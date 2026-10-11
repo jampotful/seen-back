@@ -557,7 +557,23 @@ if any(n_ in SH for _, n_ in LIC[1:4]):
     rp = os.path.join(D, "reproduction-licence.txt")
     if os.path.exists(rp):
         lines_ = open(rp, encoding="utf-8").read().splitlines()
-        T += ["**Rerun on a clean machine.** %s The comparison is kept in [`docs/eval/reproduction-licence.txt`](eval/reproduction-licence.txt)." % " ".join(l_ for l_ in lines_[:1] + [l_ for l_ in lines_ if l_.startswith("numbers that differ")][:1]), ""]
+        tot_ = next((l_.split(":")[-1].strip() for l_ in lines_ if l_.startswith("numbers that differ")), "?")
+        files_ = [l_.split()[0] for l_ in lines_[1:] if ".json" in l_[:80] and "numbers compared" in l_ and not __import__("re").search(r"compared, 0 differ", l_)]
+        T += ["**Rerun on a clean machine.** %s In all, %s numbers differ by more than 0.0005, all of them in these files: %s. The comparison is kept in [`docs/eval/reproduction-licence.txt`](eval/reproduction-licence.txt)." % (lines_[0], tot_, ", ".join("`%s`" % f_ for f_ in files_)), ""]
+        RD, RS = load("reproduction-licence-decision.json"), load("reproduction-licence-shipped.json")
+        if RD and RS:
+            rn, rk = RS["numbers"], RS["numbers"]["kind"]
+            rt = RD["tests"]
+            same = sorted(set(l_.split()[1] for l_ in open(os.path.join(D, "reproduction-licence-sha256.txt"), encoding="utf-8").read().splitlines()) & set(l_.split()[1] for l_ in open(os.path.join(D, "pocket-v3-sha256.txt"), encoding="utf-8").read().splitlines() if l_ in open(os.path.join(D, "reproduction-licence-sha256.txt"), encoding="utf-8").read().splitlines()))
+            T += ["On the build machine the kind rows came out different and Study 2 chose another kinds head (%s; rule `%s`, t_kind %g, w_kind %g), so `tools/eval/shipped.py` set kind_at %s, name_at %s and offer_at %s there. "
+                  "That slot gets the kind right for %s of the wildlife test photos and %s of the extra set's, asserts a kind for %s of the wildlife photos and is right for %s of those, names a species for %s and is right for %s of those, and names one on %d of the %d test photos of people and rooms. "
+                  "It passes the same three tests (paired difference against pocket v2 on wildlife %+.1f points, %+.1f to %+.1f). The files that are byte for byte the same on both machines: %s. "
+                  "The sandbox's scikit-learn warned that its optimizer stopped at the 300-iteration limit while fitting kind rows; the kind rows, and every setting chosen with them, should be taken as one draw among close ones. The slot published as pocket v3 is the sandbox's." % (
+                      RS["manifest"]["evaluation"].get("kind_head", "?"), RS["manifest"]["fusion"]["rule"], RS["manifest"]["fusion"]["t_kind"], RS["manifest"]["fusion"]["w_kind"], rn["kind_at"], rn["name_at"], rn["offer_at"],
+                      pci(rn["kind_right"]), pci(rk["test_extra"]["kind_right"]), pci(rk["test_wildlife"]["asserted"]), pci(rk["test_wildlife"]["asserted_right"]), pci(rn["named"]), pci(rn["named_right"]),
+                      rt["iii_named_on_people_and_rooms"]["named"], rt["iii_named_on_people_and_rooms"]["photos"],
+                      100 * rt["i_wildlife_kind_paired_difference"]["difference"][0], 100 * rt["i_wildlife_kind_paired_difference"]["difference"][1], 100 * rt["i_wildlife_kind_paired_difference"]["difference"][2],
+                      ", ".join("`%s`" % x_ for x_ in same) or "none"), ""]
     PL = load("pets-livestock.json")
     if PL:
         T += ["**Names on pets and livestock** (`tools/eval/pets.py`). %s" % PL["text"], "",
