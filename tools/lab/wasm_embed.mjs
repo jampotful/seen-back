@@ -25,7 +25,9 @@ const u8 = Buffer.alloc(per);
 const x = new Float32Array(per);
 const mean = norm.mean, std = norm.std;
 
+const tLoad = performance.now();
 const sess = await ort.InferenceSession.create(new Uint8Array(fs.readFileSync(modelPath)), { executionProviders: ['wasm'], graphOptimizationLevel: 'all' });
+const loadMs = Math.round(performance.now() - tLoad);
 const out = fs.openSync(outF32, 'w');
 const ms = [];
 let width = 0;
@@ -50,5 +52,5 @@ for (let i = 0; i < ids.length; i++) {
   if (i % 500 === 0) console.log(`wasm ${i}/${ids.length} ${ms[ms.length - 1].toFixed(1)} ms`);
 }
 fs.closeSync(out);
-fs.writeFileSync(outLat, JSON.stringify({ runtime, threads, node: process.version, width, count: ids.length, ms }) + '\n');
+fs.writeFileSync(outLat, JSON.stringify({ runtime, threads, node: process.version, width, count: ids.length, load_ms: loadMs, start, end, ms }) + '\n');
 console.log(`wasm done: ${ids.length} photos, mean ${(ms.reduce((a, b) => a + b, 0) / Math.max(ms.length, 1)).toFixed(1)} ms`);
