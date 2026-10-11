@@ -86,6 +86,7 @@ button { cursor: pointer; }
 .msg:empty { visibility: hidden; }
 .timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 600; }
 .stack { display: flex; flex-direction: column; }
+#barFinder:not([hidden]) ~ #barType, #barAnimal:not([hidden]) ~ #barType { display: none; }   /* only ever under the line that counts the download */
 
 /* the name, as the eyes change */
 .reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 28px rgba(0, 0, 0, .8), 0 0 4px rgba(0, 0, 0, .5); padding: 0 24px; }
@@ -155,6 +156,13 @@ button { cursor: pointer; }
 .offers .pill { min-height: 44px; padding: 0 18px; font-weight: 500; }
 .about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 .sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
+.line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: 14.5px; line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.line:disabled { border-color: transparent; background: none; padding-left: 0; text-decoration: none; cursor: default; opacity: 1; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none !important; }
+.tick { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dim); }
+.tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--paper); }
+.sheet details .tick { margin-top: 12px; font-size: 13.5px; }
+.sheet select { display: block; margin-top: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #1c1c1c; color: var(--ink); font: inherit; font-size: 14.5px; }
+#svcBox { margin-top: 12px; }
 .reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
 @media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
@@ -197,6 +205,7 @@ button { cursor: pointer; }
       <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
       <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
+    <button class="line" id="svcView" type="button" hidden></button>
     <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
@@ -212,6 +221,7 @@ button { cursor: pointer; }
         <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
       </div>
       <span class="timer" id="timer" hidden>0:00</span>
+      <button class="line" id="svcHud" type="button" hidden></button>
     </div>
     <div class="stack">
       <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -225,6 +235,8 @@ button { cursor: pointer; }
         <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
         <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
       </div>
+      <!-- a way out while the recognizer is still being downloaded for the first time -->
+      <div class="bottom" id="barType" hidden><button class="pill ghost" id="btnType" type="button">Type it instead</button></div>
     </div>
   </div>
 
@@ -260,6 +272,14 @@ button { cursor: pointer; }
       <summary>About this build</summary>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="mini" id="aboutCopy" type="button">Copy</button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
+      <div id="awayRow" hidden>
+        <label class="tick"><input type="checkbox" id="awayBox"><span>I am not near Gainesville</span></label>
+        <p class="fine2" id="awayNote"></p>
+      </div>
+      <div id="svcBox" hidden>
+        <label class="fine2" for="svcChoice">A larger model on a server can be asked to name the species, from one photo made smaller.</label>
+        <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
+      </div>
     </details>
   </section>
 
@@ -290,6 +310,15 @@ button { cursor: pointer; }
     </details>
   </section>
 
+  <!-- before a photo leaves the device: what would be sent, where, and the choice -->
+  <section class="sheet" id="ask" hidden aria-label="Ask a larger model">
+    <header><h3>Ask a larger model?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="askSub"></p>
+    <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
+    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Not now</button></div>
+    <p class="note">Your answer can be changed under “About this build”, in “Met so far”.</p>
+  </section>
+
   <!-- a clip or a still, kept -->
   <section class="sheet" id="keep" hidden aria-label="Keep it">
     <header><h3 id="keepTitle">Kept</h3><button class="ico" id="keepClose" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
@@ -311,7 +340,7 @@ button { cursor: pointer; }
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '6';
+  var BUILD = '7';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -718,7 +747,13 @@ button { cursor: pointer; }
       });
     }
     if (typeof createImageBitmap !== 'function') return viaImg();
-    return createImageBitmap(file).then(function (bmp) { var c = fit(bmp, bmp.width, bmp.height, 1280); if (bmp.close) bmp.close(); return c; }, viaImg);
+    // the bitmap is let go only once the canvas has really drawn it (a one-pixel read makes it): an accelerated canvas may record a draw
+    // and carry it out later, and in macOS WebKit a photo then sometimes reached the recognizer unlike itself (runs engines/12 and 15)
+    return createImageBitmap(file).then(function (bmp) {
+      var c = fit(bmp, bmp.width, bmp.height, 1280);
+      try { c.getContext('2d').getImageData(0, 0, 1, 1); } catch (e) {}
+      if (bmp.close) bmp.close(); return c;
+    }, viaImg);
   }
   function labelDate(d) { var R = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii']; return d.getDate() + '.' + R[d.getMonth()] + '.' + d.getFullYear(); }
   function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
@@ -954,7 +989,7 @@ button { cursor: pointer; }
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
-    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0 };
+    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : v.by === 'service' ? 'service' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
     try { var a = JSON.parse(localStorage.getItem(REC_KEY) || '[]'); return Array.isArray(a) ? a.map(function (v) { return cleanMeeting(v); }).filter(Boolean) : []; }
@@ -962,13 +997,13 @@ button { cursor: pointer; }
   }
   var record = loadLocal();
   function saveLocal() {
-    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up }; }))); } catch (e) {}
+    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up, loc: m.loc }; }))); } catch (e) {}
   }
   function pushUp(m) {                             // one write at a time for each meeting
     if (!remote) return;
     var col = remote;
     m._p = (m._p || Promise.resolve()).then(function () {
-      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb });
+      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, loc: m.loc ? 1 : 0 });
     }).then(function () { m.up = 1; saveLocal(); }, function () {});
   }
   function thumbOf(c) {
@@ -987,7 +1022,8 @@ button { cursor: pointer; }
       m = { id: 'm' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36), at: Date.now(), thumb: S.animalPhoto ? thumbOf(S.animalPhoto) : '', up: 0 };
       record.unshift(m); S.meetingId = m.id;
     }
-    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : 'you';
+    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : named.by === 'service' ? 'service' : 'you';
+    m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
     saveLocal(); pushUp(m); paintRecordBits();
   }
   function forgetMeeting(id) {
@@ -1065,7 +1101,7 @@ button { cursor: pointer; }
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : 'on your word'].filter(Boolean).join(' · ')));
+      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : 'on your word'].filter(Boolean).join(' · ')));
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -1107,8 +1143,8 @@ button { cursor: pointer; }
   }
   function lookAgain(m) {
     if (!m || !EYES[m.key]) return;
-    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at };
-    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = [];
+    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
+    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
     armBack();
     photoFromThumb(m.thumb).then(function (c) {
@@ -1146,8 +1182,8 @@ button { cursor: pointer; }
       photo: 'The recognizer failed on that photo.'
     };
     var KEEP = 'keep-v1', EPS = 1e-9;
-    var state = cannot ? 'failed' : 'idle', why = cannot, M = null, table = null, hasKind = {}, worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
-    var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = 45000, priorLog = {};
+    var state = cannot ? 'failed' : 'idle', why = cannot, M = null, cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
+    var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = 45000;
 
     function err(code, detail) { var e = new Error(SAY[code] || code); e.code = code; e.sentence = SAY[code] || SAY.died; e.detail = String(detail || ''); return e; }
     function abs(u, base) { try { return new URL(u, base || location.href).href; } catch (e) { return u; } }
@@ -1218,6 +1254,10 @@ button { cursor: pointer; }
       if (!v || !f || !k || !Array.isArray(k.labels) || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !v.url || !k.url || !num(f.t_kind)) throw err('unfit', 'manifest lacks a field');
       if (k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
       if (m.species && !(m.species.url && m.species.table && num(m.species.count) && num(f.t_species) && num(f.alpha_prior) && num(f.w_kind) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
+      // a trained head carries a bias for each row; a manifest may choose how the two heads are combined. Anything this build does not know is refused, not guessed at.
+      if (k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
+      if (f.rule !== undefined && f.rule !== 'product' && f.rule !== 'mix') throw err('unfit', 'a combination rule this page does not know');
+      if (f.guard !== undefined && !(num(f.guard) && f.guard > 0)) throw err('unfit', 'fusion.guard is not a positive number');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -1228,6 +1268,18 @@ button { cursor: pointer; }
         var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = EYES[a[2]] ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
+    }
+    function floats(buf, count) {                      // a trained head's biases for the species: little-endian float32, one for each row
+      if (!buf || buf.byteLength !== count * 4) throw err('damaged', 'species biases of the wrong length');
+      var dv = new DataView(buf), out = new Float64Array(count), i;
+      for (i = 0; i < count; i++) out[i] = dv.getFloat32(i * 4, true);
+      return out;
+    }
+    function slotOf(m, rows, sb) {                     // everything the scoring needs: the settings, the labels, the species table, the biases
+      var has = {};
+      if (rows) rows.forEach(function (r) { has[r.kind] = 1; });
+      if (sb && (!rows || sb.length !== rows.length)) throw err('unfit', 'species biases do not match the table');
+      return { f: m.fusion, labels: m.kinds.labels, table: rows, has: has, kb: m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
     }
     function prune(cache, base, v) {                   // older versions of this slot and of the runtime are let go
       if (!cache) return;
@@ -1282,7 +1334,7 @@ button { cursor: pointer; }
           return r.text().then(function (text) { if (cache) cache.put(abs(manifestUrl), new Response(text, { headers: { 'Content-Type': 'application/json' } })).catch(function () {}); return text; });
         }, function () { return keptOne(manifestUrl); });
       }).then(function (text) {
-        M = readManifest(text); v = fingerprint(text); priorLog = {};
+        M = readManifest(text); v = fingerprint(text); cur = null;
         var V = M.vision, nK = M.kinds.labels.length, nS = M.species ? M.species.count : 0, c = cacheRef;
         function u(rel) { return withV(abs(rel, base), v); }
         var modelUrl = u(V.url);
@@ -1293,11 +1345,11 @@ button { cursor: pointer; }
             file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
             file(c, u(M.kinds.url), nK * M.width * 2),
             M.species ? file(c, u(M.species.url), nS * M.width * 2) : null,
-            M.species ? file(c, u(M.species.table), 0) : null
+            M.species ? file(c, u(M.species.table), 0) : null,
+            M.species && M.species.bias_url ? file(c, u(M.species.bias_url), nS * 4) : null
           ]);
         }).then(function (b) {
-          table = M.species ? readTable(b[4], nS) : null; hasKind = {};
-          if (table) table.forEach(function (r) { hasKind[r.kind] = 1; });
+          cur = slotOf(M, M.species ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
           total = got;                                 // the downloads are over; what remains is starting the encoder
           if (onProgress) onProgress();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
@@ -1335,29 +1387,47 @@ button { cursor: pointer; }
       for (i = 0; i < n; i++) out[i] /= s;
       return out;
     }
-    function priorFor(month) {                         // log of each species' share of this month's records, with a floor so that an unrecorded month is unlikely and not impossible
-      if (priorLog[month]) return priorLog[month];
-      var n = table.length, out = new Float64Array(n), sum = 0, i, floor = num(M.fusion.prior_floor) ? M.fusion.prior_floor : 1e-6;
-      for (i = 0; i < n; i++) sum += table[i].m ? Math.max(0, +table[i].m[month] || 0) : 0;
-      if (sum > 0) for (i = 0; i < n; i++) out[i] = Math.log(Math.max(table[i].m ? Math.max(0, +table[i].m[month] || 0) / sum : 0, floor));
-      priorLog[month] = out; return out;
+    function priorFor(c, month) {                      // log of each species' share of this month's records, with a floor so that an unrecorded month is unlikely and not impossible
+      var key = (typeof month === 'number' && month === Math.floor(month) && month >= 0 && month < 12) ? month : 'none';   // no month known: no prior
+      if (c.prior[key]) return c.prior[key];
+      var t = c.table, n = t.length, out = new Float64Array(n), sum = 0, i, floor = num(c.f.prior_floor) ? c.f.prior_floor : 1e-6;
+      if (key !== 'none') {
+        for (i = 0; i < n; i++) sum += t[i].m ? Math.max(0, +t[i].m[key] || 0) : 0;
+        if (sum > 0) for (i = 0; i < n; i++) out[i] = Math.log(Math.max(t[i].m ? Math.max(0, +t[i].m[key] || 0) / sum : 0, floor));
+      }
+      c.prior[key] = out; return out;
     }
-    function fuse(kd, sd, month) {
-      var f = M.fusion, labels = M.kinds.labels, n = labels.length, z = new Float64Array(n), i, p, q = {}, s = null, order = [], score = new Float64Array(n), c, kinds = [], species = [];
-      for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i];
+    // From the two heads' scores to a kind of eye, a name and offers. tools/fusion/fuse.py is the same arithmetic in numpy, line for line,
+    // and tools/fusion/parity.py holds the two to the same answers; a change here is a change there.
+    //   kd, sd: row . e for each kind row and each species row, e being the unit image vector. The rows are used as they are: a trained
+    //   head's rows are weights, not unit vectors, and it adds a bias to each score.
+    function fuseWith(c, kd, sd, month) {
+      var f = c.f, labels = c.labels, table = c.table, n = labels.length, z = new Float64Array(n), i, p, q = {}, s = null, order = [], comb, kinds = [], species = [];
+      for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
       p = softmax(z);
       if (table && sd) {
-        var pr = priorFor(month), zs = new Float64Array(table.length);
-        for (i = 0; i < zs.length; i++) zs[i] = f.t_species * sd[i] + f.alpha_prior * pr[i];
+        var pr = f.alpha_prior ? priorFor(c, month) : null, zs = new Float64Array(table.length);
+        for (i = 0; i < zs.length; i++) zs[i] = f.t_species * sd[i] + (c.sb ? c.sb[i] : 0) + (pr ? f.alpha_prior * pr[i] : 0);
         s = softmax(zs);
         for (i = 0; i < s.length; i++) { q[table[i].kind] = (q[table[i].kind] || 0) + s[i]; order.push(i); }
         order.sort(function (a, b) { return s[b] - s[a]; });
         species = order.slice(0, 5).map(function (j) { return { sci: table[j].sci, en: table[j].en, p: s[j], kind: table[j].kind }; });
       }
-      // a kind the species list can speak for is scored by both; one it has no rows for (nothing alive, a person) by the kinds alone
-      for (i = 0; i < n; i++) score[i] = s && hasKind[labels[i]] ? f.w_kind * Math.log(Math.max(p[i], EPS)) + (1 - f.w_kind) * Math.log(Math.max(q[labels[i]] || 0, EPS)) : Math.log(Math.max(p[i], EPS));
-      c = softmax(score);
-      for (i = 0; i < n; i++) kinds.push({ key: labels[i], p: c[i], head: p[i], list: s && hasKind[labels[i]] ? (q[labels[i]] || 0) : null });
+      // a kind the species list can speak for is scored by both heads; one it has no rows for (nothing alive, a person) by the kinds alone
+      function speaks(i) { return !!(s && c.has[labels[i]]); }
+      if (f.rule === 'mix') {
+        // mixing: the species head re-divides the share the kinds head gave to the kinds it can speak for, and moves at most 1 - w_kind of it
+        var A = 0, tot = 0; comb = new Float64Array(n);
+        for (i = 0; i < n; i++) if (speaks(i)) A += p[i];
+        for (i = 0; i < n; i++) { comb[i] = speaks(i) ? f.w_kind * p[i] + (1 - f.w_kind) * A * (q[labels[i]] || 0) : p[i]; tot += comb[i]; }
+        if (tot > 0) for (i = 0; i < n; i++) comb[i] /= tot; else comb = p;
+      } else {
+        // the product (the rule of build 6): a weighted sum of logarithms, with a guard under each so that a zero is unlikely and not impossible
+        var g = num(f.guard) ? f.guard : EPS, score = new Float64Array(n);
+        for (i = 0; i < n; i++) score[i] = speaks(i) ? f.w_kind * Math.log(Math.max(p[i], g)) + (1 - f.w_kind) * Math.log(Math.max(q[labels[i]] || 0, g)) : Math.log(Math.max(p[i], g));
+        comb = softmax(score);
+      }
+      for (i = 0; i < n; i++) kinds.push({ key: labels[i], p: comb[i], head: p[i], list: speaks(i) ? (q[labels[i]] || 0) : null });
       kinds.sort(function (a, b) { return b.p - a.p; });
       var kind = kinds[0].key, named = null, offers = [];
       if (species.length && kind !== 'none' && kind !== 'person') {
@@ -1396,10 +1466,11 @@ button { cursor: pointer; }
           pending[id] = { res: res, rej: rej, timer: setTimeout(function () { if (pending[id]) stop('slow', 'no answer in ' + watchMs + ' ms'); }, watchMs) };
           worker.postMessage({ op: 'run', id: id, rgba: px.buf, w: px.w, h: px.h, wantPre: !!pocket.wantPre }, [px.buf]);
         }).then(function (m) {
-          var t = performance.now(), r = fuse(m.kinds, m.species, new Date().getMonth());
+          var t = performance.now(), month = new Date().getMonth(), local = pocket.local !== false && !!cur.table, r = fuseWith(cur, m.kinds, local ? m.species : null, month);
+          r.month = month; r.local = local;                // local: the species list of this slot's region was consulted
           r.ms = { load: wasReady ? 0 : Math.round(tRun - tAsk), pre: Math.round(m.ms.pre), run: Math.round(m.ms.run), post: Math.round((m.ms.post + performance.now() - t) * 10) / 10 };
           r.backend = info.backend; r.model = M.id; r.at = Date.now(); r.from = px.w + 'x' + px.h;
-          last = r; if (pocket.wantPre) { pocket.lastEmb = m.emb; pocket.lastPre = m.pre; }
+          last = r; if (pocket.wantPre) { pocket.lastEmb = m.emb; pocket.lastPre = m.pre; pocket.lastDots = { kinds: m.kinds, species: m.species }; }
           return r;
         });
       });
@@ -1417,12 +1488,164 @@ button { cursor: pointer; }
     }
     return {
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
-      recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuse(kd, sd, month); },
+      recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuseWith(cur, kd, sd, month); },
+      fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
+      place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
+      listed: function () { return !!(cur && cur.table); },
       progress: function (fn) { onProgress = fn; },
-      offers: [], file: null, wantPre: false, lastEmb: null, lastPre: null,
-      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl }; },
-      test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; } }
+      offers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
+      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl }; },
+      test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
+        // the scoring with settings given by a check, through the same readers as a real slot (tools/fusion/parity.py)
+        world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
+        fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
     };
+  })();
+
+  // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
+  // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
+  //   {"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14",
+  //    "health": "<an address that answers {"ready": true}>" (optional), "kind_at": 0.9, "name_at": 0.5, "top": 5, "wake_s": 90, "answer_s": 60}
+  // No such file: the feature does not exist, and nothing on the page mentions it. Nothing is sent before the person has said yes.
+  // The call is Gradio's two steps: POST <call> {"data": [photo as base64 JPEG, month 1-12, region or "", top]} -> {"event_id"};
+  // GET <call>/<event_id> is a stream of events, and the one named "complete" carries [answer].
+  var naturalist = (function () {
+    var KEY = 'seenback.service.v1', mem = '', cfg = null, cfgP = null, known = false;
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var asked = local ? /[?&]svc=(off|[A-Za-z0-9_.\/-]+\.json)/.exec(location.search || '') : null;   // a check on this machine may name another file; a link to the public page may not
+    var T = { wake: 90000, answer: 60000, post: 20000, poll: 3000 };
+    function num(x) { return typeof x === 'number' && isFinite(x); }
+    function okUrl(u) { return typeof u === 'string' && (/^https:\/\/[^\/]+\//.test(u) || (local && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u))); }
+    function readConfig(j) {
+      if (!j || typeof j !== 'object' || j.api !== 'gradio' || !okUrl(j.call) || (j.health !== undefined && !okUrl(j.health))) return null;   // an arrangement this build does not know is as good as none
+      var host = ''; try { host = new URL(j.call).host; } catch (e) { return null; }
+      if (num(j.wake_s)) T.wake = j.wake_s * 1000;
+      if (num(j.answer_s)) T.answer = j.answer_s * 1000;
+      return { call: j.call.replace(/\/+$/, ''), health: j.health || '', region: typeof j.region === 'string' ? j.region : '', model: clip(j.model, 60), host: host,
+        where: /(^|\.)hf\.space$|(^|\.)huggingface\.co$/.test(host) ? 'hosted by Hugging Face' : 'at ' + host,
+        kindAt: num(j.kind_at) ? j.kind_at : null, nameAt: num(j.name_at) ? j.name_at : 0, top: num(j.top) ? Math.max(1, Math.min(10, Math.round(j.top))) : 5 };
+    }
+    function config() {                                // resolves with the service's particulars, or null where there is none
+      if (inViewer || (asked && asked[1] === 'off')) return Promise.resolve(null);
+      if (known) return Promise.resolve(cfg);
+      if (!cfgP) cfgP = fetch(asked ? asked[1] : 'service.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) {
+        if (r.status === 404) { known = true; return null; }               // no such file: there is no service
+        if (!r.ok) throw new Error('service.json ' + r.status);
+        return r.json().then(function (j) { cfg = readConfig(j); known = true; return cfg; });
+      }).catch(function () { cfgP = null; return null; });                  // no network just now, or not JSON: look again another time
+      return cfgP;
+    }
+    function choice() { try { var v = localStorage.getItem(KEY); return v === 'yes' || v === 'no' ? v : ''; } catch (e) { return mem; } }
+    function setChoice(v) { mem = v === 'yes' || v === 'no' ? v : ''; try { if (mem) localStorage.setItem(KEY, mem); else localStorage.removeItem(KEY); } catch (e) {} }
+    function fail(code, detail) { var e = new Error(code); e.code = code; e.detail = String(detail || '').slice(0, 120); return e; }
+    // What leaves the device: the photo with its longest side at most 512, as a JPEG under 1 MB. Nothing else about the photo or the person.
+    function jpeg(canvas) {
+      var k = Math.min(1, 512 / Math.max(canvas.width, canvas.height)), c = makeCanvas(canvas.width * k, canvas.height * k), x = c.getContext('2d'), q = [.85, .7, .5, .3], i, url = '';
+      x.imageSmoothingQuality = 'high'; x.drawImage(canvas, 0, 0, c.width, c.height);
+      for (i = 0; i < q.length; i++) { url = c.toDataURL('image/jpeg', q[i]); if (url.length * .75 < 1e6) break; }
+      c.width = c.height = 1;
+      if (url.indexOf('data:image/jpeg;base64,') !== 0 || url.length * .75 >= 1e6) throw fail('photo', 'not a small JPEG');
+      return url.slice(23);
+    }
+    function clean(out) {                              // the answer, with nothing taken on trust
+      if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
+      if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
+      var species = out.species.slice(0, 10).map(function (s) {
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+      }).filter(function (s) { return s && (s.sci || s.en); });
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
+      return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
+    }
+    function opts(signal, more) {                      // no cookies, no address of the page it came from
+      var o = { mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: signal }, k;
+      for (k in more) o[k] = more[k];
+      return o;
+    }
+    function listen(url, signal) {                     // the stream of events for one question, until the one that completes it
+      return fetch(url, opts(signal, { headers: { Accept: 'text/event-stream' } })).then(function (r) {
+        if (!r.ok) throw fail('failed', 'GET ' + r.status);
+        var dec = new TextDecoder('utf-8'), buf = '', found = null;
+        function take(final) {
+          var parts = buf.split(/\r?\n\r?\n/), i, ev, data;
+          buf = final ? '' : parts.pop();
+          for (i = 0; i < parts.length && !found; i++) {
+            ev = (/^event:\s*(.*)$/m.exec(parts[i]) || [])[1]; data = parts[i].split(/\r?\n/).filter(function (l) { return /^data:/.test(l); }).map(function (l) { return l.replace(/^data:\s?/, ''); }).join('\n');
+            if (ev === 'complete') found = { data: data }; else if (ev === 'error') found = { error: data };
+          }
+          return found;
+        }
+        function finish() {
+          if (!found) throw fail('garbled', 'the stream ended with no answer');
+          if (found.error !== undefined) throw fail('failed', found.error);
+          var j; try { j = JSON.parse(found.data); } catch (e) { throw fail('garbled', 'the answer is not JSON'); }
+          return clean(Array.isArray(j) ? j[0] : j);
+        }
+        if (!r.body || !r.body.getReader) return r.text().then(function (t) { buf = t; take(true); return finish(); });
+        var reader = r.body.getReader();
+        function pump() {
+          return reader.read().then(function (x) {
+            if (x.value) buf += dec.decode(x.value, { stream: true });
+            if (take(x.done)) { try { reader.cancel(); } catch (e) {} return finish(); }
+            if (x.done) return finish();
+            return pump();
+          });
+        }
+        return pump();
+      });
+    }
+    // One question. say('asking' | 'waking') tells the page what to show. Returns { promise, cancel }.
+    function ask(canvas, o, say) {
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null, signal = ctl ? ctl.signal : undefined, t0 = performance.now(), tries = 0, over = false, net = false, timers = [];
+      function left() { return T.wake - (performance.now() - t0); }
+      function wait(ms) { return new Promise(function (res) { timers.push(setTimeout(res, ms)); }); }
+      function within(p, ms, code) {                   // p, or a failure once ms have passed
+        return new Promise(function (res, rej) { var t = setTimeout(function () { rej(fail(code)); }, ms); timers.push(t); p.then(function (v) { clearTimeout(t); res(v); }, function (e) { clearTimeout(t); rej(e); }); });
+      }
+      // "Waking up" is said only where it is the likely truth: the service did not answer, and this site itself can still be reached.
+      // (A request the service worker leaves alone, so that a kept copy cannot answer for a network that is gone.)
+      function reachable() {
+        if (net) return Promise.resolve(true);
+        return within(fetch(location.href.split('#')[0], { method: 'HEAD', cache: 'no-store', credentials: 'omit' }).then(function (r) { net = r.ok; return net; }), 8000, 'offline').catch(function () { return false; });
+      }
+      function sayWaking() { return reachable().then(function (yes) { if (over) throw fail('cancelled'); if (!yes) throw fail('offline', 'this site cannot be reached either'); say('waking'); }); }
+      function awake() {                               // where the service names an address that says whether it is ready, that is asked first
+        if (!cfg.health) return Promise.resolve();
+        return within(fetch(cfg.health, opts(signal)).then(function (r) { return r.ok ? r.json() : null; }), T.post, 'asleep').catch(function () { return null; }).then(function (h) {
+          if (over) throw fail('cancelled');
+          if (h && h.ready !== false && h.ok !== false) return;
+          if (left() <= 0) throw fail('asleep', 'not ready in time');
+          return (h ? Promise.resolve(say('waking')) : sayWaking()).then(function () { return wait(Math.min(T.poll, Math.max(200, left()))); }).then(awake);
+        });
+      }
+      function post(body) {
+        tries++; if (tries === 1) say('asking');
+        return within(fetch(cfg.call, opts(signal, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })).then(function (r) {
+          if (!r.ok) throw fail(r.status === 429 ? 'busy' : (r.status >= 500 || r.status === 404) ? 'asleep' : 'refused', 'POST ' + r.status);
+          return r.json().catch(function () { throw fail('garbled', 'no event id'); });
+        }, function (e) { throw e && e.code ? e : fail(over ? 'cancelled' : 'asleep', e && e.message); }), T.post, 'asleep').then(function (j) {
+          var id = j && j.event_id;
+          if (typeof id !== 'string' || !/^[A-Za-z0-9_.-]{1,120}$/.test(id)) throw fail('garbled', 'no event id');
+          say('asking');
+          return within(listen(cfg.call + '/' + id, signal), T.answer, 'slow');
+        }, function (e) {
+          // no answer at the door: a server that sleeps when nobody calls takes a while to wake. Try again, less and less often, for as long as the wait allows.
+          if (e.code !== 'asleep' || over || left() <= 0) throw e;
+          return sayWaking().then(function () { return wait(Math.min(T.poll * Math.min(tries, 5), Math.max(200, left()))); }).then(function () { if (over) throw fail('cancelled'); return awake(); }).then(function () { return post(body); });
+        });
+      }
+      var promise = config().then(function (c) {
+        if (!c) throw fail('absent');
+        if (navigator.onLine === false) throw fail('offline');
+        var body = JSON.stringify({ data: [jpeg(canvas), o.month, o.local ? c.region : '', c.top] });
+        return awake().then(function () { return post(body); });
+      });
+      function end() { over = true; timers.forEach(clearTimeout); }
+      promise.then(end, function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} });
+      return { promise: promise, cancel: function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} } };
+    }
+    return { config: config, choice: choice, setChoice: setChoice, ask: ask, cfg: function () { return cfg; },
+      test: { times: function (t) { for (var k in t) T[k] = t[k]; return T; }, read: function (j) { return readConfig(j); } } };
   })();
 
   // ---------- naming
@@ -1438,10 +1661,10 @@ button { cursor: pointer; }
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden; }
   function closeSheets() {
     var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('info', false); show('keep', false); show('scrim', false);
+    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -1449,17 +1672,18 @@ button { cursor: pointer; }
     if (!closeSheets()) return;
     if (S.screen === 'finder') { thaw(); paintUI(); }
     else if (S.screen === 'naming' && !S.eyes) go('askAnimal');
+    paintType();
   }
   function openClaim(sub) {
     $('claimSub').textContent = (sub ? sub + ' ' : '') + 'Type the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
     var offers = pocket.offers || [], box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.en || o.sci); b.type = 'button';
-      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you' }); });
+      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
       box.appendChild(b);
     });
     show('claimOfferBox', offers.length > 0);
-    show('info', false); show('record', false); show('keep', false); openSheet('claim');
+    show('info', false); show('record', false); show('keep', false); show('ask', false); openSheet('claim');
     setTimeout(function () { try { if (!$('claim').hidden) $('claimName').focus(); } catch (e) {} }, 80);
   }
   function setViewPrompt(key) {
@@ -1469,18 +1693,22 @@ button { cursor: pointer; }
   }
 
   function reveal(key, named) {
-    S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named);
+    S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
+    if (named && named.by === 'service') paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
     go('naming'); showName();
     later(function () { hideName(); go('askView'); }, calm ? 1400 : 2100);
   }
-  function failName(why) {
+  function askName(sub) {
     msg('');
     if (S.src === 'cam') go('finder'); else go('naming');
-    openClaim(why + ' So you tell it.');
+    openClaim(sub); paintType();
   }
+  function failName(why) { askName(why + ' So you tell it.'); }
+  // While the recognizer is being downloaded for the first time, the person may type the name and not wait. The download carries on.
+  function paintType() { show('barType', !inViewer && S.screen === 'naming' && !S.eyes && !anySheet() && pocket.fetching()); }
   function identify() {
     if (!S.animalPhoto) return;
     var t = ++S.token; S.seq++;
@@ -1488,15 +1716,16 @@ button { cursor: pointer; }
     capsReady.then(function () { if (t === S.token) recognize(t); });
   }
   function recognizeHere(t) {                      // outside Claude: the page's own small model, on this device
-    go('naming'); msg(pocket.line());
-    pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); });
+    go('naming'); msg(pocket.line()); paintType();
+    pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); paintType(); });
     pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
       if (r.kind === 'none') { failName('Nothing alive was found in that photo.'); return; }
-      pocket.offers = r.offers;
+      pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
-      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page' });
+      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
+      if (!r.named && r.kind !== 'person') considerService(t);             // the kind is in use at once; a species name may follow from the larger model
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
@@ -1534,7 +1763,7 @@ button { cursor: pointer; }
     }, 'image/jpeg', .86);
   }
   function gotAnimalPhoto(c) {
-    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName();
+    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName(); dropSvc();
     if (S.src === 'cam') { S.freeze = true; if (engine) engine.setImage(c); paintUI(); }
     else showStill(c, false);
     identify();
@@ -1548,7 +1777,8 @@ button { cursor: pointer; }
   }
 
   // ---------- back, wherever something might be done over
-  function back() {
+  function back() { backStep(); paintSvc(); }
+  function backStep() {
     var s = S.screen;
     if (anySheet()) { dismissSheets(); return; }
     S.seq++; hideName(); msg('');
@@ -1557,6 +1787,7 @@ button { cursor: pointer; }
       S.token++; if (nameCtl) nameCtl.abort();
       setEyes(null);
       if (S.src === 'cam') { thaw(); go('finder'); } else go('askAnimal');
+      paintType();
       return;
     }
     if (s === 'animal') {
@@ -1683,7 +1914,9 @@ button { cursor: pointer; }
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
     $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
-      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.' : 'As you said.');
+      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.'
+      : S.named && S.named.by === 'service' ? 'Named by a larger model on a server, which can be wrong.' : 'As you said.')
+      + (S.named && S.named.local ? ' Chosen among species recorded around ' + pocket.place() + '.' : '');
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
       var li = document.createElement('li'), m = document.createElement('i'), d = document.createElement('span'), b = document.createElement('b');
@@ -1725,6 +1958,100 @@ button { cursor: pointer; }
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
   $('btnShutter').addEventListener('click', shutter);
+
+  // ---------- the larger model on a server (the naturalist), asked only with the person's say-so
+  // One line on the picture carries it: an offer to ask (tappable), "Asking the larger model.", the waking sentence, what it said,
+  // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
+  var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.' };
+  var svcTimer = 0;
+  function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
+  function paintSvc() {
+    var v = S.svc;
+    if (v && (v.t !== S.token || !S.eyes)) { S.svc = null; if (v.job) v.job.cancel(); v = null; }     // it belonged to a photo that is no longer in hand
+    var text = v ? (v.text || SVC_SAY[v.state] || '') : '', tap = !!v && (v.state === 'offer' || v.state === 'change');
+    ['svcHud', 'svcView'].forEach(function (id) { var b = $(id); b.textContent = text; b.disabled = !tap; b.hidden = !text; });
+  }
+  function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
+  function considerService(t) {
+    var photo = S.animalPhoto;
+    naturalist.config().then(function (c) {            // service.json is asked for here, the first time a photo is left without a species name
+      if (!c || t !== S.token || photo !== S.animalPhoto || !S.eyes || !S.named || S.named.by !== 'page' || navigator.onLine === false) return;
+      var ch = naturalist.choice();
+      if (ch === 'no') return;
+      if (ch === 'yes') askService(t); else { S.svc = { t: t, state: 'offer' }; paintSvc(); }
+    });
+  }
+  function askService(t) {
+    var photo = S.animalPhoto; if (!photo || t !== S.token || !S.eyes) return;
+    var v = { t: t, state: 'asking' };
+    if (S.svc && S.svc.job) S.svc.job.cancel();
+    v.job = naturalist.ask(photo, { month: new Date().getMonth() + 1, local: pocket.local !== false }, function (state) { if (S.svc === v && v.state !== state) { v.state = state; paintSvc(); } });
+    S.svc = v; paintSvc(); diag('service-ask', pocket.local !== false ? 'region' : 'no-region');
+    v.job.promise.then(function (a) { if (S.svc === v) gotService(a, t); }, function (e) {
+      diag('service-none', String((e && e.code) || 'unknown'));
+      if (S.svc === v) { S.svc = null; paintSvc(); }   // every failure lets go quietly: what the device said stands
+    });
+  }
+  function gotService(a, t) {
+    var c = naturalist.cfg(), top = a.species[0];
+    S.svc = null; clearTimeout(svcTimer);
+    diag('service', JSON.stringify({ top: top ? [top.sci, +top.p.toFixed(3), top.kind] : null, kinds: a.kinds.slice(0, 2).map(function (k) { return [k.key, +k.p.toFixed(3)]; }), ms: a.ms, model: a.model, region: a.region }).slice(0, 300));
+    if (!top || !c || !S.eyes) { paintSvc(); return; }
+    pocket.offers = a.species.slice(0, 5).map(function (s) { return { sci: s.sci, en: s.en, kind: s.kind, local: !!a.region }; });   // its five likeliest are kept for the sheet that corrects a name
+    var named = { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region };
+    var kp = a.kinds.filter(function (k) { return k.key === top.kind; })[0], kindP = kp ? kp.p : top.p;
+    if (top.p >= c.nameAt && top.kind === S.eyes) {
+      // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
+      S.named = named; noteMeeting(S.eyes, named); paintUI();
+      S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
+      svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
+    } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
+      // another kind of creature, and the larger model is sure enough by the service's own setting: the change is offered, never made
+      S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + (top.kind === 'other' ? '' : ', ' + EYES[top.kind].who) + '. Change eyes?' };
+    }
+    paintSvc();
+  }
+  function tapSvc() {
+    var v = S.svc; if (!v) return;
+    if (v.state === 'offer') {
+      var c = naturalist.cfg(); if (!c) return;
+      $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
+        (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+      $('askKeep').checked = false;
+      show('claim', false); show('record', false); show('info', false); show('keep', false); openSheet('ask');
+    } else if (v.state === 'change') { S.svc = null; diag('service-eyes', v.kind); reveal(v.kind, v.named); }
+  }
+  function answerAsk(yes) {
+    if ($('askKeep').checked) naturalist.setChoice(yes ? 'yes' : 'no');
+    closeSheets(); diag('service-say', (yes ? 'yes' : 'no') + ($('askKeep').checked ? '-kept' : ''));
+    var v = S.svc; if (!v || v.state !== 'offer') return;
+    if (yes) askService(v.t); else { S.svc = null; paintSvc(); }
+  }
+  $('svcHud').addEventListener('click', tapSvc); $('svcView').addEventListener('click', tapSvc);
+  $('askYes').addEventListener('click', function () { answerAsk(true); });
+  $('askNo').addEventListener('click', function () { answerAsk(false); });
+  $('askClose').addEventListener('click', dismissSheets);
+  // ---------- where the species list applies: it is one town's. No location is asked of the device; the person says if they are elsewhere.
+  var AWAY_KEY = 'seenback.away.v1';
+  try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
+  function paintChoices() {
+    // the switch is shown where it changes something: this device has a species list, or there is a larger model that is told the region
+    show('awayRow', !inViewer && pocket.listed()); $('awayBox').checked = pocket.local === false;
+    $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and a larger model, if asked, is not told the region.';
+    show('svcBox', false);
+    naturalist.config().then(function (c) {
+      show('svcBox', !!c); if (!c) return;
+      $('svcChoice').value = naturalist.choice();
+      if (!pocket.listed() && c.region) { show('awayRow', true); $('awayNote').textContent = 'A larger model, when asked, is told the region, so that it can choose among species recorded around ' + pocket.place() + '. With this ticked, it is not told.'; }
+    });
+  }
+  $('awayBox').addEventListener('change', function () { pocket.local = !$('awayBox').checked; try { localStorage.setItem(AWAY_KEY, pocket.local ? '0' : '1'); } catch (e) {} diag('away', pocket.local ? 'no' : 'yes'); });
+  $('svcChoice').addEventListener('change', function () { naturalist.setChoice($('svcChoice').value); diag('service-choice', $('svcChoice').value || 'each'); });
+  $('btnType').addEventListener('click', function () {
+    if (S.screen !== 'naming' || S.eyes) return;
+    S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
+    askName('The recognizer keeps downloading meanwhile.');
+  });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
@@ -1795,7 +2122,7 @@ button { cursor: pointer; }
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName,
-    rec: pocket, diag: function () { return diagLog; }, about: aboutText,
+    rec: pocket, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
@@ -1821,7 +2148,7 @@ button { cursor: pointer; }
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');
   }
-  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; }
+  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');
@@ -1844,470 +2171,13 @@ button { cursor: pointer; }
     window.claude.use('downloads').then(function (d) { downloads = d; }).catch(function () {});
     initRemote();
   }
-
-  // ---------- self-test: open the page with ?selftest=1 and it checks its own picture engine
-  // It takes over the page: a test card drawn through every eye and read back, moving pictures from a canvas and
-  // from a video, the change of eyes held at three instants, and a contact sheet at the end. The result is shown
-  // on screen, kept in window.__selftest, and sent as JSON to the same-origin path in &report=/path when given.
-  // Only robust properties are judged; everything else is recorded as numbers.
-  (function () {
-    var qs = location.search || '';
-    if (!/[?&]selftest=1(?:&|$)/.test(qs)) return;
-    S.selftest = true;
-    var rp = /[?&]report=([^&]*)/.exec(qs), reportPath = '';
-    try { reportPath = rp ? decodeURIComponent(rp[1]) : ''; } catch (e) { reportPath = ''; }
-    if (!/^\/(?!\/)[\w\-\/.]*$/.test(reportPath)) reportPath = '';
-    var T = window.__selftest = { v: 1, build: BUILD, done: false, ok: null, fails: [], checks: 0, phase: 'start', env: {}, still: {}, motion: {}, pose: [], ms: {} };
-    var tStart = performance.now(), STEADY = { ap: 1, shape: 0, mosaic: 0, soft: 0, expo: 1, focus: .5, mirror: false, camZoom: 1 };
-    var EYELIST = ['person'].concat(ORDER), TWO_CONE = ['cat', 'dog', 'deer', 'rabbit', 'squirrel'], MOVERS = ['frog', 'wader', 'squirrel', 'plant'];
-    var LIN = []; for (var i = 0; i < 256; i++) { var c = i / 255; LIN.push(c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4)); }
-
-    function el(tag, css, text, parent) { var e = document.createElement(tag); if (css) e.style.cssText = css; if (text !== undefined) e.textContent = text; if (parent) parent.appendChild(e); return e; }
-    function frame() { return new Promise(function (res) { requestAnimationFrame(res); }); }
-    function wait(ms) { return new Promise(function (res) { setTimeout(res, ms); }); }
-    function r2(x) { return Math.round(x * 100) / 100; }
-    function rgb(a) { return a.map(Math.round); }
-    function check(name, ok, detail) { T.checks++; if (!ok) T.fails.push(name + (detail ? ': ' + detail : '')); return ok; }
-    function phase(p, line) { T.phase = p; stLine.textContent = line || p; }
-    function since() { return Math.round(performance.now() - tStart); }
-
-    // ---- the page: everything of the app is hidden but its video element; the picture canvas moves into the report
-    var style = el('style', '', '#app>:not(#vid){display:none!important}' +
-      '#selftest{position:fixed;inset:0;z-index:50;overflow:auto;-webkit-overflow-scrolling:touch;background:#101010;color:#eee;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;' +
-      'padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(28px + env(safe-area-inset-bottom,0px));box-sizing:border-box;-webkit-user-select:text;user-select:text}' +
-      '#selftest h1{font:400 30px/1.05 var(--serif);margin:0 0 2px;letter-spacing:-.01em}' +
-      '#selftest .ln{color:#bbb;margin:0 0 8px;min-height:1.4em}' +
-      '#stStage{position:relative;background:#000;margin:0 0 10px;overflow:hidden}' +
-      '#stStage.full{position:fixed;inset:0;z-index:60;margin:0;width:auto!important;height:auto!important}' +
-      '#stCap{position:absolute;left:0;right:0;top:0;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:rgba(0,0,0,.72);color:#fff;font:600 17px/1.3 system-ui,-apple-system,sans-serif}' +
-      '#stCap:empty{display:none}' +
-      '#stSum{font-size:16px;margin:4px 0 8px}#stSum b.ok{color:#7ddc8a}#stSum b.no{color:#ff7b7b}' +
-      '#stSum ul{margin:4px 0 0;padding-left:18px;color:#ffb3b3;font-size:13px}' +
-      '#stBtns{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 12px}' +
-      '#stBtns button{font:600 15px system-ui,-apple-system,sans-serif;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:#f4f1ea;color:#111}' +
-      '#stSheet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 14px}' +
-      '@media (min-width:900px){#stSheet{grid-template-columns:repeat(8,minmax(0,1fr))}}' +
-      '#stSheet figure{margin:0}#stSheet canvas{display:block;width:100%;height:auto;background:#000}' +
-      '#stSheet figcaption{font-size:12px;line-height:1.2;padding:2px 0 0;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '#stSheet figcaption.no{color:#ff7b7b}' +
-      '#selftest table{border-collapse:collapse;font-size:12px;margin:0 0 12px}#selftest td,#selftest th{border-bottom:1px solid #333;padding:3px 8px 3px 0;text-align:left;vertical-align:top}' +
-      '#selftest pre,#selftest textarea{font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;color:#cfcfcf;white-space:pre-wrap;word-break:break-all}' +
-      '#selftest textarea{width:100%;height:160px;background:#000;border:1px solid #333;box-sizing:border-box}', document.head);
-    var root = el('div', '', undefined, document.body); root.id = 'selftest';
-    el('h1', '', 'Seen Back self-test', root);
-    var stLine = el('p', '', 'Starting.', root); stLine.className = 'ln';
-    var stSum = el('div', '', '', root); stSum.id = 'stSum';
-    var stBtns = el('div', '', undefined, root); stBtns.id = 'stBtns'; stBtns.hidden = true;
-    var btnCopy = el('button', '', 'Copy report', stBtns), copied = el('span', 'color:#bbb', '', stBtns);
-    var stage = el('div', '', undefined, root); stage.id = 'stStage';
-    var cap = el('div', '', '', stage); cap.id = 'stCap';
-    if (canvas) stage.insertBefore(canvas, cap);
-    var sheet = el('div', '', undefined, root); sheet.id = 'stSheet';
-    var details = el('div', '', undefined, root);
-    var ta = el('textarea', '', '', root); ta.readOnly = true; ta.hidden = true;
-    function fitStage() {
-      if (stage.classList.contains('full') || !canvas) return;
-      var a = canvas.width / Math.max(1, canvas.height), wMax = root.clientWidth - 32, hMax = Math.max(160, innerHeight * .55);
-      var w = Math.min(wMax, hMax * a); stage.style.width = Math.round(w) + 'px'; stage.style.height = Math.round(w / a) + 'px';
-    }
-    function sizeCanvas(w, h) { canvas.width = Math.max(2, Math.round(w)); canvas.height = Math.max(2, Math.round(h)); fitStage(); }
-    function fullSize() {          // the size the app itself would draw at, filling this screen (as engine.resize does)
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), w = innerWidth * dpr, h = innerHeight * dpr, k = Math.min(1, engine.side() / Math.max(w, h, 1));
-      sizeCanvas(w * k, h * k);
-    }
-
-    // ---- reporting
-    function post() {
-      if (!reportPath || typeof fetch !== 'function') return Promise.resolve();
-      T.ms.total = since();
-      return fetch(reportPath, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(T) })
-        .then(function (r) { T.posted = r.status; }, function (e) { T.postError = String(e).slice(0, 120); });
-    }
-    btnCopy.addEventListener('click', function () {
-      var txt = JSON.stringify(T);
-      function fallback() {
-        ta.hidden = false; ta.value = txt; ta.focus(); ta.select();
-        var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-        copied.textContent = ok ? 'Copied.' : 'Select the text in the box below and copy it.';
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { copied.textContent = 'Copied. Paste it into a message to us.'; }, fallback);
-      else fallback();
-    });
-
-    // ---- the test card: colour patches, a grey ramp, a horizon, fine gratings, and four corner markers
-    var PERIODS = [2, 4, 8, 16];
-    function layout(W, H) {
-      var L = { patches: [], ramp: [], grat: [], corners: [] }, names = ['red', 'green', 'blue', 'yellow', 'white'], cols = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffffff'];
-      names.forEach(function (n, i) { L.patches.push({ name: n, col: cols[i], x: Math.round((.10 + i * .17) * W), y: Math.round(.10 * H), w: Math.round(.14 * W), h: Math.round(.22 * H) }); });
-      for (var j = 0; j < 6; j++) L.ramp.push({ v: j * 51, x: Math.round((.10 + j * .8 / 6) * W), y: Math.round(.36 * H), w: Math.round(.8 / 6 * W), h: Math.round(.10 * H) });
-      L.horizon = { y: Math.round(.505 * H), h: Math.max(2, Math.round(.006 * H)) };
-      ['v', 'h'].forEach(function (o, row) {
-        PERIODS.forEach(function (p, k) { L.grat.push({ name: o + p, o: o, p: p, x: Math.round((.08 + k * .215) * W), y: Math.round((row ? .75 : .55) * H), w: Math.round(.195 * W), h: Math.round(.16 * H) }); });
-      });
-      var s = Math.round(.07 * H), m = Math.round(.02 * H);
-      L.corners = [{ name: 'tl', col: '#ffffff', x: m, y: m }, { name: 'tr', col: '#ff0000', x: W - m - s, y: m }, { name: 'bl', col: '#00ff00', x: m, y: H - m - s }, { name: 'br', col: '#0000ff', x: W - m - s, y: H - m - s }];
-      L.corners.forEach(function (c) { c.w = s; c.h = s; });
-      return L;
-    }
-    function drawCard(W, H) {
-      var c = makeCanvas(W, H), x = c.getContext('2d'), L = layout(W, H);
-      x.fillStyle = '#5f5f5f'; x.fillRect(0, 0, W, H);
-      L.patches.forEach(function (p) { x.fillStyle = p.col; x.fillRect(p.x, p.y, p.w, p.h); });
-      L.ramp.forEach(function (p) { x.fillStyle = 'rgb(' + p.v + ',' + p.v + ',' + p.v + ')'; x.fillRect(p.x, p.y, p.w, p.h); });
-      x.fillStyle = '#e8e8e8'; x.fillRect(0, L.horizon.y, W, L.horizon.h);
-      L.grat.forEach(function (g) {
-        x.fillStyle = '#000'; x.fillRect(g.x, g.y, g.w, g.h); x.fillStyle = '#fff';
-        if (g.o === 'v') for (var a = 0; a < g.w; a += g.p) x.fillRect(g.x + a, g.y, g.p / 2, g.h);
-        else for (var b = 0; b < g.h; b += g.p) x.fillRect(g.x, g.y + b, g.w, g.p / 2);
-      });
-      L.corners.forEach(function (p) { x.fillStyle = p.col; x.fillRect(p.x, p.y, p.w, p.h); });
-      return { c: c, L: L };
-    }
-
-    // ---- where a point of the card lands on the screen: the view pass's own mapping, inverted (a still at full strength,
-    // card and canvas the same size, so the person's eye maps every pixel to itself)
-    function toScreen(P, W, H, sx, sy) {
-      var A = W / H, qx = (sx / W - .5) * A, qy = sy / H - .5, qr = Math.hypot(qx, qy);
-      if (qr < 1e-9) return [W / 2, H / 2];
-      function out(r) { var rn = clamp(r / (.45 * Math.sqrt(A * A + 1)), 0, 1), mag = 1 / lerp(1 / P.fovea, 1, rn * rn); return r * (1 + P.barrel * r * r) / (P.zoom * mag); }
-      var lo = 0, hi = 8;
-      for (var i = 0; i < 48; i++) { var mid = (lo + hi) / 2; if (out(mid) < qr) lo = mid; else hi = mid; }
-      var r = (lo + hi) / 2;
-      return [(r * qx / qr / A + .5) * W, (r * qy / qr + .5) * H];
-    }
-    function screenBox(P, W, H, b, f) {
-      var x0 = b.x + b.w * (.5 - f / 2), x1 = b.x + b.w * (.5 + f / 2), y0 = b.y + b.h * (.5 - f / 2), y1 = b.y + b.h * (.5 + f / 2);
-      var pts = [toScreen(P, W, H, x0, y0), toScreen(P, W, H, x1, y0), toScreen(P, W, H, x0, y1), toScreen(P, W, H, x1, y1)];
-      // keep only the inner part that every corner agrees on (the mapping bends straight edges a little)
-      var X0 = Math.max(pts[0][0], pts[2][0]), X1 = Math.min(pts[1][0], pts[3][0]), Y0 = Math.max(pts[0][1], pts[1][1]), Y1 = Math.min(pts[2][1], pts[3][1]);
-      var cx = (X0 + X1) / 2, cy = (Y0 + Y1) / 2;
-      return { x0: clamp(Math.round(Math.min(X0, cx - .5)), 0, W - 1), x1: clamp(Math.round(Math.max(X1, cx + .5)), 1, W), y0: clamp(Math.round(Math.min(Y0, cy - .5)), 0, H - 1), y1: clamp(Math.round(Math.max(Y1, cy + .5)), 1, H) };
-    }
-    function stats(img, W, b) {
-      var d = img.data, n = 0, s = [0, 0, 0], L = [];
-      for (var y = b.y0; y < b.y1; y++) for (var x = b.x0; x < b.x1; x++) {
-        var o = (y * W + x) * 4; s[0] += d[o]; s[1] += d[o + 1]; s[2] += d[o + 2]; n++;
-        L.push(.2126 * LIN[d[o]] + .7152 * LIN[d[o + 1]] + .0722 * LIN[d[o + 2]]);
-      }
-      n = Math.max(1, n);
-      var m = 0; L.forEach(function (v) { m += v; }); m /= Math.max(1, L.length);
-      var vv = 0; L.forEach(function (v) { vv += (v - m) * (v - m); }); vv /= Math.max(1, L.length);
-      return { rgb: [s[0] / n, s[1] / n, s[2] / n], lum: m, contrast: m > 1e-4 ? Math.sqrt(vv) / m : 0 };
-    }
-    function linDist(a, b) { var d = 0; for (var k = 0; k < 3; k++) { var e = LIN[Math.round(a[k])] - LIN[Math.round(b[k])]; d += e * e; } return Math.sqrt(d); }
-    function lumOf(a) { return .2126 * LIN[Math.round(a[0])] + .7152 * LIN[Math.round(a[1])] + .0722 * LIN[Math.round(a[2])]; }
-    function whole(img, W, H) {      // over the whole frame: spread of brightness, darkest share, largest gap between channels
-      var d = img.data, n = 0, m = 0, m2 = 0, dark = 0, spread = 0, step = Math.max(1, Math.round(Math.min(W, H) / 120));
-      for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) {
-        var o = (y * W + x) * 4, l = .299 * d[o] + .587 * d[o + 1] + .114 * d[o + 2];
-        m += l; m2 += l * l; n++; if (l < 16) dark++;
-        spread = Math.max(spread, Math.max(d[o], d[o + 1], d[o + 2]) - Math.min(d[o], d[o + 1], d[o + 2]));
-      }
-      m /= n; return { mean: m, std: Math.sqrt(Math.max(0, m2 / n - m * m)), dark: dark / n, spread: spread };
-    }
-
-    // ---- 1. the device
-    async function envPhase() {
-      phase('env', 'Reading what this browser offers.');
-      var E = T.env, n = navigator;
-      E.ua = n.userAgent; E.dpr = window.devicePixelRatio; E.viewport = innerWidth + 'x' + innerHeight; E.screen = screen.width + 'x' + screen.height;
-      E.webgl2 = !!engine; E.side = engine ? engine.side() : null; E.coarse = coarse; E.calm = calm; E.camera = hasCamera;
-      if (!engine) {
-        try { E.webgl2Context = !!makeCanvas(4, 4).getContext('webgl2'); } catch (e) { E.webgl2Context = false; }
-        try { Engine(makeCanvas(4, 4)); E.engineError = 'started on a second try'; } catch (e) { E.engineError = String(e && e.message || e).slice(0, 400); }
-      }
-      var gl = engine ? canvas.getContext('webgl2') : null;
-      if (gl) {
-        E.vendor = gl.getParameter(gl.VENDOR); E.renderer = gl.getParameter(gl.RENDERER); E.glVersion = gl.getParameter(gl.VERSION); E.glsl = gl.getParameter(gl.SHADING_LANGUAGE_VERSION);
-        var dbg = null; try { dbg = gl.getExtension('WEBGL_debug_renderer_info'); } catch (e) { dbg = null; }
-        if (dbg) { E.unmaskedVendor = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL); E.unmaskedRenderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL); }
-        E.floatOK = engine.floatOK; E.maxTexture = gl.getParameter(gl.MAX_TEXTURE_SIZE); E.maxLayers = gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS);
-        E.maxSamplers = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS); E.colorSpace = gl.drawingBufferColorSpace || null;
-        var ex = gl.getSupportedExtensions() || [];
-        E.extCount = ex.length;
-        E.ext = ['EXT_color_buffer_float', 'EXT_color_buffer_half_float', 'OES_texture_float_linear', 'EXT_float_blend', 'EXT_texture_filter_anisotropic', 'KHR_parallel_shader_compile', 'WEBGL_debug_renderer_info', 'EXT_disjoint_timer_query_webgl2', 'OVR_multiview2', 'WEBGL_compressed_texture_astc', 'WEBGL_compressed_texture_etc']
-          .filter(function (k) { return ex.indexOf(k) >= 0; });
-      }
-      E.crossOriginIsolated = !!window.crossOriginIsolated; E.webgpu = !!n.gpu; E.offscreenCanvas = typeof OffscreenCanvas === 'function';
-      E.captureStream = !!(HTMLCanvasElement.prototype.captureStream); E.rvfc = !!(window.HTMLVideoElement && 'requestVideoFrameCallback' in HTMLVideoElement.prototype);
-      E.recorder = window.MediaRecorder && MediaRecorder.isTypeSupported ? ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm', 'video/x-matroska;codecs=avc1']
-        .filter(function (t) { try { return MediaRecorder.isTypeSupported(t); } catch (e) { return false; } }) : null;
-      try { E.shareFiles = !!(n.canShare && n.canShare({ files: [new File([new Uint8Array([255, 216, 255])], 'x.jpg', { type: 'image/jpeg' })] })); } catch (e) { E.shareFiles = false; }
-      E.serviceWorker = 'serviceWorker' in n; E.swControlled = !!(n.serviceWorker && n.serviceWorker.controller);
-      E.cores = n.hardwareConcurrency || null; E.memoryGB = n.deviceMemory || null;
-      E.canPlay = { mp4: vid.canPlayType('video/mp4; codecs="avc1.42E01E"'), webm: vid.canPlayType('video/webm; codecs="vp8"') };
-      try { if (document.fonts && document.fonts.load) { await Promise.race([document.fonts.load('400 20px "Instrument Serif"'), wait(3000)]); E.serif = document.fonts.check('400 20px "Instrument Serif"'); } } catch (e) { E.serif = 'unknown'; }
-      check('WebGL 2 engine starts', !!engine, E.engineError);
-      post();
-    }
-
-    // ---- 2. the test card through each of the sixteen eyes, read back
-    async function stillPhase() {
-      var side = engine.side(), W = Math.min(side, 480), H = Math.round(W * .75), card = drawCard(W, H), L = card.L;
-      phase('still', 'Drawing a test card through each eye.');
-      sizeCanvas(W, H); engine.setImage(card.c);
-      var rc = makeCanvas(W, H), rx = rc.getContext('2d', { willReadFrequently: true });
-      T.still.size = W + 'x' + H; T.still.eyes = {};
-      await frame(); engine.draw(HUMAN, STEADY, performance.now(), 16); engine.state(); await frame();   // a first draw, so start-up costs are not counted
-      for (var e = 0; e < EYELIST.length; e++) {
-        var key = EYELIST[e], P = key === 'person' ? HUMAN : paramsOf(EYES[key]);
-        stLine.textContent = 'Still pictures: ' + key + ' (' + (e + 1) + ' of ' + EYELIST.length + ').';
-        var res = await new Promise(function (done) {
-          requestAnimationFrame(function () {
-            var t1 = performance.now();
-            engine.draw(P, STEADY, performance.now(), 16);
-            var err = engine.state().err;
-            rx.drawImage(canvas, 0, 0);
-            var img = rx.getImageData(0, 0, W, H);
-            done({ err: err, img: img, ms: performance.now() - t1 });
-          });
-        });
-        var img = res.img, R = { err: res.err, ms: Math.round(res.ms), patches: {}, ramp: [], grat: {}, corners: {} };
-        L.patches.forEach(function (p) { R.patches[p.name] = rgb(stats(img, W, screenBox(P, W, H, p, .4)).rgb); });
-        L.ramp.forEach(function (p) { R.ramp.push(Math.round(stats(img, W, screenBox(P, W, H, p, .4)).rgb[1])); });
-        L.grat.forEach(function (g) { R.grat[g.name] = r2(stats(img, W, screenBox(P, W, H, g, .6)).contrast); });
-        L.corners.forEach(function (c) { R.corners[c.name] = rgb(stats(img, W, screenBox(P, W, H, c, .5)).rgb); });
-        var wh = whole(img, W, H); R.mean = Math.round(wh.mean); R.std = r2(wh.std); R.spread = wh.spread;
-        T.still.eyes[key] = R;
-        var tile = makeCanvas(160, 120); tile.getContext('2d').drawImage(rc, 0, 0, 160, 120);
-        var fig = el('figure', '', undefined, sheet); fig.appendChild(tile); fig.dataset.key = key;
-        el('figcaption', '', key === 'person' ? 'person (you)' : key, fig);
-        await frame();
-      }
-      // judged: only what holds whatever the renderer
-      var E = T.still.eyes, person = E.person;
-      EYELIST.forEach(function (k) {
-        var bad = !check('still ' + k + ': picture not blank', E[k].std > 1.5 && E[k].mean > 2, 'mean ' + E[k].mean + ', spread ' + E[k].std);
-        bad = !check('still ' + k + ': no GL error', E[k].err === 0, 'error 0x' + (E[k].err || 0).toString(16)) || bad;
-        if (bad) markTile(k);
-      });
-      var C = person.corners, upright = C.tl[0] > 170 && C.tl[1] > 170 && C.tl[2] > 170 && C.tr[0] > 150 && C.tr[1] < 100 && C.br[2] > 150 && C.br[0] < 100 && C.bl[1] > 150 && C.bl[0] < 100;
-      check('still person: corner markers in place (picture neither flipped nor mirrored)', upright, JSON.stringify(C));
-      var o = E.other, greyOK = o.spread <= 10;
-      check('still other: comes out grey', greyOK, 'largest gap between channels ' + o.spread);
-      var bR = lumOf(E.bee.patches.red), pR = lumOf(person.patches.red);
-      check('still bee: red patch turns dark', bR < .5 * pR, 'red patch luminance ' + r2(bR) + ' against ' + r2(pR) + ' for a person');
-      var dP = linDist(person.patches.red, person.patches.green);
-      TWO_CONE.forEach(function (k) {
-        var d = linDist(E[k].patches.red, E[k].patches.green);
-        check('still ' + k + ': red and green pulled together', d < .8 * dP, 'distance ' + r2(d) + ' against ' + r2(dP) + ' for a person');
-      });
-      var fineP = (person.grat.v2 + person.grat.h2) / 2;
-      ORDER.forEach(function (k) {
-        if (!(EYES[k].cpd < HUMAN_CPD)) return;
-        var f = (E[k].grat.v2 + E[k].grat.h2) / 2;
-        check('still ' + k + ': finest grating keeps less contrast than for a person', f < .9 * fineP, 'contrast ' + r2(f) + ' against ' + r2(fineP));
-      });
-      T.ms.still = since();
-      post();
-    }
-    function markTile(k) { var f = sheet.querySelector('figure[data-key="' + k + '"] figcaption'); if (f) f.className = 'no'; }
-
-    // ---- 3. moving pictures, from a canvas and from a video
-    var mcv = makeCanvas(1280, 720), mx = mcv.getContext('2d'), mbase = null, freshV = false, lastVT = -1, vidOK = false;
-    function paintMotion(now) {
-      var t = now / 1000;
-      if (!mbase) mbase = drawCard(1280, 720).c;
-      mx.drawImage(mbase, 0, 0);
-      mx.fillStyle = '#ffffff'; mx.fillRect(((t * 420) % 1400) - 80, 300, 80, 80);
-      mx.fillStyle = '#e33b2e'; mx.beginPath(); mx.arc(640 + 420 * Math.sin(t * 2.7), 520, 44, 0, 7); mx.fill();
-    }
-    function watchVideo() {
-      if (!vid.requestVideoFrameCallback) return;
-      (function again() { vid.requestVideoFrameCallback(function () { freshV = true; if (S.selftest) again(); }); })();
-    }
-    // the clip goes in as a blob address, as a clip the person picks does (startClip), and so needs no byte ranges from the server
-    function loadClip(url) {
-      return fetch(url).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }).then(function (b) {
-        return new Promise(function (res, rej) {
-        var done = false, to = setTimeout(function () { if (!done) { done = true; rej(new Error('no data within 8 s')); } }, 8000);
-        vid.onloadeddata = function () { if (!done) { done = true; clearTimeout(to); res(); } };
-        vid.onerror = function () { if (!done) { done = true; clearTimeout(to); rej(new Error('error ' + (vid.error && vid.error.code))); } };
-        vid.loop = true; vid.muted = true; vid.playsInline = true; vid.setAttribute('playsinline', ''); vid.src = URL.createObjectURL(b);
-        try { vid.load(); } catch (e) {}
-        });
-      }).then(function () { return vid.play(); });
-    }
-    async function startVideo() {
-      var M = T.motion.video = { tried: [] }, order = vid.canPlayType('video/mp4; codecs="avc1.42E01E"') ? ['mp4', 'webm'] : ['webm', 'mp4'];
-      for (var i = 0; i < order.length && !vidOK; i++) {
-        try { await loadClip('test/assets/motion.' + order[i]); vidOK = true; M.used = order[i]; M.tried.push(order[i] + ': playing'); }
-        catch (e) { M.tried.push(order[i] + ': ' + String(e && e.message || e).slice(0, 80)); }
-      }
-      check('video: a test clip plays', vidOK, M.tried.join('; '));
-      if (vidOK) { M.size = vid.videoWidth + 'x' + vid.videoHeight; watchVideo(); }
-    }
-    function videoUpright() {        // the clip has red in its top left corner and blue in its bottom right
-      return new Promise(function (done) {
-        var vw = vid.videoWidth, vh = vid.videoHeight;
-        sizeCanvas(vw, vh);
-        requestAnimationFrame(function () {
-          engine.setFrame(vid, vw, vh, performance.now());
-          engine.draw(HUMAN, STEADY, performance.now(), 16);
-          var rc = makeCanvas(vw, vh), rx = rc.getContext('2d', { willReadFrequently: true }); rx.drawImage(canvas, 0, 0);
-          var img = rx.getImageData(0, 0, vw, vh), s = Math.round(vh * .1);
-          var tl = stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb, br = stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb;
-          done({ tl: rgb(tl), br: rgb(br), err: engine.state().err });
-        });
-      });
-    }
-    // what the video element delivers over a while: frame callbacks, and changes of currentTime
-    function videoProbe(ms) {
-      return new Promise(function (done) {
-        var cb = 0, ct = 0, last = vid.currentTime, t0 = performance.now(), on = true;
-        if (vid.requestVideoFrameCallback) (function again() { vid.requestVideoFrameCallback(function () { cb++; if (on) again(); }); })();
-        (function tick() {
-          if (vid.currentTime !== last) { ct++; last = vid.currentTime; }
-          if (performance.now() - t0 < ms) { requestAnimationFrame(tick); return; }
-          on = false; done({ callbacks: cb, timeChanges: ct, paused: vid.paused, time: r2(vid.currentTime), ready: vid.readyState });
-        })();
-      });
-    }
-    async function videoProbes() {        // the page's own video element as the app styles it (2 px, transparent), then shown
-      var P = T.motion.videoProbe = {};
-      P.asStyled = await videoProbe(1500);
-      var app = $('app'), keepApp = app.style.cssText, keepVid = vid.style.cssText;
-      app.style.zIndex = '70'; app.style.background = 'transparent'; app.style.pointerEvents = 'none';
-      vid.style.cssText = 'position:fixed;right:8px;bottom:8px;width:160px;height:90px;opacity:1';
-      if (vid.paused) { try { await vid.play(); } catch (e) { P.replay = String(e).slice(0, 80); } }
-      P.shown = await videoProbe(1500);
-      app.style.cssText = keepApp; vid.style.cssText = keepVid;
-      P.afterwards = await videoProbe(1000);
-    }
-    function run(eye, kind, ms) {
-      return new Promise(function (done) {
-        var P = paramsOf(EYES[eye]), t0 = null, last = 0, dts = [], cpu = [], n = 0, fresh = 0, w0 = null, wGot = 0, errAny = 0;
-        function step(now) {
-          if (t0 === null) t0 = now;
-          var c0 = performance.now();
-          if (kind === 'canvas') { paintMotion(now); engine.setFrame(mcv, mcv.width, mcv.height, now); fresh++; }
-          else if (vid.readyState >= 2 && vid.videoWidth) {
-            var isNew = vid.requestVideoFrameCallback ? freshV : vid.currentTime !== lastVT;
-            if (isNew || fresh === 0) { freshV = false; lastVT = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now); fresh++; }
-          }
-          // state() reads the GL error flag, which waits for the graphics chip, so it is read only after the first frame
-          // (where a change of size starts the ring again) and at the end; an error flag stays set until it is read
-          if (fresh && w0 === null) { var s0 = engine.state(); w0 = s0.writes; errAny = s0.err; }
-          engine.draw(P, STEADY, now, last ? Math.min(100, now - last) : 16);
-          cpu.push(performance.now() - c0);
-          if (last) dts.push(now - last);
-          last = now; n++;
-          if ((now - t0 < ms || n < 3 || fresh < 3) && now - t0 < 3000) { requestAnimationFrame(step); return; }   // the ring takes every second frame, so three new frames always write one
-          var st = engine.state(), d = dts.slice(1), c = cpu.slice(1); wGot = w0 === null ? 0 : st.writes - w0;
-          function mean(a) { if (!a.length) return null; var s = 0; a.forEach(function (v) { s += v; }); return Math.round(s / a.length * 10) / 10; }
-          function worst(a) { return a.length ? Math.round(Math.max.apply(null, a) * 10) / 10 : null; }
-          done({ frames: n, fresh: fresh, writes: wGot, err: errAny || st.err, paused: kind === 'video' ? vid.paused : undefined, ms: mean(d), worst: worst(d), cpu: mean(c), cpuWorst: worst(c), first: dts.length ? Math.round(dts[0]) : null, size: canvas.width + 'x' + canvas.height, ring: st.sw + 'x' + st.sh });
-        }
-        requestAnimationFrame(step);
-      });
-    }
-    async function motionPhase() {
-      phase('motion', 'Moving pictures.');
-      var side0 = engine.side(), sizes = [['default', side0], ['540', 540]];
-      T.motion.side0 = side0; T.motion.runs = {};
-      await startVideo();
-      if (vidOK) {
-        var up = T.motion.videoUpright = await videoUpright();
-        check('video: picture upright (red corner top left, blue bottom right)', up.tl[0] > 140 && up.tl[2] < 110 && up.br[2] > 140 && up.br[0] < 110, JSON.stringify(up));
-      }
-      if (vidOK) { stLine.textContent = 'Watching what the video element delivers.'; await videoProbes(); }
-      for (var s = 0; s < sizes.length; s++) {
-        engine.setSide(sizes[s][1]); fullSize();
-        for (var e = 0; e < MOVERS.length; e++) {
-          var kinds = vidOK ? ['canvas', 'video'] : ['canvas'];
-          for (var k = 0; k < kinds.length; k++) {
-            var name = sizes[s][0] + ' ' + MOVERS[e] + ' ' + kinds[k];
-            stLine.textContent = 'Moving pictures: ' + MOVERS[e] + ' from a ' + kinds[k] + ', picture size ' + sizes[s][0] + ' (' + engine.side() + ').';
-            var r = T.motion.runs[name] = await run(MOVERS[e], kinds[k], 600);
-            check('motion ' + name + ': frames advance', r.writes > 0, r.writes + ' ring writes from ' + r.fresh + ' new frames');
-            check('motion ' + name + ': no GL error', r.err === 0, 'error 0x' + (r.err || 0).toString(16));
-          }
-        }
-      }
-      engine.setSide(side0);
-      try { vid.pause(); } catch (e) {}
-      T.ms.motion = since();
-      post();
-    }
-
-    // ---- 4. the change of eyes, held still with the page's own pose(t) hook and drawn by the page's own loop
-    async function posePhase() {
-      phase('pose', 'The change of eyes, held at three instants.');
-      stage.classList.add('full'); stage.style.width = ''; stage.style.height = '';
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), w = innerWidth * dpr, h = innerHeight * dpr, k = Math.min(1, engine.side() / Math.max(w, h));
-      var card = drawCard(Math.round(w * k), Math.round(h * k));
-      showStill(card.c, true);
-      var rc = makeCanvas(2, 2), rx = rc.getContext('2d', { willReadFrequently: true });
-      S.selftest = false;                               // from here the app's own loop draws
-      var plan = [['cat', 'slit pupil'], ['bee', 'mosaic']];
-      for (var i = 0; i < plan.length; i++) {
-        setEyes(plan[i][0], null); go('animal');
-        for (var j = 0; j < 3; j++) {
-          var t = [.2, .45, .8][j];
-          window.__seenBack.pose(t);
-          cap.textContent = 'Change of eyes: ' + plan[i][0] + ' (' + (calm ? 'reduced motion asked for, so no ' + plan[i][1] : plan[i][1]) + '), held at t = ' + t.toFixed(2);
-          T.posing = plan[i][0] + '@' + t;
-          var h0 = performance.now(), seen = 0, lastSeen = S.lastNow;
-          while (performance.now() - h0 < 900 || (seen < 3 && performance.now() - h0 < 6000)) {   // on a slow renderer, hold until the page has drawn it a few times
-            await frame(); if (S.lastNow !== lastSeen) { seen++; lastSeen = S.lastNow; }
-          }
-          var got = await new Promise(function (done) {
-            requestAnimationFrame(function () {         // drawn and read back in one go, as the page's own snapshot does
-              var now = performance.now(), fx = fxNow(now, 0);
-              engine.draw(mix(HUMAN, eyeP, S.k), fx, now, 16);
-              var err = engine.state().err;
-              rc.width = canvas.width; rc.height = canvas.height; rx.drawImage(canvas, 0, 0);
-              var wh = whole(rx.getImageData(0, 0, rc.width, rc.height), rc.width, rc.height);
-              done({ eye: plan[i][0], t: t, k: r2(S.k), ap: r2(fx.ap), mosaic: r2(fx.mosaic), err: err, dark: r2(wh.dark), mean: Math.round(wh.mean), size: canvas.width + 'x' + canvas.height });
-            });
-          });
-          T.pose.push(got);
-          check('pose ' + got.eye + ' at ' + t + ': no GL error', got.err === 0, 'error 0x' + (got.err || 0).toString(16));
-          await wait(300);
-        }
-      }
-      window.__seenBack.pose(null); S.selftest = true; T.posing = null; cap.textContent = '';
-      stage.classList.remove('full'); stage.hidden = true;
-      T.ms.pose = since();
-    }
-
-    // ---- 5. the report, ending on the contact sheet
-    function finish() {
-      T.done = true; T.ok = T.fails.length === 0; T.ms.total = since(); T.phase = 'done';
-      stLine.textContent = 'Finished in ' + (T.ms.total / 1000).toFixed(1) + ' s. ' + (T.env.renderer ? 'Renderer: ' + (T.env.unmaskedRenderer || T.env.renderer) + '.' : '');
-      stSum.innerHTML = '';
-      var b = el('b', '', T.ok ? 'All ' + T.checks + ' checks passed.' : T.fails.length + ' of ' + T.checks + ' checks failed.', stSum); b.className = T.ok ? 'ok' : 'no';
-      if (!T.ok) { var ul = el('ul', '', undefined, stSum); T.fails.slice(0, 12).forEach(function (f) { el('li', '', f, ul); }); if (T.fails.length > 12) el('li', '', 'and ' + (T.fails.length - 12) + ' more', ul); }
-      stBtns.hidden = false;
-      var E = T.env, rows = [['Browser', E.ua], ['Screen', E.viewport + ' at ' + E.dpr + 'x'], ['WebGL 2', E.webgl2 ? 'yes' : 'no ' + (E.engineError || '')],
-        ['Renderer', (E.unmaskedRenderer || E.renderer || '') + ' / ' + (E.unmaskedVendor || E.vendor || '')], ['Float targets', String(E.floatOK)],
-        ['Largest texture', E.maxTexture + ', ' + E.maxLayers + ' layers'], ['Typeface loaded', String(E.serif)], ['Video', JSON.stringify(E.canPlay) + (T.motion.video ? ' used ' + T.motion.video.used : '')],
-        ['Recorder', (E.recorder || []).join(', ') || 'none'], ['Share files', String(E.shareFiles)]];
-      var tb = el('table', '', undefined, details);
-      rows.forEach(function (r) { var tr = el('tr', '', undefined, tb); el('th', '', r[0], tr); el('td', '', r[1], tr); });
-      if (T.motion.runs) {
-        var mt = el('table', '', undefined, details), hr = el('tr', '', undefined, mt);
-        ['moving picture', 'ms per frame', 'worst', 'ring writes', 'size'].forEach(function (h) { el('th', '', h, hr); });
-        Object.keys(T.motion.runs).forEach(function (k) { var r = T.motion.runs[k], tr = el('tr', '', undefined, mt); [k, r.ms, r.worst, r.writes, r.size].forEach(function (v) { el('td', '', String(v), tr); }); });
-      }
-      el('pre', '', JSON.stringify(T), details);
-      ta.value = JSON.stringify(T);
-      root.scrollTop = 0;
-    }
-
-    async function main() {
-      await frame();
-      await envPhase();
-      if (engine) {
-        try { await stillPhase(); } catch (e) { check('still phase ran', false, String(e && e.stack || e).slice(0, 300)); }
-        try { await motionPhase(); } catch (e) { check('motion phase ran', false, String(e && e.stack || e).slice(0, 300)); }
-        try { await posePhase(); } catch (e) { S.selftest = true; check('pose phase ran', false, String(e && e.stack || e).slice(0, 300)); }
-      }
-      finish();
-      post();
-    }
-    main().catch(function (e) { check('self-test ran', false, String(e && e.stack || e).slice(0, 300)); finish(); post(); });
-  })();
+  // ---------- self-test hook: with ?selftest=1 the page fetches selftest.js and hands it the bindings it reads (build.py)
+  if (/[?&]selftest=1(?:&|$)/.test(location.search || '')) {
+    S.selftest = true;   // at once, as the self-test did when it was part of this script: the page's loop leaves the drawing to it
+    window.__seenBackSelftest = { '$': $, 'BUILD': BUILD, 'EYES': EYES, 'Engine': Engine, 'HUMAN': HUMAN, 'HUMAN_CPD': HUMAN_CPD, 'ORDER': ORDER, 'S': S, 'calm': calm, 'canvas': canvas, 'clamp': clamp, 'coarse': coarse, 'decode': decode, 'engine': engine, 'fxNow': fxNow, 'go': go, 'hasCamera': hasCamera, 'lerp': lerp, 'makeCanvas': makeCanvas, 'mix': mix, 'paramsOf': paramsOf, 'pocket': pocket, 'setEyes': setEyes, 'showStill': showStill, 'vid': vid };
+    var selftestScript = document.createElement('script'); selftestScript.src = 'selftest.js?v=' + encodeURIComponent(BUILD);
+    document.head.appendChild(selftestScript);
+  }
 })();
 </script>
 <script>

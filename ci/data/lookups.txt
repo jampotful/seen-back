@@ -1,0 +1,16 @@
+# GBIF API answers the data agent wants back (address, file name); fetched first by ci/data/coco.sh into out/lookups/.
+# Only species records and counts (limit=0 with facets): no occurrence record, so no names of people, comes back.
+https://api.gbif.org/v1/species/8283204 gbif-species-8283204.json
+https://api.gbif.org/v1/species/2927067 gbif-species-2927067.json
+https://api.gbif.org/v1/species/8283204/synonyms gbif-synonyms-8283204.json
+https://api.gbif.org/v1/species/2927067/synonyms gbif-synonyms-2927067.json
+https://api.gbif.org/v1/species/8283204/children gbif-children-8283204.json
+https://api.gbif.org/v1/species/2927067/children gbif-children-2927067.json
+https://api.gbif.org/v1/species/match?name=Salvia%20azurea&kingdom=Plantae&verbose=true gbif-match-salvia-azurea.json
+https://api.gbif.org/v1/species/search?q=Salvia%20azurea&datasetKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&limit=50 gbif-backbone-search-salvia-azurea.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&gadmGid=USA.10.1_1&speciesKey=8283204&limit=0&facet=taxonKey&facet=acceptedTaxonKey&facet=year gbif-occ-facets-8283204.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&gadmGid=USA.10.1_1&speciesKey=2927067&limit=0&facet=taxonKey&facet=acceptedTaxonKey&facet=year gbif-occ-facets-2927067.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&gadmGid=USA.10.1_1&speciesKey=8283204&limit=0&facet=verbatimScientificName gbif-occ-verbatim-8283204.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&gadmGid=USA.10.1_1&speciesKey=2927067&limit=0&facet=verbatimScientificName gbif-occ-verbatim-2927067.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&speciesKey=2927067&limit=0&facet=verbatimScientificName&facet=country gbif-occ-verbatim-2927067-everywhere.json
+https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&speciesKey=8283204&limit=0&facet=verbatimScientificName&facet=country gbif-occ-verbatim-8283204-everywhere.json

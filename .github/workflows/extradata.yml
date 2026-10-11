@@ -1,0 +1,31 @@
+name: extradata
+# Photos for the kinds the wildlife records lack (people, pets, livestock, nothing alive), from COCO 2017's
+# annotations. Start it by pushing a commit to a branch named run/extradata/<anything>. The manifest goes INTO the
+# branch pub/data-alachua under extra/coco-kinds/ (everything else there is kept); summary and log come back on ci.
+on:
+  push:
+    branches: ['run/extradata/**']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: extradata-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: build, check and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/data/coco.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh extradata out
