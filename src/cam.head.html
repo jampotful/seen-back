@@ -66,6 +66,7 @@ button { cursor: pointer; }
 .msg:empty { visibility: hidden; }
 .timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 600; }
 .stack { display: flex; flex-direction: column; }
+#barFinder:not([hidden]) ~ #barType, #barAnimal:not([hidden]) ~ #barType { display: none; }   /* only ever under the line that counts the download */
 
 /* the name, as the eyes change */
 .reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 28px rgba(0, 0, 0, .8), 0 0 4px rgba(0, 0, 0, .5); padding: 0 24px; }
@@ -203,6 +204,8 @@ button { cursor: pointer; }
         <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
         <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
       </div>
+      <!-- a way out while the recognizer is still being downloaded for the first time -->
+      <div class="bottom" id="barType" hidden><button class="pill ghost" id="btnType" type="button">Type it instead</button></div>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|offline|version|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|typeit|offline|version|missing|damaged|dying|about|viewer ...]
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
 // A real model: make a slot with test/rec/make_slot.py --photos <dir>, then
 //   SLOT=<slot dir, from the repository root> PHOTOS=<dir> node test/rec/check_rec.js parity
@@ -21,7 +21,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'typeit', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -261,6 +261,32 @@ async function meet(page, name) {
     r.lines = lines.length > 12 ? lines.slice(0, 4).concat(['... ' + (lines.length - 8) + ' more ...'], lines.slice(-4)) : lines; r.end = await st(page); r.shown = await text(page, 'rvName'); r.waited = await page.evaluate(() => window.__seenBack.rec.about().last.ms); r.errors = errors;
     const nums = lines.map((l) => /^Getting the recognizer: (\d+) of (\d+) MB\.$/.exec(l)).filter(Boolean);
     done('progress', r, r.stateAtPhoto !== 'ready' && nums.length >= 3 && nums.every((n, i) => +n[1] <= +n[2] && (!i || +n[1] >= +nums[i - 1][1])) && +nums[nums.length - 1][2] === 15 && r.end.eyes === 'wader' && r.shown === 'Great Blue Heron' && !errors.length);
+    await ctl('reset=1'); await ctx.close();
+  });
+
+  if (want.includes('typeit')) await section('typeit', async () => {   // a way out of a long first download: type the name, and the download carries on by itself
+    await ctl('reset=1'); await ctl('slow=' + encodeURIComponent('ort-wasm.*\\.wasm') + '&bps=1500000');
+    const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT); const r = {}; await begin(page);
+    r.buttonBefore = await page.locator('#barType').isVisible();
+    await page.locator('#inAnimalPick').setInputFiles(photo('heron.png'));
+    await page.waitForSelector('#btnType', { state: 'visible', timeout: 20000 });
+    r.line = await text(page, 'msg'); r.button = (await text(page, 'btnType')).trim();
+    r.buttonUnderLine = await page.evaluate(() => document.getElementById('btnType').getBoundingClientRect().top >= document.getElementById('msg').getBoundingClientRect().bottom - 1 && document.getElementById('btnType').getBoundingClientRect().bottom <= window.innerHeight);
+    fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'typeit.png'), scale: 'css' }).catch(() => {});
+    await page.locator('#btnType').tap(); await page.waitForSelector('#claim', { state: 'visible' });
+    r.sub = await text(page, 'claimSub'); r.stateAtTap = (await about(page)).state; r.buttonWhileAsking = await page.locator('#barType').isVisible();
+    await page.locator('#claimName').fill('heron'); await page.locator('#claimForm button[type=submit]').tap();
+    await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+    r.typed = await st(page); r.stateWhenTyped = (await about(page)).state;
+    await ready(page, 60000);                                      // nobody is waiting, and the download finishes all the same
+    await page.waitForTimeout(1500);                               // the late answer for the photo already named by hand changes nothing
+    r.after = await st(page); r.record = await page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.by + '|' + m.key));
+    r.next = await meet(page, 'stripes.png'); r.buttonNext = await page.locator('#barType').isVisible();   // the next photo is recognized, with no button
+    r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'type-instead').length); r.errors = errors;
+    done('typeit', r, !r.buttonBefore && /^Getting the recognizer: \d+ of 15 MB\.$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
+      && r.sub === 'The recognizer keeps downloading meanwhile. Type the kind of animal or plant, such as cat, heron or oak.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
+      && r.typed.eyes === 'wader' && r.typed.named.by === 'you' && r.typed.named.common === 'Heron' && r.after.eyes === 'wader' && r.after.named.by === 'you' && r.after.screen === 'askView' && r.record.length === 1 && r.record[0] === 'Heron|you|wader'
+      && r.next.eyes === 'insect' && !r.buttonNext && r.trace === 1 && !errors.length);
     await ctl('reset=1'); await ctx.close();
   });
 

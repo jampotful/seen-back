@@ -1186,6 +1186,7 @@
     if (!closeSheets()) return;
     if (S.screen === 'finder') { thaw(); paintUI(); }
     else if (S.screen === 'naming' && !S.eyes) go('askAnimal');
+    paintType();
   }
   function openClaim(sub) {
     $('claimSub').textContent = (sub ? sub + ' ' : '') + 'Type the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
@@ -1206,18 +1207,21 @@
   }
 
   function reveal(key, named) {
-    S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named);
+    S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
     go('naming'); showName();
     later(function () { hideName(); go('askView'); }, calm ? 1400 : 2100);
   }
-  function failName(why) {
+  function askName(sub) {
     msg('');
     if (S.src === 'cam') go('finder'); else go('naming');
-    openClaim(why + ' So you tell it.');
+    openClaim(sub); paintType();
   }
+  function failName(why) { askName(why + ' So you tell it.'); }
+  // While the recognizer is being downloaded for the first time, the person may type the name and not wait. The download carries on.
+  function paintType() { show('barType', !inViewer && S.screen === 'naming' && !S.eyes && !anySheet() && pocket.fetching()); }
   function identify() {
     if (!S.animalPhoto) return;
     var t = ++S.token; S.seq++;
@@ -1225,8 +1229,8 @@
     capsReady.then(function () { if (t === S.token) recognize(t); });
   }
   function recognizeHere(t) {                      // outside Claude: the page's own small model, on this device
-    go('naming'); msg(pocket.line());
-    pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); });
+    go('naming'); msg(pocket.line()); paintType();
+    pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); paintType(); });
     pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
@@ -1294,6 +1298,7 @@
       S.token++; if (nameCtl) nameCtl.abort();
       setEyes(null);
       if (S.src === 'cam') { thaw(); go('finder'); } else go('askAnimal');
+      paintType();
       return;
     }
     if (s === 'animal') {
@@ -1462,6 +1467,11 @@
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
   $('btnShutter').addEventListener('click', shutter);
+  $('btnType').addEventListener('click', function () {
+    if (S.screen !== 'naming' || S.eyes) return;
+    S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
+    askName('The recognizer keeps downloading meanwhile.');
+  });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
