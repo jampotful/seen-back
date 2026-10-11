@@ -37,6 +37,19 @@ d=json.load(open(sys.argv[1])); print('phone', d.get('phone'), '| offline', json
   done
   exit 0
 fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*)    # only test/engines/resume_probe.js: a reload while the larger model is being downloaded (WebKit; Chromium beside it)
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & node test/rec/serve.js 8788 cors > "$OUT/rec-serve-big-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    [ "$B" = firefox ] && continue
+    step "resume_probe.js: $B"; BROWSER=$B PORT=8782 BIG_PORT=8788 timeout 300 node test/engines/resume_probe.js > "$OUT/rec/resume-$B.json" 2> "$OUT/rec/resume-$B.err.txt"; echo "resume probe $B: exit $?"
+    python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('version', d.get('version'), 'error', d.get('error')); print('before', json.dumps(d.get('before'))[:500]); print('asked before', json.dumps(d.get('asked'))[:300])
+for a in d.get('after', [])[:12]: print(' after', json.dumps(a)[:400])
+print('last', json.dumps((d.get('after') or [None])[-1])[:500]); print('asked after', json.dumps(d.get('askedAfter'))[:500]); print('kept', d.get('kept')); print('console', json.dumps(d.get('console'))[:800])" "$OUT/rec/resume-$B.json"
+  done
+  exit 0 ;;
+esac
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-svc*)    # only check_rec.js service, with ci/engines/patches/check_rec-quiet-cors.patch (each engine's own words for a refused CORS request)
   git apply ci/engines/patches/check_rec-quiet-cors.patch && echo "patch applied"
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & sleep 1
