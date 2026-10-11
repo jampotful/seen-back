@@ -280,6 +280,8 @@ def main():
          "Built by `tools/species/build_train.py` on %s (UTC). %d rows from %d species, at most %d a species." % (
              datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M"), len(rows), len(n_per), args.cap), "",
          "Rows are in order of each photo's rank within its species, so the first rows hold every species' first photo.", "",
+         "The manifest (about 20 MB) is published only on the branch `pub/data-alachua` as `train/%s/manifest.csv`; "
+         "this summary and `regions/%s/inat.json` are also kept in the repository." % (out.name, region.name), "",
          "## Checks", ""] + ["- " + c for c in checks] + ["", "## Photos a species", "", "| photos | species |", "|---|---:|"]
     for lo, hi in ((args.cap, args.cap), (30, args.cap - 1), (10, 29), (5, 9), (2, 4), (1, 1)):
         L.append("| %s | %d |" % ("%d" % lo if lo == hi else "%d to %d" % (lo, hi), sum(1 for v in n_per.values() if lo <= v <= hi)))
