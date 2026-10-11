@@ -1,0 +1,12 @@
+{
+ "about": "Extra kinds (people, pets, livestock, nothing alive; COCO 2017, extra/coco-kinds on pub/data-alachua) for the pocket models: the original model's vectors on every row, and the shipping int8 file (onnx/vision.int8-per-channel.onnx) through onnxruntime-web 1.30.0's WASM build on the test rows only (four single-thread processes). One machine at a time, 39M first. Replaces run/lab/extra-coco, which never ran.",
+ "data": "pub/data-alachua",
+ "manifest": "extra/coco-kinds/manifest.csv",
+ "shard_mode": "block",
+ "models": ["tinyclip-39m-16", "tinyclip-8m-16"],
+ "stages": ["images", "images-wasm-int8-per-channel"],
+ "shards": {},
+ "wasm_split": "test",
+ "wasm_procs": 4,
+ "max_parallel": 1
+}

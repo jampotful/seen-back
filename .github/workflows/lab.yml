@@ -30,6 +30,8 @@ jobs:
       device_model: ${{ steps.plan.outputs.device_model }}
       device_branch: ${{ steps.plan.outputs.device_branch }}
       device_max: ${{ steps.plan.outputs.device_max }}
+      card_patch: ${{ steps.plan.outputs.card_patch }}
+      has_card_patch: ${{ steps.plan.outputs.has_card_patch }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
@@ -230,3 +232,24 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh lab ret device-pub
+
+  # Patches to model cards (ci/lab/runs/<label>.json "card_patch": {"<model id>": {...}}), e.g. marking a file broken.
+  card_patch:
+    needs: plan
+    if: needs.plan.outputs.has_card_patch == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: patch cards
+        env:
+          PATCH: ${{ needs.plan.outputs.card_patch }}
+        run: |
+          mkdir -p ret
+          python3 -m pip install --quiet numpy 2>&1 | tail -1
+          bash ci/lab/card_patch.sh "$PATCH"
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret card-patch

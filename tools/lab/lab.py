@@ -605,7 +605,9 @@ def stage_text(args):
             log("%s: %s" % (setname, vec.shape))
             card.setdefault("text", {})[setname] = {"rows": len(sj["species"]), "width": int(vec.shape[1]), "region": region,
                                                     "shards": sn, "shard_%d_rows" % si: len(groups),
-                                                    "short_context": bool(getattr(m, "short_text", False))}
+                                                    "short_context": bool(getattr(m, "short_text", False)),
+                                                    "species_json_sha256": sha256(args.species_json),
+                                                    "species_json_retrieved": sj.get("source", {}).get("retrieved")}
         card["width"] = int(vec.shape[1])
     else:
         raise SystemExit("unknown labelset")
