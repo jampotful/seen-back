@@ -302,6 +302,29 @@
         });
       });
     }
+    // what the video element delivers over a while: frame callbacks, and changes of currentTime
+    function videoProbe(ms) {
+      return new Promise(function (done) {
+        var cb = 0, ct = 0, last = vid.currentTime, t0 = performance.now(), on = true;
+        if (vid.requestVideoFrameCallback) (function again() { vid.requestVideoFrameCallback(function () { cb++; if (on) again(); }); })();
+        (function tick() {
+          if (vid.currentTime !== last) { ct++; last = vid.currentTime; }
+          if (performance.now() - t0 < ms) { requestAnimationFrame(tick); return; }
+          on = false; done({ callbacks: cb, timeChanges: ct, paused: vid.paused, time: r2(vid.currentTime), ready: vid.readyState });
+        })();
+      });
+    }
+    async function videoProbes() {        // the page's own video element as the app styles it (2 px, transparent), then shown
+      var P = T.motion.videoProbe = {};
+      P.asStyled = await videoProbe(1500);
+      var app = $('app'), keepApp = app.style.cssText, keepVid = vid.style.cssText;
+      app.style.zIndex = '70'; app.style.background = 'transparent'; app.style.pointerEvents = 'none';
+      vid.style.cssText = 'position:fixed;right:8px;bottom:8px;width:160px;height:90px;opacity:1';
+      if (vid.paused) { try { await vid.play(); } catch (e) { P.replay = String(e).slice(0, 80); } }
+      P.shown = await videoProbe(1500);
+      app.style.cssText = keepApp; vid.style.cssText = keepVid;
+      P.afterwards = await videoProbe(1000);
+    }
     function run(eye, kind, ms) {
       return new Promise(function (done) {
         var P = paramsOf(EYES[eye]), t0 = null, last = 0, dts = [], cpu = [], n = 0, fresh = 0, w0 = null, wGot = 0, errAny = 0;
@@ -324,7 +347,7 @@
           var st = engine.state(), d = dts.slice(1), c = cpu.slice(1); wGot = w0 === null ? 0 : st.writes - w0;
           function mean(a) { if (!a.length) return null; var s = 0; a.forEach(function (v) { s += v; }); return Math.round(s / a.length * 10) / 10; }
           function worst(a) { return a.length ? Math.round(Math.max.apply(null, a) * 10) / 10 : null; }
-          done({ frames: n, fresh: fresh, writes: wGot, err: errAny || st.err, ms: mean(d), worst: worst(d), cpu: mean(c), cpuWorst: worst(c), first: dts.length ? Math.round(dts[0]) : null, size: canvas.width + 'x' + canvas.height, ring: st.sw + 'x' + st.sh });
+          done({ frames: n, fresh: fresh, writes: wGot, err: errAny || st.err, paused: kind === 'video' ? vid.paused : undefined, ms: mean(d), worst: worst(d), cpu: mean(c), cpuWorst: worst(c), first: dts.length ? Math.round(dts[0]) : null, size: canvas.width + 'x' + canvas.height, ring: st.sw + 'x' + st.sh });
         }
         requestAnimationFrame(step);
       });
@@ -338,6 +361,7 @@
         var up = T.motion.videoUpright = await videoUpright();
         check('video: picture upright (red corner top left, blue bottom right)', up.tl[0] > 140 && up.tl[2] < 110 && up.br[2] > 140 && up.br[0] < 110, JSON.stringify(up));
       }
+      if (vidOK) { stLine.textContent = 'Watching what the video element delivers.'; await videoProbes(); }
       for (var s = 0; s < sizes.length; s++) {
         engine.setSide(sizes[s][1]); fullSize();
         for (var e = 0; e < MOVERS.length; e++) {
