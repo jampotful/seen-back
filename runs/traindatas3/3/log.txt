@@ -1,0 +1,55 @@
+=== 2026-10-11T06:44:45Z machine
+4
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   59G   86G  41% /
+/dev/root       145G   59G   86G  41% /
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1531       12135          43        2686       14457
+Sun Oct 11 06:44:45 UTC 2026
+awk: /usr/bin/mawk
+=== 2026-10-11T06:44:45Z machine: exit 0
+=== 2026-10-11T06:44:45Z download taxa
+=== 2026-10-11T06:44:46Z download taxa: exit 0
+=== 2026-10-11T06:44:46Z decompressor
+decompressor: igzip -dc
+=== 2026-10-11T06:44:51Z decompressor: exit 0
+=== 2026-10-11T06:44:51Z sizes
+observations.csv.gz Last-Modified: Sun, 27 Sep 2026 16:10:27 GMT Content-Length: 13420521411 
+photos.csv.gz Last-Modified: Sun, 27 Sep 2026 16:45:05 GMT Content-Length: 20668099997 
+=== 2026-10-11T06:44:51Z sizes: exit 0
+=== 2026-10-11T06:44:51Z observations in the box (streamed)
+try 1: curl 0, decompress 0, filter 0; rows kept 264412; 06:47:45
+observation_uuid	observer_id	latitude	longitude	positional_accuracy	taxon_id	quality_grade	observed_on	anomaly_score
+bc923fc9-32e7-47a3-99e4-935d2c43a395	1620	29.6484397568	-82.3469683528		67731	research	2003-03-11	47.32680665718398
+=== 2026-10-11T06:47:45Z observations in the box (streamed): exit 0
+=== 2026-10-11T06:47:45Z photos of those observations (streamed)
+try 1: curl 0, decompress 0, filter 0; rows kept 443078; 06:54:50
+photo_uuid	photo_id	observation_uuid	observer_id	extension	license	width	height	position
+60f05e43-222d-4261-9d87-79cb6a969655	65271	bc923fc9-32e7-47a3-99e4-935d2c43a395	1620	jpg	CC-BY-NC-SA	1600	1200	0
+=== 2026-10-11T06:54:50Z photos of those observations (streamed): exit 0
+=== 2026-10-11T06:54:50Z training manifest
+== taxonomy
+  1668467 taxa
+== observations
+  264412 research-grade observations in the box
+== photos
+== the evaluation photos' iNaturalist names
+  evaluation photos found in the open-data photos file: 5921 of 6000 (keys: 1390); keys whose photos sit mostly under another iNaturalist name: 57; names used as aliases: 56
+  observations in the box, research grade: 264412; kept: 181774 (through an alias: 7570); left out: {'not identified to a species': 1124, 'species not in the species list by name': 5308, 'dated after 2024-12-31': 76206}
+  photo rows read: 443078; kept observations with a photo: 181774 of 181774
+  wrote stage/train/alachua-pre2025/manifest.csv: 84839 rows
+  wrote out/inat-from-eval.json: 1390 keys
+  wrote stage/train/alachua-pre2025/SUMMARY.md; 5s
+PROBLEMS:
+  a photo appears twice
+=== 2026-10-11T06:54:56Z training manifest: exit 2
+=== 2026-10-11T06:54:56Z rows
+84840 stage/train/alachua-pre2025/manifest.csv
+id,gbif_id,obs_url,key,sci,en,kingdom,class,order,family,eyes,date,month,photo_url,licence,split
+t000001,,https://www.inaturalist.org/observations/9f7022ee-396c-49b6-862b-2b3774ac0d2b,2441370,Alligator mississippiensis,American Alligator,Animalia,Crocodylia,,Alligatoridae,alligator,2021-12-24,12,https://inaturalist-open-data.s3.amazonaws.com/photos/173518531/medium.jpeg,CC-BY-NC,train
+t000002,,https://www.inaturalist.org/observations/34ed427f-4c31-46f7-9abb-a628b2fa011e,4287413,Anolis sagrei,Brown Anole,Animalia,Squamata,,Dactyloidae,reptile,2005-08-14,8,https://inaturalist-open-data.s3.amazonaws.com/photos/108569126/medium.jpeg,CC-BY-NC,train
+5a9d6fd438d59485be852c2256d072534ee9055ebf16af20ba872ecd2f489d26  stage/train/alachua-pre2025/manifest.csv
+=== 2026-10-11T06:54:56Z rows: exit 0
+=== 2026-10-11T06:54:56Z photo address check
+shard 0/1: 29 rows; fetched 29, kept 0, failed 0; HTTP status of the last attempt: {200: 29}; 1s
+=== 2026-10-11T06:54:56Z photo address check: exit 0
