@@ -1,0 +1,105 @@
+
+=== 01:33:42 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Darwin iad20-gt1024-bdd58e54-3cf9-4dbc-9279-a3e1245bb0db-6E8C4015030B.local 25.6.0 Darwin Kernel Version 25.6.0: Fri Jul 31 19:16:43 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_VMAPPLE arm64
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.14.7
+
+=== 01:33:44 build
+build 5 | index.html 147655 bytes | artifact 145077 bytes
+build ok
+
+=== 01:33:44 serve the repository on 127.0.0.1:8781
+index.html -> 200
+
+=== 01:34:20 iPhone simulator: boot it now, it takes a while
+iOS 26.2 (26.2 - 23C54) - com.apple.CoreSimulator.SimRuntime.iOS-26-2
+iOS 26.4 (26.4.1 - 23E254a) - com.apple.CoreSimulator.SimRuntime.iOS-26-4
+iOS 26.5 (26.5 - 23F77) - com.apple.CoreSimulator.SimRuntime.iOS-26-5
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+
+=== 01:34:33 playwright 1.56.0 and WebKit
+
+added 2 packages in 1m
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 01:38:04 self-test: Playwright WebKit (macOS build) x phone, desktop
+01:38:56 webkit-phone 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 51214ms
+01:39:36 webkit-desktop 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 40244ms
+
+=== 01:39:36 self-test: real Safari through safaridriver
+safaridriver --enable: exit 0
+01:39:48 session 166572EE-0F0C-4040-95DF-5DBF4D9E7D69 26.6.2
+01:40:35 safari 26.6.2 done=true ok=true fails=0 Apple GPU
+safari.js: exit 0
+
+=== 01:40:36 iPhone simulator: Safari opens the self-test and posts its report
+ci/engines/macos.sh: line 51:  8629 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+Monitoring boot status for iPhone 17 (88931AEA-62E6-447F-8697-DCE00A671384).
+Device already booted, nothing to do.
+
+    iPhone 17 (88931AEA-62E6-447F-8697-DCE00A671384) (Booted) 
+openurl (opening screen): exit 0
+openurl: exit 0
+report arrived after 32 s
+/Users/runner/work/seen-back/seen-back/out/reports:
+total 384
+drwxr-xr-x  22 runner  staff    704 Oct 11 01:46 .
+drwxr-xr-x   8 runner  staff    256 Oct 11 01:39 ..
+-rw-r--r--   1 runner  staff   1224 Oct 11 01:45 iphone-01.json
+-rw-r--r--   1 runner  staff   7191 Oct 11 01:45 iphone-02.json
+-rw-r--r--   1 runner  staff  10228 Oct 11 01:46 iphone-03.json
+-rw-r--r--   1 runner  staff  10844 Oct 11 01:46 iphone-04.json
+-rw-r--r--   1 runner  staff  10844 Oct 11 01:46 iphone.json
+-rw-r--r--   1 runner  staff   1256 Oct 11 01:39 safari-desktop-01.json
+-rw-r--r--   1 runner  staff   7245 Oct 11 01:40 safari-desktop-02.json
+-rw-r--r--   1 runner  staff  10276 Oct 11 01:40 safari-desktop-03.json
+-rw-r--r--   1 runner  staff  10879 Oct 11 01:40 safari-desktop-04.json
+-rw-r--r--   1 runner  staff  10879 Oct 11 01:40 safari-desktop.json
+-rw-r--r--   1 runner  staff   1256 Oct 11 01:39 webkit-desktop-01.json
+-rw-r--r--   1 runner  staff   7243 Oct 11 01:39 webkit-desktop-02.json
+-rw-r--r--   1 runner  staff  10272 Oct 11 01:39 webkit-desktop-03.json
+-rw-r--r--   1 runner  staff  10888 Oct 11 01:39 webkit-desktop-04.json
+-rw-r--r--   1 runner  staff  10888 Oct 11 01:39 webkit-desktop.json
+-rw-r--r--   1 runner  staff   1253 Oct 11 01:38 webkit-phone-01.json
+-rw-r--r--   1 runner  staff   7230 Oct 11 01:38 webkit-phone-02.json
+-rw-r--r--   1 runner  staff  10254 Oct 11 01:38 webkit-phone-03.json
+-rw-r--r--   1 runner  staff  10871 Oct 11 01:38 webkit-phone-04.json
+-rw-r--r--   1 runner  staff  10871 Oct 11 01:38 webkit-phone.json
+
+/Users/runner/work/seen-back/seen-back/out/sim:
+total 23296
+drwxr-xr-x  15 runner  staff      480 Oct 11 01:46 .
+drwxr-xr-x   8 runner  staff      256 Oct 11 01:39 ..
+-rw-r--r--@  1 runner  staff  1809400 Oct 11 01:45 iphone-0-open-b.png
+-rw-r--r--@  1 runner  staff  1752417 Oct 11 01:45 iphone-0-open.png
+-rw-r--r--@  1 runner  staff   782767 Oct 11 01:46 iphone-003s.png
+-rw-r--r--@  1 runner  staff   782767 Oct 11 01:46 iphone-010s.png
+-rw-r--r--@  1 runner  staff   697847 Oct 11 01:46 iphone-012s.png
+-rw-r--r--@  1 runner  staff   708434 Oct 11 01:46 iphone-015s.png
+-rw-r--r--@  1 runner  staff   619572 Oct 11 01:46 iphone-018s.png
+-rw-r--r--@  1 runner  staff   591273 Oct 11 01:46 iphone-021s.png
+-rw-r--r--@  1 runner  staff   210675 Oct 11 01:46 iphone-024s.png
+-rw-r--r--@  1 runner  staff  1086638 Oct 11 01:46 iphone-026s.png
+-rw-r--r--@  1 runner  staff  1155513 Oct 11 01:46 iphone-029s.png
+-rw-r--r--@  1 runner  staff   849247 Oct 11 01:46 iphone-032s.png
+-rw-r--r--@  1 runner  staff   849247 Oct 11 01:46 iphone-final.png
+
+=== 01:46:36 summary
+safari desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone.json']
+
+=== 01:46:36 shrink pictures
+pictures: 31 total bytes: 866465
+956K	/Users/runner/work/seen-back/seen-back/out
