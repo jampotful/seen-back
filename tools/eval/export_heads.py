@@ -77,6 +77,8 @@ manifest = {
                    "tuned_on": meta["tuned_on"], "prior_smoothing": {"lam": meta["lam"], "c": meta["c"]}},
     "needs": [n for n in (("species.bias_url (build 7 of the page)" if has_bias else None), ("fusion.rule mix (build 7 of the page)" if fus["rule"] == "mix" else None)) if n],
 }
+if fus.get("if_rule_product"):
+    manifest["fusion_if_rule_product"] = dict(fus["if_rule_product"], note="for a page that only has the product rule (build 6): use these two values in place of fusion.t_kind and fusion.w_kind; name_at and offer_at were set under the mix rule")
 if has_bias:
     manifest["species"]["bias_url"] = "species.bias.f32.bin"
 with open(os.path.join(a.out, "manifest.json"), "w", encoding="utf-8") as f:

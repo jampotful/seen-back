@@ -136,6 +136,16 @@ text = ("The slot holds the head `%s` for `%s` (%s), fitted on `%s`, with %d spe
     n, pci(num["kind_right"]), pci(num["species_top1"]), pci(num["species_top5"]), 100 * num["called_person"], 100 * num["called_none"], differ)
 if man.get("needs"):
     text += " The slot needs: %s." % "; ".join(man["needs"])
+# how many photos get a name when a named species must be right more often than nine times in ten
+t_p = np.array([r["species"][0]["p"] for r in res])
+t_ok = np.array([r["species"][0]["kind"] == r["kind"] and r["kind"] not in ("none", "person") for r in res])
+levels = []
+for floor in (0.9, 0.95, 0.98):
+    tau = level(top_p[top_ok], top_right[top_ok], floor=floor)
+    m = t_ok & (t_p >= tau) if tau is not None else np.zeros(n, bool)
+    levels.append({"right_at_least": floor, "name_at": tau, "named": ev.ci(m), "named_right": ev.ci(top1[m])})
+num["levels"] = levels
+
 # 4. photos of people, pets, livestock and rooms (data/extra/<name>), when their vectors are published
 extra = []
 for xname in ("coco-kinds",):

@@ -14,18 +14,46 @@ step() {
   return "$rc"
 }
 ROOT=work/root
+
+# A branch named run/eval/armed* waits until the training vectors are published, then runs. armed-all also waits for BioCLIP 2's.
+has_file() {   # has_file <branch> <path>: does the published branch hold the path? (trees only, no file is downloaded)
+  git fetch -q --depth 1 --filter=blob:none origin "refs/heads/$1" 2>/dev/null || return 1
+  git ls-tree -r --name-only FETCH_HEAD | grep -qx "$2"
+}
+case "${GITHUB_REF_NAME:-}" in
+  run/eval/armed-all*) WAIT="pub/lab-tinyclip-39m-16 pub/lab-tinyclip-8m-16 pub/lab-bioclip2-l14" ;;
+  run/eval/armed*) WAIT="pub/lab-tinyclip-39m-16 pub/lab-tinyclip-8m-16" ;;
+  *) WAIT="" ;;
+esac
+if [ -n "$WAIT" ]; then
+  echo "=== $(date -u +%FT%TZ) waiting for images/alachua-pre2025.f16.npy on: $WAIT" | tee -a "$LOG"
+  deadline=$(( $(date +%s) + ${WAIT_SECONDS:-18000} ))
+  while :; do
+    missing=""
+    for b in $WAIT; do has_file "$b" images/alachua-pre2025.f16.npy || missing="$missing $b"; done
+    has_file pub/data-alachua train/alachua-pre2025/manifest.csv || missing="$missing pub/data-alachua(manifest)"
+    [ -z "$missing" ] && break
+    if [ "$(date +%s)" -ge "$deadline" ]; then
+      echo "=== $(date -u +%FT%TZ) gave up waiting; still missing:$missing" | tee -a "$LOG"
+      echo "The training vectors never arrived; missing:$missing" > out/never-arrived.txt
+      exit 0
+    fi
+    sleep 60
+  done
+  echo "=== $(date -u +%FT%TZ) the training vectors are published" | tee -a "$LOG"
+fi
 step "install" python3 -m pip install --quiet numpy scikit-learn || exit 1
 mkdir -p out/committed && cp docs/eval/*.json out/committed/ 2>/dev/null; cp docs/EVAL.md out/committed/EVAL.md 2>/dev/null
 step "fetch" python3 -I tools/eval/fetch.py "$ROOT" || exit 1
 step "checks" python3 -I tools/eval/checks.py "$ROOT"
 step "study 1" python3 -I tools/eval/study1.py "$ROOT" || exit 1
 TRAINS="sentences val"
-[ -f "$ROOT/lab/tinyclip-39m-16/images/alachua-pre2025.f16.npy" ] && TRAINS="$TRAINS alachua-pre2025"
+[ -f "$ROOT/lab/tinyclip-39m-16/images/alachua-pre2025.f16.npy" ] && [ -f "$ROOT/data/train/alachua-pre2025/manifest.csv" ] && TRAINS="$TRAINS alachua-pre2025"
 for t in $TRAINS; do
   step "study 2: $t" env SKIP_FETCH=1 SKIP_STUDY1=1 bash tools/eval/run.sh "$ROOT" "$t"
 done
 step "report" python3 -I tools/eval/report.py
-mkdir -p out/rerun && cp docs/eval/*.json out/rerun/ && cp docs/EVAL.md out/rerun/EVAL.md
+mkdir -p out/rerun && cp docs/eval/*.json docs/eval/*.md out/rerun/ && cp docs/EVAL.md out/rerun/EVAL.md
 step "compare with the committed files" python3 -I tools/eval/compare.py out/committed out/rerun
 python3 -I tools/eval/compare.py out/committed out/rerun > out/compare.txt 2>&1
 rm -rf out/committed

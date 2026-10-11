@@ -3,6 +3,8 @@ name: eval
 # Start it by pushing a commit to a branch named run/eval/<anything>. On the ci branch, under runs/eval/<run number>/,
 # come back: the studies' JSON files and docs/EVAL.md as this machine wrote them, compare.txt (how they differ from
 # the files committed in the pushed commit), and the log. The exported heads go to branches pub/heads-<train>-<model>.
+# A branch named run/eval/armed<anything> first waits (up to five hours) until the training vectors of both pocket
+# models are published, then runs; run/eval/armed-all<anything> also waits for BioCLIP 2's training vectors.
 on:
   push:
     branches: ['run/eval/**']
@@ -14,7 +16,7 @@ concurrency:
 jobs:
   eval:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

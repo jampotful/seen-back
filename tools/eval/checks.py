@@ -75,7 +75,7 @@ mism = sum(1 for r in rows if int(r["key"]) in key2s and (key2s[int(r["key"])]["
 add("an evaluation row's name and kind of eye equal the species list's for the same key", "pass" if not mism else "FAIL", "%d rows disagree" % mism)
 test = [r for r in rows if r["split"] == "test"]
 out_of_list = sum(int(r["key"]) not in key2s for r in test)
-add("test photos whose species is not in the list at all", "note", "%d of %d (so a recognizer held to the list can reach at most %.4f)" % (out_of_list, len(test), 1 - out_of_list / len(test)))
+add("test photos whose species is not in the list at all", "note", "%d of %d, so a recognizer held to the list can reach at most %.4f." % (out_of_list, len(test), 1 - out_of_list / len(test)))
 
 # 4. vectors line up with rows
 mid = [r["id"] for r in rows]
@@ -126,6 +126,22 @@ for n_en, sets in sorted(stale.items()):
         "(keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com "
         "describe the earlier names and would change if the rows were made again." % (len(sets), ", ".join(sorted({x.split("/")[0] for x in sets})), n_en, len(species)))
 
+# what the earlier English names may cost a pocket model that is scored against English names
+for model in ("tinyclip-39m-16",):
+    E, ids = ev.load_images(root, model)
+    Sx, labels = ev.load_text(root, model, "species_com")
+    if E is None or Sx is None:
+        continue
+    ES = ev.EvalSet(root, ids)
+    changed = np.array([l.get("en", "") != s_["en"] for l, s_ in zip(labels, species)])
+    yt = ES.y[ES.test]
+    hit = ev.ranks(E[ES.test] @ Sx.T, yt) == 0
+    on = (yt >= 0) & changed[np.maximum(yt, 0)]
+    if on.any():
+        add("test photos of species whose English label row carries an earlier name (%s, species_com, no prior)" % model, "note",
+            "%d of %d test photos; top-1 is %.3f on them and %.3f on the others. Examples of earlier and present names: %s. Making the English-name rows again from the present list is likely to help the pocket models; by how much is unmeasured." % (
+                int(on.sum()), len(yt), hit[on].mean(), hit[~on].mean(), "; ".join("%s / %s" % (labels[i].get("en", ""), species[i]["en"]) for i in np.nonzero(changed)[0][:4])))
+
 # 5. the same photo on both sides of the split
 for model, level in (("clip-b32", 0.98), ("bioclip2-l14", 0.999)):
     E, ids = ev.load_images(root, model)
@@ -172,9 +188,27 @@ if os.path.exists(tp):
                 mx = np.maximum(mx, (Ee @ Et[i:i + 20000].T).max(1))
             add("evaluation photos with an almost identical training photo for %s (cosine above 0.995)" % model, "note", "%d of %d" % (int((mx > 0.995).sum()), len(eid)))
 else:
-    add("training photos share no record with the evaluation photos", "waiting", "data/train/alachua-pre2025/manifest.csv is not published yet")
+    add("training photos share no record with the evaluation photos", "waiting", "`data/train/alachua-pre2025/manifest.csv` was not published when the checks ran.")
+
+# facts from each model's card, for the report's decisions
+cards = {}
+for model in sorted(os.listdir(os.path.join(root, "lab"))):
+    card = json.load(open(os.path.join(root, "lab", model, "card.json"), encoding="utf-8"))
+    im = card.get("images") or {}
+    def shard_mean(block, *path):
+        vals = []
+        for k, v in (block or {}).items():
+            if k.startswith("shard_") and isinstance(v, dict):
+                for q in path:
+                    v = v.get(q) if isinstance(v, dict) else None
+                if v is not None:
+                    vals.append(float(v))
+        return round(sum(vals) / len(vals), 2) if vals else None
+    cards[model] = {"licence": card.get("licence"), "role": card.get("role"), "params": card.get("params"), "ship": card.get("ship"), "ship_bytes": card.get("ship_bytes"), "ship_sha256": card.get("ship_sha256"),
+                    "torch_photos_per_second": shard_mean(im.get(ev.EVALSET), "photos_per_second"), "torch_via": (im.get(ev.EVALSET) or {}).get("via"),
+                    "wasm_ms_per_photo": shard_mean(im.get(ev.EVALSET + ".wasm-int8-per-channel"), "latency_ms", "mean"), "wasm_via": (im.get(ev.EVALSET + ".wasm-int8-per-channel") or {}).get("via")}
 
 n_fail = sum(c["verdict"] == "FAIL" for c in checks)
 fetched = json.load(open(os.path.join(root, "FETCHED.json"))) if os.path.exists(os.path.join(root, "FETCHED.json")) else {}
-ev.write_json(a.out, {"made_by": "tools/eval/checks.py", "inputs": {"branches": fetched}, "failed": n_fail, "checks": checks})
+ev.write_json(a.out, {"made_by": "tools/eval/checks.py", "inputs": {"branches": fetched}, "failed": n_fail, "checks": checks, "cards": cards})
 raise SystemExit(1 if n_fail else 0)

@@ -192,7 +192,7 @@ def run_model(root, model, mode, save):
             ls_best = max(texts, key=lambda ls: tune_head([(ls, texts[ls], zero)], Xu, lps, yu, ES.month[tune])[1][0])
             Tb = texts[ls_best]
             heads["prototypes + sentences"] = [("%s, beta %g, bias for species without photos %g" % (ls_best, beta, c0), Pr + np.float32(beta) * Tb, np.where(have, 0, c0).astype(np.float32))
-                                               for beta in (0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)]
+                                               for beta in (0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)]
         # discriminant
         shrink = (0.03, 0.1, 0.3, 1.0)
         L, _, _ = lda(X, ytr, S, shrink)
@@ -202,7 +202,7 @@ def run_model(root, model, mode, save):
             for g in shrink:
                 W, b = L[g]
                 sc = float(np.median(np.linalg.norm(W[have], axis=1)))
-                for gam in (0.1, 0.3, 1.0, 3.0):
+                for gam in (0.03, 0.1, 0.3, 1.0, 3.0):
                     rows = np.where(have[:, None], W + np.float32(gam * sc) * Tb, np.float32((1 + gam) * sc) * Tb)
                     bias = np.where(have, b, np.float32(np.median(b[have])))
                     dm.append(("shrinkage %g, %s, gamma %g" % (g, ls_best, gam), rows.astype(np.float32), bias.astype(np.float32)))
@@ -316,10 +316,12 @@ def run_model(root, model, mode, save):
         for rule in ("mix", "product"):
             a_, _, tk, w = max((t for t in tried if t[1] == rule), key=lambda t: t[0])
             pred = kl[fused(ev.softmax_rows((tk * (Xt @ K.T)).astype(np.float64)), Qt, speaks, w, rule).argmax(1)]
-            res["kind_heads"].append({"name": "the page's combination of the kind phrases and the head `%s` (rule `%s`, t_kind %g, w_kind %g)" % (chosen["name"], rule, tk, w),
+            res["kind_heads"].append({"name": "the page's combination of kind phrases and species list (rule `%s`, t_kind %g, w_kind %g; species head `%s`)" % (rule, tk, w, chosen["name"]),
                                       "accuracy": ev.ci(pred == eyes_t), "called_person": float((pred == "person").mean()), "called_none": float((pred == "none").mean())})
             if rule == "mix":
                 fusion = {"rule": rule, "t_kind": tk, "w_kind": w, "tuning_kind_right": round(a_, 4)}
+            else:
+                fusion["if_rule_product"] = {"t_kind": tk, "w_kind": w, "tuning_kind_right": round(a_, 4)}
 
     def tops(Pm, y):
         o = np.argsort(-Pm, 1)[:, :3]
@@ -358,7 +360,7 @@ def run_model(root, model, mode, save):
         rest = ~named & ~offered
         conf["test"] = {"named": ev.ci(named), "named_right": ev.ci(ht[named]), "offered": ev.ci(offered), "offered_holds_species": ev.ci(h3t[offered]), "kind_only": ev.ci(rest)}
         conf["text"] = ("For the head `%s`, the scale was set on the tuning photos (expected calibration error %.3f there). A species is named when its probability is at least %.2f, the lowest level from which named species were right at least nine times in ten on the tuning photos%s. "
-                        "On the test photos a species is then named for %s of photos and that name is right for %s of them; three species are offered for %s and hold the right one for %s; %s get a kind of eye only. This table leaves out the page's rule that offers come from the winning kind; the section on shipping applies it." % (
+                        "On the test photos a species is then named for %s of photos and that name is right for %s of them; three species are offered for %s and hold the right one for %s; %s get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule." % (
                             chosen["name"], ece, name_at, ("; three species are offered when the first three together reach %.2f, set the same way" % offer_at) if offer_at is not None else "; no level for offers reached nine in ten",
                             _pci(conf["test"]["named"]), _pci(conf["test"]["named_right"]), _pci(conf["test"]["offered"]), _pci(conf["test"]["offered_holds_species"]), _pci(conf["test"]["kind_only"])))
     else:

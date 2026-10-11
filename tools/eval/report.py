@@ -212,7 +212,7 @@ def s2_title(name, s2):
 
 
 def short_kind(n):
-    return n.split(" (")[0] if n.startswith(("kind phrases", "trained on")) else n
+    return n.split(" (")[0] if n.startswith(("kind phrases", "trained on", "the page's combination")) else n.split(" of the head")[0]
 
 
 for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get("sentences_only"))):
@@ -246,25 +246,12 @@ for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get(
     kn = []
     for m in ms:
         for h in s2["models"][m]["kind_heads"]:
-            if short_kind(h["name"]).split(" (rule")[0] not in kn:
-                kn.append(short_kind(h["name"]).split(" (rule")[0])
+            if "`product`" not in h["name"] and short_kind(h["name"]) not in kn:
+                kn.append(short_kind(h["name"]))
     def kget(m, k):
-        return next((h for h in s2["models"][m]["kind_heads"] if short_kind(h["name"]).split(" (rule")[0] == k and "`product`" not in h["name"]), None)
-    rows = []
-    for k in kn:
-        label = k.split(" and the head")[0].split(" of the head")[0]
-        if label not in [r_[0] for r_ in rows]:
-            rows.append([label] + [pci(kget(m, k)["accuracy"]) if kget(m, k) else "" for m in ms])
-        else:
-            row = next(r_ for r_ in rows if r_[0] == label)
-            for i, m in enumerate(ms):
-                if kget(m, k):
-                    row[i + 1] = pci(kget(m, k)["accuracy"])
+        return next((h for h in s2["models"][m]["kind_heads"] if short_kind(h["name"]) == k and "`product`" not in h["name"]), None)
+    rows = [[k] + [pci(kget(m, k)["accuracy"]) if kget(m, k) else "–" for m in ms] for k in kn]
     T += ["Kind of eye right on the test photos:", "", table(["Kind of eye from"] + ms, rows), ""]
-    for m in ms:
-        r = s2["models"][m]
-        if r.get("confidence"):
-            T += ["- **%s.** %s" % (m, r["confidence"]["text"])]
     for note in sorted({n_ for m in ms for n_ in s2["models"][m].get("notes", [])}):
         T += ["- " + note]
     T += ["", "Every head, its settings, the reliability tables and the breakdown by fitting photos are in [`docs/eval/study2-%s.md`](eval/study2-%s.md)." % (name, name), ""]
@@ -292,7 +279,8 @@ if SH:
     T += ["The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).", ""]
 
 # ---- decisions: sentences around numbers that the studies wrote
-real = next((v for k, v in S2.items() if not v.get("standin")), None)
+real = next((v for k, v in S2.items() if not v.get("standin") and not v.get("sentences_only")), None)
+CARDS = (CH or {}).get("cards", {})
 m39, m8 = S1["models"].get("tinyclip-39m-16"), S1["models"].get("tinyclip-8m-16")
 WV = "alachua-2025.wasm-int8-per-channel"
 T += ["## Decisions", ""]
@@ -302,10 +290,10 @@ if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
         return v["kind_phrases"]["accuracy"], v["labelsets"][r["best_labelset_on_val"]]["tuned_top1"]
     k39, s39 = wasm(m39)
     k8, s8 = wasm(m8)
-    lat = lambda r: ("about %d ms a photo" % round(r["card"]["wasm_latency_ms"])) if r["card"].get("wasm_latency_ms") else "latency in its card"
+    lat = lambda mid: ("about %d ms a photo" % round(CARDS[mid]["wasm_ms_per_photo"])) if CARDS.get(mid, {}).get("wasm_ms_per_photo") else "a time given in its card"
     txt = ("On the vectors a phone computes, and scored against sentences, TinyCLIP 39M/16 gets the kind of eye from phrases right for %s and the species with the prior for %s; TinyCLIP 8M/16 gets %s and %s. "
            "The first is a %.1f MB download and took %s in the laboratory's one-thread WASM run; the second is %.1f MB and took %s. " % (
-               pci(k39), pci(s39), pci(k8), pci(s8), m39["card"]["ship_bytes"] / 1e6, lat(m39), m8["card"]["ship_bytes"] / 1e6, lat(m8)))
+               pci(k39), pci(s39), pci(k8), pci(s8), m39["card"]["ship_bytes"] / 1e6, lat("tinyclip-39m-16"), m8["card"]["ship_bytes"] / 1e6, lat("tinyclip-8m-16")))
     if real and "tinyclip-39m-16" in real["models"] and "tinyclip-8m-16" in real["models"]:
         def best(r):
             h = next(h for h in r["species_heads"] if h["name"] == r["chosen_species_head"]["name"])
@@ -315,8 +303,13 @@ if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
                 "Recommendation: ship the model whose trained head is ahead by more than the intervals, and prefer the 8M model when they overlap, because it is a quarter of the download and a third of the time." % (
                     h39["name"], pci(h39["prior"]["top1"]), h8["name"], pci(h8["prior"]["top1"])))
     else:
-        txt += ("Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written, and they decide this choice: a trained head may close the gap between the two models or widen it. "
-                "Until then the recommendation is TinyCLIP 39M/16 with its sentence rows and the prior, to show a kind of eye and to offer species only above the thresholds measured below, and TinyCLIP 8M/16 if the download has to stay under 10 MB.")
+        txt += ("Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written. They decide this choice: a trained head may close the gap between the two models or widen it. ")
+        a39, a8 = SH.get("sentences-tinyclip-39m-16"), SH.get("sentences-tinyclip-8m-16")
+        if a39 and a8:
+            n39, n8 = a39["numbers"], a8["numbers"]
+            txt += ("What can ship before then is each model's sentence rows with the prior. Scored as the page would, the 39M slot gets the kind of eye right for %s, names a species for %s of test photos and is right for %s of those names; the 8M slot gets %s, %s and %s. "
+                    "Recommendation until trained heads are measured: TinyCLIP 39M/16, which is ahead on the kind of eye and on the share of photos it can name by more than the intervals, and TinyCLIP 8M/16 only if the download has to stay near 10 MB." % (
+                        pci(n39["kind_right"]), pc(n39["named"][0]), pci(n39["named_right"]), pci(n8["kind_right"]), pc(n8["named"][0]), pci(n8["named_right"])))
     T += ["- **The pocket model.** " + txt]
 if b2:
     v = b2["labelsets"]["species_sci"]
@@ -326,13 +319,20 @@ if b2:
     T += ["- **The server.** BioCLIP 2 (ViT-L/14) with rows made from scientific names, all %d species of the list, and the prior (alpha %g at temperature %g, smoothing lam %g and c %g): top-1 %s, top-5 %s, and the kind of eye from summed species probabilities right for %s. "
           "The kind of eye should come from the species list and the kind phrases should count for little, because this model's kind phrases alone are right for %s.%s" % (
               st["species_in_list"], st["alpha_prior"], st["t_species"], st["lam"], st["c"], pci(t["top1"]), pci(t["top5"]), pci(t["kind_from_sum"]), pci(b2["kind_phrases"]["accuracy"]),
-              (" BioCLIP 2.5 measures %s with the prior%s. It runs at about a third of the speed by the coordinator's notes, and its training date is undocumented, so no number for it can be defended in public. BioCLIP 2 is the one to run." % (
-                  pci(b25["labelsets"]["species_sci"]["tuned"]["top1"]), (", a paired difference of %s points from BioCLIP 2 on the same photos" % pts(b25["against_bioclip2_l14"]["top1_with_prior_difference"])) if b25.get("against_bioclip2_l14") else "")) if b25 else "")]
+              (" BioCLIP 2.5 measures %s with the prior%s.%s The date of BioCLIP 2.5's training data is undocumented, so it cannot be shown that the test photos are new to it, and no number for it can be defended in public. BioCLIP 2 is the one to run." % (
+                  pci(b25["labelsets"]["species_sci"]["tuned"]["top1"]), (", a paired difference of %s points from BioCLIP 2 on the same photos" % pts(b25["against_bioclip2_l14"]["top1_with_prior_difference"])) if b25.get("against_bioclip2_l14") else "",
+                  (" The laboratory's runs embedded %.1f photos a second with BioCLIP 2 and %.1f with BioCLIP 2.5 on build machines without a graphics card." % (CARDS["bioclip2-l14"]["torch_photos_per_second"], CARDS["bioclip25-h14"]["torch_photos_per_second"]))
+                  if CARDS.get("bioclip2-l14", {}).get("torch_photos_per_second") and CARDS.get("bioclip25-h14", {}).get("torch_photos_per_second") else "")) if b25 else "")]
+    srv = SH.get("sentences-bioclip2-l14")
+    if srv and srv["numbers"].get("levels"):
+        T += ["- **How sure the server is.** Scored as the page would (slot `sentences-bioclip2-l14`): " + " ".join(
+            "Naming only above %s keeps %s of test photos named, and those names are right for %s." % (("%.2f" % l["name_at"]) if l["name_at"] is not None else "no level", pc(l["named"][0]), pci(l["named_right"])) for l in srv["numbers"]["levels"] if l["name_at"] is not None)
+            + " Each level was set on `val` to make named species right at least 90, 95 and 98 times in 100 there."]
     T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % int(100 * t["top1"][1])]
 T += [""]
 
-T += ["## Where the first look differed", "",
-      "The coordinator's first look (`quick.py`) gave the numbers in the left column of each pair. The right column is this study's number for the same model and label set.", ""]
+T += ["## The first look, checked", "",
+      "A first look at these models, made earlier in the night with a quick script, gave the numbers in the column `First look`. The next column is this study's number for the same model and label set.", ""]
 rows = []
 lab = {"plain_top1": "top-1", "plain_top5": "top-5", "tuned_top1": "top-1 with prior", "tuned_top5": "top-5 with prior", "kind_from_top": "kind from top species", "kind_phrases": "kind from phrases"}
 for m, ls, claims in FIRST_LOOK:
@@ -345,14 +345,14 @@ for m, ls, claims in FIRST_LOOK:
         g = got[k]
         rows.append([m, lab[k], pc(c), pci(g), "inside the interval" if g[1] - 0.0005 <= c <= g[2] + 0.0005 else "outside the interval"])
 T += [table(["Model", "Measure", "First look", "This study", "First look against this study's interval"], rows, ["---", "---", "---:", "---:", "---"]), "",
-      "The first look chose its settings on `val` from a smaller grid and without smoothing choices, so differences of a point with the prior are expected.", ""]
+      "%d of the %d first-look numbers fall inside this study's interval. The first look chose its settings on `val` from a smaller grid and without smoothing choices, so differences of a point with the prior are expected." % (sum(r_[4].startswith("inside") for r_ in rows), len(rows)), ""]
 
 if CH:
     fails = [c for c in CH["checks"] if c["verdict"] == "FAIL"]
     notes = [c for c in CH["checks"] if c["verdict"] == "note"]
     waits = [c for c in CH["checks"] if c["verdict"] == "waiting"]
     T += ["## Checks for leakage and for mistakes", "",
-          "`tools/eval/checks.py` ran %d checks: %d passed, %d failed, %d are facts to know, and %d wait for a file that is not published yet. The full table is in [`docs/eval/checks.md`](eval/checks.md)." % (
+          "`tools/eval/checks.py` ran %d checks: %d passed, %d failed, %d record a fact to know, and %d could not run because a file was not published. The full table is in [`docs/eval/checks.md`](eval/checks.md)." % (
               len(CH["checks"]), sum(c["verdict"] == "pass" for c in CH["checks"]), len(fails), len(notes), len(waits)), ""]
     T += ["- **%s.** %s" % (c["check"][0].upper() + c["check"][1:], c["detail"]) for c in fails + notes + waits] + [""]
     T += ["What the checks cover: the dates of the photos against the species list's cutoff and against the snapshot behind BioCLIP 2's training data; that no id, observation or photo address repeats; that the split follows from the record id alone; that every vector file has the manifest's 6,000 ids in order; that label rows follow the species list; that no test photo has a copy on `val`; and, once the training manifest exists, that it shares no record, observation or photo with the evaluation set. "
@@ -365,15 +365,34 @@ T += ["## What this does not show", "",
       "- **The labels follow GBIF's names.** Where GBIF and iNaturalist split or name a species differently, a photo is counted against GBIF's species.",
       "- **Nothing here compares with iNaturalist's own model.** We cannot run it, and its published accuracy figures are measured on other photos with other rules. No sentence in the app may say or suggest that this recognizer matches it.",
       "- **People, pets and photos with nothing alive in them are missing from the evaluation set.** How often a person is called a person is unmeasured here.",
-      "- **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured only in the section on shipping, when it is present.", ""]
+      "- **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured in the section on what the page would show.", ""]
 
-T += ["## How to rerun", "", "```", "python3 -I tools/eval/fetch.py ROOT            # the published data and vectors, into ROOT/data and ROOT/lab",
-      "python3 -I tools/eval/checks.py ROOT           # docs/eval/checks.json", "python3 -I tools/eval/study1.py ROOT           # docs/eval/study1.json (about four minutes on two cores)",
-      "python3 -I tools/eval/study2.py ROOT --train val                # trained heads with val standing in for a training set",
-      "python3 -I tools/eval/study2.py ROOT --train alachua-pre2025    # trained heads for real, once the training vectors are published",
-      "python3 -I tools/eval/export_heads.py ROOT --model MODEL --out DIR   # the chosen heads in the layout of models/<slot>/",
-      "python3 -I tools/eval/shipped.py ROOT DIR      # the exported slot, scored through tools/fusion/fuse.py",
-      "python3 -I tools/eval/report.py                # this file and the tables under docs/eval/", "```", "",
+rp = os.path.join(D, "reproduction.txt")
+if os.path.exists(rp):
+    lines = open(rp, encoding="utf-8").read().strip().splitlines()
+    files = [l for l in lines if "numbers compared" in l]
+    n_num = sum(int(l.split()[1]) for l in files)
+    last = next((l for l in lines if l.startswith("numbers that differ")), "")
+    head = next((l for l in lines if l.startswith("#")), "")
+    T += ["## Rerun on a clean machine", "",
+          "The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared with the files committed here by `tools/eval/compare.py` (%s). "
+          "%d numbers in %d files were compared; %s. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt)." % (
+              head.lstrip("# ").rstrip(".") or "see the file", n_num, len(files), ("%s of them differ by more than 0.0005" % last.rsplit(":", 1)[1].strip()) if last else "see the file"), ""]
+
+T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 1, Study 2, export, as-shipped scoring, this report):", "", "```",
+      "bash tools/eval/run.sh ROOT sentences          # slots made from sentence rows",
+      "bash tools/eval/run.sh ROOT val                # the stand-in for trained heads",
+      "bash tools/eval/run.sh ROOT alachua-pre2025    # trained heads for real, once the training vectors are published", "```", "",
+      "The steps one at a time:", "", "```",
+      "python3 -I tools/eval/fetch.py ROOT                 # the published data and vectors, into ROOT/data and ROOT/lab",
+      "python3 -I tools/eval/checks.py ROOT                # docs/eval/checks.json",
+      "python3 -I tools/eval/study1.py ROOT                # docs/eval/study1.json, about four minutes on two cores",
+      "python3 -I tools/eval/study2.py ROOT --train TRAIN --save ROOT/heads/TRAIN      # docs/eval/study2-TRAIN.json and the chosen heads",
+      "python3 -I tools/eval/export_heads.py ROOT --head ROOT/heads/TRAIN/MODEL.npz --out ROOT/slots/TRAIN/MODEL   # a slot in the layout of models/<slot>/",
+      "python3 -I tools/eval/shipped.py ROOT ROOT/slots/TRAIN/MODEL --name TRAIN-MODEL   # thresholds and as-shipped numbers through tools/fusion/fuse.py",
+      "python3 -I tools/eval/report.py                     # this file and the tables under docs/eval/",
+      "python3 -I tools/eval/compare.py DIR_A DIR_B        # do two runs give the same numbers?", "```", "",
+      "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`.", "",
       "Inputs of this run: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "."]
 with open(a.out, "w", encoding="utf-8") as f:
     f.write("\n".join(T).rstrip("\n") + "\n")
