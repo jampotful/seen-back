@@ -171,7 +171,7 @@
   function shapeOf(key) { var p = EYES[key].pupil; return p === 'v' ? 1 : p === 'h' ? 2 : 0; }
   function showName() {
     $('rvName').textContent = shownName(); $('rvSci').textContent = (S.named && S.named.scientific) || '';
-    $('rvCount').textContent = S.named && S.named.again ? 'Met ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'A new kind of eye' : S.nov === 'name' ? 'First meeting' : S.nov === 'again' ? 'Met before' : '';
+    $('rvCount').textContent = S.named && S.named.again ? 'Encountered ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'See the world as ' + (/^[aeiou]/i.test(shownName()) ? 'an' : 'a') : S.nov === 'name' ? 'First encounter' : S.nov === 'again' ? 'Encountered before' : '';
     var mNow = S.meetingId ? record.filter(function (r) { return r.id === S.meetingId; })[0] : null;
     $('rvWarn').textContent = S.eyes !== 'person' && mNow ? lentLine(mNow) : '';      // the week, said once at the meeting; what is a guess is marked on the name and in its sheet
     $('reveal').classList.add('show');
@@ -210,7 +210,7 @@
   function afterChange() {
     if (S.screen !== 'animal') return;
     var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That is a person. You have those eyes already.'
-      : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : 'Part of this is a guess. Tap the name to see which part.';
+      : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : '';
     msg(line, 6500);
   }
 

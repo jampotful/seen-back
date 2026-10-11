@@ -27,6 +27,7 @@ The laboratory's own record of each model, with the licence texts it quotes, is 
 |---|---|---|---|
 | ONNX Runtime Web 1.30.0 (Microsoft) | MIT | `vendor/ort/LICENSE`, the LICENSE file of github.com/microsoft/onnxruntime at the tag v1.30.0; the npm package states MIT in its `package.json` and in the header of each script (`vendor/ort/README.txt`) | **ships** in `vendor/ort/`; the laboratory also ran the same package in Node on build machines (`ci/lab/device.sh`) |
 | Instrument Serif (typeface) | SIL Open Font License 1.1 | `fonts/OFL-Instrument-Serif.txt` in this repository | **ships** in `fonts/` |
+| DM Sans (typeface, variable, from npm `@fontsource-variable/dm-sans` 5.3.0) | SIL Open Font License 1.1 | `fonts/OFL-DM-Sans.txt` in this repository | **ships** in `fonts/` |
 | This project's own code | none chosen yet | | ships without a licence; the choice waits on the owner |
 
 ## Data

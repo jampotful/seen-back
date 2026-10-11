@@ -34,7 +34,7 @@
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
       kbox.appendChild(b);
     });
-    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'It may be one of these.';
+    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'Is it one of these?';
     var offers = offerList(pocket.offers || []), box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.label); b.type = 'button';
@@ -55,7 +55,7 @@
     return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? o.en + ' (' + o.sci + ')' : o.en || o.sci }; });
   }
   function setViewPrompt(key) {
-    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'Now see as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
+    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'View the world as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
     $('askViewText').textContent = '';
     $('askViewFine').textContent = '';
   }
@@ -94,17 +94,17 @@
       pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       pocket.kindOffers = r.kindOffers || [];
       if (!r.sure) {
-        // Not sure is an answer: no kind is asserted and no eyes change. Where the larger model is on this device it is asked before the person is.
+        // Not sure is an answer: no kind is asserted and no eyes change. Where the full database is on this device it is asked before the person is.
         diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
         large.survey().then(function (h) {
           if (t !== S.token || S.eyes) return;
-          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('The recognizer is not sure what that is.');
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that is.');
         });
         return;
       }
       var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
-      closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from a larger model
+      closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
@@ -292,22 +292,29 @@
     if (!S.eyes) return;
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
-    $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
-      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.'
-      : S.named && S.named.by === 'service' ? 'Named by a larger model on a server, which can be wrong.'
-      : S.named && S.named.by === 'device-large' ? 'Named on this device by a larger model, which can be wrong.' : 'As you said.')
-      + (S.named && S.named.local ? ' Chosen among species recorded around ' + pocket.place() + '.' : '');
+    $('infoSub').textContent = [S.named && S.named.scientific ? S.named.scientific + '.' : '',
+      S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
+      : S.named && S.named.by === 'page' ? ''
+      : S.named && S.named.by === 'service' ? 'Named by the full database on a server, which can be wrong.'
+      : S.named && S.named.by === 'device-large' ? 'Named on this device by the full database, which can be wrong.' : 'As you said.',
+      S.named && S.named.local ? 'Chosen among species recorded around ' + pocket.place() + '.' : ''].filter(Boolean).join(' ');
+    show('infoSub', !!$('infoSub').textContent);
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
       var li = document.createElement('li'), m = document.createElement('i'), d = document.createElement('span'), b = document.createElement('b');
       m.className = 'mk' + (r[0] === 'i' ? '' : ' ' + r[0]); m.setAttribute('role', 'img');
-      m.setAttribute('aria-label', r[0] === 'm' ? 'measured in this animal' : r[0] === 'g' ? 'measured in a relative' : r[0] === 'i' ? 'a guess' : 'left out');
-      b.textContent = r[1] + '. '; d.appendChild(b); d.appendChild(document.createTextNode(r[2]));
+      m.setAttribute('aria-label', r[0] === 'm' ? 'known in this animal' : r[0] === 'g' ? 'known in a relative' : r[0] === 'i' ? 'speculative' : 'left out');
+      b.textContent = r[1] + ': '; d.appendChild(b); d.appendChild(document.createTextNode(r[2]));
       li.appendChild(m); li.appendChild(d); ul.appendChild(li);
     });
     $('info').scrollTop = 0; show('claim', false); show('record', false); openSheet('info');
   }
 
+  function noteLink(before, word, after, title) {   // a line of the naming sheet with one linked word; the link opens a new report with the typed name as its title
+    var n = $('claimNote'), a = document.createElement('a'); n.textContent = before;
+    a.href = 'https://github.com/jampotful/seen-back/issues/new?title=' + encodeURIComponent(title); a.target = '_blank'; a.rel = 'noopener'; a.textContent = word;
+    n.appendChild(a); n.appendChild(document.createTextNode(after));
+  }
   // ---------- wiring
   $('claimForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -318,8 +325,8 @@
     if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: cap(t), scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
-      $('claimNote').textContent = 'Regards has no eyes of its own for \u201C' + named.common + '\u201D yet. It can show a general view.';
-      claimKept = named; show('claimOtherRow', true); return;
+      diag('said-noview', clip(named.common, 60));
+      noteLink('Sorry, we don\u2019t yet have a visualizer for \u201C' + named.common + '\u201D. You can send us feedback ', 'here', '. In the meantime, try a different creature.', 'No view yet: ' + named.common); return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
     sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
@@ -332,8 +339,7 @@
       });
       show('claimSuggestRow', true); return;
     }
-    $('claimNote').textContent = 'Regards can\u2019t identify \u201C' + t + '\u201D. If that is our mistake, tell us in About. A pet\u2019s own name works beside its kind: \u201CBiscuit, a cat\u201D.';
-    show('claimAboutRow', true);
+    noteLink('Regards can\u2019t identify \u201C' + t + '\u201D. If you typed in a pet\u2019s name (e.g. Biscuit), please make sure you include what kind of pet it is (\u201CBiscuit, a cat\u201D). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
@@ -342,7 +348,7 @@
 
   function toAskAnimal() {
     $('askFine').textContent = inViewer ? 'Inside Claude the camera is closed to this page, so it works from a photo of who you met and a clip of your view. If nothing opens when you tap, open this page in a browser in place of the Claude app.'
-      : S.camRefused ? 'The camera was refused or missing, so this works from a photo of who you met and a clip of your view.' : '';
+      : S.camRefused ? 'Your camera isn\u2019t available. If you took a photo with your camera app, you can upload it here instead.' : '';
     go('askAnimal');
   }
   $('btnBegin').addEventListener('click', function () {
@@ -355,10 +361,10 @@
   });
   $('btnShutter').addEventListener('click', shutter);
 
-  // ---------- the larger model on a server (the naturalist), asked only with the person's say-so
-  // One line on the picture carries it: an offer to ask (tappable), "Asking the larger model.", the waking sentence, what it said,
+  // ---------- the full database on a server (the naturalist), asked only with the person's say-so
+  // One line on the picture carries it: an offer to ask (tappable), "Asking the full database.", the waking sentence, what it said,
   // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
-  var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.', looking: 'Looking more closely.' };
+  var SVC_SAY = { offer: 'The full database on a server can try to name the species. Ask it?', asking: 'Asking the full database.', waking: 'The full database is waking up, which can take a minute.', looking: 'Looking more closely.' };
   var svcTimer = 0, svcTap = null, askFirstT = 0, firstJob = null;
   function renewName() { if ($('reveal').classList.contains('show') && (S.screen === 'naming' || S.screen === 'animal') && !anySheet()) showName(); }     // a finer name that arrives while the first is still large on the picture takes its place there; later, the line on the picture says it
   function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
@@ -366,9 +372,9 @@
     var v = S.svc;
     if (v && (v.t !== S.token || !S.eyes)) { S.svc = null; if (v.job) v.job.cancel(); v = null; }     // it belonged to a photo that is no longer in hand
     var text = v ? (v.text || (v.state === 'get' ? getLine() : SVC_SAY[v.state]) || '') : '', tap = v && (v.state === 'offer' || v.state === 'change' || v.state === 'get') ? tapSvc : null;
-    if (!text && bigNote) { text = bigNote.text; tap = bigNote.tap; }     // the larger model's download belongs to no one photo: its line shows whenever the photo has none of its own
+    if (!text && bigNote) { text = bigNote.text; tap = bigNote.tap; }     // the full database's download belongs to no one photo: its line shows whenever the photo has none of its own
     svcTap = tap;
-    var loupe = !!tap && /^A larger model .*(Get it|Ask it)\?$/.test(text);     // the offer of a finer name is a loupe to tap; its sentence stays for screen readers
+    var loupe = !!tap && /^Download the full database|Ask it\?$/.test(text);     // the offer of a finer name is a loupe to tap; its sentence stays for screen readers
     ['svcHud', 'svcView'].forEach(function (id) {
       var b = $(id), sp;
       b.textContent = '';
@@ -409,10 +415,10 @@
     if (top.p >= c.nameAt && top.kind === S.eyes) {
       // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
       S.named = named; noteMeeting(S.eyes, named); paintUI(); renewName();
-      S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
+      S.svc = { t: t, state: 'said', text: 'The full database says ' + named.common + '.' };
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
-      // another kind of creature, and the larger model is sure enough by the service's own setting: the change is offered, never made
+      // another kind of creature, and the full database is sure enough by the service's own setting: the change is offered, never made
       S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + (top.kind === 'other' ? '' : ', ' + EYES[top.kind].who) + '. Change eyes?' };
     }
     paintSvc();
@@ -440,7 +446,7 @@
   $('askYes').addEventListener('click', function () { answerAsk(true); });
   $('askNo').addEventListener('click', function () { answerAsk(false); });
   $('askClose').addEventListener('click', dismissSheets);
-  // ---------- the larger model on this device (models/naturalist): fetched once if the person says so, then every photo is named here
+  // ---------- the full database on this device (models/naturalist): fetched once if the person says so, then every photo is named here
   // The choice is kept in this browser: '' (ask when a photo is left without a species name), 'no' (do not offer it), 'yes' (asked for:
   // a download that was interrupted carries on by itself), 'kept' (it arrived whole: if it is gone later, nothing is fetched unasked).
   var BIG_KEY = 'seenback.large.v1', bigMem = '', bigNote = null, bigNoteTimer = 0, bigDelAsked = false;
@@ -458,8 +464,8 @@
   function getLine() {
     var z = large.size(), h = large.has();
     // it had arrived whole and is not here now (the browser cleared it away, or the model was replaced by a newer one): said as it is
-    if (bigChoice() === 'kept' && h !== 'kept') return 'The larger model is no longer on this ' + dev() + '. Get it again?';
-    return z && h === 'partial' ? 'The larger model is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'A larger model can name the species on this ' + dev() + '. Get it?';
+    if (bigChoice() === 'kept' && h !== 'kept') return 'The full database is no longer on this ' + dev() + '. Get it again?';
+    return z && h === 'partial' ? 'The full database is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'Download the full database of specific species names?';
   }
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
@@ -470,13 +476,10 @@
   function openBig() {                             // consent first, in plain words; and while it is being fetched, the same sheet stops it
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
-    $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
-    $('bigSub').textContent = 'It names the species. About ' + z.mb + ' MB, downloaded once, kept on this ' + dev() + '. Photos stay here. ' +
-      (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
-        : s && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.' + (coarse ? ' No phone has been timed yet.' : '')
-        : 'It takes several seconds a photo on a computer. No phone has been timed yet.');   // what was measured, and nothing else
+    $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
+    $('bigSub').textContent = 'The full database is free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.';
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
-    $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Get it';
+    $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
     show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); openSheet('big');
   }
@@ -494,7 +497,7 @@
     var p = large.get(); noteBig(large.line(), openBig);
     p.then(function () {
       setBigChoice('kept'); if (!$('big').hidden) closeSheets();
-      noteBig('The larger model is on this ' + dev() + '.', null, 8000);
+      noteBig('The full database is on this ' + dev() + '.', null, 8000);
       // the photo in hand is looked at now, if the small model's answer is still what stands
       if (S.eyes && S.eyes !== 'person' && S.named && S.named.by === 'page' && !S.svc) lookCloser(S.token);
     }, function (e) {
@@ -508,7 +511,7 @@
   function five(r) { return r.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: true }; }); }
   function largeName(r) { return r.local && r.named ? { common: clip(r.named.en || r.named.sci, 60) || handName(r.kind), scientific: clip(r.named.sci, 80), by: 'device-large', local: true } : null; }
   function noteLarge(r) { diag('large', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sure: r.sure, sp: r.species.slice(0, 2).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model }).slice(0, 300)); }
-  // After the small model's answer is in use. Where the larger model is on this device it looks at every photo in the background. Where it
+  // After the small model's answer is in use. Where the full database is on this device it looks at every photo in the background. Where it
   // is not, a photo left without a species name raises the offer to get it. Where there is no such model, or the person wants none,
   // the server is considered, as before: so the device comes first where both exist.
   function closer(t, named) {
@@ -541,16 +544,16 @@
     if (r.sure && r.kind === S.eyes && named) {
       // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
       S.named = named; noteMeeting(S.eyes, named); paintUI(); renewName();
-      S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
+      S.svc = { t: t, state: 'said', text: 'The full database says ' + named.common + '.' };
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (r.sure && r.kindAt !== null && r.kind !== S.eyes && r.kind !== 'person' && r.kind !== 'none') {
-      // another kind of creature, and the larger model is sure enough by its slot's own setting: the change is offered, never made
+      // another kind of creature, and the full database is sure enough by its slot's own setting: the change is offered, never made
       S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
         text: 'It looks like ' + (named ? aAn(named.common) + (r.kind === 'other' ? '' : ', ' + EYES[r.kind].who) : r.kind === 'other' ? 'some other living thing' : EYES[r.kind].who) + '. Change eyes?' };
     }
     paintSvc();
   }
-  // Nothing has a name yet: the small model was not sure, or the person asked from the sheet that asks for a name. The larger model's
+  // Nothing has a name yet: the small model was not sure, or the person asked from the sheet that asks for a name. The full database's
   // answer is waited for, and taken; if it is not sure either, its three likeliest kinds are offered.
   function firstLook(t, unsure) {
     var photo = S.animalPhoto; if (!photo || t !== S.token) return;
@@ -562,14 +565,14 @@
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
       if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
-      askName(unsure ? 'The recognizer and the larger model are both not sure what that is.' : 'The larger model is not sure what that is.');
+      askName(unsure ? 'The recognizer and the full database are both not sure what that is.' : 'The full database is not sure what that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
-      askName(unsure ? 'The recognizer is not sure what that is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+      askName(unsure ? 'We\u2019re not sure what that is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
     });
   }
-  // The same from the server, where that is the larger model there is: asked with the person's say-so, and its answer taken as the name.
+  // The same from the server, where that is the full database there is: asked with the person's say-so, and its answer taken as the name.
   function firstService(t) {
     var photo = S.animalPhoto; if (!photo || t !== S.token) return;
     go('naming'); msg(SVC_SAY.asking); paintType(); S.closer = t;
@@ -581,28 +584,28 @@
       var c = naturalist.cfg(), top = a.species[0];
       pocket.offers = a.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: !!a.region }; });
       if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
-      askName('The larger model could not name it.');
+      askName('The full database could not name it.');
     }, function (e) {
       if (firstJob === job) firstJob = null;
       if (t !== S.token || S.eyes) return;
       diag('service-none', String((e && e.code) || 'unknown'));
       if (e && e.code === 'cancelled') return;
-      askName('The larger model could not be asked just now.');
+      askName('The full database could not be asked just now.');
     });
   }
-  // From the sheet that asks for a name there is a way to a larger model, where there is one: on this device first, else on a server.
+  // From the sheet that asks for a name there is a way to the full database, where there is one: on this device first, else on a server.
   var claimAskHow = '';
   function paintClaimAsk() {
     show('claimAskRow', false); claimAskHow = '';
-    if (inViewer || S.eyes || !S.animalPhoto || S.closer === S.token) return;     // not where a larger model has had this photo already
+    if (inViewer || S.eyes || !S.animalPhoto || S.closer === S.token) return;     // not where the full database has had this photo already
     var t = S.token;
     function still() { return t === S.token && !$('claim').hidden && !S.eyes; }
     large.survey().then(function (h) {
       if (!still()) return;
-      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the larger model on this ' + dev(); claimAskHow = 'device'; show('claimAskRow', true); return; }
+      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the full database on this ' + dev(); claimAskHow = 'device'; show('claimAskRow', true); return; }
       naturalist.config().then(function (c) {
         if (!c || !still() || navigator.onLine === false || naturalist.choice() === 'no') return;
-        $('claimAsk').textContent = 'Ask a larger model on a server'; claimAskHow = 'service'; show('claimAskRow', true);
+        $('claimAsk').textContent = 'Ask the full database on a server'; claimAskHow = 'service'; show('claimAskRow', true);
       });
     });
   }
@@ -616,18 +619,18 @@
     $('askKeep').checked = false;
     closeSheets(); askFirstT = t; openSheet('ask');
   });
-  function paintBig() {                            // in the About block: where the larger model stands, and the ways to get it, stop it and delete it
+  function paintBig() {                            // in the About block: where the full database stands, and the ways to get it, stop it and delete it
     large.survey().then(function () {
       var h = large.has(), z = large.size(), a = large.about(), d = dev(), fail = a.getFail && !/^stopped/.test(a.getFail) ? ' ' + large.say(a.getFail.split(':')[0]) : '';
       if (!z || !h) { show('bigBox', false); return; }
-      $('bigState').textContent = bigDelAsked ? 'Delete the larger model from this ' + d + '? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
+      $('bigState').textContent = bigDelAsked ? 'Delete the full database from this ' + d + '? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
         : h === 'getting' ? large.line()
-        : h === 'kept' ? 'The larger model is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
-        : h === 'partial' ? 'The larger model is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
-        : 'A larger model that names the species can be kept on this ' + d + ': about ' + z.mb + ' MB, downloaded once. Photos are not sent anywhere.' + fail;
-      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Get it'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
+        : h === 'kept' ? 'The full database is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
+        : h === 'partial' ? 'The full database is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
+        : 'You can download the full database of species to your ' + d + '. It\u2019s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.' + fail;
+      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
       show('bigGet', !bigDelAsked && (h === 'absent' || h === 'partial')); show('bigHalt', h === 'getting'); show('bigDel', h === 'kept' || h === 'partial'); show('bigDelNo', bigDelAsked);
-      show('bigAskRow', !bigDelAsked && (h === 'absent' || h === 'partial')); $('bigAsk').checked = bigChoice() === 'no';
+      show('bigAskRow', false); $('bigAsk').checked = bigChoice() === 'no';
       show('bigBox', true);
     });
   }
@@ -659,14 +662,14 @@
   var AWAY_KEY = 'seenback.away.v1';
   try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
   function paintChoices() {
-    // the switch is shown where it changes something: this device has a species list, or there is a larger model that is told the region
-    show('awayRow', !inViewer && pocket.listed()); $('awayBox').checked = pocket.local === false;
-    $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and a larger model, if asked, is not told the region.';
+    // the switch is shown where it changes something: this device has a species list, or there is the full database that is told the region
+    show('awayRow', false); $('awayBox').checked = pocket.local === false;
+    $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and the full database, if asked, is not told the region.';
     show('svcBox', false); bigDelAsked = false; paintBig();
     naturalist.config().then(function (c) {
       show('svcBox', !!c); if (!c) return;
       $('svcChoice').value = naturalist.choice();
-      if (!pocket.listed() && c.region) { show('awayRow', true); $('awayNote').textContent = 'A larger model, when asked, is told the region, so that it can choose among species recorded around ' + pocket.place() + '. With this ticked, it is not told.'; }
+      if (false) { $('awayNote').textContent = 'The full database, when asked, is told the region, so that it can choose among species recorded around ' + pocket.place() + '. With this ticked, it is not told.'; }
     });
   }
   $('awayBox').addEventListener('change', function () { pocket.local = !$('awayBox').checked; try { localStorage.setItem(AWAY_KEY, pocket.local ? '0' : '1'); } catch (e) {} diag('away', pocket.local ? 'no' : 'yes'); });
@@ -781,15 +784,19 @@
     var f = pocket.about().fitted; if (!f) return '';
     var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
-    return 'The rows the recognizer compares a photo with were fitted on ' + n + 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.' + (rule ? ' ' + rule + (/[.!?]$/.test(rule) ? '' : '.') : '');
+    return 'We identify by comparing with photos shared on iNaturalist and Flickr under Creative Commons licenses or in the public domain.';
   }
-  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a;
-    $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; el.textContent = fl;
-    if (fl && f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list)) {   // the attribution: where each photograph's address and licence can be read
-      a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'The list of them';
-      el.appendChild(document.createTextNode(' ')); el.appendChild(a); el.appendChild(document.createTextNode(' gives each one’s address and licence' + (typeof f.list_mb === 'number' && f.list_mb >= 1 ? ' (a file of about ' + Math.round(f.list_mb) + ' MB)' : '') + '.'));
+  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a, i;
+    $('buildMark').textContent = aboutText(); $('aboutNote').textContent = '';
+    el.textContent = 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10) + '.';
+    if (fl) {
+      el.appendChild(document.createElement('br')); el.appendChild(document.createElement('br'));
+      if (f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list) && (i = fl.indexOf('photos')) >= 0) {   // the attribution: the word "photos" opens the list of each photograph's address and licence
+        a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'photos';
+        el.appendChild(document.createTextNode(fl.slice(0, i))); el.appendChild(a); el.appendChild(document.createTextNode(fl.slice(i + 6)));
+      } else el.appendChild(document.createTextNode(fl));
     }
-    show('fittedOn', !!fl); paintChoices(); }
+    show('fittedOn', true); paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');

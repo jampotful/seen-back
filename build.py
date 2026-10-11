@@ -37,11 +37,17 @@ script = "\n<script>\n(function () {\n" + js + "})();\n</script>\n"
 (root / "dist" / "app.js").write_text("(function () {\n" + js + "})();\n", encoding="utf-8")   # for a syntax check
 
 # ---- 2. the standalone form: a real document, the typeface served from this site, and the pieces that make it installable
-GOOGLE = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">'
+GOOGLE = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&display=swap">'
 assert GOOGLE in head
 FACES = "<style>\n" + "\n".join(
     '@font-face{font-family:"Instrument Serif";font-style:%s;font-weight:400;font-display:swap;'
     'src:url(fonts/instrument-serif-%s-400-%s.woff2) format("woff2");unicode-range:%s}' % (style, subset, style, rng)
+    for style in ("normal", "italic")
+    for subset, rng in (("latin-ext", "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"),
+                        ("latin", "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"))
+) + "\n" + "\n".join(
+    '@font-face{font-family:"DM Sans";font-style:%s;font-weight:100 1000;font-display:swap;'
+    'src:url(fonts/dm-sans-%s-wght-%s.woff2) format("woff2-variations");unicode-range:%s}' % (style, subset, style, rng)
     for style in ("normal", "italic")
     for subset, rng in (("latin-ext", "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"),
                         ("latin", "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"))

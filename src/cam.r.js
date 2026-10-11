@@ -62,7 +62,7 @@
     diagP = diagP.then(function () { return ref.set({ log: log }); }).catch(function () {});
   }
   var framed = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
-  // who gave the name: Claude, this page's small model, a larger model on a server, a larger model on this device, or the person
+  // who gave the name: Claude, this page's small model, the full database on a server, the full database on this device, or the person
   function byOf(by) { return by === 'Claude' || by === 'page' || by === 'service' || by === 'device-large' ? by : 'you'; }
   function cleanMeeting(v, id) {
     if (!v || typeof v !== 'object') return null;
@@ -170,7 +170,7 @@
   }
   function lentLine(m) {                           // the same, in a few words, for the moment of meeting and of looking again
     var ms = lentLeft(m), d = Math.ceil(ms / 864e5);
-    return ms <= 0 ? '' : d >= 7 ? 'Yours for a week' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
+    return ms <= 0 ? '' : d >= 7 ? 'You can now see the world through this creature\u2019s eyes for a week.' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
   }
   function ringOf(m, cls) {                        // a ring that empties over the week
     var f = Math.max(0, Math.min(1, lentLeft(m) / LEND_MS)), r = 6, c = 2 * Math.PI * r, s = svgEl('svg', { viewBox: '0 0 16 16', 'aria-hidden': 'true' });
@@ -180,14 +180,14 @@
   }
   function latestOf(key) { for (var i = 0; i < record.length; i++) if (record[i].key === key) return record[i]; return null; }
   function paintRecordBits() {
-    var t = 'Met so far' + (record.length ? ': ' + record.length : ''), n = record.length ? String(record.length) : '';
+    var t = 'Encounters' + (record.length ? ': ' + record.length : ''), n = record.length ? String(record.length) : '';
     $('introRecN').textContent = n; $('recAskAnimalN').textContent = n; $('introRec').setAttribute('aria-label', t); $('recAskAnimal').setAttribute('aria-label', t);
   }
   function renderRecord() {
     var met = {}, once = {}, n = record.length, k = 0, have = {};
     record.forEach(function (m) { if (KINDS.indexOf(m.key) >= 0) { once[m.key] = 1; if (lent(m)) met[m.key] = 1; } var g = g60Of(m); if (g) have[g] = 1; });
     KINDS.forEach(function (key) { if (met[key]) k++; });
-    $('recordSub').textContent = n ? 'Eyes stay with you for a week.' : 'Photograph something alive. Its eyes are yours for a week.';
+    $('recordSub').textContent = '';
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
@@ -206,17 +206,17 @@
       // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
       // and shown as a ring with the days left
       var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
-      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].join(' · ')));
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : 'on your word', lentSays(m)].join(' · ')));
       tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
       if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
-      x.type = 'button'; x.setAttribute('aria-label', 'Forget the meeting with ' + m.common);
+      x.type = 'button'; x.setAttribute('aria-label', 'Forget the encounter with ' + m.common);
       x.addEventListener('click', function () {
         var yes = el('button', 'mini', 'Forget'), no = el('button', 'mini', 'Keep');
         yes.type = no.type = 'button'; li.textContent = ''; li.className = 'ask';
-        li.appendChild(el('span', 'q', 'Forget the meeting with ' + m.common + '?')); li.appendChild(yes); li.appendChild(no);
+        li.appendChild(el('span', 'q', 'Forget the encounter with ' + m.common + '?')); li.appendChild(yes); li.appendChild(no);
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });

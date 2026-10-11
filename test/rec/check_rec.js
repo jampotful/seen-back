@@ -2,7 +2,7 @@
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
 //   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|nameover|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
-// "large" (the larger model a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
+// "large" (the full database a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
 // by itself (8788 unless BIG_PORT says otherwise) if nothing answers there.
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
 // A real model: make a slot with test/rec/make_slot.py --photos <dir>, then
@@ -16,7 +16,7 @@ const path = require('path'), fs = require('fs'), http = require('http');
 const here = __dirname, PORT = process.env.PORT || 8782, ORIGIN = 'http://127.0.0.1:' + PORT;
 const SLOT = process.env.SLOT || 'test/rec/models/standin';
 // The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
-// The larger model is off too (big=off) unless a check names its slot, so that a models/naturalist/ at the site's root changes nothing in the other checks.
+// The full database is off too (big=off) unless a check names its slot, so that a models/naturalist/ at the site's root changes nothing in the other checks.
 const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? '' : '&big=off') + (q || '');
 const BIG_PORT = +(process.env.BIG_PORT || 8788), BIG_ORIGIN = 'http://127.0.0.1:' + BIG_PORT, BIG = 'test/rec/models/standin-big';
 const bctl = (q) => new Promise((res, rej) => http.get(BIG_ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => { try { res(JSON.parse(b)); } catch (e) { rej(e); } }); }).on('error', rej));
@@ -158,13 +158,13 @@ async function meet(page, name) {
     r.errors = errors;
     const anole = month === 0 ? 'Green Anole' : 'Brown Anole';
     done('flow', r, r.heron.eyes === 'wader' && r.heron.shown === 'Great Blue Heron' && r.heron.sci === 'Ardea herodias' && r.heron.named.by === 'page' && /Great Blue Heron\|Ardea herodias\|page\|wader/.test(r.heronRecord[0]) && !r.heronOffersShown
-      && r.stripes.eyes === 'insect' && r.stripes.shown === 'Insect' && r.stripes.sci === '' && r.offerLine === 'It may be one of these.' && r.offerButtons.join() === 'Gulf Fritillary,Monarch,Queen' && r.offersAboveField
+      && r.stripes.eyes === 'insect' && r.stripes.shown === 'Insect' && r.stripes.sci === '' && r.offerLine === 'Is it one of these?' && r.offerButtons.join() === 'Gulf Fritillary,Monarch,Queen' && r.offersAboveField
       && r.afterOffer.eyes === 'insect' && r.afterOffer.named.common === 'Monarch' && r.afterOffer.named.by === 'you' && /^Monarch\|Danaus plexippus\|you\|insect/.test(r.afterOfferRecord[0])
       && r.dots.eyes === 'frog' && r.dots.shown === 'Frog or toad' && !r.dotsOffersShown
       && r.rings.eyes === 'reptile' && r.rings.shown === anole
       && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'A person'
       && r.wall.claim && !r.wall.eyes && /^Nothing alive was found in that photo\. So you tell it\./.test(r.wall.sub)
-      && /^Ardea herodias\. Recognized on this (phone|computer) by a small model, which can be wrong\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.infoSub) && r.notRightIsThere
+      && /^Ardea herodias\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.infoSub) && r.notRightIsThere
       && r.rows.some((x) => /Great Blue Heron \| Ardea herodias .* recognized by a small model/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
@@ -258,8 +258,8 @@ async function meet(page, name) {
     r.errors = errors;
     const tail = '', b = r.byHand;
     done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great Blue Heron' && before === 1
-      && r.odd.claim && !r.odd.eyes && r.odd.sub === 'The recognizer is not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
-      && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'It may be one of these kinds.' && r.sheet.kindsShown
+      && r.odd.claim && !r.odd.eyes && r.odd.sub === 'We’re not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
+      && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'Is it one of these?' && r.sheet.kindsShown
       && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? w.offers[i] + ' (' + r.sheet.last.offerSci[i] + ')' : w.offers[i])) && new Set(r.sheet.offers).size === r.sheet.offers.length
       && r.sameName.join() === 'giant blue sage,Red-spotted Admiral (Limenitis astyanax),Red-spotted Admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
@@ -428,9 +428,9 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'service-ask.png'), scale: 'css' }).catch(() => {});
       await page.locator('#askNo').tap(); await page.waitForTimeout(300);
       r.notNow = { line: await svcLine(page), sent: fake.calls().length, choice: await page.evaluate(() => window.__seenBack.svc.choice()), named: (await st(page)).named.by };
-      all('offer', r.offer.eyesAtOnce === 'insect' && r.offer.shown === 'Insect' && r.offer.line === 'A larger model on a server can try to name the species. Ask it?' && r.offer.sentBeforeYes === 0);
-      all('sheet', r.sheet.title === 'Ask a larger model?' && r.sheet.sub === 'This one photo, made smaller, would be sent to a server run for this project, at 127.0.0.1:' + SVC_PORT + '. The month and the name of this region go with it. The photo is not kept there.'
-        && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Not now' && /under “About”/.test(r.sheet.note) && !r.sheet.ticked);
+      all('offer', r.offer.eyesAtOnce === 'insect' && r.offer.shown === 'Insect' && r.offer.line === 'The full database on a server can try to name the species. Ask it?' && r.offer.sentBeforeYes === 0);
+      all('sheet', r.sheet.title === 'Ask the full database?' && r.sheet.sub === 'This one photo, made smaller, would be sent to a server run for this project, at 127.0.0.1:' + SVC_PORT + '. The month and the name of this region go with it. The photo is not kept there.'
+        && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Later' && /under “About”/.test(r.sheet.note) && !r.sheet.ticked);
       all('notNow', r.notNow.line === '' && r.notNow.sent === 0 && r.notNow.choice === '' && r.notNow.named === 'page');
       // the next photo asks again. This time: yes, and do not ask again
       fake.set({ delay: 700 });
@@ -440,7 +440,7 @@ async function meet(page, name) {
       const month = new Date().getMonth() + 1;
       r.asked = { named: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), sent: fake.calls(), choice: await page.evaluate(() => window.__seenBack.svc.choice()), record: await recordRows(page), line: await svcLine(page) };
       const c = r.asked.sent[0] || {};
-      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the larger model.') >= 0 && r.asked.line === 'The larger model says Monarch.' && r.asked.choice === 'yes'
+      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the full database.') >= 0 && r.asked.line === 'The full database says Monarch.' && r.asked.choice === 'yes'
         && r.asked.record[0] === 'Monarch|Danaus plexippus|service|insect' && r.asked.record.length === 2);
       all('whatWasSent', r.asked.sent.length === 1 && c.jpeg && Math.max(c.w, c.h) === 512 && c.imageBytes < 1e6 && c.fields === 4 && c.month === month && c.region === 'us-fl-alachua' && c.top === 5 && !c.prefix && c.cookie === '' && c.referer === '' && c.auth === '' && /^application\/json/.test(c.type));
       // the sheet behind the name, the list of meetings, and its five likeliest as offers
@@ -456,8 +456,8 @@ async function meet(page, name) {
       r.about = await page.evaluate(() => ({ shown: !document.getElementById('svcBox').hidden, value: document.getElementById('svcChoice').value, options: [...document.querySelectorAll('#svcChoice option')].map((o) => o.textContent), label: document.querySelector('#svcBox label').textContent }));
       await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'service-about.png'), scale: 'css' }).catch(() => {});
       await page.locator('#recordClose').tap();
-      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus. Named by a larger model on a server, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
-        && r.offers.join() === 'Monarch,Queen,Gulf Fritillary,Viceroy,Common Buckeye' && /^Monarch \| Danaus plexippus .* named by a larger model on a server · its eyes are yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
+      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus. Named by the full database on a server, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
+        && r.offers.join() === 'Monarch,Queen,Gulf Fritillary,Viceroy,Common Buckeye' && /^Monarch \| Danaus plexippus .* named by the full database on a server · its eyes are yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
       // from now on it is asked without a prompt. It sees another kind of creature and is sure: the change is offered in one line, and not made
       fake.set({ answer: 'egret', delay: 300 }); let n = fake.calls().length;
       await meet(page, 'dots.png'); await page.waitForFunction(() => /Change eyes\?$/.test(document.getElementById('svcView').textContent), null, { timeout: 15000 });
@@ -497,7 +497,7 @@ async function meet(page, name) {
       r.never = { posts: fake.calls().length - n, line: await svcLine(page), choice: await page.evaluate(() => window.__seenBack.svc.choice()) };
       await page.evaluate(() => window.__seenBack.svc.setChoice('')); await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(400);
       r.eachTimeAgain = await svcLine(page);
-      all('never', r.never.posts === 0 && r.never.line === '' && r.never.choice === 'no' && r.eachTimeAgain === 'A larger model on a server can try to name the species. Ask it?');
+      all('never', r.never.posts === 0 && r.never.line === '' && r.never.choice === 'no' && r.eachTimeAgain === 'The full database on a server can try to name the species. Ask it?');
       r.errors = errors; all('noErrors', !errors.length);
       await ctx.close();
     }
@@ -505,11 +505,11 @@ async function meet(page, name) {
       fake.reset(); const { ctx, page, errors } = await open(browser, Q + file); await ready(page);
       await page.evaluate(() => { window.__seenBack.svc.setChoice('yes'); window.__seenBack.svc.test.times({ poll: 400 }); }); await begin(page); await svcWatch(page);
       fake.sleep(600000); const t0 = Date.now(); await meet(page, 'stripes.png');
-      await page.waitForFunction(() => window.__svc.indexOf('The larger model is waking up, which can take a minute.') >= 0, null, { timeout: 15000 });
+      await page.waitForFunction(() => window.__svc.indexOf('The full database is waking up, which can take a minute.') >= 0, null, { timeout: 15000 });
       const eyesWhileWaiting = (await st(page)).eyes; await page.waitForTimeout(1300); fake.sleep(0);     // it wakes
       await byService(page);
       r[name] = { lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), eyesWhileWaiting, named: (await st(page)).named.common, posts: fake.calls().length, healthAsked: fake.state.health, wokeAfterMs: Date.now() - t0, errors: quiet(errors) };
-      all(name, r[name].lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / The larger model says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
+      all(name, r[name].lines.join(' / ') === 'Asking the full database. / The full database is waking up, which can take a minute. / The full database says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
       await ctx.close();
     }
     { // it does not wake within the wait (shortened here from 90 seconds to 8): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
@@ -520,7 +520,7 @@ async function meet(page, name) {
       await page.waitForFunction(() => window.__svc.length >= 2 && window.__svc[window.__svc.length - 1] === '', null, { timeout: 40000 });
       const s = await st(page);
       r.neverWakes = { lines: await page.evaluate(() => window.__svc.filter((x, i, a) => (i || x) && (!i || a[i - 1] !== x))), state: s.eyes + '|' + s.named.common + '|' + s.named.by, claim: s.claim, msg: await text(page, 'msg'), why: await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'service-none').map((d) => d.code).join()) };
-      all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / ' && r.neverWakes.state === 'insect|Insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
+      all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the full database. / The full database is waking up, which can take a minute. / ' && r.neverWakes.state === 'insect|Insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
       await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 90000, answer: 1500 }); });
       r.failures = {};
       for (const mode of ['error', 'garbled', 'refusal', 'refuse', 'busy', 'slow']) {
@@ -534,7 +534,7 @@ async function meet(page, name) {
       r.failureErrors = quiet(errors); all('failuresQuiet', !r.failureErrors.length);
       await ctx.close();
     }
-    { // from the sheet that asks for a name there is a way to the larger model: consent first, then its answer is taken as the name
+    { // from the sheet that asks for a name there is a way to the full database: consent first, then its answer is taken as the name
       fake.reset(); fake.set({ answer: 'egret', delay: 300 }); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page);
       const s = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
       r.fromSheet = { sub: s.sub, link: await text(page, 'claimAsk'), sentBefore: fake.calls().length };
@@ -548,16 +548,16 @@ async function meet(page, name) {
       await page.waitForFunction(() => /could not name it/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 15000 }); await page.waitForTimeout(400);
       r.fromSheet.faint = { sub: await text(page, 'claimSub'), offers: await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)), linkAgain: await page.locator('#claimAskRow').isVisible(), eyes: (await st(page)).eyes };
       r.fromSheet.errors = errors;
-      all('fromSheet', /^Nothing alive was found/.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask a larger model on a server' && r.fromSheet.sentBefore === 0 && /made smaller, would be sent to a server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
+      all('fromSheet', /^Nothing alive was found/.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /made smaller, would be sent to a server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
         && r.fromSheet.after === 'wader|Great Egret|service' && r.fromSheet.record[0] === 'Great Egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
-        && r.fromSheet.faint.sub === 'The larger model could not name it.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf Fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
+        && r.fromSheet.faint.sub === 'The full database could not name it.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf Fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
       await ctx.close();
     }
     fake.reset();
     done('service', r, ok);
   });
 
-  // ---------- the larger model on this device: a stand-in cut into three parts, served from a second origin (another port) with CORS
+  // ---------- the full database on this device: a stand-in cut into three parts, served from a second origin (another port) with CORS
   let bigServer = null;
   const bigUp = async () => {
     try { await bctl('reset=1'); } catch (e) {
@@ -618,14 +618,14 @@ async function meet(page, name) {
       await toAbout(page); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutAbsent = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), halt: await page.locator('#bigHalt').isVisible(), ticked: await page.locator('#bigAsk').isChecked(), tick: (await page.locator('#bigAskRow').textContent()).trim() };
       await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
-      await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
-      all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
-      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It names the species. About ' + MB + ' MB, downloaded once, kept on this ' + d + '. Photos stay here. It takes several seconds a photo on a computer. No phone has been timed yet.'
-        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /^It can be deleted under “About”\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
+      await page.evaluate(() => { const b = document.getElementById('bigAsk'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); }); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
+      all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'Download the full database of specific species names?' && r.offer.partsAsked === 0);
+      all('sheet', r.sheet.title === 'Get the full database?' && r.sheet.sub === 'The full database is free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it’s fairly large and may slow down this app.'
+        && r.sheet.net === '' && r.sheet.yes === 'Download' && r.sheet.no === 'Later' && r.sheet.never === 'Do not ask again' && /^You can always delete the downloaded database under “About”\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
       all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
       all('never', r.never.choice === 'no' && r.never.line === '');
-      all('aboutAbsent', r.aboutAbsent.state === 'A larger model that names the species can be kept on this ' + d + ': about ' + MB + ' MB, downloaded once. Photos are not sent anywhere.' && r.aboutAbsent.get && !r.aboutAbsent.del && !r.aboutAbsent.halt && r.aboutAbsent.ticked && r.aboutAbsent.tick === 'Do not offer the larger model' && r.aboutAbsent.choiceAfter === '' && r.aboutAbsent.parts === 0 && !errors.length);
+      all('aboutAbsent', r.aboutAbsent.state === 'You can download the full database of species to your ' + d + '. It’s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it’s fairly large and may slow down this app.' && r.aboutAbsent.get && !r.aboutAbsent.del && !r.aboutAbsent.halt && r.aboutAbsent.ticked && r.aboutAbsent.tick === 'Do not offer the full database' && r.aboutAbsent.choiceAfter === '' && r.aboutAbsent.parts === 0 && !errors.length);
       await ctx.close();
     }
     { // the download: progress, each part kept as it arrives; a reload mid-way, after which it carries on by itself and fetches no kept part again
@@ -640,7 +640,7 @@ async function meet(page, name) {
       await bigHave(page, 'kept', 60000); await page.waitForFunction(() => window.__seenBack.bigChoice() === 'kept', null, { timeout: 30000 });
       const fin = await bigNow(page);
       r.resumed = { parts: await partsAsked(), kept: await keptBig(page), state: fin.state, choice: fin.choice, kept_bytes: fin.kept === fin.bytes, errors: errors.slice() };
-      all('progress', mid.have === 'getting' && mid.choice === 'yes' && r.progress.lines.length >= 1 && r.progress.lines.every((l) => new RegExp('^Getting the larger model: \\d+ of ' + MB + ' MB\\.$').test(l)) && r.progress.kept === 1 && r.progress.eyes === 'insect');
+      all('progress', mid.have === 'getting' && mid.choice === 'yes' && r.progress.lines.length >= 1 && r.progress.lines.every((l) => new RegExp('^Getting the full database: \\d+ of ' + MB + ' MB\\.$').test(l)) && r.progress.kept === 1 && r.progress.eyes === 'insect');
       all('resumed', r.afterReload.choice === 'yes' && r.resumed.parts.filter((x) => x === 'part00').length === 1 && r.resumed.parts.filter((x) => x === 'part01').length === 2 && r.resumed.parts.filter((x) => x === 'part02').length === 1
         && r.resumed.kept.filter((k) => /^part\/SHA/.test(k)).length === 3 && r.resumed.kept.indexOf('whole/SHA') >= 0 && fin.state === 'ready' && fin.choice === 'kept' && r.resumed.kept_bytes && !errors.length);
       // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
@@ -659,11 +659,11 @@ async function meet(page, name) {
       await page.locator('#about summary').tap(); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await page.locator('#recordClose').tap();
-      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
-        && r.named.line === 'The larger model says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
-        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by a larger model, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
-        && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by a larger model · its eyes are yours for a week$/.test(r.named.rows[0]));
-      all('aboutKept', r.aboutKept.state === 'The larger model is on this ' + d + ' (' + MB + ' MB). It names the species here, and photos are not sent anywhere.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
+      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The full database says Monarch.'
+        && r.named.line === 'The full database says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
+        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by the full database, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
+        && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by the full database · its eyes are yours for a week$/.test(r.named.rows[0]));
+      all('aboutKept', r.aboutKept.state === 'The full database is on this ' + d + ' (' + MB + ' MB). It names the species here, and photos are not sent anywhere.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
       // another kind of creature, and it is sure: the change is offered in one line, and not made
       const s2 = await meet(page, 'dots.png'); await lineIs(page, /Change eyes\?$/); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
       const b2 = await st(page);
@@ -692,11 +692,11 @@ async function meet(page, name) {
       // from the sheet that asks for a name: the small model found nothing alive; the larger one is asked, is not sure, and offers its three likeliest kinds
       const s6 = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
       r.fromSheet = { sub: s6.sub, link: await text(page, 'claimAsk') }; await page.locator('#claimAsk').tap();
-      await page.waitForFunction(() => /larger model is not sure/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 20000 }); await page.waitForTimeout(300);
+      await page.waitForFunction(() => /full database is not sure/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 20000 }); await page.waitForTimeout(300);
       r.fromSheet.after = await page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), link: !document.getElementById('claimAskRow').hidden, eyes: window.__seenBack.S.eyes }));
       r.fromSheet.reference = E('wall.png'); await page.locator('#claimKinds button').first().tap(); await page.waitForTimeout(300); const a6 = await st(page); r.fromSheet.chosen = a6.eyes + '|' + a6.named.by;
-      all('fromSheet', /^Nothing alive was found in that photo\. So you tell it\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Look more closely, with the larger model on this ' + d
-        && r.fromSheet.after.sub === 'The larger model is not sure what that is.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
+      all('fromSheet', /^Nothing alive was found in that photo\. So you tell it\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Look more closely, with the full database on this ' + d
+        && r.fromSheet.after.sub === 'The full database is not sure what that is.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
         && r.fromSheet.chosen === E('wall.png').kindOffers[0] + '|you');
       await page.close();
       // the small model is not sure, and the larger one is on the device: it is asked before the person is, and its answer is taken
@@ -712,8 +712,8 @@ async function meet(page, name) {
       await bigHave(page, 'absent', 15000); await page.waitForTimeout(300);
       r.del.after = { kept: await keptBig(page), state: await text(page, 'bigState'), choice: (await bigNow(page)).choice, running: (await bigNow(page)).running, ticked: await page.locator('#bigAsk').isChecked() };
       await page.locator('#recordClose').tap(); const s8 = await meet(page, 'heron.png'); await page.waitForTimeout(700); r.del.next = { by: (await st(page)).named.by, line: await svcLine(page), parts: (await partsAsked()).length };
-      all('delete', r.del.asks === 'Delete the larger model from this ' + d + '? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
-        && r.del.after.kept.length === 0 && /^A larger model that names the species can be kept on this/.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
+      all('delete', r.del.asks === 'Delete the full database from this ' + d + '? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
+        && r.del.after.kept.length === 0 && /^You can download the full database of species to your /.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
       await ctx.close();
     }
     { // stopped mid-way: what arrived is kept, the line says where it stands, and "Get the rest" carries on without fetching a kept part again
@@ -721,7 +721,7 @@ async function meet(page, name) {
       const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page); const d = r.device;
       await meet(page, 'stripes.png'); await offered(page); await getIt(page);
       await page.waitForFunction(() => window.__seenBack.big.about().keptBytes > 300000, null, { timeout: 20000 });
-      await lineIs(page, /^Getting the larger model/); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
+      await lineIs(page, /^Getting the full database/); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
       r.stop = { title: await text(page, 'bigTitle'), stop: await page.locator('#bigStop').isVisible() && (await text(page, 'bigStop')), yesShown: await page.locator('#bigYes').isVisible(), net: await text(page, 'bigNet') };
       await page.locator('#bigStop').tap(); await bigHave(page, 'partial', 10000); await page.waitForTimeout(200);
       const x = await bigNow(page); r.stop.after = { have: x.have, choice: x.choice, line: await svcLine(page), kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length };
@@ -729,9 +729,9 @@ async function meet(page, name) {
       r.stop.sheet = { title: await text(page, 'bigTitle'), yes: await text(page, 'bigYes'), net: (await text(page, 'bigNet')).trim() };
       await bctl('reset=1'); await page.locator('#bigYes').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);
       r.stop.rest = { parts: await partsAsked(), named: (await st(page)).named.common, errors };
-      all('stop', r.stop.title === 'Getting the larger model' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Getting the larger model: \d+ of \d+ MB\.$/.test(r.stop.net)
+      all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Getting the full database: \d+ of \d+ MB\.$/.test(r.stop.net)
         && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
-        && /^The larger model is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the larger model?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
+        && /^The full database is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
         && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
       // a larger slot may carry a kinds head too (the same parts, kept already): it names as before, and it can say that nothing alive is there
       if (BIG_PORT === 8788) {
@@ -749,7 +749,7 @@ async function meet(page, name) {
     }
     // failures, each in words on the line, with a way on where there is one; what the small model said stands throughout
     r.failures = {};
-    for (const [name, rule, wanted, keptWanted] of [['missingPart', 'lose=' + encodeURIComponent('part01'), 'The larger model’s files are missing. Try again?', 1], ['damagedPart', 'damage=' + encodeURIComponent('part02'), 'The larger model’s file arrived damaged. Try again?', 2], ['noNetwork', 'drop=' + encodeURIComponent('part'), 'The larger model could not be downloaded. Try again?', 0]]) {
+    for (const [name, rule, wanted, keptWanted] of [['missingPart', 'lose=' + encodeURIComponent('part01'), 'The full database’s files are missing. Try again?', 1], ['damagedPart', 'damage=' + encodeURIComponent('part02'), 'The full database’s file arrived damaged. Try again?', 2], ['noNetwork', 'drop=' + encodeURIComponent('part'), 'The full database could not be downloaded. Try again?', 0]]) {
       await ctl('reset=1'); await bctl('reset=1'); await bctl(rule);
       const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page);
       await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /Try again\?$/, 30000);
@@ -763,21 +763,21 @@ async function meet(page, name) {
       await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot.replace(/\/manifest\.port\.json$/, '') + (BIG_PORT === 8788 ? '/manifest.bad-whole.json' : '/manifest.port.bad-whole.json')); await ready(page); await begin(page);
       await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /arrived damaged/, 30000); const b = await bigNow(page);
       r.failures.badWhole = { line: await svcLine(page), have: b.have, why: b.getFail, kept: (await keptBig(page)).filter((k) => /^part|^whole/.test(k)).length, by: (await st(page)).named.by };
-      all('badWhole', r.failures.badWhole.line === 'The larger model’s file arrived damaged. Try again?' && b.have === 'absent' && /sha256/.test(b.getFail) && r.failures.badWhole.kept === 0 && r.failures.badWhole.by === 'page'); await ctx.close();
+      all('badWhole', r.failures.badWhole.line === 'The full database’s file arrived damaged. Try again?' && b.have === 'absent' && /sha256/.test(b.getFail) && r.failures.badWhole.kept === 0 && r.failures.badWhole.by === 'page'); await ctx.close();
     }
     { // the browser says there is no room: nothing is fetched, and there is nothing to try again
       await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, Q); await ready(page); await begin(page);
       await page.evaluate(() => { navigator.storage.estimate = () => Promise.resolve({ quota: 1000, usage: 900 }); });
       await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /not enough room/, 15000); const b = await bigNow(page);
       r.failures.noRoom = { line: await svcLine(page), tappable: await page.evaluate(() => !document.getElementById('svcView').disabled), have: b.have, choice: b.choice, parts: (await partsAsked()).length };
-      all('noRoom', r.failures.noRoom.line === 'There is not enough room on this device for the larger model.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
+      all('noRoom', r.failures.noRoom.line === 'There is not enough room on this device for the full database.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
     }
     { // where there is a server too, the device comes first; "Do not ask again" for the device leaves the server to be offered
       await ctl('reset=1'); await bctl('reset=1'); const Qs = (await svcFiles()) + 'service.json&big=' + slot; const { ctx, page } = await open(browser, Qs); await ready(page); await begin(page);
       await meet(page, 'stripes.png'); r.both = { first: await offered(page), sent: fake.calls().length };
       await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.locator('#bigNever').tap(); await page.waitForTimeout(200);
       await meet(page, 'stripes.png'); r.both.then = await offered(page); r.both.sentAfter = fake.calls().length;
-      all('both', /^A larger model can name the species on this (phone|computer)\. Get it\?$/.test(r.both.first) && r.both.then === 'A larger model on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
+      all('both', r.both.first === 'Download the full database of specific species names?' && r.both.then === 'The full database on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
     }
     await bctl('reset=1'); await ctl('reset=1');
     done('large', r, ok);
@@ -812,12 +812,12 @@ async function meet(page, name) {
     const info = async () => { await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg'));
       await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 }); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); const t = await text(page, 'infoSub');
       await page.locator('#infoClose').tap(); await page.evaluate(() => history.back()); await page.waitForTimeout(200); await page.evaluate(() => history.back()); await page.waitForTimeout(200); return t; };
-    const about = async () => { await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); if (!(await page.locator('#awayBox').isVisible())) { await page.locator('#about summary').tap(); await page.waitForTimeout(300); } };
+    const about = async () => { await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); if (!(await page.evaluate(() => document.getElementById('about').open))) { await page.locator('#about summary').tap(); await page.waitForTimeout(300); } };
     r.near = { heron: (await meet(page, 'heron.png')).shown }; r.near.info = await info();
     await about(); r.switch = { label: (await page.locator('#awayRow .tick').textContent()).trim(), note: await text(page, 'awayNote'), tickedAtFirst: await page.locator('#awayBox').isChecked() };
     await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'away.png'), scale: 'css' }).catch(() => {});
-    await page.locator('#awayBox').check(); await page.locator('#recordClose').tap();
-    // elsewhere: the device names the kind and no species, and the larger model is asked without a region
+    await page.evaluate(() => { const b = document.getElementById('awayBox'); b.checked = true; b.dispatchEvent(new Event('change', { bubbles: true })); }); await page.locator('#recordClose').tap();
+    // elsewhere: the device names the kind and no species, and the full database is asked without a region
     fake.reset(); fake.set({ answer: 'egret', delay: 900 });     // long enough for the kind alone to be read off the screen first: a finer name now replaces it there as soon as it comes
     const h = await meet(page, 'heron.png'); r.away = { atOnce: h.eyes + '|' + h.shown, top: h.last && h.last.top }; await byService(page);
     r.away.sent = fake.calls().map((c) => JSON.stringify(c.region) + ' month ' + c.month); r.away.named = (await st(page)).named.common + '|' + (await st(page)).named.by; r.away.info = await info();
@@ -825,13 +825,13 @@ async function meet(page, name) {
     // the choice is kept across a reload, and can be undone
     await page.reload(); await page.waitForTimeout(400); await ready(page);
     r.afterReload = await page.evaluate(() => window.__seenBack.rec.local); await begin(page);
-    await about(); r.tickedAfterReload = await page.locator('#awayBox').isChecked(); await page.locator('#awayBox').uncheck(); await page.locator('#recordClose').tap();
+    await about(); r.tickedAfterReload = await page.locator('#awayBox').isChecked(); await page.evaluate(() => { const b = document.getElementById('awayBox'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); }); await page.locator('#recordClose').tap();
     fake.reset(); r.nearAgain = (await meet(page, 'heron.png')).shown; r.nearAgainPosts = fake.calls().length;
     r.locationAsked = await page.evaluate(() => window.__geo); r.errors = errors;
-    done('away', r, r.near.heron === 'Great Blue Heron' && /which can be wrong\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.near.info)
+    done('away', r, r.near.heron === 'Great Blue Heron' && /^Ardea herodias\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.near.info)
       && r.switch.label === 'I am not near Gainesville' && /^Species are named from a list of those recorded around Gainesville, Florida\./.test(r.switch.note) && !r.switch.tickedAtFirst
       && r.away.atOnce === 'wader|Wading bird' && r.away.top === null && r.away.sent.join() === '"" month ' + (new Date().getMonth() + 1) && r.away.named === 'Great Egret|service'
-      && r.away.info === 'Ardea alba. Named by a larger model on a server, which can be wrong.' && /named by a larger model on a server · its eyes are yours for a week$/.test(r.away.rows[0])
+      && r.away.info === 'Ardea alba. Named by the full database on a server, which can be wrong.' && /named by the full database on a server · its eyes are yours for a week$/.test(r.away.rows[0])
       && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'Great Blue Heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
     await ctx.close();
   });
@@ -950,7 +950,7 @@ async function meet(page, name) {
     await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150);
     fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'about.png'), scale: 'css' });
     r.overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); r.errors = errors;
-    r.fitted = { none: await page.locator('#fittedOn').isVisible() };      // the stand-in's manifest has no fitted_on block: no sentence
+    r.fitted = { none: await text(page, 'fittedOn') };      // the stand-in's manifest has no fitted_on block: no sentence
     for (const [name, m] of [['full', 'manifest.fitted.json'], ['bare', 'manifest.fitted-bare.json']]) {    // a block with its sentence and count; a block with neither (a count that is not a number)
       const o = await open(browser, '&nosw=1&rec=' + SLOT + '/' + m); await ready(o.page); await o.page.locator('#btnBegin').tap(); await o.page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
       await o.page.locator('#recAskAnimal').tap(); await o.page.waitForSelector('#record', { state: 'visible' }); await o.page.locator('#about summary').tap(); await o.page.waitForTimeout(200);
@@ -958,9 +958,9 @@ async function meet(page, name) {
       if (name === 'full') { await o.page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await o.page.waitForTimeout(150); await o.page.screenshot({ path: path.join(here, 'shots', 'about-fitted.png'), scale: 'css' }).catch(() => {}); }
       await o.ctx.close();
     }
-    const base = 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.';
-    done('about', r, !r.fitted.none && r.fitted.full === 'The rows the recognizer compares a photo with were fitted on 61,234 ' + base + ' Only photographs in the public domain or under CC BY or CC BY-NC were used.'
-      && r.fitted.bare === 'The rows the recognizer compares a photo with were fitted on ' + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
+    const base = 'We identify by comparing with photos shared on iNaturalist and Flickr under Creative Commons licenses or in the public domain.';
+    done('about', r, /^v1\.\d+\.$/.test(r.fitted.none) && r.fitted.full === r.fitted.none + base
+      && r.fitted.bare === r.fitted.none + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
       && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });

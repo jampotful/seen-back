@@ -1,5 +1,5 @@
 
-  // ---------- recognition in the page itself: the pocket recognizer, and a larger model the person may fetch once
+  // ---------- recognition in the page itself: the pocket recognizer, and the full database the person may fetch once
   // Outside Claude's viewer the page names the photo by itself: an image encoder run by ONNX Runtime Web in a worker
   // (vendor/rec-worker.js), and label vectors worked out beforehand. The files are described by models/<slot>/manifest.json
   // (docs/CONTRACTS.md). Nothing here is fetched before the opening screen is up, and nothing about a photo leaves the device.
@@ -30,12 +30,12 @@
     }
     return p[m];
   }
-  function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the larger model
+  function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the full database
     var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
     var cannot = inViewer ? 'off' : slot === 'off' || /\.\.|^\/|\/\//.test(slot) ? 'off'
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
-      : (big && !window.caches) ? 'browser' : '';      // the larger model has to be kept, and this browser keeps nothing
+      : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
       off: 'This page’s recognizer is switched off.',
       absent: 'This page has no recognizer yet.',
@@ -49,15 +49,15 @@
       photo: 'The recognizer failed on that photo.'
     };
     if (big) {
-      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'larger model'); });
-      SAY.room = 'There is not enough room on this device for the larger model.';
-      SAY.keep = 'The larger model could not be kept on this device.';
+      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'full database'); });
+      SAY.room = 'There is not enough room on this device for the full database.';
+      SAY.keep = 'The full database could not be kept on this device.';
       SAY.stopped = 'The download was stopped.';
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
     var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = big ? 120000 : 45000, netWaitMs = 6000, api;
-    // the larger model only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
+    // the full database only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
     var have = '', gone = false, keptBytes = 0, partGot = 0, getP = null, getCtl = null, getFail = '', surveyP = null, idleMs = 60000, idleTimer = 0, queue = Promise.resolve(), asked = 0;
 
     function err(code, detail) { var e = new Error(SAY[code] || code); e.code = code; e.sentence = SAY[code] || SAY.died; e.detail = String(detail || ''); return e; }
@@ -159,7 +159,7 @@
         var sum = 0;
         if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
       }
-      if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the larger model without its length' : 'a model in parts in the pocket slot');
+      if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the full database without its length' : 'a model in parts in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -256,7 +256,7 @@
     function adopt(text) { M = readManifest(text); ver = fingerprint(text); base = abs(manifestUrl).replace(/[^\/]*$/, ''); cur = null; }
     function u(rel) { return withV(abs(rel, base), ver); }
 
-    // ---------- a model in parts (the larger model)
+    // ---------- a model in parts (the full database)
     // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
     function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
     function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
@@ -312,7 +312,7 @@
       } catch (e) {}
       return Promise.resolve();
     }
-    // What of the larger model is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
+    // What of the full database is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
     // The manifest is asked for the first time this is called, and never before.
     function survey(fresh) {
       if (cannot || gone) return Promise.resolve('none');
@@ -388,7 +388,7 @@
       return p;
     }
     function halt() { if (getCtl) try { getCtl.abort(); } catch (e) {} }
-    function rest() {                                  // nothing has needed the larger model for a minute: its worker, and the memory it holds, are let go
+    function rest() {                                  // nothing has needed the full database for a minute: its worker, and the memory it holds, are let go
       clearTimeout(idleTimer); idleTimer = 0;
       if (!worker || state !== 'ready' || Object.keys(pending).length) return;
       var w = worker; worker = null; w.onmessage = w.onerror = null; try { w.terminate(); } catch (e) {}
@@ -414,7 +414,7 @@
       state = 'loading'; why = ''; got = 0; total = 0;
       return keepOpen().then(function (cache) {
         cacheRef = cache;
-        if (big && M) return null;                     // the larger model's worker is started again and again; its manifest is read once
+        if (big && M) return null;                     // the full database's worker is started again and again; its manifest is read once
         return manifestText(cache).then(adopt);
       }).then(function () {
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, nS = M.species ? M.species.count : 0, c = cacheRef;
@@ -484,7 +484,7 @@
     // and tools/fusion/parity.py holds the two to the same answers; a change here is a change there.
     //   kd, sd: row . e for each kind row and each species row, e being the unit image vector. The rows are used as they are: a trained
     //   head's rows are weights, not unit vectors, and it adds a bias to each score.
-    //   A slot without a kinds head (the larger model): kd is not used, and a kind's score is its share of the species answer.
+    //   A slot without a kinds head (the full database): kd is not used, and a kind's score is its share of the species answer.
     function fuseWith(c, kd, sd, month) {
       var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
       if (c.head) {
@@ -576,11 +576,11 @@
         });
       }
       if (!big) return run();
-      var p = queue.then(run, run); queue = p.catch(function () {}).then(tire); return p;     // one photo at a time through the larger model
+      var p = queue.then(run, run); queue = p.catch(function () {}).then(tire); return p;     // one photo at a time through the full database
     }
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
-      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the larger model.' : 'Getting the larger model: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
+      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the full database.' : 'Getting the full database: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
       if (state === 'loading' && total > got) return 'Getting the recognizer: ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB.';
       return 'Looking at what it is.';
     }
@@ -613,7 +613,7 @@
         out.has = top(out.has); out.near = top(out.near); return out;
       },
       progress: function (fn) { onProgress = fn; },
-      // the larger model: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
+      // the full database: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
       survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },
       has: function () { return getP ? 'getting' : have; },
       broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
@@ -630,10 +630,10 @@
     return api;
   }
   var pocket = recognizer({ slot: (/[?&]rec=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') || [0, 'models/pocket'])[1] });
-  // The larger model's slot. A check on this machine may name another slot, or switch it off; a link to the public page may not.
+  // The full database's slot. A check on this machine may name another slot, or switch it off; a link to the public page may not.
   var large = recognizer({ big: true, slot: ((onThisMachine ? /[?&]big=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') : null) || [0, 'models/naturalist'])[1] });
 
-  // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
+  // ---------- the species service (the naturalist): the full database on a server, asked only with the person's say-so
   // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
   //   {"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14",
   //    "health": "<an address that answers {"ready": true}>" (optional), "kind_at": 0.9, "name_at": 0.5, "top": 5, "wake_s": 90, "answer_s": 60}

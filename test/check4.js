@@ -98,7 +98,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     const got = await page.evaluate(c => Object.keys(c).filter(k => window.__seenBack.kindOfName(k) !== c[k]).map(k => k + ' -> ' + window.__seenBack.kindOfName(k) + ' (wanted ' + c[k] + ')'), cases);
     // the sheet "Now your view." says how the view returns, in plain English for every kind (for 'other' it once read "as this one may take it in")
     const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewH').textContent + '|' + document.getElementById('askViewText').textContent]; }));
-    view.forEach(([k, t]) => { if (!/^Now see as [^.|]+\.\|$/.test(t) || / as this one\./.test(t) || (k === 'other' && t !== 'Now see as this living thing.|')) got.push('view prompt for ' + k + ': ' + t); });
+    view.forEach(([k, t]) => { if (!/^View the world as [^.|]+\.\|$/.test(t) || / as this one\./.test(t) || (k === 'other' && t !== 'View the world as this living thing.|')) got.push('view prompt for ' + k + ': ' + t); });
     out.lex = { tried: Object.keys(cases).length + view.length, wrong: got }; await ctx.close();
   }
 
@@ -122,7 +122,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.goneStays = await page.evaluate(() => !document.getElementById('record').hidden && window.__seenBack.S.screen);
     await page.locator('#metList li .ico').first().tap(); await page.waitForTimeout(1200); r.lentOpens = (await st(page)).eyes;
     r.errors = errors; out.lent = r;
-    const ok = r.sub === 'Eyes stay with you for a week.' && r.rings === 1 && r.days.join() === '1d'
+    const ok = r.sub === '' && r.rings === 1 && r.days.join() === '1d'
       && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A kind of eye that has gone back$/.test(e))
       && /its eyes go back within a day \| look true$/.test(r.rows[0]) && /its eyes have gone back \| look false$/.test(r.rows[1]) && /its eyes have gone back \| look false$/.test(r.rows[2])
       && r.goneStays && r.lentOpens === 'wader' && !errors.length;
@@ -136,13 +136,13 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.goto(HTTP.replace('rec=off', 'rec=models/pocket')); await page.waitForFunction(() => window.__seenBack.rec.about().state === 'ready', null, { timeout: 120000 });
     await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible' });
     const r = {}; const type = async (w) => { await page.evaluate(() => window.__seenBack.openClaim('')); await page.waitForSelector('#claim', { state: 'visible' }); await page.locator('#claimName').fill(w); await page.locator('#claimForm button[type=submit]').tap(); await page.waitForTimeout(350);
-      return page.evaluate(() => ({ note: document.getElementById('claimNote').textContent, sug: [...document.querySelectorAll('#claimSuggest button')].map((b) => b.textContent), show: !document.getElementById('claimOtherRow').hidden, about: !document.getElementById('claimAboutRow').hidden, eyes: window.__seenBack.S.eyes, named: window.__seenBack.S.named && (window.__seenBack.S.named.common + '|' + window.__seenBack.S.named.scientific) })); };
+      return page.evaluate(() => ({ note: document.getElementById('claimNote').textContent, sug: [...document.querySelectorAll('#claimSuggest button')].map((b) => b.textContent), show: !document.getElementById('claimOtherRow').hidden, about: !!document.querySelector('#claimNote a[href*="issues/new"]'), eyes: window.__seenBack.S.eyes, named: window.__seenBack.S.named && (window.__seenBack.S.named.common + '|' + window.__seenBack.S.named.scientific) })); };
     r.unknown = await type('xqzzvk'); r.slip = await type('herron'); r.slipSpecies = await type('monarhc'); r.several = await type('blue heron x'); r.noEyes = await type('wolf spider');
     r.exact = await type('green treefrog');
     r.errors = errors; out.typed = r; await ctx.close();
     const ok = /^Regards can’t identify “xqzzvk”\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
       && r.slip.note === 'Did you mean one of these?' && r.slip.sug.includes('Heron') && r.slipSpecies.sug.includes('Monarch')
-      && /^Regards has no eyes of its own for “Wolf spider” yet\./.test(r.noEyes.note) && r.noEyes.show && !r.noEyes.about
+      && /^Sorry, we don’t yet have a visualizer for “Wolf spider”\. You can send us feedback here\./.test(r.noEyes.note) && !r.noEyes.show && r.noEyes.about
       && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '') && !errors.length;
     if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('typed: a typed name is not handled as it should be'); }
   }
@@ -160,7 +160,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.locator('#claimBack').tap(); await page.waitForTimeout(200); r.afterDismiss = await st(page);   // do-over
     await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' });
     await page.locator('#claimName').fill('Biscuit'); await page.locator('#claimForm button[type=submit]').tap(); await page.waitForTimeout(200);
-    r.petName = { note: await text(page, 'claimNote'), about: await page.locator('#claimAboutRow').isVisible(), other: await page.locator('#claimOtherRow').isVisible(), still: (await st(page)).screen };
+    r.petName = { note: await text(page, 'claimNote'), about: await page.locator('#claimNote a').isVisible(), other: await page.locator('#claimOtherRow').isVisible(), still: (await st(page)).screen };
     if (!/^Regards can’t identify “Biscuit”\. /.test(r.petName.note) || !r.petName.about || r.petName.other) throw new Error('an unknown word: ' + JSON.stringify(r.petName)); await shot(page, 'R2b-pet-name');
     await page.locator('#claimBack').tap(); await page.waitForTimeout(200); await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
     r.cleanAgain = await page.evaluate(() => document.getElementById('claimName').value + '|' + document.getElementById('claimNote').textContent + '|' + !document.getElementById('claimAboutRow').hidden);
@@ -182,7 +182,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.eyesOn = await page.evaluate(() => [...document.querySelectorAll('#eyeStrip .eye')].map(b => b.disabled ? 0 : 1).join(''));
     r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map(li => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent));
     await shot(page, 'R4-record');
-    await page.locator('#g60 summary').tap(); await page.waitForTimeout(200);
+    await page.evaluate(() => { document.getElementById('g60').open = true; }); await page.waitForTimeout(200);
     r.g60rows = await page.evaluate(() => [...document.querySelectorAll('#g60List li')].slice(0, 3).map(li => li.className + ':' + li.textContent));
     await page.evaluate(() => { document.getElementById('record').scrollTop = 9999; }); await page.waitForTimeout(150); await shot(page, 'R5-record-g60');
     await page.evaluate(() => { document.getElementById('record').scrollTop = 0; });
@@ -274,7 +274,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       const r = {};
       await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); r.fine = await text(page, 'askFine');
       await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg')); await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); r.sub = await text(page, 'claimSub');
-      await page.locator('#claimName').fill('wolf spider'); await page.locator('#claimForm button[type=submit]').tap(); await page.locator('#claimOther').tap();
+      await page.locator('#claimName').fill('heron'); await page.locator('#claimForm button[type=submit]').tap();
       await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); r.kept = await st(page);
       await page.locator('#changeAskView').tap(); await say(page, 'honeybee');
       await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });

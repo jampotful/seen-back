@@ -7,7 +7,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '14';
+  var BUILD = '15';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -60,11 +60,11 @@
       ['i', 'Field', 'Left as the camera gives it.']] },
     wader: { chip: 'Heron, crane, pigeon', who: 'a wading bird', fov: 300, cpd: 25, topoS: .6, fall: .8, pupil: 'o', sheen: .6, hold: 280, thrust: 120,
       cue: 'Walk. The picture holds, then lurches, as a heron’s head does.', rows: [
-      ['m', 'Gaze', 'Herons, egrets, cranes, pigeons and chickens walk with a held head: the eye stays fixed on the world, then the head thrusts forward. The picture holds, then lurches.'],
-      ['g', 'Tempo', 'The thrust lasts 100 to 150 milliseconds in pigeons. The length of the hold is a guess.'],
+      ['m', 'Gaze', 'Herons, egrets, cranes, pigeons and chickens stabilize their head when walking: their eyes stay fixed on the world, then the head thrusts forward.'],
+      ['g', 'Tempo', 'The thrust lasts 100 to 150 milliseconds in pigeons.'],
       ['g', 'Sharpness', 'Most birds resolve under 30 cycles per degree to your 60.'],
-      ['i', 'Ultraviolet', 'Some birds see it and no phone records it. The violet is invented.'],
-      ['i', 'Field', 'A guess: eyes on the sides of the head.']] },
+      ['i', 'Ultraviolet', 'Some birds see it.'],
+      ['i', 'Field', 'Eyes on the sides of the head.']] },
     bird: { chip: 'Other bird', who: 'a bird', fov: 300, cpd: 25, topoA: .5, fall: .6, pupil: 'o', sheen: .8, rate: .5,
       cue: 'Each moment runs slow, then the picture catches up.', rows: [
       ['g', 'Pace', 'Birds follow flicker at 40 to 140 a second, the faster movers higher, and you stop near 60.' + SLOW.replace('that ratio', 'suggest it')],

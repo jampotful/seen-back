@@ -1,5 +1,5 @@
 <title>Regards</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: a camera. The picture fills the screen and the few controls float on it. One dark look, by choice, in every theme. */
 :root, :root[data-theme="dark"], :root[data-theme="light"] {
@@ -15,11 +15,11 @@
   --paper-ink: #111111;
   --rec: #E5484D;
   --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* Three levels of type, and nothing outside them. H1: the large lines on the picture. H2: names and the titles of sheets.
      H3: everything else; smaller text is a fixed share of H3's size. Each level has a font, a size, a weight, a style, a case and a spacing. */
-  --h1-font: var(--serif); --h1-size: clamp(40px, 11.5vw, 72px); --h1-weight: 400; --h1-style: normal; --h1-case: none; --h1-track: -0.012em; --h1-lead: 1;
-  --h2-font: var(--serif); --h2-size: 26px; --h2-weight: 400; --h2-style: normal; --h2-case: none; --h2-track: 0em; --h2-lead: 1.1;
+  --h1-font: var(--serif); --h1-size: 38px; --h1-weight: 400; --h1-style: normal; --h1-case: none; --h1-track: 0em; --h1-lead: 1.06;
+  --h2-font: var(--sans); --h2-size: 24px; --h2-weight: 400; --h2-style: normal; --h2-case: none; --h2-track: 0em; --h2-lead: 1.1;
   --h3-font: var(--sans); --h3-size: 16px; --h3-weight: 400; --h3-style: normal; --h3-case: none; --h3-track: 0em; --h3-lead: 1.4;
 }
 html { padding: 0 !important; }
@@ -34,7 +34,7 @@ button { cursor: pointer; }
 
 /* the opening screen and the photo prompts */
 .screen { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 20px; background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .92) 30%, rgba(0, 0, 0, .5) 52%, rgba(0, 0, 0, 0) 74%); }
-.screen h1 { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; max-width: 12ch; text-wrap: balance; }
+.screen h1 { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; max-width: 17ch; text-wrap: balance; }
 .screen h1 em { font-style: italic; }
 .screen h2 { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; text-wrap: balance; }
 .screen p { margin: 0; max-width: 34ch; color: var(--dim); }
@@ -192,20 +192,19 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- 1. what is about to happen -->
   <section class="screen pad" id="intro">
-    <h1>Photograph something alive. <em>See as it sees.</em></h1>
-    <p class="loanline"><svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>Its eyes are yours for a week.</p>
-    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="chip" id="introRec" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button></div>
+    <h1>Photograph another species to view the world through its eyes.</h1>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Start</button><button class="chip" id="introRec" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button></div>
     <p class="fine" id="introFine"></p>
   </section>
 
   <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
   <section class="screen pad" id="askAnimal" hidden>
-    <h2>Who did you meet?</h2>
+    <h2>What did you encounter?</h2>
     <div class="row">
       <label class="pill round" id="lblAnimalCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
       <label class="pill ghost round" id="lblAnimalPick" aria-label="Choose a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inAnimalPick" type="file" accept="image/*"></label>
     </div>
-    <div class="row links"><button class="ico sm" id="backAskAnimal" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="chip" id="recAskAnimal" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="recAskAnimalN"></span></button></div>
+    <div class="row links"><button class="ico sm" id="backAskAnimal" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="chip" id="recAskAnimal" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="recAskAnimalN"></span></button></div>
     <p class="fine" id="askFine"></p>
   </section>
 
@@ -241,7 +240,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <div class="bottom" id="barFinder">
         <label class="ico" aria-label="Choose a photo you already have"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inLib" type="file" accept="image/*"></label>
         <button class="shutter" id="btnShutter" type="button" aria-label="Photograph it"><i></i></button>
-        <button class="ico" id="btnRecF" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
+        <button class="ico" id="btnRecF" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
       </div>
       <div class="bottom" id="barAnimal" hidden>
         <button class="ico" id="btnEyes" type="button" aria-label="Hold to see with your own eyes"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
@@ -261,8 +260,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   <section class="sheet fromtop" id="claim" hidden aria-label="Say what it was">
     <header><h3>What was it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
     <p class="sub" id="claimSub"></p>
-    <div class="offers" id="claimKindBox" hidden><p class="note">It may be one of these kinds.</p><div class="row" id="claimKinds"></div></div>
-    <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">It may be one of these.</p><div class="row" id="claimOffers"></div></div>
+    <div class="offers" id="claimKindBox" hidden><p class="note">Is it one of these?</p><div class="row" id="claimKinds"></div></div>
+    <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">Is it one of these?</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
       <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
       <button class="pill round" type="submit" aria-label="That is what it was"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
@@ -275,22 +274,22 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   </section>
 
   <!-- everyone met so far, and the eyes that came with them -->
-  <section class="sheet" id="record" hidden aria-label="Met so far">
-    <header><h3>Met</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
-    <p class="sub" id="recordSub"></p>
+  <section class="sheet" id="record" hidden aria-label="Encounters">
+    <header><h3>Encounters</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="recordSub" hidden></p>
     <div class="eyes" id="eyeStrip"></div>
     <ul class="met" id="metList"></ul>
-    <details id="g60">
+    <details id="g60" hidden>
       <summary id="g60Sum"></summary>
       <ol id="g60List"></ol>
       <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season.</p>
     </details>
     <details id="about">
       <summary>About</summary>
-      <p class="aboutLead" id="aboutApp">Regards lends you the eyes of whatever you photograph, for a week.</p>
-      <p class="aboutLead" id="aboutBy">Made by Conrad Cheung, an artist in Gainesville, Florida.</p>
-      <p class="aboutLead" id="aboutTell">Something wrong, or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener">Tell us</a>.</p>
-      <p class="fine2" id="aboutBuildLabel">This build</p>
+      <p class="aboutLead" id="aboutApp">Regards lets you view the world, for one week, through the eyes of a species you photograph. Can you find all the species?</p>
+      <p class="aboutLead" id="aboutBy">This app is made by Conrad Cheung.</p>
+      <p class="aboutLead" id="aboutTell">Something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener">Tell us</a>.</p>
+      <p class="fine2" id="aboutBuildLabel" hidden>This build</p>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="ico sm" id="aboutCopy" type="button" aria-label="Copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.2a1.7 1.7 0 0 0-1.7-1.7H6.2a1.7 1.7 0 0 0-1.7 1.7v7.6a1.7 1.7 0 0 0 1.7 1.7h2.3"/></svg></button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
       <p class="fine2" id="fittedOn" hidden></p>
@@ -300,11 +299,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       </div>
       <div id="bigBox" hidden>
         <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
-        <div class="row"><button class="mini" id="bigGet" type="button">Get it</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
-        <label class="tick" id="bigAskRow"><input type="checkbox" id="bigAsk"><span>Do not offer the larger model</span></label>
+        <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
+        <label class="tick" id="bigAskRow" hidden><input type="checkbox" id="bigAsk"><span>Do not offer the full database</span></label>
       </div>
       <div id="svcBox" hidden>
-        <label class="fine2" for="svcChoice">A larger model on a server can be asked to name the species, from one photo made smaller.</label>
+        <label class="fine2" for="svcChoice">The full database on a server can be asked to name the species, from one photo made smaller.</label>
         <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
       </div>
     </details>
@@ -315,9 +314,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <header><h3 id="infoTitle"></h3><button class="ico" id="infoClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
-    <p class="key"><span><i class="mk m"></i>measured in this animal</span><span><i class="mk g"></i>measured in a relative</span><span><i class="mk"></i>a guess</span><span><i class="mk x"></i>left out</span></p>
+    <p class="key"><span><i class="mk m"></i>known in this animal</span><span><i class="mk g"></i>known in a relative</span><span><i class="mk"></i>speculative</span><span><i class="mk x"></i>left out</span></p>
     <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right?</button></div>
-    <details>
+    <details hidden>
       <summary>Sources, and what is unchecked</summary>
       <ul>
         <li>Sharpness across about 600 species: Caves, Brandley and Johnsen, 2018. <a href="https://today.duke.edu/2018/05/details-look-sharp-people-may-be-blurry-their-pets" target="_blank" rel="noopener">Duke University</a>.</li>
@@ -338,22 +337,22 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   </section>
 
   <!-- before a photo leaves the device: what would be sent, where, and the choice -->
-  <section class="sheet" id="ask" hidden aria-label="Ask a larger model">
-    <header><h3>Ask a larger model?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+  <section class="sheet" id="ask" hidden aria-label="Ask the full database">
+    <header><h3>Ask the full database?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="askSub"></p>
     <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
-    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Not now</button></div>
+    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Later</button></div>
     <p class="note">Your answer can be changed under “About”.</p>
   </section>
 
   <!-- before a large download: what it is, how large, where it stays, and the choice -->
-  <section class="sheet" id="big" hidden aria-label="Get a larger model">
-    <header><h3 id="bigTitle">Get a larger model?</h3><button class="ico" id="bigClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+  <section class="sheet" id="big" hidden aria-label="Get the full database">
+    <header><h3 id="bigTitle">Get the full database?</h3><button class="ico" id="bigClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="bigSub"></p>
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
-    <div class="row"><button class="pill" id="bigYes" type="button">Get it</button><button class="pill ghost" id="bigNo" type="button">Not now</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
+    <div class="row"><button class="pill" id="bigYes" type="button">Download</button><button class="pill ghost" id="bigNo" type="button">Later</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
     <div class="row links"><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">It can be deleted under “About”.</p>
+    <p class="note">You can always delete the downloaded database under “About”.</p>
   </section>
 
   <!-- a clip or a still, kept -->
