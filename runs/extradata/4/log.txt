@@ -1,0 +1,94 @@
+=== 2026-10-11T05:22:22Z install requests
+=== 2026-10-11T05:22:27Z install requests: exit 0
+=== 2026-10-11T05:22:27Z addresses
+http://images.cocodataset.org/annotations/annotations_trainval2017.zip 200 application/zip 252907541
+https://images.cocodataset.org/annotations/annotations_trainval2017.zip curl: (60) SSL: no alternative certificate subject name matches target host name 'images.cocodataset.org'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000  
+curl failed
+http://images.cocodataset.org/train2017/000000000009.jpg 200 image/jpeg 224297
+https://images.cocodataset.org/train2017/000000000009.jpg curl: (60) SSL: no alternative certificate subject name matches target host name 'images.cocodataset.org'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000  
+curl failed
+http://images.cocodataset.org/val2017/000000000139.jpg 200 image/jpeg 161811
+https://images.cocodataset.org/val2017/000000000139.jpg curl: (60) SSL: no alternative certificate subject name matches target host name 'images.cocodataset.org'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000  
+curl failed
+=== 2026-10-11T05:22:27Z addresses: exit 0
+photo_url scheme: http
+out/coco-termsofuse.html: 662 characters of text; around the first 'licens': 'COCO - Common Objects in Context info@cocodataset.org Home People Dataset Overview Explore Download External Terms of Use Tasks Detection 2020 Keypoints 2020 Panoptic 2020 DensePose 2020 Detection 2019 Keypoints 2019 Stuff 2019 Panoptic 2019 Detection 2018 Keypoints 2018 Stuff 2018 Panoptic 2018 Det'
+out/coco-termsofusehtm.html: 410 characters of text; around the first 'licens': 'Page not found · GitHub Pages 404 File not found The site configured at this address does not contain the requested file. If this is your site, make sure that the filename case matches the URL as well as any file permissions. For root URLs (like http://example.com/ ) you must provide an index.html f'
+=== 2026-10-11T05:22:27Z annotations
+=== 2026-10-11T05:22:30Z annotations: exit 0
+=== 2026-10-11T05:22:30Z zip listing
+-rw-r--r-- 1 runner runner 252907541 Oct 11 05:22 work/coco/annotations_trainval2017.zip
+Archive:  work/coco/annotations_trainval2017.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+469785474  2017-09-01 19:02   annotations/instances_train2017.json
+ 19987840  2017-09-01 19:02   annotations/instances_val2017.json
+ 91865115  2017-09-01 19:04   annotations/captions_train2017.json
+  3872473  2017-09-01 19:04   annotations/captions_val2017.json
+238884731  2017-09-01 19:04   annotations/person_keypoints_train2017.json
+ 10020657  2017-09-01 19:04   annotations/person_keypoints_val2017.json
+---------                     -------
+834416290                     6 files
+=== 2026-10-11T05:22:30Z zip listing: exit 0
+=== 2026-10-11T05:22:30Z extra manifest
+wrote data/extra/coco-kinds/manifest.csv: 10240 rows {('test', 'cat'): 77, ('test', 'deer'): 200, ('test', 'dog'): 63, ('test', 'none'): 500, ('test', 'person'): 400, ('train', 'cat'): 1500, ('train', 'deer'): 1500, ('train', 'dog'): 1500, ('train', 'none'): 2500, ('train', 'person'): 2000}; 16s
+=== 2026-10-11T05:22:46Z extra manifest: exit 0
+=== 2026-10-11T05:22:46Z photo address check
+shard 0/1: 205 rows; fetched 205, kept 0, failed 0; HTTP status of the last attempt: {200: 205}; 1s
+=== 2026-10-11T05:22:48Z photo address check: exit 0
+=== 2026-10-11T05:22:48Z photo files
+c000575.jpg
+c000675.jpg
+c005151.jpg
+work/coco-check/c000575.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, baseline, precision 8, 640x513, components 3
+work/coco-check/c000675.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, baseline, precision 8, 640x480, components 3
+work/coco-check/c005151.jpg: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, baseline, precision 8, 640x480, components 3
+31M	work/coco-check
+=== 2026-10-11T05:22:48Z photo files: exit 0
+=== 2026-10-11T05:22:48Z publish into pub/data-alachua
+read pub/data-alachua at e359b2f57b8e: 7 files
+published into pub/data-alachua: 8cd2b174d77b (was e359b2f57b8ef1c5ee5549f8000c621e5202de0d); files now:
+  _made.txt
+  eval/alachua-2025/SUMMARY.md
+  eval/alachua-2025/manifest.csv
+  extra/coco-kinds/SUMMARY.md
+  extra/coco-kinds/largest.csv
+  extra/coco-kinds/manifest.csv
+  regions/us-fl-alachua/SUMMARY.md
+  regions/us-fl-alachua/species.json
+=== 2026-10-11T05:22:49Z publish into pub/data-alachua: exit 0
+=== 2026-10-11T05:22:49Z branch after
+100644 blob b96b67cedf26dd4472cde96d5808321bd06c13e2     554	_made.txt
+100644 blob b876f1eaedcdceac4d38d56e51112c6b33f877e6    5871	eval/alachua-2025/SUMMARY.md
+100644 blob f5fe424e79fcd30cd3067021066fa41b4bc45270 1595061	eval/alachua-2025/manifest.csv
+100644 blob 4724843692146bd363023e4de64d26a5319c89d6    6011	extra/coco-kinds/SUMMARY.md
+100644 blob e87b2f8e4110b8e8db371f13683cea3e7e40f16d  370553	extra/coco-kinds/largest.csv
+100644 blob 45175716f30e974c495c3a0b8a55b40c8e317104 1787510	extra/coco-kinds/manifest.csv
+100644 blob 78133e28c8bdfa4f46e98eea4b917cbb12e04efe    9876	regions/us-fl-alachua/SUMMARY.md
+100644 blob f50f0a24dd61a78249d7487d0372c8f666949ba7 1820884	regions/us-fl-alachua/species.json
+made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9
+made_at=2026-10-11T01:51:13Z
+workflow=data
+run_number=4
+published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2
+published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3
+published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4
+=== 2026-10-11T05:22:50Z branch after: exit 0
