@@ -53,7 +53,14 @@ The emulator runs on a server processor with hardware virtualization, so its tim
 
 **iOS, run 4** (`runs/native/4-ios/`, commit `a88469a`; the same build and simulator as run 2, whose self-test passed again with all 98 checks, the recognizer ready in 2.3 s). Inside the app at `app://localhost/`, the page cannot keep the larger model. The probe's call to `get()` failed 1.6 s after it began, with no part kept, and the page said "The larger model could not be kept on this device." The recognizer recorded the cause as `keep: Request url is not HTTP/HTTPS` (`ios/big-state.json`). The page names each kept part by an address under its own origin (`partKey` in `src/cam.rec.js`), and Cache Storage takes only `http` and `https` addresses as names, so every such name fails at `app://`. The page's own copies of the pocket model were not kept either: after the self-test the storage in use was 77 bytes (`before` in `ios/big-state.json`), where the Android shell showed 126,612,835 bytes at the same point. The page catches that failure without a word, and the pocket recognizer runs from the app's own files, which is why the self-test passes. `navigator.storage.estimate()` gave a quota of 10,307,921,511 bytes there. Two ways out, neither tried yet: the shell serves its files over `http://127.0.0.1` from a small server inside the app (a loopback address is a secure context, and the page's names would then be `http` addresses), or the page names its kept copies with an `https` address of its own choosing wherever its own address is not `http` or `https` (a change in `src/cam.rec.js`, which belongs to the recognizer's area).
 
-IOS_BIG2_RESULTS
+**iOS, run 5** (`runs/native/5-ios/`, commit `7288841`). Inside the app at `app://localhost/` the probe failed again in the same way. Then the same app was pointed at the page served from the Mac at `http://127.0.0.1:8781`, a loopback address that stands in for a server inside the app (`ios/5-big-served-state.json`, `ios/5-big-served-memory.txt`, `ios/log.txt`):
+
+- The four parts, 309,812,341 bytes, came from `raw.githubusercontent.com`, were verified and kept, and the encoder started, 17.5 s after the call; starting the encoder took 11.9 s of that (session 2.0 s, warm-up 6.5 s).
+- `navigator.storage.estimate()` gave 61,956,931 bytes in use before and 381,643,630 after, with a quota of 10,307,921,511 bytes.
+- The four photos took 9.6 s (`heron.png`, wader), 11.2 s (`portrait.jpg`, other), 8.8 s (`garden.jpg`, plant) and 7.0 s (`wall.png`, other, with `sure` false) on the WASM backend with one thread.
+- The simulator's web content process reached 1,427 MB of resident memory on the Mac at its peak, sampled every 4 s with `ps`. The simulator has no memory limit of a phone's kind, so this does not show that an iPhone will allow it.
+
+In the simulator, then, the same app holds and runs the larger model when the page's address is `http`. The next step for the iOS shell is the small server inside the app (or the page change above), checked again in the simulator and then on a real iPhone.
 
 ## Commands
 
