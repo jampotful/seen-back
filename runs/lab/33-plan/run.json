@@ -1,0 +1,32 @@
+{
+ "about": "Routes that could cut the memory BioCLIP 2's shipped device file (pub/model-bioclip2-l14 at 462ecdc, hybrid-fc2-w8) needs in onnxruntime-web 1.30.0's WASM build, each in a fresh Node process on the same 24 test photos as run/lab/mem-base: (a) the graph in ORT format (saved by onnxruntime at the basic level), with the runtime's default use_ort_model_bytes_directly, with use_ort_model_bytes_for_initializers, and with bytes copied; (b) the weights in an external data file handed to the runtime beside a small graph, also letting go of the bytes and with lean allocation; (d) graphOptimizationLevel basic and disabled, enableCpuMemArena and enableMemPattern off; (e) use_device_allocator_for_initializers and disable_prepacking. The job with the external data routes also runs the page's own worker (vendor/rec-worker.js) in headless Chromium with the shipped file and reads the renderer's memory with ps.",
+ "models": [],
+ "stages": [],
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "publish": false,
+ "mem": {
+  "commit": "462ecdc327746ec5990c416bb51246b99faba0cb",
+  "jobs": [
+   {"tag": "mem-a", "routes": [
+     {"name": "ort", "form": "ort-basic", "options": {}},
+     {"name": "ort-init", "form": "ort-basic", "options": {"extra": {"session": {"use_ort_model_bytes_for_initializers": "1"}}}},
+     {"name": "ort-copy", "form": "ort-basic", "options": {"extra": {"session": {"use_ort_model_bytes_directly": "0"}}}}
+   ]},
+   {"tag": "mem-b", "page": true, "routes": [
+     {"name": "ext", "form": "external", "options": {}},
+     {"name": "ext-drop", "form": "external", "options": {}, "drop_js": true},
+     {"name": "ext-lean", "form": "external", "options": {"enableCpuMemArena": false, "extra": {"session": {"use_device_allocator_for_initializers": "1"}}}, "drop_js": true}
+   ]},
+   {"tag": "mem-d", "routes": [
+     {"name": "no-arena", "form": "onnx", "options": {"enableCpuMemArena": false}},
+     {"name": "init-device-alloc", "form": "onnx", "options": {"extra": {"session": {"use_device_allocator_for_initializers": "1"}}}},
+     {"name": "no-prepack", "form": "onnx", "options": {"extra": {"session": {"disable_prepacking": "1"}}}},
+     {"name": "no-mempattern", "form": "onnx", "options": {"enableMemPattern": false}},
+     {"name": "opt-basic", "form": "onnx", "options": {"graphOptimizationLevel": "basic"}},
+     {"name": "opt-disabled", "form": "onnx", "options": {"graphOptimizationLevel": "disabled"}}
+   ]}
+  ]
+ },
+ "max_parallel": 1
+}
