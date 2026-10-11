@@ -1,0 +1,361 @@
+=== 2026-10-11T08:50:01Z install
+=== 2026-10-11T08:50:12Z install: exit 0
+=== 2026-10-11T08:50:12Z fetch
+pub/data-alachua 6e9a8aac93d1 2026-10-11T01:51:13Z -> work/root/data
+pub/lab-bioclip-b16 8390d0006a34 2026-10-11T03:41:31Z -> work/root/lab/bioclip-b16
+pub/lab-bioclip2-l14 6b92505ce3d0 2026-10-11T07:31:40Z -> work/root/lab/bioclip2-l14
+pub/lab-bioclip25-h14 40532989b3a9 2026-10-11T03:42:14Z -> work/root/lab/bioclip25-h14
+pub/lab-bioclip25-mobile-fastvit 3c8cc3bd2386 2026-10-11T03:42:23Z -> work/root/lab/bioclip25-mobile-fastvit
+pub/lab-clip-b32 721281767c8b 2026-10-11T03:42:35Z -> work/root/lab/clip-b32
+pub/lab-mobileclip2-s0 3da256a7dad0 2026-10-11T03:42:45Z -> work/root/lab/mobileclip2-s0
+pub/lab-siglip2-b16 5efd3b247595 2026-10-11T03:42:58Z -> work/root/lab/siglip2-b16
+pub/lab-tinyclip-39m-16 a7d50027fcc3 2026-10-11T08:13:27Z -> work/root/lab/tinyclip-39m-16
+pub/lab-tinyclip-40m-32 6d8c0ecbd92e 2026-10-11T03:45:01Z -> work/root/lab/tinyclip-40m-32
+pub/lab-tinyclip-61m-32 8809961eda38 2026-10-11T06:47:00Z -> work/root/lab/tinyclip-61m-32
+pub/lab-tinyclip-8m-16 eecce81f4a0b 2026-10-11T08:13:18Z -> work/root/lab/tinyclip-8m-16
+wrote work/root/FETCHED.json with 12 branches
+=== 2026-10-11T08:51:01Z fetch: exit 0
+=== 2026-10-11T08:51:01Z checks
+pass    every evaluation photo is dated after the species list's last record (2024-12-31): 6000 rows; earliest 2025-01-01, latest 2026-09-29; rows on or before 2024-12-31: 0
+pass    every evaluation photo is dated after the GBIF snapshot behind BioCLIP 2's training data (2024-05-01): earliest evaluation date 2025-01-01. This says nothing about BioCLIP 2.5, whose card gives no snapshot date.
+pass    no evaluation observation was created before the first one dated 2025-01-01: observation numbers run from 257012724 to 404616041; the smallest number among observations dated 2025-01-01 is 257012724; observations with a smaller number: 0. A smaller number would mean an observation created earlier than 2025 and dated later.
+pass    the month column is the month of the date: 0 rows disagree
+pass    no two evaluation rows share a value of id: 6000 distinct values in 6000 rows
+pass    no two evaluation rows share a value of gbif_id: 6000 distinct values in 6000 rows
+pass    no two evaluation rows share a value of obs_url: 6000 distinct values in 6000 rows
+pass    no two evaluation rows share a value of photo_url: 6000 distinct values in 6000 rows
+pass    the split is the stated function of gbif_id alone (tools/species/build_eval.py, split_of): 0 rows disagree; val 1803, test 4197
+pass    in the species list the twelve monthly counts add up to the total, and species are sorted by total: 5911 species; 0 whose months do not add up; sorted: True
+pass    no GBIF species key appears twice in the list: 5911 keys, 5911 distinct
+note    scientific names carried by more than one species key: 1: {"Salvia azurea": [8283204, 2927067]}. Their sentence rows are identical, so the later key can never be the top answer; photos of it on the test split: 0.
+pass    an evaluation row's name and kind of eye equal the species list's for the same key: 0 rows disagree
+note    test photos whose species is not in the list at all: 36 of 4197, so a recognizer held to the list can reach at most 0.9914.
+pass    vectors of bioclip-b16 line up with the manifest and the species list: 5 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of bioclip2-l14 line up with the manifest and the species list: 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of bioclip25-h14 line up with the manifest and the species list: 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of bioclip25-mobile-fastvit line up with the manifest and the species list: 1 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of clip-b32 line up with the manifest and the species list: 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of mobileclip2-s0 line up with the manifest and the species list: 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of siglip2-b16 line up with the manifest and the species list: 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of tinyclip-39m-16 line up with the manifest and the species list: 8 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of tinyclip-40m-32 line up with the manifest and the species list: 7 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of tinyclip-61m-32 line up with the manifest and the species list: 7 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+pass    vectors of tinyclip-8m-16 line up with the manifest and the species list: 8 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order
+note    label files whose kind of eye differs from the species list: 9 label sets (bioclip-b16, mobileclip2-s0, siglip2-b16) carry another kind of eye than the list in 1 of 5911 rows. The studies take the kind from the species list, so no number here is touched; a slot built from these label files would show the earlier kinds.
+note    label rows made from an earlier species.json: 15 label sets (of bioclip2-l14, bioclip25-h14, clip-b32, tinyclip-40m-32, tinyclip-61m-32) were made before the list's English names were revised: 645 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again.
+note    label rows made from an earlier species.json: 9 label sets (of bioclip-b16, mobileclip2-s0, siglip2-b16) were made before the list's English names were revised: 2099 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again.
+pass    test photos with an almost identical photo on val (clip-b32 cosine above 0.98): 0 of 4197 test photos
+pass    test photos with an almost identical photo on val (bioclip2-l14 cosine above 0.999): 0 of 4197 test photos
+note    how tightly BioCLIP 2 groups a species: 1470 of 4197 test photos have a val photo within cosine 0.95, and for 1454 of those it is the same species. Photos of one species sit close together in this model, which is why a list of names is enough for it.
+pass    every training photo is dated on or before 2024-12-31: 84808 rows; latest 2024-12-31; rows after: 0
+note    no gbif_id is shared between the training and the evaluation photos: the training manifest's gbif_id column is empty (it was built from iNaturalist's open-data files, which carry no GBIF record id), so this comparison says nothing; the dates and the photo numbers below do the work
+pass    no obs_url is shared between the training and the evaluation photos: 0 shared; 84808 of 84808 training rows carry a value
+pass    no photo_url is shared between the training and the evaluation photos: 0 shared; 84808 of 84808 training rows carry a value
+pass    no photo number is shared between the training and the evaluation photos: 6000 evaluation and 84808 training photo numbers read from the addresses; shared: 0; addresses without a number: 0
+note    training observations can be compared with evaluation observations by number: 0 of 84808 training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before 2024-12-31 while every evaluation row is dated after it, so no observation can be on both sides.
+pass    no training photo appears twice: 0 repeated photo addresses in 84808 rows
+pass    the kind of eye of every training row is the species list's: 0 rows disagree (the studies take the kind from the species list by the row's species key)
+note    training photos per species: 84808 photos of 5467 species (most for one species: 60); rows without a species key: 0; species keys outside the list: 0; list species without a training photo: 444
+pass    training vectors of tinyclip-39m-16 line up with the training manifest: 84808 vectors, 84808 ids, of 84808 manifest rows; ids in manifest order: True
+note    evaluation photos with an almost identical training photo for tinyclip-39m-16 (cosine above 0.995): 0 of 6000
+pass    training vectors of tinyclip-8m-16 line up with the training manifest: 84808 vectors, 84808 ids, of 84808 manifest rows; ids in manifest order: True
+note    evaluation photos with an almost identical training photo for tinyclip-8m-16 (cosine above 0.995): 0 of 6000
+pass    no two rows of the extra set share an id or a photo: 10240 rows, 10240 ids, 10240 photo addresses
+pass    the extra set's test rows come from COCO's val2017 and its train rows from train2017: 0 rows disagree. COCO keeps the two apart, so no photo is on both sides.
+note    how the extra set is cut (tools/eval/kinds.py): fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported.
+pass    extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest: 10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240
+pass    extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995): 0 of 1240
+pass    extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest: 10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240
+pass    extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest: 1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240
+pass    extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995): 0 of 1240
+pass    extra-set vectors `coco-kinds` of tinyclip-8m-16 line up with the manifest: 10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240
+pass    extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-8m-16 line up with the manifest: 1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240
+pass    extra-set test photos with an almost identical fitting or tuning photo for tinyclip-8m-16 (cosine above 0.995): 0 of 1240
+wrote docs/eval/checks.json
+=== 2026-10-11T08:51:09Z checks: exit 0
+=== 2026-10-11T08:51:09Z study 2: alachua-pre2025, licence rule nc
+== tinyclip-39m-16
+  3242 of 84808 fitting vectors are left out by the licence rule `nc`
+  3242 of 84808 fitting vectors are left out: their id is not in the manifest or their species is not in the list
+  sentences                  plain 0.2302 | prior 0.3533 top5 0.5513 kind 0.8072 | tune 0.3638 | species_com
+  prototypes                 plain 0.3674 | prior 0.4725 top5 0.7146 kind 0.8782 | tune 0.5141 | class means
+  prototypes + sentences     plain 0.3848 | prior 0.4834 top5 0.7196 kind 0.8816 | tune 0.5180 | species_com, beta 0.1, bias for species without photos 0.2
+  discriminant               plain 0.4775 | prior 0.5390 top5 0.7524 kind 0.8856 | tune 0.5746 | shrinkage 0.03
+  discriminant + sentences   plain 0.4756 | prior 0.5356 top5 0.7529 kind 0.8925 | tune 0.5691 | shrinkage 0.3, species_com, gamma 0.03
+  4162 of 5944 fitting photos of the extra set are left out by the licence rule `nc`
+wrote docs/eval/study2-alachua-pre2025-nc.json
+=== 2026-10-11T08:54:24Z study 2: alachua-pre2025, licence rule nc: exit 0
+=== 2026-10-11T08:54:24Z export: nc
+slot work/root/slots/alachua-pre2025-nc/tinyclip-39m-16 | head: discriminant | species rows 5391 | bias: True | 15.9 MB without the image encoder
+=== 2026-10-11T08:54:25Z export: nc: exit 0
+=== 2026-10-11T08:54:25Z study 2: alachua-pre2025, licence rule by
+== tinyclip-39m-16
+  65936 of 84808 fitting vectors are left out by the licence rule `by`
+  65936 of 84808 fitting vectors are left out: their id is not in the manifest or their species is not in the list
+  sentences                  plain 0.2302 | prior 0.3533 top5 0.5513 kind 0.8072 | tune 0.3638 | species_com
+  prototypes                 plain 0.3140 | prior 0.3886 top5 0.6321 kind 0.8561 | tune 0.4265 | class means
+  prototypes + sentences     plain 0.3410 | prior 0.4067 top5 0.6488 kind 0.8701 | tune 0.4437 | species_com, beta 0.25, bias for species without photos 0.2
+  discriminant               plain 0.3726 | prior 0.4274 top5 0.6543 kind 0.8589 | tune 0.4664 | shrinkage 0.3
+  discriminant + sentences   plain 0.3819 | prior 0.4372 top5 0.6598 kind 0.8401 | tune 0.4725 | shrinkage 0.3, species_com, gamma 0.03
+  4957 of 5944 fitting photos of the extra set are left out by the licence rule `by`
+wrote docs/eval/study2-alachua-pre2025-by.json
+=== 2026-10-11T08:56:24Z study 2: alachua-pre2025, licence rule by: exit 0
+=== 2026-10-11T08:56:24Z export: by
+slot work/root/slots/alachua-pre2025-by/tinyclip-39m-16 | head: discriminant + sentences | species rows 5911 | bias: True | 9.0 MB without the image encoder
+=== 2026-10-11T08:56:24Z export: by: exit 0
+=== 2026-10-11T08:56:24Z scored: nc, name_at at 92 in 100
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 1, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.86 and offer_at 0.86. On the 4197 test photos the kind of eye is right for 88.1% (87.1 to 89.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every photo counts the same)`. With kind_at 0.69 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 82.4% (81.3 to 83.6) of the wildlife test photos and is right for 95.5% (94.7 to 96.1) of those; for the 17.6% (16.4 to 18.7) where it is not sure, the true kind is among its three likeliest for 89.3% (87.0 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.9 to 97.8); the page asserts a kind for 93.0% (91.5 to 94.3) and is right for 98.4% (97.8 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 92.0% (85.1 to 97.7). A species is named on 15.3% (13.3 to 17.4) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+  a species name                  21.2%  the name is right for 91.8% (89.9 to 93.6); the kind for 97.9% (96.9 to 98.8)
+  three species to choose from    16.6%  the three hold the species for 87.1% (84.5 to 89.5); the kind is right for 96.0% (94.5 to 97.4)
+  a kind of eye only              62.2%  the kind is right for 82.7% (81.3 to 84.1)
+wrote docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json
+=== 2026-10-11T08:56:41Z scored: nc, name_at at 92 in 100: exit 0
+=== 2026-10-11T08:56:41Z scored: nc, name_at at 90 in 100
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 1, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.80 and offer_at 0.88. On the 4197 test photos the kind of eye is right for 88.1% (87.1 to 89.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every photo counts the same)`. With kind_at 0.69 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 82.4% (81.3 to 83.6) of the wildlife test photos and is right for 95.5% (94.7 to 96.1) of those; for the 17.6% (16.4 to 18.7) where it is not sure, the true kind is among its three likeliest for 89.3% (87.0 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.9 to 97.8); the page asserts a kind for 93.0% (91.5 to 94.3) and is right for 98.4% (97.8 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 92.0% (85.1 to 97.7). A species is named on 15.7% (13.6 to 17.7) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+  a species name                  24.5%  the name is right for 90.4% (88.5 to 92.1); the kind for 97.6% (96.6 to 98.4)
+  three species to choose from    12.0%  the three hold the species for 88.0% (85.3 to 90.8); the kind is right for 96.0% (94.2 to 97.6)
+  a kind of eye only              63.5%  the kind is right for 83.0% (81.6 to 84.5)
+wrote docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16-at90.json
+=== 2026-10-11T08:56:59Z scored: nc, name_at at 90 in 100: exit 0
+=== 2026-10-11T08:56:59Z scored: by
+The slot holds the head `discriminant + sentences` for `tinyclip-39m-16` (shrinkage 0.3, species_com, gamma 0.03), fitted on `images/alachua-pre2025 (licence rule by)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.5. On 1803 tuning photos (val) the thresholds came out as name_at 0.68 and offer_at never (no level reached nine in ten). On the 4197 test photos the kind of eye is right for 86.0% (84.9 to 87.1); the top species is right for 43.8% (42.3 to 45.4) and is among the first five for 66.0% (64.5 to 67.4). `person` was said for 0.02% of these photos and `none` for 0.14%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`. With kind_at 0.54 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 73.0% (71.7 to 74.4) of the wildlife test photos and is right for 96.7% (96.0 to 97.3) of those; for the 27.0% (25.6 to 28.3) where it is not sure, the true kind is among its three likeliest for 87.9% (86.0 to 89.7). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.7% (95.7 to 97.7); the page asserts a kind for 92.7% (91.2 to 94.1) and is right for 99.0% (98.4 to 99.5) of those; where it is not sure the true kind is among its three likeliest for 95.6% (91.2 to 98.9). A species is named on 14.8% (12.9 to 16.9) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+  a species name                  11.7%  the name is right for 90.0% (87.4 to 92.5); the kind for 98.8% (97.8 to 99.6)
+  three species to choose from     0.0%  the three hold the species for –; the kind is right for –
+  a kind of eye only              88.3%  the kind is right for 84.3% (83.1 to 85.4)
+wrote docs/eval/shipped-alachua-pre2025-by-tinyclip-39m-16.json
+=== 2026-10-11T08:57:17Z scored: by: exit 0
+=== 2026-10-11T08:57:17Z pocket v3 decision
+wrote docs/eval/decision-pocket-v3.json
+{
+ "i_wildlife_kind_paired_difference": {
+  "candidate": [
+   0.8813,
+   0.8713,
+   0.8914,
+   4197
+  ],
+  "pocket_v2": [
+   0.8728,
+   0.8628,
+   0.8828,
+   4197
+  ],
+  "difference": [
+   0.0086,
+   0.0,
+   0.0172
+  ],
+  "photos": 4197,
+  "fails": false
+ },
+ "ii_extra_kind_right": {
+  "candidate": [
+   0.9685,
+   0.9589,
+   0.9782,
+   1240
+  ],
+  "bar": 0.965,
+  "fails": false
+ },
+ "iii_named_on_people_and_rooms": {
+  "photos": 900,
+  "named": 1,
+  "share": 0.0011111111111111111,
+  "by_kind": {
+   "person": {
+    "n": 400,
+    "named": 0.0
+   },
+   "none": {
+    "n": 500,
+    "named": 0.002
+   }
+  },
+  "bar": 0.01,
+  "fails": false
+ }
+}
+The candidate passes all three tests, so it ships as pocket v3.
+=== 2026-10-11T08:57:18Z pocket v3 decision: exit 0
+=== 2026-10-11T08:57:18Z pocket v3 files
+work/root/pocket-v3 ['fitted_on.csv', 'kinds.f16.bin', 'manifest.json', 'species.bias.f32.bin', 'species.f16.bin', 'species.json'] 15.9 MB
+work/root/pub-pocket-v3 ['fitted_on.csv', 'kinds.f16.bin', 'manifest.json', 'measured.json', 'species.bias.f32.bin', 'species.f16.bin', 'species.json'] 15.9 MB
+=== 2026-10-11T08:57:18Z pocket v3 files: exit 0
+=== 2026-10-11T08:57:18Z last check
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 1, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.86 and offer_at 0.86. On the 4197 test photos the kind of eye is right for 88.1% (87.1 to 89.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every photo counts the same)`. With kind_at 0.69 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 82.4% (81.3 to 83.6) of the wildlife test photos and is right for 95.5% (94.7 to 96.1) of those; for the 17.6% (16.4 to 18.7) where it is not sure, the true kind is among its three likeliest for 89.3% (87.0 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.9 to 97.8); the page asserts a kind for 93.0% (91.5 to 94.3) and is right for 98.4% (97.8 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 92.0% (85.1 to 97.7). A species is named on 15.3% (13.3 to 17.4) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+  a species name                  21.2%  the name is right for 91.8% (89.9 to 93.6); the kind for 97.9% (96.9 to 98.8)
+  three species to choose from    16.6%  the three hold the species for 87.1% (84.5 to 89.5); the kind is right for 96.0% (94.5 to 97.4)
+  a kind of eye only              62.2%  the kind is right for 82.7% (81.3 to 84.1)
+wrote docs/eval/shipped-pocket-v3.json
+=== 2026-10-11T08:57:36Z last check: exit 0
+=== 2026-10-11T08:57:36Z pets and livestock
+The 340 test photos of the extra set whose largest object COCO files as a cat, dog, horse, cow or sheep went through the slot `pocket-v3` (vectors `images/coco-kinds.wasm-int8-per-channel`, its own thresholds). A species was named for 189 of them, and 137 of those names were the domestic species of the photo's category. The species list holds the Domestic Cat and the Domestic Horse and no domestic dog, cow or sheep, so on a dog, cow or sheep every name is another species. The top species, named or not, was the domestic one for 147 photos.
+cat 77 66 (85.7%) 66 of 66 named 69 (89.6%) | 
+dog 63 3 (4.8%) 0 of 3 named 0 (0.0%) | Domestic Cat (Felis catus) 3
+horse 82 71 (86.6%) 71 of 71 named 78 (95.1%) | 
+cow 73 43 (58.9%) 0 of 43 named 0 (0.0%) | Domestic Horse (Equus caballus) 23, American Bison (Bison bison) 19, White-tailed Deer (Odocoileus virginianus) 1
+sheep 45 6 (13.3%) 0 of 6 named 0 (0.0%) | American Bison (Bison bison) 5, White-tailed Deer (Odocoileus virginianus) 1
+wrote docs/eval/pets-livestock.json
+=== 2026-10-11T08:57:36Z pets and livestock: exit 0
+=== 2026-10-11T08:57:36Z report
+wrote docs/eval/labelsets.md
+wrote docs/eval/variants.md
+wrote docs/eval/model-bioclip25-h14.md
+wrote docs/eval/model-bioclip2-l14.md
+wrote docs/eval/model-bioclip-b16.md
+wrote docs/eval/model-tinyclip-39m-16.md
+wrote docs/eval/model-tinyclip-8m-16.md
+wrote docs/eval/model-tinyclip-61m-32.md
+wrote docs/eval/model-tinyclip-40m-32.md
+wrote docs/eval/model-mobileclip2-s0.md
+wrote docs/eval/model-clip-b32.md
+wrote docs/eval/model-siglip2-b16.md
+wrote docs/eval/checks.md
+wrote docs/eval/study2-sentences.md
+wrote docs/eval/study2-alachua-pre2025.md
+wrote docs/eval/study2-val.md
+wrote docs/eval/shipped.md
+wrote docs/EVAL.md
+=== 2026-10-11T08:57:36Z report: exit 0
+=== 2026-10-11T08:57:36Z compare with the committed files
+checks.json                              40 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 186 other values, 15 differ; 1 keys on one side only
+    /checks[40]/check: 'no two rows of the extra set share an id or a photo' | 'training vectors of tinyclip-39m-16 line up with the training manifest'
+    /checks[41]/check: "the extra set's test rows come from COCO's val2017 and its train rows from train2017" | 'evaluation photos with an almost identical training photo for tinyclip-39m-16 (cosine above 0.995)'
+    /checks[41]/verdict: 'pass' | 'note'
+    /checks[42]/check: 'how the extra set is cut (tools/eval/kinds.py)' | 'training vectors of tinyclip-8m-16 line up with the training manifest'
+    /checks[42]/verdict: 'note' | 'pass'
+    /checks[43]/check: 'extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest' | 'evaluation photos with an almost identical training photo for tinyclip-8m-16 (cosine above 0.995)'
+    /checks[43]/verdict: 'pass' | 'note'
+    /checks[44]/check: 'extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995)' | 'no two rows of the extra set share an id or a photo'
+    /checks[45]/check: 'extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest' | "the extra set's test rows come from COCO's val2017 and its train rows from train2017"
+    /checks[46]/check: 'extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest' | 'how the extra set is cut (tools/eval/kinds.py)'
+    /checks[46]/verdict: 'pass' | 'note'
+    /checks[47]/check: 'extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995)' | 'extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest'
+decision-pocket-v3.json                  25 numbers compared, 10 differ by more than 0.0005, largest difference 1.000000; 10 other values, 0 differ; 0 keys on one side only
+    /tests/i_wildlife_kind_paired_difference/candidate[0]: 0.8914 | 0.8813
+    /tests/i_wildlife_kind_paired_difference/candidate[1]: 0.8821 | 0.8713
+    /tests/i_wildlife_kind_paired_difference/candidate[2]: 0.9006 | 0.8914
+    /tests/i_wildlife_kind_paired_difference/difference[0]: 0.0186 | 0.0086
+    /tests/i_wildlife_kind_paired_difference/difference[1]: 0.01 | 0.0
+    /tests/i_wildlife_kind_paired_difference/difference[2]: 0.0267 | 0.0172
+    /tests/ii_extra_kind_right/candidate[1]: 0.9581 | 0.9589
+    /tests/iii_named_on_people_and_rooms/by_kind/none/named: 0.0 | 0.002
+    /tests/iii_named_on_people_and_rooms/named: 0 | 1
+    /tests/iii_named_on_people_and_rooms/share: 0.0 | 0.0011111111111111111
+decision-pocket-val.json                 57 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 30 other values, 0 differ; 0 keys on one side only
+decision-pocket.json                     57 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 30 other values, 0 differ; 0 keys on one side only
+extra-naming-sentences-bioclip2-l14-at-0.78.json     68 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 17 other values, 0 differ; 0 keys on one side only
+extra-naming-val-tinyclip-39m-16.json     67 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 15 other values, 0 differ; 0 keys on one side only
+pets-livestock.json                      37 numbers compared, 10 differ by more than 0.0005, largest difference 2.000000; 40 other values, 11 differ; 0 keys on one side only
+    /fusion/kind_at: 0.53 | 0.69
+    /fusion/name_at: 0.89 | 0.86
+    /fusion/offer_at: 0.98 | 0.86
+    /fusion/t_kind: 0.5 | 1.0
+    /rows[1]/counts/named: 4 | 3
+    /rows[2]/counts/domestic: 70 | 71
+    /rows[2]/counts/named: 70 | 71
+    /rows[4]/counts/named: 4 | 6
+    /totals/domestic: 136 | 137
+    /totals/named: 187 | 189
+    /rows[1]/domestic: '0 of 4 named' | '0 of 3 named'
+    /rows[1]/named: '4 (6.3%)' | '3 (4.8%)'
+shipped-alachua-pre2025-by-tinyclip-39m-16.json    627 numbers compared, 234 differ by more than 0.0005, largest difference 18.000000; 130 other values, 12 differ; 0 keys on one side only
+    /extra[0]/rows[0]/none: 0.015 | 0.0075
+    /extra[0]/rows[0]/person: 0.9825 | 0.99
+    /extra[0]/rows[4]/named: 0.575 | 0.57
+    /extra[0]/rows[4]/none: 0.0 | 0.005
+    /manifest/fusion/name_at: 0.67 | 0.68
+    /numbers/kind/asserted_extra[2]/asserted: 184 | 183
+    /numbers/kind/asserted_extra[4]/asserted: 379 | 380
+    /numbers/kind/asserted_extra[5]/asserted: 461 | 462
+    /numbers/kind/asserted_wildlife[6]/asserted: 296 | 295
+    /numbers/kind/asserted_wildlife[7]/asserted: 358 | 356
+    /numbers/kind/asserted_wildlife[9]/asserted: 136 | 135
+    /numbers/kind/asserted_wildlife[11]/asserted: 76 | 75
+shipped-alachua-pre2025-nc-tinyclip-39m-16-at90.json    594 numbers compared, 370 differ by more than 0.0005, largest difference 387.000000; 121 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /manifest/fusion/kind_at: 0.53 | 0.69
+    /manifest/fusion/t_kind: 0.5 | 1.0
+    /numbers/kind/asserted_extra[0]/asserted: 73 | 71
+    /numbers/kind/asserted_extra[1]/asserted: 57 | 42
+    /numbers/kind/asserted_extra[2]/asserted: 180 | 170
+    /numbers/kind/asserted_extra[3]/asserted: 3 | 1
+    /numbers/kind/asserted_extra[4]/asserted: 392 | 5
+shipped-alachua-pre2025-nc-tinyclip-39m-16.json    617 numbers compared, 407 differ by more than 0.0005, largest difference 548.000000; 121 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/named: 0.0 | 0.002
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /extra[0]/rows[4]/named: 0.585 | 0.6
+    /manifest/fusion/kind_at: 0.53 | 0.69
+    /manifest/fusion/name_at: 0.89 | 0.86
+    /manifest/fusion/offer_at: 0.98 | 0.86
+    /manifest/fusion/t_kind: 0.5 | 1.0
+    /numbers/kind/asserted_extra[0]/asserted: 73 | 71
+shipped-alachua-pre2025-tinyclip-39m-16.json    592 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 121 other values, 0 differ; 0 keys on one side only
+shipped-alachua-pre2025-tinyclip-8m-16.json    592 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 121 other values, 0 differ; 0 keys on one side only
+shipped-live-pocket.json                569 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 107 other values, 0 differ; 0 keys on one side only
+shipped-pocket-v3.json                  648 numbers compared, 426 differ by more than 0.0005, largest difference 548.000000; 126 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/named: 0.0 | 0.002
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /extra[0]/rows[4]/named: 0.585 | 0.6
+    /manifest/evaluation/measured/extra_kind_right[1]: 0.9581 | 0.9589
+    /manifest/evaluation/measured/kind_asserted[0]: 0.817 | 0.8242
+    /manifest/evaluation/measured/kind_asserted[1]: 0.8056 | 0.813
+    /manifest/evaluation/measured/kind_asserted[2]: 0.8289 | 0.8356
+    /manifest/evaluation/measured/kind_right[0]: 0.8914 | 0.8813
+shipped-sentences-bioclip2-l14.json     416 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 183 other values, 0 differ; 0 keys on one side only
+shipped-sentences-tinyclip-39m-16.json    618 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 123 other values, 0 differ; 0 keys on one side only
+shipped-sentences-tinyclip-8m-16.json    632 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 115 other values, 0 differ; 0 keys on one side only
+shipped-val-bioclip2-l14.json           370 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 84 other values, 0 differ; 0 keys on one side only
+shipped-val-tinyclip-39m-16.json        634 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 118 other values, 0 differ; 0 keys on one side only
+shipped-val-tinyclip-8m-16.json         553 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 127 other values, 0 differ; 0 keys on one side only
+study1.json                           27925 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6269 other values, 0 differ; 0 keys on one side only
+study2-alachua-pre2025-by.json         1284 numbers compared, 356 differ by more than 0.0005, largest difference 1012.000000; 229 other values, 28 differ; 0 keys on one side only
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/kind_at: 0.54 | 0.55
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[0]: 0.8605 | 0.8581
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[1]: 0.8411 | 0.8379
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[2]: 0.8815 | 0.879
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted_right[3]: 1067 | 1064
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[0]: 0.1395 | 0.1419
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[1]: 0.1185 | 0.121
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[2]: 0.1589 | 0.1621
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[0]: 0.9711 | 0.9716
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[1]: 0.9422 | 0.9432
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[3]: 173 | 176
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra_by_kind[0]/asserted: 0.89 | 0.885
+study2-alachua-pre2025-nc.json         1298 numbers compared, 377 differ by more than 0.0005, largest difference 72.000000; 217 other values, 12 differ; 0 keys on one side only
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[0]: 0.9226 | 0.929
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[1]: 0.9073 | 0.9145
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[2]: 0.9371 | 0.9435
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted_right[3]: 1144 | 1152
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[0]: 0.9694 | 0.9685
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[1]: 0.9597 | 0.9589
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[2]: 0.979 | 0.9782
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[0]: 0.0774 | 0.071
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[1]: 0.0629 | 0.0565
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[2]: 0.0927 | 0.0855
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[0]: 0.9583 | 0.9205
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[1]: 0.9167 | 0.8636
+study2-alachua-pre2025.json            2537 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 427 other values, 0 differ; 0 keys on one side only
+study2-sentences.json                  1503 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 361 other values, 0 differ; 0 keys on one side only
+study2-val.json                        2987 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 498 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-fp16.json     102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-hybrid-fc2-w8.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-int8-per-channel.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-uint8-per-channel.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-w4-block32.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-w8-float.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+numbers that differ by more than the tolerance, all files: 2190
+=== 2026-10-11T08:57:36Z compare with the committed files: exit 0

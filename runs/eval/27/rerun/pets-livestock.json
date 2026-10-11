@@ -1,0 +1,106 @@
+{
+ "made_by": "tools/eval/pets.py",
+ "slot": "pocket-v3",
+ "model": "tinyclip-39m-16",
+ "vectors": "images/coco-kinds.wasm-int8-per-channel",
+ "fusion": {
+  "t_kind": 1.0,
+  "t_species": 100.0,
+  "alpha_prior": 0.75,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.86,
+  "offer_at": 0.86,
+  "prior_floor": 1e-06,
+  "kind_at": 0.69
+ },
+ "rows": [
+  {
+   "category": "cat",
+   "photos": 77,
+   "domestic_in_slot": true,
+   "named": "66 (85.7%)",
+   "domestic": "66 of 66 named",
+   "other": "0 of 66 named",
+   "top_species_domestic": "69 (89.6%)",
+   "wrong_names": "",
+   "counts": {
+    "photos": 77,
+    "named": 66,
+    "domestic": 66,
+    "top_domestic": 69
+   }
+  },
+  {
+   "category": "dog",
+   "photos": 63,
+   "domestic_in_slot": false,
+   "named": "3 (4.8%)",
+   "domestic": "0 of 3 named",
+   "other": "3 of 3 named",
+   "top_species_domestic": "0 (0.0%)",
+   "wrong_names": "Domestic Cat (Felis catus) 3",
+   "counts": {
+    "photos": 63,
+    "named": 3,
+    "domestic": 0,
+    "top_domestic": 0
+   }
+  },
+  {
+   "category": "horse",
+   "photos": 82,
+   "domestic_in_slot": true,
+   "named": "71 (86.6%)",
+   "domestic": "71 of 71 named",
+   "other": "0 of 71 named",
+   "top_species_domestic": "78 (95.1%)",
+   "wrong_names": "",
+   "counts": {
+    "photos": 82,
+    "named": 71,
+    "domestic": 71,
+    "top_domestic": 78
+   }
+  },
+  {
+   "category": "cow",
+   "photos": 73,
+   "domestic_in_slot": false,
+   "named": "43 (58.9%)",
+   "domestic": "0 of 43 named",
+   "other": "43 of 43 named",
+   "top_species_domestic": "0 (0.0%)",
+   "wrong_names": "Domestic Horse (Equus caballus) 23, American Bison (Bison bison) 19, White-tailed Deer (Odocoileus virginianus) 1",
+   "counts": {
+    "photos": 73,
+    "named": 43,
+    "domestic": 0,
+    "top_domestic": 0
+   }
+  },
+  {
+   "category": "sheep",
+   "photos": 45,
+   "domestic_in_slot": false,
+   "named": "6 (13.3%)",
+   "domestic": "0 of 6 named",
+   "other": "6 of 6 named",
+   "top_species_domestic": "0 (0.0%)",
+   "wrong_names": "American Bison (Bison bison) 5, White-tailed Deer (Odocoileus virginianus) 1",
+   "counts": {
+    "photos": 45,
+    "named": 6,
+    "domestic": 0,
+    "top_domestic": 0
+   }
+  }
+ ],
+ "totals": {
+  "photos": 340,
+  "named": 189,
+  "domestic": 137,
+  "top_domestic": 147
+ },
+ "text": "The 340 test photos of the extra set whose largest object COCO files as a cat, dog, horse, cow or sheep went through the slot `pocket-v3` (vectors `images/coco-kinds.wasm-int8-per-channel`, its own thresholds). A species was named for 189 of them, and 137 of those names were the domestic species of the photo's category. The species list holds the Domestic Cat and the Domestic Horse and no domestic dog, cow or sheep, so on a dog, cow or sheep every name is another species. The top species, named or not, was the domestic one for 147 photos."
+}

@@ -1,0 +1,549 @@
+{
+ "made_by": "tools/eval/checks.py",
+ "inputs": {
+  "branches": {
+   "pub/data-alachua": {
+    "commit": "6e9a8aac93d1b2ee13938799c61d69e97dbc9da3",
+    "made_at": "2026-10-11T01:51:13Z",
+    "made_from": "5149891a3c0a9d07e93e64942eb83c63821fb6f9",
+    "published": "training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5",
+    "run_number": "4",
+    "workflow": "data"
+   },
+   "pub/lab-bioclip-b16": {
+    "commit": "8390d0006a3469e2c5e3588bab83f0ca839df80b",
+    "made_at": "2026-10-11T03:41:31Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip2-l14": {
+    "commit": "6b92505ce3d0645587d09ad0c81118358eb4be69",
+    "made_at": "2026-10-11T07:31:40Z",
+    "made_from": "45d6f3334ebff51f6aed189019c1ef476ababb8f",
+    "run_number": "20",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip25-h14": {
+    "commit": "40532989b3a9bcbd413c170091347e07c8b658d7",
+    "made_at": "2026-10-11T03:42:14Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip25-mobile-fastvit": {
+    "commit": "3c8cc3bd23863d17708eb691464b0ed076f9c880",
+    "made_at": "2026-10-11T03:42:23Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-clip-b32": {
+    "commit": "721281767c8bfe4a6906a2ef4207066439314127",
+    "made_at": "2026-10-11T03:42:35Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-mobileclip2-s0": {
+    "commit": "3da256a7dad0606f62068b8e905d5f829d2b2f9c",
+    "made_at": "2026-10-11T03:42:45Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-siglip2-b16": {
+    "commit": "5efd3b2475959679b5f3d4902b15e94264824fdd",
+    "made_at": "2026-10-11T03:42:58Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-39m-16": {
+    "commit": "a7d50027fcc36651fcfa5d67cd2399bf49cd5d29",
+    "made_at": "2026-10-11T08:13:27Z",
+    "made_from": "d6546983c415d0a35858dac67406f4d31c455042",
+    "run_number": "30",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-40m-32": {
+    "commit": "6d8c0ecbd92e68fd2ae852fb8aee19b254ef9e41",
+    "made_at": "2026-10-11T03:45:01Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-61m-32": {
+    "commit": "8809961eda384e8df03143752c637f497b64cd96",
+    "made_at": "2026-10-11T06:47:00Z",
+    "made_from": "28bdfc454823ca0f03d76fefa4fe3f437aaf1c49",
+    "run_number": "26",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-8m-16": {
+    "commit": "eecce81f4a0bbecd6fa76962dcbb2e69c41b0ec1",
+    "made_at": "2026-10-11T08:13:18Z",
+    "made_from": "d6546983c415d0a35858dac67406f4d31c455042",
+    "run_number": "30",
+    "workflow": "lab"
+   }
+  }
+ },
+ "failed": 0,
+ "checks": [
+  {
+   "check": "every evaluation photo is dated after the species list's last record (2024-12-31)",
+   "verdict": "pass",
+   "detail": "6000 rows; earliest 2025-01-01, latest 2026-09-29; rows on or before 2024-12-31: 0"
+  },
+  {
+   "check": "every evaluation photo is dated after the GBIF snapshot behind BioCLIP 2's training data (2024-05-01)",
+   "verdict": "pass",
+   "detail": "earliest evaluation date 2025-01-01. This says nothing about BioCLIP 2.5, whose card gives no snapshot date."
+  },
+  {
+   "check": "no evaluation observation was created before the first one dated 2025-01-01",
+   "verdict": "pass",
+   "detail": "observation numbers run from 257012724 to 404616041; the smallest number among observations dated 2025-01-01 is 257012724; observations with a smaller number: 0. A smaller number would mean an observation created earlier than 2025 and dated later."
+  },
+  {
+   "check": "the month column is the month of the date",
+   "verdict": "pass",
+   "detail": "0 rows disagree"
+  },
+  {
+   "check": "no two evaluation rows share a value of id",
+   "verdict": "pass",
+   "detail": "6000 distinct values in 6000 rows"
+  },
+  {
+   "check": "no two evaluation rows share a value of gbif_id",
+   "verdict": "pass",
+   "detail": "6000 distinct values in 6000 rows"
+  },
+  {
+   "check": "no two evaluation rows share a value of obs_url",
+   "verdict": "pass",
+   "detail": "6000 distinct values in 6000 rows"
+  },
+  {
+   "check": "no two evaluation rows share a value of photo_url",
+   "verdict": "pass",
+   "detail": "6000 distinct values in 6000 rows"
+  },
+  {
+   "check": "the split is the stated function of gbif_id alone (tools/species/build_eval.py, split_of)",
+   "verdict": "pass",
+   "detail": "0 rows disagree; val 1803, test 4197"
+  },
+  {
+   "check": "in the species list the twelve monthly counts add up to the total, and species are sorted by total",
+   "verdict": "pass",
+   "detail": "5911 species; 0 whose months do not add up; sorted: True"
+  },
+  {
+   "check": "no GBIF species key appears twice in the list",
+   "verdict": "pass",
+   "detail": "5911 keys, 5911 distinct"
+  },
+  {
+   "check": "scientific names carried by more than one species key",
+   "verdict": "note",
+   "detail": "1: {\"Salvia azurea\": [8283204, 2927067]}. Their sentence rows are identical, so the later key can never be the top answer; photos of it on the test split: 0."
+  },
+  {
+   "check": "an evaluation row's name and kind of eye equal the species list's for the same key",
+   "verdict": "pass",
+   "detail": "0 rows disagree"
+  },
+  {
+   "check": "test photos whose species is not in the list at all",
+   "verdict": "note",
+   "detail": "36 of 4197, so a recognizer held to the list can reach at most 0.9914."
+  },
+  {
+   "check": "vectors of bioclip-b16 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "5 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of bioclip2-l14 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of bioclip25-h14 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of bioclip25-mobile-fastvit line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "1 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of clip-b32 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of mobileclip2-s0 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of siglip2-b16 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of tinyclip-39m-16 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "8 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of tinyclip-40m-32 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "7 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of tinyclip-61m-32 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "7 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "vectors of tinyclip-8m-16 line up with the manifest and the species list",
+   "verdict": "pass",
+   "detail": "8 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order"
+  },
+  {
+   "check": "label files whose kind of eye differs from the species list",
+   "verdict": "note",
+   "detail": "9 label sets (bioclip-b16, mobileclip2-s0, siglip2-b16) carry another kind of eye than the list in 1 of 5911 rows. The studies take the kind from the species list, so no number here is touched; a slot built from these label files would show the earlier kinds."
+  },
+  {
+   "check": "label rows made from an earlier species.json",
+   "verdict": "note",
+   "detail": "15 label sets (of bioclip2-l14, bioclip25-h14, clip-b32, tinyclip-40m-32, tinyclip-61m-32) were made before the list's English names were revised: 645 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again."
+  },
+  {
+   "check": "label rows made from an earlier species.json",
+   "verdict": "note",
+   "detail": "9 label sets (of bioclip-b16, mobileclip2-s0, siglip2-b16) were made before the list's English names were revised: 2099 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again."
+  },
+  {
+   "check": "test photos with an almost identical photo on val (clip-b32 cosine above 0.98)",
+   "verdict": "pass",
+   "detail": "0 of 4197 test photos"
+  },
+  {
+   "check": "test photos with an almost identical photo on val (bioclip2-l14 cosine above 0.999)",
+   "verdict": "pass",
+   "detail": "0 of 4197 test photos"
+  },
+  {
+   "check": "how tightly BioCLIP 2 groups a species",
+   "verdict": "note",
+   "detail": "1470 of 4197 test photos have a val photo within cosine 0.95, and for 1454 of those it is the same species. Photos of one species sit close together in this model, which is why a list of names is enough for it."
+  },
+  {
+   "check": "every training photo is dated on or before 2024-12-31",
+   "verdict": "pass",
+   "detail": "84808 rows; latest 2024-12-31; rows after: 0"
+  },
+  {
+   "check": "no gbif_id is shared between the training and the evaluation photos",
+   "verdict": "note",
+   "detail": "the training manifest's gbif_id column is empty (it was built from iNaturalist's open-data files, which carry no GBIF record id), so this comparison says nothing; the dates and the photo numbers below do the work"
+  },
+  {
+   "check": "no obs_url is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "0 shared; 84808 of 84808 training rows carry a value"
+  },
+  {
+   "check": "no photo_url is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "0 shared; 84808 of 84808 training rows carry a value"
+  },
+  {
+   "check": "no photo number is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "6000 evaluation and 84808 training photo numbers read from the addresses; shared: 0; addresses without a number: 0"
+  },
+  {
+   "check": "training observations can be compared with evaluation observations by number",
+   "verdict": "note",
+   "detail": "0 of 84808 training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before 2024-12-31 while every evaluation row is dated after it, so no observation can be on both sides."
+  },
+  {
+   "check": "no training photo appears twice",
+   "verdict": "pass",
+   "detail": "0 repeated photo addresses in 84808 rows"
+  },
+  {
+   "check": "the kind of eye of every training row is the species list's",
+   "verdict": "pass",
+   "detail": "0 rows disagree (the studies take the kind from the species list by the row's species key)"
+  },
+  {
+   "check": "training photos per species",
+   "verdict": "note",
+   "detail": "84808 photos of 5467 species (most for one species: 60); rows without a species key: 0; species keys outside the list: 0; list species without a training photo: 444"
+  },
+  {
+   "check": "training vectors of tinyclip-39m-16 line up with the training manifest",
+   "verdict": "pass",
+   "detail": "84808 vectors, 84808 ids, of 84808 manifest rows; ids in manifest order: True"
+  },
+  {
+   "check": "evaluation photos with an almost identical training photo for tinyclip-39m-16 (cosine above 0.995)",
+   "verdict": "note",
+   "detail": "0 of 6000"
+  },
+  {
+   "check": "training vectors of tinyclip-8m-16 line up with the training manifest",
+   "verdict": "pass",
+   "detail": "84808 vectors, 84808 ids, of 84808 manifest rows; ids in manifest order: True"
+  },
+  {
+   "check": "evaluation photos with an almost identical training photo for tinyclip-8m-16 (cosine above 0.995)",
+   "verdict": "note",
+   "detail": "0 of 6000"
+  },
+  {
+   "check": "no two rows of the extra set share an id or a photo",
+   "verdict": "pass",
+   "detail": "10240 rows, 10240 ids, 10240 photo addresses"
+  },
+  {
+   "check": "the extra set's test rows come from COCO's val2017 and its train rows from train2017",
+   "verdict": "pass",
+   "detail": "0 rows disagree. COCO keeps the two apart, so no photo is on both sides."
+  },
+  {
+   "check": "how the extra set is cut (tools/eval/kinds.py)",
+   "verdict": "note",
+   "detail": "fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported."
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of tinyclip-8m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-8m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for tinyclip-8m-16 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
+  }
+ ],
+ "cards": {
+  "bioclip-b16": {
+   "licence": "MIT",
+   "role": "naturalist",
+   "params": {
+    "image": 86192640,
+    "text": 63428097,
+    "total": 149620737
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 4.72,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "bioclip2-l14": {
+   "licence": "MIT",
+   "role": "naturalist",
+   "params": {
+    "image": 303966208,
+    "text": 123650305,
+    "total": 427616513
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 1.24,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "bioclip25-h14": {
+   "licence": "MIT",
+   "role": "naturalist",
+   "params": {
+    "image": 632076800,
+    "text": 354032641,
+    "total": 986109441
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 0.56,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "bioclip25-mobile-fastvit": {
+   "licence": "MIT (card tag and statement only)",
+   "role": "reference",
+   "params": {
+    "image": 11569068,
+    "text": null,
+    "total": 11569068,
+    "note": "counted from ONNX initializers"
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 33.39,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "clip-b32": {
+   "licence": "MIT (repository licence); the model card rules out deployed use",
+   "role": "reference",
+   "params": {
+    "image": 87849216,
+    "text": 63428097,
+    "total": 151277313
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 17.33,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "mobileclip2-s0": {
+   "licence": "Apple research-only licence family (not read for MobileCLIP2 tonight)",
+   "role": "reference",
+   "params": {
+    "image": 11406976,
+    "text": 63428097,
+    "total": 74835073
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 15.01,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "siglip2-b16": {
+   "licence": "Apache-2.0 (card tag)",
+   "role": "reference",
+   "params": {
+    "image": 92884224,
+    "text": 282303746,
+    "total": 375187970
+   },
+   "ship": null,
+   "ship_bytes": null,
+   "ship_sha256": null,
+   "torch_photos_per_second": 6.53,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "tinyclip-39m-16": {
+   "licence": "MIT",
+   "role": "pocket",
+   "params": {
+    "image": 38587392,
+    "text": 44513793,
+    "total": 83101185
+   },
+   "ship": "onnx/vision.int8-per-channel.onnx",
+   "ship_bytes": 40978137,
+   "ship_sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+   "torch_photos_per_second": 10.72,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": 332.79,
+   "wasm_via": "onnxruntime-web 1.30.0 WASM, 1 thread(s), Node v22.23.3"
+  },
+  "tinyclip-40m-32": {
+   "licence": "MIT",
+   "role": "pocket",
+   "params": {
+    "image": 39691776,
+    "text": 44513793,
+    "total": 84205569
+   },
+   "ship": "onnx/vision.int8-per-channel.onnx",
+   "ship_bytes": 45394265,
+   "ship_sha256": "b820516b114a6a0d6a4b5f6ae097414de24f69ab4e797d4c80a5747f00a6ea41",
+   "torch_photos_per_second": 38.36,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "tinyclip-61m-32": {
+   "licence": "MIT",
+   "role": "pocket",
+   "params": {
+    "image": 61411200,
+    "text": 53970945,
+    "total": 115382145
+   },
+   "ship": "onnx/vision.int8-per-channel.onnx",
+   "ship_bytes": 68443487,
+   "ship_sha256": "65a35751d03d6301751deca9093fc0401cca6322edb326b480748e8e4517d28e",
+   "torch_photos_per_second": 26.47,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": null,
+   "wasm_via": null
+  },
+  "tinyclip-8m-16": {
+   "licence": "MIT",
+   "role": "pocket",
+   "params": {
+    "image": 8276992,
+    "text": 15169025,
+    "total": 23446017
+   },
+   "ship": "onnx/vision.int8-per-channel.onnx",
+   "ship_bytes": 9559225,
+   "ship_sha256": "af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34",
+   "torch_photos_per_second": 45.88,
+   "torch_via": "torch",
+   "wasm_ms_per_photo": 99.84,
+   "wasm_via": "onnxruntime-web 1.30.0 WASM, 1 thread(s), Node v22.23.3"
+  }
+ }
+}

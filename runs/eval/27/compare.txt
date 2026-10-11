@@ -1,0 +1,139 @@
+checks.json                              40 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 186 other values, 15 differ; 1 keys on one side only
+    /checks[40]/check: 'no two rows of the extra set share an id or a photo' | 'training vectors of tinyclip-39m-16 line up with the training manifest'
+    /checks[41]/check: "the extra set's test rows come from COCO's val2017 and its train rows from train2017" | 'evaluation photos with an almost identical training photo for tinyclip-39m-16 (cosine above 0.995)'
+    /checks[41]/verdict: 'pass' | 'note'
+    /checks[42]/check: 'how the extra set is cut (tools/eval/kinds.py)' | 'training vectors of tinyclip-8m-16 line up with the training manifest'
+    /checks[42]/verdict: 'note' | 'pass'
+    /checks[43]/check: 'extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest' | 'evaluation photos with an almost identical training photo for tinyclip-8m-16 (cosine above 0.995)'
+    /checks[43]/verdict: 'pass' | 'note'
+    /checks[44]/check: 'extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995)' | 'no two rows of the extra set share an id or a photo'
+    /checks[45]/check: 'extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest' | "the extra set's test rows come from COCO's val2017 and its train rows from train2017"
+    /checks[46]/check: 'extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest' | 'how the extra set is cut (tools/eval/kinds.py)'
+    /checks[46]/verdict: 'pass' | 'note'
+    /checks[47]/check: 'extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995)' | 'extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest'
+decision-pocket-v3.json                  25 numbers compared, 10 differ by more than 0.0005, largest difference 1.000000; 10 other values, 0 differ; 0 keys on one side only
+    /tests/i_wildlife_kind_paired_difference/candidate[0]: 0.8914 | 0.8813
+    /tests/i_wildlife_kind_paired_difference/candidate[1]: 0.8821 | 0.8713
+    /tests/i_wildlife_kind_paired_difference/candidate[2]: 0.9006 | 0.8914
+    /tests/i_wildlife_kind_paired_difference/difference[0]: 0.0186 | 0.0086
+    /tests/i_wildlife_kind_paired_difference/difference[1]: 0.01 | 0.0
+    /tests/i_wildlife_kind_paired_difference/difference[2]: 0.0267 | 0.0172
+    /tests/ii_extra_kind_right/candidate[1]: 0.9581 | 0.9589
+    /tests/iii_named_on_people_and_rooms/by_kind/none/named: 0.0 | 0.002
+    /tests/iii_named_on_people_and_rooms/named: 0 | 1
+    /tests/iii_named_on_people_and_rooms/share: 0.0 | 0.0011111111111111111
+decision-pocket-val.json                 57 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 30 other values, 0 differ; 0 keys on one side only
+decision-pocket.json                     57 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 30 other values, 0 differ; 0 keys on one side only
+extra-naming-sentences-bioclip2-l14-at-0.78.json     68 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 17 other values, 0 differ; 0 keys on one side only
+extra-naming-val-tinyclip-39m-16.json     67 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 15 other values, 0 differ; 0 keys on one side only
+pets-livestock.json                      37 numbers compared, 10 differ by more than 0.0005, largest difference 2.000000; 40 other values, 11 differ; 0 keys on one side only
+    /fusion/kind_at: 0.53 | 0.69
+    /fusion/name_at: 0.89 | 0.86
+    /fusion/offer_at: 0.98 | 0.86
+    /fusion/t_kind: 0.5 | 1.0
+    /rows[1]/counts/named: 4 | 3
+    /rows[2]/counts/domestic: 70 | 71
+    /rows[2]/counts/named: 70 | 71
+    /rows[4]/counts/named: 4 | 6
+    /totals/domestic: 136 | 137
+    /totals/named: 187 | 189
+    /rows[1]/domestic: '0 of 4 named' | '0 of 3 named'
+    /rows[1]/named: '4 (6.3%)' | '3 (4.8%)'
+shipped-alachua-pre2025-by-tinyclip-39m-16.json    627 numbers compared, 234 differ by more than 0.0005, largest difference 18.000000; 130 other values, 12 differ; 0 keys on one side only
+    /extra[0]/rows[0]/none: 0.015 | 0.0075
+    /extra[0]/rows[0]/person: 0.9825 | 0.99
+    /extra[0]/rows[4]/named: 0.575 | 0.57
+    /extra[0]/rows[4]/none: 0.0 | 0.005
+    /manifest/fusion/name_at: 0.67 | 0.68
+    /numbers/kind/asserted_extra[2]/asserted: 184 | 183
+    /numbers/kind/asserted_extra[4]/asserted: 379 | 380
+    /numbers/kind/asserted_extra[5]/asserted: 461 | 462
+    /numbers/kind/asserted_wildlife[6]/asserted: 296 | 295
+    /numbers/kind/asserted_wildlife[7]/asserted: 358 | 356
+    /numbers/kind/asserted_wildlife[9]/asserted: 136 | 135
+    /numbers/kind/asserted_wildlife[11]/asserted: 76 | 75
+shipped-alachua-pre2025-nc-tinyclip-39m-16-at90.json    594 numbers compared, 370 differ by more than 0.0005, largest difference 387.000000; 121 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /manifest/fusion/kind_at: 0.53 | 0.69
+    /manifest/fusion/t_kind: 0.5 | 1.0
+    /numbers/kind/asserted_extra[0]/asserted: 73 | 71
+    /numbers/kind/asserted_extra[1]/asserted: 57 | 42
+    /numbers/kind/asserted_extra[2]/asserted: 180 | 170
+    /numbers/kind/asserted_extra[3]/asserted: 3 | 1
+    /numbers/kind/asserted_extra[4]/asserted: 392 | 5
+shipped-alachua-pre2025-nc-tinyclip-39m-16.json    617 numbers compared, 407 differ by more than 0.0005, largest difference 548.000000; 121 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/named: 0.0 | 0.002
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /extra[0]/rows[4]/named: 0.585 | 0.6
+    /manifest/fusion/kind_at: 0.53 | 0.69
+    /manifest/fusion/name_at: 0.89 | 0.86
+    /manifest/fusion/offer_at: 0.98 | 0.86
+    /manifest/fusion/t_kind: 0.5 | 1.0
+    /numbers/kind/asserted_extra[0]/asserted: 73 | 71
+shipped-alachua-pre2025-tinyclip-39m-16.json    592 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 121 other values, 0 differ; 0 keys on one side only
+shipped-alachua-pre2025-tinyclip-8m-16.json    592 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 121 other values, 0 differ; 0 keys on one side only
+shipped-live-pocket.json                569 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 107 other values, 0 differ; 0 keys on one side only
+shipped-pocket-v3.json                  648 numbers compared, 426 differ by more than 0.0005, largest difference 548.000000; 126 other values, 42 differ; 7 keys on one side only
+    /extra[0]/rows[0]/none: 0.005 | 0.01
+    /extra[0]/rows[0]/person: 0.9925 | 0.9875
+    /extra[0]/rows[1]/named: 0.0 | 0.002
+    /extra[0]/rows[1]/none: 0.972 | 0.97
+    /extra[0]/rows[1]/person: 0.004 | 0.0
+    /extra[0]/rows[3]/named: 0.06349206349206349 | 0.047619047619047616
+    /extra[0]/rows[4]/named: 0.585 | 0.6
+    /manifest/evaluation/measured/extra_kind_right[1]: 0.9581 | 0.9589
+    /manifest/evaluation/measured/kind_asserted[0]: 0.817 | 0.8242
+    /manifest/evaluation/measured/kind_asserted[1]: 0.8056 | 0.813
+    /manifest/evaluation/measured/kind_asserted[2]: 0.8289 | 0.8356
+    /manifest/evaluation/measured/kind_right[0]: 0.8914 | 0.8813
+shipped-sentences-bioclip2-l14.json     416 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 183 other values, 0 differ; 0 keys on one side only
+shipped-sentences-tinyclip-39m-16.json    618 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 123 other values, 0 differ; 0 keys on one side only
+shipped-sentences-tinyclip-8m-16.json    632 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 115 other values, 0 differ; 0 keys on one side only
+shipped-val-bioclip2-l14.json           370 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 84 other values, 0 differ; 0 keys on one side only
+shipped-val-tinyclip-39m-16.json        634 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 118 other values, 0 differ; 0 keys on one side only
+shipped-val-tinyclip-8m-16.json         553 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 127 other values, 0 differ; 0 keys on one side only
+study1.json                           27925 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6269 other values, 0 differ; 0 keys on one side only
+study2-alachua-pre2025-by.json         1284 numbers compared, 356 differ by more than 0.0005, largest difference 1012.000000; 229 other values, 28 differ; 0 keys on one side only
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/kind_at: 0.54 | 0.55
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[0]: 0.8605 | 0.8581
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[1]: 0.8411 | 0.8379
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[2]: 0.8815 | 0.879
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted_right[3]: 1067 | 1064
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[0]: 0.1395 | 0.1419
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[1]: 0.1185 | 0.121
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[2]: 0.1589 | 0.1621
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[0]: 0.9711 | 0.9716
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[1]: 0.9422 | 0.9432
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[3]: 173 | 176
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra_by_kind[0]/asserted: 0.89 | 0.885
+study2-alachua-pre2025-nc.json         1298 numbers compared, 377 differ by more than 0.0005, largest difference 72.000000; 217 other values, 12 differ; 0 keys on one side only
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[0]: 0.9226 | 0.929
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[1]: 0.9073 | 0.9145
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted[2]: 0.9371 | 0.9435
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/asserted_right[3]: 1144 | 1152
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[0]: 0.9694 | 0.9685
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[1]: 0.9597 | 0.9589
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/kind_right[2]: 0.979 | 0.9782
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[0]: 0.0774 | 0.071
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[1]: 0.0629 | 0.0565
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure[2]: 0.0927 | 0.0855
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[0]: 0.9583 | 0.9205
+    /models/tinyclip-39m-16/kind_decision/candidates[2]/test_extra/not_sure_true_kind_among_three[1]: 0.9167 | 0.8636
+study2-alachua-pre2025.json            2537 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 427 other values, 0 differ; 0 keys on one side only
+study2-sentences.json                  1503 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 361 other values, 0 differ; 0 keys on one side only
+study2-val.json                        2987 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 498 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-fp16.json     102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-hybrid-fc2-w8.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-int8-per-channel.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-uint8-per-channel.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-w4-block32.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-w8-float.json    102 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+numbers that differ by more than the tolerance, all files: 2190
