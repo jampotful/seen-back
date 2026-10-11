@@ -12,10 +12,13 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROB
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-thr*) THR_ONLY=1 ;; *) THR_ONLY=0 ;; esac   # only the threads experiment (ci/engines/threads.sh)
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-b7*) NO_ST=1 ;; *) NO_ST=0 ;; esac   # the build's checks (check_rec.js, parity, probes, threads) without the self-test, for time
 if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-resw*) [ "$PART" = chromium ] && { echo "WebKit-only resume run: nothing for the chromium part"; exit 0; } ;; esac
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
 step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version; lscpu | grep -E "Model name|Flags" | sed -E "s/(Flags:).*/\1 $(grep -o -w -E "avx2|avx512f|avx512_vnni|avx_vnni|avx512bw" /proc/cpuinfo | sort -u | tr "\n" " ")/"
 step "build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)"
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*fix*)   # the resume probe on a page with ci/engines/patches/webkit-resume.patch applied to src/cam.rec.js
+  git apply ci/engines/patches/webkit-resume.patch && echo "webkit-resume.patch applied" || echo "webkit-resume.patch FAILED to apply" ;; esac
 if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/build-selftest-on-demand.patch 2>/dev/null; then git apply ci/engines/patches/build-selftest-on-demand.patch && echo "build.py patched"; fi
 python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 step "playwright $PWV: $BROWSERS"
@@ -46,7 +49,9 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*)    # only test/engines/re
 import json,sys
 d=json.load(open(sys.argv[1])); print('version', d.get('version'), 'error', d.get('error')); print('before', json.dumps(d.get('before'))[:500]); print('asked before', json.dumps(d.get('asked'))[:300])
 for a in d.get('after', [])[:12]: print(' after', json.dumps(a)[:400])
-print('last', json.dumps((d.get('after') or [None])[-1])[:500]); print('asked after', json.dumps(d.get('askedAfter'))[:500]); print('kept', d.get('kept')); print('console', json.dumps(d.get('console'))[:800])" "$OUT/rec/resume-$B.json"
+print('last', json.dumps((d.get('after') or [None])[-1])[:500]); print('asked after', json.dumps(d.get('askedAfter'))[:500]); print('kept', d.get('kept')); print('stores', d.get('stores')); print('console', json.dumps(d.get('console'))[:800])
+print('variant', d.get('variant'), 'keysBefore', d.get('keysBefore'))
+for x in d.get('trace', []): print(' KT', x[:300])" "$OUT/rec/resume-$B.json"
   done
   exit 0 ;;
 esac
