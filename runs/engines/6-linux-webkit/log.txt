@@ -1,0 +1,63 @@
+
+=== 01:43:36 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1234       12624          38        2486       14755
+v22.23.3
+Python 3.12.3
+Ubuntu 24.04.5 LTS
+
+=== 01:43:36 build
+build 5 | index.html 147655 bytes | artifact 145077 bytes
+build ok
+
+=== 01:43:36 playwright 1.56.0 and its browsers
+
+added 2 packages in 2s
+Processing triggers for libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) ...
+Setting up libgtk-4-1:amd64 (4.14.5+ds-0ubuntu0.10) ...
+Setting up glib-networking:amd64 (2.80.0-1build1) ...
+Setting up libsoup-3.0-0:amd64 (3.4.4-5ubuntu0.9) ...
+Setting up libgssdp-1.6-0:amd64 (1.6.3-1build3) ...
+Setting up gstreamer1.0-plugins-good:amd64 (1.24.2-1ubuntu1.8) ...
+Setting up libgupnp-1.6-0:amd64 (1.6.6-1build3) ...
+Setting up libgupnp-igd-1.6-0:amd64 (1.6.0-3build3) ...
+Setting up libnice10:amd64 (0.1.21-2build3) ...
+Setting up libgstreamer-plugins-bad1.0-0:amd64 (1.24.2-1ubuntu4) ...
+Setting up gstreamer1.0-plugins-bad:amd64 (1.24.2-1ubuntu4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart packagekit.service php8.3-fpm.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-ubuntu-24.04.zip
+Webkit 26.0 (playwright build v2215) downloaded to /home/runner/.cache/ms-playwright/webkit-2215
+
+=== 01:44:06 ffmpeg and Pillow
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+pillow ok
+
+=== 01:44:15 serve the repository on 127.0.0.1:8781
+index.html -> 200
+
+=== 01:44:16 self-test: webkit x phone, desktop
+01:44:53 webkit-phone 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 36727ms
+01:45:23 webkit-desktop 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 30929ms
+
+=== 01:45:23 summary
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone None None []
+
+=== 01:45:23 shrink pictures
+pictures: 11 total bytes: 579468
+632K	/home/runner/work/seen-back/seen-back/out
