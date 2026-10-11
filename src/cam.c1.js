@@ -42,7 +42,13 @@
       });
     }
     if (typeof createImageBitmap !== 'function') return viaImg();
-    return createImageBitmap(file).then(function (bmp) { var c = fit(bmp, bmp.width, bmp.height, 1280); if (bmp.close) bmp.close(); return c; }, viaImg);
+    // the bitmap is let go only once the canvas has really drawn it (a one-pixel read makes it): an accelerated canvas may record a draw
+    // and carry it out later, and in macOS WebKit a photo then sometimes reached the recognizer unlike itself (runs engines/12 and 15)
+    return createImageBitmap(file).then(function (bmp) {
+      var c = fit(bmp, bmp.width, bmp.height, 1280);
+      try { c.getContext('2d').getImageData(0, 0, 1, 1); } catch (e) {}
+      if (bmp.close) bmp.close(); return c;
+    }, viaImg);
   }
   function labelDate(d) { var R = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii']; return d.getDate() + '.' + R[d.getMonth()] + '.' + d.getFullYear(); }
   function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
