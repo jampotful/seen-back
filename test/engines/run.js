@@ -13,6 +13,7 @@ const BROWSERS = (process.env.BROWSERS || 'chromium').split(',').filter(Boolean)
 const VIEWPORTS = (process.env.VIEWPORTS || 'phone,desktop').split(',').filter(Boolean);
 const LABEL = process.env.LABEL || process.platform;
 const LIMIT = +(process.env.LIMIT_MS || 180000);
+const HEADED = process.env.HEADED === '1', TAGX = process.env.TAG || '';
 fs.mkdirSync(OUT, { recursive: true });
 const log = (...a) => { const s = new Date().toISOString().slice(11, 19) + ' ' + a.join(' '); console.log(s); fs.appendFileSync(path.join(OUT, 'run-log.txt'), s + '\n'); };
 const VP = {
@@ -25,9 +26,9 @@ const FF_PREFS = { 'media.navigator.streams.fake': true, 'media.navigator.permis
   'media.autoplay.blocking_policy': 0 };
 
 function launchOpts(name) {
-  if (name === 'chromium') return { args: process.env.CHROMIUM_ARGS ? process.env.CHROMIUM_ARGS.split(' ') : GL_ARGS };
-  if (name === 'firefox') return { firefoxUserPrefs: FF_PREFS };
-  return {};
+  if (name === 'chromium') return { headless: !HEADED, args: process.env.CHROMIUM_ARGS ? process.env.CHROMIUM_ARGS.split(' ') : GL_ARGS };
+  if (name === 'firefox') return { headless: !HEADED, firefoxUserPrefs: FF_PREFS };
+  return { headless: !HEADED };
 }
 // Firefox and WebKit do not take Playwright's isMobile
 function ctxOpts(name, vp) { const o = Object.assign({}, VP[vp]); if (name === 'firefox') delete o.isMobile; return o; }
@@ -37,10 +38,10 @@ async function watchPage(page, rec) {
   page.on('pageerror', e => rec.pageErrors.push(String(e && e.message || e).slice(0, 300)));
   page.on('requestfailed', r => rec.failedRequests.push(r.url().replace(BASE.replace('/index.html', ''), '') + ' ' + (r.failure() && r.failure().errorText)));
 }
-const shot = async (page, file, rec) => { try { await page.screenshot({ path: path.join(OUT, file), scale: 'css', timeout: 20000 }); rec.shots.push(file); } catch (e) { rec.notes.push('screenshot ' + file + ' failed: ' + String(e.message).slice(0, 160)); } };
+const shot = async (page, file, rec) => { try { await page.screenshot({ path: path.join(OUT, file), scale: 'css', timeout: 45000 }); rec.shots.push(file); } catch (e) { rec.notes.push('screenshot ' + file + ' failed: ' + String(e.message).slice(0, 160)); } };
 
 async function one(name, vp) {
-  const tag = name + '-' + vp, rec = { browser: name, viewport: vp, platform: LABEL, console: [], pageErrors: [], failedRequests: [], shots: [], notes: [] };
+  const tag = name + TAGX + '-' + vp, rec = { headed: HEADED, browser: name + TAGX, viewport: vp, platform: LABEL, console: [], pageErrors: [], failedRequests: [], shots: [], notes: [] };
   const t0 = Date.now();
   let browser;
   try { browser = await pw[name].launch(launchOpts(name)); } catch (e) { rec.launchError = String(e.message).slice(0, 600); log(tag, 'launch failed', rec.launchError.split('\n')[0]); return rec; }
