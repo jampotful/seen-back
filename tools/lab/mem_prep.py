@@ -8,6 +8,9 @@
       norm.json, and sel_manifest.csv (the rows, for the photo fetcher).
   python3 tools/lab/mem_prep.py ort --model ONNX --out ORT [--level basic|disabled]
       The same graph in ORT format, saved by onnxruntime (Python) after the chosen optimization level.
+  python3 tools/lab/mem_prep.py preopt --model ONNX --out ONNX2 [--level extended] [--external NAME]
+      The graph after onnxruntime's (Python, CPU) optimizations up to the chosen level, saved as ONNX, its weights
+      optionally in an external data file NAME beside it.
   python3 tools/lab/mem_prep.py external --model ONNX --out GRAPH --weights NAME
       The same graph with every tensor of 1 kB or more in one external data file NAME beside GRAPH.
 """
@@ -79,6 +82,22 @@ def to_ort(a):
     print("ORT format (%s, onnxruntime %s): %d bytes" % (a.level, ort.__version__, pathlib.Path(a.out).stat().st_size))
 
 
+def preopt(a):
+    import onnxruntime as ort
+
+    so = ort.SessionOptions()
+    so.graph_optimization_level = {"basic": ort.GraphOptimizationLevel.ORT_ENABLE_BASIC,
+                                   "extended": ort.GraphOptimizationLevel.ORT_ENABLE_EXTENDED}[a.level]
+    so.optimized_model_filepath = a.out
+    if a.external:
+        so.add_session_config_entry("session.optimized_model_external_initializers_file_name", a.external)
+        so.add_session_config_entry("session.optimized_model_external_initializers_min_size_in_bytes", "1024")
+    ort.InferenceSession(a.model, so, providers=["CPUExecutionProvider"])
+    g = pathlib.Path(a.out)
+    print("optimized ONNX (%s, onnxruntime %s): graph %d bytes%s" % (a.level, ort.__version__, g.stat().st_size,
+          (", %s %d bytes" % (a.external, (g.parent / a.external).stat().st_size)) if a.external else ""))
+
+
 def external(a):
     import onnx
 
@@ -101,12 +120,17 @@ def main():
     o.add_argument("--model", required=True)
     o.add_argument("--out", required=True)
     o.add_argument("--level", default="basic", choices=["basic", "disabled"])
+    q = sub.add_parser("preopt")
+    q.add_argument("--model", required=True)
+    q.add_argument("--out", required=True)
+    q.add_argument("--level", default="extended", choices=["basic", "extended"])
+    q.add_argument("--external", default="")
     e = sub.add_parser("external")
     e.add_argument("--model", required=True)
     e.add_argument("--out", required=True)
     e.add_argument("--weights", required=True)
     a = ap.parse_args()
-    {"pixels": pixels, "ort": to_ort, "external": external}[a.cmd](a)
+    {"pixels": pixels, "ort": to_ort, "preopt": preopt, "external": external}[a.cmd](a)
 
 
 if __name__ == "__main__":

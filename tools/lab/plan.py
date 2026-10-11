@@ -64,8 +64,11 @@ print("card_patch=" + json.dumps(run.get("card_patch") or {}))
 print("has_card_patch=%s" % ("true" if run.get("card_patch") else "false"))
 # memory runs: {"mem": {"jobs": [{"tag": "mem-base", "routes": [{...}, ...], "page": false}, ...], "commit": "<model commit>"}}
 mem = run.get("mem") or {}
+# a job's "publish": {"form": "external" | "ort-basic", "branch": "pub/...", "route": "<measured route>"} publishes that form
 mwork = [{"tag": j["tag"], "routes": json.dumps(j.get("routes", [])), "page": "true" if j.get("page") else "false",
-          "commit": mem.get("commit", "462ecdc327746ec5990c416bb51246b99faba0cb")} for j in mem.get("jobs", [])]
+          "commit": mem.get("commit", "462ecdc327746ec5990c416bb51246b99faba0cb"),
+          "pub_form": (j.get("publish") or {}).get("form", ""), "pub_branch": (j.get("publish") or {}).get("branch", ""),
+          "pub_route": (j.get("publish") or {}).get("route", "")} for j in mem.get("jobs", [])]
 print("mem=" + json.dumps({"include": mwork}))
 print("has_mem=%s" % ("true" if mwork else "false"))
 print("count=%d" % (len(work) + len(models) + len(dwork) + len(mwork)), file=sys.stderr)

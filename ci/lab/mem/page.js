@@ -8,13 +8,14 @@
   function abs(p) { return new URL(p, location.href).href; }
   var got = null, fetchMs = 0;
   // the model's bytes as one buffer in the page, as the page holds them once it has joined the kept parts
-  window.memFetch = function (modelPath) {
+  window.memFetch = function (modelPath, weightsPath) {
     var t0 = performance.now();
     return Promise.all([
       fetch(abs('/vendor/ort/ort-wasm-simd-threaded.wasm')).then(function (r) { return r.arrayBuffer(); }),
       fetch(abs(modelPath)).then(function (r) { return r.arrayBuffer(); }),
-      fetch(abs('/pix/u8.bin')).then(function (r) { return r.arrayBuffer(); })
-    ]).then(function (b) { got = b; pix = new Uint8Array(b[2]); fetchMs = Math.round(performance.now() - t0); return { fetch_ms: fetchMs, model_bytes: b[1].byteLength }; });
+      fetch(abs('/pix/u8.bin')).then(function (r) { return r.arrayBuffer(); }),
+      weightsPath ? fetch(abs(weightsPath)).then(function (r) { return r.arrayBuffer(); }) : null
+    ]).then(function (b) { got = b; pix = new Uint8Array(b[2]); fetchMs = Math.round(performance.now() - t0); return { fetch_ms: fetchMs, model_bytes: b[1].byteLength, weights_bytes: b[3] ? b[3].byteLength : 0 }; });
   };
   window.memStart = function (width) {
     var b = got; got = null; width = width || 768;
@@ -27,8 +28,10 @@
       w.onerror = function (e) { var x = waiters.shift(); if (x) x.res({ op: 'fail', message: String(e.message || e) }); };
       return next('hello').then(function () {
         var t1 = performance.now();
-        w.postMessage({ op: 'init', ep: 'wasm', ort: { js: abs('/vendor/ort/ort.wasm.min.js'), mjs: abs('/vendor/ort/ort-wasm-simd-threaded.mjs'), wasm: abs('/vendor/ort/ort-wasm-simd-threaded.wasm') },
-          wasmBinary: b[0], model: b[1], vision: V, width: width, kinds: null, nKinds: 0, species: new ArrayBuffer(width * 2), nSpecies: 1 }, [b[0], b[1]]);
+        var init = { op: 'init', ep: 'wasm', ort: { js: abs('/vendor/ort/ort.wasm.min.js'), mjs: abs('/vendor/ort/ort-wasm-simd-threaded.mjs'), wasm: abs('/vendor/ort/ort-wasm-simd-threaded.wasm') },
+          wasmBinary: b[0], model: b[1], vision: V, width: width, kinds: null, nKinds: 0, species: new ArrayBuffer(width * 2), nSpecies: 1 }, tr = [b[0], b[1]];
+        if (b[3]) { init.weights = b[3]; init.weightsName = 'vision.weights.bin'; tr.push(b[3]); }   // read only by a worker with ci/lab/patches/worker-memory.patch
+        w.postMessage(init, tr);
         return next('ready').then(function (m) {
           return { op: m.op, fail: m.op === 'fail' ? (m.stage + ': ' + m.message) : '', fetch_ms: fetchMs, ready_ms: Math.round(performance.now() - t1),
             worker_ms: m.ms || null, heap: m.heap || 0, threads: m.threads, backend: m.backend };

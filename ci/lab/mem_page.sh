@@ -11,5 +11,15 @@ node test/rec/serve.js 8790 > serve.log 2>&1 & spid=$!
 sleep 2
 say "page run: the shipped file through vendor/rec-worker.js"
 timeout 1200 node tools/lab/mem_page.mjs "$PW" 8790 /model/vision.int8.onnx 24 ret/routes/page.json ret/routes/page.f32 >> "$L" 2>&1 || say "page run failed"
+# with the worker patch (ci/lab/patches/worker-external-data.patch) applied to this checkout's copy: the external data form
+if [ -f ci/lab/patches/worker-external-data.patch ] && [ -f model/ext/vision.weights.bin ]; then
+  if git apply ci/lab/patches/worker-external-data.patch 2>>"$L"; then
+    say "page run: the external data form through the patched vendor/rec-worker.js"
+    WEIGHTS=/model/ext/vision.weights.bin timeout 1200 node tools/lab/mem_page.mjs "$PW" 8790 /model/ext/vision.graph.onnx 24 ret/routes/page-ext.json ret/routes/page-ext.f32 >> "$L" 2>&1 || say "patched page run failed"
+    git checkout -- vendor/rec-worker.js
+  else
+    say "the worker patch did not apply"
+  fi
+fi
 kill "$spid" 2>/dev/null
 say "page run done"

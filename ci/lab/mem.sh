@@ -32,7 +32,7 @@ python3 -m pip install --quiet numpy pillow 2>&1 | tail -1
 python3 tools/lab/mem_prep.py pixels --manifest data_in/manifest.csv --photos photos --out pix 2>&1 | tail -3 | tee -a "$L"
 cp pix/ids.json ret/ids.json; cp pix/norm.json ret/norm.json
 forms=$(python3 -c "import json,sys;print(' '.join(sorted({r.get('form','onnx') for r in json.loads(sys.argv[1])})))" "$routes")
-if echo "$forms" | grep -q -E "ort-|external"; then
+if echo "$forms" | grep -q -E "ort-|external|pre-"; then
   python3 -m pip install --quiet onnx "onnxruntime==1.30.0" 2>&1 | tail -1 || python3 -m pip install --quiet onnx onnxruntime 2>&1 | tail -1
   python3 -c "import onnxruntime, onnx; print('python onnxruntime', onnxruntime.__version__, 'onnx', onnx.__version__)" 2>&1 | tee -a "$L"
 fi
@@ -41,9 +41,11 @@ for f in $forms; do
     ort-basic) python3 tools/lab/mem_prep.py ort --model model/vision.int8.onnx --out model/vision.basic.ort --level basic 2>&1 | tail -3 | tee -a "$L" ;;
     ort-disabled) python3 tools/lab/mem_prep.py ort --model model/vision.int8.onnx --out model/vision.disabled.ort --level disabled 2>&1 | tail -3 | tee -a "$L" ;;
     external) mkdir -p model/ext && python3 tools/lab/mem_prep.py external --model model/vision.int8.onnx --out model/ext/vision.graph.onnx --weights vision.weights.bin 2>&1 | tail -3 | tee -a "$L" ;;
+    pre-extended) mkdir -p model/pre && python3 tools/lab/mem_prep.py preopt --model model/vision.int8.onnx --out model/pre/vision.pre.onnx --level extended 2>&1 | tail -3 | tee -a "$L" ;;
+    pre-extended-ext) mkdir -p model/prex && python3 tools/lab/mem_prep.py preopt --model model/vision.int8.onnx --out model/prex/vision.pre.onnx --level extended --external vision.pre.weights.bin 2>&1 | tail -3 | tee -a "$L" ;;
   esac
 done
-ls -l model model/ext 2>/dev/null >> "$L"
+ls -l model model/ext model/pre model/prex 2>/dev/null >> "$L"
 n=$(python3 -c "import json,sys;print(len(json.loads(sys.argv[1])))" "$routes")
 fail=0
 for i in $(seq 0 $((n - 1))); do
@@ -52,9 +54,12 @@ import json, sys
 r = json.loads(sys.argv[1])[int(sys.argv[2])]
 form = r.get("form", "onnx")
 r["model"] = {"onnx": "model/vision.int8.onnx", "ort-basic": "model/vision.basic.ort", "ort-disabled": "model/vision.disabled.ort",
-              "external": "model/ext/vision.graph.onnx"}[form]
+              "external": "model/ext/vision.graph.onnx", "pre-extended": "model/pre/vision.pre.onnx",
+              "pre-extended-ext": "model/prex/vision.pre.onnx"}[form]
 if form == "external":
     r["external"] = "model/ext/vision.weights.bin"; r["external_name"] = "vision.weights.bin"
+if form == "pre-extended-ext":
+    r["external"] = "model/prex/vision.pre.weights.bin"; r["external_name"] = "vision.pre.weights.bin"
 r.setdefault("photos", 24)
 print(json.dumps(r))
 PY

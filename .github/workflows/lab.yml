@@ -291,6 +291,11 @@ jobs:
         env:
           ROUTES: ${{ matrix.routes }}
         run: bash ci/lab/mem.sh "${{ matrix.tag }}" "$ROUTES" "${{ matrix.commit }}"
+      - name: publish a measured form in parts to a new branch
+        if: matrix.pub_form != ''
+        env:
+          MODEL_COMMIT: ${{ matrix.commit }}
+        run: bash ci/lab/mem_pub.sh "${{ matrix.pub_form }}" "${{ matrix.pub_branch }}" "${{ matrix.pub_route }}"
       - name: the page's worker in Chromium
         if: matrix.page == 'true'
         run: bash ci/lab/mem_page.sh "${{ matrix.commit }}"

@@ -1,0 +1,38 @@
+Worker change for the larger model's weights as an external data file (ci/lab/patches/worker-external-data.patch)
+
+Against vendor/rec-worker.js on main at build 8 (8037aec). Apply with: git apply ci/lab/patches/worker-external-data.patch
+It needs a new file: the graph and weights published on pub/model-bioclip2-l14-b (ci/lab/mem_pub.sh), and a change in
+the page (src/cam.rec.js) that is not in this patch: fetch vision.graph.onnx and the parts of vision.weights.bin, check
+them against parts.json, and send init with model = the graph's bytes, weights = the joined weights, weightsName =
+'vision.weights.bin' (transfer both buffers). With no m.weights the worker behaves exactly as before.
+
+Measured (onnxruntime-web 1.30.0 WASM, one thread; tools/lab/mem_node.mjs in Node 22 on GitHub ubuntu-latest machines;
+tables by tools/lab/mem_table.py from runs/lab/32-mem-base and runs/lab/33-mem-b on the ci branch):
+  shipped file (vision.int8.onnx, 309,812,341 bytes), worker's options:  WASM heap 819.4 MiB; peak resident 1249 MiB
+    while the session is created, 1167 MiB during photos 1 and 10 with the file's bytes let go
+  external data (vision.graph.onnx 2,175,801 bytes + vision.weights.bin 307,658,752 bytes), same options: WASM heap
+    429.0 MiB (-47.6%); peak resident 814 MiB while the session is created, 630 and 632 MiB during photos 1 and 10
+    with the bytes let go
+  vectors of 24 test photos: identical to the shipped file's (largest absolute difference 0.0; cosine 1.0000000)
+  seconds a photo: 2.79 (shipped, run 32 machine) and 4.85 (external, run 33 machine); these were different machines,
+    and the shipped file through the page's worker in Chromium on the run 33 machine took 4.39 s a photo
+
+diff --git a/vendor/rec-worker.js b/vendor/rec-worker.js
+index cb8ab2e..d0a9012 100644
+--- a/vendor/rec-worker.js
++++ b/vendor/rec-worker.js
+@@ -123,8 +123,12 @@ function init(m) {
+   ort.env.wasm.proxy = false;
+   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
+   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
+-  ort.InferenceSession.create(new Uint8Array(m.model), { executionProviders: [backend], graphOptimizationLevel: 'all' }).then(function (s) {
+-    session = s; t2 = now(); m.model = null;           // the session has its own copy by now: a large model's bytes are let go
++  var opts = { executionProviders: [backend], graphOptimizationLevel: 'all' };
++  // a model whose weights come in an external data file (m.weights, under the name its graph gives the file): the runtime
++  // copies them into its heap once, where a single file is first copied in whole and then read into a second copy
++  if (m.weights) opts.externalData = [{ path: m.weightsName || 'vision.weights.bin', data: new Uint8Array(m.weights) }];
++  ort.InferenceSession.create(new Uint8Array(m.model), opts).then(function (s) {
++    session = s; t2 = now(); m.model = null; m.weights = null;   // the session has its own copy by now: a large model's bytes are let go
+     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
+     // one pass over an empty picture, so the first real photo does not pay for warming up
+     return run1(new Float32Array(3 * V.size * V.size)).then(function () {

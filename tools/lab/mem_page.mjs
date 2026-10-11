@@ -1,7 +1,7 @@
 // The larger model through the page's own worker (vendor/rec-worker.js) in headless Chromium, with the renderer's
 // resident memory read from ps every 150 ms and kept as a peak for each phase; the worker reports the WASM heap's size
 // with every message (ci/lab/mem/wrap-worker.js).
-// Usage: node tools/lab/mem_page.mjs <playwright prefix> <port> <model path on the server> <photos> <out.json> <out.f32>
+// Usage: [WEIGHTS=<external data path on the server>] node tools/lab/mem_page.mjs <playwright prefix> <port> <model path on the server> <photos> <out.json> <out.f32>
 // The server is test/rec/serve.js at the repository root; the pixels are at /pix/u8.bin (tools/lab/mem_prep.py pixels).
 import { createRequire } from 'node:module';
 import { execFile } from 'node:child_process';
@@ -47,7 +47,7 @@ page.on('pageerror', (e) => logs.push('pageerror: ' + String(e).slice(0, 300)));
 await page.goto(`http://127.0.0.1:${port}/ci/lab/mem/page.html`);
 phase = 'page open'; await new Promise((r) => setTimeout(r, 1500)); await sample();
 phase = 'model fetched into the page';
-rec.fetch = await page.evaluate((p) => window.memFetch(p), modelPath);
+rec.fetch = await page.evaluate((a) => window.memFetch(a[0], a[1]), [modelPath, process.env.WEIGHTS || '']);
 await sample();
 phase = 'session created (worker init, warm-up)';
 rec.init = await page.evaluate((w) => window.memStart(w), parseInt(process.env.WIDTH || '768', 10));
