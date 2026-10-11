@@ -1,8 +1,9 @@
 /* Seen Back: the recognizer's worker. A classic worker (no modules), so the picture on the page keeps moving
    while a photo is prepared and passed through the image encoder.
 
-   The page sends:   {op:'init', ort:{js,mjs,wasm}, wasmBinary, ep, model, vision:{input,output,size,mean,std,resize,crop}, width, kinds, nKinds, species, nSpecies}
-                     (kinds may be absent where there are species: a slot without a kinds head)
+   The page sends:   {op:'init', ort:{js,mjs,wasm}, wasmBinary, ep, model, weights?, weightsName?, vision:{input,output,size,mean,std,resize,crop}, width, kinds, nKinds, species, nSpecies}
+                     (kinds may be absent where there are species: a slot without a kinds head; where the model's weights are a file of
+                     their own, model is the graph and weights that file's bytes, under the name the graph gives it)
                      {op:'run', id, rgba, w, h, wantPre}          rgba: the photo's pixels, 4 bytes each, rows from the top
    and it answers:   {op:'hello'}  {op:'ready', ms, backend, threads}  {op:'done', id, kinds, species, emb, ms, pre?}  {op:'fail', id?, stage, name, message}
 
@@ -123,8 +124,12 @@ function init(m) {
   ort.env.wasm.proxy = false;
   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
-  ort.InferenceSession.create(new Uint8Array(m.model), { executionProviders: [backend], graphOptimizationLevel: 'all' }).then(function (s) {
-    session = s; t2 = now(); m.model = null;           // the session has its own copy by now: a large model's bytes are let go
+  var opts = { executionProviders: [backend], graphOptimizationLevel: 'all' };
+  // a model whose weights come in an external data file (m.weights, under the name its graph gives the file): the runtime
+  // copies them into its heap once, where a single file is first copied in whole and then read into a second copy
+  if (m.weights) opts.externalData = [{ path: m.weightsName || 'vision.weights.bin', data: new Uint8Array(m.weights) }];
+  ort.InferenceSession.create(new Uint8Array(m.model), opts).then(function (s) {
+    session = s; t2 = now(); m.model = null; m.weights = null; opts.externalData = null;   // the session has its own copy by now: a large model's bytes are let go
     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
     // one pass over an empty picture, so the first real photo does not pay for warming up
     return run1(new Float32Array(3 * V.size * V.size)).then(function () {

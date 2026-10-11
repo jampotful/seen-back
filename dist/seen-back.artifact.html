@@ -1303,6 +1303,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
       }
       if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the larger model without its length' : 'a model in parts in the pocket slot');
+      // the larger model may come as a small graph beside its weights as a file of their own: the graph with its length and checksum, and the
+      // name the graph gives that file; vision.parts, vision.bytes and vision.sha256 then describe the weights
+      if (v.graph !== undefined && !(big && v.graph && okPart(v.graph.url) && num(v.graph.bytes) && v.graph.bytes > 0 && typeof v.graph.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(v.graph.sha256)
+        && typeof v.weights_name === 'string' && /^[A-Za-z0-9_][A-Za-z0-9_.-]{0,119}$/.test(v.weights_name))) throw err('unfit', big ? 'the graph or the name of its weights is not as it should be' : 'a model in two files in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -1403,15 +1407,21 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
     function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
     function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
+    function keptOf(V) { return (V.graph ? [V.graph] : []).concat(partsOf(V)); }     // all that is kept of it: the graph first, where the weights are a file of their own, then the parts
+    function allBytes(V) { return V.bytes + (V.graph ? V.graph.bytes : 0); }
     function unkeepParts() {
       var V = M.vision; have = 'absent'; keptBytes = 0;
-      return Promise.all(partsOf(V).map(function (p) { return unkeep(partKey(p)); }).concat([unkeep(wholeKey(V))]));
+      return Promise.all(keptOf(V).map(function (p) { return unkeep(partKey(p)); }).concat([unkeep(wholeKey(V))]));
     }
-    function staleParts(cache) {                       // parts of a model this slot no longer names
-      if (!cache || !M) return;
-      var now = {}; partsOf(M.vision).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); now[wholeKey(M.vision)] = 1;
-      cache.keys().then(function (keys) {
-        keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+    function staleParts(cache) {                       // parts of a model this slot no longer names (an older form of it among them): let go once
+      if (!cache || !M) return;                        // all of the model it names is kept and its whole verified, and never before
+      var V = M.vision, now = {}, mine = keptOf(V).map(partKey).concat(V.sha256 ? [wholeKey(V)] : []);
+      mine.forEach(function (k) { now[k.split('?')[0]] = 1; });
+      Promise.all(mine.map(function (k) { return kept(cache, k); })).then(function (hits) {
+        if (!hits.every(Boolean)) return;
+        return cache.keys().then(function (keys) {
+          keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+        });
       }).catch(function () {});
     }
     function readInto(res, buf, at, n) {               // a kept part, straight into its place in the whole
@@ -1447,6 +1457,16 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         });
       }).then(function () { return buf.buffer; });
     }
+    function graphOf(cache, V) {                       // the graph, where the weights are a file of their own: small, so verified each time it is read
+      var g = V.graph;
+      return kept(cache, partKey(g)).then(function (res) {
+        if (!res) { have = ''; throw err('missing', 'a part is no longer kept on this device'); }
+        return res.arrayBuffer().then(function (b) {
+          if (b.byteLength !== g.bytes) throw err('damaged', 'the kept graph is ' + b.byteLength + ' bytes, not ' + g.bytes);
+          return sha256(g.sha256)(b).then(function () { return b; });
+        }).catch(function (e) { have = ''; return unkeep(partKey(g)).then(function () { throw e && e.code ? e : err('damaged', 'the kept graph could not be read'); }); });
+      });
+    }
     function room(need) {                              // is there room to keep it? Where the browser will not say, the download finds out
       try {
         if (navigator.storage && navigator.storage.estimate) return navigator.storage.estimate().then(function (e) {
@@ -1463,11 +1483,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (!fresh && have) return Promise.resolve(have);
       if (!surveyP) surveyP = keepOpen().then(function (cache) {
         return (M ? Promise.resolve() : manifestText(cache).then(adopt)).then(function () {
-          var P = partsOf(M.vision);
+          var P = keptOf(M.vision);
           return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
-            if (have !== 'kept') staleParts(cache);
+            staleParts(cache);
             return have;
           });
         });
@@ -1492,7 +1512,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       }).then(function (cache) {
         if (!cache) throw err('keep', 'this browser gave no store to keep it in');
         store = cache;
-        var P = partsOf(M.vision), i = 0;
+        var P = keptOf(M.vision), i = 0;
         function next() {
           if (i >= P.length) return Promise.resolve();
           var part = P[i++], key = partKey(part);
@@ -1516,11 +1536,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
             });
           }).then(next);
         }
-        return room(Math.max(0, M.vision.bytes - keptBytes)).then(next);
+        return room(Math.max(0, allBytes(M.vision) - keptBytes)).then(next);
       }).then(function () {
-        have = 'kept'; staleParts(store); notify();
+        have = 'kept'; notify();
         return ready();
-      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + M.vision.bytes); notify(); }, function (e) {
+      }).then(function () { getP = null; getCtl = null; staleParts(store); diag('large-kept', M.id + ' ' + allBytes(M.vision)); notify(); }, function (e) {
         getP = null; getCtl = null;
         if (!e || !e.code) e = err('died', e && e.message);
         if (have !== 'kept') have = keptBytes ? 'partial' : 'absent';
@@ -1570,17 +1590,18 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
             M.kinds ? file(c, u(M.kinds.url), nK * M.width * 2) : null,
             M.species ? file(c, u(M.species.url), nS * M.width * 2) : null,
             M.species ? file(c, u(M.species.table), 0) : null,
-            M.species && M.species.bias_url ? file(c, u(M.species.bias_url), nS * 4) : null
+            M.species && M.species.bias_url ? file(c, u(M.species.bias_url), nS * 4) : null,
+            inParts && V.graph ? graphOf(c, V) : null
           ]);
         }).then(function (b) {
           cur = slotOf(M, M.species ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
           total = got;                                 // the downloads are over; what remains is starting the encoder
           notify();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
-            wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
+            wasmBinary: b[0], model: b[6] || b[1], weights: b[6] ? b[1] : null, weightsName: b[6] ? V.weights_name : '', vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS };
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], b[6] ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;
@@ -1723,7 +1744,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     }
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
-      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the larger model.' : 'Getting the larger model: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
+      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the larger model.' : 'Getting the larger model: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(allBytes(M.vision))) + ' MB.';
       if (state === 'loading' && total > got) return 'Getting the recognizer: ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB.';
       return 'Looking at what it is.';
     }
@@ -1744,7 +1765,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },
       has: function () { return getP ? 'getting' : have; },
       broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
-      size: function () { return M ? { bytes: M.vision.bytes || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(M.vision.bytes || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
+      size: function () { return M ? { bytes: allBytes(M.vision) || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(allBytes(M.vision) || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
       offers: [], kindOffers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
       about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl, fitted: M && M.fitted_on && typeof M.fitted_on === 'object' ? M.fitted_on : null,
         have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M && M.vision.bytes || 0, getFail: getFail }; },
