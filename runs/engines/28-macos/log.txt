@@ -1,0 +1,147 @@
+
+=== 06:50:15 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.12.10
+
+=== 06:50:15 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 7 | index.html 171866 bytes | artifact 169288 bytes | selftest.js 44338 bytes
+build ok
+171896 index.html
+44338 selftest.js
+
+=== 06:50:16 threads experiment only (run/engines/mac-thr-a): boot the simulator, Playwright WebKit, safaridriver
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+added 2 packages in 2m
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+safaridriver --enable: exit 0
+Device already booted, nothing to do.
+
+
+=== 06:57:56 threads experiment: three copies of the page, patched
+patching file 'src/cam.rec.js'
+patching file 'vendor/rec-worker.js'
+base: threads patch applied and built
+patching file 'src/sw.template.js'
+rc: sw.js isolation lines: 1
+/tmp/coi/cl/sw.js:const COEP = 'credentialless'
+/tmp/coi/rc/sw.js:const COEP = 'require-corp'
+base index.html carries the threads switch: 1
+
+=== 06:57:57 headers of the other origins a large model or a typeface would come from
+--- https://raw.githubusercontent.com/jampotful/seen-back/main/manifest.webmanifest
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+x-content-type-options: nosniff
+access-control-allow-origin: *
+cross-origin-resource-policy: cross-origin
+--- https://fonts.googleapis.com/css2?family=Instrument+Serif
+HTTP/2 200 
+content-type: text/css; charset=utf-8
+access-control-allow-origin: *
+timing-allow-origin: *
+cross-origin-resource-policy: cross-origin
+cross-origin-opener-policy: same-origin-allow-popups
+x-content-type-options: nosniff
+8791 -> 200
+8792 -> 200
+8793 -> 200
+8794 -> 200
+
+=== 06:57:59 threads experiment: webkit
+06:58:35 webkit-none-t1 {"coi":false,"controlled":true,"reloads":1,"ready":"ready","readyMs":3839,"threads":1,"loadMs":3838,"start":{"vectors":41,"session":1094,"warm":750},"medianRunMs":626,"minRunMs":569,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"
+06:59:01 webkit-none-t4 {"coi":false,"controlled":true,"reloads":1,"ready":"ready","readyMs":3088,"threads":1,"loadMs":3087,"start":{"vectors":47,"session":1029,"warm":747},"medianRunMs":701,"minRunMs":609,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"
+06:59:30 webkit-require-corp-t1 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":3735,"threads":1,"loadMs":3734,"start":{"vectors":48.580000000000005,"session":1133.3,"warm":937.9399999999998},"medianRunMs":762,"minRunMs":632,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","img":"error
+07:00:45 webkit-require-corp-t2 {"coi":true,"controlled":true,"reloads":1,"ready":"failed: slow The recognizer took too long.","readyMs":60169,"threads":0,"loadMs":0,"start":null,"medianRunMs":null,"minRunMs":null,"n":0,"kinds":[],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","img":"error","rawGithub":"ok 200 616 acao=null","worker":"ok, isolated inside: true","webgl":"ok","camera":{"timeout
+07:02:01 webkit-require-corp-t4 {"coi":true,"controlled":true,"reloads":1,"ready":"failed: slow The recognizer took too long.","readyMs":60150,"threads":0,"loadMs":0,"start":null,"medianRunMs":null,"minRunMs":null,"n":0,"kinds":[],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","img":"error","rawGithub":"ok 200 616 acao=null","worker":"ok, isolated inside: true","webgl":"ok","camera":{"timeout
+07:02:27 webkit-credentialless-t1 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":1636,"threads":1,"loadMs":1635,"start":{"vectors":43,"session":765,"warm":658},"medianRunMs":599,"minRunMs":552,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"o
+07:02:54 webkit-credentialless-t2 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":1981,"threads":1,"loadMs":1981,"start":{"vectors":45,"session":979,"warm":734.0000000000002},"medianRunMs":652,"minRunMs":552,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=nul
+07:03:22 webkit-credentialless-t4 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":2341,"threads":1,"loadMs":2339,"start":{"vectors":42,"session":1113,"warm":827.0000000000002},"medianRunMs":604,"minRunMs":556,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=nu
+threads.js webkit: exit 0
+
+=== 07:03:23 threads experiment: safari
+07:03:56 safari-none-t1 {"coi":false,"controlled":true,"reloads":1,"ready":"ready","readyMs":2044,"threads":1,"loadMs":2043,"start":{"vectors":73,"session":793,"warm":854.0000000000002},"medianRunMs":666,"minRunMs":541,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=nul
+07:04:08 safari-none-t4 {"coi":false,"controlled":true,"reloads":0,"ready":"ready","readyMs":2310,"threads":1,"loadMs":2310,"start":{"vectors":50.000000000000014,"session":710,"warm":838},"medianRunMs":639,"minRunMs":576,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=n
+07:04:27 safari-require-corp-t1 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":2515,"threads":1,"loadMs":2514,"start":{"vectors":59.06000000000002,"session":972.3400000000001,"warm":817.1200000000001},"medianRunMs":677,"minRunMs":538,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","i
+07:04:36 safari-require-corp-t2 {"coi":true,"controlled":true,"reloads":0,"ready":"ready","readyMs":2443,"threads":2,"loadMs":2443,"start":{"vectors":52.34,"session":978.02,"warm":566.8600000000001},"medianRunMs":386,"minRunMs":324,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","img":"error","rawGithub"
+07:04:49 safari-require-corp-t4 {"coi":true,"controlled":true,"reloads":0,"ready":"ready","readyMs":2299,"threads":4,"loadMs":2298,"start":{"vectors":58.88000000000002,"session":920.4400000000002,"warm":798.66},"medianRunMs":556,"minRunMs":421,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Load failed","img":"error"
+07:05:12 safari-credentialless-t1 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":2384,"threads":1,"loadMs":2382,"start":{"vectors":76,"session":810,"warm":768},"medianRunMs":662,"minRunMs":575,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"o
+07:05:29 safari-credentialless-t2 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":2151,"threads":1,"loadMs":2151,"start":{"vectors":59,"session":867,"warm":856},"medianRunMs":775,"minRunMs":682,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"o
+07:05:46 safari-credentialless-t4 {"coi":false,"controlled":true,"reloads":3,"ready":"ready","readyMs":2171,"threads":1,"loadMs":2171,"start":{"vectors":52,"session":979,"warm":744},"medianRunMs":656,"minRunMs":560,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900","rawGithub":"ok 200 616 acao=null","worker":"o
+threads.js safari: exit 0
+
+=== 07:05:47 threads experiment: Safari on the iPhone simulator 88931AEA-62E6-447F-8697-DCE00A671384
+sim-none-t1: 57 s, {"name":"sim-none-t1","href":"http://127.0.0.1:8791/index.html?probe=1&name=sim-none-t1&threads=1&want=&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (iPhone; CPU iPhone OS 1
+sim-none-t4: 21 s, {"name":"sim-none-t4","href":"http://127.0.0.1:8791/index.html?probe=1&name=sim-none-t4&threads=4&want=&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (iPhone; CPU iPhone OS 1
+sim-require-corp-t1: 22 s, {"name":"sim-require-corp-t1","href":"http://127.0.0.1:8792/index.html?probe=1&name=sim-require-corp-t1&threads=1&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (iPho
+sim-require-corp-t2: 18 s, {"name":"sim-require-corp-t2","href":"http://127.0.0.1:8792/index.html?probe=1&name=sim-require-corp-t2&threads=2&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (iPho
+sim-require-corp-t4: 29 s, {"name":"sim-require-corp-t4","href":"http://127.0.0.1:8792/index.html?probe=1&name=sim-require-corp-t4&threads=4&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (iPho
+sim-credentialless-t1: 30 s, {"name":"sim-credentialless-t1","href":"http://127.0.0.1:8793/index.html?probe=1&name=sim-credentialless-t1&threads=1&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (
+sim-credentialless-t2: 27 s, {"name":"sim-credentialless-t2","href":"http://127.0.0.1:8793/index.html?probe=1&name=sim-credentialless-t2&threads=2&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (
+sim-credentialless-t4: 25 s, {"name":"sim-credentialless-t4","href":"http://127.0.0.1:8793/index.html?probe=1&name=sim-credentialless-t4&threads=4&want=coi&photos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg&rounds=3&x=http://127.0.0.1:8794&cam=0","ua":"Mozilla/5.0 (
+
+=== 07:10:48 threads experiment: summary
+ci/engines/threads.sh: line 54: 14677 Terminated: 15          node "$ROOT/test/engines/coi_serve.js" "$R" $P0="$T/base" $P1="$T/rc" $P2="$T/cl" $P3="$T/base:cors" > "$R/serve-log.txt" 2>&1
+safari-credentialless-t1           coi=False threads=1    ready=ready                                    readyMs=2384   median run ms=662     min=575     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-credentialless-t2           coi=False threads=1    ready=ready                                    readyMs=2151   median run ms=775     min=682     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-credentialless-t4           coi=False threads=1    ready=ready                                    readyMs=2171   median run ms=656     min=560     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-none-t1                     coi=False threads=1    ready=ready                                    readyMs=2044   median run ms=666     min=541     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-none-t4                     coi=False threads=1    ready=ready                                    readyMs=2310   median run ms=639     min=576     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-require-corp-t1             coi=True  threads=1    ready=ready                                    readyMs=2515   median run ms=677     min=538     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-require-corp-t2             coi=True  threads=2    ready=ready                                    readyMs=2443   median run ms=386     min=324     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+safari-require-corp-t4             coi=True  threads=4    ready=ready                                    readyMs=2299   median run ms=556     min=421     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-credentialless-t1              coi=False threads=1    ready=ready                                    readyMs=4107   median run ms=940     min=878     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-credentialless-t2              coi=False threads=1    ready=ready                                    readyMs=3627   median run ms=897     min=830     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-credentialless-t4              coi=False threads=1    ready=ready                                    readyMs=2889   median run ms=850     min=791     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-none-t1                        coi=False threads=1    ready=ready                                    readyMs=2538   median run ms=838     min=766     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-none-t4                        coi=False threads=1    ready=ready                                    readyMs=3507   median run ms=803     min=752     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-require-corp-t1                coi=True  threads=1    ready=ready                                    readyMs=2730   median run ms=834     min=750     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-require-corp-t2                coi=True  threads=2    ready=ready                                    readyMs=4461   median run ms=568     min=445     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+sim-require-corp-t4                coi=True  threads=4    ready=ready                                    readyMs=7832   median run ms=818     min=758     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "not tried", "opener": "object"} error=None
+webkit-credentialless-t1           coi=False threads=1    ready=ready                                    readyMs=1636   median run ms=599     min=552     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-credentialless-t2           coi=False threads=1    ready=ready                                    readyMs=1981   median run ms=652     min=552     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-credentialless-t4           coi=False threads=1    ready=ready                                    readyMs=2341   median run ms=604     min=556     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-none-t1                     coi=False threads=1    ready=ready                                    readyMs=3839   median run ms=626     min=569     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-none-t4                     coi=False threads=1    ready=ready                                    readyMs=3088   median run ms=701     min=609     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-require-corp-t1             coi=True  threads=1    ready=ready                                    readyMs=3735   median run ms=762     min=632     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-require-corp-t2             coi=True  threads=0    ready=failed: slow The recognizer took too lon readyMs=60169  median run ms=None    min=None    n=0
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+webkit-require-corp-t4             coi=True  threads=0    ready=failed: slow The recognizer took too lon readyMs=60150  median run ms=None    min=None    n=0
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Load failed", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": {"timeout": 8000}, "opener": "object"} error=None
+
+=== 07:10:54 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 8 total bytes: 319416
+416K	/Users/runner/work/seen-back/seen-back/out
