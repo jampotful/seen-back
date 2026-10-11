@@ -25,6 +25,7 @@ node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | g
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
 if [ "$THR_ONLY" = 1 ]; then ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-sw5*) ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/sw5xx.sh; exit 0 ;; esac   # only ci/engines/patches/sw-5xx-kept.patch, proven
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
   sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html

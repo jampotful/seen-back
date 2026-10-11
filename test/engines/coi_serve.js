@@ -3,12 +3,13 @@
 // It sends no isolation headers of its own (the point is to see what the service worker alone can do); ':cors' marks a port that
 // stands in for raw.githubusercontent.com (Access-Control-Allow-Origin: *, no Cross-Origin-Resource-Policy).
 // A request for index.html with probe=1 in its address gets test/engines/coi_probe.js added before </body>.
-// POST /report/<name> writes the body to <report dir>/<name>.json.
+// POST /report/<name> writes the body to <report dir>/<name>.json. GET /__bad?on=1|0 makes the port answer 502 to everything, or stop.
 const http = require('http'), fs = require('fs'), path = require('path');
 const [, , RDIR, ...specs] = process.argv;
 fs.mkdirSync(RDIR, { recursive: true });
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript', '.mjs': 'text/javascript', '.wasm': 'application/wasm', '.json': 'application/json',
   '.onnx': 'application/octet-stream', '.bin': 'application/octet-stream', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json', '.css': 'text/css', '.md': 'text/plain' };
+const bad = {};   // GET /__bad?on=1: every later answer on that port is a 502 until /__bad?on=0
 for (const spec of specs) {
   const [port, rest] = spec.split('='), [root, flag] = rest.split(':'), cors = flag === 'cors';
   http.createServer((req, res) => {
@@ -20,6 +21,8 @@ for (const spec of specs) {
       });
       return;
     }
+    if (u.pathname === '/__bad') { bad[port] = u.searchParams.get('on') === '1'; res.writeHead(200, { 'Access-Control-Allow-Origin': '*' }); res.end(String(bad[port])); return; }
+    if (bad[port]) { res.writeHead(502, { 'Content-Type': 'text/html' }); res.end('<h1>502 Bad Gateway</h1>'); return; }   // as a proxy or a CDN having a bad moment
     if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Allow-Headers': '*' }); res.end(); return; }
     let p = decodeURIComponent(u.pathname); if (p.endsWith('/')) p += 'index.html';
     const file = path.join(root, path.normalize(p).replace(/^(\.\.[\/\\])+/, ''));
