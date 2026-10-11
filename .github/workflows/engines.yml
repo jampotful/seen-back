@@ -1,9 +1,10 @@
 name: engines
-# The picture engine on every browser engine. The page's own self-test (index.html?selftest=1) runs in
-# Chromium, Firefox and WebKit on Linux (one job each), and in WebKit, real Safari and an iPhone simulator on macOS.
-# Start it by pushing a commit to a branch named run/engines/<anything>. Results come back on the `ci`
-# branch under runs/engines/<run number>-linux and -macos: log.txt, summary.json, the self-test reports,
-# and screenshots as small JPEGs.
+# The picture engine and the recognizer inside the page, on every browser engine. Push a commit to run/engines/<label>:
+#  - linux (two jobs: chromium; firefox-webkit): test/rec/check_rec.js on the stand-in and on a real slot, and the page's self-test
+#    (index.html?selftest=1) with its recognizer phase; Firefox headed on Xvfb (headless Firefox has no WebGL on these machines)
+#  - macos: the same in Playwright's WebKit, then the self-test in real Safari (safaridriver) and in Safari on an iPhone simulator
+# Push to run/engines/live (or run/engines/live-<anything>) instead to check only the live address, https://jampotful.github.io/seen-back/.
+# Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
     branches: ['run/engines/**']
@@ -14,32 +15,53 @@ concurrency:
   cancel-in-progress: true
 jobs:
   linux:
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') }}
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, firefox, webkit]
+        part: [chromium, firefox-webkit]
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
-      - name: self-test in ${{ matrix.browser }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: recognizer and self-test in ${{ matrix.part }}
         env:
-          BROWSER: ${{ matrix.browser }}
+          PART: ${{ matrix.part }}
         run: bash ci/engines/linux.sh
       - name: return results
         if: always()
         env:
           JOB_STATUS: ${{ job.status }}
-        run: bash ci/return.sh engines out linux-${{ matrix.browser }}
+        run: bash ci/return.sh engines out linux-${{ matrix.part }}
   macos:
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') }}
     runs-on: macos-latest
-    timeout-minutes: 45
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
-      - name: self-test in WebKit, Safari and an iPhone simulator
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: recognizer and self-test in WebKit, Safari and an iPhone simulator
         run: bash ci/engines/macos.sh
       - name: return results
         if: always()
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out macos
+  live:
+    if: ${{ startsWith(github.ref_name, 'run/engines/live') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: the live address in Chromium and WebKit
+        run: bash ci/engines/live.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out live
