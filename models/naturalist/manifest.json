@@ -446,7 +446,7 @@
   "fusion.rule mix (build 7 of the page)",
   "fusion.kind_at (the build of the page that has the answer `not sure`)"
  ],
- "fusion_thresholds_note": "name_at is the level from which a named species was right at least 98 times in 100 on val, and offer_at the level from which the three offered species held the right one nine times in ten for the photos left without a name (tools/eval/shipped.py through tools/fusion/fuse.py; 2 means never). On the test photos with the original model's vectors: a species named for 84.6% and right for 98.1% of those.",
+ "fusion_thresholds_note": "name_at is the level from which a named species was right at least 98 times in 100 on val, and offer_at the level from which the three offered species held the right one nine times in ten for the photos left without a name (tools/eval/shipped.py through tools/fusion/fuse.py; 2 means never). As shipped, with kind_at 0.5, on the 4,197 test photos with the original model's vectors: a species named for 84.2% (3,533) and right for 98.2% of those (3,469); recomputed independently by tools/audit/recompute.py (docs/eval/audit.md). Without kind_at the figures are 84.6% and 98.1%.",
  "fusion_kind_at_note": "kind_at 0.5 was set for the photos this model is asked about: ones the small model has already called alive. On the wildlife photos its kind of eye is then asserted for 98 photos in 100 and right for 0.990 on val (1,803) and 0.989 on test (4,197), original-model vectors, through tools/fusion/fuse.py (tools/eval/nat_kind_at.py). On photos of people and rooms no level reached 95 in 100, which is why the page never asks this model about a person, and asks it about a photo with nothing alive only when the person says to.",
  "seconds_a_photo": {
   "computer": 5

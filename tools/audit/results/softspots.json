@@ -1,0 +1,1273 @@
+{
+ "dates": {
+  "eval_first": "2025-01-01",
+  "eval_last": "2026-09-29",
+  "train_first": "1910-06-07",
+  "train_last": "2024-12-31",
+  "species_list_records_through": "2024-12-31",
+  "species_list_query": "https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&gadmGid=USA.10.1_1&year=1600,2024&facet=speciesKey (paged with facetOffset); months: the same with month=1..12",
+  "eval_rows_before_2025": 0,
+  "train_rows_after_2024": 0
+ },
+ "overlaps": {
+  "eval_photo_ids_repeated": 0,
+  "eval_obs_urls_repeated": 0,
+  "eval_gbif_ids_repeated": 0,
+  "photo_ids_in_both_train_and_eval": 0,
+  "train_photo_ids_repeated": 0,
+  "train_largest_photo_id": 739931430,
+  "eval_smallest_photo_id": 460955050,
+  "eval_photo_ids_below_train_largest": 5937
+ },
+ "split_counts": {
+  "test": 4197,
+  "val": 1803
+ },
+ "near_copies_test_vs_val": {
+  "bioclip2_cos_gt_0.95": {
+   "test_photos": 1470,
+   "same_species": 1454,
+   "same_species_same_date": 29
+  },
+  "tinyclip39_cos_gt_0.95": {
+   "test_photos": 69,
+   "same_species": 34
+  },
+  "bioclip2_cos_gt_0.98": {
+   "test_photos": 435,
+   "same_species": 434,
+   "same_species_same_date": 10
+  },
+  "tinyclip39_cos_gt_0.98": {
+   "test_photos": 1,
+   "same_species": 1
+  },
+  "bioclip2_cos_gt_0.99": {
+   "test_photos": 53,
+   "same_species": 53,
+   "same_species_same_date": 3
+  },
+  "tinyclip39_cos_gt_0.99": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "bioclip2_cos_gt_0.995": {
+   "test_photos": 1,
+   "same_species": 1,
+   "same_species_same_date": 0
+  },
+  "tinyclip39_cos_gt_0.995": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "bioclip2_cos_gt_0.999": {
+   "test_photos": 0,
+   "same_species": 0,
+   "same_species_same_date": 0
+  },
+  "tinyclip39_cos_gt_0.999": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "same_species_same_date_on_val": 221
+ },
+ "near_copies_test_vs_train": {
+  "training_rows_with_vectors": 84808,
+  "tinyclip39_cos_gt_0.98": {
+   "test_photos": 11,
+   "same_species": 6
+  },
+  "tinyclip39_cos_gt_0.99": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "tinyclip39_cos_gt_0.995": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "tinyclip39_cos_gt_0.999": {
+   "test_photos": 0,
+   "same_species": 0
+  },
+  "closest_pairs": [
+   {
+    "test": "e001321",
+    "test_obs": "https://www.inaturalist.org/observations/282510229",
+    "test_date": "2025-05-15",
+    "train": "t058438",
+    "train_obs": "https://www.inaturalist.org/observations/bb148739-c4ab-4833-8f47-b02e3edef5b3",
+    "train_date": "2017-08-22",
+    "cos": 0.9869,
+    "same_species": true
+   },
+   {
+    "test": "e003659",
+    "test_obs": "https://www.inaturalist.org/observations/342687436",
+    "test_date": "2026-01-24",
+    "train": "t066264",
+    "train_obs": "https://www.inaturalist.org/observations/56a82702-2cf1-4274-9a1d-84f8e4a98e93",
+    "train_date": "2017-03-19",
+    "cos": 0.9845,
+    "same_species": true
+   },
+   {
+    "test": "e004453",
+    "test_obs": "https://www.inaturalist.org/observations/354832603",
+    "test_date": "2026-04-17",
+    "train": "t051181",
+    "train_obs": "https://www.inaturalist.org/observations/ac457418-6716-41cf-88da-1952118c27bb",
+    "train_date": "2023-05-08",
+    "cos": 0.9838,
+    "same_species": true
+   },
+   {
+    "test": "e000157",
+    "test_obs": "https://www.inaturalist.org/observations/260769059",
+    "test_date": "2025-02-04",
+    "train": "t001487",
+    "train_obs": "https://www.inaturalist.org/observations/00bf61e6-9dc0-477f-84e7-8ae924cc45c1",
+    "train_date": "2022-02-24",
+    "cos": 0.9824,
+    "same_species": false
+   },
+   {
+    "test": "e003504",
+    "test_obs": "https://www.inaturalist.org/observations/332968574",
+    "test_date": "2025-12-26",
+    "train": "t051565",
+    "train_obs": "https://www.inaturalist.org/observations/35a63c32-00ec-42e0-92ef-b2e5c7c43803",
+    "train_date": "2020-08-23",
+    "cos": 0.9817,
+    "same_species": false
+   },
+   {
+    "test": "e005547",
+    "test_obs": "https://www.inaturalist.org/observations/401062265",
+    "test_date": "2026-08-10",
+    "train": "t015617",
+    "train_obs": "https://www.inaturalist.org/observations/2cbbcbda-f4f3-4dba-bd22-f4a0339767b0",
+    "train_date": "2022-07-18",
+    "cos": 0.9812,
+    "same_species": true
+   },
+   {
+    "test": "e000193",
+    "test_obs": "https://www.inaturalist.org/observations/261192479",
+    "test_date": "2025-02-09",
+    "train": "t076050",
+    "train_obs": "https://www.inaturalist.org/observations/cda378fa-b1f0-4ab3-9a81-54e953626724",
+    "train_date": "2024-01-27",
+    "cos": 0.9811,
+    "same_species": false
+   },
+   {
+    "test": "e002013",
+    "test_obs": "https://www.inaturalist.org/observations/397330156",
+    "test_date": "2025-08-01",
+    "train": "t052302",
+    "train_obs": "https://www.inaturalist.org/observations/0ebe147a-1407-4e9e-bed4-6fe0a7e07245",
+    "train_date": "2024-10-04",
+    "cos": 0.9806,
+    "same_species": true
+   },
+   {
+    "test": "e004260",
+    "test_obs": "https://www.inaturalist.org/observations/346581879",
+    "test_date": "2026-04-01",
+    "train": "t083394",
+    "train_obs": "https://www.inaturalist.org/observations/2b1ccb7f-c04a-4ceb-8926-bcca57d21d7b",
+    "train_date": "2023-03-25",
+    "cos": 0.9805,
+    "same_species": false
+   },
+   {
+    "test": "e005996",
+    "test_obs": "https://www.inaturalist.org/observations/404253517",
+    "test_date": "2026-09-28",
+    "train": "t075864",
+    "train_obs": "https://www.inaturalist.org/observations/9aa2a685-cc35-494e-b1a7-3a957ba24c28",
+    "train_date": "2024-11-12",
+    "cos": 0.9801,
+    "same_species": false
+   },
+   {
+    "test": "e003759",
+    "test_obs": "https://www.inaturalist.org/observations/338605035",
+    "test_date": "2026-02-14",
+    "train": "t006218",
+    "train_obs": "https://www.inaturalist.org/observations/5f78e995-91cf-41c0-9f18-9d4886788a39",
+    "train_date": "2022-02-13",
+    "cos": 0.98,
+    "same_species": true
+   },
+   {
+    "test": "e001338",
+    "test_obs": "https://www.inaturalist.org/observations/282450298",
+    "test_date": "2025-05-18",
+    "train": "t040521",
+    "train_obs": "https://www.inaturalist.org/observations/d7e9e58d-a8dc-41d3-82a6-3d5e7f36d59d",
+    "train_date": "2021-03-28",
+    "cos": 0.9793,
+    "same_species": true
+   }
+  ]
+ },
+ "slots": {
+  "naturalist": {
+   "all": {
+    "kind_right": [
+     4114,
+     4197,
+     98.0
+    ],
+    "kind_asserted": [
+     4116,
+     4197,
+     98.1
+    ],
+    "kind_right_when_asserted": [
+     4069,
+     4116,
+     98.9
+    ],
+    "top_species_right": [
+     3880,
+     4197,
+     92.4
+    ],
+    "named": [
+     3533,
+     4197,
+     84.2
+    ],
+    "named_right": [
+     3469,
+     3533,
+     98.2
+    ],
+    "named_if_kind_at_ignored": [
+     3549,
+     4197,
+     84.6
+    ],
+    "named_right_if_kind_at_ignored": [
+     3481,
+     3549,
+     98.1
+    ]
+   },
+   "without_val_twins": {
+    "photos": 3975,
+    "kind_right": [
+     3898,
+     3975,
+     98.1
+    ],
+    "top_species_right": [
+     3672,
+     3975,
+     92.4
+    ],
+    "named": [
+     3337,
+     3975,
+     83.9
+    ],
+    "named_right": [
+     3275,
+     3337,
+     98.1
+    ]
+   },
+   "without_train_near_copies_tinyclip_0.995": {
+    "photos": 4197,
+    "kind_right": [
+     4114,
+     4197,
+     98.0
+    ],
+    "top_species_right": [
+     3880,
+     4197,
+     92.4
+    ],
+    "named": [
+     3533,
+     4197,
+     84.2
+    ],
+    "named_right": [
+     3469,
+     3533,
+     98.2
+    ]
+   },
+   "by_kind": {
+    "plant": {
+     "photos": 1223,
+     "kind_right": 99.1,
+     "kind_asserted": 99.2,
+     "kind_right_when_asserted": 99.2,
+     "top_species_right": 94.3,
+     "named": 84.2,
+     "named_right": 98.7,
+     "named_n": 1030
+    },
+    "insect": {
+     "photos": 962,
+     "kind_right": 98.6,
+     "kind_asserted": 99.5,
+     "kind_right_when_asserted": 99.0,
+     "top_species_right": 89.3,
+     "named": 82.1,
+     "named_right": 96.5,
+     "named_n": 790
+    },
+    "bird": {
+     "photos": 531,
+     "kind_right": 96.0,
+     "kind_asserted": 96.4,
+     "kind_right_when_asserted": 98.6,
+     "top_species_right": 91.5,
+     "named": 85.9,
+     "named_right": 98.7,
+     "named_n": 456
+    },
+    "wader": {
+     "photos": 382,
+     "kind_right": 99.0,
+     "kind_asserted": 99.2,
+     "kind_right_when_asserted": 99.5,
+     "top_species_right": 97.1,
+     "named": 91.9,
+     "named_right": 99.4,
+     "named_n": 351
+    },
+    "other": {
+     "photos": 296,
+     "kind_right": 96.3,
+     "kind_asserted": 97.3,
+     "kind_right_when_asserted": 97.9,
+     "top_species_right": 88.9,
+     "named": 79.7,
+     "named_right": 98.7,
+     "named_n": 236
+    },
+    "reptile": {
+     "photos": 268,
+     "kind_right": 97.8,
+     "kind_asserted": 97.8,
+     "kind_right_when_asserted": 98.5,
+     "top_species_right": 93.3,
+     "named": 86.2,
+     "named_right": 98.3,
+     "named_n": 231
+    },
+    "bee": {
+     "photos": 126,
+     "kind_right": 97.6,
+     "kind_asserted": 96.0,
+     "kind_right_when_asserted": 98.3,
+     "top_species_right": 89.7,
+     "named": 74.6,
+     "named_right": 96.8,
+     "named_n": 94
+    },
+    "alligator": {
+     "photos": 110,
+     "kind_right": 97.3,
+     "kind_asserted": 96.4,
+     "kind_right_when_asserted": 98.1,
+     "top_species_right": 97.3,
+     "named": 93.6,
+     "named_right": 100.0,
+     "named_n": 103
+    },
+    "frog": {
+     "photos": 97,
+     "kind_right": 97.9,
+     "kind_asserted": 99.0,
+     "kind_right_when_asserted": 99.0,
+     "top_species_right": 90.7,
+     "named": 79.4,
+     "named_right": 93.5,
+     "named_n": 77
+    },
+    "hawk": {
+     "photos": 82,
+     "kind_right": 96.3,
+     "kind_asserted": 92.7,
+     "kind_right_when_asserted": 97.4,
+     "top_species_right": 91.5,
+     "named": 79.3,
+     "named_right": 100.0,
+     "named_n": 65
+    },
+    "squirrel": {
+     "photos": 36,
+     "kind_right": 94.4,
+     "kind_asserted": 88.9,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 97.2,
+     "named": 83.3,
+     "named_right": 100.0,
+     "named_n": 30
+    },
+    "deer": {
+     "photos": 36,
+     "kind_right": 94.4,
+     "kind_asserted": 83.3,
+     "kind_right_when_asserted": 96.7,
+     "top_species_right": 97.2,
+     "named": 75.0,
+     "named_right": 100.0,
+     "named_n": 27
+    },
+    "rabbit": {
+     "photos": 31,
+     "kind_right": 100.0,
+     "kind_asserted": 100.0,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 100.0,
+     "named": 100.0,
+     "named_right": 100.0,
+     "named_n": 31
+    },
+    "cat": {
+     "photos": 11,
+     "kind_right": 90.9,
+     "kind_asserted": 72.7,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 81.8,
+     "named": 72.7,
+     "named_right": 100.0,
+     "named_n": 8
+    },
+    "dog": {
+     "photos": 6,
+     "kind_right": 83.3,
+     "kind_asserted": 83.3,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 83.3,
+     "named": 66.7,
+     "named_right": 100.0,
+     "named_n": 4
+    }
+   },
+   "by_records": {
+    "0-0": {
+     "photos": 36,
+     "top_species_right": 0.0,
+     "named": 16.7,
+     "named_right": 0.0,
+     "named_n": 6
+    },
+    "1-2": {
+     "photos": 58,
+     "top_species_right": 70.7,
+     "named": 41.4,
+     "named_right": 87.5,
+     "named_n": 24
+    },
+    "3-9": {
+     "photos": 138,
+     "top_species_right": 75.4,
+     "named": 52.9,
+     "named_right": 87.7,
+     "named_n": 73
+    },
+    "10-49": {
+     "photos": 468,
+     "top_species_right": 88.0,
+     "named": 71.8,
+     "named_right": 96.4,
+     "named_n": 336
+    },
+    "50-199": {
+     "photos": 1195,
+     "top_species_right": 93.8,
+     "named": 84.9,
+     "named_right": 98.0,
+     "named_n": 1015
+    },
+    "200-more": {
+     "photos": 2302,
+     "top_species_right": 95.7,
+     "named": 90.3,
+     "named_right": 99.3,
+     "named_n": 2079
+    }
+   },
+   "intervals": {
+    "kind_right": {
+     "photos": [
+      98.0,
+      97.6,
+      98.4,
+      4197
+     ],
+     "species_day": [
+      98.0,
+      97.6,
+      98.5,
+      3949
+     ],
+     "day": [
+      98.0,
+      97.5,
+      98.5,
+      626
+     ]
+    },
+    "named_right": {
+     "photos": [
+      98.2,
+      97.8,
+      98.6,
+      3533
+     ],
+     "species_day": [
+      98.2,
+      97.7,
+      98.6,
+      3322
+     ],
+     "day": [
+      98.2,
+      97.7,
+      98.6,
+      615
+     ]
+    }
+   },
+   "heads_disagree": {
+    "photos": [
+     998,
+     4197,
+     23.8
+    ],
+    "kind_right_when_disagree": [
+     944,
+     998,
+     94.6
+    ],
+    "winner_is_kinds_head": [
+     54,
+     998,
+     5.4
+    ],
+    "not_sure_when_disagree": [
+     76,
+     998,
+     7.6
+    ],
+    "kind_right_if_species_list_alone_when_disagree": [
+     957,
+     998,
+     95.9
+    ]
+   }
+  },
+  "pocket_live": {
+   "all": {
+    "kind_right": [
+     3663,
+     4197,
+     87.3
+    ],
+    "kind_asserted": [
+     3307,
+     4197,
+     78.8
+    ],
+    "kind_right_when_asserted": [
+     3157,
+     3307,
+     95.5
+    ],
+    "top_species_right": [
+     1525,
+     4197,
+     36.3
+    ],
+    "named": [
+     557,
+     4197,
+     13.3
+    ],
+    "named_right": [
+     514,
+     557,
+     92.3
+    ],
+    "named_if_kind_at_ignored": [
+     596,
+     4197,
+     14.2
+    ],
+    "named_right_if_kind_at_ignored": [
+     548,
+     596,
+     91.9
+    ]
+   },
+   "without_val_twins": {
+    "photos": 3975,
+    "kind_right": [
+     3453,
+     3975,
+     86.9
+    ],
+    "top_species_right": [
+     1385,
+     3975,
+     34.8
+    ],
+    "named": [
+     484,
+     3975,
+     12.2
+    ],
+    "named_right": [
+     444,
+     484,
+     91.7
+    ]
+   },
+   "without_train_near_copies_tinyclip_0.995": {
+    "photos": 4197,
+    "kind_right": [
+     3663,
+     4197,
+     87.3
+    ],
+    "top_species_right": [
+     1525,
+     4197,
+     36.3
+    ],
+    "named": [
+     557,
+     4197,
+     13.3
+    ],
+    "named_right": [
+     514,
+     557,
+     92.3
+    ]
+   },
+   "by_kind": {
+    "plant": {
+     "photos": 1223,
+     "kind_right": 98.3,
+     "kind_asserted": 93.4,
+     "kind_right_when_asserted": 99.5,
+     "top_species_right": 29.1,
+     "named": 6.1,
+     "named_right": 88.0,
+     "named_n": 75
+    },
+    "insect": {
+     "photos": 962,
+     "kind_right": 88.4,
+     "kind_asserted": 78.2,
+     "kind_right_when_asserted": 95.1,
+     "top_species_right": 19.3,
+     "named": 4.8,
+     "named_right": 78.3,
+     "named_n": 46
+    },
+    "bird": {
+     "photos": 531,
+     "kind_right": 84.9,
+     "kind_asserted": 71.8,
+     "kind_right_when_asserted": 96.6,
+     "top_species_right": 47.8,
+     "named": 22.0,
+     "named_right": 90.6,
+     "named_n": 117
+    },
+    "wader": {
+     "photos": 382,
+     "kind_right": 85.6,
+     "kind_asserted": 84.0,
+     "kind_right_when_asserted": 93.5,
+     "top_species_right": 64.1,
+     "named": 33.5,
+     "named_right": 96.9,
+     "named_n": 128
+    },
+    "other": {
+     "photos": 296,
+     "kind_right": 72.0,
+     "kind_asserted": 57.4,
+     "kind_right_when_asserted": 85.3,
+     "top_species_right": 24.0,
+     "named": 1.0,
+     "named_right": 33.3,
+     "named_n": 3
+    },
+    "reptile": {
+     "photos": 268,
+     "kind_right": 83.6,
+     "kind_asserted": 68.7,
+     "kind_right_when_asserted": 93.5,
+     "top_species_right": 48.1,
+     "named": 13.1,
+     "named_right": 85.7,
+     "named_n": 35
+    },
+    "bee": {
+     "photos": 126,
+     "kind_right": 60.3,
+     "kind_asserted": 69.0,
+     "kind_right_when_asserted": 72.4,
+     "top_species_right": 24.6,
+     "named": 1.6,
+     "named_right": 100.0,
+     "named_n": 2
+    },
+    "alligator": {
+     "photos": 110,
+     "kind_right": 81.8,
+     "kind_asserted": 77.3,
+     "kind_right_when_asserted": 96.5,
+     "top_species_right": 79.1,
+     "named": 65.5,
+     "named_right": 98.6,
+     "named_n": 72
+    },
+    "frog": {
+     "photos": 97,
+     "kind_right": 80.4,
+     "kind_asserted": 68.0,
+     "kind_right_when_asserted": 97.0,
+     "top_species_right": 32.0,
+     "named": 3.1,
+     "named_right": 100.0,
+     "named_n": 3
+    },
+    "hawk": {
+     "photos": 82,
+     "kind_right": 74.4,
+     "kind_asserted": 68.3,
+     "kind_right_when_asserted": 92.9,
+     "top_species_right": 62.2,
+     "named": 32.9,
+     "named_right": 96.3,
+     "named_n": 27
+    },
+    "squirrel": {
+     "photos": 36,
+     "kind_right": 80.6,
+     "kind_asserted": 52.8,
+     "kind_right_when_asserted": 94.7,
+     "top_species_right": 69.4,
+     "named": 50.0,
+     "named_right": 100.0,
+     "named_n": 18
+    },
+    "deer": {
+     "photos": 36,
+     "kind_right": 69.4,
+     "kind_asserted": 58.3,
+     "kind_right_when_asserted": 95.2,
+     "top_species_right": 66.7,
+     "named": 50.0,
+     "named_right": 100.0,
+     "named_n": 18
+    },
+    "rabbit": {
+     "photos": 31,
+     "kind_right": 87.1,
+     "kind_asserted": 51.6,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 87.1,
+     "named": 32.3,
+     "named_right": 100.0,
+     "named_n": 10
+    },
+    "cat": {
+     "photos": 11,
+     "kind_right": 63.6,
+     "kind_asserted": 63.6,
+     "kind_right_when_asserted": 85.7,
+     "top_species_right": 54.5,
+     "named": 27.3,
+     "named_right": 100.0,
+     "named_n": 3
+    },
+    "dog": {
+     "photos": 6,
+     "kind_right": 50.0,
+     "kind_asserted": 0.0,
+     "kind_right_when_asserted": null,
+     "top_species_right": 33.3,
+     "named": 0.0,
+     "named_right": null,
+     "named_n": 0
+    }
+   },
+   "by_records": {
+    "0-0": {
+     "photos": 36,
+     "top_species_right": 0.0,
+     "named": 2.8,
+     "named_right": 0.0,
+     "named_n": 1
+    },
+    "1-2": {
+     "photos": 58,
+     "top_species_right": 1.7,
+     "named": 1.7,
+     "named_right": 0.0,
+     "named_n": 1
+    },
+    "3-9": {
+     "photos": 138,
+     "top_species_right": 0.0,
+     "named": 0.7,
+     "named_right": 0.0,
+     "named_n": 1
+    },
+    "10-49": {
+     "photos": 468,
+     "top_species_right": 6.8,
+     "named": 3.0,
+     "named_right": 35.7,
+     "named_n": 14
+    },
+    "50-199": {
+     "photos": 1195,
+     "top_species_right": 20.3,
+     "named": 3.8,
+     "named_right": 65.2,
+     "named_n": 46
+    },
+    "200-more": {
+     "photos": 2302,
+     "top_species_right": 54.3,
+     "named": 21.5,
+     "named_right": 97.0,
+     "named_n": 494
+    }
+   },
+   "intervals": {
+    "kind_right": {
+     "photos": [
+      87.3,
+      86.3,
+      88.3,
+      4197
+     ],
+     "species_day": [
+      87.3,
+      86.3,
+      88.3,
+      3949
+     ],
+     "day": [
+      87.3,
+      86.2,
+      88.3,
+      626
+     ]
+    },
+    "named_right": {
+     "photos": [
+      92.3,
+      89.9,
+      94.4,
+      557
+     ],
+     "species_day": [
+      92.3,
+      90.0,
+      94.5,
+      514
+     ],
+     "day": [
+      92.3,
+      89.8,
+      94.4,
+      319
+     ]
+    }
+   }
+  },
+  "pocket_run25_trained_39m": {
+   "all": {
+    "kind_right": [
+     3715,
+     4197,
+     88.5
+    ],
+    "kind_asserted": [
+     3558,
+     4197,
+     84.8
+    ],
+    "kind_right_when_asserted": [
+     3380,
+     3558,
+     95.0
+    ],
+    "top_species_right": [
+     2240,
+     4197,
+     53.4
+    ],
+    "named": [
+     968,
+     4197,
+     23.1
+    ],
+    "named_right": [
+     875,
+     968,
+     90.4
+    ],
+    "named_if_kind_at_ignored": [
+     1044,
+     4197,
+     24.9
+    ],
+    "named_right_if_kind_at_ignored": [
+     921,
+     1044,
+     88.2
+    ]
+   },
+   "without_val_twins": {
+    "photos": 3975,
+    "kind_right": [
+     3520,
+     3975,
+     88.6
+    ],
+    "top_species_right": [
+     2102,
+     3975,
+     52.9
+    ],
+    "named": [
+     887,
+     3975,
+     22.3
+    ],
+    "named_right": [
+     798,
+     887,
+     90.0
+    ]
+   },
+   "without_train_near_copies_tinyclip_0.995": {
+    "photos": 4197,
+    "kind_right": [
+     3715,
+     4197,
+     88.5
+    ],
+    "top_species_right": [
+     2240,
+     4197,
+     53.4
+    ],
+    "named": [
+     968,
+     4197,
+     23.1
+    ],
+    "named_right": [
+     875,
+     968,
+     90.4
+    ]
+   },
+   "by_kind": {
+    "plant": {
+     "photos": 1223,
+     "kind_right": 98.0,
+     "kind_asserted": 95.3,
+     "kind_right_when_asserted": 99.5,
+     "top_species_right": 55.1,
+     "named": 20.4,
+     "named_right": 93.2,
+     "named_n": 250
+    },
+    "insect": {
+     "photos": 962,
+     "kind_right": 94.4,
+     "kind_asserted": 89.0,
+     "kind_right_when_asserted": 96.8,
+     "top_species_right": 46.7,
+     "named": 10.9,
+     "named_right": 88.6,
+     "named_n": 105
+    },
+    "bird": {
+     "photos": 531,
+     "kind_right": 86.8,
+     "kind_asserted": 78.9,
+     "kind_right_when_asserted": 94.3,
+     "top_species_right": 51.2,
+     "named": 31.3,
+     "named_right": 84.9,
+     "named_n": 166
+    },
+    "wader": {
+     "photos": 382,
+     "kind_right": 84.8,
+     "kind_asserted": 87.4,
+     "kind_right_when_asserted": 91.6,
+     "top_species_right": 65.4,
+     "named": 48.2,
+     "named_right": 91.3,
+     "named_n": 184
+    },
+    "other": {
+     "photos": 296,
+     "kind_right": 73.3,
+     "kind_asserted": 72.6,
+     "kind_right_when_asserted": 83.7,
+     "top_species_right": 43.6,
+     "named": 18.2,
+     "named_right": 87.0,
+     "named_n": 54
+    },
+    "reptile": {
+     "photos": 268,
+     "kind_right": 73.9,
+     "kind_asserted": 66.4,
+     "kind_right_when_asserted": 93.3,
+     "top_species_right": 57.8,
+     "named": 7.1,
+     "named_right": 84.2,
+     "named_n": 19
+    },
+    "bee": {
+     "photos": 126,
+     "kind_right": 71.4,
+     "kind_asserted": 84.1,
+     "kind_right_when_asserted": 77.4,
+     "top_species_right": 42.9,
+     "named": 13.5,
+     "named_right": 76.5,
+     "named_n": 17
+    },
+    "alligator": {
+     "photos": 110,
+     "kind_right": 74.5,
+     "kind_asserted": 61.8,
+     "kind_right_when_asserted": 89.7,
+     "top_species_right": 76.4,
+     "named": 56.4,
+     "named_right": 98.4,
+     "named_n": 62
+    },
+    "frog": {
+     "photos": 97,
+     "kind_right": 78.4,
+     "kind_asserted": 69.1,
+     "kind_right_when_asserted": 91.0,
+     "top_species_right": 40.2,
+     "named": 2.1,
+     "named_right": 100.0,
+     "named_n": 2
+    },
+    "hawk": {
+     "photos": 82,
+     "kind_right": 80.5,
+     "kind_asserted": 78.0,
+     "kind_right_when_asserted": 90.6,
+     "top_species_right": 52.4,
+     "named": 45.1,
+     "named_right": 83.8,
+     "named_n": 37
+    },
+    "squirrel": {
+     "photos": 36,
+     "kind_right": 86.1,
+     "kind_asserted": 75.0,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 88.9,
+     "named": 66.7,
+     "named_right": 100.0,
+     "named_n": 24
+    },
+    "deer": {
+     "photos": 36,
+     "kind_right": 75.0,
+     "kind_asserted": 72.2,
+     "kind_right_when_asserted": 92.3,
+     "top_species_right": 66.7,
+     "named": 66.7,
+     "named_right": 95.8,
+     "named_n": 24
+    },
+    "rabbit": {
+     "photos": 31,
+     "kind_right": 77.4,
+     "kind_asserted": 74.2,
+     "kind_right_when_asserted": 95.7,
+     "top_species_right": 77.4,
+     "named": 45.2,
+     "named_right": 92.9,
+     "named_n": 14
+    },
+    "cat": {
+     "photos": 11,
+     "kind_right": 63.6,
+     "kind_asserted": 54.5,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 54.5,
+     "named": 54.5,
+     "named_right": 100.0,
+     "named_n": 6
+    },
+    "dog": {
+     "photos": 6,
+     "kind_right": 83.3,
+     "kind_asserted": 66.7,
+     "kind_right_when_asserted": 100.0,
+     "top_species_right": 83.3,
+     "named": 66.7,
+     "named_right": 100.0,
+     "named_n": 4
+    }
+   },
+   "by_records": {
+    "0-0": {
+     "photos": 36,
+     "top_species_right": 0.0,
+     "named": 5.6,
+     "named_right": 0.0,
+     "named_n": 2
+    },
+    "1-2": {
+     "photos": 58,
+     "top_species_right": 0.0,
+     "named": 1.7,
+     "named_right": 0.0,
+     "named_n": 1
+    },
+    "3-9": {
+     "photos": 138,
+     "top_species_right": 13.0,
+     "named": 7.2,
+     "named_right": 60.0,
+     "named_n": 10
+    },
+    "10-49": {
+     "photos": 468,
+     "top_species_right": 38.2,
+     "named": 14.1,
+     "named_right": 78.8,
+     "named_n": 66
+    },
+    "50-199": {
+     "photos": 1195,
+     "top_species_right": 53.3,
+     "named": 16.2,
+     "named_right": 89.7,
+     "named_n": 194
+    },
+    "200-more": {
+     "photos": 2302,
+     "top_species_right": 61.1,
+     "named": 30.2,
+     "named_right": 92.5,
+     "named_n": 695
+    }
+   },
+   "intervals": {
+    "kind_right": {
+     "photos": [
+      88.5,
+      87.5,
+      89.6,
+      4197
+     ],
+     "species_day": [
+      88.5,
+      87.5,
+      89.5,
+      3949
+     ],
+     "day": [
+      88.5,
+      87.5,
+      89.5,
+      626
+     ]
+    },
+    "named_right": {
+     "photos": [
+      90.4,
+      88.4,
+      92.3,
+      968
+     ],
+     "species_day": [
+      90.4,
+      88.5,
+      92.2,
+      923
+     ],
+     "day": [
+      90.4,
+      88.4,
+      92.3,
+      437
+     ]
+    }
+   }
+  }
+ },
+ "pets_and_garden": {
+  "Felis catus": 190,
+  "Canis familiaris": null,
+  "Canis lupus": null,
+  "Equus caballus": 236,
+  "Bos taurus": null,
+  "Ovis aries": null,
+  "Capra hircus": null,
+  "Gallus gallus": 14,
+  "Monstera deliciosa": null,
+  "Epipremnum aureum": 19,
+  "Dracaena trifasciata": null,
+  "Sansevieria trifasciata": null,
+  "Ficus lyrata": null,
+  "Ficus elastica": null,
+  "Chlorophytum comosum": null,
+  "Spathiphyllum wallisii": null,
+  "Zamioculcas zamiifolia": null,
+  "Phalaenopsis aphrodite": null,
+  "Aloe vera": null,
+  "Hydrangea macrophylla": null,
+  "Rosa chinensis": null,
+  "Camellia japonica": null,
+  "Gardenia jasminoides": null,
+  "Hibiscus rosa-sinensis": null,
+  "Lantana camara": 25,
+  "Tagetes erecta": null,
+  "Zinnia elegans": null,
+  "Petunia atkinsiana": null,
+  "Pelargonium hortorum": null,
+  "Rhododendron indicum": null,
+  "Nandina domestica": 115,
+  "Ligustrum sinense": 19,
+  "Lagerstroemia indica": 2,
+  "Plumbago auriculata": 75,
+  "Catharanthus roseus": 57
+ },
+ "list_species_by_kingdom": {
+  "Animalia": 3684,
+  "Plantae": 1609,
+  "Fungi": 599,
+  "Protozoa": 16,
+  "Bacteria": 2,
+  "incertae sedis": 1
+ }
+}
