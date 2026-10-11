@@ -1,0 +1,305 @@
+
+=== 07:11:22 response headers, as a browser that accepts gzip and br would get them
+--- https://jampotful.github.io/seen-back/
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-29f78"
+expires: Sun, 11 Oct 2026 07:21:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 54952
+bytes on the wire: 54952
+--- https://jampotful.github.io/seen-back/index.html
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-29f78"
+expires: Sun, 11 Oct 2026 07:21:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 54952
+bytes on the wire: 54952
+--- https://jampotful.github.io/seen-back/sw.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-f6f"
+expires: Sun, 11 Oct 2026 07:21:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1583
+bytes on the wire: 1583
+--- https://jampotful.github.io/seen-back/manifest.webmanifest
+HTTP/2 200 
+content-type: application/manifest+json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-268"
+expires: Sun, 11 Oct 2026 07:21:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 281
+bytes on the wire: 281
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm
+HTTP/2 200 
+content-type: application/wasm
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-d94899"
+expires: Sun, 11 Oct 2026 07:21:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 3722335
+bytes on the wire: 3722335
+--- https://jampotful.github.io/seen-back/vendor/ort/ort.wasm.min.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-c414"
+expires: Sun, 11 Oct 2026 07:21:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 16193
+bytes on the wire: 16193
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-5f3d"
+expires: Sun, 11 Oct 2026 07:21:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 9095
+bytes on the wire: 9095
+--- https://jampotful.github.io/seen-back/vendor/rec-worker.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-270b"
+expires: Sun, 11 Oct 2026 07:21:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 4000
+bytes on the wire: 4000
+--- https://jampotful.github.io/seen-back/models/pocket/manifest.json
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-8b3"
+expires: Sun, 11 Oct 2026 07:21:24 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1123
+bytes on the wire: 1123
+--- the model named by the manifest: https://jampotful.github.io/seen-back/models/pocket/vision.int8-per-channel.onnx
+HTTP/2 200 
+content-type: application/octet-stream
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-27146d9"
+expires: Sun, 11 Oct 2026 07:21:24 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 1
+via: 1.1 varnish
+x-cache: MISS
+x-cache-hits: 0
+content-length: 35342999
+bytes on the wire: 35342999, in 1.918989 s
+--- the same, asked for without compression
+HTTP/2 200 
+content-length: 40978137
+bytes on the wire: 40978137, in 1.161581 s
+--- the same, asked for a byte range (does a resumed download work?)
+HTTP/2 206 
+content-range: bytes 0-1023/40978137
+content-length: 1024
+bytes on the wire: 1024
+--- https://jampotful.github.io/seen-back/models/pocket/species.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 5605950
+bytes on the wire: 5605950
+--- https://jampotful.github.io/seen-back/models/pocket/kinds.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 16231
+bytes on the wire: 16231
+--- https://jampotful.github.io/seen-back/models/pocket/species.json
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 185337
+bytes on the wire: 185337
+
+=== 07:11:28 playwright 1.56.0, Chromium, Firefox and WebKit
+added 2 packages in 2s
+install chromium (try 1): exit 0
+install webkit (try 1): exit 0
+install firefox (try 1): exit 0
+
+=== 07:12:16 the page in Chromium, Firefox and WebKit
+07:15:27 chromium 141.0.7390.37 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js chromium: exit 0
+07:16:05 webkit 26.0 status 200 sw true second controlled true offline [[502,true,null,null,null],[502,true,null,null,null],[502,true,null,null,null]] slot present ready
+live.js webkit: exit 0
+07:16:43 firefox 142.0.1 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js firefox: exit 0
+{
+ "chromium": {
+  "version": "141.0.7390.37",
+  "status": 200,
+  "build": "Seen Back, build 7.",
+  "sw_registered": true,
+  "sw_active": true,
+  "controlled_first": true,
+  "controlled_second": true,
+  "crossOriginIsolated": false,
+  "offline": {
+   "console": [],
+   "status": 200,
+   "fromServiceWorker": true,
+   "online": true,
+   "controlled": true,
+   "screen": "intro",
+   "build": "Seen Back, build 7.",
+   "rec": "ready",
+   "recognized": {
+    "ready": "ready",
+    "readyMs": 0,
+    "about": {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "model": "tinyclip-39m-16",
+     "rule": "product",
+     "trained": false,
+     "backend": "wasm",
+     "threads": 1,
+     "loadMs": 1639,
+     "start": {
+      "vectors": 63.40000000002328,
+      "session": 819.8999999999942,
+      "warm": 669.8999999999942
+     },
+     "last": null,
+     "got": 0,
+     "total": 0,
+     "slot": "models/pocket/manifest.json"
+    },
+    "photo": {
+     "kind": "wader",
+     "p": 0.824,
+     "species1": [
+      "Egretta caerulea",
+      0.101
+     ],
+     "ms": {
+      "load": 0,
+      "pre": 69,
+      "run": 563,
+      "post": 25
+     },
+     "wall": 10872
+    }
+   },
+   "kept": {
+    "keep-v1": [
+     "/seen-back/models/pocket/kinds.f16.bin?v=f1c760d32da8e737",
+     "/seen-back/models/pocket/species.json?v=f1c760d32da8e737",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+     "/seen-back/vendor/rec-worker.js?v=7",
+     "/seen-back/vendor/ort/ort.wasm.min.js?v=1.30.0",
+     "/seen-back/models/pocket/species.f16.bin?v=f1c760d32da8e737",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+     "/seen-back/models/pocket/vision.int8-per-channel.onnx?v=f1c760d32da8e737",
+     "/seen-back/models/pocket/manifest.json"
+    ],
+    "shell-7": [
+     "/seen-back/index.html",
+     "/seen-back/manifest.webmanifest",
+     "/seen-back/icons/icon-192.png",
+     "/seen-back/icons/icon-512.png",
+     "/seen-back/fonts/instrument-serif-latin-400-normal.woff2",
+     "/seen-back/fonts/instrument-serif-latin-400-italic.woff2",
+     "/seen-back/test/rec/photos/heron.png",
+     "/seen-back/test/rec/photos/portrait.jpg",
+     "/seen-back/test/rec/photos/wall.png",
+     "/seen-back/test/rec/photos/garden.jpg",
+     "/seen-back/"
+    ]
+   }
+  },
+  "slot": "present",
+  "ready": "ready",
+  "readyMs": 4,
+  "readyFromNav": "ready",
+  "readyFromNavMs": 4579,
+  "loadEventMs": 490,
+  "photos": [
+   {
+    "name": "heron.png",
+    "kind": "wader",
+    "kinds3": [
+     [
+      "wader",
+      0.824
+     ],
+     [
+      "bird",
+      0.076
+     ],
+     [
+      "plant",
+      0.043
+     ]
+    ],
+    "species1": [
+     "Egretta caerulea",
+     0.101
+    ],
+    "ms": {
+     "load": 0,
+     "pre": 74,
+     "run": 540,
+     "post": 33.9
+    },
+    "wall": 22062
+   },
+   {
+    "name": "portrait.jpg",
+    "kind": "person",
+    "kinds3": [
+     [
+      "person",
+      0.948
+     ],
+     [
+      "plant",
+      0.016
+     ],
+     [
+      "insect",
+      0.016
+     ]
+    ],
+pictures: 4 total bytes: 267428
