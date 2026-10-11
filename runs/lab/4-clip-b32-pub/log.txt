@@ -1,0 +1,105 @@
+==== job log parts/lab-clip-b32-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:37:13] job: model=clip-b32 shard=0/1 stages=images
+data_source=pub/data-alachua
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:59:55Z workflow=data run_number=1 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:37:13] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+fetched 200/6000 (1.8s)
+fetched 400/6000 (3.1s)
+fetched 600/6000 (4.5s)
+fetched 800/6000 (5.8s)
+fetched 1000/6000 (7.2s)
+fetched 1200/6000 (8.6s)
+fetched 1400/6000 (10.0s)
+fetched 1600/6000 (11.4s)
+fetched 1800/6000 (12.8s)
+fetched 2000/6000 (14.2s)
+fetched 2200/6000 (15.7s)
+fetched 2400/6000 (17.2s)
+fetched 2600/6000 (18.7s)
+fetched 2800/6000 (20.2s)
+fetched 3000/6000 (21.8s)
+fetched 3200/6000 (23.4s)
+fetched 3400/6000 (24.9s)
+fetched 3600/6000 (26.4s)
+fetched 3800/6000 (27.9s)
+fetched 4000/6000 (29.5s)
+fetched 4200/6000 (31.0s)
+fetched 4400/6000 (32.4s)
+fetched 4600/6000 (33.9s)
+fetched 4800/6000 (35.4s)
+fetched 5000/6000 (36.9s)
+fetched 5200/6000 (38.5s)
+fetched 5400/6000 (40.1s)
+fetched 5600/6000 (41.7s)
+fetched 5800/6000 (43.2s)
+fetched 6000/6000 (44.8s)
+photos: 6000 rows, 6000 to fetch, 0 failed, 44.8s
+[01:37:58] exit 0
+[01:37:58] + python3 -u tools/lab/lab.py images --model clip-b32 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname alachua-2025 --out art/clip-b32
+images: clip-b32, eval alachua-2025, shard 0/1, 6000 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded clip-b32 via transformers in 8.5s
+[0;93m2026-10-11 01:38:08.538416429 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6000, 17.11 photos/s
+  images 192/6000, 17.48 photos/s
+  images 352/6000, 17.54 photos/s
+  images 512/6000, 17.55 photos/s
+  images 672/6000, 17.56 photos/s
+  images 832/6000, 17.55 photos/s
+  images 992/6000, 17.53 photos/s
+  images 1152/6000, 17.52 photos/s
+  images 1312/6000, 17.50 photos/s
+  images 1472/6000, 17.48 photos/s
+  images 1632/6000, 17.47 photos/s
+  images 1792/6000, 17.46 photos/s
+  images 1952/6000, 17.45 photos/s
+  images 2112/6000, 17.43 photos/s
+  images 2272/6000, 17.42 photos/s
+  images 2432/6000, 17.41 photos/s
+  images 2592/6000, 17.40 photos/s
+  images 2752/6000, 17.39 photos/s
+  images 2912/6000, 17.38 photos/s
+  images 3072/6000, 17.38 photos/s
+  images 3232/6000, 17.37 photos/s
+  images 3392/6000, 17.37 photos/s
+  images 3552/6000, 17.37 photos/s
+  images 3712/6000, 17.37 photos/s
+  images 3872/6000, 17.37 photos/s
+  images 4032/6000, 17.36 photos/s
+  images 4192/6000, 17.35 photos/s
+  images 4352/6000, 17.35 photos/s
+  images 4512/6000, 17.35 photos/s
+  images 4672/6000, 17.34 photos/s
+  images 4832/6000, 17.35 photos/s
+  images 4992/6000, 17.35 photos/s
+  images 5152/6000, 17.34 photos/s
+  images 5312/6000, 17.34 photos/s
+  images 5472/6000, 17.33 photos/s
+  images 5632/6000, 17.33 photos/s
+  images 5792/6000, 17.33 photos/s
+  images 5952/6000, 17.33 photos/s
+images: 6000 embedded, 0 skipped, 346.3s (17.33 photos/s)
+[01:43:55] exit 0
+[01:43:55] job done, fail=0
+[01:55:15] merging into existing pub/lab-clip-b32 (25e3131)
+parts/lab-clip-b32-s0/
+[01:55:15] + python3 -u tools/lab/lab.py merge --model clip-b32 --manifest data_in/manifest.csv --out pubdir parts/lab-clip-b32-s0/
+[01:55:16] exit 0
+[01:55:16] + bash ci/put_branch.sh pub/lab-clip-b32 pubdir lab: clip-b32
+published pub/lab-clip-b32
+[01:55:18] exit 0
+[01:55:18] published pub/lab-clip-b32
