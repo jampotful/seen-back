@@ -1,0 +1,72 @@
+[08:59:27] memory job mem-pre; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1641       12079          44        2634       14348
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:59 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:59 vision.int8.onnx
+
+added 18 packages in 2s
+photos: 24 rows, 24 to fetch, 0 failed, 0.6s
+pixels: 24 photos (0 skipped), every 13-th test row
+[0;93m2026-10-11 08:59:42.802648246 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python onnxruntime 1.30.0 onnx 1.23.2
+[0;93m2026-10-11 08:59:42.949728896 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+optimized ONNX (extended, onnxruntime 1.30.0): graph 325010233 bytes
+[0;93m2026-10-11 08:59:43.917050641 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+optimized ONNX (extended, onnxruntime 1.30.0): graph 794909 bytes, vision.pre.weights.bin 324349952 bytes
+model:
+total 302568
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:59 parts.json
+drwxr-xr-x 2 runner runner      4096 Oct 11 08:59 pre
+drwxr-xr-x 2 runner runner      4096 Oct 11 08:59 prex
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:59 vision.int8.onnx
+
+model/pre:
+total 317396
+-rw-r--r-- 1 runner runner 325010233 Oct 11 08:59 vision.pre.onnx
+
+model/prex:
+total 317528
+-rw-r--r-- 1 runner runner    794909 Oct 11 08:59 vision.pre.onnx
+-rw-r--r-- 1 runner runner 324349952 Oct 11 08:59 vision.pre.weights.bin
+[08:59:44] route base-drop: {"name": "base-drop", "form": "onnx", "options": {}, "drop_js": true, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":55.5,"peak_mb":55.5,"heap_mb":0}
+{"step":"file read","rss_mb":352.3,"peak_mb":352.3,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1245.5,"peak_mb":1245.5,"heap_mb":819.4,"ms":931}
+{"step":"file bytes let go","rss_mb":936.6,"peak_mb":1245.1,"heap_mb":819.4}
+{"step":"warm-up (empty picture)","rss_mb":1017.3,"peak_mb":1080.1,"heap_mb":819.4,"ms":3117}
+{"step":"photo 1","rss_mb":1019.8,"peak_mb":1019.8,"heap_mb":819.4,"ms":2890}
+{"step":"photo 10","rss_mb":1020.1,"peak_mb":1020.1,"heap_mb":819.4,"ms":2931}
+{"step":"photo 24","rss_mb":1020.1,"peak_mb":1020.1,"heap_mb":819.4,"ms":2887}
+route base-drop: ready 931 ms, heap 819.4 MB, photo mean 2878 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.22
+	Maximum resident set size (kbytes): 1044148
+[09:00:57] route pre-drop: {"name": "pre-drop", "form": "pre-extended", "options": {}, "drop_js": true, "model": "model/pre/vision.pre.onnx", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":368.4,"peak_mb":368.4,"heap_mb":0,"ms":34}
+{"step":"session created","rss_mb":1160.5,"peak_mb":1160.5,"heap_mb":649.3,"ms":469}
+{"step":"file bytes let go","rss_mb":837,"peak_mb":1160.1,"heap_mb":649.3}
+{"step":"warm-up (empty picture)","rss_mb":1010.1,"peak_mb":1011.5,"heap_mb":649.3,"ms":2969}
+{"step":"photo 1","rss_mb":951,"peak_mb":1012.4,"heap_mb":649.3,"ms":2884}
+{"step":"photo 10","rss_mb":951.4,"peak_mb":951.4,"heap_mb":649.3,"ms":2909}
+{"step":"photo 24","rss_mb":951.5,"peak_mb":951.5,"heap_mb":649.3,"ms":2912}
+route pre-drop: ready 469 ms, heap 649.3 MB, photo mean 2896 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.03
+	Maximum resident set size (kbytes): 974044
+[09:02:11] route pre-ext-drop: {"name": "pre-ext-drop", "form": "pre-extended-ext", "options": {}, "drop_js": true, "model": "model/prex/vision.pre.onnx", "external": "model/prex/vision.pre.weights.bin", "external_name": "vision.pre.weights.bin", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":368.5,"peak_mb":368.5,"heap_mb":0,"ms":26}
+{"step":"session created","rss_mb":836.9,"peak_mb":836.9,"heap_mb":357.5,"ms":457}
+{"step":"file bytes let go","rss_mb":513.4,"peak_mb":836.7,"heap_mb":357.5}
+{"step":"warm-up (empty picture)","rss_mb":624.4,"peak_mb":687.1,"heap_mb":357.5,"ms":2964}
+{"step":"photo 1","rss_mb":630.9,"peak_mb":630.9,"heap_mb":429,"ms":2895}
+{"step":"photo 10","rss_mb":631.2,"peak_mb":631.2,"heap_mb":429,"ms":2915}
+{"step":"photo 24","rss_mb":631.2,"peak_mb":631.2,"heap_mb":429,"ms":2881}
+route pre-ext-drop: ready 457 ms, heap 429 MB, photo mean 2905 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.23
+	Maximum resident set size (kbytes): 646068
+[09:03:24] memory job done, fail=0
