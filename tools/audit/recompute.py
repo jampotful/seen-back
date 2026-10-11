@@ -32,7 +32,8 @@ def boot(flags, idx_sets=None):
         return [None, None, None, 0]
     draws = RNG.integers(0, n, size=(B, n))
     m = f[draws].mean(axis=1)
-    return [round(float(f.mean()), 4), round(float(np.percentile(m, 2.5)), 4), round(float(np.percentile(m, 97.5)), 4), n]
+    # the count is kept beside the share so that a percentage is rounded once, from the count (see README)
+    return [round(float(f.mean()), 6), round(float(np.percentile(m, 2.5)), 4), round(float(np.percentile(m, 97.5)), 4), n, int(f.sum())]
 
 
 def read_manifest(path):
