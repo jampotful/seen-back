@@ -1,0 +1,1027 @@
+==== job log parts/lab-tinyclip-8m-16-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[07:49:21] job: model=tinyclip-8m-16 shard=0/2 stages=images
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=alachua-pre2025
+manifest_rows=84808
+species=5911
+[07:49:21] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/2 --mode mod
+fetched 200/42404 (1.8s)
+fetched 400/42404 (2.4s)
+fetched 600/42404 (3.1s)
+fetched 800/42404 (3.7s)
+fetched 1000/42404 (4.2s)
+fetched 1200/42404 (4.7s)
+fetched 1400/42404 (5.3s)
+fetched 1600/42404 (5.8s)
+fetched 1800/42404 (6.3s)
+fetched 2000/42404 (6.9s)
+fetched 2200/42404 (7.4s)
+fetched 2400/42404 (7.9s)
+fetched 2600/42404 (8.5s)
+fetched 2800/42404 (9.0s)
+fetched 3000/42404 (9.6s)
+fetched 3200/42404 (10.2s)
+fetched 3400/42404 (10.8s)
+fetched 3600/42404 (11.4s)
+fetched 3800/42404 (11.9s)
+fetched 4000/42404 (12.5s)
+fetched 4200/42404 (13.0s)
+fetched 4400/42404 (13.7s)
+fetched 4600/42404 (14.3s)
+fetched 4800/42404 (14.9s)
+fetched 5000/42404 (15.4s)
+fetched 5200/42404 (16.0s)
+fetched 5400/42404 (16.6s)
+fetched 5600/42404 (17.1s)
+fetched 5800/42404 (17.7s)
+fetched 6000/42404 (18.2s)
+fetched 6200/42404 (18.7s)
+fetched 6400/42404 (19.3s)
+fetched 6600/42404 (19.8s)
+fetched 6800/42404 (20.4s)
+fetched 7000/42404 (21.0s)
+fetched 7200/42404 (21.6s)
+fetched 7400/42404 (22.1s)
+fetched 7600/42404 (22.7s)
+fetched 7800/42404 (23.2s)
+fetched 8000/42404 (23.8s)
+fetched 8200/42404 (24.4s)
+fetched 8400/42404 (25.0s)
+fetched 8600/42404 (25.6s)
+fetched 8800/42404 (26.2s)
+fetched 9000/42404 (26.8s)
+fetched 9200/42404 (27.3s)
+fetched 9400/42404 (27.9s)
+fetched 9600/42404 (28.4s)
+fetched 9800/42404 (28.9s)
+fetched 10000/42404 (29.5s)
+fetched 10200/42404 (30.1s)
+fetched 10400/42404 (30.7s)
+fetched 10600/42404 (31.3s)
+fetched 10800/42404 (31.8s)
+fetched 11000/42404 (32.4s)
+fetched 11200/42404 (33.0s)
+fetched 11400/42404 (33.5s)
+fetched 11600/42404 (34.1s)
+fetched 11800/42404 (34.6s)
+fetched 12000/42404 (35.2s)
+fetched 12200/42404 (35.8s)
+fetched 12400/42404 (36.4s)
+fetched 12600/42404 (36.9s)
+fetched 12800/42404 (37.5s)
+fetched 13000/42404 (38.1s)
+fetched 13200/42404 (38.7s)
+fetched 13400/42404 (39.2s)
+fetched 13600/42404 (39.8s)
+fetched 13800/42404 (40.4s)
+fetched 14000/42404 (41.0s)
+fetched 14200/42404 (41.5s)
+fetched 14400/42404 (42.1s)
+fetched 14600/42404 (42.7s)
+fetched 14800/42404 (43.3s)
+fetched 15000/42404 (43.9s)
+fetched 15200/42404 (44.4s)
+fetched 15400/42404 (45.0s)
+fetched 15600/42404 (45.6s)
+fetched 15800/42404 (46.1s)
+fetched 16000/42404 (46.7s)
+fetched 16200/42404 (47.3s)
+fetched 16400/42404 (47.9s)
+fetched 16600/42404 (48.5s)
+fetched 16800/42404 (49.0s)
+fetched 17000/42404 (49.6s)
+fetched 17200/42404 (50.1s)
+fetched 17400/42404 (50.7s)
+fetched 17600/42404 (51.3s)
+fetched 17800/42404 (51.8s)
+fetched 18000/42404 (52.4s)
+fetched 18200/42404 (53.0s)
+fetched 18400/42404 (53.5s)
+fetched 18600/42404 (54.1s)
+fetched 18800/42404 (54.6s)
+fetched 19000/42404 (55.2s)
+fetched 19200/42404 (55.8s)
+fetched 19400/42404 (56.3s)
+fetched 19600/42404 (56.9s)
+fetched 19800/42404 (57.5s)
+fetched 20000/42404 (58.0s)
+fetched 20200/42404 (58.6s)
+fetched 20400/42404 (59.2s)
+fetched 20600/42404 (59.7s)
+fetched 20800/42404 (60.3s)
+fetched 21000/42404 (60.8s)
+fetched 21200/42404 (61.4s)
+fetched 21400/42404 (61.9s)
+fetched 21600/42404 (62.5s)
+fetched 21800/42404 (63.0s)
+fetched 22000/42404 (63.6s)
+fetched 22200/42404 (64.2s)
+fetched 22400/42404 (64.8s)
+fetched 22600/42404 (65.4s)
+fetched 22800/42404 (65.9s)
+fetched 23000/42404 (66.5s)
+fetched 23200/42404 (67.1s)
+fetched 23400/42404 (67.7s)
+fetched 23600/42404 (68.2s)
+fetched 23800/42404 (68.8s)
+fetched 24000/42404 (69.4s)
+fetched 24200/42404 (70.0s)
+fetched 24400/42404 (70.5s)
+fetched 24600/42404 (71.1s)
+fetched 24800/42404 (71.7s)
+fetched 25000/42404 (72.2s)
+fetched 25200/42404 (72.8s)
+fetched 25400/42404 (73.3s)
+fetched 25600/42404 (74.0s)
+fetched 25800/42404 (74.6s)
+fetched 26000/42404 (75.2s)
+fetched 26200/42404 (75.7s)
+fetched 26400/42404 (76.3s)
+fetched 26600/42404 (76.8s)
+fetched 26800/42404 (77.4s)
+fetched 27000/42404 (78.0s)
+fetched 27200/42404 (78.6s)
+fetched 27400/42404 (79.2s)
+fetched 27600/42404 (79.7s)
+fetched 27800/42404 (80.3s)
+fetched 28000/42404 (80.8s)
+fetched 28200/42404 (81.4s)
+fetched 28400/42404 (82.0s)
+fetched 28600/42404 (82.5s)
+fetched 28800/42404 (83.1s)
+fetched 29000/42404 (83.7s)
+fetched 29200/42404 (84.3s)
+fetched 29400/42404 (84.9s)
+fetched 29600/42404 (85.4s)
+fetched 29800/42404 (86.0s)
+fetched 30000/42404 (86.6s)
+fetched 30200/42404 (87.2s)
+fetched 30400/42404 (87.7s)
+fetched 30600/42404 (88.3s)
+fetched 30800/42404 (88.9s)
+fetched 31000/42404 (89.5s)
+fetched 31200/42404 (90.1s)
+fetched 31400/42404 (90.6s)
+fetched 31600/42404 (91.2s)
+fetched 31800/42404 (91.8s)
+fetched 32000/42404 (92.3s)
+fetched 32200/42404 (92.9s)
+fetched 32400/42404 (93.4s)
+fetched 32600/42404 (94.0s)
+fetched 32800/42404 (94.6s)
+fetched 33000/42404 (95.2s)
+fetched 33200/42404 (95.8s)
+fetched 33400/42404 (96.4s)
+fetched 33600/42404 (97.0s)
+fetched 33800/42404 (97.5s)
+fetched 34000/42404 (98.2s)
+fetched 34200/42404 (98.8s)
+fetched 34400/42404 (99.4s)
+fetched 34600/42404 (100.1s)
+fetched 34800/42404 (100.7s)
+fetched 35000/42404 (101.3s)
+fetched 35200/42404 (101.8s)
+fetched 35400/42404 (102.4s)
+fetched 35600/42404 (103.0s)
+fetched 35800/42404 (103.5s)
+fetched 36000/42404 (104.1s)
+fetched 36200/42404 (104.6s)
+fetched 36400/42404 (105.2s)
+fetched 36600/42404 (105.8s)
+fetched 36800/42404 (106.4s)
+fetched 37000/42404 (107.0s)
+fetched 37200/42404 (107.6s)
+fetched 37400/42404 (108.2s)
+fetched 37600/42404 (108.8s)
+fetched 37800/42404 (109.4s)
+fetched 38000/42404 (110.0s)
+fetched 38200/42404 (110.6s)
+fetched 38400/42404 (111.2s)
+fetched 38600/42404 (111.8s)
+fetched 38800/42404 (112.4s)
+fetched 39000/42404 (113.0s)
+fetched 39200/42404 (113.6s)
+fetched 39400/42404 (114.2s)
+fetched 39600/42404 (114.8s)
+fetched 39800/42404 (115.4s)
+fetched 40000/42404 (116.0s)
+fetched 40200/42404 (116.6s)
+fetched 40400/42404 (117.1s)
+fetched 40600/42404 (117.7s)
+fetched 40800/42404 (118.3s)
+fetched 41000/42404 (118.9s)
+fetched 41200/42404 (119.4s)
+fetched 41400/42404 (120.0s)
+fetched 41600/42404 (120.6s)
+fetched 41800/42404 (121.1s)
+fetched 42000/42404 (121.7s)
+fetched 42200/42404 (122.3s)
+fetched 42400/42404 (122.9s)
+photos: 42404 rows, 42404 to fetch, 0 failed, 130.2s
+[07:51:32] exit 0
+[07:51:32] + python3 -u tools/lab/lab.py images --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 0/2 --shard-mode mod --evalname alachua-pre2025 --out art/tinyclip-8m-16
+images: tinyclip-8m-16, eval alachua-pre2025, shard 0/2, 42404 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-8m-16 via transformers in 4.4s
+[0;93m2026-10-11 07:51:37.670445182 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/42404, 33.55 photos/s
+  images 192/42404, 34.50 photos/s
+  images 352/42404, 35.03 photos/s
+  images 512/42404, 35.29 photos/s
+  images 672/42404, 35.43 photos/s
+  images 832/42404, 35.44 photos/s
+  images 992/42404, 35.52 photos/s
+  images 1152/42404, 35.54 photos/s
+  images 1312/42404, 35.56 photos/s
+  images 1472/42404, 35.57 photos/s
+  images 1632/42404, 35.61 photos/s
+  images 1792/42404, 35.64 photos/s
+  images 1952/42404, 35.67 photos/s
+  images 2112/42404, 35.71 photos/s
+  images 2272/42404, 35.73 photos/s
+  images 2432/42404, 35.75 photos/s
+  images 2592/42404, 35.76 photos/s
+  images 2752/42404, 35.77 photos/s
+  images 2912/42404, 35.77 photos/s
+  images 3072/42404, 35.78 photos/s
+  images 3232/42404, 35.79 photos/s
+  images 3392/42404, 35.79 photos/s
+  images 3552/42404, 35.80 photos/s
+  images 3712/42404, 35.80 photos/s
+  images 3872/42404, 35.81 photos/s
+  images 4032/42404, 35.79 photos/s
+  images 4192/42404, 35.78 photos/s
+  images 4352/42404, 35.78 photos/s
+  images 4512/42404, 35.78 photos/s
+  images 4672/42404, 35.79 photos/s
+  images 4832/42404, 35.80 photos/s
+  images 4992/42404, 35.81 photos/s
+  images 5152/42404, 35.81 photos/s
+  images 5312/42404, 35.82 photos/s
+  images 5472/42404, 35.83 photos/s
+  images 5632/42404, 35.83 photos/s
+  images 5792/42404, 35.84 photos/s
+  images 5952/42404, 35.85 photos/s
+  images 6112/42404, 35.86 photos/s
+  images 6272/42404, 35.86 photos/s
+  images 6432/42404, 35.87 photos/s
+  images 6592/42404, 35.87 photos/s
+  images 6752/42404, 35.87 photos/s
+  images 6912/42404, 35.88 photos/s
+  images 7072/42404, 35.88 photos/s
+  images 7232/42404, 35.88 photos/s
+  images 7392/42404, 35.88 photos/s
+  images 7552/42404, 35.88 photos/s
+  images 7712/42404, 35.89 photos/s
+  images 7872/42404, 35.89 photos/s
+  images 8032/42404, 35.89 photos/s
+  images 8192/42404, 35.90 photos/s
+  images 8352/42404, 35.90 photos/s
+  images 8512/42404, 35.90 photos/s
+  images 8672/42404, 35.91 photos/s
+  images 8832/42404, 35.91 photos/s
+  images 8992/42404, 35.91 photos/s
+  images 9152/42404, 35.92 photos/s
+  images 9312/42404, 35.92 photos/s
+  images 9472/42404, 35.92 photos/s
+  images 9632/42404, 35.93 photos/s
+  images 9792/42404, 35.93 photos/s
+  images 9952/42404, 35.93 photos/s
+  images 10112/42404, 35.93 photos/s
+  images 10272/42404, 35.93 photos/s
+  images 10432/42404, 35.94 photos/s
+  images 10592/42404, 35.94 photos/s
+  images 10752/42404, 35.94 photos/s
+  images 10912/42404, 35.94 photos/s
+  images 11072/42404, 35.94 photos/s
+  images 11232/42404, 35.94 photos/s
+  images 11392/42404, 35.95 photos/s
+  images 11552/42404, 35.95 photos/s
+  images 11712/42404, 35.94 photos/s
+  images 11872/42404, 35.94 photos/s
+  images 12032/42404, 35.94 photos/s
+  images 12192/42404, 35.94 photos/s
+  images 12352/42404, 35.94 photos/s
+  images 12512/42404, 35.93 photos/s
+  images 12672/42404, 35.93 photos/s
+  images 12832/42404, 35.93 photos/s
+  images 12992/42404, 35.93 photos/s
+  images 13152/42404, 35.93 photos/s
+  images 13312/42404, 35.93 photos/s
+  images 13472/42404, 35.93 photos/s
+  images 13632/42404, 35.93 photos/s
+  images 13792/42404, 35.93 photos/s
+  images 13952/42404, 35.93 photos/s
+  images 14112/42404, 35.93 photos/s
+  images 14272/42404, 35.93 photos/s
+  images 14432/42404, 35.93 photos/s
+  images 14592/42404, 35.93 photos/s
+  images 14752/42404, 35.93 photos/s
+  images 14912/42404, 35.93 photos/s
+  images 15072/42404, 35.93 photos/s
+  images 15232/42404, 35.93 photos/s
+  images 15392/42404, 35.93 photos/s
+  images 15552/42404, 35.93 photos/s
+  images 15712/42404, 35.93 photos/s
+  images 15872/42404, 35.93 photos/s
+  images 16032/42404, 35.93 photos/s
+  images 16192/42404, 35.93 photos/s
+  images 16352/42404, 35.93 photos/s
+  images 16512/42404, 35.93 photos/s
+  images 16672/42404, 35.93 photos/s
+  images 16832/42404, 35.93 photos/s
+  images 16992/42404, 35.93 photos/s
+  images 17152/42404, 35.93 photos/s
+  images 17312/42404, 35.93 photos/s
+  images 17472/42404, 35.93 photos/s
+  images 17632/42404, 35.93 photos/s
+  images 17792/42404, 35.93 photos/s
+  images 17952/42404, 35.93 photos/s
+  images 18112/42404, 35.93 photos/s
+  images 18272/42404, 35.93 photos/s
+  images 18432/42404, 35.93 photos/s
+  images 18592/42404, 35.93 photos/s
+  images 18752/42404, 35.93 photos/s
+  images 18912/42404, 35.93 photos/s
+  images 19072/42404, 35.93 photos/s
+  images 19232/42404, 35.93 photos/s
+  images 19392/42404, 35.93 photos/s
+  images 19552/42404, 35.93 photos/s
+  images 19712/42404, 35.93 photos/s
+  images 19872/42404, 35.93 photos/s
+  images 20032/42404, 35.93 photos/s
+  images 20192/42404, 35.93 photos/s
+  images 20352/42404, 35.93 photos/s
+  images 20512/42404, 35.93 photos/s
+  images 20672/42404, 35.93 photos/s
+  images 20832/42404, 35.93 photos/s
+  images 20992/42404, 35.93 photos/s
+  images 21152/42404, 35.93 photos/s
+  images 21312/42404, 35.93 photos/s
+  images 21472/42404, 35.93 photos/s
+  images 21632/42404, 35.93 photos/s
+  images 21792/42404, 35.93 photos/s
+  images 21952/42404, 35.93 photos/s
+  images 22112/42404, 35.93 photos/s
+  images 22272/42404, 35.93 photos/s
+  images 22432/42404, 35.93 photos/s
+  images 22592/42404, 35.93 photos/s
+  images 22752/42404, 35.93 photos/s
+  images 22912/42404, 35.93 photos/s
+  images 23072/42404, 35.93 photos/s
+  images 23232/42404, 35.93 photos/s
+  images 23392/42404, 35.93 photos/s
+  images 23552/42404, 35.93 photos/s
+  images 23712/42404, 35.93 photos/s
+  images 23872/42404, 35.93 photos/s
+  images 24032/42404, 35.93 photos/s
+  images 24192/42404, 35.93 photos/s
+  images 24352/42404, 35.93 photos/s
+  images 24512/42404, 35.93 photos/s
+  images 24672/42404, 35.93 photos/s
+  images 24832/42404, 35.93 photos/s
+  images 24992/42404, 35.93 photos/s
+  images 25152/42404, 35.93 photos/s
+  images 25312/42404, 35.93 photos/s
+  images 25472/42404, 35.93 photos/s
+  images 25632/42404, 35.93 photos/s
+  images 25792/42404, 35.93 photos/s
+  images 25952/42404, 35.93 photos/s
+  images 26112/42404, 35.93 photos/s
+  images 26272/42404, 35.93 photos/s
+  images 26432/42404, 35.93 photos/s
+  images 26592/42404, 35.93 photos/s
+  images 26752/42404, 35.93 photos/s
+  images 26912/42404, 35.93 photos/s
+  images 27072/42404, 35.93 photos/s
+  images 27232/42404, 35.93 photos/s
+  images 27392/42404, 35.93 photos/s
+  images 27552/42404, 35.93 photos/s
+  images 27712/42404, 35.93 photos/s
+  images 27872/42404, 35.93 photos/s
+  images 28032/42404, 35.93 photos/s
+  images 28192/42404, 35.93 photos/s
+  images 28352/42404, 35.93 photos/s
+  images 28512/42404, 35.93 photos/s
+  images 28672/42404, 35.93 photos/s
+  images 28832/42404, 35.93 photos/s
+  images 28992/42404, 35.93 photos/s
+  images 29152/42404, 35.93 photos/s
+  images 29312/42404, 35.93 photos/s
+  images 29472/42404, 35.93 photos/s
+  images 29632/42404, 35.93 photos/s
+  images 29792/42404, 35.93 photos/s
+  images 29952/42404, 35.93 photos/s
+  images 30112/42404, 35.93 photos/s
+  images 30272/42404, 35.93 photos/s
+  images 30432/42404, 35.93 photos/s
+  images 30592/42404, 35.93 photos/s
+  images 30752/42404, 35.93 photos/s
+  images 30912/42404, 35.93 photos/s
+  images 31072/42404, 35.93 photos/s
+  images 31232/42404, 35.93 photos/s
+  images 31392/42404, 35.93 photos/s
+  images 31552/42404, 35.93 photos/s
+  images 31712/42404, 35.93 photos/s
+  images 31872/42404, 35.93 photos/s
+  images 32032/42404, 35.93 photos/s
+  images 32192/42404, 35.93 photos/s
+  images 32352/42404, 35.93 photos/s
+  images 32512/42404, 35.93 photos/s
+  images 32672/42404, 35.93 photos/s
+  images 32832/42404, 35.93 photos/s
+  images 32992/42404, 35.93 photos/s
+  images 33152/42404, 35.93 photos/s
+  images 33312/42404, 35.93 photos/s
+  images 33472/42404, 35.93 photos/s
+  images 33632/42404, 35.93 photos/s
+  images 33792/42404, 35.93 photos/s
+  images 33952/42404, 35.93 photos/s
+  images 34112/42404, 35.93 photos/s
+  images 34272/42404, 35.93 photos/s
+  images 34432/42404, 35.93 photos/s
+  images 34592/42404, 35.93 photos/s
+  images 34752/42404, 35.93 photos/s
+  images 34912/42404, 35.93 photos/s
+  images 35072/42404, 35.93 photos/s
+  images 35232/42404, 35.93 photos/s
+  images 35392/42404, 35.93 photos/s
+  images 35552/42404, 35.93 photos/s
+  images 35712/42404, 35.93 photos/s
+  images 35872/42404, 35.93 photos/s
+  images 36032/42404, 35.93 photos/s
+  images 36192/42404, 35.93 photos/s
+  images 36352/42404, 35.93 photos/s
+  images 36512/42404, 35.93 photos/s
+  images 36672/42404, 35.93 photos/s
+  images 36832/42404, 35.93 photos/s
+  images 36992/42404, 35.93 photos/s
+  images 37152/42404, 35.93 photos/s
+  images 37312/42404, 35.93 photos/s
+  images 37472/42404, 35.93 photos/s
+  images 37632/42404, 35.92 photos/s
+  images 37792/42404, 35.92 photos/s
+  images 37952/42404, 35.92 photos/s
+  images 38112/42404, 35.92 photos/s
+  images 38272/42404, 35.92 photos/s
+  images 38432/42404, 35.92 photos/s
+  images 38592/42404, 35.92 photos/s
+  images 38752/42404, 35.92 photos/s
+  images 38912/42404, 35.92 photos/s
+  images 39072/42404, 35.92 photos/s
+  images 39232/42404, 35.91 photos/s
+  images 39392/42404, 35.91 photos/s
+  images 39552/42404, 35.91 photos/s
+  images 39712/42404, 35.91 photos/s
+  images 39872/42404, 35.91 photos/s
+  images 40032/42404, 35.91 photos/s
+  images 40192/42404, 35.91 photos/s
+  images 40352/42404, 35.91 photos/s
+  images 40512/42404, 35.91 photos/s
+  images 40672/42404, 35.91 photos/s
+  images 40832/42404, 35.91 photos/s
+  images 40992/42404, 35.91 photos/s
+  images 41152/42404, 35.91 photos/s
+  images 41312/42404, 35.91 photos/s
+  images 41472/42404, 35.91 photos/s
+  images 41632/42404, 35.91 photos/s
+  images 41792/42404, 35.91 photos/s
+  images 41952/42404, 35.91 photos/s
+  images 42112/42404, 35.91 photos/s
+  images 42272/42404, 35.91 photos/s
+  images 42404/42404, 35.91 photos/s
+images: 42404 embedded, 0 skipped, 1180.9s (35.91 photos/s)
+[08:11:19] exit 0
+[08:11:19] job done, fail=0
+==== job log parts/lab-tinyclip-8m-16-s1/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[07:49:14] job: model=tinyclip-8m-16 shard=1/2 stages=images
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=alachua-pre2025
+manifest_rows=84808
+species=5911
+[07:49:14] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 1/2 --mode mod
+fetched 200/42404 (2.9s)
+fetched 400/42404 (4.8s)
+fetched 600/42404 (6.8s)
+fetched 800/42404 (8.7s)
+fetched 1000/42404 (10.5s)
+fetched 1200/42404 (12.3s)
+fetched 1400/42404 (14.0s)
+fetched 1600/42404 (15.7s)
+fetched 1800/42404 (17.2s)
+fetched 2000/42404 (18.8s)
+fetched 2200/42404 (20.5s)
+fetched 2400/42404 (22.0s)
+fetched 2600/42404 (23.6s)
+fetched 2800/42404 (25.2s)
+fetched 3000/42404 (26.9s)
+fetched 3200/42404 (28.5s)
+fetched 3400/42404 (30.1s)
+fetched 3600/42404 (31.7s)
+fetched 3800/42404 (33.4s)
+fetched 4000/42404 (35.0s)
+fetched 4200/42404 (36.6s)
+fetched 4400/42404 (38.2s)
+fetched 4600/42404 (39.8s)
+fetched 4800/42404 (41.5s)
+fetched 5000/42404 (43.1s)
+fetched 5200/42404 (44.7s)
+fetched 5400/42404 (46.4s)
+fetched 5600/42404 (47.9s)
+fetched 5800/42404 (49.6s)
+fetched 6000/42404 (51.2s)
+fetched 6200/42404 (52.8s)
+fetched 6400/42404 (54.5s)
+fetched 6600/42404 (56.1s)
+fetched 6800/42404 (57.9s)
+fetched 7000/42404 (59.5s)
+fetched 7200/42404 (61.2s)
+fetched 7400/42404 (62.8s)
+fetched 7600/42404 (64.5s)
+fetched 7800/42404 (66.1s)
+fetched 8000/42404 (67.8s)
+fetched 8200/42404 (69.4s)
+fetched 8400/42404 (71.1s)
+fetched 8600/42404 (72.8s)
+fetched 8800/42404 (74.4s)
+fetched 9000/42404 (76.0s)
+fetched 9200/42404 (77.6s)
+fetched 9400/42404 (79.3s)
+fetched 9600/42404 (80.9s)
+fetched 9800/42404 (82.7s)
+fetched 10000/42404 (84.3s)
+fetched 10200/42404 (86.0s)
+fetched 10400/42404 (87.8s)
+fetched 10600/42404 (89.4s)
+fetched 10800/42404 (91.1s)
+fetched 11000/42404 (92.8s)
+fetched 11200/42404 (94.5s)
+fetched 11400/42404 (96.2s)
+fetched 11600/42404 (98.0s)
+fetched 11800/42404 (99.6s)
+fetched 12000/42404 (101.3s)
+fetched 12200/42404 (103.0s)
+fetched 12400/42404 (104.7s)
+fetched 12600/42404 (106.4s)
+fetched 12800/42404 (108.1s)
+fetched 13000/42404 (109.9s)
+fetched 13200/42404 (111.5s)
+fetched 13400/42404 (113.2s)
+fetched 13600/42404 (114.9s)
+fetched 13800/42404 (116.6s)
+fetched 14000/42404 (118.4s)
+fetched 14200/42404 (120.1s)
+fetched 14400/42404 (121.8s)
+fetched 14600/42404 (123.5s)
+fetched 14800/42404 (125.3s)
+fetched 15000/42404 (127.1s)
+fetched 15200/42404 (128.8s)
+fetched 15400/42404 (130.5s)
+fetched 15600/42404 (132.3s)
+fetched 15800/42404 (134.0s)
+fetched 16000/42404 (135.7s)
+fetched 16200/42404 (137.5s)
+fetched 16400/42404 (139.2s)
+fetched 16600/42404 (141.0s)
+fetched 16800/42404 (142.8s)
+fetched 17000/42404 (144.5s)
+fetched 17200/42404 (146.2s)
+fetched 17400/42404 (148.0s)
+fetched 17600/42404 (149.7s)
+fetched 17800/42404 (151.5s)
+fetched 18000/42404 (153.2s)
+fetched 18200/42404 (155.0s)
+fetched 18400/42404 (156.8s)
+fetched 18600/42404 (158.5s)
+fetched 18800/42404 (160.3s)
+fetched 19000/42404 (162.1s)
+fetched 19200/42404 (163.8s)
+fetched 19400/42404 (165.5s)
+fetched 19600/42404 (167.3s)
+fetched 19800/42404 (169.1s)
+fetched 20000/42404 (170.9s)
+fetched 20200/42404 (172.7s)
+fetched 20400/42404 (174.4s)
+fetched 20600/42404 (176.2s)
+fetched 20800/42404 (177.8s)
+fetched 21000/42404 (179.6s)
+fetched 21200/42404 (181.4s)
+fetched 21400/42404 (183.2s)
+fetched 21600/42404 (185.6s)
+fetched 21800/42404 (190.1s)
+fetched 22000/42404 (192.0s)
+fetched 22200/42404 (193.9s)
+fetched 22400/42404 (195.7s)
+fetched 22600/42404 (197.5s)
+fetched 22800/42404 (199.4s)
+fetched 23000/42404 (201.1s)
+fetched 23200/42404 (203.0s)
+fetched 23400/42404 (204.8s)
+fetched 23600/42404 (206.6s)
+fetched 23800/42404 (208.4s)
+fetched 24000/42404 (210.2s)
+fetched 24200/42404 (212.1s)
+fetched 24400/42404 (213.9s)
+fetched 24600/42404 (215.7s)
+fetched 24800/42404 (217.5s)
+fetched 25000/42404 (219.4s)
+fetched 25200/42404 (221.2s)
+fetched 25400/42404 (223.0s)
+fetched 25600/42404 (224.8s)
+fetched 25800/42404 (226.6s)
+fetched 26000/42404 (228.4s)
+fetched 26200/42404 (230.2s)
+fetched 26400/42404 (232.0s)
+fetched 26600/42404 (233.8s)
+fetched 26800/42404 (235.5s)
+fetched 27000/42404 (237.3s)
+fetched 27200/42404 (239.2s)
+fetched 27400/42404 (241.0s)
+fetched 27600/42404 (242.7s)
+fetched 27800/42404 (244.5s)
+fetched 28000/42404 (246.3s)
+fetched 28200/42404 (248.2s)
+fetched 28400/42404 (250.0s)
+fetched 28600/42404 (251.9s)
+fetched 28800/42404 (253.8s)
+fetched 29000/42404 (255.7s)
+fetched 29200/42404 (257.5s)
+fetched 29400/42404 (259.3s)
+fetched 29600/42404 (261.2s)
+fetched 29800/42404 (263.0s)
+fetched 30000/42404 (264.9s)
+fetched 30200/42404 (266.8s)
+fetched 30400/42404 (268.6s)
+fetched 30600/42404 (270.4s)
+fetched 30800/42404 (272.2s)
+fetched 31000/42404 (274.0s)
+fetched 31200/42404 (275.8s)
+fetched 31400/42404 (277.7s)
+fetched 31600/42404 (279.5s)
+fetched 31800/42404 (281.3s)
+fetched 32000/42404 (283.2s)
+fetched 32200/42404 (285.1s)
+fetched 32400/42404 (287.0s)
+fetched 32600/42404 (288.9s)
+fetched 32800/42404 (290.6s)
+fetched 33000/42404 (292.5s)
+fetched 33200/42404 (294.4s)
+fetched 33400/42404 (296.3s)
+fetched 33600/42404 (298.2s)
+fetched 33800/42404 (300.1s)
+fetched 34000/42404 (302.0s)
+fetched 34200/42404 (303.8s)
+fetched 34400/42404 (305.7s)
+fetched 34600/42404 (307.6s)
+fetched 34800/42404 (309.5s)
+fetched 35000/42404 (311.3s)
+fetched 35200/42404 (313.2s)
+fetched 35400/42404 (315.1s)
+fetched 35600/42404 (316.9s)
+fetched 35800/42404 (318.9s)
+fetched 36000/42404 (320.8s)
+fetched 36200/42404 (322.7s)
+fetched 36400/42404 (324.6s)
+fetched 36600/42404 (326.5s)
+fetched 36800/42404 (328.4s)
+fetched 37000/42404 (330.3s)
+fetched 37200/42404 (332.2s)
+fetched 37400/42404 (334.1s)
+fetched 37600/42404 (336.0s)
+fetched 37800/42404 (337.8s)
+fetched 38000/42404 (339.7s)
+fetched 38200/42404 (341.6s)
+fetched 38400/42404 (343.5s)
+fetched 38600/42404 (345.4s)
+fetched 38800/42404 (347.3s)
+fetched 39000/42404 (349.3s)
+fetched 39200/42404 (351.3s)
+fetched 39400/42404 (353.2s)
+fetched 39600/42404 (355.1s)
+fetched 39800/42404 (357.1s)
+fetched 40000/42404 (359.0s)
+fetched 40200/42404 (361.0s)
+fetched 40400/42404 (362.8s)
+fetched 40600/42404 (364.8s)
+fetched 40800/42404 (366.8s)
+fetched 41000/42404 (368.7s)
+fetched 41200/42404 (370.6s)
+fetched 41400/42404 (372.6s)
+fetched 41600/42404 (374.6s)
+fetched 41800/42404 (376.5s)
+fetched 42000/42404 (378.6s)
+fetched 42200/42404 (380.5s)
+fetched 42400/42404 (382.5s)
+photos: 42404 rows, 42404 to fetch, 0 failed, 382.5s
+[07:55:37] exit 0
+[07:55:37] + python3 -u tools/lab/lab.py images --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 1/2 --shard-mode mod --evalname alachua-pre2025 --out art/tinyclip-8m-16
+images: tinyclip-8m-16, eval alachua-pre2025, shard 1/2, 42404 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-8m-16 via transformers in 5.3s
+[0;93m2026-10-11 07:55:43.923626849 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/42404, 44.16 photos/s
+  images 192/42404, 45.72 photos/s
+  images 352/42404, 46.07 photos/s
+  images 512/42404, 46.46 photos/s
+  images 672/42404, 46.66 photos/s
+  images 832/42404, 46.69 photos/s
+  images 992/42404, 46.91 photos/s
+  images 1152/42404, 47.12 photos/s
+  images 1312/42404, 47.16 photos/s
+  images 1472/42404, 47.22 photos/s
+  images 1632/42404, 47.20 photos/s
+  images 1792/42404, 47.18 photos/s
+  images 1952/42404, 47.17 photos/s
+  images 2112/42404, 47.04 photos/s
+  images 2272/42404, 47.02 photos/s
+  images 2432/42404, 47.02 photos/s
+  images 2592/42404, 46.94 photos/s
+  images 2752/42404, 46.92 photos/s
+  images 2912/42404, 46.94 photos/s
+  images 3072/42404, 46.96 photos/s
+  images 3232/42404, 46.94 photos/s
+  images 3392/42404, 46.91 photos/s
+  images 3552/42404, 46.91 photos/s
+  images 3712/42404, 46.92 photos/s
+  images 3872/42404, 46.93 photos/s
+  images 4032/42404, 46.93 photos/s
+  images 4192/42404, 46.95 photos/s
+  images 4352/42404, 46.98 photos/s
+  images 4512/42404, 47.02 photos/s
+  images 4672/42404, 47.07 photos/s
+  images 4832/42404, 47.06 photos/s
+  images 4992/42404, 47.06 photos/s
+  images 5152/42404, 47.05 photos/s
+  images 5312/42404, 47.05 photos/s
+  images 5472/42404, 47.06 photos/s
+  images 5632/42404, 47.01 photos/s
+  images 5792/42404, 47.00 photos/s
+  images 5952/42404, 46.99 photos/s
+  images 6112/42404, 46.95 photos/s
+  images 6272/42404, 46.96 photos/s
+  images 6432/42404, 46.97 photos/s
+  images 6592/42404, 47.00 photos/s
+  images 6752/42404, 46.99 photos/s
+  images 6912/42404, 46.99 photos/s
+  images 7072/42404, 46.98 photos/s
+  images 7232/42404, 46.98 photos/s
+  images 7392/42404, 46.98 photos/s
+  images 7552/42404, 46.98 photos/s
+  images 7712/42404, 46.97 photos/s
+  images 7872/42404, 46.99 photos/s
+  images 8032/42404, 46.98 photos/s
+  images 8192/42404, 46.96 photos/s
+  images 8352/42404, 46.96 photos/s
+  images 8512/42404, 46.96 photos/s
+  images 8672/42404, 46.96 photos/s
+  images 8832/42404, 46.96 photos/s
+  images 8992/42404, 46.95 photos/s
+  images 9152/42404, 46.96 photos/s
+  images 9312/42404, 46.98 photos/s
+  images 9472/42404, 46.99 photos/s
+  images 9632/42404, 47.00 photos/s
+  images 9792/42404, 47.03 photos/s
+  images 9952/42404, 47.06 photos/s
+  images 10112/42404, 47.09 photos/s
+  images 10272/42404, 47.13 photos/s
+  images 10432/42404, 47.14 photos/s
+  images 10592/42404, 47.15 photos/s
+  images 10752/42404, 47.14 photos/s
+  images 10912/42404, 47.13 photos/s
+  images 11072/42404, 47.13 photos/s
+  images 11232/42404, 47.12 photos/s
+  images 11392/42404, 47.14 photos/s
+  images 11552/42404, 47.15 photos/s
+  images 11712/42404, 47.17 photos/s
+  images 11872/42404, 47.20 photos/s
+  images 12032/42404, 47.23 photos/s
+  images 12192/42404, 47.26 photos/s
+  images 12352/42404, 47.29 photos/s
+  images 12512/42404, 47.29 photos/s
+  images 12672/42404, 47.30 photos/s
+  images 12832/42404, 47.32 photos/s
+  images 12992/42404, 47.34 photos/s
+  images 13152/42404, 47.34 photos/s
+  images 13312/42404, 47.35 photos/s
+  images 13472/42404, 47.35 photos/s
+  images 13632/42404, 47.34 photos/s
+  images 13792/42404, 47.35 photos/s
+  images 13952/42404, 47.37 photos/s
+  images 14112/42404, 47.38 photos/s
+  images 14272/42404, 47.40 photos/s
+  images 14432/42404, 47.38 photos/s
+  images 14592/42404, 47.37 photos/s
+  images 14752/42404, 47.37 photos/s
+  images 14912/42404, 47.38 photos/s
+  images 15072/42404, 47.37 photos/s
+  images 15232/42404, 47.37 photos/s
+  images 15392/42404, 47.37 photos/s
+  images 15552/42404, 47.37 photos/s
+  images 15712/42404, 47.37 photos/s
+  images 15872/42404, 47.38 photos/s
+  images 16032/42404, 47.38 photos/s
+  images 16192/42404, 47.38 photos/s
+  images 16352/42404, 47.38 photos/s
+  images 16512/42404, 47.39 photos/s
+  images 16672/42404, 47.39 photos/s
+  images 16832/42404, 47.38 photos/s
+  images 16992/42404, 47.38 photos/s
+  images 17152/42404, 47.37 photos/s
+  images 17312/42404, 47.36 photos/s
+  images 17472/42404, 47.35 photos/s
+  images 17632/42404, 47.34 photos/s
+  images 17792/42404, 47.34 photos/s
+  images 17952/42404, 47.32 photos/s
+  images 18112/42404, 47.31 photos/s
+  images 18272/42404, 47.30 photos/s
+  images 18432/42404, 47.28 photos/s
+  images 18592/42404, 47.28 photos/s
+  images 18752/42404, 47.27 photos/s
+  images 18912/42404, 47.28 photos/s
+  images 19072/42404, 47.28 photos/s
+  images 19232/42404, 47.27 photos/s
+  images 19392/42404, 47.27 photos/s
+  images 19552/42404, 47.28 photos/s
+  images 19712/42404, 47.26 photos/s
+  images 19872/42404, 47.27 photos/s
+  images 20032/42404, 47.26 photos/s
+  images 20192/42404, 47.26 photos/s
+  images 20352/42404, 47.26 photos/s
+  images 20512/42404, 47.27 photos/s
+  images 20672/42404, 47.28 photos/s
+  images 20832/42404, 47.28 photos/s
+  images 20992/42404, 47.29 photos/s
+  images 21152/42404, 47.28 photos/s
+  images 21312/42404, 47.28 photos/s
+  images 21472/42404, 47.27 photos/s
+  images 21632/42404, 47.27 photos/s
+  images 21792/42404, 47.26 photos/s
+  images 21952/42404, 47.26 photos/s
+  images 22112/42404, 47.26 photos/s
+  images 22272/42404, 47.25 photos/s
+  images 22432/42404, 47.24 photos/s
+  images 22592/42404, 47.24 photos/s
+  images 22752/42404, 47.24 photos/s
+  images 22912/42404, 47.23 photos/s
+  images 23072/42404, 47.23 photos/s
+  images 23232/42404, 47.22 photos/s
+  images 23392/42404, 47.22 photos/s
+  images 23552/42404, 47.21 photos/s
+  images 23712/42404, 47.21 photos/s
+  images 23872/42404, 47.21 photos/s
+  images 24032/42404, 47.22 photos/s
+  images 24192/42404, 47.22 photos/s
+  images 24352/42404, 47.22 photos/s
+  images 24512/42404, 47.22 photos/s
+  images 24672/42404, 47.23 photos/s
+  images 24832/42404, 47.23 photos/s
+  images 24992/42404, 47.24 photos/s
+  images 25152/42404, 47.24 photos/s
+  images 25312/42404, 47.24 photos/s
+  images 25472/42404, 47.25 photos/s
+  images 25632/42404, 47.25 photos/s
+  images 25792/42404, 47.26 photos/s
+  images 25952/42404, 47.27 photos/s
+  images 26112/42404, 47.27 photos/s
+  images 26272/42404, 47.28 photos/s
+  images 26432/42404, 47.29 photos/s
+  images 26592/42404, 47.30 photos/s
+  images 26752/42404, 47.29 photos/s
+  images 26912/42404, 47.29 photos/s
+  images 27072/42404, 47.29 photos/s
+  images 27232/42404, 47.29 photos/s
+  images 27392/42404, 47.29 photos/s
+  images 27552/42404, 47.28 photos/s
+  images 27712/42404, 47.28 photos/s
+  images 27872/42404, 47.27 photos/s
+  images 28032/42404, 47.27 photos/s
+  images 28192/42404, 47.28 photos/s
+  images 28352/42404, 47.28 photos/s
+  images 28512/42404, 47.28 photos/s
+  images 28672/42404, 47.28 photos/s
+  images 28832/42404, 47.27 photos/s
+  images 28992/42404, 47.27 photos/s
+  images 29152/42404, 47.27 photos/s
+  images 29312/42404, 47.27 photos/s
+  images 29472/42404, 47.27 photos/s
+  images 29632/42404, 47.26 photos/s
+  images 29792/42404, 47.25 photos/s
+  images 29952/42404, 47.24 photos/s
+  images 30112/42404, 47.23 photos/s
+  images 30272/42404, 47.23 photos/s
+  images 30432/42404, 47.23 photos/s
+  images 30592/42404, 47.23 photos/s
+  images 30752/42404, 47.22 photos/s
+  images 30912/42404, 47.21 photos/s
+  images 31072/42404, 47.21 photos/s
+  images 31232/42404, 47.21 photos/s
+  images 31392/42404, 47.21 photos/s
+  images 31552/42404, 47.21 photos/s
+  images 31712/42404, 47.20 photos/s
+  images 31872/42404, 47.20 photos/s
+  images 32032/42404, 47.19 photos/s
+  images 32192/42404, 47.19 photos/s
+  images 32352/42404, 47.18 photos/s
+  images 32512/42404, 47.17 photos/s
+  images 32672/42404, 47.17 photos/s
+  images 32832/42404, 47.14 photos/s
+  images 32992/42404, 47.14 photos/s
+  images 33152/42404, 47.13 photos/s
+  images 33312/42404, 47.12 photos/s
+  images 33472/42404, 47.12 photos/s
+  images 33632/42404, 47.12 photos/s
+  images 33792/42404, 47.11 photos/s
+  images 33952/42404, 47.11 photos/s
+  images 34112/42404, 47.10 photos/s
+  images 34272/42404, 47.09 photos/s
+  images 34432/42404, 47.08 photos/s
+  images 34592/42404, 47.07 photos/s
+  images 34752/42404, 47.05 photos/s
+  images 34912/42404, 47.04 photos/s
+  images 35072/42404, 47.02 photos/s
+  images 35232/42404, 47.02 photos/s
+  images 35392/42404, 47.01 photos/s
+  images 35552/42404, 47.00 photos/s
+  images 35712/42404, 46.99 photos/s
+  images 35872/42404, 46.99 photos/s
+  images 36032/42404, 46.98 photos/s
+  images 36192/42404, 46.97 photos/s
+  images 36352/42404, 46.96 photos/s
+  images 36512/42404, 46.95 photos/s
+  images 36672/42404, 46.94 photos/s
+  images 36832/42404, 46.93 photos/s
+  images 36992/42404, 46.92 photos/s
+  images 37152/42404, 46.90 photos/s
+  images 37312/42404, 46.89 photos/s
+  images 37472/42404, 46.88 photos/s
+  images 37632/42404, 46.87 photos/s
+  images 37792/42404, 46.86 photos/s
+  images 37952/42404, 46.85 photos/s
+  images 38112/42404, 46.84 photos/s
+  images 38272/42404, 46.83 photos/s
+  images 38432/42404, 46.82 photos/s
+  images 38592/42404, 46.81 photos/s
+  images 38752/42404, 46.80 photos/s
+  images 38912/42404, 46.80 photos/s
+  images 39072/42404, 46.79 photos/s
+  images 39232/42404, 46.78 photos/s
+  images 39392/42404, 46.77 photos/s
+  images 39552/42404, 46.77 photos/s
+  images 39712/42404, 46.76 photos/s
+  images 39872/42404, 46.75 photos/s
+  images 40032/42404, 46.73 photos/s
+  images 40192/42404, 46.72 photos/s
+  images 40352/42404, 46.72 photos/s
+  images 40512/42404, 46.71 photos/s
+  images 40672/42404, 46.70 photos/s
+  images 40832/42404, 46.70 photos/s
+  images 40992/42404, 46.69 photos/s
+  images 41152/42404, 46.68 photos/s
+  images 41312/42404, 46.67 photos/s
+  images 41472/42404, 46.66 photos/s
+  images 41632/42404, 46.65 photos/s
+  images 41792/42404, 46.65 photos/s
+  images 41952/42404, 46.64 photos/s
+  images 42112/42404, 46.63 photos/s
+  images 42272/42404, 46.62 photos/s
+  images 42404/42404, 46.62 photos/s
+images: 42404 embedded, 0 skipped, 909.6s (46.62 photos/s)
+[08:10:55] exit 0
+[08:10:55] job done, fail=0
+[08:13:17] merging into existing pub/lab-tinyclip-8m-16 (eb148ee)
+parts/lab-tinyclip-8m-16-s0/
+parts/lab-tinyclip-8m-16-s1/
+[08:13:17] + python3 -u tools/lab/lab.py merge --model tinyclip-8m-16 --manifest data_in/manifest.csv --run 30 --out pubdir parts/lab-tinyclip-8m-16-s0/ parts/lab-tinyclip-8m-16-s1/
+merged alachua-pre2025: 2 of 2 shards, 84808 rows, 0 skipped
+[08:13:18] exit 0
+[08:13:18] + bash ci/put_branch.sh pub/lab-tinyclip-8m-16 pubdir lab: tinyclip-8m-16
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File images/alachua-pre2025.f16.npy is 82.82 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+published pub/lab-tinyclip-8m-16
+[08:13:47] exit 0
+[08:13:47] published pub/lab-tinyclip-8m-16
