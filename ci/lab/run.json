@@ -1,14 +1,14 @@
 {
- "about": "Shakedown on stand-in data: every model through the stages it will need, and the pocket candidates exported.",
+ "about": "Species label sets from pub/data-alachua's species.json for every model with a text tower; exports redone with two int8 candidates; the FastViT student's image stage on the stand-in.",
  "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32", "clip-b32", "bioclip-b16", "bioclip2-l14", "bioclip25-h14", "bioclip25-mobile-fastvit", "siglip2-b16", "mobileclip2-s0"],
  "stages": {
-  "tinyclip-8m-16": ["text-kinds", "text-species", "export", "images", "images-onnx-int8"],
-  "tinyclip-40m-32": ["text-kinds", "export", "images", "images-onnx-int8"],
-  "tinyclip-39m-16": ["text-kinds", "export", "images"],
-  "tinyclip-61m-32": ["text-kinds", "export", "images"],
-  "bioclip-b16": ["text-kinds", "export", "images"],
+  "tinyclip-8m-16": ["text-species", "export"],
+  "tinyclip-40m-32": ["text-species", "export"],
+  "tinyclip-39m-16": ["text-species", "export"],
+  "tinyclip-61m-32": ["text-species", "export"],
+  "bioclip-b16": ["text-species", "export"],
   "bioclip25-mobile-fastvit": ["images"],
-  "*": ["text-kinds", "images"]
+  "*": ["text-species"]
  },
  "data": "auto",
  "shards": {},

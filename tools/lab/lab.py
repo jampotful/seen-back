@@ -380,9 +380,11 @@ class OnnxOnlyModel(Base):
 
     def encode_pixels(self, pv):
         pv = np.asarray(pv, dtype=np.float32)
+        b0 = self.sess.get_inputs()[0].shape[0]
+        step = b0 if isinstance(b0, int) and b0 > 0 else 16  # some exports fix the batch at 1
         outs = []
-        for i in range(0, len(pv), 16):
-            outs.append(self.sess.run(None, {self.input_name: pv[i:i + 16]})[0])
+        for i in range(0, len(pv), step):
+            outs.append(self.sess.run(None, {self.input_name: pv[i:i + step]})[0])
         return np.concatenate(outs).astype(np.float32)
 
     def params(self):
@@ -642,7 +644,13 @@ def export_onnx(m, path, size, opset):
 
     if "dynamo" in inspect.signature(torch.onnx.export).parameters:
         kw["dynamo"] = False
-    with torch.no_grad():
+    # nn.MultiheadAttention (open_clip towers) takes a fused fast path in eval mode without gradients, and that fused
+    # operator (aten::_native_multi_head_attention) cannot be exported; turn the fast path off and trace with gradients on.
+    try:
+        torch.backends.mha.set_fastpath_enabled(False)
+    except Exception:
+        pass
+    with torch.enable_grad():
         torch.onnx.export(v, (dummy,), str(path), **kw)
 
 
@@ -689,9 +697,16 @@ def stage_export(args):
     from onnxruntime.quantization import QuantType, quantize_dynamic
 
     int8 = od / "vision.int8.onnx"
-    quantize_dynamic(str(fp32), str(int8), op_types_to_quantize=["MatMul", "Gemm"], weight_type=QuantType.QInt8,
-                     per_channel=False, reduce_range=False, extra_options={"MatMulConstBOnly": True})
-    log("int8: %.1f MB" % (int8.stat().st_size / 1e6))
+    cands = {}
+    for tag, pc in (("int8-per-tensor", False), ("int8-per-channel", True)):
+        f = tmp / ("vision.%s.onnx" % tag)
+        try:
+            quantize_dynamic(str(fp32), str(f), op_types_to_quantize=["MatMul", "Gemm"], weight_type=QuantType.QInt8,
+                             per_channel=pc, reduce_range=False, extra_options={"MatMulConstBOnly": True})
+            cands[tag] = f
+            log("%s: %.1f MB" % (tag, f.stat().st_size / 1e6))
+        except Exception as e:
+            log("%s failed: %s: %s" % (tag, type(e).__name__, e))
     fp16 = tmp / "vision.fp16.onnx"
     fp16_note = None
     try:
@@ -726,13 +741,14 @@ def stage_export(args):
     pv = m.pixel_values(ims) if ims else None
     ref = m.encode_pixels(pv) if ims else None
     pv_np = pv.numpy().astype(np.float32) if pv is not None else None
-    files = {"fp32": fp32, "int8": int8}
+    files = {"fp32": fp32}
+    files.update(cands)
     if fp16 is not None:
         files["fp16"] = fp16
     parity = {"model": entry["id"], "photos": len(ims), "photo_ids": pids, "opset": args.opset,
               "input": "pixel_values: float32 [N,3,%d,%d], already resized, cropped and normalized" % (size, size),
               "output": "image_embeds: float32 [N,%s], projected embedding, NOT unit-normalized (normalize before cosine)" % (card.get("width") or "D"),
-              "quantization": "onnxruntime.quantization.quantize_dynamic, op_types_to_quantize=[MatMul, Gemm], weight_type=QInt8, per_channel=False, MatMulConstBOnly=True; convolutions (the patch embedding) stay float32",
+              "quantization": "onnxruntime.quantization.quantize_dynamic, op_types_to_quantize=[MatMul, Gemm], weight_type=QInt8, MatMulConstBOnly=True, made twice (per_channel False and True); the one with the higher mean cosine to the original model is published as vision.int8.onnx; convolutions (the patch embedding) stay float32; activations are quantized at run time (DynamicQuantizeLinear + MatMulInteger)",
               "fp16": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True); input and output stay float32",
               "files": {}}
     if fp16_note:
@@ -772,6 +788,19 @@ def stage_export(args):
             info["run_error"] = "%s: %s" % (type(e).__name__, e)
         parity["files"][variant] = info
         log("%s: %s" % (variant, json.dumps({k: v for k, v in info.items() if k not in ("ops",)})))
+    best = None
+    for tag in cands:
+        c = parity["files"].get(tag, {}).get("cosine_vs_torch", {}).get("mean", -1)
+        if "run_error" in parity["files"].get(tag, {}):
+            continue
+        if best is None or c > parity["files"][best].get("cosine_vs_torch", {}).get("mean", -1) + 1e-4:
+            best = tag
+    if best is None:
+        raise SystemExit("no int8 file ran")
+    shutil.copy(cands[best], int8)
+    parity["files"]["int8"] = dict(parity["files"][best], chosen_from=best)
+    files["int8"] = int8
+    log("int8: published %s" % best)
     parity["machine"] = {"cpus": os.cpu_count(), "processor": platform.processor(), "machine": platform.machine()}
     parity["software"] = versions()
     # keep inputs and ORT outputs for the browser (WASM) check
@@ -782,7 +811,10 @@ def stage_export(args):
         pv_np[:k].tofile(wd / "input.f32")
         (wd / "shape.json").write_text(json.dumps([k, 3, size, size]))
         np.ascontiguousarray(ref[:k], dtype=np.float32).tofile(wd / "torch_ref.f32")
-        for variant, f in files.items():
+        for variant in ("int8", "fp16", "fp32"):
+            f = files.get(variant)
+            if f is None:
+                continue
             try:
                 s = ort_session(f)
                 got = s.run(None, {"pixel_values": pv_np[:k]})[0]
@@ -804,6 +836,8 @@ def stage_export(args):
     if int8.stat().st_size >= 95e6:
         shutil.move(str(int8), str(tmp / int8.name))
         parity["files"]["int8"]["why_not_published"] = "over 95 MB"
+    for tag in cands:
+        parity["files"][tag]["published"] = False
     for variant in parity["files"]:
         f = od / ("vision.%s.onnx" % variant)
         if f.exists():
