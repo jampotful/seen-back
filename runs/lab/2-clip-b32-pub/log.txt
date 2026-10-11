@@ -1,0 +1,47 @@
+==== job log parts/lab-clip-b32-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:56:30] job: model=clip-b32 shard=0/1 stages=text-kinds,images
+data_source=standin
+evalname=standin
+manifest_rows=40
+species=30
+[00:56:30] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+photos: 40 rows, 40 to fetch, 0 failed, 1.0s
+[00:56:31] exit 0
+[00:56:31] + python3 -u tools/lab/lab.py text --model clip-b32 --labelset kinds --out art/clip-b32
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded clip-b32 via transformers in 12.2s
+[0;93m2026-10-11 00:56:44.070816719 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/708 (2.3s)
+kinds: (17, 512) -> text/kinds.f16.npy
+[00:56:50] exit 0
+[00:56:50] + python3 -u tools/lab/lab.py images --model clip-b32 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname standin --out art/clip-b32
+images: clip-b32, eval standin, shard 0/1, 40 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded clip-b32 via transformers in 3.8s
+[0;93m2026-10-11 00:56:54.555316345 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/40, 16.61 photos/s
+images: 40 embedded, 0 skipped, 2.4s (16.62 photos/s)
+[00:56:57] exit 0
+[00:56:57] job done, fail=0
+parts/lab-clip-b32-s0/
+[01:11:29] + python3 -u tools/lab/lab.py merge --model clip-b32 --manifest data_in/manifest.csv --out pubdir parts/lab-clip-b32-s0/
+[01:11:29] exit 0
+[01:11:29] + bash ci/put_branch.sh pub/lab-clip-b32 pubdir lab: clip-b32
+remote: 
+remote: Create a pull request for 'pub/lab-clip-b32' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/lab-clip-b32        
+remote: 
+published pub/lab-clip-b32
+[01:11:30] exit 0
+[01:11:30] published pub/lab-clip-b32
