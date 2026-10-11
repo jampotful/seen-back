@@ -37,6 +37,14 @@ add("every evaluation photo is dated after the species list's last record (%s)" 
 snap = "2024-05-01"
 add("every evaluation photo is dated after the GBIF snapshot behind BioCLIP 2's training data (%s)" % snap, "pass" if min(r["date"] for r in rows) > snap else "FAIL",
     "earliest evaluation date %s. This says nothing about BioCLIP 2.5, whose card gives no snapshot date." % min(r["date"] for r in rows))
+# observation numbers on iNaturalist grow with the time an observation was created
+obs = np.array([int(r["obs_url"].rsplit("/", 1)[1]) for r in rows])
+first_day = min(r["date"] for r in rows)
+floor_id = int(min(o for o, r in zip(obs, rows) if r["date"] == first_day))
+older = int((obs < floor_id).sum())
+add("no evaluation observation was created before the first one dated %s" % first_day, "pass" if older == 0 else "note",
+    "observation numbers run from %d to %d; the smallest number among observations dated %s is %d; observations with a smaller number: %d. "
+    "A smaller number would mean an observation created earlier than 2025 and dated later." % (obs.min(), obs.max(), first_day, floor_id, older))
 bad_month = sum(int(r["month"]) != int(r["date"][5:7]) for r in rows)
 add("the month column is the month of the date", "pass" if not bad_month else "FAIL", "%d rows disagree" % bad_month)
 

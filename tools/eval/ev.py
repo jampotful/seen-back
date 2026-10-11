@@ -136,6 +136,18 @@ def ci(x):
     return [round(float(x.mean()), 4), round(float(lo), 4), round(float(hi), 4), int(n)]
 
 
+def ci_cluster(x, clusters):
+    """As ci(), but resampling whole clusters of photos (for example one species on one day), which are not independent of each other."""
+    x = np.asarray(x, dtype=np.float64)
+    _, inv = np.unique(np.asarray(clusters), return_inverse=True)
+    C = int(inv.max()) + 1
+    hits, size = np.bincount(inv, weights=x, minlength=C), np.bincount(inv, minlength=C).astype(np.float64)
+    counts = np.random.default_rng(SEED + C).multinomial(C, np.full(C, 1.0 / C), size=RESAMPLES)
+    b = (counts @ hits) / (counts @ size)
+    lo, hi = np.percentile(b, [2.5, 97.5])
+    return [round(float(x.mean()), 4), round(float(lo), 4), round(float(hi), 4), int(len(x)), C]
+
+
 def softmax_rows(Z):
     Z = Z - Z.max(1, keepdims=True)
     np.exp(Z, out=Z)

@@ -132,6 +132,8 @@ def score_labelset(ES, Z, differ, want_detail):
     out["names_agree_only"] = {"rows_left_out": int(d.sum()), "plain_top1": ev.ci(h1[~d]), "tuned_top1": ev.ci(g1[~d]),
                                "plain_top1_on_rows_left_out": ev.ci(h1[d]), "tuned_top1_on_rows_left_out": ev.ci(g1[d])}
     if want_detail:
+        day_species = np.array([r["date"] + "|" + r["key"] for r, t in zip(ES.rows, te) if t])
+        out["clustered"] = {"clusters": "one species on one day", "plain_top1": ev.ci_cluster(h1, day_species), "tuned_top1": ev.ci_cluster(g1, day_species)}
         G = groups_for(ES, te)
         out["breakdown"] = {name: breakdown(g, g1, g5, h1) for name, g in G.items()}
         out["kind_confusion_from_top"] = confusion(eyes[te], ES.sp_eyes[p1], [k for k in ev.KINDS if (eyes[te] == k).any()], kinds15)
@@ -223,7 +225,12 @@ def run_model(root, model, differ_cache):
             del Z
         res["variants"][v] = o
     res["seconds"] = round(time.time() - t0, 1)
+    if res.get("best_labelset_on_val"):
+        HITS[model] = (kept[res["best_labelset_on_val"]]["plain_hit"], kept[res["best_labelset_on_val"]]["tuned_hit"])
     return res
+
+
+HITS = {}      # model -> (hits without the prior, hits with it) on the test photos, for paired comparisons between models
 
 
 def prior_only(root):
@@ -271,4 +278,11 @@ if __name__ == "__main__":
         out["models"][m] = r
         b = r.get("best_labelset_on_val")
         print(m, "kinds", (r.get("kind_phrases") or {}).get("accuracy"), "|", b, (r["labelsets"][b]["plain"]["top1"], r["labelsets"][b]["tuned"]["top1"], r["labelsets"][b]["tuned"]["settings"]) if b else "no label rows", "| %.0fs" % r["seconds"], flush=True)
+        ev.write_json(a.out, out)
+    ref = "bioclip2-l14"
+    if ref in HITS:
+        for m, (h0, h1) in HITS.items():
+            if m != ref and len(h0) == len(HITS[ref][0]):
+                out["models"][m]["against_bioclip2_l14"] = {"top1_difference": ev.ci(h0.astype(np.float32) - HITS[ref][0].astype(np.float32)),
+                                                           "top1_with_prior_difference": ev.ci(h1.astype(np.float32) - HITS[ref][1].astype(np.float32))}
         ev.write_json(a.out, out)

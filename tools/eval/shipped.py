@@ -136,10 +136,37 @@ text = ("The slot holds the head `%s` for `%s` (%s), fitted on `%s`, with %d spe
     n, pci(num["kind_right"]), pci(num["species_top1"]), pci(num["species_top5"]), 100 * num["called_person"], 100 * num["called_none"], differ)
 if man.get("needs"):
     text += " The slot needs: %s." % "; ".join(man["needs"])
+# 4. photos of people, pets, livestock and rooms (data/extra/<name>), when their vectors are published
+extra = []
+for xname in ("coco-kinds",):
+    xman = os.path.join(a.root, "data", "extra", xname, "manifest.csv")
+    xv = next((v for v in (xname + ".wasm-int8-per-channel", xname) if os.path.exists(os.path.join(a.root, "lab", evn["model"], "images", v + ".f16.npy"))), None) if "wasm" in evn["test_vectors"] else (xname if os.path.exists(os.path.join(a.root, "lab", evn["model"], "images", xname + ".f16.npy")) else None)
+    if not os.path.exists(xman) or xv is None:
+        continue
+    Ex, xids = ev.load_images(a.root, evn["model"], xv)
+    by = {r["id"]: r for r in ev.read_manifest(a.root, "extra/" + xname)}
+    sel = [k for k, i in enumerate(xids) if by[i]["split"] == "test"]
+    if a.limit:
+        sel = sel[:a.limit]
+    Ex = Ex[sel].astype(np.float64)
+    Ex /= np.linalg.norm(Ex, axis=1, keepdims=True)
+    xr = [by[xids[k]] for k in sel]
+    kdx, sdx = Ex @ slot["kinds"].T, Ex @ slot["species"].T
+    xres = [F.fuse(man, table, int(r["month"] or 6) - 1, kdx[j], sdx[j], kind_bias=slot["kind_bias"], species_bias=slot["species_bias"]) for j, r in enumerate(xr)]
+    xe = np.array([r["eyes"] for r in xr])
+    xs = np.array([r["kind"] for r in xres])
+    xn = np.array([r["named"] is not None for r in xres])
+    rows_x = [{"kind": k, "n": int((xe == k).sum()), "right": ev.ci(xs[xe == k] == k), "person": float((xs[xe == k] == "person").mean()), "none": float((xs[xe == k] == "none").mean()), "named": float(xn[xe == k].mean())} for k in ("person", "none", "cat", "dog", "deer") if (xe == k).any()]
+    extra.append({"set": xname, "vectors": "images/" + xv, "rows": rows_x,
+                  "text": "The %d test photos of the extra set `%s` (COCO photos of people, cats, dogs, grazing animals and rooms with nothing alive; vectors `images/%s`) went through the same slot. A species name on a photo of a person or a room is always wrong." % (len(xr), xname, xv)})
+    print(extra[-1]["text"])
+    for g in rows_x:
+        print("  %-7s n %4d  right %s  person %.3f  none %.3f  named %.3f" % (g["kind"], g["n"], pci(g["right"]), g["person"], g["none"], g["named"]))
+
 outcomes = [{"what": "a species name", "share": num["named"][0], "right": "the name is right for %s; the kind for %s" % (pci(num["named_right"]), pci(num["named_kind_right"]))},
             {"what": "three species to choose from", "share": num["offered"][0], "right": "the three hold the species for %s; the kind is right for %s" % (pci(num["offered_holds_species"]), pci(num["offered_kind_right"]))},
             {"what": "a kind of eye only", "share": num["kind_only"][0], "right": "the kind is right for %s" % pci(num["kind_only_kind_right"])}]
-out = {"made_by": "tools/eval/shipped.py", "slot": name, "manifest": {k: man[k] for k in ("id", "fusion", "evaluation", "needs") if k in man}, "numbers": num, "text": text, "outcomes": outcomes}
+out = {"made_by": "tools/eval/shipped.py", "slot": name, "manifest": {k: man[k] for k in ("id", "fusion", "evaluation", "needs") if k in man}, "numbers": num, "text": text, "outcomes": outcomes, "extra": extra}
 print(text)
 for o in outcomes:
     print("  %-30s %5.1f%%  %s" % (o["what"], 100 * (o["share"] or 0), o["right"]))

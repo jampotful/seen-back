@@ -29,7 +29,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ev
 
-REL = (0.0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0)   # prior weight, in units of a head's usual gap between first and second
+REL = (0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0)   # prior weight, in units of a head's usual gap between first and second
 SCALES = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0, 32.0, 48.0, 64.0, 96.0, 128.0)   # calibration scale, in the same units
 T_KIND = (20.0, 50.0, 100.0)                                            # temperature of the kind phrases in the page's combination
 W_KIND = (0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0)                       # weight of the kind phrases against the species list
@@ -50,6 +50,8 @@ def fit_set(root, model, mode):
         h = np.array([int(hashlib.sha256(i.encode()).hexdigest()[:8], 16) % 3 for i in ids])
         fit, tune = ES.val & (h < 2), ES.val & (h == 2)
         return ES, E0[fit], ES.y[fit], ES.eyes[fit], tune, [i for i, f in zip(ids, fit) if f], "images/" + ev.EVALSET + " (two thirds of val)"
+    if mode == "sentences":
+        return ES, None, None, None, ES.val.copy(), [], "none (sentence rows only)"
     X, tid = ev.load_images(root, model, mode)
     if X is None:
         return None
@@ -146,8 +148,10 @@ def run_model(root, model, mode, save):
         log(model, ": no training vectors published (images/%s)" % mode)
         return None
     ES, X, ytr, eyes_tr, tune, fit_ids, train_name = got
-    ok = ytr >= 0
-    X, ytr, eyes_tr = X[ok], ytr[ok], eyes_tr[ok]
+    fitted = X is not None
+    if fitted:
+        ok = ytr >= 0
+        X, ytr, eyes_tr = X[ok], ytr[ok], eyes_tr[ok]
     S = len(ES.species)
     tv = ev.EVALSET + ".wasm-int8-per-channel"
     Et, ids_t = ev.load_images(root, model, tv)
@@ -159,7 +163,7 @@ def run_model(root, model, mode, save):
     Xu, Xt = Et[tune], Et[te]
     yu, yt = ES.y[tune], ES.y[te]
     lps = [ev.log_share(ev.prior_weights(ES.M, ES.N, lam, c)) for lam, c in SMOOTH]
-    res = {"train_vectors": train_name, "train_photos": int(len(X)), "train_species": int(len(set(ytr.tolist()))), "tuning_photos": int(tune.sum()),
+    res = {"train_vectors": train_name, "train_photos": int(len(X)) if fitted else 0, "train_species": int(len(set(ytr.tolist()))) if fitted else 0, "tuning_photos": int(tune.sum()),
            "test_vectors": "images/" + tv, "test_photos": int(te.sum()), "species_heads": [], "kind_heads": [], "notes": []}
     heads = {}       # name -> list of (label, rows, bias)
 
@@ -172,58 +176,60 @@ def run_model(root, model, mode, save):
     zero = np.zeros(S, np.float32)
     if texts:
         heads["sentences"] = [(ls, T_, zero) for ls, T_ in texts.items()]
-    # prototypes
-    have = np.zeros(S, bool)
-    have[ytr] = True
-    cnt = np.bincount(ytr, minlength=S)
-    Pr = np.zeros((S, X.shape[1]), np.float32)
-    np.add.at(Pr, ytr, X)
-    Pr = ev.unit(Pr)
-    Pr[~have] = 0
-    heads["prototypes"] = [("class means", Pr, np.where(have, 0, NEG).astype(np.float32))]
-    if texts:
-        # the label set that does best by itself on the tuning photos is the one mixed into the trained heads
-        ls_best = max(texts, key=lambda ls: tune_head([(ls, texts[ls], zero)], Xu, lps, yu, ES.month[tune])[1][0])
-        Tb = texts[ls_best]
-        heads["prototypes + sentences"] = [("%s, beta %g, bias for species without photos %g" % (ls_best, beta, c0), Pr + np.float32(beta) * Tb, np.where(have, 0, c0).astype(np.float32))
-                                           for beta in (0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)]
-    # discriminant
-    shrink = (0.03, 0.1, 0.3, 1.0)
-    L, _, _ = lda(X, ytr, S, shrink)
-    heads["discriminant"] = [("shrinkage %g" % g, L[g][0], L[g][1]) for g in shrink]
-    if texts:
-        dm = []
-        for g in shrink:
-            W, b = L[g]
-            sc = float(np.median(np.linalg.norm(W[have], axis=1)))
-            for gam in (0.1, 0.3, 1.0, 3.0):
-                rows = np.where(have[:, None], W + np.float32(gam * sc) * Tb, np.float32((1 + gam) * sc) * Tb)
-                bias = np.where(have, b, np.float32(np.median(b[have])))
-                dm.append(("shrinkage %g, %s, gamma %g" % (g, ls_best, gam), rows.astype(np.float32), bias.astype(np.float32)))
-        heads["discriminant + sentences"] = dm
-    # mapped into BioCLIP 2's space
-    big = "bioclip2-l14"
-    if model != big:
-        if mode == "val":
-            Eb, idb = ev.load_images(root, big)
-            pair_x, pair_y = X, (Eb[[idb.index(i) for i in fit_ids]][ok] if Eb is not None else None)
-        else:
-            Eb, idb = ev.load_images(root, big, mode)
-            if Eb is not None:
-                pos = {i: k for k, i in enumerate(idb)}
-                sel = [k for k, i in enumerate(np.array(fit_ids)[ok]) if i in pos]
-                pair_x, pair_y = X[sel], Eb[[pos[i] for i in np.array(fit_ids)[ok][sel]]]
+    cnt = np.zeros(S, int)
+    if fitted:
+        # prototypes
+        have = np.zeros(S, bool)
+        have[ytr] = True
+        cnt = np.bincount(ytr, minlength=S)
+        Pr = np.zeros((S, X.shape[1]), np.float32)
+        np.add.at(Pr, ytr, X)
+        Pr = ev.unit(Pr)
+        Pr[~have] = 0
+        heads["prototypes"] = [("class means", Pr, np.where(have, 0, NEG).astype(np.float32))]
+        if texts:
+            # the label set that does best by itself on the tuning photos is the one mixed into the trained heads
+            ls_best = max(texts, key=lambda ls: tune_head([(ls, texts[ls], zero)], Xu, lps, yu, ES.month[tune])[1][0])
+            Tb = texts[ls_best]
+            heads["prototypes + sentences"] = [("%s, beta %g, bias for species without photos %g" % (ls_best, beta, c0), Pr + np.float32(beta) * Tb, np.where(have, 0, c0).astype(np.float32))
+                                               for beta in (0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)]
+        # discriminant
+        shrink = (0.03, 0.1, 0.3, 1.0)
+        L, _, _ = lda(X, ytr, S, shrink)
+        heads["discriminant"] = [("shrinkage %g" % g, L[g][0], L[g][1]) for g in shrink]
+        if texts:
+            dm = []
+            for g in shrink:
+                W, b = L[g]
+                sc = float(np.median(np.linalg.norm(W[have], axis=1)))
+                for gam in (0.1, 0.3, 1.0, 3.0):
+                    rows = np.where(have[:, None], W + np.float32(gam * sc) * Tb, np.float32((1 + gam) * sc) * Tb)
+                    bias = np.where(have, b, np.float32(np.median(b[have])))
+                    dm.append(("shrinkage %g, %s, gamma %g" % (g, ls_best, gam), rows.astype(np.float32), bias.astype(np.float32)))
+            heads["discriminant + sentences"] = dm
+        # mapped into BioCLIP 2's space
+        big = "bioclip2-l14"
+        if model != big:
+            if mode == "val":
+                Eb, idb = ev.load_images(root, big)
+                pair_x, pair_y = X, (Eb[[idb.index(i) for i in fit_ids]][ok] if Eb is not None else None)
             else:
-                pair_y = None
-        Sb, _ = ev.load_text(root, big, "species_sci")
-        if pair_y is not None and Sb is not None:
-            G = (pair_x.T @ pair_x).astype(np.float64)
-            XY = (pair_x.T @ pair_y).astype(np.float64)
-            tr = np.trace(G) / G.shape[0]
-            heads["mapped to BioCLIP 2"] = [("ridge %g, %d pairs" % (lam, len(pair_x)), (Sb @ np.linalg.solve(G + lam * tr * np.eye(G.shape[0]), XY).T.astype(np.float32)).astype(np.float32), zero) for lam in (0.001, 0.01, 0.1, 1.0)]
-            res["notes"].append("The map into BioCLIP 2's space was fitted on %d pairs of vectors of the same photos." % len(pair_x))
-        else:
-            res["notes"].append("The map into BioCLIP 2's space could not be fitted: BioCLIP 2's vectors of the fitting photos are not published yet.")
+                Eb, idb = ev.load_images(root, big, mode)
+                if Eb is not None:
+                    pos = {i: k for k, i in enumerate(idb)}
+                    sel = [k for k, i in enumerate(np.array(fit_ids)[ok]) if i in pos]
+                    pair_x, pair_y = X[sel], Eb[[pos[i] for i in np.array(fit_ids)[ok][sel]]]
+                else:
+                    pair_y = None
+            Sb, _ = ev.load_text(root, big, "species_sci")
+            if pair_y is not None and Sb is not None:
+                G = (pair_x.T @ pair_x).astype(np.float64)
+                XY = (pair_x.T @ pair_y).astype(np.float64)
+                tr = np.trace(G) / G.shape[0]
+                heads["mapped to BioCLIP 2"] = [("ridge %g, %d pairs" % (lam, len(pair_x)), (Sb @ np.linalg.solve(G + lam * tr * np.eye(G.shape[0]), XY).T.astype(np.float32)).astype(np.float32), zero) for lam in (0.001, 0.01, 0.1, 1.0)]
+                res["notes"].append("The map into BioCLIP 2's space was fitted on %d pairs of vectors of the same photos." % len(pair_x))
+            else:
+                res["notes"].append("The map into BioCLIP 2's space could not be fitted: BioCLIP 2's vectors of the fitting photos are not published yet.")
 
     ntr = cnt[np.maximum(yt, 0)] * (yt >= 0)
     chosen, table_cols, table_hits = None, [], []
@@ -263,6 +269,8 @@ def run_model(root, model, mode, save):
         pred = np.array(klabels)[(Xt @ K.T).argmax(1)]
         res["kind_heads"].append({"name": "kind phrases (sentence rows, with `person` and `none`)", "accuracy": ev.ci(pred == eyes_t), "called_person": float((pred == "person").mean()), "called_none": float((pred == "none").mean())})
     try:
+        if not fitted:
+            raise LookupError
         from sklearn.linear_model import LogisticRegression
         clf = LogisticRegression(C=20.0, max_iter=300).fit(X, eyes_tr)
         zk = clf.decision_function(Xt)
@@ -280,6 +288,8 @@ def run_model(root, model, mode, save):
             pred2 = lab2[z2.argmax(1)]
             res["kind_heads"].append({"name": "trained rows, with the sentence rows for `person` and `none` kept beside them", "accuracy": ev.ci(pred2 == eyes_t), "called_person": float((pred2 == "person").mean()), "called_none": float((pred2 == "none").mean())})
             res["notes"].append("The wildlife records hold no people and no photos with nothing alive in them. The sentence rows for `person` and `none` are kept, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured.")
+    except LookupError:
+        pass
     except Exception as e:                                                # scikit-learn missing or the fit failed: say so
         res["notes"].append("The trained kind head was not fitted: %s." % type(e).__name__)
     res["kind_heads"].append({"name": "summed species probabilities of the head `%s`" % chosen["name"], "accuracy": next(h["prior"]["kind_from_sum"] for h in res["species_heads"] if h["name"] == chosen["name"]), "called_person": 0.0, "called_none": 0.0})
@@ -380,11 +390,14 @@ if __name__ == "__main__":
     a = ap.parse_args()
     out_path = a.out or "docs/eval/study2-%s.json" % a.train
     standin = a.train == "val"
+    sentences_only = a.train == "sentences"
     what = ("This run is a stand-in that proves the machinery. No training vectors were published when it ran, so two thirds of the `val` photos were used to fit the heads and the last third to choose settings. "
             "With about two fitting photos a species, these numbers say little about what the real training set (up to sixty photos a species) will give. They are here to show that every step runs and to be replaced."
             if standin else
+            "No head was fitted here. The models' own sentence rows were given the prior, the calibration and the page's combination with the kind phrases, with every setting chosen on the whole of `val`. These are the slots that can ship before any training photo exists."
+            if sentences_only else
             "Heads were fitted on the training photos `%s` (from before 2025, up to sixty a species), settings were chosen on `val`, and every number is from `test`." % a.train)
-    out = {"made_by": "tools/eval/study2.py --train " + a.train, "standin": standin, "what": what,
+    out = {"made_by": "tools/eval/study2.py --train " + a.train, "standin": standin, "sentences_only": sentences_only, "what": what,
            "method": {"resamples": ev.RESAMPLES, "seed": ev.SEED, "prior_weight_grid": REL, "scale_grid": SCALES, "smoothing": SMOOTH}, "models": {}}
     fetched = os.path.join(a.root, "FETCHED.json")
     if os.path.exists(fetched):

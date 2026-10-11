@@ -170,6 +170,8 @@ if b2:
     T += ["## BioCLIP 2 in more detail", "",
           "BioCLIP 2 (ViT-L/14) scored against scientific names is right about the species in %s of test photos, and has the species in its first five in %s. With the prior these become %s and %s; the paired gain in top-1 is %s points. The same computation written twice by different hands (`tools/eval/firstcheck.py` and `tools/eval/study1.py`) gives the same top-1 and top-5 without the prior." % (
               pci(v["plain"]["top1"]), pci(v["plain"]["top5"]), pci(t["top1"]), pci(t["top5"]), pts(t["top1_gain_over_plain"])), "",
+          ] + (["- **Photos that belong together.** Several photos of one species on one day often come from one outing, so they are less than independent. Resampling whole groups (one species on one day, %d groups) instead of single photos gives %s without the prior and %s with it, against the intervals above." % (
+              v["clustered"]["plain_top1"][4], pci(v["clustered"]["plain_top1"]), pci(v["clustered"]["tuned_top1"]))] if v.get("clustered") else []) + [
           "- **Rare species lose under the prior.** For species with 1 or 2 records before 2025, top-1 is %s with the prior and %s without it (%d photos); for 3 to 9 records, %s and %s (%d photos). For species with 200 or more records it is %s and %s (%d photos). The prior buys its gain on common species and pays for it on rare ones." % (
               pc(rec["1 or 2 records"]["top1"][0]), pc(rec["1 or 2 records"]["top1_no_prior"]), rec["1 or 2 records"]["n"], pc(rec["3 to 9"]["top1"][0]), pc(rec["3 to 9"]["top1_no_prior"]), rec["3 to 9"]["n"],
               pc(rec["200 or more"]["top1"][0]), pc(rec["200 or more"]["top1_no_prior"]), rec["200 or more"]["n"]),
@@ -200,30 +202,94 @@ T += [table(["Model", "File the phone downloads", "Kind from phrases", "Kind fro
       "The vectors a phone computes (WASM, int8) cost about half a point of species top-1 against the original model's vectors; every quantized set is compared in [`docs/eval/variants.md`](eval/variants.md).", ""]
 return_marker = len(T)
 
-# Study 2 and the decisions are added by the sections below when their files exist.
-for name, s2 in S2.items():
-    standin = s2.get("standin")
-    T += ["## Heads trained on photos (Study 2)%s" % (": machinery proven on a stand-in" if standin else ""), ""]
-    T += [s2["what"], ""]
+# Study 2: the detail goes to docs/eval/study2-<name>.md, a summary comes here.
+def s2_title(name, s2):
+    if s2.get("sentences_only"):
+        return "Sentence rows with the prior, as the page would use them"
+    if s2.get("standin"):
+        return "Trained heads (Study 2): the machinery, proven on a stand-in"
+    return "Heads trained on local photos (Study 2)"
+
+
+def short_kind(n):
+    return n.split(" (")[0] if n.startswith(("kind phrases", "trained on")) else n
+
+
+for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get("sentences_only"))):
+    s2 = S2[name]
+    L = ["# %s" % s2_title(name, s2), "", GEN % ("docs/eval/study2-%s.json" % name), "", s2["what"], ""]
     for m, r in s2["models"].items():
-        T += ["### %s" % m, "", "Trained on %d photos of %d species (`%s`); tested on %d test photos (`%s`)." % (r["train_photos"], r["train_species"], r["train_vectors"], r["test_photos"], r["test_vectors"]), ""]
-        rows = [[h["name"], pci(h["plain"]["top1"]), pci(h["plain"]["top5"]), pci(h["prior"]["top1"]), pci(h["prior"]["top5"]), pci(h["prior"].get("kind_from_sum")), h["prior"].get("settings_text", "")] for h in r["species_heads"]]
-        T += [table(["Species head", "Top-1", "Top-5", "Top-1 with prior", "Top-5 with prior", "Kind from summed species", "Settings chosen on the tuning photos"], rows, ["---", "---:", "---:", "---:", "---:", "---:", "---"]), ""]
+        L += ["## %s" % m, "", "Fitted on %d photos of %d species (`%s`); settings chosen on %d tuning photos; tested on %d test photos (`%s`)." % (r["train_photos"], r["train_species"], r["train_vectors"], r["tuning_photos"], r["test_photos"], r["test_vectors"]), ""]
+        L += [table(["Species head", "Top-1", "Top-5", "Top-1 with prior", "Top-5 with prior", "Kind from summed species", "Chosen on the tuning photos"],
+                    [[h["name"], pci(h["plain"]["top1"]), pci(h["plain"]["top5"]), pci(h["prior"]["top1"]), pci(h["prior"]["top5"]), pci(h["prior"].get("kind_from_sum")), h["prior"].get("settings_text", "")] for h in r["species_heads"]],
+                    ["---", "---:", "---:", "---:", "---:", "---:", "---"]), ""]
         if r.get("kind_heads"):
-            T += [table(["Kind-of-eye head", "Right kind", "Called `person`", "Called `none`"], [[h["name"], pci(h["accuracy"]), pc(h.get("called_person"), 2), pc(h.get("called_none"), 2)] for h in r["kind_heads"]]), ""]
-        if r.get("by_train_photos"):
-            T += ["Top-1 with the prior for the head named first above each column, by how many training photos the species has:", "",
-                  table(["Training photos of the species", "Test photos"] + r["by_train_photos"]["heads"], [[g["group"], g["n"]] + [pc(x) for x in g["top1"]] for g in r["by_train_photos"]["rows"]]), ""]
+            L += [table(["Kind of eye from", "Right kind", "Called `person`", "Called `none`"], [[h["name"], pci(h["accuracy"]), pc(h.get("called_person"), 2), pc(h.get("called_none"), 2)] for h in r["kind_heads"]]), ""]
+        if r["train_photos"] and r.get("by_train_photos"):
+            L += ["Top-1 with the prior for each head, by how many fitting photos the species has:", "",
+                  table(["Fitting photos of the species", "Test photos"] + r["by_train_photos"]["heads"], [[g["group"], g["n"]] + [pc(x) for x in g["top1"]] for g in r["by_train_photos"]["rows"]]), ""]
         c = r.get("confidence")
         if c:
-            T += ["**Confidence.** %s" % c["text"], ""]
-        for note in r.get("notes", []):
-            T += ["- " + note]
-        T += [""]
+            L += ["**Confidence.** %s" % c["text"], "", table(["Top probability", "Tuning photos", "Mean probability", "Share right"], [["%.1f to %.1f" % (x["from"], x["to"]), x["photos"], pc(x["mean_probability"]), pc(x["right"])] for x in c["reliability_on_tuning_photos"]]), ""]
+        L += ["- " + note for note in r.get("notes", [])] + [""]
+    write("study2-%s.md" % name, "\n".join(L))
+    ms = list(s2["models"])
+    T += ["## " + s2_title(name, s2), "", s2["what"], ""]
+    heads = []
+    for m in ms:
+        for h in s2["models"][m]["species_heads"]:
+            if h["name"] not in heads:
+                heads.append(h["name"])
+    get = lambda m, hn: next((h for h in s2["models"][m]["species_heads"] if h["name"] == hn), None)
+    T += ["Species top-1 with the prior on the test photos%s:" % (" (the pocket models on the vectors a phone computes)" if any("wasm" in s2["models"][m]["test_vectors"] for m in ms) else ""), "",
+          table(["Species head"] + ms, [[hn] + [pci(get(m, hn)["prior"]["top1"]) if get(m, hn) else "–" for m in ms] for hn in heads]), ""]
+    kn = []
+    for m in ms:
+        for h in s2["models"][m]["kind_heads"]:
+            if short_kind(h["name"]).split(" (rule")[0] not in kn:
+                kn.append(short_kind(h["name"]).split(" (rule")[0])
+    def kget(m, k):
+        return next((h for h in s2["models"][m]["kind_heads"] if short_kind(h["name"]).split(" (rule")[0] == k and "`product`" not in h["name"]), None)
+    rows = []
+    for k in kn:
+        label = k.split(" and the head")[0].split(" of the head")[0]
+        if label not in [r_[0] for r_ in rows]:
+            rows.append([label] + [pci(kget(m, k)["accuracy"]) if kget(m, k) else "" for m in ms])
+        else:
+            row = next(r_ for r_ in rows if r_[0] == label)
+            for i, m in enumerate(ms):
+                if kget(m, k):
+                    row[i + 1] = pci(kget(m, k)["accuracy"])
+    T += ["Kind of eye right on the test photos:", "", table(["Kind of eye from"] + ms, rows), ""]
+    for m in ms:
+        r = s2["models"][m]
+        if r.get("confidence"):
+            T += ["- **%s.** %s" % (m, r["confidence"]["text"])]
+    for note in sorted({n_ for m in ms for n_ in s2["models"][m].get("notes", [])}):
+        T += ["- " + note]
+    T += ["", "Every head, its settings, the reliability tables and the breakdown by fitting photos are in [`docs/eval/study2-%s.md`](eval/study2-%s.md)." % (name, name), ""]
 
-for name, sh in SH.items():
-    T += ["## As shipped: `%s`" % name, "", sh["text"], ""]
-    T += [table(["What the page would show", "Share of test photos", "Right"], [[x["what"], pc(x["share"]), x["right"]] for x in sh["outcomes"]]), ""]
+if SH:
+    T += ["## What the page would show", "",
+          "Each slot below was written by `tools/eval/export_heads.py` in the layout of `models/<slot>/` and then scored by `tools/eval/shipped.py`, which reads the slot's own files as the page does and sends every photo through `tools/fusion/fuse.py`. "
+          "The two thresholds were set on the tuning photos so that a named species, and the three offered species, were right at least nine times in ten there. Slots whose name begins with `val-` hold stand-in heads.", ""]
+    rows = []
+    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
+        n = SH[name]["numbers"]
+        rows.append(["`%s`" % name, pci(n["kind_right"]), pci(n["species_top1"]), "%s at %s" % (pc(n["named"][0]), n["name_at"] if n["name_at"] is not None else "never"), pci(n["named_right"]),
+                     "%s at %s" % (pc(n["offered"][0]), n["offer_at"] if n["offer_at"] is not None else "never"), pci(n["offered_holds_species"]), pc(n["kind_only"][0]), pci(n["kind_only_kind_right"])])
+    T += [table(["Slot", "Kind right", "Top species right", "Species named (share, threshold)", "Named species right", "Three offered (share, threshold)", "Offer holds the species", "Kind only", "Kind right when kind only"], rows), ""]
+    L = ["# Exported slots, scored as the page would", "", GEN % "docs/eval/shipped-*.json", ""]
+    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
+        sh = SH[name]
+        L += ["## `%s`" % name, "", sh["text"], "", table(["What the page would show", "Share of test photos", "Right"], [[x["what"], pc(x["share"]), x["right"]] for x in sh["outcomes"]], ["---", "---:", "---"]), ""]
+        for x in sh.get("extra", []):
+            L += [x["text"], "", table(["Photos of", "Photos", "Kind said right", "Said `person`", "Said `none`", "A species named"], [[g["kind"], g["n"], pci(g["right"]), pc(g["person"]), pc(g["none"]), pc(g["named"])] for g in x["rows"]]), ""]
+    write("shipped.md", "\n".join(L))
+    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
+        for x in SH[name].get("extra", []):
+            T += ["**`%s` on photos of people, pets, livestock and rooms.** %s" % (name, x["text"]), "", table(["Photos of", "Photos", "Kind said right", "Said `person`", "Said `none`", "A species named"], [[g["kind"], g["n"], pci(g["right"]), pc(g["person"]), pc(g["none"]), pc(g["named"])] for g in x["rows"]]), ""]
+    T += ["The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).", ""]
 
 # ---- decisions: sentences around numbers that the studies wrote
 real = next((v for k, v in S2.items() if not v.get("standin")), None)
@@ -260,12 +326,9 @@ if b2:
     T += ["- **The server.** BioCLIP 2 (ViT-L/14) with rows made from scientific names, all %d species of the list, and the prior (alpha %g at temperature %g, smoothing lam %g and c %g): top-1 %s, top-5 %s, and the kind of eye from summed species probabilities right for %s. "
           "The kind of eye should come from the species list and the kind phrases should count for little, because this model's kind phrases alone are right for %s.%s" % (
               st["species_in_list"], st["alpha_prior"], st["t_species"], st["lam"], st["c"], pci(t["top1"]), pci(t["top5"]), pci(t["kind_from_sum"]), pci(b2["kind_phrases"]["accuracy"]),
-              (" BioCLIP 2.5 measures %s with the prior. Its interval overlaps BioCLIP 2's, it runs at about a third of the speed by the laboratory's timing, and its training date is undocumented, so BioCLIP 2 is the one to run." % pci(b25["labelsets"]["species_sci"]["tuned"]["top1"])) if b25 else "")]
-    T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % round(100 * t["top1"][1])]
-for name, sh in SH.items():
-    n = sh["numbers"]
-    T += ["- **Names and offers for `%s`.** With name_at %s and offer_at %s, set on the tuning photos, the page would name a species for %s of test photos and be right for %s of those; it would offer three species for %s and they would hold the right one for %s." % (
-        name, n["name_at"] if n["name_at"] is not None else "never", n["offer_at"] if n["offer_at"] is not None else "never", pc(n["named"][0]), pci(n["named_right"]), pc(n["offered"][0]), pci(n["offered_holds_species"]))]
+              (" BioCLIP 2.5 measures %s with the prior%s. It runs at about a third of the speed by the coordinator's notes, and its training date is undocumented, so no number for it can be defended in public. BioCLIP 2 is the one to run." % (
+                  pci(b25["labelsets"]["species_sci"]["tuned"]["top1"]), (", a paired difference of %s points from BioCLIP 2 on the same photos" % pts(b25["against_bioclip2_l14"]["top1_with_prior_difference"])) if b25.get("against_bioclip2_l14") else "")) if b25 else "")]
+    T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % int(100 * t["top1"][1])]
 T += [""]
 
 T += ["## Where the first look differed", "",
