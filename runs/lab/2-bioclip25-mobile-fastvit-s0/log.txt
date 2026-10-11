@@ -1,0 +1,45 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:56:30] job: model=bioclip25-mobile-fastvit shard=0/1 stages=images
+data_source=standin
+evalname=standin
+manifest_rows=40
+species=30
+[00:56:30] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+photos: 40 rows, 40 to fetch, 0 failed, 1.2s
+[00:56:31] exit 0
+[00:56:31] + python3 -u tools/lab/lab.py images --model bioclip25-mobile-fastvit --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname standin --out art/bioclip25-mobile-fastvit
+images: bioclip25-mobile-fastvit, eval standin, shard 0/1, 40 rows
+[0;93m2026-10-11 00:56:34.682090367 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+loaded bioclip25-mobile-fastvit via onnx in 3.4s
+Traceback (most recent call last):
+  File "/home/runner/work/seen-back/seen-back/tools/lab/lab.py", line 928, in <module>
+    main()
+  File "/home/runner/work/seen-back/seen-back/tools/lab/lab.py", line 918, in main
+    stage_images(args)
+  File "/home/runner/work/seen-back/seen-back/tools/lab/lab.py", line 596, in stage_images
+    ids, vec, bad, el = embed_rows(m, part, args.photos, batch=args.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/lab/lab.py", line 574, in embed_rows
+    vecs.append(unit(encode_fn(pv)))
+                     ^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/lab/lab.py", line 385, in encode_pixels
+    outs.append(self.sess.run(None, {self.input_name: pv[i:i + 16]})[0])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 395, in run
+    return self._sess.run(output_names, input_feed, run_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: image for the following indices
+ index: 0 Got: 16 Expected: 1
+ Please fix either the inputs/outputs or the model.
+[00:56:38] exit 1
+[00:56:38] job done, fail=1
