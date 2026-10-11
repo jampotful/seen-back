@@ -527,7 +527,8 @@
       if (t !== S.token || S.eyes) return;
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
-      if (r.sure && r.kind !== 'none') { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
       askName(unsure ? 'The recognizer and the larger model are both not sure what that is.' : 'The larger model is not sure what that is.');
     }, function (e) {

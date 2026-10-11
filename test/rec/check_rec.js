@@ -714,6 +714,18 @@ async function meet(page, name) {
         && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
         && /^The larger model is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the larger model?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
         && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
+      // a larger slot may carry a kinds head too (the same parts, kept already): it names as before, and it can say that nothing alive is there
+      if (BIG_PORT === 8788) {
+        await page.close(); const k = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + BIG + '/manifest.kinds.json', null, ctx); await ready(k.page); await begin(k.page); await bctl('reset=1');
+        const h = await meet(k.page, 'heron.png'); await byLarge(k.page); const kb = await bigNow(k.page);
+        r.kindsHead = { model: await k.page.evaluate(() => window.__seenBack.big.about().model), heron: (await st(k.page)).named.common + '|' + (await st(k.page)).named.by, parts: (await partsAsked()).length, reference: expect.big_kinds['heron.png'][month].named };
+        await meet(k.page, 'wall.png'); await k.page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await k.page.locator('#claimAsk').tap();
+        await k.page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !document.getElementById('claim').hidden; }, kb.last.at, { timeout: 20000 }); await k.page.waitForTimeout(300);
+        r.kindsHead.wall = await k.page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: document.querySelectorAll('#claimKinds button').length, link: !document.getElementById('claimAskRow').hidden, last: window.__seenBack.big.about().last.kind, eyes: window.__seenBack.S.eyes }));
+        r.kindsHead.errors = k.errors;
+        all('kindsHead', r.kindsHead.model === 'standin-big-kinds' && r.kindsHead.heron === 'Great Blue Heron|device-large' && r.kindsHead.parts === 0 && r.kindsHead.wall.last === 'none' && !r.kindsHead.wall.eyes
+          && r.kindsHead.wall.sub === 'Nothing alive was found in that photo. So you tell it. Type the kind of animal or plant, such as cat, heron or oak.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
+      }
       await ctx.close();
     }
     // failures, each in words on the line, with a way on where there is one; what the small model said stands throughout

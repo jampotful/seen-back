@@ -423,3 +423,11 @@ assert eb["small.png"]["sure"] is False and eb["wall.png"]["sure"] is False and 
 # the same with a checksum of the whole that the parts cannot meet: every part passes, and the whole must still be refused
 mbw = json.loads(json.dumps(mb)); mbw["id"] = "standin-big-bad-whole"; mbw["vision"]["sha256"] = "0" * 64
 (big / "manifest.bad-whole.json").write_text(json.dumps(mbw, indent=1) + "\n", encoding="utf-8")
+# and with a kinds head, as a larger slot may also come (the kinds head knows "nothing alive" and a person, which a species list cannot)
+K.astype("<f2").tofile(big / "kinds.f16.bin")
+mbk = json.loads(json.dumps(mb)); mbk["id"] = "standin-big-kinds"; mbk["kinds"] = {"url": "kinds.f16.bin", "labels": KINDS}
+mbk["fusion"] = dict(mb["fusion"], t_kind=100, w_kind=0.5)
+(big / "manifest.kinds.json").write_text(json.dumps(mbk, indent=1) + "\n", encoding="utf-8")
+expect["big_kinds"] = {name: answers(load_slot(big / "manifest.kinds.json"), name) for name in MADE}
+(slot / "expect.json").write_text(json.dumps(expect, separators=(",", ":")) + "\n", encoding="utf-8")
+assert all(a["kind"] == "none" and a["sure"] for a in expect["big_kinds"]["wall.png"]) and all(a["named"] == "Great Blue Heron" for a in expect["big_kinds"]["heron.png"]), expect["big_kinds"]["wall.png"][0]
