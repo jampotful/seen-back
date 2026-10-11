@@ -42,12 +42,14 @@
     diagP = diagP.then(function () { return ref.set({ log: log }); }).catch(function () {});
   }
   var framed = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+  // who gave the name: Claude, this page's small model, a larger model on a server, a larger model on this device, or the person
+  function byOf(by) { return by === 'Claude' || by === 'page' || by === 'service' || by === 'device-large' ? by : 'you'; }
   function cleanMeeting(v, id) {
     if (!v || typeof v !== 'object') return null;
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
-    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : v.by === 'service' ? 'service' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
+    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
     try { var a = JSON.parse(localStorage.getItem(REC_KEY) || '[]'); return Array.isArray(a) ? a.map(function (v) { return cleanMeeting(v); }).filter(Boolean) : []; }
@@ -80,7 +82,7 @@
       m = { id: 'm' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36), at: Date.now(), thumb: S.animalPhoto ? thumbOf(S.animalPhoto) : '', up: 0 };
       record.unshift(m); S.meetingId = m.id;
     }
-    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : named.by === 'service' ? 'service' : 'you';
+    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = byOf(named.by);
     m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
     saveLocal(); pushUp(m); paintRecordBits();
   }
@@ -159,7 +161,7 @@
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : 'on your word'].filter(Boolean).join(' · ')));
+      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word'].filter(Boolean).join(' · ')));
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -202,7 +204,7 @@
   function lookAgain(m) {
     if (!m || !EYES[m.key]) return;
     var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
-    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; paintSvc();
+    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; pocket.kindOffers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
     armBack();
     photoFromThumb(m.thumb).then(function (c) {

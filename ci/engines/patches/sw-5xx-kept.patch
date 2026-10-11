@@ -1,0 +1,24 @@
+diff --git a/src/sw.template.js b/src/sw.template.js
+index 4ff2bee..99fe7f4 100644
+--- a/src/sw.template.js
++++ b/src/sw.template.js
+@@ -52,14 +52,17 @@ self.addEventListener('fetch', (event) => {
+         return res;
+       });
+       if (fixed) return c.match(req).then((hit) => hit || caches.match(req)).then((hit) => hit || fromNet());   // the typeface may be in the shell's store
+-      return fromNet().catch(() => c.match(req).then((hit) => hit || Response.error()));
++      // a server or a proxy in the way answering 5xx is no better than no network: the kept copy, where there is one
++      return fromNet().then((res) => res.status >= 500 ? c.match(req).then((hit) => hit || res) : res, () => c.match(req).then((hit) => hit || Response.error()));
+     }));
+     return;
+   }
++  const kept = () => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html'));
+   event.respondWith(                                               // the page: the network first, the kept copy when there is none
+     fetch(req).then((res) => {
+       if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
++      if (res.status >= 500) return kept().then((hit) => hit || res);   // a 5xx (WebKit hands a proxy's 502 over as an answer) is treated as no network
+       return res;
+-    }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html')))
++    }).catch(kept)
+   );
+ });

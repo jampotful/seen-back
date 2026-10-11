@@ -15,14 +15,21 @@ MAN=$(curl -s -f "${SITE}models/pocket/manifest.json" || true)
 if [ -n "$MAN" ]; then
   VURL=$(printf '%s' "$MAN" | python3 -I -c "import json,sys; print(json.load(sys.stdin)['vision']['url'])" 2>/dev/null || true)
   echo "--- the model named by the manifest: ${SITE}models/pocket/$VURL"
-  curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, deflate, br' -w "bytes on the wire: %{size_download}\n" "${SITE}models/pocket/$VURL" | grep -i -E "^HTTP|content-type|content-encoding|content-length|cache-control|etag|age:|bytes on the wire"
+  curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, deflate, br' -w "bytes on the wire: %{size_download}, in %{time_total} s\n" "${SITE}models/pocket/$VURL" | grep -i -E "^HTTP|content-type|content-encoding|content-length|cache-control|etag|last-modified|expires|age:|x-cache|via|access-control|bytes on the wire"
+  echo "--- the same, asked for without compression"
+  curl -s -o /dev/null -D - -w "bytes on the wire: %{size_download}, in %{time_total} s\n" "${SITE}models/pocket/$VURL" | grep -i -E "^HTTP|content-encoding|content-length|bytes on the wire"
+  echo "--- the same, asked for a byte range (does a resumed download work?)"
+  curl -s -o /dev/null -D - -H 'Range: bytes=0-1023' -w "bytes on the wire: %{size_download}\n" "${SITE}models/pocket/$VURL" | grep -i -E "^HTTP|content-range|content-encoding|content-length|bytes on the wire"
+  for f in species.f16.bin kinds.f16.bin species.json; do echo "--- ${SITE}models/pocket/$f"; curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, deflate, br' -w "bytes on the wire: %{size_download}\n" "${SITE}models/pocket/$f" | grep -i -E "^HTTP|content-encoding|content-length|cache-control|bytes on the wire"; done
 else echo "no slot yet: ${SITE}models/pocket/manifest.json is not there"; fi
-step "playwright $PWV, Chromium and WebKit"
+step "playwright $PWV, Chromium, Firefox and WebKit"
 mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
 export NODE_PATH="$PW/node_modules"
-node "$PW/node_modules/playwright/cli.js" install --with-deps chromium webkit 2>&1 | grep -v -E "[0-9]+%" | tail -4
-step "the page in Chromium and WebKit"
-OUT="$OUT" SITE="$SITE" BROWSERS=chromium,webkit node test/engines/live.js
+for B in chromium webkit firefox; do   # one at a time with a time limit: run 26 hung for twenty minutes installing all three at once
+  for try in 1 2; do timeout 240 node "$PW/node_modules/playwright/cli.js" install --with-deps $B > "$OUT/install-$B.txt" 2>&1; rc=$?; echo "install $B (try $try): exit $rc"; [ $rc = 0 ] && break; done
+done
+step "the page in Chromium, Firefox and WebKit"
+for B in chromium webkit firefox; do OUT="$OUT" SITE="$SITE" BROWSERS=$B timeout 420 node test/engines/live.js; echo "live.js $B: exit $?"; done   # one process each, so one that hangs cannot take the others with it
 python3 -I - "$OUT" <<'PY'
 import json, glob, os, sys
 out = sys.argv[1]; S = {}
@@ -30,7 +37,9 @@ for f in sorted(glob.glob(os.path.join(out, "live-*.json"))):
     r = json.load(open(f)); p = (r.get("first") or {}).get("page") or {}
     S[r["browser"]] = {"version": r.get("version"), "status": (r.get("first") or {}).get("status"), "build": p.get("build"), "sw_registered": p.get("swRegistered"), "sw_active": p.get("swActive"),
         "controlled_first": p.get("controlled"), "controlled_second": (r.get("second") or {}).get("controlled"), "crossOriginIsolated": p.get("coi"), "offline": r.get("offline"),
-        "slot": r.get("slot"), "ready": r.get("ready"), "readyMs": r.get("readyMs"), "photos": r.get("photos"), "rec_first": p.get("rec"), "errors": r.get("pageErrors"), "notes": r.get("notes"), "error": r.get("error")}
+        "slot": r.get("slot"), "ready": r.get("ready"), "readyMs": r.get("readyMs"), "readyFromNav": r.get("readyFromNav"), "readyFromNavMs": r.get("readyFromNavMs"), "loadEventMs": r.get("loadEventMs"),
+        "photos": r.get("photos"), "rec_first": p.get("rec"), "about": r.get("about"), "kept": r.get("kept"), "offlineVisits": r.get("offlineVisits"), "proxy": r.get("proxy"), "second": r.get("second"),
+        "errors": r.get("pageErrors"), "console": (r.get("console") or [])[:20], "notes": r.get("notes"), "error": r.get("error")}
 json.dump(S, open(os.path.join(out, "summary.json"), "w"), indent=1); print(json.dumps(S, indent=1)[:3000])
 PY
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow && /tmp/venv/bin/python -I ci/engines/shrink.py "$OUT"

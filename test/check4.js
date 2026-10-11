@@ -8,8 +8,9 @@ fs.mkdirSync(shots, { recursive: true });
 const PORT = process.env.PORT || 8765;
 // These checks are about the picture, the typed name and the record, so the page's own recognizer is switched off (rec=off) and so is the
 // service worker (nosw=1). The recognizer has its own checks in test/rec/check_rec.js.
-// The species service is switched off too (svc=off), so that a service.json at the site's root changes nothing here.
-const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420) + '&nosw=1&svc=off&rec=' + (process.env.REC || 'off');
+// The species service is switched off too (svc=off), so that a service.json at the site's root changes nothing here, and so is the larger
+// model a person may download (big=off), so that a models/naturalist/ at the site's root changes nothing either.
+const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420) + '&nosw=1&svc=off&big=off&rec=' + (process.env.REC || 'off');
 const phone = devices['Pixel 7'];
 const mode = process.argv[2] || 'record';
 // SLOW=4 on a busy machine: every wait for something to appear lasts four times as long before it gives up. Nothing else changes.
