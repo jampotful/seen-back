@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Run inside reactivecircus/android-emulator-runner, after ci/native/android_build.sh: install the debug APK in the emulator,
 # open it, run the page's self-test inside the WebView with the shipped pocket recognizer, then press Begin with the
-# emulator's camera. Screenshots, logcat and what the page reports about itself go into out/android/.
+# emulator's camera, and (unless BIG=0) fetch the larger model. APK= names another APK to install. Screenshots, logcat and what the page reports about itself go into out/android/.
 set -uo pipefail
 ROOT="$PWD"; OUT="$ROOT/out/android"; mkdir -p "$OUT/shots"
 exec > >(tee -a "$OUT/emu-log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 PKG=org.seenback.shell
-APK=native/android-shell/app/build/outputs/apk/debug/app-debug.apk
+APK="${APK:-native/android-shell/app/build/outputs/apk/debug/app-debug.apk}"
 RECQ="&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg"
 shot() { adb exec-out screencap -p > "$OUT/shots/$1.png" 2>/dev/null; echo "screenshot $1"; }
 state() { adb shell run-as $PKG cat files/state.json 2>/dev/null; }
@@ -67,6 +67,7 @@ adb shell "am start -W -n $PKG/.MainActivity --es js 'document.getElementById(\"
 sleep 25; shot 3-begin
 state > "$OUT/state-begin.json"; head -c 600 "$OUT/state-begin.json"; echo
 
+if [ "${BIG:-1}" = 1 ]; then
 step "4. the larger model (models/naturalist: 310 MB from raw.githubusercontent.com) through the page's own recognizer object, then four photos"
 adb shell am force-stop $PKG; sleep 1
 ( while :; do echo "$(date -u +%T) $(adb shell ps -A -o PID,RSS,NAME 2>/dev/null | grep -E 'seenback|sandboxed|webview' | tr -s ' ' | tr '\n' ';') $(adb shell grep MemAvailable /proc/meminfo | tr -s ' ')"; sleep 4; done ) > "$OUT/big-memory.txt" 2>&1 &
@@ -107,6 +108,8 @@ for name, kb in sorted(peak.items()):
     print("peak resident memory: %s %d MB" % (name, kb // 1024))
 print("lowest MemAvailable in the emulator: %s MB" % (low // 1024 if low else "?"))
 PY
+
+else echo; echo "step 4 (the larger model) left out: BIG=0"; fi
 
 step "logcat lines from the shell and the page"
 kill $LOGPID 2>/dev/null; sleep 1
