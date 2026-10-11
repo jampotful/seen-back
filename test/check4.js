@@ -144,6 +144,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' });
     await page.locator('#claimName').fill('Biscuit'); await page.locator('#claimForm button[type=submit]').tap(); await page.waitForTimeout(200);
     r.petName = { note: await text(page, 'claimNote'), other: await text(page, 'claimOther'), still: (await st(page)).screen }; await shot(page, 'R2b-pet-name');
+    await page.locator('#claimBack').tap(); await page.waitForTimeout(200); await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
+    r.cleanAgain = await page.evaluate(() => document.getElementById('claimName').value + '|' + document.getElementById('claimNote').textContent + '|' + !document.getElementById('claimOtherRow').hidden);
+    if (r.cleanAgain !== '||false') throw new Error('the naming sheet kept an earlier word: ' + r.cleanAgain);   // build 12 left the field, the note and the link in place
     await say(page, 'Biscuit, a cat'); await page.waitForTimeout(700);
     r.count1 = await text(page, 'rvCount'); r.shown1 = await text(page, 'rvName'); await shot(page, 'R3-new-kind'); await page.waitForTimeout(3600);
     r.cat = await st(page);
