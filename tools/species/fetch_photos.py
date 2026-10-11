@@ -8,7 +8,7 @@ Usage: python3 tools/species/fetch_photos.py <manifest.csv> <dir> [--shard i/n] 
   with 0 <= i < n. Example: four jobs use 0/4, 1/4, 2/4 and 3/4.
 - Resumable: a file already present with image content is kept. Downloads go to a .part file first.
 - At most 16 downloads at once; retries with backoff on network errors, 429 and 5xx; 403 and 404 are final.
-- Failures are printed and written to <dir>/_failures.tsv (id, url, reason). The exit status is 0 even when
+- Failures are printed and written to <dir>/_failures.tsv (id, url, reason), or _failures-<i>-of-<n>.tsv for a shard. The exit status is 0 even when
   some photos fail (a manifest row that could not be fetched is expected to be skipped by the evaluation), unless
   --strict is given; it is 1 when nothing at all could be fetched, and 2 for bad arguments.
 """
@@ -112,7 +112,7 @@ def main():
                 print("  %d/%d %s (%.0fs)" % (k, len(rows), dict(tally), time.time() - t0), flush=True)
     for p in outdir.glob("*.jpg.part"):
         p.unlink()
-    fail_path = outdir / "_failures.tsv"
+    fail_path = outdir / ("_failures.tsv" if n == 1 else "_failures-%d-of-%d.tsv" % (i, n))
     if failures:
         with open(fail_path, "w", encoding="utf-8") as f:
             f.write("id\turl\treason\n")

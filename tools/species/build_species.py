@@ -7,9 +7,12 @@ one faceted query over all months gives `n`, twelve queries with month=1..12 giv
 facetOffset. The script checks that the twelve months sum to `n` for every species and that the species totals
 agree across the two ways of counting, and exits non-zero if they do not.
 
-Taxonomy and canonical names come from GBIF's species API. English names come first from iNaturalist's public
-taxonomy archive (joined by scientific name; see names.py), then from GBIF's English vernacular names (see
-common.choose_gbif_english), else empty. The kind of eye comes from eyes.py.
+Taxonomy and canonical names come from GBIF's species API; where the backbone gives a species no phylum, class
+and order, those ranks are filled from iNaturalist's taxonomy (listed in SUMMARY.md). English names: the species
+is found in iNaturalist's public taxonomy archive by scientific name, and its name is iNaturalist's preferred
+English name from the iNaturalist API (en_source "inat-api"; the archive does not mark the preferred name), else
+an English name from the archive ("inat-taxonomy"), else GBIF's English vernacular names ("gbif-vernacular",
+see common.choose_gbif_english), else empty. See names.py. The kind of eye comes from eyes.py.
 
 Usage: python3 tools/species/build_species.py [--out data/regions/us-fl-alachua] [--cache work/cache] [--diag DIR]
 Needs network access to api.gbif.org and www.inaturalist.org (run it on a build machine; see .github/workflows/data.yml).
@@ -65,6 +68,16 @@ def verify_region(base, diag):
         lines.append("  %s: %s" % (k, dict(c.most_common(8))))
     if lat:
         lines.append("  latitude %.4f..%.4f, longitude %.4f..%.4f" % (min(lat), max(lat), min(lon), max(lon)))
+    for field in ("gadmLevel2Gid", "gadmLevel1Gid", "stateProvince"):
+        # Every record of the query, not just the first page: the facet counts of the place fields.
+        try:
+            r2 = common.get_json("/occurrence/search", dict(base, limit=0, facet=field, facetLimit=20), tries=3)
+            fc = (r2.get("facets") or [{}])[0].get("counts", [])
+            got = {c["name"]: c["count"] for c in fc}
+            lines.append("  all %d records by %s: %s (sum %d)" % (r2.get("count", 0), field, got, sum(got.values())))
+            tally["facet:" + field] = Counter(got)
+        except Exception as e:
+            lines.append("  facet on %s not available: %s" % (field, str(e)[:160]))
     if diag:
         (diag / "occurrence_sample.json").write_text(json.dumps([common.scrub_occurrence(x) for x in recs[:5]], indent=1))
     return "\n".join(lines), tally
@@ -119,6 +132,9 @@ def main():
         gids = tally["gadm.level2.gid"]
         if set(gids) != {args.gadm}:
             problems.append("records outside %s in the region sample: %s" % (args.gadm, dict(gids)))
+        fac = tally.get("facet:gadmLevel2Gid")
+        if fac and set(fac) != {args.gadm}:
+            problems.append("records of the query fall in other GADM areas: %s" % dict(fac))
         if set(tally["gadm.level2"]) != {"Alachua"} or set(tally["gadm.level1"]) != {"Florida"}:
             problems.append("GADM names are not all Florida / Alachua: %s %s" % (dict(tally["gadm.level1"]), dict(tally["gadm.level2"])))
     c_year = common.count(base)
@@ -178,8 +194,8 @@ def main():
         arch = names.ensure_archive(args.cache)
         if diag:
             (diag / "inat_archive.txt").write_text(names.describe(arch, PROBES), encoding="utf-8")
-        inat, inat_rep, inat_taxa = names.english_names(arch, wanted)
-        log("  iNaturalist archive: %s" % inat_rep)
+        inat, inat_rep, inat_taxa = names.inat_names(arch, wanted)
+        log("  iNaturalist: %s" % inat_rep)
     except Exception as e:  # the list is still useful with GBIF names; say so loudly
         log("  iNaturalist names unavailable: %s: %s" % (type(e).__name__, e))
         problems.append("iNaturalist archive could not be read: %s" % e)
@@ -196,7 +212,7 @@ def main():
     for k, i in zip(keys, info):
         sci = i.get("canonicalName") or i.get("species") or ""
         if sci in inat:
-            en, src = inat[sci], "inat-taxonomy"
+            en, src = inat[sci]
         elif k in gbif_names:
             en, src = gbif_names[k], "gbif-vernacular"
         else:
@@ -213,10 +229,8 @@ def main():
         checks.append("ranks filled from iNaturalist's taxonomy where the GBIF backbone gives no phylum, class or order "
                       "(%d species): %s" % (len(filled), "; ".join(filled)))
         log("  " + checks[-1])
-    api_check = check_names_with_api(species, inat, inat_taxa)
-    if api_check:
-        checks.append(api_check)
-        log("  " + api_check.replace("\n", "\n  "))
+    if inat_rep:
+        checks.append("English names from iNaturalist: %s" % {k: v for k, v in inat_rep.items() if k != "place_name_examples"})
     query = ("%s/occurrence/search?datasetKey=%s&%s&year=1600,%d&facet=speciesKey (paged with facetOffset); "
              "months: the same with month=1..12" % (common.API, common.INAT_DATASET,
                                                     "&".join("%s=%s" % kv for kv in sorted(place.items())), last_year))
@@ -228,7 +242,8 @@ def main():
     }
     common.write_json_list(out / "species.json", head, species)
     log("  wrote %s: %d species" % (out / "species.json", len(species)))
-    summary = make_summary(species, head, checks, problems, inat_rep, total, args)
+    status = {str(i.get("key")): i.get("taxonomicStatus") for i in info}
+    summary = make_summary(species, head, checks, problems, inat_rep, total, args, status)
     (out / "SUMMARY.md").write_text(summary, encoding="utf-8")
     log("  wrote %s" % (out / "SUMMARY.md"))
     log("  GBIF requests: %s; %.0fs" % (common.stats(), time.time() - t0))
@@ -252,39 +267,11 @@ def fill_ranks(rec, inat_ranks, filled):
         filled.append("%s (%s)" % (rec["sci"], ", ".join(got)))
 
 
-def check_names_with_api(species, inat, inat_taxa, top=300, rand=300, seed=7):
-    """Compare the names chosen from the archive with iNaturalist's own preferred names (its API, locale en,
-    place United States) for the most recorded species and a seeded random sample of the rest."""
-    import random
-    with_id = [s for s in species if s["en_source"] == "inat-taxonomy" and s["sci"] in inat_taxa]
-    pick = with_id[:top]
-    rest = with_id[top:]
-    random.Random(seed).shuffle(rest)
-    pick += rest[:rand]
-    if not pick:
-        return ""
-    try:
-        api = names.api_preferred([inat_taxa[s["sci"]]["id"] for s in pick])
-    except Exception as e:  # a check, not a source: report and carry on
-        return "iNaturalist API check failed: %s" % e
-    seen = [(s, api.get(str(inat_taxa[s["sci"]]["id"]))) for s in pick]
-    seen = [(s, a) for s, a in seen if a is not None]
-    same = [1 for s, a in seen if a.casefold() == s["en"].casefold()]
-    diff = [(s["sci"], s["en"], a) for s, a in seen if a.casefold() != s["en"].casefold()]
-    lines = ["English names checked against iNaturalist's API (preferred name, locale en, place United States): "
-             "%d of %d agree (%s), among them %d of the %d most recorded" % (
-                 len(same), len(seen), pct(len(same), len(seen)),
-                 sum(1 for s, a in seen[:top] if a.casefold() == s["en"].casefold()), min(top, len(seen)))]
-    for sci, ours, theirs in diff[:30]:
-        lines.append("  %s: archive %r, API %r" % (sci, ours, theirs))
-    return "\n".join(lines)
-
-
 def pct(a, b):
     return "%.1f%%" % (100.0 * a / b) if b else "n/a"
 
 
-def make_summary(species, head, checks, problems, inat_rep, total, args):
+def make_summary(species, head, checks, problems, inat_rep, total, args, status=None):
     S = len(species)
     R = sum(s["n"] for s in species)
     L = []
@@ -342,9 +329,18 @@ def make_summary(species, head, checks, problems, inat_rep, total, args):
     with_en = sum(1 for s in species if s["en"])
     L.append("- Species with an English name: %d of %d (%s); records whose species has one: %s." % (
         with_en, S, pct(with_en, S), pct(sum(s["n"] for s in species if s["en"]), R)))
-    L.append("- From iNaturalist's taxonomy archive: %d species (%s of records); from GBIF vernacular names: %d (%s); none: %d (%s)." % (
-        src["inat-taxonomy"], pct(src_r["inat-taxonomy"], R), src["gbif-vernacular"], pct(src_r["gbif-vernacular"], R),
-        src[""], pct(src_r[""], R)))
+    L.append("- iNaturalist's preferred English name (its API, locale en, place Florida; taxon found through the "
+             "taxonomy archive by scientific name), `en_source` `inat-api`: %d species (%s of records)." % (
+                 src["inat-api"], pct(src_r["inat-api"], R)))
+    L.append("- An English name from iNaturalist's taxonomy archive where the API gave none, `inat-taxonomy`: %d (%s)." % (
+        src["inat-taxonomy"], pct(src_r["inat-taxonomy"], R)))
+    L.append("- GBIF's English vernacular names, `gbif-vernacular`: %d (%s); none: %d (%s)." % (
+        src["gbif-vernacular"], pct(src_r["gbif-vernacular"], R), src[""], pct(src_r[""], R)))
+    if inat_rep.get("archive_choice_agrees_with_api") is not None:
+        a, d = inat_rep["archive_choice_agrees_with_api"], inat_rep.get("archive_choice_differs_from_api", 0)
+        L.append("- Why the API: the archive lists a taxon's English names without marking the preferred one. Taking "
+                 "a name from the archive alone (a US or Florida name first, else the first name with no place) "
+                 "matches iNaturalist's preferred name for %d of %d species (%s)." % (a, a + d, pct(a, a + d)))
     if inat_rep:
         L.append("- Join by scientific name to iNaturalist species: %d of %d names found; %d dropped for a kingdom mismatch; "
                  "%d ambiguous; %d with an English name." % (inat_rep.get("name_in_inat", 0), inat_rep.get("wanted", 0),
@@ -380,6 +376,22 @@ def make_summary(species, head, checks, problems, inat_rep, total, args):
     if ext:
         odd.append("Mammals drawn with the `other` eye: %s." % ", ".join(
             "%s (%d)" % (s["en"] or s["sci"], s["n"]) for s in ext[:12]))
+    status = status or {}
+    doubt = [s for s in species if status.get(str(s["key"])) not in (None, "ACCEPTED")]
+    if doubt:
+        odd.append("%d species carry a GBIF taxonomic status other than ACCEPTED (%s), e.g. %s." % (
+            len(doubt), dict(Counter(status.get(str(s["key"])) for s in doubt)),
+            ", ".join("*%s* (%d)" % (s["sci"], s["n"]) for s in doubt[:6])))
+    noclass = [s for s in species if not s["class"]]
+    if noclass:
+        grp = Counter("%s/%s" % (s["kingdom"], s["phylum"] or "?") for s in noclass)
+        odd.append("%d species have no class in the GBIF backbone (%s); ray-finned fishes are among them, which is "
+                   "harmless here because fish take the `other` eye either way. Examples: %s." % (
+                       len(noclass), dict(grp), ", ".join("*%s* (%s)" % (s["sci"], s["order"] or "no order") for s in noclass[:6])))
+    busiest = max(range(12), key=lambda i: sum(s["m"][i] for s in species))
+    odd.append("The busiest calendar month is %s with %d records (%s of all)." % (
+        ("January February March April May June July August September October November December").split()[busiest],
+        sum(s["m"][busiest] for s in species), pct(sum(s["m"][busiest] for s in species), R)))
     for o in odd:
         L.append("- " + o)
     L.append("")

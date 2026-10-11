@@ -5,11 +5,12 @@ extensions. This module reads the archive's meta.xml to find the files and colum
 so it does not depend on column order. Species are joined by exact scientific name at rank species; when two
 iNaturalist taxa share a name, the kingdom decides.
 
-Choice of one English name per taxon (iNaturalist shows a place-specific name first where one applies):
+The archive lists a taxon's English names without marking the one iNaturalist prefers, and its row order is
+not that preference (checked against the API: see inat_names). So inat_names() takes the preferred name from
+iNaturalist's API and uses the archive for the join and as a fallback. The archive-only choice (choose()) is:
   1. a name tied to the United States or Florida (locality or country code), in file order;
   2. otherwise the first name with no place attached, in file order;
   3. otherwise the first name.
-The file order is checked against known preferred names by describe() in the build log.
 """
 import csv
 import io
@@ -258,3 +259,56 @@ def api_preferred(ids, place_id=1, per=30, pause=1.1):
                 time.sleep(5 * attempt)
         time.sleep(pause)
     return out
+
+
+def check_place(place_id):
+    """The name of an iNaturalist place, to confirm a place id before using it."""
+    try:
+        r = requests.get("https://api.inaturalist.org/v1/places/%s" % place_id, headers={"User-Agent": UA}, timeout=60)
+        res = r.json().get("results", []) if r.status_code == 200 else []
+        return res[0].get("name") if res else ""
+    except (requests.RequestException, ValueError):
+        return ""
+
+
+def inat_names(path, wanted, place=("Florida", 21)):
+    """English names for GBIF species names, from iNaturalist.
+
+    The archive maps each scientific name to an iNaturalist taxon (exact name, rank species, kingdom to break
+    ties). The archive does not mark which English name iNaturalist prefers, and its row order is not that
+    preference, so the name is taken from iNaturalist's API (preferred_common_name, locale en, preferred place
+    Florida), which is what the site shows a person in Florida. Where the API gives none, the archive's choice
+    (choose()) is used. Returns (dict sci -> (name, source), report, taxa dict sci -> ranks and id).
+    """
+    archive, rep, taxa = english_names(path, wanted)
+    name, pid = place
+    got = check_place(pid)
+    if got != name:
+        rep["place_check"] = "place %s is %r, not %r; using 1 (United States)" % (pid, got, name)
+        pid = 1
+        rep["place_check"] += "; place 1 is %r" % check_place(1)
+    else:
+        rep["place_check"] = "place %s is %s" % (pid, got)
+    ids = sorted({t["id"] for t in taxa.values()}, key=lambda x: int(x) if x.isdigit() else 0)
+    t0 = time.time()
+    api = api_preferred(ids, place_id=pid)
+    rep["api_requests_s"] = round(time.time() - t0)
+    rep["api_answered"] = len(api)
+    out = {}
+    agree = differ = 0
+    for sci, t in taxa.items():
+        a = api.get(str(t["id"]))
+        if a:
+            out[sci] = (a, "inat-api")
+            if sci in archive:
+                if archive[sci].casefold() == a.casefold():
+                    agree += 1
+                else:
+                    differ += 1
+        elif sci in archive:
+            out[sci] = (archive[sci], "inat-taxonomy")
+    for sci, n in archive.items():  # archive names for names whose taxon was not mapped (ambiguous ids)
+        out.setdefault(sci, (n, "inat-taxonomy"))
+    rep["archive_choice_agrees_with_api"] = agree
+    rep["archive_choice_differs_from_api"] = differ
+    return out, rep, taxa

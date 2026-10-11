@@ -166,6 +166,9 @@ def main():
     hosts = Counter()
     eligible = defaultdict(list)
     date_off = 0
+    gid2 = Counter(c["gid2"] for c in pool.values())
+    checks.append("GADM level-2 area of every record read: %s" % dict(gid2))
+    log("  " + checks[-1])
     for c in pool.values():
         hosts[re.sub(r"^https?://([^/]+)/.*$", r"\1", c["photo"]) if c["photo"] else "(none)"] += 1
         if c["gid2"] and not args.bbox and c["gid2"] != args.gadm:
@@ -222,7 +225,8 @@ def main():
                 wanted.setdefault(nm, info[k].get("kingdom"))
         try:
             arch = names.ensure_archive(args.cache)
-            inat, rep, inat_taxa = names.english_names(arch, wanted)
+            inat, rep, inat_taxa = names.inat_names(arch, wanted)
+            inat = {k: v[0] for k, v in inat.items()}
             log("  iNaturalist names for species not in the list: %s" % rep)
         except Exception as e:
             inat = {}
