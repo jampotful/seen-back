@@ -1,0 +1,23 @@
+{
+ "about": "Dry run of the training job's path (rows limit, shards modulo n, torch + CPU int8 + WASM int8 in four processes) on the first 800 evaluation rows; nothing is published.",
+ "models": [
+  "tinyclip-8m-16"
+ ],
+ "stages": [
+  "images",
+  "images-onnx-int8-per-channel",
+  "images-wasm-int8-per-channel"
+ ],
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "rows": {
+  "tinyclip-8m-16": 800
+ },
+ "shard_mode": "mod",
+ "shards": {
+  "tinyclip-8m-16": 2
+ },
+ "wasm_procs": 4,
+ "publish": false,
+ "max_parallel": 2
+}

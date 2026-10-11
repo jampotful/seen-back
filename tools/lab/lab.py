@@ -110,9 +110,18 @@ def eval_name(manifest_path, override=None):
     return p.parent.name if p.name == "manifest.csv" else p.stem
 
 
-def shard_rows(rows, shard):
-    """Contiguous blocks, so that merging is a concatenation in manifest order."""
+def shard_rows(rows, shard, mode="block", limit=None):
+    """mode "block": contiguous blocks; mode "mod": rows whose index is i modulo n (balanced when the manifest is ordered
+    by rank within species). `limit` keeps only the first `limit` rows before sharding. Merging restores manifest order."""
+    if limit:
+        if isinstance(limit, str) and ":" in limit:
+            a, b = limit.split(":")
+            rows = rows[int(a or 0):(int(b) if b else None)]
+        else:
+            rows = rows[:int(limit)]
     i, n = parse_shard(shard)
+    if mode == "mod":
+        return rows[i::n]
     per = math.ceil(len(rows) / n) if rows else 0
     return rows[i * per:(i + 1) * per]
 
@@ -131,6 +140,23 @@ def sha256(path):
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def cpu_info():
+    """The build machine's processor: int8 results in onnxruntime CPU depend on it (u8s8 integer kernels without VNNI
+    can saturate), so every CPU int8 set records it."""
+    info = {}
+    try:
+        txt = open("/proc/cpuinfo").read()
+        for line in txt.splitlines():
+            if line.startswith("model name") and "model" not in info:
+                info["model"] = line.split(":", 1)[1].strip()
+            if line.startswith("flags") and "flags" not in info:
+                fl = set(line.split(":", 1)[1].split())
+                info["flags"] = sorted(x for x in fl if x in ("avx2", "avx512f", "avx512_vnni", "avx_vnni", "avx512bw", "amx_int8"))
+    except Exception:
+        pass
+    return info
 
 
 def versions():
@@ -637,7 +663,7 @@ def stage_images(args, variant=None):
     out = pathlib.Path(args.out)
     rows = read_manifest(args.manifest)
     name = eval_name(args.manifest, args.evalname)
-    part = shard_rows(rows, args.shard)
+    part = shard_rows(rows, args.shard, args.shard_mode, args.rows)
     i, n = parse_shard(args.shard)
     log("images: %s, eval %s, shard %d/%d, %d rows" % (entry["id"], name, i, n, len(part)))
     m = load(entry)
@@ -670,9 +696,11 @@ def stage_images(args, variant=None):
     for rid, why in bad[:50]:
         log("  skipped %s: %s" % (rid, why))
     stats = {"rows": len(part), "embedded": len(ids), "skipped": len(bad), "seconds": round(el, 1),
+             "shard_mode": args.shard_mode, "row_limit": args.rows,
              "photos_per_second": round(len(ids) / max(el, 1e-6), 2), "machine_cpus": os.cpu_count()}
     if variant is not None:
         stats["onnx_sha256"] = onnx_sha
+        stats["cpu"] = cpu_info()
     card["images"] = {name + tag: {"shards": n, ("shard_%d" % i): stats,
                                    "via": ("torch" if m.torch_model else "onnxruntime CPU, the model's own ONNX file")
                                    if variant is None else "onnxruntime CPU, vision.%s.onnx" % variant}}
@@ -930,12 +958,53 @@ def stage_export(args):
 # stage: merge shards and parts into one model directory
 
 
+def load_provenance(out):
+    """_files.json: for each published file, the run that wrote it and its sha256. Built from _made.txt when missing."""
+    out = pathlib.Path(out)
+    f = out / "_files.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    made = {}
+    if (out / "_made.txt").exists():
+        for line in (out / "_made.txt").read_text().splitlines():
+            if "=" in line:
+                k, v = line.split("=", 1)
+                made[k] = v
+    run = int(made.get("run_number") or 0)
+    prov = {}
+    for g in out.rglob("*"):
+        if g.is_file() and g.name not in ("_made.txt", "_files.json") and ".git" not in g.parts:
+            prov[str(g.relative_to(out))] = {"run": run, "sha256": sha256(g)}
+    return prov
+
+
+def save_provenance(out, prov):
+    out = pathlib.Path(out)
+    for k in list(prov):
+        if not (out / k).exists():
+            del prov[k]
+    (out / "_files.json").write_text(json.dumps(dict(sorted(prov.items())), indent=0) + "\n")
+
+
 def stage_merge(args):
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     rows = read_manifest(args.manifest) if args.manifest else []
     order = {r["id"]: k for k, r in enumerate(rows)}
     shards, tshards = {}, {}
+    run = int(args.run if args.run is not None else (os.environ.get("GITHUB_RUN_NUMBER") or 0))
+    prov = load_provenance(out)
+    kept = []
+
+    def newer(rel):
+        r = prov.get(str(rel), {}).get("run", -1)
+        if r > run:
+            kept.append((str(rel), r))
+            return True
+        return False
+
+    def wrote(rel):
+        prov[str(rel)] = {"run": run, "sha256": sha256(out / rel)}
     for part in args.parts:
         part = pathlib.Path(part)
         if not part.is_dir():
@@ -954,12 +1023,24 @@ def stage_merge(args):
                 base = rel.name.split(".shard-")[0]
                 tshards.setdefault(base, []).append(f)
                 continue
+            if newer(rel):
+                continue
             dest = out / rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(f, dest)
+            wrote(rel)
         c = part / "card.json"
         if c.exists():
-            update_card(out, json.loads(c.read_text(encoding="utf-8")))
+            patch = json.loads(c.read_text(encoding="utf-8"))
+            if prov.get("card.json", {}).get("run", -1) > run and (out / "card.json").exists():
+                # a later run wrote this card: keep every value it set, only add what it lacks
+                cur = json.loads((out / "card.json").read_text(encoding="utf-8"))
+                (out / "card.json").write_text(json.dumps(patch, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+                update_card(out, cur)
+                kept.append(("card.json (merged, later values kept)", prov["card.json"]["run"]))
+            else:
+                update_card(out, patch)
+                prov["card.json"] = {"run": run, "sha256": sha256(out / "card.json")}
     def shard_index(f):
         tail = f.name.split(".shard-")[1]
         return int(tail.split("-of-")[0])
@@ -971,12 +1052,16 @@ def stage_merge(args):
         if len(npys) != n_expected or len(jsons) != n_expected:
             log("text %s: %d of %d shards present; not merged" % (base, len(npys), n_expected))
             continue
+        if newer("text/%s.f16.npy" % base):
+            continue
         v = np.concatenate([np.load(f) for f in npys])
         meta = json.loads(jsons[0].read_text())
         meta["labels"] = [r for f in jsons for r in json.loads(f.read_text())["labels"]]
         (out / "text").mkdir(parents=True, exist_ok=True)
         np.save(out / "text" / ("%s.f16.npy" % base), v.astype(np.float16))
         (out / "text" / ("%s.labels.json" % base)).write_text(json.dumps(meta, indent=1, ensure_ascii=False) + "\n")
+        wrote("text/%s.f16.npy" % base)
+        wrote("text/%s.labels.json" % base)
         log("merged text %s: %d shards, %d rows" % (base, len(npys), len(v)))
 
     for base, fs in shards.items():
@@ -994,6 +1079,27 @@ def stage_merge(args):
         if not allv:
             continue
         v = np.concatenate(allv)
+        # union with rows the branch already holds for this set (another run may have embedded other shards); where
+        # both have a row, the newer run's row wins
+        ef, ei = out / "images" / ("%s.f16.npy" % base), out / "images" / ("%s.ids.json" % base)
+        if ef.exists() and ei.exists():
+            old_v, old_id = np.load(ef), json.loads(ei.read_text())
+            mine = set(allid)
+            if prov.get("images/%s.f16.npy" % base, {}).get("run", -1) > run:
+                keep = set(old_id)
+                sel = [k for k, r in enumerate(allid) if r not in keep]
+                v, allid = v[sel], [allid[k] for k in sel]
+                kept.append(("images/%s rows already there (union, later rows kept)" % base, prov["images/%s.f16.npy" % base]["run"]))
+                mine = set(allid)
+            add = [k for k, r in enumerate(old_id) if r not in mine]
+            if add:
+                v = np.concatenate([v, old_v[add].astype(v.dtype)])
+                allid = allid + [old_id[k] for k in add]
+                log("  %s: %d rows kept from the branch" % (base, len(add)))
+            sk = out / "images" / ("%s.skipped.json" % base)
+            if sk.exists():
+                got = set(allid)
+                skipped += [x for x in json.loads(sk.read_text()) if x[0] not in got and x[0] not in {y[0] for y in skipped}]
         idx = sorted(range(len(allid)), key=lambda k: order.get(allid[k], 10 ** 9 + k))
         v = v[idx]
         allid = [allid[k] for k in idx]
@@ -1001,10 +1107,288 @@ def stage_merge(args):
         np.save(out / "images" / ("%s.f16.npy" % base), v.astype(np.float16))
         (out / "images" / ("%s.ids.json" % base)).write_text(json.dumps(allid) + "\n")
         (out / "images" / ("%s.skipped.json" % base)).write_text(json.dumps(skipped, indent=0) + "\n")
+        for ext in (".f16.npy", ".ids.json", ".skipped.json"):
+            wrote("images/%s%s" % (base, ext))
         n_expected = int(npys[0].name.split("-of-")[1].split(".")[0])
         log("merged %s: %d of %d shards, %d rows, %d skipped" % (base, len(npys), n_expected, len(allid), len(skipped)))
         update_card(out, {"images": {base: {"rows_embedded": len(allid), "skipped": len(skipped),
                                             "shards_present": len(npys), "complete": len(npys) == n_expected}}})
+    for rel, r in kept:
+        log("kept %s: a later run (%d) published it; this is run %d" % (rel, r, run))
+    save_provenance(out, prov)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stage: quant-lab (try other ways to make the image encoder small; numbers only, nothing published)
+
+
+def weight_only_int8(src, dst):
+    """Every MatMul with a constant weight gets int8 weights (symmetric, per output column) and a DequantizeLinear in
+    front: the file is about as small as the int8 file, the arithmetic stays float."""
+    import onnx
+    from onnx import helper, numpy_helper
+
+    mdl = onnx.load(str(src))
+    g = mdl.graph
+    inits = {i.name: i for i in g.initializer}
+    done, nodes = {}, []
+    for nd in g.node:
+        if nd.op_type == "MatMul" and nd.input[1] in inits:
+            base = nd.input[1]
+            if base not in done:
+                W = numpy_helper.to_array(inits[base]).astype(np.float32)
+                if W.ndim != 2:
+                    nodes.append(nd)
+                    continue
+                sc = (np.abs(W).max(axis=0) / 127.0).astype(np.float32)
+                sc[sc == 0] = 1e-8
+                q = np.clip(np.rint(W / sc), -127, 127).astype(np.int8)
+                g.initializer.remove(inits[base])
+                g.initializer.extend([numpy_helper.from_array(q, base + "_q"), numpy_helper.from_array(sc, base + "_s"),
+                                      numpy_helper.from_array(np.zeros(sc.shape, np.int8), base + "_z")])
+                nodes.append(helper.make_node("DequantizeLinear", [base + "_q", base + "_s", base + "_z"], [base + "_dq"], axis=1))
+                done[base] = base + "_dq"
+            nd.input[1] = done[base]
+        nodes.append(nd)
+    del g.node[:]
+    g.node.extend(nodes)
+    onnx.save(mdl, str(dst))
+
+
+def fp16_weights(src, dst):
+    """Large float initializers stored as float16 with a Cast back to float32: half the download, float32 arithmetic."""
+    import onnx
+    from onnx import TensorProto, helper, numpy_helper
+
+    mdl = onnx.load(str(src))
+    g = mdl.graph
+    casts = []
+    for init in list(g.initializer):
+        if init.data_type == TensorProto.FLOAT:
+            a = numpy_helper.to_array(init)
+            if a.size >= 1024:
+                g.initializer.remove(init)
+                g.initializer.append(numpy_helper.from_array(a.astype(np.float16), init.name + "_h"))
+                casts.append(helper.make_node("Cast", [init.name + "_h"], [init.name], to=TensorProto.FLOAT))
+    nodes = casts + list(g.node)
+    del g.node[:]
+    g.node.extend(nodes)
+    onnx.save(mdl, str(dst))
+
+
+def stage_quant_lab(args):
+    import subprocess
+
+    from onnxruntime.quantization import QuantType, quantize_dynamic
+
+    entry = model_entry(args.model)
+    m = load(entry)
+    card = base_card(entry, m)
+    size = card["input"]["size"]
+    tmp = pathlib.Path(args.work)
+    tmp.mkdir(parents=True, exist_ok=True)
+    fp32 = tmp / "vision.fp32.onnx"
+    export_onnx(m, fp32, size, 17)
+    files = {"fp32": fp32}
+    recipes = {
+        "int8-per-channel": dict(weight_type=QuantType.QInt8, per_channel=True, reduce_range=False),
+        "int8-per-channel-7bit": dict(weight_type=QuantType.QInt8, per_channel=True, reduce_range=True),
+        "uint8-per-channel": dict(weight_type=QuantType.QUInt8, per_channel=True, reduce_range=False),
+    }
+    notes = {"int8-per-channel": "the shipping recipe: dynamic int8, per-channel weights, MatMul and Gemm with constant weights",
+             "int8-per-channel-7bit": "as shipped, with reduce_range (7-bit weights), which avoids saturation in u8s8 kernels without VNNI",
+             "uint8-per-channel": "as shipped, with unsigned 8-bit weights (u8u8 kernels)",
+             "w8-float": "8-bit weights (per output column, DequantizeLinear) with float activations and float arithmetic",
+             "f16w-float": "float16 weights cast to float32 when the session loads: half the download, float32 arithmetic",
+             "fp16": "float16 throughout (convert_float_to_float16, keep_io_types)"}
+    for tag, kw in recipes.items():
+        f = tmp / ("vision.%s.onnx" % tag)
+        try:
+            quantize_dynamic(str(fp32), str(f), op_types_to_quantize=["MatMul", "Gemm"], extra_options={"MatMulConstBOnly": True}, **kw)
+            files[tag] = f
+        except Exception as e:
+            log("%s failed: %s" % (tag, e))
+    for tag, fn in (("w8-float", weight_only_int8), ("f16w-float", fp16_weights)):
+        f = tmp / ("vision.%s.onnx" % tag)
+        try:
+            fn(fp32, f)
+            files[tag] = f
+        except Exception as e:
+            log("%s failed: %s: %s" % (tag, type(e).__name__, e))
+    try:
+        import onnx
+        from onnxruntime.transformers.float16 import convert_float_to_float16
+
+        onnx.save(convert_float_to_float16(onnx.load(str(fp32)), keep_io_types=True), str(tmp / "vision.fp16.onnx"))
+        files["fp16"] = tmp / "vision.fp16.onnx"
+    except Exception as e:
+        log("fp16 failed: %s" % e)
+    rows = read_manifest(args.manifest)
+    ok, _ = iter_photos(rows, args.photos)
+    ims, pids = [], []
+    for rid, pth in ok[:args.parity_n]:
+        try:
+            ims.append(open_rgb(pth))
+            pids.append(rid)
+        except Exception:
+            pass
+    pv = m.pixel_values(ims)
+    ref = m.encode_pixels(pv)
+    pv_np = pv.numpy().astype(np.float32)
+    np.save(tmp / "_pv.npy", pv_np)
+    np.save(tmp / "_ref.npy", ref)
+    res = {"model": entry["id"], "photos": len(ims), "cpu": cpu_info(), "files": {}}
+    wd = tmp / "wasm"
+    wd.mkdir(exist_ok=True)
+    k = min(len(pv_np), 8)
+    pv_np[:k].tofile(wd / "input.f32")
+    (wd / "shape.json").write_text(json.dumps([k, 3, size, size]))
+    np.ascontiguousarray(ref[:k], dtype=np.float32).tofile(wd / "torch_ref.f32")
+    for tag, f in files.items():
+        info = {"mb": round(f.stat().st_size / 1e6, 2), "how": notes.get(tag, "the original model, exported")}
+        r = subprocess.run([sys.executable, "-u", __file__, "_parity", str(f), str(tmp / "_pv.npy"), str(tmp / "_ref.npy"), "1"],
+                           capture_output=True, text=True)
+        try:
+            info["cpu"] = json.loads(r.stdout.strip().splitlines()[-1])
+        except Exception:
+            info["cpu"] = {"run_error": (r.stderr or "")[-300:]}
+        res["files"][tag] = info
+        log("%s: %s" % (tag, json.dumps(info)))
+    (pathlib.Path(args.out_json)).write_text(json.dumps(res, indent=1) + "\n")
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stage: repair (undo what an older run's publish overwrote, from a snapshot taken just before it)
+
+
+def stage_repair(args):
+    snap, cur, out = pathlib.Path(args.snapshot), pathlib.Path(args.current), pathlib.Path(args.out)
+    if out.exists():
+        shutil.rmtree(out)
+    shutil.copytree(cur, out)
+    sprov = load_provenance(snap)
+    restored, added = [], []
+    for f in snap.rglob("*"):
+        if not f.is_file():
+            continue
+        rel = str(f.relative_to(snap))
+        if rel in ("_made.txt", "_files.json", "card.json"):
+            continue
+        g = out / rel
+        if not g.exists() or sha256(g) != sha256(f):
+            g.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(f, g)
+            restored.append(rel)
+    if (snap / "card.json").exists():
+        if not (out / "card.json").exists():
+            shutil.copy(snap / "card.json", out / "card.json")
+        update_card(out, json.loads((snap / "card.json").read_text(encoding="utf-8")))
+    prov = {}
+    for g in out.rglob("*"):
+        if not g.is_file():
+            continue
+        rel = str(g.relative_to(out))
+        if rel in ("_made.txt", "_files.json"):
+            continue
+        if rel in sprov and (snap / rel).exists() and rel != "card.json":
+            prov[rel] = sprov[rel]
+        else:
+            prov[rel] = {"run": int(args.run) if rel == "card.json" else int(args.older_run), "sha256": sha256(g)}
+            if not (snap / rel).exists():
+                added.append(rel)
+    save_provenance(out, prov)
+    rep = {"restored": restored, "kept_from_older_run": added}
+    (pathlib.Path(args.report)).write_text(json.dumps(rep, indent=1) + "\n")
+    log("repair: restored %d files, kept %d new files from run %s" % (len(restored), len(added), args.older_run))
+    for r in restored:
+        log("  restored " + r)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stage: ship (name the one file meant for shipping, so nobody depends on an alias)
+
+
+def stage_ship(args):
+    out = pathlib.Path(args.out)
+    f = out / args.file
+    if not f.exists():
+        raise SystemExit("no %s" % f)
+    update_card(out, {"ship": args.file, "ship_sha256": sha256(f), "ship_bytes": f.stat().st_size,
+                      "ship_note": "the ONNX file meant for the page; vision.int8.onnx is only an alias and may change"})
+    log("ship: %s %s" % (args.file, sha256(f)))
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stages: pixels and wasm-collect (the shipped path: onnxruntime-web's WASM build fed with Pillow-prepared pixels)
+
+
+def stage_pixels(args):
+    """Writes the model's own preprocessing up to (not including) rescaling and normalization: uint8 [N,3,S,S], the
+    Pillow resize and centre crop of transformers' CLIPImageProcessor, plus ids.json and norm.json (mean, std)."""
+    entry = model_entry(args.model)
+    if entry["loader"] != "transformers":
+        raise SystemExit("pixels: only transformers image processors are reproduced here")
+    from transformers import AutoImageProcessor
+
+    ip = AutoImageProcessor.from_pretrained(entry["source"])
+    rows = read_manifest(args.manifest)
+    part = shard_rows(rows, args.shard, args.shard_mode, args.rows)
+    ok, bad = iter_photos(part, args.photos)
+    od = pathlib.Path(args.pix)
+    od.mkdir(parents=True, exist_ok=True)
+    ids = []
+    with open(od / "u8.bin", "wb") as fh:
+        for rid, path in ok:
+            try:
+                im = open_rgb(path)
+            except Exception as e:
+                bad.append((rid, "unreadable: %s" % type(e).__name__))
+                continue
+            x = ip(images=[im], do_rescale=False, do_normalize=False, return_tensors="np")["pixel_values"][0]
+            u = np.rint(x).clip(0, 255).astype(np.uint8)
+            if np.abs(u.astype(np.float32) - x).max() > 1e-3:
+                raise SystemExit("pixels: processor output is not whole numbers before rescaling")
+            fh.write(u.tobytes())
+            ids.append(rid)
+    size = int(x.shape[-1]) if ids else None
+    (od / "ids.json").write_text(json.dumps(ids))
+    (od / "skipped.json").write_text(json.dumps(bad))
+    (od / "norm.json").write_text(json.dumps({"mean": [float(v) for v in ip.image_mean], "std": [float(v) for v in ip.image_std],
+                                              "size": size, "layout": "uint8 NCHW, RGB", "count": len(ids)}))
+    log("pixels: %d photos, %d skipped, size %s" % (len(ids), len(bad), size))
+
+
+def stage_wasm_collect(args):
+    entry = model_entry(args.model)
+    out = pathlib.Path(args.out)
+    pix = pathlib.Path(args.pix)
+    ids = json.loads((pix / "ids.json").read_text())
+    bad = json.loads((pix / "skipped.json").read_text())
+    lat = json.loads(pathlib.Path(args.lat).read_text())
+    d = lat["width"]
+    emb = np.fromfile(args.emb, dtype=np.float32).reshape(-1, d)
+    assert len(emb) == len(ids), (len(emb), len(ids))
+    i, n = parse_shard(args.shard)
+    name = eval_name(args.manifest, args.evalname) + ".wasm-" + args.variant
+    suffix = "" if n == 1 else ".shard-%d-of-%d" % (i, n)
+    save_f16(out / "images" / ("%s%s.f16.npy" % (name, suffix)), emb)
+    (out / "images" / ("%s%s.ids.json" % (name, suffix))).write_text(json.dumps(ids) + "\n")
+    (out / "images" / ("%s%s.skipped.json" % (name, suffix))).write_text(json.dumps(bad, indent=0) + "\n")
+    ms = np.array(lat["ms"], dtype=np.float64)
+    (out / "images" / ("%s.latency-%d-of-%d.json" % (name, i, n))).write_text(json.dumps(
+        {"ids": ids, "ms": [round(float(v), 3) for v in ms], "about": "session.run wall time per photo, batch 1"}) + "\n")
+    q = lambda p: round(float(np.percentile(ms, p)), 2) if len(ms) else None
+    stats = {"rows": len(ids) + len(bad), "embedded": len(ids), "skipped": len(bad),
+             "latency_ms": {"mean": round(float(ms.mean()), 2) if len(ms) else None, "p50": q(50), "p90": q(90),
+                            "p99": q(99), "min": q(0), "max": q(100)},
+             "onnx": args.onnx_name, "onnx_sha256": args.onnx_sha, "runtime": lat.get("runtime"),
+             "threads": lat.get("threads"), "node": lat.get("node"), "machine_cpus": os.cpu_count(), "cpu": cpu_info(),
+             "processes": lat.get("processes", 1), "note": lat.get("note"),
+             "pixels": "transformers CLIPImageProcessor resize (Pillow, bicubic) and centre crop to uint8; then (v/255 - mean)/std in float32 in JavaScript"}
+    update_card(out, {"images": {name: {"shards": n, "shard_%d" % i: stats,
+                                        "via": "onnxruntime-web %s WASM, %s thread(s), Node %s" % (lat.get("runtime"), lat.get("threads"), lat.get("node"))}},
+                      "stages": ["images-wasm-" + args.variant]})
+    log("wasm %s: %d embedded, latency %s" % (name, len(ids), json.dumps(stats["latency_ms"])))
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -1030,6 +1414,8 @@ def main():
         i.add_argument("--shard")
         i.add_argument("--evalname")
         i.add_argument("--batch", type=int, default=32)
+        i.add_argument("--rows", help="use only the first ROWS rows of the manifest, or rows A:B")
+        i.add_argument("--shard-mode", choices=["block", "mod"], default="block")
         i.add_argument("--out", required=True)
         if name == "images-onnx":
             i.add_argument("--variant", choices=["int8", "int8-per-tensor", "int8-per-channel", "fp16", "fp32"], required=True)
@@ -1047,7 +1433,49 @@ def main():
     g.add_argument("--model", required=True)
     g.add_argument("--manifest")
     g.add_argument("--out", required=True)
+    g.add_argument("--run", type=int, help="this run's number (default: $GITHUB_RUN_NUMBER)")
     g.add_argument("parts", nargs="*")
+    ql = sub.add_parser("quant-lab")
+    ql.add_argument("--model", required=True)
+    ql.add_argument("--manifest", required=True)
+    ql.add_argument("--photos", required=True)
+    ql.add_argument("--work", required=True)
+    ql.add_argument("--out-json", required=True)
+    ql.add_argument("--parity-n", type=int, default=40)
+    rp = sub.add_parser("repair")
+    rp.add_argument("--snapshot", required=True)
+    rp.add_argument("--current", required=True)
+    rp.add_argument("--out", required=True)
+    rp.add_argument("--older-run", required=True)
+    rp.add_argument("--run", required=True)
+    rp.add_argument("--report", required=True)
+    pv = sub.add_parser("provenance")
+    pv.add_argument("--out", required=True)
+    pv.add_argument("--run", type=int)
+    sh = sub.add_parser("ship")
+    sh.add_argument("--model", required=True)
+    sh.add_argument("--file", required=True)
+    sh.add_argument("--out", required=True)
+    px = sub.add_parser("pixels")
+    px.add_argument("--model", required=True)
+    px.add_argument("--manifest", required=True)
+    px.add_argument("--photos", required=True)
+    px.add_argument("--shard")
+    px.add_argument("--rows")
+    px.add_argument("--shard-mode", choices=["block", "mod"], default="block")
+    px.add_argument("--pix", required=True)
+    wc = sub.add_parser("wasm-collect")
+    wc.add_argument("--model", required=True)
+    wc.add_argument("--variant", required=True)
+    wc.add_argument("--manifest", required=True)
+    wc.add_argument("--evalname")
+    wc.add_argument("--shard")
+    wc.add_argument("--pix", required=True)
+    wc.add_argument("--emb", required=True)
+    wc.add_argument("--lat", required=True)
+    wc.add_argument("--onnx-name")
+    wc.add_argument("--onnx-sha")
+    wc.add_argument("--out", required=True)
     args = ap.parse_args()
     if args.stage == "text":
         if args.labelset == "species" and not args.species_json:
@@ -1061,6 +1489,25 @@ def main():
         stage_export(args)
     elif args.stage == "merge":
         stage_merge(args)
+    elif args.stage == "ship":
+        stage_ship(args)
+    elif args.stage == "repair":
+        stage_repair(args)
+    elif args.stage == "quant-lab":
+        stage_quant_lab(args)
+    elif args.stage == "provenance":
+        prov = load_provenance(args.out)
+        for g in pathlib.Path(args.out).rglob("*"):
+            rel = str(g.relative_to(args.out))
+            if g.is_file() and rel not in ("_made.txt", "_files.json") and ".git" not in g.parts:
+                h = sha256(g)
+                if prov.get(rel, {}).get("sha256") != h:
+                    prov[rel] = {"run": int(args.run if args.run is not None else (os.environ.get("GITHUB_RUN_NUMBER") or 0)), "sha256": h}
+        save_provenance(args.out, prov)
+    elif args.stage == "pixels":
+        stage_pixels(args)
+    elif args.stage == "wasm-collect":
+        stage_wasm_collect(args)
 
 
 if __name__ == "__main__":

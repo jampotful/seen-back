@@ -1,0 +1,19 @@
+{
+ "data": "pub/data-alachua",
+ "manifest": "extra/coco-kinds/manifest.csv",
+ "shard_mode": "block",
+ "wait_minutes": 280,
+ "about": "Extra kinds (people, pets, livestock, nothing alive; COCO 2017) for the pocket models: the original model, the shipping int8 file in onnxruntime CPU, and the same file in onnxruntime-web's WASM build; waits for extra/coco-kinds/manifest.csv on pub/data-alachua.",
+ "models": [
+  "tinyclip-8m-16",
+  "tinyclip-39m-16"
+ ],
+ "stages": [
+  "images",
+  "images-onnx-int8-per-channel",
+  "images-wasm-int8-per-channel"
+ ],
+ "shards": {},
+ "max_parallel": 1,
+ "wasm_procs": 4
+}
