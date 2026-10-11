@@ -96,7 +96,10 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       'tiger swallowtail': 'insect', 'american alligator': 'alligator', 'green anole': 'reptile', 'southern toad': 'frog', 'white-tailed deer': 'deer', 'marsh rabbit': 'rabbit', 'spanish moss': 'plant',
       'beautyberry': 'plant', 'live oak': 'plant', 'wolf spider': 'other', 'armadillo': 'other', 'plant': 'plant', 'ant': 'insect', 'a person': 'person', 'limpkin': 'wader', 'barred owl': 'bird', 'walkingstick': 'insect', 'elephant': '', 'biscuit': '', 'biscuit, a cat': 'cat', 'my dog rex': 'dog' };
     const got = await page.evaluate(c => Object.keys(c).filter(k => window.__seenBack.kindOfName(k) !== c[k]).map(k => k + ' -> ' + window.__seenBack.kindOfName(k) + ' (wanted ' + c[k] + ')'), cases);
-    out.lex = { tried: Object.keys(cases).length, wrong: got }; await ctx.close();
+    // the sheet "Now your view." says how the view returns, in plain English for every kind (for 'other' it once read "as this one may take it in")
+    const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewText').textContent]; }));
+    view.forEach(([k, t]) => { if (!/ It returns as [^.]+ may take it in\.$/.test(t) || / as this one may /.test(t) || (k === 'other' && !/ It returns as this living thing may take it in\.$/.test(t))) got.push('view prompt for ' + k + ': ' + t); });
+    out.lex = { tried: Object.keys(cases).length + view.length, wrong: got }; await ctx.close();
   }
 
   if (mode === 'record') {
