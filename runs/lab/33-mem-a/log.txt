@@ -1,0 +1,57 @@
+[08:48:41] memory job mem-a; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1135       12582          42        2635       14854
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+
+added 18 packages in 2s
+photos: 24 rows, 24 to fetch, 0 failed, 0.3s
+pixels: 24 photos (0 skipped), every 13-th test row
+[0;93m2026-10-11 08:48:55.571826951 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python onnxruntime 1.30.0 onnx 1.23.2
+[0;93m2026-10-11 08:48:55.741903675 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+ORT format (basic, onnxruntime 1.30.0): 310038272 bytes
+model:
+total 605332
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 310038272 Oct 11 08:48 vision.basic.ort
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+[08:48:56] route ort: {"name": "ort", "form": "ort-basic", "options": {}, "model": "model/vision.basic.ort", "photos": 24}
+{"step":"start","rss_mb":55.4,"peak_mb":55.4,"heap_mb":0}
+{"step":"file read","rss_mb":352.5,"peak_mb":352.5,"heap_mb":0,"ms":34}
+{"step":"session created","rss_mb":1101.5,"peak_mb":1101.5,"heap_mb":623.4,"ms":614}
+{"step":"warm-up (empty picture)","rss_mb":1397.2,"peak_mb":1397.9,"heap_mb":733.9,"ms":4005}
+{"step":"photo 1","rss_mb":1399.6,"peak_mb":1399.6,"heap_mb":733.9,"ms":3917}
+{"step":"photo 10","rss_mb":1399.9,"peak_mb":1399.9,"heap_mb":733.9,"ms":3884}
+{"step":"photo 24","rss_mb":1400.4,"peak_mb":1400.4,"heap_mb":733.9,"ms":3990}
+route ort: ready 614 ms, heap 733.9 MB, photo mean 3896 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:38.24
+	Maximum resident set size (kbytes): 1433608
+[08:50:34] route ort-init: {"name": "ort-init", "form": "ort-basic", "options": {"extra": {"session": {"use_ort_model_bytes_for_initializers": "1"}}}, "model": "model/vision.basic.ort", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":354.1,"peak_mb":354.1,"heap_mb":0,"ms":34}
+{"step":"session created","rss_mb":789.8,"peak_mb":789.8,"heap_mb":365.6,"ms":559}
+{"step":"warm-up (empty picture)","rss_mb":1089,"peak_mb":1089.7,"heap_mb":438.7,"ms":4064}
+{"step":"photo 1","rss_mb":1095.5,"peak_mb":1095.5,"heap_mb":438.7,"ms":3940}
+{"step":"photo 10","rss_mb":1036.5,"peak_mb":1036.5,"heap_mb":438.7,"ms":4156}
+{"step":"photo 24","rss_mb":1038.2,"peak_mb":1038.2,"heap_mb":438.7,"ms":4242}
+route ort-init: ready 559 ms, heap 438.7 MB, photo mean 4180 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:44.81
+	Maximum resident set size (kbytes): 1062696
+[08:52:19] route ort-copy: {"name": "ort-copy", "form": "ort-basic", "options": {"extra": {"session": {"use_ort_model_bytes_directly": "0"}}}, "model": "model/vision.basic.ort", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":354.1,"peak_mb":354.1,"heap_mb":0,"ms":34}
+{"step":"session created","rss_mb":1402.7,"peak_mb":1402.7,"heap_mb":987.9,"ms":630}
+{"step":"warm-up (empty picture)","rss_mb":1573,"peak_mb":1573.7,"heap_mb":987.9,"ms":4106}
+{"step":"photo 1","rss_mb":1575.5,"peak_mb":1575.5,"heap_mb":987.9,"ms":3890}
+{"step":"photo 10","rss_mb":1582.1,"peak_mb":1582.1,"heap_mb":987.9,"ms":3887}
+{"step":"photo 24","rss_mb":1585.2,"peak_mb":1585.2,"heap_mb":987.9,"ms":3932}
+route ort-copy: ready 630 ms, heap 987.9 MB, photo mean 3894 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:38.29
+	Maximum resident set size (kbytes): 1622868
+[08:53:58] memory job done, fail=0
