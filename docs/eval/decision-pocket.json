@@ -1,133 +1,133 @@
 {
  "made_by": "tools/eval/decide.py",
  "slots_compared": {
-  "tinyclip-39m-16": "sentences-tinyclip-39m-16",
-  "tinyclip-8m-16": "sentences-tinyclip-8m-16"
+  "tinyclip-39m-16": "alachua-pre2025-tinyclip-39m-16",
+  "tinyclip-8m-16": "alachua-pre2025-tinyclip-8m-16"
  },
- "train": "sentences",
+ "train": "alachua-pre2025",
  "sets": [
   "wildlife",
   "extra"
  ],
  "rule": "TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95% interval lies wholly above zero. The measure is the mean of the share right on the wildlife test photos and on the extra set's test photos. The comparison is made on the test photos: a choice among two candidates by a rule fixed beforehand, which bends the chosen slot's test figures very little, and which is the one decision here that the test photos took part in.",
  "deciding_difference": [
-  0.0052,
-  -0.0065,
-  0.0167
+  0.0509,
+  0.0435,
+  0.058
  ],
  "measures": [
   {
    "photos": "wildlife",
    "measure": "kind of eye right",
-   "tinyclip-39m-16": 0.8142,
-   "tinyclip-8m-16": 0.7732,
+   "tinyclip-39m-16": 0.8852,
+   "tinyclip-8m-16": 0.8034,
    "difference": [
-    0.041,
-    0.0307,
-    0.0508
+    0.0817,
+    0.071,
+    0.0924
    ],
    "n": 4197
   },
   {
    "photos": "wildlife",
    "measure": "kind asserted and right",
-   "tinyclip-39m-16": 0.4768,
-   "tinyclip-8m-16": 0.4139,
+   "tinyclip-39m-16": 0.8053,
+   "tinyclip-8m-16": 0.5623,
    "difference": [
-    0.0629,
-    0.0503,
-    0.0746
+    0.243,
+    0.2297,
+    0.2566
    ],
    "n": 4197
   },
   {
    "photos": "wildlife",
    "measure": "kind asserted and wrong",
-   "tinyclip-39m-16": 0.0112,
-   "tinyclip-8m-16": 0.011,
+   "tinyclip-39m-16": 0.0424,
+   "tinyclip-8m-16": 0.0222,
    "difference": [
-    0.0002,
-    -0.0031,
-    0.0036
+    0.0203,
+    0.0145,
+    0.026
    ],
    "n": 4197
   },
   {
    "photos": "wildlife",
    "measure": "a right species name shown",
-   "tinyclip-39m-16": 0.1553,
-   "tinyclip-8m-16": 0.0836,
+   "tinyclip-39m-16": 0.2194,
+   "tinyclip-8m-16": 0.0617,
    "difference": [
-    0.0717,
-    0.0636,
-    0.0805
+    0.1577,
+    0.1465,
+    0.1692
    ],
    "n": 4197
   },
   {
    "photos": "wildlife",
    "measure": "a species name shown",
-   "tinyclip-39m-16": 0.1732,
-   "tinyclip-8m-16": 0.0939,
+   "tinyclip-39m-16": 0.2487,
+   "tinyclip-8m-16": 0.0705,
    "difference": [
-    0.0793,
-    0.0703,
-    0.0886
+    0.1782,
+    0.1665,
+    0.1906
    ],
    "n": 4197
   },
   {
    "photos": "extra",
    "measure": "kind of eye right",
-   "tinyclip-39m-16": 0.8008,
-   "tinyclip-8m-16": 0.8315,
+   "tinyclip-39m-16": 0.9742,
+   "tinyclip-8m-16": 0.954,
    "difference": [
-    -0.0306,
-    -0.0524,
-    -0.0097
+    0.0202,
+    0.0097,
+    0.0298
    ],
    "n": 1240
   },
   {
    "photos": "extra",
    "measure": "kind asserted and right",
-   "tinyclip-39m-16": 0.2831,
-   "tinyclip-8m-16": 0.2726,
+   "tinyclip-39m-16": 0.9444,
+   "tinyclip-8m-16": 0.8581,
    "difference": [
-    0.0105,
-    -0.0169,
-    0.0387
+    0.0863,
+    0.0685,
+    0.1032
    ],
    "n": 1240
   },
   {
    "photos": "extra",
    "measure": "kind asserted and wrong",
-   "tinyclip-39m-16": 0.0065,
-   "tinyclip-8m-16": 0.0089,
+   "tinyclip-39m-16": 0.0105,
+   "tinyclip-8m-16": 0.0097,
    "difference": [
-    -0.0024,
-    -0.0081,
-    0.0024
+    0.0008,
+    -0.0048,
+    0.0065
    ],
    "n": 1240
   },
   {
    "photos": "extra",
    "measure": "a species name shown",
-   "tinyclip-39m-16": 0.0121,
-   "tinyclip-8m-16": 0.0105,
+   "tinyclip-39m-16": 0.1613,
+   "tinyclip-8m-16": 0.1565,
    "difference": [
-    0.0016,
-    -0.004,
-    0.0081
+    0.0048,
+    -0.0081,
+    0.0185
    ],
    "n": 1240
   }
  ],
- "choice": "tinyclip-8m-16",
- "slot": "sentences-tinyclip-8m-16",
- "branch": "pub/heads-sentences-tinyclip-8m-16",
- "provisional": true,
- "why": "On the mean of the share right on the wildlife test photos and on the extra set's test photos, TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +0.5 points (-0.7 to +1.7), paired over the same photos. The interval reaches zero, so the smaller model ships: it is a quarter of the download and about a third of the time a photo."
+ "choice": "tinyclip-39m-16",
+ "slot": "alachua-pre2025-tinyclip-39m-16",
+ "branch": "pub/heads-alachua-pre2025-tinyclip-39m-16",
+ "provisional": false,
+ "why": "On the mean of the share right on the wildlife test photos and on the extra set's test photos, TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +5.1 points (+4.3 to +5.8), paired over the same photos. The interval lies above zero, so the larger pocket model ships: a wrong kind gives a person the wrong eyes, and that weighs more than 31 MB downloaded once."
 }

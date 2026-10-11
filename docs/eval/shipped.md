@@ -2,6 +2,401 @@
 
 _This file is written by `tools/eval/report.py` from `docs/eval/shipped-*.json`. Rerun the script to change it._
 
+## `alachua-pre2025-by-tinyclip-39m-16`
+
+The slot holds the head `discriminant + sentences` for `tinyclip-39m-16` (shrinkage 0.3, species_com, gamma 0.03), fitted on `images/alachua-pre2025 (licence rule by)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.5. On 1803 tuning photos (val) the thresholds came out as name_at 0.67 and offer_at never (no level reached nine in ten). On the 4197 test photos the kind of eye is right for 86.0% (84.9 to 87.0); the top species is right for 43.8% (42.3 to 45.4) and is among the first five for 66.0% (64.5 to 67.4). `person` was said for 0.02% of these photos and `none` for 0.14%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`. With kind_at 0.54 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 73.1% (71.8 to 74.5) of the wildlife test photos and is right for 96.7% (96.1 to 97.3) of those; for the 26.9% (25.5 to 28.2) where it is not sure, the true kind is among its three likeliest for 87.9% (86.0 to 89.8). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.5% (95.4 to 97.5); the page asserts a kind for 92.6% (91.1 to 94.0) and is right for 99.0% (98.3 to 99.5) of those; where it is not sure the true kind is among its three likeliest for 96.7% (92.4 to 100.0). A species is named on 14.9% (13.0 to 17.0) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 12.1% | the name is right for 89.0% (86.2 to 91.5); the kind for 98.8% (97.8 to 99.6) |
+| three species to choose from | 0.0% | the three hold the species for –; the kind is right for – |
+| a kind of eye only | 87.9% | the kind is right for 84.2% (83.0 to 85.4) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.54):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 54.5% (27.3 to 81.8) | 54.5% | 100.0% | 40.0% | 0.0% | 9.1% | 54.5% | bird (1) |
+| dog | 6 | 83.3% (50.0 to 100.0) | 33.3% | 100.0% | 75.0% | 0.0% | 0.0% | 33.3% | squirrel (1) |
+| squirrel | 36 | 86.1% (75.0 to 97.2) | 44.4% | 100.0% | 85.0% | 0.0% | 0.0% | 41.7% | plant (2) |
+| deer | 36 | 69.4% (52.8 to 83.3) | 55.6% | 95.0% | 62.5% | 0.0% | 0.0% | 52.8% | other (3) |
+| rabbit | 31 | 80.7% (67.7 to 93.5) | 71.0% | 100.0% | 77.8% | 0.0% | 0.0% | 64.5% | squirrel (3) |
+| hawk | 82 | 78.0% (68.3 to 86.6) | 68.3% | 94.6% | 65.4% | 0.0% | 0.0% | 37.8% | bird (11) |
+| wader | 382 | 82.5% (78.5 to 86.1) | 79.8% | 93.1% | 88.3% | 0.0% | 0.0% | 35.3% | bird (48) |
+| bird | 531 | 83.0% (79.7 to 86.2) | 66.5% | 96.0% | 88.2% | 0.0% | 0.8% | 18.8% | wader (32) |
+| alligator | 110 | 60.9% (51.8 to 70.0) | 43.6% | 95.8% | 54.8% | 0.0% | 0.0% | 41.8% | reptile (20) |
+| reptile | 268 | 72.4% (67.2 to 77.6) | 50.7% | 96.3% | 81.8% | 0.0% | 0.0% | 5.2% | insect (35) |
+| frog | 97 | 76.3% (67.0 to 84.5) | 59.8% | 98.3% | 94.9% | 0.0% | 0.0% | 1.0% | insect (14) |
+| bee | 126 | 69.8% (61.9 to 78.6) | 63.5% | 85.0% | 91.3% | 0.0% | 0.0% | 3.2% | insect (24) |
+| insect | 962 | 90.2% (88.2 to 92.1) | 71.0% | 96.5% | 98.9% | 0.0% | 0.0% | 1.9% | plant (37) |
+| plant | 1223 | 98.2% (97.4 to 98.9) | 91.3% | 99.8% | 100.0% | 0.0% | 0.1% | 6.1% | insect (12) |
+| other | 296 | 69.3% (64.2 to 74.7) | 56.8% | 90.5% | 83.6% | 0.3% | 0.0% | 7.8% | insect (55) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 6 | 100.0% (100.0 to 100.0) | – |
+| dog | 2 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 16 | 100.0% (100.0 to 100.0) | – |
+| deer | 19 | 100.0% (100.0 to 100.0) | – |
+| rabbit | 22 | 100.0% (100.0 to 100.0) | – |
+| hawk | 58 | 91.4% (84.5 to 98.3) | wader (3) |
+| wader | 296 | 96.0% (93.6 to 98.0) | bird (12) |
+| bird | 358 | 94.7% (92.2 to 96.9) | wader (15) |
+| alligator | 46 | 100.0% (100.0 to 100.0) | – |
+| reptile | 136 | 96.3% (92.7 to 99.3) | alligator (2) |
+| frog | 59 | 96.6% (91.5 to 100.0) | insect (2) |
+| bee | 76 | 89.5% (81.6 to 96.0) | insect (7) |
+| insect | 673 | 97.9% (96.9 to 99.0) | other (8) |
+| plant | 1144 | 97.4% (96.4 to 98.3) | insect (9) |
+| other | 158 | 96.2% (93.0 to 98.7) | insect (5) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 98.2% (97.0 to 99.5) | 94.5% | 100.0% | 100.0% | 98.2% | 1.5% | 0.0% | none (6) |
+| none | 500 | 97.2% (95.6 to 98.6) | 92.0% | 99.6% | 97.5% | 0.2% | 97.2% | 0.2% | plant (5) |
+| cat | 77 | 89.6% (81.8 to 96.1) | 89.6% | 95.7% | 75.0% | 1.3% | 5.2% | 85.7% | none (4) |
+| dog | 63 | 90.5% (82.5 to 96.8) | 84.1% | 94.3% | 100.0% | 0.0% | 0.0% | 4.8% | cat (5) |
+| deer | 200 | 95.5% (92.5 to 98.0) | 94.0% | 97.9% | 100.0% | 1.0% | 0.0% | 57.5% | dog (5) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 70 | 94.3% (88.6 to 98.6) | dog (3) |
+| dog | 53 | 94.3% (86.8 to 100.0) | deer (3) |
+| deer | 184 | 100.0% (100.0 to 100.0) | – |
+| plant | 1 | 0.0% (0.0 to 0.0) | none (1) |
+| person | 379 | 99.7% (99.2 to 100.0) | deer (1) |
+| none | 461 | 99.4% (98.5 to 100.0) | cat (3) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.36 | 90.6% (89.8 to 91.5) | 90.8% (89.9 to 91.7) | 75.9% (71.6 to 80.0) | 98.5% (97.7 to 99.1) | 97.4% (96.5 to 98.2) | 89.5% (73.7 to 100.0) |
+| 95 in 100 | 0.54 | 73.1% (71.8 to 74.5) | 96.7% (96.1 to 97.3) | 87.9% (86.0 to 89.8) | 92.6% (91.1 to 94.0) | 99.0% (98.3 to 99.5) | 96.7% (92.4 to 100.0) |
+| 98 in 100 | 0.69 | 57.4% (55.8 to 58.9) | 98.5% (98.0 to 99.0) | 91.8% (90.6 to 93.1) | 77.9% (75.6 to 80.3) | 99.4% (98.9 to 99.8) | 97.5% (95.3 to 99.3) |
+
+## `alachua-pre2025-nc-tinyclip-39m-16`
+
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.89 and offer_at 0.98. On the 4197 test photos the kind of eye is right for 89.1% (88.2 to 90.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`. With kind_at 0.53 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 81.7% (80.6 to 82.9) of the wildlife test photos and is right for 96.3% (95.7 to 96.9) of those; for the 18.3% (17.1 to 19.4) where it is not sure, the true kind is among its three likeliest for 89.5% (87.2 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.8 to 97.8); the page asserts a kind for 95.2% (94.0 to 96.4) and is right for 98.4% (97.6 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 96.7% (91.7 to 100.0). A species is named on 15.1% (13.1 to 17.1) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 20.1% | the name is right for 93.2% (91.6 to 94.9); the kind for 98.1% (97.2 to 98.9) |
+| three species to choose from | 4.6% | the three hold the species for 86.1% (80.9 to 90.7); the kind is right for 92.3% (88.1 to 95.9) |
+| a kind of eye only | 75.2% | the kind is right for 86.5% (85.4 to 87.8) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.53):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 63.6% (36.4 to 90.9) | 63.6% | 100.0% | 50.0% | 0.0% | 0.0% | 63.6% | bird (1) |
+| dog | 6 | 83.3% (50.0 to 100.0) | 66.7% | 100.0% | 50.0% | 0.0% | 0.0% | 50.0% | squirrel (1) |
+| squirrel | 36 | 88.9% (77.8 to 97.2) | 77.8% | 100.0% | 75.0% | 0.0% | 0.0% | 69.4% | plant (2) |
+| deer | 36 | 80.6% (66.7 to 91.7) | 75.0% | 92.6% | 66.7% | 0.0% | 0.0% | 69.4% | insect (2) |
+| rabbit | 31 | 80.7% (67.7 to 93.5) | 77.4% | 91.7% | 71.4% | 0.0% | 0.0% | 48.4% | other (2) |
+| hawk | 82 | 82.9% (74.4 to 90.2) | 81.7% | 91.0% | 86.7% | 0.0% | 0.0% | 40.2% | bird (5) |
+| wader | 382 | 88.0% (84.5 to 91.1) | 87.4% | 93.7% | 87.5% | 0.0% | 0.0% | 42.9% | bird (30) |
+| bird | 531 | 86.1% (82.9 to 88.9) | 76.6% | 94.3% | 87.1% | 0.0% | 0.0% | 25.8% | wader (24) |
+| alligator | 110 | 77.3% (69.1 to 84.6) | 70.0% | 94.8% | 60.6% | 0.0% | 0.0% | 65.5% | reptile (8) |
+| reptile | 268 | 80.2% (75.4 to 84.7) | 68.3% | 96.2% | 92.9% | 0.0% | 0.0% | 4.1% | insect (22) |
+| frog | 97 | 88.7% (82.5 to 94.8) | 75.3% | 98.6% | 91.7% | 0.0% | 0.0% | 0.0% | insect (4) |
+| bee | 126 | 76.2% (68.2 to 83.3) | 77.0% | 89.7% | 86.2% | 0.0% | 0.0% | 14.3% | insect (16) |
+| insect | 962 | 91.5% (89.6 to 93.1) | 80.7% | 96.4% | 98.9% | 0.0% | 0.0% | 8.5% | plant (23) |
+| plant | 1223 | 97.8% (97.0 to 98.6) | 91.8% | 99.6% | 97.0% | 0.0% | 0.0% | 17.2% | other (10) |
+| other | 296 | 75.7% (71.0 to 80.4) | 68.2% | 91.1% | 81.9% | 0.0% | 0.0% | 14.5% | insect (49) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 7 | 100.0% (100.0 to 100.0) | – |
+| dog | 4 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 32 | 87.5% (75.0 to 96.9) | bird (1) |
+| deer | 26 | 96.2% (88.5 to 100.0) | other (1) |
+| rabbit | 22 | 100.0% (100.0 to 100.0) | – |
+| hawk | 70 | 87.1% (78.6 to 94.3) | bird (7) |
+| wader | 328 | 95.4% (93.0 to 97.6) | bird (13) |
+| bird | 405 | 94.8% (92.6 to 96.8) | wader (15) |
+| alligator | 74 | 98.7% (96.0 to 100.0) | reptile (1) |
+| reptile | 184 | 95.7% (92.4 to 98.4) | alligator (4) |
+| frog | 77 | 93.5% (88.3 to 98.7) | insect (3) |
+| bee | 94 | 92.5% (87.2 to 97.9) | insect (7) |
+| insect | 760 | 98.4% (97.5 to 99.2) | other (8) |
+| plant | 1151 | 97.2% (96.2 to 98.2) | insect (10) |
+| other | 195 | 94.4% (90.8 to 97.4) | insect (7) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 99.2% (98.2 to 100.0) | 97.2% | 100.0% | 100.0% | 99.2% | 0.5% | 0.0% | none (2) |
+| none | 500 | 97.2% (95.6 to 98.6) | 95.2% | 98.9% | 91.7% | 0.4% | 97.2% | 0.0% | plant (5) |
+| cat | 77 | 90.9% (84.4 to 96.1) | 93.5% | 93.1% | 100.0% | 1.3% | 5.2% | 85.7% | none (4) |
+| dog | 63 | 90.5% (82.5 to 96.8) | 92.1% | 93.1% | 100.0% | 0.0% | 0.0% | 6.3% | cat (6) |
+| deer | 200 | 95.5% (92.5 to 98.0) | 92.5% | 97.3% | 100.0% | 1.5% | 0.0% | 58.5% | dog (3) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 73 | 91.8% (84.9 to 97.3) | dog (4) |
+| dog | 57 | 94.7% (87.7 to 100.0) | deer (2) |
+| deer | 180 | 100.0% (100.0 to 100.0) | – |
+| plant | 3 | 0.0% (0.0 to 0.0) | none (3) |
+| person | 392 | 99.2% (98.2 to 100.0) | deer (3) |
+| none | 475 | 99.2% (98.3 to 99.8) | cat (4) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.29 | 97.5% (97.0 to 97.9) | 90.6% (89.7 to 91.4) | 69.2% (59.8 to 77.6) | 99.7% (99.4 to 100.0) | 97.2% (96.3 to 98.1) | 50.0% (0.0 to 100.0) |
+| 95 in 100 | 0.53 | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) |
+| 98 in 100 | 0.68 | 66.4% (65.0 to 67.9) | 98.1% (97.6 to 98.6) | 93.5% (92.1 to 94.8) | 85.8% (83.9 to 87.8) | 99.0% (98.3 to 99.5) | 97.7% (95.5 to 99.4) |
+
+## `alachua-pre2025-nc-tinyclip-39m-16-at90`
+
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.80 and offer_at 0.88. On the 4197 test photos the kind of eye is right for 89.1% (88.2 to 90.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`. With kind_at 0.53 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 81.7% (80.6 to 82.9) of the wildlife test photos and is right for 96.3% (95.7 to 96.9) of those; for the 18.3% (17.1 to 19.4) where it is not sure, the true kind is among its three likeliest for 89.5% (87.2 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.8 to 97.8); the page asserts a kind for 95.2% (94.0 to 96.4) and is right for 98.4% (97.6 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 96.7% (91.7 to 100.0). A species is named on 15.7% (13.6 to 17.7) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 25.3% | the name is right for 91.0% (89.2 to 92.7); the kind for 97.9% (97.0 to 98.8) |
+| three species to choose from | 12.0% | the three hold the species for 85.9% (82.9 to 88.8); the kind is right for 93.8% (91.6 to 95.8) |
+| a kind of eye only | 62.7% | the kind is right for 84.7% (83.3 to 86.1) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.53):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 63.6% (36.4 to 90.9) | 63.6% | 100.0% | 50.0% | 0.0% | 0.0% | 63.6% | bird (1) |
+| dog | 6 | 83.3% (50.0 to 100.0) | 66.7% | 100.0% | 50.0% | 0.0% | 0.0% | 66.7% | squirrel (1) |
+| squirrel | 36 | 88.9% (77.8 to 97.2) | 77.8% | 100.0% | 75.0% | 0.0% | 0.0% | 72.2% | plant (2) |
+| deer | 36 | 80.6% (66.7 to 91.7) | 75.0% | 92.6% | 66.7% | 0.0% | 0.0% | 69.4% | insect (2) |
+| rabbit | 31 | 80.7% (67.7 to 93.5) | 77.4% | 91.7% | 71.4% | 0.0% | 0.0% | 58.1% | other (2) |
+| hawk | 82 | 82.9% (74.4 to 90.2) | 81.7% | 91.0% | 86.7% | 0.0% | 0.0% | 50.0% | bird (5) |
+| wader | 382 | 88.0% (84.5 to 91.1) | 87.4% | 93.7% | 87.5% | 0.0% | 0.0% | 50.3% | bird (30) |
+| bird | 531 | 86.1% (82.9 to 88.9) | 76.6% | 94.3% | 87.1% | 0.0% | 0.0% | 32.8% | wader (24) |
+| alligator | 110 | 77.3% (69.1 to 84.6) | 70.0% | 94.8% | 60.6% | 0.0% | 0.0% | 65.5% | reptile (8) |
+| reptile | 268 | 80.2% (75.4 to 84.7) | 68.3% | 96.2% | 92.9% | 0.0% | 0.0% | 9.3% | insect (22) |
+| frog | 97 | 88.7% (82.5 to 94.8) | 75.3% | 98.6% | 91.7% | 0.0% | 0.0% | 3.1% | insect (4) |
+| bee | 126 | 76.2% (68.2 to 83.3) | 77.0% | 89.7% | 86.2% | 0.0% | 0.0% | 19.0% | insect (16) |
+| insect | 962 | 91.5% (89.6 to 93.1) | 80.7% | 96.4% | 98.9% | 0.0% | 0.0% | 12.8% | plant (23) |
+| plant | 1223 | 97.8% (97.0 to 98.6) | 91.8% | 99.6% | 97.0% | 0.0% | 0.0% | 21.4% | other (10) |
+| other | 296 | 75.7% (71.0 to 80.4) | 68.2% | 91.1% | 81.9% | 0.0% | 0.0% | 22.3% | insect (49) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 7 | 100.0% (100.0 to 100.0) | – |
+| dog | 4 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 32 | 87.5% (75.0 to 96.9) | bird (1) |
+| deer | 26 | 96.2% (88.5 to 100.0) | other (1) |
+| rabbit | 22 | 100.0% (100.0 to 100.0) | – |
+| hawk | 70 | 87.1% (78.6 to 94.3) | bird (7) |
+| wader | 328 | 95.4% (93.0 to 97.6) | bird (13) |
+| bird | 405 | 94.8% (92.6 to 96.8) | wader (15) |
+| alligator | 74 | 98.7% (96.0 to 100.0) | reptile (1) |
+| reptile | 184 | 95.7% (92.4 to 98.4) | alligator (4) |
+| frog | 77 | 93.5% (88.3 to 98.7) | insect (3) |
+| bee | 94 | 92.5% (87.2 to 97.9) | insect (7) |
+| insect | 760 | 98.4% (97.5 to 99.2) | other (8) |
+| plant | 1151 | 97.2% (96.2 to 98.2) | insect (10) |
+| other | 195 | 94.4% (90.8 to 97.4) | insect (7) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 99.2% (98.2 to 100.0) | 97.2% | 100.0% | 100.0% | 99.2% | 0.5% | 0.0% | none (2) |
+| none | 500 | 97.2% (95.6 to 98.6) | 95.2% | 98.9% | 91.7% | 0.4% | 97.2% | 0.2% | plant (5) |
+| cat | 77 | 90.9% (84.4 to 96.1) | 93.5% | 93.1% | 100.0% | 1.3% | 5.2% | 85.7% | none (4) |
+| dog | 63 | 90.5% (82.5 to 96.8) | 92.1% | 93.1% | 100.0% | 0.0% | 0.0% | 6.3% | cat (6) |
+| deer | 200 | 95.5% (92.5 to 98.0) | 92.5% | 97.3% | 100.0% | 1.5% | 0.0% | 62.0% | dog (3) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 73 | 91.8% (84.9 to 97.3) | dog (4) |
+| dog | 57 | 94.7% (87.7 to 100.0) | deer (2) |
+| deer | 180 | 100.0% (100.0 to 100.0) | – |
+| plant | 3 | 0.0% (0.0 to 0.0) | none (3) |
+| person | 392 | 99.2% (98.2 to 100.0) | deer (3) |
+| none | 475 | 99.2% (98.3 to 99.8) | cat (4) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.29 | 97.5% (97.0 to 97.9) | 90.6% (89.7 to 91.4) | 69.2% (59.8 to 77.6) | 99.7% (99.4 to 100.0) | 97.2% (96.3 to 98.1) | 50.0% (0.0 to 100.0) |
+| 95 in 100 | 0.53 | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) |
+| 98 in 100 | 0.68 | 66.4% (65.0 to 67.9) | 98.1% (97.6 to 98.6) | 93.5% (92.1 to 94.8) | 85.8% (83.9 to 87.8) | 99.0% (98.3 to 99.5) | 97.7% (95.5 to 99.4) |
+
+## `alachua-pre2025-tinyclip-39m-16`
+
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025`, with 5467 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.6. On 1803 tuning photos (val) the thresholds came out as name_at 0.82 and offer_at 0.98. On the 4197 test photos the kind of eye is right for 88.5% (87.5 to 89.5); the top species is right for 53.4% (51.9 to 55.0) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.02%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every photo counts the same)`. With kind_at 0.51 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 84.8% (83.7 to 85.9) of the wildlife test photos and is right for 95.0% (94.2 to 95.7) of those; for the 15.2% (14.1 to 16.3) where it is not sure, the true kind is among its three likeliest for 86.1% (83.4 to 88.6). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 97.4% (96.5 to 98.2); the page asserts a kind for 95.5% (94.2 to 96.7) and is right for 98.9% (98.3 to 99.5) of those; where it is not sure the true kind is among its three likeliest for 94.6% (87.5 to 100.0). A species is named on 16.1% (14.1 to 18.2) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 24.9% | the name is right for 88.2% (86.2 to 90.0); the kind for 95.3% (94.1 to 96.5) |
+| three species to choose from | 2.7% | the three hold the species for 92.1% (86.8 to 96.5); the kind is right for 98.2% (95.6 to 100.0) |
+| a kind of eye only | 72.4% | the kind is right for 85.8% (84.6 to 87.0) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.51):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 63.6% (36.4 to 90.9) | 54.5% | 100.0% | 60.0% | 0.0% | 0.0% | 63.6% | insect (2) |
+| dog | 6 | 83.3% (50.0 to 100.0) | 66.7% | 100.0% | 50.0% | 0.0% | 0.0% | 83.3% | squirrel (1) |
+| squirrel | 36 | 86.1% (75.0 to 97.2) | 75.0% | 100.0% | 66.7% | 0.0% | 0.0% | 75.0% | bird (2) |
+| deer | 36 | 75.0% (61.1 to 88.9) | 72.2% | 92.3% | 50.0% | 0.0% | 0.0% | 69.4% | other (4) |
+| rabbit | 31 | 77.4% (61.3 to 90.3) | 74.2% | 95.7% | 75.0% | 0.0% | 0.0% | 51.6% | squirrel (3) |
+| hawk | 82 | 80.5% (72.0 to 89.0) | 78.0% | 90.6% | 72.2% | 0.0% | 0.0% | 51.2% | bird (7) |
+| wader | 382 | 84.8% (81.2 to 88.5) | 87.4% | 91.6% | 83.3% | 0.0% | 0.0% | 50.5% | bird (41) |
+| bird | 531 | 86.8% (83.6 to 89.6) | 78.9% | 94.3% | 85.7% | 0.0% | 0.2% | 33.1% | wader (18) |
+| alligator | 110 | 74.6% (66.4 to 82.7) | 61.8% | 89.7% | 64.3% | 0.0% | 0.0% | 70.0% | reptile (10) |
+| reptile | 268 | 73.9% (68.7 to 79.1) | 66.4% | 93.3% | 86.7% | 0.0% | 0.0% | 7.8% | insect (38) |
+| frog | 97 | 78.3% (70.1 to 85.6) | 69.1% | 91.0% | 83.3% | 0.0% | 0.0% | 2.1% | insect (13) |
+| bee | 126 | 71.4% (63.5 to 79.4) | 84.1% | 77.4% | 85.0% | 0.0% | 0.0% | 18.3% | insect (22) |
+| insect | 962 | 94.4% (92.9 to 95.8) | 89.0% | 96.8% | 99.1% | 0.0% | 0.0% | 11.3% | plant (25) |
+| plant | 1223 | 98.0% (97.2 to 98.8) | 95.3% | 99.5% | 100.0% | 0.0% | 0.0% | 21.2% | insect (9) |
+| other | 296 | 73.3% (68.2 to 78.4) | 72.6% | 83.7% | 86.4% | 0.0% | 0.0% | 20.9% | insect (61) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 6 | 100.0% (100.0 to 100.0) | – |
+| dog | 4 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 30 | 90.0% (80.0 to 100.0) | bird (1) |
+| deer | 25 | 96.0% (88.0 to 100.0) | other (1) |
+| rabbit | 22 | 100.0% (100.0 to 100.0) | – |
+| hawk | 66 | 87.9% (80.3 to 95.5) | bird (7) |
+| wader | 320 | 95.6% (93.1 to 97.8) | bird (13) |
+| bird | 423 | 93.4% (91.0 to 95.7) | wader (22) |
+| alligator | 62 | 98.4% (95.2 to 100.0) | reptile (1) |
+| reptile | 174 | 95.4% (92.0 to 98.3) | alligator (6) |
+| frog | 63 | 96.8% (92.1 to 100.0) | insect (2) |
+| bee | 85 | 96.5% (91.8 to 100.0) | insect (3) |
+| insect | 883 | 93.9% (92.3 to 95.4) | other (25) |
+| plant | 1204 | 96.3% (95.2 to 97.3) | insect (14) |
+| other | 191 | 94.2% (90.6 to 97.4) | insect (7) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 99.2% (98.2 to 100.0) | 97.5% | 99.7% | 100.0% | 99.2% | 0.5% | 0.0% | none (2) |
+| none | 500 | 97.8% (96.4 to 99.0) | 95.4% | 99.4% | 91.3% | 0.4% | 97.8% | 0.2% | cat (3) |
+| cat | 77 | 90.9% (84.4 to 97.4) | 90.9% | 97.1% | 85.7% | 1.3% | 3.9% | 90.9% | none (3) |
+| dog | 63 | 90.5% (82.5 to 96.8) | 88.9% | 92.9% | 100.0% | 0.0% | 0.0% | 7.9% | cat (6) |
+| deer | 200 | 97.5% (95.0 to 99.5) | 95.5% | 98.4% | 100.0% | 1.0% | 0.5% | 62.0% | person (2) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 74 | 91.9% (85.1 to 97.3) | dog (4) |
+| dog | 53 | 98.1% (94.3 to 100.0) | deer (1) |
+| deer | 188 | 100.0% (100.0 to 100.0) | – |
+| plant | 1 | 0.0% (0.0 to 0.0) | none (1) |
+| person | 391 | 99.5% (98.7 to 100.0) | deer (2) |
+| none | 477 | 99.4% (98.5 to 100.0) | cat (2) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.32 | 96.9% (96.3 to 97.4) | 90.4% (89.5 to 91.3) | 62.9% (54.5 to 71.2) | 99.4% (99.0 to 99.8) | 97.7% (96.8 to 98.5) | 71.4% (42.9 to 100.0) |
+| 95 in 100 | 0.51 | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 86.1% (83.4 to 88.6) | 95.5% (94.2 to 96.7) | 98.9% (98.3 to 99.5) | 94.6% (87.5 to 100.0) |
+| 98 in 100 | 0.64 | 71.9% (70.6 to 73.2) | 97.8% (97.2 to 98.3) | 91.2% (89.6 to 92.7) | 87.7% (85.9 to 89.6) | 99.5% (99.1 to 99.9) | 96.0% (92.8 to 98.7) |
+
+## `alachua-pre2025-tinyclip-8m-16`
+
+The slot holds the head `discriminant` for `tinyclip-8m-16` (shrinkage 0.3), fitted on `images/alachua-pre2025`, with 5467 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 1, w_kind 0.7, alpha_prior 0.5. On 1803 tuning photos (val) the thresholds came out as name_at 0.90 and offer_at 0.97. On the 4197 test photos the kind of eye is right for 80.3% (79.0 to 81.6); the top species is right for 42.5% (41.0 to 44.0) and is among the first five for 65.5% (64.1 to 66.9). `person` was said for 0.02% of these photos and `none` for 0.05%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every photo counts the same)`. With kind_at 0.82 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 58.5% (56.9 to 60.0) of the wildlife test photos and is right for 96.2% (95.4 to 96.9) of those; for the 41.5% (40.0 to 43.1) where it is not sure, the true kind is among its three likeliest for 91.5% (90.1 to 92.7). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 95.4% (94.2 to 96.5); the page asserts a kind for 86.8% (84.8 to 88.7) and is right for 98.9% (98.2 to 99.4) of those; where it is not sure the true kind is among its three likeliest for 92.7% (88.4 to 96.3). A species is named on 15.7% (13.7 to 17.7) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 7.0% | the name is right for 87.5% (83.8 to 91.2); the kind for 92.9% (89.9 to 95.6) |
+| three species to choose from | 2.2% | the three hold the species for 92.5% (86.2 to 96.8); the kind is right for 95.7% (91.5 to 98.9) |
+| a kind of eye only | 90.7% | the kind is right for 79.0% (77.7 to 80.2) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.82):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 72.7% (45.5 to 100.0) | 18.2% | 100.0% | 100.0% | 0.0% | 9.1% | 54.5% | other (2) |
+| dog | 6 | 50.0% (16.7 to 83.3) | 33.3% | 50.0% | 75.0% | 0.0% | 0.0% | 50.0% | deer (2) |
+| squirrel | 36 | 61.1% (47.2 to 77.8) | 33.3% | 100.0% | 70.8% | 0.0% | 0.0% | 38.9% | bird (4) |
+| deer | 36 | 75.0% (58.3 to 88.9) | 58.3% | 95.2% | 53.3% | 0.0% | 0.0% | 66.7% | plant (3) |
+| rabbit | 31 | 74.2% (58.1 to 90.3) | 54.8% | 100.0% | 71.4% | 0.0% | 0.0% | 25.8% | squirrel (4) |
+| hawk | 82 | 70.7% (61.0 to 80.5) | 28.0% | 91.3% | 83.1% | 0.0% | 0.0% | 6.1% | bird (14) |
+| wader | 382 | 72.5% (67.8 to 77.0) | 54.5% | 91.8% | 91.4% | 0.0% | 0.0% | 17.3% | bird (75) |
+| bird | 531 | 82.1% (78.9 to 85.3) | 54.2% | 98.6% | 90.9% | 0.2% | 0.2% | 7.0% | wader (33) |
+| alligator | 110 | 55.5% (46.4 to 65.5) | 25.5% | 85.7% | 76.8% | 0.0% | 0.0% | 40.0% | reptile (23) |
+| reptile | 268 | 51.5% (45.5 to 57.1) | 24.6% | 90.9% | 87.6% | 0.0% | 0.0% | 1.5% | insect (79) |
+| frog | 97 | 52.6% (43.3 to 62.9) | 25.8% | 84.0% | 80.6% | 0.0% | 0.0% | 0.0% | insect (35) |
+| bee | 126 | 44.4% (35.7 to 53.2) | 19.8% | 40.0% | 97.0% | 0.0% | 0.0% | 4.8% | insect (51) |
+| insect | 962 | 89.0% (86.9 to 90.8) | 57.0% | 97.4% | 98.8% | 0.0% | 0.0% | 0.4% | plant (43) |
+| plant | 1223 | 96.2% (95.1 to 97.3) | 87.9% | 99.3% | 95.9% | 0.0% | 0.0% | 4.7% | insect (19) |
+| other | 296 | 60.5% (54.7 to 65.9) | 38.2% | 84.1% | 94.0% | 0.0% | 0.0% | 5.7% | insect (85) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 2 | 100.0% (100.0 to 100.0) | – |
+| dog | 1 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 12 | 100.0% (100.0 to 100.0) | – |
+| deer | 22 | 90.9% (77.3 to 100.0) | dog (1) |
+| rabbit | 17 | 100.0% (100.0 to 100.0) | – |
+| hawk | 23 | 91.3% (78.3 to 100.0) | bird (1) |
+| wader | 193 | 99.0% (97.4 to 100.0) | bird (2) |
+| bird | 301 | 94.3% (91.7 to 96.7) | wader (13) |
+| alligator | 24 | 100.0% (100.0 to 100.0) | – |
+| reptile | 64 | 93.8% (87.5 to 98.4) | alligator (4) |
+| frog | 21 | 100.0% (100.0 to 100.0) | – |
+| bee | 11 | 90.9% (72.7 to 100.0) | insect (1) |
+| insect | 559 | 95.5% (93.7 to 97.1) | other (12) |
+| plant | 1102 | 96.9% (95.8 to 97.8) | insect (12) |
+| other | 101 | 94.1% (89.1 to 98.0) | plant (3) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 98.2% (96.8 to 99.5) | 96.0% | 99.5% | 93.8% | 98.2% | 1.2% | 0.0% | none (5) |
+| none | 500 | 96.0% (94.2 to 97.6) | 93.0% | 99.8% | 82.9% | 0.4% | 96.0% | 0.0% | dog (6) |
+| cat | 77 | 90.9% (84.4 to 97.4) | 88.3% | 94.1% | 77.8% | 1.3% | 5.2% | 85.7% | none (4) |
+| dog | 63 | 82.5% (73.0 to 92.1) | 4.8% | 0.0% | 98.3% | 0.0% | 0.0% | 11.1% | cat (8) |
+| deer | 200 | 94.0% (90.5 to 97.0) | 78.0% | 98.7% | 95.5% | 1.5% | 0.0% | 60.5% | dog (8) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 67 | 95.5% (89.5 to 100.0) | dog (3) |
+| dog | 1 | 0.0% (0.0 to 0.0) | deer (1) |
+| deer | 154 | 100.0% (100.0 to 100.0) | – |
+| plant | 1 | 0.0% (0.0 to 0.0) | none (1) |
+| person | 384 | 99.5% (98.7 to 100.0) | cat (1) |
+| none | 469 | 98.9% (97.9 to 99.8) | cat (3) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.64 | 75.8% (74.6 to 77.1) | 90.7% (89.7 to 91.7) | 89.7% (87.8 to 91.4) | 94.3% (93.0 to 95.6) | 97.9% (97.0 to 98.6) | 88.6% (80.0 to 95.7) |
+| 95 in 100 | 0.82 | 58.5% (56.9 to 60.0) | 96.2% (95.4 to 96.9) | 91.5% (90.1 to 92.7) | 86.8% (84.8 to 88.7) | 98.9% (98.2 to 99.4) | 92.7% (88.4 to 96.3) |
+| 98 in 100 | 0.93 | 42.1% (40.6 to 43.7) | 98.6% (98.0 to 99.1) | 93.3% (92.3 to 94.3) | 80.7% (78.4 to 82.9) | 99.3% (98.7 to 99.8) | 93.8% (90.4 to 96.7) |
+
 ## `live-pocket`
 
 The slot holds the head `sentences` for `tinyclip-39m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 100, w_kind 0.3, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.40 and offer_at 0.53. On the 4197 test photos the kind of eye is right for 83.7% (82.5 to 84.8); the top species is right for 34.9% (33.5 to 36.4) and is among the first five for 53.8% (52.3 to 55.3). `person` was said for 0.05% of these photos and `none` for 0.05%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind phrases`. With kind_at 0.88 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 38.4% (37.0 to 40.0) of the wildlife test photos and is right for 99.0% (98.5 to 99.4) of those; for the 61.6% (60.0 to 62.9) where it is not sure, the true kind is among its three likeliest for 95.6% (94.8 to 96.4). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 70.1% (67.3 to 72.6); the page asserts a kind for 3.7% (2.7 to 4.8) and is right for 97.8% (93.5 to 100.0) of those; where it is not sure the true kind is among its three likeliest for 81.7% (79.5 to 83.8). A species is named on 0.9% (0.4 to 1.5) of these photos.
@@ -75,6 +470,85 @@ Other bars for an asserted kind, each level set on the tuning photos:
 | 90 in 100 | 0.52 | 85.7% (84.6 to 86.7) | 90.3% (89.3 to 91.2) | 86.8% (84.0 to 89.5) | 50.8% (47.9 to 53.6) | 91.3% (89.0 to 93.5) | 69.3% (65.6 to 73.0) |
 | 95 in 100 | 0.88 | 38.4% (37.0 to 40.0) | 99.0% (98.5 to 99.4) | 95.6% (94.8 to 96.4) | 3.7% (2.7 to 4.8) | 97.8% (93.5 to 100.0) | 81.7% (79.5 to 83.8) |
 | 98 in 100 | no level reached it | – | – | – | – | – | – |
+
+## `pocket-v3`
+
+The slot holds the head `discriminant` for `tinyclip-39m-16` (shrinkage 0.03), fitted on `images/alachua-pre2025 (licence rule nc)`, with 5391 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.7, alpha_prior 0.75. On 1803 tuning photos (val) the thresholds came out as name_at 0.89 and offer_at 0.98. On the 4197 test photos the kind of eye is right for 89.1% (88.2 to 90.1); the top species is right for 53.8% (52.2 to 55.4) and is among the first five for 75.1% (73.8 to 76.5). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`. With kind_at 0.53 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 81.7% (80.6 to 82.9) of the wildlife test photos and is right for 96.3% (95.7 to 96.9) of those; for the 18.3% (17.1 to 19.4) where it is not sure, the true kind is among its three likeliest for 89.5% (87.2 to 91.5). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.9% (95.8 to 97.8); the page asserts a kind for 95.2% (94.0 to 96.4) and is right for 98.4% (97.6 to 99.1) of those; where it is not sure the true kind is among its three likeliest for 96.7% (91.7 to 100.0). A species is named on 15.1% (13.1 to 17.1) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 20.1% | the name is right for 93.2% (91.6 to 94.9); the kind for 98.1% (97.2 to 98.9) |
+| three species to choose from | 4.6% | the three hold the species for 86.1% (80.9 to 90.7); the kind is right for 92.3% (88.1 to 95.9) |
+| a kind of eye only | 75.2% | the kind is right for 86.5% (85.4 to 87.8) |
+
+The kind of eye on the wildlife test photos, one row a true kind (kind_at 0.53):
+
+| True kind | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| cat | 11 | 63.6% (36.4 to 90.9) | 63.6% | 100.0% | 50.0% | 0.0% | 0.0% | 63.6% | bird (1) |
+| dog | 6 | 83.3% (50.0 to 100.0) | 66.7% | 100.0% | 50.0% | 0.0% | 0.0% | 50.0% | squirrel (1) |
+| squirrel | 36 | 88.9% (77.8 to 97.2) | 77.8% | 100.0% | 75.0% | 0.0% | 0.0% | 69.4% | plant (2) |
+| deer | 36 | 80.6% (66.7 to 91.7) | 75.0% | 92.6% | 66.7% | 0.0% | 0.0% | 69.4% | insect (2) |
+| rabbit | 31 | 80.7% (67.7 to 93.5) | 77.4% | 91.7% | 71.4% | 0.0% | 0.0% | 48.4% | other (2) |
+| hawk | 82 | 82.9% (74.4 to 90.2) | 81.7% | 91.0% | 86.7% | 0.0% | 0.0% | 40.2% | bird (5) |
+| wader | 382 | 88.0% (84.5 to 91.1) | 87.4% | 93.7% | 87.5% | 0.0% | 0.0% | 42.9% | bird (30) |
+| bird | 531 | 86.1% (82.9 to 88.9) | 76.6% | 94.3% | 87.1% | 0.0% | 0.0% | 25.8% | wader (24) |
+| alligator | 110 | 77.3% (69.1 to 84.6) | 70.0% | 94.8% | 60.6% | 0.0% | 0.0% | 65.5% | reptile (8) |
+| reptile | 268 | 80.2% (75.4 to 84.7) | 68.3% | 96.2% | 92.9% | 0.0% | 0.0% | 4.1% | insect (22) |
+| frog | 97 | 88.7% (82.5 to 94.8) | 75.3% | 98.6% | 91.7% | 0.0% | 0.0% | 0.0% | insect (4) |
+| bee | 126 | 76.2% (68.2 to 83.3) | 77.0% | 89.7% | 86.2% | 0.0% | 0.0% | 14.3% | insect (16) |
+| insect | 962 | 91.5% (89.6 to 93.1) | 80.7% | 96.4% | 98.9% | 0.0% | 0.0% | 8.5% | plant (23) |
+| plant | 1223 | 97.8% (97.0 to 98.6) | 91.8% | 99.6% | 97.0% | 0.0% | 0.0% | 17.2% | other (10) |
+| other | 296 | 75.7% (71.0 to 80.4) | 68.2% | 91.1% | 81.9% | 0.0% | 0.0% | 14.5% | insect (49) |
+
+The same photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 7 | 100.0% (100.0 to 100.0) | – |
+| dog | 4 | 100.0% (100.0 to 100.0) | – |
+| squirrel | 32 | 87.5% (75.0 to 96.9) | bird (1) |
+| deer | 26 | 96.2% (88.5 to 100.0) | other (1) |
+| rabbit | 22 | 100.0% (100.0 to 100.0) | – |
+| hawk | 70 | 87.1% (78.6 to 94.3) | bird (7) |
+| wader | 328 | 95.4% (93.0 to 97.6) | bird (13) |
+| bird | 405 | 94.8% (92.6 to 96.8) | wader (15) |
+| alligator | 74 | 98.7% (96.0 to 100.0) | reptile (1) |
+| reptile | 184 | 95.7% (92.4 to 98.4) | alligator (4) |
+| frog | 77 | 93.5% (88.3 to 98.7) | insect (3) |
+| bee | 94 | 92.5% (87.2 to 97.9) | insect (7) |
+| insect | 760 | 98.4% (97.5 to 99.2) | other (8) |
+| plant | 1151 | 97.2% (96.2 to 98.2) | insect (10) |
+| other | 195 | 94.4% (90.8 to 97.4) | insect (7) |
+
+The kind of eye on the extra set's test photos (`images/coco-kinds.wasm-int8-per-channel`):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 99.2% (98.2 to 100.0) | 97.2% | 100.0% | 100.0% | 99.2% | 0.5% | 0.0% | none (2) |
+| none | 500 | 97.2% (95.6 to 98.6) | 95.2% | 98.9% | 91.7% | 0.4% | 97.2% | 0.0% | plant (5) |
+| cat | 77 | 90.9% (84.4 to 96.1) | 93.5% | 93.1% | 100.0% | 1.3% | 5.2% | 85.7% | none (4) |
+| dog | 63 | 90.5% (82.5 to 96.8) | 92.1% | 93.1% | 100.0% | 0.0% | 0.0% | 6.3% | cat (6) |
+| deer | 200 | 95.5% (92.5 to 98.0) | 92.5% | 97.3% | 100.0% | 1.5% | 0.0% | 58.5% | dog (3) |
+
+The extra set's test photos by the kind the page asserted:
+
+| Kind asserted | Photos | Right | Commonest true kind when wrong |
+|---|---:|---:|---|
+| cat | 73 | 91.8% (84.9 to 97.3) | dog (4) |
+| dog | 57 | 94.7% (87.7 to 100.0) | deer (2) |
+| deer | 180 | 100.0% (100.0 to 100.0) | – |
+| plant | 3 | 0.0% (0.0 to 0.0) | none (3) |
+| person | 392 | 99.2% (98.2 to 100.0) | deer (3) |
+| none | 475 | 99.2% (98.3 to 99.8) | cat (4) |
+
+Other bars for an asserted kind, each level set on the tuning photos:
+
+| Asserted kind right at least | kind_at | Asserted, wildlife test | Right when asserted | True kind among the three when not sure | Asserted, extra test | Right when asserted | True kind among the three when not sure |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 90 in 100 | 0.29 | 97.5% (97.0 to 97.9) | 90.6% (89.7 to 91.4) | 69.2% (59.8 to 77.6) | 99.7% (99.4 to 100.0) | 97.2% (96.3 to 98.1) | 50.0% (0.0 to 100.0) |
+| 95 in 100 | 0.53 | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) |
+| 98 in 100 | 0.68 | 66.4% (65.0 to 67.9) | 98.1% (97.6 to 98.6) | 93.5% (92.1 to 94.8) | 85.8% (83.9 to 87.8) | 99.0% (98.3 to 99.5) | 97.7% (95.5 to 99.4) |
 
 ## `sentences-bioclip2-l14`
 

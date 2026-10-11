@@ -1,0 +1,60 @@
+{
+ "made_by": "tools/eval/decide_v3.py",
+ "rule": "The candidate (heads fitted on the training photos under the licence rule nc, TinyCLIP 39M/16, name_at at the 92-in-100 level on val) ships unless, on the test photos, (i) its kind of eye on wildlife is worse than pocket v2's by a paired difference whose 95% interval lies wholly below zero, (ii) its kind of eye on the extra set's test photos is right for less than 96.5%, or (iii) it names a species on more than 1% of the test photos of people and rooms. The rule was set by the coordinator before the candidate was measured.",
+ "candidate": "alachua-pre2025-nc-tinyclip-39m-16",
+ "pocket_v2": "val-tinyclip-39m-16",
+ "tests": {
+  "i_wildlife_kind_paired_difference": {
+   "candidate": [
+    0.8914,
+    0.8821,
+    0.9006,
+    4197
+   ],
+   "pocket_v2": [
+    0.8728,
+    0.8628,
+    0.8828,
+    4197
+   ],
+   "difference": [
+    0.0186,
+    0.01,
+    0.0267
+   ],
+   "photos": 4197,
+   "fails": false
+  },
+  "ii_extra_kind_right": {
+   "candidate": [
+    0.9685,
+    0.9581,
+    0.9782,
+    1240
+   ],
+   "bar": 0.965,
+   "fails": false
+  },
+  "iii_named_on_people_and_rooms": {
+   "photos": 900,
+   "named": 0,
+   "share": 0.0,
+   "by_kind": {
+    "person": {
+     "n": 400,
+     "named": 0.0
+    },
+    "none": {
+     "n": 500,
+     "named": 0.0
+    }
+   },
+   "bar": 0.01,
+   "fails": false
+  }
+ },
+ "fails": [],
+ "ships": true,
+ "slot": "alachua-pre2025-nc-tinyclip-39m-16",
+ "why": "The candidate passes all three tests, so it ships as pocket v3."
+}
