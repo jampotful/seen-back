@@ -48,6 +48,8 @@ git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
 BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-webkit.json" 2> "$OUT/rec/parity-real-patched-webkit.err.txt"
 echo "parity (real, patched) webkit: exit $?"; tail -1 "$OUT/rec/parity-real-patched-webkit.json"; git checkout -q test/rec/check_rec.js
 
+step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: webkit (macOS)"
+BROWSER=webkit PORT=8782 limit 400 node test/engines/rec_probe.js > "$OUT/rec/probe-webkit.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-webkit.json"
 step "self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop"
 PORT=8781 OUT="$OUT/shots" BROWSERS=webkit VIEWPORTS=phone,desktop LABEL=macos LIMIT_MS=300000 EXTRA="$RECQ" node test/engines/run.js
 
