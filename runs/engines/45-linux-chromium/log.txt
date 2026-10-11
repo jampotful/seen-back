@@ -1,0 +1,213 @@
+
+=== 10:04:26 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15988        1583       12133          40        2632       14405
+v22.23.3
+Python 3.12.15
+Model name:                              INTEL(R) XEON(R) PLATINUM 8573C
+Flags: avx2 avx512_vnni avx512bw avx512f avx_vnni 
+
+=== 10:04:26 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+webkit-resume.patch applied
+build 9 | index.html 219153 bytes | artifact 216575 bytes | selftest.js 44338 bytes
+build ok
+219193 index.html
+44338 selftest.js
+
+=== 10:04:27 playwright 1.56.0: chromium
+added 2 packages in 1s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 10:05:00 resume_probe.js: chromium
+resume probe chromium: exit 0
+version 141.0.7390.37 error None
+before {"t": 17035, "ready": "complete", "have": "getting", "kept": 300186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": ["large-say yes"], "line": "Getting the larger model: 0 of 1 MB."}
+asked before ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01"]
+ after {"t": 1433, "ready": "complete", "have": "", "kept": 0, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "", "at": 1}
+ after {"t": 2524, "ready": "complete", "have": "", "kept": 0, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "", "at": 3}
+ after {"t": 3605, "ready": "complete", "have": "getting", "kept": 282686, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 4}
+ after {"t": 4676, "ready": "complete", "have": "getting", "kept": 292686, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 5}
+ after {"t": 5735, "ready": "complete", "have": "getting", "kept": 345186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 6}
+ after {"t": 6760, "ready": "complete", "have": "getting", "kept": 397686, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 7}
+ after {"t": 7772, "ready": "complete", "have": "getting", "kept": 447686, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 8}
+ after {"t": 8818, "ready": "complete", "have": "getting", "kept": 500186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 9}
+ after {"t": 9850, "ready": "complete", "have": "getting", "kept": 550186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 10}
+ after {"t": 10892, "ready": "complete", "have": "getting", "kept": 848060, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 11}
+ after {"t": 11940, "ready": "complete", "have": "getting", "kept": 848060, "state": "loading", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Checking the larger model.", "at": 12}
+ after {"t": 13055, "ready": "complete", "have": "getting", "kept": 848060, "state": "loading", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Checking the larger model.", "at": 13}
+last {"t": 14149, "ready": "complete", "have": "kept", "kept": 848060, "state": "ready", "why": "", "fail": "", "getFail": "", "choice": "kept", "online": true, "diag": ["large-ready standin-big 2383ms kept", "large-kept standin-big 848060"], "line": "The larger model is on this phone.", "at": 14}
+asked after ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part02"]
+kept ['part/SHA?bytes=282686', 'manifest.json', 'part/SHA?bytes=282694', 'part/SHA?bytes=282680', 'species.f16.bin?v=4ed3e55a76221c6e', 'species.json?v=4ed3e55a76221c6e', 'whole/SHA']
+stores {'keep-v1': ['test/rec/models/standin-big/part/SHA?bytes=282686', 'test/rec/models/standin-big/manifest.json', 'test/rec/models/standin-big/part/SHA?bytes=282694', 'test/rec/models/standin-big/part/SHA?bytes=282680', 'test/rec/models/standin-big/species.f16.bin?v=4ed3e55a76221c6e', 'test/rec/models/standin-big/species.json?v=4ed3e55a76221c6e', 'test/rec/models/standin-big/whole/SHA']}
+console ["warning: [GroupMarkerNotSet(crbug.com/242999)!:A0702000DC3E0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag", "warning: [.WebGL-0x15f40013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x15f40013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x15f40013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x15f40013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", "warning: Canvas2D: Multiple readback
+variant {'ref': 'run/engines/linux-res-fix1', 'persist': False, 'halt': False} keysBefore ['manifest.json', 'part/SHA?bytes=282686']
+ KT {"p":"oej3","t":10,"op":"document","u":"?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin"}
+ KT {"p":"oej3","t":4519,"n":1,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < load:1588:14 < ready:1634:29 < go:1762:45"}
+ KT {"p":"oej3","t":4634,"n":1,"ph":"ok","v":"cache#1"}
+ KT {"p":"oej3","t":7818,"n":30,"op":"cache#1.keys","u":"","by":"prune:1358:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1620:69:1620:69"}
+ KT {"p":"oej3","t":7935,"n":30,"ph":"ok","v":["standin/manifest.json"]}
+ KT {"p":"oej3","t":11726,"n":31,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < Object.survey:1486:31 < closer:2430:11 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:2044:7:2044:7"}
+ KT {"p":"oej3","t":11792,"n":31,"ph":"ok","v":"cache#2"}
+ KT {"p":"oej3","t":12017,"n":32,"op":"cache#2.put","u":"standin-big/manifest.json","by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1416:28:1416:28"}
+ KT {"p":"oej3","t":12018,"n":33,"op":"cache#2.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":12019,"n":34,"op":"cache#2.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":12019,"n":35,"op":"cache#2.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":12089,"n":33,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12089,"n":36,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":12091,"n":34,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12091,"n":37,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":12091,"n":35,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12091,"n":38,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":12091,"n":32,"ph":"ok"}
+ KT {"p":"oej3","t":12153,"n":36,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12224,"n":37,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12224,"n":38,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":12224,"n":39,"op":"cache#2.keys","u":"","by":"staleParts:1435:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1492:34:1492:34"}
+ KT {"p":"oej3","t":12288,"n":39,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"oej3","t":15673,"n":40,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < survey:1486:31 < Object.get:1511:15 < startBig:2408:19 < answerBig:2401:25"}
+ KT {"p":"oej3","t":15747,"n":40,"ph":"ok","v":"cache#3"}
+ KT {"p":"oej3","t":15747,"n":41,"op":"cache#3.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":15748,"n":42,"op":"cache#3.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":15748,"n":43,"op":"cache#3.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map
+ KT {"p":"oej3","t":15813,"n":41,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15813,"n":44,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":15813,"n":42,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15813,"n":45,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":15813,"n":43,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15813,"n":46,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"oej3","t":15813,"n":44,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15876,"n":45,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15939,"n":46,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":15940,"n":47,"op":"cache#3.keys","u":"","by":"staleParts:1435:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1492:34:1492:34"}
+ KT {"p":"oej3","t":15941,"n":48,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1513:16:1513:16"}
+ KT {"p":"oej3","t":16004,"n":47,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"oej3","t":16005,"n":48,"ph":"ok","v":"cache#4"}
+ KT {"p":"oej3","t":16072,"n":49,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1533:18"}
+ KT {"p":"oej3","t":16134,"n":49,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":16134,"n":50,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112"}
+ KT {"p":"oej3","t":16198,"n":50,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":16333,"n":51,"op":"cache#4.put","u":"standin-big/part/a610170f?bytes=282686","by":"keep:1521:24 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1542:71:1542:71"}
+ KT {"p":"oej3","t":16401,"n":51,"ph":"ok"}
+ KT {"p":"oej3","t":16401,"n":52,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1523:46:1523:46"}
+ KT {"p":"oej3","t":16462,"n":52,"ph":"ok","v":"hit 282686"}
+ KT {"p":"oej3","t":16463,"n":53,"op":"cache#4.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1533:18"}
+ KT {"p":"oej3","t":16526,"n":53,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":16526,"n":54,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112"}
+ KT {"p":"oej3","t":16588,"n":54,"ph":"ok","v":"miss"}
+ KT {"p":"oej3","t":17103,"n":55,"op":"caches.open","u":"keep-v1","by":"eval:1:34 < UtilityScript.evaluate:292:16 < UtilityScript.<anonymous>:1:44"}
+ KT {"p":"oej3","t":17169,"n":55,"ph":"ok","v":"cache#5"}
+ KT {"p":"oej3","t":17170,"n":56,"op":"cache#5.keys","u":"","by":"eval:1:51 < async:316:30"}
+ KT {"p":"oej3","t":17236,"n":56,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686"]}
+ KT {"p":"oej3","t":17301,"op":"beforeunload"}
+ KT {"p":"oej3","t":17373,"op":"pagehide"}
+ KT {"p":"mo3g","t":143,"op":"document","u":"?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin"}
+ KT {"p":"mo3g","t":2052,"n":1,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < Object.survey:1486:31 < resumeBig:2566:11"}
+ KT {"p":"mo3g","t":2168,"n":1,"ph":"ok","v":"cache#1"}
+ KT {"p":"mo3g","t":2521,"n":2,"op":"cache#1.put","u":"standin-big/manifest.json","by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1416:28:1416:28"}
+ KT {"p":"mo3g","t":2523,"n":3,"op":"cache#1.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map <
+ KT {"p":"mo3g","t":2523,"n":4,"op":"cache#1.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map <
+ KT {"p":"mo3g","t":2524,"n":5,"op":"cache#1.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map <
+ KT {"p":"mo3g","t":2652,"n":2,"ph":"ok"}
+ KT {"p":"mo3g","t":2769,"n":3,"ph":"ok","v":"hit 282686"}
+ KT {"p":"mo3g","t":2769,"n":4,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":2769,"n":6,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":2769,"n":5,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":2769,"n":7,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":2891,"n":6,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3010,"n":7,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3010,"n":8,"op":"cache#1.keys","u":"","by":"staleParts:1435:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1492:34:1492:34"}
+ KT {"p":"mo3g","t":3010,"n":9,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < survey:1486:31 < Object.get:1511:15 < startBig:2408:19 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:2568:53:2568:53"}
+ KT {"p":"mo3g","t":3131,"n":8,"ph":"ok","v":["standin/manifest.json","standin-big/part/a610170f?bytes=282686","standin-big/manifest.json"]}
+ KT {"p":"mo3g","t":3248,"n":9,"ph":"ok","v":"cache#2"}
+ KT {"p":"mo3g","t":3248,"n":10,"op":"cache#2.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map 
+ KT {"p":"mo3g","t":3248,"n":11,"op":"cache#2.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map 
+ KT {"p":"mo3g","t":3248,"n":12,"op":"cache#2.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1489:58:1489:58 < Array.map 
+ KT {"p":"mo3g","t":3369,"n":10,"ph":"ok","v":"hit 282686"}
+ KT {"p":"mo3g","t":3490,"n":11,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3490,"n":13,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":3490,"n":12,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3490,"n":14,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":3605,"n":13,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3730,"n":14,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":3731,"n":15,"op":"cache#2.keys","u":"","by":"staleParts:1435:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1492:34:1492:34"}
+ KT {"p":"mo3g","t":3731,"n":16,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1513:16:1513:16"}
+ KT {"p":"mo3g","t":3851,"n":15,"ph":"ok","v":["standin/manifest.json","standin-big/part/a610170f?bytes=282686","standin-big/manifest.json"]}
+ KT {"p":"mo3g","t":3967,"n":16,"ph":"ok","v":"cache#3"}
+ KT {"p":"mo3g","t":4084,"n":17,"op":"cache#3.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1533:18"}
+ KT {"p":"mo3g","t":4200,"n":17,"ph":"ok","v":"hit 282686"}
+ KT {"p":"mo3g","t":4201,"n":18,"op":"cache#3.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1533:18"}
+ KT {"p":"mo3g","t":4316,"n":18,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":4316,"n":19,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112"}
+ KT {"p":"mo3g","t":4431,"n":19,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":4552,"n":20,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < load:1588:14 < ready:1634:29 < go:1762:45"}
+ KT {"p":"mo3g","t":4675,"n":20,"ph":"ok","v":"cache#4"}
+ KT {"p":"mo3g","t":7025,"n":28,"op":"cache#4.keys","u":"","by":"prune:1358:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1620:69:1620:69"}
+ KT {"p":"mo3g","t":7116,"n":28,"ph":"ok","v":["standin-big/part/a610170f?bytes=282686","standin-big/manifest.json","standin/manifest.json"]}
+ KT {"p":"mo3g","t":10225,"n":29,"op":"cache#3.put","u":"standin-big/part/ca6b85fd?bytes=282694","by":"keep:1521:24 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1542:71:1542:71"}
+ KT {"p":"mo3g","t":10322,"n":29,"ph":"ok"}
+ KT {"p":"mo3g","t":10322,"n":30,"op":"cache#3.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1523:46:1523:46"}
+ KT {"p":"mo3g","t":10419,"n":30,"ph":"ok","v":"hit 282694"}
+ KT {"p":"mo3g","t":10419,"n":31,"op":"cache#3.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1533:18"}
+ KT {"p":"mo3g","t":10512,"n":31,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":10512,"n":32,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112"}
+ KT {"p":"mo3g","t":10605,"n":32,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":10794,"n":33,"op":"cache#3.put","u":"standin-big/part/db30d268?bytes=282680","by":"keep:1521:24 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1542:71:1542:71"}
+ KT {"p":"mo3g","t":10891,"n":33,"ph":"ok"}
+ KT {"p":"mo3g","t":10891,"n":34,"op":"cache#3.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1523:46:1523:46"}
+ KT {"p":"mo3g","t":10987,"n":34,"ph":"ok","v":"hit 282680"}
+ KT {"p":"mo3g","t":10989,"n":35,"op":"cache#3.keys","u":"","by":"staleParts:1435:13 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1551:24:1551:24"}
+ KT {"p":"mo3g","t":10989,"n":36,"op":"caches.open","u":"keep-v1","by":"keepOpen:1236:63 < load:1588:14 < ready:1634:29 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1552:16:1552:16"}
+ KT {"p":"mo3g","t":11081,"n":35,"ph":"ok","v":["standin-big/part/a610170f?bytes=282686","standin-big/manifest.json","standin/manifest.json","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680"]}
+ KT {"p":"mo3g","t":11176,"n":36,"ph":"ok","v":"cache#5"}
+ KT {"p":"mo3g","t":11176,"n":38,"op":"cache#5.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1458:16 < joined:1463:14 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin
+ KT {"p":"mo3g","t":11177,"n":39,"op":"cache#5.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < file:1271:47 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1601
+ KT {"p":"mo3g","t":11177,"n":40,"op":"cache#5.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < file:1271:47 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1602:25
+ KT {"p":"mo3g","t":11370,"n":38,"ph":"ok","v":"hit 282686"}
+ KT {"p":"mo3g","t":11371,"n":39,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11371,"n":41,"op":"caches.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":11371,"n":40,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11371,"n":42,"op":"caches.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":11469,"n":41,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11563,"n":43,"op":"cache#5.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1458:16 < async"}
+ KT {"p":"mo3g","t":11564,"n":42,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11656,"n":43,"ph":"ok","v":"hit 282694"}
+ KT {"p":"mo3g","t":11657,"n":44,"op":"cache#5.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1285:22:1285:22"}
+ KT {"p":"mo3g","t":11750,"n":44,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11750,"n":45,"op":"caches.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":11750,"n":46,"op":"cache#5.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1285:22:1285:22"}
+ KT {"p":"mo3g","t":11844,"n":47,"op":"cache#5.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < next:1458:16 < async"}
+ KT {"p":"mo3g","t":11845,"n":45,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11845,"n":48,"op":"cache#5.put","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1288:30:1288:30 < async"}
+ KT {"p":"mo3g","t":11938,"n":46,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":11938,"n":47,"ph":"ok","v":"hit 282680"}
+ KT {"p":"mo3g","t":11938,"n":48,"ph":"ok"}
+ KT {"p":"mo3g","t":11938,"n":49,"op":"caches.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":12038,"n":49,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":12039,"n":50,"op":"cache#5.put","u":"standin-big/species.json?v=4ed3e55a76221c6e","by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1288:30:1288:30 < async"}
+ KT {"p":"mo3g","t":12156,"n":51,"op":"cache#5.match","u":"standin-big/whole/4038e996","opt":{"ignoreVary":true},"by":"one:1241:40 < kept:1242:23 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1465:16:1465:16 < async"}
+ KT {"p":"mo3g","t":12157,"n":50,"ph":"ok"}
+ KT {"p":"mo3g","t":12284,"n":51,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":12284,"n":52,"op":"caches.match","u":"standin-big/whole/4038e996","opt":{"ignoreVary":true},"by":"one:1241:40 < http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1242:112:1242:112 < async"}
+ KT {"p":"mo3g","t":12541,"n":52,"ph":"ok","v":"miss"}
+ KT {"p":"mo3g","t":12544,"n":53,"op":"cache#5.put","u":"standin-big/whole/4038e996","by":"http://127.0.0.1:8782/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big:1467:90:1467:90 < async"}
+ KT {"p":"mo3g","t":12671,"n":53,"ph":"ok"}
+ KT {"p":"mo3g","t":14279,"n":54,"op":"caches.open","u":"keep-v1","by":"eval:1:34 < UtilityScript.evaluate:292:16 < UtilityScript.<anonymous>:1:44"}
+ KT {"p":"mo3g","t":14408,"n":54,"ph":"ok","v":"cache#6"}
+ KT {"p":"mo3g","t":14409,"n":55,"op":"cache#6.keys","u":"","by":"eval:1:51 < async:316:30"}
+ KT {"p":"mo3g","t":14538,"n":55,"ph":"ok","v":["standin-big/part/a610170f?bytes=282686","standin-big/manifest.json","standin/manifest.json","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680","standin-big/species.f16.bin?v=4ed3e55a76221c6e","standin-big/species.json?v=4ed3
+ KT {"p":"mo3g","t":14665,"n":56,"op":"caches.keys","u":"","by":"eval:1:58 < UtilityScript.evaluate:292:16 < UtilityScript.<anonymous>:1:44"}
+ KT {"p":"mo3g","t":14798,"n":56,"ph":"ok","v":[]}
+ KT {"p":"mo3g","t":14798,"n":57,"op":"caches.open","u":"keep-v1","by":"eval:1:94 < async:316:30"}
+ KT {"p":"mo3g","t":14931,"n":57,"ph":"ok","v":"cache#7"}
+ KT {"p":"mo3g","t":14931,"n":58,"op":"cache#7.keys","u":"","by":"eval:1:103 < async:316:30"}
+ KT {"p":"mo3g","t":15061,"n":58,"ph":"ok","v":["standin-big/part/a610170f?bytes=282686","standin-big/manifest.json","standin/manifest.json","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680","standin-big/species.f16.bin?v=4ed3e55a76221c6e","standin-big/species.json?v=4ed3
