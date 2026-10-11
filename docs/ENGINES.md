@@ -35,7 +35,7 @@ What the failures were:
 
 The live address (`runs/engines/34-live`): in Chromium, Firefox and WebKit the page loads as build 8, the service worker controls the first and second visits, and with the network cut the page starts and the pocket model is ready.
 
-Build 9 at the live address (`runs/engines/41-live`): the same in Chromium 141, Firefox 142 and WebKit 26.0, with the new heads answering a test photo.
+Build 9 at the live address (`runs/engines/41-live`): the same in Chromium 141, Firefox 142 and WebKit 26.0, with the new heads answering a test photo. Build 10 (`runs/engines/54-live`): the same again.
 
 ## The larger model, fetched from the live address through the page's own sheet (build 8)
 
@@ -76,7 +76,7 @@ That change is written and waits on the branch `agent/rec-b`. In headless Chromi
 | While the model is fetched and started | 1,390 MiB | 1,060 MiB |
 | While it answers photos | 1,281 MiB | 936 MiB |
 
-No other engine has run the new form, so the form that five engines have run stays live until Safari and Firefox have run the new one.
+A trial on build machines then served that branch's own page and ran the larger-model check on it (`run/engines/bigb-a`, commit `2fecb34`; `runs/engines/53-big-mac-ws`). In Safari 26.6 and in WebKit 26.0 on macOS the new form was fetched from `raw.githubusercontent.com`, verified, kept and run, with the same names as the live form (Little Blue Heron at 0.988 for the first photo), ready 16.4 and 14.8 seconds after "Get it". The largest process still peaked at 2,044 MiB in Safari and 2,046 MiB in WebKit on the first visit, against 2,077 and 2,178 MiB for the live form: in WebKit the weight lies outside the WASM heap, and this form does not remove it. The iPhone simulator's job could not start Safari (`runs/engines/53-big-mac-sim`), and the Linux job had not returned when this was written (`runs/engines/53-big-linux`). The new form is therefore correct in three engines and lighter in one, and the form that five engines have run stays live.
 
 ## Home screen
 
