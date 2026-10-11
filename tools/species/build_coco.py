@@ -245,6 +245,10 @@ def main():
                                                       pools["test"].get(k, 0), got[("test", k)], WANT[k][1]))
     if shortfalls:
         L += ["", "Fewer than wanted, so all there are: " + "; ".join(shortfalls) + "."]
+    dates = sorted(r["date"] for r in rows if r["date"])
+    if dates:
+        L += ["", "`date` and `month` are COCO's `date_captured`, which runs only from %s to %s here: it is not when the "
+              "photos were taken, so no month prior applies to these rows." % (dates[0], dates[-1])]
     L += ["", "Grazing animals among the `deer` rows: train %s; test %s (eligible: train %s; test %s)." % (
         dict(chosen_mix.get("train", {})), dict(chosen_mix.get("test", {})), dict(deer_mix["train"]), dict(deer_mix["test"])), "",
         "## How much of the image the largest annotation covers", "",
