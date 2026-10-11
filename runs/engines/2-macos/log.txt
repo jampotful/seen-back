@@ -1,0 +1,91 @@
+
+=== 01:13:09 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Darwin sjc20-cw715-fd5311a4-3240-49a0-accd-b9a58ef9f872-D64581C7A38B.local 25.6.0 Darwin Kernel Version 25.6.0: Fri Jul 31 19:16:43 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_VMAPPLE arm64
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.14.7
+
+=== 01:13:10 build
+build 5 | index.html 145701 bytes | artifact 143123 bytes
+build ok
+
+=== 01:13:10 serve the repository on 127.0.0.1:8781
+index.html -> 200
+
+=== 01:13:46 iPhone simulator: boot it now, it takes a while
+iOS 26.2 (26.2 - 23C54) - com.apple.CoreSimulator.SimRuntime.iOS-26-2
+iOS 26.4 (26.4.1 - 23E254a) - com.apple.CoreSimulator.SimRuntime.iOS-26-4
+iOS 26.5 (26.5 - 23F77) - com.apple.CoreSimulator.SimRuntime.iOS-26-5
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+
+=== 01:13:55 playwright 1.56.0 and WebKit
+
+added 2 packages in 1m
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 01:19:17 self-test: Playwright WebKit (macOS build) x phone, desktop
+01:19:58 webkit-phone 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 40470ms
+01:20:39 webkit-desktop 26.0 done=true ok=true fails=0 checks=93 webgl2=true float=true Apple GPU 41339ms
+
+=== 01:20:39 self-test: real Safari through safaridriver
+safaridriver --enable: exit 0
+01:20:54 session 1B356BCA-C42A-4451-BAAF-B51D8729F281 26.6.2
+01:21:26 safari 26.6.2 done=true ok=true fails=0 Apple GPU
+safari.js: exit 0
+ci/engines/macos.sh: line 49:  8802 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 01:21:27 iPhone simulator: Safari opens the self-test and posts its report
+Monitoring boot status for iPhone 17 (88931AEA-62E6-447F-8697-DCE00A671384).
+Device already booted, nothing to do.
+
+    iPhone 17 (88931AEA-62E6-447F-8697-DCE00A671384) (Booted) 
+openurl: exit 0
+report arrived after 8 s
+/Users/runner/work/seen-back/seen-back/out/reports:
+total 328
+drwxr-xr-x  20 runner  staff    640 Oct 11 01:26 .
+drwxr-xr-x   8 runner  staff    256 Oct 11 01:20 ..
+-rw-r--r--   1 runner  staff   7195 Oct 11 01:26 iphone-01.json
+-rw-r--r--   1 runner  staff   1225 Oct 11 01:26 iphone-02.json
+-rw-r--r--   1 runner  staff   9868 Oct 11 01:26 iphone-03.json
+-rw-r--r--   1 runner  staff  10484 Oct 11 01:26 iphone-04.json
+-rw-r--r--   1 runner  staff  10484 Oct 11 01:26 iphone.json
+-rw-r--r--   1 runner  staff   1256 Oct 11 01:21 safari-desktop-01.json
+-rw-r--r--   1 runner  staff   7246 Oct 11 01:21 safari-desktop-02.json
+-rw-r--r--   1 runner  staff   9892 Oct 11 01:21 safari-desktop-03.json
+-rw-r--r--   1 runner  staff  10495 Oct 11 01:21 safari-desktop-04.json
+-rw-r--r--   1 runner  staff  10495 Oct 11 01:21 safari-desktop.json
+-rw-r--r--   1 runner  staff   1256 Oct 11 01:20 webkit-desktop-01.json
+-rw-r--r--   1 runner  staff   7249 Oct 11 01:20 webkit-desktop-02.json
+-rw-r--r--   1 runner  staff   7249 Oct 11 01:20 webkit-desktop.json
+-rw-r--r--   1 runner  staff   1253 Oct 11 01:19 webkit-phone-01.json
+-rw-r--r--   1 runner  staff   7228 Oct 11 01:19 webkit-phone-02.json
+-rw-r--r--   1 runner  staff   9876 Oct 11 01:19 webkit-phone-03.json
+-rw-r--r--   1 runner  staff  10493 Oct 11 01:19 webkit-phone-04.json
+-rw-r--r--   1 runner  staff  10493 Oct 11 01:19 webkit-phone.json
+
+/Users/runner/work/seen-back/seen-back/out/sim:
+total 3376
+drwxr-xr-x  4 runner  staff      128 Oct 11 01:26 .
+drwxr-xr-x  8 runner  staff      256 Oct 11 01:20 ..
+-rw-r--r--@ 1 runner  staff   694103 Oct 11 01:26 iphone-008s.png
+-rw-r--r--@ 1 runner  staff  1031509 Oct 11 01:26 iphone-final.png
+
+=== 01:26:41 summary
+safari desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone.json']
+
+=== 01:26:41 shrink pictures
+pictures: 19 total bytes: 1015903
+1.1M	/Users/runner/work/seen-back/seen-back/out
