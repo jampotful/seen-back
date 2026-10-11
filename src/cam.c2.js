@@ -6,7 +6,7 @@
     '{"found": true, "common": "Domestic cat", "scientific": "Felis catus", "eyes": "cat"}',
     'Rules:',
     '- "common" is the everyday English name, as fine as the photo supports. "scientific" is the Latin name at that level, or "" if you have none.',
-    '- "eyes" is exactly one of: "cat" (any cat), "dog" (dogs, foxes, coyotes), "squirrel" (squirrels, chipmunks, rats, mice), "deer" (deer, horses, cattle, goats, sheep), "rabbit" (rabbits, hares), "hawk" (hawks, eagles, falcons, kites, ospreys, vultures), "wader" (herons, egrets, ibis, storks, cranes, limpkins, coots, moorhens, pigeons, doves, chickens, turkeys), "bird" (any other bird, owls and ducks included), "alligator" (alligators, crocodiles), "reptile" (lizards, snakes, turtles), "frog" (frogs, toads), "bee" (bees, wasps), "insect" (any other insect), "plant" (plants, trees, flowers, mosses, ferns), "person" (a human being), "other" (anything else alive: fungi, spiders, fish, snails, other mammals).',
+    '- "eyes" is exactly one of: "cat" (any cat), "dog" (dogs, foxes, coyotes), "squirrel" (squirrels, chipmunks, rats, mice), "deer" (deer, horses, cattle, goats, sheep), "rabbit" (rabbits, hares), "hawk" (hawks, eagles, falcons, kites, ospreys), "wader" (herons, egrets, ibis, storks, cranes, limpkins, coots, moorhens, pigeons, doves, chickens, turkeys), "bird" (any other bird, with owls, ducks and vultures included), "alligator" (alligators, crocodiles), "reptile" (lizards, snakes, turtles), "frog" (frogs, toads), "bee" (bees, wasps), "insect" (any other insect), "plant" (plants, trees, flowers, mosses, ferns), "person" (a human being), "other" (anything else alive: fungi, spiders, fish, snails, other mammals).',
     '- If the main subject is a person, set "eyes" to "person", "common" to "A person", "scientific" to "", and say nothing else about them.',
     '- If nothing alive is the subject, reply {"found": false}.'
   ].join('\n');
@@ -26,6 +26,13 @@
   }
   function openClaim(sub) {
     $('claimSub').textContent = (sub ? sub + ' ' : '') + 'Type the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
+    var offers = pocket.offers || [], box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
+    offers.forEach(function (o) {
+      var b = el('button', 'pill ghost', o.en || o.sci); b.type = 'button';
+      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you' }); });
+      box.appendChild(b);
+    });
+    show('claimOfferBox', offers.length > 0);
     show('info', false); show('record', false); show('keep', false); openSheet('claim');
     setTimeout(function () { try { if (!$('claim').hidden) $('claimName').focus(); } catch (e) {} }, 80);
   }
@@ -54,11 +61,28 @@
     if (!capsSettled) { go('naming'); msg('Looking at what it is.'); }     // Claude's part of the page may still be arriving
     capsReady.then(function () { if (t === S.token) recognize(t); });
   }
+  function recognizeHere(t) {                      // outside Claude: the page's own small model, on this device
+    go('naming'); msg(pocket.line());
+    pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); });
+    pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
+      if (t !== S.token) return;
+      diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
+      if (r.kind === 'none') { failName('Nothing alive was found in that photo.'); return; }
+      pocket.offers = r.offers;
+      var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
+      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page' });
+    }, function (e) {
+      if (t !== S.token) return;
+      diag('pocket-error', String((e && e.code) || 'unknown'));
+      failName((e && e.sentence) || 'It could not be recognized this time.');
+    });
+  }
   function recognize(t) {
+    if (!inViewer && pocket.usable()) { recognizeHere(t); return; }
     if (!(sample && canImages)) {
       msg(''); if (S.src !== 'cam') go('naming'); else go('finder');
       diag('no-recognizer', inViewer ? (sample ? 'no-images' : 'no-sample') : 'outside');
-      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : 'Outside Claude this page cannot recognize a photo yet, so you tell it.');
+      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : (pocket.whyNot() || 'This page cannot recognize a photo here.') + ' So you tell it.');
       return;
     }
     if (nameCtl) nameCtl.abort();
@@ -84,7 +108,7 @@
     }, 'image/jpeg', .86);
   }
   function gotAnimalPhoto(c) {
-    S.animalPhoto = c; S.meetingId = null; S.nov = ''; setEyes(null); hideName();
+    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName();
     if (S.src === 'cam') { S.freeze = true; if (engine) engine.setImage(c); paintUI(); }
     else showStill(c, false);
     identify();
@@ -94,7 +118,7 @@
     $('flash').classList.remove('go'); void $('flash').offsetWidth; $('flash').classList.add('go');
     var c = fit(vid, vid.videoWidth, vid.videoHeight, 1280);
     if (S.mirror) { var m = makeCanvas(c.width, c.height), x = m.getContext('2d'); x.translate(c.width, 0); x.scale(-1, 1); x.drawImage(c, 0, 0); c = m; }
-    msg(''); gotAnimalPhoto(c);
+    msg(''); pocket.file = null; gotAnimalPhoto(c);
   }
 
   // ---------- back, wherever something might be done over
@@ -232,7 +256,8 @@
     if (!S.eyes) return;
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
-    $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.' : 'As you said.');
+    $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
+      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.' : 'As you said.');
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
       var li = document.createElement('li'), m = document.createElement('i'), d = document.createElement('span'), b = document.createElement('b');
@@ -320,7 +345,7 @@
 
   function onAnimalFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
-    decode(f).then(gotAnimalPhoto).catch(function () { if (S.screen === 'finder') msg('That file could not be read as a photo.', 5000); else $('askFine').textContent = 'That file could not be read as a photo.'; });
+    decode(f).then(function (c) { pocket.file = f; gotAnimalPhoto(c); }).catch(function () { if (S.screen === 'finder') msg('That file could not be read as a photo.', 5000); else $('askFine').textContent = 'That file could not be read as a photo.'; });
   }
   function onViewFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f || !S.eyes || !engine) return;
@@ -344,8 +369,46 @@
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName,
+    rec: pocket, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
-  $('buildMark').textContent = 'Build ' + BUILD + '.';
+
+  // ---------- about this build: one block to copy from a real phone, to say how it ran there
+  var frameMs = [], frameLast = 0;
+  (function watchFrames2(now) {                    // how long the last frames took, measured here and not in the engine
+    requestAnimationFrame(watchFrames2);
+    if (frameLast && now - frameLast < 1000) { frameMs.push(now - frameLast); if (frameMs.length > 90) frameMs.shift(); }
+    frameLast = now;
+  })(0);
+  function aboutText() {
+    var a = pocket.about(), st = engine ? engine.state() : null, L = ['Seen Back, build ' + BUILD + '.'], r = a.last, avg = 0;
+    frameMs.forEach(function (x) { avg += x; });
+    avg = frameMs.length ? avg / frameMs.length : 0;
+    if (inViewer) L.push('Recognizer: Claude, inside Claude’s viewer.');
+    else if (a.state === 'ready') L.push('Recognizer: ' + a.model + ', ' + a.backend + (a.threads ? ', ' + a.threads + (a.threads === 1 ? ' thread' : ' threads') : '') + ', ready in ' + (a.loadMs / 1000).toFixed(1) + ' s.');
+    else if (a.state === 'loading') L.push('Recognizer: loading' + (a.total ? ', ' + Math.round(a.got / 1e6) + ' of ' + Math.round(a.total / 1e6) + ' MB' : '') + '.');
+    else if (a.state === 'idle') L.push('Recognizer: not started yet.');
+    else L.push('Recognizer: not running. ' + (a.fail || a.why) + '.');
+    if (r) L.push('Last photo: ' + r.kind + ' ' + r.kindP.toFixed(2) + (r.species[0] ? ', ' + r.species[0].sci + ' ' + r.species[0].p.toFixed(2) : '') + '; ' + (r.ms.load ? 'waited ' + r.ms.load + ' ms, ' : '') + 'prepared in ' + r.ms.pre + ' ms from ' + r.from + ', recognized in ' + r.ms.run + ' ms.');
+    L.push('Picture: ' + canvas.width + ' by ' + canvas.height + (st && st.sw ? ', source ' + st.sw + ' by ' + st.sh : '') + (engine ? ', limit ' + engine.side() : ', no engine') +
+      (avg ? ', ' + avg.toFixed(1) + ' ms a frame over the last ' + frameMs.length + '.' : '.'));
+    L.push('Screen: ' + window.innerWidth + ' by ' + window.innerHeight + ' at ' + (window.devicePixelRatio || 1) + '. ' + (coarse ? 'Touch.' : 'Pointer.') + (S.camOK ? ' Camera open.' : S.camRefused ? ' Camera refused.' : ''));
+    L.push(String(navigator.userAgent || '').slice(0, 200));
+    return L.join('\n');
+  }
+  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; }
+  $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
+  $('aboutCopy').addEventListener('click', function () {
+    var text = aboutText(), note = $('aboutNote');
+    $('buildMark').textContent = text;
+    function byHand() {
+      try {
+        var sel = window.getSelection(), range = document.createRange(); range.selectNodeContents($('buildMark')); sel.removeAllRanges(); sel.addRange(range);
+        note.textContent = document.execCommand('copy') ? 'Copied.' : 'It could not be copied from here. The lines are selected, so copy them by hand.';
+      } catch (e) { note.textContent = 'It could not be copied from here. Select the lines and copy them by hand.'; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { note.textContent = 'Copied.'; }, byHand); else byHand();
+  });
+  pocket.warm();
   if (inViewer) {
     window.claude.use('sample').then(function (s) {
       if (!s) return;

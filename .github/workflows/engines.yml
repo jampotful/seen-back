@@ -1,0 +1,45 @@
+name: engines
+# The picture engine on every browser engine. The page's own self-test (index.html?selftest=1) runs in
+# Chromium, Firefox and WebKit on Linux (one job each), and in WebKit, real Safari and an iPhone simulator on macOS.
+# Start it by pushing a commit to a branch named run/engines/<anything>. Results come back on the `ci`
+# branch under runs/engines/<run number>-linux and -macos: log.txt, summary.json, the self-test reports,
+# and screenshots as small JPEGs.
+on:
+  push:
+    branches: ['run/engines/**']
+permissions:
+  contents: write
+concurrency:
+  group: engines-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: self-test in ${{ matrix.browser }}
+        env:
+          BROWSER: ${{ matrix.browser }}
+        run: bash ci/engines/linux.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out linux-${{ matrix.browser }}
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: self-test in WebKit, Safari and an iPhone simulator
+        run: bash ci/engines/macos.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out macos

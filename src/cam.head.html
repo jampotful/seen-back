@@ -122,7 +122,7 @@ button { cursor: pointer; }
 .met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; }
 .met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
 .met .nm { display: block; font-family: var(--serif); font-size: 23px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.met .sm { display: block; font-size: 12.5px; color: var(--faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.met .sm { display: block; font-size: 12.5px; line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
 .met .x { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--faint); font-size: 22px; line-height: 1; }
 .met li.ask { grid-template-columns: minmax(0, 1fr) auto auto; min-height: 48px; }
 .met li.ask .q { font-size: 15px; color: var(--dim); }
@@ -130,6 +130,11 @@ button { cursor: pointer; }
 .sheet details ol { margin: 10px 0 0; padding-left: 32px; display: flex; flex-direction: column; gap: 5px; color: var(--faint); }
 .sheet details ol li.on { color: var(--ink); }
 .sheet .fine2 { margin: 10px 0 0; font-size: 12.5px; color: var(--faint); }
+.offers { display: flex; flex-direction: column; gap: 10px; }
+.offers[hidden] { display: none; }
+.offers .pill { min-height: 44px; padding: 0 18px; font-weight: 500; }
+.about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
 .reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
 @media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
@@ -209,6 +214,7 @@ button { cursor: pointer; }
   <section class="sheet fromtop" id="claim" hidden aria-label="Say what it was">
     <header><h3>What was it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
     <p class="sub" id="claimSub"></p>
+    <div class="offers" id="claimOfferBox" hidden><p class="note">It may be one of these.</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
       <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
       <button class="pill" type="submit">That is what it was</button>
@@ -226,7 +232,12 @@ button { cursor: pointer; }
     <details id="g60">
       <summary id="g60Sum"></summary>
       <ol id="g60List"></ol>
-      <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season. <span id="buildMark"></span></p>
+      <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season.</p>
+    </details>
+    <details id="about">
+      <summary>About this build</summary>
+      <pre class="about" id="buildMark"></pre>
+      <div class="row"><button class="mini" id="aboutCopy" type="button">Copy</button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
     </details>
   </section>
 

@@ -210,7 +210,7 @@
   // ---------- drawing loop
   function loop(now) {
     requestAnimationFrame(loop);
-    if (!engine) return;
+    if (!engine || S.selftest) return;                       // the self-test (?selftest=1) draws for itself
     var dt = S.lastNow ? Math.min(100, now - S.lastNow) : 16; S.lastNow = now;
     engine.resize();
     var s = S.screen;

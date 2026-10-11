@@ -6,7 +6,9 @@ const fs = require('fs');
 const here = __dirname, shots = path.join(here, 'shots4');
 fs.mkdirSync(shots, { recursive: true });
 const PORT = process.env.PORT || 8765;
-const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420);
+// These checks are about the picture, the typed name and the record, so the page's own recognizer is switched off (rec=off) and so is the
+// service worker (nosw=1). The recognizer has its own checks in test/rec/check_rec.js.
+const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420) + '&nosw=1&rec=' + (process.env.REC || 'off');
 const phone = devices['Pixel 7'];
 const mode = process.argv[2] || 'record';
 const fontCss = () => ['normal', 'italic'].map(st => `@font-face{font-family:"Instrument Serif";font-style:${st};font-weight:400;src:url(http://127.0.0.1:${PORT}/fonts/instrument-serif-latin-400-${st}.woff2) format("woff2");}`).join('\n');
@@ -82,7 +84,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
   if (mode === 'lex') {
     const { ctx, page } = await open(browser, {});
     const cases = { 'cat': 'cat', 'my kitten': 'cat', 'bobcat': 'cat', 'catbird': 'bird', 'catfish': 'other', 'fox squirrel': 'squirrel', 'red fox': 'dog', 'foxglove': '', 'dogwood': 'plant',
-      'rat snake': 'reptile', 'squirrel treefrog': 'frog', 'crane fly': 'insect', 'sandhill crane': 'wader', 'turkey vulture': 'hawk', 'wild turkey': 'wader', 'wood stork': 'wader', 'wood duck': 'bird',
+      'rat snake': 'reptile', 'squirrel treefrog': 'frog', 'crane fly': 'insect', 'sandhill crane': 'wader', 'turkey vulture': 'bird', 'black vulture': 'bird', 'red-shouldered hawk': 'hawk', 'wild turkey': 'wader', 'wood stork': 'wader', 'wood duck': 'bird',
       'great blue heron': 'wader', 'honeybee': 'bee', 'bumblebees': 'bee', 'gulf fritillary': 'insect', 'dragonfly': 'insect', 'tufted titmouse': 'bird', 'mockingbird': 'bird', 'swallow-tailed kite': 'hawk',
       'tiger swallowtail': 'insect', 'american alligator': 'alligator', 'green anole': 'reptile', 'southern toad': 'frog', 'white-tailed deer': 'deer', 'marsh rabbit': 'rabbit', 'spanish moss': 'plant',
       'beautyberry': 'plant', 'live oak': 'plant', 'wolf spider': 'other', 'armadillo': 'other', 'plant': 'plant', 'ant': 'insect', 'a person': 'person', 'limpkin': 'wader', 'barred owl': 'bird', 'walkingstick': 'insect', 'elephant': '', 'biscuit': '', 'biscuit, a cat': 'cat', 'my dog rex': 'dog' };
