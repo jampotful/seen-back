@@ -93,22 +93,24 @@ sleep 1; curl -s -o /dev/null -w "8781 -> %{http_code}\n" http://127.0.0.1:8781/
 selftest 3-served -url "http://127.0.0.1:8781/index.html?selftest=1&nosw=1&report=/report/ios-served$RECQ"
 else
 step "4. the larger model (models/naturalist: 310 MB from raw.githubusercontent.com) through the page's own recognizer inside the app, then four photos"
-( while :; do echo "$(date -u +%T) $(ps -axo pid=,rss=,comm= | grep -E 'WebKit.WebContent|SeenBack' | grep -v grep | awk '{n=$3; sub(/.*\//,"",n); printf "%s %s %s;", $1, $2, n}') $(vm_stat | awk '/Pages free/ {print "free_pages", $3}')"; sleep 4; done ) > "$OUT/big-memory.txt" 2>&1 &
+bigprobe() {   # $1 label, then the launch arguments
+local label=$1; shift
+( while :; do echo "$(date -u +%T) $(ps -axo pid=,rss=,command= | grep -E 'WebKit.WebContent|SeenBack' | grep -v grep | awk '{ n = ($0 ~ /WebContent/) ? "WebContent" : "SeenBack"; printf "%s %s %s;", $1, $2, n }')"; sleep 4; done ) > "$OUT/$label-memory.txt" 2>&1 &
 MEMPID=$!
 xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1; sleep 1
-xcrun simctl launch "$UDID" $BID -probe native-probe/big.js 2>&1
-t0=$(date +%s); n=0; fin=0
+xcrun simctl launch "$UDID" $BID "$@" 2>&1
+local t0=$(date +%s) n=0 fin=0 el
 while [ $(( $(date +%s) - t0 )) -lt 900 ]; do
   sleep 6; n=$((n+1)); el=$(( $(date +%s) - t0 ))
-  case $n in 3|10|20|40|70|100) shot "4-big-$(printf %03d $el)s";; esac
-  state > "$OUT/big-state.json"
-  if python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); sys.exit(0 if (d.get('big') or {}).get('done') else 1)" "$OUT/big-state.json" 2>/dev/null; then echo "probe done after about $el s"; fin=1; shot 4-big-final; break; fi
-  [ $((n % 10)) = 0 ] && python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); b=d.get('big') or {}; print($el, 's:', b.get('line'), b.get('has'), b.get('steps'))" "$OUT/big-state.json" 2>/dev/null
+  case $n in 3|10|20|40|70|100) shot "$label-$(printf %03d $el)s";; esac
+  state > "$OUT/$label-state.json"
+  if python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); sys.exit(0 if (d.get('big') or {}).get('done') else 1)" "$OUT/$label-state.json" 2>/dev/null; then echo "probe done after about $el s"; fin=1; shot $label-final; break; fi
+  [ $((n % 10)) = 0 ] && python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); b=d.get('big') or {}; print($el, 's:', b.get('line'), b.get('has'), b.get('steps'))" "$OUT/$label-state.json" 2>/dev/null
 done
-[ $fin = 1 ] || { echo "the probe did not finish within 900 s"; shot 4-big-stopped; }
+[ $fin = 1 ] || { echo "the probe did not finish within 900 s"; shot $label-stopped; }
 kill $MEMPID 2>/dev/null
-state > "$OUT/big-state.json"
-python3 -I - "$OUT/big-state.json" "$OUT/big-memory.txt" <<'PY'
+state > "$OUT/$label-state.json"
+python3 -I - "$OUT/$label-state.json" "$OUT/$label-memory.txt" <<'PY'
 import json, re, sys
 try:
     d = json.load(open(sys.argv[1]))
@@ -127,6 +129,12 @@ for line in open(sys.argv[2]):
 for name, kb in sorted(peak.items()):
     print("peak resident memory on the Mac: %s %d MB" % (name, kb // 1024))
 PY
+}
+bigprobe 4-big -probe native-probe/big.js
+step "5. the larger model again, with the same app pointed at the page served from this Mac (http://127.0.0.1:8781), where Cache Storage takes http addresses"
+python3 -I ci/engines/serve.py 8781 "$ROOT" "$ROOT/out/reports" > "$OUT/serve-log.txt" 2>&1 &
+sleep 1; curl -s -o /dev/null -w "8781 -> %{http_code}\n" http://127.0.0.1:8781/index.html
+bigprobe 5-big-served -url "http://127.0.0.1:8781/index.html" -probe ci/native/probe-big.js
 fi
 
 step "the app's own log (console errors and warnings, loads it could not serve)"
