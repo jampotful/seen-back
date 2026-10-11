@@ -753,7 +753,13 @@
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');
   }
-  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; paintChoices(); }
+  function fittedLine() {                          // where the pocket slot's rows came from, said only when its manifest carries a fitted_on block
+    var f = pocket.about().fitted; if (!f) return '';
+    var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
+    var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
+    return 'The rows the recognizer compares a photo with were fitted on ' + n + 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.' + (rule ? ' ' + rule + (/[.!?]$/.test(rule) ? '' : '.') : '');
+  }
+  function paintAbout() { var fl = fittedLine(); $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; $('fittedOn').textContent = fl; show('fittedOn', !!fl); paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');

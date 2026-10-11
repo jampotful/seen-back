@@ -948,7 +948,17 @@ async function meet(page, name) {
     await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150);
     fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'about.png'), scale: 'css' });
     r.overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); r.errors = errors;
-    done('about', r, /^Seen Back, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
+    r.fitted = { none: await page.locator('#fittedOn').isVisible() };      // the stand-in's manifest has no fitted_on block: no sentence
+    for (const [name, m] of [['full', 'manifest.fitted.json'], ['bare', 'manifest.fitted-bare.json']]) {    // a block with its sentence and count; a block with neither (a count that is not a number)
+      const o = await open(browser, '&nosw=1&rec=' + SLOT + '/' + m); await ready(o.page); await o.page.locator('#btnBegin').tap(); await o.page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
+      await o.page.locator('#recAskAnimal').tap(); await o.page.waitForSelector('#record', { state: 'visible' }); await o.page.locator('#about summary').tap(); await o.page.waitForTimeout(200);
+      r.fitted[name] = (await o.page.locator('#fittedOn').isVisible()) ? await text(o.page, 'fittedOn') : '(hidden)'; r.fitted[name + 'Errors'] = o.errors;
+      if (name === 'full') { await o.page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await o.page.waitForTimeout(150); await o.page.screenshot({ path: path.join(here, 'shots', 'about-fitted.png'), scale: 'css' }).catch(() => {}); }
+      await o.ctx.close();
+    }
+    const base = 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.';
+    done('about', r, !r.fitted.none && r.fitted.full === 'The rows the recognizer compares a photo with were fitted on 61,234 ' + base + ' Only photographs in the public domain or under CC BY or CC BY-NC were used.'
+      && r.fitted.bare === 'The rows the recognizer compares a photo with were fitted on ' + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Seen Back, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
       && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });

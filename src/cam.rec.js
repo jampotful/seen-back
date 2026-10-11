@@ -587,7 +587,7 @@
       broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
       size: function () { return M ? { bytes: M.vision.bytes || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(M.vision.bytes || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
       offers: [], kindOffers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
-      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl,
+      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl, fitted: M && M.fitted_on && typeof M.fitted_on === 'object' ? M.fitted_on : null,
         have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M && M.vision.bytes || 0, getFail: getFail }; },
       test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
         idle: function (ms) { idleMs = ms; tire(); }, netWait: function (ms) { netWaitMs = ms; }, running: function () { return !!worker; },
