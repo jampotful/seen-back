@@ -1,0 +1,164 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[07:49:12] job: model=tinyclip-39m-16 shard=1/7 stages=images
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=alachua-pre2025
+manifest_rows=84808
+species=5911
+[07:49:12] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 1/7 --mode mod
+fetched 200/12116 (2.5s)
+fetched 400/12116 (4.5s)
+fetched 600/12116 (6.6s)
+fetched 800/12116 (8.6s)
+fetched 1000/12116 (10.5s)
+fetched 1200/12116 (12.5s)
+fetched 1400/12116 (14.5s)
+fetched 1600/12116 (16.6s)
+fetched 1800/12116 (18.6s)
+fetched 2000/12116 (20.7s)
+fetched 2200/12116 (22.7s)
+fetched 2400/12116 (24.7s)
+fetched 2600/12116 (26.8s)
+fetched 2800/12116 (28.8s)
+fetched 3000/12116 (30.8s)
+fetched 3200/12116 (32.9s)
+fetched 3400/12116 (35.0s)
+fetched 3600/12116 (37.1s)
+fetched 3800/12116 (39.2s)
+fetched 4000/12116 (41.2s)
+fetched 4200/12116 (43.3s)
+fetched 4400/12116 (45.4s)
+fetched 4600/12116 (47.5s)
+fetched 4800/12116 (49.6s)
+fetched 5000/12116 (51.7s)
+fetched 5200/12116 (53.8s)
+fetched 5400/12116 (55.9s)
+fetched 5600/12116 (57.9s)
+fetched 5800/12116 (60.0s)
+fetched 6000/12116 (62.1s)
+fetched 6200/12116 (64.1s)
+fetched 6400/12116 (66.2s)
+fetched 6600/12116 (68.2s)
+fetched 6800/12116 (70.2s)
+fetched 7000/12116 (72.3s)
+fetched 7200/12116 (74.4s)
+fetched 7400/12116 (76.4s)
+fetched 7600/12116 (78.5s)
+fetched 7800/12116 (80.5s)
+fetched 8000/12116 (82.6s)
+fetched 8200/12116 (84.6s)
+fetched 8400/12116 (86.7s)
+fetched 8600/12116 (88.8s)
+fetched 8800/12116 (90.9s)
+fetched 9000/12116 (92.9s)
+fetched 9200/12116 (95.0s)
+fetched 9400/12116 (97.1s)
+fetched 9600/12116 (99.1s)
+fetched 9800/12116 (101.2s)
+fetched 10000/12116 (103.3s)
+fetched 10200/12116 (105.5s)
+fetched 10400/12116 (107.6s)
+fetched 10600/12116 (109.7s)
+fetched 10800/12116 (111.7s)
+fetched 11000/12116 (113.8s)
+fetched 11200/12116 (115.8s)
+fetched 11400/12116 (118.0s)
+fetched 11600/12116 (120.0s)
+fetched 11800/12116 (122.0s)
+fetched 12000/12116 (124.1s)
+photos: 12116 rows, 12116 to fetch, 0 failed, 125.4s
+[07:51:18] exit 0
+[07:51:18] + python3 -u tools/lab/lab.py images --model tinyclip-39m-16 --manifest data_in/manifest.csv --photos photos --shard 1/7 --shard-mode mod --evalname alachua-pre2025 --out art/tinyclip-39m-16
+images: tinyclip-39m-16, eval alachua-pre2025, shard 1/7, 12116 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-39m-16 via transformers in 6.3s
+[0;93m2026-10-11 07:51:25.198533033 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/12116, 12.27 photos/s
+  images 192/12116, 12.24 photos/s
+  images 352/12116, 12.39 photos/s
+  images 512/12116, 12.30 photos/s
+  images 672/12116, 12.35 photos/s
+  images 832/12116, 12.33 photos/s
+  images 992/12116, 12.30 photos/s
+  images 1152/12116, 12.23 photos/s
+  images 1312/12116, 12.17 photos/s
+  images 1472/12116, 12.14 photos/s
+  images 1632/12116, 12.13 photos/s
+  images 1792/12116, 12.12 photos/s
+  images 1952/12116, 12.12 photos/s
+  images 2112/12116, 12.12 photos/s
+  images 2272/12116, 12.11 photos/s
+  images 2432/12116, 12.10 photos/s
+  images 2592/12116, 12.10 photos/s
+  images 2752/12116, 12.09 photos/s
+  images 2912/12116, 12.08 photos/s
+  images 3072/12116, 12.07 photos/s
+  images 3232/12116, 12.06 photos/s
+  images 3392/12116, 12.05 photos/s
+  images 3552/12116, 12.05 photos/s
+  images 3712/12116, 12.05 photos/s
+  images 3872/12116, 12.05 photos/s
+  images 4032/12116, 12.05 photos/s
+  images 4192/12116, 12.05 photos/s
+  images 4352/12116, 12.05 photos/s
+  images 4512/12116, 12.05 photos/s
+  images 4672/12116, 12.05 photos/s
+  images 4832/12116, 12.04 photos/s
+  images 4992/12116, 12.04 photos/s
+  images 5152/12116, 12.04 photos/s
+  images 5312/12116, 12.03 photos/s
+  images 5472/12116, 12.02 photos/s
+  images 5632/12116, 12.02 photos/s
+  images 5792/12116, 12.01 photos/s
+  images 5952/12116, 12.01 photos/s
+  images 6112/12116, 12.01 photos/s
+  images 6272/12116, 12.00 photos/s
+  images 6432/12116, 11.99 photos/s
+  images 6592/12116, 11.99 photos/s
+  images 6752/12116, 11.99 photos/s
+  images 6912/12116, 11.99 photos/s
+  images 7072/12116, 11.98 photos/s
+  images 7232/12116, 11.98 photos/s
+  images 7392/12116, 11.98 photos/s
+  images 7552/12116, 11.98 photos/s
+  images 7712/12116, 11.98 photos/s
+  images 7872/12116, 11.98 photos/s
+  images 8032/12116, 11.98 photos/s
+  images 8192/12116, 11.98 photos/s
+  images 8352/12116, 11.99 photos/s
+  images 8512/12116, 12.00 photos/s
+  images 8672/12116, 12.01 photos/s
+  images 8832/12116, 12.02 photos/s
+  images 8992/12116, 12.03 photos/s
+  images 9152/12116, 12.04 photos/s
+  images 9312/12116, 12.04 photos/s
+  images 9472/12116, 12.05 photos/s
+  images 9632/12116, 12.05 photos/s
+  images 9792/12116, 12.05 photos/s
+  images 9952/12116, 12.05 photos/s
+  images 10112/12116, 12.05 photos/s
+  images 10272/12116, 12.05 photos/s
+  images 10432/12116, 12.06 photos/s
+  images 10592/12116, 12.06 photos/s
+  images 10752/12116, 12.05 photos/s
+  images 10912/12116, 12.05 photos/s
+  images 11072/12116, 12.05 photos/s
+  images 11232/12116, 12.06 photos/s
+  images 11392/12116, 12.06 photos/s
+  images 11552/12116, 12.06 photos/s
+  images 11712/12116, 12.06 photos/s
+  images 11872/12116, 12.07 photos/s
+  images 12032/12116, 12.07 photos/s
+images: 12116 embedded, 0 skipped, 1003.3s (12.08 photos/s)
+[08:08:09] exit 0
+[08:08:09] job done, fail=0
