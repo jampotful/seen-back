@@ -796,7 +796,8 @@ T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 
       "python3 -I tools/eval/pets.py ROOT DIR --name pocket-v3                               # docs/eval/pets-livestock.json", "```", "",
       "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`. "
       "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything; `run/eval/licence<label>` reruns the heads under the licence rule, the pocket v3 decision, the last check and the pets check, and publishes nothing.", "",
-      "Inputs of this run: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "."]
+      "Inputs of Study 1: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "." +
+      ((" The slot files in the tables above (`docs/eval/shipped-*.json`, leaving out the two `-b8` files) were last scored from " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(load("slot-inputs.json")["inputs"].items())) + " (`docs/eval/slot-inputs.json`).") if load("slot-inputs.json") else "")]
 with open(a.out, "w", encoding="utf-8") as f:
     f.write("\n".join(T).rstrip("\n") + "\n")
 print("wrote", a.out)
