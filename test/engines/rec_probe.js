@@ -15,7 +15,8 @@ async function timeline(page, ms, until) { const t0 = Date.now(), out = []; let 
   const browser = await pw[ENGINE].launch(); out.version = browser.version();
   try {
     await ctl('reset=1');
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    // PHONE=1: check_rec.js's own phone emulation (Pixel 7, its user agent included), to see whether that is what keeps WebKit's damaged case waiting
+    const ctx = await browser.newContext(process.env.PHONE === '1' ? Object.assign({}, pw.devices['Pixel 7']) : { viewport: { width: 390, height: 844 } }); out.phone = process.env.PHONE === '1';
     let page = await ctx.newPage(); const errs = []; page.on('pageerror', (e) => errs.push(e.message)); page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 200)); });
     await page.goto(ORIGIN + '/index.html?side=420&rec=' + SLOT);
     out.firstReady = await timeline(page, 60000, (a) => a.state === 'ready' || a.state === 'failed');

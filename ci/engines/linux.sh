@@ -8,6 +8,8 @@ ROOT="$PWD"; OUT="$ROOT/out"; mkdir -p "$OUT/shots" "$OUT/reports" "$OUT/rec"
 exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 PART="${PART:-chromium}"; PW=/tmp/pw; PWV=1.56.0
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROBE_ONLY=0 ;; esac   # only rec_probe.js in WebKit, with and without phone emulation
+if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
 step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version; lscpu | grep -E "Model name|Flags" | sed -E "s/(Flags:).*/\1 $(grep -o -w -E "avx2|avx512f|avx512_vnni|avx_vnni|avx512bw" /proc/cpuinfo | sort -u | tr "\n" " ")/"
@@ -20,6 +22,17 @@ export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | grep -v -E "[0-9]+%" | tail -6
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
+if [ "$PROBE_ONLY" = 1 ]; then
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
+  sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html
+  for PH1 in 0 1; do
+    step "rec_probe.js in WebKit, PHONE=$PH1"
+    PHONE=$PH1 BROWSER=webkit PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-webkit-phone$PH1.json" 2>&1; echo "probe: exit $?"; python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('phone', d.get('phone'), '| offline', json.dumps(d.get('offline'))[:300]); print('keptBad', json.dumps(d.get('keptBad'))[:600]); print('error', d.get('error'))" "$OUT/rec/probe-webkit-phone$PH1.json"
+  done
+  exit 0
+fi
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
 RECQ="&rec=ci-rec/slot&recphotos=$PH&recexpect=ci-rec/slot/expect.json"
