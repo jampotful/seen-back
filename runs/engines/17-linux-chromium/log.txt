@@ -1,0 +1,98 @@
+
+=== 05:13:36 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1001       12827          40        2520       14987
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 7763 64-Core Processor
+Flags: avx2 
+
+=== 05:13:36 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build.py patched
+build 6 | index.html 142955 bytes | artifact 140377 bytes | selftest.js 44338 bytes
+build ok
+142977 index.html
+44338 selftest.js
+
+=== 05:13:36 playwright 1.56.0: chromium
+added 2 packages in 1s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 05:14:01 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+[0;93m2026-10-11 05:14:09.404754505 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python 1.31.0 12.3.0 2.5.4
+total 76816
+drwxr-xr-x 2 runner runner     4096 Oct 11 05:14 .
+drwxr-xr-x 6 runner runner     4096 Oct 11 05:14 ..
+-rw-r--r-- 1 runner runner     8822 Oct 11 05:14 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 556485
+[0;93m2026-10-11 05:14:13.744866093 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.2354], ['plant', 0.1984], ['frog', 0.1374]]
+  python: asset-portrait.jpg [['person', 0.9462], ['none', 0.0275], ['other', 0.0118]]
+  python: big12mp.jpg [['none', 0.232], ['plant', 0.1942], ['frog', 0.14]]
+  python: dots.png [['none', 0.837], ['person', 0.0622], ['plant', 0.0565]]
+  python: garden.jpg [['none', 0.2284], ['frog', 0.1543], ['plant', 0.152]]
+  python: heron.png [['wader', 0.6847], ['bird', 0.2174], ['hawk', 0.0427]]
+  python: info-exif6.jpg [['person', 0.9406], ['none', 0.0259], ['other', 0.0124]]
+  python: odd.png [['none', 0.7644], ['other', 0.0631], ['plant', 0.0483]]
+  python: portrait.jpg [['person', 0.9406], ['none', 0.0259], ['other', 0.0124]]
+  python: rings.png [['other', 0.3172], ['none', 0.2009], ['plant', 0.1808]]
+  python: small.png [['plant', 0.6755], ['other', 0.088], ['wader', 0.0668]]
+  python: stripes.png [['none', 0.546], ['other', 0.1417], ['insect', 0.1127]]
+  python: wall.png [['none', 0.961], ['person', 0.0156], ['plant', 0.0059]]
+  python: wide.png [['deer', 0.2004], ['none', 0.1919], ['plant', 0.149]]
+
+=== 05:14:14 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 05:14:15 check_rec.js, every check, stand-in model: chromium
+check_rec chromium: exit 0 in 208 s
+flow: ok | camera: ok | fuse: ok | parity: ok | progress: ok | offline+version: ok | missing: ok | damaged: ok | dying: ok | about: ok | viewer: ok
+
+=== 05:17:43 check_rec.js parity, real slot (tinyclip-8m-16): chromium
+parity (real) chromium: exit 0 in 43 s
+parity: ok
+(ci/engines/patches/check_rec-int8-cosine.patch is already in test/rec/check_rec.js on this commit)
+
+=== 05:18:26 self-test with the recognizer phase: chromium (picture limited to 540 on this software renderer)
+05:21:14 chromium-phone 141.0.7390.37 done=true ok=true fails=0 checks=139 webgl2=true float=true ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver) 167829ms
+05:24:53 chromium-desktop 141.0.7390.37 done=true ok=true fails=0 checks=139 webgl2=true float=true ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver) 218625ms
+
+=== 05:24:53 summary
+chromium desktop done True ok True fails 0 webgl2 True float True ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+chromium phone done True ok True fails 0 webgl2 True float True ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+check4 {}
+iphone None None []
+
+=== 05:24:53 shrink pictures
+pictures: 14 total bytes: 852413
+932K	/home/runner/work/seen-back/seen-back/out
