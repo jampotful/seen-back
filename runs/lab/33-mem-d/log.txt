@@ -1,0 +1,85 @@
+[08:48:42] memory job mem-d; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1289       12426          42        2636       14699
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+
+added 18 packages in 2s
+photos: 24 rows, 24 to fetch, 0 failed, 0.6s
+pixels: 24 photos (0 skipped), every 13-th test row
+model:
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+[08:48:52] route no-arena: {"name": "no-arena", "form": "onnx", "options": {"enableCpuMemArena": false}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":55.5,"peak_mb":55.5,"heap_mb":0}
+{"step":"file read","rss_mb":352.3,"peak_mb":352.3,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1247.2,"peak_mb":1247.2,"heap_mb":819.4,"ms":790}
+{"step":"warm-up (empty picture)","rss_mb":1419.5,"peak_mb":1421.2,"heap_mb":819.4,"ms":2852}
+{"step":"photo 1","rss_mb":1422,"peak_mb":1422,"heap_mb":819.4,"ms":2772}
+{"step":"photo 10","rss_mb":1422.4,"peak_mb":1422.4,"heap_mb":819.4,"ms":3011}
+{"step":"photo 24","rss_mb":1422.4,"peak_mb":1422.4,"heap_mb":819.4,"ms":2778}
+route no-arena: ready 790 ms, heap 819.4 MB, photo mean 2868 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:12.48
+	Maximum resident set size (kbytes): 1456272
+[08:50:05] route init-device-alloc: {"name": "init-device-alloc", "form": "onnx", "options": {"extra": {"session": {"use_device_allocator_for_initializers": "1"}}}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1236.2,"peak_mb":1236.2,"heap_mb":820.4,"ms":788}
+{"step":"warm-up (empty picture)","rss_mb":1387,"peak_mb":1388.6,"heap_mb":820.4,"ms":2972}
+{"step":"photo 1","rss_mb":1389.5,"peak_mb":1389.5,"heap_mb":820.4,"ms":2868}
+{"step":"photo 10","rss_mb":1389.8,"peak_mb":1389.8,"heap_mb":820.4,"ms":2802}
+{"step":"photo 24","rss_mb":1389.9,"peak_mb":1389.9,"heap_mb":820.4,"ms":2811}
+route init-device-alloc: ready 788 ms, heap 820.4 MB, photo mean 2825 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:11.68
+	Maximum resident set size (kbytes): 1422808
+[08:51:17] route no-prepack: {"name": "no-prepack", "form": "onnx", "options": {"extra": {"session": {"disable_prepacking": "1"}}}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":28}
+{"step":"session created","rss_mb":1209.1,"peak_mb":1209.1,"heap_mb":820.2,"ms":821}
+{"step":"warm-up (empty picture)","rss_mb":1397.7,"peak_mb":1399.4,"heap_mb":820.2,"ms":2840}
+{"step":"photo 1","rss_mb":1400.3,"peak_mb":1400.3,"heap_mb":820.2,"ms":2795}
+{"step":"photo 10","rss_mb":1400.6,"peak_mb":1400.6,"heap_mb":820.2,"ms":2801}
+{"step":"photo 24","rss_mb":1404.5,"peak_mb":1404.5,"heap_mb":820.2,"ms":2801}
+route no-prepack: ready 821 ms, heap 820.2 MB, photo mean 2797 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:10.88
+	Maximum resident set size (kbytes): 1437932
+[08:52:28] route no-mempattern: {"name": "no-mempattern", "form": "onnx", "options": {"enableMemPattern": false}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":353.8,"peak_mb":353.8,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1247.2,"peak_mb":1247.2,"heap_mb":819.4,"ms":767}
+{"step":"warm-up (empty picture)","rss_mb":1395.5,"peak_mb":1458.4,"heap_mb":819.4,"ms":2866}
+{"step":"photo 1","rss_mb":1398,"peak_mb":1398,"heap_mb":819.4,"ms":2793}
+{"step":"photo 10","rss_mb":1399.9,"peak_mb":1399.9,"heap_mb":819.4,"ms":2875}
+{"step":"photo 24","rss_mb":1400.5,"peak_mb":1400.5,"heap_mb":819.4,"ms":2830}
+route no-mempattern: ready 767 ms, heap 819.4 MB, photo mean 2841 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:11.85
+	Maximum resident set size (kbytes): 1433912
+[08:53:39] route opt-basic: {"name": "opt-basic", "form": "onnx", "options": {"graphOptimizationLevel": "basic"}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1101.3,"peak_mb":1101.3,"heap_mb":625.8,"ms":631}
+{"step":"warm-up (empty picture)","rss_mb":1336.4,"peak_mb":1395.3,"heap_mb":729.9,"ms":3023}
+{"step":"photo 1","rss_mb":1339,"peak_mb":1339,"heap_mb":729.9,"ms":2860}
+{"step":"photo 10","rss_mb":1340.5,"peak_mb":1340.5,"heap_mb":729.9,"ms":2717}
+{"step":"photo 24","rss_mb":1341.9,"peak_mb":1341.9,"heap_mb":729.9,"ms":2781}
+route opt-basic: ready 631 ms, heap 729.9 MB, photo mean 2732 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:09.43
+	Maximum resident set size (kbytes): 1373828
+[08:54:49] route opt-disabled: {"name": "opt-disabled", "form": "onnx", "options": {"graphOptimizationLevel": "disabled"}, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1093.3,"peak_mb":1093.3,"heap_mb":625.8,"ms":522}
+{"step":"warm-up (empty picture)","rss_mb":1394.4,"peak_mb":1395.1,"heap_mb":729.9,"ms":2827}
+{"step":"photo 1","rss_mb":1401,"peak_mb":1401,"heap_mb":729.9,"ms":2734}
+{"step":"photo 10","rss_mb":1402.4,"peak_mb":1402.4,"heap_mb":729.9,"ms":2697}
+{"step":"photo 24","rss_mb":1404.5,"peak_mb":1404.5,"heap_mb":729.9,"ms":2891}
+route opt-disabled: ready 522 ms, heap 729.9 MB, photo mean 2744 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:09.29
+	Maximum resident set size (kbytes): 1437708
+[08:55:58] memory job done, fail=0
