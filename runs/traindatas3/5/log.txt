@@ -1,0 +1,107 @@
+=== 2026-10-11T06:57:48Z machine
+4
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   59G   86G  41% /
+/dev/root       145G   59G   86G  41% /
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1448       12229          42        2676       14541
+Sun Oct 11 06:57:48 UTC 2026
+awk: /usr/bin/mawk
+=== 2026-10-11T06:57:48Z machine: exit 0
+=== 2026-10-11T06:57:48Z download taxa
+=== 2026-10-11T06:57:50Z download taxa: exit 0
+=== 2026-10-11T06:57:50Z decompressor
+decompressor: igzip -dc
+=== 2026-10-11T06:57:58Z decompressor: exit 0
+=== 2026-10-11T06:57:58Z sizes
+observations.csv.gz Last-Modified: Sun, 27 Sep 2026 16:10:27 GMT Content-Length: 13420521411 
+photos.csv.gz Last-Modified: Sun, 27 Sep 2026 16:45:05 GMT Content-Length: 20668099997 
+=== 2026-10-11T06:57:59Z sizes: exit 0
+=== 2026-10-11T06:57:59Z observations in the box (streamed)
+try 1: curl 0, decompress 0, filter 0; rows kept 264412; 07:02:20
+observation_uuid	observer_id	latitude	longitude	positional_accuracy	taxon_id	quality_grade	observed_on	anomaly_score
+bc923fc9-32e7-47a3-99e4-935d2c43a395	1620	29.6484397568	-82.3469683528		67731	research	2003-03-11	47.32680665718398
+=== 2026-10-11T07:02:20Z observations in the box (streamed): exit 0
+=== 2026-10-11T07:02:20Z photos of those observations (streamed)
+try 1: curl 0, decompress 0, filter 0; rows kept 443078; 07:10:52
+photo_uuid	photo_id	observation_uuid	observer_id	extension	license	width	height	position
+60f05e43-222d-4261-9d87-79cb6a969655	65271	bc923fc9-32e7-47a3-99e4-935d2c43a395	1620	jpg	CC-BY-NC-SA	1600	1200	0
+=== 2026-10-11T07:10:52Z photos of those observations (streamed): exit 0
+=== 2026-10-11T07:10:52Z training manifest
+== taxonomy
+  1668467 taxa
+== observations
+  264412 research-grade observations in the box
+== photos
+  photos attached to more than one observation: 312; observations whose first photo is one of them and which use their next own photo: 18; observations left with no photo of their own: 254
+== the evaluation photos' iNaturalist names
+  evaluation photos found in the open-data photos file: 5921 of 6000 (keys: 1390); keys whose photos sit mostly under another iNaturalist name: 57; names used as aliases: 56
+  observations in the box, research grade: 264412; kept: 181774 (through an alias: 7570); left out: {'not identified to a species': 1124, 'species not in the species list by name': 5308, 'dated after 2024-12-31': 76206}
+  photo rows read: 443078; kept observations with a photo: 181612 of 181774
+  wrote stage/train/alachua-pre2025/manifest.csv: 84808 rows
+  wrote out/inat-from-eval.json: 1390 keys
+  wrote stage/train/alachua-pre2025/SUMMARY.md; 9s
+all checks passed
+=== 2026-10-11T07:11:01Z training manifest: exit 0
+=== 2026-10-11T07:11:01Z rows
+84809 stage/train/alachua-pre2025/manifest.csv
+id,gbif_id,obs_url,key,sci,en,kingdom,class,order,family,eyes,date,month,photo_url,licence,split
+t000001,,https://www.inaturalist.org/observations/9f7022ee-396c-49b6-862b-2b3774ac0d2b,2441370,Alligator mississippiensis,American Alligator,Animalia,Crocodylia,,Alligatoridae,alligator,2021-12-24,12,https://inaturalist-open-data.s3.amazonaws.com/photos/173518531/medium.jpeg,CC-BY-NC,train
+t000002,,https://www.inaturalist.org/observations/34ed427f-4c31-46f7-9abb-a628b2fa011e,4287413,Anolis sagrei,Brown Anole,Animalia,Squamata,,Dactyloidae,reptile,2005-08-14,8,https://inaturalist-open-data.s3.amazonaws.com/photos/108569126/medium.jpeg,CC-BY-NC,train
+aff6d581b2cddc13bc4302e5aaaeb5a760361c8121905e09800f543e47212122  stage/train/alachua-pre2025/manifest.csv
+=== 2026-10-11T07:11:01Z rows: exit 0
+=== 2026-10-11T07:11:01Z check
+ok    columns: as in docs/CONTRACTS.md
+      rows: 84808
+ok    the manifest has rows
+ok    split is train on every row
+ok    gbif_id is empty on every row (this route has none)
+ok    every date is a real date (bad: 0)
+ok    no row dated after records_through 2024-12-31 (after: 0); dates run from 1910-06-07 to 2024-12-31
+ok    month equals the date's month (differs: 0)
+ok    ids run t000001.. in order
+ok    photo addresses match the open-data bucket's pattern (others: 0)
+ok    observation addresses are inaturalist.org/observations/<UUID> (others: 0)
+ok    no photo twice (repeated: 0)
+ok    no observation twice (repeated: 0)
+ok    no photo shared with the evaluation manifest (6000 rows, 6000 photo ids; shared: 0)
+ok    no observation address shared with the evaluation manifest
+ok    every evaluation photo (from 2025-01-01) is later than every training photo (to 2024-12-31)
+ok    every key is in the species list with the list's name, English name, kind and taxonomy 
+ok    at most 60 rows a species (largest: 60)
+ok    within a species, rows in increasing sha256(seed|photo id) (out of order: 0)
+ok    through the file, each row's rank within its species never decreases (decreases: 0)
+ok    within one rank, species by records, most first, then key (out of order: 0)
+ok    licences are Creative Commons or CC0: {'CC-BY-NC': 62694, 'CC-BY': 13555, 'CC0': 5317, 'CC-BY-NC-ND': 2569, 'CC-BY-NC-SA': 387, 'CC-BY-ND': 156, 'CC-BY-SA': 130}
+      species with photos: 5467 of 5911; without: 444, standing for 2215 of the list's 187313 records (1.2%)
+      60 photos: 659 species
+      30 to 59 photos: 419 species
+      10 to 29 photos: 1018 species
+      5 to 9 photos: 801 species
+      2 to 4 photos: 1289 species
+      1 photos: 1281 species
+      rows if every list record had a photo here: 86915; rows: 84808 (97.6%)
+      most recorded list species with no photo: Hermeuptychia hermes (Hermes Satyr, 244); Samea ecclesialis (Assembly Moth, 148); Limenitis astyanax (, 118); Acontia onagrus (, 101); Pyrgus oileus (Tropical Checkered-Skipper, 81); Atteva punctella (, 62); Carphephorus paniculatus (, 40); Platycotis vittatus (Oak Treehopper, 39); Atrytone delaware (, 37); Aethiopocassis scripta (, 32); Enodia portlandia (Southern Pearly-eye, 31); Porphyrio porphyrio (Western Swamphen, 31); Argyria nivalis (, 30); Hydrocharis spongia (American spongeplant, 28); Citrus aurantium (sour orange, 26)
+      list species with under half the photos their records allow (records, rows, name): [(41, 15, 'Antrostomus carolinensis'), (20, 7, 'Geomys pinetis'), (17, 3, 'Stylisma patens'), (15, 5, 'Leotia lubrica'), (15, 1, 'Chasmanthium laxum'), (12, 4, 'Melospiza lincolnii'), (11, 4, 'Pimpla marginella'), (11, 2, 'Araneus pegnia'), (9, 3, 'Epiblema strenuana'), (9, 2, 'Graminorthezia tillandsiae')]
+      kinds of eye: {'insect': 32404, 'plant': 28509, 'other': 8380, 'bird': 6886, 'bee': 2472, 'reptile': 2313, 'wader': 1580, 'frog': 912, 'hawk': 603, 'squirrel': 201, 'deer': 180, 'rabbit': 124, 'cat': 96, 'dog': 88, 'alligator': 60}
+all checks passed
+=== 2026-10-11T07:11:02Z check: exit 0
+=== 2026-10-11T07:11:02Z photo address check
+shard 0/1: 29 rows; fetched 29, kept 0, failed 0; HTTP status of the last attempt: {200: 29}; 1s
+=== 2026-10-11T07:11:04Z photo address check: exit 0
+publishing as train/alachua-pre2025
+=== 2026-10-11T07:11:04Z publish
+read pub/data-alachua at f09ef6bf4b49: 9 files
+published into pub/data-alachua: 6e9a8aac93d1 (was f09ef6bf4b4944cb847f511668ae8b1249fb6470); files now:
+  _made.txt
+  eval/alachua-2025/SUMMARY.md
+  eval/alachua-2025/manifest.csv
+  extra/coco-kinds/SUMMARY.md
+  extra/coco-kinds/largest.csv
+  extra/coco-kinds/manifest.csv
+  regions/us-fl-alachua/SUMMARY.md
+  regions/us-fl-alachua/inat.json
+  regions/us-fl-alachua/species.json
+  train/alachua-pre2025/SUMMARY.md
+  train/alachua-pre2025/manifest.csv
+=== 2026-10-11T07:11:09Z publish: exit 0
