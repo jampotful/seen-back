@@ -382,7 +382,9 @@ async function meet(page, name) {
 
   // ---------- the species service: a fake server that speaks Gradio's two-step call (test/rec/fake_service.js)
   let fake = null;
-  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_/.test(e));     // a sleeping server's refusals are written to the console by the browser itself
+  // a sleeping server's refusals are written to the console by the browser itself, each engine in its own words: Chromium "blocked by CORS policy",
+  // "net::ERR_"; Firefox "Cross-Origin Request Blocked"; WebKit "Preflight response is not successful", "due to access control checks" (runs engines/33)
+  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_|Cross-Origin Request Blocked|Preflight response is not successful|due to access control checks|is not allowed by Access-Control-Allow-Origin/.test(e));
   const svcFiles = async () => {
     if (!fake) fake = await require('./fake_service.js').start(SVC_PORT);
     fake.reset();
@@ -618,7 +620,7 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
       await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
       all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
-      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. On a phone it takes several seconds a photo.'
+      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. It takes several seconds a photo on a computer. No phone has been timed yet.'
         && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /can be changed, and the model deleted, under “About this build”/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
       all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');

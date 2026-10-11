@@ -2379,8 +2379,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
     $('bigSub').textContent = 'It is a larger model that names the species: about ' + z.mb + ' MB, downloaded once and kept on this ' + dev() + '. Photos are not sent anywhere. ' +
       (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
-        : s && !coarse && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.'
-        : 'On a phone it takes several seconds a photo.');
+        : s && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.' + (coarse ? ' No phone has been timed yet.' : '')
+        : 'It takes several seconds a photo on a computer. No phone has been timed yet.');   // what was measured, and nothing else
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Get it';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -2688,7 +2688,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
     return 'The rows the recognizer compares a photo with were fitted on ' + n + 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.' + (rule ? ' ' + rule + (/[.!?]$/.test(rule) ? '' : '.') : '');
   }
-  function paintAbout() { var fl = fittedLine(); $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; $('fittedOn').textContent = fl; show('fittedOn', !!fl); paintChoices(); }
+  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a;
+    $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; el.textContent = fl;
+    if (fl && f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list)) {   // the attribution: where each photograph's address and licence can be read
+      a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'The list of them';
+      el.appendChild(document.createTextNode(' ')); el.appendChild(a); el.appendChild(document.createTextNode(' gives each one’s address and licence' + (typeof f.list_mb === 'number' && f.list_mb >= 1 ? ' (a file of about ' + Math.round(f.list_mb) + ' MB)' : '') + '.'));
+    }
+    show('fittedOn', !!fl); paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');

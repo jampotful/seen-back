@@ -29,6 +29,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ev
 import kinds
+import licences
 
 REL = (0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0)   # prior weight, in units of a head's usual gap between first and second
 SCALES = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0, 32.0, 48.0, 64.0, 96.0, 128.0)   # calibration scale, in the same units
@@ -43,14 +44,22 @@ def log(*a):
     print(*a, flush=True)
 
 
+LICENCE = "all"         # set by --licence: which photos rows may be fitted on (tools/eval/licences.py)
+FITTED = {}              # set name -> list of (id, address, licence) of the photos rows were fitted on, for fitted_on.csv
+
+
 def fit_set(root, model, mode):
-    """Fitting vectors X (unit), species index y, kind of eye, and the masks of tuning and test rows of the evaluation set."""
+    """Fitting vectors X (unit), species index y, kind of eye, and the masks of tuning and test rows of the evaluation set.
+    A photo whose licence the rule in LICENCE does not allow is left out of fitting (y = -1, or out of the val stand-in's fitting part)."""
     E0, ids = ev.load_images(root, model)
     ES = ev.EvalSet(root, ids)
+    FITTED.clear()
     if mode == "val":
         h = np.array([int(hashlib.sha256(i.encode()).hexdigest()[:8], 16) % 3 for i in ids])
-        fit, tune = ES.val & (h < 2), ES.val & (h == 2)
-        return ES, E0[fit], ES.y[fit], ES.eyes[fit], tune, [i for i, f in zip(ids, fit) if f], "images/" + ev.EVALSET + " (two thirds of val)"
+        lic_ok = np.array([licences.allowed(r.get("licence", ""), LICENCE) for r in ES.rows])
+        fit, tune = ES.val & (h < 2) & lic_ok, ES.val & (h == 2)
+        FITTED[ev.EVALSET] = [(r["id"], r["obs_url"], r["licence"]) for r, f in zip(ES.rows, fit) if f]
+        return ES, E0[fit], ES.y[fit], ES.eyes[fit], tune, [i for i, f in zip(ids, fit) if f], "images/" + ev.EVALSET + " (two thirds of val)" + ("" if LICENCE == "all" else ", licence rule " + LICENCE)
     if mode == "sentences":
         return ES, None, None, None, ES.val.copy(), [], "none (sentence rows only)"
     X, tid = ev.load_images(root, model, mode)
@@ -60,8 +69,29 @@ def fit_set(root, model, mode):
     # a vector whose id the manifest does not hold, or whose species is not in the list, is left out of every fit (y = -1);
     # the kind of eye is the species list's, whatever the manifest's own column says
     y = np.array([ES.key2i.get(int(by[i]["key"]), -1) if i in by and by[i]["key"].strip().isdigit() else -1 for i in tid])
+    lic_ok = np.array([i in by and licences.allowed(by[i].get("licence", ""), LICENCE) for i in tid])
+    if not lic_ok.all():
+        log("  %d of %d fitting vectors are left out by the licence rule `%s`" % (int((~lic_ok).sum()), len(lic_ok), LICENCE))
+    y = np.where(lic_ok, y, -1)
+    FITTED[mode] = [(i, by[i]["obs_url"], by[i]["licence"]) for i, yy in zip(tid, y) if yy >= 0]
     eyes = np.where(y >= 0, ES.sp_eyes[np.maximum(y, 0)], "")
-    return ES, X, y, eyes, ES.val.copy(), tid, "images/" + mode
+    return ES, X, y, eyes, ES.val.copy(), tid, "images/" + mode + ("" if LICENCE == "all" else " (licence rule %s)" % LICENCE)
+
+
+class Lazy:
+    """A list of candidate heads made one at a time when asked for, so that dozens of species-by-width arrays are never held at once.
+    The arithmetic is the same as building the list first."""
+    def __init__(self, params, make):
+        self.params, self.make = params, make
+
+    def __len__(self):
+        return len(self.params)
+
+    def __getitem__(self, i):
+        return self.make(self.params[i])
+
+    def __iter__(self):
+        return (self.make(p) for p in self.params)
 
 
 def tune_head(cands, Xu, lps, y_tune, m_tune):
@@ -197,21 +227,21 @@ def run_model(root, model, mode, save):
             # the label set that does best by itself on the tuning photos is the one mixed into the trained heads
             ls_best = max(texts, key=lambda ls: tune_head([(ls, texts[ls], zero)], Xu, lps, yu, ES.month[tune])[1][0])
             Tb = texts[ls_best]
-            heads["prototypes + sentences"] = [("%s, beta %g, bias for species without photos %g" % (ls_best, beta, c0), Pr + np.float32(beta) * Tb, np.where(have, 0, c0).astype(np.float32))
-                                               for beta in (0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)]
+            heads["prototypes + sentences"] = Lazy([(beta, c0) for beta in (0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0) for c0 in (0.2, 0.35, 0.5, 0.65, 0.8)],
+                                                   lambda bc, Pr=Pr, Tb=Tb, have=have, ls_best=ls_best: ("%s, beta %g, bias for species without photos %g" % (ls_best, bc[0], bc[1]), Pr + np.float32(bc[0]) * Tb, np.where(have, 0, bc[1]).astype(np.float32)))
         # discriminant
         shrink = (0.03, 0.1, 0.3, 1.0)
         L, _, _ = lda(X, ytr, S, shrink)
         heads["discriminant"] = [("shrinkage %g" % g, L[g][0], L[g][1]) for g in shrink]
         if texts:
-            dm = []
-            for g in shrink:
+            def dm_make(gg, L=L, have=have, Tb=Tb, ls_best=ls_best):
+                g, gam = gg
                 W, b = L[g]
                 sc = float(np.median(np.linalg.norm(W[have], axis=1)))
-                for gam in (0.03, 0.1, 0.3, 1.0, 3.0):
-                    rows = np.where(have[:, None], W + np.float32(gam * sc) * Tb, np.float32((1 + gam) * sc) * Tb)
-                    bias = np.where(have, b, np.float32(np.median(b[have])))
-                    dm.append(("shrinkage %g, %s, gamma %g" % (g, ls_best, gam), rows.astype(np.float32), bias.astype(np.float32)))
+                rows = np.where(have[:, None], W + np.float32(gam * sc) * Tb, np.float32((1 + gam) * sc) * Tb)
+                bias = np.where(have, b, np.float32(np.median(b[have])))
+                return ("shrinkage %g, %s, gamma %g" % (g, ls_best, gam), rows.astype(np.float32), bias.astype(np.float32))
+            dm = Lazy([(g, gam) for g in shrink for gam in (0.03, 0.1, 0.3, 1.0, 3.0)], dm_make)
             heads["discriminant + sentences"] = dm
         # mapped into BioCLIP 2's space
         big = "bioclip2-l14"
@@ -278,6 +308,11 @@ def run_model(root, model, mode, save):
     XT = kinds.load(root, model, want_wasm="wasm" in tv)        # people, pets, livestock and rooms; None until their vectors are published
     if XT is not None and not len(XT["tune"]["ids"]):
         XT = None
+    if XT is not None and LICENCE != "all" and len(XT["fit"]["ids"]):
+        # only the fitting part is cut by the licence rule; the tuning and test parts choose settings and report, as before
+        keep_l = np.array([licences.allowed(l_, LICENCE) for l_ in XT["fit"]["licence"]])
+        log("  %d of %d fitting photos of the extra set are left out by the licence rule `%s`" % (int((~keep_l).sum()), len(keep_l), LICENCE))
+        XT["fit"] = {k_: (v_[keep_l] if isinstance(v_, np.ndarray) else ([x_ for x_, q_ in zip(v_, keep_l) if q_] if isinstance(v_, list) else v_)) for k_, v_ in XT["fit"].items()}
     kind_cands = []                                              # (name, rows, bias or None, temperatures to try)
     if K is not None:
         pred = np.array(klabels)[(Xt @ K.T).argmax(1)]
@@ -316,6 +351,7 @@ def run_model(root, model, mode, save):
                     Wk[klabels.index(c)], bk[klabels.index(c)] = c2.coef_[j], c2.intercept_[j]
                 kind_cands.append(("kind rows fitted on the fitting photos and the extra set (%s)" % wname, Wk, bk, (0.5, 1.0, 2.0)))
             res["kind_rows_fitted_on"] = {"wildlife_photos": int(len(X)), "extra_photos": int(len(XT["fit"]["ids"])), "by_kind": {str(c): int(n) for c, n in zip(cls, cnt)}}
+            FITTED[XT["set"]] = [(str(i_), str(u_), str(l_)) for i_, u_, l_ in zip(XT["fit"]["ids"], XT["fit"]["address"], XT["fit"]["licence"])]
     except LookupError:
         pass
     except Exception as e:                                                # scikit-learn missing or the fit failed: say so
@@ -445,14 +481,33 @@ def run_model(root, model, mode, save):
     else:
         conf["text"] = "For the head `%s`, no probability level made named species right nine times in ten on the tuning photos, so this head should name no species by itself." % chosen["name"]
     res["confidence"] = conf
+    # the photos the saved rows were fitted on: the wildlife fitting photos when the species head or the kinds head was
+    # fitted on them, and the extra set's fitting part when the kinds head was
+    kind_fitted = bool(fusion) and str(fusion.get("kind_head", "")).startswith("kind rows fitted")
+    used = []
+    if fitted and (chosen["name"] != "sentences" or kind_fitted):
+        used += [(("train/" + mode) if mode != "val" else ("eval/" + ev.EVALSET), *r_) for s_, rs_ in FITTED.items() if s_ != kinds.EXTRA for r_ in rs_]
+    if kind_fitted:
+        used += [("extra/" + kinds.EXTRA, *r_) for r_ in FITTED.get(kinds.EXTRA, [])]
+    by_lic = {}
+    for s_, _, _, l_ in used:
+        by_lic.setdefault(s_, {})
+        by_lic[s_][l_] = by_lic[s_].get(l_, 0) + 1
+    res["fitted_on"] = {"licence_rule": LICENCE, "rule": licences.SENTENCE[LICENCE], "photos": len(used), "by_set_and_licence": by_lic}
     if save:
         os.makedirs(save, exist_ok=True)
+        import csv
+        with open(os.path.join(save, model + ".fitted_on.csv"), "w", encoding="utf-8", newline="") as f_:
+            w_ = csv.writer(f_)
+            w_.writerow(["set", "id", "address", "licence"])
+            w_.writerows(used)
         keep = chosen["keep"]
         np.savez(os.path.join(save, model + ".npz"), rows=chosen["rows"][keep], bias=chosen["bias"][keep], keep=np.nonzero(keep)[0],
                  kind_rows=kind_save[0] if kind_save else np.zeros((0, 0), np.float32), kind_bias=kind_save[1] if kind_save else np.zeros(0, np.float32), kind_labels=json.dumps(list(klabels) if K is not None else []),
                  meta=json.dumps({"model": model, "head": chosen["name"], "choice": chosen["label"], "train": mode, "train_vectors": train_name, "test_vectors": "images/" + tv,
                                   "alpha_prior": chosen["alpha"], "lam": chosen["smooth"][0], "c": chosen["smooth"][1], "name_at": name_at, "offer_at": offer_at, "fusion": fusion,
-                                  "tuned_on": "the third of val kept for tuning" if mode == "val" else "val", "made_by": "tools/eval/study2.py"}))
+                                  "tuned_on": "the third of val kept for tuning" if mode == "val" else "val", "made_by": "tools/eval/study2.py" + ("" if LICENCE == "all" else " --licence " + LICENCE),
+                                  "fitted_on": res["fitted_on"]}))
         res["saved_head"] = os.path.join(save, model + ".npz")
     res["seconds"] = round(time.time() - t0, 1)
     return res
@@ -470,8 +525,10 @@ if __name__ == "__main__":
     ap.add_argument("--out")
     ap.add_argument("--save")
     ap.add_argument("--merge", action="store_true", help="keep the models already in the output file that are not run now")
+    ap.add_argument("--licence", default="all", choices=licences.RULES, help="fit rows only on photos whose licence this rule allows (tools/eval/licences.py); the file names then end in -<rule>")
     a = ap.parse_args()
-    out_path = a.out or "docs/eval/study2-%s.json" % a.train
+    LICENCE = a.licence
+    out_path = a.out or "docs/eval/study2-%s%s.json" % (a.train, "" if a.licence == "all" else "-" + a.licence)
     standin = a.train == "val"
     sentences_only = a.train == "sentences"
     what = ("This run is a stand-in that proves the machinery. No training vectors were published when it ran, so two thirds of the `val` photos were used to fit the heads and the last third to choose settings. "
@@ -480,7 +537,9 @@ if __name__ == "__main__":
             "No head was fitted here. The models' own sentence rows were given the prior, the calibration and the page's combination with the kind phrases, with every setting chosen on the whole of `val`. These are the slots that can ship before any training photo exists."
             if sentences_only else
             "Heads were fitted on the training photos `%s` (from before 2025, up to sixty a species), settings were chosen on `val`, and every number is from `test`." % a.train)
-    out = {"made_by": "tools/eval/study2.py --train " + a.train, "standin": standin, "sentences_only": sentences_only, "what": what,
+    if a.licence != "all":
+        what += " " + licences.SENTENCE[a.licence] + " The tuning photos (`val`, and the tuning third of the extra set) choose settings only and are not cut by the rule."
+    out = {"made_by": "tools/eval/study2.py --train " + a.train + ("" if a.licence == "all" else " --licence " + a.licence), "licence_rule": a.licence, "standin": standin, "sentences_only": sentences_only, "what": what,
            "method": {"resamples": ev.RESAMPLES, "seed": ev.SEED, "prior_weight_grid": REL, "scale_grid": SCALES, "smoothing": SMOOTH}, "models": {}}
     if a.merge and os.path.exists(out_path):
         out["models"] = {m: r for m, r in json.load(open(out_path, encoding="utf-8"))["models"].items() if m not in a.models.split(",")}
