@@ -6,17 +6,17 @@
   "fusion": {
    "t_kind": 20.0,
    "t_species": 100.0,
-   "alpha_prior": 1.0,
+   "alpha_prior": 0.75,
    "w_kind": 0.7,
    "rule": "mix",
-   "name_at": 0.89,
-   "offer_at": 0.96,
+   "name_at": 0.63,
+   "offer_at": 2.0,
    "prior_floor": 1e-06
   },
   "evaluation": {
    "model": "tinyclip-39m-16",
    "head": "prototypes + sentences",
-   "choice": "species_taxon_com, beta 8, bias for species without photos 0.8",
+   "choice": "species_com, beta 8, bias for species without photos 0.65",
    "train": "val",
    "train_vectors": "images/alachua-2025 (two thirds of val)",
    "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
@@ -34,95 +34,172 @@
  "numbers": {
   "test_photos": 4197,
   "tuning_photos": 565,
-  "name_at": 0.89,
-  "offer_at": 0.96,
+  "name_at": 0.63,
+  "offer_at": null,
   "kind_right": [
-   0.8692,
-   0.8592,
-   0.8797,
+   0.8675,
+   0.8573,
+   0.8771,
    4197
   ],
   "called_person": 0.0,
   "called_none": 0.0,
   "species_top1": [
-   0.3629,
-   0.3486,
-   0.3772,
+   0.3693,
+   0.355,
+   0.3841,
    4197
   ],
   "species_top5": [
-   0.5835,
-   0.5685,
-   0.5985,
+   0.558,
+   0.5428,
+   0.573,
    4197
   ],
   "named": [
-   0.1496,
-   0.1391,
-   0.1611,
+   0.1942,
+   0.1816,
+   0.2068,
    4197
   ],
   "named_right": [
+   0.8871,
+   0.8663,
    0.9092,
-   0.8869,
-   0.9299,
-   628
+   815
   ],
   "named_kind_right": [
-   0.9745,
-   0.9618,
-   0.9873,
-   628
+   0.984,
+   0.9742,
+   0.9926,
+   815
   ],
   "offered": [
-   0.046,
-   0.0396,
-   0.0524,
+   0.0,
+   0.0,
+   0.0,
    4197
   ],
   "offered_holds_species": [
-   0.9482,
-   0.9171,
-   0.9793,
-   193
+   null,
+   null,
+   null,
+   0
   ],
   "offered_kind_right": [
-   0.9845,
-   0.9637,
-   1.0,
-   193
+   null,
+   null,
+   null,
+   0
   ],
   "kind_only": [
-   0.8044,
-   0.7922,
-   0.8161,
+   0.8058,
+   0.7932,
+   0.8184,
    4197
   ],
   "kind_only_kind_right": [
-   0.843,
-   0.8306,
-   0.8555,
-   3376
+   0.8394,
+   0.8273,
+   0.8519,
+   3382
   ],
   "top_species_differs_from_direct_computation": 0,
-  "seconds": 42.2
+  "seconds": 106.4,
+  "levels": [
+   {
+    "right_at_least": 0.9,
+    "name_at": 0.63,
+    "named": [
+     0.1942,
+     0.1816,
+     0.2068,
+     4197
+    ],
+    "named_right": [
+     0.8871,
+     0.8663,
+     0.9092,
+     815
+    ],
+    "offer_at": null,
+    "offered": [
+     0.0,
+     0.0,
+     0.0,
+     4197
+    ],
+    "offered_holds_species": [
+     null,
+     null,
+     null,
+     0
+    ],
+    "kind_only": [
+     0.8058,
+     0.7932,
+     0.8184,
+     4197
+    ]
+   },
+   {
+    "right_at_least": 0.95,
+    "name_at": 0.71,
+    "named": [
+     0.1575,
+     0.1461,
+     0.1687,
+     4197
+    ],
+    "named_right": [
+     0.9198,
+     0.8986,
+     0.9395,
+     661
+    ],
+    "offer_at": null,
+    "offered": [
+     0.0,
+     0.0,
+     0.0,
+     4197
+    ],
+    "offered_holds_species": [
+     null,
+     null,
+     null,
+     0
+    ],
+    "kind_only": [
+     0.8425,
+     0.8313,
+     0.8539,
+     4197
+    ]
+   },
+   {
+    "right_at_least": 0.98,
+    "name_at": null
+   }
+  ]
  },
- "text": "The slot holds the head `prototypes + sentences` for `tinyclip-39m-16` (species_taxon_com, beta 8, bias for species without photos 0.8), fitted on `images/alachua-2025 (two thirds of val)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 20, w_kind 0.7, alpha_prior 1. On 565 tuning photos (the third of val kept for tuning) the thresholds came out as name_at 0.89 and offer_at 0.96. On the 4197 test photos the kind of eye is right for 86.9% (85.9 to 88.0); the top species is right for 36.3% (34.9 to 37.7) and is among the first five for 58.4% (56.9 to 59.9). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: species.bias_url (build 7 of the page); fusion.rule mix (build 7 of the page).",
+ "text": "The slot holds the head `prototypes + sentences` for `tinyclip-39m-16` (species_com, beta 8, bias for species without photos 0.65), fitted on `images/alachua-2025 (two thirds of val)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 20, w_kind 0.7, alpha_prior 0.75. On 565 tuning photos (the third of val kept for tuning) the thresholds came out as name_at 0.63 and offer_at never (no level reached nine in ten). On the 4197 test photos the kind of eye is right for 86.8% (85.7 to 87.7); the top species is right for 36.9% (35.5 to 38.4) and is among the first five for 55.8% (54.3 to 57.3). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: species.bias_url (build 7 of the page); fusion.rule mix (build 7 of the page).",
  "outcomes": [
   {
    "what": "a species name",
-   "share": 0.1496,
-   "right": "the name is right for 90.9% (88.7 to 93.0); the kind for 97.5% (96.2 to 98.7)"
+   "share": 0.1942,
+   "right": "the name is right for 88.7% (86.6 to 90.9); the kind for 98.4% (97.4 to 99.3)"
   },
   {
    "what": "three species to choose from",
-   "share": 0.046,
-   "right": "the three hold the species for 94.8% (91.7 to 97.9); the kind is right for 98.5% (96.4 to 100.0)"
+   "share": 0.0,
+   "right": "the three hold the species for –; the kind is right for –"
   },
   {
    "what": "a kind of eye only",
-   "share": 0.8044,
-   "right": "the kind is right for 84.3% (83.1 to 85.5)"
+   "share": 0.8058,
+   "right": "the kind is right for 83.9% (82.7 to 85.2)"
   }
- ]
+ ],
+ "extra": []
 }

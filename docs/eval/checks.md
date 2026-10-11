@@ -6,6 +6,7 @@ _This file is written by `tools/eval/report.py` from `docs/eval/checks.json`. Re
 |---|---|---|
 | pass | every evaluation photo is dated after the species list's last record (2024-12-31) | 6000 rows; earliest 2025-01-01, latest 2026-09-29; rows on or before 2024-12-31: 0 |
 | pass | every evaluation photo is dated after the GBIF snapshot behind BioCLIP 2's training data (2024-05-01) | earliest evaluation date 2025-01-01. This says nothing about BioCLIP 2.5, whose card gives no snapshot date. |
+| pass | no evaluation observation was created before the first one dated 2025-01-01 | observation numbers run from 257012724 to 404616041; the smallest number among observations dated 2025-01-01 is 257012724; observations with a smaller number: 0. A smaller number would mean an observation created earlier than 2025 and dated later. |
 | pass | the month column is the month of the date | 0 rows disagree |
 | pass | no two evaluation rows share a value of id | 6000 distinct values in 6000 rows |
 | pass | no two evaluation rows share a value of gbif_id | 6000 distinct values in 6000 rows |
@@ -16,7 +17,7 @@ _This file is written by `tools/eval/report.py` from `docs/eval/checks.json`. Re
 | pass | no GBIF species key appears twice in the list | 5911 keys, 5911 distinct |
 | note | scientific names carried by more than one species key | 1: {"Salvia azurea": [8283204, 2927067]}. Their sentence rows are identical, so the later key can never be the top answer; photos of it on the test split: 0. |
 | pass | an evaluation row's name and kind of eye equal the species list's for the same key | 0 rows disagree |
-| note | test photos whose species is not in the list at all | 36 of 4197 (so a recognizer held to the list can reach at most 0.9914) |
+| note | test photos whose species is not in the list at all | 36 of 4197, so a recognizer held to the list can reach at most 0.9914. |
 | pass | vectors of bioclip-b16 line up with the manifest and the species list | 5 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order |
 | pass | vectors of bioclip2-l14 line up with the manifest and the species list | 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order |
 | pass | vectors of bioclip25-h14 line up with the manifest and the species list | 4 files checked; all 6,000 ids in manifest order, no values missing; label rows carry the list's keys and scientific names in the list's order |
@@ -31,7 +32,8 @@ _This file is written by `tools/eval/report.py` from `docs/eval/checks.json`. Re
 | note | label files whose kind of eye differs from the species list | 9 label sets (bioclip-b16, mobileclip2-s0, siglip2-b16) carry another kind of eye than the list in 1 of 5911 rows. The studies take the kind from the species list, so no number here is touched; a slot built from these label files would show the earlier kinds. |
 | note | label rows made from an earlier species.json | 21 label sets (of bioclip2-l14, bioclip25-h14, clip-b32, tinyclip-39m-16, tinyclip-40m-32, tinyclip-61m-32, tinyclip-8m-16) were made before the list's English names were revised: 645 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again. |
 | note | label rows made from an earlier species.json | 9 label sets (of bioclip-b16, mobileclip2-s0, siglip2-b16) were made before the list's English names were revised: 2099 of 5911 rows carry an English name the list no longer has (keys, scientific names and kinds agree in every row). Results for species_sci are unaffected; results for species_com and species_taxon_com describe the earlier names and would change if the rows were made again. |
+| note | test photos of species whose English label row carries an earlier name (tinyclip-39m-16, species_com, no prior) | 567 of 4197 test photos; top-1 is 0.093 on them and 0.228 on the others. Examples of earlier and present names: Romerillo / White beggarticks; Cuban Treefrog / Cuban Tree Frog; White Tailed Deer / White-tailed Deer; Wanderer / Monarch. Making the English-name rows again from the present list is likely to help the pocket models; by how much is unmeasured. |
 | pass | test photos with an almost identical photo on val (clip-b32 cosine above 0.98) | 0 of 4197 test photos |
 | pass | test photos with an almost identical photo on val (bioclip2-l14 cosine above 0.999) | 0 of 4197 test photos |
 | note | how tightly BioCLIP 2 groups a species | 1470 of 4197 test photos have a val photo within cosine 0.95, and for 1454 of those it is the same species. Photos of one species sit close together in this model, which is why a list of names is enough for it. |
-| waiting | training photos share no record with the evaluation photos | data/train/alachua-pre2025/manifest.csv is not published yet |
+| waiting | training photos share no record with the evaluation photos | `data/train/alachua-pre2025/manifest.csv` was not published when the checks ran. |
