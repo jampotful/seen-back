@@ -25,7 +25,7 @@ if git ls-remote --exit-code origin "refs/heads/pub/lab-$model" >/dev/null 2>&1;
   say "merging into existing pub/lab-$model ($(git rev-parse --short FETCH_HEAD))"
 fi
 ls -d parts/*/ >> "$L" 2>&1 || { say "no job outputs to publish"; exit 1; }
-run python3 -u tools/lab/lab.py merge --model "$model" --manifest data_in/manifest.csv --out pubdir parts/*/ || exit 1
+run python3 -u tools/lab/lab.py merge --model "$model" --manifest data_in/manifest.csv --run "${GITHUB_RUN_NUMBER:-0}" --out pubdir parts/*/ || exit 1
 rm -rf pubdir/_ci
 run bash ci/put_branch.sh "pub/lab-$model" pubdir "lab: $model" || exit 1
 cp pubdir/card.json ret/ 2>/dev/null; cp pubdir/onnx/parity.json ret/ 2>/dev/null

@@ -7,6 +7,10 @@ on:
     branches: ['run/lab/**']
 permissions:
   contents: write
+# A newer push to the same run branch cancels the older run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   plan:
     runs-on: ubuntu-latest
@@ -16,6 +20,10 @@ jobs:
       models: ${{ steps.plan.outputs.models }}
       max_parallel: ${{ steps.plan.outputs.max_parallel }}
       publish_after: ${{ steps.plan.outputs.publish_after }}
+      has_work: ${{ steps.plan.outputs.has_work }}
+      has_models: ${{ steps.plan.outputs.has_models }}
+      guard: ${{ steps.plan.outputs.guard }}
+      has_guard: ${{ steps.plan.outputs.has_guard }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
@@ -24,7 +32,7 @@ jobs:
           python3 tools/lab/plan.py ci/lab/run.json | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
       - name: data
         run: |
-          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('data','auto'))")" 2>&1 | tee -a ret/log.txt
+          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('data','auto'))")" "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('manifest',''))")" 2>&1 | tee -a ret/log.txt
           cp data_in/source.txt ret/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         with:
@@ -39,6 +47,7 @@ jobs:
 
   work:
     needs: plan
+    if: needs.plan.outputs.has_work == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
@@ -65,6 +74,8 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_HUB_DISABLE_PROGRESS_BARS: "1"
           TOKENIZERS_PARALLELISM: "false"
+          ROWS: ${{ matrix.rows }}
+          SHARD_MODE: ${{ matrix.mode }}
         run: bash ci/lab/job.sh "${{ matrix.model }}" "${{ matrix.shard }}" "${{ matrix.nshards }}" "${{ matrix.stages }}"
       - uses: actions/upload-artifact@v4
         if: always()
@@ -81,7 +92,7 @@ jobs:
 
   publish:
     needs: [plan, work]
-    if: always() && needs.plan.result == 'success'
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_models == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 70
     strategy:
@@ -110,3 +121,27 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh lab ret "${{ matrix.model }}-pub"
+
+  guard:
+    needs: plan
+    if: needs.plan.outputs.has_guard == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@v4
+      - name: guard
+        env:
+          GUARD: ${{ needs.plan.outputs.guard }}
+        run: |
+          mkdir -p ret
+          python3 -m pip install --quiet numpy 2>&1 | tail -1
+          older=$(python3 -c "import json,os;print(json.loads(os.environ['GUARD'])['older_run'])")
+          minutes=$(python3 -c "import json,os;print(json.loads(os.environ['GUARD']).get('minutes',320))")
+          models=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD'])['models']))")
+          pockets=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD']).get('ship',[])))")
+          bash ci/lab/guard.sh "$older" "$minutes" "$models" "$pockets"
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret guard

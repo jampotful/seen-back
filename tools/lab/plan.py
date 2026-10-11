@@ -15,7 +15,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 run = json.loads(pathlib.Path(sys.argv[1]).read_text())
 slate = {m["id"]: m for m in json.loads((ROOT / "tools/lab/models.json").read_text())["models"]}
 work, models = [], []
-for mid in run["models"]:
+for mid in run.get("models", []):
     if mid not in slate:
         raise SystemExit("unknown model %s" % mid)
     st = run["stages"]
@@ -27,12 +27,20 @@ for mid in run["models"]:
     img = [s for s in stages if s.startswith("images") or s == "text-species"]
     other = [s for s in stages if s not in img]
     n = int(run.get("shards", {}).get(mid, 1)) if img else 1
+    rows = run.get("rows", {})
+    rows = rows.get(mid, rows.get("*", "")) if isinstance(rows, dict) else rows
     for i in range(n):
         s_i = (other if i == 0 else []) + img
-        work.append({"model": mid, "shard": i, "nshards": n, "stages": ",".join(s_i), "tag": "%s-s%d" % (mid, i)})
+        work.append({"model": mid, "shard": i, "nshards": n, "stages": ",".join(s_i), "tag": "%s-s%d" % (mid, i),
+                     "rows": str(rows or ""), "mode": run.get("shard_mode", "block")})
     models.append(mid)
 print("work=" + json.dumps({"include": work}))
+print("has_work=%s" % ("true" if work else "false"))
 print("models=" + json.dumps(models))
+print("has_models=%s" % ("true" if models else "false"))
+print("guard=" + json.dumps(run.get("guard") or {}))
+print("has_guard=%s" % ("true" if run.get("guard") else "false"))
+print("manifest=%s" % run.get("manifest", ""))
 print("max_parallel=%d" % int(run.get("max_parallel", 10)))
 print("publish_after=%s" % (run.get("publish_after_run") or ""))
 print("count=%d" % (len(work) + len(models)), file=sys.stderr)

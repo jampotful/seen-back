@@ -1,9 +1,9 @@
 {
- "about": "BioCLIP (ViT-B/16) as a stretch pocket candidate: export again with each ONNX file measured in its own process (the fp16 file crashed onnxruntime in runs 3 and 4), then image vectors over eval/alachua-2025 from the int8 file that is closer to the original (per-channel int8 is broken for this graph: cosine 0.29). Publishes after run 4 has published.",
- "models": ["bioclip-b16"],
- "stages": ["export", "images-onnx-int8-per-tensor"],
- "data": "pub/data-alachua",
- "shards": {},
- "max_parallel": 1,
- "publish_after_run": 4
+ "about": "Guard: name the shipping int8 file in the TinyCLIP cards, record which run wrote each file (_files.json), then watch every model branch and undo what run 3's late publish overwrites (it runs code from before the publish guard and cannot be cancelled).",
+ "models": [],
+ "guard": {"older_run": 3, "minutes": 320,
+           "models": ["tinyclip-8m-16", "tinyclip-39m-16", "tinyclip-40m-32", "tinyclip-61m-32", "clip-b32", "bioclip-b16", "bioclip2-l14", "bioclip25-h14", "bioclip25-mobile-fastvit", "siglip2-b16", "mobileclip2-s0"],
+           "ship": ["tinyclip-8m-16", "tinyclip-39m-16", "tinyclip-40m-32", "tinyclip-61m-32"]},
+ "data": "auto",
+ "max_parallel": 1
 }

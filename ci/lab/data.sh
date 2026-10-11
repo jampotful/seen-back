@@ -2,7 +2,7 @@
 # Put the species list and evaluation manifest in data_in/: from pub/data-alachua when it exists (or when asked),
 # otherwise a stand-in made from GBIF by tools/lab/standin.py. Usage: bash ci/lab/data.sh <auto|pub/data-alachua|standin>
 set -uo pipefail
-want="${1:-auto}"
+want="${1:-auto}"; manpath="${2:-}"
 mkdir -p data_in
 src=standin
 if [ "$want" != standin ] && git ls-remote --exit-code origin refs/heads/pub/data-alachua >/dev/null 2>&1; then src=pub/data-alachua; fi
@@ -13,7 +13,8 @@ if [ "$src" = pub/data-alachua ]; then
   git show FETCH_HEAD:regions/us-fl-alachua/species.json > data_in/species.json
   git show FETCH_HEAD:_made.txt > data_in/data_made.txt 2>/dev/null || true
   [ -n "$(git ls-tree --name-only FETCH_HEAD tools/species/fetch_photos.py)" ] && git show FETCH_HEAD:tools/species/fetch_photos.py > data_in/fetch_photos_species.py || true
-  man=$(git ls-tree -r --name-only FETCH_HEAD | grep -E '^eval/[^/]+/manifest\.csv$' | head -1)
+  if [ -n "$manpath" ]; then man="$manpath"; git cat-file -e "FETCH_HEAD:$man" 2>/dev/null || { echo "$man is not on pub/data-alachua"; exit 1; }
+  else man=$(git ls-tree -r --name-only FETCH_HEAD | grep -E '^eval/[^/]+/manifest\.csv$' | head -1); fi
   if [ -n "$man" ]; then
     git show "FETCH_HEAD:$man" > data_in/manifest.csv
     ename=$(basename "$(dirname "$man")")

@@ -110,9 +110,14 @@ def eval_name(manifest_path, override=None):
     return p.parent.name if p.name == "manifest.csv" else p.stem
 
 
-def shard_rows(rows, shard):
-    """Contiguous blocks, so that merging is a concatenation in manifest order."""
+def shard_rows(rows, shard, mode="block", limit=None):
+    """mode "block": contiguous blocks; mode "mod": rows whose index is i modulo n (balanced when the manifest is ordered
+    by rank within species). `limit` keeps only the first `limit` rows before sharding. Merging restores manifest order."""
+    if limit:
+        rows = rows[:int(limit)]
     i, n = parse_shard(shard)
+    if mode == "mod":
+        return rows[i::n]
     per = math.ceil(len(rows) / n) if rows else 0
     return rows[i * per:(i + 1) * per]
 
@@ -637,7 +642,7 @@ def stage_images(args, variant=None):
     out = pathlib.Path(args.out)
     rows = read_manifest(args.manifest)
     name = eval_name(args.manifest, args.evalname)
-    part = shard_rows(rows, args.shard)
+    part = shard_rows(rows, args.shard, args.shard_mode, args.rows)
     i, n = parse_shard(args.shard)
     log("images: %s, eval %s, shard %d/%d, %d rows" % (entry["id"], name, i, n, len(part)))
     m = load(entry)
@@ -670,6 +675,7 @@ def stage_images(args, variant=None):
     for rid, why in bad[:50]:
         log("  skipped %s: %s" % (rid, why))
     stats = {"rows": len(part), "embedded": len(ids), "skipped": len(bad), "seconds": round(el, 1),
+             "shard_mode": args.shard_mode, "row_limit": args.rows,
              "photos_per_second": round(len(ids) / max(el, 1e-6), 2), "machine_cpus": os.cpu_count()}
     if variant is not None:
         stats["onnx_sha256"] = onnx_sha
@@ -930,12 +936,53 @@ def stage_export(args):
 # stage: merge shards and parts into one model directory
 
 
+def load_provenance(out):
+    """_files.json: for each published file, the run that wrote it and its sha256. Built from _made.txt when missing."""
+    out = pathlib.Path(out)
+    f = out / "_files.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    made = {}
+    if (out / "_made.txt").exists():
+        for line in (out / "_made.txt").read_text().splitlines():
+            if "=" in line:
+                k, v = line.split("=", 1)
+                made[k] = v
+    run = int(made.get("run_number") or 0)
+    prov = {}
+    for g in out.rglob("*"):
+        if g.is_file() and g.name not in ("_made.txt", "_files.json") and ".git" not in g.parts:
+            prov[str(g.relative_to(out))] = {"run": run, "sha256": sha256(g)}
+    return prov
+
+
+def save_provenance(out, prov):
+    out = pathlib.Path(out)
+    for k in list(prov):
+        if not (out / k).exists():
+            del prov[k]
+    (out / "_files.json").write_text(json.dumps(dict(sorted(prov.items())), indent=0) + "\n")
+
+
 def stage_merge(args):
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     rows = read_manifest(args.manifest) if args.manifest else []
     order = {r["id"]: k for k, r in enumerate(rows)}
     shards, tshards = {}, {}
+    run = int(args.run if args.run is not None else (os.environ.get("GITHUB_RUN_NUMBER") or 0))
+    prov = load_provenance(out)
+    kept = []
+
+    def newer(rel):
+        r = prov.get(str(rel), {}).get("run", -1)
+        if r > run:
+            kept.append((str(rel), r))
+            return True
+        return False
+
+    def wrote(rel):
+        prov[str(rel)] = {"run": run, "sha256": sha256(out / rel)}
     for part in args.parts:
         part = pathlib.Path(part)
         if not part.is_dir():
@@ -954,12 +1001,24 @@ def stage_merge(args):
                 base = rel.name.split(".shard-")[0]
                 tshards.setdefault(base, []).append(f)
                 continue
+            if newer(rel):
+                continue
             dest = out / rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(f, dest)
+            wrote(rel)
         c = part / "card.json"
         if c.exists():
-            update_card(out, json.loads(c.read_text(encoding="utf-8")))
+            patch = json.loads(c.read_text(encoding="utf-8"))
+            if prov.get("card.json", {}).get("run", -1) > run and (out / "card.json").exists():
+                # a later run wrote this card: keep every value it set, only add what it lacks
+                cur = json.loads((out / "card.json").read_text(encoding="utf-8"))
+                (out / "card.json").write_text(json.dumps(patch, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+                update_card(out, cur)
+                kept.append(("card.json (merged, later values kept)", prov["card.json"]["run"]))
+            else:
+                update_card(out, patch)
+                prov["card.json"] = {"run": run, "sha256": sha256(out / "card.json")}
     def shard_index(f):
         tail = f.name.split(".shard-")[1]
         return int(tail.split("-of-")[0])
@@ -971,12 +1030,16 @@ def stage_merge(args):
         if len(npys) != n_expected or len(jsons) != n_expected:
             log("text %s: %d of %d shards present; not merged" % (base, len(npys), n_expected))
             continue
+        if newer("text/%s.f16.npy" % base):
+            continue
         v = np.concatenate([np.load(f) for f in npys])
         meta = json.loads(jsons[0].read_text())
         meta["labels"] = [r for f in jsons for r in json.loads(f.read_text())["labels"]]
         (out / "text").mkdir(parents=True, exist_ok=True)
         np.save(out / "text" / ("%s.f16.npy" % base), v.astype(np.float16))
         (out / "text" / ("%s.labels.json" % base)).write_text(json.dumps(meta, indent=1, ensure_ascii=False) + "\n")
+        wrote("text/%s.f16.npy" % base)
+        wrote("text/%s.labels.json" % base)
         log("merged text %s: %d shards, %d rows" % (base, len(npys), len(v)))
 
     for base, fs in shards.items():
@@ -991,7 +1054,7 @@ def stage_merge(args):
             sk = npy.with_name(npy.name.replace(".f16.npy", ".skipped.json"))
             if sk.exists():
                 skipped += json.loads(sk.read_text())
-        if not allv:
+        if not allv or newer("images/%s.f16.npy" % base):
             continue
         v = np.concatenate(allv)
         idx = sorted(range(len(allid)), key=lambda k: order.get(allid[k], 10 ** 9 + k))
@@ -1001,10 +1064,148 @@ def stage_merge(args):
         np.save(out / "images" / ("%s.f16.npy" % base), v.astype(np.float16))
         (out / "images" / ("%s.ids.json" % base)).write_text(json.dumps(allid) + "\n")
         (out / "images" / ("%s.skipped.json" % base)).write_text(json.dumps(skipped, indent=0) + "\n")
+        for ext in (".f16.npy", ".ids.json", ".skipped.json"):
+            wrote("images/%s%s" % (base, ext))
         n_expected = int(npys[0].name.split("-of-")[1].split(".")[0])
         log("merged %s: %d of %d shards, %d rows, %d skipped" % (base, len(npys), n_expected, len(allid), len(skipped)))
         update_card(out, {"images": {base: {"rows_embedded": len(allid), "skipped": len(skipped),
                                             "shards_present": len(npys), "complete": len(npys) == n_expected}}})
+    for rel, r in kept:
+        log("kept %s: a later run (%d) published it; this is run %d" % (rel, r, run))
+    save_provenance(out, prov)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stage: repair (undo what an older run's publish overwrote, from a snapshot taken just before it)
+
+
+def stage_repair(args):
+    snap, cur, out = pathlib.Path(args.snapshot), pathlib.Path(args.current), pathlib.Path(args.out)
+    if out.exists():
+        shutil.rmtree(out)
+    shutil.copytree(cur, out)
+    sprov = load_provenance(snap)
+    restored, added = [], []
+    for f in snap.rglob("*"):
+        if not f.is_file():
+            continue
+        rel = str(f.relative_to(snap))
+        if rel in ("_made.txt", "_files.json", "card.json"):
+            continue
+        g = out / rel
+        if not g.exists() or sha256(g) != sha256(f):
+            g.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(f, g)
+            restored.append(rel)
+    if (snap / "card.json").exists():
+        if not (out / "card.json").exists():
+            shutil.copy(snap / "card.json", out / "card.json")
+        update_card(out, json.loads((snap / "card.json").read_text(encoding="utf-8")))
+    prov = {}
+    for g in out.rglob("*"):
+        if not g.is_file():
+            continue
+        rel = str(g.relative_to(out))
+        if rel in ("_made.txt", "_files.json"):
+            continue
+        if rel in sprov and (snap / rel).exists() and rel != "card.json":
+            prov[rel] = sprov[rel]
+        else:
+            prov[rel] = {"run": int(args.run) if rel == "card.json" else int(args.older_run), "sha256": sha256(g)}
+            if not (snap / rel).exists():
+                added.append(rel)
+    save_provenance(out, prov)
+    rep = {"restored": restored, "kept_from_older_run": added}
+    (pathlib.Path(args.report)).write_text(json.dumps(rep, indent=1) + "\n")
+    log("repair: restored %d files, kept %d new files from run %s" % (len(restored), len(added), args.older_run))
+    for r in restored:
+        log("  restored " + r)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stage: ship (name the one file meant for shipping, so nobody depends on an alias)
+
+
+def stage_ship(args):
+    out = pathlib.Path(args.out)
+    f = out / args.file
+    if not f.exists():
+        raise SystemExit("no %s" % f)
+    update_card(out, {"ship": args.file, "ship_sha256": sha256(f), "ship_bytes": f.stat().st_size,
+                      "ship_note": "the ONNX file meant for the page; vision.int8.onnx is only an alias and may change"})
+    log("ship: %s %s" % (args.file, sha256(f)))
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# stages: pixels and wasm-collect (the shipped path: onnxruntime-web's WASM build fed with Pillow-prepared pixels)
+
+
+def stage_pixels(args):
+    """Writes the model's own preprocessing up to (not including) rescaling and normalization: uint8 [N,3,S,S], the
+    Pillow resize and centre crop of transformers' CLIPImageProcessor, plus ids.json and norm.json (mean, std)."""
+    entry = model_entry(args.model)
+    if entry["loader"] != "transformers":
+        raise SystemExit("pixels: only transformers image processors are reproduced here")
+    from transformers import AutoImageProcessor
+
+    ip = AutoImageProcessor.from_pretrained(entry["source"])
+    rows = read_manifest(args.manifest)
+    part = shard_rows(rows, args.shard, args.shard_mode, args.rows)
+    ok, bad = iter_photos(part, args.photos)
+    od = pathlib.Path(args.pix)
+    od.mkdir(parents=True, exist_ok=True)
+    ids = []
+    with open(od / "u8.bin", "wb") as fh:
+        for rid, path in ok:
+            try:
+                im = open_rgb(path)
+            except Exception as e:
+                bad.append((rid, "unreadable: %s" % type(e).__name__))
+                continue
+            x = ip(images=[im], do_rescale=False, do_normalize=False, return_tensors="np")["pixel_values"][0]
+            u = np.rint(x).clip(0, 255).astype(np.uint8)
+            if np.abs(u.astype(np.float32) - x).max() > 1e-3:
+                raise SystemExit("pixels: processor output is not whole numbers before rescaling")
+            fh.write(u.tobytes())
+            ids.append(rid)
+    size = int(x.shape[-1]) if ids else None
+    (od / "ids.json").write_text(json.dumps(ids))
+    (od / "skipped.json").write_text(json.dumps(bad))
+    (od / "norm.json").write_text(json.dumps({"mean": [float(v) for v in ip.image_mean], "std": [float(v) for v in ip.image_std],
+                                              "size": size, "layout": "uint8 NCHW, RGB", "count": len(ids)}))
+    log("pixels: %d photos, %d skipped, size %s" % (len(ids), len(bad), size))
+
+
+def stage_wasm_collect(args):
+    entry = model_entry(args.model)
+    out = pathlib.Path(args.out)
+    pix = pathlib.Path(args.pix)
+    ids = json.loads((pix / "ids.json").read_text())
+    bad = json.loads((pix / "skipped.json").read_text())
+    lat = json.loads(pathlib.Path(args.lat).read_text())
+    d = lat["width"]
+    emb = np.fromfile(args.emb, dtype=np.float32).reshape(-1, d)
+    assert len(emb) == len(ids), (len(emb), len(ids))
+    i, n = parse_shard(args.shard)
+    name = eval_name(args.manifest, args.evalname) + ".wasm-" + args.variant
+    suffix = "" if n == 1 else ".shard-%d-of-%d" % (i, n)
+    save_f16(out / "images" / ("%s%s.f16.npy" % (name, suffix)), emb)
+    (out / "images" / ("%s%s.ids.json" % (name, suffix))).write_text(json.dumps(ids) + "\n")
+    (out / "images" / ("%s%s.skipped.json" % (name, suffix))).write_text(json.dumps(bad, indent=0) + "\n")
+    ms = np.array(lat["ms"], dtype=np.float64)
+    (out / "images" / ("%s.latency-%d-of-%d.json" % (name, i, n))).write_text(json.dumps(
+        {"ids": ids, "ms": [round(float(v), 3) for v in ms], "about": "session.run wall time per photo, batch 1"}) + "\n")
+    q = lambda p: round(float(np.percentile(ms, p)), 2) if len(ms) else None
+    stats = {"rows": len(ids) + len(bad), "embedded": len(ids), "skipped": len(bad),
+             "latency_ms": {"mean": round(float(ms.mean()), 2) if len(ms) else None, "p50": q(50), "p90": q(90),
+                            "p99": q(99), "min": q(0), "max": q(100)},
+             "onnx": args.onnx_name, "onnx_sha256": args.onnx_sha, "runtime": lat.get("runtime"),
+             "threads": lat.get("threads"), "node": lat.get("node"), "machine_cpus": os.cpu_count(),
+             "pixels": "transformers CLIPImageProcessor resize (Pillow, bicubic) and centre crop to uint8; then (v/255 - mean)/std in float32 in JavaScript"}
+    update_card(out, {"images": {name: {"shards": n, "shard_%d" % i: stats,
+                                        "via": "onnxruntime-web %s WASM, %s thread(s), Node %s" % (lat.get("runtime"), lat.get("threads"), lat.get("node"))}},
+                      "stages": ["images-wasm-" + args.variant]})
+    log("wasm %s: %d embedded, latency %s" % (name, len(ids), json.dumps(stats["latency_ms"])))
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -1030,6 +1231,8 @@ def main():
         i.add_argument("--shard")
         i.add_argument("--evalname")
         i.add_argument("--batch", type=int, default=32)
+        i.add_argument("--rows", type=int, help="use only the first ROWS rows of the manifest")
+        i.add_argument("--shard-mode", choices=["block", "mod"], default="block")
         i.add_argument("--out", required=True)
         if name == "images-onnx":
             i.add_argument("--variant", choices=["int8", "int8-per-tensor", "int8-per-channel", "fp16", "fp32"], required=True)
@@ -1047,7 +1250,41 @@ def main():
     g.add_argument("--model", required=True)
     g.add_argument("--manifest")
     g.add_argument("--out", required=True)
+    g.add_argument("--run", type=int, help="this run's number (default: $GITHUB_RUN_NUMBER)")
     g.add_argument("parts", nargs="*")
+    rp = sub.add_parser("repair")
+    rp.add_argument("--snapshot", required=True)
+    rp.add_argument("--current", required=True)
+    rp.add_argument("--out", required=True)
+    rp.add_argument("--older-run", required=True)
+    rp.add_argument("--run", required=True)
+    rp.add_argument("--report", required=True)
+    pv = sub.add_parser("provenance")
+    pv.add_argument("--out", required=True)
+    sh = sub.add_parser("ship")
+    sh.add_argument("--model", required=True)
+    sh.add_argument("--file", required=True)
+    sh.add_argument("--out", required=True)
+    px = sub.add_parser("pixels")
+    px.add_argument("--model", required=True)
+    px.add_argument("--manifest", required=True)
+    px.add_argument("--photos", required=True)
+    px.add_argument("--shard")
+    px.add_argument("--rows", type=int)
+    px.add_argument("--shard-mode", choices=["block", "mod"], default="block")
+    px.add_argument("--pix", required=True)
+    wc = sub.add_parser("wasm-collect")
+    wc.add_argument("--model", required=True)
+    wc.add_argument("--variant", required=True)
+    wc.add_argument("--manifest", required=True)
+    wc.add_argument("--evalname")
+    wc.add_argument("--shard")
+    wc.add_argument("--pix", required=True)
+    wc.add_argument("--emb", required=True)
+    wc.add_argument("--lat", required=True)
+    wc.add_argument("--onnx-name")
+    wc.add_argument("--onnx-sha")
+    wc.add_argument("--out", required=True)
     args = ap.parse_args()
     if args.stage == "text":
         if args.labelset == "species" and not args.species_json:
@@ -1061,6 +1298,16 @@ def main():
         stage_export(args)
     elif args.stage == "merge":
         stage_merge(args)
+    elif args.stage == "ship":
+        stage_ship(args)
+    elif args.stage == "repair":
+        stage_repair(args)
+    elif args.stage == "provenance":
+        save_provenance(args.out, load_provenance(args.out))
+    elif args.stage == "pixels":
+        stage_pixels(args)
+    elif args.stage == "wasm-collect":
+        stage_wasm_collect(args)
 
 
 if __name__ == "__main__":
