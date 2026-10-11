@@ -36,7 +36,7 @@ Goal: the page itself tells a cat from a heron from an oak, with no network, in 
 - [x] Measure the kind of eye on held-out local research-grade photos, per kind, with the confusion tables. *(`docs/EVAL.md`, `docs/eval/model-<id>.md`.)* In build 9 the kind is right for 89.1% (88.2 to 90.1) of the 4,197 test photos, and for 96.9% (1,201) of 1,240 COCO test photos of people, pets, grazing animals and rooms (`docs/eval/decision-pocket-v3.json`).
 - [ ] Measure the time a photo takes on a phone. It has been measured only on build machines (`docs/LOG.md`, 03:40).
 
-Still open: the time a photo takes on a phone is unmeasured. `docs/EVAL.md` is behind build 9: its rows called "live" describe the pocket slot of build 7, some of its naming figures predate the rule that a species is named only under an asserted kind, and four of its figures were rounded twice (`docs/eval/audit.md`).
+Still open: the line above that carries no tick. `docs/EVAL.md` is behind build 9: its rows called "live" describe the pocket slot of build 7, some of its naming figures predate the rule that a species is named only under an asserted kind, and four of its figures were rounded twice (`docs/eval/audit.md`).
 
 ## Phase 3: species (the naturalist)
 
@@ -55,8 +55,8 @@ Still open:
 - No phone has held the larger model, and whether a phone's browser will keep a 310 MB file and find the memory to run it is unknown.
 - The page should load the larger model in its lighter form, with the weights as a data file beside a small graph file; the worker's side is written as `ci/lab/patches/worker-external-data.patch`, and the page's side is not.
 - In WebKit, a reload while the larger model is arriving makes the page fetch a kept part again and then fail with "a part is no longer kept on this device" (`runs/engines/38-linux-firefox-webkit/rec/resume-webkit.json`). Chromium resumes in the same probe.
-- After a reload with the larger model kept, the first photo waited 25 to 42 seconds for the pocket recognizer's answer in Chromium, where it usually comes in about a second (`docs/ENGINES.md`; `runs/engines/40-big-linux/big-chromium.json`). The pocket recognizer should answer first, in its usual time, whether or not the larger model is kept.
-- With the larger model on the device, every photo the pocket recognizer called alive should get its second look, those the small model named among them; where its name differs it should replace the small model's, and its "not sure" should never remove a name. A review on 11 October saw a name from the pocket recognizer stand with no second look, and this is open.
+- After a reload with the larger model kept, the first photo waited 25 to 42 seconds for the pocket recognizer's answer in Chromium, where it otherwise comes in under a second on build machines (`docs/ENGINES.md`; `runs/engines/40-big-linux/big-chromium.json`; `docs/LOG.md`, 03:40). The pocket recognizer should answer first, in its usual time, whether or not the larger model is kept.
+- With the larger model on the device, it should look at every photo the pocket recognizer called alive, also those the small model named. Where its name differs, its name should replace the small model's, and its "not sure" should never remove a name. A review on 11 October saw a name from the pocket recognizer stand with no second look; this is open.
 - The species service has no home, and `service.json`, which would point the page at it, is absent.
 
 ## Phase 4: a regional pocket model
@@ -64,7 +64,7 @@ Still open:
 Goal: species-level recognition on the device, offline, for the region.
 
 - [x] Gather training photos. `train/alachua-pre2025` holds 84,808 photos of 5,467 species, all dated before 2025, read from iNaturalist's open-data files (commit `2850053`; `data/train/alachua-pre2025/SUMMARY.md`; the manifest is on `pub/data-alachua`).
-- [x] Fit heads on the pocket encoder's vectors of those photos, and measure them on the held-out photos. *(evaluation run 25, `runs/eval/25/` on `ci`; the figures are under Phase 2)*
+- [x] Fit heads on the pocket encoder's vectors of those photos, and measure them on the held-out photos. *(evaluation run 25, `runs/eval/25/` on `ci`; the heads under the licence rule in `docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json`)*
 - [x] Ship heads fitted under the licence rule of 11 October, with the list of photos they were fitted on published beside them as the attribution. *(build 9, commit `013bb77`: heads from `pub/heads-pocket-v3` at `f0c2544`, fitted on 83,348 photos and chosen by a rule fixed before their numbers existed, `docs/eval/decision-pocket-v3.json`; the list is `fitted_on.csv` there, `docs/LICENCES.md`)* On the test photos they name a species for 20.1% and are right for 93.3% of those (788 of 845), where the heads of build 8 named 13.3% and were right for 92.3% (`docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json`, `docs/eval/audit.md`).
 - [ ] Teach a small encoder from BioCLIP 2 (distillation) on openly licensed iNaturalist photos of the region's species.
 - [ ] Write a model card for the shipped slot, stating its data, licences, accuracy by group and known failures. The slot manifests carry an `evaluation` block, and `docs/eval/model-<id>.md` gives breakdowns by kind and the commonest mistakes for each model measured.
@@ -84,8 +84,8 @@ Still open: every line of this phase. Thin app shells around the built page ran 
 
 1. An iPhone comes first. The page has never run on one, and nobody knows yet whether a phone's browser will keep the 310 MB model and run it, or how long the pocket recognizer takes on a phone. On build machines the Apple and WebKit browsers reached 1,688 to 2,598 MiB while running the larger model, and in WebKit a reload during its download breaks it.
 2. A server for phones that cannot hold the larger model comes next. The service in `service/` was proven on a build machine and has not been deployed, the page reads its address from `service.json` at the site's root (`docs/CONTRACTS.md`), and a free home on Hugging Face becomes possible at about 10 November.
-3. A wider set of photos with nothing alive in them follows. The extra set's rooms are COCO photos, and in the page before build 9 shipped the pocket recognizer called a brick wall a reptile and named a photo of old coins as a fungus (`docs/LOG.md`, 05:52).
-4. Domestic animals and cultivated plants come into the species list. The list was built from records of wild things, so it holds no dog, cattle or sheep, most houseplants or common garden flowers, and every name the app gives one of them is wrong; on COCO photos the pocket recognizer named 43 of 73 cows, each wrongly (`docs/eval/audit.md`, `docs/eval/pets-livestock.json`).
+3. A wider set of photos with nothing alive in them comes third. The only such photos the recognizers were tuned and tested on are COCO's rooms, and in the page before build 9 shipped the pocket recognizer called a brick wall a reptile and named a photo of old coins as a fungus (`docs/LOG.md`, 05:52).
+4. Then domestic animals and cultivated plants join the species list. The list was built from records of wild things, so it holds no dog, cattle or sheep, most houseplants or common garden flowers, and every name the app gives one of them is wrong; on COCO photos the pocket recognizer named 43 of 73 cows, each wrongly (`docs/eval/audit.md`, `docs/eval/pets-livestock.json`).
 5. A student model small enough for every phone follows. Distilling BioCLIP 2 into a small encoder needs a graphics card, and the build machines used so far have none.
 6. More regions come after that. The species list, the evaluation photos and the training photos are built for one region by the scripts in `tools/species/`, and every number so far holds for Alachua County alone.
 7. The game comes last, once its rule is decided.
