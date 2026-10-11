@@ -1,0 +1,72 @@
+
+=== 08:46:23 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+arm64
+7516192768
+Xcode 26.6 Build version 17F113 
+simulator SDK 26.5
+
+=== 08:46:26 boot an iPhone simulator now, it takes a while
+simulator: 88931AEA-62E6-447F-8697-DCE00A671384 com.apple.CoreSimulator.SimRuntime.iOS-26-5 iPhone 17
+
+=== 08:46:32 build the page
+build 8 | index.html 214821 bytes | artifact 212243 bytes | selftest.js 44338 bytes
+build ok
+
+=== 08:47:09 compile the shell with swiftc for the simulator
+bundle: 44 files, 71804 kB in /Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app/www
+/Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app: replacing existing signature
+codesign (ad hoc): exit 0
+app: 71992 kB
+zipped like an .ipa: 54406286 bytes
+
+=== 08:48:51 install and open the app
+Device already booted, nothing to do.
+
+install: exit 0
+org.seenback.shell: 18732
+screenshot 1-open
+{"st":null,"sb":true,"screen":"intro","src":"none","href":"app://localhost/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
+
+=== 08:54:35 2. the page's self-test inside the app (app://localhost), with the shipped pocket recognizer on four photos
+org.seenback.shell: 20005
+screenshot 2-selftest-011s
+screenshot 2-selftest-025s
+self-test done after about 32 s
+screenshot 2-selftest-final
+address: app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg | secure context: True | crossOriginIsolated: False
+user agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+self-test done: True ok: True checks: 98 phase: done
+fails: []
+webgl2: True float: True renderer: Apple GPU engineError: None
+rec: {"slot": "models/pocket", "photos": [{"name": "heron.png", "bytes": 29625, "decodeMs": 57, "shown": "900x1200", "wallMs": 807, "from": "900x1200", "ms": {"load": 0, "pre": 44, "run": 638, "post": 28}, "kind": "wader", "kinds3": [["wader", 0.3825], ["bird", 0.25670000000000004], ["dog", 0.0635]], "head3": [["bird", 0.3617], ["wader", 0.251], ["dog", 0.0908]], "species1": ["Eudocimus albus", 0.187]}, {"name": "portrait.jpg", "bytes": 46865, "decodeMs": 60, "shown": "960x1280", "wallMs": 730, "from": "1200x1600", "ms": {"load": 0, "pre": 27, "run": 639, "post": 8}, "kind": "person", "kinds3": [["person", 0.4903], ["other", 0.10859999999999999], ["bird", 0.0867]], "head3": [["person", 0.4903], ["dog", 0.1039], ["bird", 0.1034]], "species1": ["Fulica americana", 0.168]}, {"name": "wall.png", "bytes": 4614, "decodeMs": 23, "shown": "1024x768", "wallMs": 695, "from": "1024x768", "ms": {"load": 0, "pre": 21, "run": 647, "post": 7}, "kind": "none", "kinds3": [["none", 0.4707], ["insect", 0.1195], ["dog", 0.0711]], "head3": [["none", 0.4707], ["dog", 0.1015], ["bird", 0.0787]], "species1": ["Idaea demissaria", 0.092]}, {"name": "garden.jpg", "bytes": 257177, "decodeMs": 39, "shown": "1280x960", "wallMs": 599, "from": "1600x1200", "ms": {"load": 0, "pre": 28, "run": 515, "post": 7}, "kind": "plant", "kinds3": [["plant", 0.3285], ["none", 0.2614], ["dog", 0.08960000000000001]], "head3": [["none", 0.2614], ["plant", 0.1791], ["dog", 0.128]], "species1": ["Torenia crustacea", 0.108]}], "readyMs": 1722, "about": {"state": "ready", "why": "", "fail": "", "model": "tinyclip-39m-16", "rule": "mix", "trained": true, "backend": "wasm", "threads": 1, "loadMs": 1722, "start": {"vectors": 74, "session": 745, "warm": 622}, "got": 61953585, "total": 61953585, "slot": "models/pocket/manifest.json", "have": "", "keptBytes": 0, "bytes": 40978137, "getFail": ""}, "meanRunMs": 640}
+keys: ['build', 'checks', 'done', 'env', 'fails', 'motion', 'ms', 'ok', 'phase', 'pose', 'posing', 'rec', 'still', 'v']
+
+=== 08:55:16 3. the same app pointed at the page served from this Mac (http://127.0.0.1:8781), for comparison
+8781 -> 200
+org.seenback.shell: 24284
+screenshot 3-served-012s
+screenshot 3-served-025s
+self-test done after about 38 s
+screenshot 3-served-final
+address: http://127.0.0.1:8781/index.html?selftest=1&nosw=1&report=/report/ios-served&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg | secure context: True | crossOriginIsolated: False
+user agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+self-test done: True ok: True checks: 98 phase: done
+fails: []
+webgl2: True float: True renderer: Apple GPU engineError: None
+rec: {"slot": "models/pocket", "photos": [{"name": "heron.png", "bytes": 29625, "decodeMs": 54, "shown": "900x1200", "wallMs": 956, "from": "900x1200", "ms": {"load": 0, "pre": 64, "run": 774, "post": 29}, "kind": "wader", "kinds3": [["wader", 0.3825], ["bird", 0.25670000000000004], ["dog", 0.0635]], "head3": [["bird", 0.3617], ["wader", 0.251], ["dog", 0.0908]], "species1": ["Eudocimus albus", 0.187]}, {"name": "portrait.jpg", "bytes": 46865, "decodeMs": 57, "shown": "960x1280", "wallMs": 732, "from": "1200x1600", "ms": {"load": 0, "pre": 40, "run": 627, "post": 7}, "kind": "person", "kinds3": [["person", 0.4903], ["other", 0.10859999999999999], ["bird", 0.0867]], "head3": [["person", 0.4903], ["dog", 0.1039], ["bird", 0.1034]], "species1": ["Fulica americana", 0.168]}, {"name": "wall.png", "bytes": 4614, "decodeMs": 17, "shown": "1024x768", "wallMs": 665, "from": "1024x768", "ms": {"load": 0, "pre": 13, "run": 632, "post": 6}, "kind": "none", "kinds3": [["none", 0.4707], ["insect", 0.1195], ["dog", 0.0711]], "head3": [["none", 0.4707], ["dog", 0.1015], ["bird", 0.0787]], "species1": ["Idaea demissaria", 0.092]}, {"name": "garden.jpg", "bytes": 257177, "decodeMs": 46, "shown": "1280x960", "wallMs": 749, "from": "1600x1200", "ms": {"load": 0, "pre": 32, "run": 652, "post": 8}, "kind": "plant", "kinds3": [["plant", 0.3285], ["none", 0.2614], ["dog", 0.08960000000000001]], "head3": [["none", 0.2614], ["plant", 0.1791], ["dog", 0.128]], "species1": ["Torenia crustacea", 0.108]}], "readyMs": 3155, "about": {"state": "ready", "why": "", "fail": "", "model": "tinyclip-39m-16", "rule": "mix", "trained": true, "backend": "wasm", "threads": 1, "loadMs": 3155, "start": {"vectors": 55.99999999999999, "session": 720.0000000000001, "warm": 580.9999999999999}, "got": 61953585, "total": 61953585, "slot": "models/pocket/manifest.json", "have": "", "keptBytes": 0, "bytes": 40978137, "getFail": ""}, "meanRunMs": 709}
+keys: ['build', 'checks', 'done', 'env', 'fails', 'motion', 'ms', 'ok', 'phase', 'pose', 'posing', 'posted', 'rec', 'still', 'v']
+
+=== 08:56:40 the app's own log (console errors and warnings, loads it could not serve)
+       9 /Users/runner/work/seen-back/seen-back/out/ios/app-log.txt
+1791708856.6 open app://localhost/index.html
+1791708856.9 launched
+1791708866.1 page finished app://localhost/index.html
+1791708878.2 open app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791708878.2 launched
+1791708879.4 page finished app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791708958.9 open http://127.0.0.1:8781/index.html?selftest=1&nosw=1&report=/report/ios-served&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791708959.1 launched
+1791708961.2 page finished http://127.0.0.1:8781/index.html?selftest=1&nosw=1&report=/report/ios-served&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
