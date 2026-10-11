@@ -7,7 +7,7 @@ const URL = 'http://127.0.0.1:' + PORT + '/index.html?side=420&nosw=1&rec=test/r
 const noCamera = () => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError')); };
 const look = (page) => page.evaluate(() => { const b = window.__seenBack, $ = (i) => document.getElementById(i);
   return { screen: b && b.S.screen, engine: b && b.state(), beginDisabled: $('btnBegin') && $('btnBegin').disabled, introFine: $('introFine') && $('introFine').textContent,
-    askAnimalHidden: $('askAnimal') && $('askAnimal').hidden, msg: $('msg') && $('msg').textContent, mediaDevices: !!navigator.mediaDevices, touch: 'ontouchstart' in window, ua: navigator.userAgent.slice(0, 120) }; }).catch((e) => ({ error: e.message }));
+    askAnimalHidden: $('askAnimal') && $('askAnimal').hidden, msg: $('msg') && $('msg').textContent, mediaDevices: !!navigator.mediaDevices, gum: navigator.mediaDevices ? String(navigator.mediaDevices.getUserMedia).replace(/\s+/g, ' ').slice(0, 60) : null, touch: 'ontouchstart' in window, ua: navigator.userAgent.slice(0, 120) }; }).catch((e) => ({ error: e.message }));
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   const out = { engine: ENGINE }, browser = await pw[ENGINE].launch(); out.version = browser.version();

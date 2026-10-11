@@ -16,6 +16,25 @@ step "build, with ci/engines/patches/build-selftest-on-demand.patch where build.
 if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/build-selftest-on-demand.patch 2>/dev/null; then git apply ci/engines/patches/build-selftest-on-demand.patch && echo "build.py patched"; fi
 python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 
+case "${GITHUB_REF_NAME:-}" in run/engines/mac-rec*) ONLY_REC=1 ;; *) ONLY_REC=0 ;; esac
+if [ "$ONLY_REC" = 1 ]; then                    # a branch run/engines/mac-rec*: only check_rec.js in WebKit, with the patch for the camera refusal
+  step "check_rec.js only (${GITHUB_REF_NAME}): its server on 8782, Playwright WebKit"
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
+  sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html
+  mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
+  export NODE_PATH="$PW/node_modules"
+  node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -3
+  step "begin_probe.js: what Begin does in macOS WebKit, and whether the init script's camera refusal took"
+  BROWSER=webkit PORT=8782 OUT="$OUT/rec" limit 120 node test/engines/begin_probe.js > "$OUT/rec/begin-probe-webkit.json" 2>&1; echo "begin probe: exit $?"; head -c 2500 "$OUT/rec/begin-probe-webkit.json"
+  step "check_rec.js, every check, stand-in model, with ci/engines/patches/check_rec-webkit-camera-refusal.patch: webkit (macOS)"
+  git apply ci/engines/patches/check_rec-webkit-camera-refusal.patch && echo "patch applied"
+  t0=$(date +%s); BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit-patched.json" 2> "$OUT/rec/check_rec-webkit-patched.err.txt"
+  echo "check_rec webkit (patched): exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit-patched.json"; tail -c 600 "$OUT/rec/check_rec-webkit-patched.err.txt"
+  git checkout -q test/rec/check_rec.js; rm -rf test/rec/shots
+  step "summary"; python3 -I ci/engines/summarize.py "$OUT" macos
+  exit 0
+fi
+
 step "iPhone simulator: boot it now, it takes a while"
 UDID=$(xcrun simctl list devices available -j | python3 -I -c "
 import json, sys
