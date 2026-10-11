@@ -37,6 +37,18 @@ d=json.load(open(sys.argv[1])); print('phone', d.get('phone'), '| offline', json
   done
   exit 0
 fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-svc*)    # only check_rec.js service, with ci/engines/patches/check_rec-quiet-cors.patch (each engine's own words for a refused CORS request)
+  git apply ci/engines/patches/check_rec-quiet-cors.patch && echo "patch applied"
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    step "check_rec.js service, patched: $B"
+    if [ "$B" = firefox ]; then NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 \
+      timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"
+    else BROWSER=$B PORT=8782 timeout 900 node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"; fi
+    echo "check_rec service $B: exit $?"; tail -1 "$OUT/rec/svc-$B.json"; tail -c 300 "$OUT/rec/svc-$B.err.txt"
+  done
+  git checkout -q test/rec/check_rec.js; exit 0 ;;
+esac
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
 RECQ="&rec=ci-rec/slot&recphotos=$PH&recexpect=ci-rec/slot/expect.json"
