@@ -23,7 +23,7 @@ Every line the app shows about an animal's sight carries one of four grades: mea
 
 ## What the page claims for each kind of eye, and what backs it
 
-Each line of `src/cam.a.js` graded as measured (m) or measured in a relative or a wider group (g), with the row above that backs it. Lines graded as a guess or as left out are named under the last column.
+The table gives each line of `src/cam.a.js` graded as measured (m) or as measured in a relative or a wider group (g), with the row above that backs it. Lines graded as a guess or as left out are named under the last column.
 
 | Kind | Measured lines, and their source | Guesses and lines left out |
 |---|---|---|
@@ -48,15 +48,17 @@ Each line of `src/cam.a.js` graded as measured (m) or measured in a relative or 
 
 A check of `src/cam.a.js` against the table on 11 October found these. Each needs a source or a change of words.
 
-- Deer: the horizontal pupil "cuts glare from above".
-- Alligator: the vertical slit pupil, graded as measured in a relative.
-- Other birds: "Birds follow flicker at 40 to 140 a second, the faster movers higher". The rows above give a pigeon's 143 and the raptors' 77 to 129, and nothing for 40.
-- Insects: "Flies and dragonflies follow flicker past 100 a second".
-- Bees: the honeybee's 200 a second "in bright light".
-- Hawks: "against your 50 to 60", where the other lines about pace say that you stop near 60.
-- Plants: "A plant has nothing to focus light", graded as measured in a wider group.
+- Deer: the page says that the horizontal pupil "cuts glare from above".
+- Alligator: the page grades the vertical slit pupil as measured in a relative.
+- Other birds: the page says "Birds follow flicker at 40 to 140 a second, the faster movers higher". The rows above give a pigeon's 143 and the raptors' 77 to 129, and nothing for 40.
+- Insects: the page says "Flies and dragonflies follow flicker past 100 a second".
+- Bees: the page gives the honeybee's 200 a second "in bright light", a condition the row above does not state.
+- Hawks: the page says "against your 50 to 60", where the other lines about pace say that you stop near 60.
+- Plants: the page grades "A plant has nothing to focus light" as measured in a wider group.
 
 ## Entered from memory, still unchecked
+
+These were entered from memory and have not been checked against a source:
 
 - The two-cone colour arithmetic (Viénot, Brettel and Mollon, 1999).
 - Two cone types in dogs.
