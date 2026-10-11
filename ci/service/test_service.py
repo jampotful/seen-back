@@ -33,11 +33,22 @@ def now_ms(t0):
     return int(round((time.perf_counter() - t0) * 1000))
 
 
-def call(base, data, origin=PAGE_ORIGIN, timeout=240):
-    """Gradio's two steps, as a browser makes them. Returns (result or None, info)."""
+WIRE = []
+
+
+def _hdrs(h):
+    keep = ("content-type", "access-control-allow-origin", "access-control-allow-credentials", "vary", "cache-control",
+            "content-length", "x-accel-buffering", "connection")
+    return {k: v for k, v in h.items() if k.lower() in keep}
+
+
+def call(base, data, origin=PAGE_ORIGIN, timeout=240, record=None):
+    """Gradio's two steps, as a browser makes them. Returns (result or None, info). With record set, the exchange's
+    status lines, main headers and bodies (the photo shortened) are kept in WIRE under that name."""
     url = base.rstrip("/") + "/gradio_api/call/identify"
     t0 = time.perf_counter()
     info = {}
+    raw_lines = []
     try:
         r = S.post(url, json={"data": data}, headers={"Origin": origin, "Content-Type": "application/json"}, timeout=60)
     except requests.RequestException as e:
@@ -54,6 +65,10 @@ def call(base, data, origin=PAGE_ORIGIN, timeout=240):
     except Exception:
         info["post_body"] = r.text[:300]
         return None, info
+    if record:
+        shown = [(d[:40] + "...(%d characters)" % len(d)) if isinstance(d, str) and len(d) > 60 else d for d in data]
+        WIRE.append("### %s\n> POST %s\n> Origin: %s\n> Content-Type: application/json\n> %s\n< %d %s\n< %s\n"
+                    % (record, url, origin, json.dumps({"data": shown}), r.status_code, json.dumps(_hdrs(r.headers)), r.text))
     result, event, events = None, None, []
     try:
         g = S.get(url + "/" + eid, headers={"Origin": origin, "Accept": "text/event-stream"}, stream=True, timeout=(20, timeout))
@@ -61,6 +76,8 @@ def call(base, data, origin=PAGE_ORIGIN, timeout=240):
         info["get_acao"] = g.headers.get("access-control-allow-origin")
         info["get_type"] = g.headers.get("content-type")
         for line in g.iter_lines(decode_unicode=True):
+            if record:
+                raw_lines.append(line if line is not None else "")
             if not line:
                 continue
             if line.startswith("event:"):
@@ -76,6 +93,9 @@ def call(base, data, origin=PAGE_ORIGIN, timeout=240):
                     info["error_event"] = payload[:300]
                     break
         g.close()
+        if record:
+            WIRE.append("> GET %s/%s\n> Origin: %s\n> Accept: text/event-stream\n< %d %s\n%s\n"
+                        % (url, eid, origin, g.status_code, json.dumps(_hdrs(g.headers)), "\n".join(raw_lines)))
     except requests.RequestException as e:
         info["get_error"] = type(e).__name__
     info["events"] = events
@@ -218,7 +238,7 @@ def main():
             break
     answers = []
     for n, (row, b64, nbytes, size, resized) in enumerate(photos):
-        result, info = call(base, [b64, int(row["month"]), "us-fl-alachua", 5])
+        result, info = call(base, [b64, int(row["month"]), "us-fl-alachua", 5], record="a photo" if n == 0 else None)
         ok = isinstance(result, dict) and "species" in result
         top = result["species"][0] if ok and result["species"] else {}
         keys5 = [s.get("key") for s in result["species"]] if ok else []
@@ -284,7 +304,7 @@ def main():
     ]
     ref = {}
     for want, data in cases:
-        result, info = call(base, data)
+        result, info = call(base, data, record=("a refusal (%s)" % want) if want == "not_image" else None)
         code = result.get("code") if isinstance(result, dict) else None
         ref[want] = {"code": code, "error": result.get("error") if isinstance(result, dict) else None,
                      "ms_total": info.get("ms_total"), "post_status": info.get("post_status"), "error_event": info.get("error_event")}
@@ -302,6 +322,7 @@ def main():
     say("checks: " + ", ".join("%s %s" % (k, "pass" if v else "FAIL") for k, v in res["checks"].items()))
     json.dump(res, open(os.path.join(a.out, "results.json"), "w"), indent=1)
     open(os.path.join(a.out, "summary.txt"), "w").write("\n".join(lines) + "\n")
+    open(os.path.join(a.out, "wire.txt"), "w").write("Exchanges exactly as made and received (photo strings shortened)\n\n" + "\n".join(WIRE))
     raise SystemExit(0 if res["passed"] else 1)
 
 

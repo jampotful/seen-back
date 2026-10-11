@@ -73,6 +73,13 @@ jobs:
           rc=${PIPESTATUS[0]}
           echo "server start to end of test: $(( $(date +%s) - start )) s; test exit $rc" | tee -a out/log.txt
           kill "$pid" 2>/dev/null || true
+          sleep 3
+          # the same test with the encoder held to two threads, the core count of a free CPU Space
+          SB_THREADS=2 GRADIO_SERVER_PORT=7861 python service/app.py > out/server-2threads.log 2>&1 &
+          pid2=$!
+          python ci/service/test_service.py --base http://127.0.0.1:7861 --manifest data/eval/alachua-2025/manifest.csv \
+            --out out/local-2threads --wait 600 2>&1 | tail -4 | tee -a out/log.txt
+          kill "$pid2" 2>/dev/null || true
           ok=$(python -c "import json;r=json.load(open('out/local/results.json'));c=r['checks'];print('yes' if c.get('health') and c.get('photos_answered') else 'no')" 2>/dev/null || echo no)
           echo "ok=$ok" >> "$GITHUB_OUTPUT"
           echo "deploy gate (health and photos answered): $ok" | tee -a out/log.txt
