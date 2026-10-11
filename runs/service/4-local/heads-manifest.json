@@ -1,0 +1,26 @@
+{
+ "id": "bioclip2-l14",
+ "source": "hf-hub:imageomics/bioclip-2",
+ "source_url": "https://huggingface.co/imageomics/bioclip-2",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE",
+ "region": "us-fl-alachua",
+ "region_name": "Alachua County, Florida",
+ "width": 768,
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5911,
+  "rowset": "species_sci",
+  "sha256": "1d58a9f118897bde9b0e51015e5d8dd3ebb9eb27bc2f5151829936ce888c63bb"
+ },
+ "fusion": {
+  "t_species": 100.0,
+  "alpha_prior": 0.8333,
+  "prior_floor": 1e-06
+ },
+ "prior_weights": "monthly record counts through 2024-12-31 plus 0.5",
+ "names": "English names from iNaturalist for 0 species, from the species list for the rest",
+ "provisional": true,
+ "note": "Provisional: the first-look ranking (temperature 30, prior weight 0.25) at temperature 100 and prior weight 0.8333, the same order with the lowest val negative log-likelihood (ci/service/calibrate.py); the evaluation agent's tuned rows and settings replace them."
+}
