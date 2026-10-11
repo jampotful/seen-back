@@ -1,0 +1,268 @@
+<title>Seen Back</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: a camera. The picture fills the screen and the few controls float on it. One dark look, by choice, in every theme. */
+:root, :root[data-theme="dark"], :root[data-theme="light"] {
+  color-scheme: dark;
+  --bg: #000;
+  --ink: #FFFFFF;
+  --dim: rgba(255, 255, 255, .78);
+  --faint: rgba(255, 255, 255, .56);
+  --glass: rgba(22, 22, 22, .5);
+  --panel: rgba(16, 16, 16, .92);
+  --line: rgba(255, 255, 255, .22);
+  --paper: #F4F1EA;
+  --paper-ink: #111111;
+  --rec: #E5484D;
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+html { padding: 0 !important; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.4; overflow: hidden; overscroll-behavior: none; -webkit-font-smoothing: antialiased; }
+button, label, input { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+#app { position: fixed; inset: 0; overflow: hidden; background: var(--bg); touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--bg); }
+#vid { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+.pad { padding: calc(16px + env(safe-area-inset-top, 0px)) 18px calc(20px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; }
+
+/* the opening screen and the photo prompts */
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 20px; background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .92) 30%, rgba(0, 0, 0, .5) 52%, rgba(0, 0, 0, 0) 74%); }
+.screen h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 12vw, 80px); line-height: .98; letter-spacing: -0.012em; margin: 0; max-width: 12ch; text-wrap: balance; }
+.screen h1 em { font-style: italic; }
+.screen h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 10.5vw, 64px); line-height: 1; margin: 0; text-wrap: balance; }
+.screen p { margin: 0; max-width: 34ch; color: var(--dim); }
+.screen .fine { font-size: 13.5px; color: var(--faint); max-width: 40ch; }
+.screen .fine:empty { display: none; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pill { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--paper); color: var(--paper-ink); font-weight: 600; font-size: 16px; overflow: hidden; }
+.pill.ghost { background: var(--glass); color: var(--ink); border: 1px solid var(--line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.pill input, .ico input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 0; }
+.pill:active, .ico:active, .eye:active, .shutter:active { transform: scale(.96); }
+.pill:disabled { opacity: .5; }
+.link { background: none; border: 0; padding: 8px 0; color: var(--dim); text-decoration: underline; text-underline-offset: 3px; font-size: 14.5px; }
+.row.links { gap: 4px 22px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* controls floating on the picture */
+.hud { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+.hud > * > * { pointer-events: auto; }
+.top, .bottom { display: flex; align-items: center; gap: 10px; }
+.top { justify-content: space-between; }
+.top .left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.bottom { justify-content: center; gap: 30px; }
+.ico { position: relative; flex: none; width: 48px; height: 48px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--glass); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.ico.on { background: var(--paper); color: var(--paper-ink); }
+.shutter { flex: none; width: 78px; height: 78px; border-radius: 50%; border: 3px solid var(--ink); background: transparent; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.shutter i { display: block; width: 62px; height: 62px; border-radius: 50%; background: var(--ink); transition: all .18s ease; }
+.shutter.rec i { background: var(--rec); width: 30px; height: 30px; }
+.shutter.recording i { background: var(--rec); width: 26px; height: 26px; border-radius: 6px; }
+.who { min-width: 0; max-width: 100%; display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.who .nm { font-family: var(--serif); font-size: 23px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.who .mk { flex: none; margin: 0; }
+.msg { align-self: center; text-align: center; font-size: 14.5px; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); margin: 0 0 16px; max-width: 32ch; min-height: 1.4em; text-wrap: balance; pointer-events: none !important; }
+.msg:empty { visibility: hidden; }
+.timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.stack { display: flex; flex-direction: column; }
+
+/* the name, as the eyes change */
+.reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 28px rgba(0, 0, 0, .8), 0 0 4px rgba(0, 0, 0, .5); padding: 0 24px; }
+.reveal.show { opacity: 1; }
+.reveal .nm { font-family: var(--serif); font-size: clamp(50px, 14.5vw, 100px); line-height: .98; margin: 0; text-wrap: balance; }
+.reveal .sci { font-family: var(--serif); font-style: italic; font-size: clamp(21px, 5.6vw, 32px); margin: 0; color: var(--dim); }
+.reveal .warn { font-size: 13.5px; margin: 12px 0 0; color: var(--dim); }
+.reveal p:empty { display: none; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.flash.go { animation: flash .34s ease-out; }
+@keyframes flash { 0% { opacity: .85; } 100% { opacity: 0; } }
+.focus { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 1.5px solid var(--ink); border-radius: 50%; opacity: 0; pointer-events: none; }
+.focus.go { animation: focus .9s ease-out; }
+@keyframes focus { 0% { opacity: .95; transform: scale(1.35); } 30% { opacity: .95; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+
+/* sheets */
+.scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .35); }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 80%; overflow: auto; background: var(--panel); border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); padding: 18px 18px calc(22px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; user-select: text; -webkit-user-select: text; }
+.sheet header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet h3 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.05; margin: 0; }
+.sheet .sub { margin: -8px 0 0; color: var(--dim); font-size: 14.5px; }
+.sheet .sub:empty { display: none; }
+.rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.rows li { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 15px; color: var(--dim); }
+.rows b { color: var(--ink); font-weight: 600; }
+.mk { display: inline-block; box-sizing: border-box; width: 12px; height: 12px; border: 1.5px solid currentColor; border-radius: 50%; margin-top: 4px; }
+.mk.m { background: currentColor; }
+.mk.g { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.mk.x { border-width: 0 0 1.5px 0; border-radius: 0; height: 8px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--faint); margin: 0; }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key .mk { margin-top: 0; }
+.sheet details { font-size: 13.5px; color: var(--dim); }
+.sheet details summary { cursor: pointer; color: var(--ink); padding: 6px 0; }
+.sheet details ul { margin: 8px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.sheet a { color: inherit; text-underline-offset: 3px; }
+.sheet .media { display: block; width: 100%; max-height: 46vh; object-fit: contain; border-radius: 12px; background: #000; }
+.note { margin: 0; font-size: 13.5px; color: var(--dim); min-height: 1.3em; }
+.note:empty { display: none; }
+.sheet.fromtop { top: 0; bottom: auto; border-top: 0; border-bottom: 1px solid var(--line); border-radius: 0 0 22px 22px; padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 20px; }
+.field { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.field input { flex: 1 1 200px; min-width: 0; min-height: 52px; box-sizing: border-box; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .08); color: var(--ink); font-size: 17px; }
+.field input::placeholder { color: var(--faint); }
+.ico.sm { width: 40px; height: 40px; }
+.ico.sm svg { width: 19px; height: 19px; }
+.eyes { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.eye { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--ink); display: inline-flex; align-items: center; justify-content: center; }
+.eye svg { width: 30px; height: 30px; pointer-events: none; }
+.eye .iris { fill: none; stroke: currentColor; stroke-width: 1.4; }
+.eye .pupil { fill: currentColor; }
+.eye:disabled { color: rgba(255, 255, 255, .26); cursor: default; }
+.met { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.met:empty { display: none; }
+.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; }
+.met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
+.met .nm { display: block; font-family: var(--serif); font-size: 23px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.met .sm { display: block; font-size: 12.5px; color: var(--faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.met .x { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--faint); font-size: 22px; line-height: 1; }
+.met li.ask { grid-template-columns: minmax(0, 1fr) auto auto; min-height: 48px; }
+.met li.ask .q { font-size: 15px; color: var(--dim); }
+.met .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
+.sheet details ol { margin: 10px 0 0; padding-left: 32px; display: flex; flex-direction: column; gap: 5px; color: var(--faint); }
+.sheet details ol li.on { color: var(--ink); }
+.sheet .fine2 { margin: 10px 0 0; font-size: 12.5px; color: var(--faint); }
+.reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
+@media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
+</style>
+
+<div id="app">
+  <canvas id="gl" role="img" aria-label="The camera view"></canvas>
+  <video id="vid" playsinline muted></video>
+  <div class="flash" id="flash"></div>
+  <div class="focus" id="focusRing"></div>
+
+  <!-- 1. what is about to happen -->
+  <section class="screen pad" id="intro">
+    <h1>Photograph something alive. <em>Your camera takes on its way of seeing.</em></h1>
+    <p>Field of view, focus, colour and the pace of movement shift toward what is known of how it sees. Where the camera has to guess, it tells you.</p>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="link" id="introRec" type="button">Met so far</button></div>
+    <p class="fine" id="introFine"></p>
+  </section>
+
+  <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
+  <section class="screen pad" id="askAnimal" hidden>
+    <h2>First, who you met.</h2>
+    <p>Take its photo, or choose one you have.</p>
+    <div class="row">
+      <label class="pill" id="lblAnimalCam">Take a photo<input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost" id="lblAnimalPick">Choose a photo<input id="inAnimalPick" type="file" accept="image/*"></label>
+    </div>
+    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="link" id="recAskAnimal" type="button">Met so far</button></div>
+    <p class="fine" id="askFine"></p>
+  </section>
+
+  <!-- 3b. then the person's own view, as a clip or a photo -->
+  <section class="screen pad" id="askView" hidden>
+    <h2>Now your view.</h2>
+    <p id="askViewText"></p>
+    <div class="row">
+      <label class="pill" id="lblViewClip">Record a clip<input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
+      <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
+    </div>
+    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
+    <p class="fine" id="askViewFine"></p>
+  </section>
+
+  <!-- controls on the picture -->
+  <div class="hud pad" id="hud" hidden>
+    <div class="stack" style="gap:10px">
+      <div class="top">
+        <div class="left">
+          <button class="ico" id="btnBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="who" id="btnWho" type="button" hidden aria-label="What is shown, and how far to trust it"><span class="nm" id="whoName"></span><i class="mk g" id="whoMark"></i></button>
+        </div>
+        <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
+      </div>
+      <span class="timer" id="timer" hidden>0:00</span>
+    </div>
+    <div class="stack">
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      <div class="bottom" id="barFinder">
+        <label class="ico" aria-label="Choose a photo you already have"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inLib" type="file" accept="image/*"></label>
+        <button class="shutter" id="btnShutter" type="button" aria-label="Photograph it"><i></i></button>
+        <button class="ico" id="btnRecF" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
+      </div>
+      <div class="bottom" id="barAnimal" hidden>
+        <button class="ico" id="btnEyes" type="button" aria-label="Hold to see with your own eyes"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+        <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
+        <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" id="reveal" aria-live="polite"><p class="count" id="rvCount"></p><p class="nm" id="rvName"></p><p class="sci" id="rvSci"></p><p class="warn" id="rvWarn"></p></div>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <!-- what was it: said by the person, where nothing can recognize the photo or the answer came out wrong -->
+  <section class="sheet fromtop" id="claim" hidden aria-label="Say what it was">
+    <header><h3>What was it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
+    <p class="sub" id="claimSub"></p>
+    <form class="field" id="claimForm" autocomplete="off">
+      <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
+      <button class="pill" type="submit">That is what it was</button>
+    </form>
+    <p class="note" id="claimNote" role="status" aria-live="polite"></p>
+    <div class="row links" id="claimOtherRow" hidden><button class="link" id="claimOther" type="button"></button></div>
+  </section>
+
+  <!-- everyone met so far, and the eyes that came with them -->
+  <section class="sheet" id="record" hidden aria-label="Met so far">
+    <header><h3>Met so far</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="recordSub"></p>
+    <div class="eyes" id="eyeStrip"></div>
+    <ul class="met" id="metList"></ul>
+    <details id="g60">
+      <summary id="g60Sum"></summary>
+      <ol id="g60List"></ol>
+      <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season. <span id="buildMark"></span></p>
+    </details>
+  </section>
+
+  <!-- what is shown, and how far to trust it -->
+  <section class="sheet" id="info" hidden aria-label="What is shown">
+    <header><h3 id="infoTitle"></h3><button class="ico" id="infoClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="infoSub"></p>
+    <ul class="rows" id="rows"></ul>
+    <p class="key"><span><i class="mk m"></i>measured in this animal</span><span><i class="mk g"></i>measured in a relative</span><span><i class="mk"></i>a guess</span><span><i class="mk x"></i>left out</span></p>
+    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right? Say what it was</button></div>
+    <details>
+      <summary>Sources, and what is unchecked</summary>
+      <ul>
+        <li>Sharpness across about 600 species: Caves, Brandley and Johnsen, 2018. <a href="https://today.duke.edu/2018/05/details-look-sharp-people-may-be-blurry-their-pets" target="_blank" rel="noopener">Duke University</a>.</li>
+        <li>Cats' field, sharpness, dim light and cones: figures checked by veterinary eye specialists for Nickolay Lamm, 2013. <a href="https://nickolaylamm.com/art-for-clients/what-do-cats-see/" target="_blank" rel="noopener">What Do Cats See?</a></li>
+        <li>Pupil shapes in 214 species: Banks and colleagues, Science Advances, 2015. <a href="https://www.sci.news/biology/science-pupils-shape-eyes-animals-03112.html" target="_blank" rel="noopener">Summary</a>.</li>
+        <li>Dogs' retinas and nose length: McGreevy, Grassi and Harman, Brain, Behavior and Evolution. <a href="https://openpolar.no/Record/crskarger:10.1159%2F000073756" target="_blank" rel="noopener">Record</a>.</li>
+        <li>Deer cones, field and pupil: Jacobs and colleagues, 1994, and Heffelfinger, 2006, as gathered by <a href="https://www.wildlifeonline.me.uk/animals/article/deer-overview-senses-vision" target="_blank" rel="noopener">Wildlife Online</a>.</li>
+        <li>The sharp band in crocodiles' eyes: Nagloo and colleagues, 2016. <a href="https://www.sciencenews.org/blog/wild-things/crocodile-eyes-are-optimized-lurking" target="_blank" rel="noopener">Science News</a>.</li>
+        <li>How fast eyes follow flicker: Inger and colleagues, PLoS ONE, 2014. <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098631" target="_blank" rel="noopener">The paper</a>. Raptors: Potier and Kelber, 2019. <a href="https://www.lunduniversity.lu.se/article/falcons-see-prey-speed-formula-1-car" target="_blank" rel="noopener">Lund University</a>.</li>
+        <li>Birds that walk with a held head: Necker, 2007. <a href="https://www.reinhold-necker.de/Head%20bobbing%20print.pdf" target="_blank" rel="noopener">The review</a>.</li>
+        <li>Frogs and stillness: Lettvin and colleagues, 1959. <a href="https://www.cns.nyu.edu/~david/courses/perception/lecturenotes/brain/lettvin.html" target="_blank" rel="noopener">Lecture notes</a>.</li>
+        <li>Two cone types in ground squirrels: Jacobs, Neitz and Crognale, 1985. <a href="https://link.springer.com/article/10.1007/BF00613974" target="_blank" rel="noopener">The paper</a>.</li>
+        <li>Bees' receptors: <a href="https://insectvision.dlr.de/flying-insects/bee-photoreceptor-model" target="_blank" rel="noopener">DLR Insect Vision</a>. Ultraviolet needs its own camera: Vasas and colleagues, 2024, <a href="https://www.sussex.ac.uk/news/article/63262-new-video-camera-system-captures-the-coloured-world-that-animals-see" target="_blank" rel="noopener">University of Sussex</a>.</li>
+        <li>Plants and far-red light: Fraser, Hayes and Franklin, 2016. <a href="https://research-information.bris.ac.uk/ws/files/71767370/COPLBI_D_16_00008_2_.pdf" target="_blank" rel="noopener">The review</a>.</li>
+        <li>Unchecked: the two-cone colour arithmetic, entered from memory. Two assumptions of this app's own: that the phone's long side fills about 24 degrees of your view, and that a faster eye can be suggested by slowing the picture. Every line marked as a guess is a first entry for a vision scientist to correct.</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- a clip or a still, kept -->
+  <section class="sheet" id="keep" hidden aria-label="Keep it">
+    <header><h3 id="keepTitle">Kept</h3><button class="ico" id="keepClose" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
+    <video class="media" id="keepVideo" controls playsinline loop muted hidden></video>
+    <canvas class="media" id="keepCv" role="img" aria-label="The kept still" hidden></canvas>
+    <div class="row"><button class="pill" id="keepShare" type="button" hidden>Share</button><button class="pill ghost" id="keepSave" type="button">Save</button></div>
+    <p class="note" id="keepNote" role="status" aria-live="polite"></p>
+  </section>
+</div>
