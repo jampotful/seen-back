@@ -661,6 +661,7 @@ def stage_images(args, variant=None):
 
         ids, vec, bad, el = embed_rows(m, part, args.photos, batch=args.batch, encode_fn=enc)
         tag = "." + variant
+        onnx_sha = sha256(f)
     suffix = "" if n == 1 else ".shard-%d-of-%d" % (i, n)
     save_f16(out / "images" / ("%s%s%s.f16.npy" % (name, tag, suffix)), vec)
     (out / "images" / ("%s%s%s.ids.json" % (name, tag, suffix))).write_text(json.dumps(ids) + "\n", encoding="utf-8")
@@ -670,6 +671,8 @@ def stage_images(args, variant=None):
         log("  skipped %s: %s" % (rid, why))
     stats = {"rows": len(part), "embedded": len(ids), "skipped": len(bad), "seconds": round(el, 1),
              "photos_per_second": round(len(ids) / max(el, 1e-6), 2), "machine_cpus": os.cpu_count()}
+    if variant is not None:
+        stats["onnx_sha256"] = onnx_sha
     card["images"] = {name + tag: {"shards": n, ("shard_%d" % i): stats,
                                    "via": ("torch" if m.torch_model else "onnxruntime CPU, the model's own ONNX file")
                                    if variant is None else "onnxruntime CPU, vision.%s.onnx" % variant}}
@@ -885,8 +888,15 @@ def stage_export(args):
     if int8.stat().st_size >= 95e6:
         shutil.move(str(int8), str(tmp / int8.name))
         parity["files"]["int8"]["why_not_published"] = "over 95 MB"
-    for tag in cands:
-        parity["files"][tag]["published"] = False
+    for tag, f in cands.items():
+        if f.stat().st_size < 95e6:
+            shutil.copy(f, od / f.name)
+            parity["files"][tag]["published"] = True
+        else:
+            parity["files"][tag]["published"] = False
+            parity["files"][tag]["why_not_published"] = "over 95 MB"
+    parity["int8_alias"] = ("vision.int8.onnx is a copy of vision.%s.onnx, the closer of the two int8 files to the original "
+                            "model on this export's parity photos; the explicitly named files do not change meaning" % best)
     for variant in parity["files"]:
         f = od / ("vision.%s.onnx" % variant)
         if f.exists():
@@ -1002,7 +1012,7 @@ def main():
         i.add_argument("--batch", type=int, default=32)
         i.add_argument("--out", required=True)
         if name == "images-onnx":
-            i.add_argument("--variant", choices=["int8", "fp16", "fp32"], required=True)
+            i.add_argument("--variant", choices=["int8", "int8-per-tensor", "int8-per-channel", "fp16", "fp32"], required=True)
             i.add_argument("--onnx", help="the ONNX file (default: OUT/onnx/vision.VARIANT.onnx)")
     e = sub.add_parser("export")
     e.add_argument("--model", required=True)

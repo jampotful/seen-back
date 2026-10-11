@@ -41,7 +41,7 @@ PY
   else fail=1; fi
 fi
 if has images; then run python3 -u tools/lab/lab.py images --model "$model" --manifest "$man" --photos photos --shard "$shard/$n" --evalname "$ename" --out "$out" || fail=1; fi
-for v in int8 fp16; do
+for v in int8 int8-per-tensor int8-per-channel fp16; do
   if has "images-onnx-$v"; then
     f="$out/onnx/vision.$v.onnx"
     if [ ! -f "$f" ]; then

@@ -1,8 +1,8 @@
 {
- "about": "BioCLIP 2 and BioCLIP 2.5: image vectors over eval/alachua-2025 and the species label sets, both sharded; species text uses the short-context path (checked against the full context on the first batch).",
- "models": ["bioclip2-l14", "bioclip25-h14"],
- "stages": ["text-species", "images"],
+ "about": "Pocket candidates: both int8 files published under explicit names (vision.int8-per-tensor.onnx, vision.int8-per-channel.onnx) with image vectors over eval/alachua-2025 from each, so quantization loss can be measured per file whatever vision.int8.onnx points at.",
+ "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32"],
+ "stages": ["export", "images-onnx-int8-per-tensor", "images-onnx-int8-per-channel"],
  "data": "pub/data-alachua",
- "shards": {"bioclip2-l14": 4, "bioclip25-h14": 8},
- "max_parallel": 4
+ "shards": {},
+ "max_parallel": 2
 }
