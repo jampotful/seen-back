@@ -43,6 +43,10 @@ mkdir -p "$OUT/rec/shots-webkit"; cp test/rec/shots/*.png "$OUT/rec/shots-webkit
 step "check_rec.js parity, real slot: webkit (macOS)"
 t0=$(date +%s); BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-webkit.json" 2> "$OUT/rec/parity-real-webkit.err.txt"
 echo "parity (real) webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/parity-real-webkit.json"; tail -c 400 "$OUT/rec/parity-real-webkit.err.txt"
+step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: webkit (macOS)"
+git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
+BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-webkit.json" 2> "$OUT/rec/parity-real-patched-webkit.err.txt"
+echo "parity (real, patched) webkit: exit $?"; tail -1 "$OUT/rec/parity-real-patched-webkit.json"; git checkout -q test/rec/check_rec.js
 
 step "self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop"
 PORT=8781 OUT="$OUT/shots" BROWSERS=webkit VIEWPORTS=phone,desktop LABEL=macos LIMIT_MS=300000 EXTRA="$RECQ" node test/engines/run.js

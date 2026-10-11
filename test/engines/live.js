@@ -27,7 +27,7 @@ async function one(name) {
     await shot(page, 'live-' + name + '-1-first.png', r);
     r.first.page = await page.evaluate(async () => {
       const b = window.__seenBack, reg = navigator.serviceWorker ? await navigator.serviceWorker.getRegistration() : null;
-      return { build: (document.getElementById('buildMark') || {}).textContent, screen: b && b.S.screen, engine: b && b.state(), coi: !!window.crossOriginIsolated, secure: window.isSecureContext,
+      return { build: b && b.about ? b.about().split('\n')[0] : '', screen: b && b.S.screen, engine: b && b.state(), coi: !!window.crossOriginIsolated, secure: window.isSecureContext,
         swSupported: 'serviceWorker' in navigator, swRegistered: !!reg, swActive: !!(reg && reg.active), swState: reg && reg.active ? reg.active.state : null, controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller),
         rec: b && b.rec ? b.rec.about() : null, serif: document.fonts ? document.fonts.check('400 20px "Instrument Serif"') : null };
     });
@@ -55,14 +55,18 @@ async function one(name) {
     // a second visit: the service worker should be in control now
     await page.reload({ waitUntil: 'load' }); await page.waitForTimeout(2500);
     r.second = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), screen: window.__seenBack && window.__seenBack.S.screen }));
-    // and one with the network off
+    // and one with the network off, in a new tab of the same browser (a reload can leave the old page on screen)
+    await page.close();
     await ctx.setOffline(true);
+    const p2 = await ctx.newPage();
     try {
-      await page.reload({ waitUntil: 'load', timeout: 20000 }); await page.waitForTimeout(2500);
-      r.offline = await page.evaluate(() => ({ online: navigator.onLine, controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), screen: window.__seenBack && window.__seenBack.S.screen,
-        build: (document.getElementById('buildMark') || {}).textContent, rec: window.__seenBack && window.__seenBack.rec ? window.__seenBack.rec.about().state : null }));
-      await shot(page, 'live-' + name + '-2-offline.png', r);
-    } catch (e) { r.offline = { failed: String(e.message).split('\n')[0] }; await shot(page, 'live-' + name + '-2-offline.png', r); }
+      const resp2 = await p2.goto(SITE, { waitUntil: 'domcontentloaded', timeout: 20000 });
+      r.offline = { status: resp2 && resp2.status(), fromServiceWorker: resp2 ? resp2.fromServiceWorker() : null };
+      await p2.waitForTimeout(3000);
+      Object.assign(r.offline, await p2.evaluate(() => ({ online: navigator.onLine, controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), screen: window.__seenBack && window.__seenBack.S.screen,
+        build: window.__seenBack && window.__seenBack.about ? window.__seenBack.about().split('\n')[0] : '', rec: window.__seenBack && window.__seenBack.rec ? window.__seenBack.rec.about().state : null })));
+    } catch (e) { r.offline = Object.assign(r.offline || {}, { failed: String(e.message).split('\n')[0] }); }
+    await shot(p2, 'live-' + name + '-2-offline.png', r);
     await ctx.setOffline(false);
   } catch (e) { r.error = String(e && e.stack || e).slice(0, 600); }
   await browser.close().catch(() => {});

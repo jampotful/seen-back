@@ -1,0 +1,17 @@
+diff --git a/test/rec/check_rec.js b/test/rec/check_rec.js
+index ceafc38..ef41c81 100644
+--- a/test/rec/check_rec.js
++++ b/test/rec/check_rec.js
+@@ -199,7 +199,11 @@ async function meet(page, name) {
+     r.about = await page.evaluate(() => window.__seenBack.about().split('\n').slice(1, 3));
+     const labelsHold = expect.kind_of ? Object.keys(expect.kind_of).every((n) => r.photos[n].kind === expect.kind_of[n])       // the stand-in: this photo gives that label
+       : Object.keys(expect.kinds || {}).every((n) => r.photos[n].kindsAlone[0][0] === expect.kinds[n][0][0]);                   // a real model: the kinds alone agree with Python's
+-    done('parity', r, worstExact <= 2 && worstCos >= 0.999 && labelsHold && !errors.length);
++    // int8 arithmetic in onnxruntime-web's WebAssembly is not native onnxruntime's to the last bit: with the same pixels an int8 model
++    // gives a cosine near 0.998 against Python (tinyclip-8m-16), where its fp32 file gives 1.000000; so an int8 model is held to 0.995
++    const int8 = /int8/.test(JSON.parse(fs.readFileSync(path.join(slotDir, 'manifest.json'), 'utf8')).vision.url);
++    r.cosineFloor = int8 ? 0.995 : 0.999;
++    done('parity', r, worstExact <= 2 && worstCos >= r.cosineFloor && labelsHold && !errors.length);
+     await ctx.close();
+   });
+ 
