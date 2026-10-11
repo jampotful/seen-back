@@ -2019,6 +2019,64 @@ button { cursor: pointer; }
       post();
     }
 
+    // ---- 1b. the recognizer, when the address names a slot (&rec=) and photos (&recphotos=a,b,c): each photo goes in as the page's
+    // own photo does (a File, decoded to a canvas, then pocket.recognize), and with &recexpect=<expect.json> the answers are held
+    // against what Python got for the same photos (test/rec/make_slot.py --photos)
+    function param(name) { var m = new RegExp('[?&]' + name + '=([^&]*)').exec(qs); try { return m ? decodeURIComponent(m[1]) : ''; } catch (e) { return ''; } }
+    function sameOrigin(u) { return /^(\/(?!\/)|[\w.\-]+(\/|$))/.test(u) && !/^[a-z][\w+.\-]*:/i.test(u); }
+    async function recPhase() {
+      var R = T.rec = { slot: param('rec'), photos: [] }, list = param('recphotos').split(',').filter(Boolean).filter(sameOrigin), ex = param('recexpect'), expect = null;
+      phase('rec', 'The recognizer: starting it.');
+      if (ex && sameOrigin(ex)) { try { expect = await (await fetch(ex, { cache: 'no-store' })).json(); R.expect = ex; } catch (e) { R.expectError = String(e).slice(0, 120); } }
+      var t0 = performance.now();
+      try { await pocket.ready(); R.readyMs = Math.round(performance.now() - t0); }
+      catch (e) { R.readyMs = Math.round(performance.now() - t0); R.error = { code: e && e.code, sentence: e && e.sentence, detail: String(e && e.detail || e).slice(0, 200) }; }
+      R.about = pocket.about(); delete R.about.last;
+      check('rec: recognizer ready', !R.error, R.error ? R.error.sentence + ' (' + R.error.code + ': ' + R.error.detail + ')' : '');
+      if (R.error) { post(); return; }
+      pocket.wantPre = true;
+      for (var i = 0; i < list.length; i++) {
+        var url = list[i], name = url.split('/').pop().split('?')[0], P = { name: name };
+        stLine.textContent = 'The recognizer: photo ' + (i + 1) + ' of ' + list.length + ' (' + name + ').';
+        try {
+          var blob = await (await fetch(url)).blob(), file = new File([blob], name, { type: blob.type || (/\.png$/i.test(name) ? 'image/png' : 'image/jpeg') });
+          P.bytes = blob.size;
+          var t1 = performance.now(), cv = await decode(file); P.decodeMs = Math.round(performance.now() - t1); P.shown = cv.width + 'x' + cv.height;
+          var t2 = performance.now(), r = await pocket.recognize(cv, file); P.wallMs = Math.round(performance.now() - t2);
+          P.from = r.from; P.ms = r.ms; P.kind = r.kind; P.kinds3 = r.kinds.slice(0, 3).map(function (k) { return [k.key, r2(k.p * 100) / 100]; });
+          P.head3 = r.kinds.slice().sort(function (a, b) { return b.head - a.head; }).slice(0, 3).map(function (k) { return [k.key, Math.round(k.head * 1e4) / 1e4]; });
+          if (r.species && r.species[0]) P.species1 = [r.species[0].sci, Math.round(r.species[0].p * 1e3) / 1e3];
+          var py = expect && expect.kinds && expect.kinds[name], pe = expect && expect.photos && expect.photos[name];
+          if (py) { P.python3 = py; P.match = P.head3[0][0] === py[0][0]; }
+          if (pe && pe.embedding && pocket.lastEmb) {
+            var e = pe.embedding, g = pocket.lastEmb, dot = 0, na = 0, nb = 0;
+            for (var j = 0; j < e.length; j++) { dot += e[j] * g[j]; na += e[j] * e[j]; nb += g[j] * g[j]; }
+            P.cosine = Math.round(dot / Math.sqrt(na * nb) * 1e6) / 1e6;
+          }
+          if (pe && pe.pre_sha256 && pocket.lastPre && window.crypto && crypto.subtle) {      // the 224 x 224 pixels the encoder got, against Pillow's
+            var d = await crypto.subtle.digest('SHA-256', pocket.lastPre), hex = Array.prototype.map.call(new Uint8Array(d), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+            P.preSame = hex === pe.pre_sha256;
+          }
+          check('rec ' + name + ': recognized', true);
+          if (py && !/^info-/.test(name)) check('rec ' + name + ': top kind matches Python', P.match, 'page ' + JSON.stringify(P.head3) + ', Python ' + JSON.stringify(py));
+          // a PNG reaches both resizes as the same pixels, so the prepared picture must be Pillow's to the byte; the encoder's int8
+          // arithmetic in WebAssembly is not Python's to the last bit, so the embedding is judged loosely and its cosine recorded
+          if (P.preSame !== undefined && /\.png$/i.test(name) && !/^info-/.test(name)) check('rec ' + name + ': prepared pixels identical to Pillow\'s', P.preSame);
+          if (P.cosine !== undefined && !/^info-/.test(name)) check('rec ' + name + ': embedding near Python\'s (cosine at least 0.99)', P.cosine >= .99, 'cosine ' + P.cosine);
+        } catch (e) {
+          P.error = { code: e && e.code, sentence: e && e.sentence, detail: String(e && (e.detail || e.message) || e).slice(0, 200) };
+          check('rec ' + name + ': recognized', false, (P.error.sentence || '') + ' ' + P.error.detail);
+        }
+        R.photos.push(P);
+        if (pocket.about().state !== 'ready' && i < list.length - 1) { try { await pocket.ready(); } catch (e) {} }
+      }
+      pocket.wantPre = false; pocket.lastPre = null;
+      var runs = R.photos.filter(function (x) { return x.ms; });
+      if (runs.length) R.meanRunMs = Math.round(runs.reduce(function (a, x) { return a + x.ms.pre + x.ms.run; }, 0) / runs.length);
+      T.ms.rec = since();
+      post();
+    }
+
     // ---- 2. the test card through each of the sixteen eyes, read back
     async function stillPhase() {
       var side = engine.side(), W = Math.min(side, 480), H = Math.round(W * .75), card = drawCard(W, H), L = card.L;
@@ -2268,6 +2326,12 @@ button { cursor: pointer; }
         ['moving picture', 'ms per frame', 'worst', 'ring writes', 'size'].forEach(function (h) { el('th', '', h, hr); });
         Object.keys(T.motion.runs).forEach(function (k) { var r = T.motion.runs[k], tr = el('tr', '', undefined, mt); [k, r.ms, r.worst, r.writes, r.size].forEach(function (v) { el('td', '', String(v), tr); }); });
       }
+      if (T.rec) {
+        var rt = el('table', '', undefined, details), rh = el('tr', '', undefined, rt);
+        el('caption', 'text-align:left;padding:0 0 4px', 'Recognizer ' + (T.rec.about ? (T.rec.about.model || '') + ', ' + (T.rec.about.backend || '') : '') + (T.rec.readyMs !== undefined ? ', ready in ' + T.rec.readyMs + ' ms' : '') + (T.rec.error ? ': ' + T.rec.error.sentence : ''), rt);
+        ['photo', 'kinds (page)', 'Python', 'ms (prepare + run)'].forEach(function (h) { el('th', '', h, rh); });
+        T.rec.photos.forEach(function (x) { var tr = el('tr', '', undefined, rt); [x.name, x.error ? x.error.sentence : (x.head3 || []).map(function (k) { return k[0] + ' ' + k[1]; }).join(', '), x.python3 ? x.python3[0][0] + (x.match ? ' (same)' : ' (differs)') : '', x.ms ? x.ms.pre + ' + ' + x.ms.run : ''].forEach(function (v) { el('td', '', String(v), tr); }); });
+      }
       el('pre', '', JSON.stringify(T), details);
       ta.value = JSON.stringify(T);
       root.scrollTop = 0;
@@ -2276,6 +2340,7 @@ button { cursor: pointer; }
     async function main() {
       await frame();
       await envPhase();
+      if (param('rec')) { try { await recPhase(); } catch (e) { check('rec phase ran', false, String(e && e.stack || e).slice(0, 300)); } }
       if (engine) {
         try { await stillPhase(); } catch (e) { check('still phase ran', false, String(e && e.stack || e).slice(0, 300)); }
         try { await motionPhase(); } catch (e) { check('motion phase ran', false, String(e && e.stack || e).slice(0, 300)); }
