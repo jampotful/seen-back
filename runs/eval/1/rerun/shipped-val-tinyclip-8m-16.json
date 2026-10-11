@@ -1,0 +1,129 @@
+{
+ "made_by": "tools/eval/shipped.py",
+ "slot": "val-tinyclip-8m-16",
+ "manifest": {
+  "id": "tinyclip-8m-16",
+  "fusion": {
+   "t_kind": 50.0,
+   "t_species": 100.0,
+   "alpha_prior": 0.5,
+   "w_kind": 0.3,
+   "rule": "mix",
+   "name_at": 0.31,
+   "offer_at": 0.33,
+   "prior_floor": 1e-06
+  },
+  "evaluation": {
+   "model": "tinyclip-8m-16",
+   "head": "discriminant + sentences",
+   "choice": "shrinkage 0.03, species_com, gamma 3",
+   "train": "val",
+   "train_vectors": "images/alachua-2025 (two thirds of val)",
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "tuned_on": "the third of val kept for tuning",
+   "prior_smoothing": {
+    "lam": 0.0,
+    "c": 0.1
+   }
+  },
+  "needs": [
+   "species.bias_url (build 7 of the page)",
+   "fusion.rule mix (build 7 of the page)"
+  ]
+ },
+ "numbers": {
+  "test_photos": 4197,
+  "tuning_photos": 565,
+  "name_at": 0.31,
+  "offer_at": 0.33,
+  "kind_right": [
+   0.7751,
+   0.7624,
+   0.7879,
+   4197
+  ],
+  "called_person": 0.0002382654276864427,
+  "called_none": 0.0009530617107457708,
+  "species_top1": [
+   0.2561,
+   0.243,
+   0.2692,
+   4197
+  ],
+  "species_top5": [
+   0.4377,
+   0.4234,
+   0.4527,
+   4197
+  ],
+  "named": [
+   0.0827,
+   0.0741,
+   0.0908,
+   4197
+  ],
+  "named_right": [
+   0.8991,
+   0.8646,
+   0.928,
+   347
+  ],
+  "named_kind_right": [
+   0.9914,
+   0.9798,
+   1.0,
+   347
+  ],
+  "offered": [
+   0.0667,
+   0.0596,
+   0.0746,
+   4197
+  ],
+  "offered_holds_species": [
+   0.7821,
+   0.7321,
+   0.8286,
+   280
+  ],
+  "offered_kind_right": [
+   0.9714,
+   0.95,
+   0.9893,
+   280
+  ],
+  "kind_only": [
+   0.8506,
+   0.8399,
+   0.8616,
+   4197
+  ],
+  "kind_only_kind_right": [
+   0.7387,
+   0.7246,
+   0.7529,
+   3570
+  ],
+  "top_species_differs_from_direct_computation": 0,
+  "seconds": 27.1
+ },
+ "text": "The slot holds the head `discriminant + sentences` for `tinyclip-8m-16` (shrinkage 0.03, species_com, gamma 3), fitted on `images/alachua-2025 (two thirds of val)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 50, w_kind 0.3, alpha_prior 0.5. On 565 tuning photos (the third of val kept for tuning) the thresholds came out as name_at 0.31 and offer_at 0.33. On the 4197 test photos the kind of eye is right for 77.5% (76.2 to 78.8); the top species is right for 25.6% (24.3 to 26.9) and is among the first five for 43.8% (42.3 to 45.3). `person` was said for 0.02% of these photos and `none` for 0.10%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: species.bias_url (build 7 of the page); fusion.rule mix (build 7 of the page).",
+ "outcomes": [
+  {
+   "what": "a species name",
+   "share": 0.0827,
+   "right": "the name is right for 89.9% (86.5 to 92.8); the kind for 99.1% (98.0 to 100.0)"
+  },
+  {
+   "what": "three species to choose from",
+   "share": 0.0667,
+   "right": "the three hold the species for 78.2% (73.2 to 82.9); the kind is right for 97.1% (95.0 to 98.9)"
+  },
+  {
+   "what": "a kind of eye only",
+   "share": 0.8506,
+   "right": "the kind is right for 73.9% (72.5 to 75.3)"
+  }
+ ],
+ "extra": []
+}

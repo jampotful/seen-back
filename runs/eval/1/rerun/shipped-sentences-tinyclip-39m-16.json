@@ -1,0 +1,128 @@
+{
+ "made_by": "tools/eval/shipped.py",
+ "slot": "sentences-tinyclip-39m-16",
+ "manifest": {
+  "id": "tinyclip-39m-16",
+  "fusion": {
+   "t_kind": 20.0,
+   "t_species": 100.0,
+   "alpha_prior": 1.0,
+   "w_kind": 0.5,
+   "rule": "mix",
+   "name_at": 0.4,
+   "offer_at": 0.53,
+   "prior_floor": 1e-06
+  },
+  "evaluation": {
+   "model": "tinyclip-39m-16",
+   "head": "sentences",
+   "choice": "species_com",
+   "train": "sentences",
+   "train_vectors": "none (sentence rows only)",
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "tuned_on": "val",
+   "prior_smoothing": {
+    "lam": 2.0,
+    "c": 1.0
+   }
+  },
+  "needs": [
+   "fusion.rule mix (build 7 of the page)"
+  ]
+ },
+ "numbers": {
+  "test_photos": 4197,
+  "tuning_photos": 1803,
+  "name_at": 0.4,
+  "offer_at": 0.53,
+  "kind_right": [
+   0.8394,
+   0.8277,
+   0.8504,
+   4197
+  ],
+  "called_person": 0.0,
+  "called_none": 0.0,
+  "species_top1": [
+   0.3488,
+   0.3345,
+   0.3638,
+   4197
+  ],
+  "species_top5": [
+   0.538,
+   0.523,
+   0.5533,
+   4197
+  ],
+  "named": [
+   0.1542,
+   0.1434,
+   0.1656,
+   4197
+  ],
+  "named_right": [
+   0.9274,
+   0.9072,
+   0.9459,
+   647
+  ],
+  "named_kind_right": [
+   0.9876,
+   0.9784,
+   0.9954,
+   647
+  ],
+  "offered": [
+   0.0331,
+   0.0281,
+   0.0388,
+   4197
+  ],
+  "offered_holds_species": [
+   0.8489,
+   0.7842,
+   0.9065,
+   139
+  ],
+  "offered_kind_right": [
+   0.9928,
+   0.9784,
+   1.0,
+   139
+  ],
+  "kind_only": [
+   0.8127,
+   0.8008,
+   0.8244,
+   4197
+  ],
+  "kind_only_kind_right": [
+   0.805,
+   0.7921,
+   0.8182,
+   3411
+  ],
+  "top_species_differs_from_direct_computation": 0,
+  "seconds": 35.3
+ },
+ "text": "The slot holds the head `sentences` for `tinyclip-39m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 20, w_kind 0.5, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.40 and offer_at 0.53. On the 4197 test photos the kind of eye is right for 83.9% (82.8 to 85.0); the top species is right for 34.9% (33.5 to 36.4) and is among the first five for 53.8% (52.3 to 55.3). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: fusion.rule mix (build 7 of the page).",
+ "outcomes": [
+  {
+   "what": "a species name",
+   "share": 0.1542,
+   "right": "the name is right for 92.7% (90.7 to 94.6); the kind for 98.8% (97.8 to 99.5)"
+  },
+  {
+   "what": "three species to choose from",
+   "share": 0.0331,
+   "right": "the three hold the species for 84.9% (78.4 to 90.6); the kind is right for 99.3% (97.8 to 100.0)"
+  },
+  {
+   "what": "a kind of eye only",
+   "share": 0.8127,
+   "right": "the kind is right for 80.5% (79.2 to 81.8)"
+  }
+ ],
+ "extra": []
+}
