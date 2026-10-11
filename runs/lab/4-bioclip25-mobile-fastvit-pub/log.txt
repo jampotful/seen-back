@@ -1,0 +1,104 @@
+==== job log parts/lab-bioclip25-mobile-fastvit-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:47:36] job: model=bioclip25-mobile-fastvit shard=0/1 stages=images
+data_source=pub/data-alachua
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:59:55Z workflow=data run_number=1 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:47:36] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+fetched 200/6000 (3.7s)
+fetched 400/6000 (6.9s)
+fetched 600/6000 (10.0s)
+fetched 800/6000 (13.1s)
+fetched 1000/6000 (16.4s)
+fetched 1200/6000 (19.7s)
+fetched 1400/6000 (23.0s)
+fetched 1600/6000 (26.3s)
+fetched 1800/6000 (29.6s)
+fetched 2000/6000 (33.0s)
+fetched 2200/6000 (36.4s)
+fetched 2400/6000 (39.8s)
+fetched 2600/6000 (43.3s)
+fetched 2800/6000 (46.8s)
+fetched 3000/6000 (50.3s)
+fetched 3200/6000 (54.0s)
+fetched 3400/6000 (57.5s)
+fetched 3600/6000 (60.9s)
+fetched 3800/6000 (64.4s)
+fetched 4000/6000 (68.0s)
+fetched 4200/6000 (71.5s)
+fetched 4400/6000 (75.1s)
+fetched 4600/6000 (78.6s)
+fetched 4800/6000 (82.1s)
+fetched 5000/6000 (85.8s)
+fetched 5200/6000 (89.4s)
+fetched 5400/6000 (93.1s)
+fetched 5600/6000 (96.7s)
+fetched 5800/6000 (100.3s)
+fetched 6000/6000 (103.9s)
+photos: 6000 rows, 6000 to fetch, 0 failed, 103.9s
+[01:49:20] exit 0
+[01:49:20] + python3 -u tools/lab/lab.py images --model bioclip25-mobile-fastvit --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname alachua-2025 --out art/bioclip25-mobile-fastvit
+images: bioclip25-mobile-fastvit, eval alachua-2025, shard 0/1, 6000 rows
+[0;93m2026-10-11 01:49:23.163831795 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+loaded bioclip25-mobile-fastvit via onnx in 2.6s
+  images 32/6000, 33.21 photos/s
+  images 192/6000, 33.76 photos/s
+  images 352/6000, 33.96 photos/s
+  images 512/6000, 33.93 photos/s
+  images 672/6000, 33.87 photos/s
+  images 832/6000, 33.82 photos/s
+  images 992/6000, 33.81 photos/s
+  images 1152/6000, 33.79 photos/s
+  images 1312/6000, 33.70 photos/s
+  images 1472/6000, 33.66 photos/s
+  images 1632/6000, 33.65 photos/s
+  images 1792/6000, 33.66 photos/s
+  images 1952/6000, 33.68 photos/s
+  images 2112/6000, 33.67 photos/s
+  images 2272/6000, 33.67 photos/s
+  images 2432/6000, 33.68 photos/s
+  images 2592/6000, 33.65 photos/s
+  images 2752/6000, 33.65 photos/s
+  images 2912/6000, 33.63 photos/s
+  images 3072/6000, 33.62 photos/s
+  images 3232/6000, 33.60 photos/s
+  images 3392/6000, 33.59 photos/s
+  images 3552/6000, 33.59 photos/s
+  images 3712/6000, 33.59 photos/s
+  images 3872/6000, 33.56 photos/s
+  images 4032/6000, 33.56 photos/s
+  images 4192/6000, 33.49 photos/s
+  images 4352/6000, 33.44 photos/s
+  images 4512/6000, 33.39 photos/s
+  images 4672/6000, 33.40 photos/s
+  images 4832/6000, 33.41 photos/s
+  images 4992/6000, 33.41 photos/s
+  images 5152/6000, 33.40 photos/s
+  images 5312/6000, 33.38 photos/s
+  images 5472/6000, 33.38 photos/s
+  images 5632/6000, 33.38 photos/s
+  images 5792/6000, 33.38 photos/s
+  images 5952/6000, 33.39 photos/s
+images: 6000 embedded, 0 skipped, 179.7s (33.39 photos/s)
+[01:52:26] exit 0
+[01:52:26] job done, fail=0
+[01:55:58] merging into existing pub/lab-bioclip25-mobile-fastvit (2fdf413)
+parts/lab-bioclip25-mobile-fastvit-s0/
+[01:55:58] + python3 -u tools/lab/lab.py merge --model bioclip25-mobile-fastvit --manifest data_in/manifest.csv --out pubdir parts/lab-bioclip25-mobile-fastvit-s0/
+[01:55:58] exit 0
+[01:55:58] + bash ci/put_branch.sh pub/lab-bioclip25-mobile-fastvit pubdir lab: bioclip25-mobile-fastvit
+published pub/lab-bioclip25-mobile-fastvit
+[01:56:01] exit 0
+[01:56:01] published pub/lab-bioclip25-mobile-fastvit
