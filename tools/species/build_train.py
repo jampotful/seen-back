@@ -37,45 +37,80 @@ from common import log  # noqa: E402
 INFRA = ("subspecies", "variety", "form", "infrahybrid")
 
 
-SKIPPED = []            # (year, month, offset) of single records GBIF would not serve as readable JSON
+class BadJSON(Exception):
+    """GBIF answered 200 with a body that is not readable JSON, twice running."""
+
+
+def get_page(q, off, limit, tries=9):
+    """One page of an occurrence search. Rate limits and server errors are waited out patiently; a body that is not
+    readable JSON twice running raises BadJSON at once, because waiting does not mend it."""
+    import random
+    import requests
+    delay, bad, last = 2.0, 0, ""
+    for attempt in range(1, tries + 1):
+        wait = delay
+        try:
+            r = common.session().get(common.API + "/occurrence/search", params=dict(q, limit=limit, offset=off), timeout=90)
+            if r.status_code == 200:
+                try:
+                    return r.json()
+                except ValueError as e:
+                    bad += 1
+                    last = "unreadable JSON: %s" % str(e)[:80]
+                    if bad >= 2:
+                        raise BadJSON(last)
+                    wait = 1.0
+            elif r.status_code in (408, 429, 500, 502, 503, 504):
+                last = "HTTP %s" % r.status_code
+                ra = r.headers.get("Retry-After", "")
+                if ra.isdigit():
+                    wait = max(wait, float(ra))
+            else:
+                raise RuntimeError("%s -> HTTP %s: %s" % (r.url, r.status_code, r.text[:200]))
+        except (requests.ConnectionError, requests.Timeout, requests.exceptions.ChunkedEncodingError) as e:
+            last = "%s: %s" % (type(e).__name__, str(e)[:80])
+        time.sleep(wait + random.random())
+        delay = min(delay * 2, 60)
+    raise RuntimeError("gave up on occurrence search %s offset %d limit %d: %s" % (q, off, limit, last))
 
 
 def fetch_slice(q, off, limit):
-    """Records off..off+limit of a query. A slice that will not come back as readable JSON is halved until the
-    record that breaks it stands alone, and that one record is skipped and noted."""
+    """Records off..off+limit of a query: (count, records, skipped). A slice that will not come back as readable
+    JSON is halved until the record that breaks it stands alone; that one record is skipped and noted."""
     try:
-        r = common.get_json("/occurrence/search", dict(q, limit=limit, offset=off), tries=3 if limit > 1 else 2)
-        return r.get("count", 0), r.get("results", []), limit
-    except RuntimeError as e:
+        r = get_page(q, off, limit)
+        return r.get("count", 0), r.get("results", []), []
+    except BadJSON as e:
         if limit == 1:
-            SKIPPED.append((q.get("year"), q.get("month"), off))
-            log("  skipped one unreadable record: %s-%s offset %d (%s)" % (q.get("year"), q.get("month"), off, str(e)[-80:]))
-            return None, [], 1
+            log("  skipped one unreadable record: %s-%s offset %d (%s)" % (q.get("year"), q.get("month"), off, e))
+            return None, [], [(q.get("year"), q.get("month"), off)]
         half = limit // 2
-        c1, r1, _ = fetch_slice(q, off, half)
-        c2, r2, _ = fetch_slice(q, off + half, limit - half)
-        return (c1 if c1 is not None else c2), r1 + r2, limit
+        c1, r1, s1 = fetch_slice(q, off, half)
+        c2, r2, s2 = fetch_slice(q, off + half, limit - half)
+        return (c1 if c1 is not None else c2), r1 + r2, s1 + s2
 
 
-def fetch_month(base, y, m, tries=3):
-    """All records of one calendar month. Pages of 300; a month whose pages do not add up is read again."""
+def fetch_month(base, y, m, tries=2):
+    """All records of one calendar month, in pages of 300: ((year, month), count, records, attempt, skipped).
+    A month whose pages and skipped records do not add up to its count is read once more."""
     q = dict(base, year=y, month=m)
     for attempt in range(1, tries + 1):
-        recs, off, cnt, skipped0 = {}, 0, None, len(SKIPPED)
+        recs, off, cnt, skipped = {}, 0, None, []
         while True:
-            c, res, asked = fetch_slice(q, off, 300)
+            c, res, sk = fetch_slice(q, off, 300)
+            skipped += sk
             if c is not None:
                 cnt = c
             for x in res:
                 rec = compact(x)
                 recs[rec["gbif_id"]] = rec
-            off += asked
-            if cnt is None or off >= cnt or (not res and len(SKIPPED) == skipped0):
+            off += 300
+            if cnt is None or off >= cnt or (not res and not sk):
                 break
         cnt = cnt or 0
-        if len(recs) + (len(SKIPPED) - skipped0) >= cnt:
-            return (y, m), cnt, list(recs.values()), attempt
-    return (y, m), cnt, list(recs.values()), -attempt
+        if len(recs) + len(skipped) >= cnt:
+            return (y, m), cnt, list(recs.values()), attempt, skipped
+    return (y, m), cnt, list(recs.values()), -attempt, skipped
 
 
 def pct(a, b):
@@ -111,8 +146,9 @@ def main():
     log("  %d records in years %s..%s" % (total, years[0], years[-1]))
     yms = [(y, m) for y in years for m in range(1, 13) if (y, m) <= (last.year, last.month)]
     got = common.pmap(lambda ym: fetch_month(base, ym[0], ym[1]), yms, workers=args.workers, desc="months", every=20)
-    pool, short, dup = {}, [], 0
-    for ym, cnt, recs, attempt in got:
+    pool, short, dup, SKIPPED = {}, [], 0, []
+    for ym, cnt, recs, attempt, skipped in got:
+        SKIPPED += skipped
         if attempt < 0:
             short.append((ym, cnt, len(recs)))
         for c in recs:

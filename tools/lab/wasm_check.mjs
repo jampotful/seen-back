@@ -31,7 +31,8 @@ const stats = (xs) => ({ mean: xs.reduce((s, x) => s + x, 0) / xs.length, min: M
 
 const result = { onnxruntime_web: ortVersion, backend: 'wasm', threads: 1, node: process.version, photos: n, files: {} };
 const torchRef = fs.existsSync(path.join(wasmDir, 'torch_ref.f32')) ? readF32(path.join(wasmDir, 'torch_ref.f32')) : null;
-for (const variant of ['int8', 'fp16', 'fp32']) {
+const variants = process.env.WASM_ALL ? fs.readdirSync(onnxDir).filter((n) => /^vision\..+\.onnx$/.test(n)).map((n) => n.slice(7, -5)) : ['int8', 'fp16', 'fp32'];
+for (const variant of variants) {
   const f = path.join(onnxDir, `vision.${variant}.onnx`);
   if (!fs.existsSync(f)) continue;
   const info = {};
