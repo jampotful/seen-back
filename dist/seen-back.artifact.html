@@ -1717,13 +1717,16 @@ button { cursor: pointer; }
       if (!vid.requestVideoFrameCallback) return;
       (function again() { vid.requestVideoFrameCallback(function () { freshV = true; if (S.selftest) again(); }); })();
     }
+    // the clip goes in as a blob address, as a clip the person picks does (startClip), and so needs no byte ranges from the server
     function loadClip(url) {
-      return new Promise(function (res, rej) {
+      return fetch(url).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }).then(function (b) {
+        return new Promise(function (res, rej) {
         var done = false, to = setTimeout(function () { if (!done) { done = true; rej(new Error('no data within 8 s')); } }, 8000);
         vid.onloadeddata = function () { if (!done) { done = true; clearTimeout(to); res(); } };
         vid.onerror = function () { if (!done) { done = true; clearTimeout(to); rej(new Error('error ' + (vid.error && vid.error.code))); } };
-        vid.loop = true; vid.muted = true; vid.playsInline = true; vid.setAttribute('playsinline', ''); vid.src = url;
+        vid.loop = true; vid.muted = true; vid.playsInline = true; vid.setAttribute('playsinline', ''); vid.src = URL.createObjectURL(b);
         try { vid.load(); } catch (e) {}
+        });
       }).then(function () { return vid.play(); });
     }
     async function startVideo() {

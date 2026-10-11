@@ -22,6 +22,35 @@ class H(http.server.SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
+    def send_head(self):
+        # byte ranges, which Safari asks for before it plays a video
+        rng = self.headers.get("Range")
+        path = self.translate_path(self.path)
+        m = re.match(r"^bytes=(\d*)-(\d*)$", rng or "")
+        if not m or not os.path.isfile(path):
+            return super().send_head()
+        size = os.path.getsize(path)
+        a = int(m.group(1)) if m.group(1) else max(0, size - int(m.group(2) or 0))
+        b = int(m.group(2)) if m.group(1) and m.group(2) else size - 1
+        b = min(b, size - 1)
+        if a > b or a >= size:
+            self.send_response(416)
+            self.send_header("Content-Range", "bytes */%d" % size)
+            self.end_headers()
+            return None
+        f = open(path, "rb")
+        f.seek(a)
+        self.send_response(206)
+        self.send_header("Content-Type", self.guess_type(path))
+        self.send_header("Content-Range", "bytes %d-%d/%d" % (a, b, size))
+        self.send_header("Content-Length", str(b - a + 1))
+        self.send_header("Accept-Ranges", "bytes")
+        self.end_headers()
+        import io
+        data = f.read(b - a + 1)
+        f.close()
+        return io.BytesIO(data)
+
     def do_POST(self):
         m = re.match(r"^/report(?:/([\w.\-]{1,80}))?/?$", self.path.split("?")[0])
         if not m:
