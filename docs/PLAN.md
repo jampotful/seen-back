@@ -60,12 +60,16 @@ Goal: species-level recognition on the device, offline, for the region.
 - [ ] Teach a small encoder from BioCLIP 2 (distillation) on openly licensed iNaturalist photos of the region's species.
 - [ ] Write a model card for the shipped slot, stating its data, licences, accuracy by group and known failures. The slot manifests carry an `evaluation` block, and `docs/eval/model-<id>.md` gives breakdowns by kind and the commonest mistakes for each model measured.
 
+Still open: the three lines above that carry no tick.
+
 ## Phase 5: the game, sharing, and review
 
 - [ ] Decide the rule of the finding game (kept, lent, sealed eyes, or held open for a town). The decision is awaited.
 - [ ] Share a still or a clip through the phone's own share sheet. The page calls `navigator.share` (`src/cam.c2.js`), and the share sheet has not been checked on any phone (`docs/LOG.md`).
 - [ ] Have a vision scientist review the sixteen eye models, and fold the corrections back into `docs/SOURCES.md`.
 - [ ] Build for the iPhone and Android stores, if the web app proves the case for them.
+
+Still open: every line of this phase.
 
 ## What comes next, in order
 
