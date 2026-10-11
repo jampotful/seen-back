@@ -1,0 +1,112 @@
+name: lab
+# The model laboratory. Push a commit to run/lab/<label>; ci/lab/run.json in that commit says which models and stages.
+# Each model's files are published to pub/lab-<model id>; small reports and logs come back on the ci branch as
+# runs/lab/<run>-plan, runs/lab/<run>-<model>-s<shard> (one per job) and runs/lab/<run>-<model>-pub (one per model).
+on:
+  push:
+    branches: ['run/lab/**']
+permissions:
+  contents: write
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      work: ${{ steps.plan.outputs.work }}
+      models: ${{ steps.plan.outputs.models }}
+      max_parallel: ${{ steps.plan.outputs.max_parallel }}
+      publish_after: ${{ steps.plan.outputs.publish_after }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        run: |
+          mkdir -p ret
+          python3 tools/lab/plan.py ci/lab/run.json | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
+      - name: data
+        run: |
+          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('data','auto'))")" 2>&1 | tee -a ret/log.txt
+          cp data_in/source.txt ret/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data
+          path: data_in/
+          retention-days: 3
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret plan
+
+  work:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(needs.plan.outputs.max_parallel) }}
+      matrix: ${{ fromJSON(needs.plan.outputs.work) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: data
+          path: data_in
+      - name: install
+        run: |
+          mkdir -p ret
+          {
+            python3 -m pip install --quiet --upgrade pip
+            python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+            python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" onnx onnxruntime onnxconverter-common numpy pillow huggingface_hub safetensors ftfy regex sentencepiece protobuf
+            python3 -m pip list 2>/dev/null | grep -i -E "^(torch|torchvision|open.clip|timm|transformers|onnx|onnxruntime|numpy|pillow|huggingface)" 
+          } 2>&1 | tee -a ret/log.txt
+      - name: stages
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: bash ci/lab/job.sh "${{ matrix.model }}" "${{ matrix.shard }}" "${{ matrix.nshards }}" "${{ matrix.stages }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lab-${{ matrix.model }}-s${{ matrix.shard }}
+          path: art/${{ matrix.model }}/
+          retention-days: 3
+          if-no-files-found: warn
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret "${{ matrix.tag }}"
+
+  publish:
+    needs: [plan, work]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        model: ${{ fromJSON(needs.plan.outputs.models) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: data
+          path: data_in
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: lab-${{ matrix.model }}-s*
+          path: parts
+      - name: merge and publish
+        env:
+          PUBLISH_AFTER_RUN: ${{ needs.plan.outputs.publish_after }}
+        run: |
+          mkdir -p ret
+          python3 -m pip install --quiet numpy 2>&1 | tail -1
+          bash ci/lab/publish.sh "${{ matrix.model }}"
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret "${{ matrix.model }}-pub"
