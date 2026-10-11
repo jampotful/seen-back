@@ -173,12 +173,12 @@ def main():
         nm = i.get("canonicalName") or i.get("species")
         if nm:
             wanted.setdefault(nm, i.get("kingdom"))
-    inat, inat_rep = {}, {}
+    inat, inat_rep, inat_taxa = {}, {}, {}
     try:
         arch = names.ensure_archive(args.cache)
         if diag:
             (diag / "inat_archive.txt").write_text(names.describe(arch, PROBES), encoding="utf-8")
-        inat, inat_rep = names.english_names(arch, wanted)
+        inat, inat_rep, inat_taxa = names.english_names(arch, wanted)
         log("  iNaturalist archive: %s" % inat_rep)
     except Exception as e:  # the list is still useful with GBIF names; say so loudly
         log("  iNaturalist names unavailable: %s: %s" % (type(e).__name__, e))
@@ -192,7 +192,7 @@ def main():
             [{"key": i["key"], "names": common.gbif_vernacular(i["key"], cache)[:12]} for i in need[:4]], indent=1, ensure_ascii=False))
 
     log("== writing")
-    species = []
+    species, filled = [], []
     for k, i in zip(keys, info):
         sci = i.get("canonicalName") or i.get("species") or ""
         if sci in inat:
@@ -205,9 +205,18 @@ def main():
                "kingdom": i.get("kingdom") or "", "phylum": i.get("phylum") or "", "class": i.get("class") or "",
                "order": i.get("order") or "", "family": i.get("family") or "", "genus": i.get("genus") or "",
                "n": n[k], "m": m[k]}
+        fill_ranks(rec, inat_taxa.get(sci), filled)
         rec["eyes"] = eyes.kind_of_record(rec)
         species.append(rec)
     species.sort(key=lambda s: (-s["n"], s["sci"], str(s["key"])))
+    if filled:
+        checks.append("ranks filled from iNaturalist's taxonomy where the GBIF backbone gives no phylum, class or order "
+                      "(%d species): %s" % (len(filled), "; ".join(filled)))
+        log("  " + checks[-1])
+    api_check = check_names_with_api(species, inat, inat_taxa)
+    if api_check:
+        checks.append(api_check)
+        log("  " + api_check.replace("\n", "\n  "))
     query = ("%s/occurrence/search?datasetKey=%s&%s&year=1600,%d&facet=speciesKey (paged with facetOffset); "
              "months: the same with month=1..12" % (common.API, common.INAT_DATASET,
                                                     "&".join("%s=%s" % kv for kv in sorted(place.items())), last_year))
@@ -227,6 +236,48 @@ def main():
         log("PROBLEMS:\n  " + "\n  ".join(problems))
         sys.exit(2)
     log("all checks passed")
+
+
+def fill_ranks(rec, inat_ranks, filled):
+    """Where the GBIF backbone gives a species no phylum, class and order (a hole in the backbone, not a
+    different classification), take the missing ranks from iNaturalist's taxonomy so the kind of eye is not lost."""
+    if not inat_ranks or rec["phylum"] or rec["class"] or rec["order"]:
+        return
+    got = []
+    for r in ("kingdom", "phylum", "class", "order", "family", "genus"):
+        if not rec[r] and inat_ranks.get(r):
+            rec[r] = inat_ranks[r]
+            got.append(r)
+    if got:
+        filled.append("%s (%s)" % (rec["sci"], ", ".join(got)))
+
+
+def check_names_with_api(species, inat, inat_taxa, top=300, rand=300, seed=7):
+    """Compare the names chosen from the archive with iNaturalist's own preferred names (its API, locale en,
+    place United States) for the most recorded species and a seeded random sample of the rest."""
+    import random
+    with_id = [s for s in species if s["en_source"] == "inat-taxonomy" and s["sci"] in inat_taxa]
+    pick = with_id[:top]
+    rest = with_id[top:]
+    random.Random(seed).shuffle(rest)
+    pick += rest[:rand]
+    if not pick:
+        return ""
+    try:
+        api = names.api_preferred([inat_taxa[s["sci"]]["id"] for s in pick])
+    except Exception as e:  # a check, not a source: report and carry on
+        return "iNaturalist API check failed: %s" % e
+    seen = [(s, api.get(str(inat_taxa[s["sci"]]["id"]))) for s in pick]
+    seen = [(s, a) for s, a in seen if a is not None]
+    same = [1 for s, a in seen if a.casefold() == s["en"].casefold()]
+    diff = [(s["sci"], s["en"], a) for s, a in seen if a.casefold() != s["en"].casefold()]
+    lines = ["English names checked against iNaturalist's API (preferred name, locale en, place United States): "
+             "%d of %d agree (%s), among them %d of the %d most recorded" % (
+                 len(same), len(seen), pct(len(same), len(seen)),
+                 sum(1 for s, a in seen[:top] if a.casefold() == s["en"].casefold()), min(top, len(seen)))]
+    for sci, ours, theirs in diff[:30]:
+        lines.append("  %s: archive %r, API %r" % (sci, ours, theirs))
+    return "\n".join(lines)
 
 
 def pct(a, b):

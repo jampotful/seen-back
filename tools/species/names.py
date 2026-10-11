@@ -82,9 +82,11 @@ def read_meta(zf):
                      "fields": _fields(core), "header": int(core.get("ignoreHeaderLines", "0")), "rowType": core.get("rowType")},
             "ext": []}
     for ext in root.findall("d:extension", NS):
-        info["ext"].append({"file": ext.find("d:files/d:location", NS).text.strip(),
-                            "id": int(ext.find("d:coreid", NS).get("index")), "fields": _fields(ext),
-                            "header": int(ext.get("ignoreHeaderLines", "0")), "rowType": ext.get("rowType")})
+        # One <extension> may list many files (iNaturalist lists one vernacular file per lexicon).
+        for loc in ext.findall("d:files/d:location", NS):
+            info["ext"].append({"file": loc.text.strip(),
+                                "id": int(ext.find("d:coreid", NS).get("index")), "fields": _fields(ext),
+                                "header": int(ext.get("ignoreHeaderLines", "0")), "rowType": ext.get("rowType")})
     return info
 
 
@@ -102,9 +104,9 @@ def _get(row, idx):
 
 
 def english_files(meta):
-    """Vernacular-name extension files to read for English names."""
+    """Vernacular-name extension files to read for English names: the English lexicon file when there is one."""
     vern = [e for e in meta["ext"] if T["vernacularName"] in e["fields"]]
-    eng = [e for e in vern if re.search(r"english", e["file"], re.I)]
+    eng = [e for e in vern if re.search(r"(^|[-_/])english\.csv$", e["file"], re.I)]
     return eng or vern
 
 
@@ -152,6 +154,7 @@ def describe(path, probe_names=()):
     return "\n".join(out)
 
 
+RANKS = ("kingdom", "phylum", "class", "order", "family", "genus")
 US_PLACE = re.compile(r"\b(United States|USA|U\.S\.|Florida|North America)\b", re.I)
 
 
@@ -172,16 +175,20 @@ def choose(rows):
 def english_names(path, wanted):
     """wanted: dict scientific name -> kingdom (GBIF). Returns (names dict sci -> English name, report dict)."""
     rep = {"wanted": len(wanted), "name_in_inat": 0, "ambiguous": 0, "kingdom_mismatch": 0, "with_english": 0}
+    taxa = {}
     with zipfile.ZipFile(path) as zf:
         meta = read_meta(zf)
         c = meta["core"]
         fi = c["fields"]
         i_name, i_rank, i_king = fi.get(T["scientificName"]), fi.get(T["taxonRank"]), fi.get(T["kingdom"])
-        cand = {}
+        rank_idx = {r: fi.get("http://rs.tdwg.org/dwc/terms/" + r) for r in RANKS}
+        cand, ranks_of = {}, {}
         for row in _rows(zf, c["file"], c["header"]):
             nm = _get(row, i_name)
             if nm in wanted and _get(row, i_rank).lower() == "species":
-                cand.setdefault(nm, []).append((_get(row, c["id"]), _get(row, i_king)))
+                tid = _get(row, c["id"])
+                cand.setdefault(nm, []).append((tid, _get(row, i_king)))
+                ranks_of[tid] = {r: _get(row, rank_idx[r]) for r in RANKS}
         chosen = {}
         for nm, lst in cand.items():
             rep["name_in_inat"] += 1
@@ -205,13 +212,49 @@ def english_names(path, wanted):
                 id_rows.setdefault(tid, []).append((_get(row, iv), _get(row, iloc), _get(row, icc), lang))
         out = {}
         for nm, ids in chosen.items():
+            if len(ids) == 1:
+                taxa[nm] = dict(ranks_of.get(ids[0], {}), id=ids[0])
             with_names = [i for i in ids if id_rows.get(i)]
             if len(with_names) > 1:
                 rep["ambiguous"] += 1
                 continue
             if with_names:
-                n = choose(id_rows[with_names[0]])
+                taxa[nm] = dict(ranks_of.get(with_names[0], {}), id=with_names[0])
+                rows = id_rows[with_names[0]]
+                n = choose(rows)
                 if n:
                     out[nm] = n
                     rep["with_english"] += 1
-    return out, rep
+                    plain = [r[0] for r in rows if r[0] and not (r[1] or "").strip() and not (r[2] or "").strip()]
+                    if plain and plain[0] != n:
+                        rep["place_name_chosen"] = rep.get("place_name_chosen", 0) + 1
+                        ex = rep.setdefault("place_name_examples", [])
+                        if len(ex) < 15:
+                            ex.append("%s: %s (no place: %s)" % (nm, n, plain[0]))
+                    if len(rows) > 1:
+                        rep["several_english"] = rep.get("several_english", 0) + 1
+    return out, rep, taxa
+
+
+def api_preferred(ids, place_id=1, per=30, pause=1.1):
+    """iNaturalist's own preferred English name for taxon ids, from its public API (locale en, preferred place
+    `place_id`, 1 = United States). Used to check the names chosen from the archive. About one request a second."""
+    out = {}
+    ids = list(ids)
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept": "application/json"})
+    for k in range(0, len(ids), per):
+        chunk = ids[k:k + per]
+        url = "https://api.inaturalist.org/v1/taxa/%s" % ",".join(str(i) for i in chunk)
+        for attempt in range(1, 5):
+            try:
+                r = s.get(url, params={"locale": "en", "preferred_place_id": place_id}, timeout=60)
+                if r.status_code == 200:
+                    for t in r.json().get("results", []):
+                        out[str(t.get("id"))] = t.get("preferred_common_name") or ""
+                    break
+                time.sleep(5 * attempt)
+            except (requests.RequestException, ValueError):
+                time.sleep(5 * attempt)
+        time.sleep(pause)
+    return out

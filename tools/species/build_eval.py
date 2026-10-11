@@ -137,7 +137,7 @@ def main():
                 if start <= dd <= end:
                     days.append(dd.isoformat())
     log("== reading %d days" % len(days))
-    got = common.pmap(lambda d: fetch_day(base, d), days, workers=args.workers, desc="days", every=60)
+    got = common.pmap(lambda d: fetch_day(base, d), days, workers=min(args.workers, 4), desc="days", every=60)
     pool, day_cnt = {}, Counter()
     dup_ids, short_days, retried = 0, [], 0
     for day, cnt, recs, attempt in got:
@@ -213,6 +213,7 @@ def main():
     info = dict(zip(need, common.pmap(lambda k: common.species_info(k, cache), need, workers=args.workers, desc="species API")))
     new = [k for k in need if k not in by_key]
     en = {k: by_key[k]["en"] for k in need if k in by_key}
+    inat_taxa = {}
     if new:
         wanted = {}
         for k in new:
@@ -221,7 +222,7 @@ def main():
                 wanted.setdefault(nm, info[k].get("kingdom"))
         try:
             arch = names.ensure_archive(args.cache)
-            inat, rep = names.english_names(arch, wanted)
+            inat, rep, inat_taxa = names.english_names(arch, wanted)
             log("  iNaturalist names for species not in the list: %s" % rep)
         except Exception as e:
             inat = {}
@@ -234,16 +235,22 @@ def main():
             en[k] = inat.get(nm) or gmap.get(k) or ""
 
     rows = []
+    filled = []
     for c in sorted(chosen, key=lambda c: (c["date"], int(c["gbif_id"]))):
         k = str(c["speciesKey"])
         i = info[k]
-        tax = {f: (i.get(f) or "") for f in ("kingdom", "phylum", "class", "order", "family", "genus")}
+        sci = i.get("canonicalName") or i.get("species") or ""
+        if k in by_key:  # the species list's taxonomy (with any ranks it filled) and kind of eye
+            tax = {f: by_key[k].get(f, "") for f in ("kingdom", "phylum", "class", "order", "family", "genus")}
+        else:
+            tax = {f: (i.get(f) or "") for f in ("kingdom", "phylum", "class", "order", "family", "genus")}
+            fill_ranks(dict(tax, sci=sci), tax, inat_taxa.get(sci), filled)
         m = PHOTO.match(c["photo"])
         rows.append({
             "gbif_id": c["gbif_id"], "obs_url": c["obs_url"], "key": int(k) if k.isdigit() else k,
-            "sci": i.get("canonicalName") or i.get("species") or "", "en": en.get(k, ""),
+            "sci": sci, "en": en.get(k, ""),
             "kingdom": tax["kingdom"], "class": tax["class"], "order": tax["order"], "family": tax["family"],
-            "eyes": eyes.kind_of_record(tax), "date": c["date"], "month": int(c["date"][5:7]),
+            "eyes": by_key[k]["eyes"] if k in by_key else eyes.kind_of_record(tax), "date": c["date"], "month": int(c["date"][5:7]),
             "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/%s/medium.%s" % (m.group(1), m.group(2)),
             "licence": common.licence_id(c["photo_licence"] or c["rec_licence"]), "split": split_of(c["gbif_id"]),
             "_licence_from_record": not c["photo_licence"],
@@ -261,6 +268,8 @@ def main():
         for r in rows:
             w.writerow([r[c] for c in COLUMNS])
     log("  wrote %s: %d rows" % (out / "manifest.csv", len(rows)))
+    if filled:
+        checks.append("ranks filled from iNaturalist's taxonomy for species outside the list: %s" % "; ".join(sorted(set(filled))))
     lic_from_rec = sum(1 for r in rows if r["_licence_from_record"])
     if lic_from_rec:
         checks.append("%d rows took the record's licence because the image carried none" % lic_from_rec)
@@ -270,6 +279,17 @@ def main():
         log("PROBLEMS:\n  " + "\n  ".join(problems))
         sys.exit(2)
     log("all checks passed")
+
+
+def fill_ranks(rec, tax, inat_ranks, filled):
+    """As in build_species.fill_ranks: only where GBIF gives no phylum, class and order."""
+    if not inat_ranks or tax["phylum"] or tax["class"] or tax["order"]:
+        return
+    got = [r for r in ("kingdom", "phylum", "class", "order", "family", "genus") if not tax[r] and inat_ranks.get(r)]
+    for r in got:
+        tax[r] = inat_ranks[r]
+    if got:
+        filled.append("%s (%s)" % (rec["sci"], ", ".join(got)))
 
 
 def pct(a, b):
