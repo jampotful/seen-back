@@ -17,9 +17,8 @@ case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;;
 
 step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version; lscpu | grep -E "Model name|Flags" | sed -E "s/(Flags:).*/\1 $(grep -o -w -E "avx2|avx512f|avx512_vnni|avx_vnni|avx512bw" /proc/cpuinfo | sort -u | tr "\n" " ")/"
 step "build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)"
-case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*fix*)   # the resume probe on a page with a patch to src/cam.rec.js: ...fixkey -> webkit-resume-key.patch, ...fixdel -> webkit-resume-del.patch, else webkit-resume.patch
-  case "${GITHUB_REF_NAME}" in *fixkey*) RP=webkit-resume-key.patch ;; *fixdel*) RP=webkit-resume-del.patch ;; *) RP=webkit-resume.patch ;; esac
-  git apply "ci/engines/patches/$RP" && echo "$RP applied" || echo "$RP FAILED to apply" ;; esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*fix*)   # the resume probe on a page with ci/engines/patches/webkit-resume.patch applied to src/cam.rec.js
+  git apply ci/engines/patches/webkit-resume.patch && echo "webkit-resume.patch applied" || echo "webkit-resume.patch FAILED to apply" ;; esac
 if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/build-selftest-on-demand.patch 2>/dev/null; then git apply ci/engines/patches/build-selftest-on-demand.patch && echo "build.py patched"; fi
 python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 step "playwright $PWV: $BROWSERS"
