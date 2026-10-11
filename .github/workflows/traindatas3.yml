@@ -1,0 +1,27 @@
+name: traindatas3
+# Training photos built from iNaturalist's open-data files (no API). Start it by pushing a commit to a branch named
+# run/traindatas3/<anything>. The manifest goes to pub/data-alachua; the summary and log come back on ci.
+on:
+  push:
+    branches: ['run/traindatas3/**']
+permissions:
+  contents: write
+concurrency:
+  group: traindatas3-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: build, check and publish
+        run: python3 -m pip install --quiet requests && bash ci/data/train_s3.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh traindatas3 out
