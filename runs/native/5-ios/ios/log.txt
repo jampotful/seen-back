@@ -1,0 +1,133 @@
+
+=== 09:11:52 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+arm64
+7516192768
+Xcode 26.6 Build version 17F113 
+simulator SDK 26.5
+
+=== 09:11:56 boot an iPhone simulator now, it takes a while
+simulator: 88931AEA-62E6-447F-8697-DCE00A671384 com.apple.CoreSimulator.SimRuntime.iOS-26-5 iPhone 17
+
+=== 09:12:07 build the page
+build 8 | index.html 214821 bytes | artifact 212243 bytes | selftest.js 44338 bytes
+build ok
+
+=== 09:13:20 compile the shell with swiftc for the simulator
+bundle: 45 files, 71808 kB in /Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app/www
+/Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app: replacing existing signature
+codesign (ad hoc): exit 0
+app: 72000 kB
+zipped like an .ipa: 54410335 bytes
+
+=== 09:15:51 install and open the app
+Device already booted, nothing to do.
+
+install: exit 0
+org.seenback.shell: 15874
+screenshot 1-open
+{"st":null,"sb":true,"screen":"intro","src":"none","big":null,"href":"app://localhost/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
+
+=== 09:21:40 2. the page's self-test inside the app (app://localhost), with the shipped pocket recognizer on four photos
+org.seenback.shell: 16596
+screenshot 2-selftest-012s
+screenshot 2-selftest-028s
+self-test done after about 28 s
+screenshot 2-selftest-final
+address: app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg | secure context: True | crossOriginIsolated: False
+user agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+self-test done: True ok: True checks: 98 phase: done
+fails: []
+webgl2: True float: True renderer: Apple GPU engineError: None
+rec: {"slot": "models/pocket", "photos": [{"name": "heron.png", "bytes": 29625, "decodeMs": 34, "shown": "900x1200", "wallMs": 656, "from": "900x1200", "ms": {"load": 0, "pre": 48, "run": 558, "post": 26}, "kind": "wader", "kinds3": [["wader", 0.3825], ["bird", 0.25670000000000004], ["dog", 0.0635]], "head3": [["bird", 0.3617], ["wader", 0.251], ["dog", 0.0908]], "species1": ["Eudocimus albus", 0.187]}, {"name": "portrait.jpg", "bytes": 46865, "decodeMs": 66, "shown": "960x1280", "wallMs": 659, "from": "1200x1600", "ms": {"load": 0, "pre": 27, "run": 559, "post": 6}, "kind": "person", "kinds3": [["person", 0.4903], ["other", 0.10859999999999999], ["bird", 0.0867]], "head3": [["person", 0.4903], ["dog", 0.1039], ["bird", 0.1034]], "species1": ["Fulica americana", 0.168]}, {"name": "wall.png", "bytes": 4614, "decodeMs": 16, "shown": "1024x768", "wallMs": 694, "from": "1024x768", "ms": {"load": 0, "pre": 13, "run": 661, "post": 5}, "kind": "none", "kinds3": [["none", 0.4707], ["insect", 0.1195], ["dog", 0.0711]], "head3": [["none", 0.4707], ["dog", 0.1015], ["bird", 0.0787]], "species1": ["Idaea demissaria", 0.092]}, {"name": "garden.jpg", "bytes": 257177, "decodeMs": 79, "shown": "1280x960", "wallMs": 672, "from": "1600x1200", "ms": {"load": 0, "pre": 31, "run": 553, "post": 8}, "kind": "plant", "kinds3": [["plant", 0.3285], ["none", 0.2614], ["dog", 0.08960000000000001]], "head3": [["none", 0.2614], ["plant", 0.1791], ["dog", 0.128]], "species1": ["Torenia crustacea", 0.108]}], "readyMs": 1458, "about": {"state": "ready", "why": "", "fail": "", "model": "tinyclip-39m-16", "rule": "mix", "trained": true, "backend": "wasm", "threads": 1, "loadMs": 1444, "start": {"vectors": 44, "session": 597, "warm": 547}, "got": 61953585, "total": 61953585, "slot": "models/pocket/manifest.json", "have": "", "keptBytes": 0, "bytes": 40978137, "getFail": ""}, "meanRunMs": 613}
+keys: ['build', 'checks', 'done', 'env', 'fails', 'motion', 'ms', 'ok', 'phase', 'pose', 'posing', 'rec', 'still', 'v']
+
+=== 09:22:17 4. the larger model (models/naturalist: 310 MB from raw.githubusercontent.com) through the page's own recognizer inside the app, then four photos
+org.seenback.shell: 17999
+probe done after about 14 s
+screenshot 4-big-final
+ci/native/ios.sh: line 42: 17981 Terminated: 15          ( while :; do
+    echo "$(date -u +%T) $(ps -axo pid=,rss=,command= | grep -E 'WebKit.WebContent|SeenBack' | grep -v grep | awk '{ n = ($0 ~ /WebContent/) ? "WebContent" : "SeenBack"; printf "%s %s %s;", $1, $2, n }')"; sleep 4;
+done ) > "$OUT/$label-memory.txt" 2>&1
+started: "2026-10-11T09:22:27.012Z"
+steps: ["get at 4"]
+before: {"usage": 77, "quota": 10307921511}
+after: null
+gotMs: null
+has: "absent"
+size: {"bytes": 309812341, "kept": 0, "mb": 310, "keptMb": 0, "seconds": {"computer": 5}}
+readyMs: null
+error: "keep: The larger model could not be kept on this device."
+ms: 1300
+done: true
+line: "Looking more closely."
+about: {"state": "idle", "why": "", "fail": "", "model": "bioclip2-l14", "rule": "mix", "trained": false, "backend": "", "threads": 0, "loadMs": 0, "start": null, "last": null, "got": 0, "total": 0, "slot": "models/naturalist/manifest.json", "have": "absent", "keptBytes": 0, "bytes": 309812341, "getFail": "keep: Request url is not HTTP/HTTPS"}
+peak resident memory on the Mac: 16596 SeenBack 144 MB
+peak resident memory on the Mac: 16608 WebContent 281 MB
+peak resident memory on the Mac: 17988 WebContent 1 MB
+peak resident memory on the Mac: 17999 SeenBack 163 MB
+peak resident memory on the Mac: 18006 WebContent 629 MB
+peak resident memory on the Mac: 18042 WebContent 0 MB
+peak resident memory on the Mac: 18250 WebContent 1 MB
+
+=== 09:22:38 5. the larger model again, with the same app pointed at the page served from this Mac (http://127.0.0.1:8781), where Cache Storage takes http addresses
+8781 -> 200
+org.seenback.shell: 20439
+screenshot 5-big-served-032s
+probe done after about 64 s
+screenshot 5-big-served-final
+ci/native/ios.sh: line 42: 20288 Terminated: 15          ( while :; do
+    echo "$(date -u +%T) $(ps -axo pid=,rss=,command= | grep -E 'WebKit.WebContent|SeenBack' | grep -v grep | awk '{ n = ($0 ~ /WebContent/) ? "WebContent" : "SeenBack"; printf "%s %s %s;", $1, $2, n }')"; sleep 4;
+done ) > "$OUT/$label-memory.txt" 2>&1
+started: "2026-10-11T09:23:27.753Z"
+steps: ["get at 2", "kept and started at 17529"]
+before: {"usage": 61956931, "quota": 10307921511}
+after: {"usage": 381643630, "quota": 10307921511}
+gotMs: 17529
+has: "kept"
+size: {"bytes": 309812341, "kept": 309812341, "mb": 310, "keptMb": 310, "seconds": {"computer": 5}}
+readyMs: 0
+error: null
+ms: 54060
+done: true
+line: "Looking more closely."
+about: {"state": "ready", "why": "", "fail": "", "model": "bioclip2-l14", "rule": "mix", "trained": false, "backend": "wasm", "threads": 1, "loadMs": 11914, "start": {"vectors": 80, "session": 2027, "warm": 6459}, "last": null, "got": 9864829, "total": 9864829, "slot": "models/naturalist/manifest.json", "have": "kept", "keptBytes": 309812341, "bytes": 309812341, "getFail": ""}
+photo: {"name": "heron.png", "ms": 9558, "answer": "{\"kind\":\"wader\",\"kindP\":0.8474607737402905,\"sure\":true,\"kinds\":[{\"key\":\"wader\",\"p\":0.8474607737402905,\"head\":0.8115658402346834,\"list\":0.8833558798593277},{\"key\":\"bird\",\"p\":0.14245779954301066,\"head\":0.18202763436610314,\"list\":0.10288798482489296},{\"key\":\"other\",\"p\":0.003945754558590852,\"head\":0.006225415522566385,\"list\":0.0016660939201807886},{\"key\":\"plant\",\"p\":0.0025384172303851236,\"head\":0.00002503611498320499,\"list\":0.005051799332941195},{\"key\":\"insect\",\"p\":0.002118457210932695,\"head\":0.0001"}
+photo: {"name": "portrait.jpg", "ms": 11197, "answer": "{\"kind\":\"other\",\"kindP\":0.519025673253535,\"sure\":true,\"kinds\":[{\"key\":\"other\",\"p\":0.519025673253535,\"head\":0.9179340747587796,\"list\":0.12014497869888092},{\"key\":\"wader\",\"p\":0.18930510451051843,\"head\":0.042093439899398476,\"list\":0.33659439204263303},{\"key\":\"plant\",\"p\":0.11639836419367863,\"head\":0.0061572863458239134,\"list\":0.2266917200173079},{\"key\":\"insect\",\"p\":0.10558959980942337,\"head\":0.01277171253353835,\"list\":0.19845325291366508},{\"key\":\"bird\",\"p\":0.04248020551344978,\"head\":0.01857646845956"}
+photo: {"name": "garden.jpg", "ms": 8797, "answer": "{\"kind\":\"plant\",\"kindP\":0.7985331743238261,\"sure\":true,\"kinds\":[{\"key\":\"plant\",\"p\":0.7985331743238261,\"head\":0.6521390171786035,\"list\":0.9449610723372073},{\"key\":\"insect\",\"p\":0.10782535518028523,\"head\":0.17460151984759217,\"list\":0.041050656271538956},{\"key\":\"other\",\"p\":0.07216294459335677,\"head\":0.14198563839921433,\"list\":0.0023403343516960173},{\"key\":\"bird\",\"p\":0.007359280054495402,\"head\":0.0068874808051685825,\"list\":0.007831358931054425},{\"key\":\"wader\",\"p\":0.006635096782206395,\"head\":0.0127695"}
+photo: {"name": "wall.png", "ms": 6968, "answer": "{\"kind\":\"other\",\"kindP\":0.46976651173928885,\"sure\":false,\"kinds\":[{\"key\":\"other\",\"p\":0.46976651173928885,\"head\":0.8158398408816804,\"list\":0.12371111973505676},{\"key\":\"plant\",\"p\":0.2209187957478604,\"head\":0.09473163065722918,\"list\":0.3471562957675815},{\"key\":\"insect\",\"p\":0.2141394154270249,\"head\":0.01826992787888675,\"list\":0.410068359658095},{\"key\":\"reptile\",\"p\":0.04684869381175489,\"head\":0.04063049717276143,\"list\":0.05307458584774303},{\"key\":\"bird\",\"p\":0.01398768365480766,\"head\":0.00737206767759"}
+peak resident memory on the Mac: 17999 SeenBack 140 MB
+peak resident memory on the Mac: 18006 WebContent 188 MB
+peak resident memory on the Mac: 20295 WebContent 1 MB
+peak resident memory on the Mac: 20363 WebContent 1 MB
+peak resident memory on the Mac: 20439 SeenBack 165 MB
+peak resident memory on the Mac: 20450 WebContent 1427 MB
+peak resident memory on the Mac: 20917 WebContent 0 MB
+peak resident memory on the Mac: 21053 WebContent 0 MB
+peak resident memory on the Mac: 21143 WebContent 0 MB
+peak resident memory on the Mac: 21321 WebContent 1 MB
+peak resident memory on the Mac: 21509 WebContent 1 MB
+peak resident memory on the Mac: 21550 WebContent 0 MB
+peak resident memory on the Mac: 21574 WebContent 1 MB
+peak resident memory on the Mac: 21651 WebContent 0 MB
+peak resident memory on the Mac: 21817 WebContent 0 MB
+peak resident memory on the Mac: 22163 WebContent 1 MB
+
+=== 09:24:28 the app's own log (console errors and warnings, loads it could not serve)
+      14 /Users/runner/work/seen-back/seen-back/out/ios/app-log.txt
+1791710475.9 open app://localhost/index.html
+1791710476.7 launched
+1791710487.1 page finished app://localhost/index.html
+1791710504.1 open app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791710504.2 launched
+1791710505.4 page finished app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791710541.0 open app://localhost/index.html
+1791710541.1 launched
+1791710542.8 page finished app://localhost/index.html
+1791710547.0 probe native-probe/big.js injected
+1791710601.6 open http://127.0.0.1:8781/index.html
+1791710601.7 launched
+1791710603.5 page finished http://127.0.0.1:8781/index.html
+1791710607.7 probe ci/native/probe-big.js injected
