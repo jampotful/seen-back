@@ -14,6 +14,22 @@
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
   var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
   var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  function plain(x) { return String(x || '').toLowerCase().replace(/[^a-z' -]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function slips(a, b, lim) {                          // how many slips of the keys turn one word into the other: a letter wrong, missing, added, or two swapped
+    var n = a.length, m = b.length, i, j, p2 = null, p = [], c, low;
+    for (j = 0; j <= m; j++) p[j] = j;
+    for (i = 1; i <= n; i++) {
+      c = [i]; low = i;
+      for (j = 1; j <= m; j++) {
+        c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1));
+        if (p2 && i > 1 && j > 1 && a.charCodeAt(i - 1) === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === b.charCodeAt(j - 1)) c[j] = Math.min(c[j], p2[j - 2] + 1);
+        if (c[j] < low) low = c[j];
+      }
+      if (low > lim) return lim + 1;
+      p2 = p; p = c;
+    }
+    return p[m];
+  }
   function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the larger model
     var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
@@ -580,6 +596,22 @@
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
       place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
       listed: function () { return !!(cur && cur.table); },
+      // A typed name looked up in the species list: the species it names exactly, the species whose names hold every word of it, and the
+      // species whose names are a slip of the keys away. The most recorded come first. Empty where there is no list.
+      find: function (q) {
+        var t = cur && cur.table, s = plain(q), out = { exact: null, has: [], near: [] }, ws, lim, best = -1;
+        if (!t || s.length < 3) return out;
+        ws = s.split(' '); lim = s.length <= 5 ? 1 : 2;
+        t.forEach(function (r) {
+          var en = plain(r.en), sci = plain(r.sci), w = 0, i;
+          if (r.m) for (i = 0; i < 12; i++) w += r.m[i];
+          if (en === s || sci === s) { if (w > best) { best = w; out.exact = r; } return; }
+          if (ws.every(function (x) { return (' ' + en + ' ').indexOf(' ' + x) >= 0 || (' ' + sci + ' ').indexOf(' ' + x) >= 0; })) { out.has.push([w, r]); return; }
+          if ((en && Math.abs(en.length - s.length) <= lim && slips(s, en, lim) <= lim) || (sci && Math.abs(sci.length - s.length) <= lim && slips(s, sci, lim) <= lim)) out.near.push([w, r]);
+        });
+        function top(a) { return a.sort(function (x, y) { return y[0] - x[0]; }).slice(0, 3).map(function (x) { return x[1]; }); }
+        out.has = top(out.has); out.near = top(out.near); return out;
+      },
       progress: function (fn) { onProgress = fn; },
       // the larger model: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
       survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },

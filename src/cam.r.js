@@ -28,6 +28,26 @@
     return '';                                     // no word in it is a kind this page knows
   }
 
+  // The words of the table, one plain form each, for catching a slip of the keys ("herron"). Made once from the patterns above.
+  var LEXW = null;
+  function lexWords() {
+    if (LEXW) return LEXW; LEXW = [];
+    LEX.forEach(function (L) {
+      if (L[0] === 'person') return;
+      L[1].source.replace(/\\b/g, '').replace(/^\(/, '').replace(/\)$/, '').replace(/\((\w+)\|\w+\)\??/g, '$1').replace(/\(\w+\)\?/g, '').replace(/(\w)\?/g, function (a, ch) { return ch === 's' ? '' : ch; })
+        .split('|').forEach(function (w) { if (/^[a-z]{3,}$/.test(w)) LEXW.push([w, L[0]]); });
+    });
+    return LEXW;
+  }
+  function nearWords(text) {                       // kinds whose word is a slip of the keys from a word that was typed
+    var out = [], seen = {};
+    plain(text).split(' ').forEach(function (t) {
+      if (t.length < 3) return; var lim = t.length <= 5 ? 1 : 2;
+      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0].charAt(0).toUpperCase() + w[0].slice(1), sci: '', kind: w[1] }); } });
+    });
+    return out.slice(0, 3);
+  }
+
   // ---------- the record: everyone met so far, and the eyes that came with them
   // Kept in this browser, and beside it in the viewer's own private part of the artifact's store, where one is offered.
   var KINDS = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant'];

@@ -423,7 +423,7 @@
       if (bmp.close) bmp.close(); return c;
     }, viaImg);
   }
-  function labelDate(d) { var R = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii']; return d.getDate() + '.' + R[d.getMonth()] + '.' + d.getFullYear(); }
+  function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
   function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
@@ -637,6 +637,26 @@
     var t = String(text || '').toLowerCase().replace(/[^a-z' -]+/g, ' ');
     for (var i = 0; i < LEX.length; i++) if (LEX[i][1].test(t)) return LEX[i][0];
     return '';                                     // no word in it is a kind this page knows
+  }
+
+  // The words of the table, one plain form each, for catching a slip of the keys ("herron"). Made once from the patterns above.
+  var LEXW = null;
+  function lexWords() {
+    if (LEXW) return LEXW; LEXW = [];
+    LEX.forEach(function (L) {
+      if (L[0] === 'person') return;
+      L[1].source.replace(/\\b/g, '').replace(/^\(/, '').replace(/\)$/, '').replace(/\((\w+)\|\w+\)\??/g, '$1').replace(/\(\w+\)\?/g, '').replace(/(\w)\?/g, function (a, ch) { return ch === 's' ? '' : ch; })
+        .split('|').forEach(function (w) { if (/^[a-z]{3,}$/.test(w)) LEXW.push([w, L[0]]); });
+    });
+    return LEXW;
+  }
+  function nearWords(text) {                       // kinds whose word is a slip of the keys from a word that was typed
+    var out = [], seen = {};
+    plain(text).split(' ').forEach(function (t) {
+      if (t.length < 3) return; var lim = t.length <= 5 ? 1 : 2;
+      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0].charAt(0).toUpperCase() + w[0].slice(1), sci: '', kind: w[1] }); } });
+    });
+    return out.slice(0, 3);
   }
 
   // ---------- the record: everyone met so far, and the eyes that came with them
@@ -870,6 +890,22 @@
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
   var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
   var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  function plain(x) { return String(x || '').toLowerCase().replace(/[^a-z' -]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function slips(a, b, lim) {                          // how many slips of the keys turn one word into the other: a letter wrong, missing, added, or two swapped
+    var n = a.length, m = b.length, i, j, p2 = null, p = [], c, low;
+    for (j = 0; j <= m; j++) p[j] = j;
+    for (i = 1; i <= n; i++) {
+      c = [i]; low = i;
+      for (j = 1; j <= m; j++) {
+        c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1));
+        if (p2 && i > 1 && j > 1 && a.charCodeAt(i - 1) === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === b.charCodeAt(j - 1)) c[j] = Math.min(c[j], p2[j - 2] + 1);
+        if (c[j] < low) low = c[j];
+      }
+      if (low > lim) return lim + 1;
+      p2 = p; p = c;
+    }
+    return p[m];
+  }
   function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the larger model
     var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
@@ -1436,6 +1472,22 @@
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
       place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
       listed: function () { return !!(cur && cur.table); },
+      // A typed name looked up in the species list: the species it names exactly, the species whose names hold every word of it, and the
+      // species whose names are a slip of the keys away. The most recorded come first. Empty where there is no list.
+      find: function (q) {
+        var t = cur && cur.table, s = plain(q), out = { exact: null, has: [], near: [] }, ws, lim, best = -1;
+        if (!t || s.length < 3) return out;
+        ws = s.split(' '); lim = s.length <= 5 ? 1 : 2;
+        t.forEach(function (r) {
+          var en = plain(r.en), sci = plain(r.sci), w = 0, i;
+          if (r.m) for (i = 0; i < 12; i++) w += r.m[i];
+          if (en === s || sci === s) { if (w > best) { best = w; out.exact = r; } return; }
+          if (ws.every(function (x) { return (' ' + en + ' ').indexOf(' ' + x) >= 0 || (' ' + sci + ' ').indexOf(' ' + x) >= 0; })) { out.has.push([w, r]); return; }
+          if ((en && Math.abs(en.length - s.length) <= lim && slips(s, en, lim) <= lim) || (sci && Math.abs(sci.length - s.length) <= lim && slips(s, sci, lim) <= lim)) out.near.push([w, r]);
+        });
+        function top(a) { return a.sort(function (x, y) { return y[0] - x[0]; }).slice(0, 3).map(function (x) { return x[1]; }); }
+        out.has = top(out.has); out.near = top(out.near); return out;
+      },
       progress: function (fn) { onProgress = fn; },
       // the larger model: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
       survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },
@@ -1632,7 +1684,7 @@
   }
   function openClaim(sub) {
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);   // the field's own words say what to type
+    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -1915,14 +1967,29 @@
   // ---------- wiring
   $('claimForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var t = clip($('claimName').value, 60), key = kindOfName(t);
+    var t = clip($('claimName').value, 60), hit = pocket.find ? pocket.find(t) : null, sp = hit && hit.exact, key, named, sug, box = $('claimSuggest');
+    box.textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
-    if (!key) {                                    // a pet's own name, or a kind this page has no word for
-      $('claimNote').textContent = '\u201C' + t + '\u201D is not a kind this page knows. Type what kind of animal or plant it is, such as cat. Its own name can come along: \u201CBiscuit, a cat\u201D.';
-      $('claimOther').textContent = 'It is some other living thing. Keep \u201C' + t + '\u201D'; claimKept = t; show('claimOtherRow', true);
-      return;
+    // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
+    if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
+    else { key = kindOfName(t); named = { common: cap(t), scientific: '', by: 'you' }; }
+    if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
+      $('claimNote').textContent = 'Regards has no eyes of its own for \u201C' + named.common + '\u201D yet. It can show a general view.';
+      claimKept = named; show('claimOtherRow', true); return;
     }
-    diag('said', key); reveal(key, { common: cap(t), scientific: '', by: 'you' });
+    if (key) { diag('said', key); reveal(key, named); return; }
+    sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
+    if (sug.length) {                              // a slip of the keys, or a name that fits several
+      $('claimNote').textContent = 'Did you mean one of these?';
+      offerList(sug.map(function (r) { return { sci: r.sci, en: r.en, kind: r.kind, local: !!r.sci }; })).forEach(function (o) {
+        var b = el('button', 'pill ghost', o.label); b.type = 'button';
+        b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
+        box.appendChild(b);
+      });
+      show('claimSuggestRow', true); return;
+    }
+    $('claimNote').textContent = 'Regards can\u2019t identify \u201C' + t + '\u201D. If that is our mistake, tell us in About. A pet\u2019s own name works beside its kind: \u201CBiscuit, a cat\u201D.';
+    show('claimAboutRow', true);
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
@@ -1957,7 +2024,14 @@
     var text = v ? (v.text || (v.state === 'get' ? getLine() : SVC_SAY[v.state]) || '') : '', tap = v && (v.state === 'offer' || v.state === 'change' || v.state === 'get') ? tapSvc : null;
     if (!text && bigNote) { text = bigNote.text; tap = bigNote.tap; }     // the larger model's download belongs to no one photo: its line shows whenever the photo has none of its own
     svcTap = tap;
-    ['svcHud', 'svcView'].forEach(function (id) { var b = $(id); b.textContent = text; b.disabled = !tap; b.hidden = !text; });
+    var loupe = !!tap && /^A larger model .*(Get it|Ask it)\?$/.test(text);     // the offer of a finer name is a loupe to tap; its sentence stays for screen readers
+    ['svcHud', 'svcView'].forEach(function (id) {
+      var b = $(id), sp;
+      b.textContent = '';
+      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 20.5 20.5"/><path d="M10.5 7.6v5.8M7.6 10.5h5.8"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
+      else b.textContent = text;
+      b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text;
+    });
   }
   function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
   function considerService(t) {
@@ -2261,8 +2335,9 @@
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
-  var claimKept = '';
-  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', { common: cap(claimKept), scientific: '', by: 'you' }); } });
+  var claimKept = null;
+  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
+  $('claimAbout').addEventListener('click', function () { openRecord(); $('about').open = true; paintAbout(); later(function () { try { $('about').scrollIntoView(); } catch (e) {} }, 60); });
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
   $('recordClose').addEventListener('click', dismissSheets);
@@ -2327,7 +2402,7 @@
 
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
-  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain,
+  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 

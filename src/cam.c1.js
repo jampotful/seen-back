@@ -50,7 +50,7 @@
       if (bmp.close) bmp.close(); return c;
     }, viaImg);
   }
-  function labelDate(d) { var R = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii']; return d.getDate() + '.' + R[d.getMonth()] + '.' + d.getFullYear(); }
+  function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
   function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }

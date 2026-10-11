@@ -165,6 +165,12 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font-family: inherit; font-size: calc(var(--h3-size) * .78); line-height: 1.5; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 .sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: calc(var(--h3-size) * .9); }
 .line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: calc(var(--h3-size) * .9); line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.line.loupe { position: relative; width: 48px; height: 48px; max-width: none; padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; animation: loupeIn .5s ease-out both; }
+.line.loupe svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.line.loupe::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--ink); opacity: 0; animation: loupeRing 2.6s ease-out 2; pointer-events: none; }
+@keyframes loupeIn { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes loupeRing { 0% { opacity: .55; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(1.55); } }
+@media (prefers-reduced-motion: reduce) { .line.loupe, .line.loupe::after { animation: none; } }
 .line:disabled { border-color: transparent; background: none; padding-left: 0; text-decoration: none; cursor: default; opacity: 1; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none !important; }
 .tick { display: flex; align-items: center; gap: 10px; font-size: calc(var(--h3-size) * .94); color: var(--dim); }
 .tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--paper); }
@@ -262,7 +268,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <button class="pill round" type="submit" aria-label="That is what it was"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
-    <div class="row links" id="claimOtherRow" hidden><button class="link" id="claimOther" type="button"></button></div>
+    <div class="offers" id="claimSuggestRow" hidden><div class="row" id="claimSuggest"></div></div>
+    <div class="row links" id="claimOtherRow" hidden><button class="pill ghost" id="claimOther" type="button">Show it</button></div>
+    <div class="row links" id="claimAboutRow" hidden><button class="link" id="claimAbout" type="button">About</button></div>
     <div class="row links" id="claimAskRow" hidden><button class="link" id="claimAsk" type="button"></button></div>
   </section>
 
@@ -281,6 +289,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <summary>About</summary>
       <p class="aboutLead" id="aboutApp">Regards lends you the eyes of whatever you photograph, for a week.</p>
       <p class="aboutLead" id="aboutBy">Made by Conrad Cheung, an artist in Gainesville, Florida.</p>
+      <p class="aboutLead" id="aboutTell">Something wrong, or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener">Tell us</a>.</p>
       <p class="fine2" id="aboutBuildLabel">This build</p>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="ico sm" id="aboutCopy" type="button" aria-label="Copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.2a1.7 1.7 0 0 0-1.7-1.7H6.2a1.7 1.7 0 0 0-1.7 1.7v7.6a1.7 1.7 0 0 0 1.7 1.7h2.3"/></svg></button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>

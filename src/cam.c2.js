@@ -28,7 +28,7 @@
   }
   function openClaim(sub) {
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);   // the field's own words say what to type
+    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -311,14 +311,29 @@
   // ---------- wiring
   $('claimForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var t = clip($('claimName').value, 60), key = kindOfName(t);
+    var t = clip($('claimName').value, 60), hit = pocket.find ? pocket.find(t) : null, sp = hit && hit.exact, key, named, sug, box = $('claimSuggest');
+    box.textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
-    if (!key) {                                    // a pet's own name, or a kind this page has no word for
-      $('claimNote').textContent = '\u201C' + t + '\u201D is not a kind this page knows. Type what kind of animal or plant it is, such as cat. Its own name can come along: \u201CBiscuit, a cat\u201D.';
-      $('claimOther').textContent = 'It is some other living thing. Keep \u201C' + t + '\u201D'; claimKept = t; show('claimOtherRow', true);
-      return;
+    // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
+    if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
+    else { key = kindOfName(t); named = { common: cap(t), scientific: '', by: 'you' }; }
+    if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
+      $('claimNote').textContent = 'Regards has no eyes of its own for \u201C' + named.common + '\u201D yet. It can show a general view.';
+      claimKept = named; show('claimOtherRow', true); return;
     }
-    diag('said', key); reveal(key, { common: cap(t), scientific: '', by: 'you' });
+    if (key) { diag('said', key); reveal(key, named); return; }
+    sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
+    if (sug.length) {                              // a slip of the keys, or a name that fits several
+      $('claimNote').textContent = 'Did you mean one of these?';
+      offerList(sug.map(function (r) { return { sci: r.sci, en: r.en, kind: r.kind, local: !!r.sci }; })).forEach(function (o) {
+        var b = el('button', 'pill ghost', o.label); b.type = 'button';
+        b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
+        box.appendChild(b);
+      });
+      show('claimSuggestRow', true); return;
+    }
+    $('claimNote').textContent = 'Regards can\u2019t identify \u201C' + t + '\u201D. If that is our mistake, tell us in About. A pet\u2019s own name works beside its kind: \u201CBiscuit, a cat\u201D.';
+    show('claimAboutRow', true);
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
@@ -353,7 +368,14 @@
     var text = v ? (v.text || (v.state === 'get' ? getLine() : SVC_SAY[v.state]) || '') : '', tap = v && (v.state === 'offer' || v.state === 'change' || v.state === 'get') ? tapSvc : null;
     if (!text && bigNote) { text = bigNote.text; tap = bigNote.tap; }     // the larger model's download belongs to no one photo: its line shows whenever the photo has none of its own
     svcTap = tap;
-    ['svcHud', 'svcView'].forEach(function (id) { var b = $(id); b.textContent = text; b.disabled = !tap; b.hidden = !text; });
+    var loupe = !!tap && /^A larger model .*(Get it|Ask it)\?$/.test(text);     // the offer of a finer name is a loupe to tap; its sentence stays for screen readers
+    ['svcHud', 'svcView'].forEach(function (id) {
+      var b = $(id), sp;
+      b.textContent = '';
+      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 20.5 20.5"/><path d="M10.5 7.6v5.8M7.6 10.5h5.8"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
+      else b.textContent = text;
+      b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text;
+    });
   }
   function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
   function considerService(t) {
@@ -657,8 +679,9 @@
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
-  var claimKept = '';
-  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', { common: cap(claimKept), scientific: '', by: 'you' }); } });
+  var claimKept = null;
+  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
+  $('claimAbout').addEventListener('click', function () { openRecord(); $('about').open = true; paintAbout(); later(function () { try { $('about').scrollIntoView(); } catch (e) {} }, 60); });
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
   $('recordClose').addEventListener('click', dismissSheets);
@@ -723,7 +746,7 @@
 
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
-  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain,
+  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
