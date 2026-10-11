@@ -36,3 +36,21 @@ On two shared cores the first takes about a minute and the second about forty se
 - A COCO photo's month is taken two ways: from the manifest's `month` column, and from `sha256("month|" + id)` modulo 12, which `tools/eval/kinds.py` uses. The second was read in that file after the first disagreed with `docs/EVAL.md`.
 - "The same photographer on the same day" is approximated by "the same species on the same day", because no manifest holds a photographer's name.
 - Intervals use this audit's own seed, so their ends can differ from `docs/EVAL.md` by a tenth.
+
+## The int8 check
+
+The comparison of the shipped int8 file's browser vectors with the original vectors (in `docs/eval/audit.md`, two rows of the agreement table) was run by hand with the functions of `recompute.py`, from `runs/lab/25-device-hybrid-fc2-w8/wasm_hybrid-fc2-w8.f16.npy` and `.ids.json` on the `ci` branch:
+
+```
+python3 -I -c "
+import json, sys, numpy as np; sys.path.insert(0, 'tools/audit'); import recompute as rc
+R = 'ROOT'
+man = {r['id']: r for r in rc.read_manifest(R + '/data/eval/alachua-2025/manifest.csv')}
+ids = json.load(open(R + '/wasm/wasm_hybrid-fc2-w8.ids.json')); W = rc.unit(rc.load_f16_npy(R + '/wasm/wasm_hybrid-fc2-w8.f16.npy'))
+slot = rc.read_slot('models/naturalist'); keys = np.array(slot['keys'])
+mo = np.array([int(man[x]['month']) - 1 for x in ids]); tk = np.array([int(man[x]['key']) for x in ids])
+for ka in ('manifest', None):
+    r = rc.page_rule(slot, W, mo, kind_at_override=ka); n = r['named']; ok = keys[r['top']] == tk
+    print(ka, n.sum(), (ok & n).sum())
+"
+```
