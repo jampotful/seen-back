@@ -25,7 +25,9 @@ else echo "no slot yet: ${SITE}models/pocket/manifest.json is not there"; fi
 step "playwright $PWV, Chromium, Firefox and WebKit"
 mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
 export NODE_PATH="$PW/node_modules"
-node "$PW/node_modules/playwright/cli.js" install --with-deps chromium firefox webkit 2>&1 | grep -v -E "[0-9]+%" | tail -4
+for B in chromium webkit firefox; do   # one at a time with a time limit: run 26 hung for twenty minutes installing all three at once
+  for try in 1 2; do timeout 240 node "$PW/node_modules/playwright/cli.js" install --with-deps $B > "$OUT/install-$B.txt" 2>&1; rc=$?; echo "install $B (try $try): exit $rc"; [ $rc = 0 ] && break; done
+done
 step "the page in Chromium, Firefox and WebKit"
 for B in chromium webkit firefox; do OUT="$OUT" SITE="$SITE" BROWSERS=$B timeout 420 node test/engines/live.js; echo "live.js $B: exit $?"; done   # one process each, so one that hangs cannot take the others with it
 python3 -I - "$OUT" <<'PY'
