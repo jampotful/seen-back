@@ -770,7 +770,7 @@ async function meet(page, name) {
       // the kept manifest is put back as a host that varies by a header leaves it: a plain lookup by its address no longer finds it
       r.plainLookupFinds = await page.evaluate(async () => { const c = await caches.open('keep-v1'), k = (await c.keys()).filter((q) => /standin\/manifest\.json$/.test(q.url))[0], t = await (await c.match(k)).text();
         await c.delete(k); await c.put(new Request(k.url, { headers: { 'X-Seen': 'one' } }), new Response(t, { headers: { 'Content-Type': 'application/json', 'Vary': 'X-Seen' } })); return !!(await c.match(k.url)); });
-      await page.evaluate(() => window.__seenBack.rec.test.forget()); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // no network for anything the recognizer needs
+      await page.evaluate(() => window.__seenBack.rec.test.forget()); await ctl('drop=' + encodeURIComponent('standin'));     // no network for the slot's files (the worker's own script is the service worker's to keep, and there is none here)
       r.withVary = await page.evaluate(() => window.__seenBack.rec.ready().then(() => 'ready', (e) => e.code + ': ' + e.detail));
       await begin(page); r.heron = (await meet(page, 'heron.png')).shown;
       // a network that neither answers nor fails: after the wait (six seconds, shortened here) the kept copy is used
@@ -799,7 +799,7 @@ async function meet(page, name) {
     await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'away.png'), scale: 'css' }).catch(() => {});
     await page.locator('#awayBox').check(); await page.locator('#recordClose').tap();
     // elsewhere: the device names the kind and no species, and the larger model is asked without a region
-    fake.reset(); fake.set({ answer: 'egret' });
+    fake.reset(); fake.set({ answer: 'egret', delay: 900 });     // long enough for the kind alone to be read off the screen first: a finer name now replaces it there as soon as it comes
     const h = await meet(page, 'heron.png'); r.away = { atOnce: h.eyes + '|' + h.shown, top: h.last && h.last.top }; await byService(page);
     r.away.sent = fake.calls().map((c) => JSON.stringify(c.region) + ' month ' + c.month); r.away.named = (await st(page)).named.common + '|' + (await st(page)).named.by; r.away.info = await info();
     await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); r.away.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].slice(0, 1).map((li) => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent)); await page.locator('#recordClose').tap();
