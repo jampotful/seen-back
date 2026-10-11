@@ -43,7 +43,7 @@
     var out = [], seen = {};
     plain(text).split(' ').forEach(function (t) {
       if (t.length < 3) return; var lim = t.length <= 5 ? 1 : 2;
-      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0].charAt(0).toUpperCase() + w[0].slice(1), sci: '', kind: w[1] }); } });
+      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0], sci: '', kind: w[1] }); } });
     });
     return out.slice(0, 3);
   }
@@ -69,6 +69,7 @@
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
+    if (typeof v.common === 'string' && !v.sci && (v.common.toLowerCase() === handName(key).toLowerCase() || /^(a person|something alive)$/i.test(v.common))) v.common = v.common.toLowerCase();   // a group's name kept from an older build loses its capital
     return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
@@ -226,7 +227,7 @@
     var ol = $('g60List'); ol.textContent = '';
     G60.forEach(function (r, i) { var li = el('li', have[i + 1] ? 'on' : '', have[i + 1] ? r[2] + ', ' + r[0] + ' records' : r[0] + ' records'); ol.appendChild(li); });
   }
-  function openRecord() { renderRecord(); show('claim', false); show('info', false); show('keep', false); openSheet('record'); $('record').scrollTop = 0; }
+  function openRecord() { renderRecord(); bigDelAsked = false; paintBig(); try { $('buildMark').textContent = aboutText(); } catch (e) {} show('claim', false); show('info', false); show('keep', false); openSheet('record'); $('record').scrollTop = 0; }
 
   // ---------- looking again through eyes already met
   function photoFromThumb(src) {

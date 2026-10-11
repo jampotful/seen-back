@@ -12,10 +12,10 @@
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
   function closeSheets() {
     var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
+    show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -30,7 +30,7 @@
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
     $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
-      var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
+      var name = key === 'person' ? 'a person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
       kbox.appendChild(b);
     });
@@ -98,11 +98,11 @@
         diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
         large.survey().then(function (h) {
           if (t !== S.token || S.eyes) return;
-          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that is.');
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that species is.');
         });
         return;
       }
-      var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
+      var common = r.kind === 'person' ? 'a person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
       closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
@@ -323,15 +323,15 @@
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
-    else { key = kindOfName(t); named = { common: cap(t), scientific: '', by: 'you' }; }
+    else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60));
-      noteLink('Sorry, we don\u2019t yet have a visualizer for \u201C' + named.common + '\u201D. You can send us feedback ', 'here', '. In the meantime, try a different creature.', 'No view yet: ' + named.common); return;
+      $('claimNote').textContent = cap(named.common) + ' isn\u2019t yet a creature this app can view the world as. We\u2019re adding new species all the time! In the meantime, try a different creature.'; return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
     sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
     if (sug.length) {                              // a slip of the keys, or a name that fits several
-      $('claimNote').textContent = 'Did you mean one of these?';
+      $('claimNote').textContent = 'Did you mean:';
       offerList(sug.map(function (r) { return { sci: r.sci, en: r.en, kind: r.kind, local: !!r.sci }; })).forEach(function (o) {
         var b = el('button', 'pill ghost', o.label); b.type = 'button';
         b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
@@ -339,7 +339,7 @@
       });
       show('claimSuggestRow', true); return;
     }
-    noteLink('Regards can\u2019t identify \u201C' + t + '\u201D. If you typed in a pet\u2019s name (e.g. Biscuit), please make sure you include what kind of pet it is (\u201CBiscuit, a cat\u201D). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
+    noteLink(cap(t) + ' isn\u2019t a creature we know. If you typed in a pet\u2019s name (e.g., Marquise), please make sure you include what kind of pet it is (Marquise, my cat). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
@@ -378,7 +378,7 @@
     ['svcHud', 'svcView'].forEach(function (id) {
       var b = $(id), sp;
       b.textContent = '';
-      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 20.5 20.5"/><path d="M10.5 7.6v5.8M7.6 10.5h5.8"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
+      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.6"/><path d="M12 2.8v4M12 17.2v4M2.8 12h4M17.2 12h4M5.5 5.5l2.6 2.6M15.9 15.9l2.6 2.6M18.5 5.5l-2.6 2.6M8.1 15.9l-2.6 2.6"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
       else b.textContent = text;
       b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text;
     });
@@ -470,14 +470,14 @@
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
     if (text && ms) bigNoteTimer = setTimeout(function () { bigNote = null; paintSvc(); }, ms);
-    paintSvc(); if ($('about').open) paintBig();
+    paintSvc(); if (!$('record').hidden) paintBig();
     if (!$('big').hidden && large.has() === 'getting') $('bigNet').textContent = large.line();
   }
   function openBig() {                             // consent first, in plain words; and while it is being fetched, the same sheet stops it
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
-    $('bigSub').textContent = 'The full database is free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.';
+    $('bigSub').textContent = 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.';
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -563,13 +563,13 @@
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
-      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
       askName(unsure ? 'The recognizer and the full database are both not sure what that is.' : 'The full database is not sure what that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
-      askName(unsure ? 'We\u2019re not sure what that is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+      askName(unsure ? 'We\u2019re not sure what that species is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
     });
   }
   // The same from the server, where that is the full database there is: asked with the person's say-so, and its answer taken as the name.
@@ -665,7 +665,7 @@
     // the switch is shown where it changes something: this device has a species list, or there is the full database that is told the region
     show('awayRow', false); $('awayBox').checked = pocket.local === false;
     $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and the full database, if asked, is not told the region.';
-    show('svcBox', false); bigDelAsked = false; paintBig();
+    show('svcBox', false);
     naturalist.config().then(function (c) {
       show('svcBox', !!c); if (!c) return;
       $('svcChoice').value = naturalist.choice();
@@ -684,7 +684,7 @@
   $('backAskView').addEventListener('click', back);
   var claimKept = null;
   $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
-  $('claimAbout').addEventListener('click', function () { openRecord(); $('about').open = true; paintAbout(); later(function () { try { $('about').scrollIntoView(); } catch (e) {} }, 60); });
+  $('claimAbout').addEventListener('click', openAbout);
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
   $('recordClose').addEventListener('click', dismissSheets);
@@ -784,7 +784,7 @@
     var f = pocket.about().fitted; if (!f) return '';
     var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
-    return 'We identify by comparing with photos shared on iNaturalist and Flickr under Creative Commons licenses or in the public domain.';
+    return 'This app identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
   }
   function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a, i;
     $('buildMark').textContent = aboutText(); $('aboutNote').textContent = '';
@@ -797,7 +797,9 @@
       } else el.appendChild(document.createTextNode(fl));
     }
     show('fittedOn', true); paintChoices(); }
-  $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
+  function openAbout() { paintAbout(); show('buildBox', false); show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); openSheet('aboutSheet'); $('aboutSheet').scrollTop = 0; }
+  $('recAbout').addEventListener('click', openAbout); $('introAbout').addEventListener('click', openAbout); $('aboutClose').addEventListener('click', dismissSheets);
+  $('fittedOn').addEventListener('click', function (e) { if (e.target && e.target.tagName === 'A') return; show('buildBox', $('buildBox').hidden); });   // the block of figures for a report from a real device: a tap on the version line shows it
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');
     $('buildMark').textContent = text;

@@ -112,6 +112,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .35); }
 .sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 80%; overflow: auto; background: var(--panel); border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); padding: 18px 18px calc(22px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; user-select: text; -webkit-user-select: text; }
 .sheet header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hbtns { display: inline-flex; gap: 8px; flex: none; }
+.bigbox { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+.bigbox .fine2 { margin: 0 0 10px; font-size: calc(var(--h3-size) * .84); color: var(--dim); }
+#fittedOn { cursor: default; }
 .sheet h3 { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--h2-font); text-transform: var(--h2-case); letter-spacing: var(--h2-track); margin: 0; }
 .sheet .sub { margin: -8px 0 0; color: var(--dim); font-size: calc(var(--h3-size) * .9); }
 .sheet .sub:empty { display: none; }
@@ -193,7 +197,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   <!-- 1. what is about to happen -->
   <section class="screen pad" id="intro">
     <h1>Photograph another species to view the world through its eyes.</h1>
-    <div class="row"><button class="pill" id="btnBegin" type="button">Start</button><button class="chip" id="introRec" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button></div>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Start</button><button class="chip" id="introRec" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button><button class="ico sm" id="introAbout" type="button" aria-label="About"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2"/><circle cx="12" cy="7.9" r=".55" fill="currentColor"/></svg></button></div>
     <p class="fine" id="introFine"></p>
   </section>
 
@@ -218,7 +222,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <label class="pill ghost round" id="lblViewPick" aria-label="Choose a clip or a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
     <button class="line" id="svcView" type="button" hidden></button>
-    <div class="row links"><button class="ico sm" id="backAskView" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="link" id="changeAskView" type="button">Not right?</button></div>
+    <div class="row links"><button class="ico sm" id="backAskView" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="link" id="changeAskView" type="button">Wrong creature?</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
 
@@ -258,7 +262,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- what was it: said by the person, where nothing can recognize the photo or the answer came out wrong -->
   <section class="sheet fromtop" id="claim" hidden aria-label="Say what it was">
-    <header><h3>What was it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
+    <header><h3>What is it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
     <p class="sub" id="claimSub"></p>
     <div class="offers" id="claimKindBox" hidden><p class="note">Is it one of these?</p><div class="row" id="claimKinds"></div></div>
     <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">Is it one of these?</p><div class="row" id="claimOffers"></div></div>
@@ -275,7 +279,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- everyone met so far, and the eyes that came with them -->
   <section class="sheet" id="record" hidden aria-label="Encounters">
-    <header><h3>Encounters</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <header><h3>Encounters</h3><span class="hbtns"><button class="ico" id="recAbout" type="button" aria-label="About"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2"/><circle cx="12" cy="7.9" r=".55" fill="currentColor"/></svg></button><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></header>
     <p class="sub" id="recordSub" hidden></p>
     <div class="eyes" id="eyeStrip"></div>
     <ul class="met" id="metList"></ul>
@@ -284,29 +288,34 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <ol id="g60List"></ol>
       <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season.</p>
     </details>
-    <details id="about">
-      <summary>About</summary>
+    <div id="bigBox" class="bigbox" hidden>
+      <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
+      <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
+      <label class="tick" id="bigAskRow" hidden><input type="checkbox" id="bigAsk"><span>Do not offer the full database</span></label>
+    </div>
+  </section>
+
+  <!-- about the app: what it is, who made it, where to write, and the credit the photographs' licences ask for -->
+  <section class="sheet" id="aboutSheet" hidden aria-label="About">
+    <header><h3>About</h3><button class="ico" id="aboutClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <div id="about">
       <p class="aboutLead" id="aboutApp">Regards lets you view the world, for one week, through the eyes of a species you photograph. Can you find all the species?</p>
-      <p class="aboutLead" id="aboutBy">This app is made by Conrad Cheung.</p>
+      <p class="aboutLead" id="aboutBy">This app is made by Conrad Cheung, an artist, writer and Assistant Professor of 3D + Extended Media at the University of Florida.</p>
       <p class="aboutLead" id="aboutTell">Something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener">Tell us</a>.</p>
-      <p class="fine2" id="aboutBuildLabel" hidden>This build</p>
+      <p class="fine2" id="fittedOn"></p>
+      <div id="buildBox" hidden>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="ico sm" id="aboutCopy" type="button" aria-label="Copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.2a1.7 1.7 0 0 0-1.7-1.7H6.2a1.7 1.7 0 0 0-1.7 1.7v7.6a1.7 1.7 0 0 0 1.7 1.7h2.3"/></svg></button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
-      <p class="fine2" id="fittedOn" hidden></p>
+      </div>
       <div id="awayRow" hidden>
         <label class="tick"><input type="checkbox" id="awayBox"><span>I am not near Gainesville</span></label>
         <p class="fine2" id="awayNote"></p>
-      </div>
-      <div id="bigBox" hidden>
-        <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
-        <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
-        <label class="tick" id="bigAskRow" hidden><input type="checkbox" id="bigAsk"><span>Do not offer the full database</span></label>
       </div>
       <div id="svcBox" hidden>
         <label class="fine2" for="svcChoice">The full database on a server can be asked to name the species, from one photo made smaller.</label>
         <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
       </div>
-    </details>
+    </div>
   </section>
 
   <!-- what is shown, and how far to trust it -->
@@ -315,7 +324,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
     <p class="key"><span><i class="mk m"></i>known in this animal</span><span><i class="mk g"></i>known in a relative</span><span><i class="mk"></i>speculative</span><span><i class="mk x"></i>left out</span></p>
-    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right?</button></div>
+    <div class="row"><button class="pill ghost" id="infoChange" type="button">Wrong creature?</button></div>
     <details hidden>
       <summary>Sources, and what is unchecked</summary>
       <ul>
@@ -342,7 +351,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="sub" id="askSub"></p>
     <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
     <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Later</button></div>
-    <p class="note">Your answer can be changed under “About”.</p>
+    <p class="note">Your answer can be changed under About.</p>
   </section>
 
   <!-- before a large download: what it is, how large, where it stays, and the choice -->
@@ -351,8 +360,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="sub" id="bigSub"></p>
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
     <div class="row"><button class="pill" id="bigYes" type="button">Download</button><button class="pill ghost" id="bigNo" type="button">Later</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
-    <div class="row links"><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">You can always delete the downloaded database under “About”.</p>
+    <div class="row links" hidden><button class="link" id="bigNever" type="button">Do not ask again</button></div>
+    <p class="note">You can always delete the downloaded database under Encounters.</p>
   </section>
 
   <!-- a clip or a still, kept -->
@@ -376,7 +385,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '15';
+  var BUILD = '16';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -792,7 +801,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     }, viaImg);
   }
   function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
-  function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
+  function handName(key) { return key === 'other' ? 'something alive' : EYES[key].who.replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
   function later(fn, ms) { var seq = S.seq; setTimeout(function () { if (seq === S.seq) fn(); }, ms); }
@@ -912,7 +921,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function shapeOf(key) { var p = EYES[key].pupil; return p === 'v' ? 1 : p === 'h' ? 2 : 0; }
   function showName() {
     $('rvName').textContent = shownName(); $('rvSci').textContent = (S.named && S.named.scientific) || '';
-    $('rvCount').textContent = S.named && S.named.again ? 'Encountered ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'See the world as ' + (/^[aeiou]/i.test(shownName()) ? 'an' : 'a') : S.nov === 'name' ? 'First encounter' : S.nov === 'again' ? 'Encountered before' : '';
+    $('rvCount').textContent = S.named && S.named.again ? 'Encountered ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' && S.eyes !== 'person' ? 'See the world as ' + (/^[aeiou]/i.test(shownName()) ? 'an' : 'a') : S.nov === 'name' ? 'First encounter' : S.nov === 'again' ? 'Encountered before' : '';
     var mNow = S.meetingId ? record.filter(function (r) { return r.id === S.meetingId; })[0] : null;
     $('rvWarn').textContent = S.eyes !== 'person' && mNow ? lentLine(mNow) : '';      // the week, said once at the meeting; what is a guess is marked on the name and in its sheet
     $('reveal').classList.add('show');
@@ -1022,7 +1031,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var out = [], seen = {};
     plain(text).split(' ').forEach(function (t) {
       if (t.length < 3) return; var lim = t.length <= 5 ? 1 : 2;
-      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0].charAt(0).toUpperCase() + w[0].slice(1), sci: '', kind: w[1] }); } });
+      lexWords().forEach(function (w) { if (!seen[w[0]] && Math.abs(w[0].length - t.length) <= lim && slips(t, w[0], lim) <= lim) { seen[w[0]] = 1; out.push({ en: w[0], sci: '', kind: w[1] }); } });
     });
     return out.slice(0, 3);
   }
@@ -1048,6 +1057,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
+    if (typeof v.common === 'string' && !v.sci && (v.common.toLowerCase() === handName(key).toLowerCase() || /^(a person|something alive)$/i.test(v.common))) v.common = v.common.toLowerCase();   // a group's name kept from an older build loses its capital
     return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
@@ -1205,7 +1215,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var ol = $('g60List'); ol.textContent = '';
     G60.forEach(function (r, i) { var li = el('li', have[i + 1] ? 'on' : '', have[i + 1] ? r[2] + ', ' + r[0] + ' records' : r[0] + ' records'); ol.appendChild(li); });
   }
-  function openRecord() { renderRecord(); show('claim', false); show('info', false); show('keep', false); openSheet('record'); $('record').scrollTop = 0; }
+  function openRecord() { renderRecord(); bigDelAsked = false; paintBig(); try { $('buildMark').textContent = aboutText(); } catch (e) {} show('claim', false); show('info', false); show('keep', false); openSheet('record'); $('record').scrollTop = 0; }
 
   // ---------- looking again through eyes already met
   function photoFromThumb(src) {
@@ -2036,10 +2046,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
   function closeSheets() {
     var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
+    show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -2054,7 +2064,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
     $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
-      var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
+      var name = key === 'person' ? 'a person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
       kbox.appendChild(b);
     });
@@ -2122,11 +2132,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
         large.survey().then(function (h) {
           if (t !== S.token || S.eyes) return;
-          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that is.');
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that species is.');
         });
         return;
       }
-      var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
+      var common = r.kind === 'person' ? 'a person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
       closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
@@ -2347,15 +2357,15 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
-    else { key = kindOfName(t); named = { common: cap(t), scientific: '', by: 'you' }; }
+    else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60));
-      noteLink('Sorry, we don\u2019t yet have a visualizer for \u201C' + named.common + '\u201D. You can send us feedback ', 'here', '. In the meantime, try a different creature.', 'No view yet: ' + named.common); return;
+      $('claimNote').textContent = cap(named.common) + ' isn\u2019t yet a creature this app can view the world as. We\u2019re adding new species all the time! In the meantime, try a different creature.'; return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
     sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
     if (sug.length) {                              // a slip of the keys, or a name that fits several
-      $('claimNote').textContent = 'Did you mean one of these?';
+      $('claimNote').textContent = 'Did you mean:';
       offerList(sug.map(function (r) { return { sci: r.sci, en: r.en, kind: r.kind, local: !!r.sci }; })).forEach(function (o) {
         var b = el('button', 'pill ghost', o.label); b.type = 'button';
         b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
@@ -2363,7 +2373,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       });
       show('claimSuggestRow', true); return;
     }
-    noteLink('Regards can\u2019t identify \u201C' + t + '\u201D. If you typed in a pet\u2019s name (e.g. Biscuit), please make sure you include what kind of pet it is (\u201CBiscuit, a cat\u201D). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
+    noteLink(cap(t) + ' isn\u2019t a creature we know. If you typed in a pet\u2019s name (e.g., Marquise), please make sure you include what kind of pet it is (Marquise, my cat). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
@@ -2402,7 +2412,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     ['svcHud', 'svcView'].forEach(function (id) {
       var b = $(id), sp;
       b.textContent = '';
-      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 20.5 20.5"/><path d="M10.5 7.6v5.8M7.6 10.5h5.8"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
+      if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.6"/><path d="M12 2.8v4M12 17.2v4M2.8 12h4M17.2 12h4M5.5 5.5l2.6 2.6M15.9 15.9l2.6 2.6M18.5 5.5l-2.6 2.6M8.1 15.9l-2.6 2.6"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
       else b.textContent = text;
       b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text;
     });
@@ -2494,14 +2504,14 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
     if (text && ms) bigNoteTimer = setTimeout(function () { bigNote = null; paintSvc(); }, ms);
-    paintSvc(); if ($('about').open) paintBig();
+    paintSvc(); if (!$('record').hidden) paintBig();
     if (!$('big').hidden && large.has() === 'getting') $('bigNet').textContent = large.line();
   }
   function openBig() {                             // consent first, in plain words; and while it is being fetched, the same sheet stops it
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
-    $('bigSub').textContent = 'The full database is free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.';
+    $('bigSub').textContent = 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.';
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -2587,13 +2597,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
-      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
       askName(unsure ? 'The recognizer and the full database are both not sure what that is.' : 'The full database is not sure what that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
-      askName(unsure ? 'We\u2019re not sure what that is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+      askName(unsure ? 'We\u2019re not sure what that species is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
     });
   }
   // The same from the server, where that is the full database there is: asked with the person's say-so, and its answer taken as the name.
@@ -2689,7 +2699,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     // the switch is shown where it changes something: this device has a species list, or there is the full database that is told the region
     show('awayRow', false); $('awayBox').checked = pocket.local === false;
     $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and the full database, if asked, is not told the region.';
-    show('svcBox', false); bigDelAsked = false; paintBig();
+    show('svcBox', false);
     naturalist.config().then(function (c) {
       show('svcBox', !!c); if (!c) return;
       $('svcChoice').value = naturalist.choice();
@@ -2708,7 +2718,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   $('backAskView').addEventListener('click', back);
   var claimKept = null;
   $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
-  $('claimAbout').addEventListener('click', function () { openRecord(); $('about').open = true; paintAbout(); later(function () { try { $('about').scrollIntoView(); } catch (e) {} }, 60); });
+  $('claimAbout').addEventListener('click', openAbout);
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
   $('recordClose').addEventListener('click', dismissSheets);
@@ -2808,7 +2818,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var f = pocket.about().fitted; if (!f) return '';
     var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
-    return 'We identify by comparing with photos shared on iNaturalist and Flickr under Creative Commons licenses or in the public domain.';
+    return 'This app identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
   }
   function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a, i;
     $('buildMark').textContent = aboutText(); $('aboutNote').textContent = '';
@@ -2821,7 +2831,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       } else el.appendChild(document.createTextNode(fl));
     }
     show('fittedOn', true); paintChoices(); }
-  $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
+  function openAbout() { paintAbout(); show('buildBox', false); show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); openSheet('aboutSheet'); $('aboutSheet').scrollTop = 0; }
+  $('recAbout').addEventListener('click', openAbout); $('introAbout').addEventListener('click', openAbout); $('aboutClose').addEventListener('click', dismissSheets);
+  $('fittedOn').addEventListener('click', function (e) { if (e.target && e.target.tagName === 'A') return; show('buildBox', $('buildBox').hidden); });   // the block of figures for a report from a real device: a tap on the version line shows it
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');
     $('buildMark').textContent = text;

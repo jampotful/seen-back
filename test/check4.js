@@ -109,7 +109,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.addInitScript((day) => { if (localStorage.getItem('seenback.record.v1')) return; const now = Date.now();
       localStorage.setItem('seenback.record.v1', JSON.stringify([
         { id: 'mm01', key: 'wader', common: 'Great blue heron', sci: 'Ardea herodias', by: 'you', at: now - 6.5 * day, thumb: '', up: 0, loc: 0 },
-        { id: 'mm02', key: 'cat', common: 'Cat', sci: '', by: 'you', at: now - 8 * day, thumb: '', up: 0, loc: 0 },
+        { id: 'mm02', key: 'cat', common: 'cat', sci: '', by: 'you', at: now - 8 * day, thumb: '', up: 0, loc: 0 },
         { id: 'mm03', key: 'wader', common: 'Great egret', sci: 'Ardea alba', by: 'you', at: now - 30 * day, thumb: '', up: 0, loc: 0 }])); }, day);
     await page.goto(HTTP); await page.waitForTimeout(700);
     await page.locator('#introRec').tap(); await page.waitForSelector('#record', { state: 'visible' }); await page.waitForTimeout(250);
@@ -140,9 +140,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.unknown = await type('xqzzvk'); r.slip = await type('herron'); r.slipSpecies = await type('monarhc'); r.several = await type('blue heron x'); r.noEyes = await type('wolf spider');
     r.exact = await type('green treefrog');
     r.errors = errors; out.typed = r; await ctx.close();
-    const ok = /^Regards can’t identify “xqzzvk”\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
-      && r.slip.note === 'Did you mean one of these?' && r.slip.sug.includes('Heron') && r.slipSpecies.sug.includes('Monarch')
-      && /^Sorry, we don’t yet have a visualizer for “Wolf spider”\. You can send us feedback here\./.test(r.noEyes.note) && !r.noEyes.show && r.noEyes.about
+    const ok = /^Xqzzvk isn’t a creature we know\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
+      && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('Monarch')
+      && /^Wolf spider isn’t yet a creature this app can view the world as\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
       && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '') && !errors.length;
     if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('typed: a typed name is not handled as it should be'); }
   }
@@ -161,7 +161,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' });
     await page.locator('#claimName').fill('Biscuit'); await page.locator('#claimForm button[type=submit]').tap(); await page.waitForTimeout(200);
     r.petName = { note: await text(page, 'claimNote'), about: await page.locator('#claimNote a').isVisible(), other: await page.locator('#claimOtherRow').isVisible(), still: (await st(page)).screen };
-    if (!/^Regards can’t identify “Biscuit”\. /.test(r.petName.note) || !r.petName.about || r.petName.other) throw new Error('an unknown word: ' + JSON.stringify(r.petName)); await shot(page, 'R2b-pet-name');
+    if (!/^Biscuit isn’t a creature we know\. /.test(r.petName.note) || !r.petName.about || r.petName.other) throw new Error('an unknown word: ' + JSON.stringify(r.petName)); await shot(page, 'R2b-pet-name');
     await page.locator('#claimBack').tap(); await page.waitForTimeout(200); await page.locator('#btnShutter').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
     r.cleanAgain = await page.evaluate(() => document.getElementById('claimName').value + '|' + document.getElementById('claimNote').textContent + '|' + !document.getElementById('claimAboutRow').hidden);
     if (r.cleanAgain !== '||false') throw new Error('the naming sheet kept an earlier word: ' + r.cleanAgain);   // build 12 left the field, the note and the link in place
