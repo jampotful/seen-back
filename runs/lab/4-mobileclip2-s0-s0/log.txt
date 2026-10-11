@@ -1,0 +1,95 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:47:17] job: model=mobileclip2-s0 shard=0/1 stages=images
+data_source=pub/data-alachua
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:59:55Z workflow=data run_number=1 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:47:17] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+fetched 200/6000 (0.9s)
+fetched 400/6000 (1.3s)
+fetched 600/6000 (1.8s)
+fetched 800/6000 (2.3s)
+fetched 1000/6000 (2.9s)
+fetched 1200/6000 (3.4s)
+fetched 1400/6000 (3.9s)
+fetched 1600/6000 (4.4s)
+fetched 1800/6000 (5.0s)
+fetched 2000/6000 (5.5s)
+fetched 2200/6000 (6.1s)
+fetched 2400/6000 (6.7s)
+fetched 2600/6000 (7.3s)
+fetched 2800/6000 (8.0s)
+fetched 3000/6000 (8.6s)
+fetched 3200/6000 (9.2s)
+fetched 3400/6000 (9.7s)
+fetched 3600/6000 (10.3s)
+fetched 3800/6000 (10.8s)
+fetched 4000/6000 (11.4s)
+fetched 4200/6000 (11.9s)
+fetched 4400/6000 (12.5s)
+fetched 4600/6000 (13.0s)
+fetched 4800/6000 (13.6s)
+fetched 5000/6000 (14.1s)
+fetched 5200/6000 (14.6s)
+fetched 5400/6000 (15.1s)
+fetched 5600/6000 (15.7s)
+fetched 5800/6000 (16.2s)
+fetched 6000/6000 (16.7s)
+photos: 6000 rows, 6000 to fetch, 0 failed, 16.7s
+[01:47:34] exit 0
+[01:47:34] + python3 -u tools/lab/lab.py images --model mobileclip2-s0 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname alachua-2025 --out art/mobileclip2-s0
+images: mobileclip2-s0, eval alachua-2025, shard 0/1, 6000 rows
+loaded mobileclip2-s0 via open_clip in 7.0s
+[0;93m2026-10-11 01:47:41.647914920 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6000, 15.22 photos/s
+  images 192/6000, 15.37 photos/s
+  images 352/6000, 15.34 photos/s
+  images 512/6000, 15.30 photos/s
+  images 672/6000, 15.28 photos/s
+  images 832/6000, 15.25 photos/s
+  images 992/6000, 15.23 photos/s
+  images 1152/6000, 15.18 photos/s
+  images 1312/6000, 15.15 photos/s
+  images 1472/6000, 15.14 photos/s
+  images 1632/6000, 15.14 photos/s
+  images 1792/6000, 15.14 photos/s
+  images 1952/6000, 15.16 photos/s
+  images 2112/6000, 15.17 photos/s
+  images 2272/6000, 15.19 photos/s
+  images 2432/6000, 15.18 photos/s
+  images 2592/6000, 15.16 photos/s
+  images 2752/6000, 15.15 photos/s
+  images 2912/6000, 15.15 photos/s
+  images 3072/6000, 15.13 photos/s
+  images 3232/6000, 15.13 photos/s
+  images 3392/6000, 15.13 photos/s
+  images 3552/6000, 15.13 photos/s
+  images 3712/6000, 15.09 photos/s
+  images 3872/6000, 15.07 photos/s
+  images 4032/6000, 15.06 photos/s
+  images 4192/6000, 15.06 photos/s
+  images 4352/6000, 15.06 photos/s
+  images 4512/6000, 15.06 photos/s
+  images 4672/6000, 15.06 photos/s
+  images 4832/6000, 15.06 photos/s
+  images 4992/6000, 15.05 photos/s
+  images 5152/6000, 15.04 photos/s
+  images 5312/6000, 15.03 photos/s
+  images 5472/6000, 15.02 photos/s
+  images 5632/6000, 15.01 photos/s
+  images 5792/6000, 15.01 photos/s
+  images 5952/6000, 15.01 photos/s
+images: 6000 embedded, 0 skipped, 399.7s (15.01 photos/s)
+[01:54:22] exit 0
+[01:54:22] job done, fail=0
