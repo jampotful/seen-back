@@ -4,6 +4,7 @@
   index.html                     the app as a standalone page; this is what the web address serves
   sw.js                          the service worker, stamped with this build, so the app opens with no signal
   dist/seen-back.artifact.html   the same page in the shape Claude's artifact publisher wants
+  selftest.js                    the self-test, fetched by the page only when its address has ?selftest=1
 
 The parts live in src/. Nothing here needs a network.
 """
@@ -11,10 +12,22 @@ import pathlib, re
 
 root = pathlib.Path(__file__).resolve().parent
 src = root / "src"
-PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js", "cam.selftest.js")
+PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js")
+# The self-test (src/cam.selftest.js) is not part of the page's script. It becomes selftest.js, which the page fetches only for
+# ?selftest=1, through a small hook that hands it the page's bindings it reads. Every one of them is set once at start-up and never
+# reassigned, so handing over their values is the same as reading them in place. A binding missing here fails the self-test at once.
+SELFTEST_READS = ("$", "BUILD", "EYES", "Engine", "HUMAN", "HUMAN_CPD", "ORDER", "S", "calm", "canvas", "clamp", "coarse", "decode",
+                  "engine", "fxNow", "go", "hasCamera", "lerp", "makeCanvas", "mix", "paramsOf", "pocket", "setEyes", "showStill", "vid")
 
 head = (src / "cam.head.html").read_text(encoding="utf-8")
 js = "".join((src / n).read_text(encoding="utf-8") for n in PARTS)
+js += ("  // ---------- self-test hook: with ?selftest=1 the page fetches selftest.js and hands it the bindings it reads (build.py)\n"
+       "  if (/[?&]selftest=1(?:&|$)/.test(location.search || '')) {\n"
+       "    S.selftest = true;   // at once, as the self-test did when it was part of this script: the page's loop leaves the drawing to it\n"
+       "    window.__seenBackSelftest = { " + ", ".join("'%s': %s" % (n, n) for n in SELFTEST_READS) + " };\n"
+       "    var selftestScript = document.createElement('script'); selftestScript.src = 'selftest.js?v=' + encodeURIComponent(BUILD);\n"
+       "    document.head.appendChild(selftestScript);\n"
+       "  }\n")
 build = re.search(r"var BUILD = '([^']+)'", js).group(1)
 script = "\n<script>\n(function () {\n" + js + "})();\n</script>\n"
 
@@ -58,8 +71,14 @@ standalone = (
 )
 (root / "index.html").write_text(standalone, encoding="utf-8")
 
-# ---- 3. the service worker, stamped
+# ---- 3. the self-test, fetched on demand
+selftest = ("// Seen Back self-test, build " + build + ": fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.\n"
+            "(function (I) {\n  if (!I) return;\n  var " + ", ".join("%s = I['%s']" % (n, n) for n in SELFTEST_READS) + ";\n"
+            + (src / "cam.selftest.js").read_text(encoding="utf-8") + "})(window.__seenBackSelftest);\n")
+(root / "selftest.js").write_text(selftest, encoding="utf-8")
+
+# ---- 4. the service worker, stamped
 sw = (src / "sw.template.js").read_text(encoding="utf-8").replace("__BUILD__", build)
 (root / "sw.js").write_text(sw, encoding="utf-8")
 
-print("build", build, "| index.html", len(standalone), "bytes | artifact", len(head + script), "bytes")
+print("build", build, "| index.html", len(standalone), "bytes | artifact", len(head + script), "bytes | selftest.js", len(selftest), "bytes")

@@ -6,7 +6,7 @@
 //   without             (a slot's manifest.json) the network first, and the kept copy only where there is no network.
 // The page itself also puts the recognizer's large files into the same store (KEEP) under the same addresses,
 // so that they are kept even on a first visit, before this worker has taken charge of the page.
-const VERSION = '6';
+const VERSION = '7';
 const ORT_V = '1.30.0';                                            // the same number as ORT.v in src/cam.rec.js
 const SHELL = 'shell-' + VERSION;
 const KEEP = 'keep-v1';

@@ -8,9 +8,15 @@ fs.mkdirSync(shots, { recursive: true });
 const PORT = process.env.PORT || 8765;
 // These checks are about the picture, the typed name and the record, so the page's own recognizer is switched off (rec=off) and so is the
 // service worker (nosw=1). The recognizer has its own checks in test/rec/check_rec.js.
-const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420) + '&nosw=1&rec=' + (process.env.REC || 'off');
+// The species service is switched off too (svc=off), so that a service.json at the site's root changes nothing here.
+const HTTP = 'http://127.0.0.1:' + PORT + '/index.html?side=' + (process.env.SIDE || 420) + '&nosw=1&svc=off&rec=' + (process.env.REC || 'off');
 const phone = devices['Pixel 7'];
 const mode = process.argv[2] || 'record';
+// SLOW=4 on a busy machine: every wait for something to appear lasts four times as long before it gives up. Nothing else changes.
+const SLOW = +(process.env.SLOW || 1);
+const patient = (page) => { if (SLOW === 1) return page;
+  const scale = (o) => (o && o.timeout ? Object.assign({}, o, { timeout: o.timeout * SLOW }) : o), wf = page.waitForFunction.bind(page), ws = page.waitForSelector.bind(page);
+  page.waitForFunction = (fn, arg, o) => wf(fn, arg, scale(o)); page.waitForSelector = (sel, o) => ws(sel, scale(o)); return page; };
 const fontCss = () => ['normal', 'italic'].map(st => `@font-face{font-family:"Instrument Serif";font-style:${st};font-weight:400;src:url(http://127.0.0.1:${PORT}/fonts/instrument-serif-latin-400-${st}.woff2) format("woff2");}`).join('\n');
 
 const claudeStub = () => {
@@ -67,7 +73,7 @@ async function launch() {
 }
 async function open(browser, opts, init, ctxIn) {
   const ctx = ctxIn || await browser.newContext(Object.assign({}, phone, opts || {}));
-  const page = await ctx.newPage(); const errors = [];
+  const page = patient(await ctx.newPage()); const errors = [];
   page.on('pageerror', e => errors.push('pageerror: ' + e.message));
   page.on('console', m => { if (m.type() === 'error' && !/TUNNEL|ERR_|favicon/.test(m.text())) errors.push('console: ' + m.text()); });
   await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));

@@ -47,7 +47,7 @@
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
-    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0 };
+    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : v.by === 'service' ? 'service' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
     try { var a = JSON.parse(localStorage.getItem(REC_KEY) || '[]'); return Array.isArray(a) ? a.map(function (v) { return cleanMeeting(v); }).filter(Boolean) : []; }
@@ -55,13 +55,13 @@
   }
   var record = loadLocal();
   function saveLocal() {
-    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up }; }))); } catch (e) {}
+    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up, loc: m.loc }; }))); } catch (e) {}
   }
   function pushUp(m) {                             // one write at a time for each meeting
     if (!remote) return;
     var col = remote;
     m._p = (m._p || Promise.resolve()).then(function () {
-      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb });
+      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, loc: m.loc ? 1 : 0 });
     }).then(function () { m.up = 1; saveLocal(); }, function () {});
   }
   function thumbOf(c) {
@@ -80,7 +80,8 @@
       m = { id: 'm' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36), at: Date.now(), thumb: S.animalPhoto ? thumbOf(S.animalPhoto) : '', up: 0 };
       record.unshift(m); S.meetingId = m.id;
     }
-    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : 'you';
+    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : named.by === 'service' ? 'service' : 'you';
+    m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
     saveLocal(); pushUp(m); paintRecordBits();
   }
   function forgetMeeting(id) {
@@ -158,7 +159,7 @@
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : 'on your word'].filter(Boolean).join(' · ')));
+      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : 'on your word'].filter(Boolean).join(' · ')));
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -200,8 +201,8 @@
   }
   function lookAgain(m) {
     if (!m || !EYES[m.key]) return;
-    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at };
-    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = [];
+    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
+    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
     armBack();
     photoFromThumb(m.thumb).then(function (c) {
