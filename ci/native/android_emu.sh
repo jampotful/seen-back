@@ -34,14 +34,14 @@ state > "$OUT/state-open.json"; head -c 600 "$OUT/state-open.json"; echo
 step "2. the page's self-test inside the WebView, with the shipped pocket recognizer (models/pocket) on four photos"
 adb shell am force-stop $PKG; sleep 1
 adb shell "am start -W -n $PKG/.MainActivity --es q 'selftest=1&nosw=1$RECQ'" 2>&1 | grep -E "Status|TotalTime|Error"
-t0=$(date +%s); n=0; done=0
+t0=$(date +%s); n=0; fin=0
 while [ $(( $(date +%s) - t0 )) -lt 480 ]; do
   sleep 5; n=$((n+1)); el=$(( $(date +%s) - t0 ))
   case $n in 2|4|8|14|24|40|60|80) shot "2-selftest-$(printf %03d $el)s";; esac
   state > "$OUT/selftest-state.json"
-  if grep -q '"done":true' "$OUT/selftest-state.json"; then echo "self-test done after about $el s"; done=1; sleep 2; shot 2-selftest-final; break; fi
+  if grep -q '"done":true' "$OUT/selftest-state.json"; then echo "self-test done after about $el s"; fin=1; sleep 2; shot 2-selftest-final; break; fi
 done
-[ $done = 1 ] || echo "self-test did not report done within 480 s"
+[ $fin = 1 ] || echo "self-test did not report done within 480 s"
 state > "$OUT/selftest-state.json"
 python3 -I - "$OUT/selftest-state.json" <<'PY'
 import json, sys
