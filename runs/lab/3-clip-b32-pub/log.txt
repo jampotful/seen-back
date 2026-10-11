@@ -1,0 +1,58 @@
+==== job log parts/lab-clip-b32-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:59:55] job: model=clip-b32 shard=0/1 stages=text-species
+data_source=pub/data-alachua (species) + stand-in (manifest)
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:56:35Z workflow=data run_number=1 
+evalname=standin
+manifest_rows=40
+species=5911
+[00:59:55] + python3 -u tools/lab/lab.py text --model clip-b32 --labelset species --species-json data_in/species.json --out art/clip-b32
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded clip-b32 via transformers in 12.9s
+[0;93m2026-10-11 01:00:08.505807400 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/23644 (1.8s)
+  text 2816/23644 (21.1s)
+  text 5376/23644 (41.2s)
+  text 7936/23644 (61.9s)
+  text 10496/23644 (81.5s)
+  text 13056/23644 (100.7s)
+  text 15616/23644 (121.0s)
+  text 18176/23644 (141.1s)
+  text 20736/23644 (161.3s)
+  text 23296/23644 (181.5s)
+species_com: (5911, 512)
+  text 256/23644 (2.0s)
+  text 2816/23644 (23.1s)
+  text 5376/23644 (43.5s)
+  text 7936/23644 (63.9s)
+  text 10496/23644 (84.7s)
+  text 13056/23644 (105.4s)
+  text 15616/23644 (126.2s)
+  text 18176/23644 (146.9s)
+  text 20736/23644 (167.8s)
+  text 23296/23644 (188.7s)
+species_sci: (5911, 512)
+  text 256/5911 (4.7s)
+  text 2816/5911 (58.4s)
+  text 5376/5911 (114.1s)
+species_taxon_com: (5911, 512)
+[01:08:30] exit 0
+[01:08:30] job done, fail=0
+[03:32:17] merging into existing pub/lab-clip-b32 (5810895)
+parts/lab-clip-b32-s0/
+[03:32:17] + python3 -u tools/lab/lab.py merge --model clip-b32 --manifest data_in/manifest.csv --out pubdir parts/lab-clip-b32-s0/
+[03:32:17] exit 0
+[03:32:17] + bash ci/put_branch.sh pub/lab-clip-b32 pubdir lab: clip-b32
+published pub/lab-clip-b32
+[03:32:22] exit 0
+[03:32:22] published pub/lab-clip-b32
