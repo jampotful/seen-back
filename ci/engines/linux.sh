@@ -9,6 +9,8 @@ exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 PART="${PART:-chromium}"; PW=/tmp/pw; PWV=1.56.0
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROBE_ONLY=0 ;; esac   # only rec_probe.js in WebKit, with and without phone emulation
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-thr*) THR_ONLY=1 ;; *) THR_ONLY=0 ;; esac   # only the threads experiment (ci/engines/threads.sh)
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-b7*) NO_ST=1 ;; *) NO_ST=0 ;; esac   # the build's checks (check_rec.js, parity, probes, threads) without the self-test, for time
 if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
@@ -22,6 +24,8 @@ export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | grep -v -E "[0-9]+%" | tail -6
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
+if [ "$THR_ONLY" = 1 ]; then ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-sw5*) ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/sw5xx.sh; exit 0 ;; esac   # only ci/engines/patches/sw-5xx-kept.patch, proven
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
   sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html
@@ -75,7 +79,14 @@ for B in $BROWSERS; do
   if [ "$B" = webkit ]; then
     step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: $B"
     BROWSER=$B PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-$B.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-$B.json"
+    step "offline_repeat.js: the offline case again and again, with and without phone emulation, and what Cache Storage holds when it fails: $B"
+    BROWSER=$B PORT=8782 TRIALS=6 VARIANTS=desk,phone timeout 900 node test/engines/offline_repeat.js > "$OUT/rec/offline-repeat-$B.json" 2> "$OUT/rec/offline-repeat-$B.err.txt"; echo "offline_repeat: exit $?"
+    python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('failed', d.get('failed'), 'of', len(d.get('trials', [])))
+for t in d.get('trials', []): print(t['variant'], t['trial'], json.dumps(t.get('offline'))[:160], '| after', json.dumps(t.get('after'))[:260], '| asked', t.get('asked'), '| errors', json.dumps(t.get('errors'))[:200])" "$OUT/rec/offline-repeat-$B.json"
   fi
+  if [ "$NO_ST" = 1 ]; then echo "(no self-test on ${GITHUB_REF_NAME})"; continue; fi
   step "self-test with the recognizer phase: $B (picture limited to 540 on this software renderer)"
   if [ "$B" = firefox ]; then
     LIBGL_ALWAYS_SOFTWARE=1 HEADED=1 TAG=-xvfb PORT=8781 OUT="$OUT/shots" BROWSERS=firefox VIEWPORTS=phone,desktop LABEL=linux-xvfb LIMIT_MS=480000 EXTRA="&side=540$RECQ" \
@@ -85,5 +96,6 @@ for B in $BROWSERS; do
   fi
 done
 
+ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh
 step "summary"; python3 -I ci/engines/summarize.py "$OUT" "linux-$PART"
 step "shrink pictures"; /tmp/venv/bin/python -I ci/engines/shrink.py "$OUT"; du -sh "$OUT"

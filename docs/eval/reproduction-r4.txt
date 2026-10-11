@@ -1,0 +1,24 @@
+# runs/eval/13 on the ci branch (a clean build machine, commit 72c6eb043e9f, started from the branch run/eval/coco-r4 once the pocket models' vectors of the extra set were published), against the files under docs/eval/ made in the evaluation sandbox
+# shipped-live-pocket.json is not made again by that run (it carries the copy committed before the extra set's vectors existed), so its differences mean nothing.
+# The stand-in files (study2-val.json, shipped-val-*.json) hold kind rows fitted by an iterative optimizer, which stops at slightly different rows on another machine.
+# The stand-in slot of TinyCLIP 39M/16 in the sandbox: rule mix, t_kind 0.5, w_kind 0.7, kind_at 0.5, kind right for 87.3% of the wildlife test photos and 98.2% of the extra set's test photos, a kind asserted for 78.8% of the wildlife test photos. On the build machine: rule mix, t_kind 0.5, w_kind 0.7, kind_at 0.49, kind right for 87.3% of the wildlife test photos and 98.2% of the extra set's test photos, a kind asserted for 80.0% of the wildlife test photos.
+checks.json                              40 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 182 other values, 0 differ; 0 keys on one side only
+decision-pocket-val.json             only in docs/eval
+decision-pocket.json                     57 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 30 other values, 1 differ; 0 keys on one side only
+shipped-live-pocket.json                370 numbers compared, 98 differ by more than 0.0005, largest difference 1267.000000; 51 other values, 6 differ; 15 keys on one side only
+shipped-sentences-bioclip2-l14.json     378 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 76 other values, 0 differ; 1 keys on one side only
+shipped-sentences-tinyclip-39m-16.json    601 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 89 other values, 0 differ; 2 keys on one side only
+shipped-sentences-tinyclip-8m-16.json    613 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 77 other values, 0 differ; 2 keys on one side only
+shipped-val-bioclip2-l14.json           370 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 84 other values, 0 differ; 0 keys on one side only
+shipped-val-tinyclip-39m-16.json        614 numbers compared, 174 differ by more than 0.0005, largest difference 51.000000; 78 other values, 6 differ; 2 keys on one side only
+shipped-val-tinyclip-8m-16.json         536 numbers compared, 206 differ by more than 0.0005, largest difference 10.000000; 93 other values, 10 differ; 2 keys on one side only
+study1.json                           27925 numbers compared, 2 differ by more than 0.0005, largest difference 0.000600; 6269 other values, 0 differ; 0 keys on one side only
+study2-sentences.json                  1297 numbers compared, 1 differ by more than 0.0005, largest difference 0.000500; 265 other values, 0 differ; 0 keys on one side only
+study2-val.json                        2986 numbers compared, 613 differ by more than 0.0005, largest difference 303.000000; 499 other values, 14 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-fp16.json  only in docs/eval
+variant-bioclip2-l14-wasm-hybrid-fc2-w8.json only in docs/eval
+variant-bioclip2-l14-wasm-int8-per-channel.json    103 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-uint8-per-channel.json    103 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 6 other values, 0 differ; 0 keys on one side only
+variant-bioclip2-l14-wasm-w4-block32.json only in docs/eval
+variant-bioclip2-l14-wasm-w8-float.json only in docs/eval
+numbers that differ by more than the tolerance, all files: 1094

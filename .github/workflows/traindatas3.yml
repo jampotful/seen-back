@@ -1,6 +1,7 @@
 name: traindatas3
 # Training photos built from iNaturalist's open-data files (no API). Start it by pushing a commit to a branch named
 # run/traindatas3/<anything>. The manifest goes to pub/data-alachua; the summary and log come back on ci.
+# A commit whose ci/data/job.txt says "inat" runs ci/data/inat.sh instead (inat.json, a few minutes).
 on:
   push:
     branches: ['run/traindatas3/**']
@@ -19,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: build, check and publish
-        run: python3 -m pip install --quiet requests && bash ci/data/train_s3.sh
+        run: python3 -m pip install --quiet requests && bash "ci/data/$(cat ci/data/job.txt 2>/dev/null || echo train_s3).sh"
       - name: return results
         if: always()
         env:
