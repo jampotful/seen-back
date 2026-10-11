@@ -50,7 +50,7 @@ async function one(name) {
     const tNav = Date.now();
     const resp = await page.goto(SITE, { waitUntil: 'load', timeout: 45000 });
     r.loadEventMs = Date.now() - tNav;
-    r.readyFromNav = await page.evaluate(() => window.__seenBack && window.__seenBack.rec ? window.__seenBack.rec.ready().then(() => 'ready', (e) => 'failed: ' + (e && e.code)) : 'no recognizer').catch((e) => 'error: ' + e.message);
+    r.readyFromNav = await page.evaluate(() => window.__seenBack && window.__seenBack.rec ? Promise.race([window.__seenBack.rec.ready().then(() => 'ready', (e) => 'failed: ' + (e && e.code)), new Promise((res) => setTimeout(() => res('still waiting after 120 s'), 120000))]) : 'no recognizer').catch((e) => 'error: ' + e.message);
     r.readyFromNavMs = Date.now() - tNav;
     r.first = { status: resp && resp.status(), headers: resp && resp.headers() };
     await page.waitForTimeout(5000);
@@ -67,7 +67,7 @@ async function one(name) {
     if (man.status === 200) {
       try { r.manifest = JSON.parse(man.text); } catch (e) { r.manifest = 'not JSON'; }
       const t0 = Date.now();
-      r.ready = await page.evaluate(() => window.__seenBack.rec.ready().then(() => 'ready', (e) => 'failed: ' + (e && e.code) + ' ' + (e && e.sentence) + ' ' + (e && e.detail))).catch((e) => 'error: ' + e.message);
+      r.ready = await page.evaluate(() => Promise.race([window.__seenBack.rec.ready().then(() => 'ready', (e) => 'failed: ' + (e && e.code) + ' ' + (e && e.sentence) + ' ' + (e && e.detail)), new Promise((res) => setTimeout(() => res('still waiting after 60 s'), 60000))])).catch((e) => 'error: ' + e.message);
       r.readyMs = Date.now() - t0; r.about = await page.evaluate(() => window.__seenBack.rec.about());
       if (r.ready === 'ready') r.photos = await page.evaluate(async (list) => {
         const out = [];

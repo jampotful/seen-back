@@ -27,7 +27,7 @@ mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit 
 export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install --with-deps chromium firefox webkit 2>&1 | grep -v -E "[0-9]+%" | tail -4
 step "the page in Chromium, Firefox and WebKit"
-OUT="$OUT" SITE="$SITE" BROWSERS=chromium,firefox,webkit timeout 900 node test/engines/live.js; echo "live.js: exit $?"
+for B in chromium webkit firefox; do OUT="$OUT" SITE="$SITE" BROWSERS=$B timeout 420 node test/engines/live.js; echo "live.js $B: exit $?"; done   # one process each, so one that hangs cannot take the others with it
 python3 -I - "$OUT" <<'PY'
 import json, glob, os, sys
 out = sys.argv[1]; S = {}
