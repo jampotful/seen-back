@@ -60,6 +60,9 @@ print("meta written")
 PY
 run python3 tools/lab/device.py parts --file "$f" --size 90000000 --out pub --meta meta.json --name vision.int8.onnx || exit 1
 cp ret/device_results.json pub/results.json
+# every recipe's WASM vectors on the test photos (unit rows, float16, in the order of the ids file), for the evaluation
+mkdir -p pub/vectors
+for v in dparts/*/wasm_*.f16.npy; do b=$(basename "$v" .f16.npy); cp "$v" "pub/vectors/${b#wasm_}.alachua-2025-test320.f16.npy"; cp "${v%.f16.npy}.ids.json" "pub/vectors/${b#wasm_}.alachua-2025-test320.ids.json"; done
 cp pub/parts.json ret/
 run bash ci/put_branch.sh "$branch" pub "lab: $model for the device ($best, in parts)" || exit 1
 sha=$(git ls-remote origin "refs/heads/$branch" | cut -f1)
