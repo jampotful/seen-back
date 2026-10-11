@@ -52,9 +52,14 @@ async function one(name) {
         return out;
       }, PHOTOS);
     }
-    // a second visit: the service worker should be in control now
-    await page.reload({ waitUntil: 'load' }); await page.waitForTimeout(2500);
-    r.second = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), screen: window.__seenBack && window.__seenBack.S.screen }));
+    // a second visit, in a new tab (a reload under a service worker sometimes never reports "load" to Playwright)
+    await page.close();
+    page = await ctx.newPage();
+    try {
+      const resp1 = await page.goto(SITE, { waitUntil: 'domcontentloaded', timeout: 30000 }); await page.waitForTimeout(2500);
+      r.second = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), screen: window.__seenBack && window.__seenBack.S.screen }));
+      r.second.fromServiceWorker = resp1 ? resp1.fromServiceWorker() : null;
+    } catch (e) { r.second = { failed: String(e.message).split('\n')[0] }; }
     // and one with the network off, in a new tab of the same browser (a reload can leave the old page on screen)
     await page.close();
     await ctx.setOffline(true);
