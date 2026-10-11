@@ -1,0 +1,148 @@
+{
+ "id": "tinyclip-39m-16",
+ "source": "wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+ "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+ "loader": "transformers",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+ "role": "pocket",
+ "params": {
+  "image": 38587392,
+  "text": 44513793,
+  "total": 83101185
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224"
+ },
+ "preprocess_detail": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224",
+  "rescale": 0.00392156862745098,
+  "image_processor": "CLIPImageProcessor",
+  "model_class": "CLIPModel"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "text": {
+  "species_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  },
+  "species_sci": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  },
+  "species_taxon_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  }
+ },
+ "width": 512,
+ "stages": [
+  "export",
+  "images-onnx-int8-per-channel",
+  "images-onnx-int8-per-tensor",
+  "text-species"
+ ],
+ "onnx": {
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "output_unit_normalized": false,
+  "dynamic_batch": true,
+  "opset": 17,
+  "files": {
+   "fp32": {
+    "bytes": 154555411,
+    "published": false
+   },
+   "int8-per-tensor": {
+    "bytes": 40698732,
+    "published": true
+   },
+   "int8-per-channel": {
+    "bytes": 40978137,
+    "published": true
+   },
+   "fp16": {
+    "bytes": 77458168,
+    "published": true
+   },
+   "int8": {
+    "bytes": 40978137,
+    "published": true
+   }
+  }
+ },
+ "images": {
+  "alachua-2025.int8-per-tensor": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 6000,
+    "embedded": 6000,
+    "skipped": 0,
+    "seconds": 378.7,
+    "photos_per_second": 15.84,
+    "machine_cpus": 4,
+    "onnx_sha256": "9f33c51531b16a87b693659b8a440752e6bcb5c570fd197ccfca33c3d4d91950"
+   },
+   "via": "onnxruntime CPU, vision.int8-per-tensor.onnx"
+  },
+  "alachua-2025.int8-per-channel": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 6000,
+    "embedded": 6000,
+    "skipped": 0,
+    "seconds": 377.0,
+    "photos_per_second": 15.92,
+    "machine_cpus": 4,
+    "onnx_sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e"
+   },
+   "via": "onnxruntime CPU, vision.int8-per-channel.onnx"
+  }
+ }
+}
