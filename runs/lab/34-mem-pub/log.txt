@@ -1,0 +1,82 @@
+[08:59:32] memory job mem-pub; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1351       12366          45        2637       14638
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:59 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:59 vision.int8.onnx
+
+added 18 packages in 2s
+photos: 24 rows, 24 to fetch, 0 failed, 0.3s
+pixels: 24 photos (0 skipped), every 13-th test row
+[0;93m2026-10-11 08:59:49.343335427 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python onnxruntime 1.30.0 onnx 1.23.2
+external data: graph 2175801 bytes, vision.weights.bin 307658752 bytes
+model:
+total 302564
+drwxr-xr-x 2 runner runner      4096 Oct 11 08:59 ext
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:59 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:59 vision.int8.onnx
+
+model/ext:
+total 302576
+-rw-r--r-- 1 runner runner   2175801 Oct 11 08:59 vision.graph.onnx
+-rw------- 1 runner runner 307658752 Oct 11 08:59 vision.weights.bin
+[08:59:50] route base-drop: {"name": "base-drop", "form": "onnx", "options": {}, "drop_js": true, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":55.4,"peak_mb":55.4,"heap_mb":0}
+{"step":"file read","rss_mb":352.2,"peak_mb":352.2,"heap_mb":0,"ms":52}
+{"step":"session created","rss_mb":1244.7,"peak_mb":1244.7,"heap_mb":819.4,"ms":1261}
+{"step":"file bytes let go","rss_mb":937.4,"peak_mb":1245.7,"heap_mb":819.4}
+{"step":"warm-up (empty picture)","rss_mb":1089.3,"peak_mb":1149.8,"heap_mb":819.4,"ms":4651}
+{"step":"photo 1","rss_mb":1090.8,"peak_mb":1090.8,"heap_mb":819.4,"ms":4649}
+{"step":"photo 10","rss_mb":1089.9,"peak_mb":1089.9,"heap_mb":819.4,"ms":4561}
+{"step":"photo 24","rss_mb":1089.9,"peak_mb":1089.9,"heap_mb":819.4,"ms":4570}
+route base-drop: ready 1261 ms, heap 819.4 MB, photo mean 4498 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:54.19
+	Maximum resident set size (kbytes): 1115520
+[09:01:44] route ext-drop: {"name": "ext-drop", "form": "external", "options": {}, "drop_js": true, "model": "model/ext/vision.graph.onnx", "external": "model/ext/vision.weights.bin", "external_name": "vision.weights.bin", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":44}
+{"step":"session created","rss_mb":833.3,"peak_mb":833.3,"heap_mb":357.5,"ms":1206}
+{"step":"file bytes let go","rss_mb":525.8,"peak_mb":833.6,"heap_mb":357.5}
+{"step":"warm-up (empty picture)","rss_mb":723.4,"peak_mb":724.2,"heap_mb":429,"ms":4811}
+{"step":"photo 1","rss_mb":724.9,"peak_mb":724.9,"heap_mb":429,"ms":4478}
+{"step":"photo 10","rss_mb":729.5,"peak_mb":729.5,"heap_mb":429,"ms":4543}
+{"step":"photo 24","rss_mb":729.6,"peak_mb":729.6,"heap_mb":429,"ms":4606}
+route ext-drop: ready 1206 ms, heap 429 MB, photo mean 4542 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:55.12
+	Maximum resident set size (kbytes): 746536
+[09:03:39] memory job done, fail=0
+cut vision.weights.bin into 4 parts, 307658752 bytes, 9bb90d945849da04a5874d4b2a0e016dd4a00b6a2d78bf79a17fb6da58b09242
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File vision.weights.bin.part00 is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: File vision.weights.bin.part01 is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: File vision.weights.bin.part02 is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+remote: 
+remote: Create a pull request for 'pub/model-bioclip2-l14-b' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/model-bioclip2-l14-b        
+remote: 
+published pub/model-bioclip2-l14-b
+[09:04:16] published pub/model-bioclip2-l14-b at add8cf58da052a2f81b9b7465674dc29b51b46f9
+vision.weights.bin.part00: 90000000 bytes, sha256 matches
+vision.weights.bin.part01: 90000000 bytes, sha256 matches
+vision.weights.bin.part02: 90000000 bytes, sha256 matches
+vision.weights.bin.part03: 37658752 bytes, sha256 matches
+vision.graph.onnx: 2175801 bytes, sha256 matches
+all published files match parts.json
+added 2 packages in 1s
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+[09:04:49] page run: the shipped file through vendor/rec-worker.js
+init: {"op":"ready","fail":"","fetch_ms":494,"ready_ms":5923,"worker_ms":{"vectors":8.5,"session":1215.899999999965,"warm":4696.799999999988},"heap":860815360,"threads":1,"backend":"wasm"}
+{"peaks":{"launch":{"renderer_max_mb":41.4,"renderer_sum_mb":41.4,"browser_all_mb":337.8},"page open":{"renderer_max_mb":87.3,"renderer_sum_mb":87.3,"browser_all_mb":405.2},"model fetched into the page":{"renderer_max_mb":432,"renderer_sum_mb":432,"browser_all_mb":755.2},"session created (worker init, warm-up)":{"renderer_max_mb":1330.4,"renderer_sum_mb":1330.4,"browser_all_mb":1655},"photo 1":{"renderer_max_mb":1218.1,"renderer_sum_mb":1218.1,"browser_all_mb":1542.8},"other photos":{"renderer_max_mb":1236.2,"renderer_sum_mb":1236.2,"browser_all_mb":1559.7},"photo 10":{"renderer_max_mb":1224.2,"renderer_sum_mb":1224.2,"browser_all_mb":1549.2},"after":{"renderer_max_mb":1236.2,"renderer_sum_mb":1236.2,"browser_all_mb":1559.7}},"heap_mb":820.9,"photo_ms":[4595,4737,4558,4496,4491,4615,4490,4520,4503,4407,4558,4476,4455,4541,4567,4502,4545,4572,4505,4506,4527,4494,4465,4588]}
+[09:06:47] page run: the external data form through the patched vendor/rec-worker.js
+init: {"op":"ready","fail":"","fetch_ms":492,"ready_ms":5815,"worker_ms":{"vectors":6.5,"session":1157.1999999999534,"warm":4647.900000000023},"heap":449839104,"threads":1,"backend":"wasm"}
+{"peaks":{"page open":{"renderer_max_mb":87.3,"renderer_sum_mb":87.3,"browser_all_mb":405.7},"model fetched into the page":{"renderer_max_mb":640.4,"renderer_sum_mb":640.4,"browser_all_mb":961.9},"session created (worker init, warm-up)":{"renderer_max_mb":953.3,"renderer_sum_mb":953.3,"browser_all_mb":1276.5},"photo 1":{"renderer_max_mb":857.3,"renderer_sum_mb":857.3,"browser_all_mb":1184.8},"other photos":{"renderer_max_mb":875.5,"renderer_sum_mb":875.5,"browser_all_mb":1198.4},"photo 10":{"renderer_max_mb":863.6,"renderer_sum_mb":863.6,"browser_all_mb":1186.9},"after":{"renderer_max_mb":875.5,"renderer_sum_mb":875.5,"browser_all_mb":1197.3}},"heap_mb":429,"photo_ms":[4587,4498,4458,4506,4464,4457,4475,4506,4428,4488,4464,4456,4458,4453,4406,4467,4452,4432,4490,4443,4467,4463,4494,4524]}
+[09:08:43] page run done
