@@ -41,7 +41,8 @@ step "species list" python3 tools/species/build_species.py --out data/regions/us
 rc_species=$?
 cp data/regions/us-fl-alachua/SUMMARY.md out/species-SUMMARY.md 2>/dev/null || true
 if [ "$rc_species" -eq 0 ] && [ "${PUBLISH:-1}" = "1" ]; then
-  step "publish species list" bash ci/put_branch.sh pub/data-alachua data "species list"
+  mkdir -p stage1/regions && cp -R data/regions/us-fl-alachua stage1/regions/ && rm -f stage1/regions/us-fl-alachua/inat.json
+  step "publish species list" bash ci/data/merge_pub.sh pub/data-alachua stage1 "species list"
 fi
 [ -f data/regions/us-fl-alachua/species.json ] || { counts; exit 1; }
 
@@ -60,6 +61,9 @@ if [ -f data/eval/alachua-2025/manifest.csv ]; then
 fi
 
 if [ "$rc_species" -eq 0 ] && [ "$rc_eval" -eq 0 ] && [ "${PUBLISH:-1}" = "1" ]; then
-  step "publish species list and manifest" bash ci/put_branch.sh pub/data-alachua data "species list and evaluation manifest" || exit 1
+  # INTO pub/data-alachua (ci/data/merge_pub.sh): the training manifest, iNaturalist names and extra sets stay.
+  mkdir -p stage2/regions stage2/eval && cp -R data/regions/us-fl-alachua stage2/regions/ && rm -f stage2/regions/us-fl-alachua/inat.json
+  cp -R data/eval/alachua-2025 stage2/eval/
+  step "publish species list and manifest" bash ci/data/merge_pub.sh pub/data-alachua stage2 "species list and evaluation manifest" eval/alachua-2025 || exit 1
 fi
 [ "$rc_species" -eq 0 ] && [ "$rc_eval" -eq 0 ]

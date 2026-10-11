@@ -1,0 +1,233 @@
+{
+ "made_by": "tools/eval/shipped.py",
+ "slot": "sentences-bioclip2-l14-product",
+ "manifest": {
+  "id": "bioclip2-l14",
+  "fusion": {
+   "t_kind": 20.0,
+   "t_species": 100.0,
+   "alpha_prior": 1.0,
+   "w_kind": 0.5,
+   "rule": "product",
+   "name_at": 0.05,
+   "offer_at": 2.0,
+   "prior_floor": 1e-06
+  },
+  "evaluation": {
+   "model": "bioclip2-l14",
+   "head": "sentences",
+   "choice": "species_sci",
+   "train": "sentences",
+   "train_vectors": "none (sentence rows only)",
+   "test_vectors": "images/alachua-2025",
+   "tuned_on": "val",
+   "prior_smoothing": {
+    "lam": 2.0,
+    "c": 1.0
+   }
+  },
+  "needs": []
+ },
+ "numbers": {
+  "test_photos": 4197,
+  "tuning_photos": 1803,
+  "name_at": 0.05,
+  "offer_at": null,
+  "kind_right": [
+   0.9828,
+   0.9786,
+   0.9864,
+   4197
+  ],
+  "called_person": 0.0,
+  "called_none": 0.0,
+  "species_top1": [
+   0.9245,
+   0.9164,
+   0.9323,
+   4197
+  ],
+  "species_top5": [
+   0.9747,
+   0.9697,
+   0.9793,
+   4197
+  ],
+  "named": [
+   0.9952,
+   0.9931,
+   0.9971,
+   4197
+  ],
+  "named_right": [
+   0.9277,
+   0.9198,
+   0.9351,
+   4177
+  ],
+  "named_kind_right": [
+   0.9861,
+   0.9825,
+   0.9895,
+   4177
+  ],
+  "offered": [
+   0.0,
+   0.0,
+   0.0,
+   4197
+  ],
+  "offered_holds_species": [
+   null,
+   null,
+   null,
+   0
+  ],
+  "offered_kind_right": [
+   null,
+   null,
+   null,
+   0
+  ],
+  "kind_only": [
+   0.0048,
+   0.0029,
+   0.0069,
+   4197
+  ],
+  "kind_only_kind_right": [
+   0.3,
+   0.1,
+   0.5,
+   20
+  ],
+  "top_species_differs_from_direct_computation": 0,
+  "seconds": 51.6,
+  "levels": [
+   {
+    "right_at_least": 0.9,
+    "name_at": 0.05,
+    "named": [
+     0.9952,
+     0.9931,
+     0.9971,
+     4197
+    ],
+    "named_right": [
+     0.9277,
+     0.9198,
+     0.9351,
+     4177
+    ],
+    "offer_at": null,
+    "offered": [
+     0.0,
+     0.0,
+     0.0,
+     4197
+    ],
+    "offered_holds_species": [
+     null,
+     null,
+     null,
+     0
+    ],
+    "kind_only": [
+     0.0048,
+     0.0029,
+     0.0069,
+     4197
+    ]
+   },
+   {
+    "right_at_least": 0.95,
+    "name_at": 0.44,
+    "named": [
+     0.9571,
+     0.9509,
+     0.9628,
+     4197
+    ],
+    "named_right": [
+     0.951,
+     0.9445,
+     0.9574,
+     4017
+    ],
+    "offer_at": null,
+    "offered": [
+     0.0,
+     0.0,
+     0.0,
+     4197
+    ],
+    "offered_holds_species": [
+     null,
+     null,
+     null,
+     0
+    ],
+    "kind_only": [
+     0.0429,
+     0.0372,
+     0.0491,
+     4197
+    ]
+   },
+   {
+    "right_at_least": 0.98,
+    "name_at": 0.78,
+    "named": [
+     0.8473,
+     0.8354,
+     0.8582,
+     4197
+    ],
+    "named_right": [
+     0.9798,
+     0.9753,
+     0.9843,
+     3556
+    ],
+    "offer_at": 0.66,
+    "offered": [
+     0.1168,
+     0.1075,
+     0.127,
+     4197
+    ],
+    "offered_holds_species": [
+     0.9184,
+     0.8939,
+     0.9408,
+     490
+    ],
+    "kind_only": [
+     0.036,
+     0.0305,
+     0.0417,
+     4197
+    ]
+   }
+  ]
+ },
+ "text": "The slot holds the head `sentences` for `bioclip2-l14` (species_sci), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 20, w_kind 0.5, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.05 and offer_at never (no level reached nine in ten). On the 4197 test photos the kind of eye is right for 98.3% (97.9 to 98.6); the top species is right for 92.5% (91.6 to 93.2) and is among the first five for 97.5% (97.0 to 97.9). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos.",
+ "outcomes": [
+  {
+   "what": "a species name",
+   "share": 0.9952,
+   "right": "the name is right for 92.8% (92.0 to 93.5); the kind for 98.6% (98.2 to 99.0)"
+  },
+  {
+   "what": "three species to choose from",
+   "share": 0.0,
+   "right": "the three hold the species for –; the kind is right for –"
+  },
+  {
+   "what": "a kind of eye only",
+   "share": 0.0048,
+   "right": "the kind is right for 30.0% (10.0 to 50.0)"
+  }
+ ],
+ "extra": []
+}

@@ -1,0 +1,79 @@
+{
+ "id": "tinyclip-39m-16",
+ "licence": "MIT",
+ "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+ "vision": {
+  "url": "vision.int8-per-channel.onnx",
+  "bytes": 40978137,
+  "sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+  "from": "pub/lab-tinyclip-39m-16:onnx/vision.int8-per-channel.onnx",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ]
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5911
+ },
+ "fusion": {
+  "t_kind": 100.0,
+  "t_species": 100.0,
+  "alpha_prior": 1.0,
+  "w_kind": 0.3,
+  "rule": "product",
+  "name_at": 0.4,
+  "offer_at": 0.53,
+  "prior_floor": 1e-06
+ },
+ "fusion_note": "Interim settings, 11 October 2026. The exported settings (rule mix, t_kind 20, w_kind 0.5) were tuned on wildlife photos alone and called a photo of a person or of a coffee cup a plant. These settings (rule product, t_kind 100, w_kind 0.3) were chosen by tools/eval/interim.py so that 13 of 15 local photos of people, objects, a cat and plants come out right, while the kind of eye stays right on 0.8365 of the 4,197 test photos (0.8394 under the exported settings) and a species is named for 0.152 of them, correctly for 0.934 of those. A head trained with photos of people and of nothing alive replaces this.",
+ "evaluation": {
+  "model": "tinyclip-39m-16",
+  "head": "sentences",
+  "choice": "species_com",
+  "train": "sentences",
+  "train_vectors": "none (sentence rows only)",
+  "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 2.0,
+   "c": 1.0
+  }
+ },
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never"
+}

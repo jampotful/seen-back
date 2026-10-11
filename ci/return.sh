@@ -4,6 +4,10 @@
 # The results land in runs/<name>/<run number>[-shard]/ with a _meta.txt beside them, and one line is
 # added to INDEX.txt: time, path, job status, the first twelve characters of the commit, and the branch.
 # Keep results small: text, tables, and a few compressed pictures. Anything over 25 MB is refused.
+#
+# Many jobs return at once, and every one of them adds a line to the end of INDEX.txt, so a rebase would
+# conflict there every time. Each try therefore starts again from the branch as it stands now, copies the
+# results in, adds the line, and pushes; a push that loses the race is simply tried again.
 set -uo pipefail
 name="$1"; dir="$2"; shard="${3:-}"
 dest="runs/$name/${GITHUB_RUN_NUMBER:-0}${shard:+-$shard}"
@@ -26,24 +30,31 @@ if [ "$size_kb" -gt 25600 ]; then
   find "$dir" -type f ! \( -name '*.txt' -o -name '*.json' -o -name '*.md' -o -name '*.csv' -o -name '*.log' \) -delete
   echo "oversize=${size_kb}kB, binary files dropped" >> "$dir/_meta.txt"
 fi
-git config user.name "github-actions[bot]"
-git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-tmp="$(mktemp -d)"
-if git fetch -q origin ci 2>/dev/null; then
-  git worktree add -q "$tmp" FETCH_HEAD
-else
-  git worktree add -q --detach "$tmp"
-  ( cd "$tmp" && git checkout -q --orphan ci-new && git rm -rfq . 2>/dev/null; true )
-fi
-mkdir -p "$tmp/$dest"
-cp -R "$dir"/. "$tmp/$dest/" 2>/dev/null || true
-cd "$tmp"
-echo "$(date -u +%FT%TZ) $dest ${JOB_STATUS:-unknown} ${sha:0:12} ${GITHUB_REF_NAME:-}" >> INDEX.txt
-git add -A
-git commit -qm "results: $dest (${JOB_STATUS:-unknown})"
-for i in 1 2 3 4 5 6 7 8 9 10; do
-  if git push -q origin HEAD:ci; then echo "returned $dest"; exit 0; fi
-  sleep $((RANDOM % 6 + 2))
-  git fetch -q origin ci && git rebase -q FETCH_HEAD || { git rebase --abort 2>/dev/null; true; }
+src="$(cd "$dir" && pwd)"
+origin_url="$(git remote get-url origin)"
+auth="$(git config --get-all http.https://github.com/.extraheader || true)"
+line="$(date -u +%FT%TZ) $dest ${JOB_STATUS:-unknown} ${sha:0:12} ${GITHUB_REF_NAME:-}"
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+  tmp="$(mktemp -d)"
+  (
+    cd "$tmp" || exit 9
+    git init -q .
+    git config user.name "github-actions[bot]"
+    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    [ -n "$auth" ] && git config http.https://github.com/.extraheader "$auth"
+    if git fetch -q --depth 1 "$origin_url" ci 2>/dev/null; then
+      git checkout -q -b ci FETCH_HEAD
+    else
+      git checkout -q --orphan ci
+    fi
+    mkdir -p "$dest"
+    cp -R "$src"/. "$dest/" 2>/dev/null || true
+    echo "$line" >> INDEX.txt
+    git add -A
+    git commit -qm "results: $dest (${JOB_STATUS:-unknown})"
+    git push -q "$origin_url" HEAD:ci
+  ) && { echo "returned $dest"; rm -rf "$tmp"; exit 0; }
+  rm -rf "$tmp"
+  sleep $((RANDOM % 8 + 2))
 done
 echo "could not return $dest" >&2; exit 1
