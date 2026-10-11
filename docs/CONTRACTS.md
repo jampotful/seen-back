@@ -34,7 +34,8 @@ To avoid collisions, each area of work owns its files. Change another area's fil
 | Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/`, `test/check4.js` |
 | Species lists and evaluation photos | `tools/species/`, `.github/workflows/data.yml`, `ci/data/`, `data/` |
 | Model laboratory | `tools/lab/`, `.github/workflows/lab.yml`, `ci/lab/`, `labels/` |
-| Species service | `service/`, `.github/workflows/service.yml` |
+| Species service | `service/`, `.github/workflows/service.yml`, `ci/service/` |
+| Evaluation | `tools/eval/`, `docs/EVAL.md`, `docs/eval/` |
 | Shared | `build.py`, `ci/*.sh`, `docs/`, `README.md` (changed on `main` by the coordinator) |
 
 ## The sixteen kinds of eye
@@ -92,6 +93,18 @@ One row per photo, one photo per observation. Columns:
 - `date` is the observation date; every row is later than `records_through` of the species list, and later than 2024-05-01, the date of the GBIF snapshot behind BioCLIP 2's training data.
 - `split` is `val` (three in ten) or `test`, fixed by a hash of `gbif_id`. Settings are tuned on `val`; reported numbers come from `test`.
 
+### Training photos: `data/train/<name>/manifest.csv`
+
+The same sixteen columns as the evaluation manifest, with `split` set to `train`. Rows come from records through `records_through` of the species list, so no training photo is later than any evaluation photo's cutoff. Up to sixty photos a species, chosen by a hash so the choice can be repeated. Ids start with `t`.
+
+### Photos for kinds the wildlife records lack: `data/extra/<name>/manifest.csv`
+
+People, pets, livestock and photos with nothing alive in them, taken from an openly licensed general data set. The same columns where they apply (`eyes` holds the kind, or `none`), `split` is `train` or `test`, and `key`, `sci`, `en` and the taxonomy columns are empty.
+
+### iNaturalist's own names: `data/regions/<region>/inat.json`
+
+GBIF files some species under names iNaturalist does not use (it lumps Florida's Common Gallinule into *Gallinula chloropus*, for one). For each GBIF species key this file gives the iNaturalist taxon most often attached to its records in the region: `{"<key>": {"inat_id": 0, "sci": "...", "en": "...", "share": 0.98}}`. The species list's `sci` stays GBIF's, because the biology models were trained on GBIF's names; `en` and the name shown to a person follow iNaturalist.
+
 ### Labels: `labels/kinds.json` and the lab's label sets
 
 `labels/kinds.json` holds, for each kind of eye and for `none` (nothing alive), a list of noun phrases. The lab turns each phrase into sentences with its templates and averages them into one vector per kind.
@@ -121,4 +134,30 @@ onnx/parity.json          how closely each ONNX file reproduces the original mod
 }
 ```
 
-Embedding files are raw little-endian float16, row after row, unit length. `species.json` here is the compact table the page needs (scientific name, English name, kind of eye, twelve monthly weights), rows in the same order as the vectors.
+Embedding files are raw little-endian float16, row after row, unit length.
+
+Details settled while building it:
+
+- `"crop": "center"` drops `floor(spare / 2)` pixels from the near edge, as the laboratory's image processor does.
+- The species table is `{"species": [[scientific, English, kind, [twelve monthly weights]], ...]}`.
+- Optional `fusion.prior_floor` (default 1e-6) and `fusion.offer_any_kind` (default false: the three offers come from the winning kind).
+- A head may be trained instead of made from sentences. Then its rows are weights, not unit vectors, and it carries a bias: `"kinds": {"url": "...", "labels": [...], "bias": [..]}` and `"species": {..., "bias_url": "species.bias.f32.bin"}`. The score of a row is `t * (row . e) + bias`, with `e` the unit image vector, so a sentence-made head is the case of unit rows and no bias.
+- Files are asked for with `?v=<version>` and kept under that address; the manifest itself is asked of the network first. The service worker keeps versioned addresses first and treats unversioned files under `models/`, `vendor/` and `data/` as network-first with the kept copy as fallback.
+- `tools/species/fetch_photos.py --shard i/n` counts shards from zero. `species.json` here is the compact table the page needs (scientific name, English name, kind of eye, twelve monthly weights), rows in the same order as the vectors.
+
+## The species service (the naturalist)
+
+A small server that names the species from a photo, for when there is signal. The page never calls it without the person's say-so.
+
+```
+POST /v1/identify      multipart form: image (JPEG, longest side at most 512, under 1 MB), month (1-12), region ("us-fl-alachua" or empty), top (at most 10)
+  -> 200 {"model": "bioclip2-l14", "region": "us-fl-alachua", "ms": 1234,
+          "species": [{"key": 2480962, "sci": "Ardea herodias", "en": "Great Blue Heron", "eyes": "wader", "p": 0.83}],
+          "kinds": [{"key": "wader", "p": 0.97}]}
+GET  /v1/health        -> {"ok": true, "ready": true, "model": "...", "species": 5911}
+```
+
+- It answers browsers from `https://jampotful.github.io` and from localhost, and nobody else's pages.
+- It keeps no photo and logs nothing about a photo beyond a count and the time taken.
+- It reads its label rows, biases, species table and prior from files in the same layout as the page's recognizer, so a better head is a change of files.
+- It runs on the free tier only.
