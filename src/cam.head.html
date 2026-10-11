@@ -66,6 +66,7 @@ button { cursor: pointer; }
 .msg:empty { visibility: hidden; }
 .timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 600; }
 .stack { display: flex; flex-direction: column; }
+#barFinder:not([hidden]) ~ #barType, #barAnimal:not([hidden]) ~ #barType { display: none; }   /* only ever under the line that counts the download */
 
 /* the name, as the eyes change */
 .reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 28px rgba(0, 0, 0, .8), 0 0 4px rgba(0, 0, 0, .5); padding: 0 24px; }
@@ -135,6 +136,13 @@ button { cursor: pointer; }
 .offers .pill { min-height: 44px; padding: 0 18px; font-weight: 500; }
 .about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 .sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
+.line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: 14.5px; line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.line:disabled { border-color: transparent; background: none; padding-left: 0; text-decoration: none; cursor: default; opacity: 1; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none !important; }
+.tick { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dim); }
+.tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--paper); }
+.sheet details .tick { margin-top: 12px; font-size: 13.5px; }
+.sheet select { display: block; margin-top: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #1c1c1c; color: var(--ink); font: inherit; font-size: 14.5px; }
+#svcBox { margin-top: 12px; }
 .reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
 @media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
@@ -175,6 +183,7 @@ button { cursor: pointer; }
       <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
       <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
+    <button class="line" id="svcView" type="button" hidden></button>
     <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
@@ -190,6 +199,7 @@ button { cursor: pointer; }
         <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
       </div>
       <span class="timer" id="timer" hidden>0:00</span>
+      <button class="line" id="svcHud" type="button" hidden></button>
     </div>
     <div class="stack">
       <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -203,6 +213,8 @@ button { cursor: pointer; }
         <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
         <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
       </div>
+      <!-- a way out while the recognizer is still being downloaded for the first time -->
+      <div class="bottom" id="barType" hidden><button class="pill ghost" id="btnType" type="button">Type it instead</button></div>
     </div>
   </div>
 
@@ -238,6 +250,14 @@ button { cursor: pointer; }
       <summary>About this build</summary>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="mini" id="aboutCopy" type="button">Copy</button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
+      <div id="awayRow" hidden>
+        <label class="tick"><input type="checkbox" id="awayBox"><span>I am not near Gainesville</span></label>
+        <p class="fine2" id="awayNote"></p>
+      </div>
+      <div id="svcBox" hidden>
+        <label class="fine2" for="svcChoice">A larger model on a server can be asked to name the species, from one photo made smaller.</label>
+        <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
+      </div>
     </details>
   </section>
 
@@ -266,6 +286,15 @@ button { cursor: pointer; }
         <li>Unchecked: the two-cone colour arithmetic, entered from memory. Two assumptions of this app's own: that the phone's long side fills about 24 degrees of your view, and that a faster eye can be suggested by slowing the picture. Every line marked as a guess is a first entry for a vision scientist to correct.</li>
       </ul>
     </details>
+  </section>
+
+  <!-- before a photo leaves the device: what would be sent, where, and the choice -->
+  <section class="sheet" id="ask" hidden aria-label="Ask a larger model">
+    <header><h3>Ask a larger model?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="askSub"></p>
+    <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
+    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Not now</button></div>
+    <p class="note">Your answer can be changed under “About this build”, in “Met so far”.</p>
   </section>
 
   <!-- a clip or a still, kept -->

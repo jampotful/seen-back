@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 8781, OUT = process.env.OUT || 'out', WD = process.env.WD || 'http://127.0.0.1:4444';
-const BASE = 'http://127.0.0.1:' + PORT + '/index.html';
+const BASE = 'http://127.0.0.1:' + PORT + '/index.html', EXTRA = process.env.EXTRA || '';
 fs.mkdirSync(OUT, { recursive: true });
 const rec = { browser: 'safari', viewport: 'desktop', platform: 'macos', shots: [], notes: [], steps: [] };
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
@@ -30,10 +30,10 @@ function screen(name) { try { execFileSync('screencapture', ['-x', path.join(OUT
     await wd('POST', `/session/${sid}/url`, { url: BASE }); await sleep(3500); await shot('safari-desktop-1-open.png'); screen('safari-desktop-1-open-screen.png');
     rec.openState = await js('return {screen: window.__seenBack && window.__seenBack.S.screen, engine: window.__seenBack && window.__seenBack.state(), serif: document.fonts ? document.fonts.check(\'400 20px "Instrument Serif"\') : null, sw: !!navigator.serviceWorker}').catch(e => ({ error: e.message }));
     rec.steps.push('opening screen');
-    await wd('POST', `/session/${sid}/url`, { url: BASE + '?selftest=1&nosw=1&report=/report/safari-desktop' });
+    await wd('POST', `/session/${sid}/url`, { url: BASE + '?selftest=1&nosw=1&report=/report/safari-desktop' + EXTRA });
     const t0 = Date.now(), seen = {};
     let T = null;
-    while (Date.now() - t0 < 240000) {
+    while (Date.now() - t0 < 360000) {
       T = await js('return window.__selftest ? {phase: window.__selftest.phase, posing: window.__selftest.posing, done: window.__selftest.done} : null').catch(() => null);
       if (T && T.phase === 'still' && !seen.still) { seen.still = 1; await shot('safari-desktop-2-still.png'); }
       if (T && T.phase === 'motion' && !seen.motion) { seen.motion = 1; await sleep(1200); await shot('safari-desktop-3-motion.png'); screen('safari-desktop-3-motion-screen.png'); }

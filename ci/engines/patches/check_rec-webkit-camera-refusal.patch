@@ -1,0 +1,33 @@
+diff --git a/test/rec/check_rec.js b/test/rec/check_rec.js
+index d786995..75ca8ec 100644
+--- a/test/rec/check_rec.js
++++ b/test/rec/check_rec.js
+@@ -27,19 +27,25 @@ const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r
+ const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
+ const about = (page) => page.evaluate(() => window.__seenBack.rec.about());
+ const st = (page) => page.evaluate(() => { const b = window.__seenBack; return { screen: b.S.screen, eyes: b.S.eyes, named: b.S.named, claim: !document.getElementById('claim').hidden }; });
+-const noCamera = () => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError')); };
++// The camera refused. In macOS WebKit the init script's refusal did not take: Begin waited on a getUserMedia that never answered (no
++// prompt can appear there), so every case stopped at #askAnimal (runs engines/12 and 15). So the refusal is also defined on the
++// prototype, and begin() sets it again in the loaded page before it taps.
++// ("Button failed to load, iconName = ...-placard" is macOS WebKit's own video controls, logged as an error; it is not the page's.)
++const noCamera = () => { if (!navigator.mediaDevices) return; const no = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError'));
++  try { navigator.mediaDevices.getUserMedia = no; } catch (e) {}
++  for (const o of [navigator.mediaDevices, window.MediaDevices && MediaDevices.prototype]) { if (o) try { Object.defineProperty(o, 'getUserMedia', { value: no, configurable: true, writable: true }); } catch (e) {} } };
+ 
+ async function open(browser, q, opts, ctxIn) {
+   const ctx = ctxIn || await browser.newContext(Object.assign({}, phone, opts || {}));
+   const page = await ctx.newPage(); const errors = [];
+   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
+-  page.on('console', (m) => { if (m.type() === 'error' && !/favicon|Failed to load resource|ERR_INTERNET_DISCONNECTED|ERR_FAILED/.test(m.text())) errors.push('console: ' + m.text()); });
++  page.on('console', (m) => { if (m.type() === 'error' && !/favicon|Failed to load resource|ERR_INTERNET_DISCONNECTED|ERR_FAILED|Button failed to load, iconName = [\w-]*placard/.test(m.text())) errors.push('console: ' + m.text()); });
+   await page.addInitScript(noCamera);
+   await page.goto(url(q)); await page.waitForTimeout(300);
+   return { ctx, page, errors };
+ }
+ const ready = (page, ms) => page.waitForFunction(() => window.__seenBack.rec.about().state === 'ready', null, { timeout: ms || 60000 });
+-const begin = async (page) => { await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); };
++const begin = async (page) => { await page.evaluate(noCamera).catch(() => {}); await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); };
+ // choose a photo of who was met, and wait until it has a name or the sheet asks for one
+ async function meet(page, name) {
+   if (!(await page.locator('#askAnimal').isVisible())) {

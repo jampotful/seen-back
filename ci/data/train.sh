@@ -23,6 +23,11 @@ if [ -f data/train/alachua-pre2025/manifest.csv ]; then
   step "photo address check" python3 tools/species/fetch_photos.py work/photo-check.csv work/photo-check --shard 0/1
 fi
 if [ "$rc" -eq 0 ]; then
-  step "publish" bash ci/put_branch.sh pub/data-alachua data "species list, evaluation manifest, training manifest, iNaturalist names" || exit 1
+  # Publish INTO pub/data-alachua: only this job's files are replaced; the species list, the evaluation manifest and
+  # the extra photo sets published by other jobs stay (ci/data/merge_pub.sh).
+  mkdir -p stage/train stage/regions/us-fl-alachua
+  cp -R data/train/alachua-pre2025 stage/train/
+  cp data/regions/us-fl-alachua/inat.json stage/regions/us-fl-alachua/
+  step "publish" bash ci/data/merge_pub.sh pub/data-alachua stage "training manifest and iNaturalist names" train/alachua-pre2025 || exit 1
 fi
 exit "$rc"
