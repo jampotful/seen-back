@@ -11,6 +11,11 @@ function wrap(type, name) {
     }
   });
 }
+// with PW_TAP_AS_CLICK=1, locator.tap() clicks instead (to tell a page that ignores taps from a browser build that cannot send them)
+if (process.env.PW_TAP_AS_CLICK === '1') {
+  try { require(require('path').join(process.env.PW_REAL, '..', 'playwright-core', 'lib', 'client', 'locator.js')).Locator.prototype.tap = function (o) { return this.click(o); }; }
+  catch (e) { console.error('tap-as-click shim failed: ' + e.message); }
+}
 module.exports = new Proxy(real, {
   get(o, k) { return process.env.PW_HEADED === '1' && (k === 'firefox' || k === 'webkit' || k === 'chromium') ? wrap(o[k], k) : o[k]; }
 });
