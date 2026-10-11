@@ -1,0 +1,264 @@
+
+=== 10:11:36 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1463       12245          40        2641       14526
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 7763 64-Core Processor
+Flags: avx2 
+
+=== 10:11:36 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+webkit-resume.patch applied
+build 9 | index.html 219453 bytes | artifact 216875 bytes | selftest.js 44338 bytes
+build ok
+219493 index.html
+44338 selftest.js
+
+=== 10:11:37 playwright 1.56.0: firefox webkit
+added 2 packages in 2s
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Firefox 142.0.1 (playwright build v1495) from https://cdn.playwright.dev/dbazure/download/playwright/builds/firefox/1495/firefox-ubuntu-24.04.zip
+Firefox 142.0.1 (playwright build v1495) downloaded to /home/runner/.cache/ms-playwright/firefox-1495
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-ubuntu-24.04.zip
+Webkit 26.0 (playwright build v2215) downloaded to /home/runner/.cache/ms-playwright/webkit-2215
+mesa and xvfb: exit 0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 10:12:36 resume_probe.js: webkit
+resume probe webkit: exit 0
+version 26.0 error None
+before {"t": 7293, "ready": "complete", "have": "getting", "kept": 300186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": ["large-say yes"], "line": "Getting the larger model: 0 of 1 MB."}
+asked before ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01"]
+ after {"t": 1067, "ready": "complete", "have": "", "kept": 0, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "", "at": 1}
+ after {"t": 2070, "ready": "complete", "have": "getting", "kept": 300186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 2}
+ after {"t": 3076, "ready": "complete", "have": "getting", "kept": 350186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 3}
+ after {"t": 4082, "ready": "complete", "have": "getting", "kept": 400186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 4}
+ after {"t": 5085, "ready": "complete", "have": "getting", "kept": 450186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 5}
+ after {"t": 6091, "ready": "complete", "have": "getting", "kept": 500186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 6}
+ after {"t": 7099, "ready": "complete", "have": "getting", "kept": 550186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 7}
+ after {"t": 8100, "ready": "complete", "have": "getting", "kept": 848060, "state": "loading", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Checking the larger model.", "at": 8}
+ after {"t": 9108, "ready": "complete", "have": "getting", "kept": 848060, "state": "loading", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Checking the larger model.", "at": 9}
+ after {"t": 10111, "ready": "complete", "have": "kept", "kept": 848060, "state": "ready", "why": "", "fail": "", "getFail": "", "choice": "kept", "online": true, "diag": ["large-ready standin-big 1966ms kept", "large-kept standin-big 848060"], "line": "The larger model is on this phone.", "at": 10}
+last {"t": 10111, "ready": "complete", "have": "kept", "kept": 848060, "state": "ready", "why": "", "fail": "", "getFail": "", "choice": "kept", "online": true, "diag": ["large-ready standin-big 1966ms kept", "large-kept standin-big 848060"], "line": "The larger model is on this phone.", "at": 10}
+asked after ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part02"]
+kept ['manifest.json', 'part/SHA?bytes=282686', 'part/SHA?bytes=282694', 'part/SHA?bytes=282680', 'whole/SHA', 'species.f16.bin?v=4ed3e55a76221c6e', 'species.json?v=4ed3e55a76221c6e']
+stores {'keep-v1': ['test/rec/models/standin-big/manifest.json', 'test/rec/models/standin-big/part/SHA?bytes=282686', 'test/rec/models/standin-big/part/SHA?bytes=282694', 'test/rec/models/standin-big/part/SHA?bytes=282680', 'test/rec/models/standin-big/whole/SHA', 'test/rec/models/standin-big/species.f16.bin?v=4ed3e55a76221c6e', 'test/rec/models/standin-big/species.json?v=4ed3e55a76221c6e']}
+console []
+variant {'ref': 'run/engines/linux-res-fix-final', 'persist': False, 'halt': False, 'sw': False} keysBefore ['manifest.json', 'part/SHA?bytes=282686']
+ KT {"p":"bt57","t":8,"op":"document","u":"?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin"}
+ KT {"p":"bt57","t":1496,"n":1,"op":"caches.open","u":"keep-v1","by":"load:1590:22 < ready:1636:33 < go:1764:50"}
+ KT {"p":"bt57","t":1499,"n":1,"ph":"ok","v":"cache#1"}
+ KT {"p":"bt57","t":1502,"n":2,"op":"cache#1.delete","u":"standin/manifest.json","opt":{"ignoreVary":true},"by":"?:1419:29"}
+ KT {"p":"bt57","t":1506,"n":2,"ph":"ok","v":false}
+ KT {"p":"bt57","t":1685,"n":26,"op":"cache#1.delete","u":"vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"bt57","t":1686,"n":27,"op":"cache#1.delete","u":"standin/kinds.f16.bin?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"bt57","t":1686,"n":28,"op":"cache#1.delete","u":"standin/species.f16.bin?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"bt57","t":1692,"n":29,"op":"cache#1.delete","u":"standin/species.json?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"bt57","t":1692,"n":26,"ph":"ok","v":false}
+ KT {"p":"bt57","t":1699,"n":27,"ph":"ok","v":false}
+ KT {"p":"bt57","t":1699,"n":28,"ph":"ok","v":false}
+ KT {"p":"bt57","t":1700,"n":33,"op":"cache#1.delete","u":"standin/vision.int8.onnx?v=sha256-4038e996","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"bt57","t":1700,"n":29,"ph":"ok","v":false}
+ KT {"p":"bt57","t":1722,"n":33,"ph":"ok","v":false}
+ KT {"p":"bt57","t":3110,"n":36,"op":"cache#1.keys","u":"","by":"?:1622:74"}
+ KT {"p":"bt57","t":3111,"n":36,"ph":"ok","v":["standin/manifest.json"]}
+ KT {"p":"bt57","t":3748,"n":37,"op":"caches.open","u":"keep-v1","by":"survey:1489:39 < closer:2432:17 < ?:2046:13"}
+ KT {"p":"bt57","t":3762,"n":37,"ph":"ok","v":"cache#2"}
+ KT {"p":"bt57","t":3765,"n":38,"op":"cache#2.delete","u":"standin-big/manifest.json","opt":{"ignoreVary":true},"by":"?:1419:29"}
+ KT {"p":"bt57","t":3765,"n":39,"op":"cache#2.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":3766,"n":40,"op":"cache#2.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":3766,"n":41,"op":"cache#2.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":3766,"n":38,"ph":"ok","v":false}
+ KT {"p":"bt57","t":3766,"n":42,"op":"cache#2.put","u":"standin-big/manifest.json","by":""}
+ KT {"p":"bt57","t":3766,"n":39,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3766,"n":43,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":3766,"n":40,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3767,"n":44,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":3767,"n":41,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3767,"n":45,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":3767,"n":42,"ph":"ok"}
+ KT {"p":"bt57","t":3767,"n":43,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3767,"n":44,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3767,"n":45,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":3768,"n":46,"op":"cache#2.keys","u":"","by":"?:1495:44"}
+ KT {"p":"bt57","t":3769,"n":46,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"bt57","t":6895,"n":47,"op":"caches.open","u":"keep-v1","by":"survey:1489:39 < get:1514:21 < startBig:2410:22 < answerBig:2403:33 < ?:2550:64"}
+ KT {"p":"bt57","t":6896,"n":47,"ph":"ok","v":"cache#3"}
+ KT {"p":"bt57","t":6896,"n":48,"op":"cache#3.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":6896,"n":49,"op":"cache#3.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":6896,"n":50,"op":"cache#3.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"bt57","t":6897,"n":48,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6897,"n":51,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6897,"n":49,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6897,"n":52,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6897,"n":50,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6897,"n":53,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6898,"n":51,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6898,"n":52,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6898,"n":53,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6898,"n":54,"op":"cache#3.keys","u":"","by":"?:1495:44"}
+ KT {"p":"bt57","t":6898,"n":55,"op":"caches.open","u":"keep-v1","by":""}
+ KT {"p":"bt57","t":6899,"n":55,"ph":"ok","v":"cache#4"}
+ KT {"p":"bt57","t":6899,"n":56,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1535:22"}
+ KT {"p":"bt57","t":6899,"n":54,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"bt57","t":6899,"n":56,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6899,"n":57,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6900,"n":57,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6910,"n":58,"op":"cache#4.delete","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"keep:1523:25"}
+ KT {"p":"bt57","t":6911,"n":58,"ph":"ok","v":false}
+ KT {"p":"bt57","t":6911,"n":59,"op":"cache#4.put","u":"standin-big/part/a610170f?bytes=282686","by":""}
+ KT {"p":"bt57","t":6912,"n":59,"ph":"ok"}
+ KT {"p":"bt57","t":6912,"n":60,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6914,"n":60,"ph":"ok","v":"hit 282686"}
+ KT {"p":"bt57","t":6915,"n":61,"op":"cache#4.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1535:22"}
+ KT {"p":"bt57","t":6915,"n":61,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":6916,"n":62,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"bt57","t":6916,"n":62,"ph":"ok","v":"miss"}
+ KT {"p":"bt57","t":7300,"n":63,"op":"caches.open","u":"keep-v1","by":"? < evaluate < ?"}
+ KT {"p":"bt57","t":7301,"n":63,"ph":"ok","v":"cache#5"}
+ KT {"p":"bt57","t":7301,"n":64,"op":"cache#5.keys","u":"","by":""}
+ KT {"p":"bt57","t":7302,"n":64,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686"]}
+ KT {"p":"bt57","t":7306,"op":"beforeunload"}
+ KT {"p":"bt57","t":7313,"op":"pagehide"}
+ KT {"p":"5hj4","t":11,"op":"document","u":"?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin"}
+ KT {"p":"5hj4","t":1264,"n":1,"op":"caches.open","u":"keep-v1","by":"load:1590:22 < ready:1636:33 < go:1764:50"}
+ KT {"p":"5hj4","t":1265,"n":1,"ph":"ok","v":"cache#1"}
+ KT {"p":"5hj4","t":1268,"n":2,"op":"cache#1.delete","u":"standin/manifest.json","opt":{"ignoreVary":true},"by":"?:1419:29"}
+ KT {"p":"5hj4","t":1269,"n":2,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1466,"n":26,"op":"cache#1.delete","u":"vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":1467,"n":27,"op":"cache#1.delete","u":"standin/vision.int8.onnx?v=sha256-4038e996","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":1467,"n":28,"op":"cache#1.delete","u":"standin/kinds.f16.bin?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":1467,"n":29,"op":"cache#1.delete","u":"standin/species.f16.bin?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":1468,"n":30,"op":"cache#1.delete","u":"standin/species.json?v=d5076a98b3c84be8","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":1468,"n":26,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1474,"n":27,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1474,"n":28,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1474,"n":29,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1474,"n":30,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1571,"n":36,"op":"caches.open","u":"keep-v1","by":"survey:1489:39 < resumeBig:2568:17"}
+ KT {"p":"5hj4","t":1576,"n":36,"ph":"ok","v":"cache#2"}
+ KT {"p":"5hj4","t":1582,"n":37,"op":"cache#2.delete","u":"standin-big/manifest.json","opt":{"ignoreVary":true},"by":"?:1419:29"}
+ KT {"p":"5hj4","t":1583,"n":38,"op":"cache#2.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1583,"n":39,"op":"cache#2.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1583,"n":40,"op":"cache#2.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1585,"n":37,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1585,"n":41,"op":"cache#2.put","u":"standin-big/manifest.json","by":""}
+ KT {"p":"5hj4","t":1585,"n":38,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1585,"n":42,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1585,"n":39,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1585,"n":43,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1585,"n":40,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1585,"n":44,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1585,"n":41,"ph":"ok"}
+ KT {"p":"5hj4","t":1585,"n":42,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1585,"n":43,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1585,"n":44,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1586,"n":45,"op":"cache#2.keys","u":"","by":"?:1495:44"}
+ KT {"p":"5hj4","t":1586,"n":46,"op":"caches.open","u":"keep-v1","by":"survey:1489:39 < get:1514:21 < startBig:2410:22 < ?:2570:61"}
+ KT {"p":"5hj4","t":1587,"n":46,"ph":"ok","v":"cache#3"}
+ KT {"p":"5hj4","t":1587,"n":47,"op":"cache#3.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1587,"n":48,"op":"cache#3.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1587,"n":49,"op":"cache#3.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < map < ?:1492:35"}
+ KT {"p":"5hj4","t":1587,"n":45,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"5hj4","t":1597,"n":47,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1598,"n":50,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1598,"n":48,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1598,"n":51,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1598,"n":49,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1598,"n":52,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1606,"n":50,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1606,"n":51,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1606,"n":52,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1606,"n":53,"op":"cache#3.keys","u":"","by":"?:1495:44"}
+ KT {"p":"5hj4","t":1606,"n":54,"op":"caches.open","u":"keep-v1","by":""}
+ KT {"p":"5hj4","t":1607,"n":54,"ph":"ok","v":"cache#4"}
+ KT {"p":"5hj4","t":1607,"n":55,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1535:22"}
+ KT {"p":"5hj4","t":1607,"n":53,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json"]}
+ KT {"p":"5hj4","t":1610,"n":55,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1610,"n":56,"op":"caches.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1611,"n":56,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1643,"n":57,"op":"cache#4.delete","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"keep:1523:25"}
+ KT {"p":"5hj4","t":1643,"n":57,"ph":"ok","v":true}
+ KT {"p":"5hj4","t":1643,"n":58,"op":"cache#4.put","u":"standin-big/part/a610170f?bytes=282686","by":""}
+ KT {"p":"5hj4","t":1647,"n":58,"ph":"ok"}
+ KT {"p":"5hj4","t":1648,"n":59,"op":"cache#4.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1648,"n":59,"ph":"ok","v":"hit 282686"}
+ KT {"p":"5hj4","t":1649,"n":60,"op":"cache#4.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1535:22"}
+ KT {"p":"5hj4","t":1650,"n":60,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":1650,"n":61,"op":"caches.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":1659,"n":61,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":2905,"n":62,"op":"cache#1.keys","u":"","by":"?:1622:74"}
+ KT {"p":"5hj4","t":2905,"n":62,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686"]}
+ KT {"p":"5hj4","t":7436,"n":63,"op":"cache#4.delete","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"keep:1523:25"}
+ KT {"p":"5hj4","t":7437,"n":63,"ph":"ok","v":false}
+ KT {"p":"5hj4","t":7437,"n":64,"op":"cache#4.put","u":"standin-big/part/ca6b85fd?bytes=282694","by":""}
+ KT {"p":"5hj4","t":7443,"n":64,"ph":"ok"}
+ KT {"p":"5hj4","t":7444,"n":65,"op":"cache#4.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7446,"n":65,"ph":"ok","v":"hit 282694"}
+ KT {"p":"5hj4","t":7446,"n":66,"op":"cache#4.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1535:22"}
+ KT {"p":"5hj4","t":7447,"n":66,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7447,"n":67,"op":"caches.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7447,"n":67,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7491,"n":68,"op":"cache#4.delete","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"keep:1523:25"}
+ KT {"p":"5hj4","t":7493,"n":68,"ph":"ok","v":false}
+ KT {"p":"5hj4","t":7493,"n":69,"op":"cache#4.put","u":"standin-big/part/db30d268?bytes=282680","by":""}
+ KT {"p":"5hj4","t":7494,"n":69,"ph":"ok"}
+ KT {"p":"5hj4","t":7494,"n":70,"op":"cache#4.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7498,"n":70,"ph":"ok","v":"hit 282680"}
+ KT {"p":"5hj4","t":7498,"n":71,"op":"cache#4.keys","u":"","by":"?:1553:34"}
+ KT {"p":"5hj4","t":7499,"n":72,"op":"caches.open","u":"keep-v1","by":"load:1590:22 < ready:1636:33"}
+ KT {"p":"5hj4","t":7499,"n":72,"ph":"ok","v":"cache#5"}
+ KT {"p":"5hj4","t":7500,"n":74,"op":"cache#5.match","u":"standin-big/part/a610170f?bytes=282686","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1461:20 < joined:1466:18 < ?:1601:29"}
+ KT {"p":"5hj4","t":7500,"n":75,"op":"cache#5.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"kept:1242:26 < file:1274:51 < ?:1603:29"}
+ KT {"p":"5hj4","t":7500,"n":76,"op":"cache#5.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"kept:1242:26 < file:1274:51 < ?:1604:29"}
+ KT {"p":"5hj4","t":7500,"n":71,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680"]}
+ KT {"p":"5hj4","t":7530,"n":74,"ph":"ok","v":"hit 282686"}
+ KT {"p":"5hj4","t":7531,"n":77,"op":"cache#5.match","u":"standin-big/part/ca6b85fd?bytes=282694","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1461:20"}
+ KT {"p":"5hj4","t":7531,"n":75,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7531,"n":78,"op":"caches.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7531,"n":76,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7531,"n":79,"op":"caches.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7535,"n":77,"ph":"ok","v":"hit 282694"}
+ KT {"p":"5hj4","t":7536,"n":80,"op":"cache#5.match","u":"standin-big/part/db30d268?bytes=282680","opt":{"ignoreVary":true},"by":"kept:1242:26 < next:1461:20"}
+ KT {"p":"5hj4","t":7536,"n":78,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7537,"n":79,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7537,"n":80,"ph":"ok","v":"hit 282680"}
+ KT {"p":"5hj4","t":7538,"n":81,"op":"cache#5.match","u":"standin-big/whole/4038e996","opt":{"ignoreVary":true},"by":"kept:1242:26 < ?:1468:20"}
+ KT {"p":"5hj4","t":7539,"n":82,"op":"cache#5.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"kept:1242:26 < ?:1288:26"}
+ KT {"p":"5hj4","t":7539,"n":81,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7539,"n":83,"op":"caches.match","u":"standin-big/whole/4038e996","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7541,"n":84,"op":"cache#5.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"kept:1242:26 < ?:1288:26"}
+ KT {"p":"5hj4","t":7543,"n":82,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7543,"n":85,"op":"caches.match","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7543,"n":84,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7543,"n":86,"op":"caches.match","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":""}
+ KT {"p":"5hj4","t":7544,"n":83,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7545,"n":87,"op":"cache#5.delete","u":"standin-big/whole/4038e996","opt":{"ignoreVary":true},"by":"?:1470:91"}
+ KT {"p":"5hj4","t":7548,"n":85,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7548,"n":88,"op":"cache#5.delete","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":7548,"n":86,"ph":"ok","v":"miss"}
+ KT {"p":"5hj4","t":7549,"n":89,"op":"cache#5.delete","u":"standin-big/species.json?v=4ed3e55a76221c6e","opt":{"ignoreVary":true},"by":"?:1291:31"}
+ KT {"p":"5hj4","t":7549,"n":87,"ph":"ok","v":false}
+ KT {"p":"5hj4","t":7549,"n":90,"op":"cache#5.put","u":"standin-big/whole/4038e996","by":""}
+ KT {"p":"5hj4","t":7549,"n":88,"ph":"ok","v":false}
+ KT {"p":"5hj4","t":7549,"n":91,"op":"cache#5.put","u":"standin-big/species.f16.bin?v=4ed3e55a76221c6e","by":""}
+ KT {"p":"5hj4","t":7549,"n":89,"ph":"ok","v":false}
+ KT {"p":"5hj4","t":7549,"n":92,"op":"cache#5.put","u":"standin-big/species.json?v=4ed3e55a76221c6e","by":""}
+ KT {"p":"5hj4","t":7549,"n":90,"ph":"ok"}
+ KT {"p":"5hj4","t":7550,"n":91,"ph":"ok"}
+ KT {"p":"5hj4","t":7550,"n":92,"ph":"ok"}
+ KT {"p":"5hj4","t":10118,"n":93,"op":"caches.open","u":"keep-v1","by":"? < evaluate < ?"}
+ KT {"p":"5hj4","t":10119,"n":93,"ph":"ok","v":"cache#6"}
+ KT {"p":"5hj4","t":10119,"n":94,"op":"cache#6.keys","u":"","by":""}
+ KT {"p":"5hj4","t":10122,"n":94,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680","standin-big/whole/4038e996","standin-big/species.f16.bin?v=4ed3e55a76221c6e","st
+ KT {"p":"5hj4","t":10125,"n":95,"op":"caches.keys","u":"","by":"? < evaluate < ?"}
+ KT {"p":"5hj4","t":10127,"n":95,"ph":"ok","v":[]}
+ KT {"p":"5hj4","t":10127,"n":96,"op":"caches.open","u":"keep-v1","by":""}
+ KT {"p":"5hj4","t":10128,"n":96,"ph":"ok","v":"cache#7"}
+ KT {"p":"5hj4","t":10128,"n":97,"op":"cache#7.keys","u":"","by":""}
+ KT {"p":"5hj4","t":10129,"n":97,"ph":"ok","v":["standin/manifest.json","standin-big/manifest.json","standin-big/part/a610170f?bytes=282686","standin-big/part/ca6b85fd?bytes=282694","standin-big/part/db30d268?bytes=282680","standin-big/whole/4038e996","standin-big/species.f16.bin?v=4ed3e55a76221c6e","st
