@@ -357,6 +357,22 @@ if SH:
               table(["Slot", "Named species right at least", "name_at", "Photos named", "Named species right", "offer_at", "Photos offered three", "Offer holds the species", "Kind only"], lrows), ""]
     T += ["The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).", ""]
 
+# ---- the larger model as a phone would run it
+VAR = {os.path.basename(p_)[8:-5]: json.load(open(p_, encoding="utf-8")) for p_ in sorted(glob.glob(os.path.join(D, "variant-*.json")))}
+if VAR:
+    v0 = next(iter(VAR.values()))
+    T += ["## The larger model on the device", "",
+          "The species service has no free server to live on, so BioCLIP 2's image encoder is offered as a download and runs on the device. The laboratory made int8 files of it and ran each through onnxruntime-web's WASM build on %d test photos (every k-th test row). "
+          "`tools/eval/variant.py` sent those vectors, and the original model's vectors of the same photos, through `fuse.py` with the slot `%s` and its thresholds (name_at %g, offer_at %g, the levels set on `val` for a named species right 98 times in 100). Every difference is paired over the same photos. "
+          "No threshold was set again: the laboratory's vectors hold test photos only, and a threshold may be set on `val` alone." % (v0["test_photos"], v0["slot"], v0["fusion"]["name_at"], v0["fusion"]["offer_at"]), ""]
+    rows = []
+    for name, v in VAR.items():
+        o, n, d = v["original"], v["variant"], v["paired_difference"]
+        rows.append(["`%s`" % name, "%.4f (%.4f)" % (v["cosine_to_original"]["mean"], v["cosine_to_original"]["p01"]), pci(o["species_top1"]), pci(n["species_top1"]), pts(d["top1"]), pci(n["species_top5"]), pci(n["kind_right"]),
+                     pci(o["named"]), pci(n["named"]), pci(n["named_right"]), pci(v["same_top_species"])])
+    T += [table(["Vectors", "Cosine to the original (1st percentile)", "Top species right, original vectors", "Top species right, these vectors", "Paired difference (points)", "First five", "Kind right", "Species named, original", "Species named, these", "Named species right, these", "Same top species as the original"], rows), "",
+          "With %d photos an interval is several points wide, so these figures can show a large loss and cannot show a small one. The sources of the vectors: %s." % (v0["test_photos"], "; ".join("`%s`: %s" % (k_, v_["vectors"]) for k_, v_ in VAR.items())), ""]
+
 # ---- decisions: sentences around numbers that the studies wrote
 real = next((v for k, v in S2.items() if not v.get("standin") and not v.get("sentences_only")), None)
 CARDS = (CH or {}).get("cards", {})

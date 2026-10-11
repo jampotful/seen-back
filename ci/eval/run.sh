@@ -20,11 +20,32 @@ has_file() {   # has_file <branch> <path>: does the published branch hold the pa
   git fetch -q --depth 1 --filter=blob:none origin "refs/heads/$1" 2>/dev/null || return 1
   git ls-tree -r --name-only FETCH_HEAD | grep -qx "$2"
 }
+# A branch named run/eval/coco* waits (up to ninety minutes) until both pocket models' vectors of the extra set
+# (people, pets, livestock, rooms) are published, then reruns everything, so that the sentence slots it publishes
+# are tuned with them.
+WAIT_EXTRA=""
 case "${GITHUB_REF_NAME:-}" in
   run/eval/armed-all*) WAIT="pub/lab-tinyclip-39m-16 pub/lab-tinyclip-8m-16 pub/lab-bioclip2-l14" ;;
   run/eval/armed*) WAIT="pub/lab-tinyclip-39m-16 pub/lab-tinyclip-8m-16" ;;
+  run/eval/coco*) WAIT=""; WAIT_EXTRA="pub/lab-tinyclip-39m-16 pub/lab-tinyclip-8m-16" ;;
   *) WAIT="" ;;
 esac
+if [ -n "$WAIT_EXTRA" ]; then
+  echo "=== $(date -u +%FT%TZ) waiting for images/coco-kinds.f16.npy on: $WAIT_EXTRA" | tee -a "$LOG"
+  deadline=$(( $(date +%s) + ${EXTRA_WAIT_SECONDS:-5400} ))
+  while :; do
+    missing=""
+    for b in $WAIT_EXTRA; do has_file "$b" images/coco-kinds.f16.npy || missing="$missing $b"; done
+    [ -z "$missing" ] && break
+    if [ "$(date +%s)" -ge "$deadline" ]; then
+      echo "=== $(date -u +%FT%TZ) going on without the extra set's vectors on:$missing" | tee -a "$LOG"
+      echo "The extra set's vectors never arrived on:$missing" > out/extra-never-arrived.txt
+      break
+    fi
+    sleep 60
+  done
+  echo "=== $(date -u +%FT%TZ) done waiting for the extra set" | tee -a "$LOG"
+fi
 if [ -n "$WAIT" ]; then
   echo "=== $(date -u +%FT%TZ) waiting for images/alachua-pre2025.f16.npy on: $WAIT" | tee -a "$LOG"
   deadline=$(( $(date +%s) + ${WAIT_SECONDS:-18000} ))
@@ -59,9 +80,15 @@ step "install" python3 -m pip install --quiet numpy scikit-learn || exit 1
 mkdir -p out/committed && cp docs/eval/*.json out/committed/ 2>/dev/null; cp docs/EVAL.md out/committed/EVAL.md 2>/dev/null
 step "fetch" python3 -I tools/eval/fetch.py "$ROOT" || exit 1
 step "checks" python3 -I tools/eval/checks.py "$ROOT"
-step "study 1" python3 -I tools/eval/study1.py "$ROOT" || exit 1
-TRAINS="sentences val"
-[ -f "$ROOT/lab/tinyclip-39m-16/images/alachua-pre2025.f16.npy" ] && [ -f "$ROOT/data/train/alachua-pre2025/manifest.csv" ] && TRAINS="$TRAINS alachua-pre2025"
+if [ -n "$WAIT" ]; then
+  # An armed run exists to deliver the trained heads as soon as it can: Study 1, the sentence slots and the stand-in
+  # are rerun by the other runs and are taken here as committed.
+  TRAINS="alachua-pre2025"
+else
+  step "study 1" python3 -I tools/eval/study1.py "$ROOT" || exit 1
+  TRAINS="sentences val"
+  [ -f "$ROOT/lab/tinyclip-39m-16/images/alachua-pre2025.f16.npy" ] && [ -f "$ROOT/data/train/alachua-pre2025/manifest.csv" ] && TRAINS="$TRAINS alachua-pre2025"
+fi
 for t in $TRAINS; do
   step "study 2: $t" env SKIP_FETCH=1 SKIP_STUDY1=1 bash tools/eval/run.sh "$ROOT" "$t"
 done
