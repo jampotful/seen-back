@@ -128,7 +128,9 @@ def _embed(x):
     return e.float().cpu().numpy()[0]
 
 
-embed = spaces.GPU(duration=20)(_embed) if spaces is not None else _embed
+# ZeroGPU admits a call only while the visitor's remaining daily quota covers the declared duration, and a shorter
+# declaration gets better queue priority; one 224-pixel photo through ViT-L/14 takes a small fraction of this.
+embed = spaces.GPU(duration=10)(_embed) if spaces is not None else _embed
 
 # ---------------------------------------------------------------- manners: rate limit, counting
 
