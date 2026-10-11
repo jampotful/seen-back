@@ -34,11 +34,11 @@ def differing_rows(root, ES):
     if os.path.exists(p):
         inat = json.load(open(p, encoding="utf-8"))
         flag = np.array([(str(r["key"]) in inat and inat[str(r["key"])].get("sci", r["sci"]) != r["sci"]) for r in ES.rows])
-        return flag, "inat.json: the GBIF species key's usual iNaturalist name differs from the GBIF name"
+        return flag, "`inat.json`, which gives each GBIF species key the name iNaturalist most often uses for it"
     text = open(os.path.join(root, "data", "eval", ev.EVALSET, "SUMMARY.md"), encoding="utf-8").read()
     gbif_names = set(m.group(1) for m in re.finditer(r"^- \*[^*]+\*: \*([^*]+)\*, \d+$", text, re.M))
     flag = np.array([r["sci"] in gbif_names for r in ES.rows])
-    return flag, "SUMMARY.md: the 25 most frequent of the 63 differing pairs (inat.json was not published yet)"
+    return flag, "the 25 most frequent of the 63 differing pairs, as listed in `data/eval/alachua-2025/SUMMARY.md`, because `inat.json` was not published yet (the summary counts 331 such rows in the whole set)"
 
 
 def confusion(true, pred, labels_true, labels_pred):
@@ -167,6 +167,11 @@ def run_model(root, model, differ_cache):
     card = json.load(open(os.path.join(root, "lab", model, "card.json"), encoding="utf-8"))
     res = {"rows": len(ids), "test": int(ES.test.sum()), "val": int(ES.val.sum()), "width": int(E.shape[1]),
            "card": {k: card.get(k) for k in ("source", "licence", "role", "params", "ship", "ship_bytes", "ship_sha256")}, "labelsets": {}}
+    wasm = (card.get("images") or {}).get(ev.EVALSET + ".wasm-int8-per-channel") or {}
+    lat = [v["latency_ms"]["mean"] for k, v in wasm.items() if k.startswith("shard_") and isinstance(v, dict) and "latency_ms" in v]
+    if lat:
+        res["card"]["wasm_latency_ms"] = round(float(np.mean(lat)), 1)
+        res["card"]["wasm_latency_note"] = "mean over %d shards of the laboratory's run (%s)" % (len(lat), wasm.get("via", ""))
     if model not in differ_cache:
         differ_cache[model] = differing_rows(root, ES)
     differ, how = differ_cache[model]

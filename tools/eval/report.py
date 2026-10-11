@@ -175,7 +175,7 @@ if b2:
               pc(rec["200 or more"]["top1"][0]), pc(rec["200 or more"]["top1_no_prior"]), rec["200 or more"]["n"]),
           "- **By kind of eye** (kinds with at least 30 test photos), top-1 with the prior runs from %s for `%s` to %s for `%s`." % (pc(kinds[0]["top1"][0]), kinds[0]["group"], pc(kinds[-1]["top1"][0]), kinds[-1]["group"]),
           "- **Its own kind phrases are weak.** Asked for the kind of eye through the kind phrases, BioCLIP 2 is right in %s. Taking the kind from its top species is right in %s. A biology model knows species names far better than everyday words such as \"a wading bird\"." % (pci(b2["kind_phrases"]["accuracy"]), pci(t["kind_from_top"])),
-          "- **Names that differ between GBIF and iNaturalist.** %d test photos are of species whose GBIF name differs from the name iNaturalist uses (%s). Top-1 without the prior is %s on those photos and %s on the rest, so scoring against GBIF's names costs nothing here." % (
+          "- **Names that differ between GBIF and iNaturalist.** %d test photos are of species whose GBIF name differs from the name iNaturalist uses. They were found from %s. Top-1 without the prior is %s on those photos and %s on the rest, so scoring against GBIF's names did not lower the result on these photos." % (
               na["rows_left_out"], b2["differing_names_rule"], pci(na["plain_top1_on_rows_left_out"]), pci(na["plain_top1"])),
           "- **Mistakes.** Of %d wrong answers for species in the list, %d named a species of the same genus and %d one of the same family. The table of commonest mistakes, with links to the observations, is in [`docs/eval/model-bioclip2-l14.md`](eval/model-bioclip2-l14.md)." % (
               v["mistakes_summary"]["wrong_with_species_in_list"], v["mistakes_summary"]["same_genus"], v["mistakes_summary"]["same_family"]), ""]
@@ -225,9 +225,48 @@ for name, sh in SH.items():
     T += ["## As shipped: `%s`" % name, "", sh["text"], ""]
     T += [table(["What the page would show", "Share of test photos", "Right"], [[x["what"], pc(x["share"]), x["right"]] for x in sh["outcomes"]]), ""]
 
-dec = load("decisions.json")
-if dec:
-    T += ["## Decisions", ""] + ["- **%s** %s" % (d["title"], d["text"]) for d in dec["decisions"]] + [""]
+# ---- decisions: sentences around numbers that the studies wrote
+real = next((v for k, v in S2.items() if not v.get("standin")), None)
+m39, m8 = S1["models"].get("tinyclip-39m-16"), S1["models"].get("tinyclip-8m-16")
+WV = "alachua-2025.wasm-int8-per-channel"
+T += ["## Decisions", ""]
+if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
+    def wasm(r):
+        v = r["variants"][WV]
+        return v["kind_phrases"]["accuracy"], v["labelsets"][r["best_labelset_on_val"]]["tuned_top1"]
+    k39, s39 = wasm(m39)
+    k8, s8 = wasm(m8)
+    lat = lambda r: ("about %d ms a photo" % round(r["card"]["wasm_latency_ms"])) if r["card"].get("wasm_latency_ms") else "latency in its card"
+    txt = ("On the vectors a phone computes, and scored against sentences, TinyCLIP 39M/16 gets the kind of eye from phrases right for %s and the species with the prior for %s; TinyCLIP 8M/16 gets %s and %s. "
+           "The first is a %.1f MB download and took %s in the laboratory's one-thread WASM run; the second is %.1f MB and took %s. " % (
+               pci(k39), pci(s39), pci(k8), pci(s8), m39["card"]["ship_bytes"] / 1e6, lat(m39), m8["card"]["ship_bytes"] / 1e6, lat(m8)))
+    if real and "tinyclip-39m-16" in real["models"] and "tinyclip-8m-16" in real["models"]:
+        def best(r):
+            h = next(h for h in r["species_heads"] if h["name"] == r["chosen_species_head"]["name"])
+            return h
+        h39, h8 = best(real["models"]["tinyclip-39m-16"]), best(real["models"]["tinyclip-8m-16"])
+        txt += ("With heads fitted on the training photos, the 39M model's best head (`%s`) names the species for %s of test photos with the prior and the 8M model's (`%s`) for %s. "
+                "Recommendation: ship the model whose trained head is ahead by more than the intervals, and prefer the 8M model when they overlap, because it is a quarter of the download and a third of the time." % (
+                    h39["name"], pci(h39["prior"]["top1"]), h8["name"], pci(h8["prior"]["top1"])))
+    else:
+        txt += ("Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written, and they decide this choice: a trained head may close the gap between the two models or widen it. "
+                "Until then the recommendation is TinyCLIP 39M/16 with its sentence rows and the prior, to show a kind of eye and to offer species only above the thresholds measured below, and TinyCLIP 8M/16 if the download has to stay under 10 MB.")
+    T += ["- **The pocket model.** " + txt]
+if b2:
+    v = b2["labelsets"]["species_sci"]
+    t = v["tuned"]
+    st = t["settings"]
+    b25 = S1["models"].get("bioclip25-h14")
+    T += ["- **The server.** BioCLIP 2 (ViT-L/14) with rows made from scientific names, all %d species of the list, and the prior (alpha %g at temperature %g, smoothing lam %g and c %g): top-1 %s, top-5 %s, and the kind of eye from summed species probabilities right for %s. "
+          "The kind of eye should come from the species list and the kind phrases should count for little, because this model's kind phrases alone are right for %s.%s" % (
+              st["species_in_list"], st["alpha_prior"], st["t_species"], st["lam"], st["c"], pci(t["top1"]), pci(t["top5"]), pci(t["kind_from_sum"]), pci(b2["kind_phrases"]["accuracy"]),
+              (" BioCLIP 2.5 measures %s with the prior. Its interval overlaps BioCLIP 2's, it runs at about a third of the speed by the laboratory's timing, and its training date is undocumented, so BioCLIP 2 is the one to run." % pci(b25["labelsets"]["species_sci"]["tuned"]["top1"])) if b25 else "")]
+    T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % round(100 * t["top1"][1])]
+for name, sh in SH.items():
+    n = sh["numbers"]
+    T += ["- **Names and offers for `%s`.** With name_at %s and offer_at %s, set on the tuning photos, the page would name a species for %s of test photos and be right for %s of those; it would offer three species for %s and they would hold the right one for %s." % (
+        name, n["name_at"] if n["name_at"] is not None else "never", n["offer_at"] if n["offer_at"] is not None else "never", pc(n["named"][0]), pci(n["named_right"]), pc(n["offered"][0]), pci(n["offered_holds_species"]))]
+T += [""]
 
 T += ["## Where the first look differed", "",
       "The coordinator's first look (`quick.py`) gave the numbers in the left column of each pair. The right column is this study's number for the same model and label set.", ""]
