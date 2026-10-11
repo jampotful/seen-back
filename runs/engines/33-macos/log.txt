@@ -1,0 +1,364 @@
+
+=== 08:26:12 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.12.10
+
+=== 08:26:13 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 8 | index.html 214821 bytes | artifact 212243 bytes | selftest.js 44338 bytes
+build ok
+214859 index.html
+44338 selftest.js
+
+=== 08:26:13 iPhone simulator: boot it now, it takes a while
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+
+=== 08:26:23 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+python 1.31.0 12.3.0 2.5.4
+total 154272
+drwxr-xr-x  8 runner  wheel       256 Oct 11 08:30 .
+drwxr-xr-x  9 runner  wheel       288 Oct 11 08:30 ..
+-rw-r--r--  1 runner  wheel      8822 Oct 11 08:30 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 576765
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.3649], ['plant', 0.2287], ['deer', 0.1062]]
+  python: asset-portrait.jpg [['person', 0.9391], ['none', 0.0363], ['other', 0.0087]]
+  python: big12mp.jpg [['none', 0.3967], ['plant', 0.1959], ['frog', 0.0999]]
+  python: dots.png [['none', 0.8679], ['plant', 0.0578], ['person', 0.0453]]
+  python: garden.jpg [['none', 0.3292], ['plant', 0.2174], ['deer', 0.1221]]
+  python: heron.png [['wader', 0.6513], ['bird', 0.2546], ['hawk', 0.0488]]
+  python: info-exif6.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: odd.png [['none', 0.8681], ['plant', 0.0415], ['other', 0.0256]]
+  python: portrait.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: rings.png [['other', 0.2688], ['none', 0.2334], ['plant', 0.2143]]
+  python: small.png [['plant', 0.6989], ['other', 0.082], ['bird', 0.0618]]
+  python: stripes.png [['none', 0.7913], ['plant', 0.0713], ['other', 0.047]]
+  python: wall.png [['none', 0.9664], ['person', 0.0153], ['plant', 0.0049]]
+  python: wide.png [['none', 0.2437], ['plant', 0.2288], ['rabbit', 0.1381]]
+
+=== 08:30:42 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 08:31:24 playwright 1.56.0 and WebKit
+added 2 packages in 20s
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 08:32:58 check_rec.js, every check, stand-in model: webkit (macOS)
+check_rec webkit: exit 1 in 412 s
+flow: ok | fuse: ok | notsure: ok | trained: ok | parity: ok | progress: ok | typeit: ok | service: FAILED | large (did not finish): FAILED | keptcopy: ok | away: ok | offline (did not finish): FAILED | missing: ok | damaged (did not finish): FAILED | dying: ok | about: ok | viewer: ok
+ci/engines/macos.sh: line 126:  4618 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 08:39:50 begin_probe.js: what Begin does in macOS WebKit, with and without check_rec.js's phone emulation
+begin probe: exit 0
+{
+ "engine": "webkit",
+ "version": "26.0",
+ "phone-tap": {
+  "errors": [
+   "error: Button failed to load, iconName = invalid-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/104d45d5-0526-474f-af2a-bd543649ea40",
+   "error: Button failed to load, iconName = pip-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/60c64005-f07c-41c1-a3e4-286e8a94ae10",
+   "error: Button failed to load, iconName = airplay-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/14dd72dd-256c-4626-a5e0-a70a4b8edd30"
+  ],
+  "before": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": false,
+   "introFine": "",
+   "askAnimalHidden": true,
+   "msg": "",
+   "mediaDevices": true,
+   "gum": "function getUserMedia() { [native code] }",
+   "touch": true,
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
+  },
+  "pressed": "tap",
+  "after": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": true,
+   "introFine": "",
+   "askAnimalHidden": true,
+   "msg": "",
+   "mediaDevices": true,
+   "gum": "function getUserMedia() { [native code] }",
+   "touch": true,
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
+  }
+ },
+ "phone-click": {
+  "errors": [
+   "error: Button failed to load, iconName = invalid-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/3354d3c7-4a58-4e0a-8d65-f4a1323d5b9e",
+   "error: Button failed to load, iconName = pip-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/40ac52e4-1ec3-463a-b20f-a4a37263c040",
+   "error: Button failed to load, iconName = airplay-placard, layoutTraits = [MacOSLayoutTraits Inline], src = blob:http://127.0.0.1:8782/d3578eac-d54f-4826-a2fc-435671706dbc"
+  ],
+  "before": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": false,
+   "introFine": "",
+   "askAnimalHidden": true,
+   "msg": "",
+   "mediaDevices": true,
+   "gum": "function getUserMedia() { [native code] }",
+   "touch": true,
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
+  },
+  "pressed": "click",
+  "after": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": true,
+   "introFine": "",
+   "askAnimalHidden": true,
+   "msg": "",
+   "mediaDevices": true,
+   "gum": "function getUserMedia() { [native code] }",
+   "touch": true,
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
+  }
+ },
+ "plain-click": {
+  "errors": [],
+  "before": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": false,
+   "introFine": "",
+   "askAnimalHidden": true,
+   "msg": "",
+   "mediaDevices": true,
+   "gum": "function getUserMedia() { [native code] }",
+   "touch": false,
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
+  },
+  "pressed": "click",
+  "after": {
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "beginDisabled": true,
+   "introFine": "",
+   "askAnimalHidden"ci/engines/macos.sh: line 126: 22773 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 08:40:16 check_rec.js parity, real slot: webkit (macOS)
+parity (real) webkit: exit 0 in 25 s
+parity: ok
+ci/engines/macos.sh: line 126: 24524 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+(ci/engines/patches/check_rec-int8-cosine.patch is already in test/rec/check_rec.js on this commit)
+
+=== 08:40:41 rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: webkit (macOS)
+probe: exit 0
+{
+ "engine": "webkit",
+ "version": "26.0",
+ "phone": "0",
+ "firstReady": [
+  [
+   39,
+   {
+    "state": "idle",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1385,
+   {
+    "state": "loading",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 15165296
+   }
+  ],
+  [
+   2184,
+   {
+    "state": "ready",
+    "why": "",
+    "fail": "",
+    "loadMs": 805,
+    "got": 15165296
+   }
+  ]
+ ],
+ "controlled": true,
+ "kept": [
+  "vendor/rec-worker.js?v=8",
+  "vendor/ort/ort.wasm.min.js?v=1.30.0",
+  "vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+  "test/rec/models/standin/manifest.json",
+  "test/rec/models/standin/vision.int8.onnx?v=d5076a98b3c84be8",
+  "vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+  "test/rec/models/standin/kinds.f16.bin?v=d5076a98b3c84be8",
+  "test/rec/models/standin/species.f16.bin?v=d5076a98b3c84be8",
+  "test/rec/models/standin/species.json?v=d5076a98b3c84be8"
+ ],
+ "swKept": {
+  "shell-8": 7,
+  "keep-v1": 9
+ },
+ "offline": {
+  "loaded": true,
+  "controlled": true,
+  "timeline": [
+   [
+    1,
+    {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "loadMs": 568,
+     "got": 0
+    }
+   ]
+  ],
+  "asked": [
+   "index.html",
+   "manifest.webmanifest",
+   "test/rec/models/standin/manifest.json",
+   "sw.js"
+  ]
+ },
+ "keptBad": [
+  [
+   8,
+   {
+    "state": "idle",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1296,
+   {
+    "state": "loading",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1574,
+   {
+    "state": "failed",
+    "why": "damaged",
+    "fail": "damaged: session Error Can't create a session. ERROR_CODE: 7, ERROR_MESSAGE: Failed to load model because protobuf parsing failed.",
+    "loadMs": 0,
+    "got": 0
+   }
+  ]
+ ],
+ "errors": []
+}
+ci/engines/macos.sh: line 126: 25591 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 08:40:57 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+08:41:34 webkit-phone 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 36789ms
+08:42:10 webkit-desktop 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 36047ms
+
+=== 08:42:10 self-test with the recognizer phase: real Safari through safaridriver
+safaridriver --enable: exit 0
+08:42:20 session 3223DCB9-587B-4728-84D0-E0B7944D0F70 26.6.2
+08:43:00 safari 26.6.2 done=true ok=true fails=0 Apple GPU
+safari.js: exit 0
+ci/engines/macos.sh: line 141: 30447 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 08:43:00 iPhone simulator: Safari opens the self-test with the recognizer phase and posts its report
+Device already booted, nothing to do.
+
+openurl: exit 0
+report arrived after 39 s
+iphone-01.json iphone-02.json iphone-03.json iphone-04.json iphone-05.json iphone.json safari-desktop-01.json safari-desktop-02.json safari-desktop-03.json safari-desktop-04.json safari-desktop-05.json safari-desktop.json webkit-desktop-01.json webkit-desktop-02.json webkit-desktop-03.json webkit-desktop-04.json webkit-desktop-05.json webkit-desktop.json webkit-phone-01.json webkit-phone-02.json webkit-phone-03.json webkit-phone-04.json webkit-phone-05.json webkit-phone.json 
+
+=== 08:49:08 summary
+safari desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone-05.json', 'iphone.json']
+
+=== 08:49:08 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 43 total bytes: 1336771
+1.4M	/Users/runner/work/seen-back/seen-back/out
