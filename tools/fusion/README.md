@@ -7,11 +7,18 @@ Its interface is at the top of the file. `python3 -I tools/fusion/fuse.py` rerun
 
 ## State on 11 October 2026, 00:40 Eastern: read this before relying on it
 
-- **Same as the page (build 6):** the `product` rule with no biases. Checked only on those five cases, to the four decimal places recorded
-  from the page. The parity check asked for (random and adversarial cases, both sides, agreement to 1e-6) is **not written yet**.
+- **Same as the page (build 6):** the `product` rule with no biases. `parity.py` (with `test/rec/fuse_page.js`) feeds 409 cases to both,
+  made for the stand-in slot: 300 random score vectors at six scales (the scores times 0.001, 0.05, 1 and 30, which is the same as tiny and
+  huge temperatures), all scores equal and all scores zero in each of the twelve months, every kind sure of itself against a species list
+  sure of something else, and ties between two kinds. Result in headless Chromium: the same kind, order of kinds, top five, name and offers
+  in all 409, and the largest difference in any probability 8.9e-16. The stand-in table has species with no records in some months and
+  kinds with no species rows (`none`, `person`), so those cases are in it. Not covered: a table row with no monthly weights at all.
 - **In the reference only, not in the page yet:** a trained head's biases (`kind_bias`, `species_bias`), and the `mix` rule.
   A manifest that carries a bias or `"rule": "mix"` is scored by the reference as described here and by build 6 as if neither were there.
-  Numbers made with them are therefore "as proposed", not "as shipped", until the page follows.
+  Numbers made with them are therefore "as proposed", not "as shipped", until the page follows. `fusion.guard` is likewise read by the
+  reference only; the page uses 1e-9.
+
+To rerun: `node test/rec/serve.js 8782 &`, then the three commands at the top of `parity.py`.
 
 ## What is computed
 
