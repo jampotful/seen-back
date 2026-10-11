@@ -36,6 +36,8 @@ jobs:
       device_from_run: ${{ steps.plan.outputs.device_from_run }}
       device_choose: ${{ steps.plan.outputs.device_choose }}
       has_device_pub: ${{ steps.plan.outputs.has_device_pub }}
+      mem: ${{ steps.plan.outputs.mem }}
+      has_mem: ${{ steps.plan.outputs.has_mem }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
@@ -267,3 +269,33 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh lab ret card-patch
+
+  # Memory of the shipped device file in onnxruntime-web's WASM build (ci/lab/runs/<label>.json "mem"): each job runs its
+  # routes (ways of creating the session) in Node, one fresh process a route; a job with "page": true also runs the
+  # page's own worker in headless Chromium and reads the renderer's memory with ps.
+  mem:
+    needs: plan
+    if: needs.plan.outputs.has_mem == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.mem) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: data
+          path: data_in
+      - name: routes in Node
+        env:
+          ROUTES: ${{ matrix.routes }}
+        run: bash ci/lab/mem.sh "${{ matrix.tag }}" "$ROUTES" "${{ matrix.commit }}"
+      - name: the page's worker in Chromium
+        if: matrix.page == 'true'
+        run: bash ci/lab/mem_page.sh "${{ matrix.commit }}"
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret "${{ matrix.tag }}"

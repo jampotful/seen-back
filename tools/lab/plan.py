@@ -62,4 +62,10 @@ print("device_choose=%s" % dev.get("choose", ""))
 print("has_device_pub=%s" % ("true" if dev.get("branch") and (dwork or dev.get("from_run")) else "false"))
 print("card_patch=" + json.dumps(run.get("card_patch") or {}))
 print("has_card_patch=%s" % ("true" if run.get("card_patch") else "false"))
-print("count=%d" % (len(work) + len(models) + len(dwork)), file=sys.stderr)
+# memory runs: {"mem": {"jobs": [{"tag": "mem-base", "routes": [{...}, ...], "page": false}, ...], "commit": "<model commit>"}}
+mem = run.get("mem") or {}
+mwork = [{"tag": j["tag"], "routes": json.dumps(j.get("routes", [])), "page": "true" if j.get("page") else "false",
+          "commit": mem.get("commit", "462ecdc327746ec5990c416bb51246b99faba0cb")} for j in mem.get("jobs", [])]
+print("mem=" + json.dumps({"include": mwork}))
+print("has_mem=%s" % ("true" if mwork else "false"))
+print("count=%d" % (len(work) + len(models) + len(dwork) + len(mwork)), file=sys.stderr)
