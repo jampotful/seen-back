@@ -438,23 +438,30 @@
     }
     // One question. say('asking' | 'waking') tells the page what to show. Returns { promise, cancel }.
     function ask(canvas, o, say) {
-      var ctl = typeof AbortController === 'function' ? new AbortController() : null, signal = ctl ? ctl.signal : undefined, t0 = performance.now(), tries = 0, over = false, timers = [];
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null, signal = ctl ? ctl.signal : undefined, t0 = performance.now(), tries = 0, over = false, net = false, timers = [];
       function left() { return T.wake - (performance.now() - t0); }
       function wait(ms) { return new Promise(function (res) { timers.push(setTimeout(res, ms)); }); }
       function within(p, ms, code) {                   // p, or a failure once ms have passed
         return new Promise(function (res, rej) { var t = setTimeout(function () { rej(fail(code)); }, ms); timers.push(t); p.then(function (v) { clearTimeout(t); res(v); }, function (e) { clearTimeout(t); rej(e); }); });
       }
+      // "Waking up" is said only where it is the likely truth: the service did not answer, and this site itself can still be reached.
+      // (A request the service worker leaves alone, so that a kept copy cannot answer for a network that is gone.)
+      function reachable() {
+        if (net) return Promise.resolve(true);
+        return within(fetch(location.href.split('#')[0], { method: 'HEAD', cache: 'no-store', credentials: 'omit' }).then(function (r) { net = r.ok; return net; }), 8000, 'offline').catch(function () { return false; });
+      }
+      function sayWaking() { return reachable().then(function (yes) { if (over) throw fail('cancelled'); if (!yes) throw fail('offline', 'this site cannot be reached either'); say('waking'); }); }
       function awake() {                               // where the service names an address that says whether it is ready, that is asked first
         if (!cfg.health) return Promise.resolve();
         return within(fetch(cfg.health, opts(signal)).then(function (r) { return r.ok ? r.json() : null; }), T.post, 'asleep').catch(function () { return null; }).then(function (h) {
           if (over) throw fail('cancelled');
           if (h && h.ready !== false && h.ok !== false) return;
           if (left() <= 0) throw fail('asleep', 'not ready in time');
-          say('waking'); return wait(Math.min(T.poll, Math.max(200, left()))).then(awake);
+          return (h ? Promise.resolve(say('waking')) : sayWaking()).then(function () { return wait(Math.min(T.poll, Math.max(200, left()))); }).then(awake);
         });
       }
       function post(body) {
-        tries++; say(tries > 1 ? 'waking' : 'asking');
+        tries++; if (tries === 1) say('asking');
         return within(fetch(cfg.call, opts(signal, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })).then(function (r) {
           if (!r.ok) throw fail(r.status === 429 ? 'busy' : (r.status >= 500 || r.status === 404) ? 'asleep' : 'refused', 'POST ' + r.status);
           return r.json().catch(function () { throw fail('garbled', 'no event id'); });
@@ -466,7 +473,7 @@
         }, function (e) {
           // no answer at the door: a server that sleeps when nobody calls takes a while to wake. Try again, less and less often, for as long as the wait allows.
           if (e.code !== 'asleep' || over || left() <= 0) throw e;
-          say('waking'); return wait(Math.min(T.poll * Math.min(tries, 5), Math.max(200, left()))).then(function () { if (over) throw fail('cancelled'); return awake(); }).then(function () { return post(body); });
+          return sayWaking().then(function () { return wait(Math.min(T.poll * Math.min(tries, 5), Math.max(200, left()))); }).then(function () { if (over) throw fail('cancelled'); return awake(); }).then(function () { return post(body); });
         });
       }
       var promise = config().then(function (c) {

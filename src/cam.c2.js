@@ -386,10 +386,15 @@
   var AWAY_KEY = 'seenback.away.v1';
   try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
   function paintChoices() {
-    show('awayRow', !inViewer); $('awayBox').checked = pocket.local === false;
+    // the switch is shown where it changes something: this device has a species list, or there is a larger model that is told the region
+    show('awayRow', !inViewer && pocket.listed()); $('awayBox').checked = pocket.local === false;
     $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and a larger model, if asked, is not told the region.';
     show('svcBox', false);
-    naturalist.config().then(function (c) { show('svcBox', !!c); if (c) $('svcChoice').value = naturalist.choice(); });
+    naturalist.config().then(function (c) {
+      show('svcBox', !!c); if (!c) return;
+      $('svcChoice').value = naturalist.choice();
+      if (!pocket.listed() && c.region) { show('awayRow', true); $('awayNote').textContent = 'A larger model, when asked, is told the region, so that it can choose among species recorded around ' + pocket.place() + '. With this ticked, it is not told.'; }
+    });
   }
   $('awayBox').addEventListener('change', function () { pocket.local = !$('awayBox').checked; try { localStorage.setItem(AWAY_KEY, pocket.local ? '0' : '1'); } catch (e) {} diag('away', pocket.local ? 'no' : 'yes'); });
   $('svcChoice').addEventListener('change', function () { naturalist.setChoice($('svcChoice').value); diag('service-choice', $('svcChoice').value || 'each'); });
