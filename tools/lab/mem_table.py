@@ -83,7 +83,7 @@ def main():
                     idx = [pub[0].index(i) for i in ids[:len(v)]]
                     row["cos_pub_min"] = float((v * pub[1][idx]).sum(1).min())
             rows.append(row)
-    hdr = "| route | peak resident MB (create / photo 1 / photo 10; whole run) | WASM heap MB | s to ready | s a photo | cosine to shipped (min of %d) |" % len(ref)
+    hdr = "| route | peak resident MiB (session created / photo 1 / photo 10; whole run) | WASM heap MiB | s to ready | s a photo | cosine to shipped (min of %d) |" % len(ref)
     print(hdr)
     print("|---|---|---|---|---|---|")
     for r in rows:

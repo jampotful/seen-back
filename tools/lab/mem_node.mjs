@@ -52,7 +52,7 @@ function status() {
 }
 let resetOk = true;
 function resetPeak() { try { fs.writeFileSync('/proc/self/clear_refs', '5'); } catch (e) { resetOk = false; } }
-const MB = (b) => (b == null ? null : Math.round(b / 1048576 * 10) / 10);
+const MB = (b) => (b == null ? null : Math.round(b / 1048576 * 10) / 10);   // MiB, as every "_mb" field here
 
 const require = createRequire(path.join(path.resolve(prefix), 'package.json'));
 const ort = require('onnxruntime-web');

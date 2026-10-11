@@ -1,21 +1,25 @@
 Worker change for the larger model's weights as an external data file (ci/lab/patches/worker-external-data.patch)
 
 Against vendor/rec-worker.js on main at build 8 (8037aec). Apply with: git apply ci/lab/patches/worker-external-data.patch
-It needs a new file: the graph and weights published on pub/model-bioclip2-l14-b (ci/lab/mem_pub.sh), and a change in
-the page (src/cam.rec.js) that is not in this patch: fetch vision.graph.onnx and the parts of vision.weights.bin, check
-them against parts.json, and send init with model = the graph's bytes, weights = the joined weights, weightsName =
+It needs the new file, published on pub/model-bioclip2-l14-b at add8cf58 (vision.graph.onnx, 2,175,801 bytes, and
+vision.weights.bin in four parts, 307,658,752 bytes, with parts.json; made by ci/lab/mem_pub.sh from the shipped
+vision.int8.onnx with onnx.save_model(save_as_external_data=True), every tensor unchanged), and a change in the page
+(src/cam.rec.js) that is not in this patch: fetch vision.graph.onnx and the parts of vision.weights.bin, check them
+against parts.json, and send init with model = the graph's bytes, weights = the joined weights, weightsName =
 'vision.weights.bin' (transfer both buffers). With no m.weights the worker behaves exactly as before.
 
-Measured (onnxruntime-web 1.30.0 WASM, one thread; tools/lab/mem_node.mjs in Node 22 on GitHub ubuntu-latest machines;
-tables by tools/lab/mem_table.py from runs/lab/32-mem-base and runs/lab/33-mem-b on the ci branch):
-  shipped file (vision.int8.onnx, 309,812,341 bytes), worker's options:  WASM heap 819.4 MiB; peak resident 1249 MiB
-    while the session is created, 1167 MiB during photos 1 and 10 with the file's bytes let go
-  external data (vision.graph.onnx 2,175,801 bytes + vision.weights.bin 307,658,752 bytes), same options: WASM heap
-    429.0 MiB (-47.6%); peak resident 814 MiB while the session is created, 630 and 632 MiB during photos 1 and 10
-    with the bytes let go
-  vectors of 24 test photos: identical to the shipped file's (largest absolute difference 0.0; cosine 1.0000000)
-  seconds a photo: 2.79 (shipped, run 32 machine) and 4.85 (external, run 33 machine); these were different machines,
-    and the shipped file through the page's worker in Chromium on the run 33 machine took 4.39 s a photo
+Measured on one GitHub ubuntu-latest machine (lab run 34, runs/lab/34-mem-pub on the ci branch; onnxruntime-web 1.30.0
+WASM, one thread, the worker's options; 24 test photos; table by tools/lab/mem_table.py, all runs in ci/lab/mem/results.json):
+  headless Chromium, the page's own worker:
+    shipped file:        WASM heap 820.9 MiB; renderer peak 1330 MiB while the session is created, 1218 and 1224 MiB
+                         during photos 1 and 10; 5.9 s to ready; 4.53 s a photo
+    external data form:  WASM heap 429.0 MiB; renderer peak 953 MiB while the session is created, 857 and 864 MiB
+                         during photos 1 and 10; 5.8 s to ready; 4.47 s a photo (this patch applied on the machine)
+  Node (tools/lab/mem_node.mjs), the file's bytes let go once the session exists:
+    shipped file:        WASM heap 819.4 MiB; peak resident 1246 MiB; 4.50 s a photo
+    external data form:  WASM heap 429.0 MiB; peak resident 834 MiB; 4.54 s a photo
+  vectors: the external data form's are identical to the shipped file's (Node: largest absolute difference 0.0;
+  Chromium: cosine 1.000000000 on all 24 photos)
 
 diff --git a/vendor/rec-worker.js b/vendor/rec-worker.js
 index cb8ab2e..d0a9012 100644
