@@ -1,0 +1,71 @@
+
+=== 01:41:35 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1293       12571          40        2482       14695
+v22.23.3
+Python 3.12.3
+Ubuntu 24.04.5 LTS
+
+=== 01:41:35 build
+build 5 | index.html 147655 bytes | artifact 145077 bytes
+build ok
+
+=== 01:41:35 playwright 1.56.0 and its browsers
+
+added 2 packages in 1s
+Setting up fonts-unifont (1:15.1.01-1build1) ...
+Setting up xfonts-utils (1:7.7+6build3) ...
+Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+Setting up xfonts-scalable (1:1.0.3-1.3) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart php8.3-fpm.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+=== 01:41:58 ffmpeg and Pillow
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+pillow ok
+
+=== 01:42:20 serve the repository on 127.0.0.1:8781
+index.html -> 200
+
+=== 01:42:21 self-test: chromium x phone, desktop
+01:48:56 chromium-phone 141.0.7390.37 done=true ok=true fails=0 checks=93 webgl2=true float=true ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver) 394390ms
+01:57:59 chromium-desktop 141.0.7390.37 done=true ok=false fails=1 checks=93 webgl2=true float=true ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver) 542962ms
+
+=== 01:57:59 existing checks in Chromium (test/check4.js, unchanged)
+-rw-r--r-- 1 runner runner 4084448 Oct 11 01:57 cam.mjpeg
+check4 lex: exit 0 in 3 s
+check4 record: exit 0 in 78 s
+check4 viewer: exit 0 in 53 s
+check4 edge: exit 0 in 54 s
+check4 sweep: exit 0 in 154 s
+
+=== 02:03:41 summary
+chromium desktop done True ok False fails 1 webgl2 True float True ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+chromium phone done True ok True fails 0 webgl2 True float True ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+check4 {'edge': True, 'lex': True, 'record': True, 'sweep': True, 'viewer': True}
+iphone None None []
+
+=== 02:03:41 shrink pictures
+pictures: 28 total bytes: 942775
+1.1M	/home/runner/work/seen-back/seen-back/out
