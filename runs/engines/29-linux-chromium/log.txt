@@ -1,0 +1,145 @@
+
+=== 07:06:04 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1457       12281          43        2614       14531
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 9V45 96-Core Processor
+Flags: avx2 avx512_vnni avx512bw avx512f avx_vnni 
+
+=== 07:06:04 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 7 | index.html 171866 bytes | artifact 169288 bytes | selftest.js 44338 bytes
+build ok
+171896 index.html
+44338 selftest.js
+
+=== 07:06:05 playwright 1.56.0: chromium
+added 2 packages in 2s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 07:06:29 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+[0;93m2026-10-11 07:06:35.417870165 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python 1.31.0 12.3.0 2.5.4
+total 76816
+drwxr-xr-x 2 runner runner     4096 Oct 11 07:06 .
+drwxr-xr-x 6 runner runner     4096 Oct 11 07:06 ..
+-rw-r--r-- 1 runner runner     8822 Oct 11 07:06 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 556485
+[0;93m2026-10-11 07:06:40.326760824 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.3567], ['plant', 0.2083], ['frog', 0.109]]
+  python: asset-portrait.jpg [['person', 0.9322], ['none', 0.0404], ['other', 0.0091]]
+  python: big12mp.jpg [['none', 0.4143], ['plant', 0.206], ['deer', 0.1061]]
+  python: dots.png [['none', 0.8682], ['plant', 0.0579], ['person', 0.0473]]
+  python: garden.jpg [['none', 0.3537], ['plant', 0.2206], ['frog', 0.1062]]
+  python: heron.png [['wader', 0.6421], ['bird', 0.2484], ['hawk', 0.0408]]
+  python: info-exif6.jpg [['person', 0.9409], ['none', 0.0355], ['other', 0.0078]]
+  python: odd.png [['none', 0.8614], ['plant', 0.0407], ['other', 0.0274]]
+  python: portrait.jpg [['person', 0.9409], ['none', 0.0355], ['other', 0.0078]]
+  python: rings.png [['other', 0.2859], ['none', 0.2193], ['plant', 0.1987]]
+  python: small.png [['plant', 0.7476], ['other', 0.0691], ['none', 0.049]]
+  python: stripes.png [['none', 0.7918], ['plant', 0.0721], ['other', 0.0467]]
+  python: wall.png [['none', 0.9698], ['person', 0.0137], ['plant', 0.0046]]
+  python: wide.png [['none', 0.2365], ['plant', 0.2361], ['deer', 0.1418]]
+
+=== 07:06:40 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 07:06:41 check_rec.js, every check, stand-in model: chromium
+check_rec chromium: exit 0 in 284 s
+flow: ok | camera: ok | fuse: ok | trained: ok | parity: ok | progress: ok | typeit: ok | service: ok | away: ok | offline+version: ok | missing: ok | damaged: ok | dying: ok | about: ok | viewer: ok
+
+=== 07:11:25 check_rec.js parity, real slot (tinyclip-8m-16): chromium
+parity (real) chromium: exit 0 in 27 s
+parity: ok
+(ci/engines/patches/check_rec-int8-cosine.patch is already in test/rec/check_rec.js on this commit)
+(no self-test on run/engines/linux-b7a)
+
+=== 07:11:52 threads experiment: three copies of the page, patched
+patching file src/cam.rec.js
+patching file vendor/rec-worker.js
+base: threads patch applied and built
+patching file src/sw.template.js
+rc: sw.js isolation lines: 1
+/tmp/coi/cl/sw.js:const COEP = 'credentialless'
+/tmp/coi/rc/sw.js:const COEP = 'require-corp'
+base index.html carries the threads switch: 1
+
+=== 07:11:52 headers of the other origins a large model or a typeface would come from
+--- https://raw.githubusercontent.com/jampotful/seen-back/main/manifest.webmanifest
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+x-content-type-options: nosniff
+access-control-allow-origin: *
+cross-origin-resource-policy: cross-origin
+--- https://fonts.googleapis.com/css2?family=Instrument+Serif
+HTTP/2 200 
+content-type: text/css; charset=utf-8
+access-control-allow-origin: *
+timing-allow-origin: *
+cross-origin-opener-policy: same-origin-allow-popups
+cross-origin-resource-policy: cross-origin
+x-content-type-options: nosniff
+8791 -> 200
+8792 -> 200
+8793 -> 200
+8794 -> 200
+
+=== 07:11:54 threads experiment: chromium
+07:15:45 chromium-none-t1 {"coi":false,"controlled":true,"reloads":1,"ready":"ready","readyMs":194016,"threads":1,"loadMs":194016,"start":{"vectors":91.39999999990687,"session":700.1000000000931,"warm":419.0999999999767},"medianRunMs":538,"minRunMs":379,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900"
+07:19:43 chromium-require-corp-t1 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":200491,"threads":1,"loadMs":200490,"start":{"vectors":96.9199999999255,"session":575.140000000014,"warm":469.65500000002794},"medianRunMs":437,"minRunMs":365,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Failed to fe
+07:23:40 chromium-require-corp-t2 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":201816,"threads":2,"loadMs":201816,"start":{"vectors":45.73999999999069,"session":615.1199999999953,"warm":461.14000000001397},"medianRunMs":431,"minRunMs":315,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Failed to 
+07:27:42 chromium-require-corp-t4 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":203941,"threads":4,"loadMs":203941,"start":{"vectors":49.93499999982305,"session":660.2250000000931,"warm":567.875},"medianRunMs":475,"minRunMs":316,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"failed: TypeError: Failed to fetch","img
+07:31:40 chromium-credentialless-t2 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":202679,"threads":2,"loadMs":202679,"start":{"vectors":96.3300000000745,"session":685.3649999999907,"warm":416.63999999989755},"medianRunMs":426,"minRunMs":284,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900",
+07:35:38 chromium-credentialless-t4 {"coi":true,"controlled":true,"reloads":1,"ready":"ready","readyMs":200110,"threads":4,"loadMs":200109,"start":{"vectors":48.579999999841675,"session":718.0949999999721,"warm":446.37000000011176},"medianRunMs":508,"minRunMs":472,"n":8,"kinds":["heron.png:wader","portrait.jpg:person","wall.png:none","garden.jpg:plant"],"breaks":{"corsFetch":"ok 200 29625","noCorsFetch":"ok opaque","img":"loaded 900
+threads.js chromium: exit 0
+
+=== 07:35:38 threads experiment: summary
+chromium-credentialless-t2         coi=True  threads=2    ready=ready                                    readyMs=202679 median run ms=426     min=284     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+chromium-credentialless-t4         coi=True  threads=4    ready=ready                                    readyMs=200110 median run ms=508     min=472     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+chromium-none-t1                   coi=False threads=1    ready=ready                                    readyMs=194016 median run ms=538     min=379     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "ok opaque", "img": "loaded 900", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: false", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+chromium-require-corp-t1           coi=True  threads=1    ready=ready                                    readyMs=200491 median run ms=437     min=365     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Failed to fetch", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+chromium-require-corp-t2           coi=True  threads=2    ready=ready                                    readyMs=201816 median run ms=431     min=315     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Failed to fetch", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+chromium-require-corp-t4           coi=True  threads=4    ready=ready                                    readyMs=203941 median run ms=475     min=316     n=8
+                                   breaks={"corsFetch": "ok 200 29625", "noCorsFetch": "failed: TypeError: Failed to fetch", "img": "error", "rawGithub": "ok 200 616 acao=null", "worker": "ok, isolated inside: true", "webgl": "ok", "camera": "ok fake_device_0", "opener": "object"} error=None
+
+=== 07:35:38 summary
+check4 {}
+iphone None None []
+
+=== 07:35:38 shrink pictures
+pictures: 8 total bytes: 435430
+512K	/home/runner/work/seen-back/seen-back/out
