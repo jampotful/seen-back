@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|nameover|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
 // "large" (the larger model a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
 // by itself (8788 unless BIG_PORT says otherwise) if nothing answers there.
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
@@ -33,7 +33,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -99,6 +99,20 @@ async function meet(page, name) {
   const byService = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'service'; }, null, { timeout: 20000 });
   const recordRows = (page) => page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
   const typeName = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
+  // the big name over a screen that has text of its own: the largest opacity #reveal had, sampled every frame, while #askView or #askAnimal was in view
+  const watchOver = (page) => page.evaluate(() => { window.__over = 0; const q = (id) => document.getElementById(id), f = () => { if (!q('askView').hidden || !q('askAnimal').hidden) window.__over = Math.max(window.__over, +getComputedStyle(q('reveal')).opacity); requestAnimationFrame(f); }; requestAnimationFrame(f); });
+  const overNow = (page) => page.evaluate(() => window.__over);
+
+  if (want.includes('nameover')) await section('nameover', async () => {     // the big name fades on the picture, and is never drawn across "Now your view." or "Who did you meet?"
+    const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT), r = {}; await ready(page); await begin(page); await watchOver(page);
+    r.heron = (await meet(page, 'heron.png')).eyes; await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(900);
+    r.overAskView = await overNow(page);
+    await page.locator('#backAskView').tap(); await page.waitForTimeout(150); await page.evaluate(() => { window.__over = 0; });
+    r.stripes = (await meet(page, 'stripes.png')).eyes; await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(900);
+    r.overAgain = await overNow(page); r.errors = errors;
+    fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'nameover.png'), scale: 'css' }).catch(() => {});
+    done('nameover', r, r.heron === 'wader' && r.stripes === 'insect' && r.overAskView < 0.05 && r.overAgain < 0.05 && !errors.length); await ctx.close();
+  });
 
   if (want.includes('flow')) await section('flow', async () => {     // a photo chosen through the file input, through to the name; each tier of naming; the correction sheet
     const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT);
@@ -220,7 +234,7 @@ async function meet(page, name) {
       return { kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), kindNote: document.querySelector('#claimKindBox .note').textContent, kindsShown: !q('claimKindBox').hidden,
         offers: [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent), offerNote: q('claimOfferNote').textContent, offersShown: !q('claimOfferBox').hidden,
         kindsAboveOffers: box('claimKindBox').bottom <= box('claimOfferBox').top + 1, aboveField: box('claimOfferBox').bottom <= box('claimName').top + 1,
-        last: { kind: l.kind, sure: l.sure, p: +l.kindP.toFixed(4), kindOffers: l.kindOffers, named: l.named }, screen: window.__seenBack.S.screen, meetings: window.__seenBack.record().length }; });
+        last: { kind: l.kind, sure: l.sure, p: +l.kindP.toFixed(4), kindOffers: l.kindOffers, named: l.named, offerSci: l.offers.map((o) => o.sci) }, screen: window.__seenBack.S.screen, meetings: window.__seenBack.record().length }; });
     await page.screenshot({ path: path.join(here, 'shots', 'notsure.png'), scale: 'css' }).catch(() => {});
     await page.locator('#claimKinds button').nth(1).tap(); await page.waitForTimeout(300);
     r.chosen = await st(page); r.record = await recordRows(page);
@@ -239,12 +253,15 @@ async function meet(page, name) {
       o.noneLeads = pick(rec.test.fuseIn(world(f(0.9), t), [0, Math.log(2), 0, 0, Math.log(6)], [0, 1], 6));
       let refused = ''; try { world(Object.assign(f(0.5), { kind_at: 'high' }), t); } catch (e) { refused = e.code + ': ' + e.detail; } o.refused = refused;
       return o; });
+    r.sameName = await page.evaluate(() => window.__seenBack.offerList([{ sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Limenitis astyanax', en: 'Red-spotted Admiral' },
+      { sci: 'Limenitis arthemis', en: 'Red-spotted Admiral' }, { sci: 'Larra bicolor', en: 'Wasp' }]).map((o) => o.label));     // from the real list: Salvia azurea is filed under two GBIF keys; two admirals share a name
     r.errors = errors;
     const tail = ' Choose one below, or type the kind of animal or plant, such as cat, heron or oak.', b = r.byHand;
     done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great Blue Heron' && before === 1
       && r.odd.claim && !r.odd.eyes && r.odd.sub === 'The recognizer is not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
       && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'It may be one of these kinds.' && r.sheet.kindsShown
-      && r.sheet.offers.join() === w.offers.join() && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
+      && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? w.offers[i] + ' (' + r.sheet.last.offerSci[i] + ')' : w.offers[i])) && new Set(r.sheet.offers).size === r.sheet.offers.length
+      && r.sameName.join() === 'giant blue sage,Red-spotted Admiral (Limenitis astyanax),Red-spotted Admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
       && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === 'Choose one below, or type the kind of animal or plant, such as cat, heron or oak.'
       && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
@@ -365,7 +382,9 @@ async function meet(page, name) {
 
   // ---------- the species service: a fake server that speaks Gradio's two-step call (test/rec/fake_service.js)
   let fake = null;
-  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_/.test(e));     // a sleeping server's refusals are written to the console by the browser itself
+  // a sleeping server's refusals are written to the console by the browser itself, each engine in its own words: Chromium "blocked by CORS policy",
+  // "net::ERR_"; Firefox "Cross-Origin Request Blocked"; WebKit "Preflight response is not successful", "due to access control checks" (runs engines/33)
+  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_|Cross-Origin Request Blocked|Preflight response is not successful|due to access control checks|is not allowed by Access-Control-Allow-Origin/.test(e));
   const svcFiles = async () => {
     if (!fake) fake = await require('./fake_service.js').start(SVC_PORT);
     fake.reset();
@@ -601,7 +620,7 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
       await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
       all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
-      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. On a phone it takes several seconds a photo.'
+      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. It takes several seconds a photo on a computer. No phone has been timed yet.'
         && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /can be changed, and the model deleted, under “About this build”/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
       all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
@@ -625,11 +644,11 @@ async function meet(page, name) {
       all('resumed', r.afterReload.choice === 'yes' && r.resumed.parts.filter((x) => x === 'part00').length === 1 && r.resumed.parts.filter((x) => x === 'part01').length === 2 && r.resumed.parts.filter((x) => x === 'part02').length === 1
         && r.resumed.kept.filter((k) => /^part\/SHA/.test(k)).length === 3 && r.resumed.kept.indexOf('whole/SHA') >= 0 && fin.state === 'ready' && fin.choice === 'kept' && r.resumed.kept_bytes && !errors.length);
       // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
-      await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page);
+      await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page); await watchOver(page);
       const s1 = await meet(page, 'stripes.png'); await byLarge(page); await page.waitForTimeout(150);
       r.named = { atOnce: s1.eyes + '|' + s1.last.kind + '|' + (s1.last.top && s1.last.top[0]) + '|' + s1.last.offers.length, small: await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return l.kind + '|' + (l.named ? l.named.en : 'no name') + '|' + l.offers.length; }), after: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), line: await svcLine(page), record: await recordRows(page),
         overlay: await page.evaluate(() => (document.getElementById('reveal').classList.contains('show') ? document.getElementById('rvName').textContent : '(gone)')), last: (await bigNow(page)).last, reference: E('stripes.png') };
-      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {});
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(700); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {}); r.named.overSheet = await overNow(page);
       await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 });
       r.named.pill = await text(page, 'whoName'); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); r.named.infoSub = await text(page, 'infoSub');
       await page.locator('#infoChange').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
@@ -640,7 +659,7 @@ async function meet(page, name) {
       await page.locator('#about summary').tap(); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await page.locator('#recordClose').tap();
-      all('named', s1.eyes === 'insect' && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
+      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
         && r.named.line === 'The larger model says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
         && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by a larger model, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
         && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by a larger model$/.test(r.named.rows[0]));
@@ -846,6 +865,9 @@ async function meet(page, name) {
       await ctl('reset=1');
       ({ page, errors } = await open(browser, '&rec=' + SLOT, null, ctx)); await ready(page);
       r.again = { asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin|vendor/.test(x)), errors: errors.slice() }; ok = ok && !errors.length;
+      // a phone that kept build 8's files holds the encoder under the manifest's fingerprint as well: a copy under such an address must be let go
+      r.again.encoderKey = await page.evaluate(async () => { const c = await caches.open('keep-v1'), k = (await c.keys()).map((q) => q.url).filter((u) => /vision\.int8\.onnx\?v=/.test(u));
+        if (k.length === 1) await c.put(k[0].replace(/v=[^&]+/, 'v=0123abcd'), await c.match(k[0])); return k.map((u) => u.replace(location.origin + '/', '')); });
       await page.close();
       // the laboratory publishes a new model under the same address: another manifest, so another version
       await ctl('reset=1'); await ctl('swap=' + SLOT + '/manifest.json&with=' + SLOT + '/manifest.kinds-only.json');
@@ -853,7 +875,10 @@ async function meet(page, name) {
       r.newVersion = { model: (await about(page)).model, asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin/.test(x)),
         kept: await page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url.replace(location.origin + '/', '')).filter((u) => /standin/.test(u)).sort()), errors: errors.slice() };
       const vs = new Set(r.newVersion.kept.map((u) => (/v=([0-9a-f]+)/.exec(u) || [])[1]).filter(Boolean));
-      ok = ok && r.again.asked.length === 1 && /manifest\.json$/.test(r.again.asked[0]) && r.newVersion.model === 'standin-kinds-only' && r.newVersion.asked.some((x) => /vision\.int8\.onnx\?v=/.test(x)) && vs.size === 1 && r.newVersion.kept.some((u) => /vision\.int8\.onnx\?v=/.test(u)) && !errors.length;
+      // the new manifest names the same encoder (the same sha256): it is not fetched again, and stays kept under its checksum; the old copy is gone
+      const sha = JSON.parse(fs.readFileSync(path.join(slotDir, 'manifest.kinds-only.json'), 'utf8')).vision.sha256;
+      ok = ok && r.again.asked.length === 1 && /manifest\.json$/.test(r.again.asked[0]) && r.again.encoderKey.length === 1 && r.again.encoderKey[0].endsWith('vision.int8.onnx?v=sha256-' + sha) && r.newVersion.model === 'standin-kinds-only'
+        && !r.newVersion.asked.some((x) => /vision\.int8\.onnx/.test(x)) && vs.size === 1 && r.newVersion.kept.filter((u) => /vision\.int8\.onnx/.test(u)).join() === r.again.encoderKey[0] && !errors.length;
       await page.close(); await ctl('reset=1');
     }
     done(want.includes('version') ? 'offline+version' : 'offline', r, ok);
@@ -925,7 +950,17 @@ async function meet(page, name) {
     await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150);
     fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'about.png'), scale: 'css' });
     r.overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); r.errors = errors;
-    done('about', r, /^Seen Back, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
+    r.fitted = { none: await page.locator('#fittedOn').isVisible() };      // the stand-in's manifest has no fitted_on block: no sentence
+    for (const [name, m] of [['full', 'manifest.fitted.json'], ['bare', 'manifest.fitted-bare.json']]) {    // a block with its sentence and count; a block with neither (a count that is not a number)
+      const o = await open(browser, '&nosw=1&rec=' + SLOT + '/' + m); await ready(o.page); await o.page.locator('#btnBegin').tap(); await o.page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
+      await o.page.locator('#recAskAnimal').tap(); await o.page.waitForSelector('#record', { state: 'visible' }); await o.page.locator('#about summary').tap(); await o.page.waitForTimeout(200);
+      r.fitted[name] = (await o.page.locator('#fittedOn').isVisible()) ? await text(o.page, 'fittedOn') : '(hidden)'; r.fitted[name + 'Errors'] = o.errors;
+      if (name === 'full') { await o.page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await o.page.waitForTimeout(150); await o.page.screenshot({ path: path.join(here, 'shots', 'about-fitted.png'), scale: 'css' }).catch(() => {}); }
+      await o.ctx.close();
+    }
+    const base = 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.';
+    done('about', r, !r.fitted.none && r.fitted.full === 'The rows the recognizer compares a photo with were fitted on 61,234 ' + base + ' Only photographs in the public domain or under CC BY or CC BY-NC were used.'
+      && r.fitted.bare === 'The rows the recognizer compares a photo with were fitted on ' + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Seen Back, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
       && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });

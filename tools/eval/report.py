@@ -92,6 +92,8 @@ FIRST_LOOK = [("bioclip2-l14", "species_sci", {"plain_top1": 0.904, "plain_top5"
 S1 = load("study1.json")
 CH = load("checks.json")
 S2 = {os.path.basename(p)[7:-5]: json.load(open(p, encoding="utf-8")) for p in sorted(glob.glob(os.path.join(D, "study2-*.json")))}
+S2L = {k: v for k, v in S2.items() if v.get("licence_rule", "all") != "all"}       # heads fitted under a licence rule: their own section
+S2 = {k: v for k, v in S2.items() if k not in S2L}
 SH = {os.path.basename(p)[8:-5]: json.load(open(p, encoding="utf-8")) for p in sorted(glob.glob(os.path.join(D, "shipped-*.json")))}
 models = [m for m in ORDER if m in S1["models"]] + [m for m in S1["models"] if m not in ORDER]
 P = S1["prior_only"]
@@ -358,7 +360,8 @@ if SH:
                               ("%.2f" % l["offer_at"]) if l.get("offer_at") is not None else "never", pci(l.get("offered")), pci(l.get("offered_holds_species")), pci(l.get("kind_only"))])
     if lrows:
         T += ["A stricter bar for naming is available. The table gives, for a named species that has to be right at least 90, 95 or 98 times in 100 on `val`, the threshold that `val` gives and what then happens on the test photos. "
-              "For each bar the offer threshold was set again on `val`, for the photos left without a name, so that the three offered species hold the right one nine times in ten.", "",
+              "For each bar the offer threshold was set again on `val`, for the photos left without a name, so that the three offered species hold the right one nine times in ten. "
+              "The slots scored with `--name-bar 0.92` add a row for 92 in 100. The shares in this table leave out the page's rule that no species is named while the kind is not sure (`fusion.kind_at`), which the table above applies, so for a slot with `kind_at` the share named can be lower there and the share right higher.", "",
               table(["Slot", "Named species right at least", "name_at", "Photos named", "Named species right", "offer_at", "Photos offered three", "Offer holds the species", "Kind only"], lrows), ""]
     T += ["The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).", ""]
 
@@ -502,6 +505,83 @@ if not real:
     T += ["- **What waits for the training vectors.** " + tx]
 T += [""]
 
+# ---- heads fitted under the licence rule (tools/eval/licences.py), the pocket v3 decision, and the pets and livestock check
+LIC = [("all licences (run 25, scored again with build 8's fuse.py)", "alachua-pre2025-tinyclip-39m-16-b8"), ("all licences (run 25 as it ran)", "alachua-pre2025-tinyclip-39m-16"), ("`nc`", "alachua-pre2025-nc-tinyclip-39m-16-at90"), ("`by`", "alachua-pre2025-by-tinyclip-39m-16"),
+       ("`nc`, name_at at 92 in 100: the candidate for pocket v3", "alachua-pre2025-nc-tinyclip-39m-16"), ("pocket v2 (live in build 8), scored with build 8's fuse.py", "val-tinyclip-39m-16-b8"), ("pocket v2, the file the rule names (fuse.py before build 8)", "val-tinyclip-39m-16"),
+       ("pocket v2 refitted under `nc`", "val-nc-tinyclip-39m-16")]
+if any(n_ in SH for _, n_ in LIC[1:4]):
+    T += ["## Heads under the licence rule", "",
+          "The rule set by the coordinator on 11 October 2026, pending the owner's decision: heads that ship are fitted only on photos in the public domain (CC0, no known copyright restrictions, United States Government work) or shared under CC BY or CC BY-NC, and a list of the photos used (set, id, address, licence) is published beside the heads. "
+          "Photos under any licence with ND or SA terms are left out of fitting. In code and in these files the rule is called `nc`; `by` (the public domain and CC BY only) is measured for comparison. `tools/eval/licences.py` holds both, and `tools/eval/study2.py --licence nc` applies the rule to the species rows (training photos), to the kind rows (training photos and the fitting part of the extra set) and, for the stand-in, to the `val` photos it fits on. "
+          "The tuning photos choose settings only and are not cut by the rule. Everything else is run 25's procedure: Study 2 fits and chooses on `val`, `tools/eval/export_heads.py` writes the slot, `tools/eval/shipped.py` scores it through `tools/fusion/fuse.py` on the test photos.", ""]
+    for k_, v_ in sorted(S2L.items()):
+        for m_, r_ in v_["models"].items():
+            fo = r_.get("fitted_on", {})
+            if fo:
+                parts = "; ".join("%s: %s" % (set_, ", ".join("%s %d" % (l_, c_) for l_, c_ in sorted(d_.items(), key=lambda kv: -kv[1]))) for set_, d_ in fo["by_set_and_licence"].items())
+                T += ["- `%s`, %s: rows fitted on %d photos (%s). Species head `%s`; kinds head %s." % (k_, m_, fo["photos"], parts, r_["chosen_species_head"]["name"],
+                                                                                                  ("`%s`" % r_["kind_decision"]["chosen"]["head"]) if r_.get("kind_decision") else "the kind phrases")]
+    T += [""]
+    rows = []
+    for label, n_ in LIC:
+        if n_ not in SH:
+            continue
+        nn = SH[n_]["numbers"]
+        k = nn.get("kind", {})
+        tw, tx = k.get("test_wildlife", {}), k.get("test_extra")
+        by = {g["kind"]: g for g in k.get("table_extra", [])}
+        rows.append([label, "`%s`" % n_, pci(nn["kind_right"]), pci(tx["kind_right"]) if tx else "–", pci(tw.get("asserted")), pci(tw.get("asserted_right")), pci(nn["species_top1"]),
+                     "%s at %s" % (pc(nn["named"][0]), nn["name_at"] if nn["name_at"] is not None else "never"), pci(nn["named_right"]),
+                     pc(by["person"]["named"]) if "person" in by else "–", pc(by["none"]["named"]) if "none" in by else "–"])
+    T += ["TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The rows for run 25 and for `nc` and `by` set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos. "
+          "Run 25 (commit c0cd718) and the committed file of pocket v2 (made at 03:23) were scored with the `tools/fusion/fuse.py` from before build 8, which named a species even when the kind was under `kind_at`; build 8's fuse.py and page name one only when the kind is asserted. "
+          "The rows marked build 8 are the same slots scored again by `tools/eval/shipped.py` with the present fuse.py: their thresholds and their kind of eye, photo for photo, are the same, and only the naming columns move.", "",
+          table(["Heads fitted on", "Slot", "Kind right, wildlife", "Kind right, extra set", "Kind asserted, wildlife", "Right when asserted", "Top species right", "Species named (share, name_at)", "Named species right", "Named on people", "Named on rooms"], rows,
+                ["---", "---"] + ["---:"] * 9), ""]
+    DV3 = load("decision-pocket-v3.json")
+    if DV3:
+        t_ = DV3["tests"]
+        T += ["**Pocket v3, by the rule set beforehand** (`tools/eval/decide_v3.py`). %s" % DV3["rule"], "",
+              "- (i) Kind of eye on the wildlife test photos: %s for the candidate against %s for pocket v2, a paired difference of %s points (%s to %s) over %d photos. %s" % (
+                  pci(t_["i_wildlife_kind_paired_difference"]["candidate"]), pci(t_["i_wildlife_kind_paired_difference"]["pocket_v2"]), "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][0]),
+                  "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][1]), "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][2]), t_["i_wildlife_kind_paired_difference"]["photos"],
+                  "The interval lies wholly below zero, so this test fails." if t_["i_wildlife_kind_paired_difference"]["fails"] else "The interval does not lie wholly below zero, so this test passes."),
+              "- (ii) Kind of eye on the extra set's test photos: %s against a bar of 96.5%%. %s" % (pci(t_["ii_extra_kind_right"]["candidate"]), "This test fails." if t_["ii_extra_kind_right"]["fails"] else "This test passes."),
+              "- (iii) A species named on %d of the %d test photos of people and rooms (%s) against a bar of 1%%. %s" % (t_["iii_named_on_people_and_rooms"]["named"], t_["iii_named_on_people_and_rooms"]["photos"], pc(t_["iii_named_on_people_and_rooms"]["share"]),
+                                                                                                                         "This test fails." if t_["iii_named_on_people_and_rooms"]["fails"] else "This test passes."),
+              "", DV3["why"], ""]
+        if DV3.get("beside"):
+            nm = {"kind_right": "kind of eye right", "asserted_right": "kind asserted and right", "asserted_wrong": "kind asserted and wrong", "named": "a species name shown", "named_right": "a right species name shown"}
+            T += ["Beside the rule, deciding nothing: the candidate against pocket v2 on the same photos (paired differences in points, with 95% bootstrap intervals).", "",
+                  table(["Photos", "Measure", "Candidate", "Pocket v2", "Paired difference (points)"],
+                        [["wildlife test" if b_["photos"] == "wildlife" else "extra test", nm.get(b_["measure"], b_["measure"]), pc(b_["candidate"]), pc(b_["pocket_v2"]),
+                          "%+.1f (%+.1f to %+.1f)" % tuple(100 * x_ for x_ in b_["difference"])] for b_ in DV3["beside"]], ["---", "---", "---:", "---:", "---:"]), ""]
+    rp = os.path.join(D, "reproduction-licence.txt")
+    if os.path.exists(rp):
+        lines_ = open(rp, encoding="utf-8").read().splitlines()
+        tot_ = next((l_.split(":")[-1].strip() for l_ in lines_ if l_.startswith("numbers that differ")), "?")
+        files_ = [l_.split()[0] for l_ in lines_[1:] if ".json" in l_[:80] and "numbers compared" in l_ and not __import__("re").search(r"compared, 0 differ", l_)]
+        T += ["**Rerun on a clean machine.** %s In all, %s numbers differ by more than 0.0005, all of them in these files: %s. The comparison is kept in [`docs/eval/reproduction-licence.txt`](eval/reproduction-licence.txt)." % (lines_[0], tot_, ", ".join("`%s`" % f_ for f_ in files_)), ""]
+        RD, RS = load("reproduction-licence-decision.json"), load("reproduction-licence-shipped.json")
+        if RD and RS:
+            rn, rk = RS["numbers"], RS["numbers"]["kind"]
+            rt = RD["tests"]
+            same = sorted(set(l_.split()[1] for l_ in open(os.path.join(D, "reproduction-licence-sha256.txt"), encoding="utf-8").read().splitlines()) & set(l_.split()[1] for l_ in open(os.path.join(D, "pocket-v3-sha256.txt"), encoding="utf-8").read().splitlines() if l_ in open(os.path.join(D, "reproduction-licence-sha256.txt"), encoding="utf-8").read().splitlines()))
+            T += ["On the build machine the kind rows came out different and Study 2 chose another kinds head (%s; rule `%s`, t_kind %g, w_kind %g), so `tools/eval/shipped.py` set kind_at %s, name_at %s and offer_at %s there. "
+                  "That slot gets the kind right for %s of the wildlife test photos and %s of the extra set's, asserts a kind for %s of the wildlife photos and is right for %s of those, names a species for %s and is right for %s of those, and names one on %d of the %d test photos of people and rooms. "
+                  "It passes the same three tests (paired difference against pocket v2 on wildlife %+.1f points, %+.1f to %+.1f). The files that are byte for byte the same on both machines: %s. "
+                  "The sandbox's scikit-learn warned that its optimizer stopped at the 300-iteration limit while fitting kind rows; the kind rows, and every setting chosen with them, should be taken as one draw among close ones. The slot published as pocket v3 is the sandbox's." % (
+                      RS["manifest"]["evaluation"].get("kind_head", "?"), RS["manifest"]["fusion"]["rule"], RS["manifest"]["fusion"]["t_kind"], RS["manifest"]["fusion"]["w_kind"], rn["kind_at"], rn["name_at"], rn["offer_at"],
+                      pci(rn["kind_right"]), pci(rk["test_extra"]["kind_right"]), pci(rk["test_wildlife"]["asserted"]), pci(rk["test_wildlife"]["asserted_right"]), pci(rn["named"]), pci(rn["named_right"]),
+                      rt["iii_named_on_people_and_rooms"]["named"], rt["iii_named_on_people_and_rooms"]["photos"],
+                      100 * rt["i_wildlife_kind_paired_difference"]["difference"][0], 100 * rt["i_wildlife_kind_paired_difference"]["difference"][1], 100 * rt["i_wildlife_kind_paired_difference"]["difference"][2],
+                      ", ".join("`%s`" % x_ for x_ in same) or "none"), ""]
+    PL = load("pets-livestock.json")
+    if PL:
+        T += ["**Names on pets and livestock** (`tools/eval/pets.py`). %s" % PL["text"], "",
+              table(["Category", "Test photos", "A species named", "The domestic species", "Another species", "What it names when wrong"],
+                    [[r_["category"], r_["photos"], r_["named"], r_["domestic"], r_["other"], r_["wrong_names"] or "–"] for r_ in PL["rows"]], ["---", "---:", "---:", "---:", "---:", "---"]), ""]
+
 T += ["## The first look, checked", "",
       "A first look at these models, made earlier in the night with a quick script, gave the numbers in the column `First look`. The next column is this study's number for the same model and label set.", ""]
 rows = []
@@ -610,8 +690,16 @@ T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 
       "python3 -I tools/eval/naturalist.py SLOT --shipped docs/eval/shipped-NAME.json --out DIR --variant docs/eval/variant-LABEL.json   # head files for models/naturalist",
       "python3 -I tools/eval/report.py                     # this file and the tables under docs/eval/",
       "python3 -I tools/eval/compare.py DIR_A DIR_B        # do two runs give the same numbers?", "```", "",
+      "Heads under the licence rule and pocket v3, one step at a time:", "", "```",
+      "python3 -I tools/eval/study2.py ROOT --train alachua-pre2025 --models tinyclip-39m-16 --licence nc --save ROOT/heads/alachua-pre2025-nc   # also --licence by",
+      "python3 -I tools/eval/export_heads.py ROOT --head ROOT/heads/alachua-pre2025-nc/tinyclip-39m-16.npz --out ROOT/slots/alachua-pre2025-nc/tinyclip-39m-16   # with fitted_on.csv",
+      "python3 -I tools/eval/shipped.py ROOT ROOT/slots/alachua-pre2025-nc/tinyclip-39m-16 --name alachua-pre2025-nc-tinyclip-39m-16 --name-bar 0.92",
+      "python3 -I tools/eval/decide_v3.py --candidate alachua-pre2025-nc-tinyclip-39m-16      # docs/eval/decision-pocket-v3.json",
+      "python3 -I tools/eval/pocket_v3.py SLOT --shipped docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json --decision docs/eval/decision-pocket-v3.json --ready DIR --publish DIR2",
+      "python3 -I tools/eval/shipped.py ROOT DIR --name pocket-v3 --name-bar 0.92 --no-write   # the last check of the assembled files",
+      "python3 -I tools/eval/pets.py ROOT DIR --name pocket-v3                               # docs/eval/pets-livestock.json", "```", "",
       "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`. "
-      "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything.", "",
+      "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything; `run/eval/licence<label>` reruns the heads under the licence rule, the pocket v3 decision, the last check and the pets check, and publishes nothing.", "",
       "Inputs of this run: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "."]
 with open(a.out, "w", encoding="utf-8") as f:
     f.write("\n".join(T).rstrip("\n") + "\n")

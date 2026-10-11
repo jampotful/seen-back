@@ -194,3 +194,13 @@ Entries also carry `n` and `via` (`observations` or `name`); `share` is null for
 ### Training manifests from the open-data route
 
 `gbif_id` is empty, observation addresses are made from UUIDs, and licences carry no version (`CC-BY-NC`). The region is a bounding box. `tools/species/check_train_s3.py` holds the checks.
+
+### Added with build 9 (11 October 2026, 05:52)
+
+- **Which photos heads may be fitted on.** Only photos in the public domain (CC0, "no known copyright restrictions", United States Government work) or under CC BY or CC BY-NC; photos under any ND or SA licence are left out of fitting. The rule is called `nc` in `tools/eval/`. It is the coordinator's rule, waiting for the owner's word, and it assumes the app stays free of charge. Tuning photos, which only choose settings, are not cut by it.
+- **`fitted_on` in a slot's manifest**: `{rule, licence_rule, photos, by_licence, by_set, list, list_mb, sources}`. `rule` is a sentence the About block shows; `list` is the address of a CSV with one row a photo used for fitting (set, id, address, licence), shown as a link when it is an https address. The page tolerates the block's absence and any missing field.
+- **A model file with a checksum is kept under its checksum.** Where `vision.sha256` is 64 hex digits the encoder is fetched and kept as `<file>?v=sha256-<checksum>`, so a new manifest that names the same file costs no second download. Heads, tables and biases stay under the manifest's fingerprint.
+- **Offers never read the same.** Where two offered species share an English name, each button adds its scientific name; a species listed twice is offered once.
+- **Published heads that the live page depends on are pinned**: `pin/heads-pocket-v3-f0c2544` keeps the commit that holds `fitted_on.csv`; `pin/model-bioclip2-l14-462ecdc` keeps the larger model's parts; `pin/model-bioclip2-l14-b-add8cf5` keeps the external-data form of the same model (a 2 MB graph file and its weights in four parts, described by `parts.json` there), which the page does not use yet.
+- **New areas and their files**: `tools/audit/` and `docs/eval/audit.md` (an independent recomputation of the evaluation's headline numbers; it imports nothing from `tools/eval/` or `tools/fusion/`); `native/`, `ci/native/` and `.github/workflows/native.yml` (thin Android and iPhone shells around the built page, run on build machines by a push to `run/native/<label>`); `docs/ENGINES.md` (what ran on which engine, each figure with its run).
+- **The section "The species service" above is the first design.** What was built is in `service/README.md` and under "`service.json` at the site's root": Gradio's two-step call with a base64 photo. The service is not deployed.
