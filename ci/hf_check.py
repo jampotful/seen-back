@@ -23,3 +23,6 @@ else:
     if perms:
         print("hf fine-grained permissions:", ", ".join(sorted(perms)))
     print("hf account kind:", d.get("type"))
+    print("hf account is PRO:", d.get("isPro"))
+    print("hf e-mail verified:", d.get("emailVerified"))
+    print("hf whoami fields:", ", ".join(sorted(d.keys())))
