@@ -132,7 +132,8 @@ def main():
     log("  %d research-grade observations in the box" % n_obs)
 
     log("== photos")
-    first, photo_obs = {}, {}                    # observation -> its first photo; evaluation photo -> observation
+    photos_of, photo_obs = defaultdict(list), {}  # observation -> its photos; evaluation photo -> observation
+    obs_of_photo = defaultdict(set)              # one photo can be attached to several observations (a flower and its bee)
     n_ph = 0
     for r in read_tsv(args.photos):
         n_ph += 1
@@ -145,9 +146,25 @@ def main():
             pos = int(r.get("position") or 0)
         except ValueError:
             pos = 0
-        cur = first.get(u)
-        if cur is None or pos < cur[0]:
-            first[u] = (pos, pid, ext, r.get("license", ""))
+        photos_of[u].append((pos, int(pid) if pid.isdigit() else 0, pid, ext, r.get("license", "")))
+        obs_of_photo[pid].add(u)
+    first = {}                                   # observation -> its first photo that no other observation shares
+    shared_photos = {p for p, us in obs_of_photo.items() if len(us) > 1}
+    moved = lost = 0
+    for u, ph in photos_of.items():
+        ph.sort()
+        own = [t for t in ph if t[2] not in shared_photos]
+        if not own:
+            lost += 1
+            continue
+        if own[0] is not ph[0]:
+            moved += 1
+        pos, _, pid, ext, lic = own[0]
+        first[u] = (pos, pid, ext, lic)
+    line = ("photos attached to more than one observation: %d; observations whose first photo is one of them and which "
+            "use their next own photo: %d; observations left with no photo of their own: %d" % (len(shared_photos), moved, lost))
+    log("  " + line)
+    checks.append(line)
 
     log("== the evaluation photos' iNaturalist names")
     sci_of = {str(s["key"]): s["sci"] for s in sp["species"]}
