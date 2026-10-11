@@ -21,7 +21,7 @@ This file was brought up to date on 11 October 2026, when build 9 (commit `013bb
 - [x] The self-test passed in Chrome on a phone. *(93 of 93 in Chrome 154 on a phone with a Mali-G715 graphics chip, the same entry; the log does not name the phone's operating system)*
 - [ ] The self-test has yet to run in Safari on an iPhone. It has run only in Safari on iOS 26.5 in an iPhone 17 simulator on a build machine (`docs/LOG.md`, 11 October).
 
-Still open: the page has not run on an iPhone, and installing it to a home screen has not been checked on any device. Chromium 141 on a build machine reports no reason against installing it (`runs/engines/40-big-linux`, `docs/ENGINES.md`).
+The page has yet to run on an iPhone, and installing it to a home screen has not been checked on any device. Chromium 141 on a build machine reports no reason against installing it (`runs/engines/40-big-linux`, `docs/ENGINES.md`).
 
 ## Phase 2: recognition on the device (the pocket recognizer)
 
@@ -36,7 +36,7 @@ Goal: the page itself tells a cat from a heron from an oak, with no network, in 
 - [x] Measure the kind of eye on held-out local research-grade photos, per kind, with the confusion tables. *(`docs/EVAL.md`, `docs/eval/model-<id>.md`.)* In build 9 the kind is right for 89.1% (88.2 to 90.1) of the 4,197 test photos, and for 96.9% (1,201) of 1,240 COCO test photos of people, pets, grazing animals and rooms (`docs/eval/decision-pocket-v3.json`).
 - [ ] Measure the time a photo takes on a phone. It has been measured only on build machines (`docs/LOG.md`, 03:40).
 
-Still open: the line above that carries no tick. `docs/EVAL.md` is behind build 9: its rows called "live" describe the pocket slot of build 7, some of its naming figures predate the rule that a species is named only under an asserted kind, and four of its figures were rounded twice (`docs/eval/audit.md`).
+The line above that carries no tick is still open. `docs/EVAL.md` is behind build 9: its rows called "live" describe the pocket slot of build 7, some of its naming figures predate the rule that a species is named only under an asserted kind, and four of its figures were rounded twice (`docs/eval/audit.md`).
 
 ## Phase 3: species (the naturalist)
 
@@ -50,7 +50,7 @@ Goal: a species name for what was photographed, shown only when it is likely to 
 - [x] Measure its memory. The largest browser process peaked at 1,501 MiB in Chromium and at 1,688 to 2,598 MiB in the Apple and WebKit browsers (`docs/ENGINES.md`). In the laboratory, the weights handed to the runtime as a data file beside a 2 MB graph file cut the WASM heap from 821 to 429 MiB and the renderer's peak from 1,330 to 953 MiB, with identical vectors (`ci/lab/mem/results.json`). That form is measured and published on `pub/model-bioclip2-l14-b` (commit `add8cf5`, kept by `pin/model-bioclip2-l14-b-add8cf5`), and the page does not use it yet.
 - [x] Show uncertainty: under `offer_at` the page offers three species of the winning kind and lets the person choose. *(`docs/CONTRACTS.md`; `docs/EVAL.md`, "What the page would show")*
 
-Still open:
+These are still open:
 
 - No phone has held the larger model, and whether a phone's browser will keep a 310 MB file and find the memory to run it is unknown.
 - The page should load the larger model in its lighter form, with the weights as a data file beside a small graph file; the worker's side is written as `ci/lab/patches/worker-external-data.patch`, and the page's side is not.
@@ -69,7 +69,7 @@ Goal: species-level recognition on the device, offline, for the region.
 - [ ] Teach a small encoder from BioCLIP 2 (distillation) on openly licensed iNaturalist photos of the region's species.
 - [ ] Write a model card for the shipped slot, stating its data, licences, accuracy by group and known failures. The slot manifests carry an `evaluation` block, and `docs/eval/model-<id>.md` gives breakdowns by kind and the commonest mistakes for each model measured.
 
-Still open: the two lines above that carry no tick.
+The two lines above that carry no tick are still open.
 
 ## Phase 5: the game, sharing, and review
 
@@ -78,7 +78,7 @@ Still open: the two lines above that carry no tick.
 - [ ] Have a vision scientist review the sixteen eye models, and fold the corrections back into `docs/SOURCES.md`.
 - [ ] Build for the iPhone and Android stores, if the web app proves the case for them.
 
-Still open: every line of this phase. Thin app shells around the built page ran on build machines as an experiment (`native/README.md`): an Android WebView app on an Android 14 emulator and an iPhone WKWebView app in an iPhone 17 simulator each passed the page's self-test, 98 checks of 98. In the iPhone shell the larger model cannot be kept, because the app serves the page from its own address scheme and Cache Storage accepts only http and https addresses. No Android file has been published yet that the owner could put on a phone.
+Every line of this phase is still open. Thin app shells around the built page ran on build machines as an experiment (`native/README.md`): an Android WebView app on an Android 14 emulator and an iPhone WKWebView app in an iPhone 17 simulator each passed the page's self-test, 98 checks of 98. In the iPhone shell the larger model cannot be kept, because the app serves the page from its own address scheme and Cache Storage accepts only http and https addresses. No Android file has been published yet that the owner could put on a phone.
 
 ## What comes next, in order
 

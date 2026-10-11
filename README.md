@@ -17,7 +17,7 @@ The app is served at https://jampotful.github.io/seen-back/ . The page there is 
 | Installing to a home screen | Chromium 141 on a build machine reports no reason against installing the page | Any device |
 | Native shells, as an experiment (`native/`) | An Android WebView app on an Android 14 emulator and an iPhone WKWebView app in an iPhone 17 simulator, both on build machines; nothing is in a store | Any phone |
 
-What stands behind each row:
+The evidence for each row follows.
 
 - On 10 October the self-test of build 6 passed 93 of 93 checks on the phone in Chrome and on the MacBook Pro in both browsers. In Ecosia on the same phone it passed 92 of 93, because the test sampled a clip before the clip's first frame was in place, and build 7 fixed that race (`docs/LOG.md`, 10 October, 23:25, and 11 October, 02:26).
 - With the model that shipped in build 7, the pocket recognizer was ready in 2.1 to 6.4 seconds and answered a photo in 0.5 to 0.95 seconds in Chromium, WebKit and Safari on build machines, and in about 3.5 seconds in headless Firefox (`docs/LOG.md`, 03:40). With build 8 its vectors agreed with Python's in every engine tried; in Safari 26.6 and in the iPhone simulator all 14 photos agreed with a cosine of at least 0.9954 (`docs/ENGINES.md`). After a reload with the larger model kept, the first photo waited 25 to 42 seconds for the pocket recognizer's answer in Chromium on a build machine (`docs/ENGINES.md`); this delay is open.
