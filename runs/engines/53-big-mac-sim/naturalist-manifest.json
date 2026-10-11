@@ -1,0 +1,461 @@
+{
+ "id": "bioclip2-l14",
+ "licence": "MIT",
+ "source": "https://huggingface.co/imageomics/bioclip-2",
+ "vision": {
+  "graph": {
+   "url": "https://raw.githubusercontent.com/jampotful/seen-back/add8cf58da052a2f81b9b7465674dc29b51b46f9/vision.graph.onnx",
+   "bytes": 2175801,
+   "sha256": "7ef86b4b476d1904d18fdd01eae65886326bee65933422e2c7f8214e398df934"
+  },
+  "weights_name": "vision.weights.bin",
+  "parts": [
+   {
+    "url": "https://raw.githubusercontent.com/jampotful/seen-back/add8cf58da052a2f81b9b7465674dc29b51b46f9/vision.weights.bin.part00",
+    "bytes": 90000000,
+    "sha256": "78e858068a57fdb8d5d0295e3a688a59db84b5a2efd6817b82e2c6313ba7877a"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/jampotful/seen-back/add8cf58da052a2f81b9b7465674dc29b51b46f9/vision.weights.bin.part01",
+    "bytes": 90000000,
+    "sha256": "0dfb7095917c8a6f940611c14be64e079585e44e0f66809c754cf694741958c1"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/jampotful/seen-back/add8cf58da052a2f81b9b7465674dc29b51b46f9/vision.weights.bin.part02",
+    "bytes": 90000000,
+    "sha256": "d9240225d72b3ceed8a0866ddaebb534587398ccd23c4a9a51b7359f38e43372"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/jampotful/seen-back/add8cf58da052a2f81b9b7465674dc29b51b46f9/vision.weights.bin.part03",
+    "bytes": 37658752,
+    "sha256": "a0159ba0eae082132b61cda59e5636e912723d5916356badbb2add23e1f84f24"
+   }
+  ],
+  "bytes": 307658752,
+  "sha256": "9bb90d945849da04a5874d4b2a0e016dd4a00b6a2d78bf79a17fb6da58b09242",
+  "from": "pub/model-bioclip2-l14-b at add8cf58da05 (the file of pub/model-bioclip2-l14 at 462ecdc32774, recipe hybrid-fc2-w8, with its weights as an external data file)",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center-round",
+  "preprocessing_as_the_laboratory_states_it": {
+   "resize": "shortest side to 224, the other side int(224 * long / short) (truncated), bicubic with antialiasing (torchvision Resize on a PIL image, i.e. PIL's BICUBIC)",
+   "crop": "centre 224 x 224: left = round((W - 224) / 2), top = round((H - 224) / 2) with halves rounded to even (Python round, as torchvision CenterCrop)"
+  }
+ },
+ "width": 768,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ],
+  "made_from": "kind phrases"
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5911
+ },
+ "fusion": {
+  "t_kind": 100.0,
+  "t_species": 100.0,
+  "alpha_prior": 1.0,
+  "w_kind": 0.5,
+  "rule": "mix",
+  "name_at": 0.78,
+  "offer_at": 0.67,
+  "prior_floor": 1e-06,
+  "kind_at": 0.5
+ },
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on val by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+ "evaluation": {
+  "model": "bioclip2-l14",
+  "head": "sentences",
+  "choice": "species_sci",
+  "train": "sentences",
+  "train_vectors": "none (sentence rows only)",
+  "test_vectors": "images/alachua-2025",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 2.0,
+   "c": 1.0
+  },
+  "kind_head": "kind phrases",
+  "kind_tuned_with_extra_set": true,
+  "as_shipped": {
+   "from": "shipped-sentences-bioclip2-l14.json",
+   "test_photos": 4197,
+   "kind_right": [
+    0.9802,
+    0.9757,
+    0.984,
+    4197
+   ],
+   "species_top1": [
+    0.9245,
+    0.9164,
+    0.9323,
+    4197
+   ],
+   "named": [
+    0.8456,
+    0.8337,
+    0.8563,
+    4197
+   ],
+   "named_right": [
+    0.9808,
+    0.976,
+    0.9851,
+    3549
+   ],
+   "offered": [
+    0.1127,
+    0.1034,
+    0.1229,
+    4197
+   ],
+   "offered_holds_species": [
+    0.9218,
+    0.8964,
+    0.945,
+    473
+   ]
+  },
+  "int8": [
+   {
+    "name": "bioclip2-l14-wasm-hybrid-fc2-w8",
+    "vectors": "runs/lab/25-device-hybrid-fc2-w8/wasm_hybrid-fc2-w8.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 25 of the laboratory)",
+    "test_photos": 320,
+    "cosine_to_original": {
+     "mean": 0.9988,
+     "p01": 0.9962,
+     "min": 0.99
+    },
+    "original": {
+     "kind_right": [
+      0.9844,
+      0.9688,
+      0.9969,
+      320
+     ],
+     "species_top1": [
+      0.9406,
+      0.9125,
+      0.9656,
+      320
+     ],
+     "species_top5": [
+      0.9719,
+      0.95,
+      0.9875,
+      320
+     ],
+     "named": [
+      0.8875,
+      0.85,
+      0.9187,
+      320
+     ],
+     "named_right": [
+      0.9789,
+      0.9613,
+      0.993,
+      284
+     ],
+     "offered": [
+      0.0781,
+      0.05,
+      0.1094,
+      320
+     ],
+     "offered_holds_species": [
+      0.92,
+      0.8,
+      1.0,
+      25
+     ],
+     "kind_only": [
+      0.0344,
+      0.0156,
+      0.0562,
+      320
+     ]
+    },
+    "variant": {
+     "kind_right": [
+      0.9812,
+      0.9656,
+      0.9937,
+      320
+     ],
+     "species_top1": [
+      0.9375,
+      0.9094,
+      0.9625,
+      320
+     ],
+     "species_top5": [
+      0.9688,
+      0.9469,
+      0.9875,
+      320
+     ],
+     "named": [
+      0.8781,
+      0.8406,
+      0.9125,
+      320
+     ],
+     "named_right": [
+      0.9786,
+      0.9609,
+      0.9929,
+      281
+     ],
+     "offered": [
+      0.0906,
+      0.0625,
+      0.1219,
+      320
+     ],
+     "offered_holds_species": [
+      0.8966,
+      0.7931,
+      1.0,
+      29
+     ],
+     "kind_only": [
+      0.0312,
+      0.0125,
+      0.0531,
+      320
+     ]
+    },
+    "paired_difference": {
+     "kind_right": [
+      -0.0031,
+      -0.0094,
+      0.0,
+      320
+     ],
+     "top1": [
+      -0.0031,
+      -0.0094,
+      0.0,
+      320
+     ],
+     "top5": [
+      -0.0031,
+      -0.0094,
+      0.0,
+      320
+     ],
+     "named": [
+      -0.0094,
+      -0.025,
+      0.0031,
+      320
+     ],
+     "named_right": [
+      -0.0094,
+      -0.025,
+      0.0031,
+      320
+     ]
+    },
+    "same_top_species": [
+     0.9906,
+     0.9781,
+     1.0,
+     320
+    ]
+   },
+   {
+    "name": "bioclip2-l14-wasm-int8-per-channel",
+    "vectors": "runs/lab/25-device-int8-per-channel/wasm_int8-per-channel.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 25 of the laboratory)",
+    "test_photos": 320,
+    "cosine_to_original": {
+     "mean": 0.9932,
+     "p01": 0.9713,
+     "min": 0.9429
+    },
+    "original": {
+     "kind_right": [
+      0.9844,
+      0.9688,
+      0.9969,
+      320
+     ],
+     "species_top1": [
+      0.9406,
+      0.9125,
+      0.9656,
+      320
+     ],
+     "species_top5": [
+      0.9719,
+      0.95,
+      0.9875,
+      320
+     ],
+     "named": [
+      0.8875,
+      0.85,
+      0.9187,
+      320
+     ],
+     "named_right": [
+      0.9789,
+      0.9613,
+      0.993,
+      284
+     ],
+     "offered": [
+      0.0781,
+      0.05,
+      0.1094,
+      320
+     ],
+     "offered_holds_species": [
+      0.92,
+      0.8,
+      1.0,
+      25
+     ],
+     "kind_only": [
+      0.0344,
+      0.0156,
+      0.0562,
+      320
+     ]
+    },
+    "variant": {
+     "kind_right": [
+      0.9812,
+      0.9656,
+      0.9937,
+      320
+     ],
+     "species_top1": [
+      0.9312,
+      0.9,
+      0.9563,
+      320
+     ],
+     "species_top5": [
+      0.9812,
+      0.9656,
+      0.9937,
+      320
+     ],
+     "named": [
+      0.875,
+      0.8375,
+      0.9094,
+      320
+     ],
+     "named_right": [
+      0.9821,
+      0.9643,
+      0.9964,
+      280
+     ],
+     "offered": [
+      0.0875,
+      0.0594,
+      0.1188,
+      320
+     ],
+     "offered_holds_species": [
+      0.9286,
+      0.8214,
+      1.0,
+      28
+     ],
+     "kind_only": [
+      0.0375,
+      0.0188,
+      0.0594,
+      320
+     ]
+    },
+    "paired_difference": {
+     "kind_right": [
+      -0.0031,
+      -0.0094,
+      0.0,
+      320
+     ],
+     "top1": [
+      -0.0094,
+      -0.0281,
+      0.0094,
+      320
+     ],
+     "top5": [
+      0.0094,
+      0.0,
+      0.0219,
+      320
+     ],
+     "named": [
+      -0.0125,
+      -0.0344,
+      0.0094,
+      320
+     ],
+     "named_right": [
+      -0.0094,
+      -0.0281,
+      0.0094,
+      320
+     ]
+    },
+    "same_top_species": [
+     0.9625,
+     0.9406,
+     0.9812,
+     320
+    ]
+   }
+  ]
+ },
+ "needs": [
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fusion_thresholds_note": "name_at is the level from which a named species was right at least 98 times in 100 on val, and offer_at the level from which the three offered species held the right one nine times in ten for the photos left without a name (tools/eval/shipped.py through tools/fusion/fuse.py; 2 means never). As shipped, with kind_at 0.5, on the 4,197 test photos with the original model's vectors: a species named for 84.2% (3,533) and right for 98.2% of those (3,469); recomputed independently by tools/audit/recompute.py (docs/eval/audit.md). Without kind_at the figures are 84.6% and 98.1%.",
+ "fusion_kind_at_note": "kind_at 0.5 was set for the photos this model is asked about: ones the small model has already called alive. On the wildlife photos its kind of eye is then asserted for 98 photos in 100 and right for 0.990 on val (1,803) and 0.989 on test (4,197), original-model vectors, through tools/fusion/fuse.py (tools/eval/nat_kind_at.py). On photos of people and rooms no level reached 95 in 100, which is why the page never asks this model about a person, and asks it about a photo with nothing alive only when the person says to.",
+ "seconds_a_photo": {
+  "computer": 5
+ },
+ "seconds_note": "4.9 s a photo was measured in Node with onnxruntime-web 1.30.0, one thread, on a build machine (laboratory run 25). No phone has been measured."
+}
