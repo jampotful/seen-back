@@ -729,6 +729,36 @@ def onnx_ops(path):
     return ops, opset
 
 
+def parity_one(argv):
+    """_parity <onnx> <pv.npy> <ref.npy> <has_ref>: prints one JSON line (cosines vs the original model, latency)."""
+    f, pvf, reff, has_ref = argv
+    pv = np.load(pvf).astype(np.float32)
+    ref = np.load(reff)
+    info = {}
+    try:
+        s = ort_session(f)
+        if has_ref == "1":
+            outs = [s.run(None, {"pixel_values": pv[i:i + 8]})[0] for i in range(0, len(pv), 8)]
+            got = np.concatenate(outs)
+            cos = (unit(got) * unit(ref)).sum(-1)
+            info["cosine_vs_torch"] = {"mean": float(cos.mean()), "min": float(cos.min()), "max": float(cos.max())}
+            info["output_norm_mean"] = float(np.linalg.norm(got, axis=-1).mean())
+        s1 = ort_session(f, threads=1)
+        x1 = pv[:1]
+        for _ in range(3):
+            s1.run(None, {"pixel_values": x1})
+        ts = []
+        for _ in range(20):
+            t0 = time.perf_counter()
+            s1.run(None, {"pixel_values": x1})
+            ts.append(time.perf_counter() - t0)
+        info["latency_ms_1thread"] = {"mean": round(1000 * float(np.mean(ts)), 2), "min": round(1000 * float(np.min(ts)), 2),
+                                      "runs": 20, "warmup": 3, "batch": 1}
+    except Exception as e:
+        info["run_error"] = "%s: %s" % (type(e).__name__, e)
+    print(json.dumps(info), flush=True)
+
+
 def stage_export(args):
     entry = model_entry(args.model)
     out = pathlib.Path(args.out)
@@ -806,6 +836,11 @@ def stage_export(args):
     if fp16_note:
         parity["fp16_note"] = fp16_note
     xs1 = pv_np[:1] if pv_np is not None else np.random.randn(1, 3, size, size).astype(np.float32)
+    # each file is measured in its own process, so that a crash inside onnxruntime costs one row, not the stage
+    import subprocess
+
+    np.save(tmp / "_pv.npy", pv_np if pv_np is not None else xs1)
+    np.save(tmp / "_ref.npy", ref if ref is not None else np.zeros((len(xs1), 1), np.float32))
     for variant, f in files.items():
         info = {"bytes": f.stat().st_size, "mb": round(f.stat().st_size / 1e6, 2)}
         try:
@@ -814,30 +849,12 @@ def stage_export(args):
             info["opset_import"] = opset
         except Exception as e:
             info["ops_error"] = str(e)
+        r = subprocess.run([sys.executable, "-u", __file__, "_parity", str(f), str(tmp / "_pv.npy"), str(tmp / "_ref.npy"),
+                            "1" if ref is not None else "0"], capture_output=True, text=True)
         try:
-            s = ort_session(f)
-            if pv_np is not None:
-                outs = []
-                for i in range(0, len(pv_np), 8):
-                    outs.append(s.run(None, {"pixel_values": pv_np[i:i + 8]})[0])
-                got = np.concatenate(outs)
-                cos = (unit(got) * unit(ref)).sum(-1)
-                info["cosine_vs_torch"] = {"mean": float(cos.mean()), "min": float(cos.min()),
-                                           "max": float(cos.max())}
-                info["output_norm_mean"] = float(np.linalg.norm(got, axis=-1).mean())
-            s1 = ort_session(f, threads=1)
-            for _ in range(3):
-                s1.run(None, {"pixel_values": xs1})
-            ts = []
-            for _ in range(20):
-                t0 = time.perf_counter()
-                s1.run(None, {"pixel_values": xs1})
-                ts.append(time.perf_counter() - t0)
-            info["latency_ms_1thread"] = {"mean": round(1000 * float(np.mean(ts)), 2),
-                                          "min": round(1000 * float(np.min(ts)), 2), "runs": 20, "warmup": 3,
-                                          "batch": 1}
-        except Exception as e:
-            info["run_error"] = "%s: %s" % (type(e).__name__, e)
+            info.update(json.loads(r.stdout.strip().splitlines()[-1]))
+        except Exception:
+            info["run_error"] = "measuring process ended with code %s: %s" % (r.returncode, (r.stderr or "")[-400:])
         parity["files"][variant] = info
         log("%s: %s" % (variant, json.dumps({k: v for k, v in info.items() if k not in ("ops",)})))
     best = None
@@ -865,7 +882,7 @@ def stage_export(args):
         np.ascontiguousarray(ref[:k], dtype=np.float32).tofile(wd / "torch_ref.f32")
         for variant in ("int8", "fp16", "fp32"):
             f = files.get(variant)
-            if f is None:
+            if f is None or "run_error" in parity["files"].get(variant, {}):
                 continue
             try:
                 s = ort_session(f)
@@ -994,6 +1011,9 @@ def stage_merge(args):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "_parity":
+        parity_one(sys.argv[2:])
+        return
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="stage", required=True)
     t = sub.add_parser("text")
