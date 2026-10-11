@@ -2,15 +2,18 @@
 
 Usage: python3 ci/service/build_heads.py --rows text/species_sci.f16.npy --labels text/species_sci.labels.json
            --species data/regions/us-fl-alachua/species.json [--inat inat.json] [--card card.json] --out service/heads/us-fl-alachua
-           [--t 30] [--alpha 0.25] [--smooth 0.5]
+           [--t 100] [--alpha 0.8333] [--smooth 0.5]
 
 Writes, in the layout of the page's models/<slot>/:
   manifest.json     id, source, licence, width, species {url, table, count}, fusion {t_species, alpha_prior, prior_floor}
   species.f16.bin   raw little-endian float16 rows, unit length, in the order of the species list
   species.json      {"species": [[scientific, English, kind, [twelve monthly weights]], ...], "keys": [GBIF keys]}
 The monthly weights are the list's record counts plus `smooth`, so that the page's prior rule (each species' share of
-the month's weights, floored) reproduces the first-look script's (M + 0.5) arithmetic. Settings are provisional until
-the evaluation agent hands over tuned ones.
+the month's weights, floored) reproduces the first-look script's (M + 0.5) arithmetic. Temperature 100 with prior weight 0.8333 ranks every species exactly as the
+first-look setting (30, 0.25) does, since only the ratio of the two decides the order; 100 is where the negative
+log-likelihood on the val split is lowest (ci/service/calibrate.py). At 30 the probabilities are so flat that the
+species summed by kind of eye pick the right kind on only 44% of photos. Settings are provisional until the
+evaluation agent hands over tuned ones.
 """
 import argparse
 import hashlib
@@ -29,8 +32,8 @@ def main():
     ap.add_argument("--card")
     ap.add_argument("--out", required=True)
     ap.add_argument("--rowset", default="species_sci")
-    ap.add_argument("--t", type=float, default=30.0)
-    ap.add_argument("--alpha", type=float, default=0.25)
+    ap.add_argument("--t", type=float, default=100.0)
+    ap.add_argument("--alpha", type=float, default=round(0.25 * 100 / 30, 4))
     ap.add_argument("--smooth", type=float, default=0.5)
     a = ap.parse_args()
 
@@ -84,7 +87,7 @@ def main():
         "prior_weights": "monthly record counts through %s plus %g" % (sp.get("source", {}).get("records_through", "?"), a.smooth),
         "names": "English names from iNaturalist for %d species, from the species list for the rest" % n_inat,
         "provisional": True,
-        "note": "Provisional settings from the first-look script (temperature 30, prior weight 0.25); the evaluation agent's tuned rows and settings replace them.",
+        "note": "Provisional: the first-look ranking (temperature 30, prior weight 0.25) at temperature 100 and prior weight 0.8333, the same order with the lowest val negative log-likelihood (ci/service/calibrate.py); the evaluation agent's tuned rows and settings replace them.",
     }
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False), encoding="utf-8")
     print("head %s: %d species x %d, row norms before %.4f..%.4f, iNaturalist names %d, t %g, alpha %g"

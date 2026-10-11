@@ -24,7 +24,7 @@ It runs [BioCLIP 2](https://huggingface.co/imageomics/bioclip-2) (ViT-L/14, MIT 
 [licence text](https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE)) on the photo and scores the result
 against the 5,911 species recorded in Alachua County, Florida, by their scientific names, weighted by how often each
 species was recorded in the photo's month. The species list and its monthly counts come from iNaturalist research-grade
-observations through GBIF, recorded through 2024. The settings (temperature 30, prior weight 0.25) are provisional.
+observations through GBIF, recorded through 2024. The settings (temperature 100, prior weight 0.83) are provisional.
 
 On ZeroGPU the image encoder runs on a GPU for a fraction of a second per photo; elsewhere it runs on the processor.
 

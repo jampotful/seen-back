@@ -20,4 +20,6 @@ python3 ci/service/build_heads.py --rows lab/text/species_sci.f16.npy --labels l
   --species data/regions/us-fl-alachua/species.json --card lab/card.json "${inat[@]}" --out service/heads/us-fl-alachua | tee -a "$out/log.txt"
 python3 ci/service/check_head.py --head service/heads/us-fl-alachua --images lab/images/alachua-2025.f16.npy \
   --ids lab/images/alachua-2025.ids.json --manifest data/eval/alachua-2025/manifest.csv | tee -a "$out/log.txt"
+(cd ci/service && python3 calibrate.py --head ../../service/heads/us-fl-alachua --images ../../lab/images/alachua-2025.f16.npy \
+  --ids ../../lab/images/alachua-2025.ids.json --manifest ../../data/eval/alachua-2025/manifest.csv) | tee "$out/calibrate.txt"
 cp service/heads/us-fl-alachua/manifest.json "$out/heads-manifest.json"
