@@ -2,10 +2,16 @@
 """Turn a laboratory model branch (pub/lab-<id>, checked out or extracted into a directory) into a slot the page can load.
 
   python3 -I test/rec/make_slot.py <lab dir> <out dir> [--species <label set, e.g. species_com>] [--list <species.json of a region>]
+                                   [--inat <inat.json of that region>] [--inat-min-share 0.5]
                                    [--fusion '<json>'] [--photos <dir of photos>] [--model int8|fp16|fp32]
 
 Writes <out dir>/manifest.json, vision.<model>.onnx, kinds.f16.bin and, with --species, species.f16.bin and species.json
 (rows [scientific, English, kind, twelve monthly weights]; the weights come from --list by GBIF key, and are left out without it).
+
+The names in the table are the names a person is shown. With --inat they are iNaturalist's (data/regions/<region>/inat.json, by GBIF
+species key): its scientific name, and its English name where it has one; then the species list's English name; then the label set's.
+The vectors were made from GBIF's names and stay as they are: only what is shown changes. GBIF's keys are kept beside the rows
+("keys", in row order), so that a row can be traced back to the list whatever it is called on screen.
 The fusion settings default to the example in docs/CONTRACTS.md and are marked as untuned.
 With --photos it also writes expect.json and pre/<name>.u8: what Pillow and onnxruntime give here for each photo, for test/rec/check_rec.js to compare the browser with.
 """
@@ -15,6 +21,8 @@ import numpy as np
 ap = argparse.ArgumentParser()
 ap.add_argument("lab"); ap.add_argument("out")
 ap.add_argument("--species"); ap.add_argument("--list"); ap.add_argument("--fusion"); ap.add_argument("--photos")
+ap.add_argument("--inat", help="iNaturalist's names by GBIF species key: {\"<key>\": {\"inat_id\", \"sci\", \"en\", \"share\"}}")
+ap.add_argument("--inat-min-share", type=float, default=0.0, help="use iNaturalist's name only where that taxon has at least this share of the key's records (default: always)")
 ap.add_argument("--model", default="int8", help="which of the branch's files to use: int8 (the default), fp16 or fp32")
 a = ap.parse_args()
 lab, out = pathlib.Path(a.lab), pathlib.Path(a.out)
@@ -49,11 +57,31 @@ if a.species:
     by_key = {}
     if a.list:
         by_key = {s["key"]: s for s in json.loads(pathlib.Path(a.list).read_text(encoding="utf-8"))["species"]}
-    table = [[r["sci"], r.get("en", ""), r["eyes"], (by_key.get(r["key"]) or {}).get("m")] for r in rows]
+    inat = json.loads(pathlib.Path(a.inat).read_text(encoding="utf-8")) if a.inat else {}
+    told = {"inat_sci": 0, "sci_differs": 0, "inat_en": 0, "list_en": 0, "label_en": 0, "no_en": 0, "below_share": 0}
+
+    def shown(r):
+        """The two names a person sees for this row: scientific, English."""
+        i, l = inat.get(str(r["key"])) or {}, by_key.get(r["key"]) or {}
+        if i and float(i.get("share") or 0) < a.inat_min_share:
+            told["below_share"] += 1; i = {}
+        clean = lambda v: " ".join(str(v or "").split())
+        sci = clean(i.get("sci")) or clean(r["sci"])
+        told["inat_sci"] += bool(clean(i.get("sci"))); told["sci_differs"] += bool(clean(i.get("sci"))) and clean(i.get("sci")) != clean(r["sci"])
+        for source, en in (("inat_en", clean(i.get("en"))), ("list_en", clean(l.get("en"))), ("label_en", clean(r.get("en"))), ("no_en", "")):
+            if en or source == "no_en":
+                told[source] += 1
+                return sci, en
+
+    table = [list(shown(r)) + [r["eyes"], (by_key.get(r["key"]) or {}).get("m")] for r in rows]
     vec.astype("<f2").tofile(out / "species.f16.bin")
-    (out / "species.json").write_text(json.dumps({"columns": ["sci", "en", "kind", "m"], "set": a.species, "species": table}, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    (out / "species.json").write_text(json.dumps({"columns": ["sci", "en", "kind", "m"], "set": a.species, "names": "inat" if a.inat else "labels",
+                                                  "keys": [r["key"] for r in rows], "species": table}, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     manifest["species"] = {"url": "species.f16.bin", "table": "species.json", "count": len(rows)}
     print("species:", len(rows), "rows,", sum(1 for t in table if t[3]), "with monthly weights")
+    if a.inat:
+        print("names: scientific from iNaturalist for %(inat_sci)d rows (%(sci_differs)d differ from GBIF's); English from iNaturalist %(inat_en)d, "
+              "from the species list %(list_en)d, from the label set %(label_en)d, none %(no_en)d; %(below_share)d keys under the share asked for" % told)
 (out / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n", encoding="utf-8")
 print("slot", out, "| model", manifest["vision"]["bytes"], "bytes | kinds", kinds.shape)
 
