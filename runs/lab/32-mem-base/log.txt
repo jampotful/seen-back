@@ -1,0 +1,42 @@
+[08:45:17] memory job mem-base; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1455       12263          42        2632       14533
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:45 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:45 vision.int8.onnx
+
+added 18 packages in 2s
+photos: 24 rows, 24 to fetch, 0 failed, 0.5s
+pixels: 24 photos (0 skipped), every 13-th test row
+model:
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:45 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:45 vision.int8.onnx
+[08:45:35] route base: {"name": "base", "form": "onnx", "options": {}, "drop_js": false, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":55.4,"peak_mb":55.4,"heap_mb":0}
+{"step":"file read","rss_mb":352.3,"peak_mb":352.3,"heap_mb":0,"ms":26}
+{"step":"session created","rss_mb":1249,"peak_mb":1249,"heap_mb":819.4,"ms":898}
+{"step":"warm-up (empty picture)","rss_mb":1367.2,"peak_mb":1426.5,"heap_mb":819.4,"ms":2882}
+{"step":"photo 1","rss_mb":1369.8,"peak_mb":1369.8,"heap_mb":819.4,"ms":2797}
+{"step":"photo 10","rss_mb":1370.1,"peak_mb":1370.1,"heap_mb":819.4,"ms":2781}
+{"step":"photo 24","rss_mb":1370.2,"peak_mb":1370.2,"heap_mb":819.4,"ms":2806}
+route base: ready 898 ms, heap 819.4 MB, photo mean 2794 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:10.93
+	Maximum resident set size (kbytes): 1402768
+[08:46:46] route base-drop: {"name": "base-drop", "form": "onnx", "options": {}, "drop_js": true, "model": "model/vision.int8.onnx", "photos": 24}
+{"step":"start","rss_mb":57.1,"peak_mb":57.1,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":27}
+{"step":"session created","rss_mb":1246.3,"peak_mb":1246.3,"heap_mb":819.4,"ms":810}
+{"step":"file bytes let go","rss_mb":943,"peak_mb":1248.7,"heap_mb":819.4}
+{"step":"warm-up (empty picture)","rss_mb":1164.9,"peak_mb":1166.4,"heap_mb":819.4,"ms":2960}
+{"step":"photo 1","rss_mb":1167.3,"peak_mb":1167.3,"heap_mb":819.4,"ms":2815}
+{"step":"photo 10","rss_mb":1167.8,"peak_mb":1167.8,"heap_mb":819.4,"ms":2877}
+{"step":"photo 24","rss_mb":1167.8,"peak_mb":1167.8,"heap_mb":819.4,"ms":2876}
+route base-drop: ready 810 ms, heap 819.4 MB, photo mean 2849 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:12.22
+	Maximum resident set size (kbytes): 1195412
+[08:47:58] memory job done, fail=0
