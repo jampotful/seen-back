@@ -1,0 +1,16 @@
+{
+ "about": "Numbers only (nothing is published): BioCLIP 2's image encoder with 4-bit block weights (MatMulNBits, blocks of 32, float activations), through onnxruntime-web 1.30.0's WASM build on the same 320 test photos as device-l14; scored afterwards with tools/lab/device.py score on the returned vectors.",
+ "models": [],
+ "stages": [],
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "publish": false,
+ "device": {
+  "model": "bioclip2-l14",
+  "jobs": [["w4-block32"]],
+  "photos": 320,
+  "branch": "",
+  "max_parallel": 1
+ },
+ "max_parallel": 1
+}

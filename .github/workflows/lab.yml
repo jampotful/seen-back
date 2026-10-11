@@ -184,7 +184,7 @@ jobs:
           {
             python3 -m pip install --quiet --upgrade pip
             python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
-            python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" onnx onnxruntime onnxconverter-common numpy pillow huggingface_hub safetensors ftfy regex sentencepiece protobuf
+            python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" onnx onnxruntime onnxconverter-common onnx-ir numpy pillow huggingface_hub safetensors ftfy regex sentencepiece protobuf
             python3 -m pip list 2>/dev/null | grep -i -E "^(torch|torchvision|open.clip|timm|transformers|onnx|onnxruntime|numpy|pillow|huggingface)"
             nproc; free -g; df -h . | tail -1
           } 2>&1 | tee -a ret/log.txt

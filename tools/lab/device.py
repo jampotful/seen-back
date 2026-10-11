@@ -96,8 +96,11 @@ def make_recipe(tag, fp32, dst, work):
 
         try:
             from onnxruntime.quantization.matmul_nbits_quantizer import MatMulNBitsQuantizer as Q
-        except Exception:
-            from onnxruntime.quantization.matmul_4bits_quantizer import MatMul4BitsQuantizer as Q
+        except ModuleNotFoundError:
+            # onnxruntime's NBits quantizer imports onnx_ir, which is not among its own requirements
+            import subprocess
+            subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "onnx-ir"], check=False)
+            from onnxruntime.quantization.matmul_nbits_quantizer import MatMulNBitsQuantizer as Q
         q = Q(onnx.load(str(fp32)), block_size=32, is_symmetric=True)
         q.process()
         q.model.save_model_to_file(str(dst), use_external_data_format=False)
