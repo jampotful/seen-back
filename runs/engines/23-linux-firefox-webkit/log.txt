@@ -1,0 +1,43 @@
+
+=== 05:40:27 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1298       12531          40        2518       14691
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 7763 64-Core Processor
+Flags: avx2 
+
+=== 05:40:27 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build.py patched
+build 6 | index.html 142955 bytes | artifact 140377 bytes | selftest.js 44338 bytes
+build ok
+142977 index.html
+44338 selftest.js
+
+=== 05:40:28 playwright 1.56.0: firefox webkit
+added 2 packages in 1s
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Firefox 142.0.1 (playwright build v1495) from https://cdn.playwright.dev/dbazure/download/playwright/builds/firefox/1495/firefox-ubuntu-24.04.zip
+Firefox 142.0.1 (playwright build v1495) downloaded to /home/runner/.cache/ms-playwright/firefox-1495
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-ubuntu-24.04.zip
+Webkit 26.0 (playwright build v2215) downloaded to /home/runner/.cache/ms-playwright/webkit-2215
+mesa and xvfb: exit 0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+8782 -> 200
+
+=== 05:41:20 rec_probe.js in WebKit, PHONE=0
+probe: exit 0
+phone False | offline {"loaded": true, "controlled": true, "timeline": [[3, {"state": "ready", "why": "", "fail": "", "loadMs": 1523, "got": 0}]], "asked": ["index.html", "manifest.webmanifest", "test/rec/models/standin/manifest.json", "sw.js"]}
+keptBad [[14, {"state": "idle", "why": "", "fail": "", "loadMs": 0, "got": 0}], [1281, {"state": "loading", "why": "", "fail": "", "loadMs": 0, "got": 0}], [2047, {"state": "failed", "why": "damaged", "fail": "damaged: session Error Can't create a session. ERROR_CODE: 7, ERROR_MESSAGE: Failed to load model because protobuf parsing failed.", "loadMs": 0, "got": 0}]]
+error None
+
+=== 05:41:35 rec_probe.js in WebKit, PHONE=1
+probe: exit 0
+phone True | offline {"loaded": true, "controlled": true, "timeline": [[7, {"state": "failed", "why": "network", "fail": "network: test/rec/models/standin/manifest.json", "loadMs": 0, "got": 0}]], "asked": ["index.html", "manifest.webmanifest", "sw.js", "test/rec/models/standin/manifest.json"]}
+keptBad [[8, {"state": "idle", "why": "", "fail": "", "loadMs": 0, "got": 0}], [1365, {"state": "loading", "why": "", "fail": "", "loadMs": 0, "got": 525832}], [1621, {"state": "loading", "why": "", "fail": "", "loadMs": 0, "got": 15165296}], [2900, {"state": "ready", "why": "", "fail": "", "loadMs": 1628, "got": 15165296}]]
+error None
