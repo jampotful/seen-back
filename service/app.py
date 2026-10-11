@@ -128,8 +128,8 @@ def _embed(x):
     return e.float().cpu().numpy()[0]
 
 
-# ZeroGPU admits a call only while the visitor's remaining daily quota covers the declared duration, and a shorter
-# declaration gets better queue priority; one 224-pixel photo through ViT-L/14 takes a small fraction of this.
+# Hugging Face's ZeroGPU page: "Specifying shorter durations for quicker functions will improve queue priority for
+# Space visitors." One 224-pixel photo through ViT-L/14 should take a small fraction of ten seconds (not yet measured on a GPU).
 embed = spaces.GPU(duration=10)(_embed) if spaces is not None else _embed
 
 # ---------------------------------------------------------------- manners: rate limit, counting
