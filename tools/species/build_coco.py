@@ -132,7 +132,7 @@ def main():
         for block in iter(lambda: f.read(1 << 20), b""):
             h.update(block)
     zsha, zsize = h.hexdigest(), Path(args.zip).stat().st_size
-    rows, problems, shortfalls = [], [], []
+    rows, problems, shortfalls, largest = [], [], [], {}
     pools, reasons, lic_tables, shares, deer_mix, chosen_mix = {}, {}, {}, defaultdict(list), {}, {}
     with zipfile.ZipFile(args.zip) as zf:
         for split, sdir in SPLITS:
@@ -170,9 +170,13 @@ def main():
                     shortfalls.append(note)     # reported in the summary; the set is still published
                 for im in pick:
                     anns = [a for a in by_img[im["id"]] if not a.get("iscrowd")]
+                    top_name, top_share = "", 0.0
                     if anns:
                         top = max(anns, key=lambda a: (a["area"], -a["id"]))
-                        shares[(split, kind)].append(top["area"] / float(im["width"] * im["height"]))
+                        top_name, top_share = cats[top["category_id"]]["name"], top["area"] / float(im["width"] * im["height"])
+                        shares[(split, kind)].append(top_share)
+                    largest["c%06d" % im["id"]] = (top_name, top_share, len(by_img[im["id"]]),
+                                                   sum(1 for a in by_img[im["id"]] if a.get("iscrowd")))
                     l = lic.get(im.get("license"), {})
                     date = (im.get("date_captured") or "")[:10]
                     photo = im["coco_url"]
@@ -208,6 +212,12 @@ def main():
         w.writerow(COLUMNS)
         for r in rows:
             w.writerow([r[c] for c in COLUMNS])
+    with open(out / "largest.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["id", "split", "eyes", "largest", "largest_share", "annotations", "crowd_regions"])
+        for r in rows:
+            nm, sh, na, nc = largest[r["id"]]
+            w.writerow([r["id"], r["split"], r["eyes"], nm, "%.4f" % sh, na, nc])
     # ---- summary
     got = Counter((r["split"], r["eyes"]) for r in rows)
     L = ["# Extra photos: kinds the wildlife records lack (COCO 2017)", "",
@@ -217,6 +227,9 @@ def main():
              len(rows), len(tr), len(te)), "",
          "The manifest lists addresses only. Photos are downloaded when a laboratory or evaluation run needs them and "
          "are never committed or republished.", "",
+         "`largest.csv` (same ids, same order) gives each image's largest annotation, the share of the image it covers, "
+         "and how many annotations the image has, so a training run can leave out images whose subject is small "
+         "(the rules set no minimum size for cats, dogs and grazing animals) without rebuilding this set.", "",
          "## Rules", ""]
     L += ["- `person`: the largest annotation (by annotated area, crowd regions left out) is a person covering at least "
           "a fifth of the image, and no animal is annotated.",
@@ -248,6 +261,21 @@ def main():
     for lid, l in sorted(lic_tables["train"].items()):
         code = licence_id(l.get("url"), l.get("name"))
         L.append("| %d | %s | %s | %s | %d | %d |" % (lid, code, l.get("name"), l.get("url"), lc[("train", code)], lc[("test", code)]))
+    L += ["", "What COCO's terms of use say (the page's source, `dataset/termsofuse.htm` in "
+          "github.com/cocodataset/cocodataset.github.io, read 2026-10-11 at commit 5e1c4da7): \"The annotations in this "
+          "dataset along with this website belong to the COCO Consortium and are licensed under a Creative Commons "
+          "Attribution 4.0 License.\" \"The COCO Consortium does not own the copyright of the images. Use of the images "
+          "must abide by the Flickr Terms of Use. The users of the images accept full responsibility for the use of the "
+          "dataset, including but not limited to the use of any copies of copyrighted images that they may create from "
+          "the dataset.\"", "",
+          "What this project does with them: it downloads the photos on build machines to compute vectors for training "
+          "and testing the kind-of-eye head, and redistributes no photo; the manifest carries each photo's licence and "
+          "Flickr address, which lead to the attribution. Most rows carry a NonCommercial licence and some a NoDerivs "
+          "licence. Whether a model trained on such photos may ship is not settled by those licences' text; the "
+          "`licence` column lets a training run keep only CC-BY-2.0, CC-BY-SA-2.0 and "
+          "no-known-copyright-restrictions rows if the owner decides so (train rows of those licences here: %d)." % (
+              sum(1 for r in rows if r["split"] == "train" and r["licence"] in ("CC-BY-2.0", "CC-BY-SA-2.0", "no-known-copyright-restrictions"))),
+          ]
     L += ["", "## Checks", ""] + ["- " + c for c in checks]
     L += ["", "## Images left out (train2017 and val2017 together)", "", "| reason | images |", "|---|---:|"]
     left = reasons["train"] + reasons["test"]

@@ -15,21 +15,6 @@ step() {
   return "$rc"
 }
 ZIP=http://images.cocodataset.org/annotations/annotations_trainval2017.zip
-# The log so far of any traindata job still going, returned on ci (github.com shows logs only to people signed in; the
-# API serves them to this job's token). Keeps the last 300 lines.
-peek() {
-  local rid jid
-  for rid in $(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/traindata.yml/runs?per_page=10" \
-      --jq '.workflow_runs[] | select(.status != "completed") | .id' 2>/dev/null); do
-    for jid in $(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$rid/jobs" --jq '.jobs[].id' 2>/dev/null); do
-      gh api "repos/${GITHUB_REPOSITORY}/actions/jobs/$jid/logs" > work/live.txt 2>&1 || true
-      tail -n 300 work/live.txt > "out/traindata-live-$rid.txt"
-      echo "[$(date -u +%T)] traindata run $rid job $jid: log has $(wc -l < work/live.txt) lines; last 300 kept" | tee -a "$LOG"
-    done
-  done
-}
-step "traindata log so far" peek
-JOB_STATUS=peek bash ci/return.sh extradata out || true
 step "install requests" python3 -m pip install --quiet requests || exit 1
 
 # Which addresses answer, over http and https (HEAD requests; a 200 with an image type is what we want).
@@ -92,7 +77,6 @@ for i in $(seq 1 110); do
   echo "[$(date -u +%T)] traindata runs not completed: $busy; extra/coco-kinds on the branch: $here" | tee -a "$LOG"
   [ "$here" = yes ] || step "publish again" publish
   [ "$busy" = "0" ] && break
-  if [ $((i % 4)) -eq 0 ]; then peek; JOB_STATUS=watching bash ci/return.sh extradata out || true; fi
   sleep 60
 done
 on_branch || step "publish again" publish
