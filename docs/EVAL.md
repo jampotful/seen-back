@@ -119,8 +119,11 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 | Slot | Kind right | Top species right | Species named (share, threshold) | Named species right | Three offered (share, threshold) | Offer holds the species | Kind only | Kind right when kind only |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `sentences-bioclip2-l14` | 98.3% (97.8 to 98.6) | 92.5% (91.6 to 93.2) | 99.5% at 0.05 | 92.8% (92.1 to 93.6) | 0.0% at never | – | 0.5% | 30.4% (13.0 to 47.8) |
+| `sentences-bioclip2-l14-product` | 98.3% (97.9 to 98.6) | 92.5% (91.6 to 93.2) | 99.5% at 0.05 | 92.8% (92.0 to 93.5) | 0.0% at never | – | 0.5% | 30.0% (10.0 to 50.0) |
 | `sentences-tinyclip-39m-16` | 83.9% (82.8 to 85.0) | 34.9% (33.5 to 36.4) | 15.4% at 0.4 | 92.7% (90.7 to 94.6) | 3.3% at 0.53 | 84.9% (78.4 to 90.6) | 81.3% | 80.5% (79.2 to 81.8) |
+| `sentences-tinyclip-39m-16-product` | 84.5% (83.4 to 85.6) | 34.9% (33.5 to 36.4) | 15.4% at 0.4 | 93.0% (91.0 to 94.9) | 3.3% at 0.53 | 84.9% (78.4 to 90.6) | 81.3% | 81.2% (79.8 to 82.5) |
 | `sentences-tinyclip-8m-16` | 78.8% (77.6 to 80.0) | 25.3% (24.0 to 26.7) | 9.2% at 0.42 | 89.9% (86.8 to 92.7) | 5.1% at 0.47 | 81.9% (76.8 to 86.6) | 85.7% | 75.6% (74.1 to 77.0) |
+| `sentences-tinyclip-8m-16-product` | 78.9% (77.7 to 80.1) | 25.3% (24.0 to 26.7) | 9.2% at 0.42 | 90.1% (87.0 to 93.2) | 5.1% at 0.47 | 81.9% (76.8 to 86.6) | 85.7% | 75.7% (74.3 to 77.1) |
 | `val-bioclip2-l14` | 98.5% (98.1 to 98.9) | 91.7% (90.9 to 92.6) | 99.6% at 0.05 | 92.0% (91.2 to 92.8) | 0.0% at never | – | 0.4% | 46.7% (20.0 to 73.3) |
 | `val-tinyclip-39m-16` | 86.8% (85.7 to 87.7) | 36.9% (35.5 to 38.4) | 19.4% at 0.63 | 88.7% (86.6 to 90.9) | 0.0% at never | – | 80.6% | 83.9% (82.7 to 85.2) |
 | `val-tinyclip-8m-16` | 77.5% (76.2 to 78.8) | 25.6% (24.3 to 26.9) | 8.3% at 0.31 | 89.9% (86.5 to 92.8) | 6.7% at 0.33 | 78.2% (73.2 to 82.9) | 85.1% | 73.9% (72.5 to 75.3) |
@@ -132,12 +135,21 @@ A stricter bar for naming is available. The table gives, for a named species tha
 | `sentences-bioclip2-l14` | 90 in 100 | 0.05 | 99.5% (99.2 to 99.7) | 92.8% (92.1 to 93.6) | never | 0.0% (0.0 to 0.0) | – | 0.5% (0.3 to 0.8) |
 | `sentences-bioclip2-l14` | 95 in 100 | 0.44 | 95.7% (95.0 to 96.3) | 95.1% (94.4 to 95.7) | never | 0.0% (0.0 to 0.0) | – | 4.3% (3.7 to 5.0) |
 | `sentences-bioclip2-l14` | 98 in 100 | 0.78 | 84.7% (83.5 to 85.8) | 98.0% (97.5 to 98.4) | 0.66 | 11.7% (10.8 to 12.7) | 91.8% (89.4 to 94.1) | 3.6% (3.0 to 4.2) |
+| `sentences-bioclip2-l14-product` | 90 in 100 | 0.05 | 99.5% (99.3 to 99.7) | 92.8% (92.0 to 93.5) | never | 0.0% (0.0 to 0.0) | – | 0.5% (0.3 to 0.7) |
+| `sentences-bioclip2-l14-product` | 95 in 100 | 0.44 | 95.7% (95.1 to 96.3) | 95.1% (94.5 to 95.7) | never | 0.0% (0.0 to 0.0) | – | 4.3% (3.7 to 4.9) |
+| `sentences-bioclip2-l14-product` | 98 in 100 | 0.78 | 84.7% (83.5 to 85.8) | 98.0% (97.5 to 98.4) | 0.66 | 11.7% (10.8 to 12.7) | 91.8% (89.4 to 94.1) | 3.6% (3.0 to 4.2) |
 | `sentences-tinyclip-39m-16` | 90 in 100 | 0.40 | 15.4% (14.3 to 16.6) | 92.7% (90.7 to 94.6) | 0.53 | 3.3% (2.8 to 3.9) | 84.9% (78.4 to 90.6) | 81.3% (80.1 to 82.4) |
 | `sentences-tinyclip-39m-16` | 95 in 100 | 0.46 | 13.2% (12.2 to 14.2) | 95.5% (93.7 to 97.1) | 0.57 | 3.1% (2.5 to 3.6) | 91.5% (86.1 to 96.1) | 83.8% (82.6 to 84.9) |
 | `sentences-tinyclip-39m-16` | 98 in 100 | 0.85 | 1.8% (1.4 to 2.2) | 100.0% (100.0 to 100.0) | 0.38 | 24.6% (23.2 to 25.9) | 87.1% (85.0 to 89.1) | 73.7% (72.3 to 75.0) |
+| `sentences-tinyclip-39m-16-product` | 90 in 100 | 0.40 | 15.4% (14.3 to 16.5) | 93.0% (91.0 to 94.9) | 0.53 | 3.3% (2.8 to 3.9) | 84.9% (78.4 to 90.6) | 81.3% (80.2 to 82.5) |
+| `sentences-tinyclip-39m-16-product` | 95 in 100 | 0.46 | 13.2% (12.2 to 14.2) | 95.5% (93.7 to 97.1) | 0.57 | 3.1% (2.5 to 3.6) | 91.5% (86.1 to 96.1) | 83.8% (82.6 to 84.9) |
+| `sentences-tinyclip-39m-16-product` | 98 in 100 | 0.85 | 1.8% (1.4 to 2.2) | 100.0% (100.0 to 100.0) | 0.38 | 24.4% (23.1 to 25.7) | 87.3% (85.2 to 89.4) | 73.8% (72.4 to 75.0) |
 | `sentences-tinyclip-8m-16` | 90 in 100 | 0.42 | 9.2% (8.3 to 10.0) | 89.9% (86.8 to 92.7) | 0.47 | 5.1% (4.5 to 5.8) | 81.9% (76.8 to 86.6) | 85.7% (84.6 to 86.8) |
 | `sentences-tinyclip-8m-16` | 95 in 100 | 0.56 | 5.3% (4.6 to 5.9) | 95.9% (93.2 to 98.2) | 0.44 | 10.1% (9.2 to 11.0) | 84.6% (80.8 to 87.9) | 84.7% (83.5 to 85.7) |
 | `sentences-tinyclip-8m-16` | 98 in 100 | 0.62 | 4.0% (3.4 to 4.6) | 95.8% (92.2 to 98.8) | 0.44 | 11.4% (10.4 to 12.4) | 86.0% (82.8 to 88.9) | 84.7% (83.5 to 85.7) |
+| `sentences-tinyclip-8m-16-product` | 90 in 100 | 0.42 | 9.2% (8.3 to 10.0) | 90.1% (87.0 to 93.2) | 0.47 | 5.1% (4.5 to 5.8) | 81.9% (76.8 to 86.6) | 85.7% (84.7 to 86.8) |
+| `sentences-tinyclip-8m-16-product` | 95 in 100 | 0.56 | 5.3% (4.6 to 5.9) | 95.9% (93.2 to 98.2) | 0.43 | 10.9% (10.0 to 11.8) | 84.2% (80.9 to 87.5) | 83.9% (82.8 to 85.0) |
+| `sentences-tinyclip-8m-16-product` | 98 in 100 | 0.62 | 4.0% (3.4 to 4.6) | 95.8% (92.2 to 98.8) | 0.44 | 11.3% (10.4 to 12.4) | 86.1% (83.2 to 89.3) | 84.7% (83.5 to 85.8) |
 
 The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).
 
@@ -148,6 +160,7 @@ The text for each slot, with what it needs from the page, is in [`docs/eval/ship
 - **The server's files.** The slot `sentences-bioclip2-l14` holds these rows and a table whose monthly weights carry the smoothing (lam 2, c 1), with alpha_prior 1, t_species 100, rule `mix`, t_kind 20 and w_kind 0.7, all chosen on `val`. Scored as the page would, it gets the kind of eye right for 98.3% (97.8 to 98.6) of test photos and the species for 92.5% (91.6 to 93.2). Its settings differ a little from the line above because Study 2 searches a finer grid of prior weights; the two results agree within their intervals.
 - **When the server should name a species.** The nine-in-ten rule lets BioCLIP 2 name a species for nearly every photo, since it is right more often than that overall. A stricter bar suits a name shown to a person: with name_at 0.78, set on `val` for 98 in 100, the slot `sentences-bioclip2-l14` names a species for 84.7% (83.5 to 85.8) of test photos and is right for 98.0% (97.5 to 98.4) of those names; with offer_at 0.66 it offers three species for 11.7% (10.8 to 12.7) and they hold the right one for 91.8% (89.4 to 94.1), and 3.6% (3.0 to 4.2) get a kind of eye only. The other bars are in the table under "What the page would show".
 - **What the app may say about the server.** A sentence the measurements support: "On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about 91 photos in 100." It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model.
+- **What waits for the training vectors.** Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. `bash tools/eval/run.sh ROOT alachua-pre2025` measures them, exports the best head of each model as a slot and scores it as the page would. A build-machine run on the branch `run/eval/armed-pocket` waits for the pocket models' training vectors and then does exactly that; `run/eval/armed-all` also waits for BioCLIP 2's. Their results come back under `runs/eval/` on the `ci` branch and the slots go to `pub/heads-alachua-pre2025-<model>`. The stand-in gives one hint about BioCLIP 2: adding prototypes from about 1,200 photos to its sentence rows moved top-1 without the prior from 90.3% (89.4 to 91.3) to 91.3% (90.5 to 92.2) and top-1 with the prior from 92.4% (91.6 to 93.2) to 91.7% (90.9 to 92.6), so a real gain is not shown yet.
 
 ## The first look, checked
 

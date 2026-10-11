@@ -12,6 +12,16 @@ The slot holds the head `sentences` for `bioclip2-l14` (species_sci), fitted on 
 | three species to choose from | 0.0% | the three hold the species for –; the kind is right for – |
 | a kind of eye only | 0.5% | the kind is right for 30.4% (13.0 to 47.8) |
 
+## `sentences-bioclip2-l14-product`
+
+The slot holds the head `sentences` for `bioclip2-l14` (species_sci), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 20, w_kind 0.5, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.05 and offer_at never (no level reached nine in ten). On the 4197 test photos the kind of eye is right for 98.3% (97.9 to 98.6); the top species is right for 92.5% (91.6 to 93.2) and is among the first five for 97.5% (97.0 to 97.9). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos.
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 99.5% | the name is right for 92.8% (92.0 to 93.5); the kind for 98.6% (98.2 to 99.0) |
+| three species to choose from | 0.0% | the three hold the species for –; the kind is right for – |
+| a kind of eye only | 0.5% | the kind is right for 30.0% (10.0 to 50.0) |
+
 ## `sentences-tinyclip-39m-16`
 
 The slot holds the head `sentences` for `tinyclip-39m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 20, w_kind 0.5, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.40 and offer_at 0.53. On the 4197 test photos the kind of eye is right for 83.9% (82.8 to 85.0); the top species is right for 34.9% (33.5 to 36.4) and is among the first five for 53.8% (52.3 to 55.3). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: fusion.rule mix (build 7 of the page).
@@ -22,6 +32,16 @@ The slot holds the head `sentences` for `tinyclip-39m-16` (species_com), fitted 
 | three species to choose from | 3.3% | the three hold the species for 84.9% (78.4 to 90.6); the kind is right for 99.3% (97.8 to 100.0) |
 | a kind of eye only | 81.3% | the kind is right for 80.5% (79.2 to 81.8) |
 
+## `sentences-tinyclip-39m-16-product`
+
+The slot holds the head `sentences` for `tinyclip-39m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 20, w_kind 0.5, alpha_prior 1. On 1803 tuning photos (val) the thresholds came out as name_at 0.40 and offer_at 0.53. On the 4197 test photos the kind of eye is right for 84.5% (83.4 to 85.6); the top species is right for 34.9% (33.5 to 36.4) and is among the first five for 53.8% (52.3 to 55.3). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos.
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 15.4% | the name is right for 93.0% (91.0 to 94.9); the kind for 98.9% (98.1 to 99.7) |
+| three species to choose from | 3.3% | the three hold the species for 84.9% (78.4 to 90.6); the kind is right for 99.3% (97.8 to 100.0) |
+| a kind of eye only | 81.3% | the kind is right for 81.2% (79.8 to 82.5) |
+
 ## `sentences-tinyclip-8m-16`
 
 The slot holds the head `sentences` for `tinyclip-8m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 20, w_kind 0.7, alpha_prior 0.625. On 1803 tuning photos (val) the thresholds came out as name_at 0.42 and offer_at 0.47. On the 4197 test photos the kind of eye is right for 78.8% (77.6 to 80.0); the top species is right for 25.3% (24.0 to 26.7) and is among the first five for 43.2% (41.7 to 44.7). `person` was said for 0.02% of these photos and `none` for 0.02%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The slot needs: fusion.rule mix (build 7 of the page).
@@ -31,6 +51,16 @@ The slot holds the head `sentences` for `tinyclip-8m-16` (species_com), fitted o
 | a species name | 9.2% | the name is right for 89.9% (86.8 to 92.7); the kind for 98.7% (97.4 to 99.7) |
 | three species to choose from | 5.1% | the three hold the species for 81.9% (76.8 to 86.6); the kind is right for 97.2% (94.9 to 99.1) |
 | a kind of eye only | 85.7% | the kind is right for 75.6% (74.1 to 77.0) |
+
+## `sentences-tinyclip-8m-16-product`
+
+The slot holds the head `sentences` for `tinyclip-8m-16` (species_com), fitted on `none (sentence rows only)`, with 5911 species rows. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 20, w_kind 0.5, alpha_prior 0.625. On 1803 tuning photos (val) the thresholds came out as name_at 0.42 and offer_at 0.47. On the 4197 test photos the kind of eye is right for 78.9% (77.7 to 80.1); the top species is right for 25.3% (24.0 to 26.7) and is among the first five for 43.2% (41.7 to 44.7). `person` was said for 0.00% of these photos and `none` for 0.00%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos.
+
+| What the page would show | Share of test photos | Right |
+|---|---:|---|
+| a species name | 9.2% | the name is right for 90.1% (87.0 to 93.2); the kind for 99.0% (97.7 to 99.7) |
+| three species to choose from | 5.1% | the three hold the species for 81.9% (76.8 to 86.6); the kind is right for 97.2% (94.9 to 99.1) |
+| a kind of eye only | 85.7% | the kind is right for 75.7% (74.3 to 77.1) |
 
 ## `val-bioclip2-l14`
 

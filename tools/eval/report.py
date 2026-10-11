@@ -349,6 +349,17 @@ if b2:
             l["name_at"], pci(l["named"]), pci(l["named_right"]),
             ("; with offer_at %.2f it offers three species for %s and they hold the right one for %s, and %s get a kind of eye only" % (l["offer_at"], pci(l["offered"]), pci(l["offered_holds_species"]), pci(l["kind_only"]))) if l.get("offer_at") is not None else "")]
     T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % int(100 * t["top1"][1])]
+sv = S2.get("val")
+if not real:
+    tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "
+          "`bash tools/eval/run.sh ROOT alachua-pre2025` measures them, exports the best head of each model as a slot and scores it as the page would. "
+          "A build-machine run on the branch `run/eval/armed-pocket` waits for the pocket models' training vectors and then does exactly that; `run/eval/armed-all` also waits for BioCLIP 2's. Their results come back under `runs/eval/` on the `ci` branch and the slots go to `pub/heads-alachua-pre2025-<model>`.")
+    if sv and "bioclip2-l14" in sv["models"]:
+        hs = {h["name"]: h for h in sv["models"]["bioclip2-l14"]["species_heads"]}
+        if "sentences" in hs and "prototypes + sentences" in hs:
+            tx += (" The stand-in gives one hint about BioCLIP 2: adding prototypes from about 1,200 photos to its sentence rows moved top-1 without the prior from %s to %s and top-1 with the prior from %s to %s, so a real gain is not shown yet." % (
+                pci(hs["sentences"]["plain"]["top1"]), pci(hs["prototypes + sentences"]["plain"]["top1"]), pci(hs["sentences"]["prior"]["top1"]), pci(hs["prototypes + sentences"]["prior"]["top1"])))
+    T += ["- **What waits for the training vectors.** " + tx]
 T += [""]
 
 T += ["## The first look, checked", "",
