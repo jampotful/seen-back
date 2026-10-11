@@ -259,7 +259,7 @@ for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get(
 if SH:
     T += ["## What the page would show", "",
           "Each slot below was written by `tools/eval/export_heads.py` in the layout of `models/<slot>/` and then scored by `tools/eval/shipped.py`, which reads the slot's own files as the page does and sends every photo through `tools/fusion/fuse.py`. "
-          "The two thresholds were set on the tuning photos so that a named species, and the three offered species, were right at least nine times in ten there. Slots whose name begins with `val-` hold stand-in heads.", ""]
+          "The two thresholds were set on the tuning photos so that a named species, and the three offered species, were right at least nine times in ten there. Slots whose name begins with `val-` hold stand-in heads. A name that ends in `-product` is the same slot scored under the product rule with its own two settings and thresholds (`fusion_if_rule_product` in the slot's manifest); build 6 of the page has only that rule, and the `mix` rule needs build 7.", ""]
     rows = []
     for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
         n = SH[name]["numbers"]
@@ -276,6 +276,20 @@ if SH:
     for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
         for x in SH[name].get("extra", []):
             T += ["**`%s` on photos of people, pets, livestock and rooms.** %s" % (name, x["text"]), "", table(["Photos of", "Photos", "Kind said right", "Said `person`", "Said `none`", "A species named"], [[g["kind"], g["n"], pci(g["right"]), pc(g["person"]), pc(g["none"]), pc(g["named"])] for g in x["rows"]]), ""]
+    lrows = []
+    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
+        if name.startswith("val-"):
+            continue
+        for l in SH[name]["numbers"].get("levels", []):
+            if l.get("name_at") is None:
+                lrows.append(["`%s`" % name, "%d in 100" % round(100 * l["right_at_least"]), "no level reached it", "–", "–", "–", "–", "–", "–"])
+            else:
+                lrows.append(["`%s`" % name, "%d in 100" % round(100 * l["right_at_least"]), "%.2f" % l["name_at"], pci(l["named"]), pci(l["named_right"]),
+                              ("%.2f" % l["offer_at"]) if l.get("offer_at") is not None else "never", pci(l.get("offered")), pci(l.get("offered_holds_species")), pci(l.get("kind_only"))])
+    if lrows:
+        T += ["A stricter bar for naming is available. The table gives, for a named species that has to be right at least 90, 95 or 98 times in 100 on `val`, the threshold that `val` gives and what then happens on the test photos. "
+              "For each bar the offer threshold was set again on `val`, for the photos left without a name, so that the three offered species hold the right one nine times in ten.", "",
+              table(["Slot", "Named species right at least", "name_at", "Photos named", "Named species right", "offer_at", "Photos offered three", "Offer holds the species", "Kind only"], lrows), ""]
     T += ["The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).", ""]
 
 # ---- decisions: sentences around numbers that the studies wrote
@@ -324,10 +338,16 @@ if b2:
                   (" The laboratory's runs embedded %.1f photos a second with BioCLIP 2 and %.1f with BioCLIP 2.5 on build machines without a graphics card." % (CARDS["bioclip2-l14"]["torch_photos_per_second"], CARDS["bioclip25-h14"]["torch_photos_per_second"]))
                   if CARDS.get("bioclip2-l14", {}).get("torch_photos_per_second") and CARDS.get("bioclip25-h14", {}).get("torch_photos_per_second") else "")) if b25 else "")]
     srv = SH.get("sentences-bioclip2-l14")
-    if srv and srv["numbers"].get("levels"):
-        T += ["- **How sure the server is.** Scored as the page would (slot `sentences-bioclip2-l14`): " + " ".join(
-            "Naming only above %s keeps %s of test photos named, and those names are right for %s." % (("%.2f" % l["name_at"]) if l["name_at"] is not None else "no level", pc(l["named"][0]), pci(l["named_right"])) for l in srv["numbers"]["levels"] if l["name_at"] is not None)
-            + " Each level was set on `val` to make named species right at least 90, 95 and 98 times in 100 there."]
+    if srv:
+        f_, n_, e_ = srv["manifest"]["fusion"], srv["numbers"], srv["manifest"]["evaluation"]
+        T += ["- **The server's files.** The slot `sentences-bioclip2-l14` holds these rows and a table whose monthly weights carry the smoothing (lam %g, c %g), with alpha_prior %g, t_species %g, rule `%s`, t_kind %g and w_kind %g, all chosen on `val`. Scored as the page would, it gets the kind of eye right for %s of test photos and the species for %s. Its settings differ a little from the line above because Study 2 searches a finer grid of prior weights; the two results agree within their intervals." % (
+            e_["prior_smoothing"]["lam"], e_["prior_smoothing"]["c"], f_["alpha_prior"], f_["t_species"], f_.get("rule", "product"), f_["t_kind"], f_["w_kind"], pci(n_["kind_right"]), pci(n_["species_top1"]))]
+    lv = [l for l in (srv["numbers"].get("levels", []) if srv else []) if l.get("name_at") is not None and l["right_at_least"] == 0.98]
+    if lv:
+        l = lv[0]
+        T += ["- **When the server should name a species.** The nine-in-ten rule lets BioCLIP 2 name a species for nearly every photo, since it is right more often than that overall. A stricter bar suits a name shown to a person: with name_at %.2f, set on `val` for 98 in 100, the slot `sentences-bioclip2-l14` names a species for %s of test photos and is right for %s of those names%s. The other bars are in the table under \"What the page would show\"." % (
+            l["name_at"], pci(l["named"]), pci(l["named_right"]),
+            ("; with offer_at %.2f it offers three species for %s and they hold the right one for %s, and %s get a kind of eye only" % (l["offer_at"], pci(l["offered"]), pci(l["offered_holds_species"]), pci(l["kind_only"]))) if l.get("offer_at") is not None else "")]
     T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % int(100 * t["top1"][1])]
 T += [""]
 

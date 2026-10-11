@@ -20,6 +20,8 @@ for m in $MODELS; do
   if [ -f "$ROOT/heads/$TRAIN/$m.npz" ]; then
     python3 -I tools/eval/export_heads.py "$ROOT" --head "$ROOT/heads/$TRAIN/$m.npz" --out "$ROOT/slots/$TRAIN/$m"
     python3 -I tools/eval/shipped.py "$ROOT" "$ROOT/slots/$TRAIN/$m" --name "$TRAIN-$m"
+    # the same slot under the product rule, which is all that build 6 of the page has (not for the stand-in)
+    [ "$TRAIN" = "val" ] || python3 -I tools/eval/shipped.py "$ROOT" "$ROOT/slots/$TRAIN/$m" --name "$TRAIN-$m" --rule product
   fi
 done
 python3 -I tools/eval/report.py

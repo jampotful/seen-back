@@ -25,10 +25,19 @@ ap.add_argument("slot")
 ap.add_argument("--name")
 ap.add_argument("--out")
 ap.add_argument("--limit", type=int, default=0, help="score only the first N tuning and N test photos (for a quick try)")
+ap.add_argument("--rule", choices=["product"], help="score the slot under the product rule (what build 6 of the page computes) with the settings in fusion_if_rule_product; the thresholds found are written there")
 a = ap.parse_args()
 name = a.name or os.path.basename(os.path.normpath(a.slot))
 slot = F.load_slot(a.slot)
 man, table = slot["manifest"], slot["table"]
+on_disk = copy.deepcopy(man)
+if a.rule == "product":
+    alt = man.get("fusion_if_rule_product")
+    if not alt:
+        raise SystemExit("this slot carries no settings for the product rule")
+    man["fusion"] = dict(man["fusion"], rule="product", t_kind=alt["t_kind"], w_kind=alt["w_kind"])
+    man["needs"] = [x for x in man.get("needs", []) if "rule mix" not in x]
+    name += "-product"
 evn = man["evaluation"]
 keys = json.load(open(os.path.join(a.slot, man["species"]["table"]), encoding="utf-8"))["keys"]
 E, ids = ev.load_images(a.root, evn["model"], evn["test_vectors"].split("/", 1)[1])
@@ -83,14 +92,21 @@ name_at = level(top_p[top_ok], top_right[top_ok])
 named = top_ok & (top_p >= name_at) if name_at is not None else np.zeros(len(res), bool)
 off_p = np.array([sum(o["p"] for o in r["offers"]) for r in res])
 off_has = np.array([truth[i] >= 0 and any(o["sci"] == sci_of[truth[i]] for o in r["offers"]) for i, r in zip(idx, res)])
-can_offer = ~named & np.array([len(r["offers"]) > 0 for r in res])
+can_offer_all = np.array([len(r["offers"]) > 0 for r in res])
+can_offer = ~named & can_offer_all
 offer_at = level(off_p[can_offer], off_has[can_offer])
 man["fusion"]["name_at"] = name_at if name_at is not None else 2.0
 man["fusion"]["offer_at"] = offer_at if offer_at is not None else 2.0
 man["fusion_thresholds_note"] = "set by tools/eval/shipped.py on %d tuning photos (%s) through tools/fusion/fuse.py; 2 means never" % (len(res), evn["tuned_on"])
 if not a.limit:
+    if a.rule == "product":
+        on_disk["fusion_if_rule_product"].update(name_at=man["fusion"]["name_at"], offer_at=man["fusion"]["offer_at"],
+                                                 note="for a page that only has the product rule (build 6): use these four values in place of the same keys of fusion")
+        to_write = on_disk
+    else:
+        to_write = man
     with open(os.path.join(a.slot, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump(man, f, indent=1)
+        json.dump(to_write, f, indent=1)
         f.write("\n")
 
 # 3. the test photos, as the page would answer
@@ -136,14 +152,26 @@ text = ("The slot holds the head `%s` for `%s` (%s), fitted on `%s`, with %d spe
     n, pci(num["kind_right"]), pci(num["species_top1"]), pci(num["species_top5"]), 100 * num["called_person"], 100 * num["called_none"], differ)
 if man.get("needs"):
     text += " The slot needs: %s." % "; ".join(man["needs"])
-# how many photos get a name when a named species must be right more often than nine times in ten
-t_p = np.array([r["species"][0]["p"] for r in res])
-t_ok = np.array([r["species"][0]["kind"] == r["kind"] and r["kind"] not in ("none", "person") for r in res])
+# how many photos get a name when a named species must be right more often than nine times in ten, and what the
+# three offers then do for the rest; from a second pass over the test photos with naming off and offers always made
+_, res2 = run(ES.test, probe)
+t_p = np.array([r["species"][0]["p"] for r in res2])
+t_ok = np.array([r["species"][0]["kind"] == r["kind"] and r["kind"] not in ("none", "person") for r in res2])
+t_right = np.array([r["species"][0]["sci"] == t for r, t in zip(res2, tsci)])
+t_off_p = np.array([sum(o["p"] for o in r["offers"]) for r in res2])
+t_off_has = np.array([any(o["sci"] == t for o in r["offers"]) for r, t in zip(res2, tsci)])
+t_can = np.array([len(r["offers"]) > 0 for r in res2])
 levels = []
 for floor in (0.9, 0.95, 0.98):
     tau = level(top_p[top_ok], top_right[top_ok], floor=floor)
-    m = t_ok & (t_p >= tau) if tau is not None else np.zeros(n, bool)
-    levels.append({"right_at_least": floor, "name_at": tau, "named": ev.ci(m), "named_right": ev.ci(top1[m])})
+    if tau is None:
+        levels.append({"right_at_least": floor, "name_at": None})
+        continue
+    nm_u = top_ok & (top_p >= tau)
+    tau_o = level(off_p[~nm_u & can_offer_all], off_has[~nm_u & can_offer_all])
+    m = t_ok & (t_p >= tau)
+    of = ~m & t_can & (t_off_p >= tau_o) if tau_o is not None else np.zeros(n, bool)
+    levels.append({"right_at_least": floor, "name_at": tau, "named": ev.ci(m), "named_right": ev.ci(t_right[m]), "offer_at": tau_o, "offered": ev.ci(of), "offered_holds_species": ev.ci(t_off_has[of]), "kind_only": ev.ci(~m & ~of)})
 num["levels"] = levels
 
 # 4. photos of people, pets, livestock and rooms (data/extra/<name>), when their vectors are published
