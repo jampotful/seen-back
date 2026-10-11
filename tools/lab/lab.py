@@ -525,6 +525,7 @@ def stage_text(args):
             save_f16(out / "text" / ("%s.f16.npy" % setname), vec)
             (out / "text" / ("%s.labels.json" % setname)).write_text(json.dumps({
                 "labels": meta_rows, "region": region, "species_json_sha256": sha256(args.species_json),
+                "species_source": sj.get("source", {}),
                 "method": how, "example": groups[0] if groups else [],
             }, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
             log("%s: %s" % (setname, vec.shape))

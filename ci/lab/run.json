@@ -1,6 +1,15 @@
 {
- "models": ["tinyclip-8m-16", "tinyclip-40m-32"],
- "stages": ["text-kinds", "export"],
+ "about": "Shakedown on stand-in data: every model through the stages it will need, and the pocket candidates exported.",
+ "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32", "clip-b32", "bioclip-b16", "bioclip2-l14", "bioclip25-h14", "bioclip25-mobile-fastvit", "siglip2-b16", "mobileclip2-s0"],
+ "stages": {
+  "tinyclip-8m-16": ["text-kinds", "text-species", "export", "images", "images-onnx-int8"],
+  "tinyclip-40m-32": ["text-kinds", "export", "images", "images-onnx-int8"],
+  "tinyclip-39m-16": ["text-kinds", "export", "images"],
+  "tinyclip-61m-32": ["text-kinds", "export", "images"],
+  "bioclip-b16": ["text-kinds", "export", "images"],
+  "bioclip25-mobile-fastvit": ["images"],
+  "*": ["text-kinds", "images"]
+ },
  "data": "auto",
  "shards": {},
  "max_parallel": 10
