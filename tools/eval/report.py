@@ -439,6 +439,21 @@ if b2:
             l["name_at"], pci(l["named"]), pci(l["named_right"]),
             ("; with offer_at %.2f it offers three species for %s and they hold the right one for %s, and %s get a kind of eye only" % (l["offer_at"], pci(l["offered"]), pci(l["offered_holds_species"]), pci(l["kind_only"]))) if l.get("offer_at") is not None else "")]
     T += ["- **What the app may say about the server.** A sentence the measurements support: \"On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about %d photos in 100.\" It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model." % int(100 * t["top1"][1])]
+live = SH.get("live-pocket")
+if live:
+    k_, n_, f_ = live["numbers"].get("kind") or {}, live["numbers"], live["manifest"]["fusion"]
+    tw_, tx_ = k_.get("test_wildlife"), k_.get("test_extra")
+    T += ["- **The slot that is live.** `live-pocket` in the tables is `models/pocket` as it stands on `main`: TinyCLIP 39M/16, sentence rows, and the interim settings chosen by hand (rule `%s`, t_kind %g, w_kind %g). Through `fuse.py` it gets the kind of eye right for %s of the wildlife test photos and names a species for %s, rightly for %s of those names. "
+          "%s%s" % (f_.get("rule", "product"), f_["t_kind"], f_["w_kind"], pci(n_["kind_right"]), pc(n_["named"][0]), pci(n_["named_right"]),
+                    ("For these settings `kind_at` comes out as %.2f: the page then asserts a kind for %s of the wildlife test photos and is right for %s of those, and where it is not sure the true kind is among its three likeliest for %s. " % (
+                        k_["kind_at"], pci(tw_["asserted"]), pci(tw_["asserted_right"]), pci(tw_["not_sure_true_kind_among_three"]))) if k_.get("kind_at") is not None else "No level of `kind_at` reached 95 in 100 for these settings. ",
+                    ("On the extra set's test photos (people, cats, dogs, grazing animals, rooms) it gets the kind right for %s, asserts for %s and is right for %s of those." % (pci(tx_["kind_right"]), pci(tx_["asserted"]), pci(tx_["asserted_right"]))) if tx_ else
+                    "That level was set on wildlife photos alone, because the pocket models' vectors of the extra set were not published when this was written; it says nothing about people or rooms, for which the only evidence is the fifteen sample photos of `tools/eval/interim.py`.")]
+if VAR:
+    best = min(VAR.items(), key=lambda kv: -kv[1]["variant"]["species_top1"][0])
+    T += ["- **The larger model on the device.** The head files are the slot `%s` with name_at %g and offer_at %g. On the laboratory's %d test photos the int8 vectors computed by the browser's WASM runtime change the top species for few photos (table above), and a named species stays right as often as with the original vectors, so the thresholds are kept. "
+          "They could not be set again on int8 vectors, since no `val` photo has any. `tools/eval/naturalist.py` writes the files for `models/naturalist`; the `vision` block of its manifest is left for the laboratory's `parts.json`." % (
+              best[1]["slot"], best[1]["fusion"]["name_at"], best[1]["fusion"]["offer_at"], best[1]["test_photos"])]
 sv = S2.get("val")
 if not real:
     tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "
@@ -544,9 +559,14 @@ T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 
       "python3 -I tools/eval/study2.py ROOT --train TRAIN --save ROOT/heads/TRAIN      # docs/eval/study2-TRAIN.json and the chosen heads",
       "python3 -I tools/eval/export_heads.py ROOT --head ROOT/heads/TRAIN/MODEL.npz --out ROOT/slots/TRAIN/MODEL   # a slot in the layout of models/<slot>/",
       "python3 -I tools/eval/shipped.py ROOT ROOT/slots/TRAIN/MODEL --name TRAIN-MODEL   # thresholds and as-shipped numbers through tools/fusion/fuse.py",
+      "python3 -I tools/eval/shipped.py ROOT models/pocket --name live-pocket --no-write   # the slot that is live, scored as it stands; its manifest is left alone",
+      "python3 -I tools/eval/decide.py                     # docs/eval/decision-pocket.json: which pocket model ships, by the rule written at the top of the script",
+      "python3 -I tools/eval/variant.py ROOT SLOT --vectors FILE.f16.npy --ids FILE.ids.json --name LABEL --name-at 0.78 --offer-at 0.66   # another set of vectors of the same test photos, beside the original's",
+      "python3 -I tools/eval/naturalist.py SLOT --shipped docs/eval/shipped-NAME.json --out DIR --variant docs/eval/variant-LABEL.json   # head files for models/naturalist",
       "python3 -I tools/eval/report.py                     # this file and the tables under docs/eval/",
       "python3 -I tools/eval/compare.py DIR_A DIR_B        # do two runs give the same numbers?", "```", "",
-      "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`.", "",
+      "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`. "
+      "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything.", "",
       "Inputs of this run: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "."]
 with open(a.out, "w", encoding="utf-8") as f:
     f.write("\n".join(T).rstrip("\n") + "\n")

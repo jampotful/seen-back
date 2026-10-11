@@ -469,6 +469,7 @@ if __name__ == "__main__":
     ap.add_argument("--models", default="tinyclip-39m-16,tinyclip-8m-16,bioclip2-l14")
     ap.add_argument("--out")
     ap.add_argument("--save")
+    ap.add_argument("--merge", action="store_true", help="keep the models already in the output file that are not run now")
     a = ap.parse_args()
     out_path = a.out or "docs/eval/study2-%s.json" % a.train
     standin = a.train == "val"
@@ -481,6 +482,8 @@ if __name__ == "__main__":
             "Heads were fitted on the training photos `%s` (from before 2025, up to sixty a species), settings were chosen on `val`, and every number is from `test`." % a.train)
     out = {"made_by": "tools/eval/study2.py --train " + a.train, "standin": standin, "sentences_only": sentences_only, "what": what,
            "method": {"resamples": ev.RESAMPLES, "seed": ev.SEED, "prior_weight_grid": REL, "scale_grid": SCALES, "smoothing": SMOOTH}, "models": {}}
+    if a.merge and os.path.exists(out_path):
+        out["models"] = {m: r for m, r in json.load(open(out_path, encoding="utf-8"))["models"].items() if m not in a.models.split(",")}
     fetched = os.path.join(a.root, "FETCHED.json")
     if os.path.exists(fetched):
         out["inputs"] = {"branches": json.load(open(fetched))}
