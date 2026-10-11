@@ -10,6 +10,7 @@ step() { echo; echo "=== $(date -u +%T) $*"; }
 PART="${PART:-chromium}"; PW=/tmp/pw; PWV=1.56.0
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROBE_ONLY=0 ;; esac   # only rec_probe.js in WebKit, with and without phone emulation
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-thr*) THR_ONLY=1 ;; *) THR_ONLY=0 ;; esac   # only the threads experiment (ci/engines/threads.sh)
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-b7*) NO_ST=1 ;; *) NO_ST=0 ;; esac   # the build's checks (check_rec.js, parity, probes, threads) without the self-test, for time
 if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
@@ -84,6 +85,7 @@ import json,sys
 d=json.load(open(sys.argv[1])); print('failed', d.get('failed'), 'of', len(d.get('trials', [])))
 for t in d.get('trials', []): print(t['variant'], t['trial'], json.dumps(t.get('offline'))[:160], '| after', json.dumps(t.get('after'))[:260], '| asked', t.get('asked'), '| errors', json.dumps(t.get('errors'))[:200])" "$OUT/rec/offline-repeat-$B.json"
   fi
+  if [ "$NO_ST" = 1 ]; then echo "(no self-test on ${GITHUB_REF_NAME})"; continue; fi
   step "self-test with the recognizer phase: $B (picture limited to 540 on this software renderer)"
   if [ "$B" = firefox ]; then
     LIBGL_ALWAYS_SOFTWARE=1 HEADED=1 TAG=-xvfb PORT=8781 OUT="$OUT/shots" BROWSERS=firefox VIEWPORTS=phone,desktop LABEL=linux-xvfb LIMIT_MS=480000 EXTRA="&side=540$RECQ" \

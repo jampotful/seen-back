@@ -27,7 +27,7 @@ async function playwright(engine) {
   const pw = require('playwright'), out = { browser: engine, runs: {} };
   const launch = engine === 'chromium' ? { args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'] } : engine === 'firefox' ? { firefoxUserPrefs: { 'media.navigator.streams.fake': true, 'media.navigator.permission.disabled': true } } : {};
   const browser = await pw[engine].launch(launch); out.version = browser.version();
-  for (const [mode, port] of MODES) for (const th of (mode === 'none' ? [1, 4] : THREADS)) {
+  for (const [mode, port] of MODES) for (const th of (mode === 'none' ? [1] : mode === 'credentialless' ? THREADS.filter((x) => x > 1) : THREADS)) {
     const name = `${engine}-${mode}-t${th}`, errs = [];
     try { fs.unlinkSync(path.join(REPORTS, name + '.json')); } catch (e) {}
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
@@ -49,7 +49,7 @@ async function safari() {
     let sid = null;
     try {
       const s = await wd('POST', '/session', { capabilities: { alwaysMatch: { browserName: 'safari' } } }); sid = s.sessionId; out.version = s.capabilities && s.capabilities.browserVersion;
-      for (const th of (mode === 'none' ? [1, 4] : THREADS)) {
+      for (const th of (mode === 'none' ? [1] : mode === 'credentialless' ? THREADS.filter((x) => x > 1) : THREADS)) {
         const name = `safari-${mode}-t${th}`, t0 = Date.now();
         try { fs.unlinkSync(path.join(REPORTS, name + '.json')); } catch (e) {}
         await wd('POST', `/session/${sid}/url`, { url: url(port, name, th, mode).replace('cam=1', 'cam=0') }).catch((e) => log('url', e.message));

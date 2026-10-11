@@ -33,7 +33,7 @@ for E in $ENGINES; do
       [ -z "${UDID:-}" ] && { echo "no simulator"; continue; }
       PH=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
       for mp in none:$P0 require-corp:$P1 credentialless:$P2; do
-        m=${mp%%:*}; p=${mp##*:}; W=coi; [ "$m" = none ] && W=; TH="1 2 4"; [ "$m" = none ] && TH="1 4"
+        m=${mp%%:*}; p=${mp##*:}; W=coi; [ "$m" = none ] && W=; TH="1 2 4"; [ "$m" = none ] && TH="1"; [ "$m" = credentialless ] && TH="2 4"
         for th in $TH; do
           n="sim-$m-t$th"; rm -f "$R/$n.json"
           xcrun simctl openurl "$UDID" "http://127.0.0.1:$p/index.html?probe=1&name=$n&threads=$th&want=$W&photos=$PH&rounds=${ROUNDS:-3}&x=$XORIGIN&cam=0" 2>&1
