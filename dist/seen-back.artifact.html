@@ -2177,21 +2177,34 @@ button { cursor: pointer; }
       check('video: a test clip plays', vidOK, M.tried.join('; '));
       if (vidOK) { M.size = vid.videoWidth + 'x' + vid.videoHeight; watchVideo(); }
     }
-    function videoUpright() {        // the clip has red in its top left corner and blue in its bottom right
-      // only once the element has shown a frame: before its first frame callback WebKit can hand WebGL a black picture (the app's own
-      // loop also uploads a clip's frame only after a frame callback)
+    // The clip has red in its top left corner and blue in its bottom right, in every frame. The check judges a picture made only of
+    // the clip's own frames. One upload from a video element is not enough: before the element has a frame for WebGL, texImage2D can
+    // leave the texture as it was (Chromium kept the still phase's test card: tl [192,192,192], br [38,38,192], read on a phone in
+    // Ecosia and on a build machine, run engines/11) or make it black (WebKit on macOS, run engines/12). So it waits for the element's
+    // first frame callback, then uploads every new frame until four have gone in (the ring has then taken two), and reads the picture
+    // through the human eye, which has no time effects (no persistence, hold or slowed rate), so it shows the last frame uploaded.
+    // The reading after the first upload is kept as `first`, as evidence of the race; it is not judged.
+    function videoUpright() {
+      function corners() {
+        var vw = vid.videoWidth, vh = vid.videoHeight;
+        engine.draw(HUMAN, STEADY, performance.now(), 16);
+        var rc = makeCanvas(vw, vh), rx = rc.getContext('2d', { willReadFrequently: true }); rx.drawImage(canvas, 0, 0);
+        var img = rx.getImageData(0, 0, vw, vh), s = Math.round(vh * .1);
+        return { tl: rgb(stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb), br: rgb(stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb) };
+      }
       var firstFrame = vid.requestVideoFrameCallback ? new Promise(function (res) { var t = setTimeout(res, 1500); vid.requestVideoFrameCallback(function () { clearTimeout(t); res(); }); }) : wait(300);
       return firstFrame.then(function () { return new Promise(function (done) {
-        var vw = vid.videoWidth, vh = vid.videoHeight;
-        sizeCanvas(vw, vh);
-        requestAnimationFrame(function () {
-          engine.setFrame(vid, vw, vh, performance.now());
-          engine.draw(HUMAN, STEADY, performance.now(), 16);
-          var rc = makeCanvas(vw, vh), rx = rc.getContext('2d', { willReadFrequently: true }); rx.drawImage(canvas, 0, 0);
-          var img = rx.getImageData(0, 0, vw, vh), s = Math.round(vh * .1);
-          var tl = stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb, br = stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb;
-          done({ tl: rgb(tl), br: rgb(br), err: engine.state().err });
-        });
+        var t0 = performance.now(), fresh = 0, first = null;
+        sizeCanvas(vid.videoWidth, vid.videoHeight);
+        (function step() {
+          if (vid.readyState >= 2 && vid.videoWidth) {
+            var isNew = vid.requestVideoFrameCallback ? freshV : vid.currentTime !== lastVT;
+            if (isNew || fresh === 0) { freshV = false; lastVT = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, performance.now()); fresh++; if (fresh === 1) first = corners(); }
+          }
+          if (fresh < 4 && performance.now() - t0 < 4000) { requestAnimationFrame(step); return; }
+          var last = corners(), st = engine.state();
+          done({ tl: last.tl, br: last.br, err: st.err, fresh: fresh, writes: st.writes, ms: Math.round(performance.now() - t0), first: first });
+        })();
       }); });
     }
     // what the video element delivers over a while: frame callbacks, and changes of currentTime

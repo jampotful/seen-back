@@ -42,16 +42,16 @@ echo "check_rec webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec
 mkdir -p "$OUT/rec/shots-webkit"; cp test/rec/shots/*.png "$OUT/rec/shots-webkit/" 2>/dev/null; rm -rf test/rec/shots
 step "begin_probe.js: what Begin does in macOS WebKit, with and without check_rec.js's phone emulation"
 BROWSER=webkit PORT=8782 OUT="$OUT/rec" limit 120 node test/engines/begin_probe.js > "$OUT/rec/begin-probe-webkit.json" 2>&1; echo "begin probe: exit $?"; head -c 4000 "$OUT/rec/begin-probe-webkit.json"
-step "check_rec.js again, every check, with locator.tap() made a click (ci/engines/pwshim): webkit (macOS)"
-t0=$(date +%s); NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_TAP_AS_CLICK=1 BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit-click.json" 2> "$OUT/rec/check_rec-webkit-click.err.txt"
-echo "check_rec webkit (tap as click): exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit-click.json"; tail -c 400 "$OUT/rec/check_rec-webkit-click.err.txt"; rm -rf test/rec/shots
+# (run engines/12 ran check_rec.js a second time with locator.tap() made a click: every case still stopped at the same place, so that run is dropped)
 step "check_rec.js parity, real slot: webkit (macOS)"
 t0=$(date +%s); NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_TAP_AS_CLICK=1 BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-webkit.json" 2> "$OUT/rec/parity-real-webkit.err.txt"
 echo "parity (real) webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/parity-real-webkit.json"; tail -c 400 "$OUT/rec/parity-real-webkit.err.txt"
-step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: webkit (macOS)"
-git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
-NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_TAP_AS_CLICK=1 BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-webkit.json" 2> "$OUT/rec/parity-real-patched-webkit.err.txt"
-echo "parity (real, patched) webkit: exit $?"; tail -1 "$OUT/rec/parity-real-patched-webkit.json"; git checkout -q test/rec/check_rec.js
+if git apply --check ci/engines/patches/check_rec-int8-cosine.patch 2>/dev/null; then
+  step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: webkit (macOS)"
+  git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
+  NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_TAP_AS_CLICK=1 BROWSER=webkit PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" limit 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-webkit.json" 2> "$OUT/rec/parity-real-patched-webkit.err.txt"
+  echo "parity (real, patched) webkit: exit $?"; tail -1 "$OUT/rec/parity-real-patched-webkit.json"; git checkout -q test/rec/check_rec.js
+else echo "(ci/engines/patches/check_rec-int8-cosine.patch is already in test/rec/check_rec.js on this commit)"; fi
 
 step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: webkit (macOS)"
 BROWSER=webkit PORT=8782 limit 400 node test/engines/rec_probe.js > "$OUT/rec/probe-webkit.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-webkit.json"

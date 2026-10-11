@@ -46,15 +46,17 @@ for B in $BROWSERS; do
     BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-$B.json" 2> "$OUT/rec/parity-real-$B.err.txt"
   fi
   echo "parity (real) $B: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/parity-real-$B.json"; tail -c 400 "$OUT/rec/parity-real-$B.err.txt"
-  step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: $B"
-  git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
-  if [ "$B" = firefox ]; then
-    NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" \
-      timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
-  else
-    BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
-  fi
-  echo "parity (real, patched) $B: exit $?"; tail -1 "$OUT/rec/parity-real-patched-$B.json"; git checkout -q test/rec/check_rec.js
+  if git apply --check ci/engines/patches/check_rec-int8-cosine.patch 2>/dev/null; then
+    step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: $B"
+    git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
+    if [ "$B" = firefox ]; then
+      NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" \
+        timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
+    else
+      BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
+    fi
+    echo "parity (real, patched) $B: exit $?"; tail -1 "$OUT/rec/parity-real-patched-$B.json"; git checkout -q test/rec/check_rec.js
+  else echo "(ci/engines/patches/check_rec-int8-cosine.patch is already in test/rec/check_rec.js on this commit)"; fi
   if [ "$B" = webkit ]; then
     step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: $B"
     BROWSER=$B PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-$B.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-$B.json"
