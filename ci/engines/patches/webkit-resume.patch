@@ -1,0 +1,36 @@
+diff --git a/src/cam.rec.js b/src/cam.rec.js
+index c7f569d..37e07f2 100644
+--- a/src/cam.rec.js
++++ b/src/cam.rec.js
+@@ -334,6 +334,18 @@
+         if (!cache) throw err('keep', 'this browser gave no store to keep it in');
+         store = cache;
+         var P = partsOf(M.vision), i = 0;
++        // A part counts as kept once it can be read back. WebKit, for some seconds after a reload, answers a put as done and keeps nothing
++        // (runs/engines/42-linux-firefox-webkit): there the part is put again, a little later each time, until it stays.
++        function keep(key, b, tries) {
++          return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
++            throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
++          }).then(function () { return cache.match(key, { ignoreVary: true }); }).then(function (hit) {
++            if (hit) return;
++            if (tries >= 8 || halted()) throw err(halted() ? 'stopped' : 'keep', 'a part was not kept after ' + (tries + 1) + ' tries');
++            diag('large-keep-again', key.replace(/^.*\/part\//, '').slice(0, 12) + ' ' + (tries + 1));
++            return new Promise(function (res) { setTimeout(res, 500 * Math.pow(2, Math.min(tries, 4))); }).then(function () { return keep(key, b, tries + 1); });
++          });
++        }
+         function next() {
+           if (i >= P.length) return Promise.resolve();
+           var part = P[i++], key = partKey(part);
+@@ -346,11 +358,7 @@
+               return readAll(r, part.bytes, function (n) { partGot += n; notify(); });
+             }).then(function (b) {
+               if (b.byteLength !== part.bytes) throw err('damaged', part.url + ' is ' + b.byteLength + ' bytes, not ' + part.bytes);
+-              return sha256(part.sha256)(b).then(function () {
+-                return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
+-                  throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
+-                });
+-              });
++              return sha256(part.sha256)(b).then(function () { return keep(key, b, 0); });
+             }).then(function () { keptBytes += part.bytes; partGot = 0; notify(); }, function (e) {
+               partGot = 0;
+               throw halted() ? err('stopped') : e && e.code ? e : err('network', part.url + ' ' + ((e && e.message) || ''));

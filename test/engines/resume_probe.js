@@ -23,7 +23,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     if (!PERSIST) ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
     const page = PERSIST ? (ctx.pages()[0] || await ctx.newPage()) : await ctx.newPage();
     // Every call the page makes to Cache Storage, with its result and its caller, as console lines "KT {...}" (they survive the reload)
-    const trace = () => {
+    const trace = (arg) => {
       if (!window.Cache || window.__kt) return; window.__kt = 1;
       const pid = Math.random().toString(36).slice(2, 6), ids = new WeakMap(); let seq = 0, nc = 0;
       const cid = (c) => { if (!c || typeof c !== 'object') return 0; if (!ids.has(c)) ids.set(c, ++nc); return ids.get(c); };
@@ -44,14 +44,30 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       ['open', 'match', 'delete', 'keys', 'has'].forEach((m) => wrap(CacheStorage.prototype, m, 'caches'));
       log({ op: 'document', u: location.href.replace(/^.*\?/, '?').slice(0, 80) });
       addEventListener('pagehide', () => log({ op: 'pagehide' })); addEventListener('beforeunload', () => log({ op: 'beforeunload' }));
+      // "window": for 12 s from the document's start, a small entry is put into keep-v1 every 250 ms and read back at once, and the
+      // entries of every document so far are counted: when, after a reload, does a put stay, and does anything of the last page remain?
+      if (arg && arg.window) caches.open('keep-v1').then((c) => {
+        const t0 = performance.now(); let i = 0;
+        const tick = () => {
+          if (performance.now() - t0 > 12000) return;
+          const k = location.origin + '/__kt/' + pid + '/' + (++i), j = i;
+          c.put(k, new Response('x')).then(() => c.match(k)).then((h) => (j % 4 ? null : c.keys()).then((ks) => {
+            const o = { op: 'W', i: j, hit: !!h }; if (ks) { const w = ks.map((q) => q.url).filter((u) => /\/__kt\//.test(u)); o.own = w.filter((u) => u.indexOf('/' + pid + '/') > 0).length; o.other = w.length - o.own; o.all = ks.length; }
+            log(o);
+          })).catch((e) => log({ op: 'W', i: j, e: String(e) })).then(() => setTimeout(tick, 250));
+        };
+        tick();
+      });
     };
-    await page.addInitScript(trace);
+    await page.addInitScript(trace, { window: /window/.test(REF) });
     page.on('console', (m) => { const x = m.text(); if (/^KT /.test(x)) { if (out.trace.length < 1500) out.trace.push(x.slice(3, 600)); return; } out.console.push(m.type() + ': ' + x.slice(0, 200)); });
     page.on('pageerror', (e) => out.console.push('pageerror: ' + String(e.message).slice(0, 200)));
     const noCamera = () => { if (!navigator.mediaDevices) return; const no = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError'));
       for (const o of [navigator.mediaDevices, window.MediaDevices && MediaDevices.prototype]) { if (o) try { Object.defineProperty(o, 'getUserMedia', { value: no, configurable: true, writable: true }); } catch (e) {} } };
     await page.addInitScript(noCamera);
-    await page.goto(ORIGIN + '/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big', { waitUntil: 'load' });
+    let BIGQ = 'test/rec/models/standin-big';         // the stand-in's manifest names port 8788; for another, a copy of it is written beside it
+    if (BIG_PORT !== 8788) { const fs = require('fs'), d = path.join(__dirname, '..', 'rec', 'models', 'standin-big'); fs.writeFileSync(path.join(d, 'manifest.port.json'), fs.readFileSync(path.join(d, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); BIGQ += '/manifest.port.json'; }
+    await page.goto(ORIGIN + '/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=' + BIGQ, { waitUntil: 'load' });
     await page.waitForFunction(() => window.__seenBack && window.__seenBack.rec.about().state === 'ready', null, { timeout: 60000 });
     await page.evaluate(noCamera); await page.locator('#btnBegin').click(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
     await page.locator('#inAnimalPick').setInputFiles(path.join(__dirname, '..', 'rec', 'photos', 'stripes.png'));
