@@ -1,0 +1,128 @@
+{
+ "id": "tinyclip-39m-16",
+ "licence": "MIT",
+ "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+ "vision": {
+  "url": "vision.int8-per-channel.onnx",
+  "bytes": 40978137,
+  "sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+  "from": "pub/lab-tinyclip-39m-16:onnx/vision.int8-per-channel.onnx",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ],
+  "made_from": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "bias": [
+   0.56031,
+   0.70495,
+   -2.16855,
+   2.09192,
+   -1.39307,
+   0.14477,
+   -0.59252,
+   0.08143,
+   -0.76941,
+   -1.29723,
+   -2.343,
+   -1.22078,
+   0.59747,
+   0.39797,
+   2.69785,
+   -0.38932,
+   2.92505
+  ]
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5911,
+  "bias_url": "species.bias.f32.bin"
+ },
+ "fusion": {
+  "t_kind": 0.5,
+  "t_species": 100.0,
+  "alpha_prior": 0.5,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.67,
+  "offer_at": 2.0,
+  "prior_floor": 1e-06,
+  "kind_at": 0.54
+ },
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on val by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+ "evaluation": {
+  "model": "tinyclip-39m-16",
+  "head": "discriminant + sentences",
+  "choice": "shrinkage 0.3, species_com, gamma 0.03",
+  "train": "alachua-pre2025",
+  "train_vectors": "images/alachua-pre2025 (licence rule by)",
+  "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 0.0,
+   "c": 0.1
+  },
+  "kind_head": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "kind_tuned_with_extra_set": true
+ },
+ "needs": [
+  "species.bias_url (build 7 of the page)",
+  "kinds.bias (build 7 of the page)",
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fitted_on": {
+  "rule": "Rows were fitted only on photos in the public domain (CC0, no known copyright restrictions, United States Government work) or shared under CC BY.",
+  "licence_rule": "by",
+  "photos": 19859,
+  "by_licence": {
+   "CC-BY": 13555,
+   "CC0": 5317,
+   "CC-BY-2.0": 974,
+   "no-known-copyright-restrictions": 13
+  },
+  "by_set": {
+   "train/alachua-pre2025": 18872,
+   "extra/coco-kinds": 987
+  },
+  "list": "fitted_on.csv",
+  "sources": "train/alachua-pre2025: iNaturalist observations (open-data files); extra/coco-kinds: COCO 2017 images from Flickr. Each row of the list gives the address and the licence.",
+  "not_listed": "Settings (prior weight, temperatures, thresholds) were chosen on the evaluation photos of the `val` split and on a third of the extra set's training rows; no row was fitted on them."
+ },
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never",
+ "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 1803 wildlife tuning photos and on 3056 extra-set (coco-kinds) tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
+}
