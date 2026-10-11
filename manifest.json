@@ -1,0 +1,184 @@
+{
+ "id": "tinyclip-39m-16",
+ "licence": "MIT",
+ "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+ "vision": {
+  "url": "vision.int8-per-channel.onnx",
+  "bytes": 40978137,
+  "sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+  "from": "pub/lab-tinyclip-39m-16:onnx/vision.int8-per-channel.onnx",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ],
+  "made_from": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "bias": [
+   0.1998,
+   0.87288,
+   -0.12905,
+   2.17021,
+   -2.02688,
+   -1.02382,
+   -1.26973,
+   0.25515,
+   -2.90233,
+   -0.81404,
+   -2.40647,
+   -1.04486,
+   1.50216,
+   0.47353,
+   3.08519,
+   0.74393,
+   2.78525
+  ]
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5391,
+  "bias_url": "species.bias.f32.bin"
+ },
+ "fusion": {
+  "t_kind": 0.5,
+  "t_species": 100.0,
+  "alpha_prior": 0.75,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.89,
+  "offer_at": 0.98,
+  "prior_floor": 1e-06,
+  "kind_at": 0.53
+ },
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on val by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+ "evaluation": {
+  "model": "tinyclip-39m-16",
+  "head": "discriminant",
+  "choice": "shrinkage 0.03",
+  "train": "alachua-pre2025",
+  "train_vectors": "images/alachua-pre2025 (licence rule nc)",
+  "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 0.0,
+   "c": 0.1
+  },
+  "kind_head": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "kind_tuned_with_extra_set": true,
+  "measured": {
+   "from": "docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json (tools/eval/shipped.py through tools/fusion/fuse.py)",
+   "test_photos": 4197,
+   "kind_right": [
+    0.8914,
+    0.8821,
+    0.9006,
+    4197
+   ],
+   "kind_asserted": [
+    0.817,
+    0.8056,
+    0.8289,
+    4197
+   ],
+   "kind_right_when_asserted": [
+    0.9633,
+    0.9571,
+    0.9694,
+    3429
+   ],
+   "species_top1": [
+    0.5375,
+    0.5225,
+    0.5535,
+    4197
+   ],
+   "named": [
+    0.2013,
+    0.1894,
+    0.214,
+    4197
+   ],
+   "named_right": [
+    0.9325,
+    0.916,
+    0.9491,
+    845
+   ],
+   "extra_test_photos": 1240,
+   "extra_kind_right": [
+    0.9685,
+    0.9581,
+    0.9782,
+    1240
+   ],
+   "named_on_people_and_rooms": 0.0,
+   "intervals": "95% bootstrap intervals over photos: [share, low, high, photos]"
+  },
+  "decision": {
+   "from": "docs/eval/decision-pocket-v3.json (tools/eval/decide_v3.py)",
+   "rule": "The candidate (heads fitted on the training photos under the licence rule nc, TinyCLIP 39M/16, name_at at the 92-in-100 level on val) ships unless, on the test photos, (i) its kind of eye on wildlife is worse than pocket v2's by a paired difference whose 95% interval lies wholly below zero, (ii) its kind of eye on the extra set's test photos is right for less than 96.5%, or (iii) it names a species on more than 1% of the test photos of people and rooms. The rule was set by the coordinator before the candidate was measured.",
+   "why": "The candidate passes all three tests, so it ships as pocket v3."
+  }
+ },
+ "needs": [
+  "species.bias_url (build 7 of the page)",
+  "kinds.bias (build 7 of the page)",
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fitted_on": {
+  "rule": "Rows were fitted only on photos in the public domain (CC0, no known copyright restrictions, United States Government work) or shared under CC BY or CC BY-NC; photos under any licence with ND or SA terms were left out.",
+  "licence_rule": "nc",
+  "photos": 83348,
+  "by_licence": {
+   "CC-BY-NC": 62694,
+   "CC-BY": 13555,
+   "CC0": 5317,
+   "CC-BY-2.0": 974,
+   "CC-BY-NC-2.0": 795,
+   "no-known-copyright-restrictions": 13
+  },
+  "by_set": {
+   "train/alachua-pre2025": 81566,
+   "extra/coco-kinds": 1782
+  },
+  "list": "fitted_on.csv",
+  "sources": "train/alachua-pre2025: iNaturalist observations (open-data files); extra/coco-kinds: COCO 2017 images from Flickr. Each row of the list gives the address and the licence.",
+  "not_listed": "Settings (prior weight, temperatures, thresholds) were chosen on the evaluation photos of the `val` split and on a third of the extra set's training rows; no row was fitted on them."
+ },
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never; name_at is the lowest level from which a named species was right at least 92 times in 100 on the tuning photos; offer_at is the nine-in-ten level for the photos left without a name",
+ "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 1803 wildlife tuning photos and on 3056 extra-set (coco-kinds) tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
+}
