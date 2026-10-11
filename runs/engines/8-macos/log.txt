@@ -1,0 +1,110 @@
+
+=== 02:32:04 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.12.10
+
+=== 02:32:06 build
+build 6 | index.html 183069 bytes | artifact 180491 bytes
+build ok
+
+=== 02:32:06 iPhone simulator: boot it now, it takes a while
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+
+=== 02:32:21 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+python 1.31.0 12.3.0 2.5.4
+total 153616
+drwxr-xr-x  8 runner  wheel       256 Oct 11 02:34 .
+drwxr-xr-x  8 runner  wheel       256 Oct 11 02:34 ..
+-rw-r--r--  1 runner  wheel      8822 Oct 11 02:34 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 576765
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.3649], ['plant', 0.2287], ['deer', 0.1062]]
+  python: asset-portrait.jpg [['person', 0.9391], ['none', 0.0363], ['other', 0.0087]]
+  python: big12mp.jpg [['none', 0.3967], ['plant', 0.1959], ['frog', 0.0999]]
+  python: dots.png [['none', 0.8679], ['plant', 0.0578], ['person', 0.0453]]
+  python: garden.jpg [['none', 0.3292], ['plant', 0.2174], ['deer', 0.1221]]
+  python: heron.png [['wader', 0.6513], ['bird', 0.2546], ['hawk', 0.0488]]
+  python: info-exif6.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: odd.png [['none', 0.8681], ['plant', 0.0415], ['other', 0.0256]]
+  python: portrait.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: rings.png [['other', 0.2688], ['none', 0.2334], ['plant', 0.2143]]
+  python: small.png [['plant', 0.6989], ['other', 0.082], ['bird', 0.0618]]
+  python: stripes.png [['none', 0.7913], ['plant', 0.0713], ['other', 0.047]]
+  python: wall.png [['none', 0.9664], ['person', 0.0153], ['plant', 0.0049]]
+  python: wide.png [['none', 0.2437], ['plant', 0.2288], ['rabbit', 0.1381]]
+
+=== 02:34:58 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 02:35:56 playwright 1.56.0 and WebKit
+added 2 packages in 13s
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 02:36:43 check_rec.js, every check, stand-in model: webkit (macOS)
+check_rec webkit: exit 1 in 169 s
+flow (did not finish): FAILED | fuse (did not finish): FAILED | parity (did not finish): FAILED | progress (did not finish): FAILED | offline (did not finish): FAILED | missing (did not finish): FAILED | damaged (did not finish): FAILED | dying (did not finish): FAILED | about (did not finish): FAILED | viewer: ok
+ci/engines/macos.sh: line 41: 10474 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 02:39:32 check_rec.js parity, real slot: webkit (macOS)
+parity (real) webkit: exit 1 in 16 s
+parity (did not finish): FAILED
+ci/engines/macos.sh: line 45: 15331 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 02:39:48 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+02:40:25 webkit-phone 26.0 done=true ok=true fails=0 checks=142 webgl2=true float=true Apple GPU 36864ms
+02:41:07 webkit-desktop 26.0 done=true ok=true fails=0 checks=142 webgl2=true float=true Apple GPU 41520ms
+
+=== 02:41:07 self-test with the recognizer phase: real Safari through safaridriver
+safaridriver --enable: exit 0
+02:41:22 session A948F851-CAE4-4A16-A7F7-8AB7E6CB8132 26.6.2
+02:42:05 safari 26.6.2 done=true ok=true fails=0 Apple GPU
+safari.js: exit 0
+ci/engines/macos.sh: line 56: 19783 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 02:42:06 iPhone simulator: Safari opens the self-test with the recognizer phase and posts its report
+Device already booted, nothing to do.
+
+openurl: exit 0
+report arrived after 34 s
+iphone-01.json iphone-02.json iphone-03.json iphone-04.json iphone-05.json iphone.json safari-desktop-01.json safari-desktop-02.json safari-desktop-03.json safari-desktop-04.json safari-desktop-05.json safari-desktop.json webkit-desktop-01.json webkit-desktop-02.json webkit-desktop-03.json webkit-desktop-04.json webkit-desktop-05.json webkit-desktop.json webkit-phone-01.json webkit-phone-02.json webkit-phone-03.json webkit-phone-04.json webkit-phone-05.json webkit-phone.json 
+
+=== 02:47:15 summary
+safari desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone-05.json', 'iphone.json']
+
+=== 02:47:16 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 30 total bytes: 983820
+1.1M	/Users/runner/work/seen-back/seen-back/out
