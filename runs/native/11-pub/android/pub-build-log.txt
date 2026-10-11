@@ -1,0 +1,16 @@
+
+=== 17:02:27 the bundle without check files (TEST=0), and the APK to publish
+bundle: 30 files, 70160 kB in native/android-shell/app/src/main/assets/www
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.10.2/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1791738149627.json
+
+BUILD SUCCESSFUL in 8s
+33 actionable tasks: 33 executed
+assembleDebug took 9 s
+apk/check.apk: 55329783 bytes, sha256 482e56ed31b4ac618a099d43d0203dac75825fc9e6f0120f4731e223e155c64f
+apk/seen-back-debug.apk: 54200498 bytes, sha256 bb964b2025bb3bf9203ca0e59770a70bc0d965e0fc28fb1e99d9faa038161db2
+
+=== 17:02:36 compare the two APKs entry by entry
+entries: 51 in the check APK, 36 in the published APK, 36 identical (same CRC-32 and size)
+verdict: the APKs differ only in check files and signature files
