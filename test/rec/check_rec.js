@@ -16,6 +16,11 @@ const SLOT = process.env.SLOT || 'test/rec/models/standin';
 // The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
 const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (q || '');
 const SVC_PORT = +(process.env.SVC_PORT || 8784);
+// SLOW=4 on a busy machine: every wait for something to appear lasts four times as long before it gives up. Nothing else changes.
+const SLOW = +(process.env.SLOW || 1);
+const patient = (page) => { if (SLOW === 1) return page;
+  const scale = (o) => (o && o.timeout ? Object.assign({}, o, { timeout: o.timeout * SLOW }) : o), wf = page.waitForFunction.bind(page), ws = page.waitForSelector.bind(page);
+  page.waitForFunction = (fn, arg, o) => wf(fn, arg, scale(o)); page.waitForSelector = (sel, o) => ws(sel, scale(o)); return page; };
 const phone = Object.assign({}, devices['Pixel 7']);
 if (ENGINE === 'firefox') { delete phone.isMobile; delete phone.userAgent; }      // Firefox has no mobile emulation in Playwright
 if (ENGINE === 'webkit') delete phone.userAgent;
@@ -29,19 +34,25 @@ const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
 const about = (page) => page.evaluate(() => window.__seenBack.rec.about());
 const st = (page) => page.evaluate(() => { const b = window.__seenBack; return { screen: b.S.screen, eyes: b.S.eyes, named: b.S.named, claim: !document.getElementById('claim').hidden }; });
-const noCamera = () => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError')); };
+// The camera refused. In macOS WebKit the init script's refusal did not take: Begin waited on a getUserMedia that never answered (no
+// prompt can appear there), so every case stopped at #askAnimal (runs engines/12 and 15). So the refusal is also defined on the
+// prototype, and begin() sets it again in the loaded page before it taps.
+// ("Button failed to load, iconName = ...-placard" is macOS WebKit's own video controls, logged as an error; it is not the page's.)
+const noCamera = () => { if (!navigator.mediaDevices) return; const no = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError'));
+  try { navigator.mediaDevices.getUserMedia = no; } catch (e) {}
+  for (const o of [navigator.mediaDevices, window.MediaDevices && MediaDevices.prototype]) { if (o) try { Object.defineProperty(o, 'getUserMedia', { value: no, configurable: true, writable: true }); } catch (e) {} } };
 
 async function open(browser, q, opts, ctxIn) {
   const ctx = ctxIn || await browser.newContext(Object.assign({}, phone, opts || {}));
-  const page = await ctx.newPage(); const errors = [];
+  const page = patient(await ctx.newPage()); const errors = [];
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
-  page.on('console', (m) => { if (m.type() === 'error' && !/favicon|Failed to load resource|ERR_INTERNET_DISCONNECTED|ERR_FAILED/.test(m.text())) errors.push('console: ' + m.text()); });
+  page.on('console', (m) => { if (m.type() === 'error' && !/favicon|Failed to load resource|ERR_INTERNET_DISCONNECTED|ERR_FAILED|Button failed to load, iconName = [\w-]*placard/.test(m.text())) errors.push('console: ' + m.text()); });
   await page.addInitScript(noCamera);
   await page.goto(url(q)); await page.waitForTimeout(300);
   return { ctx, page, errors };
 }
 const ready = (page, ms) => page.waitForFunction(() => window.__seenBack.rec.about().state === 'ready', null, { timeout: ms || 60000 });
-const begin = async (page) => { await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); };
+const begin = async (page) => { await page.evaluate(noCamera).catch(() => {}); await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); };
 // choose a photo of who was met, and wait until it has a name or the sheet asks for one
 async function meet(page, name) {
   if (!(await page.locator('#askAnimal').isVisible())) {
@@ -131,7 +142,7 @@ async function meet(page, name) {
   });
 
   if (want.includes('camera')) await section('camera', async () => {   // the live camera and the shutter: the frame as it is goes to the recognizer, and the picture keeps being drawn
-    const ctx = await browser.newContext(Object.assign({}, phone, { permissions: ['camera'] })); const page = await ctx.newPage(); const errors = [];
+    const ctx = await browser.newContext(Object.assign({}, phone, { permissions: ['camera'] })); const page = patient(await ctx.newPage()); const errors = [];
     page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
     await page.goto(url('&nosw=1&rec=' + SLOT)); await ready(page);
     const r = {};
@@ -329,7 +340,13 @@ async function meet(page, name) {
       r.unknownArrangement = { line: await svcLine(b.page), posts: fake.calls().length }; all('unknownArrangement', r.unknownArrangement.line === '' && r.unknownArrangement.posts === 0); await b.ctx.close();
     }
     { // consent first
-      const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page); await svcWatch(page);
+      const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page);
+      // how service.json is read: where the server is said to be, and what is not accepted as a service at all
+      r.read = await page.evaluate(() => { const read = window.__seenBack.svc.test.read, c = 'https://someone-seen-back.hf.space/gradio_api/call/identify';
+        const a = read({ api: 'gradio', call: c, region: 'us-fl-alachua', model: 'bioclip2-l14' }), b = read({ api: 'gradio', call: 'https://example.org/gradio_api/call/identify' });
+        return { hf: a && a.where, kindAt: a && a.kindAt, nameAt: a && a.nameAt, top: a && a.top, other: b && b.where, plainHttp: read({ api: 'gradio', call: 'http://example.org/call/identify' }), noCall: read({ api: 'gradio' }), restApi: read({ api: 'rest', call: c }), notAnObject: read('x') }; });
+      all('read', r.read.hf === 'hosted by Hugging Face' && r.read.kindAt === null && r.read.nameAt === 0 && r.read.top === 5 && r.read.other === 'at example.org' && r.read.plainHttp === null && r.read.noCall === null && r.read.restApi === null && r.read.notAnObject === null);
+      await begin(page); await svcWatch(page);
       const s1 = await meet(page, 'stripes.png');
       await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForSelector('#svcView', { state: 'visible', timeout: 6000 });
       r.offer = { eyesAtOnce: s1.eyes, shown: s1.shown, line: await text(page, 'svcView'), sentBeforeYes: fake.calls().length };
@@ -597,7 +614,7 @@ async function meet(page, name) {
 
   if (want.includes('viewer')) await section('viewer', async () => {   // inside Claude's viewer nothing of this starts: no worker, no request for the recognizer
     await ctl('reset=1');
-    const ctx = await browser.newContext(Object.assign({}, phone)); const page = await ctx.newPage();
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage());
     await page.addInitScript(() => { window.claude = { use: () => Promise.resolve(null) }; });
     await page.goto(url('&nosw=1&rec=' + SLOT)); await page.waitForTimeout(2500);
     const r = { usable: await page.evaluate(() => window.__seenBack.rec.usable()), asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin|vendor|service/.test(x)), block: (await page.evaluate(() => window.__seenBack.about())).split('\n')[1] };

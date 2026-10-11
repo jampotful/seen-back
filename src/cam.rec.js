@@ -487,5 +487,5 @@
       return { promise: promise, cancel: function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} } };
     }
     return { config: config, choice: choice, setChoice: setChoice, ask: ask, cfg: function () { return cfg; },
-      test: { times: function (t) { for (var k in t) T[k] = t[k]; return T; } } };
+      test: { times: function (t) { for (var k in t) T[k] = t[k]; return T; }, read: function (j) { return readConfig(j); } } };
   })();
