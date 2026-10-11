@@ -11,17 +11,63 @@ const get = (u) => new Promise((res, rej) => http.get(u, (r) => { let b = ''; r.
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 (async () => {
   const out = { browser: NAME, console: [], before: null, after: [] };
-  const browser = await pw[NAME].launch(); out.version = browser.version();
+  // REF (the run branch's name) chooses a variant: "persist" uses a persistent context (a profile on disk, as Safari has) instead of
+  // Playwright's ephemeral one; "halt" stops the download and lets it settle before the reload, so that no fetch is in flight then.
+  const REF = process.env.GITHUB_REF_NAME || process.env.VARIANT || '', PERSIST = /persist/.test(REF), HALT = /halt/.test(REF), SW = /-sw/.test(REF);   // "-sw": the service worker is let in (as on the live page)
+  out.variant = { ref: REF, persist: PERSIST, halt: HALT, sw: SW }; out.trace = [];
+  let browser = null, ctx;
+  if (PERSIST) { const dir = require('fs').mkdtempSync(require('os').tmpdir() + '/resume-'); ctx = await pw[NAME].launchPersistentContext(dir, { viewport: { width: 390, height: 844 }, hasTouch: true }); }
+  else { browser = await pw[NAME].launch(); out.version = browser.version(); }
   try {
     await get(ORIGIN + '/__ctl?reset=1'); await get(BIG + '/__ctl?reset=1'); await get(BIG + '/__ctl?slow=part01&bps=50000');
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
-    const page = await ctx.newPage();
-    page.on('console', (m) => out.console.push(m.type() + ': ' + m.text().slice(0, 200)));
+    if (!PERSIST) ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+    const page = PERSIST ? (ctx.pages()[0] || await ctx.newPage()) : await ctx.newPage();
+    // Every call the page makes to Cache Storage, with its result and its caller, as console lines "KT {...}" (they survive the reload)
+    const trace = (arg) => {
+      if (!window.Cache || window.__kt) return; window.__kt = 1;
+      const pid = Math.random().toString(36).slice(2, 6), ids = new WeakMap(); let seq = 0, nc = 0;
+      const cid = (c) => { if (!c || typeof c !== 'object') return 0; if (!ids.has(c)) ids.set(c, ++nc); return ids.get(c); };
+      const short = (u) => String(u && u.url || u).replace(/^https?:\/\/[^\/]+\//, '').replace(/^test\/rec\/models\//, '').replace(/[0-9a-f]{64}/, (m) => m.slice(0, 8));
+      const who = () => (new Error().stack || '').split('\n').slice(3, 8).map((l) => { l = l.trim().replace(/^at /, ''); const name = l.split(/[@ ]/)[0] || '?', pos = /:(\d+):(\d+)\)?$/.exec(l); return name + (pos ? ':' + pos[1] + ':' + pos[2] : ''); }).join(' < ');
+      const log = (o) => { try { console.debug('KT ' + JSON.stringify(Object.assign({ p: pid, t: Math.round(performance.now()) }, o))); } catch (e) {} };
+      const sum = (name, v) => name === 'keys' ? (v || []).map(short).filter((u) => /big|manifest/.test(u)) : name === 'open' ? 'cache#' + cid(v) : name === 'match' ? (v ? 'hit ' + (v.headers.get('content-length') || '?') : 'miss') : v;
+      const wrap = (proto, name, kind) => {
+        const f = proto && proto[name]; if (!f) return;
+        proto[name] = function (...a) {
+          const u = a.length ? short(a[0]) : '', quiet = (name === 'match' || name === 'put') && !/standin-big/.test(u), n = ++seq;
+          if (!quiet) log({ n, op: kind + (kind === 'cache' ? '#' + cid(this) : '') + '.' + name, u, opt: a[1] && name !== 'put' ? a[1] : undefined, by: who() });
+          let r; try { r = f.apply(this, a); } catch (e) { log({ n, ph: 'throw', e: e.name + ' ' + e.message }); throw e; }
+          return Promise.resolve(r).then((v) => { if (!quiet) log({ n, ph: 'ok', v: sum(name, v) }); return v; }, (e) => { log({ n, ph: 'err', op: name, u, e: (e && e.name) + ' ' + (e && e.message) }); throw e; });
+        };
+      };
+      ['put', 'match', 'delete', 'keys', 'add', 'addAll', 'matchAll'].forEach((m) => wrap(Cache.prototype, m, 'cache'));
+      ['open', 'match', 'delete', 'keys', 'has'].forEach((m) => wrap(CacheStorage.prototype, m, 'caches'));
+      log({ op: 'document', u: location.href.replace(/^.*\?/, '?').slice(0, 80) });
+      addEventListener('pagehide', () => log({ op: 'pagehide' })); addEventListener('beforeunload', () => log({ op: 'beforeunload' }));
+      // "window": for 12 s from the document's start, a small entry is put into keep-v1 every 250 ms and read back at once, and the
+      // entries of every document so far are counted: when, after a reload, does a put stay, and does anything of the last page remain?
+      if (arg && arg.window) caches.open('keep-v1').then((c) => {
+        const t0 = performance.now(); let i = 0;
+        const tick = () => {
+          if (performance.now() - t0 > 12000) return;
+          const k = location.origin + '/__kt/' + pid + '/' + (++i), j = i;
+          c.put(k, new Response('x')).then(() => c.match(k)).then((h) => (j % 4 ? null : c.keys()).then((ks) => {
+            const o = { op: 'W', i: j, hit: !!h }; if (ks) { const w = ks.map((q) => q.url).filter((u) => /\/__kt\//.test(u)); o.own = w.filter((u) => u.indexOf('/' + pid + '/') > 0).length; o.other = w.length - o.own; o.all = ks.length; }
+            log(o);
+          })).catch((e) => log({ op: 'W', i: j, e: String(e) })).then(() => setTimeout(tick, 250));
+        };
+        tick();
+      });
+    };
+    await page.addInitScript(trace, { window: /window/.test(REF) });
+    page.on('console', (m) => { const x = m.text(); if (/^KT /.test(x)) { if (out.trace.length < 1500) out.trace.push(x.slice(3, 600)); return; } out.console.push(m.type() + ': ' + x.slice(0, 200)); });
     page.on('pageerror', (e) => out.console.push('pageerror: ' + String(e.message).slice(0, 200)));
     const noCamera = () => { if (!navigator.mediaDevices) return; const no = () => Promise.reject(new DOMException('Permission denied', 'NotAllowedError'));
       for (const o of [navigator.mediaDevices, window.MediaDevices && MediaDevices.prototype]) { if (o) try { Object.defineProperty(o, 'getUserMedia', { value: no, configurable: true, writable: true }); } catch (e) {} } };
     await page.addInitScript(noCamera);
-    await page.goto(ORIGIN + '/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=test/rec/models/standin-big', { waitUntil: 'load' });
+    let BIGQ = 'test/rec/models/standin-big';         // the stand-in's manifest names port 8788; for another, a copy of it is written beside it
+    if (BIG_PORT !== 8788) { const fs = require('fs'), d = path.join(__dirname, '..', 'rec', 'models', 'standin-big'); fs.writeFileSync(path.join(d, 'manifest.port.json'), fs.readFileSync(path.join(d, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); BIGQ += '/manifest.port.json'; }
+    await page.goto(ORIGIN + '/index.html?side=420&svc=off' + (SW ? '' : '&nosw=1') + '&rec=test/rec/models/standin&big=' + BIGQ, { waitUntil: 'load' });
     await page.waitForFunction(() => window.__seenBack && window.__seenBack.rec.about().state === 'ready', null, { timeout: 60000 });
     await page.evaluate(noCamera); await page.locator('#btnBegin').click(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
     await page.locator('#inAnimalPick').setInputFiles(path.join(__dirname, '..', 'rec', 'photos', 'stripes.png'));
@@ -31,15 +77,25 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     const now = () => page.evaluate(() => { const B = window.__seenBack, a = B.big.about(); return { t: Math.round(performance.now()), ready: document.readyState, have: a.have, kept: a.keptBytes, state: a.state, why: a.why, fail: a.fail, getFail: a.getFail, choice: B.bigChoice(), online: navigator.onLine,
       diag: B.diag().filter((d) => /^large/.test(d.what)).slice(-4).map((d) => d.what + ' ' + String(d.code).slice(0, 120)), line: (document.getElementById('svcView').hidden ? '' : document.getElementById('svcView').textContent) || (document.getElementById('svcHud').hidden ? '' : document.getElementById('svcHud').textContent) }; });
     out.before = await now(); out.asked = await get(BIG + '/__ctl?log=1');
+    out.swBefore = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), registrations: navigator.serviceWorker ? 'yes' : 'none' }));
+    if (HALT) {        // no fetch in flight at the reload: stopped, settled, and the choice set back to 'yes' so that the next visit carries on
+      await page.evaluate(() => window.__seenBack.big.halt());
+      for (let i = 0; i < 20; i++) { await sleep(250); if (await page.evaluate(() => window.__seenBack.big.about().have !== 'getting')) break; }
+      await sleep(1000); out.halted = await now();
+      await page.evaluate(() => localStorage.setItem('seenback.large.v1', 'yes'));
+    }
+    out.keysBefore = await page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url.replace(/^.*standin-big\//, '').replace(/[0-9a-f]{64}/, 'SHA')).filter((u) => !/^http/.test(u)));
     const t0 = Date.now(); await page.reload(); out.reloadMs = Date.now() - t0;
     for (let i = 0; i < 45; i++) {
       await sleep(1000);
       try { const s = await now(); s.at = Math.round((Date.now() - t0) / 1000); out.after.push(s); if (s.have === 'kept' && s.state === 'ready') break; } catch (e) { out.after.push({ error: String(e.message).split('\n')[0] }); }
     }
     out.askedAfter = await get(BIG + '/__ctl?log=1');
+    out.swAfter = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller) }));
     out.kept = await page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url.replace(/^.*standin-big\//, '').replace(/[0-9a-f]{64}/, 'SHA')).filter((u) => !/^http/.test(u)));
+    out.stores = await page.evaluate(async () => { const o = {}; for (const n of await caches.keys()) o[n] = (await (await caches.open(n)).keys()).map((q) => q.url.replace(/^https?:\/\/[^\/]+\//, '').replace(/[0-9a-f]{64}/, 'SHA')).filter((u) => /big/.test(u)); return o; });
   } catch (e) { out.error = String(e && e.stack || e).slice(0, 600); }
-  await browser.close().catch(() => {});
+  await (browser || ctx).close().catch(() => {});
   console.log(JSON.stringify(out, null, 1));
   process.exit(0);
 })();

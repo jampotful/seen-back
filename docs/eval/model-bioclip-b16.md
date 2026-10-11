@@ -19,7 +19,7 @@ Species rows made from the taxonomy and English name; settings chosen on `val`: 
 | alligator | 110 | 72.7% (64.5 to 80.9) | 81.8% (74.6 to 89.1) | 50.9% |
 | reptile | 268 | 70.9% (65.7 to 76.5) | 92.2% (88.8 to 95.2) | 64.2% |
 | frog | 97 | 59.8% (49.5 to 69.1) | 87.6% (80.4 to 93.8) | 52.6% |
-| bee | 126 | 59.5% (50.8 to 68.2) | 81.8% (74.6 to 88.1) | 54.0% |
+| bee | 126 | 59.5% (50.8 to 68.2) | 81.7% (74.6 to 88.1) | 54.0% |
 | insect | 962 | 66.0% (63.1 to 68.9) | 83.7% (81.3 to 85.9) | 60.3% |
 | plant | 1223 | 71.3% (68.7 to 73.8) | 86.8% (85.0 to 88.7) | 62.5% |
 | other | 296 | 61.5% (55.7 to 66.5) | 81.8% (77.0 to 86.2) | 57.8% |
@@ -68,7 +68,7 @@ Species rows made from the taxonomy and English name; settings chosen on `val`: 
 | 09 | 454 | 70.9% (66.7 to 75.1) | 87.0% (83.7 to 90.1) | 64.1% |
 | 10 | 227 | 70.0% (64.3 to 76.2) | 88.5% (84.6 to 92.5) | 59.0% |
 | 11 | 258 | 68.6% (62.8 to 74.0) | 84.1% (79.5 to 88.4) | 57.0% |
-| 12 | 134 | 70.2% (61.9 to 77.6) | 85.8% (79.8 to 91.8) | 64.2% |
+| 12 | 134 | 70.1% (61.9 to 77.6) | 85.8% (79.8 to 91.8) | 64.2% |
 
 ## Kind of eye from the kind phrases: what was said (columns) for each true kind (rows)
 

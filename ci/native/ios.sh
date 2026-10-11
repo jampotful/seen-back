@@ -2,7 +2,10 @@
 # The iOS shell on a macOS build machine: compile native/ios-shell/main.swift for the iPhone simulator with swiftc (no Xcode
 # project, no signing identity: an ad hoc signature, which the simulator accepts), copy the built page into the app, install it in
 # an iPhone simulator, open it, run the page's self-test with the pocket recognizer inside the app, and then the same app pointed at
-# the page served from this machine (http://127.0.0.1:8781) for comparison. Everything goes into out/ios/.
+# the page served from this machine (http://127.0.0.1:8781) for comparison. Inside the app the page comes from the shell's own
+# server at http://127.0.0.1:41730/ (main.swift, class Loopback). A label starting with ios-big runs the larger-model probe instead
+# of the comparison; one starting with ios-loop runs the larger-model probe inside the app twice (the second launch must find the
+# model kept) and then presses Begin. Everything goes into out/ios/.
 set -uo pipefail
 ROOT="$PWD"; OUT="$ROOT/out/ios"; mkdir -p "$OUT/shots" "$ROOT/out/reports"
 exec > >(tee -a "$OUT/log.txt") 2>&1
@@ -81,11 +84,16 @@ step "install and open the app"
 xcrun simctl install "$UDID" "$APP" 2>&1; echo "install: exit $?"
 xcrun simctl launch "$UDID" $BID 2>&1; sleep 15; shot 1-open
 state > "$OUT/open-state.json"; head -c 700 "$OUT/open-state.json"; echo
+applog | grep -E "loopback|open " | head -6
+for u in index.html "models/pocket/manifest.json" "nothing-here.txt"; do
+  curl -s -o /dev/null -w "the app's server, from the Mac: $u -> %{http_code}, %{size_download} bytes, %{content_type}\n" "http://127.0.0.1:41730/$u"
+done
+curl -s -o /dev/null -r 0-99 -w "the app's server, a byte range of test/assets/motion.mp4 -> %{http_code}, %{size_download} bytes\n" "http://127.0.0.1:41730/test/assets/motion.mp4"
 
-step "2. the page's self-test inside the app (app://localhost), with the shipped pocket recognizer on four photos"
+step "2. the page's self-test inside the app (served by the app itself), with the shipped pocket recognizer on four photos"
 selftest 2-selftest -q "selftest=1&nosw=1$RECQ"
 
-case "${GITHUB_REF_NAME:-}" in run/native/ios-big*|run/native/big*) BIG=1 ;; *) BIG=0 ;; esac
+case "${GITHUB_REF_NAME:-}" in run/native/ios-big*|run/native/big*) BIG=1 ;; run/native/ios-loop*) BIG=2 ;; *) BIG=0 ;; esac
 if [ $BIG = 0 ]; then
 step "3. the same app pointed at the page served from this Mac (http://127.0.0.1:8781), for comparison"
 python3 -I ci/engines/serve.py 8781 "$ROOT" "$ROOT/out/reports" > "$OUT/serve-log.txt" 2>&1 &
@@ -131,10 +139,21 @@ for name, kb in sorted(peak.items()):
 PY
 }
 bigprobe 4-big -probe native-probe/big.js
+if [ $BIG = 2 ]; then
+step "4b. the larger model once more, after the app is closed and opened again: the parts must come from what the page kept"
+bigprobe 4b-big-again -probe native-probe/big.js
+step "6. Begin inside the app: the page asks for the camera (the simulator has none)"
+xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1; sleep 1
+xcrun simctl launch "$UDID" $BID -js 'document.getElementById("btnBegin").click()' 2>&1
+sleep 25; shot 6-begin
+state > "$OUT/6-begin-state.json"; head -c 900 "$OUT/6-begin-state.json"; echo
+applog | grep -E "camera|loopback|open " | tail -12
+else
 step "5. the larger model again, with the same app pointed at the page served from this Mac (http://127.0.0.1:8781), where Cache Storage takes http addresses"
 python3 -I ci/engines/serve.py 8781 "$ROOT" "$ROOT/out/reports" > "$OUT/serve-log.txt" 2>&1 &
 sleep 1; curl -s -o /dev/null -w "8781 -> %{http_code}\n" http://127.0.0.1:8781/index.html
 bigprobe 5-big-served -url "http://127.0.0.1:8781/index.html" -probe ci/native/probe-big.js
+fi
 fi
 
 step "the app's own log (console errors and warnings, loads it could not serve)"

@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '9';
+  var BUILD = '10';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -1632,7 +1632,7 @@
   }
   function setViewPrompt(key) {
     $('askViewText').textContent = (coarse ? 'Record a few seconds of what is in front of you, or photograph it.' : 'Choose a clip or a photo of what is in front of you.') +
-      (key === 'person' ? '' : ' It returns as ' + EYES[key].who + ' may take it in.');
+      (key === 'person' ? '' : ' It returns as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + ' may take it in.');   // EYES.other.who is "this one", which reads badly here
     $('askViewFine').textContent = '';
   }
 
@@ -2298,7 +2298,7 @@
 
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
-  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList,
+  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 

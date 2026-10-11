@@ -72,7 +72,7 @@ Species rows made from the scientific name; settings chosen on `val`: {"min_n": 
 
 ## Kind of eye from the kind phrases: what was said (columns) for each true kind (rows)
 
-Accuracy 70.0% (68.7 to 71.4). Photos called `person`: 0.00%; called `none`: 0.00% (the test split holds neither).
+Accuracy 70.1% (68.7 to 71.4). Photos called `person`: 0.00%; called `none`: 0.00% (the test split holds neither).
 
 | true \ said | cat | dog | squirrel | deer | rabbit | hawk | wader | bird | alligator | reptile | frog | bee | insect | plant | person | other | none |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|

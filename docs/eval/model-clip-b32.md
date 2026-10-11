@@ -15,9 +15,9 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 10,
 | rabbit | 31 | 83.9% (71.0 to 96.8) | 96.8% (90.3 to 100.0) | 25.8% |
 | hawk | 82 | 56.1% (45.1 to 67.1) | 70.7% (61.0 to 81.7) | 35.4% |
 | wader | 382 | 58.1% (53.4 to 63.1) | 83.8% (80.1 to 87.2) | 47.9% |
-| bird | 531 | 39.7% (35.6 to 44.1) | 66.8% (62.7 to 70.6) | 22.2% |
+| bird | 531 | 39.7% (35.6 to 44.1) | 66.9% (62.7 to 70.6) | 22.2% |
 | alligator | 110 | 89.1% (82.7 to 94.5) | 94.5% (90.0 to 98.2) | 63.6% |
-| reptile | 268 | 42.9% (37.3 to 48.5) | 74.2% (69.0 to 79.5) | 22.4% |
+| reptile | 268 | 42.9% (37.3 to 48.5) | 74.3% (69.0 to 79.5) | 22.4% |
 | frog | 97 | 15.5% (8.2 to 22.7) | 70.1% (60.8 to 78.3) | 10.3% |
 | bee | 126 | 24.6% (17.5 to 32.5) | 50.8% (42.1 to 58.7) | 7.9% |
 | insect | 962 | 19.3% (16.9 to 21.7) | 36.1% (33.2 to 39.0) | 7.4% |
@@ -36,7 +36,7 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 10,
 | Animalia / Arachnida | 154 | 21.4% (14.9 to 27.9) | 44.2% (36.4 to 51.9) | 8.4% |
 | Animalia / Mammalia | 139 | 54.7% (46.0 to 62.6) | 75.5% (68.3 to 82.7) | 22.3% |
 | Animalia / Crocodylia | 110 | 89.1% (82.7 to 94.5) | 94.5% (90.0 to 98.2) | 63.6% |
-| Animalia / Amphibia | 101 | 14.8% (7.9 to 21.8) | 68.3% (59.4 to 77.2) | 10.9% |
+| Animalia / Amphibia | 101 | 14.9% (7.9 to 21.8) | 68.3% (59.4 to 77.2) | 10.9% |
 | Animalia / Testudines | 59 | 33.9% (22.0 to 45.8) | 67.8% (55.9 to 79.7) | 17.0% |
 | Fungi / Agaricomycetes | 39 | 17.9% (7.7 to 30.8) | 30.8% (17.9 to 46.2) | 0.0% |
 | Plantae / Polypodiopsida | 38 | 28.9% (15.8 to 44.7) | 44.7% (28.9 to 60.5) | 13.2% |
@@ -68,7 +68,7 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 10,
 | 09 | 454 | 32.2% (27.8 to 36.6) | 55.7% (51.1 to 60.4) | 14.3% |
 | 10 | 227 | 31.3% (25.1 to 37.4) | 51.5% (44.9 to 57.7) | 11.9% |
 | 11 | 258 | 36.4% (30.2 to 42.2) | 57.8% (51.9 to 63.6) | 18.6% |
-| 12 | 134 | 35.8% (28.3 to 44.0) | 60.5% (52.2 to 68.7) | 23.1% |
+| 12 | 134 | 35.8% (28.3 to 44.0) | 60.4% (52.2 to 68.7) | 23.1% |
 
 ## Kind of eye from the kind phrases: what was said (columns) for each true kind (rows)
 

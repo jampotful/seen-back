@@ -9,7 +9,7 @@
 // Nothing kept here differs by what a request's headers say, so kept copies are looked up with ignoreVary: a host that sends
 // "Vary: Accept-Encoding" (GitHub Pages does) must not make a kept copy unfindable for a request whose headers differ.
 // The larger model's parts come from another origin and are fetched and kept by the page alone; this worker never sees them.
-const VERSION = '9';
+const VERSION = '10';
 const ORT_V = '1.30.0';                                            // the same number as ORT.v in src/cam.rec.js
 const SHELL = 'shell-' + VERSION;
 const KEEP = 'keep-v1';
