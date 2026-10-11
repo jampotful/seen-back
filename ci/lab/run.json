@@ -1,7 +1,23 @@
 {
- "about": "Pocket candidates: both int8 files published under explicit names (vision.int8-per-tensor.onnx, vision.int8-per-channel.onnx) with image vectors over eval/alachua-2025 from each, so quantization loss can be measured per file whatever vision.int8.onnx points at.",
- "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32"],
- "stages": ["export", "images-onnx-int8-per-tensor", "images-onnx-int8-per-channel"],
+ "about": "Pocket candidates: both int8 files published under explicit names (vision.int8-per-tensor.onnx, vision.int8-per-channel.onnx) with image vectors over eval/alachua-2025 from each, so quantization loss can be measured per file whatever vision.int8.onnx points at; species label sets (5911 species from pub/data-alachua) for the TinyCLIPs and CLIP B/32 published now rather than with run 3.",
+ "models": [
+  "tinyclip-8m-16",
+  "tinyclip-40m-32",
+  "tinyclip-39m-16",
+  "tinyclip-61m-32",
+  "clip-b32"
+ ],
+ "stages": {
+  "clip-b32": [
+   "text-species"
+  ],
+  "*": [
+   "export",
+   "text-species",
+   "images-onnx-int8-per-tensor",
+   "images-onnx-int8-per-channel"
+  ]
+ },
  "data": "pub/data-alachua",
  "shards": {},
  "max_parallel": 2
