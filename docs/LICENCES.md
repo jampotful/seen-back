@@ -1,6 +1,6 @@
 # Licences
 
-Every model, data set, library and font that ships in the app or was used to build or measure it, with its licence, where the licence was read, and its status. The status is one of: ships, used for measurement only, used to fit or build, or will not ship. "Not read" means that nobody working on this project has read the licence text. A tag on a model card is recorded as a tag.
+This file lists every model, data set, library and font that ships in the app or was used to build or measure it, with its licence, where the licence was read, and its status. The status is one of: ships, used for measurement only, used to fit or build, or will not ship. "Not read" means that nobody working on this project has read the licence text. A tag on a model card is recorded as a tag.
 
 This file describes build 8 (commit `8037aec`), as it stood on 11 October 2026.
 
@@ -25,7 +25,7 @@ The laboratory's own record of each model, with the licence texts it quotes, is 
 
 | Thing | Licence | Where the licence was read | Status |
 |---|---|---|---|
-| ONNX Runtime Web 1.30.0 (Microsoft) | MIT | `vendor/ort/LICENSE`, the LICENSE file of github.com/microsoft/onnxruntime at the tag v1.30.0; the npm package states MIT in its `package.json` and in the header of each script (`vendor/ort/README.txt`) | **ships** in `vendor/ort/` |
+| ONNX Runtime Web 1.30.0 (Microsoft) | MIT | `vendor/ort/LICENSE`, the LICENSE file of github.com/microsoft/onnxruntime at the tag v1.30.0; the npm package states MIT in its `package.json` and in the header of each script (`vendor/ort/README.txt`) | **ships** in `vendor/ort/`; the laboratory also ran the same package in Node on build machines (`ci/lab/device.sh`) |
 | Instrument Serif (typeface) | SIL Open Font License 1.1 | `fonts/OFL-Instrument-Serif.txt` in this repository | **ships** in `fonts/` |
 | This project's own code | none chosen yet | | ships without a licence; the choice waits on the owner |
 
@@ -37,7 +37,7 @@ The laboratory's own record of each model, with the licence texts it quotes, is 
 | The evaluation photos `alachua-2025`: 6,000 research-grade iNaturalist photos dated 2025 and 2026 | each photo's own licence, one per row in the manifest's `licence` column: CC BY-NC 4.0 for 88.6%, CC BY 4.0 for 7.9%, CC0 for 3.4%, CC BY-NC-ND 4.0 for 3 photos (`data/eval/alachua-2025/SUMMARY.md`) | the manifest's `licence` column | used for measurement; two thirds of the 1,803 `val` photos also fitted the pocket heads in build 8. Photos are downloaded on build machines when a run needs them and are never committed or republished |
 | The training photos `train/alachua-pre2025`: 84,808 photos of 5,467 species, from iNaturalist's open-data files, all dated before 2025 | each photo's own licence: CC BY-NC for 73.9%, CC BY 16.0%, CC0 6.3%, CC BY-NC-ND 3.0%, CC BY-NC-SA 0.5%, CC BY-ND 0.2%, CC BY-SA 0.2% (`data/train/alachua-pre2025/SUMMARY.md`). The open-data README says: "Unless the photo license specifies the photo is in the public domain, all photographers retain copyright of their photos, and the license under which the photo is shared dictates how the photo can be used." The licence of the open-data metadata files was not read | `https://raw.githubusercontent.com/inaturalist/inaturalist-open-data/main/README.md`, read 11 October 2026 (fetch run 6, `runs/fetch/6/inat-open-data-readme.md` on `ci`) | used to fit heads that were measured in evaluation run 25 (`runs/eval/25/` on `ci`); none of them ships in build 8. The manifest is on the branch `pub/data-alachua`; no photo is committed |
 | COCO 2017: the extra set `coco-kinds`, 10,240 images of people, cats, dogs, horses, cows, sheep and rooms | annotations: Creative Commons Attribution 4.0. Images: "The COCO Consortium does not own the copyright of the images. Use of the images must abide by the Flickr Terms of Use." Each image carries a Flickr licence in COCO's annotation file: of the 9,000 train rows, 2,537 are CC BY-NC-SA 2.0, 2,428 CC BY-NC-ND 2.0, 1,504 CC BY 2.0, 1,219 CC BY-NC 2.0, 828 CC BY-SA 2.0, 463 CC BY-ND 2.0 and 21 "no known copyright restrictions" (`data/extra/coco-kinds/SUMMARY.md`). Flickr's terms of use were not read | COCO's terms of use, `dataset/termsofuse.htm` in github.com/cocodataset/cocodataset.github.io at commit `5e1c4da7`, read 11 October 2026 | used to fit and test the kind decision; the kind rows of the pocket recognizer in build 8 were fitted on COCO train rows of every licence. The manifest lists addresses only, and no image is committed or republished |
-| TreeOfLife-200M, the training data of BioCLIP 2 | compilation CC0; images under their own licences | `https://huggingface.co/datasets/imageomics/TreeOfLife-200M`, read 10 October 2026 | not used directly. Its GBIF snapshot of 2024-05-01 is the reason every evaluation photo is dated 2025 or later |
+| TreeOfLife-200M, the training data of BioCLIP 2 | compilation CC0; images under their own licences | `https://huggingface.co/datasets/imageomics/TreeOfLife-200M`, read 10 October 2026 | not used directly. Every evaluation photo is dated after its GBIF snapshot of 2024-05-01, so none can be among BioCLIP 2's training photos (`docs/EVAL.md`) |
 
 ## Which photos heads may be fitted on: the rule of 11 October 2026
 
@@ -57,7 +57,6 @@ None of these ships in the app. Their licences were not read.
 | Tool | Used for |
 |---|---|
 | Playwright, with Chromium, Firefox and WebKit | the browser checks under `test/` and on build machines |
-| onnxruntime-web 1.30.0 in Node | the laboratory's runs of the browser's runtime (`ci/lab/device.sh`) |
 | PyTorch 2.8.0, torchvision 0.23.0, open_clip_torch, timm, transformers, onnx, onnxruntime, onnxconverter-common, huggingface_hub, safetensors | the laboratory on build machines (`.github/workflows/lab.yml`) |
 | numpy, Pillow, requests | the evaluation and the data scripts under `tools/` |
 | Gradio and the `spaces` package | the species service in `service/`, built and undeployed |
