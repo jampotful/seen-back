@@ -87,13 +87,12 @@ awk -F"\t" 'NR==1 { for (i = 1; i <= NF; i++) if ($i == "observation_uuid") c = 
 step "photos of those observations (streamed)" stream_pass photos.csv.gz photos_filter work/photos.tsv || exit 1
 
 step "training manifest" python3 tools/species/build_train_s3.py --obs work/obs.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
-  --out stage/train/alachua-pre2025 --cap "${CAP:-60}" --snapshot "$SNAP"
+  --out stage/train/alachua-pre2025 --cap "${CAP:-60}" --snapshot "$SNAP" --inat-out out/inat-from-eval.json
 rc=$?
 cp stage/train/alachua-pre2025/SUMMARY.md out/train-SUMMARY.md 2>/dev/null || true
 [ -f stage/train/alachua-pre2025/manifest.csv ] || exit 1
 step "rows" bash -c 'wc -l stage/train/alachua-pre2025/manifest.csv; head -3 stage/train/alachua-pre2025/manifest.csv; sha256sum stage/train/alachua-pre2025/manifest.csv'
 [ -f tools/species/check_train_s3.py ] && step "check" python3 tools/species/check_train_s3.py stage/train/alachua-pre2025/manifest.csv
-gzip -c work/obs.tsv > out/obs-in-box.tsv.gz 2>/dev/null; [ "$(stat -c %s out/obs-in-box.tsv.gz 2>/dev/null || echo 0)" -lt 12000000 ] || rm -f out/obs-in-box.tsv.gz
 awk -F, 'NR==1 || (NR-2)%3000==0' stage/train/alachua-pre2025/manifest.csv > work/photo-check.csv
 [ -z "${S3_BASE:-}" ] && step "photo address check" python3 tools/species/fetch_photos.py work/photo-check.csv work/photo-check --shard 0/1
 if [ "$rc" -eq 0 ]; then

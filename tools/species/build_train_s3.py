@@ -12,9 +12,15 @@ ci/data/train_s3.sh with awk while the files stream past:
   taxa.csv.gz  the whole taxonomy file (small)
 
 and writes the manifest: observations dated through the species list's `records_through`, identified to a species that
-is in the species list (matched by scientific name; a subspecies counts as its species), one photo an observation (the
-first), up to --cap a species, ranked by sha256("<seed>|<photo id>") so the choice can be repeated. Rows are in order of
+is in the species list (matched by scientific name; a subspecies counts as its species; a species GBIF files under
+another name is matched through the evaluation photos, see below), one photo an observation (the first), up to --cap a species, ranked by sha256("<seed>|<photo id>") so the choice can be repeated. Rows are in order of
 each photo's rank within its species, so any prefix of the file is a fair, smaller training set.
+
+Names that differ: the evaluation manifest carries GBIF species keys and iNaturalist photo ids. Joined to the photos
+file, each evaluation photo shows which iNaturalist species its observation is filed under. When most of a list
+species' evaluation photos sit under an iNaturalist name that no list species carries (iNaturalist's Gallinula
+galeata for GBIF's Gallinula chloropus), observations under that name count for the list species too. The same
+join is written, with --inat-out, as the iNaturalist taxon most often attached to each key (inat.json's format).
 
 Differences from the GBIF route, stated plainly: the region is a bounding box around Alachua County, not the county's
 outline, so some photos come from just over the line; iNaturalist blurs the place of some threatened species; `gbif_id`
@@ -70,6 +76,7 @@ def main():
     ap.add_argument("--cap", type=int, default=60)
     ap.add_argument("--seed", default="seen-back/alachua-pre2025/s3/v1")
     ap.add_argument("--snapshot", default="", help="date of the open-data files, for the summary")
+    ap.add_argument("--inat-out", default="", help="write the evaluation photos' iNaturalist names per key here (JSON)")
     args = ap.parse_args()
     t0 = time.time()
     out = Path(args.out)
@@ -93,54 +100,46 @@ def main():
         taxa[r["taxon_id"]] = (r.get("rank", ""), r.get("name", ""), r.get("ancestry", ""))
     log("  %d taxa" % len(taxa))
 
-    def species_name(tid):
-        """The species a taxon belongs to: itself at species rank, its species ancestor below that, else ''."""
+    def species_of(tid):
+        """(taxon id, name) of the species a taxon belongs to: itself at species rank, its species ancestor below that."""
         t = taxa.get(tid)
         if not t:
-            return ""
+            return ("", "")
         rank, name, anc = t
         if rank == "species" or rank == "hybrid":
-            return name
+            return (tid, name)
         if rank in INFRA:
             for a in reversed(anc.split("/")):
                 ta = taxa.get(a)
                 if ta and ta[0] == "species":
-                    return ta[1]
-            return " ".join(name.split()[:2])
-        return ""
+                    return (a, ta[1])
+            return ("", " ".join(name.split()[:2]))
+        return ("", "")
+
+    eval_rows = []
+    if Path(args.eval).exists():
+        for r in csv.DictReader(open(args.eval, encoding="utf-8")):
+            m = re.search(r"/photos/(\d+)/", r["photo_url"])
+            eval_rows.append((r["key"], m.group(1) if m else ""))
+    eval_photos = {p for _, p in eval_rows if p}
+    eval_n = len(eval_rows)
 
     log("== observations")
-    obs, why = {}, Counter()
-    n_obs = 0
+    allobs = {}
     for r in read_tsv(args.obs):
-        n_obs += 1
-        d = r.get("observed_on", "")
-        if not re.match(r"^\d{4}-\d{2}-\d{2}$", d):
-            why["no date"] += 1
-            continue
-        if d > through:
-            why["dated after %s" % through] += 1
-            continue
-        nm = species_name(r.get("taxon_id", ""))
-        if not nm:
-            why["not identified to a species"] += 1
-            continue
-        s = by_name.get(nm)
-        if not s:
-            why["species not in the species list by name"] += 1
-            continue
-        obs[r["observation_uuid"]] = (d, s, r.get("taxon_id", ""), nm)
-    line = "observations in the box, research grade: %d; kept: %d; left out: %s" % (n_obs, len(obs), dict(why))
-    log("  " + line)
-    checks.append(line)
+        allobs[r["observation_uuid"]] = (r.get("observed_on", ""), r.get("taxon_id", ""))
+    n_obs = len(allobs)
+    log("  %d research-grade observations in the box" % n_obs)
 
     log("== photos")
-    first = {}                                   # observation -> its first photo
+    first, photo_obs = {}, {}                    # observation -> its first photo; evaluation photo -> observation
     n_ph = 0
     for r in read_tsv(args.photos):
         n_ph += 1
-        u = r.get("observation_uuid", "")
-        if u not in obs or not r.get("photo_id") or not r.get("extension"):
+        u, pid, ext = r.get("observation_uuid", ""), r.get("photo_id", ""), r.get("extension", "")
+        if pid in eval_photos:
+            photo_obs[pid] = u
+        if u not in allobs or not pid or not ext:
             continue
         try:
             pos = int(r.get("position") or 0)
@@ -148,22 +147,76 @@ def main():
             pos = 0
         cur = first.get(u)
         if cur is None or pos < cur[0]:
-            first[u] = (pos, r["photo_id"], r["extension"], r.get("license", ""))
-    line = "photo rows read: %d; kept observations with a photo: %d of %d" % (n_ph, len(first), len(obs))
+            first[u] = (pos, pid, ext, r.get("license", ""))
+
+    log("== the evaluation photos' iNaturalist names")
+    sci_of = {str(s["key"]): s["sci"] for s in sp["species"]}
+    entry_of = {str(s["key"]): s for s in sp["species"]}
+    tally = defaultdict(Counter)
+    for key, pid in eval_rows:
+        u = photo_obs.get(pid)
+        if u in allobs:
+            stid, nm = species_of(allobs[u][1])
+            if nm:
+                tally[key][(stid, nm)] += 1
+    joined = sum(sum(c.values()) for c in tally.values())
+    inat = {}
+    cands = defaultdict(list)
+    for key, c in tally.items():
+        (stid, nm), k = c.most_common(1)[0]
+        tot = sum(c.values())
+        inat[key] = {"inat_id": int(stid) if stid.isdigit() else 0, "sci": nm, "en": "", "share": round(k / tot, 3), "n": tot}
+        if key in sci_of and nm != sci_of[key] and nm not in by_name and k / tot >= 0.5:
+            cands[nm].append((k, key))
+    alias = {}
+    for nm, ks in cands.items():
+        ks.sort(reverse=True)
+        if len(ks) == 1 or ks[0][0] > 2 * ks[1][0]:
+            alias[nm] = entry_of[ks[0][1]]
+        else:
+            problems.append("ambiguous iNaturalist name %s (keys %s); not used" % (nm, ks))
+    line = ("evaluation photos found in the open-data photos file: %d of %d (keys: %d); keys whose photos sit mostly under "
+            "another iNaturalist name: %d; names used as aliases: %d" % (joined, eval_n, len(tally),
+            sum(1 for k, v in inat.items() if k in sci_of and v["sci"] != sci_of[k]), len(alias)))
     log("  " + line)
     checks.append(line)
 
-    eval_photos, eval_n = set(), 0
-    if Path(args.eval).exists():
-        for r in csv.DictReader(open(args.eval, encoding="utf-8")):
-            eval_n += 1
-            m = re.search(r"/photos/(\d+)/", r["photo_url"])
-            if m:
-                eval_photos.add(m.group(1))
+    obs, why = {}, Counter()
+    via_alias = Counter()
+    for u, (d, tid) in allobs.items():
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", d):
+            why["no date"] += 1
+            continue
+        if d > through:
+            why["dated after %s" % through] += 1
+            continue
+        stid, nm = species_of(tid)
+        if not nm:
+            why["not identified to a species"] += 1
+            continue
+        s = by_name.get(nm)
+        if not s:
+            s = alias.get(nm)
+            if not s:
+                why["species not in the species list by name"] += 1
+                continue
+            via_alias[nm] += 1
+        obs[u] = (d, s, tid, nm)
+    line = "observations in the box, research grade: %d; kept: %d (through an alias: %d); left out: %s" % (
+        n_obs, len(obs), sum(via_alias.values()), dict(why))
+    log("  " + line)
+    checks.append(line)
+    line = "photo rows read: %d; kept observations with a photo: %d of %d" % (
+        n_ph, sum(1 for u in obs if u in first), len(obs))
+    log("  " + line)
+    checks.append(line)
 
     per = defaultdict(list)
     shared = 0
-    for u, (pos, pid, ext, lic) in first.items():
+    for u in obs:
+        if u not in first:
+            continue
+        pos, pid, ext, lic = first[u]
         if pid in eval_photos:
             shared += 1
             continue
@@ -231,6 +284,15 @@ def main():
     L += ["", "## The most recorded species with no training photo here", "", "| records in the list | species | English name |", "|---:|---|---|"]
     for n, a, e in missing:
         L.append("| %d | *%s* | %s |" % (n, a, e))
+    L += ["", "## List species matched through another iNaturalist name", "",
+          "From the evaluation photos (see the top of `tools/species/build_train_s3.py`).", "",
+          "| GBIF name (list) | iNaturalist name | observations kept | rows |", "|---|---|---:|---:|"]
+    rows_by_key = n_per
+    for nm, s in sorted(alias.items(), key=lambda t: -via_alias[t[0]]):
+        L.append("| *%s* | *%s* | %d | %d |" % (s["sci"], nm, via_alias[nm], rows_by_key.get(str(s["key"]), 0)))
+    if args.inat_out:
+        Path(args.inat_out).write_text(json.dumps(inat, ensure_ascii=False, sort_keys=True, indent=0) + "\n", encoding="utf-8")
+        log("  wrote %s: %d keys" % (args.inat_out, len(inat)))
     if problems:
         L += ["", "## Problems", ""] + ["- " + p for p in problems]
     (out / "SUMMARY.md").write_text("\n".join(L) + "\n", encoding="utf-8")
