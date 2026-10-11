@@ -1,0 +1,28 @@
+name: data
+# Species list for the test region and the evaluation photo manifest, built from GBIF on a build machine.
+# Start it by pushing a commit to a branch named run/data/<anything>. The data go to the branch pub/data-alachua;
+# the summaries, the log and row counts come back on the ci branch under runs/data/<run number>/.
+on:
+  push:
+    branches: ['run/data/**']
+permissions:
+  contents: write
+concurrency:
+  group: data-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: build, check and publish
+        run: bash ci/data/run.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh data out
