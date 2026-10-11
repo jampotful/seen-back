@@ -55,6 +55,10 @@ for B in $BROWSERS; do
     BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
   fi
   echo "parity (real, patched) $B: exit $?"; tail -1 "$OUT/rec/parity-real-patched-$B.json"; git checkout -q test/rec/check_rec.js
+  if [ "$B" = webkit ]; then
+    step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: $B"
+    BROWSER=$B PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-$B.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-$B.json"
+  fi
   step "self-test with the recognizer phase: $B (picture limited to 540 on this software renderer)"
   if [ "$B" = firefox ]; then
     LIBGL_ALWAYS_SOFTWARE=1 HEADED=1 TAG=-xvfb PORT=8781 OUT="$OUT/shots" BROWSERS=firefox VIEWPORTS=phone,desktop LABEL=linux-xvfb LIMIT_MS=480000 EXTRA="&side=540$RECQ" \
