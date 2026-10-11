@@ -51,6 +51,18 @@
     }, viaImg);
   }
   function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
+  // A species' English name in sentence case: the first letter a capital, the rest small, except words that are names of
+  // places or people ("North American river otter", "Cooper's hawk"). A scientific name passes through unchanged in effect.
+  var PROPER = ' african alaskan american andean antarctic antillean appalachian arabian arctic argentine asian asiatic atlantic australian bahama bahaman baltic bermuda bolivian brazilian british burmese california californian canada canadian caribbean carolina carolinian chilean chinese colombian colorado cuban dutch egyptian english eurasian european florida floridian french georgia german greek guatemalan gulf haitian hawaiian himalayan hispaniolan indian indies indonesian irish italian jamaican japanese javan korean louisiana madagascar malayan mediterranean mexican mississippi new nile norway norwegian pacific panama panamanian persian peruvian philippine polynesian portuguese puerto rican russian scotia scottish siberian spanish sumatran swedish swiss tasmanian texas texan thai turkish virginia virginian world york zealand amazon bolivia china peru lanka keys st. augustine charles sebastian william susan maria lizzie jones hentz caesar hercules jesus venus quaker confederate january february march april june july august september october november december ';
+  function nameCase(name) {
+    name = String(name || ''); if (!name) return name;
+    var first = true;
+    return name.replace(/[^\s-]+/g, function (w, at) {
+      var keep = /['’]s?$/.test(w) || PROPER.indexOf(' ' + w.toLowerCase() + ' ') >= 0 || (w.length <= 3 && w === w.toUpperCase() && /[A-Z]/.test(w) && at > 0);
+      if (first) { first = false; return w.charAt(0).toUpperCase() + w.slice(1); }
+      return keep ? w : w.toLowerCase();
+    });
+  }
   function handName(key) { return key === 'other' ? 'something alive' : EYES[key].who.replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }

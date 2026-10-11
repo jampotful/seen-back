@@ -424,6 +424,18 @@
     }, viaImg);
   }
   function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
+  // A species' English name in sentence case: the first letter a capital, the rest small, except words that are names of
+  // places or people ("North American river otter", "Cooper's hawk"). A scientific name passes through unchanged in effect.
+  var PROPER = ' african alaskan american andean antarctic antillean appalachian arabian arctic argentine asian asiatic atlantic australian bahama bahaman baltic bermuda bolivian brazilian british burmese california californian canada canadian caribbean carolina carolinian chilean chinese colombian colorado cuban dutch egyptian english eurasian european florida floridian french georgia german greek guatemalan gulf haitian hawaiian himalayan hispaniolan indian indies indonesian irish italian jamaican japanese javan korean louisiana madagascar malayan mediterranean mexican mississippi new nile norway norwegian pacific panama panamanian persian peruvian philippine polynesian portuguese puerto rican russian scotia scottish siberian spanish sumatran swedish swiss tasmanian texas texan thai turkish virginia virginian world york zealand amazon bolivia china peru lanka keys st. augustine charles sebastian william susan maria lizzie jones hentz caesar hercules jesus venus quaker confederate january february march april june july august september october november december ';
+  function nameCase(name) {
+    name = String(name || ''); if (!name) return name;
+    var first = true;
+    return name.replace(/[^\s-]+/g, function (w, at) {
+      var keep = /['’]s?$/.test(w) || PROPER.indexOf(' ' + w.toLowerCase() + ' ') >= 0 || (w.length <= 3 && w === w.toUpperCase() && /[A-Z]/.test(w) && at > 0);
+      if (first) { first = false; return w.charAt(0).toUpperCase() + w.slice(1); }
+      return keep ? w : w.toLowerCase();
+    });
+  }
   function handName(key) { return key === 'other' ? 'something alive' : EYES[key].who.replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
@@ -681,6 +693,7 @@
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
     if (typeof v.common === 'string' && !v.sci && (v.common.toLowerCase() === handName(key).toLowerCase() || /^(a person|something alive)$/i.test(v.common))) v.common = v.common.toLowerCase();   // a group's name kept from an older build loses its capital
+    if (typeof v.common === 'string' && v.sci) v.common = nameCase(v.common);   // a species' name kept from an older build is set in sentence case
     return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
@@ -1695,7 +1708,7 @@
     var offers = offerList(pocket.offers || []), box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.label); b.type = 'button';
-      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
+      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: nameCase(clip(o.en || o.sci, 60)), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
       box.appendChild(b);
     });
     show('claimOfferBox', offers.length > 0);
@@ -1709,7 +1722,7 @@
     var seen = {}, n = {}, low = function (x) { return String(x || '').toLowerCase(); };
     var keep = list.filter(function (o) { var k = low(o.sci || o.en); if (!k || seen[k]) return false; seen[k] = 1; return true; });
     keep.forEach(function (o) { var w = low(o.en || o.sci); n[w] = (n[w] || 0) + 1; });
-    return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? o.en + ' (' + o.sci + ')' : o.en || o.sci }; });
+    return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? nameCase(o.en) + ' (' + o.sci + ')' : (o.sci ? nameCase(o.en) : o.en) || o.sci }; });
   }
   function setViewPrompt(key) {
     $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'View the world as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
@@ -1760,7 +1773,7 @@
         return;
       }
       var common = r.kind === 'person' ? 'a person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
-      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
+      reveal(r.kind, { common: (r.named ? nameCase(clip(common, 60)) : clip(common, 60)) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
       closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
       if (t !== S.token) return;
@@ -1788,7 +1801,7 @@
         if (!d || typeof d !== 'object' || d.found === false) { failName('Nothing alive was found in that photo.'); return; }
         var key = String(d.eyes || 'other'); if (!EYES[key]) key = 'other';
         diag('recognized', key);
-        reveal(key, { common: clip(d.common, 60) || handName(key), scientific: clip(d.scientific, 80), by: 'Claude' });
+        reveal(key, { common: (d.scientific ? nameCase(clip(d.common, 60)) : clip(d.common, 60)) || handName(key), scientific: clip(d.scientific, 80), by: 'Claude' });
       }).catch(function (e) {
         clearTimeout(slow); if (t !== S.token) return;
         var code = e && e.code; if (code === 'cancelled') return;
@@ -1979,7 +1992,7 @@
     box.textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
-    if (sp) { key = sp.kind; named = { common: clip(sp.en || sp.sci, 60), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
+    if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60));
@@ -1991,7 +2004,7 @@
       $('claimNote').textContent = 'Did you mean:';
       offerList(sug.map(function (r) { return { sci: r.sci, en: r.en, kind: r.kind, local: !!r.sci }; })).forEach(function (o) {
         var b = el('button', 'pill ghost', o.label); b.type = 'button';
-        b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
+        b.addEventListener('click', function () { diag('suggested', o.kind); reveal(o.kind, { common: nameCase(clip(o.en || o.sci, 60)), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
         box.appendChild(b);
       });
       show('claimSuggestRow', true); return;
@@ -2067,7 +2080,7 @@
     diag('service', JSON.stringify({ top: top ? [top.sci, +top.p.toFixed(3), top.kind] : null, kinds: a.kinds.slice(0, 2).map(function (k) { return [k.key, +k.p.toFixed(3)]; }), ms: a.ms, model: a.model, region: a.region }).slice(0, 300));
     if (!top || !c || !S.eyes) { paintSvc(); return; }
     pocket.offers = a.species.slice(0, 5).map(function (s) { return { sci: s.sci, en: s.en, kind: s.kind, local: !!a.region }; });   // its five likeliest are kept for the sheet that corrects a name
-    var named = { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region };
+    var named = { common: nameCase(clip(top.en || top.sci, 60)), scientific: clip(top.sci, 80), by: 'service', local: !!a.region };
     var kp = a.kinds.filter(function (k) { return k.key === top.kind; })[0], kindP = kp ? kp.p : top.p;
     if (top.p >= c.nameAt && top.kind === S.eyes) {
       // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
@@ -2166,7 +2179,7 @@
     });
   }
   function five(r) { return r.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: true }; }); }
-  function largeName(r) { return r.local && r.named ? { common: clip(r.named.en || r.named.sci, 60) || handName(r.kind), scientific: clip(r.named.sci, 80), by: 'device-large', local: true } : null; }
+  function largeName(r) { return r.local && r.named ? { common: nameCase(clip(r.named.en || r.named.sci, 60)) || handName(r.kind), scientific: clip(r.named.sci, 80), by: 'device-large', local: true } : null; }
   function noteLarge(r) { diag('large', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sure: r.sure, sp: r.species.slice(0, 2).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model }).slice(0, 300)); }
   // After the small model's answer is in use. Where the full database is on this device it looks at every photo in the background. Where it
   // is not, a photo left without a species name raises the offer to get it. Where there is no such model, or the person wants none,
@@ -2240,7 +2253,7 @@
       if (t !== S.token || S.eyes) return;
       var c = naturalist.cfg(), top = a.species[0];
       pocket.offers = a.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: !!a.region }; });
-      if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
+      if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: nameCase(clip(top.en || top.sci, 60)), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
       askName('The full database could not name it.');
     }, function (e) {
       if (firstJob === job) firstJob = null;
