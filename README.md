@@ -1,8 +1,8 @@
 # Seen Back
 
-Seen Back is a web app in which you photograph something alive and your camera view changes toward what is known of how that creature sees: its field of view, where its sight is sharp, the shape of its pupil, its colours and the pace at which it takes in movement. A recognizer inside the page names the kind of eye and, when it is sure enough, the species, from the 5,911 species recorded in Alachua County, Florida, through 2024. Every meeting is kept in a record in the browser (`src/cam.r.js` keeps up to 300), and eyes you have met can be looked through again.
+Seen Back is a web app in which you photograph something alive and your camera view changes toward what is known of how that creature sees: its field of view, where its sight is sharp, the shape of its pupil, its colours and the pace at which it takes in movement. A recognizer inside the page names the kind of eye and, when it is sure enough, the species, from the 5,911 species recorded in Alachua County, Florida, through 2024. Every meeting is kept in a record in the browser (`src/cam.r.js` keeps up to 300), and eyes you have met can be looked through again for a week after the meeting.
 
-The app is served at https://jampotful.github.io/seen-back/ . The page there is build 10, which differs from build 9 (commit `013bb77`) by one sentence in a sheet; every figure and check below was made on build 9 unless it says otherwise. "Seen Back" is a working title.
+The app is served at https://jampotful.github.io/seen-back/ . The page there is build 11. Build 10 differs from build 9 (commit `013bb77`) by one sentence in a sheet, and build 11 adds the rule that eyes are lent for a week from a meeting; every figure and check below was made on build 9 unless it says otherwise. "Seen Back" is a working title.
 
 ## What works today, and where it was checked
 

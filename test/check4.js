@@ -1,5 +1,5 @@
 // Browser checks. Serve the repository root on port 8765 first (python3 -m http.server 8765 --bind 127.0.0.1),
-// then: NODE_PATH=<where playwright lives> node test/check4.js <record|viewer|edge|sweep|film|lex>
+// then: NODE_PATH=<where playwright lives> node test/check4.js <record|lent|viewer|edge|sweep|film|lex>
 const { chromium, devices } = require('playwright');
 const path = require('path');
 const fs = require('fs');
@@ -102,6 +102,32 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     out.lex = { tried: Object.keys(cases).length + view.length, wrong: got }; await ctx.close();
   }
 
+  if (mode === 'lent') {   // eyes are lent for a week from a meeting: an older meeting stays in the record, and its eyes cannot be looked through
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = await ctx.newPage(); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    const day = 864e5;
+    await page.addInitScript((day) => { if (localStorage.getItem('seenback.record.v1')) return; const now = Date.now();
+      localStorage.setItem('seenback.record.v1', JSON.stringify([
+        { id: 'mm01', key: 'wader', common: 'Great blue heron', sci: 'Ardea herodias', by: 'you', at: now - 6.5 * day, thumb: '', up: 0, loc: 0 },
+        { id: 'mm02', key: 'cat', common: 'Cat', sci: '', by: 'you', at: now - 8 * day, thumb: '', up: 0, loc: 0 },
+        { id: 'mm03', key: 'wader', common: 'Great egret', sci: 'Ardea alba', by: 'you', at: now - 30 * day, thumb: '', up: 0, loc: 0 }])); }, day);
+    await page.goto(HTTP); await page.waitForTimeout(700);
+    await page.locator('#introRec').tap(); await page.waitForSelector('#record', { state: 'visible' }); await page.waitForTimeout(250);
+    const r = { sub: await text(page, 'recordSub') };
+    r.eyes = await page.evaluate(() => [...document.querySelectorAll('#eyeStrip .eye')].map(b => (b.disabled ? 0 : 1) + (b.querySelector('.pupil') ? 'p' : '-') + ':' + b.getAttribute('aria-label')).filter(x => !/not yet met/.test(x)));
+    r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map(li => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent + ' | look ' + !!li.querySelector('.ico')));
+    await shot(page, 'L1-lent');
+    await page.evaluate(() => window.__seenBack.lookAgain && window.__seenBack.lookAgain(window.__seenBack.record()[1])); await page.waitForTimeout(600);
+    r.goneStays = await page.evaluate(() => !document.getElementById('record').hidden && window.__seenBack.S.screen);
+    await page.locator('#metList li .ico').first().tap(); await page.waitForTimeout(1200); r.lentOpens = (await st(page)).eyes;
+    r.errors = errors; out.lent = r;
+    const ok = /^3 meetings kept\. Eyes are lent for a week from a meeting, and 1 of 14 kinds are with you now\. Tap an eye to look through it\.$/.test(r.sub)
+      && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A kind of eye that has gone back$/.test(e))
+      && /its eyes go back within a day \| look true$/.test(r.rows[0]) && /its eyes have gone back \| look false$/.test(r.rows[1]) && /its eyes have gone back \| look false$/.test(r.rows[2])
+      && r.goneStays && r.lentOpens === 'wader' && !errors.length;
+    await ctx.close();
+    if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('lent: the week of lending is not as it should be'); }
+  }
   if (mode === 'record') {
     const { ctx, page, errors } = await open(browser, { permissions: ['camera'], acceptDownloads: true });
     const r = {};

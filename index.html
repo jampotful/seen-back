@@ -361,7 +361,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '10';
+  var BUILD = '11';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -1100,22 +1100,33 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     else s.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 1.3, 'class': 'pupil' }));
     return s;
   }
+  // The rule of the finding game: eyes are lent for a week from a meeting, and then go back. The record of the meeting stays for good.
+  // To see as a heron again after the week, a heron has to be met again. A meeting whose time lies ahead of this clock counts as just made.
+  var LEND_MS = 7 * 864e5;
+  function lentLeft(m) { return m ? LEND_MS - Math.max(0, Date.now() - m.at) : 0; }
+  function lent(m) { return lentLeft(m) > 0; }
+  function lentSays(m) {
+    var ms = lentLeft(m), d;
+    if (ms <= 0) return 'its eyes have gone back';
+    d = Math.ceil(ms / 864e5);
+    return ms <= 36e5 ? 'its eyes go back within the hour' : ms <= 864e5 ? 'its eyes go back within a day' : d >= 7 ? 'its eyes are yours for a week' : 'its eyes are yours for ' + d + ' more days';
+  }
   function latestOf(key) { for (var i = 0; i < record.length; i++) if (record[i].key === key) return record[i]; return null; }
   function paintRecordBits() {
     var t = 'Met so far' + (record.length ? ': ' + record.length : '');
     $('introRec').textContent = t; $('recAskAnimal').textContent = t;
   }
   function renderRecord() {
-    var met = {}, n = record.length, k = 0, have = {};
-    record.forEach(function (m) { if (KINDS.indexOf(m.key) >= 0) met[m.key] = 1; var g = g60Of(m); if (g) have[g] = 1; });
+    var met = {}, once = {}, n = record.length, k = 0, have = {};
+    record.forEach(function (m) { if (KINDS.indexOf(m.key) >= 0) { once[m.key] = 1; if (lent(m)) met[m.key] = 1; } var g = g60Of(m); if (g) have[g] = 1; });
     KINDS.forEach(function (key) { if (met[key]) k++; });
-    $('recordSub').textContent = n ? n + (n === 1 ? ' meeting, and ' : ' meetings, and ') + k + ' of ' + KINDS.length + ' kinds of eye. Tap an eye to look through it again.'
-      : 'No one yet. Photograph something alive: the meeting is kept here, and its eyes come with it.';
+    $('recordSub').textContent = n ? n + (n === 1 ? ' meeting kept. ' : ' meetings kept. ') + 'Eyes are lent for a week from a meeting, and ' + k + ' of ' + KINDS.length + ' kinds are with you now.' + (k ? ' Tap an eye to look through it.' : ' Meet one again to have its eyes back.')
+      : 'No one yet. Photograph something alive: the meeting is kept here, and its eyes are yours for a week.';
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
-      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : 'A kind of eye not yet met');
-      b.appendChild(eyeGlyph(key, !!met[key]));
+      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A kind of eye that has gone back' : 'A kind of eye not yet met');
+      b.appendChild(eyeGlyph(key, !!once[key]));          // a kind met once keeps its pupil, dimmed when its eyes have gone back
       if (met[key]) b.addEventListener('click', function () { lookAgain(latestOf(key)); });
       strip.appendChild(b);
     });
@@ -1124,7 +1135,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word'].filter(Boolean).join(' · ')));
+      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].filter(Boolean).join(' · ')));
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -1136,7 +1147,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });
-      li.appendChild(th); li.appendChild(tx); li.appendChild(look); li.appendChild(x); ul.appendChild(li);
+      li.appendChild(th); li.appendChild(tx); if (lent(m)) li.appendChild(look); li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
     });
     $('g60Sum').textContent = 'Gainesville’s sixty most recorded in autumn: ' + Object.keys(have).length + ' met';
     var ol = $('g60List'); ol.textContent = '';
@@ -1165,7 +1176,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     });
   }
   function lookAgain(m) {
-    if (!m || !EYES[m.key]) return;
+    if (!m || !EYES[m.key] || !lent(m)) return;
     var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
     closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; pocket.kindOffers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
@@ -2651,7 +2662,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
-  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt,
+  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
