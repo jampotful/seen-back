@@ -1,0 +1,102 @@
+{
+ "id": "bioclip2-l14",
+ "source": "hf-hub:imageomics/bioclip-2",
+ "source_url": "https://huggingface.co/imageomics/bioclip-2",
+ "loader": "open_clip",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE",
+ "role": "naturalist",
+ "params": {
+  "image": 303966208,
+  "text": 123650305,
+  "total": 427616513
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "preprocess_detail": {
+  "transforms": [
+   "Resize(size=224, interpolation=bicubic, max_size=None, antialias=True)",
+   "CenterCrop(size=(224, 224))",
+   "MaybeConvertMode()",
+   "MaybeToTensor()",
+   "Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])"
+  ],
+  "preprocess_cfg": {
+   "size": [
+    224,
+    224
+   ],
+   "mode": "RGB",
+   "mean": [
+    0.48145466,
+    0.4578275,
+    0.40821073
+   ],
+   "std": [
+    0.26862954,
+    0.26130258,
+    0.27577711
+   ],
+   "interpolation": "bicubic",
+   "resize_mode": "shortest",
+   "fill_color": 0
+  },
+  "antialias": true,
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "images": {
+  "coco-kinds": {
+   "shards": 2,
+   "shard_1": {
+    "rows": 5120,
+    "embedded": 5120,
+    "skipped": 0,
+    "seconds": 4740.3,
+    "shard_mode": "block",
+    "row_limit": null,
+    "photos_per_second": 1.08,
+    "machine_cpus": 4
+   },
+   "via": "torch"
+  }
+ },
+ "stages": [
+  "images"
+ ]
+}
