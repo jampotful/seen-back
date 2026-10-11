@@ -12,7 +12,9 @@ PW=/tmp/pw; PWV=1.56.0
 step "machine"
 sw_vers; sysctl -n machdep.cpu.brand_string hw.ncpu hw.memsize; xcodebuild -version | tr '\n' ' '; echo
 defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString 2>/dev/null | sed 's/^/Safari /'; node --version; python3 --version
-step "build"; python3 -I build.py && node --check dist/app.js && echo "build ok"
+step "build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)"
+if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/build-selftest-on-demand.patch 2>/dev/null; then git apply ci/engines/patches/build-selftest-on-demand.patch && echo "build.py patched"; fi
+python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 
 step "iPhone simulator: boot it now, it takes a while"
 UDID=$(xcrun simctl list devices available -j | python3 -I -c "

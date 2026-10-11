@@ -1547,6 +1547,8 @@
   // from a video, the change of eyes held at three instants, and a contact sheet at the end. The result is shown
   // on screen, kept in window.__selftest, and sent as JSON to the same-origin path in &report=/path when given.
   // Only robust properties are judged; everything else is recorded as numbers.
+  // It reads only page bindings that are set once at start-up (build.py lists them as SELFTEST_READS), so it can run either inside the
+  // page's script or as selftest.js, fetched by the page only for ?selftest=1 and handed those bindings by a small hook.
   (function () {
     var qs = location.search || '';
     if (!/[?&]selftest=1(?:&|$)/.test(qs)) return;
@@ -2029,7 +2031,7 @@
           var got = await new Promise(function (done) {
             requestAnimationFrame(function () {         // drawn and read back in one go, as the page's own snapshot does
               var now = performance.now(), fx = fxNow(now, 0);
-              engine.draw(mix(HUMAN, eyeP, S.k), fx, now, 16);
+              engine.draw(mix(HUMAN, S.eyes ? paramsOf(EYES[S.eyes]) : HUMAN, S.k), fx, now, 16);   // the eye setEyes chose, as the page's eyeP holds it
               var err = engine.state().err;
               rc.width = canvas.width; rc.height = canvas.height; rx.drawImage(canvas, 0, 0);
               var wh = whole(rx.getImageData(0, 0, rc.width, rc.height), rc.width, rc.height);
