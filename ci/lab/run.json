@@ -1,15 +1,8 @@
 {
- "about": "Image vectors over the full evaluation manifest (pub/data-alachua eval/alachua-2025) for the smaller models; pocket candidates re-exported in the same job so that images-onnx-int8 uses the file published with them.",
- "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32", "bioclip-b16", "clip-b32", "siglip2-b16", "mobileclip2-s0", "bioclip25-mobile-fastvit"],
- "stages": {
-  "tinyclip-8m-16": ["export", "images", "images-onnx-int8"],
-  "tinyclip-40m-32": ["export", "images", "images-onnx-int8"],
-  "tinyclip-39m-16": ["export", "images", "images-onnx-int8"],
-  "tinyclip-61m-32": ["export", "images", "images-onnx-int8"],
-  "bioclip-b16": ["export", "images", "images-onnx-int8"],
-  "*": ["images"]
- },
+ "about": "BioCLIP 2 and BioCLIP 2.5: image vectors over eval/alachua-2025 and the species label sets, both sharded; species text uses the short-context path (checked against the full context on the first batch).",
+ "models": ["bioclip2-l14", "bioclip25-h14"],
+ "stages": ["text-species", "images"],
  "data": "pub/data-alachua",
- "shards": {"siglip2-b16": 2},
+ "shards": {"bioclip2-l14": 4, "bioclip25-h14": 8},
  "max_parallel": 4
 }

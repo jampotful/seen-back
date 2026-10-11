@@ -21,7 +21,7 @@ elif has export; then
   run python3 "$fetcher" "$man" photos --limit 48 || fail=1
 fi
 if has text-kinds; then run python3 -u tools/lab/lab.py text --model "$model" --labelset kinds --out "$out" || fail=1; fi
-if has text-species; then run python3 -u tools/lab/lab.py text --model "$model" --labelset species --species-json data_in/species.json --out "$out" || fail=1; fi
+if has text-species; then run python3 -u tools/lab/lab.py text --model "$model" --labelset species --species-json data_in/species.json --shard "$shard/$n" --out "$out" || fail=1; fi
 if has export; then
   if run python3 -u tools/lab/lab.py export --model "$model" --manifest "$man" --photos photos --out "$out" --work "work_$model"; then
     if [ ! -d ortweb/node_modules/onnxruntime-web ]; then

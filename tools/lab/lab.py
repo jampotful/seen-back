@@ -169,12 +169,48 @@ class OpenClipModel(Base):
             self.model, _, self.preprocess = open_clip.create_model_and_transforms(src)
             self.tokenizer = open_clip.get_tokenizer(src)
         self.model.eval()
+        self.short_text = None  # decided on the first batch: can the padded context be cut to the batch's longest text?
+
+    def _encode_short(self, t):
+        """CLIP's text tower is causal and pools at the end-of-text token, so cutting the context after the longest
+        sentence of a batch changes nothing but the cost. Done by trimming the positional table and the causal mask
+        for the call, then restoring them."""
+        torch = self.torch
+        m = self.model
+        L = int((t != 0).long().cumsum(-1).argmax(-1).max().item()) + 1
+        pos, mask = m.positional_embedding, m.attn_mask
+        try:
+            m.positional_embedding = torch.nn.Parameter(pos[:L], requires_grad=False)
+            m.attn_mask = mask[:L, :L] if mask is not None else None
+            return m.encode_text(t[:, :L])
+        finally:
+            m.positional_embedding = pos
+            m.attn_mask = mask
 
     def encode_text(self, texts):
         torch = self.torch
+        m = self.model
         with torch.no_grad():
             t = self.tokenizer(texts)
-            return self.model.encode_text(t).float().numpy()
+            if self.short_text is None:
+                ok = all(hasattr(m, a) for a in ("positional_embedding", "attn_mask", "token_embedding")) and \
+                    getattr(m, "text_pool_type", "argmax") == "argmax"
+                if ok:
+                    try:
+                        full = m.encode_text(t[:8]).float()
+                        short = self._encode_short(t[:8]).float()
+                        a = torch.nn.functional.normalize(full, dim=-1)
+                        b = torch.nn.functional.normalize(short, dim=-1)
+                        dev = float((a - b).abs().max())
+                        ok = dev < 1e-4
+                        log("  short-context text check: max deviation %.2e -> %s" % (dev, "used" if ok else "not used"))
+                    except Exception as e:
+                        log("  short-context text check failed (%s); full context used" % type(e).__name__)
+                        ok = False
+                self.short_text = ok
+            if self.short_text:
+                return self._encode_short(t).float().numpy()
+            return m.encode_text(t).float().numpy()
 
     def pixel_values(self, images):
         torch = self.torch
@@ -502,7 +538,10 @@ def stage_text(args):
         card["width"] = int(vec.shape[1])
     elif args.labelset == "species":
         sj = json.loads(pathlib.Path(args.species_json).read_text(encoding="utf-8"))
-        species = sj["species"]
+        si, sn = parse_shard(args.shard)
+        species = shard_rows(sj["species"], args.shard)
+        suffix = "" if sn == 1 else ".shard-%d-of-%d" % (si, sn)
+        log("species: %d of %d (shard %d/%d)" % (len(species), len(sj["species"]), si, sn))
         kinds = json.loads(KINDS.read_text(encoding="utf-8"))
         templates = kinds["templates"]
         com_groups, sci_groups, tc_groups = [], [], []
@@ -524,14 +563,16 @@ def stage_text(args):
              "(Imageomics/bioclip scripts/evobio10m/make_wds.py, key taxon_com.txt; Taxon.taxonomic in src/imageomics/naming.py; common falls back to the scientific name)"),
         ):
             vec = encode_label_sets(m, groups)
-            save_f16(out / "text" / ("%s.f16.npy" % setname), vec)
-            (out / "text" / ("%s.labels.json" % setname)).write_text(json.dumps({
+            save_f16(out / "text" / ("%s%s.f16.npy" % (setname, suffix)), vec)
+            (out / "text" / ("%s%s.labels.json" % (setname, suffix))).write_text(json.dumps({
                 "labels": meta_rows, "region": region, "species_json_sha256": sha256(args.species_json),
                 "species_source": sj.get("source", {}),
                 "method": how, "example": groups[0] if groups else [],
             }, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
             log("%s: %s" % (setname, vec.shape))
-            card.setdefault("text", {})[setname] = {"rows": len(groups), "width": int(vec.shape[1]), "region": region}
+            card.setdefault("text", {})[setname] = {"rows": len(sj["species"]), "width": int(vec.shape[1]), "region": region,
+                                                    "shards": sn, "shard_%d_rows" % si: len(groups),
+                                                    "short_context": bool(getattr(m, "short_text", False))}
         card["width"] = int(vec.shape[1])
     else:
         raise SystemExit("unknown labelset")
@@ -859,7 +900,7 @@ def stage_merge(args):
     out.mkdir(parents=True, exist_ok=True)
     rows = read_manifest(args.manifest) if args.manifest else []
     order = {r["id"]: k for k, r in enumerate(rows)}
-    shards = {}
+    shards, tshards = {}, {}
     for part in args.parts:
         part = pathlib.Path(part)
         if not part.is_dir():
@@ -874,12 +915,35 @@ def stage_merge(args):
                 base = rel.name.split(".shard-")[0]
                 shards.setdefault(base, []).append(f)
                 continue
+            if rel.parts[0] == "text" and ".shard-" in rel.name:
+                base = rel.name.split(".shard-")[0]
+                tshards.setdefault(base, []).append(f)
+                continue
             dest = out / rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(f, dest)
         c = part / "card.json"
         if c.exists():
             update_card(out, json.loads(c.read_text(encoding="utf-8")))
+    def shard_index(f):
+        tail = f.name.split(".shard-")[1]
+        return int(tail.split("-of-")[0])
+
+    for base, fs in tshards.items():
+        npys = sorted((f for f in fs if f.name.endswith(".f16.npy")), key=shard_index)
+        jsons = sorted((f for f in fs if f.name.endswith(".labels.json")), key=shard_index)
+        n_expected = int(npys[0].name.split("-of-")[1].split(".")[0]) if npys else 0
+        if len(npys) != n_expected or len(jsons) != n_expected:
+            log("text %s: %d of %d shards present; not merged" % (base, len(npys), n_expected))
+            continue
+        v = np.concatenate([np.load(f) for f in npys])
+        meta = json.loads(jsons[0].read_text())
+        meta["labels"] = [r for f in jsons for r in json.loads(f.read_text())["labels"]]
+        (out / "text").mkdir(parents=True, exist_ok=True)
+        np.save(out / "text" / ("%s.f16.npy" % base), v.astype(np.float16))
+        (out / "text" / ("%s.labels.json" % base)).write_text(json.dumps(meta, indent=1, ensure_ascii=False) + "\n")
+        log("merged text %s: %d shards, %d rows" % (base, len(npys), len(v)))
+
     for base, fs in shards.items():
         npys = sorted(f for f in fs if f.name.endswith(".f16.npy"))
         allid, allv, skipped = [], [], []
@@ -902,8 +966,10 @@ def stage_merge(args):
         np.save(out / "images" / ("%s.f16.npy" % base), v.astype(np.float16))
         (out / "images" / ("%s.ids.json" % base)).write_text(json.dumps(allid) + "\n")
         (out / "images" / ("%s.skipped.json" % base)).write_text(json.dumps(skipped, indent=0) + "\n")
-        log("merged %s: %d shards, %d rows, %d skipped" % (base, len(npys), len(allid), len(skipped)))
-        update_card(out, {"images": {base: {"rows_embedded": len(allid), "skipped": len(skipped)}}})
+        n_expected = int(npys[0].name.split("-of-")[1].split(".")[0])
+        log("merged %s: %d of %d shards, %d rows, %d skipped" % (base, len(npys), n_expected, len(allid), len(skipped)))
+        update_card(out, {"images": {base: {"rows_embedded": len(allid), "skipped": len(skipped),
+                                            "shards_present": len(npys), "complete": len(npys) == n_expected}}})
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -916,6 +982,7 @@ def main():
     t.add_argument("--model", required=True)
     t.add_argument("--labelset", choices=["kinds", "species"], required=True)
     t.add_argument("--species-json")
+    t.add_argument("--shard", help="i/n: contiguous block of species rows (species label sets only)")
     t.add_argument("--out", required=True)
     for name in ("images", "images-onnx"):
         i = sub.add_parser(name)

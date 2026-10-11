@@ -3,7 +3,8 @@
 run.json: {"models": [...ids...], "stages": [...] or {"<id>": [...], "*": [...]}, "data": "auto|pub/data-alachua|standin",
            "shards": {"<id>": n}, "max_parallel": 10}
 Stages: text-kinds, text-species, images, export, images-onnx-int8, images-onnx-fp16.
-Image stages are split into shards (contiguous blocks of manifest rows); the other stages run on shard 0.
+Image stages and text-species are split into shards (contiguous blocks of manifest or species rows); the other stages
+run on shard 0.
 Prints GitHub step outputs: work=<json matrix>, models=<json list>, max_parallel=<n>.
 """
 import json
@@ -23,8 +24,8 @@ for mid in run["models"]:
         stages = [s for s in stages if s not in ("export", "text-kinds", "text-species") and not s.startswith("images-onnx")]
     if not stages:
         continue
-    img = [s for s in stages if s.startswith("images")]
-    other = [s for s in stages if not s.startswith("images")]
+    img = [s for s in stages if s.startswith("images") or s == "text-species"]
+    other = [s for s in stages if s not in img]
     n = int(run.get("shards", {}).get(mid, 1)) if img else 1
     for i in range(n):
         s_i = (other if i == 0 else []) + img
