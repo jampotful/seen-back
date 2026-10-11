@@ -1,0 +1,102 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[07:12:04] job: model=bioclip2-l14 shard=1/9 stages=images
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=alachua-pre2025
+manifest_rows=84808
+species=5911
+[07:12:04] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 1/9 --mode mod --rows 60000
+fetched 200/6667 (1.6s)
+fetched 400/6667 (2.8s)
+fetched 600/6667 (3.8s)
+fetched 800/6667 (5.0s)
+fetched 1000/6667 (6.2s)
+fetched 1200/6667 (7.3s)
+fetched 1400/6667 (8.4s)
+fetched 1600/6667 (9.6s)
+fetched 1800/6667 (10.7s)
+fetched 2000/6667 (11.9s)
+fetched 2200/6667 (13.1s)
+fetched 2400/6667 (14.2s)
+fetched 2600/6667 (15.4s)
+fetched 2800/6667 (16.6s)
+fetched 3000/6667 (17.7s)
+fetched 3200/6667 (18.9s)
+fetched 3400/6667 (20.0s)
+fetched 3600/6667 (21.2s)
+fetched 3800/6667 (22.3s)
+fetched 4000/6667 (23.4s)
+fetched 4200/6667 (24.6s)
+fetched 4400/6667 (25.7s)
+fetched 4600/6667 (26.8s)
+fetched 4800/6667 (28.0s)
+fetched 5000/6667 (29.1s)
+fetched 5200/6667 (30.2s)
+fetched 5400/6667 (31.3s)
+fetched 5600/6667 (32.4s)
+fetched 5800/6667 (33.5s)
+fetched 6000/6667 (34.7s)
+fetched 6200/6667 (35.8s)
+fetched 6400/6667 (36.9s)
+fetched 6600/6667 (38.1s)
+photos: 6667 rows, 6667 to fetch, 0 failed, 38.5s
+[07:12:43] exit 0
+[07:12:43] + python3 -u tools/lab/lab.py images --model bioclip2-l14 --manifest data_in/manifest.csv --photos photos --shard 1/9 --shard-mode mod --rows 60000 --evalname alachua-pre2025 --out art/bioclip2-l14
+images: bioclip2-l14, eval alachua-pre2025, shard 1/9, 6667 rows
+loaded bioclip2-l14 via open_clip in 12.3s
+[0;93m2026-10-11 07:12:56.211699451 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6667, 1.03 photos/s
+  images 192/6667, 1.04 photos/s
+  images 352/6667, 1.04 photos/s
+  images 512/6667, 1.04 photos/s
+  images 672/6667, 1.04 photos/s
+  images 832/6667, 1.04 photos/s
+  images 992/6667, 1.04 photos/s
+  images 1152/6667, 1.04 photos/s
+  images 1312/6667, 1.04 photos/s
+  images 1472/6667, 1.04 photos/s
+  images 1632/6667, 1.04 photos/s
+  images 1792/6667, 1.04 photos/s
+  images 1952/6667, 1.04 photos/s
+  images 2112/6667, 1.04 photos/s
+  images 2272/6667, 1.04 photos/s
+  images 2432/6667, 1.04 photos/s
+  images 2592/6667, 1.04 photos/s
+  images 2752/6667, 1.04 photos/s
+  images 2912/6667, 1.04 photos/s
+  images 3072/6667, 1.04 photos/s
+  images 3232/6667, 1.04 photos/s
+  images 3392/6667, 1.04 photos/s
+  images 3552/6667, 1.04 photos/s
+  images 3712/6667, 1.04 photos/s
+  images 3872/6667, 1.04 photos/s
+  images 4032/6667, 1.04 photos/s
+  images 4192/6667, 1.04 photos/s
+  images 4352/6667, 1.04 photos/s
+  images 4512/6667, 1.04 photos/s
+  images 4672/6667, 1.04 photos/s
+  images 4832/6667, 1.04 photos/s
+  images 4992/6667, 1.04 photos/s
+  images 5152/6667, 1.04 photos/s
+  images 5312/6667, 1.04 photos/s
+  images 5472/6667, 1.04 photos/s
+  images 5632/6667, 1.04 photos/s
+  images 5792/6667, 1.04 photos/s
+  images 5952/6667, 1.04 photos/s
+  images 6112/6667, 1.04 photos/s
+  images 6272/6667, 1.04 photos/s
+  images 6432/6667, 1.04 photos/s
+  images 6592/6667, 1.04 photos/s
+images: 6667 embedded, 0 skipped, 6394.9s (1.04 photos/s)
+[08:59:31] exit 0
+[08:59:31] job done, fail=0
