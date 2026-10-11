@@ -234,7 +234,7 @@ async function meet(page, name) {
       return { kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), kindNote: document.querySelector('#claimKindBox .note').textContent, kindsShown: !q('claimKindBox').hidden,
         offers: [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent), offerNote: q('claimOfferNote').textContent, offersShown: !q('claimOfferBox').hidden,
         kindsAboveOffers: box('claimKindBox').bottom <= box('claimOfferBox').top + 1, aboveField: box('claimOfferBox').bottom <= box('claimName').top + 1,
-        last: { kind: l.kind, sure: l.sure, p: +l.kindP.toFixed(4), kindOffers: l.kindOffers, named: l.named }, screen: window.__seenBack.S.screen, meetings: window.__seenBack.record().length }; });
+        last: { kind: l.kind, sure: l.sure, p: +l.kindP.toFixed(4), kindOffers: l.kindOffers, named: l.named, offerSci: l.offers.map((o) => o.sci) }, screen: window.__seenBack.S.screen, meetings: window.__seenBack.record().length }; });
     await page.screenshot({ path: path.join(here, 'shots', 'notsure.png'), scale: 'css' }).catch(() => {});
     await page.locator('#claimKinds button').nth(1).tap(); await page.waitForTimeout(300);
     r.chosen = await st(page); r.record = await recordRows(page);
@@ -253,12 +253,15 @@ async function meet(page, name) {
       o.noneLeads = pick(rec.test.fuseIn(world(f(0.9), t), [0, Math.log(2), 0, 0, Math.log(6)], [0, 1], 6));
       let refused = ''; try { world(Object.assign(f(0.5), { kind_at: 'high' }), t); } catch (e) { refused = e.code + ': ' + e.detail; } o.refused = refused;
       return o; });
+    r.sameName = await page.evaluate(() => window.__seenBack.offerList([{ sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Limenitis astyanax', en: 'Red-spotted Admiral' },
+      { sci: 'Limenitis arthemis', en: 'Red-spotted Admiral' }, { sci: 'Larra bicolor', en: 'Wasp' }]).map((o) => o.label));     // from the real list: Salvia azurea is filed under two GBIF keys; two admirals share a name
     r.errors = errors;
     const tail = ' Choose one below, or type the kind of animal or plant, such as cat, heron or oak.', b = r.byHand;
     done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great Blue Heron' && before === 1
       && r.odd.claim && !r.odd.eyes && r.odd.sub === 'The recognizer is not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
       && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'It may be one of these kinds.' && r.sheet.kindsShown
-      && r.sheet.offers.join() === w.offers.join() && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
+      && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? w.offers[i] + ' (' + r.sheet.last.offerSci[i] + ')' : w.offers[i])) && new Set(r.sheet.offers).size === r.sheet.offers.length
+      && r.sameName.join() === 'giant blue sage,Red-spotted Admiral (Limenitis astyanax),Red-spotted Admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
       && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === 'Choose one below, or type the kind of animal or plant, such as cat, heron or oak.'
       && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
