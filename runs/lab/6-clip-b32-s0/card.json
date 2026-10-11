@@ -1,0 +1,88 @@
+{
+ "id": "clip-b32",
+ "source": "openai/clip-vit-base-patch32",
+ "source_url": "https://huggingface.co/openai/clip-vit-base-patch32",
+ "loader": "transformers",
+ "licence": "MIT (repository licence); the model card rules out deployed use",
+ "licence_url": "https://raw.githubusercontent.com/openai/CLIP/main/LICENSE",
+ "role": "reference",
+ "params": {
+  "image": 87849216,
+  "text": 63428097,
+  "total": 151277313
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224"
+ },
+ "preprocess_detail": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224",
+  "rescale": 0.00392156862745098,
+  "image_processor": "CLIPImageProcessor",
+  "model_class": "CLIPModel"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "text": {
+  "species_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  },
+  "species_sci": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  },
+  "species_taxon_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua",
+   "shards": 1,
+   "shard_0_rows": 5911,
+   "short_context": false
+  }
+ },
+ "width": 512,
+ "stages": [
+  "text-species"
+ ]
+}

@@ -1,0 +1,50 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[02:05:00] job: model=clip-b32 shard=0/1 stages=text-species
+data_source=pub/data-alachua
+data_made=made_from=1ac9ea0d1f4d4d866539d01dd267ee5c218fa5d9 made_at=2026-10-11T01:10:26Z workflow=data run_number=2 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[02:05:00] + python3 -u tools/lab/lab.py text --model clip-b32 --labelset species --species-json data_in/species.json --shard 0/1 --out art/clip-b32
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded clip-b32 via transformers in 8.9s
+[0;93m2026-10-11 02:05:10.492531258 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 5911 of 5911 (shard 0/1)
+  text 256/23644 (2.1s)
+  text 2816/23644 (22.1s)
+  text 5376/23644 (42.6s)
+  text 7936/23644 (64.2s)
+  text 10496/23644 (85.4s)
+  text 13056/23644 (106.5s)
+  text 15616/23644 (128.6s)
+  text 18176/23644 (150.6s)
+  text 20736/23644 (172.6s)
+  text 23296/23644 (194.6s)
+species_com: (5911, 512)
+  text 256/23644 (2.2s)
+  text 2816/23644 (25.2s)
+  text 5376/23644 (47.6s)
+  text 7936/23644 (70.0s)
+  text 10496/23644 (92.6s)
+  text 13056/23644 (115.1s)
+  text 15616/23644 (137.8s)
+  text 18176/23644 (160.4s)
+  text 20736/23644 (183.2s)
+  text 23296/23644 (205.9s)
+species_sci: (5911, 512)
+  text 256/5911 (5.1s)
+  text 2816/5911 (60.8s)
+  text 5376/5911 (121.3s)
+species_taxon_com: (5911, 512)
+[02:14:12] exit 0
+[02:14:12] job done, fail=0
