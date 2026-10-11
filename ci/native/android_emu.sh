@@ -67,6 +67,47 @@ adb shell "am start -W -n $PKG/.MainActivity --es js 'document.getElementById(\"
 sleep 25; shot 3-begin
 state > "$OUT/state-begin.json"; head -c 600 "$OUT/state-begin.json"; echo
 
+step "4. the larger model (models/naturalist: 310 MB from raw.githubusercontent.com) through the page's own recognizer object, then four photos"
+adb shell am force-stop $PKG; sleep 1
+( while :; do echo "$(date -u +%T) $(adb shell ps -A -o PID,RSS,NAME 2>/dev/null | grep -E 'seenback|sandboxed|webview' | tr -s ' ' | tr '\n' ';') $(adb shell grep MemAvailable /proc/meminfo | tr -s ' ')"; sleep 4; done ) > "$OUT/big-memory.txt" 2>&1 &
+MEMPID=$!
+adb shell "am start -W -n $PKG/.MainActivity --es probe native-probe/big.js" 2>&1 | grep -E "Status|TotalTime|Error"
+t0=$(date +%s); n=0; fin=0
+while [ $(( $(date +%s) - t0 )) -lt 900 ]; do
+  sleep 6; n=$((n+1)); el=$(( $(date +%s) - t0 ))
+  case $n in 3|10|20|40|70|100) shot "4-big-$(printf %03d $el)s";; esac
+  state > "$OUT/big-state.json"
+  if python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); sys.exit(0 if (d.get('big') or {}).get('done') else 1)" "$OUT/big-state.json" 2>/dev/null; then echo "probe done after about $el s"; fin=1; shot 4-big-final; break; fi
+  [ $((n % 10)) = 0 ] && python3 -I -c "import json,sys; d=json.load(open(sys.argv[1])); b=d.get('big') or {}; print($el, 's:', b.get('line'), b.get('has'), b.get('steps'))" "$OUT/big-state.json" 2>/dev/null
+done
+[ $fin = 1 ] || { echo "the probe did not finish within 900 s"; shot 4-big-stopped; }
+kill $MEMPID 2>/dev/null
+state > "$OUT/big-state.json"
+python3 -I - "$OUT/big-state.json" "$OUT/big-memory.txt" <<'PY'
+import json, re, sys
+try:
+    d = json.load(open(sys.argv[1]))
+except Exception as e:
+    print("state unreadable:", e); d = {}
+b = d.get("big") or {}
+for k in ("started", "steps", "before", "after", "gotMs", "has", "size", "readyMs", "error", "ms", "done", "line"):
+    print(k + ":", json.dumps(b.get(k)))
+print("about:", json.dumps(b.get("about"))[:900])
+for p in b.get("photos") or []:
+    print("photo:", json.dumps(p)[:700])
+peak = {}
+low = None
+for line in open(sys.argv[2]):
+    for pid, rss, name in re.findall(r"(\d+) (\d+) ([\w.:]+);", line):
+        peak[name] = max(peak.get(name, 0), int(rss))
+    m = re.search(r"MemAvailable: (\d+)", line)
+    if m:
+        low = int(m.group(1)) if low is None else min(low, int(m.group(1)))
+for name, kb in sorted(peak.items()):
+    print("peak resident memory: %s %d MB" % (name, kb // 1024))
+print("lowest MemAvailable in the emulator: %s MB" % (low // 1024 if low else "?"))
+PY
+
 step "logcat lines from the shell and the page"
 kill $LOGPID 2>/dev/null; sleep 1
 grep -E "SeenBack|chromium|cr_|WebView|FATAL|AndroidRuntime" "$OUT/logcat-all.txt" | grep -v "SeenBack *: state " > "$OUT/logcat-seenback.txt"

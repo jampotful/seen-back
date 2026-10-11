@@ -5,7 +5,8 @@ package org.seenback.shell;
 // keeps camera access, workers, WebAssembly and Cache Storage. The shell grants the page's camera request once the
 // person has granted the app's own camera permission. Every three seconds it writes what the page reports about itself
 // (window.__selftest, the screen it shows) to files/state.json, which a debug build lets `adb shell run-as` read.
-// Intent extras for tests: "q" (a query string for index.html), "url" (any address instead), "js" (run after the page loads).
+// Intent extras for tests: "q" (a query string for index.html), "url" (any address instead), "js" (run after the page loads),
+// "probe" (the path of a script in the bundle to add to the page after it loads).
 
 import android.Manifest;
 import android.app.Activity;
@@ -44,6 +45,7 @@ public class MainActivity extends Activity {
     static final String STATE_JS = "JSON.stringify({st: window.__selftest || null, sb: !!window.__seenBack,"
             + " screen: (window.__seenBack && window.__seenBack.S) ? window.__seenBack.S.screen : null,"
             + " src: (window.__seenBack && window.__seenBack.S) ? window.__seenBack.S.src : null,"
+            + " big: window.__bigProbe || null,"
             + " href: location.href, secure: window.isSecureContext, coi: window.crossOriginIsolated, ua: navigator.userAgent})";
 
     WebView web;
@@ -73,6 +75,12 @@ public class MainActivity extends Activity {
             @Override
             public void onPageFinished(WebView v, String url) {
                 Log.i(TAG, "page finished " + url);
+                final String probe = getIntent().getStringExtra("probe");
+                if (probe != null && probe.matches("[A-Za-z0-9_./-]+") && !jsDone) {
+                    jsDone = true;
+                    handler.postDelayed(() -> web.evaluateJavascript("(function(){var s=document.createElement('script');s.src='" + probe
+                            + "';document.head.appendChild(s);})()", r -> Log.i(TAG, "probe " + probe + " injected")), 4000);
+                }
                 final String js = getIntent().getStringExtra("js");
                 if (js != null && !jsDone) {
                     jsDone = true;
