@@ -332,7 +332,8 @@
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
       recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuseWith(cur, kd, sd, month); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
-      region: function () { return cur && cur.table ? String((M.species && M.species.place) || '') : ''; },
+      place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
+      listed: function () { return !!(cur && cur.table); },
       progress: function (fn) { onProgress = fn; },
       offers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
       about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl }; },
@@ -341,4 +342,143 @@
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
         fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
     };
+  })();
+
+  // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
+  // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
+  //   {"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14",
+  //    "health": "<an address that answers {"ready": true}>" (optional), "kind_at": 0.9, "name_at": 0.5, "top": 5, "wake_s": 90, "answer_s": 60}
+  // No such file: the feature does not exist, and nothing on the page mentions it. Nothing is sent before the person has said yes.
+  // The call is Gradio's two steps: POST <call> {"data": [photo as base64 JPEG, month 1-12, region or "", top]} -> {"event_id"};
+  // GET <call>/<event_id> is a stream of events, and the one named "complete" carries [answer].
+  var naturalist = (function () {
+    var KEY = 'seenback.service.v1', mem = '', cfg = null, cfgP = null, known = false;
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var asked = local ? /[?&]svc=(off|[A-Za-z0-9_.\/-]+\.json)/.exec(location.search || '') : null;   // a check on this machine may name another file; a link to the public page may not
+    var T = { wake: 90000, answer: 60000, post: 20000, poll: 3000 };
+    function num(x) { return typeof x === 'number' && isFinite(x); }
+    function okUrl(u) { return typeof u === 'string' && (/^https:\/\/[^\/]+\//.test(u) || (local && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u))); }
+    function readConfig(j) {
+      if (!j || typeof j !== 'object' || j.api !== 'gradio' || !okUrl(j.call) || (j.health !== undefined && !okUrl(j.health))) return null;   // an arrangement this build does not know is as good as none
+      var host = ''; try { host = new URL(j.call).host; } catch (e) { return null; }
+      if (num(j.wake_s)) T.wake = j.wake_s * 1000;
+      if (num(j.answer_s)) T.answer = j.answer_s * 1000;
+      return { call: j.call.replace(/\/+$/, ''), health: j.health || '', region: typeof j.region === 'string' ? j.region : '', model: clip(j.model, 60), host: host,
+        where: /(^|\.)hf\.space$|(^|\.)huggingface\.co$/.test(host) ? 'hosted by Hugging Face' : 'at ' + host,
+        kindAt: num(j.kind_at) ? j.kind_at : null, nameAt: num(j.name_at) ? j.name_at : 0, top: num(j.top) ? Math.max(1, Math.min(10, Math.round(j.top))) : 5 };
+    }
+    function config() {                                // resolves with the service's particulars, or null where there is none
+      if (inViewer || (asked && asked[1] === 'off')) return Promise.resolve(null);
+      if (known) return Promise.resolve(cfg);
+      if (!cfgP) cfgP = fetch(asked ? asked[1] : 'service.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) {
+        if (r.status === 404) { known = true; return null; }               // no such file: there is no service
+        if (!r.ok) throw new Error('service.json ' + r.status);
+        return r.json().then(function (j) { cfg = readConfig(j); known = true; return cfg; });
+      }).catch(function () { cfgP = null; return null; });                  // no network just now, or not JSON: look again another time
+      return cfgP;
+    }
+    function choice() { try { var v = localStorage.getItem(KEY); return v === 'yes' || v === 'no' ? v : ''; } catch (e) { return mem; } }
+    function setChoice(v) { mem = v === 'yes' || v === 'no' ? v : ''; try { if (mem) localStorage.setItem(KEY, mem); else localStorage.removeItem(KEY); } catch (e) {} }
+    function fail(code, detail) { var e = new Error(code); e.code = code; e.detail = String(detail || '').slice(0, 120); return e; }
+    // What leaves the device: the photo with its longest side at most 512, as a JPEG under 1 MB. Nothing else about the photo or the person.
+    function jpeg(canvas) {
+      var k = Math.min(1, 512 / Math.max(canvas.width, canvas.height)), c = makeCanvas(canvas.width * k, canvas.height * k), x = c.getContext('2d'), q = [.85, .7, .5, .3], i, url = '';
+      x.imageSmoothingQuality = 'high'; x.drawImage(canvas, 0, 0, c.width, c.height);
+      for (i = 0; i < q.length; i++) { url = c.toDataURL('image/jpeg', q[i]); if (url.length * .75 < 1e6) break; }
+      c.width = c.height = 1;
+      if (url.indexOf('data:image/jpeg;base64,') !== 0 || url.length * .75 >= 1e6) throw fail('photo', 'not a small JPEG');
+      return url.slice(23);
+    }
+    function clean(out) {                              // the answer, with nothing taken on trust
+      if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
+      if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
+      var species = out.species.slice(0, 10).map(function (s) {
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+      }).filter(function (s) { return s && (s.sci || s.en); });
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
+      return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
+    }
+    function opts(signal, more) {                      // no cookies, no address of the page it came from
+      var o = { mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: signal }, k;
+      for (k in more) o[k] = more[k];
+      return o;
+    }
+    function listen(url, signal) {                     // the stream of events for one question, until the one that completes it
+      return fetch(url, opts(signal, { headers: { Accept: 'text/event-stream' } })).then(function (r) {
+        if (!r.ok) throw fail('failed', 'GET ' + r.status);
+        var dec = new TextDecoder('utf-8'), buf = '', found = null;
+        function take(final) {
+          var parts = buf.split(/\r?\n\r?\n/), i, ev, data;
+          buf = final ? '' : parts.pop();
+          for (i = 0; i < parts.length && !found; i++) {
+            ev = (/^event:\s*(.*)$/m.exec(parts[i]) || [])[1]; data = parts[i].split(/\r?\n/).filter(function (l) { return /^data:/.test(l); }).map(function (l) { return l.replace(/^data:\s?/, ''); }).join('\n');
+            if (ev === 'complete') found = { data: data }; else if (ev === 'error') found = { error: data };
+          }
+          return found;
+        }
+        function finish() {
+          if (!found) throw fail('garbled', 'the stream ended with no answer');
+          if (found.error !== undefined) throw fail('failed', found.error);
+          var j; try { j = JSON.parse(found.data); } catch (e) { throw fail('garbled', 'the answer is not JSON'); }
+          return clean(Array.isArray(j) ? j[0] : j);
+        }
+        if (!r.body || !r.body.getReader) return r.text().then(function (t) { buf = t; take(true); return finish(); });
+        var reader = r.body.getReader();
+        function pump() {
+          return reader.read().then(function (x) {
+            if (x.value) buf += dec.decode(x.value, { stream: true });
+            if (take(x.done)) { try { reader.cancel(); } catch (e) {} return finish(); }
+            if (x.done) return finish();
+            return pump();
+          });
+        }
+        return pump();
+      });
+    }
+    // One question. say('asking' | 'waking') tells the page what to show. Returns { promise, cancel }.
+    function ask(canvas, o, say) {
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null, signal = ctl ? ctl.signal : undefined, t0 = performance.now(), tries = 0, over = false, timers = [];
+      function left() { return T.wake - (performance.now() - t0); }
+      function wait(ms) { return new Promise(function (res) { timers.push(setTimeout(res, ms)); }); }
+      function within(p, ms, code) {                   // p, or a failure once ms have passed
+        return new Promise(function (res, rej) { var t = setTimeout(function () { rej(fail(code)); }, ms); timers.push(t); p.then(function (v) { clearTimeout(t); res(v); }, function (e) { clearTimeout(t); rej(e); }); });
+      }
+      function awake() {                               // where the service names an address that says whether it is ready, that is asked first
+        if (!cfg.health) return Promise.resolve();
+        return within(fetch(cfg.health, opts(signal)).then(function (r) { return r.ok ? r.json() : null; }), T.post, 'asleep').catch(function () { return null; }).then(function (h) {
+          if (over) throw fail('cancelled');
+          if (h && h.ready !== false && h.ok !== false) return;
+          if (left() <= 0) throw fail('asleep', 'not ready in time');
+          say('waking'); return wait(Math.min(T.poll, Math.max(200, left()))).then(awake);
+        });
+      }
+      function post(body) {
+        tries++; say(tries > 1 ? 'waking' : 'asking');
+        return within(fetch(cfg.call, opts(signal, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })).then(function (r) {
+          if (!r.ok) throw fail(r.status === 429 ? 'busy' : (r.status >= 500 || r.status === 404) ? 'asleep' : 'refused', 'POST ' + r.status);
+          return r.json().catch(function () { throw fail('garbled', 'no event id'); });
+        }, function (e) { throw e && e.code ? e : fail(over ? 'cancelled' : 'asleep', e && e.message); }), T.post, 'asleep').then(function (j) {
+          var id = j && j.event_id;
+          if (typeof id !== 'string' || !/^[A-Za-z0-9_.-]{1,120}$/.test(id)) throw fail('garbled', 'no event id');
+          say('asking');
+          return within(listen(cfg.call + '/' + id, signal), T.answer, 'slow');
+        }, function (e) {
+          // no answer at the door: a server that sleeps when nobody calls takes a while to wake. Try again, less and less often, for as long as the wait allows.
+          if (e.code !== 'asleep' || over || left() <= 0) throw e;
+          say('waking'); return wait(Math.min(T.poll * Math.min(tries, 5), Math.max(200, left()))).then(function () { if (over) throw fail('cancelled'); return awake(); }).then(function () { return post(body); });
+        });
+      }
+      var promise = config().then(function (c) {
+        if (!c) throw fail('absent');
+        if (navigator.onLine === false) throw fail('offline');
+        var body = JSON.stringify({ data: [jpeg(canvas), o.month, o.local ? c.region : '', c.top] });
+        return awake().then(function () { return post(body); });
+      });
+      function end() { over = true; timers.forEach(clearTimeout); }
+      promise.then(end, function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} });
+      return { promise: promise, cancel: function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} } };
+    }
+    return { config: config, choice: choice, setChoice: setChoice, ask: ask, cfg: function () { return cfg; },
+      test: { times: function (t) { for (var k in t) T[k] = t[k]; return T; } } };
   })();

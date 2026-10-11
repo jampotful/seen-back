@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|typeit|offline|version|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|typeit|service|away|offline|version|missing|damaged|dying|about|viewer ...]
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
 // A real model: make a slot with test/rec/make_slot.py --photos <dir>, then
 //   SLOT=<slot dir, from the repository root> PHOTOS=<dir> node test/rec/check_rec.js parity
@@ -13,7 +13,9 @@ const ENGINE = process.env.BROWSER || 'chromium', isChromium = ENGINE === 'chrom
 const path = require('path'), fs = require('fs'), http = require('http');
 const here = __dirname, PORT = process.env.PORT || 8782, ORIGIN = 'http://127.0.0.1:' + PORT;
 const SLOT = process.env.SLOT || 'test/rec/models/standin';
-const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (q || '');
+// The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
+const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (q || '');
+const SVC_PORT = +(process.env.SVC_PORT || 8784);
 const phone = Object.assign({}, devices['Pixel 7']);
 if (ENGINE === 'firefox') { delete phone.isMobile; delete phone.userAgent; }      // Firefox has no mobile emulation in Playwright
 if (ENGINE === 'webkit') delete phone.userAgent;
@@ -21,7 +23,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'typeit', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'typeit', 'service', 'away', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -122,7 +124,7 @@ async function meet(page, name) {
       && r.rings.eyes === 'reptile' && r.rings.shown === anole
       && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'A person'
       && r.wall.claim && !r.wall.eyes && /^Nothing alive was found in that photo\. So you tell it\./.test(r.wall.sub)
-      && /^Ardea herodias\. Recognized on this (phone|computer) by a small model, which can be wrong\.$/.test(r.infoSub) && r.notRightIsThere
+      && /^Ardea herodias\. Recognized on this (phone|computer) by a small model, which can be wrong\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.infoSub) && r.notRightIsThere
       && r.rows.some((x) => /Great Blue Heron \| Ardea herodias .* recognized by a small model/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
@@ -290,6 +292,196 @@ async function meet(page, name) {
     await ctl('reset=1'); await ctx.close();
   });
 
+  // ---------- the species service: a fake server that speaks Gradio's two-step call (test/rec/fake_service.js)
+  const until = async (fn, ms) => { const t0 = Date.now(); while (!fn()) { if (Date.now() - t0 > (ms || 15000)) throw new Error('waited too long'); await new Promise((res) => setTimeout(res, 50)); } };
+  const svcLine = (page) => page.evaluate(() => { const vis = (e) => !e.hidden && e.offsetParent !== null, a = document.getElementById('svcView'), b = document.getElementById('svcHud'); return vis(a) ? a.textContent : vis(b) ? b.textContent : ''; });
+  const svcWatch = (page) => page.evaluate(() => { window.__svc = []; const el = document.getElementById('svcView'); new MutationObserver(() => { const t = el.hidden ? '' : el.textContent; if (window.__svc[window.__svc.length - 1] !== t) window.__svc.push(t); }).observe(el, { childList: true, characterData: true, subtree: true, attributes: true }); });
+  const svcSettled = (page) => page.waitForFunction(() => { const v = window.__seenBack.S.svc; return !v || (v.state !== 'asking' && v.state !== 'waking'); }, null, { timeout: 20000 });
+  const byService = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'service'; }, null, { timeout: 20000 });
+  const recordRows = (page) => page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
+  const typeName = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
+  let fake = null;
+  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_/.test(e));     // a sleeping server's refusals are written to the console by the browser itself
+  const svcFiles = async () => {
+    if (!fake) fake = await require('./fake_service.js').start(SVC_PORT);
+    fake.reset();
+    const dir = path.join(here, 'shots'), base = { api: 'gradio', call: 'http://127.0.0.1:' + SVC_PORT + '/gradio_api/call/identify', region: 'us-fl-alachua', model: 'fake-naturalist', kind_at: 0.9, name_at: 0.5 };
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'service.json'), JSON.stringify(base));
+    fs.writeFileSync(path.join(dir, 'service.health.json'), JSON.stringify(Object.assign({ health: 'http://127.0.0.1:' + SVC_PORT + '/health' }, base)));
+    fs.writeFileSync(path.join(dir, 'service.elsewhere.json'), JSON.stringify(Object.assign({}, base, { api: 'rest' })));     // an arrangement this build does not know
+    return '&nosw=1&rec=' + SLOT + '&svc=test/rec/shots/';
+  };
+
+  if (want.includes('service')) await section('service', async () => {   // consent first; what is sent; the answer on screen and in the record; another kind offered, never taken; sleep, failure, refusal
+    const Q = await svcFiles(), r = {}; let ok = true; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
+    { // no service.json: the feature does not exist, nothing mentions it, and the file is asked for only once a photo is left without a species name
+      await ctl('reset=1');
+      const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&svc=test/rec/nowhere.json'); await ready(page); await begin(page);
+      const askedBefore = (await ctl('log=1')).filter((x) => /^test\/rec\/nowhere\.json/.test(x)).length;
+      const s = await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(500);
+      r.absent = { askedBefore, askedAfter: (await ctl('log=1')).filter((x) => /^test\/rec\/nowhere\.json/.test(x)).length, eyes: s.eyes, line: await svcLine(page), posts: fake.calls().length };
+      await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); await page.locator('#about summary').tap(); await page.waitForTimeout(300);
+      r.absent.aboutMentionsIt = await page.locator('#svcBox').isVisible(); r.absent.errors = errors;
+      all('absent', askedBefore === 0 && r.absent.askedAfter === 1 && s.eyes === 'insect' && r.absent.line === '' && r.absent.posts === 0 && !r.absent.aboutMentionsIt && !errors.length);
+      await ctx.close();
+      const b = await open(browser, Q + 'service.elsewhere.json'); await ready(b.page); await begin(b.page); await meet(b.page, 'stripes.png'); await b.page.waitForTimeout(600);
+      r.unknownArrangement = { line: await svcLine(b.page), posts: fake.calls().length }; all('unknownArrangement', r.unknownArrangement.line === '' && r.unknownArrangement.posts === 0); await b.ctx.close();
+    }
+    { // consent first
+      const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page); await svcWatch(page);
+      const s1 = await meet(page, 'stripes.png');
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForSelector('#svcView', { state: 'visible', timeout: 6000 });
+      r.offer = { eyesAtOnce: s1.eyes, shown: s1.shown, line: await text(page, 'svcView'), sentBeforeYes: fake.calls().length };
+      await page.screenshot({ path: path.join(here, 'shots', 'service-offer.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#svcView').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.waitForTimeout(150);
+      r.sheet = { title: await page.locator('#ask h3').textContent(), sub: await text(page, 'askSub'), tick: (await page.locator('#ask .tick').textContent()).trim(), yes: await text(page, 'askYes'), no: await text(page, 'askNo'), note: await page.locator('#ask .note').textContent(), ticked: await page.locator('#askKeep').isChecked() };
+      await page.screenshot({ path: path.join(here, 'shots', 'service-ask.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#askNo').tap(); await page.waitForTimeout(300);
+      r.notNow = { line: await svcLine(page), sent: fake.calls().length, choice: await page.evaluate(() => window.__seenBack.svc.choice()), named: (await st(page)).named.by };
+      all('offer', r.offer.eyesAtOnce === 'insect' && r.offer.shown === 'Insect' && r.offer.line === 'A larger model on a server can try to name the species. Ask it?' && r.offer.sentBeforeYes === 0);
+      all('sheet', r.sheet.title === 'Ask a larger model?' && r.sheet.sub === 'This one photo, made smaller, would be sent to a server run for this project, at 127.0.0.1:' + SVC_PORT + '. The month and the name of this region go with it. The photo is not kept there.'
+        && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Not now' && /About this build/.test(r.sheet.note) && !r.sheet.ticked);
+      all('notNow', r.notNow.line === '' && r.notNow.sent === 0 && r.notNow.choice === '' && r.notNow.named === 'page');
+      // the next photo asks again. This time: yes, and do not ask again
+      fake.set({ delay: 700 });
+      await meet(page, 'stripes.png'); await page.waitForSelector('#svcView', { state: 'visible', timeout: 8000 });
+      await page.locator('#svcView').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askKeep').check(); await page.locator('#askYes').tap();
+      await byService(page); await page.waitForTimeout(200);
+      const month = new Date().getMonth() + 1;
+      r.asked = { named: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), sent: fake.calls(), choice: await page.evaluate(() => window.__seenBack.svc.choice()), record: await recordRows(page), line: await svcLine(page) };
+      const c = r.asked.sent[0] || {};
+      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the larger model.') >= 0 && r.asked.line === 'The larger model says Monarch.' && r.asked.choice === 'yes'
+        && r.asked.record[0] === 'Monarch|Danaus plexippus|service|insect' && r.asked.record.length === 2);
+      all('whatWasSent', r.asked.sent.length === 1 && c.jpeg && Math.max(c.w, c.h) === 512 && c.imageBytes < 1e6 && c.fields === 4 && c.month === month && c.region === 'us-fl-alachua' && c.top === 5 && !c.prefix && c.cookie === '' && c.referer === '' && c.auth === '' && /^application\/json/.test(c.type));
+      // the sheet behind the name, the list of meetings, and its five likeliest as offers
+      await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg'));
+      await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 });
+      r.pill = await text(page, 'whoName'); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); r.infoSub = await text(page, 'infoSub');
+      await page.locator('#infoChange').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
+      r.offers = await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)); await page.locator('#claimBack').tap();
+      await page.evaluate(() => history.back()); await page.waitForTimeout(200); await page.evaluate(() => history.back()); await page.waitForTimeout(200);
+      await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
+      r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map((li) => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent));
+      await page.locator('#about summary').tap(); await page.waitForTimeout(300);
+      r.about = await page.evaluate(() => ({ shown: !document.getElementById('svcBox').hidden, value: document.getElementById('svcChoice').value, options: [...document.querySelectorAll('#svcChoice option')].map((o) => o.textContent), label: document.querySelector('#svcBox label').textContent }));
+      await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'service-about.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#recordClose').tap();
+      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus. Named by a larger model on a server, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
+        && r.offers.join() === 'Monarch,Queen,Gulf Fritillary,Viceroy,Common Buckeye' && /^Monarch \| Danaus plexippus .* named by a larger model on a server$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
+      // from now on it is asked without a prompt. It sees another kind of creature and is sure: the change is offered in one line, and not made
+      fake.set({ answer: 'egret', delay: 300 }); let n = fake.calls().length;
+      await meet(page, 'dots.png'); await page.waitForFunction(() => /Change eyes\?$/.test(document.getElementById('svcView').textContent), null, { timeout: 15000 });
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+      const before = await st(page);
+      r.change = { line: await text(page, 'svcView'), eyesBefore: before.eyes, namedBefore: before.named.common + '|' + before.named.by, posts: fake.calls().length - n, meetings: (await recordRows(page)).length };
+      await page.screenshot({ path: path.join(here, 'shots', 'service-change.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
+      const after = await st(page); r.change.after = after.eyes + '|' + after.named.common + '|' + after.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
+      all('change', r.change.line === 'It looks like a Great Egret, a wading bird. Change eyes?' && r.change.eyesBefore === 'frog' && r.change.namedBefore === 'Frog or toad|page' && r.change.posts === 1
+        && r.change.after === 'wader|Great Egret|service' && r.change.record[0] === 'Great Egret|Ardea alba|service|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
+      // another kind, but it is not sure enough: nothing changes, and its likeliest stay as offers
+      fake.set({ answer: 'unsure' }); n = fake.calls().length;
+      await meet(page, 'dots.png'); await until(() => fake.calls().length > n); await svcSettled(page); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(200);
+      const u = await st(page); r.unsure = { state: u.eyes + '|' + u.named.common + '|' + u.named.by, line: await svcLine(page) };
+      await page.locator('#changeAskView').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
+      r.unsure.offers = await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)); await page.locator('#claimBack').tap();
+      all('unsure', r.unsure.state === 'frog|Frog or toad|page' && r.unsure.line === '' && r.unsure.offers.join() === 'Great Egret,Green Treefrog,Snowy Egret');
+      // the same kind, but its best guess is under the service's own mark for naming: the name stays, the guesses are offered
+      fake.set({ answer: 'faint' }); n = fake.calls().length;
+      await meet(page, 'stripes.png'); await until(() => fake.calls().length > n); await svcSettled(page); await page.waitForTimeout(200);
+      const f = await st(page); r.faint = f.eyes + '|' + f.named.common + '|' + f.named.by; all('faint', r.faint === 'insect|Insect|page');
+      // the device named the species itself: nobody is asked
+      n = fake.calls().length; await meet(page, 'heron.png'); await page.waitForTimeout(900);
+      r.namedByDevice = { posts: fake.calls().length - n, by: (await st(page)).named.by, line: await svcLine(page) }; all('namedByDevice', r.namedByDevice.posts === 0 && r.namedByDevice.by === 'page' && r.namedByDevice.line === '');
+      // a name typed while the question is out is not overwritten when the answer comes
+      fake.set({ answer: 'monarch', delay: 1500 }); n = fake.calls().length;
+      await meet(page, 'stripes.png'); await until(() => fake.calls().length > n); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+      await page.locator('#changeAskView').tap(); await typeName(page, 'beetle'); await page.waitForTimeout(2300);
+      const t = await st(page); r.typedWins = t.named.common + '|' + t.named.by; all('typedWins', r.typedWins === 'Beetle|you');
+      // "Never ask it", chosen in the About block: no line, nothing sent; and back to asking each time
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
+      await page.locator('#about summary').tap().catch(() => {}); await page.waitForTimeout(200);
+      if (!(await page.locator('#svcChoice').isVisible())) { await page.locator('#about summary').tap(); await page.waitForTimeout(300); }
+      await page.selectOption('#svcChoice', 'no'); await page.locator('#recordClose').tap();
+      fake.set({ delay: 0 }); n = fake.calls().length; await meet(page, 'stripes.png'); await page.waitForTimeout(900);
+      r.never = { posts: fake.calls().length - n, line: await svcLine(page), choice: await page.evaluate(() => window.__seenBack.svc.choice()) };
+      await page.evaluate(() => window.__seenBack.svc.setChoice('')); await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(400);
+      r.eachTimeAgain = await svcLine(page);
+      all('never', r.never.posts === 0 && r.never.line === '' && r.never.choice === 'no' && r.eachTimeAgain === 'A larger model on a server can try to name the species. Ask it?');
+      r.errors = errors; all('noErrors', !errors.length);
+      await ctx.close();
+    }
+    for (const [name, file] of [['asleep', 'service.json'], ['asleepWithHealth', 'service.health.json']]) {   // a sleeping server: one honest line, then the answer
+      fake.reset(); const { ctx, page, errors } = await open(browser, Q + file); await ready(page);
+      await page.evaluate(() => { window.__seenBack.svc.setChoice('yes'); window.__seenBack.svc.test.times({ poll: 400 }); }); await begin(page); await svcWatch(page);
+      fake.sleep(600000); const t0 = Date.now(); await meet(page, 'stripes.png');
+      await page.waitForFunction(() => window.__svc.indexOf('The larger model is waking up, which can take a minute.') >= 0, null, { timeout: 15000 });
+      const eyesWhileWaiting = (await st(page)).eyes; await page.waitForTimeout(1300); fake.sleep(0);     // it wakes
+      await byService(page);
+      r[name] = { lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), eyesWhileWaiting, named: (await st(page)).named.common, posts: fake.calls().length, healthAsked: fake.state.health, wokeAfterMs: Date.now() - t0, errors: quiet(errors) };
+      all(name, r[name].lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / The larger model says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
+      await ctx.close();
+    }
+    { // it does not wake within the wait (shortened here from 90 seconds to 2): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
+      fake.reset(); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page);
+      r.waitByDefault = await page.evaluate(() => { window.__seenBack.svc.setChoice('yes'); const t = window.__seenBack.svc.test.times({}); return { wake: t.wake, answer: t.answer }; });
+      await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 2000, poll: 400 }); }); await begin(page); await svcWatch(page);
+      fake.sleep(600000); await meet(page, 'stripes.png');
+      await page.waitForFunction(() => window.__svc.length >= 2 && window.__svc[window.__svc.length - 1] === '', null, { timeout: 15000 });
+      const s = await st(page);
+      r.neverWakes = { lines: await page.evaluate(() => window.__svc.filter((x, i, a) => (i || x) && (!i || a[i - 1] !== x))), state: s.eyes + '|' + s.named.common + '|' + s.named.by, claim: s.claim, msg: await text(page, 'msg'), why: await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'service-none').map((d) => d.code).join()) };
+      all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / ' && r.neverWakes.state === 'insect|Insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
+      await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 90000, answer: 1500 }); });
+      r.failures = {};
+      for (const mode of ['error', 'garbled', 'refusal', 'refuse', 'busy', 'slow']) {
+        fake.reset(); fake.set(mode === 'slow' ? { delay: 4000 } : { mode });
+        await meet(page, 'stripes.png'); await until(() => fake.calls().length > 0); await svcSettled(page); await page.waitForTimeout(150);
+        const x = await st(page);
+        r.failures[mode] = { state: x.eyes + '|' + x.named.common + '|' + x.named.by, line: await svcLine(page), posts: fake.calls().length, claim: x.claim, msg: await text(page, 'msg') };
+        all('failure ' + mode, r.failures[mode].state === 'insect|Insect|page' && r.failures[mode].line === '' && r.failures[mode].posts === 1 && !x.claim && r.failures[mode].msg === '');
+      }
+      r.failureCodes = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'service-none').map((d) => d.code).join());
+      r.failureErrors = quiet(errors); all('failuresQuiet', !r.failureErrors.length);
+      await ctx.close();
+    }
+    fake.reset();
+    done('service', r, ok);
+  });
+
+  if (want.includes('away')) await section('away', async () => {     // the species list is one town's: the sheet says so, and a switch turns local naming off. No location is asked of the device
+    const Q = await svcFiles(), r = {};
+    const ctx = await browser.newContext(Object.assign({}, phone));
+    await ctx.addInitScript(() => { window.__geo = 0; try { const g = navigator.geolocation; if (g) { g.getCurrentPosition = () => { window.__geo++; }; g.watchPosition = () => { window.__geo++; return 0; }; } } catch (e) {} });
+    let { page, errors } = await open(browser, Q + 'service.json', null, ctx); await ready(page);
+    await page.evaluate(() => window.__seenBack.svc.setChoice('yes')); await begin(page);
+    const info = async () => { await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg'));
+      await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 }); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); const t = await text(page, 'infoSub');
+      await page.locator('#infoClose').tap(); await page.evaluate(() => history.back()); await page.waitForTimeout(200); await page.evaluate(() => history.back()); await page.waitForTimeout(200); return t; };
+    const about = async () => { await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); if (!(await page.locator('#awayBox').isVisible())) { await page.locator('#about summary').tap(); await page.waitForTimeout(300); } };
+    r.near = { heron: (await meet(page, 'heron.png')).shown }; r.near.info = await info();
+    await about(); r.switch = { label: (await page.locator('#awayRow .tick').textContent()).trim(), note: await text(page, 'awayNote'), tickedAtFirst: await page.locator('#awayBox').isChecked() };
+    await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'away.png'), scale: 'css' }).catch(() => {});
+    await page.locator('#awayBox').check(); await page.locator('#recordClose').tap();
+    // elsewhere: the device names the kind and no species, and the larger model is asked without a region
+    fake.reset(); fake.set({ answer: 'egret' });
+    const h = await meet(page, 'heron.png'); r.away = { atOnce: h.eyes + '|' + h.shown, top: h.last && h.last.top }; await byService(page);
+    r.away.sent = fake.calls().map((c) => JSON.stringify(c.region) + ' month ' + c.month); r.away.named = (await st(page)).named.common + '|' + (await st(page)).named.by; r.away.info = await info();
+    await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); r.away.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].slice(0, 1).map((li) => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent)); await page.locator('#recordClose').tap();
+    // the choice is kept across a reload, and can be undone
+    await page.reload(); await page.waitForTimeout(400); await ready(page);
+    r.afterReload = await page.evaluate(() => window.__seenBack.rec.local); await begin(page);
+    await about(); r.tickedAfterReload = await page.locator('#awayBox').isChecked(); await page.locator('#awayBox').uncheck(); await page.locator('#recordClose').tap();
+    fake.reset(); r.nearAgain = (await meet(page, 'heron.png')).shown; r.nearAgainPosts = fake.calls().length;
+    r.locationAsked = await page.evaluate(() => window.__geo); r.errors = errors;
+    done('away', r, r.near.heron === 'Great Blue Heron' && /which can be wrong\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.near.info)
+      && r.switch.label === 'I am not near Gainesville' && /^Species are named from a list of those recorded around Gainesville, Florida\./.test(r.switch.note) && !r.switch.tickedAtFirst
+      && r.away.atOnce === 'wader|Wading bird' && r.away.top === null && r.away.sent.join() === '"" month ' + (new Date().getMonth() + 1) && r.away.named === 'Great Egret|service'
+      && r.away.info === 'Ardea alba. Named by a larger model on a server, which can be wrong.' && /named by a larger model on a server$/.test(r.away.rows[0])
+      && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'Great Blue Heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
+    await ctx.close();
+  });
+
   if (want.includes('offline') || want.includes('version')) await section('offline', async () => {   // a second visit with the network off; then a new version is noticed, fetched, and the old one let go
     await ctl('reset=1');
     const ctx = await browser.newContext(Object.assign({}, phone));
@@ -408,12 +600,12 @@ async function meet(page, name) {
     const ctx = await browser.newContext(Object.assign({}, phone)); const page = await ctx.newPage();
     await page.addInitScript(() => { window.claude = { use: () => Promise.resolve(null) }; });
     await page.goto(url('&nosw=1&rec=' + SLOT)); await page.waitForTimeout(2500);
-    const r = { usable: await page.evaluate(() => window.__seenBack.rec.usable()), asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin|vendor/.test(x)), block: (await page.evaluate(() => window.__seenBack.about())).split('\n')[1] };
+    const r = { usable: await page.evaluate(() => window.__seenBack.rec.usable()), asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin|vendor|service/.test(x)), block: (await page.evaluate(() => window.__seenBack.about())).split('\n')[1] };
     done('viewer', r, r.usable === false && r.asked.length === 0 && /Claude/.test(r.block));
     await ctx.close();
   });
 
-  await browser.close();
+  await browser.close(); if (fake) fake.close();
   console.log(JSON.stringify(out, null, 1));
   console.log(Object.keys(out).map((k) => k + ': ' + (out[k].ok ? 'ok' : 'FAILED')).join(' | '));
   process.exit(bad ? 1 : 0);

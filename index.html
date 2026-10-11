@@ -156,6 +156,13 @@ button { cursor: pointer; }
 .offers .pill { min-height: 44px; padding: 0 18px; font-weight: 500; }
 .about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 .sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
+.line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: 14.5px; line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.line:disabled { border-color: transparent; background: none; padding-left: 0; text-decoration: none; cursor: default; opacity: 1; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none !important; }
+.tick { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dim); }
+.tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--paper); }
+.sheet details .tick { margin-top: 12px; font-size: 13.5px; }
+.sheet select { display: block; margin-top: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #1c1c1c; color: var(--ink); font: inherit; font-size: 14.5px; }
+#svcBox { margin-top: 12px; }
 .reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
 @media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
@@ -198,6 +205,7 @@ button { cursor: pointer; }
       <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
       <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
+    <button class="line" id="svcView" type="button" hidden></button>
     <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
@@ -213,6 +221,7 @@ button { cursor: pointer; }
         <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
       </div>
       <span class="timer" id="timer" hidden>0:00</span>
+      <button class="line" id="svcHud" type="button" hidden></button>
     </div>
     <div class="stack">
       <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -263,6 +272,14 @@ button { cursor: pointer; }
       <summary>About this build</summary>
       <pre class="about" id="buildMark"></pre>
       <div class="row"><button class="mini" id="aboutCopy" type="button">Copy</button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
+      <div id="awayRow" hidden>
+        <label class="tick"><input type="checkbox" id="awayBox"><span>I am not near Gainesville</span></label>
+        <p class="fine2" id="awayNote"></p>
+      </div>
+      <div id="svcBox" hidden>
+        <label class="fine2" for="svcChoice">A larger model on a server can be asked to name the species, from one photo made smaller.</label>
+        <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
+      </div>
     </details>
   </section>
 
@@ -291,6 +308,15 @@ button { cursor: pointer; }
         <li>Unchecked: the two-cone colour arithmetic, entered from memory. Two assumptions of this app's own: that the phone's long side fills about 24 degrees of your view, and that a faster eye can be suggested by slowing the picture. Every line marked as a guess is a first entry for a vision scientist to correct.</li>
       </ul>
     </details>
+  </section>
+
+  <!-- before a photo leaves the device: what would be sent, where, and the choice -->
+  <section class="sheet" id="ask" hidden aria-label="Ask a larger model">
+    <header><h3>Ask a larger model?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <p class="sub" id="askSub"></p>
+    <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
+    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Not now</button></div>
+    <p class="note">Your answer can be changed under “About this build”, in “Met so far”.</p>
   </section>
 
   <!-- a clip or a still, kept -->
@@ -957,7 +983,7 @@ button { cursor: pointer; }
     var key = String(v.key || ''), mid = String(id || v.id || '');
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
-    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0 };
+    return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: v.by === 'Claude' ? 'Claude' : v.by === 'page' ? 'page' : v.by === 'service' ? 'service' : 'you', at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
     try { var a = JSON.parse(localStorage.getItem(REC_KEY) || '[]'); return Array.isArray(a) ? a.map(function (v) { return cleanMeeting(v); }).filter(Boolean) : []; }
@@ -965,13 +991,13 @@ button { cursor: pointer; }
   }
   var record = loadLocal();
   function saveLocal() {
-    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up }; }))); } catch (e) {}
+    try { localStorage.setItem(REC_KEY, JSON.stringify(record.slice(0, 300).map(function (m) { return { id: m.id, key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, up: m.up, loc: m.loc }; }))); } catch (e) {}
   }
   function pushUp(m) {                             // one write at a time for each meeting
     if (!remote) return;
     var col = remote;
     m._p = (m._p || Promise.resolve()).then(function () {
-      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb });
+      return col.doc(m.id).set({ key: m.key, common: m.common, sci: m.sci, by: m.by, at: m.at, thumb: m.thumb, loc: m.loc ? 1 : 0 });
     }).then(function () { m.up = 1; saveLocal(); }, function () {});
   }
   function thumbOf(c) {
@@ -990,7 +1016,8 @@ button { cursor: pointer; }
       m = { id: 'm' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36), at: Date.now(), thumb: S.animalPhoto ? thumbOf(S.animalPhoto) : '', up: 0 };
       record.unshift(m); S.meetingId = m.id;
     }
-    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : 'you';
+    m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = named.by === 'Claude' ? 'Claude' : named.by === 'page' ? 'page' : named.by === 'service' ? 'service' : 'you';
+    m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
     saveLocal(); pushUp(m); paintRecordBits();
   }
   function forgetMeeting(id) {
@@ -1068,7 +1095,7 @@ button { cursor: pointer; }
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : 'on your word'].filter(Boolean).join(' · ')));
+      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : 'on your word'].filter(Boolean).join(' · ')));
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -1110,8 +1137,8 @@ button { cursor: pointer; }
   }
   function lookAgain(m) {
     if (!m || !EYES[m.key]) return;
-    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at };
-    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = [];
+    var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
+    closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
     armBack();
     photoFromThumb(m.thumb).then(function (c) {
@@ -1457,7 +1484,8 @@ button { cursor: pointer; }
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
       recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuseWith(cur, kd, sd, month); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
-      region: function () { return cur && cur.table ? String((M.species && M.species.place) || '') : ''; },
+      place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
+      listed: function () { return !!(cur && cur.table); },
       progress: function (fn) { onProgress = fn; },
       offers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
       about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl }; },
@@ -1466,6 +1494,145 @@ button { cursor: pointer; }
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
         fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
     };
+  })();
+
+  // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
+  // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
+  //   {"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14",
+  //    "health": "<an address that answers {"ready": true}>" (optional), "kind_at": 0.9, "name_at": 0.5, "top": 5, "wake_s": 90, "answer_s": 60}
+  // No such file: the feature does not exist, and nothing on the page mentions it. Nothing is sent before the person has said yes.
+  // The call is Gradio's two steps: POST <call> {"data": [photo as base64 JPEG, month 1-12, region or "", top]} -> {"event_id"};
+  // GET <call>/<event_id> is a stream of events, and the one named "complete" carries [answer].
+  var naturalist = (function () {
+    var KEY = 'seenback.service.v1', mem = '', cfg = null, cfgP = null, known = false;
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var asked = local ? /[?&]svc=(off|[A-Za-z0-9_.\/-]+\.json)/.exec(location.search || '') : null;   // a check on this machine may name another file; a link to the public page may not
+    var T = { wake: 90000, answer: 60000, post: 20000, poll: 3000 };
+    function num(x) { return typeof x === 'number' && isFinite(x); }
+    function okUrl(u) { return typeof u === 'string' && (/^https:\/\/[^\/]+\//.test(u) || (local && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u))); }
+    function readConfig(j) {
+      if (!j || typeof j !== 'object' || j.api !== 'gradio' || !okUrl(j.call) || (j.health !== undefined && !okUrl(j.health))) return null;   // an arrangement this build does not know is as good as none
+      var host = ''; try { host = new URL(j.call).host; } catch (e) { return null; }
+      if (num(j.wake_s)) T.wake = j.wake_s * 1000;
+      if (num(j.answer_s)) T.answer = j.answer_s * 1000;
+      return { call: j.call.replace(/\/+$/, ''), health: j.health || '', region: typeof j.region === 'string' ? j.region : '', model: clip(j.model, 60), host: host,
+        where: /(^|\.)hf\.space$|(^|\.)huggingface\.co$/.test(host) ? 'hosted by Hugging Face' : 'at ' + host,
+        kindAt: num(j.kind_at) ? j.kind_at : null, nameAt: num(j.name_at) ? j.name_at : 0, top: num(j.top) ? Math.max(1, Math.min(10, Math.round(j.top))) : 5 };
+    }
+    function config() {                                // resolves with the service's particulars, or null where there is none
+      if (inViewer || (asked && asked[1] === 'off')) return Promise.resolve(null);
+      if (known) return Promise.resolve(cfg);
+      if (!cfgP) cfgP = fetch(asked ? asked[1] : 'service.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) {
+        if (r.status === 404) { known = true; return null; }               // no such file: there is no service
+        if (!r.ok) throw new Error('service.json ' + r.status);
+        return r.json().then(function (j) { cfg = readConfig(j); known = true; return cfg; });
+      }).catch(function () { cfgP = null; return null; });                  // no network just now, or not JSON: look again another time
+      return cfgP;
+    }
+    function choice() { try { var v = localStorage.getItem(KEY); return v === 'yes' || v === 'no' ? v : ''; } catch (e) { return mem; } }
+    function setChoice(v) { mem = v === 'yes' || v === 'no' ? v : ''; try { if (mem) localStorage.setItem(KEY, mem); else localStorage.removeItem(KEY); } catch (e) {} }
+    function fail(code, detail) { var e = new Error(code); e.code = code; e.detail = String(detail || '').slice(0, 120); return e; }
+    // What leaves the device: the photo with its longest side at most 512, as a JPEG under 1 MB. Nothing else about the photo or the person.
+    function jpeg(canvas) {
+      var k = Math.min(1, 512 / Math.max(canvas.width, canvas.height)), c = makeCanvas(canvas.width * k, canvas.height * k), x = c.getContext('2d'), q = [.85, .7, .5, .3], i, url = '';
+      x.imageSmoothingQuality = 'high'; x.drawImage(canvas, 0, 0, c.width, c.height);
+      for (i = 0; i < q.length; i++) { url = c.toDataURL('image/jpeg', q[i]); if (url.length * .75 < 1e6) break; }
+      c.width = c.height = 1;
+      if (url.indexOf('data:image/jpeg;base64,') !== 0 || url.length * .75 >= 1e6) throw fail('photo', 'not a small JPEG');
+      return url.slice(23);
+    }
+    function clean(out) {                              // the answer, with nothing taken on trust
+      if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
+      if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
+      var species = out.species.slice(0, 10).map(function (s) {
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+      }).filter(function (s) { return s && (s.sci || s.en); });
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
+      return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
+    }
+    function opts(signal, more) {                      // no cookies, no address of the page it came from
+      var o = { mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: signal }, k;
+      for (k in more) o[k] = more[k];
+      return o;
+    }
+    function listen(url, signal) {                     // the stream of events for one question, until the one that completes it
+      return fetch(url, opts(signal, { headers: { Accept: 'text/event-stream' } })).then(function (r) {
+        if (!r.ok) throw fail('failed', 'GET ' + r.status);
+        var dec = new TextDecoder('utf-8'), buf = '', found = null;
+        function take(final) {
+          var parts = buf.split(/\r?\n\r?\n/), i, ev, data;
+          buf = final ? '' : parts.pop();
+          for (i = 0; i < parts.length && !found; i++) {
+            ev = (/^event:\s*(.*)$/m.exec(parts[i]) || [])[1]; data = parts[i].split(/\r?\n/).filter(function (l) { return /^data:/.test(l); }).map(function (l) { return l.replace(/^data:\s?/, ''); }).join('\n');
+            if (ev === 'complete') found = { data: data }; else if (ev === 'error') found = { error: data };
+          }
+          return found;
+        }
+        function finish() {
+          if (!found) throw fail('garbled', 'the stream ended with no answer');
+          if (found.error !== undefined) throw fail('failed', found.error);
+          var j; try { j = JSON.parse(found.data); } catch (e) { throw fail('garbled', 'the answer is not JSON'); }
+          return clean(Array.isArray(j) ? j[0] : j);
+        }
+        if (!r.body || !r.body.getReader) return r.text().then(function (t) { buf = t; take(true); return finish(); });
+        var reader = r.body.getReader();
+        function pump() {
+          return reader.read().then(function (x) {
+            if (x.value) buf += dec.decode(x.value, { stream: true });
+            if (take(x.done)) { try { reader.cancel(); } catch (e) {} return finish(); }
+            if (x.done) return finish();
+            return pump();
+          });
+        }
+        return pump();
+      });
+    }
+    // One question. say('asking' | 'waking') tells the page what to show. Returns { promise, cancel }.
+    function ask(canvas, o, say) {
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null, signal = ctl ? ctl.signal : undefined, t0 = performance.now(), tries = 0, over = false, timers = [];
+      function left() { return T.wake - (performance.now() - t0); }
+      function wait(ms) { return new Promise(function (res) { timers.push(setTimeout(res, ms)); }); }
+      function within(p, ms, code) {                   // p, or a failure once ms have passed
+        return new Promise(function (res, rej) { var t = setTimeout(function () { rej(fail(code)); }, ms); timers.push(t); p.then(function (v) { clearTimeout(t); res(v); }, function (e) { clearTimeout(t); rej(e); }); });
+      }
+      function awake() {                               // where the service names an address that says whether it is ready, that is asked first
+        if (!cfg.health) return Promise.resolve();
+        return within(fetch(cfg.health, opts(signal)).then(function (r) { return r.ok ? r.json() : null; }), T.post, 'asleep').catch(function () { return null; }).then(function (h) {
+          if (over) throw fail('cancelled');
+          if (h && h.ready !== false && h.ok !== false) return;
+          if (left() <= 0) throw fail('asleep', 'not ready in time');
+          say('waking'); return wait(Math.min(T.poll, Math.max(200, left()))).then(awake);
+        });
+      }
+      function post(body) {
+        tries++; say(tries > 1 ? 'waking' : 'asking');
+        return within(fetch(cfg.call, opts(signal, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })).then(function (r) {
+          if (!r.ok) throw fail(r.status === 429 ? 'busy' : (r.status >= 500 || r.status === 404) ? 'asleep' : 'refused', 'POST ' + r.status);
+          return r.json().catch(function () { throw fail('garbled', 'no event id'); });
+        }, function (e) { throw e && e.code ? e : fail(over ? 'cancelled' : 'asleep', e && e.message); }), T.post, 'asleep').then(function (j) {
+          var id = j && j.event_id;
+          if (typeof id !== 'string' || !/^[A-Za-z0-9_.-]{1,120}$/.test(id)) throw fail('garbled', 'no event id');
+          say('asking');
+          return within(listen(cfg.call + '/' + id, signal), T.answer, 'slow');
+        }, function (e) {
+          // no answer at the door: a server that sleeps when nobody calls takes a while to wake. Try again, less and less often, for as long as the wait allows.
+          if (e.code !== 'asleep' || over || left() <= 0) throw e;
+          say('waking'); return wait(Math.min(T.poll * Math.min(tries, 5), Math.max(200, left()))).then(function () { if (over) throw fail('cancelled'); return awake(); }).then(function () { return post(body); });
+        });
+      }
+      var promise = config().then(function (c) {
+        if (!c) throw fail('absent');
+        if (navigator.onLine === false) throw fail('offline');
+        var body = JSON.stringify({ data: [jpeg(canvas), o.month, o.local ? c.region : '', c.top] });
+        return awake().then(function () { return post(body); });
+      });
+      function end() { over = true; timers.forEach(clearTimeout); }
+      promise.then(end, function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} });
+      return { promise: promise, cancel: function () { end(); if (ctl) try { ctl.abort(); } catch (e) {} } };
+    }
+    return { config: config, choice: choice, setChoice: setChoice, ask: ask, cfg: function () { return cfg; },
+      test: { times: function (t) { for (var k in t) T[k] = t[k]; return T; } } };
   })();
 
   // ---------- naming
@@ -1481,10 +1648,10 @@ button { cursor: pointer; }
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden; }
   function closeSheets() {
     var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('info', false); show('keep', false); show('scrim', false);
+    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -1499,11 +1666,11 @@ button { cursor: pointer; }
     var offers = pocket.offers || [], box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.en || o.sci); b.type = 'button';
-      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you' }); });
+      b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
       box.appendChild(b);
     });
     show('claimOfferBox', offers.length > 0);
-    show('info', false); show('record', false); show('keep', false); openSheet('claim');
+    show('info', false); show('record', false); show('keep', false); show('ask', false); openSheet('claim');
     setTimeout(function () { try { if (!$('claim').hidden) $('claimName').focus(); } catch (e) {} }, 80);
   }
   function setViewPrompt(key) {
@@ -1514,6 +1681,7 @@ button { cursor: pointer; }
 
   function reveal(key, named) {
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
+    if (named && named.by === 'service') paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
@@ -1541,9 +1709,10 @@ button { cursor: pointer; }
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
       if (r.kind === 'none') { failName('Nothing alive was found in that photo.'); return; }
-      pocket.offers = r.offers;
+      pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
-      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page' });
+      reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
+      if (!r.named && r.kind !== 'person') considerService(t);             // the kind is in use at once; a species name may follow from the larger model
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
@@ -1581,7 +1750,7 @@ button { cursor: pointer; }
     }, 'image/jpeg', .86);
   }
   function gotAnimalPhoto(c) {
-    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName();
+    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName(); dropSvc();
     if (S.src === 'cam') { S.freeze = true; if (engine) engine.setImage(c); paintUI(); }
     else showStill(c, false);
     identify();
@@ -1595,7 +1764,8 @@ button { cursor: pointer; }
   }
 
   // ---------- back, wherever something might be done over
-  function back() {
+  function back() { backStep(); paintSvc(); }
+  function backStep() {
     var s = S.screen;
     if (anySheet()) { dismissSheets(); return; }
     S.seq++; hideName(); msg('');
@@ -1731,7 +1901,9 @@ button { cursor: pointer; }
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
     $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
-      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.' : 'As you said.');
+      : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.'
+      : S.named && S.named.by === 'service' ? 'Named by a larger model on a server, which can be wrong.' : 'As you said.')
+      + (S.named && S.named.local ? ' Chosen among species recorded around ' + pocket.place() + '.' : '');
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
       var li = document.createElement('li'), m = document.createElement('i'), d = document.createElement('span'), b = document.createElement('b');
@@ -1773,6 +1945,90 @@ button { cursor: pointer; }
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
   $('btnShutter').addEventListener('click', shutter);
+
+  // ---------- the larger model on a server (the naturalist), asked only with the person's say-so
+  // One line on the picture carries it: an offer to ask (tappable), "Asking the larger model.", the waking sentence, what it said,
+  // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
+  var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.' };
+  var svcTimer = 0;
+  function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
+  function paintSvc() {
+    var v = S.svc;
+    if (v && (v.t !== S.token || !S.eyes)) { S.svc = null; if (v.job) v.job.cancel(); v = null; }     // it belonged to a photo that is no longer in hand
+    var text = v ? (v.text || SVC_SAY[v.state] || '') : '', tap = !!v && (v.state === 'offer' || v.state === 'change');
+    ['svcHud', 'svcView'].forEach(function (id) { var b = $(id); b.textContent = text; b.disabled = !tap; b.hidden = !text; });
+  }
+  function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
+  function considerService(t) {
+    var photo = S.animalPhoto;
+    naturalist.config().then(function (c) {            // service.json is asked for here, the first time a photo is left without a species name
+      if (!c || t !== S.token || photo !== S.animalPhoto || !S.eyes || !S.named || S.named.by !== 'page' || navigator.onLine === false) return;
+      var ch = naturalist.choice();
+      if (ch === 'no') return;
+      if (ch === 'yes') askService(t); else { S.svc = { t: t, state: 'offer' }; paintSvc(); }
+    });
+  }
+  function askService(t) {
+    var photo = S.animalPhoto; if (!photo || t !== S.token || !S.eyes) return;
+    var v = { t: t, state: 'asking' };
+    if (S.svc && S.svc.job) S.svc.job.cancel();
+    v.job = naturalist.ask(photo, { month: new Date().getMonth() + 1, local: pocket.local !== false }, function (state) { if (S.svc === v && v.state !== state) { v.state = state; paintSvc(); } });
+    S.svc = v; paintSvc(); diag('service-ask', pocket.local !== false ? 'region' : 'no-region');
+    v.job.promise.then(function (a) { if (S.svc === v) gotService(a, t); }, function (e) {
+      diag('service-none', String((e && e.code) || 'unknown'));
+      if (S.svc === v) { S.svc = null; paintSvc(); }   // every failure lets go quietly: what the device said stands
+    });
+  }
+  function gotService(a, t) {
+    var c = naturalist.cfg(), top = a.species[0];
+    S.svc = null; clearTimeout(svcTimer);
+    diag('service', JSON.stringify({ top: top ? [top.sci, +top.p.toFixed(3), top.kind] : null, kinds: a.kinds.slice(0, 2).map(function (k) { return [k.key, +k.p.toFixed(3)]; }), ms: a.ms, model: a.model, region: a.region }).slice(0, 300));
+    if (!top || !c || !S.eyes) { paintSvc(); return; }
+    pocket.offers = a.species.slice(0, 5).map(function (s) { return { sci: s.sci, en: s.en, kind: s.kind, local: !!a.region }; });   // its five likeliest are kept for the sheet that corrects a name
+    var named = { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region };
+    var kp = a.kinds.filter(function (k) { return k.key === top.kind; })[0], kindP = kp ? kp.p : top.p;
+    if (top.p >= c.nameAt && top.kind === S.eyes) {
+      // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
+      S.named = named; noteMeeting(S.eyes, named); paintUI();
+      S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
+      svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
+    } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
+      // another kind of creature, and the larger model is sure enough by the service's own setting: the change is offered, never made
+      S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + (top.kind === 'other' ? '' : ', ' + EYES[top.kind].who) + '. Change eyes?' };
+    }
+    paintSvc();
+  }
+  function tapSvc() {
+    var v = S.svc; if (!v) return;
+    if (v.state === 'offer') {
+      var c = naturalist.cfg(); if (!c) return;
+      $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
+        (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+      $('askKeep').checked = false;
+      show('claim', false); show('record', false); show('info', false); show('keep', false); openSheet('ask');
+    } else if (v.state === 'change') { S.svc = null; diag('service-eyes', v.kind); reveal(v.kind, v.named); }
+  }
+  function answerAsk(yes) {
+    if ($('askKeep').checked) naturalist.setChoice(yes ? 'yes' : 'no');
+    closeSheets(); diag('service-say', (yes ? 'yes' : 'no') + ($('askKeep').checked ? '-kept' : ''));
+    var v = S.svc; if (!v || v.state !== 'offer') return;
+    if (yes) askService(v.t); else { S.svc = null; paintSvc(); }
+  }
+  $('svcHud').addEventListener('click', tapSvc); $('svcView').addEventListener('click', tapSvc);
+  $('askYes').addEventListener('click', function () { answerAsk(true); });
+  $('askNo').addEventListener('click', function () { answerAsk(false); });
+  $('askClose').addEventListener('click', dismissSheets);
+  // ---------- where the species list applies: it is one town's. No location is asked of the device; the person says if they are elsewhere.
+  var AWAY_KEY = 'seenback.away.v1';
+  try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
+  function paintChoices() {
+    show('awayRow', !inViewer); $('awayBox').checked = pocket.local === false;
+    $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and a larger model, if asked, is not told the region.';
+    show('svcBox', false);
+    naturalist.config().then(function (c) { show('svcBox', !!c); if (c) $('svcChoice').value = naturalist.choice(); });
+  }
+  $('awayBox').addEventListener('change', function () { pocket.local = !$('awayBox').checked; try { localStorage.setItem(AWAY_KEY, pocket.local ? '0' : '1'); } catch (e) {} diag('away', pocket.local ? 'no' : 'yes'); });
+  $('svcChoice').addEventListener('change', function () { naturalist.setChoice($('svcChoice').value); diag('service-choice', $('svcChoice').value || 'each'); });
   $('btnType').addEventListener('click', function () {
     if (S.screen !== 'naming' || S.eyes) return;
     S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
@@ -1848,7 +2104,7 @@ button { cursor: pointer; }
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName,
-    rec: pocket, diag: function () { return diagLog; }, about: aboutText,
+    rec: pocket, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
@@ -1874,7 +2130,7 @@ button { cursor: pointer; }
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');
   }
-  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; }
+  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');
