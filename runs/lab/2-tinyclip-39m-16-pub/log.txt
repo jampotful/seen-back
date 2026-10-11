@@ -1,0 +1,75 @@
+==== job log parts/lab-tinyclip-39m-16-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:57:35] job: model=tinyclip-39m-16 shard=0/1 stages=text-kinds,export,images
+data_source=standin
+evalname=standin
+manifest_rows=40
+species=30
+[00:57:35] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+photos: 40 rows, 40 to fetch, 0 failed, 1.0s
+[00:57:36] exit 0
+[00:57:36] + python3 -u tools/lab/lab.py text --model tinyclip-39m-16 --labelset kinds --out art/tinyclip-39m-16
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-39m-16 via transformers in 6.9s
+[0;93m2026-10-11 00:57:43.472168032 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/708 (0.5s)
+kinds: (17, 512) -> text/kinds.f16.npy
+[00:57:45] exit 0
+[00:57:45] + python3 -u tools/lab/lab.py export --model tinyclip-39m-16 --manifest data_in/manifest.csv --photos photos --out art/tinyclip-39m-16 --work work_tinyclip-39m-16
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-39m-16 via transformers in 2.6s
+[0;93m2026-10-11 00:57:48.142827951 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+/home/runner/work/seen-back/seen-back/tools/lab/lab.py:646: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+  torch.onnx.export(v, (dummy,), str(path), **kw)
+/home/runner/.local/lib/python3.12/site-packages/transformers/models/clip/modeling_clip.py:197: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if not interpolate_pos_encoding and (height != self.image_size or width != self.image_size):
+exported fp32 in 0.9s: 154.6 MB
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+int8: 40.7 MB
+fp16: 77.5 MB
+parity photos: 40
+fp32: {"bytes": 154555411, "mb": 154.56, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 1.0, "min": 0.9999998211860657, "max": 1.0000001192092896}, "output_norm_mean": 9.911407470703125, "latency_ms_1thread": {"mean": 99.05, "min": 88.59, "runs": 20, "warmup": 3, "batch": 1}}
+int8: {"bytes": 40698732, "mb": 40.7, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 0.9960129857063293, "min": 0.9921309947967529, "max": 0.9981468915939331}, "output_norm_mean": 9.927581787109375, "latency_ms_1thread": {"mean": 24.88, "min": 24.48, "runs": 20, "warmup": 3, "batch": 1}}
+fp16: {"bytes": 77458168, "mb": 77.46, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 0.9999998211860657, "min": 0.9999995231628418, "max": 0.9999999403953552}, "output_norm_mean": 9.911293029785156, "latency_ms_1thread": {"mean": 96.59, "min": 96.26, "runs": 20, "warmup": 3, "batch": 1}}
+[00:58:05] exit 0
+
+added 18 packages in 6s
+[00:58:12] + node tools/lab/wasm_check.mjs ortweb work_tinyclip-39m-16/all work_tinyclip-39m-16/wasm work_tinyclip-39m-16/wasm.json
+int8 {"load_ms":356,"cosine_vs_ort_cpu":{"mean":0.9973544676614567,"min":0.9959469097057703},"cosine_vs_torch":{"mean":0.9976967172331013,"min":0.9965479218221354},"latency_ms_1thread":{"mean":277.4030654999998,"min":259.6130969999999,"runs":10,"warmup":3,"batch":1},"runs":true}
+fp16 {"load_ms":401,"cosine_vs_ort_cpu":{"mean":0.9999999133537273,"min":0.9999998844803709},"cosine_vs_torch":{"mean":0.9999998137135268,"min":0.9999997371882349},"latency_ms_1thread":{"mean":526.9225994999999,"min":508.0477690000007,"runs":10,"warmup":3,"batch":1},"runs":true}
+fp32 {"load_ms":294,"cosine_vs_ort_cpu":{"mean":0.99999999999956,"min":0.9999999999989122},"cosine_vs_torch":{"mean":0.9999999999994593,"min":0.9999999999991385},"latency_ms_1thread":{"mean":490.9019066000004,"min":486.41171100000065,"runs":10,"warmup":3,"batch":1},"runs":true}
+[00:58:41] exit 0
+wasm results merged into parity.json
+[00:58:41] + python3 -u tools/lab/lab.py images --model tinyclip-39m-16 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname standin --out art/tinyclip-39m-16
+images: tinyclip-39m-16, eval standin, shard 0/1, 40 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-39m-16 via transformers in 2.6s
+[0;93m2026-10-11 00:58:44.280259901 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/40, 15.07 photos/s
+images: 40 embedded, 0 skipped, 2.6s (15.25 photos/s)
+[00:58:47] exit 0
+[00:58:47] job done, fail=0
+parts/lab-tinyclip-39m-16-s0/
+[01:10:02] + python3 -u tools/lab/lab.py merge --model tinyclip-39m-16 --manifest data_in/manifest.csv --out pubdir parts/lab-tinyclip-39m-16-s0/
+[01:10:02] exit 0
+[01:10:02] + bash ci/put_branch.sh pub/lab-tinyclip-39m-16 pubdir lab: tinyclip-39m-16
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File onnx/vision.fp16.onnx is 73.87 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+remote: 
+remote: Create a pull request for 'pub/lab-tinyclip-39m-16' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/lab-tinyclip-39m-16        
+remote: 
+published pub/lab-tinyclip-39m-16
+[01:10:15] exit 0
+[01:10:15] published pub/lab-tinyclip-39m-16
