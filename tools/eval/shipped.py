@@ -7,8 +7,15 @@
 2. On the tuning photos, with naming switched off, records what fuse.py would name and offer. From those it sets
    name_at, the lowest level from which a named species was right at least nine times in ten, and offer_at, the lowest
    level from which the three offered species held the right one at least nine times in ten. Both go into manifest.json.
-3. On the test photos, with the thresholds set, reports what the page would show and how often it is right.
+3. Sets kind_at, the level under which the page says it is not sure of the kind: the lowest level from which an asserted
+   kind was right at least 95 times in 100 on the wildlife tuning photos and, taken by themselves, on the tuning third of
+   the extra set (people, cats, dogs, grazing animals, rooms with nothing alive; tools/eval/kinds.py), when the
+   model's vectors of that set are published.
+4. On the test photos, with the thresholds set, reports what the page would show and how often it is right: the
+   wildlife test photos, and beside them the extra set's test rows, with a table of the kinds for each.
 The photos' vectors are the ones named in the manifest's "evaluation" block (for a pocket model, the WASM int8 vectors).
+--vectors names another set of vectors of the evaluation photos (for example the int8 file of the larger model), and
+--no-write leaves the slot's manifest as it is.
 """
 import argparse, copy, hashlib, json, os, sys, time
 import numpy as np
@@ -17,6 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "fusion"))
 import ev
+import kinds
 import fuse as F
 
 ap = argparse.ArgumentParser()
@@ -26,6 +34,8 @@ ap.add_argument("--name")
 ap.add_argument("--out")
 ap.add_argument("--limit", type=int, default=0, help="score only the first N tuning and N test photos (for a quick try)")
 ap.add_argument("--rule", choices=["product"], help="score the slot under the product rule (what build 6 of the page computes) with the settings in fusion_if_rule_product; the thresholds found are written there")
+ap.add_argument("--vectors", help="score these vectors of the evaluation photos in place of the manifest's (the part after images/, for example alachua-2025.wasm-int8)")
+ap.add_argument("--no-write", action="store_true", help="do not write the thresholds into the slot's manifest")
 a = ap.parse_args()
 name = a.name or os.path.basename(os.path.normpath(a.slot))
 slot = F.load_slot(a.slot)
@@ -40,7 +50,11 @@ if a.rule == "product":
     name += "-product"
 evn = man["evaluation"]
 keys = json.load(open(os.path.join(a.slot, man["species"]["table"]), encoding="utf-8"))["keys"]
+if a.vectors:
+    evn["test_vectors"] = "images/" + a.vectors
 E, ids = ev.load_images(a.root, evn["model"], evn["test_vectors"].split("/", 1)[1])
+if E is None:
+    raise SystemExit("no vectors %s for %s under %s" % (evn["test_vectors"], evn["model"], a.root))
 ES = ev.EvalSet(a.root, ids)
 k2row = {k: i for i, k in enumerate(keys)}
 truth = np.array([k2row.get(int(r["key"]), -1) for r in ES.rows])
@@ -53,17 +67,38 @@ E64 = E.astype(np.float64)
 E64 /= np.linalg.norm(E64, axis=1, keepdims=True)
 
 
+def score(V, months, manifest):
+    """Every row of V (unit vectors, float64) through fuse.py with the slot's own files."""
+    kd = V @ slot["kinds"].T
+    sd = V @ slot["species"].T
+    return [F.fuse(manifest, table, int(months[j]), kd[j], sd[j], kind_bias=slot["kind_bias"], species_bias=slot["species_bias"]) for j in range(len(V))]
+
+
 def run(mask, manifest):
     idx = np.nonzero(mask)[0]
     if a.limit:
         idx = idx[:a.limit]
-    kd = E64[idx] @ slot["kinds"].T
-    sd = E64[idx] @ slot["species"].T
-    out = []
-    for j, i in enumerate(idx):
-        r = F.fuse(manifest, table, int(ES.month[i]), kd[j], sd[j], kind_bias=slot["kind_bias"], species_bias=slot["species_bias"])
-        out.append(r)
-    return idx, out
+    return idx, score(E64[idx], ES.month[idx], manifest)
+
+
+def unit64(X):
+    X = X.astype(np.float64)
+    return X / np.linalg.norm(X, axis=1, keepdims=True)
+
+
+def kind_fields(res, eyes):
+    """From fuse.py's answers: the winning kind, its probability, whether the true kind is among the three likeliest."""
+    said = np.array([r["kind"] for r in res])
+    prob = np.array([r["kindP"] for r in res])
+    three = np.array([e in [k["key"] for k in r["kinds"][:3]] for r, e in zip(res, eyes)], dtype=bool)
+    return said, prob, three
+
+
+# people, pets, livestock and rooms: the tuning third joins the tuning photos of the kind decision, the test rows are reported
+XT = kinds.load(a.root, evn["model"], want_wasm="wasm" in evn["test_vectors"])
+if XT is not None and a.limit:
+    for part in ("tune", "test"):
+        XT[part] = {k: (v[:a.limit] if k != "vectors" else v) for k, v in XT[part].items()}
 
 
 def level(conf, hit, floor=0.9, least=30):
@@ -98,7 +133,21 @@ offer_at = level(off_p[can_offer], off_has[can_offer])
 man["fusion"]["name_at"] = name_at if name_at is not None else 2.0
 man["fusion"]["offer_at"] = offer_at if offer_at is not None else 2.0
 man["fusion_thresholds_note"] = "set by tools/eval/shipped.py on %d tuning photos (%s) through tools/fusion/fuse.py; 2 means never" % (len(res), evn["tuned_on"])
-if not a.limit:
+# 3. kind_at: under it the page says it is not sure. Set where an asserted kind is right at least 95 times in 100 on each tuning set by itself.
+tune_sets = [("wildlife", kind_fields(res, ES.eyes[idx]), ES.eyes[idx])]
+if XT is not None and len(XT["tune"]["ids"]):
+    xres_tune = score(unit64(XT["tune"]["X"]), XT["tune"]["month"], probe)
+    tune_sets.append(("extra", kind_fields(xres_tune, XT["tune"]["eyes"]), XT["tune"]["eyes"]))
+kind_levels = {bar: kinds.kind_at([(f_[1], f_[0] == eyes_) for _, f_, eyes_ in tune_sets], bar) for bar in kinds.BARS}
+kind_at = kind_levels[kinds.BAR]
+if kind_at is not None:
+    man["fusion"]["kind_at"] = kind_at
+else:
+    man["fusion"].pop("kind_at", None)
+man["fusion_kind_at_note"] = ("kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least %d times in 100 on %s. %s" % (
+    round(100 * kinds.BAR), " and on ".join("%d %s tuning photos" % (len(e_), n_ if n_ == "wildlife" else "extra-set (coco-kinds)") for n_, _, e_ in tune_sets),
+    "No level reached that, so the key is left out and the page asserts every kind." if kind_at is None else "Under it the page should say that it is not sure and offer its three likeliest kinds."))
+if not a.limit and not a.no_write:
     if a.rule == "product":
         on_disk["fusion_if_rule_product"].update(name_at=man["fusion"]["name_at"], offer_at=man["fusion"]["offer_at"],
                                                  note="for a page that only has the product rule (build 6): use these four values in place of the same keys of fusion")
@@ -122,7 +171,9 @@ named_right = np.array([r["named"] is not None and r["named"]["sci"] == t for r,
 offer_has = np.array([any(o["sci"] == t for o in r["offers"]) for r, t in zip(res, tsci)])
 top1 = np.array([r["species"][0]["sci"] == t for r, t in zip(res, tsci)])
 top5 = np.array([any(s["sci"] == t for s in r["species"]) for r, t in zip(res, tsci)])
-said = np.array([r["kind"] for r in res])
+said, kprob, kthree = kind_fields(res, eyes)
+sure = kprob >= kind_at if kind_at is not None else np.ones(n, bool)
+sure_field_differs = sum(("sure" in r) and (bool(r["sure"]) != bool(s_)) for r, s_ in zip(res, sure))     # fuse.py's own field, once the page has the answer "not sure"
 # parity with a direct computation of the top species from the same files
 f = man["fusion"]
 W = np.array([r[3] for r in table], dtype=np.float64)
@@ -136,6 +187,41 @@ num = {"test_photos": n, "tuning_photos": int(tune.sum()), "name_at": name_at, "
        "offered": ev.ci(is_offer), "offered_holds_species": ev.ci(offer_has[is_offer]), "offered_kind_right": ev.ci(kind_right[is_offer]),
        "kind_only": ev.ci(rest), "kind_only_kind_right": ev.ci(kind_right[rest]),
        "top_species_differs_from_direct_computation": differ, "seconds": round(time.time() - t0, 1)}
+# the kind of eye with the answer "not sure": wildlife test photos, and the extra set's test rows beside them
+num["kind_at"] = kind_at
+kd_ = {"bar": kinds.BAR, "kind_at": kind_at, "tuned_on": {n_: int(len(e_)) for n_, _, e_ in tune_sets}, "extra_set_vectors_published": XT is not None,
+       "fuse_sure_field_differs": int(sure_field_differs),
+       "tuning": {n_: kinds.outcome(f_[0], f_[1], f_[2], e_, kind_at) for n_, f_, e_ in tune_sets},
+       "test_wildlife": kinds.outcome(said, kprob, kthree, eyes, kind_at),
+       "test_wildlife_named_and_asserted": ev.ci(is_named & sure), "test_wildlife_named_and_asserted_right": ev.ci(named_right[is_named & sure]),
+       "table_wildlife": kinds.table(said, kprob, kthree, eyes, kind_at, named=is_named, order=[k for k in ev.KINDS if (eyes == k).any()]),
+       "asserted_wildlife": kinds.by_said(said, kprob, eyes, kind_at)}
+xtest = None
+if XT is not None and len(XT["test"]["ids"]):
+    xres = score(unit64(XT["test"]["X"]), XT["test"]["month"], man)
+    xe = XT["test"]["eyes"]
+    xs, xp, x3 = kind_fields(xres, xe)
+    xn = np.array([r["named"] is not None for r in xres])
+    xo = np.array([len(r["offers"]) > 0 for r in xres])
+    xsure = xp >= kind_at if kind_at is not None else np.ones(len(xs), bool)
+    kd_["test_extra"] = kinds.outcome(xs, xp, x3, xe, kind_at)
+    kd_["test_extra_vectors"] = XT["test"]["vectors"]
+    kd_["test_extra_named"] = ev.ci(xn)
+    kd_["test_extra_named_and_asserted"] = ev.ci(xn & xsure)
+    kd_["test_extra_offered"] = ev.ci(xo)
+    kd_["table_extra"] = kinds.table(xs, xp, x3, xe, kind_at, named=xn, order=kinds.EXTRA_KINDS)
+    kd_["asserted_extra"] = kinds.by_said(xs, xp, xe, kind_at)
+    xtest = (xs, xp, x3, xe)
+kd_["levels"] = []
+for bar in kinds.BARS:
+    tau = kind_levels[bar]
+    row = {"right_at_least": bar, "kind_at": tau}
+    if tau is not None:
+        row["test_wildlife"] = kinds.outcome(said, kprob, kthree, eyes, tau)
+        if xtest is not None:
+            row["test_extra"] = kinds.outcome(xtest[0], xtest[1], xtest[2], xtest[3], tau)
+    kd_["levels"].append(row)
+num["kind"] = kd_
 
 
 def pci(v):
@@ -150,6 +236,18 @@ text = ("The slot holds the head `%s` for `%s` (%s), fitted on `%s`, with %d spe
     f.get("rule", "product"), f["t_kind"], f["w_kind"], f["alpha_prior"], len(top_p), evn["tuned_on"],
     ("%.2f" % name_at) if name_at is not None else "never (no level reached nine in ten)", ("%.2f" % offer_at) if offer_at is not None else "never (no level reached nine in ten)",
     n, pci(num["kind_right"]), pci(num["species_top1"]), pci(num["species_top5"]), 100 * num["called_person"], 100 * num["called_none"], differ)
+pk = lambda v: "–" if not v or v[0] is None else "%.1f%% (%.1f to %.1f)" % (100 * v[0], 100 * v[1], 100 * v[2])
+tw = kd_["test_wildlife"]
+if kind_at is not None:
+    text += (" The kinds head is `%s`. With kind_at %.2f (%s), the page asserts a kind for %s of the wildlife test photos and is right for %s of those; for the %s where it is not sure, the true kind is among its three likeliest for %s." % (
+        evn.get("kind_head", "kind phrases"), kind_at, "set on wildlife tuning photos and the extra set's tuning third" if len(tune_sets) > 1 else "set on wildlife tuning photos alone, because the extra set's vectors were not published for this model",
+        pk(tw["asserted"]), pk(tw["asserted_right"]), pk(tw["not_sure"]), pk(tw["not_sure_true_kind_among_three"])))
+    if "test_extra" in kd_:
+        tx = kd_["test_extra"]
+        text += (" On the %d test photos of people, cats, dogs, grazing animals and rooms (`%s`), the kind is right for %s; the page asserts a kind for %s and is right for %s of those; where it is not sure the true kind is among its three likeliest for %s. A species is named on %s of these photos." % (
+            tx["photos"], kd_["test_extra_vectors"], pk(tx["kind_right"]), pk(tx["asserted"]), pk(tx["asserted_right"]), pk(tx["not_sure_true_kind_among_three"]), pk(kd_["test_extra_named"])))
+else:
+    text += " No level of the winning kind's probability made asserted kinds right %d times in 100 on the tuning photos, so the slot carries no kind_at." % round(100 * kinds.BAR)
 if man.get("needs"):
     text += " The slot needs: %s." % "; ".join(man["needs"])
 # how many photos get a name when a named species must be right more often than nine times in ten, and what the
@@ -174,37 +272,25 @@ for floor in (0.9, 0.95, 0.98):
     levels.append({"right_at_least": floor, "name_at": tau, "named": ev.ci(m), "named_right": ev.ci(t_right[m]), "offer_at": tau_o, "offered": ev.ci(of), "offered_holds_species": ev.ci(t_off_has[of]), "kind_only": ev.ci(~m & ~of)})
 num["levels"] = levels
 
-# 4. photos of people, pets, livestock and rooms (data/extra/<name>), when their vectors are published
+# the older layout of the extra set's rows, kept for the report's short table
 extra = []
-for xname in ("coco-kinds",):
-    xman = os.path.join(a.root, "data", "extra", xname, "manifest.csv")
-    xv = next((v for v in (xname + ".wasm-int8-per-channel", xname) if os.path.exists(os.path.join(a.root, "lab", evn["model"], "images", v + ".f16.npy"))), None) if "wasm" in evn["test_vectors"] else (xname if os.path.exists(os.path.join(a.root, "lab", evn["model"], "images", xname + ".f16.npy")) else None)
-    if not os.path.exists(xman) or xv is None:
-        continue
-    Ex, xids = ev.load_images(a.root, evn["model"], xv)
-    by = {r["id"]: r for r in ev.read_manifest(a.root, "extra/" + xname)}
-    sel = [k for k, i in enumerate(xids) if by[i]["split"] == "test"]
-    if a.limit:
-        sel = sel[:a.limit]
-    Ex = Ex[sel].astype(np.float64)
-    Ex /= np.linalg.norm(Ex, axis=1, keepdims=True)
-    xr = [by[xids[k]] for k in sel]
-    kdx, sdx = Ex @ slot["kinds"].T, Ex @ slot["species"].T
-    xres = [F.fuse(man, table, int(r["month"] or 6) - 1, kdx[j], sdx[j], kind_bias=slot["kind_bias"], species_bias=slot["species_bias"]) for j, r in enumerate(xr)]
-    xe = np.array([r["eyes"] for r in xr])
-    xs = np.array([r["kind"] for r in xres])
-    xn = np.array([r["named"] is not None for r in xres])
-    rows_x = [{"kind": k, "n": int((xe == k).sum()), "right": ev.ci(xs[xe == k] == k), "person": float((xs[xe == k] == "person").mean()), "none": float((xs[xe == k] == "none").mean()), "named": float(xn[xe == k].mean())} for k in ("person", "none", "cat", "dog", "deer") if (xe == k).any()]
-    extra.append({"set": xname, "vectors": "images/" + xv, "rows": rows_x,
-                  "text": "The %d test photos of the extra set `%s` (COCO photos of people, cats, dogs, grazing animals and rooms with nothing alive; vectors `images/%s`) went through the same slot. A species name on a photo of a person or a room is always wrong." % (len(xr), xname, xv)})
-    print(extra[-1]["text"])
-    for g in rows_x:
-        print("  %-7s n %4d  right %s  person %.3f  none %.3f  named %.3f" % (g["kind"], g["n"], pci(g["right"]), g["person"], g["none"], g["named"]))
+if "table_extra" in kd_:
+    extra.append({"set": kinds.EXTRA, "vectors": kd_["test_extra_vectors"], "rows": [{"kind": g["kind"], "n": g["n"], "right": g["right"], "person": g["said_person"], "none": g["said_none"], "named": g["named"]} for g in kd_["table_extra"]],
+                  "text": "The %d test photos of the extra set `%s` (COCO photos of people, cats, dogs, grazing animals and rooms with nothing alive; vectors `%s`) went through the same slot, each with a calendar month drawn by a hash of its id. A species name on a photo of a person or a room is always wrong." % (
+                      kd_["test_extra"]["photos"], kinds.EXTRA, kd_["test_extra_vectors"])})
 
 outcomes = [{"what": "a species name", "share": num["named"][0], "right": "the name is right for %s; the kind for %s" % (pci(num["named_right"]), pci(num["named_kind_right"]))},
             {"what": "three species to choose from", "share": num["offered"][0], "right": "the three hold the species for %s; the kind is right for %s" % (pci(num["offered_holds_species"]), pci(num["offered_kind_right"]))},
             {"what": "a kind of eye only", "share": num["kind_only"][0], "right": "the kind is right for %s" % pci(num["kind_only_kind_right"])}]
+# one character a photo, in the order of the vectors, so that two slots scored on the same photos can be compared photo by photo (tools/eval/decide.py)
+bits = lambda v: "".join("1" if x else "0" for x in v)
+sha = lambda ids_: hashlib.sha256("\n".join(ids_).encode()).hexdigest()
+per_photo = {"wildlife": {"ids_sha256": sha([ids[i] for i in idx]), "kind_right": bits(kind_right), "asserted_right": bits(kind_right & sure), "asserted_wrong": bits(~kind_right & sure), "named": bits(is_named), "named_right": bits(named_right)}}
+if xtest is not None:
+    per_photo["extra"] = {"ids_sha256": sha(XT["test"]["ids"]), "kind_right": bits(xs == xe), "asserted_right": bits((xs == xe) & xsure), "asserted_wrong": bits((xs != xe) & xsure), "named": bits(xn)}
 out = {"made_by": "tools/eval/shipped.py", "slot": name, "manifest": {k: man[k] for k in ("id", "fusion", "evaluation", "needs") if k in man}, "numbers": num, "text": text, "outcomes": outcomes, "extra": extra}
+if not a.limit:
+    out["per_photo"] = per_photo
 print(text)
 for o in outcomes:
     print("  %-30s %5.1f%%  %s" % (o["what"], 100 * (o["share"] or 0), o["right"]))

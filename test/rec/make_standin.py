@@ -325,3 +325,109 @@ for name, t in trained.items():
 assert trained["small.png"]["kind"] == "hawk" and trained["small.png"]["named"] == "Red-shouldered Hawk" and trained["small.png"]["plain_kind"] == "bird", trained["small.png"]
 assert trained["dots.png"]["kind"] != "frog" and trained["dots.png"]["plain_kind"] == "frog", trained["dots.png"]
 assert trained["heron.png"]["named"] == "Great Blue Heron", trained["heron.png"]
+
+
+# ---------- "not sure is an answer" (fusion.kind_at): the same slot with one photo the kinds cannot settle. odd.png's kind (bee) gets
+# a rival row, so that the kinds head gives the bee about six parts in ten; the kinds alone decide here (w_kind 1), and under
+# kind_at 0.9 the page must assert nothing, and offer its three likeliest kinds with the species offers of the likeliest.
+Ku = K.copy()
+Ku[ki("dog")] = near(E["odd.png"], 1 - math.log(0.6 / 0.4) / FUSION["t_kind"])
+Ku.astype("<f2").tofile(slot / "kinds.unsure.f16.bin")
+m5 = json.loads(json.dumps(manifest))
+m5["id"] = "standin-kind-at"
+m5["kinds"] = {"url": "kinds.unsure.f16.bin", "labels": KINDS}
+m5["fusion"] = dict(FUSION, w_kind=1, kind_at=0.9)
+(slot / "manifest.kind-at.json").write_text(json.dumps(m5, indent=1) + "\n", encoding="utf-8")
+ku = load_slot(slot / "manifest.kind-at.json")
+
+
+def answers(s, name):
+    """What the reference gives for a photo in each month, January first (the page uses the month of the day it runs)."""
+    out = []
+    for month in range(12):
+        r = ref_fuse(s["manifest"], s["table"], month, None if s["kinds"] is None else ref_dots(s["kinds"], E[name]), ref_dots(s["species"], E[name]), kind_bias=s["kind_bias"], species_bias=s["species_bias"])
+        out.append({"kind": r["kind"], "sure": r["sure"], "kindP": round(r["kindP"], 4), "kindOffers": r["kindOffers"], "named": (r["named"] or {}).get("en", ""),
+                    "offers": [o["en"] or o["sci"] for o in r["offers"]], "five": [x["en"] or x["sci"] for x in r["species"][:5]]})
+    return out
+
+
+expect["kind_at"] = {name: answers(ku, name) for name in MADE}
+assert all(a["sure"] is False and a["kindOffers"][:2] == ["bee", "dog"] and a["named"] == "" for a in expect["kind_at"]["odd.png"]), expect["kind_at"]["odd.png"][0]
+assert all(a["sure"] for n, months in expect["kind_at"].items() if n != "odd.png" for a in months), expect["kind_at"]
+
+
+# ---------- the larger model's stand-in (test/rec/models/standin-big): the same encoder, cut into three parts that a second origin serves
+# (test/rec/serve.js <port> cors), with no kinds head: the kind is taken from the species answer. Its species rows are made so that
+# it differs from the pocket stand-in where the checks need it to:
+#   stripes.png  the pocket says "Insect" and offers three; this one names the Monarch
+#   dots.png     the pocket says frog; this one is sure of a Great Egret, a wading bird: the change of eyes is offered, never made
+#   small.png    two kinds as likely as each other: it is not sure, and nothing changes
+#   wall.png     nothing it knows: it is not sure, and offers its three likeliest kinds when asked from the sheet
+big = here / "models" / "standin-big"
+big.mkdir(parents=True, exist_ok=True)
+BIG_PORT = 8788                                        # where the checks serve the parts from by default (check_rec.js BIG_PORT)
+whole = int8.read_bytes()
+cut = [0, len(whole) // 3, 2 * len(whole) // 3 + 7, len(whole)]      # three parts of unequal length
+parts = []
+for i in range(3):
+    piece = whole[cut[i]:cut[i + 1]]
+    (big / ("vision.int8.onnx.part%02d" % i)).write_bytes(piece)
+    parts.append({"url": "http://127.0.0.1:%d/test/rec/models/standin-big/vision.int8.onnx.part%02d" % (BIG_PORT, i), "bytes": len(piece), "sha256": hashlib.sha256(piece).hexdigest()})
+brows, bvecs = [], []
+
+
+def badd(sci, en, kind, m, v):
+    brows.append([sci, en, kind, m]); bvecs.append(v / np.linalg.norm(v))
+
+
+badd("Ardea herodias", "Great Blue Heron", "wader", month_flat, E["heron.png"])
+badd("Bidens alba", "Beggarticks", "plant", month_flat, E["garden.jpg"])
+badd("Danaus plexippus", "Monarch", "insect", month_flat, near(E["stripes.png"], 0.995))
+badd("Dione vanillae", "Gulf Fritillary", "insect", month_flat, near(E["stripes.png"], 0.93))
+badd("Danaus gilippus", "Queen", "insect", month_flat, near(E["stripes.png"], 0.92))
+badd("Ardea alba", "Great Egret", "wader", month_flat, near(E["dots.png"], 0.995))
+badd("Dryophytes cinereus", "Green Treefrog", "frog", month_flat, near(E["dots.png"], 0.90))
+badd("Anolis sagrei", "Brown Anole", "reptile", [0] + [40] * 11, near(E["rings.png"], 0.99))
+badd("Anolis carolinensis", "Green Anole", "reptile", [40] + [0] * 11, near(E["rings.png"], 0.99))
+badd("Apis mellifera", "Western Honey Bee", "bee", month_flat, near(E["odd.png"], 0.995))
+badd("Buteo lineatus", "Red-shouldered Hawk", "hawk", month_flat, near(E["small.png"], 0.95))
+badd("Cardinalis cardinalis", "Northern Cardinal", "bird", month_flat, near(E["small.png"], 0.95))
+badd("Sciurus carolinensis", "Eastern Gray Squirrel", "squirrel", month_flat, near(E["wall.png"], 0.9))      # a wall: two kinds as likely as each other
+badd("Odocoileus virginianus", "White-tailed Deer", "deer", month_flat, near(E["wall.png"], 0.9))
+for sci, en, kind in filler[:10]:
+    if sci not in [r[0] for r in brows]:
+        badd(sci, en, kind, month_flat, away(rs.randn(WIDTH)))
+Sb = np.stack(bvecs)
+Sb.astype("<f2").tofile(big / "species.f16.bin")
+(big / "species.json").write_text(json.dumps({"columns": ["sci", "en", "kind", "m"], "species": brows}, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+mb = {
+    "id": "standin-big", "licence": manifest["licence"], "source": "test/rec/make_standin.py",
+    "vision": {"parts": parts, "bytes": len(whole), "sha256": hashlib.sha256(whole).hexdigest(), "input": "pixel_values", "output": "image_embeds",
+               "size": SIZE, "mean": MEAN, "std": STD, "resize": "shortest-bicubic-antialias", "crop": "center"},
+    "width": WIDTH,
+    "species": {"url": "species.f16.bin", "table": "species.json", "count": len(brows)},
+    "fusion": {"t_species": 100, "alpha_prior": 0.5, "name_at": 0.6, "offer_at": 0.3, "kind_at": 0.8},
+}
+(big / "manifest.json").write_text(json.dumps(mb, indent=1) + "\n", encoding="utf-8")
+bs = load_slot(big)
+expect["big"] = {name: answers(bs, name) for name in MADE}
+(slot / "expect.json").write_text(json.dumps(expect, separators=(",", ":")) + "\n", encoding="utf-8")
+for name, months in expect["big"].items():
+    a = months[0]
+    print("  larger stand-in: %-13s %-8s %.3f %-5s named %-18s kinds offered %s" % (name, a["kind"], a["kindP"], "sure" if a["sure"] else "not", a["named"] or "-", a["kindOffers"] or "-"))
+print("  kind_at stand-in: odd.png in January", expect["kind_at"]["odd.png"][0])
+eb = {name: months[0] for name, months in expect["big"].items()}
+assert all(len({(a["kind"], a["sure"], a["named"], tuple(a["kindOffers"])) for a in months}) == 1 for name, months in expect["big"].items() if name != "rings.png"), "the larger stand-in should say the same in every month, the anoles apart"
+assert eb["stripes.png"]["named"] == "Monarch" and eb["dots.png"]["kind"] == "wader" and eb["dots.png"]["named"] == "Great Egret" and eb["dots.png"]["sure"], (eb["stripes.png"], eb["dots.png"])
+assert eb["small.png"]["sure"] is False and eb["wall.png"]["sure"] is False and eb["heron.png"]["named"] == "Great Blue Heron" and eb["odd.png"]["named"] == "Western Honey Bee", eb
+# the same with a checksum of the whole that the parts cannot meet: every part passes, and the whole must still be refused
+mbw = json.loads(json.dumps(mb)); mbw["id"] = "standin-big-bad-whole"; mbw["vision"]["sha256"] = "0" * 64
+(big / "manifest.bad-whole.json").write_text(json.dumps(mbw, indent=1) + "\n", encoding="utf-8")
+# and with a kinds head, as a larger slot may also come (the kinds head knows "nothing alive" and a person, which a species list cannot)
+K.astype("<f2").tofile(big / "kinds.f16.bin")
+mbk = json.loads(json.dumps(mb)); mbk["id"] = "standin-big-kinds"; mbk["kinds"] = {"url": "kinds.f16.bin", "labels": KINDS}
+mbk["fusion"] = dict(mb["fusion"], t_kind=100, w_kind=0.5)
+(big / "manifest.kinds.json").write_text(json.dumps(mbk, indent=1) + "\n", encoding="utf-8")
+expect["big_kinds"] = {name: answers(load_slot(big / "manifest.kinds.json"), name) for name in MADE}
+(slot / "expect.json").write_text(json.dumps(expect, separators=(",", ":")) + "\n", encoding="utf-8")
+assert all(a["kind"] == "none" and a["sure"] for a in expect["big_kinds"]["wall.png"]) and all(a["named"] == "Great Blue Heron" for a in expect["big_kinds"]["heron.png"]), expect["big_kinds"]["wall.png"][0]

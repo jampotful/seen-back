@@ -6,6 +6,9 @@
 //   without             (a slot's manifest.json) the network first, and the kept copy only where there is no network.
 // The page itself also puts the recognizer's large files into the same store (KEEP) under the same addresses,
 // so that they are kept even on a first visit, before this worker has taken charge of the page.
+// Nothing kept here differs by what a request's headers say, so kept copies are looked up with ignoreVary: a host that sends
+// "Vary: Accept-Encoding" (GitHub Pages does) must not make a kept copy unfindable for a request whose headers differ.
+// The larger model's parts come from another origin and are fetched and kept by the page alone; this worker never sees them.
 const VERSION = '__BUILD__';
 const ORT_V = '1.30.0';                                            // the same number as ORT.v in src/cam.rec.js
 const SHELL = 'shell-' + VERSION;
@@ -51,15 +54,19 @@ self.addEventListener('fetch', (event) => {
         if (res.status === 200) event.waitUntil(c.put(req, res.clone()).catch(() => {}));   // kept even if the page goes away mid-download
         return res;
       });
-      if (fixed) return c.match(req).then((hit) => hit || caches.match(req)).then((hit) => hit || fromNet());   // the typeface may be in the shell's store
-      return fromNet().catch(() => c.match(req).then((hit) => hit || Response.error()));
-    }));
+      const keptCopy = () => c.match(req, { ignoreVary: true }).then((hit) => hit || caches.match(req, { ignoreVary: true }));   // the typeface may be in the shell's store
+      if (fixed) return keptCopy().then((hit) => hit || fromNet());
+      // a server or a proxy in the way answering 5xx is no better than no network: the kept copy, where there is one
+      return fromNet().then((res) => res.status >= 500 ? keptCopy().then((hit) => hit || res) : res, () => keptCopy().then((hit) => hit || Response.error()));
+    }, () => fetch(req)));                                         // the store will not open: the network as it is, and the page looks for kept copies by itself
     return;
   }
+  const kept = () => caches.match(req, { ignoreSearch: true, ignoreVary: true }).then((hit) => hit || caches.match('index.html', { ignoreVary: true }));
   event.respondWith(                                               // the page: the network first, the kept copy when there is none
     fetch(req).then((res) => {
       if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
+      if (res.status >= 500) return kept().then((hit) => hit || res);   // a 5xx (WebKit hands a proxy's 502 over as an answer) is treated as no network
       return res;
-    }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html')))
+    }).catch(kept)
   );
 });

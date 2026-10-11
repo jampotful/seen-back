@@ -30,8 +30,9 @@ M12 = [10] * 12
 
 def page_manifest(labels, fusion, kind_bias, n_species):
     """A manifest the page's reader accepts; the encoder's fields are fillers, since nothing is encoded."""
-    out = {"id": "parity", "vision": {"url": "x.onnx", "size": 224, "mean": [0, 0, 0], "std": [1, 1, 1]}, "width": 4,
-           "kinds": {"url": "k.bin", "labels": labels}, "fusion": fusion}
+    out = {"id": "parity", "vision": {"url": "x.onnx", "size": 224, "mean": [0, 0, 0], "std": [1, 1, 1]}, "width": 4, "fusion": fusion}
+    if labels is not None:                                            # None: a slot without a kinds head
+        out["kinds"] = {"url": "k.bin", "labels": labels}
     if kind_bias is not None:
         out["kinds"]["bias"] = kind_bias
     if n_species:
@@ -86,13 +87,26 @@ def make(path):
                         if rs.rand() < 0.5: f["prior_floor"] = pick([1e-6, 1e-3, 0])
                         if rs.rand() < 0.5: f["guard"] = pick([1e-9, 1e-3, 1e-30])
                         if rs.rand() < 0.3: f["offer_any_kind"] = True
+                        if rs.rand() < 0.6: f["kind_at"] = pick([0, 0.3, 0.5, 0.9, 1, 1.1])     # not sure is an answer; absent in the rest, as before build 8
                         kb = [float(v) for v in np.round(rs.randn(len(labels)) * 3, 3)] if bias in ("kinds", "both") else None
                         sb = [float(v) for v in np.float32(rs.randn(len(table)) * 3)] if table is not None and bias in ("species", "both") else None
                         if kb is not None and rs.rand() < 0.3: kb[rs.randint(len(kb))] = 50.0     # one bias that outweighs everything
                         if sb is not None and rs.rand() < 0.3: sb[rs.randint(len(sb))] = -50.0
                         worlds.append({"manifest": page_manifest(labels, f, kb, len(table) if table is not None else 0), "table": table, "sb": sb})
+    # ---- slots without a kinds head (the larger model): the kind is each kind's share of the species answer
+    for tname in ("standin", "awkward", "one"):
+        for bias in (False, True):
+            for kind_at in (None, 0, 0.5, 0.9, 1, 1.1):
+                table = tables[tname]
+                f = {"t_species": pick([1e-4, 1, 30, 100, 1e5]), "alpha_prior": pick([0, 0.5, 2]), "name_at": pick([0, 0.3, 0.6, 1.1]), "offer_at": pick([0, 0.3, 0.9])}
+                if kind_at is not None: f["kind_at"] = kind_at
+                if rs.rand() < 0.5: f["prior_floor"] = pick([1e-6, 1e-3, 0])
+                if rs.rand() < 0.3: f["offer_any_kind"] = True
+                sb = [float(v) for v in np.float32(rs.randn(len(table)) * 3)] if bias else None
+                worlds.append({"manifest": page_manifest(None, f, None, len(table)), "table": table, "sb": sb})
     for w, world in enumerate(worlds):
-        n, table = len(world["manifest"]["kinds"]["labels"]), world["table"]
+        headless = "kinds" not in world["manifest"]
+        n, table = (0 if headless else len(world["manifest"]["kinds"]["labels"])), world["table"]
         k = len(table) if table is not None else 0
         sd = lambda v: v if table is not None else None
         for i in range(8):
@@ -100,7 +114,14 @@ def make(path):
             cases.append({"world": w, "kd": (rs.uniform(-0.3, 1, n) * scale).tolist(), "sd": sd((rs.uniform(-0.3, 1, k) * scale).tolist()), "month": int(rs.randint(0, 12))})
         cases.append({"world": w, "kd": [0.5] * n, "sd": sd([0.5] * k), "month": 3})                     # all equal, in the month nobody recorded
         cases.append({"world": w, "kd": [0.0] * n, "sd": sd([0.0] * k), "month": None})                  # all zero, and no month known
-        a, b = rs.randint(n), rs.randint(max(k, 1))
+        a, b = rs.randint(max(n, 1)), rs.randint(max(k, 1))
+        if headless:                                                  # no kind scores at all: one species sure, and every species tied
+            s1 = [0.0] * k; s1[b] = 1.0
+            cases.append({"world": w, "kd": None, "sd": s1, "month": int(rs.randint(0, 12))})
+            cases.append({"world": w, "kd": None, "sd": [0.3] * k, "month": 0})
+            for c in cases[-10:]:
+                if c.get("world") == w: c["kd"] = None
+            continue
         kd = [0.0] * n; kd[a] = 1.0; s1 = [0.0] * k
         if k: s1[b] = 1.0
         cases.append({"world": w, "kd": kd, "sd": sd(s1), "month": int(rs.randint(0, 12))})              # one head sure against the other
@@ -118,9 +139,12 @@ def differences(r, g):
     if [k["key"] for k in r["kinds"]] != [k["key"] for k in g["kinds"]]: why.append("order of kinds")
     if [s["sci"] for s in r["species"]] != [s["sci"] for s in g["species"]]: why.append("top five")
     if (r["named"] or {}).get("sci") != (g["named"] or {}).get("sci"): why.append("named")
+    if r["sure"] is not g.get("sure"): why.append("sure %s / %s" % (r["sure"], g.get("sure")))
+    if r["kindOffers"] != g.get("kindOffers"): why.append("the three kinds offered")
+    if [k["head"] is None for k in r["kinds"]] != [k["head"] is None for k in g["kinds"]]: why.append("which answers have a kinds head")
     if [s["sci"] for s in r["offers"]] != [s["sci"] for s in g["offers"]]: why.append("offers")
     if [k["list"] is None for k in r["kinds"]] != [k["list"] is None for k in g["kinds"]]: why.append("which kinds the list speaks for")
-    nums = [abs(a["p"] - b["p"]) for a, b in zip(r["kinds"], g["kinds"])] + [abs(a["head"] - b["head"]) for a, b in zip(r["kinds"], g["kinds"])]
+    nums = [abs(a["p"] - b["p"]) for a, b in zip(r["kinds"], g["kinds"])] + [abs(a["head"] - b["head"]) for a, b in zip(r["kinds"], g["kinds"]) if a["head"] is not None and b["head"] is not None]
     nums += [abs(a["list"] - b["list"]) for a, b in zip(r["kinds"], g["kinds"]) if a["list"] is not None and b["list"] is not None]
     nums += [abs(a["p"] - b["p"]) for a, b in zip(r["species"], g["species"])] + [abs(r["kindP"] - g["kindP"])]
     d = max(nums)
@@ -131,12 +155,15 @@ def differences(r, g):
 def check(cases_path, page_path):
     made = json.loads(pathlib.Path(cases_path).read_text()); page = json.loads(pathlib.Path(page_path).read_text())
     cases, worlds = made["cases"], made["worlds"]
-    worst, bad, by = 0.0, [], {}
+    worst, bad, by, unsure = 0.0, [], {}, 0
     for i, (c, g) in enumerate(zip(cases, page["cases"])):
         if "world" in c:
             w = worlds[c["world"]]
-            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=w["manifest"]["kinds"].get("bias"), species_bias=w["sb"])
-            tag = w["manifest"]["fusion"].get("rule", "product") + (", biases" if w["sb"] is not None or w["manifest"]["kinds"].get("bias") is not None else ", no biases")
+            kb = (w["manifest"].get("kinds") or {}).get("bias")
+            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=kb, species_bias=w["sb"])
+            tag = (w["manifest"]["fusion"].get("rule", "product") if "kinds" in w["manifest"] else "no kinds head") + (", biases" if w["sb"] is not None or kb is not None else ", no biases")
+            tag += ", kind_at" if w["manifest"]["fusion"].get("kind_at") is not None else ""
+            unsure += not r["sure"]
         else:
             r = fuse(m, t, c["month"], c["kd"], c["sd"]); tag = "the loaded slot (product, no biases)"
         d, why = differences(r, g)
@@ -144,7 +171,7 @@ def check(cases_path, page_path):
         if why: bad.append(("case %d (%s)" % (i, tag), why))
     if len(page["cases"]) != len(cases): bad.append(("count", ["the page answered %d of %d cases" % (len(page["cases"]), len(cases))]))
     for tag in sorted(by): print("  %5d cases: %s" % (by[tag], tag))
-    print(len(cases), "cases, largest difference in any probability %.3g," % worst, len(bad), "differ")
+    print(len(cases), "cases (%d of them not sure), largest difference in any probability %.3g," % (unsure, worst), len(bad), "differ")
     # ---- the trained-head slot, from pixels
     tr = load_slot(STANDIN / "manifest.trained.json")
     worst_dot, worst_p = 0.0, 0.0

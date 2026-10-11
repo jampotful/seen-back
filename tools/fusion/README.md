@@ -5,6 +5,50 @@ scores of the kind rows and the species rows, the month, the slot's manifest and
 `{kind, kindP, kinds, species, named, offers}`. Its interface is at the top of the file. `python3 -I tools/fusion/fuse.py` reruns five
 cases whose answers the page gave (the stand-in slot under `test/rec/models/standin`) and exits 1 if any differs.
 
+## State on 11 October 2026, 03:20 Eastern (build 8)
+
+Two things were added to the page and to the reference together, and `parity.py` now holds them to each other as well.
+
+- **Not sure is an answer: `fusion.kind_at`.** When the manifest gives it and the winning kind's probability is under it, the result
+  has `sure: false`: the page asserts no kind and changes no eyes, says "The recognizer is not sure what that is." and offers the
+  three likeliest kinds other than `none` as buttons (`kindOffers`, best first) above the typed field. `named` is then `None`; the
+  species offers are worked out as ever (the three likeliest of the winning kind, if together they reach `offer_at`), and a winning
+  kind of `none` or `person` gives none. At the threshold itself the answer is sure (`p >= kind_at`). Without `kind_at` (absent or
+  null) every answer is sure and `kindOffers` is empty, as in build 7. A `kind_at` that is not a number is refused by the page.
+- **A slot without a kinds head** (no `kinds` in the manifest; the species are then required). The labels are the kinds the species
+  table has, in the order of `KINDS`, and a kind's probability is its share of the species answer; `head` is `None` for every kind,
+  and `t_kind`, `w_kind`, `rule` and `guard` are not read. Call `fuse(manifest, table, month, None, species_dots, ...)`.
+  `load_slot` returns `kinds: None` for such a slot. A larger slot may also carry a kinds head; then it is scored like any other.
+
+Last run of `parity.py` (headless Chromium, this sandbox, build 8): 2,505 score cases, all the same in kind, order of kinds, top
+five, name, offers, `sure` and the three kinds offered; the largest difference in any probability was 5.1e-16. 1,064 of the cases
+carry a `kind_at` (0, 0.3, 0.5, 0.9, 1 or 1.1) and 620 come out not sure; 432 go through slots without a kinds head. The 9 photos
+through the trained-head slot agree as before (row scores to 1.1e-7, probabilities to 2.2e-16).
+
+For whoever sets `kind_at`: with `out = fuse(...)`, the page asserts `out["kind"]` only where `out["sure"]`; where it does not, the
+right kind is "among the three offered" when it is in `out["kindOffers"]` (`none` is never offered: a photo of nothing alive that
+comes out not sure is shown three kinds of living thing and a field to type in).
+
+### The larger model on the device (`models/naturalist/manifest.json`)
+
+The page reads a second slot from `models/naturalist/manifest.json` (no such file: the feature does not exist). It follows the
+pocket slot's contract, and `load_slot` reads it the same way, with these differences:
+
+    "vision": {"parts": [{"url": "https://raw.githubusercontent.com/<owner>/<repo>/<commit>/vision.int8.onnx.part00", "bytes": 90000000, "sha256": "..."}, ...],
+               "bytes": 309812341, "sha256": "<of the parts joined in order>",
+               "input": "pixel_values", "output": "image_embeds", "size": 224, "mean": [...], "std": [...],
+               "resize": "shortest-bicubic-antialias", "crop": "center-round"},
+    "seconds_a_photo": {"phone": 12, "computer": 5}        (optional, measured: the consent sheet then says "about N seconds a photo")
+
+- `vision.parts` are fetched one after another and joined in order. A part's `url` is absolute over https (another origin is fine
+  if it answers with `access-control-allow-origin`), or relative to the manifest. Every part needs `bytes`; `sha256` is checked when
+  given, and so is `vision.sha256` for the whole. The lengths must add up to `vision.bytes`, or the page refuses the slot.
+- `vision.bytes` is what the consent sheet's "about 310 MB" is made from.
+- `"crop": "center-round"` is torchvision's CenterCrop (halves rounded to even), which is what the laboratory states for BioCLIP 2;
+  `"center"` takes the floor. The worker has both.
+- `kinds` may be left out (see above). `fusion` then needs `t_species`, `alpha_prior`, `name_at`, `offer_at`, and should give
+  `kind_at`: the page offers a change of eyes only where the slot gives `kind_at` and the answer is sure.
+
 ## State on 11 October 2026, 01:15 Eastern (build 7)
 
 The page and the reference now compute the same thing for everything a manifest can ask for: sentence-made heads and trained heads

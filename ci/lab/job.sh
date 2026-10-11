@@ -72,7 +72,8 @@ for v in int8-per-channel int8-per-tensor int8; do
     fi
     osha=$(sha256sum "$f" | cut -d' ' -f1)
     say "wasm $v: $f sha256 $osha"
-    if run python3 -u tools/lab/lab.py pixels --model "$model" --manifest "$man" --photos photos --shard "$shard/$n" --shard-mode "$mode" "${rowsarg[@]}" --pix "pix_$v"; then
+    splitarg=(); [ -n "${WASM_SPLIT:-}" ] && splitarg=(--split "$WASM_SPLIT")
+    if run python3 -u tools/lab/lab.py pixels --model "$model" --manifest "$man" --photos photos --shard "$shard/$n" --shard-mode "$mode" "${rowsarg[@]}" "${splitarg[@]}" --pix "pix_$v"; then
       procs="${WASM_PROCS:-1}"; ok=1
       if [ "$procs" -le 1 ]; then
         run node tools/lab/wasm_embed.mjs ortweb "$f" "pix_$v" "wasm_$v.f32" "wasm_$v.json" 1 || ok=0
