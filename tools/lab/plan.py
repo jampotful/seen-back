@@ -35,7 +35,8 @@ for mid in run.get("models", []):
             continue
         s_i = (other if i == 0 else []) + img
         work.append({"model": mid, "shard": i, "nshards": n, "stages": ",".join(s_i), "tag": "%s-s%d" % (mid, i),
-                     "rows": str(rows or ""), "mode": run.get("shard_mode", "block")})
+                     "rows": str(rows or ""), "mode": run.get("shard_mode", "block"),
+                     "wasm_procs": str(run.get("wasm_procs", 1))})
     models.append(mid)
 print("work=" + json.dumps({"include": work}))
 print("has_work=%s" % ("true" if work else "false"))

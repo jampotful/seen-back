@@ -80,6 +80,7 @@ jobs:
           TOKENIZERS_PARALLELISM: "false"
           ROWS: ${{ matrix.rows }}
           SHARD_MODE: ${{ matrix.mode }}
+          WASM_PROCS: ${{ matrix.wasm_procs }}
         run: bash ci/lab/job.sh "${{ matrix.model }}" "${{ matrix.shard }}" "${{ matrix.nshards }}" "${{ matrix.stages }}"
       - uses: actions/upload-artifact@v4
         if: always()

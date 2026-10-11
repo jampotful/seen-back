@@ -64,11 +64,35 @@ for v in int8-per-channel int8-per-tensor int8; do
     osha=$(sha256sum "$f" | cut -d' ' -f1)
     say "wasm $v: $f sha256 $osha"
     if run python3 -u tools/lab/lab.py pixels --model "$model" --manifest "$man" --photos photos --shard "$shard/$n" --shard-mode "$mode" "${rowsarg[@]}" --pix "pix_$v"; then
-      if run node tools/lab/wasm_embed.mjs ortweb "$f" "pix_$v" "wasm_$v.f32" "wasm_$v.json" 1; then
+      procs="${WASM_PROCS:-1}"; ok=1
+      if [ "$procs" -le 1 ]; then
+        run node tools/lab/wasm_embed.mjs ortweb "$f" "pix_$v" "wasm_$v.f32" "wasm_$v.json" 1 || ok=0
+      else
+        # several single-thread processes on one machine: same arithmetic (WASM is deterministic), shared cores, so the
+        # recorded times are not single-photo latencies
+        cnt=$(python3 -c "import json;print(len(json.load(open('pix_$v/ids.json'))))"); per=$(( (cnt + procs - 1) / procs ))
+        say "wasm: $cnt photos in $procs processes"
+        pids=()
+        for k in $(seq 0 $((procs - 1))); do
+          node tools/lab/wasm_embed.mjs ortweb "$f" "pix_$v" "wasm_$v.$k.f32" "wasm_$v.$k.json" 1 $((k * per)) $(((k + 1) * per)) >> "$L" 2>&1 & pids+=($!)
+        done
+        for pid in "${pids[@]}"; do wait "$pid" || ok=0; done
+        cat $(for k in $(seq 0 $((procs - 1))); do echo "wasm_$v.$k.f32"; done) > "wasm_$v.f32"
+        python3 - "$procs" "$v" <<'PY' >> "$L" 2>&1 || ok=0
+import json, sys
+n, v = int(sys.argv[1]), sys.argv[2]
+parts = [json.load(open("wasm_%s.%d.json" % (v, k))) for k in range(n)]
+out = dict(parts[0]); out["ms"] = [x for p in parts for x in p["ms"]]; out["count"] = sum(p["count"] for p in parts)
+out["processes"] = n; out["note"] = "%d single-thread processes shared the machine; times are not single-photo latencies" % n
+json.dump(out, open("wasm_%s.json" % v, "w"))
+print("wasm parts merged:", out["count"])
+PY
+      fi
+      if [ "$ok" = 1 ]; then
         run python3 -u tools/lab/lab.py wasm-collect --model "$model" --variant "$v" --manifest "$man" --evalname "$ename" --shard "$shard/$n" --pix "pix_$v" --emb "wasm_$v.f32" --lat "wasm_$v.json" --onnx-name "onnx/vision.$v.onnx" --onnx-sha "$osha" --out "$out" || fail=1
       else fail=1; fi
     else fail=1; fi
-    rm -rf "pix_$v" "wasm_$v.f32"
+    rm -rf "pix_$v" wasm_"$v"*.f32
   fi
 done
 cp "$out/card.json" ret/ 2>/dev/null; cp "$out/onnx/parity.json" ret/ 2>/dev/null

@@ -142,6 +142,23 @@ def sha256(path):
     return h.hexdigest()
 
 
+def cpu_info():
+    """The build machine's processor: int8 results in onnxruntime CPU depend on it (u8s8 integer kernels without VNNI
+    can saturate), so every CPU int8 set records it."""
+    info = {}
+    try:
+        txt = open("/proc/cpuinfo").read()
+        for line in txt.splitlines():
+            if line.startswith("model name") and "model" not in info:
+                info["model"] = line.split(":", 1)[1].strip()
+            if line.startswith("flags") and "flags" not in info:
+                fl = set(line.split(":", 1)[1].split())
+                info["flags"] = sorted(x for x in fl if x in ("avx2", "avx512f", "avx512_vnni", "avx_vnni", "avx512bw", "amx_int8"))
+    except Exception:
+        pass
+    return info
+
+
 def versions():
     v = {"python": platform.python_version(), "numpy": np.__version__}
     for mod in ("torch", "open_clip", "transformers", "timm", "onnx", "onnxruntime", "PIL"):
@@ -683,6 +700,7 @@ def stage_images(args, variant=None):
              "photos_per_second": round(len(ids) / max(el, 1e-6), 2), "machine_cpus": os.cpu_count()}
     if variant is not None:
         stats["onnx_sha256"] = onnx_sha
+        stats["cpu"] = cpu_info()
     card["images"] = {name + tag: {"shards": n, ("shard_%d" % i): stats,
                                    "via": ("torch" if m.torch_model else "onnxruntime CPU, the model's own ONNX file")
                                    if variant is None else "onnxruntime CPU, vision.%s.onnx" % variant}}
@@ -1225,7 +1243,8 @@ def stage_wasm_collect(args):
              "latency_ms": {"mean": round(float(ms.mean()), 2) if len(ms) else None, "p50": q(50), "p90": q(90),
                             "p99": q(99), "min": q(0), "max": q(100)},
              "onnx": args.onnx_name, "onnx_sha256": args.onnx_sha, "runtime": lat.get("runtime"),
-             "threads": lat.get("threads"), "node": lat.get("node"), "machine_cpus": os.cpu_count(),
+             "threads": lat.get("threads"), "node": lat.get("node"), "machine_cpus": os.cpu_count(), "cpu": cpu_info(),
+             "processes": lat.get("processes", 1), "note": lat.get("note"),
              "pixels": "transformers CLIPImageProcessor resize (Pillow, bicubic) and centre crop to uint8; then (v/255 - mean)/std in float32 in JavaScript"}
     update_card(out, {"images": {name: {"shards": n, "shard_%d" % i: stats,
                                         "via": "onnxruntime-web %s WASM, %s thread(s), Node %s" % (lat.get("runtime"), lat.get("threads"), lat.get("node"))}},
