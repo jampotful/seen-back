@@ -18,5 +18,8 @@ for i, pid in enumerate(["e000008", "e000001", "e000017", "e000153"]):
     except Exception as e:
         s = stand[i]; shutil.copyfile(root / "test/rec/photos" / s, out / s)
         L.append({"name": s, "path": str(out / s), "type": "image/png" if s.endswith(".png") else "image/jpeg", "truth": "stand-in, because " + pid + " could not be fetched: " + str(e)[:120]})
+# heron.png is not sure of its kind under pocket v2 (0.382 under kind_at 0.5: run engines/35, Safari), so the page asks for the kind and offers
+# nothing; the first evaluation photo (a Little Blue Heron: wader 0.76, no species named) raises the offer when it could be fetched
+if not L[1]["truth"].startswith("stand-in"): L[0] = dict(L[1])
 json.dump(L, open(out / "photos.json", "w"), indent=1)
 for x in L: print(x["name"], pathlib.Path(x["path"]).stat().st_size, x["truth"])

@@ -20,7 +20,11 @@ const mark = (k) => { r.marks[k] = Date.now(); };
 const save = () => fs.writeFileSync(path.join(OUT, 'big-' + NAME + '.json'), JSON.stringify(r, null, 1));
 // a proxy, so that the network can be cut for Chromium's offline visits (as test/engines/live.js does)
 const PROXY_PORT = +(process.env.PROXY_PORT || 8811); const proxy = { down: false, socks: new Set(), refused: 0, tunnels: 0 };
-const proxyServer = require('http').createServer((q, s) => { s.writeHead(405); s.end(); });
+const proxyServer = require('http').createServer((q, s) => {      // plain http (a page on localhost) is passed on too
+  if (proxy.down) { proxy.refused++; s.writeHead(502); s.end(); return; }
+  try { const u = new URL(q.url), up = require('http').request({ host: u.hostname, port: u.port || 80, path: u.pathname + u.search, method: q.method, headers: q.headers }, (ur) => { s.writeHead(ur.statusCode, ur.headers); ur.pipe(s); });
+    up.on('error', () => { s.writeHead(502); s.end(); }); q.pipe(up); } catch (e) { s.writeHead(405); s.end(); }
+});
 proxyServer.on('connect', (req, sock, head) => {
   if (proxy.down) { proxy.refused++; sock.end('HTTP/1.1 502 Bad Gateway\r\n\r\n'); return; }
   const [h, p] = req.url.split(':'); proxy.tunnels++;
@@ -32,11 +36,12 @@ proxyServer.on('connect', (req, sock, head) => {
 const setDown = (d) => { proxy.down = d; if (d) for (const x of proxy.socks) x.destroy(); };
 
 async function pollPage(evalFn, label, limitMs) {      // read window.__big until done; a dead page or tab is said as such
-  const t0 = Date.now(); let last = null, fails = 0;
+  const t0 = Date.now(); let last = null, fails = 0, polls = 0;
   while (Date.now() - t0 < limitMs) {
     await sleep(2000);
-    try { last = await evalFn('return window.__big ? {done: window.__big.done, steps: window.__big.steps.slice(-1), phase: window.__big.phase} : null'); fails = 0; }
+    try { last = await evalFn('var b = window.__seenBack, a = b && b.big ? b.big.about() : {}; return window.__big ? {done: window.__big.done, steps: window.__big.steps.slice(-1), phase: window.__big.phase, err: window.__big.error || null, now: b ? [b.S.screen, b.S.eyes, b.S.svc && b.S.svc.state, b.S.named && b.S.named.by, a.have, a.keptBytes, a.state, a.getFail].join(" | ") : "no page"} : null'); fails = 0; }
     catch (e) { fails++; r.notes.push(label + ' poll ' + String(e.message || e).split('\n')[0].slice(0, 200)); if (fails >= 5) return { died: String(e.message || e).split('\n')[0].slice(0, 300) }; continue; }
+    if (++polls % 10 === 1) log(label, Math.round((Date.now() - t0) / 1000) + ' s', JSON.stringify(last).slice(0, 300));
     if (last && last.done) return { done: true };
   }
   return { timeout: true, last };
@@ -45,9 +50,13 @@ async function pollPage(evalFn, label, limitMs) {      // read window.__big unti
 async function playwrightRun() {
   const pw = require('playwright');
   const isC = NAME === 'chromium', udd = fs.mkdtempSync('/tmp/big-' + NAME + '-');
-  const ctx = await pw[NAME].launchPersistentContext(udd, Object.assign({ headless: process.env.HEADED !== '1', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true },
-    isC ? { isMobile: true, proxy: { server: 'http://127.0.0.1:' + PROXY_PORT }, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] } : {}));
-  r.version = ctx.browser() ? ctx.browser().version() : '';
+  const o = Object.assign({ headless: process.env.HEADED !== '1', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true },
+    isC ? { isMobile: true, proxy: { server: 'http://127.0.0.1:' + PROXY_PORT }, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] } : {});
+  let ctx, br = null;
+  // WebKit refused a persistent profile on macOS (run engines/35: "Browser started with no default context"), so it gets an ordinary context
+  if (NAME === 'webkit') { br = await pw.webkit.launch({ headless: o.headless }); delete o.headless; ctx = await br.newContext(o); r.context = 'new context'; }
+  else { ctx = await pw[NAME].launchPersistentContext(udd, o); r.context = 'persistent profile'; }
+  r.version = br ? br.version() : ctx.browser() ? ctx.browser().version() : '';
   const onResp = async (resp) => {
     const u = resp.url(); if (!/githubusercontent\.com/.test(u)) return;
     const q = resp.request(), h = resp.headers(), o = { url: u.replace(/^https:\/\/[^/]+\//, '').replace(/[0-9a-f]{40}/, 'COMMIT'), status: resp.status(), fromSW: resp.fromServiceWorker(), t: Date.now(),
@@ -99,7 +108,7 @@ async function playwrightRun() {
     catch (e) { h.offline = Object.assign(h.offline || {}, { failed: String(e.message).split('\n')[0] }); }
     h.proxy = { refused: proxy.refused, tunnels: proxy.tunnels }; setDown(false); mark('offlineDone');
   }
-  await ctx.close().catch(() => {});
+  await ctx.close().catch(() => {}); if (br) await br.close().catch(() => {});
 }
 
 async function wd(method, p, body) {

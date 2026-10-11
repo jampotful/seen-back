@@ -67,7 +67,7 @@
     return { name: p.name, truth: p.truth || '', toAsk: ok, chosen: chosen, small: sm, smallMs: tSmall - t0, large: got ? bigLast() : null, wallMs: got ? t1 - t0 : null, afterSmallMs: got ? t1 - tSmall : null, st: st(), big: bigNow(), fail: got ? '' : diagOf(/^large-none|^large-get/).slice(-2) };
   }
   async function pageUp(R) {
-    await until(function () { return W.__seenBack && W.__seenBack.rec && W.__seenBack.big; }, 60000);
+    if (!(await until(function () { return W.__seenBack && W.__seenBack.rec && W.__seenBack.big; }, 60000))) throw new Error('the page did not start in 60 s: ' + document.title + ' | ' + (document.body ? document.body.innerText.slice(0, 200) : ''));
     var B = W.__seenBack, t0 = now();
     R.pocketReady = await Promise.race([B.rec.ready().then(function () { return 'ready'; }, function (e) { return 'failed ' + (e && e.code); }), sleep(150000).then(function () { return 'still waiting after 150 s'; })]);
     R.pocketReadyMs = now() - t0; R.pocketAt = now();
@@ -119,7 +119,7 @@
     R.steps.push(now() + ' ready ' + !!tReady);
     if (!tReady) return;
     // the photo in hand is looked at as soon as the model is ready
-    var g0 = await until(function () { var l = B.big.about().last; return l ? l : null; }, 240000, 100);
+    var g0 = /offer/.test(R.path) && B.S.eyes ? await until(function () { var l = B.big.about().last; return l ? l : null; }, 120000, 100) : null;
     R.photo0 = { at: now() - tReady, large: g0 ? bigLast() : null, st: st() }; R.epochPhotos = Date.now();
     R.photos = [];
     for (var k = 0; k < o.photos.length; k++) { R.photos.push(await onePhoto(o.photos[k], 240000)); R.steps.push(now() + ' photo ' + o.photos[k].name); }

@@ -91,7 +91,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [mac-ws, mac-sim]
+        part: ${{ fromJSON(startsWith(github.ref_name, 'run/engines/big-wk') && '["mac-ws"]' || '["mac-ws", "mac-sim"]') }}
     runs-on: macos-latest
     timeout-minutes: 75
     steps:

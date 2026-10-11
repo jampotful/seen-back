@@ -10,6 +10,9 @@ exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 limit() { local s=$1; shift; "$@" & local p=$!; ( sleep "$s"; kill "$p" 2>/dev/null ) & local w=$!; wait "$p"; local rc=$?; kill "$w" 2>/dev/null; return $rc; }
 SITE="${SITE:-https://jampotful.github.io/seen-back/}"; PW=/tmp/pw; PWV=1.56.0; PART="${PART:-linux}"
+# run/engines/big-wk*: only WebKit (Linux, and macOS through Playwright), after run engines/35
+case "${GITHUB_REF_NAME:-}" in run/engines/big-wk*) ONLY_WK=1 ;; *) ONLY_WK=0 ;; esac
+if [ "$ONLY_WK" = 1 ] && [ "$PART" = mac-sim ]; then echo "nothing for $PART on ${GITHUB_REF_NAME}"; exit 0; fi
 step "machine ($PART)"; uname -a; (command -v free >/dev/null && free -m) || (sysctl -n hw.memsize hw.ncpu; sw_vers); node --version; df -h /tmp | tail -1
 step "the larger model's manifest from the live address, and its parts with curl"
 curl -s -f "${SITE}models/naturalist/manifest.json" -o "$OUT/naturalist-manifest.json"; echo "manifest: exit $?, $(wc -c < "$OUT/naturalist-manifest.json") bytes"
@@ -40,14 +43,13 @@ case "$PART" in
   linux)
     for B in chromium firefox webkit; do for t in 1 2; do timeout 300 node "$PW/node_modules/playwright/cli.js" install --with-deps $B > "$OUT/install-$B.txt" 2>&1 && break; done; done
     sudo apt-get install -y -q xvfb > /dev/null 2>&1; Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & export DISPLAY=:99
-    run chromium 1500
-    run firefox 1300 HEADED=1
+    [ "$ONLY_WK" = 1 ] || run chromium 1500
+    [ "$ONLY_WK" = 1 ] || run firefox 1300 HEADED=1
     run webkit 1300 ;;
   mac-ws)
     node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -2
     run webkit 1300
-    sudo safaridriver --enable 2>&1; safaridriver -p 4444 > "$OUT/safaridriver-log.txt" 2>&1 & sleep 2
-    run safari 1300 ;;
+    if [ "$ONLY_WK" != 1 ]; then sudo safaridriver --enable 2>&1; safaridriver -p 4444 > "$OUT/safaridriver-log.txt" 2>&1 & sleep 2; run safari 1300; fi ;;
   mac-sim)
     UDID=$(xcrun simctl list devices available -j | python3 -I -c "
 import json, sys
