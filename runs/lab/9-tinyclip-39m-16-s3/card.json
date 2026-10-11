@@ -1,0 +1,31 @@
+{
+ "images": {
+  "alachua-2025.wasm-int8-per-channel": {
+   "shards": 4,
+   "shard_3": {
+    "rows": 1500,
+    "embedded": 1500,
+    "skipped": 0,
+    "latency_ms": {
+     "mean": 211.88,
+     "p50": 211.28,
+     "p90": 215.27,
+     "p99": 236.12,
+     "min": 199.81,
+     "max": 299.2
+    },
+    "onnx": "onnx/vision.int8-per-channel.onnx",
+    "onnx_sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+    "runtime": "1.30.0",
+    "threads": 1,
+    "node": "v22.23.3",
+    "machine_cpus": 4,
+    "pixels": "transformers CLIPImageProcessor resize (Pillow, bicubic) and centre crop to uint8; then (v/255 - mean)/std in float32 in JavaScript"
+   },
+   "via": "onnxruntime-web 1.30.0 WASM, 1 thread(s), Node v22.23.3"
+  }
+ },
+ "stages": [
+  "images-wasm-int8-per-channel"
+ ]
+}
