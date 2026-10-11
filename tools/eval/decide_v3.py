@@ -51,6 +51,20 @@ named_pr = sum(round(r["named"] * r["n"]) for r in pr)
 share_pr = named_pr / n_pr if n_pr else None
 fail_iii = share_pr is None or share_pr > 0.01
 
+# reported beside the rule and deciding nothing: paired differences (candidate minus pocket v2) on the same photos
+beside = []
+for sname, keys in (("wildlife", ("asserted_right", "asserted_wrong", "named", "named_right")), ("extra", ("kind_right", "asserted_wrong", "named"))):
+    if sname not in pc or sname not in pl or pc[sname]["ids_sha256"] != pl[sname]["ids_sha256"]:
+        continue
+    for key in keys:
+        if key not in pc[sname] or key not in pl[sname]:
+            continue
+        va, vb = bits(pc[sname][key]), bits(pl[sname][key])
+        dd = (va - vb).astype(np.float32)
+        bb = dd[ev.boot_index(len(dd))].mean(1)
+        l_, h_ = np.percentile(bb, [2.5, 97.5])
+        beside.append({"photos": sname, "measure": key, "candidate": round(float(va.mean()), 4), "pocket_v2": round(float(vb.mean()), 4),
+                       "difference": [round(float(dd.mean()), 4), round(float(l_), 4), round(float(h_), 4)], "n": int(len(dd))})
 fails = [t for t, f in (("(i)", fail_i), ("(ii)", fail_ii), ("(iii)", fail_iii)) if f]
 ships = not fails
 nc, nl = C["numbers"], L["numbers"]
@@ -65,6 +79,7 @@ out = {
         "ii_extra_kind_right": {"candidate": extra_right, "bar": 0.965, "fails": bool(fail_ii)},
         "iii_named_on_people_and_rooms": {"photos": n_pr, "named": named_pr, "share": share_pr, "by_kind": {r["kind"]: {"n": r["n"], "named": r["named"]} for r in pr}, "bar": 0.01, "fails": bool(fail_iii)},
     },
+    "beside": beside,
     "fails": fails, "ships": ships,
     "slot": a.candidate if ships else None,
     "why": ("The candidate passes all three tests, so it ships as pocket v3." if ships else

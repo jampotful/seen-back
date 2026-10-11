@@ -548,6 +548,16 @@ if any(n_ in SH for _, n_ in LIC[1:4]):
               "- (iii) A species named on %d of the %d test photos of people and rooms (%s) against a bar of 1%%. %s" % (t_["iii_named_on_people_and_rooms"]["named"], t_["iii_named_on_people_and_rooms"]["photos"], pc(t_["iii_named_on_people_and_rooms"]["share"]),
                                                                                                                          "This test fails." if t_["iii_named_on_people_and_rooms"]["fails"] else "This test passes."),
               "", DV3["why"], ""]
+        if DV3.get("beside"):
+            nm = {"kind_right": "kind of eye right", "asserted_right": "kind asserted and right", "asserted_wrong": "kind asserted and wrong", "named": "a species name shown", "named_right": "a right species name shown"}
+            T += ["Beside the rule, deciding nothing: the candidate against pocket v2 on the same photos (paired differences in points, with 95% bootstrap intervals).", "",
+                  table(["Photos", "Measure", "Candidate", "Pocket v2", "Paired difference (points)"],
+                        [["wildlife test" if b_["photos"] == "wildlife" else "extra test", nm.get(b_["measure"], b_["measure"]), pc(b_["candidate"]), pc(b_["pocket_v2"]),
+                          "%+.1f (%+.1f to %+.1f)" % tuple(100 * x_ for x_ in b_["difference"])] for b_ in DV3["beside"]], ["---", "---", "---:", "---:", "---:"]), ""]
+    rp = os.path.join(D, "reproduction-licence.txt")
+    if os.path.exists(rp):
+        lines_ = open(rp, encoding="utf-8").read().splitlines()
+        T += ["**Rerun on a clean machine.** %s The comparison is kept in [`docs/eval/reproduction-licence.txt`](eval/reproduction-licence.txt)." % " ".join(l_ for l_ in lines_[:1] + [l_ for l_ in lines_ if l_.startswith("numbers that differ")][:1]), ""]
     PL = load("pets-livestock.json")
     if PL:
         T += ["**Names on pets and livestock** (`tools/eval/pets.py`). %s" % PL["text"], "",

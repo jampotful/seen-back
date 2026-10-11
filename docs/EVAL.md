@@ -316,6 +316,18 @@ TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the
 
 The candidate passes all three tests, so it ships as pocket v3.
 
+Beside the rule, deciding nothing: the candidate against pocket v2 on the same photos (paired differences in points, with 95% bootstrap intervals).
+
+| Photos | Measure | Candidate | Pocket v2 | Paired difference (points) |
+|---|---|---:|---:|---:|
+| wildlife test | kind asserted and right | 78.7% | 75.2% | +3.5 (+2.5 to +4.5) |
+| wildlife test | kind asserted and wrong | 3.0% | 3.6% | -0.6 (-1.1 to -0.1) |
+| wildlife test | a species name shown | 20.1% | 14.2% | +5.9 (+4.8 to +7.1) |
+| wildlife test | a right species name shown | 18.8% | 13.1% | +5.7 (+4.7 to +6.8) |
+| extra test | kind of eye right | 96.9% | 98.2% | -1.3 (-2.0 to -0.5) |
+| extra test | kind asserted and wrong | 1.5% | 0.7% | +0.8 (+0.2 to +1.5) |
+| extra test | a species name shown | 15.1% | 6.2% | +8.9 (+7.3 to +10.5) |
+
 **Names on pets and livestock** (`tools/eval/pets.py`). The 340 test photos of the extra set whose largest object COCO files as a cat, dog, horse, cow or sheep went through the slot `pocket-v3` (vectors `images/coco-kinds.wasm-int8-per-channel`, its own thresholds). A species was named for 187 of them, and 136 of those names were the domestic species of the photo's category. The species list holds the Domestic Cat and the Domestic Horse and no domestic dog, cow or sheep, so on a dog, cow or sheep every name is another species. The top species, named or not, was the domestic one for 147 photos.
 
 | Category | Test photos | A species named | The domestic species | Another species | What it names when wrong |
