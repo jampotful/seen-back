@@ -13,8 +13,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const out = { browser: NAME, console: [], before: null, after: [] };
   // REF (the run branch's name) chooses a variant: "persist" uses a persistent context (a profile on disk, as Safari has) instead of
   // Playwright's ephemeral one; "halt" stops the download and lets it settle before the reload, so that no fetch is in flight then.
-  const REF = process.env.GITHUB_REF_NAME || process.env.VARIANT || '', PERSIST = /persist/.test(REF), HALT = /halt/.test(REF);
-  out.variant = { ref: REF, persist: PERSIST, halt: HALT }; out.trace = [];
+  const REF = process.env.GITHUB_REF_NAME || process.env.VARIANT || '', PERSIST = /persist/.test(REF), HALT = /halt/.test(REF), SW = /-sw/.test(REF);   // "-sw": the service worker is let in (as on the live page)
+  out.variant = { ref: REF, persist: PERSIST, halt: HALT, sw: SW }; out.trace = [];
   let browser = null, ctx;
   if (PERSIST) { const dir = require('fs').mkdtempSync(require('os').tmpdir() + '/resume-'); ctx = await pw[NAME].launchPersistentContext(dir, { viewport: { width: 390, height: 844 }, hasTouch: true }); }
   else { browser = await pw[NAME].launch(); out.version = browser.version(); }
@@ -67,7 +67,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await page.addInitScript(noCamera);
     let BIGQ = 'test/rec/models/standin-big';         // the stand-in's manifest names port 8788; for another, a copy of it is written beside it
     if (BIG_PORT !== 8788) { const fs = require('fs'), d = path.join(__dirname, '..', 'rec', 'models', 'standin-big'); fs.writeFileSync(path.join(d, 'manifest.port.json'), fs.readFileSync(path.join(d, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); BIGQ += '/manifest.port.json'; }
-    await page.goto(ORIGIN + '/index.html?side=420&svc=off&nosw=1&rec=test/rec/models/standin&big=' + BIGQ, { waitUntil: 'load' });
+    await page.goto(ORIGIN + '/index.html?side=420&svc=off' + (SW ? '' : '&nosw=1') + '&rec=test/rec/models/standin&big=' + BIGQ, { waitUntil: 'load' });
     await page.waitForFunction(() => window.__seenBack && window.__seenBack.rec.about().state === 'ready', null, { timeout: 60000 });
     await page.evaluate(noCamera); await page.locator('#btnBegin').click(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
     await page.locator('#inAnimalPick').setInputFiles(path.join(__dirname, '..', 'rec', 'photos', 'stripes.png'));
@@ -77,6 +77,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     const now = () => page.evaluate(() => { const B = window.__seenBack, a = B.big.about(); return { t: Math.round(performance.now()), ready: document.readyState, have: a.have, kept: a.keptBytes, state: a.state, why: a.why, fail: a.fail, getFail: a.getFail, choice: B.bigChoice(), online: navigator.onLine,
       diag: B.diag().filter((d) => /^large/.test(d.what)).slice(-4).map((d) => d.what + ' ' + String(d.code).slice(0, 120)), line: (document.getElementById('svcView').hidden ? '' : document.getElementById('svcView').textContent) || (document.getElementById('svcHud').hidden ? '' : document.getElementById('svcHud').textContent) }; });
     out.before = await now(); out.asked = await get(BIG + '/__ctl?log=1');
+    out.swBefore = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller), registrations: navigator.serviceWorker ? 'yes' : 'none' }));
     if (HALT) {        // no fetch in flight at the reload: stopped, settled, and the choice set back to 'yes' so that the next visit carries on
       await page.evaluate(() => window.__seenBack.big.halt());
       for (let i = 0; i < 20; i++) { await sleep(250); if (await page.evaluate(() => window.__seenBack.big.about().have !== 'getting')) break; }
@@ -90,6 +91,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       try { const s = await now(); s.at = Math.round((Date.now() - t0) / 1000); out.after.push(s); if (s.have === 'kept' && s.state === 'ready') break; } catch (e) { out.after.push({ error: String(e.message).split('\n')[0] }); }
     }
     out.askedAfter = await get(BIG + '/__ctl?log=1');
+    out.swAfter = await page.evaluate(() => ({ controlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller) }));
     out.kept = await page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url.replace(/^.*standin-big\//, '').replace(/[0-9a-f]{64}/, 'SHA')).filter((u) => !/^http/.test(u)));
     out.stores = await page.evaluate(async () => { const o = {}; for (const n of await caches.keys()) o[n] = (await (await caches.open(n)).keys()).map((q) => q.url.replace(/^https?:\/\/[^\/]+\//, '').replace(/[0-9a-f]{64}/, 'SHA')).filter((u) => /big/.test(u)); return o; });
   } catch (e) { out.error = String(e && e.stack || e).slice(0, 600); }
