@@ -41,7 +41,7 @@ for mid in run.get("models", []):
 print("work=" + json.dumps({"include": work}))
 print("has_work=%s" % ("true" if work else "false"))
 print("models=" + json.dumps(models))
-print("has_models=%s" % ("true" if models else "false"))
+print("has_models=%s" % ("true" if models and run.get("publish", True) else "false"))
 print("guard=" + json.dumps(run.get("guard") or {}))
 print("has_guard=%s" % ("true" if run.get("guard") else "false"))
 print("manifest=%s" % run.get("manifest", ""))

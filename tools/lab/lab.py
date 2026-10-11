@@ -1119,6 +1119,145 @@ def stage_merge(args):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
+# stage: quant-lab (try other ways to make the image encoder small; numbers only, nothing published)
+
+
+def weight_only_int8(src, dst):
+    """Every MatMul with a constant weight gets int8 weights (symmetric, per output column) and a DequantizeLinear in
+    front: the file is about as small as the int8 file, the arithmetic stays float."""
+    import onnx
+    from onnx import helper, numpy_helper
+
+    mdl = onnx.load(str(src))
+    g = mdl.graph
+    inits = {i.name: i for i in g.initializer}
+    done, nodes = {}, []
+    for nd in g.node:
+        if nd.op_type == "MatMul" and nd.input[1] in inits:
+            base = nd.input[1]
+            if base not in done:
+                W = numpy_helper.to_array(inits[base]).astype(np.float32)
+                if W.ndim != 2:
+                    nodes.append(nd)
+                    continue
+                sc = (np.abs(W).max(axis=0) / 127.0).astype(np.float32)
+                sc[sc == 0] = 1e-8
+                q = np.clip(np.rint(W / sc), -127, 127).astype(np.int8)
+                g.initializer.remove(inits[base])
+                g.initializer.extend([numpy_helper.from_array(q, base + "_q"), numpy_helper.from_array(sc, base + "_s"),
+                                      numpy_helper.from_array(np.zeros(sc.shape, np.int8), base + "_z")])
+                nodes.append(helper.make_node("DequantizeLinear", [base + "_q", base + "_s", base + "_z"], [base + "_dq"], axis=1))
+                done[base] = base + "_dq"
+            nd.input[1] = done[base]
+        nodes.append(nd)
+    del g.node[:]
+    g.node.extend(nodes)
+    onnx.save(mdl, str(dst))
+
+
+def fp16_weights(src, dst):
+    """Large float initializers stored as float16 with a Cast back to float32: half the download, float32 arithmetic."""
+    import onnx
+    from onnx import TensorProto, helper, numpy_helper
+
+    mdl = onnx.load(str(src))
+    g = mdl.graph
+    casts = []
+    for init in list(g.initializer):
+        if init.data_type == TensorProto.FLOAT:
+            a = numpy_helper.to_array(init)
+            if a.size >= 1024:
+                g.initializer.remove(init)
+                g.initializer.append(numpy_helper.from_array(a.astype(np.float16), init.name + "_h"))
+                casts.append(helper.make_node("Cast", [init.name + "_h"], [init.name], to=TensorProto.FLOAT))
+    nodes = casts + list(g.node)
+    del g.node[:]
+    g.node.extend(nodes)
+    onnx.save(mdl, str(dst))
+
+
+def stage_quant_lab(args):
+    import subprocess
+
+    from onnxruntime.quantization import QuantType, quantize_dynamic
+
+    entry = model_entry(args.model)
+    m = load(entry)
+    card = base_card(entry, m)
+    size = card["input"]["size"]
+    tmp = pathlib.Path(args.work)
+    tmp.mkdir(parents=True, exist_ok=True)
+    fp32 = tmp / "vision.fp32.onnx"
+    export_onnx(m, fp32, size, 17)
+    files = {"fp32": fp32}
+    recipes = {
+        "int8-per-channel": dict(weight_type=QuantType.QInt8, per_channel=True, reduce_range=False),
+        "int8-per-channel-7bit": dict(weight_type=QuantType.QInt8, per_channel=True, reduce_range=True),
+        "uint8-per-channel": dict(weight_type=QuantType.QUInt8, per_channel=True, reduce_range=False),
+    }
+    notes = {"int8-per-channel": "the shipping recipe: dynamic int8, per-channel weights, MatMul and Gemm with constant weights",
+             "int8-per-channel-7bit": "as shipped, with reduce_range (7-bit weights), which avoids saturation in u8s8 kernels without VNNI",
+             "uint8-per-channel": "as shipped, with unsigned 8-bit weights (u8u8 kernels)",
+             "w8-float": "8-bit weights (per output column, DequantizeLinear) with float activations and float arithmetic",
+             "f16w-float": "float16 weights cast to float32 when the session loads: half the download, float32 arithmetic",
+             "fp16": "float16 throughout (convert_float_to_float16, keep_io_types)"}
+    for tag, kw in recipes.items():
+        f = tmp / ("vision.%s.onnx" % tag)
+        try:
+            quantize_dynamic(str(fp32), str(f), op_types_to_quantize=["MatMul", "Gemm"], extra_options={"MatMulConstBOnly": True}, **kw)
+            files[tag] = f
+        except Exception as e:
+            log("%s failed: %s" % (tag, e))
+    for tag, fn in (("w8-float", weight_only_int8), ("f16w-float", fp16_weights)):
+        f = tmp / ("vision.%s.onnx" % tag)
+        try:
+            fn(fp32, f)
+            files[tag] = f
+        except Exception as e:
+            log("%s failed: %s: %s" % (tag, type(e).__name__, e))
+    try:
+        import onnx
+        from onnxruntime.transformers.float16 import convert_float_to_float16
+
+        onnx.save(convert_float_to_float16(onnx.load(str(fp32)), keep_io_types=True), str(tmp / "vision.fp16.onnx"))
+        files["fp16"] = tmp / "vision.fp16.onnx"
+    except Exception as e:
+        log("fp16 failed: %s" % e)
+    rows = read_manifest(args.manifest)
+    ok, _ = iter_photos(rows, args.photos)
+    ims, pids = [], []
+    for rid, pth in ok[:args.parity_n]:
+        try:
+            ims.append(open_rgb(pth))
+            pids.append(rid)
+        except Exception:
+            pass
+    pv = m.pixel_values(ims)
+    ref = m.encode_pixels(pv)
+    pv_np = pv.numpy().astype(np.float32)
+    np.save(tmp / "_pv.npy", pv_np)
+    np.save(tmp / "_ref.npy", ref)
+    res = {"model": entry["id"], "photos": len(ims), "cpu": cpu_info(), "files": {}}
+    wd = tmp / "wasm"
+    wd.mkdir(exist_ok=True)
+    k = min(len(pv_np), 8)
+    pv_np[:k].tofile(wd / "input.f32")
+    (wd / "shape.json").write_text(json.dumps([k, 3, size, size]))
+    np.ascontiguousarray(ref[:k], dtype=np.float32).tofile(wd / "torch_ref.f32")
+    for tag, f in files.items():
+        info = {"mb": round(f.stat().st_size / 1e6, 2), "how": notes.get(tag, "the original model, exported")}
+        r = subprocess.run([sys.executable, "-u", __file__, "_parity", str(f), str(tmp / "_pv.npy"), str(tmp / "_ref.npy"), "1"],
+                           capture_output=True, text=True)
+        try:
+            info["cpu"] = json.loads(r.stdout.strip().splitlines()[-1])
+        except Exception:
+            info["cpu"] = {"run_error": (r.stderr or "")[-300:]}
+        res["files"][tag] = info
+        log("%s: %s" % (tag, json.dumps(info)))
+    (pathlib.Path(args.out_json)).write_text(json.dumps(res, indent=1) + "\n")
+
+
+# ---------------------------------------------------------------------------------------------------------------------
 # stage: repair (undo what an older run's publish overwrote, from a snapshot taken just before it)
 
 
@@ -1296,6 +1435,13 @@ def main():
     g.add_argument("--out", required=True)
     g.add_argument("--run", type=int, help="this run's number (default: $GITHUB_RUN_NUMBER)")
     g.add_argument("parts", nargs="*")
+    ql = sub.add_parser("quant-lab")
+    ql.add_argument("--model", required=True)
+    ql.add_argument("--manifest", required=True)
+    ql.add_argument("--photos", required=True)
+    ql.add_argument("--work", required=True)
+    ql.add_argument("--out-json", required=True)
+    ql.add_argument("--parity-n", type=int, default=40)
     rp = sub.add_parser("repair")
     rp.add_argument("--snapshot", required=True)
     rp.add_argument("--current", required=True)
@@ -1347,6 +1493,8 @@ def main():
         stage_ship(args)
     elif args.stage == "repair":
         stage_repair(args)
+    elif args.stage == "quant-lab":
+        stage_quant_lab(args)
     elif args.stage == "provenance":
         prov = load_provenance(args.out)
         for g in pathlib.Path(args.out).rglob("*"):

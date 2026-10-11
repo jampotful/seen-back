@@ -22,6 +22,15 @@ if [[ "$stages" == *",images"* ]]; then
 elif has export; then
   run python3 "$fetcher" "$man" photos --limit 48 || fail=1
 fi
+if has quant-lab; then
+  [ -n "$(ls photos 2>/dev/null | head -1)" ] || run python3 "$fetcher" "$man" photos --limit 48
+  if run python3 -u tools/lab/lab.py quant-lab --model "$model" --manifest "$man" --photos photos --work "ql_$model" --out-json ret/quant_lab.json; then
+    if [ ! -d ortweb/node_modules/onnxruntime-web ]; then
+      (mkdir -p ortweb && cd ortweb && npm init -y >/dev/null && npm install --no-audit --no-fund onnxruntime-web@1.30.0) >> "$L" 2>&1
+    fi
+    WASM_ALL=1 run node tools/lab/wasm_check.mjs ortweb "ql_$model" "ql_$model/wasm" ret/quant_lab_wasm.json || fail=1
+  else fail=1; fi
+fi
 if has text-kinds; then run python3 -u tools/lab/lab.py text --model "$model" --labelset kinds --out "$out" || fail=1; fi
 if has text-species; then run python3 -u tools/lab/lab.py text --model "$model" --labelset species --species-json data_in/species.json --shard "$shard/$n" --out "$out" || fail=1; fi
 if has export; then
