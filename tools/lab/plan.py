@@ -34,4 +34,5 @@ for mid in run["models"]:
 print("work=" + json.dumps({"include": work}))
 print("models=" + json.dumps(models))
 print("max_parallel=%d" % int(run.get("max_parallel", 10)))
+print("publish_after=%s" % (run.get("publish_after_run") or ""))
 print("count=%d" % (len(work) + len(models)), file=sys.stderr)

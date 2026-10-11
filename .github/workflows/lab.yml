@@ -15,6 +15,7 @@ jobs:
       work: ${{ steps.plan.outputs.work }}
       models: ${{ steps.plan.outputs.models }}
       max_parallel: ${{ steps.plan.outputs.max_parallel }}
+      publish_after: ${{ steps.plan.outputs.publish_after }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
@@ -82,7 +83,7 @@ jobs:
     needs: [plan, work]
     if: always() && needs.plan.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 70
     strategy:
       fail-fast: false
       matrix:
@@ -98,6 +99,8 @@ jobs:
           pattern: lab-${{ matrix.model }}-s*
           path: parts
       - name: merge and publish
+        env:
+          PUBLISH_AFTER_RUN: ${{ needs.plan.outputs.publish_after }}
         run: |
           mkdir -p ret
           python3 -m pip install --quiet numpy 2>&1 | tail -1
