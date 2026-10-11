@@ -8,6 +8,8 @@ name: engines
 # run/engines/mac-39<anything>: the macOS job runs only the self-test with the shipped slot (models/pocket) in WebKit, Safari and the simulator;
 # run/engines/mac-thr<anything> and run/engines/linux-thr<anything>: only the threads experiment (ci/engines/threads.sh), which every
 # other macOS-less Linux run also does at its end.
+# run/engines/big-<anything>: the larger model from the live address (ci/engines/big.sh, test/engines/big.js): one Linux job (Chromium with the
+# home-screen questions, Firefox, WebKit) and two macOS jobs (Playwright's WebKit and real Safari; Safari on an iPhone simulator).
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
@@ -19,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   linux:
-    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/mac') }}
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/mac') && !startsWith(github.ref_name, 'run/engines/big') }}
     strategy:
       fail-fast: false
       matrix:
@@ -41,7 +43,7 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out linux-${{ matrix.part }}
   macos:
-    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/linux') }}
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/linux') && !startsWith(github.ref_name, 'run/engines/big') }}
     runs-on: macos-latest
     timeout-minutes: 55
     steps:
@@ -69,3 +71,37 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out live
+  big-linux:
+    if: ${{ startsWith(github.ref_name, 'run/engines/big') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - name: the larger model from the live address in Chromium, Firefox and WebKit
+        env:
+          PART: linux
+        run: bash ci/engines/big.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out big-linux
+  big-mac:
+    if: ${{ startsWith(github.ref_name, 'run/engines/big') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [mac-ws, mac-sim]
+    runs-on: macos-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - name: the larger model from the live address in ${{ matrix.part }}
+        env:
+          PART: ${{ matrix.part }}
+        run: bash ci/engines/big.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out big-${{ matrix.part }}
