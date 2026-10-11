@@ -1,0 +1,155 @@
+
+=== 06:50:02 response headers, as a browser that accepts gzip and br would get them
+--- https://jampotful.github.io/seen-back/
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-29f78"
+expires: Sun, 11 Oct 2026 07:00:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 54952
+bytes on the wire: 54952
+--- https://jampotful.github.io/seen-back/index.html
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-29f78"
+expires: Sun, 11 Oct 2026 07:00:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 54952
+bytes on the wire: 54952
+--- https://jampotful.github.io/seen-back/sw.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-f6f"
+expires: Sun, 11 Oct 2026 07:00:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1583
+bytes on the wire: 1583
+--- https://jampotful.github.io/seen-back/manifest.webmanifest
+HTTP/2 200 
+content-type: application/manifest+json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-268"
+expires: Sun, 11 Oct 2026 07:00:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 281
+bytes on the wire: 281
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm
+HTTP/2 200 
+content-type: application/wasm
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-d94899"
+expires: Sun, 11 Oct 2026 07:00:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 3722335
+bytes on the wire: 3722335
+--- https://jampotful.github.io/seen-back/vendor/ort/ort.wasm.min.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-c414"
+expires: Sun, 11 Oct 2026 07:00:03 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 16193
+bytes on the wire: 16193
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-5f3d"
+expires: Sun, 11 Oct 2026 07:00:03 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 9095
+bytes on the wire: 9095
+--- https://jampotful.github.io/seen-back/vendor/rec-worker.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-270b"
+expires: Sun, 11 Oct 2026 07:00:03 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 4000
+bytes on the wire: 4000
+--- https://jampotful.github.io/seen-back/models/pocket/manifest.json
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-8b3"
+expires: Sun, 11 Oct 2026 07:00:03 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1123
+bytes on the wire: 1123
+--- the model named by the manifest: https://jampotful.github.io/seen-back/models/pocket/vision.int8-per-channel.onnx
+HTTP/2 200 
+content-type: application/octet-stream
+last-modified: Sun, 11 Oct 2026 06:31:39 GMT
+access-control-allow-origin: *
+etag: W/"6acb2d4b-27146d9"
+expires: Sun, 11 Oct 2026 07:00:03 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 2
+via: 1.1 varnish
+x-cache: MISS
+x-cache-hits: 0
+content-length: 35342999
+bytes on the wire: 35342999, in 2.198279 s
+--- the same, asked for without compression
+HTTP/2 200 
+content-length: 40978137
+bytes on the wire: 40978137, in 0.841124 s
+--- the same, asked for a byte range (does a resumed download work?)
+HTTP/2 206 
+content-range: bytes 0-1023/40978137
+content-length: 1024
+bytes on the wire: 1024
+--- https://jampotful.github.io/seen-back/models/pocket/species.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 5605950
+bytes on the wire: 5605950
+--- https://jampotful.github.io/seen-back/models/pocket/kinds.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 16231
+bytes on the wire: 16231
+--- https://jampotful.github.io/seen-back/models/pocket/species.json
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 185337
+bytes on the wire: 185337
+
+=== 06:50:07 playwright 1.56.0, Chromium, Firefox and WebKit
+added 2 packages in 2s
