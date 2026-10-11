@@ -1,0 +1,84 @@
+{
+ "made_by": "tools/eval/decide.py",
+ "slots_compared": {
+  "tinyclip-39m-16": "sentences-tinyclip-39m-16",
+  "tinyclip-8m-16": "sentences-tinyclip-8m-16"
+ },
+ "train": "sentences",
+ "sets": [
+  "wildlife"
+ ],
+ "rule": "TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95% interval lies wholly above zero. The measure is the share right on the wildlife test photos (the extra set's vectors were not published for both models).",
+ "deciding_difference": [
+  0.0558,
+  0.0465,
+  0.0658
+ ],
+ "measures": [
+  {
+   "photos": "wildlife",
+   "measure": "kind of eye right",
+   "tinyclip-39m-16": 0.8449,
+   "tinyclip-8m-16": 0.7891,
+   "difference": [
+    0.0558,
+    0.0465,
+    0.0658
+   ],
+   "n": 4197
+  },
+  {
+   "photos": "wildlife",
+   "measure": "kind asserted and right",
+   "tinyclip-39m-16": 0.6548,
+   "tinyclip-8m-16": 0.3055,
+   "difference": [
+    0.3493,
+    0.335,
+    0.3641
+   ],
+   "n": 4197
+  },
+  {
+   "photos": "wildlife",
+   "measure": "kind asserted and wrong",
+   "tinyclip-39m-16": 0.0293,
+   "tinyclip-8m-16": 0.0052,
+   "difference": [
+    0.0241,
+    0.0195,
+    0.0293
+   ],
+   "n": 4197
+  },
+  {
+   "photos": "wildlife",
+   "measure": "a right species name shown",
+   "tinyclip-39m-16": 0.143,
+   "tinyclip-8m-16": 0.0824,
+   "difference": [
+    0.0605,
+    0.0527,
+    0.0686
+   ],
+   "n": 4197
+  },
+  {
+   "photos": "wildlife",
+   "measure": "a species name shown",
+   "tinyclip-39m-16": 0.1537,
+   "tinyclip-8m-16": 0.0915,
+   "difference": [
+    0.0622,
+    0.0541,
+    0.0708
+   ],
+   "n": 4197
+  }
+ ],
+ "choice": "tinyclip-39m-16",
+ "slot": "sentences-tinyclip-39m-16",
+ "branch": "pub/heads-sentences-tinyclip-39m-16",
+ "provisional": true,
+ "why": "On the share right on the wildlife test photos (the extra set's vectors were not published for both models), TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +5.6 points (+4.7 to +6.6), paired over the same photos. The interval lies above zero, so the larger pocket model ships: a wrong kind gives a person the wrong eyes, and that weighs more than 31 MB downloaded once."
+}

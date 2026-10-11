@@ -22,4 +22,5 @@ for m in $MODELS; do
     python3 -I tools/eval/shipped.py "$ROOT" "$ROOT/slots/$TRAIN/$m" --name "$TRAIN-$m"
   fi
 done
+python3 -I tools/eval/decide.py || echo "The pocket decision could not be computed."
 python3 -I tools/eval/report.py

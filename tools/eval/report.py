@@ -52,6 +52,34 @@ def write(name, text):
     print("wrote", p)
 
 
+def extra_table(rows, first="Photos of"):
+    """One row a true kind, from tools/eval/kinds.py table()."""
+    return table([first, "Photos", "Kind right", "Kind asserted", "Right when asserted", "True kind among the three when not sure", "Said `person`", "Said `none`", "A species named", "Commonest wrong answer"],
+                 [[g["kind"], g["n"], pci(g["right"]), pc(g["asserted"]), pc(g["asserted_right"]), pc(g["not_sure_true_kind_among_three"]), pc(g["said_person"]), pc(g["said_none"]), pc(g["named"]), g["commonest_wrong"] or "–"] for g in rows],
+                 ["---"] + ["---:"] * 8 + ["---"])
+
+
+def kind_decision_lines(kd):
+    """The table of kinds heads and rules of one model in Study 2."""
+    t = kd["tuned_on"]
+    ex = t.get("extra")
+    out = ["**The kind decision.** The kinds head, its temperature, its weight against the species list and the rule were chosen on %d wildlife tuning photos%s. The number tuned on is %s. Each row is one kinds head under one rule at its best setting on the tuning photos. "
+           "`kind_at` is the level this computation gives for an asserted kind to be right 95 times in 100 on each tuning set by itself; the level a slot ships with is set by `tools/eval/shipped.py` through `fuse.py`." % (
+               t["wildlife_photos"], (" and %d tuning photos of the extra set `%s` (`%s`). Another %d of its photos were there for fitting kind rows, and its %d test photos (`%s`) are only reported" % (
+                   ex["photos"], ex["set"], ex["vectors"], ex["fitting_photos"], ex["test_photos"], ex["test_vectors"])) if ex else " alone, because this model's vectors of the extra set (people, pets, livestock, rooms) were not published when this ran", kd["tuned_number"]), ""]
+
+    def row(label, c):
+        tw, tx = c["test_wildlife"], c.get("test_extra")
+        return [label, c["head"], c["rule"], "%g" % c["t_kind"], "%g" % c["w_kind"], pc(c["tuning_both"]), pc(c["tuning_wildlife"]), pc(c["tuning_extra"]), pci(tw["kind_right"]), pci(tx["kind_right"]) if tx else "–",
+                ("%.2f" % c["kind_at"]) if c.get("kind_at") is not None else "none", pci(tw["asserted"]), pci(tw["asserted_right"]), pci(tx["asserted"]) if tx else "–", pci(tx["asserted_right"]) if tx else "–"]
+    rows = [row("", c) for c in kd["candidates"]] + [row("**chosen**", kd["chosen"]), row("what the wildlife photos alone would choose", kd["chosen_on_wildlife_alone"])]
+    out += [table(["", "Kinds head", "Rule", "t_kind", "w_kind", "Tuning number", "Wildlife tuning photos", "Extra tuning photos", "Kind right, wildlife test", "Kind right, extra test", "kind_at", "Asserted, wildlife test", "Right when asserted", "Asserted, extra test", "Right when asserted"],
+                  rows, ["---", "---", "---"] + ["---:"] * 12), ""]
+    if kd["chosen"].get("test_extra_by_kind"):
+        out += ["The chosen setting on the extra set's test photos, by kind (no species is named in this computation):", "", extra_table(kd["chosen"]["test_extra_by_kind"]), ""]
+    return out
+
+
 GEN = "_This file is written by `tools/eval/report.py` from `%s`. Rerun the script to change it._"
 NAMES = {"species_sci": "scientific name", "species_com": "English name", "species_taxon_com": "taxonomy and English name"}
 ORDER = ["bioclip25-h14", "bioclip2-l14", "bioclip-b16", "tinyclip-39m-16", "tinyclip-8m-16", "tinyclip-61m-32", "tinyclip-40m-32", "mobileclip2-s0", "clip-b32", "siglip2-b16", "bioclip25-mobile-fastvit"]
@@ -139,7 +167,10 @@ T += ["# Evaluation: what the recognizers get right, and how we know", "",
       "- **The list.** A model answers with one of the %d species recorded in the county through 2024 (`data/regions/us-fl-alachua/species.json`). The list also gives each species' records by calendar month, and its kind of eye." % P["species_in_list"]["1"],
       "- **Scoring against sentences.** Each species becomes a row made by the model's text half from sentences that hold its name. A photo's score for a species is the cosine between the photo's vector and that row. Three kinds of rows were tried: the scientific name, the English name, and the taxonomy followed by the English name in the form BioCLIP was trained on.",
       "- **The prior.** The place-and-season prior adds `alpha * log(share)` to a species' score, where `share` is the species' part of all records of that calendar month. A month's weight for a species is its records in that month, plus `lam` times a twelfth of its yearly records, plus `c`. This is the arithmetic of `tools/fusion/fuse.py`, with the smoothing written into the table's monthly weights.",
-      "- **Intervals.** Each share is followed by a 95%% percentile interval from %d bootstrap resamples over photos (seed %d). The intervals describe the luck of which photos were drawn. They say nothing about photos of another kind." % (meth["resamples"], meth["seed"]), ""]
+      "- **Intervals.** Each share is followed by a 95%% percentile interval from %d bootstrap resamples over photos (seed %d). The intervals describe the luck of which photos were drawn. They say nothing about photos of another kind." % (meth["resamples"], meth["seed"]),
+      "- **People, pets, livestock and rooms.** The wildlife photos hold no people, no photos with nothing alive in them and almost no pets. The extra set `coco-kinds` (`data/extra/coco-kinds/SUMMARY.md`) holds 10,240 photos from COCO 2017 filed as `person`, `cat`, `dog`, `deer` (horses, cows and sheep) and `none` (rooms and objects). "
+      "`tools/eval/kinds.py` cuts COCO's own training rows by a hash of the row id into a part for fitting kind rows (two thirds) and a part that joins the wildlife `val` photos whenever a setting of the kind decision is chosen (one third); COCO's own validation rows are the test rows and are only reported. "
+      "A COCO photo has no date that means a season, so each is given a calendar month by a hash of its id. The number a kind decision is tuned on is the mean of the share right on the wildlife tuning photos and of the mean share right over the extra set's five kinds, because nobody knows what share of a phone's photos are of people or of rooms.", ""]
 
 T += ["## The main table", "",
       "Test split, %d photos. For each model the species rows are the label set that did best on `val`. The kind of eye is given twice: from the model's own kind phrases (`labels/kinds.json`, seventeen rows that include `person` and `none`), and from the kind of the top species with the prior." % P["test_rows"], ""]
@@ -225,6 +256,8 @@ for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get(
                     ["---", "---:", "---:", "---:", "---:", "---:", "---"]), ""]
         if r.get("kind_heads"):
             L += [table(["Kind of eye from", "Right kind", "Called `person`", "Called `none`"], [[h["name"], pci(h["accuracy"]), pc(h.get("called_person"), 2), pc(h.get("called_none"), 2)] for h in r["kind_heads"]]), ""]
+        if r.get("kind_decision"):
+            L += kind_decision_lines(r["kind_decision"])
         if r["train_photos"] and r.get("by_train_photos"):
             L += ["Top-1 with the prior for each head, by how many fitting photos the species has:", "",
                   table(["Fitting photos of the species", "Test photos"] + r["by_train_photos"]["heads"], [[g["group"], g["n"]] + [pc(x) for x in g["top1"]] for g in r["by_train_photos"]["rows"]]), ""]
@@ -246,12 +279,23 @@ for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get(
     kn = []
     for m in ms:
         for h in s2["models"][m]["kind_heads"]:
-            if "`product`" not in h["name"] and short_kind(h["name"]) not in kn:
+            if short_kind(h["name"]) not in kn:
                 kn.append(short_kind(h["name"]))
     def kget(m, k):
-        return next((h for h in s2["models"][m]["kind_heads"] if short_kind(h["name"]) == k and "`product`" not in h["name"]), None)
+        return next((h for h in s2["models"][m]["kind_heads"] if short_kind(h["name"]) == k), None)
     rows = [[k] + [pci(kget(m, k)["accuracy"]) if kget(m, k) else "–" for m in ms] for k in kn]
     T += ["Kind of eye right on the test photos:", "", table(["Kind of eye from"] + ms, rows), ""]
+    kdm = [m for m in ms if s2["models"][m].get("kind_decision")]
+    if kdm:
+        rows = []
+        for m in kdm:
+            kd = s2["models"][m]["kind_decision"]
+            for label, c in (("chosen", kd["chosen"]), ("what the wildlife photos alone would choose", kd["chosen_on_wildlife_alone"])):
+                tw, tx = c["test_wildlife"], c.get("test_extra")
+                by = {g["kind"]: g for g in c.get("test_extra_by_kind", [])}
+                rows.append([m, label, "%s; rule `%s`, t_kind %g, w_kind %g" % (c["head"], c["rule"], c["t_kind"], c["w_kind"]), pci(tw["kind_right"]), pci(tx["kind_right"]) if tx else "–"] + [pc(by[k]["right"][0]) if k in by else "–" for k in ("person", "none", "cat", "dog", "deer")])
+        T += ["The kind decision on the wildlife test photos and on the extra set's test photos (people, rooms with nothing alive, cats, dogs, grazing animals). The second row of each model shows what tuning on wildlife photos alone, as the first export did, would have chosen:", "",
+              table(["Model", "", "Kinds head and settings", "Kind right, wildlife test", "Kind right, extra test", "`person`", "`none`", "`cat`", "`dog`", "`deer`"], rows, ["---", "---", "---"] + ["---:"] * 7), ""]
     for note in sorted({n_ for m in ms for n_ in s2["models"][m].get("notes", [])}):
         T += ["- " + note]
     T += ["", "Every head, its settings, the reliability tables and the breakdown by fitting photos are in [`docs/eval/study2-%s.md`](eval/study2-%s.md)." % (name, name), ""]
@@ -259,23 +303,44 @@ for name in sorted(S2, key=lambda k: (bool(S2[k].get("standin")), not S2[k].get(
 if SH:
     T += ["## What the page would show", "",
           "Each slot below was written by `tools/eval/export_heads.py` in the layout of `models/<slot>/` and then scored by `tools/eval/shipped.py`, which reads the slot's own files as the page does and sends every photo through `tools/fusion/fuse.py`. "
-          "The two thresholds were set on the tuning photos so that a named species, and the three offered species, were right at least nine times in ten there. Slots whose name begins with `val-` hold stand-in heads. A name that ends in `-product` is the same slot scored under the product rule with its own two settings and thresholds (`fusion_if_rule_product` in the slot's manifest); build 6 of the page has only that rule, and the `mix` rule needs build 7.", ""]
+          "The two thresholds were set on the tuning photos so that a named species, and the three offered species, were right at least nine times in ten there. Slots whose name begins with `val-` hold stand-in heads. A name that ends in `-wasm-int8` or the like is the same slot scored on other vectors of the same photos (the larger model's int8 file as the browser runs it). The kinds head, its temperature, its weight and the rule (`mix` or `product`, both in the page since build 7) were chosen by Study 2 as described above.", ""]
     rows = []
     for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
         n = SH[name]["numbers"]
         rows.append(["`%s`" % name, pci(n["kind_right"]), pci(n["species_top1"]), "%s at %s" % (pc(n["named"][0]), n["name_at"] if n["name_at"] is not None else "never"), pci(n["named_right"]),
                      "%s at %s" % (pc(n["offered"][0]), n["offer_at"] if n["offer_at"] is not None else "never"), pci(n["offered_holds_species"]), pc(n["kind_only"][0]), pci(n["kind_only_kind_right"])])
     T += [table(["Slot", "Kind right", "Top species right", "Species named (share, threshold)", "Named species right", "Three offered (share, threshold)", "Offer holds the species", "Kind only", "Kind right when kind only"], rows), ""]
+    # the kind of eye with the answer "not sure"
+    krows = []
+    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
+        k = SH[name]["numbers"].get("kind")
+        if not k:
+            continue
+        tw, tx = k["test_wildlife"], k.get("test_extra")
+        krows.append(["`%s`" % name, ("%.2f" % k["kind_at"]) if k["kind_at"] is not None else "none", "yes" if "extra" in k["tuned_on"] else "no", pci(tw["kind_right"]), pci(tw["asserted"]), pci(tw["asserted_right"]), pci(tw["not_sure_true_kind_among_three"]),
+                      pci(tx["kind_right"]) if tx else "–", pci(tx["asserted"]) if tx else "–", pci(tx["asserted_right"]) if tx else "–", pci(tx["not_sure_true_kind_among_three"]) if tx else "–", pci(k.get("test_extra_named")) if tx else "–"])
+    if krows:
+        T += ["**Not sure is an answer.** Under `fusion.kind_at` the page asserts no kind, says that it is not sure and offers its three likeliest kinds. `tools/eval/shipped.py` sets the level through `fuse.py` as the lowest one from which an asserted kind was right at least 95 times in 100 on the wildlife tuning photos and, taken by itself, on the tuning third of the extra set. "
+              "The table gives what then happens on the wildlife test photos and on the extra set's test photos. A slot whose third column says `no` was tuned before its model's vectors of the extra set were published: its level and its settings have never been asked about a person or an empty room.", "",
+              table(["Slot", "kind_at", "Tuned with the extra set", "Kind right, wildlife test", "Kind asserted", "Right when asserted", "True kind among the three when not sure", "Kind right, extra test", "Kind asserted", "Right when asserted", "True kind among the three when not sure", "A species named on an extra photo"], krows), ""]
     L = ["# Exported slots, scored as the page would", "", GEN % "docs/eval/shipped-*.json", ""]
     for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
         sh = SH[name]
         L += ["## `%s`" % name, "", sh["text"], "", table(["What the page would show", "Share of test photos", "Right"], [[x["what"], pc(x["share"]), x["right"]] for x in sh["outcomes"]], ["---", "---:", "---"]), ""]
-        for x in sh.get("extra", []):
-            L += [x["text"], "", table(["Photos of", "Photos", "Kind said right", "Said `person`", "Said `none`", "A species named"], [[g["kind"], g["n"], pci(g["right"]), pc(g["person"]), pc(g["none"]), pc(g["named"])] for g in x["rows"]]), ""]
+        k = sh["numbers"].get("kind")
+        if k:
+            L += ["The kind of eye on the wildlife test photos, one row a true kind (kind_at %s):" % (("%.2f" % k["kind_at"]) if k["kind_at"] is not None else "none"), "", extra_table(k["table_wildlife"], "True kind"), ""]
+            if k.get("table_extra"):
+                L += ["The kind of eye on the extra set's test photos (`%s`):" % k["test_extra_vectors"], "", extra_table(k["table_extra"]), ""]
+            lv = []
+            for l in k.get("levels", []):
+                if l.get("kind_at") is None:
+                    lv.append(["%d in 100" % round(100 * l["right_at_least"]), "no level reached it"] + ["–"] * 6)
+                else:
+                    tw, tx = l["test_wildlife"], l.get("test_extra")
+                    lv.append(["%d in 100" % round(100 * l["right_at_least"]), "%.2f" % l["kind_at"], pci(tw["asserted"]), pci(tw["asserted_right"]), pci(tw["not_sure_true_kind_among_three"]), pci(tx["asserted"]) if tx else "–", pci(tx["asserted_right"]) if tx else "–", pci(tx["not_sure_true_kind_among_three"]) if tx else "–"])
+            L += ["Other bars for an asserted kind, each level set on the tuning photos:", "", table(["Asserted kind right at least", "kind_at", "Asserted, wildlife test", "Right when asserted", "True kind among the three when not sure", "Asserted, extra test", "Right when asserted", "True kind among the three when not sure"], lv), ""]
     write("shipped.md", "\n".join(L))
-    for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
-        for x in SH[name].get("extra", []):
-            T += ["**`%s` on photos of people, pets, livestock and rooms.** %s" % (name, x["text"]), "", table(["Photos of", "Photos", "Kind said right", "Said `person`", "Said `none`", "A species named"], [[g["kind"], g["n"], pci(g["right"]), pc(g["person"]), pc(g["none"]), pc(g["named"])] for g in x["rows"]]), ""]
     lrows = []
     for name in sorted(SH, key=lambda k: (k.startswith("val-"), k)):
         if name.startswith("val-"):
@@ -325,6 +390,15 @@ if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
                     "Recommendation until trained heads are measured: TinyCLIP 39M/16, which is ahead on the kind of eye and on the share of photos it can name by more than the intervals, and TinyCLIP 8M/16 only if the download has to stay near 10 MB." % (
                         pci(n39["kind_right"]), pc(n39["named"][0]), pci(n39["named_right"]), pci(n8["kind_right"]), pc(n8["named"][0]), pci(n8["named_right"])))
     T += ["- **The pocket model.** " + txt]
+DEC = load("decision-pocket.json")
+if DEC:
+    d = DEC["deciding_difference"]
+    T += ["- **The pocket model, by the rule set down beforehand** (`tools/eval/decide.py`). %s Compared: the slots `%s` and `%s`, scored through `fuse.py` on the same photos. %s The slot to ship is `%s`, published as the branch `%s`.%s" % (
+        DEC["rule"], DEC["slots_compared"]["tinyclip-39m-16"], DEC["slots_compared"]["tinyclip-8m-16"], DEC["why"], DEC["slot"], DEC["branch"],
+        (" This choice is provisional: it was made %s. `tools/eval/decide.py` makes it again from the trained slots when they exist." % " and ".join(
+            ([("from sentence-made slots, before heads fitted on the training photos were measured")] if DEC["train"] != "alachua-pre2025" else []) +
+            ([("on wildlife photos alone, before both models' vectors of the extra set were published")] if "extra" not in DEC["sets"] else []))) if DEC.get("provisional") else ""), "",
+          table(["Photos", "Measure", "TinyCLIP 39M/16", "TinyCLIP 8M/16", "Paired difference (points)"], [[m_["photos"] + " test", m_["measure"], pc(m_["tinyclip-39m-16"]), pc(m_["tinyclip-8m-16"]), pts(m_["difference"])] for m_ in DEC["measures"]], ["---", "---", "---:", "---:", "---:"]), ""]
 if b2:
     v = b2["labelsets"]["species_sci"]
     t = v["tuned"]
@@ -353,7 +427,9 @@ sv = S2.get("val")
 if not real:
     tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "
           "`bash tools/eval/run.sh ROOT alachua-pre2025` measures them, exports the best head of each model as a slot and scores it as the page would. "
-          "A build-machine run on the branch `run/eval/armed-pocket` waits for the pocket models' training vectors and then does exactly that; `run/eval/armed-all` also waits for BioCLIP 2's. Their results come back under `runs/eval/` on the `ci` branch and the slots go to `pub/heads-alachua-pre2025-<model>`.")
+          "A build-machine run on the branch `run/eval/armed-pocket` waits for the pocket models' training vectors and then does exactly that; `run/eval/armed-all` also waits for BioCLIP 2's. Both then give the extra set's vectors up to forty minutes to appear and go on with what is published. "
+          "Their results come back under `runs/eval/` on the `ci` branch, the slots go to `pub/heads-alachua-pre2025-<model>`, and `docs/eval/decision-pocket.json` in the returned files names the pocket slot to ship. "
+          "The whole path was tried in the evaluation sandbox on made-up vectors of the real size (86,915 training rows in the shape of the open-data manifest, with no GBIF record ids); those numbers mean nothing and are kept nowhere.")
     if sv and "bioclip2-l14" in sv["models"]:
         hs = {h["name"]: h for h in sv["models"]["bioclip2-l14"]["species_heads"]}
         if "sentences" in hs and "prototypes + sentences" in hs:
@@ -378,6 +454,20 @@ for m, ls, claims in FIRST_LOOK:
 T += [table(["Model", "Measure", "First look", "This study", "First look against this study's interval"], rows, ["---", "---", "---:", "---:", "---"]), "",
       "%d of the %d first-look numbers fall inside this study's interval. The first look chose its settings on `val` from a smaller grid and without smoothing choices, so differences of a point with the prior are expected." % (sum(r_[4].startswith("inside") for r_ in rows), len(rows)), ""]
 
+if os.path.exists(os.path.join(D, "others.md")):
+    ours = pci(b2["labelsets"]["species_sci"]["tuned"]["top1"]) if b2 else "–"
+    T += ["## What others publish, and why none of it is a head-to-head comparison", "",
+          "The sources, with quotes, addresses and the day each page was read, are in [`docs/eval/others.md`](eval/others.md). That file was written by hand from the pages it cites. Several of its quotes came through a page-reading tool and are marked there as unchecked against the raw page. In short:", "",
+          "- **iNaturalist tests its own model in a way close to ours and states few figures in words.** For each release it draws \"1,000 random Research Grade observations in each group not seen during training time\" and compares the model's suggestion with the community's species. The newest release found is v2.34 (September 2026, 123,618 taxa); its accuracy appears only in a chart image, which was not read. The latest figure stated in words is \"Overall the average accuracy of 2.20 is 88.7%\" (February 2025). The post does not say whether that figure uses location, whether it counts the first suggestion only, or how the average over groups is taken.",
+          "- **With and without location.** The only such pair of figures found is from 2023: the first suggestion was right for 75% from the photo alone, 83% with the older location grid and 87% with the Geomodel. The post does not describe its test photos. iNaturalist's open code multiplies the vision score by a location score that is floored at 0.005, and does not use the month in what was read. Our prior uses the month's records within one county's list.",
+          "- **Independent tests on photos taken for the purpose give lower and scattered figures.** Six plant apps on 38 species in Ireland: species right at the first attempt for 88% of flower photos and 80% of leaf photos (Pl@ntNet) down to 4% and 7% (the iNaturalist app). Five plant apps on 857 professionally identified images: 69% right with the first suggestion. Tree leaves in New Jersey: iNaturalist right to species for 70%.",
+          "- **Research-grade labels are themselves wrong a few times in a hundred.** iNaturalist's two experiments in 2024 put them at 95% and 97% correct. A difference of a point or two between two models on such labels should be read with that in mind.",
+          "- **BioCLIP 2's own card** gives a zero-shot top-1 of 55.6 averaged over ten benchmarks, with other photos, another list of labels for each benchmark, and no place or season.",
+          "- **Nothing was found** on the accuracy of Seek, on Merlin's photo identifier beyond press figures from 2015 and 2017, or from the makers of Pl@ntNet and Google Lens.", "",
+          "**Why none of this can be set beside our numbers.** Our figure of %s is for one county, a list of %d species, the month known, and an average over photos. iNaturalist's 88.7%% covers more than 100,000 taxa over the whole world and is an average whose construction is not stated. The photos differ, the lists differ and the counting differs. "
+          "The two tests also share a weakness: research-grade photos are the ones people already agreed on, often after seeing iNaturalist's own suggestion, and nobody we found has measured how much easier that makes them. We could not run iNaturalist's model on our test photos, since its vision endpoint is unpublished and needs a token. "
+          "The numbers on this page describe this recognizer on this test. They are no ranking against anyone." % (ours, P["species_in_list"]["1"]), ""]
+
 if CH:
     fails = [c for c in CH["checks"] if c["verdict"] == "FAIL"]
     notes = [c for c in CH["checks"] if c["verdict"] == "note"]
@@ -386,7 +476,7 @@ if CH:
           "`tools/eval/checks.py` ran %d checks: %d passed, %d failed, %d record a fact to know, and %d could not run because a file was not published. The full table is in [`docs/eval/checks.md`](eval/checks.md)." % (
               len(CH["checks"]), sum(c["verdict"] == "pass" for c in CH["checks"]), len(fails), len(notes), len(waits)), ""]
     T += ["- **%s.** %s" % (c["check"][0].upper() + c["check"][1:], c["detail"]) for c in fails + notes + waits] + [""]
-    T += ["What the checks cover: the dates of the photos against the species list's cutoff and against the snapshot behind BioCLIP 2's training data; that no id, observation or photo address repeats; that the split follows from the record id alone; that every vector file has the manifest's 6,000 ids in order; that label rows follow the species list; that no test photo has a copy on `val`; and, once the training manifest exists, that it shares no record, observation or photo with the evaluation set. "
+    T += ["What the checks cover: the dates of the photos against the species list's cutoff and against the snapshot behind BioCLIP 2's training data; that no id, observation or photo address repeats; that the split follows from the record id alone; that every vector file has the manifest's 6,000 ids in order; that label rows follow the species list; that no test photo has a copy on `val`; once the training manifest exists, that it shares no record, observation or photo number with the evaluation set and that no training photo is dated after 2024 (a manifest built from iNaturalist's open-data files carries no GBIF record id, so there the dates and the photo numbers do the work); and for the extra set, that COCO's training and validation photos stay on their own sides and that the vectors line up with the manifest. "
           "The image vectors are made from the photo file alone: `tools/lab/lab.py` (`embed_rows`) reads only the row id to find the file.", ""]
 
 T += ["## What this does not show", "",
@@ -395,7 +485,9 @@ T += ["## What this does not show", "",
       "- **One region.** Every number is for Alachua County and for a list of its own species. A longer list, or a place with fewer records, will give lower numbers.",
       "- **The labels follow GBIF's names.** Where GBIF and iNaturalist split or name a species differently, a photo is counted against GBIF's species.",
       "- **Nothing here compares with iNaturalist's own model.** We cannot run it, and its published accuracy figures are measured on other photos with other rules. No sentence in the app may say or suggest that this recognizer matches it.",
-      "- **People, pets and photos with nothing alive in them are missing from the evaluation set.** How often a person is called a person is unmeasured here.",
+      ("- **People, pets, livestock and rooms are measured on COCO photos only.** They are well-lit photos from a general data set, with the subject large in the frame for people. A phone held at a blank wall, a hand, a toy animal, a painting of a bird or a screen showing a heron is in neither set, and neither is a person standing in a garden, where two answers are defensible."
+       if any((v["numbers"].get("kind") or {}).get("test_extra") for v in SH.values()) else
+       "- **People, pets and photos with nothing alive in them are unmeasured so far.** The extra set of COCO photos exists and the scripts tune and report with it, but no model's vectors of it were published when this report was written. How often a person is called a person is unmeasured here."),
       "- **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured in the section on what the page would show.", ""]
 
 TRIAL = ""
@@ -417,6 +509,13 @@ if os.path.exists(rp):
           "The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared with the files committed here by `tools/eval/compare.py` (%s). "
           "%d numbers in %d files were compared; %s. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt).%s" % (
               head.lstrip("# ").rstrip(".") or "see the file", n_num, len(files), ("%s of them differ by more than 0.0005" % last.rsplit(":", 1)[1].strip()) if last else "see the file", TRIAL), ""]
+    r4 = os.path.join(D, "reproduction-r4.txt")
+    if os.path.exists(r4):
+        l4 = open(r4, encoding="utf-8").read().strip().splitlines()
+        T += ["A second rerun covers the files written since the kind decision was changed to include the extra set (%s): %s. It is kept in [`docs/eval/reproduction-r4.txt`](eval/reproduction-r4.txt)." % (
+            next((l for l in l4 if l.startswith("#")), "").lstrip("# ").rstrip("."), next((l for l in l4 if l.startswith("numbers that differ")), "see the file")), ""]
+    else:
+        T += ["That rerun is older than the present Study 2 and as-shipped files, which were written after the kind decision was changed to include the extra set and to set `kind_at`. Those files have not been confirmed on a clean machine. Every push to a `run/eval/` branch reruns them and returns `compare.txt` under `runs/eval/` on the `ci` branch.", ""]
 
 T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 1, Study 2, export, as-shipped scoring, this report):", "", "```",
       "bash tools/eval/run.sh ROOT sentences          # slots made from sentence rows",

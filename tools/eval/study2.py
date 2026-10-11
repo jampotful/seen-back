@@ -23,7 +23,7 @@ unit image vector. The heads:
   mapped to BioCLIP 2     a ridge regression from this model's vectors to BioCLIP 2's, folded into BioCLIP 2's label rows
 With --save the best head of each model is written to <dir>/<model>.npz for tools/eval/export_heads.py.
 """
-import argparse, hashlib, json, os, sys, time
+import argparse, gc, hashlib, json, os, sys, time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -57,8 +57,10 @@ def fit_set(root, model, mode):
     if X is None:
         return None
     by = {r["id"]: r for r in ev.read_manifest(root, "train/" + mode)}
-    y = np.array([ES.key2i.get(int(by[i]["key"]), -1) for i in tid])
-    eyes = np.array([by[i]["eyes"] for i in tid])
+    # a vector whose id the manifest does not hold, or whose species is not in the list, is left out of every fit (y = -1);
+    # the kind of eye is the species list's, whatever the manifest's own column says
+    y = np.array([ES.key2i.get(int(by[i]["key"]), -1) if i in by and by[i]["key"].strip().isdigit() else -1 for i in tid])
+    eyes = np.where(y >= 0, ES.sp_eyes[np.maximum(y, 0)], "")
     return ES, X, y, eyes, ES.val.copy(), tid, "images/" + mode
 
 
@@ -152,6 +154,8 @@ def run_model(root, model, mode, save):
     fitted = X is not None
     if fitted:
         ok = ytr >= 0
+        if not ok.all():
+            log("  %d of %d fitting vectors are left out: their id is not in the manifest or their species is not in the list" % (int((~ok).sum()), len(ok)))
         X, ytr, eyes_tr = X[ok], ytr[ok], eyes_tr[ok]
     S = len(ES.species)
     tv = ev.EVALSET + ".wasm-int8-per-channel"
@@ -178,6 +182,7 @@ def run_model(root, model, mode, save):
     if texts:
         heads["sentences"] = [(ls, T_, zero) for ls, T_ in texts.items()]
     cnt = np.zeros(S, int)
+    L = dm = Pr = Tb = None
     if fitted:
         # prototypes
         have = np.zeros(S, bool)
@@ -231,6 +236,7 @@ def run_model(root, model, mode, save):
                 res["notes"].append("The map into BioCLIP 2's space was fitted on %d pairs of vectors of the same photos." % len(pair_x))
             else:
                 res["notes"].append("The map into BioCLIP 2's space could not be fitted: BioCLIP 2's vectors of the fitting photos are not published yet.")
+            Eb = pair_x = pair_y = Sb = None                             # the large model's vectors are not needed again
 
     ntr = cnt[np.maximum(yt, 0)] * (yt >= 0)
     chosen, table_cols, table_hits = None, [], []
@@ -260,6 +266,9 @@ def run_model(root, model, mode, save):
         if chosen is None or acc1 > chosen["tune"]:
             chosen = {"tune": acc1, "name": name, "label": label, "rows": rows * np.float32(s), "bias": np.where(keep_rows, bias * np.float32(s), NEG).astype(np.float32),
                       "alpha": float(rho * s), "smooth": SMOOTH[si], "Zt": Zt, "Zu": Zu0, "rho": rho, "s": s, "si": si, "keep": keep_rows, "hit": r1 == 0, "raw": (rows, bias)}
+    heads.clear()                                                        # the candidates are large; only the chosen head is needed from here on
+    cands = L = dm = Pr = Tb = texts = None
+    gc.collect()
     res["by_train_photos"] = {"heads": table_cols, "rows": [{"group": g, "n": int(((ntr >= lo) & (ntr <= hi)).sum()), "top1": [round(float(hh[(ntr >= lo) & (ntr <= hi)].mean()), 4) if ((ntr >= lo) & (ntr <= hi)).any() else None for hh in table_hits]} for g, lo, hi in TRAIN_BINS]}
     res["chosen_species_head"] = {"name": chosen["name"], "choice": chosen["label"], "tuning_top1": round(chosen["tune"], 4)}
 

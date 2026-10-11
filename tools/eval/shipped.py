@@ -280,7 +280,15 @@ if "table_extra" in kd_:
 outcomes = [{"what": "a species name", "share": num["named"][0], "right": "the name is right for %s; the kind for %s" % (pci(num["named_right"]), pci(num["named_kind_right"]))},
             {"what": "three species to choose from", "share": num["offered"][0], "right": "the three hold the species for %s; the kind is right for %s" % (pci(num["offered_holds_species"]), pci(num["offered_kind_right"]))},
             {"what": "a kind of eye only", "share": num["kind_only"][0], "right": "the kind is right for %s" % pci(num["kind_only_kind_right"])}]
+# one character a photo, in the order of the vectors, so that two slots scored on the same photos can be compared photo by photo (tools/eval/decide.py)
+bits = lambda v: "".join("1" if x else "0" for x in v)
+sha = lambda ids_: hashlib.sha256("\n".join(ids_).encode()).hexdigest()
+per_photo = {"wildlife": {"ids_sha256": sha([ids[i] for i in idx]), "kind_right": bits(kind_right), "asserted_right": bits(kind_right & sure), "asserted_wrong": bits(~kind_right & sure), "named": bits(is_named), "named_right": bits(named_right)}}
+if xtest is not None:
+    per_photo["extra"] = {"ids_sha256": sha(XT["test"]["ids"]), "kind_right": bits(xs == xe), "asserted_right": bits((xs == xe) & xsure), "asserted_wrong": bits((xs != xe) & xsure), "named": bits(xn)}
 out = {"made_by": "tools/eval/shipped.py", "slot": name, "manifest": {k: man[k] for k in ("id", "fusion", "evaluation", "needs") if k in man}, "numbers": num, "text": text, "outcomes": outcomes, "extra": extra}
+if not a.limit:
+    out["per_photo"] = per_photo
 print(text)
 for o in outcomes:
     print("  %-30s %5.1f%%  %s" % (o["what"], 100 * (o["share"] or 0), o["right"]))

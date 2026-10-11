@@ -182,14 +182,16 @@ if os.path.exists(tp):
         "%d of %d training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before %s while every evaluation row is dated after it, so no observation can be on both sides." % (num_obs, len(train), through))
     dup = len(train) - len({r["photo_url"] for r in train})
     add("no training photo appears twice", "pass" if not dup else "FAIL", "%d repeated photo addresses in %d rows" % (dup, len(train)))
-    eyes_bad = sum(r["eyes"] != key2s[int(r["key"])]["eyes"] for r in train if r["key"] and int(r["key"]) in key2s)
-    add("the kind of eye of every training row is the species list's", "pass" if not eyes_bad else "FAIL", "%d rows disagree" % eyes_bad)
+    eyes_bad = sum(r["eyes"] != key2s[int(r["key"])]["eyes"] for r in train if r["key"].strip().isdigit() and int(r["key"]) in key2s)
+    add("the kind of eye of every training row is the species list's", "pass" if not eyes_bad else "note", "%d rows disagree (the studies take the kind from the species list by the row's species key)" % eyes_bad)
     per = {}
+    nokey = sum(not r["key"].strip().isdigit() for r in train)
     for r in train:
-        per[r["key"]] = per.get(r["key"], 0) + 1
+        if r["key"].strip().isdigit():
+            per[r["key"]] = per.get(r["key"], 0) + 1
     notin = sum(int(k) not in key2s for k in per)
-    add("training photos per species", "note", "%d photos of %d species (most for one species: %d); species keys outside the list: %d; list species without a training photo: %d" % (
-        len(train), len(per), max(per.values()), notin, len(set(keys) - {int(k) for k in per})))
+    add("training photos per species", "note" if not nokey else "FAIL", "%d photos of %d species (most for one species: %d); rows without a species key: %d; species keys outside the list: %d; list species without a training photo: %d" % (
+        len(train), len(per), max(per.values()), nokey, notin, len(set(keys) - {int(k) for k in per})))
     for model in sorted(os.listdir(os.path.join(root, "lab"))):
         p = os.path.join(root, "lab", model, "images", "alachua-pre2025")
         if os.path.exists(p + ".f16.npy"):

@@ -82,7 +82,7 @@ def balanced(right_w, right_x=None, eyes_x=None):
     return 0.5 * (a + c), a, c
 
 
-def level(conf, hit, floor, least=30):
+def level(conf, hit, floor, least=100):
     """The lowest level from which every higher level keeps the share right at or above `floor`, for one set of photos;
     None when even the highest levels with at least `least` photos fall short."""
     good = None
