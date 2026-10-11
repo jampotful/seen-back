@@ -88,7 +88,8 @@ async function meet(page, name) {
   await ctl('reset=1');
   const month = new Date().getMonth();
   // one check failing to finish must not hide the others
-  const section = async (name, fn) => { try { await fn(); } catch (e) { done(name + ' (did not finish)', { error: String(e && e.message || e).split('\n')[0] }, false); await ctl('reset=1'); } };
+  let sofar = null;     // what a long check had gathered when it stopped, so that the place can be found
+  const section = async (name, fn) => { sofar = null; try { await fn(); } catch (e) { done(name + ' (did not finish)', { error: String(e && e.stack || e).split('\n').slice(0, 4).join(' | '), sofar }, false); await ctl('reset=1'); } };
 
   // ---------- helpers for the line on the picture, the record and the sheet that asks for a name
   const until = async (fn, ms) => { const t0 = Date.now(); while (!fn()) { if (Date.now() - t0 > (ms || 15000)) throw new Error('waited too long'); await new Promise((res) => setTimeout(res, 50)); } };
@@ -559,17 +560,17 @@ async function meet(page, name) {
   const largeAfter = (page, at) => page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !window.__seenBack.S.svc; }, at, { timeout: 30000 });
   const offered = async (page) => { await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); await page.waitForSelector('#svcView', { state: 'visible', timeout: 8000 }); return text(page, 'svcView'); };
   const getIt = async (page) => { await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.locator('#bigYes').tap(); };
-  const toAbout = async (page) => { if ((await st(page)).screen === 'askView') await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
+  const toAbout = async (page) => { if ((await st(page)).eyes) await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); if ((await st(page)).screen === 'askView') await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
     if (!(await page.evaluate(() => document.getElementById('about').open))) await page.locator('#about summary').tap(); await page.waitForTimeout(350); await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); };
 
   if (want.includes('large')) await section('large', async () => {    // consent, progress, a reload mid-way, stopping, deleting; the answer in the background; another kind offered, never taken; failures in words
-    const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
+    const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; sofar = r; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
     const MB = Math.max(1, Math.round(JSON.parse(fs.readFileSync(path.join(here, 'models', 'standin-big', 'manifest.json'), 'utf8')).vision.bytes / 1e6));
     const E = (name) => expect.big[name][month];
     { // no such model: the feature does not exist, and nothing mentions it
       await ctl('reset=1'); const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=test/rec/nowhere'); await ready(page); await begin(page);
       const s = await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(500);
-      r.absent = { eyes: s.eyes, line: await svcLine(page), asked: (await ctl('log=1')).filter((x) => /nowhere/.test(x)).length }; await toAbout(page);
+      r.absent = { eyes: s.eyes, line: await svcLine(page), asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /nowhere/.test(x)).length }; await toAbout(page);
       r.absent.aboutMentionsIt = await page.locator('#bigBox').isVisible(); r.absent.errors = errors;
       all('absent', s.eyes === 'insect' && r.absent.line === '' && r.absent.asked === 1 && !r.absent.aboutMentionsIt && !errors.length); await ctx.close();
     }
@@ -577,7 +578,7 @@ async function meet(page, name) {
       await ctl('reset=1'); await bctl('reset=1');
       const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page);
       const d = await page.evaluate(() => (matchMedia('(pointer: coarse)').matches ? 'phone' : 'computer')); r.device = d;
-      const before = (await ctl('log=1')).filter((x) => /standin-big/.test(x)).length;
+      const before = (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin-big/.test(x)).length;
       const s = await meet(page, 'stripes.png');
       r.offer = { manifestAskedBeforeAPhoto: before, eyesAtOnce: s.eyes, shown: s.shown, line: await offered(page), partsAsked: (await partsAsked()).length };
       await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
@@ -626,7 +627,7 @@ async function meet(page, name) {
       // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
       await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page);
       const s1 = await meet(page, 'stripes.png'); await byLarge(page); await page.waitForTimeout(150);
-      r.named = { atOnce: s1.eyes + '|' + s1.shown, after: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), line: await svcLine(page), record: await recordRows(page),
+      r.named = { atOnce: s1.eyes + '|' + s1.last.kind + '|' + (s1.last.top && s1.last.top[0]) + '|' + s1.last.offers.length, small: await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return l.kind + '|' + (l.named ? l.named.en : 'no name') + '|' + l.offers.length; }), after: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), line: await svcLine(page), record: await recordRows(page),
         overlay: await page.evaluate(() => (document.getElementById('reveal').classList.contains('show') ? document.getElementById('rvName').textContent : '(gone)')), last: (await bigNow(page)).last, reference: E('stripes.png') };
       await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {});
       await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 });
@@ -639,7 +640,7 @@ async function meet(page, name) {
       await page.locator('#about summary').tap(); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await page.locator('#recordClose').tap();
-      all('named', r.named.atOnce === 'insect|Insect' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.join(' / ') === 'Looking more closely. / The larger model says Monarch.'
+      all('named', s1.eyes === 'insect' && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
         && r.named.line === 'The larger model says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
         && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by a larger model, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
         && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by a larger model$/.test(r.named.rows[0]));
@@ -658,11 +659,11 @@ async function meet(page, name) {
       const s3 = await meet(page, 'small.png'); await largeAfter(page, at); await page.waitForTimeout(150); const a3 = await st(page);
       r.unsure = { state: a3.eyes + '|' + a3.named.common + '|' + a3.named.by, line: await svcLine(page), last: (await bigNow(page)).last, reference: E('small.png') };
       at = r.unsure.last.at; await meet(page, 'portrait.jpg'); await page.waitForTimeout(900); r.person = { eyes: (await st(page)).eyes, asked: (await bigNow(page)).last.at !== at };
-      const s5 = await meet(page, 'heron.png'); await byLarge(page); r.heron = { atOnce: s5.named.by + '|' + s5.shown, after: (await st(page)).named.common + '|' + (await st(page)).named.by };
+      const s5 = await meet(page, 'heron.png'); await byLarge(page); r.heron = { small: await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return l.named && l.named.en; }), after: (await st(page)).named.common + '|' + (await st(page)).named.by };
       r.askedOfServers = { parts: (await partsAsked()).length, photos: (await ctl('log=1')).filter((x) => !/^test\/rec\/photos|^test\/assets/.test(x) && !/^index\.html/.test(x)) };
       all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
       all('person', r.person.eyes === 'person' && !r.person.asked);
-      all('heron', r.heron.atOnce === 'page|Great Blue Heron' && r.heron.after === 'Great Blue Heron|device-large');
+      all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'Great Blue Heron|device-large');
       all('nothingAsked', r.askedOfServers.parts === 0 && r.askedOfServers.photos.length === 0);
       // a minute with nothing to do (shortened here): its worker is let go, and the next photo starts it again
       await page.evaluate(() => window.__seenBack.big.test.idle(300)); await page.waitForFunction(() => !window.__seenBack.big.test.running(), null, { timeout: 8000 });

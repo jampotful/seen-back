@@ -424,8 +424,10 @@
     return '';
   }
   function getLine() {
-    var z = large.size();
-    return z && large.has() === 'partial' ? 'The larger model is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'A larger model can name the species on this ' + dev() + '. Get it?';
+    var z = large.size(), h = large.has();
+    // it had arrived whole and is not here now (the browser cleared it away, or the model was replaced by a newer one): said as it is
+    if (bigChoice() === 'kept' && h !== 'kept') return 'The larger model is no longer on this ' + dev() + '. Get it again?';
+    return z && h === 'partial' ? 'The larger model is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'A larger model can name the species on this ' + dev() + '. Get it?';
   }
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
@@ -615,8 +617,7 @@
   function resumeBig() {
     var ch = bigChoice(); if (inViewer || (ch !== 'yes' && ch !== 'kept')) return;
     large.survey().then(function (h) {
-      if (h === 'none' || h === 'kept' || h === 'getting') return;
-      if (ch === 'kept') { setBigChoice(''); return; }
+      if (h === 'none' || h === 'kept' || h === 'getting' || ch === 'kept') return;     // 'kept' and gone: the next photo's line says so, and asks
       if (!netSays() && navigator.onLine !== false) startBig(); else setBigChoice('');
     });
   }
