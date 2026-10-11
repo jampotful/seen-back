@@ -1,0 +1,232 @@
+
+=== 02:49:10 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.12.10
+
+=== 02:49:11 build
+build 6 | index.html 183069 bytes | artifact 180491 bytes
+build ok
+
+=== 02:49:11 iPhone simulator: boot it now, it takes a while
+iPhone 17: 88931AEA-62E6-447F-8697-DCE00A671384
+
+=== 02:49:20 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+python 1.31.0 12.3.0 2.5.4
+total 153616
+drwxr-xr-x  8 runner  wheel       256 Oct 11 02:53 .
+drwxr-xr-x  8 runner  wheel       256 Oct 11 02:53 ..
+-rw-r--r--  1 runner  wheel      8822 Oct 11 02:53 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 576765
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.3649], ['plant', 0.2287], ['deer', 0.1062]]
+  python: asset-portrait.jpg [['person', 0.9391], ['none', 0.0363], ['other', 0.0087]]
+  python: big12mp.jpg [['none', 0.3967], ['plant', 0.1959], ['frog', 0.0999]]
+  python: dots.png [['none', 0.8679], ['plant', 0.0578], ['person', 0.0453]]
+  python: garden.jpg [['none', 0.3292], ['plant', 0.2174], ['deer', 0.1221]]
+  python: heron.png [['wader', 0.6513], ['bird', 0.2546], ['hawk', 0.0488]]
+  python: info-exif6.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: odd.png [['none', 0.8681], ['plant', 0.0415], ['other', 0.0256]]
+  python: portrait.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: rings.png [['other', 0.2688], ['none', 0.2334], ['plant', 0.2143]]
+  python: small.png [['plant', 0.6989], ['other', 0.082], ['bird', 0.0618]]
+  python: stripes.png [['none', 0.7913], ['plant', 0.0713], ['other', 0.047]]
+  python: wall.png [['none', 0.9664], ['person', 0.0153], ['plant', 0.0049]]
+  python: wide.png [['none', 0.2437], ['plant', 0.2288], ['rabbit', 0.1381]]
+
+=== 02:53:20 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 02:54:26 playwright 1.56.0 and WebKit
+added 2 packages in 12s
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 02:55:01 check_rec.js, every check, stand-in model: webkit (macOS)
+check_rec webkit: exit 1 in 194 s
+flow (did not finish): FAILED | fuse (did not finish): FAILED | parity (did not finish): FAILED | progress (did not finish): FAILED | offline (did not finish): FAILED | missing (did not finish): FAILED | damaged (did not finish): FAILED | dying (did not finish): FAILED | about (did not finish): FAILED | viewer: ok
+ci/engines/macos.sh: line 41:  6505 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 02:58:15 check_rec.js again, every check, with locator.tap() made a click (ci/engines/pwshim): webkit (macOS)
+check_rec webkit (tap as click): exit 1 in 190 s
+flow (did not finish): FAILED | fuse (did not finish): FAILED | parity (did not finish): FAILED | progress (did not finish): FAILED | offline (did not finish): FAILED | missing (did not finish): FAILED | damaged (did not finish): FAILED | dying (did not finish): FAILED | about (did not finish): FAILED | viewer: ok
+ci/engines/macos.sh: line 45: 10506 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 03:01:25 check_rec.js parity, real slot: webkit (macOS)
+parity (real) webkit: exit 1 in 23 s
+parity (did not finish): FAILED
+ci/engines/macos.sh: line 48: 14451 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 03:01:48 check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: webkit (macOS)
+patch applied
+ci/engines/macos.sh: line 52: 15047 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+parity (real, patched) webkit: exit 1
+parity (did not finish): FAILED
+
+=== 03:02:06 rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: webkit (macOS)
+probe: exit 0
+{
+ "engine": "webkit",
+ "version": "26.0",
+ "firstReady": [
+  [
+   71,
+   {
+    "state": "idle",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1384,
+   {
+    "state": "loading",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 15165296
+   }
+  ],
+  [
+   2245,
+   {
+    "state": "ready",
+    "why": "",
+    "fail": "",
+    "loadMs": 997,
+    "got": 15165296
+   }
+  ]
+ ],
+ "controlled": true,
+ "kept": [
+  "vendor/rec-worker.js?v=6",
+  "vendor/ort/ort.wasm.min.js?v=1.30.0",
+  "vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+  "test/rec/models/standin/manifest.json",
+  "vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+  "test/rec/models/standin/kinds.f16.bin?v=d5076a98b3c84be8",
+  "test/rec/models/standin/vision.int8.onnx?v=d5076a98b3c84be8",
+  "test/rec/models/standin/species.json?v=d5076a98b3c84be8",
+  "test/rec/models/standin/species.f16.bin?v=d5076a98b3c84be8"
+ ],
+ "swKept": {
+  "shell-6": 7,
+  "keep-v1": 9
+ },
+ "offline": {
+  "loaded": true,
+  "controlled": true,
+  "timeline": [
+   [
+    25,
+    {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "loadMs": 1722,
+     "got": 0
+    }
+   ]
+  ],
+  "asked": [
+   "index.html",
+   "manifest.webmanifest",
+   "sw.js",
+   "test/rec/models/standin/manifest.json"
+  ]
+ },
+ "keptBad": [
+  [
+   103,
+   {
+    "state": "idle",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1414,
+   {
+    "state": "loading",
+    "why": "",
+    "fail": "",
+    "loadMs": 0,
+    "got": 0
+   }
+  ],
+  [
+   1669,
+   {
+    "state": "failed",
+    "why": "damaged",
+    "fail": "damaged: session Error Can't create a session. ERROR_CODE: 7, ERROR_MESSAGE: Failed to load model because protobuf parsing failed.",
+    "loadMs": 0,
+    "got": 0
+   }
+  ]
+ ],
+ "errors": []
+}
+ci/engines/macos.sh: line 55: 15974 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 03:02:25 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+03:03:05 webkit-phone 26.0 done=true ok=false fails=3 checks=142 webgl2=true float=true Apple GPU 39479ms
+03:03:55 webkit-desktop 26.0 done=true ok=true fails=0 checks=142 webgl2=true float=true Apple GPU 50181ms
+
+=== 03:03:56 self-test with the recognizer phase: real Safari through safaridriver
+safaridriver --enable: exit 0
+03:04:08 session 72789552-84D5-48A4-8EAC-73F484C22ED1 26.6.2
+03:04:57 safari 26.6.2 done=true ok=false fails=1 Apple GPU
+safari.js: exit 0
+ci/engines/macos.sh: line 65: 19506 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 03:04:58 iPhone simulator: Safari opens the self-test with the recognizer phase and posts its report
+Device already booted, nothing to do.
+
+openurl: exit 0
+report arrived after 30 s
+iphone-01.json iphone-02.json iphone-03.json iphone-04.json iphone-05.json iphone.json safari-desktop-01.json safari-desktop-02.json safari-desktop-03.json safari-desktop-04.json safari-desktop-05.json safari-desktop.json webkit-desktop-01.json webkit-desktop-02.json webkit-desktop-03.json webkit-desktop-04.json webkit-desktop-05.json webkit-desktop.json webkit-phone-01.json webkit-phone-02.json webkit-phone-03.json webkit-phone-04.json webkit-phone-05.json webkit-phone.json 
+
+=== 03:10:09 summary
+safari desktop done True ok False fails 1 webgl2 True float True Apple GPU
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok False fails 3 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone-05.json', 'iphone.json']
+
+=== 03:10:09 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 30 total bytes: 989718
+1.1M	/Users/runner/work/seen-back/seen-back/out
