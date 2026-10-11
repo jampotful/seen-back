@@ -1773,7 +1773,7 @@ button { cursor: pointer; }
     }
     function run(eye, kind, ms) {
       return new Promise(function (done) {
-        var P = paramsOf(EYES[eye]), t0 = null, last = 0, dts = [], cpu = [], n = 0, fresh = 0, w0 = null, wLast = 0, wGot = 0, errAny = 0;
+        var P = paramsOf(EYES[eye]), t0 = null, last = 0, dts = [], cpu = [], n = 0, fresh = 0, w0 = null, wGot = 0, errAny = 0;
         function step(now) {
           if (t0 === null) t0 = now;
           var c0 = performance.now();
@@ -1782,17 +1782,15 @@ button { cursor: pointer; }
             var isNew = vid.requestVideoFrameCallback ? freshV : vid.currentTime !== lastVT;
             if (isNew || fresh === 0) { freshV = false; lastVT = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now); fresh++; }
           }
-          if (fresh) {                        // state() also reads (and clears) the GL error flag, so the first error is kept here
-            var s0 = engine.state(), wn = s0.writes; if (s0.err && !errAny) errAny = s0.err;
-            if (w0 === null) w0 = wn; else if (wn < wLast) w0 = wn - wGot;   // a change of size starts the ring again
-            wGot = wn - w0; wLast = wn;
-          }
+          // state() reads the GL error flag, which waits for the graphics chip, so it is read only after the first frame
+          // (where a change of size starts the ring again) and at the end; an error flag stays set until it is read
+          if (fresh && w0 === null) { var s0 = engine.state(); w0 = s0.writes; errAny = s0.err; }
           engine.draw(P, STEADY, now, last ? Math.min(100, now - last) : 16);
           cpu.push(performance.now() - c0);
           if (last) dts.push(now - last);
           last = now; n++;
           if ((now - t0 < ms || n < 3) && now - t0 < 2500) { requestAnimationFrame(step); return; }
-          var st = engine.state(), d = dts.slice(1), c = cpu.slice(1);
+          var st = engine.state(), d = dts.slice(1), c = cpu.slice(1); wGot = w0 === null ? 0 : st.writes - w0;
           function mean(a) { if (!a.length) return null; var s = 0; a.forEach(function (v) { s += v; }); return Math.round(s / a.length * 10) / 10; }
           function worst(a) { return a.length ? Math.round(Math.max.apply(null, a) * 10) / 10 : null; }
           done({ frames: n, fresh: fresh, writes: wGot, err: errAny || st.err, ms: mean(d), worst: worst(d), cpu: mean(c), cpuWorst: worst(c), first: dts.length ? Math.round(dts[0]) : null, size: canvas.width + 'x' + canvas.height, ring: st.sw + 'x' + st.sh });
