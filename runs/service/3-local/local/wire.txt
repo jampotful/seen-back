@@ -1,0 +1,31 @@
+Exchanges exactly as made and received (photo strings shortened)
+
+### a photo
+> POST http://127.0.0.1:7860/gradio_api/call/identify
+> Origin: https://jampotful.github.io
+> Content-Type: application/json
+> {"data": ["/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BS...(182164 characters)", 1, "us-fl-alachua", 5]}
+< 200 {"content-length": "47", "content-type": "application/json", "access-control-allow-credentials": "true", "access-control-allow-origin": "https://jampotful.github.io", "vary": "Origin"}
+< {"event_id":"012579da8f8c42f28d24ce635cd83399"}
+
+> GET http://127.0.0.1:7860/gradio_api/call/identify/012579da8f8c42f28d24ce635cd83399
+> Origin: https://jampotful.github.io
+> Accept: text/event-stream
+< 200 {"content-type": "text/event-stream; charset=utf-8", "access-control-allow-credentials": "true", "access-control-allow-origin": "https://jampotful.github.io", "vary": "Origin"}
+event: complete
+data: [{"model": "bioclip2-l14", "region": "us-fl-alachua", "ms": 1261, "species": [{"key": 1707399, "sci": "Schistocerca rubiginosa", "en": "Rusty Bird Grasshopper", "eyes": "insect", "p": 0.4639}, {"key": 1707282, "sci": "Schistocerca americana", "en": "American Bird Grasshopper", "eyes": "insect", "p": 0.3302}, {"key": 1707408, "sci": "Schistocerca ceratiola", "en": "Rosemary Grasshopper", "eyes": "insect", "p": 0.1522}, {"key": 1707293, "sci": "Schistocerca serialis", "en": "Cuban bird grasshopper", "eyes": "insect", "p": 0.0468}, {"key": 1707404, "sci": "Schistocerca alutacea", "en": "Leather-colored Bird Grasshopper", "eyes": "insect", "p": 0.0044}], "kinds": [{"key": "insect", "p": 0.9999}], "device": "cpu", "provisional": true}]
+
+### a refusal (not_image)
+> POST http://127.0.0.1:7860/gradio_api/call/identify
+> Origin: https://jampotful.github.io
+> Content-Type: application/json
+> {"data": ["dGhpcyBpcyBub3QgYSBwaG90b2dyYXBoLCBvbmx5IHdvcmRz", 5, "us-fl-alachua", 5]}
+< 200 {"content-length": "47", "content-type": "application/json", "access-control-allow-credentials": "true", "access-control-allow-origin": "https://jampotful.github.io", "vary": "Origin"}
+< {"event_id":"5264a1158d0d445a96c3d52dc3a583eb"}
+
+> GET http://127.0.0.1:7860/gradio_api/call/identify/5264a1158d0d445a96c3d52dc3a583eb
+> Origin: https://jampotful.github.io
+> Accept: text/event-stream
+< 200 {"content-type": "text/event-stream; charset=utf-8", "access-control-allow-credentials": "true", "access-control-allow-origin": "https://jampotful.github.io", "vary": "Origin"}
+event: complete
+data: [{"error": "The photo could not be opened as an image.", "code": "not_image", "ms": 0}]
