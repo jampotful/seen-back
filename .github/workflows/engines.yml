@@ -5,6 +5,9 @@ name: engines
 #  - macos: the same in Playwright's WebKit, then the self-test in real Safari (safaridriver) and in Safari on an iPhone simulator
 # Push to run/engines/live (or run/engines/live-<anything>) instead to check only the live address, https://jampotful.github.io/seen-back/;
 # push to run/engines/mac-<anything> to run only the macOS job, or to run/engines/linux-<anything> for only the Linux jobs.
+# run/engines/mac-39<anything>: the macOS job runs only the self-test with the shipped slot (models/pocket) in WebKit, Safari and the simulator;
+# run/engines/mac-thr<anything> and run/engines/linux-thr<anything>: only the threads experiment (ci/engines/threads.sh), which every
+# other macOS-less Linux run also does at its end.
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
@@ -59,7 +62,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: the live address in Chromium and WebKit
+      - name: the live address in Chromium, Firefox and WebKit
         run: bash ci/engines/live.sh
       - name: return results
         if: always()

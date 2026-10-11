@@ -56,14 +56,17 @@ self.addEventListener('fetch', (event) => {
       });
       const keptCopy = () => c.match(req, { ignoreVary: true }).then((hit) => hit || caches.match(req, { ignoreVary: true }));   // the typeface may be in the shell's store
       if (fixed) return keptCopy().then((hit) => hit || fromNet());
-      return fromNet().catch(() => keptCopy().then((hit) => hit || Response.error()));
+      // a server or a proxy in the way answering 5xx is no better than no network: the kept copy, where there is one
+      return fromNet().then((res) => res.status >= 500 ? keptCopy().then((hit) => hit || res) : res, () => keptCopy().then((hit) => hit || Response.error()));
     }, () => fetch(req)));                                         // the store will not open: the network as it is, and the page looks for kept copies by itself
     return;
   }
+  const kept = () => caches.match(req, { ignoreSearch: true, ignoreVary: true }).then((hit) => hit || caches.match('index.html', { ignoreVary: true }));
   event.respondWith(                                               // the page: the network first, the kept copy when there is none
     fetch(req).then((res) => {
       if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
+      if (res.status >= 500) return kept().then((hit) => hit || res);   // a 5xx (WebKit hands a proxy's 502 over as an answer) is treated as no network
       return res;
-    }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html')))
+    }).catch(kept)
   );
 });

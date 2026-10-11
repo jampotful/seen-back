@@ -44,36 +44,67 @@
    "person",
    "other",
    "none"
+  ],
+  "made_from": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "bias": [
+   0.86921,
+   0.19907,
+   -1.12066,
+   2.11914,
+   -0.71764,
+   -0.82835,
+   -0.76561,
+   1.14594,
+   -0.90951,
+   -0.81436,
+   -1.61845,
+   -1.48294,
+   -0.32251,
+   -0.49864,
+   2.50409,
+   -0.51286,
+   2.76685
   ]
  },
  "species": {
   "url": "species.f16.bin",
   "table": "species.json",
-  "count": 5911
+  "count": 5911,
+  "bias_url": "species.bias.f32.bin"
  },
  "fusion": {
-  "t_kind": 100.0,
+  "t_kind": 0.5,
   "t_species": 100.0,
   "alpha_prior": 1.0,
-  "w_kind": 0.3,
-  "rule": "product",
-  "name_at": 0.4,
-  "offer_at": 0.53,
-  "prior_floor": 1e-06
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.9,
+  "offer_at": 0.94,
+  "prior_floor": 1e-06,
+  "kind_at": 0.5
  },
- "fusion_note": "Interim settings, 11 October 2026. The exported settings (rule mix, t_kind 20, w_kind 0.5) were tuned on wildlife photos alone and called a photo of a person or of a coffee cup a plant. These settings (rule product, t_kind 100, w_kind 0.3) were chosen by tools/eval/interim.py so that 13 of 15 local photos of people, objects, a cat and plants come out right, while the kind of eye stays right on 0.8365 of the 4,197 test photos (0.8394 under the exported settings) and a species is named for 0.152 of them, correctly for 0.934 of those. A head trained with photos of people and of nothing alive replaces this.",
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on the third of val kept for tuning by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
  "evaluation": {
   "model": "tinyclip-39m-16",
-  "head": "sentences",
-  "choice": "species_com",
-  "train": "sentences",
-  "train_vectors": "none (sentence rows only)",
+  "head": "prototypes + sentences",
+  "choice": "species_taxon_com, beta 8, bias for species without photos 0.8",
+  "train": "val",
+  "train_vectors": "images/alachua-2025 (two thirds of val)",
   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
-  "tuned_on": "val",
+  "tuned_on": "the third of val kept for tuning",
   "prior_smoothing": {
-   "lam": 2.0,
-   "c": 1.0
-  }
+   "lam": 0.0,
+   "c": 0.1
+  },
+  "kind_head": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+  "kind_tuned_with_extra_set": true
  },
- "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never"
+ "needs": [
+  "species.bias_url (build 7 of the page)",
+  "kinds.bias (build 7 of the page)",
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 565 tuning photos (the third of val kept for tuning) through tools/fusion/fuse.py; 2 means never",
+ "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 565 wildlife tuning photos and on 3056 extra-set (coco-kinds) tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
 }

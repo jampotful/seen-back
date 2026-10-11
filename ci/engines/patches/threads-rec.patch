@@ -1,0 +1,35 @@
+diff --git a/src/cam.rec.js b/src/cam.rec.js
+index 33bf64c..6ae7a09 100644
+--- a/src/cam.rec.js
++++ b/src/cam.rec.js
+@@ -194,7 +194,7 @@
+           cur = slotOf(M, M.species ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
+           total = got;                                 // the downloads are over; what remains is starting the encoder
+           if (onProgress) onProgress();
+-          var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
++          var init = { op: 'init', ep: ORT.ep, threads: +((/[?&]threads=(\d+)/.exec(location.search) || [])[1] || 1), ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
+             wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
+             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS };
+           return startWorker(init, [b[0], b[1], b[2]].concat(b[3] ? [b[3]] : [])).catch(function (e) {
+diff --git a/vendor/rec-worker.js b/vendor/rec-worker.js
+index feb7175..5202280 100644
+--- a/vendor/rec-worker.js
++++ b/vendor/rec-worker.js
+@@ -117,7 +117,7 @@ function init(m) {
+   t1 = now();
+   var ort = self.ort;
+   ort.env.logLevel = 'error';
+-  ort.env.wasm.numThreads = 1;                       // more than one needs a cross-origin isolated page, which a plain static host does not give
++  ort.env.wasm.numThreads = self.crossOriginIsolated && m.threads > 1 ? Math.min(m.threads | 0, 16) : 1;   // the threads experiment (ci/engines/patches/threads-rec.patch): more than one only where the page is cross-origin isolated
+   ort.env.wasm.proxy = false;
+   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
+   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
+@@ -126,7 +126,7 @@ function init(m) {
+     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
+     // one pass over an empty picture, so the first real photo does not pay for warming up
+     return run1(new Float32Array(3 * V.size * V.size)).then(function () {
+-      self.postMessage({ op: 'ready', backend: backend, threads: ort.env.wasm.numThreads, ms: { vectors: t1 - t0, session: t2 - t1, warm: now() - t2 } });
++      self.postMessage({ op: 'ready', backend: backend, threads: ort.env.wasm.numThreads, coi: !!self.crossOriginIsolated, asked: m.threads || 1, ms: { vectors: t1 - t0, session: t2 - t1, warm: now() - t2 } });
+     });
+   }).catch(function (e) {
+     // the runtime failing to start is not the model's fault: its loader could not be fetched, or this browser cannot run it
