@@ -1,0 +1,316 @@
+{
+ "browser": "chromium",
+ "site": "https://jampotful.github.io/seen-back/",
+ "shots": [
+  "live-chromium-2-offline.png"
+ ],
+ "notes": [
+  "live-chromium-1-first.png: page.screenshot: Timeout 30000ms exceeded."
+ ],
+ "console": [],
+ "pageErrors": [],
+ "version": "141.0.7390.37",
+ "first": {
+  "status": 200,
+  "headers": {
+   "accept-ranges": "bytes",
+   "access-control-allow-origin": "*",
+   "age": "0",
+   "cache-control": "max-age=600",
+   "content-encoding": "gzip",
+   "content-length": "54952",
+   "content-type": "text/html; charset=utf-8",
+   "date": "Sun, 11 Oct 2026 06:29:00 GMT",
+   "etag": "W/\"6acb2c34-29f78\"",
+   "expires": "Sun, 11 Oct 2026 06:38:10 GMT",
+   "last-modified": "Sun, 11 Oct 2026 06:27:00 GMT",
+   "server": "GitHub.com",
+   "strict-transport-security": "max-age=31556952",
+   "vary": "Accept-Encoding",
+   "via": "1.1 varnish",
+   "x-cache": "HIT",
+   "x-cache-hits": "1",
+   "x-fastly-request-id": "9eef50a66d07ca0ed4e68d27e2310341c113e18b",
+   "x-github-edge-region": "westus3",
+   "x-github-request-id": "9C4C:1C4915:2656B6:2C1788:6ACB2C79",
+   "x-proxy-cache": "MISS",
+   "x-served-by": "cache-bur-kbur8200049-BUR",
+   "x-timer": "S1791700141.872544,VS0,VE77"
+  },
+  "page": {
+   "build": "Seen Back, build 7.",
+   "screen": "intro",
+   "engine": {
+    "sw": 160,
+    "sh": 300,
+    "writes": 0,
+    "stepMs": 66,
+    "moving": false,
+    "floatOK": true,
+    "err": 0
+   },
+   "coi": false,
+   "secure": true,
+   "swSupported": true,
+   "swRegistered": true,
+   "swActive": true,
+   "swState": "activated",
+   "controlled": true,
+   "rec": {
+    "state": "ready",
+    "why": "",
+    "fail": "",
+    "model": "tinyclip-39m-16",
+    "rule": "product",
+    "trained": false,
+    "backend": "wasm",
+    "threads": 1,
+    "loadMs": 3527,
+    "start": {
+     "vectors": 73.60000000000582,
+     "session": 1009.0999999999767,
+     "warm": 888.8000000000175
+    },
+    "last": null,
+    "got": 62047398,
+    "total": 62047398,
+    "slot": "models/pocket/manifest.json"
+   },
+   "serif": true
+  }
+ },
+ "slot": "present",
+ "manifest": {
+  "id": "tinyclip-39m-16",
+  "licence": "MIT",
+  "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+  "vision": {
+   "url": "vision.int8-per-channel.onnx",
+   "bytes": 40978137,
+   "sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+   "from": "pub/lab-tinyclip-39m-16:onnx/vision.int8-per-channel.onnx",
+   "input": "pixel_values",
+   "output": "image_embeds",
+   "size": 224,
+   "mean": [
+    0.48145466,
+    0.4578275,
+    0.40821073
+   ],
+   "std": [
+    0.26862954,
+    0.26130258,
+    0.27577711
+   ],
+   "resize": "shortest-bicubic-antialias",
+   "crop": "center"
+  },
+  "width": 512,
+  "kinds": {
+   "url": "kinds.f16.bin",
+   "labels": [
+    "cat",
+    "dog",
+    "squirrel",
+    "deer",
+    "rabbit",
+    "hawk",
+    "wader",
+    "bird",
+    "alligator",
+    "reptile",
+    "frog",
+    "bee",
+    "insect",
+    "plant",
+    "person",
+    "other",
+    "none"
+   ]
+  },
+  "species": {
+   "url": "species.f16.bin",
+   "table": "species.json",
+   "count": 5911
+  },
+  "fusion": {
+   "t_kind": 100,
+   "t_species": 100,
+   "alpha_prior": 1,
+   "w_kind": 0.3,
+   "rule": "product",
+   "name_at": 0.4,
+   "offer_at": 0.53,
+   "prior_floor": 0.000001
+  },
+  "fusion_note": "Interim settings, 11 October 2026. The exported settings (rule mix, t_kind 20, w_kind 0.5) were tuned on wildlife photos alone and called a photo of a person or of a coffee cup a plant. These settings (rule product, t_kind 100, w_kind 0.3) were chosen by tools/eval/interim.py so that 13 of 15 local photos of people, objects, a cat and plants come out right, while the kind of eye stays right on 0.8365 of the 4,197 test photos (0.8394 under the exported settings) and a species is named for 0.152 of them, correctly for 0.934 of those. A head trained with photos of people and of nothing alive replaces this.",
+  "evaluation": {
+   "model": "tinyclip-39m-16",
+   "head": "sentences",
+   "choice": "species_com",
+   "train": "sentences",
+   "train_vectors": "none (sentence rows only)",
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "tuned_on": "val",
+   "prior_smoothing": {
+    "lam": 2,
+    "c": 1
+   }
+  },
+  "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never"
+ },
+ "ready": "ready",
+ "readyMs": 5,
+ "about": {
+  "state": "ready",
+  "why": "",
+  "fail": "",
+  "model": "tinyclip-39m-16",
+  "rule": "product",
+  "trained": false,
+  "backend": "wasm",
+  "threads": 1,
+  "loadMs": 3527,
+  "start": {
+   "vectors": 73.60000000000582,
+   "session": 1009.0999999999767,
+   "warm": 888.8000000000175
+  },
+  "last": null,
+  "got": 62047398,
+  "total": 62047398,
+  "slot": "models/pocket/manifest.json"
+ },
+ "photos": [
+  {
+   "name": "heron.png",
+   "kind": "wader",
+   "kinds3": [
+    [
+     "wader",
+     0.824
+    ],
+    [
+     "bird",
+     0.076
+    ],
+    [
+     "plant",
+     0.043
+    ]
+   ],
+   "species1": [
+    "Egretta caerulea",
+    0.101
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 79,
+    "run": 700,
+    "post": 27.4
+   },
+   "wall": 45985
+  },
+  {
+   "name": "portrait.jpg",
+   "kind": "person",
+   "kinds3": [
+    [
+     "person",
+     0.948
+    ],
+    [
+     "plant",
+     0.016
+    ],
+    [
+     "insect",
+     0.016
+    ]
+   ],
+   "species1": [
+    "Danaus plexippus",
+    0.078
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 60,
+    "run": 771,
+    "post": 25.6
+   },
+   "wall": 40768
+  },
+  {
+   "name": "wall.png",
+   "kind": "none",
+   "kinds3": [
+    [
+     "none",
+     0.756
+    ],
+    [
+     "plant",
+     0.099
+    ],
+    [
+     "insect",
+     0.067
+    ]
+   ],
+   "species1": [
+    "Bidens alba",
+    0.035
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 39,
+    "run": 682,
+    "post": 249.9
+   },
+   "wall": 41817
+  },
+  {
+   "name": "garden.jpg",
+   "kind": "plant",
+   "kinds3": [
+    [
+     "plant",
+     0.514
+    ],
+    [
+     "none",
+     0.348
+    ],
+    [
+     "insect",
+     0.061
+    ]
+   ],
+   "species1": [
+    "Calyptocarpus vialis",
+    0.099
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 85,
+    "run": 593,
+    "post": 16.5
+   },
+   "wall": 38629
+  }
+ ],
+ "second": {
+  "controlled": true,
+  "screen": "intro",
+  "fromServiceWorker": true
+ },
+ "offline": {
+  "status": 200,
+  "fromServiceWorker": true,
+  "online": false,
+  "controlled": true,
+  "screen": "intro",
+  "build": "Seen Back, build 7.",
+  "rec": "ready"
+ }
+}
