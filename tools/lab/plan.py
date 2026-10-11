@@ -36,7 +36,7 @@ for mid in run.get("models", []):
         s_i = (other if i == 0 else []) + img
         work.append({"model": mid, "shard": i, "nshards": n, "stages": ",".join(s_i), "tag": "%s-s%d" % (mid, i),
                      "rows": str(rows or ""), "mode": run.get("shard_mode", "block"),
-                     "wasm_procs": str(run.get("wasm_procs", 1))})
+                     "wasm_procs": str(run.get("wasm_procs", 1)), "wasm_split": run.get("wasm_split", "")})
     models.append(mid)
 print("work=" + json.dumps({"include": work}))
 print("has_work=%s" % ("true" if work else "false"))
@@ -47,4 +47,13 @@ print("has_guard=%s" % ("true" if run.get("guard") else "false"))
 print("manifest=%s" % run.get("manifest", ""))
 print("max_parallel=%d" % int(run.get("max_parallel", 10)))
 print("publish_after=%s" % (run.get("publish_after_run") or ""))
-print("count=%d" % (len(work) + len(models)), file=sys.stderr)
+# device runs: {"device": {"model": id, "jobs": [[recipe, ...], ...], "photos": 320, "branch": "pub/model-<id>", "max_parallel": n}}
+dev = run.get("device") or {}
+dwork = [{"model": dev["model"], "recipes": ",".join(j), "tag": "device-%s" % j[0], "photos": str(dev.get("photos", 320))}
+         for j in dev.get("jobs", [])]
+print("device=" + json.dumps({"include": dwork}))
+print("has_device=%s" % ("true" if dwork else "false"))
+print("device_model=%s" % dev.get("model", ""))
+print("device_branch=%s" % dev.get("branch", ""))
+print("device_max=%d" % int(dev.get("max_parallel", max(len(dwork), 1))))
+print("count=%d" % (len(work) + len(models) + len(dwork)), file=sys.stderr)

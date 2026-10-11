@@ -1,0 +1,16 @@
+{
+ "about": "BioCLIP 2's image encoder for the device: four machines, each exporting the encoder and making its recipes (int8 per channel; unsigned int8 per channel and 4-bit block weights; 8-bit weights with float arithmetic and float16; int8 with the second MLP layer of each block in float arithmetic), each run through onnxruntime-web 1.30.0's WASM build on 320 test photos (every k-th test row of eval/alachua-2025). device_pub scores them against the original model's published vectors and the published server rows, and publishes the chosen int8 file in parts of at most 90,000,000 bytes to pub/model-bioclip2-l14.",
+ "models": [],
+ "stages": [],
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "publish": false,
+ "device": {
+  "model": "bioclip2-l14",
+  "jobs": [["int8-per-channel"], ["uint8-per-channel", "w4-block32"], ["w8-float", "fp16"], ["hybrid-fc2-w8"]],
+  "photos": 320,
+  "branch": "pub/model-bioclip2-l14",
+  "max_parallel": 4
+ },
+ "max_parallel": 1
+}

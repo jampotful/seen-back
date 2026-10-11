@@ -1333,6 +1333,9 @@ def stage_pixels(args):
     ip = AutoImageProcessor.from_pretrained(entry["source"])
     rows = read_manifest(args.manifest)
     part = shard_rows(rows, args.shard, args.shard_mode, args.rows)
+    if args.split:
+        part = [r for r in part if r.get("split") == args.split]
+        log("pixels: only rows with split=%s: %d" % (args.split, len(part)))
     ok, bad = iter_photos(part, args.photos)
     od = pathlib.Path(args.pix)
     od.mkdir(parents=True, exist_ok=True)
@@ -1464,6 +1467,7 @@ def main():
     px.add_argument("--rows")
     px.add_argument("--shard-mode", choices=["block", "mod"], default="block")
     px.add_argument("--pix", required=True)
+    px.add_argument("--split", help="only rows whose split is this (e.g. test)")
     wc = sub.add_parser("wasm-collect")
     wc.add_argument("--model", required=True)
     wc.add_argument("--variant", required=True)
