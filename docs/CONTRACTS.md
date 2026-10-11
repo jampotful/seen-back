@@ -18,7 +18,7 @@ The working sandbox cannot reach most of the internet. GitHub's build machines c
 - **Start a run** by pushing a commit to a branch named `run/<workflow>/<label>`: `git push -f origin HEAD:refs/heads/run/engines/dev`. The workflow file is read from the pushed commit, so a workflow can be developed on a run branch without touching `main`.
 - **Results come back** as files on the `ci` branch under `runs/<name>/<run number>[-shard]/`, with a line in `INDEX.txt` (time, path, status, first twelve characters of the commit, branch). Every workflow ends with `bash ci/return.sh <name> <dir> [shard]` under `if: always()`, and writes its own log into the returned directory, because the logs on github.com cannot be read without signing in.
 - **Wait for results** with `bash ci/wait.sh <commit sha> [lines expected] [seconds]`, then read them with `git show FETCH_HEAD:runs/...` or a checkout of the `ci` branch.
-- **Large or binary outputs** (models, embeddings, data sets) go to their own branch with `bash ci/put_branch.sh <branch> <dir>`, which replaces the branch and keeps no history. Branch names: `lab/<model id>` for a model's files, `data/<name>` for data sets.
+- **Large or binary outputs** (models, embeddings, data sets) go to their own branch with `bash ci/put_branch.sh <branch> <dir>`, which replaces the branch and keeps no history. Branch names: `pub/lab-<model id>` for a model's files, `pub/data-<name>` for data sets; the branch root mirrors the directory it was published from.
 - **Reading a public page** from the sandbox: list addresses in `ci/fetch/list.txt` and push to `run/fetch/<label>`; the text comes back under `runs/fetch/`.
 - **Limits**: 20 jobs at once, 5 of them macOS; a job may run six hours; results returned to `ci` stay under 25 MB per job; a file in git stays under 95 MB.
 - **A secret named `HF_TOKEN`** (a Hugging Face token with write access) is available to workflows as `${{ secrets.HF_TOKEN }}`. Never print it, never write it to a file that is returned.
@@ -31,7 +31,7 @@ To avoid collisions, each area of work owns its files. Change another area's fil
 | Area | Files |
 |---|---|
 | Picture engine and its checks | `src/cam.b.js`, `src/cam.c1.js`, `src/cam.selftest.js`, `.github/workflows/engines.yml`, `ci/engines/`, `test/engines/` |
-| Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/` |
+| Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/`, `test/check4.js` |
 | Species lists and evaluation photos | `tools/species/`, `.github/workflows/data.yml`, `ci/data/`, `data/` |
 | Model laboratory | `tools/lab/`, `.github/workflows/lab.yml`, `ci/lab/`, `labels/` |
 | Species service | `service/`, `.github/workflows/service.yml` |
@@ -96,7 +96,7 @@ One row per photo, one photo per observation. Columns:
 
 `labels/kinds.json` holds, for each kind of eye and for `none` (nothing alive), a list of noun phrases. The lab turns each phrase into sentences with its templates and averages them into one vector per kind.
 
-### A model's files: branch `lab/<model id>`
+### A model's files: branch `pub/lab-<model id>`
 
 ```
 card.json                 id, source address, licence, licence address, parameter counts, input size, mean, std, resize rule, embedding width

@@ -48,7 +48,7 @@ INSTALL = (
     '<link rel="apple-touch-icon" href="icons/icon-180.png">\n'
     '<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">\n'
 )
-WORKER = ("<script>\nif ('serviceWorker' in navigator && location.protocol === 'https:') {\n"
+WORKER = ("<script>\nif ('serviceWorker' in navigator && (location.protocol === 'https:' || /^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname)) && !/[?&]nosw=1/.test(location.search)) {\n"
           "  window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });\n}\n</script>\n")
 standalone = (
     "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
