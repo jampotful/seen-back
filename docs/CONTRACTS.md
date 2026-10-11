@@ -31,7 +31,7 @@ To avoid collisions, each area of work owns its files. Change another area's fil
 | Area | Files |
 |---|---|
 | Picture engine and its checks | `src/cam.b.js`, `src/cam.c1.js`, `src/cam.selftest.js`, `.github/workflows/engines.yml`, `ci/engines/`, `test/engines/` |
-| Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/`, `test/check4.js` |
+| Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/`, `test/check4.js`, `tools/fusion/` |
 | Species lists and evaluation photos | `tools/species/`, `.github/workflows/data.yml`, `ci/data/`, `data/` |
 | Model laboratory | `tools/lab/`, `.github/workflows/lab.yml`, `ci/lab/`, `labels/` |
 | Species service | `service/`, `.github/workflows/service.yml`, `ci/service/` |
