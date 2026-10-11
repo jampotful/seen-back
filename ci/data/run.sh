@@ -45,7 +45,7 @@ if [ "$rc_species" -eq 0 ] && [ "${PUBLISH:-1}" = "1" ]; then
 fi
 [ -f data/regions/us-fl-alachua/species.json ] || { counts; exit 1; }
 
-step "evaluation manifest" python3 tools/species/build_eval.py --out data/eval/alachua-2025 \
+step "evaluation manifest" python3 tools/species/build_eval.py --out data/eval/alachua-2025 --end 2026-09-29 \
   --species data/regions/us-fl-alachua/species.json --cache work/cache --diag out/diag
 rc_eval=$?
 cp data/eval/alachua-2025/SUMMARY.md out/eval-SUMMARY.md 2>/dev/null || true

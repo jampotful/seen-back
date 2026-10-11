@@ -1,5 +1,6 @@
 name: lab
-# The model laboratory. Push a commit to run/lab/<label>; ci/lab/run.json in that commit says which models and stages.
+# The model laboratory. Push a commit to run/lab/<label>; ci/lab/runs/<label>.json in that commit (or else
+# ci/lab/run.json) says which models and stages.
 # Each model's files are published to pub/lab-<model id>; small reports and logs come back on the ci branch as
 # runs/lab/<run>-plan, runs/lab/<run>-<model>-s<shard> (one per job) and runs/lab/<run>-<model>-pub (one per model).
 on:
@@ -7,24 +8,35 @@ on:
     branches: ['run/lab/**']
 permissions:
   contents: write
+# A newer push to the same run branch cancels the older run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 300
     outputs:
       work: ${{ steps.plan.outputs.work }}
       models: ${{ steps.plan.outputs.models }}
       max_parallel: ${{ steps.plan.outputs.max_parallel }}
       publish_after: ${{ steps.plan.outputs.publish_after }}
+      has_work: ${{ steps.plan.outputs.has_work }}
+      has_models: ${{ steps.plan.outputs.has_models }}
+      guard: ${{ steps.plan.outputs.guard }}
+      has_guard: ${{ steps.plan.outputs.has_guard }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
         run: |
           mkdir -p ret
-          python3 tools/lab/plan.py ci/lab/run.json | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
+          cfg="ci/lab/runs/${GITHUB_REF_NAME#run/lab/}.json"; [ -f "$cfg" ] || cfg=ci/lab/run.json
+          echo "config: $cfg" | tee -a ret/log.txt
+          cp "$cfg" ret/run.json
+          python3 tools/lab/plan.py "$cfg" | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
       - name: data
         run: |
-          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('data','auto'))")" 2>&1 | tee -a ret/log.txt
+          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('data','auto'))")" "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('manifest',''))")" "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('wait_minutes',0))")" "$(python3 -c "import json;print(json.dumps(json.load(open('ret/run.json')).get('wait_for_file') or ''))")" 2>&1 | tee -a ret/log.txt
           cp data_in/source.txt ret/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         with:
@@ -39,6 +51,7 @@ jobs:
 
   work:
     needs: plan
+    if: needs.plan.outputs.has_work == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
@@ -65,6 +78,9 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_HUB_DISABLE_PROGRESS_BARS: "1"
           TOKENIZERS_PARALLELISM: "false"
+          ROWS: ${{ matrix.rows }}
+          SHARD_MODE: ${{ matrix.mode }}
+          WASM_PROCS: ${{ matrix.wasm_procs }}
         run: bash ci/lab/job.sh "${{ matrix.model }}" "${{ matrix.shard }}" "${{ matrix.nshards }}" "${{ matrix.stages }}"
       - uses: actions/upload-artifact@v4
         if: always()
@@ -81,7 +97,7 @@ jobs:
 
   publish:
     needs: [plan, work]
-    if: always() && needs.plan.result == 'success'
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_models == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 70
     strategy:
@@ -110,3 +126,28 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh lab ret "${{ matrix.model }}-pub"
+
+  guard:
+    needs: plan
+    if: needs.plan.outputs.has_guard == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@v4
+      - name: guard
+        env:
+          GUARD: ${{ needs.plan.outputs.guard }}
+        run: |
+          mkdir -p ret
+          python3 -m pip install --quiet numpy 2>&1 | tail -1
+          older=$(python3 -c "import json,os;print(json.loads(os.environ['GUARD'])['older_run'])")
+          minutes=$(python3 -c "import json,os;print(json.loads(os.environ['GUARD']).get('minutes',320))")
+          models=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD'])['models']))")
+          pockets=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD']).get('ship',[])))")
+          export REPAIR_FROM=$(python3 -c "import json,os;print(json.dumps(json.loads(os.environ['GUARD']).get('repair_from') or {}) if json.loads(os.environ['GUARD']).get('repair_from') else '')")
+          bash ci/lab/guard.sh "$older" "$minutes" "$models" "$pockets"
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lab ret guard
