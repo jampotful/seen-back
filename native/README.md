@@ -1,20 +1,34 @@
 # Native shells
 
-This directory holds two thin native shells around the built page, one for Android and one for the iPhone. The scripts in `ci/native/` build them and run them on GitHub's build machines. Each shell carries a copy of the built page and serves it to the system's own web view from inside the app, so the page itself is unchanged. Nothing here is signed for a store, and nothing here has run on a real phone: every result below comes from an Android emulator or an iPhone simulator on a build machine.
+This directory holds two thin native shells around the built page, one for Android and one for the iPhone. The scripts in `ci/native/` build them and run them on GitHub's build machines. Each shell carries a copy of the built page and serves it to the system's own web view from inside the app, so the page itself is unchanged. The Android shell is also published as a debug APK that a person can install on their own phone (see "The Android file"). Nothing here is signed for a store, and nothing here has run on a real phone: every result below comes from an Android emulator or an iPhone simulator on a build machine.
 
 ## What is here
 
 | Path | What it is |
 |---|---|
 | `native/android-shell/` | A Gradle project (Android Gradle Plugin 8.7.3, compile and target SDK 35, minimum SDK 24, Java 17) with one activity in Java and no libraries. The activity shows a WebView and answers every request for `https://appassets.androidplatform.net/` from the files packed under `assets/www/` in the APK, with its own table of content types (the WebAssembly runtime's `.mjs` file is a module script, which must arrive with a JavaScript type). That address is a secure origin that never reaches the network, so the page keeps camera access, workers and Cache Storage. When the page asks for the camera, the shell asks the person for Android's camera permission and then grants the page's request. |
-| `native/ios-shell/` | `main.swift` and `Info.plist`: a UIKit app with one WKWebView, compiled with `swiftc` for the iPhone simulator. There is no Xcode project yet. A URL scheme handler serves the bundled files at `app://localhost/`, with byte ranges for video. The host name `localhost` makes the origin potentially trustworthy under the Secure Contexts rules, and the page reported `isSecureContext` true there. The shell grants the page's camera request after iOS has asked the person, with the sentence in `Info.plist`. |
+| `native/ios-shell/` | `main.swift` and `Info.plist`: a UIKit app with one WKWebView, compiled with `swiftc` for the iPhone simulator. There is no Xcode project in the repository; the steps for making one are below. A small http server inside the app (class `Loopback`, written with Apple's Network framework) serves the bundled files at `http://127.0.0.1:41730/`, with byte ranges for video. It listens on the loopback address only, so nothing outside the phone can reach it, and its port is fixed, so the page's origin, and with it what the page keeps in Cache Storage, stays the same from one launch to the next. A loopback address is potentially trustworthy under the Secure Contexts rules. If the server cannot start, the shell serves the same files at `app://localhost/` through a URL scheme handler, as it did before run 7. The shell grants the page's camera request after iOS has asked the person, with the sentence in `Info.plist`; `NSAllowsLocalNetworking` in `Info.plist` lets the web view load an `http` address on the loopback. |
 | `ci/native/bundle.sh` | Copies the built page and what it fetches into one directory: `index.html`, `sw.js`, `selftest.js`, `manifest.webmanifest`, `vendor/`, `fonts/`, `icons/`, `labels/`, `models/pocket/`, and `models/naturalist/` (the larger model's rows and manifest; its 310 MB encoder still comes from the network, as on the web). For the checks it adds `test/assets/`, `test/rec/photos/` and `native-probe/big.js`; `TEST=0` leaves them out. The page fetches nothing under `data/`, so `data/` stays out. |
 | `ci/native/android_build.sh`, `ci/native/android_emu.sh` | The Android job: build the page, bundle it, run `gradle assembleDebug`, then in an emulator open the app, run the page's self-test with the pocket recognizer, press Begin with the emulator's camera, and fetch the larger model through the page's own recognizer. |
 | `ci/native/ios.sh` | The iOS job: build the page, compile the shell, copy the page into the app, sign it ad hoc, install it in an iPhone simulator and run the same self-test inside it. A label starting with `ios-big` runs the larger-model probe instead of the comparison run: once inside the app, and once with the same app pointed at the page served from the Mac. |
+| `ci/native/android_pub_build.sh`, `ci/native/android_pub_emu.sh`, `ci/native/android_pub.sh`, `ci/native/android_pub_files.py` | The publishing job (see "The Android file"): two debug APKs from one build of the page, the self-test on the one with the check files, the published one opened in the emulator, and only after both have passed, the file on the branch `pub/app-android` with its `README.md` and `built.json`. |
 | `ci/native/probe-big.js` | Used only by the checks. It fetches the larger model the way the consent sheet's "Get it" does (download, verify, keep, start the encoder) and then names four photos with it. |
-| `.github/workflows/native.yml` | Starts both jobs on a push to `run/native/<label>`. |
+| `.github/workflows/native.yml` | Starts the jobs on a push to `run/native/<label>`: a label starting with `pub` runs only the publishing job, one starting with `android` only the Android job, one starting with `ios` only the iOS job, and any other label both of the last two. |
 
-The shells read a few launch options that only the checks use: the Android intent extras `q` (a query string for `index.html`), `url`, `js` and `probe`, and the iOS launch arguments `-q`, `-url` and `-probe`. Every three seconds each shell writes what the page reports about itself (`window.__selftest`, the screen it shows, `window.__bigProbe`) to a file in the app's own storage, which the checks read with `adb shell run-as` on Android and from the simulator's data container on iOS.
+The shells read a few launch options that only the checks use: the Android intent extras `q` (a query string for `index.html`), `url`, `js` and `probe`, and the iOS launch arguments `-q`, `-url`, `-app` (serve at `app://localhost/`), `-js` and `-probe`. Every three seconds each shell writes what the page reports about itself (`window.__selftest`, the screen it shows, `window.__bigProbe`) to a file in the app's own storage, which the checks read with `adb shell run-as` on Android and from the simulator's data container on iOS.
+
+## The Android file
+
+A push to `run/native/pub<anything>` builds the page from that commit and makes two debug APKs from that one build, signed with the same debug key, which Gradle makes on the build machine and which goes when the machine does. The first holds the check files (`test/assets/`, `test/rec/photos/`, `native-probe/`); the second is made with `TEST=0` and holds none. `ci/native/android_pub_build.sh` compares the two entry by entry and stops if they differ anywhere outside the check files and the signature files. In an Android 14 emulator the job then runs the page's self-test in the first APK, removes it, installs the second, opens it at its first screen and presses Begin with the emulator's camera. Only when the self-test has passed with no failed check and the second APK has shown its first screen at a secure origin and reached the camera does `ci/native/android_pub.sh` put the second APK on the branch `pub/app-android` as `seen-back-debug.apk`, with a `README.md` for the person installing it and a `built.json` (the commit, the page's build number from `src/cam.a.js`, the file's bytes and SHA-256, the time). It then fetches the file back from `raw.githubusercontent.com` at the branch's new commit and compares the checksum. The job uses only files in `native/`, `ci/native/`, the workflow, `ci/put_branch.sh` and `ci/return.sh`, so it runs from `main` as it does from a working branch.
+
+The file's address for a phone is https://raw.githubusercontent.com/jampotful/seen-back/pub/app-android/seen-back-debug.apk , and the branch's `README.md` says how to install it. Each build is signed with a new throwaway key, so Android will not install a newer file over an older one; the app has to be removed first.
+
+### Run 6 (`runs/native/6-pub/`, commit `731fcab`, label `pub-a`)
+
+- **Build.** The page of build 9. The APK with the check files is 55,324,991 bytes and the published one 54,195,702 bytes; Gradle's second build, after `clean`, took 13 s. The comparison found 51 entries in the first and 36 in the second, all 36 identical in CRC-32 and size; the 15 entries found only in the first are all under `assets/www/test/` and `assets/www/native-probe/` (`android/pub-compare.txt`, `android/pub-build-log.txt`).
+- **The self-test**, in the APK with the check files, in the same emulator as run 1 (Android 14, Android System WebView 113.0.5672.136): all 98 checks passed in 47.0 s, at a secure origin (`android/selftest-state.json`, `android/emu-log.txt`).
+- **The published APK**, installed fresh in the same emulator, opened at the page's first screen at `https://appassets.androidplatform.net/index.html` with `isSecureContext` true, and Begin took it to the finder with the emulator's camera as its source (`android/pub-state-open.json`, `android/pub-state-begin.json`, `android/shots/5-pub-open.jpg`, `android/shots/6-pub-begin.jpg`; the gate's verdict is in `android/gate.json`).
+- **Published.** `pub/app-android` at commit `a1331eb`: `seen-back-debug.apk` (54,195,702 bytes, SHA-256 `2aaaec28013c25f845b21e145809b94a118f94e13139996ed7ac0049dcd75a97`), `README.md`, `built.json`. The job read the file back from `raw.githubusercontent.com` at that commit and found the same checksum, with the type `application/octet-stream` (`android/pub-log.txt`). GitHub's push warned that the file is over its recommended 50 MB and accepted it.
 
 ## What ran, and what it showed
 
@@ -64,12 +78,20 @@ In the simulator, then, the same app holds and runs the larger model when the pa
 
 ## Commands
 
-Start both jobs on build machines (a label starting with `android` runs only the Android job, one starting with `ios` only the iOS job), wait, and read the results:
+Start the jobs on build machines (see the workflow's row above for what each label runs), wait, and read the results:
 
 ```
 git push -f origin HEAD:refs/heads/run/native/<label>
 bash ci/wait.sh <commit> <results expected> 540
 git fetch origin ci && git show FETCH_HEAD:runs/native/<run number>-android/android/emu-log.txt
+```
+
+Publish the APK from `main` (one result, under `runs/native/<run number>-pub/`; the file appears on `pub/app-android` only if the gate passed):
+
+```
+git push -f origin origin/main:refs/heads/run/native/pub-<label>
+bash ci/wait.sh <commit of main> 1 540
+git fetch origin ci && git show FETCH_HEAD:runs/native/<run number>-pub/android/gate.json
 ```
 
 Build the APK on a computer with the Android SDK, JDK 17 and Gradle 8.10, and install it on a phone with USB debugging on:
@@ -96,16 +118,19 @@ xcrun simctl install booted "$APP" && xcrun simctl launch booted org.seenback.sh
 
 ## A build for the owner's own iPhone
 
-A real iPhone runs only apps signed with a certificate that Apple has issued. For the owner's own phone, an Apple ID signed in to Xcode on their Mac is enough (Xcode, Settings, Accounts; the free "Personal Team"). The steps:
+A real iPhone runs only apps signed with a certificate that Apple has issued. For one's own phone, an Apple ID signed in to Xcode is enough: Xcode makes a free "Personal Team" for it. These steps make the Xcode project on the owner's Mac; none of them has been tried, because the build machine has no Apple ID and no phone, and this repository holds no signing identity.
 
-1. In Xcode, make a new iOS App project with the UIKit interface. Delete its generated Swift files and its main storyboard, remove the scene and storyboard entries from the project's Info settings, add `native/ios-shell/main.swift`, and copy the keys of `native/ios-shell/Info.plist` into the Info settings, the camera sentence among them.
-2. Make the page's files with `TEST=0 bash ci/native/bundle.sh www` and add the `www` directory to the project as a folder reference, so that its paths are kept.
-3. Give the app a bundle identifier of the owner's own (for example one ending in `.seenback`), and choose the Personal Team under Signing and Capabilities.
-4. Connect the iPhone, turn on Developer Mode on it (Settings, Privacy and Security), press Run, and on the first launch trust the developer on the phone (Settings, General, VPN and Device Management).
+1. **The page's files.** In a clone of the repository on the Mac, run `python3 -I build.py`, then `TEST=0 bash ci/native/bundle.sh native/ios-shell/www`. This makes `native/ios-shell/www`, which git ignores.
+2. **The Apple ID.** Open Xcode, then Xcode, Settings, Accounts, press the plus sign and sign in with the Apple ID. A team named after the person, with "(Personal Team)" after it, appears.
+3. **The project.** File, New, Project, iOS, App. Product Name `SeenBack`; Team: the Personal Team; Organization Identifier: something of the owner's own in reverse domain form (for example `com.example.yourname`), which makes the bundle identifier `com.example.yourname.SeenBack`; Interface: Storyboard; Language: Swift; no tests. Save it anywhere outside the repository.
+4. **Remove what the template made.** In the project navigator, delete `AppDelegate.swift`, `SceneDelegate.swift`, `ViewController.swift` and `Main.storyboard` (Move to Trash). Keep `LaunchScreen.storyboard` and `Assets.xcassets`.
+5. **Add the shell.** Drag `native/ios-shell/main.swift` from the repository into the project navigator, with the target `SeenBack` ticked. Leave copying off, so that the project uses the repository's file. Then drag the folder `native/ios-shell/www` in the same way and add it as a folder reference (a blue folder), so that the app holds `www/` with its paths unchanged; `main.swift` reads the page from there.
+6. **The settings that the template set differently.** Select the project, the target `SeenBack`, the Build Settings tab, All. Set "Application Scene Manifest (Generation)" to No, and clear "UIKit Main Storyboard File Base Name". In the Info tab, delete "Application Scene Manifest" if it is still listed, and add two keys: "Privacy - Camera Usage Description" (`NSCameraUsageDescription`) with the sentence from `native/ios-shell/Info.plist`, and "App Transport Security Settings" (`NSAppTransportSecurity`) holding "Allow Local Networking" (`NSAllowsLocalNetworking`) set to YES. Under General, set Minimum Deployments to iOS 16.0 or later, and leave only iPhone under Supported Destinations.
+7. **Signing.** In Signing and Capabilities, keep "Automatically manage signing" on, with the Personal Team. If Xcode says that the bundle identifier is taken, change the Organization Identifier part.
+8. **The phone.** Connect the iPhone with a cable and trust the Mac on the phone. On the phone, turn on Developer Mode (Settings, Privacy and Security, Developer Mode; the phone restarts and asks once more). In Xcode, choose the iPhone as the run destination and press Run. The first launch stops with a message about an untrusted developer: on the phone, open Settings, General, VPN and Device Management, choose the Apple ID under Developer App, and trust it. Press Run again.
+9. **On the phone.** The app opens at the page's first screen. Begin asks for the camera with the sentence from step 6. The larger model is fetched from the network when the person agrees, and kept in the app's own storage.
 
-What the free tier allows, from Apple's page "Choosing a Membership" (developer.apple.com/support/compare-memberships, read on 11 October 2026): up to 10 App IDs and up to 3 devices, each expiring after 7 days; up to 3 apps on a device; provisioning profiles that expire 7 days after they are issued, so the app has to be built and installed from Xcode again every week. The same page lists app distribution and App Store Connect, of which TestFlight is a part, among the benefits of the Apple Developer Program.
-
-The build machine cannot do this part: it has no Apple ID and no phone, and this repository holds no signing identity.
+What the free tier allows, from Apple's page "Choosing a Membership" (developer.apple.com/support/compare-memberships, read on 11 October 2026): up to 10 App IDs and up to 3 devices, each expiring after 7 days; up to 3 apps on a device; provisioning profiles that expire 7 days after they are issued. After seven days the app no longer opens; connecting the phone and pressing Run again in Xcode signs and installs it anew. An app that is installed over itself in this way keeps its data, so the kept larger model should stay; that was not tried. Deleting the app deletes what it kept. The same page lists app distribution and App Store Connect, of which TestFlight is a part, among the benefits of the paid Apple Developer Program.
 
 ## The distance to the two stores
 
