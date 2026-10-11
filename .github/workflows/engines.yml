@@ -87,7 +87,7 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out big-linux
   big-mac:
-    if: ${{ startsWith(github.ref_name, 'run/engines/big') }}
+    if: ${{ startsWith(github.ref_name, 'run/engines/big') && !startsWith(github.ref_name, 'run/engines/big-lx') }}
     strategy:
       fail-fast: false
       matrix:

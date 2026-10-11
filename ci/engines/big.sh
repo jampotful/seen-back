@@ -12,6 +12,8 @@ limit() { local s=$1; shift; "$@" & local p=$!; ( sleep "$s"; kill "$p" 2>/dev/n
 SITE="${SITE:-https://jampotful.github.io/seen-back/}"; PW=/tmp/pw; PWV=1.56.0; PART="${PART:-linux}"
 # run/engines/big-wk*: only WebKit (Linux, and macOS through Playwright), after run engines/35
 case "${GITHUB_REF_NAME:-}" in run/engines/big-wk*) ONLY_WK=1 ;; *) ONLY_WK=0 ;; esac
+# run/engines/big-lx-<browser>-*: only that browser, on Linux (the macOS jobs do not start)
+ONLY_LX=$(printf '%s' "${GITHUB_REF_NAME:-}" | sed -n -E 's#^run/engines/big-lx-(chromium|firefox|webkit)-.*#\1#p')
 if [ "$ONLY_WK" = 1 ] && [ "$PART" = mac-sim ]; then echo "nothing for $PART on ${GITHUB_REF_NAME}"; exit 0; fi
 step "machine ($PART)"; uname -a; (command -v free >/dev/null && free -m) || (sysctl -n hw.memsize hw.ncpu; sw_vers); node --version; df -h /tmp | tail -1
 step "the larger model's manifest from the live address, and its parts with curl"
@@ -43,9 +45,12 @@ case "$PART" in
   linux)
     for B in chromium firefox webkit; do for t in 1 2; do timeout 300 node "$PW/node_modules/playwright/cli.js" install --with-deps $B > "$OUT/install-$B.txt" 2>&1 && break; done; done
     sudo apt-get install -y -q xvfb > /dev/null 2>&1; Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & export DISPLAY=:99
+    if [ -n "$ONLY_LX" ]; then if [ "$ONLY_LX" = firefox ]; then run firefox 1500 HEADED=1; else run "$ONLY_LX" 1500; fi
+    else
     [ "$ONLY_WK" = 1 ] || run chromium 1500
     [ "$ONLY_WK" = 1 ] || run firefox 1300 HEADED=1
-    run webkit 1300 ;;
+    run webkit 1300
+    fi ;;
   mac-ws)
     node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -2
     run webkit 1300
