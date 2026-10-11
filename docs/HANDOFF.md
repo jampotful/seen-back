@@ -47,7 +47,7 @@ The working sandbox reaches little of the internet, so anything that needs the o
 - **Read the results** on the `ci` branch, under `runs/<name>/<run number>[-shard]/`, with a line for each result in `INDEX.txt`. `bash ci/wait.sh <commit> [lines expected] [seconds]` waits for them; it exits 3 when the wait runs out, and can be run again. The logs on github.com cannot be read without signing in, so every job writes its own log into the directory it returns.
 - **The laboratory** reads its orders from `ci/lab/runs/<label>.json` when that file exists in the pushed commit, and from `ci/lab/run.json` only otherwise.
 - **Reading a public page**: list its address in `ci/fetch/list.txt` and push to `run/fetch/<label>`; the text comes back under `runs/fetch/`.
-- **Limits**: 20 jobs at once, 5 of them on macOS; six hours a job; under 25 MB returned to `ci` by one job; under 95 MB for one file in git.
+- **Limits**: at most 20 jobs run at once, 5 of them on macOS; a job may run six hours; one job returns under 25 MB to `ci`; and a file in git stays under 95 MB.
 - The engines workflow runs the checks and the self-test on Linux (Chromium, Firefox, WebKit) and on macOS (WebKit, Safari, Safari in the iPhone simulator); a branch named `run/engines/live-<anything>` checks only the live address (`.github/workflows/engines.yml`).
 
 ## Published data and models
@@ -90,8 +90,8 @@ One secret exists, by name only: `HF_TOKEN`, a Hugging Face token with write acc
 
 ## Waiting on the owner
 
-- The rule for which photos heads may be fitted on, which the coordinator set on 11 October pending the owner's decision (`docs/LICENCES.md`).
-- A licence for this project's code; none has been chosen.
-- The rule of the finding game (`docs/PLAN.md`, Phase 5).
-- A run of the page on an iPhone, and of the larger model on a phone.
-- A home for the species service. A free Hugging Face account can host it on shared graphics cards from about 10 November, when the account is thirty days old (`docs/LOG.md`, 11 October, 00:52).
+- The owner has yet to decide on the rule for which photos heads may be fitted on, which the coordinator set on 11 October (`docs/LICENCES.md`).
+- No licence has been chosen for this project's code.
+- The rule of the finding game awaits a decision (`docs/PLAN.md`, Phase 5).
+- The page has yet to run on an iPhone, and the larger model on any phone.
+- The species service needs a home. A free Hugging Face account can host it on shared graphics cards from about 10 November, when the account is thirty days old (`docs/LOG.md`, 11 October, 00:52).
