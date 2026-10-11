@@ -1,0 +1,2681 @@
+{
+ "made_by": "tools/eval/study2.py --train val",
+ "standin": true,
+ "sentences_only": false,
+ "what": "This run is a stand-in that proves the machinery. No training vectors were published when it ran, so two thirds of the `val` photos were used to fit the heads and the last third to choose settings. With about two fitting photos a species, these numbers say little about what the real training set (up to sixty photos a species) will give. They are here to show that every step runs and to be replaced.",
+ "method": {
+  "resamples": 2000,
+  "seed": 20261011,
+  "prior_weight_grid": [
+   0.0,
+   0.05,
+   0.1,
+   0.15,
+   0.2,
+   0.25,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.75,
+   1.0,
+   1.25,
+   1.5,
+   2.0,
+   2.5,
+   3.0,
+   4.0,
+   5.0
+  ],
+  "scale_grid": [
+   0.25,
+   0.5,
+   0.75,
+   1.0,
+   1.5,
+   2.0,
+   3.0,
+   4.0,
+   6.0,
+   8.0,
+   12.0,
+   16.0,
+   24.0,
+   32.0,
+   48.0,
+   64.0,
+   96.0,
+   128.0
+  ],
+  "smoothing": [
+   [
+    0.0,
+    0.1
+   ],
+   [
+    2.0,
+    1.0
+   ]
+  ]
+ },
+ "models": {
+  "tinyclip-39m-16": {
+   "train_vectors": "images/alachua-2025 (two thirds of val)",
+   "train_photos": 1226,
+   "train_species": 574,
+   "tuning_photos": 565,
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "test_photos": 4197,
+   "species_heads": [
+    {
+     "name": "sentences",
+     "plain": {
+      "top1": [
+       0.2285,
+       0.2166,
+       0.2406,
+       4197
+      ],
+      "top5": [
+       0.401,
+       0.3869,
+       0.416,
+       4197
+      ],
+      "choice": "species_taxon_com",
+      "tuning_top1": 0.2195
+     },
+     "prior": {
+      "top1": [
+       0.3457,
+       0.3317,
+       0.3603,
+       4197
+      ],
+      "top5": [
+       0.5406,
+       0.5261,
+       0.5556,
+       4197
+      ],
+      "kind_from_sum": [
+       0.8594,
+       0.8487,
+       0.8701,
+       4197
+      ],
+      "tuning_top1": 0.354,
+      "choice": "species_com",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 1.25,
+       "scale": 88.1916,
+       "tuning_nll": 4.1866,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_com; alpha 1.25; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "prototypes",
+     "plain": {
+      "top1": [
+       0.275,
+       0.2614,
+       0.289,
+       4197
+      ],
+      "top5": [
+       0.4389,
+       0.4243,
+       0.4544,
+       4197
+      ],
+      "choice": "class means",
+      "tuning_top1": 0.2584
+     },
+     "prior": {
+      "top1": [
+       0.3007,
+       0.2866,
+       0.315,
+       4197
+      ],
+      "top5": [
+       0.4572,
+       0.4425,
+       0.472,
+       4197
+      ],
+      "kind_from_sum": [
+       0.8392,
+       0.8282,
+       0.8501,
+       4197
+      ],
+      "tuning_top1": 0.285,
+      "choice": "class means",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.375,
+       "scale": 41.613,
+       "tuning_nll": 2.8663,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "class means; alpha 0.38; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "prototypes + sentences",
+     "plain": {
+      "top1": [
+       0.3248,
+       0.3112,
+       0.3395,
+       4197
+      ],
+      "top5": [
+       0.4994,
+       0.4849,
+       0.5144,
+       4197
+      ],
+      "choice": "species_com, beta 4, bias for species without photos 0.65",
+      "tuning_top1": 0.308
+     },
+     "prior": {
+      "top1": [
+       0.3693,
+       0.355,
+       0.3841,
+       4197
+      ],
+      "top5": [
+       0.558,
+       0.543,
+       0.5733,
+       4197
+      ],
+      "kind_from_sum": [
+       0.8649,
+       0.8547,
+       0.8754,
+       4197
+      ],
+      "tuning_top1": 0.3752,
+      "choice": "species_com, beta 8, bias for species without photos 0.65",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.75,
+       "scale": 7.8646,
+       "tuning_nll": 3.7563,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_com, beta 8, bias for species without photos 0.65; alpha 0.75; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "discriminant",
+     "plain": {
+      "top1": [
+       0.3252,
+       0.3109,
+       0.3395,
+       4197
+      ],
+      "top5": [
+       0.452,
+       0.4367,
+       0.4675,
+       4197
+      ],
+      "choice": "shrinkage 0.3",
+      "tuning_top1": 0.3115
+     },
+     "prior": {
+      "top1": [
+       0.3257,
+       0.3117,
+       0.34,
+       4197
+      ],
+      "top5": [
+       0.4539,
+       0.4384,
+       0.4689,
+       4197
+      ],
+      "kind_from_sum": [
+       0.8294,
+       0.8182,
+       0.8408,
+       4197
+      ],
+      "tuning_top1": 0.3168,
+      "choice": "shrinkage 0.3",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.025,
+       "scale": 0.0352,
+       "tuning_nll": 3.1757,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "shrinkage 0.3; alpha 0.02; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "discriminant + sentences",
+     "plain": {
+      "top1": [
+       0.3348,
+       0.3202,
+       0.3495,
+       4197
+      ],
+      "top5": [
+       0.4634,
+       0.4482,
+       0.4787,
+       4197
+      ],
+      "choice": "shrinkage 0.3, species_com, gamma 0.03",
+      "tuning_top1": 0.3239
+     },
+     "prior": {
+      "top1": [
+       0.3462,
+       0.3319,
+       0.3615,
+       4197
+      ],
+      "top5": [
+       0.4934,
+       0.478,
+       0.5087,
+       4197
+      ],
+      "kind_from_sum": [
+       0.7484,
+       0.7348,
+       0.7617,
+       4197
+      ],
+      "tuning_top1": 0.3434,
+      "choice": "shrinkage 0.1, species_com, gamma 1",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.3125,
+       "scale": 0.0025,
+       "tuning_nll": 5.4989,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "shrinkage 0.1, species_com, gamma 1; alpha 0.31; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "mapped to BioCLIP 2",
+     "plain": {
+      "top1": [
+       0.2654,
+       0.2516,
+       0.2792,
+       4197
+      ],
+      "top5": [
+       0.4641,
+       0.4491,
+       0.4794,
+       4197
+      ],
+      "choice": "ridge 0.1, 1226 pairs",
+      "tuning_top1": 0.2885
+     },
+     "prior": {
+      "top1": [
+       0.3526,
+       0.3381,
+       0.3676,
+       4197
+      ],
+      "top5": [
+       0.5802,
+       0.5654,
+       0.5959,
+       4197
+      ],
+      "kind_from_sum": [
+       0.812,
+       0.8001,
+       0.8235,
+       4197
+      ],
+      "tuning_top1": 0.3575,
+      "choice": "ridge 0.01, 1226 pairs",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.9375,
+       "scale": 132.6822,
+       "tuning_nll": 3.3527,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "ridge 0.01, 1226 pairs; alpha 0.94; lam 0, c 0.1"
+     }
+    }
+   ],
+   "kind_heads": [
+    {
+     "name": "kind phrases (sentence rows, with `person` and `none`)",
+     "accuracy": [
+      0.7734,
+      0.7605,
+      0.7868,
+      4197
+     ],
+     "called_person": 0.0004765308553728854,
+     "called_none": 0.0009530617107457708
+    },
+    {
+     "name": "trained on the fitting photos (logistic regression, 14 kinds, no row for `person` or `none`)",
+     "accuracy": [
+      0.8447,
+      0.8335,
+      0.8554,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "trained rows, with the sentence rows for `person` and `none` kept beside them",
+     "accuracy": [
+      0.8437,
+      0.8325,
+      0.8547,
+      4197
+     ],
+     "called_person": 0.0009530617107457708,
+     "called_none": 0.0033357159876101976
+    },
+    {
+     "name": "summed species probabilities of the head `prototypes + sentences`",
+     "accuracy": [
+      0.8649,
+      0.8547,
+      0.8754,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `mix`, t_kind 20, w_kind 0.7; species head `prototypes + sentences`)",
+     "accuracy": [
+      0.8673,
+      0.857,
+      0.8768,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `product`, t_kind 100, w_kind 0.2; species head `prototypes + sentences`)",
+     "accuracy": [
+      0.8663,
+      0.8561,
+      0.8768,
+      4197
+     ],
+     "called_person": 0.0004765308553728854,
+     "called_none": 0.0002382654276864427
+    }
+   ],
+   "notes": [
+    "The map into BioCLIP 2's space was fitted on 1226 pairs of vectors of the same photos.",
+    "The wildlife records hold no people and no photos with nothing alive in them. The sentence rows for `person` and `none` are kept, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured."
+   ],
+   "by_train_photos": {
+    "heads": [
+     "sentences",
+     "prototypes",
+     "prototypes + sentences",
+     "discriminant",
+     "discriminant + sentences",
+     "mapped to BioCLIP 2"
+    ],
+    "rows": [
+     {
+      "group": "no training photo",
+      "n": 1326,
+      "top1": [
+       0.1259,
+       0.0,
+       0.0769,
+       0.0,
+       0.0,
+       0.0958
+      ]
+     },
+     {
+      "group": "1 or 2",
+      "n": 1072,
+      "top1": [
+       0.2668,
+       0.2146,
+       0.305,
+       0.1959,
+       0.2724,
+       0.2435
+      ]
+     },
+     {
+      "group": "3 to 9",
+      "n": 1253,
+      "top1": [
+       0.4637,
+       0.4924,
+       0.5427,
+       0.565,
+       0.5658,
+       0.5188
+      ]
+     },
+     {
+      "group": "10 to 29",
+      "n": 312,
+      "top1": [
+       0.7724,
+       0.6987,
+       0.7853,
+       0.7692,
+       0.8045,
+       0.7308
+      ]
+     },
+     {
+      "group": "30 or more",
+      "n": 234,
+      "top1": [
+       0.7521,
+       0.8419,
+       0.8376,
+       0.8932,
+       0.859,
+       0.9145
+      ]
+     }
+    ]
+   },
+   "chosen_species_head": {
+    "name": "prototypes + sentences",
+    "choice": "species_com, beta 8, bias for species without photos 0.65",
+    "tuning_top1": 0.3752
+   },
+   "fusion_tried_on_tuning_photos": [
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8743
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8531
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.8655
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8478
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8088
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8655
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.8743
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.8496
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8159
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7912
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8602
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8389
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.869
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.8708
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.8619
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8425
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8177
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.8673
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.8726
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.8655
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.846
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.8283
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8035
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7788
+    }
+   ],
+   "confidence": {
+    "head": "prototypes + sentences",
+    "reliability_on_tuning_photos": [
+     {
+      "from": 0.0,
+      "to": 0.1,
+      "photos": 101,
+      "mean_probability": 0.0636,
+      "right": 0.099
+     },
+     {
+      "from": 0.1,
+      "to": 0.2,
+      "photos": 143,
+      "mean_probability": 0.1433,
+      "right": 0.1748
+     },
+     {
+      "from": 0.2,
+      "to": 0.3,
+      "photos": 87,
+      "mean_probability": 0.2507,
+      "right": 0.2989
+     },
+     {
+      "from": 0.3,
+      "to": 0.4,
+      "photos": 51,
+      "mean_probability": 0.3503,
+      "right": 0.3333
+     },
+     {
+      "from": 0.4,
+      "to": 0.5,
+      "photos": 39,
+      "mean_probability": 0.4489,
+      "right": 0.4103
+     },
+     {
+      "from": 0.5,
+      "to": 0.6,
+      "photos": 27,
+      "mean_probability": 0.5413,
+      "right": 0.6296
+     },
+     {
+      "from": 0.6,
+      "to": 0.7,
+      "photos": 26,
+      "mean_probability": 0.6466,
+      "right": 0.5769
+     },
+     {
+      "from": 0.7,
+      "to": 0.8,
+      "photos": 25,
+      "mean_probability": 0.7467,
+      "right": 0.92
+     },
+     {
+      "from": 0.8,
+      "to": 0.9,
+      "photos": 27,
+      "mean_probability": 0.8534,
+      "right": 0.9259
+     },
+     {
+      "from": 0.9,
+      "to": 1.0,
+      "photos": 39,
+      "mean_probability": 0.946,
+      "right": 0.9744
+     }
+    ],
+    "expected_calibration_error": 0.0464,
+    "name_at": 0.63,
+    "offer_at": null,
+    "test": {
+     "named": [
+      0.1947,
+      0.182,
+      0.2073,
+      4197
+     ],
+     "named_right": [
+      0.8862,
+      0.8641,
+      0.9082,
+      817
+     ],
+     "offered": [
+      0.0,
+      0.0,
+      0.0,
+      4197
+     ],
+     "offered_holds_species": [
+      null,
+      null,
+      null,
+      0
+     ],
+     "kind_only": [
+      0.8053,
+      0.7927,
+      0.818,
+      4197
+     ]
+    },
+    "text": "For the head `prototypes + sentences`, the scale was set on the tuning photos (expected calibration error 0.046 there). A species is named when its probability is at least 0.63, the lowest level from which named species were right at least nine times in ten on the tuning photos; no level for offers reached nine in ten. On the test photos a species is then named for 19.5% (18.2 to 20.7) of photos and that name is right for 88.6% (86.4 to 90.8) of them; three species are offered for 0.0% (0.0 to 0.0) and hold the right one for –; 80.5% (79.3 to 81.8) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule."
+   },
+   "saved_head": "work/root/heads/val/tinyclip-39m-16.npz",
+   "seconds": 20.1
+  },
+  "tinyclip-8m-16": {
+   "train_vectors": "images/alachua-2025 (two thirds of val)",
+   "train_photos": 1226,
+   "train_species": 574,
+   "tuning_photos": 565,
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "test_photos": 4197,
+   "species_heads": [
+    {
+     "name": "sentences",
+     "plain": {
+      "top1": [
+       0.1461,
+       0.1353,
+       0.1565,
+       4197
+      ],
+      "top5": [
+       0.2759,
+       0.2628,
+       0.2888,
+       4197
+      ],
+      "choice": "species_com",
+      "tuning_top1": 0.1416
+     },
+     "prior": {
+      "top1": [
+       0.2576,
+       0.2452,
+       0.2711,
+       4197
+      ],
+      "top5": [
+       0.446,
+       0.4313,
+       0.461,
+       4197
+      ],
+      "kind_from_sum": [
+       0.7808,
+       0.7684,
+       0.7929,
+       4197
+      ],
+      "tuning_top1": 0.269,
+      "choice": "species_com",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 1.25,
+       "scale": 54.3998,
+       "tuning_nll": 4.5024,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_com; alpha 1.25; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "prototypes",
+     "plain": {
+      "top1": [
+       0.2128,
+       0.2006,
+       0.2252,
+       4197
+      ],
+      "top5": [
+       0.3648,
+       0.3507,
+       0.38,
+       4197
+      ],
+      "choice": "class means",
+      "tuning_top1": 0.2035
+     },
+     "prior": {
+      "top1": [
+       0.2397,
+       0.2266,
+       0.2533,
+       4197
+      ],
+      "top5": [
+       0.3881,
+       0.3738,
+       0.4031,
+       4197
+      ],
+      "kind_from_sum": [
+       0.7763,
+       0.7639,
+       0.7882,
+       4197
+      ],
+      "tuning_top1": 0.2372,
+      "choice": "class means",
+      "settings": {
+       "lam": 2.0,
+       "c": 1.0,
+       "alpha_prior": 0.5,
+       "scale": 41.9483,
+       "tuning_nll": 3.4704,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "class means; alpha 0.50; lam 2, c 1"
+     }
+    },
+    {
+     "name": "prototypes + sentences",
+     "plain": {
+      "top1": [
+       0.2426,
+       0.2302,
+       0.2561,
+       4197
+      ],
+      "top5": [
+       0.4132,
+       0.3991,
+       0.4272,
+       4197
+      ],
+      "choice": "species_com, beta 2, bias for species without photos 0.2",
+      "tuning_top1": 0.2442
+     },
+     "prior": {
+      "top1": [
+       0.2692,
+       0.2559,
+       0.2831,
+       4197
+      ],
+      "top5": [
+       0.4437,
+       0.4284,
+       0.4599,
+       4197
+      ],
+      "kind_from_sum": [
+       0.782,
+       0.7694,
+       0.7944,
+       4197
+      ],
+      "tuning_top1": 0.2673,
+      "choice": "species_com, beta 2, bias for species without photos 0.8",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.625,
+       "scale": 29.8786,
+       "tuning_nll": 4.7583,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_com, beta 2, bias for species without photos 0.8; alpha 0.62; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "discriminant",
+     "plain": {
+      "top1": [
+       0.2461,
+       0.233,
+       0.2592,
+       4197
+      ],
+      "top5": [
+       0.3812,
+       0.3665,
+       0.3962,
+       4197
+      ],
+      "choice": "shrinkage 0.3",
+      "tuning_top1": 0.2389
+     },
+     "prior": {
+      "top1": [
+       0.2492,
+       0.2361,
+       0.2626,
+       4197
+      ],
+      "top5": [
+       0.3831,
+       0.3679,
+       0.3981,
+       4197
+      ],
+      "kind_from_sum": [
+       0.767,
+       0.7539,
+       0.7794,
+       4197
+      ],
+      "tuning_top1": 0.2478,
+      "choice": "shrinkage 0.3",
+      "settings": {
+       "lam": 2.0,
+       "c": 1.0,
+       "alpha_prior": 0.25,
+       "scale": 0.0641,
+       "tuning_nll": 3.9457,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "shrinkage 0.3; alpha 0.25; lam 2, c 1"
+     }
+    },
+    {
+     "name": "discriminant + sentences",
+     "plain": {
+      "top1": [
+       0.2652,
+       0.2518,
+       0.279,
+       4197
+      ],
+      "top5": [
+       0.412,
+       0.3974,
+       0.4274,
+       4197
+      ],
+      "choice": "shrinkage 0.1, species_com, gamma 0.1",
+      "tuning_top1": 0.2602
+     },
+     "prior": {
+      "top1": [
+       0.2561,
+       0.243,
+       0.2692,
+       4197
+      ],
+      "top5": [
+       0.4377,
+       0.4234,
+       0.4527,
+       4197
+      ],
+      "kind_from_sum": [
+       0.7474,
+       0.7348,
+       0.761,
+       4197
+      ],
+      "tuning_top1": 0.2726,
+      "choice": "shrinkage 0.03, species_com, gamma 3",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.5,
+       "scale": 0.0007,
+       "tuning_nll": 4.7462,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "shrinkage 0.03, species_com, gamma 3; alpha 0.50; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "mapped to BioCLIP 2",
+     "plain": {
+      "top1": [
+       0.1651,
+       0.1546,
+       0.177,
+       4197
+      ],
+      "top5": [
+       0.3243,
+       0.3105,
+       0.3386,
+       4197
+      ],
+      "choice": "ridge 0.01, 1226 pairs",
+      "tuning_top1": 0.1929
+     },
+     "prior": {
+      "top1": [
+       0.2428,
+       0.2302,
+       0.2561,
+       4197
+      ],
+      "top5": [
+       0.4532,
+       0.4379,
+       0.4687,
+       4197
+      ],
+      "kind_from_sum": [
+       0.7157,
+       0.7022,
+       0.7293,
+       4197
+      ],
+      "tuning_top1": 0.2566,
+      "choice": "ridge 0.01, 1226 pairs",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.75,
+       "scale": 128.3133,
+       "tuning_nll": 4.1807,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "ridge 0.01, 1226 pairs; alpha 0.75; lam 0, c 0.1"
+     }
+    }
+   ],
+   "kind_heads": [
+    {
+     "name": "kind phrases (sentence rows, with `person` and `none`)",
+     "accuracy": [
+      0.7241,
+      0.7103,
+      0.7384,
+      4197
+     ],
+     "called_person": 0.0004765308553728854,
+     "called_none": 0.002144388849177984
+    },
+    {
+     "name": "trained on the fitting photos (logistic regression, 14 kinds, no row for `person` or `none`)",
+     "accuracy": [
+      0.7703,
+      0.7574,
+      0.7827,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "trained rows, with the sentence rows for `person` and `none` kept beside them",
+     "accuracy": [
+      0.767,
+      0.7541,
+      0.7794,
+      4197
+     ],
+     "called_person": 0.0026209197045508697,
+     "called_none": 0.008577555396711936
+    },
+    {
+     "name": "summed species probabilities of the head `discriminant + sentences`",
+     "accuracy": [
+      0.7474,
+      0.7348,
+      0.761,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `mix`, t_kind 50, w_kind 0.3; species head `discriminant + sentences`)",
+     "accuracy": [
+      0.7751,
+      0.7624,
+      0.7879,
+      4197
+     ],
+     "called_person": 0.0002382654276864427,
+     "called_none": 0.0009530617107457708
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `product`, t_kind 50, w_kind 0.3; species head `discriminant + sentences`)",
+     "accuracy": [
+      0.7806,
+      0.7677,
+      0.7927,
+      4197
+     ],
+     "called_person": 0.0002382654276864427,
+     "called_none": 0.0009530617107457708
+    }
+   ],
+   "notes": [
+    "The map into BioCLIP 2's space was fitted on 1226 pairs of vectors of the same photos.",
+    "The wildlife records hold no people and no photos with nothing alive in them. The sentence rows for `person` and `none` are kept, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured."
+   ],
+   "by_train_photos": {
+    "heads": [
+     "sentences",
+     "prototypes",
+     "prototypes + sentences",
+     "discriminant",
+     "discriminant + sentences",
+     "mapped to BioCLIP 2"
+    ],
+    "rows": [
+     {
+      "group": "no training photo",
+      "n": 1326,
+      "top1": [
+       0.0671,
+       0.0,
+       0.0528,
+       0.0,
+       0.0837,
+       0.0415
+      ]
+     },
+     {
+      "group": "1 or 2",
+      "n": 1072,
+      "top1": [
+       0.1614,
+       0.139,
+       0.1763,
+       0.1026,
+       0.1688,
+       0.1465
+      ]
+     },
+     {
+      "group": "3 to 9",
+      "n": 1253,
+      "top1": [
+       0.348,
+       0.3791,
+       0.399,
+       0.4022,
+       0.348,
+       0.3296
+      ]
+     },
+     {
+      "group": "10 to 29",
+      "n": 312,
+      "top1": [
+       0.6667,
+       0.5994,
+       0.6186,
+       0.7019,
+       0.6026,
+       0.5705
+      ]
+     },
+     {
+      "group": "30 or more",
+      "n": 234,
+      "top1": [
+       0.7479,
+       0.8333,
+       0.7607,
+       0.9103,
+       0.6795,
+       0.9231
+      ]
+     }
+    ]
+   },
+   "chosen_species_head": {
+    "name": "discriminant + sentences",
+    "choice": "shrinkage 0.03, species_com, gamma 3",
+    "tuning_top1": 0.2726
+   },
+   "fusion_tried_on_tuning_photos": [
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.754
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.7628
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.7717
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.7876
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7982
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7876
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.7646
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.777
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.8
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.7912
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7876
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7681
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.7947
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.7894
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.7858
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7752
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7469
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.7611
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.7894
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.8035
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7965
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7947
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.7681
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.7929
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.8053
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.7912
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7912
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7681
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.7504
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.7947
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.8
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.7982
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.7929
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.7894
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.7558
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7416
+    }
+   ],
+   "confidence": {
+    "head": "discriminant + sentences",
+    "reliability_on_tuning_photos": [
+     {
+      "from": 0.0,
+      "to": 0.1,
+      "photos": 398,
+      "mean_probability": 0.0436,
+      "right": 0.1256
+     },
+     {
+      "from": 0.1,
+      "to": 0.2,
+      "photos": 88,
+      "mean_probability": 0.1414,
+      "right": 0.4659
+     },
+     {
+      "from": 0.2,
+      "to": 0.3,
+      "photos": 36,
+      "mean_probability": 0.2458,
+      "right": 0.6944
+     },
+     {
+      "from": 0.3,
+      "to": 0.4,
+      "photos": 26,
+      "mean_probability": 0.34,
+      "right": 0.8846
+     },
+     {
+      "from": 0.4,
+      "to": 0.5,
+      "photos": 12,
+      "mean_probability": 0.4428,
+      "right": 0.8333
+     },
+     {
+      "from": 0.5,
+      "to": 0.6,
+      "photos": 3,
+      "mean_probability": 0.5613,
+      "right": 1.0
+     },
+     {
+      "from": 0.6,
+      "to": 0.7,
+      "photos": 1,
+      "mean_probability": 0.619,
+      "right": 1.0
+     },
+     {
+      "from": 0.7,
+      "to": 0.8,
+      "photos": 1,
+      "mean_probability": 0.7121,
+      "right": 1.0
+     },
+     {
+      "from": 0.8,
+      "to": 0.9,
+      "photos": 0,
+      "mean_probability": null,
+      "right": null
+     },
+     {
+      "from": 0.9,
+      "to": 1.0,
+      "photos": 0,
+      "mean_probability": null,
+      "right": null
+     }
+    ],
+    "expected_calibration_error": 0.1738,
+    "name_at": 0.31,
+    "offer_at": 0.34,
+    "test": {
+     "named": [
+      0.0829,
+      0.0743,
+      0.091,
+      4197
+     ],
+     "named_right": [
+      0.8966,
+      0.8649,
+      0.9282,
+      348
+     ],
+     "offered": [
+      0.0743,
+      0.0667,
+      0.0822,
+      4197
+     ],
+     "offered_holds_species": [
+      0.8077,
+      0.766,
+      0.8494,
+      312
+     ],
+     "kind_only": [
+      0.8427,
+      0.832,
+      0.8537,
+      4197
+     ]
+    },
+    "text": "For the head `discriminant + sentences`, the scale was set on the tuning photos (expected calibration error 0.174 there). A species is named when its probability is at least 0.31, the lowest level from which named species were right at least nine times in ten on the tuning photos; three species are offered when the first three together reach 0.34, set the same way. On the test photos a species is then named for 8.3% (7.4 to 9.1) of photos and that name is right for 89.7% (86.5 to 92.8) of them; three species are offered for 7.4% (6.7 to 8.2) and hold the right one for 80.8% (76.6 to 84.9); 84.3% (83.2 to 85.4) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule."
+   },
+   "saved_head": "work/root/heads/val/tinyclip-8m-16.npz",
+   "seconds": 20.4
+  },
+  "bioclip2-l14": {
+   "train_vectors": "images/alachua-2025 (two thirds of val)",
+   "train_photos": 1226,
+   "train_species": 574,
+   "tuning_photos": 565,
+   "test_vectors": "images/alachua-2025",
+   "test_photos": 4197,
+   "species_heads": [
+    {
+     "name": "sentences",
+     "plain": {
+      "top1": [
+       0.9035,
+       0.8942,
+       0.9126,
+       4197
+      ],
+      "top5": [
+       0.9681,
+       0.9624,
+       0.9733,
+       4197
+      ],
+      "choice": "species_sci",
+      "tuning_top1": 0.9027
+     },
+     "prior": {
+      "top1": [
+       0.9242,
+       0.9161,
+       0.9321,
+       4197
+      ],
+      "top5": [
+       0.9747,
+       0.9697,
+       0.9793,
+       4197
+      ],
+      "kind_from_sum": [
+       0.9833,
+       0.9793,
+       0.9869,
+       4197
+      ],
+      "tuning_top1": 0.9257,
+      "choice": "species_sci",
+      "settings": {
+       "lam": 2.0,
+       "c": 1.0,
+       "alpha_prior": 1.0,
+       "scale": 86.4851,
+       "tuning_nll": 0.2915,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_sci; alpha 1.00; lam 2, c 1"
+     }
+    },
+    {
+     "name": "prototypes",
+     "plain": {
+      "top1": [
+       0.6097,
+       0.5952,
+       0.625,
+       4197
+      ],
+      "top5": [
+       0.6552,
+       0.6409,
+       0.6695,
+       4197
+      ],
+      "choice": "class means",
+      "tuning_top1": 0.5628
+     },
+     "prior": {
+      "top1": [
+       0.6107,
+       0.5964,
+       0.6257,
+       4197
+      ],
+      "top5": [
+       0.655,
+       0.6405,
+       0.6693,
+       4197
+      ],
+      "kind_from_sum": [
+       0.9316,
+       0.924,
+       0.9395,
+       4197
+      ],
+      "tuning_top1": 0.5699,
+      "choice": "class means",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.4,
+       "scale": 75.5244,
+       "tuning_nll": 0.6477,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "class means; alpha 0.40; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "prototypes + sentences",
+     "plain": {
+      "top1": [
+       0.9135,
+       0.9052,
+       0.9218,
+       4197
+      ],
+      "top5": [
+       0.9733,
+       0.9683,
+       0.9781,
+       4197
+      ],
+      "choice": "species_sci, beta 8, bias for species without photos 0.65",
+      "tuning_top1": 0.915
+     },
+     "prior": {
+      "top1": [
+       0.9173,
+       0.9087,
+       0.9257,
+       4197
+      ],
+      "top5": [
+       0.9759,
+       0.9712,
+       0.9802,
+       4197
+      ],
+      "kind_from_sum": [
+       0.9845,
+       0.9805,
+       0.9881,
+       4197
+      ],
+      "tuning_top1": 0.9274,
+      "choice": "species_sci, beta 8, bias for species without photos 0.65",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.6,
+       "scale": 12.824,
+       "tuning_nll": 0.2825,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "species_sci, beta 8, bias for species without photos 0.65; alpha 0.60; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "discriminant",
+     "plain": {
+      "top1": [
+       0.6011,
+       0.5868,
+       0.6162,
+       4197
+      ],
+      "top5": [
+       0.6436,
+       0.629,
+       0.6583,
+       4197
+      ],
+      "choice": "shrinkage 0.1",
+      "tuning_top1": 0.5646
+     },
+     "prior": {
+      "top1": [
+       0.6066,
+       0.5923,
+       0.6216,
+       4197
+      ],
+      "top5": [
+       0.6533,
+       0.639,
+       0.6679,
+       4197
+      ],
+      "kind_from_sum": [
+       0.9159,
+       0.9076,
+       0.9245,
+       4197
+      ],
+      "tuning_top1": 0.5699,
+      "choice": "shrinkage 1",
+      "settings": {
+       "lam": 0.0,
+       "c": 0.1,
+       "alpha_prior": 0.45,
+       "scale": 0.0085,
+       "tuning_nll": 0.6885,
+       "rows_with_a_species": 574
+      },
+      "settings_text": "shrinkage 1; alpha 0.45; lam 0, c 0.1"
+     }
+    },
+    {
+     "name": "discriminant + sentences",
+     "plain": {
+      "top1": [
+       0.9095,
+       0.9006,
+       0.9178,
+       4197
+      ],
+      "top5": [
+       0.9724,
+       0.9674,
+       0.9771,
+       4197
+      ],
+      "choice": "shrinkage 1, species_sci, gamma 3",
+      "tuning_top1": 0.9097
+     },
+     "prior": {
+      "top1": [
+       0.9085,
+       0.8995,
+       0.9173,
+       4197
+      ],
+      "top5": [
+       0.9752,
+       0.9702,
+       0.9797,
+       4197
+      ],
+      "kind_from_sum": [
+       0.9843,
+       0.9805,
+       0.9878,
+       4197
+      ],
+      "tuning_top1": 0.9168,
+      "choice": "shrinkage 1, species_sci, gamma 3",
+      "settings": {
+       "lam": 2.0,
+       "c": 1.0,
+       "alpha_prior": 0.9,
+       "scale": 0.0041,
+       "tuning_nll": 0.3175,
+       "rows_with_a_species": 5911
+      },
+      "settings_text": "shrinkage 1, species_sci, gamma 3; alpha 0.90; lam 2, c 1"
+     }
+    }
+   ],
+   "kind_heads": [
+    {
+     "name": "kind phrases (sentence rows, with `person` and `none`)",
+     "accuracy": [
+      0.7613,
+      0.7482,
+      0.7741,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "trained on the fitting photos (logistic regression, 14 kinds, no row for `person` or `none`)",
+     "accuracy": [
+      0.9438,
+      0.9371,
+      0.9502,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "trained rows, with the sentence rows for `person` and `none` kept beside them",
+     "accuracy": [
+      0.9402,
+      0.933,
+      0.9471,
+      4197
+     ],
+     "called_person": 0.0002382654276864427,
+     "called_none": 0.008577555396711936
+    },
+    {
+     "name": "summed species probabilities of the head `prototypes + sentences`",
+     "accuracy": [
+      0.9845,
+      0.9805,
+      0.9881,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `mix`, t_kind 20, w_kind 0.5; species head `prototypes + sentences`)",
+     "accuracy": [
+      0.985,
+      0.9812,
+      0.9886,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    },
+    {
+     "name": "the page's combination of kind phrases and species list (rule `product`, t_kind 20, w_kind 0.5; species head `prototypes + sentences`)",
+     "accuracy": [
+      0.9857,
+      0.9819,
+      0.989,
+      4197
+     ],
+     "called_person": 0.0,
+     "called_none": 0.0
+    }
+   ],
+   "notes": [
+    "The wildlife records hold no people and no photos with nothing alive in them. The sentence rows for `person` and `none` are kept, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured."
+   ],
+   "by_train_photos": {
+    "heads": [
+     "sentences",
+     "prototypes",
+     "prototypes + sentences",
+     "discriminant",
+     "discriminant + sentences"
+    ],
+    "rows": [
+     {
+      "group": "no training photo",
+      "n": 1326,
+      "top1": [
+       0.871,
+       0.0,
+       0.8371,
+       0.0,
+       0.8069
+      ]
+     },
+     {
+      "group": "1 or 2",
+      "n": 1072,
+      "top1": [
+       0.9384,
+       0.7826,
+       0.944,
+       0.7687,
+       0.93
+      ]
+     },
+     {
+      "group": "3 to 9",
+      "n": 1253,
+      "top1": [
+       0.9457,
+       0.9497,
+       0.9561,
+       0.9489,
+       0.9665
+      ]
+     },
+     {
+      "group": "10 to 29",
+      "n": 312,
+      "top1": [
+       0.984,
+       0.9904,
+       0.9808,
+       0.9872,
+       0.9872
+      ]
+     },
+     {
+      "group": "30 or more",
+      "n": 234,
+      "top1": [
+       0.9658,
+       0.9615,
+       0.9573,
+       0.9615,
+       0.9701
+      ]
+     }
+    ]
+   },
+   "chosen_species_head": {
+    "name": "prototypes + sentences",
+    "choice": "species_sci, beta 8, bias for species without photos 0.65",
+    "tuning_top1": 0.9274
+   },
+   "fusion_tried_on_tuning_photos": [
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.9735
+    },
+    {
+     "rule": "mix",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.977
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8832
+    },
+    {
+     "rule": "mix",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9788
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.9239
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.8159
+    },
+    {
+     "rule": "mix",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9841
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.7,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 0.9,
+     "kind_right": 0.977
+    },
+    {
+     "rule": "product",
+     "t_kind": 20.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.7,
+     "kind_right": 0.9788
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 0.9,
+     "kind_right": 0.954
+    },
+    {
+     "rule": "product",
+     "t_kind": 50.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.0,
+     "kind_right": 0.9805
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.1,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.2,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.3,
+     "kind_right": 0.9823
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "kind_right": 0.9788
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.7,
+     "kind_right": 0.9735
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 0.9,
+     "kind_right": 0.9133
+    },
+    {
+     "rule": "product",
+     "t_kind": 100.0,
+     "w_kind": 1.0,
+     "kind_right": 0.7664
+    }
+   ],
+   "confidence": {
+    "head": "prototypes + sentences",
+    "reliability_on_tuning_photos": [
+     {
+      "from": 0.0,
+      "to": 0.1,
+      "photos": 0,
+      "mean_probability": null,
+      "right": null
+     },
+     {
+      "from": 0.1,
+      "to": 0.2,
+      "photos": 4,
+      "mean_probability": 0.1623,
+      "right": 0.0
+     },
+     {
+      "from": 0.2,
+      "to": 0.3,
+      "photos": 3,
+      "mean_probability": 0.233,
+      "right": 0.3333
+     },
+     {
+      "from": 0.3,
+      "to": 0.4,
+      "photos": 3,
+      "mean_probability": 0.3313,
+      "right": 0.3333
+     },
+     {
+      "from": 0.4,
+      "to": 0.5,
+      "photos": 13,
+      "mean_probability": 0.4363,
+      "right": 0.5385
+     },
+     {
+      "from": 0.5,
+      "to": 0.6,
+      "photos": 13,
+      "mean_probability": 0.5541,
+      "right": 0.6154
+     },
+     {
+      "from": 0.6,
+      "to": 0.7,
+      "photos": 10,
+      "mean_probability": 0.6529,
+      "right": 0.9
+     },
+     {
+      "from": 0.7,
+      "to": 0.8,
+      "photos": 20,
+      "mean_probability": 0.7701,
+      "right": 0.75
+     },
+     {
+      "from": 0.8,
+      "to": 0.9,
+      "photos": 38,
+      "mean_probability": 0.8532,
+      "right": 0.7895
+     },
+     {
+      "from": 0.9,
+      "to": 1.0,
+      "photos": 461,
+      "mean_probability": 0.9908,
+      "right": 0.9826
+     }
+    ],
+    "expected_calibration_error": 0.0215,
+    "name_at": 0.05,
+    "offer_at": null,
+    "test": {
+     "named": [
+      1.0,
+      1.0,
+      1.0,
+      4197
+     ],
+     "named_right": [
+      0.9173,
+      0.9087,
+      0.9257,
+      4197
+     ],
+     "offered": [
+      0.0,
+      0.0,
+      0.0,
+      4197
+     ],
+     "offered_holds_species": [
+      null,
+      null,
+      null,
+      0
+     ],
+     "kind_only": [
+      0.0,
+      0.0,
+      0.0,
+      4197
+     ]
+    },
+    "text": "For the head `prototypes + sentences`, the scale was set on the tuning photos (expected calibration error 0.022 there). A species is named when its probability is at least 0.05, the lowest level from which named species were right at least nine times in ten on the tuning photos; no level for offers reached nine in ten. On the test photos a species is then named for 100.0% (100.0 to 100.0) of photos and that name is right for 91.7% (90.9 to 92.6) of them; three species are offered for 0.0% (0.0 to 0.0) and hold the right one for –; 0.0% (0.0 to 0.0) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule."
+   },
+   "saved_head": "work/root/heads/val/bioclip2-l14.npz",
+   "seconds": 18.3
+  }
+ },
+ "inputs": {
+  "branches": {
+   "pub/data-alachua": {
+    "commit": "7ee4ed7f57ad112bda2e5e420b4ba9e5b16888c5",
+    "made_at": "2026-10-11T01:51:13Z",
+    "made_from": "5149891a3c0a9d07e93e64942eb83c63821fb6f9",
+    "published": "extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5",
+    "run_number": "4",
+    "workflow": "data"
+   },
+   "pub/lab-bioclip-b16": {
+    "commit": "8390d0006a3469e2c5e3588bab83f0ca839df80b",
+    "made_at": "2026-10-11T03:41:31Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip2-l14": {
+    "commit": "f552a63fbd5e4e31a415eec0257e328bc0e4e820",
+    "made_at": "2026-10-11T03:41:58Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip25-h14": {
+    "commit": "40532989b3a9bcbd413c170091347e07c8b658d7",
+    "made_at": "2026-10-11T03:42:14Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-bioclip25-mobile-fastvit": {
+    "commit": "3c8cc3bd23863d17708eb691464b0ed076f9c880",
+    "made_at": "2026-10-11T03:42:23Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-clip-b32": {
+    "commit": "721281767c8bfe4a6906a2ef4207066439314127",
+    "made_at": "2026-10-11T03:42:35Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-mobileclip2-s0": {
+    "commit": "3da256a7dad0606f62068b8e905d5f829d2b2f9c",
+    "made_at": "2026-10-11T03:42:45Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-siglip2-b16": {
+    "commit": "5efd3b2475959679b5f3d4902b15e94264824fdd",
+    "made_at": "2026-10-11T03:42:58Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-39m-16": {
+    "commit": "d68a5fc88c30343c363071b665e7ea1af09037b8",
+    "made_at": "2026-10-11T03:48:07Z",
+    "made_from": "8badfd6e1a79ae44a289e03a3e718d9d906d0365",
+    "run_number": "9",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-40m-32": {
+    "commit": "6d8c0ecbd92e68fd2ae852fb8aee19b254ef9e41",
+    "made_at": "2026-10-11T03:45:01Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-61m-32": {
+    "commit": "bd62f0f43f8cf9d52dd7c8a27424e36b5535758e",
+    "made_at": "2026-10-11T03:46:23Z",
+    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
+    "run_number": "10",
+    "workflow": "lab"
+   },
+   "pub/lab-tinyclip-8m-16": {
+    "commit": "af03032158c37e783cba02a4bea6ef0537e34e50",
+    "made_at": "2026-10-11T03:48:04Z",
+    "made_from": "8badfd6e1a79ae44a289e03a3e718d9d906d0365",
+    "run_number": "9",
+    "workflow": "lab"
+   }
+  }
+ }
+}

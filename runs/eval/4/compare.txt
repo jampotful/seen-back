@@ -1,0 +1,66 @@
+checks.json                               1 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 63 other values, 37 differ; 2 keys on one side only
+    /checks[2]/check: 'the month column is the month of the date' | 'no evaluation observation was created before the first one dated 2025-01-01'
+    /checks[3]/check: 'no two evaluation rows share a value of id' | 'the month column is the month of the date'
+    /checks[4]/check: 'no two evaluation rows share a value of gbif_id' | 'no two evaluation rows share a value of id'
+    /checks[5]/check: 'no two evaluation rows share a value of obs_url' | 'no two evaluation rows share a value of gbif_id'
+    /checks[6]/check: 'no two evaluation rows share a value of photo_url' | 'no two evaluation rows share a value of obs_url'
+    /checks[7]/check: 'the split is the stated function of gbif_id alone (tools/species/build_eval.py, split_of)' | 'no two evaluation rows share a value of photo_url'
+    /checks[8]/check: 'in the species list the twelve monthly counts add up to the total, and species are sorted by total' | 'the split is the stated function of gbif_id alone (tools/species/build_eval.py, split_of)'
+    /checks[9]/check: 'no GBIF species key appears twice in the list' | 'in the species list the twelve monthly counts add up to the total, and species are sorted by total'
+    /checks[10]/check: 'scientific names carried by more than one species key' | 'no GBIF species key appears twice in the list'
+    /checks[10]/verdict: 'note' | 'pass'
+    /checks[11]/check: "an evaluation row's name and kind of eye equal the species list's for the same key" | 'scientific names carried by more than one species key'
+    /checks[11]/verdict: 'pass' | 'note'
+shipped-val-bioclip2-l14.json            56 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 20 other values, 0 differ; 2 keys on one side only
+    /extra
+    /numbers/levels
+shipped-val-tinyclip-39m-16.json         56 numbers compared, 39 differ by more than 0.0005, largest difference 193.000000; 20 other values, 8 differ; 2 keys on one side only
+    /manifest/fusion/alpha_prior: 1.0 | 0.75
+    /manifest/fusion/name_at: 0.89 | 0.63
+    /manifest/fusion/offer_at: 0.96 | 2.0
+    /numbers/kind_only[0]: 0.8044 | 0.8058
+    /numbers/kind_only[1]: 0.7922 | 0.7932
+    /numbers/kind_only[2]: 0.8161 | 0.8184
+    /numbers/kind_only_kind_right[0]: 0.843 | 0.8394
+    /numbers/kind_only_kind_right[1]: 0.8306 | 0.8273
+    /numbers/kind_only_kind_right[2]: 0.8555 | 0.8519
+    /numbers/kind_only_kind_right[3]: 3376 | 3382
+    /numbers/kind_right[0]: 0.8692 | 0.8675
+    /numbers/kind_right[1]: 0.8592 | 0.8573
+shipped-val-tinyclip-8m-16.json          63 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 13 other values, 0 differ; 2 keys on one side only
+    /extra
+    /numbers/levels
+study1.json                            5395 numbers compared, 0 differ by more than 0.0005, largest difference 0.000000; 1240 other values, 0 differ; 16 keys on one side only
+    /models/bioclip-b16/against_bioclip2_l14
+    /models/bioclip-b16/labelsets/species_com/clustered
+    /models/bioclip-b16/labelsets/species_sci/clustered
+    /models/bioclip-b16/labelsets/species_taxon_com/clustered
+    /models/bioclip2-l14/labelsets/species_com/clustered
+    /models/bioclip2-l14/labelsets/species_sci/clustered
+    /models/bioclip2-l14/labelsets/species_taxon_com/clustered
+    /models/bioclip25-h14
+    /models/bioclip25-mobile-fastvit
+    /models/clip-b32
+    /models/mobileclip2-s0
+    /models/siglip2-b16
+study2-val.json                        1345 numbers compared, 237 differ by more than 0.0005, largest difference 249.000000; 278 other values, 17 differ; 2 keys on one side only
+    /method/prior_weight_grid[3]: 0.2 | 0.15
+    /method/prior_weight_grid[4]: 0.3 | 0.2
+    /method/prior_weight_grid[5]: 0.5 | 0.25
+    /method/prior_weight_grid[6]: 0.75 | 0.3
+    /method/prior_weight_grid[7]: 1.0 | 0.4
+    /method/prior_weight_grid[8]: 1.5 | 0.5
+    /method/prior_weight_grid[9]: 2.0 | 0.6
+    /method/prior_weight_grid[10]: 3.0 | 0.75
+    /method/prior_weight_grid[11]: 5.0 | 1.0
+    /models/bioclip2-l14/by_train_photos/rows[0]/top1[0]: 0.8582 | 0.871
+    /models/bioclip2-l14/by_train_photos/rows[0]/top1[4]: 0.8213 | 0.8069
+    /models/bioclip2-l14/by_train_photos/rows[1]/top1[0]: 0.9366 | 0.9384
+shipped-sentences-bioclip2-l14-product.json only in out/rerun
+shipped-sentences-bioclip2-l14.json  only in out/rerun
+shipped-sentences-tinyclip-39m-16-product.json only in out/rerun
+shipped-sentences-tinyclip-39m-16.json only in out/rerun
+shipped-sentences-tinyclip-8m-16-product.json only in out/rerun
+shipped-sentences-tinyclip-8m-16.json only in out/rerun
+study2-sentences.json                only in out/rerun
+numbers that differ by more than the tolerance, all files: 276
