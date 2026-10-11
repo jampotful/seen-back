@@ -1,0 +1,82 @@
+
+=== 05:31:04 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.20.0
+Python 3.12.10
+
+=== 05:31:05 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build.py patched
+build 6 | index.html 143317 bytes | artifact 140739 bytes | selftest.js 44338 bytes
+build ok
+143339 index.html
+44338 selftest.js
+
+=== 05:31:05 a real slot and its photos
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+python 1.31.0 12.3.0 2.5.4
+total 153616
+drwxr-xr-x  8 runner  wheel       256 Oct 11 05:31 .
+drwxr-xr-x  9 runner  wheel       288 Oct 11 05:31 ..
+-rw-r--r--  1 runner  wheel      8822 Oct 11 05:31 parity.json
+asset-garden.jpg 263072
+asset-portrait.jpg 46795
+big12mp.jpg 776979
+dots.png 46609
+garden.jpg 257177
+heron.png 29625
+info-exif6.jpg 46901
+odd.png 32962
+portrait.jpg 46865
+rings.png 5014
+small.png 12646
+stripes.png 29601
+wall.png 4614
+wide.png 576765
+species: 5911 rows, 0 with monthly weights
+slot ci-rec/slot | model 9559225 bytes | kinds (17, 512)
+  python: asset-garden.jpg [['none', 0.3649], ['plant', 0.2287], ['deer', 0.1062]]
+  python: asset-portrait.jpg [['person', 0.9391], ['none', 0.0363], ['other', 0.0087]]
+  python: big12mp.jpg [['none', 0.3967], ['plant', 0.1959], ['frog', 0.0999]]
+  python: dots.png [['none', 0.8679], ['plant', 0.0578], ['person', 0.0453]]
+  python: garden.jpg [['none', 0.3292], ['plant', 0.2174], ['deer', 0.1221]]
+  python: heron.png [['wader', 0.6513], ['bird', 0.2546], ['hawk', 0.0488]]
+  python: info-exif6.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: odd.png [['none', 0.8681], ['plant', 0.0415], ['other', 0.0256]]
+  python: portrait.jpg [['person', 0.9296], ['none', 0.0403], ['other', 0.0111]]
+  python: rings.png [['other', 0.2688], ['none', 0.2334], ['plant', 0.2143]]
+  python: small.png [['plant', 0.6989], ['other', 0.082], ['bird', 0.0618]]
+  python: stripes.png [['none', 0.7913], ['plant', 0.0713], ['other', 0.047]]
+  python: wall.png [['none', 0.9664], ['person', 0.0153], ['plant', 0.0049]]
+  python: wide.png [['none', 0.2437], ['plant', 0.2288], ['rabbit', 0.1381]]
+
+=== 05:31:16 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 200
+8782 -> 200
+
+=== 05:31:52 playwright 1.56.0 and WebKit
+added 2 packages in 4s
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 05:32:02 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+05:32:40 webkit-phone 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 37112ms
+05:33:11 webkit-desktop 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 31779ms
+
+=== 05:33:11 self-test with the recognizer phase again: Playwright WebKit (macOS) x phone, desktop
+05:33:44 webkit-phone 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 32151ms
+05:34:19 webkit-desktop 26.0 done=true ok=true fails=0 checks=140 webgl2=true float=true Apple GPU 35142ms
+
+=== 05:34:19 summary
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone None None []
