@@ -1,0 +1,60 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:27:50] job: model=bioclip2-l14 shard=3/4 stages=text-species,images
+data_source=pub/data-alachua
+data_made=made_from=1ac9ea0d1f4d4d866539d01dd267ee5c218fa5d9 made_at=2026-10-11T01:10:26Z workflow=data run_number=2 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:27:50] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 3/4
+fetched 200/1500 (1.2s)
+fetched 400/1500 (2.0s)
+fetched 600/1500 (2.8s)
+fetched 800/1500 (3.7s)
+fetched 1000/1500 (4.5s)
+fetched 1200/1500 (5.4s)
+fetched 1400/1500 (6.3s)
+photos: 1500 rows, 1500 to fetch, 0 failed, 6.9s
+[01:27:57] exit 0
+[01:27:57] + python3 -u tools/lab/lab.py text --model bioclip2-l14 --labelset species --species-json data_in/species.json --shard 3/4 --out art/bioclip2-l14
+loaded bioclip2-l14 via open_clip in 13.2s
+[0;93m2026-10-11 01:28:10.527581523 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 1477 of 5911 (shard 3/4)
+  short-context text check: max deviation 8.94e-08 -> used
+  text 256/5908 (5.1s)
+  text 2816/5908 (51.5s)
+  text 5376/5908 (96.9s)
+species_com: (1477, 768)
+  text 256/5908 (4.5s)
+  text 2816/5908 (52.5s)
+  text 5376/5908 (100.2s)
+species_sci: (1477, 768)
+  text 256/1477 (12.1s)
+species_taxon_com: (1477, 768)
+[01:32:58] exit 0
+[01:32:58] + python3 -u tools/lab/lab.py images --model bioclip2-l14 --manifest data_in/manifest.csv --photos photos --shard 3/4 --evalname alachua-2025 --out art/bioclip2-l14
+images: bioclip2-l14, eval alachua-2025, shard 3/4, 1500 rows
+loaded bioclip2-l14 via open_clip in 5.8s
+[0;93m2026-10-11 01:33:04.801563299 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/1500, 1.04 photos/s
+  images 192/1500, 1.04 photos/s
+  images 352/1500, 1.04 photos/s
+  images 512/1500, 1.04 photos/s
+  images 672/1500, 1.04 photos/s
+  images 832/1500, 1.04 photos/s
+  images 992/1500, 1.04 photos/s
+  images 1152/1500, 1.04 photos/s
+  images 1312/1500, 1.04 photos/s
+  images 1472/1500, 1.04 photos/s
+images: 1500 embedded, 0 skipped, 1449.0s (1.04 photos/s)
+[01:57:14] exit 0
+[01:57:14] job done, fail=0
