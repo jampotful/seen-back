@@ -16,6 +16,14 @@ step() {
 }
 ZIP=http://images.cocodataset.org/annotations/annotations_trainval2017.zip
 step "install requests" python3 -m pip install --quiet requests || exit 1
+lookups() {
+  mkdir -p out/lookups
+  grep -v '^#' ci/data/lookups.txt | while read -r url name; do
+    [ -n "$url" ] || continue
+    curl -sS --max-time 60 -A "seen-back-data/1 (+https://github.com/jampotful/seen-back)" -o "out/lookups/$name" -w "%{http_code} $name\n" "$url" || echo "failed $name"
+  done
+}
+[ -f ci/data/lookups.txt ] && step "GBIF lookups" lookups
 
 # Which addresses answer, over http and https (HEAD requests; a 200 with an image type is what we want).
 probe() { for u in "$@"; do printf '%s ' "$u"; curl -sS -o /dev/null -I --max-time 30 -w '%{http_code} %{content_type} %header{content-length}\n' "$u" || echo "curl failed"; done; }
