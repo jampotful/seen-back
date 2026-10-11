@@ -25,7 +25,7 @@ python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
   sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html
-  for PH1 in 0 1; do
+  for PH1 in 1 2; do
     step "rec_probe.js in WebKit, PHONE=$PH1"
     PHONE=$PH1 BROWSER=webkit PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-webkit-phone$PH1.json" 2>&1; echo "probe: exit $?"; python3 -I -c "
 import json,sys
