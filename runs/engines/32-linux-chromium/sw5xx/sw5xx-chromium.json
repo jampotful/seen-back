@@ -1,0 +1,31 @@
+{
+ "browser": "chromium",
+ "runs": {
+  "unpatched": {
+   "console": [
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+   ],
+   "first": "waiting after 90 s",
+   "controlled": true,
+   "bad": "true",
+   "status": 502,
+   "fromServiceWorker": true,
+   "app": false
+  },
+  "patched": {
+   "console": [],
+   "first": "waiting after 90 s",
+   "controlled": true,
+   "bad": "true",
+   "status": 200,
+   "fromServiceWorker": true,
+   "app": true,
+   "second": {
+    "ready": "ready",
+    "kind": "wader",
+    "runMs": 604
+   }
+  }
+ },
+ "version": "141.0.7390.37"
+}
