@@ -1,0 +1,27 @@
+{
+ "data": "pub/data-alachua",
+ "manifest": "train/alachua-pre2025/manifest.csv",
+ "shard_mode": "mod",
+ "wait_minutes": 280,
+ "about": "Training-set vectors for BioCLIP 2 (ViT-L/14), first 60,000 rows, shards 0-2 of 9 (rows modulo 9); the plan job waits for the manifest.",
+ "models": [
+  "bioclip2-l14"
+ ],
+ "stages": [
+  "images"
+ ],
+ "rows": {
+  "bioclip2-l14": 60000
+ },
+ "shards": {
+  "bioclip2-l14": 9
+ },
+ "shard_subset": {
+  "bioclip2-l14": [
+   0,
+   1,
+   2
+  ]
+ },
+ "max_parallel": 3
+}
