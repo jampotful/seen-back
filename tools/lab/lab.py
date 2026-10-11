@@ -114,7 +114,11 @@ def shard_rows(rows, shard, mode="block", limit=None):
     """mode "block": contiguous blocks; mode "mod": rows whose index is i modulo n (balanced when the manifest is ordered
     by rank within species). `limit` keeps only the first `limit` rows before sharding. Merging restores manifest order."""
     if limit:
-        rows = rows[:int(limit)]
+        if isinstance(limit, str) and ":" in limit:
+            a, b = limit.split(":")
+            rows = rows[int(a or 0):(int(b) if b else None)]
+        else:
+            rows = rows[:int(limit)]
     i, n = parse_shard(shard)
     if mode == "mod":
         return rows[i::n]
@@ -1054,9 +1058,30 @@ def stage_merge(args):
             sk = npy.with_name(npy.name.replace(".f16.npy", ".skipped.json"))
             if sk.exists():
                 skipped += json.loads(sk.read_text())
-        if not allv or newer("images/%s.f16.npy" % base):
+        if not allv:
             continue
         v = np.concatenate(allv)
+        # union with rows the branch already holds for this set (another run may have embedded other shards); where
+        # both have a row, the newer run's row wins
+        ef, ei = out / "images" / ("%s.f16.npy" % base), out / "images" / ("%s.ids.json" % base)
+        if ef.exists() and ei.exists():
+            old_v, old_id = np.load(ef), json.loads(ei.read_text())
+            mine = set(allid)
+            if prov.get("images/%s.f16.npy" % base, {}).get("run", -1) > run:
+                keep = set(old_id)
+                sel = [k for k, r in enumerate(allid) if r not in keep]
+                v, allid = v[sel], [allid[k] for k in sel]
+                kept.append(("images/%s rows already there (union, later rows kept)" % base, prov["images/%s.f16.npy" % base]["run"]))
+                mine = set(allid)
+            add = [k for k, r in enumerate(old_id) if r not in mine]
+            if add:
+                v = np.concatenate([v, old_v[add].astype(v.dtype)])
+                allid = allid + [old_id[k] for k in add]
+                log("  %s: %d rows kept from the branch" % (base, len(add)))
+            sk = out / "images" / ("%s.skipped.json" % base)
+            if sk.exists():
+                got = set(allid)
+                skipped += [x for x in json.loads(sk.read_text()) if x[0] not in got and x[0] not in {y[0] for y in skipped}]
         idx = sorted(range(len(allid)), key=lambda k: order.get(allid[k], 10 ** 9 + k))
         v = v[idx]
         allid = [allid[k] for k in idx]
@@ -1231,7 +1256,7 @@ def main():
         i.add_argument("--shard")
         i.add_argument("--evalname")
         i.add_argument("--batch", type=int, default=32)
-        i.add_argument("--rows", type=int, help="use only the first ROWS rows of the manifest")
+        i.add_argument("--rows", help="use only the first ROWS rows of the manifest, or rows A:B")
         i.add_argument("--shard-mode", choices=["block", "mod"], default="block")
         i.add_argument("--out", required=True)
         if name == "images-onnx":
@@ -1271,7 +1296,7 @@ def main():
     px.add_argument("--manifest", required=True)
     px.add_argument("--photos", required=True)
     px.add_argument("--shard")
-    px.add_argument("--rows", type=int)
+    px.add_argument("--rows")
     px.add_argument("--shard-mode", choices=["block", "mod"], default="block")
     px.add_argument("--pix", required=True)
     wc = sub.add_parser("wasm-collect")

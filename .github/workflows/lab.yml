@@ -1,5 +1,6 @@
 name: lab
-# The model laboratory. Push a commit to run/lab/<label>; ci/lab/run.json in that commit says which models and stages.
+# The model laboratory. Push a commit to run/lab/<label>; ci/lab/runs/<label>.json in that commit (or else
+# ci/lab/run.json) says which models and stages.
 # Each model's files are published to pub/lab-<model id>; small reports and logs come back on the ci branch as
 # runs/lab/<run>-plan, runs/lab/<run>-<model>-s<shard> (one per job) and runs/lab/<run>-<model>-pub (one per model).
 on:
@@ -14,7 +15,7 @@ concurrency:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 300
     outputs:
       work: ${{ steps.plan.outputs.work }}
       models: ${{ steps.plan.outputs.models }}
@@ -29,10 +30,13 @@ jobs:
       - id: plan
         run: |
           mkdir -p ret
-          python3 tools/lab/plan.py ci/lab/run.json | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
+          cfg="ci/lab/runs/${GITHUB_REF_NAME#run/lab/}.json"; [ -f "$cfg" ] || cfg=ci/lab/run.json
+          echo "config: $cfg" | tee -a ret/log.txt
+          cp "$cfg" ret/run.json
+          python3 tools/lab/plan.py "$cfg" | tee -a ret/log.txt >> "$GITHUB_OUTPUT"
       - name: data
         run: |
-          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('data','auto'))")" "$(python3 -c "import json;print(json.load(open('ci/lab/run.json')).get('manifest',''))")" 2>&1 | tee -a ret/log.txt
+          bash ci/lab/data.sh "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('data','auto'))")" "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('manifest',''))")" "$(python3 -c "import json;print(json.load(open('ret/run.json')).get('wait_minutes',0))")" "$(python3 -c "import json;print(json.dumps(json.load(open('ret/run.json')).get('wait_for_file') or ''))")" 2>&1 | tee -a ret/log.txt
           cp data_in/source.txt ret/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         with:

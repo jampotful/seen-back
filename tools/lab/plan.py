@@ -29,7 +29,10 @@ for mid in run.get("models", []):
     n = int(run.get("shards", {}).get(mid, 1)) if img else 1
     rows = run.get("rows", {})
     rows = rows.get(mid, rows.get("*", "")) if isinstance(rows, dict) else rows
+    subset = run.get("shard_subset", {}).get(mid)
     for i in range(n):
+        if subset is not None and i not in subset:
+            continue
         s_i = (other if i == 0 else []) + img
         work.append({"model": mid, "shard": i, "nshards": n, "stages": ",".join(s_i), "tag": "%s-s%d" % (mid, i),
                      "rows": str(rows or ""), "mode": run.get("shard_mode", "block")})

@@ -2,7 +2,24 @@
 # Put the species list and evaluation manifest in data_in/: from pub/data-alachua when it exists (or when asked),
 # otherwise a stand-in made from GBIF by tools/lab/standin.py. Usage: bash ci/lab/data.sh <auto|pub/data-alachua|standin>
 set -uo pipefail
-want="${1:-auto}"; manpath="${2:-}"
+want="${1:-auto}"; manpath="${2:-}"; waitmin="${3:-0}"; waitfile="${4:-}"
+# Optionally wait (up to waitmin minutes) for the manifest to appear on pub/data-alachua, and for a file on another
+# branch (waitfile: JSON ["<branch>", "<path>"]), e.g. an earlier run's published vectors.
+t0=$(date +%s)
+if [ -n "$manpath" ] && [ "${waitmin:-0}" -gt 0 ]; then
+  until git fetch -q --depth 1 origin pub/data-alachua 2>/dev/null && git cat-file -e "FETCH_HEAD:$manpath" 2>/dev/null; do
+    [ $(( $(date +%s) - t0 )) -ge $(( waitmin * 60 )) ] && { echo "waited $waitmin minutes; $manpath never appeared"; exit 1; }
+    echo "[$(date -u +%T)] waiting for $manpath on pub/data-alachua"; sleep 60
+  done
+fi
+if [ -n "$waitfile" ] && [ "$waitfile" != '""' ]; then
+  wb=$(python3 -c "import json,sys;print(json.loads(sys.argv[1])[0])" "$waitfile"); wf=$(python3 -c "import json,sys;print(json.loads(sys.argv[1])[1])" "$waitfile")
+  until git fetch -q --depth 1 origin "$wb" 2>/dev/null && git cat-file -e "FETCH_HEAD:$wf" 2>/dev/null; do
+    [ $(( $(date +%s) - t0 )) -ge $(( ${waitmin:-0} * 60 + 60 )) ] && { echo "waited; $wb:$wf never appeared"; exit 1; }
+    echo "[$(date -u +%T)] waiting for $wf on $wb"; sleep 60
+  done
+  echo "found $wf on $wb"
+fi
 mkdir -p data_in
 src=standin
 if [ "$want" != standin ] && git ls-remote --exit-code origin refs/heads/pub/data-alachua >/dev/null 2>&1; then src=pub/data-alachua; fi
