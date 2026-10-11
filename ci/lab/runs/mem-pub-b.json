@@ -1,0 +1,18 @@
+{
+ "about": "BioCLIP 2's shipped device file (pub/model-bioclip2-l14 at 462ecdc, hybrid-fc2-w8) with its weights in an external data file: run/lab/mem-routes measured a WASM heap of 429 MiB against 819 MiB with identical vectors. This run measures the shipped file and the external data form again on one machine (seconds a photo on the same machine), publishes the external data form in parts to pub/model-bioclip2-l14-b (graph, weight parts, parts.json; the branch the live page reads is not touched) and checks every published file from raw.githubusercontent.com, then runs both through the page's worker in headless Chromium (the external form with ci/lab/patches/worker-external-data.patch applied on the build machine) and reads the renderer's memory with ps.",
+ "models": [],
+ "stages": [],
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "publish": false,
+ "mem": {
+  "commit": "462ecdc327746ec5990c416bb51246b99faba0cb",
+  "jobs": [
+   {"tag": "mem-pub", "page": true, "routes": [
+     {"name": "base-drop", "form": "onnx", "options": {}, "drop_js": true},
+     {"name": "ext-drop", "form": "external", "options": {}, "drop_js": true}
+   ], "publish": {"form": "external", "branch": "pub/model-bioclip2-l14-b", "route": "ext-drop"}}
+  ]
+ },
+ "max_parallel": 1
+}

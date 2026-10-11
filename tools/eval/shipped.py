@@ -36,6 +36,7 @@ ap.add_argument("--limit", type=int, default=0, help="score only the first N tun
 ap.add_argument("--rule", choices=["product"], help="score the slot under the product rule (what build 6 of the page computes) with the settings in fusion_if_rule_product; the thresholds found are written there")
 ap.add_argument("--vectors", help="score these vectors of the evaluation photos in place of the manifest's (the part after images/, for example alachua-2025.wasm-int8)")
 ap.add_argument("--no-write", action="store_true", help="do not write the thresholds into the slot's manifest")
+ap.add_argument("--name-bar", type=float, default=0.9, help="name_at is the lowest level from which a named species was right at least this often on the tuning photos; when no level reaches it, the nine-in-ten level")
 a = ap.parse_args()
 name = a.name or os.path.basename(os.path.normpath(a.slot))
 slot = F.load_slot(a.slot)
@@ -123,7 +124,10 @@ idx, res = run(tune, probe)
 top_p = np.array([r["species"][0]["p"] for r in res])
 top_ok = np.array([r["species"][0]["kind"] == r["kind"] and r["kind"] not in ("none", "person") for r in res])
 top_right = np.array([truth[i] >= 0 and r["species"][0]["sci"] == sci_of[truth[i]] for i, r in zip(idx, res)])
-name_at = level(top_p[top_ok], top_right[top_ok])
+name_at = level(top_p[top_ok], top_right[top_ok], floor=a.name_bar)
+name_bar_used = a.name_bar
+if name_at is None and a.name_bar != 0.9:
+    name_at, name_bar_used = level(top_p[top_ok], top_right[top_ok]), 0.9
 named = top_ok & (top_p >= name_at) if name_at is not None else np.zeros(len(res), bool)
 off_p = np.array([sum(o["p"] for o in r["offers"]) for r in res])
 off_has = np.array([truth[i] >= 0 and any(o["sci"] == sci_of[truth[i]] for o in r["offers"]) for i, r in zip(idx, res)])
@@ -133,6 +137,9 @@ offer_at = level(off_p[can_offer], off_has[can_offer])
 man["fusion"]["name_at"] = name_at if name_at is not None else 2.0
 man["fusion"]["offer_at"] = offer_at if offer_at is not None else 2.0
 man["fusion_thresholds_note"] = "set by tools/eval/shipped.py on %d tuning photos (%s) through tools/fusion/fuse.py; 2 means never" % (len(res), evn["tuned_on"])
+if a.name_bar != 0.9:
+    man["fusion_thresholds_note"] += ("; name_at is the lowest level from which a named species was right at least %d times in 100 on the tuning photos%s; offer_at is the nine-in-ten level for the photos left without a name" % (
+        round(100 * a.name_bar), "" if name_bar_used == a.name_bar else " (no level reached that, so the nine-in-ten level was taken)"))
 # 3. kind_at: under it the page says it is not sure. Set where an asserted kind is right at least 95 times in 100 on each tuning set by itself.
 tune_sets = [("wildlife", kind_fields(res, ES.eyes[idx]), ES.eyes[idx])]
 if XT is not None and len(XT["tune"]["ids"]):
@@ -180,7 +187,7 @@ W = np.array([r[3] for r in table], dtype=np.float64)
 lp = np.log(np.maximum(W / W.sum(0, keepdims=True), f.get("prior_floor", 1e-6))).T
 zs = f["t_species"] * (E64[idx] @ slot["species"].T) + (slot["species_bias"] if slot["species_bias"] is not None else 0) + f["alpha_prior"] * lp[ES.month[idx]]
 differ = int((np.array([sci_of[j] for j in zs.argmax(1)]) != np.array([r["species"][0]["sci"] for r in res])).sum())
-num = {"test_photos": n, "tuning_photos": int(tune.sum()), "name_at": name_at, "offer_at": offer_at,
+num = {"test_photos": n, "tuning_photos": int(tune.sum()), "name_at": name_at, "offer_at": offer_at, "name_bar_asked": a.name_bar, "name_bar_used": name_bar_used,
        "kind_right": ev.ci(kind_right), "called_person": float((said == "person").mean()), "called_none": float((said == "none").mean()),
        "species_top1": ev.ci(top1), "species_top5": ev.ci(top5),
        "named": ev.ci(is_named), "named_right": ev.ci(named_right[is_named]), "named_kind_right": ev.ci(kind_right[is_named]),
@@ -260,7 +267,7 @@ t_off_p = np.array([sum(o["p"] for o in r["offers"]) for r in res2])
 t_off_has = np.array([any(o["sci"] == t for o in r["offers"]) for r, t in zip(res2, tsci)])
 t_can = np.array([len(r["offers"]) > 0 for r in res2])
 levels = []
-for floor in (0.9, 0.95, 0.98):
+for floor in sorted({0.9, 0.95, 0.98, a.name_bar}):
     tau = level(top_p[top_ok], top_right[top_ok], floor=floor)
     if tau is None:
         levels.append({"right_at_least": floor, "name_at": None})
