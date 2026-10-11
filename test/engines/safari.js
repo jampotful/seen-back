@@ -15,6 +15,9 @@ async function wd(method, p, body) {
   return j.value;
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// what is really on the screen, beside what WebDriver's screenshot returns (it may leave out a WebGL canvas)
+const { execFileSync } = require('child_process');
+function screen(name) { try { execFileSync('screencapture', ['-x', path.join(OUT, name)], { timeout: 15000 }); rec.shots.push(name); } catch (e) { rec.notes.push('screencapture ' + name + ': ' + String(e.message).split('\n')[0].slice(0, 160)); } }
 (async () => {
   let sid = null;
   try {
@@ -24,7 +27,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const shot = async (name) => { try { const b = await wd('GET', `/session/${sid}/screenshot`); fs.writeFileSync(path.join(OUT, name), Buffer.from(b, 'base64')); rec.shots.push(name); } catch (e) { rec.notes.push('screenshot ' + name + ': ' + e.message); } };
     const js = (script) => wd('POST', `/session/${sid}/execute/sync`, { script, args: [] });
     try { await wd('POST', `/session/${sid}/window/rect`, { width: 1280, height: 860, x: 0, y: 0 }); } catch (e) { rec.notes.push('window size: ' + e.message); }
-    await wd('POST', `/session/${sid}/url`, { url: BASE }); await sleep(3500); await shot('safari-desktop-1-open.png');
+    await wd('POST', `/session/${sid}/url`, { url: BASE }); await sleep(3500); await shot('safari-desktop-1-open.png'); screen('safari-desktop-1-open-screen.png');
     rec.openState = await js('return {screen: window.__seenBack && window.__seenBack.S.screen, engine: window.__seenBack && window.__seenBack.state(), serif: document.fonts ? document.fonts.check(\'400 20px "Instrument Serif"\') : null, sw: !!navigator.serviceWorker}').catch(e => ({ error: e.message }));
     rec.steps.push('opening screen');
     await wd('POST', `/session/${sid}/url`, { url: BASE + '?selftest=1&nosw=1&report=/report/safari-desktop' });
@@ -33,8 +36,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     while (Date.now() - t0 < 240000) {
       T = await js('return window.__selftest ? {phase: window.__selftest.phase, posing: window.__selftest.posing, done: window.__selftest.done} : null').catch(() => null);
       if (T && T.phase === 'still' && !seen.still) { seen.still = 1; await shot('safari-desktop-2-still.png'); }
-      if (T && T.phase === 'motion' && !seen.motion) { seen.motion = 1; await sleep(1200); await shot('safari-desktop-3-motion.png'); }
-      if (T && T.posing === 'cat@0.45' && !seen.cat) { seen.cat = 1; await shot('safari-desktop-4-pose-cat.png'); }
+      if (T && T.phase === 'motion' && !seen.motion) { seen.motion = 1; await sleep(1200); await shot('safari-desktop-3-motion.png'); screen('safari-desktop-3-motion-screen.png'); }
+      if (T && T.posing === 'cat@0.45' && !seen.cat) { seen.cat = 1; await shot('safari-desktop-4-pose-cat.png'); screen('safari-desktop-4-pose-cat-screen.png'); }
       if (T && T.posing === 'bee@0.45' && !seen.bee) { seen.bee = 1; await shot('safari-desktop-5-pose-bee.png'); }
       if (T && T.done) break;
       await sleep(300);

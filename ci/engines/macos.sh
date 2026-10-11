@@ -51,11 +51,15 @@ step "iPhone simulator: Safari opens the self-test and posts its report"
 if [ -n "$UDID" ]; then
   limit 240 xcrun simctl bootstatus "$UDID" -b 2>&1 | tail -3
   xcrun simctl list devices | grep "$UDID"
+  # first the opening screen, as a person sees it (is the WebGL picture on the screen?)
+  xcrun simctl openurl "$UDID" "http://127.0.0.1:$PORT/index.html?nosw=1" 2>&1; echo "openurl (opening screen): exit $?"
+  sleep 10; xcrun simctl io "$UDID" screenshot "$OUT/sim/iphone-0-open.png" >/dev/null 2>&1
+  sleep 4; xcrun simctl io "$UDID" screenshot "$OUT/sim/iphone-0-open-b.png" >/dev/null 2>&1
   xcrun simctl openurl "$UDID" "http://127.0.0.1:$PORT/index.html?selftest=1&nosw=1&report=/report/iphone" 2>&1; echo "openurl: exit $?"
   t0=$(date +%s); n=0
   while [ $(( $(date +%s) - t0 )) -lt 300 ]; do
-    sleep 6; n=$((n+1)); el=$(( $(date +%s) - t0 ))
-    if [ $n -le 8 ] || [ $((n % 5)) -eq 0 ]; then xcrun simctl io "$UDID" screenshot "$OUT/sim/iphone-$(printf %03d $el)s.png" >/dev/null 2>&1; fi
+    sleep 2; n=$((n+1)); el=$(( $(date +%s) - t0 ))
+    if [ $n -le 20 ] || [ $((n % 15)) -eq 0 ]; then xcrun simctl io "$UDID" screenshot "$OUT/sim/iphone-$(printf %03d $el)s.png" >/dev/null 2>&1; fi
     if [ -f "$OUT/reports/iphone.json" ] && grep -q '"done":true' "$OUT/reports/iphone.json"; then echo "report arrived after $el s"; sleep 3; xcrun simctl io "$UDID" screenshot "$OUT/sim/iphone-final.png" >/dev/null 2>&1; break; fi
   done
   ls -la "$OUT/reports" "$OUT/sim"
