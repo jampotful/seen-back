@@ -1,0 +1,145 @@
+{
+ "model": "tinyclip-39m-16",
+ "photos": 40,
+ "cpu": {
+  "model": "AMD EPYC 7763 64-Core Processor",
+  "flags": [
+   "avx2"
+  ]
+ },
+ "files": {
+  "fp32": {
+   "mb": 154.56,
+   "how": "the original model, exported",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 1.0,
+     "min": 0.9999998807907104,
+     "max": 1.0000001192092896
+    },
+    "output_norm_mean": 9.916285514831543,
+    "latency_ms_1thread": {
+     "mean": 184.3,
+     "min": 183.45,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "int8-per-channel": {
+   "mb": 40.98,
+   "how": "the shipping recipe: dynamic int8, per-channel weights, MatMul and Gemm with constant weights",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 0.9973951578140259,
+     "min": 0.9949356317520142,
+     "max": 0.9983046650886536
+    },
+    "output_norm_mean": 9.917323112487793,
+    "latency_ms_1thread": {
+     "mean": 108.75,
+     "min": 108.33,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "int8-per-channel-7bit": {
+   "mb": 40.98,
+   "how": "as shipped, with reduce_range (7-bit weights), which avoids saturation in u8s8 kernels without VNNI",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 0.9974304437637329,
+     "min": 0.9957517981529236,
+     "max": 0.9985790848731995
+    },
+    "output_norm_mean": 9.910626411437988,
+    "latency_ms_1thread": {
+     "mean": 108.9,
+     "min": 108.29,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "uint8-per-channel": {
+   "mb": 41.0,
+   "how": "as shipped, with unsigned 8-bit weights (u8u8 kernels)",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 0.9975887537002563,
+     "min": 0.9954850077629089,
+     "max": 0.9987303018569946
+    },
+    "output_norm_mean": 9.905298233032227,
+    "latency_ms_1thread": {
+     "mean": 135.66,
+     "min": 134.99,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "w8-float": {
+   "mb": 40.82,
+   "how": "8-bit weights (per output column, DequantizeLinear) with float activations and float arithmetic",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 0.999752402305603,
+     "min": 0.9995837211608887,
+     "max": 0.9998289346694946
+    },
+    "output_norm_mean": 9.915071487426758,
+    "latency_ms_1thread": {
+     "mean": 282.6,
+     "min": 281.3,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "f16w-float": {
+   "mb": 77.5,
+   "how": "float16 weights cast to float32 when the session loads: half the download, float32 arithmetic",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 1.0,
+     "min": 0.9999998807907104,
+     "max": 1.0000001192092896
+    },
+    "output_norm_mean": 9.916285514831543,
+    "latency_ms_1thread": {
+     "mean": 184.79,
+     "min": 184.06,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  },
+  "fp16": {
+   "mb": 77.46,
+   "how": "float16 throughout (convert_float_to_float16, keep_io_types)",
+   "cpu": {
+    "cosine_vs_torch": {
+     "mean": 0.9999998211860657,
+     "min": 0.9999996423721313,
+     "max": 1.0
+    },
+    "output_norm_mean": 9.916173934936523,
+    "latency_ms_1thread": {
+     "mean": 193.6,
+     "min": 192.7,
+     "runs": 20,
+     "warmup": 3,
+     "batch": 1
+    }
+   }
+  }
+ }
+}

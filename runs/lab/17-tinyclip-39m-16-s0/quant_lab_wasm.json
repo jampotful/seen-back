@@ -1,0 +1,114 @@
+{
+ "onnxruntime_web": "1.30.0",
+ "backend": "wasm",
+ "threads": 1,
+ "node": "v22.23.3",
+ "photos": 8,
+ "files": {
+  "f16w-float": {
+   "load_ms": 817,
+   "cosine_vs_torch": {
+    "mean": 0.9999999999990176,
+    "min": 0.9999999999981816
+   },
+   "latency_ms_1thread": {
+    "mean": 856.2865341999998,
+    "min": 852.6525409999995,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "fp16": {
+   "load_ms": 441,
+   "cosine_vs_torch": {
+    "mean": 0.9999998014027289,
+    "min": 0.9999996788711514
+   },
+   "latency_ms_1thread": {
+    "mean": 803.0568449999998,
+    "min": 800.3968940000013,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "fp32": {
+   "load_ms": 319,
+   "cosine_vs_torch": {
+    "mean": 0.9999999999990176,
+    "min": 0.9999999999981816
+   },
+   "latency_ms_1thread": {
+    "mean": 778.5890946000006,
+    "min": 777.0639050000027,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "int8-per-channel-7bit": {
+   "load_ms": 153,
+   "cosine_vs_torch": {
+    "mean": 0.9980428837171902,
+    "min": 0.9971570870376314
+   },
+   "latency_ms_1thread": {
+    "mean": 448.1494383999998,
+    "min": 446.1144850000055,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "int8-per-channel": {
+   "load_ms": 144,
+   "cosine_vs_torch": {
+    "mean": 0.9984264312094447,
+    "min": 0.9975452660248784
+   },
+   "latency_ms_1thread": {
+    "mean": 449.21136360000384,
+    "min": 447.65703600000415,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "uint8-per-channel": {
+   "load_ms": 147,
+   "cosine_vs_torch": {
+    "mean": 0.9986875172565234,
+    "min": 0.9982554646947882
+   },
+   "latency_ms_1thread": {
+    "mean": 442.38651079999835,
+    "min": 371.6654109999945,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  },
+  "w8-float": {
+   "load_ms": 277,
+   "cosine_vs_torch": {
+    "mean": 0.9998672764242305,
+    "min": 0.9998444712998927
+   },
+   "latency_ms_1thread": {
+    "mean": 802.420713900002,
+    "min": 798.7767259999964,
+    "runs": 10,
+    "warmup": 3,
+    "batch": 1
+   },
+   "runs": true
+  }
+ }
+}
