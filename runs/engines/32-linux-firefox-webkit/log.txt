@@ -1,0 +1,40 @@
+
+=== 07:18:52 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1381       12354          40        2613       14608
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 7763 64-Core Processor
+Flags: avx2 
+
+=== 07:18:52 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 7 | index.html 171866 bytes | artifact 169288 bytes | selftest.js 44338 bytes
+build ok
+171896 index.html
+44338 selftest.js
+
+=== 07:18:52 playwright 1.56.0: firefox webkit
+added 2 packages in 1s
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Firefox 142.0.1 (playwright build v1495) from https://cdn.playwright.dev/dbazure/download/playwright/builds/firefox/1495/firefox-ubuntu-24.04.zip
+Firefox 142.0.1 (playwright build v1495) downloaded to /home/runner/.cache/ms-playwright/firefox-1495
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-ubuntu-24.04.zip
+Webkit 26.0 (playwright build v2215) downloaded to /home/runner/.cache/ms-playwright/webkit-2215
+mesa and xvfb: exit 0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 07:19:36 the service worker and a 5xx: as built, and with ci/engines/patches/sw-5xx-kept.patch
+old: built
+patching file src/sw.template.js
+new: sw.js 5xx lines: 2
+firefox unpatched {"console":[],"first":"ready","controlled":true,"bad":"true","status":502,"fromServiceWorker":true,"app":false}
+firefox patched {"console":[],"first":"ready","controlled":true,"bad":"true","status":200,"fromServiceWorker":true,"app":true,"second":{"ready":"ready","kind":"wader","runMs":6238}}
+sw5xx.js firefox: exit 0
+webkit unpatched {"console":["Failed to load resource: the server responded with a status of 502 (Bad Gateway)"],"first":"ready","controlled":true,"bad":"true","status":502,"fromServiceWorker":true,"app":false}
+webkit patched {"console":[],"first":"ready","controlled":true,"bad":"true","status":200,"fromServiceWorker":true,"app":true,"second":{"ready":"ready","kind":"wader","runMs":677}}
+sw5xx.js webkit: exit 0
