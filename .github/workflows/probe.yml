@@ -1,0 +1,48 @@
+name: probe
+# What a build machine can reach, and what it is made of. Results come back on the `ci` branch.
+on:
+  push:
+    branches: [main]
+    paths: ['ci/probe.trigger', '.github/workflows/probe.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: gather
+        run: |
+          mkdir -p out
+          {
+            echo "date: $(date -u)"; echo "os: $(uname -a)"
+            echo "cpus: $(getconf _NPROCESSORS_ONLN)"
+            (free -g 2>/dev/null | head -2) || (sysctl -n hw.memsize | awk '{print "mem_bytes: " $1}')
+            df -h . | tail -1
+            python3 --version; node --version; git --version
+            (xcodebuild -version 2>/dev/null | tr '\n' ' '; echo) || true
+            (xcrun simctl list devices available 2>/dev/null | grep -i -E "iphone" | head -8) || true
+            for u in https://huggingface.co/api/models/imageomics/bioclip-2 \
+                     https://huggingface.co/Xenova/mobileclip_s0/resolve/main/config.json \
+                     "https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&limit=0" \
+                     https://inaturalist-open-data.s3.amazonaws.com/metadata/README.md \
+                     https://cdn.jsdelivr.net/npm/onnxruntime-web/package.json \
+                     https://jampotful.github.io/seen-back/ \
+                     https://jampotful.github.io/seen-back/sw.js; do
+              printf "%s -> " "$u"; curl -s -L -o /dev/null -m 25 -w "%{http_code} %{size_download}B %{time_total}s\n" "$u"
+            done
+            echo "secret HF_TOKEN present: ${HF_TOKEN:+yes}"
+          } > out/probe.txt 2>&1
+          cat out/probe.txt
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh probe out ${{ matrix.os }}
