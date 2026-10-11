@@ -1,0 +1,38 @@
+diff --git a/docs/ENGINES.md b/docs/ENGINES.md
+index d092f4c..e629b52 100644
+--- a/docs/ENGINES.md
++++ b/docs/ENGINES.md
+@@ -37,21 +37,21 @@ The live address (`runs/engines/34-live`): in Chromium, Firefox and WebKit the p
+ 
+ ## The larger model, fetched from the live address through the page's own sheet (build 8)
+ 
+-Sources: `runs/engines/35-big-mac-ws` (Safari), `35-big-mac-sim` (iPhone simulator), `36-big-mac-ws` (WebKit, macOS), `36-big-linux` (WebKit, Linux), `40-big-linux` (Chromium). Memory is the resident size of the largest browser process, read with `ps` once a second.
+-
+-| | Safari 26.6, macOS | Safari, iPhone 17e simulator | WebKit 26.0, macOS | WebKit 26.0, Linux | Chromium 141, Linux |
+-|---|---:|---:|---:|---:|---:|
+-| Download, "Get it" to last byte | 5.6 s | 9.9 s | 3.3 s | 2.3 s | 9.2 s |
+-| Ready to answer after "Get it" | 18.5 s | 38.9 s | 15.2 s | 10.6 s | 21.9 s |
+-| Seconds a photo (four photos) | 5.5 to 7.3 | 9.9 to 10.8 | 4.9 to 6.1 | 4.7 to 5.0 | 7.4 to 7.9 |
+-| Largest browser process at its peak | 2,077 MiB | 1,688 MiB | 2,178 MiB | 2,598 MiB | 1,501 MiB |
+-| All four parts kept and verified | yes | yes | yes | yes | yes |
+-| Fetched again after a reload | nothing | nothing | nothing | nothing | nothing |
+-| Tab died | no | no | no | no | no |
++Sources: `runs/engines/35-big-mac-ws` (Safari), `35-big-mac-sim` (iPhone simulator), `36-big-mac-ws` (WebKit, macOS), `36-big-linux` (WebKit, Linux), `40-big-linux` (Chromium), `39-big-linux` (Firefox, headed on a virtual display). Memory is the resident size of the largest browser process, read with `ps` once a second.
++
++| | Safari 26.6, macOS | Safari, iPhone 17e simulator | WebKit 26.0, macOS | WebKit 26.0, Linux | Chromium 141, Linux | Firefox 142, Linux |
++|---|---:|---:|---:|---:|---:|---:|
++| Download, "Get it" to last byte | 5.6 s | 9.9 s | 3.3 s | 2.3 s | 9.2 s | 5.3 s |
++| Ready to answer after "Get it" | 18.5 s | 38.9 s | 15.2 s | 10.6 s | 21.9 s | 146.9 s |
++| Seconds a photo (four photos) | 5.5 to 7.3 | 9.9 to 10.8 | 4.9 to 6.1 | 4.7 to 5.0 | 7.4 to 7.9 | no answer to any of three |
++| Largest browser process at its peak | 2,077 MiB | 1,688 MiB | 2,178 MiB | 2,598 MiB | 1,501 MiB | 1,930 MiB |
++| All four parts kept and verified | yes | yes | yes | yes | yes | yes |
++| Fetched again after a reload | nothing | nothing | nothing | nothing | nothing | not reached |
++| Tab died | no | no | no | no | no | no crash reported; the page closed before the second visit |
+ 
+ - The four parts come from `raw.githubusercontent.com` with status 200, no redirect, no compression, and a header that allows any origin. Each part's checksum, and the checksum of the four joined, matches the manifest.
+ - The iPhone simulator borrows the Mac's memory. A pass there does not show that a real iPhone holds the model.
+-- Firefox had not returned its figures when this was written (`runs/engines/39-big-linux`).
++- Firefox (`runs/engines/39-big-linux/big-summary.txt`) kept and verified the model, and then spent 130.7 of its 146.9 seconds before "ready" in the first run of the model (8.3 s to make the session). The larger model then answered none of the three photos tried: each ended as "slow", and the pocket model took 11.4 to 11.9 seconds a photo beside it, where it took 0.6 to 0.7 in Chromium (`runs/engines/35-big-linux`). The page had closed by the time of the second visit, so that was not measured; no crash was reported. All of Firefox's browser processes together peaked at 3,028 MiB. An earlier attempt with the three browsers on one machine (`runs/engines/35-big-linux`) lost the Firefox page before its figures were read, and returned none.
+ - The same four photos on every engine: a Little Blue Heron and a Green Treefrog named correctly; an American Bird Grasshopper right as the first answer and left unnamed, being under the level for a name; and one plant photo (Guinea Hen Weed) that sits on that level, named wrongly as Small-Flower Pawpaw by the three Apple engines and left unnamed by the other two.
+ - With the network cut after the model was kept, Chromium still started the page and the larger model still named the heron.
+ - After a reload with the larger model kept, the first photo's first answer took far longer than usual in Chromium (25 to 42 seconds before the pocket model answered). This is open.
