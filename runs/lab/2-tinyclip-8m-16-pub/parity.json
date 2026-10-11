@@ -1,0 +1,272 @@
+{
+ "model": "tinyclip-8m-16",
+ "photos": 40,
+ "photo_ids": [
+  "s000001",
+  "s000002",
+  "s000003",
+  "s000004",
+  "s000005",
+  "s000006",
+  "s000007",
+  "s000008",
+  "s000009",
+  "s000010",
+  "s000011",
+  "s000012",
+  "s000013",
+  "s000014",
+  "s000015",
+  "s000016",
+  "s000017",
+  "s000018",
+  "s000019",
+  "s000020",
+  "s000021",
+  "s000022",
+  "s000023",
+  "s000024",
+  "s000025",
+  "s000026",
+  "s000027",
+  "s000028",
+  "s000029",
+  "s000030",
+  "s000031",
+  "s000032",
+  "s000033",
+  "s000034",
+  "s000035",
+  "s000036",
+  "s000037",
+  "s000038",
+  "s000039",
+  "s000040"
+ ],
+ "opset": 17,
+ "input": "pixel_values: float32 [N,3,224,224], already resized, cropped and normalized",
+ "output": "image_embeds: float32 [N,D], projected embedding, NOT unit-normalized (normalize before cosine)",
+ "quantization": "onnxruntime.quantization.quantize_dynamic, op_types_to_quantize=[MatMul, Gemm], weight_type=QInt8, per_channel=False, MatMulConstBOnly=True; convolutions (the patch embedding) stay float32",
+ "fp16": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True); input and output stay float32",
+ "files": {
+  "fp32": {
+   "bytes": 33280418,
+   "mb": 33.28,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Cast": 1,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Mul": 41,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::MatMul": 81,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 1.0,
+    "min": 0.9999998807907104,
+    "max": 1.0000001192092896
+   },
+   "output_norm_mean": 6.075827598571777,
+   "latency_ms_1thread": {
+    "mean": 26.65,
+    "min": 26.39,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": true,
+   "sha256": "87f9c4c9ee5a1e997f526c715891c11ec15162abdc2e878a4906f1431f86aab6"
+  },
+  "int8": {
+   "bytes": 9441160,
+   "mb": 9.44,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Cast": 62,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Mul": 163,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::DynamicQuantizeLinear": 41,
+    "ai.onnx::MatMulInteger": 61,
+    "ai.onnx::MatMul": 20,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9959686398506165,
+    "min": 0.9898775219917297,
+    "max": 0.9978171586990356
+   },
+   "output_norm_mean": 6.126400947570801,
+   "latency_ms_1thread": {
+    "mean": 13.29,
+    "min": 13.16,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": true,
+   "sha256": "080fe852f7cd0a336f3f6f7d9b2c31ed22115fc7d58f482e6e8f6736d6644fcc"
+  },
+  "fp16": {
+   "bytes": 16791296,
+   "mb": 16.79,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Cast": 3,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Mul": 41,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::MatMul": 81,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9999996423721313,
+    "min": 0.9999991059303284,
+    "max": 0.9999998807907104
+   },
+   "output_norm_mean": 6.075863361358643,
+   "latency_ms_1thread": {
+    "mean": 30.27,
+    "min": 29.9,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": true,
+   "sha256": "4aa5705eadd0ce6befd46174fda0a88e2031066815d0e2068f4642c43254741d"
+  }
+ },
+ "machine": {
+  "cpus": 4,
+  "processor": "x86_64",
+  "machine": "x86_64"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "wasm": {
+  "onnxruntime_web": "1.30.0",
+  "backend": "wasm",
+  "threads": 1,
+  "node": "v22.23.3",
+  "photos": 8,
+  "files": {
+   "int8": {
+    "load_ms": 518,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9963574588467651,
+     "min": 0.9948881739216959
+    },
+    "cosine_vs_torch": {
+     "mean": 0.996146181646969,
+     "min": 0.9946479539606652
+    },
+    "latency_ms_1thread": {
+     "mean": 96.19555029999995,
+     "min": 95.92195500000003,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   },
+   "fp16": {
+    "load_ms": 252,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9999998980193372,
+     "min": 0.9999998667464306
+    },
+    "cosine_vs_torch": {
+     "mean": 0.9999996562549849,
+     "min": 0.9999995064853905
+    },
+    "latency_ms_1thread": {
+     "mean": 182.97856589999984,
+     "min": 179.09383100000014,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   },
+   "fp32": {
+    "load_ms": 145,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9999999999992774,
+     "min": 0.9999999999986626
+    },
+    "cosine_vs_torch": {
+     "mean": 0.9999999999984646,
+     "min": 0.9999999999977298
+    },
+    "latency_ms_1thread": {
+     "mean": 164.25565779999997,
+     "min": 162.34751200000028,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   }
+  }
+ }
+}
