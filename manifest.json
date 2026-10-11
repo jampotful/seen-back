@@ -1,0 +1,81 @@
+{
+ "id": "bioclip2-l14",
+ "licence": "MIT",
+ "source": "https://huggingface.co/imageomics/bioclip-2",
+ "vision": {
+  "note": "this model runs on the server from its original weights; no file is shipped to the phone",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ]
+ },
+ "width": 768,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ],
+  "made_from": "kind phrases"
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5911
+ },
+ "fusion": {
+  "t_kind": 20.0,
+  "t_species": 100.0,
+  "alpha_prior": 1.0,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.05,
+  "offer_at": 2.0,
+  "prior_floor": 1e-06,
+  "kind_at": 0.2
+ },
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on val by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos alone, because the extra set's vectors were not published for this model: this slot has never been asked about a person or an empty room. name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+ "evaluation": {
+  "model": "bioclip2-l14",
+  "head": "sentences",
+  "choice": "species_sci",
+  "train": "sentences",
+  "train_vectors": "none (sentence rows only)",
+  "test_vectors": "images/alachua-2025",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 2.0,
+   "c": 1.0
+  },
+  "kind_head": "kind phrases",
+  "kind_tuned_with_extra_set": false
+ },
+ "needs": [
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never",
+ "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 1803 wildlife tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
+}
