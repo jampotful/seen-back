@@ -1,0 +1,82 @@
+{
+ "id": "standin-trained",
+ "licence": "none: random weights made by test/rec/make_standin.py",
+ "source": "test/rec/make_standin.py",
+ "vision": {
+  "url": "vision.int8.onnx",
+  "bytes": 848060,
+  "sha256": "4038e9967657e6f74ff881dbcad9528a5e7b49fb3775a58d805de94056d73679",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "kinds": {
+  "url": "kinds.trained.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "other",
+   "person",
+   "none"
+  ],
+  "bias": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -30.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "species": {
+  "url": "species.trained.f16.bin",
+  "table": "species.json",
+  "count": 54,
+  "bias_url": "species.bias.f32.bin"
+ },
+ "fusion": {
+  "t_kind": 50,
+  "t_species": 50,
+  "alpha_prior": 0.5,
+  "w_kind": 0.7,
+  "name_at": 0.6,
+  "offer_at": 0.3,
+  "rule": "mix"
+ }
+}

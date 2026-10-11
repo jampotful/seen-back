@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|parity|progress|offline|version|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|offline|version|missing|damaged|dying|about|viewer ...]
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
 // A real model: make a slot with test/rec/make_slot.py --photos <dir>, then
 //   SLOT=<slot dir, from the repository root> PHOTOS=<dir> node test/rec/check_rec.js parity
@@ -21,7 +21,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'parity', 'progress', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -159,6 +159,11 @@ async function meet(page, name) {
         o.noneNotOutvoted = pick(rec.fuse(kd({ none: 1, plant: .96 }), sd({ 'Beggarticks': .9 }), 6));
         o.speciesTipsTheKind = pick(rec.fuse(kd({ bird: 1, wader: .995 }), sd({ 'Great Blue Heron': .9 }), 6));        // kinds nearly tied; the species list settles it
         o.kindDisagrees = pick(rec.fuse(kd({ plant: 1, wader: .9 }), sd({ 'Great Blue Heron': .9, 'Beggarticks': .9 - Math.log(.65 / .35) / m.fusion.t_species }), 6));   // a likely species of a kind the kinds rule out is not named, and not offered either: the offers are of the kind that won
+        // the same disagreement under each rule, both heads sure (temperature 100): the product is settled by the guard alone, the mix by the weight
+        const world = (rule, w, guard) => rec.test.world({ id: 'x', vision: { url: 'x', size: 224, mean: [0, 0, 0], std: [1, 1, 1] }, width: 4, kinds: { url: 'k', labels: L }, species: { url: 's', table: 't', count: t.length },
+          fusion: Object.assign({}, m.fusion, { rule: rule, w_kind: w }, guard ? { guard: guard } : {}) }, t, null);
+        const clash = (id) => { const x = rec.test.fuseIn(id, kd({ plant: 1 }), sd({ 'Great Blue Heron': 1 }), 6), by = {}; x.kinds.forEach((k) => { by[k.key] = +k.p.toFixed(4); }); return { kind: x.kind, plant: by.plant, wader: by.wader }; };
+        o.mixKindsLead = clash(world('mix', .7)); o.mixListLeads = clash(world('mix', .3)); o.productGuard9 = clash(world('product', .7)); o.productGuard3 = clash(world('product', .7, 1e-3));
         o.sum = (() => { const x = rec.fuse(kd({ cat: 1 }), sd({}), 6); return +x.kinds.reduce((a, k) => a + k.p, 0).toFixed(6) + ' ' + x.kinds.length + ' ' + x.species.length; })();
         return o;
       });
@@ -172,7 +177,36 @@ async function meet(page, name) {
     const c = r.cases;
     done('fuse', r, c.januaryAnole.top === 'Green Anole' && c.januaryAnole.named === 'Green Anole' && c.julyAnole.named === 'Brown Anole' && c.personNotOutvoted.kind === 'person' && c.noneNotOutvoted.kind === 'none'
       && c.speciesTipsTheKind.kind === 'wader' && c.speciesTipsTheKind.named === 'Great Blue Heron' && c.kindDisagrees.kind === 'plant' && c.kindDisagrees.top === 'Great Blue Heron' && c.kindDisagrees.named === null && c.kindDisagrees.offers[0] === 'Beggarticks' && c.kindDisagrees.offers.indexOf('Great Blue Heron') < 0
+      && c.mixKindsLead.kind === 'plant' && Math.abs(c.mixKindsLead.plant - .7) < 1e-3 && Math.abs(c.mixKindsLead.wader - .3) < 1e-3 && c.mixListLeads.kind === 'wader' && Math.abs(c.mixListLeads.wader - .7) < 1e-3 && c.productGuard9.plant > .999 && c.productGuard3.plant < .9 && c.productGuard3.kind === 'plant'
       && c.sum === '1 17 5' && r.kindsOnly.eyes === 'wader' && r.kindsOnly.shown === 'Wading bird' && r.kindsOnlyModel === 'standin-kinds-only');
+  });
+
+  if (want.includes('trained')) await section('trained', async () => {   // a trained head's files drop in: rows that are not unit vectors, a bias for every row, the mixing rule
+    const r = { photos: {} }; let same = true;
+    {
+      const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await ready(page);
+      r.about = await page.evaluate(() => { const a = window.__seenBack.rec.about(); return { model: a.model, rule: a.rule, trained: a.trained }; });
+      await begin(page);
+      for (const name of Object.keys(expect.trained)) {            // what tools/fusion/fuse.py gave for each photo, from Python's own embedding (make_standin.py)
+        const s = await meet(page, name), w = expect.trained[name];
+        const got = await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return { kind: l.kind, named: l.named ? l.named.en : '', offers: l.offers.map((o) => o.en) }; });
+        r.photos[name] = { page: got.kind + ' | ' + (got.named || '-') + ' | ' + (got.offers.join(', ') || '-'), reference: w.kind + ' | ' + (w.named || '-') + ' | ' + (w.offers.join(', ') || '-'), sentenceMade: w.plain_kind + ' | ' + (w.plain_named || '-'), shown: s.claim ? '(asks)' : s.shown };
+        if (got.kind !== w.kind || got.named !== w.named || got.offers.join() !== w.offers.join()) same = false;
+      }
+      r.errors = errors; same = same && !errors.length;
+      await ctx.close();
+    }
+    { // a rule this build does not know is refused in words, and so is a bias file cut short
+      const tail = ' So you tell it. Type the kind of animal or plant, such as cat, heron or oak.';
+      const a = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.unknown-rule.json'); await begin(a.page); r.unknownRule = (await meet(a.page, 'heron.png')).sub; r.unknownRuleWhy = (await about(a.page)).fail; await a.ctx.close();
+      await ctl('reset=1'); await ctl('cut=' + encodeURIComponent('species\\.bias'));
+      const b = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await begin(b.page); r.biasCutShort = (await meet(b.page, 'heron.png')).sub; r.biasCutShortWhy = (await about(b.page)).fail; await b.ctx.close(); await ctl('reset=1');
+      same = same && r.unknownRule === 'The recognizer’s files do not fit this build of the page.' + tail && r.biasCutShort === 'The recognizer’s file arrived damaged.' + tail;
+    }
+    const t = expect.trained;
+    done('trained', r, same && r.about.model === 'standin-trained' && r.about.rule === 'mix' && r.about.trained === true
+      && t['small.png'].kind === 'hawk' && t['small.png'].named === 'Red-shouldered Hawk' && t['small.png'].plain_kind === 'bird'     // the flips the trained files were built to cause
+      && t['dots.png'].kind !== 'frog' && t['dots.png'].plain_kind === 'frog' && Object.keys(t).length >= 7);
   });
 
   if (want.includes('parity')) await section('parity', async () => {   // the page's own preparing of a photo against Pillow's, and its embedding against onnxruntime's in Python

@@ -278,3 +278,50 @@ expect["offers"] = {"stripes.png": ["Gulf Fritillary", "Monarch", "Queen"]}
 print("operators in the int8 stand-in:", ops)
 print("model bytes:", int8.stat().st_size, "| kinds", K.shape, "| species", Sm.shape)
 print("largest cosine between two different photos: %.4f" % expect["cosine_between_photos"]["max_off_diagonal"])
+
+
+# ---------- the same slot as a trained head arrives (docs/CONTRACTS.md): rows that are weights and not unit vectors, a bias for
+# every row, and the mixing rule. What each photo should give is worked out by the reference, tools/fusion/fuse.py, from Python's
+# own embeddings; test/rec/check_rec.js "trained" asks the browser for the same answers.
+import sys
+sys.path.insert(0, str(here.parents[1] / "tools" / "fusion"))
+from fuse import dots as ref_dots, fuse as ref_fuse, load_slot  # noqa: E402
+
+ki = KINDS.index
+Kt, kb = K.copy(), np.zeros(len(KINDS))
+Kt[ki("bird")] = 0.2 * E["small.png"]                 # small.png: its own short row now loses ...
+Kt[ki("hawk")] = 1.6 * near(E["small.png"], 0.7)      # ... to a long row that points partly away. Were rows made unit length, the bird would win.
+kb[ki("frog")] = -30.0                                # dots.png: a bias alone takes the frog out
+St, sb = Sm * 2.0, np.zeros(len(rows))                # every species row twice as long, at half the temperature: the same scores
+sb[[r[0] for r in rows].index("Buteo lineatus")] = 90.0   # small.png: a bias alone lifts a hawk that looks like nothing, and it is named
+Kt.astype("<f2").tofile(slot / "kinds.trained.f16.bin")
+St.astype("<f2").tofile(slot / "species.trained.f16.bin")
+sb.astype("<f4").tofile(slot / "species.bias.f32.bin")
+m3 = json.loads(json.dumps(manifest))
+m3["id"] = "standin-trained"
+m3["kinds"] = {"url": "kinds.trained.f16.bin", "labels": KINDS, "bias": [float(v) for v in kb]}
+m3["species"] = {"url": "species.trained.f16.bin", "table": "species.json", "count": len(rows), "bias_url": "species.bias.f32.bin"}
+m3["fusion"] = {"t_kind": 50, "t_species": 50, "alpha_prior": 0.5, "w_kind": 0.7, "name_at": 0.6, "offer_at": 0.3, "rule": "mix"}
+(slot / "manifest.trained.json").write_text(json.dumps(m3, indent=1) + "\n", encoding="utf-8")
+m4 = json.loads(json.dumps(m3)); m4["id"] = "standin-rule-from-the-future"; m4["fusion"]["rule"] = "vote"     # a rule no build knows: the page must refuse the slot, not guess
+(slot / "manifest.unknown-rule.json").write_text(json.dumps(m4, indent=1) + "\n", encoding="utf-8")
+
+tr = load_slot(slot / "manifest.trained.json")           # read back as the page reads it, half precision and all
+plain = load_slot(slot)
+trained = {}
+for name in MADE:
+    seen = set()
+    for month in range(12):
+        r = ref_fuse(tr["manifest"], tr["table"], month, ref_dots(tr["kinds"], E[name]), ref_dots(tr["species"], E[name]), kind_bias=tr["kind_bias"], species_bias=tr["species_bias"])
+        seen.add((r["kind"], (r["named"] or {}).get("en", ""), tuple(o["en"] for o in r["offers"]), r["kindP"] >= 0.6))
+    p0 = ref_fuse(plain["manifest"], plain["table"], 6, ref_dots(plain["kinds"], E[name]), ref_dots(plain["species"], E[name]))
+    if len(seen) == 1 and list(seen)[0][3]:             # the same answer in every month, and a clear one
+        kind, named, offers, _ = list(seen)[0]
+        trained[name] = {"kind": kind, "named": named, "offers": list(offers), "plain_kind": p0["kind"], "plain_named": (p0["named"] or {}).get("en", "")}
+expect["trained"] = trained
+(slot / "expect.json").write_text(json.dumps(expect, separators=(",", ":")) + "\n", encoding="utf-8")
+for name, t in trained.items():
+    print("  trained head: %-13s %-8s %-22s offers %s | sentence-made: %s %s" % (name, t["kind"], t["named"] or "-", t["offers"] or "-", t["plain_kind"], t["plain_named"] or "-"))
+assert trained["small.png"]["kind"] == "hawk" and trained["small.png"]["named"] == "Red-shouldered Hawk" and trained["small.png"]["plain_kind"] == "bird", trained["small.png"]
+assert trained["dots.png"]["kind"] != "frog" and trained["dots.png"]["plain_kind"] == "frog", trained["dots.png"]
+assert trained["heron.png"]["named"] == "Great Blue Heron", trained["heron.png"]
