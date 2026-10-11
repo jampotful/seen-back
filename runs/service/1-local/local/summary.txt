@@ -1,0 +1,34 @@
+health: ok after 18.0 s ({"ok": true, "ready": true, "model": "bioclip2-l14", "species": 5911, "regions": ["us-fl-alachua"], "device": "cpu", "zero_gpu": false, "threads": 4, "load_seconds": 11.6, "provisional": true, "gradio": "6.30.0"})
+health from the page's origin: 200, Access-Control-Allow-Origin https://jampotful.github.io
+preflight from https://jampotful.github.io: {"status": 200, "allow_origin": "https://jampotful.github.io", "allow_methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT", "allow_headers": "content-type", "max_age": "600"}
+preflight from http://localhost:8786: {"status": 200, "allow_origin": "http://localhost:8786", "allow_methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT", "allow_headers": "content-type", "max_age": "600"}
+preflight from https://example.org: {"status": 200, "allow_origin": null, "allow_methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT", "allow_headers": "content-type", "max_age": "600"}
+call from https://example.org: 403 {"error": "This service answers only the Seen Back page and pages on this computer.", "code": "origin"}
+ 1 e000001 Schistocerca americana           -> Schistocerca rubiginosa          p 0.052 wrong  1288 ms total, 1273 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 2 e000301 Antheraea polyphemus             -> Antheraea polyphemus             p 0.031 RIGHT  1288 ms total, 1273 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 3 e000601 Storeria occipitomaculata        -> Diadophis punctatus              p 0.055 wrong  1322 ms total, 1303 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 4 e000891 Anolis sagrei                    -> Anolis sagrei                    p 0.077 RIGHT  1311 ms total, 1296 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 5 e001186 Centruroides hentzi              -> Centruroides hentzi              p 0.141 RIGHT  1315 ms total, 1301 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 6 e001496 Aramus guarauna                  -> Aramus guarauna                  p 0.059 RIGHT  1324 ms total, 1302 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 7 e001800 Gopherus polyphemus              -> Gopherus polyphemus              p 0.080 RIGHT  1287 ms total, 1270 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 8 e002103 Ictinia mississippiensis         -> Tillandsia usneoides             p 0.014 wrong  1306 ms total, 1290 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+ 9 e002408 Coluber constrictor              -> Coluber constrictor              p 0.096 RIGHT  1320 ms total, 1303 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+10 e002691 Anisomorpha buprestoides         -> Anisomorpha buprestoides         p 0.065 RIGHT  1314 ms total, 1297 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+11 e002976 Eacles imperialis                -> Eacles imperialis                p 0.082 RIGHT  1326 ms total, 1311 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+12 e003276 Dione vanillae                   -> Dione vanillae                   p 0.042 RIGHT  1320 ms total, 1293 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+13 e003558 Theatops posticus                -> Theatops posticus                p 0.091 RIGHT  1329 ms total, 1315 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+14 e003871 Haemorhous mexicanus             -> Haemorhous mexicanus             p 0.031 RIGHT  1316 ms total, 1297 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+15 e004188 Zenaida macroura                 -> Zenaida macroura                 p 0.037 RIGHT  1327 ms total, 1303 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+16 e004504 Piranga rubra                    -> Piranga rubra                    p 0.062 RIGHT  1317 ms total, 1302 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+17 e004789 Columba livia                    -> Lanius ludovicianus              p 0.003 wrong  1332 ms total, 1305 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+18 e005099 Leptoglossus phyllopus           -> Leptoglossus phyllopus           p 0.067 RIGHT  1323 ms total, 1304 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+19 e005393 Gordonia lasianthus              -> Gordonia lasianthus              p 0.051 RIGHT  1302 ms total, 1278 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+20 e005699 Procyon lotor                    -> Procyon lotor                    p 0.054 RIGHT  1330 ms total, 1315 ms in the service, ACAO post https://jampotful.github.io get https://jampotful.github.io
+photos: 20 of 20 answered, top-1 right 16, top-5 18, kind of eye 6; first call 1288 ms; total per photo median 1318.5 ms, worst 1332 ms; warm (2nd on) median 1320, worst 1332; in the service median 1301.5, worst 1315
+parity with the laboratory's own vectors under the same head: same top-1 on 20 of 20, largest difference in p 0.0001
+refusal too_large: got too_large, 'The photo is larger than 1.5 MB; send a JPEG whose longest side is at most 512 pixels.'
+refusal not_image: got not_image, 'The photo could not be opened as an image.'
+refusal bad_month: got bad_month, 'The month must be a whole number from 1 to 12.'
+refusal unknown_region: got unknown_region, 'The region must be one of us-fl-alachua, or empty.'
+no region: {"region": "", "note": "No region was given, so the answer is drawn from the Alachua County, Florida list without the season's weights.", "top1": {"key": 1707408, "sci": "Schistocerca ceratiola", "en": "Rosemary Grasshopper", "eyes": "insect", "p": 0.0438}}
+checks: health pass, health_cors pass, preflight_page pass, preflight_localhost pass, preflight_other_refused pass, other_origin_refused pass, photos_answered pass, acao_on_calls pass, refusals pass, no_region pass
