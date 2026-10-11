@@ -41,6 +41,19 @@ if [ -n "$WAIT" ]; then
     sleep 60
   done
   echo "=== $(date -u +%FT%TZ) the training vectors are published" | tee -a "$LOG"
+  # The kind decision is tuned with photos of people, pets, livestock and rooms (extra/coco-kinds). Give their vectors a
+  # bounded time to appear, then go on with whatever is published: the studies say which they had.
+  deadline=$(( $(date +%s) + ${EXTRA_WAIT_SECONDS:-2400} ))
+  while :; do
+    missing=""
+    for b in $WAIT; do has_file "$b" images/coco-kinds.f16.npy || missing="$missing $b"; done
+    [ -z "$missing" ] && break
+    if [ "$(date +%s)" -ge "$deadline" ]; then
+      echo "=== $(date -u +%FT%TZ) going on without the extra set's vectors on:$missing" | tee -a "$LOG"
+      break
+    fi
+    sleep 60
+  done
 fi
 step "install" python3 -m pip install --quiet numpy scikit-learn || exit 1
 mkdir -p out/committed && cp docs/eval/*.json out/committed/ 2>/dev/null; cp docs/EVAL.md out/committed/EVAL.md 2>/dev/null

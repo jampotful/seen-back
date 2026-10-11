@@ -28,6 +28,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ev
+import kinds
 
 REL = (0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0)   # prior weight, in units of a head's usual gap between first and second
 SCALES = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0, 32.0, 48.0, 64.0, 96.0, 128.0)   # calibration scale, in the same units
@@ -258,16 +259,21 @@ def run_model(root, model, mode, save):
         log("  %-26s plain %.4f | prior %.4f top5 %.4f kind %.4f | tune %.4f | %s" % (name, h["plain"]["top1"][0], h["prior"]["top1"][0], h["prior"]["top5"][0], h["prior"]["kind_from_sum"][0], acc1, label))
         if chosen is None or acc1 > chosen["tune"]:
             chosen = {"tune": acc1, "name": name, "label": label, "rows": rows * np.float32(s), "bias": np.where(keep_rows, bias * np.float32(s), NEG).astype(np.float32),
-                      "alpha": float(rho * s), "smooth": SMOOTH[si], "Zt": Zt, "Zu": Zu0, "rho": rho, "s": s, "si": si, "keep": keep_rows, "hit": r1 == 0}
+                      "alpha": float(rho * s), "smooth": SMOOTH[si], "Zt": Zt, "Zu": Zu0, "rho": rho, "s": s, "si": si, "keep": keep_rows, "hit": r1 == 0, "raw": (rows, bias)}
     res["by_train_photos"] = {"heads": table_cols, "rows": [{"group": g, "n": int(((ntr >= lo) & (ntr <= hi)).sum()), "top1": [round(float(hh[(ntr >= lo) & (ntr <= hi)].mean()), 4) if ((ntr >= lo) & (ntr <= hi)).any() else None for hh in table_hits]} for g, lo, hi in TRAIN_BINS]}
     res["chosen_species_head"] = {"name": chosen["name"], "choice": chosen["label"], "tuning_top1": round(chosen["tune"], 4)}
 
     # kind of eye
     K, klabels = ev.load_text(root, model, "kinds")
     eyes_t = ES.eyes[te]
+    XT = kinds.load(root, model, want_wasm="wasm" in tv)        # people, pets, livestock and rooms; None until their vectors are published
+    if XT is not None and not len(XT["tune"]["ids"]):
+        XT = None
+    kind_cands = []                                              # (name, rows, bias or None, temperatures to try)
     if K is not None:
         pred = np.array(klabels)[(Xt @ K.T).argmax(1)]
         res["kind_heads"].append({"name": "kind phrases (sentence rows, with `person` and `none`)", "accuracy": ev.ci(pred == eyes_t), "called_person": float((pred == "person").mean()), "called_none": float((pred == "none").mean())})
+        kind_cands.append(("kind phrases", K, None, T_KIND))
     try:
         if not fitted:
             raise LookupError
@@ -276,8 +282,8 @@ def run_model(root, model, mode, save):
         zk = clf.decision_function(Xt)
         pred = clf.classes_[zk.argmax(1)]
         res["kind_heads"].append({"name": "trained on the fitting photos (logistic regression, %d kinds, no row for `person` or `none`)" % len(clf.classes_), "accuracy": ev.ci(pred == eyes_t), "called_person": 0.0, "called_none": 0.0})
-        if K is not None:
-            # sentence rows for person and none beside the trained rows: their bias is set so that at most 0.5% of tuning photos are called person or none
+        if K is not None and XT is None:
+            # no photos of people or rooms to fit on: sentence rows for person and none beside the trained rows, with a bias set so that at most 0.5% of tuning photos are called person or none
             pn = [klabels.index("person"), klabels.index("none")]
             zu = clf.decision_function(Xu)
             tk = float(zu.std() / max(1e-6, (Xu @ K.T).std()))
@@ -287,7 +293,20 @@ def run_model(root, model, mode, save):
             lab2 = np.array(list(clf.classes_) + ["person", "none"])
             pred2 = lab2[z2.argmax(1)]
             res["kind_heads"].append({"name": "trained rows, with the sentence rows for `person` and `none` kept beside them", "accuracy": ev.ci(pred2 == eyes_t), "called_person": float((pred2 == "person").mean()), "called_none": float((pred2 == "none").mean())})
-            res["notes"].append("The wildlife records hold no people and no photos with nothing alive in them. The sentence rows for `person` and `none` are kept, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured.")
+            res["notes"].append("The extra set's vectors were not published for this model when this ran, so no kind row could be fitted for `person` or `none`. The sentence rows for the two are kept beside the trained rows, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured.")
+        if K is not None and XT is not None and len(XT["fit"]["ids"]):
+            # kind rows for all seventeen labels, fitted on the wildlife fitting photos and the fitting part of the extra set
+            Xf, ef = np.concatenate([X, XT["fit"]["X"]]), np.concatenate([eyes_tr, XT["fit"]["eyes"]])
+            cls, cnt = np.unique(ef, return_counts=True)
+            for wname, power in (("every photo counts the same", 0.0), ("a kind's photos weighted by the inverse square root of their number", 0.5), ("every kind counts the same", 1.0)):
+                sw = (cnt.astype(np.float64) ** -power)[np.searchsorted(cls, ef)]
+                sw *= len(ef) / sw.sum()
+                c2 = LogisticRegression(C=20.0, max_iter=300).fit(Xf, ef, sample_weight=sw)
+                Wk, bk = np.zeros((len(klabels), Xf.shape[1]), np.float32), np.full(len(klabels), -50.0, np.float32)      # a label without a fitting photo is never said
+                for j, c in enumerate(c2.classes_):
+                    Wk[klabels.index(c)], bk[klabels.index(c)] = c2.coef_[j], c2.intercept_[j]
+                kind_cands.append(("kind rows fitted on the fitting photos and the extra set (%s)" % wname, Wk, bk, (0.5, 1.0, 2.0)))
+            res["kind_rows_fitted_on"] = {"wildlife_photos": int(len(X)), "extra_photos": int(len(XT["fit"]["ids"])), "by_kind": {str(c): int(n) for c, n in zip(cls, cnt)}}
     except LookupError:
         pass
     except Exception as e:                                                # scikit-learn missing or the fit failed: say so
@@ -299,29 +318,80 @@ def run_model(root, model, mode, save):
     Pu = ev.softmax_rows((np.float32(chosen["s"]) * (chosen["Zu"] + np.float32(chosen["rho"]) * lpu)).astype(np.float64))
     Pt = ev.softmax_rows((np.float32(chosen["s"]) * (chosen["Zt"] + np.float32(chosen["rho"]) * lpt)).astype(np.float64))
 
-    # the page's combination of the kind phrases with the species list: weight, temperature and rule chosen on the tuning photos
-    fusion = None
-    if K is not None:
+    # the page's combination of a kinds head with the species list. The kinds head, its temperature, the weight and the
+    # rule are chosen on the tuning photos: the wildlife tuning photos and, when published, the tuning third of the extra set.
+    fusion, kind_save = None, None
+    if kind_cands:
         kl = np.array(klabels)
-        speaks = np.array([(ES.sp_eyes[chosen["keep"]] == k).any() for k in klabels])
-        Qu = np.stack([Pu[:, chosen["keep"] & (ES.sp_eyes == k)].sum(1) for k in klabels], 1)
-        Qt = np.stack([Pt[:, chosen["keep"] & (ES.sp_eyes == k)].sum(1) for k in klabels], 1)
+        keepc = chosen["keep"]
+        speaks = np.array([(ES.sp_eyes[keepc] == k).any() for k in klabels])
+        q_of = lambda Pm: np.stack([Pm[:, keepc & (ES.sp_eyes == k)].sum(1) for k in klabels], 1)
+        Qu, Qt = q_of(Pu), q_of(Pt)
+        rows_c, bias_c = chosen["raw"]
+
+        def list_side(Xr, months):                                       # the species list's share for each kind, for photos of the extra set
+            Z = Xr @ rows_c.T + bias_c + np.float32(chosen["rho"]) * lps[chosen["si"]][months]
+            return q_of(ev.softmax_rows((np.float32(chosen["s"]) * Z).astype(np.float64)))
+
+        ext = {p: {"X": XT[p]["X"], "eyes": XT[p]["eyes"], "Q": list_side(XT[p]["X"], XT[p]["month"])} for p in ("tune", "test") if len(XT[p]["ids"])} if XT is not None else {}
+
+        def decide(ci_, rule, tk, w, Xr, Q):                              # winning kind, its probability, the three likeliest
+            _, R, bk_, _ = kind_cands[ci_]
+            c = fused(ev.softmax_rows((tk * (Xr @ R.T + (bk_ if bk_ is not None else 0))).astype(np.float64)), Q, speaks, w, rule)
+            o = np.argsort(-c, 1, kind="stable")[:, :3]
+            return kl[o[:, 0]], c[np.arange(len(c)), o[:, 0]], kl[o]
+
         tried = []
-        for rule in ("mix", "product"):
-            for tk in T_KIND:
-                pku = ev.softmax_rows((tk * (Xu @ K.T)).astype(np.float64))
-                for w in W_KIND:
-                    tried.append((float((kl[fused(pku, Qu, speaks, w, rule).argmax(1)] == ES.eyes[tune]).mean()), rule, tk, w))
-        res["fusion_tried_on_tuning_photos"] = [{"rule": r_, "t_kind": tk, "w_kind": w, "kind_right": round(a_, 4)} for a_, r_, tk, w in tried]
-        for rule in ("mix", "product"):
-            a_, _, tk, w = max((t for t in tried if t[1] == rule), key=lambda t: t[0])
-            pred = kl[fused(ev.softmax_rows((tk * (Xt @ K.T)).astype(np.float64)), Qt, speaks, w, rule).argmax(1)]
-            res["kind_heads"].append({"name": "the page's combination of kind phrases and species list (rule `%s`, t_kind %g, w_kind %g; species head `%s`)" % (rule, tk, w, chosen["name"]),
-                                      "accuracy": ev.ci(pred == eyes_t), "called_person": float((pred == "person").mean()), "called_none": float((pred == "none").mean())})
-            if rule == "mix":
-                fusion = {"rule": rule, "t_kind": tk, "w_kind": w, "tuning_kind_right": round(a_, 4)}
-            else:
-                fusion["if_rule_product"] = {"t_kind": tk, "w_kind": w, "tuning_kind_right": round(a_, 4)}
+        for ci_, (hname, R, bk_, temps) in enumerate(kind_cands):
+            for tk in temps:
+                for rule in ("mix", "product"):
+                    for w in W_KIND:
+                        rw = decide(ci_, rule, tk, w, Xu, Qu)[0] == ES.eyes[tune]
+                        rx = (decide(ci_, rule, tk, w, ext["tune"]["X"], ext["tune"]["Q"])[0] == ext["tune"]["eyes"]) if "tune" in ext else None
+                        both, aw, ax = kinds.balanced(rw, rx, ext["tune"]["eyes"] if rx is not None else None)
+                        tried.append({"head": hname, "rule": rule, "t_kind": tk, "w_kind": w, "tuning_both": round(both, 4), "tuning_wildlife": round(aw, 4), "tuning_extra": None if ax is None else round(ax, 4), "_i": ci_})
+
+        def on_test(t):
+            said, prob, three = decide(t["_i"], t["rule"], t["t_kind"], t["w_kind"], Xt, Qt)
+            out = {k: v for k, v in t.items() if k != "_i"}
+            # the level for "not sure", from this computation (tools/eval/shipped.py sets the one that ships, through fuse.py)
+            su, pu_, _ = decide(t["_i"], t["rule"], t["t_kind"], t["w_kind"], Xu, Qu)
+            sets = [(pu_, su == ES.eyes[tune])]
+            if "tune" in ext:
+                sx, px, _ = decide(t["_i"], t["rule"], t["t_kind"], t["w_kind"], ext["tune"]["X"], ext["tune"]["Q"])
+                sets.append((px, sx == ext["tune"]["eyes"]))
+            tau = kinds.kind_at(sets)
+            out["kind_at"] = tau
+            out["test_wildlife"] = kinds.outcome(said, prob, (three == eyes_t[:, None]).any(1), eyes_t, tau)
+            out["called_person"], out["called_none"] = float((said == "person").mean()), float((said == "none").mean())
+            if "test" in ext:
+                sx, px, tx = decide(t["_i"], t["rule"], t["t_kind"], t["w_kind"], ext["test"]["X"], ext["test"]["Q"])
+                ex = ext["test"]["eyes"]
+                out["test_extra"] = kinds.outcome(sx, px, (tx == ex[:, None]).any(1), ex, tau)
+                out["test_extra_by_kind"] = kinds.table(sx, px, (tx == ex[:, None]).any(1), ex, tau, order=kinds.EXTRA_KINDS)
+            return out
+
+        best = max(tried, key=lambda t: t["tuning_both"])
+        cands_out = []
+        for ci_ in range(len(kind_cands)):
+            for rule in ("mix", "product"):
+                cands_out.append(on_test(max((t for t in tried if t["_i"] == ci_ and t["rule"] == rule), key=lambda t: t["tuning_both"])))
+        res["kind_decision"] = {
+            "tuned_on": {"wildlife_photos": int(tune.sum()), "wildlife_vectors": "images/" + tv,
+                         "extra": ({"set": XT["set"], "photos": int(len(XT["tune"]["ids"])), "vectors": XT["tune"]["vectors"], "fitting_photos": int(len(XT["fit"]["ids"])),
+                                    "test_photos": int(len(XT["test"]["ids"])), "test_vectors": XT["test"]["vectors"], "rows_with_vectors": XT["rows_with_vectors"], "rows_in_manifest": XT["rows_in_manifest"]} if XT is not None else None)},
+            "tuned_number": "the mean of the share right on the wildlife tuning photos and of the mean share right over the extra set's kinds" if ext else "the share right on the wildlife tuning photos (the extra set's vectors were not published for this model)",
+            "settings_tried": len(tried), "candidates": cands_out, "chosen": on_test(best),
+            "chosen_on_wildlife_alone": on_test(max(tried, key=lambda t: t["tuning_wildlife"])),
+            "species_head": chosen["name"]}
+        res["kind_heads"].append({"name": "the page's combination of %s and the species list (rule `%s`, t_kind %g, w_kind %g; species head `%s`)" % (best["head"], best["rule"], best["t_kind"], best["w_kind"], chosen["name"]),
+                                  "accuracy": res["kind_decision"]["chosen"]["test_wildlife"]["kind_right"], "called_person": res["kind_decision"]["chosen"]["called_person"], "called_none": res["kind_decision"]["chosen"]["called_none"]})
+        _, R, bk_, _ = kind_cands[best["_i"]]
+        fusion = {"rule": best["rule"], "t_kind": best["t_kind"], "w_kind": best["w_kind"], "kind_head": best["head"], "tuning_both": best["tuning_both"], "tuning_wildlife": best["tuning_wildlife"], "tuning_extra": best["tuning_extra"],
+                  "tuned_with_extra_set": bool(ext), "kind_at_from_study2": res["kind_decision"]["chosen"]["kind_at"]}
+        kind_save = (R.astype(np.float32), (np.float32(best["t_kind"]) * bk_).astype(np.float32) if bk_ is not None else np.zeros(0, np.float32))
+        if not ext:
+            res["notes"].append("The extra set's vectors (people, pets, livestock, rooms) were not published for this model when this ran, so the kind decision was tuned on wildlife photos alone and says nothing about a person or an empty room.")
 
     def tops(Pm, y):
         o = np.argsort(-Pm, 1)[:, :3]
@@ -370,6 +440,7 @@ def run_model(root, model, mode, save):
         os.makedirs(save, exist_ok=True)
         keep = chosen["keep"]
         np.savez(os.path.join(save, model + ".npz"), rows=chosen["rows"][keep], bias=chosen["bias"][keep], keep=np.nonzero(keep)[0],
+                 kind_rows=kind_save[0] if kind_save else np.zeros((0, 0), np.float32), kind_bias=kind_save[1] if kind_save else np.zeros(0, np.float32), kind_labels=json.dumps(list(klabels) if K is not None else []),
                  meta=json.dumps({"model": model, "head": chosen["name"], "choice": chosen["label"], "train": mode, "train_vectors": train_name, "test_vectors": "images/" + tv,
                                   "alpha_prior": chosen["alpha"], "lam": chosen["smooth"][0], "c": chosen["smooth"][1], "name_at": name_at, "offer_at": offer_at, "fusion": fusion,
                                   "tuned_on": "the third of val kept for tuning" if mode == "val" else "val", "made_by": "tools/eval/study2.py"}))

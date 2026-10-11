@@ -6,7 +6,7 @@
 Each check is a line of the output with a verdict: "pass", "FAIL", "note" (a fact to know), or "waiting"
 (the file it needs is not published yet). The script exits 1 if any check fails.
 """
-import argparse, csv, hashlib, json, os, sys
+import argparse, csv, hashlib, json, os, re, sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -165,8 +165,25 @@ if os.path.exists(tp):
     late = sum(r["date"] > through for r in train)
     add("every training photo is dated on or before %s" % through, "pass" if not late else "FAIL", "%d rows; latest %s; rows after: %d" % (len(train), max(r["date"] for r in train), late))
     for col in ("gbif_id", "obs_url", "photo_url"):
-        shared = len({r[col] for r in rows} & {r[col] for r in train})
-        add("no %s is shared between the training and the evaluation photos" % col, "pass" if not shared else "FAIL", "%d shared" % shared)
+        have = sum(bool(r[col]) for r in train)
+        shared = len({r[col] for r in rows if r[col]} & {r[col] for r in train if r[col]})
+        if not have:
+            # the open-data route to the training photos has no GBIF record ids: this comparison cannot speak
+            add("no %s is shared between the training and the evaluation photos" % col, "note", "the training manifest's %s column is empty (it was built from iNaturalist's open-data files, which carry no GBIF record id), so this comparison says nothing; the dates and the photo numbers below do the work" % col)
+        else:
+            add("no %s is shared between the training and the evaluation photos" % col, "pass" if not shared else "FAIL", "%d shared; %d of %d training rows carry a value" % (shared, have, len(train)))
+    # the photo's own number in iNaturalist's bucket, which both routes to the training photos carry in the address
+    pid = lambda u: (re.search(r"/photos/(\d+)/", u) or [None, None])[1]
+    ep, tp_ = {pid(r["photo_url"]) for r in rows}, {pid(r["photo_url"]) for r in train}
+    add("no photo number is shared between the training and the evaluation photos", "pass" if None not in ep and None not in tp_ and not (ep & tp_) else "FAIL",
+        "%d evaluation and %d training photo numbers read from the addresses; shared: %d; addresses without a number: %d" % (len(ep - {None}), len(tp_ - {None}), len((ep & tp_) - {None}), sum(pid(r["photo_url"]) is None for r in rows + train)))
+    num_obs = sum(r["obs_url"].rsplit("/", 1)[-1].isdigit() for r in train)
+    add("training observations can be compared with evaluation observations by number", "note" if num_obs < len(train) else "pass",
+        "%d of %d training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before %s while every evaluation row is dated after it, so no observation can be on both sides." % (num_obs, len(train), through))
+    dup = len(train) - len({r["photo_url"] for r in train})
+    add("no training photo appears twice", "pass" if not dup else "FAIL", "%d repeated photo addresses in %d rows" % (dup, len(train)))
+    eyes_bad = sum(r["eyes"] != key2s[int(r["key"])]["eyes"] for r in train if r["key"] and int(r["key"]) in key2s)
+    add("the kind of eye of every training row is the species list's", "pass" if not eyes_bad else "FAIL", "%d rows disagree" % eyes_bad)
     per = {}
     for r in train:
         per[r["key"]] = per.get(r["key"], 0) + 1
@@ -189,6 +206,44 @@ if os.path.exists(tp):
             add("evaluation photos with an almost identical training photo for %s (cosine above 0.995)" % model, "note", "%d of %d" % (int((mx > 0.995).sum()), len(eid)))
 else:
     add("training photos share no record with the evaluation photos", "waiting", "`data/train/alachua-pre2025/manifest.csv` was not published when the checks ran.")
+
+# 7. the extra set: people, pets, livestock and rooms (COCO 2017)
+xp = os.path.join(root, "data", "extra", "coco-kinds", "manifest.csv")
+if os.path.exists(xp):
+    import kinds as KX
+    with open(xp, newline="", encoding="utf-8") as f:
+        xrows = list(csv.DictReader(f))
+    n_id, n_ph = len({r["id"] for r in xrows}), len({r["photo_url"] for r in xrows})
+    add("no two rows of the extra set share an id or a photo", "pass" if n_id == len(xrows) == n_ph else "FAIL", "%d rows, %d ids, %d photo addresses" % (len(xrows), n_id, n_ph))
+    wrong_home = sum(("/val2017/" in r["photo_url"]) != (r["split"] == "test") or ("/train2017/" in r["photo_url"]) != (r["split"] == "train") for r in xrows)
+    add("the extra set's test rows come from COCO's val2017 and its train rows from train2017", "pass" if not wrong_home else "FAIL", "%d rows disagree. COCO keeps the two apart, so no photo is on both sides." % wrong_home)
+    parts = {}
+    for r in xrows:
+        parts.setdefault(KX.part_of(r), {}).setdefault(r["eyes"], 0)
+        parts[KX.part_of(r)][r["eyes"]] += 1
+    add("how the extra set is cut (tools/eval/kinds.py)", "note", "; ".join("%s: %s" % (p_, ", ".join("%s %d" % kv for kv in sorted(parts[p_].items()))) for p_ in ("fit", "tune", "test") if p_ in parts) +
+        ". `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported.")
+    xid = {r["id"]: r for r in xrows}
+    for model in sorted(os.listdir(os.path.join(root, "lab"))):
+        for vn in ("coco-kinds", "coco-kinds" + KX.WASM):
+            p = os.path.join(root, "lab", model, "images", vn)
+            if os.path.exists(p + ".f16.npy"):
+                vid = ev.read_ids(p + ".ids.json")
+                n = np.load(p + ".f16.npy", mmap_mode="r").shape[0]
+                ok = n == len(vid) == len(set(vid)) and all(i in xid for i in vid)
+                add("extra-set vectors `%s` of %s line up with the manifest" % (vn, model), "pass" if ok else "FAIL", "%d vectors, %d ids, of %d manifest rows; by part: %s" % (
+                    n, len(vid), len(xrows), ", ".join("%s %d" % (p_, sum(KX.part_of(xid[i]) == p_ for i in vid if i in xid)) for p_ in ("fit", "tune", "test"))))
+        Ex, exid = ev.load_images(root, model, "coco-kinds")
+        if Ex is not None and len(exid) > 1:
+            part = np.array([KX.part_of(xid[i]) for i in exid])
+            if (part == "test").any() and (part != "test").any():
+                mx = np.zeros(int((part == "test").sum()), dtype=np.float32)
+                rest = Ex[part != "test"]
+                for i in range(0, len(rest), 4000):
+                    mx = np.maximum(mx, (Ex[part == "test"] @ rest[i:i + 4000].T).max(1))
+                add("extra-set test photos with an almost identical fitting or tuning photo for %s (cosine above 0.995)" % model, "pass" if not (mx > 0.995).any() else "note", "%d of %d" % (int((mx > 0.995).sum()), len(mx)))
+else:
+    add("the extra set of people, pets, livestock and rooms", "waiting", "`data/extra/coco-kinds/manifest.csv` was not published when the checks ran.")
 
 # facts from each model's card, for the report's decisions
 cards = {}
