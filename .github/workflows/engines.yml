@@ -4,7 +4,7 @@ name: engines
 #    (index.html?selftest=1) with its recognizer phase; Firefox headed on Xvfb (headless Firefox has no WebGL on these machines)
 #  - macos: the same in Playwright's WebKit, then the self-test in real Safari (safaridriver) and in Safari on an iPhone simulator
 # Push to run/engines/live (or run/engines/live-<anything>) instead to check only the live address, https://jampotful.github.io/seen-back/;
-# push to run/engines/mac-<anything> to run only the macOS job.
+# push to run/engines/mac-<anything> to run only the macOS job, or to run/engines/linux-<anything> for only the Linux jobs.
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out linux-${{ matrix.part }}
   macos:
-    if: ${{ !startsWith(github.ref_name, 'run/engines/live') }}
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/linux') }}
     runs-on: macos-latest
     timeout-minutes: 55
     steps:
