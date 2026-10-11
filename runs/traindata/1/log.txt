@@ -1,0 +1,69 @@
+=== 2026-10-11T03:15:51Z install requests
+=== 2026-10-11T03:15:53Z install requests: exit 0
+=== 2026-10-11T03:15:53Z training manifest
+== pool: records with a still image through 2024-12-31
+  177164 records in years 1910..2024
+  months: 20/744 (5s)
+  months: 40/744 (11s)
+  months: 60/744 (14s)
+  months: 80/744 (19s)
+  months: 100/744 (23s)
+  months: 120/744 (28s)
+  months: 140/744 (33s)
+  months: 160/744 (38s)
+  months: 180/744 (43s)
+  months: 200/744 (48s)
+  months: 220/744 (53s)
+  months: 240/744 (58s)
+  months: 260/744 (63s)
+  months: 280/744 (71s)
+  months: 300/744 (76s)
+  months: 320/744 (81s)
+  months: 340/744 (85s)
+  months: 360/744 (90s)
+  months: 380/744 (95s)
+  months: 400/744 (100s)
+  months: 420/744 (106s)
+  months: 440/744 (109s)
+  months: 460/744 (114s)
+  months: 480/744 (119s)
+  months: 500/744 (124s)
+  months: 520/744 (131s)
+  months: 540/744 (136s)
+  months: 560/744 (141s)
+  months: 580/744 (147s)
+  months: 600/744 (152s)
+  months: 620/744 (157s)
+  months: 640/744 (163s)
+  months: 660/744 (170s)
+  months: 680/744 (186s)
+  months: 700/744 (232s)
+  months: 720/744 (278s)
+  months: 740/744 (330s)
+Traceback (most recent call last):
+  File "/home/runner/work/seen-back/seen-back/tools/species/build_train.py", line 249, in <module>
+    main()
+  File "/home/runner/work/seen-back/seen-back/tools/species/build_train.py", line 91, in main
+    got = common.pmap(lambda ym: fetch_month(base, ym[0], ym[1]), yms, workers=args.workers, desc="months", every=20)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/species/common.py", line 91, in pmap
+    out[futs[f]] = f.result()
+                   ^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/species/build_train.py", line 91, in <lambda>
+    got = common.pmap(lambda ym: fetch_month(base, ym[0], ym[1]), yms, workers=args.workers, desc="months", every=20)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/species/build_train.py", line 45, in fetch_month
+    r = common.get_json("/occurrence/search", dict(base, year=y, month=m, limit=300, offset=off))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/species/common.py", line 79, in get_json
+    raise RuntimeError("gave up on %s %s after %d tries: %s" % (url, params or "", tries, last))
+RuntimeError: gave up on https://api.gbif.org/v1/occurrence/search {'gadmGid': 'USA.10.1_1', 'datasetKey': '50c9509d-22c7-4a22-a47d-8c48425ef4a7', 'mediaType': 'StillImage', 'year': 2020, 'month': 9, 'limit': 300, 'offset': 2100} after 7 tries: JSONDecodeError: Expecting ':' delimiter: line 1 column 475130 (char 475129)
+=== 2026-10-11T03:21:41Z training manifest: exit 1
