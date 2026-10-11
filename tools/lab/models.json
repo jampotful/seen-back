@@ -1,0 +1,152 @@
+{
+ "about": "The model laboratory's slate. Licence texts were read on 2026-10-10 (US Eastern) through the fetch workflow (ci branch runs/fetch/2/) or directly from raw.githubusercontent.com; 'licence_text' quotes or summarizes what the text says. A model card's YAML tag alone is recorded as a tag, not as a licence. Roles: pocket = candidate for the in-page recognizer; naturalist = candidate for the species service; reference = measured for comparison only.",
+ "models": [
+  {
+   "id": "tinyclip-8m-16",
+   "loader": "transformers",
+   "source": "wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+   "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+   "licence_text": "MIT License, Copyright (c) Microsoft Corporation: permission to use, copy, modify, merge, publish, distribute, sublicense and sell, with the notice kept. The model card's YAML says license: mit and its License section links to Cream/TinyCLIP/LICENSE (card read at https://huggingface.co/wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M/raw/main/README.md).",
+   "licence_read": "2026-10-10",
+   "role": "pocket",
+   "notes": "TinyCLIP (Wu et al., ICCV 2023), distilled from OpenAI CLIP ViT-B/16 with affinity mimicking and weight inheritance, trained on YFCC-15M. Transformers CLIPModel; repo has model.safetensors."
+  },
+  {
+   "id": "tinyclip-39m-16",
+   "loader": "transformers",
+   "source": "wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+   "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+   "licence_text": "As tinyclip-8m-16: MIT, Copyright (c) Microsoft Corporation; card YAML license: mit, card links Cream/TinyCLIP/LICENSE.",
+   "licence_read": "2026-10-10",
+   "role": "pocket",
+   "notes": "Patch 16, YFCC-15M."
+  },
+  {
+   "id": "tinyclip-40m-32",
+   "loader": "transformers",
+   "source": "wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M",
+   "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+   "licence_text": "As tinyclip-8m-16: MIT, Copyright (c) Microsoft Corporation; card YAML license: mit, card links Cream/TinyCLIP/LICENSE.",
+   "licence_read": "2026-10-10",
+   "role": "pocket",
+   "notes": "Patch 32 (49 tokens at 224), LAION-400M; the cheapest per pixel of the family."
+  },
+  {
+   "id": "tinyclip-61m-32",
+   "loader": "transformers",
+   "source": "wkcn/TinyCLIP-ViT-61M-32-Text-29M-LAION400M",
+   "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-61M-32-Text-29M-LAION400M",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+   "licence_text": "As tinyclip-8m-16: MIT, Copyright (c) Microsoft Corporation; card YAML license: mit, card links Cream/TinyCLIP/LICENSE.",
+   "licence_read": "2026-10-10",
+   "role": "pocket",
+   "notes": "Patch 32, LAION-400M."
+  },
+  {
+   "id": "clip-b32",
+   "loader": "transformers",
+   "source": "openai/clip-vit-base-patch32",
+   "source_url": "https://huggingface.co/openai/clip-vit-base-patch32",
+   "licence": "MIT (repository licence); the model card rules out deployed use",
+   "licence_url": "https://raw.githubusercontent.com/openai/CLIP/main/LICENSE",
+   "licence_text": "MIT License, Copyright (c) 2021 OpenAI. The Hugging Face card carries no licence tag. Its 'Out-of-Scope Use Cases' section (also in https://raw.githubusercontent.com/openai/CLIP/main/model-card.md) says: 'Any deployed use case of the model - whether commercial or not - is currently out of scope.' That is a statement of intended use, not a licence term, but it should be weighed before CLIP ships.",
+   "licence_read": "2026-10-10",
+   "role": "reference",
+   "notes": "The teacher family of TinyCLIP; the baseline every other row is compared with."
+  },
+  {
+   "id": "bioclip-b16",
+   "loader": "open_clip",
+   "source": "hf-hub:imageomics/bioclip",
+   "source_url": "https://huggingface.co/imageomics/bioclip",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip/main/LICENSE",
+   "licence_text": "MIT terms, Copyright (c) 2023-2024 Imageomics Institute and Copyright (c) 2012-2021 the OpenCLIP authors. The model card says 'License: MIT' (https://huggingface.co/imageomics/bioclip/raw/main/README.md).",
+   "licence_read": "2026-10-10",
+   "role": "naturalist",
+   "notes": "OpenCLIP ViT-B/16 trained on TreeOfLife-10M. Also exported to ONNX as a stretch pocket candidate (its image tower is about 86M parameters)."
+  },
+  {
+   "id": "bioclip2-l14",
+   "loader": "open_clip",
+   "source": "hf-hub:imageomics/bioclip-2",
+   "source_url": "https://huggingface.co/imageomics/bioclip-2",
+   "licence": "MIT",
+   "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE",
+   "licence_text": "MIT terms, Copyright (c) 2023-2026 Imageomics Institute, (c) 2024-2025 Samuel Stevens, (c) 2022 sgvaze, (c) 2021 Visipedia. The model card says 'License: MIT' and the weights are fine-tuned from laion/CLIP-ViT-L-14-laion2B-s32B-b82K (card at https://huggingface.co/imageomics/bioclip-2/raw/main/README.md, read in runs/fetch/1).",
+   "licence_read": "2026-10-10",
+   "role": "naturalist",
+   "notes": "ViT-L/14, TreeOfLife-200M (GBIF snapshot 2024-05-01)."
+  },
+  {
+   "id": "bioclip25-h14",
+   "loader": "open_clip",
+   "source": "hf-hub:imageomics/bioclip-2.5-vith14",
+   "source_url": "https://huggingface.co/imageomics/bioclip-2.5-vith14",
+   "licence": "MIT",
+   "licence_url": "https://huggingface.co/imageomics/bioclip-2.5-vith14/raw/main/README.md",
+   "licence_text": "Model card YAML license: mit and 'License: MIT'; fine-tuned from laion/CLIP-ViT-H-14-laion2B-s32B-b79K. The repository has no LICENSE file of its own (file list from https://huggingface.co/api/models/imageomics/bioclip-2.5-vith14).",
+   "licence_read": "2026-10-10",
+   "role": "naturalist",
+   "notes": "ViT-H/14 (embed 1024, vision width 1280, 32 layers; open_clip_config.json)."
+  },
+  {
+   "id": "bioclip25-mobile-fastvit",
+   "loader": "onnx",
+   "source": "crazedcodernate/bioclip-2.5-mobile-fastvit",
+   "source_url": "https://huggingface.co/crazedcodernate/bioclip-2.5-mobile-fastvit",
+   "onnx_files": {"fp32": "flora_student_fp32.onnx", "fp16": "flora_student_fp16.onnx"},
+   "reference_variant": "fp32",
+   "preprocess": {"size": 224, "resize": "squash", "interpolation": "bicubic (PIL default, as in the card's example)", "mean": null, "std": null, "range": "0..1; ImageNet normalization folded into the graph", "output": "L2-normalized, 1024-d, in BioCLIP 2.5's space"},
+   "text_from": "bioclip25-h14",
+   "licence": "MIT (card tag and statement only)",
+   "licence_url": "https://huggingface.co/crazedcodernate/bioclip-2.5-mobile-fastvit/raw/main/README.md",
+   "licence_text": "Card YAML license: mit and 'This model is released under the MIT License, matching its teacher.' No LICENSE file in the repository. The card notes that its training images (iNaturalist 2021) carry their photographers' licences and that whether weights are derivative of training images is unsettled.",
+   "licence_read": "2026-10-10",
+   "role": "reference",
+   "notes": "A single person's upload (created 2026-07-22, 0 downloads when read). A timm fastvit_sa12 student (11.6M parameters) distilled by cosine loss to cached BioCLIP 2.5 ViT-H/14 image embeddings, on iNaturalist 2021 train_mini, kingdom Plantae only (213,550 images, 4,271 species). No text tower: it is scored against bioclip25-h14's text vectors. Card reports 0.84 validation cosine to the teacher on plants and 71.7% top-1 agreement with the teacher; int8 not published because it broke. Never trained on animals, so expected to be weak outside plants; measured to find out."
+  },
+  {
+   "id": "siglip2-b16",
+   "loader": "transformers",
+   "source": "google/siglip2-base-patch16-224",
+   "source_url": "https://huggingface.co/google/siglip2-base-patch16-224",
+   "licence": "Apache-2.0 (card tag)",
+   "licence_url": "https://huggingface.co/google/siglip2-base-patch16-224/raw/main/README.md",
+   "licence_text": "Card YAML license: apache-2.0. The repository has no LICENSE file (file list from the Hugging Face API). Apache 2.0 permits commercial use and redistribution with notice.",
+   "licence_read": "2026-10-10",
+   "role": "reference",
+   "notes": "Added by the lab: the strongest permissively licensed general image-text model at base size (sigmoid loss, multilingual, WebLI). Its image tower (~86M) is larger than the pocket target, so it is a reference for what a general model of this size reaches, and an export candidate if it wins by a wide margin."
+  },
+  {
+   "id": "mobileclip2-s0",
+   "loader": "open_clip",
+   "source": "MobileCLIP2-S0",
+   "pretrained": "dfndr2b",
+   "source_url": "https://huggingface.co/timm/MobileCLIP2-S0-OpenCLIP",
+   "licence": "Apple research-only licence family (not read for MobileCLIP2 tonight)",
+   "licence_url": "https://raw.githubusercontent.com/apple/ml-mobileclip/main/LICENSE_MODELS",
+   "licence_text": "LICENSE_MODELS of apple/ml-mobileclip: use 'exclusively for Research Purposes', excluding 'product development or use in any commercial product or service' (read by the coordinator 2026-10-10). Will not ship.",
+   "licence_read": "2026-10-10",
+   "role": "reference",
+   "notes": "MobileCLIP-S0 itself does not load in open_clip or transformers: open_clip's pretrained.py lists MobileCLIP-S1, -S2, -B and MobileCLIP2-S0/S2/S3/S4/B/L-14, not MobileCLIP-S0. MobileCLIP2-S0 (open_clip name, weights at timm/MobileCLIP2-S0-OpenCLIP) stands in for it, as a comparison only."
+  }
+ ],
+ "looked_at_and_left_out": [
+  {
+   "source": "m3r1al/naturalist-bioclip-v1",
+   "why": "An fp16 re-export (~173 MB, fp32 input and output) of imageomics/bioclip's image tower with a small seed table of fungus and plant text vectors for a third-party app; card YAML license: mit, created 2026-07-06, 0 downloads. It adds no weights beyond bioclip-b16, which the lab exports itself; its card reports plain dynamic int8 at about 0.97 cosine for that ViT, which the lab's own parity for bioclip-b16 measures directly."
+  },
+  {
+   "source": "apple/MobileCLIP-S0",
+   "why": "Does not load in open_clip (see mobileclip2-s0); research-only licence."
+  }
+ ]
+}
