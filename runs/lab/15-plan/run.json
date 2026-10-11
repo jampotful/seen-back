@@ -1,0 +1,22 @@
+{
+ "data": "pub/data-alachua",
+ "manifest": "train/alachua-pre2025/manifest.csv",
+ "shard_mode": "mod",
+ "wait_minutes": 280,
+ "about": "Training-set vectors for the pocket models over the whole training manifest: the original model (torch); the shipping int8 file (onnx/vision.int8-per-channel.onnx) in onnxruntime CPU (its results depend on the build machine's processor, which is recorded); and the same file in onnxruntime-web 1.30.0's WASM build (4 single-thread processes per machine; WASM arithmetic is the same on every machine, and it is what the page computes). Shards are rows modulo n. The plan job waits for the manifest.",
+ "models": [
+  "tinyclip-39m-16",
+  "tinyclip-8m-16"
+ ],
+ "stages": [
+  "images",
+  "images-onnx-int8-per-channel",
+  "images-wasm-int8-per-channel"
+ ],
+ "shards": {
+  "tinyclip-39m-16": 6,
+  "tinyclip-8m-16": 3
+ },
+ "max_parallel": 5,
+ "wasm_procs": 4
+}
