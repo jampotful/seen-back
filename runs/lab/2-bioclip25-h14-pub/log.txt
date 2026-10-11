@@ -1,0 +1,45 @@
+==== job log parts/lab-bioclip25-h14-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:56:29] job: model=bioclip25-h14 shard=0/1 stages=text-kinds,images
+data_source=standin
+evalname=standin
+manifest_rows=40
+species=30
+[00:56:29] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+photos: 40 rows, 40 to fetch, 0 failed, 0.5s
+[00:56:29] exit 0
+[00:56:29] + python3 -u tools/lab/lab.py text --model bioclip25-h14 --labelset kinds --out art/bioclip25-h14
+loaded bioclip25-h14 via open_clip in 21.2s
+[0;93m2026-10-11 00:56:51.154681974 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/708 (69.9s)
+kinds: (17, 1024) -> text/kinds.f16.npy
+[01:00:06] exit 0
+[01:00:06] + python3 -u tools/lab/lab.py images --model bioclip25-h14 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname standin --out art/bioclip25-h14
+images: bioclip25-h14, eval standin, shard 0/1, 40 rows
+loaded bioclip25-h14 via open_clip in 9.3s
+[0;93m2026-10-11 01:00:15.601915966 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/40, 0.52 photos/s
+images: 40 embedded, 0 skipped, 77.3s (0.52 photos/s)
+[01:01:33] exit 0
+[01:01:33] job done, fail=0
+parts/lab-bioclip25-h14-s0/
+[01:04:24] + python3 -u tools/lab/lab.py merge --model bioclip25-h14 --manifest data_in/manifest.csv --out pubdir parts/lab-bioclip25-h14-s0/
+[01:04:24] exit 0
+[01:04:24] + bash ci/put_branch.sh pub/lab-bioclip25-h14 pubdir lab: bioclip25-h14
+remote: 
+remote: Create a pull request for 'pub/lab-bioclip25-h14' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/lab-bioclip25-h14        
+remote: 
+published pub/lab-bioclip25-h14
+[01:04:25] exit 0
+[01:04:25] published pub/lab-bioclip25-h14
