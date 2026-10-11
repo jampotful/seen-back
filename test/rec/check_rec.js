@@ -197,9 +197,18 @@ async function meet(page, name) {
     if (process.env.DUMP) fs.writeFileSync(process.env.DUMP, JSON.stringify(dump));     // the browser's embeddings, to study elsewhere
     r.worstPixelDiffOnSamePixels = worstExact; r.worstCosineOnSamePixels = +worstCos.toFixed(6); r.errors = errors;
     r.about = await page.evaluate(() => window.__seenBack.about().split('\n').slice(1, 3));
+    // An int8 model's numbers differ between onnxruntime-web (the same in every browser) and native onnxruntime, and native onnxruntime's
+    // differ from one processor to the next: for the same photos the worst cosine was 0.9984 on one build machine and 0.9821 on another
+    // (tinyclip-8m-16, runs engines/8 and 11), and one photo's two likeliest kinds swapped places in Python while the browsers stayed put.
+    // So an int8 model is held to a cosine of 0.98 and its kinds are compared only where Python's two likeliest are 0.05 or more apart.
+    // (The stand-in is int8 too, but its expectations are made on the machine that runs the check, and it stays held to 0.999.)
+    const int8 = !expect.kind_of && /int8/.test(JSON.parse(fs.readFileSync(path.join(slotDir, 'manifest.json'), 'utf8')).vision.url);
+    r.cosineFloor = int8 ? 0.98 : 0.999;
+    const clear = (n) => !int8 || (expect.kinds[n][0][1] - ((expect.kinds[n][1] || [0, 0])[1])) >= 0.05;
+    r.closeCalls = int8 ? Object.keys(expect.kinds || {}).filter((n) => !clear(n)) : [];
     const labelsHold = expect.kind_of ? Object.keys(expect.kind_of).every((n) => r.photos[n].kind === expect.kind_of[n])       // the stand-in: this photo gives that label
-      : Object.keys(expect.kinds || {}).every((n) => r.photos[n].kindsAlone[0][0] === expect.kinds[n][0][0]);                   // a real model: the kinds alone agree with Python's
-    done('parity', r, worstExact <= 2 && worstCos >= 0.999 && labelsHold && !errors.length);
+      : Object.keys(expect.kinds || {}).filter(clear).every((n) => r.photos[n].kindsAlone[0][0] === expect.kinds[n][0][0]);     // a real model: the kinds alone agree with Python's
+    done('parity', r, worstExact <= 2 && worstCos >= r.cosineFloor && labelsHold && !errors.length);
     await ctx.close();
   });
 
