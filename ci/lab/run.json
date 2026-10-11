@@ -1,9 +1,42 @@
 {
- "about": "The shipped path, measured: evaluation-set vectors of the two pocket models' shipping int8 files (onnx/vision.int8-per-channel.onnx) computed by onnxruntime-web 1.30.0's WASM build in Node, single thread, one photo at a time, from pixels prepared by the models' own Pillow-based image processor; per-photo latency recorded.",
- "models": ["tinyclip-8m-16", "tinyclip-39m-16"],
- "stages": ["images-wasm-int8-per-channel"],
- "data": "pub/data-alachua",
- "manifest": "eval/alachua-2025/manifest.csv",
- "shards": {"tinyclip-8m-16": 2, "tinyclip-39m-16": 4},
- "max_parallel": 6
+ "about": "Repair: run 3 (code from before the publish guard) published every model branch at 03:32 UTC, before the guard started, putting back older files (tinyclip-8m-16's vision.int8.onnx became the per-tensor file again; parity.json files went back to stand-in photos). Each branch is rebuilt from its commit before run 3 (GitHub still serves it by sha), keeping files run 3 added that were not there before (species label sets for siglip2-b16, mobileclip2-s0, bioclip-b16); the TinyCLIP cards name the shipping file; every branch gets _files.json.",
+ "models": [],
+ "guard": {
+  "older_run": 3,
+  "minutes": 5,
+  "models": [
+   "bioclip-b16",
+   "bioclip2-l14",
+   "bioclip25-h14",
+   "bioclip25-mobile-fastvit",
+   "clip-b32",
+   "mobileclip2-s0",
+   "siglip2-b16",
+   "tinyclip-39m-16",
+   "tinyclip-40m-32",
+   "tinyclip-61m-32",
+   "tinyclip-8m-16"
+  ],
+  "ship": [
+   "tinyclip-8m-16",
+   "tinyclip-39m-16",
+   "tinyclip-40m-32",
+   "tinyclip-61m-32"
+  ],
+  "repair_from": {
+   "bioclip-b16": "bcfa71fcad2521695f25901246a0dace441e992c",
+   "bioclip2-l14": "a9d894de190b3add86f82932351f7499cfcb4307",
+   "bioclip25-h14": "718081d05782b24b0b044990c72c59e5619f2c11",
+   "bioclip25-mobile-fastvit": "227a363ece2bb1cb5b4db437481c69cf22ad3372",
+   "clip-b32": "58108951e92f17a759465bda060567efbd192546",
+   "mobileclip2-s0": "fd6da1332da4ade2e20b80ced09bbfca4bb46ce1",
+   "siglip2-b16": "66cc38db1b2dab4e957e1f2dfb662954d84347bb",
+   "tinyclip-39m-16": "ac25071c97966e446527fd5592426e512ad65fa1",
+   "tinyclip-40m-32": "7ff2171b4b20fc94110b3c9aaf3deb881dd4eea5",
+   "tinyclip-61m-32": "5be1dd4c6f7571b854663f7cdf2162b166cbce25",
+   "tinyclip-8m-16": "6da3e82babe8d8dda03b36da98199b9f2c0ebc2b"
+  }
+ },
+ "data": "auto",
+ "max_parallel": 1
 }

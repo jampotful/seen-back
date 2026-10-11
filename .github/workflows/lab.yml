@@ -139,6 +139,7 @@ jobs:
           minutes=$(python3 -c "import json,os;print(json.loads(os.environ['GUARD']).get('minutes',320))")
           models=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD'])['models']))")
           pockets=$(python3 -c "import json,os;print(','.join(json.loads(os.environ['GUARD']).get('ship',[])))")
+          export REPAIR_FROM=$(python3 -c "import json,os;print(json.dumps(json.loads(os.environ['GUARD']).get('repair_from') or {}) if json.loads(os.environ['GUARD']).get('repair_from') else '')")
           bash ci/lab/guard.sh "$older" "$minutes" "$models" "$pockets"
       - name: return results
         if: always()

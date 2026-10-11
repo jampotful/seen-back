@@ -16,7 +16,31 @@ made_run() { git show "$1:_made.txt" 2>/dev/null | sed -n 's/^run_number=//p'; }
 is_pocket() { local m; for m in "${pockets[@]}"; do [ "$m" = "$1" ] && return 0; done; return 1; }
 publish() { bash ci/put_branch.sh "pub/lab-$1" "$2" "lab guard: $1 ($3)" >> "$L" 2>&1; }
 declare -A done_
+# Repair from known snapshots (REPAIR_FROM='{"model": "commit sha of the branch before the older run published"}'):
+# GitHub still serves a replaced branch's commit by its sha.
+if [ -n "${REPAIR_FROM:-}" ]; then
+  for pair in $(python3 -c "import json,os;print(' '.join('%s=%s' % kv for kv in json.loads(os.environ['REPAIR_FROM']).items()))"); do
+    m="${pair%%=*}"; s0="${pair#*=}"
+    rm -rf "snap/$m" "cur_$m" "fix_$m"; mkdir -p "snap/$m" "cur_$m"
+    if ! git fetch -q --depth 1 origin "$s0"; then say "cannot fetch snapshot $s0 for $m"; continue; fi
+    git archive "$s0" | tar -x -C "snap/$m"
+    git fetch -q --depth 1 origin "pub/lab-$m" || { say "no pub/lab-$m"; continue; }
+    rn=$(made_run FETCH_HEAD); git archive FETCH_HEAD | tar -x -C "cur_$m"
+    say "repairing pub/lab-$m (now run $rn, $(git rev-parse --short FETCH_HEAD)) from $s0 (run $(made_run "$s0"))"
+    if python3 -u tools/lab/lab.py repair --snapshot "snap/$m" --current "cur_$m" --out "fix_$m" --older-run "$older" --run "${GITHUB_RUN_NUMBER:-0}" --report "ret/$m.repair.json" >> "$L" 2>&1; then
+      if is_pocket "$m" && [ -f "fix_$m/onnx/vision.int8-per-channel.onnx" ]; then
+        python3 -u tools/lab/lab.py ship --model "$m" --file onnx/vision.int8-per-channel.onnx --out "fix_$m" >> "$L" 2>&1
+      fi
+      python3 -u tools/lab/lab.py provenance --out "fix_$m" --run "${GITHUB_RUN_NUMBER:-0}" >> "$L" 2>&1
+      if publish "$m" "fix_$m" "repaired after run $older"; then say "repaired pub/lab-$m"; else say "PUBLISH FAILED for pub/lab-$m"; fi
+      cp "fix_$m/card.json" "ret/$m.card.json" 2>/dev/null
+      (cd "fix_$m" && sha256sum onnx/*.onnx 2>/dev/null) > "ret/$m.onnx.sha256" || true
+    else say "REPAIR FAILED for pub/lab-$m"; fi
+    done_[$m]=1
+  done
+fi
 for m in "${models[@]}"; do
+  [ -n "${done_[$m]:-}" ] && continue
   git fetch -q --depth 1 origin "pub/lab-$m" || { say "no pub/lab-$m"; done_[$m]=1; continue; }
   rn=$(made_run FETCH_HEAD)
   if [ "$rn" = "$older" ]; then say "pub/lab-$m already published by run $older; nothing to snapshot, not repaired"; done_[$m]=1; continue; fi

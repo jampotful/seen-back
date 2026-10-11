@@ -1261,6 +1261,7 @@ def main():
     rp.add_argument("--report", required=True)
     pv = sub.add_parser("provenance")
     pv.add_argument("--out", required=True)
+    pv.add_argument("--run", type=int)
     sh = sub.add_parser("ship")
     sh.add_argument("--model", required=True)
     sh.add_argument("--file", required=True)
@@ -1303,7 +1304,14 @@ def main():
     elif args.stage == "repair":
         stage_repair(args)
     elif args.stage == "provenance":
-        save_provenance(args.out, load_provenance(args.out))
+        prov = load_provenance(args.out)
+        for g in pathlib.Path(args.out).rglob("*"):
+            rel = str(g.relative_to(args.out))
+            if g.is_file() and rel not in ("_made.txt", "_files.json") and ".git" not in g.parts:
+                h = sha256(g)
+                if prov.get(rel, {}).get("sha256") != h:
+                    prov[rel] = {"run": int(args.run if args.run is not None else (os.environ.get("GITHUB_RUN_NUMBER") or 0)), "sha256": h}
+        save_provenance(args.out, prov)
     elif args.stage == "pixels":
         stage_pixels(args)
     elif args.stage == "wasm-collect":
