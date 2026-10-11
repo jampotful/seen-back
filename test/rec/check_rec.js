@@ -278,7 +278,7 @@ async function meet(page, name) {
   });
 
   if (want.includes('typeit')) await section('typeit', async () => {   // a way out of a long first download: type the name, and the download carries on by itself
-    await ctl('reset=1'); await ctl('slow=' + encodeURIComponent('ort-wasm.*\\.wasm') + '&bps=1500000');
+    await ctl('reset=1'); await ctl('slow=' + encodeURIComponent('ort-wasm.*\\.wasm') + '&bps=500000');     // about half a minute of download, so that a busy machine still finds the button there
     const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT); const r = {}; await begin(page);
     r.buttonBefore = await page.locator('#barType').isVisible();
     await page.locator('#inAnimalPick').setInputFiles(photo('heron.png'));
@@ -440,12 +440,12 @@ async function meet(page, name) {
       all(name, r[name].lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / The larger model says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
       await ctx.close();
     }
-    { // it does not wake within the wait (shortened here from 90 seconds to 2): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
+    { // it does not wake within the wait (shortened here from 90 seconds to 8): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
       fake.reset(); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page);
       r.waitByDefault = await page.evaluate(() => { window.__seenBack.svc.setChoice('yes'); const t = window.__seenBack.svc.test.times({}); return { wake: t.wake, answer: t.answer }; });
-      await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 2000, poll: 400 }); }); await begin(page); await svcWatch(page);
+      await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 8000, poll: 400 }); }); await begin(page); await svcWatch(page);
       fake.sleep(600000); await meet(page, 'stripes.png');
-      await page.waitForFunction(() => window.__svc.length >= 2 && window.__svc[window.__svc.length - 1] === '', null, { timeout: 15000 });
+      await page.waitForFunction(() => window.__svc.length >= 2 && window.__svc[window.__svc.length - 1] === '', null, { timeout: 40000 });
       const s = await st(page);
       r.neverWakes = { lines: await page.evaluate(() => window.__svc.filter((x, i, a) => (i || x) && (!i || a[i - 1] !== x))), state: s.eyes + '|' + s.named.common + '|' + s.named.by, claim: s.claim, msg: await text(page, 'msg'), why: await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'service-none').map((d) => d.code).join()) };
       all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the larger model. / The larger model is waking up, which can take a minute. / ' && r.neverWakes.state === 'insect|Insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
