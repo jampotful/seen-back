@@ -2178,7 +2178,10 @@ button { cursor: pointer; }
       if (vidOK) { M.size = vid.videoWidth + 'x' + vid.videoHeight; watchVideo(); }
     }
     function videoUpright() {        // the clip has red in its top left corner and blue in its bottom right
-      return new Promise(function (done) {
+      // only once the element has shown a frame: before its first frame callback WebKit can hand WebGL a black picture (the app's own
+      // loop also uploads a clip's frame only after a frame callback)
+      var firstFrame = vid.requestVideoFrameCallback ? new Promise(function (res) { var t = setTimeout(res, 1500); vid.requestVideoFrameCallback(function () { clearTimeout(t); res(); }); }) : wait(300);
+      return firstFrame.then(function () { return new Promise(function (done) {
         var vw = vid.videoWidth, vh = vid.videoHeight;
         sizeCanvas(vw, vh);
         requestAnimationFrame(function () {
@@ -2189,7 +2192,7 @@ button { cursor: pointer; }
           var tl = stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb, br = stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb;
           done({ tl: rgb(tl), br: rgb(br), err: engine.state().err });
         });
-      });
+      }); });
     }
     // what the video element delivers over a while: frame callbacks, and changes of currentTime
     function videoProbe(ms) {

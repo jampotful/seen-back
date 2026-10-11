@@ -40,6 +40,8 @@ step "check_rec.js, every check, stand-in model: webkit (macOS)"
 t0=$(date +%s); BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit.json" 2> "$OUT/rec/check_rec-webkit.err.txt"
 echo "check_rec webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit.json"; tail -c 400 "$OUT/rec/check_rec-webkit.err.txt"
 mkdir -p "$OUT/rec/shots-webkit"; cp test/rec/shots/*.png "$OUT/rec/shots-webkit/" 2>/dev/null; rm -rf test/rec/shots
+step "begin_probe.js: what Begin does in macOS WebKit, with and without check_rec.js's phone emulation"
+BROWSER=webkit PORT=8782 OUT="$OUT/rec" limit 120 node test/engines/begin_probe.js > "$OUT/rec/begin-probe-webkit.json" 2>&1; echo "begin probe: exit $?"; head -c 4000 "$OUT/rec/begin-probe-webkit.json"
 step "check_rec.js again, every check, with locator.tap() made a click (ci/engines/pwshim): webkit (macOS)"
 t0=$(date +%s); NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_TAP_AS_CLICK=1 BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit-click.json" 2> "$OUT/rec/check_rec-webkit-click.err.txt"
 echo "check_rec webkit (tap as click): exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit-click.json"; tail -c 400 "$OUT/rec/check_rec-webkit-click.err.txt"; rm -rf test/rec/shots
