@@ -1,0 +1,94 @@
+
+=== 08:46:54 emulator
+List of devices attached
+emulator-5554	device
+
+ro.build.version.release=14
+ro.build.version.sdk=34
+ro.product.model=sdk_gphone64_x86_64
+ro.product.cpu.abi=x86_64
+webview (com.google.android.webview) versionName=113.0.5672.136
+webview (com.google.android.webview) versionName=113.0.5672.136
+Current WebView package (name, version): (com.google.android.webview, 113.0.5672.136)
+Minimum WebView version code: 567263637
+Preferred WebView package (name, version): (com.google.android.webview, 113.0.5672.136)
+MemTotal:        4016536 kB
+MemFree:          210776 kB
+
+=== 08:46:55 install
+Performing Streamed Install
+Success
+android.permission.CAMERA
+
+=== 08:46:59 1. open the app as a person would
+Status: ok
+TotalTime: 4247
+screenshot 1-open
+{"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36"}
+
+=== 08:47:19 2. the page's self-test inside the WebView, with the shipped pocket recognizer (models/pocket) on four photos
+Status: ok
+TotalTime: 1450
+screenshot 2-selftest-010s
+screenshot 2-selftest-020s
+screenshot 2-selftest-041s
+self-test done after about 52 s
+screenshot 2-selftest-final
+secure context: True | crossOriginIsolated: False
+user agent: Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36
+self-test done: True ok: True checks: 98 phase: done
+fails: []
+webgl2: True float: True renderer: Android Emulator OpenGL ES Translator (Google SwiftShader) engineError: None
+rec: {"slot": "models/pocket", "photos": [{"name": "heron.png", "bytes": 29625, "decodeMs": 678, "shown": "900x1200", "wallMs": 2280, "from": "900x1200", "ms": {"load": 0, "pre": 177, "run": 1944, "post": 71.7}, "kind": "wader", "kinds3": [["wader", 0.3825], ["bird", 0.25670000000000004], ["dog", 0.0635]], "head3": [["bird", 0.3617], ["wader", 0.251], ["dog", 0.0908]], "species1": ["Eudocimus albus", 0.187]}, {"name": "portrait.jpg", "bytes": 46865, "decodeMs": 124, "shown": "960x1280", "wallMs": 1512, "from": "1200x1600", "ms": {"load": 0, "pre": 136, "run": 1218, "post": 50}, "kind": "person", "kinds3": [["person", 0.46380000000000005], ["other", 0.1117], ["bird", 0.0926]], "head3": [["person", 0.4638], ["dog", 0.1098], ["bird", 0.1082]], "species1": ["Fulica americana", 0.192]}, {"name": "wall.png", "bytes": 4614, "decodeMs": 128, "shown": "1024x768", "wallMs": 936, "from": "1024x768", "ms": {"load": 0, "pre": 79, "run": 786, "post": 13.1}, "kind": "none", "kinds3": [["none", 0.4707], ["insect", 0.1195], ["dog", 0.0711]], "head3": [["none", 0.4707], ["dog", 0.1015], ["bird", 0.0787]], "species1": ["Idaea demissaria", 0.092]}, {"name": "garden.jpg", "bytes": 257177, "decodeMs": 93, "shown": "1280x960", "wallMs": 611, "from": "1600x1200", "ms": {"load": 0, "pre": 38, "run": 531, "post": 14.1}, "kind": "plant", "kinds3": [["plant", 0.30670000000000003], ["none", 0.29059999999999997], ["dog", 0.0855]], "head3": [["none", 0.2906], ["plant", 0.1603], ["dog", 0.1222]], "species1": ["Torenia crustacea", 0.101]}], "readyMs": 7516, "about": {"state": "ready", "why": "", "fail": "", "model": "tinyclip-39m-16", "rule": "mix", "trained": true, "backend": "wasm", "threads": 1, "loadMs": 7515, "start": {"vectors": 156.70000000001164, "session": 2174.899999999994, "warm": 4457.899999999994}, "got": 0, "total": 0, "slot": "models/pocket/manifest.json", "have": "", "keptBytes": 0, "bytes": 40978137, "getFail": ""}, "meanRunMs": 1227}
+keys: ['build', 'checks', 'done', 'env', 'fails', 'motion', 'ms', 'ok', 'phase', 'pose', 'posing', 'rec', 'still', 'v']
+
+=== 08:48:16 3. Begin, with the emulator's camera (the shell grants the page's camera request)
+Status: ok
+TotalTime: 1020
+screenshot 3-begin
+{"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36"}
+
+=== 08:48:44 logcat lines from the shell and the page
+  32790 /home/runner/work/seen-back/seen-back/out/android/logcat-all.txt
+    622 /home/runner/work/seen-back/seen-back/out/android/logcat-seenback.txt
+  33412 total
+console lines: 2
+10-11 08:47:03.099 I/SeenBack( 3445): open https://appassets.androidplatform.net/index.html
+10-11 08:47:07.183 I/SeenBack( 3445): page finished https://appassets.androidplatform.net/index.html
+10-11 08:47:07.210 I/SeenBack( 3445): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:47:10.516 I/SeenBack( 3445): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:47:13.901 I/SeenBack( 3445): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:47:17.309 I/SeenBack( 3445): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:47:21.964 I/SeenBack( 4572): open https://appassets.androidplatform.net/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+10-11 08:47:23.420 I/SeenBack( 4572): page finished https://appassets.androidplatform.net/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+10-11 08:47:24.980 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":1,"phase":"rec","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.
+10-11 08:47:27.985 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":1,"phase":"rec","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.
+10-11 08:47:30.990 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":1,"phase":"rec","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.
+10-11 08:47:31.814 I/SeenBackConsole( 4572): WARNING Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently @https://appassets.androidplatform.net/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg:1701
+10-11 08:47:34.055 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":3,"phase":"rec","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.
+10-11 08:47:35.891 I/SeenBackConsole( 4572): WARNING Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently @https://appassets.androidplatform.net/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg:1701
+10-11 08:47:37.059 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":5,"phase":"rec","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.
+10-11 08:47:40.101 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":6,"phase":"still","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.
+10-11 08:47:43.112 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":60,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:47:46.132 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":60,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:47:49.603 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":66,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:47:53.099 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":72,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:47:56.192 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":80,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:47:59.454 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":88,"phase":"motion","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/11
+10-11 08:48:02.694 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":93,"phase":"pose","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.
+10-11 08:48:05.994 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":95,"phase":"pose","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.
+10-11 08:48:09.331 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":false,"ok":null,"fails":[],"checks":97,"phase":"pose","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.
+10-11 08:48:12.368 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":true,"ok":true,"fails":[],"checks":98,"phase":"done","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0
+10-11 08:48:15.459 I/SeenBack( 4572): state {"st":{"v":1,"build":"8","done":true,"ok":true,"fails":[],"checks":98,"phase":"done","env":{"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0
+10-11 08:48:18.477 I/SeenBack( 5557): open https://appassets.androidplatform.net/index.html
+10-11 08:48:19.175 I/SeenBack( 5557): page finished https://appassets.androidplatform.net/index.html
+10-11 08:48:21.673 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:24.954 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"intro","src":"none","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:25.289 I/SeenBack( 5557): page finished https://appassets.androidplatform.net/index.html
+10-11 08:48:25.311 I/SeenBack( 5557): js -> null
+10-11 08:48:25.672 I/SeenBack( 5557): page's camera request granted
+10-11 08:48:29.610 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:33.066 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:36.440 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:39.732 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
+10-11 08:48:43.104 I/SeenBack( 5557): state {"st":null,"sb":true,"screen":"finder","src":"cam","href":"https://appassets.androidplatform.net/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64 Build/UE1A.230829.050; wv) AppleWebKit/537.36 (
