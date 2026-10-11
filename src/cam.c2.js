@@ -12,21 +12,29 @@
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
   function closeSheets() {
     var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('scrim', false);
+    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
   function dismissSheets() {                       // closed by the person, without saying who it was
-    if (!closeSheets()) return;
+    var first = askFirstT; askFirstT = 0;
+    if (!closeSheets()) { if (first && first === S.token && !S.eyes) askName(''); return; }   // the question to the server was opened from the sheet that asks for a name: back to it
     if (S.screen === 'finder') { thaw(); paintUI(); }
     else if (S.screen === 'naming' && !S.eyes) go('askAnimal');
     paintType();
   }
   function openClaim(sub) {
-    $('claimSub').textContent = (sub ? sub + ' ' : '') + 'Type the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
+    var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
+    $('claimSub').textContent = (sub ? sub + ' ' : '') + (kinds.length ? 'Choose one below, or type' : 'Type') + ' the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
+    kinds.forEach(function (key) {
+      var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
+      b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
+      kbox.appendChild(b);
+    });
+    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'It may be one of these.';
     var offers = pocket.offers || [], box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.en || o.sci); b.type = 'button';
@@ -34,7 +42,8 @@
       box.appendChild(b);
     });
     show('claimOfferBox', offers.length > 0);
-    show('info', false); show('record', false); show('keep', false); show('ask', false); openSheet('claim');
+    show('info', false); show('record', false); show('keep', false); show('ask', false); show('big', false); openSheet('claim');
+    paintClaimAsk();
     setTimeout(function () { try { if (!$('claim').hidden) $('claimName').focus(); } catch (e) {} }, 80);
   }
   function setViewPrompt(key) {
@@ -45,7 +54,7 @@
 
   function reveal(key, named) {
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
-    if (named && named.by === 'service') paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
+    if (named && (named.by === 'service' || named.by === 'device-large')) paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
@@ -72,11 +81,21 @@
     pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
-      if (r.kind === 'none') { failName('Nothing alive was found in that photo.'); return; }
+      if (r.kind === 'none' && r.sure) { failName('Nothing alive was found in that photo.'); return; }
       pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
+      pocket.kindOffers = r.kindOffers || [];
+      if (!r.sure) {
+        // Not sure is an answer: no kind is asserted and no eyes change. Where the larger model is on this device it is asked before the person is.
+        diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
+        large.survey().then(function (h) {
+          if (t !== S.token || S.eyes) return;
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('The recognizer is not sure what that is.');
+        });
+        return;
+      }
       var common = r.kind === 'person' ? 'A person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: clip(common, 60) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
-      if (!r.named && r.kind !== 'person') considerService(t);             // the kind is in use at once; a species name may follow from the larger model
+      closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from a larger model
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
@@ -114,7 +133,7 @@
     }, 'image/jpeg', .86);
   }
   function gotAnimalPhoto(c) {
-    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; setEyes(null); hideName(); dropSvc();
+    S.animalPhoto = c; S.meetingId = null; S.nov = ''; pocket.offers = []; pocket.kindOffers = []; S.closer = 0; askFirstT = 0; if (firstJob) { firstJob.cancel(); firstJob = null; } setEyes(null); hideName(); dropSvc();
     if (S.src === 'cam') { S.freeze = true; if (engine) engine.setImage(c); paintUI(); }
     else showStill(c, false);
     identify();
@@ -128,7 +147,7 @@
   }
 
   // ---------- back, wherever something might be done over
-  function back() { backStep(); paintSvc(); }
+  function back() { if (firstJob) { firstJob.cancel(); firstJob = null; } backStep(); paintSvc(); }
   function backStep() {
     var s = S.screen;
     if (anySheet()) { dismissSheets(); return; }
@@ -266,7 +285,8 @@
     $('infoTitle').textContent = shownName();
     $('infoSub').textContent = (S.named && S.named.scientific ? S.named.scientific + '. ' : '') + (S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
       : S.named && S.named.by === 'page' ? 'Recognized on this ' + (coarse ? 'phone' : 'computer') + ' by a small model, which can be wrong.'
-      : S.named && S.named.by === 'service' ? 'Named by a larger model on a server, which can be wrong.' : 'As you said.')
+      : S.named && S.named.by === 'service' ? 'Named by a larger model on a server, which can be wrong.'
+      : S.named && S.named.by === 'device-large' ? 'Named on this device by a larger model, which can be wrong.' : 'As you said.')
       + (S.named && S.named.local ? ' Chosen among species recorded around ' + pocket.place() + '.' : '');
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
@@ -313,13 +333,16 @@
   // ---------- the larger model on a server (the naturalist), asked only with the person's say-so
   // One line on the picture carries it: an offer to ask (tappable), "Asking the larger model.", the waking sentence, what it said,
   // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
-  var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.' };
-  var svcTimer = 0;
+  var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.', looking: 'Looking more closely.' };
+  var svcTimer = 0, svcTap = null, askFirstT = 0, firstJob = null;
+  function renewName() { if ($('reveal').classList.contains('show')) showName(); }     // a finer name that arrives while the first is still large on the screen takes its place there too
   function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
   function paintSvc() {
     var v = S.svc;
     if (v && (v.t !== S.token || !S.eyes)) { S.svc = null; if (v.job) v.job.cancel(); v = null; }     // it belonged to a photo that is no longer in hand
-    var text = v ? (v.text || SVC_SAY[v.state] || '') : '', tap = !!v && (v.state === 'offer' || v.state === 'change');
+    var text = v ? (v.text || (v.state === 'get' ? getLine() : SVC_SAY[v.state]) || '') : '', tap = v && (v.state === 'offer' || v.state === 'change' || v.state === 'get') ? tapSvc : null;
+    if (!text && bigNote) { text = bigNote.text; tap = bigNote.tap; }     // the larger model's download belongs to no one photo: its line shows whenever the photo has none of its own
+    svcTap = tap;
     ['svcHud', 'svcView'].forEach(function (id) { var b = $(id); b.textContent = text; b.disabled = !tap; b.hidden = !text; });
   }
   function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
@@ -353,7 +376,7 @@
     var kp = a.kinds.filter(function (k) { return k.key === top.kind; })[0], kindP = kp ? kp.p : top.p;
     if (top.p >= c.nameAt && top.kind === S.eyes) {
       // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
-      S.named = named; noteMeeting(S.eyes, named); paintUI();
+      S.named = named; noteMeeting(S.eyes, named); paintUI(); renewName();
       S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
@@ -370,18 +393,236 @@
         (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
       $('askKeep').checked = false;
       show('claim', false); show('record', false); show('info', false); show('keep', false); openSheet('ask');
-    } else if (v.state === 'change') { S.svc = null; diag('service-eyes', v.kind); reveal(v.kind, v.named); }
+    } else if (v.state === 'change') { S.svc = null; diag(v.named.by === 'service' ? 'service-eyes' : 'large-eyes', v.kind); reveal(v.kind, v.named); }
+    else if (v.state === 'get') openBig();
   }
   function answerAsk(yes) {
     if ($('askKeep').checked) naturalist.setChoice(yes ? 'yes' : 'no');
+    var first = askFirstT; askFirstT = 0;
     closeSheets(); diag('service-say', (yes ? 'yes' : 'no') + ($('askKeep').checked ? '-kept' : ''));
+    if (first) { if (first === S.token && !S.eyes) { if (yes) firstService(first); else askName(''); } return; }
     var v = S.svc; if (!v || v.state !== 'offer') return;
     if (yes) askService(v.t); else { S.svc = null; paintSvc(); }
   }
-  $('svcHud').addEventListener('click', tapSvc); $('svcView').addEventListener('click', tapSvc);
+  $('svcHud').addEventListener('click', function () { if (svcTap) svcTap(); }); $('svcView').addEventListener('click', function () { if (svcTap) svcTap(); });
   $('askYes').addEventListener('click', function () { answerAsk(true); });
   $('askNo').addEventListener('click', function () { answerAsk(false); });
   $('askClose').addEventListener('click', dismissSheets);
+  // ---------- the larger model on this device (models/naturalist): fetched once if the person says so, then every photo is named here
+  // The choice is kept in this browser: '' (ask when a photo is left without a species name), 'no' (do not offer it), 'yes' (asked for:
+  // a download that was interrupted carries on by itself), 'kept' (it arrived whole: if it is gone later, nothing is fetched unasked).
+  var BIG_KEY = 'seenback.large.v1', bigMem = '', bigNote = null, bigNoteTimer = 0, bigDelAsked = false;
+  function bigChoice() { try { var v = localStorage.getItem(BIG_KEY); return v === 'yes' || v === 'no' || v === 'kept' ? v : ''; } catch (e) { return bigMem; } }
+  function setBigChoice(v) { bigMem = v; try { if (v) localStorage.setItem(BIG_KEY, v); else localStorage.removeItem(BIG_KEY); } catch (e) {} }
+  function dev() { return coarse ? 'phone' : 'computer'; }
+  function netSays() {                             // what the connection says of itself, where it says anything
+    var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!c) return '';
+    if (c.saveData) return 'This ' + dev() + ' is set to save data';
+    if (c.metered === true || c.type === 'cellular') return 'This connection reports itself as metered';
+    if (/^(slow-2g|2g|3g)$/.test(c.effectiveType || '')) return 'This connection reports itself as slow';
+    return '';
+  }
+  function getLine() {
+    var z = large.size(), h = large.has();
+    // it had arrived whole and is not here now (the browser cleared it away, or the model was replaced by a newer one): said as it is
+    if (bigChoice() === 'kept' && h !== 'kept') return 'The larger model is no longer on this ' + dev() + '. Get it again?';
+    return z && h === 'partial' ? 'The larger model is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'A larger model can name the species on this ' + dev() + '. Get it?';
+  }
+  function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
+    clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
+    if (text && ms) bigNoteTimer = setTimeout(function () { bigNote = null; paintSvc(); }, ms);
+    paintSvc(); if ($('about').open) paintBig();
+    if (!$('big').hidden && large.has() === 'getting') $('bigNet').textContent = large.line();
+  }
+  function openBig() {                             // consent first, in plain words; and while it is being fetched, the same sheet stops it
+    var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
+    rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
+    $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
+    $('bigSub').textContent = 'It is a larger model that names the species: about ' + z.mb + ' MB, downloaded once and kept on this ' + dev() + '. Photos are not sent anywhere. ' +
+      (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
+        : s && !coarse && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.'
+        : 'On a phone it takes several seconds a photo.');
+    $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
+    $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Get it';
+    show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
+    show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); openSheet('big');
+  }
+  function answerBig(what) {
+    var v = S.svc;
+    closeSheets(); diag('large-say', what);
+    if (v && v.state === 'get') { S.svc = null; paintSvc(); }
+    if (what === 'yes') startBig(); else if (what === 'never') setBigChoice('no');
+  }
+  function startBig() {
+    if (large.has() === 'getting') return;
+    setBigChoice('yes');
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {}); } catch (e) {}   // so that the browser does not clear it away by itself
+    large.progress(function () { if (large.has() === 'getting') noteBig(large.line(), openBig); });
+    var p = large.get(); noteBig(large.line(), openBig);
+    p.then(function () {
+      setBigChoice('kept'); if (!$('big').hidden) closeSheets();
+      noteBig('The larger model is on this ' + dev() + '.', null, 8000);
+      // the photo in hand is looked at now, if the small model's answer is still what stands
+      if (S.eyes && S.eyes !== 'person' && S.named && S.named.by === 'page' && !S.svc) lookCloser(S.token);
+    }, function (e) {
+      var code = (e && e.code) || 'died', z = large.size(), again = /^(network|missing|damaged|died|slow)$/.test(code);
+      if (!$('big').hidden) closeSheets();
+      if (code === 'stopped') { setBigChoice(''); noteBig('The download was stopped.' + (z && z.keptMb ? ' ' + z.keptMb + ' of ' + z.mb + ' MB are kept on this ' + dev() + '.' : ''), null, 8000); return; }
+      if (!again) setBigChoice('');
+      noteBig(((e && e.sentence) || large.say(code)) + (again ? ' Try again?' : ''), again ? startBig : null, 30000);
+    });
+  }
+  function five(r) { return r.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: true }; }); }
+  function largeName(r) { return r.local && r.named ? { common: clip(r.named.en || r.named.sci, 60) || handName(r.kind), scientific: clip(r.named.sci, 80), by: 'device-large', local: true } : null; }
+  function noteLarge(r) { diag('large', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sure: r.sure, sp: r.species.slice(0, 2).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model }).slice(0, 300)); }
+  // After the small model's answer is in use. Where the larger model is on this device it looks at every photo in the background. Where it
+  // is not, a photo left without a species name raises the offer to get it. Where there is no such model, or the person wants none,
+  // the server is considered, as before: so the device comes first where both exist.
+  function closer(t, named) {
+    var photo = S.animalPhoto;
+    large.survey().then(function (h) {
+      if (t !== S.token || photo !== S.animalPhoto || !S.eyes || !S.named || S.named.by !== 'page') return;
+      if (h === 'kept' && !large.broken()) { if (S.eyes !== 'person') lookCloser(t); return; }
+      if (named || S.eyes === 'person') return;
+      if (h === 'none' || h === 'kept' || bigChoice() === 'no') { considerService(t); return; }
+      if (h === 'getting') { paintSvc(); return; }
+      if (navigator.onLine === false) return;
+      S.svc = { t: t, state: 'get' }; paintSvc();
+    });
+  }
+  function lookCloser(t) {                         // in the background: the eyes are in use already
+    var photo = S.animalPhoto; if (!photo || t !== S.token || !S.eyes) return;
+    var v = { t: t, state: 'looking' };
+    if (S.svc && S.svc.job) S.svc.job.cancel();
+    S.svc = v; paintSvc();
+    large.recognize(photo, pocket.file).then(function (r) { if (S.svc === v) gotCloser(r, t); }, function (e) {
+      diag('large-none', String((e && e.code) || 'unknown'));
+      if (S.svc === v) { S.svc = null; paintSvc(); }   // every failure lets go quietly: what the small model said stands
+    });
+  }
+  function gotCloser(r, t) {
+    var named = largeName(r);
+    S.svc = null; clearTimeout(svcTimer); S.closer = t; noteLarge(r);
+    if (!S.eyes) { paintSvc(); return; }
+    if (r.local && r.species.length) pocket.offers = five(r);          // its five likeliest are kept for the sheet that corrects a name
+    if (r.sure && r.kind === S.eyes && named) {
+      // the same kind of eye, a finer name: on screen, in the sheet behind the name, and in the record
+      S.named = named; noteMeeting(S.eyes, named); paintUI(); renewName();
+      S.svc = { t: t, state: 'said', text: 'The larger model says ' + named.common + '.' };
+      svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
+    } else if (r.sure && r.kindAt !== null && r.kind !== S.eyes && r.kind !== 'person' && r.kind !== 'none') {
+      // another kind of creature, and the larger model is sure enough by its slot's own setting: the change is offered, never made
+      S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
+        text: 'It looks like ' + (named ? aAn(named.common) + (r.kind === 'other' ? '' : ', ' + EYES[r.kind].who) : r.kind === 'other' ? 'some other living thing' : EYES[r.kind].who) + '. Change eyes?' };
+    }
+    paintSvc();
+  }
+  // Nothing has a name yet: the small model was not sure, or the person asked from the sheet that asks for a name. The larger model's
+  // answer is waited for, and taken; if it is not sure either, its three likeliest kinds are offered.
+  function firstLook(t, unsure) {
+    var photo = S.animalPhoto; if (!photo || t !== S.token) return;
+    closeSheets(); go('naming'); msg(SVC_SAY.looking); paintType();
+    large.recognize(photo, pocket.file).then(function (r) {
+      if (t !== S.token || S.eyes) return;
+      S.closer = t; noteLarge(r);
+      if (r.local && r.species.length) pocket.offers = five(r);
+      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'A person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      pocket.kindOffers = r.kindOffers || [];
+      askName(unsure ? 'The recognizer and the larger model are both not sure what that is.' : 'The larger model is not sure what that is.');
+    }, function (e) {
+      if (t !== S.token || S.eyes) return;
+      S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
+      askName(unsure ? 'The recognizer is not sure what that is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+    });
+  }
+  // The same from the server, where that is the larger model there is: asked with the person's say-so, and its answer taken as the name.
+  function firstService(t) {
+    var photo = S.animalPhoto; if (!photo || t !== S.token) return;
+    go('naming'); msg(SVC_SAY.asking); paintType(); S.closer = t;
+    var job = naturalist.ask(photo, { month: new Date().getMonth() + 1, local: pocket.local !== false }, function (state) { if (t === S.token && !S.eyes && S.screen === 'naming' && !anySheet()) msg(SVC_SAY[state] || ''); });
+    firstJob = job; diag('service-ask', 'first');
+    job.promise.then(function (a) {
+      if (firstJob === job) firstJob = null;
+      if (t !== S.token || S.eyes) return;
+      var c = naturalist.cfg(), top = a.species[0];
+      pocket.offers = a.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: !!a.region }; });
+      if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: clip(top.en || top.sci, 60), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
+      askName('The larger model could not name it.');
+    }, function (e) {
+      if (firstJob === job) firstJob = null;
+      if (t !== S.token || S.eyes) return;
+      diag('service-none', String((e && e.code) || 'unknown'));
+      if (e && e.code === 'cancelled') return;
+      askName('The larger model could not be asked just now.');
+    });
+  }
+  // From the sheet that asks for a name there is a way to a larger model, where there is one: on this device first, else on a server.
+  var claimAskHow = '';
+  function paintClaimAsk() {
+    show('claimAskRow', false); claimAskHow = '';
+    if (inViewer || S.eyes || !S.animalPhoto || S.closer === S.token) return;     // not where a larger model has had this photo already
+    var t = S.token;
+    function still() { return t === S.token && !$('claim').hidden && !S.eyes; }
+    large.survey().then(function (h) {
+      if (!still()) return;
+      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the larger model on this ' + dev(); claimAskHow = 'device'; show('claimAskRow', true); return; }
+      naturalist.config().then(function (c) {
+        if (!c || !still() || navigator.onLine === false || naturalist.choice() === 'no') return;
+        $('claimAsk').textContent = 'Ask a larger model on a server'; claimAskHow = 'service'; show('claimAskRow', true);
+      });
+    });
+  }
+  $('claimAsk').addEventListener('click', function () {
+    var t = S.token, c = naturalist.cfg();
+    if (claimAskHow === 'device') { diag('large-asked', ''); firstLook(t, false); return; }
+    if (claimAskHow !== 'service' || !c) return;
+    if (naturalist.choice() === 'yes') { closeSheets(); firstService(t); return; }
+    $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
+      (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+    $('askKeep').checked = false;
+    closeSheets(); askFirstT = t; openSheet('ask');
+  });
+  function paintBig() {                            // in the About block: where the larger model stands, and the ways to get it, stop it and delete it
+    large.survey().then(function () {
+      var h = large.has(), z = large.size(), a = large.about(), d = dev(), fail = a.getFail && !/^stopped/.test(a.getFail) ? ' ' + large.say(a.getFail.split(':')[0]) : '';
+      if (!z || !h) { show('bigBox', false); return; }
+      $('bigState').textContent = bigDelAsked ? 'Delete the larger model from this ' + d + '? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
+        : h === 'getting' ? large.line()
+        : h === 'kept' ? 'The larger model is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
+        : h === 'partial' ? 'The larger model is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
+        : 'A larger model that names the species can be kept on this ' + d + ': about ' + z.mb + ' MB, downloaded once. Photos are not sent anywhere.' + fail;
+      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Get it'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
+      show('bigGet', !bigDelAsked && (h === 'absent' || h === 'partial')); show('bigHalt', h === 'getting'); show('bigDel', h === 'kept' || h === 'partial'); show('bigDelNo', bigDelAsked);
+      show('bigAskRow', !bigDelAsked && (h === 'absent' || h === 'partial')); $('bigAsk').checked = bigChoice() === 'no';
+      show('bigBox', true);
+    });
+  }
+  $('bigYes').addEventListener('click', function () { answerBig('yes'); });
+  $('bigNo').addEventListener('click', function () { answerBig('no'); });
+  $('bigNever').addEventListener('click', function () { answerBig('never'); });
+  $('bigStop').addEventListener('click', function () { closeSheets(); diag('large-say', 'stop'); large.halt(); });
+  $('bigClose').addEventListener('click', dismissSheets);
+  $('bigGet').addEventListener('click', function () { large.survey().then(openBig); });
+  $('bigHalt').addEventListener('click', function () { diag('large-say', 'stop'); large.halt(); });
+  $('bigDel').addEventListener('click', function () {
+    if (!bigDelAsked) { bigDelAsked = true; paintBig(); return; }                // a second thought first, as with a meeting
+    bigDelAsked = false; diag('large-say', 'delete');
+    large.forget().then(function () { setBigChoice('no'); noteBig(''); if (S.svc && (S.svc.state === 'get' || S.svc.state === 'looking')) { S.svc = null; paintSvc(); } paintBig(); });
+  });
+  $('bigDelNo').addEventListener('click', function () { bigDelAsked = false; paintBig(); });
+  $('bigAsk').addEventListener('change', function () { setBigChoice($('bigAsk').checked ? 'no' : ''); diag('large-choice', $('bigAsk').checked ? 'no' : 'each'); });
+  // A download the person asked for and that was interrupted carries on by itself at the next visit, unless the connection says of itself
+  // that it is metered or slow, or the device is set to save data: then it waits to be asked. One that had arrived whole and is gone is not fetched again unasked.
+  function resumeBig() {
+    var ch = bigChoice(); if (inViewer || (ch !== 'yes' && ch !== 'kept')) return;
+    large.survey().then(function (h) {
+      if (h === 'none' || h === 'kept' || h === 'getting' || ch === 'kept') return;     // 'kept' and gone: the next photo's line says so, and asks
+      if (!netSays() && navigator.onLine !== false) startBig(); else setBigChoice('');
+    });
+  }
+
   // ---------- where the species list applies: it is one town's. No location is asked of the device; the person says if they are elsewhere.
   var AWAY_KEY = 'seenback.away.v1';
   try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
@@ -389,7 +630,7 @@
     // the switch is shown where it changes something: this device has a species list, or there is a larger model that is told the region
     show('awayRow', !inViewer && pocket.listed()); $('awayBox').checked = pocket.local === false;
     $('awayNote').textContent = 'Species are named from a list of those recorded around ' + pocket.place() + '. With this ticked, this ' + (coarse ? 'phone' : 'computer') + ' names only the kind of animal or plant, and a larger model, if asked, is not told the region.';
-    show('svcBox', false);
+    show('svcBox', false); bigDelAsked = false; paintBig();
     naturalist.config().then(function (c) {
       show('svcBox', !!c); if (!c) return;
       $('svcChoice').value = naturalist.choice();
@@ -473,7 +714,7 @@
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName,
-    rec: pocket, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
+    rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
@@ -493,6 +734,10 @@
     else if (a.state === 'idle') L.push('Recognizer: not started yet.');
     else L.push('Recognizer: not running. ' + (a.fail || a.why) + '.');
     if (r) L.push('Last photo: ' + r.kind + ' ' + r.kindP.toFixed(2) + (r.species[0] ? ', ' + r.species[0].sci + ' ' + r.species[0].p.toFixed(2) : '') + '; ' + (r.ms.load ? 'waited ' + r.ms.load + ' ms, ' : '') + 'prepared in ' + r.ms.pre + ' ms from ' + r.from + ', recognized in ' + r.ms.run + ' ms.');
+    var b = large.about();
+    if (b.have) L.push('Larger model: ' + (b.model || 'unnamed') + ', ' + (b.have === 'kept' ? 'on this device' : b.have === 'getting' ? 'being fetched' : b.have === 'partial' ? 'partly on this device' : 'not on this device') + ', ' + Math.round(b.keptBytes / 1e6) + ' of ' + Math.round(b.bytes / 1e6) + ' MB' +
+      (b.last ? '; last photo ' + b.last.kind + ' ' + b.last.kindP.toFixed(2) + (b.last.species[0] ? ', ' + b.last.species[0].sci + ' ' + b.last.species[0].p.toFixed(2) : '') + ', in ' + (b.last.ms.run / 1000).toFixed(1) + ' s' + (b.last.ms.load ? ' after ' + (b.last.ms.load / 1000).toFixed(1) + ' s to start' : '') : '') +
+      (b.state === 'failed' && b.fail ? '; ' + b.fail : '') + '.');
     L.push('Picture: ' + canvas.width + ' by ' + canvas.height + (st && st.sw ? ', source ' + st.sw + ' by ' + st.sh : '') + (engine ? ', limit ' + engine.side() : ', no engine') +
       (avg ? ', ' + avg.toFixed(1) + ' ms a frame over the last ' + frameMs.length + '.' : '.'));
     L.push('Screen: ' + window.innerWidth + ' by ' + window.innerHeight + ' at ' + (window.devicePixelRatio || 1) + '. ' + (coarse ? 'Touch.' : 'Pointer.') + (S.camOK ? ' Camera open.' : S.camRefused ? ' Camera refused.' : ''));
@@ -513,6 +758,7 @@
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { note.textContent = 'Copied.'; }, byHand); else byHand();
   });
   pocket.warm();
+  if (document.readyState === 'complete') setTimeout(resumeBig, 1500); else window.addEventListener('load', function () { setTimeout(resumeBig, 1500); });
   if (inViewer) {
     window.claude.use('sample').then(function (s) {
       if (!s) return;

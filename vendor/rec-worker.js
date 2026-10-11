@@ -2,6 +2,7 @@
    while a photo is prepared and passed through the image encoder.
 
    The page sends:   {op:'init', ort:{js,mjs,wasm}, wasmBinary, ep, model, vision:{input,output,size,mean,std,resize,crop}, width, kinds, nKinds, species, nSpecies}
+                     (kinds may be absent where there are species: a slot without a kinds head)
                      {op:'run', id, rgba, w, h, wantPre}          rgba: the photo's pixels, 4 bytes each, rows from the top
    and it answers:   {op:'hello'}  {op:'ready', ms, backend, threads}  {op:'done', id, kinds, species, emb, ms, pre?}  {op:'fail', id?, stage, name, message}
 
@@ -111,8 +112,9 @@ function init(m) {
   try {
     V = m.vision; width = m.width; backend = m.ep || 'wasm';
     if (V.resize !== 'shortest-bicubic-antialias' || (V.crop !== 'center' && V.crop !== 'center-round')) throw new Error('unknown resize or crop rule');
-    K = halves(m.kinds); nK = m.nKinds; SP = m.species ? halves(m.species) : null; nS = m.species ? m.nSpecies : 0;
-    if (K.length !== nK * width || (SP && SP.length !== nS * width)) throw new Error('label vectors of the wrong length');
+    // a slot may come without a kinds head (the larger model: its kind is taken from the species answer)
+    K = m.kinds ? halves(m.kinds) : null; nK = m.kinds ? m.nKinds : 0; SP = m.species ? halves(m.species) : null; nS = m.species ? m.nSpecies : 0;
+    if ((K && K.length !== nK * width) || (SP && SP.length !== nS * width) || (!K && !SP)) throw new Error('label vectors of the wrong length');
   } catch (e) { fail('unfit', e); return; }
   t1 = now();
   var ort = self.ort;
@@ -122,7 +124,7 @@ function init(m) {
   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
   ort.InferenceSession.create(new Uint8Array(m.model), { executionProviders: [backend], graphOptimizationLevel: 'all' }).then(function (s) {
-    session = s; t2 = now();
+    session = s; t2 = now(); m.model = null;           // the session has its own copy by now: a large model's bytes are let go
     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
     // one pass over an empty picture, so the first real photo does not pay for warming up
     return run1(new Float32Array(3 * V.size * V.size)).then(function () {
@@ -152,7 +154,7 @@ function run(m) {
   try { u8 = prepare(new Uint8Array(m.rgba), m.w, m.h, V); t = toTensor(u8, V); } catch (e) { fail('run', e, m.id); return; }
   t1 = now();
   run1(t).then(function (e) {
-    var t2 = now(), kd = dots(K, nK, e), sd = SP ? dots(SP, nS, e) : null, t3 = now();
+    var t2 = now(), kd = K ? dots(K, nK, e) : null, sd = SP ? dots(SP, nS, e) : null, t3 = now();
     var msg = { op: 'done', id: m.id, kinds: kd, species: sd, emb: e, ms: { pre: t1 - t0, run: t2 - t1, post: t3 - t2 } };
     if (m.wantPre) msg.pre = u8;
     self.postMessage(msg);

@@ -28,7 +28,7 @@ const playwright = require('playwright'), fs = require('fs');
         const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height; c.getContext('2d').drawImage(bmp, 0, 0);
         const r = await rec.recognize(c, null);
         return { month: r.month, emb: Array.from(rec.lastEmb), kd: Array.from(rec.lastDots.kinds), sd: Array.from(rec.lastDots.species),
-          result: { kind: r.kind, kindP: r.kindP, kinds: r.kinds, species: r.species, named: r.named, offers: r.offers } };
+          result: { kind: r.kind, kindP: r.kindP, sure: r.sure, kinds: r.kinds, kindOffers: r.kindOffers, species: r.species, named: r.named, offers: r.offers } };
       }, name);
     }
     out.trained = await page.evaluate(() => { const a = window.__seenBack.rec.about(); return { model: a.model, rule: a.rule, trained: a.trained }; });

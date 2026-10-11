@@ -1,0 +1,37 @@
+diff --git a/src/sw.template.js b/src/sw.template.js
+index 4ff2bee..0d20dc4 100644
+--- a/src/sw.template.js
++++ b/src/sw.template.js
+@@ -10,6 +10,16 @@ const VERSION = '__BUILD__';
+ const ORT_V = '1.30.0';                                            // the same number as ORT.v in src/cam.rec.js
+ const SHELL = 'shell-' + VERSION;
+ const KEEP = 'keep-v1';
++// The threads experiment (ci/engines/patches/coi-sw.patch): every answer this worker gives is handed over with the two headers that
++// make the page cross-origin isolated, which GitHub Pages cannot send. 'credentialless' is the other value tried.
++const COEP = 'require-corp';
++function isolate(res) {
++  if (!res || res.type === 'opaque' || res.type === 'opaqueredirect' || res.type === 'error' || res.status === 0) return res;
++  const h = new Headers(res.headers);
++  h.set('Cross-Origin-Embedder-Policy', COEP);
++  h.set('Cross-Origin-Opener-Policy', 'same-origin');
++  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
++}
+ const SHELL_FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png',
+   'fonts/instrument-serif-latin-400-normal.woff2', 'fonts/instrument-serif-latin-400-italic.woff2'];
+ // The small scripts the recognizer's worker is made of. The large files are fetched by the page, with a count of what has arrived.
+@@ -53,13 +63,13 @@ self.addEventListener('fetch', (event) => {
+       });
+       if (fixed) return c.match(req).then((hit) => hit || caches.match(req)).then((hit) => hit || fromNet());   // the typeface may be in the shell's store
+       return fromNet().catch(() => c.match(req).then((hit) => hit || Response.error()));
+-    }));
++    }).then(isolate));
+     return;
+   }
+   event.respondWith(                                               // the page: the network first, the kept copy when there is none
+     fetch(req).then((res) => {
+       if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
+       return res;
+-    }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html')))
++    }).catch(() => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('index.html'))).then(isolate)
+   );
+ });

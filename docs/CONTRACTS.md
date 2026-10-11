@@ -18,10 +18,11 @@ The working sandbox cannot reach most of the internet. GitHub's build machines c
 - **Start a run** by pushing a commit to a branch named `run/<workflow>/<label>`: `git push -f origin HEAD:refs/heads/run/engines/dev`. The workflow file is read from the pushed commit, so a workflow can be developed on a run branch without touching `main`.
 - **Results come back** as files on the `ci` branch under `runs/<name>/<run number>[-shard]/`, with a line in `INDEX.txt` (time, path, status, first twelve characters of the commit, branch). Every workflow ends with `bash ci/return.sh <name> <dir> [shard]` under `if: always()`, and writes its own log into the returned directory, because the logs on github.com cannot be read without signing in.
 - **Wait for results** with `bash ci/wait.sh <commit sha> [lines expected] [seconds]`, then read them with `git show FETCH_HEAD:runs/...` or a checkout of the `ci` branch.
-- **Large or binary outputs** (models, embeddings, data sets) go to their own branch with `bash ci/put_branch.sh <branch> <dir>`, which replaces the branch and keeps no history. Branch names: `pub/lab-<model id>` for a model's files, `pub/data-<name>` for data sets; the branch root mirrors the directory it was published from.
+- **Large or binary outputs** (models, embeddings, data sets) go to their own branch with `bash ci/put_branch.sh <branch> <dir>`, which replaces the branch and keeps no history. To add to a `pub/data-*` branch without removing what other jobs put there, use `bash ci/data/merge_pub.sh`. A `pub/` branch keeps no history, so a commit that something outside depends on (the parts of a model that browsers fetch by commit address) is pinned by a branch named `pin/<what>-<commit>`. Branch names: `pub/lab-<model id>` for a model's files, `pub/data-<name>` for data sets; the branch root mirrors the directory it was published from.
 - **Reading a public page** from the sandbox: list addresses in `ci/fetch/list.txt` and push to `run/fetch/<label>`; the text comes back under `runs/fetch/`.
 - **Limits**: 20 jobs at once, 5 of them macOS; a job may run six hours; results returned to `ci` stay under 25 MB per job; a file in git stays under 95 MB.
 - **A secret named `HF_TOKEN`** (a Hugging Face token with write access) is available to workflows as `${{ secrets.HF_TOKEN }}`. Never print it, never write it to a file that is returned.
+- **The laboratory reads its orders from `ci/lab/runs/<label>.json`** in the pushed commit when that file exists, and from `ci/lab/run.json` only otherwise. A newer push to the same run branch cancels the run in progress (the laboratory, data and engines workflows all do this).
 - A workflow that never appears on `ci` probably failed to parse. The list of runs at `https://github.com/jampotful/seen-back/actions` is public.
 
 ## Who owns which files
@@ -32,10 +33,10 @@ To avoid collisions, each area of work owns its files. Change another area's fil
 |---|---|
 | Picture engine and its checks | `src/cam.b.js`, `src/cam.c1.js`, `src/cam.selftest.js`, `.github/workflows/engines.yml`, `ci/engines/`, `test/engines/` |
 | Recognition in the page | `src/cam.rec.js`, `src/cam.c2.js`, `src/cam.r.js`, `src/cam.head.html`, `src/sw.template.js`, `vendor/`, `models/`, `test/rec/`, `test/check4.js`, `tools/fusion/` |
-| Species lists and evaluation photos | `tools/species/`, `.github/workflows/data.yml`, `ci/data/`, `data/` |
+| Species lists, training and evaluation photos | `tools/species/`, `.github/workflows/data.yml`, `traindata.yml`, `traindatas3.yml`, `extradata.yml`, `ci/data/`, `data/` |
 | Model laboratory | `tools/lab/`, `.github/workflows/lab.yml`, `ci/lab/`, `labels/` |
 | Species service | `service/`, `.github/workflows/service.yml`, `ci/service/` |
-| Evaluation | `tools/eval/`, `docs/EVAL.md`, `docs/eval/` |
+| Evaluation | `tools/eval/`, `docs/EVAL.md`, `docs/eval/`, `.github/workflows/eval.yml`, `ci/eval/` |
 | Shared | `build.py`, `ci/*.sh`, `docs/`, `README.md` (changed on `main` by the coordinator) |
 
 ## The sixteen kinds of eye
@@ -161,3 +162,35 @@ GET  /v1/health        -> {"ok": true, "ready": true, "model": "...", "species":
 - It keeps no photo and logs nothing about a photo beyond a count and the time taken.
 - It reads its label rows, biases, species table and prior from files in the same layout as the page's recognizer, so a better head is a change of files.
 - It runs on the free tier only.
+
+## Added while building it (11 October 2026)
+
+### The recognizer's manifest, as the page reads it from build 8
+
+- `fusion.rule`: `"product"` (the default) or `"mix"`; `fusion.guard` (default 1e-9, product rule only). Both rules are written out in `tools/fusion/README.md`, and `tools/fusion/fuse.py` is the reference the page is held to by `tools/fusion/parity.py`. A manifest with a rule or a field the page does not know is refused, and the person is asked to type the kind.
+- `fusion.kind_at`: under this probability the page asserts no kind of eye, says it is not sure, and offers its three likeliest kinds. The result then has `sure: false` and `kindOffers`. Absent, every kind is asserted.
+- `kinds.bias` (a list) and `species.bias_url` (raw little-endian float32): a trained head's biases.
+- `kinds` may be left out. Then the kind of eye is the kind holding the largest share of the species answer.
+- `vision.crop`: `"center"` drops `floor(spare / 2)` pixels; `"center-round"` rounds half the spare to even, as torchvision's CenterCrop does (BioCLIP's own preprocessing).
+- `vision.parts`: a list of `{url, bytes, sha256}` fetched one after another with plain GET requests and joined, with `vision.bytes` and `vision.sha256` for the whole. Addresses may be on another origin; `raw.githubusercontent.com` answers a plain GET with `access-control-allow-origin: *` and refuses a preflight, so no request may carry a custom header.
+- `seconds_a_photo: {phone, computer}`: optional, measured numbers for the consent sheet.
+- The species table may carry `keys` (GBIF species keys) and `names_from` beside its rows; monthly weights may be smoothed decimals.
+- Extra keys a slot may carry and the page ignores: `evaluation`, `needs`, `fusion_note`, `fusion_thresholds_note`, `fusion_kind_at_note`, `seconds_note`.
+
+### Two slots
+
+- `models/pocket/` is fetched when the page is idle and answers every photo.
+- `models/naturalist/` is a larger model the person may choose to download once (the consent sheet states its size and that photos are not sent anywhere). It runs after the pocket model has named the kind, and its answer is recorded with `by: 'device-large'`. A check on localhost may point at another slot with `?big=<slot>` or switch it off with `?big=off`; a public address may not.
+- A meeting's `by` is one of `you`, `Claude`, `page`, `device-large`, `service`; `loc` is set when the species was chosen from the local list.
+
+### `service.json` at the site's root (absent today)
+
+`{"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14"}` and, optionally, `health`, `kind_at`, `name_at`, `top`, `wake_s`, `answer_s`. The photo goes as bare base64 JPEG in Gradio's two-step call (`service/README.md`, `runs/service/3-local/local/wire.txt` on `ci`). When both a device model and a service exist, the device model is preferred.
+
+### `inat.json`
+
+Entries also carry `n` and `via` (`observations` or `name`); `share` is null for `name` entries. `data/regions/us-fl-alachua/INAT.md` describes how it was made.
+
+### Training manifests from the open-data route
+
+`gbif_id` is empty, observation addresses are made from UUIDs, and licences carry no version (`CC-BY-NC`). The region is a bounding box. `tools/species/check_train_s3.py` holds the checks.
