@@ -478,6 +478,15 @@ elif DECV and SH.get("val-" + DECV["choice"]):
               "It is a stand-in in two respects: its kind rows and its species rows were fitted on two thirds of the `val` photos (and the kind rows on the extra set's fitting part as well), and its thresholds were set on the remaining %d `val` photos, so they are less steady than thresholds set on all of `val`. "
               "The trained slots replace it when `run/eval/armed-pocket` has run." % (
                   DECV["choice"], DECV["choice"], pci(n_["kind_right"]), pci(tx_["kind_right"]), k_["kind_at"], pci(tw_["asserted"]), pci(tw_["asserted_right"]), pci(n_["named"]), pci(n_["named_right"]), n_["tuning_photos"])]
+XN = load("extra-naming-sentences-bioclip2-l14-at-0.78.json")
+srv_ = SH.get("sentences-bioclip2-l14")
+if XN and srv_ and (srv_["numbers"].get("kind") or {}).get("table_extra"):
+    by_ = {g["kind"]: g for g in srv_["numbers"]["kind"]["table_extra"]}
+    pn_ = XN["person_or_none"]
+    T += ["- **The larger model on people and rooms.** BioCLIP 2's kind phrases say `person` for %s of the extra set's test photos of people and `none` for %s of its photos of rooms, so the kind of such a photo has to come from the pocket model, which runs first. "
+          "With name_at %g and offer_at %g the slot names a species on %s of the %d test photos of people and rooms and offers three on %s (`tools/eval/extra_naming.py`). At the nine-in-ten level of the slot's own manifest it names one on %s of the photos of people and %s of the photos of rooms, which is one more reason for the stricter level on the device." % (
+              pc(by_["person"]["said_person"]) if "person" in by_ else "–", pc(by_["none"]["said_none"]) if "none" in by_ else "–", XN["fusion"]["name_at"], XN["fusion"]["offer_at"], pci(pn_["named"]), pn_["n"], pci(pn_["offered"]),
+              pc(by_["person"]["named"]) if "person" in by_ else "–", pc(by_["none"]["named"]) if "none" in by_ else "–")]
 sv = S2.get("val")
 if not real:
     tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "
