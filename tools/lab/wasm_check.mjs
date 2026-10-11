@@ -9,7 +9,7 @@ import path from 'node:path';
 const [prefix, onnxDir, wasmDir, outJson] = process.argv.slice(2);
 const require = createRequire(path.join(path.resolve(prefix), 'package.json'));
 const ort = require('onnxruntime-web');
-const ortVersion = require('onnxruntime-web/package.json').version;
+const ortVersion = JSON.parse(fs.readFileSync(path.join(path.resolve(prefix), 'node_modules', 'onnxruntime-web', 'package.json'), 'utf8')).version;
 ort.env.wasm.numThreads = 1;
 
 const shape = JSON.parse(fs.readFileSync(path.join(wasmDir, 'shape.json'), 'utf8'));
