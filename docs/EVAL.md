@@ -211,6 +211,10 @@ What the checks cover: the dates of the photos against the species list's cutoff
 - **People, pets and photos with nothing alive in them are missing from the evaluation set.** How often a person is called a person is unmeasured here.
 - **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured in the section on what the page would show.
 
+## Rerun on a clean machine
+
+The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared with the files committed here by `tools/eval/compare.py` (The whole evaluation as run on a GitHub build machine from the published branches alone (runs/eval/4 on the ci branch, commit b5f22175e5b4) against the files under docs/eval/ as run in the evaluation sandbox with the same scripts). 31228 numbers in 13 files were compared; 0 of them differ by more than 0.0005. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt). An earlier run of Study 1 on another build machine differed from these files in 15 of 27925 numbers, each by a single photo ([`docs/eval/reproduction-trial.txt`](eval/reproduction-trial.txt)). Two scores that are almost equal can change places when another processor does the arithmetic.
+
 ## How to rerun
 
 One command does everything (fetch, checks, Study 1, Study 2, export, as-shipped scoring, this report):

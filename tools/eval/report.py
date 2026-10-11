@@ -398,6 +398,14 @@ T += ["## What this does not show", "",
       "- **People, pets and photos with nothing alive in them are missing from the evaluation set.** How often a person is called a person is unmeasured here.",
       "- **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured in the section on what the page would show.", ""]
 
+TRIAL = ""
+tp = os.path.join(D, "reproduction-trial.txt")
+if os.path.exists(tp):
+    tl = [l for l in open(tp, encoding="utf-8").read().splitlines() if "numbers compared" in l]
+    if tl:
+        w = tl[0].split()
+        TRIAL = (" An earlier run of Study 1 on another build machine differed from these files in %s of %s numbers, each by a single photo "
+                 "([`docs/eval/reproduction-trial.txt`](eval/reproduction-trial.txt)). Two scores that are almost equal can change places when another processor does the arithmetic." % (w[4], w[1]))
 rp = os.path.join(D, "reproduction.txt")
 if os.path.exists(rp):
     lines = open(rp, encoding="utf-8").read().strip().splitlines()
@@ -407,8 +415,8 @@ if os.path.exists(rp):
     head = next((l for l in lines if l.startswith("#")), "")
     T += ["## Rerun on a clean machine", "",
           "The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared with the files committed here by `tools/eval/compare.py` (%s). "
-          "%d numbers in %d files were compared; %s. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt)." % (
-              head.lstrip("# ").rstrip(".") or "see the file", n_num, len(files), ("%s of them differ by more than 0.0005" % last.rsplit(":", 1)[1].strip()) if last else "see the file"), ""]
+          "%d numbers in %d files were compared; %s. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt).%s" % (
+              head.lstrip("# ").rstrip(".") or "see the file", n_num, len(files), ("%s of them differ by more than 0.0005" % last.rsplit(":", 1)[1].strip()) if last else "see the file", TRIAL), ""]
 
 T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 1, Study 2, export, as-shipped scoring, this report):", "", "```",
       "bash tools/eval/run.sh ROOT sentences          # slots made from sentence rows",
