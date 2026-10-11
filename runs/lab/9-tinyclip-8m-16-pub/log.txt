@@ -1,0 +1,124 @@
+==== job log parts/lab-tinyclip-8m-16-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[03:36:12] job: model=tinyclip-8m-16 shard=0/2 stages=images-wasm-int8-per-channel
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[03:36:12] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/2 --mode block
+fetched 200/3000 (1.2s)
+fetched 400/3000 (2.1s)
+fetched 600/3000 (3.0s)
+fetched 800/3000 (3.8s)
+fetched 1000/3000 (4.7s)
+fetched 1200/3000 (5.5s)
+fetched 1400/3000 (6.4s)
+fetched 1600/3000 (7.1s)
+fetched 1800/3000 (7.5s)
+fetched 2000/3000 (8.0s)
+fetched 2200/3000 (8.5s)
+fetched 2400/3000 (8.9s)
+fetched 2600/3000 (9.4s)
+fetched 2800/3000 (9.9s)
+fetched 3000/3000 (10.4s)
+photos: 3000 rows, 3000 to fetch, 0 failed, 10.4s
+[03:36:22] exit 0
+
+added 18 packages in 3s
+[03:36:34] wasm int8-per-channel: prev/onnx/vision.int8-per-channel.onnx sha256 af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34
+[03:36:34] + python3 -u tools/lab/lab.py pixels --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 0/2 --shard-mode block --pix pix_int8-per-channel
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+pixels: 3000 photos, 0 skipped, size 224
+[03:37:02] exit 0
+[03:37:02] + node tools/lab/wasm_embed.mjs ortweb prev/onnx/vision.int8-per-channel.onnx pix_int8-per-channel wasm_int8-per-channel.f32 wasm_int8-per-channel.json 1
+wasm 0/3000 96.9 ms
+wasm 500/3000 96.7 ms
+wasm 1000/3000 97.0 ms
+wasm 1500/3000 96.6 ms
+wasm 2000/3000 95.9 ms
+wasm 2500/3000 139.0 ms
+wasm done: 3000 photos, mean 102.8 ms
+[03:42:12] exit 0
+[03:42:12] + python3 -u tools/lab/lab.py wasm-collect --model tinyclip-8m-16 --variant int8-per-channel --manifest data_in/manifest.csv --evalname alachua-2025 --shard 0/2 --pix pix_int8-per-channel --emb wasm_int8-per-channel.f32 --lat wasm_int8-per-channel.json --onnx-name onnx/vision.int8-per-channel.onnx --onnx-sha af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34 --out art/tinyclip-8m-16
+wasm alachua-2025.wasm-int8-per-channel: 3000 embedded, latency {"mean": 102.79, "p50": 96.95, "p90": 138.99, "p99": 139.54, "min": 93.46, "max": 153.59}
+[03:42:12] exit 0
+[03:42:12] job done, fail=0
+==== job log parts/lab-tinyclip-8m-16-s1/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[03:36:12] job: model=tinyclip-8m-16 shard=1/2 stages=images-wasm-int8-per-channel
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[03:36:12] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 1/2 --mode block
+fetched 200/3000 (1.3s)
+fetched 400/3000 (2.2s)
+fetched 600/3000 (3.1s)
+fetched 800/3000 (4.0s)
+fetched 1000/3000 (4.8s)
+fetched 1200/3000 (5.7s)
+fetched 1400/3000 (6.6s)
+fetched 1600/3000 (7.3s)
+fetched 1800/3000 (7.9s)
+fetched 2000/3000 (8.5s)
+fetched 2200/3000 (9.1s)
+fetched 2400/3000 (9.7s)
+fetched 2600/3000 (10.3s)
+fetched 2800/3000 (10.9s)
+fetched 3000/3000 (11.7s)
+photos: 3000 rows, 3000 to fetch, 0 failed, 11.7s
+[03:36:24] exit 0
+
+added 18 packages in 3s
+[03:36:38] wasm int8-per-channel: prev/onnx/vision.int8-per-channel.onnx sha256 af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34
+[03:36:38] + python3 -u tools/lab/lab.py pixels --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 1/2 --shard-mode block --pix pix_int8-per-channel
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+pixels: 3000 photos, 0 skipped, size 224
+[03:37:06] exit 0
+[03:37:06] + node tools/lab/wasm_embed.mjs ortweb prev/onnx/vision.int8-per-channel.onnx pix_int8-per-channel wasm_int8-per-channel.f32 wasm_int8-per-channel.json 1
+wasm 0/3000 96.5 ms
+wasm 500/3000 96.8 ms
+wasm 1000/3000 97.1 ms
+wasm 1500/3000 95.9 ms
+wasm 2000/3000 97.8 ms
+wasm 2500/3000 97.5 ms
+wasm done: 3000 photos, mean 96.9 ms
+[03:41:59] exit 0
+[03:41:59] + python3 -u tools/lab/lab.py wasm-collect --model tinyclip-8m-16 --variant int8-per-channel --manifest data_in/manifest.csv --evalname alachua-2025 --shard 1/2 --pix pix_int8-per-channel --emb wasm_int8-per-channel.f32 --lat wasm_int8-per-channel.json --onnx-name onnx/vision.int8-per-channel.onnx --onnx-sha af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34 --out art/tinyclip-8m-16
+wasm alachua-2025.wasm-int8-per-channel: 3000 embedded, latency {"mean": 96.88, "p50": 96.94, "p90": 97.44, "p99": 100.72, "min": 93.62, "max": 122.82}
+[03:41:59] exit 0
+[03:41:59] job done, fail=0
+[03:48:04] merging into existing pub/lab-tinyclip-8m-16 (90ddfde)
+parts/lab-tinyclip-8m-16-s0/
+parts/lab-tinyclip-8m-16-s1/
+[03:48:04] + python3 -u tools/lab/lab.py merge --model tinyclip-8m-16 --manifest data_in/manifest.csv --run 9 --out pubdir parts/lab-tinyclip-8m-16-s0/ parts/lab-tinyclip-8m-16-s1/
+merged alachua-2025.wasm-int8-per-channel: 2 of 2 shards, 6000 rows, 0 skipped
+kept card.json (merged, later values kept): a later run (10) published it; this is run 9
+kept card.json (merged, later values kept): a later run (10) published it; this is run 9
+[03:48:04] exit 0
+[03:48:04] + bash ci/put_branch.sh pub/lab-tinyclip-8m-16 pubdir lab: tinyclip-8m-16
+published pub/lab-tinyclip-8m-16
+[03:48:23] exit 0
+[03:48:23] published pub/lab-tinyclip-8m-16
