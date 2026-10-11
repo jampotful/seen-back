@@ -63,7 +63,19 @@ def logs(repo, kind, seconds=12, keep=250):
 
 
 def guard(repo, label):
-    rt = api.get_space_runtime(repo)
+    rt = None
+    for attempt in range(6):
+        try:
+            rt = api.get_space_runtime(repo)
+            break
+        except Exception as e:
+            say("%s: hardware not readable yet (%s)" % (label, type(e).__name__))
+            time.sleep(5)
+    if rt is None:
+        say("hardware could not be read back, so it cannot be shown to be free: deleting the Space now")
+        api.delete_repo(repo, repo_type="space", missing_ok=True)
+        save("hardware.json", {"unreadable": True, "deleted": True})
+        sys.exit(3)
     cur, req = rt.hardware, rt.requested_hardware
     cur = None if cur is None else str(getattr(cur, "value", cur))
     req = None if req is None else str(getattr(req, "value", req))
@@ -100,6 +112,12 @@ def main():
             save("deploy.json", {"created": False, "refused": True, "http_status": status, "refusal": red,
                                  "account_name_redacted": redacted, "exception": type(e).__name__})
             say("create refused: HTTP %s: %s" % (status, red))
+            try:  # a refused create must not leave a half-made Space behind
+                if api.repo_exists(repo, repo_type="space"):
+                    api.delete_repo(repo, repo_type="space", missing_ok=True)
+                    say("a Space had been made despite the refusal; deleted")
+            except Exception as e2:
+                say("could not check for a half-made Space: %s" % type(e2).__name__)
             sys.exit(2)
         say("created")
     guard(repo, "after create")
