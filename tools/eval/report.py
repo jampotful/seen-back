@@ -92,6 +92,8 @@ FIRST_LOOK = [("bioclip2-l14", "species_sci", {"plain_top1": 0.904, "plain_top5"
 S1 = load("study1.json")
 CH = load("checks.json")
 S2 = {os.path.basename(p)[7:-5]: json.load(open(p, encoding="utf-8")) for p in sorted(glob.glob(os.path.join(D, "study2-*.json")))}
+S2L = {k: v for k, v in S2.items() if v.get("licence_rule", "all") != "all"}       # heads fitted under a licence rule: their own section
+S2 = {k: v for k, v in S2.items() if k not in S2L}
 SH = {os.path.basename(p)[8:-5]: json.load(open(p, encoding="utf-8")) for p in sorted(glob.glob(os.path.join(D, "shipped-*.json")))}
 models = [m for m in ORDER if m in S1["models"]] + [m for m in S1["models"] if m not in ORDER]
 P = S1["prior_only"]
@@ -501,6 +503,55 @@ if not real:
                 pci(hs["sentences"]["plain"]["top1"]), pci(hs["prototypes + sentences"]["plain"]["top1"]), pci(hs["sentences"]["prior"]["top1"]), pci(hs["prototypes + sentences"]["prior"]["top1"])))
     T += ["- **What waits for the training vectors.** " + tx]
 T += [""]
+
+# ---- heads fitted under the licence rule (tools/eval/licences.py), the pocket v3 decision, and the pets and livestock check
+LIC = [("all licences (run 25)", "alachua-pre2025-tinyclip-39m-16"), ("`nc`", "alachua-pre2025-nc-tinyclip-39m-16-at90"), ("`by`", "alachua-pre2025-by-tinyclip-39m-16"),
+       ("`nc`, name_at at 92 in 100: the candidate for pocket v3", "alachua-pre2025-nc-tinyclip-39m-16"), ("pocket v2 (live in build 8)", "val-tinyclip-39m-16"),
+       ("pocket v2 refitted under `nc`", "val-nc-tinyclip-39m-16")]
+if any(n_ in SH for _, n_ in LIC[1:4]):
+    T += ["## Heads under the licence rule", "",
+          "The rule set by the coordinator on 11 October 2026, pending the owner's decision: heads that ship are fitted only on photos in the public domain (CC0, no known copyright restrictions, United States Government work) or shared under CC BY or CC BY-NC, and a list of the photos used (set, id, address, licence) is published beside the heads. "
+          "Photos under any licence with ND or SA terms are left out of fitting. In code and in these files the rule is called `nc`; `by` (the public domain and CC BY only) is measured for comparison. `tools/eval/licences.py` holds both, and `tools/eval/study2.py --licence nc` applies the rule to the species rows (training photos), to the kind rows (training photos and the fitting part of the extra set) and, for the stand-in, to the `val` photos it fits on. "
+          "The tuning photos choose settings only and are not cut by the rule. Everything else is run 25's procedure: Study 2 fits and chooses on `val`, `tools/eval/export_heads.py` writes the slot, `tools/eval/shipped.py` scores it through `tools/fusion/fuse.py` on the test photos.", ""]
+    for k_, v_ in sorted(S2L.items()):
+        for m_, r_ in v_["models"].items():
+            fo = r_.get("fitted_on", {})
+            if fo:
+                parts = "; ".join("%s: %s" % (set_, ", ".join("%s %d" % (l_, c_) for l_, c_ in sorted(d_.items(), key=lambda kv: -kv[1]))) for set_, d_ in fo["by_set_and_licence"].items())
+                T += ["- `%s`, %s: rows fitted on %d photos (%s). Species head `%s`; kinds head %s." % (k_, m_, fo["photos"], parts, r_["chosen_species_head"]["name"],
+                                                                                                  ("`%s`" % r_["kind_decision"]["chosen"]["head"]) if r_.get("kind_decision") else "the kind phrases")]
+    T += [""]
+    rows = []
+    for label, n_ in LIC:
+        if n_ not in SH:
+            continue
+        nn = SH[n_]["numbers"]
+        k = nn.get("kind", {})
+        tw, tx = k.get("test_wildlife", {}), k.get("test_extra")
+        by = {g["kind"]: g for g in k.get("table_extra", [])}
+        rows.append([label, "`%s`" % n_, pci(nn["kind_right"]), pci(tx["kind_right"]) if tx else "–", pci(tw.get("asserted")), pci(tw.get("asserted_right")), pci(nn["species_top1"]),
+                     "%s at %s" % (pc(nn["named"][0]), nn["name_at"] if nn["name_at"] is not None else "never"), pci(nn["named_right"]),
+                     pc(by["person"]["named"]) if "person" in by else "–", pc(by["none"]["named"]) if "none" in by else "–"])
+    T += ["TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The first three rows set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos.", "",
+          table(["Heads fitted on", "Slot", "Kind right, wildlife", "Kind right, extra set", "Kind asserted, wildlife", "Right when asserted", "Top species right", "Species named (share, name_at)", "Named species right", "Named on people", "Named on rooms"], rows,
+                ["---", "---"] + ["---:"] * 9), ""]
+    DV3 = load("decision-pocket-v3.json")
+    if DV3:
+        t_ = DV3["tests"]
+        T += ["**Pocket v3, by the rule set beforehand** (`tools/eval/decide_v3.py`). %s" % DV3["rule"], "",
+              "- (i) Kind of eye on the wildlife test photos: %s for the candidate against %s for pocket v2, a paired difference of %s points (%s to %s) over %d photos. %s" % (
+                  pci(t_["i_wildlife_kind_paired_difference"]["candidate"]), pci(t_["i_wildlife_kind_paired_difference"]["pocket_v2"]), "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][0]),
+                  "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][1]), "%+.1f" % (100 * t_["i_wildlife_kind_paired_difference"]["difference"][2]), t_["i_wildlife_kind_paired_difference"]["photos"],
+                  "The interval lies wholly below zero, so this test fails." if t_["i_wildlife_kind_paired_difference"]["fails"] else "The interval does not lie wholly below zero, so this test passes."),
+              "- (ii) Kind of eye on the extra set's test photos: %s against a bar of 96.5%%. %s" % (pci(t_["ii_extra_kind_right"]["candidate"]), "This test fails." if t_["ii_extra_kind_right"]["fails"] else "This test passes."),
+              "- (iii) A species named on %d of the %d test photos of people and rooms (%s) against a bar of 1%%. %s" % (t_["iii_named_on_people_and_rooms"]["named"], t_["iii_named_on_people_and_rooms"]["photos"], pc(t_["iii_named_on_people_and_rooms"]["share"]),
+                                                                                                                         "This test fails." if t_["iii_named_on_people_and_rooms"]["fails"] else "This test passes."),
+              "", DV3["why"], ""]
+    PL = load("pets-livestock.json")
+    if PL:
+        T += ["**Names on pets and livestock** (`tools/eval/pets.py`). %s" % PL["text"], "",
+              table(["Category", "Test photos", "A species named", "The domestic species", "Another species", "What it names when wrong"],
+                    [[r_["category"], r_["photos"], r_["named"], r_["domestic"], r_["other"], r_["wrong_names"] or "–"] for r_ in PL["rows"]], ["---", "---:", "---:", "---:", "---:", "---"]), ""]
 
 T += ["## The first look, checked", "",
       "A first look at these models, made earlier in the night with a quick script, gave the numbers in the column `First look`. The next column is this study's number for the same model and label set.", ""]

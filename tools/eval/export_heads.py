@@ -91,6 +91,21 @@ manifest["evaluation"]["kind_head"] = fus.get("kind_head", "kind phrases")
 manifest["evaluation"]["kind_tuned_with_extra_set"] = bool(fus.get("tuned_with_extra_set"))
 if has_bias:
     manifest["species"]["bias_url"] = "species.bias.f32.bin"
+# the photos the rows were fitted on (written by tools/eval/study2.py beside the head): copied as fitted_on.csv, counted in the manifest
+listed = a.head[:-4] + ".fitted_on.csv" if a.head.endswith(".npz") else None
+if listed and os.path.exists(listed):
+    import csv, shutil
+    shutil.copyfile(listed, os.path.join(a.out, "fitted_on.csv"))
+    used = list(csv.DictReader(open(listed, encoding="utf-8")))
+    by_lic, by_set = {}, {}
+    for r in used:
+        by_lic[r["licence"]] = by_lic.get(r["licence"], 0) + 1
+        by_set[r["set"]] = by_set.get(r["set"], 0) + 1
+    fo = meta.get("fitted_on") or {}
+    manifest["fitted_on"] = {"rule": fo.get("rule", ""), "licence_rule": fo.get("licence_rule", "all"), "photos": len(used),
+                             "by_licence": dict(sorted(by_lic.items(), key=lambda kv: -kv[1])), "by_set": by_set, "list": "fitted_on.csv",
+                             "sources": "train/alachua-pre2025: iNaturalist observations (open-data files); extra/coco-kinds: COCO 2017 images from Flickr. Each row of the list gives the address and the licence.",
+                             "not_listed": "Settings (prior weight, temperatures, thresholds) were chosen on the evaluation photos of the `val` split and on a third of the extra set's training rows; no row was fitted on them."}
 with open(os.path.join(a.out, "manifest.json"), "w", encoding="utf-8") as f:
     json.dump(manifest, f, indent=1)
     f.write("\n")
