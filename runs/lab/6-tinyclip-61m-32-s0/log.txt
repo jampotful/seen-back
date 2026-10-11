@@ -1,0 +1,202 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:50:55] job: model=tinyclip-61m-32 shard=0/1 stages=export,text-species,images-onnx-int8-per-tensor,images-onnx-int8-per-channel
+data_source=pub/data-alachua
+data_made=made_from=1ac9ea0d1f4d4d866539d01dd267ee5c218fa5d9 made_at=2026-10-11T01:10:26Z workflow=data run_number=2 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:50:55] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+fetched 200/6000 (0.9s)
+fetched 400/6000 (1.5s)
+fetched 600/6000 (2.1s)
+fetched 800/6000 (2.6s)
+fetched 1000/6000 (3.2s)
+fetched 1200/6000 (3.7s)
+fetched 1400/6000 (4.3s)
+fetched 1600/6000 (4.9s)
+fetched 1800/6000 (5.6s)
+fetched 2000/6000 (6.2s)
+fetched 2200/6000 (6.9s)
+fetched 2400/6000 (7.5s)
+fetched 2600/6000 (8.2s)
+fetched 2800/6000 (8.9s)
+fetched 3000/6000 (9.7s)
+fetched 3200/6000 (10.4s)
+fetched 3400/6000 (11.1s)
+fetched 3600/6000 (11.8s)
+fetched 3800/6000 (12.5s)
+fetched 4000/6000 (13.2s)
+fetched 4200/6000 (13.9s)
+fetched 4400/6000 (14.6s)
+fetched 4600/6000 (15.3s)
+fetched 4800/6000 (16.0s)
+fetched 5000/6000 (16.7s)
+fetched 5200/6000 (17.3s)
+fetched 5400/6000 (18.1s)
+fetched 5600/6000 (18.7s)
+fetched 5800/6000 (19.4s)
+fetched 6000/6000 (20.1s)
+photos: 6000 rows, 6000 to fetch, 0 failed, 20.1s
+[01:51:15] exit 0
+[01:51:15] + python3 -u tools/lab/lab.py text --model tinyclip-61m-32 --labelset species --species-json data_in/species.json --shard 0/1 --out art/tinyclip-61m-32
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-61m-32 via transformers in 5.7s
+[0;93m2026-10-11 01:51:21.667187295 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 5911 of 5911 (shard 0/1)
+  text 256/23644 (1.5s)
+  text 2816/23644 (16.0s)
+  text 5376/23644 (30.7s)
+  text 7936/23644 (46.1s)
+  text 10496/23644 (61.4s)
+  text 13056/23644 (76.6s)
+  text 15616/23644 (92.5s)
+  text 18176/23644 (108.3s)
+  text 20736/23644 (124.2s)
+  text 23296/23644 (140.0s)
+species_com: (5911, 512)
+  text 256/23644 (1.6s)
+  text 2816/23644 (18.1s)
+  text 5376/23644 (34.0s)
+  text 7936/23644 (49.9s)
+  text 10496/23644 (66.1s)
+  text 13056/23644 (82.3s)
+  text 15616/23644 (98.7s)
+  text 18176/23644 (114.9s)
+  text 20736/23644 (131.3s)
+  text 23296/23644 (147.7s)
+species_sci: (5911, 512)
+  text 256/5911 (3.7s)
+  text 2816/5911 (43.5s)
+  text 5376/5911 (86.4s)
+species_taxon_com: (5911, 512)
+[01:57:50] exit 0
+[01:57:50] + python3 -u tools/lab/lab.py export --model tinyclip-61m-32 --manifest data_in/manifest.csv --photos photos --out art/tinyclip-61m-32 --work work_tinyclip-61m-32
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-61m-32 via transformers in 3.5s
+[0;93m2026-10-11 01:57:54.032330422 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+/home/runner/work/seen-back/seen-back/tools/lab/lab.py:706: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+  torch.onnx.export(v, (dummy,), str(path), **kw)
+/home/runner/.local/lib/python3.12/site-packages/transformers/models/clip/modeling_clip.py:197: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if not interpolate_pos_encoding and (height != self.image_size or width != self.image_size):
+exported fp32 in 1.4s: 245.8 MB
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+int8-per-tensor: 68.1 MB
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+int8-per-channel: 68.4 MB
+fp16: 123.1 MB
+parity photos: 40
+fp32: {"bytes": 245849471, "mb": 245.85, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 1.0, "min": 0.9999998807907104, "max": 1.0000001192092896}, "output_norm_mean": 7.991349697113037, "latency_ms_1thread": {"mean": 74.5, "min": 74.18, "runs": 20, "warmup": 3, "batch": 1}}
+int8-per-tensor: {"bytes": 68094962, "mb": 68.09, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 0.9916254281997681, "min": 0.9848294854164124, "max": 0.9953939914703369}, "output_norm_mean": 7.9845075607299805, "latency_ms_1thread": {"mean": 40.23, "min": 40.07, "runs": 20, "warmup": 3, "batch": 1}}
+int8-per-channel: {"bytes": 68443487, "mb": 68.44, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 0.8512029647827148, "min": 0.7936015129089355, "max": 0.923149824142456}, "output_norm_mean": 7.952033996582031, "latency_ms_1thread": {"mean": 40.48, "min": 40.31, "runs": 20, "warmup": 3, "batch": 1}}
+fp16: {"bytes": 123104382, "mb": 123.1, "opset_import": {"ai.onnx": 17}, "cosine_vs_torch": {"mean": 0.9999996423721313, "min": 0.9999993443489075, "max": 1.0}, "output_norm_mean": 7.9910712242126465, "latency_ms_1thread": {"mean": 76.5, "min": 76.03, "runs": 20, "warmup": 3, "batch": 1}}
+int8: published int8-per-tensor
+[01:58:18] exit 0
+
+added 18 packages in 3s
+[01:58:22] + node tools/lab/wasm_check.mjs ortweb work_tinyclip-61m-32/all work_tinyclip-61m-32/wasm work_tinyclip-61m-32/wasm.json
+int8 {"load_ms":532,"cosine_vs_ort_cpu":{"mean":0.9915842206126357,"min":0.9860330107263368},"cosine_vs_torch":{"mean":0.9929293751221548,"min":0.9864397714870818},"latency_ms_1thread":{"mean":135.9054564,"min":133.89184999999998,"runs":10,"warmup":3,"batch":1},"runs":true}
+fp16 {"load_ms":551,"cosine_vs_ort_cpu":{"mean":0.9999998406656855,"min":0.9999997630820711},"cosine_vs_torch":{"mean":0.9999996213231208,"min":0.99999950823169},"latency_ms_1thread":{"mean":276.45713799999976,"min":268.9991429999991,"runs":10,"warmup":3,"batch":1},"runs":true}
+fp32 {"load_ms":419,"cosine_vs_ort_cpu":{"mean":0.9999999999984525,"min":0.9999999999958491},"cosine_vs_torch":{"mean":0.9999999999974212,"min":0.9999999999921487},"latency_ms_1thread":{"mean":263.2003686999997,"min":262.6443129999989,"runs":10,"warmup":3,"batch":1},"runs":true}
+[01:58:38] exit 0
+wasm results merged into parity.json
+[01:58:38] + python3 -u tools/lab/lab.py images-onnx --model tinyclip-61m-32 --variant int8-per-tensor --onnx art/tinyclip-61m-32/onnx/vision.int8-per-tensor.onnx --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname alachua-2025 --out art/tinyclip-61m-32
+images: tinyclip-61m-32, eval alachua-2025, shard 0/1, 6000 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-61m-32 via transformers in 3.3s
+[0;93m2026-10-11 01:58:42.601441512 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6000, 38.10 photos/s
+  images 192/6000, 38.21 photos/s
+  images 352/6000, 38.30 photos/s
+  images 512/6000, 38.10 photos/s
+  images 672/6000, 38.08 photos/s
+  images 832/6000, 38.11 photos/s
+  images 992/6000, 38.13 photos/s
+  images 1152/6000, 38.08 photos/s
+  images 1312/6000, 38.08 photos/s
+  images 1472/6000, 38.07 photos/s
+  images 1632/6000, 38.05 photos/s
+  images 1792/6000, 38.04 photos/s
+  images 1952/6000, 38.05 photos/s
+  images 2112/6000, 38.04 photos/s
+  images 2272/6000, 38.03 photos/s
+  images 2432/6000, 38.03 photos/s
+  images 2592/6000, 38.01 photos/s
+  images 2752/6000, 37.99 photos/s
+  images 2912/6000, 37.98 photos/s
+  images 3072/6000, 37.95 photos/s
+  images 3232/6000, 37.93 photos/s
+  images 3392/6000, 37.92 photos/s
+  images 3552/6000, 37.90 photos/s
+  images 3712/6000, 37.88 photos/s
+  images 3872/6000, 37.88 photos/s
+  images 4032/6000, 37.86 photos/s
+  images 4192/6000, 37.85 photos/s
+  images 4352/6000, 37.85 photos/s
+  images 4512/6000, 37.84 photos/s
+  images 4672/6000, 37.83 photos/s
+  images 4832/6000, 37.84 photos/s
+  images 4992/6000, 37.83 photos/s
+  images 5152/6000, 37.81 photos/s
+  images 5312/6000, 37.80 photos/s
+  images 5472/6000, 37.78 photos/s
+  images 5632/6000, 37.75 photos/s
+  images 5792/6000, 37.74 photos/s
+  images 5952/6000, 37.73 photos/s
+images: 6000 embedded, 0 skipped, 159.0s (37.73 photos/s)
+[02:01:22] exit 0
+[02:01:22] + python3 -u tools/lab/lab.py images-onnx --model tinyclip-61m-32 --variant int8-per-channel --onnx art/tinyclip-61m-32/onnx/vision.int8-per-channel.onnx --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname alachua-2025 --out art/tinyclip-61m-32
+images: tinyclip-61m-32, eval alachua-2025, shard 0/1, 6000 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-61m-32 via transformers in 3.4s
+[0;93m2026-10-11 02:01:26.333577743 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6000, 37.87 photos/s
+  images 192/6000, 37.98 photos/s
+  images 352/6000, 38.19 photos/s
+  images 512/6000, 38.25 photos/s
+  images 672/6000, 38.25 photos/s
+  images 832/6000, 38.25 photos/s
+  images 992/6000, 38.27 photos/s
+  images 1152/6000, 38.27 photos/s
+  images 1312/6000, 38.26 photos/s
+  images 1472/6000, 38.24 photos/s
+  images 1632/6000, 38.15 photos/s
+  images 1792/6000, 38.14 photos/s
+  images 1952/6000, 38.12 photos/s
+  images 2112/6000, 38.10 photos/s
+  images 2272/6000, 38.08 photos/s
+  images 2432/6000, 38.04 photos/s
+  images 2592/6000, 38.02 photos/s
+  images 2752/6000, 37.99 photos/s
+  images 2912/6000, 37.97 photos/s
+  images 3072/6000, 37.95 photos/s
+  images 3232/6000, 37.92 photos/s
+  images 3392/6000, 37.92 photos/s
+  images 3552/6000, 37.92 photos/s
+  images 3712/6000, 37.91 photos/s
+  images 3872/6000, 37.91 photos/s
+  images 4032/6000, 37.87 photos/s
+  images 4192/6000, 37.87 photos/s
+  images 4352/6000, 37.87 photos/s
+  images 4512/6000, 37.86 photos/s
+  images 4672/6000, 37.86 photos/s
+  images 4832/6000, 37.86 photos/s
+  images 4992/6000, 37.85 photos/s
+  images 5152/6000, 37.84 photos/s
+  images 5312/6000, 37.82 photos/s
+  images 5472/6000, 37.80 photos/s
+  images 5632/6000, 37.79 photos/s
+  images 5792/6000, 37.78 photos/s
+  images 5952/6000, 37.77 photos/s
+images: 6000 embedded, 0 skipped, 158.9s (37.76 photos/s)
+[02:04:06] exit 0
+[02:04:06] job done, fail=0
