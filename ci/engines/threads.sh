@@ -45,7 +45,8 @@ for E in $ENGINES; do
       done ;;
     *)
       step "threads experiment: $E"
-      BROWSERS="$E" REPORTS="$R" timeout 1500 node "$ROOT/test/engines/threads.js"; echo "threads.js $E: exit $?" ;;
+      TO=""; command -v timeout >/dev/null 2>&1 && TO="timeout 1500"   # macOS has no timeout
+      BROWSERS="$E" REPORTS="$R" $TO node "$ROOT/test/engines/threads.js"; echo "threads.js $E: exit $?" ;;
   esac
 done
 kill "$SERVER" 2>/dev/null
