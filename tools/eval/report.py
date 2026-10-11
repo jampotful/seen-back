@@ -662,8 +662,16 @@ T += ["## How to rerun", "", "One command does everything (fetch, checks, Study 
       "python3 -I tools/eval/naturalist.py SLOT --shipped docs/eval/shipped-NAME.json --out DIR --variant docs/eval/variant-LABEL.json   # head files for models/naturalist",
       "python3 -I tools/eval/report.py                     # this file and the tables under docs/eval/",
       "python3 -I tools/eval/compare.py DIR_A DIR_B        # do two runs give the same numbers?", "```", "",
+      "Heads under the licence rule and pocket v3, one step at a time:", "", "```",
+      "python3 -I tools/eval/study2.py ROOT --train alachua-pre2025 --models tinyclip-39m-16 --licence nc --save ROOT/heads/alachua-pre2025-nc   # also --licence by",
+      "python3 -I tools/eval/export_heads.py ROOT --head ROOT/heads/alachua-pre2025-nc/tinyclip-39m-16.npz --out ROOT/slots/alachua-pre2025-nc/tinyclip-39m-16   # with fitted_on.csv",
+      "python3 -I tools/eval/shipped.py ROOT ROOT/slots/alachua-pre2025-nc/tinyclip-39m-16 --name alachua-pre2025-nc-tinyclip-39m-16 --name-bar 0.92",
+      "python3 -I tools/eval/decide_v3.py --candidate alachua-pre2025-nc-tinyclip-39m-16      # docs/eval/decision-pocket-v3.json",
+      "python3 -I tools/eval/pocket_v3.py SLOT --shipped docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json --decision docs/eval/decision-pocket-v3.json --ready DIR --publish DIR2",
+      "python3 -I tools/eval/shipped.py ROOT DIR --name pocket-v3 --name-bar 0.92 --no-write   # the last check of the assembled files",
+      "python3 -I tools/eval/pets.py ROOT DIR --name pocket-v3                               # docs/eval/pets-livestock.json", "```", "",
       "Pushing a commit to a branch named `run/eval/<label>` reruns all of it on a clean build machine (`.github/workflows/eval.yml`), returns the files and a comparison with the committed numbers under `runs/eval/` on the `ci` branch, and publishes the exported slots to `pub/heads-<train>-<model>`. "
-      "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything.", "",
+      "A branch named `run/eval/armed<label>` waits for the training vectors and then measures the trained heads only; `run/eval/coco<label>` waits for the pocket models' vectors of the extra set and then reruns everything; `run/eval/licence<label>` reruns the heads under the licence rule, the pocket v3 decision, the last check and the pets check, and publishes nothing.", "",
       "Inputs of this run: " + "; ".join("`%s` at `%s`" % (k, v["commit"][:12]) for k, v in sorted(S1["inputs"]["branches"].items())) + "."]
 with open(a.out, "w", encoding="utf-8") as f:
     f.write("\n".join(T).rstrip("\n") + "\n")
