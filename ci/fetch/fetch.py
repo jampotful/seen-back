@@ -8,6 +8,7 @@ import pathlib
 import re
 import sys
 import urllib.request
+import time
 
 CAP = 8 * 1024 * 1024
 src, out = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
@@ -31,6 +32,7 @@ for line in src.read_text(encoding="utf-8").splitlines():
     parts = line.split(None, 1)
     url = parts[0]
     n += 1
+    time.sleep(1.5)  # iNaturalist asks for about one request a second
     name = parts[1].strip() if len(parts) > 1 else "%02d-%s" % (n, re.sub(r"[^A-Za-z0-9.]+", "-", url.split("//", 1)[-1])[:80].strip("-"))
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "seen-back-ci/1 (research; github.com/jampotful/seen-back)", "Accept": "*/*"})
