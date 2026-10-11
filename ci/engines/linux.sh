@@ -46,6 +46,15 @@ for B in $BROWSERS; do
     BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-$B.json" 2> "$OUT/rec/parity-real-$B.err.txt"
   fi
   echo "parity (real) $B: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/parity-real-$B.json"; tail -c 400 "$OUT/rec/parity-real-$B.err.txt"
+  step "check_rec.js parity, real slot, with ci/engines/patches/check_rec-int8-cosine.patch applied: $B"
+  git apply ci/engines/patches/check_rec-int8-cosine.patch && echo "patch applied"
+  if [ "$B" = firefox ]; then
+    NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" \
+      timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
+  else
+    BROWSER=$B PORT=8782 SLOT=ci-rec/slot PHOTOS="$ROOT/ci-rec/photos" timeout 900 node test/rec/check_rec.js parity > "$OUT/rec/parity-real-patched-$B.json" 2> "$OUT/rec/parity-real-patched-$B.err.txt"
+  fi
+  echo "parity (real, patched) $B: exit $?"; tail -1 "$OUT/rec/parity-real-patched-$B.json"; git checkout -q test/rec/check_rec.js
   step "self-test with the recognizer phase: $B (picture limited to 540 on this software renderer)"
   if [ "$B" = firefox ]; then
     LIBGL_ALWAYS_SOFTWARE=1 HEADED=1 TAG=-xvfb PORT=8781 OUT="$OUT/shots" BROWSERS=firefox VIEWPORTS=phone,desktop LABEL=linux-xvfb LIMIT_MS=480000 EXTRA="&side=540$RECQ" \
