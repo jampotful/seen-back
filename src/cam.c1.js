@@ -24,7 +24,14 @@
 
   // ---------- small helpers
   function show(id, on) { $(id).hidden = !on; }
-  function msg(t, ms) { clearTimeout(msgTimer); $('msg').textContent = t || ''; if (t && ms) msgTimer = setTimeout(function () { $('msg').textContent = ''; }, ms); }
+  // A line that is waiting carries a bar under it: one that slides while the wait has no known end (the line holds an ellipsis),
+  // and one that fills where the line says how far it has come ("12 of 310 MB").
+  function waitMark(el, text) {
+    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026/.test(t || '');
+    el.classList.toggle('wait', on); el.classList.toggle('det', !!m);
+    if (m) el.style.setProperty('--p', String(Math.max(0, Math.min(1, +m[1] / Math.max(1, +m[2]))))); else el.style.removeProperty('--p');
+  }
+  function msg(t, ms) { clearTimeout(msgTimer); $('msg').textContent = t || ''; waitMark($('msg')); if (t && ms) msgTimer = setTimeout(function () { $('msg').textContent = ''; waitMark($('msg')); }, ms); }
   function cap(s) { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); }
   function clip(s, n) { s = (typeof s === 'string' ? s : '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n) : s; }
   function makeCanvas(w, h) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }

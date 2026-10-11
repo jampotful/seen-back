@@ -81,7 +81,7 @@
   function identify() {
     if (!S.animalPhoto) return;
     var t = ++S.token; S.seq++;
-    if (!capsSettled) { go('naming'); msg('Looking at what it is.'); }     // Claude's part of the page may still be arriving
+    if (!capsSettled) { go('naming'); msg('Looking\u2026'); }     // Claude's part of the page may still be arriving
     capsReady.then(function () { if (t === S.token) recognize(t); });
   }
   function recognizeHere(t) {                      // outside Claude: the page's own small model, on this device
@@ -121,8 +121,8 @@
     }
     if (nameCtl) nameCtl.abort();
     nameCtl = new AbortController(); var ctl = nameCtl;
-    go('naming'); msg('Looking at what it is.');
-    var slow = setTimeout(function () { if (t === S.token && S.screen === 'naming' && !S.eyes) msg('Still looking. If Claude asked your permission, answer it, or go back.'); }, 14000);
+    go('naming'); msg('Looking\u2026');
+    var slow = setTimeout(function () { if (t === S.token && S.screen === 'naming' && !S.eyes) msg('Still looking\u2026 If Claude asked your permission, answer it, or go back.'); }, 14000);
     S.animalPhoto.toBlob(function (blob) {
       if (t !== S.token) { clearTimeout(slow); return; }
       if (!blob) { clearTimeout(slow); failName('The photo could not be prepared.'); return; }
@@ -364,7 +364,7 @@
   // ---------- the full database on a server (the naturalist), asked only with the person's say-so
   // One line on the picture carries it: an offer to ask (tappable), "Asking the full database.", the waking sentence, what it said,
   // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
-  var SVC_SAY = { offer: 'The full database on a server can try to name the species. Ask it?', asking: 'Asking the full database.', waking: 'The full database is waking up, which can take a minute.', looking: 'Looking more closely.' };
+  var SVC_SAY = { offer: 'The full database on a server can try to name the species. Ask it?', asking: 'Asking the full database\u2026', waking: 'The full database is waking up. This can take a minute\u2026', looking: 'Looking more closely\u2026' };
   var svcTimer = 0, svcTap = null, askFirstT = 0, firstJob = null;
   function renewName() { if ($('reveal').classList.contains('show') && (S.screen === 'naming' || S.screen === 'animal') && !anySheet()) showName(); }     // a finer name that arrives while the first is still large on the picture takes its place there; later, the line on the picture says it
   function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
@@ -380,7 +380,7 @@
       b.textContent = '';
       if (loupe) { b.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.6"/><path d="M12 2.8v4M12 17.2v4M2.8 12h4M17.2 12h4M5.5 5.5l2.6 2.6M15.9 15.9l2.6 2.6M18.5 5.5l-2.6 2.6M8.1 15.9l-2.6 2.6"/></svg>'); sp = document.createElement('span'); sp.className = 'vh'; sp.textContent = text; b.appendChild(sp); }
       else b.textContent = text;
-      b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text;
+      b.classList.toggle('loupe', loupe); b.disabled = !tap; b.hidden = !text; waitMark(b, loupe ? '' : text);
     });
   }
   function dropSvc() { var v = S.svc; S.svc = null; clearTimeout(svcTimer); if (v && v.job) v.job.cancel(); paintSvc(); }
@@ -471,7 +471,7 @@
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
     if (text && ms) bigNoteTimer = setTimeout(function () { bigNote = null; paintSvc(); }, ms);
     paintSvc(); if (!$('record').hidden) paintBig();
-    if (!$('big').hidden && large.has() === 'getting') $('bigNet').textContent = large.line();
+    if (!$('big').hidden && large.has() === 'getting') { $('bigNet').textContent = large.line(); waitMark($('bigNet')); }
   }
   function openBig() {                             // consent first, in plain words; and while it is being fetched, the same sheet stops it
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
@@ -479,6 +479,7 @@
     $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
     $('bigSub').textContent = 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.';
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
+    waitMark($('bigNet'));
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
     show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); openSheet('big');
@@ -628,6 +629,7 @@
         : h === 'kept' ? 'The full database is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
         : h === 'partial' ? 'The full database is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
         : 'You can download the full database of species to your ' + d + '. It\u2019s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.' + fail;
+      waitMark($('bigState'));
       $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
       show('bigGet', !bigDelAsked && (h === 'absent' || h === 'partial')); show('bigHalt', h === 'getting'); show('bigDel', h === 'kept' || h === 'partial'); show('bigDelNo', bigDelAsked);
       show('bigAskRow', false); $('bigAsk').checked = bigChoice() === 'no';
@@ -731,7 +733,7 @@
   function onViewFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f || !S.eyes || !engine) return;
     var key = S.eyes, nm = S.named, isVideo = /^video\//.test(f.type) || /\.(mp4|mov|webm|m4v|3gp|mkv)$/i.test(f.name || '');
-    S.seq++; $('askViewFine').textContent = 'Opening it.';
+    S.seq++; $('askViewFine').textContent = 'Opening\u2026'; waitMark($('askViewFine'));
     (isVideo ? startClip(f) : decode(f).then(function (c) { showStill(c, true); })).then(function () {
       $('askViewFine').textContent = ''; setEyes(key, nm); go('animal'); showName(); later(startChange, calm ? 150 : 900);
     }).catch(function () {

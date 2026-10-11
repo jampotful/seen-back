@@ -580,9 +580,9 @@
     }
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
-      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the full database.' : 'Getting the full database: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
-      if (state === 'loading' && total > got) return 'Getting the recognizer: ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB.';
-      return 'Looking at what it is.';
+      if (big) return !(getP && M) ? 'Looking more closely\u2026' : have === 'kept' ? 'Checking the full database\u2026' : 'Downloading the full database\u2026 ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB';
+      if (state === 'loading' && total > got) return 'Getting ready\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
+      return 'Looking\u2026';
     }
     function warm() {                                  // once the opening screen is up and the page has nothing else to do
       if (big || cannot || (navigator.connection && navigator.connection.saveData)) return;

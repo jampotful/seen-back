@@ -352,7 +352,7 @@ async function meet(page, name) {
     await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden; }, null, { timeout: 60000 });
     const lines = await page.evaluate(() => window.__lines);
     r.lines = lines.length > 12 ? lines.slice(0, 4).concat(['... ' + (lines.length - 8) + ' more ...'], lines.slice(-4)) : lines; r.end = await st(page); r.shown = await text(page, 'rvName'); r.waited = await page.evaluate(() => window.__seenBack.rec.about().last.ms); r.errors = errors;
-    const nums = lines.map((l) => /^Getting the recognizer: (\d+) of (\d+) MB\.$/.exec(l)).filter(Boolean);
+    const nums = lines.map((l) => /^Getting ready… (\d+) of (\d+) MB$/.exec(l)).filter(Boolean);
     done('progress', r, r.stateAtPhoto !== 'ready' && nums.length >= 3 && nums.every((n, i) => +n[1] <= +n[2] && (!i || +n[1] >= +nums[i - 1][1])) && +nums[nums.length - 1][2] === 15 && r.end.eyes === 'wader' && r.shown === 'Great blue heron' && !errors.length);
     await ctl('reset=1'); await ctx.close();
   });
@@ -376,7 +376,7 @@ async function meet(page, name) {
     r.after = await st(page); r.record = await page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.by + '|' + m.key));
     r.next = await meet(page, 'stripes.png'); r.buttonNext = await page.locator('#barType').isVisible();   // the next photo is recognized, with no button
     r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'type-instead').length); r.errors = errors;
-    done('typeit', r, !r.buttonBefore && /^Getting the recognizer: \d+ of 15 MB\.$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
+    done('typeit', r, !r.buttonBefore && /^Getting ready… \d+ of 15 MB$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
       && r.sub === 'The recognizer keeps downloading meanwhile.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
       && r.typed.eyes === 'wader' && r.typed.named.by === 'you' && r.typed.named.common === 'heron' && r.after.eyes === 'wader' && r.after.named.by === 'you' && r.after.screen === 'askView' && r.record.length === 1 && r.record[0] === 'heron|you|wader'
       && r.next.eyes === 'insect' && !r.buttonNext && r.trace === 1 && !errors.length);
@@ -443,7 +443,7 @@ async function meet(page, name) {
       const month = new Date().getMonth() + 1;
       r.asked = { named: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), sent: fake.calls(), choice: await page.evaluate(() => window.__seenBack.svc.choice()), record: await recordRows(page), line: await svcLine(page) };
       const c = r.asked.sent[0] || {};
-      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the full database.') >= 0 && r.asked.line === 'The full database says Monarch.' && r.asked.choice === 'yes'
+      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the full database…') >= 0 && r.asked.line === 'The full database says Monarch.' && r.asked.choice === 'yes'
         && r.asked.record[0] === 'Monarch|Danaus plexippus|service|insect' && r.asked.record.length === 2);
       all('whatWasSent', r.asked.sent.length === 1 && c.jpeg && Math.max(c.w, c.h) === 512 && c.imageBytes < 1e6 && c.fields === 4 && c.month === month && c.region === 'us-fl-alachua' && c.top === 5 && !c.prefix && c.cookie === '' && c.referer === '' && c.auth === '' && /^application\/json/.test(c.type));
       // the sheet behind the name, the list of meetings, and its five likeliest as offers
@@ -507,11 +507,11 @@ async function meet(page, name) {
       fake.reset(); const { ctx, page, errors } = await open(browser, Q + file); await ready(page);
       await page.evaluate(() => { window.__seenBack.svc.setChoice('yes'); window.__seenBack.svc.test.times({ poll: 400 }); }); await begin(page); await svcWatch(page);
       fake.sleep(600000); const t0 = Date.now(); await meet(page, 'stripes.png');
-      await page.waitForFunction(() => window.__svc.indexOf('The full database is waking up, which can take a minute.') >= 0, null, { timeout: 15000 });
+      await page.waitForFunction(() => window.__svc.indexOf('The full database is waking up. This can take a minute…') >= 0, null, { timeout: 15000 });
       const eyesWhileWaiting = (await st(page)).eyes; await page.waitForTimeout(1300); fake.sleep(0);     // it wakes
       await byService(page);
       r[name] = { lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), eyesWhileWaiting, named: (await st(page)).named.common, posts: fake.calls().length, healthAsked: fake.state.health, wokeAfterMs: Date.now() - t0, errors: quiet(errors) };
-      all(name, r[name].lines.join(' / ') === 'Asking the full database. / The full database is waking up, which can take a minute. / The full database says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
+      all(name, r[name].lines.join(' / ') === 'Asking the full database… / The full database is waking up. This can take a minute… / The full database says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
       await ctx.close();
     }
     { // it does not wake within the wait (shortened here from 90 seconds to 8): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
@@ -522,7 +522,7 @@ async function meet(page, name) {
       await page.waitForFunction(() => window.__svc.length >= 2 && window.__svc[window.__svc.length - 1] === '', null, { timeout: 40000 });
       const s = await st(page);
       r.neverWakes = { lines: await page.evaluate(() => window.__svc.filter((x, i, a) => (i || x) && (!i || a[i - 1] !== x))), state: s.eyes + '|' + s.named.common + '|' + s.named.by, claim: s.claim, msg: await text(page, 'msg'), why: await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'service-none').map((d) => d.code).join()) };
-      all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the full database. / The full database is waking up, which can take a minute. / ' && r.neverWakes.state === 'insect|insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
+      all('neverWakes', r.waitByDefault.wake === 90000 && r.neverWakes.lines.join(' / ') === 'Asking the full database… / The full database is waking up. This can take a minute… / ' && r.neverWakes.state === 'insect|insect|page' && !r.neverWakes.claim && r.neverWakes.msg === '' && r.neverWakes.why === 'asleep');
       await page.evaluate(() => { window.__seenBack.svc.test.times({ wake: 90000, answer: 1500 }); });
       r.failures = {};
       for (const mode of ['error', 'garbled', 'refusal', 'refuse', 'busy', 'slow']) {
@@ -642,7 +642,7 @@ async function meet(page, name) {
       await bigHave(page, 'kept', 60000); await page.waitForFunction(() => window.__seenBack.bigChoice() === 'kept', null, { timeout: 30000 });
       const fin = await bigNow(page);
       r.resumed = { parts: await partsAsked(), kept: await keptBig(page), state: fin.state, choice: fin.choice, kept_bytes: fin.kept === fin.bytes, errors: errors.slice() };
-      all('progress', mid.have === 'getting' && mid.choice === 'yes' && r.progress.lines.length >= 1 && r.progress.lines.every((l) => new RegExp('^Getting the full database: \\d+ of ' + MB + ' MB\\.$').test(l)) && r.progress.kept === 1 && r.progress.eyes === 'insect');
+      all('progress', mid.have === 'getting' && mid.choice === 'yes' && r.progress.lines.length >= 1 && r.progress.lines.every((l) => new RegExp('^Downloading the full database… \\d+ of ' + MB + ' MB$').test(l)) && r.progress.kept === 1 && r.progress.eyes === 'insect');
       all('resumed', r.afterReload.choice === 'yes' && r.resumed.parts.filter((x) => x === 'part00').length === 1 && r.resumed.parts.filter((x) => x === 'part01').length === 2 && r.resumed.parts.filter((x) => x === 'part02').length === 1
         && r.resumed.kept.filter((k) => /^part\/SHA/.test(k)).length === 3 && r.resumed.kept.indexOf('whole/SHA') >= 0 && fin.state === 'ready' && fin.choice === 'kept' && r.resumed.kept_bytes && !errors.length);
       // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
@@ -661,7 +661,7 @@ async function meet(page, name) {
       await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await shut(page);
-      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The full database says Monarch.'
+      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely… / The full database says Monarch.'
         && r.named.line === 'The full database says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
         && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by the full database, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
         && r.named.offers.join() === E('stripes.png').five.map(sentence).join() && /^Monarch \| Danaus plexippus .* named on this device by the full database · its eyes are yours for a week$/.test(r.named.rows[0]));
@@ -705,7 +705,7 @@ async function meet(page, name) {
       ({ page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.kind-at.json&big=' + slot, null, ctx)); await ready(page); await begin(page);
       await page.evaluate(() => { const el = document.getElementById('msg'); window.__lines = []; new MutationObserver(() => { const t = el.textContent; if (t && window.__lines[window.__lines.length - 1] !== t) window.__lines.push(t); }).observe(el, { childList: true, characterData: true, subtree: true }); });
       const s7 = await meet(page, 'odd.png'); r.first = { state: s7.eyes + '|' + s7.shown + '|' + (s7.named && s7.named.by), claim: s7.claim, lines: await page.evaluate(() => window.__lines.filter((x, i, a) => a.indexOf(x) === i)), small: await page.evaluate(() => window.__seenBack.rec.about().last.sure), record: (await recordRows(page))[0], errors };
-      all('first', r.first.state === 'bee|Western honey bee|device-large' && !r.first.claim && r.first.lines.indexOf('Looking more closely.') >= 0 && r.first.small === false && r.first.record === 'Western honey bee|Apis mellifera|device-large|bee' && !errors.length);
+      all('first', r.first.state === 'bee|Western honey bee|device-large' && !r.first.claim && r.first.lines.indexOf('Looking more closely…') >= 0 && r.first.small === false && r.first.record === 'Western honey bee|Apis mellifera|device-large|bee' && !errors.length);
       // deleted from the device, with a second thought first; after that it is not offered
       await toAbout(page); await page.waitForSelector('#bigDel', { state: 'visible', timeout: 5000 }); await page.locator('#bigDel').tap(); await page.waitForTimeout(250);
       r.del = { asks: await text(page, 'bigState'), keep: await page.locator('#bigDelNo').isVisible(), keptWhileAsking: (await keptBig(page)).length };
@@ -723,7 +723,7 @@ async function meet(page, name) {
       const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page); const d = r.device;
       await meet(page, 'stripes.png'); await offered(page); await getIt(page);
       await page.waitForFunction(() => window.__seenBack.big.about().keptBytes > 300000, null, { timeout: 20000 });
-      await lineIs(page, /^Getting the full database/); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
+      await lineIs(page, /^Downloading the full database/); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
       r.stop = { title: await text(page, 'bigTitle'), stop: await page.locator('#bigStop').isVisible() && (await text(page, 'bigStop')), yesShown: await page.locator('#bigYes').isVisible(), net: await text(page, 'bigNet') };
       await page.locator('#bigStop').tap(); await bigHave(page, 'partial', 10000); await page.waitForTimeout(200);
       const x = await bigNow(page); r.stop.after = { have: x.have, choice: x.choice, line: await svcLine(page), kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length };
@@ -731,7 +731,7 @@ async function meet(page, name) {
       r.stop.sheet = { title: await text(page, 'bigTitle'), yes: await text(page, 'bigYes'), net: (await text(page, 'bigNet')).trim() };
       await bctl('reset=1'); await page.locator('#bigYes').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);
       r.stop.rest = { parts: await partsAsked(), named: (await st(page)).named.common, errors };
-      all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Getting the full database: \d+ of \d+ MB\.$/.test(r.stop.net)
+      all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Downloading the full database… \d+ of \d+ MB$/.test(r.stop.net)
         && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
         && /^The full database is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
         && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
