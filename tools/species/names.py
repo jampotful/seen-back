@@ -237,26 +237,45 @@ def english_names(path, wanted):
     return out, rep, taxa
 
 
-def api_preferred(ids, place_id=1, per=30, pause=1.1):
+def api_preferred(ids, place_id=1, per=30, pause=1.0, budget=900):
     """iNaturalist's own preferred English name for taxon ids, from its public API (locale en, preferred place
-    `place_id`, 1 = United States). Used to check the names chosen from the archive. About one request a second."""
+    `place_id`). About one request a second, as iNaturalist asks. Stops early, keeping what it has, when the time
+    budget (seconds) is spent or when requests keep failing; the caller falls back to the archive for the rest."""
     out = {}
     ids = list(ids)
     s = requests.Session()
     s.headers.update({"User-Agent": UA, "Accept": "application/json"})
-    for k in range(0, len(ids), per):
-        chunk = ids[k:k + per]
+    t0, fails, codes = time.time(), 0, {}
+    chunks = [ids[k:k + per] for k in range(0, len(ids), per)]
+    for n, chunk in enumerate(chunks, 1):
+        if time.time() - t0 > budget:
+            log("  iNaturalist API: time budget spent after %d of %d requests" % (n - 1, len(chunks)))
+            break
         url = "https://api.inaturalist.org/v1/taxa/%s" % ",".join(str(i) for i in chunk)
-        for attempt in range(1, 5):
+        ok = False
+        for attempt in range(1, 4):
+            wait = 5 * attempt
             try:
-                r = s.get(url, params={"locale": "en", "preferred_place_id": place_id}, timeout=60)
+                r = s.get(url, params={"locale": "en", "preferred_place_id": place_id}, timeout=30)
+                codes[r.status_code] = codes.get(r.status_code, 0) + 1
                 if r.status_code == 200:
                     for t in r.json().get("results", []):
                         out[str(t.get("id"))] = t.get("preferred_common_name") or ""
+                    ok = True
                     break
-                time.sleep(5 * attempt)
-            except (requests.RequestException, ValueError):
-                time.sleep(5 * attempt)
+                if r.status_code == 429:
+                    ra = r.headers.get("Retry-After", "")
+                    wait = min(60, int(ra)) if ra.isdigit() else 15 * attempt
+            except (requests.RequestException, ValueError) as e:
+                codes[type(e).__name__] = codes.get(type(e).__name__, 0) + 1
+            time.sleep(wait)
+        if not ok:
+            fails += 1
+            if fails >= 5 and fails * 2 > n:
+                log("  iNaturalist API keeps failing (%s); stopping after %d requests" % (codes, n))
+                break
+        if n % 25 == 0 or n == len(chunks):
+            log("  iNaturalist API: %d/%d requests, %d names, statuses %s (%.0fs)" % (n, len(chunks), len(out), codes, time.time() - t0))
         time.sleep(pause)
     return out
 
@@ -312,3 +331,17 @@ def inat_names(path, wanted, place=("Florida", 21)):
     rep["archive_choice_agrees_with_api"] = agree
     rep["archive_choice_differs_from_api"] = differ
     return out, rep, taxa
+
+
+def taxa_by_id(path, ids):
+    """iNaturalist taxon id -> (scientific name, rank) for the given ids, from the archive's core file."""
+    ids = {str(i) for i in ids if i}
+    out = {}
+    with zipfile.ZipFile(path) as zf:
+        c = read_meta(zf)["core"]
+        fi = c["fields"]
+        for row in _rows(zf, c["file"], c["header"]):
+            tid = _get(row, c["id"])
+            if tid in ids:
+                out[tid] = (_get(row, fi.get(T["scientificName"])), _get(row, fi.get(T["taxonRank"])).lower())
+    return out

@@ -69,7 +69,7 @@ def compact(x):
             "taxonRank": x.get("taxonRank"), "date": (x.get("eventDate") or "")[:10], "year": x.get("year"),
             "month": x.get("month"), "photo": first.get("identifier") or "", "photo_licence": first.get("license") or "",
             "rec_licence": x.get("license") or "", "n_media": len(media),
-            "gid2": ((x.get("gadm") or {}).get("level2") or {}).get("gid")}
+            "gid2": ((x.get("gadm") or {}).get("level2") or {}).get("gid"), "taxonID": x.get("taxonID")}
 
 
 def fetch_day(base, day, tries=3):
@@ -257,7 +257,7 @@ def main():
             "eyes": by_key[k]["eyes"] if k in by_key else eyes.kind_of_record(tax), "date": c["date"], "month": int(c["date"][5:7]),
             "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/%s/medium.%s" % (m.group(1), m.group(2)),
             "licence": common.licence_id(c["photo_licence"] or c["rec_licence"]), "split": split_of(c["gbif_id"]),
-            "_licence_from_record": not c["photo_licence"],
+            "_licence_from_record": not c["photo_licence"], "_inat_taxon": c.get("taxonID"),
         })
     for i, r in enumerate(rows, 1):
         r["id"] = "e%06d" % i
@@ -274,15 +274,42 @@ def main():
     log("  wrote %s: %d rows" % (out / "manifest.csv", len(rows)))
     if filled:
         checks.append("ranks filled from iNaturalist's taxonomy for species outside the list: %s" % "; ".join(sorted(set(filled))))
+    names_differ = compare_with_inat(rows, args.cache)
     lic_from_rec = sum(1 for r in rows if r["_licence_from_record"])
     if lic_from_rec:
         checks.append("%d rows took the record's licence because the image carried none" % lic_from_rec)
-    (out / "SUMMARY.md").write_text(make_summary(rows, by_key, sp, quota, eligible, pool, why, checks, problems, args, end), encoding="utf-8")
+    (out / "SUMMARY.md").write_text(make_summary(rows, by_key, sp, quota, eligible, pool, why, checks, problems, args, end,
+                                                 names_differ), encoding="utf-8")
     log("  wrote %s; GBIF requests %s; %.0fs" % (out / "SUMMARY.md", common.stats(), time.time() - t0))
     if problems:
         log("PROBLEMS:\n  " + "\n  ".join(problems))
         sys.exit(2)
     log("all checks passed")
+
+
+def compare_with_inat(rows, cache):
+    """Rows whose GBIF species (the label used here) differs from the species iNaturalist's community named:
+    the record's taxonID is the iNaturalist taxon. Differences come from the GBIF backbone treating a name as a
+    synonym of another species, or splitting and lumping differently."""
+    try:
+        arch = names.ensure_archive(cache)
+        tax = names.taxa_by_id(arch, {r["_inat_taxon"] for r in rows})
+    except Exception as e:
+        return {"error": str(e)}
+    pairs, unknown, same = Counter(), 0, 0
+    for r in rows:
+        t = tax.get(str(r["_inat_taxon"] or ""))
+        if not t:
+            unknown += 1
+            continue
+        nm, rank = t
+        sp = " ".join(nm.split()[:2]) if rank in ("subspecies", "variety", "form", "hybrid") else nm
+        if sp == r["sci"]:
+            same += 1
+        else:
+            pairs[(nm, r["sci"])] += 1
+    return {"same": same, "differ": sum(pairs.values()), "unknown": unknown, "pairs": pairs.most_common(25),
+            "n_pairs": len(pairs)}
 
 
 def fill_ranks(rec, tax, inat_ranks, filled):
@@ -310,7 +337,7 @@ def table(L, title, counter, total, order=None):
     L.append("")
 
 
-def make_summary(rows, by_key, sp, quota, eligible, pool, why, checks, problems, args, end):
+def make_summary(rows, by_key, sp, quota, eligible, pool, why, checks, problems, args, end, names_differ=None):
     N = len(rows)
     L = ["# Evaluation photos: %s" % Path(args.out).name, ""]
     L.append("Made by `tools/species/build_eval.py` on %s from GBIF (iNaturalist research-grade observations, dataset `%s`), "
@@ -363,6 +390,23 @@ def make_summary(rows, by_key, sp, quota, eligible, pool, why, checks, problems,
     L.append("")
     L.append("- Rows with an English name: %d (%s)." % (sum(1 for r in rows if r["en"]), pct(sum(1 for r in rows if r["en"]), N)))
     L.append("")
+    nd = names_differ or {}
+    if "same" in nd:
+        L.append("## Labels: GBIF species against the name given on iNaturalist")
+        L.append("")
+        L.append("Rows are labelled with the GBIF backbone species of the record. For %d rows (%s) the species the "
+                 "iNaturalist community named (the record's `taxonID`, looked up in iNaturalist's taxonomy archive) has "
+                 "another name in the backbone; %d rows agree; %d could not be looked up. %d distinct pairs; the most "
+                 "frequent (iNaturalist name: GBIF label, rows):" % (nd["differ"], pct(nd["differ"], N), nd["same"],
+                                                                     nd["unknown"], nd["n_pairs"]))
+        L.append("")
+        for (a, b), k in nd["pairs"]:
+            L.append("- *%s*: *%s*, %d" % (a, b, k))
+        L.append("")
+        L.append("A recognizer that answers with iNaturalist's names needs this mapping before it is scored against `sci`/`key`.")
+        L.append("")
+    elif nd.get("error"):
+        checks.append("comparison with iNaturalist names failed: %s" % nd["error"])
     L.append("## Checks")
     L.append("")
     for c in checks:
