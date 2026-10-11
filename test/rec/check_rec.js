@@ -863,6 +863,9 @@ async function meet(page, name) {
       await ctl('reset=1');
       ({ page, errors } = await open(browser, '&rec=' + SLOT, null, ctx)); await ready(page);
       r.again = { asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin|vendor/.test(x)), errors: errors.slice() }; ok = ok && !errors.length;
+      // a phone that kept build 8's files holds the encoder under the manifest's fingerprint as well: a copy under such an address must be let go
+      r.again.encoderKey = await page.evaluate(async () => { const c = await caches.open('keep-v1'), k = (await c.keys()).map((q) => q.url).filter((u) => /vision\.int8\.onnx\?v=/.test(u));
+        if (k.length === 1) await c.put(k[0].replace(/v=[^&]+/, 'v=0123abcd'), await c.match(k[0])); return k.map((u) => u.replace(location.origin + '/', '')); });
       await page.close();
       // the laboratory publishes a new model under the same address: another manifest, so another version
       await ctl('reset=1'); await ctl('swap=' + SLOT + '/manifest.json&with=' + SLOT + '/manifest.kinds-only.json');
@@ -870,7 +873,10 @@ async function meet(page, name) {
       r.newVersion = { model: (await about(page)).model, asked: (await ctl('log=1')).filter((x) => !/^index\.html/.test(x) && /standin/.test(x)),
         kept: await page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url.replace(location.origin + '/', '')).filter((u) => /standin/.test(u)).sort()), errors: errors.slice() };
       const vs = new Set(r.newVersion.kept.map((u) => (/v=([0-9a-f]+)/.exec(u) || [])[1]).filter(Boolean));
-      ok = ok && r.again.asked.length === 1 && /manifest\.json$/.test(r.again.asked[0]) && r.newVersion.model === 'standin-kinds-only' && r.newVersion.asked.some((x) => /vision\.int8\.onnx\?v=/.test(x)) && vs.size === 1 && r.newVersion.kept.some((u) => /vision\.int8\.onnx\?v=/.test(u)) && !errors.length;
+      // the new manifest names the same encoder (the same sha256): it is not fetched again, and stays kept under its checksum; the old copy is gone
+      const sha = JSON.parse(fs.readFileSync(path.join(slotDir, 'manifest.kinds-only.json'), 'utf8')).vision.sha256;
+      ok = ok && r.again.asked.length === 1 && /manifest\.json$/.test(r.again.asked[0]) && r.again.encoderKey.length === 1 && r.again.encoderKey[0].endsWith('vision.int8.onnx?v=sha256-' + sha) && r.newVersion.model === 'standin-kinds-only'
+        && !r.newVersion.asked.some((x) => /vision\.int8\.onnx/.test(x)) && vs.size === 1 && r.newVersion.kept.filter((u) => /vision\.int8\.onnx/.test(u)).join() === r.again.encoderKey[0] && !errors.length;
       await page.close(); await ctl('reset=1');
     }
     done(want.includes('version') ? 'offline+version' : 'offline', r, ok);

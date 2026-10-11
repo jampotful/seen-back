@@ -5,6 +5,8 @@
   // (docs/CONTRACTS.md). Nothing here is fetched before the opening screen is up, and nothing about a photo leaves the device.
   // Kept copies: every file is asked for with ?v=<version> and kept under that address, so a new version is a new address.
   // The runtime's version is its release number; a slot's version is a fingerprint of its manifest, which is always asked of the network first.
+  // From build 9 the encoder is the exception where the manifest gives its checksum: it is asked for with ?v=sha256-<checksum>, so that
+  // new heads or new settings (a new manifest) do not cost a second download of an encoder whose bytes have not changed.
   // There are two slots. The pocket one (models/pocket) is fetched by the page itself once the opening screen is up. The larger one
   // (models/naturalist) is some hundreds of megabytes, in parts that may live on another origin: nothing of it is fetched until the
   // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
@@ -168,14 +170,16 @@
       return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
         kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
     }
-    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go
+    function encV(V) { return V && !V.parts && typeof V.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(V.sha256) ? 'sha256-' + V.sha256.toLowerCase() : ''; }   // the encoder's own version, where its checksum is given
+    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go; the encoder in use stays under its checksum
       if (!cache) return;
+      var ev = M ? encV(M.vision) : '';
       cache.keys().then(function (keys) {
         keys.forEach(function (req) {
           var u; try { u = new URL(req.url); } catch (e) { return; }
           var q = /[?&]v=([^&]+)/.exec(u.search), here = u.href.split('?')[0];
           if (!q) return;
-          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v) cache.delete(req);
+          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v && !(ev && decodeURIComponent(q[1]) === ev && here === abs(M.vision.url, base))) cache.delete(req);
           if (here.indexOf(abs(ORT.dir)) === 0 && decodeURIComponent(q[1]) !== ORT.v) cache.delete(req);
         });
       }).catch(function () {});
@@ -398,7 +402,7 @@
         return manifestText(cache).then(adopt);
       }).then(function () {
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, nS = M.species ? M.species.count : 0, c = cacheRef;
-        var inParts = big || !!V.parts, modelUrl = inParts ? '' : u(V.url);
+        var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
         return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
