@@ -1,34 +1,3 @@
 {
- "data": "pub/data-alachua",
- "manifest": "train/alachua-pre2025/manifest.csv",
- "shard_mode": "mod",
- "wait_minutes": 290,
- "about": "Training-set vectors for BioCLIP 2, first 60,000 rows, shards 3-8 of 9; waits until train-pocket has published (so that at most ten machines run at once), then merges its rows with what train-l14-a published.",
- "models": [
-  "bioclip2-l14"
- ],
- "stages": [
-  "images"
- ],
- "rows": {
-  "bioclip2-l14": 60000
- },
- "shards": {
-  "bioclip2-l14": 9
- },
- "shard_subset": {
-  "bioclip2-l14": [
-   3,
-   4,
-   5,
-   6,
-   7,
-   8
-  ]
- },
- "max_parallel": 6,
- "wait_for_file": [
-  "pub/lab-tinyclip-39m-16",
-  "images/alachua-pre2025.int8-per-channel.f16.npy"
- ]
+ "about": "Superseded: no further BioCLIP 2 training shards tonight; run/lab/train-l14-a carries shards 0 to 2.", "models": [], "stages": [], "data": "auto", "max_parallel": 1
 }
