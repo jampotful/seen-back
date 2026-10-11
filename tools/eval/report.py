@@ -400,7 +400,7 @@ if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
             return h
         h39, h8 = best(real["models"]["tinyclip-39m-16"]), best(real["models"]["tinyclip-8m-16"])
         txt += ("With heads fitted on the training photos, the 39M model's best head (`%s`) names the species for %s of test photos with the prior and the 8M model's (`%s`) for %s. "
-                "Recommendation: ship the model whose trained head is ahead by more than the intervals, and prefer the 8M model when they overlap, because it is a quarter of the download and a third of the time." % (
+                "Which of the two ships is worked out in the next lines, by the kind of eye as the page would decide it." % (
                     h39["name"], pci(h39["prior"]["top1"]), h8["name"], pci(h8["prior"]["top1"])))
     else:
         txt += ("Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written. They decide this choice: a trained head may close the gap between the two models or widen it. ")
