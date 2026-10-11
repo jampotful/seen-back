@@ -549,14 +549,26 @@ if os.path.exists(rp):
     last = next((l for l in lines if l.startswith("numbers that differ")), "")
     head = next((l for l in lines if l.startswith("#")), "")
     T += ["## Rerun on a clean machine", "",
-          "The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared with the files committed here by `tools/eval/compare.py` (%s). "
+          "The whole evaluation was run again on a GitHub build machine from the published branches alone, and its numbers were compared by `tools/eval/compare.py` with the files as they were committed at that time (%s). "
           "%d numbers in %d files were compared; %s. The comparison is kept in [`docs/eval/reproduction.txt`](eval/reproduction.txt).%s" % (
               head.lstrip("# ").rstrip(".") or "see the file", n_num, len(files), ("%s of them differ by more than 0.0005" % last.rsplit(":", 1)[1].strip()) if last else "see the file", TRIAL), ""]
     r4 = os.path.join(D, "reproduction-r4.txt")
     if os.path.exists(r4):
         l4 = open(r4, encoding="utf-8").read().strip().splitlines()
-        T += ["A second rerun covers the files written since the kind decision was changed to include the extra set (%s): %s. It is kept in [`docs/eval/reproduction-r4.txt`](eval/reproduction-r4.txt)." % (
-            next((l for l in l4 if l.startswith("#")), "").lstrip("# ").rstrip("."), next((l for l in l4 if l.startswith("numbers that differ")), "see the file")), ""]
+        cnt = {}
+        for l in l4:
+            w = l.split()
+            if len(w) > 5 and w[2:4] == ["numbers", "compared,"]:
+                cnt[w[0]] = (int(w[1]), int(w[4]))
+        sen = [v for k_, v in cnt.items() if k_.startswith(("shipped-sentences-", "study2-sentences", "decision-pocket.json", "checks", "variant-"))]
+        val = [v for k_, v in cnt.items() if k_.startswith(("shipped-val-", "study2-val"))]
+        a13, b13 = SH.get("val-tinyclip-39m-16"), None
+        T += ["A second rerun covers the files written since the kind decision was changed to include the extra set (%s). In the sentence slots, their study, the checks, the pocket decision and the int8 comparisons, %d of %d numbers differ by more than 0.0005%s. "
+              "In the stand-in files %d of %d numbers differ: their kind rows are fitted by an iterative optimizer, which stopped at slightly different rows on the other machine. %s "
+              "A slot with fitted kind rows is therefore the same in substance on another machine and differs in late digits. The comparison is kept in [`docs/eval/reproduction-r4.txt`](eval/reproduction-r4.txt)." % (
+                  next((l for l in l4 if l.startswith("#")), "").lstrip("# ").rstrip("."), sum(v[1] for v in sen), sum(v[0] for v in sen),
+                  (" (Study 1: %d of %d)" % (cnt["study1.json"][1], cnt["study1.json"][0])) if "study1.json" in cnt else "", sum(v[1] for v in val), sum(v[0] for v in val),
+                  " ".join(l.lstrip("# ") for l in l4 if l.startswith("# The stand-in slot"))), ""]
     else:
         T += ["That rerun is older than the present Study 2 and as-shipped files, which were written after the kind decision was changed to include the extra set and to set `kind_at`. Those files have not been confirmed on a clean machine. Every push to a `run/eval/` branch reruns them and returns `compare.txt` under `runs/eval/` on the `ci` branch.", ""]
 
