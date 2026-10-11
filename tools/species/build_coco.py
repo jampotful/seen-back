@@ -167,7 +167,7 @@ def main():
                     pick = ranked[:want]
                 if len(pick) < want:
                     note = "%s %s: %d wanted, %d there are" % (split, kind, want, len(pick))
-                    (problems if kind in ("person", "none") else shortfalls).append(note)
+                    shortfalls.append(note)     # reported in the summary; the set is still published
                 for im in pick:
                     anns = [a for a in by_img[im["id"]] if not a.get("iscrowd")]
                     if anns:

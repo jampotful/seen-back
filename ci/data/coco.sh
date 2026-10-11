@@ -59,16 +59,25 @@ fi
 [ "$rc" -eq 0 ] || exit "$rc"
 [ "${PUBLISH:-1}" = "1" ] || exit 0
 
-# The training-manifest job publishes with ci/put_branch.sh in its older commits, which replaces the whole branch:
-# wait while one is queued or running, so it cannot erase this set right after it lands.
-for i in $(seq 1 90); do
+publish() {
+  rm -rf stage && mkdir -p stage/extra && cp -R data/extra/coco-kinds stage/extra/
+  bash ci/data/merge_pub.sh pub/data-alachua stage "extra photo set coco-kinds" extra/coco-kinds
+}
+on_branch() { git fetch -q --depth 1 origin pub/data-alachua 2>/dev/null && git cat-file -e FETCH_HEAD:extra/coco-kinds/manifest.csv 2>/dev/null; }
+step "publish into pub/data-alachua" publish || exit 1
+step "branch after" bash -c 'git fetch -q --depth 1 origin pub/data-alachua && git ls-tree -r -l FETCH_HEAD && git show FETCH_HEAD:_made.txt'
+JOB_STATUS=published bash ci/return.sh extradata out || true   # an early copy of the results; the final one follows
+
+# A traindata job built from an older commit publishes with ci/put_branch.sh, which replaces the whole branch. While
+# one is queued or running, watch the branch and publish this set again if it disappears; stop when none is left.
+for i in $(seq 1 110); do
   busy=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/traindata.yml/runs?per_page=20" \
     --jq '[.workflow_runs[] | select(.status != "completed")] | length' 2>/dev/null || echo "?")
-  echo "[$(date -u +%T)] traindata runs not completed: $busy" | tee -a "$LOG"
+  if on_branch; then here=yes; else here=no; fi
+  echo "[$(date -u +%T)] traindata runs not completed: $busy; extra/coco-kinds on the branch: $here" | tee -a "$LOG"
+  [ "$here" = yes ] || step "publish again" publish
   [ "$busy" = "0" ] && break
   sleep 60
 done
-mkdir -p stage/extra
-cp -R data/extra/coco-kinds stage/extra/
-step "publish into pub/data-alachua" bash ci/data/merge_pub.sh pub/data-alachua stage "extra photo set coco-kinds" extra/coco-kinds || exit 1
-step "branch after" bash -c 'git fetch -q --depth 1 origin pub/data-alachua && git ls-tree -r -l FETCH_HEAD && git show FETCH_HEAD:_made.txt'
+on_branch || step "publish again" publish
+step "branch at the end" bash -c 'git fetch -q --depth 1 origin pub/data-alachua && git ls-tree -r -l FETCH_HEAD && git show FETCH_HEAD:_made.txt'
