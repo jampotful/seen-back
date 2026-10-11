@@ -1,0 +1,110 @@
+{
+ "id": "tinyclip-8m-16",
+ "licence": "MIT",
+ "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+ "vision": {
+  "url": "vision.int8-per-channel.onnx",
+  "bytes": 9559225,
+  "sha256": "af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34",
+  "from": "pub/lab-tinyclip-8m-16:onnx/vision.int8-per-channel.onnx",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "kinds": {
+  "url": "kinds.f16.bin",
+  "labels": [
+   "cat",
+   "dog",
+   "squirrel",
+   "deer",
+   "rabbit",
+   "hawk",
+   "wader",
+   "bird",
+   "alligator",
+   "reptile",
+   "frog",
+   "bee",
+   "insect",
+   "plant",
+   "person",
+   "other",
+   "none"
+  ],
+  "made_from": "kind rows fitted on the fitting photos and the extra set (every photo counts the same)",
+  "bias": [
+   2.51954,
+   3.91171,
+   -1.89077,
+   4.97512,
+   -4.47127,
+   -2.28416,
+   -2.06208,
+   1.5178,
+   -5.04941,
+   -1.70397,
+   -4.77322,
+   -3.7184,
+   0.27987,
+   -0.51679,
+   5.77005,
+   1.07591,
+   6.86579
+  ]
+ },
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 5467,
+  "bias_url": "species.bias.f32.bin"
+ },
+ "fusion": {
+  "t_kind": 1.0,
+  "t_species": 100.0,
+  "alpha_prior": 0.5,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.9,
+  "offer_at": 0.97,
+  "prior_floor": 1e-06,
+  "kind_at": 0.82
+ },
+ "fusion_note": "alpha_prior and the prior's smoothing were chosen on val by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+ "evaluation": {
+  "model": "tinyclip-8m-16",
+  "head": "discriminant",
+  "choice": "shrinkage 0.3",
+  "train": "alachua-pre2025",
+  "train_vectors": "images/alachua-pre2025",
+  "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+  "tuned_on": "val",
+  "prior_smoothing": {
+   "lam": 0.0,
+   "c": 0.1
+  },
+  "kind_head": "kind rows fitted on the fitting photos and the extra set (every photo counts the same)",
+  "kind_tuned_with_extra_set": true
+ },
+ "needs": [
+  "species.bias_url (build 7 of the page)",
+  "kinds.bias (build 7 of the page)",
+  "fusion.rule mix (build 7 of the page)",
+  "fusion.kind_at (the build of the page that has the answer `not sure`)"
+ ],
+ "fusion_thresholds_note": "set by tools/eval/shipped.py on 1803 tuning photos (val) through tools/fusion/fuse.py; 2 means never",
+ "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 1803 wildlife tuning photos and on 3056 extra-set (coco-kinds) tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
+}
