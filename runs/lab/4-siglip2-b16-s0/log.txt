@@ -1,0 +1,62 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:41:05] job: model=siglip2-b16 shard=0/2 stages=images
+data_source=pub/data-alachua
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:59:55Z workflow=data run_number=1 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[01:41:05] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/2
+fetched 200/3000 (1.6s)
+fetched 400/3000 (2.7s)
+fetched 600/3000 (3.8s)
+fetched 800/3000 (5.0s)
+fetched 1000/3000 (6.1s)
+fetched 1200/3000 (7.3s)
+fetched 1400/3000 (8.5s)
+fetched 1600/3000 (9.7s)
+fetched 1800/3000 (10.9s)
+fetched 2000/3000 (12.1s)
+fetched 2200/3000 (13.3s)
+fetched 2400/3000 (14.5s)
+fetched 2600/3000 (15.8s)
+fetched 2800/3000 (17.0s)
+fetched 3000/3000 (18.4s)
+photos: 3000 rows, 3000 to fetch, 0 failed, 18.4s
+[01:41:23] exit 0
+[01:41:23] + python3 -u tools/lab/lab.py images --model siglip2-b16 --manifest data_in/manifest.csv --photos photos --shard 0/2 --evalname alachua-2025 --out art/siglip2-b16
+images: siglip2-b16, eval alachua-2025, shard 0/2, 3000 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded siglip2-b16 via transformers in 18.2s
+[0;93m2026-10-11 01:41:42.330539450 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/3000, 7.06 photos/s
+  images 192/3000, 7.04 photos/s
+  images 352/3000, 7.06 photos/s
+  images 512/3000, 7.06 photos/s
+  images 672/3000, 7.06 photos/s
+  images 832/3000, 7.05 photos/s
+  images 992/3000, 7.03 photos/s
+  images 1152/3000, 7.03 photos/s
+  images 1312/3000, 7.02 photos/s
+  images 1472/3000, 7.02 photos/s
+  images 1632/3000, 7.03 photos/s
+  images 1792/3000, 7.03 photos/s
+  images 1952/3000, 7.03 photos/s
+  images 2112/3000, 7.02 photos/s
+  images 2272/3000, 7.00 photos/s
+  images 2432/3000, 7.00 photos/s
+  images 2592/3000, 7.00 photos/s
+  images 2752/3000, 7.01 photos/s
+  images 2912/3000, 7.01 photos/s
+images: 3000 embedded, 0 skipped, 427.5s (7.02 photos/s)
+[01:48:50] exit 0
+[01:48:50] job done, fail=0
