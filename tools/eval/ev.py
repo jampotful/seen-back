@@ -133,7 +133,8 @@ def ci(x):
         return [None, None, None, 0]
     b = x[boot_index(n)].mean(1)
     lo, hi = np.percentile(b, [2.5, 97.5])
-    return [round(float(x.mean()), 4), round(float(lo), 4), round(float(hi), 4), int(n)]
+    # unrounded: a share is its count divided by its total, and it is rounded once, where it is printed (tools/eval/report.py)
+    return [float(x.astype(np.float64).mean()), float(lo), float(hi), int(n)]
 
 
 def ci_cluster(x, clusters):
@@ -145,7 +146,7 @@ def ci_cluster(x, clusters):
     counts = np.random.default_rng(SEED + C).multinomial(C, np.full(C, 1.0 / C), size=RESAMPLES)
     b = (counts @ hits) / (counts @ size)
     lo, hi = np.percentile(b, [2.5, 97.5])
-    return [round(float(x.mean()), 4), round(float(lo), 4), round(float(hi), 4), int(len(x)), C]
+    return [float(x.mean()), float(lo), float(hi), int(len(x)), C]
 
 
 def softmax_rows(Z):

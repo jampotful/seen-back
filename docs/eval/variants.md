@@ -7,7 +7,7 @@ The same 4197 test photos, the same settings as for the original vectors. `int8*
 | Model | Vectors | Mean cosine to original | 1st percentile | Kind from phrases | Difference (points) | Species top-1 with prior | Difference (points) |
 |---|---|---:|---:|---:|---:|---:|---:|
 | bioclip-b16 | int8-per-tensor | 0.9592 | 0.8717 | 46.5% (45.0 to 47.9) | +1.0 (+0.2 to +1.8) | 65.5% (64.0 to 66.9) | -4.1 (-4.8 to -3.3) |
-| tinyclip-39m-16 | int8 | 0.9967 | 0.9927 | 77.5% (76.1 to 78.8) | -0.1 (-0.6 to +0.3) | 34.9% (33.5 to 36.4) | -0.3 (-0.8 to +0.1) |
+| tinyclip-39m-16 | int8 | 0.9967 | 0.9927 | 77.5% (76.1 to 78.8) | -0.1 (-0.6 to +0.3) | 35.0% (33.5 to 36.4) | -0.3 (-0.8 to +0.1) |
 | tinyclip-39m-16 | int8-per-channel | 0.9965 | 0.9921 | 77.2% (76.0 to 78.5) | -0.4 (-0.8 to +0.1) | 34.5% (33.1 to 36.0) | -0.7 (-1.2 to -0.3) |
 | tinyclip-39m-16 | int8-per-tensor | 0.9957 | 0.9903 | 77.2% (75.9 to 78.5) | -0.4 (-0.8 to +0.1) | 34.8% (33.4 to 36.2) | -0.4 (-0.9 to +0.1) |
 | tinyclip-39m-16 | wasm-int8-per-channel | 0.9984 | 0.9965 | 77.3% (76.0 to 78.7) | -0.2 (-0.6 to +0.1) | 34.8% (33.3 to 36.2) | -0.5 (-0.9 to -0.1) |

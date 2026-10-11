@@ -10,11 +10,11 @@ Fitted on 1226 photos of 574 species (`images/alachua-2025 (two thirds of val)`)
 
 | Species head | Top-1 | Top-5 | Top-1 with prior | Top-5 with prior | Kind from summed species | Chosen on the tuning photos |
 |---|---:|---:|---:|---:|---:|---|
-| sentences | 90.3% (89.4 to 91.3) | 96.8% (96.2 to 97.3) | 92.4% (91.6 to 93.2) | 97.5% (97.0 to 97.9) | 98.3% (97.9 to 98.7) | species_sci; alpha 1.00; lam 2, c 1 |
+| sentences | 90.4% (89.4 to 91.3) | 96.8% (96.2 to 97.3) | 92.4% (91.6 to 93.2) | 97.5% (97.0 to 97.9) | 98.3% (97.9 to 98.7) | species_sci; alpha 1.00; lam 2, c 1 |
 | prototypes | 61.0% (59.5 to 62.5) | 65.5% (64.1 to 67.0) | 61.1% (59.6 to 62.6) | 65.5% (64.0 to 66.9) | 93.2% (92.4 to 94.0) | class means; alpha 0.40; lam 0, c 0.1 |
-| prototypes + sentences | 91.3% (90.5 to 92.2) | 97.3% (96.8 to 97.8) | 91.7% (90.9 to 92.6) | 97.6% (97.1 to 98.0) | 98.5% (98.0 to 98.8) | species_sci, beta 8, bias for species without photos 0.65; alpha 0.60; lam 0, c 0.1 |
+| prototypes + sentences | 91.4% (90.5 to 92.2) | 97.3% (96.8 to 97.8) | 91.7% (90.9 to 92.6) | 97.6% (97.1 to 98.0) | 98.5% (98.0 to 98.8) | species_sci, beta 8, bias for species without photos 0.65; alpha 0.60; lam 0, c 0.1 |
 | discriminant | 60.1% (58.7 to 61.6) | 64.4% (62.9 to 65.8) | 60.7% (59.2 to 62.2) | 65.3% (63.9 to 66.8) | 91.6% (90.8 to 92.5) | shrinkage 1; alpha 0.45; lam 0, c 0.1 |
-| discriminant + sentences | 91.0% (90.1 to 91.8) | 97.2% (96.7 to 97.7) | 90.8% (90.0 to 91.7) | 97.5% (97.0 to 98.0) | 98.4% (98.0 to 98.8) | shrinkage 1, species_sci, gamma 3; alpha 0.90; lam 2, c 1 |
+| discriminant + sentences | 90.9% (90.1 to 91.8) | 97.2% (96.7 to 97.7) | 90.9% (90.0 to 91.7) | 97.5% (97.0 to 98.0) | 98.4% (98.0 to 98.8) | shrinkage 1, species_sci, gamma 3; alpha 0.90; lam 2, c 1 |
 
 | Kind of eye from | Right kind | Called `person` | Called `none` |
 |---|---:|---:|---:|
@@ -67,7 +67,7 @@ Fitted on 1226 photos of 574 species (`images/alachua-2025 (two thirds of val)`)
 
 | Species head | Top-1 | Top-5 | Top-1 with prior | Top-5 with prior | Kind from summed species | Chosen on the tuning photos |
 |---|---:|---:|---:|---:|---:|---|
-| sentences | 23.0% (21.8 to 24.3) | 40.2% (38.7 to 41.6) | 35.1% (33.7 to 36.6) | 57.1% (55.7 to 58.6) | 82.2% (81.1 to 83.3) | species_taxon_com; alpha 0.75; lam 0, c 0.1 |
+| sentences | 23.0% (21.8 to 24.3) | 40.1% (38.7 to 41.6) | 35.1% (33.7 to 36.6) | 57.1% (55.7 to 58.6) | 82.2% (81.1 to 83.3) | species_taxon_com; alpha 0.75; lam 0, c 0.1 |
 | prototypes | 27.5% (26.1 to 28.9) | 43.9% (42.4 to 45.4) | 30.1% (28.7 to 31.5) | 45.7% (44.2 to 47.2) | 83.9% (82.8 to 85.0) | class means; alpha 0.38; lam 0, c 0.1 |
 | prototypes + sentences | 33.1% (31.7 to 34.6) | 49.2% (47.8 to 50.8) | 36.4% (34.9 to 37.8) | 58.8% (57.2 to 60.2) | 86.5% (85.5 to 87.5) | species_taxon_com, beta 8, bias for species without photos 0.8; alpha 1.00; lam 0, c 0.1 |
 | discriminant | 32.5% (31.1 to 34.0) | 45.2% (43.7 to 46.8) | 32.6% (31.2 to 34.0) | 45.4% (43.8 to 46.9) | 82.9% (81.8 to 84.1) | shrinkage 0.3; alpha 0.02; lam 0, c 0.1 |
@@ -85,16 +85,16 @@ Fitted on 1226 photos of 574 species (`images/alachua-2025 (two thirds of val)`)
 
 |  | Kinds head | Rule | t_kind | w_kind | Tuning number | Wildlife tuning photos | Extra tuning photos | Kind right, wildlife test | Kind right, extra test | kind_at | Asserted, wildlife test | Right when asserted | Asserted, extra test | Right when asserted |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | kind phrases | mix | 100 | 0.5 | 85.7% | 86.7% | 84.7% | 85.9% (84.9 to 87.0) | 78.6% (76.3 to 80.9) | 0.75 | 68.5% (67.0 to 69.9) | 96.5% (95.8 to 97.1) | 39.0% (36.1 to 41.8) | 95.2% (93.4 to 97.1) |
-|  | kind phrases | product | 100 | 0.7 | 84.2% | 83.5% | 84.9% | 83.7% (82.5 to 84.8) | 81.2% (79.0 to 83.3) | 0.76 | 77.8% (76.5 to 79.0) | 93.0% (92.2 to 93.9) | 48.9% (46.1 to 51.7) | 94.7% (92.9 to 96.5) |
+|  | kind phrases | mix | 100 | 0.5 | 85.7% | 86.7% | 84.7% | 85.9% (84.9 to 87.0) | 78.6% (76.3 to 80.9) | 0.75 | 68.5% (67.0 to 69.9) | 96.4% (95.8 to 97.1) | 39.0% (36.1 to 41.8) | 95.2% (93.4 to 97.1) |
+|  | kind phrases | product | 100 | 0.7 | 84.2% | 83.5% | 84.9% | 83.7% (82.5 to 84.8) | 81.2% (79.0 to 83.3) | 0.76 | 77.8% (76.5 to 79.0) | 93.0% (92.2 to 93.9) | 49.0% (46.1 to 51.7) | 94.7% (92.9 to 96.5) |
 |  | kind rows fitted on the fitting photos and the extra set (every photo counts the same) | mix | 0.5 | 0.7 | 92.7% | 88.3% | 97.1% | 87.2% (86.2 to 88.2) | 98.3% (97.5 to 99.0) | 0.46 | 80.1% (79.0 to 81.4) | 95.2% (94.5 to 95.9) | 97.3% (96.3 to 98.2) | 99.2% (98.7 to 99.7) |
 |  | kind rows fitted on the fitting photos and the extra set (every photo counts the same) | product | 2 | 0.5 | 92.1% | 87.4% | 96.8% | 87.5% (86.5 to 88.5) | 98.3% (97.5 to 99.0) | 0.85 | 80.9% (79.7 to 82.1) | 94.7% (93.9 to 95.4) | 98.0% (97.2 to 98.7) | 99.1% (98.5 to 99.6) |
-|  | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
+|  | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.1% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
 |  | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | product | 1 | 0.7 | 92.4% | 88.0% | 96.8% | 87.0% (86.0 to 88.1) | 98.3% (97.5 to 99.0) | 0.72 | 81.3% (80.2 to 82.6) | 94.7% (94.0 to 95.5) | 97.7% (96.9 to 98.5) | 99.0% (98.4 to 99.5) |
 |  | kind rows fitted on the fitting photos and the extra set (every kind counts the same) | mix | 0.5 | 0.7 | 92.2% | 87.6% | 96.8% | 87.0% (86.0 to 88.0) | 98.1% (97.3 to 98.8) | 0.51 | 78.7% (77.5 to 80.0) | 95.2% (94.5 to 95.9) | 93.4% (91.9 to 94.8) | 99.4% (99.0 to 99.7) |
 |  | kind rows fitted on the fitting photos and the extra set (every kind counts the same) | product | 2 | 0.5 | 92.3% | 88.1% | 96.4% | 86.9% (85.9 to 88.0) | 97.9% (97.0 to 98.6) | 0.86 | 81.2% (80.0 to 82.4) | 94.7% (93.9 to 95.4) | 97.3% (96.4 to 98.2) | 98.9% (98.3 to 99.4) |
-| **chosen** | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
-| what the wildlife photos alone would choose | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
+| **chosen** | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.1% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
+| what the wildlife photos alone would choose | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 92.8% | 88.7% | 97.0% | 87.3% (86.3 to 88.3) | 98.1% (97.3 to 98.8) | 0.50 | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) |
 
 The chosen setting on the extra set's test photos, by kind (no species is named in this computation):
 
@@ -160,7 +160,7 @@ Fitted on 1226 photos of 574 species (`images/alachua-2025 (two thirds of val)`)
 |  | kind phrases | mix | 100 | 0.5 | 81.7% | 78.8% | 84.7% | 76.3% (75.0 to 77.6) | 83.3% (81.2 to 85.4) | 0.71 | 44.0% (42.6 to 45.6) | 95.1% (94.1 to 96.0) | 39.0% (36.3 to 41.7) | 96.5% (94.8 to 98.1) |
 |  | kind phrases | product | 100 | 0.7 | 80.4% | 79.1% | 81.7% | 75.3% (73.9 to 76.6) | 83.0% (80.9 to 85.2) | 0.93 | 27.3% (25.9 to 28.7) | 95.7% (94.5 to 96.9) | 15.4% (13.5 to 17.5) | 96.3% (93.2 to 99.0) |
 |  | kind rows fitted on the fitting photos and the extra set (every photo counts the same) | mix | 0.5 | 0.7 | 86.6% | 79.1% | 94.0% | 78.6% (77.3 to 79.8) | 96.9% (95.8 to 97.8) | 0.50 | 51.3% (49.8 to 52.9) | 93.9% (92.8 to 94.9) | 91.4% (89.8 to 92.8) | 98.9% (98.3 to 99.5) |
-|  | kind rows fitted on the fitting photos and the extra set (every photo counts the same) | product | 2 | 0.7 | 86.3% | 78.9% | 93.7% | 77.2% (76.0 to 78.4) | 96.5% (95.5 to 97.5) | 0.94 | 57.2% (55.7 to 58.8) | 92.9% (91.8 to 93.9) | 95.7% (94.5 to 96.7) | 98.5% (97.8 to 99.2) |
+|  | kind rows fitted on the fitting photos and the extra set (every photo counts the same) | product | 2 | 0.7 | 86.3% | 78.9% | 93.7% | 77.2% (76.0 to 78.4) | 96.5% (95.5 to 97.5) | 0.94 | 57.2% (55.7 to 58.8) | 92.9% (91.8 to 93.9) | 95.6% (94.5 to 96.7) | 98.5% (97.8 to 99.2) |
 |  | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | mix | 0.5 | 0.7 | 87.3% | 80.7% | 94.0% | 78.6% (77.3 to 79.8) | 96.8% (95.8 to 97.7) | 0.54 | 49.9% (48.4 to 51.6) | 95.3% (94.4 to 96.2) | 87.9% (86.0 to 89.7) | 99.3% (98.7 to 99.7) |
 |  | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number) | product | 1 | 0.7 | 86.4% | 80.3% | 92.5% | 77.9% (76.6 to 79.2) | 96.3% (95.2 to 97.3) | 0.80 | 54.1% (52.6 to 55.8) | 94.3% (93.4 to 95.3) | 93.5% (92.0 to 94.8) | 98.8% (98.1 to 99.3) |
 |  | kind rows fitted on the fitting photos and the extra set (every kind counts the same) | mix | 0.5 | 0.5 | 87.4% | 81.8% | 92.9% | 79.5% (78.3 to 80.8) | 96.4% (95.3 to 97.4) | 0.53 | 52.6% (51.1 to 54.1) | 95.4% (94.5 to 96.2) | 70.2% (67.7 to 72.8) | 99.3% (98.7 to 99.8) |

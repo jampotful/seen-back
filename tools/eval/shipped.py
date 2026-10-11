@@ -36,8 +36,11 @@ ap.add_argument("--limit", type=int, default=0, help="score only the first N tun
 ap.add_argument("--rule", choices=["product"], help="score the slot under the product rule (what build 6 of the page computes) with the settings in fusion_if_rule_product; the thresholds found are written there")
 ap.add_argument("--vectors", help="score these vectors of the evaluation photos in place of the manifest's (the part after images/, for example alachua-2025.wasm-int8)")
 ap.add_argument("--no-write", action="store_true", help="do not write the thresholds into the slot's manifest")
+ap.add_argument("--as-shipped", action="store_true", help="score the slot with the name_at, offer_at and kind_at its manifest carries (the slot as the page has it); implies --no-write")
 ap.add_argument("--name-bar", type=float, default=0.9, help="name_at is the lowest level from which a named species was right at least this often on the tuning photos; when no level reaches it, the nine-in-ten level")
 a = ap.parse_args()
+if a.as_shipped:
+    a.no_write = True
 name = a.name or os.path.basename(os.path.normpath(a.slot))
 slot = F.load_slot(a.slot)
 man, table = slot["manifest"], slot["table"]
@@ -154,6 +157,19 @@ else:
 man["fusion_kind_at_note"] = ("kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least %d times in 100 on %s. %s" % (
     round(100 * kinds.BAR), " and on ".join("%d %s tuning photos" % (len(e_), n_ if n_ == "wildlife" else "extra-set (coco-kinds)") for n_, _, e_ in tune_sets),
     "No level reached that, so the key is left out and the page asserts every kind." if kind_at is None else "Under it the page should say that it is not sure and offer its three likeliest kinds."))
+if a.as_shipped:
+    # the thresholds the manifest carries replace the ones just set on the tuning photos; the slot is scored as the page has it
+    f0 = on_disk["fusion"]
+    name_at = f0["name_at"] if f0.get("name_at", 2.0) <= 1 else None
+    offer_at = f0["offer_at"] if f0.get("offer_at", 2.0) <= 1 else None
+    kind_at = f0.get("kind_at")
+    man["fusion"]["name_at"], man["fusion"]["offer_at"] = f0.get("name_at", 2.0), f0.get("offer_at", 2.0)
+    if kind_at is None:
+        man["fusion"].pop("kind_at", None)
+    else:
+        man["fusion"]["kind_at"] = kind_at
+    for k_ in ("fusion_thresholds_note", "fusion_kind_at_note"):
+        man[k_] = on_disk.get(k_, "")
 if not a.limit and not a.no_write:
     if a.rule == "product":
         on_disk["fusion_if_rule_product"].update(name_at=man["fusion"]["name_at"], offer_at=man["fusion"]["offer_at"],
@@ -196,6 +212,7 @@ num = {"test_photos": n, "tuning_photos": int(tune.sum()), "name_at": name_at, "
        "top_species_differs_from_direct_computation": differ, "seconds": round(time.time() - t0, 1)}
 # the kind of eye with the answer "not sure": wildlife test photos, and the extra set's test rows beside them
 num["kind_at"] = kind_at
+num["as_shipped"] = bool(a.as_shipped)
 kd_ = {"bar": kinds.BAR, "kind_at": kind_at, "tuned_on": {n_: int(len(e_)) for n_, _, e_ in tune_sets}, "extra_set_vectors_published": XT is not None,
        "fuse_sure_field_differs": int(sure_field_differs),
        "tuning": {n_: kinds.outcome(f_[0], f_[1], f_[2], e_, kind_at) for n_, f_, e_ in tune_sets},
@@ -236,18 +253,18 @@ def pci(v):
 
 
 text = ("The slot holds the head `%s` for `%s` (%s), fitted on `%s`, with %d species rows%s. Every photo's vector (`%s`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). "
-        "Settings: rule `%s`, t_kind %g, w_kind %g, alpha_prior %g. On %d tuning photos (%s) the thresholds came out as name_at %s and offer_at %s. "
+        "Settings: rule `%s`, t_kind %g, w_kind %g, alpha_prior %g. " + ("The thresholds are the ones the slot's manifest carries: name_at %s and offer_at %s. " if a.as_shipped else "On %d tuning photos (%s) the thresholds came out as name_at %s and offer_at %s. ") +
         "On the %d test photos the kind of eye is right for %s; the top species is right for %s and is among the first five for %s. `person` was said for %.2f%% of these photos and `none` for %.2f%%; the set holds neither. "
         "The top species from fuse.py differs from a direct matrix computation on the same files for %d photos.") % (
     evn["head"], evn["model"], evn["choice"], evn["train_vectors"], len(table), ", and a bias a row" if slot["species_bias"] is not None else "", evn["test_vectors"],
-    f.get("rule", "product"), f["t_kind"], f["w_kind"], f["alpha_prior"], len(top_p), evn["tuned_on"],
+    f.get("rule", "product"), f["t_kind"], f["w_kind"], f["alpha_prior"], *(() if a.as_shipped else (len(top_p), evn["tuned_on"])),
     ("%.2f" % name_at) if name_at is not None else "never (no level reached nine in ten)", ("%.2f" % offer_at) if offer_at is not None else "never (no level reached nine in ten)",
     n, pci(num["kind_right"]), pci(num["species_top1"]), pci(num["species_top5"]), 100 * num["called_person"], 100 * num["called_none"], differ)
 pk = lambda v: "–" if not v or v[0] is None else "%.1f%% (%.1f to %.1f)" % (100 * v[0], 100 * v[1], 100 * v[2])
 tw = kd_["test_wildlife"]
 if kind_at is not None:
     text += (" The kinds head is `%s`. With kind_at %.2f (%s), the page asserts a kind for %s of the wildlife test photos and is right for %s of those; for the %s where it is not sure, the true kind is among its three likeliest for %s." % (
-        evn.get("kind_head", "kind phrases"), kind_at, "set on wildlife tuning photos and the extra set's tuning third" if len(tune_sets) > 1 else "set on wildlife tuning photos alone, because the extra set's vectors were not published for this model",
+        evn.get("kind_head", "kind phrases"), kind_at, "as the slot's manifest carries it" if a.as_shipped else "set on wildlife tuning photos and the extra set's tuning third" if len(tune_sets) > 1 else "set on wildlife tuning photos alone, because the extra set's vectors were not published for this model",
         pk(tw["asserted"]), pk(tw["asserted_right"]), pk(tw["not_sure"]), pk(tw["not_sure_true_kind_among_three"])))
     if "test_extra" in kd_:
         tx = kd_["test_extra"]

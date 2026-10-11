@@ -2,7 +2,7 @@
 
 _This file is written by `tools/eval/report.py` from `docs/eval/study1.json`. Rerun the script to change it._
 
-Species rows made from the scientific name; settings chosen on `val`: {"min_n": 1, "lam": 2.0, "c": 1.0, "ratio": 0.012, "t_species": 100, "alpha_prior": 1.2, "species_in_list": 5911, "combinations_tried": 108}. Top-1 90.3% (89.4 to 91.3) without the prior and 92.4% (91.6 to 93.2) with it.
+Species rows made from the scientific name; settings chosen on `val`: {"min_n": 1, "lam": 2.0, "c": 1.0, "ratio": 0.012, "t_species": 100, "alpha_prior": 1.2, "species_in_list": 5911, "combinations_tried": 108}. Top-1 90.4% (89.4 to 91.3) without the prior and 92.4% (91.6 to 93.2) with it.
 
 ## By kind of eye
 
@@ -22,7 +22,7 @@ Species rows made from the scientific name; settings chosen on `val`: {"min_n": 
 | bee | 126 | 89.7% (84.1 to 94.4) | 96.8% (93.7 to 99.2) | 86.5% |
 | insect | 962 | 89.0% (87.0 to 90.8) | 96.8% (95.5 to 97.8) | 87.5% |
 | plant | 1223 | 94.3% (92.9 to 95.4) | 98.1% (97.3 to 98.8) | 91.1% |
-| other | 296 | 88.8% (85.1 to 92.2) | 95.3% (92.6 to 97.6) | 87.2% |
+| other | 296 | 88.9% (85.1 to 92.2) | 95.3% (92.6 to 97.6) | 87.2% |
 
 ## By class
 
@@ -47,7 +47,7 @@ Species rows made from the scientific name; settings chosen on `val`: {"min_n": 
 | Records before 2025 | Photos | Top-1 with prior | Top-5 with prior | Top-1 without prior |
 |---|---:|---:|---:|---:|
 | not in the list | 36 | 0.0% (0.0 to 0.0) | 0.0% (0.0 to 0.0) | 0.0% |
-| 1 or 2 records | 58 | 70.7% (58.6 to 82.8) | 96.5% (91.4 to 100.0) | 79.3% |
+| 1 or 2 records | 58 | 70.7% (58.6 to 82.8) | 96.6% (91.4 to 100.0) | 79.3% |
 | 3 to 9 | 138 | 75.4% (68.1 to 82.6) | 93.5% (89.1 to 97.1) | 81.2% |
 | 10 to 49 | 468 | 87.4% (84.4 to 90.2) | 97.9% (96.4 to 98.9) | 88.2% |
 | 50 to 199 | 1195 | 93.7% (92.3 to 95.1) | 98.7% (98.1 to 99.3) | 91.7% |

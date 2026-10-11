@@ -28,16 +28,16 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 10,
 
 | Kingdom / class | Photos | Top-1 with prior | Top-5 with prior | Top-1 without prior |
 |---|---:|---:|---:|---:|
-| Animalia / Insecta | 1088 | 23.4% (21.0 to 25.9) | 40.5% (37.8 to 43.4) | 12.3% |
+| Animalia / Insecta | 1088 | 23.3% (21.0 to 25.9) | 40.5% (37.8 to 43.4) | 12.3% |
 | Animalia / Aves | 995 | 54.1% (51.1 to 57.2) | 78.1% (75.6 to 80.5) | 45.5% |
-| Plantae / Magnoliopsida | 878 | 18.2% (15.8 to 20.7) | 31.6% (28.7 to 34.6) | 8.2% |
+| Plantae / Magnoliopsida | 878 | 18.2% (15.8 to 20.7) | 31.5% (28.7 to 34.6) | 8.2% |
 | Plantae / Liliopsida | 291 | 12.7% (8.9 to 16.5) | 29.9% (24.4 to 35.4) | 9.3% |
 | Animalia / Squamata | 209 | 45.9% (38.8 to 52.6) | 71.3% (65.1 to 77.0) | 23.9% |
 | Animalia / Arachnida | 154 | 29.2% (22.1 to 37.0) | 47.4% (39.6 to 55.8) | 18.2% |
 | Animalia / Mammalia | 139 | 60.4% (52.5 to 68.3) | 76.3% (69.1 to 83.5) | 42.4% |
 | Animalia / Crocodylia | 110 | 81.8% (74.6 to 88.2) | 95.5% (90.9 to 99.1) | 62.7% |
 | Animalia / Amphibia | 101 | 38.6% (29.7 to 47.5) | 70.3% (61.4 to 79.2) | 20.8% |
-| Animalia / Testudines | 59 | 49.1% (37.3 to 62.7) | 83.0% (72.9 to 91.5) | 30.5% |
+| Animalia / Testudines | 59 | 49.2% (37.3 to 62.7) | 83.1% (72.9 to 91.5) | 30.5% |
 | Fungi / Agaricomycetes | 39 | 20.5% (7.7 to 33.3) | 41.0% (25.6 to 56.4) | 7.7% |
 | Plantae / Polypodiopsida | 38 | 28.9% (15.8 to 44.7) | 50.0% (34.2 to 65.8) | 7.9% |
 | all other classes | 96 | 29.2% (19.8 to 38.5) | 49.0% (38.5 to 59.4) | 10.4% |
@@ -64,7 +64,7 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 10,
 | 05 | 383 | 34.2% (29.8 to 38.9) | 50.4% (45.4 to 55.6) | 23.0% |
 | 06 | 317 | 35.6% (30.6 to 41.0) | 51.1% (45.4 to 56.8) | 24.3% |
 | 07 | 384 | 31.8% (27.1 to 36.5) | 48.2% (43.2 to 52.9) | 22.1% |
-| 08 | 368 | 29.3% (24.7 to 34.0) | 47.5% (42.7 to 52.7) | 18.5% |
+| 08 | 368 | 29.3% (24.7 to 34.0) | 47.6% (42.7 to 52.7) | 18.5% |
 | 09 | 454 | 34.8% (30.4 to 39.2) | 55.3% (50.7 to 59.9) | 21.8% |
 | 10 | 227 | 30.4% (24.7 to 36.1) | 52.4% (46.3 to 58.6) | 16.7% |
 | 11 | 258 | 33.3% (27.5 to 39.1) | 55.8% (49.6 to 61.6) | 23.6% |
