@@ -1,0 +1,49 @@
+
+=== 09:00:59 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1263       12455          41        2632       14725
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 9V45 96-Core Processor
+Flags: avx2 avx512_vnni avx512bw avx512f avx_vnni 
+
+=== 09:00:59 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 8 | index.html 214821 bytes | artifact 212243 bytes | selftest.js 44338 bytes
+build ok
+214859 index.html
+44338 selftest.js
+
+=== 09:00:59 playwright 1.56.0: chromium
+added 2 packages in 1s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 09:01:25 resume_probe.js: chromium
+resume probe chromium: exit 0
+version 141.0.7390.37 error None
+before {"t": 14588, "ready": "complete", "have": "getting", "kept": 300186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": ["large-say yes"], "line": "Getting the larger model: 0 of 1 MB."}
+asked before ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01"]
+ after {"t": 1297, "ready": "complete", "have": "", "kept": 0, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "", "at": 1}
+ after {"t": 2382, "ready": "complete", "have": "", "kept": 0, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "", "at": 2}
+ after {"t": 3453, "ready": "complete", "have": "getting", "kept": 282686, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 3}
+ after {"t": 4475, "ready": "complete", "have": "getting", "kept": 325186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 4}
+ after {"t": 5547, "ready": "complete", "have": "getting", "kept": 375186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 6}
+ after {"t": 6600, "ready": "complete", "have": "getting", "kept": 430186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 7}
+ after {"t": 7668, "ready": "complete", "have": "getting", "kept": 480186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 0 of 1 MB.", "at": 8}
+ after {"t": 8683, "ready": "complete", "have": "getting", "kept": 535186, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 9}
+ after {"t": 9691, "ready": "complete", "have": "getting", "kept": 565380, "state": "idle", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Getting the larger model: 1 of 1 MB.", "at": 10}
+ after {"t": 10719, "ready": "complete", "have": "getting", "kept": 848060, "state": "loading", "why": "", "fail": "", "getFail": "", "choice": "yes", "online": true, "diag": [], "line": "Checking the larger model.", "at": 11}
+ after {"t": 11758, "ready": "complete", "have": "kept", "kept": 848060, "state": "ready", "why": "", "fail": "", "getFail": "", "choice": "kept", "online": true, "diag": ["large-ready standin-big 1676ms kept", "large-kept standin-big 848060"], "line": "The larger model is on this phone.", "at": 12}
+last {"t": 11758, "ready": "complete", "have": "kept", "kept": 848060, "state": "ready", "why": "", "fail": "", "getFail": "", "choice": "kept", "online": true, "diag": ["large-ready standin-big 1676ms kept", "large-kept standin-big 848060"], "line": "The larger model is on this phone.", "at": 12}
+asked after ["test/rec/models/standin-big/vision.int8.onnx.part00", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part01", "test/rec/models/standin-big/vision.int8.onnx.part02"]
+kept ['part/SHA?bytes=282686', 'manifest.json', 'part/SHA?bytes=282694', 'part/SHA?bytes=282680', 'species.f16.bin?v=4ed3e55a76221c6e', 'species.json?v=4ed3e55a76221c6e', 'whole/SHA']
+console ["warning: [GroupMarkerNotSet(crbug.com/242999)!:A0702000B4300000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag", "warning: [.WebGL-0x3b1c0013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x3b1c0013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x3b1c0013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", "warning: [.WebGL-0x3b1c0013ce00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", "warning: Canvas2D: Multiple readback
