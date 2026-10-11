@@ -17,6 +17,7 @@ if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/buil
 python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 
 case "${GITHUB_REF_NAME:-}" in run/engines/mac-rec*) ONLY_REC=1 ;; *) ONLY_REC=0 ;; esac
+case "${GITHUB_REF_NAME:-}" in run/engines/mac-st*) ONLY_ST=1 ;; *) ONLY_ST=0 ;; esac   # only the self-test in Playwright WebKit, twice per size
 if [ "$ONLY_REC" = 1 ]; then                    # a branch run/engines/mac-rec*: only check_rec.js in WebKit, with the patch for the camera refusal
   step "check_rec.js only (${GITHUB_REF_NAME}): its server on 8782, Playwright WebKit"
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
@@ -35,6 +36,7 @@ if [ "$ONLY_REC" = 1 ]; then                    # a branch run/engines/mac-rec*:
   exit 0
 fi
 
+if [ "$ONLY_ST" != 1 ]; then
 step "iPhone simulator: boot it now, it takes a while"
 UDID=$(xcrun simctl list devices available -j | python3 -I -c "
 import json, sys
@@ -42,6 +44,7 @@ d = json.load(sys.stdin)['devices']
 c = sorted((rt, x['udid']) for rt, xs in d.items() for x in xs if x['name'] == 'iPhone 17' and x.get('isAvailable', True))
 print(c[-1][1] if c else '')")
 echo "iPhone 17: ${UDID:-none found}"; [ -n "$UDID" ] && xcrun simctl boot "$UDID" 2>&1
+fi
 
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
@@ -57,6 +60,7 @@ mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit 
 export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -3
 
+if [ "$ONLY_ST" != 1 ]; then
 step "check_rec.js, every check, stand-in model: webkit (macOS)"
 t0=$(date +%s); BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit.json" 2> "$OUT/rec/check_rec-webkit.err.txt"
 echo "check_rec webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit.json"; tail -c 400 "$OUT/rec/check_rec-webkit.err.txt"
@@ -76,8 +80,14 @@ else echo "(ci/engines/patches/check_rec-int8-cosine.patch is already in test/re
 
 step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: webkit (macOS)"
 BROWSER=webkit PORT=8782 limit 400 node test/engines/rec_probe.js > "$OUT/rec/probe-webkit.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-webkit.json"
+fi
 step "self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop"
 PORT=8781 OUT="$OUT/shots" BROWSERS=webkit VIEWPORTS=phone,desktop LABEL=macos LIMIT_MS=300000 EXTRA="$RECQ" node test/engines/run.js
+if [ "$ONLY_ST" = 1 ]; then
+  mkdir -p "$OUT/shots2"; step "self-test with the recognizer phase again: Playwright WebKit (macOS) x phone, desktop"
+  PORT=8781 OUT="$OUT/shots2" BROWSERS=webkit VIEWPORTS=phone,desktop LABEL=macos LIMIT_MS=300000 EXTRA="$RECQ" node test/engines/run.js
+  step "summary"; python3 -I ci/engines/summarize.py "$OUT" macos; exit 0
+fi
 
 step "self-test with the recognizer phase: real Safari through safaridriver"
 sudo safaridriver --enable 2>&1; echo "safaridriver --enable: exit $?"
