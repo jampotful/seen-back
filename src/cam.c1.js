@@ -172,7 +172,8 @@
   function showName() {
     $('rvName').textContent = shownName(); $('rvSci').textContent = (S.named && S.named.scientific) || '';
     $('rvCount').textContent = S.named && S.named.again ? 'Met ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'A new kind of eye' : S.nov === 'name' ? 'First meeting' : S.nov === 'again' ? 'Met before' : '';
-    $('rvWarn').textContent = S.eyes !== 'person' && guessed(S.eyes) ? 'Part of what follows is a guess.' : '';
+    var mNow = S.meetingId ? record.filter(function (r) { return r.id === S.meetingId; })[0] : null;
+    $('rvWarn').textContent = S.eyes !== 'person' && mNow ? lentLine(mNow) : '';      // the week, said once at the meeting; what is a guess is marked on the name and in its sheet
     $('reveal').classList.add('show');
     clearTimeout(nameTimer); nameTimer = setTimeout(function () { $('reveal').classList.remove('show'); }, calm ? 1500 : 2500);
   }

@@ -256,14 +256,14 @@ async function meet(page, name) {
     r.sameName = await page.evaluate(() => window.__seenBack.offerList([{ sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Limenitis astyanax', en: 'Red-spotted Admiral' },
       { sci: 'Limenitis arthemis', en: 'Red-spotted Admiral' }, { sci: 'Larra bicolor', en: 'Wasp' }]).map((o) => o.label));     // from the real list: Salvia azurea is filed under two GBIF keys; two admirals share a name
     r.errors = errors;
-    const tail = ' Choose one below, or type the kind of animal or plant, such as cat, heron or oak.', b = r.byHand;
+    const tail = '', b = r.byHand;
     done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great Blue Heron' && before === 1
       && r.odd.claim && !r.odd.eyes && r.odd.sub === 'The recognizer is not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
       && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'It may be one of these kinds.' && r.sheet.kindsShown
       && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? w.offers[i] + ' (' + r.sheet.last.offerSci[i] + ')' : w.offers[i])) && new Set(r.sheet.offers).size === r.sheet.offers.length
       && r.sameName.join() === 'giant blue sage,Red-spotted Admiral (Limenitis astyanax),Red-spotted Admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
-      && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === 'Choose one below, or type the kind of animal or plant, such as cat, heron or oak.'
+      && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === ''
       && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
       && b.under.sure === false && b.under.kind === 'wader' && b.under.offered.join() === 'wader,plant,bird' && b.under.named === null && b.under.offers[0] === 'Great Blue Heron'
       && b.at.sure === true && b.at.named === 'Great Blue Heron' && b.at.offered.length === 0 && b.noThreshold.sure === true && b.noThreshold.offered.length === 0
@@ -287,7 +287,7 @@ async function meet(page, name) {
       await ctx.close();
     }
     { // a rule this build does not know is refused in words, and so is a bias file cut short
-      const tail = ' So you tell it. Type the kind of animal or plant, such as cat, heron or oak.';
+      const tail = ' So you tell it.';
       const a = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.unknown-rule.json'); await begin(a.page); r.unknownRule = (await meet(a.page, 'heron.png')).sub; r.unknownRuleWhy = (await about(a.page)).fail; await a.ctx.close();
       await ctl('reset=1'); await ctl('cut=' + encodeURIComponent('species\\.bias'));
       const b = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await begin(b.page); r.biasCutShort = (await meet(b.page, 'heron.png')).sub; r.biasCutShortWhy = (await about(b.page)).fail; await b.ctx.close(); await ctl('reset=1');
@@ -374,7 +374,7 @@ async function meet(page, name) {
     r.next = await meet(page, 'stripes.png'); r.buttonNext = await page.locator('#barType').isVisible();   // the next photo is recognized, with no button
     r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'type-instead').length); r.errors = errors;
     done('typeit', r, !r.buttonBefore && /^Getting the recognizer: \d+ of 15 MB\.$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
-      && r.sub === 'The recognizer keeps downloading meanwhile. Type the kind of animal or plant, such as cat, heron or oak.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
+      && r.sub === 'The recognizer keeps downloading meanwhile.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
       && r.typed.eyes === 'wader' && r.typed.named.by === 'you' && r.typed.named.common === 'Heron' && r.after.eyes === 'wader' && r.after.named.by === 'you' && r.after.screen === 'askView' && r.record.length === 1 && r.record[0] === 'Heron|you|wader'
       && r.next.eyes === 'insect' && !r.buttonNext && r.trace === 1 && !errors.length);
     await ctl('reset=1'); await ctx.close();
@@ -550,7 +550,7 @@ async function meet(page, name) {
       r.fromSheet.errors = errors;
       all('fromSheet', /^Nothing alive was found/.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask a larger model on a server' && r.fromSheet.sentBefore === 0 && /made smaller, would be sent to a server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
         && r.fromSheet.after === 'wader|Great Egret|service' && r.fromSheet.record[0] === 'Great Egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
-        && r.fromSheet.faint.sub === 'The larger model could not name it. Type the kind of animal or plant, such as cat, heron or oak.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf Fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
+        && r.fromSheet.faint.sub === 'The larger model could not name it.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf Fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
       await ctx.close();
     }
     fake.reset();
@@ -620,8 +620,8 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
       await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
       all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
-      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. It takes several seconds a photo on a computer. No phone has been timed yet.'
-        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /can be changed, and the model deleted, under “About this build”/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
+      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It names the species. About ' + MB + ' MB, downloaded once, kept on this ' + d + '. Photos stay here. It takes several seconds a photo on a computer. No phone has been timed yet.'
+        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /^It can be deleted under “About this build”\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
       all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
       all('never', r.never.choice === 'no' && r.never.line === '');
@@ -696,7 +696,7 @@ async function meet(page, name) {
       r.fromSheet.after = await page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), link: !document.getElementById('claimAskRow').hidden, eyes: window.__seenBack.S.eyes }));
       r.fromSheet.reference = E('wall.png'); await page.locator('#claimKinds button').first().tap(); await page.waitForTimeout(300); const a6 = await st(page); r.fromSheet.chosen = a6.eyes + '|' + a6.named.by;
       all('fromSheet', /^Nothing alive was found in that photo\. So you tell it\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Look more closely, with the larger model on this ' + d
-        && r.fromSheet.after.sub === 'The larger model is not sure what that is. Choose one below, or type the kind of animal or plant, such as cat, heron or oak.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
+        && r.fromSheet.after.sub === 'The larger model is not sure what that is.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
         && r.fromSheet.chosen === E('wall.png').kindOffers[0] + '|you');
       await page.close();
       // the small model is not sure, and the larger one is on the device: it is asked before the person is, and its answer is taken
@@ -743,7 +743,7 @@ async function meet(page, name) {
         r.kindsHead.wall = await k.page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: document.querySelectorAll('#claimKinds button').length, link: !document.getElementById('claimAskRow').hidden, last: window.__seenBack.big.about().last.kind, eyes: window.__seenBack.S.eyes }));
         r.kindsHead.errors = k.errors;
         all('kindsHead', r.kindsHead.model === 'standin-big-kinds' && r.kindsHead.heron === 'Great Blue Heron|device-large' && r.kindsHead.parts === 0 && r.kindsHead.wall.last === 'none' && !r.kindsHead.wall.eyes
-          && r.kindsHead.wall.sub === 'Nothing alive was found in that photo. So you tell it. Type the kind of animal or plant, such as cat, heron or oak.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
+          && r.kindsHead.wall.sub === 'Nothing alive was found in that photo. So you tell it.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
       }
       await ctx.close();
     }
@@ -895,7 +895,7 @@ async function meet(page, name) {
     { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // the page arrives, and then the network is gone for everything the recognizer needs
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.offlineFirst = await meet(page, 'heron.png'); await ctl('reset=1'); await ctx.close(); }
     { const { ctx, page } = await open(browser, '&nosw=1&rec=off'); await begin(page); r.off = (await meet(page, 'heron.png')); await ctx.close(); }
-    const tail = ' So you tell it. Type the kind of animal or plant, such as cat, heron or oak.';
+    const tail = ' So you tell it.';
     done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This page has no recognizer yet.' + tail && r.noModel.claim && r.noModel.sub === 'The recognizer’s files are missing.' + tail && r.recovered === 'Great Blue Heron'
       && r.offlineFirst.claim && r.offlineFirst.sub === 'The recognizer could not be downloaded.' + tail && r.off.claim && r.off.sub === 'This page’s recognizer is switched off.' + tail);
   });
@@ -916,7 +916,7 @@ async function meet(page, name) {
       await page.reload();     // the page tries the kept copy by itself once it is idle, finds it is no model, and throws it away; the next photo fetches a good one
       await page.waitForFunction(() => window.__seenBack.rec.about().state === 'failed', null, { timeout: 20000 }); r.keptBadWhy = (await about(page)).fail;
       await begin(page); r.keptBadThenFetchedAgain = (await meet(page, 'heron.png')).shown; await ctx.close(); }
-    const tail = ' So you tell it. Type the kind of animal or plant, such as cat, heron or oak.', sub = 'The recognizer’s file arrived damaged.' + tail;
+    const tail = ' So you tell it.', sub = 'The recognizer’s file arrived damaged.' + tail;
     done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'Great Blue Heron');
     await ctl('reset=1');
   });
@@ -933,7 +933,7 @@ async function meet(page, name) {
     await page.locator('#claimBack').tap(); await page.evaluate(() => window.__seenBack.rec.test.watch(45000));
     r.afterHang = (await meet(page, 'stripes.png')).eyes;
     r.pictureStillDrawn = await page.evaluate(() => window.__seenBack.state().err === 0);
-    const tail = ' So you tell it. Type the kind of animal or plant, such as cat, heron or oak.';
+    const tail = ' So you tell it.';
     done('dying', r, r.before === 'Great Blue Heron' && r.thrown.claim && r.thrown.sub === 'The recognizer stopped working.' + tail && r.afterThrow === 'Great Blue Heron'
       && r.hung.claim && r.hung.sub === 'The recognizer took too long.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
     await ctx.close();
@@ -960,7 +960,7 @@ async function meet(page, name) {
     }
     const base = 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.';
     done('about', r, !r.fitted.none && r.fitted.full === 'The rows the recognizer compares a photo with were fitted on 61,234 ' + base + ' Only photographs in the public domain or under CC BY or CC BY-NC were used.'
-      && r.fitted.bare === 'The rows the recognizer compares a photo with were fitted on ' + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Seen Back, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
+      && r.fitted.bare === 'The rows the recognizer compares a photo with were fitted on ' + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
       && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });

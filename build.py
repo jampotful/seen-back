@@ -57,7 +57,7 @@ INSTALL = (
     '<meta name="mobile-web-app-capable" content="yes">\n'
     '<meta name="apple-mobile-web-app-capable" content="yes">\n'
     '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
-    '<meta name="apple-mobile-web-app-title" content="Seen Back">\n'
+    '<meta name="apple-mobile-web-app-title" content="Regards">\n'
     '<link rel="apple-touch-icon" href="icons/icon-180.png">\n'
     '<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">\n'
 )

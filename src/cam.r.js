@@ -148,22 +148,33 @@
     d = Math.ceil(ms / 864e5);
     return ms <= 36e5 ? 'its eyes go back within the hour' : ms <= 864e5 ? 'its eyes go back within a day' : d >= 7 ? 'its eyes are yours for a week' : 'its eyes are yours for ' + d + ' more days';
   }
+  function lentLine(m) {                           // the same, in a few words, for the moment of meeting and of looking again
+    var ms = lentLeft(m), d = Math.ceil(ms / 864e5);
+    return ms <= 0 ? '' : d >= 7 ? 'Yours for a week' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
+  }
+  function ringOf(m, cls) {                        // a ring that empties over the week
+    var f = Math.max(0, Math.min(1, lentLeft(m) / LEND_MS)), r = 6, c = 2 * Math.PI * r, s = svgEl('svg', { viewBox: '0 0 16 16', 'aria-hidden': 'true' });
+    s.appendChild(svgEl('circle', { cx: 8, cy: 8, r: r, 'class': 'rest' }));
+    s.appendChild(svgEl('circle', { cx: 8, cy: 8, r: r, 'class': 'left', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 8 8)' }));
+    return s;
+  }
   function latestOf(key) { for (var i = 0; i < record.length; i++) if (record[i].key === key) return record[i]; return null; }
   function paintRecordBits() {
-    var t = 'Met so far' + (record.length ? ': ' + record.length : '');
-    $('introRec').textContent = t; $('recAskAnimal').textContent = t;
+    var t = 'Met so far' + (record.length ? ': ' + record.length : ''), n = record.length ? String(record.length) : '';
+    $('introRecN').textContent = n; $('recAskAnimalN').textContent = n; $('introRec').setAttribute('aria-label', t); $('recAskAnimal').setAttribute('aria-label', t);
   }
   function renderRecord() {
     var met = {}, once = {}, n = record.length, k = 0, have = {};
     record.forEach(function (m) { if (KINDS.indexOf(m.key) >= 0) { once[m.key] = 1; if (lent(m)) met[m.key] = 1; } var g = g60Of(m); if (g) have[g] = 1; });
     KINDS.forEach(function (key) { if (met[key]) k++; });
-    $('recordSub').textContent = n ? n + (n === 1 ? ' meeting kept. ' : ' meetings kept. ') + 'Eyes are lent for a week from a meeting, and ' + k + ' of ' + KINDS.length + ' kinds are with you now.' + (k ? ' Tap an eye to look through it.' : ' Meet one again to have its eyes back.')
-      : 'No one yet. Photograph something alive: the meeting is kept here, and its eyes are yours for a week.';
+    $('recordSub').textContent = n ? 'Eyes stay with you for a week.' : 'Photograph something alive. Its eyes are yours for a week.';
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
       b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A kind of eye that has gone back' : 'A kind of eye not yet met');
-      b.appendChild(eyeGlyph(key, !!once[key]));          // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      if (met[key]) { f = Math.max(.02, lentLeft(lm) / LEND_MS); g.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 11, 'class': 'loan', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 12 12)' })); }
+      b.appendChild(g);                                    // the outer ring is the week, emptying
       if (met[key]) b.addEventListener('click', function () { lookAgain(latestOf(key)); });
       strip.appendChild(b);
     });
@@ -172,7 +183,12 @@
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].filter(Boolean).join(' · ')));
+      // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
+      // and shown as a ring with the days left
+      var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].join(' · ')));
+      tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
+      if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -184,9 +200,9 @@
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });
-      li.appendChild(th); li.appendChild(tx); if (lent(m)) li.appendChild(look); li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
+      li.appendChild(th); li.appendChild(tx); if (lent(m)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
     });
-    $('g60Sum').textContent = 'Gainesville’s sixty most recorded in autumn: ' + Object.keys(have).length + ' met';
+    $('g60Sum').textContent = 'Gainesville’s sixty: ' + Object.keys(have).length + ' met';
     var ol = $('g60List'); ol.textContent = '';
     G60.forEach(function (r, i) { var li = el('li', have[i + 1] ? 'on' : '', have[i + 1] ? r[2] + ', ' + r[0] + ' records' : r[0] + ' records'); ol.appendChild(li); });
   }

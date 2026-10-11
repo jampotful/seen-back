@@ -1,4 +1,4 @@
-<title>Seen Back</title>
+<title>Regards</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: a camera. The picture fills the screen and the few controls float on it. One dark look, by choice, in every theme. */
@@ -75,6 +75,24 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .reveal .nm { font-family: var(--serif); font-size: clamp(50px, 14.5vw, 100px); line-height: .98; margin: 0; text-wrap: balance; }
 .reveal .sci { font-family: var(--serif); font-style: italic; font-size: clamp(21px, 5.6vw, 32px); margin: 0; color: var(--dim); }
 .reveal .warn { font-size: 13.5px; margin: 12px 0 0; color: var(--dim); }
+.screen p:empty, .sheet .sub:empty { display: none; }
+.screen .mark { font-family: var(--serif); font-style: italic; font-size: 22px; margin: 0 0 14px; color: var(--dim); letter-spacing: .01em; }
+.loanline { display: flex; align-items: center; gap: 8px; }
+.ring { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .22); background: rgba(0, 0, 0, .25); color: var(--ink); font-size: 15px; font-variant-numeric: tabular-nums; }
+.chip svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.chip span:empty { display: none; }
+.pill.round { width: 64px; height: 64px; padding: 0; justify-content: center; border-radius: 50%; }
+.pill.round svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pill.round svg .dot { fill: currentColor; stroke: none; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.eye .loan { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; opacity: .95; }
+.eye .iris { opacity: .45; }
+.met .days { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.met .days svg { width: 16px; height: 16px; }
+.met .days .rest { fill: none; stroke: rgba(255, 255, 255, .22); stroke-width: 2; }
+.met .days .left { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.met li.gone .th, .met li.gone .nm { opacity: .5; }
 .reveal p:empty { display: none; }
 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
 .flash.go { animation: flash .34s ease-out; }
@@ -121,7 +139,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .eye:disabled { color: rgba(255, 255, 255, .26); cursor: default; }
 .met { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .met:empty { display: none; }
-.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; }
+.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto auto; gap: 10px; align-items: center; }
+.met li.gone { grid-template-columns: 48px minmax(0, 1fr) auto; }
 .met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
 .met .nm { display: block; font-family: var(--serif); font-size: 23px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .met .sm { display: block; font-size: 12.5px; line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
@@ -159,35 +178,35 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- 1. what is about to happen -->
   <section class="screen pad" id="intro">
-    <h1>Photograph something alive. <em>Your camera takes on its way of seeing.</em></h1>
-    <p>Field of view, focus, colour and the pace of movement shift toward what is known of how it sees. Where the camera has to guess, it tells you.</p>
-    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="link" id="introRec" type="button">Met so far</button></div>
+    <p class="mark">Regards</p>
+    <h1>Photograph something alive. <em>See as it sees.</em></h1>
+    <p class="loanline"><svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>Its eyes are yours for a week.</p>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="chip" id="introRec" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button></div>
     <p class="fine" id="introFine"></p>
   </section>
 
   <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
   <section class="screen pad" id="askAnimal" hidden>
-    <h2>First, who you met.</h2>
-    <p>Take its photo, or choose one you have.</p>
+    <h2>Who did you meet?</h2>
     <div class="row">
-      <label class="pill" id="lblAnimalCam">Take a photo<input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblAnimalPick">Choose a photo<input id="inAnimalPick" type="file" accept="image/*"></label>
+      <label class="pill round" id="lblAnimalCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblAnimalPick" aria-label="Choose a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inAnimalPick" type="file" accept="image/*"></label>
     </div>
-    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="link" id="recAskAnimal" type="button">Met so far</button></div>
+    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="chip" id="recAskAnimal" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="recAskAnimalN"></span></button></div>
     <p class="fine" id="askFine"></p>
   </section>
 
   <!-- 3b. then the person's own view, as a clip or a photo -->
   <section class="screen pad" id="askView" hidden>
-    <h2>Now your view.</h2>
+    <h2 id="askViewH">Now your view.</h2>
     <p id="askViewText"></p>
     <div class="row">
-      <label class="pill" id="lblViewClip">Record a clip<input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
+      <label class="pill round" id="lblViewClip" aria-label="Record a clip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle class="dot" cx="12" cy="12" r="4.2"/></svg><input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewPick" aria-label="Choose a clip or a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
     <button class="line" id="svcView" type="button" hidden></button>
-    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
+    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right?</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
 
@@ -233,7 +252,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">It may be one of these.</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
       <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
-      <button class="pill" type="submit">That is what it was</button>
+      <button class="pill" type="submit" aria-label="That is what it was">Done</button>
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
     <div class="row links" id="claimOtherRow" hidden><button class="link" id="claimOther" type="button"></button></div>
@@ -242,7 +261,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- everyone met so far, and the eyes that came with them -->
   <section class="sheet" id="record" hidden aria-label="Met so far">
-    <header><h3>Met so far</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <header><h3>Met</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="recordSub"></p>
     <div class="eyes" id="eyeStrip"></div>
     <ul class="met" id="metList"></ul>
@@ -278,7 +297,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
     <p class="key"><span><i class="mk m"></i>measured in this animal</span><span><i class="mk g"></i>measured in a relative</span><span><i class="mk"></i>a guess</span><span><i class="mk x"></i>left out</span></p>
-    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right? Say what it was</button></div>
+    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right?</button></div>
     <details>
       <summary>Sources, and what is unchecked</summary>
       <ul>
@@ -315,7 +334,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
     <div class="row"><button class="pill" id="bigYes" type="button">Get it</button><button class="pill ghost" id="bigNo" type="button">Not now</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
     <div class="row links"><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">Your answer can be changed, and the model deleted, under “About this build”, in “Met so far”.</p>
+    <p class="note">It can be deleted under “About this build”.</p>
   </section>
 
   <!-- a clip or a still, kept -->
@@ -339,7 +358,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '11';
+  var BUILD = '12';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -876,7 +895,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function showName() {
     $('rvName').textContent = shownName(); $('rvSci').textContent = (S.named && S.named.scientific) || '';
     $('rvCount').textContent = S.named && S.named.again ? 'Met ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'A new kind of eye' : S.nov === 'name' ? 'First meeting' : S.nov === 'again' ? 'Met before' : '';
-    $('rvWarn').textContent = S.eyes !== 'person' && guessed(S.eyes) ? 'Part of what follows is a guess.' : '';
+    var mNow = S.meetingId ? record.filter(function (r) { return r.id === S.meetingId; })[0] : null;
+    $('rvWarn').textContent = S.eyes !== 'person' && mNow ? lentLine(mNow) : '';      // the week, said once at the meeting; what is a guess is marked on the name and in its sheet
     $('reveal').classList.add('show');
     clearTimeout(nameTimer); nameTimer = setTimeout(function () { $('reveal').classList.remove('show'); }, calm ? 1500 : 2500);
   }
@@ -1089,22 +1109,33 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     d = Math.ceil(ms / 864e5);
     return ms <= 36e5 ? 'its eyes go back within the hour' : ms <= 864e5 ? 'its eyes go back within a day' : d >= 7 ? 'its eyes are yours for a week' : 'its eyes are yours for ' + d + ' more days';
   }
+  function lentLine(m) {                           // the same, in a few words, for the moment of meeting and of looking again
+    var ms = lentLeft(m), d = Math.ceil(ms / 864e5);
+    return ms <= 0 ? '' : d >= 7 ? 'Yours for a week' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
+  }
+  function ringOf(m, cls) {                        // a ring that empties over the week
+    var f = Math.max(0, Math.min(1, lentLeft(m) / LEND_MS)), r = 6, c = 2 * Math.PI * r, s = svgEl('svg', { viewBox: '0 0 16 16', 'aria-hidden': 'true' });
+    s.appendChild(svgEl('circle', { cx: 8, cy: 8, r: r, 'class': 'rest' }));
+    s.appendChild(svgEl('circle', { cx: 8, cy: 8, r: r, 'class': 'left', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 8 8)' }));
+    return s;
+  }
   function latestOf(key) { for (var i = 0; i < record.length; i++) if (record[i].key === key) return record[i]; return null; }
   function paintRecordBits() {
-    var t = 'Met so far' + (record.length ? ': ' + record.length : '');
-    $('introRec').textContent = t; $('recAskAnimal').textContent = t;
+    var t = 'Met so far' + (record.length ? ': ' + record.length : ''), n = record.length ? String(record.length) : '';
+    $('introRecN').textContent = n; $('recAskAnimalN').textContent = n; $('introRec').setAttribute('aria-label', t); $('recAskAnimal').setAttribute('aria-label', t);
   }
   function renderRecord() {
     var met = {}, once = {}, n = record.length, k = 0, have = {};
     record.forEach(function (m) { if (KINDS.indexOf(m.key) >= 0) { once[m.key] = 1; if (lent(m)) met[m.key] = 1; } var g = g60Of(m); if (g) have[g] = 1; });
     KINDS.forEach(function (key) { if (met[key]) k++; });
-    $('recordSub').textContent = n ? n + (n === 1 ? ' meeting kept. ' : ' meetings kept. ') + 'Eyes are lent for a week from a meeting, and ' + k + ' of ' + KINDS.length + ' kinds are with you now.' + (k ? ' Tap an eye to look through it.' : ' Meet one again to have its eyes back.')
-      : 'No one yet. Photograph something alive: the meeting is kept here, and its eyes are yours for a week.';
+    $('recordSub').textContent = n ? 'Eyes stay with you for a week.' : 'Photograph something alive. Its eyes are yours for a week.';
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
       b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A kind of eye that has gone back' : 'A kind of eye not yet met');
-      b.appendChild(eyeGlyph(key, !!once[key]));          // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      if (met[key]) { f = Math.max(.02, lentLeft(lm) / LEND_MS); g.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 11, 'class': 'loan', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 12 12)' })); }
+      b.appendChild(g);                                    // the outer ring is the week, emptying
       if (met[key]) b.addEventListener('click', function () { lookAgain(latestOf(key)); });
       strip.appendChild(b);
     });
@@ -1113,7 +1144,12 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       var li = el('li'), th, tx = el('div'), look = el('button', 'ico sm'), x = el('button', 'x', '×');
       if (m.thumb) { th = el('img', 'th'); th.alt = ''; th.src = m.thumb; } else th = el('span', 'th');
       tx.appendChild(el('span', 'nm', m.common));
-      tx.appendChild(el('span', 'sm', [m.sci, labelDate(new Date(m.at)), m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].filter(Boolean).join(' · ')));
+      // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
+      // and shown as a ring with the days left
+      var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by a larger model on a server' : m.by === 'device-large' ? 'named on this device by a larger model' : 'on your word', lentSays(m)].join(' · ')));
+      tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
+      if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
       var sv = svgEl('svg', { viewBox: '0 0 24 24' }); sv.appendChild(svgEl('path', { d: 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z' })); sv.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 2.8 })); look.appendChild(sv);
       look.addEventListener('click', function () { lookAgain(m); });
@@ -1125,9 +1161,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });
-      li.appendChild(th); li.appendChild(tx); if (lent(m)) li.appendChild(look); li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
+      li.appendChild(th); li.appendChild(tx); if (lent(m)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
     });
-    $('g60Sum').textContent = 'Gainesville’s sixty most recorded in autumn: ' + Object.keys(have).length + ' met';
+    $('g60Sum').textContent = 'Gainesville’s sixty: ' + Object.keys(have).length + ' met';
     var ol = $('g60List'); ol.textContent = '';
     G60.forEach(function (r, i) { var li = el('li', have[i + 1] ? 'on' : '', have[i + 1] ? r[2] + ', ' + r[0] + ' records' : r[0] + ' records'); ol.appendChild(li); });
   }
@@ -1946,7 +1982,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   }
   function openClaim(sub) {
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = (sub ? sub + ' ' : '') + (kinds.length ? 'Choose one below, or type' : 'Type') + ' the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
+    $('claimSub').textContent = sub || '';         // the field's own words say what to type $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -1973,8 +2009,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? o.en + ' (' + o.sci + ')' : o.en || o.sci }; });
   }
   function setViewPrompt(key) {
-    $('askViewText').textContent = (coarse ? 'Record a few seconds of what is in front of you, or photograph it.' : 'Choose a clip or a photo of what is in front of you.') +
-      (key === 'person' ? '' : ' It returns as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + ' may take it in.');   // EYES.other.who is "this one", which reads badly here
+    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'Now see as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
+    $('askViewText').textContent = '';
     $('askViewFine').textContent = '';
   }
 
@@ -2240,7 +2276,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
-  if (!coarse) { $('lblAnimalCam').hidden = true; $('lblAnimalPick').className = 'pill'; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true; $('lblViewPick').className = 'pill'; $('lblViewPick').firstChild.nodeValue = 'Choose a clip or a photo'; }
+  if (!coarse) { $('lblAnimalCam').hidden = true; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true;    // one way in, so it is said in words
+    [['lblAnimalPick', 'Choose a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
 
   function toAskAnimal() {
     $('askFine').textContent = inViewer ? 'Inside Claude the camera is closed to this page, so it works from a photo of who you met and a clip of your view. If nothing opens when you tap, open this page in a browser in place of the Claude app.'
@@ -2366,7 +2403,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
-    $('bigSub').textContent = 'It is a larger model that names the species: about ' + z.mb + ' MB, downloaded once and kept on this ' + dev() + '. Photos are not sent anywhere. ' +
+    $('bigSub').textContent = 'It names the species. About ' + z.mb + ' MB, downloaded once, kept on this ' + dev() + '. Photos stay here. ' +
       (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
         : s && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.' + (coarse ? ' No phone has been timed yet.' : '')
         : 'It takes several seconds a photo on a computer. No phone has been timed yet.');   // what was measured, and nothing else
@@ -2652,7 +2689,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     frameLast = now;
   })(0);
   function aboutText() {
-    var a = pocket.about(), st = engine ? engine.state() : null, L = ['Seen Back, build ' + BUILD + '.'], r = a.last, avg = 0;
+    var a = pocket.about(), st = engine ? engine.state() : null, L = ['Regards, build ' + BUILD + '.'], r = a.last, avg = 0;
     frameMs.forEach(function (x) { avg += x; });
     avg = frameMs.length ? avg / frameMs.length : 0;
     if (inViewer) L.push('Recognizer: Claude, inside Claude’s viewer.');

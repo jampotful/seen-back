@@ -97,8 +97,8 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       'beautyberry': 'plant', 'live oak': 'plant', 'wolf spider': 'other', 'armadillo': 'other', 'plant': 'plant', 'ant': 'insect', 'a person': 'person', 'limpkin': 'wader', 'barred owl': 'bird', 'walkingstick': 'insect', 'elephant': '', 'biscuit': '', 'biscuit, a cat': 'cat', 'my dog rex': 'dog' };
     const got = await page.evaluate(c => Object.keys(c).filter(k => window.__seenBack.kindOfName(k) !== c[k]).map(k => k + ' -> ' + window.__seenBack.kindOfName(k) + ' (wanted ' + c[k] + ')'), cases);
     // the sheet "Now your view." says how the view returns, in plain English for every kind (for 'other' it once read "as this one may take it in")
-    const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewText').textContent]; }));
-    view.forEach(([k, t]) => { if (!/ It returns as [^.]+ may take it in\.$/.test(t) || / as this one may /.test(t) || (k === 'other' && !/ It returns as this living thing may take it in\.$/.test(t))) got.push('view prompt for ' + k + ': ' + t); });
+    const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewH').textContent + '|' + document.getElementById('askViewText').textContent]; }));
+    view.forEach(([k, t]) => { if (!/^Now see as [^.|]+\.\|$/.test(t) || / as this one\./.test(t) || (k === 'other' && t !== 'Now see as this living thing.|')) got.push('view prompt for ' + k + ': ' + t); });
     out.lex = { tried: Object.keys(cases).length + view.length, wrong: got }; await ctx.close();
   }
 
@@ -116,12 +116,13 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     const r = { sub: await text(page, 'recordSub') };
     r.eyes = await page.evaluate(() => [...document.querySelectorAll('#eyeStrip .eye')].map(b => (b.disabled ? 0 : 1) + (b.querySelector('.pupil') ? 'p' : '-') + ':' + b.getAttribute('aria-label')).filter(x => !/not yet met/.test(x)));
     r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map(li => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent + ' | look ' + !!li.querySelector('.ico')));
+    r.rings = await page.evaluate(() => document.querySelectorAll('#eyeStrip .eye .loan').length); r.days = await page.evaluate(() => [...document.querySelectorAll('#metList .days')].map((d) => d.textContent));
     await shot(page, 'L1-lent');
     await page.evaluate(() => window.__seenBack.lookAgain && window.__seenBack.lookAgain(window.__seenBack.record()[1])); await page.waitForTimeout(600);
     r.goneStays = await page.evaluate(() => !document.getElementById('record').hidden && window.__seenBack.S.screen);
     await page.locator('#metList li .ico').first().tap(); await page.waitForTimeout(1200); r.lentOpens = (await st(page)).eyes;
     r.errors = errors; out.lent = r;
-    const ok = /^3 meetings kept\. Eyes are lent for a week from a meeting, and 1 of 14 kinds are with you now\. Tap an eye to look through it\.$/.test(r.sub)
+    const ok = r.sub === 'Eyes stay with you for a week.' && r.rings === 1 && r.days.join() === '1d'
       && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A kind of eye that has gone back$/.test(e))
       && /its eyes go back within a day \| look true$/.test(r.rows[0]) && /its eyes have gone back \| look false$/.test(r.rows[1]) && /its eyes have gone back \| look false$/.test(r.rows[2])
       && r.goneStays && r.lentOpens === 'wader' && !errors.length;

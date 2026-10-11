@@ -28,7 +28,7 @@
   }
   function openClaim(sub) {
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = (sub ? sub + ' ' : '') + (kinds.length ? 'Choose one below, or type' : 'Type') + ' the kind of animal or plant, such as cat, heron or oak.'; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
+    $('claimSub').textContent = sub || '';         // the field's own words say what to type $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false);
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'A person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -55,8 +55,8 @@
     return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? o.en + ' (' + o.sci + ')' : o.en || o.sci }; });
   }
   function setViewPrompt(key) {
-    $('askViewText').textContent = (coarse ? 'Record a few seconds of what is in front of you, or photograph it.' : 'Choose a clip or a photo of what is in front of you.') +
-      (key === 'person' ? '' : ' It returns as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + ' may take it in.');   // EYES.other.who is "this one", which reads badly here
+    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'Now see as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
+    $('askViewText').textContent = '';
     $('askViewFine').textContent = '';
   }
 
@@ -322,7 +322,8 @@
   });
   $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
   $('btnBegin').disabled = !engine;
-  if (!coarse) { $('lblAnimalCam').hidden = true; $('lblAnimalPick').className = 'pill'; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true; $('lblViewPick').className = 'pill'; $('lblViewPick').firstChild.nodeValue = 'Choose a clip or a photo'; }
+  if (!coarse) { $('lblAnimalCam').hidden = true; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true;    // one way in, so it is said in words
+    [['lblAnimalPick', 'Choose a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
 
   function toAskAnimal() {
     $('askFine').textContent = inViewer ? 'Inside Claude the camera is closed to this page, so it works from a photo of who you met and a clip of your view. If nothing opens when you tap, open this page in a browser in place of the Claude app.'
@@ -448,7 +449,7 @@
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
-    $('bigSub').textContent = 'It is a larger model that names the species: about ' + z.mb + ' MB, downloaded once and kept on this ' + dev() + '. Photos are not sent anywhere. ' +
+    $('bigSub').textContent = 'It names the species. About ' + z.mb + ' MB, downloaded once, kept on this ' + dev() + '. Photos stay here. ' +
       (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
         : s && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.' + (coarse ? ' No phone has been timed yet.' : '')
         : 'It takes several seconds a photo on a computer. No phone has been timed yet.');   // what was measured, and nothing else
@@ -734,7 +735,7 @@
     frameLast = now;
   })(0);
   function aboutText() {
-    var a = pocket.about(), st = engine ? engine.state() : null, L = ['Seen Back, build ' + BUILD + '.'], r = a.last, avg = 0;
+    var a = pocket.about(), st = engine ? engine.state() : null, L = ['Regards, build ' + BUILD + '.'], r = a.last, avg = 0;
     frameMs.forEach(function (x) { avg += x; });
     avg = frameMs.length ? avg / frameMs.length : 0;
     if (inViewer) L.push('Recognizer: Claude, inside Claude’s viewer.');

@@ -50,7 +50,7 @@
       '#selftest pre,#selftest textarea{font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;color:#cfcfcf;white-space:pre-wrap;word-break:break-all}' +
       '#selftest textarea{width:100%;height:160px;background:#000;border:1px solid #333;box-sizing:border-box}', document.head);
     var root = el('div', '', undefined, document.body); root.id = 'selftest';
-    el('h1', '', 'Seen Back self-test', root);
+    el('h1', '', 'Regards self-test', root);
     var stLine = el('p', '', 'Starting.', root); stLine.className = 'ln';
     var stSum = el('div', '', '', root); stSum.id = 'stSum';
     var stBtns = el('div', '', undefined, root); stBtns.id = 'stBtns'; stBtns.hidden = true;

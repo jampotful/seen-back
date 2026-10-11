@@ -1,4 +1,4 @@
-// Seen Back self-test, build 11: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
+// Seen Back self-test, build 12: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
 (function (I) {
   if (!I) return;
   var $ = I['$'], BUILD = I['BUILD'], EYES = I['EYES'], Engine = I['Engine'], HUMAN = I['HUMAN'], HUMAN_CPD = I['HUMAN_CPD'], ORDER = I['ORDER'], S = I['S'], calm = I['calm'], canvas = I['canvas'], clamp = I['clamp'], coarse = I['coarse'], decode = I['decode'], engine = I['engine'], fxNow = I['fxNow'], go = I['go'], hasCamera = I['hasCamera'], lerp = I['lerp'], makeCanvas = I['makeCanvas'], mix = I['mix'], paramsOf = I['paramsOf'], pocket = I['pocket'], setEyes = I['setEyes'], showStill = I['showStill'], vid = I['vid'];
@@ -54,7 +54,7 @@
       '#selftest pre,#selftest textarea{font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;color:#cfcfcf;white-space:pre-wrap;word-break:break-all}' +
       '#selftest textarea{width:100%;height:160px;background:#000;border:1px solid #333;box-sizing:border-box}', document.head);
     var root = el('div', '', undefined, document.body); root.id = 'selftest';
-    el('h1', '', 'Seen Back self-test', root);
+    el('h1', '', 'Regards self-test', root);
     var stLine = el('p', '', 'Starting.', root); stLine.className = 'ln';
     var stSum = el('div', '', '', root); stSum.id = 'stSum';
     var stBtns = el('div', '', undefined, root); stBtns.id = 'stBtns'; stBtns.hidden = true;

@@ -1,4 +1,4 @@
-<title>Seen Back</title>
+<title>Regards</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: a camera. The picture fills the screen and the few controls float on it. One dark look, by choice, in every theme. */
@@ -75,6 +75,24 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .reveal .nm { font-family: var(--serif); font-size: clamp(50px, 14.5vw, 100px); line-height: .98; margin: 0; text-wrap: balance; }
 .reveal .sci { font-family: var(--serif); font-style: italic; font-size: clamp(21px, 5.6vw, 32px); margin: 0; color: var(--dim); }
 .reveal .warn { font-size: 13.5px; margin: 12px 0 0; color: var(--dim); }
+.screen p:empty, .sheet .sub:empty { display: none; }
+.screen .mark { font-family: var(--serif); font-style: italic; font-size: 22px; margin: 0 0 14px; color: var(--dim); letter-spacing: .01em; }
+.loanline { display: flex; align-items: center; gap: 8px; }
+.ring { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .22); background: rgba(0, 0, 0, .25); color: var(--ink); font-size: 15px; font-variant-numeric: tabular-nums; }
+.chip svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.chip span:empty { display: none; }
+.pill.round { width: 64px; height: 64px; padding: 0; justify-content: center; border-radius: 50%; }
+.pill.round svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pill.round svg .dot { fill: currentColor; stroke: none; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.eye .loan { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; opacity: .95; }
+.eye .iris { opacity: .45; }
+.met .days { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.met .days svg { width: 16px; height: 16px; }
+.met .days .rest { fill: none; stroke: rgba(255, 255, 255, .22); stroke-width: 2; }
+.met .days .left { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.met li.gone .th, .met li.gone .nm { opacity: .5; }
 .reveal p:empty { display: none; }
 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
 .flash.go { animation: flash .34s ease-out; }
@@ -121,7 +139,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .eye:disabled { color: rgba(255, 255, 255, .26); cursor: default; }
 .met { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .met:empty { display: none; }
-.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; }
+.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto auto; gap: 10px; align-items: center; }
+.met li.gone { grid-template-columns: 48px minmax(0, 1fr) auto; }
 .met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
 .met .nm { display: block; font-family: var(--serif); font-size: 23px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .met .sm { display: block; font-size: 12.5px; line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
@@ -159,35 +178,35 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- 1. what is about to happen -->
   <section class="screen pad" id="intro">
-    <h1>Photograph something alive. <em>Your camera takes on its way of seeing.</em></h1>
-    <p>Field of view, focus, colour and the pace of movement shift toward what is known of how it sees. Where the camera has to guess, it tells you.</p>
-    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="link" id="introRec" type="button">Met so far</button></div>
+    <p class="mark">Regards</p>
+    <h1>Photograph something alive. <em>See as it sees.</em></h1>
+    <p class="loanline"><svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>Its eyes are yours for a week.</p>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="chip" id="introRec" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button></div>
     <p class="fine" id="introFine"></p>
   </section>
 
   <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
   <section class="screen pad" id="askAnimal" hidden>
-    <h2>First, who you met.</h2>
-    <p>Take its photo, or choose one you have.</p>
+    <h2>Who did you meet?</h2>
     <div class="row">
-      <label class="pill" id="lblAnimalCam">Take a photo<input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblAnimalPick">Choose a photo<input id="inAnimalPick" type="file" accept="image/*"></label>
+      <label class="pill round" id="lblAnimalCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblAnimalPick" aria-label="Choose a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inAnimalPick" type="file" accept="image/*"></label>
     </div>
-    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="link" id="recAskAnimal" type="button">Met so far</button></div>
+    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="chip" id="recAskAnimal" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="recAskAnimalN"></span></button></div>
     <p class="fine" id="askFine"></p>
   </section>
 
   <!-- 3b. then the person's own view, as a clip or a photo -->
   <section class="screen pad" id="askView" hidden>
-    <h2>Now your view.</h2>
+    <h2 id="askViewH">Now your view.</h2>
     <p id="askViewText"></p>
     <div class="row">
-      <label class="pill" id="lblViewClip">Record a clip<input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
+      <label class="pill round" id="lblViewClip" aria-label="Record a clip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle class="dot" cx="12" cy="12" r="4.2"/></svg><input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewPick" aria-label="Choose a clip or a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
     <button class="line" id="svcView" type="button" hidden></button>
-    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
+    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right?</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
 
@@ -233,7 +252,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">It may be one of these.</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
       <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
-      <button class="pill" type="submit">That is what it was</button>
+      <button class="pill" type="submit" aria-label="That is what it was">Done</button>
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
     <div class="row links" id="claimOtherRow" hidden><button class="link" id="claimOther" type="button"></button></div>
@@ -242,7 +261,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- everyone met so far, and the eyes that came with them -->
   <section class="sheet" id="record" hidden aria-label="Met so far">
-    <header><h3>Met so far</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <header><h3>Met</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="recordSub"></p>
     <div class="eyes" id="eyeStrip"></div>
     <ul class="met" id="metList"></ul>
@@ -278,7 +297,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
     <p class="key"><span><i class="mk m"></i>measured in this animal</span><span><i class="mk g"></i>measured in a relative</span><span><i class="mk"></i>a guess</span><span><i class="mk x"></i>left out</span></p>
-    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right? Say what it was</button></div>
+    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right?</button></div>
     <details>
       <summary>Sources, and what is unchecked</summary>
       <ul>
@@ -315,7 +334,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
     <div class="row"><button class="pill" id="bigYes" type="button">Get it</button><button class="pill ghost" id="bigNo" type="button">Not now</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
     <div class="row links"><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">Your answer can be changed, and the model deleted, under “About this build”, in “Met so far”.</p>
+    <p class="note">It can be deleted under “About this build”.</p>
   </section>
 
   <!-- a clip or a still, kept -->

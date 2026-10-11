@@ -43,9 +43,9 @@ built = {
 }
 json.dump(built, open(os.path.join(d, "built.json"), "w"), indent=1)
 
-readme = """# Seen Back for Android: a debug build
+readme = """# Regards for Android: a debug build
 
-`seen-back-debug.apk` is the Seen Back page of build {build} inside a plain Android WebView. The page's files are packed in the app, and the app serves them to its WebView from inside itself. It was built on a GitHub build machine from commit `{commit}` of https://github.com/{repo} and signed there with a debug key that Gradle made for this one build. The key was thrown away with the machine, and it is in no repository.
+`seen-back-debug.apk` is the Regards page of build {build} inside a plain Android WebView. The page's files are packed in the app, and the app serves them to its WebView from inside itself. It was built on a GitHub build machine from commit `{commit}` of https://github.com/{repo} and signed there with a debug key that Gradle made for this one build. The key was thrown away with the machine, and it is in no repository.
 
 The file is for trying the page on one's own phone. It is a debug build and has not been through Google Play or any other store.
 
@@ -68,7 +68,7 @@ The same build, with the page's check files added, ran in an Android 14 emulator
 2. The browser downloads the file. It may warn that this kind of file can harm the device; choose to download it anyway.
 3. Open the downloaded file. Android asks whether the browser may install unknown apps. Turn that on for the browser in the setting it shows, go back and press Install.
 4. Google Play Protect is likely to warn that it does not recognize the app's developer, because a debug key belongs to no developer it knows, and it may offer to scan the app first. Its dialog has a way to install the app anyway, sometimes under "More details".
-5. Open Seen Back. The first time you press Begin, Android asks for the camera.
+5. Open Regards. The first time you press Begin, Android asks for the camera.
 
 The larger model (309,812,341 bytes) is not in the file. As on the web, the page offers to fetch it and then keeps it in the app's own storage.
 
