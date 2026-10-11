@@ -18,6 +18,30 @@ python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || nod
 
 case "${GITHUB_REF_NAME:-}" in run/engines/mac-rec*) ONLY_REC=1 ;; *) ONLY_REC=0 ;; esac
 case "${GITHUB_REF_NAME:-}" in run/engines/mac-st*) ONLY_ST=1 ;; *) ONLY_ST=0 ;; esac   # only the self-test in Playwright WebKit, twice per size
+case "${GITHUB_REF_NAME:-}" in run/engines/mac-39*) ONLY_39=1 ;; *) ONLY_39=0 ;; esac   # the self-test with the shipped slot (models/pocket, TinyCLIP 39M/16) in WebKit, Safari and the simulator
+case "${GITHUB_REF_NAME:-}" in run/engines/mac-thr*) ONLY_THR=1 ;; *) ONLY_THR=0 ;; esac  # only the threads experiment (ci/engines/threads.sh) in WebKit, Safari and the simulator
+sim_boot() {
+  UDID=$(xcrun simctl list devices available -j | python3 -I -c "
+import json, sys
+d = json.load(sys.stdin)['devices']
+c = sorted((rt, x['udid']) for rt, xs in d.items() for x in xs if x['name'] == 'iPhone 17' and x.get('isAvailable', True))
+print(c[-1][1] if c else '')")
+  echo "iPhone 17: ${UDID:-none found}"; [ -n "$UDID" ] && xcrun simctl boot "$UDID" 2>&1
+}
+if [ "$ONLY_THR" = 1 ]; then
+  step "threads experiment only (${GITHUB_REF_NAME}): boot the simulator, Playwright WebKit, safaridriver"
+  sim_boot
+  mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
+  export NODE_PATH="$PW/node_modules"
+  node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -3
+  sudo safaridriver --enable 2>&1; echo "safaridriver --enable: exit $?"
+  safaridriver -p 4444 > "$OUT/safaridriver-log.txt" 2>&1 &
+  [ -n "$UDID" ] && limit 240 xcrun simctl bootstatus "$UDID" -b 2>&1 | tail -2
+  ENGINES="webkit safari sim" UDID="$UDID" OUT="$OUT" bash ci/engines/threads.sh
+  [ -n "$UDID" ] && xcrun simctl shutdown "$UDID" 2>&1
+  step "shrink pictures"; python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow && /tmp/venv/bin/python -I ci/engines/shrink.py "$OUT"; du -sh "$OUT"
+  exit 0
+fi
 if [ "$ONLY_REC" = 1 ]; then                    # a branch run/engines/mac-rec*: only check_rec.js in WebKit, with the patch for the camera refusal
   step "check_rec.js only (${GITHUB_REF_NAME}): its server on 8782, Playwright WebKit"
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
@@ -46,9 +70,14 @@ print(c[-1][1] if c else '')")
 echo "iPhone 17: ${UDID:-none found}"; [ -n "$UDID" ] && xcrun simctl boot "$UDID" 2>&1
 fi
 
+if [ "$ONLY_39" = 1 ]; then
+  step "the shipped slot: models/pocket ($(python3 -I -c "import json; m=json.load(open('models/pocket/manifest.json')); print(m.get('id') or m.get('model') or '?')")), and four photos from test/rec/photos"
+  RECQ="&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg"
+else
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
 RECQ="&rec=ci-rec/slot&recphotos=$PH&recexpect=ci-rec/slot/expect.json"
+fi
 
 step "servers: the self-test's on 8781, the recognizer checks' own on 8782"
 python3 -I ci/engines/serve.py 8781 "$ROOT" "$OUT/reports" > "$OUT/serve-log.txt" 2>&1 &
@@ -60,7 +89,7 @@ mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit 
 export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -3
 
-if [ "$ONLY_ST" != 1 ]; then
+if [ "$ONLY_ST" != 1 ] && [ "$ONLY_39" != 1 ]; then
 step "check_rec.js, every check, stand-in model: webkit (macOS)"
 t0=$(date +%s); BROWSER=webkit PORT=8782 limit 1500 node test/rec/check_rec.js > "$OUT/rec/check_rec-webkit.json" 2> "$OUT/rec/check_rec-webkit.err.txt"
 echo "check_rec webkit: exit $? in $(( $(date +%s) - t0 )) s"; tail -1 "$OUT/rec/check_rec-webkit.json"; tail -c 400 "$OUT/rec/check_rec-webkit.err.txt"

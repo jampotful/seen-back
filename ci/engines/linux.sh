@@ -9,6 +9,7 @@ exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 PART="${PART:-chromium}"; PW=/tmp/pw; PWV=1.56.0
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROBE_ONLY=0 ;; esac   # only rec_probe.js in WebKit, with and without phone emulation
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-thr*) THR_ONLY=1 ;; *) THR_ONLY=0 ;; esac   # only the threads experiment (ci/engines/threads.sh)
 if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
@@ -22,6 +23,7 @@ export NODE_PATH="$PW/node_modules"
 node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | grep -v -E "[0-9]+%" | tail -6
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
+if [ "$THR_ONLY" = 1 ]; then ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh; exit 0; fi
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
   sleep 1; curl -s -o /dev/null -w "8782 -> %{http_code}\n" http://127.0.0.1:8782/index.html
@@ -85,5 +87,6 @@ for B in $BROWSERS; do
   fi
 done
 
+ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh
 step "summary"; python3 -I ci/engines/summarize.py "$OUT" "linux-$PART"
 step "shrink pictures"; /tmp/venv/bin/python -I ci/engines/shrink.py "$OUT"; du -sh "$OUT"
