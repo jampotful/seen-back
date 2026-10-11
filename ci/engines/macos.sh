@@ -28,6 +28,20 @@ c = sorted((rt, x['udid']) for rt, xs in d.items() for x in xs if x['name'] == '
 print(c[-1][1] if c else '')")
   echo "iPhone 17: ${UDID:-none found}"; [ -n "$UDID" ] && xcrun simctl boot "$UDID" 2>&1
 }
+case "${GITHUB_REF_NAME:-}" in run/engines/mac-lead*) ONLY_LEAD=1 ;; *) ONLY_LEAD=0 ;; esac  # only the WebKit lead: offline_repeat.js in macOS WebKit
+if [ "$ONLY_LEAD" = 1 ]; then
+  step "the WebKit lead only (${GITHUB_REF_NAME}): offline_repeat.js in Playwright WebKit on macOS"
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
+  mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
+  export NODE_PATH="$PW/node_modules"
+  node "$PW/node_modules/playwright/cli.js" install webkit 2>&1 | grep -v -E "[0-9]+%" | tail -3
+  BROWSER=webkit PORT=8782 TRIALS=6 VARIANTS=desk,phone limit 900 node test/engines/offline_repeat.js > "$OUT/rec/offline-repeat-webkit.json" 2> "$OUT/rec/offline-repeat-webkit.err.txt"; echo "offline_repeat: exit $?"
+  python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('failed', d.get('failed'), 'of', len(d.get('trials', [])))
+for t in d.get('trials', []): print(t['variant'], t['trial'], json.dumps(t.get('offline'))[:160], '| after', json.dumps(t.get('after'))[:260], '| asked', t.get('asked'), '| errors', json.dumps(t.get('errors'))[:200])" "$OUT/rec/offline-repeat-webkit.json"
+  exit 0
+fi
 if [ "$ONLY_THR" = 1 ]; then
   step "threads experiment only (${GITHUB_REF_NAME}): boot the simulator, Playwright WebKit, safaridriver"
   sim_boot
