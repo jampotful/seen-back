@@ -408,13 +408,13 @@ if m39 and m8 and WV in m39["variants"] and WV in m8["variants"]:
         if a39 and a8:
             n39, n8 = a39["numbers"], a8["numbers"]
             txt += ("What can ship before then is each model's sentence rows with the prior. Scored as the page would, the 39M slot gets the kind of eye right for %s, names a species for %s of test photos and is right for %s of those names; the 8M slot gets %s, %s and %s. "
-                    "Recommendation until trained heads are measured: TinyCLIP 39M/16, which is ahead on the kind of eye and on the share of photos it can name by more than the intervals, and TinyCLIP 8M/16 only if the download has to stay near 10 MB." % (
+                    "Which of the two ships is worked out in the next lines." % (
                         pci(n39["kind_right"]), pc(n39["named"][0]), pci(n39["named_right"]), pci(n8["kind_right"]), pc(n8["named"][0]), pci(n8["named_right"])))
     T += ["- **The pocket model.** " + txt]
 DEC = load("decision-pocket.json")
 if DEC:
     d = DEC["deciding_difference"]
-    T += ["- **The pocket model, by the rule set down beforehand** (`tools/eval/decide.py`). %s Compared: the slots `%s` and `%s`, scored through `fuse.py` on the same photos. %s The slot to ship is `%s`, published as the branch `%s`.%s" % (
+    T += ["- **The pocket model, by the rule set down beforehand** (`tools/eval/decide.py`). %s Compared: the slots `%s` and `%s`, scored through `fuse.py` on the same photos. %s By this rule the slot is `%s` (branch `%s`).%s" % (
         DEC["rule"], DEC["slots_compared"]["tinyclip-39m-16"], DEC["slots_compared"]["tinyclip-8m-16"], DEC["why"], DEC["slot"], DEC["branch"],
         (" This choice is provisional: it was made %s. `tools/eval/decide.py` makes it again from the trained slots when they exist." % " and ".join(
             ([("from sentence-made slots, before heads fitted on the training photos were measured")] if DEC["train"] != "alachua-pre2025" else []) +
@@ -457,7 +457,7 @@ if live:
 if VAR:
     best = min(VAR.items(), key=lambda kv: -kv[1]["variant"]["species_top1"][0])
     T += ["- **The larger model on the device.** The head files are the slot `%s` with name_at %g and offer_at %g. On the laboratory's %d test photos the int8 vectors computed by the browser's WASM runtime change the top species for few photos (table above), and a named species stays right as often as with the original vectors, so the thresholds are kept. "
-          "They could not be set again on int8 vectors, since no `val` photo has any. `tools/eval/naturalist.py` writes the files for `models/naturalist`; the `vision` block of its manifest is left for the laboratory's `parts.json`." % (
+          "They could not be set again on int8 vectors, since no `val` photo has any. `tools/eval/naturalist.py` writes the files for `models/naturalist` and, given the laboratory's `parts.json`, lists the parts of the int8 file in the manifest's `vision` block; they are published as the branch `pub/heads-naturalist-bioclip2-l14`." % (
               best[1]["slot"], best[1]["fusion"]["name_at"], best[1]["fusion"]["offer_at"], best[1]["test_photos"])]
 DECV = load("decision-pocket-val.json")
 if DECV and DEC and DEC["train"] != "alachua-pre2025":
@@ -466,6 +466,18 @@ if DECV and DEC and DEC["train"] != "alachua-pre2025":
           "On them TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by %s points on %s, paired over the same photos, and the rule's answer there is `%s`. This second look was added after the first answer was seen, so it is evidence and no part of the rule; the trained slots are decided by the rule as written." % (
               DECV["slots_compared"]["tinyclip-39m-16"], DECV["slots_compared"]["tinyclip-8m-16"], pts(dv), "the mean of the share right on the wildlife test photos and on the extra set's test photos" if "extra" in DECV["sets"] else "the wildlife test photos", DECV["choice"]), "",
           table(["Photos", "Measure", "TinyCLIP 39M/16", "TinyCLIP 8M/16", "Paired difference (points)"], [[m_["photos"] + " test", m_["measure"], pc(m_["tinyclip-39m-16"]), pc(m_["tinyclip-8m-16"]), pts(m_["difference"])] for m_ in DECV["measures"]], ["---", "---", "---:", "---:", "---:"]), ""]
+if DEC and DEC["train"] == "alachua-pre2025":
+    T += ["- **What should ship in the pocket.** The slot `%s`, published as the branch `%s`: the rule's answer on slots whose heads were fitted on the training photos." % (DEC["slot"], DEC["branch"])]
+elif DECV and SH.get("val-" + DECV["choice"]):
+    w_ = SH["val-" + DECV["choice"]]
+    n_, k_ = w_["numbers"], w_["numbers"].get("kind") or {}
+    tw_, tx_ = k_.get("test_wildlife"), k_.get("test_extra")
+    if tw_ and tx_ and k_.get("kind_at") is not None:
+        T += ["- **What should ship in the pocket until the trained slots are measured.** The rule's answer on sentence slots is a tie that falls to the smaller model, and it rests on phrases that neither model should ship with. Of the slots measured so far, the one with the best kind decision is the stand-in `val-%s` (branch `pub/heads-val-%s`): "
+              "the kind of eye right for %s of the wildlife test photos and %s of the extra set's test photos; with kind_at %.2f a kind asserted for %s of the wildlife test photos and right for %s of those; a species named for %s and right for %s of those names. "
+              "It is a stand-in in two respects: its kind rows and its species rows were fitted on two thirds of the `val` photos (and the kind rows on the extra set's fitting part as well), and its thresholds were set on the remaining %d `val` photos, so they are less steady than thresholds set on all of `val`. "
+              "The trained slots replace it when `run/eval/armed-pocket` has run." % (
+                  DECV["choice"], DECV["choice"], pci(n_["kind_right"]), pci(tx_["kind_right"]), k_["kind_at"], pci(tw_["asserted"]), pci(tw_["asserted_right"]), pci(n_["named"]), pci(n_["named_right"]), n_["tuning_photos"])]
 sv = S2.get("val")
 if not real:
     tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "
