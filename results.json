@@ -1,0 +1,293 @@
+{
+ "photos_common": 320,
+ "about": "species scored with tools/fusion/fuse.py against the published server rows (slot pub/heads-sentences-bioclip2-l14@6b69b6dd532d) with its fusion settings and the month prior; cosine is to the original model's published vectors (pub/lab-bioclip2-l14 images/alachua-2025.f16.npy)",
+ "slot_fusion": {
+  "t_kind": 20.0,
+  "t_species": 100.0,
+  "alpha_prior": 1.0,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.05,
+  "offer_at": 2.0,
+  "prior_floor": 1e-06
+ },
+ "original": {
+  "n": 320,
+  "top1": 94.06,
+  "top5": 97.19,
+  "top1_count": 301,
+  "top5_count": 311,
+  "named": 319,
+  "named_right": 301
+ },
+ "recipes": {
+  "hybrid-fc2-w8": {
+   "how": "int8-per-channel for every MatMul except the 24 blocks' mlp.c_proj (second MLP layer), which get w8-float",
+   "kept_float_arithmetic": 24,
+   "example_node": "/visual/transformer/resblocks.0/mlp/c_proj/MatMul",
+   "bytes": 309812341,
+   "mb": 309.81,
+   "sha256": "4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031",
+   "seconds": 21.5,
+   "job": "device-hybrid-fc2-w8",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 5018.8,
+    "median_ms": 4939.3,
+    "min_ms": 4924.5,
+    "load_ms": 1674,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 2387.4,
+    "median_ms": 2387.9,
+    "min_ms": 2369.6,
+    "load_ms": 1633,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 320,
+    "mean": 0.99877,
+    "min": 0.98998,
+    "p05": 0.99723
+   },
+   "photos_run": 320,
+   "species_on_common_photos": {
+    "n": 320,
+    "top1": 93.75,
+    "top5": 96.88,
+    "top1_count": 300,
+    "top5_count": 310,
+    "named": 320,
+    "named_right": 300
+   }
+  },
+  "int8-per-channel": {
+   "how": "onnxruntime.quantization.quantize_dynamic: MatMul and Gemm with constant weights, weight_type QInt8, per_channel=True, reduce_range=False, MatMulConstBOnly; activations quantized at run time (DynamicQuantizeLinear + MatMulInteger)",
+   "bytes": 309841461,
+   "mb": 309.84,
+   "sha256": "d67872272539786eec2b441252396ddac882fb321ca980c97c39578b847361e3",
+   "seconds": 20.9,
+   "job": "device-int8-per-channel",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 3202.7,
+    "median_ms": 3201.6,
+    "min_ms": 3199.2,
+    "load_ms": 1159,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 1665.8,
+    "median_ms": 1663.9,
+    "min_ms": 1657.7,
+    "load_ms": 1268,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 320,
+    "mean": 0.99323,
+    "min": 0.94291,
+    "p05": 0.98429
+   },
+   "photos_run": 320,
+   "species_on_common_photos": {
+    "n": 320,
+    "top1": 93.12,
+    "top5": 98.12,
+    "top1_count": 298,
+    "top5_count": 314,
+    "named": 319,
+    "named_right": 298
+   }
+  },
+  "uint8-per-channel": {
+   "how": "as int8-per-channel with weight_type QUInt8 (unsigned 8-bit weights)",
+   "bytes": 309958298,
+   "mb": 309.96,
+   "sha256": "a1cee088f46cb379fbf743520aa5170d1fed1df02927fe92ac86f13f80069b5f",
+   "seconds": 20.4,
+   "job": "device-uint8-per-channel",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 3209.0,
+    "median_ms": 3209.2,
+    "min_ms": 3204.9,
+    "load_ms": 1145,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 1686.6,
+    "median_ms": 1686.2,
+    "min_ms": 1677.5,
+    "load_ms": 1248,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 320,
+    "mean": 0.99338,
+    "min": 0.96604,
+    "p05": 0.98258
+   },
+   "photos_run": 320,
+   "species_on_common_photos": {
+    "n": 320,
+    "top1": 93.44,
+    "top5": 97.19,
+    "top1_count": 299,
+    "top5_count": 311,
+    "named": 320,
+    "named_right": 299
+   }
+  },
+  "w4-block32": {
+   "how": "onnxruntime MatMulNBitsQuantizer: 4-bit symmetric weights in blocks of 32 (MatMulNBits); activations float",
+   "error": "ModuleNotFoundError: No module named 'onnxruntime.quantization.matmul_4bits_quantizer'",
+   "job": "device-uint8-per-channel"
+  },
+  "w8-float": {
+   "how": "every MatMul with a constant 2-D weight: symmetric 8-bit weights, one scale per output column, DequantizeLinear in front; activations and arithmetic stay float32",
+   "bytes": 384801014,
+   "mb": 384.8,
+   "sha256": "ab842b06e3de834c623a937e619f9dad314dc75143b9f16a516aa3d8e8c83cc7",
+   "seconds": 1.6,
+   "job": "device-w8-float",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 8443.6,
+    "median_ms": 8111.0,
+    "min_ms": 8086.1,
+    "load_ms": 2262,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 3659.0,
+    "median_ms": 3643.7,
+    "min_ms": 3606.6,
+    "load_ms": 2017,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 320,
+    "mean": 0.9999,
+    "min": 0.99949,
+    "p05": 0.9998
+   },
+   "photos_run": 320,
+   "species_on_common_photos": {
+    "n": 320,
+    "top1": 94.06,
+    "top5": 97.5,
+    "top1_count": 301,
+    "top5_count": 312,
+    "named": 319,
+    "named_right": 301
+   }
+  },
+  "fp16": {
+   "how": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True)",
+   "bytes": 608986535,
+   "mb": 608.99,
+   "sha256": "d0fdacb66ee152236c81f6fb51758042e717764579245b444ca0a48cf809181f",
+   "seconds": 7.8,
+   "job": "device-w8-float",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 7802.0,
+    "median_ms": 7800.2,
+    "min_ms": 7126.3,
+    "load_ms": 2884,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 3167.5,
+    "median_ms": 3168.1,
+    "min_ms": 3155.9,
+    "load_ms": 2930,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 24,
+    "mean": 1.0,
+    "min": 0.99999,
+    "p05": 1.0
+   },
+   "photos_run": 24,
+   "species_on_its_photos": {
+    "n": 24,
+    "top1": 87.5,
+    "top5": 91.67,
+    "top1_count": 21,
+    "top5_count": 22,
+    "named": 24,
+    "named_right": 21
+   },
+   "species_original_on_same_photos": {
+    "n": 24,
+    "top1": 87.5,
+    "top5": 91.67,
+    "top1_count": 21,
+    "top5_count": 22,
+    "named": 24,
+    "named_right": 21
+   }
+  }
+ },
+ "best": "hybrid-fc2-w8",
+ "best_why": "chosen by name in the run file (device.choose), after reading the numbers",
+ "candidates": [
+  {
+   "recipe": "hybrid-fc2-w8",
+   "qualifies": true,
+   "median_ms_1thread": 4939.3,
+   "top1": 93.75,
+   "cosine_mean": 0.99877
+  },
+  {
+   "recipe": "int8-per-channel",
+   "qualifies": true,
+   "median_ms_1thread": 3201.6,
+   "top1": 93.12,
+   "cosine_mean": 0.99323
+  },
+  {
+   "recipe": "uint8-per-channel",
+   "qualifies": true,
+   "median_ms_1thread": 3209.2,
+   "top1": 93.44,
+   "cosine_mean": 0.99338
+  },
+  {
+   "recipe": "w8-float",
+   "qualifies": true,
+   "median_ms_1thread": 8111.0,
+   "top1": 94.06,
+   "cosine_mean": 0.9999
+  }
+ ]
+}

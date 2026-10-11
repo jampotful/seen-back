@@ -1,0 +1,151 @@
+{
+ "model": "bioclip2-l14",
+ "source": "hf-hub:imageomics/bioclip-2",
+ "source_url": "https://huggingface.co/imageomics/bioclip-2",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE",
+ "licence_note": "BioCLIP 2 is released under the MIT licence (model card 'License: MIT'; LICENSE file at the address given); keep the notice",
+ "recipe": "hybrid-fc2-w8",
+ "recipe_how": "int8-per-channel for every MatMul except the 24 blocks' mlp.c_proj (second MLP layer), which get w8-float",
+ "params_image_encoder": 303966208,
+ "input": {
+  "name": "pixel_values",
+  "type": "float32",
+  "shape": [
+   1,
+   3,
+   224,
+   224
+  ]
+ },
+ "output": {
+  "name": "image_embeds",
+  "type": "float32",
+  "width": 768,
+  "unit_normalized": false,
+  "note": "normalize to unit length before the dot products"
+ },
+ "preprocessing": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest side to 224, the other side int(224 * long / short) (truncated), bicubic with antialiasing (torchvision Resize on a PIL image, i.e. PIL's BICUBIC)",
+  "crop": "centre 224 x 224: left = round((W - 224) / 2), top = round((H - 224) / 2) with halves rounded to even (Python round, as torchvision CenterCrop)",
+  "crop_rule_checked": "the rule reproduced the transforms' output on 320 of 320 photos",
+  "scale": "RGB; v / 255, then (v - mean) / std per channel; NCHW",
+  "open_clip_transforms": [
+   "Resize(size=224, interpolation=bicubic, max_size=None, antialias=True)",
+   "CenterCrop(size=(224, 224))",
+   "MaybeConvertMode()",
+   "MaybeToTensor()",
+   "Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])"
+  ]
+ },
+ "runtime": "onnxruntime-web 1.30.0, WASM backend (single thread unless the page is cross-origin isolated)",
+ "measured": {
+  "about": "species scored with tools/fusion/fuse.py against the published server rows (slot pub/heads-sentences-bioclip2-l14@6b69b6dd532d) with its fusion settings and the month prior; cosine is to the original model's published vectors (pub/lab-bioclip2-l14 images/alachua-2025.f16.npy)",
+  "photos": 320,
+  "original": {
+   "n": 320,
+   "top1": 94.06,
+   "top5": 97.19,
+   "top1_count": 301,
+   "top5_count": 311,
+   "named": 319,
+   "named_right": 301
+  },
+  "chosen": {
+   "bytes": 309812341,
+   "sha256": "4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031",
+   "latency_1": {
+    "threads": 1,
+    "photos": 6,
+    "mean_ms": 5018.8,
+    "median_ms": 4939.3,
+    "min_ms": 4924.5,
+    "load_ms": 1674,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "latency_4": {
+    "threads": 4,
+    "photos": 6,
+    "mean_ms": 2387.4,
+    "median_ms": 2387.9,
+    "min_ms": 2369.6,
+    "load_ms": 1633,
+    "runtime": "1.30.0",
+    "node": "v22.23.3"
+   },
+   "cosine_to_original": {
+    "photos": 320,
+    "mean": 0.99877,
+    "min": 0.98998,
+    "p05": 0.99723
+   },
+   "species_on_common_photos": {
+    "n": 320,
+    "top1": 93.75,
+    "top5": 96.88,
+    "top1_count": 300,
+    "top5_count": 310,
+    "named": 320,
+    "named_right": 300
+   }
+  },
+  "rule": "chosen by name in the run file (device.choose), after reading the numbers",
+  "all_recipes": "results.json"
+ },
+ "server_rows": "pub/heads-sentences-bioclip2-l14@6b69b6dd532d71e51ada4cf0cade0da53918b227",
+ "made_by": {
+  "workflow": "lab",
+  "run_number": "29",
+  "commit": "bb15a73073e84fe3b55fe7f6c882a7b1ee24cd8e",
+  "software": {
+   "python": "3.12.3",
+   "numpy": "2.5.2",
+   "torch": "2.8.0+cpu",
+   "open_clip": "3.3.0",
+   "transformers": "4.57.6",
+   "timm": "1.0.30",
+   "onnx": "1.23.2",
+   "onnxruntime": "1.31.0",
+   "PIL": "12.3.0"
+  }
+ },
+ "file": "vision.int8.onnx",
+ "bytes": 309812341,
+ "sha256": "4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031",
+ "part_size_max": 90000000,
+ "parts": [
+  {
+   "name": "vision.int8.onnx.part00",
+   "bytes": 90000000,
+   "sha256": "721fa3a2364f9e76f6f29e6168fbd9d404c3505fe4076df134fa0d1214a65b01"
+  },
+  {
+   "name": "vision.int8.onnx.part01",
+   "bytes": 90000000,
+   "sha256": "084e1777366132c32249f903b6335fc2fd10e81196d1c9196c4e742b6734acad"
+  },
+  {
+   "name": "vision.int8.onnx.part02",
+   "bytes": 90000000,
+   "sha256": "f180ea007bbf459e8e4d5827c095089c55d15913caf201dce80efc8214071898"
+  },
+  {
+   "name": "vision.int8.onnx.part03",
+   "bytes": 39812341,
+   "sha256": "be2fcbb3c826bf63f7786eff482ac06579f40253076f6a61c1b9be1a01374c8b"
+  }
+ ],
+ "join": "fetch the parts in order and concatenate them; the result's bytes and sha256 are those above"
+}
