@@ -1,0 +1,190 @@
+{
+ "model": "bioclip2-l14",
+ "source": "hf-hub:imageomics/bioclip-2",
+ "source_url": "https://huggingface.co/imageomics/bioclip-2",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip-2/main/LICENSE",
+ "params": {
+  "image": 303966208,
+  "text": 123650305,
+  "total": 427616513
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "preprocess_detail": {
+  "transforms": [
+   "Resize(size=224, interpolation=bicubic, max_size=None, antialias=True)",
+   "CenterCrop(size=(224, 224))",
+   "MaybeConvertMode()",
+   "MaybeToTensor()",
+   "Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])"
+  ],
+  "preprocess_cfg": {
+   "size": [
+    224,
+    224
+   ],
+   "mode": "RGB",
+   "mean": [
+    0.48145466,
+    0.4578275,
+    0.40821073
+   ],
+   "std": [
+    0.26862954,
+    0.26130258,
+    0.27577711
+   ],
+   "interpolation": "bicubic",
+   "resize_mode": "shortest",
+   "fill_color": 0
+  },
+  "antialias": true,
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "cpu": {
+  "model": "AMD EPYC 7763 64-Core Processor",
+  "flags": [
+   "avx2"
+  ]
+ },
+ "recipes": {
+  "uint8-per-channel": {
+   "how": "as int8-per-channel with weight_type QUInt8 (unsigned 8-bit weights)",
+   "bytes": 309958298,
+   "mb": 309.96,
+   "sha256": "a1cee088f46cb379fbf743520aa5170d1fed1df02927fe92ac86f13f80069b5f",
+   "ops": {
+    "ai.onnx::Constant": 1310,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Mod": 24,
+    "ai.onnx::Shape": 196,
+    "ai.onnx::Reshape": 266,
+    "ai.onnx::Add": 193,
+    "ai.onnx::Gather": 196,
+    "ai.onnx::Unsqueeze": 555,
+    "ai.onnx::Concat": 243,
+    "ai.onnx::Transpose": 193,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Mul": 339,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Cast": 244,
+    "ai.onnx::LayerNormalization": 50,
+    "ai.onnx::DynamicQuantizeLinear": 97,
+    "ai.onnx::Slice": 96,
+    "ai.onnx::MatMulInteger": 97,
+    "ai.onnx::Div": 72,
+    "ai.onnx::Squeeze": 48,
+    "ai.onnx::Sqrt": 72,
+    "ai.onnx::MatMul": 48,
+    "ai.onnx::Softmax": 24,
+    "ai.onnx::Erf": 24
+   },
+   "seconds": 20.4
+  },
+  "w4-block32": {
+   "how": "onnxruntime MatMulNBitsQuantizer: 4-bit symmetric weights in blocks of 32 (MatMulNBits); activations float",
+   "error": "ModuleNotFoundError: No module named 'onnxruntime.quantization.matmul_4bits_quantizer'"
+  }
+ },
+ "timings": {
+  "export_s": 6.3,
+  "total_s": 64.3
+ },
+ "fp32": {
+  "bytes": 1216631949,
+  "sha256": "ea33c9a5644b5f4c8f57003eaeb46306e418feda0e5741c7d567bb15c38bcf36"
+ },
+ "pixels": {
+  "photos": 320,
+  "skipped": [],
+  "crop_rule_ok": 320,
+  "crop_rule_checked": 320,
+  "examples": [
+   {
+    "w": 375,
+    "h": 500,
+    "resized": [
+     224,
+     298
+    ],
+    "crop_rule_ok": true
+   },
+   {
+    "w": 500,
+    "h": 375,
+    "resized": [
+     298,
+     224
+    ],
+    "crop_rule_ok": true
+   },
+   {
+    "w": 500,
+    "h": 375,
+    "resized": [
+     298,
+     224
+    ],
+    "crop_rule_ok": true
+   },
+   {
+    "w": 500,
+    "h": 333,
+    "resized": [
+     336,
+     224
+    ],
+    "crop_rule_ok": true
+   },
+   {
+    "w": 500,
+    "h": 333,
+    "resized": [
+     336,
+     224
+    ],
+    "crop_rule_ok": true
+   }
+  ],
+  "max_abs_diff_vs_model_transform": 0.0
+ }
+}
