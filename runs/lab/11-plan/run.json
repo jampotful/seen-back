@@ -1,0 +1,20 @@
+{
+ "data": "pub/data-alachua",
+ "manifest": "train/alachua-pre2025/manifest.csv",
+ "shard_mode": "mod",
+ "wait_minutes": 280,
+ "about": "Training-set vectors for the pocket models: the original model (torch) and the shipping int8 file (onnx/vision.int8-per-channel.onnx) in onnxruntime CPU, over the whole training manifest; shards are rows modulo n. The plan job waits for the manifest to appear.",
+ "models": [
+  "tinyclip-39m-16",
+  "tinyclip-8m-16"
+ ],
+ "stages": [
+  "images",
+  "images-onnx-int8-per-channel"
+ ],
+ "shards": {
+  "tinyclip-39m-16": 6,
+  "tinyclip-8m-16": 3
+ },
+ "max_parallel": 5
+}
