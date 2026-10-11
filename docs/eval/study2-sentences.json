@@ -2208,20 +2208,18 @@
      "called_none": 0.0
     },
     {
-     "name": "the page's combination of kind phrases and the species list (rule `mix`, t_kind 20, w_kind 0.7; species head `sentences`)",
+     "name": "the page's combination of kind phrases and the species list (rule `mix`, t_kind 100, w_kind 0.5; species head `sentences`)",
      "accuracy": [
-      0.9826,
-      0.9783,
-      0.9864,
+      0.9802,
+      0.9757,
+      0.984,
       4197
      ],
      "called_person": 0.0,
      "called_none": 0.0
     }
    ],
-   "notes": [
-    "The extra set's vectors (people, pets, livestock, rooms) were not published for this model when this ran, so the kind decision was tuned on wildlife photos alone and says nothing about a person or an empty room."
-   ],
+   "notes": [],
    "by_train_photos": {
     "heads": [
      "sentences"
@@ -2273,192 +2271,597 @@
     "tuned_on": {
      "wildlife_photos": 1803,
      "wildlife_vectors": "images/alachua-2025",
-     "extra": null
+     "extra": {
+      "set": "coco-kinds",
+      "photos": 3056,
+      "vectors": "images/coco-kinds",
+      "fitting_photos": 5944,
+      "test_photos": 1240,
+      "test_vectors": "images/coco-kinds",
+      "rows_with_vectors": 10240,
+      "rows_in_manifest": 10240
+     }
     },
-    "tuned_number": "the share right on the wildlife tuning photos (the extra set's vectors were not published for this model)",
+    "tuned_number": "the mean of the share right on the wildlife tuning photos and of the mean share right over the extra set's kinds",
     "settings_tried": 48,
     "candidates": [
      {
       "head": "kind phrases",
       "rule": "mix",
-      "t_kind": 20.0,
-      "w_kind": 0.7,
-      "tuning_both": 0.9834,
-      "tuning_wildlife": 0.9834,
-      "tuning_extra": null,
-      "kind_at": 0.2,
+      "t_kind": 100.0,
+      "w_kind": 0.5,
+      "tuning_both": 0.6523,
+      "tuning_wildlife": 0.9784,
+      "tuning_extra": 0.3263,
+      "kind_at": null,
       "test_wildlife": {
        "photos": 4197,
        "kind_right": [
-        0.9826,
-        0.9783,
-        0.9864,
+        0.9802,
+        0.9757,
+        0.984,
         4197
        ],
        "asserted": [
-        0.9964,
-        0.9945,
-        0.9981,
+        1.0,
+        1.0,
+        1.0,
         4197
        ],
        "asserted_right": [
-        0.9852,
-        0.9813,
-        0.9885,
-        4182
+        0.9802,
+        0.9757,
+        0.984,
+        4197
        ],
        "not_sure": [
-        0.0036,
-        0.0019,
-        0.0055,
+        0.0,
+        0.0,
+        0.0,
         4197
        ],
        "not_sure_true_kind_among_three": [
-        0.8667,
-        0.6667,
-        1.0,
-        15
+        null,
+        null,
+        null,
+        0
        ],
        "true_kind_among_three": [
-        0.9964,
-        0.9945,
-        0.9981,
+        0.9962,
+        0.9943,
+        0.9979,
         4197
        ],
        "wrong_and_asserted": [
-        0.0148,
-        0.0114,
-        0.0188,
+        0.0198,
+        0.016,
+        0.0243,
         4197
        ]
       },
       "called_person": 0.0,
-      "called_none": 0.0
+      "called_none": 0.0,
+      "test_extra": {
+       "photos": 1240,
+       "kind_right": [
+        0.1702,
+        0.1492,
+        0.1911,
+        1240
+       ],
+       "asserted": [
+        1.0,
+        1.0,
+        1.0,
+        1240
+       ],
+       "asserted_right": [
+        0.1702,
+        0.1492,
+        0.1911,
+        1240
+       ],
+       "not_sure": [
+        0.0,
+        0.0,
+        0.0,
+        1240
+       ],
+       "not_sure_true_kind_among_three": [
+        null,
+        null,
+        null,
+        0
+       ],
+       "true_kind_among_three": [
+        0.2306,
+        0.2073,
+        0.2548,
+        1240
+       ],
+       "wrong_and_asserted": [
+        0.8298,
+        0.8089,
+        0.8508,
+        1240
+       ]
+      },
+      "test_extra_by_kind": [
+       {
+        "kind": "person",
+        "n": 400,
+        "right": [
+         0.0,
+         0.0,
+         0.0,
+         400
+        ],
+        "asserted": 1.0,
+        "asserted_right": 0.0,
+        "not_sure_true_kind_among_three": null,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (248)"
+       },
+       {
+        "kind": "none",
+        "n": 500,
+        "right": [
+         0.0,
+         0.0,
+         0.0,
+         500
+        ],
+        "asserted": 1.0,
+        "asserted_right": 0.0,
+        "not_sure_true_kind_among_three": null,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (301)"
+       },
+       {
+        "kind": "cat",
+        "n": 77,
+        "right": [
+         0.8571,
+         0.7792,
+         0.9351,
+         77
+        ],
+        "asserted": 1.0,
+        "asserted_right": 0.8571428571428571,
+        "not_sure_true_kind_among_three": null,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (8)"
+       },
+       {
+        "kind": "dog",
+        "n": 63,
+        "right": [
+         0.1429,
+         0.0635,
+         0.2381,
+         63
+        ],
+        "asserted": 1.0,
+        "asserted_right": 0.14285714285714285,
+        "not_sure_true_kind_among_three": null,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (45)"
+       },
+       {
+        "kind": "deer",
+        "n": 200,
+        "right": [
+         0.68,
+         0.615,
+         0.7401,
+         200
+        ],
+        "asserted": 1.0,
+        "asserted_right": 0.68,
+        "not_sure_true_kind_among_three": null,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "wader (47)"
+       }
+      ]
      },
      {
       "head": "kind phrases",
       "rule": "product",
-      "t_kind": 20.0,
+      "t_kind": 100.0,
       "w_kind": 0.5,
-      "tuning_both": 0.9834,
-      "tuning_wildlife": 0.9834,
-      "tuning_extra": null,
-      "kind_at": 0.2,
+      "tuning_both": 0.649,
+      "tuning_wildlife": 0.98,
+      "tuning_extra": 0.3179,
+      "kind_at": 0.97,
       "test_wildlife": {
        "photos": 4197,
        "kind_right": [
-        0.9828,
-        0.9786,
-        0.9864,
+        0.979,
+        0.9745,
+        0.9831,
         4197
        ],
        "asserted": [
-        0.999,
-        0.9981,
-        0.9998,
+        0.5318,
+        0.5168,
+        0.5463,
         4197
        ],
        "asserted_right": [
-        0.9835,
-        0.9795,
-        0.9874,
-        4193
+        0.9982,
+        0.996,
+        0.9996,
+        2232
        ],
        "not_sure": [
+        0.4682,
+        0.4537,
+        0.4832,
+        4197
+       ],
+       "not_sure_true_kind_among_three": [
+        0.9939,
+        0.9903,
+        0.9969,
+        1965
+       ],
+       "true_kind_among_three": [
+        0.9969,
+        0.9952,
+        0.9986,
+        4197
+       ],
+       "wrong_and_asserted": [
         0.001,
         0.0002,
         0.0019,
         4197
-       ],
-       "not_sure_true_kind_among_three": [
-        0.75,
-        0.25,
-        1.0,
-        4
-       ],
-       "true_kind_among_three": [
-        0.9957,
-        0.9938,
-        0.9976,
-        4197
-       ],
-       "wrong_and_asserted": [
-        0.0164,
-        0.0129,
-        0.0207,
-        4197
        ]
       },
       "called_person": 0.0,
-      "called_none": 0.0
+      "called_none": 0.0,
+      "test_extra": {
+       "photos": 1240,
+       "kind_right": [
+        0.1685,
+        0.1476,
+        0.1903,
+        1240
+       ],
+       "asserted": [
+        0.025,
+        0.0161,
+        0.0339,
+        1240
+       ],
+       "asserted_right": [
+        0.9677,
+        0.9032,
+        1.0,
+        31
+       ],
+       "not_sure": [
+        0.975,
+        0.9661,
+        0.9839,
+        1240
+       ],
+       "not_sure_true_kind_among_three": [
+        0.2084,
+        0.1869,
+        0.2308,
+        1209
+       ],
+       "true_kind_among_three": [
+        0.2282,
+        0.2048,
+        0.2524,
+        1240
+       ],
+       "wrong_and_asserted": [
+        0.0008,
+        0.0,
+        0.0024,
+        1240
+       ]
+      },
+      "test_extra_by_kind": [
+       {
+        "kind": "person",
+        "n": 400,
+        "right": [
+         0.0,
+         0.0,
+         0.0,
+         400
+        ],
+        "asserted": 0.0,
+        "asserted_right": null,
+        "not_sure_true_kind_among_three": 0.0,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (232)"
+       },
+       {
+        "kind": "none",
+        "n": 500,
+        "right": [
+         0.0,
+         0.0,
+         0.0,
+         500
+        ],
+        "asserted": 0.0,
+        "asserted_right": null,
+        "not_sure_true_kind_among_three": 0.0,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (291)"
+       },
+       {
+        "kind": "cat",
+        "n": 77,
+        "right": [
+         0.8571,
+         0.7792,
+         0.9351,
+         77
+        ],
+        "asserted": 0.18181818181818182,
+        "asserted_right": 1.0,
+        "not_sure_true_kind_among_three": 0.873015873015873,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (8)"
+       },
+       {
+        "kind": "dog",
+        "n": 63,
+        "right": [
+         0.1587,
+         0.0794,
+         0.254,
+         63
+        ],
+        "asserted": 0.0,
+        "asserted_right": null,
+        "not_sure_true_kind_among_three": 0.5238095238095238,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "other (45)"
+       },
+       {
+        "kind": "deer",
+        "n": 200,
+        "right": [
+         0.665,
+         0.5999,
+         0.73,
+         200
+        ],
+        "asserted": 0.085,
+        "asserted_right": 0.9411764705882353,
+        "not_sure_true_kind_among_three": 0.8961748633879781,
+        "said_person": 0.0,
+        "said_none": 0.0,
+        "named": null,
+        "commonest_wrong": "wader (47)"
+       }
+      ]
      }
     ],
     "chosen": {
      "head": "kind phrases",
      "rule": "mix",
-     "t_kind": 20.0,
-     "w_kind": 0.7,
-     "tuning_both": 0.9834,
-     "tuning_wildlife": 0.9834,
-     "tuning_extra": null,
-     "kind_at": 0.2,
+     "t_kind": 100.0,
+     "w_kind": 0.5,
+     "tuning_both": 0.6523,
+     "tuning_wildlife": 0.9784,
+     "tuning_extra": 0.3263,
+     "kind_at": null,
      "test_wildlife": {
       "photos": 4197,
       "kind_right": [
-       0.9826,
-       0.9783,
-       0.9864,
+       0.9802,
+       0.9757,
+       0.984,
        4197
       ],
       "asserted": [
-       0.9964,
-       0.9945,
-       0.9981,
+       1.0,
+       1.0,
+       1.0,
        4197
       ],
       "asserted_right": [
-       0.9852,
-       0.9813,
-       0.9885,
-       4182
+       0.9802,
+       0.9757,
+       0.984,
+       4197
       ],
       "not_sure": [
-       0.0036,
-       0.0019,
-       0.0055,
+       0.0,
+       0.0,
+       0.0,
        4197
       ],
       "not_sure_true_kind_among_three": [
-       0.8667,
-       0.6667,
-       1.0,
-       15
+       null,
+       null,
+       null,
+       0
       ],
       "true_kind_among_three": [
-       0.9964,
-       0.9945,
-       0.9981,
+       0.9962,
+       0.9943,
+       0.9979,
        4197
       ],
       "wrong_and_asserted": [
-       0.0148,
-       0.0114,
-       0.0188,
+       0.0198,
+       0.016,
+       0.0243,
        4197
       ]
      },
      "called_person": 0.0,
-     "called_none": 0.0
+     "called_none": 0.0,
+     "test_extra": {
+      "photos": 1240,
+      "kind_right": [
+       0.1702,
+       0.1492,
+       0.1911,
+       1240
+      ],
+      "asserted": [
+       1.0,
+       1.0,
+       1.0,
+       1240
+      ],
+      "asserted_right": [
+       0.1702,
+       0.1492,
+       0.1911,
+       1240
+      ],
+      "not_sure": [
+       0.0,
+       0.0,
+       0.0,
+       1240
+      ],
+      "not_sure_true_kind_among_three": [
+       null,
+       null,
+       null,
+       0
+      ],
+      "true_kind_among_three": [
+       0.2306,
+       0.2073,
+       0.2548,
+       1240
+      ],
+      "wrong_and_asserted": [
+       0.8298,
+       0.8089,
+       0.8508,
+       1240
+      ]
+     },
+     "test_extra_by_kind": [
+      {
+       "kind": "person",
+       "n": 400,
+       "right": [
+        0.0,
+        0.0,
+        0.0,
+        400
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.0,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (248)"
+      },
+      {
+       "kind": "none",
+       "n": 500,
+       "right": [
+        0.0,
+        0.0,
+        0.0,
+        500
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.0,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (301)"
+      },
+      {
+       "kind": "cat",
+       "n": 77,
+       "right": [
+        0.8571,
+        0.7792,
+        0.9351,
+        77
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.8571428571428571,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (8)"
+      },
+      {
+       "kind": "dog",
+       "n": 63,
+       "right": [
+        0.1429,
+        0.0635,
+        0.2381,
+        63
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.14285714285714285,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (45)"
+      },
+      {
+       "kind": "deer",
+       "n": 200,
+       "right": [
+        0.68,
+        0.615,
+        0.7401,
+        200
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.68,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "wader (47)"
+      }
+     ]
     },
     "chosen_on_wildlife_alone": {
      "head": "kind phrases",
      "rule": "mix",
      "t_kind": 20.0,
      "w_kind": 0.7,
-     "tuning_both": 0.9834,
+     "tuning_both": 0.6491,
      "tuning_wildlife": 0.9834,
-     "tuning_extra": null,
-     "kind_at": 0.2,
+     "tuning_extra": 0.3149,
+     "kind_at": null,
      "test_wildlife": {
       "photos": 4197,
       "kind_right": [
@@ -2468,28 +2871,28 @@
        4197
       ],
       "asserted": [
-       0.9964,
-       0.9945,
-       0.9981,
+       1.0,
+       1.0,
+       1.0,
        4197
       ],
       "asserted_right": [
-       0.9852,
-       0.9813,
-       0.9885,
-       4182
+       0.9826,
+       0.9783,
+       0.9864,
+       4197
       ],
       "not_sure": [
-       0.0036,
-       0.0019,
-       0.0055,
+       0.0,
+       0.0,
+       0.0,
        4197
       ],
       "not_sure_true_kind_among_three": [
-       0.8667,
-       0.6667,
-       1.0,
-       15
+       null,
+       null,
+       null,
+       0
       ],
       "true_kind_among_three": [
        0.9964,
@@ -2498,14 +2901,146 @@
        4197
       ],
       "wrong_and_asserted": [
-       0.0148,
-       0.0114,
-       0.0188,
+       0.0174,
+       0.0136,
+       0.0217,
        4197
       ]
      },
      "called_person": 0.0,
-     "called_none": 0.0
+     "called_none": 0.0,
+     "test_extra": {
+      "photos": 1240,
+      "kind_right": [
+       0.1565,
+       0.1363,
+       0.1766,
+       1240
+      ],
+      "asserted": [
+       1.0,
+       1.0,
+       1.0,
+       1240
+      ],
+      "asserted_right": [
+       0.1565,
+       0.1363,
+       0.1766,
+       1240
+      ],
+      "not_sure": [
+       0.0,
+       0.0,
+       0.0,
+       1240
+      ],
+      "not_sure_true_kind_among_three": [
+       null,
+       null,
+       null,
+       0
+      ],
+      "true_kind_among_three": [
+       0.2266,
+       0.2032,
+       0.2508,
+       1240
+      ],
+      "wrong_and_asserted": [
+       0.8435,
+       0.8234,
+       0.8637,
+       1240
+      ]
+     },
+     "test_extra_by_kind": [
+      {
+       "kind": "person",
+       "n": 400,
+       "right": [
+        0.0,
+        0.0,
+        0.0,
+        400
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.0,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "insect (150)"
+      },
+      {
+       "kind": "none",
+       "n": 500,
+       "right": [
+        0.0,
+        0.0,
+        0.0,
+        500
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.0,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (169)"
+      },
+      {
+       "kind": "cat",
+       "n": 77,
+       "right": [
+        0.8961,
+        0.8308,
+        0.961,
+        77
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.8961038961038961,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (5)"
+      },
+      {
+       "kind": "dog",
+       "n": 63,
+       "right": [
+        0.1429,
+        0.0635,
+        0.2381,
+        63
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.14285714285714285,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "other (37)"
+      },
+      {
+       "kind": "deer",
+       "n": 200,
+       "right": [
+        0.58,
+        0.515,
+        0.645,
+        200
+       ],
+       "asserted": 1.0,
+       "asserted_right": 0.58,
+       "not_sure_true_kind_among_three": null,
+       "said_person": 0.0,
+       "said_none": 0.0,
+       "named": null,
+       "commonest_wrong": "wader (66)"
+      }
+     ]
     },
     "species_head": "sentences"
    },
@@ -2621,7 +3156,7 @@
     "text": "For the head `sentences`, the scale was set on the tuning photos (expected calibration error 0.024 there). A species is named when its probability is at least 0.05, the lowest level from which named species were right at least nine times in ten on the tuning photos; no level for offers reached nine in ten. On the test photos a species is then named for 100.0% (100.0 to 100.0) of photos and that name is right for 92.5% (91.6 to 93.2) of them; three species are offered for 0.0% (0.0 to 0.0) and hold the right one for –; 0.0% (0.0 to 0.0) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule."
    },
    "saved_head": "/home/claude/work/eval-root/heads/sentences/bioclip2-l14.npz",
-   "seconds": 10.0
+   "seconds": 13.0
   }
  },
  "inputs": {
@@ -2642,10 +3177,10 @@
     "workflow": "lab"
    },
    "pub/lab-bioclip2-l14": {
-    "commit": "f552a63fbd5e4e31a415eec0257e328bc0e4e820",
-    "made_at": "2026-10-11T03:41:58Z",
-    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
-    "run_number": "10",
+    "commit": "6b92505ce3d0645587d09ad0c81118358eb4be69",
+    "made_at": "2026-10-11T07:31:40Z",
+    "made_from": "45d6f3334ebff51f6aed189019c1ef476ababb8f",
+    "run_number": "20",
     "workflow": "lab"
    },
    "pub/lab-bioclip25-h14": {

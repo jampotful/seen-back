@@ -18,10 +18,10 @@
     "workflow": "lab"
    },
    "pub/lab-bioclip2-l14": {
-    "commit": "f552a63fbd5e4e31a415eec0257e328bc0e4e820",
-    "made_at": "2026-10-11T03:41:58Z",
-    "made_from": "c30e09f4644238d239b3621632ee51fddd3be791",
-    "run_number": "10",
+    "commit": "6b92505ce3d0645587d09ad0c81118358eb4be69",
+    "made_at": "2026-10-11T07:31:40Z",
+    "made_from": "45d6f3334ebff51f6aed189019c1ef476ababb8f",
+    "run_number": "20",
     "workflow": "lab"
    },
    "pub/lab-bioclip25-h14": {
@@ -305,6 +305,16 @@
    "check": "how the extra set is cut (tools/eval/kinds.py)",
    "verdict": "note",
    "detail": "fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported."
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
   },
   {
    "check": "extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest",

@@ -47,6 +47,8 @@ _This file is written by `tools/eval/report.py` from `docs/eval/checks.json`. Re
 | pass | no two rows of the extra set share an id or a photo | 10240 rows, 10240 ids, 10240 photo addresses |
 | pass | the extra set's test rows come from COCO's val2017 and its train rows from train2017 | 0 rows disagree. COCO keeps the two apart, so no photo is on both sides. |
 | note | how the extra set is cut (tools/eval/kinds.py) | fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported. |
+| pass | extra-set vectors `coco-kinds` of bioclip2-l14 line up with the manifest | 10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240 |
+| pass | extra-set test photos with an almost identical fitting or tuning photo for bioclip2-l14 (cosine above 0.995) | 0 of 1240 |
 | pass | extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest | 10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240 |
 | pass | extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest | 1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240 |
 | pass | extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995) | 0 of 1240 |

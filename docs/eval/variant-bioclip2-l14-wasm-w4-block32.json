@@ -7,15 +7,14 @@
  "test_photos": 320,
  "photos_left_out_because_they_are_val": 0,
  "fusion": {
-  "t_kind": 20.0,
+  "t_kind": 100.0,
   "t_species": 100.0,
   "alpha_prior": 1.0,
-  "w_kind": 0.7,
+  "w_kind": 0.5,
   "rule": "mix",
   "name_at": 0.78,
-  "offer_at": 0.66,
-  "prior_floor": 1e-06,
-  "kind_at": 0.2
+  "offer_at": 0.67,
+  "prior_floor": 1e-06
  },
  "cosine_to_original": {
   "mean": 0.9929,
@@ -54,29 +53,29 @@
    284
   ],
   "offered": [
-   0.0812,
-   0.0531,
-   0.1125,
+   0.0781,
+   0.05,
+   0.1094,
    320
   ],
   "offered_holds_species": [
-   0.9231,
-   0.8077,
+   0.92,
+   0.8,
    1.0,
-   26
+   25
   ],
   "kind_only": [
-   0.0312,
-   0.0125,
-   0.05,
+   0.0344,
+   0.0156,
+   0.0562,
    320
   ]
  },
  "variant": {
   "kind_right": [
-   0.9844,
-   0.9688,
-   0.9969,
+   0.9812,
+   0.9656,
+   0.9937,
    320
   ],
   "species_top1": [
@@ -92,16 +91,16 @@
    320
   ],
   "named": [
-   0.875,
-   0.8375,
-   0.9094,
+   0.8719,
+   0.8344,
+   0.9062,
    320
   ],
   "named_right": [
-   0.9786,
-   0.9607,
-   0.9929,
-   280
+   0.9821,
+   0.9642,
+   0.9964,
+   279
   ],
   "offered": [
    0.0875,
@@ -116,16 +115,16 @@
    28
   ],
   "kind_only": [
-   0.0375,
+   0.0406,
    0.0188,
-   0.0594,
+   0.0625,
    320
   ]
  },
  "paired_difference": {
   "kind_right": [
-   0.0,
-   0.0,
+   -0.0031,
+   -0.0094,
    0.0,
    320
   ],
@@ -142,8 +141,8 @@
    320
   ],
   "named": [
-   -0.0125,
-   -0.0312,
+   -0.0156,
+   -0.0344,
    0.0031,
    320
   ],
@@ -161,6 +160,6 @@
   320
  ],
  "top_probability_mean_absolute_change": 0.0164,
- "photos_named_by_one_and_not_the_other": 8,
- "text": "320 test photos, the slot `sentences-bioclip2-l14` with name_at 0.78 and offer_at 0.66, every photo through `fuse.py` twice: with the original model's vectors and with the vectors `runs/lab/28-device-w4-block32/wasm_w4-block32.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 28 of the laboratory)`. The two vectors of a photo have a mean cosine of 0.9929 (1st percentile 0.9788). Top species right: 94.1% (91.2 to 96.6) with the original vectors and 94.4% (91.6 to 96.9) with these, a paired difference of +0.3 (-0.9 to +1.9) points; first five: 97.2% (95.0 to 98.8) and 97.5% (95.6 to 99.1). Kind of eye right: 98.4% (96.9 to 99.7) and 98.4% (96.9 to 99.7). A species is named for 88.8% (85.0 to 91.9) and 87.5% (83.8 to 90.9) of the photos, and that name is right for 97.9% (96.1 to 99.3) and 97.9% (96.1 to 99.3). The top species is the same for 97.2% (95.3 to 98.8) of the photos; the top probability moves by 0.016 on average, and 8 photos are named under one set of vectors and left unnamed under the other."
+ "photos_named_by_one_and_not_the_other": 9,
+ "text": "320 test photos, the slot `sentences-bioclip2-l14` with name_at 0.78 and offer_at 0.67, every photo through `fuse.py` twice: with the original model's vectors and with the vectors `runs/lab/28-device-w4-block32/wasm_w4-block32.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 28 of the laboratory)`. The two vectors of a photo have a mean cosine of 0.9929 (1st percentile 0.9788). Top species right: 94.1% (91.2 to 96.6) with the original vectors and 94.4% (91.6 to 96.9) with these, a paired difference of +0.3 (-0.9 to +1.9) points; first five: 97.2% (95.0 to 98.8) and 97.5% (95.6 to 99.1). Kind of eye right: 98.4% (96.9 to 99.7) and 98.1% (96.6 to 99.4). A species is named for 88.8% (85.0 to 91.9) and 87.2% (83.4 to 90.6) of the photos, and that name is right for 97.9% (96.1 to 99.3) and 98.2% (96.4 to 99.6). The top species is the same for 97.2% (95.3 to 98.8) of the photos; the top probability moves by 0.016 on average, and 9 photos are named under one set of vectors and left unnamed under the other."
 }
