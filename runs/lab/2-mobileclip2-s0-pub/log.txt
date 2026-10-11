@@ -1,0 +1,45 @@
+==== job log parts/lab-mobileclip2-s0-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[00:58:08] job: model=mobileclip2-s0 shard=0/1 stages=text-kinds,images
+data_source=standin
+evalname=standin
+manifest_rows=40
+species=30
+[00:58:08] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/1
+photos: 40 rows, 40 to fetch, 0 failed, 1.2s
+[00:58:10] exit 0
+[00:58:10] + python3 -u tools/lab/lab.py text --model mobileclip2-s0 --labelset kinds --out art/mobileclip2-s0
+loaded mobileclip2-s0 via open_clip in 17.2s
+[0;93m2026-10-11 00:58:27.472068762 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/708 (9.5s)
+kinds: (17, 512) -> text/kinds.f16.npy
+[00:58:54] exit 0
+[00:58:54] + python3 -u tools/lab/lab.py images --model mobileclip2-s0 --manifest data_in/manifest.csv --photos photos --shard 0/1 --evalname standin --out art/mobileclip2-s0
+images: mobileclip2-s0, eval standin, shard 0/1, 40 rows
+loaded mobileclip2-s0 via open_clip in 4.2s
+[0;93m2026-10-11 00:58:58.767844083 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/40, 14.16 photos/s
+images: 40 embedded, 0 skipped, 2.8s (14.53 photos/s)
+[00:59:02] exit 0
+[00:59:02] job done, fail=0
+parts/lab-mobileclip2-s0-s0/
+[01:09:45] + python3 -u tools/lab/lab.py merge --model mobileclip2-s0 --manifest data_in/manifest.csv --out pubdir parts/lab-mobileclip2-s0-s0/
+[01:09:45] exit 0
+[01:09:45] + bash ci/put_branch.sh pub/lab-mobileclip2-s0 pubdir lab: mobileclip2-s0
+remote: 
+remote: Create a pull request for 'pub/lab-mobileclip2-s0' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/lab-mobileclip2-s0        
+remote: 
+published pub/lab-mobileclip2-s0
+[01:09:46] exit 0
+[01:09:46] published pub/lab-mobileclip2-s0
