@@ -1,0 +1,59 @@
+==== job log parts/lab-tinyclip-8m-16-s0/
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[06:52:28] job: model=tinyclip-8m-16 shard=0/1 stages=text-species
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[06:52:28] + python3 -u tools/lab/lab.py text --model tinyclip-8m-16 --labelset species --species-json data_in/species.json --shard 0/1 --out art/tinyclip-8m-16
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-8m-16 via transformers in 5.3s
+[0;93m2026-10-11 06:52:34.173785535 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+species: 5911 of 5911 (shard 0/1)
+  text 256/23644 (0.1s)
+  text 2816/23644 (0.9s)
+  text 5376/23644 (1.8s)
+  text 7936/23644 (2.7s)
+  text 10496/23644 (3.6s)
+  text 13056/23644 (4.5s)
+  text 15616/23644 (5.5s)
+  text 18176/23644 (6.4s)
+  text 20736/23644 (7.4s)
+  text 23296/23644 (8.3s)
+species_com: (5911, 512)
+  text 256/23644 (0.1s)
+  text 2816/23644 (1.0s)
+  text 5376/23644 (2.0s)
+  text 7936/23644 (2.9s)
+  text 10496/23644 (3.8s)
+  text 13056/23644 (4.7s)
+  text 15616/23644 (5.5s)
+  text 18176/23644 (6.5s)
+  text 20736/23644 (7.5s)
+  text 23296/23644 (8.4s)
+species_sci: (5911, 512)
+  text 256/5911 (0.2s)
+  text 2816/5911 (2.5s)
+  text 5376/5911 (5.1s)
+species_taxon_com: (5911, 512)
+[06:52:57] exit 0
+[06:52:57] job done, fail=0
+[06:53:24] merging into existing pub/lab-tinyclip-8m-16 (af03032)
+parts/lab-tinyclip-8m-16-s0/
+[06:53:24] + python3 -u tools/lab/lab.py merge --model tinyclip-8m-16 --manifest data_in/manifest.csv --run 26 --out pubdir parts/lab-tinyclip-8m-16-s0/
+[06:53:24] exit 0
+[06:53:24] + bash ci/put_branch.sh pub/lab-tinyclip-8m-16 pubdir lab: tinyclip-8m-16
+published pub/lab-tinyclip-8m-16
+[06:53:43] exit 0
+[06:53:43] published pub/lab-tinyclip-8m-16
