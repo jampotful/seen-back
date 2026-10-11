@@ -1,0 +1,23 @@
+name: fetch
+# Fetch public web addresses from a build machine and return what they hold on the `ci` branch.
+# For reading public pages and files from a workspace that cannot reach them directly.
+# Put one address per line in ci/fetch/list.txt, optionally followed by a space and a file name,
+# then push the commit to a branch named run/fetch/<anything>.
+on:
+  push:
+    branches: ['run/fetch/**']
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: fetch
+        run: python3 ci/fetch/fetch.py ci/fetch/list.txt out 2>&1 | tee out.log; mkdir -p out; mv out.log out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh fetch out

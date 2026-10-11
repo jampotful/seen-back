@@ -11,7 +11,7 @@ import pathlib, re
 
 root = pathlib.Path(__file__).resolve().parent
 src = root / "src"
-PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.c2.js")
+PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js", "cam.selftest.js")
 
 head = (src / "cam.head.html").read_text(encoding="utf-8")
 js = "".join((src / n).read_text(encoding="utf-8") for n in PARTS)

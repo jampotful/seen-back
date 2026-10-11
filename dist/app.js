@@ -816,6 +816,9 @@
     });
   }
 
+  // ---------- recognition in the page itself (the pocket recognizer)
+  // Filled in by the recognizer work. See docs/CONTRACTS.md.
+
   // ---------- naming
   var PROMPT = [
     'The attached photograph was taken by someone who wants to know what living thing is in it.',
@@ -1172,4 +1175,7 @@
     window.claude.use('downloads').then(function (d) { downloads = d; }).catch(function () {});
     initRemote();
   }
+
+  // ---------- self-test: open the page with ?selftest=1 and it checks its own picture engine
+  // Filled in by the engines work. See docs/CONTRACTS.md.
 })();
