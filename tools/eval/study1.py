@@ -191,7 +191,7 @@ def run_model(root, model, differ_cache):
     if res["labelsets"]:
         res["best_labelset_on_val"] = max(res["labelsets"], key=lambda k: res["labelsets"][k]["tuned"]["val_top1"])
     # the same settings on the int8 and WASM vectors (pocket models)
-    variants = sorted(f[:-8] for f in os.listdir(os.path.join(root, "lab", model, "images")) if f.endswith(".f16.npy") and f.startswith(ev.EVALSET + "."))
+    variants = sorted(f[:-8] for f in os.listdir(os.path.join(root, "lab", model, "images")) if f.endswith(".f16.npy") and f.startswith(ev.EVALSET + ".") and f[:-8] != ev.EVALSET)
     res["variants"] = {}
     for v in variants:
         Ev, idv = ev.load_images(root, model, v)
