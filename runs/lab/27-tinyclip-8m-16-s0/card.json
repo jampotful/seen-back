@@ -1,0 +1,110 @@
+{
+ "id": "tinyclip-8m-16",
+ "source": "wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+ "source_url": "https://huggingface.co/wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+ "loader": "transformers",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/microsoft/Cream/main/TinyCLIP/LICENSE",
+ "role": "pocket",
+ "params": {
+  "image": 8276992,
+  "text": 15169025,
+  "total": 23446017
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224"
+ },
+ "preprocess_detail": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224 (PIL), then centre crop 224",
+  "rescale": 0.00392156862745098,
+  "image_processor": "CLIPImageProcessor",
+  "model_class": "CLIPModel"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "images": {
+  "coco-kinds": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 10240,
+    "embedded": 10240,
+    "skipped": 0,
+    "seconds": 316.2,
+    "shard_mode": "block",
+    "row_limit": null,
+    "photos_per_second": 32.39,
+    "machine_cpus": 4
+   },
+   "via": "torch"
+  },
+  "coco-kinds.wasm-int8-per-channel": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 1240,
+    "embedded": 1240,
+    "skipped": 0,
+    "latency_ms": {
+     "mean": 185.83,
+     "p50": 182.24,
+     "p90": 186.45,
+     "p99": 310.03,
+     "min": 97.27,
+     "max": 362.19
+    },
+    "onnx": "onnx/vision.int8-per-channel.onnx",
+    "onnx_sha256": "af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34",
+    "runtime": "1.30.0",
+    "threads": 1,
+    "node": "v22.23.3",
+    "machine_cpus": 4,
+    "cpu": {
+     "model": "AMD EPYC 7763 64-Core Processor",
+     "flags": [
+      "avx2"
+     ]
+    },
+    "processes": 4,
+    "note": "4 single-thread processes shared the machine; times are not single-photo latencies",
+    "pixels": "transformers CLIPImageProcessor resize (Pillow, bicubic) and centre crop to uint8; then (v/255 - mean)/std in float32 in JavaScript"
+   },
+   "via": "onnxruntime-web 1.30.0 WASM, 1 thread(s), Node v22.23.3"
+  }
+ },
+ "stages": [
+  "images",
+  "images-wasm-int8-per-channel"
+ ]
+}
