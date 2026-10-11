@@ -37,19 +37,21 @@
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
       : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
-      off: 'This page’s recognizer is switched off.',
-      absent: 'This page has no recognizer yet.',
-      missing: 'The recognizer’s files are missing.',
-      network: 'The recognizer could not be downloaded.',
-      damaged: 'The recognizer’s file arrived damaged.',
-      unfit: 'The recognizer’s files do not fit this build of the page.',
-      browser: 'This browser cannot run the recognizer.',
-      died: 'The recognizer stopped working.',
-      slow: 'The recognizer took too long.',
-      photo: 'The recognizer failed on that photo.'
+      off: 'Identifying is switched off.',
+      absent: 'This app can’t identify photos yet.',
+      missing: 'Some of this app’s files are missing.',
+      network: 'The download didn’t finish.',
+      damaged: 'A download arrived damaged.',
+      unfit: 'This app’s files are out of date.',
+      browser: 'This browser can’t identify photos.',
+      died: 'Something stopped working.',
+      slow: 'That took too long.',
+      photo: 'That photo couldn’t be read.'
     };
     if (big) {
-      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'full database'); });
+      SAY.off = 'The full database is switched off.'; SAY.absent = 'This app has no full database yet.'; SAY.missing = 'The full database\u2019s files are missing.';
+      SAY.network = 'The full database could not be downloaded.'; SAY.damaged = 'The full database\u2019s file arrived damaged.'; SAY.unfit = 'The full database\u2019s files do not fit this build of the app.';
+      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database stopped working.'; SAY.slow = 'The full database took too long.'; SAY.photo = 'The full database failed on that photo.';
       SAY.room = 'There is not enough room on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
       SAY.stopped = 'The download was stopped.';

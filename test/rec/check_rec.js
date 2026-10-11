@@ -168,7 +168,7 @@ async function meet(page, name) {
       && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'a person'
       && r.wall.claim && !r.wall.eyes && /^Nothing alive was found in that photo\. So you tell it\./.test(r.wall.sub)
       && /^Ardea herodias\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.infoSub) && r.notRightIsThere
-      && r.rows.some((x) => /Great blue heron \| Ardea herodias .* recognized by a small model/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
+      && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
   });
@@ -294,7 +294,7 @@ async function meet(page, name) {
       const a = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.unknown-rule.json'); await begin(a.page); r.unknownRule = (await meet(a.page, 'heron.png')).sub; r.unknownRuleWhy = (await about(a.page)).fail; await a.ctx.close();
       await ctl('reset=1'); await ctl('cut=' + encodeURIComponent('species\\.bias'));
       const b = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await begin(b.page); r.biasCutShort = (await meet(b.page, 'heron.png')).sub; r.biasCutShortWhy = (await about(b.page)).fail; await b.ctx.close(); await ctl('reset=1');
-      same = same && r.unknownRule === 'The recognizer’s files do not fit this build of the page.' + tail && r.biasCutShort === 'The recognizer’s file arrived damaged.' + tail;
+      same = same && r.unknownRule === 'This app’s files are out of date.' + tail && r.biasCutShort === 'A download arrived damaged.' + tail;
     }
     const t = expect.trained;
     done('trained', r, same && r.about.model === 'standin-trained' && r.about.rule === 'mix' && r.about.trained === true
@@ -377,7 +377,7 @@ async function meet(page, name) {
     r.next = await meet(page, 'stripes.png'); r.buttonNext = await page.locator('#barType').isVisible();   // the next photo is recognized, with no button
     r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'type-instead').length); r.errors = errors;
     done('typeit', r, !r.buttonBefore && /^Getting ready… \d+ of 15 MB$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
-      && r.sub === 'The recognizer keeps downloading meanwhile.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
+      && r.sub === 'The download carries on meanwhile.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
       && r.typed.eyes === 'wader' && r.typed.named.by === 'you' && r.typed.named.common === 'heron' && r.after.eyes === 'wader' && r.after.named.by === 'you' && r.after.screen === 'askView' && r.record.length === 1 && r.record[0] === 'heron|you|wader'
       && r.next.eyes === 'insect' && !r.buttonNext && r.trace === 1 && !errors.length);
     await ctl('reset=1'); await ctx.close();
@@ -801,7 +801,7 @@ async function meet(page, name) {
     { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // and where there is no kept copy at all, the reason says so
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.none = (await meet(page, 'heron.png')).sub; r.noneWhy = (await about(page)).fail; await ctl('reset=1'); await ctx.close(); }
     done('keptcopy', r, r.plainLookupFinds === false && r.withVary === 'ready' && r.heron === 'Great blue heron' && r.hanging === 'ready in under six seconds' && !r.errors.length
-      && /^The recognizer could not be downloaded\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
+      && /^The download didn’t finish\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
     await ctl('reset=1');
   });
 
@@ -898,8 +898,8 @@ async function meet(page, name) {
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.offlineFirst = await meet(page, 'heron.png'); await ctl('reset=1'); await ctx.close(); }
     { const { ctx, page } = await open(browser, '&nosw=1&rec=off'); await begin(page); r.off = (await meet(page, 'heron.png')); await ctx.close(); }
     const tail = ' So you tell it.';
-    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This page has no recognizer yet.' + tail && r.noModel.claim && r.noModel.sub === 'The recognizer’s files are missing.' + tail && r.recovered === 'Great blue heron'
-      && r.offlineFirst.claim && r.offlineFirst.sub === 'The recognizer could not be downloaded.' + tail && r.off.claim && r.off.sub === 'This page’s recognizer is switched off.' + tail);
+    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t identify photos yet.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing.' + tail && r.recovered === 'Great blue heron'
+      && r.offlineFirst.claim && r.offlineFirst.sub === 'The download didn’t finish.' + tail && r.off.claim && r.off.sub === 'Identifying is switched off.' + tail);
   });
 
   if (want.includes('damaged')) await section('damaged', async () => {  // the model's bytes changed on the way; the model cut short; a kept copy that is not a model
@@ -918,7 +918,7 @@ async function meet(page, name) {
       await page.reload();     // the page tries the kept copy by itself once it is idle, finds it is no model, and throws it away; the next photo fetches a good one
       await page.waitForFunction(() => window.__seenBack.rec.about().state === 'failed', null, { timeout: 20000 }); r.keptBadWhy = (await about(page)).fail;
       await begin(page); r.keptBadThenFetchedAgain = (await meet(page, 'heron.png')).shown; await ctx.close(); }
-    const tail = ' So you tell it.', sub = 'The recognizer’s file arrived damaged.' + tail;
+    const tail = ' So you tell it.', sub = 'A download arrived damaged.' + tail;
     done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'Great blue heron');
     await ctl('reset=1');
   });
@@ -936,8 +936,8 @@ async function meet(page, name) {
     r.afterHang = (await meet(page, 'stripes.png')).eyes;
     r.pictureStillDrawn = await page.evaluate(() => window.__seenBack.state().err === 0);
     const tail = ' So you tell it.';
-    done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'The recognizer stopped working.' + tail && r.afterThrow === 'Great blue heron'
-      && r.hung.claim && r.hung.sub === 'The recognizer took too long.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
+    done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'Something stopped working.' + tail && r.afterThrow === 'Great blue heron'
+      && r.hung.claim && r.hung.sub === 'That took too long.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
     await ctx.close();
   });
 

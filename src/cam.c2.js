@@ -566,7 +566,7 @@
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
       if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
-      askName(unsure ? 'The recognizer and the full database are both not sure what that is.' : 'The full database is not sure what that is.');
+      askName(unsure ? 'Even the full database isn’t sure what that is.' : 'The full database is not sure what that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
@@ -679,7 +679,7 @@
   $('btnType').addEventListener('click', function () {
     if (S.screen !== 'naming' || S.eyes) return;
     S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
-    askName('The recognizer keeps downloading meanwhile.');
+    askName('The download carries on meanwhile.');
   });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);

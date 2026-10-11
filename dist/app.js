@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '17';
+  var BUILD = '18';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -838,7 +838,7 @@
       // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
       // and shown as a ring with the days left
       var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
-      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'recognized by a small model' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : 'on your word', lentSays(m)].join(' · ')));
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'named by this app' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : 'on your word', lentSays(m)].join(' · ')));
       tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
       if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
@@ -934,19 +934,21 @@
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
       : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
-      off: 'This page’s recognizer is switched off.',
-      absent: 'This page has no recognizer yet.',
-      missing: 'The recognizer’s files are missing.',
-      network: 'The recognizer could not be downloaded.',
-      damaged: 'The recognizer’s file arrived damaged.',
-      unfit: 'The recognizer’s files do not fit this build of the page.',
-      browser: 'This browser cannot run the recognizer.',
-      died: 'The recognizer stopped working.',
-      slow: 'The recognizer took too long.',
-      photo: 'The recognizer failed on that photo.'
+      off: 'Identifying is switched off.',
+      absent: 'This app can’t identify photos yet.',
+      missing: 'Some of this app’s files are missing.',
+      network: 'The download didn’t finish.',
+      damaged: 'A download arrived damaged.',
+      unfit: 'This app’s files are out of date.',
+      browser: 'This browser can’t identify photos.',
+      died: 'Something stopped working.',
+      slow: 'That took too long.',
+      photo: 'That photo couldn’t be read.'
     };
     if (big) {
-      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'full database'); });
+      SAY.off = 'The full database is switched off.'; SAY.absent = 'This app has no full database yet.'; SAY.missing = 'The full database\u2019s files are missing.';
+      SAY.network = 'The full database could not be downloaded.'; SAY.damaged = 'The full database\u2019s file arrived damaged.'; SAY.unfit = 'The full database\u2019s files do not fit this build of the app.';
+      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database stopped working.'; SAY.slow = 'The full database took too long.'; SAY.photo = 'The full database failed on that photo.';
       SAY.room = 'There is not enough room on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
       SAY.stopped = 'The download was stopped.';
@@ -2243,7 +2245,7 @@
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
       if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
-      askName(unsure ? 'The recognizer and the full database are both not sure what that is.' : 'The full database is not sure what that is.');
+      askName(unsure ? 'Even the full database isn’t sure what that is.' : 'The full database is not sure what that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
@@ -2356,7 +2358,7 @@
   $('btnType').addEventListener('click', function () {
     if (S.screen !== 'naming' || S.eyes) return;
     S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
-    askName('The recognizer keeps downloading meanwhile.');
+    askName('The download carries on meanwhile.');
   });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
