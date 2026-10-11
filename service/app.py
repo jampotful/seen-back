@@ -53,7 +53,10 @@ LOCAL_HOSTS = {"localhost", "127.0.0.1"}
 SPACE_HOST = (os.environ.get("SPACE_HOST") or "").strip().lower()  # set by Hugging Face on a Space: <sub>.hf.space
 
 Image.MAX_IMAGE_PIXELS = MAX_PIXELS * 2
-torch.set_num_threads(int(os.environ.get("SB_THREADS", str(os.cpu_count() or 2))))
+# Threads for the encoder when it runs on the processor. Measured on a 4-vCPU build machine (2 cores with two threads
+# each): 2 threads answered in 1.12 s a photo, 4 threads in 1.29 s (runs/service/3-local). In a container os.cpu_count()
+# can report the host's processors, so the default is Hugging Face's CPU_CORES when set, else 2.
+torch.set_num_threads(int(os.environ.get("SB_THREADS") or os.environ.get("CPU_CORES") or 2))
 
 
 # ---------------------------------------------------------------- heads: rows, table, settings, prior
