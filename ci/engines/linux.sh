@@ -37,6 +37,31 @@ d=json.load(open(sys.argv[1])); print('phone', d.get('phone'), '| offline', json
   done
   exit 0
 fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*)    # only test/engines/resume_probe.js: a reload while the larger model is being downloaded (WebKit; Chromium beside it)
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & node test/rec/serve.js 8788 cors > "$OUT/rec-serve-big-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    [ "$B" = firefox ] && continue
+    step "resume_probe.js: $B"; BROWSER=$B PORT=8782 BIG_PORT=8788 timeout 300 node test/engines/resume_probe.js > "$OUT/rec/resume-$B.json" 2> "$OUT/rec/resume-$B.err.txt"; echo "resume probe $B: exit $?"
+    python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('version', d.get('version'), 'error', d.get('error')); print('before', json.dumps(d.get('before'))[:500]); print('asked before', json.dumps(d.get('asked'))[:300])
+for a in d.get('after', [])[:12]: print(' after', json.dumps(a)[:400])
+print('last', json.dumps((d.get('after') or [None])[-1])[:500]); print('asked after', json.dumps(d.get('askedAfter'))[:500]); print('kept', d.get('kept')); print('console', json.dumps(d.get('console'))[:800])" "$OUT/rec/resume-$B.json"
+  done
+  exit 0 ;;
+esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-svc*)    # only check_rec.js service, with ci/engines/patches/check_rec-quiet-cors.patch (each engine's own words for a refused CORS request)
+  git apply ci/engines/patches/check_rec-quiet-cors.patch && echo "patch applied"
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    step "check_rec.js service, patched: $B"
+    if [ "$B" = firefox ]; then NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 \
+      timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"
+    else BROWSER=$B PORT=8782 timeout 900 node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"; fi
+    echo "check_rec service $B: exit $?"; tail -1 "$OUT/rec/svc-$B.json"; tail -c 300 "$OUT/rec/svc-$B.err.txt"
+  done
+  git checkout -q test/rec/check_rec.js; exit 0 ;;
+esac
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
 RECQ="&rec=ci-rec/slot&recphotos=$PH&recexpect=ci-rec/slot/expect.json"

@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '8';
+  var BUILD = '9';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -833,6 +833,8 @@
   // (docs/CONTRACTS.md). Nothing here is fetched before the opening screen is up, and nothing about a photo leaves the device.
   // Kept copies: every file is asked for with ?v=<version> and kept under that address, so a new version is a new address.
   // The runtime's version is its release number; a slot's version is a fingerprint of its manifest, which is always asked of the network first.
+  // From build 9 the encoder is the exception where the manifest gives its checksum: it is asked for with ?v=sha256-<checksum>, so that
+  // new heads or new settings (a new manifest) do not cost a second download of an encoder whose bytes have not changed.
   // There are two slots. The pocket one (models/pocket) is fetched by the page itself once the opening screen is up. The larger one
   // (models/naturalist) is some hundreds of megabytes, in parts that may live on another origin: nothing of it is fetched until the
   // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
@@ -996,14 +998,16 @@
       return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
         kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
     }
-    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go
+    function encV(V) { return V && !V.parts && typeof V.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(V.sha256) ? 'sha256-' + V.sha256.toLowerCase() : ''; }   // the encoder's own version, where its checksum is given
+    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go; the encoder in use stays under its checksum
       if (!cache) return;
+      var ev = M ? encV(M.vision) : '';
       cache.keys().then(function (keys) {
         keys.forEach(function (req) {
           var u; try { u = new URL(req.url); } catch (e) { return; }
           var q = /[?&]v=([^&]+)/.exec(u.search), here = u.href.split('?')[0];
           if (!q) return;
-          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v) cache.delete(req);
+          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v && !(ev && decodeURIComponent(q[1]) === ev && here === abs(M.vision.url, base))) cache.delete(req);
           if (here.indexOf(abs(ORT.dir)) === 0 && decodeURIComponent(q[1]) !== ORT.v) cache.delete(req);
         });
       }).catch(function () {});
@@ -1226,7 +1230,7 @@
         return manifestText(cache).then(adopt);
       }).then(function () {
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, nS = M.species ? M.species.count : 0, c = cacheRef;
-        var inParts = big || !!V.parts, modelUrl = inParts ? '' : u(V.url);
+        var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
         return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
@@ -1411,7 +1415,7 @@
       broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
       size: function () { return M ? { bytes: M.vision.bytes || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(M.vision.bytes || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
       offers: [], kindOffers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
-      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl,
+      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl, fitted: M && M.fitted_on && typeof M.fitted_on === 'object' ? M.fitted_on : null,
         have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M && M.vision.bytes || 0, getFail: getFail }; },
       test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
         idle: function (ms) { idleMs = ms; tire(); }, netWait: function (ms) { netWaitMs = ms; }, running: function () { return !!worker; },
@@ -1607,9 +1611,9 @@
       kbox.appendChild(b);
     });
     show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'It may be one of these.';
-    var offers = pocket.offers || [], box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
+    var offers = offerList(pocket.offers || []), box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
-      var b = el('button', 'pill ghost', o.en || o.sci); b.type = 'button';
+      var b = el('button', 'pill ghost', o.label); b.type = 'button';
       b.addEventListener('click', function () { diag('offer', o.kind); reveal(o.kind, { common: clip(o.en || o.sci, 60), scientific: clip(o.sci, 80), by: 'you', local: !!o.local }); });
       box.appendChild(b);
     });
@@ -1617,6 +1621,14 @@
     show('info', false); show('record', false); show('keep', false); show('ask', false); show('big', false); openSheet('claim');
     paintClaimAsk();
     setTimeout(function () { try { if (!$('claim').hidden) $('claimName').focus(); } catch (e) {} }, 80);
+  }
+  // The offers as buttons: one species twice (one name filed under two keys) is offered once, and two species that share an English
+  // name each carry the scientific name, so that no two buttons read the same.
+  function offerList(list) {
+    var seen = {}, n = {}, low = function (x) { return String(x || '').toLowerCase(); };
+    var keep = list.filter(function (o) { var k = low(o.sci || o.en); if (!k || seen[k]) return false; seen[k] = 1; return true; });
+    keep.forEach(function (o) { var w = low(o.en || o.sci); n[w] = (n[w] || 0) + 1; });
+    return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? o.en + ' (' + o.sci + ')' : o.en || o.sci }; });
   }
   function setViewPrompt(key) {
     $('askViewText').textContent = (coarse ? 'Record a few seconds of what is in front of you, or photograph it.' : 'Choose a clip or a photo of what is in front of you.') +
@@ -1631,6 +1643,7 @@
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
     go('naming'); showName();
+    if (!calm) later(hideName, 1500);              // the name has faded on the picture (half a second) before "Now your view." comes up
     later(function () { hideName(); go('askView'); }, calm ? 1400 : 2100);
   }
   function askName(sub) {
@@ -1907,7 +1920,7 @@
   // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
   var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.', looking: 'Looking more closely.' };
   var svcTimer = 0, svcTap = null, askFirstT = 0, firstJob = null;
-  function renewName() { if ($('reveal').classList.contains('show')) showName(); }     // a finer name that arrives while the first is still large on the screen takes its place there too
+  function renewName() { if ($('reveal').classList.contains('show') && (S.screen === 'naming' || S.screen === 'animal') && !anySheet()) showName(); }     // a finer name that arrives while the first is still large on the picture takes its place there; later, the line on the picture says it
   function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
   function paintSvc() {
     var v = S.svc;
@@ -2013,8 +2026,8 @@
     $('bigTitle').textContent = getting ? 'Getting the larger model' : h === 'partial' ? 'Get the rest of the larger model?' : 'Get a larger model?';
     $('bigSub').textContent = 'It is a larger model that names the species: about ' + z.mb + ' MB, downloaded once and kept on this ' + dev() + '. Photos are not sent anywhere. ' +
       (s && coarse && typeof s.phone === 'number' ? 'On a phone it takes about ' + Math.round(s.phone) + (Math.round(s.phone) === 1 ? ' second' : ' seconds') + ' a photo.'
-        : s && !coarse && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.'
-        : 'On a phone it takes several seconds a photo.');
+        : s && typeof s.computer === 'number' ? 'On a computer it takes about ' + Math.round(s.computer) + (Math.round(s.computer) === 1 ? ' second' : ' seconds') + ' a photo.' + (coarse ? ' No phone has been timed yet.' : '')
+        : 'It takes several seconds a photo on a computer. No phone has been timed yet.');   // what was measured, and nothing else
     $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Get it';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -2285,7 +2298,7 @@
 
   paintUI(); paintRecordBits();
   requestAnimationFrame(loop);
-  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName,
+  window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
 
@@ -2316,7 +2329,19 @@
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');
   }
-  function paintAbout() { $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; paintChoices(); }
+  function fittedLine() {                          // where the pocket slot's rows came from, said only when its manifest carries a fitted_on block
+    var f = pocket.about().fitted; if (!f) return '';
+    var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
+    var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
+    return 'The rows the recognizer compares a photo with were fitted on ' + n + 'photographs shared on iNaturalist and Flickr under Creative Commons licences or in the public domain.' + (rule ? ' ' + rule + (/[.!?]$/.test(rule) ? '' : '.') : '');
+  }
+  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a;
+    $('buildMark').textContent = aboutText(); $('aboutNote').textContent = ''; el.textContent = fl;
+    if (fl && f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list)) {   // the attribution: where each photograph's address and licence can be read
+      a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'The list of them';
+      el.appendChild(document.createTextNode(' ')); el.appendChild(a); el.appendChild(document.createTextNode(' gives each one’s address and licence' + (typeof f.list_mb === 'number' && f.list_mb >= 1 ? ' (a file of about ' + Math.round(f.list_mb) + ' MB)' : '') + '.'));
+    }
+    show('fittedOn', !!fl); paintChoices(); }
   $('about').addEventListener('toggle', function () { if ($('about').open) paintAbout(); });
   $('aboutCopy').addEventListener('click', function () {
     var text = aboutText(), note = $('aboutNote');
