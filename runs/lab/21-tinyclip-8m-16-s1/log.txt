@@ -1,0 +1,63 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[04:10:32] job: model=tinyclip-8m-16 shard=1/2 stages=images,images-onnx-int8-per-channel,images-wasm-int8-per-channel
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[04:10:32] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 1/2 --mode mod --rows 800
+fetched 200/400 (1.4s)
+fetched 400/400 (2.4s)
+photos: 400 rows, 400 to fetch, 0 failed, 2.4s
+[04:10:35] exit 0
+[04:10:35] + python3 -u tools/lab/lab.py images --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 1/2 --shard-mode mod --rows 800 --evalname alachua-2025 --out art/tinyclip-8m-16
+images: tinyclip-8m-16, eval alachua-2025, shard 1/2, 400 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-8m-16 via transformers in 4.6s
+[0;93m2026-10-11 04:10:40.334775273 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/400, 33.32 photos/s
+  images 192/400, 34.53 photos/s
+  images 352/400, 34.96 photos/s
+images: 400 embedded, 0 skipped, 11.4s (35.03 photos/s)
+[04:10:52] exit 0
+[04:10:58] + python3 -u tools/lab/lab.py images-onnx --model tinyclip-8m-16 --variant int8-per-channel --onnx prev/onnx/vision.int8-per-channel.onnx --manifest data_in/manifest.csv --photos photos --shard 1/2 --shard-mode mod --rows 800 --evalname alachua-2025 --out art/tinyclip-8m-16
+images: tinyclip-8m-16, eval alachua-2025, shard 1/2, 400 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-8m-16 via transformers in 3.3s
+[0;93m2026-10-11 04:11:02.219003753 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/400, 47.44 photos/s
+  images 192/400, 48.42 photos/s
+  images 352/400, 48.30 photos/s
+images: 400 embedded, 0 skipped, 8.3s (48.35 photos/s)
+[04:11:11] exit 0
+
+added 18 packages in 2s
+[04:11:15] wasm int8-per-channel: prev/onnx/vision.int8-per-channel.onnx sha256 af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34
+[04:11:15] + python3 -u tools/lab/lab.py pixels --model tinyclip-8m-16 --manifest data_in/manifest.csv --photos photos --shard 1/2 --shard-mode mod --rows 800 --pix pix_int8-per-channel
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+pixels: 400 photos, 0 skipped, size 224
+[04:11:21] exit 0
+[04:11:21] wasm: 400 photos in 4 processes
+wasm 0/100 176.5 ms
+wasm 0/100 183.3 ms
+wasm 0/100 180.6 ms
+wasm 0/100 197.8 ms
+wasm done: 100 photos, mean 183.0 ms
+wasm done: 100 photos, mean 182.0 ms
+wasm done: 100 photos, mean 192.3 ms
+wasm done: 100 photos, mean 194.8 ms
+wasm parts merged: 400
+[04:11:43] + python3 -u tools/lab/lab.py wasm-collect --model tinyclip-8m-16 --variant int8-per-channel --manifest data_in/manifest.csv --evalname alachua-2025 --shard 1/2 --pix pix_int8-per-channel --emb wasm_int8-per-channel.f32 --lat wasm_int8-per-channel.json --onnx-name onnx/vision.int8-per-channel.onnx --onnx-sha af9bbf815d578ce8ae819070b4a4d021a70d989d5e6dde4992c3198908751b34 --out art/tinyclip-8m-16
+wasm alachua-2025.wasm-int8-per-channel: 400 embedded, latency {"mean": 188.04, "p50": 181.5, "p90": 221.3, "p99": 313.72, "min": 96.0, "max": 355.5}
+[04:11:43] exit 0
+[04:11:43] job done, fail=0
