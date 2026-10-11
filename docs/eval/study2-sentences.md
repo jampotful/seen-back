@@ -16,16 +16,26 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 |---|---:|---:|---:|
 | kind phrases (sentence rows, with `person` and `none`) | 77.3% (76.0 to 78.7) | 0.05% | 0.10% |
 | summed species probabilities of the head `sentences` | 80.7% (79.5 to 81.9) | 0.00% | 0.00% |
-| the page's combination of kind phrases and the species list (rule `product`, t_kind 20, w_kind 0.5; species head `sentences`) | 83.7% (82.6 to 84.8) | 0.00% | 0.00% |
+| the page's combination of kind phrases and the species list (rule `mix`, t_kind 100, w_kind 0.5; species head `sentences`) | 81.4% (80.2 to 82.6) | 0.07% | 0.07% |
 
-**The kind decision.** The kinds head, its temperature, its weight against the species list and the rule were chosen on 1803 wildlife tuning photos alone, because this model's vectors of the extra set (people, pets, livestock, rooms) were not published when this ran. The number tuned on is the share right on the wildlife tuning photos (the extra set's vectors were not published for this model). Each row is one kinds head under one rule at its best setting on the tuning photos. `kind_at` is the level this computation gives for an asserted kind to be right 95 times in 100 on each tuning set by itself; the level a slot ships with is set by `tools/eval/shipped.py` through `fuse.py`.
+**The kind decision.** The kinds head, its temperature, its weight against the species list and the rule were chosen on 1803 wildlife tuning photos and 3056 tuning photos of the extra set `coco-kinds` (`images/coco-kinds`). Another 5944 of its photos were there for fitting kind rows, and its 1240 test photos (`images/coco-kinds.wasm-int8-per-channel`) are only reported. The number tuned on is the mean of the share right on the wildlife tuning photos and of the mean share right over the extra set's kinds. Each row is one kinds head under one rule at its best setting on the tuning photos. `kind_at` is the level this computation gives for an asserted kind to be right 95 times in 100 on each tuning set by itself; the level a slot ships with is set by `tools/eval/shipped.py` through `fuse.py`.
 
 |  | Kinds head | Rule | t_kind | w_kind | Tuning number | Wildlife tuning photos | Extra tuning photos | Kind right, wildlife test | Kind right, extra test | kind_at | Asserted, wildlife test | Right when asserted | Asserted, extra test | Right when asserted |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | kind phrases | mix | 20 | 0.7 | 84.0% | 84.0% | – | 83.4% (82.2 to 84.5) | – | 0.32 | 61.3% (59.9 to 62.8) | 95.8% (95.0 to 96.5) | – | – |
-|  | kind phrases | product | 20 | 0.5 | 84.4% | 84.4% | – | 83.7% (82.6 to 84.8) | – | 0.43 | 65.7% (64.3 to 67.2) | 95.6% (94.8 to 96.3) | – | – |
-| **chosen** | kind phrases | product | 20 | 0.5 | 84.4% | 84.4% | – | 83.7% (82.6 to 84.8) | – | 0.43 | 65.7% (64.3 to 67.2) | 95.6% (94.8 to 96.3) | – | – |
-| what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 84.4% | 84.4% | – | 83.7% (82.6 to 84.8) | – | 0.43 | 65.7% (64.3 to 67.2) | 95.6% (94.8 to 96.3) | – | – |
+|  | kind phrases | mix | 100 | 0.5 | 84.2% | 82.0% | 86.5% | 81.4% (80.2 to 82.6) | 80.1% (77.8 to 82.3) | 0.76 | 48.8% (47.3 to 50.4) | 97.7% (97.0 to 98.3) | 29.0% (26.5 to 31.5) | 97.8% (96.1 to 99.2) |
+|  | kind phrases | product | 100 | 0.7 | 83.1% | 81.0% | 85.2% | 81.1% (79.9 to 82.3) | 81.5% (79.1 to 83.5) | 0.91 | 43.0% (41.5 to 44.6) | 95.9% (94.9 to 96.7) | 27.0% (24.6 to 29.5) | 97.9% (96.1 to 99.4) |
+| **chosen** | kind phrases | mix | 100 | 0.5 | 84.2% | 82.0% | 86.5% | 81.4% (80.2 to 82.6) | 80.1% (77.8 to 82.3) | 0.76 | 48.8% (47.3 to 50.4) | 97.7% (97.0 to 98.3) | 29.0% (26.5 to 31.5) | 97.8% (96.1 to 99.2) |
+| what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 54.2% | 84.4% | 24.1% | 83.7% (82.6 to 84.8) | 22.1% (19.8 to 24.4) | none | 100.0% (100.0 to 100.0) | 83.7% (82.6 to 84.8) | 100.0% (100.0 to 100.0) | 22.1% (19.8 to 24.4) |
+
+The chosen setting on the extra set's test photos, by kind (no species is named in this computation):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 94.8% (92.2 to 96.8) | 73.5% | 100.0% | 86.8% | 94.8% | 0.5% | – | insect (7) |
+| none | 500 | 62.8% (58.6 to 67.0) | 11.8% | 88.1% | 72.6% | 3.2% | 62.8% | – | plant (64) |
+| cat | 77 | 90.9% (84.4 to 97.4) | 2.6% | 100.0% | 94.7% | 0.0% | 2.6% | – | dog (2) |
+| dog | 63 | 88.9% (81.0 to 95.2) | 0.0% | – | 92.1% | 1.6% | 0.0% | – | cat (4) |
+| deer | 200 | 87.0% (82.0 to 91.5) | 2.5% | 80.0% | 96.9% | 8.0% | 0.0% | – | person (16) |
 
 **Confidence.** For the head `sentences`, the scale was set on the tuning photos (expected calibration error 0.204 there). A species is named when its probability is at least 0.28, the lowest level from which named species were right at least nine times in ten on the tuning photos; three species are offered when the first three together reach 0.45, set the same way. On the test photos a species is then named for 17.7% (16.6 to 18.9) of photos and that name is right for 89.6% (87.5 to 91.9) of them; three species are offered for 1.7% (1.4 to 2.1) and hold the right one for 83.6% (75.3 to 91.8); 80.6% (79.4 to 81.7) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule.
 
@@ -42,7 +52,6 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 | 0.8 to 0.9 | 19 | 84.8% | 100.0% |
 | 0.9 to 1.0 | 1 | 93.5% | 100.0% |
 
-- The extra set's vectors (people, pets, livestock, rooms) were not published for this model when this ran, so the kind decision was tuned on wildlife photos alone and says nothing about a person or an empty room.
 
 ## tinyclip-8m-16
 
@@ -56,16 +65,26 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 |---|---:|---:|---:|
 | kind phrases (sentence rows, with `person` and `none`) | 72.4% (71.0 to 73.8) | 0.05% | 0.21% |
 | summed species probabilities of the head `sentences` | 78.2% (77.0 to 79.5) | 0.00% | 0.00% |
-| the page's combination of kind phrases and the species list (rule `product`, t_kind 20, w_kind 0.5; species head `sentences`) | 79.4% (78.2 to 80.6) | 0.00% | 0.00% |
+| the page's combination of kind phrases and the species list (rule `mix`, t_kind 100, w_kind 0.5; species head `sentences`) | 77.3% (76.0 to 78.6) | 0.07% | 0.26% |
 
-**The kind decision.** The kinds head, its temperature, its weight against the species list and the rule were chosen on 1803 wildlife tuning photos alone, because this model's vectors of the extra set (people, pets, livestock, rooms) were not published when this ran. The number tuned on is the share right on the wildlife tuning photos (the extra set's vectors were not published for this model). Each row is one kinds head under one rule at its best setting on the tuning photos. `kind_at` is the level this computation gives for an asserted kind to be right 95 times in 100 on each tuning set by itself; the level a slot ships with is set by `tools/eval/shipped.py` through `fuse.py`.
+**The kind decision.** The kinds head, its temperature, its weight against the species list and the rule were chosen on 1803 wildlife tuning photos and 3056 tuning photos of the extra set `coco-kinds` (`images/coco-kinds`). Another 5944 of its photos were there for fitting kind rows, and its 1240 test photos (`images/coco-kinds.wasm-int8-per-channel`) are only reported. The number tuned on is the mean of the share right on the wildlife tuning photos and of the mean share right over the extra set's kinds. Each row is one kinds head under one rule at its best setting on the tuning photos. `kind_at` is the level this computation gives for an asserted kind to be right 95 times in 100 on each tuning set by itself; the level a slot ships with is set by `tools/eval/shipped.py` through `fuse.py`.
 
 |  | Kinds head | Rule | t_kind | w_kind | Tuning number | Wildlife tuning photos | Extra tuning photos | Kind right, wildlife test | Kind right, extra test | kind_at | Asserted, wildlife test | Right when asserted | Asserted, extra test | Right when asserted |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | kind phrases | mix | 50 | 0.3 | 79.5% | 79.5% | – | 79.4% (78.2 to 80.6) | – | 0.68 | 44.6% (43.0 to 46.2) | 97.4% (96.7 to 98.1) | – | – |
-|  | kind phrases | product | 20 | 0.5 | 79.8% | 79.8% | – | 79.4% (78.2 to 80.6) | – | 0.53 | 41.5% (39.9 to 43.0) | 97.8% (97.1 to 98.5) | – | – |
-| **chosen** | kind phrases | product | 20 | 0.5 | 79.8% | 79.8% | – | 79.4% (78.2 to 80.6) | – | 0.53 | 41.5% (39.9 to 43.0) | 97.8% (97.1 to 98.5) | – | – |
-| what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 79.8% | 79.8% | – | 79.4% (78.2 to 80.6) | – | 0.53 | 41.5% (39.9 to 43.0) | 97.8% (97.1 to 98.5) | – | – |
+|  | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.2% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) |
+|  | kind phrases | product | 100 | 0.7 | 79.3% | 76.0% | 82.6% | 75.7% (74.4 to 77.0) | 82.8% (80.7 to 84.9) | 0.99 | 6.9% (6.2 to 7.7) | 97.2% (95.2 to 99.0) | 5.8% (4.5 to 7.2) | 100.0% (100.0 to 100.0) |
+| **chosen** | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.2% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) |
+| what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 56.2% | 79.8% | 32.7% | 79.4% (78.2 to 80.6) | 26.2% (23.7 to 28.8) | none | 100.0% (100.0 to 100.0) | 79.4% (78.2 to 80.6) | 100.0% (100.0 to 100.0) | 26.2% (23.7 to 28.8) |
+
+The chosen setting on the extra set's test photos, by kind (no species is named in this computation):
+
+| Photos of | Photos | Kind right | Kind asserted | Right when asserted | True kind among the three when not sure | Said `person` | Said `none` | A species named | Commonest wrong answer |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| person | 400 | 90.8% (87.8 to 93.5) | 38.2% | 99.3% | 96.4% | 90.8% | 3.5% | – | other (16) |
+| none | 500 | 78.6% (74.8 to 82.2) | 36.6% | 96.7% | 83.9% | 1.2% | 78.6% | – | plant (52) |
+| cat | 77 | 92.2% (85.7 to 97.4) | 3.9% | 66.7% | 94.6% | 1.3% | 3.9% | – | none (3) |
+| dog | 63 | 81.0% (71.4 to 90.5) | 0.0% | – | 90.5% | 3.2% | 0.0% | – | cat (6) |
+| deer | 200 | 76.5% (70.5 to 82.0) | 5.0% | 70.0% | 91.1% | 14.0% | 2.5% | – | person (28) |
 
 **Confidence.** For the head `sentences`, the scale was set on the tuning photos (expected calibration error 0.043 there). A species is named when its probability is at least 0.57, the lowest level from which named species were right at least nine times in ten on the tuning photos; three species are offered when the first three together reach 0.64, set the same way. On the test photos a species is then named for 9.3% (8.5 to 10.2) of photos and that name is right for 88.3% (85.0 to 91.3) of them; three species are offered for 6.0% (5.3 to 6.7) and hold the right one for 83.4% (78.7 to 87.8); 84.6% (83.6 to 85.7) get a kind of eye only. These figures leave out the page's rule that names and offers must agree with the winning kind; the exported slot is scored with that rule.
 
@@ -82,7 +101,6 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 | 0.8 to 0.9 | 37 | 84.6% | 94.6% |
 | 0.9 to 1.0 | 23 | 93.9% | 100.0% |
 
-- The extra set's vectors (people, pets, livestock, rooms) were not published for this model when this ran, so the kind decision was tuned on wildlife photos alone and says nothing about a person or an empty room.
 
 ## bioclip2-l14
 

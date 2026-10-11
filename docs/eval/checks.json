@@ -60,10 +60,10 @@
     "workflow": "lab"
    },
    "pub/lab-tinyclip-39m-16": {
-    "commit": "72508140000b4402cb0cac446201056f4859407a",
-    "made_at": "2026-10-11T06:53:23Z",
+    "commit": "7b08c6ab3201dd4d066c2bf803a422dd87c3025a",
+    "made_at": "2026-10-11T07:14:23Z",
     "made_from": "28bdfc454823ca0f03d76fefa4fe3f437aaf1c49",
-    "run_number": "26",
+    "run_number": "27",
     "workflow": "lab"
    },
    "pub/lab-tinyclip-40m-32": {
@@ -81,10 +81,10 @@
     "workflow": "lab"
    },
    "pub/lab-tinyclip-8m-16": {
-    "commit": "a69a6092eb904c078464cf5cb0350ee6b1f64598",
-    "made_at": "2026-10-11T06:53:24Z",
+    "commit": "eb148eec10554fc8102c031d6d9312528ef33f36",
+    "made_at": "2026-10-11T07:14:18Z",
     "made_from": "28bdfc454823ca0f03d76fefa4fe3f437aaf1c49",
-    "run_number": "26",
+    "run_number": "27",
     "workflow": "lab"
    }
   }
@@ -305,6 +305,36 @@
    "check": "how the extra set is cut (tools/eval/kinds.py)",
    "verdict": "note",
    "detail": "fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported."
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of tinyclip-39m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-39m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for tinyclip-39m-16 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds` of tinyclip-8m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "10240 vectors, 10240 ids, of 10240 manifest rows; by part: fit 5944, tune 3056, test 1240"
+  },
+  {
+   "check": "extra-set vectors `coco-kinds.wasm-int8-per-channel` of tinyclip-8m-16 line up with the manifest",
+   "verdict": "pass",
+   "detail": "1240 vectors, 1240 ids, of 10240 manifest rows; by part: fit 0, tune 0, test 1240"
+  },
+  {
+   "check": "extra-set test photos with an almost identical fitting or tuning photo for tinyclip-8m-16 (cosine above 0.995)",
+   "verdict": "pass",
+   "detail": "0 of 1240"
   }
  ],
  "cards": {

@@ -78,16 +78,16 @@ Kind of eye right on the test photos:
 |---|---:|---:|---:|
 | kind phrases | 77.3% (76.0 to 78.7) | 72.4% (71.0 to 73.8) | 76.1% (74.8 to 77.4) |
 | summed species probabilities | 80.7% (79.5 to 81.9) | 78.2% (77.0 to 79.5) | 98.3% (97.9 to 98.7) |
-| the page's combination of kind phrases and the species list | 83.7% (82.6 to 84.8) | 79.4% (78.2 to 80.6) | 98.3% (97.8 to 98.6) |
+| the page's combination of kind phrases and the species list | 81.4% (80.2 to 82.6) | 77.3% (76.0 to 78.6) | 98.3% (97.8 to 98.6) |
 
 The kind decision on the wildlife test photos and on the extra set's test photos (people, rooms with nothing alive, cats, dogs, grazing animals). The second row of each model shows what tuning on wildlife photos alone, as the first export did, would have chosen:
 
 | Model |  | Kinds head and settings | Kind right, wildlife test | Kind right, extra test | `person` | `none` | `cat` | `dog` | `deer` |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| tinyclip-39m-16 | chosen | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 83.7% (82.6 to 84.8) | – | – | – | – | – | – |
-| tinyclip-39m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 83.7% (82.6 to 84.8) | – | – | – | – | – | – |
-| tinyclip-8m-16 | chosen | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 79.4% (78.2 to 80.6) | – | – | – | – | – | – |
-| tinyclip-8m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 79.4% (78.2 to 80.6) | – | – | – | – | – | – |
+| tinyclip-39m-16 | chosen | kind phrases; rule `mix`, t_kind 100, w_kind 0.5 | 81.4% (80.2 to 82.6) | 80.1% (77.8 to 82.3) | 94.8% | 62.8% | 90.9% | 88.9% | 87.0% |
+| tinyclip-39m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 83.7% (82.6 to 84.8) | 22.1% (19.8 to 24.4) | 46.8% | 2.4% | 54.5% | 0.0% | 16.5% |
+| tinyclip-8m-16 | chosen | kind phrases; rule `mix`, t_kind 100, w_kind 0.5 | 77.3% (76.0 to 78.6) | 83.2% (81.0 to 85.2) | 90.8% | 78.6% | 92.2% | 81.0% | 76.5% |
+| tinyclip-8m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 79.4% (78.2 to 80.6) | 26.2% (23.7 to 28.8) | 27.0% | 16.4% | 79.2% | 0.0% | 37.0% |
 | bioclip2-l14 | chosen | kind phrases; rule `mix`, t_kind 20, w_kind 0.7 | 98.3% (97.8 to 98.6) | – | – | – | – | – | – |
 | bioclip2-l14 | what the wildlife photos alone would choose | kind phrases; rule `mix`, t_kind 20, w_kind 0.7 | 98.3% (97.8 to 98.6) | – | – | – | – | – | – |
 
@@ -101,35 +101,36 @@ This run is a stand-in that proves the machinery. No training vectors were publi
 
 Species top-1 with the prior on the test photos (the pocket models on the vectors a phone computes):
 
-| Species head | tinyclip-39m-16 | tinyclip-8m-16 | bioclip2-l14 |
+| Species head | bioclip2-l14 | tinyclip-39m-16 | tinyclip-8m-16 |
 |---|---:|---:|---:|
-| sentences | 35.1% (33.7 to 36.6) | 25.9% (24.6 to 27.2) | 92.4% (91.6 to 93.2) |
-| prototypes | 30.1% (28.7 to 31.5) | 24.0% (22.7 to 25.3) | 61.1% (59.6 to 62.6) |
-| prototypes + sentences | 36.4% (34.9 to 37.8) | 27.3% (25.9 to 28.6) | 91.7% (90.9 to 92.6) |
-| discriminant | 32.6% (31.2 to 34.0) | 24.9% (23.6 to 26.3) | 60.7% (59.2 to 62.2) |
-| discriminant + sentences | 34.6% (33.2 to 36.1) | 25.3% (24.0 to 26.6) | 90.8% (90.0 to 91.7) |
-| mapped to BioCLIP 2 | 35.3% (33.8 to 36.8) | 24.3% (23.0 to 25.6) | – |
+| sentences | 92.4% (91.6 to 93.2) | 35.1% (33.7 to 36.6) | 25.9% (24.6 to 27.2) |
+| prototypes | 61.1% (59.6 to 62.6) | 30.1% (28.7 to 31.5) | 24.0% (22.7 to 25.3) |
+| prototypes + sentences | 91.7% (90.9 to 92.6) | 36.4% (34.9 to 37.8) | 27.3% (25.9 to 28.6) |
+| discriminant | 60.7% (59.2 to 62.2) | 32.6% (31.2 to 34.0) | 24.9% (23.6 to 26.3) |
+| discriminant + sentences | 90.8% (90.0 to 91.7) | 34.6% (33.2 to 36.1) | 25.3% (24.0 to 26.6) |
+| mapped to BioCLIP 2 | – | 35.3% (33.8 to 36.8) | 24.3% (23.0 to 25.6) |
 
 Kind of eye right on the test photos:
 
-| Kind of eye from | tinyclip-39m-16 | tinyclip-8m-16 | bioclip2-l14 |
+| Kind of eye from | bioclip2-l14 | tinyclip-39m-16 | tinyclip-8m-16 |
 |---|---:|---:|---:|
-| kind phrases | 77.3% (76.0 to 78.7) | 72.4% (71.0 to 73.8) | 76.1% (74.8 to 77.4) |
-| trained on the fitting photos | 84.5% (83.4 to 85.5) | 77.0% (75.7 to 78.3) | 94.4% (93.7 to 95.0) |
-| trained rows, with the sentence rows for `person` and `none` kept beside them | 84.4% (83.2 to 85.5) | 76.7% (75.4 to 77.9) | 94.0% (93.3 to 94.7) |
-| summed species probabilities | 86.5% (85.5 to 87.5) | 73.7% (72.4 to 75.0) | 98.5% (98.0 to 98.8) |
-| the page's combination of kind phrases and the species list | 87.0% (85.9 to 88.0) | 77.7% (76.4 to 78.9) | 98.6% (98.2 to 98.9) |
+| kind phrases | 76.1% (74.8 to 77.4) | 77.3% (76.0 to 78.7) | 72.4% (71.0 to 73.8) |
+| trained on the fitting photos | 94.4% (93.7 to 95.0) | 84.5% (83.4 to 85.5) | 77.0% (75.7 to 78.3) |
+| trained rows, with the sentence rows for `person` and `none` kept beside them | 94.0% (93.3 to 94.7) | – | – |
+| summed species probabilities | 98.5% (98.0 to 98.8) | 86.5% (85.5 to 87.5) | 73.7% (72.4 to 75.0) |
+| the page's combination of kind phrases and the species list | 98.6% (98.2 to 98.9) | – | – |
+| the page's combination of kind rows fitted on the fitting photos and the extra set | – | 87.3% (86.3 to 88.3) | 79.5% (78.3 to 80.8) |
 
 The kind decision on the wildlife test photos and on the extra set's test photos (people, rooms with nothing alive, cats, dogs, grazing animals). The second row of each model shows what tuning on wildlife photos alone, as the first export did, would have chosen:
 
 | Model |  | Kinds head and settings | Kind right, wildlife test | Kind right, extra test | `person` | `none` | `cat` | `dog` | `deer` |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| tinyclip-39m-16 | chosen | kind phrases; rule `product`, t_kind 20, w_kind 0.7 | 87.0% (85.9 to 88.0) | – | – | – | – | – | – |
-| tinyclip-39m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.7 | 87.0% (85.9 to 88.0) | – | – | – | – | – | – |
-| tinyclip-8m-16 | chosen | kind phrases; rule `product`, t_kind 50, w_kind 0.3 | 77.7% (76.4 to 78.9) | – | – | – | – | – | – |
-| tinyclip-8m-16 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 50, w_kind 0.3 | 77.7% (76.4 to 78.9) | – | – | – | – | – | – |
 | bioclip2-l14 | chosen | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 98.6% (98.2 to 98.9) | – | – | – | – | – | – |
 | bioclip2-l14 | what the wildlife photos alone would choose | kind phrases; rule `product`, t_kind 20, w_kind 0.5 | 98.6% (98.2 to 98.9) | – | – | – | – | – | – |
+| tinyclip-39m-16 | chosen | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number); rule `mix`, t_kind 0.5, w_kind 0.7 | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 99.5% | 98.6% | 92.2% | 95.2% | 97.5% |
+| tinyclip-39m-16 | what the wildlife photos alone would choose | kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number); rule `mix`, t_kind 0.5, w_kind 0.7 | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 99.5% | 98.6% | 92.2% | 95.2% | 97.5% |
+| tinyclip-8m-16 | chosen | kind rows fitted on the fitting photos and the extra set (every kind counts the same); rule `mix`, t_kind 0.5, w_kind 0.5 | 79.5% (78.3 to 80.8) | 96.4% (95.3 to 97.4) | 98.2% | 97.6% | 89.6% | 90.5% | 94.0% |
+| tinyclip-8m-16 | what the wildlife photos alone would choose | kind rows fitted on the fitting photos and the extra set (every kind counts the same); rule `product`, t_kind 2, w_kind 0.3 | 79.4% (78.2 to 80.6) | 93.3% (91.8 to 94.7) | 98.2% | 97.8% | 90.9% | 20.6% | 96.0% |
 
 - The extra set's vectors (people, pets, livestock, rooms) were not published for this model when this ran, so the kind decision was tuned on wildlife photos alone and says nothing about a person or an empty room.
 - The extra set's vectors were not published for this model when this ran, so no kind row could be fitted for `person` or `none`. The sentence rows for the two are kept beside the trained rows, with a bias set on the tuning photos so that at most 0.5% of them are called `person` or `none`. How often a person is then called a person is unmeasured.
@@ -145,23 +146,23 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `live-pocket` | 83.7% (82.5 to 84.8) | 34.9% (33.5 to 36.4) | 15.2% at 0.4 | 93.4% (91.4 to 95.2) | 3.3% at 0.53 | 85.5% (79.7 to 91.3) | 81.5% | 80.2% (78.8 to 81.5) |
 | `sentences-bioclip2-l14` | 98.3% (97.8 to 98.6) | 92.5% (91.6 to 93.2) | 99.5% at 0.05 | 92.8% (92.1 to 93.6) | 0.0% at never | – | 0.5% | 30.4% (13.0 to 47.8) |
-| `sentences-tinyclip-39m-16` | 83.7% (82.6 to 84.8) | 35.3% (33.9 to 36.8) | 17.6% at 0.28 | 89.8% (87.5 to 91.9) | 0.0% at never | – | 82.4% | 80.6% (79.3 to 81.8) |
-| `sentences-tinyclip-8m-16` | 79.5% (78.2 to 80.6) | 26.4% (25.1 to 27.8) | 9.7% at 0.56 | 88.2% (85.0 to 91.4) | 5.5% at 0.62 | 81.8% (76.2 to 86.6) | 84.8% | 76.2% (74.8 to 77.6) |
+| `sentences-tinyclip-39m-16` | 81.4% (80.2 to 82.6) | 35.3% (33.9 to 36.8) | 17.3% at 0.27 | 89.7% (87.5 to 91.9) | 0.0% at never | – | 82.7% | 77.8% (76.4 to 79.2) |
+| `sentences-tinyclip-8m-16` | 77.3% (76.0 to 78.6) | 26.4% (25.1 to 27.8) | 9.4% at 0.56 | 89.1% (86.0 to 92.1) | 4.9% at 0.63 | 81.0% (76.1 to 86.3) | 85.7% | 74.0% (72.5 to 75.4) |
 | `val-bioclip2-l14` | 98.6% (98.2 to 98.9) | 91.7% (90.9 to 92.6) | 99.5% at 0.05 | 92.2% (91.3 to 92.9) | 0.0% at never | – | 0.5% | 52.4% (28.6 to 71.4) |
-| `val-tinyclip-39m-16` | 87.0% (85.9 to 88.0) | 36.3% (34.9 to 37.8) | 14.9% at 0.89 | 91.8% (89.6 to 93.9) | 7.0% at 0.94 | 90.2% (86.8 to 93.6) | 78.1% | 83.9% (82.6 to 85.1) |
-| `val-tinyclip-8m-16` | 77.6% (76.4 to 78.9) | 25.3% (24.0 to 26.6) | 0.0% at never | – | 16.2% at 0.24 | 83.2% (80.3 to 85.9) | 83.8% | 73.9% (72.3 to 75.3) |
+| `val-tinyclip-39m-16` | 87.3% (86.3 to 88.3) | 36.3% (34.9 to 37.8) | 14.2% at 0.9 | 92.0% (89.6 to 94.0) | 7.3% at 0.94 | 90.3% (86.7 to 93.5) | 78.5% | 84.3% (83.0 to 85.6) |
+| `val-tinyclip-8m-16` | 79.5% (78.3 to 80.8) | 25.3% (24.0 to 26.6) | 0.0% at never | – | 15.8% at 0.24 | 83.0% (80.1 to 85.7) | 84.2% | 76.1% (74.7 to 77.6) |
 
 **Not sure is an answer.** Under `fusion.kind_at` the page asserts no kind, says that it is not sure and offers its three likeliest kinds. `tools/eval/shipped.py` sets the level through `fuse.py` as the lowest one from which an asserted kind was right at least 95 times in 100 on the wildlife tuning photos and, taken by itself, on the tuning third of the extra set. The table gives what then happens on the wildlife test photos and on the extra set's test photos. A slot whose third column says `no` was tuned before its model's vectors of the extra set were published: its level and its settings have never been asked about a person or an empty room.
 
 | Slot | kind_at | Tuned with the extra set | Kind right, wildlife test | Kind asserted | Right when asserted | True kind among the three when not sure | Kind right, extra test | Kind asserted | Right when asserted | True kind among the three when not sure | A species named on an extra photo |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `live-pocket` | 0.71 | no | 83.7% (82.5 to 84.8) | 68.6% (67.2 to 70.0) | 95.7% (95.0 to 96.5) | 92.1% (90.6 to 93.5) | – | – | – | – | – |
+| `live-pocket` | 0.88 | yes | 83.7% (82.5 to 84.8) | 38.4% (37.0 to 40.0) | 99.0% (98.5 to 99.4) | 95.6% (94.8 to 96.4) | 70.1% (67.3 to 72.6) | 3.7% (2.7 to 4.8) | 97.8% (93.5 to 100.0) | 81.7% (79.5 to 83.8) | 0.9% (0.4 to 1.5) |
 | `sentences-bioclip2-l14` | 0.20 | no | 98.3% (97.8 to 98.6) | 99.6% (99.5 to 99.8) | 98.5% (98.1 to 98.9) | 86.7% (66.7 to 100.0) | – | – | – | – | – |
-| `sentences-tinyclip-39m-16` | 0.43 | no | 83.7% (82.6 to 84.8) | 65.7% (64.3 to 67.1) | 95.6% (94.8 to 96.3) | 89.4% (87.8 to 90.9) | – | – | – | – | – |
-| `sentences-tinyclip-8m-16` | 0.53 | no | 79.5% (78.2 to 80.6) | 41.5% (40.0 to 43.0) | 97.8% (97.0 to 98.4) | 91.5% (90.4 to 92.6) | – | – | – | – | – |
+| `sentences-tinyclip-39m-16` | 0.76 | yes | 81.4% (80.2 to 82.6) | 48.8% (47.3 to 50.4) | 97.7% (97.0 to 98.3) | 93.4% (92.4 to 94.5) | 80.1% (77.8 to 82.3) | 28.9% (26.4 to 31.4) | 97.8% (96.1 to 99.2) | 82.9% (80.2 to 85.4) | 1.2% (0.7 to 1.8) |
+| `sentences-tinyclip-8m-16` | 0.80 | yes | 77.3% (76.0 to 78.6) | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 91.4% (90.2 to 92.5) | 83.2% (81.0 to 85.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) | 90.2% (88.3 to 92.2) | 1.1% (0.6 to 1.6) |
 | `val-bioclip2-l14` | 0.20 | no | 98.6% (98.2 to 98.9) | 100.0% (99.9 to 100.0) | 98.6% (98.2 to 99.0) | 50.0% (0.0 to 100.0) | – | – | – | – | – |
-| `val-tinyclip-39m-16` | 0.46 | no | 87.0% (85.9 to 88.0) | 77.7% (76.4 to 79.0) | 95.4% (94.7 to 96.1) | 91.4% (89.7 to 93.3) | – | – | – | – | – |
-| `val-tinyclip-8m-16` | 0.58 | no | 77.6% (76.4 to 78.9) | 52.4% (50.9 to 54.0) | 94.3% (93.3 to 95.3) | 89.0% (87.6 to 90.4) | – | – | – | – | – |
+| `val-tinyclip-39m-16` | 0.50 | yes | 87.3% (86.3 to 88.3) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 90.5% (88.5 to 92.4) | 98.2% (97.3 to 98.8) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) | 94.6% (89.3 to 100.0) | 6.2% (4.9 to 7.7) |
+| `val-tinyclip-8m-16` | 0.53 | yes | 79.5% (78.3 to 80.8) | 52.6% (51.1 to 54.2) | 95.4% (94.5 to 96.2) | 88.9% (87.5 to 90.2) | 96.4% (95.3 to 97.4) | 70.2% (67.6 to 72.7) | 99.3% (98.7 to 99.8) | 94.6% (92.2 to 96.8) | 0.0% (0.0 to 0.0) |
 
 A stricter bar for naming is available. The table gives, for a named species that has to be right at least 90, 95 or 98 times in 100 on `val`, the threshold that `val` gives and what then happens on the test photos. For each bar the offer threshold was set again on `val`, for the photos left without a name, so that the three offered species hold the right one nine times in ten.
 
@@ -173,12 +174,12 @@ A stricter bar for naming is available. The table gives, for a named species tha
 | `sentences-bioclip2-l14` | 90 in 100 | 0.05 | 99.5% (99.2 to 99.7) | 92.8% (92.1 to 93.6) | never | 0.0% (0.0 to 0.0) | – | 0.5% (0.3 to 0.8) |
 | `sentences-bioclip2-l14` | 95 in 100 | 0.44 | 95.7% (95.0 to 96.3) | 95.1% (94.4 to 95.7) | never | 0.0% (0.0 to 0.0) | – | 4.3% (3.7 to 5.0) |
 | `sentences-bioclip2-l14` | 98 in 100 | 0.78 | 84.7% (83.5 to 85.8) | 98.0% (97.5 to 98.4) | 0.66 | 11.7% (10.8 to 12.7) | 91.8% (89.4 to 94.1) | 3.6% (3.0 to 4.2) |
-| `sentences-tinyclip-39m-16` | 90 in 100 | 0.28 | 17.6% (16.5 to 18.8) | 89.8% (87.5 to 91.9) | never | 0.0% (0.0 to 0.0) | – | 82.4% (81.2 to 83.5) |
-| `sentences-tinyclip-39m-16` | 95 in 100 | 0.35 | 13.7% (12.7 to 14.8) | 94.8% (92.9 to 96.5) | 0.48 | 2.4% (2.0 to 2.9) | 89.2% (83.3 to 94.1) | 83.9% (82.7 to 85.0) |
-| `sentences-tinyclip-39m-16` | 98 in 100 | 0.49 | 9.0% (8.1 to 9.8) | 97.4% (95.5 to 98.7) | 0.40 | 9.9% (9.0 to 10.8) | 92.3% (89.9 to 94.9) | 81.1% (79.9 to 82.3) |
-| `sentences-tinyclip-8m-16` | 90 in 100 | 0.56 | 9.7% (8.8 to 10.6) | 88.2% (85.0 to 91.4) | 0.62 | 5.5% (4.9 to 6.2) | 81.8% (76.2 to 86.6) | 84.8% (83.7 to 85.8) |
-| `sentences-tinyclip-8m-16` | 95 in 100 | 0.71 | 5.2% (4.5 to 5.9) | 95.4% (92.7 to 98.2) | 0.61 | 10.2% (9.3 to 11.2) | 83.9% (80.4 to 87.4) | 84.6% (83.5 to 85.7) |
-| `sentences-tinyclip-8m-16` | 98 in 100 | 0.87 | 2.0% (1.6 to 2.5) | 98.8% (96.4 to 100.0) | 0.58 | 15.2% (14.1 to 16.3) | 84.8% (81.8 to 87.4) | 82.8% (81.7 to 84.0) |
+| `sentences-tinyclip-39m-16` | 90 in 100 | 0.27 | 17.3% (16.2 to 18.5) | 89.7% (87.5 to 91.9) | never | 0.0% (0.0 to 0.0) | – | 82.7% (81.5 to 83.8) |
+| `sentences-tinyclip-39m-16` | 95 in 100 | 0.35 | 13.2% (12.1 to 14.2) | 95.3% (93.5 to 97.1) | 0.48 | 2.4% (1.9 to 2.9) | 89.0% (83.0 to 95.0) | 84.5% (83.4 to 85.6) |
+| `sentences-tinyclip-39m-16` | 98 in 100 | 0.38 | 12.4% (11.4 to 13.4) | 96.0% (94.2 to 97.5) | 0.48 | 2.8% (2.3 to 3.3) | 90.6% (85.5 to 95.7) | 84.8% (83.7 to 85.9) |
+| `sentences-tinyclip-8m-16` | 90 in 100 | 0.56 | 9.4% (8.5 to 10.2) | 89.1% (86.0 to 92.1) | 0.63 | 4.9% (4.3 to 5.6) | 81.0% (76.1 to 86.3) | 85.7% (84.7 to 86.8) |
+| `sentences-tinyclip-8m-16` | 95 in 100 | 0.71 | 5.1% (4.5 to 5.8) | 95.8% (93.1 to 98.2) | 0.62 | 9.4% (8.5 to 10.3) | 85.0% (81.5 to 88.6) | 85.5% (84.4 to 86.5) |
+| `sentences-tinyclip-8m-16` | 98 in 100 | 0.87 | 2.0% (1.6 to 2.5) | 98.8% (96.4 to 100.0) | 0.59 | 14.0% (12.9 to 15.1) | 86.4% (83.7 to 89.1) | 84.0% (82.9 to 85.1) |
 
 The text for each slot, with what it needs from the page, is in [`docs/eval/shipped.md`](eval/shipped.md).
 
@@ -199,23 +200,41 @@ With 24 photos an interval is several points wide, so these figures can show a l
 
 ## Decisions
 
-- **The pocket model.** On the vectors a phone computes, and scored against sentences, TinyCLIP 39M/16 gets the kind of eye from phrases right for 77.3% (76.0 to 78.7) and the species with the prior for 34.8% (33.3 to 36.2); TinyCLIP 8M/16 gets 72.4% (71.0 to 73.8) and 26.1% (24.8 to 27.4). The first is a 41.0 MB download and took about 333 ms a photo in the laboratory's one-thread WASM run; the second is 9.6 MB and took about 100 ms a photo. Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written. They decide this choice: a trained head may close the gap between the two models or widen it. What can ship before then is each model's sentence rows with the prior. Scored as the page would, the 39M slot gets the kind of eye right for 83.7% (82.6 to 84.8), names a species for 17.6% of test photos and is right for 89.8% (87.5 to 91.9) of those names; the 8M slot gets 79.5% (78.2 to 80.6), 9.7% and 88.2% (85.0 to 91.4). Recommendation until trained heads are measured: TinyCLIP 39M/16, which is ahead on the kind of eye and on the share of photos it can name by more than the intervals, and TinyCLIP 8M/16 only if the download has to stay near 10 MB.
-- **The pocket model, by the rule set down beforehand** (`tools/eval/decide.py`). TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95% interval lies wholly above zero. The measure is the share right on the wildlife test photos (the extra set's vectors were not published for both models). The comparison is made on the test photos: a choice among two candidates by a rule fixed beforehand, which bends the chosen slot's test figures very little, and which is the one decision here that the test photos took part in. Compared: the slots `sentences-tinyclip-39m-16` and `sentences-tinyclip-8m-16`, scored through `fuse.py` on the same photos. On the share right on the wildlife test photos (the extra set's vectors were not published for both models), TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +4.2 points (+3.3 to +5.2), paired over the same photos. The interval lies above zero, so the larger pocket model ships: a wrong kind gives a person the wrong eyes, and that weighs more than 31 MB downloaded once. The slot to ship is `sentences-tinyclip-39m-16`, published as the branch `pub/heads-sentences-tinyclip-39m-16`. This choice is provisional: it was made from sentence-made slots, before heads fitted on the training photos were measured and on wildlife photos alone, before both models' vectors of the extra set were published. `tools/eval/decide.py` makes it again from the trained slots when they exist.
+- **The pocket model.** On the vectors a phone computes, and scored against sentences, TinyCLIP 39M/16 gets the kind of eye from phrases right for 77.3% (76.0 to 78.7) and the species with the prior for 34.8% (33.3 to 36.2); TinyCLIP 8M/16 gets 72.4% (71.0 to 73.8) and 26.1% (24.8 to 27.4). The first is a 41.0 MB download and took about 333 ms a photo in the laboratory's one-thread WASM run; the second is 9.6 MB and took about 100 ms a photo. Heads fitted on the real training photos have not been measured, because the training vectors were not published when this report was written. They decide this choice: a trained head may close the gap between the two models or widen it. What can ship before then is each model's sentence rows with the prior. Scored as the page would, the 39M slot gets the kind of eye right for 81.4% (80.2 to 82.6), names a species for 17.3% of test photos and is right for 89.7% (87.5 to 91.9) of those names; the 8M slot gets 77.3% (76.0 to 78.6), 9.4% and 89.1% (86.0 to 92.1). Recommendation until trained heads are measured: TinyCLIP 39M/16, which is ahead on the kind of eye and on the share of photos it can name by more than the intervals, and TinyCLIP 8M/16 only if the download has to stay near 10 MB.
+- **The pocket model, by the rule set down beforehand** (`tools/eval/decide.py`). TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95% interval lies wholly above zero. The measure is the mean of the share right on the wildlife test photos and on the extra set's test photos. The comparison is made on the test photos: a choice among two candidates by a rule fixed beforehand, which bends the chosen slot's test figures very little, and which is the one decision here that the test photos took part in. Compared: the slots `sentences-tinyclip-39m-16` and `sentences-tinyclip-8m-16`, scored through `fuse.py` on the same photos. On the mean of the share right on the wildlife test photos and on the extra set's test photos, TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +0.5 points (-0.7 to +1.7), paired over the same photos. The interval reaches zero, so the smaller model ships: it is a quarter of the download and about a third of the time a photo. The slot to ship is `sentences-tinyclip-8m-16`, published as the branch `pub/heads-sentences-tinyclip-8m-16`. This choice is provisional: it was made from sentence-made slots, before heads fitted on the training photos were measured. `tools/eval/decide.py` makes it again from the trained slots when they exist.
 
 | Photos | Measure | TinyCLIP 39M/16 | TinyCLIP 8M/16 | Paired difference (points) |
 |---|---|---:|---:|---:|
-| wildlife test | kind of eye right | 83.7% | 79.5% | +4.2 (+3.3 to +5.2) |
-| wildlife test | kind asserted and right | 62.8% | 40.6% | +22.2 (+20.9 to +23.6) |
-| wildlife test | kind asserted and wrong | 2.9% | 0.9% | +1.9 (+1.5 to +2.5) |
-| wildlife test | a right species name shown | 15.8% | 8.6% | +7.2 (+6.4 to +8.1) |
-| wildlife test | a species name shown | 17.6% | 9.7% | +7.9 (+6.9 to +8.8) |
+| wildlife test | kind of eye right | 81.4% | 77.3% | +4.1 (+3.1 to +5.1) |
+| wildlife test | kind asserted and right | 47.7% | 41.4% | +6.3 (+5.0 to +7.5) |
+| wildlife test | kind asserted and wrong | 1.1% | 1.1% | +0.0 (-0.3 to +0.4) |
+| wildlife test | a right species name shown | 15.5% | 8.4% | +7.2 (+6.4 to +8.1) |
+| wildlife test | a species name shown | 17.3% | 9.4% | +7.9 (+7.0 to +8.9) |
+| extra test | kind of eye right | 80.1% | 83.2% | -3.1 (-5.2 to -1.0) |
+| extra test | kind asserted and right | 28.3% | 27.3% | +1.1 (-1.7 to +3.9) |
+| extra test | kind asserted and wrong | 0.7% | 0.9% | -0.2 (-0.8 to +0.2) |
+| extra test | a species name shown | 1.2% | 1.1% | +0.2 (-0.4 to +0.8) |
 
 - **The server.** BioCLIP 2 (ViT-L/14) with rows made from scientific names, all 5911 species of the list, and the prior (alpha 1.2 at temperature 100, smoothing lam 2 and c 1): top-1 92.4% (91.6 to 93.2), top-5 97.5% (97.0 to 97.9), and the kind of eye from summed species probabilities right for 98.4% (98.0 to 98.7). The kind of eye should come from the species list and the kind phrases should count for little, because this model's kind phrases alone are right for 76.1% (74.8 to 77.4). BioCLIP 2.5 measures 93.4% (92.7 to 94.2) with the prior, a paired difference of +1.0 (+0.4 to +1.7) points from BioCLIP 2 on the same photos. The laboratory's runs embedded 1.2 photos a second with BioCLIP 2 and 0.6 with BioCLIP 2.5 on build machines without a graphics card. The date of BioCLIP 2.5's training data is undocumented, so it cannot be shown that the test photos are new to it, and no number for it can be defended in public. BioCLIP 2 is the one to run.
 - **The server's files.** The slot `sentences-bioclip2-l14` holds these rows and a table whose monthly weights carry the smoothing (lam 2, c 1), with alpha_prior 1, t_species 100, rule `mix`, t_kind 20 and w_kind 0.7, all chosen on `val`. Scored as the page would, it gets the kind of eye right for 98.3% (97.8 to 98.6) of test photos and the species for 92.5% (91.6 to 93.2). Its settings differ a little from the line above because Study 2 searches a finer grid of prior weights; the two results agree within their intervals.
 - **When the server should name a species.** The nine-in-ten rule lets BioCLIP 2 name a species for nearly every photo, since it is right more often than that overall. A stricter bar suits a name shown to a person: with name_at 0.78, set on `val` for 98 in 100, the slot `sentences-bioclip2-l14` names a species for 84.7% (83.5 to 85.8) of test photos and is right for 98.0% (97.5 to 98.4) of those names; with offer_at 0.66 it offers three species for 11.7% (10.8 to 12.7) and they hold the right one for 91.8% (89.4 to 94.1), and 3.6% (3.0 to 4.2) get a kind of eye only. The other bars are in the table under "What the page would show".
 - **What the app may say about the server.** A sentence the measurements support: "On photos from Alachua County that iNaturalist's community had already identified, taken in 2025 and 2026, this recognizer named the species for about 91 photos in 100." It may add that such photos are easier than a photo taken in passing. It may not compare itself with iNaturalist's model.
-- **The slot that is live.** `live-pocket` in the tables is `models/pocket` as it stands on `main`: TinyCLIP 39M/16, sentence rows, and the interim settings chosen by hand (rule `product`, t_kind 100, w_kind 0.3). Through `fuse.py` it gets the kind of eye right for 83.7% (82.5 to 84.8) of the wildlife test photos and names a species for 15.2%, rightly for 93.4% (91.4 to 95.2) of those names. For these settings `kind_at` comes out as 0.71: the page then asserts a kind for 68.6% (67.2 to 70.0) of the wildlife test photos and is right for 95.7% (95.0 to 96.5) of those, and where it is not sure the true kind is among its three likeliest for 92.1% (90.6 to 93.5). That level was set on wildlife photos alone, because the pocket models' vectors of the extra set were not published when this was written; it says nothing about people or rooms, for which the only evidence is the fifteen sample photos of `tools/eval/interim.py`.
+- **The slot that is live.** `live-pocket` in the tables is `models/pocket` as it stands on `main`: TinyCLIP 39M/16, sentence rows, and the interim settings chosen by hand (rule `product`, t_kind 100, w_kind 0.3). Through `fuse.py` it gets the kind of eye right for 83.7% (82.5 to 84.8) of the wildlife test photos and names a species for 15.2%, rightly for 93.4% (91.4 to 95.2) of those names. For these settings `kind_at` comes out as 0.88: the page then asserts a kind for 38.4% (37.0 to 40.0) of the wildlife test photos and is right for 99.0% (98.5 to 99.4) of those, and where it is not sure the true kind is among its three likeliest for 95.6% (94.8 to 96.4). On the extra set's test photos (people, cats, dogs, grazing animals, rooms) it gets the kind right for 70.1% (67.3 to 72.6), asserts for 3.7% (2.7 to 4.8) and is right for 97.8% (93.5 to 100.0) of those.
 - **The larger model on the device.** The head files are the slot `sentences-bioclip2-l14` with name_at 0.78 and offer_at 0.66. On the laboratory's 320 test photos the int8 vectors computed by the browser's WASM runtime change the top species for few photos (table above), and a named species stays right as often as with the original vectors, so the thresholds are kept. They could not be set again on int8 vectors, since no `val` photo has any. `tools/eval/naturalist.py` writes the files for `models/naturalist`; the `vision` block of its manifest is left for the laboratory's `parts.json`.
+- **The same comparison on slots whose kind rows are fitted on photos.** The sentence slots above are the weakest form of either model on people and rooms. The stand-in slots `val-tinyclip-39m-16` and `val-tinyclip-8m-16` carry kind rows fitted on wildlife photos and on the extra set's fitting part, which is the form the trained slots will have. On them TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by +4.8 (+4.1 to +5.5) points on the mean of the share right on the wildlife test photos and on the extra set's test photos, paired over the same photos, and the rule's answer there is `tinyclip-39m-16`. This second look was added after the first answer was seen, so it is evidence and no part of the rule; the trained slots are decided by the rule as written.
+
+| Photos | Measure | TinyCLIP 39M/16 | TinyCLIP 8M/16 | Paired difference (points) |
+|---|---|---:|---:|---:|
+| wildlife test | kind of eye right | 87.3% | 79.5% | +7.8 (+6.7 to +8.8) |
+| wildlife test | kind asserted and right | 75.2% | 50.2% | +25.0 (+23.7 to +26.4) |
+| wildlife test | kind asserted and wrong | 3.6% | 2.4% | +1.1 (+0.6 to +1.7) |
+| wildlife test | a right species name shown | 13.1% | 0.0% | +13.1 (+12.1 to +14.1) |
+| wildlife test | a species name shown | 14.2% | 0.0% | +14.2 (+13.2 to +15.3) |
+| extra test | kind of eye right | 98.2% | 96.4% | +1.8 (+1.0 to +2.6) |
+| extra test | kind asserted and right | 94.8% | 69.7% | +25.1 (+22.6 to +27.5) |
+| extra test | kind asserted and wrong | 0.7% | 0.5% | +0.2 (-0.2 to +0.8) |
+| extra test | a species name shown | 6.2% | 0.0% | +6.2 (+4.9 to +7.7) |
+
 - **What waits for the training vectors.** Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. `bash tools/eval/run.sh ROOT alachua-pre2025` measures them, exports the best head of each model as a slot and scores it as the page would. A build-machine run on the branch `run/eval/armed-pocket` waits for the pocket models' training vectors and then does exactly that; `run/eval/armed-all` also waits for BioCLIP 2's. Both then give the extra set's vectors up to forty minutes to appear and go on with what is published. Their results come back under `runs/eval/` on the `ci` branch, the slots go to `pub/heads-alachua-pre2025-<model>`, and `docs/eval/decision-pocket.json` in the returned files names the pocket slot to ship. The whole path was tried in the evaluation sandbox on made-up vectors of the real size (86,915 training rows in the shape of the open-data manifest, with no GBIF record ids); those numbers mean nothing and are kept nowhere. The stand-in gives one hint about BioCLIP 2: adding prototypes from about 1,200 photos to its sentence rows moved top-1 without the prior from 90.3% (89.4 to 91.3) to 91.3% (90.5 to 92.2) and top-1 with the prior from 92.4% (91.6 to 93.2) to 91.7% (90.9 to 92.6), so a real gain is not shown yet.
 
 ## The first look, checked
@@ -257,7 +276,7 @@ The sources, with quotes, addresses and the day each page was read, are in [`doc
 
 ## Checks for leakage and for mistakes
 
-`tools/eval/checks.py` ran 43 checks: 33 passed, 0 failed, 10 record a fact to know, and 0 could not run because a file was not published. The full table is in [`docs/eval/checks.md`](eval/checks.md).
+`tools/eval/checks.py` ran 49 checks: 39 passed, 0 failed, 10 record a fact to know, and 0 could not run because a file was not published. The full table is in [`docs/eval/checks.md`](eval/checks.md).
 
 - **Scientific names carried by more than one species key.** 1: {"Salvia azurea": [8283204, 2927067]}. Their sentence rows are identical, so the later key can never be the top answer; photos of it on the test split: 0.
 - **Test photos whose species is not in the list at all.** 36 of 4197, so a recognizer held to the list can reach at most 0.9914.
@@ -279,7 +298,7 @@ What the checks cover: the dates of the photos against the species list's cutoff
 - **One region.** Every number is for Alachua County and for a list of its own species. A longer list, or a place with fewer records, will give lower numbers.
 - **The labels follow GBIF's names.** Where GBIF and iNaturalist split or name a species differently, a photo is counted against GBIF's species.
 - **Nothing here compares with iNaturalist's own model.** We cannot run it, and its published accuracy figures are measured on other photos with other rules. No sentence in the app may say or suggest that this recognizer matches it.
-- **People, pets and photos with nothing alive in them are unmeasured so far.** The extra set of COCO photos exists and the scripts tune and report with it, but no model's vectors of it were published when this report was written. How often a person is called a person is unmeasured here.
+- **People, pets, livestock and rooms are measured on COCO photos only.** They are well-lit photos from a general data set, with the subject large in the frame for people. A phone held at a blank wall, a hand, a toy animal, a painting of a bird or a screen showing a heron is in neither set, and neither is a person standing in a garden, where two answers are defensible.
 - **Top-5 is measured against the whole list.** The page offers three species of the winning kind; that rule is measured in the section on what the page would show.
 
 ## Rerun on a clean machine

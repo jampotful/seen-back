@@ -29,6 +29,7 @@ BIG, SMALL = "tinyclip-39m-16", "tinyclip-8m-16"
 ap = argparse.ArgumentParser()
 ap.add_argument("--dir", default="docs/eval")
 ap.add_argument("--out")
+ap.add_argument("--train", help="compare the two slots of this kind (for example `val`, the stand-in whose kind rows are fitted on photos) in place of the rule's own order; the result is a second look and is written to decision-pocket-<train>.json")
 a = ap.parse_args()
 
 
@@ -56,7 +57,7 @@ def iv(mean, b):
     return [round(mean, 4), round(float(lo), 4), round(float(hi), 4)]
 
 
-train = next((t for t in ("alachua-pre2025", "sentences") if load(t, BIG) and load(t, SMALL)), None)
+train = next((t for t in ((a.train,) if a.train else ("alachua-pre2025", "sentences")) if load(t, BIG) and load(t, SMALL)), None)
 if train is None:
     print("no pair of as-shipped results with per-photo outcomes for both pocket models; nothing decided")
     raise SystemExit(0)
@@ -91,6 +92,6 @@ out = {"made_by": "tools/eval/decide.py", "slots_compared": {BIG: "%s-%s" % (tra
            what, 100 * deciding[0], 100 * deciding[1], 100 * deciding[2],
            "The interval lies above zero, so the larger pocket model ships: a wrong kind gives a person the wrong eyes, and that weighs more than 31 MB downloaded once." if ahead else
            "The interval reaches zero, so the smaller model ships: it is a quarter of the download and about a third of the time a photo."))}
-ev.write_json(a.out or os.path.join(a.dir, "decision-pocket.json"), out)
+ev.write_json(a.out or os.path.join(a.dir, "decision-pocket%s.json" % (("-" + a.train) if a.train else "")), out)
 print(out["why"])
 print("choice:", choice, "| slot branch:", out["branch"], "| provisional:", out["provisional"])

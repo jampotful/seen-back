@@ -24,4 +24,5 @@ for m in $MODELS; do
   fi
 done
 python3 -I tools/eval/decide.py || echo "The pocket decision could not be computed."
+python3 -I tools/eval/decide.py --train val || true      # a second look: the stand-in slots, whose kind rows are fitted on photos
 python3 -I tools/eval/report.py

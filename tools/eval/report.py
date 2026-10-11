@@ -459,6 +459,13 @@ if VAR:
     T += ["- **The larger model on the device.** The head files are the slot `%s` with name_at %g and offer_at %g. On the laboratory's %d test photos the int8 vectors computed by the browser's WASM runtime change the top species for few photos (table above), and a named species stays right as often as with the original vectors, so the thresholds are kept. "
           "They could not be set again on int8 vectors, since no `val` photo has any. `tools/eval/naturalist.py` writes the files for `models/naturalist`; the `vision` block of its manifest is left for the laboratory's `parts.json`." % (
               best[1]["slot"], best[1]["fusion"]["name_at"], best[1]["fusion"]["offer_at"], best[1]["test_photos"])]
+DECV = load("decision-pocket-val.json")
+if DECV and DEC and DEC["train"] != "alachua-pre2025":
+    dv = DECV["deciding_difference"]
+    T += ["- **The same comparison on slots whose kind rows are fitted on photos.** The sentence slots above are the weakest form of either model on people and rooms. The stand-in slots `%s` and `%s` carry kind rows fitted on wildlife photos and on the extra set's fitting part, which is the form the trained slots will have. "
+          "On them TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by %s points on %s, paired over the same photos, and the rule's answer there is `%s`. This second look was added after the first answer was seen, so it is evidence and no part of the rule; the trained slots are decided by the rule as written." % (
+              DECV["slots_compared"]["tinyclip-39m-16"], DECV["slots_compared"]["tinyclip-8m-16"], pts(dv), "the mean of the share right on the wildlife test photos and on the extra set's test photos" if "extra" in DECV["sets"] else "the wildlife test photos", DECV["choice"]), "",
+          table(["Photos", "Measure", "TinyCLIP 39M/16", "TinyCLIP 8M/16", "Paired difference (points)"], [[m_["photos"] + " test", m_["measure"], pc(m_["tinyclip-39m-16"]), pc(m_["tinyclip-8m-16"]), pts(m_["difference"])] for m_ in DECV["measures"]], ["---", "---", "---:", "---:", "---:"]), ""]
 sv = S2.get("val")
 if not real:
     tx = ("Fitted heads on the real training set are unmeasured: for both pocket models (prototypes, prototypes with sentence rows, the discriminant head, the map into BioCLIP 2's space) and for BioCLIP 2 itself. "

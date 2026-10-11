@@ -4,15 +4,15 @@
  "manifest": {
   "id": "tinyclip-8m-16",
   "fusion": {
-   "t_kind": 50.0,
+   "t_kind": 0.5,
    "t_species": 100.0,
    "alpha_prior": 0.5,
-   "w_kind": 0.3,
-   "rule": "product",
+   "w_kind": 0.5,
+   "rule": "mix",
    "name_at": 2.0,
    "offer_at": 0.24,
    "prior_floor": 1e-06,
-   "kind_at": 0.58
+   "kind_at": 0.53
   },
   "evaluation": {
    "model": "tinyclip-8m-16",
@@ -26,11 +26,13 @@
     "lam": 0.0,
     "c": 0.1
    },
-   "kind_head": "kind phrases",
-   "kind_tuned_with_extra_set": false
+   "kind_head": "kind rows fitted on the fitting photos and the extra set (every kind counts the same)",
+   "kind_tuned_with_extra_set": true
   },
   "needs": [
    "species.bias_url (build 7 of the page)",
+   "kinds.bias (build 7 of the page)",
+   "fusion.rule mix (build 7 of the page)",
    "fusion.kind_at (the build of the page that has the answer `not sure`)"
   ]
  },
@@ -40,13 +42,13 @@
   "name_at": null,
   "offer_at": 0.24,
   "kind_right": [
-   0.7765,
-   0.7639,
-   0.7887,
+   0.7951,
+   0.7829,
+   0.8075,
    4197
   ],
-  "called_person": 0.0004765308553728854,
-  "called_none": 0.0009530617107457708,
+  "called_person": 0.0014295925661186562,
+  "called_none": 0.002144388849177984,
   "species_top1": [
    0.2528,
    0.2402,
@@ -78,83 +80,84 @@
    0
   ],
   "offered": [
-   0.162,
-   0.1513,
-   0.1732,
+   0.1582,
+   0.1477,
+   0.1692,
    4197
   ],
   "offered_holds_species": [
-   0.8324,
-   0.8029,
-   0.8588,
-   680
+   0.8298,
+   0.8012,
+   0.857,
+   664
   ],
   "offered_kind_right": [
-   0.9721,
-   0.9588,
-   0.9838,
-   680
+   0.9744,
+   0.9623,
+   0.985,
+   664
   ],
   "kind_only": [
-   0.838,
-   0.8268,
-   0.8487,
+   0.8418,
+   0.8308,
+   0.8523,
    4197
   ],
   "kind_only_kind_right": [
-   0.7387,
-   0.7233,
-   0.7529,
-   3517
+   0.7614,
+   0.7472,
+   0.7758,
+   3533
   ],
   "top_species_differs_from_direct_computation": 0,
-  "seconds": 13.1,
-  "kind_at": 0.58,
+  "seconds": 13.5,
+  "kind_at": 0.53,
   "kind": {
    "bar": 0.95,
-   "kind_at": 0.58,
+   "kind_at": 0.53,
    "tuned_on": {
-    "wildlife": 565
+    "wildlife": 565,
+    "extra": 3056
    },
-   "extra_set_vectors_published": false,
+   "extra_set_vectors_published": true,
    "fuse_sure_field_differs": 0,
    "tuning": {
     "wildlife": {
      "photos": 565,
      "kind_right": [
-      0.8,
-      0.7664,
-      0.8319,
+      0.8177,
+      0.7876,
+      0.8496,
       565
      ],
      "asserted": [
-      0.4991,
-      0.4602,
-      0.5416,
+      0.5221,
+      0.4814,
+      0.5646,
       565
      ],
      "asserted_right": [
-      0.9504,
-      0.9255,
-      0.9752,
-      282
+      0.9525,
+      0.9288,
+      0.9763,
+      295
      ],
      "not_sure": [
-      0.5009,
-      0.4584,
-      0.5398,
+      0.4779,
+      0.4354,
+      0.5186,
       565
      ],
      "not_sure_true_kind_among_three": [
-      0.9329,
-      0.9011,
-      0.9576,
-      283
+      0.9333,
+      0.9,
+      0.963,
+      270
      ],
      "true_kind_among_three": [
       0.9664,
       0.9504,
-      0.9805,
+      0.9788,
       565
      ],
      "wrong_and_asserted": [
@@ -163,50 +166,95 @@
       0.0389,
       565
      ]
+    },
+    "extra": {
+     "photos": 3056,
+     "kind_right": [
+      0.9382,
+      0.9293,
+      0.9467,
+      3056
+     ],
+     "asserted": [
+      0.5137,
+      0.4948,
+      0.5311,
+      3056
+     ],
+     "asserted_right": [
+      0.9936,
+      0.9892,
+      0.9975,
+      1570
+     ],
+     "not_sure": [
+      0.4863,
+      0.4689,
+      0.5052,
+      3056
+     ],
+     "not_sure_true_kind_among_three": [
+      0.9468,
+      0.9354,
+      0.9583,
+      1486
+     ],
+     "true_kind_among_three": [
+      0.9725,
+      0.9669,
+      0.9781,
+      3056
+     ],
+     "wrong_and_asserted": [
+      0.0033,
+      0.0016,
+      0.0052,
+      3056
+     ]
     }
    },
    "test_wildlife": {
     "photos": 4197,
     "kind_right": [
-     0.7765,
-     0.7639,
-     0.7887,
+     0.7951,
+     0.7829,
+     0.8075,
      4197
     ],
     "asserted": [
-     0.5237,
-     0.5092,
-     0.5401,
+     0.5261,
+     0.5115,
+     0.5416,
      4197
     ],
     "asserted_right": [
-     0.9431,
-     0.9331,
-     0.9527,
-     2198
+     0.9538,
+     0.9452,
+     0.9624,
+     2208
     ],
     "not_sure": [
-     0.4763,
-     0.4599,
-     0.4908,
+     0.4739,
+     0.4584,
+     0.4885,
      4197
     ],
     "not_sure_true_kind_among_three": [
-     0.8904,
-     0.8764,
-     0.904,
-     1999
+     0.8889,
+     0.8753,
+     0.9025,
+     1989
     ],
     "true_kind_among_three": [
-     0.9433,
-     0.9361,
-     0.9502,
+     0.9426,
+     0.9352,
+     0.9495,
      4197
     ],
     "wrong_and_asserted": [
-     0.0298,
-     0.0245,
-     0.035,
+     0.0243,
+     0.0198,
+     0.0293,
      4197
     ]
    },
@@ -227,48 +275,48 @@
      "kind": "cat",
      "n": 11,
      "right": [
-      0.3636,
-      0.0909,
-      0.6364,
+      0.4545,
+      0.1818,
+      0.7273,
       11
      ],
-     "asserted": 0.09090909090909091,
-     "asserted_right": 1.0,
-     "not_sure_true_kind_among_three": 0.3,
+     "asserted": 0.0,
+     "asserted_right": null,
+     "not_sure_true_kind_among_three": 0.6363636363636364,
      "said_person": 0.0,
      "said_none": 0.09090909090909091,
      "named": 0.0,
-     "commonest_wrong": "plant (5)"
+     "commonest_wrong": "plant (3)"
     },
     {
      "kind": "dog",
      "n": 6,
      "right": [
-      0.1667,
       0.0,
-      0.5,
+      0.0,
+      0.0,
       6
      ],
-     "asserted": 0.16666666666666666,
-     "asserted_right": 0.0,
-     "not_sure_true_kind_among_three": 0.2,
+     "asserted": 0.0,
+     "asserted_right": null,
+     "not_sure_true_kind_among_three": 0.16666666666666666,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "deer (2)"
+     "commonest_wrong": "insect (2)"
     },
     {
      "kind": "squirrel",
      "n": 36,
      "right": [
       0.5278,
-      0.3611,
+      0.3889,
       0.6944,
       36
      ],
      "asserted": 0.16666666666666666,
      "asserted_right": 1.0,
-     "not_sure_true_kind_among_three": 0.5,
+     "not_sure_true_kind_among_three": 0.6,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
@@ -278,352 +326,829 @@
      "kind": "deer",
      "n": 36,
      "right": [
-      0.4444,
-      0.2778,
-      0.6111,
+      0.6944,
+      0.5278,
+      0.8333,
       36
      ],
-     "asserted": 0.16666666666666666,
-     "asserted_right": 0.8333333333333334,
-     "not_sure_true_kind_among_three": 0.6666666666666666,
+     "asserted": 0.05555555555555555,
+     "asserted_right": 0.5,
+     "not_sure_true_kind_among_three": 0.7058823529411765,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "plant (12)"
+     "commonest_wrong": "plant (6)"
     },
     {
      "kind": "rabbit",
      "n": 31,
      "right": [
-      0.7419,
-      0.5806,
-      0.9032,
+      0.6452,
+      0.4516,
+      0.8065,
       31
      ],
-     "asserted": 0.41935483870967744,
+     "asserted": 0.3548387096774194,
      "asserted_right": 1.0,
-     "not_sure_true_kind_among_three": 0.7222222222222222,
+     "not_sure_true_kind_among_three": 0.6,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "plant (3)"
+     "commonest_wrong": "squirrel (6)"
     },
     {
      "kind": "hawk",
      "n": 82,
      "right": [
-      0.5854,
-      0.4756,
-      0.6951,
+      0.5,
+      0.3902,
+      0.6098,
       82
      ],
-     "asserted": 0.36585365853658536,
-     "asserted_right": 0.9666666666666667,
-     "not_sure_true_kind_among_three": 0.7307692307692307,
+     "asserted": 0.2073170731707317,
+     "asserted_right": 0.8823529411764706,
+     "not_sure_true_kind_among_three": 0.7538461538461538,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "bird (18)"
+     "commonest_wrong": "bird (25)"
     },
     {
      "kind": "wader",
      "n": 382,
      "right": [
-      0.8089,
-      0.767,
-      0.8482,
+      0.7461,
+      0.7016,
+      0.788,
       382
      ],
-     "asserted": 0.5366492146596858,
-     "asserted_right": 0.9804878048780488,
-     "not_sure_true_kind_among_three": 0.8926553672316384,
+     "asserted": 0.5078534031413613,
+     "asserted_right": 0.9484536082474226,
+     "not_sure_true_kind_among_three": 0.8723404255319149,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "bird (44)"
+     "commonest_wrong": "bird (70)"
     },
     {
      "kind": "bird",
      "n": 531,
      "right": [
-      0.71,
-      0.6723,
-      0.7477,
+      0.7966,
+      0.7627,
+      0.8305,
       531
      ],
-     "asserted": 0.2071563088512241,
-     "asserted_right": 0.9181818181818182,
-     "not_sure_true_kind_among_three": 0.9026128266033254,
-     "said_person": 0.003766478342749529,
-     "said_none": 0.003766478342749529,
+     "asserted": 0.3615819209039548,
+     "asserted_right": 0.9583333333333334,
+     "not_sure_true_kind_among_three": 0.9262536873156342,
+     "said_person": 0.0018832391713747645,
+     "said_none": 0.007532956685499058,
      "named": 0.0,
-     "commonest_wrong": "wader (52)"
+     "commonest_wrong": "wader (45)"
     },
     {
      "kind": "alligator",
      "n": 110,
      "right": [
-      0.7,
-      0.6091,
-      0.7818,
+      0.7364,
+      0.6545,
+      0.8182,
       110
      ],
-     "asserted": 0.4,
+     "asserted": 0.4818181818181818,
      "asserted_right": 1.0,
-     "not_sure_true_kind_among_three": 0.7727272727272727,
+     "not_sure_true_kind_among_three": 0.8070175438596491,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "reptile (11)"
+     "commonest_wrong": "plant (9)"
     },
     {
      "kind": "reptile",
      "n": 268,
      "right": [
-      0.4739,
-      0.4142,
-      0.5299,
+      0.5373,
+      0.4776,
+      0.597,
       268
      ],
-     "asserted": 0.11194029850746269,
-     "asserted_right": 0.7666666666666667,
-     "not_sure_true_kind_among_three": 0.819327731092437,
-     "said_person": 0.0,
+     "asserted": 0.1417910447761194,
+     "asserted_right": 0.868421052631579,
+     "not_sure_true_kind_among_three": 0.8260869565217391,
+     "said_person": 0.007462686567164179,
      "said_none": 0.0037313432835820895,
      "named": 0.0,
-     "commonest_wrong": "insect (81)"
+     "commonest_wrong": "insect (78)"
     },
     {
      "kind": "frog",
      "n": 97,
      "right": [
+      0.5361,
       0.4433,
-      0.3402,
-      0.5464,
+      0.6291,
       97
      ],
-     "asserted": 0.24742268041237114,
-     "asserted_right": 0.7083333333333334,
-     "not_sure_true_kind_among_three": 0.6575342465753424,
+     "asserted": 0.2268041237113402,
+     "asserted_right": 0.9090909090909091,
+     "not_sure_true_kind_among_three": 0.7333333333333333,
      "said_person": 0.0,
-     "said_none": 0.0,
+     "said_none": 0.010309278350515464,
      "named": 0.0,
-     "commonest_wrong": "insect (43)"
+     "commonest_wrong": "insect (30)"
     },
     {
      "kind": "bee",
      "n": 126,
      "right": [
-      0.3968,
-      0.3175,
-      0.4841,
+      0.4206,
+      0.3413,
+      0.5,
       126
      ],
-     "asserted": 0.46825396825396826,
-     "asserted_right": 0.4915254237288136,
-     "not_sure_true_kind_among_three": 0.8955223880597015,
+     "asserted": 0.42063492063492064,
+     "asserted_right": 0.37735849056603776,
+     "not_sure_true_kind_among_three": 0.863013698630137,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "insect (59)"
+     "commonest_wrong": "insect (60)"
     },
     {
      "kind": "insect",
      "n": 962,
      "right": [
-      0.9314,
-      0.9158,
-      0.947,
+      0.9064,
+      0.8867,
+      0.9241,
       962
      ],
-     "asserted": 0.6694386694386695,
-     "asserted_right": 0.9798136645962733,
-     "not_sure_true_kind_among_three": 0.9968553459119497,
-     "said_person": 0.0,
-     "said_none": 0.0,
+     "asserted": 0.5914760914760915,
+     "asserted_right": 0.9736379613356766,
+     "not_sure_true_kind_among_three": 0.9949109414758269,
+     "said_person": 0.002079002079002079,
+     "said_none": 0.0010395010395010396,
      "named": 0.0,
-     "commonest_wrong": "plant (46)"
+     "commonest_wrong": "plant (40)"
     },
     {
      "kind": "plant",
      "n": 1223,
      "right": [
-      0.9632,
-      0.9526,
-      0.9738,
+      0.9567,
+      0.9444,
+      0.9681,
       1223
      ],
-     "asserted": 0.7914963205233033,
-     "asserted_right": 0.9948347107438017,
-     "not_sure_true_kind_among_three": 0.996078431372549,
+     "asserted": 0.777596075224857,
+     "asserted_right": 0.9968454258675079,
+     "not_sure_true_kind_among_three": 0.9926470588235294,
      "said_person": 0.0,
-     "said_none": 0.0,
+     "said_none": 0.0008176614881439084,
      "named": 0.0,
-     "commonest_wrong": "insect (37)"
+     "commonest_wrong": "insect (33)"
     },
     {
      "kind": "other",
      "n": 296,
      "right": [
-      0.3074,
-      0.2568,
-      0.3615,
+      0.4966,
+      0.4426,
+      0.5541,
       296
      ],
-     "asserted": 0.19256756756756757,
-     "asserted_right": 0.17543859649122806,
-     "not_sure_true_kind_among_three": 0.9497907949790795,
+     "asserted": 0.33783783783783783,
+     "asserted_right": 0.77,
+     "not_sure_true_kind_among_three": 0.8367346938775511,
+     "said_person": 0.0033783783783783786,
+     "said_none": 0.0,
+     "named": 0.0,
+     "commonest_wrong": "insect (107)"
+    }
+   ],
+   "asserted_wildlife": [
+    {
+     "said": "squirrel",
+     "asserted": 6,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      6
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "deer",
+     "asserted": 1,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      1
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "rabbit",
+     "asserted": 11,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      11
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "hawk",
+     "asserted": 15,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      15
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "wader",
+     "asserted": 191,
+     "right": [
+      0.9634,
+      0.9319,
+      0.9895,
+      191
+     ],
+     "commonest_true_kind_when_wrong": "bird (7)"
+    },
+    {
+     "said": "bird",
+     "asserted": 194,
+     "right": [
+      0.9485,
+      0.9175,
+      0.9794,
+      194
+     ],
+     "commonest_true_kind_when_wrong": "wader (9)"
+    },
+    {
+     "said": "alligator",
+     "asserted": 54,
+     "right": [
+      0.9815,
+      0.9444,
+      1.0,
+      54
+     ],
+     "commonest_true_kind_when_wrong": "bird (1)"
+    },
+    {
+     "said": "reptile",
+     "asserted": 33,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      33
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "frog",
+     "asserted": 20,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      20
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "bee",
+     "asserted": 23,
+     "right": [
+      0.8696,
+      0.6957,
+      1.0,
+      23
+     ],
+     "commonest_true_kind_when_wrong": "insect (3)"
+    },
+    {
+     "said": "insect",
+     "asserted": 607,
+     "right": [
+      0.9127,
+      0.888,
+      0.9341,
+      607
+     ],
+     "commonest_true_kind_when_wrong": "bee (27)"
+    },
+    {
+     "said": "plant",
+     "asserted": 972,
+     "right": [
+      0.9753,
+      0.965,
+      0.9846,
+      972
+     ],
+     "commonest_true_kind_when_wrong": "insect (9)"
+    },
+    {
+     "said": "other",
+     "asserted": 81,
+     "right": [
+      0.9506,
+      0.9012,
+      0.9877,
+      81
+     ],
+     "commonest_true_kind_when_wrong": "insect (3)"
+    }
+   ],
+   "test_extra": {
+    "photos": 1240,
+    "kind_right": [
+     0.9637,
+     0.9532,
+     0.9742,
+     1240
+    ],
+    "asserted": [
+     0.7016,
+     0.6758,
+     0.7274,
+     1240
+    ],
+    "asserted_right": [
+     0.9931,
+     0.9874,
+     0.9977,
+     870
+    ],
+    "not_sure": [
+     0.2984,
+     0.2726,
+     0.3242,
+     1240
+    ],
+    "not_sure_true_kind_among_three": [
+     0.9459,
+     0.9216,
+     0.9676,
+     370
+    ],
+    "true_kind_among_three": [
+     0.9815,
+     0.9734,
+     0.9887,
+     1240
+    ],
+    "wrong_and_asserted": [
+     0.0048,
+     0.0016,
+     0.0089,
+     1240
+    ]
+   },
+   "test_extra_vectors": "images/coco-kinds.wasm-int8-per-channel",
+   "test_extra_named": [
+    0.0,
+    0.0,
+    0.0,
+    1240
+   ],
+   "test_extra_named_and_asserted": [
+    0.0,
+    0.0,
+    0.0,
+    1240
+   ],
+   "test_extra_offered": [
+    0.0185,
+    0.0113,
+    0.0258,
+    1240
+   ],
+   "table_extra": [
+    {
+     "kind": "person",
+     "n": 400,
+     "right": [
+      0.9825,
+      0.9675,
+      0.995,
+      400
+     ],
+     "asserted": 0.9475,
+     "asserted_right": 0.9920844327176781,
+     "not_sure_true_kind_among_three": 1.0,
+     "said_person": 0.9825,
+     "said_none": 0.015,
+     "named": 0.0,
+     "commonest_wrong": "none (6)"
+    },
+    {
+     "kind": "none",
+     "n": 500,
+     "right": [
+      0.976,
+      0.96,
+      0.988,
+      500
+     ],
+     "asserted": 0.896,
+     "asserted_right": 1.0,
+     "not_sure_true_kind_among_three": 0.8846153846153846,
+     "said_person": 0.004,
+     "said_none": 0.976,
+     "named": 0.0,
+     "commonest_wrong": "cat (3)"
+    },
+    {
+     "kind": "cat",
+     "n": 77,
+     "right": [
+      0.8961,
+      0.8312,
+      0.961,
+      77
+     ],
+     "asserted": 0.18181818181818182,
+     "asserted_right": 0.8571428571428571,
+     "not_sure_true_kind_among_three": 0.9206349206349206,
+     "said_person": 0.025974025974025976,
+     "said_none": 0.05194805194805195,
+     "named": 0.0,
+     "commonest_wrong": "none (4)"
+    },
+    {
+     "kind": "dog",
+     "n": 63,
+     "right": [
+      0.9048,
+      0.8254,
+      0.9683,
+      63
+     ],
+     "asserted": 0.0,
+     "asserted_right": null,
+     "not_sure_true_kind_among_three": 0.9206349206349206,
      "said_person": 0.0,
      "said_none": 0.0,
      "named": 0.0,
-     "commonest_wrong": "insect (156)"
+     "commonest_wrong": "cat (5)"
+    },
+    {
+     "kind": "deer",
+     "n": 200,
+     "right": [
+      0.94,
+      0.905,
+      0.97,
+      200
+     ],
+     "asserted": 0.145,
+     "asserted_right": 0.9655172413793104,
+     "not_sure_true_kind_among_three": 0.9766081871345029,
+     "said_person": 0.02,
+     "said_none": 0.0,
+     "named": 0.0,
+     "commonest_wrong": "dog (6)"
+    }
+   ],
+   "asserted_extra": [
+    {
+     "said": "cat",
+     "asserted": 12,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      12
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "deer",
+     "asserted": 28,
+     "right": [
+      1.0,
+      1.0,
+      1.0,
+      28
+     ],
+     "commonest_true_kind_when_wrong": ""
+    },
+    {
+     "said": "person",
+     "asserted": 378,
+     "right": [
+      0.9947,
+      0.9868,
+      1.0,
+      378
+     ],
+     "commonest_true_kind_when_wrong": "cat (1)"
+    },
+    {
+     "said": "none",
+     "asserted": 452,
+     "right": [
+      0.9912,
+      0.9823,
+      0.9978,
+      452
+     ],
+     "commonest_true_kind_when_wrong": "person (3)"
     }
    ],
    "levels": [
     {
      "right_at_least": 0.9,
-     "kind_at": 0.47,
+     "kind_at": 0.39,
      "test_wildlife": {
       "photos": 4197,
       "kind_right": [
-       0.7765,
-       0.7639,
-       0.7887,
+       0.7951,
+       0.7829,
+       0.8075,
        4197
       ],
       "asserted": [
-       0.7003,
-       0.6864,
-       0.7141,
+       0.7658,
+       0.7536,
+       0.7789,
        4197
       ],
       "asserted_right": [
-       0.8955,
-       0.8847,
-       0.9061,
-       2939
+       0.8902,
+       0.8799,
+       0.9008,
+       3214
       ],
       "not_sure": [
-       0.2997,
-       0.2859,
-       0.3136,
+       0.2342,
+       0.2211,
+       0.2464,
        4197
       ],
       "not_sure_true_kind_among_three": [
-       0.8545,
-       0.8355,
-       0.872,
-       1258
+       0.822,
+       0.7976,
+       0.8454,
+       983
       ],
       "true_kind_among_three": [
-       0.9433,
-       0.9361,
-       0.9502,
+       0.9426,
+       0.9352,
+       0.9495,
        4197
       ],
       "wrong_and_asserted": [
-       0.0731,
-       0.065,
-       0.0808,
+       0.0841,
+       0.0758,
+       0.0924,
        4197
+      ]
+     },
+     "test_extra": {
+      "photos": 1240,
+      "kind_right": [
+       0.9637,
+       0.9532,
+       0.9742,
+       1240
+      ],
+      "asserted": [
+       0.8952,
+       0.8774,
+       0.9121,
+       1240
+      ],
+      "asserted_right": [
+       0.9874,
+       0.9802,
+       0.9937,
+       1110
+      ],
+      "not_sure": [
+       0.1048,
+       0.0879,
+       0.1226,
+       1240
+      ],
+      "not_sure_true_kind_among_three": [
+       0.8769,
+       0.8231,
+       0.9308,
+       130
+      ],
+      "true_kind_among_three": [
+       0.9815,
+       0.9734,
+       0.9887,
+       1240
+      ],
+      "wrong_and_asserted": [
+       0.0113,
+       0.0056,
+       0.0177,
+       1240
       ]
      }
     },
     {
      "right_at_least": 0.95,
-     "kind_at": 0.58,
+     "kind_at": 0.53,
      "test_wildlife": {
       "photos": 4197,
       "kind_right": [
-       0.7765,
-       0.7639,
-       0.7887,
+       0.7951,
+       0.7829,
+       0.8075,
        4197
       ],
       "asserted": [
-       0.5237,
-       0.5092,
-       0.5401,
+       0.5261,
+       0.5115,
+       0.5416,
        4197
       ],
       "asserted_right": [
-       0.9431,
-       0.9331,
-       0.9527,
-       2198
+       0.9538,
+       0.9452,
+       0.9624,
+       2208
       ],
       "not_sure": [
-       0.4763,
-       0.4599,
-       0.4908,
+       0.4739,
+       0.4584,
+       0.4885,
        4197
       ],
       "not_sure_true_kind_among_three": [
-       0.8904,
-       0.8764,
-       0.904,
-       1999
+       0.8889,
+       0.8753,
+       0.9025,
+       1989
       ],
       "true_kind_among_three": [
-       0.9433,
-       0.9361,
-       0.9502,
+       0.9426,
+       0.9352,
+       0.9495,
        4197
       ],
       "wrong_and_asserted": [
-       0.0298,
-       0.0245,
-       0.035,
+       0.0243,
+       0.0198,
+       0.0293,
        4197
+      ]
+     },
+     "test_extra": {
+      "photos": 1240,
+      "kind_right": [
+       0.9637,
+       0.9532,
+       0.9742,
+       1240
+      ],
+      "asserted": [
+       0.7016,
+       0.6758,
+       0.7274,
+       1240
+      ],
+      "asserted_right": [
+       0.9931,
+       0.9874,
+       0.9977,
+       870
+      ],
+      "not_sure": [
+       0.2984,
+       0.2726,
+       0.3242,
+       1240
+      ],
+      "not_sure_true_kind_among_three": [
+       0.9459,
+       0.9216,
+       0.9676,
+       370
+      ],
+      "true_kind_among_three": [
+       0.9815,
+       0.9734,
+       0.9887,
+       1240
+      ],
+      "wrong_and_asserted": [
+       0.0048,
+       0.0016,
+       0.0089,
+       1240
       ]
      }
     },
     {
      "right_at_least": 0.98,
-     "kind_at": 0.7,
+     "kind_at": 0.61,
      "test_wildlife": {
       "photos": 4197,
       "kind_right": [
-       0.7765,
-       0.7639,
-       0.7887,
+       0.7951,
+       0.7829,
+       0.8075,
        4197
       ],
       "asserted": [
-       0.2945,
-       0.2807,
-       0.3086,
+       0.3948,
+       0.3803,
+       0.4101,
        4197
       ],
       "asserted_right": [
-       0.983,
-       0.9749,
-       0.9895,
-       1236
+       0.9734,
+       0.9656,
+       0.9807,
+       1657
       ],
       "not_sure": [
-       0.7055,
-       0.6914,
-       0.7193,
+       0.6052,
+       0.5899,
+       0.6197,
        4197
       ],
       "not_sure_true_kind_among_three": [
-       0.9206,
-       0.9102,
-       0.9301,
-       2961
+       0.9083,
+       0.8972,
+       0.9197,
+       2540
       ],
       "true_kind_among_three": [
-       0.9433,
-       0.9361,
-       0.9502,
+       0.9426,
+       0.9352,
+       0.9495,
        4197
       ],
       "wrong_and_asserted": [
-       0.005,
-       0.0031,
+       0.0105,
        0.0074,
+       0.0136,
        4197
+      ]
+     },
+     "test_extra": {
+      "photos": 1240,
+      "kind_right": [
+       0.9637,
+       0.9532,
+       0.9742,
+       1240
+      ],
+      "asserted": [
+       0.6355,
+       0.6089,
+       0.6637,
+       1240
+      ],
+      "asserted_right": [
+       0.9987,
+       0.9962,
+       1.0,
+       788
+      ],
+      "not_sure": [
+       0.3645,
+       0.3363,
+       0.3911,
+       1240
+      ],
+      "not_sure_true_kind_among_three": [
+       0.9491,
+       0.9292,
+       0.969,
+       452
+      ],
+      "true_kind_among_three": [
+       0.9815,
+       0.9734,
+       0.9887,
+       1240
+      ],
+      "wrong_and_asserted": [
+       0.0008,
+       0.0,
+       0.0024,
+       1240
       ]
      }
     }
@@ -644,7 +1169,7 @@
    }
   ]
  },
- "text": "The slot holds the head `discriminant + sentences` for `tinyclip-8m-16` (shrinkage 0.03, species_com, gamma 1), fitted on `images/alachua-2025 (two thirds of val)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `product`, t_kind 50, w_kind 0.3, alpha_prior 0.5. On 565 tuning photos (the third of val kept for tuning) the thresholds came out as name_at never (no level reached nine in ten) and offer_at 0.24. On the 4197 test photos the kind of eye is right for 77.6% (76.4 to 78.9); the top species is right for 25.3% (24.0 to 26.6) and is among the first five for 45.5% (44.0 to 47.0). `person` was said for 0.05% of these photos and `none` for 0.10%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind phrases`. With kind_at 0.58 (set on wildlife tuning photos alone, because the extra set's vectors were not published for this model), the page asserts a kind for 52.4% (50.9 to 54.0) of the wildlife test photos and is right for 94.3% (93.3 to 95.3) of those; for the 47.6% (46.0 to 49.1) where it is not sure, the true kind is among its three likeliest for 89.0% (87.6 to 90.4). The slot needs: species.bias_url (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).",
+ "text": "The slot holds the head `discriminant + sentences` for `tinyclip-8m-16` (shrinkage 0.03, species_com, gamma 1), fitted on `images/alachua-2025 (two thirds of val)`, with 5911 species rows, and a bias a row. Every photo's vector (`images/alachua-2025.wasm-int8-per-channel`) went through `tools/fusion/fuse.py`, the reference of the page's arithmetic, with the slot's own files as the page reads them (half-precision rows). Settings: rule `mix`, t_kind 0.5, w_kind 0.5, alpha_prior 0.5. On 565 tuning photos (the third of val kept for tuning) the thresholds came out as name_at never (no level reached nine in ten) and offer_at 0.24. On the 4197 test photos the kind of eye is right for 79.5% (78.3 to 80.8); the top species is right for 25.3% (24.0 to 26.6) and is among the first five for 45.5% (44.0 to 47.0). `person` was said for 0.14% of these photos and `none` for 0.21%; the set holds neither. The top species from fuse.py differs from a direct matrix computation on the same files for 0 photos. The kinds head is `kind rows fitted on the fitting photos and the extra set (every kind counts the same)`. With kind_at 0.53 (set on wildlife tuning photos and the extra set's tuning third), the page asserts a kind for 52.6% (51.1 to 54.2) of the wildlife test photos and is right for 95.4% (94.5 to 96.2) of those; for the 47.4% (45.8 to 48.9) where it is not sure, the true kind is among its three likeliest for 88.9% (87.5 to 90.2). On the 1240 test photos of people, cats, dogs, grazing animals and rooms (`images/coco-kinds.wasm-int8-per-channel`), the kind is right for 96.4% (95.3 to 97.4); the page asserts a kind for 70.2% (67.6 to 72.7) and is right for 99.3% (98.7 to 99.8) of those; where it is not sure the true kind is among its three likeliest for 94.6% (92.2 to 96.8). A species is named on 0.0% (0.0 to 0.0) of these photos. The slot needs: species.bias_url (build 7 of the page); kinds.bias (build 7 of the page); fusion.rule mix (build 7 of the page); fusion.kind_at (the build of the page that has the answer `not sure`).",
  "outcomes": [
   {
    "what": "a species name",
@@ -653,24 +1178,104 @@
   },
   {
    "what": "three species to choose from",
-   "share": 0.162,
-   "right": "the three hold the species for 83.2% (80.3 to 85.9); the kind is right for 97.2% (95.9 to 98.4)"
+   "share": 0.1582,
+   "right": "the three hold the species for 83.0% (80.1 to 85.7); the kind is right for 97.4% (96.2 to 98.5)"
   },
   {
    "what": "a kind of eye only",
-   "share": 0.838,
-   "right": "the kind is right for 73.9% (72.3 to 75.3)"
+   "share": 0.8418,
+   "right": "the kind is right for 76.1% (74.7 to 77.6)"
   }
  ],
- "extra": [],
+ "extra": [
+  {
+   "set": "coco-kinds",
+   "vectors": "images/coco-kinds.wasm-int8-per-channel",
+   "rows": [
+    {
+     "kind": "person",
+     "n": 400,
+     "right": [
+      0.9825,
+      0.9675,
+      0.995,
+      400
+     ],
+     "person": 0.9825,
+     "none": 0.015,
+     "named": 0.0
+    },
+    {
+     "kind": "none",
+     "n": 500,
+     "right": [
+      0.976,
+      0.96,
+      0.988,
+      500
+     ],
+     "person": 0.004,
+     "none": 0.976,
+     "named": 0.0
+    },
+    {
+     "kind": "cat",
+     "n": 77,
+     "right": [
+      0.8961,
+      0.8312,
+      0.961,
+      77
+     ],
+     "person": 0.025974025974025976,
+     "none": 0.05194805194805195,
+     "named": 0.0
+    },
+    {
+     "kind": "dog",
+     "n": 63,
+     "right": [
+      0.9048,
+      0.8254,
+      0.9683,
+      63
+     ],
+     "person": 0.0,
+     "none": 0.0,
+     "named": 0.0
+    },
+    {
+     "kind": "deer",
+     "n": 200,
+     "right": [
+      0.94,
+      0.905,
+      0.97,
+      200
+     ],
+     "person": 0.02,
+     "none": 0.0,
+     "named": 0.0
+    }
+   ],
+   "text": "The 1240 test photos of the extra set `coco-kinds` (COCO photos of people, cats, dogs, grazing animals and rooms with nothing alive; vectors `images/coco-kinds.wasm-int8-per-channel`) went through the same slot, each with a calendar month drawn by a hash of its id. A species name on a photo of a person or a room is always wrong."
+  }
+ ],
  "per_photo": {
   "wildlife": {
    "ids_sha256": "83934132784c97079673bfcf4d5dfb90ae58557488bfe20a1dcfe556439735d2",
-   "kind_right": "101111011111101010111111111110111010111111000001111011011111101111110010110111111111111110111111110110111101101111111111110111111111101111110100111011101011111101011111100111101110101111011111111011111101111111111101111101111111111111111111111110111111111110111111111011111100110011101111100101010111101111111010101100000101101101011011111111111111111001011111101111110111111101111011101111111010111011111001111111110000111111111101111110111010111111111101001011111110111111111111101111111101110111101111101110101111101111011011111011111111101110010111111111111110111111111111111111001001111111001100101011111011100011111111111101110011111111101010111101111111110111111110101010110110110111111111011111111111110110110011111111101100100111111111111111111111111011111101111111101001110011100011111111101110110111011100011101011111111101101100010111101111110111111001001011101111111111110101111100111011011110111100110001101111110010100101111110111110111110101111011111101111010011011111111111111110111110110110010111111110111111111011111111110111100111110110111101111101100101101111001111000100101111001111001111111110010001111111110101111111110010101110010001100111101111010011111111010011111011111100111011111001101111111000111010111010110110111101101111100011101101110111110111111111011111111011111011111100001101100111111111111111111011001011101011111101011111111100101111111101111111111111111110101000111110110111111111111111111111111111110111111111111011111111101101111110110111010111111111111100110001010111100111101010111101110110110101111101111100110100111111011011011111111111111111111010101110111111011111110011111010110010111011111101101101101011111111101001100110111111101111011101100111011101101111011111010110111111111010100000011100111101111000111110111011101011011111111111001110110110011101001111011111110111111111111111011111011110111101111011011011111100111011110111000011101111110111111110111111010011011010110110110011110011110111111111011010111111111100111001111111101111011111111101111111101100011110011011110011011001111110010010111111111010100011001111110111111011111011011111001111111111101111011100011111110110111111011101110111110110101111011111100110111100111110101011111011011110111111111101111110011110111111110000110111111111111111100111011111011111111111110111111110101010111101111011111110111110111010010111100000111111111101101111011111111110011111101101011110111111111110111111111101111011111110010110111101011111111111111010111111111100110111011111001110110101101111111111101101110111100111110001011111111111011111101111111011101110110111111110101111111111111001101111010101111111111111111111110111111110110010111011101001111110111111111110111111111011110011110011101011111111011111111010010111111011111100111111001111111111111110110110101010101111100100101011111101001111111101111011111111111111111111111111110001111111111111111111011111101001100101110111111011011101111111111111111110111111010111101011111101101111111011111111111111101111001011111110111111011100110111011111111110111111111111111001001111111111111111101101111110111011111111111110000101001101111011111110111011110111111111111111110111110101111111011111111001111101101011100111111111111111111111111111110111010110111111111111111111111111101111111001111111111111111111110001011111111111111101101111111100111110110111101110110111111101111011101111111011111000111110111001011100011111110001111100110111101100111111011001101111111011110111010111111111011111111011011110011101111101111100111111011101101101111111110111111011011011111111110101111110111111111011111111101111111110111101110111111111101111111001111111001111011011011111000010111110101111110011111111101111110111011111101011011101011100101001111111111111111110111111110001101101101111111010011101000111010111110010011110011111101011101111110011111101101111110001111110111011011111111111100110111011110111111110011111110111111111101001111111111000111111111111111111111110111111100101101111011011101100101100111111101011111011010111111100001101111011101101111111011011111111111110111111111111110101010101011111110111110110100110111011111110111010111110011011010101000100101011111100011111111111111101111111111011011111111111101101111001111",
-   "asserted_right": "101111000001100000100110111100011000101001000001111000001110000110110010010011001110010010100100110100000101101101101110110110001001001000010100111001001010101100010110100011101010101011001111011011111100000000001001101100101011010001110010111010100111111000100101110010110000110000101111000100010011001011111000100100000101101100001001100011101101111000000010100111110111111101111011101011111000010011110001110010110000011010111101011110011010110100001101001011010110111101111111101111111101110100100111101100101101101111011010010011101111100010000111101100111110110111101111111000000001100110001000100001101001100011100010001101010000001101101000001001101111000111100100000000110110010111111111011111111111100110010011110001001100100101111010110001111101110011001101000100100000100000100011011110001010100011011000011101001111111101101000010110100100010001010001001000101011011101110001111100010011011010110100010001101000110010100101101010111110001110101001011101001101010011011110111011100100011110010110000110011110100011111001100101110100000110100000001101111001100100101011001011000000100111001100001100110010010001000011110101111011100010000110010001000101001100010011101001010010110011011000101001011001000000010000110010000010110000111101101111000001101101110000100100110010011101110011001010111100000101100011111100111111010011001010001001100100010111101100101001101100111111011110001110000000100110000101100001100110100111111111110011110111111011110010001000011110110100010111010011111100110000000111100111001000110101010100110001111001101100110100100110011000011100101011011111100010101010110111011100100001111000010010001000111000001101001010110110000000100110000100101100010001000011011101101101011101010100010110010010000000001000100101001000110110111011100011010111111011000110010110011101000111000011000111001111011101000111000100110101011010001010100000111010110100000011101100000010011100001111010010011000100110110011110011100001001011011010011111111000101000001100101011001011100001110010100000010110000011110001000001111100010000110010000010000010001111100101111010111011010101000110101100101110011100010110110110111110001001100101110110101111001110100010111000111110101010111000000010011110000100000010001110000001110000110110001100111000100110011101010010110100100111111110101000001101101011101110110010011000000000100000001011001101100010011101110110011011100101010010101111111110000100000101000010011010000110111101001110001110111000011111010100010101000110000010010001001110111101101001110101000110100001001000111110011000000111001011100110010011101110100110001101011001101011010000001110101011111101100011011100010000110010100000001110011010110010000101011000000011110011101011111010001110110010010001101011110000101011000011010000110000100110000000101000100000001011111001001110101101111011111110101011100001110100100001011000110101010110011111100001100101110011101011011000101111011001101110110111000100001011110100101011110010110110011000100011000000111110111001011100100111010111111000001011000011101001000111001110111011000100010100001000001100000100000100000001011010100110011010100110110111101110110110110100100001011010010000101101100001100011001011111110110010110001100111000110000111001111100111001011100011111001100011011001011101100001001111011111111100100111100000111110110111000110110001101101111011001100101000111000110100011001011100010111010000011000010001000100110111010000001111111001110001010101110110011111001001011100011100011101010000011110011101000000111110110001111010001011110010100001111010011111111011111011000110000000111100100101101111101101111001101100000111000011011110000010111010001101000010101001001010110111011101101001000101001000101000111101111000011100011100100001100000001000001010010001000110010111110010011110001101101001001100100000111001000101010000011100110000010101111111100010111000010001111100010110010110101010001001110111110000111011011111100110010010100111100101101101000001101100000000011111000001011010010011111000001101011010101101111101011011001101101010011111111111110101000100001101000110100100000110011001001000001000110110010010010001000100101011100000001101110011010001101001101000000100010110100000100001011",
-   "asserted_wrong": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000100000000000000000000000000000000000000100000000000000000000000000010000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000100000000000000001000000010000000000000000000000010000000000000000000010000000000001000000001000010000001000000000000000000000000000000000000000000000100100000000000000000000000000001000000000000001000000000100000000001000010000000000000000000000000000000000000000001000000000000000000000000000000100000000000000000000001000010001001100001000000000000100000000000100000000000000000000000000000000000001000000000000000001000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000000000000001000000000000100000000000000000000000000101000000000000001000000001000000000000100000000000000000010000000000000000001000000000000000000000000000000000000000001000000000000000000000000000100000100000000000000000000000000000000001000000000010000000000000000000000000000000000100000000000000000000000000000000010000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000100000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000001000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000000000000000010000000000000001000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000001000010000000000001000000000100000000000000000000000010000000000000000000000000000000000000000000000001000000000000000000000001000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000001000001000000000000000000000000000000000010000000000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000010000000000000000000001000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000001000010100000000000000110000001000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000001000000000000000000000000000100000000000000000000000000001000000000000000000000000000000000000000100000000000000000000000010100000000000000000000000000001000000000000000000100000000110000000000000001000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000011100010000100000000000000000000000000000001000000000000000000000000000000001000000000000001000000000000000000000001000000000000000000000100000000000000000000000000000000000000100000000000000000000000000",
+   "kind_right": "101111111111101010111111111110111110111011010001111111111111101111110010110111111111111110111111111111111101101111111111110111111111101101111110111001101011111101011111100111111110101111011111111111111101110111111001101110111111111111111111111110101111111110111111111011111100110001101111101101010111101011111110101100000101101111011011111111111111111011010111101111110111111101111011101111111010111011111101111111110001111111111111111110111010111111111101101011111110111111111111101111111101111110101111101110101111101111011011111011111111111110010111111110111110111111111111111110001001111111001100101011111011101011111011011101111011101111101000111101101111110111111111110101111110111111111111011111111111110110111011111111001111110111111111111111111111110011111111111111101001100011100011011111111110110111011000111101011111111101101100110110101111110111111001101011101111111111111111111100110011111110111100110101101111110010100111111110111110111110101111011111101111010011011111111111111111111110110110011111111110111111111001111101110111100111101101111101111101101111101111001011110111101111011110001111111111011011111111110101111011110010101110000001100101101110010011101111011011111011111111111011111001001011111010111110111010111110111101101111110011101101111111110111111111111111111111111011111100101111110111111111111111110010101011101111111101011111111100101111111101111111111110111111101010111111111111111111111111111111111111111111111111111011111111101101011110110101010111011111111100111011010111101111111010111111110110110001111101111100110100111111011011011111111111111111111010101110111111111111111111111010110010111011111101101111101011111111111110100110111111101111011101010111111101111111011111110111111111111010100000011111111101101000111110111111101111011111111111001111111111011101001111010111110111111111111111001111111110111111111011011010101100111011111111010011101101110111111101101111010010011110110110111011110011110111111111011010111111111100110100101111111111011111111101111111101110011110001011010011011001111110010010111011111010000111001111111111111010111111011111001111111111101111011100111111110110111110111111010111111110100111101111100110111100111110101011111011010110111111101101011110011110110111111000110111001110111101100111011111011111111101100111111110111110111101111011111110111111111010011011111000111111111101111110111111111111001111101111011110111111111110111111111101111011111010011110111101011111111110111011111111111100011111111111001110110101101111111111101111111111100111110011111111111111011100111111111011101111110111111111100111111110111011101111010101101111111111111101110111111110110110111011101101111111111111111111111111111010110011110111101011111110011111110110011111111011111110111111001011010111111110110110101001101110100000101011111111001111111111111011111111111111111111111111110101111110111101110111011111101001100101110111111011111101111111111011111110111111010111111011111101101111111010111110011111111111011001111110111111011110110111111111111111111111110111111001001111111111111011101101111110011011111111111110000111001101111111111110111110110111110111101111111111110100111111011111111001111111100011110111111111111111111111110111110111110110111111111111111111111111101111111001111011111111111111110101011111111111111101101111101100111110110111101110111011111111111111111111111011111000111110111001111101011111010001111100110111111100110111011101101111111011111111010111111111011111111011011110101101111101011010111111111111101101111111110111111011011011111111100111111010011111111111111111001110111111111101111111111111101101101001111111111111011011011111000010111110111111110011111111111111110111011111111011111111011110101011111111111111111100111101110001101111111111111010011111000111011111110010111111111111101111101111110011111101111111110011111111111011011111111111100011111011111111111111011111110111111011101001111111111001111111011111111111111111111111110101111111011011111101101000111111010011111111011111111100001101011011111101111111011011111111111110111111111111111111111101011111110111100110101010111111111110111011111110011011110101000100100011111100011111111111111101111011111010010111111111101001111001111",
+   "asserted_right": "101111000001100010101110111110011000111001000001111000001110000011110010010011011111011010110100110010000101101111101111110100001100001100110000111001001010111101010010000111111010101011001011011011111101010000101001101100101011010101110010111010100111110000101111110010110000110000001011100100010001101011111000100100000101101100001001100010011001011001000111100101110101110101111011101011011000010011111001100111100000011110111101011110111010111100001101001011010110111111111111001011111101110100100111101100100101101111011010010011101111110010000111110100111110110110101011011000000001100110000100100001001011100010110010001100010001101101100000001001101111010111100100100000010100010111111111011111111111110110010011110000001100100111111011110001111001110011101101001101101000000000100010011110001110100011010000011101011111100100101000010110100110000001011001001010000001011111110000111100010011011010111000010001100101110010000101101000111110001110101011011101001011010011011110111001100101011010110110000010011110100001111000101101100100100010100000001100111101000100101011001011000000100111001000001110010010010001000010110101111011100000101110000001100101001100000011100001000001110001010010101001010001001010000000111010100000100000111101101111110001101101111110100101110011000101111011001010011100001101100011111000101111010010001010000000100100011101101100101001101100111111011110010010000000100110000101100001100110100010110111110110100111111010011010001001010110110101010101010010111100000000000111000010011010010101010100110001111000111100110100100110011000011100111011110110100010101110010101001101110000111000010010011000011001001111101010110110100000000110000100100111010000000110010101101001011101110110110110000010100000001100100101101000110110111011101011010111011111000100010010011101000111010010010111101111010101001111110100110101011011001010101100111011110110000011101100000010011100001011010010011000110110110011100011010101001011010010110011111000100000101101101101011011100001111110100000011110000011000001010001111100010010100010000010000010001111000001111010111011010101000100111101101110010100000010100010111110001111010001110110100111001110100010110000111110101010111000010100011111000100011010011110100001110000010111001010111001100110011101010111111100100111111110101000001101100011101110010010011000000000110000001010000001100010011111110110001011000101010110111101011110100100001001000010011010000110111101011111011110101000011111010000010101000110001010010001001110111110101000110101100111010001011000011101011000000011001011101110000011111100000111001100111000100111010000101110101111111101100111011110010000110010100100011111111110001010110001101000010011110001101011111010001100110010010111101011110100100011001011010000110100100110001000101000100000000010101101001111100101111010111110111010100000110110100001111100111101000111011111100001100101110010111011011100101111011001111110110111010100001011110100101011111010111100010001110011000000111110111001011100110101010101110000001001000011100001000111101100111010100001110110001000001101000110000100000000011011100100010010000111110101101110100111110100101111011011010000101101100001100011001001111111110011110001110110000100000111011111100111001011001011111001110011011001111111110001000111011101110100100110100000111110010101100110110001101101101011000000101010111000110100011001000100010010000001010000110001001100010111010000001101101001110001010101111010011111001001011100001100101101010000010110111110000000111110010101011000001011110110100001101010011110111011111001000010000000101001100011101111101101101001111000100111001011010110000010101100001110000010111010001010110101011101101001000101001010001000010101111000111100011100100001101100001010001010010101000110010111100010011110001101101001001100010000011001001101010000011101010001000100111111100011011000010001110101011111100111101010101001110101111000111111011111101111011110101111100101100101001001101100000000111110010001001111010011101000001101011010101101111101011011001001111010011110111110110101100100011101010110100100001010111101000000101000111100000011010001000100100011101100000101010011111100101011111010000000110110101000111001111",
+   "asserted_wrong": "000000000000000000000000000000000000000000001000000000000000000000000000000000000000000001000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000110000000000000000000000000010000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000100000000000000000000000000000000000010000000000000000000000010000000000000000000010000000000001000001000000000000000000000000000000000000000000000000000000000000100100000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100100000000000000000000000000010000001000001000000000000000000000000000000000000000000000000000000000000001000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010010000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000001000000000000100000000000000000010000000000010000001000000000000000000000000000000000000000000000000000000000000000000000100000100000000000000000000000000000000001000000000010000000000000000000000000000000000000000000000000000000001000000000010000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000100000000000000000000000101000000000001000000000000000000000000000010000000000000000000000100000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000011000000000000000000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000001000000000000000001000000000100000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000001000000000000100000000000000000000000000001000000000000010001000000000000000000000000000000000000000100000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000001000000000000000000000000000000001000000000000010000000100000000000000000000000000000000000000000110000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000100000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000010000000000000000000000000000100000000110000000000000001000000000000000000000000000000000000000000000100000000000000000000000000000000000100000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000100000000000100000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000001000000000000000000000000000000000000001000000100000010000000000000000000000000000000100000000000000000000100000",
    "named": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
    "named_right": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "extra": {
+   "ids_sha256": "7c0839b8b8eba68ad3450b03d27ad8129b70fb92d4ea0674384c99a96da6ff88",
+   "kind_right": "1101111111111111111111111111111111111111111111111111111111111111111110111111111111111111111111111111111111111111111111111111111111111111100111011111111111111111111111111111111111111111111111011111111111111111111011111111101111111111111111111111111111111111111111111110111111011111111111101110111111111111111111111111111111111111111111111111111111111111111111111111111111111111101101111111111111111111111111111111111111101111111111111111111111111111011111111110111111101111111111111111111111011111111111111111111111111101111111111111111111111111111111111101111111111111111111111111111111111011111111111111110111111111111111111111111111111111111111111111111111101111111111111111111111111111111111111111111111111101111111111111111111101111111111111111111111111111111111111111111111111111110111111111111111111111111110111111111111111111111011111111111111111101111111111101111111111111111111111111111111111111111111011111111111111111111111111111111011111101111111111111111111111111011111111111111111111111111111111111111111111111111111111111110111111111111111101111111110111111111111111111111111111111111111011111111101111111101111110111111101111111111111111111111111111111111111111111111111111111111111111111110111111111111111111111111101111111",
+   "asserted_right": "1101111110111101111111111111011101110111101110110111011110111111001110011110111111100101110111101011110110111010111101101111111111111001000110001100011011101110111101011011101110111011111010011110111110111111101011110010001111101101111111100010101001101001111111010110011011011110111001101110110111101111110101111111111110111101110110001101100111111100010011001111101111111101101101101111110111101000000001111111101111100110111101111011010110011111010001011010111110100111111110101100100011011101111110001111110110110100101111111111011111111101011111101101111101101101111111110111111111101011110111010111010111111111001110011100111111111011111101111111011111101111110111110110011011111111111111111101011011111101110111111110111100001001110101111111111111111101011111111001111111011011100111100111111011110111011110110111111101111011111011111011111111101100111111110101111111111111010110101110111111011011011111010100101111101110100111100001101011011101010011001111111111110010001011011101101001101001111111100010100010011101100111000110010111111110110111001001011010001101101101101101011011010000110011001111100101111100001111110011101001111000011101110011111111000110100101011011111101011101111111101001110000110100000101000000000000001000",
+   "asserted_wrong": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000100000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "named": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
   }
  }
 }
