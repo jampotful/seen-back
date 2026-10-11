@@ -11,6 +11,13 @@ Usage (run from the repository root; every stage writes into --out, which mirror
 
 Models are described in tools/lab/models.json. Vectors are float16 unit rows (.npy). card.json in --out is updated, never
 replaced, so that stages run at different times add to one description of the model.
+
+Loaders: open_clip (hf-hub:... or a built-in name with "pretrained"), transformers (CLIPModel, SiglipModel), and onnx for
+models published only as an ONNX image encoder (e.g. a distilled student). An onnx model has no text tower: `text` only
+records which model's text vectors it is meant to be scored against ("text_from" in models.json); `export` does not apply
+(the file is already ONNX); `images` runs the published file with the preprocessing written in models.json; images-onnx
+does not apply. Shards (--shard i/n) are contiguous blocks of manifest rows (images) or species rows (species label sets);
+`merge` joins them in order.
 """
 import argparse
 import csv
@@ -664,7 +671,8 @@ def stage_images(args, variant=None):
     stats = {"rows": len(part), "embedded": len(ids), "skipped": len(bad), "seconds": round(el, 1),
              "photos_per_second": round(len(ids) / max(el, 1e-6), 2), "machine_cpus": os.cpu_count()}
     card["images"] = {name + tag: {"shards": n, ("shard_%d" % i): stats,
-                                   "via": "torch" if variant is None else "onnxruntime CPU, vision.%s.onnx" % variant}}
+                                   "via": ("torch" if m.torch_model else "onnxruntime CPU, the model's own ONNX file")
+                                   if variant is None else "onnxruntime CPU, vision.%s.onnx" % variant}}
     card["stages"] = ["images" if variant is None else "images-onnx-" + variant]
     update_card(out, card)
 
