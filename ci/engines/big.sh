@@ -10,6 +10,13 @@ exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 limit() { local s=$1; shift; "$@" & local p=$!; ( sleep "$s"; kill "$p" 2>/dev/null ) & local w=$!; wait "$p"; local rc=$?; kill "$w" 2>/dev/null; return $rc; }
 SITE="${SITE:-https://jampotful.github.io/seen-back/}"; PW=/tmp/pw; PWV=1.56.0; PART="${PART:-linux}"
+# run/engines/bigb*: this commit's own page, built here and served on this machine, in place of the live address. Used to try a form of
+# the larger model that is not live yet (the commit's models/naturalist/manifest.json says which).
+case "${GITHUB_REF_NAME:-}" in run/engines/bigb*)
+  python3 -I build.py | tail -1
+  python3 -I ci/engines/serve.py 8781 "$ROOT" "$OUT/reports" > "$OUT/serve-log.txt" 2>&1 &
+  sleep 2; SITE="http://127.0.0.1:8781/"; echo "serving this commit at $SITE" ;;
+esac
 # run/engines/big-wk*: only WebKit (Linux, and macOS through Playwright), after run engines/35
 case "${GITHUB_REF_NAME:-}" in run/engines/big-wk*) ONLY_WK=1 ;; *) ONLY_WK=0 ;; esac
 # run/engines/big-lx-<browser>-*: only that browser, on Linux (the macOS jobs do not start)
