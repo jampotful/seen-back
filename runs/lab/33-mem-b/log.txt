@@ -1,0 +1,72 @@
+[08:48:44] memory job mem-b; model commit 462ecdc327746ec5990c416bb51246b99faba0cb
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15988        1442       12283          44        2625       14546
+Swap:           3071           0        3071
+v22.23.3
+whole file sha256 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 parts.json says 4cf3225b2d2ffefc7594927ef7efe9808bcc8a3323c9aea6d4a45267519de031 OK
+total 302560
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+
+added 18 packages in 3s
+photos: 24 rows, 24 to fetch, 0 failed, 0.8s
+pixels: 24 photos (0 skipped), every 13-th test row
+[0;93m2026-10-11 08:49:01.003938338 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+python onnxruntime 1.30.0 onnx 1.23.2
+external data: graph 2175801 bytes, vision.weights.bin 307658752 bytes
+model:
+total 302564
+drwxr-xr-x 2 runner runner      4096 Oct 11 08:49 ext
+-rw-r--r-- 1 runner runner      4612 Oct 11 08:48 parts.json
+-rw-r--r-- 1 runner runner 309812341 Oct 11 08:48 vision.int8.onnx
+
+model/ext:
+total 302576
+-rw-r--r-- 1 runner runner   2175801 Oct 11 08:49 vision.graph.onnx
+-rw------- 1 runner runner 307658752 Oct 11 08:49 vision.weights.bin
+[08:49:01] route ext: {"name": "ext", "form": "external", "options": {}, "model": "model/ext/vision.graph.onnx", "external": "model/ext/vision.weights.bin", "external_name": "vision.weights.bin", "photos": 24}
+{"step":"start","rss_mb":55.5,"peak_mb":55.5,"heap_mb":0}
+{"step":"file read","rss_mb":352.3,"peak_mb":352.3,"heap_mb":0,"ms":70}
+{"step":"session created","rss_mb":814,"peak_mb":814,"heap_mb":357.5,"ms":1285}
+{"step":"warm-up (empty picture)","rss_mb":978.1,"peak_mb":1038.9,"heap_mb":429,"ms":5149}
+{"step":"photo 1","rss_mb":978.7,"peak_mb":978.7,"heap_mb":429,"ms":4947}
+{"step":"photo 10","rss_mb":979.8,"peak_mb":979.8,"heap_mb":429,"ms":4865}
+{"step":"photo 24","rss_mb":979.8,"peak_mb":979.8,"heap_mb":429,"ms":4885}
+route ext: ready 1285 ms, heap 429 MB, photo mean 4865 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:03.42
+	Maximum resident set size (kbytes): 1003052
+[08:51:05] route ext-drop: {"name": "ext-drop", "form": "external", "options": {}, "drop_js": true, "model": "model/ext/vision.graph.onnx", "external": "model/ext/vision.weights.bin", "external_name": "vision.weights.bin", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":70}
+{"step":"session created","rss_mb":813.7,"peak_mb":813.7,"heap_mb":357.5,"ms":1247}
+{"step":"file bytes let go","rss_mb":510.9,"peak_mb":815.5,"heap_mb":357.5}
+{"step":"warm-up (empty picture)","rss_mb":628.1,"peak_mb":689.3,"heap_mb":429,"ms":5003}
+{"step":"photo 1","rss_mb":629.6,"peak_mb":629.6,"heap_mb":429,"ms":4919}
+{"step":"photo 10","rss_mb":632.4,"peak_mb":632.4,"heap_mb":429,"ms":4856}
+{"step":"photo 24","rss_mb":632.5,"peak_mb":632.5,"heap_mb":429,"ms":4851}
+route ext-drop: ready 1247 ms, heap 429 MB, photo mean 4846 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:02.78
+	Maximum resident set size (kbytes): 647280
+[08:53:08] route ext-lean: {"name": "ext-lean", "form": "external", "options": {"enableCpuMemArena": false, "extra": {"session": {"use_device_allocator_for_initializers": "1"}}}, "drop_js": true, "model": "model/ext/vision.graph.onnx", "external": "model/ext/vision.weights.bin", "external_name": "vision.weights.bin", "photos": 24}
+{"step":"start","rss_mb":57,"peak_mb":57,"heap_mb":0}
+{"step":"file read","rss_mb":353.9,"peak_mb":353.9,"heap_mb":0,"ms":70}
+{"step":"session created","rss_mb":832.8,"peak_mb":832.8,"heap_mb":357.5,"ms":1265}
+{"step":"file bytes let go","rss_mb":531.4,"peak_mb":836.1,"heap_mb":357.5}
+{"step":"warm-up (empty picture)","rss_mb":706.5,"peak_mb":706.5,"heap_mb":429,"ms":4925}
+{"step":"photo 1","rss_mb":712,"peak_mb":712,"heap_mb":429,"ms":4819}
+{"step":"photo 10","rss_mb":719.5,"peak_mb":719.5,"heap_mb":429,"ms":4874}
+{"step":"photo 24","rss_mb":719.5,"peak_mb":719.5,"heap_mb":429,"ms":4868}
+route ext-lean: ready 1265 ms, heap 429 MB, photo mean 4884 ms
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:03.48
+	Maximum resident set size (kbytes): 736444
+[08:55:11] memory job done, fail=0
+added 2 packages in 1s
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+[08:55:33] page run: the shipped file through vendor/rec-worker.js
+init: {"op":"ready","fail":"","fetch_ms":535,"ready_ms":5864,"worker_ms":{"vectors":6.600000000034925,"session":1297,"warm":4558.299999999988},"heap":860815360,"threads":1,"backend":"wasm"}
+{"peaks":{"launch":{"renderer_max_mb":0,"renderer_sum_mb":0,"browser_all_mb":200.1},"page open":{"renderer_max_mb":87.4,"renderer_sum_mb":87.4,"browser_all_mb":403.4},"model fetched into the page":{"renderer_max_mb":661.3,"renderer_sum_mb":661.3,"browser_all_mb":982.6},"session created (worker init, warm-up)":{"renderer_max_mb":1314.8,"renderer_sum_mb":1314.8,"browser_all_mb":1637.8},"photo 1":{"renderer_max_mb":1216.6,"renderer_sum_mb":1216.6,"browser_all_mb":1539.6},"other photos":{"renderer_max_mb":1234.4,"renderer_sum_mb":1234.4,"browser_all_mb":1555.8},"photo 10":{"renderer_max_mb":1222.3,"renderer_sum_mb":1222.3,"browser_all_mb":1545.3},"after":{"renderer_max_mb":1234.4,"renderer_sum_mb":1234.4,"browser_all_mb":1555.8}},"heap_mb":820.9,"photo_ms":[4468,4462,4394,4409,4441,4384,4413,4419,4388,4396,4406,4403,4395,4387,4373,4377,4356,4381,4364,4366,4361,4369,4358,4365]}
+[08:57:27] page run done
