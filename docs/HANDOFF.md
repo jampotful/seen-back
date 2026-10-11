@@ -1,6 +1,6 @@
 # Handoff
 
-This file is for whoever carries this work on next, a person or an assistant. It describes the repository as it stood at build 8 (commit `8037aec`) on 11 October 2026. `docs/CONTRACTS.md` holds the formats and rules in full, and `docs/LOG.md` says what happened and when; read both before changing anything.
+This file is for whoever carries this work on next, a person or an assistant. It describes the repository as it stood at build 9 (commit `013bb77`) on 11 October 2026. `docs/CONTRACTS.md` holds the formats and rules in full, and `docs/LOG.md` says what happened and when; read both before changing anything.
 
 Private working notes are kept outside this repository. An assistant working for the owner will find them in the owner's Claude project, in the document `claude/seen-back-working-notes.md`.
 
@@ -18,10 +18,12 @@ Private working notes are kept outside this repository. An assistant working for
 | `tools/lab/` | The model laboratory: label rows, image vectors and browser-ready ONNX files for each model |
 | `tools/eval/` | The evaluation, from fetching the published vectors to writing `docs/EVAL.md` |
 | `tools/fusion/` | The page's arithmetic written in Python (`fuse.py`) and the check that the page agrees with it (`parity.py`) |
+| `tools/audit/` | An independent recomputation of the headline numbers, with its results in `tools/audit/results/` and its findings in `docs/eval/audit.md` |
 | `service/` | The species service (BioCLIP 2 behind a small Gradio app), built and undeployed |
+| `native/` | Two thin app shells around the built page, an Android WebView app and an iPhone WKWebView app, run on build machines as an experiment; `native/README.md` says what they showed |
 | `test/` | The browser checks: `check4.js` (the record, the word table, the viewer, the edges, the sweep of every kind of eye), `rec/check_rec.js` (the recognizers, against a stand-in model), and `engines/` (runs on the build machines) |
 | `ci/`, `.github/workflows/` | The build machines' scripts and workflows |
-| `docs/` | The plan, the log, the contracts, the evaluation, the sources, the licences, and this file |
+| `docs/` | The plan, the log, the contracts, the evaluation (`EVAL.md`, `eval/`) and its audit (`eval/audit.md`), what ran on which engine (`ENGINES.md`), the sources, the licences, and this file |
 
 ## Building and checking
 
@@ -48,24 +50,25 @@ The working sandbox reaches little of the internet, so anything that needs the o
 - **The laboratory** reads its orders from `ci/lab/runs/<label>.json` when that file exists in the pushed commit, and from `ci/lab/run.json` only otherwise.
 - **Reading a public page**: list its address in `ci/fetch/list.txt` and push to `run/fetch/<label>`; the text comes back under `runs/fetch/`.
 - **Limits**: at most 20 jobs run at once, 5 of them on macOS; a job may run six hours; one job returns under 25 MB to `ci`; and a file in git stays under 95 MB.
-- The engines workflow runs the checks and the self-test on Linux (Chromium, Firefox, WebKit) and on macOS (WebKit, Safari, Safari in the iPhone simulator); a branch named `run/engines/live-<anything>` checks only the live address (`.github/workflows/engines.yml`).
+- The engines workflow runs the checks and the self-test on Linux (Chromium, Firefox, WebKit) and on macOS (WebKit, Safari, Safari in the iPhone simulator); a branch named `run/engines/live-<anything>` checks only the live address (`.github/workflows/engines.yml`). What it found is in `docs/ENGINES.md`.
+- The native workflow (`.github/workflows/native.yml`) starts on a push to `run/native/<label>`. A label starting with `android` runs only the Android job, one starting with `ios` only the iOS job, and one starting with `ios-big` runs the larger model's probe in the iPhone shell; other labels run both jobs. The Android job builds the page, packs it into a debug APK, and runs the self-test, the camera and the larger model in an Android 14 emulator; the iOS job compiles the shell and runs the self-test in an iPhone 17 simulator. Results come back under `runs/native/<run number>-android/` and `runs/native/<run number>-ios/` on `ci`, and `native/README.md` gives the commands for building either shell by hand.
 
 ## Published data and models
 
 - A branch named `pub/...` holds one published thing and keeps no history: `bash ci/put_branch.sh <branch> <dir>` replaces it whole, and `bash ci/data/merge_pub.sh` adds to a `pub/data-*` branch without removing what other jobs put there.
 - `pub/data-alachua` holds the manifests of the evaluation, training and extra photos.
 - `pub/lab-<model>` holds one model's files: `card.json`, label rows under `text/`, image vectors under `images/`, and ONNX files under `onnx/` for a model that is a candidate for the page.
-- `pub/model-bioclip2-l14` holds the larger model's int8 file in parts, with `parts.json`.
-- `pub/heads-<fitting set>-<model>` holds a slot exported by the evaluation, in the layout of `models/<slot>/`. The heads in build 8 came from `pub/heads-val-tinyclip-39m-16` and `pub/heads-naturalist-bioclip2-l14`; heads fitted on the training photos are on `pub/heads-alachua-pre2025-tinyclip-39m-16` and `-8m-16` and are not in build 8.
-- A branch named `pin/<what>-<commit>` keeps a commit alive that something outside depends on. `pin/model-bioclip2-l14-462ecdc` keeps the commit from which every browser fetches the larger model's four parts (`raw.githubusercontent.com/jampotful/seen-back/462ecdc.../vision.int8.onnx.part00` to `part03`). Leave it in place: `pub/` branches keep no history, and this branch is what keeps that commit (`docs/CONTRACTS.md`).
+- `pub/model-bioclip2-l14` holds the larger model's int8 file in parts, with `parts.json`. `pub/model-bioclip2-l14-b` holds the same model as a 2 MB graph file with its weights beside it as a data file in four parts, and its `parts.json` gives every checksum and the call that loads it; the page does not use that form yet.
+- `pub/heads-<fitting set>-<model>` holds a slot exported by the evaluation, in the layout of `models/<slot>/`. The pocket heads in build 9 came from `pub/heads-pocket-v3` (commit `f0c2544`), which also holds `fitted_on.csv`, the list of the photos they were fitted on, and `measured.json`; the larger model's came from `pub/heads-naturalist-bioclip2-l14`. The pocket heads of build 8 came from `pub/heads-val-tinyclip-39m-16`.
+- A branch named `pin/<what>-<commit>` keeps a commit alive that something outside depends on, because `pub/` branches keep no history (`docs/CONTRACTS.md`). Three are in use, and each must stay in place. `pin/model-bioclip2-l14-462ecdc` keeps the commit from which every browser fetches the larger model's four parts (`raw.githubusercontent.com/jampotful/seen-back/462ecdc.../vision.int8.onnx.part00` to `part03`). `pin/heads-pocket-v3-f0c2544` keeps the commit that holds `fitted_on.csv`, which the page's About block links to. `pin/model-bioclip2-l14-b-add8cf5` keeps the external-data form of the larger model.
 - Photos themselves are never committed or republished. Manifests carry each photo's address and licence, and the build machines download photos when a run needs them.
 
 ## How a slot is assembled and shipped
 
 1. The laboratory computes a model's label rows, image vectors and ONNX files and publishes them on `pub/lab-<model>`.
 2. The evaluation fits heads and chooses settings on `val` (`tools/eval/study2.py`), writes a slot in the layout of `models/<slot>/` (`tools/eval/export_heads.py`), and sets `name_at`, `offer_at` and `kind_at` while scoring the slot as the page would, through `tools/fusion/fuse.py` (`tools/eval/shipped.py`). For the larger model, `tools/eval/naturalist.py` writes the head files and lists the encoder's parts from the laboratory's `parts.json` in the manifest's `vision` block. A build-machine run publishes the slots as `pub/heads-<fitting set>-<model>`.
-3. To ship a slot, copy its files into `models/<slot>/`. The pocket slot's encoder comes from the branch its manifest names in `vision.from`. Run `python3 -I build.py`, then `test/rec/check_rec.js` and `test/check4.js`, and merge to `main`.
-4. In build 8 the page keeps a slot's files under an address made from a fingerprint of the slot's manifest (`src/cam.rec.js`), so any change to the manifest, new heads or a new threshold, makes every phone download all of that slot's files again, the 41 MB encoder among them.
+3. To ship a slot, copy its files into `models/<slot>/`. For pocket v3, `tools/eval/decide_v3.py` applied a rule written before the candidate was measured (`docs/eval/decision-pocket-v3.json`), and `tools/eval/pocket_v3.py` assembled exactly the files that replace the heads in `models/pocket/`, `fitted_on.csv` among them. The pocket slot's encoder comes from the branch its manifest names in `vision.from`. Run `python3 -I build.py`, then `test/rec/check_rec.js` and `test/check4.js`, and merge to `main`.
+4. The page keeps a slot's files under an address made from a fingerprint of the slot's manifest (`src/cam.rec.js`), so any change to the manifest, new heads or a new threshold, makes every phone download that slot's files again. From build 9 an encoder whose checksum the manifest gives is kept under that checksum instead, so new heads no longer cost a second download of the pocket's 41 MB encoder.
 5. A manifest that names a rule or a field the page does not know is refused, and the person is asked to type the kind (`docs/CONTRACTS.md`).
 
 ## Rerunning the evaluation
@@ -77,6 +80,19 @@ bash tools/eval/run.sh ROOT alachua-pre2025    # heads fitted on the training ph
 ```
 
 The steps one at a time, and what each writes, are listed at the end of `docs/EVAL.md`. Pushing to `run/eval/<label>` reruns everything on a clean build machine, returns the files and a comparison with the committed numbers under `runs/eval/` on `ci`, and publishes the exported slots. `tools/eval/compare.py` says whether two runs give the same numbers.
+
+Pushing to `run/eval/licence<anything>` reruns only the heads fitted under the licence rule, the pocket v3 decision, the last check of the assembled files and the pets and livestock check, and compares them with the committed files; it publishes nothing (`ci/eval/run.sh`).
+
+## Rechecking the numbers: the audit
+
+`tools/audit/` recomputes the headline numbers of the evaluation with code of its own, which imports nothing from `tools/eval/` or `tools/fusion/`. Fill a directory `ROOT` from the `pub/*` branches as the table in `tools/audit/README.md` lays out, then run, from a checkout of this repository:
+
+```
+nice -n 10 env OMP_NUM_THREADS=1 python3 -I tools/audit/recompute.py ROOT . tools/audit/results/recompute.json
+nice -n 10 env OMP_NUM_THREADS=1 python3 -I tools/audit/softspots.py ROOT . tools/audit/results/softspots.json
+```
+
+On two shared cores the first took about a minute and the second about forty seconds (`tools/audit/README.md`). The comparison of the shipped int8 file's browser vectors is a short script in the last block of the same README. `docs/eval/audit.md` lists what disagreed and why, and its soft spots: names for species with few local records, the bar of 98 in 100 chosen after three bars' test outcomes were seen, and what the species list lacks.
 
 ## Secrets
 
@@ -90,8 +106,9 @@ One secret exists, by name only: `HF_TOKEN`, a Hugging Face token with write acc
 
 ## Waiting on the owner
 
-- The owner has yet to decide on the rule for which photos heads may be fitted on, which the coordinator set on 11 October (`docs/LICENCES.md`).
+- The owner has yet to decide on the rule for which photos heads may be fitted on, which the coordinator set on 11 October and under which the heads of build 9 were fitted (`docs/LICENCES.md`).
 - No licence has been chosen for this project's code.
 - The rule of the finding game awaits a decision (`docs/PLAN.md`, Phase 5).
-- The page has yet to run on an iPhone, and the larger model on any phone.
+- Only the owner's own devices can show the page on a real phone. It has yet to run on an iPhone, and the larger model on any phone. `native/README.md` gives the steps for putting the iPhone shell on the owner's own iPhone from Xcode with a free Apple ID, whose provisioning profiles expire after seven days.
 - The species service needs a home. A free Hugging Face account can host it on shared graphics cards from about 10 November, when the account is thirty days old (`docs/LOG.md`, 11 October, 00:52).
+- Whether to take the app shells toward the stores is the owner's call. A Play Console account costs US$25 once, and a personal account created after 13 November 2023 must first run a closed test with at least 12 testers for at least 14 days. The Apple Developer Program costs 99 USD a year (`native/README.md`).
