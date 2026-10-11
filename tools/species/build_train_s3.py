@@ -282,7 +282,8 @@ def main():
          "This route differs from the species list's in three ways: the region is a bounding box (latitude 29.42 to 29.95, "
          "longitude -82.66 to -82.05), which takes in a strip of the neighbouring counties; iNaturalist blurs the place of some "
          "threatened species, so a few are missed or misplaced; and species are matched to the list by scientific name, so a "
-         "species GBIF files under another name has no training photos here.", "",
+         "species GBIF files under another name has training photos here only when the evaluation photos show which "
+         "iNaturalist name it sits under (the table near the end).", "",
          "## Checks", ""] + ["- " + c for c in checks]
     if dup_names:
         L.append("- scientific names carried by two keys in the species list (the more recorded key keeps the photos): %s" % ", ".join(sorted(dup_names)))
