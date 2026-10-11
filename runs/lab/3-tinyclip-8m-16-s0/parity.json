@@ -1,0 +1,365 @@
+{
+ "model": "tinyclip-8m-16",
+ "photos": 40,
+ "photo_ids": [
+  "s000001",
+  "s000002",
+  "s000003",
+  "s000004",
+  "s000005",
+  "s000006",
+  "s000007",
+  "s000008",
+  "s000009",
+  "s000010",
+  "s000011",
+  "s000012",
+  "s000013",
+  "s000014",
+  "s000015",
+  "s000016",
+  "s000017",
+  "s000018",
+  "s000019",
+  "s000020",
+  "s000021",
+  "s000022",
+  "s000023",
+  "s000024",
+  "s000025",
+  "s000026",
+  "s000027",
+  "s000028",
+  "s000029",
+  "s000030",
+  "s000031",
+  "s000032",
+  "s000033",
+  "s000034",
+  "s000035",
+  "s000036",
+  "s000037",
+  "s000038",
+  "s000039",
+  "s000040"
+ ],
+ "opset": 17,
+ "input": "pixel_values: float32 [N,3,224,224], already resized, cropped and normalized",
+ "output": "image_embeds: float32 [N,D], projected embedding, NOT unit-normalized (normalize before cosine)",
+ "quantization": "onnxruntime.quantization.quantize_dynamic, op_types_to_quantize=[MatMul, Gemm], weight_type=QInt8, MatMulConstBOnly=True, made twice (per_channel False and True); the one with the higher mean cosine to the original model is published as vision.int8.onnx; convolutions (the patch embedding) stay float32; activations are quantized at run time (DynamicQuantizeLinear + MatMulInteger)",
+ "fp16": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True); input and output stay float32",
+ "files": {
+  "fp32": {
+   "bytes": 33280418,
+   "mb": 33.28,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Cast": 1,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Mul": 41,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::MatMul": 81,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 1.0,
+    "min": 0.9999998807907104,
+    "max": 1.0000001192092896
+   },
+   "output_norm_mean": 6.075827598571777,
+   "latency_ms_1thread": {
+    "mean": 43.26,
+    "min": 42.88,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": true,
+   "sha256": "87f9c4c9ee5a1e997f526c715891c11ec15162abdc2e878a4906f1431f86aab6"
+  },
+  "int8-per-tensor": {
+   "bytes": 9441160,
+   "mb": 9.44,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Cast": 62,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Mul": 163,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::DynamicQuantizeLinear": 41,
+    "ai.onnx::MatMulInteger": 61,
+    "ai.onnx::MatMul": 20,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9959720373153687,
+    "min": 0.9914487600326538,
+    "max": 0.9976091980934143
+   },
+   "output_norm_mean": 6.080637454986572,
+   "latency_ms_1thread": {
+    "mean": 28.08,
+    "min": 27.91,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": false
+  },
+  "int8-per-channel": {
+   "bytes": 9559225,
+   "mb": 9.56,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Cast": 62,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Mul": 163,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::DynamicQuantizeLinear": 41,
+    "ai.onnx::MatMulInteger": 61,
+    "ai.onnx::MatMul": 20,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9911907315254211,
+    "min": 0.9775921106338501,
+    "max": 0.9939572811126709
+   },
+   "output_norm_mean": 5.9636335372924805,
+   "latency_ms_1thread": {
+    "mean": 28.84,
+    "min": 28.61,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": false
+  },
+  "fp16": {
+   "bytes": 16791296,
+   "mb": 16.79,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Cast": 3,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Mul": 41,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::MatMul": 81,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9999996423721313,
+    "min": 0.9999990463256836,
+    "max": 0.9999998211860657
+   },
+   "output_norm_mean": 6.075863361358643,
+   "latency_ms_1thread": {
+    "mean": 46.19,
+    "min": 45.99,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "published": true,
+   "sha256": "4aa5705eadd0ce6befd46174fda0a88e2031066815d0e2068f4642c43254741d"
+  },
+  "int8": {
+   "bytes": 9441160,
+   "mb": 9.44,
+   "ops": {
+    "ai.onnx::Constant": 242,
+    "ai.onnx::Shape": 33,
+    "ai.onnx::Cast": 62,
+    "ai.onnx::Gather": 33,
+    "ai.onnx::Conv": 1,
+    "ai.onnx::Unsqueeze": 91,
+    "ai.onnx::Concat": 43,
+    "ai.onnx::Slice": 1,
+    "ai.onnx::Reshape": 42,
+    "ai.onnx::ConstantOfShape": 1,
+    "ai.onnx::Transpose": 41,
+    "ai.onnx::Mul": 163,
+    "ai.onnx::Equal": 1,
+    "ai.onnx::Where": 1,
+    "ai.onnx::Expand": 1,
+    "ai.onnx::Add": 91,
+    "ai.onnx::LayerNormalization": 22,
+    "ai.onnx::DynamicQuantizeLinear": 41,
+    "ai.onnx::MatMulInteger": 61,
+    "ai.onnx::MatMul": 20,
+    "ai.onnx::Softmax": 10,
+    "ai.onnx::Div": 10,
+    "ai.onnx::Erf": 10
+   },
+   "opset_import": {
+    "ai.onnx": 17
+   },
+   "cosine_vs_torch": {
+    "mean": 0.9959720373153687,
+    "min": 0.9914487600326538,
+    "max": 0.9976091980934143
+   },
+   "output_norm_mean": 6.080637454986572,
+   "latency_ms_1thread": {
+    "mean": 28.08,
+    "min": 27.91,
+    "runs": 20,
+    "warmup": 3,
+    "batch": 1
+   },
+   "chosen_from": "int8-per-tensor",
+   "published": true,
+   "sha256": "080fe852f7cd0a336f3f6f7d9b2c31ed22115fc7d58f482e6e8f6736d6644fcc"
+  }
+ },
+ "machine": {
+  "cpus": 4,
+  "processor": "x86_64",
+  "machine": "x86_64"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "wasm": {
+  "onnxruntime_web": "1.30.0",
+  "backend": "wasm",
+  "threads": 1,
+  "node": "v22.23.3",
+  "photos": 8,
+  "files": {
+   "int8": {
+    "load_ms": 444,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9962483284604302,
+     "min": 0.9945685397706944
+    },
+    "cosine_vs_torch": {
+     "mean": 0.9961461735707536,
+     "min": 0.9946479198176834
+    },
+    "latency_ms_1thread": {
+     "mean": 95.94993670000004,
+     "min": 95.4299860000001,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   },
+   "fp16": {
+    "load_ms": 253,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9999998980193372,
+     "min": 0.9999998667464306
+    },
+    "cosine_vs_torch": {
+     "mean": 0.9999996562419963,
+     "min": 0.9999995064288446
+    },
+    "latency_ms_1thread": {
+     "mean": 208.2652516,
+     "min": 181.9305720000002,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   },
+   "fp32": {
+    "load_ms": 143,
+    "cosine_vs_ort_cpu": {
+     "mean": 0.9999999999992724,
+     "min": 0.9999999999985651
+    },
+    "cosine_vs_torch": {
+     "mean": 0.9999999999984193,
+     "min": 0.9999999999979065
+    },
+    "latency_ms_1thread": {
+     "mean": 164.9552757999996,
+     "min": 164.29240600000048,
+     "runs": 10,
+     "warmup": 3,
+     "batch": 1
+    },
+    "runs": true
+   }
+  }
+ }
+}
