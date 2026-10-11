@@ -5,7 +5,8 @@
 // The shell grants the page's camera request (iOS 15 and later); the system asks the person first, with the sentence in
 // Info.plist. Every three seconds it writes what the page reports about itself (window.__selftest, the screen it shows) to
 // Documents/state.json, and the page's console errors to Documents/log.txt, where the simulator's data container shows them.
-// Launch arguments for tests: -q <query string for index.html>, -url <any address instead>.
+// Launch arguments for tests: -q <query string for index.html>, -url <any address instead>,
+// -probe <path of a script in the bundle to add to the page after it loads>.
 // Build for the simulator: see ci/native/ios.sh (swiftc, no Xcode project).
 
 import UIKit
@@ -83,6 +84,8 @@ final class Files: NSObject, WKURLSchemeHandler {
 final class VC: UIViewController, WKScriptMessageHandler, WKUIDelegate, WKNavigationDelegate {
     var web: WKWebView!
     var timer: Timer?
+    var probe: String?
+    var probed = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +122,7 @@ final class VC: UIViewController, WKScriptMessageHandler, WKUIDelegate, WKNaviga
         var target = "app://localhost/index.html"
         if let i = args.firstIndex(of: "-q"), i + 1 < args.count { target += "?" + args[i + 1] }
         if let i = args.firstIndex(of: "-url"), i + 1 < args.count { target = args[i + 1] }
+        if let i = args.firstIndex(of: "-probe"), i + 1 < args.count { probe = args[i + 1] }
         note("open " + target)
         if let u = URL(string: target) { web.load(URLRequest(url: u)) } else { note("not an address: " + target) }
         timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in self?.poll() }
@@ -128,6 +132,7 @@ final class VC: UIViewController, WKScriptMessageHandler, WKUIDelegate, WKNaviga
         let js = "JSON.stringify({st: window.__selftest || null, sb: !!window.__seenBack,"
             + " screen: (window.__seenBack && window.__seenBack.S) ? window.__seenBack.S.screen : null,"
             + " src: (window.__seenBack && window.__seenBack.S) ? window.__seenBack.S.src : null,"
+            + " big: window.__bigProbe || null,"
             + " href: location.href, secure: window.isSecureContext, coi: window.crossOriginIsolated, ua: navigator.userAgent})"
         web.evaluateJavaScript(js) { r, e in
             if let s = r as? String {
@@ -144,6 +149,13 @@ final class VC: UIViewController, WKScriptMessageHandler, WKUIDelegate, WKNaviga
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         note("page finished " + (webView.url?.absoluteString ?? ""))
+        if let p = probe, !probed, p.range(of: "^[A-Za-z0-9_./-]+$", options: .regularExpression) != nil {
+            probed = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+                let js = "(function(){var s=document.createElement('script');s.src='" + p + "';document.head.appendChild(s);})()"
+                self?.web.evaluateJavaScript(js) { _, e in note("probe " + p + " injected" + (e.map { " with error " + $0.localizedDescription } ?? "")) }
+            }
+        }
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
