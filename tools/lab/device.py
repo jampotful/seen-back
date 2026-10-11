@@ -309,9 +309,14 @@ def score(args):
         ok = orig is not None and r["species_on_common_photos"]["top1"] >= orig - 1.0 and (r.get("cosine_to_original") or {}).get("mean", 0) >= 0.99
         cands.append((t, ok, ms, r["species_on_common_photos"]["top1"], (r.get("cosine_to_original") or {}).get("mean", 0)))
     good = [c for c in cands if c[1]]
-    if good:
-        best = min(good, key=lambda c: c[2])[0]
-        why = "fastest (median single-thread ms) of the recipes within one point of the original's top-1 with mean cosine >= 0.99"
+    if args.choose:
+        best, why = args.choose, "chosen by name in the run file (device.choose), after reading the numbers"
+    elif good:
+        fastest = min(c[2] for c in good)
+        tie = [c for c in good if c[2] <= 1.1 * fastest]
+        best = max(tie, key=lambda c: (c[4], c[3]))[0]
+        why = ("of the recipes within one point of the original's top-1 with mean cosine >= 0.99, those within 10% of the "
+               "fastest median single-thread time; of those, the highest mean cosine to the original")
     elif cands:
         best = max(cands, key=lambda c: (c[3], c[4]))[0]
         why = "no recipe was within one point of the original with cosine >= 0.99; the best top-1 (then cosine) was taken"
@@ -374,6 +379,7 @@ def main():
     sc.add_argument("--min-photos", type=int, default=250)
     sc.add_argument("--runs", nargs="+", required=True)
     sc.add_argument("--out", required=True)
+    sc.add_argument("--choose", default="", help="publish this recipe whatever the rule says (recorded as such)")
     pt = sub.add_parser("parts")
     pt.add_argument("--file", required=True)
     pt.add_argument("--size", type=int, default=90_000_000)

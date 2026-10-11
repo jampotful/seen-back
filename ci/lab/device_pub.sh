@@ -18,7 +18,8 @@ git fetch -q --depth 1 origin "pub/heads-sentences-$model" && git --work-tree=sl
 slot_sha=$(git rev-parse FETCH_HEAD)
 say "server rows from pub/heads-sentences-$model $slot_sha"
 run python3 -u tools/lab/device.py score --model "$model" --manifest data_in/manifest.csv --ref-npy ref/images/alachua-2025.f16.npy \
-  --ref-ids ref/images/alachua-2025.ids.json --slot slot --slot-name "pub/heads-sentences-$model@${slot_sha:0:12}" --runs dparts/*/ --out ret/device_results.json || exit 1
+  --ref-ids ref/images/alachua-2025.ids.json --slot slot --slot-name "pub/heads-sentences-$model@${slot_sha:0:12}" --runs dparts/*/ --out ret/device_results.json \
+  --choose "${DEVICE_CHOOSE:-}" || exit 1
 best=$(python3 -c "import json;print(json.load(open('ret/device_results.json'))['best'] or '')")
 [ -n "$best" ] || { say "no int8 recipe qualified to publish"; exit 1; }
 f=$(ls dparts/*/vision."$best".onnx 2>/dev/null | head -1)

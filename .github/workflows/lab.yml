@@ -8,6 +8,7 @@ on:
     branches: ['run/lab/**']
 permissions:
   contents: write
+  actions: read
 # A newer push to the same run branch cancels the older run.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,6 +33,9 @@ jobs:
       device_max: ${{ steps.plan.outputs.device_max }}
       card_patch: ${{ steps.plan.outputs.card_patch }}
       has_card_patch: ${{ steps.plan.outputs.has_card_patch }}
+      device_from_run: ${{ steps.plan.outputs.device_from_run }}
+      device_choose: ${{ steps.plan.outputs.device_choose }}
+      has_device_pub: ${{ steps.plan.outputs.has_device_pub }}
     steps:
       - uses: actions/checkout@v4
       - id: plan
@@ -209,7 +213,7 @@ jobs:
 
   device_pub:
     needs: [plan, device]
-    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_device == 'true' && needs.plan.outputs.device_branch != ''
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_device_pub == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -219,10 +223,20 @@ jobs:
           name: data
           path: data_in
       - uses: actions/download-artifact@v4
+        if: needs.plan.outputs.device_from_run == ''
         with:
           pattern: device-*
           path: dparts
+      - uses: actions/download-artifact@v4
+        if: needs.plan.outputs.device_from_run != ''
+        with:
+          pattern: device-*
+          path: dparts
+          run-id: ${{ needs.plan.outputs.device_from_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: score, choose, cut into parts, publish, check the raw address
+        env:
+          DEVICE_CHOOSE: ${{ needs.plan.outputs.device_choose }}
         run: |
           mkdir -p ret
           python3 -m pip install --quiet numpy 2>&1 | tail -1
