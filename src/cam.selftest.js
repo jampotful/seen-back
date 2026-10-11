@@ -4,6 +4,8 @@
   // from a video, the change of eyes held at three instants, and a contact sheet at the end. The result is shown
   // on screen, kept in window.__selftest, and sent as JSON to the same-origin path in &report=/path when given.
   // Only robust properties are judged; everything else is recorded as numbers.
+  // It reads only page bindings that are set once at start-up (build.py lists them as SELFTEST_READS), so it can run either inside the
+  // page's script or as selftest.js, fetched by the page only for ?selftest=1 and handed those bindings by a small hook.
   (function () {
     var qs = location.search || '';
     if (!/[?&]selftest=1(?:&|$)/.test(qs)) return;
@@ -195,6 +197,68 @@
       post();
     }
 
+    // ---- 1b. the recognizer, when the address names a slot (&rec=) and photos (&recphotos=a,b,c): each photo goes in as the page's
+    // own photo does (a File, decoded to a canvas, then pocket.recognize), and with &recexpect=<expect.json> the answers are held
+    // against what Python got for the same photos (test/rec/make_slot.py --photos)
+    function param(name) { var m = new RegExp('[?&]' + name + '=([^&]*)').exec(qs); try { return m ? decodeURIComponent(m[1]) : ''; } catch (e) { return ''; } }
+    function sameOrigin(u) { return /^(\/(?!\/)|[\w.\-]+(\/|$))/.test(u) && !/^[a-z][\w+.\-]*:/i.test(u); }
+    async function recPhase() {
+      var R = T.rec = { slot: param('rec'), photos: [] }, list = param('recphotos').split(',').filter(Boolean).filter(sameOrigin), ex = param('recexpect'), expect = null;
+      phase('rec', 'The recognizer: starting it.');
+      if (ex && sameOrigin(ex)) { try { expect = await (await fetch(ex, { cache: 'no-store' })).json(); R.expect = ex; } catch (e) { R.expectError = String(e).slice(0, 120); } }
+      var t0 = performance.now();
+      try { await pocket.ready(); R.readyMs = Math.round(performance.now() - t0); }
+      catch (e) { R.readyMs = Math.round(performance.now() - t0); R.error = { code: e && e.code, sentence: e && e.sentence, detail: String(e && e.detail || e).slice(0, 200) }; }
+      R.about = pocket.about(); delete R.about.last;
+      check('rec: recognizer ready', !R.error, R.error ? R.error.sentence + ' (' + R.error.code + ': ' + R.error.detail + ')' : '');
+      if (R.error) { post(); return; }
+      pocket.wantPre = true;
+      for (var i = 0; i < list.length; i++) {
+        var url = list[i], name = url.split('/').pop().split('?')[0], P = { name: name };
+        stLine.textContent = 'The recognizer: photo ' + (i + 1) + ' of ' + list.length + ' (' + name + ').';
+        try {
+          var blob = await (await fetch(url)).blob(), file = new File([blob], name, { type: blob.type || (/\.png$/i.test(name) ? 'image/png' : 'image/jpeg') });
+          P.bytes = blob.size;
+          var t1 = performance.now(), cv = await decode(file); P.decodeMs = Math.round(performance.now() - t1); P.shown = cv.width + 'x' + cv.height;
+          var t2 = performance.now(), r = await pocket.recognize(cv, file); P.wallMs = Math.round(performance.now() - t2);
+          P.from = r.from; P.ms = r.ms; P.kind = r.kind; P.kinds3 = r.kinds.slice(0, 3).map(function (k) { return [k.key, r2(k.p * 100) / 100]; });
+          P.head3 = r.kinds.slice().sort(function (a, b) { return b.head - a.head; }).slice(0, 3).map(function (k) { return [k.key, Math.round(k.head * 1e4) / 1e4]; });
+          if (r.species && r.species[0]) P.species1 = [r.species[0].sci, Math.round(r.species[0].p * 1e3) / 1e3];
+          var py = expect && expect.kinds && expect.kinds[name], pe = expect && expect.photos && expect.photos[name];
+          if (py) { P.python3 = py; P.match = P.head3[0][0] === py[0][0]; }
+          if (pe && pe.embedding && pocket.lastEmb) {
+            var e = pe.embedding, g = pocket.lastEmb, dot = 0, na = 0, nb = 0;
+            for (var j = 0; j < e.length; j++) { dot += e[j] * g[j]; na += e[j] * e[j]; nb += g[j] * g[j]; }
+            P.cosine = Math.round(dot / Math.sqrt(na * nb) * 1e6) / 1e6;
+          }
+          if (pe && pe.pre_sha256 && pocket.lastPre && window.crypto && crypto.subtle) {      // the 224 x 224 pixels the encoder got, against Pillow's
+            var d = await crypto.subtle.digest('SHA-256', pocket.lastPre), hex = Array.prototype.map.call(new Uint8Array(d), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+            P.preSame = hex === pe.pre_sha256;
+          }
+          check('rec ' + name + ': recognized', true);
+          // Python's answer for an int8 model depends on the processor it ran on (its int8 kernels differ), so a photo whose two likeliest
+          // kinds are within 0.05 of each other in Python's answer is recorded as a close call and not judged
+          if (py) P.pyMargin = Math.round(((py[0] || [0, 0])[1] - (py[1] || [0, 0])[1]) * 1e4) / 1e4;
+          if (py && !/^info-/.test(name) && P.pyMargin >= .05) check('rec ' + name + ': top kind matches Python', P.match, 'page ' + JSON.stringify(P.head3) + ', Python ' + JSON.stringify(py));
+          // a PNG reaches both resizes as the same pixels, so the prepared picture must be Pillow's to the byte; an int8 encoder's
+          // numbers differ between onnxruntime-web and native onnxruntime, and native onnxruntime's differ from one processor to the
+          // next (cosines of 0.982 to 0.999 between build machines for the same photo), so the embedding is judged loosely
+          if (P.preSame !== undefined && /\.png$/i.test(name) && !/^info-/.test(name)) check('rec ' + name + ': prepared pixels identical to Pillow\'s', P.preSame);
+          if (P.cosine !== undefined && !/^info-/.test(name)) check('rec ' + name + ': embedding near Python\'s (cosine at least 0.98)', P.cosine >= .98, 'cosine ' + P.cosine);
+        } catch (e) {
+          P.error = { code: e && e.code, sentence: e && e.sentence, detail: String(e && (e.detail || e.message) || e).slice(0, 200) };
+          check('rec ' + name + ': recognized', false, (P.error.sentence || '') + ' ' + P.error.detail);
+        }
+        R.photos.push(P);
+        if (pocket.about().state !== 'ready' && i < list.length - 1) { try { await pocket.ready(); } catch (e) {} }
+      }
+      pocket.wantPre = false; pocket.lastPre = null;
+      var runs = R.photos.filter(function (x) { return x.ms; });
+      if (runs.length) R.meanRunMs = Math.round(runs.reduce(function (a, x) { return a + x.ms.pre + x.ms.run; }, 0) / runs.length);
+      T.ms.rec = since();
+      post();
+    }
+
     // ---- 2. the test card through each of the sixteen eyes, read back
     async function stillPhase() {
       var side = engine.side(), W = Math.min(side, 480), H = Math.round(W * .75), card = drawCard(W, H), L = card.L;
@@ -291,19 +355,35 @@
       check('video: a test clip plays', vidOK, M.tried.join('; '));
       if (vidOK) { M.size = vid.videoWidth + 'x' + vid.videoHeight; watchVideo(); }
     }
-    function videoUpright() {        // the clip has red in its top left corner and blue in its bottom right
-      return new Promise(function (done) {
+    // The clip has red in its top left corner and blue in its bottom right, in every frame. The check judges a picture made only of
+    // the clip's own frames. One upload from a video element is not enough: before the element has a frame for WebGL, texImage2D can
+    // leave the texture as it was (Chromium kept the still phase's test card: tl [192,192,192], br [38,38,192], read on a phone in
+    // Ecosia and on a build machine, run engines/11) or make it black (WebKit on macOS, run engines/12). So it waits for the element's
+    // first frame callback, then uploads every new frame until four have gone in (the ring has then taken two), and reads the picture
+    // through the human eye, which has no time effects (no persistence, hold or slowed rate), so it shows the last frame uploaded.
+    // The reading after the first upload is kept as `first`, as evidence of the race; it is not judged.
+    function videoUpright() {
+      function corners() {
         var vw = vid.videoWidth, vh = vid.videoHeight;
-        sizeCanvas(vw, vh);
-        requestAnimationFrame(function () {
-          engine.setFrame(vid, vw, vh, performance.now());
-          engine.draw(HUMAN, STEADY, performance.now(), 16);
-          var rc = makeCanvas(vw, vh), rx = rc.getContext('2d', { willReadFrequently: true }); rx.drawImage(canvas, 0, 0);
-          var img = rx.getImageData(0, 0, vw, vh), s = Math.round(vh * .1);
-          var tl = stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb, br = stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb;
-          done({ tl: rgb(tl), br: rgb(br), err: engine.state().err });
-        });
-      });
+        engine.draw(HUMAN, STEADY, performance.now(), 16);
+        var rc = makeCanvas(vw, vh), rx = rc.getContext('2d', { willReadFrequently: true }); rx.drawImage(canvas, 0, 0);
+        var img = rx.getImageData(0, 0, vw, vh), s = Math.round(vh * .1);
+        return { tl: rgb(stats(img, vw, { x0: 2, y0: 2, x1: s, y1: s }).rgb), br: rgb(stats(img, vw, { x0: vw - s, y0: vh - s, x1: vw - 2, y1: vh - 2 }).rgb) };
+      }
+      var firstFrame = vid.requestVideoFrameCallback ? new Promise(function (res) { var t = setTimeout(res, 1500); vid.requestVideoFrameCallback(function () { clearTimeout(t); res(); }); }) : wait(300);
+      return firstFrame.then(function () { return new Promise(function (done) {
+        var t0 = performance.now(), fresh = 0, first = null;
+        sizeCanvas(vid.videoWidth, vid.videoHeight);
+        (function step() {
+          if (vid.readyState >= 2 && vid.videoWidth) {
+            var isNew = vid.requestVideoFrameCallback ? freshV : vid.currentTime !== lastVT;
+            if (isNew || fresh === 0) { freshV = false; lastVT = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, performance.now()); fresh++; if (fresh === 1) first = corners(); }
+          }
+          if (fresh < 4 && performance.now() - t0 < 4000) { requestAnimationFrame(step); return; }
+          var last = corners(), st = engine.state();
+          done({ tl: last.tl, br: last.br, err: st.err, fresh: fresh, writes: st.writes, ms: Math.round(performance.now() - t0), first: first });
+        })();
+      }); });
     }
     // what the video element delivers over a while: frame callbacks, and changes of currentTime
     function videoProbe(ms) {
@@ -408,7 +488,7 @@
           var got = await new Promise(function (done) {
             requestAnimationFrame(function () {         // drawn and read back in one go, as the page's own snapshot does
               var now = performance.now(), fx = fxNow(now, 0);
-              engine.draw(mix(HUMAN, eyeP, S.k), fx, now, 16);
+              engine.draw(mix(HUMAN, S.eyes ? paramsOf(EYES[S.eyes]) : HUMAN, S.k), fx, now, 16);   // the eye setEyes chose, as the page's eyeP holds it
               var err = engine.state().err;
               rc.width = canvas.width; rc.height = canvas.height; rx.drawImage(canvas, 0, 0);
               var wh = whole(rx.getImageData(0, 0, rc.width, rc.height), rc.width, rc.height);
@@ -444,6 +524,12 @@
         ['moving picture', 'ms per frame', 'worst', 'ring writes', 'size'].forEach(function (h) { el('th', '', h, hr); });
         Object.keys(T.motion.runs).forEach(function (k) { var r = T.motion.runs[k], tr = el('tr', '', undefined, mt); [k, r.ms, r.worst, r.writes, r.size].forEach(function (v) { el('td', '', String(v), tr); }); });
       }
+      if (T.rec) {
+        var rt = el('table', '', undefined, details), rh = el('tr', '', undefined, rt);
+        el('caption', 'text-align:left;padding:0 0 4px', 'Recognizer ' + (T.rec.about ? (T.rec.about.model || '') + ', ' + (T.rec.about.backend || '') : '') + (T.rec.readyMs !== undefined ? ', ready in ' + T.rec.readyMs + ' ms' : '') + (T.rec.error ? ': ' + T.rec.error.sentence : ''), rt);
+        ['photo', 'kinds (page)', 'Python', 'ms (prepare + run)'].forEach(function (h) { el('th', '', h, rh); });
+        T.rec.photos.forEach(function (x) { var tr = el('tr', '', undefined, rt); [x.name, x.error ? x.error.sentence : (x.head3 || []).map(function (k) { return k[0] + ' ' + k[1]; }).join(', '), x.python3 ? x.python3[0][0] + (x.match ? ' (same)' : ' (differs)') : '', x.ms ? x.ms.pre + ' + ' + x.ms.run : ''].forEach(function (v) { el('td', '', String(v), tr); }); });
+      }
       el('pre', '', JSON.stringify(T), details);
       ta.value = JSON.stringify(T);
       root.scrollTop = 0;
@@ -452,6 +538,7 @@
     async function main() {
       await frame();
       await envPhase();
+      if (param('rec')) { try { await recPhase(); } catch (e) { check('rec phase ran', false, String(e && e.stack || e).slice(0, 300)); } }
       if (engine) {
         try { await stillPhase(); } catch (e) { check('still phase ran', false, String(e && e.stack || e).slice(0, 300)); }
         try { await motionPhase(); } catch (e) { check('motion phase ran', false, String(e && e.stack || e).slice(0, 300)); }

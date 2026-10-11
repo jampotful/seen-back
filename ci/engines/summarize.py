@@ -27,7 +27,19 @@ def brief(rec):
             "video": (T.get("motion") or {}).get("video"), "ms": T.get("ms"),
             "pageErrors": rec.get("pageErrors"), "console": (rec.get("console") or [])[:8], "failedRequests": (rec.get("failedRequests") or [])[:8],
             "installability": rec.get("installability"), "serviceWorker": rec.get("serviceWorker"), "liveFlow": rec.get("liveFlow"),
-            "openState": rec.get("openState"), "notes": rec.get("notes"), "shots": rec.get("shots")}
+            "openState": rec.get("openState"), "notes": rec.get("notes"), "shots": rec.get("shots"), "rec": recBrief(T.get("rec"))}
+
+
+def recBrief(R):
+    if not R:
+        return None
+    ph = R.get("photos") or []
+    return {"ready": not R.get("error"), "readyMs": R.get("readyMs"), "error": R.get("error"), "backend": (R.get("about") or {}).get("backend"), "model": (R.get("about") or {}).get("model"),
+            "meanRunMs": R.get("meanRunMs"), "photos": len(ph), "errors": [p["name"] + ": " + str(p["error"]) for p in ph if p.get("error")],
+            "matchPython": "%d of %d" % (sum(1 for p in ph if p.get("match")), sum(1 for p in ph if "match" in p)), "differ": [[p["name"], p.get("head3"), p.get("python3")] for p in ph if p.get("match") is False],
+            "preSamePNG": "%d of %d" % (sum(1 for p in ph if p.get("preSame") and p["name"].endswith(".png")), sum(1 for p in ph if "preSame" in p and p["name"].endswith(".png"))),
+            "cosineMin": min([p["cosine"] for p in ph if "cosine" in p and not p["name"].startswith("info-")] or [None]) if any("cosine" in p for p in ph) else None,
+            "perPhoto": [[p["name"], (p.get("ms") or {}).get("pre"), (p.get("ms") or {}).get("run"), p.get("from")] for p in ph]}
 
 
 for f in sorted(glob.glob(os.path.join(out, "shots", "*.json"))):
@@ -66,6 +78,19 @@ for f in sorted(glob.glob(os.path.join(out, "check4-*.json"))):
         r["stderr_tail"] = err[-400:]
     S["check4"][m] = r
 
+S["check_rec"] = {}
+for f in sorted(glob.glob(os.path.join(out, "rec", "*.json"))):
+    name = os.path.basename(f)[:-5]
+    txt = open(f).read().strip().splitlines()
+    try:
+        j = json.loads("\n".join(txt[:-1])) if len(txt) > 1 else {}
+    except Exception:
+        j = {}
+    S["check_rec"][name] = {"line": txt[-1] if txt else "(nothing printed)", "failed": {k: v for k, v in j.items() if isinstance(v, dict) and not v.get("ok")}}
+    if os.path.exists(f.replace(".json", ".err.txt")):
+        e = open(f.replace(".json", ".err.txt")).read()
+        if e.strip():
+            S["check_rec"][name]["stderr_tail"] = e[-600:]
 ip = os.path.join(out, "reports", "iphone.json")
 if os.path.exists(ip):
     try:

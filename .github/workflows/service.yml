@@ -1,0 +1,120 @@
+name: service
+# The species service (a Gradio app for a ZeroGPU Space). Start it by pushing to run/service/<label>.
+#   account: is the Hugging Face account older than 30 days (yes or no, with days); never prints the name or the token
+#   local:   builds the head, starts the app on this machine's processor, tests it as the page's browser would
+#   deploy:  only when the label contains "deploy", the account is old enough and the local test answered the photos:
+#            creates or updates the Space on ZeroGPU, reads its hardware back (deletes it and fails on anything that
+#            could cost money), waits for it and runs the same test against its public address
+# Results come back on the ci branch under runs/service/<run number>-<job>/.
+on:
+  push:
+    branches: ['run/service/**']
+permissions:
+  contents: write
+concurrency:
+  group: service-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  account:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    outputs:
+      eligible: ${{ steps.age.outputs.eligible }}
+      days: ${{ steps.age.outputs.days }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: age
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          mkdir -p out
+          python3 ci/service/account.py out 2>&1 | tee out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh service out account
+
+  local:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    outputs:
+      ok: ${{ steps.test.outputs.ok }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: install
+        run: |
+          mkdir -p out
+          start=$(date +%s)
+          { pip install -q numpy pillow requests && \
+            pip install -q torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cpu && \
+            pip install -q gradio==6.30.0 open_clip_torch==3.3.0 spaces; } > out/install.txt 2>&1 || { tail -60 out/install.txt; exit 1; }
+          echo "install took $(( $(date +%s) - start )) s" | tee -a out/log.txt
+          pip freeze > out/pip-freeze.txt
+      - name: head
+        run: bash ci/service/heads.sh out
+      - name: run and test
+        id: test
+        env:
+          GRADIO_SERVER_NAME: 127.0.0.1
+          GRADIO_ANALYTICS_ENABLED: 'False'
+        run: |
+          set -uo pipefail
+          { echo "cpus: $(nproc)"; free -m | head -2; lscpu | grep -E 'Model name|^CPU\(s\)'; } > out/machine.txt
+          start=$(date +%s)
+          python service/app.py > out/server.log 2>&1 &
+          pid=$!
+          python ci/service/test_service.py --base http://127.0.0.1:7860 --manifest data/eval/alachua-2025/manifest.csv \
+            --out out/local --wait 900 --head service/heads/us-fl-alachua \
+            --lab-images lab/images/alachua-2025.f16.npy --lab-ids lab/images/alachua-2025.ids.json 2>&1 | tee -a out/log.txt
+          rc=${PIPESTATUS[0]}
+          echo "server start to end of test: $(( $(date +%s) - start )) s; test exit $rc" | tee -a out/log.txt
+          kill "$pid" 2>/dev/null || true
+          sleep 3
+          # the same test with the encoder held to two threads, the core count of a free CPU Space
+          SB_THREADS=2 GRADIO_SERVER_PORT=7861 python service/app.py > out/server-2threads.log 2>&1 &
+          pid2=$!
+          python ci/service/test_service.py --base http://127.0.0.1:7861 --manifest data/eval/alachua-2025/manifest.csv \
+            --out out/local-2threads --wait 600 2>&1 | tail -4 | tee -a out/log.txt
+          kill "$pid2" 2>/dev/null || true
+          ok=$(python -c "import json;r=json.load(open('out/local/results.json'));c=r['checks'];print('yes' if c.get('health') and c.get('photos_answered') else 'no')" 2>/dev/null || echo no)
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+          echo "deploy gate (health and photos answered): $ok" | tee -a out/log.txt
+          exit $rc
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh service out local
+
+  deploy:
+    needs: [account, local]
+    if: ${{ always() && contains(github.ref_name, 'deploy') && needs.account.outputs.eligible == 'yes' && needs.local.outputs.ok == 'yes' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: install
+        run: pip install -q huggingface_hub==2.2.0 requests pillow numpy
+      - name: head
+        run: bash ci/service/heads.sh out
+      - name: deploy and test
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -uo pipefail
+          python ci/service/deploy.py service out data/eval/alachua-2025/manifest.csv \
+            --head service/heads/us-fl-alachua --lab-images lab/images/alachua-2025.f16.npy \
+            --lab-ids lab/images/alachua-2025.ids.json 2>&1 | tee -a out/log.txt
+          exit ${PIPESTATUS[0]}
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh service out deploy
