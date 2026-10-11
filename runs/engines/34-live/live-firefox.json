@@ -1,0 +1,541 @@
+{
+ "browser": "firefox",
+ "site": "https://jampotful.github.io/seen-back/",
+ "shots": [
+  "live-firefox-1-first.png",
+  "live-firefox-2-offline.png"
+ ],
+ "notes": [],
+ "console": [
+  "warning: [JavaScript Warning: \"Failed to create WebGL context: WebGL creation failed: \n* AllowWebgl2:false restricts context creation on this system. ()\" {file: \"https://jampotful.github.io/seen-back/\" line: 587}]"
+ ],
+ "pageErrors": [],
+ "version": "142.0.1",
+ "loadEventMs": 391,
+ "readyFromNav": "ready",
+ "readyFromNavMs": 9221,
+ "first": {
+  "status": 200,
+  "headers": {
+   "server": "GitHub.com",
+   "content-type": "text/html; charset=utf-8",
+   "x-origin-cache": "HIT",
+   "last-modified": "Sun, 11 Oct 2026 08:26:03 GMT",
+   "access-control-allow-origin": "*",
+   "strict-transport-security": "max-age=31556952",
+   "etag": "W/\"6acb481b-3474b\"",
+   "expires": "Sun, 11 Oct 2026 08:42:30 GMT",
+   "cache-control": "max-age=600",
+   "content-encoding": "gzip",
+   "x-proxy-cache": "MISS",
+   "x-github-request-id": "DEB2:5E23B:1CAA631:2379CE1:6ACB499C",
+   "x-github-edge-region": "iad",
+   "accept-ranges": "bytes",
+   "date": "Sun, 11 Oct 2026 08:33:02 GMT",
+   "via": "1.1 varnish",
+   "age": "0",
+   "x-served-by": "cache-phx1710144-PHX",
+   "x-cache": "HIT",
+   "x-cache-hits": "1",
+   "x-timer": "S1791707582.415083, VS0, VE72",
+   "vary": "Accept-Encoding",
+   "x-fastly-request-id": "521a83bd8ec1ce9dd9b467be27036e13e55f31e5",
+   "content-length": "65707",
+   "x-firefox-spdy": "h2"
+  },
+  "page": {
+   "build": "Seen Back, build 8.",
+   "screen": "intro",
+   "engine": null,
+   "coi": false,
+   "secure": true,
+   "swSupported": true,
+   "swRegistered": true,
+   "swActive": true,
+   "swState": "activated",
+   "controlled": true,
+   "rec": {
+    "state": "ready",
+    "why": "",
+    "fail": "",
+    "model": "tinyclip-39m-16",
+    "rule": "mix",
+    "trained": true,
+    "backend": "wasm",
+    "threads": 1,
+    "loadMs": 8828,
+    "start": {
+     "vectors": 25,
+     "session": 667,
+     "warm": 5904
+    },
+    "last": null,
+    "got": 61953585,
+    "total": 61953585,
+    "slot": "models/pocket/manifest.json",
+    "have": "",
+    "keptBytes": 0,
+    "bytes": 40978137,
+    "getFail": ""
+   },
+   "serif": true
+  }
+ },
+ "slot": "present",
+ "manifest": {
+  "id": "tinyclip-39m-16",
+  "licence": "MIT",
+  "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M",
+  "vision": {
+   "url": "vision.int8-per-channel.onnx",
+   "bytes": 40978137,
+   "sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e",
+   "from": "pub/lab-tinyclip-39m-16:onnx/vision.int8-per-channel.onnx",
+   "input": "pixel_values",
+   "output": "image_embeds",
+   "size": 224,
+   "mean": [
+    0.48145466,
+    0.4578275,
+    0.40821073
+   ],
+   "std": [
+    0.26862954,
+    0.26130258,
+    0.27577711
+   ],
+   "resize": "shortest-bicubic-antialias",
+   "crop": "center"
+  },
+  "width": 512,
+  "kinds": {
+   "url": "kinds.f16.bin",
+   "labels": [
+    "cat",
+    "dog",
+    "squirrel",
+    "deer",
+    "rabbit",
+    "hawk",
+    "wader",
+    "bird",
+    "alligator",
+    "reptile",
+    "frog",
+    "bee",
+    "insect",
+    "plant",
+    "person",
+    "other",
+    "none"
+   ],
+   "made_from": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+   "bias": [
+    0.86921,
+    0.19907,
+    -1.12066,
+    2.11914,
+    -0.71764,
+    -0.82835,
+    -0.76561,
+    1.14594,
+    -0.90951,
+    -0.81436,
+    -1.61845,
+    -1.48294,
+    -0.32251,
+    -0.49864,
+    2.50409,
+    -0.51286,
+    2.76685
+   ]
+  },
+  "species": {
+   "url": "species.f16.bin",
+   "table": "species.json",
+   "count": 5911,
+   "bias_url": "species.bias.f32.bin"
+  },
+  "fusion": {
+   "t_kind": 0.5,
+   "t_species": 100,
+   "alpha_prior": 1,
+   "w_kind": 0.7,
+   "rule": "mix",
+   "name_at": 0.9,
+   "offer_at": 0.94,
+   "prior_floor": 0.000001,
+   "kind_at": 0.5
+  },
+  "fusion_note": "alpha_prior and the prior's smoothing were chosen on the third of val kept for tuning by tools/eval/study2.py. The kinds head, t_kind, w_kind and the rule were chosen there too, on the same wildlife photos together with a third of the `train` rows of the extra set coco-kinds (people, cats, dogs, grazing animals, rooms with nothing alive). name_at, offer_at and kind_at are set by tools/eval/shipped.py through tools/fusion/fuse.py.",
+  "evaluation": {
+   "model": "tinyclip-39m-16",
+   "head": "prototypes + sentences",
+   "choice": "species_taxon_com, beta 8, bias for species without photos 0.8",
+   "train": "val",
+   "train_vectors": "images/alachua-2025 (two thirds of val)",
+   "test_vectors": "images/alachua-2025.wasm-int8-per-channel",
+   "tuned_on": "the third of val kept for tuning",
+   "prior_smoothing": {
+    "lam": 0,
+    "c": 0.1
+   },
+   "kind_head": "kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)",
+   "kind_tuned_with_extra_set": true
+  },
+  "needs": [
+   "species.bias_url (build 7 of the page)",
+   "kinds.bias (build 7 of the page)",
+   "fusion.rule mix (build 7 of the page)",
+   "fusion.kind_at (the build of the page that has the answer `not sure`)"
+  ],
+  "fusion_thresholds_note": "set by tools/eval/shipped.py on 565 tuning photos (the third of val kept for tuning) through tools/fusion/fuse.py; 2 means never",
+  "fusion_kind_at_note": "kind_at was set by tools/eval/shipped.py through tools/fusion/fuse.py: the lowest level from which an asserted kind was right at least 95 times in 100 on 565 wildlife tuning photos and on 3056 extra-set (coco-kinds) tuning photos. Under it the page should say that it is not sure and offer its three likeliest kinds."
+ },
+ "ready": "ready",
+ "readyMs": 1,
+ "about": {
+  "state": "ready",
+  "why": "",
+  "fail": "",
+  "model": "tinyclip-39m-16",
+  "rule": "mix",
+  "trained": true,
+  "backend": "wasm",
+  "threads": 1,
+  "loadMs": 8828,
+  "start": {
+   "vectors": 25,
+   "session": 667,
+   "warm": 5904
+  },
+  "last": null,
+  "got": 61953585,
+  "total": 61953585,
+  "slot": "models/pocket/manifest.json",
+  "have": "",
+  "keptBytes": 0,
+  "bytes": 40978137,
+  "getFail": ""
+ },
+ "photos": [
+  {
+   "name": "heron.png",
+   "kind": "wader",
+   "kinds3": [
+    [
+     "wader",
+     0.382
+    ],
+    [
+     "bird",
+     0.257
+    ],
+    [
+     "dog",
+     0.064
+    ]
+   ],
+   "species1": [
+    "Eudocimus albus",
+    0.187
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 23,
+    "run": 5837,
+    "post": 10
+   },
+   "wall": 5882
+  },
+  {
+   "name": "portrait.jpg",
+   "kind": "person",
+   "kinds3": [
+    [
+     "person",
+     0.464
+    ],
+    [
+     "other",
+     0.112
+    ],
+    [
+     "bird",
+     0.093
+    ]
+   ],
+   "species1": [
+    "Fulica americana",
+    0.192
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 30,
+    "run": 5971,
+    "post": 6
+   },
+   "wall": 6018
+  },
+  {
+   "name": "wall.png",
+   "kind": "none",
+   "kinds3": [
+    [
+     "none",
+     0.471
+    ],
+    [
+     "insect",
+     0.12
+    ],
+    [
+     "dog",
+     0.071
+    ]
+   ],
+   "species1": [
+    "Idaea demissaria",
+    0.092
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 19,
+    "run": 5912,
+    "post": 6
+   },
+   "wall": 5946
+  },
+  {
+   "name": "garden.jpg",
+   "kind": "plant",
+   "kinds3": [
+    [
+     "plant",
+     0.307
+    ],
+    [
+     "none",
+     0.291
+    ],
+    [
+     "dog",
+     0.086
+    ]
+   ],
+   "species1": [
+    "Torenia crustacea",
+    0.101
+   ],
+   "ms": {
+    "load": 0,
+    "pre": 35,
+    "run": 5911,
+    "post": 7
+   },
+   "wall": 5964
+  }
+ ],
+ "kept": {
+  "keep-v1": [
+   "/seen-back/models/pocket/species.bias.f32.bin?v=fc8f2efd91310f74",
+   "/seen-back/models/pocket/kinds.f16.bin?v=fc8f2efd91310f74",
+   "/seen-back/vendor/rec-worker.js?v=8",
+   "/seen-back/models/pocket/species.json?v=fc8f2efd91310f74",
+   "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+   "/seen-back/vendor/ort/ort.wasm.min.js?v=1.30.0",
+   "/seen-back/models/pocket/species.f16.bin?v=fc8f2efd91310f74",
+   "/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+   "/seen-back/models/pocket/vision.int8-per-channel.onnx?v=fc8f2efd91310f74",
+   "/seen-back/models/pocket/manifest.json"
+  ],
+  "shell-8": [
+   "/seen-back/",
+   "/seen-back/index.html",
+   "/seen-back/manifest.webmanifest",
+   "/seen-back/icons/icon-192.png",
+   "/seen-back/icons/icon-512.png",
+   "/seen-back/fonts/instrument-serif-latin-400-normal.woff2",
+   "/seen-back/fonts/instrument-serif-latin-400-italic.woff2",
+   "/seen-back/test/rec/photos/heron.png",
+   "/seen-back/test/rec/photos/portrait.jpg",
+   "/seen-back/test/rec/photos/wall.png",
+   "/seen-back/test/rec/photos/garden.jpg"
+  ]
+ },
+ "second": {
+  "controlled": true,
+  "screen": "intro",
+  "fromServiceWorker": true
+ },
+ "offlineVisits": [
+  {
+   "console": [
+    "warning: [JavaScript Warning: \"Failed to create WebGL context: WebGL creation failed: \n* AllowWebgl2:false restricts context creation on this system. ()\" {file: \"https://jampotful.github.io/seen-back/\" line: 587}]"
+   ],
+   "status": 200,
+   "fromServiceWorker": true,
+   "online": true,
+   "controlled": true,
+   "screen": "intro",
+   "build": "Seen Back, build 8.",
+   "rec": "loading",
+   "recognized": {
+    "ready": "ready",
+    "readyMs": 4794,
+    "about": {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "model": "tinyclip-39m-16",
+     "rule": "mix",
+     "trained": true,
+     "backend": "wasm",
+     "threads": 1,
+     "loadMs": 6800,
+     "start": {
+      "vectors": 25,
+      "session": 680,
+      "warm": 5912
+     },
+     "last": null,
+     "got": 0,
+     "total": 0,
+     "slot": "models/pocket/manifest.json",
+     "have": "",
+     "keptBytes": 0,
+     "bytes": 40978137,
+     "getFail": ""
+    },
+    "photo": {
+     "kind": "wader",
+     "p": 0.382,
+     "species1": [
+      "Eudocimus albus",
+      0.187
+     ],
+     "ms": {
+      "load": 0,
+      "pre": 22,
+      "run": 5903,
+      "post": 8
+     },
+     "wall": 5946
+    }
+   },
+   "kept": {
+    "keep-v1": [
+     "/seen-back/models/pocket/species.bias.f32.bin?v=fc8f2efd91310f74",
+     "/seen-back/models/pocket/kinds.f16.bin?v=fc8f2efd91310f74",
+     "/seen-back/vendor/rec-worker.js?v=8",
+     "/seen-back/models/pocket/species.json?v=fc8f2efd91310f74",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+     "/seen-back/vendor/ort/ort.wasm.min.js?v=1.30.0",
+     "/seen-back/models/pocket/species.f16.bin?v=fc8f2efd91310f74",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+     "/seen-back/models/pocket/vision.int8-per-channel.onnx?v=fc8f2efd91310f74",
+     "/seen-back/models/pocket/manifest.json"
+    ],
+    "shell-8": [
+     "/seen-back/index.html",
+     "/seen-back/manifest.webmanifest",
+     "/seen-back/icons/icon-512.png",
+     "/seen-back/fonts/instrument-serif-latin-400-normal.woff2",
+     "/seen-back/fonts/instrument-serif-latin-400-italic.woff2",
+     "/seen-back/test/rec/photos/heron.png",
+     "/seen-back/test/rec/photos/portrait.jpg",
+     "/seen-back/test/rec/photos/wall.png",
+     "/seen-back/test/rec/photos/garden.jpg",
+     "/seen-back/",
+     "/seen-back/icons/icon-192.png"
+    ]
+   }
+  }
+ ],
+ "offline": {
+  "console": [
+   "warning: [JavaScript Warning: \"Failed to create WebGL context: WebGL creation failed: \n* AllowWebgl2:false restricts context creation on this system. ()\" {file: \"https://jampotful.github.io/seen-back/\" line: 587}]"
+  ],
+  "status": 200,
+  "fromServiceWorker": true,
+  "online": true,
+  "controlled": true,
+  "screen": "intro",
+  "build": "Seen Back, build 8.",
+  "rec": "loading",
+  "recognized": {
+   "ready": "ready",
+   "readyMs": 4794,
+   "about": {
+    "state": "ready",
+    "why": "",
+    "fail": "",
+    "model": "tinyclip-39m-16",
+    "rule": "mix",
+    "trained": true,
+    "backend": "wasm",
+    "threads": 1,
+    "loadMs": 6800,
+    "start": {
+     "vectors": 25,
+     "session": 680,
+     "warm": 5912
+    },
+    "last": null,
+    "got": 0,
+    "total": 0,
+    "slot": "models/pocket/manifest.json",
+    "have": "",
+    "keptBytes": 0,
+    "bytes": 40978137,
+    "getFail": ""
+   },
+   "photo": {
+    "kind": "wader",
+    "p": 0.382,
+    "species1": [
+     "Eudocimus albus",
+     0.187
+    ],
+    "ms": {
+     "load": 0,
+     "pre": 22,
+     "run": 5903,
+     "post": 8
+    },
+    "wall": 5946
+   }
+  },
+  "kept": {
+   "keep-v1": [
+    "/seen-back/models/pocket/species.bias.f32.bin?v=fc8f2efd91310f74",
+    "/seen-back/models/pocket/kinds.f16.bin?v=fc8f2efd91310f74",
+    "/seen-back/vendor/rec-worker.js?v=8",
+    "/seen-back/models/pocket/species.json?v=fc8f2efd91310f74",
+    "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+    "/seen-back/vendor/ort/ort.wasm.min.js?v=1.30.0",
+    "/seen-back/models/pocket/species.f16.bin?v=fc8f2efd91310f74",
+    "/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+    "/seen-back/models/pocket/vision.int8-per-channel.onnx?v=fc8f2efd91310f74",
+    "/seen-back/models/pocket/manifest.json"
+   ],
+   "shell-8": [
+    "/seen-back/index.html",
+    "/seen-back/manifest.webmanifest",
+    "/seen-back/icons/icon-512.png",
+    "/seen-back/fonts/instrument-serif-latin-400-normal.woff2",
+    "/seen-back/fonts/instrument-serif-latin-400-italic.woff2",
+    "/seen-back/test/rec/photos/heron.png",
+    "/seen-back/test/rec/photos/portrait.jpg",
+    "/seen-back/test/rec/photos/wall.png",
+    "/seen-back/test/rec/photos/garden.jpg",
+    "/seen-back/",
+    "/seen-back/icons/icon-192.png"
+   ]
+  }
+ },
+ "proxy": {
+  "refused": 2,
+  "tunnels": 3
+ }
+}

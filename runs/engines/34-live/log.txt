@@ -1,0 +1,297 @@
+
+=== 08:27:21 response headers, as a browser that accepts gzip and br would get them
+--- https://jampotful.github.io/seen-back/
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:03 GMT
+access-control-allow-origin: *
+etag: W/"6acb481b-3474b"
+expires: Sun, 11 Oct 2026 08:37:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 65707
+bytes on the wire: 65707
+--- https://jampotful.github.io/seen-back/index.html
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:03 GMT
+access-control-allow-origin: *
+etag: W/"6acb481b-3474b"
+expires: Sun, 11 Oct 2026 08:37:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 65707
+bytes on the wire: 65707
+--- https://jampotful.github.io/seen-back/sw.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:03 GMT
+access-control-allow-origin: *
+etag: W/"6acb481b-1363"
+expires: Sun, 11 Oct 2026 08:37:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1948
+bytes on the wire: 1948
+--- https://jampotful.github.io/seen-back/manifest.webmanifest
+HTTP/2 200 
+content-type: application/manifest+json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-268"
+expires: Sun, 11 Oct 2026 08:37:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 281
+bytes on the wire: 281
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm
+HTTP/2 200 
+content-type: application/wasm
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-d94899"
+expires: Sun, 11 Oct 2026 08:37:22 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 3722335
+bytes on the wire: 3722335
+--- https://jampotful.github.io/seen-back/vendor/ort/ort.wasm.min.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-c414"
+expires: Sun, 11 Oct 2026 08:37:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 16193
+bytes on the wire: 16193
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-5f3d"
+expires: Sun, 11 Oct 2026 08:37:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 9095
+bytes on the wire: 9095
+--- https://jampotful.github.io/seen-back/vendor/rec-worker.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-2878"
+expires: Sun, 11 Oct 2026 08:37:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 4139
+bytes on the wire: 4139
+--- https://jampotful.github.io/seen-back/models/pocket/manifest.json
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+last-modified: Sun, 11 Oct 2026 08:26:02 GMT
+access-control-allow-origin: *
+etag: W/"6acb481a-d12"
+expires: Sun, 11 Oct 2026 08:37:23 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1450
+bytes on the wire: 1450
+--- the model named by the manifest: https://jampotful.github.io/seen-back/models/pocket/vision.int8-per-channel.onnx
+HTTP/2 200 
+content-type: application/octet-stream
+last-modified: Sun, 11 Oct 2026 08:26:03 GMT
+access-control-allow-origin: *
+etag: W/"6acb481b-27146d9"
+expires: Sun, 11 Oct 2026 08:37:24 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 1
+via: 1.1 varnish
+x-cache: MISS
+x-cache-hits: 0
+content-length: 35342999
+bytes on the wire: 35342999, in 1.741059 s
+--- the same, asked for without compression
+HTTP/2 200 
+content-length: 40978137
+bytes on the wire: 40978137, in 0.843806 s
+--- the same, asked for a byte range (does a resumed download work?)
+HTTP/2 206 
+content-range: bytes 0-1023/40978137
+content-length: 1024
+bytes on the wire: 1024
+--- https://jampotful.github.io/seen-back/models/pocket/species.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 5601918
+bytes on the wire: 5601918
+--- https://jampotful.github.io/seen-back/models/pocket/kinds.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 16205
+bytes on the wire: 16205
+--- https://jampotful.github.io/seen-back/models/pocket/species.json
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 174336
+bytes on the wire: 174336
+
+=== 08:27:27 playwright 1.56.0, Chromium, Firefox and WebKit
+added 2 packages in 1s
+install chromium (try 1): exit 0
+install webkit (try 1): exit 0
+install firefox (try 1): exit 0
+
+=== 08:28:40 the page in Chromium, Firefox and WebKit
+08:32:24 chromium 141.0.7390.37 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js chromium: exit 0
+08:33:01 webkit 26.0 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"],[200,true,null,"ready","wader"],[200,true,null,"ready","wader"]] slot present ready
+live.js webkit: exit 0
+08:33:57 firefox 142.0.1 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js firefox: exit 0
+{
+ "chromium": {
+  "version": "141.0.7390.37",
+  "status": 200,
+  "build": "Seen Back, build 8.",
+  "sw_registered": true,
+  "sw_active": true,
+  "controlled_first": true,
+  "controlled_second": true,
+  "crossOriginIsolated": false,
+  "offline": {
+   "console": [],
+   "status": 200,
+   "fromServiceWorker": true,
+   "online": true,
+   "controlled": true,
+   "screen": "intro",
+   "build": "Seen Back, build 8.",
+   "rec": "ready",
+   "recognized": {
+    "ready": "ready",
+    "readyMs": 0,
+    "about": {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "model": "tinyclip-39m-16",
+     "rule": "mix",
+     "trained": true,
+     "backend": "wasm",
+     "threads": 1,
+     "loadMs": 1966,
+     "start": {
+      "vectors": 77.70000000001164,
+      "session": 830.4000000000233,
+      "warm": 954.8999999999651
+     },
+     "last": null,
+     "got": 0,
+     "total": 0,
+     "slot": "models/pocket/manifest.json",
+     "have": "",
+     "keptBytes": 0,
+     "bytes": 40978137,
+     "getFail": ""
+    },
+    "photo": {
+     "kind": "wader",
+     "p": 0.382,
+     "species1": [
+      "Eudocimus albus",
+      0.187
+     ],
+     "ms": {
+      "load": 0,
+      "pre": 87,
+      "run": 858,
+      "post": 22.3
+     },
+     "wall": 11654
+    }
+   },
+   "kept": {
+    "keep-v1": [
+     "/seen-back/models/pocket/kinds.f16.bin?v=fc8f2efd91310f74",
+     "/seen-back/models/pocket/species.bias.f32.bin?v=fc8f2efd91310f74",
+     "/seen-back/models/pocket/species.json?v=fc8f2efd91310f74",
+     "/seen-back/vendor/ort/ort.wasm.min.js?v=1.30.0",
+     "/seen-back/vendor/rec-worker.js?v=8",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30.0",
+     "/seen-back/models/pocket/species.f16.bin?v=fc8f2efd91310f74",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm?v=1.30.0",
+     "/seen-back/models/pocket/vision.int8-per-channel.onnx?v=fc8f2efd91310f74",
+     "/seen-back/models/pocket/manifest.json"
+    ],
+    "shell-8": [
+     "/seen-back/index.html",
+     "/seen-back/manifest.webmanifest",
+     "/seen-back/icons/icon-192.png",
+     "/seen-back/icons/icon-512.png",
+     "/seen-back/fonts/instrument-serif-latin-400-normal.woff2",
+     "/seen-back/fonts/instrument-serif-latin-400-italic.woff2",
+     "/seen-back/test/rec/photos/heron.png",
+     "/seen-back/test/rec/photos/portrait.jpg",
+     "/seen-back/test/rec/photos/wall.png",
+     "/seen-back/test/rec/photos/garden.jpg",
+     "/seen-back/"
+    ]
+   }
+  },
+  "slot": "present",
+  "ready": "ready",
+  "readyMs": 6,
+  "readyFromNav": "ready",
+  "readyFromNavMs": 3019,
+  "loadEventMs": 293,
+  "photos": [
+   {
+    "name": "heron.png",
+    "kind": "wader",
+    "kinds3": [
+     [
+      "wader",
+      0.382
+     ],
+     [
+      "bird",
+      0.257
+     ],
+     [
+      "dog",
+      0.064
+     ]
+    ],
+    "species1": [
+     "Eudocimus albus",
+     0.187
+    ],
+    "ms": {
+     "load": 0,
+     "pre": 70,
+     "run": 649,
+     "post": 18.4
+    },
+    "wall": 28399
+   },
+   {
+    "name": "portrait.jpg",
+    "kind": "person",
+ 
+pictures: 4 total bytes: 305946
