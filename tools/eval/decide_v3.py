@@ -20,6 +20,7 @@ import ev
 ap = argparse.ArgumentParser()
 ap.add_argument("--candidate", required=True)
 ap.add_argument("--live", default="val-tinyclip-39m-16")
+ap.add_argument("--live-beside", help="pocket v2 scored again with the present tools/fusion/fuse.py (for example val-tinyclip-39m-16-b8), for the measures reported beside the rule; its kind of eye must equal --live's photo for photo")
 ap.add_argument("--dir", default="docs/eval")
 ap.add_argument("--out")
 a = ap.parse_args()
@@ -53,6 +54,12 @@ fail_iii = share_pr is None or share_pr > 0.01
 
 # reported beside the rule and deciding nothing: paired differences (candidate minus pocket v2) on the same photos
 beside = []
+if a.live_beside:
+    LB = load(a.live_beside)["per_photo"]
+    for s_ in ("wildlife", "extra"):
+        if s_ in pl and s_ in LB:
+            assert pl[s_]["ids_sha256"] == LB[s_]["ids_sha256"] and pl[s_]["kind_right"] == LB[s_]["kind_right"], "--live-beside differs from --live in the kind of eye"
+    pl = LB
 for sname, keys in (("wildlife", ("asserted_right", "asserted_wrong", "named", "named_right")), ("extra", ("kind_right", "asserted_wrong", "named"))):
     if sname not in pc or sname not in pl or pc[sname]["ids_sha256"] != pl[sname]["ids_sha256"]:
         continue
@@ -73,7 +80,7 @@ out = {
     "rule": "The candidate (heads fitted on the training photos under the licence rule nc, TinyCLIP 39M/16, name_at at the 92-in-100 level on val) ships unless, on the test photos, "
             "(i) its kind of eye on wildlife is worse than pocket v2's by a paired difference whose 95% interval lies wholly below zero, (ii) its kind of eye on the extra set's test photos is right for less than 96.5%, "
             "or (iii) it names a species on more than 1% of the test photos of people and rooms. The rule was set by the coordinator before the candidate was measured.",
-    "candidate": a.candidate, "pocket_v2": a.live,
+    "candidate": a.candidate, "pocket_v2": a.live, "pocket_v2_beside": a.live_beside or a.live,
     "tests": {
         "i_wildlife_kind_paired_difference": {"candidate": nc["kind_right"], "pocket_v2": nl["kind_right"], "difference": diff, "photos": int(len(d)), "fails": bool(fail_i)},
         "ii_extra_kind_right": {"candidate": extra_right, "bar": 0.965, "fails": bool(fail_ii)},

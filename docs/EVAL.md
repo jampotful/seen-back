@@ -183,6 +183,7 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 | `alachua-pre2025-nc-tinyclip-39m-16` | 89.1% (88.2 to 90.1) | 53.8% (52.2 to 55.4) | 20.1% at 0.89 | 93.2% (91.6 to 94.9) | 4.6% at 0.98 | 86.1% (80.9 to 90.7) | 75.2% | 86.5% (85.4 to 87.8) |
 | `alachua-pre2025-nc-tinyclip-39m-16-at90` | 89.1% (88.2 to 90.1) | 53.8% (52.2 to 55.4) | 25.3% at 0.8 | 91.0% (89.2 to 92.7) | 12.0% at 0.88 | 85.9% (82.9 to 88.8) | 62.7% | 84.7% (83.3 to 86.1) |
 | `alachua-pre2025-tinyclip-39m-16` | 88.5% (87.5 to 89.5) | 53.4% (51.9 to 55.0) | 24.9% at 0.82 | 88.2% (86.2 to 90.0) | 2.7% at 0.98 | 92.1% (86.8 to 96.5) | 72.4% | 85.8% (84.6 to 87.0) |
+| `alachua-pre2025-tinyclip-39m-16-b8` | 88.5% (87.5 to 89.5) | 53.4% (51.9 to 55.0) | 23.1% at 0.82 | 90.4% (88.4 to 92.2) | 3.6% at 0.98 | 84.3% (78.4 to 89.6) | 73.3% | 85.6% (84.3 to 86.8) |
 | `alachua-pre2025-tinyclip-8m-16` | 80.3% (79.0 to 81.6) | 42.5% (41.0 to 44.0) | 7.0% at 0.9 | 87.5% (83.8 to 91.2) | 2.2% at 0.97 | 92.5% (86.2 to 96.8) | 90.7% | 79.0% (77.7 to 80.2) |
 | `live-pocket` | 83.7% (82.5 to 84.8) | 34.9% (33.5 to 36.4) | 15.2% at 0.4 | 93.4% (91.4 to 95.2) | 3.3% at 0.53 | 85.5% (79.7 to 91.3) | 81.5% | 80.2% (78.8 to 81.5) |
 | `pocket-v3` | 89.1% (88.2 to 90.1) | 53.8% (52.2 to 55.4) | 20.1% at 0.89 | 93.2% (91.6 to 94.9) | 4.6% at 0.98 | 86.1% (80.9 to 90.7) | 75.2% | 86.5% (85.4 to 87.8) |
@@ -191,6 +192,7 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 | `sentences-tinyclip-8m-16` | 77.3% (76.0 to 78.6) | 26.4% (25.1 to 27.8) | 9.4% at 0.56 | 89.1% (86.0 to 92.1) | 4.9% at 0.63 | 81.0% (76.1 to 86.3) | 85.7% | 74.0% (72.5 to 75.4) |
 | `val-bioclip2-l14` | 98.6% (98.2 to 98.9) | 91.7% (90.9 to 92.6) | 99.5% at 0.05 | 92.2% (91.3 to 92.9) | 0.0% at never | – | 0.5% | 52.4% (28.6 to 71.4) |
 | `val-tinyclip-39m-16` | 87.3% (86.3 to 88.3) | 36.3% (34.9 to 37.8) | 14.2% at 0.9 | 92.0% (89.6 to 94.0) | 7.3% at 0.94 | 90.3% (86.7 to 93.5) | 78.5% | 84.3% (83.0 to 85.6) |
+| `val-tinyclip-39m-16-b8` | 87.3% (86.3 to 88.3) | 36.3% (34.9 to 37.8) | 13.3% at 0.9 | 92.3% (90.1 to 94.4) | 8.2% at 0.94 | 90.1% (86.8 to 93.0) | 78.6% | 84.3% (83.0 to 85.5) |
 | `val-tinyclip-8m-16` | 79.5% (78.3 to 80.8) | 25.3% (24.0 to 26.6) | 0.0% at never | – | 15.8% at 0.24 | 83.0% (80.1 to 85.7) | 84.2% | 76.1% (74.7 to 77.6) |
 
 **Not sure is an answer.** Under `fusion.kind_at` the page asserts no kind, says that it is not sure and offers its three likeliest kinds. `tools/eval/shipped.py` sets the level through `fuse.py` as the lowest one from which an asserted kind was right at least 95 times in 100 on the wildlife tuning photos and, taken by itself, on the tuning third of the extra set. The table gives what then happens on the wildlife test photos and on the extra set's test photos. A slot whose third column says `no` was tuned before its model's vectors of the extra set were published: its level and its settings have never been asked about a person or an empty room.
@@ -201,6 +203,7 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 | `alachua-pre2025-nc-tinyclip-39m-16` | 0.53 | yes | 89.1% (88.2 to 90.1) | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 96.9% (95.8 to 97.8) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) | 15.1% (13.1 to 17.1) |
 | `alachua-pre2025-nc-tinyclip-39m-16-at90` | 0.53 | yes | 89.1% (88.2 to 90.1) | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 96.9% (95.8 to 97.8) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) | 15.7% (13.6 to 17.7) |
 | `alachua-pre2025-tinyclip-39m-16` | 0.51 | yes | 88.5% (87.5 to 89.5) | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 86.1% (83.4 to 88.6) | 97.4% (96.5 to 98.2) | 95.5% (94.2 to 96.7) | 98.9% (98.3 to 99.5) | 94.6% (87.5 to 100.0) | 16.1% (14.1 to 18.2) |
+| `alachua-pre2025-tinyclip-39m-16-b8` | 0.51 | yes | 88.5% (87.5 to 89.5) | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 86.1% (83.4 to 88.6) | 97.4% (96.5 to 98.2) | 95.5% (94.2 to 96.7) | 98.9% (98.3 to 99.5) | 94.6% (87.5 to 100.0) | 15.7% (13.7 to 17.7) |
 | `alachua-pre2025-tinyclip-8m-16` | 0.82 | yes | 80.3% (79.0 to 81.6) | 58.5% (56.9 to 60.0) | 96.2% (95.4 to 96.9) | 91.5% (90.1 to 92.7) | 95.4% (94.2 to 96.5) | 86.8% (84.8 to 88.7) | 98.9% (98.2 to 99.4) | 92.7% (88.4 to 96.3) | 15.7% (13.7 to 17.7) |
 | `live-pocket` | 0.88 | yes | 83.7% (82.5 to 84.8) | 38.4% (37.0 to 40.0) | 99.0% (98.5 to 99.4) | 95.6% (94.8 to 96.4) | 70.1% (67.3 to 72.6) | 3.7% (2.7 to 4.8) | 97.8% (93.5 to 100.0) | 81.7% (79.5 to 83.8) | 0.9% (0.4 to 1.5) |
 | `pocket-v3` | 0.53 | yes | 89.1% (88.2 to 90.1) | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 89.5% (87.2 to 91.5) | 96.9% (95.8 to 97.8) | 95.2% (94.0 to 96.4) | 98.4% (97.6 to 99.1) | 96.7% (91.7 to 100.0) | 15.1% (13.1 to 17.1) |
@@ -209,6 +212,7 @@ Each slot below was written by `tools/eval/export_heads.py` in the layout of `mo
 | `sentences-tinyclip-8m-16` | 0.80 | yes | 77.3% (76.0 to 78.6) | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 91.4% (90.2 to 92.5) | 83.2% (81.0 to 85.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) | 90.2% (88.3 to 92.2) | 1.1% (0.6 to 1.6) |
 | `val-bioclip2-l14` | 0.20 | no | 98.6% (98.2 to 98.9) | 100.0% (99.9 to 100.0) | 98.6% (98.2 to 99.0) | 50.0% (0.0 to 100.0) | – | – | – | – | – |
 | `val-tinyclip-39m-16` | 0.50 | yes | 87.3% (86.3 to 88.3) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 90.5% (88.5 to 92.4) | 98.2% (97.3 to 98.8) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) | 94.6% (89.3 to 100.0) | 6.2% (4.9 to 7.7) |
+| `val-tinyclip-39m-16-b8` | 0.50 | yes | 87.3% (86.3 to 88.3) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 90.5% (88.5 to 92.4) | 98.2% (97.3 to 98.8) | 95.5% (94.3 to 96.6) | 99.2% (98.7 to 99.7) | 94.6% (89.3 to 100.0) | 6.2% (4.9 to 7.7) |
 | `val-tinyclip-8m-16` | 0.53 | yes | 79.5% (78.3 to 80.8) | 52.6% (51.1 to 54.2) | 95.4% (94.5 to 96.2) | 88.9% (87.5 to 90.2) | 96.4% (95.3 to 97.4) | 70.2% (67.6 to 72.7) | 99.3% (98.7 to 99.8) | 94.6% (92.2 to 96.8) | 0.0% (0.0 to 0.0) |
 
 A stricter bar for naming is available. The table gives, for a named species that has to be right at least 90, 95 or 98 times in 100 on `val`, the threshold that `val` gives and what then happens on the test photos. For each bar the offer threshold was set again on `val`, for the photos left without a name, so that the three offered species hold the right one nine times in ten. The slots scored with `--name-bar 0.92` add a row for 92 in 100. The shares in this table leave out the page's rule that no species is named while the kind is not sure (`fusion.kind_at`), which the table above applies, so for a slot with `kind_at` the share named can be lower there and the share right higher.
@@ -228,6 +232,9 @@ A stricter bar for naming is available. The table gives, for a named species tha
 | `alachua-pre2025-tinyclip-39m-16` | 90 in 100 | 0.82 | 24.9% (23.6 to 26.3) | 88.2% (86.2 to 90.0) | 0.98 | 2.7% (2.2 to 3.2) | 92.1% (86.8 to 96.5) | 72.4% (71.0 to 73.7) |
 | `alachua-pre2025-tinyclip-39m-16` | 95 in 100 | no level reached it | – | – | – | – | – | – |
 | `alachua-pre2025-tinyclip-39m-16` | 98 in 100 | no level reached it | – | – | – | – | – | – |
+| `alachua-pre2025-tinyclip-39m-16-b8` | 90 in 100 | 0.82 | 24.9% (23.6 to 26.3) | 88.2% (86.2 to 90.0) | 0.98 | 2.7% (2.2 to 3.2) | 92.1% (86.8 to 96.5) | 72.4% (71.0 to 73.7) |
+| `alachua-pre2025-tinyclip-39m-16-b8` | 95 in 100 | no level reached it | – | – | – | – | – | – |
+| `alachua-pre2025-tinyclip-39m-16-b8` | 98 in 100 | no level reached it | – | – | – | – | – | – |
 | `alachua-pre2025-tinyclip-8m-16` | 90 in 100 | 0.90 | 7.0% (6.3 to 7.8) | 87.5% (83.8 to 91.2) | 0.97 | 2.2% (1.8 to 2.7) | 92.5% (86.2 to 96.8) | 90.7% (89.8 to 91.6) |
 | `alachua-pre2025-tinyclip-8m-16` | 95 in 100 | no level reached it | – | – | – | – | – | – |
 | `alachua-pre2025-tinyclip-8m-16` | 98 in 100 | no level reached it | – | – | – | – | – | – |
@@ -298,15 +305,17 @@ The rule set by the coordinator on 11 October 2026, pending the owner's decision
 - `alachua-pre2025-by`, tinyclip-39m-16: rows fitted on 19859 photos (train/alachua-pre2025: CC-BY 13555, CC0 5317; extra/coco-kinds: CC-BY-2.0 974, no-known-copyright-restrictions 13). Species head `discriminant + sentences`; kinds head `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`.
 - `alachua-pre2025-nc`, tinyclip-39m-16: rows fitted on 83348 photos (train/alachua-pre2025: CC-BY-NC 62694, CC-BY 13555, CC0 5317; extra/coco-kinds: CC-BY-2.0 974, CC-BY-NC-2.0 795, no-known-copyright-restrictions 13). Species head `discriminant`; kinds head `kind rows fitted on the fitting photos and the extra set (a kind's photos weighted by the inverse square root of their number)`.
 
-TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The first three rows set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos.
+TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The rows for run 25 and for `nc` and `by` set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos. Run 25 (commit c0cd718) and the committed file of pocket v2 (made at 03:23) were scored with the `tools/fusion/fuse.py` from before build 8, which named a species even when the kind was under `kind_at`; build 8's fuse.py and page name one only when the kind is asserted. The rows marked build 8 are the same slots scored again by `tools/eval/shipped.py` with the present fuse.py: their thresholds and their kind of eye, photo for photo, are the same, and only the naming columns move.
 
 | Heads fitted on | Slot | Kind right, wildlife | Kind right, extra set | Kind asserted, wildlife | Right when asserted | Top species right | Species named (share, name_at) | Named species right | Named on people | Named on rooms |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| all licences (run 25) | `alachua-pre2025-tinyclip-39m-16` | 88.5% (87.5 to 89.5) | 97.4% (96.5 to 98.2) | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 53.4% (51.9 to 55.0) | 24.9% at 0.82 | 88.2% (86.2 to 90.0) | 0.0% | 0.2% |
+| all licences (run 25, scored again with build 8's fuse.py) | `alachua-pre2025-tinyclip-39m-16-b8` | 88.5% (87.5 to 89.5) | 97.4% (96.5 to 98.2) | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 53.4% (51.9 to 55.0) | 23.1% at 0.82 | 90.4% (88.4 to 92.2) | 0.0% | 0.0% |
+| all licences (run 25 as it ran) | `alachua-pre2025-tinyclip-39m-16` | 88.5% (87.5 to 89.5) | 97.4% (96.5 to 98.2) | 84.8% (83.7 to 85.9) | 95.0% (94.2 to 95.7) | 53.4% (51.9 to 55.0) | 24.9% at 0.82 | 88.2% (86.2 to 90.0) | 0.0% | 0.2% |
 | `nc` | `alachua-pre2025-nc-tinyclip-39m-16-at90` | 89.1% (88.2 to 90.1) | 96.9% (95.8 to 97.8) | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 53.8% (52.2 to 55.4) | 25.3% at 0.8 | 91.0% (89.2 to 92.7) | 0.0% | 0.2% |
 | `by` | `alachua-pre2025-by-tinyclip-39m-16` | 86.0% (84.9 to 87.0) | 96.5% (95.4 to 97.5) | 73.1% (71.8 to 74.5) | 96.7% (96.1 to 97.3) | 43.8% (42.3 to 45.4) | 12.1% at 0.67 | 89.0% (86.2 to 91.5) | 0.0% | 0.2% |
 | `nc`, name_at at 92 in 100: the candidate for pocket v3 | `alachua-pre2025-nc-tinyclip-39m-16` | 89.1% (88.2 to 90.1) | 96.9% (95.8 to 97.8) | 81.7% (80.6 to 82.9) | 96.3% (95.7 to 96.9) | 53.8% (52.2 to 55.4) | 20.1% at 0.89 | 93.2% (91.6 to 94.9) | 0.0% | 0.0% |
-| pocket v2 (live in build 8) | `val-tinyclip-39m-16` | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 36.3% (34.9 to 37.8) | 14.2% at 0.9 | 92.0% (89.6 to 94.0) | 0.0% | 0.0% |
+| pocket v2 (live in build 8), scored with build 8's fuse.py | `val-tinyclip-39m-16-b8` | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 36.3% (34.9 to 37.8) | 13.3% at 0.9 | 92.3% (90.1 to 94.4) | 0.0% | 0.0% |
+| pocket v2, the file the rule names (fuse.py before build 8) | `val-tinyclip-39m-16` | 87.3% (86.3 to 88.3) | 98.2% (97.3 to 98.8) | 78.8% (77.6 to 80.1) | 95.5% (94.8 to 96.1) | 36.3% (34.9 to 37.8) | 14.2% at 0.9 | 92.0% (89.6 to 94.0) | 0.0% | 0.0% |
 
 **Pocket v3, by the rule set beforehand** (`tools/eval/decide_v3.py`). The candidate (heads fitted on the training photos under the licence rule nc, TinyCLIP 39M/16, name_at at the 92-in-100 level on val) ships unless, on the test photos, (i) its kind of eye on wildlife is worse than pocket v2's by a paired difference whose 95% interval lies wholly below zero, (ii) its kind of eye on the extra set's test photos is right for less than 96.5%, or (iii) it names a species on more than 1% of the test photos of people and rooms. The rule was set by the coordinator before the candidate was measured.
 
@@ -322,8 +331,8 @@ Beside the rule, deciding nothing: the candidate against pocket v2 on the same p
 |---|---|---:|---:|---:|
 | wildlife test | kind asserted and right | 78.7% | 75.2% | +3.5 (+2.5 to +4.5) |
 | wildlife test | kind asserted and wrong | 3.0% | 3.6% | -0.6 (-1.1 to -0.1) |
-| wildlife test | a species name shown | 20.1% | 14.2% | +5.9 (+4.8 to +7.1) |
-| wildlife test | a right species name shown | 18.8% | 13.1% | +5.7 (+4.7 to +6.8) |
+| wildlife test | a species name shown | 20.1% | 13.3% | +6.9 (+5.8 to +8.0) |
+| wildlife test | a right species name shown | 18.8% | 12.2% | +6.5 (+5.5 to +7.6) |
 | extra test | kind of eye right | 96.9% | 98.2% | -1.3 (-2.0 to -0.5) |
 | extra test | kind asserted and wrong | 1.5% | 0.7% | +0.8 (+0.2 to +1.5) |
 | extra test | a species name shown | 15.1% | 6.2% | +8.9 (+7.3 to +10.5) |

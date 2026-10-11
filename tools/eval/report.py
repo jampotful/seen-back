@@ -506,8 +506,8 @@ if not real:
 T += [""]
 
 # ---- heads fitted under the licence rule (tools/eval/licences.py), the pocket v3 decision, and the pets and livestock check
-LIC = [("all licences (run 25)", "alachua-pre2025-tinyclip-39m-16"), ("`nc`", "alachua-pre2025-nc-tinyclip-39m-16-at90"), ("`by`", "alachua-pre2025-by-tinyclip-39m-16"),
-       ("`nc`, name_at at 92 in 100: the candidate for pocket v3", "alachua-pre2025-nc-tinyclip-39m-16"), ("pocket v2 (live in build 8)", "val-tinyclip-39m-16"),
+LIC = [("all licences (run 25, scored again with build 8's fuse.py)", "alachua-pre2025-tinyclip-39m-16-b8"), ("all licences (run 25 as it ran)", "alachua-pre2025-tinyclip-39m-16"), ("`nc`", "alachua-pre2025-nc-tinyclip-39m-16-at90"), ("`by`", "alachua-pre2025-by-tinyclip-39m-16"),
+       ("`nc`, name_at at 92 in 100: the candidate for pocket v3", "alachua-pre2025-nc-tinyclip-39m-16"), ("pocket v2 (live in build 8), scored with build 8's fuse.py", "val-tinyclip-39m-16-b8"), ("pocket v2, the file the rule names (fuse.py before build 8)", "val-tinyclip-39m-16"),
        ("pocket v2 refitted under `nc`", "val-nc-tinyclip-39m-16")]
 if any(n_ in SH for _, n_ in LIC[1:4]):
     T += ["## Heads under the licence rule", "",
@@ -533,7 +533,9 @@ if any(n_ in SH for _, n_ in LIC[1:4]):
         rows.append([label, "`%s`" % n_, pci(nn["kind_right"]), pci(tx["kind_right"]) if tx else "–", pci(tw.get("asserted")), pci(tw.get("asserted_right")), pci(nn["species_top1"]),
                      "%s at %s" % (pc(nn["named"][0]), nn["name_at"] if nn["name_at"] is not None else "never"), pci(nn["named_right"]),
                      pc(by["person"]["named"]) if "person" in by else "–", pc(by["none"]["named"]) if "none" in by else "–"])
-    T += ["TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The first three rows set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos.", "",
+    T += ["TinyCLIP 39M/16 on the test photos (4197 wildlife photos, and 1240 photos of the extra set: 400 of people, 500 of rooms, 77 cats, 63 dogs, 200 grazing animals). The rows for run 25 and for `nc` and `by` set name_at at the nine-in-ten level, as run 25 did. Intervals are 95% bootstrap intervals over photos. "
+          "Run 25 (commit c0cd718) and the committed file of pocket v2 (made at 03:23) were scored with the `tools/fusion/fuse.py` from before build 8, which named a species even when the kind was under `kind_at`; build 8's fuse.py and page name one only when the kind is asserted. "
+          "The rows marked build 8 are the same slots scored again by `tools/eval/shipped.py` with the present fuse.py: their thresholds and their kind of eye, photo for photo, are the same, and only the naming columns move.", "",
           table(["Heads fitted on", "Slot", "Kind right, wildlife", "Kind right, extra set", "Kind asserted, wildlife", "Right when asserted", "Top species right", "Species named (share, name_at)", "Named species right", "Named on people", "Named on rooms"], rows,
                 ["---", "---"] + ["---:"] * 9), ""]
     DV3 = load("decision-pocket-v3.json")
