@@ -77,6 +77,12 @@ for B in $BROWSERS; do
   if [ "$B" = webkit ]; then
     step "rec_probe.js: the offline second visit without Playwright's offline switch, and a kept model that is not a model: $B"
     BROWSER=$B PORT=8782 timeout 400 node test/engines/rec_probe.js > "$OUT/rec/probe-$B.json" 2>&1; echo "probe: exit $?"; head -c 3000 "$OUT/rec/probe-$B.json"
+    step "offline_repeat.js: the offline case again and again, with and without phone emulation, and what Cache Storage holds when it fails: $B"
+    BROWSER=$B PORT=8782 TRIALS=6 VARIANTS=desk,phone timeout 900 node test/engines/offline_repeat.js > "$OUT/rec/offline-repeat-$B.json" 2> "$OUT/rec/offline-repeat-$B.err.txt"; echo "offline_repeat: exit $?"
+    python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('failed', d.get('failed'), 'of', len(d.get('trials', [])))
+for t in d.get('trials', []): print(t['variant'], t['trial'], json.dumps(t.get('offline'))[:160], '| after', json.dumps(t.get('after'))[:260], '| asked', t.get('asked'), '| errors', json.dumps(t.get('errors'))[:200])" "$OUT/rec/offline-repeat-$B.json"
   fi
   step "self-test with the recognizer phase: $B (picture limited to 540 on this software renderer)"
   if [ "$B" = firefox ]; then
