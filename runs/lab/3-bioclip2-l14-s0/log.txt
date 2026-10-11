@@ -1,0 +1,48 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[01:02:20] job: model=bioclip2-l14 shard=0/1 stages=text-species
+data_source=pub/data-alachua (species) + stand-in (manifest)
+data_made=made_from=d116e9a78d4c0c0aa2b2d62463124f9ba82225ca made_at=2026-10-11T00:56:35Z workflow=data run_number=1 
+evalname=standin
+manifest_rows=40
+species=5911
+[01:02:20] + python3 -u tools/lab/lab.py text --model bioclip2-l14 --labelset species --species-json data_in/species.json --out art/bioclip2-l14
+loaded bioclip2-l14 via open_clip in 13.5s
+[0;93m2026-10-11 01:02:34.520729942 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  text 256/23644 (20.3s)
+  text 2816/23644 (223.7s)
+  text 5376/23644 (426.9s)
+  text 7936/23644 (630.6s)
+  text 10496/23644 (833.9s)
+  text 13056/23644 (1036.6s)
+  text 15616/23644 (1239.4s)
+  text 18176/23644 (1440.6s)
+  text 20736/23644 (1642.7s)
+  text 23296/23644 (1842.7s)
+species_com: (5911, 768)
+  text 256/23644 (19.9s)
+  text 2816/23644 (220.2s)
+  text 5376/23644 (421.4s)
+  text 7936/23644 (622.1s)
+  text 10496/23644 (824.2s)
+  text 13056/23644 (1025.0s)
+  text 15616/23644 (1226.0s)
+  text 18176/23644 (1428.9s)
+  text 20736/23644 (1629.7s)
+  text 23296/23644 (1832.3s)
+species_sci: (5911, 768)
+  text 256/5911 (20.2s)
+  text 2816/5911 (222.1s)
+  text 5376/5911 (422.4s)
+species_taxon_com: (5911, 768)
+[02:12:28] exit 0
+[02:12:28] job done, fail=0
