@@ -1,0 +1,72 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+4
+               total        used        free      shared  buff/cache   available
+Mem:              15           1          10           0           4          14
+Swap:              2           0           2
+/dev/root       145G   60G   85G  42% /
+[06:46:46] device job: model=bioclip2-l14 recipes=int8-per-channel photos=320
+data_source=pub/data-alachua
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 
+evalname=alachua-2025
+manifest_rows=6000
+species=5911
+[06:46:46] + python3 tools/lab/device.py select --manifest data_in/manifest.csv --split test --n 320 --out ret/rows.json
+selected 320 of 4197 test rows (every 13-th)
+[06:46:46] exit 0
+sub-manifest: 320 rows
+[06:46:46] + python3 tools/lab/fetch_photos.py sel_manifest.csv photos
+fetched 200/320 (1.6s)
+photos: 320 rows, 320 to fetch, 0 failed, 2.4s
+[06:46:49] exit 0
+
+added 18 packages in 3s
+[06:46:55] + python3 -u tools/lab/device.py make --model bioclip2-l14 --manifest data_in/manifest.csv --rows ret/rows.json --photos photos --recipes int8-per-channel --work work --pix pix --summary ret/device_summary.json --ref-n 24
+loaded bioclip2-l14 via open_clip in 11.3s
+[0;93m2026-10-11 06:47:08.476848456 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+exported fp32: 1216.6 MB in 7.6s
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+int8-per-channel: {"how": "onnxruntime.quantization.quantize_dynamic: MatMul and Gemm with constant weights, weight_type QInt8, per_channel=True, reduce_range=False, MatMulConstBOnly; activations quantized at run time (DynamicQuantizeLinear + MatMulInteger)", "bytes": 309841461, "mb": 309.84, "sha256": "d67872272539786eec2b441252396ddac882fb321ca980c97c39578b847361e3", "seconds": 20.9}
+[06:48:01] exit 0
+[06:48:01] pixels for 320 photos
+[06:48:01] wasm int8-per-channel: 320 photos in 4 single-thread processes (309841461 bytes)
+wasm 0/80 6324.9 ms
+wasm 0/80 6359.7 ms
+wasm 0/80 6333.5 ms
+wasm 0/80 6341.8 ms
+wasm done: 80 photos, mean 6337.4 ms
+wasm done: 80 photos, mean 6339.1 ms
+wasm done: 80 photos, mean 6334.0 ms
+wasm done: 80 photos, mean 6328.0 ms
+wasm int8-per-channel: 320 vectors, bulk mean 6335 ms
+cosine to the original model (same machine, first 24 photos): mean 0.99090 min 0.94351
+[06:57:24] latency int8-per-channel threads=1: wasm done: 6 photos, mean 3202.7 ms
+wasm 0/6 3202.3 ms
+wasm done: 6 photos, mean 3202.7 ms
+[06:57:41] latency int8-per-channel threads=4: wasm done: 6 photos, mean 1665.8 ms
+wasm 0/6 1661.9 ms
+wasm done: 6 photos, mean 1665.8 ms
+four-thread vectors vs single-thread vectors (first 6 photos): min cosine 0.999973
+total 303180
+drwxr-xr-x  2 runner runner      4096 Oct 11 06:57 .
+drwxr-xr-x 24 runner runner      4096 Oct 11 06:57 ..
+-rw-r--r--  1 runner runner      3763 Oct 11 06:57 device_summary.json
+-rw-r--r--  1 runner runner      3591 Oct 11 06:57 rows.json
+-rw-r--r--  1 runner runner       264 Oct 11 06:57 torch_ref.ids.json
+-rw-r--r--  1 runner runner     73856 Oct 11 06:57 torch_ref.npy
+-rw-r--r--  1 runner runner 309841461 Oct 11 06:47 vision.int8-per-channel.onnx
+-rw-r--r--  1 runner runner      6264 Oct 11 06:57 wasm_int8-per-channel.bulk.json
+-rw-r--r--  1 runner runner    491648 Oct 11 06:57 wasm_int8-per-channel.f16.npy
+-rw-r--r--  1 runner runner      3520 Oct 11 06:57 wasm_int8-per-channel.ids.json
+-rw-r--r--  1 runner runner       225 Oct 11 06:57 wasm_int8-per-channel.latency_1.json
+-rw-r--r--  1 runner runner       220 Oct 11 06:57 wasm_int8-per-channel.latency_4.json
+[06:57:41] device job done, fail=0
