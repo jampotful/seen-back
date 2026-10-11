@@ -330,8 +330,13 @@ if SH:
         k = sh["numbers"].get("kind")
         if k:
             L += ["The kind of eye on the wildlife test photos, one row a true kind (kind_at %s):" % (("%.2f" % k["kind_at"]) if k["kind_at"] is not None else "none"), "", extra_table(k["table_wildlife"], "True kind"), ""]
+            said_table = lambda rows: table(["Kind asserted", "Photos", "Right", "Commonest true kind when wrong"], [[g["said"], g["asserted"], pci(g["right"]), g["commonest_true_kind_when_wrong"] or "–"] for g in rows], ["---", "---:", "---:", "---"])
+            if k.get("asserted_wildlife"):
+                L += ["The same photos by the kind the page asserted:", "", said_table(k["asserted_wildlife"]), ""]
             if k.get("table_extra"):
                 L += ["The kind of eye on the extra set's test photos (`%s`):" % k["test_extra_vectors"], "", extra_table(k["table_extra"]), ""]
+            if k.get("asserted_extra"):
+                L += ["The extra set's test photos by the kind the page asserted:", "", said_table(k["asserted_extra"]), ""]
             lv = []
             for l in k.get("levels", []):
                 if l.get("kind_at") is None:

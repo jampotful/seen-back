@@ -35,7 +35,15 @@ _This file is written by `tools/eval/report.py` from `docs/eval/checks.json`. Re
 | pass | test photos with an almost identical photo on val (clip-b32 cosine above 0.98) | 0 of 4197 test photos |
 | pass | test photos with an almost identical photo on val (bioclip2-l14 cosine above 0.999) | 0 of 4197 test photos |
 | note | how tightly BioCLIP 2 groups a species | 1470 of 4197 test photos have a val photo within cosine 0.95, and for 1454 of those it is the same species. Photos of one species sit close together in this model, which is why a list of names is enough for it. |
-| waiting | training photos share no record with the evaluation photos | `data/train/alachua-pre2025/manifest.csv` was not published when the checks ran. |
+| pass | every training photo is dated on or before 2024-12-31 | 84808 rows; latest 2024-12-31; rows after: 0 |
+| note | no gbif_id is shared between the training and the evaluation photos | the training manifest's gbif_id column is empty (it was built from iNaturalist's open-data files, which carry no GBIF record id), so this comparison says nothing; the dates and the photo numbers below do the work |
+| pass | no obs_url is shared between the training and the evaluation photos | 0 shared; 84808 of 84808 training rows carry a value |
+| pass | no photo_url is shared between the training and the evaluation photos | 0 shared; 84808 of 84808 training rows carry a value |
+| pass | no photo number is shared between the training and the evaluation photos | 6000 evaluation and 84808 training photo numbers read from the addresses; shared: 0; addresses without a number: 0 |
+| note | training observations can be compared with evaluation observations by number | 0 of 84808 training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before 2024-12-31 while every evaluation row is dated after it, so no observation can be on both sides. |
+| pass | no training photo appears twice | 0 repeated photo addresses in 84808 rows |
+| pass | the kind of eye of every training row is the species list's | 0 rows disagree (the studies take the kind from the species list by the row's species key) |
+| note | training photos per species | 84808 photos of 5467 species (most for one species: 60); rows without a species key: 0; species keys outside the list: 0; list species without a training photo: 444 |
 | pass | no two rows of the extra set share an id or a photo | 10240 rows, 10240 ids, 10240 photo addresses |
 | pass | the extra set's test rows come from COCO's val2017 and its train rows from train2017 | 0 rows disagree. COCO keeps the two apart, so no photo is on both sides. |
 | note | how the extra set is cut (tools/eval/kinds.py) | fit: cat 983, deer 1016, dog 974, none 1628, person 1343; tune: cat 517, deer 484, dog 526, none 872, person 657; test: cat 77, deer 200, dog 63, none 500, person 400. `fit` (two thirds of COCO's train rows by a hash of the id) may be used to fit a kind head, `tune` joins the wildlife tuning photos for the kind decision, `test` is only reported. |

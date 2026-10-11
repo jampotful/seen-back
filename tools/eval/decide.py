@@ -14,6 +14,10 @@ the extra set's test photos (wildlife alone while either model's vectors of the 
 is a quarter of the download and about a third of the time a photo, so it ships unless TinyCLIP 39M/16 is ahead on that
 measure by a paired difference whose interval lies wholly above zero. The share of photos that get a right species
 name, and the share whose kind is asserted and wrong, are reported beside it and do not decide.
+
+The comparison is made on the test photos, which is a choice among two made on test. The rule was fixed first and
+there are only two candidates, so the chosen slot's test figures are bent very little by it; they are still no longer
+figures that no decision has touched, and the report says so.
 """
 import argparse, json, os, sys
 import numpy as np
@@ -80,7 +84,7 @@ ahead = deciding[1] > 0
 choice = BIG if ahead else SMALL
 what = "the mean of the share right on the wildlife test photos and on the extra set's test photos" if len(sets) == 2 else "the share right on the wildlife test photos (the extra set's vectors were not published for both models)"
 out = {"made_by": "tools/eval/decide.py", "slots_compared": {BIG: "%s-%s" % (train, BIG), SMALL: "%s-%s" % (train, SMALL)}, "train": train, "sets": sets,
-       "rule": "TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95%% interval lies wholly above zero. The measure is %s." % what,
+       "rule": "TinyCLIP 8M/16 ships unless TinyCLIP 39M/16 is ahead on the kind of eye, as the page would decide it, by a paired difference whose 95%% interval lies wholly above zero. The measure is %s. The comparison is made on the test photos: a choice among two candidates by a rule fixed beforehand, which bends the chosen slot's test figures very little, and which is the one decision here that the test photos took part in." % what,
        "deciding_difference": deciding, "measures": measures, "choice": choice, "slot": "%s-%s" % (train, choice), "branch": "pub/heads-%s-%s" % (train, choice),
        "provisional": train != "alachua-pre2025" or len(sets) < 2,
        "why": ("On %s, TinyCLIP 39M/16 is ahead of TinyCLIP 8M/16 by %+.1f points (%+.1f to %+.1f), paired over the same photos. %s" % (

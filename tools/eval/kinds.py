@@ -134,3 +134,15 @@ def table(said, prob, three, truth, tau, named=None, order=None):
                      "named": (float(named[m].mean()) if named is not None else None),
                      "commonest_wrong": ("%s (%d)" % (vals[int(np.argmax(cnt))], int(cnt.max())) if len(wrong) else "")})
     return rows
+
+
+def by_said(said, prob, truth, tau):
+    """One row a kind the page asserted: how many photos it asserted that kind for, and how often that was right."""
+    sure = prob >= tau if tau is not None else np.ones(len(said), bool)
+    rows = []
+    for k in [k for k in ev.KINDS if ((said == k) & sure).any()]:
+        m = (said == k) & sure
+        wrong = truth[m][truth[m] != k]
+        vals, cnt = np.unique(wrong, return_counts=True) if len(wrong) else ([], [])
+        rows.append({"said": k, "asserted": int(m.sum()), "right": ev.ci(truth[m] == k), "commonest_true_kind_when_wrong": ("%s (%d)" % (vals[int(np.argmax(cnt))], int(cnt.max())) if len(wrong) else "")})
+    return rows

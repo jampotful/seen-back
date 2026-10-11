@@ -1,0 +1,166 @@
+{
+ "made_by": "tools/eval/variant.py",
+ "name": "bioclip2-l14-wasm-w4-block32",
+ "slot": "sentences-bioclip2-l14",
+ "model": "bioclip2-l14",
+ "vectors": "runs/lab/28-device-w4-block32/wasm_w4-block32.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 28 of the laboratory)",
+ "test_photos": 320,
+ "photos_left_out_because_they_are_val": 0,
+ "fusion": {
+  "t_kind": 20.0,
+  "t_species": 100.0,
+  "alpha_prior": 1.0,
+  "w_kind": 0.7,
+  "rule": "mix",
+  "name_at": 0.78,
+  "offer_at": 0.66,
+  "prior_floor": 1e-06,
+  "kind_at": 0.2
+ },
+ "cosine_to_original": {
+  "mean": 0.9929,
+  "p01": 0.9788,
+  "min": 0.9407
+ },
+ "original": {
+  "kind_right": [
+   0.9844,
+   0.9688,
+   0.9969,
+   320
+  ],
+  "species_top1": [
+   0.9406,
+   0.9125,
+   0.9656,
+   320
+  ],
+  "species_top5": [
+   0.9719,
+   0.95,
+   0.9875,
+   320
+  ],
+  "named": [
+   0.8875,
+   0.85,
+   0.9187,
+   320
+  ],
+  "named_right": [
+   0.9789,
+   0.9613,
+   0.993,
+   284
+  ],
+  "offered": [
+   0.0812,
+   0.0531,
+   0.1125,
+   320
+  ],
+  "offered_holds_species": [
+   0.9231,
+   0.8077,
+   1.0,
+   26
+  ],
+  "kind_only": [
+   0.0312,
+   0.0125,
+   0.05,
+   320
+  ]
+ },
+ "variant": {
+  "kind_right": [
+   0.9844,
+   0.9688,
+   0.9969,
+   320
+  ],
+  "species_top1": [
+   0.9438,
+   0.9156,
+   0.9688,
+   320
+  ],
+  "species_top5": [
+   0.975,
+   0.9563,
+   0.9906,
+   320
+  ],
+  "named": [
+   0.875,
+   0.8375,
+   0.9094,
+   320
+  ],
+  "named_right": [
+   0.9786,
+   0.9607,
+   0.9929,
+   280
+  ],
+  "offered": [
+   0.0875,
+   0.0562,
+   0.1187,
+   320
+  ],
+  "offered_holds_species": [
+   0.9643,
+   0.8929,
+   1.0,
+   28
+  ],
+  "kind_only": [
+   0.0375,
+   0.0188,
+   0.0594,
+   320
+  ]
+ },
+ "paired_difference": {
+  "kind_right": [
+   0.0,
+   0.0,
+   0.0,
+   320
+  ],
+  "top1": [
+   0.0031,
+   -0.0094,
+   0.0188,
+   320
+  ],
+  "top5": [
+   0.0031,
+   -0.0063,
+   0.0126,
+   320
+  ],
+  "named": [
+   -0.0125,
+   -0.0312,
+   0.0031,
+   320
+  ],
+  "named_right": [
+   -0.0125,
+   -0.0312,
+   0.0031,
+   320
+  ]
+ },
+ "same_top_species": [
+  0.9719,
+  0.9531,
+  0.9875,
+  320
+ ],
+ "top_probability_mean_absolute_change": 0.0164,
+ "photos_named_by_one_and_not_the_other": 8,
+ "text": "320 test photos, the slot `sentences-bioclip2-l14` with name_at 0.78 and offer_at 0.66, every photo through `fuse.py` twice: with the original model's vectors and with the vectors `runs/lab/28-device-w4-block32/wasm_w4-block32.f16.npy on the ci branch (onnxruntime-web 1.30.0, WASM build, run 28 of the laboratory)`. The two vectors of a photo have a mean cosine of 0.9929 (1st percentile 0.9788). Top species right: 94.1% (91.2 to 96.6) with the original vectors and 94.4% (91.6 to 96.9) with these, a paired difference of +0.3 (-0.9 to +1.9) points; first five: 97.2% (95.0 to 98.8) and 97.5% (95.6 to 99.1). Kind of eye right: 98.4% (96.9 to 99.7) and 98.4% (96.9 to 99.7). A species is named for 88.8% (85.0 to 91.9) and 87.5% (83.8 to 90.9) of the photos, and that name is right for 97.9% (96.1 to 99.3) and 97.9% (96.1 to 99.3). The top species is the same for 97.2% (95.3 to 98.8) of the photos; the top probability moves by 0.016 on average, and 8 photos are named under one set of vectors and left unnamed under the other."
+}

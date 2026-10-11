@@ -194,7 +194,8 @@ kd_ = {"bar": kinds.BAR, "kind_at": kind_at, "tuned_on": {n_: int(len(e_)) for n
        "tuning": {n_: kinds.outcome(f_[0], f_[1], f_[2], e_, kind_at) for n_, f_, e_ in tune_sets},
        "test_wildlife": kinds.outcome(said, kprob, kthree, eyes, kind_at),
        "test_wildlife_named_and_asserted": ev.ci(is_named & sure), "test_wildlife_named_and_asserted_right": ev.ci(named_right[is_named & sure]),
-       "table_wildlife": kinds.table(said, kprob, kthree, eyes, kind_at, named=is_named, order=[k for k in ev.KINDS if (eyes == k).any()])}
+       "table_wildlife": kinds.table(said, kprob, kthree, eyes, kind_at, named=is_named, order=[k for k in ev.KINDS if (eyes == k).any()]),
+       "asserted_wildlife": kinds.by_said(said, kprob, eyes, kind_at)}
 xtest = None
 if XT is not None and len(XT["test"]["ids"]):
     xres = score(unit64(XT["test"]["X"]), XT["test"]["month"], man)
@@ -209,6 +210,7 @@ if XT is not None and len(XT["test"]["ids"]):
     kd_["test_extra_named_and_asserted"] = ev.ci(xn & xsure)
     kd_["test_extra_offered"] = ev.ci(xo)
     kd_["table_extra"] = kinds.table(xs, xp, x3, xe, kind_at, named=xn, order=kinds.EXTRA_KINDS)
+    kd_["asserted_extra"] = kinds.by_said(xs, xp, xe, kind_at)
     xtest = (xs, xp, x3, xe)
 kd_["levels"] = []
 for bar in kinds.BARS:

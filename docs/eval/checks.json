@@ -3,10 +3,10 @@
  "inputs": {
   "branches": {
    "pub/data-alachua": {
-    "commit": "f09ef6bf4b4944cb847f511668ae8b1249fb6470",
+    "commit": "6e9a8aac93d1b2ee13938799c61d69e97dbc9da3",
     "made_at": "2026-10-11T01:51:13Z",
     "made_from": "5149891a3c0a9d07e93e64942eb83c63821fb6f9",
-    "published": "inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4",
+    "published": "training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5",
     "run_number": "4",
     "workflow": "data"
    },
@@ -247,9 +247,49 @@
    "detail": "1470 of 4197 test photos have a val photo within cosine 0.95, and for 1454 of those it is the same species. Photos of one species sit close together in this model, which is why a list of names is enough for it."
   },
   {
-   "check": "training photos share no record with the evaluation photos",
-   "verdict": "waiting",
-   "detail": "`data/train/alachua-pre2025/manifest.csv` was not published when the checks ran."
+   "check": "every training photo is dated on or before 2024-12-31",
+   "verdict": "pass",
+   "detail": "84808 rows; latest 2024-12-31; rows after: 0"
+  },
+  {
+   "check": "no gbif_id is shared between the training and the evaluation photos",
+   "verdict": "note",
+   "detail": "the training manifest's gbif_id column is empty (it was built from iNaturalist's open-data files, which carry no GBIF record id), so this comparison says nothing; the dates and the photo numbers below do the work"
+  },
+  {
+   "check": "no obs_url is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "0 shared; 84808 of 84808 training rows carry a value"
+  },
+  {
+   "check": "no photo_url is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "0 shared; 84808 of 84808 training rows carry a value"
+  },
+  {
+   "check": "no photo number is shared between the training and the evaluation photos",
+   "verdict": "pass",
+   "detail": "6000 evaluation and 84808 training photo numbers read from the addresses; shared: 0; addresses without a number: 0"
+  },
+  {
+   "check": "training observations can be compared with evaluation observations by number",
+   "verdict": "note",
+   "detail": "0 of 84808 training rows give the observation by its number; the others give it by its UUID, which the evaluation manifest does not hold. An observation has one date, and every training row is dated on or before 2024-12-31 while every evaluation row is dated after it, so no observation can be on both sides."
+  },
+  {
+   "check": "no training photo appears twice",
+   "verdict": "pass",
+   "detail": "0 repeated photo addresses in 84808 rows"
+  },
+  {
+   "check": "the kind of eye of every training row is the species list's",
+   "verdict": "pass",
+   "detail": "0 rows disagree (the studies take the kind from the species list by the row's species key)"
+  },
+  {
+   "check": "training photos per species",
+   "verdict": "note",
+   "detail": "84808 photos of 5467 species (most for one species: 60); rows without a species key: 0; species keys outside the list: 0; list species without a training photo: 444"
   },
   {
    "check": "no two rows of the extra set share an id or a photo",
