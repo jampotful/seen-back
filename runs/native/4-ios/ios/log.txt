@@ -1,0 +1,84 @@
+
+=== 08:58:43 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+arm64
+7516192768
+Xcode 26.6 Build version 17F113 
+simulator SDK 26.5
+
+=== 08:58:46 boot an iPhone simulator now, it takes a while
+simulator: 88931AEA-62E6-447F-8697-DCE00A671384 com.apple.CoreSimulator.SimRuntime.iOS-26-5 iPhone 17
+
+=== 08:58:56 build the page
+build 8 | index.html 214821 bytes | artifact 212243 bytes | selftest.js 44338 bytes
+build ok
+
+=== 08:59:45 compile the shell with swiftc for the simulator
+bundle: 45 files, 71808 kB in /Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app/www
+/Users/runner/work/seen-back/seen-back/build-ios/SeenBack.app: replacing existing signature
+codesign (ad hoc): exit 0
+app: 72000 kB
+zipped like an .ipa: 54410335 bytes
+
+=== 09:03:13 install and open the app
+Device already booted, nothing to do.
+
+install: exit 0
+org.seenback.shell: 18930
+screenshot 1-open
+{"st":null,"sb":true,"screen":"intro","src":"none","big":null,"href":"app://localhost/index.html","secure":true,"coi":false,"ua":"Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
+
+=== 09:09:02 2. the page's self-test inside the app (app://localhost), with the shipped pocket recognizer on four photos
+org.seenback.shell: 19731
+screenshot 2-selftest-011s
+screenshot 2-selftest-024s
+self-test done after about 37 s
+screenshot 2-selftest-final
+address: app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg | secure context: True | crossOriginIsolated: False
+user agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+self-test done: True ok: True checks: 98 phase: done
+fails: []
+webgl2: True float: True renderer: Apple GPU engineError: None
+rec: {"slot": "models/pocket", "photos": [{"name": "heron.png", "bytes": 29625, "decodeMs": 51, "shown": "900x1200", "wallMs": 1902, "from": "900x1200", "ms": {"load": 0, "pre": 48, "run": 736, "post": 163}, "kind": "wader", "kinds3": [["wader", 0.3825], ["bird", 0.25670000000000004], ["dog", 0.0635]], "head3": [["bird", 0.3617], ["wader", 0.251], ["dog", 0.0908]], "species1": ["Eudocimus albus", 0.187]}, {"name": "portrait.jpg", "bytes": 46865, "decodeMs": 90, "shown": "960x1280", "wallMs": 858, "from": "1200x1600", "ms": {"load": 0, "pre": 32, "run": 668, "post": 9}, "kind": "person", "kinds3": [["person", 0.4903], ["other", 0.10859999999999999], ["bird", 0.0867]], "head3": [["person", 0.4903], ["dog", 0.1039], ["bird", 0.1034]], "species1": ["Fulica americana", 0.168]}, {"name": "wall.png", "bytes": 4614, "decodeMs": 43, "shown": "1024x768", "wallMs": 618, "from": "1024x768", "ms": {"load": 0, "pre": 16, "run": 571, "post": 6}, "kind": "none", "kinds3": [["none", 0.4707], ["insect", 0.1195], ["dog", 0.0711]], "head3": [["none", 0.4707], ["dog", 0.1015], ["bird", 0.0787]], "species1": ["Idaea demissaria", 0.092]}, {"name": "garden.jpg", "bytes": 257177, "decodeMs": 34, "shown": "1280x960", "wallMs": 819, "from": "1600x1200", "ms": {"load": 0, "pre": 39, "run": 707, "post": 8}, "kind": "plant", "kinds3": [["plant", 0.3285], ["none", 0.2614], ["dog", 0.08960000000000001]], "head3": [["none", 0.2614], ["plant", 0.1791], ["dog", 0.128]], "species1": ["Torenia crustacea", 0.108]}], "readyMs": 2273, "about": {"state": "ready", "why": "", "fail": "", "model": "tinyclip-39m-16", "rule": "mix", "trained": true, "backend": "wasm", "threads": 1, "loadMs": 2273, "start": {"vectors": 91, "session": 780, "warm": 742}, "got": 61953585, "total": 61953585, "slot": "models/pocket/manifest.json", "have": "", "keptBytes": 0, "bytes": 40978137, "getFail": ""}, "meanRunMs": 704}
+keys: ['build', 'checks', 'done', 'env', 'fails', 'motion', 'ms', 'ok', 'phase', 'pose', 'posing', 'rec', 'still', 'v']
+
+=== 09:09:47 4. the larger model (models/naturalist: 310 MB from raw.githubusercontent.com) through the page's own recognizer inside the app, then four photos
+org.seenback.shell: 21541
+probe done after about 8 s
+screenshot 4-big-final
+ci/native/ios.sh: line 42: 21519 Terminated: 15          ( while :; do
+    echo "$(date -u +%T) $(ps -axo pid=,rss=,comm= | grep -E 'WebKit.WebContent|SeenBack' | grep -v grep | awk '{n=$3; sub(/.*\//,"",n); printf "%s %s %s;", $1, $2, n}') $(vm_stat | awk '/Pages free/ {print "free_pages", $3}')"; sleep 4;
+done ) > "$OUT/big-memory.txt" 2>&1
+started: "2026-10-11T09:09:57.383Z"
+steps: ["get at 5"]
+before: {"usage": 77, "quota": 10307921511}
+after: null
+gotMs: null
+has: "absent"
+size: {"bytes": 309812341, "kept": 0, "mb": 310, "keptMb": 0, "seconds": {"computer": 5}}
+readyMs: null
+error: "keep: The larger model could not be kept on this device."
+ms: 1623
+done: true
+line: "Looking more closely."
+about: {"state": "idle", "why": "", "fail": "", "model": "bioclip2-l14", "rule": "mix", "trained": false, "backend": "", "threads": 0, "loadMs": 0, "start": null, "last": null, "got": 0, "total": 0, "slot": "models/naturalist/manifest.json", "have": "absent", "keptBytes": 0, "bytes": 309812341, "getFail": "keep: Request url is not HTTP/HTTPS"}
+peak resident memory on the Mac: 19731 SeenBack 144 MB
+peak resident memory on the Mac: 19737 iOS 316 MB
+peak resident memory on the Mac: 21472 com.apple.WebKit.WebContent 41 MB
+peak resident memory on the Mac: 21541 SeenBack 163 MB
+peak resident memory on the Mac: 21546 iOS 646 MB
+
+=== 09:10:05 the app's own log (console errors and warnings, loads it could not serve)
+      10 /Users/runner/work/seen-back/seen-back/out/ios/app-log.txt
+1791709720.3 open app://localhost/index.html
+1791709720.6 launched
+1791709726.7 page finished app://localhost/index.html
+1791709746.4 open app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791709746.5 launched
+1791709747.8 page finished app://localhost/index.html?selftest=1&nosw=1&rec=models/pocket&recphotos=test/rec/photos/heron.png,test/rec/photos/portrait.jpg,test/rec/photos/wall.png,test/rec/photos/garden.jpg
+1791709790.9 open app://localhost/index.html
+1791709791.0 launched
+1791709793.1 page finished app://localhost/index.html
+1791709797.4 probe native-probe/big.js injected
