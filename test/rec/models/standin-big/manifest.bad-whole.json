@@ -1,0 +1,54 @@
+{
+ "id": "standin-big-bad-whole",
+ "licence": "none: random weights made by test/rec/make_standin.py",
+ "source": "test/rec/make_standin.py",
+ "vision": {
+  "parts": [
+   {
+    "url": "http://127.0.0.1:8788/test/rec/models/standin-big/vision.int8.onnx.part00",
+    "bytes": 282686,
+    "sha256": "a610170f03bc0dc1040ad7a85cd433d718f4b3272205efe2909aa3a1eae134fb"
+   },
+   {
+    "url": "http://127.0.0.1:8788/test/rec/models/standin-big/vision.int8.onnx.part01",
+    "bytes": 282694,
+    "sha256": "ca6b85fdb1828a48a8eecddafc141cf4496538404470b9d2c643d4e3507e3db7"
+   },
+   {
+    "url": "http://127.0.0.1:8788/test/rec/models/standin-big/vision.int8.onnx.part02",
+    "bytes": 282680,
+    "sha256": "db30d268618aca790a4e24d4585c7e3123565f618a72b673ae688f6ab581657e"
+   }
+  ],
+  "bytes": 848060,
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 19
+ },
+ "fusion": {
+  "t_species": 100,
+  "alpha_prior": 0.5,
+  "name_at": 0.6,
+  "offer_at": 0.3,
+  "kind_at": 0.8
+ }
+}

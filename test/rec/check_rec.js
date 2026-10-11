@@ -1,7 +1,9 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|trained|parity|progress|typeit|service|away|offline|version|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
+// "large" (the larger model a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
+// by itself (8788 unless BIG_PORT says otherwise) if nothing answers there.
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
 // A real model: make a slot with test/rec/make_slot.py --photos <dir>, then
 //   SLOT=<slot dir, from the repository root> PHOTOS=<dir> node test/rec/check_rec.js parity
@@ -14,7 +16,10 @@ const path = require('path'), fs = require('fs'), http = require('http');
 const here = __dirname, PORT = process.env.PORT || 8782, ORIGIN = 'http://127.0.0.1:' + PORT;
 const SLOT = process.env.SLOT || 'test/rec/models/standin';
 // The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
-const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (q || '');
+// The larger model is off too (big=off) unless a check names its slot, so that a models/naturalist/ at the site's root changes nothing in the other checks.
+const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? '' : '&big=off') + (q || '');
+const BIG_PORT = +(process.env.BIG_PORT || 8788), BIG_ORIGIN = 'http://127.0.0.1:' + BIG_PORT, BIG = 'test/rec/models/standin-big';
+const bctl = (q) => new Promise((res, rej) => http.get(BIG_ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => { try { res(JSON.parse(b)); } catch (e) { rej(e); } }); }).on('error', rej));
 const SVC_PORT = +(process.env.SVC_PORT || 8784);
 // SLOW=4 on a busy machine: every wait for something to appear lasts four times as long before it gives up. Nothing else changes.
 const SLOW = +(process.env.SLOW || 1);
@@ -28,7 +33,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'trained', 'parity', 'progress', 'typeit', 'service', 'away', 'offline', 'version', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -84,6 +89,15 @@ async function meet(page, name) {
   const month = new Date().getMonth();
   // one check failing to finish must not hide the others
   const section = async (name, fn) => { try { await fn(); } catch (e) { done(name + ' (did not finish)', { error: String(e && e.message || e).split('\n')[0] }, false); await ctl('reset=1'); } };
+
+  // ---------- helpers for the line on the picture, the record and the sheet that asks for a name
+  const until = async (fn, ms) => { const t0 = Date.now(); while (!fn()) { if (Date.now() - t0 > (ms || 15000)) throw new Error('waited too long'); await new Promise((res) => setTimeout(res, 50)); } };
+  const svcLine = (page) => page.evaluate(() => { const vis = (e) => !e.hidden && e.offsetParent !== null, a = document.getElementById('svcView'), b = document.getElementById('svcHud'); return vis(a) ? a.textContent : vis(b) ? b.textContent : ''; });
+  const svcWatch = (page) => page.evaluate(() => { window.__svc = []; const el = document.getElementById('svcView'); new MutationObserver(() => { const t = el.hidden ? '' : el.textContent; if (window.__svc[window.__svc.length - 1] !== t) window.__svc.push(t); }).observe(el, { childList: true, characterData: true, subtree: true, attributes: true }); });
+  const svcSettled = (page) => page.waitForFunction(() => { const v = window.__seenBack.S.svc; return !v || (v.state !== 'asking' && v.state !== 'waking'); }, null, { timeout: 20000 });
+  const byService = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'service'; }, null, { timeout: 20000 });
+  const recordRows = (page) => page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
+  const typeName = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
 
   if (want.includes('flow')) await section('flow', async () => {     // a photo chosen through the file input, through to the name; each tier of naming; the correction sheet
     const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT);
@@ -192,6 +206,51 @@ async function meet(page, name) {
       && c.speciesTipsTheKind.kind === 'wader' && c.speciesTipsTheKind.named === 'Great Blue Heron' && c.kindDisagrees.kind === 'plant' && c.kindDisagrees.top === 'Great Blue Heron' && c.kindDisagrees.named === null && c.kindDisagrees.offers[0] === 'Beggarticks' && c.kindDisagrees.offers.indexOf('Great Blue Heron') < 0
       && c.mixKindsLead.kind === 'plant' && Math.abs(c.mixKindsLead.plant - .7) < 1e-3 && Math.abs(c.mixKindsLead.wader - .3) < 1e-3 && c.mixListLeads.kind === 'wader' && Math.abs(c.mixListLeads.wader - .7) < 1e-3 && c.productGuard9.plant > .999 && c.productGuard3.plant < .9 && c.productGuard3.kind === 'plant'
       && c.sum === '1 17 5' && r.kindsOnly.eyes === 'wader' && r.kindsOnly.shown === 'Wading bird' && r.kindsOnlyModel === 'standin-kinds-only');
+  });
+
+  if (want.includes('notsure')) await section('notsure', async () => {   // under fusion.kind_at the page asserts no kind: it says so, changes no eyes, and offers its three likeliest kinds above the typed field
+    const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.kind-at.json'); const r = {}; await ready(page); await begin(page);
+    const w = expect.kind_at['odd.png'][month], hand = (keys) => page.evaluate((keys) => keys.map((k) => k === 'person' ? 'A person' : k === 'other' ? 'Something alive' : (() => { const s = window.__seenBack.EYES[k].who.replace(/^an? /, ''); return s.charAt(0).toUpperCase() + s.slice(1); })()), keys);
+    r.sure = await meet(page, 'heron.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });     // a sure answer is as it was
+    const before = (await page.evaluate(() => window.__seenBack.record().length));
+    r.odd = await meet(page, 'odd.png'); await page.waitForTimeout(200);
+    r.reference = w; r.buttonsWanted = await hand(w.kindOffers);
+    r.sheet = await page.evaluate(() => { const q = (id) => document.getElementById(id), box = (id) => q(id).getBoundingClientRect(), l = window.__seenBack.rec.about().last;
+      return { kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), kindNote: document.querySelector('#claimKindBox .note').textContent, kindsShown: !q('claimKindBox').hidden,
+        offers: [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent), offerNote: q('claimOfferNote').textContent, offersShown: !q('claimOfferBox').hidden,
+        kindsAboveOffers: box('claimKindBox').bottom <= box('claimOfferBox').top + 1, aboveField: box('claimOfferBox').bottom <= box('claimName').top + 1,
+        last: { kind: l.kind, sure: l.sure, p: +l.kindP.toFixed(4), kindOffers: l.kindOffers, named: l.named }, screen: window.__seenBack.S.screen, meetings: window.__seenBack.record().length }; });
+    await page.screenshot({ path: path.join(here, 'shots', 'notsure.png'), scale: 'css' }).catch(() => {});
+    await page.locator('#claimKinds button').nth(1).tap(); await page.waitForTimeout(300);
+    r.chosen = await st(page); r.record = await recordRows(page);
+    await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.locator('#changeAskView').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
+    r.again = await page.evaluate(() => ({ kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), sub: document.getElementById('claimSub').textContent })); await page.locator('#claimBack').tap();
+    // the sheet closed without an answer: no eyes, no meeting
+    r.odd2 = await meet(page, 'odd.png'); await page.locator('#claimBack').tap(); await page.waitForTimeout(250); r.dismissed = await st(page); r.meetingsAfterDismiss = (await recordRows(page)).length;
+    // the rule with numbers set by hand: at the threshold it is sure; "nothing alive" is never among the kinds offered; a slot with no threshold is always sure
+    r.byHand = await page.evaluate(async () => {
+      const rec = window.__seenBack.rec, L = ['wader', 'plant', 'bird', 'person', 'none'], t = [['Ardea herodias', 'Great Blue Heron', 'wader', null], ['Bidens alba', 'Beggarticks', 'plant', null]];
+      const world = (f, table) => rec.test.world({ id: 'x', vision: { url: 'x', size: 224, mean: [0, 0, 0], std: [1, 1, 1] }, width: 4, kinds: { url: 'k', labels: L }, species: table ? { url: 's', table: 't', count: table.length } : undefined, fusion: f }, table || null, null);
+      const f = (kind_at) => Object.assign({ t_kind: 1, t_species: 100, alpha_prior: 0, w_kind: 1, name_at: 0.5, offer_at: 0.3 }, kind_at === undefined ? {} : { kind_at });
+      const pick = (x) => ({ kind: x.kind, p: +x.kindP.toFixed(4), sure: x.sure, offered: x.kindOffers, named: x.named && x.named.en, offers: x.offers.map((o) => o.en) });
+      const kd = [Math.log(6), Math.log(2), 0, 0, 0], o = {};     // wader 6 parts in 11, plant 2, the rest 1 each
+      o.under = pick(rec.test.fuseIn(world(f(0.61), t), kd, [1, 0], 6)); o.at = pick(rec.test.fuseIn(world(f(6 / 11 - 1e-9), t), kd, [1, 0], 6)); o.noThreshold = pick(rec.test.fuseIn(world(f(undefined), t), kd, [1, 0], 6));
+      o.noneLeads = pick(rec.test.fuseIn(world(f(0.9), t), [0, Math.log(2), 0, 0, Math.log(6)], [0, 1], 6));
+      let refused = ''; try { world(Object.assign(f(0.5), { kind_at: 'high' }), t); } catch (e) { refused = e.code + ': ' + e.detail; } o.refused = refused;
+      return o; });
+    r.errors = errors;
+    const tail = ' Choose one below, or type the kind of animal or plant, such as cat, heron or oak.', b = r.byHand;
+    done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great Blue Heron' && before === 1
+      && r.odd.claim && !r.odd.eyes && r.odd.sub === 'The recognizer is not sure what that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
+      && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'It may be one of these kinds.' && r.sheet.kindsShown
+      && r.sheet.offers.join() === w.offers.join() && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
+      && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
+      && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === 'Choose one below, or type the kind of animal or plant, such as cat, heron or oak.'
+      && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
+      && b.under.sure === false && b.under.kind === 'wader' && b.under.offered.join() === 'wader,plant,bird' && b.under.named === null && b.under.offers[0] === 'Great Blue Heron'
+      && b.at.sure === true && b.at.named === 'Great Blue Heron' && b.at.offered.length === 0 && b.noThreshold.sure === true && b.noThreshold.offered.length === 0
+      && b.noneLeads.kind === 'none' && b.noneLeads.sure === false && b.noneLeads.offered.join() === 'plant,wader,bird' && b.noneLeads.offers.length === 0 && /^unfit: fusion\.kind_at/.test(b.refused) && !errors.length);
+    await ctx.close();
   });
 
   if (want.includes('trained')) await section('trained', async () => {   // a trained head's files drop in: rows that are not unit vectors, a bias for every row, the mixing rule
@@ -304,13 +363,6 @@ async function meet(page, name) {
   });
 
   // ---------- the species service: a fake server that speaks Gradio's two-step call (test/rec/fake_service.js)
-  const until = async (fn, ms) => { const t0 = Date.now(); while (!fn()) { if (Date.now() - t0 > (ms || 15000)) throw new Error('waited too long'); await new Promise((res) => setTimeout(res, 50)); } };
-  const svcLine = (page) => page.evaluate(() => { const vis = (e) => !e.hidden && e.offsetParent !== null, a = document.getElementById('svcView'), b = document.getElementById('svcHud'); return vis(a) ? a.textContent : vis(b) ? b.textContent : ''; });
-  const svcWatch = (page) => page.evaluate(() => { window.__svc = []; const el = document.getElementById('svcView'); new MutationObserver(() => { const t = el.hidden ? '' : el.textContent; if (window.__svc[window.__svc.length - 1] !== t) window.__svc.push(t); }).observe(el, { childList: true, characterData: true, subtree: true, attributes: true }); });
-  const svcSettled = (page) => page.waitForFunction(() => { const v = window.__seenBack.S.svc; return !v || (v.state !== 'asking' && v.state !== 'waking'); }, null, { timeout: 20000 });
-  const byService = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'service'; }, null, { timeout: 20000 });
-  const recordRows = (page) => page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
-  const typeName = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
   let fake = null;
   const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_/.test(e));     // a sleeping server's refusals are written to the console by the browser itself
   const svcFiles = async () => {
@@ -462,8 +514,261 @@ async function meet(page, name) {
       r.failureErrors = quiet(errors); all('failuresQuiet', !r.failureErrors.length);
       await ctx.close();
     }
+    { // from the sheet that asks for a name there is a way to the larger model: consent first, then its answer is taken as the name
+      fake.reset(); fake.set({ answer: 'egret', delay: 300 }); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page);
+      const s = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
+      r.fromSheet = { sub: s.sub, link: await text(page, 'claimAsk'), sentBefore: fake.calls().length };
+      await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); r.fromSheet.askSub = await text(page, 'askSub'); r.fromSheet.sentAtSheet = fake.calls().length;
+      await page.locator('#askNo').tap(); await page.waitForSelector('#claim', { state: 'visible', timeout: 4000 }); r.fromSheet.afterNo = (await st(page)).claim; r.fromSheet.sentAfterNo = fake.calls().length;
+      await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
+      await byService(page); await page.waitForTimeout(200);
+      const x = await st(page); r.fromSheet.after = x.eyes + '|' + x.named.common + '|' + x.named.by; r.fromSheet.record = await recordRows(page); r.fromSheet.sent = fake.calls().length;
+      // it cannot name it: back to the sheet, with its guesses as offers, and no second link
+      fake.set({ answer: 'faint' }); const s2 = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
+      await page.waitForFunction(() => /could not name it/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 15000 }); await page.waitForTimeout(400);
+      r.fromSheet.faint = { sub: await text(page, 'claimSub'), offers: await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)), linkAgain: await page.locator('#claimAskRow').isVisible(), eyes: (await st(page)).eyes };
+      r.fromSheet.errors = errors;
+      all('fromSheet', /^Nothing alive was found/.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask a larger model on a server' && r.fromSheet.sentBefore === 0 && /made smaller, would be sent to a server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
+        && r.fromSheet.after === 'wader|Great Egret|service' && r.fromSheet.record[0] === 'Great Egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
+        && r.fromSheet.faint.sub === 'The larger model could not name it. Type the kind of animal or plant, such as cat, heron or oak.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf Fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
+      await ctx.close();
+    }
     fake.reset();
     done('service', r, ok);
+  });
+
+  // ---------- the larger model on this device: a stand-in cut into three parts, served from a second origin (another port) with CORS
+  let bigServer = null;
+  const bigUp = async () => {
+    try { await bctl('reset=1'); } catch (e) {
+      bigServer = require('child_process').spawn(process.execPath, [path.join(here, 'serve.js'), String(BIG_PORT), 'cors'], { stdio: 'ignore' });
+      let up = false; for (let i = 0; i < 50 && !up; i++) { try { await bctl('reset=1'); up = true; } catch (e2) { await new Promise((res) => setTimeout(res, 100)); } }
+      if (!up) throw new Error('no second server on port ' + BIG_PORT);
+    }
+    if (BIG_PORT === 8788) return BIG;                 // the stand-in's manifest names that port; for another, a copy of it is written beside it
+    for (const f of ['manifest.json', 'manifest.bad-whole.json']) fs.writeFileSync(path.join(here, 'models', 'standin-big', f.replace('manifest', 'manifest.port')), fs.readFileSync(path.join(here, 'models', 'standin-big', f), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT));
+    return BIG + '/manifest.port.json';
+  };
+  const bigNow = (page) => page.evaluate(() => { const B = window.__seenBack, a = B.big.about(), l = a.last; return { have: a.have, kept: a.keptBytes, bytes: a.bytes, state: a.state, why: a.why, fail: a.fail, getFail: a.getFail, choice: B.bigChoice(), running: B.big.test.running(),
+    last: l && { kind: l.kind, sure: l.sure, named: l.named ? (l.named.en || l.named.sci) : '', kindOffers: l.kindOffers, five: l.species.map((x) => x.en || x.sci), at: l.at, ms: l.ms } }; });
+  const bigHave = (page, what, ms) => page.waitForFunction((w) => window.__seenBack.big.about().have === w, what, { timeout: ms || 30000 });
+  const lineIs = (page, re, ms) => page.waitForFunction((src) => { const vis = (e) => !e.hidden && e.offsetParent !== null, a = document.getElementById('svcView'), b = document.getElementById('svcHud'); return new RegExp(src).test(vis(a) ? a.textContent : vis(b) ? b.textContent : ''); }, re.source, { timeout: ms || 20000 });
+  const partsAsked = async () => (await bctl('log=1')).map((x) => (/part\d\d/.exec(x) || [''])[0]).filter(Boolean);
+  const keptBig = (page) => page.evaluate(async () => (await (await caches.open('keep-v1')).keys()).map((q) => q.url).filter((u) => /standin-big\//.test(u)).map((u) => u.replace(/^.*standin-big\//, '').replace(/[0-9a-f]{64}/, 'SHA').replace(/v=[0-9a-f]+/, 'v=V')).sort());
+  const byLarge = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'device-large'; }, null, { timeout: 30000 });
+  const largeAfter = (page, at) => page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !window.__seenBack.S.svc; }, at, { timeout: 30000 });
+  const offered = async (page) => { await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); await page.waitForSelector('#svcView', { state: 'visible', timeout: 8000 }); return text(page, 'svcView'); };
+  const getIt = async (page) => { await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.locator('#bigYes').tap(); };
+  const toAbout = async (page) => { if ((await st(page)).screen === 'askView') await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
+    if (!(await page.evaluate(() => document.getElementById('about').open))) await page.locator('#about summary').tap(); await page.waitForTimeout(350); await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); };
+
+  if (want.includes('large')) await section('large', async () => {    // consent, progress, a reload mid-way, stopping, deleting; the answer in the background; another kind offered, never taken; failures in words
+    const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
+    const MB = Math.max(1, Math.round(JSON.parse(fs.readFileSync(path.join(here, 'models', 'standin-big', 'manifest.json'), 'utf8')).vision.bytes / 1e6));
+    const E = (name) => expect.big[name][month];
+    { // no such model: the feature does not exist, and nothing mentions it
+      await ctl('reset=1'); const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=test/rec/nowhere'); await ready(page); await begin(page);
+      const s = await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(500);
+      r.absent = { eyes: s.eyes, line: await svcLine(page), asked: (await ctl('log=1')).filter((x) => /nowhere/.test(x)).length }; await toAbout(page);
+      r.absent.aboutMentionsIt = await page.locator('#bigBox').isVisible(); r.absent.errors = errors;
+      all('absent', s.eyes === 'insect' && r.absent.line === '' && r.absent.asked === 1 && !r.absent.aboutMentionsIt && !errors.length); await ctx.close();
+    }
+    { // consent first, in plain words; what the connection says of itself; do not ask again; the About block
+      await ctl('reset=1'); await bctl('reset=1');
+      const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page);
+      const d = await page.evaluate(() => (matchMedia('(pointer: coarse)').matches ? 'phone' : 'computer')); r.device = d;
+      const before = (await ctl('log=1')).filter((x) => /standin-big/.test(x)).length;
+      const s = await meet(page, 'stripes.png');
+      r.offer = { manifestAskedBeforeAPhoto: before, eyesAtOnce: s.eyes, shown: s.shown, line: await offered(page), partsAsked: (await partsAsked()).length };
+      await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
+      r.sheet = { title: await text(page, 'bigTitle'), sub: await text(page, 'bigSub'), net: await text(page, 'bigNet'), yes: await text(page, 'bigYes'), no: await text(page, 'bigNo'), never: await text(page, 'bigNever'),
+        note: await page.locator('#big .note:not(#bigNet)').textContent(), stopShown: await page.locator('#bigStop').isVisible(), overflow: await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth) };
+      fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'large-ask.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#bigNo').tap(); await page.waitForTimeout(300);
+      r.notNow = { line: await svcLine(page), choice: (await bigNow(page)).choice, parts: (await partsAsked()).length, by: (await st(page)).named.by };
+      r.net = {};
+      for (const [name, c] of [['save', { saveData: true }], ['metered', { type: 'cellular' }], ['slow', { effectiveType: '2g' }]]) {
+        await page.evaluate((c) => Object.defineProperty(navigator, 'connection', { value: c, configurable: true }), c);
+        await meet(page, 'stripes.png'); await offered(page); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' });
+        r.net[name] = await text(page, 'bigNet'); await page.locator('#bigNo').tap(); await page.waitForTimeout(200);
+      }
+      await page.evaluate(() => Object.defineProperty(navigator, 'connection', { value: undefined, configurable: true }));
+      await meet(page, 'stripes.png'); await offered(page); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.locator('#bigNever').tap(); await page.waitForTimeout(200);
+      r.never = { choice: (await bigNow(page)).choice }; await meet(page, 'stripes.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(600); r.never.line = await svcLine(page);
+      await toAbout(page); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
+      r.aboutAbsent = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), halt: await page.locator('#bigHalt').isVisible(), ticked: await page.locator('#bigAsk').isChecked(), tick: (await page.locator('#bigAskRow').textContent()).trim() };
+      await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
+      all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
+      all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It is a larger model that names the species: about ' + MB + ' MB, downloaded once and kept on this ' + d + '. Photos are not sent anywhere. On a phone it takes several seconds a photo.'
+        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /can be changed, and the model deleted, under “About this build”/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
+      all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
+      all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
+      all('never', r.never.choice === 'no' && r.never.line === '');
+      all('aboutAbsent', r.aboutAbsent.state === 'A larger model that names the species can be kept on this ' + d + ': about ' + MB + ' MB, downloaded once. Photos are not sent anywhere.' && r.aboutAbsent.get && !r.aboutAbsent.del && !r.aboutAbsent.halt && r.aboutAbsent.ticked && r.aboutAbsent.tick === 'Do not offer the larger model' && r.aboutAbsent.choiceAfter === '' && r.aboutAbsent.parts === 0 && !errors.length);
+      await ctx.close();
+    }
+    { // the download: progress, each part kept as it arrives; a reload mid-way, after which it carries on by itself and fetches no kept part again
+      await ctl('reset=1'); await bctl('reset=1'); await bctl('slow=' + encodeURIComponent('part01') + '&bps=50000');     // the second part takes about six seconds
+      const ctx = await browser.newContext(Object.assign({}, phone)); let { page, errors } = await open(browser, Q, null, ctx); await ready(page); await begin(page); const d = r.device;
+      await meet(page, 'stripes.png'); await offered(page); await svcWatch(page); await getIt(page);
+      await page.waitForFunction(() => window.__seenBack.big.about().keptBytes > 300000, null, { timeout: 20000 });     // the first part is kept, the second is arriving
+      const mid = await bigNow(page);
+      r.progress = { have: mid.have, choice: mid.choice, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length, eyes: (await st(page)).eyes };
+      await page.reload(); await page.waitForTimeout(300);
+      r.afterReload = { choice: await page.evaluate(() => window.__seenBack.bigChoice()), have0: (await bigNow(page)).have };
+      await bigHave(page, 'kept', 60000); await page.waitForFunction(() => window.__seenBack.bigChoice() === 'kept', null, { timeout: 30000 });
+      const fin = await bigNow(page);
+      r.resumed = { parts: await partsAsked(), kept: await keptBig(page), state: fin.state, choice: fin.choice, kept_bytes: fin.kept === fin.bytes, errors: errors.slice() };
+      all('progress', mid.have === 'getting' && mid.choice === 'yes' && r.progress.lines.length >= 1 && r.progress.lines.every((l) => new RegExp('^Getting the larger model: \\d+ of ' + MB + ' MB\\.$').test(l)) && r.progress.kept === 1 && r.progress.eyes === 'insect');
+      all('resumed', r.afterReload.choice === 'yes' && r.resumed.parts.filter((x) => x === 'part00').length === 1 && r.resumed.parts.filter((x) => x === 'part01').length === 2 && r.resumed.parts.filter((x) => x === 'part02').length === 1
+        && r.resumed.kept.filter((k) => /^part\/SHA/.test(k)).length === 3 && r.resumed.kept.indexOf('whole/SHA') >= 0 && fin.state === 'ready' && fin.choice === 'kept' && r.resumed.kept_bytes && !errors.length);
+      // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
+      await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page);
+      const s1 = await meet(page, 'stripes.png'); await byLarge(page); await page.waitForTimeout(150);
+      r.named = { atOnce: s1.eyes + '|' + s1.shown, after: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), line: await svcLine(page), record: await recordRows(page),
+        overlay: await page.evaluate(() => (document.getElementById('reveal').classList.contains('show') ? document.getElementById('rvName').textContent : '(gone)')), last: (await bigNow(page)).last, reference: E('stripes.png') };
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 });
+      r.named.pill = await text(page, 'whoName'); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); r.named.infoSub = await text(page, 'infoSub');
+      await page.locator('#infoChange').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
+      r.named.offers = await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)); await page.locator('#claimBack').tap();
+      await page.evaluate(() => history.back()); await page.waitForTimeout(200); await page.evaluate(() => history.back()); await page.waitForTimeout(200);
+      await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
+      r.named.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].slice(0, 1).map((li) => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent));
+      await page.locator('#about summary').tap(); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
+      r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
+      await page.locator('#recordClose').tap();
+      all('named', r.named.atOnce === 'insect|Insect' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.join(' / ') === 'Looking more closely. / The larger model says Monarch.'
+        && r.named.line === 'The larger model says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
+        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by a larger model, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
+        && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by a larger model$/.test(r.named.rows[0]));
+      all('aboutKept', r.aboutKept.state === 'The larger model is on this ' + d + ' (' + MB + ' MB). It names the species here, and photos are not sent anywhere.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
+      // another kind of creature, and it is sure: the change is offered in one line, and not made
+      const s2 = await meet(page, 'dots.png'); await lineIs(page, /Change eyes\?$/); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+      const b2 = await st(page);
+      r.change = { atOnce: s2.eyes + '|' + s2.shown, line: await text(page, 'svcView'), before: b2.eyes + '|' + b2.named.common + '|' + b2.named.by, meetings: (await recordRows(page)).length };
+      await page.screenshot({ path: path.join(here, 'shots', 'large-change.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
+      const a2 = await st(page); r.change.after = a2.eyes + '|' + a2.named.common + '|' + a2.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
+      all('change', r.change.atOnce === 'frog|Frog or toad' && r.change.line === 'It looks like a Great Egret, a wading bird. Change eyes?' && r.change.before === 'frog|Frog or toad|page'
+        && r.change.after === 'wader|Great Egret|device-large' && r.change.record[0] === 'Great Egret|Ardea alba|device-large|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
+      // it is not sure: nothing changes; a person: it is not asked; a species the small model named: it has its say all the same
+      let at = (await bigNow(page)).last.at;
+      const s3 = await meet(page, 'small.png'); await largeAfter(page, at); await page.waitForTimeout(150); const a3 = await st(page);
+      r.unsure = { state: a3.eyes + '|' + a3.named.common + '|' + a3.named.by, line: await svcLine(page), last: (await bigNow(page)).last, reference: E('small.png') };
+      at = r.unsure.last.at; await meet(page, 'portrait.jpg'); await page.waitForTimeout(900); r.person = { eyes: (await st(page)).eyes, asked: (await bigNow(page)).last.at !== at };
+      const s5 = await meet(page, 'heron.png'); await byLarge(page); r.heron = { atOnce: s5.named.by + '|' + s5.shown, after: (await st(page)).named.common + '|' + (await st(page)).named.by };
+      r.askedOfServers = { parts: (await partsAsked()).length, photos: (await ctl('log=1')).filter((x) => !/^test\/rec\/photos|^test\/assets/.test(x) && !/^index\.html/.test(x)) };
+      all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
+      all('person', r.person.eyes === 'person' && !r.person.asked);
+      all('heron', r.heron.atOnce === 'page|Great Blue Heron' && r.heron.after === 'Great Blue Heron|device-large');
+      all('nothingAsked', r.askedOfServers.parts === 0 && r.askedOfServers.photos.length === 0);
+      // a minute with nothing to do (shortened here): its worker is let go, and the next photo starts it again
+      await page.evaluate(() => window.__seenBack.big.test.idle(300)); await page.waitForFunction(() => !window.__seenBack.big.test.running(), null, { timeout: 8000 });
+      r.rest = { state: (await bigNow(page)).state }; await meet(page, 'stripes.png'); await byLarge(page); r.rest.after = (await st(page)).named.common; r.rest.started = (await bigNow(page)).last.ms.load > 0;
+      await page.evaluate(() => window.__seenBack.big.test.idle(60000));
+      all('rest', r.rest.state === 'idle' && r.rest.after === 'Monarch' && r.rest.started);
+      // from the sheet that asks for a name: the small model found nothing alive; the larger one is asked, is not sure, and offers its three likeliest kinds
+      const s6 = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
+      r.fromSheet = { sub: s6.sub, link: await text(page, 'claimAsk') }; await page.locator('#claimAsk').tap();
+      await page.waitForFunction(() => /larger model is not sure/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 20000 }); await page.waitForTimeout(300);
+      r.fromSheet.after = await page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), link: !document.getElementById('claimAskRow').hidden, eyes: window.__seenBack.S.eyes }));
+      r.fromSheet.reference = E('wall.png'); await page.locator('#claimKinds button').first().tap(); await page.waitForTimeout(300); const a6 = await st(page); r.fromSheet.chosen = a6.eyes + '|' + a6.named.by;
+      all('fromSheet', /^Nothing alive was found in that photo\. So you tell it\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Look more closely, with the larger model on this ' + d
+        && r.fromSheet.after.sub === 'The larger model is not sure what that is. Choose one below, or type the kind of animal or plant, such as cat, heron or oak.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
+        && r.fromSheet.chosen === E('wall.png').kindOffers[0] + '|you');
+      await page.close();
+      // the small model is not sure, and the larger one is on the device: it is asked before the person is, and its answer is taken
+      ({ page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.kind-at.json&big=' + slot, null, ctx)); await ready(page); await begin(page);
+      await page.evaluate(() => { const el = document.getElementById('msg'); window.__lines = []; new MutationObserver(() => { const t = el.textContent; if (t && window.__lines[window.__lines.length - 1] !== t) window.__lines.push(t); }).observe(el, { childList: true, characterData: true, subtree: true }); });
+      const s7 = await meet(page, 'odd.png'); r.first = { state: s7.eyes + '|' + s7.shown + '|' + (s7.named && s7.named.by), claim: s7.claim, lines: await page.evaluate(() => window.__lines.filter((x, i, a) => a.indexOf(x) === i)), small: await page.evaluate(() => window.__seenBack.rec.about().last.sure), record: (await recordRows(page))[0], errors };
+      all('first', r.first.state === 'bee|Western Honey Bee|device-large' && !r.first.claim && r.first.lines.indexOf('Looking more closely.') >= 0 && r.first.small === false && r.first.record === 'Western Honey Bee|Apis mellifera|device-large|bee' && !errors.length);
+      // deleted from the device, with a second thought first; after that it is not offered
+      await toAbout(page); await page.waitForSelector('#bigDel', { state: 'visible', timeout: 5000 }); await page.locator('#bigDel').tap(); await page.waitForTimeout(250);
+      r.del = { asks: await text(page, 'bigState'), keep: await page.locator('#bigDelNo').isVisible(), keptWhileAsking: (await keptBig(page)).length };
+      await page.screenshot({ path: path.join(here, 'shots', 'large-delete.png'), scale: 'css' }).catch(() => {});
+      await page.locator('#bigDelNo').tap(); await page.waitForTimeout(200); r.del.keptAfterKeep = (await bigNow(page)).have; await page.locator('#bigDel').tap(); await page.waitForTimeout(150); await page.locator('#bigDel').tap();
+      await bigHave(page, 'absent', 15000); await page.waitForTimeout(300);
+      r.del.after = { kept: await keptBig(page), state: await text(page, 'bigState'), choice: (await bigNow(page)).choice, running: (await bigNow(page)).running, ticked: await page.locator('#bigAsk').isChecked() };
+      await page.locator('#recordClose').tap(); const s8 = await meet(page, 'heron.png'); await page.waitForTimeout(700); r.del.next = { by: (await st(page)).named.by, line: await svcLine(page), parts: (await partsAsked()).length };
+      all('delete', r.del.asks === 'Delete the larger model from this ' + d + '? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
+        && r.del.after.kept.length === 0 && /^A larger model that names the species can be kept on this/.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
+      await ctx.close();
+    }
+    { // stopped mid-way: what arrived is kept, the line says where it stands, and "Get the rest" carries on without fetching a kept part again
+      await ctl('reset=1'); await bctl('reset=1'); await bctl('slow=' + encodeURIComponent('part01') + '&bps=30000');
+      const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page); const d = r.device;
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page);
+      await page.waitForFunction(() => window.__seenBack.big.about().keptBytes > 300000, null, { timeout: 20000 });
+      await lineIs(page, /^Getting the larger model/); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
+      r.stop = { title: await text(page, 'bigTitle'), stop: await page.locator('#bigStop').isVisible() && (await text(page, 'bigStop')), yesShown: await page.locator('#bigYes').isVisible(), net: await text(page, 'bigNet') };
+      await page.locator('#bigStop').tap(); await bigHave(page, 'partial', 10000); await page.waitForTimeout(200);
+      const x = await bigNow(page); r.stop.after = { have: x.have, choice: x.choice, line: await svcLine(page), kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length };
+      await meet(page, 'stripes.png'); r.stop.offer = await offered(page); await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.waitForTimeout(150);
+      r.stop.sheet = { title: await text(page, 'bigTitle'), yes: await text(page, 'bigYes'), net: (await text(page, 'bigNet')).trim() };
+      await bctl('reset=1'); await page.locator('#bigYes').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);
+      r.stop.rest = { parts: await partsAsked(), named: (await st(page)).named.common, errors };
+      all('stop', r.stop.title === 'Getting the larger model' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Getting the larger model: \d+ of \d+ MB\.$/.test(r.stop.net)
+        && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
+        && /^The larger model is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the larger model?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
+        && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
+      await ctx.close();
+    }
+    // failures, each in words on the line, with a way on where there is one; what the small model said stands throughout
+    r.failures = {};
+    for (const [name, rule, wanted, keptWanted] of [['missingPart', 'lose=' + encodeURIComponent('part01'), 'The larger model’s files are missing. Try again?', 1], ['damagedPart', 'damage=' + encodeURIComponent('part02'), 'The larger model’s file arrived damaged. Try again?', 2], ['noNetwork', 'drop=' + encodeURIComponent('part'), 'The larger model could not be downloaded. Try again?', 0]]) {
+      await ctl('reset=1'); await bctl('reset=1'); await bctl(rule);
+      const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page);
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /Try again\?$/, 30000);
+      const b = await bigNow(page), x = { line: await svcLine(page), have: b.have, why: b.getFail, kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length, state: (await st(page)).eyes + '|' + (await st(page)).named.by, claim: (await st(page)).claim };
+      await bctl('reset=1'); await page.locator('#svcView').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);      // put right: a tap on the line carries on from what is kept
+      x.partsAfter = (await partsAsked()).join(); x.named = (await st(page)).named.common; r.failures[name] = x;
+      all(name, x.line === wanted && x.have === (keptWanted ? 'partial' : 'absent') && x.kept === keptWanted && x.state === 'insect|page' && !x.claim && x.partsAfter === ['part00', 'part01', 'part02'].slice(keptWanted).join() && x.named === 'Monarch' && !quiet(errors).length);
+      await ctx.close();
+    }
+    { // every part passes its own checksum and the whole does not: nothing of it is kept
+      await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot.replace(/\/manifest\.port\.json$/, '') + (BIG_PORT === 8788 ? '/manifest.bad-whole.json' : '/manifest.port.bad-whole.json')); await ready(page); await begin(page);
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /arrived damaged/, 30000); const b = await bigNow(page);
+      r.failures.badWhole = { line: await svcLine(page), have: b.have, why: b.getFail, kept: (await keptBig(page)).filter((k) => /^part|^whole/.test(k)).length, by: (await st(page)).named.by };
+      all('badWhole', r.failures.badWhole.line === 'The larger model’s file arrived damaged. Try again?' && b.have === 'absent' && /sha256/.test(b.getFail) && r.failures.badWhole.kept === 0 && r.failures.badWhole.by === 'page'); await ctx.close();
+    }
+    { // the browser says there is no room: nothing is fetched, and there is nothing to try again
+      await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, Q); await ready(page); await begin(page);
+      await page.evaluate(() => { navigator.storage.estimate = () => Promise.resolve({ quota: 1000, usage: 900 }); });
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /not enough room/, 15000); const b = await bigNow(page);
+      r.failures.noRoom = { line: await svcLine(page), tappable: await page.evaluate(() => !document.getElementById('svcView').disabled), have: b.have, choice: b.choice, parts: (await partsAsked()).length };
+      all('noRoom', r.failures.noRoom.line === 'There is not enough room on this device for the larger model.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
+    }
+    { // where there is a server too, the device comes first; "Do not ask again" for the device leaves the server to be offered
+      await ctl('reset=1'); await bctl('reset=1'); const Qs = (await svcFiles()) + 'service.json&big=' + slot; const { ctx, page } = await open(browser, Qs); await ready(page); await begin(page);
+      await meet(page, 'stripes.png'); r.both = { first: await offered(page), sent: fake.calls().length };
+      await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.locator('#bigNever').tap(); await page.waitForTimeout(200);
+      await meet(page, 'stripes.png'); r.both.then = await offered(page); r.both.sentAfter = fake.calls().length;
+      all('both', /^A larger model can name the species on this (phone|computer)\. Get it\?$/.test(r.both.first) && r.both.then === 'A larger model on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
+    }
+    await bctl('reset=1'); await ctl('reset=1');
+    done('large', r, ok);
+  });
+
+  if (want.includes('keptcopy')) await section('keptcopy', async () => {   // the manifest's kept copy is found where a plain lookup would miss it, and used where the network neither answers nor fails
+    await ctl('reset=1'); const r = {};
+    { const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT); await ready(page);
+      // the kept manifest is put back as a host that varies by a header leaves it: a plain lookup by its address no longer finds it
+      r.plainLookupFinds = await page.evaluate(async () => { const c = await caches.open('keep-v1'), k = (await c.keys()).filter((q) => /standin\/manifest\.json$/.test(q.url))[0], t = await (await c.match(k)).text();
+        await c.delete(k); await c.put(new Request(k.url, { headers: { 'X-Seen': 'one' } }), new Response(t, { headers: { 'Content-Type': 'application/json', 'Vary': 'X-Seen' } })); return !!(await c.match(k.url)); });
+      await page.evaluate(() => window.__seenBack.rec.test.forget()); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // no network for anything the recognizer needs
+      r.withVary = await page.evaluate(() => window.__seenBack.rec.ready().then(() => 'ready', (e) => e.code + ': ' + e.detail));
+      await begin(page); r.heron = (await meet(page, 'heron.png')).shown;
+      // a network that neither answers nor fails: after the wait (six seconds, shortened here) the kept copy is used
+      await ctl('reset=1'); await ctl('hang=' + encodeURIComponent('standin/manifest'));
+      r.hanging = await page.evaluate(() => { const rec = window.__seenBack.rec, t0 = performance.now(); rec.test.forget(); rec.test.netWait(700); return rec.ready().then(() => 'ready in ' + (performance.now() - t0 < 6000 ? 'under six seconds' : 'six seconds or more'), (e) => e.code + ': ' + e.detail); });
+      r.errors = quiet(errors); await ctx.close(); }
+    { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // and where there is no kept copy at all, the reason says so
+      const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.none = (await meet(page, 'heron.png')).sub; r.noneWhy = (await about(page)).fail; await ctl('reset=1'); await ctx.close(); }
+    done('keptcopy', r, r.plainLookupFinds === false && r.withVary === 'ready' && r.heron === 'Great Blue Heron' && r.hanging === 'ready in under six seconds' && !r.errors.length
+      && /^The recognizer could not be downloaded\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
+    await ctl('reset=1');
   });
 
   if (want.includes('away')) await section('away', async () => {     // the species list is one town's: the sheet says so, and a switch turns local naming off. No location is asked of the device
@@ -622,7 +927,7 @@ async function meet(page, name) {
     await ctx.close();
   });
 
-  await browser.close(); if (fake) fake.close();
+  await browser.close(); if (fake) fake.close(); if (bigServer) bigServer.kill();
   console.log(JSON.stringify(out, null, 1));
   console.log(Object.keys(out).map((k) => k + ': ' + (out[k].ok ? 'ok' : 'FAILED')).join(' | '));
   process.exit(bad ? 1 : 0);

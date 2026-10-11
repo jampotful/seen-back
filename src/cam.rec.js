@@ -1,16 +1,23 @@
 
-  // ---------- recognition in the page itself (the pocket recognizer)
+  // ---------- recognition in the page itself: the pocket recognizer, and a larger model the person may fetch once
   // Outside Claude's viewer the page names the photo by itself: an image encoder run by ONNX Runtime Web in a worker
   // (vendor/rec-worker.js), and label vectors worked out beforehand. The files are described by models/<slot>/manifest.json
   // (docs/CONTRACTS.md). Nothing here is fetched before the opening screen is up, and nothing about a photo leaves the device.
   // Kept copies: every file is asked for with ?v=<version> and kept under that address, so a new version is a new address.
   // The runtime's version is its release number; a slot's version is a fingerprint of its manifest, which is always asked of the network first.
+  // There are two slots. The pocket one (models/pocket) is fetched by the page itself once the opening screen is up. The larger one
+  // (models/naturalist) is some hundreds of megabytes, in parts that may live on another origin: nothing of it is fetched until the
+  // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
+  // when a photo needs it and let go after a minute with nothing to do.
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
-  var pocket = (function () {
-    var asked = /[?&]rec=([A-Za-z0-9_.\/-]+)/.exec(location.search || ''), slot = asked ? asked[1] : 'models/pocket';
+  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
+  var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the larger model
+    var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
     var cannot = inViewer ? 'off' : slot === 'off' || /\.\.|^\/|\/\//.test(slot) ? 'off'
-      : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser' : '';
+      : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
+      : (big && !window.caches) ? 'browser' : '';      // the larger model has to be kept, and this browser keeps nothing
     var SAY = {
       off: 'This page’s recognizer is switched off.',
       absent: 'This page has no recognizer yet.',
@@ -23,12 +30,20 @@
       slow: 'The recognizer took too long.',
       photo: 'The recognizer failed on that photo.'
     };
+    if (big) {
+      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'larger model'); });
+      SAY.room = 'There is not enough room on this device for the larger model.';
+      SAY.keep = 'The larger model could not be kept on this device.';
+      SAY.stopped = 'The download was stopped.';
+    }
     var KEEP = 'keep-v1', EPS = 1e-9;
-    var state = cannot ? 'failed' : 'idle', why = cannot, M = null, cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
-    var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = 45000;
+    var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
+    var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = big ? 120000 : 45000, netWaitMs = 6000, api;
+    // the larger model only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
+    var have = '', gone = false, keptBytes = 0, partGot = 0, getP = null, getCtl = null, getFail = '', surveyP = null, idleMs = 60000, idleTimer = 0, queue = Promise.resolve(), asked = 0;
 
     function err(code, detail) { var e = new Error(SAY[code] || code); e.code = code; e.sentence = SAY[code] || SAY.died; e.detail = String(detail || ''); return e; }
-    function abs(u, base) { try { return new URL(u, base || location.href).href; } catch (e) { return u; } }
+    function abs(u, b) { try { return new URL(u, b || location.href).href; } catch (e) { return u; } }
     function withV(u, v) { return u + (u.indexOf('?') < 0 ? '?' : '&') + 'v=' + encodeURIComponent(v); }
     function fingerprint(text) {                       // two rounds of FNV-1a: enough to tell one manifest from the next
       var a = 0x811c9dc5, b = 0x01000193 ^ text.length, i, c;
@@ -36,16 +51,30 @@
       return ('0000000' + (a >>> 0).toString(16)).slice(-8) + ('0000000' + (b >>> 0).toString(16)).slice(-8);
     }
     function keepOpen() { try { return window.caches ? caches.open(KEEP).catch(function () { return null; }) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-    function tick(n) { got += n; if (onProgress) onProgress(); }
-    function readAll(res, expect) {                    // the whole body, counted as it arrives
-      if (!res.body || !res.body.getReader) return res.arrayBuffer().then(function (b) { tick(b.byteLength); return b; });
+    // A kept copy, looked for in every way there is. Nothing here differs by what a request's headers say, so a copy kept with a Vary header
+    // (GitHub Pages sends "Vary: Accept-Encoding") is matched whatever the asking request carries; and where this page's own store
+    // will not open or will not answer, every store of this site is asked, the service worker's among them.
+    function kept(cache, url) {
+      function one(c) { try { return c.match(url, { ignoreVary: true }).then(function (hit) { return hit || null; }, function () { return null; }); } catch (e) { return Promise.resolve(null); } }
+      return (cache ? one(cache) : Promise.resolve(null)).then(function (hit) { return hit || (window.caches ? one(caches) : null); });
+    }
+    function unkeep(url) {                             // out of every store of this site
+      if (!window.caches) return Promise.resolve();
+      return caches.keys().then(function (names) {
+        return Promise.all(names.map(function (n) { return caches.open(n).then(function (c) { return c.delete(url, { ignoreVary: true }); }); }));
+      }).catch(function () {});
+    }
+    function notify() { if (onProgress) onProgress(); }
+    function tick(n) { got += n; notify(); }
+    function readAll(res, expect, count) {             // the whole body, counted as it arrives
+      if (!res.body || !res.body.getReader) return res.arrayBuffer().then(function (b) { count(b.byteLength); return b; });
       var reader = res.body.getReader(), buf = expect ? new Uint8Array(expect) : null, chunks = [], n = 0;
       function pump() {
         return reader.read().then(function (r) {
           if (r.done) return;
           var c = r.value;
           if (buf && n + c.length <= buf.length) buf.set(c, n); else { if (buf) { chunks.push(buf.slice(0, n)); buf = null; } chunks.push(c); }
-          n += c.length; tick(c.length); return pump();
+          n += c.length; count(c.length); return pump();
         });
       }
       return pump().then(function () {
@@ -54,23 +83,23 @@
       });
     }
     // One file: the kept copy if there is one, otherwise the network, counted toward the progress line.
-    function file(cache, url, expect, check) {
-      var hit = cache ? cache.match(url).catch(function () { return null; }) : Promise.resolve(null);
-      return hit.then(function (res) {
+    function file(cache, url, expect, check, fresh) {
+      function again() { return unkeep(url).then(function () { return file(cache, url, expect, check, true); }); }
+      return (fresh ? Promise.resolve(null) : kept(cache, url)).then(function (res) {
         if (res) return res.arrayBuffer().then(function (b) {
-          if (expect && b.byteLength !== expect) { return cache.delete(url).then(function () { return file(cache, url, expect, check); }); }   // a kept copy cut short is thrown away
+          if (expect && b.byteLength !== expect) return again();        // a kept copy cut short is thrown away
           return b;
-        });
-        total += expect || 0; if (onProgress) onProgress();
+        }, again);                                                     // and so is one that cannot be read
+        total += expect || 0; notify();
         return fetch(url).then(function (r) {
           if (!r.ok) throw err(r.status === 404 ? 'missing' : 'network', url + ' ' + r.status);
           if (!expect) { var len = +r.headers.get('content-length') || 0; total += len; }
-          return readAll(r, expect).catch(function (e) { throw e && e.code ? e : err('network', url); }).then(function (b) {
+          return readAll(r, expect, tick).catch(function (e) { throw e && e.code ? e : err('network', url); }).then(function (b) {
             if (expect && b.byteLength !== expect) throw err('damaged', url + ' is ' + b.byteLength + ' bytes, not ' + expect);
             return (check ? check(b) : Promise.resolve()).then(function () {
               if (!cache) return b;
               // kept by the page itself, unless the service worker has kept the same bytes under the same address already
-              return cache.match(url).catch(function () { return null; }).then(function (there) {
+              return kept(cache, url).then(function (there) {
                 if (there) return b;
                 var copy = new Response(b, { headers: { 'Content-Type': r.headers.get('content-type') || 'application/octet-stream', 'Content-Length': String(b.byteLength) } });
                 return cache.put(url, copy).catch(function () {}).then(function () { return b; });   // a full disk is no reason to fail
@@ -90,16 +119,29 @@
       };
     }
     function num(x) { return typeof x === 'number' && isFinite(x); }
+    function okPart(u) {                               // a part may live on another origin, over https; a check on this machine may use its own ports
+      return typeof u === 'string' && !!u && (/^https:\/\/[^\/]+\//.test(u) || (!/^[a-z][a-z0-9+.-]*:/i.test(u) && !/^\/\//.test(u)) || (onThisMachine && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u)));
+    }
+    function partsOf(V) { return Array.isArray(V.parts) ? V.parts : [{ url: V.url, bytes: V.bytes, sha256: V.sha256 }]; }
     function readManifest(text) {
       var m; try { m = JSON.parse(text); } catch (e) { throw err('damaged', 'manifest is not JSON'); }
-      var v = m && m.vision, f = m && m.fusion, k = m && m.kinds;
-      if (!v || !f || !k || !Array.isArray(k.labels) || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !v.url || !k.url || !num(f.t_kind)) throw err('unfit', 'manifest lacks a field');
-      if (k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
-      if (m.species && !(m.species.url && m.species.table && num(m.species.count) && num(f.t_species) && num(f.alpha_prior) && num(f.w_kind) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
+      var v = m && m.vision, f = m && m.fusion, k = m && m.kinds, sp = m && m.species;
+      if (!v || !f || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !(v.url || Array.isArray(v.parts))) throw err('unfit', 'manifest lacks a field');
+      // a slot may come without a kinds head: then the kind is taken from the species answer, and the species are not optional
+      if (k ? !(Array.isArray(k.labels) && k.url && num(f.t_kind)) : !sp) throw err('unfit', 'manifest lacks a field');
+      if (k && k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
+      if (sp && !(sp.url && sp.table && num(sp.count) && num(f.t_species) && num(f.alpha_prior) && (!k || num(f.w_kind)) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
       // a trained head carries a bias for each row; a manifest may choose how the two heads are combined. Anything this build does not know is refused, not guessed at.
-      if (k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
+      if (k && k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
       if (f.rule !== undefined && f.rule !== 'product' && f.rule !== 'mix') throw err('unfit', 'a combination rule this page does not know');
       if (f.guard !== undefined && !(num(f.guard) && f.guard > 0)) throw err('unfit', 'fusion.guard is not a positive number');
+      if (f.kind_at !== undefined && f.kind_at !== null && !num(f.kind_at)) throw err('unfit', 'fusion.kind_at is not a number');
+      // a model in parts: every part with its length, the lengths adding up to the whole
+      if (v.parts !== undefined) {
+        var sum = 0;
+        if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
+      }
+      if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the larger model without its length' : 'a model in parts in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -121,17 +163,20 @@
       var has = {};
       if (rows) rows.forEach(function (r) { has[r.kind] = 1; });
       if (sb && (!rows || sb.length !== rows.length)) throw err('unfit', 'species biases do not match the table');
-      return { f: m.fusion, labels: m.kinds.labels, table: rows, has: has, kb: m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
+      if (!m.kinds && !rows) throw err('unfit', 'neither kinds nor species');
+      // without a kinds head the labels are the kinds the table has, in the one fixed order
+      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
+        kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
     }
-    function prune(cache, base, v) {                   // older versions of this slot and of the runtime are let go
+    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go
       if (!cache) return;
       cache.keys().then(function (keys) {
         keys.forEach(function (req) {
           var u; try { u = new URL(req.url); } catch (e) { return; }
-          var ver = /[?&]v=([^&]+)/.exec(u.search), here = u.href.split('?')[0];
-          if (!ver) return;
-          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(ver[1]) !== v) cache.delete(req);
-          if (here.indexOf(abs(ORT.dir)) === 0 && decodeURIComponent(ver[1]) !== ORT.v) cache.delete(req);
+          var q = /[?&]v=([^&]+)/.exec(u.search), here = u.href.split('?')[0];
+          if (!q) return;
+          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v) cache.delete(req);
+          if (here.indexOf(abs(ORT.dir)) === 0 && decodeURIComponent(q[1]) !== ORT.v) cache.delete(req);
         });
       }).catch(function () {});
     }
@@ -141,19 +186,19 @@
       state = 'failed'; why = code; lastFail = code + (detail ? ': ' + detail : ''); loadP = null;
       Object.keys(p).forEach(function (id) { clearTimeout(p[id].timer); p[id].rej(err(code, detail)); });
     }
-    function startWorker(init, transfer) {
+    function startWorker(init, transfer, sessionCode) {
       return new Promise(function (res, rej) {
         var w, hello = false, settled = false, timer;
         function no(code, detail) { if (settled) { stop(code, detail); return; } settled = true; clearTimeout(timer); stop(code, detail); rej(err(code, detail)); }
         try { w = new Worker('vendor/rec-worker.js?v=' + BUILD); } catch (e) { rej(err('browser', e && e.message)); return; }
         worker = w;
-        timer = setTimeout(function () { no('slow', 'starting'); }, Math.max(watchMs, 60000));
-        w.onerror = function (e) { if (e && e.preventDefault) e.preventDefault(); no(hello ? 'died' : 'network', e && e.message); };
+        timer = setTimeout(function () { no('slow', 'starting'); }, Math.max(watchMs, 60000) * (big ? 2 : 1));
+        w.onerror = function (e) { if (e && e.preventDefault) e.preventDefault(); no(hello ? (big && !settled ? 'browser' : 'died') : 'network', e && e.message); };
         w.onmessage = function (ev) {
           var m = ev.data || {}, p;
           if (m.op === 'hello') { hello = true; return; }
           if (m.op === 'ready') { settled = true; clearTimeout(timer); info = { backend: m.backend, threads: m.threads, ms: m.ms }; res(); return; }
-          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? 'damaged' : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
+          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
           p = pending[m.id]; if (!p) return;
           delete pending[m.id]; clearTimeout(p.timer);
           if (m.op === 'done') p.res(m); else p.rej(err('photo', m.message));
@@ -161,31 +206,205 @@
         w.postMessage(init, transfer);
       });
     }
+    // The manifest: the network first, so that a new model is noticed; the kept copy where there is no network, where the server is
+    // having a bad moment, where the answer breaks off, or where none comes in six seconds. The kept copy is the last resort, so it is
+    // looked for more than once before the load is given up, and what was missing is written into the reason.
+    function keptText(cache, url, detail) {
+      var tries = 0;
+      function look() {
+        return (cache ? Promise.resolve(cache) : keepOpen()).then(function (c) { return kept(c, url); }).then(function (hit) { return hit ? hit.text() : null; }, function () { return null; }).then(function (text) {
+          if (text) return text;
+          if (++tries < 3) return new Promise(function (res) { setTimeout(res, 150 * tries); }).then(look);
+          throw err('network', detail + (window.caches ? '; no kept copy found' : '; this browser keeps no copies'));
+        });
+      }
+      return look();
+    }
+    function manifestText(cache) {
+      var url = abs(manifestUrl), ctl = typeof AbortController === 'function' ? new AbortController() : null, late = false;
+      var timer = ctl ? setTimeout(function () { kept(cache, url).then(function (hit) { if (hit) { late = true; try { ctl.abort(); } catch (e) {} } }); }, netWaitMs) : 0;
+      return fetch(manifestUrl, { cache: 'no-cache', signal: ctl ? ctl.signal : undefined }).then(function (r) {
+        clearTimeout(timer);
+        if (r.status === 404) throw err('absent', manifestUrl);            // taken away on purpose, or never there
+        if (!r.ok) return keptText(cache, url, manifestUrl + ' ' + r.status);           // a server having a bad moment
+        return r.text().then(function (text) {
+          if (cache) cache.put(url, new Response(text, { headers: { 'Content-Type': 'application/json' } })).catch(function () {});
+          return text;
+        }, function () { return keptText(cache, url, manifestUrl + ' broke off'); });
+      }, function () { clearTimeout(timer); return keptText(cache, url, manifestUrl + (late ? ' did not answer in time' : '')); });
+    }
+    function adopt(text) { M = readManifest(text); ver = fingerprint(text); base = abs(manifestUrl).replace(/[^\/]*$/, ''); cur = null; }
+    function u(rel) { return withV(abs(rel, base), ver); }
+
+    // ---------- a model in parts (the larger model)
+    // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
+    function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
+    function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
+    function unkeepParts() {
+      var V = M.vision; have = 'absent'; keptBytes = 0;
+      return Promise.all(partsOf(V).map(function (p) { return unkeep(partKey(p)); }).concat([unkeep(wholeKey(V))]));
+    }
+    function staleParts(cache) {                       // parts of a model this slot no longer names
+      if (!cache || !M) return;
+      var now = {}; partsOf(M.vision).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); now[wholeKey(M.vision)] = 1;
+      cache.keys().then(function (keys) {
+        keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+      }).catch(function () {});
+    }
+    function readInto(res, buf, at, n) {               // a kept part, straight into its place in the whole
+      function wrong(len) { return err('damaged', 'a kept part is ' + len + ' bytes, not ' + n); }
+      if (!res.body || !res.body.getReader) return res.arrayBuffer().then(function (b) { if (b.byteLength !== n) throw wrong(b.byteLength); buf.set(new Uint8Array(b), at); });
+      var reader = res.body.getReader(), done = 0;
+      function pump() {
+        return reader.read().then(function (r) {
+          if (r.done) { if (done !== n) throw wrong(done); return; }
+          if (done + r.value.length > n) throw wrong(done + r.value.length);
+          buf.set(r.value, at + done); done += r.value.length; return pump();
+        });
+      }
+      return pump();
+    }
+    function joined(cache, V) {                        // the parts as they are kept, put together; the whole is verified the first time
+      var buf, off = 0, i = 0, P = partsOf(V);
+      try { buf = new Uint8Array(V.bytes); } catch (e) { return Promise.reject(err('browser', 'no room in memory for ' + V.bytes + ' bytes')); }
+      function next() {
+        if (i >= P.length) return Promise.resolve();
+        var p = P[i++], at = off; off += p.bytes;
+        return kept(cache, partKey(p)).then(function (res) {
+          if (!res) { have = ''; throw err('missing', 'a part is no longer kept on this device'); }
+          return readInto(res, buf, at, p.bytes).catch(function (e) { have = ''; return unkeep(partKey(p)).then(function () { throw e && e.code ? e : err('damaged', 'a kept part could not be read'); }); });
+        }).then(next);
+      }
+      return next().then(function () {
+        if (!V.sha256) return;
+        return kept(cache, wholeKey(V)).then(function (ok) {
+          if (ok) return;
+          return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
+            function (e) { return unkeepParts().then(function () { throw e; }); });      // every part passed and the whole does not: nothing of it can be trusted
+        });
+      }).then(function () { return buf.buffer; });
+    }
+    function room(need) {                              // is there room to keep it? Where the browser will not say, the download finds out
+      try {
+        if (navigator.storage && navigator.storage.estimate) return navigator.storage.estimate().then(function (e) {
+          if (e && num(e.quota) && num(e.usage) && e.quota - e.usage < need) throw err('room', 'room for ' + Math.max(0, e.quota - e.usage) + ' bytes, and ' + need + ' are needed');
+        }, function () {});
+      } catch (e) {}
+      return Promise.resolve();
+    }
+    // What of the larger model is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
+    // The manifest is asked for the first time this is called, and never before.
+    function survey(fresh) {
+      if (cannot || gone) return Promise.resolve('none');
+      if (!fresh && getP) return Promise.resolve('getting');
+      if (!fresh && have) return Promise.resolve(have);
+      if (!surveyP) surveyP = keepOpen().then(function (cache) {
+        return (M ? Promise.resolve() : manifestText(cache).then(adopt)).then(function () {
+          var P = partsOf(M.vision);
+          return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
+            var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
+            have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
+            if (have !== 'kept') staleParts(cache);
+            return have;
+          });
+        });
+      }).then(function (h) { surveyP = null; return h; }, function (e) {
+        surveyP = null;
+        if (e && e.code === 'absent') gone = true; else lastFail = ((e && e.code) || 'died') + (e && e.detail ? ': ' + e.detail : '');
+        return 'none';
+      });
+      return surveyP.then(function (h) { return h !== 'none' && getP ? 'getting' : h; });
+    }
+    // Fetch what is missing, one part after another, each verified and kept before the next is asked for; then start the encoder once, which
+    // verifies the whole and shows that it runs on this device. Stopped by halt(); a later call carries on from the parts already kept.
+    function get() {
+      if (cannot) return Promise.reject(err(cannot));
+      if (getP) return getP;
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null, store = null;
+      function halted() { return !!(ctl && ctl.signal.aborted); }
+      getCtl = ctl; getFail = ''; partGot = 0;
+      var p = survey(true).then(function (h) {
+        if (h === 'none') throw err(gone ? 'absent' : 'network', manifestUrl);
+        return keepOpen();
+      }).then(function (cache) {
+        if (!cache) throw err('keep', 'this browser gave no store to keep it in');
+        store = cache;
+        var P = partsOf(M.vision), i = 0;
+        function next() {
+          if (i >= P.length) return Promise.resolve();
+          var part = P[i++], key = partKey(part);
+          return kept(cache, key).then(function (hit) {
+            if (hit) return;                           // already here: not fetched again
+            if (halted()) throw err('stopped');
+            partGot = 0; notify();
+            return fetch(abs(part.url, base), { mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: ctl ? ctl.signal : undefined }).then(function (r) {
+              if (!r.ok) throw err(r.status === 404 ? 'missing' : 'network', part.url + ' ' + r.status);
+              return readAll(r, part.bytes, function (n) { partGot += n; notify(); });
+            }).then(function (b) {
+              if (b.byteLength !== part.bytes) throw err('damaged', part.url + ' is ' + b.byteLength + ' bytes, not ' + part.bytes);
+              return sha256(part.sha256)(b).then(function () {
+                return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
+                  throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
+                });
+              });
+            }).then(function () { keptBytes += part.bytes; partGot = 0; notify(); }, function (e) {
+              partGot = 0;
+              throw halted() ? err('stopped') : e && e.code ? e : err('network', part.url + ' ' + ((e && e.message) || ''));
+            });
+          }).then(next);
+        }
+        return room(Math.max(0, M.vision.bytes - keptBytes)).then(next);
+      }).then(function () {
+        have = 'kept'; staleParts(store); notify();
+        return ready();
+      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + M.vision.bytes); notify(); }, function (e) {
+        getP = null; getCtl = null;
+        if (!e || !e.code) e = err('died', e && e.message);
+        if (have !== 'kept') have = keptBytes ? 'partial' : 'absent';
+        getFail = e.code + (e.detail ? ': ' + e.detail : ''); diag('large-get', getFail.slice(0, 160)); notify();
+        throw e;
+      });
+      getP = p; p.catch(function () {});
+      return p;
+    }
+    function halt() { if (getCtl) try { getCtl.abort(); } catch (e) {} }
+    function rest() {                                  // nothing has needed the larger model for a minute: its worker, and the memory it holds, are let go
+      clearTimeout(idleTimer); idleTimer = 0;
+      if (!worker || state !== 'ready' || Object.keys(pending).length) return;
+      var w = worker; worker = null; w.onmessage = w.onerror = null; try { w.terminate(); } catch (e) {}
+      state = 'idle'; loadP = null; diag('large-rest', '');
+    }
+    function tire() { if (!big) return; clearTimeout(idleTimer); idleTimer = setTimeout(rest, idleMs); }
+    function forget() {                                // off this device: the parts, the rows and the table, and the worker
+      halt();
+      return (getP ? getP.catch(function () {}) : Promise.resolve()).then(function () {
+        var w = worker, p = pending; worker = null; pending = {}; clearTimeout(idleTimer);
+        if (w) { w.onmessage = w.onerror = null; try { w.terminate(); } catch (e) {} }
+        Object.keys(p).forEach(function (id) { clearTimeout(p[id].timer); p[id].rej(err('died', 'deleted')); });
+        state = cannot ? 'failed' : 'idle'; why = cannot; loadP = null;
+        return keepOpen();
+      }).then(function (cache) {
+        if (!cache || !base) return;
+        return cache.keys().then(function (keys) { return Promise.all(keys.map(function (req) { return req.url.split('?')[0].indexOf(base) === 0 ? cache.delete(req) : null; })); });
+      }).catch(function () {}).then(function () { have = M ? 'absent' : ''; keptBytes = 0; partGot = 0; getFail = ''; diag('large-deleted', ''); notify(); });
+    }
+
     function load() {
-      var t0 = performance.now(), cacheRef = null, v = '', base = abs(manifestUrl).replace(/[^\/]*$/, ''), fromKeep = { model: false };
+      var t0 = performance.now(), cacheRef = null, fromKeep = { model: false };
       state = 'loading'; why = ''; got = 0; total = 0;
       return keepOpen().then(function (cache) {
         cacheRef = cache;
-        // the manifest: the network first, so that a new model is noticed; the kept copy where there is no network
-        function keptOne(detail) {
-          return (cache ? cache.match(abs(manifestUrl)).catch(function () { return null; }) : Promise.resolve(null)).then(function (hit) { if (!hit) throw err('network', detail); return hit.text(); });
-        }
-        return fetch(manifestUrl, { cache: 'no-cache' }).then(function (r) {
-          if (r.status === 404) throw err('absent', manifestUrl);            // taken away on purpose, or never there
-          if (!r.ok) return keptOne(manifestUrl + ' ' + r.status);           // a server having a bad moment
-          return r.text().then(function (text) { if (cache) cache.put(abs(manifestUrl), new Response(text, { headers: { 'Content-Type': 'application/json' } })).catch(function () {}); return text; });
-        }, function () { return keptOne(manifestUrl); });
-      }).then(function (text) {
-        M = readManifest(text); v = fingerprint(text); cur = null;
-        var V = M.vision, nK = M.kinds.labels.length, nS = M.species ? M.species.count : 0, c = cacheRef;
-        function u(rel) { return withV(abs(rel, base), v); }
-        var modelUrl = u(V.url);
-        return (c ? c.match(modelUrl).catch(function () { return null; }) : Promise.resolve(null)).then(function (hit) {
+        if (big && M) return null;                     // the larger model's worker is started again and again; its manifest is read once
+        return manifestText(cache).then(adopt);
+      }).then(function () {
+        var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, nS = M.species ? M.species.count : 0, c = cacheRef;
+        var inParts = big || !!V.parts, modelUrl = inParts ? '' : u(V.url);
+        return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
             file(c, withV(abs(ORT.dir + ORT.wasm), ORT.v), ORT.wasmBytes),
-            file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
-            file(c, u(M.kinds.url), nK * M.width * 2),
+            inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
+            M.kinds ? file(c, u(M.kinds.url), nK * M.width * 2) : null,
             M.species ? file(c, u(M.species.url), nS * M.width * 2) : null,
             M.species ? file(c, u(M.species.table), 0) : null,
             M.species && M.species.bias_url ? file(c, u(M.species.bias_url), nS * 4) : null
@@ -193,24 +412,26 @@
         }).then(function (b) {
           cur = slotOf(M, M.species ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
           total = got;                                 // the downloads are over; what remains is starting the encoder
-          if (onProgress) onProgress();
+          notify();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
             wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS };
-          return startWorker(init, [b[0], b[1], b[2]].concat(b[3] ? [b[3]] : [])).catch(function (e) {
+          // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
+          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
-            if (e.code === 'damaged' && c) return c.delete(modelUrl).catch(function () {}).then(function () { throw e; });
+            if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;
           });
         });
       }).then(function () {
-        state = 'ready'; loadMs = performance.now() - t0; prune(cacheRef, base, v);
-        diag('pocket-ready', M.id + ' ' + Math.round(loadMs) + 'ms ' + (fromKeep.model ? 'kept' : 'fetched'));
+        state = 'ready'; loadMs = performance.now() - t0; if (!big) prune(cacheRef, ver);
+        tire();
+        diag(big ? 'large-ready' : 'pocket-ready', M.id + ' ' + Math.round(loadMs) + 'ms ' + (fromKeep.model ? 'kept' : 'fetched'));
       }, function (e) {
         if (!e || !e.code) e = err('died', e && e.message);
         if (state !== 'failed' || !why) { state = 'failed'; why = e.code; lastFail = e.code + (e.detail ? ': ' + e.detail : ''); }
         loadP = null;
-        diag('pocket-failed', lastFail.slice(0, 160));
+        diag(big ? 'large-failed' : 'pocket-failed', lastFail.slice(0, 160));
         throw e;
       });
     }
@@ -243,10 +464,14 @@
     // and tools/fusion/parity.py holds the two to the same answers; a change here is a change there.
     //   kd, sd: row . e for each kind row and each species row, e being the unit image vector. The rows are used as they are: a trained
     //   head's rows are weights, not unit vectors, and it adds a bias to each score.
+    //   A slot without a kinds head (the larger model): kd is not used, and a kind's score is its share of the species answer.
     function fuseWith(c, kd, sd, month) {
-      var f = c.f, labels = c.labels, table = c.table, n = labels.length, z = new Float64Array(n), i, p, q = {}, s = null, order = [], comb, kinds = [], species = [];
-      for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
-      p = softmax(z);
+      var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
+      if (c.head) {
+        z = new Float64Array(n);
+        for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
+        p = softmax(z);
+      }
       if (table && sd) {
         var pr = f.alpha_prior ? priorFor(c, month) : null, zs = new Float64Array(table.length);
         for (i = 0; i < zs.length; i++) zs[i] = f.t_species * sd[i] + (c.sb ? c.sb[i] : 0) + (pr ? f.alpha_prior * pr[i] : 0);
@@ -257,7 +482,11 @@
       }
       // a kind the species list can speak for is scored by both heads; one it has no rows for (nothing alive, a person) by the kinds alone
       function speaks(i) { return !!(s && c.has[labels[i]]); }
-      if (f.rule === 'mix') {
+      if (!c.head) {
+        if (!s) throw err('unfit', 'a slot without a kinds head was given no species scores');
+        comb = new Float64Array(n);
+        for (i = 0; i < n; i++) comb[i] = q[labels[i]] || 0;
+      } else if (f.rule === 'mix') {
         // mixing: the species head re-divides the share the kinds head gave to the kinds it can speak for, and moves at most 1 - w_kind of it
         var A = 0, tot = 0; comb = new Float64Array(n);
         for (i = 0; i < n; i++) if (speaks(i)) A += p[i];
@@ -269,11 +498,14 @@
         for (i = 0; i < n; i++) score[i] = speaks(i) ? f.w_kind * Math.log(Math.max(p[i], g)) + (1 - f.w_kind) * Math.log(Math.max(q[labels[i]] || 0, g)) : Math.log(Math.max(p[i], g));
         comb = softmax(score);
       }
-      for (i = 0; i < n; i++) kinds.push({ key: labels[i], p: comb[i], head: p[i], list: speaks(i) ? (q[labels[i]] || 0) : null });
+      for (i = 0; i < n; i++) kinds.push({ key: labels[i], p: comb[i], head: p ? p[i] : null, list: speaks(i) ? (q[labels[i]] || 0) : null });
       kinds.sort(function (a, b) { return b.p - a.p; });
-      var kind = kinds[0].key, named = null, offers = [];
+      // Not sure is an answer. Under fusion.kind_at no kind is asserted and no species named: the three likeliest kinds of living thing are
+      // offered instead (the species offers are worked out as ever). Without fusion.kind_at every answer is asserted, as before build 8.
+      var kind = kinds[0].key, named = null, offers = [], sure = !(num(f.kind_at) && kinds[0].p < f.kind_at), kindOffers = [];
+      if (!sure) kindOffers = kinds.filter(function (k) { return k.key !== 'none'; }).slice(0, 3).map(function (k) { return k.key; });
       if (species.length && kind !== 'none' && kind !== 'person') {
-        if (species[0].p >= f.name_at && species[0].kind === kind) named = species[0];
+        if (sure && species[0].p >= f.name_at && species[0].kind === kind) named = species[0];
         else {
           // the three likeliest are kept as offers. They are taken from the kind that won, so that a flower is not offered a turtle;
           // a manifest that sets fusion.offer_any_kind takes the three likeliest of any kind.
@@ -281,7 +513,7 @@
           if (three.reduce(function (a, r) { return a + r.p; }, 0) >= f.offer_at) offers = three;
         }
       }
-      return { kind: kind, kindP: kinds[0].p, kinds: kinds, species: species, named: named, offers: offers };
+      return { kind: kind, kindP: kinds[0].p, sure: sure, kinds: kinds, kindOffers: kindOffers, species: species, named: named, offers: offers };
     }
     // The photo's pixels for the encoder. The canvas the page shows was brought down to 1280 by the browser's own scaling, which differs
     // from one browser to the next; so a photo chosen as a file is read again at its full size where a canvas can hold it (16 million
@@ -299,50 +531,71 @@
       }).catch(shown);
     }
     function recognize(canvas, file) {
-      var tAsk = performance.now(), wasReady = state === 'ready', shot = pixels(canvas, file);   // read now: the canvas may show something else by the time the encoder is ready
+      var tAsk = performance.now(), wasReady = state === 'ready', shot = pixels(canvas, file), mine = ++asked;   // read now: the canvas may show something else by the time the encoder is ready
       shot.catch(function () {});
-      return ready().then(function () { return shot.catch(function (e) { throw err('photo', e && e.message); }); }).then(function (px) {
-        var tRun = performance.now();
-        return new Promise(function (res, rej) {
-          var id = nextId++;
-          pending[id] = { res: res, rej: rej, timer: setTimeout(function () { if (pending[id]) stop('slow', 'no answer in ' + watchMs + ' ms'); }, watchMs) };
-          worker.postMessage({ op: 'run', id: id, rgba: px.buf, w: px.w, h: px.h, wantPre: !!pocket.wantPre }, [px.buf]);
-        }).then(function (m) {
-          var t = performance.now(), month = new Date().getMonth(), local = pocket.local !== false && !!cur.table, r = fuseWith(cur, m.kinds, local ? m.species : null, month);
-          r.month = month; r.local = local;                // local: the species list of this slot's region was consulted
-          r.ms = { load: wasReady ? 0 : Math.round(tRun - tAsk), pre: Math.round(m.ms.pre), run: Math.round(m.ms.run), post: Math.round((m.ms.post + performance.now() - t) * 10) / 10 };
-          r.backend = info.backend; r.model = M.id; r.at = Date.now(); r.from = px.w + 'x' + px.h;
-          last = r; if (pocket.wantPre) { pocket.lastEmb = m.emb; pocket.lastPre = m.pre; pocket.lastDots = { kinds: m.kinds, species: m.species }; }
-          return r;
+      function run() {
+        if (big && mine !== asked) return Promise.reject(err('photo', 'a newer photo is waiting'));   // only the photo in hand is worth the seconds
+        clearTimeout(idleTimer);
+        return ready().then(function () { return shot.catch(function (e) { throw err('photo', e && e.message); }); }).then(function (px) {
+          var tRun = performance.now();
+          return new Promise(function (res, rej) {
+            var id = nextId++;
+            pending[id] = { res: res, rej: rej, timer: setTimeout(function () { if (pending[id]) stop('slow', 'no answer in ' + watchMs + ' ms'); }, watchMs) };
+            worker.postMessage({ op: 'run', id: id, rgba: px.buf, w: px.w, h: px.h, wantPre: !!api.wantPre }, [px.buf]);
+          }).then(function (m) {
+            // far from the species list's place: a slot with a kinds head leaves the list out; one without still takes the kind from it, with no month's weight
+            var t = performance.now(), month = new Date().getMonth(), away = pocket.local === false, local = !away && !!cur.table;
+            var r = fuseWith(cur, m.kinds, local || !cur.head ? m.species : null, local ? month : null);
+            r.month = month; r.local = local;                // local: the species list of this slot's region was consulted for a name
+            r.kindAt = num(cur.f.kind_at) ? cur.f.kind_at : null;
+            r.ms = { load: wasReady ? 0 : Math.round(tRun - tAsk), pre: Math.round(m.ms.pre), run: Math.round(m.ms.run), post: Math.round((m.ms.post + performance.now() - t) * 10) / 10 };
+            r.backend = info.backend; r.model = M.id; r.at = Date.now(); r.from = px.w + 'x' + px.h;
+            last = r; if (api.wantPre) { api.lastEmb = m.emb; api.lastPre = m.pre; api.lastDots = { kinds: m.kinds, species: m.species }; }
+            return r;
+          });
         });
-      });
+      }
+      if (!big) return run();
+      var p = queue.then(run, run); queue = p.catch(function () {}).then(tire); return p;     // one photo at a time through the larger model
     }
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
+      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the larger model.' : 'Getting the larger model: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
       if (state === 'loading' && total > got) return 'Getting the recognizer: ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB.';
       return 'Looking at what it is.';
     }
     function warm() {                                  // once the opening screen is up and the page has nothing else to do
-      if (cannot || (navigator.connection && navigator.connection.saveData)) return;
+      if (big || cannot || (navigator.connection && navigator.connection.saveData)) return;
       function go() { if (state === 'idle') ready().catch(function () {}); }
       function soon() { if (window.requestIdleCallback) requestIdleCallback(go, { timeout: 4000 }); else setTimeout(go, 1200); }
       if (document.readyState === 'complete') soon(); else window.addEventListener('load', soon);
     }
-    return {
+    api = {
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
       recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuseWith(cur, kd, sd, month); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
       place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
       listed: function () { return !!(cur && cur.table); },
       progress: function (fn) { onProgress = fn; },
-      offers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
-      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl }; },
+      // the larger model: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
+      survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },
+      has: function () { return getP ? 'getting' : have; },
+      broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
+      size: function () { return M ? { bytes: M.vision.bytes || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(M.vision.bytes || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
+      offers: [], kindOffers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
+      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl,
+        have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M && M.vision.bytes || 0, getFail: getFail }; },
       test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
+        idle: function (ms) { idleMs = ms; tire(); }, netWait: function (ms) { netWaitMs = ms; }, running: function () { return !!worker; },
         // the scoring with settings given by a check, through the same readers as a real slot (tools/fusion/parity.py)
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
         fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
     };
-  })();
+    return api;
+  }
+  var pocket = recognizer({ slot: (/[?&]rec=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') || [0, 'models/pocket'])[1] });
+  // The larger model's slot. A check on this machine may name another slot, or switch it off; a link to the public page may not.
+  var large = recognizer({ big: true, slot: ((onThisMachine ? /[?&]big=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') : null) || [0, 'models/naturalist'])[1] });
 
   // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
   // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
