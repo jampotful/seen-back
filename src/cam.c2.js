@@ -266,7 +266,7 @@
     } else { var pv = $('keepCv'); pv.width = k.canvas.width; pv.height = k.canvas.height; pv.getContext('2d').drawImage(k.canvas, 0, 0); }
     var canShare = false;
     try { canShare = !inViewer && !!navigator.canShare && navigator.canShare({ files: [new File([k.blob], k.name, { type: k.blob.type })] }); } catch (e) { canShare = false; }
-    show('keepShare', canShare); $('keepSave').className = canShare ? 'pill ghost' : 'pill';
+    show('keepShare', canShare); $('keepSave').className = canShare ? 'ico' : 'ico on';
     show('claim', false); show('record', false); show('info', false); openSheet('keep');
   }
   function saveKept() {

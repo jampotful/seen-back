@@ -430,7 +430,7 @@ async function meet(page, name) {
       r.notNow = { line: await svcLine(page), sent: fake.calls().length, choice: await page.evaluate(() => window.__seenBack.svc.choice()), named: (await st(page)).named.by };
       all('offer', r.offer.eyesAtOnce === 'insect' && r.offer.shown === 'Insect' && r.offer.line === 'A larger model on a server can try to name the species. Ask it?' && r.offer.sentBeforeYes === 0);
       all('sheet', r.sheet.title === 'Ask a larger model?' && r.sheet.sub === 'This one photo, made smaller, would be sent to a server run for this project, at 127.0.0.1:' + SVC_PORT + '. The month and the name of this region go with it. The photo is not kept there.'
-        && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Not now' && /About this build/.test(r.sheet.note) && !r.sheet.ticked);
+        && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Not now' && /under “About”/.test(r.sheet.note) && !r.sheet.ticked);
       all('notNow', r.notNow.line === '' && r.notNow.sent === 0 && r.notNow.choice === '' && r.notNow.named === 'page');
       // the next photo asks again. This time: yes, and do not ask again
       fake.set({ delay: 700 });
@@ -621,7 +621,7 @@ async function meet(page, name) {
       await page.locator('#bigAsk').uncheck(); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
       all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'Insect' && r.offer.line === 'A larger model can name the species on this ' + d + '. Get it?' && r.offer.partsAsked === 0);
       all('sheet', r.sheet.title === 'Get a larger model?' && r.sheet.sub === 'It names the species. About ' + MB + ' MB, downloaded once, kept on this ' + d + '. Photos stay here. It takes several seconds a photo on a computer. No phone has been timed yet.'
-        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /^It can be deleted under “About this build”\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
+        && r.sheet.net === '' && r.sheet.yes === 'Get it' && r.sheet.no === 'Not now' && r.sheet.never === 'Do not ask again' && /^It can be deleted under “About”\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
       all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
       all('never', r.never.choice === 'no' && r.never.line === '');
