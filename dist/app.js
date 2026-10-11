@@ -1631,6 +1631,7 @@
     if (S.animalPhoto) showStill(S.animalPhoto, false);
     setViewPrompt(key);
     go('naming'); showName();
+    if (!calm) later(hideName, 1500);              // the name has faded on the picture (half a second) before "Now your view." comes up
     later(function () { hideName(); go('askView'); }, calm ? 1400 : 2100);
   }
   function askName(sub) {
@@ -1907,7 +1908,7 @@
   // and, where it sees another kind of creature and is sure enough, an offer to change eyes (tappable). The eyes never change by themselves.
   var SVC_SAY = { offer: 'A larger model on a server can try to name the species. Ask it?', asking: 'Asking the larger model.', waking: 'The larger model is waking up, which can take a minute.', looking: 'Looking more closely.' };
   var svcTimer = 0, svcTap = null, askFirstT = 0, firstJob = null;
-  function renewName() { if ($('reveal').classList.contains('show')) showName(); }     // a finer name that arrives while the first is still large on the screen takes its place there too
+  function renewName() { if ($('reveal').classList.contains('show') && (S.screen === 'naming' || S.screen === 'animal') && !anySheet()) showName(); }     // a finer name that arrives while the first is still large on the picture takes its place there; later, the line on the picture says it
   function aAn(name) { return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name; }
   function paintSvc() {
     var v = S.svc;

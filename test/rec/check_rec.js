@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|nameover|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
 // "large" (the larger model a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
 // by itself (8788 unless BIG_PORT says otherwise) if nothing answers there.
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
@@ -33,7 +33,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -99,6 +99,20 @@ async function meet(page, name) {
   const byService = (page) => page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'service'; }, null, { timeout: 20000 });
   const recordRows = (page) => page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
   const typeName = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
+  // the big name over a screen that has text of its own: the largest opacity #reveal had, sampled every frame, while #askView or #askAnimal was in view
+  const watchOver = (page) => page.evaluate(() => { window.__over = 0; const q = (id) => document.getElementById(id), f = () => { if (!q('askView').hidden || !q('askAnimal').hidden) window.__over = Math.max(window.__over, +getComputedStyle(q('reveal')).opacity); requestAnimationFrame(f); }; requestAnimationFrame(f); });
+  const overNow = (page) => page.evaluate(() => window.__over);
+
+  if (want.includes('nameover')) await section('nameover', async () => {     // the big name fades on the picture, and is never drawn across "Now your view." or "Who did you meet?"
+    const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT), r = {}; await ready(page); await begin(page); await watchOver(page);
+    r.heron = (await meet(page, 'heron.png')).eyes; await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(900);
+    r.overAskView = await overNow(page);
+    await page.locator('#backAskView').tap(); await page.waitForTimeout(150); await page.evaluate(() => { window.__over = 0; });
+    r.stripes = (await meet(page, 'stripes.png')).eyes; await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(900);
+    r.overAgain = await overNow(page); r.errors = errors;
+    fs.mkdirSync(path.join(here, 'shots'), { recursive: true }); await page.screenshot({ path: path.join(here, 'shots', 'nameover.png'), scale: 'css' }).catch(() => {});
+    done('nameover', r, r.heron === 'wader' && r.stripes === 'insect' && r.overAskView < 0.05 && r.overAgain < 0.05 && !errors.length); await ctx.close();
+  });
 
   if (want.includes('flow')) await section('flow', async () => {     // a photo chosen through the file input, through to the name; each tier of naming; the correction sheet
     const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT);
@@ -625,11 +639,11 @@ async function meet(page, name) {
       all('resumed', r.afterReload.choice === 'yes' && r.resumed.parts.filter((x) => x === 'part00').length === 1 && r.resumed.parts.filter((x) => x === 'part01').length === 2 && r.resumed.parts.filter((x) => x === 'part02').length === 1
         && r.resumed.kept.filter((k) => /^part\/SHA/.test(k)).length === 3 && r.resumed.kept.indexOf('whole/SHA') >= 0 && fin.state === 'ready' && fin.choice === 'kept' && r.resumed.kept_bytes && !errors.length);
       // ---- on the device now: every photo is looked at in the background, and nothing is asked of any server
-      await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page);
+      await ctl('reset=1'); await bctl('reset=1'); await begin(page); await svcWatch(page); await watchOver(page);
       const s1 = await meet(page, 'stripes.png'); await byLarge(page); await page.waitForTimeout(150);
       r.named = { atOnce: s1.eyes + '|' + s1.last.kind + '|' + (s1.last.top && s1.last.top[0]) + '|' + s1.last.offers.length, small: await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return l.kind + '|' + (l.named ? l.named.en : 'no name') + '|' + l.offers.length; }), after: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), line: await svcLine(page), record: await recordRows(page),
         overlay: await page.evaluate(() => (document.getElementById('reveal').classList.contains('show') ? document.getElementById('rvName').textContent : '(gone)')), last: (await bigNow(page)).last, reference: E('stripes.png') };
-      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {});
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(700); await page.screenshot({ path: path.join(here, 'shots', 'large-said.png'), scale: 'css' }).catch(() => {}); r.named.overSheet = await overNow(page);
       await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 12000 });
       r.named.pill = await text(page, 'whoName'); await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); r.named.infoSub = await text(page, 'infoSub');
       await page.locator('#infoChange').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
@@ -640,7 +654,7 @@ async function meet(page, name) {
       await page.locator('#about summary').tap(); await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await page.locator('#recordClose').tap();
-      all('named', s1.eyes === 'insect' && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
+      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely. / The larger model says Monarch.'
         && r.named.line === 'The larger model says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
         && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by a larger model, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
         && r.named.offers.join() === E('stripes.png').five.join() && /^Monarch \| Danaus plexippus .* named on this device by a larger model$/.test(r.named.rows[0]));
