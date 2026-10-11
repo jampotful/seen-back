@@ -10,7 +10,7 @@ step() { echo; echo "=== $(date -u +%T) $*"; }
 PART="${PART:-chromium}"; PW=/tmp/pw; PWV=1.56.0
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
-step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version
+step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version; lscpu | grep -E "Model name|Flags" | sed -E "s/(Flags:).*/\1 $(grep -o -w -E "avx2|avx512f|avx512_vnni|avx_vnni|avx512bw" /proc/cpuinfo | sort -u | tr "\n" " ")/"
 step "build"; python3 -I build.py && node --check dist/app.js && echo "build ok"
 step "playwright $PWV: $BROWSERS"
 mkdir -p "$PW" && (cd "$PW" && npm init -y >/dev/null && npm install --no-audit --no-fund "playwright@$PWV" 2>&1 | tail -1)
