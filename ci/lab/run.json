@@ -1,16 +1,15 @@
 {
- "about": "Species label sets from pub/data-alachua's species.json for every model with a text tower; exports redone with two int8 candidates; the FastViT student's image stage on the stand-in.",
- "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32", "clip-b32", "bioclip-b16", "bioclip2-l14", "bioclip25-h14", "bioclip25-mobile-fastvit", "siglip2-b16", "mobileclip2-s0"],
+ "about": "Image vectors over the full evaluation manifest (pub/data-alachua eval/alachua-2025) for the smaller models; pocket candidates re-exported in the same job so that images-onnx-int8 uses the file published with them.",
+ "models": ["tinyclip-8m-16", "tinyclip-40m-32", "tinyclip-39m-16", "tinyclip-61m-32", "bioclip-b16", "clip-b32", "siglip2-b16", "mobileclip2-s0", "bioclip25-mobile-fastvit"],
  "stages": {
-  "tinyclip-8m-16": ["text-species", "export"],
-  "tinyclip-40m-32": ["text-species", "export"],
-  "tinyclip-39m-16": ["text-species", "export"],
-  "tinyclip-61m-32": ["text-species", "export"],
-  "bioclip-b16": ["text-species", "export"],
-  "bioclip25-mobile-fastvit": ["images"],
-  "*": ["text-species"]
+  "tinyclip-8m-16": ["export", "images", "images-onnx-int8"],
+  "tinyclip-40m-32": ["export", "images", "images-onnx-int8"],
+  "tinyclip-39m-16": ["export", "images", "images-onnx-int8"],
+  "tinyclip-61m-32": ["export", "images", "images-onnx-int8"],
+  "bioclip-b16": ["export", "images", "images-onnx-int8"],
+  "*": ["images"]
  },
- "data": "auto",
- "shards": {},
- "max_parallel": 10
+ "data": "pub/data-alachua",
+ "shards": {"siglip2-b16": 2},
+ "max_parallel": 4
 }
