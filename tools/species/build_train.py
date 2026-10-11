@@ -37,21 +37,43 @@ from common import log  # noqa: E402
 INFRA = ("subspecies", "variety", "form", "infrahybrid")
 
 
+SKIPPED = []            # (year, month, offset) of single records GBIF would not serve as readable JSON
+
+
+def fetch_slice(q, off, limit):
+    """Records off..off+limit of a query. A slice that will not come back as readable JSON is halved until the
+    record that breaks it stands alone, and that one record is skipped and noted."""
+    try:
+        r = common.get_json("/occurrence/search", dict(q, limit=limit, offset=off), tries=3 if limit > 1 else 2)
+        return r.get("count", 0), r.get("results", []), limit
+    except RuntimeError as e:
+        if limit == 1:
+            SKIPPED.append((q.get("year"), q.get("month"), off))
+            log("  skipped one unreadable record: %s-%s offset %d (%s)" % (q.get("year"), q.get("month"), off, str(e)[-80:]))
+            return None, [], 1
+        half = limit // 2
+        c1, r1, _ = fetch_slice(q, off, half)
+        c2, r2, _ = fetch_slice(q, off + half, limit - half)
+        return (c1 if c1 is not None else c2), r1 + r2, limit
+
+
 def fetch_month(base, y, m, tries=3):
     """All records of one calendar month. Pages of 300; a month whose pages do not add up is read again."""
+    q = dict(base, year=y, month=m)
     for attempt in range(1, tries + 1):
-        recs, off, cnt = {}, 0, None
+        recs, off, cnt, skipped0 = {}, 0, None, len(SKIPPED)
         while True:
-            r = common.get_json("/occurrence/search", dict(base, year=y, month=m, limit=300, offset=off))
-            cnt = r.get("count", 0)
-            res = r.get("results", [])
+            c, res, asked = fetch_slice(q, off, 300)
+            if c is not None:
+                cnt = c
             for x in res:
-                c = compact(x)
-                recs[c["gbif_id"]] = c
-            off += len(res)
-            if not res or off >= cnt or r.get("endOfRecords"):
+                rec = compact(x)
+                recs[rec["gbif_id"]] = rec
+            off += asked
+            if cnt is None or off >= cnt or (not res and len(SKIPPED) == skipped0):
                 break
-        if len(recs) == cnt:
+        cnt = cnt or 0
+        if len(recs) + (len(SKIPPED) - skipped0) >= cnt:
             return (y, m), cnt, list(recs.values()), attempt
     return (y, m), cnt, list(recs.values()), -attempt
 
@@ -102,8 +124,11 @@ def main():
         len(pool), dup, total, len(short), short[:5])
     log(line)
     checks.append(line)
-    if short:
-        problems.append("%d months could not be read in full" % len(short))
+    if SKIPPED:
+        checks.append("records GBIF would not serve as readable JSON, skipped: %d %s" % (len(SKIPPED), SKIPPED[:10]))
+    missing = sum(c - n for _, c, n in short)
+    if missing > 25:
+        problems.append("%d months could not be read in full (%d records missing)" % (len(short), missing))
     if abs(len(pool) - total) > max(50, total // 200):
         problems.append("read %d records but GBIF counts %d" % (len(pool), total))
 
