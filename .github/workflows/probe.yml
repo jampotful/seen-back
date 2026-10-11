@@ -1,11 +1,14 @@
 name: probe
 # What a build machine can reach, and what it is made of. Results come back on the `ci` branch.
+# Start it by pushing any commit to a branch named run/probe/<anything>.
 on:
   push:
-    branches: [main]
-    paths: ['ci/probe.trigger', '.github/workflows/probe.yml']
+    branches: ['run/probe/**']
 permissions:
   contents: write
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   probe:
     strategy:
@@ -28,15 +31,15 @@ jobs:
             (xcodebuild -version 2>/dev/null | tr '\n' ' '; echo) || true
             (xcrun simctl list devices available 2>/dev/null | grep -i -E "iphone" | head -8) || true
             for u in https://huggingface.co/api/models/imageomics/bioclip-2 \
-                     https://huggingface.co/Xenova/mobileclip_s0/resolve/main/config.json \
                      "https://api.gbif.org/v1/occurrence/search?datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&limit=0" \
-                     https://inaturalist-open-data.s3.amazonaws.com/metadata/README.md \
-                     https://cdn.jsdelivr.net/npm/onnxruntime-web/package.json \
-                     https://jampotful.github.io/seen-back/ \
-                     https://jampotful.github.io/seen-back/sw.js; do
-              printf "%s -> " "$u"; curl -s -L -o /dev/null -m 25 -w "%{http_code} %{size_download}B %{time_total}s\n" "$u"
+                     https://inaturalist-open-data.s3.amazonaws.com/photos/1/medium.jpg \
+                     https://www.inaturalist.org/taxa/inaturalist-taxonomy.dwca.zip \
+                     https://download.pytorch.org/whl/cpu/torch/ \
+                     https://jampotful.github.io/seen-back/; do
+              printf "%s -> " "$u"; curl -s -L -o /dev/null -m 25 -r 0-2047 -w "%{http_code} %{size_download}B %{time_total}s\n" "$u"
             done
             echo "secret HF_TOKEN present: ${HF_TOKEN:+yes}"
+            if [ -n "${HF_TOKEN:-}" ]; then python3 ci/hf_check.py; fi
           } > out/probe.txt 2>&1
           cat out/probe.txt
         env:
