@@ -147,7 +147,7 @@ async function meet(page, name) {
     r.person = await meet(page, 'portrait.jpg');
     await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
     r.wall = await meet(page, 'wall.png');                       // nothing alive
-    await page.locator('#claimBack').tap(); await page.waitForTimeout(200);
+    await page.locator('#noticeOk').tap(); await page.waitForTimeout(200);
     // the sheet behind the name says who recognized it; the list of meetings too
     r.heron2 = await meet(page, 'heron.png'); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
     await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg'));
@@ -168,7 +168,7 @@ async function meet(page, name) {
       && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'a human'
       && !r.wall.claim && !r.wall.eyes && r.wall.notice === 'We can’t find a creature in your photo. Try again.'
       && r.infoSub === 'Ardea herodias' && r.notRightIsThere
-      && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
+      && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| /.test(x) && !/named by/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
   });
@@ -432,7 +432,7 @@ async function meet(page, name) {
       await page.locator('#askNo').tap(); await page.waitForTimeout(300);
       r.notNow = { line: await svcLine(page), sent: fake.calls().length, choice: await page.evaluate(() => window.__seenBack.svc.choice()), named: (await st(page)).named.by };
       all('offer', r.offer.eyesAtOnce === 'insect' && r.offer.shown === 'insect' && r.offer.line === 'The full database on a server can try to name the species. Ask it?' && r.offer.sentBeforeYes === 0);
-      all('sheet', r.sheet.title === 'Ask the full database?' && r.sheet.sub === 'This one photo, made smaller, would be sent to a server run for this project, at 127.0.0.1:' + SVC_PORT + '. The month and the name of this region go with it. The photo is not kept there.'
+      all('sheet', r.sheet.title === 'Ask the full database?' && r.sheet.sub === 'This photo will be temporarily sent to this project’s server, at 127.0.0.1:' + SVC_PORT + '.'
         && r.sheet.tick === 'Do not ask again' && r.sheet.yes === 'Ask it' && r.sheet.no === 'Later' && /under About/.test(r.sheet.note) && !r.sheet.ticked);
       all('notNow', r.notNow.line === '' && r.notNow.sent === 0 && r.notNow.choice === '' && r.notNow.named === 'page');
       // the next photo asks again. This time: yes, and do not ask again
@@ -538,7 +538,7 @@ async function meet(page, name) {
     }
     { // from the sheet that asks for a name there is a way to the full database: consent first, then its answer is taken as the name
       fake.reset(); fake.set({ answer: 'egret', delay: 300 }); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page);
-      const s = await meet(page, 'odd.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
+      const s = await meet(page, 'wall.png'); await page.evaluate(() => { document.getElementById('noticeOk').click(); window.__seenBack.openClaim(''); }); await page.waitForSelector('#claim', { state: 'visible', timeout: 4000 }); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
       r.fromSheet = { sub: await text(page, 'claimSub'), link: await text(page, 'claimAsk'), sentBefore: fake.calls().length };
       await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); r.fromSheet.askSub = await text(page, 'askSub'); r.fromSheet.sentAtSheet = fake.calls().length;
       await page.locator('#askNo').tap(); await page.waitForSelector('#claim', { state: 'visible', timeout: 4000 }); r.fromSheet.afterNo = (await st(page)).claim; r.fromSheet.sentAfterNo = fake.calls().length;
@@ -546,11 +546,11 @@ async function meet(page, name) {
       await byService(page); await page.waitForTimeout(200);
       const x = await st(page); r.fromSheet.after = x.eyes + '|' + x.named.common + '|' + x.named.by; r.fromSheet.record = await recordRows(page); r.fromSheet.sent = fake.calls().length;
       // it cannot name it: back to the sheet, with its guesses as offers, and no second link
-      fake.set({ answer: 'faint' }); const s2 = await meet(page, 'odd.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
+      fake.set({ answer: 'faint' }); const s2 = await meet(page, 'wall.png'); await page.evaluate(() => { document.getElementById('noticeOk').click(); window.__seenBack.openClaim(''); }); await page.waitForSelector('#claim', { state: 'visible', timeout: 4000 }); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
       await page.waitForFunction(() => /can’t ID this photo/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 15000 }); await page.waitForTimeout(400);
       r.fromSheet.faint = { sub: await text(page, 'claimSub'), offers: await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)), linkAgain: await page.locator('#claimAskRow').isVisible(), eyes: (await st(page)).eyes };
       r.fromSheet.errors = errors;
-      all('fromSheet', /^We’re not sure what kind of creature that is\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /temporarily sent to this project’s server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
+      all('fromSheet', r.fromSheet.sub === '' && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /temporarily sent to this project’s server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
         && r.fromSheet.after === 'wader|Great egret|service' && r.fromSheet.record[0] === 'Great egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
         && r.fromSheet.faint.sub === 'The full database can’t ID this photo.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
       await ctx.close();
@@ -715,7 +715,7 @@ async function meet(page, name) {
       r.del.after = { kept: await keptBig(page), state: await text(page, 'bigState'), choice: (await bigNow(page)).choice, running: (await bigNow(page)).running, ticked: await page.locator('#bigAsk').isChecked() };
       await shut(page); const s8 = await meet(page, 'heron.png'); await page.waitForTimeout(700); r.del.next = { by: (await st(page)).named.by, line: await svcLine(page), parts: (await partsAsked()).length };
       all('delete', r.del.asks === 'Delete the full database? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
-        && r.del.after.kept.length === 0 && /^You can download the full database of species to your /.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
+        && r.del.after.kept.length === 0 && /^The full database of species is free to download/.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
       await ctx.close();
     }
     { // stopped mid-way: what arrived is kept, the line says where it stands, and "Get the rest" carries on without fetching a kept part again
@@ -732,7 +732,7 @@ async function meet(page, name) {
       await bctl('reset=1'); await page.locator('#bigYes').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);
       r.stop.rest = { parts: await partsAsked(), named: (await st(page)).named.common, errors };
       all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Downloading the full database… \d+ of \d+ MB$/.test(r.stop.net)
-        && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
+        && x.have === 'partial' && x.choice === '' && /^The download has been stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
         && /^The full database is partly downloaded: \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB have been downloaded\.$/.test(r.stop.sheet.net)
         && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
       // a larger slot may carry a kinds head too (the same parts, kept already): it names as before, and it can say that nothing alive is there
@@ -770,7 +770,7 @@ async function meet(page, name) {
     { // the browser says there is no room: nothing is fetched, and there is nothing to try again
       await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, Q); await ready(page); await begin(page);
       await page.evaluate(() => { navigator.storage.estimate = () => Promise.resolve({ quota: 1000, usage: 900 }); });
-      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /not enough room/, 15000); const b = await bigNow(page);
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /not enough storage/, 15000); const b = await bigNow(page);
       r.failures.noRoom = { line: await svcLine(page), tappable: await page.evaluate(() => !document.getElementById('svcView').disabled), have: b.have, choice: b.choice, parts: (await partsAsked()).length };
       all('noRoom', r.failures.noRoom.line === 'There is not enough storage on this device for the full database.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
     }
@@ -960,8 +960,8 @@ async function meet(page, name) {
       if (name === 'full') { await o.page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await o.page.waitForTimeout(150); await o.page.screenshot({ path: path.join(here, 'shots', 'about-fitted.png'), scale: 'css' }).catch(() => {}); }
       await o.ctx.close();
     }
-    const base = 'This app identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
-    done('about', r, /^v1\.\d+\.$/.test(r.fitted.none) && r.fitted.full === r.fitted.none + base
+    const base = 'Regards identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
+    done('about', r, /^v1\.\d+$/.test(r.fitted.none) && r.fitted.full === r.fitted.none + base
       && r.fitted.bare === r.fitted.none + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
       && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
