@@ -24,9 +24,9 @@ the licence rule `nc` (docs/CONTRACTS.md: CC0, public domain, CC BY, CC BY-NC), 
 manifests and a summary. No names of people are written; an observation's address leads to its observer.
 
 Usage:
-  python3 -I tools/world/select.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
+  python3 -I tools/world/choose.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
       --out work/ranked.tsv --uuids work/uuids.txt
-  python3 -I tools/world/select.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
+  python3 -I tools/world/choose.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
       --counts work/counts.tsv --out stage/world
 """
 import argparse
@@ -270,7 +270,7 @@ def finish(args):
     if args.counts and os.path.exists(args.counts):
         for v in read_rows(args.counts, ["group", "continent", "period", "n"]):
             counts[v["group"]][(v["continent"], v["period"])] = int(v["n"])
-    L = ["# World photos", "", "Made by `tools/world/select.py` from iNaturalist's open-data snapshot (%s). Seed `%s`." % (args.snapshot or "date not given", SEED), ""]
+    L = ["# World photos", "", "Made by `tools/world/choose.py` from iNaturalist's open-data snapshot (%s). Seed `%s`." % (args.snapshot or "date not given", SEED), ""]
     L.append("Sets: fit up to %d a group (dated through 2024), tune and test %d a group each (2025 on), casual up to %d a group, and %d research-grade photos a continent from 2025 on for the full database's world test. Licence rule `nc`: %s." % (SIZES["fit"], SIZES["tune"], SIZES["casual"], SPECIES_TEST, ", ".join(sorted(ALLOWED))))
     L.append("")
     L.append("| Group | fit | tune | test | casual | research-grade records, all time | species in fit | orders in fit | continents in fit |")
