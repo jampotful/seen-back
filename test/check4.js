@@ -90,15 +90,21 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
 
   if (mode === 'lex') {
     const { ctx, page } = await open(browser, {});
-    const cases = { 'cat': 'cat', 'my kitten': 'cat', 'bobcat': 'cat', 'catbird': 'bird', 'catfish': 'other', 'fox squirrel': 'squirrel', 'red fox': 'dog', 'foxglove': '', 'dogwood': 'plant',
+    const cases = { 'cat': 'cat', 'my kitten': 'cat', 'bobcat': 'cat', 'catbird': 'bird', 'catfish': 'fish', 'fox squirrel': 'squirrel', 'red fox': 'dog', 'foxglove': '', 'dogwood': 'plant',
       'rat snake': 'reptile', 'squirrel treefrog': 'frog', 'crane fly': 'insect', 'sandhill crane': 'wader', 'turkey vulture': 'bird', 'black vulture': 'bird', 'red-shouldered hawk': 'hawk', 'wild turkey': 'wader', 'wood stork': 'wader', 'wood duck': 'bird',
       'great blue heron': 'wader', 'honeybee': 'bee', 'bumblebees': 'bee', 'gulf fritillary': 'insect', 'dragonfly': 'insect', 'tufted titmouse': 'bird', 'mockingbird': 'bird', 'swallow-tailed kite': 'hawk',
       'tiger swallowtail': 'insect', 'american alligator': 'alligator', 'green anole': 'reptile', 'southern toad': 'frog', 'white-tailed deer': 'deer', 'marsh rabbit': 'rabbit', 'spanish moss': 'plant',
-      'beautyberry': 'plant', 'live oak': 'plant', 'wolf spider': 'other', 'armadillo': 'other', 'plant': 'plant', 'ant': 'insect', 'a person': 'person', 'limpkin': 'wader', 'barred owl': 'bird', 'walkingstick': 'insect', 'elephant': '', 'biscuit': '', 'biscuit, a cat': 'cat', 'my dog rex': 'dog' };
+      'beautyberry': 'plant', 'live oak': 'plant', 'wolf spider': 'spider', 'armadillo': 'mammal', 'plant': 'plant', 'ant': 'insect', 'a person': 'person', 'limpkin': 'wader', 'barred owl': 'bird', 'walkingstick': 'insect', 'elephant': 'mammal', 'biscuit': '', 'biscuit, a cat': 'cat', 'my dog rex': 'dog',
+      // the groups with no view yet (build 21), and names whose last word decides
+      'flying fox': 'flyingfox', 'fruit bat': 'flyingfox', 'big brown bat': 'bat', 'sea lion': 'whale', 'manatee': 'whale', 'jellyfish': 'sealife', 'starfish': 'sealife', 'crayfish': 'crab', 'pill bug': 'crab',
+      'water bear': 'other', 'mites': 'other', 'slime mold': 'slime', 'jumping spider': 'jumper', 'camel spider': 'scorpion', 'seahorse': 'fish', 'octopus': 'cephalopod', 'cuttlefish': 'cephalopod', 'stingray': 'shark',
+      'earthworm': 'worm', 'millipede': 'worm', 'garden snail': 'snail', 'red eft': 'salamander', 'deer tick': 'tick', 'mushroom': 'fungus', 'turkey tail': 'fungus', 'chicken of the woods': 'fungus', 'raccoon': 'mammal', 'spider monkey': 'primate',
+      'giraffe': 'deer', 'penguin': 'bird', 'fish crow': 'bird', 'american herring gull': 'bird', 'snail kite': 'hawk', 'potter wasp': 'bee', 'velvet ant': 'bee', 'oakworm moth': 'insect', 'inchworm': 'insect', 'eastern pondhawk': 'insect',
+      'zebra longwing': 'insect', 'cricket frog': 'frog', 'butterfly weed': 'plant', 'cat’s-ear': 'plant', 'baby deer': 'deer', 'baby': 'person' };
     const got = await page.evaluate(c => Object.keys(c).filter(k => window.__seenBack.kindOfName(k) !== c[k]).map(k => k + ' -> ' + window.__seenBack.kindOfName(k) + ' (wanted ' + c[k] + ')'), cases);
-    // the sheet "Now your view." says how the view returns, in plain English for every kind (for 'other' it once read "as this one may take it in")
-    const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewH').textContent + '|' + document.getElementById('askViewText').textContent]; }));
-    view.forEach(([k, t]) => { if (!/^View the world as [^.|]+\.\|$/.test(t) || / as this one\./.test(t) || (k === 'other' && t !== 'View the world as this living thing.|')) got.push('view prompt for ' + k + ': ' + t); });
+    // the sheet "Now your view." says how the view returns, in plain English for every kind with a view ('other' has had none since build 19, so its sheet is never shown)
+    const view = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person' && k !== 'other').map((k) => { window.__seenBack.setViewPrompt(k); return [k, document.getElementById('askViewH').textContent + '|' + document.getElementById('askViewText').textContent]; }));
+    view.forEach(([k, t]) => { if (!/^View the world as [^.|]+\.\|$/.test(t) || / as this one\./.test(t)) got.push('view prompt for ' + k + ': ' + t); });
     out.lex = { tried: Object.keys(cases).length + view.length, wrong: got }; await ctx.close();
   }
 

@@ -64,6 +64,12 @@ To avoid collisions, each area of work owns its files. Change another area's fil
 
 New World vultures (Cathartiformes) go to `bird`, because the `hawk` model draws sight sharper than a person's and that is not established for vultures.
 
+### The nineteen groups inside `other` (build 21)
+
+Since build 21 the page knows nineteen groups that have no view yet, listed with the names it shows in `GROUPS` in `src/cam.a.js`: `fungus`, `slime`, `spider`, `jumper`, `fish`, `shark`, `snail`, `sealife`, `crab`, `salamander`, `worm`, `scorpion`, `tick`, `mammal`, `primate`, `whale`, `bat`, `flyingfox`, `cephalopod`. What each holds is set out in `docs/COVERAGE.md`. A photo or a typed name in one of them gets the notice for a creature with no view, which names the group, and no encounter is kept; a group moves into `EYES` when its view is drawn from its sheet (`docs/views/sheets/`). For now only the word table for typed names reaches them. `tools/species/eyes.py` and the pocket model's group head still give `other`, until the head fitted on world photos ships with the table above extended to the nineteen.
+
+A typed name is matched by the word table in `src/cam.r.js`. The word of the table that ends last in the name decides, since in most names of creatures the last word says what the creature is ("fish crow", "spider monkey"); where two end at the same letter the longer decides ("sea lion" over "lion").
+
 ## Data formats
 
 ### Species list: `data/regions/<region>/species.json`

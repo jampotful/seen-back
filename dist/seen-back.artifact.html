@@ -416,7 +416,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '20';
+  var BUILD = '21';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -516,6 +516,14 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       ['m', 'Same eyes', 'That’s a human. You already see the world as one.']] }
   };
   var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other'];
+  // Groups the app can name and cannot yet view the world as (docs/COVERAGE.md, decided by the owner on 12 October 2026).
+  // A photo or a typed name in one of them gets the notice that Regards can't view the world as that creature yet, and no
+  // encounter is kept. A group moves into EYES when its view is drawn from its sheet (docs/views/sheets/).
+  var GROUPS = { fungus: 'a fungus', slime: 'a slime mould', spider: 'a spider', jumper: 'a jumping spider', fish: 'a fish', shark: 'a shark or ray',
+    snail: 'a snail or slug', sealife: 'a sea creature', crab: 'a crustacean', salamander: 'a salamander or newt', worm: 'a worm, millipede or centipede',
+    scorpion: 'a scorpion or harvestman', tick: 'a tick', mammal: 'a mammal', primate: 'a monkey or ape', whale: 'a whale, dolphin or seal',
+    bat: 'a bat', flyingfox: 'a flying fox', cephalopod: 'an octopus or squid' };
+  function noView(key) { return key === 'other' || (!!GROUPS[key] && !EYES[key]); }
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
@@ -849,7 +857,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       return keep ? w : w.toLowerCase();
     });
   }
-  function handName(key) { return key === 'other' ? 'something alive' : EYES[key].who.replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
+  function handName(key) { return key === 'other' ? 'something alive' : (EYES[key] ? EYES[key].who : GROUPS[key] || 'something alive').replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
   function later(fn, ms) { var seq = S.seq; setTimeout(function () { if (seq === S.seq) fn(); }, ms); }
@@ -1036,32 +1044,88 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   }
 
   // ---------- a name said by the person, matched to a kind of eye
-  // Used only where nothing can look at the photo, or to correct a name that came out wrong. First match wins,
-  // so the order settles "fox squirrel", "rat snake", "crane fly" and "turkey vulture". Vultures are among the other birds:
-  // the hawk's sharper sight is not established for them.
+  // Used only where nothing can look at the photo, or to correct a name that came out wrong. In most names of creatures the
+  // last word says what the creature is ("fox squirrel", "rat snake", "crane fly", "turkey vulture", "fish crow", "oakworm
+  // moth"), so the word of the table that ends last in the name decides. Where two end at the same letter the longer decides
+  // ("sea lion" over "lion", "silverfish" over "fish"), then the entry higher in the table. Vultures are among the other birds:
+  // the hawk's sharper sight is not established for them. The groups with no view yet are in GROUPS in cam.a.js.
+  // Each word is written out whole, with no group of three or more choices inside it: lexWords() below reads the table for the
+  // words a slip of the keys is matched against.
   var LEX = [
-    ['person', /\b(person|people|humans?|man|woman|men|women|boy|girl|child|children|kid|baby|me|myself|selfie)\b/],
-    ['other', /(spiders?|fish(es)?|snails?|slugs?|\bworms?|earthworms?|\bbats?|crabs?|crayfish|shrimps?|mushrooms?|fung(us|i)|lichens?|raccoons?|opossums?|possums?|armadillos?|\bbears?|otters?|manatees?|\bpigs?|\bhogs?|monkeys?|millipedes?|centipedes?|scorpions?|\bticks?|\bmites?)\b/],
-    ['bee', /(bees?|wasps?|hornets?|yellowjackets?)\b/],
-    ['insect', /(butterfl(y|ies)|\bmoths?|beetles?|fl(y|ies)|\bants?|crickets?|cicadas?|mantis|mantids?|\bbugs?|ladybugs?|ladybirds?|lovebugs?|skippers?|monarchs?|fritillar(y|ies)|swallowtails?|longwings?|buckeyes?|katydids?|roach(es)?|weevils?|aphids?|caterpillars?|mosquito(es)?|gnats?|termites?|walkingsticks?|earwigs?|hoppers?|insects?)\b/],
-    ['frog', /(frogs?|toads?|peepers?)\b/],
-    ['alligator', /\b(alligators?|gators?|crocodiles?|crocs?|caimans?)\b/],
-    ['reptile', /(lizards?|anoles?|geckos?|skinks?|snakes?|\bracers?|turtles?|tortoises?|sliders?|cooters?|softshells?|iguanas?|reptiles?|cottonmouths?|moccasins?|copperheads?|pythons?)\b/],
-    ['squirrel', /(squirrels?|chipmunks?|\brats?|\bmice|\bmouse|\bvoles?|gophers?)\b/],
+    ['person', /\b(person|people|humans?|man|woman|men|women|boy|girl|child|children|kids?|bab(y|ies)|me|myself|selfie)\b/],
+    // names whose last word belongs to another kind, or names that end in no word of the table
+    ['other', /(\bmites?|chiggers?|tardigrades?|water ?bears?|moss ?piglets?|rotifers?|velvet ?worms?|amoebas?|bacteria|microbes?|plankton)\b/],
+    ['sealife', /(man[ -]?o'?[ -]?war|sea ?lil(y|ies)|sea ?wasps?|sea ?pens?|shipworms?)\b/],
+    ['fungus', /(chicken[ -]?of[ -]?the[ -]?woods|hen[ -]?of[ -]?the[ -]?woods|old[ -]?man[ -]?of[ -]?the[ -]?woods|turkey[ -]?tails?|deer ?moss|reindeer ?moss|dead ?man's ?fingers?|dead ?man's ?foot|jack-?o'?-?lanterns?|destroying ?angels?|shaggy ?manes?|witch's ?butter|slippery ?jacks?|slippery ?jills?|sulphur ?shel(f|ves)|sulfur ?shel(f|ves))\b/],
+    ['slime', /(slime ?mou?lds?|\bslimes?|dog ?vomit|wolf's ?milk)\b/],
+    ['crab', /(sea ?spiders?|water ?fleas?|pill[ -]?bugs?|sow[ -]?bugs?)\b/],
+    ['snail', /(sea ?hares?|sea ?butterfl(y|ies)|sea ?angels?)\b/],
+    ['jumper', /(jumping ?spiders?|zebra ?spiders?|peacock ?spiders?)\b/],
+    ['scorpion', /(camel ?spiders?|sun ?spiders?|whip ?spiders?)\b/],
+    ['spider', /(black ?widows?|brown ?widows?)\b/],
+    ['salamander', /(congo ?eels?)\b/],
+    ['flyingfox', /(flying[ -]?fox(es)?|fruit ?bats?)\b/],
+    ['whale', /(sea ?lions?|sea ?cows?)\b/],
+    ['squirrel', /(prairie ?dogs?|guinea ?pigs?)\b/],
+    ['primate', /(bush ?bab(y|ies))\b/],
+    ['fish', /(sea ?horses?|sea ?robins?|sea ?dragons?)\b/],
+    ['reptile', /(slow ?worms?|gila ?monsters?)\b/],
+    ['bird', /(nighthawks?|bee-?eaters?|oyster ?catchers?|brown ?creepers?|treecreepers?|wallcreepers?)\b/],
+    ['bee', /(velvet ?ants?|cicada ?killers?|cow ?killers?|tarantula ?hawks?|longhorn-?cuckoos?)\b/],
+    ['insect', /(silverfish|white ?peacocks?|pondhawks?|monkey ?slugs?|woolly ?bears?|bee-?killers?|inch ?worms?|silk ?worms?|meal ?worms?|glow[ -]?worms?|army ?worms?|cut ?worms?|horn ?worms?|bag ?worms?|web ?worms?|wire ?worms?|canker ?worms?|bud ?worms?|boll ?worms?|ear ?worms?|wood ?worms?|screw ?worms?|root ?worms?|fruit ?worms?|leaf ?worms?)\b/],
+    ['plant', /(monkey ?puzzles?|elephant ?ears?|alligator ?flags?|lamb's ?quarters|wood ?anemones?|japanese ?anemones?|madagascar ?periwinkles?|green ?dragons?|wakerobins?|kangaroo ?paws?|crane's-?bills?|spider ?brakes?|rattlesnake ?masters?|greater ?periwinkles?|lesser ?periwinkles?|rosy ?periwinkles?|forget-?me-?nots?|dragon-?tails?|black ?locusts?|honey ?locusts?|devil's ?walking-?sticks?|'s[ -]?foot|'s[ -]?feet|'s[ -]?ears?|'s[ -]?tails?|'s[ -]?tongues?|'s[ -]?claws?|'s[ -]?beards?|'s[ -]?feathers?|'s[ -]?seals?)\b/],
+    // the groups with no view yet
+    ['worm', /(\bworms?|earthworms?|flatworms?|roundworms?|tapeworms?|hookworms?|lugworms?|ragworms?|bloodworms?|fireworms?|tubeworms?|\bleech(es)?|nematodes?|planarians?|millipedes?|centipedes?|polychaetes?|feather ?dusters?)\b/],
+    ['flyingfox', /(megabats?)\b/],
+    ['shark', /(sharks?|hammerheads?|\brays?|stingrays?|mantas?|sawfish|guitarfish|dogfish|ratfish|chimaeras?|\bskates?)\b/],
+    ['bat', /(\bbats?|microbats?|myotis)\b/],
+    ['cephalopod', /(octopus(es)?|octopi|squids?|cuttlefish|nautilus(es)?|argonauts?|cephalopods?)\b/],
+    ['sealife', /(starfish|sea ?stars?|brittle ?stars?|feather ?stars?|basket ?stars?|corals?|anemones?|jellyfish|comb ?jell(y|ies)|moon ?jell(y|ies)|box ?jell(y|ies)|sea ?urchins?|urchins?|sea ?cucumbers?|sand ?dollars?|sea ?biscuits?|\bclams?|mussels?|oysters?|scallops?|cockles?|quahogs?|geoducks?|sponges?|sea ?squirts?|tunicates?|\bsalps?|sea ?fans?|hydroids?|\bhydras?|siphonophores?|bryozoans?|lamp ?shells?|brachiopods?|crinoids?)\b/],
+    ['crab', /(crabs?|crayfish|crawfish|crawdads?|lobsters?|shrimps?|prawns?|krill|barnacles?|woodlice|woodlouse|roly[ -]?pol(y|ies)|isopods?|amphipods?|copepods?)\b/],
+    ['snail', /(snails?|slugs?|whelks?|conch(es)?|conchs|nudibranchs?|limpets?|periwinkles?|chitons?|abalones?|cowr(y|ie)s?|murex(es)?|ramshorns?|tusk ?shells?)\b/],
+    ['jumper', /(\bjumpers?|salticids?)\b/],
+    ['scorpion', /(scorpions?|harvestm(a|e)n|daddy[ -]?long[ -]?legs|vinegaroons?|amblypygids?|solifugids?|solifugae)\b/],
+    ['spider', /(spiders?|tarantulas?|orb[ -]?weavers?|recluses?|huntsm(a|e)n|funnel-?webs?|sheet ?weavers?|sheetweavers?|hacklemesh ?weavers?|funnel ?weavers?|cobweb ?weavers?|micrathenas?)\b/],
+    ['tick', /(\bticks?)\b/],
+    ['slime', /(myxomycetes?)\b/],
+    ['fungus', /(mushrooms?|toadstools?|fung(us|i)|lichens?|\bmou?lds?|mildews?|puffballs?|morels?|chanterelles?|boletes?|polypores?|stinkhorns?|truffles?|earthstars?|earthballs?|agarics?|amanitas?|russulas?|\bbrackets?|parasols?|inkcaps?|ink ?caps?|milkcaps?|milk ?caps?|waxcaps?|waxy ?caps?|webcaps?|fibrecaps?|fibercaps?|\brusts?|rustgills?|sawgills?|mazegills?|brittlegills?|rosegills?|splitgills?|dapperlings?|lepidellas?|deceivers?|shii?takes?|suillus|reishis?|candlesnuffs?|xylarias?|trametes|oysterlings?|\bcrusts?|matsutakes?|grisettes?|brittlestems?|fieldcaps?|elfcups?|pinwheels?|earthtongues?)\b/],
+    ['salamander', /(salamanders?|\bnewts?|axolotls?|mudpupp(y|ies)|waterdogs?|amphiumas?|hellbenders?|\bsirens?|\bolms?|caecilians?|\befts?)\b/],
+    ['whale', /(whales?|dolphins?|porpoises?|orcas?|\bseals?|walrus(es)?|manatees?|dugongs?|narwhals?|belugas?|humpbacks?|pinnipeds?|cetaceans?)\b/],
+    ['primate', /(monkeys?|\bapes?|gorillas?|chimps?|chimpanzees?|orangutans?|bonobos?|gibbons?|baboons?|macaques?|lemurs?|marmosets?|tamarins?|capuchins?|loris(es)?|langurs?|colobus(es)?|mandrills?|tarsiers?|galagos?|howlers?|aye-?ayes?|sifakas?|primates?)\b/],
+    ['mammal', /(raccoons?|opossums?|possums?|armadillos?|\bbears?|\botters?|weasels?|\bminks?|ferrets?|stoats?|ermines?|polecats?|\bfishers?|skunks?|badgers?|wolverines?|martens?|\bpigs?|\bhogs?|boars?|warthogs?|peccar(y|ies)|javelinas?|hippos?|hippopotamus(es)?|rhinos?|rhinoceros(es)?|tapirs?|kangaroos?|wallab(y|ies)|koalas?|wombats?|quokkas?|quolls?|bandicoots?|bilb(y|ies)|numbats?|tasmanian ?devils?|sugar ?gliders?|hedgehogs?|\bmoles?|shrews?|tenrecs?|sloths?|anteaters?|pangolins?|aardvarks?|aardwol(f|ves)|elephants?|platypus(es)?|echidnas?|hyrax(es)?|mongooses?|meerkats?|hyenas?|civets?|genets?|binturongs?|fossas?|coatis?|coatimundis?|kinkajous?|\bringtails?|pandas?|mammals?)\b/],
+    ['fish', /(fish(es)?|\beels?|minnows?|\bbass|trout|salmon|\bcarps?|bluegills?|perch(es)?|gupp(y|ies)|gob(y|ies)|wrasses?|tunas?|\bcods?|herrings?|sardines?|anchov(y|ies)|\bpikes?|pickerels?|muskies|muskellunges?|walleyes?|\bgars?|mullets?|snappers?|groupers?|snooks?|tarpons?|bowfins?|sturgeons?|\bshads?|menhadens?|sheepshead|lampreys?|piranhas?|barracudas?|marlins?|mackerels?|halibuts?|flounders?|\bkoi|bettas?|tetras?|cichlids?|tilapias?|blenn(y|ies)|sculpins?|sticklebacks?|\bbarbs?|loach(es)?|darters?|shiners?|crappies?|morays?|madtoms?|bullheads?|silversides?|warmouths?|hogchokers?|chubsuckers?|mudskippers?|snakeheads?)\b/],
+    // the kinds with views
+    ['bee', /(bees?|wasps?|hornets?|yellowjackets?|yellow ?jackets?|daubers?|beewol(f|ves)|ichneumons?|sawfl(y|ies)|horntails?|leaf-?cutters?)\b/],
+    ['insect', /(butterfl(y|ies)|\bmoths?|hawkmoths?|silkmoths?|sphinx(es)?|beetles?|scarabs?|chafers?|borers?|sawyers?|engravers?|clerids?|weevils?|curculios?|fl(y|ies)|\bants?|antlions?|crickets?|cicadas?|mantis(es)?|mantids?|bugs?|ladybirds?|assassins?|skippers?|monarchs?|fritillar(y|ies)|swallowtails?|longwings?|birdwings?|hairstreaks?|satyrs?|wood-?nymphs?|leafwings?|clearwings?|daggers?|veneers?|hooktips?|leaftiers?|leaf ?tiers?|buckeyes?|clubtails?|darners?|cruisers?|spreadwings?|forktails?|sprites?|katydids?|coneheads?|locusts?|wetas?|lubbers?|roach(es)?|aphids?|psyllids?|mirids?|phylloxeras?|sharpshooters?|\bscales?|gallmakers?|\bkeds?|thrips|caterpillars?|loopers?|spanworms?|grubs?|maggots?|chrysalis(es)?|mosquito(es)?|gnats?|midges?|fleas?|\blice|\blouse|termites?|walkingsticks?|walking ?sticks?|earwigs?|hoppers?|lacewings?|hellgrammites?|springtails?|leaf ?miners?|leafminers?|insects?)\b/],
+    ['frog', /(frogs?|toads?|peepers?|tadpoles?|polliwogs?)\b/],
+    ['alligator', /\b(alligators?|gators?|crocodiles?|crocs?|caimans?|gharials?|gavials?)\b/],
+    ['reptile', /(lizards?|anoles?|geckos?|skinks?|snakes?|\bracers?|turtles?|tortoises?|terrapins?|sliders?|cooters?|softshells?|loggerheads?|leatherbacks?|hawksbills?|ridleys?|iguanas?|chameleons?|\bdragons?|agamas?|basilisks?|tuataras?|reptiles?|cottonmouths?|moccasins?|copperheads?|rattlers?|hognoses?|pythons?|\bboas?|anacondas?|vipers?|\badders?|cobras?|mambas?|kraits?|taipans?)\b/],
+    ['squirrel', /(squirrels?|chipmunks?|\brats?|\bmice|\bmouse|dormouse|dormice|\bvoles?|gophers?|beavers?|porcupines?|capybaras?|hamsters?|gerbils?|chinchillas?|groundhogs?|woodchucks?|marmots?|muskrats?|woodrats?|nutrias?|coypus?|agoutis?|\bpacas?|lemmings?|jerboas?|rodents?)\b/],
     ['bird', /(vultures?|condors?)\b/],
     ['hawk', /(hawks?|eagles?|falcons?|\bkites?|ospreys?|kestrels?|harriers?|buzzards?|caracaras?|merlins?)\b/],
-    ['wader', /\b(herons?|egrets?|ibis(es)?|storks?|cranes?|limpkins?|coots?|moorhens?|gallinules?|rails?|pigeons?|doves?|chickens?|roosters?|hens?|turkeys?|bitterns?|spoonbills?)\b/],
-    ['bird', /(birds?|\bducks?|\bgeese|\bgoose|\bswans?|gulls?|\bterns?|pelicans?|cormorants?|anhingas?|cardinals?|warblers?|sparrows?|\bwrens?|\bjays?|\bcrows?|ravens?|robins?|finch(es)?|phoebes?|grackles?|woodpeckers?|flickers?|\bswallows?|\bswifts?|\bowls?|parrots?|parakeets?|starlings?|thrush(es)?|thrashers?|vireos?|titmouse|titmice|chickadees?|nuthatch(es)?|orioles?|tanagers?|flycatchers?|kingfishers?|loons?|grebes?|sandpipers?|plovers?|killdeers?|shrikes?|gnatcatchers?|sapsuckers?|towhees?|waxwings?|kinglets?|buntings?|meadowlarks?|\blarks?)\b/],
-    ['cat', /\b(cats?|kittens?|kitty|kitties|bobcats?|lynx|panthers?|cougars?|lions?|tigers?|leopards?|ocelots?|jaguars?)\b/],
-    ['dog', /\b(dogs?|pupp(y|ies)|fox(es)?|coyotes?|wol(f|ves))\b/],
-    ['deer', /\b(deer|fawns?|bucks?|does?|horses?|pon(y|ies)|cows?|cattle|bulls?|cal(f|ves)|goats?|sheep|lambs?|elk|moose|bison|donkeys?|mules?)\b/],
-    ['rabbit', /\b(rabbits?|bunn(y|ies)|hares?|cottontails?)\b/],
-    ['plant', /(plants?|trees?|flowers?|\bmoss(es)?|ferns?|grass(es)?|\bvines?|shrubs?|bush(es)?|weeds?|palms?|palmettos?|\boaks?|\bpines?|magnolias?|sweetgums?|maples?|cypress|cedars?|holl(y|ies)|azaleas?|camellias?|berr(y|ies)|worts?|lil(y|ies)|roses?|orchids?|cactus|cacti|succulents?|\biv(y|ies)|creepers?|sumacs?|indigo|catbrier|greenbrier|grapes?|ardisia|beggarticks|bidens|lea(f|ves)|\bherbs?|basil|tomato(es)?|\bmints?|\bsages?|blossoms?|seedlings?|saplings?|dais(y|ies)|clover|bamboo|lantana|hibiscus|bromeliads?|tillandsia|wood)\b/]
+    ['wader', /\b(herons?|egrets?|ibis(es)?|storks?|cranes?|limpkins?|coots?|moorhens?|gallinules?|rails?|crakes?|soras?|jacanas?|shoebills?|pigeons?|doves?|chickens?|roosters?|hens?|turkeys?|pheasants?|quails?|bobwhites?|grouse|partridges?|ptarmigans?|guineafowl|guinea ?fowl|peacocks?|peafowl|peahens?|junglefowl|fowls?|bitterns?|spoonbills?)\b/],
+    ['bird', /(birds?|\bducks?|\bgeese|\bgoose|\bswans?|waterfowl|gulls?|\bterns?|pelicans?|cormorants?|anhingas?|cardinals?|warblers?|sparrows?|\bwrens?|\bjays?|\bcrows?|ravens?|\brooks?|jackdaws?|magpies?|robins?|finch(es)?|siskins?|canar(y|ies)|grosbeaks?|juncos?|phoebes?|pewees?|kingbirds?|grackles?|woodpeckers?|flickers?|\bswallows?|\bswifts?|\bowls?|parrots?|parakeets?|macaws?|cockatoos?|cockatiels?|lorikeets?|budgies?|budgerigars?|starlings?|mynas?|mynahs?|bulbuls?|thrush(es)?|thrashers?|vireos?|titmouse|titmice|\btits?|chickadees?|nuthatch(es)?|orioles?|tanagers?|flycatchers?|kingfishers?|kookaburras?|hoopoes?|hornbills?|toucans?|trogons?|quetzals?|motmots?|cuckoos?|roadrunners?|nightjars?|\bloons?|grebes?|penguins?|puffins?|albatross(es)?|petrels?|shearwaters?|gannets?|\bboob(y|ies)|skuas?|flamingos?|flamingoes|sandpipers?|plovers?|killdeers?|avocets?|stilts?|curlews?|godwits?|turnstones?|willets?|yellowlegs|dowitchers?|oystercatchers?|shrikes?|gnatcatchers?|sapsuckers?|towhees?|waxwings?|kinglets?|buntings?|meadowlarks?|\blarks?|wagtails?|pipits?|redstarts?|nightingales?|babblers?|weavers?|honeyeaters?|mallards?|\bteals?|wigeons?|mergansers?|\bscaups?|eiders?|ostrich(es)?|\bemus?|cassowar(y|ies)|kiwis?|\brheas?|bustards?)\b/],
+    ['cat', /\b(cats?|kittens?|kitty|kitties|bobcats?|wildcats?|lynx|panthers?|cougars?|pumas?|lions?|tigers?|leopards?|cheetahs?|ocelots?|jaguars?|servals?|caracals?|margays?)\b/],
+    ['dog', /\b(dogs?|pupp(y|ies)|fox(es)?|coyotes?|wol(f|ves)|jackals?|dingos?|dingoes|fennecs?|dholes?)\b/],
+    ['deer', /\b(deer|reindeer|caribou|fawns?|bucks?|does?|stags?|horses?|pon(y|ies)|cows?|cattle|bulls?|ox|oxen|cal(f|ves)|goats?|sheep|lambs?|elk|moose|bison|buffalo(es)?|yaks?|donkeys?|mules?|zebras?|giraffes?|okapis?|camels?|llamas?|alpacas?|guanacos?|vicunas?|antelopes?|gazelles?|impalas?|kudus?|elands?|oryx(es)?|springboks?|gemsboks?|gnus?|wildebeests?|hartebeests?|duikers?|waterbucks?|dik-?diks?|muntjacs?|chamois|pronghorns?|bighorns?|ibex(es)?)\b/],
+    ['rabbit', /\b(rabbits?|bunn(y|ies)|hares?|cottontails?|pikas?)\b/],
+    ['plant', /(plants?|trees?|flowers?|\bmoss(es)?|ferns?|grass(es)?|\bvines?|shrubs?|bush(es)?|weeds?|palms?|palmettos?|\boaks?|\bpines?|magnolias?|sweetgums?|maples?|cypress|cedars?|holl(y|ies)|azaleas?|camellias?|berr(y|ies)|worts?|lil(y|ies)|roses?|orchids?|cactus|cacti|succulents?|\biv(y|ies)|creepers?|sumacs?|indigo|catbrier|greenbrier|catnip|cattails?|grapes?|apples?|plums?|\bpeas?|peanuts?|beans?|fruits?|chestnuts?|ardisia|beggarticks|bidens|lea(f|ves)|\bherbs?|basil|fennels?|tomato(es)?|\bmints?|\bsages?|balms?|blossoms?|seedlings?|saplings?|dais(y|ies)|clover|trefoils?|sorrels?|catchfl(y|ies)|sphagnum|bamboo|lantana|hibiscus|honeysuckles?|bromeliads?|tillandsia|dandelions?|thistles?|nettles?|tulips?|daffodils?|popp(y|ies)|lotus(es)?|agaves?|aloes?|yuccas?|eucalyptus|acacias?|baobabs?|birch(es)?|willows?|\belms?|beech(es)?|spruces?|\bfirs?|sequoias?|junipers?|mangroves?|lavender|\breeds?|sedges?|rushes|horsetails?|foxtails?|tickseeds?|frogfruits?|vincas?|\bfigs?|bananas?|wood|seaweeds?|kelp|alga(e)?)\b/]
   ];
+
+  // global copies of the table's patterns, for finding every match in a name
+  var LEXG = null;
   function kindOfName(text) {
-    var t = String(text || '').toLowerCase().replace(/[^a-z' -]+/g, ' ');
-    for (var i = 0; i < LEX.length; i++) if (LEX[i][1].test(t)) return LEX[i][0];
-    return '';                                     // no word in it is a kind this page knows
+    var t = String(text || '').toLowerCase().replace(/[‘’ʼ]/g, '\'').replace(/[^a-z' -]+/g, ' '), best = '', end = -1, len = 0, m, e;   // a phone's curly apostrophe is a plain one
+    if (!LEXG) LEXG = LEX.map(function (L) { return new RegExp(L[1].source, 'g'); });
+    for (var i = 0; i < LEX.length; i++) {
+      LEXG[i].lastIndex = 0;
+      while ((m = LEXG[i].exec(t))) {
+        e = m.index + m[0].length;
+        if (e > end || (e === end && m[0].length > len)) { best = LEX[i][0]; end = e; len = m[0].length; }
+        if (!m[0].length) LEXG[i].lastIndex++;
+      }
+    }
+    return best;                                   // '' where no word in it is a kind this page knows
   }
 
   // The words of the table, one plain form each, for catching a slip of the keys ("herron"). Made once from the patterns above.
@@ -2154,7 +2218,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
   function reveal(key, named) {
-    if (key === 'other') { diag('no-view', clip((named && named.common) || '', 60)); S.seq++; tell(noViewSays(named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '')); return; }
+    if (noView(key)) {                             // a living thing with no view of its own: named where the app knows its group, and no encounter kept
+      var nm = named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '';
+      if (!nm && key !== 'other') nm = handName(key);
+      diag('no-view', clip((named && named.common) || key, 60)); S.seq++; tell(noViewSays(nm)); return;
+    }
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
     if (named && (named.by === 'service' || named.by === 'device-large')) paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
@@ -2417,7 +2485,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
-    if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
+    if (noView(key)) {                             // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }

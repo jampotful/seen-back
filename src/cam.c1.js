@@ -70,7 +70,7 @@
       return keep ? w : w.toLowerCase();
     });
   }
-  function handName(key) { return key === 'other' ? 'something alive' : EYES[key].who.replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
+  function handName(key) { return key === 'other' ? 'something alive' : (EYES[key] ? EYES[key].who : GROUPS[key] || 'something alive').replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
   function later(fn, ms) { var seq = S.seq; setTimeout(function () { if (seq === S.seq) fn(); }, ms); }

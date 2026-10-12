@@ -1,9 +1,16 @@
 # Coverage
 
-Compiled 12 October 2026 on branch `agent/coverage`. This is the plan for two targets the owner set, with the measurements made so far. Figures from this study name the script and the run behind them.
+Compiled 12 October 2026 on branch `agent/coverage` and brought to `main` with build 21. This is the plan for two targets the owner set, with the measurements made so far. Figures from this study name the script and the run behind them.
 
 1. **The base app** (the pocket model, no download) recognizes every broad group of living things and stays quick and small.
 2. **The full database** (the optional download) can name any species a person anywhere might meet.
+
+## The owner's decisions (12 October 2026)
+
+- **Groups.** All nineteen groups below go into the base app.
+- **Names in the base app.** The pocket model names groups only; species names come from the full database. Build 21 carries this out.
+- **The place.** The full database learns where the phone is from the phone's time zone and from the creatures already met. It does not read a photo's location and does not ask.
+- **Size.** The full database holds every species with a research-grade record, about 700 MB.
 
 ## The base app: nineteen new groups
 
@@ -89,7 +96,7 @@ Five sheets are written and each was checked by an agent that had not seen it (`
 | fungus | no picture: blue and green light and its direction, averaged slowly | gravity from the tilt sensor; averaging over minutes |
 | slime mould | no picture: away from blue, toward red, pulsing | nothing |
 
-Two findings for the page: a typed "flying fox" gets the dog's eyes, because the word table in `src/cam.r.js` matches "fox" and its bat entry does not match "flying fox"; and `docs/SOURCES.md` backs the line that an ordinary camera cannot record ultraviolet with a page that does not say so. The next sheets follow the records: snail, starfish and coral, crab, mammal, salamander, worm, whale and seal, scorpion, monkey, octopus.
+Two findings for the page: a typed "flying fox" got the dog's eyes, because the word table in `src/cam.r.js` matched "fox" and its bat entry did not match "flying fox" (fixed in build 21); and `docs/SOURCES.md` backs the line that an ordinary camera cannot record ultraviolet with a page that does not say so. The next sheets follow the records: snail, starfish and coral, crab, mammal, salamander, worm, whale and seal, scorpion, monkey, octopus.
 
 ## The full database
 
@@ -112,15 +119,15 @@ Photos named and names right are for the list's own prior. With the 400 km prior
 - **The place enters through the prior.** The rows can cover the world; what the app needs to know about the place is a count for each species recorded there, 16,210 counts for the 400 km circle, under 100 KB at six bytes a species.
 - **The plainer reading.** Alachua's photos are mostly of species the county records often, so any prior favouring what is common nearby gets them right; the flat line may owe more to Florida's dense records than to the design. A test on thinly recorded places settles it.
 - **Names.** Rows from iNaturalist's names scored 87.8% on the county list with no prior, against 90.4% for the live rows from GBIF's names. The likeliest cause is the 236 test photos whose species are named differently in the two taxonomies (`docs/EVAL.md`), not yet split out. The world rows should use GBIF's names, as the county rows do.
-- **The place without asking.** The phone's time zone narrows the world to a band with no permission; the creatures already met narrow it further; a library photo's own location could set it at once if the owner allows reading it on the phone.
+- **The place without asking.** The phone's time zone narrows the world to a band with no permission; the creatures already met narrow it further. A library photo's own location could set it at once, and the owner chose not to read it.
 - **Size.** With the 310 MB encoder and a table of names (about 56 MB for every species in today's format, 13 MB for 100,000), every species comes to about 700 MB and the 100,000 commonest to about 400 MB. A cut by world records drops species common only where few people record, which Alachua's photos cannot show.
 - **Pets and garden plants.** Dogs, cats, chickens and horses have research-grade records (19,180, 68,484, 25,656 and 11,576 all time), so they are in the rows. The casual observations add 1,184 species whose records are mostly casual (50 or more casual records and more than twice their research-grade ones), 43 of them with no research-grade record before 2025.
-- **The pocket model's species names.** Its species head was fitted on county photos, so outside the county it names county species. Raising `name_at` and `offer_at` to 2 in `models/pocket/manifest.json` stops that with no code changed, and it also ends the county names, which the pocket model gives for 20.1% of Alachua photos at 93.3% right (`docs/EVAL.md`). The hidden switch "I am not near Gainesville" (`pocket.local`) is the other route. The decision is the owner's.
+- **The pocket model's species names.** Its species head was fitted on county photos, so outside the county it names county species. Raising `name_at` and `offer_at` to 2 in `models/pocket/manifest.json` stops that with no code changed, and it also ends the county names, which the pocket model gives for 20.1% of Alachua photos at 93.3% right (`docs/EVAL.md`). The hidden switch "I am not near Gainesville" (`pocket.local`) was the other route. The owner chose the two numbers, and build 21 set them.
 
 ## Order of work
 
-1. Stop the pocket model's species names (two numbers in its manifest, which ends them in the county too), once the owner decides.
-2. Word-table entries for the nineteen groups, ahead of `dog`.
+1. Stop the pocket model's species names (two numbers in its manifest, which ends them in the county too). Done in build 21.
+2. Word-table entries for the nineteen groups. Done in build 21, where the word that ends last in a typed name decides, so the order of the table no longer settles "flying fox".
 3. World photos for 33 groups, nothing alive and casual, from the open-data snapshot, published to `pub/data-world`.
 4. The new group head, scored against the pass marks; shipped with `eyes.py`, the word table and the list of groups updated.
 5. Views in waves, each sheet read by the owner before it is drawn.

@@ -69,7 +69,11 @@
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
   function reveal(key, named) {
-    if (key === 'other') { diag('no-view', clip((named && named.common) || '', 60)); S.seq++; tell(noViewSays(named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '')); return; }
+    if (noView(key)) {                             // a living thing with no view of its own: named where the app knows its group, and no encounter kept
+      var nm = named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '';
+      if (!nm && key !== 'other') nm = handName(key);
+      diag('no-view', clip((named && named.common) || key, 60)); S.seq++; tell(noViewSays(nm)); return;
+    }
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
     if (named && (named.by === 'service' || named.by === 'device-large')) paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
@@ -332,7 +336,7 @@
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
-    if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
+    if (noView(key)) {                             // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
