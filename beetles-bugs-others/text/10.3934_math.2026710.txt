@@ -1,0 +1,1994 @@
+Mining blast vibration forecasting based on a deep learning machine optimized by improved dung beetle optimization
+Ting Zhu, Hui Lan (2026). AIMS Mathematics. https://doi.org/10.3934/math.2026710. doi:10.3934/math.2026710. Licence: cc-by-nc-sa. Text from pdf.
+
+AIMS Mathematics, 11(6): 17354‒17381.
+DOI: 10.3934/math.2026710
+Received: 25 March 2026
+Revised: 02 June 2026
+Accepted: 04 June 2026
+Published: 15 June 2026
+https://www.aimspress.com/journal/Math
+
+Research article
+
+Mining blast vibration forecasting based on a deep learning machine
+optimized by improved dung beetle optimization
+Ting Zhu1,2 and Hui Lan1,2,3,*
+1
+
+State Key Laboratory of Precision Blasting, Jianghan University, Wuhan 430056, China
+Hubei Province Key Laboratory of Engineering Blasting, Jianghan University, Wuhan 430056,
+China
+3
+School of Artificial Intelligence, Jianghan University, Wuhan 430056, China
+2
+
+* Correspondence: Email: huilan@jhun.edu.cn.
+Abstract: The ground vibrations resulting from mining blasting operations represent the most
+considerable adverse impact on local inhabitants and the surrounding environment. Precisely
+forecasting blasting vibrations with a constrained amount of monitoring data is a feasible strategy to
+manage ground vibrations. This research introduced an innovative hybrid modeling approach that
+leverages the maximal information coefficient (MIC), deep extreme learning machine (DELM), and
+improved dung beetle optimization (IDBO) to predict both the peak particle velocity (PPV) and
+frequency. Initially, feature selection was conducted utilizing the MIC algorithm. Following this, the
+variables identified by the MIC were employed as inputs to construct the DELM model. To enhance
+the DELM model's performance, the IDBO was implemented to optimize the DELM model's
+hyperparameters. The findings from the experiment show that the maximum root mean squared error
+(RMSE), mean squared error (MSE), and R2 of the proposed hybrid framework are only 0.237, 0.108,
+and 0.975, respectively. These outcomes indicate that the hybrid MIC-IDBO-DELM model holds great
+potential as a predictive tool for blasting vibration prediction.
+Keywords: ground vibration; blasting; machine learning; hybrid model; MIC-IDBO-DELM
+Mathematics Subject Classification: 68T05, 90C59
+
+1. Introduction
+Blasting is widely recognized to generate adverse environmental impacts around mining sites,
+such as ground vibration [1], dust emissions [2,3], flyrock [4], and air blast overpressure [5,6].
+
+17355
+
+Nevertheless, blasting remains the most cost‑effective method for rock fragmentation and movement
+in mining operations [7]. With the continuous advancement of blasting technology, the upgrading of
+drilling and blasting equipment, and the increasing consumption of explosives, the negative
+consequences induced by blasting have become more prominent [8]. Among these detrimental effects,
+blasting vibration is always the primary concern, as it threatens the stability of reserved rock masses,
+affects nearby structures, and compromises the safety and comfort of local residents [9,10].
+During rock blasting, the energy released by explosives generates a large amount of unconsumed
+energy, which propagates outward from blast holes in the form of seismic waves and eventually
+manifests as ground vibration [11,12]. The environmental problems induced by blasting vibration are
+typically cumulative, and have become increasingly severe with long‑term mining operations. In recent
+years, the number of environmental disputes and lawsuits related to blasting‑induced ground vibration
+has been rising, which has attracted extensive attention from both regulatory agencies and mining
+enterprises. To control the intensity of blasting vibration within a safe range, many standards and safety
+guidelines have been formulated [13,14]. Meanwhile, a large number of studies have been conducted
+to analyze and assess the potential risks posed by blasting‑induced ground vibration [15,16].
+Historically, the core goal of mine blasting design has been to attain satisfactory rock
+fragmentation [17]. As a result, the issue of ground vibration induced by blasting has long been
+overlooked. However, for blasting engineers, although a rational design should prioritize
+fragmentation performance, it is also essential to strictly control ground vibration within allowable
+safety limits [18]. To realize this goal, all factors that affect blasting vibration must be fully considered
+at the design stage. Unfortunately, this is often difficult to implement in practice, because accurate
+measurements of some influencing factors are either hard to obtain in field conditions or require
+considerable time and cost. The intensity of blasting vibration is governed by a variety of factors [19,20],
+which can be generally divided into two categories: uncontrollable factors and controllable factors [21].
+Uncontrollable factors remain unchanged during blasting operations and are mainly determined by
+geological conditions and the physical properties of the rock mass to be excavated. Therefore,
+engineers usually adopt a basic design scheme first, and then revise it according to the actual geological
+and engineering conditions of the mine. In contrast, controllable factors, such as blasting parameters
+and explosive properties, can be flexibly adjusted to offset the adverse impacts caused by
+uncontrollable factors. Accurate prediction of blasting vibration is regarded as an effective
+management approach. Such predictions are used to judge whether the generated vibration level is
+acceptable and to provide practical suggestions for optimizing blasting design, so as to reduce
+structural damage and disturbance to nearby residents. Accordingly, the precise evaluation of ground
+vibration is critical to the scientific planning and safe implementation of blasting operations [22].
+Initially, peak particle velocity (PPV) was the only indicator adopted to evaluate structural
+damage induced by blasting, acting as the primary safety control threshold. However, several cases
+have demonstrated that severe structural damage can still occur even when PPV values are well below
+the specified safety limits [23]. In response, many scholars have emphasized the importance of
+vibration frequency, noting that the dynamic response of structures is closely related to the frequency
+characteristics of blasting vibrations [24–26]. Currently, both PPV and frequency are widely accepted
+as core evaluation indicators in most safety standards, owing to their strong correlation with structural
+damage and human comfort [27–29]. Therefore, PPV and frequency are selected as the two prediction
+targets of blasting‑induced vibrations in this study.
+Adopting a scientific method for predicting blasting vibrations is critically important, as it can
+substantially improve prediction accuracy and reliability. Numerous scholars have conducted
+extensive research on blasting vibration prediction, and the corresponding prediction models can be
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17356
+
+mainly classified into two categories: empirical models based on simplified field observations [30]
+and artificial intelligence‑based machine learning models [31,32]. In practical applications, empirical
+models commonly rely only on limited parameters such as distance and maximum charge per delay to
+establish prediction formulas [33,34], resulting in relatively low prediction precision. To overcome the
+inherent limitations of empirical models, an increasing number of researchers have applied machine
+learning (ML) techniques to blasting vibration prediction. ML approaches exhibit strong capabilities
+in nonlinear mapping, making them highly suitable for capturing the complex nonlinear relationships
+between blasting parameters and ground vibration responses. Unlike empirical models, ML‑based
+models can integrate comprehensive influencing factors as model inputs. For instance, N. Torres et al.
+and A. Das et al. developed prediction models using artificial neural networks (ANNs) with 15 and 13
+input variables, respectively [35]. ANNs are recognized as one of the most effective ML methods for
+solving complex nonlinear problems and have been widely used in blasting vibration prediction.
+Nevertheless, like many other ML algorithms, ANNs are prone to overfitting during the modeling
+process [36,37]. In addition, ML models are data‑driven, but collecting large‑scale and high‑quality
+blasting vibration datasets is time‑consuming and laborious. Therefore, many existing blasting
+vibration prediction models are constructed using limited datasets.
+The combination of machine learning methods with meta‑heuristic algorithms has been proven
+to significantly improve the accuracy of blasting vibration prediction. In addition, the selection of
+appropriate influencing factors as model inputs plays a crucial role in determining the performance of
+machine learning models. Researchers including Zhu et al., Zeng et al., and Zhang et al. have adopted
+various strategies to screen input parameters for blasting vibration prediction [38]. However, the
+importance of input parameters has not been sufficiently valued in many existing models, and their
+actual effects are rarely evaluated before modeling. Feature selection is an essential step in model
+construction, which is used to quantify the correlation strength between input features and prediction
+targets. It can effectively simplify the model structure, shorten the training time, and improve
+prediction accuracy. By reasonably selecting key features, machine learning models can achieve higher
+efficiency and precision in blasting vibration prediction.
+The deep extreme learning machine (DELM) is an innovative neural network model that
+augments the capabilities of the traditional ELM through the integration of self-encoder limit learning
+to initialize the input weights and biases of the hidden layer. This enhancement facilitates the efficient
+extraction of nonlinear data features. Moreover, the DELM overcomes the drawbacks of slow training
+speeds and prolonged prediction times that are typically encountered in conventional neural network
+models and analogous methodologies. For instance, many researchers [39–41] have proposed and
+implemented a hybrid DELM model for wind power generation forecasting. The model has
+demonstrated promising outcomes, thereby validating the effectiveness of the DELM. However, the
+DELM faces issues with its random input weights and biases, which are not amenable to inverse
+adjustment, predisposing it to local optima and significantly impacting the precision of forecasting.
+The DELM’s random initialization of input weights and biases makes it prone to getting trapped
+in local optima. The proposed IDBO algorithm, enhanced with chaotic mapping for initialization, an
+adaptive step size combined with a convex lens imaging strategy, and dynamic weighting with Lévy
+flight, demonstrates superior global search capability and a stronger ability to escape local optima.
+Therefore, employing IDBO to optimize the hyperparameters of the DELM directly addresses this core
+weakness, leading to a more stable and accurate predictor.
+Many existing models do not adequately assess the importance of input parameters. The MIC
+algorithm, as a robust measure, excels at capturing both linear and nonlinear relationships between
+various blasting parameters (e.g., distance, charge weight) and the prediction targets (PPV and
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17357
+
+frequency). This allows for the identification of key influencing factors, thereby streamlining the
+model architecture and improving predictive accuracy.
+In this study, a novel integrated prediction framework is proposed to further improve the
+prediction accuracy of PPV and frequency. Specifically, the maximal information coefficient (MIC),
+improved dung beetle optimization (IDBO), and deep extreme learning machine (DELM) are
+combined to construct a hybrid model named the MIC-IDBO-DELM. The primary objective of this
+research is to enhance the prediction performance of blasting vibration by employing the MIC for
+feature selection and using IDBO to optimize the hyperparameters of the DELM.
+This paper is structured as follows. Section 2 introduces the fundamental theories of the maximal
+information coefficient, improved dung beetle optimization, and DELM. Section 3 details the proposed
+hybrid prediction framework. Section 4 presents the experimental design, results, and comprehensive
+analysis of the proposed method. Finally, the main conclusions and future research directions are
+summarized in Section 5.
+2. Methodology
+This section briefly introduces the core methodologies adopted in the proposed hybrid framework,
+including the feature selection strategy, prediction model, and improved metaheuristic optimization
+algorithm.
+2.1. Maximal information coefficient
+The maximal information coefficient (MIC) was first proposed by Reshef et al. in Science (2011)
+based on mutual information theory. As a powerful correlation metric, the MIC captures the maximum
+normalized mutual information through optimal discrete partitioning, enabling it to quantify complex
+linear and nonlinear associations between variables [42]. Moreover, the MIC exhibits strong
+robustness and insensitivity to outliers, making it highly suitable for measuring variable correlations
+in practical engineering scenarios.
+Let X and Y be two finite data sets, each comprising n elements. 𝑋 = {𝑥𝑖 |𝑖 = 1, ⋯ , 𝑛}and 𝑌 =
+{𝑦𝑖 |𝑖 = 1, ⋯ , 𝑛}, which are denoted as a two-dimensional ordered set 𝐷 = {(𝑥𝑖 , 𝑦𝑖 )|𝑖 = 1, ⋯ , 𝑛}. The
+grid of G =  x  y is utilized to divide the data space. Altering the grid division results in varying
+mutual information values, with the maximum value being:
+
+I ( D, x, y) = max I ( D G) ,
+
+(1)
+
+where I ( D G ) is the mutual information value of dataset D under division G.
+The value from Eq (1) is normalized and the MIC can be calculated by the following equation:
+M ( D) x , y =
+
+I ( D, x, y )
+.
+log min  x, y
+
+MIC ( D) = max M ( D) x , y  .
+x y  B ( n )
+
+(2)
+
+(3)
+
+The range of MIC is [0,1] . The stronger the correlation between series X and Y, the higher the
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17358
+
+MIC value.
+2.2. Deep extreme learning machine (DELM)
+Huang et al. first proposed the extreme learning machine (ELM), a typical single-hidden-layer
+feedforward neural network. Compared with traditional neural networks, the ELM effectively
+enhances learning efficiency and generalization performance. This improvement is realized by
+randomly generating or directly assigning hidden layer node weights, while only the output layer
+weights need to be calculated during the training process.
+Nevertheless, the ELM struggles to extract effective salient features when facing high-noise or
+high-dimensional data. To overcome these limitations, an autoencoder (AE) can be integrated with the
+ELM to construct an ELM-AE hybrid model. By stacking multiple ELM-AE modules, the deep
+extreme learning machine (DELM) is formed, which further improves prediction accuracy and
+generalization ability. The detailed structure of the DELM is presented in Figure 1, which consists of
+an input layer, M hidden layers, and an output layer.
+A representation of identical dimensions is achieved when the quantity of nodes in the ELM-AE
+input layer matches the count of nodes in the hidden layer. The weights of the hidden layer outputs,
+denoted as  , are specified as follows:
+
+ = H −1T ,
+
+(4)
+
+where H denotes the hidden layer output matrix and T represents the target output matrix.
+A compact representation is generated when the count of nodes in the input layer surpasses that
+in the hidden layer. Conversely, a sparse representation is achieved. For both compressed and sparse
+representations, the output weight of the hidden layer,  , can be articulated as follows:
+
+ =(
+
+E
++ H T H ) −1 H T X .
+C
+
+(5)
+
+E is the unit matrix, X represents the input matrix, and C denotes the regularization factor. The
+DELM formulation inherently includes a regularization parameter C in its solution. An appropriate
+C ＞ 0 was used to penalize large weights and improve generalization.
+During the training phase, the original input data is fed into the first hidden layer to train the initial
+ELM‑AE module, yielding its output weight matrix. The output weights of the preceding module are
+then used as the input features for the next ELM‑AE unit. Using this layer‑by‑layer unsupervised
+training strategy, all ELM‑AE layers are fully trained in turn, and the output weight matrix of the final
+layer is ultimately obtained.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17359
+
+ELM-AE
+1
+2
+
+1
+
+1
+
+2
+
+2
+
+3
+
+1
+
+1
+
+1
+
+1
+
+2
+
+2
+
+2
+
+2
+
+2
+
+3
+
+3
+
+3
+
+3
+
+3
+
+m
+
+α
+
+...
+
+Lm
+
+...
+
+Lm-1
+
+...
+
+...
+
+0
+
+...
+
+L1
+
+1
+
+1
+
+L0
+
+...
+
+L0
+
+ELM
+
+Lm-1
+
+Lm-1
+
+Lm
+
+α
+
+αM
+
+DELM
+
+...
+
+Lm-1
+
+2
+3
+
+L1
+Input Layer
+
+Lm
+
+1
+3
+
+...
+
+...
+
+3
+
+2
+
+...
+
+...
+
+3
+
+...
+
+2
+
+1
+
+...
+
+2
+
+1
+
+Lm-1
+
+Lm
+
+...
+
+L0
+
+1
+
+...
+
+3
+
+...
+
+2
+
+2
+...
+
+Input
+data
+X
+
+1
+
+...
+
+1
+
+1
+
+M Hidden Layers
+
+Output
+data
+Ŷ
+
+Output Layer
+
+Figure 1. The structure of the DELM.
+The DELM is an efficient deep model based on extreme learning machine framework, which uses
+autoencoder-based unsupervised pre-training to extract features layer-by-layer, rather than relying on
+large-scale labeled data like traditional deep neural networks. Compared with deep neural networks
+(DNNs) and convolutional neural networks (CNNs), the DELM has fewer parameters, faster training
+speed, and lower dependence on data volume, making it suitable for small-sample engineering
+prediction scenarios such as blasting vibration.
+2.3. Dung beetle optimization (DBO)
+The dung beetle optimization (DBO) algorithm, originally developed by Xue and Shen [43], is a
+novel swarm intelligence optimization approach. It is engineered to achieve more efficient and precise
+global optimal solutions by simulating the typical behavioral patterns of dung beetles, including ball
+rolling, dancing, breeding, foraging, and stealing behavior.
+2.3.1.
+
+Ball rolling
+
+Dung beetles utilize the sun's direction to navigate a direct route as they roll their dung balls.
+Equation (6) is utilized for the progressive adjustment of the dung beetle's rolling position. When faced
+with obstructions in its natural habitat that block its path, the beetle resorts to a dancing maneuver to
+ascertain a fresh direction for rolling. To replicate this behavior in a simulated environment, a
+stochastic value, represented by  , is integrated to ascertain the presence of obstacles during the dung
+ball's traversal. Upon encountering an obstacle, the beetle modifies its course by employing a
+tangential function. The equation for the position update of the rolling dung beetle is then represented
+by Eq (7).
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17360
+
+xi (t + 1) = xi (t ) +  kxi (t − 1) + b xi (t ) − X W ,
+
+(6)
+
+xi (t + 1) = xi (t ) + tan  xi (t ) − xi (t − 1) ,
+
+(7)
+
+where k refers to a constant value within the range (0.0.2] that signifies the coefficient of deviation,
+ is a natural constant with a value of either 1 or –1, b represents a constant that falls within the
+interval (0,1) , X W denotes the least-favorable location within the current group of individuals, and
+
+ represents the turning angle that lies within the range  0,   .When  = 0,  , and  / 2 , the
+
+position of the dung beetle engaged in ball-rolling remains stationary.
+2.3.2.
+
+Breeding
+
+In the wild, dung beetles choose a secure location for reproduction, and to emulate this instinct,
+the paper suggests a strategy for boundary selection to represent this zone, as outlined below in
+Eqs (8) and (9):
+L*b = max( X * (1 − R), Lb ) ,
+
+(8)
+
+Ub* = min( X * (1 + R),U b ) .
+
+(9)
+
+Once the dung beetle discovers the most-favorable area for reproduction, it begins the spawning
+process in this specific zone. Each instance of spawning for the beetle is equivalent to an iteration that
+refines its location. Considering the ever-changing character of the spawning zone, it ensures the
+exploration of the area housing the current best solution while avoiding entrapment in a local minimum.
+The formula for updating the position of the reproducing dung beetle is presented in Eq (10).
+*
+.
+Bi (t + 1) = X * + b1 ( Bi (t ) − L*b）+ b（
+2 Bi (t ) − U b）
+
+(10)
+
+In this formulation, X * signifies the most advantageous position among the current population,
+and L*b and U b* represent the minimum and maximum limits for the position of the brood ball,
+respectively. R = (1 − t ) / Tmax denotes the nonlinear convergence coefficient, where Tmax is the
+maximum number of iterations allowed, and Lb and U b are the lower and upper boundaries for the
+optimization problem, respectively. Bi (t ) is the location of the i-th brood ball at the t-th iteration,
+and b1 and b2 are two independent random numbers.
+2.3.3.
+
+Foraging
+
+As the juvenile dung beetles mature into adulthood, they emerge from the soil to seek out
+sustenance. Additionally, the area designated for foraging is progressively modified with each iteration,
+as described by the subsequent equation:
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17361
+
+Lf b = max( X b (1 − R ) , Lb ) ,
+
+(11)
+
+Uf b = min( X b (1 + R ) ,U b ) ,
+
+(12)
+
+xi (t + 1) = xi (t ) + C1 ( xi (t ) − Lf b ) + C2 ( xi (t ) − Uf b ) .
+
+(13)
+
+Here, X b represents the most-favorable position on a global scale, Lf b and Uf b are employed
+to establish the confines of the foraging territory for the young dung beetles, C1 is a random number
+that follows a Gaussian distribution, and C2 is a vector of randomness that is confined within the
+range from 0 to 1.
+2.3.4.
+
+Stealing
+
+Certain dung beetles opt to pilfer dung balls from their counterparts. To replicate this conduct in
+a model, X b is utilized to signify the site of the disputed dung balls. The act of thievery is
+characterized by the position alteration of the thieving dung beetle, and this positional change is
+delineated by the subsequent formula:
+xi (t + 1) = X b + Sg ( xi (t ) − X * ) + xi (t ) − X b .
+
+(14)
+
+In Eq (14), g symbolizes a vector of random numbers that are normally distributed across
+dimension D and S represents a fixed value.
+2.4. Improved dung beetle optimization (IDBO) algorithm
+2.4.1.
+
+Strategy 1: Population initialization based on chaotic mapping
+
+The DBO algorithm adopts random initialization to determine the starting positions of the dung
+beetle population. This strategy may result in individuals being overly concentrated, duplicated, or
+sparsely scattered in the solution space, thereby weakening population diversity. Given the strong
+ergodicity and non-repetitiveness of chaotic mapping, it can effectively enrich the diversity of the
+initial population and further boost the optimization efficiency of the algorithm.
+While logistic and tent maps are common, they can suffer from uneven distribution in certain
+parameter ranges or fixed points. The composite SPM map, by combining sine and piecewise linear
+chaotic maps, is designed to achieve better ergodicity (more thorough coverage of the solution space)
+and uniformity across the entire [0,1] interval, as visually evidenced in Figure 2(a) and (b). This
+superior traversal property helps in generating a more diverse initial population for the IDBO, which
+is crucial for improving the algorithm's global exploration capability from the outset. A reference to
+literature discussing the properties of composite chaotic maps has been added for support.
+Therefore, to overcome the limitations of random population initialization in DBO, this study
+combines sine mapping and a piecewise linear chaotic map to propose a new composite chaotic
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17362
+
+mapping strategy, named the SPM. This method ensures a more uniform and ergodic distribution of
+the initial dung beetle population. The mathematical formulation of the SPM is given as follows:
+
+Zn
+
+mod (  +  sin( Z n ) + r ,1), 0  Z n   ,
+
+Zn / 
+
+mod ( 0.5 −  +  sin( Z n ) + r ,1),   Z n  0.5,
+
+Z n +1 = 
+mod ( (1 − Z n ) /  +  sin( (1 − Z )) + r ,1), 0.5  Z  1 −  ,
+n
+n
+
+0.5 − 
+
+mod ( (1 − Z n ) +  sin( (1 − Z )) + r ,1), 1 −   Z  1.
+n
+n
+
+
+
+(15)
+
+where Z n and Z n+1 denote the n -th and (n + 1) -th chaotic values.   (0,1) ,   (0,1) , and r
+signifies a number that is randomly generated and falls within the interval from 0 to 1. mod ()
+symbolizes the modulo operation. Figure 2 illustrates the initial distribution pattern of the SPM
+mapping when  = 0.4 and  = 0.3 . It is observable in Figure 2(a) that the SPM exhibits effective
+traversal across the entire space, and Figure 2(b) demonstrates that the initial distribution of the SPM
+is highly uniform, yielding commendable outcomes.
+
+Figure 2. SPM population initialization: (a) Scatter plot; (b) Frequency distribution histogram.
+2.4.2. Strategy 2: Combining an adaptive step size with the strategy of inverse imaging through a
+convex lens
+Since the DBO algorithm relies on random searching, it lacks effective self‑adjustment during the
+foraging process. This weakens its global exploration ability and tends to trap the algorithm in local
+optimal solutions. To strengthen the search performance, a dynamic selection mechanism is introduced
+in this study. This mechanism adaptively updates the individual position by randomly choosing
+between the adaptive step size strategy and the convex lens imaging strategy according to a preset
+probability.
+In the early iteration stage, a large step size can effectively expand the foraging search range,
+strengthen the global exploration ability of the algorithm, help quickly find better solutions, and speed
+up convergence. In the later stage, a small step size is conducive to performing a refined local search.
+The orderly adjustment of the step size forms a directional guidance mechanism for the foraging
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17363
+
+behavior of dung beetles, realizing the smooth transition from global exploration to local development.
+This strategy is mainly controlled by the linearly decreasing adaptive step adjustment factor  0 , as
+shown below:
+
+
+t
+ 0 = cos[  (1 + )] .
+3
+
+(16)
+
+T
+
+At the same time, a convex lens imaging learning strategy is introduced to generate appropriate
+disturbances in the foraging dung beetle population. This mechanism effectively improves population
+diversity and strengthens the algorithm’s ability to jump out of local optimal solutions. The
+mathematical expression of this strategy is given as follows:
+
+Pj* =
+
+a j +b j
+2
+
++
+
+a j +b j
+2k
+
+−
+
+Pj
+k
+
+(17)
+
+,
+
+where Pj represents the component of the current individual in the j-th dimension. a j and b j denote
+the minimum and maximum values of the j-th dimension, respectively. Pj * is the convex lens inverse
+solution of Pj .
+Ultimately, the decision on which strategy to apply for updating the target location is made based
+on the selection probability Ps , as expressed in Eq (18). If the stochastic value Ps is less than 0.5, a
+random step strategy is implemented for the position refreshment of the foraging dung beetles; on the
+contrary, if Ps is greater than or equal to 0.5, the position adjustments are carried out using the convex
+lens inverse learning strategy, as specified in Eq (19):
+
+t
+Ps = − exp(1 − )10 .
+T
+
+(18)
+
+t
+ xi (t + 1) =  0  Pgbest
++ C1  ( Pi t − Lf b ) + C2  ( Pi t − Uf b ), Ps  0.5,
+
+t
+
+Lf b + Uf b Lf b + Uf b Pg best
++
+−
+,
+Ps  0.5.
+ xi (t + 1) =
+2
+2k
+k
+
+
+(19)
+
+2.4.3. Strategy 3: Integrating dynamic weighting elements and Levy flight maneuvers into the
+formula for updating the dung beetles' positions during the act of thievery
+Likewise, since X b represents the prime food source, it attracts the thieving dung beetle. To
+prevent the risk of the thieving dung beetle falling into a local optimum, a dynamic weighting
+coefficient  and a Levy flight mechanism have been integrated into the position update equation.
+This modification enhances the influence of the global optimum and the previous generation's position
+on the current location of the thieving dung beetle. The revised formula is presented as follows:
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17364
+
+xi (t + 1) = levy  X b + S  g  ( xi (t ) − X * + xi (t ) −   X b ),
+
+=
+
+exp(2  (1 − t / Tmax )) − exp(−2  (1 − t / Tmax ))
+,
+exp(2  (1 − t / Tmax ) + exp(−2  (1 − t / Tmax ))
+
+levy = 0.01   r / v
+
+1/ 
+
+,
+
+(20)
+
+1/ 
+
+  (1 +  )sin( / 2) 
+ u =  (  −1)/2
+ .
+ [(1 +  ) / 2] 
+2
+Here, u denotes a normally distributed variable with a mean of 0 and a standard deviation of
+ u ; v and r conform to the standard normal distribution, which is utilized to produce random
+numbers ranging from 0 to 1; and  is a stochastic number that lies within the interval from 0 to 2.
+2.4.4.
+
+Performance test of the IDBO algorithm
+
+To verify the effectiveness of the improved dung beetle optimization (IDBO) algorithm in avoiding
+local optima and enhancing global search capability, comparative experiments are conducted with
+several representative metaheuristic approaches, including the whale optimization algorithm
+(WOA) [43], standard dung beetle optimization (DBO) [4], gray wolf optimization (GWO) [45],
+Northern Goshawk optimization (NGO) [46], and Harris hawks optimization (HHO) [47]. The
+parameter settings of each comparison algorithm follow the recommended values in their original
+literature, and the detailed configurations are summarized in Table 1.
+Table 1. Parameters of the algorithms.
+Algorithm
+DBO
+WOA
+GWO
+HHO
+
+Parameter
+k
+b
+
+
+J
+
+
+
+NGO
+IDBO
+
+r
+K
+b
+
+Value
+0.1
+0.3
+[0,2]
+[0,2]
+[0,2]
+1.5
+[0,1]
+0.1
+0.3
+
+The CEC2021 benchmark suite consists of a series of classical test functions, which is widely
+adopted to validate the performance of metaheuristic optimization algorithms. It comprises four
+categories of test functions: unimodal, basic, hybrid, and composite functions, allowing a
+comprehensive and systematic evaluation of the proposed IDBO algorithm. In this study, the CEC2021
+benchmark is employed to assess the performance of IDBO, as detailed in Table 2. In particular, the
+unimodal function F1 is used to examine the convergence speed and exploitation ability of the
+algorithm. The basic functions F2 and F4 are adopted to verify its global search capability and local
+optimum avoidance performance. The hybrid functions F5 and F7 are applied to test its competence
+in solving complex optimization problems. Finally, the composite functions F8 and F10 are utilized to
+evaluate the stability and robustness of the algorithm in complex search spaces.
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17365
+
+Table 2. CEC 2021 test functions.
+Type
+Unimodal
+Basic
+
+Hybrid
+
+Composition
+
+No
+F1
+F2
+F3
+F4
+F5
+F6
+F7
+F8
+F9
+F10
+
+Function
+CEC01
+CEC02
+CEC03
+CEC04
+CEC05
+CEC06
+CEC07
+CEC08
+CEC09
+CEC10
+
+Fmin
+
+Search range
+
+0
+
+[-100,100]
+
+All algorithmic tests are conducted under the same hardware and software environment with
+MATLAB 2023b to ensure fair comparison. For all algorithms, a unified population size of 30,
+maximum iteration of 500, and problem dimension of 20 are adopted. Each algorithm runs 30
+independent trials, and its performance is evaluated using three indicators: the best value (BV), mean
+value (MV), and standard deviation (SD). Larger population sizes and higher iteration counts will
+increase computational overhead, so the combination of 30 individuals and 500 iterations is chosen as
+a moderate-scale setup, which can obtain stable results while controlling computing costs. The problem
+dimension reflects the complexity of the feature space, and high-dimensional optimization is generally
+more challenging. In this work, a dimension of 20 is set as a relatively rigorous test condition to verify
+the effectiveness of each algorithm when solving complex high-dimensional problems. Figure 3
+presents the convergence curves of six algorithms over the CEC2021 test functions.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17366
+
+Figure 3. Convergence curves of CEC2021 test functions.
+Table 3 presents the experimental results of the seven algorithms evaluated on the CEC2021
+benchmark functions, with the optimal results highlighted in bold. As clearly shown in the table, the
+proposed IDBO algorithm exhibits superior performance over the other five comparison algorithms.
+Among the ten test functions, IDBO is able to converge to the theoretical optimum for all functions
+except F6 and F7. Although it does not attain the theoretical optimal value on the relatively complex
+F6 and F7 functions, IDBO still achieves a remarkable improvement over the original DBO algorithm.
+Furthermore, IDBO outperforms DBO consistently across all test functions, regardless of whether they
+are unimodal, basic, hybrid, or composite functions, suggesting that IDBO has more stable and robust
+optimization performance. Based on the above experimental analysis, the improved IDBO algorithm
+achieves higher solution accuracy and stronger optimization reliability, which fully verifies the
+effectiveness of the improved strategies proposed in this paper.
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17367
+
+Table 3. Experimental results from the CEC2021 benchmark functions.
+Function
+F1
+
+F2
+
+F3
+
+F4
+
+F5
+
+F6
+
+F7
+
+F8
+
+F9
+
+F10
+
+Index
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+BV
+SD
+MV
+
+GWO
+9.43E-80
+6.58E-67
+1.58E-67
+0
+5.13E+02
+1.88E+02
+0
+1.76E-30
+2.92E-31
+0
+7.28E-01
+2.93E-01
+3.91E-72
+3.78E-16
+6.68E-17
+7.88E-08
+1.76E+02
+3.38E+01
+9.42E-04
+7.88E-02
+6.42E-02
+0
+6.28E-17
+1.26E-17
+5.82E-89
+4.52E-16
+7.82E-16
+2.78E-04
+3.65E-02
+9.55E-02
+
+WOA
+2.55E-100
+4.66E-107
+8.42E-108
+0
+8.72E+02
+4.43E+02
+0
+4.52E+01
+1.78E+01
+0
+3.72E+00
+1.83E+00
+7.88E-101
+3.43E+01
+4.87E+00
+0
+1.73E+02
+5.75E+01
+2.58E-08
+1.42E+00
+3.28E-01
+0
+0
+0
+5.67E-165
+5.88E-103
+1.05E-100
+1.53E-09
+3.77E+01
+2.45E+01
+
+HHO
+3.16E-123
+0
+7.66E-165
+0
+9.21E-15
+5.88E-15
+0
+0
+0
+0
+0
+0
+1.26E-24
+7.43E-20
+3.72E-20
+4.77E-05
+1.43E-04
+2.84E-04
+2.66E-05
+7.88E-05
+1.82E-04
+0
+0
+0
+5.18E-34
+3.03E-14
+7.73E-14
+6.72E-04
+2.47E-04
+1.28E-03
+
+NGO
+4.91E-105
+1.48E-29
+5.82E-30
+1.95E-13
+3.96E+01
+2.47E+02
+4.38E-26
+6.26E+01
+8.02E+01
+0
+1.38E+00
+6.77E-01
+3.17E-19
+3.53E+01
+8.56E+00
+8.34E-02
+2.58E+00
+2.95E+00
+2.46E-02
+1.78E+00
+1.78E+00
+0
+0
+0
+3.68E-15
+1.73E-15
+4.78E-15
+8.77E-03
+3.68E+01
+7.25E+01
+
+DBO
+5.59E-117
+2.20E-88
+3.84E-90
+0
+0
+0
+0
+0
+0
+0
+0
+0
+4.33E-78
+2.38E-80
+6.53E-81
+6.12E-04
+5.77E-01
+1.86E-01
+4.77E-04
+5.88E-04
+2.56E-04
+0
+0
+0
+8.92E-15
+8.62E-15
+9.23E-15
+2.72E-88
+8.53E-79
+3.42E-75
+
+IDBO
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+-2.2E-16
+7.66E-17
+-1.96E-14
+1.05E-16
+2.49E-16
+-1.52E-16
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+3. Datasets and description
+In this investigation, the dataset encompasses variables related to explosive characteristics,
+geological settings, attributes of the rock, configurations of the blasts, and the monitoring data from
+the vibrations produced by blasting. This research utilizes a compilation of 108 instances of blasting,
+each with nine distinct input parameters and a pair of output parameters. Table 4 provides a statistical
+summary of the dataset employed in this investigation. Figure 4 presents the features’ distribution as a
+histogram.
+For each continuous variable (e.g., PPV, frequency, distance, charge, etc.), we applied the
+augmented Dickey‑Fuller (ADF) test. Results show that all series are stationary (p‑value < 0.05) after
+removing any obvious trends. For variables with slight trends, we applied first‑order differencing.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17368
+
+Table 4. Description of all parameters.
+Type
+Inputs
+
+Indicator
+Maximum
+charge per
+delay
+Total charge
+Distance
+Elevation
+difference
+Resistance
+line
+Pre-split
+penetration
+ratio
+Integrity
+coefficient
+Angle
+between
+resistance
+line
+and
+measureme
+nt station
+Velocity of
+detonation
+Outputs PPV
+Frequency
+
+Symbol
+M
+
+Unit
+kg
+
+Min
+160
+
+Max
+5590
+
+Mean
+1081.1
+
+Std.Dev
+968.7
+
+T
+D
+E
+
+kg
+m
+M
+
+936
+47.1
+6
+
+9000
+444.3
+109.3
+
+4263.9
+176.7
+54.5
+
+2087.1
+98.9
+24.6
+
+R
+
+m
+
+4
+
+7
+
+5.4
+
+0.8
+
+P
+
+%
+
+0
+
+100
+
+29.6
+
+42.0
+
+I
+
+-
+
+0.3
+
+0.78
+
+0.6
+
+0.1
+
+A
+
+°
+
+0
+
+180
+
+128.0
+
+62.7
+
+V
+
+m/s
+
+2800
+
+4200
+
+3434.0
+
+700.2
+
+PPV
+Freque
+ncy
+
+cm/s
+Hz
+
+0.1
+14.3
+
+5.37
+51.1
+
+1.21
+34.0
+
+1.2
+10.0
+
+The integrity coefficient I is a dimensionless parameter defined as the ratio of the average P‑wave
+velocity in the rock mass to that in an intact rock core. In this study, it was measured using the sonic
+wave velocity testing method. Specifically, we drilled boreholes at each blast site, measured P‑wave
+velocity in situ, and divided it by the laboratory‑measured P‑wave velocity of intact samples from the
+same block.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17369
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17370
+
+Figure 4. Histograms of the eleven features.
+4. Results and discussions
+4.1. Feature selection results
+In this study, the maximal information coefficient (MIC) is adopted to quantify the contribution
+degree of each influencing factor to both PPV and frequency. Meanwhile, the MIC can effectively
+capture the potential indirect relationships between independent and dependent variables, thereby
+facilitating the identification of critical input variables for the model. The MIC analysis results
+corresponding to PPV and frequency are illustrated in Figures 5 and 6, respectively.
+
+Figure 5. Thermal diagram of MIC analysis results of PPV.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17371
+
+Figure 6. Thermal diagram of MIC analysis results of frequency.
+Feature selection (MIC): Reducing the input dimensionality from 9 to 8/9 key features minimizes
+noise and irrelevant information, directly countering overfitting by simplifying the model's task. The
+MIC is utilized to examine the "contribution" of each factor toward the output value of the PPV and
+frequency.
+The threshold of 0.2 was determined based on a combination of domain knowledge and statistical
+analysis. By examining the distribution of MIC values (as seen in Figures 5 and 6), we observed that
+the correlation (MIC value) for most features with the targets ranged between 0.1 and 0.5. A threshold
+of 0.2 effectively filters out parameters with very weak correlations (MIC < 0.2), which typically have
+minor or ambiguous physical influence on blast vibration in the context of our dataset.
+The threshold of 0.2 was chosen based on a combination of statistical reasoning and domain
+knowledge. MIC values range from 0 (no relationship) to 1 (perfect relationship). A threshold of 0.2
+was set to filter out features with only very weak associations, focusing on those with at least a modest
+correlation to the target. The distribution of MIC values in Figures 5 and 6 shows a natural gap or drop
+near this value.
+Regarding the different treatment of the velocity of detonation (V), we now explain that the MIC
+analysis revealed a stronger nonlinear relationship between V and frequency (MIC > 0.2) than between
+V and PPV (MIC < 0.2). This aligns with the physical understanding that detonation velocity can
+influence the frequency spectrum of the induced vibration wave. Its exclusion from the PPV model
+simplifies it without significant information loss, as other factors like charge weight and distance
+dominate PPV prediction.
+The key parameters selected by this threshold (e.g., distance D, maximum charge per delay M,
+integrity coefficient I, pre-split penetration ratio P) have clear physical meanings. Distance (D) is
+directly related to the geometric attenuation of vibration waves. The maximum charge per delay (M)
+is the primary source of vibration energy. The rock mass integrity coefficient (I) reflects the wave
+propagation and attenuation characteristics of the rock mass. The pre-split penetration ratio (P)
+indicates the quality of the pre-split surface, which affects the direction and isolation of blast energy.
+Therefore, the MIC threshold of 0.2 acts not only as a statistical filter but also aligns with the selection
+of parameters known to have significant physical effects in blasting engineering practice. Parameters
+with very low MIC values (e.g., below 0.1) were found to have an insignificant physical impact within
+our specific dataset and were thus removed.
+Variables with a "contribution degree" greater than 0.2 are incorporated as inputs in the predictive
+model, as illustrated in Table 5. Following the MIC analysis, each sample comprises solely the
+aforementioned selected input data.
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17372
+
+Table 5. Features after feature selection.
+Type
+
+Selected features
+
+PPV
+
+M、T、D、E、R、P、I、A
+
+Frequency
+
+M、T、D、E、R、P、I、A、V
+
+4.2. Evaluation benchmarks
+To better effectively assess the performance of the proposed algorithm, the following metrics will
+be utilized as the evaluation benchmarks, including root mean square error ( RMSE ), mean squared
+error ( MSE ) and coefficient of determination ( R 2 ), which are defined as follows:
+
+RMSE =
+
+1 N
+( X i − Yi )2 ,
+
+N i =1
+N
+
+(X −Y )
+
+MSE = i =1
+
+i
+
+2
+
+i
+
+N
+
+N
+
+i
+
+−
+
+−
+
+i
+
+2
+
+i
+
+(X −Y )
+i =1
+
+(22)
+
+,
+
+(X −Y )
+
+R 2 = 1 − i =N1
+
+(21)
+
+(23)
+
+.
+2
+
+i
+
+Here, N signifies the total count of data points, i represents each individual data point, and X i
+−
+
+−
+
+and Yi denote the actual and forecasted values, respectively. X i and Yi refer to the means of actual
+and forecasted values, respectively.
+4.3. Comparative experiments
+4.3.1.
+
+Comparative experiment I
+
+To comprehensively assess the predictive accuracy of the suggested framework, four comparative
+models (MIC-IDBO-DELM\IDBO-DELM\MIC-DELM\DELM) are established based on 70% of the
+training set and 30% of the testing set in comparative experiment I. The above four models, including
+the DELM and IDBO-DELM models that considered all variables as inputs and the other two that
+considered important variables as inputs, were utilized to establish the feasibility of the proposed
+hybrid framework.
+The outcomes for the PPV and frequency predictions of the MIC-DELM, IDBO-DELM, and
+MIC-IDBO-DELM models during the testing phase are detailed in Table 6. While the PPV prediction
+results indicate that all models possess satisfactory precision, the hybrid MIC-IDBO-DELM model
+outperforms the others in terms of accuracy. The RMSEs for the DELM, MIC-DELM, IDBO-DELM,
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17373
+
+and MIC-IDBO-DELM are 0.993, 0.814, 0.616, and 0.237, respectively, with the MIC-IDBO-DELM
+showing the lowest RMSE. In contrast, the DELM exhibits the highest RMSE. Corresponding
+observations are made regarding the MSE values, as well. In addition, R2 values for the DELM, MICDELM, IDBO-DELM, and MIC-IDBO-DELM models in predicting PPV are 0.812, 0.854, 0.917,
+and 0.975, respectively. The highest R2 is observed to be 0.975 from the MIC-IDBO-DELM model.
+The results demonstrate that the hybrid MIC-IDBO-DELM and MIC-DELM models outperform the
+IDBO-DELM and DELM models, respectively.
+As presented in Table 6, consistent conclusions can also be drawn from the frequency prediction
+results. The MIC-IDBO-DELM model still achieves the best overall performance, characterized by
+the lowest RMSE and MSE values as well as the highest R2 value. Specifically, the RMSE, MSE, and
+R2 of MIC-IDBO-DELM are 3.273, 4.351, and 0.954, respectively, whereas those of MIC-DELM
+are 8.167, 12.673, and 0.823. The performance indicators in Table 6 demonstrate that integrating the
+MIC method for key input feature selection effectively improves the prediction performance of both
+the DELM and IDBO-DELM models.
+Table 6. Performance metrics of different models in the test phase.
+Models
+DELM
+MIC-DELM
+IDBO-DELM
+MIC-IDBODELM
+4.3.2.
+
+MSE
+0.672
+0.556
+0.412
+
+PPV
+RMSE
+0.993
+0.814
+0.616
+
+0.108
+
+0.237
+
+R
+0.812
+0.854
+0.917
+
+Frequency
+MSE
+RMSE
+11.375
+17.114
+8.167
+12.673
+6.381
+8.356
+
+R2
+0.793
+0.823
+0.881
+
+0.975
+
+3.273
+
+0.954
+
+2
+
+4.351
+
+Comparative experiment II
+
+To fully illustrate the superior prediction performance of the proposed hybrid model, four
+representative single models, namely, the ANN, XGBoost, AdaBoost, and Bagging, are selected for
+comparative validation in experiment II. Figures 7‒9 and Table 7 summarize the performance metrics,
+including MSE, RMSE, and R2, obtained by the proposed hybrid model and the aforementioned single
+models in the prediction of PPV and frequency.
+Taking the MSE metric as an example, in PPV prediction, the proposed model reduces the MSE
+by 0.635, 0.507, 0.444, and 0.239, respectively, compared with the ANN, XGBoost, AdaBoost, and
+Bagging models. For the RMSE index, the corresponding reductions are 0.75, 0.63, 0.495, and 0.307.
+In terms of the coefficient of determination R2, the proposed model achieves improvements
+of 20.37%, 17.74%, 14.11%, and 9.03% over the four single models. Meanwhile, similar improvement
+trends are also obtained in frequency prediction. The above results demonstrate that the proposed
+hybrid framework exhibits stronger robustness and higher prediction accuracy than the individual
+benchmark models in PPV prediction tasks.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17374
+
+Table 7. Performance evaluation of the proposed model compared with four single models.
+Models
+ANN
+XGBoost
+AdaBoost
+Bagging
+MIC-IDBODELM
+
+MSE
+0.743
+0.615
+0.552
+0.347
+
+PPV
+RMSE
+0.987
+0.867
+0.732
+0.544
+
+0.108
+
+0.237
+
+R
+0.752
+0.802
+0.841
+0.887
+
+Frequency
+MSE
+RMSE
+13.682
+20.324
+9.766
+18.720
+8.775
+11.446
+6.941
+8.627
+
+R2
+0.707
+0.764
+0.808
+0.835
+
+0.975
+
+3.273
+
+0.954
+
+2
+
+4.351
+
+Figure 7. MSE results for PPV and frequency.
+
+Figure 8. RMSE results for PPV and frequency.
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17375
+
+Figure 9. R2 results for PPV and frequency.
+4.3.3.
+
+Comparative experiment III
+
+To further validate the effectiveness and advantages of the proposed method, this section
+compares it with representative existing approaches from recent relevant literature. The corresponding
+comparison results are summarized in Table 8.
+As reflected by the RMSE error metric in Table 8, the proposed method achieves respective
+reductions of 0.216, 0.152, 1.332, 0.995, 1.524, 0.103, 1.505, and 48.63 in RMSE values compared
+with MRFO‑SONIA, SpaSO‑ELM, MARS‑PSO‑MLP, AutoencoderNN‑SVR, HGS‑ANN, HHO‑RF,
+XGBoost, and MARs. Meanwhile, the corresponding R 2 values are enhanced by 8.36%, 6.26%,
+8.09%, 9.03%, 5.44%, 3.59%, 2.36%, and 17.33%, respectively. These results clearly demonstrate that
+the model developed in this study surpasses the comparative models and delivers significantly
+improved accuracy for PPV prognosis. In summary, the prediction results obtained using the proposed
+hybrid model are verified to be reliable and effective.
+Table 8. Comparison prediction results of different methods for PPV.
+Model
+MRFO-SONIA [48]
+SpaSO-ELM [49]
+MARS-PSO-MLP [50]
+AutoencoderNN-SVR [51]
+HGS-ANN [52]
+HHO-RF [53]
+XGBoost [54]
+MARs
+This paper
+
+RMSE
+0.453
+0.389
+1.569
+1.232
+1.761
+0.34
+1.742
+48.867
+0.237
+
+R2
+0.896
+0.914
+0.902
+0.887
+0.922
+0.940
+0.952
+0.806
+0.975
+
+5. Conclusions
+Environmental concerns associated with mining blasting operations have become increasingly
+prominent, which makes accurate prediction of blasting vibration essential to alleviate its adverse
+effects. High-precision prediction models for peak particle velocity (PPV) and vibration frequency
+represent a practical and effective approach. In this research, a novel hybrid prediction framework is
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17376
+
+proposed, which combines the deep extreme learning machine (DELM) with the maximal information
+coefficient (MIC) and improved dung beetle optimizer (IDBO) to boost the accuracy of blasting
+vibration prediction. In this integrated DELM model, the MIC is adopted to implement intelligent
+feature selection, whereas IDBO is employed to optimize the critical hyperparameters of the network.
+Taking into account all nine input variables, two streamlined MIC models were constructed for
+the purpose of feature selection. The MIC models chose eight and nine input variables for the
+prediction of PPV and frequency, respectively. Subsequently, to enhance the precision of PPV and
+frequency forecasting, IDBO was employed to determine the hyperparameters of the DELM. The
+hybrid MIC-IDBO-DELM model’s performance was then assessed against the DELM, MIC-DELM,
+and IDBO-DELM models using metrics such as MSE, RMSE, and R2. The findings demonstrated that
+the hybrid MIC-IDBO-DELM model outperformed the others, achieving MSE of 0.108 (cm/s)2
+and 3.273 (cm/s)2, RMSE of 0.237cm/s and 4.351 cm/s, and R2 of 0.975 and 0.954 for the PPV and
+frequency prediction, respectively.
+The MIC component of the hybrid model was capable of not only picking out crucial variables
+for model input but also assessing the relative significance of these selected variables. In this research,
+distance emerged as the paramount input variable, significantly surpassing other variables in
+importance. In addition, the maximum charge per delay, pre-split penetration ratio, and integrity
+coefficient were also identified as highly significant.
+Distance (D): Confirmed as paramount due to geometric attenuation of seismic waves.
+Integrity Coefficient (I): A high significance indicates that vibrations attenuate more rapidly in
+fractured rock masses (low I) due to increased scattering and energy dissipation at joints, whereas more
+intact rock (high I) transmits vibrations more efficiently and to greater distances. This physically
+explains its importance in the model.
+Pre-split Penetration Ratio (P): A high-quality pre-split (high P) acts as a designed fracture plane,
+effectively reflecting and attenuating blast energy, thereby reducing the vibration behind it. The model
+successfully captures this engineered vibration control mechanism.
+Maximum Charge Per Delay (M): The primary source of vibration energy.
+The results established the viability and efficacy of the integrated MIC-IDBO-DELM model as a
+cost-effective, interpretable, and straightforward approach for predicting blasting vibrations. The
+composite model possesses significant capacity to manage intricate and multivariable nonlinear
+challenges, including those related to blasting vibrations. The interpretability of our hybrid model
+primarily stems from the MIC-based feature selection stage, which clearly ranks and selects the most
+influential blasting parameters (D, M, I, P). This provides actionable insights for engineers. We clarify
+that while the DELM itself is a complex function approximator, its internal weights are not directly
+human-interpretable. The model's "straightforward" nature refers to its defined pipeline
+(MIC→IDBO→DELM) for practical application.
+The proposed MIC-IDBO-DELM framework offers a systematic design: The MIC first filters out
+redundant features, and then IDBO optimizes the DELM to mitigate its randomness issue. This
+sequential "feature selection + optimizer + core predictor" structure provides a more comprehensive
+solution compared to models using only a subset of these components (e.g., DELM, IDBO-DELM,
+MIC-DELM) and many existing hybrid models. The superior performance of this integrated approach
+is conclusively demonstrated by the comparative experimental results in Section 4.3.1. Note
+comparative experiment I, where the MIC-IDBO-DELM achieved the best metrics.
+Testing the model on data from different geological settings, integrating real-time sensor data for
+adaptive prediction, exploring hybrid models with other deep learning architectures, and developing a
+user-friendly software interface for field engineers are all possible directions for future work.
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17377
+
+Author contributions
+Ting Zhu: Investigation, methodology, project administration, resources, software, supervision,
+validation, visualization; Hui Lan: Funding acquisition, formal analysis, writing—review and editing.
+All authors have read and approved the final version of the manuscript for publication.
+Use of Generative-AI tools declaration
+The authors declare they have not used Artificial Intelligence (AI) tools in the creation of this
+article.
+Acknowledgments
+The authors acknowledge the Natural Science Foundation of Hubei Province, China (No.
+2024AFB1008), National Natural Science Foundation of China (Grant Nos. 52578584, 52478525, and
+U25A20355), Natural Science Foundation of Hubei Province (Grant No. 2024AFA092), National Key
+Research and Development Program (2021-008), Wuhan Key Research and Development Program
+(2024050802030155), 2024 Chutian Talent Plan-Science and Technology Innovation Team Project,
+Central Government-guided Local Science and Technology Development Special Project of Hubei
+Province (2025CSA01), Doctor Initiated Fund of State Key Laboratory of Precision Blasting [PBSKL2025-QD-12], and Hubei Provincial Key Laboratory of Metallurgical Industry Process System Science
+(No. Y202401).
+Conflict of interest
+The authors declare no conflicts of interest.
+References
+1.
+
+2.
+
+3.
+
+4.
+
+5.
+
+Y. Yan, X. Hou, H. Fei, Review of predicting the blast-induced ground vibrations to reduce
+impacts on ambient urban communities, J. Clean. Prod., 260 (2020), 121135.
+https://doi.org/10.1016/j.jclepro.2020.121135
+S. Hosseini, M. Monjezi, E. Bakhtavar, Minimization of blast-induced dust emission using geneexpression programming and grasshopper optimization algorithm: a smart mining solution based
+on blasting plan optimization, Clean Technol. Environ. Policy, 24 (2022), 2313–2328.
+https://doi.org/10.1007/s10098-022-02327-9
+S. Hosseini, M. Monjezi, E. Bakhtavar, A. Mousavi, Prediction of dust emission due to open pit
+mine blasting using a hybrid artificial neural network, Nat. Resour. Res., 30 (2021), 4773–4788.
+https://doi.org/10.1007/S11053-021-09930-5
+V. Balakrishnan, P. Rai, An overview of flyrock and its prediction in surface mine blasting using
+soft computing techniques, Recep Tayyip Erdogan Univ. J. Sci. Eng., 2 (2021), 105–119.
+https://doi.org/10.53501/rteufemud.986903
+R. Zhang, Y. Li, Y. Gui, J. Zhou, Prediction of blasting induced air-overpressure using a radial
+basis function network with an additional hidden layer, Appl. Soft Comput., 127 (2022), 109343.
+https://doi.org/10.1016/j.asoc.2022.109343
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17378
+
+6.
+
+S. Hosseini, R. Poormirzaee, M. Hajihassani, Application of reliability-based back-propagation
+causality-weighted neural networks to estimate air-overpressure due to mine blasting, Eng. Appl.
+Artif. Intell., 115 (2022), 105281. https://doi.org/10.1016/j.engappai.2022.105281
+7. R. Shirani Faradonbeh, D. Jahed Armaghani, M. Abd Majid, M. Md Tahir, B. Ramesh Murlidhar,
+M. Monjezi, et al., Prediction of ground vibration due to quarry blasting based on gene expression
+programming: a new model for peak particle velocity prediction, Int. J. Environ. Sci. Technol., 13
+(2016), 1453–1464. https://doi.org/10.1007/s13762-016-0979-2
+8. E. Bakhtavar, S. Yousefi, Analysis of ground vibration risk on mine infrastructures: Integrating
+fuzzy slack-based measure model and failure effects analysis, Int. J. Environ. Sci. Technol., 16
+(2019), 6065–6076. https://doi.org/10.1007/s13762-018-2008-0
+9. V. N. Torres, L. G. Silveira, P. F. Lopes, H. M. De Lima, Assessing and controlling of bench
+blasting-induced vibrations to minimize impacts to a neighboring community, J. Clean. Prod.,
+187 (2018), 514–524. https://doi.org/10.1016/j.jclepro.2018.03.210
+10. K. Peng, J. Zeng, D. J. Armaghani, M. Hasanipanah, Q. Chen, A novel combination of gradient
+boosted tree and optimized ANN models for forecasting ground vibration due to quarry blasting,
+Nat. Resour. Res., 30 (2021), 4657–4671. https://doi.org/10.1007/s11053-021-09899-1
+11. A. I. Lawal, S. Kwon, G. Y. Kim, Prediction of the blast-induced ground vibration in tunnel
+blasting using ANN, moth-flame optimized ANN, and gene expression programming, Acta
+Geophys., 69 (2021), 161–174. https://doi.org/10.1007/s11600-020-00532-y
+12. R. S. Faradonbeh, M. Monjezi, Prediction and minimization of blast-induced ground vibration
+using two robust meta-heuristic algorithms, Eng. Comput., 33 (2017), 835–851.
+https://doi.org/10.1007/s00366-017-0501-6
+13. A. Kumar, P. Singh, S. K. Sharma, N. Kishore, C. Singh, Quantitative assessment of BIGV and
+structural response based on velocity and frequency around an opencast mine, Curr. Sci., 121
+(2021), 275–285. https://doi.org/10.18520/cs/v121/i2/275-285
+14. K. Norén-Cosgriff, N. Ramstad, A. Neby, C. Madshus, Building damage due to vibration from
+rock
+blasting,
+Soil
+Dyn.
+Earthquake
+Eng.,
+138
+(2020),
+106331.
+https://doi.org/10.1016/j.soildyn.2020.106331
+15. A. Verkholantsev, R. Dyagilev, D. Y. Shulakov, A. Shkurko, Monitoring of earthquake loads
+from blasting in the shakhtau open pit mine, J. Min. Sci., 55 (2019), 229–238.
+https://doi.org/10.1134/S1062739119025503
+16. M. P. Roy, A. K. Mishra, H. Agrawal, P. K. Singh, Blast vibration dependence on total explosives
+weight in open-pit blasting, Arabian J. Geosci., 13 (2020), 531. https://doi.org/10.1007/s12517020-05560-y
+17. M. Rezaei, Modeling and optimizing the drilling and blasting pattern of the Boghde-Kandi quarry
+rubble mine of Saghez, Iran. J. Eng. Geol., 11 (2019), 41–53.
+18. A. Rezaeineshat, M. Monjezi, A. Mehrdanesh, M. Khandelwal, Optimization of blasting design
+in open pit limestone mines with the aim of reducing ground vibration using robust techniques,
+Geomech. Geophys. Geo Energy Geo Resour., 6 (2020), 40. https://doi.org/10.1007/s40948-02000164-y
+19. P. Sun, W. Lu, J. Zhou, X. Huang, M. Chen, Q. Li, Comparison of dominant frequency attenuation
+of blasting vibration for different charge structures, J. Rock Mech. Geotech. Eng., 14 (2022), 448–
+459. https://doi.org/10.1016/j.jrmge.2021.07.002
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17379
+
+20. P. Paurush, P. Rai, S. K. Sharma, Selection of blasting design parameters affecting peak particle
+velocity—a
+case
+study,
+Min.
+Metall.
+Explor.,
+38
+(2021),
+1435–1447.
+https://doi.org/10.1007/s42461-021-00408-9
+21. T. Mokfi, A. Shahnazar, I. Bakhshayeshi, A. M. Derakhsh, O. Tabrizi, Proposing of a new soft
+computing-based model to predict peak particle velocity induced by blasting, Eng. Comput., 34
+(2018), 881–888. https://doi.org/10.1007/s00366-018-0578-6
+22. Y. S. Chae, Effects of blasting vibrations on structures and people, In: Proceedings of 19th US
+symposium on rock mechanics, 1978, 312–318.
+23. J. Zhou, W. Lu, P. Yan, M. Chen, G. Wang, Frequency-dependent attenuation of blasting
+vibration waves, Rock Mech. Rock Eng., 49 (2016), 4061–4072. https://doi.org/10.1007/s00603016-1046-5
+24. M. Khandelwal, T. Singh, Prediction of blast induced ground vibrations and frequency in opencast
+mine: A neural network approach, J. Sound Vib., 289 (2006), 711–725.
+https://doi.org/10.1016/j.jsv.2005.02.044
+25. C. H. Dowding, Blast vibration monitoring for engineering, Excav. Support Monit., 4 (2016), 111.
+26. E. F. Gad, J. L. Wilson, A. J. Moore, A. B. Richards, Effects of mine blasting on residential
+structures, J. Perform. Constr. Facil., 19 (2005), 222–228. https://doi.org/10.1061/(ASCE)08873828(2005)19:3(222)
+27. E. K. Baliktsis, D. C. Kaliampakos, D. G. Damigos, Blasting vibration limits to prevent human
+annoyance remarks from some case studies, Miner. Resour. Eng., 10 (2001), 71–82.
+https://doi.org/10.1142/S0950609801000452
+28. C. P. Singh, H. Agrawal, A. K. Mishra, Frequency channeling: a concept to increase the frequency
+and control the PPV of blast-induced ground vibration waves in multi-hole blast in a surface mine,
+Bull. Eng. Geol. Environ., 80 (2021), 8009–8019. https://doi.org/10.1007/s10064-021-02400-5
+29. P. Rajmeny, R. Shrimali, Use of radar technology to establish threshold values of blast vibrations
+triggering sliding of geological faults at a lead-zinc open pit mine, Int. J. Rock Mech. Min. Sci.,
+113 (2019), 142–149. https://doi.org/10.1016/j.ijrmms.2018.12.004
+30. S. Zhang, W. Gao, L. Yan, J. Liu, L. Liu, The characteristics of blasting vibration frequency bands
+in jointed rock mass slope, Environ. Earth Sci., 79 (2020), 519. https://doi.org/10.1007/s12665020-09267-x
+31. M. Hasanipanah, M. Monjezi, A. Shahnazar, D. J. Armaghani, A. Farazmand, Feasibility of
+indirect determination of blast induced ground vibration based on support vector machine,
+Measurement, 75 (2015), 289–297. https://doi.org/10.1016/j.measurement.2015.07.019
+32. J. Zhou, P. G. Asteris, D. J. Armaghani, B. T. Pham, Prediction of ground vibration induced by
+blasting operations through the use of the Bayesian Network and random forest models, Soil Dyn.
+Earthquake Eng., 139 (2020), 106390. https://doi.org/10.1016/j.soildyn.2020.106390
+33. S. Murmu, P. Maheshwari, H. K. Verma, Empirical and probabilistic analysis of blast-induced
+ground vibrations, Int. J. Rock Mech. Min. Sci., 103 (2018), 267–274.
+https://doi.org/10.1016/j.ijrmms.2018.01.038
+34. A. Abolghasemifar, M. Ataei, S. R. Torabi, M. Nikkhah, Studying peak particle velocity due to
+blast in development tunnels’ face in coal stoping, Int. J. Min. Geo Eng., 52 (2018), 69–74.
+https://doi.org/10.22059/ijmge.2017.241867.594698
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17380
+
+35. A. Das, S. Sinha, S. Ganguly, Development of a blast-induced vibration prediction model using
+an artificial neural network, J. South. Afr. Inst. Min. Metall., 119 (2019), 187–200.
+https://doi.org/10.17159/2411-9717/2019/v119n2a11
+36. N. Torres, J. A. Reis, P. L. Luiz, J. H. R. Costa, L. S. Chaves, Neural network applied to blasting
+vibration control near communities in a large-scale iron ore mine, In: Proceedings of the 27th
+international symposium on mine planning and equipment selection-MPES 2018, Cham: Springer,
+2019, 81–91. https://doi.org/10.1007/978-3-319-99220-4_7
+37. A. Bardhan, P. G. Asteris, Application of hybrid ANN paradigms built with nature inspired metaheuristics for modelling soil compaction parameters, Transp. Geotech., 41 (2023), 100995.
+https://doi.org/10.1016/j.trgeo.2023.100995
+38. W. Zhu, H. N. Rad, M. Hasanipanah, A chaos recurrent ANFIS optimized by PSO to predict
+ground vibration generated in rock blasting, Appl. Soft Comput., 108 (2021), 107434.
+https://doi.org/10.1016/j.asoc.2021.107434
+39. A. Meng, Z. Zhu, W. Deng, Z. Ou, S. Lin, C. Wang, et al., A novel wind power prediction
+approach using multivariate variational mode decomposition and multi-objective crisscross
+optimization based deep extreme learning machine, Energy, 260 (2022), 124957.
+https://doi.org/10.1016/j.energy.2022.124957
+40. H. Yang, Y. Cheng, G. Li, A new traffic flow prediction model based on cosine similarity
+variational mode decomposition, extreme learning machine and iterative error compensation
+strategy,
+Eng.
+Appl.
+Artif.
+Intell.,
+115
+(2022),
+105234.
+https://doi.org/10.1016/j.engappai.2022.105234
+41. Y. Wang, D. Li, Y. Du, Z. Pan, Anomaly detection in traffic using L1-norm minimization extreme
+learning
+machine,
+Neurocomputing,
+149
+(2015),
+415–425.
+https://doi.org/10.1016/j.neucom.2014.04.073
+42. D. Reshef, Y. Reshef, M. Mitzenmacher, P. Sabeti, Equitability analysis of the maximal
+information
+coefficient,
+with
+comparisons,
+arXiv,
+2013.
+https://doi.org/10.48550/arXiv.1301.6314
+43. J. Xue, B. Shen, Dung beetle optimizer: a new meta-heuristic algorithm for global optimization,
+J. Supercomput., 79 (2023), 7305–7336. https://doi.org/10.1007/s11227-022-04959-6
+44. S. Mirjalili, A. Lewis, The whale optimization algorithm, Adv. Eng. Software, 95 (2016), 51–67.
+https://doi.org/10.1016/j.advengsoft.2016.01.008
+45. S. Mirjalili, S. M. Mirjalili, A. Lewis, Grey wolf optimizer, Adv. Eng. Software, 69 (2014), 46–
+61. https://doi.org/10.1016/j.advengsoft.2013.12.007
+46. M. Dehghani, Š. Hubálovský, P. Trojovský, Northern goshawk optimization: a new swarm-based
+algorithm for solving optimization problems, IEEE Access, 9 (2021), 162059–162080.
+https://doi.org/10.1109/ACCESS.2021.3133286
+47. A. A. Heidari, S. Mirjalili, H. Faris, I. Aljarah, M. Mafarja, H. Chen, Harris hawks optimization:
+algorithm and applications, Future Gener. Comput. Syst., 97 (2019), 849–872.
+https://doi.org/10.1016/j.future.2019.02.028
+48. H. Nguyen, X. N. Bui, E. Topal, Enhancing predictions of blast-induced ground vibration in openpit mines: comparing swarm-based optimization algorithms to optimize self-organizing neural
+networks, Int. J. Coal Geol., 275 (2023), 104294. https://doi.org/10.1016/j.coal.2023.104294
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+17381
+
+49. H. Nguyen, X. N. Bui, E. Topal, Reliability and availability artificial intelligence models for
+predicting blast-induced ground vibration intensity in open-pit mines to ensure the safety of the
+surroundings,
+Reliab.
+Eng.
+Syst.
+Saf.,
+231
+(2023),
+109032.
+https://doi.org/10.1016/j.ress.2022.109032
+50. H. Nguyen, X. N. Bui, Q. H. Tran, H. A. Nguyen, D. A. Nguyen, L. T. T. Hoa, et al., Prediction
+of ground vibration intensity in mine blasting using the novel hybrid MARS-PSO-MLP model,
+Eng. Comput., 38 (2022), 4007–4025. https://doi.org/10.1007/s00366-021-01332-8
+51. B. Ke, H. Nguyen, X. N. Bui, R. Costache, Estimation of ground vibration intensity induced by
+mine blasting using a state-of-the-art hybrid autoencoder neural network and support vector
+regression model, Nat. Resour. Res., 30 (2021), 3853–3864. https://doi.org/10.1007/s11053-02109890-w
+52. H. Nguyen, X. N. Bui, A novel hunger games search optimization-based artificial neural network
+for predicting ground vibration intensity induced by mine blasting, Nat. Resour. Res., 30 (2021),
+3865–3880. https://doi.org/10.1007/s11053-021-09903-8
+53. Z. Yu, X. Shi, J. Zhou, X. Chen, X. Qiu, Effective assessment of blast-induced ground vibration
+using an optimized random forest model based on a Harris hawks optimization algorithm, Appl.
+Sci., 10 (2020), 1403. https://doi.org/10.3390/app10041403
+54. H. Nguyen, X. N. Bui, H. B. Bui, D. T. Cuong, Developing an XGBoost model to predict blastinduced peak particle velocity in an open-pit mine: A case study, Acta Geophys., 67 (2019), 477–
+490. https://doi.org/10.1007/s11600-019-00268-4
+© 2026 the Author(s), licensee AIMS Press. This is an open access
+article distributed under the terms of the Creative Commons
+Attribution License (https://creativecommons.org/licenses/by/4.0)
+
+AIMS Mathematics
+
+Volume 11, Issue 6, 17354–17381.
+
+

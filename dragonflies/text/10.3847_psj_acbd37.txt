@@ -1,0 +1,2429 @@
+Updated Radiative Transfer Model for Titan in the Near-infrared Wavelength Range: Validation against Huygens Atmospheric and Surface Measurements and Application to the Cassini/VIMS Observations of the Dragonfly Landing Area
+Maël Es-Sayeh, Sébastien Rodriguez, Maélie Coutelier, P. Rannou, Bruno Bézard, Luca Maltagliati, Thomas Cornet, B. Grieger, Erich Karkoschka, Stéphane Le Mouëlic, Alice Le Gall, C. D. Neish, Shannon MacKenzie, Anezina Solomonidou, C. Sotin, Athena Coustenis (2023). The Planetary Science Journal. https://doi.org/10.3847/psj/acbd37. doi:10.3847/psj/acbd37. Licence: cc-by. Text from pdf.
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+https://doi.org/10.3847/PSJ/acbd37
+
+© 2023. The Author(s). Published by the American Astronomical Society.
+
+Updated Radiative Transfer Model for Titan in the Near-infrared Wavelength Range:
+Validation against Huygens Atmospheric and Surface Measurements and Application to
+the Cassini/VIMS Observations of the Dragonﬂy Landing Area
+M. Es-sayeh1 , S. Rodriguez1 , M. Coutelier2 , P. Rannou3 , B. Bézard4 , L. Maltagliati5, T. Cornet6 , B. Grieger6,
+E. Karkoschka7 , S. Le Mouélic8 , A. Le Gall9 , C. Neish10 , S. MacKenzie11 , A. Solomonidou12, C. Sotin8 , and
+A. Coustenis4
+1
+
+Université Paris Cité, Institut de physique du globe de Paris (IPGP), CNRS, Paris, France; essayeh@ipgp.fr
+2
+LATMOS/IPSL, UVSQ Université Paris-Saclay, Sorbonne Université, CNRS, Guyancourt, France
+3
+Groupe de Spectrométrie Moléculaire et Atmosphérique, UMR CNRS 7331, Université de Reims Champagne-Ardenne, Reims, France
+4
+LESIA, Observatoire de Paris, Université PSL, CNRS, Sorbonne Université, Université Paris Cité, 5 place Jules Janssen, F-92195, Meudon, France
+5
+Nature Astronomy, Springer Nature, 4 Crinan Street, London N1 9XW, UK
+6
+Aurora Technology B.V. for ESA—European Space Agency, European Space Astronomy Centre (ESAC), Camino Bajo del Castillo s/n, Urb. Villafranca del
+Castillo, E-28692 Villanueva de la Cañada, Madrid, Spain
+7
+Lunar and Planetary Laboratory, 1629 E University Boulevard, Tucson, AZ 85721-0092, USA
+8
+Laboratoire de Planétologie et Géosciences, CNRS UMR 6112, Nantes Université, Université d’Angers, Université du Mans, Nantes, France
+9
+Laboratoire Atmosphères, Milieux, Observations Spatiales (LATMOS), UVSQ/CNRS/Paris VI, UMR 8190, F-78280 Guyancourt, Institut Universitaire de France
+(IUF), Paris, France
+10
+Department of Earth Sciences, The University of Western Ontario, London, ON N6A 5B7, Canada
+11
+Johns Hopkins University Applied Physics Laboratory, 11100 Johns Hopkins Road, Laurel, MD 20723, USA
+12
+Hellenic Space Center, Athens, Greece
+Received 2022 October 17; revised 2023 February 17; accepted 2023 February 18; published 2023 March 14
+
+Abstract
+We present an analysis of Titan data acquired by the Cassini Visual and Infrared Mapping Spectrometer (VIMS) at
+the landing site of the Dragonﬂy mission, using a new version of our radiative transfer model for Titan, with
+signiﬁcant updates for the spectroscopic parameters of atmospheric gases and photochemical aerosols. Our updated
+radiative transfer model is validated against the in situ spectroscopic measurements of the Huygens probe during its
+descent and once landed. We conﬁrm that aerosols with a fractal dimension of 2.3–2.4 provide the best ﬁt to the
+observations. We apply our radiative transfer model to four VIMS data cubes over the Selk crater region including
+the Dragonﬂy landing and exploration areas, further validating our model by producing consistent aerosol
+population and surface albedo maps. These infrared albedo maps, further corrected from the photometry, enable us
+to study the Selk crater region in terms of surface composition, landscape formation, and evolution. Our results
+suggest that the Selk crater is in an intermediate state of degradation and that the mountainous terrains of the area
+(including the crater rim and ejecta) are likely to be dominated by ﬁne grains of tholin-like sediment. This organic
+sediment would be transported to the lowlands (crater ﬂoor and surrounding plains), possibly with water ice
+particles, by rivers, and further deposited and processed to form the sand particles that feed the neighboring dune
+ﬁelds. These results provide information for the operational and scientiﬁc preparation of the Dragonﬂy mission,
+paving the way for future exploration of Titan’s surface composition and geology.
+Uniﬁed Astronomy Thesaurus concepts: Titan (2186); Radiative transfer (1335); Near infrared astronomy (1093);
+Planetary atmospheres (1244); Planetary surfaces (2113)
+cryogenic temperature of Titan’s surface (≈90–94 K) and
+deepest atmosphere, methane and ethane, the most volatile
+atmospheric compounds, participate in climatic cycles similar
+to the hydrological cycle on Earth, with clouds, rain, and stable
+liquid areas at the surface. As a complex, active world
+dominated by water ice and organic molecules, Titan is a prime
+target for planetary and astrobiological research.
+The surface of Titan is subject to geological processes (e.g.,
+aeolian and ﬂuvial erosion) that lead to the formation of a
+variety of landscapes, including dune ﬁelds, river networks,
+mountains, labyrinth terrains, canyons, lakes, and seas (e.g.,
+Lopes et al. 2019), analogous to their terrestrial counterparts
+but in an exotic context. The analysis of Titan’s surface
+reﬂectivity in the near-infrared (NIR) has the potential to help
+estimate the surface composition, which in turn can help us
+understand the processes leading to the formation and evolution
+of Titan’s landscapes. Titan’s optically thick atmosphere,
+however, prevents the surface from being probed from orbit
+
+1. Introduction
+Titan is the largest icy moon of Saturn. It is the only moon in
+the solar system with a thick atmosphere, dominated by
+nitrogen and methane. Energetic atmospheric chemistry driven
+by solar ultraviolet photons and solar wind particles accelerated
+by Saturn’s magnetosphere leads to the production of a
+plethora of complex organic molecules, including prebiotic
+progenitors, that form a ubiquitous layer of organic aerosols.
+Most of the heaviest molecules produced in the atmosphere,
+along with aerosols, continuously settle down to the surface
+(e.g., Flasar 1983; Lunine et al. 1983; Yung et al. 1984;
+Malaska et al. 2016), possibly resulting in a layer of organic
+sediment up to tens of meters thick. In addition, at the
+Original content from this work may be used under the terms
+of the Creative Commons Attribution 4.0 licence. Any further
+distribution of this work must maintain attribution to the author(s) and the title
+of the work, journal citation and DOI.
+
+1
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+2.1. The Baseline of Our RT Model (RT-IPGP-2016), General
+Comments on Validity Domains and Accuracy Trade-offs
+
+in the entirety of the NIR range, and its composition is still
+largely unknown and debated, preventing us from fully
+understanding and quantifying the geological processes at
+play. Incident and reﬂected solar radiations are indeed strongly
+affected by gaseous absorption and aerosol scattering in the
+visible and NIR. Only where the methane absorption is weak
+enough do a few transmission windows give access to the
+detection of radiation reﬂected by the low atmosphere and the
+surface, making possible the retrieval of the surface albedo. In
+the 0.88–5.11 μm range (NIR channel), the Visual and Infrared
+Mapping Spectrometer (VIMS) instrument on board the
+Cassini spacecraft (Brown et al. 2004) has shown that the
+surface can be observed in eight narrow transmission windows
+centered at 0.94, 1.07, 1.28, 1.58, 2.02, 2.70, and 2.78 μm and
+in the 4.89–5.13 μm interval (Sotin et al. 2005). Even in these
+transmission windows, residual gaseous absorption and
+increasing aerosol scattering with decreasing wavelength make
+the analysis of the surface signal and the retrieving of surface
+albedo complex.
+In order to retrieve the surface albedo in the atmospheric
+windows, we apply a radiative transfer (RT) model to simulate
+the radiance factor (I/F) in the NIR channel of Cassini/VIMS
+observations of Titan. RT models in the NIR for Titan have
+been developed for decades (e.g., McKay et al. 1989; Grifﬁth
+et al. 1991, 2003, 2012; Rannou et al. 1995, 2003, 2016, 2021;
+Ádámkovics et al. 2004, 2009, 2016; Adriani et al. 2005;
+Negrão et al. 2006; Hirtzig et al. 2013; Barnes et al. 2018;
+Corlies et al. 2021; Coutelier et al. 2021), progressively
+upgrading the optical properties of atmospheric gases and
+photochemical aerosols and improving the robustness of
+Titan’s radiative budget estimation and surface albedo
+retrievals. We developed in our team an RT model for Titan
+based on the model of Hirtzig et al. (2013). Our model has
+known a few upgrades (Maltagliati et al. 2015b; Cornet et al.
+2017) since the ﬁrst version, and a complete description of the
+penultimate version is available in the supplementary material
+of Rodriguez et al. (2018). Taking advantage of recent
+signiﬁcant advances in molecular spectroscopy relevant to
+Titan’s atmospheric gases (Rey et al. 2018) and of a new
+paradigm for the description of Titan’s aerosols optical
+properties (Coutelier et al. 2021; Rannou et al. 2022), we
+recently undertook the realization of several major improvements to our model, which will be detailed in this article.
+In this article, we ﬁrst present the details of our RT model
+and its major updates since its previous version. We will then
+describe our tests to validate this new model against in situ
+Huygens measurements, both during its entire descent
+sequence and once landed. We will compare our validation
+results with those of the previous iteration of the model. Once
+our new model is validated, we will apply it to the Dragonﬂy
+landing area, in a region a few hundreds of kilometers wide,
+centered on the Selk crater, in order to extract the surface
+albedo over the entire area and discuss the regional spectral
+heterogeneities and their possible links to the local
+geomorphology.
+
+The general architecture of our RT model for Titan is
+directly inherited from the model presented in detail in Hirtzig
+et al. (2013), including a few, but signiﬁcant updates regarding
+the gas and aerosol descriptions, leading to a version that
+stabilized in 2016 (Maltagliati et al. 2015a; Cornet et al. 2017;
+Rodriguez et al. 2018), hereafter referred to as RT-IPGP-2016
+and summarized in Table 1. In the model, Titanʼs atmosphere is
+divided into 70 layers extending from the surface up to 700 km
+altitude. Pressure and temperature at boundary altitude levels
+are taken from Cassini-CIRS (Composite Infrared Spectrometer) measurements (Vinatier et al. 2010) at the latitude of
+Huygens. We include atmospheric opacity sources from gases
+—Rayleigh scattering from nitrogen (N2) and methane (CH4);
+collision-induced absorption by nitrogen and hydrogen (H2);
+and absorption by methane, its isotopologues 13CH4 and
+CH3D, acetylene (C2H2), and carbon monoxide (CO)—and
+photochemical aerosols. Molecular line lists for gaseous
+methane and its isotopologues have been compiled over the
+whole spectral range of the VIMS infrared channel
+(0.88–5.11 μm) from laboratory measurements, theoretical
+calculations, and empirical models (all the corresponding
+references can be found in Hirtzig et al. 2013). Line lists for
+acetylene and carbon monoxide are taken from the GEISA2009
+database (Jacquinet-Husson et al. 2011). Correlated-k absorption coefﬁcients have been computed for all the gaseous species
+at the VIMS spectral sampling, on a “pressure–temperature”
+grid deﬁned by the Huygens and Cassini measurements, with
+line proﬁles and cutoffs recommended by De Bergh et al.
+(2012). Concerning the aerosols, we use as a reference the
+phase functions, single-scattering albedos, and vertical extinction proﬁles constrained by the Huygens/DISR instrument
+(Tomasko et al. 2008; Doose et al. 2016), extrapolated in
+wavelengths to the VIMS infrared range. In order to account
+for the seasonal and latitudinal variability of the haze content,
+we allow the reference aerosol extinction proﬁle to be freely
+multiplied by a uniform scaling factor. Finally, a Lambertian
+surface is assumed. Given an input surface and atmospheric
+model, the radiative transfer calculation is performed via the
+plane-parallel version of the Spherical Harmonic Discrete
+Ordinate Method solver (SHDOMPP; Evans 2007) or via the
+C-code version of the Discrete Ordinates Radiative Transfer
+Program in pseudo-spherical geometry (SPS-DISORT; Buras
+et al. 2011), depending on the incidence angle domain.
+The choice of the RT solver (SHDOMPP or SPS-DISORT)
+depends on the incidence angle. Barnes et al. (2018) consider
+the use of the plane-parallel approximation—faster than with a
+pseudo-spherical approximation—acceptable up to 60° incidence. Following the Coutelier et al. (2021) tests, differences
+between I/F calculated with SHDOMPP and SPS-DISORT at
+incidence angles above 60° are greater than 5% and below 3%
+at incidence angles lower than 50°. We thus recommend using
+the plane-parallel approximation up to 50° incidence angle and
+to switch to pseudo-spherical geometry above. As SPSDISORT does not take into account the pseudo-spherical
+geometry for the emission angle direction, it should not be used
+at an emission angle higher than 60°, unfortunately limiting the
+usable observations to a narrower range of observation angles
+than available.
+Finally, RT solvers calculate the intensity ﬁeld for a ﬁnite
+number of polar and azimuth angles—so-called streams—for
+
+2. Description of the New IPGP RT Model for Titan
+In this section, we present the most recent evolution of the
+radiative transfer model for Titan developed at IPGP (Institut
+de Physique du Globe de Paris) team.
+2
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+Table 1
+Models’ Atmospheric Inputs
+
+Model
+
+RT-IPGP-2022
+
+RT-IPGP-2016
+
+Grid
+
+0–700 km with 10 km layers
+
+0–700 km with 10 km layers
+
+Temperature–pressure proﬁle
+
+Huygens/HASI (Fulchignoni et al. 2005)
+
+Cassini/CIRS (Vinatier et al. 2010)
+
+0–80 km: Huygens/GCMS (Niemann et al. 2010)
+
+0–140 km: Huygens/GCMS (Niemann et al.
+2010)
+constant above (1.48%)
+
+Gas VMR
+CH4
+
+80–350 km: linearly interpolated to 1%
+350–700 km: constant at 1%
+D/H
+
+ALMA (Thelen et al. 2019)
+
+Cassini/CIRS (Bézard et al. 2007)
+
+13
+
+ALMA (Serigano et al. 2016)
+
+Cassini/GCMS (Niemann et al. 2010)
+
+CO
+
+ALMA (Serigano et al. 2016)
+
+De Kok et al. (2007)
+
+C 2 H2
+
+Cassini/CIRS (Vinatier et al. 2007) constrained at low altitude
+with saturation curve
+
+Cassini/CIRS (Vinatier et al. 2010)
+
+HCN
+
+ALMA (Thelen et al. 2019)
+
+None
+
+CH4
+
+TheoReTS (Rey et al. 2018)
+
+<1.263 μm: Karkoschka & Tomasko (2010)
+1.263–1.71 μm: Campargue et al. (2012)
+<1.71 μm: calculated as described in Albert
+et al. (2009) and Boudon et al. (2006)
+12
+CH4 and 13CH4: line lists from Nikitin et al.
+(2002)
+CH3D: line lists from Nikitin et al.
+(2006, 2013)
+
+C 2 H2
+
+Hitran (Rothman et al. 2013)
+
+GEISA2009 (Jacquinet-Husson et al. 2011)
+
+CO
+
+Hitran (Rothman et al. 2013)
+
+GEISA2009 (Jacquinet-Husson et al. 2011)
+
+HCN
+
+Hitran (Rothman et al. 2013)
+
+None
+
+Collision-induced absorption
+
+N2–N2 and N2–H2 (Lafferty et al. 1996; McKellar 1989) using a
+constant 0.1% H2 VMR (Niemann et al. 2010)
+
+N2–N2 and N2–H2 (Lafferty et al. 1996;
+McKellar 1989)
+
+Rayleigh scattering (based on the refractive
+index ﬁtted by equations available in Sneep
+& Ubachs 2005)
+
+CH4: Loria (1909) on 0.53–0.66 μm, Rollefson & Havens (1940)
+on 1.68–14.8 μm, interpolated over the VIMS-IR wavelength
+range, King correction from Bates (1984)
+N2: Peck & Khanna (1966) on 0.5–2.06 μm, extrapolated over the
+VIMS-IR wavelength range, King correction from Naus &
+Ubachs (2000)
+C2H2: Loria (1909) on 0.546–0.670 μm, extrapolated over the
+VIMS-IR wavelength range
+CO: Smith et al. (1976) on 0.168–0.288 μm, extrapolated over the
+VIMS-IR wavelength range
+
+CH4: Loria (1909) on 0.53–0.66 μm, extrapolated over the VIMS-IR wavelength
+range
+N2: Peck & Khanna (1966) on 0.5–2.06 μm,
+extrapolated over the VIMS-IR wavelength range
+
+Refractive indices
+
+Khare et al. (1984) modiﬁed by Rannou et al. (2010)
+
+Not needed
+
+Phase function
+
+Haze: Fractal aggregate model (Rannou et al. 2003) modiﬁed
+following S. Rodriguez et al. (2023, in preparation)
+Mist: Fractal aggregate model (Rannou et al. 2003) modiﬁed
+following S. Rodriguez et al. (2023, in preparation)
+
+Doose et al. (2016)
+
+Single-scattering albedo
+
+Fractal aggregate model (Rannou et al. 2003) for z > 200 km, with
+(Doose et al. 2016) altitude dependency below
+
+Doose et al. (2016)
+
+Extinction proﬁle
+
+Fractal aggregate model (Rannou et al. 2003; Coutelier et al.
+2021)
+
+Doose et al. (2016)
+
+12
+
+C/ C
+
+Gas absorption
+
+Aerosols
+
+solvers. Following Coutelier et al. (2021), the number of
+streams in azimuth at wavelengths lower than 1.7 μm is set to
+32 and 40 for SHDOMPP and SPS-DISORT, respectively.
+
+each atmospheric layer deﬁned in the model. The higher the
+number of streams is, the higher are the accuracy and the
+computation time. Sixteen polar streams are used for both
+3
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 1. Two-way vertical transmission as a function of the wavelength as calculated by the RT-IPGP-2022 model. (a) Gas contributions only. (b) Total, all gases,
+and aerosol contributions.
+
+Twenty-four streams in azimuth are used for both solvers at
+larger wavelengths. It should be noted that, for incidence angles
+higher than 80°, 32 streams in azimuth are used beyond
+1.7 μm. Doing so, less than 0.5% differences in I/F are
+produced when compared to a test case using a very high
+angular resolution, such as 100 streams (Coutelier et al. 2021).
+
+and constant up to the highest grid level. Hydrogen cyanide
+(HCN), the simplest and most abundant nitrile, has been added
+to our gases database, and its VMR is set using the most recent
+proﬁle of Thelen et al. (2019) and linearly extrapolated above
+their highest altitude value. D/H and 12C/13C isotopic ratios
+were set to the most recent observations with ALMA (Atacama
+Large Millimeter/submillimeter Array), which are 1.033 10−4
+(Thelen et al. 2019) and 89.9 10−5 (Serigano et al. 2016),
+respectively.
+The temperature–pressure and gas VMR proﬁles are input
+parameters that are ﬁxed in our model. Since observations have
+shown that they can vary both seasonally and/or spatially, we
+quantiﬁed the effect of their largest variation range on the
+simulated I/F spectra. This is illustrated in Figure 2 by
+showing the relative difference between the simulated I/F with
+the recommended proﬁle (Table 1, middle column) and the one
+computed with the most extreme case, for each considered
+parameter. All spectra are simulated under the same geometry
+and conﬁguration (i.e., observation angles to 0°, surface albedo
+set to 0 and aerosol scaling factors set to one relatively to the
+aerosol opacity observed by Doose et al. 2016).
+From the surface up to the tropopause (≈48 km, corresponding to the ≈100 mbar level), temperatures of roughly 5 K
+colder than the recommended values have been observed
+(Anderson et al. 2014; Lellouch et al. 2014; Jennings et al.
+2019; Schinder et al. 2020). Higher in altitude, the general
+trend is that the temperature can diminish by ≈15 K, still with
+respect to the recommended values (Vinatier et al.
+2010, 2015, 2020; Coustenis et al. 2016, 2020; Teanby et al.
+2017, 2019; Mathé et al. 2020; Sylvestre et al. 2020; Rannou
+et al. 2022). We show in Figure 2 the relative difference
+between the I/F simulated with the recommended temperature
+proﬁle and the proﬁle decreased by 15 K above 120 km and by
+5 K below 50 km.
+Although very localized variations (conﬁned at certain
+altitudes) of the VMR of CH4 have been reported (Lellouch
+et al. 2014), they have no impact on our modeling, unlike more
+
+2.2. Summary of the Most Recent Updates of Our RT Model
+(RT-IPGP-2022)
+Built on the RT-IPGP-2016 iteration, the present up-to-date
+version of our RT model, called RT-IPGP-2022 hereafter, is
+presented in detail below. Figure 1 summarizes the relative
+contribution of all the atmospheric input absorption and
+scattering sources of the RT-IPGP-2022 model to Titan’s
+simulated atmospheric transmission.
+2.2.1. Titan’s Climatology and Gaseous Abundances
+
+A ﬁrst upgrade of our RT model concerns atmospheric
+structure and composition. In order to be fully consistent with
+the reference atmospheric structure used to calculate the gas
+absorption coefﬁcients, pressure and temperature at boundary
+altitude levels are now taken from Huygens-HASI (Huygens
+Atmospheric Structure Instrument) measurements (Fulchignoni
+et al. 2005). Vertical proﬁles of the volume mixing ratio
+(VMR) and isotopic ratios for our catalog of gases have been
+updated using the values from the most recent studies. A
+constant carbon monoxide VMR of 49.6 ppm is set following
+the recommendation of Serigano et al. (2016). Acetylene, the
+third most abundant unsaturated hydrocarbon in Titan’s
+atmosphere, is considered with a stratospheric VMR following
+the Cassini-CIRS analyses of Vinatier et al. (2007) and
+constant above their highest altitude value—480 km. As it
+condenses at ≈70 km, the proﬁle is adapted following the
+acetylene saturation curve. From the surface up to 80 km, we
+use the Niemann et al. (2010) methane VMR, linearly
+interpolated to 1% at 350 km following Yelle et al. (2021),
+4
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 2. Relative I/F differences between RT-IPGP-2022 simulations with recommended and modiﬁed atmospheric input parameters for the T–P proﬁle and CH4,
+C2H2, and HCN VMR. Atmospheric transmission windows are shaded in gray.
+
+globally distributed variations of the proﬁle. The general trend
+is that the tropospheric methane abundance can globally
+decrease by ≈10% relative to the recommended abundance
+proﬁle (Penteado & Grifﬁth 2010; Ádámkovics et al. 2016) and
+the stratospheric methane abundance can increase globally by
+≈10%, still relative to the recommended proﬁle (Rannou et al.
+2022). We show in Figure 2 the relative difference between the
+simulated I/F with the recommended methane proﬁle and
+decreased by 10% below 10 km and increased by 10% above
+the 190 km altitude.
+The VMR of C2H2 can vary by a factor of ≈4 above 120 km
+altitude and the VMR of HCN by a factor of ≈15 above
+120 km altitude, both around the recommended proﬁle
+(Vinatier et al. 2010, 2015, 2020; Coustenis et al.
+2016, 2020; Maltagliati et al. 2015a; Teanby et al.
+2017, 2019; Mathé et al. 2020). When decreasing or increasing
+the VMR of HCN and C2H2 by the same amount, their relative
+differences remain identical with wavelengths, except at
+wavelengths of their major absorption bands near 3 μm, where
+the relative difference is smaller when decreasing the VMR.
+Being conservative, we thus show in Figure 2 the relative
+difference between the simulated I/F with the recommended
+HCN and C2H2 proﬁles, and the same proﬁles increased above
+120 km altitude by factors of 15 and 4, respectively.
+Finally, there is no evidence of variations in 13C/12C or D/H
+(Nixon et al. 2012; Molter et al. 2016, respectively) with
+latitudes or seasons, and the analysis of De Kok et al. (2007)
+from Cassini/CIRS observations in the stratosphere over a
+latitudinal range of 75°S to 35°N argues for a latitudinally
+uniform CO proﬁle, consistent with Gurwell (2004), Gurwell &
+Muhleman (2000), Maltagliati et al. (2015a), and Rannou et al.
+(2022), which is expected given its very long ascent time in the
+Titan’s stratosphere.
+As shown in Figure 2, the highest relative differences in I/F
+are conﬁned in speciﬁc wavelength ranges and are systematically lower than 3% in the methane bands and lower than
+0.7% in the atmospheric transmission windows. As all the gas
+in the model are radiatively active, the main driver of the
+changes in simulated spectra is the T–P proﬁle. Modifying the
+methane VMR changes by less than 1% the simulated I/F in
+the cores of the methane bands and by less than 0.5% in the
+atmospheric transmission windows, weakly affecting the
+integrated column opacity. Changing the HCN and C2H2
+VMR has an effect only at their absorption band near 3 μm,
+which is a wavelength region that we do not use in our
+inversions (see Appendix B). In conclusion, keeping the
+temperature and gas VMR proﬁles ﬁxed in the model with their
+recommended values (Table 1, middle column) results in
+extremely weak biases, almost indiscernible in the atmospheric
+
+transmission windows. As a consequence, this only weakly
+affects the estimation of the aerosol opacity, and thus of the
+surface albedo, as shown in Section 3.2.
+2.2.2. Gas Line Lists and Absorption Coefﬁcients
+
+Molecular absorption in the atmosphere is treated thanks to
+the ad hoc computation of precomputed correlated-k coefﬁcients for 12CH4, CH3D, 13CH4, CO, C2H2, and HCN, as this
+method is less time-consuming than line-by-line calculation.
+The coefﬁcients, which come from Coutelier et al. (2021), are
+calculated separately once on the reference pressure grid from
+Fulchignoni et al. (2005), interpolated to the pressure levels
+corresponding to the radiative transfer model grid for each
+wavelength, taking into account the progressive VIMS
+wavelength shift—from 0 to 15 nm—reported from the
+beginning to the end of the mission (Clark et al. 2018). A
+four-point Gaussian quadrature is used to integrate the
+cumulative k distribution and produce the set of correlated-k
+coefﬁcients. Methane and its isotopes opacities are simulated as
+described in Rey et al. (2018) using recent developments from
+laboratory measurements (T = 50–350 K). This is the ﬁrst
+accurate uniﬁed theoretical methane line lists of 12CH4 and
+13
+CH4 up to 13,400 cm−1 (> 0.75 μm). CO, C2H2, and HCN
+correlated-k coefﬁcients are calculated from the HITRAN
+database (Rothman et al. 2013). For the line broadening, the
+line proﬁles are represented by a Voigt function with collision
+broadening coefﬁcients from Menard-Bourcin et al. (2007), and
+a cutoff for the Lorentzian far wings is set at 26 cm−1 from the
+line center for all lines and modiﬁed with a sub-Lorentzian
+exponential decay with a wavenumber characteristic length of
+120 cm−1 for all species except CO (Campargue et al. 2012).
+For the latter, we used the recommended cutoff by Lellouch
+et al. (2003). Despite recent improvements in the spectroscopic
+databases, the line lists of numerous species, including ethane,
+which may have important contributions in the 2.0–2.7 and
+3.0–3.7 μm ranges (Maltagliati et al. 2015a), are still not
+available.
+2.2.3. Haze Aerosols Model
+
+Tomasko et al. (2008) and Doose et al. (2016) recommended
+the use of phase functions, single-scattering albedos, and
+extinction proﬁles that best ﬁt the DISR measurements, based
+on an idealized aerosol structure, i.e., fractal aggregates of 3000
+spherical monomers 50 nm in radius and fractal dimension 2.
+The mean radius of the monomers was constrained by the high
+degree of linear polarization measured by DISR. Monomer
+radii must be less than about 0.05 μm to give sufﬁcient
+polarization in a single scattering to produce the degree of
+5
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+linear polarization measured in Titanʼs atmosphere at 140 km
+altitude (Tomasko et al. 2008). This measure is relatively
+independent of the fractal dimension since polarimetric data
+around 90° phase angle are mainly sensitive to the radius of the
+monomers and not to the fractal dimension (Rannou et al.
+1997). The number of monomers was constrained by the width
+of the forward-scattering peak. Isophote contours of the solar
+aureole, as measured by DISR during the Huygens descent, are
+best ﬁtted by a model with 3000 monomers of radius 0.05 μm
+and an optical depth proﬁle that agrees with the constraints of
+the visible spectrometer systems (Tomasko et al. 2008), again
+regardless of the fractal dimension.
+In the work of Tomasko et al. (2008) and Doose et al.
+(2016), solely the fractal dimension is notconstrained by
+observations and is set to 2. This fractal dimension corresponds
+to the theoretical value associated with the ballistic cluster–
+cluster aggregation mode that is assumed to prevail in the
+stratosphere for Titan’s aerosol growth (Meakin 1984; Cabane
+et al. 1992, 1993). The fractal aggregate model of Tomasko
+et al. (2008), and later on of Doose et al. (2016), successful in
+reproducing with a high degree of accuracy the wealth of in situ
+Huygens observations, was intensively used as the canonical
+model of Titan’s haze aerosols for a decade (e.g., Rannou et al.
+2010; Grifﬁth et al. 2012; Hirtzig et al. 2013; Solomonidou
+et al. 2014, 2016, 2018, 2020; Brossier et al. 2018; Rodriguez
+et al. 2018). Numerous studies, some including microphysical
+modeling (e.g., Lavvas et al. 2011; Coutelier et al. 2021;
+Rannou et al. 2022), showed that the fractal dimension of haze
+aerosols could exceed 2 and even reach 2.3–2.4. We thus
+redeﬁne our aerosol model by replacing the use of tabulated
+values coming from the modeling of Tomasko et al. (2008) and
+Doose et al. (2016) with a more ﬂexible approach allowing for
+self-consistent calculations of the optical properties of fractal
+aggregates. To do so, we coupled our RT model with a fractal
+aggregate scattering model, following the work of Coutelier
+et al. (2021). This aerosol model consists of a model that
+calculates the absorption and the scattering of aggregates of
+identical spheres assuming a fractal structure of the aggregate
+and a resolution method that relies on a “mean ﬁeld”
+approximation (Botet et al. 1997; Rannou et al. 1997). This
+model allows for the computation of the fractal aggregate
+optical properties, i.e., single-scattering phase functions, singlescattering albedos, and absorption and scattering crosssections, given the number and size of monomers, the fractal
+dimension, and the monomer refractive indices. Here, we use
+refractive indices that are an updated version of those of Titan’s
+aerosol laboratory analogues measured by Khare et al. (1984),
+modiﬁed with the help of Cassini VIMS and CIRS observations
+in the 100–500 km altitude range (Rannou et al. 2010; Vinatier
+et al. 2012). Given that the number and size of monomers are
+robustly constrained, independently of the fractal dimension,
+only fractal dimension is a free parameter of the fractal
+aggregate model.
+Following in situ Huygens observations (Tomasko et al.
+2008; Doose et al. 2016) and recent analyses of Cassini/VIMS
+observations by Coutelier et al. (2021), we also distinguish two
+main aerosol populations: (1) a photochemical haze layer
+composed of fractal aggregates above 55 km, and (2) a mist
+layer below. As it is subject to the tropopause’s low
+temperature, and thus condensation of organic species (Hanel
+et al. 1981; Yung et al. 1984), the moniker “mist” is used to
+
+describe an undeﬁned mixture of the above photochemical haze
+and condensed material.
+All this considered, we can calculate from the fractal
+aggregate scattering model the aerosol optical properties
+needed as inputs for our RT modeling: extinction proﬁle,
+single-scattering albedo, and phase function, as a function of
+altitude and VIMS wavelength.
+Following Coutelier et al. (2021), we compute the haze and
+mist extinctions by modifying the haze and mist optical depth
+vertical proﬁles of Doose et al. (2016) as follows:
+⎧ t (z , l) = F t (z , l ) sext, Df (l)
+h h
+0
+⎪ h , Df
+sext, Df (l 0)
+
+for z  55 km
+
+sext, Df (l)
+⎨
+for z < 55 km
+⎪ tm, Df (z , l) = Fm tm (z , l 0)
+sext, Df (l 0)
+⎩
+
+, (1 )
+
+with sext, Df the extinction cross section computed with the
+fractal aggregate model for a fractal dimension Df, and τh and
+τm the haze and mist optical depths taken from Doose et al.
+(2016). The extinction proﬁles of the haze and mist are
+normalized at an arbitrary reference wavelength λ0, here 1 μm.
+These proﬁles are adjustable thanks to two scaling parameters:
+Fh for the haze and Fm for the mist.
+The haze single-scattering albedo ω0(λ) is consistently
+computed by the fractal aggregate model for a given fractal
+dimension Df. We include in our RT model the transition
+observed by Huygens during the descent as reported in
+Doose et al. (2016): Above 200 km, ω0(λ) is computed with
+the fractal aggregate model, below 80 km, ω0(λ) is deﬁned as
+ω(λ,z < 80 km) = (0.565 + ω(λ, z > 200 km)/1.5, and between
+these two altitudes, ω0(λ) is linearly interpolated.
+Haze and mist phase functions are also calculated with the
+fractal aggregate scattering model for the fractal dimension Df.
+Following the recommendation of De Bergh et al. (2012) and
+Doose et al. (2016), our starting hypothesis is that the same phase
+functions should be used for the haze and the mist. Nevertheless,
+the analysis of multiangular observations of Titan by VIMS
+recently showed that corrective factors should be applied to the
+backscattering region of the phase functions, independently of the
+haze and the mist (S. Rodriguez et al. 2023, in preparation).
+During the 88th ﬂyby of Titan, VIMS acquired over 5 minutes a
+series of 26 cubes pointing over the same area. This sequence,
+equivalent to an emission phase function (EPF), thus constitutes
+26 observations spanning a range of emission and phase angles of
+47°–63° and 0°–70° respectively, offering a unique opportunity to
+probe the angular properties of Titan’s aerosols and surface in the
+backscattering domain. Investigating haze and mist phase curves
+thanks to the T88 EPF sequence, we found that haze and mist
+phase functions provided by the fractal aggregate scattering model
+with the recommended fractal dimension 2.4 must be further
+corrected by using multiplicative factors of 1.4 for the haze and 2
+for the mist in the 0°–70° phase angle domain, at all wavelengths
+(S. Rodriguez et al. 2023, in preparation). The corrected phase
+functions are reported in Figure 3(d). We apply these haze and
+mist phase function corrections in our RT-IPGP-2022 model.
+2.3. Summary of Differences between RT-IPGP-2016 and RTIPGP-2022
+All the updates regarding the atmospheric parameters
+(temperature proﬁle, gases VMR, and gaseous and aerosol
+optical properties) of the RT-IPGP-2022 model with respect to
+6
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 3. Comparison between RT-IPGP-2016 and RT-IPGP-2022 input parameters. (a) Pressure–temperature proﬁles, (b) gas volume mixing ratio proﬁles,
+(c) aerosol single-scattering albedos for two altitude regimes, (d) aerosol single-scattering phase functions at 2.53 μm, and (e) aerosol extinction proﬁles.
+
+the previous version (RT-IPGP-2016) are summarized in
+Table 1 and illustrated in Figure 3.
+We simulate a Titan’s spectrum using both the RT-IPGP2016 and RT-IPGP-2022 models under the same conﬁguration
+(i.e., observation angles to 0°, surface albedo set to 0, and
+aerosol scaling factors set to 1 relative to the aerosol opacity
+observed by Doose et al. 2016). We then switch on one by one
+all the input parameters of the RT-IPGP-2022 model to replace
+those used in the RT-IPGP-2016 model and calculate the
+residuals between these spectra due to a given parameter. All
+the results of these analyses are shown in Figure 4.
+The simulated spectra show that the major difference
+between RT-IPGP-2016 and RT-IPGP-2022 models comes
+from the background spectral slope. The spectra indeed cross at
+λ ≈ 2 μm due to the difference in the spectral dependency of
+the aerosol opacity between models (Figure 3(a)). This is best
+illustrated by the residuals between the 2016 and 2022 models
+(Figures 3(b) and (e)), where we show that the change in
+aerosol optical properties contributes the most, with maxima in
+regions of low atmospheric opacity, especially at the shortest
+wavelengths, below 2 μm. Here, the change in aerosol phase
+functions has the highest impact on simulated spectra. Updates
+
+in the temperature–pressure proﬁle, gas line lists, and VMR
+(Figures 3(b)–(d)) have a much lower contribution—one order
+of magnitude lower—with, as expected for the gases, maxima
+in wavelength regions of high opacity.
+All the differences between the 2016 and 2022 models have
+consequences for the aerosol opacity and surface albedo
+retrievals. This will be explored in depth and validated with
+the help of the available in situ Huygens measurements in the
+following section.
+3. Inversion of Orbital Observations of the Huygens
+Landing Site with the RT-IPGP-2022 Model and Validation
+with Huygens Observations
+3.1. Cassini/VIMS Observations of the Huygens Landing Site
+3.1.1. Cassini/VIMS
+
+VIMS was an imaging spectrometer part of the payload of
+the Cassini spacecraft. VIMS performed observations within 96
+channels in the visible from 0.3 to 1 μm, with a mean spectral
+sampling capability of 7.3 nm, and within 256 channels in the
+infrared (IR) from 0.884 to 5.110 μm, with a mean spectral
+7
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 4. (a) I/F spectra simulated by the RT-IPGP-2016 (red line) and RT-IPGP-2022 (black line) models under the same conﬁguration (i.e., incidence, emission,
+phase angles set to 0°, surface albedo set to 0, and haze and mist scaling factors set to 1 with respect to the aerosol opacity observed by Huygens (Doose et al. 2016)).
+Bottom panels: residuals between RT-IPGP-2016 and RT-IPGP-2022 simulations due to (b) all atmospheric inputs, (c) gas VMR only, (d) gas line lists only, and (e)
+aerosols only.
+
+sampling capability of 16.6 nm. In this work, we only deal with
+the infrared part of the spectrum. We perform the radiometric
+calibration of the raw data into I/F as a function of wavelength
+for each of the 256 VIMS-IR channels using the standard RC19
+VIMS pipeline (Clark et al. 2018). This calibration includes a
+time-dependent radiometric calibration aimed at correcting a
+wavelength shift that has been identiﬁed during the last years of
+the mission (Clark et al. 2018). Up to ≈15 nm of progressive
+shift is observed when comparing data taken in 2004 and data
+taken in 2017. This shift can dramatically alter the surface
+information in the sharp atmospheric windows (especially the
+narrow ones at short wavelengths) because of the wide-band
+correlated-k coefﬁcients calculation used in our RT model. For
+every pixel, we determined the viewing geometry and location
+information using the SPICE (Spacecraft, Planet, Instrument
+C-matrix—“Camera matrix”—Events) toolkit from NAIF
+(Navigation and Ancillary Information Facility) (Acton et al.
+2018). Radiometric error is computed for every VIMS spectel
+using the scheme described in Appendix A.
+
+3.1.2. VIMS Observation of the Huygens Landing Area
+
+We focus on the VIMS hyperspectral cube
+CM_1481624349_1 acquired during ﬂyby TB, which occurred
+on 2004 December 13 over the region of the Huygens landing
+site (HLS, 10°. 573S and 167°. 665E; Kazeminejad et al. 2011).
+The cube is available on the Cassini VIMS Data Portal (Le
+Mouélic et al. 2019). VIMS has observed the HLS on several
+occasions, but we chose the observation that took place the
+closest in time to Huygens’ descent and landing. The short (one
+month) time interval between VIMS and Huygens observations, corresponding to two of Titan’s days, minimizes the
+chances of atmospheric and surface changes, allowing for a
+direct comparison between orbital and in situ observations. The
+24 × 12 pixels2 VIMS cube has a mean spatial sampling of
+16 × 8 km2 per pixel. The incidence, emergence, and phase
+angles of the VIMS observation vary between 31°. 9 and 38°. 0,
+30°. 4 and 36°. 5, and 18°. 4 and 18°. 8, respectively. These
+observation angles allow us to use the plane-parallel approximation in our radiative transfer calculation.
+8
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 5. (a) Pixel footprints of the VIMS CM_1481624349_1 cube superimposed on the color-coded photometrically calibrated mosaic of Karkoschka & Schröder
+(2016) and the f-values/color correspondence, and (b) I/F of the VIMS CM_1481624349_1 cube at 2.018 μm. Pixels used for the endmember extraction are
+highlighted in red.
+
+the map, displayed in Figure 5(a), stands for the f-values.
+Purple, blue, green, orange, and pink colors correspond to the
+highest (0.65), high (0.5), medium (0.3), low (0.2), and lowest
+(−0.05) f-values, respectively (Karkoschka & Schröder 2016).
+If we assume that, in the transmission windows, the VIMS
+spectrum of a given pixel is a linear combination of the spectra
+of surface spectral units, or endmembers, weighted by their
+respective fractional coverage within the pixel, we can write
+
+3.1.3. Extraction of the Spectrum of the Huygens Landing Site from
+the VIMS Cube
+
+We use the VIMS CM_1481624349_1 observation over the
+HLS to validate our RT-IPGP-2022 model by comparing it
+with the in situ Huygens/DISR spectral measurements. First,
+we extract the most representative spectrum of the HLS from
+the VIMS data cube. To do so we superimpose the
+CM_1481624349_1 data cube over the highest-resolution
+mosaic. We use the photometrically calibrated mosaic of
+Karkoschka & Schröder (2016) constituted of about 300
+images taken by the Huygens/DISR instrument starting from
+70 km altitude at 770 nm wavelength (Karkoschka et al. 2007,
+and reﬁned by Karkoschka et al. 2012). Since the spatial
+resolution of the VIMS data cube does not allow us to
+distinguish as many small-scale surface features at the landing
+site, many attempts have been done to reconstruct the HLS
+spectrum with linear combinations of VIMS pixels around the
+HLS (e.g., Grifﬁth et al. 2012; Hirtzig et al. 2013; Corlies et al.
+2021). But the method, the choice of VIMS pixels, and the
+calculation of the linear combination coefﬁcients were not
+explicitly described and our tests with these different
+combinations showed that they were not accurate enough for
+a valid comparison. The DISR mosaic reveals the presence of
+different brightness units in the surroundings of the HLS, with
+a spatial resolution of about 1% of the distance to the HLS (i.e.,
+1 km at 100 km from the HLS and 50 cm at 50 m from the
+HLS). Over the same region covered by the DISR albedo
+mosaic, Karkoschka & Schröder (2016) built a map of the
+photometric parameter f, standing in for the relative contribution of isotropic (Lambert) to anisotropic (Lommel–Seeliger)
+surface scattering. The f-parameter map showed that, beyond
+albedo differences, this region can be characterized by units of
+variable photometric behavior (a proxy for surface composition
+and/or texture differences) at spatial resolutions below those
+accessible to VIMS, as shown in Figure 5. The color code of
+
+N
+
+V = å En a n ,
+
+(2 )
+
+n=1
+
+
+with V the observation spectrum, N the number of endmembers, En the spectrum of the endmember n, and αn the
+fractional coverage of the endmember n in the observation.
+Two physical constraints are imposed for consistency reasons,
+as αn, > 0, ∀ n to avoid unphysical negative abundances, and
+å nN= 1 an = 1. Spectral mixture analyses have been performed
+on hyperspectral image data for several solid planetary bodies
+in the solar system, such as the Moon (Li & Mustard 2003),
+Mars (Combe et al. 2008), asteroids (Combe et al. 2015), and
+Titan (McCord et al. 2008). The VIMS pixel over the HLS
+being the result of a linear mixture of photometric units, we
+apply linear unmixing to a selection of VIMS pixels close to
+the HLS with the help of the higher-resolution f-parameter map
+in order to extract the VIMS spectrum that best corresponds to
+the photometric unit (i.e., the best combination of both
+composition and texture) of the HLS itself. First, the fparameter map was segmented into photometric parameter
+clusters/endmembers using a k-means clustering algorithm. Six
+pixels of the CM_1481624349_1 VIMS cube neighboring and
+including HLS (i.e., pixels [8,2], [9,2], [10,2], [8,3], [9,3],
+[10,3]) were geographically projected and superimposed onto
+9
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+distributions over the site of Huygens entry, descent, and
+landing, to be further compared with in situ DISR
+measurements.
+We compute the I/F in the atmospheric bands (using only
+the “haze/mist spectel”—see Appendix B) with the help of our
+RT-IPGP-2022 model for various haze and mist scaling factors
+Fh and Fm, and for different aerosol fractal dimensions. We use
+the MPFIT algorithm (Markwardt 2009), which performs a
+nonlinear least-squares Levenberg–Marquardt ﬁt based on a
+gradient descent in order to maximize the goodness of ﬁt
+between the simulated spectra and the HLS endmember
+spectrum. The goodness of ﬁt is estimated by the classical
+reduced-χ 2 function of merit,
+2
+
+c 2red =
+Figure 6. HLS endmember spectrum from 0.88 to 2.6 μm computed from the
+VIMS cube CM_1481624349_1. In the methane bands (black dots), I/F values
+come from the pixel including the HLS (pixel [9,3]). In the atmospheric
+windows (red dots), I/F values are reconstructed by recombining neighboring
+pixels in order to best represent the spectrum of the HLS spectral/photometric
+unit. 2σ radiometric error bars are shown in black and 2σ propagated
+radiometric error bars are shown in red.
+
+(4 )
+
+
+with i the VIMS spectel number, (I F )obs the I/F of the HLS
+endmember spectrum, (I F )sim the I/F computed with the RT
+model, σ the 1σ radiometric error of the HLS endmember
+spectrum, and ν = n − m the degrees of freedom, i.e., the
+number of observations n = 58 (number of VIMS spectels used
+for the inversion) minus the number of free parameters m = 2.
+The inversion of the haze and mist populations (Fh and Fm)
+from the HLS endmember spectrum requires roughly 30
+minutes of computation time. This is performed for seven
+values of aerosol fractal dimensions, from 2.0 to 2.6 by 0.1
+increment. At the convergence of the inversion process, the
+MPFIT algorithm gives direct access to the free parameters Fh
+and Fm and their 1σ uncertainties.
+We present in Table 2 the c 2red , Fh and Fm values, and their
+2σ uncertainties corresponding to the best ﬁts for each aerosol
+fractal dimension that we have tested. Consistent with Coutelier
+et al. (2021) and Rannou et al. (2022), we found that D
+2
+f = 2.3–2.4 give the best ﬁt (c red = 8.22–8.20) to the HLS
+observations, using tholin’s refractive indices from Khare et al.
+(1984) modiﬁed by Rannou et al. (2010), conﬁrming the need
+for a reassessment for Titan’s aerosol fractal dimension. We
+show in Figure 7 and in Figure 8 the best ﬁts for the different
+fractal dimensions and the RT-IPGP-2016 model for comparison. The best ﬁt using the RT-IPGP-2016 model gives a
+c 2red = 15.91, almost two times higher than the best ﬁt with the
+RT-IPGP-2022, which better simulates the spectral behavior of
+the aerosols with an aerosol fractal dimension of 2.3–2.4.
+Once the haze and mist populations have been evaluated, we
+can extract the surface albedo of the HLS in the atmospheric
+windows from the HLS endmember spectrum (using the
+“surface spectels”—see Appendix B). This procedure will be
+detailed in Section 3.3.2.
+We ﬁnally present here the result of the sensitivity study
+on the ﬁxed input parameters (see Section 2.2.1) on the Fh
+and Fm parameters retrieved from the HLS endmember
+spectrum for the best-ﬁt case (Df = 2.4). When modifying all
+the ﬁxed input parameters listed in Section 2.2.1 to their
+extreme possible values, the retrieved aerosol opacity scaling
+factors, with 2σ uncertainties, are Fh = 1.1 ± 0.1 and Fm =
+1.1 ± 0.2, for a c 2red of 7.8. These values are included in the
+error bars of the Fh and Fm parameters retrieved with the
+recommended set of atmospheric parameters (see Table 1,
+middle column). The simulated spectra with these different
+atmospheric proﬁles are therefore indistinguishable and the
+
+the f-parameter map to measure for each pixel the surface
+fraction covered by each of the photometric endmember
+previously identiﬁed. A combination of linear equations (as
+many as the VIMS pixels; see Equation (2)), allows for the
+retrieval of a spectrum that best represents the spectral/
+photometric endmember of the HLS using a matrix inversion
+routine. The equation of the linear combination of each VIMS
+pixel spectrum used to reconstruct the HLS endmember is
+given in Equation (3):
+[8, 2]
+⎛ 0.125⎞ ⎛ [9, 2] ⎞
+⎟
+⎜ 0.658 ⎟ ⎜
+[10, 2]⎟
+0.005
+⎜
+.
+E=⎜
+⎟*
+0.006 ⎜ [8, 3] ⎟
+⎟
+⎜
+⎜ 0.598 ⎟ ⎜⎜ [9, 3] ⎟⎟
+⎝ 0.314 ⎠ ⎝[10, 3]⎠
+
+1 N ⎛ (I F )iobs - (I F )isim ⎞
+⎟
+å⎜
+n i=1 ⎝
+si
+⎠
+
+(3 )
+
+ The uncertainties on the HLS endmember spectrum are
+calculated by propagating the radiometric errors on the VIMS
+spectra used in the combination. We tested different numbers
+of endmembers for the segmentation of the f-parameter mosaic.
+We found that beyond ﬁve endmembers, the resulting HLS
+endmember spectrum does not present any variations greater
+than the spectrum error bars. This spectrum is computed only in
+the atmospheric transmission windows and, considering that
+Titan’s atmosphere presents uniform properties at the VIMS
+observation pixel scale, the HLS endmember spectrum is
+completed in the methane bands by the values of I/F from the
+VIMS pixel including the HLS. We show in Figure 6 the
+reconstructed HLS endmember spectrum. Since the DISR
+wavelength range stops at 1.6 μm, we choose to compute the
+HLS endmember in the windows only up to this wavelength.
+3.2. Aerosol Vertical Distributions Retrieval from the VIMS
+HLS Spectrum
+The HLS endmember spectrum derived from the VIMS cube
+CM_1481624349_1 is used to extract the haze and mist vertical
+10
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Table 2
+Best-ﬁtting c 2red , as Well as Fh and Fm with 2σ Uncertainties as a Function of the Aerosol Fractal Dimension Df
+Df
+
+2.0
+
+2.1
+
+2.2
+
+2.3
+
+2.4
+
+2.5
+
+2.6
+
+c 2red
+
+16.6
+
+15.2
+
+11.3
+
+8.2
+
+8.2
+
+13.2
+
+26.7
+
+±0.1
+
+±0.1
+
+Fh2s
+
+1.3
+
+1.2
+
+Fm2s
+
+0.9±0.3
+
+0.8±0.3
+
+1.1
+
+±0.1
+
+±0.1
+
+1.0±0.3
+
+modiﬁcation of those atmospheric input parameters within
+their expected variation range has no impact on the values of
+the inversion outputs (Fh and Fm parameters and by extension
+the surface albedo). This is totally consistent with the
+analysis of Rannou et al. (2022).
+
+±0.1
+
+1.1
+
+1.0
+
+1.1±0.2
+
+1.2±0.2
+
+±0.1
+
+1.0
+
+1.0±0.1
+
+1.4±0.2
+
+1.6±0.3
+
+spectrum by a global corrective factor F, deﬁned as follows:
+F=
+
+f
+fcorr
+
+(1 + 0.042 T ).
+
+(5 )
+
+
+The solar factor f, deﬁned in Tomasko et al. (2008) and Bézard
+(2014), represents the direct solar ﬂux contribution in the ULIS
+FOV averaged over the azimuth angles of the integration
+sequence and normalized such that f = 0 if the Sun is never in
+the FOV and f = 1 if the spectrum is collected with a uniform
+distribution in azimuth from 0° to 360°. f is calculated for each
+individual ULIS spectrum using the calibration information for
+the DISR infrared instruments.13 To account for the nonideal
+spatial response of the instrument with respect to the solar
+zenith angle, the solar factor f is further divided by a corrective
+factor fcorr deﬁned as
+
+3.3. Validation of the RT-IPGP-2022 Model with Atmospheric
+and Surface Huygens Measurements
+3.3.1. RT-IPGP-2022 Atmospheric Model Validation with Huygens/
+DISR-ULIS
+
+Here we compare the spectra acquired by the Huygens/
+DISR Upward Looking Infrared Spectrometer (ULIS) instrument during the probe’s descent into Titan’s atmosphere with
+synthetic spectra simulated with our RT-IPGP-2022 model.
+The simulated spectra are directly calculated with the haze
+and mist opacities previously retrieved from the HLS
+endmember spectrum for aerosol Df = 2.4 (see Section 3.2)
+and the surface albedo measured by DISR (Karkoschka et al.
+2012).
+The ULIS instrument covers a spectral range of
+830–1620 nm and recorded spectra from an altitude of
+141 km down to the surface and after landing (Tomasko
+et al. 2008). ULIS is made of a linear array of 150 detector
+elements. A horizontal diffusing plate and an optical deﬂector
+limited its total ﬁeld of view (FOV) to 170° in azimuth and
+from 5° to 88° in zenith angle. The data collection was
+managed by the DISR solar sensor system and, due to the
+unexpected rotation direction of the probe, data were acquired
+by integrating over random azimuth angles relative to the Sun
+rather than at well-deﬁned azimuths as planned. A total of 214
+spectra were acquired by ULIS: 4 spectra per 48 observation
+sequences from 141 to 5.3 km, plus 22 observations made in
+snapshot mode (short exposure time) from 3 km down to the
+surface. ULIS spectra, calibrated in radiance (W m−2 μm−1 sr−1),
+are archived in the ESA Planetary Science Archive and in the
+NASA Planetary Data System (PDS), along with information
+relevant to each of the observation sequences (altitude, solar zenith
+angle, and Huygens rotation speed and tilt).
+At the nodes of our RT model altitude grid, we can only
+extract, over the ULIS wavelength range, up- or down-welling
+hemispheric integrated ﬂuxes radioed to the incoming solar
+ﬂux. We therefore had to convert ULIS radiances into I/F to be
+consistent with the outputs of our RT model.
+To do so, we had ﬁrst to correct each observation for the
+rotation of the probe during the acquisition time, the nonuniform data distribution in azimuth, the nonhomogeneous
+response of the ULIS FOV in solar zenith angle, and the
+probe’s tilt. This is done by dividing each ULIS radiance
+
+1
+
+fcorr = ms
+
+2 ò R (m ) d m
+0
+
+R (ms)
+
+,
+
+(6 )
+
+
+with μs the cosine of the solar zenith angle and R(μ) the FOV
+response as a function of the zenith angle. We correct for the
+tilt T (expressed in degrees in Equation (5)) with a simple linear
+function knowing that a tilt of +10° (a positive inclination
+stands for the Huygens rotation axis pointed to the east and thus
+the Sun pointed at a lower zenith angle for the ULIS FOV)
+increases the direct ﬂux by about 42% compared to zero tilt, as
+estimated from the ULIS calibration document.14
+However, the tilt values available in the data archive (DISR
+Data User’s Guide; Karkoschka et al. 2007)15 should be used
+with caution. The Doppler shift measurements were used to
+constrain only the Earthward component of Huygens’ velocity
+during 42 sections of the descent, not accounting for the other
+axes of oscillation of the probe, with linear interpolation
+between sections. Forty gaps were due to calibration requirements, while a larger gap was observed when switching from
+one radio telescope to another on a different continent due to
+Earth’s rotation (Bird et al. 2005). Besides, the tilt was
+resampled at a lower frequency than the oscillations. In order to
+minimize all of these nonquantiﬁable uncertainties, we only
+13
+
+http://atmos.nmsu.edu/PDS/data/hpdisr_0001/DOCUMENT/DISR_
+CALIBRATION_DOCUMENTS/INFRARED_SPECTROMETERS/IR_
+SPECTROMETER_CAL_NOTES/IR_SPECTROMETER_CAL_
+NOTES.PDF
+14
+http://atmos.nmsu.edu/PDS/data/hpdisr_0001/DOCUMENT/DISR_
+CALIBRATION_DOCUMENTS/INFRARED_SPECTROMETERS/IR_
+SPECTROMETER_CAL_DOC/IR_SPECTROMETER_CAL_DOC.PDF
+15
+https://pds-atmospheres.nmsu.edu/data_and_services/atmospheres_data/
+Huygens/DISR_DATA_USERS_GUIDE_2.PDF
+
+11
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 7. Fits between our model and the HLS endmember spectrum in atmospheric bands. Simulated and observed spectra are shown with their 2σ error bars. Bestﬁtting c 2red is given and associated Fh and Fm values with 2σ uncertainties are given in Table 2.
+
+retained spectra for which 0.9 < F < 1.1 and T < 5°, reducing
+the number of spectra usable for our purpose from 214 to 27
+and applied a linear regression at a wavelength dominated by
+the solar direct ﬂux (i.e., a methane window, e.g., at 1.28 μm)
+as a function of the altitude, as shown in Figure 9, to scale the
+remaining 27 observations. It is worth noting that ﬁtting the
+data with a more physical function, like a + b ∗ e −z/H , with
+z the altitude and H a free parameter representative of the
+atmospheric scale height, does not signiﬁcantly improve the ﬁt.
+We averaged the spectra belonging to the same observation
+sequence, reducing the ﬁnal number of spectra to 21.
+We convert the radiances of each selected ULIS spectrum
+into I/F as follows:
+D2
+I
+(l ) = I (l ) p T - S ,
+F
+S (l )
+
+It is worth noting that the ULIS spectra acquired at low
+altitudes are the most reliable, as the diffuse solar ﬂux,
+becoming dominant with respect to the direct solar ﬂux, is
+signiﬁcantly less sensitive to the numerous non- or only barely
+quantiﬁable uncertainties of the Huygens probe navigation
+(rotation speed and tilt). For the same reason, ULIS spectra are
+more reliable at wavelengths of the highest atmospheric opacity
+(i.e., in gaseous absorption bands). Also, the surface albedo
+seen by the probe, which was arbitrarily chosen to be equal at
+all altitudes to the one measured after landing, has a less and
+less negligible contribution to the spectra as altitude decreases.
+Hence, the simulated spectra are all the less trustworthy in the
+atmospheric windows as we are approaching Titan’s surface.
+We recall that synthetic spectra were simulated by our RT
+model using aerosol properties constrained with a spectrum
+extracted from a VIMS observation of the HLS. Finally, all
+these possible sources of uncertainties and systematic differences being considered, ULIS spectra are extremely well
+modeled by our RT model within wavelength (gaseous
+absorption bands and their wings) and altitude (below
+100 km) ranges where both ULIS and simulated spectra are
+the most reliable. In the atmospheric bands and wings (using all
+spectels except the “surface spectels”—see Appendix B), the
+RT-IPGP-2022 model gives better matches (mean rms error
+
+(7 )
+
+
+with DT−S the Titan–Sun distance in astronomical units and
+S(λ) the solar ﬂux spectrum at 1 au (Kurucz 2005).
+The resulting ULIS spectra, expressed as I/F and interpolated at our RT model (and VIMS) spectral sampling, are
+shown in Figure 10. The same ﬁgure also shows the spectra
+simulated by the RT-IPGP-2022 and the RT-IPGP-2016
+models, interpolated at the altitudes of the ULIS spectra.
+12
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 8. Fits between our model and the HLS endmember spectrum in atmospheric bands. The ﬁrst three rows show the best ﬁts for different aerosol fractal
+dimensions Df and the last row for the RT-IPGP-2016 model. Simulated and observed spectra are shown with their 2σ error bars. Best-ﬁtting c 2red is given and
+associated Fh and Fm values with 2σ uncertainties are given in Table 2.
+
+3.3.2. Validation of RT-IPGP-2022 Surface Albedo Inversions with
+Huygens/DISR-DLIS
+
+As a second step, the surface albedo is inverted in the
+atmospheric windows (for the “surface” spectels—see
+Appendix B) of the HLS endmember spectrum, using
+previously inverted haze and mist opacities for Df = 2.4 (see
+Section 3.2). Our RT model computes the 2σ uncertainties on
+inverted surface albedos by propagating radiometric noise of
+the VIMS spectrum and uncertainties on the retrieved haze and
+mist scaling factors. I/F has been shown to be an afﬁne law of
+the surface albedo in atmospheric windows with excellent
+accuracy. We then only need two pairs of arbitrary I/F and
+surface albedo correspondences per wavelength to evaluate the
+corresponding surface albedo, drastically decreasing the
+calculation time to a few seconds per spectrum. The error on
+the retrieved albedo amounts to at most 3% at 0.9 μm and is
+negligible longward of 2.1 μm (Hirtzig et al. 2013).
+The surface albedos retrieved from the VIMS HLS endmember spectrum in the atmospheric windows are directly
+compared with the surface reﬂectivity measured in situ between
+0.83 and 1.6 μm by the Huygens/DISR Downward Looking
+Infrared Spectrometer (DLIS) instrument once the probe
+landed. We chose for our comparison the DLIS spectrum
+processed by Karkoschka et al. (2012), as it is a revision of
+
+Figure 9. ULIS radiance at 1.278 μm as a function of the altitude for spectra
+that meet the selection criteria (red dots). The black line corresponds to the best
+linear ﬁt.
+
+over all the altitudes, or RMSE = 0.0355) than the RT-IPGP2016 model (RMSE = 0.0383), validating our approach and
+the atmospheric prescriptions (for both gases and aerosols) of
+our RT-IPGP-2022 model.
+13
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 10. Comparison between ULIS (dotted black) and simulated I/F (RT-IPGP-2016 in red and RT-IPGP-2022 in blue) within the ULIS wavelength range for 21
+different altitudes. Simulated spectra are coming from forward RT calculations using the haze and mist opacities estimated from the HLS endmember spectrum (see
+Section 3.2) and the surface albedo measured by Huygens/DISR (Karkoschka et al. 2012). The simulations are plotted along with their 2σ uncertainties envelope.
+Atmospheric windows are highlighted in gray.
+
+14
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 11. Surface albedos retrieved from the VIMS HLS endmember spectrum (see Section 3.1.3) in the atmospheric windows with (a) the RT-IPGP-2022 model
+(blue) and (b) the RT-IPGP-2016 model (red). The DLIS spectrum (Karkoschka et al. 2012) scaled by a 0.44 factor to take into account the viewing geometry is shown
+in black in both panels. No error bars are available for the DLIS spectrum. Inverted surface albedos are shown with 2σ error bars.
+
+Schroder & Keller (2008) that takes into account the lamp
+parallax and includes a better lamp calibration and a phase
+angle correction. Following Rannou et al. (2016) to account for
+the main effects due to the observation geometry, we scaled the
+DLIS spectrum with a correction factor of 0.44. This factor
+corresponds to a factor of 0.363 between a phase angle larger
+than 30° and zero phase angle (Figure 8 of Karkoschka et al.
+2012), divided by the cosine of the incidence angle (34°,
+Schröder & Keller 2009). Since atmospheric windows centered
+at 0.93, 1.07, and 1.28 μm are narrow, we only used one, two,
+and two spectels in the windows of the VIMS endmember
+spectrum respectively for the surface albedo inversion. Because
+the atmospheric window at 1.57 μm is wider, we used here ﬁve
+VIMS spectels.
+We show in Figure 11 the retrieved surface albedos from the
+VIMS HLS endmember spectrum with respect to the DLIS
+surface reﬂectivity between 0.8 and 1.6 μm. The surface
+albedos inverted from the VIMS spectrum are shown for the
+RT-IPGP-2022 and RT-IPGP-2016 model conﬁgurations for
+the sake of comparison and validation. All the surface albedos
+retrieved with the RT-IPGP-2022 model present an excellent
+match to the DLIS spectrum within the error bars, even for the
+spectral slope observed in the broader 1.6 μm atmospheric
+window. The only exception is for the 1.07 μm atmospheric
+window, where our RT-IPGP-2022 fails at reproducing the
+DLIS reﬂectivity and underestimates the surface albedo by
+≈30%. The same issue has already been reported by Coutelier
+et al. (2021) with their RT model. The origin of this problem is
+still under investigation and can be due to a missing opacity
+source from the atmosphere in our RT model (gases, haze, and/
+or mist) and/or a local source of surface absorption within the
+VIMS HLS endmember spectrum (not seen in the DLIS
+spectrum due to the drastic change in spatial scale, despite our
+effort to unmix the VIMS spectrum), in this particular
+wavelength range. All this considered, our RT model provides
+overall more robust inversions of the HLS surface albedos.
+For both models, summing the Euclidean distances (D =
+å(S - O)2 ) between the simulated values S and the DLIS
+
+spectrum O over the surface spectels gives D2022 = 0.091 and
+D2016 = 0.111. The RT-IPGP-2022 model match with the DLIS
+spectrum is better than that with the RT-IPGP-2016 model and
+generates error bars 87.71% smaller on average on surface
+albedos. We conclude that RT-IPGP-2022 is a more reliable
+version than RT-IPGP-2016 for the retrieval of both Titan’s
+atmosphere and surface properties.
+4. Application to the Analysis of the Dragonﬂy
+Landing Area
+4.1. VIMS Observations of the Dragonﬂy Landing Area
+We now apply our RT-IPGP-2022 model with the objective
+of mapping the surface albedo of the Selk crater region on
+Titan, near the landing site of the Dragonﬂy mission. Dragonﬂy
+is the fourth mission in NASAʼs competitive New Frontiers
+program. Its main science objectives concern the detailed
+investigation of Titan’s prebiotic chemistry and exotic geology
+(Barnes et al. 2021). The mission consists of a multiinstrumented dual-quadcopter that will arrive in Titan’s
+equatorial region in 2033 (expected launch in 2027), in the
+same season as the landing of ESAʼs Huygens probe (Lorenz
+et al. 2018). The landing site, near the Selk crater (6°. 5N, 160°
+E) in the Shangri-la dune ﬁeld, was chosen primarily to
+examine the complex chemistry of the site, where interactions
+between organics and liquid water likely occurred within the
+impact melt (Lorenz et al. 2021).
+Selk is an impact crater that measures approximately 90 km
+in diameter with water-rich material potentially exposed in and
+around the crater and its ejecta, and a complex impact-induced
+and post-impact geology (Soderblom et al. 2010; Lorenz et al.
+2021). It was best observed by VIMS during Titan’s ﬂybys
+T35, T38, and T40 (Soderblom et al. 2010). Among all the
+VIMS observations of the Selk crater area, we selected four
+cubes that allow us to map the region with the best compromise
+between spatial coverage and spatial sampling. The main
+characteristics of the four selected VIMS data cubes are
+presented in Table 3. Due to uncertainties in the navigation, the
+15
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Table 3
+Main Characteristics of the Four Selected VIMS Data Cubes over the Selk Crater Area Ordered by Decreasing Spatial Sampling
+VIMS Cube ID
+CM_1578266417_1
+CM_1575509158_1
+CM_1578263500_1
+CM_1578263152_1
+
+Size
+(pixel × pixel)
+
+Titan Flyby
+
+Acquisition Date
+
+Spatial Sampling
+(km pixel−1)
+
+Phase Angle (°)
+
+Incidence Angle (°)
+
+Emission Angle (°)
+
+64 × 64
+64 × 64
+64 × 64
+64 × 64
+
+T40
+T38
+T40
+T40
+
+01/05/2008
+12/05/2007
+01/05/2008
+01/05/2008
+
+11.4–12.9
+6.4–7.4
+3.4–4.4
+2.5–3.4
+
+52.1–54.5
+40.6–43.0
+38.4-44.5
+31.7-40.3
+
+23.8–44.2
+25.2-37.7
+29.2-35.5
+30.0–35.1
+
+9.2–33.0
+9.6–29.8
+7.4–19.6
+9.2–16.9
+
+four cubes have been co-registered as was done in Soderblom
+et al. (2010). Taking the map with the largest spatial sampling
+as a reference, we performed the coregistration by deﬁning
+manually ground control points and applying a classic rotation–
+scaling–translation warping and bilinear resampling to the three
+other maps. Figure 12 shows the ﬁnal projected mosaics built
+with the four co-registered cubes in the ﬁrst available
+atmospheric band and window, along with the RGB color
+composite of single bands and band ratios, and the corresponding viewing geometry and spatial sampling.
+
+for the haze and mist maps, some residual seams still appear in
+surface albedo mosaics (Figures 14 and 15, middle row). Since
+atmospheric contributions are correctly evaluated by our RT
+model, these remaining seams are likely to be mainly due to the
+possible anisotropic photometric properties of the surface not
+taken into account in the model. We therefore apply a
+photometric correction inspired by the one used for the DISR
+spectrum of the HLS (see Section 3.3.2) that takes into account
+the dependency of the surface photometry on both the phase
+(g, expressed in radians) and incidence (i) angles in the form
+a gβ/cos(i), with β the phase exponent and a a constant. β is set
+free and has to be adapted to the type of surface that is
+observed. We found that the phase exponent value that best
+reduces the seams on the surface albedo mosaics of the Selk
+crater region is β = 0.3. We scale our correction to an existing
+observing case having gref = 40° and iref = 34°, which are the
+mean observed phase and incidence angles of the studied cubes
+0.3
+so that a = 1/(gref
+/cos(iref)) = 0.92. We show in Figures 14
+and 15 (bottom row) the surface albedo mosaics after the
+photometric correction. The remaining seams are still discernible in the 0.94 μm surface albedo mosaic, certainly due to
+residual atmospheric contributions (at a wavelength highly
+sensitive to aerosol scattering). The surface albedo mosaics in
+all the other atmospheric windows present a signiﬁcantly
+higher degree of homogeneity, with drastically reduced seams
+and enhanced contrast, with respect to I/F and uncorrected
+surface albedo mosaics.
+In order to discuss more quantitatively the quality of our
+retrievals for the haze and mist opacities and surface albedos,
+we extract and compare the behavior of I/F at 0.88 μm and
+1.07 μm with one of Fh, Fm, and surface albedos along
+longitudinal transects at four different latitudes where the
+VIMS cubes are overlapping (Figure 16). Incidence, emission,
+and phase angles are also indicated along the same transects.
+On the 0.88 μm I/F transects (see Figure 16, second row),
+we can clearly see a low-spatial-frequency, positive ≈20%–
+25% slope across a ≈1000 km distance toward the east. This
+positive slope is directly correlated with and can be fully
+explained by both decreasing incidence and increasing
+emission angles along the transects (see Figure 16, ﬁrst row).
+I/F value discrepancies of ≈5%–12% are also strikingly
+visible at VIMS data cube transitions. They are all due to
+sudden changes in viewing geometries between data cubes (see
+Figure 16, second row). All this shows that these I/F variations
+are not physical and exclusively originate from varying
+viewing geometries within and between data cubes. This is
+further conﬁrmed when we look at the corresponding Fh and
+Fm transects (see Figure 16-third row), which are physical
+values related to the haze and mist opacities. Here, slopes
+and seams totally vanish, becoming both less than the 2σ
+uncertainties of the Fh and Fm retrievals. The inversion
+of Fm is more uncertain, being performed within fewer
+VIMS spectels. This results in greater variability in Fm
+
+4.2. Surface Albedo Maps of the Dragonﬂy Landing Area
+Merging Titan’s orbital observations acquired in different
+viewing conditions into homogeneous mosaics is challenging
+due to the nonisotropic photometry of the atmosphere and
+surface (e.g., Le Mouelic et al. 2012; Le Mouélic et al. 2019).
+This is noticeable in our case (Figure 12), where systematic and
+signiﬁcant seams (i.e., abrupt changes in I/F) are clearly visible
+at the transitions between the four VIMS data cubes of our
+mosaic, not only in atmospheric bands (e.g., Figure 12(a)) but
+also in atmospheric windows (e.g., Figure 12(b)). The four data
+cubes have been acquired in a short time interval (within an
+Earth-month between T38 and T40 observations, and within 1
+hr for T40 observations) so that we can make the reasonable
+hypothesis that the atmosphere and surface properties did not
+change signiﬁcantly. Hence, the seams are mainly originating
+from the varying viewing geometries (Figures 12(g), (h), and
+(i)) that our RT model should be able to account for or at least
+mitigate.
+We inverted haze and mist scaling factors and surface
+albedos for all the pixels of the four VIMS data cubes with the
+RT-IPGP-2022 model. This represents a total of 16,384 pixels
+to be processed and two continuous weeks of parallel
+computations on a 40 core workstation.
+We present the ﬁrst part of the results in Figure 13, which are
+the haze and mist scaling factor maps over the Selk crater
+area. The I/F mosaic at 0.88 μm (Figure 13(a)), in the ﬁrst
+atmospheric band available in the VIMS-IR channel, is
+strongly heterogeneous, presenting marked I/F slopes within
+each individual data cube and notable I/F value discrepancies
+between the data cubes, all correlated with the viewing
+geometries (see Figure 12). The Fh mosaic (Figure 13(b)),
+and the Fm mosaic (Figure 13(c)) to a lesser extent due to
+greater uncertainties in Fm retrievals, is signiﬁcantly more
+homogeneous. Fh and Fm mosaics do not present any global
+trends with viewing geometry, and seams between VIMS data
+cubes are signiﬁcantly reduced and even disappear at most of
+the data cube transitions.
+Once the haze and mist opacities are constrained, we can
+retrieve the surface albedos in the atmospheric windows for the
+four VIMS cubes used in this study. The results are shown in
+Figures 14 and 15. Although seams have been mostly mitigated
+16
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 12. Mosaics of the four selected (and co-registered) VIMS cubes over the Selk crater area: (a) I/F at 0.89 μm, (b) I/F at 0.94 μm, (c) spatial sampling
+in km pixel−1, (d) RGB color composite with R = 〈5 μm〉, G = 2.02 μm, and B = 1.28 μm (Barnes et al. 2007), (e) RGB color composite with R = 2.02 μm,
+G = 1.57 μm, and B = 1.28 μm (Soderblom et al. 2010), (f) RGB color composite with R = 1.57/1.28 μm, G = 2.02/1.28 μm, and B = 1.28/1.07 μm (Le Mouélic
+et al. 2019), (g) incidence angle, (h) emission angle, and (i) phase angle. The mapping projection is rectangular with grid marks every 5° of longitude and latitude.
+Longitude is in degrees east.
+
+corrected for the surface observing conditions (Figure 16, ﬁfth
+row, blue curve) also show remaining small, but abrupt, value
+discrepancies of ≈5%–10% at a few data cube transitions.
+Even if the albedo discrepancies are subtle, much less than the
+retrieved uncertainties on the surface albedos, they are perfectly
+discernible on the mosaics (Figures 14 and 15, middle row).
+When corrected for the observing geometry, those discrepancies are drastically reduced to only a fraction of a percent
+(Figure 16, ﬁfth row, red curve), replaced by smooth albedo
+transitions. In the end, this conﬁrms at a much larger spatial
+scale what we already assessed for one pixel at the HLS. The
+
+values and 2σ uncertainties. Nevertheless, even the Fm
+transects are compliant with no slope and seams within the
+2σ uncertainty interval.
+I/F transects at 1.07 μm, in an atmospheric window, present
+value discrepancies of ≈5%–10% at VIMS data cube
+transitions (Figure 16-fourth row). If a few can be attributed
+to natural albedo contrasts at the transition between different
+surface terrains, most of them are artifacts due to Titan’s
+atmosphere and surface photometry. Although atmospheric
+contributions were mostly taken into account by our RT model,
+the corresponding surface albedo transects at 1.07 μm, not
+17
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 13. Mosaics of the four selected (and co-registered) VIMS cubes over the Selk crater area: (a) I/F at 0.88 μm, (b) retrieved haze scaling factor Fh, and (c)
+retrieved mist scaling factor Fm. For comparison, the same 33% relative dynamics range values are applied for the three mosaics. The mapping projection is
+rectangular with grid marks every 5° of longitude and latitude. Longitude is in degrees east. We extract I/F, Fh, and Fm transects along the four horizontal red lines
+indicated on the 0.88 μm I/F, Fh, and Fm mosaics (see Figure 16).
+
+RT-IPGP-2022 model provides an excellent correction for
+atmospheric haze and mist contributions and consequently a
+robust assessment of surface albedos, owing to a reliable
+surface photometry correction. The model can now be used
+iteratively on entire VIMS data cubes, and the resulting
+regional surface albedo maps can now be utilized with
+conﬁdence, as a complement to geomorphological maps, for
+geological analyses.
+
+resolve narrow, speciﬁc absorption bands within the atmospheric windows, this index is not used to ﬁrmly detect water
+ice but rather highlights where spectra are consistent with the
+behavior of a surface unit enriched in water ice. The index is
+based on a combination of spectral ratios at speciﬁc
+wavelengths of water ice absorption that occur within the
+surface windows. It is built as the one of Coutelier et al. (2021),
+except that we do not use the albedo level in the 5 μm window
+for consistency, as it is not based on a spectral ratio. The
+spectral ratios are
+
+4.3. Analyses of the Surface Albedos of the Dragonﬂy
+Landing Area
+
+1. r1 = 1.58/1.28 μm
+2. r2 = 2.02/1.28 μm
+3. r3 = 2.02/1.58 μm
+4. r4 = 2.70/2.78 μm.
+
+A routine extraction of the surface albedo in Titan’s eight
+NIR atmospheric windows opens new perspectives for the
+study of Titan’s complex geology and climatology. With the
+help of surface albedo estimations at the regional scale, we can
+deﬁne and map spectral ratios and spectral signatures directly
+sensitive to speciﬁc surface materials.
+In the absence of wavelength-dependent offsets (e.g.,
+atmospheric scattering), rationing the surface albedos obtained
+in different spectral bands, which aims at canceling out all
+multiplicative contributions (mainly albedo and viewing
+conditions), is a powerful technique to enhance subtle spectral
+heterogeneities in the near-infrared (e.g., Le Mouélic et al.
+1999). These heterogeneities can be due to local changes in the
+composition and/or grain size of the surface material. For
+Titan, the VIMS 1.57/1.28, 2.02/1.28, and 1.28/1.07 μm band
+ratios proved to be useful for both regional and global studies
+by enhancing speciﬁc spectral units (e.g., bright, dark brown,
+dark blue) that can be associated with terrains composed in
+majority of small-sized solid organics (bright units), largergrain organics (dark brown), or enriched in water ice grains
+(dark blue) (e.g., Rodriguez et al. 2006; Le Mouélic et al.
+2008, 2019; Brossier et al. 2018). We show in Figure 17(a) the
+RGB color composite mosaic of the ratios of the surface
+albedos of the Selk crater region retrieved with our RT-IPGP2022 model, with the 1.57/1.28 μm ratio for the red channel,
+2.02/1.28 μm ratio for the green channel, and 1.28/1.07 μm
+ratio for the blue channel.
+We also deﬁne a spectral index δ sensitive to the presence of
+surface material compatible with the spectrum of water ice,
+directly inspired by the work of Coutelier et al. (2021). Because
+the VIMS spectral sampling and resolution are insufﬁcient to
+
+These ratios are then normalized as
+ri - ri,min
+ri, n =
+,
+ri,max - ri,min
+
+with ri,min and ri,max the minimum and maximum values of the
+ratio for the considered cube. Normalized ratios are subtracted (
+i.e., r1, r2, r3) or added (i.e., r4) to the index if the expected
+nonnormalized-ratio values are higher or lower than 1,
+respectively. The ratios are weighted by their uncertainties,
+such as for a ratio r of surface albedos Ai and Aj, the relative
+uncertainty is
+s=
+
+DAj
+Dri
+DAi
+,
+=
++
+ri
+Ai
+Aj
+
+
+with ΔA the 1σ uncertainty on the surface albedo. Finally, the
+index δ is
+3
+
+d = - å (1 - si ) ri, n + (1 - s4) r4, n.
+
+(8 )
+
+i=1
+
+ The higher this index, the greater the surface enrichment
+probability in water ice.
+This criterion is already proved to give consistent results. It
+was previously used in the southern part of the Xanadu region
+(Coutelier et al. 2021), where its highest values were found to
+18
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 14. Mosaics of the four selected (and co-registered) VIMS cubes over the Selk crater area in the four ﬁrst atmospheric windows: (top row) I/F, (middle row)
+direct output of our RT model, i.e., Lambertian surface albedo, and (bottom row) Lambertian surface albedo corrected for surface photometry. The mapping projection
+is rectangular with grid marks every 5° of longitude and latitude. Longitude is in degrees east. We extract I/F, uncorrected, and corrected surface albedo transects
+along the four horizontal red lines indicated on the 1.07 μm I/F mosaics (see Figure 16).
+
+images, (2) the crater ﬂoor and (3) the ejecta blanket, both as
+bright with no slope texture in SAR images, (4) SAR-dark
+dunes with SAR-bright interdunes, and (5) SAR-dark terrains
+compatible with sand but no obvious dunes at the SAR
+resolution. These terrains are spatially correlated with infrared
+albedo units, even if only partially at some places due to
+differences in the penetration depth into the surface material
+between the RADAR and infrared observations and due to
+sensitivity to different scales of roughness. On the RGB mosaic
+of surface albedo band ratios (Figures 17(a) and (c)), several
+spectral units readily show up with a high degree of spatial
+consistency: a yellow-bright unit, a unit constituted with a mix
+of brown and blue, a purple unit, and a dark-blue unit among
+the most obvious.
+The infrared yellow-bright unit is associated with the crater
+rim and ejecta, and the elevated terrains to the northeast. The
+lowest values of the “water ice enrichment” index are highly
+spatially correlated with this spectral unit. The index is all the
+lower as the yellow-bright unit is light. The yellow-bright
+spectral unit, associated with a low index, is indicative that
+these terrains are strongly depleted in water ice and likely to be
+dominated by complex organics, at least superﬁcially.
+The dunes and SAR-dark terrains with no obvious dunes but
+compatible with sand cover the largest area around the Selk
+crater and are very well correlated with the infrared brown-blue
+unit. This unit presents a quasi-uniform “water ice enrichment”
+index with low to intermediate values, compatible with a
+possible moderate content in water ice. The most likely
+explanation is that those terrains are a geographic mixture of
+
+be spatially correlated with geomorphological units supposed
+to be enriched with surﬁcial water ice (as grains or cobbles
+mixed with other materials), such as the rivers and their mouths
+visible in the RADAR/SAR images that are supposed to be
+dried up and rich in water ice sediments (Le Gall et al. 2010).
+Conversely, Coutelier et al. (2021) also showed that the
+index has its lowest values at places where organic sediments
+are supposed to dominate the surface composition (such
+as hills and plains). We calculated this “water ice enrichment”
+index for the entirety of the Selk crater area mosaic with the
+help of the surface albedos retrieved with our RT-IPGP-2022
+model. The “water ice enrichment” index map is shown in
+Figure 17(b).
+The two mosaics—the RGB of spectral ratios and the “water
+ice enrichment” index—can be jointly analyzed in terms of
+surface composition and granulometry and linked to the local
+geomorphology in order to help to better understand the
+formation and evolution of the landscapes and their possible
+connection with the local climatology. We superimposed
+the geomorphological unit map of Lorenz et al. (2021)
+(Figure 17(e)) on both the RGB and “water ice enrichment”
+index mosaics (Figures 17(f) and (g)). This geomorphological
+classiﬁcation map was built by classifying the different types of
+terrains that have been identiﬁed on the high-resolution
+Cassini/Synthetic Aperture Radar (SAR) mosaic of the
+Dragonﬂy landing area.
+In the classiﬁcation map of Lorenz et al. (2021)
+(Figure 17(e)), ﬁve major types of terrains have been identiﬁed:
+(1) the Selk crater rim, bright and highly textured in SAR
+19
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 15. Mosaics of the four selected (and co-registered) VIMS cubes over the Selk crater area in the four last atmospheric windows: (top row) I/F, (middle row)
+direct output of our RT model, i.e., Lambertian surface albedo, and (bottom row) Lambertian surface albedo corrected for surface photometry. The mapping projection
+is rectangular with grid marks every 5° of longitude and latitude. Longitude is in degrees east. The 5 μm window mosaics result from averaging over 15 VIMS spectels
+from 4.89 to 5.13 μm to increase the S/N.
+
+VIMS spectels from 4.89 to 5.13 μm to increase the signal-tonoise ratio (S/N). Despite the absence of obvious absorption
+bands and large error bars at short wavelengths, differences are
+clearly visible, both on the global albedo level and on spectral
+slopes in speciﬁc wavelength regions. The yellow-bright unit is
+the brightest in all windows, followed by the purple unit. The
+brown-blue unit is the darkest in the ﬁrst three windows and is
+the only unit to display an almost one-to-one ratio for the 1.57
+and 2.02 μm windows. Within the error bars, the 2.70/2.79 μm
+ratio of the dark-blue unit and its low albedo at 5 μm are the
+most consistent with a possible enrichment in water ice (e.g.,
+Rodriguez et al. 2006; Soderblom et al. 2007; Barnes et al.
+2008; Brossier et al. 2018; Coutelier et al. 2021). From these
+albedo spectra, by considering more spectels sensitive to
+surface contribution within the atmospheric transmission
+windows, not only the center, it may be possible to more
+directly estimate the most probable superﬁcial composition and
+granulometry. It would require new developments and is out of
+the scope of the present study.
+Putting this new set of observations together and with the
+help of previous studies of the Selk crater region, including
+Cassini VIMS, RADAR SAR, radiometry, and SAR-topo data
+(e.g., Soderblom et al. 2010; Werynski et al. 2019; Barnes et al.
+2021; Lorenz et al. 2021; Bonnefoy et al. 2022), we can
+provide a possible scenario of the local geological and climatic
+history.
+Owing to the relatively low RADAR emissivity seen in the
+radiometry observations (Werynski et al. 2019) and to the SAR
+backscattering (Bonnefoy et al. 2022), the Selk crater rim is
+
+dunes of organic sand and interdunes where the icy bedrock
+can be sparingly exposed, as suspected by the thorough
+examination of the SAR images (Barnes et al. 2021; Lorenz
+et al. 2021; Bonnefoy et al. 2022).
+The infrared purple unit can be found locally within the
+crater ejecta and ﬂoor, and as patches embedded in the yellowbright terrains at the northeast of the mosaic. This unit is
+characterized by a “water ice enrichment” index higher than
+that of the brown-blue unit. It can be interpreted as terrains
+where organic sand and icy bedrock also cohabit with probably
+a higher content in water ice than for the dune ﬁelds outside the
+crater. This hypothesis is supported by the few dunes observed
+within the SAR-brighter crater ﬂoor in the higher-resolution
+SAR images (Barnes et al. 2021; Lorenz et al. 2021; Bonnefoy
+et al. 2022).
+Finally, the infrared-dark blue unit, visible only as very
+localized patches right at the north, east, southwest, and
+northwest of the crater rim, is strongly correlated with the
+highest “water ice enrichment” index. This spectral behavior is
+in accordance with what was already reported by, e.g., Brossier
+et al. (2018), being possibly indicative of the strongest content
+in water ice in the investigated VIMS data cubes.
+We show in Figure 18 the retrieved surface albedo corrected
+for the photometry in the center of the atmospheric transmission windows for the four most prominent spectral units
+revealed in the RGB map (i.e., brown-blue, purple, dark-blue,
+and yellow-bright units). Each spectrum is the average of a
+selection of pixels within each unit with 1σ mean arithmetic
+uncertainties. The 5μ window results from averaging over 15
+20
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 16. Longitudinal transects at four different latitudes (5°N, 7°N, 10°N, and 12°N) extracted from the VIMS mosaic of the Selk crater region (see Figures 13 and
+14 and 15): (ﬁrst row) incidence, emission, and phase angles, in red, green and blue, respectively, (second row) I/F in an atmospheric band, at 0.88 μm here, (third
+row) haze (Fh, red curve) and mist (Fm, orange curve) opacity factors, along with their 2σ uncertainty envelops, (fourth row) I/F in an atmospheric window, here at
+1.07 μm, and (ﬁfth row) surface albedos at 1.07 μm, uncorrected (in blue) and corrected (in red) for surface photometry (see text for detailed explanations of the
+surface photometry correction), along with their 2σ uncertainty envelop. Zooms on a few transitions between VIMS data cubes are also provided. Gray dotted vertical
+lines correspond to cube transitions.
+
+consistent with a higher water ice content, at least in the near
+subsurface. This is expected as crater rims are supposed to be
+windows into the crust composition. This is in apparent
+contradiction with what is inferred from the VIMS observations, which suggest a crater and its ejecta blanket rather
+dominated by tholin-like solid organics. The most likely
+explanation is that the rim and ejecta of the Selk crater are
+covered by a blanket of atmospheric organic fallouts, thin
+enough (from a few tens of micrometers to a few tens of
+centimeters) for the RADAR to be still sensitive to the water
+ice lying underneath. A possibility is that the Selk crater is old
+enough for its rim and ejecta to be already covered by a
+sufﬁcient amount of organic sediment as seen by VIMS, but
+still young enough so that the sediment blanket is not too thick
+for the near-subsurface water ice (originally at the surface) to
+be seen by the RADAR radiometer and SAR. This is in
+agreement with the analysis of Werynski et al. (2019), who
+classiﬁed the Selk crater at an intermediate state of degradation.
+It is worth noting that the ejecta has a higher RADAR
+emissivity (Werynski et al. 2019) than the rim, while in the
+infrared (probing the very top subsurface) they both seem
+equally depleted in water ice, which can be explained by the
+
+chaotic nature of those ejecta terrains constituted by a
+homogeneous mixture of water ice (ejected from the crust)
+and organic sediment at the surface and at depth.
+At the center of the crater, the SAR images show the
+presence of a few RADAR-dark dunes, RADAR-bright
+interdunes, and slightly brighter areas, with a possible central
+peak (Werynski et al. 2019; Barnes et al. 2021; Lorenz et al.
+2021; Bonnefoy et al. 2022). The RADAR emissivity,
+averaged over the entire crater ﬂoor, is higher than that of
+the rim but not as high as that of the neighboring dune ﬁelds or
+that of the interior of an older crater ﬁlled with dunes like
+Santorini (Werynski et al. 2019). Hence, if the crater ﬂoor
+might be covered by a thick bed of accumulated organic sediments
+—from where isolated dunes can develop—the SAR and
+radiometric data do not rule out ice outcropping from the crust
+in this region, in the interdunes and possibly at the central peak.
+This is in agreement with the relatively uniform infrared purple
+unit and higher “water ice enrichment” index of the crater ﬂoor.
+At places around the rim of the crater, at the bottom of the
+slopes, and inside and outside the crater, we identify a few
+infrared-dark blue patches. These infrared units are found
+within the ejecta blanket unit with no distinct brightness or
+21
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 17. (a) RGB mosaic of the Selk crater region, with the 1.57/1.28 μm albedo ratio as the red channel, the 2.02/1.28 μm albedo ratio as the green channel, and
+the 1.28/1.07 μm albedo ratio as the blue channel. (b) Same mosaic for the “water ice enrichment” index. (c) and (d) Zooms on (a) and (b). (e) Classiﬁcation map of
+the Selk crater region (Lorenz et al. 2021). The color legends are given in the frame above. White arrows designate the areas with the highest “water ice enrichment”
+index, corresponding to the dark-blue units on the RGB mosaic. The initial landing ellipse of Dragonﬂy is indicated by the solid oval on each map (Barnes et al. 2021).
+
+here, in agreement with their ﬂuvial erosion origin. The spatial
+resolution of the VIMS data cubes used in our study and the
+quality of our infrared albedo retrievals are good enough to even
+be able to see and follow the dark-blue unit along the narrow
+river valley of the north, strengthening our hypothesis. There
+may be more river valleys incising the crater walls, but SAR
+images of sufﬁcient resolution are lacking in most of the area.
+Those rivers may also be one of the modern sources of
+organic sediment that keep supplying the surrounding extensive dune ﬁelds. The spectral differences, and thus the color
+difference in the VIMS RGB mosaic, between the elevated
+terrains (yellow-bright) and most of the plains at the lowest
+altitudes (brown-blue), suggest that the sediment that covers the
+top centimeters of the rim and ejecta are likely to be different in
+granulometry, if not in composition, from the organic sand that
+composes the dunes. Indeed, Brossier et al. (2018) demonstrated in another equatorial region that, although being of
+similar chemical composition, the dune material in the
+topographic lows (infrared brown-blue) could be composed
+of larger grains than the fresher sediment (infrared yellow-
+
+texture in the SAR images. They may witness localized
+superﬁcial deposits to which only the infrared wavelengths are
+sensitive. They are all strongly correlated to the highest “water
+ice enrichment” index of the area and may be witnesses of the
+local pluvial and ﬂuvial activities, as suggested by Soderblom
+et al. (2010) and by Brossier et al. (2018) in an equivalent
+geological and climatic context. In particular, the spectral
+analyses of Brossier et al. (2018) indicated that these dark-blue
+units may be organic deposits particularly enriched with water
+ice pebbles. A mixture of ﬁne-grain organics and larger-grain
+icy rocks may have been produced by the ﬂuvial incision of the
+surface and near-subsurface substrates at higher altitudes,
+transported downwards by rivers and deposited in outwash
+plains as alluvial cones. At the north and east of the Selk crater
+rim, the SAR and VIMS images possibly reveal the presence of
+river valleys dissecting the crater rim (Soderblom et al. 2010).
+Rivers are also reported cutting the walls of the Forseti and
+Sinlap craters (Brossier et al. 2018; Werynski et al. 2019) and
+can be a common erosion feature on crater ﬂanks. These river
+valleys are connected to two of the dark-blue units reported
+22
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Figure 18. Retrieved surface albedo corrected for the photometry in the center of the methane windows for the four most prominent spectral units revealed in the RGB
+map: (a) brown-blue, (b) purple, (c) dark-blue, and (d) yellow-bright units. Each spectrum is the average of a selection of pixels within each unit (841, 289, 324, and
+196 pixels, respectively) with 1σ mean arithmetic uncertainties. The 5μ window results from averaging over 15 VIMS spectels from 4.89 to 5.13 μm in order to reduce
+the noise. For comparison, the results are displayed over the same range of albedo values.
+
+bright unit) that covers the more elevated, mountainous
+terrains. At the Selk crater, the ﬁne-grain organic sediment
+can be swept from the crater rim by episodic rainfalls (Faulk
+et al. 2017), transported along with the water ice cobbles by the
+rivers incising the crater walls and deposited in the lowlands,
+farther than the water ice cobbles due to their lower mass.
+There, different episodes of transport and processing (sintering,
+lithiﬁcation, ﬂocculation) may enable the formation of larger
+grains that will be eroded by the winds and will help to supply
+the surrounding dune ﬁelds (Le Mouélic et al. 2008; Barnes
+et al. 2015; Neish et al. 2015).
+It is important to put these results in context with
+observations of other impact craters on Titan. Although a thin
+layer of ﬁne-grained atmospheric deposits is consistent with
+these observations of Selk, it does not explain the spectral
+signature of all impact craters on Titan. Notably, craters that are
+morphologically fresher (like Sinlap) and more degraded (like
+Soi) than Selk both show more evidence of superﬁcial water ice
+in their rims and ejecta blankets (Solomonidou et al. 2020).
+This suggests there are active surface processes occurring on
+Titan to alter the infrared spectral signatures of impact craters
+over time. It may be that fresher craters (like Sinlap) have not
+had time to acquire a consistent layer of ﬁne-grained organics
+on their rough, blocky rims and ejecta. Over time, the ﬁne-
+
+grained organics may build up, while the rim and ejecta will
+become smoother due to ﬂuvial erosion, producing a more
+consistent layer of organics seen by VIMS. Given more time
+and adequate meteorological conditions (i.e., increased rainfall
+in the plains), these ﬁne-grained organics may be washed away
+to produce an infrared spectral signature more enriched in
+water ice, as we see at the Soi, Sinlap, or Afekan craters
+(Werynski et al. 2019; Solomonidou et al. 2020). Thus, the
+Selk crater may represent part of a continuum of spectral
+signatures expected for impact crater rims; these ideas will be
+directly testable with observations by Dragonﬂy.
+We identify a certain number of interesting targets in and
+around the Selk crater for the future exploration plans of
+Dragonﬂy. First of all, there are targets of prime astrobiological
+interest, at the crater rim and ﬂoor, where interactions between
+organics and liquid water likely occurred within the impact
+melt. We propose for instance to sample the interdune material,
+any remnants of a central peak, and icy material transported by
+rivers from the crater rim to the crater ﬂoor (Neish et al. 2018).
+These terrains all appear to have material coming from the crust
+transformed by the impact and probably mixed with surface
+organics if dunes or organic sediment were present before the
+impact. There are also targets of prime geological and climatic
+interests. Imaging and possibly sampling the grain size and
+23
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+composition of the sediment, from the top of the crater rim to
+the alluvial cones, would help us better comprehend the
+erosional history, the climate, and the formation of the
+landscapes of the Selk crater area and serve as a proxy for
+the entire equatorial region of Titan.
+
+are able to propose detailed geological and climatic scenarios
+that best explain all the observations. We suggest that the Selk
+crater is in an intermediate state of degradation. We suggest
+that heights and mountainous terrains (including rim and
+ejecta) are likely to be dominated by atmospheric deposits of
+ﬁne grains of tholin-like sediment. This organic sediment
+would be transported to the lowlands (crater ﬂoor and
+surrounding plains), possibly with water ice particles, by rivers
+incising down near the water ice bedrock, and further deposited
+and processed to form the sand particles that feed the
+neighboring extensive dune ﬁelds. We thus identify speciﬁc
+targets of astrobiological and geological interests for the future
+exploration of this region by the Dragonﬂy rotorcraft.
+Our model and methods, now validated and reproducible,
+can be widely used on the complete VIMS-IR data set to
+provide crucial information on Titan’s aerosol population,
+surface albedo, and composition at a global scale. Presently, the
+computation time of our RT model is too high to envisage such
+applications. But, we are working on drastically reducing the
+computation time (days rather than years), thanks to precalculated look-up tables (Rodriguez et al. 2021), enabling a
+new era in Titan exploration. Moreover, our model, designed
+for VIMS, can be adapted to analyze any ground- and spacebased IR observations, especially the James Webb Space
+Telescope imaging and spectro-imaging observations. With a
+10 times higher spectral resolution than VIMS in the nearinfrared range, it will bring new constraints on Titan’s surface
+composition in the atmospheric windows, owing to surface
+albedo inversions that we can now provide with our RT-IPGP2022 model.
+
+5. Conclusion
+We present in this study signiﬁcant improvements applied to
+our radiative transfer model for Titan’s atmosphere and surface.
+Our model is designed to simulate the observations of Titan
+realized by the VIMS instrument on board the Cassini
+spacecraft and for future similar measurements. The new
+iteration of our model (RT-IPGP-2022) takes advantage of the
+most recent updates for both the gas and aerosol descriptions,
+notably the gaseous absorption line lists, the gas volume
+mixing and isotopic ratios, and the vertical distribution of
+aerosol optical properties. We opted for a general description of
+the aerosols by the use of an aggregate model calculating the
+vertical extinction proﬁle, single-scattering albedo, and singlescattering phase function of fractal particles. We developed an
+inversion scheme that allows us to estimate the haze and mist
+opacities from the radiance factor in the NIR atmospheric
+bands, the surface albedo in the atmospheric windows, and
+their associated propagated uncertainties.
+We validated the new version of our model and its updated
+description of Titan’s atmosphere with the help of in situ
+Huygens measurements of both the atmosphere and the surface,
+and VIMS orbital observations of the HLS. Our new model,
+constrained with the VIMS observations, is able to reproduce
+the spectral observations of the ULIS, part of the Descent
+Imager/Spectral Radiometer (DISR), during the descent of the
+Huygens probe over a great range of different altitudes (140 km
+down to the surface). Our model also manages to simulate
+Titan’s surface reﬂectivity spectrum recorded by DISR once
+Huygens landed. The RT-IPGP-2022 version of our RT model
+presents signiﬁcantly better matches with Huygens measurements than our previous one (RT-IPGP-2016 model).
+Once validated, we applied our model to the Selk crater
+region, near the site chosen for the landing of the future
+Dragonﬂy mission, in order to retrieve the infrared surface
+albedo at the regional scale and analyze the area in terms of
+geology and climatology. For our analyses, we selected four
+VIMS data cubes that offer the best trade-off between spatial
+coverage of the Selk crater region and spatial sampling. We use
+our RT-IPGP-2022 model to invert our entire VIMS mosaic of
+the Selk crater area (constituted of the four data cubes) for
+aerosol populations and surface albedos. Although VIMS
+mosaics present signiﬁcant seams due to changing viewing
+conditions between the four observations, our inversions lead
+to the production of seamless aerosol distribution and surface
+albedo maps, owing to the use of a relevant surface photometric
+correction, further validating our model. We can use the surface
+albedo maps computed by our model with a higher degree of
+conﬁdence to build analytical tools for the analysis of the
+surface composition and granulometry of the Selk crater region,
+like a map combining spectral ratios of surface albedos and a
+map showing the “water ice enrichment” index adapted from
+Coutelier et al. (2021). The spectral ratios and index maps
+allow us to distinguish surface units of different spectral
+behaviors and give hints to possible local enrichments in water
+ice. Putting together our results with the previous analyses of
+the extensive Cassini data set over the Selk crater region, we
+
+This work was supported by CNES (Centre National
+d’Études Spatiales), Programme National de Planétologie of
+the Institut National des Sciences de l’Univers/Centre National
+de la Recherche Scientiﬁque and ANR (Agence Nationale de la
+Recherche) project RaD3-net (ANR-21-CE49-0020). We thank
+B. Seignovert for Cassini VIMS cube coregistration, Sandrine
+Vinatier for discussions, and two anonymous reviewers for
+their helpful suggestions and very constructive criticism that
+greatly improved the quality of the ﬁnal manuscript.
+Data Availability
+The data and radiative transfer results for this study are
+available at https://zenodo.org/record/7645466#.Y-3q_S8w07g,
+doi: 10.5281/zenodo.7645466.
+Code Availability
+The radiative transfer codes used can be accessed from the
+corresponding author upon request.
+Appendix A
+On the Radiometric Noise of VIMS
+VIMS radiometric noise is estimated for each spectel. We
+calculate the shot noise on the signal (Ss) and shot noise on the
+background (SB, i.e., the dark) to determine the total shot noise
+(Stot (l ) = Ss2 + SB2 ). The shot noise on the signal s is
+s (l ) G + B (l ) G
+
+Ss (l ) =
+, with s(λ) the uncalibrated signal in DN
+G
+as a function of wavelengths, B(λ) the mean background of the
+scan line as a function of wavelengths, and G the VIMS gain
+equals 300 DN−1. The shot noise in the background is
+
+24
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+B (l ) G
+
+the fact that forward scattering increases the photons’ mean free
+path. In the case of an optically thick atmosphere, transmission
+windows can be deﬁned as the wavelengths where the
+cumulative effective opacity does not reach unity before the
+surface. Elsewhere, the altitudes where the cumulative effective
+opacity reaches unity give good estimators of the minimum
+altitudes probed by incident photons.
+The cumulative effective opacity of Titan’s atmosphere can
+be calculated as a function of altitude for each of the 256
+spectels of the VIMS-IR channel. We plot the altitudes where it
+reaches unity as a function of VIMS-IR wavelengths
+(Figure 19). This allows us to quantitatively estimate and
+select the VIMS-IR spectels that probe down to Titan’s surface
+(“surface spectels”) and those totally insensitive to the surface’s
+signal while probing the lowest possible altitude, here 10 km—
+the lowest level of the altitude grid of our RT model, removing
+methane absorption wings (“haze/mist spectels”). These
+spectels can be used to independently invert the surface albedo
+and haze/mist population. Surface spectels correspond to
+VIMS wavelengths of 0.933, 1.065 to 1.082, 1.278 to 1.295,
+1.540 to 1.602, 2.002 to 2.100, 2.681 to 2.799, and 4.889 to
+5.122 μm. Haze/mist spectels correspond to 0.884, 0.982 to
+1.015, 1.130 to 1.196, 1.327 to 1.442, 1.656 to 1.853, and
+2.167 to 2.615 μm (and not beyond due to VIMS’ low S/N). It
+should be noted that we do not use spectel 46 (1.6416 μm)
+because it is located at a ﬁlter gap between two detectors and is
+thus not reliable (Brown et al. 2004; Clark et al. 2018).
+
+SB = G . The background signal B(λ) of each scan line is
+extracted from the raw cube (*.QUB). The 1σ total noise N in
+DN is thus deﬁned as follows: N (l ) = Stot (l )2 + R2 , with R
+the read noise (equals to 1 DN for each VIMS spectel), i.e., the
+amount of noise generated by electronics as the charges present
+in the pixels are transferred to the camera. Finally, the 1σ
+standard deviation on the radiance factor is
+s (l ) = N (l )
+
+f hc 1
+1
+,
+t l AWdl F, ld 2
+
+
+with f the VIMS transfer function in photon per DN, τ the
+exposure time in s, h the Planck constant in J, c the speed of
+light in m s−1, λ the wavelength in m, A the VIMS-IR telescope
+aperture in m2, Ω the solid angle subtended by VIMS-IR IFOV,
+δ λ the VIMS spectels FHWM, Fe,λ the Sun radiance factor in
+W m−2 μm−1 sr−1, and d the Sun–Saturn mean distance in au.
+Appendix B
+Altitudes Probed by the VIMS Spectels: Selection for Haze–
+Mist Population and Surface Albedo Inversions
+The effective opacity, written as t * = t (1 - w )(1 - wg)
+(e.g., Pollack & McKay 1985; Rannou et al. 2003), where τ is
+the atmospheric opacity, ω the atmospheric single-scattering
+albedo, and g the atmospheric asymmetry factor, accounts for
+
+Figure 19. Altitudes where τ = 1 (gray) and τ eff = 1 (black) vs. wavelengths. Red rectangles indicate the VIMS spectels used to invert the haze and mist scaling
+factors (“haze/mist spectels”) and blue rectangles the VIMS spectels used to invert the surface albedo (“surface spectels”).
+
+25
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+ORCID iDs
+
+Jacquinet-Husson, N., Crepeau, L., Armante, R., et al. 2011, JQSRT, 112, 2395
+Jennings, D. E., Tokano, T., Cottini, V., et al. 2019, ApJL, 877, L8
+Karkoschka, E., & Schröder, S. E. 2016, Icar, 270, 307
+Karkoschka, E., Schröder, S. E., Tomasko, M. G., & Keller, H. U. 2012,
+P&SS, 60, 342
+Karkoschka, E., & Tomasko, M. G. 2010, Icar, 205, 674
+Karkoschka, E., Tomasko, M. G., Doose, L. R., et al. 2007, P&SS, 55, 1896
+Kazeminejad, B., Atkinson, D. H., & Lebreton, J.-P. 2011, AdSpR, 47, 1622
+Khare, B. N., Sagan, C., Thompson, W. R., et al. 1984, AdSpR, 4, 59
+Kurucz, R. L. 2005, MSAIS, 8, 189, https://articles.adsabs.harvard.edu//full/
+2005MSAIS...8...14K/0000014.000.html
+Lafferty, W. J., Solodov, A. M., Weber, A., Olson, W. B., & Hartmann, J.-M.
+1996, ApOpt, 35, 5911
+Lavvas, P., Sander, M., Kraft, M., & Imanaka, H. 2011, ApJ, 728, 80
+Le Gall, A., Janssen, M. A., Paillou, P., Lorenz, R. D., & Wall, S. D. 2010,
+Icar, 207, 948
+Le Mouelic, S., Cornet, T., Rodriguez, S., et al. 2012, P&SS, 73, 178
+Le Mouélic, S., Cornet, T., Rodriguez, S., et al. 2019, Icar, 319, 121
+Le Mouélic, S., Langevin, Y., & Erard, S. 1999, JGR, 104, 3833
+Le Mouélic, S., Paillou, P., Janssen, M. A., et al. 2008, JGRE, 113, E04003
+Lellouch, E., Bézard, B., Flasar, F. M., et al. 2014, Icar, 231, 323
+Lellouch, E., Coustenis, A., Sebag, B., et al. 2003, Icar, 162, 125
+Li, L., & Mustard, J. F. 2003, JGRE, 108, 5053
+Lopes, R. M. C., Wall, S. D., Elachi, C., et al. 2019, SSRv, 215, 33
+Lorenz, R. D., MacKenzie, S. M., Neish, C. D., et al. 2021, PSJ, 2, 24
+Lorenz, R. D., Turtle, E. P., Barnes, J. W., et al. 2018, JHATD, 34, 374,
+https://dragonﬂy.jhuapl.edu/News-and-Resources/docs/34_03-Lorenz.pdf
+Loria, S. 1909, AnP, 334, 605
+Lunine, J. I., Stevenson, D. J., & Yung, Y. L. 1983, Sci, 222, 1229
+Malaska, M. J., Lopes, R. M. C., Williams, D. A., et al. 2016, Icar, 270, 130
+Maltagliati, L., Bézard, B., Vinatier, S., et al. 2015a, Icar, 248, 1
+Maltagliati, L., Rodriguez, S., Sotin, C., et al. 2015b, EPSC, 10, EPSC2015–687,
+https://meetingorganizer.copernicus.org/EPSC2015/EPSC2015-687.pdf
+Markwardt, C. B. 2009, in ASP Conf. Ser. 411, Astronomical Data Analysis
+Software and Systems XVIII, ed. D. A. Bohlender, D. Durand, & P. Dowler
+(San Francisco, CA: ASP)
+Mathé, C., Vinatier, S., Bézard, B., et al. 2020, Icar, 344, 113547
+McCord, T. B., Hayne, P., Combe, J.-P., et al. 2008, Icar, 194, 212
+McKay, C. P., Pollack, J. B., & Courtin, R. 1989, Icar, 80, 23
+McKellar, A. R. W. 1989, Icar, 80, 361
+Meakin, P. 1984, PhRvA, 29, 997
+Menard-Bourcin, F., Menard, J., & Boursier, C. 2007, JMoSp, 242, 55
+Molter, E. M., Nixon, C. A., Cordiner, M. A., et al. 2016, AJ, 152, 42
+Naus, H., & Ubachs, W. 2000, OptL, 25, 347
+Negrão, A., Coustenis, A., Lellouch, E., et al. 2006, P&SS, 54, 1225
+Neish, C. D., Barnes, J. W., Sotin, C., et al. 2015, GeoRL, 42, 3746
+Neish, C. D., Lorenz, R. D., Turtle, E. P., et al. 2018, AsBio, 18, 571
+Niemann, H. B., Atreya, S. K., Demick, J. E., et al. 2010, JGRE, 115, E12006
+Nikitin, A., Brown, L. R., Féjard, L., Champion, J. P., & Tyuterev, V. 2002,
+JMoSp, 216, 225
+Nikitin, A. V., Brown, L. R., Sung, K., et al. 2013, JQSRT, 114, 1
+Nikitin, A. V., Champion, J.-P., & Brown, L. R. 2006, JMoSp, 240, 14
+Nixon, C. A., Temelso, B., Vinatier, S., et al. 2012, ApJ, 749, 159
+Peck, E. R., & Khanna, B. N. 1966, JOSA, 56, 1059
+Penteado, P. F., & Grifﬁth, C. A. 2010, Icar, 206, 345
+Pollack, J. B., & McKay, C. P. 1985, JAtS, 42, 245
+Rannou, P., Cabane, M., Botet, R., & Chasseﬁère, E. 1997, JGR, 102, 10997
+Rannou, P., Cabane, M., Chasseﬁere, E., et al. 1995, Icar, 118, 355
+Rannou, P., Cours, T., Le Mouélic, S., et al. 2010, Icar, 208, 850
+Rannou, P., Coutelier, M., Rey, M. M., & Vinatier, S. 2022, A&A, 666, A140
+Rannou, P., Coutelier, M., Rivière, E., et al. 2021, ApJ, 922, 239
+Rannou, P., McKay, C. P., & Lorenz, R. D. 2003, P&SS, 51, 963
+Rannou, P., Toledo, D., Lavvas, P., et al. 2016, Icar, 270, 291
+Rey, M., Nikitin, A. V., Bézard, B., et al. 2018, Icar, 303, 114
+Rodriguez, S., Es-Sayeh, M., Cornet, T., et al. 2021, AGUFM, P45G
+Rodriguez, S., Le Mouélic, S., Barnes, J. W., et al. 2018, NatGe, 11, 727
+Rodriguez, S., Le Mouélic, S., Sotin, C., et al. 2006, P&SS, 54, 1510
+Rollefson, R., & Havens, R. 1940, PhRv, 57, 710
+Rothman, L. S., Gordon, I. E., Babikov, Y., et al. 2013, JQSRT, 130, 4
+Schinder, P. J., Flasar, F. M., Marouf, E. A., et al. 2020, Icar, 345, 113720
+Schroder, S. E., & Keller, H. U. 2008, P&SS, 56, 753
+Schröder, S. E., & Keller, H. U. 2009, P&SS, 57, 1963
+Serigano, J., Nixon, C. A., Cordiner, M. A., et al. 2016, ApJL, 821, L8
+Smith, P. L., Huber, M. C. E., & Parkinson, W. H. 1976, PhRvA, 13, 1422
+Sneep, M., & Ubachs, W. 2005, JQSRT, 92, 293
+Soderblom, J. M., Brown, R. H., Soderblom, L. A., et al. 2010, Icar, 208, 905
+
+M. Es-sayeh https://orcid.org/0000-0002-0643-4323
+S. Rodriguez https://orcid.org/0000-0003-1219-0641
+M. Coutelier https://orcid.org/0000-0002-0776-2732
+P. Rannou https://orcid.org/0000-0003-0836-723X
+B. Bézard https://orcid.org/0000-0002-5433-5661
+T. Cornet https://orcid.org/0000-0001-5971-0056
+E. Karkoschka https://orcid.org/0000-0002-4165-0064
+S. Le Mouélic https://orcid.org/0000-0001-5260-1367
+A. Le Gall https://orcid.org/0000-0002-9023-4868
+C. Neish https://orcid.org/0000-0003-3254-8348
+S. MacKenzie https://orcid.org/0000-0002-1658-9687
+C. Sotin https://orcid.org/0000-0003-3947-1072
+A. Coustenis https://orcid.org/0000-0003-3414-3491
+References
+Acton, C., Bachman, N., Semenov, B., & Wright, E. 2018, P&SS, 150, 9
+Ádámkovics, M., de Pater, I., Hartung, M., & Barnes, J. W. 2009, P&SS,
+57, 1586
+Ádámkovics, M., de Pater, I., Roe, H. G., Gibbard, S. G., & Grifﬁth, C. A.
+2004, GeoRL, 31, L17S05
+Ádámkovics, M., Mitchell, J. L., Hayes, A. G., et al. 2016, Icar, 270, 376
+Adriani, A., Moriconi, M., Liberti, G., et al. 2005, EM&P, 96, 109
+Albert, S., Bauerecker, S., Boudon, V., et al. 2009, CP, 356, 131
+Anderson, C. M., Samuelson, R. E., Achterberg, R. K., Barnes, J. W., &
+Flasar, F. M. 2014, Icar, 243, 129
+Barnes, J. W., Brown, R. H., Soderblom, L., et al. 2007, Icar, 186, 242
+Barnes, J. W., Brown, R. H., Soderblom, L., et al. 2008, Icar, 195, 400
+Barnes, J. W., Lorenz, R. D., Radebaugh, J., et al. 2015, PlSci, 4, 1
+Barnes, J. W., MacKenzie, S. M., Young, E. F., et al. 2018, AJ, 155, 264
+Barnes, J. W., Turtle, E. P., Trainer, M. G., et al. 2021, PSJ, 2, 130
+Bates, D. R. 1984, P&SS, 32, 785
+Bézard, B. 2014, Icar, 242, 64
+Bézard, B., Nixon, C., Kleiner, I., & Jennings, D. 2007, Icar, 191, 397
+Bird, M. K., Allison, M., Asmar, S. W., et al. 2005, Natur, 438, 800
+Bonnefoy, L. E., Lucas, A., Hayes, A. G., et al. 2022, PSJ, 3, 201
+Botet, R., Rannou, P., & Cabane, M. 1997, ApOpt, 36, 8791
+Boudon, V., Rey, M., & Loete, M. 2006, JQSRT, 98, 394
+Brossier, J. F., Rodriguez, S., Cornet, T., et al. 2018, JGRE, 123, 1089
+Brown, R. H., Baines, K. H., Bellucci, G., et al. 2004, SSRv, 115, 111
+Buras, R., Dowling, T., & Emde, C. 2011, JQSRT, 112, 2028
+Cabane, M., Chasseﬁere, E., & Israel, G. 1992, Icar, 96, 176
+Cabane, M., Rannou, P., Chasseﬁere, E., & Israel, G. 1993, P&SS, 41, 257
+Campargue, A., Wang, L., Mondelain, D., et al. 2012, Icar, 219, 110
+Clark, R. N., Brown, R. H., Lytle, D. M., & Hedman, M. 2018, The VIMS
+Wavelength and Radiometric Calibration 19, Final Report, Version
+2.0NASA Planetary Data System
+Combe, J.-P., Le Mouélic, S., Sotin, C., et al. 2008, P&SS, 56, 951
+Combe, J.-P., McCord, T. B., McFadden, L. A., et al. 2015, Icar, 259, 53
+Corlies, P., McDonald, G. D., Hayes, A. G., et al. 2021, Icar, 357, 114228
+Cornet, T., Rodriguez, S., Maltagliati, L., et al. 2017, EGUGA, 19, 12298
+Coustenis, A., Jennings, D. E., Achterberg, R. K., et al. 2016, Icar, 270, 409
+Coustenis, A., Jennings, D. E., Achterberg, R. K., et al. 2020, Icar, 344, 113413
+Coutelier, M., Cordier, D., Seignovert, B., et al. 2021, Icar, 364, 114464
+De Bergh, C., Courtin, R., Bézard, B., et al. 2012, P&SS, 61, 85
+De Kok, R., Irwin, P. G. J., Teanby, N. A., et al. 2007, Icar, 186, 354
+Doose, L. R., Karkoschka, E., Tomasko, M. G., & Anderson, C. M. 2016, Icar,
+270, 355
+Evans, K. F. 2007, JAtS, 64, 3854
+Faulk, S. P., Mitchell, J. L., Moon, S., & Lora, J. M. 2017, NatGe, 10, 827
+Flasar, F. M. 1983, Sci, 221, 55
+Fulchignoni, M., Ferri, F., Angrilli, F., et al. 2005, Natur, 438, 785
+Grifﬁth, C. A., Doose, L., Tomasko, M. G., Penteado, P. F., & See, C. 2012,
+Icar, 218, 975
+Grifﬁth, C. A., Owen, T., Geballe, T. R., Rayner, J., & Rannou, P. 2003, Sci,
+300, 628
+Grifﬁth, C. A., Owen, T., & Wagener, R. 1991, Icar, 93, 362
+Gurwell, M. A. 2004, ApJL, 616, L7
+Gurwell, M. A., & Muhleman, D. O. 2000, Icar, 145, 653
+Hanel, R., Conrath, B., Flasar, F. M., et al. 1981, Sci, 212, 192
+Hirtzig, M., Bézard, B., Lellouch, E., et al. 2013, Icar, 226, 470
+
+26
+
+The Planetary Science Journal, 4:44 (27pp), 2023 March
+
+Es-sayeh et al.
+
+Soderblom, L. A., Kirk, R. L., Lunine, J. I., et al. 2007, P&SS, 55, 2025
+Solomonidou, A., Coustenis, A., Hirtzig, M., et al. 2016, Icar, 270, 85
+Solomonidou, A., Coustenis, A., Lopes, R. M. C., et al. 2018, JGRE, 123, 489
+Solomonidou, A., Hirtzig, M., Coustenis, A., et al. 2014, JGRE, 119, 1729
+Solomonidou, A., Neish, C., Coustenis, A., et al. 2020, A&A, 641, A16
+Sotin, C., Jaumann, R., Buratti, B. J., et al. 2005, Natur, 435, 786
+Sylvestre, M., Teanby, N. A., Vatant d?Ollone, J., et al. 2020, Icar, 344,
+113188
+Teanby, N. A., Bézard, B., Vinatier, S., et al. 2017, NatCo, 8, 1586
+Teanby, N. A., Sylvestre, M., Sharkey, J., et al. 2019, GeoRL, 46, 3079
+
+Thelen, A. E., Nixon, C. A., Chanover, N. J., et al. 2019, Icar, 319, 417
+Tomasko, M. G., Doose, L., Engel, S., et al. 2008, P&SS, 56, 669
+Vinatier, S., Bézard, B., Lebonnois, S., et al. 2015, Icar, 250, 95
+Vinatier, S., Bézard, B., & Nixon, C. A. 2007, Icar, 191, 712
+Vinatier, S., Bézard, B., Nixon, C. A., et al. 2010, Icar, 205, 559
+Vinatier, S., Mathé, C., Bézard, B., et al. 2020, A&A, 641, A116
+Vinatier, S., Rannou, P., Anderson, C. M., et al. 2012, Icar, 219, 5
+Werynski, A., Neish, C. D., Gall, A. L., & Janssen, M. A. 2019, Icar, 321, 508
+Yelle, R. V., Koskinen, T. T., & Palmer, M. Y. 2021, Icar, 368, 114587
+Yung, Y. L., Allen, M., & Pinto, J. P. 1984, ApJS, 55, 465
+
+27
+
+

@@ -1,0 +1,325 @@
+Polarization Imaging Target Detection Method by Imitating Dragonfly Compound Eye LF-SF Mechanism
+Mengxi Xu, Xin Wang, Xijun Yan, Guofang Lv, Shengnan Zheng, Huibin Wang (2013). International Conference on Computer Science and Electronics Engineering (ICCSEE). https://doi.org/10.2991/iccsee.2013.670. doi:10.2991/iccsee.2013.670. Licence: cc-by-nc. Text from pdf.
+
+Proceedings of the 2nd International Conference on Computer Science and Electronics Engineering (ICCSEE 2013)
+
+Polarization Imaging Target Detection Method by Imitating Dragonfly Compound
+Eye LF-SF Mechanism
+Mengxi Xu1,2
+
+3
+
+1
+
+School of Computer Science and Technology, Nanjing
+Institute of Technology
+2
+Nanjing University of Science & Technology,
+Nanjing, China
+mengxi.xu@gmail.com
+
+Abstract—Recently, water surface target detection and
+tracking for sea, lake, or river are challenging research topics.
+This paper presents a framework of target detection and
+tracing based on three-channel synchronization polarization
+imaging and imitation dragonfly compound eye LF-SF (large
+field- small field) mechanism. This framework can make full
+use of the advantages of polarization sensitivity of the
+compound eyes of a dragonfly, and be useful for effective water
+surface target detection and motion vector estimation.
+Keywords- target detection and tracking; bionic information
+processing; polarization imaging
+
+I.
+
+INTRODUCTION
+
+Water surface target detection and tracking have become
+research focuses in image processing and computer vision in
+recent years. For example, in [1], the arctic marine oilspill
+program (AMOP) remote sensing project was undertaken in
+order to evaluate the capability of state-of-the-art sensors to
+detect oil in ice-infested waters. Kim et al. [2] presented a
+double layered-background removal filter (DL-BRF) for sea
+target detection problems. However, it still has some
+challenges for reliable and effective detection and tracking of
+water surface target.
+Firstly, many water surface information acquisition
+methods are based on visible imaging. However, due to the
+varying natural and climatic conditions as well as varying
+optical attributes of the targets, only using light intensity
+information of the targets for detecting and tracking can not
+get good results. Therefore, some researchers have attempted
+to acquire other optical information for water surface target
+detection. For instance, Taylor [3] presented to use
+hyperspectral AVIRIS data for oil spill detection and
+identification. In [4], the degree of polarization was used for
+ship and oil-spill detection in linear and hybrid/compact
+dual-pol SAR. In [5], long wave infrared imaging
+polarimetry was presented to detect water surface objects.
+Secondly, besides collection of water surface images, the
+design of target detectors is also crucial. Ondini et al. [6]
+described template-matching techniques for automatic
+detection of multiple, extended, and low contrast targets in
+infrared maritime scenarios. In [7], the authors used a
+background subtraction method and a real-time
+approximation of level-set-based curve evolution to
+
+Xin Wang, 3Xijun Yan, 3Guofang Lv, 1Shengnan
+Zheng, 3Huibin Wang
+3
+
+College of Computer and Information,
+Hohai University,
+Nanjing, China
+
+demarcate the outline of moving vessels in the ocean. In [8],
+a framework for a camera based vessel recognition system
+was proposed to enhance the functionalities of current Vessel
+Traffic Services (VTS) systems. Although these methods
+promote the development of water surface target detection
+and tracking, they still have these or those shortages.
+To solve these problems, this paper presents a framework
+of target detection and tracking based on three-channel
+synchronization polarization imaging and imitation
+dragonfly compound eye LF-SF mechanism. In the first step,
+it uses polarization imaging to acquire the water surface
+images. Then, it designs a novel detector by imitating
+dragonfly compound eye LF-SF (large field-small field)
+mechanism. This framework will promote the technology of
+water surface target detection and tracking.
+The rest of the paper is organized as follows. The overall
+design of the framework is presented in Section 2. Section 3
+detailedly describes the contents of the framework, such as
+the three-channel synchronization polarization imaging
+system, Stokes vectors measurement component, and the
+target detection and tracking component by imitating
+dragonfly compound eye LF-SF mechanism. Conclusions
+are given in Section 4.
+II. OVERALL DESIGN OF THE PRESENTED FRAMEWORK
+The commonly used light attribute of water surface target
+for detection is intensity. In fact, light attributes, such as
+polarization, can also provide important information for
+target detection. Polarization information shows the surface
+features, shape, and so on of the water targets [9]. Thus, we
+will utilize polarization imaging for water surface, which is
+beneficial to water surface target information acquisition.
+In addition, most existing water surface target detectors
+are dependent on background model or prior knowledge of
+optical information, so the target detection false alarm rate
+would be raised by clutter background or little prior optical
+information. In recent years, many biologists study the
+abilities of water surface target detection and tracking of the
+hydrophilic insects, such as dragonfly and backswimmer,
+and have made a progress. These insects possess compound
+eyes system, which are arranged by multiple small eyes. In
+1996, Horvath and Zeil [10] indicated that the compound
+eyes of a dragonfly have polarization sensitivity, which is the
+basis for detecting and tracking water surface targets.
+
+Published by Atlantis Press, Paris, France.
+© the authors
+2691
+
+Proceedings of the 2nd International Conference on Computer Science and Electronics Engineering (ICCSEE 2013)
+
+Moreover, the compound eyes system of a dragonfly can
+acquire large field and small field data at the same time,
+which also helps it to detect the water surface targets further
+[11-15]. Inspired by target detection neurons of the dragonfly
+visual system, a bionic water surface detector is proposed
+here. It makes full use of the advantages of the compound
+eyes system of a dragonfly, and can effectively improve the
+performance of water surface target detection and tracking.
+In summary, the whole framework based on polarization
+imaging and imitation dragonfly compound eye LF-SF (large
+field- small field) mechanism is designed. The architecture
+of the proposed framework is shown in Fig. 1. It has three
+compnents, which are three-channel synchronization
+polarization imaging system, Stokes vectors measurement
+module, and the target detection and tracking module by
+imitating dragonfly compound eye LF-SF mechanism.
+III.
+
+THE COMPONENTS OF THE PRESENTED FRAMEWORK
+
+A. Three-channel Synchronization Polarization Imaging
+System
+The three-channel synchronization polarization imaging
+system utilizes three 14 megapixel MT9F002 CMOS image
+sensors. The frame rate of each sensor is 13fps. And its
+operating temperature is -30℃ - +70℃.This type of sensor
+has such good properties as waterproof, fog-proof and dustproof, which let it be suitable for field conditions. Its pixel
+size is 1.4um, with power consumption of less than 260mW.
+It is difficult to plate polarizing film in three directions on
+the single-chip CMOS image sensor. So we design the threechannel synchronization polarization imaging system using
+three CMOS sensors. They are installed at three equally
+spaced angle on the visual axis (diameter = 260mm), and the
+FPGA processing circuit boards are installed in the center
+vacancy region. The inner surfaces of lenses at 0°, 45° and
+90° directions are mounted by Schneider B+W polarizer.
+The outer surfaces are mounted by B+W081 or B+W484
+short band spectral filters. Based on this design, when the
+height of the imaging probe is 80m and the focal length is
+40mm, the spatial resolution is about 2.6cm.
+At last, EP4CGX150 FPGA chip from Altera is selected
+to develop the system on a programmable chip (SOPC). I2C
+serial bus and 12bit parallel bus are utilized for the scanning
+control of the three channel CMOS sensors and the image
+transmission. Several 34 × 12bit dual-port RAMs and FIFOs
+are designed for CMOS sensors’ parameter read-write and
+data cache.
+B. Stokes Vectors Measurement
+In this component, the three polarized results will be
+combined to form an image, that is, the polarization image,
+by measuring the Stokes vectors. In the estimated
+polarization image, the contrast between the targets and the
+background is much higher than that in the intensity image.
+Finally, the polarization image is inputted into the next
+module.
+
+C. Target Detection and Tracking by imitating dragonfly
+compound eye LF-SF mechanism
+The latest research on the detection of surface ships and
+oil surface indicates that, even using fairly complete optical
+information acquisition device, the obtained information is
+still unstable, and contains a lot of noise. In order to
+complete the final detection task, the system must also rely
+on the support of the subsequent algorithm.
+We propose our two-dimensional target motion detection
+and motion vector estimation method, which can achieve the
+water target position match in consecutive frames. The
+proposed method combines the theory of engineering
+simulation of LF-SF system in the compound eye visual
+system, the application of the "Cell Poll" function, and the
+electrophysiology research result of the charging and
+discharging mode of the medulla cells.
+This component consists of three divisions: compound
+eyes simulation, water surface information extraction, and
+target detection and tracking, as shown in Fig.2.
+We imitate the imaging mechanism of dragonfly’s
+compound eyes, which are constituted by many small eyes.
+Such small eye produces an independent image. Then these
+images are combined together to form an integrated image
+by biological neural networks. The virtual eye swarm is
+bundled by five overlapped local windows (3 × 3 or 5 × 5),
+which build a virtual eye swarm (5 local window size). The
+small eye swarm imitates the compound eye mechanism to
+slide all the eyes to get the overlapping polarization sampling
+of each window.
+The imaging system then simulates the large field and the
+small field channels, which have different spatial and
+temporal integration characteristics for polarization
+information. LF and SF channels also have the sensing
+mechanisms of rapid polarization and slow depolarization
+characteristics. Moreover, the imaging system simulates P +
+and P- two groups of shared cell groups of different
+polarities, which have the mechanisms of diversion
+enhancement and conflict suppression. This part also uses
+"Cell Pool" for optimizing and scheduling LF and SF, in
+order to highlight the texture, edges, and other features of
+scene characteristics such as rotation mode and the target
+movement.
+Based on the electric physiology research on medulla
+cells (STMD) and the simulation of scene judgment
+mechanism by pulse sequence, we design the target motion
+detector by imitating STMD charge and discharge mode. The
+proposed method constructs a discriminant function by the
+form of an exponential function of e to calculate the
+maximum likelihood of the current pulse sequence, which at
+last gives the output of the target movement detector.
+IV. CONCLUSIONS
+The detection and tracking of water surface target under
+clutter background have been crucial problems in many
+fields. However, many methods at present cannot avoid the
+influences from clutter background. This paper focuses on a
+novel framework of water surface target detection and
+tracking based on three-channel synchronization polarization
+
+Published by Atlantis Press, Paris, France.
+© the authors
+2692
+
+Proceedings of the 2nd International Conference on Computer Science and Electronics Engineering (ICCSEE 2013)
+
+imaging and imitation dragonfly compound eye LF-SF (large
+field- small field) mechanism. This framework is the
+development of the techniques of water surface target
+detection and tracking under complex background, and will
+be widely used in the future.
+ACKNOWLEDGMENT
+This work is supported by the Special Fund for Basic
+Scientific Research of Central Colleges, Hohai University
+(Grant No. 2011B09314), China Postdoctoral Science
+Foundation funded project (Grant No. 2012M511185), and
+Jiangsu Planned Projects for Postdoctoral Research Funds
+(Grant No. 1102069C), National Natural Science Foundation
+of China (Grant No. 61263029).
+REFERENCES
+[1]
+
+[2]
+
+[3]
+
+[4]
+
+R.A. O'Neil, R.A. Neville, V. Thomson. The Arctic Marine Oilspill
+Program (AMOP) remote sensing study. Environmental Protection
+Service report series. Canada, 1983.
+S. Kim, Y.g Yang, J. Lee. Horizontal small target detection with
+cooperative background estimation and removal filters. Proceedings
+of IEEE International Conference on Acoustics, Speech and Signal
+Processing, 2011, 1761-1764.
+S. Taylor. 0.45- to 1.1 -um spectra of Prudhoe crude oil and of beach
+materials in Prince William Sound, Alaska. Special report, 1992,
+92(5): 8-22.
+R. Shirvany, M. Chabert, J. Y. Tourneret. Ship and Oil-Spill
+Detection Using the Degree of Polarization in Linear and
+Hybrid/Compact Dual-Pol SAR. IEEE Journal of Selected Topics in
+Applied Earth Observations and Remote Sensing, 2012, 5(3): 885892.
+
+[5]
+
+J. S. Harchanko, D. B. Chenault. Water-surface object detection and
+classification using imaging polarimetry. In Proceedings of SPIE,
+2005, 588815, doi: 10.1117/12.623542.
+[6] A. Ondini, G. Marsiglia, L. Fortunato, et al. Techniques for detection
+of multiple, extended, and low contrast targets in infrared maritime
+scenarios. Optical Engineering, 2006, 45(12): 126401- 126405.
+[7] Z. L. Szpak, J. R. Tapamo. Maritime surveillance: Tracking ships
+inside a dynamic background using a fast level-set. Expert Systems
+with Applications, 2011, 38(6): 6669-6680.
+[8] D. Bloisi, L. Iocchi, M. Fiorini, et al.. Camera based target
+recognition for maritime awareness. Proceedings of the 15th
+International Conference on Information Fusion, 2012: 1982-1987.
+[9] W. B. Wang, J. H. Ali, R. R. Alfano, et al.. Spectral Polarization
+Imaging of Human Rectum-Membrane-Prostate Tissues. IEEE
+Journal of Selected Topics in Quantum Electronics, 2003, 9(2): 288293.
+[10] G. Horvath , J. Zeil . Kuwait oil lakes as insect traps. Nature, 1996,
+379(7): 303-304.
+[11] F. C. Huang, M. Li, A. Y. Shi, et al.. Insert visual system inspired
+small target detection for multi-spectral remotely sensed images.
+Journal of Communication, 2011, 32(9): 88- 95.
+[12] L. Z. Xu, L. Min, A. Y. Shi, et al.. Feature Detector Model for MultSpectral Remote Sensing Image Inspired by Insert Visual System.
+Acta Electronica Sinica, 2011, 39(11): 2497-2501.
+[13] L. Z. Xu, A. Y. Shi, F. C. Huang, et al.. A perceptual and
+computational mechnism for bionic compound eye systems with
+multi-source information fusion. CAAI Transaction on Intelligent
+Systems, 2008, 3(4): 328-335.
+[14] L. Min, L. Z. Xu, A. Y. Shi, et al.. Image reconstruction algorithm
+inspired by a bionic compound eye system. CAAI Transaction on
+Intelligent Systems, 2009, 4(2): 180-187.
+[15] L. Z. Xu, X. F. Li, S. X.Yang. Intelligent Information Processing and
+System Optimization. Intelligent Automation and Soft Computing,
+2011, 17(7): 829-831
+
+Figure 1. The presented framework based on imitation dragonfly compound eye mechanism
+
+Figure 2. Target detection and tracking by Imitating dragonfly compound eye LF-SF mechanism
+
+Published by Atlantis Press, Paris, France.
+© the authors
+2693
+
+

@@ -1,0 +1,807 @@
+3D HABITAT COMPLEXITY OF CORAL REEFS IN THE NORTHWESTERN HAWAIIAN ISLANDS IS DRIVEN BY CORAL ASSEMBLAGE STRUCTURE
+John H. R. Burns, Atsuko Fukunaga, Kailey H. Pascoe, Alexandra T. Runyan, Brianna K. Craig, J. Talbot, Ashley R. Pugh, Randall K. Kosaki (2019). The international archives of the photogrammetry, remote sensing and spatial information sciences/International archives of the photogrammetry, remote sensing and spatial information sciences. https://doi.org/10.5194/isprs-archives-xlii-2-w10-61-2019. doi:10.5194/isprs-archives-xlii-2-w10-61-2019. Licence: cc-by. Text from pdf.
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+3D HABITAT COMPLEXITY OF CORAL REEFS IN THE NORTHWESTERN
+HAWAIIAN ISLANDS IS DRIVEN BY CORAL ASSEMBLAGE STRUCTURE
+J. H. R. Burns 1*, A. Fukunaga 2,3, K. H. Pascoe 1, A. Runyan1, B. K. Craig1, J. Talbot1, A. Pugh1, R. K. Kosaki 3
+1 Marine Science Department, University of Hawai‘i at Hilo, 200 West Kawili St., Hilo, HI 96720, USA – (johnhr, kpascoe,
+
+atrunyan, bkcraig, jtalbot, apugh6)@hawaii.edu
+
+2 Joint Institute for Marine and Atmospheric Research, University of Hawai‘i at Mānoa, Honolulu, HI 96822, USA -
+
+atsuko.fukunaga@noaa.gov
+
+3 Papahānaumokuākea Marine National Monument, Office of National Marine Sanctuaries, National Ocean
+
+Service, National Oceanic and Atmospheric Administration, Honolulu, HI 96818, USA - randall.kosaki@noaa.gov
+Commission II - WGII/9
+KEY WORDS: Coral Reefs, Coral Ecology, Photogrammetry, Structure-from-Motion, 3D Reconstruction, Habitat Complexity,
+Benthic Community Structure
+ABSTRACT:
+Corals act as ecosystem engineers by secreting structurally complex calcium carbonate skeletons on the benthic substrate that provide
+habitat for a diverse array of associated reef organisms. Communities of living corals create large and dynamic benthic structures that
+directly affect ecological parameters such as habitat provisioning and light availability, thus influencing overall ecosystem function.
+Despite the important role 3D structural complexity plays in ecosystem biodiversity and productivity, the field of coral ecology has
+lacked accessibility to practical technology capable of quantifying 3D characteristics of underwater habitats. Advancements in the field
+of computer vision has led to Structure-from-Motion (SfM) photogrammetry, which provides a simple and cost-effective method for
+creating high-resolution and spatially accurate 3D reconstructions of natural environments. Integrating SfM approaches into coral reef
+research and monitoring has provided useful insight into the relationship between 3D habitat complexity and ecological processes. In
+this study, we examined the relationships among 2D estimates of live coral cover and several metrics of 3D habitat structural
+complexity among eleven long-term monitoring sites at French Frigate Shoals. Our findings show that coral assemblage structure acts
+as a significant driver of 3D structural complexity of coral reef habitats at this atoll. This study highlights the importance of diverse
+and abundant coral assemblages in supporting structurally complex coral reef habitats and provides a framework for future
+investigations into the ecological role of various coral morphotypes.
+1. INTRODUCTION
+Coral reefs are some of the most productive and diverse
+ecosystems on the planet. Unfortunately, coral reefs are also
+threatened by an array of global and local stressors that have led
+to large-scale mortality and loss of live coral throughout the
+world’s ocean (Harvell et al. 2007, Hoegh-Guldberg et al. 2007,
+Hughes et al. 2018). The frequency and severity of environmental
+stressors are predicted to increase (Knowlton 2001, Hughes et al.
+2003, Hughes et al. 2018), thus it is critically important to
+quantify how subsequent shifts in coral assemblage structure will
+alter ecological processes and ecosystem services.
+The 3D physical structure of habitats plays a fundamental role in
+the organization, function, and resilience of ecosystems (Nash et
+al. 2014, Richardson et al. 2017). Habitat structural complexity
+has been shown to support high levels of abundance and diversity
+of associated taxa across a range of environments (Huston 1979,
+Guinan et al. 2009, Graham and Nash 2013). Complex and
+dynamic habitat facilitates an array of ecological niche space at
+various spatial scales which provides refugia for a multitude of
+species (Crowder and Cooper 1982, Stachowicz 2001). The
+structural complexity of habitats is typically created by
+communities of ecosystem engineers (e.g., trees, seaweeds,
+oysters, grasses, corals), which are any organism that creates,
+modifies, maintains, or destroys a habitat (Jones et al. 1996,
+Richardson et al. 2017). 3D habitat structural complexity on coral
+reefs is primarily driven by the abundance of live sessile reefforming corals. Corals are structurally diverse organisms that
+exhibit a range of morphologies (e.g., massive, branching
+tabulate, encrusting, or foliose) and high levels of environmental
+plasticity (Todd 2008). The architecturally complex habitats
+created by living corals support some of the most diverse,
+productive, and economically valuable ecosystems on the planet
+
+(Costanza et al. 1997, Moberg and Folke 1999, Hoegh-Guldberg
+et al. 2007).
+Over the past decades, research conducted on reefs throughout
+the global ocean has found the loss of live coral to be associated
+with reductions in habitat complexity, which in turn has caused a
+decline in the abundance and diversity of associated reef fish and
+invertebrates (Graham et al. 2006, Alvarez-Filip et al. 2009,
+Walker et al. 2009, Graham and Nash 2013). Corals exhibit
+differential susceptibilities to disturbances, thus persistent
+disturbance events can result in homogenized coral assemblages
+dominated by stress tolerant species (Pratchett et al. 2011,
+Darling et al. 2013, Richardson et al. 2017). Morphologically
+complex corals that exhibit intricate branching, plating, and
+corymbose morphologies are generally more susceptible to
+disturbance and disease (Gates and Ainsworth 2011, Woesik et
+al. 2011). Disturbance events can lead to reductions in the
+abundance of these structurally complex corals and result in
+significant declines in 3D structural complexity of coral reef
+habitats (Burns et al. 2016, Couch et al. 2017, Magel et al. 2019).
+Our changing climate is likely to result in shifts of coral
+assemblage structure which will impact the habitat structural
+complexity of coral reefs. Currently, the link between coral
+assemblage structure and 3D habitat complexity is poorly
+understood. More research is needed to identify the connections
+between coral assemblage structure and 3D reef structural
+complexity in order to predict how coral reef ecosystem function
+will be altered under future climate conditions.
+A primary challenge in linking coral assemblage structure to 3D
+habitat structural complexity has been the lack of available
+techniques for quantifying 3D features underwater. The
+proportion of live coral cover on a reef has been the most
+commonly used metric for characterizing coral communities
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+61
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+(Leujak and Ormand 2007, House et al. 2018). While there are a
+multitude of specific approaches for estimating live coral cover,
+the simplicity of this metric is conducive for rapid and
+standardized monitoring across a range of spatial scales (House
+et al. 2018). Unfortunately, the link between 3D reef complexity
+and live coral assemblage structure cannot be captured by solely
+implementing conventional 2D approaches into monitoring
+programs (Alvarez-Filip et al. 2011, Graham and Nash 2013).
+Accurate measurements of 3D habitat structural complexity are
+needed to determine how changes in coral assemblage structure
+can impact the physical structure of reef habitats and alter largescale ecological processes and ecosystem services.
+Coral reef ecologists have long recognized that the 3D structural
+features of coral reefs influence important ecological processes
+(Risk 1972, Luckhurst and Luckhurst 1978, MacArthur 1984,
+Kostylev et al. 2005). However, due to high cost and difficulty of
+implementing 3D techniques into monitoring programs, the field
+of coral ecology has only recently developed practical
+approaches for quantifying 3D characteristics of coral reefs
+(Burns et al. 2015, Figueira et al. 2015, Leon et al. 2015, Ferrari
+et al. 2016, Burns et al. 2016). These new innovative approaches
+rely on Structure-from-Motion (SfM) photogrammetry, which is
+a cost-effective and automated range imaging technique for
+estimating three-dimensional structures from two-dimensional
+image sequences (Snavely et al. 2008, Westoby et al. 2012,
+Fonstad et al. 2013). SfM photogrammetry processes overlapping
+imagery with scale-invariant feature transform (SIFT), which is
+a feature detection algorithm in computer vision that detects and
+describes local features in images. This technique does not
+require known 3D locations prior to calculating camera positions,
+and thus provides a fast and simple method for generating high
+resolution 3D models of natural environments (Westoby et al.
+2012). The 3D products (e.g., point clouds, digital elevation
+models, digital surface models, orthophotomosaics) derived from
+SfM photogrammetry have been demonstrated to have high
+precision and accuracy across multiple spatial scales that are
+comparable to other 3D remote sensing techniques such as
+LiDAR (Delparte et al. 2014, Javernick et al. 2014, Remondino
+et al. 2014, Storlazzi et al. 2016). The ability to create highresolution 3D reconstructions of coral reef habitats dramatically
+enhances the ability of research to study the connections between
+structural complexity and ecosystem function.
+This study aimed to improve our understanding of how
+conventional 2D coral reef survey metrics (proportion of live
+coral cover) are associated with 3D reef structural complexity.
+We used coral reef survey data from the Northwestern Hawaiian
+Islands (NWHI). The NWHI consist of ten major islands and
+atolls that span approximately 2000-km (Figure 1a). They are
+part of the Papahānaumokuākea Marine National Monument, a
+marine protected area encompassing 1.5 million square
+kilometers that is one of the largest conservation areas in the
+world. The monitoring of shallow-water (≤30 m) coral reef fish
+and reef habitats is conducted annually in the NWHI as part of
+the reef assessment and monitoring program (RAMP). One
+primary objective of these expeditions is to characterize coral
+health and assemblage structure throughout the NWHI. Since
+2012, we have conducted 3D surveys of long-term study sites in
+conjunction with annual RAMP surveys. For this study, we
+conducted multiple regression and multivariate analyses to
+determine how 2D estimates of live coral cover (delineated by
+coral genus and morphology) are related to values of 3D reef
+structural complexity at eleven long-term monitoring sites
+throughout French Frigate Shoals, the largest atoll in the NWHI
+(Figure 1b). The results from this study provide valuable insight
+into how 2D estimates of live coral cover are associated with 3D
+habitat complexity on coral reefs.
+
+Figure 1. Site images showing a) the islands and atolls within
+the Papahānaumokuākea Marine National Monument and, b)
+the specific locations of long-term monitoring sites (indicated
+by star symbols) at French Frigate Shoals.
+2. METHODS
+2.1 Image acquisition
+Images were collected from coral reef study plots at French
+Frigate Shoals (23°43′03.2″N, 166°11′10.2″W), an atoll located
+in the Papahānaumokuākea Marine National Monument. All
+surveys were conducted during a 2017 research expedition
+aboard NOAA Ship Hi‘ialakai (R 334, National Oceanic and
+Atmospheric Administration). Divers using SCUBA surveyed
+two 5x10-m plots at eleven long-term monitoring sites
+distributed throughout the atoll (Figure 1b). Each plot is marked
+with permanently installed pins to demarcate the 5x10-m plot
+area. Ground control points (GCPs) and scale bars were placed at
+each end of the survey plot to enable accurate orthorectification
+of the resulting 3D models. The divers collected overlapping (7080%) planar images of the benthic substrate while swimming in
+a boustrophodonic pattern approximately 1-m above the substrate
+following the methods developed by Burns et al. 2015. All photos
+were taken with either a Canon 5D Mark III digital SLR camera
+with a 24-mm lens in an Ikelite housing with a 20-cm
+hemispheric dome port or a Canon EOS Rebel SL1 digital SLR
+camera with an 18-55 mm lens in an Ikelite housing with a 15cm dome port.
+2.2 3D reconstructions
+3D reconstructions were rendered using Agisoft PhotoScan
+software (Agisoft LLC., St. Petersburg, Russia). The image
+processing workflow was conducted in the following phases: 1)
+image alignment, 2) generation of sparse 3D point cloud, 3) GCP
+scaling and image optimization, 4) generation of dense 3D point
+cloud, 5) rendering of continuous mesh model, 6) rendering of
+textured digital surface model, and 7) rendering of a digital
+elevation model (DEM) and orthomosaic. The 3D
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+62
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+reconstructions were orthorectified by creating a local coordinate
+system for each plot using the known spatial x-, y-, and z- values
+associated with the GCPs. The DEM is a raster file that represents
+the 3D elevation of the reef substrate as a grid of squares, and the
+orthomosaic is an orthorectified, high-resolution image created
+by stitching the source photos used for 3D reconstruction. The
+orthomosaics and DEM are projected using the same local
+coordinate system so they can be layered to perform
+identification and measurement of individual coral colonies
+(Burns et al. 2015).
+2.3 Estimation of live coral cover and quantification of 3D
+habitat structural complexity
+Orthomosaics were uploaded into CoralNet software to quantify
+estimates of live coral cover for each survey plot (Beijbom et al.,
+2012). 1000 random points were annotated onto each
+orthomosaic and each point was manually classified. All abiotic
+and biotic features were annotated, and live coral was classified
+down to genus level and associated morphology (e.g., tabulate
+Acropopra). The proportion of each annotation category was
+used to determine estimates of live coral cover for each long-term
+study plot.
+Metrics of 3D habitat structural complexity were quantified using
+3D analyst and spatial analyst tools in ArcMap geospatial
+software (ArcGIS 10.5, Environmental Systems Resource
+Institute, Redlands, USA). The DEM and orthomosaics were
+uploaded into ArcMap and the editor tool was used to digitize the
+5x10-m spatial area of the long-term study plots. The DEM and
+orthomosaic from each study plot were layered together in order
+to analyze 3D structural characteristics among all surveyed sites.
+The cell size of the DEM was set to 1.0-cm to quantify fine-scale
+variability in the 3D structural complexity of each study plot. The
+following geospatial metrics were quantified from the DEMs to
+analyze 3D structural characteristics that are known to affect the
+biodiversity and abundance of marine organisms (Kostylev et al.,
+2005, Noonan et al. 2012, Figueira et al. 2015).
+Surface complexity values were calculated as the ratio of the total
+3D surface area to the total 2D surface area of the digitized survey
+plot area. Slope values were calculated using the Benthic Terrain
+Modeler tool, which computes slope on a geodesic plane using a
+3×3 cell neighborhood and improves on the planar method by
+measuring the angle between the surface and the local x-, y-, zcoordinates for each of the 8 adjacent cells and is fitted with least
+squares (Walbridge et al. 2018). Curvature values were
+computed using the ArcMap spatial analyst tool. Curvature is the
+second derivative of the bathymetric surface, or the first
+derivative of slope. Curvature is evaluated by first calculating the
+second derivative for each cell in the surface using a moving 3×3
+window, and then fitting a fourth order polynomial to the values
+within the window (Walbridge et al. 2018). Curvature is also
+quantified in a parallel direction to slope (profile curvature) and
+a perpendicular direction to slope (planiform curvature). Positive
+and negative curvature values represent upwardly concave or
+upwardly convex surfaces, respectively, and provide a method to
+describe the concave and convex nature of the benthic substrate
+such as peaks, ridges, channels, and planar regions.
+Fractal dimension was calculated from the DEM of each survey
+plot with R statistical software (version 3.5.1) using the methods
+developed by Fukunaga et al. 2019. Each DEM was processed
+using the aggregate function to compute the fractal dimension of
+the benthic substrate across multiple resolutions; 1-cm to 2, 4, 8,
+16, 32 and 64-cm. Conducting this procedure results in one
+fractal dimension value (D) for each study plot, which represents
+a ratio of the resolution of the raster DEM to the 3D surface area
+of the DEM across the multiple resolutions used for the analysis.
+
+Figure 2. Plots representing the relationships among estimates
+of live coral cover and 3D habitat structural complexity
+identified by DISTLM. a) branching Porites (R2 = 67.3%, p <
+0.1) and tabulate Acropora (R2 = 77.5%, p < 0.01) affect 3D
+complexity, b) Pocillopora corals (R2 = 97.2%, p<0.01) and both
+branching (R2 = 87.1%, p<0.01) and encrusting (R2 = 91.9%,
+p<0.05) Porites affect BTM slope (p<0.01), c) encrusting
+Montipora (R2 = 91.0%, p<0.05) and tabulate Acropora (R2 =
+81.9%, p<0.01) affect profile curvature.
+2.4 Statistical Analysis
+Estimates of live coral cover derived from the CoralNet
+annotations were used to statistically examine how 2D metrics of
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+63
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+coral assemblage structure affect the 3D structural complexity of
+coral reef habitats at sites throughout French Frigate Shoals. Live
+coral taxa that contributed to less than 1% of the benthic habitat
+at all of the sites were removed from the analyses, except for
+massive Porites because all other Porites morphologies were
+included in the analyses. The estimates of live coral cover were
+square-root transformed and used to compute Bray-Curtis
+dissimilarity values to serve as a metric of coral assemblage
+structure. Canonical analysis of principal coordinates (CAP:
+Anderson and Robinson 2003, Anderson and Willis 2003) was
+used to explore relationships between 3D habitat structural
+complexity and the structure of coral assemblage on the basis of
+the Bray-Curtis dissimilarity. The multivariate CAP analysis
+identified principal coordinate axes that have maximum
+correlations with the metrics of 3D habitat structural complexity
+(surface complexity, slope, curvature). Fractal dimension was
+excluded from this analysis in order to avoid issues of
+multicolinearity as surface complexity and fractal dimension had
+very strong positive correlation of 0.95. We also used univariate
+distance-based linear models (DISTLM: Legendre and
+Anderson, 1999, McArdle and Anderson, 2001) to examine
+formally how estimates of live coral cover affect the metrics of
+3D habitat structural complexity (surface complexity, slope,
+curvature, and fractal dimension). The small-sample-size
+corrected version of Akaike's information criterion (AICc) was
+used to select appropriate parsimonious models and identify the
+coral genera and morphology that best explained variability in the
+levels of 3D habitat structural complexity among the study sites
+at French Frigate Shoals. All statistical analyses were done using
+the software package PRIMER 6 with the PERMANOVA+ addon (PRIMER-e, Auckland, New Zealand).
+
+Branching Porites cover (square root transformation)
+
+4
+
+2
+
+0
+
+coral cover at each survey site that were superimposed on the
+CAP ordination (Figure 4) showed a potential negative
+correlation between taburate Acropora and profile curvature and
+a positive correlation between overall coral cover and either slope
+or 3D surface complexity.
+The univariate DISTLM analysis showed that the metrics of 3D
+habitat structural complexity are significantly affected by
+estimates of live coral cover (Figure 2). The percentage of
+branching Porites coral cover exhibited a statistically significant
+positive relationship with surface complexity explaining 67.3%
+of variation, and the percentage of tabulate Acropora coral cover
+exhibited a positive relationship, explaining additional 10% of
+variation in surface complexity after the percentage of branching
+Porites was taken into account (selected model’s R2 = 77.5%,
+Figure 2a). It should be noted that the surface complexity and
+fractal dimension data exhibit Simpson’s paradox; a phenomenon
+in probability and statistics in which a trend appears in several
+different groups of data but disappears or reverses when these
+groups are combined. Tabulate Acropora coral cover exhibits a
+negative trend with surface complexity and fractal dimension
+(Figure 2a), but when analysed using DISTLM and branching
+Porites coral cover is accounted for, the relationship between
+Acropora coral cover and surface complexity is positive. The
+percentage of branching Porites coral cover and tabulate
+Acropora coral cover explained 54.0% and additional 15.2%,
+respectively, of variation in fractal dimension (selected model’s
+R2 = 69.2%). Due to the strong collinearity between values of
+surface complexity and fractal dimension, only the plot of live
+coral cover and surface complexity is shown in Figure 2. The
+percentage of branching Porites coral cover, encrusting Porites
+coral cover, and Pocillopora coral cover exhibited statistically
+significant positive relationships with slope explaining 87%,
+additional 4.7%, and additional 5.4%, respectively, of variation
+in slope (selected model’s R2 = 97.2, Figure 2b). The percentage
+of tabulate Acropora coral cover exhibited a statistically
+significant negative relationship with profile curvature
+explaining 81.9% of variation, and the encrusting Montipora
+coral cover exhibited a statistically significant positive
+relationship, explaining additional 9.1% of variation in profile
+curvature (selected model’s R2 = 91.0, Figure 2c). The percentage
+of live tabulate Acropora coral cover was found to exhibit a
+significantly negative relationship with the percentage of live
+branching Porites coral cover (R2 = 41.9%, p < 0.05, Figure 3).
+4.
+
+−2
+0.0
+
+2.5
+5.0
+Tabulate Acropora cover (square root transformation)
+
+7.5
+
+Figure 3. Plot representing the negative relationship between the
+percentage of live tabulate Acropora coral cover and the
+percentage of live branching Porites coral cover (R2 = 41.9%, p
+< 0.05) identified by DISTLM.
+3. RESULTS
+The CAP multivariate analysis indicated a strong association
+between the structure of coral assemblages (based on Bray-Curtis
+dissimilarity computed on square-root transformed live coral
+cover) and metrics of 3D habitat structural complexity (trace
+statistic = 1.2, p = 0.002). Two canonical axes produced in the
+analyses had canonical correlations of δ1 = 0.94 and δ2 = 0.57.
+The constrained CAP ordination (Figure 4) showed changes in
+the coral assemblage structure, from left to right, with an increase
+in profile curvature, while changes in the assemblage structure
+associated with increases in slope and 3D surface complexity, to
+a lesser extent, were captured from top to bottom. Levels of live
+
+CONCLUSIONS
+
+This study examined how 2D estimates of live coral cover are
+associated with 3D structural complexity of coral reef habitats at
+French Frigate Shoals. Our analyses found coral assemblage
+structure and the percentage of live coral to be significant drivers
+of 3D habitat structural complexity among eleven long-term coral
+reef study sites. Our findings provide useful information for
+conservation efforts as they provide a framework for identifying
+specific coral morphotypes that act as drivers of 3D architectural
+complexity on coral reefs.
+Our CAP analysis found statistically significant associations
+between the structure of coral assemblages at our long-term study
+sites and 3D habitat structural complexity (Figure 4). Metrics of
+3D habitat structural complexity used in the analysis together
+exhibited a statistically significant correlation with the coral
+assemblages as a whole. The sites were separated from left to
+right along a gradient of profile curvature and top to bottom along
+gradients of structural complexity. The sites with a high
+percentage of live tabulate Acropora coral cover grouped at the
+bottom left thus tend to have high values of surface complexity
+and slope and low values of profile curvature, whereas sites
+dominated by a high percentage of live Porites coral cover and
+Montipora coral cover at the bottom right tend to have high
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+64
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+values of surface complexity, slope, and profile curvature (Figure
+4). This multivariate analysis is useful for exploring relationships
+between two sets of multivariate data, thus was utilized here to
+assess the relationships among both 2D and 3D reef
+characteristics and choose 3D habitat variables for formal
+analyses using DISTLM. Metrics of 3D habitat complexity are in
+some cases highly correlated (e.g., surface complexity and fractal
+dimension), thus it is important to examine the distributions of
+these variables prior to any analyses. The CAP analysis shows
+how patterns in coral assemblage structure are intricately linked
+to a set of 3D habitat variables and play an important role in
+determining the 3D structural complexity of coral reefs. This
+finding illustrates the importance of recognizing that both levels
+of live coral and diversity in coral morphotypes play critical roles
+in maintaining habitat complexity on coral reefs.
+Our DISTLM analysis found several coral genera and
+morphologies exhibit statistically significant relationships with
+metrics of 3D habitat structural complexity. 3D complexity,
+measured as 3D surface area divided by 2D surface area, and
+fractal dimension exhibit a strong positive relationship with live
+cover of branching Porites corals (Figure 2a). This finding
+supports previous studies which have found branching coral
+morphologies to act as positive drivers of structural complexity
+on coral reefs (Alvarez-Filip et al., 2011, Burns et al. 2015, Leon
+et al. 2015, Magel et al. 2019). Interestingly, live cover of
+tabulate Acropora corals exhibits a negative trend with 3D
+complexity (Figure 2a) and fractal dimension. As discussed in the
+results, these data exhibit Simpson’s paradox. When the data are
+analysed using DISTLM and branching Porites coral cover is
+accounted for, the relationship between Acropora coral cover and
+both surface complexity and fractal dimension is positive.
+Previous 3D reef characterization conducted at this atoll found
+tabulate and branching coral species to possess values of 3D
+complexity that are statistically significantly greater than other
+coral species and abiotic benthic features (Burns et al. 2015). The
+trends in the data and DISTLM results (Figure 2a) highlight how
+branching and tabulate coral morphologies are stronger drivers of
+3D complexity and coral assemblage structure plays an important
+role in determining overall levels of 3D habitat structural
+complexity. The inverse relationship between values of tabulate
+Acropora coral cover and branching Porites coral cover (Figure
+3) shows that shifts in the dominant coral morphotype of a coral
+assemblage can have significant impacts on 3D reef structure.
+Values of slope, measured using the Benthic Terrain Modeler
+tool (Walbridge et al. 2018), exhibited statistically significant
+positive relationships with the percentage of branching Porites,
+encrusting Porites, and Pocillopora coral cover (Figure 2b). This
+finding supports other studies that have shown high values of
+coral cover promote more structurally complex coral reef habitat
+(Couch et al. 2017, Magel et al. 2019). The variability in the slope
+of each linear model (Figure 2b) provides more evidence of the
+importance of coral assemblage structure in driving 3D
+characteristics of reef habitats. Similar to 3D complexity, values
+of slope are most strongly affected by the percentage of
+branching Porites coral cover. These findings stress the
+important role that branching coral morphotypes play in shaping
+the physical 3D structure or coral reefs at French Frigate Shoals.
+We found profile curvature to exhibit a statistically significant
+positive relationship with the percentage of live encrusting
+Monitpora coral and a negative relationship with the percentage
+of live tabulate Acropora coral (Figure 2c). Positive values of
+profile curvature represent concave surface and negative values
+represent convex surface (Burns et al. 2015, Walbridge et al.
+2018). These findings show how each morphotype provides
+unique 3D physical characteristics to overall reef habitat
+complexity. At our long-term monitoring sites, encrusting coral
+
+are providing concave structure and tabulate corals provide
+convex structure. Analyzing 3D reef structure in the context of
+coral assemblage structure provides a unique perspective for
+understanding drivers of habitat complexity. The results
+presented here suggest high levels of coral cover of these
+morphotypes (encrusting and tabulate) provide a juxtaposition of
+concave and convex surface, which may provide more dynamic
+habitat space for associated reef organisms. This supports the
+notion that coral assemblage structure, rather than a single
+estimate of live coral cover, is a better predictor of 3D reef
+architecture as different combinations of coral morphotypes will
+produce unique 3D structure.
+
+Figure 4. CAP constrained ordination using the Bray-Curtis
+dissimilarity values computed from live coral cover at the study
+sites. Vector overlays show gradients of 3D habitat metrics used
+in the analysis. Live coral cover (see legend) at each study site
+is superimposed on the ordination for references.
+The field of coral ecology needs more studies focused on
+understanding the dynamics of habitat complexity as it is known
+to be an important driver of ecosystem diversity and productivity
+(Goreau 1959, Knudby and LeDrew 2007, Walker et al. 2009,
+Dustan et al. 2013). Despite the acknowledged importance of
+structural complexity, the field of coral reef ecology has lacked
+the capability to quantify effectively 3D features from coral reef
+habitats. Recent advancements in SfM technology have equipped
+marine scientists with the ability to create high-resolution and
+spatially accurate reconstructions of benthic habitats (Burns et al.
+2015, Figueira et al. 2015, Leon et al. 2015, Burns et al. 2016,
+Ferrari et al. 2016, Couch et al. 2017, Fukunaga et al., 2019,
+Magel et al. 2019). Integrating the 3D spatial data derived from
+SfM technologies with conventional 2D monitoring metrics (e.g.,
+live coral cover, coral diversity, coral size) will contribute to our
+understanding of the ecological role of various coral
+morphotypes. As scientists work towards identifying the specific
+metrics of 3D habitat structure that drive the abundance and
+diversity of reef organisms, it will be critical to know which
+specific coral species and morphologies are responsible for
+creating those habitat types.
+Our study provides new insight into the important role coral
+assemblage structure plays in driving 3D reef habitat structural
+complexity. The long-term study plots at French Frigate Shoals
+exhibit statistically significant relationships among coral
+assemblage structure and 3D structural complexity of the benthic
+habitat. These results can help managers understand and predict
+how changes in coral assemblage structure, caused by
+environmental disturbances, may affect the structural complexity
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+65
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+of coral reef habitats. As we determine the direct underpinnings
+linking 3D complexity to specific ecological processes, this
+information will become vital for determining how ecosystem
+function and services will be affected by changing climate
+conditions.
+5. ACKNOWLEDGEMENTS
+We thank the officers and crew of NOAA ship Hi‘ialakai for
+logistic support and field assistance. Image and data processing
+were completed in the UHH Multiscale Environmental Graphical
+Analysis (MEGA) Lab. B. Craig was supported by NOAA Ernest
+F. Hollings Scholarship during this project. This work was
+funded by NOAA’s Office of National Marine Sanctuaries,
+through the Papahānaumokuākea Marine National Monument,
+and by the National Science Foundation under the CREST-PRF
+Award #1720706 and EPSCoR Program Award OIA #1557349
+to J. Burns. The scientific results and conclusions, as well as any
+views or opinions expressed herein, are those of the authors and
+do not necessarily reflect the views of NSF, NOAA or the
+Department of Commerce.
+6. REFERENCES
+Alvarez-Filip, L., Dulvy, N.K., Gill, J.A., Côté, I.M., Watkinson,
+A.R., 2009 Flattening of Caribbean coral reefs: region-wide
+declines in architectural complexity. Proc R Soc Lond B Biol
+276:3019–3025
+Alvarez-Filip, L., N.K. Dulvy, I.M. Cote, A.R. Watkinson, and
+J.A. Gill., 2011. Coral identify underpins architectural
+complexity on Caribbean reefs. Ecological Applications
+21(6):2223-2231
+Anderson, M.J., Robinson, J., 2003. Generalized discriminant
+analysis based on distances. Aust N Z J Stat 45: 3301–3318
+Anderson, M.J., Willis, T.J., 2003. Canonical analysis of
+principal coordinates: a useful method of constrained ordination
+for ecology. Ecology 84: 511-525
+Beijbom, O., Edmunds, P.J., Kline, D.I., Mitchell, B.G.,
+Kriegman, D., 2012. Computer vision and pattern recognition
+(CVPR). In:2012 IEEE Conference on Rhode Island
+Burns, J.H.R., Delparte, D., Gates, R.D. and Takabayashi, M.,
+2015. Integrating structure-from-motion photogrammetry with
+geospatial software as a novel technique for quantifying 3D
+ecological characteristics of coral reefs. PeerJ, 3, p.e1077
+Burns et al. (2016) Assessing the impact of acute disturbances on
+the structure and composition of a coral community using
+innovative 3D reconstruction techniques. Methods in
+Oceanography 15/16: 49-59
+Couch, C.S., Burns, J.H.R., Liu, G., Steward, K., Gutlay, T.N.,
+Kenyon, J., et al., 2017. Mass coral bleaching due to
+unprecedented marine heatwave in Papahānaumokuākea Marine
+National Monument (Northwestern Hawaiian Islands). PLoS
+ONE12(9): e0185121
+Costanza, R., R. d’Arge, R. de Groot, S. Farber, M. Grasso, B.
+Hannon, K. Limburg, S. Naeem, R.V. O’Neill, J. Paruelo, R.G.
+Raskin, P. Sutton, and M. van den Belt., 1997. The value of the
+world's ecosystem services and natural capital. Nature 387: 253260
+Crowder, L.B., W.E. Cooper., 1982. Habitat structural
+complexity and the interaction between bluegills and their prey.
+Ecology 63:1802-1813
+
+Darling, E.S., McClanahan, T.R., Côté, I.M., 2013. Life histories
+predict coral community disassembly under multiple stressors.
+Glob Chang Biol. Jun; 19(6):1930-40
+Delparte, D.M., M. Belt, C. Nishioka, N. Turner, R. Richardson,
+and T. Ericksen., 2014. Monitoring tropical alpine lake levels in
+a culturally sensitive environment utilizing 3D technological
+approaches. Arctic, Antarctic, and Alpine Research 46(4):709718
+Dustan, P., O. Doherty, S. Pardede., 2013. Digital reef rugosity
+estimates coral reef habitat complexity. PLoS ONE 8(2):e57386
+Ferrari, R., McKinnon, D., He, H., Smith, R.N., Corke, P.,
+González-Rivero, M., Mumby, P.J. and Upcroft, B., 2016.
+Quantifying multiscale habitat structural complexity: a costeffective framework for underwater 3D modelling. Remote
+Sensing, 8(2), p.113
+Figueira, W., Ferrari, R., Weatherby, E., Porter, A., Hawes, S.
+and Byrne, M., 2015. Accuracy and precision of habitat structural
+complexity metrics derived from underwater photogrammetry.
+Remote Sensing, 7(12), pp.16883-16900
+Fonstad, M.A., J.T. Dietrich, B.C. Courville, J.L. Jensen, and
+P.E. Carbonneau., 2013. Topographic structure from motion: a
+new development in photogrammetric measurement. Earth
+Surface Processes and Landforms DOI:10.1002/esp.3366
+Fukunaga, A.F., Burns, J.H.R., Craig, B.K., Kosaki, R.K., 2019.
+Integrating Three-Dimensional Benthic Habitat Characterization
+Techniques into Ecological Monitoring of Coral Reefs. J. Mar.
+Sci. Eng. 7(2): 27
+Gates, R.D., Ainsworth, T.D., 2011. The nature and taxonomic
+composition of coral symbiomes as drivers of performance limits
+in scleractinian corals. Journal of Experimental Marine Biology
+and Ecology 408:94-101
+Goreau, T.F. 1959. The ecology of Jamaican coral reefs 1.
+Species composition and zonation. Ecology 40:67-90
+Graham, N.A.J., Wilson, S.K., Jennings, S., Polunin, N.V.C.,
+Bijoux, J.P., Robinson, J., 2006. Dynamic fragility of oceanic
+coral reef ecosystems. Proc Natl Acad Sci USA 103:8425–8429
+Graham, N.A.J., and K.L. Nash., 2013. The importance of
+structural complexity in coral reef ecosystems. Coral Reefs
+32:315-326
+Guinan, J., C. Brown, M.F.J. Dolan, and A.J. Grehan., 2009.
+Ecological niche modeling of the distribution of cold-water coral
+habitat using underwater remote sensing data. Ecological
+Informatics 4:83-92
+Harvell, C.D., Jordan-Dahlgren, E., Merkel, S., Rosenberg, E.,
+Raymundo, L., et al., 2007. Coral disease, environmental drivers
+and the balance between coral and microbial associates.
+Oceanography 20: 58–81
+Hoegh-Guldberg, O., P.J. Mumby, A.J. Hooten, R.S. Steneck, P.
+Greenfield, E. Gomez, C.D. Harvell, P.F. Sale, A.J. Edwards, K.
+Caldeira, N. Knowlton, C.M. Eakin, R. Iglesias-Prieto, N.
+Muthiga, R.H. Bradbury, A. Dubi, and M.E. Hatziolos., 2007.
+Coral Reefs Under Rapid Climate Change and Ocean
+Acidification. Science 318:1737-1742
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+66
+
+The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, Volume XLII-2/W10, 2019
+Underwater 3D Recording and Modelling “A Tool for Modern Applications and CH Recording”, 2–3 May 2019, Limassol, Cyprus
+
+House, J.E., Brambilla, V., Bidaut, L.M., Christie, A.P., Pizarro,
+O., Madin, J.S., Dornelas, M., 2018. Moving to 3D: relationships
+between coral planar area, surface area and volume. PeerJ
+6:e4280
+
+Noonan, S.H.C., Jones, G.P., Pratchett M.S., 2012. Coral size,
+health and structural complexity: effects on the ecology of a coral
+reef damselfish. Marine Ecology Progress Series. 456:127–137
+
+Hughes, T.P., Kerry, J.T., Baird, A.H., Connolly, S.R., Dietzel,
+A., Eakin, C.M., Heron, S.F., Hoey, A.S., Hoogenboom, M.O.,
+Liu, G. and McWilliam, M.J., 2018. Global warming transforms
+coral reef assemblages. Nature, 556(7702), p.492
+
+Remondino, F., Spera, M.G., Nocerino, E., Menna, F., Nex, F.,
+2014. State of the art in high density image matching. In: The
+Photogrammetric Record 29, pp. 144–166. doi:10.1111/
+phor.12063
+
+Huston, MA., 1979. A general hypothesis of species diversity.
+Am. Nat. 113:81–101
+
+Pratchett, M., Trapon, M., Berumen, M., Chong-Seng, K., 2011.
+Recent disturbances augment community shifts in coral
+assemblages in Moorea, French Polynesia. Coral Reefs 30:183–
+193
+
+Javernick, L., J. Brasington, and B. Caruso., 2014. Modeling the
+topography of shallow braided rivers using Structure-fromMotion photogrammetry. Geomorphology 213:166-182
+Jones, C.G., Lawton, J.H., Shachak, M., 1996. Organisms as
+ecosystem engineers In Ecosystem Management (eds Samson, F.
+B. & Knopf, F. L.) 130–147 (Springer)
+Knudby, A., and E. LeDrew., 2007. Measuring structural
+complexity on coral reefs. In: Pollock NW, Godfrey JM, eds.
+Diving for Science 2007. Proc of the American Academy of
+Underwater Sciences 26th Symposium pgs:181-188
+
+Richardson, L.E., Graham, N.A.J., Hoey, A.S., 2017. Cross-scale
+habitat structure driven by coral species composition on tropical
+reefs. Sci Rep 7: 7577
+Risk, M.J., 1972. Fish diversity on a coral reef in the Virgin
+Islands. Atoll Research Bulletin 153
+Snavely, N., S.N. Seitz, and R. Szeliski., 2008. Modeling the
+world from internet photo collections. International Journal of
+Computer Vision 80:189-210
+
+Knowlton, N., 2001. The future of coral reefs. Proc Natl Acad
+Sci USA 98: 5419–5425
+
+Stachowicz, J.J., 2001. Mutualism, facilitation, and the structure
+of ecological communities. Bioscience. 51:235–246
+
+Kostylev, V.E., J. Erlandsson, M.Y. Ming, and G.A. Williams.,
+2005. The relative importance of habitat complexity and surface
+area in assessing biodiversity: Fractal application on rocky
+shores. Ecological Complexity 2:272-286
+
+Storlazzi, C.D., Dartnell, P., Hatcher, G.A., Gibbs, A.E., 2016.
+End of the chain? Rugosity and fine-scale bathymetry from
+existing underwater digital imagery using structure-from-motion
+(SfM) technology. Coral Reefs. 35:889–894
+
+Leon, J.X., Roelfsema, C.M., Saunders, M.I. and Phinn, S.R.,
+2015. Measuring coral reef terrain roughness using ‘Structurefrom-Motion’close-range photogrammetry. Geomorphology,
+242, pp.21-28
+
+Todd, P.A., 2008. Morphological plasticity in scleractinian
+corals. Biol Rev Camb Philos Soc. Aug; 83(3):315-37
+
+Legendre, P., Anderson, J.M., 1999. Distance-based redundancy
+analysis: testing multispecies responses in multifactorial
+ecological experiments. Ecological Monograph 69: 1–24
+Leujak, W., Ormond, R.F.G., 2007. Comparative accuracy and
+efficiency of six coral community survey methods. Journal of
+Experimental Marine Biology and Ecology. 351:168–187
+
+Walbridge, S.; Slocum, N.; Pobuda, M.; Wright, D.J. 2018.
+Unified geomorphological analysis workflows with Benthic
+Terrain Modeler. Geosciences 8; 94
+Walker, B.K., L.K.B Jordan, and R.E. Spieler., 2009.
+Relationship of reef fish assemblages and topographic
+complexity on Southeastern Florida Coral Reef Habitats. Journal
+of Coastal Research 25(6):39-48
+
+Luckhurst, B.E., and K. Luckhurst., 1978. Analysis of the
+influence of substrate variables on coral reef fish communities.
+Marine Biology 49:317-323
+
+Westoby, M.J., J. Brasington, N.F. Glasser, M.J. Hambrey, and
+J.M.
+Reynolds.,
+2012.
+‘Structure-from-Motion’
+photogrammetry: A low-cost, effective tool for geoscience
+applications. Geomorphology 179:300-314
+
+McArdle, B.H., Anderson, M.J., 2001. Fitting multivariate
+models to community data: a comment on distance-based
+redundancy analysis. Ecology 82: 290–297
+
+Woesik, R., Sakai, K., Ganase, A., Loya, Y., 2011. Revisiting the
+winners and losers a decade after coral bleaching. Marine
+Ecology Progress Series 434:67-76
+
+MacArthur, R. H., 1984. Geographical ecology, patterns in the
+distributions of species. Princeton University Press, Princeton,
+New Jersey, USA
+Magel, J.M.T., Burns, J.H.R., Gates, R.D., Baum, J.K., 2019.
+Effects of bleaching-associated mass coral mortality on reef
+structural complexity across a gradient of local disturbance.
+Scientific Reports. 9(1) 2512
+Moberg, F., Folke, C., 1999 Ecological goods and services of
+coral reef ecosystems. Ecological Economics 29:215-233
+Nash, K.L., et al. 2014. Discontinuities, cross-scale patterns, and
+the organization of ecosystems. Ecology. 95:654–667
+
+This contribution has been peer-reviewed.
+https://doi.org/10.5194/isprs-archives-XLII-2-W10-61-2019 | © Authors 2019. CC BY 4.0 License.
+
+67
+
+

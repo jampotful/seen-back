@@ -1,0 +1,992 @@
+Field scale row unit vibration affecting planting quality
+Changyuan Zhai, John M. Long, Randal K. Taylor, Paul R. Weckler, Ning Wang (2019). Precision Agriculture. https://doi.org/10.1007/s11119-019-09684-4. doi:10.1007/s11119-019-09684-4. Licence: cc-by. Text from pdf.
+
+Precision Agriculture (2020) 21:589–602
+https://doi.org/10.1007/s11119-019-09684-4
+
+Field scale row unit vibration affecting planting quality
+Changyuan Zhai1,2
+
+· John Long2 · Randal Taylor2 · Paul Weckler2 · Ning Wang2
+
+Published online: 26 September 2019
+© The Author(s) 2019
+
+Abstract
+With recent developments allowing increased planter speeds, improving spatial uniformity
+of crop emergence will continue to be an important focus of research. Vertical vibration
+during planting usually interferes with the seed metering and delivery process, and thereby
+affects seeding quality. Two different row crop planters were instrumented with accelerometers to monitor vertical vibration of planter row units in five fields with a total area of
+220 ha in both no-till and strip-tilled conditions. The test results showed that the row unit
+vibration linearly increased with planting speeds. The R
+­ 2 of each fitting equation was more
+than 0.90. The main frequencies of the vibration were concentrated in a low-frequency
+band of 3 Hz to 10 Hz. These frequencies did not show an increasing trend with the planter
+speed. However, the amplitude clearly increased when the planter speed increased. For the
+John Deere MaxEmerge™ 5 planter, the manually measured average plant spacing was
+close to the target plant spacing with a maximum error of 21 mm, and a max coefficient of
+variation (CV) of 24.3%; the standard deviation (SD) increased with travel speed and row
+unit vibration. For the John Deere ExactEmerge™ planter, the plant spacing was closer to
+the target plant spacing with a maximum error of only 5 mm and a max CV of 14.3%; the
+SD remained almost constant, at lower values than that of the MaxEmerge™ 5, at different
+speeds. For both planters, overall, the row unit vibration increased planting spatial variability. The quality of feed index decreased with increased vertical acceleration on the row unit
+while the miss index increased. However, the multiples index was generally unaffected by
+row unit vibration.
+Keywords Planters · Vibration · FFT · Plant spacing
+
+Introduction
+The use of precision planting techniques, which involve placing seed at a precise spacing and depth, has become the dominant way to seed maize, soybean, milo and similar
+row crops (Yang et al. 2016). Improving spatial and temporal uniformity of crop emergence has been a focus of research and development related to precision planters for several
+Communicated by John Stafford.
+* Randal Taylor
+randy.taylor@okstate.edu
+Extended author information available on the last page of the article
+
+13
+
+Vol.:(0123456789)
+
+590
+
+Precision Agriculture (2020) 21:589–602
+
+years. Uniform distribution of plants reduces intra-specific competition, suppresses weeds,
+and ultimately increases yields (Karayel et al. 2006). Furthermore, recent developments to
+allow increased planting speeds have created new interest for research in this area.
+Assuming uniform seed quality and planting conditions, temporal uniformity of crop
+emergence is affected by the planting depth (Hanna et al. 2010), while spatial uniformity
+is determined by the seed metering and delivery mechanism. There has been significant
+research regarding planter components and their effects on planting quality. This includes
+examining row cleaners (Raoufat and Matbooei 2007; Yang et al. 2015), seed meters (Mursec et al. 2008; Turan et al. 2015; Yazgi and Degirmencioglu 2014), depth control (Barreiro et al. 2016; Hanna et al. 2010), and seed delivery units (Kocher et al. 2011; Staggenborg et al. 2004). Research results show that planting quality is determined by many factors
+and the performance of most components were affected by planting speed and planter
+vibration. Staggenborg et al. (2004) planted corn at speeds ranging from 6.4 to 14.5 km/h
+to assess the impact of planter speed on corn planting quality and found increasing speed
+negatively affected plant spacing uniformity. Karayel et al. (2006) used a high-speed camera to investigate the seeds exiting the metering unit in the lab and revealed that higher
+seed metering rates introduced more seed–seed and seed-wall contacts in the seed tube. In
+the field, planter vibration also aggravated the contacts, which led to a lower uniformity of
+seed spacing than predicted by the metering unit calculations (Yang et al. 2016). (Hanna
+et al. 2010) evaluated the soil loading effects of a planter and found that both the downforce on the gauge wheels and the soil moisture conditions affected the rate of corn plant
+emergence, but the downforce did not impact the plant uniformity statistically. Vibration
+occurs during the metering and delivery process, which can cause seed spacing inconsistency. The vibration varies at different field speed and downforce settings. Investigation of
+the effects of ground speed and row unit vibration is extremely useful to help engineers
+design planters with higher field speed capabilities.
+According to the International Standardization Organization (ISO) 7256 standard, planting quality evaluation can be assessed using the quality of feed (A), multiple (D) and miss
+(M) indices, and standard deviation of spacing. The indices are:
+( / )
+A = n1 N � × 100
+(1)
+( / �)
+D = n2 N × 100
+(2)
+( / )
+M = n0 N � × 100
+(3)
+
+where A is quality of feed index, D is multiple index, M is miss index, n1 is the number of
+seeds normally sown, n2 is the number of multiples, n0 is the number of misses, N′ is the
+number of intervals.
+This evaluation can be done in a laboratory (Karayel et al. 2006; Koller et al. 2014),
+which provides a controlled environment that is suitable for planter components testing.
+Performance investigation in the field is harder to conduct, but more encompassing and
+comprehensive than laboratory testing. In the field, the planting status can be monitored
+using sensors such as speed sensors, accelerometers and seed tube sensors (Zhou et al.
+2012). However, direct measurement of seed placement after planting in the field is difficult. Alternatively, it can be estimated by measuring the spacing between plants after emergence (Kachman and Smith 1995).
+The objective of this study was to quantify the effects of ground speed and row unit
+vibration on planting quality on a field scale by monitoring the vibration at different speeds
+and measuring the plant spacing after emergence.
+
+13
+
+591
+
+Precision Agriculture (2020) 21:589–602
+
+Materials and methods
+Planters and fields
+Two 18 m planters with 24 row units were used in field tests. One planter had John
+Deere MaxEmerge™ 5 row units. This is a traditional vacuum planter with a rotating
+seed disk and a seed tube delivery system. The planter was equipped with a pneumatic
+downforce system.
+The row units on the other planter were John Deere ExactEmerge™, which consisted
+of a BrushBelt™ trench delivery system to hold and transport seeds from the meter
+into the furrow, keeping desired spacing for each seed in the trench. Each row unit was
+equipped with an electric drive metering system to provide accurate target population
+and speed-matching seed delivery, and a pneumatic downforce system.
+Two no-till fields and three strip-tilled fields were chosen for tests. Three fields,
+which were 92 ha in total, were planted using the MaxEmerge™ planter, and two fields
+with a total field area of 128 ha were planted with the ExactEmerge™ planter. Field
+information and planting parameters are shown in Table 1. The JF_Ringwood_390 and
+JF_Ringwood_400 were separated by a narrow road. Both were strip-tilled and planted
+with the same settings.
+
+Design of planter monitoring system
+Three row units of each planter were instrumented to monitor their vibration during
+planting (Fig. 1). A single axis accelerometer (3741E1210G, PCB Piezotronics, Depew,
+NY, USA) was mounted on each row unit to measure its vertical vibration. All three
+accelerometer output signals were collected into a custom signal conditioning module.
+In the module, three analog devices (SCM5B41-05D, Dataforth Corporation, Tucson,
+AZ, USA) and a backplane (SCMPB07, Dataforth Corporation, Tucson, AZ, USA) were
+employed to isolate the accelerometer signals. The conditioned signals were recorded
+on an SD card as voltages at 200 Hz using a data logger (Gl 1000 Compact Logger,
+Vector North America Inc., Novi, MI, USA). During planting, implement ISObus information including GNSS was recorded on the SD card as well. The data on the SD card
+were downloaded and analyzed using CANoe® software (Vector North America Inc.,
+Novi, MI, USA) and Matlab® R2015b software (The MathWorks, Natick, MA, USA).
+
+Table 1  Test fields and planting information
+Field name
+
+Field type
+
+Field area (ha)
+
+Row length (m)
+
+Planter
+
+Target population (Plant/
+ha)
+
+JF_Helena
+
+No-till
+
+20
+
+800
+
+MaxEmerge™ 5
+
+38 300
+
+JF_Ringwood_390
+JF_Ringwood_400
+SF_Garber
+SF_Fairmont
+
+Strip-till
+Strip-till
+No-till
+Strip-till
+
+64
+8
+64
+64
+
+800
+400
+800
+800
+
+MaxEmerge™ 5
+MaxEmerge™ 5
+ExactEmerge™
+ExactEmerge™
+
+38 100
+38 100
+43 200
+69 200
+
+13
+
+592
+
+Precision Agriculture (2020) 21:589–602
+
+Fig. 1  Planter monitoring system
+
+Field test design
+Field tests were conducted in five fields (Table 1) near Enid, Oklahoma, USA from late
+March to early April, 2017. Corn was planted at four speeds in adjacent passes within
+two random areas of each field and the remainder of the field was planted at the producers’ normal planting speeds. The prescribed planting speeds were 1.3 m/s, 2.2 m/s,
+3.1 m/s and 4.0 m/s, and the producers’ normal planting speeds ranged from 2.4 to
+3.2 m/s. Planter speed was held constant for an entire planting pass. The planting pass
+was 18 m wide and 800 m long (in four test fields) or 400 m long (in one field). For an
+800 m pass, vibration data could be collected for approximately 200 s when the planter
+speed was 4.0 m/s, or about 600 s at 1.3 m/s.
+
+Acceleration data processing
+A differential voltage signal transmitted by each accelerometer was recorded by the
+planter monitoring system at a sampling rate of 200 Hz. The voltage signal was converted into relative acceleration data in m/s2 based on the calibration equation supplied
+by the supplier (PCB Piezotronics, Inc.) for each sensor. The reference frame acceleration was gravitational acceleration. If the recorded acceleration was higher than gravitational acceleration, the relative acceleration was positive, otherwise the relative acceleration was negative. Mean absolute acceleration (MAA) was obtained by averaging the
+absolute value of the relative acceleration for one second. The MMA data were used to
+map the planting vibration in each field.
+The Fast Fourier Transformation (FFT) technique was applied to the acceleration data to isolate the frequency components for analysis. The acceleration data were
+divided into five second intervals consisting of 1000 points. Zero padding was used to
+increase the number of points to 1024 before a FFT was applied to each interval. The
+main frequency and amplitude were obtained using Matlab® R2015b software. The
+average and standard deviation of the main frequency and amplitude at each prescribed
+speed in each field were analyzed as well.
+
+13
+
+593
+
+Precision Agriculture (2020) 21:589–602
+
+Data collection for plant spacing calculation
+The vibration data recorded during planting were examined and two locations were
+selected in each field based on high and low vibration. Two observations were measured at
+each of these locations. Plant spacing was also measured within each speed pass (1.3 m/s,
+2.2 m/s, 3.1 m/s and 4.0 m/s) (Fig. 2(1)).
+Plant spacing was manually measured at each point about 4 weeks after planting, when
+the average height of the plants was about 0.4 m (Fig. 2(2)). The field points were located
+using GNSS. Since each co-ordinate point represented a single planter pass of 24 rows,
+plant spacing was measured in multiple rows to determine plant spacing for the pass. At
+each point, a center row and two other rows near the center row were chosen. Plant spacing
+was measured in a 6 m length of each row.
+
+Results and discussion
+Field scale row unit vibration
+The field scale row unit vibration data for John Deere MaxEmerge 5 planter are mapped for
+the field JF_Ringwood_400 in Fig. 3. The vibration data shown is the mean absolute vertical acceleration. The passes planted with lower speeds had more data points, because the
+vibration data was mapped at the same frequency (1 Hz). In this field, the producers’ average speed was about 2.4 m/s while planting, and the prescribed test speeds were 1.3 m/s,
+2.2 m/s, 3.1 m/s and 4.0 m/s, which were marked as A, B, C, D, respectively in Fig. 3. The
+figure shows that when planting at higher speeds, the row unit vibration was greater. When
+the planting speed was constant in a row, the row unit vibration basically remained the
+
+(1)
+
+(2)
+
+Fig. 2  Field position selection and plant spacing data collection
+
+13
+
+594
+
+Precision Agriculture (2020) 21:589–602
+
+Fig. 3  Field scale row unit vibration data in a strip-tilled field JF_Ringwood_400 with the John Deere MaxEmerge 5 planter. a 1.3 m/s, b 2.2 m/s, c 3.1 m/s, d 4.0 m/s, producers’ normal speed: 2.4 m/s
+
+same. In the whole field, when planting at the producers’ normal speed, the vibration held
+fairly steady.
+Figure 4 shows row unit vibration data of the other two fields planted with the John
+Deere MaxEmerge 5 planter. The row unit vibration comparison of two different speeds
+of 1.3 m/s and 4.0 m/s in the same row is also shown in Fig. 4(1). It also illustrates that
+in a similar soil condition, a higher planting speed results in higher row unit vibration.
+The row unit vibration in the large strip-tilled field JF_Ringwood_390, which is 64 ha,
+was basically the same when planting at the producers’ normal speed of 2.6 m/s. Similar
+
+(1) JF Helena (No-till)
+
+(2) JF Ringwood 390 (Strip-tilled)
+
+Fig. 4  Field scale row unit vibration data with the John Deere MaxEmerge 5 planter. a 1.3 m/s, b 2.2 m/s, c
+3.1 m/s, d 4.0 m/s, producers’ normal speed in 1 2.4 m/s, producers’ normal speed in 2 2.6 m/s
+
+13
+
+595
+
+Precision Agriculture (2020) 21:589–602
+
+(1) SF_Garber (No-till)
+
+(2) SF_Fairmont (Strip-tilled)
+
+Fig. 5  Field scale row unit vibration data with the John Deere ExactEmerge planter. a 1.3 m/s, b 2.2 m/s, c
+3.1 m/s, d 4.0 m/s, producers’ normal speed in 1 3.0 m/s, producers’ normal speed in 2 2.5 m/s
+Fig. 6  Relationship between the
+row unit vibration and planting
+speed in similar soil conditions
+
+row unit ride quality is of importance to expect uniform planting quality and plant emergence. The soil surface was firmer in the no-till field resulting in a relatively higher row
+unit vibration an even lower normal planting speed of 2.4 m/s.
+The row unit vibration maps of the two fields planted with the John Deere ExactEmerge planter showed that when planting at the producers’ normal speeds, the vibration
+varied in different areas of the field (Fig. 5). In the circled area in the field of SF_Garber
+(Fig. 5(1)), the vibration was lower than average, while in the circled area in the field of
+SF_Fairmont (Fig. 5(2)) the vibration was higher than average. Comparing to the vibration in the no-till field (SF_Garber) with the producers’ normal speed of 3.0 m/s, the
+vibration in the strip-tilled field (SF_Fairmont) with a lower normal speed of 2.5 m/s
+was even higher. It was because the strip tillage was done when the soil was too wet
+resulting in a rough surface. Therefore, the producer decided to plant at a lower normal
+speed in SF_Fairmont field.
+The mean absolute acceleration data for four fields is shown as a function of planting speed in Fig. 6. The data from JF_Ringwood_390 and JF_Ringwood_400 fields were
+pooled because the planting conditions were similar. Vertical acceleration of the row units
+increased linearly with planting speed. The slope is an indication of how speed affects vertical acceleration and there is no consistency for tillage condition. Since both planters had
+the same pneumatic downforce system, a difference between planters was not expected.
+
+13
+
+596
+
+Precision Agriculture (2020) 21:589–602
+
+FFT analysis of the row unit vibration data
+The results of the fast Fourier transformation (FFT) analysis of the row unit vibration are
+shown in Fig. 7. The charts show that the main frequencies concentrate mainly in a lowfrequency band from 3 to 10 Hz. These main components do not increase in frequency
+with increasing planter speed. However, the amplitude clearly increases when the planter
+speed increases.
+
+Average plant spacing using different planters
+Tables 2 and 3 show the average plant spacing using different planters based on ISO
+7256/1. For the John Deere MaxEmerge 5 planter, the average plant spacing was close to
+the target plant spacing with a maximum error of 21 mm. The maximum standard deviation (SD) was 85 mm and the maximum coefficient of variation (CV) was 24.3%. The maximum CV was similar for both fields, JF_Helena and JF_Ringwood.
+For the John Deere ExactEmerge planter, the average plant spacing was closer to the
+target plant spacing with the maximum error of only 5 mm and maximum CV of 14.3%.
+The maximum CV was similar as well for each of the two fields, SF_Garber and SF_Fairmont, planted with this planter. The emerged plant spacing was more uniform in the fields
+planted using the ExactEmerge planter than those planted using the MaxEmerge 5 planter.
+In the field SF_Fairmont, where the row unit vibration was highest, the plant spacing CV
+for the ExactEmerge planter was even lower than those fields planted using the MaxEmerge 5 planter at lower row unit vibrations.
+
+Fig. 7  FFT analysis results of the row unit vibration data in different fields
+
+13
+
+1.35
+
+1.35
+2.24
+2.49
+2.51
+2.51
+2.59
+2.59
+3.13
+3.14
+4.02
+4.02
+1.34
+1.34
+1.34
+1.34
+
+JF_H
+
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_H
+JF_R
+JF_R
+JF_R
+JF_R
+
+335
+335
+341
+341
+338
+357
+323
+323
+326
+335
+335
+366
+354
+351
+354
+
+338
+
+AMPS
+(mm)
+
+46
+52
+55
+49
+46
+58
+61
+73
+79
+61
+73
+61
+49
+40
+58
+
+52
+
+13.6
+15.5
+16.1
+14.3
+13.5
+16.2
+18.9
+22.6
+24.3
+18.2
+21.8
+16.7
+13.8
+11.3
+16.4
+
+15.3
+343
+343
+343
+343
+343
+343
+343
+343
+343
+343
+343
+345
+345
+345
+345
+
+343
+8
+8
+2
+2
+5
+14
+20
+20
+17
+8
+8
+21
+9
+6
+9
+
+5
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+JF_R
+
+JF_R
+2.22
+2.22
+2.23
+2.69
+2.75
+2.75
+2.76
+3.09
+3.11
+3.11
+3.11
+3.42
+3.99
+4.00
+4.00
+
+2.21
+351
+347
+354
+357
+360
+335
+347
+351
+344
+344
+354
+351
+341
+344
+344
+
+354
+
+SD (mm) CV (%) TPS (mm) Error (mm) Field Name Speed (m/s) AMPS
+(mm)
+55
+64
+64
+64
+67
+73
+64
+85
+73
+70
+70
+67
+79
+73
+79
+
+52
+15.7
+18.4
+18.1
+17.9
+18.6
+21.8
+18.4
+24.3
+21.2
+20.4
+19.8
+19.1
+23.2
+21.2
+23.0
+
+14.7
+
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+345
+
+345
+
+6
+2
+9
+12
+15
+10
+2
+6
+1
+1
+9
+6
+4
+1
+1
+
+9
+
+SD (mm) CV (%) TPS (mm) Error (mm)
+
+AMPS average measured plant spacing, TPS target plant spacing, SD standard deviation, CV coefficient of variation, JF_H JF_Helena Field, JF_R JF_Ringwood
+
+Speed
+(m/s)
+
+Field
+name
+
+Table 2  Average plant spacing using the John Deere MaxEmerge 5 planter
+
+Precision Agriculture (2020) 21:589–602
+597
+
+13
+
+13
+
+1.43
+
+1.44
+2.33
+2.33
+3.10
+3.11
+3.23
+3.23
+3.24
+3.24
+3.24
+3.24
+4.04
+4.04
+
+SF_G
+
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+SF_G
+
+308
+305
+305
+305
+305
+305
+305
+305
+305
+305
+305
+305
+302
+
+308
+
+AMPS
+(mm)
+
+30
+21
+27
+24
+27
+27
+37
+30
+37
+27
+34
+27
+21
+
+30
+
+9.9
+7.0
+9.0
+8.0
+9.0
+9.0
+12.0
+10.0
+12.0
+9.0
+11.0
+9.0
+7.1
+
+9.9
+303
+303
+303
+303
+303
+303
+303
+303
+303
+303
+303
+303
+303
+
+303
+5
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+1
+
+5
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+SF_F
+
+SF_F
+1.34
+2.21
+2.22
+2.66
+2.76
+2.77
+2.78
+2.83
+2.84
+2.85
+2.86
+3.96
+3.97
+
+1.33
+192
+192
+192
+192
+192
+192
+192
+192
+192
+189
+192
+192
+192
+
+189
+
+SD (mm) CV (%) TPS (mm) Error (mm) Field name Speed (m/s) AMPS
+(mm)
+18
+21
+21
+24
+18
+18
+18
+21
+21
+21
+27
+21
+24
+
+15
+9.5
+11.1
+11.1
+12.7
+9.5
+9.5
+9.5
+11.1
+11.1
+11.3
+14.3
+11.1
+12.7
+
+8.1
+
+190
+190
+190
+190
+190
+190
+190
+190
+190
+190
+190
+190
+190
+
+190
+
+2
+2
+2
+2
+2
+2
+2
+2
+2
+1
+2
+2
+2
+
+1
+
+SD (mm) CV (%) TPS (mm) Error (mm)
+
+AMPS average measured plant spacing, TPS target plant spacing, SD standard deviation, CV coefficient of variation, SF_G SF_Garber Field, SF_F SF_Fairmont
+
+Speed
+(m/s)
+
+Field
+name
+
+Table 3  Average plant spacing using the John Deere ExactEmerge planter
+
+598
+Precision Agriculture (2020) 21:589–602
+
+599
+
+Precision Agriculture (2020) 21:589–602
+
+Plant spacing standard deviation at different speeds using different planters
+The relationship between planting speed and standard deviations in plant spacing is
+shown in Figs. 8 and 9. The standard deviation in plant spacing increased with planting
+speed for the John Deere MaxEmerge 5 planter in both tillage conditions having similar
+slopes (Fig. 8). There was no relationship between standard deviation in plant spacing
+and planting speed for the John Deere ExactEmerge planter (Fig. 9).
+
+Plant spacing standard deviation at different vibrations
+Figures 10 and 11 show the relationship between the row unit vertical acceleration and
+plant spacing standard deviation. The variability in plant spacing, as measured by standard deviation, increased with row unit vertical acceleration for the John Deere MaxEmerge 5 planter (Fig. 10). However, for the John Deere ExactEmerge planter, row unit
+vibration had little effect on the variation in plant spacing (Fig. 11).
+
+Planting quality at different vibrations in different fields
+Planting quality at different vibration levels for each location is presented in Fig. 12.
+Three indices were calculated based upon ISO 7256-1: quality of feed index, multiples
+index and miss index. With increasing vibration levels, the quality of feed index exhibited a downward trend in all locations except one, which was slightly positive. Row unit
+vibration level had little effect on the multiples index at all locations. The results indicate that the vacuum metering system was most likely not affected much by the row unit
+vibration if it held two or more seeds in a disk hole. However, the miss index showed
+an increasing trend in all locations except “JF_Ringwood”. This location was strip-tilled
+and had very few higher vibration values. Data points less than 3.0 m/s2 exhibited this
+upward trend with miss index magnitudes found at much higher vibration levels in other
+locations. Since indices were calculated based upon plant spacing, increasing row unit
+vibrations could indicate seed bed conditions less favorable for seedling emergence,
+or the vibration raised the chance of the seed dropping off the meter disks, thereby
+increased planting spatial variability.
+
+Fig. 8  Plant spacing standard deviation at different speeds using the John Deere MaxEmerge 5 planter
+
+13
+
+600
+
+Precision Agriculture (2020) 21:589–602
+
+Fig. 9  Plant spacing standard deviation at different speeds using the John Deere ExactEmerge planter
+
+Fig. 10  Plant spacing standard deviation at different vibrations using the John Deere MaxEmerge 5 planter
+
+Fig. 11  Plant spacing standard deviation at different vibrations using the John Deere ExactEmerge planter
+
+Conclusions
+(1) Row unit vibration increased linearly with planter speed. While different soil conditions
+affected row unit vibration, the trends were inconsistent. Thus, it would be difficult to
+predict row unit vibration with varying field conditions.
+(2) Row unit vibration data were analyzed using FFT techniques. The main frequencies
+of the vibration were concentrated in a low-frequency band ranging from 3 to 10 Hz,
+and were not related to planter speed. However, the amplitude clearly increased with
+planter speed.
+(3) For the John Deere MaxEmerge 5 planter, the average manually measured plant spacing
+was close to the target plant spacing with a maximum error of 21 mm, and a maximum
+CV of 24.3%. For the John Deere ExactEmerge planter, the plant spacing was even closer
+
+13
+
+Precision Agriculture (2020) 21:589–602
+
+601
+
+Fig. 12  Plant quality at different vibrations in different fields
+
+to the target plant spacing with a maximum error of only 5 mm and a maximum CV of
+14.3%.
+(4) For the MaxEmerge 5 planter, the plant spacing standard deviation increased with speed
+and vibration; while for the ExactEmerge planter, the standard deviation remained almost
+constant at a lower value. The seed delivery system for the ExactEmerge planter worked
+to reduce the effects of row unit vibration on plant spacing variability.
+(5) Overall, the row unit vibration reduced planting spatial uniformity. The quality of feed
+index decreased with increased vertical acceleration on the row unit while the miss index
+increased. However, the multiples index was generally unaffected by row unit vibration.
+Acknowledgements This work was funded by the Oklahoma Agricultural Experiment Station, Sarkeys Endowed Professorship, and China National Key Research and Development Project
+(2017YFD0700500-2017YFD0700502).
+Open Access This article is distributed under the terms of the Creative Commons Attribution 4.0 International License (http://creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution,
+and reproduction in any medium, provided you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons license, and indicate if changes were made.
+
+References
+Barreiro, P., Dias, S., Garrido, M., Conceic, L. A., & Valero, C. (2016). A partial study of vertical distribution
+of conventional no-till seeders and spatial variability of seed depth placement of maize in the Alentejo
+region, Portugal. Precision Agriculture, 17, 36–52. https​://doi.org/10.1007/s1111​9-015-9405-x.
+Hanna, H. M., Steward, B. L., & Aldinger, L. (2010). Soil loading effects of planter depth-gauge wheels on
+early corn growth. Applied Engineering in Agriculture, 26(4), 551–556.
+
+13
+
+Precision Agriculture (2020) 21:589–602
+
+602
+
+Kachman, S. D., & Smith, J. A. (1995). Alternative measures of accuracy in plant spacing for planters using
+single seed metering. Transactions of the ASAE, 38(2), 379–387.
+Karayel, D., Wiesehoff, M., & Ozmerzi, A. (2006). Laboratory measurement of seed drill seed spacing and
+velocity of fall of seeds using high-speed camera system. Computers and Electronics in Agriculture, 50,
+89–96. https​://doi.org/10.1016/j.compa​g.2005.05.005.
+Kocher, M. F., Coleman, J. M., Smith, J. A., & Kachman, S. D. (2011). Corn seed spacing uniformity as affected
+by seed tube condition. Applied Engineering in Agriculture, 27(2), 177–183.
+Koller, A., Wan, Y., Miller, E., Weckler, P., & Taylor, R. (2014). Test method for precision seed singulation systems. Transactions of the ASABE, 57(5), 1283–1290. https​://doi.org/10.13031​/trans​.57.10466​.
+Mursec, B., Vindis, P., Janzekovic, M., Cus, F., & Brus, M. (2008). Testing of quality of sowing by pneumatic
+sowing machines. Journal of Achievements in Materials and Manufacturing Engineering, 26(1), 81–88.
+Raoufat, M. H., & Matbooei, A. (2007). Row cleaners enhance reduced tillage planting of corn in Iran. Soil and
+Tillage Research, 93(1), 152–161. https​://doi.org/10.1016/j.still​.2006.03.026.
+Staggenborg, S. A., Taylor, R. K., & Maddux, L. D. (2004). Effect of planter speed and seed firmers on corn
+stand establishment. Applied Engineering in Agriculture, 20(5), 573–580.
+Turan, J., Višacki, V., Sedlar, A., Pantelić, S., Findura, P., Máchal, P., et al. (2015). Seeder with different seeding
+apparatus in maize sowing. Acta Universitatis Agriculturae et Silviculturae Mendelianae Brunensis, 63(1),
+137–141.
+Yang, L., Yan, B., Cui, T., Yu, Y., He, X., & Liu, Q. (2016). Global overview of research progress and development of precision maize planters. International Journal of Agricultural and Biological Engineering, 9(1),
+9–26. https​://doi.org/10.3965/j.ijabe​.20160​901.2285.
+Yang, L., Zhang, R., Gao, N., Cui, T., Liu, Q., & Zhang, D. (2015). Performance of no-till corn precision planter
+equipped with row cleaners. International Journal of Agricultural and Biological Engineering, 8(5),
+15–25. https​://doi.org/10.3965/j.ijabe​.20150​805.1846.
+Yazgi, A., & Degirmencioglu, A. (2014). Measurement of seed spacing uniformity performance of a precision
+metering unit as function of the number of holes on vacuum plate. Measurement, 56, 128–135. https​://doi.
+org/10.1016/j.measu​remen​t.2014.06.026.
+Zhou, L., Wang, S., Zhang, X., Yuan, Y., & Zhang, J. (2012). Seed monitoring system for corn planter based on
+capacitance signal. Transactions of the CSAE, 28(13), 16–21.
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and
+institutional affiliations.
+
+Affiliations
+Changyuan Zhai1,2
+
+· John Long2 · Randal Taylor2 · Paul Weckler2 · Ning Wang2
+
+Changyuan Zhai
+zhaicy@nercita.org.cn
+John Long
+john.m.long@okstate.edu
+Paul Weckler
+paul.weckler@okstate.edu
+Ning Wang
+ning.wang@okstate.edu
+1
+
+Beijing Research Center of Intelligent Equipment for Agriculture, Beijing Academy of Agriculture
+and Forestry Sciences, Beijing 100097, China
+
+2
+
+Department of Biosystems and Agricultural Engineering, Oklahoma State University, 139 Ag Hall,
+Stillwater, OK 74078, USA
+
+13
+
+

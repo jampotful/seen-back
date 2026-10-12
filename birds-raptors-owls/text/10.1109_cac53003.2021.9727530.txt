@@ -1,0 +1,507 @@
+A Miniature Biological Eagle-Eye Vision System for Small Target Detection
+Shutai Wang, Qiang Fu, Yinhao Hu, Chunhua Zhang, Wei He (2021). China Automation Congress (CAC). http://arxiv.org/abs/2107.08406. doi:10.1109/cac53003.2021.9727530. Licence: cc-by. Text from pdf.
+
+arXiv:2107.08406v1 [cs.CV] 18 Jul 2021
+
+A Miniature Biological Eagle-Eye Vision System
+for Small Target Detection
+1st Shutai Wang
+
+2nd Qiang Fu
+
+School of Automation and Electrical Engineering
+and Institute of Artificial Intelligence
+University of Science and Technology Beijing
+Beijing, China
+wst19980122@126.com
+
+School of Automation and Electrical Engineering
+and Institute of Artificial Intelligence
+University of Science and Technology Beijing
+Beijing, China
+fuqiang@ustb.edu.cn
+
+3rd Yinhao Hu
+
+4th Chunhua Zhang
+
+School of Automation and Electrical Engineering
+and Institute of Artificial Intelligence
+University of Science and Technology Beijing
+Beijing, China
+huyinhao2021@163.com
+
+Automation Research Institute Co.
+Ltd. of China South Industries Group Corporation
+Mianyang, China
+swaizhang@sina.com
+
+5th Wei He
+School of Automation and Electrical Engineering
+and Institute of Artificial Intelligence
+University of Science and Technology Beijing
+Beijing, China
+weihe@ieee.org
+
+Abstract—Small target detection is known to be a challenging
+problem. Inspired by the structural characteristics and physiological mechanism of eagle-eye, a miniature vision system is designed
+for small target detection in this paper. First, a hardware platform
+is established, which consists of a pan-tilt, a short-focus camera
+and a long-focus camera. Then, based on the visual attention
+mechanism of eagle-eye, the cameras with different focal lengths
+are controlled cooperatively to achieve small target detection.
+Experimental results show that the designed biological eagle-eye
+vision system can accurately detect small targets, which has a
+strong adaptive ability.
+Index Terms—eagle-eye, vision system, visual attention mechanism, target detection
+
+I. I NTRODUCTION
+
+Although target detection algorithms based on deep learning
+can improve performance by increasing the types and numbers
+of small target samples in the training set, the adaptability
+and accuracy of many algorithms are difficult to guarantee
+when dealing with small target detection. In vision tasks such
+as target searching [3] and target positioning [4], traditional
+vision systems have significant limitations in the efficiency and
+accuracy of image processing . However, the thorny issues are
+simple for the creatures [5]. Among all creatures, eagle-eye
+is the best in visual acuity [6], as shown in Fig. 1(a). Even
+while flying at an altitude of more than a kilometer, eagleeye can also see the ground prey clearly [7], which is called
+clairvoyance.
+
+Object detection is a significant research problem in the
+field of machine vision. At present, many researches are
+carried out on the situation that the distance to the target is
+close, and the target occupies a large proportion of the field
+of view. However, in aerial photography, the target in the
+field of view is usually small in size [1], low in resolution,
+high in noise, and very few features can be extracted [2].
+This work was supported by the National Key Research and Development
+Program of China under Grant 2019YFB1703603, the National Natural
+Science Foundation of China under Grant 61803025 and Grant 62073031, the
+Interdisciplinary Research Project for Young Teachers of USTB (Fundamental
+Research Funds for the Central Universities) under Grant FRF-IDRY-19-010
+and the Fundamental Research Funds for the China Central Universities of
+USTB under Grant FRF-TP-19-001C2. Corresponding author is W. He.
+
+(a) Eagle-eye
+
+(b) Foveal section view
+
+Fig. 1: Egle-eye and foveal section view
+By studying the structure of eagle-eye, the foveal section
+
+view of eagles is unique [8]. As shown in Fig. 1(b), eagle-eye
+has a special fovea structure to extract the image features such
+as intensity, color and orientation. The double-fovea structure
+enables the eagle to have a wide field of view [9] and local
+high resolution [10] at the same time. Then, applying visual
+attention mechanism of the eagle-eye to the image processing
+process can improve the efficiency and accuracy of target
+searching [11]. It can be seen that the structural characteristics
+[12] and physiological mechanism of the eagle-eye are very
+suitable for small target detection. Therefore, the research of
+the biological eagle-eye vision system is of great significance
+to small target detection.
+At present, many researches on the structural characteristics
+and physiological mechanism of eagle-eye have been carried
+out for decades. Lin et al. from the National University of
+Singapore used the features of eagle-eye to obtain different
+resolutions and developed a composite vision system for
+multiple depth-of-field vehicle tracking and speed detection
+[13]. The team of Professor Duan Haibin from Beihang
+University has designed a visual measurement method based
+on the physiological mechanism of eagle-eye, which is used
+for the precise docking of unmanned aerial vehicles during
+autonomous aerial refueling [14].
+Because the information processing mechanism of eagleeye is very consistent with the visual perception requirements
+of flapping-wing air vehicles [15] [16], the biological eagleeye vision system is particularly suitable for flapping-wing
+air vehicles [17] to perform visual tasks. At present, the size
+and weight of these vision systems are too large for flappingwing aerial vehicles [18] [19]. Inspired by the structural
+characteristics and physiological mechanism of eagle-eye, a
+miniature eagle-eye vision system for small target detection
+is proposed in this paper. The case where the target occupies
+no more than 0.5% of the image is defined as a small target
+in this paper. The system is divided into hardware part and
+software part, which has the advantages of small size and light
+weight. The hardware simulates the double fovea structure of
+eagle-eye.A short-focus camera was selected to simulate the
+deep fovea of the eagle eye to obtain a large field of view,
+and a long-focus camera was selected to simulate the shallow
+fovea to achieve the function of local high resolution. And
+two cameras with different focal lengths simulate the zoom
+function. In the software part, the visual attention mechanism
+[20] of eagle eye is applied to the image processing process to
+complete the searching target location. This technique can not
+only increase the speed of image processing, but also reduce
+the burden on the computer.
+The main contributions of the paper are as follows: 1) Inspired by the double-fovea structure of eagle-eye, a miniature
+biological eagle-eye vision system is proposed for small target
+detection, which has the advantages of small size and light
+weight; 2) The application of visual attention mechanism in
+image processing and analysis improves the efficiency and
+accuracy of target searching and target localization; 3) A
+cooperative control method for long and short-focus cameras
+is designed, which can make the target always appear near the
+
+center of the field of view of the long-focus camera to obtain
+more details.
+II. B IOLOGICAL E AGLE -E YE V ISION I MAGING D EVIE
+A. Mechanical Structure Design
+High resolution and wide field of view are equally important in visual tasks. Combining the structural and functional
+characteristics of the eagle-eye, a biological eagle-eye visual
+imaging device as shown in Fig. 2 is designed to simulate a
+wide field of view of the eagle-eye, local high resolution and
+other characteristics. The device adopts a dual-camera twodegree-of-freedom structure. The short-focus camera is fixed
+
+Fig. 2: The biological eagle-eye visual imaging device
+to simulate the function of a large field of view. The longfocus camera can rotate two degrees of freedom. through the
+coperative control of the long and short focus cameras, the
+target always appears near the center of the field of view of
+the long-focus camera to obtain more details.
+
+Fig. 3: Structure of the biological eagle-eye vision imaging
+device
+Fig. 3 shows the structure of the device, including a shortfocus camera, a long-focus camera, two servos, two gears,
+four brackets, and two connecting pieces. Among them, gears,
+brackets and connecting pieces are all made by 3D printing.
+The bracket A is fixed with the servo A, and is connected with
+the short-focus camera. The bracket B is connected with the
+servo A through connecting piece A to fix the servo B. The
+servo B controls the long-focus camera rolling. The gear A is
+connected to the output shaft of the servo B. And the gear B
+is engaged with the gear A and fixed with the bracket D.
+
+B. Image acquisition module
+Fig. 4 shows two cameras, which have different focal
+lengths, each weighing about 10g. The focal lengths of the
+two cameras are 2.1mm and 12mm respectively.
+
+Because the servo itself contains a closed-loop control
+system, the output angle can be directly controlled, reducing
+the difficulty of development. The servo used in this paper is
+ES9051, as shown in Fig. 6(b). Its weight is 4.6g.
+III. A LGORITHM FOR TARGET DETECTION
+A. Visual attemtion mechnism
+
+Fig. 4: Short-focus camera and long-focus camera
+The camera is equipped with an image transmission module
+to transmit the image to the ground station as shown in Fig.
+5(a). The image receiving module cooperates with the ground
+station to receive image information, which is given in Fig.
+5(b).
+
+(a) Image
+module
+
+transmission (b) Image receiving module
+
+Fig. 5: Analog image transmission module
+The ground station is a laptop, whose configuration is given
+in Table I.
+TABLE I: Configuration of the ground station
+Option
+
+Detail
+
+Operating system
+CPU
+GPU
+RAM
+
+Windows 10
+R7-4800H
+RTX-2060
+16G
+
+C. Control module
+As shown in Fig. 6(a), the servo is controlled by a selfdesigned control module. It is 20.45mm long, 15.74mm wide
+and weighs 6.24g.
+
+(a) Control module
+
+(b) Servo
+
+Fig. 6: Control module and servo
+
+Scientists have studied the predation process of eagles, and
+discovered that eagles use visual attention mechanisms to
+analyze a large amount of information and quickly search
+and locate targets of interest. This method can not only
+increase the speed of image processing, but also reduce the
+computational burden of the computer. Itti proposed a databased bottom-up [21] visual attention model in 1998. This
+model is the most representative visual attention model. For
+an input image, the model extracts primary visual features
+(color, intensity, and orientation) and uses center-surround
+operations to generate feature maps. Then all feature maps are
+merged into the saliency map. Finally, the focus of attention is
+obtained according to the saliency map. The detailed procedure
+is described as follows.
+Firstly, extract early visual features. Choose r, g, and b
+to represent the three channels of red, green and blue, and
+perform Gaussian down-sampling on these three channels to
+obtain a three-channel image of nine scales, which includes
+under nine
+R(σ), G(σ) and B(σ). Calculate I = r+g+b
+3
+scales to get I(σ). Then, the color Gaussian pyramid can be
+constructed and calculated on nine scales, where σ ∈ {0..8}.
+The r, g, and b channels are normalized by I to decouple the
+hue from the intensity.
+g(σ) + b(σ)
+(1)
+2
+r(σ) + b(σ)
+(2)
+G(σ) = g(σ) −
+2
+r(σ) + g(σ)
+B(σ) = b(σ) −
+(3)
+2
+r(σ) + g(σ) |r(σ) − g(σ)|
+Y (σ) =
+−
+− b(σ)
+(4)
+2
+2
+The above four formulas represent the Gaussian pyramids
+of red, green, blue, and yellow. Then, the model constructs the
+Gabor direction pyramid O(σ, θ) using the Gabor filter, where
+θ ∈ {0°, 45°, 90°, 135°}.
+Secondly, construct feature maps. The model uses centersurround method to calculate the corresponding feature map.
+The calculation method is as follows:
+R(σ) = r(σ) −
+
+I(c, s) = |I(c)ΘI(s)|
+
+(5)
+
+RG(c, s) = |(R(c) − G(c))Θ(G(s) − R(s))|
+
+(6)
+
+BY (c, s) = |(B(c) − Y (c))Θ(Y (s) − B(s))|
+
+(7)
+
+O(c, s, θ) = |O(c, θ)ΘO(s, θ)|
+
+(8)
+
+where c ∈ {2, 3, 4} and s = c + δ, δ ∈ {3, 4}.Θ refers to the
+matrix subtraction after adjusting the two images to the same
+
+size, I(c, s) represents a brightness feature map, RG(c, s)
+and BY (c, s) represent a color feature map, and O(c, s, θ)
+represents a directional feature map.
+Finally, construct saliency maps. In the absence of a topdown supervision mechanism, the model proposes a feature
+map normalization operator N (·). This operation process is
+based on the wit of lateral inhibition of the cerebral cortex,
+which can enhance the feature map with a few sharp values
+and suppress the feature map with many sharp values. The
+operation method is as follows:
+I=
+
+4
+c+4
+⊕
+⊕ N(I(c, s))
+c=2 c+2
+
+(9)
+
+4
+c+4
+⊕
+⊕
+C=
+[N(RG(c, s)) + N (BY (c, s))]
+c=2 s=c+3
+(10)
+O=
+
+
+4
+c+4
+P
+⊕
+N ⊕
+N(O(c, s, θ))
+θ∈{0◦ ,45◦ ,90◦ ,135◦ }
+c=2 s=c+3
+(11)
+L
+The above
+refers to the operation of adding multiple
+images to the same size so that the brightness, color and
+direction saliency map is obtained, and the final saliency map
+S is as follows:
+N (I) + N (C) + N (O)
+(12)
+S=
+3
+B. Cooperative control for long and short focus cameras
+In order to make the target always appear near the center of
+the field of view of the long-focus camera, the field of view
+of the short-focus camera is divided into blocks. The field of
+view of a short-focus camera is about 5 times that of a longfocus camera. The horizontal field of view and vertical field of
+view are divided into 6 parts to prevent target loss. Therefore,
+the field of view of short-focus camera is divided into 36 small
+areas, as shown in Fig. 7.
+
+determined as the initial position. The target area is determine
+when the target appears. Then by controling the servos to drive
+the long-focus camera to the center of each area, the target can
+appear in the field of view of the long-focus camera at this
+time.
+IV. E XPERIMENTAL RESULTS AND ANALYSIS
+In this experiment, a human was selected as a reference to
+test the performance of the biological eagle-eye vision imaging
+device. The size of the target occupies approximately 0.4% of
+the image.
+A. Target searching of the short-focus camera
+The Itti visual attention model is used to obtain the saliency
+map under the wide field of view. Fig. 8 shows the field of
+view of the short-focus camera and the corresponding saliency
+map. Saliency detection can be of maximum value with limited
+resources.
+
+(a) Original image
+
+(b) Saliency map
+
+Fig. 8: Short-focus camera field of view and saliency map
+In the saliency map, the pixel with the largest gray value
+is the brightest point, which represents a potential target.
+Through traversing all pixel points, the algorithm finds the
+saliency point, marks it, and outputs its gray value and coordinate value. Then Gaussian blur is applied for preprocessing,
+
+(a) Saliency point map
+
+(b) Saliency area map
+
+Fig. 9: Saliency point and area map
+
+Fig. 7: Field of view diagram
+The long-focus camera is located 36.88mm above the shortfocus camera. Through continuous debugging, the long-focus
+camera aims at the center of the short-focus camera, and this is
+
+from finding a point to finding a region. The experimental
+result for a sample image is shown in Fig. 9.
+Coordinate: (522,239), Gray value: 243
+It is easy to find that the centroid coordinate of the target
+is approximately (530,229) by hand. By comparison, the
+experimental results are close to the actual values.
+
+B. Target capture of the long-focus camera
+The ground station converts the coordinate of saliency point
+into a PWM signal and sends it to the control module. The
+control module controls the steering servos to drive the longfocus camera to capture the target and obtain more details. Fig.
+10(a) and (b) show the target at short and long focus cameras
+respectively.
+
+(a) Target in short-focus camera
+
+(b) Target in long-focus camera
+
+Fig. 10: Target in cameras with different focal lengths
+Through comparison, it is found that the size of the target
+accounts for 0.45% of the image in the short-focus camera
+field of view, and 8.8% of the image in the long-focus camera
+field of view. It can be seen from the experimental results
+that the device proposed in this paper can accurately complete
+the target searching, and complete the coorperative control
+of the long and short focus cameras, obtain more target
+details, and greatly improve the efficiency and accuracy of
+small target detection. To ensure the persuasiveness of the
+experiment, we conducted several sets of experiments from
+different angles, and the experimental results both reached
+the expected requirements, which proved the feasibility of the
+experiment.
+V. C ONCLUSION
+This paper proposed a miniature bioligical eagle-eye vision
+system based on the structural characteristics and physiological mechanism of the eagle-eye, which both has a wide
+field of view and local high resolution. The system includes
+a biological eagle-eye vision imaging device and software
+algorithms. In addition, the imaging device was used for
+experiments, and the experimental results proved the feasibility
+of the designed biological eagle-eye vision system.
+The biological eagle-eye vision imaging device is small in
+size, light in weight and simple in structure. In future work,
+it can be used as a vision system for micro-robots such as
+flapping-wing air vehicles to achieve target detection, target
+tracking and other tasks.
+R EFERENCES
+[1] S. Qi, M. Jie, T. Chao, C. Yang, and J. Tian, “A robust directional
+saliency-based method for infrared small-target detection under various
+complex backgrounds,” IEEE Geoscience & Remote Sensing Letters,
+vol. 10, no. 3, pp. 495–499, 2013.
+[2] H. B. Duan, Y. M. Deng, X. H. Wang, and C. F. Xu, “Small and dim
+target detection via lateral inhibition filtering and artificial bee colony
+based selective visual attention,” Plos One, vol. 8, no. 8, p. e72035,
+2013.
+
+[3] P. Lanillos, S. K. Gan, E. Besada-Portasand, G. Pajares, and
+S. Sukkarieh, “Multi-uav target search using decentralized gradientbased negotiation with expected observation,” Information Sciences An
+International Journal, vol. 282, pp. 92–110, 2014.
+[4] S. Minaeian, L. Jian, and Y. J. Son, “Vision-based target detection and
+localization via a team of cooperative uav and ugvs,” EEE Transactions
+on Systems, Man, and Cybernetics: Systems, vol. 46, no. 7, pp. 1005–
+1016, 2017.
+[5] G. Z. Zhao and H. B. Duan, “Progresses in biological eagle-eye vision
+technology,” Scientia Sinica (Technologica), vol. 47, no. 5, pp. 514–523,
+2017.
+[6] Y. M. Deng and H. B. Duan, “Biological eagle-eye-based visual platform
+for target detection,” IEEE Transactions on Aerospace and Electronic
+Systems, vol. 54, no. 6, pp. 3125–3136, 2018.
+[7] M. F. Gaffney and W. Hodos, “The visual acuity and refractive state of
+the american kestrel (falco sparverius).” Vision Research, vol. 43, no. 19,
+pp. 2053–2059, 2003.
+[8] V. A. Tucker, “The deep fovea, sideways vision and spiral flight paths in
+raptors,” Journal of Experimental Biology, vol. 203, no. 24, pp. 3745–
+3754, 2000.
+[9] G. R. Martin, S. J. Portugal, Campbell, and P. Murn, “Visual fields,
+foraging and collision vulnerability in gyps vultures,” Ibis, vol. 154,
+no. 3, pp. 626–631, 2012.
+[10] L. Reymond, “Spatial visual acuity of the eagle aquila audax: a
+behavioural, optical and anatomical investigation.” Vision Research,
+vol. 25, no. 10, pp. 1477–1491, 1985.
+[11] M. P. Jones, K. E. Pierce, and D. Ward, “Avian vision: A review of
+form and function with special consideration to birds of prey,” Journal
+of Exotic Pet Medicine, vol. 16, no. 2, pp. 69–87, 2007.
+[12] G. R. Martin, “Visual fields and their functions in birds,” Journal of
+Ornithology, vol. 148, pp. 547–562, 2007.
+[13] L. Lin, B. Ramesh, and C. Xiang, “Biologically inspired composite
+vision system for multiple depth-of-field vehicle tracking and speed
+detection,” International Journal of Bifurcation & Chaos, vol. 19, no. 11,
+pp. 3657–3670, 2014.
+[14] H. B. Duan, Y. M. Deng, X. H. Deng, Wang, and F. Liu, “Biological eagle-eye-based visual imaging guidance simulation platform for
+unmanned flying vehicles,” IEEE Aerospace and Electronic Systems
+Magazine, vol. 28, no. 12, pp. 36–45, 2014.
+[15] W. He, S. Q. Ding, and C. Y. Sun, “Research progress on modeling and
+control of flapping-wing air vehicles,” Acta Automatica Sinica, vol. 43,
+no. 5, pp. 685–696, 2017.
+[16] W. He, X. X. Mu, L. Zhang, and Y. Zou, “Modeling and trajectory
+tracking control for flapping-wing micro aerial vehicles,” IEEE/CAA
+Journal of Automatica Sinica, vol. 8, no. 1, pp. 148–156, 2021.
+[17] Q. Fu, J. Wang, L. Gong, J. Wang, and W. He, “Obstacle avoidance of
+flapping-wing air vehicles based on optical flow and fuzzy control,”
+Transactions of Nanjing University of Aeronautics and Astronautics,
+vol. 38, no. 2, pp. 206–215, 2021.
+[18] Q. Fu, X. Y. Chen, Z. L. Zheng, Q. Li, and W. He, “Research progress
+of visual perception system of bionic flapping-wing air vehicle,” Journal
+of Engineering Science, vol. 41, no. 308, pp. 15–22, 2019.
+[19] Z. Yin, W. He, Y. Zou, X. X. Mu, and C. Y. Sun, “Efficient formation
+of flapping-wing aerial vehicles based on wild geese queue effect,” Acta
+Automatica Sinica, vol. 46, pp. 1–13, 2020.
+[20] L. Itti, C. Korch, and E. Niebur, “A model of saliency-based visual attention for rapid scene analysis,” IEEE Transactions on Pattern Analysis
+and Machine Intelligence, vol. 20, no. 11, pp. 1254–1259, 1998.
+[21] O. L. Meur, P. L. Callet, D. Barba, and D. Thoreau, “A coherent
+computational approach to model bottom-up visual attention,” IEEE
+Transactions on Pattern Analysis and Machine Intelligence, vol. 28,
+no. 5, pp. 802–817, 2006.
+
+

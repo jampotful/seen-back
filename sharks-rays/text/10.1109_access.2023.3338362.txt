@@ -1,0 +1,1478 @@
+Prediction of Postoperative Visual Acuity in Rhegmatogenous Retinal Detachment Using OCT Images
+Sinda Hosni, Hajer Khachnaoui, Hsouna Mehdi Zgolli, Sonya Mabrouk, Désiré Sidibé, Hedi Tabia, Nawrès Khlifa (2023). IEEE Access. https://hal.science/hal-04360931. doi:10.1109/access.2023.3338362. Licence: cc-by-nc-nd. Text from pdf.
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.
+Digital Object Identifier 10.1109/ACCESS.2022.Doi Number
+
+Prediction of Postoperative Visual Acuity in
+Rhegmatogenous Retinal Detachment Using
+OCT Images
+1
+
+1
+
+2
+
+2
+
+3
+
+Sinda Hosni , Hajer Khachnaoui , Hsouna Mehdi Zgolli , Sonya Mabrouk , Désiré Sidibé ,
+3
+1
+Hedi Tabia , Nawres Khlifa
+1
+
+Laboratory of Biophysics and Medical Technology, Higher Institute of Medical Technologies of Tunis, University of Tunis El Manar, Tunis 1006,
+Tunisia
+2
+Hedi Raies Institute of Ophthalmology, Service A, Tunis, Tunisia
+3
+Université Paris-Saclay, Univ. Evry, IBISC Laboratory, 91020, Evry, France
+Work conducted within the OCTIPA project (CMCU 23G1418), as part of the PHC-Utique program managed by the CMCU of the French Ministry
+of Europe and Foreign Affairs and the Tunisian Ministry of Higher Education and Scientific Research.
+
+Corresponding author: Hajer Khachnaoui (hajerkhachnaoui69@gmail.com).
+
+ABSTRACT Deep Learning (DL) methods, such as Convolution Neural Networks (CNNs), have shown
+great potential in diagnosing complex diseases. Among these diseases, Rhegmatogenous Retinal
+Detachment (RRD) stands out as a critical condition necessitating precise diagnosis and postoperative
+Visual Acuity (VA) prediction. This research introduces a DL-based Computer-Aided Diagnosis (CAD)
+system that utilizes Optical Coherence Tomography (OCT) images for both the diagnosis of RRD and the
+prediction of postoperative VA. The CAD system utilizes DL techniques and a diverse dataset, including
+OCT images of patients with RRD from the Hedi Raies Ophthalmology Institute of Tunis and a large public
+dataset of normal subjects OCT. Preprocessing steps, such as image cropping, enhancement, denoising, and
+resizing, are applied to the tomographic images. Data oversampling and augmentation techniques address
+class imbalance and improve the dataset by generating additional samples. Various DL models, including
+pre-trained CNN models (VGG-16, Inception-V3, Inception-ResNet-V2), Bilinear (BCNN) (BCNN
+(VGG − 16)2 and BCNN (Inception − V3)2), and a custom CNN architecture, are implemented for RRD
+diagnosis and postoperative VA prediction. The experimental outcomes demonstrate the effectiveness of
+the proposed CAD system in accurately diagnosing RRD and predicting postoperative VA. The system
+achieves high accuracy, with 99.87% for diagnosing RRD and 98.06% for predicting postoperative VA
+using the BCNN (VGG − 16)2 model. The developed CAD system represents a significant advancement in
+the field of RRD and postoperative VA prediction. By combining DL and OCT imaging, the system
+provides automated and accurate diagnosis, showing potential in improving patient care and treatment
+decisions.
+
+INDEX TERMS Convolutional Neural Networks, Deep Learning, CAD system, Rhegmatogenous Retinal
+Detachment, OCT imaging.
+
+I. INTRODUCTION
+
+The remarkable advancements in artificial intelligence
+have brought about transformative changes in various
+industries, and healthcare is certainly no exception [1]. In
+particular, the emergence of machine learning (ML)
+techniques, with a specific focus on deep learning (DL),
+has opened up new horizons in the field of medical
+VOLUME XX, 2017
+
+imaging analysis [2]. One area that has seen significant
+progress is the development of computer-aided diagnosis
+(CAD) systems [2-4]. These systems harness the power of
+DL algorithms to assist healthcare professionals in the
+detection and diagnosis of a wide range of diseases.
+Within the realm of ophthalmology, the integration of
+
+1
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+CAD based on DL holds significant promise for
+addressing a critical condition known as Retinal
+Detachment (RD) [5-6]. This serious impairment occurs
+when the neurosensory retina becomes separated from the
+underlying retinal pigment epithelium due to the
+accumulation of subretinal fluid [6]. Rhegmatogenous
+Retinal Detachment (RRD) is due to retinal tear, this is a
+surgical emergency and carries severe visual impairment
+that can lead to blindness [7-8]. Early diagnosis is crucial
+for reattachment’s success rate and improving visual
+outcomes. However, identifying RRD in early stages
+presents challenges, as it often begins asymptomatically
+and progresses from the peripheral retina. Moreover, final
+visual outcome depends on surgery delay which is the
+most important preoperative prognosis visual factor [7].
+Among
+the
+valuable
+imaging
+techniques
+in
+ophthalmology, optical coherence tomography (OCT)
+stands out for providing high-resolution cross-sectional
+images of the retina [9]. The integration of DL-driven
+CAD systems, along with OCT imaging capabilities, has
+the potential to revolutionize the diagnosis and
+management of RRD [10-13]. These systems automate the
+detection process and leverage the computational power of
+DL algorithms to accurately identify RRD and retinal
+layers evolution. Furthermore, they hold promise in
+predicting postoperative Visual Acuity (VA), aiding in
+treatment planning and improving patient outcomes. The
+primary objective of this research is to develop a CAD
+system that utilizes DL on OCT images to identify RRD
+stage and predict postoperative VA. This addresses the
+significant challenge of predicting visual recovery during
+the preoperative examination in the management of RRD.
+II. Related works
+
+In the literature, there has been an increasing amount of
+research dedicated to exploring the utilization of DL
+methods in the field of retinal image analysis. By leveraging
+the power of DL, researchers aim to enhance the accuracy
+and efficiency of diagnosing retinal diseases through
+automated analysis of retinal images. For instance, Feng Li
+et al. [14] introduced a DL-based approach for the
+automated diagnosis of Choroidal NeoVascularization
+(CNV), Diabetic Macular Edema (DME), Drusen, and
+normal subjects in OCT images. The proposed method
+leverages an ensemble of four classification models, each
+employing an improved ResNet-50 architecture, to analyze
+retinal OCT images. The final predictions are obtained by
+calculating the average of class probabilities estimated by
+the constituent networks. The proposed method was
+evaluated on a dataset comprising 21357 retinal OCT
+images from the Shanghai Zhongshan Hospital and the
+Shanghai First People's Hospital. A 10-fold cross-validation
+technique was employed for the evaluation process. The
+experimental results highlight an impressive classification
+accuracy of 97.3%, along with a sensitivity of 96.3% and a
+specificity of 98.5%. In addition, Amit Choudhary et al. [15]
+proposed a DL model aimed at classifying OCT images of
+8
+
+the retina into four distinct categories of retinal diseases
+(CNV, DME, Drusen, and normal). To accomplish this, they
+employed the VGG-19 network, leveraging pre-trained
+weights derived from the ImageNet dataset through Transfer
+learning (TL) technique. Specifically, they modified the
+VGG-19 architecture by removing its top layers and
+substituting them with a flatten layer, a dropout layer, and an
+output dense layer. Importantly, all layers within the
+proposed CNN model were made trainable. To assess the
+performance of their CNN model, the researchers utilized
+the publicly available dataset known as "Large Dataset of
+Labeled Optical Coherence Tomography (OCT) and Chest
+X-ray Images." This dataset comprises a total of 84568 OCT
+retinal scan images and was used for training, validation,
+and testing purposes. Furthermore, they also validated their
+proposed method on an independent testing dataset obtained
+from Duke University, Harvard University, and the
+University of Michigan. This additional dataset consisted of
+OCT scanned retinal images from 45 patients. The results
+demonstrated the effectiveness of the proposed model,
+achieving an impressive classification accuracy of 99.17%.
+Moreover, the model exhibited high specificities of 99.5%
+and sensitivity of 99%.
+Several research studies have been dedicated to focusing
+specifically on the utilization of DL for the diagnosis of RD.
+For instance, Hideharu et al. [10] conducted a study utilizing
+DL technique to automate the detection OF RRD from
+Ultra-Widefield Fundus (UWF) images. The dataset
+consisted of 831 UWF images, with 420 images from nonRRD patients and 411 images from RRD patients, obtained
+from the clinical database of the Ophthalmology Department
+of Tsukazaki Hospital. Among these images, 665 were used
+for training the model, while 166 images were used for
+model validation. To enhance the training dataset, data
+augmentation technique was applied, resulting in a total of
+11970 images. The researchers employed a custom CNN
+model, composed of three convolutional layers followed by
+ReLU activation layers, pooling layers, and two fully
+connected layers. The final output layer employed a softmax
+function for binary classification. The custom CNN model
+outperformed the Support Vector Machine (SVM) method,
+achieving a sensitivity of 97.6%, specificity of 96.5%, and
+an Area Under the Curve (AUC) of 98.8%. Then, Zhongwen
+et al. [11] proposed a cascaded DL system to automate the
+detection of RD and differentiate between macula-on and
+macula-off RD based on UWF images. The cascaded DL
+system consisted of two models, both trained using the
+InceptionResNetV2 architecture. In their methodology, the
+first model was trained to identify RD in the input images.
+Subsequently, the second model was employed to further
+discern macula-on RD from the RD images detected by the
+first model. The proposed method was developed using a
+dataset of 11087 UWF images. To evaluate the performance
+of the DL models, the eligible images were randomly
+divided into three sets: 70% for the training set, 15% for the
+validation set, and 15% for the test set. The first DL model,
+used for identifying RD, achieved an impressive AUC of
+98.9%, with a sensitivity of 96.1% and specificity of 99.6%.
+On the other hand, the second DL model, employed for
+discerning macula-on RD from macula-off RD, achieved an
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+AUC of 97.5%, with a sensitivity of 93.8% and specificity
+of 90.9%. In addition, Chenxi Zhang et al. [12] carried out a
+study aimed at developing a combined DL system for the
+detection of lattice degeneration, retinal break, and RD in
+tessellated eyes using Optos images. The system consisted
+of three binary classification CNN models, each designed to
+detect one of the aforementioned conditions. For training the
+binary classification models, the seResNext-50 architecture
+was utilized. The outputs of these three models were
+analyzed to generate the final prediction. The proposed
+method was evaluated on a dataset of Optos images
+consisting of 911 samples obtained from Beijing Hua'er Eye
+Hospital. The dataset included images of lattice
+degeneration (267), retinal breaks (49), RD (44), and normal
+peripheral retina (609). It was divided into three subsets,
+with 60% of the data used for training (employing data
+augmentation techniques), 20% for model validation, and
+20% for performance assessment. The results demonstrated
+remarkable performance for the detection of RD, with an
+AUC value of 100%, sensitivity of 87.5%, and specificity of
+100%. The overall accuracy of the system was found to be
+79.8%. Recently, Sonal Yadav et al. [13] conducted a study
+aimed at diagnosing RD from non-RD images using various
+pre-trained CNN models and the TL technique on color
+fundus images. The study employed several well-known
+CNN models, including AlexNet, Inception-V3, GoogleNet,
+VGG-19, DenseNet, and ResNet-50. These models were
+trained and tested using publicly available datasets of RD
+and non-RD fundus images. Specifically, the training set
+consisted of 1227 images, whereas the testing set comprised
+400 images. Through their experimentation, the researchers
+found that the ResNet50 framework, implemented through
+TL, exhibited the best classification performance. It
+achieved remarkable values for accuracy (99.50%),
+sensitivity (99.00%), specificity (99.99%), precision
+(99.99%), and F1 score (99.49%). This model outperformed
+other learning models in accurately detecting RD and nonRD fundus images.
+The application of DL techniques in diverse imaging
+modalities, such as UWF images and Optos images, has
+greatly enhanced the precision and efficiency of diagnosing
+retinal diseases, with a particular focus on RD [10-15].
+These studies have showcased significant advancements,
+leading to improved patient care. However, it is worth
+noting that the number of studies specifically targeting RD
+diagnosis is limited. Moreover, a dedicated method for
+diagnosing RD and accurately predicting the final VA
+outcome using OCT images is currently absent, highlighting
+the need for further research in this area.
+III. Materials and methods
+A. PROPOSED METHOD
+1. MAIN CONTRIBUTIONS
+
+The proposed method addresses a specific and critical
+medical condition, RRD, which necessitates precise
+diagnosis and accurate postoperative VA prediction. Our
+research introduces a DL-based CAD system meticulously
+tailored to RRD diagnosis and postoperative VA prediction,
+8
+
+harnessing the potential of OCT images. The uniqueness of
+the proposed research study lies in several key contributions.
+Firstly, we have painstakingly designed and developed a
+CAD system, employing cutting-edge DL techniques, to
+automate RRD identification and predict postoperative VA
+based on preoperative OCT images. This system serves as a
+valuable complement to the diagnostic expertise of medical
+professionals, offering automated and precise insights. The
+most notable accomplishment of our study lies in the
+establishment of a DL-powered framework for predicting
+postoperative VA outcomes. Importantly, this system stands
+as the first of its kind to leverage the sophisticated
+capabilities of DL techniques for precise and reliable
+prediction of VA results. This advancement holds substantial
+potential for enhancing patient care and facilitating treatment
+decisions in the realm of RRD.
+Furthermore, we extend our gratitude to the Hedi Raies
+Institute of Tunis for their invaluable support, providing OCT
+images from RRD patients. These images were meticulously
+prepared and annotated by ophthalmologists, drawing from
+postoperative patient follow-up spanning several months.
+While the application of DL in medical imaging is not novel,
+our distinct focus on RRD, coupled with the integration of
+DL for VA prediction, stands as the hallmark of our unique
+contributions to the field.
+1. THE STEPS OF THE PROPOSED METHOD
+
+The proposed method encompasses a multi-step process.
+Initially, various image enhancement techniques are applied
+to preprocess OCT images, involving image cropping to
+focus on the relevant region, image quality enhancement,
+noise reduction via a non-local mean filter, and resizing to a
+standardized 224x224 dimension.
+To address class
+imbalance, data oversampling is performed in the dataset.
+Furthermore, data augmentation techniques such as rotation,
+shear, zooming, and flipping are applied to augment the
+dataset. Subsequently, the dataset is partitioned into training
+and validation sets. Concurrently, different DL methods are
+employed for RRD diagnosis and postoperative VA
+prediction. Pre-trained CNN models, including VGG-16,
+Inception-V3, and Inception-ResNet-V2, are utilized using
+TL. Additionally, a Bilinear (BCNN) approach is applied
+using VGG-16 and Inception-V3 model combinations;
+BCNN (VGG − 16)2 and BCNN (Inception − v3)2 .
+Furthermore, a custom CNN architecture is developed and
+employed. The process for each CNN model involves two
+distinct phases: training and validation, followed by testing
+and evaluation on separate datasets. Initially, it is trained and
+evaluated for diagnosing RRD, functioning as the primary
+model. Subsequently, the identical model is reutilized for the
+subsequent training and evaluation phase, designated as the
+secondary model, with a specific emphasis on predicting
+postoperative VA. The overall methodology and workflow
+of the proposed method are depicted in Figure 1, providing
+a visual representation of the different steps involved.
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+We developed our models by utilizing an NVIDIA GeForce
+GTX 1080 Ti equipped with 11 GB of graphics memory.
+The development process involved Python 3 along with a
+range of libraries, including TensorFlow, Keras, Sci-KitImage, OpenCV, NumPy, Pandas, Matplotlib, and Sci-KitLearn, among others.
+
+B. PREPARATION OF DATASETS
+1. DATA DESCRIPTION
+
+In this study, we utilized two datasets of OCT images
+representing both diseased and non-diseased patients. The
+first dataset, obtained from a local Tunisian database,
+consists of 468 OCT images from patients diagnosed with
+RRD who sought medical attention between 2013 and 2020
+at the Ophthalmology Department of Institut Hédi Raies in
+Tunis. The labeling process for this dataset involved
+capturing OCT images after the surgery for each patient and
+categorizing them into three groups based on the
+postoperative final VA outcome, which were recorded as
+labels. These labels, representing the postoperative VA, were
+then assigned to the preoperative images to build a model
+capable of predicting the postoperative VA from preoperative
+images. The preoperative images were categorized into three
+distinct classes, namely Group A, Group B, and Group C,
+each representing different ranges of final VA outcomes.
+Group A signifies poor visual recovery, Group B denotes
+average visual recovery, and Group C indicates good visual
+recovery.
+The second dataset used in this study is the "Large Dataset of
+Labeled Optical Coherence Tomography (OCT) and Chest
+X-Ray Images" [16]. It is publicly accessible and
+encompasses a wide range of OCT and chest X-ray images
+
+8
+
+[16]. From this extensive collection, we specifically extracted
+a subset of 486 OCT images that depict normal retinas.
+These images are used in the development, which includes
+both the training and validation phases, of the proposed
+methodology. Additionally, two other datasets were
+specifically created for testing the models of the proposed
+method. The first dataset comprises 94 patients diagnosed
+with RRD and 104 individuals without the condition, and it
+was created for the initial CNN models. Furthermore, a
+second dataset, containing 20 images from Group A, 22 from
+Group B, and 23 from Group C, was created to test the
+second CNN model.
+Table 1 provides an overview of the total number of images
+used in constructing the proposed method, encompassing
+both the training and validation phases, as well as the
+subsequent testing phase.
+TABLE I.
+
+Number of
+images
+
+SUMMARY OF IMAGE DATASETS FOR PROPOSED METHOD
+DEVELOPMENT AND TESTING
+RRD
+
+Normal
+
+Group A
+
+Group B
+
+Group C
+
+562
+
+590
+
+257
+
+204
+
+72
+
+Figure 2 illustrates examples of images from each group of
+the Tunisian database, as well as an example of the normal
+class from the public database.
+2. DATA PREPARATION AND PREPROCESSING
+
+Prior to applying the CNN model, data preprocessing plays a
+crucial role in enhancing DL performance [17]. The dataset
+underwent several preprocessing steps as follows:
+Firstly, image cropping was performed to eliminate irrelevant
+parts of the OCT images, focusing solely on the pertinent
+
+FIGURE 1. Block Diagram of the Proposed Method
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+retinal region. This step is essential to optimize the analysis.
+Secondly, image enhancement techniques were employed to
+improve image quality. By increasing the overall contrast of
+the images, the impact of external factors such as light
+occlusion and patient movements, which can hinder retinal
+pathology detection, was mitigated. Next, noise reduction
+was addressed using the non-local mean filter [23]. OCT
+imaging often introduces significant noise due to coherent
+beam reflection. Reducing this noise is crucial as it can
+degrade image quality and impair the performance of
+subsequent image processing algorithms. Following noise
+reduction, the image size was standardized to 224x224 pixels
+to meet the requirements of the pre-trained CNN models
+utilized in the study.
+These preprocessing steps were consistently applied to all
+images within the datasets, both during their development
+and testing phases. In the development phase, which included
+datasets containing RRD and normal classes, as well as
+datasets with three distinct groups (Group A, Group B, and
+Group C), a random split was executed. This split allocated
+80% of the images for training purposes, while the remaining
+20% were set aside for validation. This division was essential
+to ensure the effective training of the developed CNN
+models. As For the test set, a separate and independent
+preparation process was initiated from the outset. This
+involved meticulous steps to ensure that the test dataset
+remained distinct from any influence of the training or
+validation phases.
+Tables 2 and 3 present a comprehensive breakdown of
+dataset composition, encompassing training, testing, and
+validation sets, along with the patient counts within each
+class. These tables cover both the dataset containing RRD
+and normal classes and the dataset comprising Group A, B,
+and C.
+TABLE II.
+
+TRAINING, VALIDATION, AND TESTING DATA FOR RRD
+AND NORMAL CASES
+
+Number of Training images
+Number of validation images
+Number of testing images
+
+TABLE III.
+
+RRD
+374
+94
+94
+
+Normal case
+389
+97
+104
+
+a) Representative images from Group A in the Tunisian
+database.
+
+TRAINING, VALIDATION, AND TESTING DATA FOR
+GROUPS A, B, AND C
+
+Number of Training images
+Number of validation images
+Number of testing images
+
+Group A
+190
+47
+20
+
+Group B
+146
+36
+22
+
+Group C
+39
+10
+23
+
+Data oversampling and data augmentation techniques were
+exclusively employed in the datasets used for the
+development phase of the proposed method. This choice was
+driven by the need to address data imbalances and the limited
+quantity of data, both of which could significantly affect the
+construction of robust CNN models. These techniques were
+intentionally omitted from the testing set. This decision was
+8
+
+made on the basis that the testing set serves a distinct
+purpose: evaluation rather than model construction. Thus, to
+address the class imbalance within the dataset, which initially
+comprised Group A with 237 samples, Group B with 182
+samples, and Group C with 49 samples, data oversampling
+was implemented to create a more balanced dataset. This
+approach ensured that each class within the dataset contained
+237 images, resulting in a total of 711 images. In contrast, the
+dataset containing RRD and normal cases already had a
+relatively balanced number of images in each class, making
+data oversampling unnecessary for this dataset. Moreover,
+data augmentation techniques were applied. These data
+augmentation techniques included image rotation, a shear
+factor of 0.2, zooming, as well as vertical and horizontal
+flipping. As a result of this augmentation strategy, the dataset
+size significantly expanded to a total of 5724 samples,
+compared to the initial count of 954 for the dataset containing
+RRD and normal cases, and 4266 for the dataset comprising
+Group A, B, and C, a substantial increase from the initial
+711. Extensive care was dedicated to guaranteeing the
+absence of any overlap between the training and validation
+subsets. Our approach involved taking deliberate measures to
+prevent instances where data samples generated from a single
+image would inadvertently find their way into both sets. This
+precaution was fundamental to maintaining the independence
+and integrity of the training and validation data, ensuring the
+robustness of our model development and evaluation process.
+Figure 3 presents various preprocessing steps applied to the
+OCT images.
+
+b) illustrative images showcasing Group B within the
+Tunisian database.
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+C. AN ANALYSIS OF EMPLOYED CNN
+ARCHITECTURE
+
+c) Depiction of images representing Group C as found in
+the Tunisian database.
+
+This study proposes a cascaded DL model consisting of two
+CNN models. The first model focuses on diagnosing RRD
+in OCT images, while the second model aims to classify the
+identified RRD cases based on their final VA outcomes. To
+achieve this, we harnessed the potential of TL by utilizing
+three pre-trained CNN models: VGG-16, Inception-V3, and
+Inception-ResNet-V2 [18-20]. These models were initially
+trained on the extensive ImageNet dataset, enabling them to
+learn valuable generic image features. Additionally, we
+explored two variations of BCNN architectures by
+combining the aforementioned pre-trained models: BCNN
+(VGG − 16)2 and BCNN (Inception − v3)2 [21-22].
+Furthermore, we developed a custom CNN model tailored
+specifically to address our research problem. The
+categorical_crossentropy loss metric was selected to
+optimize the models' performance, and the Adam optimizer
+with a learning rate of 0.001 was used during training. The
+proposed method underwent 50 epochs of training, with a
+batch size of 32, to achieve the optimal performance.
+
+1. TRANSFER LEARNING TECHNIQUE
+
+d) Representative image of a normal case in the public
+database.
+FIGURE 2. Visual examples from Tunisian Database Groups (Group A,
+Group B, and Group C) and Comparative Image from the Normal Class
+in the Public Database: A Visual Exploration of Data Diversity and
+Representation
+
+TL is a powerful technique in DL that leverages the
+knowledge acquired by pre-trained CNN models like
+AlexNet, VGG, ResNet, and Inception. These models are
+trained on extensive datasets and excel at extracting
+important features from images [18-22]. By employing TL,
+we can take advantage of these pre-trained models' ability
+to recognize common patterns and structures in images,
+even for different tasks. This approach saves computational
+
+FIGURE 3. Preprocessing Steps for OCT Images
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+resources and time by building upon the existing
+knowledge of the pre-trained models and adopting them for
+our specific task. By transferring the learned
+representations, we can achieve faster convergence and
+potentially improve our model's performance. In this study,
+we specifically chose three popular pre-trained CNN
+models, namely VGG-16, Inception-V3, and InceptionResNet-V2, known for their exceptional performance and
+feature extraction capabilities. These models have been pretrained on large-scale ImageNet datasets, enabling them to
+learn generic visual features that can be applied to various
+image recognition tasks. Through TL, we utilize the learned
+representations from these models to address our specific
+problem of classifying RRD in OCT images.
+Figure 4 illustrates the TL of the three pre-trained CNN
+(VGG-16, Inception-V3, and Inception-ResNet-V2) models
+
+versatility, VGG-16 has become a go-to choice for many
+researchers and practitioners when working on imagerelated problems. Nevertheless, this pre-trained CNN model
+suffers from an architectural imbalance where more
+convolution layers are sequentially stacked in the upper
+layers than in the bottom layers due to resource constraints.
+This imbalance can result in inefficiencies in memory usage
+and computation, as the bottom layers, which possess higher
+spatial resolution, dominate the available resources. To
+overcome these limitations, advanced CNN architectures
+like the pre-trained Inception model have been developed.
+These architectures adopt a different approach by initially
+reducing the spatial resolution and subsequently introducing
+convolution layers. This design choice aims to optimize
+resource allocation and improve overall performance.
+
+3. PRE-TRAINED INCEPTION-V3 ARCHITECTURE
+2. PRE-TRAINED VGG-16 ARCHITECTURE
+
+VGG16 is a widely recognized and influential CNN
+architecture in the field of DL [18]. It was introduced by the
+Visual Geometry Group (VGG) at the University of Oxford
+and has gained significant popularity and success in various
+computer vision tasks. VGG16 is characterized by its deep
+structure, consisting of 16 weight layers, which enables it to
+capture intricate features and patterns in images. With its
+uniform architecture and small convolutional filters, VGG16 achieves impressive performance in image classification
+and object recognition tasks. Due to its effectiveness and
+
+The Inception-V3 architecture, created by Google's
+research team, is a popular pre-trained CNN model
+extensively utilized in computer vision applications [19]. It
+surpasses its predecessors, Inception-V1 and V2, with its 48layer structure and a larger input size of 299x299. By
+enabling deeper networks without a disproportionate
+increase in parameters, Inception-V3 effectively balances
+complexity and depth. This pre-trained CNN architecture
+excels at extracting features from images while
+simultaneously minimizing computational complexity. Its
+key characteristic is the use of inception modules, which
+employ parallel convolutional layers with different filter
+
+FIGURE 4. Transfer Learning of pre-trained CNN Models (VGG16, Inception-V3, InceptionResNet-V2)
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+sizes to capture information at multiple scales and
+abstraction levels simultaneously. This allows the model to
+learn rich representations by capturing both low-level and
+high-level features. Inception-V3 also incorporates
+techniques like factorized convolutions to reduce parameters
+and computations while maintaining efficiency. It utilizes
+auxiliary classifiers to encourage the learning of
+discriminative features and overcome the vanishing gradient
+problem.
+
+4.
+PRE-TRAINED
+ARCHITECTURE
+
+INCEPTION-RESNET-V2
+
+The Inception-ResNet-V2 architecture is a powerful pretrained CNN model that combines the strengths of the
+Inception and ResNet architectures [20]. It was developed
+by the Google Brain team as an extension of the original
+Inception and ResNet models. Inception-ResNet-V2 is
+renowned for its exceptional performance in image
+recognition tasks, demonstrating state-of-the-art results on
+various benchmark datasets. The architecture incorporates
+residual connections, which help alleviate the vanishing
+gradient problem and enable efficient training of very deep
+networks. It also utilizes inception modules, similar to
+Inception-V3, to capture multi-scale features and enhance
+the model's ability to extract rich representations. In
+addition, Inception-ResNet-V2 employs batch normalization
+and factorized convolutions to improve computational
+efficiency while maintaining high accuracy.
+
+5. BILINEAR CNN MODEL DESCRIPTION
+
+The Bilinear CNN (BCNN) architecture has gained
+significant attention in computer vision for its ability to
+capture spatial interactions between features, making it
+effective in tasks like image classification and object
+
+recognition [21-22]. BCNN utilizes bilinear pooling as a
+key component, combining the output vectors of two
+separate CNN architectures through an outer product
+function. This pooling operation captures pairwise feature
+interactions, enabling BCNN to encode higher-order feature
+correlations and extract fine-grained details and complex
+relationships in images. By leveraging both low-level and
+high-level features simultaneously, BCNN models enhance
+their discriminative power. These BCNN architectures
+provide a robust framework for extracting informative
+features from images and have the potential to improve our
+classification task. The bilinear model in BCNN is defined
+by the formula, M = 𝐹 (𝑓𝐴 , 𝑓𝐵 , 𝑃, 𝐶) where 𝑓𝐴 and 𝑓𝐵 are
+feature extractors, 𝑃 is the pooling function, and 𝐶 is the
+classification function. Bilinear features are obtained by
+performing the outer product of 𝑓𝐴 and 𝑓𝐵 , followed by
+pooling and normalization steps. The bilinear form allows
+for end-to-end training and simplifies gradient computation,
+making it an effective approach.
+In this study, we explore two BCNN variants: BCNN
+(VGG − 16)2 and BCNN (Inception − v3)2 , which
+combine pre-trained VGG16 and Inception-v3 models
+using bilinear pooling. These variants involve the
+combination of pre-trained VGG16 and Inception-v3
+models using the bilinear pooling technique. By leveraging
+the complementary strengths of these well-established CNN
+architectures, we aim to harness the power of their learned
+representations and the rich spatial interactions captured by
+bilinear pooling. The BCNN (VGG − 16)2 variant merges
+two instances of the VGG16 model, while the BCNN
+(Inception − v3)2 variant combines two instances of the
+Inception-v3 model. Through this exploration, we seek to
+leverage the benefits of both architectures and exploit their
+synergistic effects in improving the performance of our
+classification task.
+
+FIGURE 5. Bilinear Pooling CNN Architecture
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+Figure 5 presents the BCNN architecture employed in this
+study.
+6. CUSTOM CNN ARCHITECTURE DESCRIPTION
+
+Given the complexity of the BCNN model, we have
+developed a custom CNN architecture from scratch. This
+custom CNN model is specifically developed with a
+reduced number of layers compared to pre-trained CNN
+models. Our goal is to simplify the architecture while
+preserving its effectiveness. The constructed CNN
+architecture consists of two blocks, each comprising a
+convolutional layer with 32 filters and a kernel size of 3x3.
+Following the convolutional layer, a ReLU activation
+function is applied to introduce non-linearity. Additionally,
+after each convolutional layer, we have incorporated a
+MaxPooling layer with a kernel size of 2x2. This pooling
+layer helps in downsampling the spatial dimensions of the
+input. Following the block structure, a Flatten layer was
+included to convert the output into a one-dimensional
+tensor. Subsequently, two dense layers are employed. The
+first dense layer consists of 128 nodes and employs the
+ReLU activation function to introduce non-linearity.
+Finally, the second dense layer is composed of 2 nodes, and
+the Softmax activation function is applied for the purpose
+of classification. Figure 6 presents the custom CNN
+Architecture employed in this study.
+
+TABLE IV.
+
+Models
+VGG16
+Inception-V3
+Inception-ResNet-V2
+BCNN(VGG − 16)2
+BCNN(Inception − V3)2
+Custom CNN model
+
+IV. RESULTS
+
+During this study, we have developed two cascaded models
+using DL techniques. The first model was specifically
+designed to detect RRD, while the second model focused
+on the prediction of postoperative VA. Each model was
+trained and evaluated using appropriate datasets.
+These two models were developed using six CNN models:
+pre-trained VGG-16, pre-trained Inception-V3, pre-trained
+Inception-ResNet-V2, BCNN (VGG − 16)2 , BCNN
+(Inception − V3)2 , and a custom CNN model.
+The performance and results of all six CNN models, are
+presented in Table 4 and Table 5. These tables provide an
+overview of the models' accuracy, precision, recall,
+sensitivity, specificity, and AUC.
+The AUC represents the model's ability to make accurate
+classification decisions across various thresholds, without
+delving into the specific probability values. However, in the
+context of this study, our central emphasis is on the
+classification outcomes rather than the specific
+probabilities. Therefore, we have opted to prioritize the
+selection of the highest AUC in this study.
+To comprehensively assess performance, we combined the
+results of two models by multiplication: the classification of
+RRD and the prediction of VA. This approach allowed us to
+obtain a more precise measure of the overall system's
+reliability. The collective performance of the various CNN
+models is presented in Table 6.
+
+RESULTS OF VARIOUS CNN MODELS FOR RRD DIAGNOSIS
+
+Accuracy
+97.32%
+96.79%
+90.90%
+99.87%
+98.94%
+98.93%
+
+Precision
+97.32%
+96.97%
+90.90%
+99.87%
+98.94%
+98.93%
+
+Recall
+97.32%
+96.97%
+90.90%
+99.87%
+98.94%
+98.93%
+
+AUC
+97.90%
+99.76%
+91.29%
+99.99%
+99.54%
+99.76%
+
+Sensitivty
+100%
+91.35%
+97.83%
+100%
+100%
+89.19%
+
+Specificity
+95.19%
+95.74%
+84.21%
+95.19%
+95.19%
+100%
+
+FIGURE 6. Custom CNN Architecture
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+TABLE V.
+Models
+VGG16
+Inception-V3
+Inception-ResNet-V2
+BCNN(VGG − 16)2
+BCNN(Inception − V3)2
+Custom CNN model
+
+TABLE VI.
+Models
+VGG16
+Inception-V3
+Inception-ResNet-V2
+BCNN(VGG − 16)2
+BCNN(Inception − V3)2
+Custom CNN model
+
+RESULTS OF VARIOUS CNN MODELS FOR VA PREDICTION
+Accuracy
+88.37%
+90.76%
+91.53%
+98.06%
+96.40%
+92.30%
+
+Precision
+88.37%
+90.76%
+92.46%
+98.58%
+96.48%
+92.30%
+
+Recall
+88.37%
+90.76%
+92.46%
+98.58%
+96.35%
+92.30%
+
+AUC
+91.27%
+98.08%
+97.38%
+98.58%
+98.85%
+97.99%
+
+Sensitivty
+77.36%
+93.99%
+90.95%
+86.25%
+85.02%
+92.55%
+
+Specificity
+87.31%
+96.83%
+95.16%
+92.6%
+91.70%
+96.07%
+
+GLOBAL PERFORMANCE EVALUATION OF DIFFERENT CNN MODELS
+Accuracy
+86.00%
+87.85%
+83.20%
+97.93%
+95.38%
+91.31%
+
+Precision
+86.00%
+88.01%
+84.05%
+98.45%
+95.45%
+91.31%
+
+Recall
+86.00%
+88.01%
+84.05%
+98.45%
+95.33%
+91.31%
+
+AUC
+89.35%
+97.84%
+88.90%
+98.57%
+98.39%
+97.75%
+
+Sensitivty
+77.36%
+85.86%
+88.98%
+86.25%
+85.02%
+82.54%
+
+Specificity
+83.11%
+92.70%
+80.13%
+88.14%
+87.29%
+96.07%
+
+Figures 7 to 16 offer insights into the performance of two
+CNN models through the presentation of confusion matrices,
+learning curves for key metrics such as Accuracy, Precision,
+Recall, and AUC. These figures specifically highlight the
+performance of two CNN models: BCNN (VGG − 16)2
+trained on a dataset containing RRD and normal cases, and
+BCNN (Inception − V3)2 trained on a dataset comprising
+data from Group A, Group B, and Group C.
+
+FIGURE 8. Training and validation curves for accuracy metric: BCNN
+(𝐕𝐆𝐆 − 𝟏𝟔)𝟐 Model on RRD and Normal Cases Dataset
+
+FIGURE 7. Confusion Matrix: BCNN (𝐕𝐆𝐆 − 𝟏𝟔)𝟐 Model on RRD and
+Normal Cases Dataset
+FIGURE 9. Training and validation curves for precision metric: BCNN
+(𝐕𝐆𝐆 − 𝟏𝟔)𝟐 Model on RRD and Normal Cases Dataset
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+FIGURE 10. Training and validation curves for recall metric: BCNN
+(𝐕𝐆𝐆 − 𝟏𝟔)𝟐 Model on RRD and Normal Cases Dataset
+
+FIGURE 11. Training and validation curves for AUC metric: BCNN
+(𝐕𝐆𝐆 − 𝟏𝟔)𝟐 Model on RRD and Normal Cases Dataset
+
+FIGURE 12. Confusion Matrix: BCNN (𝐈𝐧𝐜𝐞𝐩𝐭𝐢𝐨𝐧 − 𝐕𝟑)𝟐 Model on Group
+A, Group B, and Group
+
+8
+
+FIGURE 13. Training and validation curves for accuracy metric: BCNN
+(𝐈𝐧𝐜𝐞𝐩𝐭𝐢𝐨𝐧 − 𝐕𝟑)𝟐 Model on Group A, Group B, and Group
+
+FIGURE 14. Training and validation curves for precision metric: BCNN
+(𝐈𝐧𝐜𝐞𝐩𝐭𝐢𝐨𝐧 − 𝐕𝟑)𝟐 Model on Group A, Group B, and Group
+
+FIGURE 15. Training and validation curves for recall metric: BCNN
+(𝐈𝐧𝐜𝐞𝐩𝐭𝐢𝐨𝐧 − 𝐕𝟑)𝟐 Model on Group A, Group B, and Group
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+FIGURE 16. Training and validation curves for AUC metric: BCNN
+(𝐈𝐧𝐜𝐞𝐩𝐭𝐢𝐨𝐧 − 𝐕𝟑)𝟐 Model on Group A, Group B, and Group
+
+V. DISCUSSION
+
+In this study, we have developed CNN cascaded model
+using DL. The first model was specifically designed for the
+identification of RRD, while the second model is dedicated
+to predicting the postoperative VA. The results of our
+analysis revealed notable insights. For RRD diagnosis,
+BCNN (VGG − 16)2 emerged as the top-performing model,
+achieving an accuracy of 99.87% and an outstanding AUC
+of 99.99%. Inception-V3 also exhibited strong performance
+with an accuracy of 96.79% and an AUC of 99.76%. Other
+models, including VGG16, Inception-ResNet-V2, BCNN
+(Inception − V3)2 , and a custom CNN architecture,
+demonstrated competitive results, highlighting their
+potential in RRD diagnosis. Shifting to VA prediction,
+BCNN (VGG − 16)2 continued to excel, delivering an
+accuracy of 98.06% and an impressive AUC of 98.58%.
+Inception-V3 displayed robust performance with an
+accuracy of 90.76% and an AUC of 98.08%, establishing its
+effectiveness in VA prediction. Inception-ResNet-V2 and
+the custom CNN model also showed promise in this task. In
+a comprehensive evaluation spanning both RRD diagnosis
+and VA prediction, BCNN (VGG − 16)2 remained a
+standout model, with an overall accuracy of 97.93% and an
+AUC of 98.57%. Inception-V3 maintained strong
+performance with an overall accuracy of 87.85% and an
+AUC of 97.84%. Other models consistently delivered
+competitive results, underscoring their versatility in
+addressing both tasks. These findings illuminate the
+capabilities of CNN models in diagnosing RRD and
+predicting VA, with BCNN (VGG − 16)2 standing out as a
+high-performing and reliable choice across both domains.
+These diverse CNN model results were attained through a
+meticulous process involving training, validation, and
+testing on both a public dataset and a carefully curated local
+database. The local database was carefully prepared and
+labeled by physicians based on post-operative patient
+follow-up over several months. Specifically, the A, B, and
+C groups were established by ophthalmologists according
+to post-operative visual acuity levels, with specific
+thresholds for each group. Group A includes individuals
+8
+
+with visual acuity ranging from 2 to 1 LogMAR. Group B
+comprises individuals with visual acuity ranging from 0.9
+to 0.4 LogMAR. Group C consists of individuals with
+visual acuity ranging from 0.3 to 0 LogMAR. Furthermore,
+both the local and public databases underwent the same
+preprocessing process. This consistency in data
+preprocessing ensures data comparability and consistent
+construction of the DL model. Regardless of potential
+differences in the populations of the two databases, the
+primary goal of this approach is to develop a robust model.
+In other words, the emphasis is on creating a model capable
+of generalizing and providing accurate predictions
+regardless of the original dataset.
+The outstanding performance achieved by the various CNN
+architectures employed in our methodology results from the
+combination of several crucial factors. This approach
+encompasses various elements, including the adoption of
+cutting-edge CNN models alongside our meticulously
+tailored custom CNN model, precisely configured to align
+with the specific task requirements. Additionally, the
+preprocessing steps for image enhancement are
+thoughtfully selected, ensuring that the input data provided
+to the models is not only of optimal quality but also of an
+appropriate quantity. Lastly, the utilization of a diverse
+dataset, encompassing samples from a variety of sources
+and exhibiting a broad spectrum of characteristics, plays a
+pivotal role in augmenting the variability within the training
+data. This diversity strengthens the model's ability to
+effectively handle diverse situations, thereby solidifying its
+exceptional performance.
+There is a certain degree of redundancy in the evaluation
+metrics among the different CNN models deployed for two
+distinct tasks: diagnosing RRD and predicting postoperative
+VA. This redundancy can be attributed to the dataset's
+meticulous structuring and equilibrium, resulting in
+consistent model performance across a range of metrics.
+The balanced nature of the dataset, where class samples are
+comparably distributed, often leads to consistent scores in
+accuracy, precision, recall, specificity, sensitivity, and AUC
+across various models. Moreover, the chosen models, such
+as VGG16, Inception-V3, and BCNN, are established
+architectures recognized for their strong performance in
+diverse tasks. Leveraging their inherent design and
+capabilities contributes to the uniformity of outcomes
+across distinct evaluation metrics, particularly when applied
+to a well-processed and balanced dataset.
+Several DL-based methods have been proposed in the
+literature for diagnosing RD. However, direct comparison
+with these models on the same database is challenging due
+to the use of different image modalities in these studies.
+Nevertheless, it is evident that the proposed method has
+achieved commendable performance. Table 7 presents a
+comparison between the proposed method and selected
+previous methods from the literature, showcasing the
+effectiveness of the proposed approach.
+Despite the notable findings and robustness of the present
+research, it is essential to address the limitations associated
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+with dataset size and the potential of combining DL with
+Hand-Crafted ML methods. The limited size of the database
+is a prevalent challenge in OCT imaging research due to
+constraints in image availability and data collection
+complexities. Additionally, it is crucial to acknowledge that
+DL methodologies may not encompass all pertinent image
+features. This emphasizes the continual requirement for
+integrating Hand-Crafted ML methods to complement and
+augment the performance of deep learning approaches.
+Moreover, the application of the proposed method should
+be used judiciously, considering the specific clinical
+context. It's important to note that RD is a complex
+condition consisting of various subtypes, each with its
+unique characteristics and clinical implications. However,
+it's crucial to underscore that the proposed method is
+primarily tailored for the accurate diagnosis of RRD.
+Consequently, there exists a potential risk of
+misclassification when dealing with other forms of RD.
+Thus, misidentifying non-RRD abnormal cases as RRD
+could result in significant clinical consequences, potentially
+leading to misguided treatment decisions.
+
+models, the proposed CAD system demonstrates high
+accuracy in diagnosing RRD and predicting VA. The
+experimental results validate the effectiveness of the
+system, achieving a diagnosis accuracy of 99.87% for RRD
+and a VA prediction accuracy of 98.06% using the BCNN
+(VGG − 16)2 model.
+The findings of this study underscore the promising
+prospects of DL-based approaches in improving patient
+care and treatment decisions for RRD, including
+postoperative VA prediction. Future research should focus
+on exploring alternative DL models to enhance
+performance metrics and investigating hybrid approaches
+that integrate DL with Hand-Crafted ML methods.
+Moreover, due to the scarcity of limited labeled data and
+the absence of publicly shared datasets, coupled with the
+paramount importance of generalizability in any medical
+study, we intend to conduct further validation of the
+proposed model using data sourced from various
+independent medical centers. This approach will enable us
+to assess the robustness of our model and affirm its utility
+across a range of clinical contexts.
+
+TABLE VII.
+
+REFERENCES
+
+COMPARISON OF THE PROPOSED METHOD WITH
+PREVIOUS STUDIES
+
+Study
+Hideharu et
+al. [10]
+
+DL model
+Custom CNN
+architecture
+
+Zhongwen et
+al. [11]
+
+Inception-ResNetV2 architecture
+
+Chenxi
+Zhang et al.
+[12]
+
+Sonal Yadav
+et al. [13]
+
+Proposed
+method
+(RRD
+diagnosis)
+Proposed
+method (VA
+prediction)
+
+Dataset
+831
+UWF
+images
+11087
+UWF
+images
+
+Accuracy %
+Sensitivity: 97.6%
+Specificity: 96.5%
+AUC: 98.8%
+Sensitivity: 96.1%
+Specificity: 99.6%
+AUC: 98.9%
+
+seResNext50
+architecture
+
+911
+Optos
+images
+
+Accuracy: 79.8%.
+Sensitivity: 87.5%
+Specificity: 100%
+AUC: 100%
+
+AlexNet,
+InceptionV3,
+GoogleNet, VGG19,
+DenseNet, and
+ResNet50
+architectures
+BCNN(VGG − 16)2
+
+1227
+color
+fundus
+images
+
+Accuracy: 99.50%
+Sensitivity: 99.00%
+Specificity: 99.99%
+Precision: 99.99%
+F1 score: 99.49%
+
+953 OCT
+images
+
+Accuracy: 99.87%
+Precision: 99.87%
+Recall: 99.87%
+AUC: 99.99%
+Accuracy: 98.06%
+Precision: 98.58%
+Recall: 98.58%
+AUC: 98.58%
+
+BCNN(VGG − 16)2
+
+467 OCT
+images
+
+VI. CONCLUSION
+
+This study makes a significant contribution to the
+development of a CAD system using DL techniques for the
+automatic RRD diagnosis and the prediction of
+postoperative VA using OCT images. By utilizing various
+preprocessing steps and implementing different CNN
+8
+
+L. Hui Wen, O. Chui Ping, S. Silvia, B. Prabal Datta, M. Filippo, A.
+U Rajendra, “Application of explainable artificial intelligence for
+healthcare: A systematic review of the last decade (2011–2022),”
+Computer Methods and Programs in Biomedicine, pp. 107161, 2022.
+[2] P. Kiran Kumar, A. Jaya Prakash, N. Bala Chakravarthy, T. Ryszard,
+A. U Rajendra, H. Mohamed et al., “Application of Kronecker
+convolutions in deep learning technique for automated detection of
+kidney stones with coronal CT images,” Information Sciences, vol.
+640, pp. 119005, 2023.
+[3] U. Raghavendra, A. Gudigar, A. Paul, T. S. Goutham, M. A.
+Inamdar, A. Hegde, et al. “Brain tumor detection and screening using
+artificial intelligence techniques: Current trends and future
+perspectives,” Computers in Biology and Medicine, pp. 107063,
+2023.
+[4] J. Feres, A. Noura, KH. Nawres, “Automatic classification of
+ultrasound thyroids images using vision transformers and generative
+adversarial networks,” Scientific African, vol. 20, pp. e01679, 2023.
+[5] C. Chensi, L. Feng, T. Hai, D. Song, W. Shu, W. Li et al., “Deep
+learning and its applications in biomedicine,” Genomics, proteomics
+& bioinformatics, vol. 16, no 1, pp. 17-32, 2018.
+[6] Y. Sonal, R. Navin Kumar, SH. Nishant, R. Murugan, “Classification
+of Retinal Detachment using Deep Learning through Retinal Fundus
+Images,” IEEE India Council International Subsections Conference
+(INDISCON). pp. 1-6, 2022.
+[7] S. Ziyaad Nabil, A. Eleftherios I, I. Danilo, S. David, S. Teresa
+“Rhegmatogenous retinal detachment: a review of current practice in
+diagnosis and management,” BMJ open ophthalmology, vol. 5, no 1,
+pp. e000474, 2020.
+[8] M. Hamza Qureshi, H. W. Steel David, “Retinal detachment
+following cataract phacoemulsification—a review of the literature,”
+Eye, vol. 34, no 4, pp. 616-631, 2020.
+[9] CH. Evita Evangelia, S. Panagiotis, B. Georgios, CH. Eleni, S.
+Maria, “Association of OCT-A characteristics with postoperative
+visual acuity after rhegmatogenous retinal detachment surgery: a
+review of the literature,” International Ophthalmology, vol. 41, pp.
+2283-2292, 2021.
+[10] O. Hideharu, T. Hitoshi, E. Hiroki, I. Naofumi, “Accuracy of deep
+learning, a machine-learning technology, using ultra–wide-field
+fundus ophthalmoscopy for detecting rhegmatogenous retinal
+detachment,” Scientific reports, vol. 7, no 1, pp. 9425, 2017.
+[11] L. Zhongwen, G. Chong, N. Danyao, L. Duoru, Z. Yi, Ch. Chuan, et
+al., “Deep learning for detecting retinal detachment and discerning
+[1]
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+This article has been accepted for publication in IEEE Access. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/ACCESS.2023.3338362
+
+macular
+status
+using
+ultra-widefield
+fundus
+images,”
+Communications biology, vol. 3, no 1, pp. 15, 2020.
+[12] Z. Chenxi, H. Feng, L. Bing, H. Wang, X. He, L. Xirong, et al.,
+“Development of a deep-learning system for detection of lattice
+degeneration, retinal breaks, and retinal detachment in tessellated
+eyes using ultra-wide-field fundus images: a pilot study,” Graefe's
+Archive for Clinical and Experimental Ophthalmology, pp. 1-10,
+2021.
+[13] Y. Sonal, D. Sanjoy, R. Murugan, S. Dutta Roy, M. Agrawal, T.
+Goel, “Performance analysis of deep neural networks through
+transfer learning in retinal detachment diagnosis using fundus
+images,” Sādhanā, vol. 47, no 2, pp. 49, 2022.
+[14] L. Feng, CH. Hua, L. Zheng, X. Zhang, M. Jiang, Zh. Wu, et al.,
+“Deep learning-based automated detection of retinal diseases using
+optical coherence tomography images,” Biomedical optics express,
+vol. 10, no 12, pp. 6204-6226, 2019.
+[15] CH. Amit, A. Savita, U. Shabana, N. Pathak, A. Lay-Ekuakille, N.
+Sharma, “A deep learning-based framework for retinal disease
+classification,” Healthcare. vol. 11, no. 2, pp. 212, 2023.
+[16] M. Paul, “Retinal OCT Images (optical coherence tomography),”
+Kaggle dataset, 2018.
+[17] A. Khabir Uddin, I. Manowarul, U. Ashraf, A. Akhter, B.
+Kumar Paul, M. Abu Yousuf et al., “A deep learning approach using
+effective preprocessing techniques to detect COVID-19 from chest
+CT-scan and X-ray images,” Computers in biology and medicine,
+vol. 139, pp. 105014, 2021.
+[18] K. Taranjit, G. Tapan Kumar, “Automated brain image classification
+based on VGG-16 and transfer learning,” International Conference
+on Information Technology (ICIT). IEEE, pp. 94-98, 2019.
+[19] CH. Vijaya, G. Paramita, T. Kuldeep, S. Mishra, “Automatic
+detection of cowpea leaves using image processing and inception-V3
+model of deep learning,” 6th International Conference on Signal
+Processing, Computing and Control (ISPCC). IEEE, pp. 314-318,
+2021.
+[20] D. Ahmet et Y. Feyza, “Inception-ResNet-v2 with LeakyReLU and
+averagepooling for more reliable and accurate classification of chest
+X-ray images,” Medical Technologies Congress (TIPTEKNO).
+IEEE, pp. 1-4, 2020.
+[21] A. Noura, KH. Hajer, M. Olfa, KH. Nawres, “Bilinear Pooling for
+Thyroid Nodule Classification in Ultrasound Imaging,” Arabian
+Journal for Science and Engineering, pp. 1-11, 2023.
+[22] M. Rekka, KH. Nawres, N. Henda, H. Saoussen, “A bilinear
+convolutional neural network for lung nodules classification on CT
+images,” International Journal of Computer Assisted Radiology and
+Surgery, vol. 16, pp. 91-101, 2021.
+[23] R. Fabrice, K. Claude, Z. Matthias, “Adaptive rendering with nonlocal means filtering,” ACM Transactions on Graphics (TOG), vol.
+31, no 6, pp. 1-11, 2012.
+
+HEDI TABIA received the MS degree in computer
+science from the INSA of Rouen Public school of
+engineers, France, in 2008, and the PhD degree in
+PLACE
+computer science from the University of Lille, in
+PHOTO
+2011. From October 2011 to August 2012, he held a
+HERE
+postdoctoral research associate position at the IEF
+laboratory (University of Paris-sud). During 20122019, he was an associate professor at the ENSEA.
+Since September 2019 he is a professor with
+Université Paris Saclay.
+
+KHLIFA NAWRES Engineer and PHD of the
+National School of Engineers of Tunis ENIT. She
+is currently Professor at the Higher Institute of
+Medical Technologies of Tunis- Tunis El Manar
+University. She coordinates the TIMEd team:
+Medical Image Processing of the BTM
+Laboratory. Her research work focuses on
+Artificial Intelligence and CAD design in medical
+imaging, emotion recognition, gaze tracking.
+
+KHACHNAOUI HAJER obtained the B.S. degree
+in 2016 from the Higher Institute of Medical
+Technologies of Tunis- Tunis El Manar University.
+PLACE
+She further pursued her studies and earned her M.S.
+PHOTO
+degrees in 'Medical Image Processing' from the same
+HERE
+university in 2018. Currently, she is a PhD student at
+the Department of Medical Image Processing, BTM
+laboratory, which is also affiliated with Tunis- Tunis
+El Manar University. Her research interests lie in the
+fields of medical image processing and Artificial Intelligence.
+
+8
+
+VOLUME XX, 2017
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License. For more information, see https://creativecommons.org/licenses/by-nc-nd/4
+
+

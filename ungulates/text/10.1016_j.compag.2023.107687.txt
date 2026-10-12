@@ -1,0 +1,1443 @@
+A review of three-dimensional computer vision used in precision livestock farming for cattle growth management
+Yaowu Wang, C.A. Mücher, Wensheng Wang, Leifeng Guo, Lammert Kooistra (2023). Computers and Electronics in Agriculture. https://research.wur.nl/en/publications/a-review-of-three-dimensional-computer-vision-used-in-precision-l. doi:10.1016/j.compag.2023.107687. Licence: cc-by. Text from pdf.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+Contents lists available at ScienceDirect
+
+Computers and Electronics in Agriculture
+journal homepage: www.elsevier.com/locate/compag
+
+Review
+
+A review of three-dimensional computer vision used in precision livestock
+farming for cattle growth management
+Yaowu Wang a, d, Sander Mücher b, Wensheng Wang c, d, *, Leifeng Guo d, Lammert Kooistra a
+a
+
+Laboratory of Geo-information Science and Remote Sensing, Wageningen University & Research, the Netherlands
+Wageningen Environmental Research, Wageningen University and Research, the Netherlands
+c
+Information Center, Ministry of Agriculture and Rural Affairs, Beijing, China
+d
+Agricultural Information Institute, Chinese Academy of Agriculture Sciences, Beijing, China
+b
+
+A R T I C L E I N F O
+
+A B S T R A C T
+
+Keywords:
+LiDAR
+Point clouds
+Alignment
+Unmanned aerial vehicles
+Cattle traffic
+
+Within precision livestock farming, three-dimensional computer vision can improve growth monitoring in cattle
+management. To investigate the implementation of three-dimensional computer vision in cattle growth man­
+agement, this systematic review, adhering to the PRISMA 2020 statement guideline, collected 47 eligible studies
+from the Web of Science database. Studies were analysed separately based on the incrementally encoded titles,
+and their outcomes were extracted and recorded in a pre-designed form. The survey of outcomes was conducted
+by using pivot analysis. The results showed that the body measurements assessment task contributed to other
+kinds of three-dimensional cattle growth tasks. Using Kinect sensors fixed at nadirs to obtain dorsal features was
+the most frequently applied approach in three-dimensional data acquisition. For three-dimensional data preprocessing, while empty scene subtraction was the most effective approach to removing background from
+point clouds, clustering and conditional filters were the most adopted functions to eliminate noise. In the dis­
+cussion, this review provides actual insights into the knowledge of three-dimensional computer vision in cattle
+growth management, synthesises common considerations within data acquisition, forms a general procedure of
+data pre-processing, considers the potential of building an automatic and successive three-dimensional multi-task
+cattle growth monitoring management system, and discusses factors affecting the performance of models for
+cattle growth management. This review inspires the practice of future three-dimensional computer vision
+research in cattle growth management and could be extended to other livestock or wild animals.
+
+1. Introduction
+For cattle growth management, the key is regular and adequate
+monitoring of body health indices, such as body measurements, body
+weight (BW), body condition score (BCS), and lameness. Body mea­
+surements, also named morphological traits or zoometric measure­
+ments, are essential to support cattle management decisions on a herd’s
+breeding, nutrition status or daily weight gain. For example, hip height
+related to age is used to assess beef cattle’s maturity type (Walmsley
+et al., 2010). BW is one of the most important parameters for monitoring
+cattle health. For example, it can detect or predict disease outbreaks by
+monitoring unexpected changes; based on detection or prediction,
+farmers or herders can take necessary actions (Kashiha et al., 2014). BCS
+assess cattle’s energy reserve or nutritional status by using a five-point
+scale ranging from the minimum for a thin animal to the maximum
+
+for a fat animal in increments of 0.25 or 0.5 (Hansen et al., 2018; Zin
+et al., 2020). BCS informs feeding strategy and provides an opportunity
+to fine-tune nutrition (Zin et al., 2020), improving cattle’s health.
+Lameness is reflected as impaired locomotion in cattle legs (SchlageterTello et al., 2018), and it is one of the most critical health and welfare
+issues (Bruijnis et al., 2012). Detection of lameness guides an appro­
+priate treatment strategy. While the trend of herd sizes per farm is
+increasing (Schlageter-Tello et al., 2018), attention must be paid to in­
+dividuals accurately, efficiently, and humanely.
+In modern intensive farming, the traditional cattle growth manage­
+ment way is defective. Humans conventionally do it with direct-contact
+tools or in-situ observations, but humans’ observations have limitations.
+First, the practices of the traditional way are stressful for both the ani­
+mals and the people themselves. For example, the presence of humans
+often affects the cow’s behaviour (Jabbar et al., 2017) because cattle can
+
+* Corresponding author at: Information Center, Ministry of Agriculture and Rural Affairs, Beijing, China.
+E-mail address: wangwensheng@caas.cn (W. Wang).
+https://doi.org/10.1016/j.compag.2023.107687
+Received 19 September 2022; Received in revised form 9 December 2022; Accepted 28 January 2023
+Available online 9 February 2023
+0168-1699/© 2023 The Author(s). Published by Elsevier B.V. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+suffer stress and welfare issues from disturbance, while during manual
+operations, people face the risk of injury (Guo et al., 2017). Second, the
+results are affected by the assessors. When humans manually carry out
+cattle management, experienced operators tend to decide with highquality results (Wilkins et al., 2015), but their observations are not
+quantified, and they are poor at detecting small or subtle changes
+(Hansen et al., 2018; O’Leary et al., 2020). However, these changes are
+more informative and helpful for individuals, such as in the early
+detection of lameness. Last, other specific disadvantages of the con­
+ventional methods can be identified. For body measurements, cattle are
+measured manually by trained operators using a variety of instruments
+such as the Aparicio measuring stick (Gaudioso et al., 2014), Lydtin stick
+(Ruchay et al., 2020), tape measure, or hipometer (Martins et al., 2020;
+Kamchen et al., 2021). These measurements require temperamental
+cattle to be stillstand through cattle crushes or containment boxes,
+which is against animal welfare. For BW, cattle are scaled using indus­
+trial scales placed in designated locations. The scales need a large budget
+to purchase, a high cost to maintain in the harsh condition covered with
+manure and urine (Dickinson et al., 2013), and skilled labourers to
+operate. For BCS, assessors evaluate cattle following a qualitative
+manual body condition scoring protocol. The assessors must be familiar
+with skeletal structures and fat reserves to support them in visually
+assessing cow body shape and palpitating defined anatomical regions
+(O’Leary et al., 2020; Zin et al., 2020). For lameness, observers visualise
+cattle using locomotion scoring (Flower and Weary, 2006). The visual­
+isation procedure combines several gaits and posture characteristics
+such as back arch, gait asymmetry, and weight-bearing into one overall
+locomotion score (LS) (Van Hertem et al., 2016; Schlageter-Tello et al.,
+2018). In summary, traditional manual methods are labour-intensive,
+labour-limited, time-consuming, and subjective (Wilkins et al., 2015),
+which means that limited attention can be paid to individuals.
+For the innovation in traditional methods, computer vision (CV) in
+precision livestock farming (PLF) contributes significantly. It refers to
+continuous directly, remote, and non-invasive monitoring or observa­
+tion of identified individuals’ health and welfare in real-time for farmers
+by providing meaningful and understandable information (Harrison
+et al., 2007; Berckmans, 2017; Neethirajan, 2017). The information
+concerns refined data, mainly created from sensors and analysed by
+models. CV is innovative in combining sensors and models. It shapes a
+non-contact way of minimising humans’ intervention to conduct cattle
+management (Viazzi et al., 2014; Van Hertem et al., 2016; Ruchay et al.,
+2020) because sensors can replace the observations of human eyes. CV
+includes two-dimensional (2D) and three-dimensional (3D) vision sys­
+tems (Song et al., 2019). 2D CV has already contributed to improving
+cattle management practices in PLF. For example, it has been explored to
+measure morphological characteristics to estimate live BW (Tasdemir
+et al., 2011). However, 2D CV has inherited limitations on anatomical
+landmark identification and cattle segmentation. Anatomical landmarks
+scatter on the surface of a cow’s body and determine morphological
+traits, which are critical for cattle growth management. Some landmarks
+are hard to identify by 2D CV because they distribute on bodies threedimensionally, and changes in perspective and distance can influence
+the capture of landmarks. Typically, 2D CV approaches need to segment
+individual cattle’s data before landmark identification, but the seg­
+mentation is impeded by different light conditions, backgrounds, and
+other factors (Salau et al., 2015) where the data are images. In the last
+decade, 3D CV has increasingly contributed to cattle management in
+PLF. For example, Cominotte et al. (2020) used a 3D CV system to
+predict BW in beef cattle. Inexpensive 3D cameras are referred to as
+alternative tools for the 2D’s as 3D CV provides the extra valuable third
+dimension, “the depth”, which is the distance between sensors and the
+targets and is represented mainly in the form of point clouds. It over­
+comes the problems mentioned in the 2D CV.
+Several reviews and basic research on 3D CV in cattle or livestock
+management have recently been published; still, they are not enough to
+describe and summarize the knowledge of conducting 3D cattle growth
+
+management. Nasirahmadi et al. (2017) reviewed image processing
+techniques based on 2D and 3D CV for automated monitoring of cattle’
+and pigs’ characteristics and behaviours in specific classified applica­
+tions. This study illustrates that with accurate information from 3D CV
+systems, there are further possibilities for improvement for these ap­
+plications, but acquiring accurate 3D information is undiscussed. Wang
+et al. (2021) compared machine learning applications based on CV for
+livestock BW prediction. This shows the possibility of fully automating
+BW prediction from digital images when introducing the machine and
+deep learning. However, other methods such as linear models are also
+used, whose performance could also be compared. Salau et al. (2016a)
+implemented an elaborate extrinsic calibration through an additional
+3D calibration object for six-Microsoft Kinect v1 camera frameworks.
+This primary step of acquiring raw data fundamentally influenced later
+research on collecting data. For example, Salau et al. (2020) determined
+the body parts of cows, including the head, rump, back, legs, and udder;
+Salau et al. (2017) recognised the udder and rear leg of cows and
+calculated morphological characteristics. Salau et al. (2017) subtly
+performed raw data pre-processing for 3D object recognition through
+concise and ingenious specifying thresholds and background subtrac­
+tion, simplifying the extraction of target point clouds. However, these
+two studies only choose one specific data acquisition issue and preprocessing for research. To our knowledge, there has been no attempt
+to systematically expound on the general data acquisition and preprocessing procedure for 3D CV cattle growth management.
+The purpose of this review was (1) to map out the current knowledge
+regarding 3D CV to support cattle growth management, (2) to describe
+thorough considerations and general procedures of three-dimensional
+data acquisition and pre-processing, (3) to analyse cattle growth man­
+agement tasks among categories, and (4) to generalise common issues to
+improve the performance of cattle growth management models. The
+results of this review will help to understand the research gaps in 3D
+cattle growth management, and the insights in the discussion could
+guide future research in this field.
+Because of the large number of abbreviations used in the relative
+scientific works, the abbreviations and cattle term explanations
+appearing in this work have been listed in supplementary 0 (https://doi.
+org/10.5281/zenodo.7406521).
+2. Material and methods
+To review the literature on 3D CV for cattle management in PLF, we
+applied the guideline developed in the PRISMA 2020 statement (Page
+et al., 2021). This systematic review approach analysed the bibliography
+in three phases: (a) collecting relevant papers, (b) performing a detailed
+review, and (c) analysing the studies (Fig. 1). This section describes the
+essential implementations in the following paragraphs, and details for
+explanation can be found in Supplementary 5.
+Query = Criterion “cattle” AND Criterion “3D vision” NOT Criterion
+“exclusions” (1)
+In the first phase, 47 relevant papers were collected. All the papers
+are either published or available online before February 1st, 2022. They
+were directly searched in the Web of Science (WoS) database and
+manually filtered after searching. These eligible papers met all three
+criteria listed in Table 1 within a record by using WoS search syntax
+(Equation (1)). The search using Equation (1) on WoS was performed on
+February 1st, 2022, generating 109 papers; citations retrieved from the
+literature search were imported to EndNote, including titles and ab­
+stracts. After importing citations into EndNote, a manual selection was
+further performed. The selection pruned the searching results to remove
+irrelevant papers by reviewing titles and abstracts. The eliminated paper
+through selection used either a non-3D CV approach or non-oriented
+cattle growth management. For example, the force plate system was
+used to measure ground reaction forces for predicting lameness (Dun­
+thorn et al., 2015); the collision between the cattle and the manipulator
+was predicted by using point clouds (Jo, 2020); hoof growth was
+2
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+Fig. 1. Flowchart of the methodology used in this systematic review.
+
+researched by using stable isotope analysis (Harrison et al., 2007).
+Through manual selection, 47 papers remained available for this review,
+and the full text of all 47 potentially eligible studies was retrieved.
+In the second phase, the selected 47 papers were reviewed, and data
+were extracted for each paper and stored in a systematic datasheet. First,
+we designed a standardised data extraction form in Supplementary 1,
+where data on study characteristics were extracted from eligible studies.
+When the form was designed, the following questions were considered
+for each paper:
+
+2. What were the tools and scenarios for the data acquisition, and how
+were the problems solved, including cattle traffic, individual iden­
+tification, extrinsic calibration, and recording triggering?
+3. What were the methods for pre-processing the raw data to maintain
+proper images for the next step, including selecting images, aligning
+rigid point clouds, removing background, filtering outliers, seg­
+menting the objective point cloud, and dealing with point clouds
+with cattle movement?
+4. What were the processing and analysis methods for different
+research purposes, what were the results, and how was the quality of
+results assessed?
+
+1. What was the research topic, or specifically the studied issue of 3D
+CV-based cattle management in PLF?
+
+We
+3
+
+presented
+
+the
+
+significant
+
+outcomes
+
+during
+
+review
+
+in
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+3. Results
+
+Table 1
+Overview of criteria used as components of query on WoS. TS: the topic fields,
+including Title, Abstract, Author, Keywords, and Keywords Plus.
+Criterion
+name
+
+Description
+
+Formula
+
+cattle
+
+Research
+objects
+Research
+methods
+
+TS = cattle OR “cows” OR cow
+
+3D vision
+
+exclusions
+
+Research fields
+
+For synthesising the current knowledge regarding 3D CV to cattle
+growth management, 47 studies were grouped into three main cate­
+gories: books, review papers, and task-oriented papers (Fig. 2). The
+categories of books and review papers belong to the non-growth task.
+The remaining 44 task-oriented papers contained one non-growth task,
+which conducted extrinsic calibration for a multi-Kinect camera system
+(Salau et al., 2016a), and 57 cattle growth management tasks as one
+study might contain multiple tasks. Among multi-task studies, Martins
+et al.’s (2020) and Hansen et al.’s (2018) had triple tasks, while seven
+other studies included double tasks. The research on cattle growth
+management started in 2014 and reached peaks in 2018 and 2020 (n =
+13). Among all tasks, body measurements assessment was the most
+attractive task (n = 17), followed by lameness classifications (n = 9). BW
+estimation has become important since 2018 (Supplementary 3).
+
+TS = “point cloud$” OR (“3-dimension*”) OR
+(“three-dimension*”) OR (“3D data” OR “3D cow
+$” OR 3D NEAR/2 vision OR 3D NEAR/2 video*
+OR 3D NEAR/2 imag*) OR LIDAR OR (RGBD OR
+RGB-D)
+TS = (glacier OR “ice”) OR (canopy OR forage)
+OR (leather) OR (rock$ OR habitat OR Emission$
+OR erosion OR bio$mass OR manure) OR
+(surgery OR tooth OR patient$ OR cell$ OR gene
+$ OR protein$ OR bone$ OR gland$ OR needle$
+OR larvae OR vitro OR immun* OR x-ray OR
+dissect OR molecular OR blood) OR (acceler* OR
+ultras*) OR heat OR children OR sustainability
+OR ”food safety“
+
+3.1. Objects of task-oriented papers
+In cattle growth management tasks, the studied objects were mainly
+cows. The ratio of tasks on non-cattle objects to cattle-oriented objects
+was 4:42 (Supplementary 3). Within the four tasks of non-cattle objects,
+two tasks owned inherited relationships. They used pigs as the research
+objects to verify the analysis software for body measurements, and the
+software was intentionally extended by the researchers to measure cattle
+due to similar body forms remaining between cattle and pigs. The other
+two tasks researched cattle’s feed and cattle’s faecal, respectively. For
+cattle-oriented tasks, 37 of 42 specified the type of cattle (Fig. 3a). The
+differences among cattle types were listed in Supplementary 3. Of all
+specific types, cows accounted for slightly above 70%; the other types,
+including heifers, steers, and calves, were far less used than cows with
+the numbers 4, 2, and 2, respectively.
+For most cattle-oriented tasks, amounts of cattle, also named cattle
+numbers, were statistically low (Fig. 3b). The range of less than 25 in­
+dividuals of cattle was the most often used, followed by the range be­
+tween 50 and 75 individuals. Ranges indicated cattle numbers used by
+researchers for their experiments, and they were expressed in half-open
+integer intervals that included the left endpoint, excluded the right
+endpoint, and the length of each range was 25 except [200, 250) of
+which the length was 50. The special length was introduced because the
+cattle numbers used in three tasks fluctuated from 208 to 242. Ranges of
+medium-scale (≥ 100 and < 200) were less used in studies than those
+of both small-scale (< 100) and large-scale (≥ 200). Moreover, no tasks
+were known with cattle numbers in the ranges [125, 150) and [150, 175).
+Holstein was the most frequently used breed among the breeds of 42
+
+Supplementary 1, based on the encoded data in supplementary 2. The
+encoded data were the titles of all studies that were encoded incre­
+mentally from ‘cattle No.2′ to ‘cattle No.48′ . The outcomes were
+collected and analysed in a few dimensions listed in Supplementary 5.
+Second, we clustered Supplementary 1′ s outcomes into Supplementary 3
+and Supplementary 4 using the pivot table analysis. Each sheet of these
+two files remained homogeneous studies.
+In the last phase, we further integrated statistical information and
+essential operations for 3D cattle growth task-oriented studies within the
+essential-oriented sheets in Supplementary 3. While statistical infor­
+mation included the statistics of studies and research objects, essential
+operations included 3D data acquisition and pre-processing. In the 3D
+data pre-processing, similar steps that included image selection, back­
+ground and noise filtering, and feature extraction were synthesised. We
+also compared studies among each cattle growth task in Supplementary
+4, where each sheet represents a specific kind of task in cattle growth
+management. Within each task-oriented sheet, models and features from
+each study were distinguished. The results of the integration and com­
+parison are shown in the results section. After comparison, we syn­
+thesised approaches to improve the models’ performance in 3D cattle
+growth management, and the approaches are described in the discussion
+section.
+
+Fig. 2. Overview of the eligible studies’ flows starting from paper types, passing task-oriented categories, and ending at groups of years.
+4
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+Fig. 3. Investigation of research objects used in the growth task-oriented studies: a) the pie chart for objects’ categories; b) the statistics of the studies’ count
+distributed among ranges of cattle’s number used in studies; c) the statistics of cattle breeds used in the studies.
+
+cattle-oriented tasks (Fig. 3c). Holstein cattle were used in 25 tasks, and
+various sub-breeds were investigated, such as Holstein Friesian, Israeli
+Holstein, and red & white Holstein. The use of breeds was influenced by
+cattle sex. For females as research objects, which means cows and
+heifers, the Holstein breed was the most often applied, which resembled
+the overall trend. For males as research objects, which means steer,
+breeds used were mainly Angus, (half-sib) Nellore, and Qinchuan.
+
+was capturing cattle’s backs by using one depth camera fixed at the
+nadir. The nadir was referred to as the position directly below a platform
+at a relatively high place. For this type of data acquisition, the depth
+camera was usually attached to a fixed platform that commonly was a
+frame at the height of between 1.95 m and 3.45 m above the ground. The
+depth camera opted to acquire data at a frames-per-second of between
+15HZ and 30HZ (Supplementary 3). The other approach was capturing
+from various viewpoints by using multiple cameras that captured cattle
+bodies and specific parts like the udder (Martins et al., 2020). Data from
+multiple cameras reconstructed point clouds of cattle, which was a
+generalisation of triangulation in photogrammetry, and the recon­
+struction methods differed regarding the types of cameras. The cameras
+were usually comprised of either identical depth cameras or the same 2D
+cameras, and they simultaneously captured 3D and 2D data, respec­
+tively, at diverse viewpoints with calibration before the acquisition.
+However, in Le Cozler et al. (2019b), five pairs of 2D cameras and laser
+projectors were used as data acquisition devices. Morpho3D laser pro­
+jectors in their studies emitted lights as stripes, generated a vertical
+plane from the intersection between the lights and the cattle each time,
+and thus merged point clouds of planes chronically to a point cloud of
+cattle. In addition, the acquisition was also conducted from multiple
+viewpoints by moving only one camera. While Pezzuolo et al. (2018)
+and Martins et al. (2020) placed one 3D camera at different places
+
+3.2. Three-dimensional data acquisition
+For the 3D data acquisition, two groups of depth cameras were
+applied. The first group named IR depth camera, used an infrared
+emitter to project a pattern of laser points whose deformation is detected
+by the infrared sensor and used to compute depth values (Salau et al.,
+2016b). Microsoft Kinect V1 was the representative of this kind. Since
+this kind of sensor was susceptible to sunlight, the experiments were
+conducted mainly indoors. However, Van Hertem et al. (2014) and
+Viazzi et al. (2014) deployed their sensors outdoors but carried out the
+experiments under external artificial light at night. The second group
+used the time of flight (ToF) principle to calculate the depth. Microsoft
+Kinect V2 was the representative of ToF cameras.
+There were generally two approaches in 3D data acquisition for 3D
+cattle growth management tasks (Supplementary 3). The popular one
+5
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+around the standing cattle, Shao et al. (2020) acquired data that were
+recorded by the 2D camera equipped on an unmanned aerial vehicle.
+Recordings of depth cameras were often triggered automatically by
+signals from other devices or sensors. The most frequently used one was
+the radio frequency identification (RFID) reader that was used to iden­
+tify each cow by reading the cow’s electronic ID tag. Successful identi­
+fication triggered the start of a new data recording as well as the stop of
+an old recording that was also stopped when the recording time was
+exhausted. Other simple triggers of recordings were a proximity sensor
+activated when the cattle approached it (Shigeta et al., 2018), a passive
+infrared motion detector that was placed ahead of the cameras (Spo­
+liansky et al., 2016), or singles of the changing status of a door (Fischer
+et al., 2015). One combination of two sensors fixed on both sides of the
+passage was applied by Wilkins et al. (2015) as triggers for recording;
+when the animal moved past the sensors, while one activated the
+recording, the other deactivated the recording. An advanced trigger was
+introduced by Okura et al. (2019). They took advantage of the depth
+sensor and used real-time foreground extraction to detect approaching
+cattle and decide the start of image capturing.
+For high-quality recordings of 3D data acquisition, cattle were
+treated in two divergent approaches. First, cattle were constrained to
+stand still, especially in live BW estimation. The methods included
+feeding cattle(Le Cozler et al., 2019a,b) , calming them (Huang et al.,
+2018; Huang et al., 2019a), or habituating them ahead (Guesgen and
+Bench, 2018; Le Cozler et al., 2019a). In the other approach, cattle
+walked following designed paths. During walking, cattle traffic could be
+controlled to ensure the quality of captured data (Van Hertem et al.,
+2018) by introducing physical facilities or using existing facilities. Van
+Hertem et al. (2014) and Viazzi et al. (2014) handled the cattle traffic
+through their designed corridors. Their studies made use of an aftermilking sorting gate followed by a 90◦ turn corridor that provided the
+necessary time delay between successive cows to obtain smooth cattle
+traffic; the gate was the only place on the farm where all cows passed
+after milking in a side-by-side milking parlour. Van Hertem et al. (2018)
+built a walk-through acquiring system at the exit of a rotary milking
+parlour where a single cow was released each time.
+
+First, a discrete five-point (1–5) numerical score derived either from
+Sprecher et al.’s (1997) or from Flower & Weary’s (2006) work, where
+cows scored at level 1 was healthy and cows scored at level 5 had a
+severely lame. Second, a binary classification considered LS scores of 1
+and 2 as non-lame; on the other hand, LS scores ≥ 3 as lame. Last, a fourpoint numerical score grouped LS 4 and LS 5 as one level, and it was used
+only in Van Hertem et al. (2016). Like the BCS estimation, the reference
+was also assessed by the observers, but the observers in lameness
+detection were quite divergent. The divergence was first shown ac­
+cording to the number of observers. While using only one observer was
+adopted to assess cattle in four studies, two observers did the same work
+in the other three studies. In Van Hertem et al.’s (2016) and Van Hertem
+et al.’s (2018) research, there were two trained and experienced ob­
+servers, but they scored LS alternatively. The second divergence was
+proficiency. The observers were usually well trained, but two without
+previous standard training were employed in Schlageter-Tello et al.
+(2018).
+3.4. Three-dimensional data pre-processing
+Three-dimensional data pre-processing for cattle management sys­
+tems is a critical procedure between 3D data acquisition and 3D model
+training. It conversed raw data from 3D data acquisition to point clouds
+and extracted features from these point clouds for models of 3D cattle
+growth management tasks. In Supplementary 3, all collected studies for
+3D cattle growth management tasks were analysed, and then the general
+procedure (Fig. 4) was synthesised from the analysis. In Fig. 4, each blue
+box’s content contains the functional item’s name and the function’s
+presented count in all explored studies. The synthesised general pro­
+cedure comprised four essential components and one optional
+component.
+The data selection was the first essential component. It was used to
+select available data from raw data acquired in 3D data acquisition. The
+selection discarded data with poor quality or data without cattle and
+sieved the remaining data to meet requirements such as disconnection to
+the border of scenes (Cominotte et al., 2020).
+After data selection, 3D construction was the optional component. It
+constructed 3D data from multi-view 2D images using structure from
+motion (SfM) when the selected data were optical images. This con­
+struction operation was seen in three studies (Gaudioso et al., 2014;
+Lomillos and Alonso, 2020; Shao et al., 2020).
+The second essential component of 3D data pre-processing consisted
+of the selection and utilisation of filters. It segmented point clouds of
+cattle from selected data in three steps. The steps started with removing
+the background. Background removal was mainly conducted by sub­
+tracting empty scene point clouds and/or applying a conditional filter
+with experimentally determined thresholds. It was done by selecting the
+largest point clouds after clustering (Huang et al., 2018). The second
+step was to filter outliers as noises. Noises were sieved through filters
+that included a clustering filter, conditional filter, statistical filter, and
+convolutional filter. The clustering filter was the most frequently
+applied in all noise removal filters and was presented ten times (Fig. 4).
+The second important one was the conditional filter. The third step was
+to use filters to fulfil specific tasks. For example, the voxel filter downsampled point clouds by compressing a partition into a voxel (Foley
+et al., 1996).
+The third essential component processed point clouds to fit models.
+The treatments comprised the body parts exclusion, point clouds
+alignment, normalisation, point clouds smoothness, and point clouds
+restoration. Of all treatments, point clouds normalisation was the most
+critical one because it adjusted the position and orientation of the point
+cloud to make the point clouds suitable for models.
+The last essential component of 3D data pre-processing is extracting
+features from point clouds for models’ input. Before feature extraction,
+anatomical landmarks of cattle on the point clouds could be identified,
+which could benefit feature extraction.
+
+3.3. Ground truth acquisition
+Ground truth (GT), also known as reference data for training and
+validation purposes, refers to data provided by direct observation,
+manual scoring, and manual measuring. During 3D cattle growth man­
+agement systems, the acquisition procedure of GT was the same as the
+mentioned conventional approaches. While tools such as tapes and
+sticks were used for body measurements assessment tasks, industrial
+scales were applied for BW estimation tasks.
+For BCS, GT was acquired by 2 or 3 assessors who independently
+assessed cattle following a manual body condition scoring protocol. GT’s
+values were usually the mean of the results given by assessors, and the
+range of GT’s values reflected the growth condition of the cattle herd. To
+qualify for the results of the manual assessment, the inter-assessor
+agreement was introduced, and three studies implemented this step in
+their work. Song et al. (2019) used Cohen’s kappa (κ) and the scoring
+correlation coefficient Spearman’s rho (ρ) to express the agreement of
+inter-assessor, while the other two used Lin’s Concordance of Correla­
+tion Coefficient (O’Leary et al., 2020) and correlation (Martins et al.,
+2020) to express the agreement of only inter-assessor. The quality was
+also validated by intra-assessor agreement, which was done by
+measuring the pairwise agreement of each assessor across two days
+(Song et al., 2019). Besides, the ranges of GT’s values were clarified in
+most reviewed studies (Supplementary 4). The GT’s values of each study
+were distributed within a BCS 5-scale subset that centered at 3, and the
+mean width of the range of these subsets was 2.4, which was less than
+half of the width of the 5-score scoring protocol.
+In the lameness detection tasks, GT presented cattle’s lameness,
+which was digitised to LS. LS followed one of three sorts of score levels.
+6
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+Fig. 4. Flowchart of a general pre-processing procedure derived from pre-processing steps identified in the selected studies. Each blue box’s content contains the
+functional item’s name and the function’s presented count in all selected studies. (For interpretation of the references to colour in this figure legend, the reader is
+referred to the web version of this article.)
+
+3.5. Body measurements assessment
+
+example, Kamchen et al. (2021) and Nir et al. (2018) applied one 3D
+camera indoors at 2.5 m and 2.8 m above the ground, respectively.
+Compared with nadir views, Huang et al. (2018) and Huang et al.
+(2019b) used a LiDAR sensor from a lateral view of Qinchuan beef cattle.
+Besides, the multi-views acquisition was conducted to acquire direct 3D
+measurements. For example, Ruchay et al. (2020) acquired data from
+multiple views by locating three RGB-D cameras on the left, right, and
+top of a passage and synchronised the data collection process. Pezzuolo
+et al. (2018) and Martins et al. (2020) obtained multiple view data by
+moving one camera around cattle. While the former acquisition scanned
+cattle in four different positions: left, right, top, and front, the latter took
+the dorsal and lateral images from the top and side. Moreover, direct 3D
+measurements were implemented by photogrammetry. Gaudioso et al.
+
+A total of 17 3D body measurements assessment tasks were grouped
+into four categories (Supplementary 4). In four categories, direct 3D
+measurements amounted to the most significant role, with a count of 13.
+The other three, including morphometric characterisation, body area &
+volume, and the effects of fur, were rarely investigated. Forty-four types
+of 3D body measurements were used in 17 assessment tasks. The top 10
+are shown in Fig. 5a, and they all belong to direct 3D measurements.
+A large range of acquisition procedures could be identified in the 3D
+acquisition approach for direct 3D measurements. Many studies
+measured them from cattle’s backs by fixing the sensor at a nadir that
+resembled what we concluded in the data acquisition section. For
+7
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+Fig. 5. The body measurements used in the bibliography and the performance of the results. a) the bar chart shows the top 10 of mostly used body measurements in
+researched 3D cattle growth management; b) the chart shows the effect of different acquisition procedures in 3D cattle growth management by comparing the value
+ranges of the five most used evaluation criteria of the top four used body measurements; c) the line chart shows the effect of body measurements by visualizing the
+fluctuations of body measurements’ values under the same criterion and acquisition procedure.
+
+(2014) and Lomillos and Alonso (2020) measured animals in their nat­
+ural environment at 10 to 15 m distance using a portable instrument
+incorporating two synchronised 2D cameras.
+The diversity of 3D data acquisition procedures affects the results’
+quality of direct 3D measurements. The results for the 5 most used
+evaluation criteria of the top 4 used direct body measurements under
+different acquisition procedures were visualised in Fig. 5.b. The visu­
+alisation of evaluation criteria on withers height and body length
+frequently showed huge ranges of values. The evaluation criteria
+“standard deviation (SD)” for body length illustrated the maximum gap
+of 10.2 cm, which was introduced by Lomillos and Alonso (2020) with a
+SD of 10.8 cm on assessing body length through using photogrammetry.
+The trend that, along with the decrease in task number, the evaluation
+results decreased was explained by the deeply dropping in the number of
+applying the corresponding evaluation criterion, which did not mean
+that the effect was eliminated.
+Apart from the diversity of 3D data acquisitions, the results’ quality
+of direct 3D measurements was also influenced by other factors. The first
+factor was the body measurements used in the research. Fig. 5c shows
+
+the SD, R2, and MAE fluctuations of 15 measurements implemented
+under the same condition in Gaudioso et al.’s (2014) work. The second
+factor was the cattle’s sex. Lomillos and Alonso (2020) verified the
+differences with 20 body measurements and six morphological indexes
+on Lidia cattle by sex. Cattle’s category (Fig. 1. a) also affected the
+performance of results. McPhee (2017) evinced that the measuring
+performance of hip height for cows and steers varied. In addition, Salau
+et al. (2015) proved that fur, fur colour, and moving velocity affect the
+measuring accuracy.
+3.6. Body weight estimation
+Eight BW estimation tasks were conducted between 2018 and 2021
+(Supplementary 4). The estimation models used features extracted from
+3D data acquisition and pre-processing as the explanatory variable,
+including 3D body measurements, and parameters calculated on 3D
+body measurements. Additional age-related information was also
+applied as an explanatory variable by the models. In BW estimation
+studies, a combination of different kinds of explanatory variables was
+8
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+more often used than a single explanatory variable. Over half of the
+studies used the parameter of calculated area or volume. Multiple var­
+iables linear regression was the most frequently applied model, and the
+artificial neural network acquired the highest correlation between live
+weights estimated from models and weights obtained from scales with
+an R2 of 0.995.
+For acquiring the most popular parameter, volume, from point
+clouds, the methods were not identical. An essential method for calcu­
+lating the volume applied calculus. The implementation in Le Cozler
+et al. (2019b) applied Mirtich’s (1996) theory that used both the
+divergence theorem and Green’s theorem, where the Green’s theorem
+calculated the area of 3D mesh and the divergence theorem calculated
+the volume based on the area. The 3D mesh was built from the point
+cloud that was cut off at shoulder level to remove the distortion of head
+movement. Cominotte et al. (2020) used a simplified implementation to
+acquire the volume by integrating volumes of divisions of the cattle’s
+dorsal part from the shoulder to the hip, where a division was treated as
+a cuboid. Another way of getting volume was arbitrarily the summation
+of heights between each point on the curvature of the back’s point cloud
+and its projections on one plane (Hansen et al., 2018; Nir et al., 2018).
+The above studies expressed the volume using cubic pixels. In Kamchen
+et al. (2021), the volume value was corrected by transforming cubic
+pixels to cubic meters, reducing the error caused by the distance vari­
+ation between the animal and the sensor.
+
+model expressed the relation between the dorsal trait, indirect angu­
+larity score, and the BCS score by Hansen et al. (2018) with a relatively
+high MAE of 0.21 among all studies. The second approach, machine
+learning classification models, was applied in two studies. Song et al.
+(2019) used a nearest-neighbour algorithm to train a model on 88
+samples, and the model achieved an overall sensitivity of 0.72 for all BCS
+classes. Shigeta et al. (2018) introduced a convolutional neural network
+with a 0.777 F-score on the enormous dataset of 8650 samples in all
+studies, but the input was 2D 460 × 310 pixels grayscale images that
+were converted from point clouds.
+3.8. Lameness detection
+During the nine lameness studies, several considerable hypotheses
+were tested. Viazzi et al. (2014) proved that the back arch trait derived
+from top-view 3D CV attained comparable performance in lameness
+detection compared to a side-view 2D CV system. It also confirmed that
+the 3D CV overcame the segmentation limitations such as shadows and
+dynamic backgrounds of the 2D approach by automatically extracting
+the back arch trait in real-time. Schlageter-Tello et al. (2018) concluded
+that the 3D CV automatic LS system based on the measurement of back
+curvature, overall, performed worse than human observers with similar
+sensitivity but lower specificity. Van Hertem et al. (2016) proved that
+the video-based system was suitable for the lameness detection system.
+Hansen et al (2018) demonstrated that arching of the cow’s spine
+derived from previously extracted 3D region of interest (ROI) was
+suitable to detect lameness by fitting a second-order polynomial curve.
+Van Hertem et al. (2018) verified that the two fair 3D lameness classi­
+fiers were curvature angle of back around hip joints Characteristics
+Curve and back posture measurement.
+Moreover, lameness detection in the early stage supported curing the
+animal early so that reduce their suffering from lesions or infection,
+which benefited animal welfare and to economic for farmers (Van
+Hertem et al., 2016). Jabbar et al. (2017) explored early lameness
+detection. They used a support vector machines model to detect the
+lameness trend by feeding in the dynamic gait symmetry measure that
+tracked the movements of the spine and hind limbs. The gait asymmetry
+was reflected by the height variations in the hip joint during walking and
+was attained from non-intrusive 3D video data. The model achieved
+high performance with accuracy = 95.7% on 23 samples when consid­
+ering LS ≥ 2 as lame on a 1–5 scoring system.
+
+3.7. Body condition score evaluation
+Eight BCS evaluation tasks were scrutinised. Their implementations
+complied with the principle of comparing outputs with GT using either
+linear regression or machine learning classification models.
+3D CV systems commonly assessed body conditions through ana­
+lysing 3D images of cattle’ backs taken from nadir. Features extracted
+from these images, named dorsal traits, were typically used as models’
+inputs. Three studies (Spoliansky et al., 2016; Martins et al., 2020; Zin
+et al., 2020) extracted directly acquired dorsal traits such as dorsal
+length and directly calculated dorsal traits such as dorsal area and
+convex hull volume to estimate BCS. Two studies extracted indirect
+dorsal traits after identifying anatomical landmarks on backs. Song et al.
+(2019) automatically identified the vertebral column, sacral ligament,
+hook bone, and pin bone. Around these physical landmarks, they
+measured the bony prominence or the body surface depression and
+defined them as model features. Fischer et al. (2015) manually identified
+four anatomical landmarks: top of the left hook bone, top of the right
+hook bone, and 2 points at the base of the sacrum to define a space
+centered on the cow’s rear before standardising cows’ 3D surfaces (the
+visualisation of them is shown in Supplementary 0). The features were
+summarised from the normalised 3D shape by performing the principal
+component analysis (PCA). From cattle’s backs, one study extracted the
+indirect angularity score. Angularity scores were quantified by oper­
+ating the rolling ball algorithm globally across the surface. Dorsal traits
+were also combined with other non-back traits. Song et al. (2019)
+applied multiple 3D cameras positioned at the top, rare, and side to
+mimic human assessors evaluating different body regions of a cow from
+different views, thereby improving BCS classification.
+Two types of models were used to estimate BCS. The first type was
+linear regression models comprising stepwise, LASSO, and simple linear
+regression. The stepwise regression was used most often (3 times).
+Before training the stepwise model, Spoliansky et al. (2016) normalised
+all features extracted through 3D data acquisition and pre-processing to
+values between 0 and 1 to obtain the same scale. Using a stepwise model,
+Fischer et al. (2015) attained the highest performance, and the model
+explained all of BCS variability with an R2 of 1 on the training dataset,
+but the performance on the test dataset was lower, especially on the
+dataset with cattle unseen (r = 0.89). Using LASSO, Martins et al. (2020)
+concluded that the model using lateral traits as input performed better
+than using dorsal traits in predicting BCS. A simple linear regression
+
+3.9. Other growth management tasks
+Other 3D cattle growth management tasks were also synthesised.
+First, the recognition task was explored, ranging from the detection of
+cattle (Salau et al., 2016b; Shao et al., 2020) to body parts analysis
+(Salau et al., 2020) and individual identification (Okura et al., 2019;
+Bezen et al., 2020). For recognition tasks, neural networks were the most
+applied methods to handle visual digital data. Second, oestrus detection
+was explored by detecting standing to be mounted (Homer et al., 2015)
+and micro-behavioural changes related to ovulation (Guesgen and
+Bench, 2018) three-dimensionally. Third, digestive tasks, including feed
+intake monitoring and faeces consistency assessment (Atkinson et al.,
+2020). Shelley et al. (2016) estimated feed intake in a laboratory where
+feed was filled in a designed plastic feed bin, and intake was measured
+by the difference in estimated weight before and after feeding. In
+contrast, Bezen (2020) did it in an open cowshed where the intake was
+measured by evaluating the difference in depth images of the feed pile
+before and after feeding. Last, reconstruction tasks that aimed to build a
+point cloud of a cattle’s whole body were implemented by two studies.
+The constructed point clouds hereafter were used for extracting
+morphological traits (Le Cozler et al., 2019a) and for allocating body
+parts’ temperature (Kawasue et al., 2017), respectively.
+9
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+4. Discussion
+
+in ambient lighting on 3D cameras based on visible light (Guo et al.,
+2017).
+Suitable platforms are necessary where cameras can be optimally
+positioned during the acquisition. The most frequently applied platform
+was a fixed frame around a passage (Supplementary 3), which was easy
+to be embedded into the existing facilities and was suitable for various
+research purposes, including BCS estimation (Zin et al., 2020), lameness
+detection (Hansen et al., 2018), and even BW prediction (Song et al.,
+2018). The tripod was the most flexible platform that could be moved
+easily and placed nearby the cattle by the actors, and was suitable for
+body measurements. However, the tripod is not recommended in future
+research because it introduces high intervention to cattle and an
+increased risk of damage to attached cameras when cattle touch the
+tripod. Ruchay et al. (2020) placed two tripods on the right- and leftsides in front of the animal passage that was headed to the hall with the
+feeding system. The tripods were in the hall at approximately 2.0 m from
+cattle when they walked out of the passage, so no obstacle existed be­
+tween the tripods and the animal if they approached the tripods.
+Moreover, Shao et al. (2020) used a UAV equipped with 2D cameras to
+record the data of a wide area above actively. Compared to using the
+frame and tripod for indoor applications, in the future, using the UAV as
+a platform could be convenient for conducting outdoor research if the
+3D camera is undisturbed by the sunlight and is dense enough; the po­
+tential problem is the noise of the flying UAV.
+During the acquisition, research objects should be well-known. This
+review concentrates on cattle’s growth management based on 3D CV. A
+cattle’s body is relatively large compared with other livestock like sheep
+and pigs. It has a complex 3D shape (Pezzuolo et al., 2018), which is
+unfavourable when using proximal 3D cameras. However, because of
+the large body shape, anatomical landmarks are prominent, and land­
+marks’ trajectories are apparent when cattle move naturally. These are
+benefits to 3D cattle growth management. For example, anatomical
+landmarks like hook bone, spine, and hip bones scattering on the back
+and the rear were measured for further research like live BW estimation;
+the walking gaits of cattle were used for lameness detection (SchlageterTello et al., 2018). Besides, two additional factors need to be considered
+when we conduct a future 3D CV-based cattle growth management. The
+first is the diversity of morphometric traits among cattle breeds, life
+cycles, and sexes. For instance, the biometry of the horns is a repre­
+sentative morphometric particularity for the Lidia breed (Lomillos and
+Alonso, 2020); dairy-type traits such as udder, hoof, and rump charac­
+teristics, are significant predictors of productivity, fertility, and health
+for cows (Martins et al., 2020). The second factor is attachments on the
+cattle’s bodies. On the one hand, the exterior mud or debris on the
+surface of the cattle and hair clumps lying orthogonal to the surface
+tangent on the coat could be reflected on the final fused point cloud,
+thereby affecting the curvature estimation. On the other hand, fur, fur
+colors, and coat texture also affect the sensitivity of cameras, which was
+proved in Salau et al. (2015). In Huang et al. (2019a), short-haired cattle
+were their ideal targets. As animals, cattle are constantly moving
+(Ruchay et al., 2020); during movement, their body shape changes, their
+body parts are incidentally hidden, and their body portions are some­
+times overlapping. Even though small relative movements of the animal
+could be ignored by compensating for misalignments during the preprocessing phase (Pezzuolo et al., 2018), it is impossible to accept the
+movement caused by possible heavily cattle moving during the long
+recording time for one cattle (approximately one minute). To eliminate
+the effect of cattle movement, animals were confined still for a short
+while by restricting them in cramped spaces or captured during
+controlled cattle traffic. However, Ruchay et al. (2020) aligned point
+clouds containing movement. As movement is the nature of animals, we
+strongly suggest that future research should pay more attention to the
+alignment of non-rigid cattle point clouds where 3D shapes of point
+clouds are slightly different.
+
+In total, 47 studies were included in this dedicated literature review.
+These studies were published in a wide variety of scientific journals
+ranging in publication from the years 2014 to 2021 (Supplementary 2),
+and they include recent research in 3D data acquisition and analysis for
+cattle growth management, including morphological measurements,
+live BW estimation, BCS evaluation, lameness detection, and other types
+of tasks for PLF. Our review focused on investigating the differences
+within each kind of task and extracting the common steps among diverse
+tasks. While the differences are shown in the following session named
+cattle growth management tasks, the common steps, including data
+acquisition, automation, and models’ performance, are discussed in
+other sections.
+4.1. Data acquisition
+3D cattle growth management applications were based on 3D data
+acquisition, and the acquisition was highly related to the camera.
+Cameras using infrared (IR) light have been widely applied (Supple­
+mentary 3) for a low cost. However, IR depth cameras’ disadvantages
+must be overcome during data acquisition. First, the IR cameras should
+avoid interference caused by directly natural sunlight on the surface of
+experimental objects (Van Hertem et al., 2014; Viazzi et al., 2014;
+McPhee, 2017). Second, the IR cameras should be appropriately placed
+to adapt narrow measurement range. While for Microsoft Kinect V1, it’s
+within 2.05 m, for Microsoft Kinect V2, it’s between 0.5 and 4.5 m (Song
+et al., 2018). As the distance between the camera and objects increases,
+the field of view (FOV) increases, and an appropriate FOV supports
+cattle management tasks better. Jabbar et al. (2017) settled an IR
+camera named ASUS Xtion PRO Live at the height of 3.69 m above the
+ground, resulting in a pixel resolution of 3.6 mm × 3.6 mm and an
+around 6 m horizontal FOV. While the resolution did not cause heavy
+distortions in the depth data, the FOV allowed the capture of at least two
+full gait cycles for their study. Third, the IR cameras should acquire
+enough frames within a short period because the resolution of IR cam­
+eras is low. For the Microsoft Kinect V1 cameras with 640 × 480 pixels,
+the point cloud density is low within each captured frame, and it is
+necessary to fuse multiple frames of point clouds into one high density
+point cloud. Huang et al. (2018; 2019a) applied IFM O3D303 with the
+resolution of 176 × 132 pixels, and they merged five consecutive frames
+into one file to meet the body shape computation of sufficient density.
+Last, the IR cameras should prevent inter-camera interference. This oc­
+curs when the fields of IR cameras overlap (Salau et al., 2017; Pezzuolo
+et al., 2018), and the cameras record synchronically. It can be prevented
+by placing lateral cameras directly facing their counterpart and
+occluding by the animals when a cow passes between cameras (Salau
+et al., 2016a; Salau et al., 2016b; Salau et al., 2017; 2021). It can also be
+prevented by recording intermittently. Huang et al. (2018) and Song
+et al. (2019) recorded an image from one camera at 2 HZ at a time and
+sequentially switched to another camera after five consecutive re­
+cordings. Ideally, the solution for inter-camera interference should be
+like the one mentioned by Huang et al. (2018) and Song et al. (2019),
+and it is, in future studies, to use new types of 3-D cameras without intercamera interference. Finally, as Martins et al. (2020) did, future research
+is advised to regularly clean the lens of cameras to remove the accu­
+mulation of dust, especially for those cameras placed at the lateral
+position.
+When using 3D cameras, we also need to consider using multiple
+sensors because they can better mimic human assessors evaluating
+different body regions of cattle from different views than a single camera
+(Song et al., 2019). While a single camera views fewer body regions than
+those assessed by manual scoring, the fusion of information from cam­
+eras located at different viewpoints provides more reliable performance
+(Ruchay et al., 2020). Before the recording, the calibration of cameras is
+necessary, which, for example, can eliminate the influence of variation
+10
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+4.2. Automation
+
+landmarks is that no visual anatomical landmarks could be available.
+For instance, the rump length was measured from palpation or explo­
+ration of the animal (Gaudioso et al., 2014). To overcome these limi­
+tations, we suppose to explore alternative body measurements from a
+precise 3D body point cloud for 3D models in future research. For
+example, Jabbar et al. (2017) analysed the animal’s gait asymmetry
+from the height variations in the hip joint during walking instead of
+traditional limb movements to detect lameness.
+Live BW estimation has attained high accuracy. However, the accu­
+racy of reviewed implementations (Supplementary 4) was based on the
+homogeneous distribution of a relatively small dataset, and the gener­
+alisation of these implementations was not verified. Moreover, no breed
+differences were introduced as features. We infer that breed differences
+in live weight estimation will gradually emerge in future publications.
+We observed that the performance of BCS estimation strongly de­
+pends on the reference accuracy of the human assessors’ observation
+and the BCS variations of the required dataset. The agreements of intraassessors and inter-assessors were used to assess the quality of the
+observation, and the mean of various assessors’ results reduced the
+reference bias. BCS tasks that calculated the agreements in their work
+account for 37.5% of all BCS tasks; the percentage of tasks that explicitly
+set the mean score as the GT is 75% among all tasks calculating agree­
+ments (Supplementary 4). While the level of agreement between ob­
+servers is a limitation in BCS estimation, another limitation mentioned
+by the analysed papers is the BCS range of samples. We found that all the
+research did not contain samples of extreme values, which needed extra
+attention during cattle management (Song et al., 2019), and the distri­
+bution of the samples’ scores followed a normal distribution with the
+mean at the center of the BCS range (Supplementary 4). As a result, the
+distribution of the dataset could cause the accuracy at the center of the
+BCS range to be higher than the accuracy on both sides of the BCS range.
+More specifically, BCS classification models’ sensitivity can be biased for
+underrepresented BCS classes (i.e., <2.0 units or > 4.0 units) (Song
+et al., 2019). When the distribution of the dataset is a reliable expression
+of the herd’s body conditions on farms, we suggest that a high BCS
+variability in herds should be used to train and test models. We also
+recommend that synthetic point clouds should be used to extend the
+samples for extreme values for 3D CV classification models.
+Accurate lameness detection could reduce animal suffering and
+minimise losses, especially when intervention was made at an early
+stage of lameness (Van Hertem et al., 2016; Jabbar et al., 2017). Early
+lameness was mildly lame that was often undiagnosed and rarely treated
+until it became severe (Viazzi et al., 2014). We propose successive ob­
+servations to reduce misdetection at an early stage. Lameness severity
+was assessed by distances between hoof prints and back arch (Van
+Hertem et al., 2016; Schlageter-Tello et al., 2018). However, when using
+the back arch as the indicator, we should realise that the back arch could
+be unreliable. Poursaberi et al. (2011) mentioned that some lame cows
+did not present an arched back, but some healthy cows do show an
+arched back.
+
+A cattle growth management system is welcome based on the pre­
+requisites that it offers the least possible interference in the routine of
+the herd and achieves maximum accuracy with minimal human
+involvement (Jabbar et al., 2017). To mitigate human intervention in
+cattle, 3D CV cattle management systems should be automated. We
+observed no standard approaches or methods yet for automated 3D
+cattle growth management. There is a need to develop a traceable pro­
+cedure to conduct 3D vision systems in this kind of study. We recom­
+mend that future publications focus more on a detailed description of the
+automated process.
+Automated data acquisition should be built with the capacity of
+acquiring high-quality images at an affordable price and not too sensi­
+tive to environmental changes. When data are obtained, controlled
+cattle traffic is necessary for the optimal performance of systems (Van
+Hertem et al., 2018). The controlled cattle traffic could be implemented
+by changing facilities; a 90◦ turn in the corridor compelled successive
+cows to form smooth traffic (Van Hertem et al., 2014; Viazzi et al.,
+2014). However, changes in facilities were seldom suitable for farms
+because of the significant variations of structures on farms. A potential
+solution to handle cattle traffic is using software-controlled gates. When
+the data are acquired, matching an individual’s digital recording with its
+identity is a remarkable issue. RFID readers are still the prevailing
+method. However, compared with these RFID readers, non-invasive
+automated identification of individuals from the collected data should
+become more acceptable. Automated identification is also much more
+complied with animal welfare because vision-based identification is
+non-invasive compared with using RFID tags that hurt the ears of cattle.
+When data are acquired, the triggers of cameras to record data improve
+the efficiency of recordings and the ratio of valid data that includes
+animals. The most common method in the selected studies is triggering
+the recording when the RFID reader successfully read the RFID tag of an
+individual. An advanced approach was the real-time foreground
+extraction that detected approaching cattle from depth images, and
+decided the start of image capture on the results of the detection (Okura
+et al., 2019). In this way, it did not need extra tools, which is convenient
+method of triggering the recording of cameras in future research.
+Moreover, to monitor the growth trend of each individual cattle, it is
+necessary in the first place to identify individuals automatically. As the
+CV approach of identification using neural networks can reach high
+accuracy without intervention, promoting animal welfare, we recom­
+mend that future research uses this method to identify individuals.
+4.3. Cattle growth management tasks
+Assessing body measurements was fundamental research for 3D
+cattle management tasks, such as BW estimation, BCS estimation, and
+lameness detection. Body measurements were heavily used as the fea­
+tures fed into other growth management tasks’ models. They were
+measured using photogrammetry that determines anatomical landmarks
+of objects on digitally captured data and measures them (Tasdemir and
+Ozkan, 2019). The landmarks are quantified from bony ridges and de­
+pressions on the body surface (Song et al., 2019), and their positions
+may change even when the animal stands naturally twice but puts
+weight on different legs. Ruchay et al. (2020) identified anatomical
+landmarks by pointing with white paint. To acquire precise and accurate
+body measurements, we recommend using the mean of results from
+different frames in future research. The second limitation in using
+anatomical landmarks is that they may be not prominent. Hip positions
+were found difficult to identify in the case of young cattle by Pezzuolo
+et al. (2018). Gaudioso et al. (2014) found that their method was diffi­
+cult to recognise points from data collected from dark animals or
+without appropriate lighting. They also claimed that the landmarks
+could be unclear when the BCS is high, which means that too many fats
+cover the landmarks. One more limitation to using anatomical
+
+4.4. Model performance
+Whether a cattle growth management system can be popularised is
+determined by the performance of the applied model. In general, a
+model’s performance can be influenced by many factors ranging from
+the raw data to the model itself. For models of 3D cattle growth man­
+agement, we noticed that no research systematically explored these
+factors. We suggest that future research could take the utmost to
+consider the factors discussed below.
+The first factor is the GT. GT was compared with the models’ output
+to evaluate cattle management systems’ performance. The effect of GT
+was proved by Wilkins et al. (2015). They compared the correlation of
+hip height between estimated height and human visual observation with
+that between estimated height and human tape-based measuring. The
+result showed that the estimated result was better correlated with visual
+11
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+uncertainty derived from GT has been discussed, which could be miti­
+gated by measuring repeatedly. This kind of uncertainty is caused by
+tapes’ resolution and calibration, Abbe error (due to the misalignment
+between the measuring tool and the cow body), the positions of
+anatomical landmarks, animal’s hair, or change of cattle’s posture
+(Pezzuolo et al., 2018; Ruchay et al., 2020). 3D sensors could cause
+another kind of uncertainty. For example, within the valid range, the
+depth measurement accuracy of Kinect cameras decreases with
+increasing distance from sensors to the animal (Salau et al., 2016b;
+Kamchen et al., 2021). Due to a non-linearity of Kinect cameras’ accu­
+racy variation along with distance variation, distortion is introduced
+that influences results, especially at large depths (Pezzuolo et al., 2018),
+which means that calibration is ahead of the acquisition is essential.
+In addition, successive observations benefit model performance in
+monitoring the growth of individual cattle. The growth changes over
+time are recorded, and historical data could be added to the models’
+analysis, which has been proved better than separate observations by
+Hansen et al. (2018). For future researchers, we suggest that they collect
+data at regular intervals.
+
+reference than tape measurements. On the other hand, GT’s reliability
+was seldom reported in 3D cattle growth management systems. Gener­
+ally, when manual reference data are considered as GT, errors or de­
+viations exist inevitably due to influence factors such as different
+acquisition methods (Wilkins et al., 2015), slightly changed stances of
+cattle (Gaudioso et al., 2014), and subjectivity of humans (Salau et al.,
+2017). To mitigate the adverse effects, repeatability is a solution because
+it could force manual measuring to approach the real values by esti­
+mating an indicator several times from the same sample using the same
+method in the same environment in a short period (Le Cozler et al.,
+2019a). The quality of GT should be quantified. Wilkins et al. (2015)
+calculated the intra-assessor and inter-assessor agreement of two expe­
+rienced operators to quantify the performance of human measuring.
+Similarly, Schlageter-Tello et al. (2018) acquired an inter-assessor
+agreement for BCS estimation. They also calculated the agreement of
+models against two observers respectively; the model’s performance was
+compared with humans’ performance to prove the model’s feasibility.
+Future researchers should consider this kind of comparison, especially
+when their GT is not persuasive enough.
+Datasets refer to the input fed into the model. Apart from the dis­
+cussed data issues, including the data range, cattle’s sex, age, breed, and
+data selection, the dataset size should be appropriate. It is difficult to
+increase the dataset’s size in real life (Ruchay et al., 2020). A small
+dataset weakens the generalisation because the model overfits the
+dataset, which means the model’s performance could be way worse on
+other datasets than the fitted dataset. To enlarge the size of the dataset,
+data augmentation can be applied. The augmentation was based on the
+existing data source, augmented the dataset with features orthogonal to
+the current features, and increased the number of samples (Nir et al.,
+2018). Huang et al. (2019a) enriched the point cloud dataset of the
+cattle body silhouette using an affine transformation that rotated
+existing point clouds by mirroring them in horizontal and vertical di­
+rections. To enlarge the size of the dataset, an alternative way is to share
+the raw data publicly. Benchmark datasets for 3D cattle growth man­
+agement tasks could greatly facilitate future research, so we appeal to
+researchers to contribute. Besides, parameters in each item of the dataset
+should be relatively independent. Multicollinearity and linear or
+nonlinear relationships of parameters need to be eliminated.
+To improve datasets utilisation efficiency and simplify the data
+acquisition procedure, it is an efficient way to synchronically implement
+multiple cattle growth management tasks under the same data acquisi­
+tion procedure because traits can be shared between or among tasks. For
+instance, hip height is a mutual feature for body measurement, BW, and
+BCS. BW and BCS are two approaches from different perspectives to
+monitoring growth rate or growth changes. The accurate hip height as
+one body measurement supports the decisions of both BW and BCS.
+Some studies have already introduced multiple tasks of a 3D cattle
+growth management system in their work. A typical study is the one
+done by Martins et al. (2020); they implemented triple tasks related to
+animal conditions, including BW estimation, BCS evaluation, and
+lameness detection, by concurrently using a 3D Kinect-like depth cam­
+era. In summary, further research is advised to consider multiple tasks in
+a 3D cattle growth management system before their experimental
+design.
+A model should be validated to confirm its feasibility that is esti­
+mated with the criteria of repeatability and reproducibility. Repeat­
+ability assesses the robustness of the model by repeating several times on
+the same kind of dataset. Reproducibility assesses the model’s general­
+izability by executing the model under variable datasets. The repeat­
+ability of a cattle growth management model was verified on validation
+or test dataset that was built ahead. In contrast, the dataset is con­
+structed posteriorly for testing the reproducibility of a cattle growth
+management model. The dataset could be created from the same animal
+later (O’Leary et al., 2020), different samples at the same herd (Fischer
+et al., 2015), or a new dairy farm with a different herd (Nir et al., 2018).
+A good model should estimate its uncertainty as well. The
+
+5. Conclusion
+This systematic literature review has analysed and synthesised 47 3D
+cattle management studies. Among various growth management tasks,
+body measurements assessment is fundamental in addition to other
+tasks, including BW estimation, BCS evaluation, and lameness detection.
+While the digestive task monitors cattle’s heath in an alternative way,
+the recognition task is an essential knot of automated individual moni­
+toring. To accomplish 3D cattle growth management tasks, 3D data
+acquisition and pre-processing are prerequisites. According to the sta­
+tistics in 3D data acquisition in this review, 3D cattle growth manage­
+ment tasks prefer to acquire 3D raw data by using the Kinect sensors at
+the nadir of a fixed platform, Holstein cows are the most popular
+research objects, and cattle fewer than 25 individuals are most often
+used for the research. This review also synthesised a general procedure
+to pre-process acquired raw data, which is committed to clarifying and
+normalising 3D cattle growth management research in the 3D data preprocessing stage; still, it needs to be verified in future work. Moreover,
+this review also discusses the automation of 3D CV for cattle growth
+management, aiming to reduce human intervention concerning animal
+welfare effectively. Finally, this review identified factors affecting the
+performance of models for cattle growth management. To improve the
+performance, the GT should be credible, the datasets should be appro­
+priate in size, model repeatability and reproducibility should be verifi­
+able, and the uncertainty should be inclusive. In summary, through this
+systematic review, we aim to support researchers who want to apply 3D
+CV for cattle growth management by simplifying 3D data acquisition
+and pre-processing stages. We advise them to consider model perfor­
+mance ahead at the experimental design stage and to implement mul­
+tiple growth management tasks successively and automatically.
+Ethics approval
+Ethics approval was not required for this study.
+Data and model availability statement
+To view supplementary material for this article, please visit https://d
+oi.org/10.5281/zenodo.7406521.
+6. Implications
+The present study serves as a reference for future research. It reviews
+collected eligible studies to update the knowledge of using threedimensional computer vision to conduct cattle growth management.
+Besides, the investigation of data acquisition, pre-processing, and
+models’ performance facilitated the practice of using three-dimensional
+computer vision at the early stages.
+
+12
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+
+CRediT authorship contribution statement
+
+capture device. Comput. Ind. 98, 14–22. https://doi.org/10.1016/j.
+compind.2018.02.011.
+Harrison, S.M., Monahan, F.J., Zazzo, A., Bahar, B., Moloney, A.P., Scrimgeour, C.M.,
+Schmidt, O., 2007. Three-dimensional growth of bovine hoof as recorded by carbon
+stable isotope ratios. Rapid Commun. Mass Spectrom. 21, 3971–3976. https://doi.
+org/10.1002/rcm.3309.
+Homer, E.M., Meng, X., Dodson, A., Garnsworthy, P.C., 2015. 35 Using 3-dimensional
+positioning for oestrous detection. Cattle Practice 23, 62–67.
+Huang, L., Guo, H., Rao, Q., Hou, Z., Li, S., Qiu, S., Fan, X., Wang, H., 2019a. 17 Body
+Dimension Measurements of Qinchuan Cattle with Transfer Learning from LiDAR
+Sensing. Sensors (Basel) 19. https://doi.org/10.3390/s19225046.
+Huang, L.W., Guo, H., Rao, Q.Q., Hou, Z.X., Li, S.Q., Qiu, S.C., Fan, X.Y., Wang, H.Y.,
+2019b. 17 Body Dimension Measurements of Qinchuan Cattle with Transfer
+Learning from LiDAR Sensing. Sensors 19 (20), 5046. https://doi.org/10.3390/
+s19225046.
+Huang, L.W., Li, S.Q., Zhu, A.Q., Fan, X.Y., Zhang, C.Y., Wang, H.Y., 2018. 43 NonContact Body Measurement for Qinchuan Cattle with LiDAR Sensor. Sensors 18,
+3014. https://doi.org/10.3390/s18093014.
+Jabbar, K.A., Hansen, M.F., Smith, M.L., Smith, L.N., 2017. 28 Early and non-intrusive
+lameness detection in dairy cows using 3-dimensional video. Biosyst. Eng. 153,
+63–69. https://doi.org/10.1016/j.biosystemseng.2016.09.017.
+Jo, M., 2020. Learning Collision Situation to Convolutional Neural Network Using
+Collision Grid Map Based on Probability Scheme. Appl. Sci. 10 https://doi.org/
+10.3390/app10020617.
+Kamchen, S.G., dos Santos, E.F., Lopes, L.B., Vendrusculo, L.G., Condotta, I., 2021. 4
+Application of depth sensor to estimate body mass and morphometric assessment in
+Nellore heifers. Livest. Sci. 245 (7), 104442 https://doi.org/10.1016/j.
+livsci.2021.104442.
+Kashiha, M., Bahr, C., Ott, S., Moons, C.P.H., Niewold, T.A., Ödberg, F.O., Berckmans, D.,
+2014. Automatic weight estimation of individual pigs using image analysis. Comput.
+Electron. Agric. 107, 38–44. https://doi.org/10.1016/j.compag.2014.06.003.
+Kawasue, K., Win, K.D., Yoshida, K., Tokunaga, T., 2017. 42 Black cattle body shape and
+temperature measurement using thermography and KINECT sensor. Artificial Life
+Robotics 22, 464–470. https://doi.org/10.1007/s10015-017-0373-2.
+Le Cozler, Y., Allain, C., Caillot, A., Delouard, J.M., Delattre, L., Luginbuhl, T.,
+Faverdin, P., 2019a. 16 High-precision scanning system for complete 3D cow body
+shape imaging and analysis of morphological traits. Comput. Electron. Agric. 157,
+447–453. https://doi.org/10.1016/j.compag.2019.01.019.
+Le Cozler, Y., Allain, C., Xavier, C., Depuille, L., Caillot, A., Delouard, J.M., Delattre, L.,
+Luginbuhl, T., Faverdin, P., 2019b. 15 Volume and surface area of Holstein dairy
+cows calculated from complete 3D shapes acquired using a high-precision scanning
+system: Interest for body weight estimation. Comput. Electron. Agric. 165 (8),
+104977 https://doi.org/10.1016/j.compag.2019.104977.
+Lomillos, J.M., Alonso, M.E., 2020. 9 Morphometric Characterization of theLidiaCattle
+Breed. Animals 10 (16), 1180. https://doi.org/10.3390/ani10071180.
+Martins, B.M., Mendes, A.L.C., Silva, L.F., Moreira, T.R., Costa, J.H.C., Rotta, P.P.,
+Chizzotti, M.L., Marcondes, M.I., 2020. 8 Estimating body weight, body condition
+score, and type traits in dairy cows using three dimensional cameras and manual
+body measurements. Livest. Sci. 236 (11), 104054 https://doi.org/10.1016/j.
+livsci.2020.104054.
+McPhee, M.J., 2017. 27 Live animal assessments of rump fat and muscle score in Angus
+cows and steers using 3-dimensional imaging (vol 95, pg 1847, 2017). Journal of
+Animal Science 95, 2323-2323. doi: https://doi.org/10.2527/jas.2016.1292.er.
+Mirtich, B., 1996. Fast and accurate computation of polyhedral mass properties.
+J. Graphics Tools 1, 31–50.
+Nasirahmadi, A., Edwards, S.A., Sturm, B., 2017. 26 Implementation of machine vision
+for detecting behaviour of cattle and pigs. Livest. Sci. 202, 25–38. https://doi.org/
+10.1016/j.livsci.2017.05.014.
+Neethirajan, S., 2017. Recent advances in wearable sensors for animal health
+management. Sens. Bio-Sens. Res. 12, 15–29. https://doi.org/10.1016/j.
+sbsr.2016.11.004.
+Nir, O., Parmet, Y., Werner, D., Adin, G., Halachmi, I., 2018. 22 3D Computer-vision
+system for automatically estimating heifer height and body mass. Biosyst. Eng. 173,
+4–10. https://doi.org/10.1016/j.biosystemseng.2017.11.014.
+O’Leary, N., Leso, L., Buckley, F., Kenneally, J., McSweeney, D., Shalloo, L., 2020. 3
+Validation of an Automated Body Condition Scoring System Using 3D Imaging.
+Agriculture-Basel 10 (8), 246. https://doi.org/10.3390/agriculture10060246.
+Okura, F., Ikuma, S., Makihara, Y., Muramatsu, D., Nakada, K., Yagi, Y., 2019. 14 RGB-D
+video-based individual identification of dairy cows using gait and texture analyses.
+Comput. Electron. Agric. 165 (9), 104944 https://doi.org/10.1016/j.
+compag.2019.104944.
+Page, M.J., McKenzie, J.E., Bossuyt, P.M., Boutron, I., Hoffmann, T.C., Mulrow, C.D.,
+Shamseer, L., Tetzlaff, J.M., Akl, E.A., Brennan, S.E., Chou, R., Glanville, J.,
+Grimshaw, J.M., Hrobjartsson, A., Lalu, M.M., Li, T., Loder, E.W., Mayo-Wilson, E.,
+McDonald, S., McGuinness, L.A., Stewart, L.A., Thomas, J., Tricco, A.C., Welch, V.A.,
+Whiting, P., Moher, D., 2021. The PRISMA 2020 statement: an updated guideline for
+reporting systematic reviews. Syst Rev 10, 89. https://doi.org/10.1186/s13643-02101626-4.
+Pezzuolo, A., Guarino, M., Sartori, L., Marinello, F., 2018. 21 A feasibility study on the
+use of a structured light depth-camera for three-dimensional body measurements of
+dairy cows in free-stall barns. Sensors 18 (15), 673. https://doi.org/10.3390/
+s18020673.
+Poursaberi, A., Bahr, C., Pluk, A., Berckmans, D., Veermäe, I., Kokin, E., Pokalainen, V.,
+2011. Online lameness detection in dairy cattle using Body Movement Pattern
+(BMP). 2011 11th International Conference on Intelligent Systems Design and
+Applications, p. 732-736, IEEE.
+
+Yaowu Wang: Conceptualization, Methodology, Formal analysis,
+Investigation, Writing – original draft, Writing – review & editing,
+Visualization, Project administration. Sander Mücher: Conceptualiza­
+tion, Writing – review & editing, Supervision. Wensheng Wang:
+Conceptualization, Methodology, Writing – review & editing, Supervi­
+sion, Project administration. Leifeng Guo: Conceptualization, Writing –
+review & editing, Supervision. Lammert Kooistra: Conceptualization,
+Methodology, Writing – review & editing, Supervision, Project
+administration.
+Declaration of Competing Interest
+The authors declare that they have no known competing financial
+interests or personal relationships that could have appeared to influence
+the work reported in this paper.
+Data availability
+I have shared the link to my data at the Attach File step.
+Acknowledgements
+This research was supported by the Major Science and Technology
+Program of Inner Mongolia Autonomous Region [Grant Number
+2020ZD0004] in China.
+References
+Atkinson, G.A., Smith, L.N., Smith, M.L., Reynolds, C.K., Humphries, D.J., Moorby, J.M.,
+Leemans, D.K., Kingston-Smith, A.H., 2020. 48 A computer vision approach to
+improving cattle digestive health by the monitoring of faecal samples. Sci. Rep. 10
+(12), 17557. https://doi.org/10.1038/s41598-020-74511-0.
+Berckmans, D., 2017. General introduction to precision livestock farming. Anim. Front.
+7, 6–11. https://doi.org/10.2527/af.2017.0102.
+Bezen, R., Edan, Y., Halachmi, I., 2020. 11 Computer vision system for measuring
+individual cow feed intake using RGB-D camera and deep learning algorithms.
+Comput. Electron. Agric. 172 (11), 105345 https://doi.org/10.1016/j.
+compag.2020.105345.
+Bruijnis, M., Beerda, B., Hogeveen, H., Stassen, E., 2012. Assessing the welfare impact of
+foot disorders in dairy cattle by a modeling approach. Animal 6, 962–970.
+Cominotte, A., Fernandes, A.F.A., Dorea, J.R.R., Rosa, G.J.M., Ladeira, M.M., van
+Cleef, E., Pereira, G.L., Baldassini, W.A., Neto, O.R.M., 2020. 10 Automated
+computer vision system to predict body weight and average daily gain in beef cattle
+during growing and finishing phases. Livest. Sci. 232 (10), 103904 https://doi.org/
+10.1016/j.livsci.2019.103904.
+Dickinson, R.A., Morton, J.M., Beggs, D.S., Anderson, G.A., Pyman, M.F., Mansell, P.D.,
+Blackwood, C.B., 2013. An automated walk-over weighing system as a tool for
+measuring liveweight change in lactating dairy cows. J Dairy Sci 96, 4477–4486.
+https://doi.org/10.3168/jds.2012-6522.
+Dunthorn, J., Dyer, R.M., Neerchal, N.K., McHenry, J.S., Rajkondawar, P.G.,
+Steingraber, G., Tasch, U., 2015. Predictive models of lameness in dairy cows
+achieve high sensitivity and specificity with force measurements in three
+dimensions. J. Dairy Res. 82, 391–399. https://doi.org/10.1017/
+s002202991500028x.
+Fischer, A., Luginbuhl, T., Delattre, L., Delouard, J.M., Faverdin, P., 2015. 36 Rear shape
+in 3 dimensions summarized by principal component analysis is a good predictor of
+body condition score in Holstein dairy cows. J. Dairy Sci. 98, 4465–4476. https://
+doi.org/10.3168/jds.2014-8969.
+Flower, F., Weary, D., 2006. Effect of hoof pathologies on subjective assessments of dairy
+cow gait. J. Dairy Sci. 89, 139–146.
+Foley, J.D., Van, F.D., Van Dam, A., Feiner, S.K., Hughes, J.F., Hughes, J., 1996.
+Computer graphics: principles and practice. Addison-Wesley Professional.
+Gaudioso, V., Sanz-Ablanedo, E., Lomillos, J.M., Alonso, M.E., Javares-Morillo, L.,
+Rodriguez, P., 2014. 39 Photozoometer“: A new photogrammetric system for
+obtaining morphometric measurements of elusive animals. Livest. Sci. 165, 147–156.
+https://doi.org/10.1016/j.livsci.2014.03.028.
+Guesgen, M.J., Bench, C.J., 2018. 24 Using kinematics to detect micro-behavioural
+changes relative to ovulation in naturally cycling tie-stall dairy heifers. Livest. Sci.
+207, 126–132. https://doi.org/10.1016/j.livsci.2017.11.019.
+Guo, H., Ma, X.D., Ma, Q., Wang, K., Su, W., Zhu, D.H., 2017. 41 LSSA_CAU: An
+interactive 3d point clouds analysis software for body measurement of livestock with
+similar forms of cows or pigs. Comput. Electron. Agric. 138, 60–68. https://doi.org/
+10.1016/j.compag.2017.04.014.
+Hansen, M.F., Smith, M.L., Smith, L.N., Jabbar, K.A., Forbes, D., 2018. 23 Automated
+monitoring of dairy cow body condition, mobility and weight using a single 3D video
+
+13
+
+Y. Wang et al.
+
+Computers and Electronics in Agriculture 206 (2023) 107687
+extraction from multiple body regions. J. Dairy Sci. 102, 4294–4308. https://doi.
+org/10.3168/jds.2018-15238.
+Spoliansky, R., Edan, Y., Parmet, Y., Halachmi, I., 2016. 30 Development of automatic
+body condition scoring using a low-cost 3-dimensional Kinect camera. J. Dairy Sci.
+99, 7714–7723. https://doi.org/10.3168/jds.2015-10607.
+Sprecher, D., Hostetler, D.E., Kaneene, J., et al., 1997. A lameness scoring system that
+uses posture and gait to predict dairy cattle reproductive performance.
+Theriogenology 47, 1179–1187.
+Tasdemir, S., Ozkan, I.A., 2019. 12 Ann approach for estimation of cow weight
+depending on photogrammetric body dimensions. Int. J. Eng. Geosci. 4, 36–44.
+https://doi.org/10.26833/ijeg.427531.
+Tasdemir, S., Urkmez, A., Inal, S., 2011. Determination of body measurements on the
+Holstein cows using digital image analysis and estimation of live weight with
+regression analysis. Comput. Electron. Agric. 76, 189–197.
+Van Hertem, T., Bahr, C., Tello, A.S., Viazzi, S., Steensels, M., Romanini, C.E.B.,
+Lokhorst, C., Maltz, E., Halachmi, I., Berckmans, D., 2016. 29 Lameness detection in
+dairy cattle: single predictor v. multivariate analysis of image-based posture
+processing and behaviour and performance sensing. Animal 10, 1525–1532. https://
+doi.org/10.1017/s1751731115001457.
+Van Hertem, T., Tello, A.S., Viazzi, S., Steensels, M., Bahr, C., Romanini, C.E.B.,
+Lokhorst, K., Maltz, E., Halachmi, I., Berckmans, D., 2018. 18 Implementation of an
+automatic 3D vision monitor for dairy cow locomotion in a commercial farm.
+Biosyst. Eng. 173, 166–175. https://doi.org/10.1016/j.biosystemseng.2017.08.011.
+Van Hertem, T., Viazzi, S., Steensels, M., Maltz, E., Antler, A., Alchanatis, V., SchlageterTello, A.A., Lokhorst, K., Romanini, E.C.B., Bahr, C., Berckmans, D., Halachmi, I.,
+2014. 38 Automatic lameness detection based on consecutive 3D-video recordings.
+Biosyst. Eng. 119, 108–116. https://doi.org/10.1016/j.biosystemseng.2014.01.009.
+Viazzi, S., Bahr, C., Van Hertem, T., Schlageter-Tello, A., Romanini, C.E.B., Halachmi, I.,
+Lokhorst, C., Berckmans, D., 2014. 37 Comparison of a three-dimensional and twodimensional camera system for automated measurement of back posture in dairy
+cows. Comput. Electron. Agric. 100, 139–147. https://doi.org/10.1016/j.
+compag.2013.11.005.
+Walmsley, B., Oddy, V.H., McPhee, M.J., Mayer, D.G., McKiernan, W.A., 2010. BeefSpecs
+a tool for the future: On-farm drafting and optimising feedlot profitability. Australian
+Farm Business Manage. J. 7, 29–35.
+Wang, Z., Shadpour, S., Chan, E., Rotondo, V., Wood, K.M., Tulpan, D., 2021. 46 ASASNANP SYMPOSIUM: Applications of machine learning for livestock body weight
+prediction from digital images. J. Anim. Sci. 99 https://doi.org/10.1093/jas/
+skab022.
+Wilkins, J.F., McKiernan, W.A., Walmsley, B.J., McPhee, M.J., 2015. 33 Automated data
+capture using laser technology to enhance live cattle assessment and description.
+Australian Farm Business Manage. J. 12, 70–77.
+Zin, T.T., Seint, P.T., Tin, P., Horii, Y., Kobayashi, I., 2020. 6 Body Condition Score
+Estimation Based on Regression Analysis Using a 3D Camera. Sensors 20 (9), 3705.
+https://doi.org/10.3390/s20133705.
+
+Ruchay, A., Kober, V., Dorofeev, K., Kolpakov, V., Miroshnikov, S., 2020. 2 Accurate
+body measurement of live cattle using three depth cameras and non-rigid 3-D shape
+recovery. Comput. Electron. Agric. 179 https://doi.org/10.1016/j.
+compag.2020.105821.
+Salau, J., Bauer, U., Haas, J.H., Thaller, G., Harms, J., Junge, W., 2015. 34 Quantification
+of the effects of fur, fur color, and velocity on Time-Of-Flight technology in dairy
+production. Springerplus 4 (14), 144. https://doi.org/10.1186/s40064-015-0903-0.
+Salau, J., Haas, J.H., Junge, W., Thaller, G., 2016a. 40 Extrinsic calibration of a multiKinect camera scanning passage for measuring functional traits in dairy cows.
+Biosyst. Eng. 151, 409–424. https://doi.org/10.1016/j.biosystemseng.2016.10.008.
+Salau, J., Haas, J.H., Junge, W., Thaller, G., 2017. 25 Automated calculation of udder
+depth and rear leg angle in Holstein-Friesian cows using a multi-Kinect cow scanning
+system. Biosyst. Eng. 160, 154–169. https://doi.org/10.1016/j.
+biosystemseng.2017.06.006.
+Salau, J., Haas, J.H., Junge, W., Thaller, G., 2020. 5 Determination of Body Parts in
+Holstein Friesian Cows Comparing Neural Networks and k Nearest Neighbour
+Classification. Animals (Basel) 11. https://doi.org/10.3390/ani11010050.
+Salau, J., Haas, J.H., Junge, W., Thaller, G., 2021. 5 Determination of Body Parts in
+Holstein Friesian Cows Comparing Neural Networks and k Nearest Neighbour
+Classification. Animals 11 (18), 50. https://doi.org/10.3390/ani11010050.
+Salau, J., Haas, J.H., Thaller, G., Leisen, M., Junge, W., 2016b. 32 Developing a multiKinect-system for monitoring in dairy cows: object recognition and surface analysis
+using wavelets. Animal 10, 1513–1524. https://doi.org/10.1017/
+s1751731116000021.
+Schlageter-Tello, A., Van Hertem, T., Bokkers, E.A.M., Viazzi, S., Bahr, C., Lokhorst, K.,
+2018. 20 Performance of human observers and an automatic 3-dimensional
+computer-vision-based locomotion scoring method to detect lameness and hoof
+lesions in dairy cows. J. Dairy Sci. 101, 6322–6335. https://doi.org/10.3168/
+jds.2017-13768.
+Shao, W., Kawakami, R., Yoshihashi, R., You, S.D., Kawase, H., Naemura, T., 2020. 7
+Cattle detection and counting in UAV images based on convolutional neural
+networks. Int. J. Remote Sens. 41, 31–52. https://doi.org/10.1080/
+01431161.2019.1624858.
+Shelley, A.N., Lau, D.L., Stone, A.E., Bewley, J.M., 2016. 31 Short communication:
+Measuring feed volume and weight by machine vision. J. Dairy Sci. 99, 386–391.
+https://doi.org/10.3168/jds.2014-8964.
+Shigeta, M., Ike, R., Takemura, H., Ohwada, H., 2018. 44 Automatic Measurement and
+Determination of Body Condition Score of Cows Based on 3D Images Using CNN.
+J. Rob. Mechatronics 30, 206–213. https://doi.org/10.20965/jrm.2018.p0206.
+Song, X., Bokkers, E.A.M., van der Tol, P.P.J., Koerkamp, P., van Mourik, S., 2018. 19
+Automated body weight prediction of dairy cows using 3-dimensional vision.
+J. Dairy Sci. 101, 4448–4459. https://doi.org/10.3168/jds.2017-13094.
+Song, X., Bokkers, E.A.M., van Mourik, S., Koerkamp, P., van der Tol, P.P.J., 2019. 13
+Automated body condition scoring of dairy cows using 3-dimensional feature
+
+14
+
+

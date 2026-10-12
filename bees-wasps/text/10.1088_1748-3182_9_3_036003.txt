@@ -1,0 +1,2024 @@
+A biomimetic vision-based hovercraft accounts for bees’ complex behaviour in various corridors
+Frédéric L. Roubieu, Julien Serres, Fabien Colonnier, Nicolas H. Franceschini, Stéphane Viollet, Franck Ruffier (2014). Bioinspiration & Biomimetics. https://doi.org/10.1088/1748-3182/9/3/036003. doi:10.1088/1748-3182/9/3/036003. Licence: cc-by. Text from pdf.
+
+Bioinspiration &
+Biomimetics
+
+You may also like
+
+PAPER • OPEN ACCESS
+
+A biomimetic vision-based hovercraft accounts for
+bees’ complex behaviour in various corridors*
+
+- New concepts, models, and assessments
+of climate-wise connectivity
+Annika T H Keeley, David D Ackerly, D
+Richard Cameron et al.
+
+To cite this article: Frédéric L Roubieu et al 2014 Bioinspir. Biomim. 9 036003
+
+- Magnetic Structures at the Boundary of
+the Closed Corona: Interpretation of SWeb Arcs
+Roger B. Scott, David I. Pontin, Anthony
+R. Yeates et al.
+
+View the article online for updates and enhancements.
+
+- Towards more sustainable and inclusive
+development corridors in Africa
+Diego Juffe Bignoli, Neil Burgess, Amayaa
+Wijesinghe et al.
+
+This content was downloaded from IP address 57.154.217.182 on 13/10/2026 at 00:34
+
+OPEN ACCESS
+Bioinspiration & Biomimetics
+Bioinspir. Biomim. 9 (2014) 036003 (22pp)
+
+doi:10.1088/1748-3182/9/3/036003
+
+A biomimetic vision-based hovercraft
+accounts for bees’ complex behaviour in
+∗
+various corridors
+Frédéric L Roubieu, Julien R Serres, Fabien Colonnier,
+Nicolas Franceschini, Stéphane Viollet and Franck Ruffier 1
+Aix-Marseille Université, CNRS, ISM UMR 7287, 13288, Marseille cedex 09, France
+E-mail: frederic.roubieu@univ-amu.fr, julien.serres@univ-amu.fr, fabien.colonnier@univ-amu.fr,
+nicolas.franceschini@univ-amu.fr, stephane.viollet@univ-amu.fr and franck.ruffier@univ-amu.fr
+Received 2 May 2013, revised 14 October 2013
+Accepted for publication 17 December 2013
+Published 11 March 2014
+Abstract
+
+Here we present the first systematic comparison between the visual guidance behaviour of a
+biomimetic robot and those of honeybees flying in similar environments. We built a miniature
+hovercraft which can travel safely along corridors with various configurations. For the first
+time, we implemented on a real physical robot the ‘lateral optic flow regulation autopilot’,
+which we previously studied computer simulations. This autopilot inspired by the results of
+experiments on various species of hymenoptera consists of two intertwined feedback loops,
+the speed and lateral control loops, each of which has its own optic flow (OF) set-point. A
+heading-lock system makes the robot move straight ahead as fast as 69 cm s−1 with a clearance
+from one wall as small as 31 cm, giving an unusually high translational OF value (125◦ s−1 ).
+Our biomimetic robot was found to navigate safely along straight, tapered and bent corridors,
+and to react appropriately to perturbations such as the lack of texture on one wall, the presence
+of a tapering or non-stationary section of the corridor and even a sloping terrain equivalent to a
+wind disturbance. The front end of the visual system consists of only two local motion sensors
+(LMS), one on each side. This minimalistic visual system measuring the lateral OF suffices to
+control both the robot’s forward speed and its clearance from the walls without ever measuring
+any speeds or distances. We added two additional LMSs oriented at +/−45◦ to improve the
+robot’s performances in stiffly tapered corridors. The simple control system accounts for
+worker bees’ ability to navigate safely in six challenging environments: straight corridors,
+single walls, tapered corridors, straight corridors with part of one wall moving or missing, as
+well as in the presence of wind.
+Keywords: optic flow (OF), autonomous guidance, collision avoidance, urban canyon
+navigation, hovercraft, biorobotics, bionics
+(Some figures may appear in colour only in the online journal)
+
+1. Introduction
+∗
+
+The following video shows the LORA robot visually guiding itself in various
+tunnels: www.dailymotion.com/embed/video/xuggrs
+1 Author to whom any correspondence should be addressed.
+
+The bio-inspired robots constructed over the past 25 years have
+largely contributed to create the field of Biorobotics, in which
+natural principles or systems are abstracted from an animal
+and implemented onboard a real robot. Beyond their possible
+usefulness in the field of Robotics, these biomimetic robots
+can be used as models to test biological hypotheses using the
+
+Content from this work may be used under the terms of
+the Creative Commons Attribution 3.0 licence. Any further
+distribution of this work must maintain attribution to the author(s) and the
+title of the work, journal citation and DOI.
+1748-3182/14/036003+22$33.00
+
+1
+
+© 2014 IOP Publishing Ltd
+
+Printed in the UK
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+rigorous experiments imposed by the real world (Franceschini
+et al 1992, Webb 2001, Ijspeert et al 2007). Biorobotics
+therefore provides us with a transdisciplinary approach, which
+can help us to identify and investigate worthwhile issues in the
+field of biological sensory-motor control systems. Over the
+past 25 years, several optic flow (OF)-based strategies have
+been implemented on various robots. The present study is the
+first, however, to account systematically for a series of flying
+abilities observed in bees by several authors in an exhaustive
+set of corridors, whereas the other bio-inspired strategies do
+not account for all the bees’ behaviours in this same set of
+corridor.
+Flying bees are able to perform some exquisitely
+difficult tasks when flying through unknown, unpredictable
+environments without using any emissive sensors to assess
+their speed or the distance to obstacles, relying mainly
+on the OF cues generated by their own motion (Horridge
+1987). Honeybees also possess velocity-tuned (VT) neurons
+responding monotonically to the optic flow (Ibbotson 2001).
+The OF is the angular speed ω (magnitude in ◦ s−1 ) at
+which any contrasting object moves past the subjects eye
+(Whiteside and Samuel 1970, Koenderink and van Doorn
+1987). Flying bees use lateral translational OF:
+
+Several OF-based strategies were implemented in physical
+robots to obtain centring behaviour while concomitantly
+controlling the forward speed:
+• using the OF balance strategy along with OF-based speed
+control (mobile robots: Santos-Victor et al (1995), Weber
+et al (1997), Baratoff et al (2000), Argyros et al (2004))
+• or the ‘bio-inspired visuomotor convergence’ theory
+(aerial robot: Conroy et al (2009); mobile robot: Humbert
+and Hyslop (2010); hovercraft: Fuller and Murray (2011)).
+Each of these OF-based control strategies gives different
+behaviours and none of them accounts for insect’s wallfollowing behaviour.
+In previous computer simulations, the autopilot based
+on the dual OF regulator called lateral optic flow regulation
+autopilot (LORA) automatically controls both the speed and
+the clearance from the walls (Serres et al 2008a). Preliminary
+results presented in Roubieu et al (2012) showed that a
+robotic hovercraft can perform not only centring but also wallfollowing tasks.
+In this paper, the LORA autopilot based on the dual
+OF regulator was implemented and tested onboard a small
+robotic hovercraft (figure 1(A)) placed in a similar corridor to
+those used to study honeybees’ behaviour. Other authors have
+endowed robots with OF-based visual guidance systems with
+small magnitude of measured OFs (less than 60–70◦ s−1 ) in
+the case of aerial robots (Zufferey and Floreano 2006, Zufferey
+et al 2007) and in that of mobile robots under steady-state
+conditions (Humbert and Hyslop 2010).
+However, it has never been previously established that
+robotic visual guidance is possible at much higher OF values
+(⩾125◦ s−1 ) in a real physical robot travelling at high speed
+(69 cm s−1 ) near a wall (31 cm away), as achieved here with the
+LORA robot. Given the proximity of the obstacle, the model
+had to be validated by performing physical tests: an account
+of these tests is presented in this paper.
+In this study, the LORA robot was equipped:
+
+• to avoid lateral obstacles (Kirchner and Srinivasan 1989,
+Srinivasan et al 1991, Serres et al 2008b, Dyhr and
+Higgins 2010, Baird and Dacke 2012),
+• to control their speed depending on the local corridor
+width (Srinivasan et al 1996, Baird et al 2006, 2010,
+Portelli et al 2010, 2011, Baird and Dacke 2012),
+• to control their speed against wind (Barron and Srinivasan
+2006) and
+• to control their speed or their position in the presence of
+moving walls (Kirchner and Srinivasan 1989, Srinivasan
+et al 1991, Baird et al 2005).
+Kirchner and Srinivasan (1989) observed that honeybees
+flying along a narrow corridor tended to maintain equidistance
+from the stationary lateral walls. These authors therefore
+suggested that this centring response might involve balancing
+the apparent motion of the images of the walls perceived
+by their two compound eyes (Kirchner and Srinivasan 1989,
+Srinivasan et al 1991).
+Recent behavioural experiments have shown that
+honeybees do not in fact systematically keep to the midline
+of corridors (Serres et al 2008b) and may instead adopt wallfollowing behaviour by navigating off-centred along a corridor.
+The latter behaviour actually makes sense, as insects must also
+be able to cope with a single-sided contrasting environment.
+In other studies, honeybees flying along a narrow tapered
+corridor have been found to keep proportional their flight speed
+and the local corridor width: the authors suggested that bees
+might proceed by regulating the total OF experienced on either
+sides (Srinivasan et al 1996).
+Other observations and experiments have shown that
+flying insects use their ventral translational OF to control
+their altitude (Ruffier and Franceschini 2005, Baird et al
+2006, Franceschini et al 2007, Portelli et al 2010) as well
+as responding to the expanding OF (Wagner 1982, Tammero
+and Dickinson 2002, Straw et al 2010, Baird et al 2013).
+
+• with a heading-lock system ensuring that the robot will
+move quickly straight ahead and therefore receives a
+purely translational OF
+• and with a visual system consisting of a minimalistic
+fly-inspired compound eye comprising two pairs of OF
+sensors oriented laterally—one of either side—with the
+addition of two pairs oriented at ± 45◦ in section 5.
+Our robotic platform is described in detail in section 2.
+The LORA autopilot based on a heading-lock system and the
+dual OF regulator mounted onboard the hovercraft to guide
+it in unknown environments are described in section 3. The
+experimental results obtained with the actual physical robot
+equipped with two pairs of pixels and the dual OF regulator
+serving to guide the robot along straight, tapered and bending
+corridors are presented in section 4. The implementation
+of frontal eyes to improve the lateral obstacle avoidance
+performances obtained in highly challenging corridors is
+discussed in section 5. In section 7, the LORA robot’s
+trajectories are systematically compared with those of bees’
+trajectories in a complete set of similar corridors in the
+presence of similar disturbances: the results of these systematic
+comparisons are summarized in the final figure.
+2
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B )
+
+(C )
+
+Figure 1. (A) A fully autonomous sighted hovercraft equipped with a miniature 8 pixel compound eye. (B) Tiny hovercraft (size:
+
+0.36 × 0.21 × 0.17 m3 ; mass: 0.87 kg) navigating along an unknown textured corridor. The robot is fully actuated by means of four ducted
+fans controlling its three degrees of freedom (on the surge, sway and yaw axes). A lift fan inflates the skirt and creates an air cushion a few
+millimetres high (∼ 2 mm) under the robot, preventing it from touching the ground. The LORA robot is equipped with an insect-inspired
+compound eye composed of four lateral eyes, i.e., four fly-inspired 2 pixel local motion sensors (LMSs), placed at ϕi = ±45◦ and
+ϕi = ±90◦ azimuthal angles (as shown in the inset) measuring the visual motion. The right and left walls of the corridor are lined with a
+natural coloured panorama depicting bushes and trees. (C) The hovercraft travels along a tapered corridor under purely translational optic
+flow (OF). This OF experienced by the robot is schematized by the white arrows on the walls.
+
+as described by several authors during the last 25 years,
+whereas previous bio-inspired robots do not account for all
+these insects performances. Our results will predictably open
+up new avenues for designing further biological experiments,
+the results of which should help in turn to improve the model.
+
+1.1. Contributions of this paper
+
+This study in the framework of biorobotics, where robots
+are often used as models for explaining animals behaviour,
+shows that bees’ behaviour can be modelled on the basis of
+OF measurements when they are flying along corridors with
+various configurations. The responses of this model to the
+uncertainties inherent to real environments, real actuators and
+real sensors were tested by implementing it onboard a real
+robotic demonstrator (a fully autonomous hovercraft). The
+hovercraft’s visually guided animal behaviour was therefore
+tested in corridors with various configurations (including
+corridors with stiffly tapering angles, bent corridors and
+straight stationary corridors placed on a flat or sloping terrain)
+lined with a natural coloured panorama depicting bushes and
+trees. Sloping terrain affected the hovercraft’s speed in the
+same way as head or tail wind disturbances. In addition,
+the corridor was equipped with a moving wall to test the
+robot’s reaction to various unilateral OF perturbations. In a
+nutshell, this study is the first systematic comparison between
+the visual guidance performances of a biomimetic robot and
+those of bees. The control scheme underlying the hovercraft’s
+behaviour accounts for many of the feats performed by bees,
+
+2. The LORA hovercraft robot
+2.1. Dynamic model and identification of the hovercraft robot
+
+The LORA robot (figure 1(A)) is a retro-fitted version of a
+miniature RC hovercraft (Seguchi and Ohtsuka 2003). The
+hovercraft’s skirt creating an air-cushion underneath the robot
+is inflated by means of a lift fan actuated by a brushless motor.
+The hovercraft is fully actuated by means of four ducted
+fans driving it on the horizontal plane and controlling its
+three degrees of freedom (on the surge, sway and yaw axes,
+figure 1(B)). Each of the four thrusters equipping the LORA
+robot is composed of a dc motor loaded with a light three-blade
+propeller producing a thrust of up to 0.72 N at 7.2 V and are
+controlled thanks to a home-made electronic board (figure 2).
+As the propellers’ profile is asymmetrical, reversing the thrust
+would not brake the robot but just cause it to slow down.
+3
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+forward and lateral linear friction coefficients, respectively.
+The control signals u f , us and u command the surge dynamics
+(equation (1)), the sway dynamics (equation (2)) and the yaw
+dynamics, respectively. Each of the four thrusters is controlled
+by combining the three control signals u f , us and u to obtain
+a PWM signal.
+Since the dynamics were identified on a flat terrain
+(β = 0◦ ), the forward and side dynamics were expected from
+equations (1) and (2) to be
+
+(A)
+
+(B)
+
+2KT ·Ubatt
+KFwd
+ζf
+=
+GV f (s) =
+1 + ζmf · s
+1 + τFwd · s
+
+(3)
+
+KT ·Ubatt
+KSide
+ζs
+=
+·
+m
+1 + ζs · s
+1 + τSide · s
+
+(4)
+
+GVs (s) =
+
+The surge and sway dynamics of the hovercraft (GV f (s) and
+GVs (s), respectively) were therefore identified as a first-order
+transfer function (equations (3) and (4)), in which the two time
+constants τFwd and τSide are of the same order of magnitude.
+Parameters KFwd,Side and τFwd,Side corresponding to each of the
+control signals uLiftFan are given in tables 2 and 3.
+2.2. The bio-inspired robot’s visual system
+
+Our hovercraft robot is equipped with a minimalistic
+compound eye consisting of only four local motion sensors
+(LMSs), based on 2 pixel OF sensors placed at azimuthal
+angles of ±45◦ and ±90◦ with a horizontal FOV of 8◦ and 14◦ ,
+respectively (figure 1(B)). Each of the four LMS consists of an
+optical assembly composed of a lens and a pair of photosensors
+(based on an iC-LSC photodiode array purchased from the
+company iC-Haus). An on-chip current amplifier is integrated
+into each photosensor, but a programmable gain was recently
+added to the circuit so as to be able to use the maximum
+range of the analogue-to-digital converter (ADC) of the μC
+(figure 3) (Ruffier and Expert 2012). When the robot moves
+straight ahead along a corridor, each eye receives within its
+small FOV a purely translational OF (figure 1(C)), which is
+defined as follows:
+Vf
+ωi =
+· sin ϕi ,
+(5)
+Dϕi
+
+Figure 2. Custom electronics: (A) Top view of the
+microcontroller-based (μC) circuit board (size: 109 × 25 mm2 ,
+mass: 8 g) including the embedded OF-based autopilot and visual
+LMSs. (B) Simplified scheme of the embedded electronics, showing
+the interconnections between the six tiny μCs and the minimalistic
+8 pixel compound eye.
+
+The lift fan was therefore used as a ‘brake’, as suggested in
+Jin et al (2004), by smoothly deflating the skirt. The forward
+and side dynamics of the hovercraft (GFwd (s) and GSide (s),
+respectively) corresponding to several lift-fan output signals
+uLiftFan were identified in the [37%; 42%] range corresponding
+to the duty cycle of the pulse-width modulation (PWM) signal
+delivered to the lift-fan controller.
+When the hovercraft’s heading  is stabilized on the
+x-axis of the corridor (see section 3.1), the equations of motion
+along the x- and y-axes can be written as follows:
+dV f
+m·
++ ζ f · V f = 2KT · Ubatt · u f
+(1)
+dt
+
+where V f is the robot’s forward speed and Dϕi is the distance
+from an object in the azimuthal direction ϕi . The OF is
+computed here using the ‘time of travel’ scheme (figure 3),
+which gives the angular speed ωi of any dark-to-light (ON) or
+light-to-dark (OFF) contrast (as occurs in flies (Franceschini
+et al 1989, Eichner et al 2011)), which is determined by
+measuring the time lag ti between the output signals of two
+neighbouring photosensors:
+ϕi
+ti =
+,
+(6)
+ωi
+where the inter-receptor angle, i.e., the angle between two
+adjacent photosensors, is denoted by ϕi . As also occurs in
+flies, each photosensor features a Gaussian angular sensitivity
+function (ASF) (Götz 1964), which is characterized by the
+acceptance angle ρi (the angle of the ASF at half height).
+
+dVs
++ ζs · Vs = KT · Ubatt · us ,
+(2)
+dt
+where m (0.878 kg) is the mass, KT is the identified gain linking
+the thruster’s force to the voltage applied and ζ f and ζs are the
+m·
+
+4
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+The latter is tuned here by slightly defocusing the lens from the
+sensor so as to equalize the values of ϕi and ρi as follows:
+ϕ90◦ = ρ90◦ = 3.5◦
+
+(7)
+
+ϕ45◦ = ρ45◦ = 2.5◦ .
+
+(8)
+
+visual signal processing and the OF-based visuomotor
+feedback loops guiding the LORA robot. The block diagram
+presented in figure 2(B) shows the architecture of the electronic
+system integrated into the LORA robot. The main μC deals
+with multi-rate tasks such as the heading-lock control system,
+the visual motion fusion process feeding the dual OF regulator,
+the data monitoring performed during the main tasks and
+the supervision of the two secondary μCs responsible for
+the lateral OF processing. The main dsPIC therefore fuses
+the visual inputs (i.e., the OF measurements ωϕmi ), the inertial
+˙ m ) and the vehicle’s heading (i.e.,
+input (i.e., the rate gyro 
+the custom micro-magnetic compass  m ). A bluetooth device
+connected to the UART peripheral of the main μC provides a
+full-duplex radio link between the freely moving robot and the
+ground station so that the hovercraft’s data can be remotely
+monitored and instructions (as regards the values of the
+OF-set-points, for instance) can be delivered. Two separate
+Li–polymer battery packs for the motors and the electronics
+(7.2 V, 2200 mAh and 7.2 V, 360 mAh, respectively) give the
+robot an endurance of 10 min. Robustness to large voltage
+disturbances was provided by a four-way ‘sensorless speed
+governor’ (Viollet et al 2008) controlling the four propellers’
+rotational speeds (rpm) in the closed-loop mode, whereas
+the lift-fan rpm was controlled via an optical sensor. The
+hovercraft is fully autonomous without requiring any umbilical
+links: it performs all the processing steps onboard and carries
+all its own sensors and actuators, its own wireless data link and
+its own power supplies. To summarize, the 6 μCs distributed
+in the LORA robot (figure 2(B)) handle no less than eight
+feedback loops (including the four sensorless speed governors)
+and make the robot relatively immune to heading disturbances
+and power supply variations.
+
+Interestingly, the values of the interommatidial angles ϕ±90◦
+and ϕ±45◦ obtained stand comparison with those measured
+at the same azimuths in the honeybee’s compound eye (Seidl
+1982). The other processing steps involved in the functional
+‘time of travel’ scheme have been described in detail in
+previous studies (Blanes 1986, Pichon et al 1989, Expert
+et al 2011, Roubieu et al 2013). The descending neurons
+found to exist in honeybees respond monotonically to front-toback translational movements (VT neurons) (Ibbotson 2001),
+thus acting like genuine OF sensors. Each of the visual
+motion sensors implemented in the hovercraft measures the
+1D angular speed ωim generated by a natural scene within a
+range of more than one decade [25◦ s−1 ; 350◦ s−1 ], which is
+similar to the visual motion measurement range of VT neurons
+[40◦ s−1 ; 1000◦ s−1 ] (Ibbotson 2001).
+In the case of the tapered corridor, the translational OF ωϕ
+experienced by the robot looking at one of the corridor walls
+at azimuth ϕ depends on the tapering angle α, and therefore
+ωϕ can vanish and even make a change of direction. This can
+be confirmed as follows (in the following equations, the same
+notation is used as in the figure 1(B)):
+V f sin ϕ − Vs cos ϕ
+ωϕ =
+(9)
+Dϕ
+˙ =0
+where  = 0 and 
+Dϕ =
+
+D(0◦ ) · (1 + tan2 (ϕ)) · cos ϕ)
+1 + (tan ϕ · tan(α − π /2))
+
+which gives
+(V f sin ϕ − Vs cos ϕ) · sin ϕ
+ωϕ =
+D(0◦ ) · (1 + tan2 (ϕ))
+· (1 + (tan ϕ · tan(α − π /2))).
+
+(10)
+
+3. The bee-inspired LORA autopilot
+The autopilot embedded onboard the real hovercraft (figure 1)
+performs multiple data-processing stages, as shown in figure 4.
+In addition to the bio-inspired dual OF regulator, the headinglock system was introduced to make the robot move straight
+ahead along the corridor axis. The autopilot therefore controls
+the robot’s motion not only forward and sideways, but also
+about the yaw axis, in line with the principles described in this
+section.
+
+(11)
+
+ϕ
+The sign of ωϕ therefore depends on the sign of 1 − tan
+tan α
+and on that of V f sin ϕ − Vs cos ϕ.
+In the present case, the orientation of the OF sensors
+ϕ (45◦ or 90◦ ) is always greater than the tapering angle
+α (7◦ or 14◦ ). This means that the direction of the OF
+will change only if the angle of orientation of the speed
+vector becomes greater than that of the OF sensors (45◦ or
+90◦ ). Thanks to our heading-lock system and our dual OF
+regulator, the robot always followed the wall in the steady
+state and the orientation of the robot’s speed vector was
+always approximately equal to the value of the tapering angle
+(i.e., about 7◦ or 14◦ ) as established in previous computer
+simulations (Serres et al 2008a)). It is most unlikely that the
+direction of the OF might change in the case of OF sensors
+oriented at 45◦ or 90◦ .
+
+3.1. The heading-lock system
+
+The hovercraft’s heading  is stabilized along the main
+axis of the corridor (the x-axis) via the heading-lock system
+based on a micro-gyro and a micro-magnetic compass
+(figure 4(A)), which compensates for any yaw disturbances by
+adjusting the rear thrusters differentially. The robot therefore
+experiences a purely translational OF (figure 1(C)), as defined
+in equation (5).
+The heading feedback loop, which is composed of
+two nested feedback loops, nullifies the robot’s yaw speed
+˙ = 0◦ s−1 and  = 0◦ ) in order to
+and angle (
+cancel any yaw drift. A proportional controller C (s) was
+included in the outer feedback loop (based on the magnetic
+micro-compass Hc (s)) and a proportional-integral (PI)
+
+2.3. Hardware architecture
+
+The photograph of the main electronic board presented
+in figure 2(A) shows the three microcontrollers (μCs—
+dsPic33FJ128GP802 from Microchip©) responsible for the
+5
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+Figure 3. Processing architecture of one 2 pixel local motion sensor (LMS). The visual signals delivered by neighbouring photosensors are
+filtered both spatially and temporally by an analogue bandpass filter with cut-off frequencies of 20 Hz and 136 Hz and a second-order
+fixed-point digital low-pass filter with a cut-off frequency of 30 Hz. The visual signals are then amplified before being digitized using the
+programmable gain controlled by an SPI bus in order to finely tune the dynamic range of the signals to the ambient illuminance and use the
+maximum range of the analogue to digital converter (Ruffier and Expert 2012). The filtered photosensor signals are then thresholded to
+determine the angular speed ωm , using the ‘time of travel’ scheme previously developed at our laboratory (Blanes 1986, 1991, Pichon et al
+1989, Franceschini et al 2009). The ‘time of travel’ t, which is proportional to the inverse of ω, elapsing between two filtered photosensor
+signals is measured by a timer: tON and tOFF are measured by means of ON and OFF contrast distinguishing processes inspired by the
+fly’s eye (Franceschini et al 1989). The delay t is measured and then used to compute the 1D angular speed ωm in the local visual field.
+The overall processing was carried out on a tiny low-power 16 bit μC (dsPIC33F128GP802 from Microchip©) at a sampling rate of 2kHz,
+giving a 0.5 ms precision measurement in the t measurement range. Whenever an LMS does not detect any new contrasting features, it
+holds the last measured value for a period of 0.5 s. Modified from Ruffier and Expert (2012).
+(A)
+
+(B )
+
+(C)
+
+Figure 4. Feedback loops implemented on the robot. (A) Custom-made heading-lock system composed of a micro-gyrometer and a
+micro-compass compensating for any yaw disturbances and keeping the robot’s heading on the x-axis of the corridor ( = 0◦ —figure 1(B)).
+(B) and (C) The bio-inspired OF-based autopilot consists of a dual lateral OF regulator based on two interdependent visuomotor feedback
+loops: a forward control loop and a side control loop, each of which has its own OF set-point, that is, ωsetFwd and ωsetSide . The forward control
+system (B) is a bilateral OF regulator that adjusts the forward thrust and the lift-fan control signal so as to keep the sum of the right and left
+fused OF ωRfused + ωLfused constant at ωsetFwd . The side control system (C) adjusts the lateral thrust on the basis of whichever of the two fused
+lateral OFs measured is the larger: max(ωRfused , ωLfused ). Details of each transfer function and their parameters are given in tables 1, 2 and 3.
+
+controller C˙ (s) was integrated into the inner-feedback loop
+(based on the micro-gyrometer Hg (s)) to improve the closedloop dynamics and obtain a zero steady-state error, thus
+locking the robot’s heading to the x-axis of the corridor (see
+figures 1(B) and 4(A)).
+
+3.2. The bio-inspired dual lateral optic flow regulation
+
+The dual lateral OF regulator consists of two intertwined
+visuomotor feedback loops controlling both the forward
+and sideways motion of the robot on the basis of the OF
+(figures 4(B) and (C)).
+6
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+The robot’s side control system previously tested in
+computer simulations Serres et al 2008a) was initially inspired
+by our findings obtained on honeybees’ wall-following
+behaviour (Serres et al 2008b) and on previous findings
+obtained on bees’ centring behaviour (Kirchner and Srinivasan
+1989). An explicit control system called the side control
+feedback loop shown in figure 4(C) (red loop) was developed.
+This first lateral OF regulator is a unilateral OF regulator that
+adjusts the vehicle’s lateral thrust (which determines the sway
+speed Vs ) so as to keep the
+ of the two fused lateral
+ higher
+fused
+, equal to the sideways OF
+OFs perceived, that is, max ωR,L
+set-point ωsetSide . The sign function sgn(ωLfused − ωRfused ) selects
+the direction corresponding to the nearest wall min(DL,R ),
+i.e., the wall generating the greatest lateral OF. Thanks to this
+unilateral OF regulator, the distance from this wall becomes
+automatically proportional to the robot’s forward speed V f ,
+whatever the speed or the distance involved. The faster the
+robot travels, the further away from that wall it will therefore
+be. The clearance from the walls (DL,R ) depends mainly on
+the sideways OF set-point. A lead integrator CSide (s) was
+introduced into the side feedback loop to increase the damping,
+thus improving the robot’s stability and its sway dynamics. The
+error signal Side is calculated as follows:
+ 
+ fused
+ fused 
+. (12)
+− ωRfused × ωsetSide − max ωR,L
+Side = sgn ωL
+
+Table 1. Transfer functions in figure 4.
+
+Transfer functions
+
+Parameters value
+
+Hc (s) = Kc
+Hg (s) = Kg
+H
+G (s) = 1s · 1+τ
+ ·s
+
+With Kc = 9.17 × 10−3 V/◦
+With Kg = 5 × 10−3 V/(◦ /s)
+With H = 4.4 × 10−1 V
+and τ = 3 × 10−1 s
+See values in table 2
+See values in table 3
+With K = 3
+With K1 = 5
+and τ1 = 3 × 10−1 s
+With K2 = 0.8,
+τ2 = 2.7 × 10−1 s and
+τ3 = 8 × 10−3 s
+With K3 = 4 × 10−1 ,
+a = 5.7, T = 2.1 × 10−1
+and τ4 = 1.59 × 10−2 s
+
+KFwd
+GFwd (s) = 1+τ
+Fwd ·s
+KSide
+GSide (s) = 1+τ
+Side ·s
+C (s) = K
+C˙ (s) = K1 · 1+τs 1 ·s
+
+CFwd (s) = K2 · 1+τs 2 ·s · 1+τ1 ·s
+3
+
+·s
+· 1+τ1 ·s
+CSide (s) = K3 · 1+a·T
+1+T ·s
+4
+
+forward controller. Depending on the sign of the output control
+signal produced by the forward controller u f , the robot can
+therefore:
+• speed up (u f > 0) by boosting the rear thrusters in the
+[0%; 60%] range (PWM) and uLiftFan to the maximum
+value of 42%;
+• slow down (u f = 0) by switching off the rear thrusters
+and keeping uLiftFan at the maximum value of 42% and
+• ‘brake’ (u f < 0) by switching off the rear thrusters and
+deflating the skirt via uLiftFan in the identified [37%; 42%]
+range.
+
+Only one lateral thruster is actuated at a time, depending on
+the sign of the output control signals us delivered by the side
+controller:
+• us < 0: the left thruster is actuated and the right one is off
+and
+• us > 0: the right thruster is actuated and the left one is
+off.
+
+The three feedback loops that make up the heading-lock
+system and the dual OF regulator are implemented in parallel
+on the main μC of the main circuit board (figure 2(A)) and
+control the LORA robot at a sampling frequency of 100 Hz.
+All the transfer functions presented in this section are presented
+in detail in table 1.
+Once the OF-based autopilot has reached the steady state
+(V f ∞ , DR,L∞ ), the LORA robot will travel at a given forward
+speed V f ∞ and at a given distance from one wall (DL∞ or
+DR∞ ). The steady-state operating point depends on the two
+OF set-points ωsetFwd and ωsetSide , as shown in figure 5(A) in
+the case of wall-following behaviour and by figure 5 B in that
+of centring behaviour.
+
+The robot’s forward control system, which was previously
+tested in computer simulations, was based on findings
+obtained on the flight behaviour of honeybees in a narrow
+tapered corridor lined with a periodic pattern of black and
+white vertical stripes (Srinivasan et al 1996). The forward
+control system is provided here by the second OF regulator
+(figure 4(B), blue loop), which holds the sum of the two fused
+lateral OFs measured, that is ωLfused +ωRfused , constant and equal
+to the forward OF set-point ωsetFwd . At all times, it adjusts
+the forward thrust, which will determine the hovercraft’s
+forward speed V f . At a given corridor width, any increase
+in the sum of the two lateral OFs is assumed here to
+result from the hovercraft’s acceleration. This control scheme
+thus automatically ensures a ‘safe forward speed’ which is
+commensurate with the local corridor width without requiring
+any information at all about the width of the corridor. A PI
+controller CFwd (s) was introduced into the forward feedback
+loop to improve the closed-loop dynamics and obtain a zero
+steady-state error, and therefore to reject any disturbances dT f
+(equation (17)) due to the sloping terrain. The error signal Fwd
+feeding the forward controller is calculated as follows:
+
+ fused
+(13)
++ ωRfused .
+Fwd = ωsetFwd − ωL
+
+3.3. Visual motion fusion
+
+Two versions of a minimalistic bee-inspired compound eye
+were implemented on the hovercraft equipped with the dual
+OF regulator. We first tested the performances of this autopilot
+with a 4 pixel compound eye consisting simply of two pairs of
+pixels (±90◦ azimuthal angles) and then extended the visual
+field towards the front by adding two pairs of pixels in the
+±45◦ optical directions, giving an 8 pixel compound eye. We
+therefore needed to feed the autopilot with a combination of
+these four visual motion signals. The visual fusion method
+defined below describes the contents of the ‘left or right FOV
+fusion’ blocks presented in figure 4.
+
+Our control method enables the robot to control its forward
+speed V f smoothly by combining the rear thrusters’ and liftfan control signals (u f and uLiftFan , respectively) in the same
+7
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B)
+
+Figure 5. Comparison between robot and bees’ operating points, assuming that bees’ behaviours are consistent with our dual optic flow
+regulator model depending on both ωsetFwd and ωsetSide . The blue parabola represents the set of operating points for which the bilateral optic
+flow is constant at a given corridor width D. The red straight line represents the set of operating points for which the unilateral optic flow
+(here, left) is constant at a given corridor width D. To compare several operating points on a same graph at different corridor widths D, the
+lateral positioning is normalized by the corridor width y/D. (A) Wall-following behaviour: 2 · ωsetSide < ωsetFwd . Black operating points for
+the LORA robot with ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 with D = 0.92 m. Green operating points for bees with ωsetFwd = 281◦ s−1
+and ωsetSide = 210◦ s−1 with D = 0.95 m given DR,L∞ = 0.24 m and V f ∞ = 0.88 m s−1 , as observed in Serres et al (2008b). (B) Centring
+behaviour: 2 · ωsetSide ⩾ ωsetFwd . Black operating point for the LORA robot with ωsetFwd = 250◦ s and ωsetSide = 125◦ s with D = 0.92 m.
+Green operating point for bees with ωsetFwd = 668◦ s and ωsetSide = 334◦ s with D = 0.12 m given DR,L∞ = 0.06 m and V f ∞ = 0.35 m s−1 as
+observed in Srinivasan et al (1991), and yellow operating point with ωsetFwd = 488◦ s−1 and ωsetSide = 244◦ s−1 with D = 0.32 m given
+DR,L∞ = 0.16 m and V f ∞ = 0.68 m s−1 as observed in Baird et al (2005).
+
+equation (14) was used to generate the right and left visual
+fused
+feeding the autopilot (figure 4).
+motion measurements ωR,L
+In each experiment presented in this section, the OF set-points
+of the vision-based autopilot were fixed at ωsetFwd = 190◦ s−1
+and ωsetSide = 125◦ s−1 .
+A digital camera (a Fastec Imaging TroubleShooter) was
+used to record the robot’s trajectories. All the details of the
+offline processing of the LORA robot’s trajectory can be found
+in Roubieu et al (2012).
+
+3.3.1. The case of a compound eye consisting of two pairs of
+pixels. Using only the ±90◦ lateral eyes, we have:
+fused
+m
+ωL,R
+= ω±90
+◦.
+
+(14)
+
+3.3.2. The case of a compound eye consisting of four pairs
+of pixels. The four LMSs output signals are combined to
+
+generate the ωLfused and ωRfused visual signals by taking the
+maximum value of each weighted OF output signal according
+to the following equation:
+fused
+ωR,L
+= max(K−ϕi ,ϕi · ω−ϕi ,ϕi )
+
+with the gain Kϕi computed as follows:
+1
+.
+Kϕi =
+sin2 ϕi
+
+4.1. Wall-following and centring behaviours in both straight
+and tapered corridors
+
+(15)
+
+In figure 7, the hovercraft entered the straight corridor on
+a central course (see the 3D trajectory in figure 7(B)). The
+trajectory plotted here shows that the robot glided safely
+at a constant clearance from the nearest wall (DL,R∞ =
+0.31 m, grey dash–dotted line), i.e., that nearest to the starting
+point. This means that the sign function (sgn(ωLfused − ωRfused ),
+figure 4(C)) selected the
+direction
+towards the nearest wall
+
+ fused
+sent the corresponding LMS
+and the criterion max ωR,L
+output to the autopilot (left +90◦ LMS in figure 7(E), red
+dotted line). The speed profile shows that the hovercraft
+kept an appropriate ‘cruise’ speed of V f ∞ = 0.69 m s−1
+(figure 7(D)). The forward OF regulator therefore strived to
+maintain the sum of the two measured lateral OFs, that is,
+fused
+(figure 7(E), blue dash–dotted line), at a constant
+ωR,L
+value corresponding to the forward OF set-point ωsetFwd .
+The hovercraft therefore adopted wall-following behaviour
+and kept its speed constant, in line with the constant local
+
+(16)
+
+4. Experimental results obtained with a 4 pixel
+compound eye
+In this section, we describe the performances of the hovercraft
+travelling along challenging unknown corridors (figures 6–
+12), thanks to the dual OF regulator and its bee-inspired
+compound eye consisting of just two pairs of pixels. When
+entering these corridors, the LORA robot was never provided
+with any explicit information about either its current forward
+speed V f , its current distance from the walls DR or DL ,
+or any other details about the corridors configuration. The
+experiments were carried out indoors under artificial lighting
+conditions. The visual motion fusion method presented in
+8
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B)
+
+(C )
+
+(D)
+
+(E )
+
+(F )
+
+Figure 6. Automatic speed control and lateral positioning of a miniature fully actuated hovercraft navigating in a 4 m long straight or tapered
+corridor. The hovercraft embeds the bee-inspired LORA autopilot based on the dual OF regulators and is endowed with an insect-inspired
+4-pixel visual system. The robot performs either a wall-following ((A) and (B)) or a centring behaviour ((C) and (D)) which depends only on
+the set of OF set-points with ωsetFwd = 250◦ s−1 and ωsetSide = 125◦ s−1 for the centring behaviour, i.e., here ωsetSide ⩽ ωsetFwd
+, as well as with
+2
+.
+The
+autonomous
+LORA
+robot
+entered the
+ωsetFwd = 250◦ s−1 and ωsetSide = 160◦ s−1 for the wall-following behaviour, i.e. ωsetSide > ωsetFwd
+2
+corridor without being informed about the configuration of the corridor and therefore operated in (E) a wall-following behaviour (1.12 s time
+interval chronophotography—black trajectory in (A)) and a centring behaviour in (F) (1.33 s time interval chronophotography—
+black trajectory in (D)). See video www.dailymotion.com/embed/video/xuggrs.
+
+corridor width. Upon applying these tests with various OF
+set-points (figure 6), it was observed that it is possible for the
+hovercraft equipped with the dual OF regulator to perform
+either wall-following behaviour (ωsetFwd = 250◦ s−1 and
+ωsetSide = 160◦ s−1 ; figure 6(A)) or centring behaviour
+(ωsetFwd = 250◦ s−1 and ωsetSide = 125◦ s−1 ; figure 6(C)),
+after taking several starting points. In each case, the marks
+
+on the trajectories plotted show that the robot kept a virtually
+constant ‘cruise’ speed while travelling along the corridor.
+These results show that the dual OF regulator accounts not only
+for bees’ wall-following behaviour—which will be observed
+whenever ωsetSide > ωsetFwd
+—but also for their centring
+2
+behaviour, which will be observed whenever ωsetSide ⩽ ωsetFwd
+.
+2
+The only condition which must be met to obtain either
+9
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B)
+
+(C )
+
+(D )
+
+(E )
+
+Figure 7. Automatic wall-following behaviour of the LORA robot in a straight 4 m long corridor. The robot was equipped with a 4 pixel
+compound eye facing in ±90◦ optical directions. (FOVs are presented in the form of blue conical shapes.) The LORA robot started on a
+central course (x0 = 0.25 m and y0 = 0.46 m) with ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 OF set-points. (A) Perspective view of the
+straight corridor. (B) 3D trajectory of the hovercraft robot navigating along the straight corridor plotted every 0.4 s. (C) Chronophotograph
+of the hovercraft robot in the horizontal plane. Marks on the trajectory indicate the robot’s position and orientation at 2.17 s time intervals.
+In the steady state, the clearance from the nearest wall reached DL∞ = 0.31 m, and the robot performed safe wall-following behaviour.
+(D) Forward speed profile V f corresponding to the trajectory shown in (C). The robot reached a steady-state forward speed
+fused
+fused
+(V f ∞ = 0.69 m s−1 . (E) Forward feedback signal (ωR,L
+) and positioning feedback signal max(ωR,L
+) with their respective set-points
+fused
+fused
+ωsetFwd and ωsetSide . The dual OF regulator strived to maintain the maximum max(ωR,L ) value and the sum of the two lateral OF max(ωR,L
+)
+at their respective set-points ωsetSide and ωsetFwd , respectively, thus making the robot perform wall-following behaviour.
+
+regulator controlled the forward speed depending on the
+local width of the corridor (the predicted speed profile is
+plotted as a function of D in the form of a grey dash–dotted
+line in figure 9(D)). The LORA autopilot therefore easily
+overcomes the OF disturbance induced by the narrowing walls
+by modifying its forward speed at all times in keeping with the
+local corridor width. As can be seen from the tests performed
+with other starting positions y0 shown in figure 10(D), the
+robot performed these wall-following tests successfully and
+hugged either the right or left wall, depending on the sign
+of Side . The trajectories plotted in figure 10(D) show that
+disturbances of this kind are rejected efficiently by the dual
+OF regulator.
+We then tested the hovercraft’s ability to navigate along a
+7◦ tapered corridor, taking several pairs of OF set-points with
+
+wall-following or centring behaviour is that the following
+criterion ωsetSide > ωsetFwd
+or ωsetSide ⩽ ωsetFwd
+must be
+2
+2
+respectively satisfied.
+The tapered corridors (with tapering angles of 7◦ and
+◦
+14 , see figures 10(A) and 10(B)) were built to test the
+vision-based autopilot’s ability to overcome the bilateral OF
+disturbances introduced by the narrowing walls. Figure 9
+shows the trajectory of the LORA robot in a 7◦ tapered corridor,
+after being made to take a central course at the start (see
+the 3D trajectory in figure 9(B)). The chronophotograph of
+the LORA robot (figure 9(C)) and the robot’s speed profile
+(figure 9(D)) show the robot’s response to the ‘non-constant
+OF disturbance’: it slowed down linearly when approaching
+the narrowest point and speeded up linearly when the corridor
+widened out beyond that point (figure 9(D)). The dual OF
+10
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+placed on a sloping terrain (β = ±1◦ , figures 8(Ac) and (Bc))
+to that observed when it was flying over a flat terrain (β = 0◦ ,
+figure 7(C)). Despite the physical disturbance dT f , the robot
+kept a constant clearance from the nearest wall (DL,R∞ =
+0.31 m; figures 8(Ac) and (Bc)) and a constant ‘cruise’ speed
+(V f ∞ = 0.69 m s−1 ; figures 8(Ad) and (Bd)). This steadystate behaviour corresponds to that which can be expected
+to occur with the pair of OF set-points ωsetFwd = 190◦ s−1
+and ωsetSide = 125◦ s−1 (figure 5(A)). The dual OF regulator
+therefore compensated efficiently for the physical disturbance
+dT f (equation (17)) due to the sloping terrain, which was
+equivalent to that induced by wind (equation (18)).
+By setting the pair of OF set-points ωsetFwd = 190◦ s−1
+and ωsetSide = 80◦ s−1 (figure 5(B)) appropriately, the
+hovercraft automatically centred and maintained its ground
+speed in the corridor (figures 8(Cc) and (Cd) and (Dc) and
+(Dd)): the robot rejected the physical disturbance due to the
+positive or negative slope, which had similar effects to those
+of a positive or a negative speed disturbance.
+The present findings on robotic navigation in the presence
+of speed disturbances show that the principles on which
+the present dual OF regulator was based also account for
+bees’ centring behaviour in the presence of wind (Barron and
+Srinivasan 2006).
+
+(ωsetFwd = 250◦ s−1 ; ωsetSide = 160◦ s−1 ) in figure 6(B)) and
+(ωsetFwd = 250◦ s−1 ; ωsetSide = 125◦ s−1 ) in figure 6(D).
+The results obtained showed that the dual OF regulator
+makes the robot adopt appropriate behaviour, that is, either
+wall-following behaviour (figure 6(B)) or centring behaviour
+(figure 6(D)), depending on the pair of OF set-points chosen. In
+all cases, the LORA robot adjusted its speed depending on the
+local corridor width, which is consistent with findings made
+on honeybees in a similar situation (Srinivasan et al 1996).
+A more ‘challenging’ unilateral tapered corridor (with
+a tapering angle of 14◦ , figure 10(B) generating a stronger
+OF disturbance than the 7◦ tapered corridor was also used
+to test the navigation skills of the LORA robot. The results
+of the tests conducted in this corridor with several starting
+positions y0 (figure 10(E)) show that the hovercraft followed
+either the right or left wall safely (figure 10(E)), depending
+on its initial ordinate y0 . One exception was observed in the
+case of the initial ordinate y0 = 0.16 m (the green trajectory
+in figure 10(E)), where the robot crashed into the right wall
+because it started off too close to that wall. This incident shows
+up the main limitation of using only ±90◦ lateral eyes, as they
+did not enable the robot to avoid this lateral obstacle. However,
+with all the other starting points, the LORA autopilot made the
+hovercraft travel safely along the 14◦ tapered corridors without
+being greatly perturbed by the major OF disturbance induced
+by the narrowing of the walls, regardless of the starting position
+y0 (figures 10(D) and 10(E)). The robot consistently showed
+suitable wall-following behaviour by following either the left
+or right wall.
+The present findings on robotic navigation along straight
+and tapered corridors show that the dual OF regulator accounts
+not only for the centring behaviour (Kircher and Srinivasan
+1989, Srinivasan et al 1991) and wall-following behaviour
+(Serres et al 2008b) but also for the system of speed control
+observed in bees in similar situations (Srinivasan et al 1996,
+Baird et al 2005, Portelli et al 2011).
+
+4.3. Automatic reaction to a 4 m ‘no contrast zone’ on one of
+the corridor walls
+
+Tests were then carried out on a 4 m long straight corridor
+(figure 11(A)) and a tapered corridor (with tapering angles
+of 7◦ and 14◦ , see figures 11(B) and (C)) in which the
+left wall was lined with a natural coloured panorama. The
+right wall was devoid of texture, and therefore mimicked the
+effect of a 4 m ‘aperture’. Only the left 2 pixel LMS could
+provide the autopilot with visual motion cues. These corridor
+configurations were used to test the behaviour of the LORA
+robot in the presence of a ‘no contrast’ zone on one corridor
+wall and its ability to cope with strong OF disturbances (in the
+7◦ and 14◦ tapered corridors), although only a single pair of
+pixels in its visual system received the relevant optical stimuli.
+The results obtained with several starting points in a 4 m
+long straight corridor are shown in figure 11(A) and those
+obtained in tapered corridors with tapering angles of 7◦ and 14◦
+are shown in figures 11(B) and 11(C). In the straight corridor
+configuration, the LORA robot hugged the left wall, i.e., the
+textured wall, and showed ‘wall-following’ behaviour even in
+the 4 m section, where no texture was present on the right
+wall (figure 11(D)), as observed with honeybees in Serres et al
+(2008b). The robot did not rush into the aperture because the
+positioning criterion selected the left 2 pixel LMS and the sign
+function (sgn(ωLfused −ωRfused ), figure 4(C)) selected the leftward
+direction that of the textured wall to be hugged. The marks on
+the trajectories plotted show that the robot accelerated during
+its journey along the corridor. As the environment was less
+cluttered in the absence of texture on one wall, the bilateral
+OF regulator made the robot speed up (with uf max = 60% and
+uliftfan = 42%) until reaching its maximum speed limit Vf max
+as it could not nullify Fwd . Based on the forward dynamics of
+
+4.2. Automatic wall-following and centring behaviour in
+corridors with a sloping floor
+
+We constructed two other straight corridors placed on either
+an ascending terrain (β = −1◦ , figure 8(A)) or a descending
+terrain (β = +1◦ , figure 8(C)).
+The straight corridors with a sloping floor were designed
+to test the ability of the dual OF regulators to cope with a
+physical disturbance dT f (equation (17), figure 4(B)) due to
+sloping terrain:
+m·g·β
+.
+(17)
+dT f =
+2KT · Ubatt
+The slope β = −1◦ can be said to be equivalent to the
+speed disturbance caused by a virtual head wind Vwindequivalent of
+−0.44 m s−1 , as described by the following equation:
+Vwindequivalent = τ f · g · sin(β ).
+
+(18)
+
+In figure 8, the hovercraft is presented as it entered the two
+straight corridors at x0 = 0.25 m and y0 = 0.46 m (see the
+3D trajectories shown in figures 8(Ab) and (Bb)). The robot
+showed similar wall-following behaviour in a straight corridor
+11
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B)
+
+(C)
+
+(D )
+
+Figure 8. Compensation for an ascending terrain (A) and (C) or a descending terrain (B) and (D) by the robot navigating along a straight 4 m
+
+long corridor adopting a wall-following behaviour (A) and (B) or a centring behaviour (C) and (D). The LORA robot was regulating optic
+flow using ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 OF set-points for the wall following behaviours and ωsetFwd = 190◦ s−1 and
+ωsetSide = 80◦ s−1 OF set-points for the centring behaviours. Perspective views of the straight 4 m corridors on an ascending terrain
+(β = −1◦ (Aa)and (Ca)) or a descending terrain (β = +1◦ (Ba) and (Da)). ((Ab), (Bb), (Cb), (Db)) 3D trajectories of the robot plotted every
+0.4 s. Chronophotograph of the hovercraft robot in the horizontal plane. Marks on the trajectories indicate the robot’s position and
+orientation at 2.2 s time intervals (Ac) and (Cc) and 1.7 s time intervals (Bc) and (Dc). ((Ad), (Bd), (Cd), (Dd)) Forward speed profiles of the
+trajectories respectively shown in ((Ac), (Bc), (Cc), (Dc)). Adopting a wall-following behaviour, the LORA robot followed—in the steady
+state—the nearest wall perfectly at a constant clearance of DR,L∞ = 0.31 m and kept its forward speed constant despite the slope of the
+terrain, reaching a ‘cruising’ speed of V f ∞ = 0.69 m s−1 . Adopting a centring behaviour, the LORA robot centred and kept its forward
+speed constant despite the slope of the terrain, reaching a ‘cruising’ speed of V f ∞ = 0.69 m s−1 . The robot equipped with the dual OF
+regulator therefore compensated efficiently for the physical disturbance due to the ascending and descending terrains.
+
+the robot on a flat terrain (equations (1) and (3), β = 0◦ , see
+table 2), the speed limit Vf max can be expected to be
+−
+
+DL∞ =
+
+Vf ∞
+with V f ∞ ⩽ Vf max .
+ωsetSide
+
+(20)
+
+t
+
+Vf max = lim KFwd · uf max · (1 − exp τFwd ) = 1.81 m s−1 .
+
+If the corridor had been long enough, the robot could therefore
+have been expected to reach a steady clearance from the left
+wall of DL∞ = 0.83 cm when reaching a speed limit of
+Vf max = 1.81 m s−1 (equation (19)). This result is therefore
+consistent with those published on honeybees (Kirchner and
+Srinivasan 1989, Srinivasan et al 1991) flying along a straight,
+
+t→+∞
+
+(19)
+The unilateral OF regulation of the sideways control
+systems makes the clearance from the nearest wall followed
+proportional to the sideways OF set-point ωsetSide (Serres et al
+2008b). We therefore have:
+12
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B )
+
+(C )
+
+(D)
+
+Figure 9. Automatic speed control of the hovercraft robot in a 4 m long tapered corridor (tapering angle: 7◦ ) with a 0.92 m wide entrance
+
+and a 0.43 m wide constriction located halfway. When entering the corridor, the robot had no information about the corridor’s configuration.
+(A) Perspective view of the 7◦ tapered corridor. (B) 3D trajectory of the hovercraft robot navigating along the tapered corridor, plotted every
+0.4 s. (C) Chronophotograph of the hovercraft robot in the horizontal plane. Marks on the trajectory indicate the robot’s position and
+orientation at 2.17 s time intervals. In the steady state, the robot showed wall-following behaviour, travelling at a safe clearance from the
+nearest wall. (D) Forward speed profiles V f corresponding to the trajectory shown in (C). The forward speed happens to be a linear function
+of the distance x travelled, and it is therefore proportional to the local corridor width D (grey dash–dotted lines). The robot therefore
+automatically decelerated when the walls narrowed and speeded up when the walls widened. The narrowing walls are treated by the LORA
+autopilot like an OF disturbance. These results show that the dual OF regulator rejected this disturbance efficiently.
+
+obstacle successfully by rejecting the strong OF disturbances
+encountered in both the 7◦ and 14◦ tapered corridors, although
+it adopted the starting position y0 . The robot roughly stabilized
+its position DL∞ at the end of the course (equation (20)). The
+marks on the trajectories show that the LORA robot slowed
+down when approaching the narrowest point and speeded up
+beyond that point, even in the absence of texture on the right
+wall. Whatever the corridor configuration (straight or tapered),
+the robot never rushed into the ‘no contrast’ zone on the right
+wall and always followed the textured wall, i.e., the left wall.
+However, the LORA robot crashed into the left wall after
+taking the starting position y0 = 0.77 m (figure 11(F)), since
+this position was too close to the wall: the 2 pixel 90◦ optical
+direction LMS was not sufficiently informative to make the
+robot avoid the wall and additional frontal ±45◦ LMSs were
+therefore necessary (see figure 10(E) and section 5.1).
+These results show that our vision-based autopilot
+enabled the hovercraft to safely avoid a lateral obstacle in
+both straight and tapered corridors successfully based on the
+measurements performed by a single 2-pixel LMS, without
+being greatly disturbed by the absence of contrast on the
+opposite side.
+
+Table 2. Identified forward dynamics in function of the lift-fan
+control signal.
+
+uLiftFan (%)
+
+KFwd (10−3 m s−1 · %−1 )
+
+τFwd (s)
+
+Fit factor(%)
+
+42
+41
+40
+39
+38
+37
+
+30.11
+28.11
+25.91
+20.88
+18.45
+16.29
+
+2.67
+2.64
+2.63
+2.02
+1.54
+1.34
+
+99.8
+99.3
+99.7
+99.4
+98.3
+96.1
+
+Table 3. Identified side dynamics in function of the lift-fan control
+
+signal
+uLiftFan (%)
+
+KSide (10−3 m s−1 · %−1 )
+
+τSide (s)
+
+Fit factor(%)
+
+42
+41
+40
+39
+38
+37
+
+16.28
+13.92
+11.02
+8.76
+8.32
+7.58
+
+2.54
+2.45
+2.2
+1.89
+1.48
+1.2
+
+94.32
+92.28
+92.11
+89.12
+88.72
+84.54
+
+narrow corridor, one wall of which was covered with a
+structureless grey sheet.
+In the tapered corridor configurations (figures 11(E)
+and (F)), the LORA robot managed to avoid a lateral
+13
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(D)
+
+(B )
+
+(C)
+
+(E )
+
+(F )
+
+(G )
+
+Figure 10. Automatic wall-following behaviour as a function of the initial ordinate y0 in both tapered (7◦ and 14◦ ) and 18◦ bend corridors.
+(A) and (B) Perspective views of the 4 m long 7◦ and 14◦ tapered corridors with a 0.92 m wide entrance and a 0.43 m and 0.42 m wide
+constriction located midway, respectively. (C) Perspective view of the 4 m long 18◦ bend corridor with a constant local corridor width of
+0.56 m. (D)–(F) Set of trajectories of the LORA robot navigating along the 7◦ and 14◦ tapered corridors and the 18◦ bending corridor in the
+case of several starting positions y0 . (G) Chronophotograph of the robot corresponding to the trajectory shown in (D), i.e., the black
+trajectory, with a 1.67 s time interval. The initial ordinate y0 was treated by the dual OF regulator as a disturbance, and the results of these
+navigation tests show that the robot performed wall-following behaviour despite the unfavourable initial ordinate. The vision-based autopilot
+therefore rejected this perturbation. However, after adopting the starting position y0 = 0.16 m in the 14◦ tapered corridor (E), the robot
+crashed into the right wall of the corridor. The 2 pixels detecting the right visual field did not enable the robot to avoid this lateral obstacle.
+
+a rotating band displaying the same panorama was stretched
+between two vertical drums. A speed-regulated motor made
+the printed band move forward or backward at a speed of
+Vp = ±0.30 m s−1 via a V-belt.
+Figure 12(C) shows superimposed trajectories recorded
+under three initial band speed conditions with Vp =
+{−0.30; 0; +0.30 m s−1 }. Similar wall-following behaviour
+
+4.4. Automatic reaction to an ‘optic flow step perturbation’
+introduced by a moving wall
+
+The corridor built for this experiment was a straight, nonstationary 4 m long, 0.92 m wide corridor (figure 12(A)). The
+4 m left and right walls were lined with a natural panorama
+depicting trees and bushes. A 1.5 m long part of the left wall
+(between abscissa x = 1.75 m to x = 3.25 m) consisting of
+14
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(D)
+
+(B )
+
+(C)
+
+(E )
+
+(F )
+
+(G )
+
+Figure 11. Automatic reaction to a 4 m ‘no-contrast’ zone in straight and tapered corridors. Since the right wall was devoid of texture (a
+
+uniform wall), only the left 2 pixel LMS could feed the autopilot with visual motion measurements/cues. (A)–(C) Perspective view of the
+4 m long straight and tapered corridors (B) and (C), with tapering angles of 7◦ and 14◦ , respectively). (D)–(F) Set of trajectories of the
+LORA robot navigating along the straight and tapered corridors after adopting several starting positions y0 . Only the two lateral eyes were
+used here. (G) Chronophotograph of the robot’s trajectory shown in (D) using the black solid line, with a 1.48 s time step. (F) The robot
+navigated safely along each corridor configuration, except when it was moving too close to the wall. Despite the absence of texture on the
+right wall, the robot therefore managed to hug the left wall (wall-following behaviour) in the straight corridor (D) and showed safe lateral
+obstacle avoidance behaviour in the tapered corridors without rushing into the ‘no-contrast’ zone (E) and (F), using a visual system
+consisting of just a single pair of pixels.
+
+was observed here to that occurring in a straight stationary
+corridor (figure 7(C)). The red trajectory is the LORA robot’s
+trajectory when the left wall was moving at a constant speed
+(Vp = +0.30 m s−1 ) in the direction of travel of the robot.
+When the robot entered this non-stationary section, it can
+be seen that it moved closer to the moving wall. The green
+trajectory (figure 12(C)) was recorded in the opposite situation,
+
+where the rotating band was moving against the direction of
+travel (Vp = −0.30 m s−1 ). The robot can be seen here to
+have shifted away from the moving wall. To understand how
+these shifts towards or away from the moving wall occurred,
+it is necessary to imagine that the stripe speed Vp on the
+left wall was perceived by the vision-based autopilot like
+V
+an ‘OF step perturbation’ of − yp affecting both the forward
+15
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B )
+
+(C )
+
+(D)
+
+Figure 12. Automatic reaction to the ‘OF step perturbation’ resulting from a non-stationary section of the left wall from abscissa x = 1.75 m
+
+to x = 3.25 m. The wall was set in motion via a band stretched between two actuated drums. The walls and the strip band were lined
+with a natural coloured panorama. A set of three experiments was performed, corresponding to three initial band speed conditions
+Vp = {−0.3; 0; 0.3 m s−1 }. (A) Perspective view of the non-stationary corridor and the two drums. (B) 3D trajectory of the LORA robot
+plotted every 0.4 s. The band was not set in motion here (Vp = 0 m s−1 ). (C) Trajectories of the LORA robot under the three initial band
+speed conditions [Vp = {−0.3; 0; 0.3 m s−1 }] (green, black and red trajectories, respectively). The robot started on a central course and then
+followed the nearest wall, i.e., the left wall, and when entering the non-stationary section of the corridor, it either approached the left wall or
+moved away from it, depending on the direction in which the belt was moving. In the case of the black trajectory (Vp = 0 m s−1 ), the robot
+navigated at a constant clearance from the wall (DL∞ = 0.31 m). This behaviour of the robot in a non-stationary corridor is consistent with
+findings made by Kirchner and Srinivasan (1989) and Portelli et al (2010) on honeybees flying along a non-stationary corridor. (D) Speed
+fused
+) constant
+profiles of the robot’s trajectories. The forward control system responsible for keeping the sum of the two lateral OFs ( ωR,L
+rejected the ‘OF step perturbation’ due to the moving wall by increasing its forward speed (solid red line) or by decreasing its speed (solid
+green line).
+
+and sideways control loops (figures 4(B) and (C)). When the
+speed of the stripe was negative Vp = −0.3 m s−1 , a positive
+perturbation of 55◦ s−1 was applied to the autopilot, whereas
+Vp = +0.3 m s−1 generated a negative OF step perturbation of
+−55◦ s−1 . A negative OF step perturbation in the motion of the
+wall was taken to mean that the moving wall was farther away,
+causing the hovercraft to accelerate while coming closer to the
+wall (figures 12(C) and (D), red solid line); and conversely,
+when a larger OF was measured, the opposite effect occurred
+(the green solid line in figures 12(C) and (D)).
+These results obtained with the dual OF regulator
+therefore account for the previous findings made on bees
+in a non-stationary corridor (Kirchner and Srinivasan 1989,
+Srinivasan et al 1991, Baird et al 2005).
+
+natural panoramas is shown in figure 10(C). This corridor was
+built to test the navigation performances of the LORA robot
+when it was no longer aligned with the local longitudinal axis
+of the corridor.
+In this 18◦ bending corridor, the robot was made to
+adopt several initial starting positions with x0 = 0.25 m and
+y0 = {0.16; 0.2; 0.44 m} (figure 10(F)). The heading-lock
+feedback loop was constantly set so as to align the robot’s
+body with the 0◦ orientation, which is the mean corridor
+orientation. The corridor walls formed an angle of +9◦ with
+the longitudinal axis of the corridor in the first half and an
+angle of −9◦ in the second half of the corridor. The results
+presented in figure 10(F) show that the robot navigated safely
+along the corridor regardless of its starting position y0 and that
+it showed wall-following behaviour despite the non-alignment
+of the robot’s body axis with the local longitudinal axis of
+the corridor. The robot also switched between following the
+right and left walls (black and blue trajectories, figure 10(F))
+because the sign function (figure 4(C)) selected the direction
+corresponding to the nearest wall (min(DL,R )). In the second
+
+4.5. Automatic navigation in a 18◦ bending corridor
+
+The experiments described in this section were performed with
+a bending 4 m long, 0.56 m wide corridor with an 18◦ bend
+located halfway. A perspective view of this corridor lined with
+16
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+part of the bending corridor, the robot hugged the left wall
+rather too closely because of the lack of visual motion
+sensors in its frontal part. As the corridor width was constant
+(D = 0.56 m), the forward speed was kept roughly constant
+at V f = 0.42 m s−1 .
+
+5.2. Repeatability of the LORA robot’s performances with an
+8 pixel compound eye
+
+Figure 14(G) shows 12 successive trials in a 14◦ tapered
+corridor. The grey dash–dotted lines give the steady-state
+clearance of the LORA robot from the nearest wall with the OF
+set-points ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 . Unlike
+the trajectory of the robot equipped with a 4-pixel visual system
+(figure 14(F)), the mean trajectory recorded here (figure 14(G),
+red solid line) shows that the robot navigated successfully
+along the 14◦ tapered corridor without crashing into the wall
+during 12 successive trials (figure 14(G)). The robot therefore
+showed more reliable wall-following behaviour, thanks to the
+addition of the ±45◦ optical directional eyes, which improves
+the two visual feedback signals controlling the dual OF
+regulator equipping the LORA robot.
+
+5. Experimental results obtained with a 8 pixel
+compound eye
+In this section, our previous compound eye was improved by
+adding two LMSs, i.e., two pairs of pixels in the frontal part
+facing at an azimuthal angle of ±45◦ in order to obtain a
+minimalistic compound eye consisting of four pairs of pixels
+connected to four LMSs. The two extra frontal eyes were
+intended to help the robot navigate in more demanding to
+‘extreme’ corridor configurations. The forward 45◦ eye detects
+the lateral OF before the lateral eye. When looking forward, the
+robot is therefore endowed with a kind of prediction horizon
+that helps it to reject lateral disturbances. This prediction
+horizon (in seconds) can be computed as follows:
+τ0 =
+
+1
+= 0.46 s.
+ωR
+
+6. Repeatability of the LORA robot’s performance
+with a 4 pixel and 8 pixel compound eye
+Figure 14 gives the results of a repeatability study on the LORA
+robot based on a set of 12 successive trajectories in one straight
+(figure 14(A)) and two tapered corridors (figures 14(B) and (C))
+with tapering angles of 7◦ and 14◦ . The mean trajectory (red
+solid line) and the standard deviation of the mean (pink shaped
+area) were calculated based on a set of 12 recorded trajectories.
+The robot was equipped with the 4 pixel visual system shown
+in figures 14(D)–(F)) (where the FOVs are given by a blue
+conical shape).
+In both the straight and 7◦ tapered corridors (figures 14(D)
+and (E)), the LORA robot entered the corridor in a central
+position and achieved safe wall-following behaviour by
+controlling both its speed and its clearance from the walls on
+the sole basis of OF cues during the 12 successive trajectories.
+The mean trajectory and the standard deviation of the mean
+show that the robot achieved excellent performances in terms
+of the repeatability and reliability of the dual OF regulator used
+to guide the robot equipped with an eye consisting of only 4
+pixels along hitherto unknown corridors. However, when the
+robot started off too near the wall (y0 = 0.16 m, figure 14(F))
+of the 14◦ tapered corridor, it crashed in all 12 successive trials,
+which shows the limitations of using only a 4 pixel compound
+eye to navigate in highly challenging corridors.
+This limitation can be explained theoretically in the case
+of tapered corridors regardless of the robots dynamics. In the
+case of the dual OF regulator (based on forward and side
+control laws) used here, it has been established by Serres et al
+(2008a) that the forward speed varies exponentially with time
+in tapered corridors. The visual closed-loop time constant can
+therefore be computed as follows:
+ωsetFwd
+τ (α) =
+(22)
+2 · tan(α) · ωsetSide · (ωsetFwd − ωsetSide )
+
+(21)
+
+Therefore, after being endowed with this prediction horizon,
+the robot can negotiate the 14◦ tapered corridor more easily
+and avoid colliding with the wall.
+Visual motion signals were fused as in equations (15)
+and (16) to generate the left and right visual motion signals
+(ωLfused and ωRfused , respectively). The OF set-points were set at
+ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 .
+5.1. Safe navigation in stringent corridor configurations with
+two additional frontal eyes
+
+The LORA robot was therefore tested in a 7◦ tapered corridor
+(figure 13(A)), a 14◦ unilateral tapered corridor (figure 13(B))
+and a 18◦ bending corridor (figure 13(C)) to assess the
+navigation performances of the latest version of the LORA
+robot equipped with this novel compound eye.
+The trajectories of the LORA robot with several starting
+positions y0 in the tapered and bend corridors are presented in
+figures 13(D)–(F). The robot showed perfect wall-following
+behaviour in each of the corridor configurations tested,
+regardless of its starting position y0 . Marks on the trajectories
+show that the robot also controlled its speed depending on the
+local corridor width. It is worth mentioning that in the case of
+the initial ordinate y0 = 0.16 m in the 14◦ tapered corridor, the
+robot avoided the right wall and followed it at a safe clearance,
+whereas it crashed into the wall when it was equipped only with
+its original 4 pixel compound eye (figures 10(F) and 14(F)). In
+the 18◦ bend corridor, the robot kept a wider clearance from the
+nearest wall (figure 13(F)) than it did with a purely ±90◦ lateral
+vision system (figure 10(F)), which confirms that frontal eyes
+improved the ability of the LORA robot to navigate safely
+in challenging corridor configurations by preventing lateral
+collisions.
+
+with ωsetFwd = 190◦ s−1 , ωsetSide = 125◦ s−1 .
+Equation (22) gives a strong criterion for choosing
+appropriate OF set-points in terms of the safe navigation. For
+example, in the case where α = 7◦ , equation (22) shows that
+the robot has to decelerate and reach its steady forward speed
+with a maximum time constant of τ (7◦ ) = 5.49 s to avoid
+17
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(D)
+
+(B )
+
+(C)
+
+(E )
+
+(F )
+
+(G )
+
+Figure 13. Robust navigation in highly challenging corridor configurations in both tapered (7◦ and 14◦ ) and 18◦ bend corridors thanks to the
+
+two additional frontal eyes. (A)–(C) Perspective views of the 4 m long tapered corridors ((A) and (B)), 7◦ and 14◦ ) and the 18◦ bend corridor.
+(D)–(F) Set of trajectories of the LORA robot navigating along the tapered corridors (y0 = {0.16; 0.31; 0.46; 0.61; 0.77 m}) and the 18◦
+bend corridor y0 = {0.16; 0.28; 0.44 m}. (G) Chronophotograph of the robot shown in (E) by a solid red line, with a 1.48 s time step. In
+comparison with the two-eyed robot (figure 10), the LORA robot gave better navigation performance since it never crashed into the walls
+(E) and travelled at a safer clearance from the walls (F).
+
+crashing. As the robot is endowed with a forward dynamic time
+constant of τFwd = 2.67 s, its dynamics are fast enough to cope
+with the dual OF regulation laws and therefore to decelerate
+safely. However, in the case where α = 14◦ , equation (22)
+shows that the robot must decelerate and reach its steady
+forward speed with a time constant of τ (14◦ ) = 2.7 s, which
+is very similar to its own dynamics τFwd . In this 14◦ tapered
+corridor configuration, the robot therefore cannot decelerate
+fast enough to reach its safe steady forward speed in time and
+it therefore crashes into the wall.
+
+7. Discussion
+Here we present a complete benchmark for a miniature fully
+actuated hovercraft (figure 1(A)) equipped with a bee-inspired
+autopilot named LORA. The performances of the robot
+endowed with a minimalistic visual system (consisting of only
+four or eight pixels forming up to four local motion sensors
+(LMSs) show that the hovercraft can navigate safely under
+purely visual control along challenging unknown corridors
+such as bending corridors and a straight corridor over flat or
+18
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(D )
+
+(B)
+
+(C)
+
+(E )
+
+(F )
+
+(G)
+
+Figure 14. Study on the repeatability of the performance of the two-eyed LORA robot (D)–(F) and those of the four-eyed robot (G). (A)–(C)
+
+Perspective views of the 4 m long straight and tapered corridors. (D)–(F) Repeatability of the LORA robot’s trajectory equipped with two
+±90◦ lateral eyes. The mean trajectory (solid red line) and the standard deviation of the mean (pink shaded area) were computed from a set
+of 12 trajectories and plotted with the expected/predicted steady-state position (grey dash–dotted line). The robot showed efficient
+wall-following behaviour in both straight and 7◦ tapered corridors. The mean trajectory (solid red line) matched the expected/predicted
+steady-state position very closely. As depicted in 13(E), the visual system did not prevent the robot from crashing into the wall. (G) The
+four-eyed robot showed efficient wall-following behaviour and alternately avoided both the right and left walls. All the trajectories shown
+here resulted from the dual OF regulators scheme with ωsetFwd = 190◦ s−1 and ωsetSide = 125◦ s−1 .
+
+autopilot guides the hovercraft in the 2D horizontal plane,
+avoiding the walls by performing manoeuvres involving only
+translational degrees of freedom along the x- and y-axis. The
+keystone of the LORA autopilot is the heading-lock system,
+which enables the robot to experience a purely translational OF
+and the pair of intertwined OF regulators forming the dual OF
+regulator which strives to hold the perceived OF constant by
+adjusting both the forward and side thrusts. Bees are likewise
+equipped with a heading-lock system based on polarized light
+cues (von Frisch 1948), which enables these insects to take
+an impressively straight course even in the presence of wind
+(Riley and Osborne 2001).
+Figure 15 shows the similarities existing between the
+performances of bees observed during the last 25 years in
+ethological studies and those of our robot equipped with the
+dual OF regulator, tested in similar situations. As summarized
+in the latter figure, the explicit LORA control system (figure 4)
+may provide a possible explanation for the behaviour of
+free-flying bees along a stationary (Kirchner and Srinivasan
+1989, Srinivasan et al 1991, Baird et al 2005, Serres et al
+
+sloping terrain (figures 6(A), 6(C), 7 and 8), even when one
+wall is devoid of texture (figure 11), or when one wall is
+moving (figure 12), and even when the corridor narrows or
+bends on the horizontal plane (figures 6(B), 6(D), 9, 10 and
+13). The 8 pixel compound eye was implemented on the LORA
+robot to improve its lateral obstacle avoidance performances
+in demanding corridor configurations (figure 13) by increasing
+the optical directions to ±45◦ . The LORA’s robustness to
+strong physical OF disturbances was also tested. The lack of
+contrast on one side (figure 11), tapered corridors (figures 9,
+10 and 13) and a moving wall (figure 12) were treated by the
+LORA autopilot like strong OF perturbations and a positive
+or negative sloping terrain was handled in the same way
+as an external physical disturbance such as a headwind or
+tailwind.
+Fully actuated robots can be endowed with these
+navigation skills by equipping them with a minimalistic visual
+system consisting of only 4 or 8 pixels, i.e., two or four
+2 pixel LMSs, forming a primitive insect-inspired visual
+system requiring few computational resources. The LORA
+19
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+(A)
+
+(B)
+
+(H )
+
+(I )
+
+(C)
+
+(D)
+
+(J )
+
+(K )
+
+(E )
+
+(F )
+
+(L )
+
+(M )
+
+(G)
+
+(N )
+
+Figure 15. Summary of the similarities of the bee behaviours observed in the last 25 years ethological studies (A)–(G) and the fully actuated
+robot behaviours equipped with the bee-inspired LORA autopilot tested in similar situations (H)–(N). These results show the dual OF
+regulator combined with heading-lock system can be viewed as a working hypothesis to explain how the honeybee Apis Melliphera controls
+both its speed and position on the horizontal plane of a constraint corridor. Blue arrows represent the main direction of the agent moving in a
+corridor where the entrance is represented by a cross. Red and green arrows represent the direction of motion of the moving wall in case of a
+non-stationary corridor. The last comparison (G) versus (N) shows how constant speed behaviour despite head wind may be explained by the
+presented model.
+
+2008b) or non-stationary corridor (Kirchner and Srinivasan
+1989, Srinivasan et al 1991, Portelli et al 2010) or a tapered
+corridor (Srinivasan et al 1996, Portelli et al 2011) or even a
+corridor in which no texture is present on one wall (Kirchner
+and Srinivasan 1989, Srinivasan et al 1991), mimicking the
+effect of an ‘aperture’ (Serres et al 2008b) or again in
+the presence of wind (Barron and Srinivasan 2006). This
+autopilot was designed in line with the Gibsonian viewpoint
+(Gibson 1950) according to which an animal’s visual system
+drives the locomotor system without any representation of
+the environment (Pichon et al 1989, Franceschini et al 1992,
+Duchon and Warren 1994).
+The direction control system based on the sign function
+(figure 4(C)) may restrict the robot’s manoeuvres, as it acts
+only as a ‘reflex’ mechanism, making the robot always head
+towards the nearest wall (min(DL,R ), and hence max(ωL,R ) in
+figure 4(C)).
+
+The sideways control system with which the LORA
+autopilot is equipped makes the robot’s trajectory highly
+dependent on the corridor’s configuration (as can be seen in
+figure 10(E) and 10(F)). The robot is therefore always bound
+to aimlessly follow the nearest wall. For instance, an artificial
+bee equipped with the LORA autopilot (with OF set-points
+typical of wall-following behaviour) entering the left entrance
+of a straight corridor would never reach a reward placed near
+the right wall at the end of the corridor, because the artificial
+bee would always follow the left wall as long as no other set
+of OF set-points is provided to make it switch from one wall
+to the other.
+8. Conclusion
+In conclusion, our autonomous hovercraft was able to
+travel at high optic flows (125◦ s−1 ) along challenging
+20
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+unfamiliar corridors such as non-stationary corridors and those
+comprising ‘no contrast’ zones, tapered and bent corridors and
+even a sloping terrain, using very few pixels (4 or 8 pixels)
+without any need for metric sensors such as rangefinders
+or velocimeters. We have also reported above how we have
+improved the navigation performances of the robot under
+exacting corridor conditions by adding two frontal eyes. The
+LORA autopilot based on the dual OF regulator combined
+with a heading-lock system is the first step to designing
+a deft, lightweight ( the autopilots electronics weigh only
+8.17 g), power-lean (power consumption: 0.75 W) low-cost
+visuomotor control system which could be potentially installed
+on a 3D free-flying micro-air vehicle by adding a ventral
+and a dorsal OF regulator making it capable of performing
+ground following, ceiling following or even docking tasks such
+as those tested in Expert and Ruffier (2012). This autopilot
+also suggests new ways of finding solutions to the automatic
+guidance of other types of holonomic and fully actuated
+vehicles such as blimps, underwater vehicles, quadrotors and
+even helicopters with counter-rotating rotors (in which the
+pitch and roll axes are uncoupled).
+The next step will consist in exploring other visual fusion
+strategies, especially that based on an anticipatory feedforward
+system involving the ±45◦ lateral eyes, such as those tested in
+Ruffier and Franceschini (2008) to help the robot anticipate and
+achieve lateral obstacle avoidance. We also intend to enlarge
+the robots field of view in the central part of the visual field,
+for example with the panoramic CurvACE sensor (Floreano
+et al 2013), to improve the OF measurements and enable the
+robot to negotiate even more challenging corridors comprising
+L-junctions or T-junctions successfully.
+
+Baird E and Dacke M 2012 Visual flight control in naturalistic and
+artificial environments J. Comp. Physiol. A 198 869–76
+Baird E, Kornfeldt T and Dacke M 2010 Minimum viewing angle
+for visually guided ground speed control in bumblebees J. Exp.
+Biol. 213 1625–32
+Baird E, Srinivasan M V, Zhang S and Cowling A 2005 Visual
+control of flight speed in honeybees J. Exp. Biol. 208 3895–905
+Baird E, Srinivasan M, Zhang S, Lamont R and Cowling A 2006
+Visual control of flight speed and height in the honeybee From
+Animals to Animats 9 vol 4095 ed S Nolfi, G Baldassarre,
+R Calabretta, J Hallam, D Marocco, J A Meyer, O Miglino
+and D Parisi (Berlin: Springer) pp 40–51
+Baratoff G, Toepfer C and Neumann H 2000 Combined
+space-variant maps for optical flow navigation Biol. Cybern.
+83 199–209
+Barron A and Srinivasan M V 2006 Visual regulation of ground
+speed and headwind compensation in freely flying honey bees
+(Apis mellifera L.) J. Exp. Biol. 209 978–84
+Blanes C 1986 Appareil visuel élémentaire pour la navigation à vue
+d’un robot mobile autonome Master Thesis in Neurosciences
+(DEA in French) Neurosciences (Aix-Marseille II)
+Blanes C 1991 Guidage visuel d’un robot mobile autonome
+d’inspiration bionique U-Thesis INP Grenoble
+Conroy J, Gremillion G, Ranganathan B and Humbert J S
+2009 Implementation of wide-field integration of optic
+flow for autonomous quadrotor navigation Auton. Robots
+27 189–98
+Duchon A and Warren W 1994 Robot navigation from a Gibsonian
+viewpoint IEEE Int. Conf. on Systems, Man, and Cybernetics.
+Humans, Information and Technology (San Antonio, USA)
+vol 3 pp 2272–7
+Dyhr J P and Higgins C M 2010 The spatial frequency tuning of
+optic-flow-dependent behaviors in the bumblebee Bombus
+impatiens J. Exp. Biol. 213 1643–50
+Eichner H, Joesch M, Schnell B, Reiff D F and Borst A 2011
+Internal structure of the fly elementary motion detector Neuron
+70 1155–64
+Expert F and Ruffier F 2012 Controlling docking, altitude and speed
+in a circular high-roofed tunnel thanks to the optic flow
+IROS’12: Int. Conf. on Intelligent Robots and Systems
+(Vilamoura, Portugal) pp 1125–32
+Expert F, Viollet S and Ruffier F 2011 Outdoor field performances
+of insect-based visual motion sensors J. Field Robot.
+28 521–41
+Floreano D et al 2013 Miniature curved artificial compound eyes
+Proc. Natl Acad. Sci. USA 110 9267–72
+Franceschini N, Pichon J M and Blanes C 1992 From insect vision
+to robot vision Phil. Trans. R. Soc. B 337 283–94
+Franceschini N, Riehle A and Le Nestour A 1989 Directionally
+selective motion detection by insect neurons facets of vision
+Facets of Vision ed D G Stavanga and R C Hardie (Berlin:
+Springer) pp 360–90
+Franceschini N, Ruffier F and Serres J 2007 A bio-inspired flying
+robot sheds light on insect piloting abilities Curr. Biol.
+17 329–35
+Franceschini N, Ruffier F, Serres J and Viollet S 2009 Optic flow
+based visual guidance: from flying insects to miniature aerial
+vehicles Aerial Vehicles (Vienna: In-Tech) pp 747–70
+Fuller S and Murray R M 2011 A hovercraft robot that uses
+insect-inspired visual autocorrelation for motion control in a
+corridor ROBIO’11: IEEE Int. Conf. on Robotics and
+Biomimetics (Karon Beach, Phuket) pp 1474–81
+Gibson J 1950 The Perception of the Visual World (Oxford:
+Houghton Mifflin) p 242
+Götz K 1964 Optomotorische untersuchung des visuellen systems
+einiger augenmutanten der fruchtfliege drosophila Biol.
+Cybern. 2 77–92
+Horridge G 1987 The evolution of visual processing and the
+construction of seeing systems Proc. R. Soc. B 230 279–92
+
+Acknowledgments
+We are grateful to the reviewers who helped us to improve
+the paper and clarify our statements. We thank R Brinkworth
+and D O’Carroll (Adelaide University, Australia) for kindly
+making their high dynamic range panoramic images available
+to us, J Diperi and Y Luparini for their involvement in the
+mechanical design of the LORA robot and the test bench, M
+Boyron for his involvement in the overall electronic design
+of the LORA robot, A Manecy and T Raharijaona for their
+fruitful comments and J Blanc for correcting the English paper.
+This research was supported partly by CNRS (Life Science;
+Information Science; Engineering Science and Technology),
+Aix-Marseille University and the French National Research
+Agency (ANR) (EVA project and IRIS project under ANR
+grants’ number ANR608-CORD-007-04 and ANR-12-INSE0009, respectively).
+References
+Argyros A, Tsakiris D and Groyer C 2004 Biomimetic centering
+behavior mobile robots with panoramic sensors IEEE Robot.
+Autom. Mag. 11 21–30
+Baird E, Boeddeker N, Ibbotson M R and Srinivasan M V 2013 A
+universal strategy for visually guided landing Proc. Natl Acad.
+Sci. 110 18686–91
+
+21
+
+F L Roubieu et al
+
+Bioinspir. Biomim. 9 (2014) 036003
+
+Humbert J and Hyslop A M 2010 Bioinspired visuomotor
+convergence IEEE Trans. Robot. 26 121–30
+Ibbotson M 2001 Evidence for velocity-tuned motion-sensitive
+descending neurons in the honeybee Proc. R. Soc. B
+268 2195–201
+Ijspeert A J, Crespi A, Ryczko D and Cabelguen J-M 2007 From
+swimming to walking with a salamander robot driven by a
+spinal cord model Science 315 1416–20
+Jin Z, Waydo S, Wildanger E, Lammers M, Scholze H, Foley P,
+Held D and Murray R 2004 MVWT-II: the second generation
+Caltech Multi-Vehicle Wireless Testbed Proc. 2004 American
+Control Conf. (Boston, USA) vol 6 pp 5321–6
+Kirchner W and Srinivasan M V 1989 Freely flying honeybees use
+image motion to estimate object distance Naturwissenchaften
+76 281–2
+Koenderink J and van Doorn A 1987 Facts on optic flow Biol.
+Cybern. 56 247–54
+Pichon J, Blanes C and Franceschini N 1989 Visual guidance of a
+mobile robot equipped with a network of self-motion sensors
+Proc. SPIE 1195 44–53
+Portelli G, Roubieu F L, Ruffier F and Franceschini N 2011
+Honeybees’ speed depends on dorsal as well as lateral, ventral
+and frontal optic flows PLoS ONE 6 e19486
+Portelli G, Ruffier F and Franceschini N 2010 Honeybees change
+their height to restore their optic flow J. Comp. Physiol. A
+196 307–13
+Riley J R and Osborne J L 2001 Flight trajectories of foraging
+insects: observations using harmonic radar Insect Movement:
+Mechanisms and Consequences ed D R Reynolds and
+C D Thomas (Wallingford: CABI) chapter 7 pp 129–57
+Roubieu F, Expert F, Sabiron G and Ruffier F 2013 Two-directional
+1-g disual motion sensor inspired by the fly’s eye IEEE Sensors
+J. 13 1025–35
+Roubieu F L, Serres J, Franceschini N, Ruffier F and Viollet S 2012
+A fully-autonomous hovercraft inspired by bees;
+wall-following and speed control in straight and tapered
+corridors ROBIO’12: IEEE Int. Conf. on Robotics and
+Biomimetics (Guangzhou, China) pp 1311–8
+Ruffier F and Expert F 2012 Visual motion sensing onboard a 50-g
+helicopter flying freely under complex VICON-lighting
+conditions CME’12: IEEE Int. Conf. on Complex Medical
+Engineering (Kobe, Japan) pp 634–9
+Ruffier F and Franceschini N 2005 Optic flow regulation: the key to
+aircraft automatic guidance Robot. Auton. Syst. 50 177–94
+Ruffier F and Franceschini N 2008 Aerial robot piloted in steep
+relief by optic flow sensors IROS’08: Int. Conf. on Intelligent
+Robots and Systems (Nice, France) pp 1266–73
+
+Santos-Victor J, Sandini G, Curotto F and Garibaldi S 1995
+Divergent stereo in autonomous navigation: from bees to robots
+Int. J. Comput. Vision 14 159–77
+Seguchi H and Ohtsuka T 2003 Nonlinear receding horizon control
+of an underactuated hovercraft Int. J. Robust Nonlinear Control
+13 381–98
+Seidl R A 1982 Die sehfelder und ommatidien divergenzwinkel von
+Arbeiterin, Königin und drohn der honigbiene (Apis mellifica)
+PhD Thesis Technische Hochschule Darmstadt
+Serres J, Dray D, Ruffier F and Franceschini N 2008a A
+vision-based autopilot for a miniature air vehicle: joint
+speed control and lateral obstacle avoidance Auton. Robots
+25 103–22
+Serres J, Masson G, Ruffier F and Franceschini N 2008b A bee in
+the corridor: centering and wall-following Naturwissenschaften
+95 1181–7
+Srinivasan M, Lehrer M, Kirchner W and Zhang S 1991 Range
+perception through apparent image speed in freely flying
+honeybees Vis. Neurosci. 6 519–35
+Srinivasan M, Zhang S, Lehrer M and Collett T 1996 Honeybee
+navigation en route to the goal: visual flight control and
+odometry J. Exp. Biol. 199 237–44
+Straw A D, Serin L and Dickinson M H 2010 Visual control of
+altitude in flying drosophila Curr. Biol. 20 1550–6
+Tammero L F and Dickinson M H 2002 The influence of visual
+landscape on the free flight behavior of the fruit fly Drosophila
+Melanogaster J. Exp. Biol. 205 327–43
+Viollet S, Kerhuel L and Franceschini N 2008 A 1-gram dual
+sensorless speed governor for micro-air vehicles 16th
+Mediterranean Conf. on Control and Automation (Ajaccio,
+France) pp 1270–75
+von Frisch K 1948 Gelöste und ungelöste Rätsel der Bienensprache
+Naturwissenschaften 35 12–23
+Wagner H 1982 Flow-field variables trigger landing in flies Nature
+297 147–8
+Webb B 2001 Can robots make good models of biological
+behaviour? Behavioural Brain Sci. 24 1033–50
+Weber K, Venkatesh S and Srinivasan M 1997 Insect Inspired
+Behaviours for the Autonomous Control of Mobile Robots in
+From Living Eyes to Seeing Machines ed M Srinivasan and
+S Venkatesh (Oxford: Oxford University Press) pp 226–48
+Whiteside T and Samuel G 1970 Blur zone Nature 225 94–5
+Zufferey J-C and Floreano D 2006 Fly-inspired visual steering of an
+ultralight indoor aircraft IEEE Trans. Robot. 22 137–46
+Zufferey J-C, Klaptocz A, Beyeler A, Nicoud J-D and Floreano D
+2007 A 10-gram vision-based flying robot Adv. Robot.
+21 1671–84
+
+22
+
+

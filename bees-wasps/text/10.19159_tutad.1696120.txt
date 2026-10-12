@@ -1,0 +1,807 @@
+Deep Learning Approaches for Image-Based Classification of Honey Bee (Apis mellifera) Lineages
+Berkant İsmail Yıldız, Kemal Karabağ (2025). Türkiye Tarımsal Araştırmalar Dergisi. https://doi.org/10.19159/tutad.1696120. doi:10.19159/tutad.1696120. Licence: cc-by-nc-nd. Text from pdf.
+
+Türkiye Tarımsal Araştırmalar Dergisi
+dergipark.org.tr/tutad
+
+Review
+
+Turk J Agric Res
+2025, 12(2): 224-230
+© TÜTAD
+ISSN: 2148-2306
+e-ISSN: 2528-858X
+doi: 10.19159/tutad.1696120
+
+Deep Learning Approaches for Image-Based Classification of
+Honey Bee (Apis mellifera) Lineages
+Berkant İsmail YILDIZ, Kemal KARABAĞ*
+Akdeniz University, Faculty of Agriculture, Department of Agricultural Biotechnology, Antalya, TÜRKİYE
+
+Received: 09.05.2025
+
+Accepted: 26.06.2025
+
+ORCID ID (By author order)
+orcid.org/0000-0001-8965-6361
+orcid.org/0000-0002-4516-6480
+*
+Corresponding Author: karabag@akdeniz.edu.tr
+
+Abstract: Honey bees (Apis mellifera) play a vital role in maintaining ecosystem balance and supporting the sustainability of
+agricultural production. Accurate classification of these insects at the species and subspecies levels is essential for biodiversity
+monitoring, understanding local adaptation, and developing effective conservation strategies. In recent years, deep learning
+algorithms have emerged as powerful tools for automatic classification based on visual data. This review presents a
+comprehensive synthesis of studies utilizing deep learning-particularly convolutional neural networks (CNNs), transfer
+learning approaches, and hybrid models-for the image-based identification of honey bee lineages. The reviewed methods are
+evaluated in terms of their performance in image analysis and morphological differentiation. While the results demonstrate
+the high accuracy and rapid classification potential of deep learning models, current limitations such as dataset size, labeling
+challenges, and environmental variability are also discussed. By examining these strengths and constraints, this review aims
+to provide an in-depth perspective on the applicability of deep learning in honey bee research and outlines promising directions
+for future studies in this rapidly advancing field.
+Keywords: Honey bee, deep learning, automatic classification, image processing, lineage classification, biodiversity
+
+1. Introduction
+Honey bees (Apis mellifera) play a fundamental role
+not only as critical pollinators within ecosystem
+services but also in enhancing agricultural
+productivity. However, recent colony losses have
+heightened the need for more effective and
+systematic approaches to the conservation and
+breeding of bee populations (Panziera et al., 2022).
+Accurate identification and classification of honey
+bee genotypes or subspecies are essential for
+monitoring natural selection, assessing local
+adaptation, and tracking disease tolerance (da Silva
+et al., 2015). In this context, classification methods
+based on the morphological characteristics of honey
+bees have long been employed (Zhang et al., 2025).
+Nevertheless, such methods are often timeconsuming, observer-dependent, and have low
+repeatability.
+With advances in image processing techniques,
+data derived from digital microscopy or macro-
+
+scale photographs of honey bees have introduced
+new potential for developing automated
+classification systems (Karthiga et al., 2021). In
+particular, deep learning algorithms have emerged
+as powerful tools due to their capacity to
+autonomously learn complex and high-dimensional
+visual patterns (De Nart et al., 2022; Rodrigues et
+al., 2022). Architectures such as Convolutional
+Neural Networks (CNNs) can accurately classify
+honey bees by recognizing visual cues such as wing
+venation, body morphology, or pattern variations
+(De Nart et al., 2022; Garcia et al., 2022; Rodrigues
+et al., 2022). These automated systems not only
+reduce the workload for researchers but also
+provide more objective and reproducible results.
+Moreover, they enable the analysis of large datasets
+and can be integrated with field-derived visual
+records.
+This review aims to provide a comprehensive
+examination of the potential of deep learning
+methods for classifying honey bees at the species,
+
+YILDIZ and KARABAĞ
+
+subspecies, or genotype level based on visual data.
+The review begins by outlining the basic principles
+and architectures of artificial neural networks
+(ANNs), followed by a detailed explanation of the
+structural components of CNNs. Subsequently,
+approaches based on these architectures that have
+been applied to honey bee image classification are
+presented alongside relevant examples from the
+literature, with a comparative evaluation in terms of
+accuracy, data requirements, and limitations.
+Finally, key challenges such as class imbalance,
+model
+interpretability,
+and
+environmental
+variability in image-based classification are
+discussed, and recommendations for future studies
+are provided.
+
+2. Fundamentals of Deep Learning
+The concept of artificial intelligence (AI) first
+gained theoretical grounding in 1935 when Alan
+Turing proposed the idea of "machines that can
+learn." Over the years, this idea evolved into
+practical applications through advancements in
+algorithm development (Grzybowski et al., 2024).
+One of the major outcomes of this evolution is
+machine learning, which is defined as a set of
+algorithms that mimic human learning processes by
+learning from data and improving their accuracy
+over time. Deep learning, introduced by Rina
+Dechter in 1986, is regarded as a subfield of
+machine learning. Inspired by the structure of the
+human brain, deep learning is a powerful approach
+that uses multi-layered ANNs to automatically
+extract patterns from data (Luo et al., 2022).
+Although machine learning and deep learning
+are often used interchangeably, they differ
+significantly in methodology. Traditional machine
+learning models typically require feature
+engineering, where domain-specific features are
+manually extracted. In contrast, deep learning
+models can perform this process automatically,
+without explicit programming. Especially deep
+neural networks have the ability to uncover
+meaningful patterns from large datasets, enabling
+them to make highly accurate predictions (Khanikar
+et al., 2022). This capability makes deep learning
+particularly advantageous for analyzing large and
+complex datasets.
+Today, one of the most impactful areas where
+deep learning is applied is computer vision.
+Architectures such as CNNs are specifically
+designed to capture and learn spatial relationships
+in images (Traore et al., 2018). These models excel
+at tasks such as image classification, object
+detection, and segmentation by recognizing visual
+patterns in data. In biological imaging, deep
+learning has also proven effective in applications
+
+ranging from cell identification to leaf disease
+detection and animal species classification. Within
+this context, deep learning offers an effective and
+scalable solution for classifying morphologically
+diverse organisms such as honey bees.
+
+3. Artificial Neural Networks
+Artificial neural networks are inspired by the
+principles of the nervous system in advanced
+biological organisms. In biological systems, the
+fundamental unit of the nervous system is the
+neuron, which consists of three main parts:
+dendrites, the soma (cell body), and the axon.
+Neurons are interconnected through dendrites and
+axons, and these connection points are called
+synapses. Dendrites collect signals from
+presynaptic neurons or the environment and
+transmit them to the soma. These signals are
+processed in the soma, and if they exceed a certain
+threshold, an action potential is generated and
+propagated along the axon (da Silva et al., 2016).
+Upon reaching the end of the axon, this signal
+triggers the release of chemical messengers known
+as neurotransmitters into the synaptic cleft,
+transmitting the signal to the next neuron. This
+sequence of electrical and chemical reactions forms
+the basis of learning and response mechanisms in
+organisms (Hodgkin and Huxley, 1952).
+Inspired by this biological framework, the
+artificial neuron-the basic unit of an ANN-was first
+introduced in 1943 by neurophysiologist Warren
+McCulloch and mathematician Walter Pitts.
+Artificial neurons are mathematical functions
+modeled after biological neurons and serve as the
+fundamental building blocks of ANNs (Kubat,
+2021).
+An artificial neuron is defined by input signals
+(I₁, I₂, ..., In) and corresponding weights (W₁, W₂,
+..., Wn), which may have positive or negative
+values. Each input signal is multiplied by its
+respective weight, and the total input is calculated
+as the sum of these products (∑IiWi). This sum is
+compared to a threshold value, and the result is
+passed through an activation function to produce an
+output, which is then transmitted to the next neuron.
+In this system, weights are adjustable parameters
+that are updated during the learning process and
+determine the influence of each input. The strength
+of the effect on the postsynaptic neuron is
+represented by the magnitude of each IiWi product.
+Multilayer ANNs, which are widely used across
+many fields including animal husbandry, consist of
+multiple computational layers. These typically
+include three main components: an input layer, one
+or more hidden layers, and an output layer. The
+learning process begins with initializing weights
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+12(2): 224-230
+
+225
+
+YILDIZ and KARABAĞ
+
+(Wij) and biases (bj) for the connections in the
+network. Neurons process a large number of
+training samples and produce predictions, which are
+then compared to actual outputs to compute the
+error (loss value). To minimize this loss, the
+backpropagation
+algorithm
+is
+used.
+Backpropagation calculates the contribution of each
+parameter to the error by propagating it backward
+and adjusts the weights accordingly.
+This process is repeated until the network
+reaches the desired level of accuracy. Through this
+iterative refinement, ANNs are capable of learning
+and making predictions with high accuracy, even in
+large datasets with complex relationships (Krogh,
+2008).
+
+4. Convolutional Neural Networks
+Convolutional Neural Networks are a specialized
+architecture of artificial neural networks designed
+specifically for deep learning tasks involving visual
+data, such as image recognition, object detection,
+and biomedical image analysis. Unlike traditional
+ANNs, CNNs are highly effective at capturing
+spatial and local correlations within data. This
+ability makes them a powerful tool for analyzing
+and classifying morphological differences among
+biological species (Zhao et al., 2024).
+The core principle behind CNNs lies in their use
+of a series of specialized layers that automatically
+extract meaningful features from input images.
+When trained on large-scale image datasets, this
+architecture can learn subtle patterns and
+relationships that are often imperceptible to the
+human eye, thereby achieving high levels of
+classification accuracy (Grzybowski et al., 2024).
+4.1. Common CNN architectures
+4.1.1. LeCun Network (LeNet)
+LeCun Network is one of the earliest CNN
+architectures in the field of deep learning,
+developed by Yann LeCun and colleagues in 1998.
+Originally designed for the recognition of
+handwritten digits, this architecture features a
+simple structure comprising a limited number of
+convolutional and pooling layers. The LeNet
+architecture consists of sequential layers that
+progressively reduce the spatial dimensions of the
+data, followed by fully connected layers for
+classification. Although relatively shallow in depth
+and rarely used directly in modern applications,
+LeNet remains foundational in the evolution of
+CNN architectures (Zhao et al., 2024).
+
+226
+
+4.1.2. Alex Krizhevsky Network (AlexNet)
+AlexNet marked a turning point in the rise of
+deep learning within the field of computer vision by
+winning the ImageNet Large Scale Visual
+Recognition Challenge (ILSVRC) in 2012. It was
+the first architecture to popularize the use of the
+ReLU (Rectified Linear Unit) activation function
+and employed the dropout technique to reduce
+overfitting. The architecture consists of five
+convolutional layers and three fully connected
+layers, and was trained using two separate
+processing pipelines to enable data parallelism.
+Compared to LeNet, AlexNet is significantly more
+advanced in terms of depth and filter sizes,
+achieving high accuracy on large datasets and
+paving the way for deeper and more complex CNN
+architectures (Rafiq et al., 2023).
+4.1.3. Visual Geometry Group Network
+(VGGNet)
+VGGNet was developed in 2014 by the Visual
+Geometry Group at the University of Oxford and is
+notable for its use of sequential 3×3 convolution
+filters to increase network depth (Tasyurek and
+Arslan, 2023). The VGG architecture simplified and
+modularized the network by employing the same
+filter size across all layers. Versions such as VGG16 and VGG-19, which contain 16 and 19 layers
+respectively, are widely used-especially in transfer
+learning applications. While its deep structure
+enables the network to learn complex patterns
+effectively, the high number of parameters results in
+relatively high computational costs (Alzubaidi et
+al., 2021).
+4.1.4. Google LeNet Architecture (GoogLeNet)
+Google LeNet Architecture, also known as
+Inception-v1, won first place in the 2014 ILSVRC
+competition and introduced a groundbreaking
+architectural concept known as network-in-network
+design. Instead of using a single convolutional
+layer, this architecture employs Inception modules,
+which apply filters of various sizes in parallel. This
+approach enables the network to be enriched both in
+width and depth while maintaining a manageable
+number of parameters. Subsequent versions,
+including Inception-v2, v3, and v4, introduced
+further optimization techniques and increased
+architectural depth (Barber and Oueslati, 2024).
+4.1.5. Residual Network (ResNet)
+Residual network was developed by Microsoft
+Research in 2015 to address the issue of
+performance degradation in deep networks, which
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+12(2): 224-230
+
+YILDIZ and KARABAĞ
+
+often occurs as network depth increases (Khan et
+al., 2019). The architecture introduced the concept
+of residual connections (also known as skip
+connections), which allow the input of a layer to be
+directly added to its output after a few layers. This
+mechanism facilitates the flow of gradients during
+backpropagation, thereby enabling the successful
+training of much deeper networks. Variants such as
+ResNet-50 and ResNet-101 are widely used today,
+particularly in transfer learning tasks, and are
+known for their high accuracy and robustness (Wu
+et al., 2019).
+4.2. Core components of convolutional neural
+networks
+A typical CNN model is composed of
+convolutional, activation, pooling, and fully
+connected layers. These layers progressively
+abstract the input image and extract the most salient
+features to perform classification (Gu et al., 2018).
+4.2.1. Convolution layer
+The convolution layer enables the model to
+extract local features from input data (e.g., an image
+of a honey bee) using small matrices called kernels
+or filters. These kernels, typically of size 3×3 or
+5×5, are slid across the input image to generate
+feature maps. The convolution operation can be
+mathematically represented as shown in Equation 1
+(Gu et al., 2018).
+(1)
+In this equation, X(i, j) represents the input
+image, W(m, n) denotes the convolution filter
+(kernel), and Y(i, j) refers to the resulting feature
+map.
+This operation enables the model to extract
+edges, textures, and salient structures from the input
+image, thereby providing powerful features that
+help distinguish between different honey bee
+lineages.
+4.2.2. Activation function
+The feature maps obtained from the convolution
+operation are initially the result of a linear
+transformation. To enable the model to learn nonlinear representations, an activation function is
+applied. One of the most commonly used activation
+functions in CNNs is the Rectified Linear Unit
+(ReLU) (Puig-Arnavat and Bruno, 2015), which is
+mathematically defined in Equation 2.
+
+(2)
+In this equation, x denotes the input value, while
+f(x) represents the corresponding output of the
+activation function.
+The ReLU function accelerates and enhances
+the learning process by mapping all negative values
+to zero. Alternatively, other activation functions
+such as Leaky ReLU and ELU (Exponential Linear
+Unit) can also be employed depending on the task
+and network architecture (Nair and Hinton, 2010).
+4.2.3. Pooling layer
+The pooling layer reduces the spatial
+dimensions of the feature maps produced by the
+convolutional layer, thereby decreasing the number
+of parameters and overall computational cost. The
+most commonly used pooling operation is Max
+Pooling, which summarizes information by
+selecting the maximum value within a defined
+window (Estrach et al., 2014), as shown in Equation
+3.
+(3)
+In this equation, X(i+m, j+n) denotes the input
+values within the local region f, and P(i, j)
+represents the pooled output, which corresponds to
+the maximum value in that region.
+Pooling contributes to spatial invariance,
+enabling the model to become more robust to
+changes in scale and orientation-such as those found
+in honey bee images.
+4.2.4. Fully connected layer
+In the final stage of a CNN, the low-dimensional
+representation obtained from the pooling layer is
+flattened and passed to the fully connected layers.
+At this point, the network functions similarly to a
+traditional artificial neural network, computing
+class probabilities-such as those corresponding to
+specific honey bee species-using activation
+functions like Softmax or Sigmoid.
+The fully connected layer performs the
+classification based on the features learned
+throughout the preceding layers. For multi-class
+classification tasks, the Softmax function is
+commonly used and is defined in Equation 4
+(Scabini and Bruno, 2023).
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+(4)
+
+12(2): 224-230
+
+227
+
+YILDIZ and KARABAĞ
+
+In this equation, xj denotes the input features,
+wij represents the weight connecting input j to
+neuron i, bi is the bias term, and zi is the resulting
+linear combination before the activation function is
+applied.
+The Softmax function normalizes the predicted
+values into probabilities, ensuring that the total sum
+across all classes is equal to 1.
+
+5. Image-Based Classification of Honey
+Bees
+The CNN architectures and processing components
+discussed in the previous sections form the
+foundational elements of the recent advances in
+honey bee image classification. By integrating
+convolutional operations, pooling strategies, and
+activation mechanisms, these deep learning models
+can efficiently learn the subtle morphological
+patterns that distinguish honey bee subspecies, wing
+venation structures, and even health-related
+abnormalities. The following studies demonstrate
+how these components have been effectively
+applied to image-based honey bee classification
+tasks.
+The classification of honey bee species has long
+attracted scientific interest due to the complex
+nature of both morphological and molecular data. In
+particular,
+the
+limitations
+of
+traditional
+classification methods in handling multivariate and
+implicit relationships have led to the emergence of
+next-generation
+artificial
+intelligence-based
+approaches in this field (Crisci et al., 2012). In this
+context, deep learning-based image processing
+methods offer a powerful alternative for the
+automated classification of honey bees in terms of
+species, subspecies, and even health status.
+Recent studies have demonstrated the
+effectiveness of CNN architectures, especially for
+the classification of images based on wing
+morphology. For instance, De Nart et al. (2022)
+aimed to differentiate honey bee subspecies by
+recognizing wing images using AI-based
+techniques. A dataset consisting of 9,887 wing
+images from seven subspecies and one hybrid was
+analyzed using ResNet-50, MobileNet V2,
+Inception Net V3, and Inception ResNet V2. As a
+result, individual wing classification accuracies
+exceeded 0.92, and all models were reported to
+outperform traditional morphometric evaluation
+methods. These findings confirm that CNN-based
+architectures
+can
+surpass
+conventional
+classification methods in terms of accuracy and
+consistency, especially when trained on large,
+balanced, and high-resolution datasets.
+
+228
+
+Similarly, Rodrigues et al. (2022) developed a
+software tool named DeepWings©, which performs
+geometric morphometric classification of honey bee
+wings by automatically detecting 19 landmarks on
+digital wing images. To achieve this, they applied a
+combination of machine learning techniques: (i)
+using a CNN to detect the wings, (ii) applying a UNet model for landmark segmentation, and (iii)
+employing a Support Vector Machine (SVM) for
+classification. The subspecies classifier achieved an
+average accuracy of 86.6% across 26 subspecies,
+and 95.8% accuracy for a subset of five major
+subspecies. The final implementation of the system
+demonstrated excellent processing speed, requiring
+only 14 seconds to analyze 10 images. However,
+despite its promising performance, DeepWings©
+shows reduced classification power for certain
+subspecies with high intra-population variabilityemphasizing the need for further refinement using
+molecularly validated training sets.
+The accuracy and overall performance of this
+software were also validated in an independent test
+study conducted by Garcia et al. (2022). The
+researchers evaluated the tool using 14,816 wing
+images from five different subspecies (A. mellifera
+carnica, A. mellifera caucasia, A. mellifera
+iberiensis, A. mellifera ligustica, and A. mellifera
+mellifera). Their results showed that 92.6% of the
+A. mellifera iberiensis colonies were matched to the
+correct subspecies with a high average probability
+of 0.919. In contrast, only 41.1% of the A. m.
+mellifera colonies were matched to their correct
+subspecies, although those that were matched
+exhibited a very high probability of 0.994. When
+compared to molecular data, the correlation
+between wing-based and molecular marker-based
+classification for 1.214 colonies was found to be
+significant but weak (r= 0.31; p<0.0001). This
+indicates that wing-based classification alone may
+not always reflect true genetic identity, especially in
+hybrid zones or genetically admixed populations.
+A different approach was proposed by Rebelo et
+al. (2021). The researchers developed a system that
+analyzes the vein patterns of the forewings of bees,
+and supported this method with image segmentation
+techniques. They reported achieving a species-level
+accuracy of 96% and a genus-level accuracy of 99%
+on a large dataset comprising 48 species and 23
+genera. These levels of accuracy represent highly
+remarkable outcomes within the scope of
+morphometric classification approaches, and point
+to the generalizability of deep learning models even
+beyond the A. mellifera species complex.
+In addition, a study by Karthiga et al. (2021)
+proposed a CNN model capable of classifying not
+only honey bee species but also their health status.
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+12(2): 224-230
+
+YILDIZ and KARABAĞ
+
+The study employed a convolutional neural network
+composed of two-dimensional layers to perform
+species and health condition analysis on a large
+dataset. To address class imbalance and better
+represent minority classes, Synthetic Minority
+Over-sampling Technique (SMOTE) was applied
+for data augmentation. The model was trained on
+more than 5.000 honey bee images, achieving 86%
+accuracy in subspecies classification and 84%
+accuracy in health status prediction. This result
+underscores the potential of CNN models to move
+beyond taxonomic classification and contribute to
+colony health monitoring-an increasingly vital area
+in apicultural research.
+Such applications demonstrate that deep
+learning can be utilized not only for species
+identification but also for broader analytical
+purposes, such as assessing colony health and
+detecting morphological deviations linked to
+environmental stressors. These findings emphasize
+the transformative potential of CNN architectures,
+when combined with curated datasets, to deliver
+fast, scalable, and accurate classifications in honey
+bee research. Nevertheless, a consistent limitation
+across these studies is the scarcity of large-scale,
+geographically diverse, and molecularly confirmed
+image datasets-a gap that future research must
+address to enhance model robustness and
+generalizability.
+
+6. Conclusions
+This review has highlighted the current potential
+and applications of deep learning techniques in the
+image-based classification of honey bees. Studies in
+the literature have reported high classification
+accuracies-ranging from 86% to 99%-mostly based
+on honey bee wing images. Notably, the application
+of pretrained CNN architectures such as ResNet and
+Inception through transfer learning has yielded
+successful outcomes, even in cases where data
+availability is limited.
+However, despite these promising findings,
+research in this field remains relatively limited and
+often constrained to specific datasets. For instance,
+most of the image data used to date are derived from
+forewing structures, while approaches based on
+body segmentation, behavioral visual data, or threedimensional imaging are not yet widespread.
+Moreover, existing studies tend to focus
+predominantly on European subspecies (e.g., A.
+mellifera carnica, A. mellifera ligustica, A.
+mellifera mellifera), with a notable lack of imagebased classification applications involving local
+variants from regions such as Anatolia, the Middle
+East, or Africa.
+
+Another limiting factor is related to image
+quality, label accuracy, and data imbalance. While
+some studies have implemented data augmentation
+techniques such as SMOTE, it remains unclear how
+well algorithms can process low-quality images
+captured under field conditions. Furthermore, the
+generalizability of the models is often confined to
+the tested datasets, and performance tends to
+degrade with data from external sources. The weak
+correlation observed between molecular data and
+visual
+classification
+results
+also
+poses
+methodological challenges for the biological
+validation of image-based predictions.
+In light of these considerations, integrating deep
+learning–based image classification methods into
+honey bee biology holds significant potential.
+However, fully realizing this potential will require
+the development of more diverse, representative,
+and well-labeled datasets, the inclusion of
+subspecies from varied geographic and genetic
+backgrounds, and the enhancement of model
+interpretability. These steps would contribute to
+both the conservation of biological diversity and the
+implementation of objective, data-driven breeding
+programs.
+
+Ethical Statement
+The authors declare that ethical approval is not
+required for this research.
+
+Funding
+This research received no external funding.
+
+Declaration of Author Contributions
+The authors declare that they have contributed
+equally to the article. All authors declare that they
+have seen/read and approved the final version of the
+article ready for publication.
+
+Declaration of Conflicts of Interest
+All authors declare that there is no conflict of
+interest related to this article.
+
+References
+Alzubaidi, L., Zhang, J., Humaidi, A.J., Al-Dujaili, A.,
+Duan, Y., Al-Shamma, O., Santamaría, J., Fadhel,
+M.A., Al-Amidie, M., Farhan, L., 2021. Review of
+deep learning: Concepts, CNN architectures,
+challenges, applications, future directions. Journal of
+Big Data, 8(1): 1-74.
+Barber, F.B.N., Oueslati, A.E., 2024. Human exons and
+introns classification using pre-trained Resnet-50 and
+GoogleNet models and 13-layers CNN model.
+Journal of Genetic Engineering and Biotechnology,
+22(1): 100359.
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+12(2): 224-230
+
+229
+
+YILDIZ and KARABAĞ
+
+Crisci, C., Ghattas, B., Perera, G., 2012. A review of
+supervised machine learning algorithms and their
+applications to ecological data. Ecological
+Modelling, 240: 113-122.
+da Silva, F.L., Sella, M.L.G., Francoy, T.M., Costa,
+A.H.R., 2015. Evaluating classification and feature
+selection techniques for honeybee subspecies
+identification using wing images. Computers and
+Electronics in Agriculture, 114: 68-77.
+da Silva, I.N., Spatti, D.H., Flauzino, R.A., Liboni,
+L.H.B, Alves, S.F.R., 2016. Artificial Neural
+Networks: A Practical Course. Springer, Berlin.
+De Nart, D., Costa, C., Di Prisco, G., Carpana, E., 2022.
+Image recognition using convolutional neural
+networks for classification of honey bee subspecies.
+Apidologie, 53: 5.
+Estrach, J.B., Szlam, A., Le Cun, Y., 2014. Signal
+recovery
+from
+pooling
+representations.
+In International Conference on Machine Learning,
+June 21-26, China, pp. 307-315.
+Garcia, C.A.Y., Rodrigues, P.J., Tofilski, A., Elen, D.,
+McCormak, G.P., Oleksa, A., Henriques, D., Ilyasov,
+R., Kartashev, A., Bargain, C., Fried, B., Pinto, M.A.,
+2022. Using the software DeepWings© to classify
+honey bees across Europe through wing geometric
+morphometrics. Insects, 13(12): 1132.
+Grzybowski, A., Pawlikowska-Łagód, K., Lambert,
+W.C., 2024. A history of artificial intelligence. Clinics
+in Dermatology, 42(3): 221-229.
+Gu, J., Wang, Z., Kuen, J., Ma, L., Shahroudy, A., Shuai,
+B., Liu, T., Wang, X., Wang, G., Cai, J., Chen, T.,
+2018. Recent advances in convolutional neural
+networks. Pattern Recognition, 77: 354-377.
+Hodgkin, A.L., Huxley, A.F., 1952. The dual effect of
+membrane potential on sodium conductance in the
+giant axon of Loligo. The Journal of Physiology,
+116(4): 497-506.
+Karthiga, M., Sountharrajan, S., Nandhini, S.S., Suganya,
+E., Sankarananth, S., 2021. A Deep Learning
+Approach to classify the Honeybee Species and
+health
+identification.
+Seventh
+International
+Conference on Bio Signals, Images, and
+Instrumentation (ICBSII), March 25-27, India, pp. 17.
+Khan, M.T., Kaushik, A.C., Ji, L., Malik, S.I., Ali, S., Wei,
+D.Q., 2019. Artificial neural networks for prediction
+of tuberculosis disease. Frontiers in Microbiology,
+10: 395.
+Khanikar, D., Phookan, A., Gogoi, A., 2022. Artificial
+neural networks-An introduction and application in
+animal breeding and production: A review.
+Agricultural Reviews, 45(3): 480-487.
+Krogh, A., 2008. What are artificial neural networks?
+Nature Biotechnology, 26(2): 195-197.
+Kubat, M., 2021. An Introduction to Machine Learning.
+Springer, Berlin.
+
+Luo, R., Popp, J., Bocklitz, T., 2022. Deep learning for
+Raman spectroscopy: A review. Analytica, 3(3): 287301.
+Nair, V., Hinton, G.E., 2010. Rectified linear units
+improve restricted boltzmann machines. In
+Proceedings of the 27th International Conference on
+Machine Learning (ICML-10), June 21-24, Israel, pp.
+807-814.
+Panziera, D., Requier, F., Chantawannakul, P., Pirk, C.W.,
+Blacquière, T., 2022. The diversity decline in wild
+and managed honey bee populations urges for an
+integrated conservation approach. Frontiers in
+Ecology and Evolution, 10: 767950.
+Puig-Arnavat, M., Bruno, J.C., 2015. Artificial neural
+networks for thermochemical conversion of biomass.
+In: A. Pandey, T. Bhaskar, M. Stöcker and R.
+Sukumaran (Eds.), Recent Advances in ThermoChemical Conversion of Biomass, Elsevier,
+Amsterdam, pp. 133-156.
+Rafiq, G., Rafiq, M., Choi, G.S., 2023. Video description:
+A comprehensive survey of deep learning
+approaches. Artificial Intelligence Review, 56(11):
+13293-13372.
+Rebelo, A.R., Fagundes, J.M., Digiampietri, L.A.,
+Francoy, T.M., Bíscaro, H.H., 2021. A fully automatic
+classification of bee species from wing images.
+Apidologie, 52: 1060-1074.
+Rodrigues, P.J., Gomes, W., Pinto, M.A., 2022.
+DeepWings©:
+Automatic
+wing
+geometric
+morphometrics classification of honey bee (Apis
+mellifera) subspecies using deep learning for
+detecting landmarks. Big Data and Cognitive
+Computing, 6(3): 70.
+Scabini, L.F.S., Bruno, O.M., 2023. Structure and
+performance of fully connected neural networks:
+Emerging complex network properties. Physica A:
+Statistical Mechanics and its Applications, 615:
+128585.
+Tasyurek, M., Arslan, R.S., 2023. RT-Droid: a novel
+approach for real-time android application analysis
+with transfer learning-based CNN models. Journal of
+Real-Time Image Processing, 20(3): 55.
+Traore, B.B., Kamsu-Foguem, B., Tangara, F., 2018.
+Deep convolution neural network for image
+recognition. Ecological Informatics, 48: 257-268.
+Wu, Z., Shen, C., Van Den Hengel, A., 2019. Wider or
+deeper: Revisiting the resnet model for visual
+recognition. Pattern Recognition, 90: 119-133.
+Zhang, X., Lu, J., Qu, X., Chen, X., 2025. An evaluation
+of morphometric characteristics of honey bee (Apis
+cerana) populations in the Qinghai-Tibet Plateau in
+China. Life, 15(2): 255.
+Zhao, X., Wang, L., Zhang, Y., Han, X., Deveci, M.,
+Parmar, M., 2024. A review of convolutional neural
+networks in computer vision. Artificial Intelligence
+Review, 57: 99.
+
+CITATION: Yıldız, B.İ., Karabağ, K., 2025. Deep Learning Approaches for Image-Based Classification of Honey Bee (Apis mellifera)
+Lineages. Turkish Journal of Agricultural Research, 12(2): 224-230.
+
+230
+
+Türkiye Tarımsal Araştırmalar Dergisi - Turkish Journal of Agricultural Research
+
+12(2): 224-230
+
+

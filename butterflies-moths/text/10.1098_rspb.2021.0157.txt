@@ -1,0 +1,3554 @@
+Light environment influences mating behaviours during the early stages of divergence in tropical butterflies
+Alexander E. Hausmann, Chi‐Yun Kuo, Marília Freire, Nicol Rueda‐M, Mauricio Linares, Carolina Pardo‐Díaz, Camilo A. Salazar, Richard M. Merrill (2021). Proceedings of the Royal Society B Biological Sciences. https://doi.org/10.1101/2020.07.28.224915. doi:10.1098/rspb.2021.0157. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+1
+
+Light environment influences mating behaviours during the early
+
+2
+
+stages of divergence in tropical butterflies
+
+3
+4
+
+Alexander E. Hausmann1*, Chi-Yun Kuo1,2, Marília Freire1,3, Nicol Rueda-M4, Mauricio
+
+5
+
+Linares4, Carolina Pardo-Diaz4, Camilo Salazar4, Richard M. Merrill1*
+
+6
+7
+8
+9
+10
+11
+12
+
+1
+
+Division of Evolutionary Biology, Ludwig-Maximilians-Universität München, Grosshaderner Str. 2, 82152 Planegg-
+
+Martinsried, Germany
+2
+
+Smithsonian Tropical Research Institute, Gamboa, 0843-03092, Panama
+
+3
+
+Present address: Department of Evolutionary Neuroethology, Max Planck Institute for Chemical Ecology, Hans-Knöll-Straße 8,
+
+07745 Jena, Germany
+4
+
+Department of Biology, Faculty of Natural Sciences, Universidad del Rosario, Carrera 24 No 63C-69, Bogotá 111221, Colombia
+
+13
+14
+
+*Corresponding authors: hausmann@bio.lmu.de and merrill@bio.lmu.de
+
+15
+16
+
+ABSTRACT
+
+17
+
+Species divergence is facilitated when traits under divergent selection also act as mating cues.
+
+18
+
+Fluctuations in sensory conditions can alter signal perception independently of adaptation to
+
+19
+
+contrasting sensory environments, but how this fine scale variation affects behavioural isolation
+
+20
+
+has received less attention, especially in terrestrial organisms. The warning patterns of Heliconius
+
+21
+
+butterflies are under selection for aposematism and act as mating cues. Using computer vision,
+
+22
+
+we extracted behavioural data from 1481 hours of video footage for 387 individuals. We show
+
+23
+
+that the putative hybrid species H. heurippa and its close relative H. timareta linaresi differ in
+
+24
+
+their response to divergent warning patterns, and that these differences are strengthened with
+
+25
+
+increased local illuminance. Trials with live individuals reveal low-level assortative mating that
+
+26
+
+are sufficiently explained by differences in visual attraction. Finally, results from hybrid
+
+27
+
+butterflies are consistent with linkage between a major warning pattern gene and the
+
+28
+
+corresponding behaviour, though the differences in behaviour we observe are unlikely to cause
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+29
+
+rapid reproductive isolation as predicted under a model of hybrid trait speciation. Overall, our
+
+30
+
+results highlight that the role of ecological mating cues for behavioural isolation may depend on
+
+31
+
+the immediate sensory conditions during which they are displayed to conspecifics.
+
+32
+33
+
+Keywords: Heliconius – Ecological Speciation – Sensory Environment – Magic traits – Hybrid
+
+34
+
+Trait Speciation – Computer vision
+
+35
+36
+
+BACKGROUND
+
+37
+
+During ecological speciation, barriers to gene flow evolve as a result of ecologically-based
+
+38
+
+divergent selection [1]. These barriers are generally expected to build up gradually over time [2],
+
+39
+
+with premating isolation evolving early alongside ecological differences [1,3,4]. The evolution of
+
+40
+
+premating isolation is facilitated when traits under ecological selection act as mating cues
+
+41
+
+(sometimes known as ‘magic traits’ [5,6]), as this allows divergent natural selection acting on
+
+42
+
+ecological traits to be transferred to mating behaviours. However, the strength of behavioural
+
+43
+
+barriers may be influenced by the immediate, and perhaps rapidly changing, sensory conditions,
+
+44
+
+but this has received relatively little empirical attention (but see [7–13]). One reason may be that
+
+45
+
+robustly detecting these effects during the early stages of divergence, when they may be most
+
+46
+
+relevant, presents a substantial empirical challenge.
+
+47
+
+It is well established that the sensory environment can alter signal detection and
+
+48
+
+perception [14,15]. Colour perception depends not only on an object’s reflectance spectrum, but
+
+49
+
+also the illumination, available light spectrum and background, all of which may change within
+
+50
+
+seconds and over very short distances [16]. This can affect within-population preferences. For
+
+51
+
+example, red colouration in male Habronattus spiders is only an efficient mating signal if
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+52
+
+presented in broad-spectrum sunlight [17]. Other sensory modalities can be also affected: Female
+
+53
+
+swordtail fish are strongly attracted to the chemical signals of conspecific males in clean water,
+
+54
+
+but not in polluted water [7]. Similarly, urban noise can disrupt the transmission of bird songs
+
+55
+
+and interfere with acoustic-based mate choice [9].
+
+56
+
+The sensory environment may affect the evolution of reproductive isolation in two main
+
+57
+
+ways. First, adaptations to meet the ecological needs of different sensory environments can
+
+58
+
+influence female preferences, subsequently driving divergence in male signals, and leading to
+
+59
+
+reproductive isolation through sensory drive [18]. For example, in two closely related Pundamilia
+
+60
+
+cichlid fishes, adaptation of the visual system to the local environment is associated with
+
+61
+
+divergent female mate preference for male colouration [19]. Second, prevailing environmental
+
+62
+
+conditions may alter the efficacy of signals used in mate choice [14], so that individual mating
+
+63
+
+preferences may act as an important reproductive barrier under some sensory conditions, but not
+
+64
+
+others (‘context-sensitive preferences’ [20]). If the strength of preferences depends on the sensory
+
+65
+
+environment, then this will influence their contribution to reproductive isolation. However,
+
+66
+
+compared to the role of sensory adaptation, the immediate influence of local sensory conditions
+
+67
+
+on mating behaviours, and how this may relate to the evolution and maintenance of new species,
+
+68
+
+has been less-studied, especially in terrestrial organisms.
+
+69
+
+By affecting context-sensitive preferences, the sensory conditions during signalling may
+
+70
+
+also influence the strength of genetic associations (i.e. linkage disequilibrium, LD) between
+
+71
+
+mating and ecological traits, which are typically required for speciation to proceed when gene
+
+72
+
+flow persists [21]. Specifically, when ecological traits act as mating cues, LD (between
+
+73
+
+ecological and preference loci) will arise as a natural consequence of mating preferences, but this
+
+74
+
+will be proportional to the strength of preference [22], which may be influenced by the sensory
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+75
+
+environment. Regardless, unless preferences are very strong, more robust coupling between
+
+76
+
+mating and ecological components of reproductive isolation likely requires genetic architectures
+
+77
+
+that impede recombination (or one-allele mechanisms, see [23]). These include physical linkage,
+
+78
+
+which may be further strengthened by genomic rearrangements like inversions, or – in the
+
+79
+
+extreme – pleiotropy, where distinct traits are controlled by the same allele [24]. To date, studies
+
+80
+
+have reported physical linkage between behavioural and ecological components of reproductive
+
+81
+
+isolation for a few animal taxa, including pea aphids [25], fish [26] and butterflies [27].
+
+82
+
+Heliconius butterflies are known for their bright warning patterns, which are often under
+
+83
+
+selection for Müllerian mimicry [28]. Closely related Heliconius species frequently – but not
+
+84
+
+always – have very different wing patterns, which additionally act as mating cues (e.g. [29–32]).
+
+85
+
+This contributes to assortative mating because males almost invariably prefer wing patterns
+
+86
+
+resembling their own, and warning patterns in Heliconius are considered one of the best examples
+
+87
+
+of ‘magic traits’ in nature [6,29,33]. Variation in warning pattern is largely controlled by a few
+
+88
+
+genes; the genetics of the corresponding visual mate preference are less well known, though
+
+89
+
+recent work implicates a handful of genes associated with neural signalling in tight linkage to the
+
+90
+
+colour pattern gene optix [27,34].
+
+91
+
+There is substantial evidence that colour pattern alleles have introgressed between
+
+92
+
+otherwise separately evolving Heliconius lineages (e.g. [35]). In particular, taxa within the
+
+93
+
+heurippa-timareta group, found in the eastern slopes of the South-American Andes, have
+
+94
+
+acquired red colour pattern elements from local races of H. melpomene via introgression of optix
+
+95
+
+alleles [36]. This has frequently led to near perfect mimicry between local races of H. timareta
+
+96
+
+and H. melpomene; elsewhere, however, the resulting colour patterns are not shared with local
+
+97
+
+Heliconius species. In particular, H. heurippa has a unique red-yellow banded forewing pattern
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+98
+
+(Fig. 1A). Its close relative H. timareta linaresi, which is assumed to represent the ancestral wing
+
+99
+
+colour pattern of the heurippa-timareta group [37], only displays a yellow band (Fig. 1A) and
+
+100
+
+also does not have an obvious co-mimic. These two populations are geographically adjacent (Fig.
+
+101
+
+1A) and presumably share a contact zone. Despite their nominal status as separate species, H. t.
+
+102
+
+linaresi and H. heurippa likely represent an early stage of divergence; hybrids between H. t.
+
+103
+
+linaresi and H. heurippa are fully viable and fertile [38] and any post-mating isolation is
+
+104
+
+probably limited to selection acting against immigrant warning patterns.
+
+105
+
+The red pattern element of H. heurippa is presumably maintained by strong frequency-
+
+106
+
+dependent selection imposed by predators [39]. However, its effectiveness as intraspecific signal
+
+107
+
+may depend on how it is perceived by conspecifics under natural sensory conditions. In this way,
+
+108
+
+premating reproductive barriers may depend on interactions between the signal, environment and
+
+109
+
+receiver. H. melpomene are broadly separated from H. heurippa-timareta (along with closely
+
+110
+
+related H. cydno) taxa across a gradient of open to closed forest and decreasing light intensity
+
+111
+
+[32,40]. These contrasting sensory environments are predicted to alter how colour patterns are
+
+112
+
+perceived by butterfly visual systems [41]. While H. heurippa and H. t. linaresi are not
+
+113
+
+ecologically isolated in this way, their forest habitats are highly heterogenous and Heliconius are
+
+114
+
+known to settle with their wings open in more brightly illuminated ‘light patches’ [42]. Whether
+
+115
+
+changes in illuminance affect male behaviours has not been investigated, but such an effect
+
+116
+
+would suggest that the efficacy of wing patterns as premating reproductive barriers may depend
+
+117
+
+on fluctuations in sensory conditions as females move through the environment.
+
+118
+
+To test whether warning patterns contribute to premating isolation between H. heurippa
+
+119
+
+and H. t. linaresi, we used a novel computer vision pipeline to extract behavioural data from
+
+120
+
+video footage, alongside choice trails to determine levels of assortative mating. Our data,
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+121
+
+including ~17,000 behavioural interactions for 387 individuals, allowed us to test (i) whether the
+
+122
+
+two species show differences in visual attraction towards con- and hetero-specific patterns and
+
+123
+
+(ii) whether these differences segregate with the colour patterns, consistent with physical linkage
+
+124
+
+between the behavioural and colour patterning genes. Measuring illuminance in real-time at each
+
+125
+
+female pattern also allowed us to ask (iii) whether these behavioural differences are influenced by
+
+126
+
+fluctuating local light conditions.
+
+127
+128
+
+MATERIAL AND METHODS
+
+129
+
+(a) Butterfly collection, maintenance and crossing design. We maintained outbred stocks of H.
+
+130
+
+timareta linaresi and H. heurippa, established from wild individuals (Table S1), between January
+
+131
+
+2016 and September 2019 at the Universidad del Rosario insectaries in La Vega, Colombia
+
+132
+
+(4°59’ N, 74°20’ W, elevation 1257 m). We generated F1 hybrids and backcross hybrids to each
+
+133
+
+species (BL, backcross to H. t. linaresi and BH, backcross to H. heurippa) (Table S2). All
+
+134
+
+butterflies were supplied with ~10% sugar solution and Lantana, Psiguria and/or Gurania spp..
+
+135
+
+Females were kept individually, with Passiflora for oviposition, whereas males were kept in
+
+136
+
+groups. Eggs were collected every other day and the caterpillars were raised until eclosion in
+
+137
+
+plastic cups, and fed on fresh Passiflora leaves.
+
+138
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+139
+140
+141
+142
+143
+144
+145
+
+Figure 1: A) Locations in Colombia where H. heurippa (red) and H. timareta linaresi (blue) are known to occur. B)
+Video recording setup. Mounted females were presented simultaneously: Each was filmed and an associated light
+logger recorded illuminance every second. ‘Tripod’ was not casting shade on light logger or mounted females at any
+time. C) Post-hoc motion detection pipeline. A difference image is formed between each frame and its predecessor
+(identifying pixels with a change in value). Thresholding, blurring and again thresholding pick out significant local
+changes (‘signals’). ‘Signal’ frames (and surrounding frames) were extracted.
+
+146
+147
+
+(b) Trials with mounted females. To test for differences in visual mating behaviours, we
+
+148
+
+assayed males in choice trials with dead mounted H. heurippa and H. t. linaresi females
+
+149
+
+presented simultaneously in an exposed 4x4x2m insectary, in which light conditions varied due
+
+150
+
+to changes in cloud coverage and patterns of shade cast by vegetation at certain daytimes. Virgin
+
+151
+
+females were frozen with their wings spread on the day of eclosion and kept at -20°C for >168h.
+
+152
+
+They were then dried and subsequently washed in hexane to remove residual cuticular
+
+153
+
+hydrocarbons and other pheromones, and mounted onto a small piece of wire. Throughout the
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+154
+
+experiment, we used 21 H. heurippa and 23 H. t. linaresi mounted females, randomly choosing a
+
+155
+
+pair each day. Mounted females were individually attached to a horizontal wire (~70cm above
+
+156
+
+ground) at one of six locations within the experimental cage. This location was changed every
+
+157
+
+hour (hereafter ‘trial’), and the new location was chosen randomly (but female types were never
+
+158
+
+in the same location twice during the same day). A GoPro Hero 5 Black™ (GoPro, San Matteo,
+
+159
+
+CA) camera (settings and equipment in Table S3) was installed at each position, and ~50cm
+
+160
+
+above the respective mounted female (Fig. 1B). At same height as the mounted female at ~30cm
+
+161
+
+distance, we attached a HOBO™ UA-002-64 logger (sensor facing up) to measure illuminance
+
+162
+
+[lux] every second (Fig. 1B). Cameras and light loggers were synced using GoPro Quik™ and
+
+163
+
+HOBOware™ software, respectively, allowing us to match video frames with light
+
+164
+
+measurements.
+
+165
+
+Most of the virgin naive males matured in one separate communal cage before being
+
+166
+
+introduced into the experimental cage >4 days after eclosion, where they were tested in mixed
+
+167
+
+groups (median group size = 22). Males were numbered and received a unique code of dots on
+
+168
+
+the dorsal side of the wings, allowing identification from videos. Each male was tested over
+
+169
+
+multiple days (median = 12d). We recorded an average of 3.01h of material on each of the 246
+
+170
+
+recording days; conducting behavioural trials across different seasons and at different daytimes
+
+171
+
+allowed us to capture a variety of light conditions.
+
+172
+173
+
+(c) Computer vision and video analyses. We used a custom motion-detection pipeline, which
+
+174
+
+post-hoc discarded video footage with no activity. The detection of frames with motion
+
+175
+
+(‘signals’) was based on difference imaging and consecutive steps of blurring and thresholding,
+
+176
+
+as implemented in the OpenCV library available for C++ (Fig. 1C). Not all of the frames of male
+
+177
+
+motion sequences made it over the threshold, so we determined the ‘signal’-frames and the
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+178
+
+surrounding frames one sec before and after a signal in R [43]. Reduced videos were created with
+
+179
+
+the OpenCV library in C++. (Code is accessible at:
+
+180
+
+github.com/SpeciationBehaviour/visual_preference_heurippa_linaresi). Video material was
+
+181
+
+processed on an HPTM Desktop computer (i7-7700 CPU, 4 cores), at runtimes ~80% of video
+
+182
+
+duration. All videos were processed under the same threshold (145) and blur (30) settings.
+
+183
+
+Remaining footage was curated manually at 66.6% speed using the MPCHCTM player. We
+
+184
+
+recorded three behaviours: ‘approach’ (male is changing its flight direction towards the mounted
+
+185
+
+female, resulting in a curve or circling motion), ‘courtship’ (sustained hovering above mounted
+
+186
+
+female) and ‘sitting’ (male sits down on mounted female). Behaviour types were combined for
+
+187
+
+subsequent analyses.
+
+188
+189
+
+(d) Tetrad experiments with live females. We performed ‘tetrad’ trials with virgin males and
+
+190
+
+females to test for assortative mating. For each trial, sexually mature H. heurippa and H. t.
+
+191
+
+linaresi males (one of each) were allowed to acclimatize for 15 mins in a 2x4x2m insectary, at
+
+192
+
+which point H. heurippa and H. t. linaresi virgin females (one of each) were introduced. Once the
+
+193
+
+first mating occurred, the experiment was stopped.
+
+194
+195
+
+(e) Statistical analyses. We measured illuminance at both mounted females for 83% of recorded
+
+196
+
+behaviours. Illuminance, measured in lux, is the intensity of light falling onto a surface. We
+
+197
+
+log10-transformed lux measures (log-illuminance) and scaled (and centred) each set of log-
+
+198
+
+illuminance measurements, making the choice of logarithm base irrelevant for the analyses.
+
+199
+
+Analyses were conducted in R [43] (supplemental R Markdown and
+
+200
+
+https://github.com/SpeciationBehaviour/visual_preference_heurippa_linaresi). Posteriors will be
+
+201
+
+described with a 95% equal-tailed credible interval and the mean as point estimate. We analysed
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+202
+
+data from trials with mounted females using logistic regression with the brms package [44], an
+
+203
+
+interface to the Bayesian software Stan [45]. Male behaviours directed towards the H. t. linaresi
+
+204
+
+or H. heurippa mounted females were fitted as binary Bernoulli-distributed response variable (i.e.
+
+205
+
+0 and 1, respectively); estimates from the model can be understood as a proportion of interactions
+
+206
+
+with the mounted H. heurippa female, with higher values indicating stronger relative attraction to
+
+207
+
+the H. heurippa ‘female’ and lower values indicating stronger relative attraction to the H. t.
+
+208
+
+linaresi ‘female’. Models initially included all possible nested variations of the fully saturated
+
+209
+
+model explaining effects of 1) male type, 2) log-illuminance at the H. heurippa ‘female’, 3) log-
+
+210
+
+illuminance at the H. t. linaresi ‘female’, and their interactions. Individual ID and trial were fitted
+
+211
+
+as random effects.
+
+212
+
+To test for ‘species’ differences, we initially fitted models for the ‘pure’ males (male type
+
+213
+
+= ‘H. heurippa’ or ‘H. t. linaresi’). Segregation of the red bar in BL hybrids (controlled by alleles
+
+214
+
+at optix [46]) allowed us to test for linkage between colour and preference loci (see [27,47]) (here
+
+215
+
+male type = ‘red’ (Bb genotype) or ‘no red’ (bb genotype) and brood was additionally fitted as a
+
+216
+
+random effect). To determine which terms to retain [48], we calculated the widely applicable
+
+217
+
+information criterion (WAIC) and the leave-one-out information criterion (LOOIC) for each set
+
+218
+
+of models, using the loo package [49], and WAIC weights using the brms package [44]. Weakly
+
+219
+
+informative priors (centred around the value for no preference) were set for coefficients
+
+220
+
+corresponding to the different male types, which gave small prior probabilities for extreme values
+
+221
+
+very close to 0 or 1. For all other coefficients, default (non-informative) priors were applied. We
+
+222
+
+also fitted ‘categorical illuminance’ models adopting the best fitting model structure determined
+
+223
+
+for each dataset, where values =<median were ‘poorly lit’, and values >median were ‘brightly lit’
+
+224
+
+(Fig. S1). Posteriors of the estimated marginal means (EMMs) were calculated using the
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+225
+
+emmeans package [50]. From this, we retrieved posteriors of contrasts and calculated the
+
+226
+
+posterior probability (PP) that EMMs differ.
+
+227
+
+For the tetrad data, we fitted observed counts of each mating outcome (type of male and
+
+228
+
+female involved) as Poisson-distributed response variable. We included the specific male-female
+
+229
+
+combination of the mating outcome as fixed factor. Transforming the resulting model estimates
+
+230
+
+into proportions effectively makes this a multinomial model [51]. Non-informative default priors
+
+231
+
+were applied throughout. PPs were calculated with the brms package [44]. We compared the
+
+232
+
+observed frequency of each mating combination to the predicted frequencies based on our
+
+233
+
+measurements of visual preference from the mounted female experiment. Predictions were
+
+234
+
+derived by multiplying the frequency that a male type was involved in any mating combination
+
+235
+
+by its respective EMMs from the models fitted to the mounted female data. Predictions were
+
+236
+
+based either on the overall EMM for each type, or the interaction term EMMs from the
+
+237
+
+categorical model. Posterior distributions for each prediction were calculated using the binom
+
+238
+
+package under the default prior [52].
+
+239
+240
+
+RESULTS
+
+241
+
+(a) Species comparisons: i) Divergent visual attraction behaviours in H. timareta linaresi
+
+242
+
+and H. heurippa males are dependent on the light environment.
+
+243
+
+Over 1.5 years we collected 1481 hours of footage. Our computer vision pipeline reduced this to
+
+244
+
+66 hours requiring human curation (i.e. 4.5% of the total footage recorded), including 16,995
+
+245
+
+behavioural ‘interactions’ from 387 males (~43.9 per male). These data allowed us to determine
+
+246
+
+the effects of male type and illuminance on relative visual attraction to the H. heurippa mounted
+
+247
+
+‘female’ (hereafter ‘preference’). The best fitting model for the pure H. heurippa and H. t.
+
+248
+
+linaresi males retained male type, log-illuminance at the H. heurippa ‘female’ and their
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+249
+
+interaction (Table S4: model #1). Overall, our results suggest that the local light environment
+
+250
+
+influences the strength of visual attraction.
+
+251
+
+Across the entire dataset, illuminance at the mounted H. heurippa female increased the
+
+252
+
+difference in preference between the male types, as evidenced by the interaction between male
+
+253
+
+type and log-illuminance at the H. heurippa ‘female’ (Fig. 2A & S3, PP simple slope H. heurippa
+
+254
+
+> H. t. linaresi = 0.996). This was largely driven by an increase in log-illuminance at the H.
+
+255
+
+heurippa ‘female’ leading to a stronger conspecific preference in H. heurippa males (PP simple
+
+256
+
+slope > 0 = 0.993); there was only limited support for an effect on H. t. linaresi males (PP simple
+
+257
+
+slope < 0 = 0.768). Overall, H. heurippa males showed a higher proportion of interactions with
+
+258
+
+the H. heurippa pattern than H. t. linaresi males. Although supported with high credibility (PP
+
+259
+
+relative visual attraction H. heurippa > H. t. linaresi = 0.969), this difference in preference was
+
+260
+
+relatively small (0.07, CrI: 0.00 - 0.14) and characterised by considerable within-population
+
+261
+
+variation (Fig. 2B). Nevertheless, this effect nearly doubled when the H. heurippa ‘female’ was
+
+262
+
+in brighter light (0.13, CrI: 0.05 - 0.22; Fig 2D) and was absent when the H. heurippa ‘female’
+
+263
+
+was poorly lit (0.01, CrI: -0.07 - 0.09; Fig 2C).
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+
+Figure 2: The effect of illuminance on relative attraction towards H. heurippa ‘females’ (i.e. proportion of
+interactions with the H. heurippa ‘female’ as opposed to the H. t. linaresi ‘female’). A: Relative attraction towards
+H. heurippa ‘females’ of H. t. linaresi (blue) and H. heurippa males (red) under changing illuminance at the H.
+heurippa ‘female’. Illuminance on the x-axis is log-scaled. Coloured area around each regression line represents the
+95% credible interval (CrI). Dashed vertical line represents the median log-illuminance used as a cutoff to define the
+poorly and brightly lit conditions (below). Relative attraction towards H. heurippa ‘females’ for H. t. linaresi males
+(blue) and H. heurippa males (red): (B) across light environments; (C) for poorly lit H. heurippa ‘female’; (D) for
+brightly lit H. heurippa ‘female’. Gardner-Altman plots in B-D show the difference between the two male types:
+Horizontal lines project from the means of the posteriors for each male type (means and CrIs in Table S5). The mean
+and the 95% CrI for the posterior of the difference between the male types are shown on the right. Each point
+represents a single individual and its size is scaled to the number of observations. Custom swarmplot was used to
+distribute the dots horizontally.
+
+277
+278
+
+(b) Species comparisons: ii) H. heurippa males mate more often with conspecific females in
+
+279
+
+choice trials.
+
+280
+
+To test for assortative mating we also conducted ‘tetrad’ mate choice trials between H. heurippa
+
+281
+
+and H. t. linaresi. During 89 tetrad trials we observed 50 con- and 39 heterospecific matings (PP
+
+282
+
+for positive assortative mating = 0.88). This trend was driven by a higher proportion of
+
+283
+
+conspecific matings involving H. heurippa males (0.405, CrI: 0.305 - 0.508) than heterospecific
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+284
+
+matings involving H. heurippa males (0.270, CrI: 0.183 - 0.366]) (PP = 0.94). H. t. linaresi males
+
+285
+
+did not participate more frequently in con- rather than heterospecific matings (PP = 0.43) (Fig. 3).
+
+286
+
+In general, H. heurippa males mated more often than H. t. linaresi males (60 vs. 29 times). Our
+
+287
+
+results closely match predictions derived from the mounted females experiment with brightly lit
+
+288
+
+H. heurippa ‘female’ (horizontal purple bars in Fig. 3), and, to some extent, those derived from
+
+289
+
+all of the illuminance conditions combined (Table S6).
+
+290
+291
+292
+293
+294
+295
+
+Figure 3: H. heurippa males show a preference for live, conspecific females in the tetrad experiments. Dashed
+vertical line indicates expected proportion under no assortative mating. Posterior distributions for each mating pair
+combination are displayed as histograms (red = 95% CrI, orange line = mean). Predictions based on the visual
+attraction data from the mounted females experiment with brightly lit H. heurippa ‘female’ are displayed with their
+95% CrI as horizontal purple lines.
+
+296
+297
+
+(c) Hybrid comparisons: Patterns of behaviour in backcross hybrids are consistent with
+
+298
+
+linkage between colour and preference loci.
+
+299
+
+Estimates of preference suggest that first generation hybrid (F1) males behave like H. heurippa
+
+300
+
+males (Fig. S4D), perhaps suggesting that H. heurippa alleles for attraction to red are dominant;
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+301
+
+however, challenging this, BH males seem to display a preference similar to H. t. linaresi males
+
+302
+
+(Fig. S4E). For BL males, the model including all possible interactions was the best fit (Table S7,
+
+303
+
+model #1). As for the ‘pure’ males, the six best fitting models included the interaction between
+
+304
+
+type (i.e. red (Bb) and non-red (bb) wing pattern) and log-illuminance at the H. heurippa ‘female’
+
+305
+
+(91% of cumulative WAIC weight for an effect of this interaction term).
+
+306
+
+As for males from the parental populations, the difference between the two genotypes was
+
+307
+
+higher when the H. heurippa ‘female’ was in bright light (Fig. 4CD). There was a small effect of
+
+308
+
+the three-way interaction with illuminance measures at the H. t. linaresi ‘female’ - the difference
+
+309
+
+was slightly higher when only the H. heurippa mounted female was brightly lit (Fig. 4C, 0.11,
+
+310
+
+CrI: 0.02 - 0.21), as opposed to when both were (Fig. 4D, 0.07, CrI: 0.00 - 0.13). A brightly lit H.
+
+311
+
+t. linaresi mounted female led to a slightly reversed pattern (i.e. bb > Bb), but only when the H.
+
+312
+
+heurippa mounted female was poorly lit (Fig. 4B, -0.03, CrI: -0.13 - 0.07). If both mounted
+
+313
+
+females where poorly lit, there was no difference in preference (Fig. 4A, 0.01, CrI: -0.05 - 0.08).
+
+314
+
+Across the entire dataset, illuminance at the mounted H. heurippa female increased the
+
+315
+
+differences in preference between the two BL genotypes (Fig. S2B, PP simple slope Bb > bb =
+
+316
+
+0.999). While the slope for Bb males is only slightly positive (PP = 0.859), the slope for bb males
+
+317
+
+is strongly negative (PP = 0.999). In contrast to the pure males, we also observed an effect of
+
+318
+
+illuminance at the H. t. linaresi ‘female’. Specifically, bb males showed a stronger preference for
+
+319
+
+the H. heurippa ‘female’ when the H. t. linaresi ‘female’ was bright (Fig. S2D & S3, PP =
+
+320
+
+0.999). Overall, Bb males were more likely to interact with the H. heurippa ‘female’ than bb
+
+321
+
+males (Fig. S5). This difference was supported with moderately high probability (PP relative
+
+322
+
+visual attraction Bb > bb = 0.897). Although these represent small effects in absolute terms (0.03,
+
+323
+
+CrI: -0.02 - 0.08]), this difference accounts for ~50% of the difference in means of the parental
+
+324
+
+populations, consistent with linkage between colour and preference loci.
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+325
+326
+327
+328
+329
+330
+331
+
+Figure 4: The effect of illuminance on relative attraction towards H. heurippa ‘females’ (i.e. the proportion of
+interactions with the H. heurippa ‘female’ as opposed to the H. t. linaresi ‘female’) for BL hybrid males (no red/bb =
+blue dots; red/Bb = red dots): (A) with poorly lit H. t. linaresi and H. heurippa ‘females’; (B) brightly lit H. t.
+linaresi and poorly lit H. heurippa ’females’; (C) poorly lit H. t. linaresi and brightly lit H. heurippa ’females’; and
+(D) brightly-lit H. t. linaresi and H. heurippa ‘females’ (means and CrIs in Table S5). Gardner-Altman plots are as in
+Figures 1B-D.
+
+332
+333
+
+DISCUSSION
+
+334
+
+By collecting ~1500h of mate choice data we have shown that the light environment can
+
+335
+
+influence visual mating behaviours during the early stages of divergence in Heliconius butterflies.
+
+336
+
+Although our data are characterised by considerable individual variation, we observed significant
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+337
+
+differences in behaviours of H. heurippa and H. timareta linaresi males, and this difference is
+
+338
+
+stronger when the female patterns are more brightly lit. Experiments with live males and females
+
+339
+
+revealed a degree of assortative mating, and the differences in visual attraction behaviours that
+
+340
+
+we observe are sufficient to explain this. We have also shown that differences in visual attraction
+
+341
+
+are associated with the presence of the red forewing band in interspecific hybrids under bright
+
+342
+
+light conditions, perhaps suggesting physical linkage between an ecologically relevant colour
+
+343
+
+pattern gene and those for the corresponding behaviour.
+
+344
+
+Studies of speciation often focus on already diverged groups, which are maintained by
+
+345
+
+multiple reproductive barriers [53,54], making it difficult to draw conclusions about the role of
+
+346
+
+the individual barriers and their ecological context. At the other extreme, barriers acting at the
+
+347
+
+early stages of divergence may be of small effect and, especially in the case of behavioural
+
+348
+
+phenotypes, require very large datasets to draw robust conclusions, which may not always be
+
+349
+
+feasible. Behavioural researchers increasingly use computer vision [55], and software for
+
+350
+
+automated tracking and individual identification is available (e.g. [56,57]). However, applying
+
+351
+
+these techniques to footage with heterogenous backgrounds, variable light environments and
+
+352
+
+arenas larger than the camera’s field of view remains a challenge. To overcome these limitations,
+
+353
+
+we combined computer vision, allowing post-hoc motion detection, with subsequent human
+
+354
+
+curation. This permitted a simple low-cost solution, and importantly allowed us to capture frames
+
+355
+
+before and after motion is detected from many hundreds of hours of video footage.
+
+356
+
+This large volume of data revealed that increased illuminance at the red mounted H.
+
+357
+
+heurippa female increased the frequency of interactions between H. heurippa males with H.
+
+358
+
+heurippa females (relative to H. t. linaresi females). H. heurippa males were no more likely than
+
+359
+
+H. t. linaresi males to interact with the H. heurippa female when she was poorly lit (lower 50%
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+360
+
+quantile of illuminance values; Fig. 2C), but were 1.3 times (i.e. 0.57/0.44, Table S5) more likely
+
+361
+
+to interact with the H. heurippa female in brighter light (upper 50% quantile of illuminance
+
+362
+
+values; Fig. 2D). Similar effects of the light environment have been observed in aquatic
+
+363
+
+organisms. For example, the attractiveness of red colour during courtship is dependent on the
+
+364
+
+spectrum of available light, influenced by water depth and turbidity, and recognition of con-
+
+365
+
+specifics may fail entirely under certain light environments (e.g. [10–12,19]). However, far fewer
+
+366
+
+studies have directly tested how changing light environments influence mating preference
+
+367
+
+behaviours that contribute to population divergence in terrestrial organisms (but see [17,58,59]).
+
+368
+
+The mechanism underlying the differences in behaviour we observe under contrasting
+
+369
+
+lighting conditions isn’t immediately clear. Insects, including butterflies [60], have frequently
+
+370
+
+evolved colour constancy across light environments [61,62], and although this may only partially
+
+371
+
+succeed [60,61], we generally expect individuals to be able to distinguish H. heurippa and H. t.
+
+372
+
+linaresi patterns under different brightness conditions. Alternatively, male attraction to female
+
+373
+
+colour patterns might to some degree be ‘wavelength-specific’, where triggering of behaviours
+
+374
+
+depends greatly on an object’s emission of specific wavelengths and their intensity [62]. Under
+
+375
+
+this scenario, a colour cue might only trigger a behaviour when presented at intense illuminance
+
+376
+
+including wavelengths from the relevant part of the spectrum [62–64]. The differences in
+
+377
+
+illuminance we measured may correlate with spectral differences; under shaded conditions, the
+
+378
+
+available light may be reflected from the vegetation or from outside the path of direct sunlight,
+
+379
+
+and consequently lack red wavelengths (but be rich in greenish or bluish light) [16,17]. Indeed,
+
+380
+
+previous work modelling Heliconius vision suggests that red patterns are more conspicuous to
+
+381
+
+Heliconius when presented in bright sunlight [41] (though whether this affects Heliconius
+
+382
+
+behaviours has not previously been tested).
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+383
+
+Regardless of the proximate mechanism, our data indicate that prevailing light conditions
+
+384
+
+can influence visual mating behaviours in Heliconius. Unlike many other examples, often
+
+385
+
+involving anthropogenic induced changes in aquatic environments [10–12], the effects we see
+
+386
+
+here potentially act across very short time and spatial scales. This reflects the forest environment
+
+387
+
+where the light environment can vary rapidly across both time and space. As such, male response
+
+388
+
+may depend less on the broader environment (perhaps influenced by forest type), than on the
+
+389
+
+movement of females across smaller spatial scales (for example between dimly and brightly lit
+
+390
+
+patches). Heliconius butterflies are known to bask in the sun with their wings open, particularly
+
+391
+
+during the morning hours [42]. This may primarily be for thermoregulation, though other species
+
+392
+
+are known to display in environments where they are most conspicuous, and Heliconius might
+
+393
+
+follow a similar strategy. Anolis lizards, for example, occupy micro-habitats in which their
+
+394
+
+dewlap colour is most conspicuous [65]. Visual modelling indicates Heliconius red patterns are
+
+395
+
+more conspicuous to avian predators when presented in bright sunlight, suggesting it may also
+
+396
+
+enhance aposematism [41]. Whatever the ultimate reason for aggregating in sun-exposed patches,
+
+397
+
+our data suggest that these behaviours could enhance the strength of divergent mating
+
+398
+
+preferences.
+
+399
+
+Whether the differences in visual attraction behaviours that we observe translate to
+
+400
+
+assortative mating, and therefore contribute to reproductive isolation, is an important question.
+
+401
+
+Previous studies testing for assortative mating between Heliconius species in tetrad experiments
+
+402
+
+similar to ours report low frequencies of interspecific mating [29,66,67]. This was not the case in
+
+403
+
+our experiments. Nevertheless, the large number of trials in our study allowed us to detect
+
+404
+
+positive assortative mating, albeit at low levels, though this was much stronger for the 60 trials in
+
+405
+
+which H. heurippa males mated (Fig. 3). Unfortunately, we do not have illuminance data for
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+406
+
+these experiments, and this would be difficult to measure given the movement of females.
+
+407
+
+Considering that the live females may have been basking in the sun, that overall activity of
+
+408
+
+Heliconius is highest when it is sunny [68] and that mating in Heliconius seems to occur more
+
+409
+
+frequently on sunny than on cloudy days (M. Linares, pers. obs.), it is likely that a large
+
+410
+
+proportion of the trials with mating outcomes included sun-exposed females. When accounting
+
+411
+
+for the more frequent involvement of H. heurippa males in mating, the mating rates between H.
+
+412
+
+heurippa and H. t. linaresi in our tetrad experiments closely match estimates derived from our
+
+413
+
+experiments with dead mounted females in bright light. Although we cannot rule out a role for
+
+414
+
+cues acting across other sensory modalities, differences in visual attraction alone are sufficient to
+
+415
+
+explain the levels of assortative mating we observe.
+
+416
+
+Considering our data for hybrids, it is overall difficult to ascertain patterns of dominance
+
+417
+
+for visual attraction. This is perhaps not surprising given that the differences in behaviour
+
+418
+
+between populations are subtle and are shaped by considerable variation. However, segregation
+
+419
+
+of the optix alleles, which control red pattern elements in Heliconius [46], in the backcross to H.
+
+420
+
+t. linaresi did allow us to test for linkage between the warning pattern cue and the corresponding
+
+421
+
+behaviour. Once again, we observed illuminance-induced shifts in visual attraction, so that the
+
+422
+
+two types of backcross to H. t. linaresi males (i.e. red/Bb vs. non-red/bb) differed in behaviour,
+
+423
+
+but only under higher illuminance conditions. These results are consistent with physical linkage
+
+424
+
+between behavioural loci and optix, as has been shown elsewhere – but with much greater effects
+
+425
+
+– between the closely related species H. cydno and H. melpomene [27]. Physical linkage will help
+
+426
+
+to maintain key genetic associations (i.e. LD) between loci underlying ecologically relevant traits
+
+427
+
+and those for premating isolation, like mating preferences, facilitating speciation with gene flow
+
+428
+
+in general [21,23], and hybrid trait speciation [69] in particular. Although the differences between
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+429
+
+backcross to H. t. linaresi genotypes account for ~50% of that observed in the two parental taxa,
+
+430
+
+in absolute terms, the effects are unlikely to permit sufficient power for a formal QTL study and
+
+431
+
+caution should be exercised when interpreting our results. Our results are consistent with a simple
+
+432
+
+genetic mechanism by which behavioural alleles were acquired alongside red colour pattern
+
+433
+
+alleles through introgression from H. melpomene into the ‘heurippa/timareta/cydno’ lineage
+
+434
+
+[69,70]. However, it seems unlikely that the behavioural differences we observe here would
+
+435
+
+rapidly lead to strong reproductive isolation, as predicted under a model of hybrid trait speciation
+
+436
+
+[66,69].
+
+437
+
+In conclusion, the behavioural differences we observe for H. heurippa and H. t. linaresi
+
+438
+
+are similar in strength to those reported elsewhere for other Heliconius taxa at the early stages of
+
+439
+
+divergence (e.g. [30,53]). Alone, these may represent only weak barriers to gene flow; however,
+
+440
+
+by augmenting divergent ecological selection acting on the warning pattern cue, they may
+
+441
+
+facilitate the accumulation of additional barriers as speciation proceeds. In addition, our results
+
+442
+
+suggest that the degree to which Heliconius warning pattern contribute to premating isolation
+
+443
+
+may depend on local illuminance, which can change rapidly in both time and space. Without
+
+444
+
+more stable differences in the sensory environment, perhaps facilitated by shifts in habitat use,
+
+445
+
+these fluctuations may constrain speciation. However, Heliconius are known to aggregate and
+
+446
+
+display their warning patterns in sun-exposed patches within the broader forest environment, and
+
+447
+
+our results suggest that this context would enhance premating isolation. Traits predominantly
+
+448
+
+shaped by ecology frequently act as mating cues, which by coupling divergent natural selection to
+
+449
+
+premating isolation can promote speciation with gene flow [6]; our results highlight that this
+
+450
+
+effect may depend on the sensory conditions during which these ecological mating cues are
+
+451
+
+displayed to conspecifics.
+
+452
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+453
+
+ACKNOWLEDGEMENTS
+
+454
+
+We are very grateful to the Abondano-Almeida family for helping AEH and MF settle in
+
+455
+
+Colombia; Juan Sebastián Sánchez, Óscar Penagos, Isabel Leon and Lina Gabriela Melo for
+
+456
+
+assistance in the insectaries; Annika Neuhaus, Morgan Oberweiser, Saoirse McMahon and Lucas
+
+457
+
+Asis for help scoring videos; and Martin Küblbeck, Lucie Queste, Matteo Rossi, Daniel Shane
+
+458
+
+Wright and Stephen Montgomery for comments on the manuscript. Field collections and
+
+459
+
+insectary rearing were conducted under permit no. 530 issued by the Autoridad Nacional de
+
+460
+
+Licencias Ambientales of Colombia (ANLA). CS and CP were funded by Universidad del
+
+461
+
+Rosario (Grant Number: IV-FGD005). ML was partially funded by the Faculty of Natural
+
+462
+
+Sciences at Universidad del Rosario. AEH, MF and RMM were supported by an Emmy Noether
+
+463
+
+fellowship and research grant awarded to RMM by the Deutsche Forschungsgemeischaft (DFG)
+
+464
+
+(Grant Number: GZ: ME 4845/1-1).
+
+465
+466
+
+REFERENCES
+
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+
+Nosil P. 2012 Ecological speciation. Oxford University Press.
+(doi:10.1093/acprof:osobl/9780199587100.001.0001)
+Mallet J. 2008 Hybridization, ecological races and the nature of species: empirical
+evidence for the ease of speciation. Philos. Trans. R. Soc. B. 363, 2971–2986.
+(doi:10.1098/rstb.2008.0081)
+Coyne JA, Orr HA. 1997 “Patterns of speciation in Drosophila” revisited. Evolution 51,
+295–303. (doi:10.1111/j.1558-5646.1997.tb02412.x)
+Grant PR, Grant BR. 1997 Genetics and the origin of bird species. PNAS 94, 7768–7775.
+(doi:10.1073/pnas.94.15.7768)
+Gavrilets S. 2004 Fitness landscapes and the origin of species (MPB-41). Princeton
+University Press. (doi:10.2307/j.ctv39x541)
+Servedio MR, Van Doorn GS, Kopp M, Frame AM, Nosil P. 2011 Magic traits in
+speciation:‘magic’but not rare? Trends Ecol. Evol. 26, 389–397.
+(doi:10.1016/j.tree.2011.04.005)
+Fisher HS, Wong BBM, Rosenthal GG. 2006 Alteration of the chemical environment
+disrupts communication in a freshwater fish. Proc. R. Soc. B 273, 1187–1193.
+(doi:10.1098/rspb.2005.3406)
+Johnson AM, Stanis S, Fuller RC. 2013 Diurnal lighting patterns and habitat alter opsin
+expression and colour preferences in a killifish. Proc. R. Soc. B 280, 20130796.
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.
+20.
+21.
+22.
+23.
+24.
+25.
+26.
+27.
+
+(doi:10.1098/rspb.2013.0796)
+Slabbekoorn H, Peet M. 2003 Birds sing at a higher pitch in urban noise. Nature 424, 267.
+(doi:10.1038/424267a)
+Heuschele J, Mannerla M, Gienapp P, Candolin U. 2009 Environment-dependent use of
+mate choice cues in sticklebacks. Behav. Ecol. 20, 1223–1227.
+(doi:10.1093/beheco/arp123)
+Seehausen O, Van Alphen JJM, Witte F. 1997 Cichlid fish diversity threatened by
+eutrophication that curbs sexual selection. Science 277, 1808–1811.
+(doi:10.1126/science.277.5333.1808)
+Engström-Öst J, Candolin U. 2007 Human-induced water turbidity alters selection on
+sexual displays in sticklebacks. Behav. Ecol. 18, 393–398. (doi:10.1093/beheco/arl097)
+Maan ME, Seehausen O, Van Alphen JJM. 2010 Female mating preferences and male
+coloration covary with water transparency in a Lake Victoria cichlid fish. Biol. J. Linn.
+Soc. 99, 398–406. (doi:10.1111/j.1095-8312.2009.01368.x)
+Endler JA. 2000 Evolutionary implications of the interaction between animal signals and
+the environment. In Animal signals: signalling and signal design in animal communication
+(ed RG Espmark Y, Amundsen T), pp. 11–46. Tapir Academic Press.
+Price TD. 2017 Sensory drive, color, and color vision. Am. Nat. 190, 157–170.
+(doi:10.1086/692535)
+Endler JA. 1993 The color of light in forests and its implications. Ecol. Monogr. 63, 1–27.
+(doi:10.2307/2937121)
+Taylor LA, McGraw KJ. 2013 Male ornamental coloration improves courtship success in a
+jumping spider, but only in the sun. Behav. Ecol. 24, 955–967.
+(doi:10.1093/beheco/art011)
+Boughman JW. 2002 How sensory drive can promote speciation. Trends Ecol. Evol. 17,
+571–577. (doi:10.1016/s0169-5347(02)02595-8)
+Seehausen O et al. 2008 Speciation through sensory drive in cichlid fish. Nature 455, 620.
+(doi:10.1038/nature07285)
+Rosenthal GG. 2017 Mate choice: the evolution of sexual decision making from microbes
+to humans. Princeton University Press. (doi:10.2307/j.ctt1vwmhb0)
+Kopp M et al. 2018 Mechanisms of assortative mating in speciation with gene flow:
+connecting theory and empirical research. Am. Nat. 191, 1–20. (doi:10.1086/694889)
+Kirkpatrick M, Barton NH. 1997 The strength of indirect selection on female mating
+preferences. PNAS 94, 1282–1286. (doi:10.1073/pnas.94.4.1282)
+Felsenstein J. 1981 Skepticism towards Santa Rosalia, or why are there so few kinds of
+animals? Evolution 35, 124–138. (doi:10.2307/2407946)
+Smadja CM, Butlin RK. 2011 A framework for comparing processes of speciation in the
+presence of gene flow. Mol. Ecol. 20, 5123–5140. (doi:10.1111/j.1365294x.2011.05350.x)
+Hawthorne DJ, Via S. 2001 Genetic linkage of ecological specialization and reproductive
+isolation in pea aphids. Nature 412, 904–907. (doi:10.1038/35091062)
+Bay RA et al. 2017 Genetic coupling of female mate choice with polygenic ecological
+divergence facilitates stickleback speciation. Curr. Biol. 27, 3344–3349.
+(doi:10.1016/j.cub.2017.09.037)
+Merrill RM, Rastas P, Martin SH, Melo MC, Barker S, Davey J, McMillan WO, Jiggins
+CD. 2019 Genetic dissection of assortative mating behavior. PLoS Biol. 17.
+(doi:10.1101/282301)
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+
+28.
+29.
+30.
+31.
+32.
+33.
+34.
+35.
+36.
+37.
+38.
+39.
+40.
+41.
+42.
+43.
+44.
+45.
+46.
+47.
+
+Merrill RM et al. 2015 The diversification of Heliconius butterflies: what have we learned
+in 150 years? J. Evol. Biol. 28, 1417–1438. (doi:10.1111/jeb.12672)
+Jiggins CD, Naisbit RE, Coe RL, Mallet J. 2001 Reproductive isolation caused by colour
+pattern mimicry. Nature 411, 302–305. (doi:10.1038/35077075)
+Merrill RM, Gompert Z, Dembeck LM, Kronforst MR, McMillan WO, Jiggins CD. 2011
+Mate preference across the speciation continuum in a clade of mimetic butterflies.
+Evolution 65, 1489–1500. (doi:10.1111/j.1558-5646.2010.01216.x)
+Sánchez AP, Pardo-Diaz C, Enciso-Romero J, Muñoz A, Jiggins CD, Salazar C, Linares
+M. 2015 An introgressed wing pattern acts as a mating cue. Evolution 69, 1619–1629.
+(doi:10.1111/evo.12679)
+Merot C, Salazar C, Merrill RM, Jiggins CD, Joron M. 2017 What shapes the continuum
+of reproductive isolation? Lessons from Heliconius butterflies. Proc. R. Soc. B 284,
+20170335. (doi:10.1098/rspb.2017.0335)
+Merrill RM, Wallbank RWR, Bull V, Salazar PCA, Mallet J, Stevens M, Jiggins CD. 2012
+Disruptive ecological selection on a mating cue. Proc. R. Soc. B 279, 4907–4913.
+(doi:10.1098/rspb.2012.1968)
+Rossi M, Hausmann AE, Thurman TJ, Montgomery SH, Papa R, Jiggins CD, Mcmillan
+WO, Merrill RM. 2020 Visual mate preference evolution during butterfly speciation is
+linked to neural processing genes. bioRxiv (doi:10.1101/2020.03.22.002121)
+Heliconius Genome Consortium. 2012 Butterfly genome reveals promiscuous exchange of
+mimicry adaptations among species. Nature 487, 94. (doi:10.1038/nature11041)
+Pardo-Diaz C, Salazar C, Baxter SW, Merot C, Figueiredo-Ready W, Joron M, McMillan
+WO, Jiggins CD. 2012 Adaptive introgression across species boundaries in Heliconius
+butterflies. PLoS Genet. 8. (doi:10.1371/journal.pgen.1002752)
+Arias CF, Giraldo N, McMillan WO, Lamas G, Jiggins CD, Salazar C. 2017 A new
+subspecies in a Heliconius butterfly adaptive radiation (Lepidoptera: Nymphalidae). Zool.
+J. Linn. Soc. 180, 805–818. (doi:10.1093/zoolinnean/zlw010)
+Rodríguez-Monje SV, Linares M. 2010 Ruta alternativa de reconstrucción del patrón de
+coloración de Heliconius heurippa. Uniandes. See
+https://univdelosandes.on.worldcat.org/oclc/916327490.
+Mallet J, Barton NH. 1989 Strong natural selection in a warning-color hybrid zone.
+Evolution 43, 421–431. (doi:10.2307/2409217)
+Estrada C, Jiggins CD. 2002 Patterns of pollen feeding and habitat preference among
+Heliconius species. Ecol. Entomol. 27, 448–456. (doi:10.1046/j.1365-2311.2002.00434.x)
+Dell’Aglio DD, Troscianko J, Stevens M, McMillan WO, Jiggins CD. 2019 The
+conspicuousness of the toxic Heliconius butterflies across time and habitat. BioRxiv ,
+662155. (doi:10.1101/662155)
+Jiggins CD. 2017 The ecology and evolution of Heliconius butterflies. Oxford University
+Press. (doi:10.1093/acprof:oso/9780199566570.001.0001)
+R Core Team. 2019 R: A Language and Environment for Statistical Computing.
+Bürkner P-C. 2018 Advanced Bayesian Multilevel Modeling with the R Package brms.
+The R Journal, 10 (1), 395--411. doi: 10.32614. (doi:10.32614/rj-2018-017)
+Carpenter B et al. 2017 Stan: A probabilistic programming language. J. Stat. Softw. 76.
+(doi:10.18637/jss.v076.i01)
+Reed RD et al. 2011 Optix drives the repeated convergent evolution of butterfly wing
+pattern mimicry. Science 333, 1137–1141. (doi:10.1126/science.1208227)
+Merrill RM, Van Schooten B, Scott JA, Jiggins CD. 2011 Pervasive genetic associations
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+
+48.
+49.
+50.
+51.
+52.
+53.
+54.
+55.
+56.
+57.
+58.
+59.
+60.
+61.
+62.
+63.
+64.
+65.
+66.
+
+between traits causing reproductive isolation in Heliconius butterflies. Proc. R. Soc. B 278,
+511–518. (doi:10.1098/rspb.2010.1493)
+Gelman A, Hwang J, Vehtari A. 2014 Understanding predictive information criteria for
+Bayesian models. Stat. Comput. 24, 997–1016. (doi:10.1007/s11222-013-9416-2)
+Vehtari A, Gabry J, Magnusson M, Yao Y, Gelman A. 2019 loo: Efficient leave-one-out
+cross-validation and WAIC for Bayesian models. R Packag. version 2.2.0
+Lenth R. 2019 emmeans: Estimated Marginal Means, aka Least-Squares Means. R Packag.
+version 1.4.6
+Royle JA, Dorazio RM. 2008 Hierarchical modeling and inference in ecology: the
+analysis of data from populations, metapopulations and communities. Elsevier.
+(doi:10.1016/B978-0-12-374097-7.X0001-4)
+Dorai-Raj S. 2014 binom: Binomial confidence intervals for several parameterizations. R
+Packag. version 1.1-1
+Chamberlain NL, Hill RI, Kapan DD, Gilbert LE, Kronforst MR. 2009 Polymorphic
+butterfly reveals the missing link in ecological speciation. Science 326, 847–850.
+(doi:10.1126/science.1179141)
+Stroud JT, Losos JB. 2020 Bridging the process-pattern divide to understand the origins
+and early stages of adaptive radiation: a review of approaches with insights from studies of
+Anolis lizards. J. Hered. 111, 33–42. (doi:10.1093/jhered/esz055)
+Egnor SER, Branson K. 2016 Computational analysis of behavior. Annu. Rev. Neurosci.
+39, 217–236. (doi:10.1146/annurev-neuro-070815-013845)
+Graving JM, Chae D, Naik H, Li L, Koger B, Costelloe BR, Couzin ID. 2019
+DeepPoseKit, a software toolkit for fast and robust animal pose estimation using deep
+learning. Elife 8, e47994. (doi:10.7554/elife.47994)
+Romero-Ferrero F, Bergomi MG, Hinz RC, Heras FJH, de Polavieja GG. 2019 Idtracker.
+ai: tracking all individuals in small or large collectives of unmarked animals. Nat. Methods
+16, 179–182. (doi:10.1038/s41592-018-0295-5)
+Summers K, Symula R, Clough M, Cronin T. 1999 Visual mate choice in poison frogs.
+Proc. R. Soc. B 266, 2141–2145. (doi:10.1098/rspb.1999.0900)
+Théry M, Pincebourde S, Feer F. 2008 Dusk light environment optimizes visual perception
+of conspecifics in a crepuscular horned beetle. Behav. Ecol. 19, 627–634.
+(doi:10.1093/beheco/arn024)
+Kinoshita M, Arikawa K. 2000 Colour constancy in the swallowtail butterfly Papilio
+xuthus. J. Exp. Biol. 203, 3521–3530.
+Chittka L, Faruq S, Skorupski P, Werner A. 2014 Colour constancy in insects. J. Comp.
+Physiol. A 200, 435–448. (doi:10.1007/s00359-014-0897-z)
+Song B-M, Lee C-H. 2018 Toward a mechanistic understanding of color vision in insects.
+Front. Neural Circuits 12, 16. (doi:10.3389/fncir.2018.00016)
+Maan ME, Cummings ME. 2009 Sexual dimorphism and directional sexual selection on
+aposematic signals in a poison frog. PNAS 106, 19072–19077.
+(doi:10.1073/pnas.0903327106)
+Paris TM, Allan SA, Udell BJ, Stansly PA. 2017 Wavelength and polarization affect
+phototaxis of the Asian citrus psyllid. Insects 8, 88. (doi:10.3390/insects8030088)
+Fleishman LJ. 1992 The influence of the sensory system and the environment on motion
+patterns in the visual displays of anoline lizards and other vertebrates. Am. Nat. 139, S36-S61. (doi:10.1086/285304)
+Mavárez J, Salazar CA, Bermingham E, Salcedo C, Jiggins CD, Linares M. 2006
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+
+67.
+68.
+69.
+70.
+
+Speciation by hybridization in Heliconius butterflies. Nature 441, 868–871.
+(doi:10.1038/nature04738)
+Kronforst MR, Young LG, Gilbert LE. 2007 Reinforcement of mate preference among
+hybridizing Heliconius butterflies. J. Evol. Biol. 20, 278–285. (doi:10.1111/j.14209101.2006.01198.x)
+Crane J. 1955 Imaginal behavior of a Trinidad butterfly, Heliconius erato hydara
+Hewitson, with special reference to the social use of color. Zool. 40, 167–196.
+Jiggins CD, Salazar C, Linares M, Mavarez J. 2008 Hybrid trait speciation and Heliconius
+butterflies. Philos. Trans. R. Soc. B. 363, 3047–3054. (doi:10.1098/rstb.2008.0065)
+Melo MC, Salazar C, Jiggins CD, Linares M. 2009 Assortative mating preferences among
+hybrids offers a route to hybrid speciation. Evolution 63, 1660–1665. (doi:10.1111/j.15585646.2009.00633.x)
+
+Supplementary material: Light environment influences mating behaviours during the early
+stages of divergence in tropical butterflies
+
+650
+651
+
+Alexander E. Hausmann1*, Chi-Yun Kuo1,2, Marília Freire1,3, Nicol Rueda-M4, Mauricio
+
+652
+
+Linares4, Carolina Pardo-Diaz4, Camilo Salazar4, Richard M. Merrill1*
+
+653
+654
+655
+656
+657
+658
+659
+
+1
+
+Division of Evolutionary Biology, Ludwig-Maximilians-Universität München, Grosshaderner Str. 2, 82152 Planegg-
+
+Martinsried, Germany
+2
+
+Smithsonian Tropical Research Institute, Gamboa, 0843-03092, Panama
+
+3
+
+Present address: Department of Evolutionary Neuroethology, Max Planck Institute for Chemical Ecology, Hans-Knöll-Straße 8,
+
+07745 Jena, Germany
+4
+
+Department of Biology, Faculty of Natural Sciences, Universidad del Rosario, Carrera 24 No 63C-69, Bogotá 111221, Colombia
+
+660
+661
+
+*Corresponding authors: hausmann@bio.lmu.de and merrill@bio.lmu.de
+
+662
+663
+664
+665
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+666
+
+1) Supplementary Figures
+
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+
+Figure S1: Examples from processed videos showing ‘poorly lit’, median and ‘brightly lit’ H. heurippa ‘female’
+(left) and a H. t. linaresi ‘female’ as a comparison at same illuminance (right). Median illuminance at the H.
+heurippa ‘female’ was calculated from illuminance data at the H. heurippa ‘female’ when ‘pure’ males showed a
+response to either model. This median value was used as threshold to build the categorical model for ‘pure’ males.
+The exact same procedure was used for BL hybrid males. The specific lux values for ‘poorly lit’ and ‘brightly lit’
+conditions (6’200 and 132’268 lux) shown here were randomly chosen from the bottom and the top quartile of the
+distribution. The presented frames were picked from different recording days. Additionally to the mounted female,
+each frame shows a conspecific male approaching/courting the ‘female’ and dots used to identify individual males
+are visible on their wings. A change in hue of the red patch on H. heurippa seems to be visible under different
+illuminance conditions, but it should not be forgotten that 1) human vision is vastly different from butterfly vision
+and 2) that this is a representation produced by the GoPro camera (GoPro, San Matteo, CA), which is postprocessing colour-composition of frames.
+
+680
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+
+Figure S2: All interaction terms involving male type from fully saturated models (i.e. Table S2, model #3 for H.
+heurippa and H. t. linaresi males and Table S4, model #1 for backcross to H. t. linaresi males). A+B: Two-way
+interactions between illuminance at the H. heurippa mounted female and male type. Proportion of interactions with
+the H. heurippa female of H. heurippa (red) and H. t. linaresi (blue) males (A; resembles Fig. 2A, but comes from a
+different underlying model); and differently coloured backcross to H. t. linaresi males (B, red males (red), males
+without red (blue)). C+D: The same for the two-way interactions between illuminance at the H. t. linaresi mounted
+female and male type E-H: Three-way interactions between male type and the two illuminance measures. Male type
+is indicated on top of each graph. Colouration of each region in the graph depends on predicted preference for the H.
+heurippa mounted female at the given light conditions (scale depicted on right). White contour lines show Kernel
+densities weighted by preference score, which essentially gives the same information as the colour gradient (‘peaks’
+are where the landscape is most red). All illuminance-axes are logarithmically scaled. Dashed lines in G and H show
+median illuminance measures at the respective axis, used to categorize conditions into ‘poorly’ and ‘brightly’ lit for
+the categorical models.
+
+694
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+
+Figure S3: A-D: Raw data points of H. t. linaresi, H. heurippa, non-red and red backcross to H. t. linaresi males
+(from top to bottom) in a two-dimensional illuminance space. Horizontal dimension shows illuminance at the
+mounted H. heurippa female, vertical dimension shows illuminance at the mounted H. t. linaresi female. Blue dots
+indicate responses of males to the mounted H. t. linaresi female and red dots indicate responses to the mounted H.
+heurippa female. Kernel densities are shown for each set of data (blue lines for responses to H. t. linaresi, red lines
+for responses to H. heurippa). E-H: the two-dimensional illuminance space was then divided into 15 squares for each
+male type and local preferences within each square were calculated. Graphs directly relate to graphs A-D. The higher
+the preference for the mounted H. heurippa female in a square, the more red the square; the higher the preference for
+the H. t. linaresi female, the more blue (see scale on the right). Squares without response are white. These local
+preferences have to be interpreted in combination with the local sample sizes (as shown in left column), since they
+often rely on very few observations. All axes are logarithmically scaled.
+
+706
+707
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+
+Figure S4: Individual trajectories from categorical models. Visual preferences of pure males and hybrid males are
+displayed by type. Within each type, data is split depending on illuminance around the H. heurippa mounted female,
+into poorly and brightly lit. Whenever an individual appeared under both light conditions, it is connected by a
+reaction norm line in this plot. Transparency of reaction norm lines within each panel is scaled by the maximum
+number of observations available for one individual within this panel. For H. t. linaresi, H. heurippa and BL males,
+posterior means for each EMM are calculated from the same underlying categorical models as used for Fig. 2 and
+Fig. 4, respectively. For F1 and BH males, a categorical model was fit including male type, the illuminance category
+around the H. heurippa ‘female’ (determined again by the median measurement) and their interaction. EMMs were
+then extracted using the same logic as for the other types. The difference between two groups (in this case between
+poorly and brightly lit conditions within each type) is shown by the same Gardner-Altman plot type as used for Fig. 2
+and Fig. 4. Small red and blue line located at the right side of each panel show estimators for H. t. linaresi and H.
+heurippa males from Fig. 2B as a reference. [Figure follows on next page]
+
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+720
+
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+721
+722
+723
+724
+725
+726
+727
+
+Figure S5: Relative attraction towards H. heurippa ‘females’ (i.e. the proportion of interactions with the mounted H.
+heurippa ‘female’ as opposed to the H. t. linaresi ‘female’) for non-red (bb) BL males (blue dots) and red (Bb) BL
+males (red dots). Data and estimators are across all light environments. Note that only preference data with
+associated illuminance data were included in the underlying statistical models (a few of the raw data points displayed
+here therefore were not considered by the underlying model). The difference between the two groups is shown with
+the same logic as used for Fig. 2 and Fig. 4. Small red and blue line located at the right side of each panel show
+estimators for H. t. linaresi and H. heurippa males from Fig. 2B as a reference.
+
+728
+729
+730
+731
+732
+733
+734
+735
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+736
+
+2) Supplementary Tables
+
+737
+738
+
+Table S1: Collection locations of H. t. linaresi and H. heurippa.
+
+Taxon
+
+Location
+
+Heliconius timareta linaresi
+
+Guayabal (2°41’04”N, 74°53’17”W)
+
+Heliconius heurippa
+
+Lejanías (03°34’0”N, 74°04’20.4”W)
+Buenavista (4°10’30”N, 73°40’41”W)
+Santa María (04°53’28.2”N, 73°15’11.4”W)
+
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+
+Table S2: Information on different experimental hybrid lines. Left column shows F1 broods from which lines
+originated. For the third line, we summarized two F1 crosses and their subsequent crosses into one hybrid line. These
+two F1 crosses had the same H. heurippa father, but a different H. t. linaresi mother. Individual counts in brackets
+show how many males of each brood were tested in the experiment. 32 other F1 males from 7 broods were tested in
+the experiment and are not mentioned here, as their brood was not involved in generating backcrosses (13
+individuals/5 broods of those being from a cross between H. t. linaresi mother and H. heurippa father and 19
+individuals/2 broods being from the reciprocal F1 cross with H. heurippa mother and H. t. linaresi father). H.
+heurippa is abbreviated as heu and H. t. linaresi as lin in the table.
+
+Backcross to lin with
+
+Backcross to lin with
+
+Backcross to heu with
+
+male F1
+
+female F1
+
+male F1
+
+mother: lin, father: F1
+
+mother: F1, father: lin
+
+mother: heu, father: F1
+
+C18_002 (12 indiv.)
+
+7 broods (45 indiv.)
+
+2 broods (9 indiv.)
+
+2 broods (20 indiv.)
+
+C18_020 (6 indiv.)
+
+3 broods (83 indiv.)
+
+1 brood (15 indiv.)
+
+1 brood (9 indiv.)
+
+4 broods (18 indiv.)
+
+2 broods (10 indiv.)
+
+3 broods (6 indiv.)
+
+1 brood (8 indiv.)
+
+-
+
+-
+
+F1 brood
+mother: lin,
+father: heu
+
+C18_034 & C18_036
+(half-sib.) (13 indiv.)
+C19_014 (-)
+
+749
+750
+751
+752
+753
+754
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+755
+756
+
+Table S3: GoPro Hero 5 Black™ (GoPro, San Matteo, CA) camera settings and equipment. All auto-settings (except
+were indicated) were disabled.
+
+Settings
+Resolution
+
+1920 x 1080 pixels
+
+Frame rate
+
+60 fps
+
+Shutter speed
+
+1/480
+
+Field of view
+
+Narrow
+
+Colour
+
+GoPro
+
+Sharpness
+
+High
+
+ISO
+
+400
+
+White balance
+
+Auto
+
+
+Equipment
+
+
+
+128 GB SanDisk™ Extreme SD card
+
+Neewer™ UV filter (reduced overexposure of yellow bands)
+
+
+Xlayer™ 210033 powerbank (charging while recording)
+
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+34
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+
+Table S4: 19 possible fixed-effect structures for the pure males of H. heurippa and H. t. linaresi (fixed effect ‘type’).
+‘I_H’ and ‘I_L’ stand for log-illuminance measures at the H. heurippa and the H. t. linaresi mounted females,
+respectively. A ‘*’ sign in a model formula indicates that all involved variables as well as all possible interactions
+between them are included. All models include trial and male ID as random effects. Including trial (and in many
+cases also individual ID) as a random effect has often been disregarded in previous analyses. However, we found
+strong correlation among individuals’ behaviour during trials (see supplementary R Markdown), likely due to the
+unique combination of males, mounted females and their position in the experimental cage during a given trial. The
+latter may have also affected sensitivity of our motion-detection software. We therefore considered it inevitable to
+correct for this. For each model we calculated a LOOIC and WAIC value, which mostly agree. Based on the WAIC
+value, differences between best model and other models are calculated (ΔWAIC) as well as a model-weight score.
+
+#
+
+Fixed Effects Term
+
+LOOIC
+
+WAIC
+
+ΔWAIC
+
+WeightWAIC
+
+1
+
+~ type * I_H
+
+3773.40
+
+3768.52
+
+0.00
+
+0.29
+
+2
+
+~ type * I_H + I_L
+
+3774.63
+
+3769.68
+
+1.16
+
+0.16
+
+3
+
+~ type * I_H * I_L
+
+3775.20
+
+3770.08
+
+1.56
+
+0.13
+
+4
+
+~ type * I_H + I_H * I_L
+
+3775.99
+
+3771.04
+
+2.52
+
+0.08
+
+5
+
+~ type * I_H + type * I_L
+
+3776.53
+
+3771.52
+
+3.01
+
+0.06
+
+6
+
+~ type * I_H + type * I_L + I_H * I_L
+
+3776.62
+
+3771.56
+
+3.04
+
+0.06
+
+7
+
+~ type
+
+3777.82
+
+3773.07
+
+4.55
+
+0.03
+
+8
+
+~ type + I_L
+
+3778.10
+
+3773.20
+
+4.68
+
+0.03
+
+9
+
+~ type + I_H
+
+3778.11
+
+3773.33
+
+4.81
+
+0.03
+
+10
+
+~ I_L
+
+3778.50
+
+3773.62
+
+5.10
+
+0.02
+
+11
+
+~ type * I_L
+
+3778.83
+
+3773.95
+
+5.43
+
+0.02
+
+12
+
+~1
+
+3779.24
+
+3774.44
+
+5.92
+
+0.02
+
+13
+
+~ I_H
+
+3779.45
+
+3774.58
+
+6.06
+
+0.01
+
+14
+
+~ type + I_H + I_L
+
+3779.75
+
+3774.87
+
+6.35
+
+0.01
+
+15
+
+~ I_H + I_L
+
+3780.58
+
+3775.58
+
+7.06
+
+0.01
+
+16
+
+~ type + I_H * I_L
+
+3780.77
+
+3775.80
+
+7.28
+
+0.01
+
+17
+
+~ type * I_L + I_H
+
+3780.82
+
+3775.99
+
+7.47
+
+0.01
+
+18
+
+~ type * I_L + I_H * I_L
+
+3781.61
+
+3776.60
+
+8.09
+
+0.01
+
+19
+
+~ I_H * I_L
+
+3781.85
+
+3776.78
+
+8.26
+
+0.00
+
+784
+785
+786
+787
+788
+35
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+789
+790
+
+Table S5: Posterior means and 95% equal-tailed credible intervals for male types from Fig. 2, Fig. S5 and Fig. 4.
+Minus (“-“) in the second column stands for a poorly lit mounted female, a plus (“+“) for a brightly lit one.
+
+Male type
+
+Light environment
+
+Mean
+
+Lower
+
+Upper
+
+H. t. linaresi (left in Fig. 2B)
+
+Across all
+
+0.447
+
+0.383
+
+0.513
+
+H. heurippa (right in Fig. 2B)
+
+Across all
+
+0.515
+
+0.449
+
+0.582
+
+H. t. linaresi (left in Fig. 2C)
+
+H. heurippa -
+
+0.464
+
+0.391
+
+0.540
+
+H. heurippa (right in Fig. 2C)
+
+H. heurippa -
+
+0.456
+
+0.385
+
+0.527
+
+H. t. linaresi (left in Fig. 2D)
+
+H. heurippa +
+
+0.437
+
+0.362
+
+0.514
+
+H. heurippa (right in Fig. 2D)
+
+H. heurippa +
+
+0.572
+
+0.493
+
+0.650
+
+BL without red (left in Fig. S5)
+
+Across all
+
+0.461
+
+0.414
+
+0.508
+
+BL with red (right in Fig. S5)
+
+Across all
+
+0.493
+
+0.444
+
+0.543
+
+BL without red (left in Fig. 4A)
+
+H. heurippa - / H. t. linaresi -
+
+0.460
+
+0.406
+
+0.515
+
+BL with red (right in Fig. 4A)
+
+H. heurippa - / H. t. linaresi -
+
+0.475
+
+0.419
+
+0.531
+
+BL without red (left in Fig. 4B)
+
+H. heurippa - / H. t. linaresi +
+
+0.477
+
+0.401
+
+0.554
+
+BL with red (right in Fig. 4B)
+
+H. heurippa - / H. t. linaresi +
+
+0.443
+
+0.359
+
+0.528
+
+BL without red (left in Fig. 4C)
+
+H. heurippa + / H. t. linaresi -
+
+0.426
+
+0.350
+
+0.505
+
+BL with red (right in Fig. 4C)
+
+H. heurippa + / H. t. linaresi -
+
+0.538
+
+0.461
+
+0.616
+
+BL without red (left in Fig. 4D)
+
+H. heurippa + / H. t. linaresi +
+
+0.438
+
+0.384
+
+0.491
+
+BL with red (right in Fig. 4D)
+
+H. heurippa + / H. t. linaresi +
+
+0.504
+
+0.446
+
+0.563
+
+791
+792
+793
+794
+795
+796
+
+Table S6: Posterior means and 95% equal-tailed credible intervals for estimates of proportions of each mating
+outcome from tetrad experiments. First row is based on empirically measured data, the other rows are stochastic
+predictions based on mounted female data from all light environments, from a poorly lit H. heurippa mounted female
+and a brightly lit one, respectively.
+
+H. heurippa ♀
+
+H. t. linaresi ♀
+
+H. heurippa ♀
+
+H. t. linaresi ♀
+
+H. t. linaresi ♂
+
+H. t. linaresi ♂
+
+H. heurippa ♂
+
+H. heurippa ♂
+
+0.168
+
+0.157
+
+0.405
+
+0.27
+
+[0.099; 0.253]
+
+[0.09; 0.239]
+
+[0.305; 0.508]
+
+[0.183; 0.366]
+
+mounted females:
+
+0.149
+
+0.184
+
+0.349
+
+0.329
+
+across all
+
+[0.084; 0.23]
+
+[0.111; 0.27]
+
+[0.255; 0.45]
+
+[0.236; 0.429]
+
+mounted females: poorly
+
+0.152
+
+0.181
+
+0.315
+
+0.363
+
+lit H. heurippa
+
+[0.086; 0.233]
+
+[0.109; 0.266]
+
+[0.224; 0.414]
+
+[0.267; 0.465]
+
+mounted females:
+
+0.146
+
+0.187
+
+0.387
+
+0.291
+
+brightly lit H. heurippa
+
+[0.082; 0.226]
+
+[0.114; 0.273]
+
+[0.289; 0.489]
+
+[0.203; 0.389]
+
+Estimates based on
+tetrad experiment
+
+797
+36
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.07.28.224915; this version posted August 3, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+798
+799
+800
+801
+802
+803
+
+Table S7: 19 possible fixed-effect structures for the BL males (fixed effect ‘type’ refers here to wing colour
+phenotype of hybrids). ‘I_H’ and ‘I_L’ stand for log-illuminance measures at the H. heurippa and the H. t. linaresi
+mounted females, respectively. A ‘*’ sign in a model formula indicates that all involved variables as well as all
+possible interactions between them are included. All models include trial, male ID and brood as random effects. Each
+model structure has a LOOIC and WAIC value, which mostly agree. Based on the WAIC value, differences between
+best model and other models are calculated (ΔWAIC) as well as a model-weight score.
+
+#
+
+Fixed Effects Term
+
+LOOIC
+
+WAIC
+
+ΔWAIC
+
+WeightWAIC
+
+1
+
+~ type * I_H * I_L
+
+6815.06
+
+6811.69
+
+0.00
+
+0.38
+
+2
+
+~ type * I_H + type * I_L + I_H * I_L
+
+6815.98
+
+6812.60
+
+0.91
+
+0.24
+
+3
+
+~ type * I_H + type * I_L
+
+6817.15
+
+6813.84
+
+2.15
+
+0.13
+
+4
+
+~ type * I_H + I_H * I_L
+
+6817.82
+
+6814.43
+
+2.74
+
+0.10
+
+5
+
+~ type * I_H
+
+6820.15
+
+6816.86
+
+5.17
+
+0.03
+
+6
+
+~ type * I_H + I_L
+
+6820.78
+
+6817.48
+
+5.79
+
+0.02
+
+7
+
+~ type + I_H * I_L
+
+6821.33
+
+6817.96
+
+6.27
+
+0.02
+
+8
+
+~ I_H * I_L
+
+6822.03
+
+6818.67
+
+6.98
+
+0.01
+
+9
+
+~ type
+
+6821.94
+
+6818.68
+
+6.99
+
+0.01
+
+10
+
+~ type * I_L + I_H * I_L
+
+6822.28
+
+6818.95
+
+7.27
+
+0.01
+
+11
+
+~1
+
+6822.46
+
+6819.18
+
+7.50
+
+0.01
+
+12
+
+~ type + I_H
+
+6822.96
+
+6819.70
+
+8.01
+
+0.01
+
+13
+
+~ type + I_L
+
+6823.18
+
+6819.94
+
+8.26
+
+0.01
+
+14
+
+~ I_H
+
+6823.50
+
+6820.19
+
+8.50
+
+0.01
+
+15
+
+~ I_L
+
+6823.80
+
+6820.52
+
+8.84
+
+0.00
+
+16
+
+~ type + I_H + I_L
+
+6824.36
+
+6821.03
+
+9.35
+
+0.00
+
+17
+
+~ type * I_L
+
+6825.21
+
+6821.92
+
+10.23
+
+0.00
+
+18
+
+~ I_H + I_L
+
+6825.20
+
+6821.93
+
+10.24
+
+0.00
+
+19
+
+~ type * I_L + I_H
+
+6825.55
+
+6822.23
+
+10.54
+
+0.00
+
+804
+
+37
+
+

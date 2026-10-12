@@ -1,0 +1,240 @@
+Deep fusion based transfer learning with bald eagle search algorithm for sign language recognition to assist individuals with hearing and speech impairments
+Manar Ahmed Hamza, Alanoud Subahi, Nouf Atiahallah Alghanmi, Nadhem Nemri (2025). Scientific Reports. https://doi.org/10.1038/s41598-025-10660-4. doi:10.1038/s41598-025-10660-4. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Deep fusion based transfer learning with bald eagle search algorithm for sign language recognition to assist individuals with hearing and speech impairments
+
+## Abstract
+AbstractSign language (SL) is a significant communication method for individuals with hearing impairments, using hand gestures to convey letters, words, and sentences. However, several people are unfamiliar with SL, creating a communication gap. An intelligent SL recognition framework must bridge this gap by accurately interpreting hand gestures into text or speech. The system uses deep learning (DL) to ensure real-time, efficient, and inclusive communication between hearing-impaired individuals and others. Hearing aid devices are notable technological developments that assist hearing-impaired individuals in communicating with others. It also helps individuals with partial hearing loss, while those with complete hearing loss rely entirely on SL for communication. Advancements in machine learning (ML) and computer vision (CV) have led to effective recognition and interpretation of SL gestures. This paper proposes an Optimized Fusion-Based Transfer Learning for Sign Language Recognition Using the Bald Eagle Search Algorithm (OFTLSLR-BESA) model. The main aim of the proposed OFTLSLR-BESA technique relies on improving the recognition system of SL to assist individuals with hearing and speech impairments. The adaptive bilateral filtering (ABF) technique initially performs the image pre-processing step to eliminate the unwd noise from input image data. Furthermore, the feature extraction process employs a fusion of InceptionV3, MobileNetV2, NASNetMobile and ResNet50V2 models. Moreover, the random vector functional link (RVFL) method is implemented for classification. Finally, the RVFL model’s hyperparameter tuning is performed using the Bald Eagle Search (BES) method. The OFTLSLR-BESA approach is evaluated under the American SL alphabet dataset. The experimental analysis of the OFTLSLR-BESA approach portrayed a superior accuracy value of 99.64% over existing models.Keywords: Sign language recognition, Bald eagle search algorithm, Transfer learning, Hearing and speech impairments, Machine learningSubject terms: Computational biology and bioinformatics, Mathematics and computing
+
+## Introduction
+As per the world health organization (WHO), 466 million individuals suffered from hearing loss across the globe in 2020. SL is a vital tool for interacting with one another1. Recently, analysis of deafness has adopted more complicated socio-cultural viewpoints, increasing the problem of community identity, maintenance and formation, and language ideology. As a means of building people’s communication, SL doesn’t ever share similar standards in the world2. Alternatively, cultural differences and other aspects make a massive difference between the SL. The physical element of SL is generally comprised of hand and forearm motions. The creation of sentences is also diverse regarding vocabulary, alphabets, and grammar amongst multiple SLs3. Difficulties arise among hearing-impaired and hearing-intact people while interacting; thus, special training is needed to understand the SL. Deaf individuals mostly encounter threats when communicating with hearing people, as many cannot comprehend SL4. This study aims to recognize and convert SL or hand gestures into readable text, facilitating real-world interaction. DL-based SL recognition models have shown significant progress, utilizing various techniques that perform intrinsic feature extraction through multiple non-linear transformations5.
+DL techniques have gained prominence because they can automatically extract meaningful features from massive and intrinsic datasets, replicating specific factors of human brain function6. Unlike conventional methods, DL models can capture complex relationships within data beyond immediate neighbours, enabling them to learn patterns and representations directly from raw inputs without manual feature engineering7. Recently, various DLs have been explicitly utilized for hand gesture detection, illustrating significant enhancements in accuracy and robustness for real-time applications8. A DL model named convolutional neural network (CNN) is beneficial for recognizing various characteristics of the imageries in spatial regions9. The different amounts of kernels are implemented at diverse layers of CNN to remove the shape of the fingers. Finally, it classifies the images into several collections based on their features10. Globally, millions of individuals encounter difficulty in communication due to hearing and speech impairments, which significantly affect their social interaction and inclusion. SL plays a significant role in bridging this communication gap, yet its discrepancies across regions and cultures create barriers to universal understanding. The complexity of diverse SLs, with unique gestures, grammar, and expressions, demands advanced recognition systems to ease effective communication. Developing robust and accurate SLR models can empower individuals with impairments, promoting greater accessibility and social integration.
+This paper proposes an Optimized Fusion-Based Transfer Learning for Sign Language Recognition Using the Bald Eagle Search Algorithm (OFTLSLR-BESA) model. The main aim of the proposed OFTLSLR-BESA technique relies on improving the recognition system of SL to assist individuals with hearing and speech impairments. The adaptive bilateral filtering (ABF) technique initially performs the image pre-processing step to eliminate the unwd noise from input image data. Furthermore, the feature extraction process employs a fusion of InceptionV3, MobileNetV2, NASNetMobile, and ResNet50V2 models. Moreover, the random vector functional link (RVFL) method is implemented for classification. Finally, the RVFL model’s hyperparameter tuning is performed using the Bald Eagle Search (BES) method. The OFTLSLR-BESA approach is evaluated under the American SL alphabet dataset. The key contribution of the OFTLSLR-BESA approach is listed below.
+The OFTLSLR-BESA model integrates ABF during image pre-processing to eliminate unwanted noise while preserving crucial edge details, improving input quality. This step enhances the efficiency of downstream feature extraction. It ensures cleaner, more informative representations for robust model training.
+The OFTLSLR-BESA method employs a fusion of InceptionV3, MobileNetV2, NASNetMobile, and ResNet50V2 to extract diverse and complementary features, improving representational richness. This multi-model integration effectively captures both fine and abstract details. It strengthens the overall feature extraction capability for improved recognition accuracy.
+The OFTLSLR-BESA method implements the RVFL network for fast and efficient classification of extracted features, mitigating computational overhead. It enhances classification speed without compromising accuracy, enabling real-time performance for practical deployment scenarios.
+The OFTLSLR-BESA methodology applies the BES approach to hyperparameter tuning, improving classification accuracy and model stability. It efficiently explores the search space to avoid local optima, resulting in a more robust and well-generalized model.
+The proposed OFTLSLR-BESA model presents a novel integration of multi-model deep feature fusion utilizing InceptionV3, MobileNetV2, NASNetMobile, and ResNet50V2 with RVFL classification and BES-based tuning. This hybrid design ensures high accuracy and computational efficiency. Unlike existing methods, it uniquely utilizes lightweight classification with metaheuristic tuning, a novel approach not previously explored in related domains.
+
+## Related works
+Lingeswari et al.11 proposed a Tamil SL (TSL) recognition method using iterative guided filtering (IGF) for noise reduction, residual exemplars local binary pattern (RELBP) for feature extraction, and a Hamiltonian deep neural network (HDNN) for classification. Abdul Ameer et al.12 proposed an Arabic SL (ArSL) recognition model utilizing long short-term memory (LSTM) networks and an attention mechanism (AM) integrated with MediaPipe for keypoint extraction. Said et al.13 introduced an adaptive transformer-based dl framework (ADTR) for continuous ArSL recognition and translation. It utilizes adaptive masking (AMK) to remove redundant video frames, local clip self-attention (LCSA) to capture hierarchical video features and adaptive fusion (AF) to integrate multi-scale temporal and spatial data. Ridwan et al.14 proposed a DNN-based approach integrating ResNet50, Inception, Xception, and VGG architectures for automated SLR. It employs advanced pre-processing and SHAP-based post-processing to improve classification accuracy and interpretability. It aims to improve communication accessibility for the deaf community using the Bhutanese-Sign-Language (BSL) dataset. Dhanjal and Singh15 presented an efficient multilingual spoken language to ISL translation system utilizing DeepSpeech for speech recognition and a synthetic keyframe approach. The method integrates translation rules with a 3D signing avatar and the Hamburg Notation System (HNS) to achieve accurate and resource-efficient SL motion synthesis. Nimbalkar et al.16 introduced a real-time system using DL, CV, and neural networks, including CNN and LSTM. By utilizing mediapipe and CVzone hand tracking modules on a curated SignVaria dataset, the system aims to accurately convert ISL gestures into text, improving communication accessibility for the deaf community. Chiradeja et al.17 proposed a hybrid graph embedding and adaptive convolutional networks (HGE-ACN) methodology using six-axis inertial and five-finger curvature sensors from a wearable glove to recognize sign language sentences accurately. Akdag and Baykan18 introduced a robust isolated sign language word recognition system by integrating residual 3D. They temporally separated convolutional blocks (R3(2 + 1)D) for effective spatial–temporal feature extraction alongside support vector machine (SVM) classification utilizing pose-based data to improve accuracy and robustness across varied backgrounds.
+Kabir et al.19 improved Bangla Sign Language (BdSL) recognition by employing a Max Voting Ensemble approach that integrates Xception, InceptionV3, DenseNet121, ResNet50, and MobileNetV2 DL models, attaining superior accuracy and reliability across BdSL-38 and BdSL-49 datasets. Ingoley and Bakal20 developed a model using transfer learning (TL)-based deep models, namely VGG16, VGG19, ResNet50, and MobileNetV2 techniques optimized with hand landmark points to achieve accurate sign-to-text interpretation. Arularasan et al.21 proposed an efficient SLR system using Mask Region-based CNN (Mask RCNN) for accurate detection, combined with social spider optimization (SSO) and Smooth SVM (SM-SVM) classification to improve accuracy and speed. Mosleh et al.22 developed a real-time bidirectional Arabic Sign Language (ArSL) translation system by utilizing TL, deep CNN architectures, namely YOLOv8n, Xception, InceptionV3, etc., and fuzzy string matching to improve communication between deaf and hearing individuals. Ellappan et al.23 introduced a highly accurate and robust SLR system by integrating CV and sensor-based techniques. This hybrid approach effectually captures complex hand and finger movements, improving communication accessibility for the deaf and hard-of-hearing community. Thatha et al.24 proposed a robust American SL (ASL) recognition system utilizing dynamic gestures by employing data augmentation and TL. The InceptionV3-based CNN model is trained to interpret ASL signs from images and video inputs accurately, improving communication accessibility for individuals with speech and hearing impairments. Vidhyalakshmi et al.25 proposed an efficient Indian SLR system utilizing TL with EfficientNetB0 and fairness-aware collaborative filtering for pre-processing. This approach aims to improve recognition accuracy, precision, and robustness by effectually removing noise and utilizing advanced DL methods on the Indian SL (ISL) dataset. Vasuki et al.26 presented a robust SLR system by integrating ResNet for spatial feature extraction with Transformer networks for modelling temporal dependencies. Gao et al.27 introduced a robust video SLR system using cross-attention fusion between RGB and skeleton modalities. Using heatmap volumes and space–time feature extraction, the CAMFuse model aimed to enhance complementary information mining and recognition accuracy on multimodal datasets. Table 1 summarizes the existing studies on SLR using DL models.
+Utilized techniques, datasets, metrics, and performance highlights of recent SLR studies.
+Despite crucial enhancements in SLR using DL, CV, and sensor fusion techniques, several limitations and research gaps remain. Few models face difficulty handling intrinsic temporal dynamics and varying signer styles, particularly in continuous and sentence-level recognition. The reliance on curated datasets with limited signer diversity poses challenges for generalization across diverse demographics and environments. Several models concentrate on isolated SL, lacking scalability for real-time, multilingual, or large vocabulary applications. Furthermore, computational efficiency remains a concern for deployment on resource-constrained devices. While some models integrate multimodal data, effectual fusion techniques to exploit complementary information fully are still evolving. A research gap exists in developing robust systems comprehensively addressing occlusions, background noise, and dynamic backgrounds. Thus, improving robustness, scalability, and real-time performance while addressing these gaps becomes substantial for broader adoption in practical scenarios.
+
+## Proposed methodology
+This study develops an OFTLSLR-BESA technique. The main aim of the proposed method is to improve the recognition system of SL to assist individuals with hearing and speech impairments. To accomplish that, the proposed OFTLSLR-BESA model involves various levels, such as image pre-processing, fusion of feature extraction, classification, and parameter tuning. Figure 1 portrays the overall working procedure of the OFTLSLR-BESA model.
+Overall working process of OFTLSLR-BESA model.
+
+## Image pre-processing
+The image pre-processing step is initially performed using the ABF technique to eliminate unwanted noise from input image data28. This technique is chosen because it can effectually remove noise while preserving essential edge data, which is critical for accurate feature extraction. Unlike conventional Gaussian or median filters that may blur edges, ABF adapts to local intensity variations, maintaining structural details. This makes it appropriate for complex image data where fine-grained information is crucial. ABF also handles varying illumination and texture conditions better than standard methods. Its balance between noise reduction and edge preservation improves the overall performance of downstream DL models in recognition tasks.
+ABF is an influential image-processing model employed to enhance the excellence of SLR methods. It upholds significant edge details while efficiently decreasing noise, making it perfect for pre-processing hand gesture imaging. Unlike conventional filtering models, ABF dynamically alters the intensity and spatial parameters depending on local image features, certifying optimum smoothing and edge preservation. This enhances the accuracy of feature extraction, which is critical for identifying intricate SL gestures. By improving the precision of motion contours and hand shapes, ABF donates to stronger and more trustworthy SLR methods.
+
+## Fusion-based feature extraction process
+In this section, the OFTLSLR-BESA model employs a fusion of InceptionV3, MobileNetV2, NASNetMobile, and ResNet50V2 models for the feature extraction. The fusion model is utilized to leverage the complementary strengths of each architecture. InceptionV3 outperforms in capturing multi-scale spatial features through its unique inception modules, while MobileNetV2 presents lightweight and efficient processing appropriate for resource-constrained environments. NASNetMobile provides optimized architecture discovered via neural architecture search, improving feature representation, and ResNet50V2 contributes deep residual learning that assists in mitigating vanishing gradients and enhances convergence. Integrating these models ensures robust, diverse, and rich feature extraction, resulting in better generalization and improved classification accuracy than relying on a single model or traditional handcrafted features.
+Inception-V3 The inception method was initially presented as Inception-Vl or GoogLeNet, attaining advanced outcomes for detection and classification tasks in large‐scale visual recognition tasks29. The significant dissimilarity from preceding system frameworks is that the × convolutional layers are substituted by dual successive layers of convolutions, using up to 128 filters. In Inception-V2, the suggested batch normalization (BN) standardizes activations to enhance training speed and stability. This current version, in Inception-V3, presented a factorization procedure, whereas conventional 7 × convolutions are factorized into small convolutions, like , to improve efficacy regarding complexity and handling time. This makes Inception-V3 a strong method for object detection precision and minimizes computational costs through different fields.
+MobileNet-V2 It is a clear version of a CNN, which is mainly committed to surveillance cameras and mobile vision devices with restricted sources and computational control. The initial type of MobileNet separated the filter into dual separated layers. The initial layer is the depthwise separable convolution, which contains a convolution filter on every input channel, utilizing a depth of 1. Nevertheless, in MobileNet-V2, the pointwise convolution layer is substituted by a bottleneck layer to decrease the feature map depth after passing through the activation function of RELU. Furthermore, the bottleneck layer, a reversed residual connection, is included in MobileNet-V2. In contrast, a expansion layer is added before the depthwise separable convolution layer to improve the channel counts by the expansion feature. Therefore, the novel version has considerably decreased the end-to-end dimensionalities, and the parameter counts make the method lighter and additional time effective. Figure 2 depicts the structure of the MobileNet-V2 model.
+Structure of MobileNet-V2 model.
+NASNet-Mobile NASNet is a deeper CNN presented recently to attain methods with small sizes and smaller foating‐point operations per second. It contains dual scalable structures, such as ImageNet and CIFAR‐10, comprising dual recurrent cells, such as reduction and normal. The significant difference between the structures associated with the normal cell counts (N) stacked among the cells of reduction influences the computational need and the precision of the framework. Then, all cells are convoluted and contain a variable number of filters; the normal cell returns a feature mapping with a similar size, while the lessening cell returns a minimized width and height of the feature mapping. At last, the NASNet-Mobile method aims to discover the top combinations between a pre-defined collection of operations to make the top-performance convolutional cells.
+ResNet50-V2 ResNet methods are a deep CNN presented recently, and their performance has been established through some datasets. Furthermore, ResNet incorporates other deeper CNNs in some competitions, with a rate of error classification of lower than 3.57%. Recently, numerous ResNet structures with various layer counts have been recommended. The most significant benefit of ResNet compared with other methods is the residual blocks, which resolve the vanishing gradient problem that emerged from the learning procedure modified at the first layers. The structure of either version of ResNet50, for example, Vl and V2, contains three residual blocks, whereas all are composed of and convolution layers. Therefore, the training of the ResNet50-V2 method is much simpler and improved to simplify novel data compared to that of ResNet50-V1.
+The fusion model captures the rich and diverse set of features from input images. By integrating these architectures, the model effectually balances depth, efficiency, and representational power, enabling robust extraction of low- and high-level image features. This multi-model fusion ensures that the unique advantages of each network, such as InceptionV3’s factorized convolutions for computational efficiency, MobileNetV2’s lightweight design for faster processing, NASNetMobile’s architecture search for optimized cell structures, and ResNet50V2’s residual connections for deeper feature learning are jointly employed for improving the overall detection accuracy.
+The extracted features from each model are incorporated to improve the method’s capability to generalize across varied input conditions and object characteristics. This fusion strategy enriches the feature representation and reduces the limitations of relying on a single architecture, resulting in a more robust and discriminative feature set that improves the system’s downstream classification and recognition performance.
+
+## RVFL-based classification process
+This section employs the RVFL network for the classification process30. This model is chosen due to its simplicity, fast training speed, and strong generalization ability. Unlike conventional neural networks that require iterative weight updates, RVFL utilizes a single-layer feedforward structure with random input weights, mitigating computational complexity. It also incorporates direct links between input and output layers, improving learning efficiency and accuracy. Compared to conventional classifiers like SVM or deep networks, RVFL attains competitive performance with significantly lower training time. Its non-iterative learning and robust performance on high-dimensional data make it ideal for real-time and resource-constrained applications.
+The RVFL method is designed as a feedforward neural network containing three layers: an output layer, an input layer, and a hidden layer (HL). The biases and weights connecting the input layer to the HL are randomly set inside a particular range utilizing a uniform distribution. They are maintained constantly during the training stage. Conversely, the weights connecting the HL to the output layer—named output weights—are established systematically over the closed‐form solution.
+Assume the training dataset be , whereas , and signifies the label. Describe , and denote matrices comprising each target and input vector, correspondingly. Following the estimate of the input matrix utilizing randomly set biases and weights, activation function was used to give the matrix (HL), stated as shown:
+whereas signifies the weighted matrix that is randomly selected with values captured from a uniform distribution through [1, 1], and signifies the biased matrix. Then, is demonstrated as:
+Here, characterizes the sample in the matrix signifies the column vector of the weighted matrix , and the biased term for the hidden node is signified as . The succeeding matrix equation has been applied to calculate the weights of the output layer:
+Now, signifies the weighted matrix that connects the connected hidden and input nodes to the output nodes, and represents the projected output. The objective function based on Eq. (3) is expressed as demonstrated:
+whereas . The solution of Eq. (4) is gained as shown:
+Here, signify the identity matrix of proper sizes, and denotes the tuning parameter.
+
+## BES-based parameter tuning model
+Finally, the hyperparameter tuning of the RVFL model is performed by implementing the BES approach31. The BES approach is chosen for its effectual balance between exploration and exploitation, inspired by the hunting behaviour of bald eagles. BES presents a robust global search capability, avoiding local optima—a common issue with conventional optimizers like grid or random search. It adapts dynamically to the search space and converges faster, enhancing classification accuracy and model stability. Compared to metaheuristic models, such as particle swarm optimization (PSO) and genetic algorithm (GA), BES performs better in high-dimensional optimization problems. Its simplicity and lower computational cost make it appropriate for real-time and large-scale applications.
+BES is a model that imitates the intelligent hunting ability of Bald Eagles to address complicated optimizer problems. Stimulated by their wide-ranging scouting, prey localization, and accurate dives, BES separates its search into 3 phases: exploring the searching region, zeroing in on suitable areas, and flying down for the best solution. The initial phase is selection, while BEs find and pick the best region (regarding quantity of food) inside the preferred searching region while they can search for prey. Equation (6) offers this behaviour mathematically.
+whereas denotes upgraded location, denotes the search region that BEs now select according to the best location identified in their preceding search, denotes the parameter to control the modifications in an area that captures a value between 1.5 and 2, and represents a randomly generated number that directs a value among ,1), specifies that these eagles have tried all the information from the earlier points. refers to the current location. The next phase is the search, where bald eagles search for prey inside the preferred searching region and focus on various paths inside the spiral area to speed up their search. The optimal location for the swoop is mathematically formulated in the succeeding equations:
+Here denotes a parameter that receives a value between (5, 10) to determine the corner between point searching in the central point, and captures a value between 0.5 and 2 to determine the search cycle counts. The last phase is swooping, where BEs swing from the best location in the searching region to their targeted prey. Each point further moves toward the optimal point. The succeeding equation mathematically explains these behaviours.
+The BES method originates from a fitness function (FF) for attaining a heightened classification performance. It describes a positive number that signifies the better efficiency of candidate solutions. The classification rate of error reduction is measured as FF, as set in Eq. (18).
+
+## Performance analysis
+Dataset details.
+Table 3 and Fig. 3 illustrate the SL detection of the OFTLSLR-BESA technique under 70:30 of the training phase (TRAPHA) and testing phase (TESPHA). Based on 70% TRAPHA, the OFTLSLR-BESA methodology achieves an average of 99.64%, of 95.29%, of 95.29%, of 95.29%, and of 95.29%. Besides, for 30%TESPHA, the OFTLSLR-BESA methodology achieves an average of 99.62%, of 95.09%, of 95.09%, of 95.08%, and of 95.09%.
+SL detection of OFTLSLR-BESA model under 70:30 of TRAPHA/TESPHA.
+Average of OFTLSLR-BESA model under 70:30 of TRAPHA/TESPHA.
+Figure 4 presents the training (TRAN) and validation (VALN) results of the OFTLSLR-BESA approach. The values of are calculated for 0–25 epochs. The figure highlighted that both values exhibit a rising trend, which notified the capability of the OFTLSLR-BESA approach with improved efficiency across several iterations. Simultaneously, they remains closer over the epochs, which designates lesser overfitting and demonstrates the optimal outcome of the OFTLSLR-BESA methodology.
+curve of OFTLSLR-BESA method.
+In Fig. 5, the TRAN loss (TRANLOSS) and VALN loss (VALNLOSS) analysis of the OFTLSLR-BESA model are exhibited. The loss values are commutated for 0–25 epochs. Both values exemplify a diminishing trend, informing the OFTLSLR-BESA approach’s ability to equilibrium a trade-off between data fitting and simplification. The continual reduction also guarantees the maximal outcome of the OFTLSLR-BESA approach.
+Loss graph of OFTLSLR-BESA method.
+The comparative results of the OFTLSLR-BESA technique with existing models are illustrated in Table 4 and Fig. 619,20,33–35. Depending on , the OFTLSLR-BESA technique has attained a higher of 99.64%. At the same time, the Vision Transformer (ViT), InceptionResnet, DenseNet, Multi-headed CNN, ResNet-18, EfficientNet, ConvNext, MobileNetV2, Xception, and VGG19 approaches obtained lesser of 94.44%, 97.55%, 97.18%, 90.18%, 98.29%, 93.06%, 99.12%, 97.86%, 90.94%, and 99.08%, respectively. Moreover, based on , the OFTLSLR-BESA technique has got better of 95.29%, where the ViT, Inception-ResNet, DenseNet, Multi-headed CNN, ResNet-18, EfficientNet, ConvNext, MobileNetV2, Xception, and VGG19 approaches have obtained lesser of 91.40%, 92.29%, 89.48%, 89.83%, 92.64%, 92.86%, 93.77%, 90.23%, 90.33%, and 93.37%, correspondingly. Moreover, based on , the OFTLSLR-BESA technique obtained a maximum of 95.29%. At the same time, the ViT, Inception-ResNet, DenseNet, Multi-headed CNN, ResNet-18, EfficientNet, ConvNext, MobileNetV2, Xception, and VGG19 methodologies accomplished worse of 91.27%, 91.14%, 89.48%, 90.42%, 91.38%, 90.92%, 91.92%, 90.20%, 91.04%, and 92.16%, respectively.
+Comparison results of OFTLSLR-BESA methodology with existing models19,20,33–35.
+Comparison results of OFTLSLR-BESA methodology with existing models.
+Table 5 and Fig. 7 specify the computational time (CT) analysis of the OFTLSLR-BESA approach with existing methods. In comparing various DL models, VGG19 illustrated the lowest CT of 10.50 s, closely followed by MobileNetV2 with 10.65 s, indicating their potential for faster deployment. Inception-ResNet achieved a CT of 11.68 s, while the Multi-headed CNN and ViT models recorded 14.00 s and 14.07 s, respectively. ResNet-18 was performed with a CT of 15.16 s, and the DenseNet Method required 16.62 s. The Xception and EfficientNet models illustrated higher CTs of 18.64 s and 18.49 s, respectively. ConvNext had the highest CT of 22.36 s among the compared models. Also, the OFTLSLR-BESA model achieved the fastest performance with a significantly reduced CT of 6.83 s, representing a CT reduction of 34.95% compared to VGG19, 35.85% compared to MobileNetV2, and 63.45% compared to ConvNext, highlighting its superior efficiency.
+CT analysis of OFTLSLR-BESA approach with existing methods19,20,33–35.
+CT analysis of OFTLSLR-BESA approach with existing methods.
+
+## Conclusion
+This study develops an OFTLSLR-BESA model. The main aim of the proposed OFTLSLR-BESA technique relies on improving the recognition system of SL to assist individuals with hearing and speech impairments. The image pre-processing step is initially performed using the ABF technique to eliminate unwanted noise from input image data. Furthermore, the feature extraction process employs a fusion of InceptionV3, MobileNetV2, NASNetMobile, and ResNet50V2 models. Moreover, the RVFL method is employed for classification. Finally, the BES method is used for tuning. The OFTLSLR-BESA approach is evaluated under the American SL alphabet dataset. The experimental analysis of the OFTLSLR-BESA approach portrayed a superior accuracy value of 99.64% over existing models. The limitations of the OFTLSLR-BESA approach comprise its reliance on a fixed set of pre-processing and classification methods, which may not adapt well to varying image qualities or diverse datasets. The model’s generalizability is restricted due to limited real-world, noisy, or dynamic environment evaluation. Furthermore, the computational complexity of integrating multiple feature extractors may affect real-time applications. The study also lacks exploration of alternative optimization strategies that could improve tuning efficiency. Future work should focus on developing more adaptive pre-processing techniques, exploring lightweight and scalable models for faster inference, and validating performance across diverse and massive datasets to improve robustness and practical usability.
+
+## Acknowledgements
+The authors extend their appreciation to the King Salman center For Disability Research for funding this work through Research Group no KSRG-2024- 443.
+
+## Author contributions
+Manar Ahmed Hamza: Conceptualization, methodology, validation, investigation, writing—original draft preparation, funding Alanoud Subahi: Conceptualization, methodology, writing—original draft preparation, writing—review and editing Nouf Atiahallah Alghanmi: methodology, validation, writing—original draft preparation Nadhem NEMRI: software, validation, data curation, writing—review and editing.
+
+## Data availability
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/grassknoted/asl-alphabet, reference number32.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/grassknoted/asl-alphabet, reference number32.
+
+## Table Table 1: Utilized techniques, datasets, metrics, and performance highlights of recent SLR studies.
+Authors | Techniques | Metrics and dataset | Performance, strengths and limitations
+Lingeswari et al.11 | IGF, RELBP, HDNN | Accuracy, Error Rate, Custom TSL dataset (31 signs, 110 signers) | Achieved significantly higher accuracy and lower error rates, though limited to static signs and a relatively small dataset
+Abdul Ameer et al.12 | LSTM, AM, MediaPipe Keypoint Extraction | Accuracy, Custom ArSL and DArSL50 dataset | Achieved 83–85% accuracy with strong temporal modelling and attention focus, though limited by small dataset size
+Said et al.13 | ADTR, AMK, LCSA, AF, Transformer Encoder-Decoder | BLEU-4 Score, Processing Efficiency, Real-Time Applicability, ArabSign dataset | The model achieves superior translation accuracy and efficiency for real-time ArSL but may vary across other languages and datasets
+Ridwan et al.14 | DNN, ResNet50, Inception, Xception, VGG, SHAP Deep Explainer | Accuracy, BSL dataset | The model achieves high accuracy and robust interpretability using SHAP but may require adaptation for other SLs
+Dhanjal and Singh15 | DeepSpeech Speech Recognition, Synthetic Keyframe Approach, HNS, 3D Signing Avatar, Multilingual Translation Rules | Accuracy, Word and Character Error Rate, Punjabi Speech and Multilingual Corpus (1036 words) | Efficient, resource-saving synthetic motion enables accurate multilingual SL translation but may face challenges in naturalness compared to video-based methods
+Nimbalkar et al.16 | DL, CV, CNN, LSTM, Mediapipe Library, CVzone Hand Tracking | Accuracy, Dataset: SignVaria, Emergency Words, Devanagari Script, English Alphabets | Achieves high accuracy and robust recognition, though regional sign variations may need additional adaptation
+Chiradeja et al.17 | HGE-ACN, Six-axis Inertial Sensors, Five-finger Curvature Sensors | Accuracy, Computational Efficiency, Glove Sensor Dataset | The model delivers high accuracy and real-time efficiency and is robust against signing speed variations and noise, but it is currently limited to single-handed glove data
+Akdag and Baykan18 | R3(2 + 1)D convolution, Residual 3D blocks, SVM, Pose-based feature extraction | Accuracy measurement, BosphorusSign22k-general and LSA64 dataset | High accuracy and robustness using pose data outperforms in diverse backgrounds but may need extensive pose estimation pre-processing
+Kabir et al.19 | Max Voting Ensemble, Xception, InceptionV3, DenseNet121, ResNet50, MobileNetV2 | Accuracy (mAcc), BdSL-38 and BdSL-49 datasets | Achieves up to 99.92% accuracy with strong robustness, though it may demand high computational resources
+Ingoley and Bakal20 | TL, VGG16, VGG19, ResNet50, MobileNetV2 | Validation and loss, ISL gesture dataset | Achieves up to 99.69% accuracy with lightweight models, though ResNet50 lags slightly in performance
+Arularasan et al.21 | Mask RCNN detection, SSO optimization, SM-SVM classification | Accuracy, Precision, Recall, F1 Score | High accuracy and fast processing with low memory usage, but dataset details and generalizability need additional clarification
+Mosleh et al.22 | TL, Bidirectional translation, Fuzzy string matching, Deep CNN architectures, Real-time execution | ArSL dataset, Accuracy, Precision, Recall, F1Score, Word Error Rate (WER), Average Match Score (FMS) | Achieves up to 99.9% accuracy with fast processing, though real-time text-to-sign generation may require broader vocabulary coverage
+Ellappan et al.23 | CV, Sensor-Based Methods, Hybrid Approach | Accuracy Rate, Recognition Robustness, Mixed Sign Language Data | The hybrid approach improves accuracy and robustness by integrating methods but may increase system complexity and cost
+Thatha et al.24 | Dynamic gesture input, Data augmentation, InceptionV3, TL | Accuracy metric, ASL image/video dataset | Achieved high accuracy in dynamic ASL recognition utilizing image/video data, but real-time generalization across users may vary
+Vidhyalakshmi et al.25 | TL, EfficientNetB0, FACF, Image Pre-processing | Accuracy, Precision, Specificity, Sensitivity, F1-score, Computational Time, ISL Dataset | The ISLR-EfficientNetB0 model significantly improves accuracy and precision over existing methods but may require higher computational resources for real-time applications
+Vasuki et al.26 | TL, ResNet Features, Transformer Networks | Accuracy, Inference Time 180 ms, Real-world Test | High accuracy and real-time speed with robustness, though occlusion handling and language coverage require improvement
+Gao et al.27 | Cross-attention fusion, RGB and skeleton modalities, Heatmap volumes, Space–time feature extraction | Accuracy, WLASL-2000 and AUTSL dataset | Robust fusion improves accuracy and modality interaction but may need high computational resources
+
+## Table Table 2: Dataset details.
+Signs | Labels | No. of count | Signs | Labels | No. of count
+A | C-1 | 3000 | N | C-14 | 3000
+B | C-2 | 3000 | O | C-15 | 3000
+C | C-3 | 3000 | P | C-16 | 3000
+D | C-4 | 3000 | Q | C-17 | 3000
+E | C-5 | 3000 | R | C-18 | 3000
+F | C-6 | 3000 | S | C-19 | 3000
+G | C-7 | 3000 | T | C-20 | 3000
+H | C-8 | 3000 | U | C-21 | 3000
+I | C-9 | 3000 | V | C-22 | 3000
+J | C-10 | 3000 | W | C-23 | 3000
+K | C-11 | 3000 | X | C-24 | 3000
+L | C-12 | 3000 | Y | C-25 | 3000
+M | C-13 | 3000 | Z | C-26 | 3000
+Total count | 78,000
+
+## Table Table 3: SL detection of OFTLSLR-BESA model under 70:30 of TRAPHA/TESPHA.
+Class Labels |  |  |  |  | 
+TRAPHA (70%)
+C-1 | 99.64 | 94.24 | 96.57 | 95.39 | 95.40
+C-2 | 99.68 | 95.66 | 95.98 | 95.82 | 95.82
+C-3 | 99.60 | 94.22 | 95.36 | 94.79 | 94.79
+C-4 | 99.67 | 95.60 | 95.78 | 95.69 | 95.69
+C-5 | 99.58 | 94.90 | 94.46 | 94.68 | 94.68
+C-6 | 99.66 | 96.64 | 94.34 | 95.48 | 95.49
+C-7 | 99.60 | 94.93 | 94.89 | 94.91 | 94.91
+C-8 | 99.64 | 95.43 | 95.29 | 95.36 | 95.36
+C-9 | 99.59 | 94.41 | 95.16 | 94.79 | 94.79
+C-10 | 99.54 | 93.86 | 94.17 | 94.01 | 94.01
+C-11 | 99.63 | 95.50 | 94.91 | 95.21 | 95.21
+C-12 | 99.66 | 94.82 | 96.35 | 95.58 | 95.58
+C-13 | 99.62 | 94.58 | 95.54 | 95.06 | 95.06
+C-14 | 99.61 | 95.07 | 94.51 | 94.79 | 94.79
+C-15 | 99.67 | 95.78 | 95.65 | 95.71 | 95.71
+C-16 | 99.63 | 95.65 | 94.83 | 95.24 | 95.24
+C-17 | 99.64 | 95.01 | 95.51 | 95.26 | 95.26
+C-18 | 99.67 | 96.40 | 94.87 | 95.63 | 95.63
+C-19 | 99.67 | 95.70 | 95.51 | 95.60 | 95.60
+C-20 | 99.70 | 96.54 | 95.63 | 96.08 | 96.08
+C-21 | 99.67 | 95.63 | 95.99 | 95.81 | 95.81
+C-22 | 99.64 | 94.77 | 95.87 | 95.32 | 95.32
+C-23 | 99.61 | 94.89 | 94.98 | 94.93 | 94.93
+C-24 | 99.65 | 95.91 | 95.14 | 95.53 | 95.53
+C-25 | 99.68 | 96.44 | 95.05 | 95.74 | 95.75
+C-26 | 99.62 | 95.00 | 95.10 | 95.05 | 95.05
+Average | 99.64 | 95.29 | 95.29 | 95.29 | 95.29
+TESPHA (30%)
+C-1 | 99.61 | 93.91 | 96.00 | 94.95 | 94.95
+C-2 | 99.59 | 96.25 | 93.18 | 94.69 | 94.70
+C-3 | 99.63 | 95.27 | 95.38 | 95.33 | 95.33
+C-4 | 99.59 | 94.93 | 94.41 | 94.67 | 94.67
+C-5 | 99.60 | 94.48 | 94.48 | 94.48 | 94.48
+C-6 | 99.68 | 97.13 | 94.42 | 95.76 | 95.77
+C-7 | 99.72 | 96.52 | 95.85 | 96.18 | 96.18
+C-8 | 99.63 | 94.70 | 95.65 | 95.17 | 95.17
+C-9 | 99.61 | 93.38 | 96.12 | 94.73 | 94.74
+C-10 | 99.58 | 94.19 | 94.72 | 94.45 | 94.45
+C-11 | 99.69 | 95.88 | 96.09 | 95.99 | 95.99
+C-12 | 99.67 | 94.43 | 97.08 | 95.73 | 95.74
+C-13 | 99.62 | 94.62 | 95.86 | 95.23 | 95.23
+C-14 | 99.52 | 94.24 | 93.84 | 94.04 | 94.04
+C-15 | 99.65 | 96.31 | 94.73 | 95.51 | 95.52
+C-16 | 99.60 | 95.24 | 94.28 | 94.75 | 94.76
+C-17 | 99.59 | 94.62 | 94.93 | 94.78 | 94.78
+C-18 | 99.62 | 95.58 | 94.74 | 95.16 | 95.16
+C-19 | 99.58 | 95.31 | 94.07 | 94.69 | 94.69
+C-20 | 99.67 | 96.38 | 94.98 | 95.68 | 95.68
+C-21 | 99.64 | 94.51 | 96.02 | 95.26 | 95.26
+C-22 | 99.58 | 93.72 | 95.76 | 94.73 | 94.73
+C-23 | 99.60 | 94.84 | 94.84 | 94.84 | 94.84
+C-24 | 99.62 | 95.40 | 94.43 | 94.91 | 94.91
+C-25 | 99.62 | 95.50 | 94.77 | 95.13 | 95.13
+C-26 | 99.64 | 95.03 | 95.67 | 95.35 | 95.35
+Average | 99.62 | 95.09 | 95.09 | 95.08 | 95.09
+
+## Table Table 4: Comparison results of OFTLSLR-BESA methodology with existing models19,20,33–35.
+Approach |  |  |  | 
+ViT33 | 94.44 | 91.40 | 92.92 | 91.27
+Inception-ResNet33 | 97.55 | 92.29 | 92.59 | 91.14
+DenseNet method19 | 97.18 | 89.48 | 91.55 | 89.48
+Multi-headed CNN34 | 90.18 | 89.83 | 90.80 | 90.42
+ResNet-1835 | 98.29 | 92.64 | 93.45 | 91.38
+EfficientNet35 | 93.06 | 92.86 | 92.32 | 90.92
+ConvNext35 | 99.12 | 93.77 | 92.71 | 91.92
+MobileNetV219 | 97.86 | 90.23 | 92.21 | 90.20
+Xception19 | 90.94 | 90.33 | 91.44 | 91.04
+VGG1920 | 99.08 | 93.37 | 94.08 | 92.16
+OFTLSLR-BESA | 99.64 | 95.29 | 95.29 | 95.29
+
+## Table Table 5: CT analysis of OFTLSLR-BESA approach with existing methods19,20,33–35.
+Approach | CT (s)
+ViT | 14.07
+Inception-ResNet | 11.68
+DenseNet Method | 16.62
+Multi-headed CNN | 14.00
+ResNet-18 | 15.16
+EfficientNet | 18.49
+ConvNext | 22.36
+MobileNetV2 | 10.65
+Xception | 18.64
+VGG19 | 10.50
+OFTLSLR-BESA | 6.83
+
+## Figure Fig. 1: Overall working process of OFTLSLR-BESA model.
+
+## Figure Fig. 2: Structure of MobileNet-V2 model.
+
+## Figure Fig. 3: Average of OFTLSLR-BESA model under 70:30 of TRAPHA/TESPHA.
+
+## Figure Fig. 4: curve of OFTLSLR-BESA method.
+
+## Figure Fig. 5: Loss graph of OFTLSLR-BESA method.
+
+## Figure Fig. 6: Comparison results of OFTLSLR-BESA methodology with existing models.
+
+## Figure Fig. 7: CT analysis of OFTLSLR-BESA approach with existing methods.

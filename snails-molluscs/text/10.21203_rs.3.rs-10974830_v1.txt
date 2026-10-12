@@ -1,0 +1,1304 @@
+Tentacle transcriptomics identifies candidate chemosensory receptors in the gray field slug Deroceras reticulatum
+Seung-Joon Ahn, Hyo Sang Jang, Rory J. Mc Donnell, Man-yeon Choi (2026). Research Square. https://doi.org/10.21203/rs.3.rs-10974830/v1. doi:10.21203/rs.3.rs-10974830/v1. Licence: cc-by. Text from pdf.
+
+Tentacle transcriptomics identifies candidate
+chemosensory receptors in the gray field slug
+Deroceras reticulatum
+Seung-Joon Ahn
+Mississippi State University
+Hyo Sang Jang
+Oregon State University
+Rory Mc Donnell
+Oregon State University
+Man-yeon Choi
+
+Agricultural Research Service
+
+Research Article
+Keywords: Transcriptome, Chemosensory Receptor, GPCR, Tentacles, Gray garden slug, Deroceras
+reticulatum
+Posted Date: September 29th, 2026
+DOI: https://doi.org/10.21203/rs.3.rs-10974830/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: No competing interests reported.
+
+Page 1/28
+
+Abstract
+Chemosensation is essential for foraging, predator avoidance, and reproductive behavior in terrestrial
+gastropods. The gray field slug (Deroceras reticulatum) is a globally important agricultural pest, yet the
+peripheral molecular mechanisms driving its chemosensory behavior remain poorly understood. Here,
+we generated and analyzed de novo transcriptomes of the upper posterior tentacles (PT) and lower
+anterior tentacles (AT), using non-sensory mantle tissue (MT) as a comparative baseline. Illumina
+sequencing and de novo assembly yielded 142,526 transcripts, of which 28,310 were functionally
+annotated. Tissue distribution and differential expression analyses revealed marked molecular
+specialization between the two tentacle pairs. PT-enriched transcripts were associated with aerial
+olfaction and photoreception, including neural signaling components, retinal-associated genes, and G
+protein-coupled receptors (GPCRs), whereas AT-enriched transcripts were associated with contact
+chemoreception and substrate-associated sensing, with enrichment of structural remodeling
+components, acetylcholine receptors, and metabolic enzymes. Targeted gene-family mining showed that
+GPCRs dominated the annotated chemosensory repertoire. A multistep bioinformatic filtering pipeline
+identified 67 PT-enriched and 38 AT-enriched candidate chemosensory GPCRs, including numerous
+uncharacterized or orphan receptors. Non-GPCR candidate families included ionotropic glutamate
+receptors, degenerin/amiloride-sensitive sodium channels, lipocalins, and Niemann-Pick type C2
+proteins. qRT-PCR analysis of 17 high-priority candidate GPCRs largely supported the RNA-Seq
+expression patterns. Together, these tissue-specific profiles provide a molecular resource for
+understanding slug chemosensory biology and for prioritizing candidate targets for future behaviorbased or molecular pest-management strategies.
+
+BACKGROUND
+Terrestrial snails and slugs possess two distinct pairs of cephalic tentacles that serve important sensory
+functions (Chase, 1986). The posterior tentacles (also known as the ocular tentacles) are elongated and
+dorsally positioned, which likely enhance their ability to detect airborne odorants, and each bears a lightsensitive structure at its apex. In contrast, the anterior tentacles (also known as the peduncular
+tentacles) are shorter, located near the mouthparts, and thought to be specialized for detecting
+substrate- and food-associated chemical cues during locomotion (Brenzinger et al., 2021). These
+tentacles constitute the principal chemosensory organs in gastropods and play essential roles in
+feeding, orientation, and reproductive behaviors (Chase and Croll, 1981; Ito et al., 2000). Odor molecules
+are detected by the olfactory epithelium covering the tentacle surface, and sensory information is
+subsequently transmitted to the tentacular ganglion located beneath the tentacle tip and then relayed to
+the procerebrum, the secondary olfactory center in the molluscan brain (Chase and Tolloczko, 1993;
+Ucciferri and Wyeth, 2023).
+Chemosensory perception in vertebrates and invertebrates is primarily mediated by large multigene
+receptor families, many of which encode proteins with a characteristic seven-transmembrane (7-TM)
+structure (Mombaerts, 1999). Among them, G protein-coupled receptors (GPCRs) represent one of the
+Page 2/28
+
+most ancient and expansive receptor superfamilies in animals (Krishnan and Schiöth, 2015). GPCRs
+transduce extracellular signals across the plasma membrane through heterotrimeric G-protein
+complexes and regulate a broad range of physiological and behavioral processes (Weis and Kobilka,
+2018). Although vertebrate and arthropod chemoreceptors both possess a 7-TM structure, they are
+evolutionarily unrelated, exhibiting opposite membrane topologies and distinct signal transduction
+mechanisms (Hanlon and Andrew, 2015). The independent evolutionary origins of chemosensory
+receptor systems underscore the importance of investigating these gene families across diverse
+invertebrate lineages, including Mollusca, the second-largest animal phylum (Xu et al., 2025). In
+particular, gastropod mollusks provide an important comparative framework for understanding the
+evolution and diversification of chemosensory GPCRs (Rondón et al., 2024).
+GPCR repertoires vary substantially among animal taxa. Approximately 800 GPCR genes have been
+identified in the human genome (Fredriksson et al., 2003), whereas more than 700 have been reported in
+the zebrafish, Danio rerio (Harty et al., 2015). In invertebrates, the fruit fly Drosophila melanogaster
+possesses more than 200 GPCR genes (Brody and Cravchik, 2000), whereas the nematode
+Caenorhabditis elegans contains approximately 1,300 putative chemosensory GPCRs, representing over
+5% of its genome (Vidal et al., 2018). In mollusks, however, GPCR-related studies remain relatively
+limited. Previous investigations have characterized GPCR families in several molluscan species
+(Morishita, 2017). For example, in the sea slug, Aplysia californica, numerous GPCRs have been identified
+from the rhinophore, a specialized chemosensory organ (Cummins et al., 2009b). In the aquatic snail,
+Biomphalaria glabrata, several ionotropic glutamate receptors (iGluRs) have been implicated in odor
+detection (Liang et al., 2016). More recently, comparative genomic analyses revealed substantial
+expansion of chemosensory GPCR families in terrestrial gastropods. More than 600 Class-A GPCRs
+were identified in Arion vulgaris, a terrestrial slug species inhabiting moist environments, whereas
+reduced chemosensory repertoires were observed in species adapted to drier habitats (Nath et al.,
+2025). These findings suggest that habitat diversification may have strongly influenced the evolution of
+chemosensory receptor systems in terrestrial mollusks. Nevertheless, the molecular basis of
+chemosensation in many terrestrial slug species, including Deroceras reticulatum, remains poorly
+understood.
+The gray field slug, Deroceras reticulatum (Müller) (Gastropoda: Pulmonata), is a globally distributed
+terrestrial pest species native to Europe and now widespread throughout North America and other
+temperate regions (CABI, 2022; Godan, 1983; Howlett, 2012; Tulli et al., 2009). This species causes
+significant damage to a wide range of agricultural and horticultural crops (Howlett, 2012; Port and Port,
+1989). Adult slugs can reach a length of 3.5–5 cm when crawling and are usually gray or cream in color
+with characteristic reticulated dark markings. When disturbed, they secrete a milky-white mucus (Mc
+Donnell et al., 2024). Eggs are generally deposited beneath stones, leaf litter, or within soil crevices, and
+hatch within several weeks depending on environmental conditions such as temperature and humidity
+(South, 1992). D. reticulatum is hermaphroditic, with individuals possessing both male and female
+reproductive organs, although cross-fertilization is common (Runham, 1978).
+Page 3/28
+
+Current management strategies rely primarily on chemical molluscicide baits, supplemented by cultural
+practices such as tillage while biological control agents such as parasitic nematodes in the genus
+Pellioditis are used in some parts of the world (Barker, 2002, 2004; Dively and Patton, 2022; Glen and
+Symondson, 2003; Tan and Grewal, 2001). Consequently, previous studies on D. reticulatum have focused
+mainly on its ecology, pest status, and control measures (Arias, 1960; Howlett, 2005; Iglesias et al., 2002;
+Lovett and Black, 1920). Early studies examined chemoreception and feeding behaviors of D. reticulatum
+(Frain, 1980; Stephenson, 1979), but the molecular mechanisms remain poorly characterized, mainly due
+to limited molecular resources for this species. Recent studies have advanced our understanding of slug
+biology through whole-body transcriptome sequencing with complex neuropeptide repertoires (Ahn et
+al., 2017) and functional characterization of the first molluscan ortholog of the vertebrate neuromedin U
+receptor in D. reticulatum (Ahn et al., 2020). For potential applications in slug managements, GPCRtargeted bioactive peptides have been identified and shown to exert deterrent effects in this species
+(Choi et al., 2024). In addition, immune-related gene expression profiles in D. reticulatum responding to
+parasitic nematode infection have also been investigated (Hafeez et al., 2024). Despite these
+advancements, molecular investigations into the specific physiological roles and sensory modalities of
+the slug tentacles remain largely unexplored in D. reticulatum.
+In this study, we analyzed the tentacle transcriptomes of D. reticulatum, generated using the Illumina
+HiSeq 2500 platform. Posterior and anterior tentacles were excised separately, and their transcriptomic
+profiles were compared with those of the mantle tissue through differential gene expression analysis.
+Particular emphasis was placed on identifying GPCRs and other chemosensory-related genes enriched
+in tentacular tissues. The expression patterns of selected candidate genes were further validated by qRTPCR. Ultimately, these tissue-specific molecular blueprints not only deepen our understanding of
+gastropod neurobiology and sensory physiology, particularly chemoreception, but also provide a valuable
+genetic foundation for identifying relevant chemoreceptor targets and developing next-generation
+behavioral disruptors for sustainable pest management.
+
+MATERIALS AND METHODS
+
+Slug tentacle and mantle tissue samples, and RNA
+isolation
+Deroceras reticulatum were collected in Corvallis, Oregon, USA (44.567862 N, -123.288672 E). Prior to
+tissue harvesting, individuals were maintained alive in plastic containers with lettuce and carrot, and
+damp paper towel at 14°C. A pair of posterior tentacles (PT) and a pair of anterior tentacles (AT)
+(Fig. 1A) were precisely excised from each slug using sterilized micro-dissection scissors (Fine Science
+Tools Inc., Foster City, CA). As a comparative control, a piece of mantle tissue (MT)—devoid of tentacles
+and internal visceral organs—was separately collected. The mantle is a saddle-shaped piece of tissue
+located behind the slug head (Mc Donnell et al., 2024). To ensure sufficient biomaterial for downstream
+application, the tentacle tissue samples were pooled from five individual slugs.
+Page 4/28
+
+Total RNA was isolated from the three tissue samples, PT, AT, and MT, using PureLink Total RNA Mini Kit
+(Thermo Fisher Scientific, Waltham, MA) following the manufacturer’s protocol. To eliminate potential
+genomic DNA contamination, the isolated RNA samples were treated with TURBO DNase (Thermo Fisher
+Scientific) for 30 min at 37°C. The treated RNA was subsequently purified by using the RNeasy MinElute
+Cleanup Kit (Qiagen, Germantown, MD) and eluted in a final volume of 50 µL of RNA storage solution.
+RNA quantity was determined using a NanoDrop ND-2000 Spectrophotometer (Thermo Fisher Scientific),
+and RNA quality was evaluated via the RNA Integrity Number (RIN) using an Agilent 2100 Bioanalyzer
+(Agilent Technologies, Santa Clara, CA). All isolated RNA profiles met the strict quality thresholds (RIN >
+7.0) required for high-throughput transcriptomic sequencing. The comprehensive workflow
+encompassing these experimental and bioinformatic procedures is schematically represented in Fig. 1B.
+
+Illumina HiSeq sequencing
+The cDNA libraries were prepared using the TruSeq Stranded Total RNA Library Prep Kit (Illumina, San
+Diego, CA). Briefly, ribosomal RNA was removed from total RNA and the remaining RNA was purified,
+fragmented and primed for cDNA synthesis. First-strand cDNA was synthesized by priming the RNA
+fragments with random hexamers and by transcribing with reverse transcriptase. RNA template of the
+first strand cDNA was replaced by incorporating dUTP in place of dTTP to generate second-strand cDNA.
+The cDNA then underwent an end repair process, adenylation of 3’ ends and subsequent ligation of the
+adapter. The adaptor-ligated libraries were purified and enriched with PCR to create the final cDNA
+library. After quality control and quantification, sequencing was performed by Psomagen Inc. (Rockville,
+MD) using the Illumina HiSeq 2500 platform.
+De novo transcriptome assembly
+The raw sequence reads generated by Illumina sequencing were checked by FastQC for quality control
+and trimmed by Trimmomatic tool (ver. 0.32) (Bolger et al., 2014) to remove adaptors and low-quality
+reads. Overlapping high-quality reads were de novo assembled to create longer contiguous fragments
+(contigs) using the Trinity (version r2014-07-17) (Grabherr et al., 2011). Transcript abundance was
+estimated using RSEM (ver. 1.2.15) to generate FPKM (fragments per kilobase per million reads).
+
+Functional annotation
+The functional annotation of the assembled transcripts was performed using a multi-tiered pipeline
+incorporating Gene Ontology (GO), UniProt, the NCBI Non-Redundant protein sequences database (NR),
+Pfam, EggNOG, and the NCBI Nucleotide database (NT). In addition, manual annotations were conducted
+for those of our interest, e.g. GPCRs, based on sequence similarity searches against the NCBI NR
+database. These homology-based searches utilized the BLASTx algorithm with a stringent with a cut-off
+E-value of 1e-5 run by Geneious 8.1.5 software (Biomatters Ltd., Auckland, New Zealand). The BLAST
+hits were grouped into major gene families based on their putative biological functions in slug. The
+Page 5/28
+
+organism information obtained by the BLAST hit was collected to confirm the transcript’s sequence
+similarity to closely related species.
+
+Differential expression analysis of tentacle transcriptome
+Transcript abundance was estimated using the RNA-Seq by Expectation-Maximization (RSEM) method.
+Differential expression analysis was subsequently performed using the edgeR package in R (McCarthy et
+al., 2012). Fragments per kilobase of transcript per million mapped reads (FPKM) values were used to
+quantify transcript abundance and to assess tissue-specific expression patterns. Differentially expressed
+genes (DEGs) among PT, AT, and MT were identified through pairwise comparisons using a false
+discovery rate (FDR) threshold of < 0.05 and a fold-change cutoff of > 2.
+Identification of chemosensory-related genes in D. reticulatum
+The search for chemosensory-related gene sequences was based on sequence similarities to known
+sequences among closely related species. De novo transcriptome sequences of D. reticulatum were
+formatted into a local BLAST database using BioEdit (Hall, 2011). Chemosensory-related protein
+sequences, including G protein-coupled receptors (GPCR), ionotropic glutamate receptors (iGluR),
+degenerin amiloride-sensitive ion channels (DEG/ENaC), lipocalin, Niemann-Pick type C2 (NPC2), and
+sensory neuron membrane protein (SNMP), were retrieved from literature across diverse gastropod
+species (Cummins et al., 2009; Nath et al., 2025; Rondón et al., 2024). These sequences were utilized as
+queries in tBLASTn searches to identify homologous transcripts within the D. reticulatum transcriptome
+database.
+
+qRT-PCR
+Two-step qRT-PCR was performed to assess the relative abundance of transcripts for selected targets. In
+the first step, first-strand cDNA was synthesized using the Verso cDNA synthesis kit (Thermo Fisher
+Scientific) according to the manufacturer’s protocol. Total RNAs isolated from PT, AT, and MT (See
+Section 2.1 above for details) were used as templates for the cDNA synthesis reaction. In the second
+step, PowerUp SYBR Green master mix for qPCR (Applied Biosystems) was used to set up the PCR
+reactions as described in the product’s manual. The qRT-PCR conditions were performed at 95°C for 10
+min; 40 cycles of 95°C for 15 s and 60°C for 1 min; followed by a melting curve analysis over the range of
+60–95°C with 0.3°C/min increments, with the specific primers (Supplementary data 5 - Table S1 and Fig.
+S1) on StepOne Plus real-time PCR system (Applied Biosystems). Among the three housekeeping genes
+preliminarily tested, rpt6 (regulatory particle triple-A ATPase 6) was selected and used to normalize
+signals, and relative abundance was calculated using the comparative Ct method (Supplementary Data 5
+- Table S2 and Fig. S2). GraphPad Prism software (Boston, MA) was used to visualize the data. One-way
+ANOVA was run using GraphPad Prism to estimate the significance of differences in the relative
+expression level between samples. P values < 0.05 were deemed statistically significant.
+Page 6/28
+
+Results
+
+Illumina sequencing, assembly and annotation
+A total of 228,377,020 paired-end raw reads with a GC content of 41.5% were generated. After trimming
+the adapters and low-quality bases, a total of 227,620,062 clean reads were obtained, representing
+99.7% recovery of the original sequencing reads (Supplementary data 1 - Table S1). More than 60% of
+the clean reads from each sample were mapped to produce assembled transcripts (Supplementary data
+1 - Table S2), resulting in a total of 142,526 transcripts with an average length of 614 bp (201–25,081 bp)
+(Supplementary data 1 - Table S3). A total of 28,310 (19.9%) transcripts were annotated by at least one
+method among GO, UniProt, NR, Pfam, EggNOG, NT, or manual annotation. Gene Ontology (GO) terms
+were assigned to the BLAST-hit contigs using Blast2Go tool, resulting in the functional annotation of
+19,074 transcripts (13.4%), UniProt annotation was assigned to 17,995 transcripts (12.6%), NR resulted
+in the largest annotation of 27,522 transcripts (19.3%), Pfam resulted in 17,468 transcripts (12.3%),
+EggNOG assigned 21,073 transcripts (14.8%), NT annotated 5,266 transcripts (3.7%), and manual
+annotation added 179 transcripts (0.1%) (Supplementary data 1 - Table S4).
+
+Differentially expressed genes across tentacles and mantle tissues
+
+Global transcript distribution
+To characterize the transcriptomic landscape of the slug chemosensory tissues, we evaluated the global
+distribution of expressed transcripts across the PT, AT, and MT for both the total unigene assembly
+(142,526 transcripts) (Fig. 1C) and the functionally annotated unigene subset (28,310 transcripts)
+(Fig. 1D).
+A global comparison of the total unigene pool revealed a massive, shared core of 67,828 transcripts
+expressed across all three tissue types, reflecting fundamental cellular maintenance and widespread
+metabolic pathways. Distinct tissue-exclusive signatures were prominent across the total assembly: the
+mantle tissue contained the highest number of unique unigenes (19,699), followed by the posterior
+tentacles (8,995), while the anterior tentacles possessed the fewest tissue-specific unigenes (3,622)
+(Fig. 1C). Furthermore, the two tentacle pairs shared a distinct subset of 8,420 transcripts that were
+entirely absent in the mantle control tissue, highlighting shared candidate genes potentially dedicated to
+specialized tentacular or sensory functions. Within the total assembly dataset, 7,015 unigenes showed
+no detectable expression across the three tissue groups (Fig. 1C).
+Following functional annotation, the distribution of the 28,310 annotated unigenes was separately
+assessed (Fig. 1D). Within this annotated subset, a core of 15,685 transcripts was shared ubiquitously
+among all three tissue domains. Striking tissue-exclusive signatures persisted within the annotated
+dataset, demonstrating persistent functional divergence: the mantle tissue maintained the largest unique
+annotated signature (3,629), followed by the posterior tentacles (1,232), and the anterior tentacles (506).
+Page 7/28
+
+The PT and AT pairs shared a restricted subset of 1,150 annotated transcripts that were absent in the
+mantle tissue. A negligible fraction (595 transcripts) of the annotated unigenes lacked expression across
+these designated tissue groups (Fig. 1D).
+
+Functional specialization of tissue-exclusive transcripts
+Functional annotation of the top 30 transcripts exclusively expressed in each category highlighted the
+distinct physiological specialization of each tissue domain (Supplementary Data 2). The poorly
+characterized transcripts such as hypothetical proteins and uncharacterized proteins were excluded in
+these lists. (i) Posterior tentacles (PT)-exclusive: Transcripts restricted entirely to PT were strongly
+enriched in chemosensory, photoreceptive, and neural signaling components. These notably featured a
+prominent array of nine GPCRs—including opsins (violet-sensitive opsin-like and melanopsin-like),
+neuropeptide/peptide receptors (fMet-Leu-Phe, allatostatin-A, and adenosine A1-like receptors), and a
+chemosensory receptor—alongside neuroregulatory rho GTPase-activating proteins (RhoGAP 35 and 15),
+motor proteins (kinesin-like protein KIF22), solute transporters (sodium-dependent phosphate and
+monocarboxylate transporters), a cyclic nucleotide-gated cation channel (CNGA/B family), and synaptic
+vesicle-associated components (synergin γ-like) (Supplementary Data 2 - Table S1). (ii) Anterior
+tentacles (AT)-exclusive: Transcripts restricted entirely to the AT prominently featured elements involved
+in structural remodeling, neuroendocrine signaling, and synaptic transmission. These included
+extracellular matrix components (collagen α-3(VI) and cell wall protein DAN4-like), proteases
+(transmembrane protease serine 9-like and endothelin-converting enzyme 1), cholinergic signaling
+machinery—comprising acetylcholinesterase-like (AChE), nicotinic acetylcholine receptor subunit type A
+(nAChR), and muscarinic acetylcholine receptor M4-like—alongside multiple GPCRs (growth hormone
+secretagogue receptor type 1-like and allatostatin-A receptor-like), a Cys-loop ligand-gated ion channel,
+and membrane transporters (sialin-like anion transporter and organic cation transporter) (Supplementary
+Data 2 - Table S2). (iii) Mantle Tissue (MT)-exclusive: Distinct from both tentacle types, the MT-exclusive
+profile was heavily dominated by muscular contraction and mucosal/immune defense machinery. This
+domain was characterized by striated muscle-specific myosin essential light chains and myosin heavy
+chains, alongside gastropod antimicrobial peptides (Incilarin A, B, and C), C1q domain-containing
+immunity factors, and a mucin-5AC-like transcript. Additionally, the MT profile featured key physiological
+regulators, including voltage-gated sodium channel β subunit 4, solute/ion transporters, and extracellular
+matrix components such as fibulin-1-like and matrilin-like 85 kDa protein (Supplementary Data 2 - Table
+S3).
+
+Differential expressions within intersecting tissue
+categories
+Comparative differential expression analysis of the overlapping tissue transcriptomes provided further
+resolution into regional specialization: (i) Shared tentacular transcriptome (1,150 transcripts): Within the
+pool shared exclusively between the two tentacle pairs (PT and AT), the top 30 transcripts showing
+higher relative expression in the PT were enriched in chemosensory, neuroendocrine, and metabolic
+machinery. These notably included six GPCRs—dominated by neuropeptide receptors, including four
+Page 8/28
+
+allatostatin-A receptors, a neuropeptides CAPA receptor, a thyrotropin-releasing hormone receptor, and a
+growth hormone secretagogue receptor—alongside five cytochrome P450 enzymes, two amiloridesensitive sodium channel subunits (DEG/ENaC α-like and β-2-like), two tyramine β-hydroxylase
+transcripts, and solute/ammonium transporters (Supplementary Data 2 - Table S4). Conversely, the top
+30 transcripts showing higher relative expression in the AT than the PT were heavily dominated by
+developmental markers, structural components, and distinct signaling pathways. The most prominently
+upregulated candidates included prestalk protein ( FC8,000> ) and basal-superficial marker (Bsmp)
+protein, alongside collagen α-3 (VI), trypsin-7-like protease, and a mitogen-activated protein kinase
+kinase kinase (MAP3K ANP1-like). Notably, this subset also featured six GPCRs—comprising an
+allatostatin-A receptor-like, α-2C adrenergic receptor-like, GPCR 54-like, growth hormone secretagogue
+receptor type 1-like, adenosine A1-like receptor, and rhodopsin-like—as well as a cytochrome P450
+enzyme (CYP2U1-like) and innexin gap junction channels (Supplementary Data 2 - Table S5). (ii) Shared
+PT and MT transcriptome (4,335 transcripts): Among the transcripts shared between PT and MT, the top
+30 genes showing higher relative expression in the PT were primarily represented by neuroendocrine
+signaling machinery and GPCR pathways. Prominent annotated candidates included three GPCRs
+(adenosine receptor A1-like and two frizzled-5-like receptors), neuropeptide/peptide hormones
+(myomodulin 3 and insulin 4), G protein signaling regulators (regulator of G-protein signaling 3, guanine
+nucleotide-binding protein G(q) subunit α, and G protein-coupled receptor kinase 5), and an ABC
+transporter (subfamily A member 2-like) (Supplementary Data 2 - Table S6). (iii) Shared AT and MT
+transcriptome (998 transcripts): For genes shared between the AT and MT tissues, the top 30 transcripts
+displaying significantly higher relative expression in the AT were led bypass of stop codon protein 1
+( FC813.3= ) and prestalk protein ( FC369.3= ). Functional annotations featured key protective,
+metabolic, and signaling elements, including a lipocalin (fatty acid-binding protein), glutathione Stransferase 1 (GST1), trypsin-1-like, acetylcholinesterase-like (AChE), endothelin-converting enzyme 1, a
+single GPCR (mth2-like), and two nuclear receptors (HR3 and NR2E1) (Supplementary Data 2 - Table S7).
+(iv) Ubiquitous core transcriptome (15,685 transcripts): Finally, among the core set of transcripts
+expressed across all three tissue types, the top 30 transcripts showing higher expression in the PT
+relative to the AT were represented by candidate genes involved in metabolic processing,
+neuroendocrine signaling, and cell communication. These notably included three cytochrome P450
+enzymes (CYP2J1-like and CYP2E1-like), two proteases (cathepsin L1-like), two GPCRs (metabotropic
+glutamate receptor 2 and orexin receptor type 2), an ABC transporter (subfamily G member 2-like), a
+neuropeptide (FMRFamide), an innexin gap junction channel (innexin unc-9-like), and cadherin cell
+adhesion molecules (Supplementary Data 2 - Table S8). In contrast, those with higher expression in the
+AT relative to the PT were predominantly composed of catalytic and structural proteins. These were
+heavily dominated by various enzymes—including four chitinases, three proteases, four peptidyl-prolyl
+cis-trans isomerases, an acetylcholinesterase-like enzyme, and a single glutathione S-transferase (GST7)
+—alongside structural and extracellular matrix elements, such as two cell wall protein DAN4-like
+transcripts, matrilin-2-like, and collagen α-3(VI) (Supplementary Data 2 - Table S9).
+
+Identification of chemosensory-related genes
+Page 9/28
+
+To evaluate the molecular machinery underlying chemoreception in D. reticulatum, we specifically
+investigated the distribution of 1,286 annotated chemosensory-related genes across the different Venn
+diagram intersection categories (Table 1). These targeted families included G protein-coupled receptors
+(GPCRs), ionotropic glutamate receptors (iGluRs), degenerin/amiloride-sensitive sodium channels
+(DEG/ENaCs), lipocalins, Niemann-Pick type C2 proteins (NPC2), and sensory neuron membrane
+proteins (SNMPs). Overall, chemosensory candidate genes demonstrated distinct spatial partitioning,
+reinforcing the functional divergence between the specialized sensory tentacles and the somatic mantle
+tissue.
+Table 1
+Distribution and tissue compartmentalization of annotated chemosensory-related gene families in
+Deroceras reticulatum. Based on the annotated unigenes (N = 28,310) and their tissue distribution (see
+Fig. 1D for Venn diagram), the candidate chemosensory genes (N = 1,286) are categorized across tissueexclusive domains and intersection categories: posterior tentacles (PT), anterior tentacles (AT), and
+mantle tissue (MT). Targeted chemosensory-related gene families include G protein-coupled receptors
+(GPCRs), ionotropic glutamate receptors (iGluRs), degenerin/amiloride-sensitive sodium channels
+(DEG/ENaCs), lipocalins, Niemann-Pick type C2 proteins (NPC2), and sensory neuron membrane
+proteins (SNMPs).
+Tissues
+
+PT
+only
+
+AT
+only
+
+MT
+only
+
+PT &
+AT
+
+PT &
+MT
+
+AT
+&
+MT
+
+PT &
+AT &
+MT
+
+No
+expression
+
+Total
+
+No.
+unigenes
+annotated
+
+1,232
+
+506
+
+3,629
+
+1,150
+
+4,335
+
+998
+
+15,865
+
+595
+
+28,310
+
+Chemosensory-related gene family
+GPCR
+
+264
+
+73
+
+108
+
+402
+
+80
+
+34
+
+178
+
+54
+
+1,193
+
+iGluR
+
+2
+
+1
+
+12
+
+0
+
+9
+
+4
+
+12
+
+0
+
+40
+
+DEG/ENaC
+
+2
+
+3
+
+10
+
+4
+
+1
+
+3
+
+9
+
+2
+
+34
+
+Lipocalin
+
+0
+
+0
+
+0
+
+0
+
+2
+
+1
+
+9
+
+0
+
+12
+
+NPC2
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+3
+
+0
+
+3
+
+SNMP
+
+0
+
+0
+
+1
+
+0
+
+2
+
+1
+
+0
+
+0
+
+4
+
+Total
+
+268
+
+77
+
+131
+
+406
+
+94
+
+43
+
+211
+
+56
+
+1,286
+
+GPCR gene family
+The GPCR gene family emerged as overwhelmingly dominant across almost all tissue categories,
+accounting for 1,193 of the 1,289 total chemosensory-related transcripts (92.7%) (Table 1). Strikingly, the
+highest concentration of GPCR genes was identified in the shared tentacular transcriptome (PT & AT),
+yielding 402 total GPCR genes. This prominent overlap underscores a substantial shared sensory
+receptor repertoire unique to tentacular functions. Among tissue-exclusive profiles, the posterior
+tentacles (PT only) maintained a substantially higher commitment to unique GPCR transcripts (264)
+Page 10/28
+
+compared to the anterior tentacles (AT only; 73), supporting a more specialized or diverse chemosensory
+role for the upper tentacle pair. In contrast, while the mantle tissue possessed a large number of total
+annotated transcripts (3,629), only 108 of them were classified as GPCRs (Table 1), further
+demonstrating that these receptors are highly enriched within the sensory tentacular structures rather
+than somatic mantle tissues.
+To systematically isolate high-confidence, chemosensory-related candidates from the total pool of 1,193
+annotated GPCR transcripts, we implemented a sequential filtering workflow based on transcript
+localization and differential abundance (Fig. 2). Candidate GPCRs from these intersecting categories
+were subsequently shortlisted using stringent downstream fold change (FC) filters to capture tissuespecific enrichment. From the 264 GPCR transcripts exclusively expressed in the PT, a subset of 35
+GPCR genes met the criteria for robust transcript abundance with an FPKM > 2, isolating highconfidence, PT-specific sensory candidates (Fig. 2). Likewise, a subset of 9 GPCR genes was shortlisted
+as exclusively and robustly expressed in the AT (Fig. 2).
+For transcripts shared between the two pairs of tentacles, comparative differential expression analysis
+partitioned candidates by regional preference. From the pool of 402 shared tentacular GPCRs (Table 1),
+14 GPCRs were identified as significantly enriched in PT ( FC2> ), whereas 10 GPCRs were found to be
+significantly enriched in AT ( FC2> ), compared to each other (Fig. 2). Similarly, 3 and 5 GPCRs were
+identified as enriched in PT and AT, respectively, compared to MT. Finally, filtering the universally shared
+core of 178 GPCRs revealed explicit localized elevations despite broad tissue distribution. Specifically,
+15 GPCRs were enriched in PT (PT > AT; FC2> ) among those higher than MT, while 14 GPCRs were
+enriched in AT (AT > PT; FC2> ).
+Together, this multi-step curation pipeline successfully narrowed the broad transcriptomic dataset down
+to discrete sets of putative chemosensory GPCRs highly enriched in PT (a total of 67 candidate GPCRs)
+and in AT (a total of 38 candidate GPCRs), providing a targeted framework for subsequent functional
+characterization (Fig. 2). Although the 65 GPCRs were found to be MT-enriched, they were excluded from
+further investigation as they fell outside the sensory scope of this study. The comprehensive profiles of
+these shortlisted tentacle-enriched candidate GPCRs and their transcript sequences are documented in
+Supplementary data 3.
+
+Non-GPCR gene families
+Among the non-GPCR chemosensory gene families, distinct localized patterns were observed that
+suggest specialized physiological and structural roles. A total of 94 non-GPCR chemosensory candidate
+transcripts were identified as differentially expressed across the three tissue types, comprising 40
+ionotropic glutamate receptors (iGluRs), 34 degenerin/amiloride-sensitive sodium channels
+(DEG/ENaCs), 12 lipocalins, 3 Niemann-Pick type C2 proteins (NPC2), and 4 sensory neuron membrane
+proteins (SNMPs) (Table 1).
+
+(A) iGluRs
+Page 11/28
+
+The 40 identified iGluRs displayed a high abundance in the mantle tissue and mixed-tissue profiles, while
+only three iGluRs showed tentacle-specific expression with 2 in PT and 1 in AT (Fig. 3A). A majority of
+iGluR transcripts were localized within the shared core across all three tissues (12 iGluRs) and
+exclusively within the mantle tissue only (12 iGluRs). Additionally, 9 iGluRs were expressed in both the PT
+and MT, while 4 iGluRs were found in the AT and MT comparison (Fig. 3A). This distinct leaning toward
+mantle-containing profiles suggests that iGluRs may coordinate pervasive somatic sensory networks or
+peripheral chemical feedback systems in the slug body wall. Intriguingly, among the tentacle-specific
+transcripts restricted exclusively to distinct tentacular types, c123747_g1_i1 (glutamate receptor subunit
+protein GluR7 precursor) was selectively expressed in PT only, whereas c88995_g1_i1 (glutamate receptor
+ionotropic, kainate 4-like) was unique to AT only (Supplementary Data 4 – Table S1). Among those
+expressed in multiple tissues, c96868_g1_i1 and c88280_g1_i1 were higher in PT and AT, respectively.
+Taken together, this analysis indicates that iGluRs play a minor but highly specialized roles in divergent
+tentacular sensing.
+
+(B) DEG/ENaC channels
+The DEG/ENaC ion channel family (34 transcripts total) was broadly distributed throughout the target
+tissues but demonstrated substantial localized enrichment within the core ubiquitous transcriptome (12
+transcripts) and mantle tissue (9 transcripts) profiles, implying substantial involvement in non-tentacular
+tactile reception or localized somatic monitoring (Fig. 3B). However, highly localized sensory markers
+were also present; c80151_g1_i1 (amiloride-sensitive sodium channel subunit alpha-like), c84991_g3_i2
+(subunit beta-2-like), c74351_g1_i1 (amiloride-sensitive sodium channel subunit alpha-like), and
+c74351_g2_i1 (acid-sensing ion channel 1-like) were heavily enriched in PT, exhibiting prominent
+upregulated expressions in the PT compared to the AT; while c133010_g1_i1 (amiloride-sensitive sodium
+channel subunit beta-like), c123636_g1_i1 (acid-sensing ion channel 1-like), and c100848_g1_i1 (amiloridesensitive sodium channel subunit beta-like) were higher in AT than PT, exhibiting prominent upregulated
+expressions in the AT compared to the PT (Supplementary Data 4 – Table S2).
+
+(C) Lipocalin, NPC2, and SNMP
+The auxiliary transport and binding protein families, lipocalins (12 total), NPC2s (3 total), and SNMPs (4
+total), were primarily restricted to interconnected tissue profiles (Fig. 3C-3E). Both lipocalins and NPC2
+expressions were entirely absent from tissue-exclusive categories (PT only, AT only, or MT only). Instead,
+lipocalins and NPC2s were predominantly localized within the ubiquitous core shared by all three tissues
+(9 lipocalins and 3 NPC2s), highlighting their fundamental roles in systemic hydrophobic ligand binding
+or general transport (Fig. 3C & 3D). The remaining lipocalins were found in shared tentacle-mantle niches
+(2 in PT & MT, 1 in AT & MT) (Fig. 3C). By the fold change analysis of lipocalins, c78360_g1_i1 (fatty acidbinding protein, muscle-like) was higher in both PT and AT, compared to MT, while c76900_g1_i1 (fatty
+acid-binding protein) was almost exclusively high in AT (Supplementary Data 4 – Table S3). In contrast,
+SNMPs were explicitly absent from the universally shared core, appearing exclusively in the mantle
+tissue (1 transcript) or within shared tentacle-mantle coordinates (2 in PT & MT, 1 in AT & MT) (Fig. 3E),
+Page 12/28
+
+revealing no particular tentacle-enriched NPC2 or SNMPs (Supplementary Data 5 – Tables S4-S5). Taken
+together, these distribution profiles indicate an intricate tissue-specific sorting of non-GPCR candidate
+chemosensory elements, including a majority of mantle-enriched ion channels and systemic transport
+proteins, balanced with a minor numbers of tentacle-enriched ones.
+
+qRT-PCR validation of selected GPCR transcripts
+To validate the tissue-specific expression profiles obtained from the RNA-Seq analysis, a total of 17
+candidate GPCR genes were selected for quantitative real-time PCR (qRT-PCR) analysis. These genes
+were chosen based on their distinctive transcript abundance patterns across the tissues: 5 were
+predominantly expressed in the posterior tentacles (PT), 7 showed high expression in both the posterior
+and anterior tentacles (PT & AT), and 5 were preferentially expressed in the anterior tentacles (AT)
+(Table 2). Among three candidate internal reference genes evaluated in preliminary optimization trials,
+the rpt6 gene was selected for target gene normalization due to its superior expression stability across
+all tested tissue types (Supplementary Data 5 - Table S2 and Fig. S1). The PT tissue served as the
+baseline control (set as 1.0) for all relative expression calculations. Relative transcript abundance was
+calculated from three technical replicates per biological sample, with standard deviations represented as
+error bars (Fig. 4).
+
+Page 13/28
+
+Table 2
+Candidate G protein-coupled receptor (GPCR) transcripts selected for qRT-PCR expression validation.
+A total of 17 candidate GPCR transcripts were selected according to their tissue-specific expression
+patterns as determined via RNA-Seq analysis. Five posterior tentacle-enriched (Nos. 1–5; PT), dual
+tentacle-enriched (Nos. 6–12; PT & AT), and anterior tentacle-enriched (Nos. 13–17; AT). Top BLAST
+search hits against the NCBI database and pairwise differential expression fold-change values across
+posterior tentacles (PT), anterior tentacles (AT), and mantle tissue (MT) are provided. Significant fold
+changes (|FC| > 2) are indicated in bold, highlighting localized functional enrichment across somatic
+and sensory tissues. Nucleotide sequences for all selected transcripts are provided in Table S1 from
+Supplementary Data 5.
+No.
+
+Tissue
+
+Unigene ID
+
+Highest hit in BLAST search
+
+Fold Change
+MT/AT
+
+PT/AT
+
+PT/MT
+
+1
+
+PT
+
+c33640_g1_i1
+
+adenosine receptor A1-like
+[Aplysia californica]
+
+1.1
+
+5.0
+
+4.7
+
+2
+
+PT
+
+c105758_g1_i1
+
+chemosensory receptor b
+[Plakobranchus ocellatus]
+
+1.0
+
+3.5
+
+3.5
+
+3
+
+PT
+
+c49038_g1_i1
+
+frizzled-5 [Aplysia californica]
+
+1.0
+
+2.7
+
+2.6
+
+4
+
+PT
+
+c79514_g1_i1
+
+orexin receptor type 2 [Aplysia
+californica]
+
+-5.0
+
+5.1
+
+25.7
+
+5
+
+PT
+
+c67458_g3_i1
+
+peptide receptor [Aplysia
+californica]
+
+-1.0
+
+2.0
+
+2.1
+
+6
+
+PT &
+AT
+
+c81140_g1_i1
+
+latrophilin-3-like [Biomphalaria
+glabrata]
+
+-1.9
+
+1.6
+
+2.9
+
+7
+
+PT &
+AT
+
+c69296_g1_i2
+
+adenosine receptor A1
+[Aplysia californica]
+
+-1.4
+
+1.8
+
+2.5
+
+8
+
+PT &
+AT
+
+c83185_g2_i1
+
+frizzled-5 [Aplysia californica]
+
+-1.4
+
+1.6
+
+2.3
+
+9
+
+PT &
+AT
+
+c49216_g1_i1
+
+G-protein coupled receptor 75
+[Aplysia californica]
+
+-1.4
+
+1.6
+
+2.2
+
+10
+
+PT &
+AT
+
+c27743_g1_i2
+
+gonadotropin-releasing
+hormone receptor [Aplysia
+californica]
+
+-1.8
+
+1.2
+
+2.2
+
+11
+
+PT &
+AT
+
+c78009_g2_i1
+
+allatostatin-A receptor
+[Aplysia californica]
+
+-2.4
+
+-1.0
+
+2.3
+
+12
+
+PT &
+AT
+
+c75240_g1_i1
+
+allatostatin-A receptor-like
+[Aplysia californica]
+
+-2.5
+
+1.7
+
+4.3
+
+13
+
+AT
+
+c69183_g1_i1
+
+thyrotropin-releasing hormone
+receptor [Plakobranchus
+ocellatus]
+
+-4.5
+
+-3.9
+
+1.1
+
+Page 14/28
+
+No.
+
+Tissue
+
+Unigene ID
+
+Highest hit in BLAST search
+
+Fold Change
+MT/AT
+
+PT/AT
+
+PT/MT
+
+14
+
+AT
+
+c89048_g1_i1
+
+neurotensin receptor type 2like [Biomphalaria glabrata]
+
+-2.0
+
+-2.3
+
+-1.1
+
+15
+
+AT
+
+c107219_g1_i1
+
+5-hydroxytryptamine receptor
+1a [Plakobranchus ocellatus]
+
+-2.1
+
+-2.3
+
+-1.1
+
+16
+
+AT
+
+c109355_g1_i1
+
+chemosensory receptor b
+[Plakobranchus ocellatus]
+
+-2.2
+
+-2.5
+
+-1.2
+
+17
+
+AT
+
+c106522_g1_i1
+
+orexin receptor type 1-like
+[Aplysia californica]
+
+-2.0
+
+-2.0
+
+1.0
+
+The qRT-PCR expression profiles largely mirrored the relative abundance trends observed in the in silico
+RNA-Seq dataset; 14 of the 17 tested transcripts exhibited the anticipated enrichment in the PT. The
+remaining three targets displayed alternative patterns that varied slightly from the RNA-Seq predictions:
+c69183_g1_i1 was confirmed to be highly abundant in the AT, while c89048_g1_i1 and c106522_g1_i1
+demonstrated elevated expression across both tentacle types (PT & AT) relative to MT (Fig. 3). Taken
+together, these validated, tissue-specific profiles indicate that these candidate genes represent highpriority targets for downstream functional characterization. Detailed data regarding the qRT-PCR assays
+are provided in Supplementary Data 5.
+
+Discussion
+The chemosensory system is essential for survival, foraging, predator avoidance, and reproductive
+success in terrestrial snails and slugs (Kiss, 2017). At the molecular level, detecting chemical signals
+relies on specialized proteins belonging to medium- to large-sized multigene families present across
+taxa in the animal kingdom (Nei et al., 2008). Although terrestrial gastropods are known to navigate
+complex environments using airborne and substrate-borne chemical cues, the molecular mechanisms
+underlying these behaviors remain poorly understood.
+This study provides a comprehensive transcriptomic resource for one of the world’s most damaging slug
+pests, Deroceras reticulatum, with a specific focus on its primary sensory structures: the posterior (PT)
+and anterior (AT) tentacles. Prior to this work, publicly available sequence resources for D. reticulatum in
+NCBI (PRJNA384817 and PRJNA167149) were limited in their representation of the chemosensory gene
+repertoire because they were derived from whole-body transcriptomes. Building upon our previous
+whole-body identification of slug neuropeptide repertoires (Ahn et al., 2017), our de novo assembly
+generated 142,526 unigenes with an average length of 614 bp. Although our overall structural annotation
+rate (19.9% of total transcripts annotated) reflects the typical limitations of working with non-model
+gastropod genomes, the absolute number of fully annotated transcripts (28,310) represents a highresolution dataset vital for exploring terrestrial slug physiology. Nonetheless, the substantial fraction of
+unannotated unigenes highlights a vast molecular diversity requiring further functional characterization.
+Page 15/28
+
+The presence of two pairs of tentacles is a defining morphological characteristic of the terrestrial
+pulmonate order Stylommatophora, distinguishing them from aquatic Basommatophora, which possess
+only a single pair (Croll, 1983). Molecular phylogenetic and microanatomical analyses suggest that this
+dual-tentacle system evolved by the splitting of an original single ancestral pair as an adaptation to life
+on land (Brenzinger et al., 2021). Our comparative transcriptomic data strongly reinforce this
+evolutionary split, showing an underlying core of shared sensory transcripts paired with a robust
+transcriptomic divergence between the individual tentacle pairs.
+Pairwise differential expression analysis and functional annotations further illuminate the distinct
+physiological specialization between the two tentacle pairs. Behavioral studies have shown that the
+lower, anterior tentacles are positioned close to the ground for substrate contact chemoreception and
+trail-following, whereas the upper, posterior tentacles project upward to specialize in airborne olfaction
+and wind orientation (Ito et al., 2000; Kiss, 2017). This functional divergence is clearly reflected in our
+data: the PT transcriptome is strongly associated with long-range neurosensory functions, as indicated
+by the abundance of neural pathways, photoreception cascades (supporting the apical optical spot), and
+expansive chemosensory receptor repertoires. In contrast, the AT transcriptome appears adapted for
+localized mechanical interaction and chemical processing, enriched with structural remodeling proteins,
+extracellular proteases, and synaptic transmission machinery. By demonstrating that the PT manages
+aerial olfaction and vision while the AT is linked to tactile and contact chemoreception, our findings
+underscore how the dual-tentacle configuration serves as a key sensory innovation enabling
+stylommatophoran slugs to successfully navigate and live in complex terrestrial habitats.
+Among the candidate chemosensory gene families identified in gastropods, GPCRs represent the
+predominant group, matching trends observed in the sea hare A. californica (Cummins et al., 2009a), the
+golden apple snail Pomacea canaliculata (Rondón et al., 2024), and the Mediterranean cone snail
+Lautoconus ventricosus (Rondón et al., 2024). In D. reticulatum, GPCRs accounted for 1,193 of the 1,289
+total annotated chemosensory-related transcripts (92.7%), with Class A rhodopsin-like receptors
+comprising the vast majority (Table 1). Our multi-step filtration pipeline successfully narrowed this
+extensive repertoire down to high-confidence sensory candidates based on tissue-specific localization
+and abundance thresholds.
+The large number of GPCRs identified from the D. reticulatum tentacular transcriptome suggests lineagespecific gene duplications. Although formal phylogenetic analysis remains to be performed to precisely
+map these duplication events in D. reticulatum, similar expansions of the Class A GPCR family have been
+documented in A. californica and other Mollusca, and are thought to reflect evolutionary adaptations to
+shifting chemical landscapes (Nath et al., 2025). A terrestrial slug, navigating a multi-dimensional
+chemical landscape containing for example volatile plant defense compounds, odors of plant and animal
+decomposition, soil microclimate indicators, and specialized mucus pheromones and kairomones,
+requires a highly adaptable and diverse receptor repertoire (Wang et al., 2026). Consequently,
+investigating these lineage-specific duplications through dedicated phylogenetic and syntenic analyses
+would represent a crucial next step to clarify the evolutionary trajectory of gastropod chemoreceptors.
+Page 16/28
+
+Moreover, because many tentacle-enriched candidates remain orphan receptors with unknown ligands,
+systematic curation of these localized networks provides a strategic roadmap for downstream
+deorphanization studies (Ahn et al., 2020). Such studies will be essential for uncovering the molecular,
+structural, and evolutionary basis of chemosensation in terrestrial slugs.
+Although GPCRs remain the primary focus of chemosensory research, our findings indicate that slug
+peripheral sensation relies on a multi-tiered network of ion channels and auxiliary transport proteins. The
+localized expression of specific ionotropic glutamate receptors (iGluRs) and variant ionotropic receptors
+(IRs) in the PT and AT suggests the presence of an ancient and conserved olfactory mechanism. In
+insects and aquatic mollusks, IR networks act as precise, rapid detectors for volatile amines and acids
+(Benton et al., 2009; Croset et al., 2010; Liang et al., 2016; Wang et al., 2026; Yamagishi et al., 2008). The
+identification of distinct, mutually exclusive iGluR/IR variants within individual tentacle types suggests
+that D. reticulatum utilizes parallel ionotropic pathways to separate different classes of chemical inputs.
+Similarly, the differential distribution of the DEG/ENaC ion channel family indicates a highly organized
+sensory interface. Members of this superfamily function as non-voltage-gated mechanoreceptors, acidsensing ion channels, or salt taste receptors (Bianchi and Driscoll, 2002; Kaulich et al., 2023; Mano and
+Driscoll, 1999). While widespread somatic expression across the mantle tissue suggest a role in general
+neuromuscular coordination, the distinct enrichment of specific DEG/ENaC variants within either the PT
+or AT points to targeted sensory tasks. These channels likely allow the slug to integrate mechanical
+feedback (such as substrate texture or wind speed) with localized chemical cues, facilitating a
+multimodal assessment of its surroundings.
+Finally, our data clarify how terrestrial gastropods overcome the biophysical challenge associated with
+detecting airborne chemical cues. Hydrophobic odorants must be captured and transferred across the
+hydrophilic mucus layer overlaying the sensory dendrites (Zarzo, 2007). In insects, this function is
+carryout by specialized odorant-binding proteins (OBPs) (Pelosi et al., 2005). Although classical insect
+OBPs appear to be evolutionarily absent in Mollusca (Rihani et al., 2021), our analysis identified potential
+functional analogs, including secreted Niemann-Pick type C2 (NPC2) proteins (Storch and Xu, 2009) and
+specialized lipocalins (Zhu et al., 2021). These extracellular carriers likely act as solubilizing chaperones
+within the tentacular mucus, capturing hydrophobic environmental lipid cues and delivering them to
+nearby chemoreceptors. This highlights a compelling example of functional convergence in terrestrial
+chemoreception.
+In addition to its evolutionary insights, the tissue-specific receptor blueprint developed in this study
+provides a valuable resource for applied agricultural biotechnology. D. reticulatum is a globally important
+agricultural pest that causes extensive damage to a diverse range of crops (Howlett, 2012; Port and Port,
+1989). Current management strategies rely heavily on broad-spectrum chemical molluscicide baits,
+which are often limited by variable efficacy, rapid degradation under wet conditions, and toxicity to nontarget organisms (Dively and Patton, 2022; Mustapha et al., 2025). There is thus an urgent need to
+develop new control tactics for this and other terrestrial gastropod pest species.
+Page 17/28
+
+Because peripheral GPCRs and ion channels are directly exposed to the external environment, they
+represent promising targets for highly selective, next-generation behavioral disruptors and speciesspecific molluscicides. The high-confidence, tentacle-enriched candidates validated by our qRT-PCR
+pipeline provide concrete targets for high-throughput chemical screening and for the design of
+sequence-specific double-stranded RNAs (dsRNAs) for targeted RNA interference (RNAi) applications.
+By identifying the specific molecular components that govern slug orientation and foraging behaviors,
+these transcriptomic profiles establish a foundation for innovative, biorational management strategies
+designed to disrupt chemosensory-mediated communication and protect vulnerable agroecosystems.
+
+Declarations
+Acknowledgements
+We thank Nivetha Ramanathan for preparing aliquots of the qPCR primers.
+Author Contributions
+S.-J.A.: Conceptualization; Methodology; Investigation; Formal analysis; Validation; Visualization;
+Software; Writing – original draft; Writing – review & editing H.S.J.: Investigation; Methodology;
+Validation; Writing – original draft; Writing – review & editing R.D.M.: Resources; Funding acquisition;
+Writing – review & editing M.-Y.C.: Conceptualization; Methodology; Investigation; Formal analysis;
+Resources; Funding acquisition; Writing – review & editing; Project administration; Supervision
+Funding
+This work was supported in part by the Oregon Grass Seed Commissions, the Oregon Association of
+Nurseries, and USDA base funds (CRIS 2072‑22000‑040‑00D) awarded to author M.C. Author R.M. also
+received research support from the Agricultural Experiment Station through Hatch Act capacity funding
+(grant number NI25HMFPXXXXG029) from the USDA National Institute of Food and Agriculture.
+Data Availability
+The raw RNA-Seq data generated and analyzed during the current study are deposited in the NCBI
+Sequence Read Archive (SRA) repository under BioProject accession number [PRJNA1527565]and SRA
+submission number [SUB16477613]. These datasets are currently scheduled for release upon
+publication of this manuscript.
+Ethics approval and consent to participate Not applicable.
+Consent for publication Not applicable.
+Competing interests The authors declare no competing interests.
+
+Page 18/28
+
+References
+1. Ahn, S.-J., Martin, R., Rao, S., Choi, M.-Y., 2017. Neuropeptides predicted from the transcriptome
+analysis of the gray garden slug Deroceras reticulatum. Peptides 93, 51–65.
+https://doi.org/10.1016/j.peptides.2017.05.005
+2. Ahn, S.J., Mc Donnell, R.J., Corcoran, J.A., Martin, R.C., Choi, M.Y., 2020. Identification and functional
+characterization of the first molluscan neuromedin U receptor in the slug, Deroceras reticulatum. Sci.
+Rep. 10, 22308. https://doi.org/10.1038/s41598-020-79047-x
+3. Arias, R.O., 1960. The biology of the grey garden slug Deroceras reticulatum (Müller) (Master Thesis).
+Oregon State College. https://agsci.oregonstate.edu/sites/agscid7/files/arias-crowell-1963-grayslug.pdf
+4. Barker, G.M. (2002) Molluscs as Crop Pests. CABI Publishing, Oxfordshire, United Kingdom.
+5. Barker, G.M. (2004) Natural Enemies of Terrestrial Molluscs. CABI Publishing, Oxfordshire, United
+Kingdom.
+6. Benton, R., Vannice, K.S., Gomez-Diaz, C., Vosshall, L.B., 2009. Variant ionotropic glutamate
+receptors as chemosensory receptors in Drosophila. Cell 136, 149–162.
+https://doi.org/10.1016/j.cell.2008.12.001
+7. Bianchi, L., Driscoll, M., 2002. Protons at the gate: DEG/ENaC ion channels help us feel and
+remember. Neuron 34(3), 337–340. https://doi.org/10.1016/S0896-6273(02)00687-6
+8. Bolger, A.M., Lohse, M., Usadel, B., 2014. Trimmomatic: a flexible trimmer for Illumina sequence
+data. Bioinformatics 30, 2114–2120. https://doi.org/10.1093/bioinformatics/btu170
+9. Brenzinger, B., Schrödl, M., Kano, Y., 2021. Origin and significance of two pairs of head tentacles in
+the radiation of euthyneuran sea slugs and land snails. Sci. Rep. 11, 21016.
+https://doi.org/10.1038/s41598-021-99172-5
+10. Brody, T., Cravchik, A., 2000. Drosophila melanogaster G protein–coupled receptors. J Cell Biol.150,
+83–88. https://doi.org/10.1083/jcb.150.2.F83
+11. CABI, 2022. Deroceras reticulatum (grey field slug). CABI Compendium.
+https://doi.org/10.1079/cabicompendium.85752
+12. Chase, R., 1986. Lessons from snail tentacles. Chem. Senses 11, 411–426.
+https://doi.org/10.1093/chemse/11.4.411
+13. Chase, R., Croll, R.P., 1981. Tentacular function in snail olfactory orientation. J. Comp. Physiol. A
+Neuroethol. Sens. Neural Behav. Physiol. 143, 357–362. https://doi.org/10.1007/BF00611173
+14. Chase, R., Tolloczko, B., 1993. Tracing neural pathways in snail olfaction: From the tip of the
+tentacles to the brain and beyond. Microsc. Res. Tech. 24, 214–230.
+https://doi.org/10.1002/jemt.1070240303
+15. Choi, M.-Y., Price, B., Hafeez, M., Martin, R., Richart, C., Donnell, R.M., 2024. Bioactive peptides inhibit
+feeding activity in the grey garden slug, Deroceras reticulatum. Pest Manag. Sci. 80, 6493–6500.
+https://doi.org/10.1002/ps.8386
+Page 19/28
+
+16. Croll, R.P., 1983. Gastropod chemoreception. Biological Reviews 58, 293–319.
+https://doi.org/10.1111/j.1469-185x.1983.tb00391.x
+17. Croset, V., Rytz, R., Cummins, S.F., Budd, A., Brawand, D., Kaessmann, H., Gibson, T.J., Benton, R.,
+2010. Ancient protostome origin of chemosensory ionotropic glutamate receptors and the evolution
+of insect taste and olfaction. PLoS Genet. 6, e1001064.
+https://doi.org/10.1371/journal.pgen.1001064
+18. Cummins, S.F., Erpenbeck, D., Zou, Z., Claudianos, C., Moroz, L.L., Nagle, G.T., Degnan, B.M., 2009a.
+Candidate chemoreceptor subfamilies differentially expressed in the chemosensory organs of the
+mollusc Aplysia. BMC Biol. 7, 28. https://doi.org/10.1186/1741-7007-7-28
+19. Cummins, S.F., Leblanc, L., Degnan, B.M., Nagle, G.T., 2009b. Molecular identification of candidate
+chemoreceptor genes and signal transduction components in the sensory epithelium of Aplysia.
+Journal of Experimental Biology 212, 2037–2044. https://doi.org/10.1242/jeb.026427
+20. Dively, G.P., Patton, T., 2022. An evaluation of cultural and chemical control practices to reduce slug
+damage in no-till corn. Insects 13(3), 277. https://doi.org/10.3390/insects13030277
+21. Frain, J.M., 1980. Chemoreception and feeding in the grey field slug, Deroceras reticulatum (Müller),
+with reference to molluscicide formulation. Westfield College, London University.
+22. Fredriksson, R., Lagerström, M.C., Lundin, L.-G., Schiöth, H.B., 2003. The G-protein-coupled receptors
+in the human genome form five main families. Phylogenetic analysis, paralogon groups, and
+fingerprints. Mol. Pharmacol. 63, 1256–1272. https://doi.org/https://doi.org/10.1124/mol.63.6.1256
+23. Glen, D.M. and Symondson, W.O.C. (2003) Influence of Soil Tillage on Slugs and Their Natural
+Enemies. In: Soil Tillage in Agroecosystems (Ed. El Titi, A.), CRC Press LLC, pp. 207-227.
+24. Godan, D., 1983. Pest slugs and snails - Biology and control. Springer-Verlag, Berlin.
+25. Grabherr, M.G., Haas, B.J., Yassour, M., Levin, J.Z., Thompson, D.A., Amit, I., Adiconis, X., Fan, L.,
+Raychowdhury, R., Zeng, Q., Chen, Z., Mauceli, E., Hacohen, N., Gnirke, A., Rhind, N., Di Palma, F.,
+Birren, B.W., Nusbaum, C., Lindblad-Toh, K., Friedman, N., Regev, A., 2011. Full-length transcriptome
+assembly from RNA-Seq data without a reference genome. Nat. Biotechnol. 29, 644–652.
+https://doi.org/10.1038/nbt.1883
+26. Hafeez, M., Mc Donnell, R., Colton, A., Howe, D., Denver, D., Martin, R.C., Choi, M.Y., 2024. Immunerelated gene profiles and differential expression in the grey garden slug Deroceras reticulatum
+infected with the parasitic nematode Phasmarhabditis hermaphrodita. Insects 15, 311.
+https://doi.org/10.3390/insects15050311
+27. Hall, T.A., 2011. BioEdit: An important software for molecular biology. GERF Bulletin of Biosciences
+2(1), 60–61.
+28. Hanlon, C.D., Andrew, D.J., 2015. Outside-in signaling - A brief review of GPCR signaling with a focus
+on the Drosophila GPCR family. J. Cell Sci. 128, 3533–3542. https://doi.org/10.1242/jcs.175158
+29. Harty, B.L., Krishnan, A., Sanchez, N.E., Schiöth, H.B., Monk, K.R., 2015. Defining the gene repertoire
+and spatiotemporal expression profiles of adhesion G protein-coupled receptors in zebrafish. BMC
+Genomics 16. https://doi.org/10.1186/s12864-015-1296-8
+Page 20/28
+
+30. Howlett, S.A., 2012. Terrestrial slug problems: classical biological control and beyond. CABI Reviews
+1–10. https://doi.org/10.1079/PAVSNNR20127051
+31. Howlett, S.A., 2005. The biology, behaviour and control of the field slug Deroceras reticulatum
+(Müller) (PhD Thesis). Newcastle University. https://theses.ncl.ac.uk/jspui/handle/10443/1640
+32. Iglesias, J., Castillejo, J., Ester, A., 2002. Laboratory evaluation of potential molluscicides for the
+control of eggs of the pest slug Deroceras reticulatum (Müller) (Pulmonata: Limacidae). Int. J. Pest
+Manag. 48, 19–23. https://doi.org/10.1080/09670870110062553
+33. Ito, I., Nakamura, H., Kimura, T., Suzuki, H., Sekiguchi, T., Kawabata, K., Ito, E., 2000. Neuronal
+components of the superior and inferior tentacles in the terrestrial slug, Limax marginatus.
+Neuroscience Research 37(3), 191-200. https://doi.org/10.1016/S0168-0102(00)00118-8
+34. Kaulich, E., Grundy, L.J., Schafer, W.R., Walker, D.S., 2023. The diverse functions of the DEG/ENaC
+family: linking genetic and physiological insights. J. Physiol. 601, 1521–1542.
+https://doi.org/10.1113/JP283335
+35. Kiss, T., 2017. Do terrestrial gastropods use olfactory cues to locate and select food actively?
+Invertebrate Neuroscience 17, 9. https://doi.org/10.1007/s10158-017-0202-2
+36. Krishnan, A., Schiöth, H.B., 2015. The role of G protein-coupled receptors in the early evolution of
+neurotransmission and the nervous system. Journal of Experimental Biology 218 (4): 562–571.
+https://doi.org/10.1242/jeb.110312
+37. Liang, D., Wang, T., Rotgans, B.A., McManus, D.P., Cummins, S.F., 2016. Ionotropic receptors
+identified within the tentacle of the freshwater snail Biomphalaria glabrata, an intermediate host of
+Schistosoma mansoni. PLoS One 11, e0156380. https://doi.org/10.1371/journal.pone.0156380
+38. Lovett, A.L., Black, A.B., 1920. The gray garden slug with notes on allied forms. Oregon Agricultural
+College Experiment Station Bulletin 170, 83–97.
+https://agsci.oregonstate.edu/sites/agscid7/files/arias-crowell-1963-gray-slug.pdf
+39. Mano, I., Driscoll, M., 1999. DEG/ENaC channels: A touchy superfamily that watches its salt.
+BioEssays 21(7), 568-578. https://doi.org/10.1002/(SICI)1521-1878(199907)21:7<568::AIDBIES5>3.0.CO;2-L
+40. McCarthy, D.J., Chen, Y., Smyth, G.K., 2012. Differential expression analysis of multifactor RNA-Seq
+experiments with respect to biological variation. Nucleic Acids Res. 40, 4288–4297.
+https://doi.org/10.1093/nar/gks042
+41. Mc Donnell, R.J., Vendetti, J., Paine, T.D. and Gormally, M.J. (2024) Slugs: A Guide to the Invasive
+and Native Fauna of California. 2nd Edition. University of California Agricultural and Natural
+Resources Publications (37 pp.). https:/ /doi.org/10.3733/UZUM1090 anrpublications.org.
+42. Mombaerts, P., 1999. Seven-transmembrane proteins as odorant and chemosensory receptors.
+Science 286, 707–711. https://doi.org/10.1126/science.286.5440.70
+43. Morishita, F., 2017. Neuropeptides and their physiological functions in mollusks, in: Horiguchi, T.
+(Ed.), Biological Effects by Organotins. Springer Japan, Tokyo, pp. 167–197.
+https://doi.org/10.1007/978-4-431-56451-5_8
+Page 21/28
+
+44. Mustapha, S., Loveridge, E.J., Butt, T.M., Vuts, J., Ortega-Ramos, P.A., Cook, S.M., 2025.
+Semiochemical applications for managing the grey field slug (Deroceras reticulatum Müller), a major
+pest of arable crops. Pest Manag. Sci. 81(11), 7288-7301. https://doi.org/10.1002/ps.70007
+45. Nath, R., Panda, B., Rakesh, S., Krishnan, A., 2025. Lineage-specific Class-A GPCR dynamics reflect
+diverse chemosensory adaptations in Lophotrochozoa. Mol. Biol. Evol. 42, msaf042.
+https://doi.org/10.1093/molbev/msaf042
+46. Nei, M., Niimura, Y., Nozawa, M., 2008. The evolution of animal chemosensory receptor gene
+repertoires: Roles of chance and necessity. Nat. Rev. Genet. 9, 951–963.
+https://doi.org/10.1038/nrg2480
+47. Pelosi, P., Calvello, M., Ban, L., 2005. Diversity of odorant-binding proteins and chemosensory
+proteins in insects. Chemical Senses 30(Suppl_1), i291–i292.
+https://doi.org/10.1093/chemse/bjh229
+48. Port, C.M., Port, G.R., 1989. The biology and behavior of slugs in relation to crop damage and
+control, in: Russell, G.E. (Ed.), Management and Control of Invertebrate Crop Pests. Intercept,
+Andover, Hampshire, U.K., p. 379.
+49. Rihani, K., Ferveur, J.-F., Briand, L., 2021. The 40-year mystery of insect odorant-binding proteins.
+Biomolecules 11(4), 509. https://doi.org/10.3390/biom11040509
+50. Rondón, J.J., Pisarenco, V.A., Ramón Pardos-Blas, J., Sánchez-Gracia, A., Zardoya, R., Rozas, J.,
+2024. Comparative genomic analysis of chemosensory-related gene families in gastropods. Mol.
+Phylogenet. Evol. 192, 107986. https://doi.org/10.1016/j.ympev.2023.107986
+51. Runham, N.W., 1978. Reproduction and its control in Deroceras reticulatum. Malacologia 17, 341–
+350.
+52. South, A., 1992. Terrestrial slugs: Biology, ecology and control. Springer Netherlands, Dordrecht.
+https://doi.org/10.1007/978-94-011-2380-8
+53. Stephenson, J.W., 1979. The functioning of the sense organs associated with feeding behaviour in
+Deroceras reticulatum (Müll.). Journal of Molluscan Studies 45, 167–171.
+https://doi.org/10.1093/oxfordjournals.mollus.a065491
+54. Storch, J., Xu, Z., 2009. Niemann-Pick C2 (NPC2) and intracellular cholesterol trafficking. Biochim.
+Biophys. Acta Mol. Cell Biol. Lipids 1791(7), 671-678. https://doi.org/10.1016/j.bbalip.2009.02.001
+55. Tan, L., Grewal, P.S., 2001. Infection behavior of the Rhabditid nematode Phasmarhabditis
+hermaphrodita to the grey garden slug Deroceras reticulatum. J. Parasitol. 87, 1349–1354.
+https://doi.org/10.1645/0022-3395(2001)087[1349:IBOTRN]2.0.CO;2
+56. Tulli, M.C., Carmona, D.M., López, A.N., Manetti, P.L., Vincini, A.M., Cendoya, G., 2009. Predation on
+the slug Deroceras reticulatum (pulmonata: Stylommatophora) by Scarites anthracinus (Coleoptera:
+Carabidae). Ecologia Austral 19, 55–61. https://www.scielo.org.ar/scielo.php?
+script=sci_arttext&pid=S1667-782X2009000100005
+57. Ucciferri, C.C., Wyeth, R.C., 2023. Chemosensory afference in the tentacle nerve of Lymnaea
+stagnalis. Invertebrate Biology 142, e12414. https://doi.org/10.1111/ivb.12414
+Page 22/28
+
+58. Vidal, B., Aghayeva, U., Sun, H., Wang, C., Glenwinkel, L., Bayer, E.A., Hobert, O., 2018. An atlas of
+Caenorhabditis elegans chemoreceptor expression. PLoS Biol. 16, e2004218.
+https://doi.org/10.1371/journal.pbio.2004218
+59. Wang, G., Sun, Y.-Q., Wang, F., Wang, Z.-Y., Sun, N.-Y., Wei, M.-J., Shen, Y.-T., Li, Y.-J., Sun, Q.-Q., Fujaya,
+Y., Bian, X.-G., Yang, W.-Q., Tan, K., 2026. Genome-wide characterization of four gastropod species
+ionotropic receptors reveals diet-linked evolutionary patterns of functional divergence. Animals 16,
+172. https://doi.org/10.3390/ani16020172
+60. Weis, W.I., Kobilka, B.K., 2018. The molecular basis of G protein-coupled receptor activation. Annual
+Review of Biochemistry 87, 897-919. https://doi.org/10.1146/annurev-biochem-060614-033910
+61. Xu, B., Kong, L., Sun, J., Zhang, J., Zhang, Y., Song, H., Li, Q., Uribe, J.E., Halanych, K.M., Cai, C., Dong,
+Y.W., Wang, S., Li, Y., 2025. Molluscan systematics: Historical perspectives and the way ahead.
+Biological Reviews 100, 672–697. https://doi.org/10.1111/brv.13157
+62. Yamagishi, M., Ito, E., Matsuo, R., 2008. Redundancy of olfactory sensory pathways for odoraversion memory in the terrestrial slug Limax valentianus. J. Exp. Biol. 211, 1841–1849.
+https://doi.org/10.1242/jeb.018028
+63. Zarzo, M., 2007. The sense of smell: Molecular basis of odorant recognition. Biological Reviews.
+https://doi.org/10.1111/j.1469-185X.2007.00019.x
+64. Zhu, J., Iannucci, A., Dani, F.R., Knoll, W., Pelosi, P., 2021. Lipocalins in arthropod chemical
+communication. Genome Biol. Evol. 13(6), evab091. https://doi.org/10.1093/gbe/evab091
+
+Figures
+
+Page 23/28
+
+Figure 1
+See image above for figure legend.
+
+Page 24/28
+
+Figure 2
+See image above for figure legend.
+
+Page 25/28
+
+Figure 3
+See image above for figure legend.
+
+Page 26/28
+
+Figure 4
+See image above for figure legend.
+
+Supplementary Files
+This is a list of supplementary files associated with this preprint. Click to download.
+Page 27/28
+
+SD4NonGPCRDEG.xlsx
+SD2Top30genes.pdf
+SD3GPCRDEG.xlsx
+SD1RNAseqstats.pdf
+SD5qRTPCRrev.pdf
+
+Page 28/28
+
+

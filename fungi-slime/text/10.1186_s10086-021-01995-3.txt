@@ -1,0 +1,602 @@
+Decay detection of constructional softwoods using machine olfaction
+Masaki Suzuki, Teruhisa Miyauchi, Shinichi ISAJI, Yasushi Hirabayashi, Ryuichi Naganawa (2021). Journal of Wood Science. https://doi.org/10.1186/s10086-021-01995-3. doi:10.1186/s10086-021-01995-3. Licence: cc-by. Text from pdf.
+
+(2021) 67:62
+Suzuki et al. J Wood Sci
+https://doi.org/10.1186/s10086-021-01995-3
+
+Journal of Wood Science
+
+Open Access
+
+NOTE
+
+Decay detection of constructional softwoods
+using machine olfaction
+Masaki Suzuki1* , Teruhisa Miyauchi1, Shinichi Isaji1, Yasushi Hirabayashi1 and Ryuichi Naganawa2
+
+Abstract
+Fungal decomposition of wood severely affects the soundness of timber constructions. The diagnosis of wood decay
+requires direct observations or sampling by skilled experts. Wood decay often occurs in obscure spaces, including the
+enclosed inner spaces of walls or under the floor. In this study, we examined the ability of machine olfaction to detect
+odors of fungi grown on common construction softwoods to provide a novel diagnostic method for wood construction soundness. The combination of a simple device equipped with semiconductor gas sensors (gas sensor array)
+and multivariate analysis discriminated a fungi-related odor from control odor without instrumental analysis (e.g., gas
+chromatography). This method is often referred to as machine olfaction or electronic nose. We measured the odor of
+wood test pieces that were infected with Fomitopsis palustris or Trametes versicolor and sound test pieces using a gas
+sensor array. The sensor responses of the specimens showed different patterns between the inoculated and control
+samples. Each specimen class formed independent groups in a principal component score plot, almost regardless of
+wood species, fungal species, or cultivation period. This method provides a new decay diagnosis method that is costeffective and easy to operate.
+Keywords: Wood decay, Wood-decay fungi, Gas sensors, Machine olfaction, Electronic nose
+Introduction
+The biological decomposition of wood severely affects
+the soundness of timber structures, and fungal degradation is the most common cause. Diagnosis of wood
+decay requires direct observation and/or destructive
+sampling. Therefore, in narrowly enclosed spaces, including the internal spaces of walls, wood decay detection is
+difficult. The detection of airborne substances such as
+microbial volatile organic compounds (MVOCs) or their
+odor from wood-decay fungi has been studied to overcome this difficulty. Kauhanen et al. [1] demonstrated
+that trained dogs can detect wood-decay fungi. Konuma
+et al. [2, 3] reported the detailed chemical composition
+of MVOCs emitted by Fomitopsis palustris (brown-rot)
+and Trametes versicolor (white-rot) using several instrumental analysis methods. For termite detection, another
+*Correspondence: suzuki-masaki@hro.or.jp
+1
+Forest Products Research Institute, Hokkaido Research Organization,
+1‑10 Nishikagura, Asahikawa, Hokkaido 071‑0198, Japan
+Full list of author information is available at the end of the article
+
+important biological issue of wood, Yanase et al. [4, 5]
+introduced a gas analyzer equipped with a packed column and a semiconductor gas sensor as a detector. They
+qualified and quantified hydrogen and methane emitted
+from termite activities. Airborne substances can be collected by air sampling. Air sampling can be performed
+remotely and nondestructively.
+Machine olfaction or an electronic nose is an odor classification method that combines multiple gas sensors
+and multivariate analysis. This method mimics mammal olfactory function by substituting olfactory receptor cells and the olfactory cortex with electronic sensors
+and a computer, respectively. The receptor cells of mammals have a small range of variation, and each variant
+responds to a broad range of substances. A particular
+type of odor is discriminated by a network of cross-connected receptor cells and neurons that process patterns
+of signals from variant receptors. In machine olfaction,
+odor discrimination is conducted by applying a pattern
+recognition algorithm to the response of multiple gas
+
+© The Author(s) 2021. Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the
+original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line
+to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory
+regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this
+licence, visit http://​creat​iveco​mmons.​org/​licen​ses/​by/4.​0/.
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+sensors [6]. Semiconductor gas sensors for specific gases
+have a high sensitivity to their target gases, but they also
+have a broad sensitivity to untargeted substances [7]. The
+sensor responses to individual odors vary among sensors
+depending on their gas-specific design. Because of this, a
+group of different gas-specific sensors, called a gas sensor
+array, generates unique patterns of output, often referred
+to as odor fingerprints for different odors [8]. The output
+of machine olfaction devices is represented by a vector
+with the dimension of the number of sensors. Principal
+component analysis (PCA) is commonly used to extract
+odor features. The PCA is also used to reduce data
+dimensions for data visualization. Supervised machine
+learning, for example, linear discriminant analysis or artificial neural network, is also applied for automated odor
+classification [9]. The advantages of machine olfaction
+over analytical methods are continuous monitoring [8],
+ease of building, cost-effectiveness, and short analysis
+time [9].
+This method has been widely studied in food sciences, as odor is one of the most important factors of
+food. Machine olfaction is applied to evaluate food odor
+to avoid time-consuming analytical methods or sensory tests that are associated with unavoidable olfactory
+fatigue problems. Hui et al. [10] measured apple aroma
+and effectively predicted the storage time. Wei et al. [11]
+measured the odor of peanuts using machine olfaction and the acid and peroxide values of peanut kernels
+using traditional methods. The results of both analyses
+are highly correlated. Haugen et al. [12] measured the
+odor of spoilage in bacteria-inoculated milk using both
+machine olfaction and gas chromatography–mass spectrometry and revealed that both results were highly correlated. They concluded that machine olfaction could be
+used to detect milk spoilage.
+In the field of wood sciences, Garneau et al. [13] demonstrated that some commercial electronic nose systems
+could classify three different softwood chips: spruce, fir,
+and pine. Baietto et al. [14] introduced several commercially available electronic noses for wood decay detection.
+They measured the odor of artificially infected wood samples and concluded that the electronic noses effectively
+detected wood decay. They used 23 fungal species and 18
+wood species. They also measured the odor of inoculated
+tree root samples and concluded that the electronic nose
+could further detect root decay of trees [15]. Their scope
+was to investigate the decay of urban shade trees to prevent sudden collapse. Their choice of fungal cultures did
+not include common species found in wooden buildings
+such as T. versicolor, and most of the wood samples were
+hardwood. They used general-purpose laboratory-grade
+electronic noses. Furthermore, some of their data analysis depended on machine-specific built-in software.
+
+Page 2 of 8
+
+Our final goal is to develop a wood constructionspecific on-site measuring device equipped with an
+automatic diagnosis algorithm using recent computing technology. As the first attempt to achieve the goal,
+we have developed a simple and cost-effective semiconductor gas sensor array that comprised commercially
+available components. Using the gas sensor array, we
+implemented a simple static headspace machine olfaction
+chamber. In this study, we aimed to examine the ability of
+a simple implementation of a machine olfaction device to
+detect odors from wood-decay fungi grown on common
+construction softwood. As representative wood-decay
+fungi, we selected F. palustris (brown-rot) and T. versicolor (white-rot). These species were chosen considering
+the availability of strains, information on cultivating conditions, and reported cases in wooden constructions [16],
+and they are also standard species in Japan Industrial
+Standard (JIS) [17]. As a typical construction softwood
+species, we selected sugi (Cryptomeria japonica) and
+karamatsu (Larix kaempferi). Both species are widely
+planted in Japan and commonly employed for construction. Sugi is also the standard species for JIS test methods
+for wood preservatives [17].
+
+Materials and methods
+Fungal strains
+
+Two species were used in this study, namely F. palustris
+(Berkeley. et M.A. Curtis) Gilbertson et Ryvarden (FFPRI
+0507) and T. versicolor (Linnaeus) Pilát (FFPRI 1030),
+hereinafter referred to as FP and TV, respectively. Both
+are standard species in JIS K 1571, the test methods for
+wood preservatives [17].
+Wood test pieces
+
+Test pieces were prepared following the sample preparation procedure of JIS K 1571 [17]. The samples were cut
+into test pieces with dimensions of 20 mm × 20 mm in
+the axial section, and 10 mm in the fiber direction. The
+wood test pieces were kept for 48 h in a drying oven at
+60 ± 2 ◦ C, and then cooled for 30 min in a glass desiccator. After cooling, the initial weights of the test pieces
+were obtained. The test pieces were sterilized using ethylene oxide (EO) gas for 5 h at 40 ◦ C. We randomly picked
+six sterilized test pieces from each species as a sound-dry
+class. The test pieces were sealed in an air-tight plastic
+bag and maintained at 25 ± 2 ◦C.
+Cultivation of fungi on test pieces
+
+Three hundred and fifty grams of sea sand (Miyazaki
+Chemical, Tokyo, Japan), 100 mL of liquid medium
+(d-(+)-glucose 4.0% (w/w), peptone 0.3% (w/w), and malt
+extract 1.5% (w/w)) were added into each glass jar and
+autoclaved the jars at 60 ± 2 °C for 30 min. Then, mycelia
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Page 3 of 8
+
+Table 1 List of gas sensors
+No.
+
+Name
+
+Target gases
+
+Manufacturer
+
+1
+
+TGS2600
+
+Hydrogen, ethanol
+
+Figaro Eng. Inc.
+
+2
+
+TGS2602
+
+Ammonia, H2 S
+
+Figaro Eng. Inc.
+
+3
+
+TGS2603
+
+Trimethylamine
+
+Figaro Eng. Inc.
+
+4
+
+TGS2620
+
+Alcohol, solvent vapors
+
+Figaro Eng. Inc.
+
+5
+
+TGS826
+
+Ammonia
+
+Figaro Eng. Inc.
+
+6
+
+MQ7
+
+Carbon monoxide
+
+Henan Hanwei Electronics
+
+Measurement
+
+Fig. 1 Cultivation of the wood-decay fungi
+
+growing in a Petri dish on potato dextrose agar were inoculated at the medium center. The jars were maintained at
+26 °C for 14 days. Thereafter, three pieces of wood were
+placed on the medium in each jar (Fig. 1). For FP, a plastic mesh sterilized by EO gas was placed between the test
+pieces and the medium. For TV, the test pieces were set
+directly on the medium. The jars were maintained at 26
+± 2 °C for 4, 8, 12, and 20 weeks. These samples were
+named the decayed class. Two jars (six test pieces) were
+prepared for each condition. Non-inoculated jars were
+also prepared. The jars were processed using the same
+procedure described above except for inoculation and
+placed under the same conditions and periods. These
+samples were named the sound-wet class. This class was
+used to evaluate the effects of a medium odor.
+Equipment
+
+We developed a simple static headspace machine olfaction device equipped with a semiconductor gas sensor array. An array of six SnO2-based semiconductor
+gas sensors and a circulation fan was placed under the
+lid of a 7-L stainless steel chamber. A data logger (GL840, Graphtec, Yokohama, Japan) and a DC power supply were connected to the measuring chamber (Fig. 2).
+All gas sensors were commercially available devices for
+environmental monitoring, for example, leak detection and air purifiers (Table 1). Before measurement, we
+connected a clean air supplier (AOE2300, GL Sciences,
+Tokyo, Japan) to the chamber and aged the sensors in a
+clean air atmosphere at a flow rate of 100 mL/min for 2
+weeks.
+
+Before measurement, a 380-mL stainless container
+filled with activated charcoal for an odorless air supplier (1050-3300, GL Sciences, Tokyo, Japan) was
+placed in the measuring chamber. The data logger was
+then set to record the output voltage of the gas sensors
+every 30 s. After at least 12 h, the sensor baseline values
+of a day were obtained. This sequence was performed
+every day during the measurement. A pair of test pieces
+was taken from the glass jars and placed on a glass Petri
+dish. Mycelia on the surface of the test pieces were kept
+as they were. The test pieces were quickly exchanged
+with the charcoal container in the measuring chamber. The chamber was then closed tightly. The voltage
+changes of the sensors 35 min after the chamber closure were recorded. After the measurement, the lid and
+test pieces were removed from the chamber. The chamber bucket was rinsed with distilled water, wiped with
+a paper towel, and then blown with hot air to remove
+moisture and odors. The charcoal container was placed
+again in the chamber. After 30 min, the next measurement was performed. The measured test pieces were
+dried at room temperature for 24 h, in a drying oven at
+60 ± 2 °C for 48 h, and then cooled for 30 min in a glass
+desiccator. After cooling, the weights of the test pieces
+were obtained.
+Data processing
+
+The conductance of sensors was calculated from the
+sensor output voltage as follows:
+
+Gi =
+
+1
+RL ( VVini − 1)
+
+,
+
+where Gi is the conductance (the reciprocal of the resistance) of sensor i (−1), RL is the resistance of the load
+resistor inserted in series to the sensors (1 k), Vin is
+the voltage of the power supply (V), and Vi is the output
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Page 4 of 8
+
+Fig. 2 Static headspace odor measurement device
+
+voltage of sensor i (V). The sensor response was calculated as follows [18]:
+
+Si =
+
+Gi − G0i
+,
+G0i
+
+where Si is the sensor response and G0i is the baseline
+conductance of sensor i (−1).
+The sensor responses were normalized to extract the
+features of the odor and to remove the concentrations of
+the vapors (odor strength) as follows [18]:
+
+Si
+S̃i = 
+
+,
+
+n
+2
+i=1 Si
+
+where S̃i is the normalized sensor response of sensor i.
+PCA was performed on the normalized sensor
+responses using R 4.0.3 [19].
+
+Results and discussion
+Figure 3 shows the rate of mass loss of wood test pieces.
+FP showed a rapid mass loss for the first 12 weeks, which
+was followed by a slower loss in both wood species. TV
+showed a linear mass loss through the cultivation time
+in both wood species. Figure 4 shows representative raw
+sensor output voltages responding to the test pieces of FP
+on sugi at 20 weeks. The sensor output voltages showed
+a quick increase (conductance decrease) after the placement of the test pieces into the chambers (at 5 min). The
+slope of the curves then decreased with time. The sensors
+used in the measurement showed sensitivity to the odors
+of the specimens. We used the values at 30 min after
+
+Fig. 3 Changes in mass loss over time
+
+placing the test pieces based on the behavior of the sensor
+output. Figure 5 shows the normalized sensor response
+patterns of FP on sugi at 20 weeks. The normalized sensor responses showed unique patterns among the classes
+of specimens. The sound-dry class showed a distinctive
+pattern compared with the others. This difference can
+be explained by the low water content of the wood test
+pieces and the absence of a culture medium. Although
+fungi cultivation was applied only to the decayed class,
+both decayed class and sound-wet class showed similar patterns. This similarity could be because the sensor response was affected by the odor of the cultivation
+medium or wood test pieces with a higher moisture content. On the contrary, some sensors, especially sensor
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Fig. 4 Voltage change of the sensors responding to the decayed
+sample
+
+3, showed different responses to these classes. These
+responses are considered to be fungi-related signals. To
+investigate whether the gas sensors could discriminate
+the fungi-related odor, the PCA was performed to reduce
+the data dimensions. Figure 6 shows scatter plots of principal components 1 and 2 of all measurements. In most
+of the measurements, each class formed an independent
+group in the plots except for FP karamatsu 8 weeks, TV
+sugi 4 weeks, and TV sugi 8 weeks. Overlapping distributions were found between decayed and sound-wet
+classes. The lower mass loss in the early stage of the cultivation might explain these overlaps. However, the relationship is unclear because it depends on both wood and
+fungal species. The decayed and sound-wet classes were
+closely distributed in the plots. This phenomenon shows
+
+Page 5 of 8
+
+that the sensors used in this study interpreted the odor
+of decayed and sound-wet classes as a similar odor. This
+result also reflects the patterns shown in Fig. 5. However,
+in most cases, the decayed class was separated from both
+sound-dry and sound-wet classes.
+This result suggests that the odor of wood-decay fungi
+can be distinguished from that of sound wood using a gas
+sensor array. It could be presumed that decay detection
+using the gas sensor array was performed using a combination of MVOCs from wood-decay fungi and odor from
+sound wood. This hypothesis is based on a previous emission analysis. Konuma et al. [2] reported that wood-decay
+fungi emit various MVOCs, for example, 3-octanone.
+Suzuki [20] investigated three Japanese softwood species
+and reported that terpenes, including α-pinene, were the
+predominant volatile organic compounds. In addition to
+the substances mentioned above, the odor of the culture
+medium and its change over time should not be ignored
+in experiments using a cultivation medium. The sensor
+responses to these odors could be an unintentional signal
+that could lead to an overestimation of the discrimination ability. Baietto et al. [14] reported a clearer discrimination in PCA plots than our results using commercial
+electronic noses. However, some parts of their preparation procedure for control (not inoculated) samples, for
+instance, the presence of medium or storage conditions,
+were unclear. In this study, we prepared sound-wet and
+sound-dry classes to clarify the effects of the treatment
+of sound samples. The sound-wet class was carefully prepared in the same way as the decayed class, except for
+mycelia inoculation. The sound-wet class appeared near
+the decayed class in the PCA plot and was also separated from the sound-dry class. This distribution can
+also be interpreted as the odor of the cultivation medium
+
+Fig. 5 Example of the normalized sensor response patterns (FP on sugi 20 weeks). Each line shows a pair of test pieces
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Page 6 of 8
+
+Fig. 6 PCA scatterplots of each measurement. The ellipses are 68% probability ellipses assuming a normal distribution
+
+transferred to the wood pieces, which is a mutually predominant odor in both decayed and sound-wet classes.
+If the control samples were inappropriately prepared,
+for example, a lack of cultivation medium or shortage of
+storage time, the gas sensor array would have detected
+the odor of the cultivation medium or its change over
+time. This would have been incorrectly interpreted as a
+signal of wood-decay fungi. Our results showed reasonable discrimination between the decayed and the two
+sound classes. Not only fungal MVOCs or terpenes, but
+
+the absence of the cultivation medium odor could also
+separate the sound-dry class and decayed class. On the
+contrary, the distinction between the sound-wet and
+decayed classes was also achieved in most cases. This
+suggests that the gas sensors responded to the fungirelated odor under the mutual cultivation medium odor.
+To determine whether this method can distinguish
+wood-decay fungi-related odor from sound wood odor,
+the data of the measurement period and wood-decay
+fungal species were merged. In these new datasets, the
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Page 7 of 8
+
+Fig. 7 PCA scatterplots of each wood species. PC: Principal component
+
+sound-dry and sound-wet classes were also merged into
+a new sound class to simplify the problem, because these
+classes were not inoculated. Figure 7 shows scatter plots
+of principal components 1, 2, and 3 of the merged datasets. In both wood species, the decayed and sound classes
+formed individual groups in the plots. However, these
+groups partially overlapped with each other. These overlaps were comparatively small. The results also suggested
+that the gas sensor array detected specific patterns of the
+samples with wood-decay fungi and the sound samples,
+regardless of the species of wood-decay fungi and the
+cultivation period.
+The simple device that we implemented is effective in
+detecting fungus-related odors in the combination of
+the two constructional softwoods and the two wooddecay fungi mentioned above. However, the present
+study has some limitations. It was conducted under pure
+cultivation conditions using limited fungal and wood
+species. Further, the sample sizes were small. Additionally, the static head space method that we used in this
+study required destructive sampling. Therefore, further
+research is needed under realistic cultivation conditions
+using non-destructive methods.
+
+Conclusions
+The findings of this study suggest that the simple semiconductor gas sensor array implemented in this study
+can detect the difference in odor between wood-decay
+fungi-inoculated wood and sound wood samples. The
+measured data of odor from inoculated samples and
+sound samples were reasonably well discriminated by
+PCA, regardless of the fungal species, wood species,
+or incubation period. In a pure culture experiment, the
+cultivation medium-related odor was predominant. The
+results suggest that our gas sensor array detected fungirelated odor from the samples prepared under pure
+culture conditions. Sensor-based odor discrimination
+enabled odor-based wood-decay fungi detection using
+a combination of JIS standard [17] fungal species and
+common construction wood. The approach evaluated
+in this study could be used as a cost-effective and easyto-use wood decay diagnosis. Furthermore, odor-based
+fungi or decay detection can be used to perform remote
+diagnoses when combined with air sampling methods.
+Abbreviations
+FP: Fomitopsis palustris; TV: Trametes versicolor; JIS: Japan Industrial Standards;
+EO: Ethylene oxide; PCA: Principal component analysis; MVOC: Microbial
+volatile organic compound.
+Acknowledgements
+We would like to thank Editage (www.​edita​ge.​com) for English language
+editing.
+
+Suzuki et al. J Wood Sci
+
+(2021) 67:62
+
+Authors’ contributions
+MS conceived the research concept, implemented the experimental device,
+performed measurements, analyzed data, and drafted the manuscript. TM
+designed the experiments and contributed to the fungal cultivation. SI contributed to fungal growth. YH contributed to the sample measurements. RN
+contributed to the design of the experimental devices and data analysis. All
+authors read and approved the final manuscript.
+Funding
+This work was supported by HRO ordinary research (Grant No. 3305-8W2901)
+and JSPS KAKENHI (Grant No. 19K06176).
+Availability of data and materials
+The datasets used and analyzed during this study are available from the corresponding author upon reasonable request.
+
+Declarations
+
+Page 8 of 8
+
+7.
+8.
+
+9.
+10.
+11.
+
+12.
+
+Competing interests
+The authors declare that they have no competing interests.
+Author details
+1
+Forest Products Research Institute, Hokkaido Research Organization, 1‑10
+Nishikagura, Asahikawa, Hokkaido 071‑0198, Japan. 2 National Institute
+of Advanced Industrial Science and Technology (AIST), 16‑1 Onogawa,
+Tsukuba, Ibaraki 305‑8569, Japan.
+Received: 11 July 2021 Accepted: 19 October 2021
+
+13.
+
+14.
+15.
+16.
+
+References
+1. Kauhanen E, Harri M, Nevalainen A, Nevalainen T (2002) Validity of
+detection of microbial growth in buildings by trained dogs. Environ Int
+28(3):153–157. https://​doi.​org/​10.​1016/​S0160-​4120(02)​00021-1
+2. Konuma R, Umezawa K, Mizukoshi A, Kawarada K, Yoshida M (2015)
+Analysis of microbial volatile organic compounds produced by wooddecay fungi. Biotechnol Lett 37(9):1845–1852. https://​doi.​org/​10.​1007/​
+s10529-​015-​1870-9
+3. Konuma R, Mizukoshi A, Kawarada K, Yoshida M (2015) Analysis of microbial volatile organic compounds emitted by brown rot fungus Fomitopsis
+palustris. Mokuzai Hozon (Wood Protection) 41(3):108–118. https://​doi.​
+org/​10.​5990/​jwpa.​41.​108 (in Japanese with English summary)
+4. Yanase Y, Miura M, Fujii Y, Okumura S, Yoshimura T (2013) Evaluation of
+the concentrations of hydrogen and methane emitted by termite using a
+semiconductor gas sensor. J Wood Sci 59(3):243–248. https://​doi.​org/​10.​
+1007/​s10086-​013-​1325-7
+5. Yanase Y, Maruyama S, Fujii Y, Okumura S, Yoshimura T (2013) Detection
+of hydrogen and methane emitted by feeding activity of termite under
+forced ventilation. Japn J Environ Entomol Zool 24(3):97–105. https://​doi.​
+org/​10.​11257/​jjeez.​24.​97
+6. Persaud K, Dodd G (1982) Analysis of discrimination mechanisms in the
+mammalian olfactory system using a model nose. Nature 299:352–355
+
+17.
+
+18.
+
+19.
+20.
+
+Gardner JW, Bartlett PN (1994) A brief history of electronic noses. Sens
+Actuat B Chemical 18(1):210–211. https://​doi.​org/​10.​1016/​0925-​4005(94)​
+87085-3
+Patel HK (2013) Toward Sensor to Reproduce Human Sense. In: The Electronic Nose: Artificial Olfaction Technology. Biological and Medical Physics, Biomedical Engineering, Springer, New Delhi, pp 115–142, https://​doi.​
+org/​10.​1007/​978-​81-​322-​1548-6
+Peris M, Escuder-Gilabert L (2009) A 21st century technique for food
+control: Electronic noses. Analytica Chimica Acta 638(1):1–15. https://​doi.​
+org/​10.​1016/j.​aca.​2009.​02.​009
+Guohua H, Yuling W, Dandan Y, Wenwen D (2013) Fuji Apple storage time
+predictive method using electronic nose. Food Anal Methods 6(1):82–88.
+https://​doi.​org/​10.​1007/​s12161-​012-​9414-6
+Wei Z, Wang J, Zhang W (2015) Detecting internal quality of peanuts
+during storage using electronic nose responses combined with physicochemical methods. Food Chem 177:89–96. https://​doi.​org/​10.​1016/j.​
+foodc​hem.​2014.​12.​100
+Haugen JE, Rudi K, Langsrud S, Bredholt S (2006) Application of gassensor array technology for detection and monitoring of growth of spoilage bacteria in milk: A model study. Analytica Chimica Acta 565(1):10–16.
+https://​doi.​org/​10.​1016/j.​aca.​2006.​02.​016
+Garneau FX, Riedl B, Hobbs S, Pichette A, Gagnon H (2004) The use of
+sensor array technology for rapid differentiation of the sapwood and
+heartwood of Eastern Canadian spruce, fir and pine. Holz als Roh Werkstoff 62(6):470–473. https://​doi.​org/​10.​1007/​s00107-​004-​0508-8
+Baietto M, Wilson AD, Bassi D, Ferrini F (2010) Evaluation of three
+electronic noses for detecting incipient wood decay. Sensors 10(2):1062–
+1092. https://​doi.​org/​10.​3390/​s1002​01062
+Baietto M, Pozzi L, Wilson AD, Bassi D (2013) Evaluation of a portable
+MOS electronic nose to detect root rots in shade tree species. Computers
+Electron Agric 96:117–125. https://​doi.​org/​10.​1016/j.​compag.​2013.​05.​002
+Sakai H, Kakutani T, Tezuka D, Shigeyama T, Sugai Y, Shintani T, Yamaguchi
+A (2020) Decay resistance of wood and treated wood to 12 strains of
+fungi. Mokuzai Hozon (Wood Protection) 46(4):196–201. https://​doi.​org/​
+10.​5990/​jwpa.​46.​196 (in Japanese with English summary)
+Japanese Standards Association (2010) Wood preservatives – performance requirements and their test methods for determining effectiveness. Standard JIS K 1571:2001, Japanese Standards Association, Tokyo,
+Japan (in Japanese)
+Gardner J, Hines E, Tang H (1992) Detection of vapours and odours from
+a multisensor array using pattern-recognition techniques part 2. artificial
+neural networks. Sens Actuat Chem 9(1):9–15. https://​doi.​org/​10.​1016/​
+0925-​4005(92)​80187-3
+R Core Team (2020) R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria, https://​
+www.R-​proje​ct.​org/
+Suzuki M (2019) Bayesian modeling of volatile organic compound emissions from three softwoods in Hokkaido. J Wood Sci, Japan. https://​doi.​
+org/​10.​1186/​s10086-​019-​1790-8
+
+Publisher’s Note
+
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+

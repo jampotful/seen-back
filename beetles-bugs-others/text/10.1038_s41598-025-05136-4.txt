@@ -1,0 +1,254 @@
+Explainable artificial intelligence with temporal convolutional networks for adverse weather condition detection in driverless vehicles.
+Alzanin S. (2025). Scientific reports. . doi:10.1038/s41598-025-05136-4. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Explainable artificial intelligence with temporal convolutional networks for adverse weather condition detection in driverless vehicles
+
+## Abstract
+AbstractAutonomous driving has reached significant milestones in research and development over the last few decades. There is growing attention in the area as the utilization of autonomous vehicles (AVs) assurances safer and more environmentally-friendly transportation systems. Adverse environmental conditions like dust or sandstorms, fog, heavy snow, and rain conditions are unsafe limitations on the function of the cameras by decreasing visibility and influencing driving safety. These limitations affect the performance of tracking and detection methods applied in traffic surveillance systems and autonomous driving applications. Using the fast development in mathematically powerful artificial intelligence (AI) approaches, AVs could sense their atmosphere using higher accuracy, make safer real-world decisions, and work consistently without user intervention. Therefore, this paper proposes a Complex Data Analysis for Adverse Weather Detection in Autonomous Vehicles Using Explainable Artificial Intelligence (CDAAWD-AVXAI) approach. The CDAAWD-AVXAI approach improves the safety and reliability of AVs by ensuring robust weather detection. Initially, the presented CDAAWD-AVXAI approach applies image pre-processing by utilizing the median filter (MF) model to reduce noise and enhance the quality of input images. The CapsNet model is employed for feature extraction to recognize spatial hierarchies and capture intricate patterns from complex visual data. Moreover, the temporal convolutional network (TCN) model detects adverse weather conditions. To further enhance performance, the hyperparameter tuning of the TCN model is performed by implementing the improved dung beetle optimization (IDBO) model. Finally, the XAI using LIME provides transparency and interpretability, allowing stakeholders to understand the decision-making process behind weather condition predictions. The stimulation study of the CDAAWD-AVXAI technique is performed under the DAWN dataset. The experimental validation of the CDAAWD-AVXAI technique portrayed a superior accuracy value of 98.83% over existing methods.Keywords: Autonomous vehicles, Adverse weather detection, Dung beetle optimization, Temporal convolutional network, Explainable artificial intelligenceSubject terms: Computational biology and bioinformatics, Mathematics and computing
+
+## Introduction
+The world health organization (WHO) was alarmed by fatal injuries and death counts because of negligence, speeding, and intoxication1. Automation in transportation has some intriguing predictions, like reduction in fuel consumption, lane capacity improvement, reduced travel time, emissions reduction, and more2. Therefore, AVs have attained considerable attention as a novel transportation method in the past years. AVs, particularly self-driving cars, have significantly increased attention in intelligent transportation, AI, and computer vision (CV). No other invention, meanwhile, the vehicle’s manufacture, had such a dramatic effect on the automotive industry as self-driving vehicles3. These vehicles mainly depend on sensors and cameras. Samples contain radar, ultrasonic, light detection and ranging (LiDAR), and more that have some autonomous features, comprising penetrating carbon dioxide emissions by up to 10%, minimizing the usage of fuel, reducing road accidents, diminishing traffic congestion, and employing roads more effectively to enhance the transportation methods4. AVs might help study and manage traffic by collecting valuable and successful information. In addition to other road-related abilities, they can recognize non-static and static objects like pedestrians, road lanes, and vehicles5. Autonomous driving technology has substantially progressed over the last decade6. However, the safety and dependability of these methods under opposing weather conditions endure essential challenges. Opposing weather, like fog, rain, and snow, can substantially control the occurrence of environmental perception sensors, thus raising the operational risks of autonomous driving methods7.
+In addition, opposing weather conditions are reasons for slippery road surfaces, complications in operating autonomous driving methods, and increasing braking distance. In opposing weather conditions, real-world recognition is essential for self-driving and traffic monitoring applications8. Object detection (OD) is significant for AVs as it guarantees security by avoiding and identifying difficulties in their pathway. Several studies have examined approaches for recognizing objects in AV, widely categorized into fully automated, manual, and semi-automated methods9. Nowadays, deep learning (DL) and machine learning (ML) models are critical for improving OD in AVs, particularly in opposing weather. Whereas classical AI depends on statistical learning, it handles boundaries because of limited flexibility to dynamic environments and manual feature engineering, necessitating overall hindering and retraining its efficiency in real-world applications10. DL and ML methods have exposed greater possibilities by challenging the difficulties modelled by adverse weather. The rapid growth of AI and ML technologies has paved the way for crucial advancements in the automotive industry, specifically in the development of AVs. As traffic-related accidents continue to pose a significant risk to human lives, the requirement for robust, automated systems to ensure safer driving conditions has become paramount. Weather conditions, however, remain a crucial challenge, as they mostly mitigate the performance of AV perception systems, resulting in potential hazards. Addressing these threats requires developing innovative solutions that adapt to dynamic environmental factors and provide reliable real-time weather condition detection. Utilizing AI, specifically through explainable models, can provide greater transparency, allowing systems to make informed decisions while maintaining user trust.
+This paper proposes a Complex Data Analysis for Adverse Weather Detection in Autonomous Vehicles Using Explainable Artificial Intelligence (CDAAWD-AVXAI) approach. The CDAAWD-AVXAI approach improves the safety and reliability of AVs by ensuring robust weather detection. Initially, the presented CDAAWD-AVXAI approach applies image pre-processing by utilizing the median filter (MF) model to reduce noise and enhance the quality of input images. The CapsNet model is employed for feature extraction to recognize spatial hierarchies and capture intricate patterns from complex visual data. Moreover, the temporal convolutional network (TCN) model detects adverse weather conditions. To further enhance performance, the hyperparameter tuning of the TCN model is performed by implementing the improved dung beetle optimization (IDBO) model. Finally, the XAI using LIME provides transparency and interpretability, allowing stakeholders to understand the decision-making process behind weather condition predictions. The stimulation study of the CDAAWD-AVXAI technique is performed under the DAWN dataset. The key contribution of the CDAAWD-AVXAI technique is listed below.
+The CDAAWD-AVXAI model applies an MF technique during the pre-processing stage to effectively mitigate noise caused by adverse weather conditions. This improves image quality before feature extraction, enhancing downstream processing. It confirms cleaner inputs for more reliable detection results.
+The CDAAWD-AVXAI approach employs CapsNet for feature extraction, which preserves spatial hierarchies and captures pose associations within the data. This improves representation learning, particularly under complex weather distortions, and strengthens the technique’s capability to distinguish subtle visual patterns in adverse conditions.
+The CDAAWD-AVXAI method integrates TCN into the model to accurately detect adverse weather conditions over time. Capturing temporal dependencies improves sequence-aware prediction performance, enhancing the approach’s robustness in dynamic weather scenarios.
+The CDAAWD-AVXAI methodology incorporates the IDBO method to fine-tune its parameters effectively. This improves the convergence speed and averts local optima during training. As a result, classification accuracy is significantly enhanced under varying weather conditions.
+The LIME-based explainable AI (XAI) is applied to provide clear insights into the model’s weather prediction decisions. This assists stakeholders in comprehending which features influenced specific outcomes and improves trust, transparency, and accountability in critical decision-making processes.
+The CDAAWD-AVXAI approach introduces a novel hybrid DL framework that integrates CapsNet for spatial feature extraction, TCN for temporal pattern recognition, and IDBO for optimal parameter tuning. It also integrates LIME-based XAI to ensure the interpretability of predictions. This integration improves the accuracy and transparency of adverse weather condition detection systems.
+
+## Related works
+Aloufi et al.11 present a new multi-objective method utilizing only the AV camera sensing method. This method presents improved efficacy and possible performance advantages by incorporating image feature valuation, super-resolution generative adversarial network (SRGAN), and an enhanced form of You Only Look Once (YOLO) version 5. Moreover, the YOLO structure is enhanced to recognize six object classes (cyclist, car, motorcycle, bus, pedestrian truck) through adverse weather situations. Kondapally et al.12 introduced a model to describe and understand six average weather transition states: rainy to sunny, sunny to rainy, and others. Initially, this paper suggests a method for interpolating the average weather transition data utilizing a variational autoencoder and removing its spatial characteristics by VGG. Additionally, the temporal distribution of such spatial features is modelled by using a gated recurrent unit to classify the consistent transition state. Meftah et al.13 create considerable support for the domain of AV obstacle avoidance by presenting a new method that uses the generative adversarial networks (GANs) approach for data augmentation. Using a GAN approach to make training datasets and incorporate images describing difficult weather conditions is essential in improving the precision of the DL methods. Three DL techniques, VGG16, ResNet50, and ResNet101 transfer learning trained on these databases before or after using the data augmentation methods. Li et al.14 implement a new field adaptive OD structure for autonomous driving in cloudy conditions. This model utilizes either an image-level or object-level version to reduce the domain adaptation in an image’s object presence and style. The research also presents original adversarial gradient reversal layers to conduct adversarial mining for the complex case and domain discrepancy. Furthermore, this work presented an auxiliary field by data augmentation for enforcing novel domain-level metric regularization. In15, a DL method is accomplished to recognize dangerous road and outside weather situations, allowing a rapid response to novel environments and conditions. The work attains this by presenting an enhanced taxonomy and label hierarchy for an advanced adverse weather database, renaming it with a new semi-automated labelling pipeline. Applying the newly presented hierarchy and dataset, the work training RECNet, a DL approach for the classification of weather conditions from a solitary frame of RGB.
+Chen et al.16 proposed an orchestrated method which permits real-world OD. In an edge-calculating manner, the YOLO-based OD method utilizes thermal imageries to correctly identify objects in poor-lighting situations. Moreover, an attention mechanism enhances the performance of the systems without considerably improving model complexities. An unidentified object detector spontaneously labels and classifies unidentified objects without accurate monitoring on edge tools; however, the roadside unit (RSU)-based mechanism is established to upgrade class labels and guarantee safe driving knowledge for AVs. Zhang et al.17 developed a new method to detect objects at various stages using sensors and DL-based solutions in the traffic circle. The recommended model increases the efficacy of single-stage object detectors. The enhanced architecture is derived from the one-stage object-detection method, including numerous lightweight backbones. Moreover, attention mechanisms are combined to refine the process of OD additionally. Madaram et al.18 propose a war strategy optimization (WSO) approach for effectual electric vehicle charge scheduling, enhancing waiting time and charging costs compared to existing methods. Golam et al.19 developed BlackIceNet, a multimodal CNN-based methodology that integrates visual, acoustic, and sensor data for accurate and early black ice detection to improve road safety. Nadana Ravishankar et al.20 developed the white shark optimizer with optimal dl-based effective unmanned aerial vehicles communication and scene classification (WSOODL-UAVCSC) technique for optimized UAV clustering and accurate scene classification utilizing DL and metaheuristic algorithms. Nagavarapu et al.21 developed a vision-based algorithm incorporating CNN-LSTM for rain removal and lane marker detection to improve AV navigation in rainy conditions. Selvarajan22 reviews and analyzes recent improvements in bio-inspired optimization techniques and assesses their efficiency in solving complex engineering problems. Khan et al.23 propose a Reinforcement Learning (RL)-based traffic congestion detection model improved with XAI for improved accuracy, adaptability, and interpretability in smart cities. Nazat, Li, and Abdallah24 introduce an end-to-end XAI framework to interpret AI-based anomaly detection in VANETs, improving transparency, trust, and feature explainability in AV networks. Othman and Ahmed25 improve real-time image processing in AVs utilizing EfficientNet and MobileNet techniques for enhanced accuracy and speed under diverse driving conditions. Thakur and Mishra26 analyze integrating multi-sensor technologies with AI-based DL methods for enhanced obstacle detection in AVs. Using DL, Khairnar et al.27 developed a modified CANet for accurate and effectual road scene segmentation in unstructured driving scenarios.
+Despite crucial progress in DL-based AV perception models, various challenges still exist. Many techniques are restricted by dependence on single-modality data, mitigating robustness in adverse weather. GAN-based augmentation enhances performance but may introduce artefacts that affect model reliability. Methodologies, namely GRL and auxiliary fields, lack generalization across unknown domains. Diverse OD techniques comprising YOLO variants encounter difficulty with class imbalance and small object detection. Furthermore, real-time constraints are often overlooked in intrisic architectures with attention or hybrid backbones. Incorporating XAI mostly remains shallow, using actionable insights into the AV decision-making process. Comprehensive solutions incorporating multimodal fusion, XAI, and lightweight architectures have also not been explored adequately.
+
+## Methodology
+This article introduces a CDAAWD-AVXAI method. The CDAAWD-AVXAI method framework improves the reliability and safety of AVs by guaranteeing robust weather detection. Figure 1 illustrates the entire procedure of the CDAAWD-AVXAI model.
+Overall process of CDAAWD-AVXAI approach.
+
+## Image Pre-processing using MF
+Initially, the presented CDAAWD-AVXAI technique applies image pre-processing using an MF model to reduce noise and enhance the quality of input images28. This model is chosen due to its efficiency in removing salt-and-pepper noise while conserving crucial edge details. Unlike mean or Gaussian filters, which may blur critical features, MF maintains the integrity of structural data, which is substantial for precise feature extraction in weather-distorted images. Its non-linear approach makes it specifically appropriate for adverse weather conditions, where noise is mostly non-uniform and sharp transitions exist. Furthermore, MF is computationally efficient, making it ideal for real-time applications. Its simplicity and robustness against noise ensure cleaner inputs, thereby enhancing the overall performance of the subsequent DL models.
+The MF is a real image pre-processing approach applied in adverse weather conditions recognition for AVs, mainly to minimize noise and improve image quality in challenging weather conditions. It operates by substituting every pixel value within the image using the median value of the closed pixels inside an identified window. This removes impulsive noise, like snow or rain, which may change sensor data. During AVs, utilizing an MF guarantees that the data connected to the system is cleaner and more valid for analyzing weather conditions. By enhancing the clarity of the image, the MF improves the precision of the following methods for classifying and detecting adverse weather conditions, namely snow, fog, or rain.
+
+## CapsNet-based feature extraction
+The CapsNet model is employed for feature extraction to recognize spatial hierarchies and capture intricate patterns from complex visual data29. This method is chosen due to its capability to preserve spatial hierarchies and associations between parts of an image, which is crucial for accurate weather condition detection. Unlike the conventional convolutional neural network (CNN) model, focusing majorly on finding patterns without considering their spatial alignment, CapsNet captures both spatial and pose data, enabling better handling of complex, varying image conditions. This makes the chosen technique specifically effectual in detecting objects under diverse weather conditions, where features may appear in various orientations. Furthermore, CapsNet’s dynamic routing mechanism enhances representation learning by highlighting relevant features, mitigating the risk of losing crucial data in adverse weather contexts. This results in improved generalization and robustness for feature extraction compared to conventional methods. Figure 2 portrays the structure of CapsNet.
+Architecture of CapsNet model.
+CapsNet, which outshines the essential limits of traditional CNNs, indicates a significant development in the area of neural network structure. It generates capsules, which are groups of neurons that keep various things in images. Over iterative refinement, the first mechanism increases agreement and enhances the prediction precision by verifying connections amongst capsules through layers. CapsNet connects with prediction vectors, enabling the prediction transmissions from low-level to high-level capsules. The initial capsules detect more essential goods, such as edges, while the subordinate capsules take objects instantiating at a high level. This includes iterative changes to control the suitable model to transmit capsule outputs to high-level capsules. This method involves computing coupling coefficients, which define the power of connections among capsules according to the scalar agreement of their prediction vectors. This process is computationally challenging, demanding many iterations in which every iteration improves the coupling coefficients utilizing softmax functions. The maximum promising output from every higher capsule is assessed using the squashing function, as stated in Eq. (1).
+Now, denotes iteration counts, refers to the coupling coefficient, and represents the logarithmic before modifications in the iterative procedure.
+Capsules refine relations over the contract and attention, investigative input, and emphasizing important regions. This advanced method permits CapsNets to recognize essential features while attention feature mapping underlines important areas. It depends only on iterative refinement according to prediction vectors and includes an additional layer of complexity by appearing in crucial areas, resulting in more accurate and understanding feature extraction. This model changes ratings rely on contextual significance, which permits the system to filter noise and concentrate on the most informative features.
+The measures of similarity are computed to assess the connection between low-level and high‐level capsules, utilizing the activation vectors dot product characterized in Eq. (3).
+Now, signifies the predicted vector for capsule The attention mechanism guides the procedure by ordering low-level capsules, leading to a more effective and strong method.
+
+## Weather detection using TCN
+Moreover, the TCN model detects adverse weather conditions30. This technique is chosen because it can effectively capture long-range dependencies in sequential data. Unlike recurrent neural networks (RNNs) or long short-term memory (LSTM) networks, the utilized model employs convolutional layers for processing temporal sequences, allowing for rapid training and parallelization. This characteristic of the model plays a crucial part in making the method appropriate for real-time weather detection. Furthermore, varying input lengths are handled by the TCN technique and also assist in giving improved stability during backpropagation, mitigating the vanishing gradient problem mostly faced in RNNs. This capability of the method to capture both short- and long-term patterns in data assists in improving the accuracy of detecting adverse weather conditions and giving more appropriate results. Figure 3 illustrates the structure of the TCN method.
+Structure of TCN methodology.
+The TCN is built upon the 1D-CNN, combining residual module, causal convolution, and dilated convolution. This structure efficiently takes correlations inside the data, making it suitable for time-series prediction tasks. Causal convolution is a unidirectional convolution approach, which guarantees the output at a particular point of time in the preceding layer relies exclusively on the input from the present layer and the prior point of time. Therefore, the receptive area of causal convolution develops linearly by improving the depth of the network. Nevertheless, when addressing more extended sequences of historical data, the training problem increases as the network depth multiplies. To tackle this problem, TCN utilizes dilated convolution technologies to conduct interval sampling on the input data. The computation equation is as shown:
+In Eq. (4), signifies the time step, characterizes the convolutional operation, and refers to the output value at the point of time , specifies the dimensions of the convolution kernel. In contrast, helps as the summation index, while indicates the element in the convolutional kernel. The growth coefficient captures values within the set , characterizes the input sequence, and specifies the growth distance of the present weight from , at last, characterizes the input value equivalent to the translation from the time to the past time .
+As the main component of the TCN, dilated causal convolution permits the system to efficiently capture longer-range dependency in time-series data while keeping computational cost.
+Network degradation and gradient explosion threats become more prominent as the number of NN layers improves. To tackle this problem, the TCN combines a residual connection module within the output layer. This module contains an ID-CNN and dual identical internal unit. Every internal unit comprises an extended causal convolutional layer, dropout layer, normalization layer, and activation function.
+
+## IDBO-based parameter tuning
+To further enhance performance, the hyperparameter tuning of the TCN model is performed by utilizing the IDBO method31. This model is chosen for its robust capability to effectively navigate complex, high-dimensional search spaces. IDBO specializes in balancing exploration and exploitation, ensuring a thorough search for optimal parameters. This adaptive behaviour of the method assists in avoiding local minima, making the technique more dependable than standard optimization methods in DL applications. This technique is appropriate for multimodal optimization issues, namely tuning DL techniques, where it can find optimum outcomes with fewer iterations. Additionally, it is computationally effectual and proper for models with massive hyperparameters. Its efficiency in diverse scenarios confirms enhanced performance and generalization of the model. Figure 4 specifies the steps involved in the IDBO methodology.
+Steps involved in the IDBO technique.
+Dung beetles feed on dung and show four major behaviours: foraging, rolling, stealing, and breeding. The DBO method mainly mimics the dung beetle’s behaviours and determines related mathematic methods for iterative optimization.
+
+## Initialization of the population
+The DBO model uniformly and randomly distributes individuals to make the primary population. The location of every DB assists in solving the optimization problem. To guarantee the diversity of the population, the particular representation is as shown:
+In Eq. (5), denotes a randomly generated number in the interval of characterizes the location of the DB; and correspond to the lower and upper limits of the solution space.
+
+## Rolling behavior
+The DB’s rolling behaviour is classified into dual modes: obstacle-free and obstacle‐enhanced. When obstacles are absent, the DB rolls the dung ball in a direct line. The DB fine-tunes its location if obstacles are present by implementing a dance to define the optimum path. The location-updated models to dance and roll are defined from Eqs. (6) to (9).
+Here, characterizes the existing iteration number, and symbolizes the location of the DB at iteration . denotes the deflection coefficient using ; The parameter can capture values of 1 or , while specifies that the DB has not deviated from its original direction, whereas indicates a deviation.
+symbolizes the globally poor location. During the obstacle-free mode, the DB’s path is affected by light intensity, using mimicking changes in light intensity; a smaller directs stronger light. The angle , if , the location of the DB remains unchanged. Lastly,
+
+## Reproductive behaviour
+DBs must locate proper breeding grounds for laying their eggs and roll dung balls for their offspring to live. A boundary selection approach is presented to pretend the egg-laying positions of breeding DBs, as explained in Eq. (8) to (11).
+Meanwhile, and characterize the lower and upper boundaries of the spawning region correspondingly. signifies the present local optimum solution, and the updated parameter and is described as whereas refers to maximal iteration counts. Then, the upper and lower boundaries of the spawning region are affected by the iteration counts , and the location of the DB eggs dynamically changes. The particular formulations are produced in Eq. (12).
+Now, characterizes the location of the DB egg in the following iteration and are dual independent arbitrary vectors of size 1
+
+## Foraging behaviour
+The description of a proper foraging region is introduced in Eqs. (13) and (14). When the appropriate foraging region is determined, the location of the DB is upgraded in foraging, as demonstrated in Eq. (15).
+Here, and denotes the upper and lower boundaries of the foraging region, correspondingly. represents the global optimum location; denotes a randomly generated number that follows a standard distribution, whereas refers to a randomly generated vector in the interval .
+
+## Stealing behaviour
+In the stealing behaviour, some DBs will select dung balls from another beetle, using the stealing DBs choosing to steal close to the global optimum location. The location updating is defined in Eq. (16).
+Now, refers to the constant, whereas is the randomly generated vector of size 1D, which follows a standard distribution.
+
+## Golden sine algorithm
+The golden sine algorithm (GoldSA) is a new meta-heuristic optimizer method. The GoldSA works in a barrier-free mode throughout the rolling ball phase, attaining a balance between exploitation and exploration, which enables finding solutions near the global optimal. The particular expression of the GoldSA is given in Eqs. (17)-(20).
+whereas denotes the location of the individual in iteration , signifies the location of the individual after calculation in throughout the iteration. represents a randomly generated number in the interval of , which defines the moving distance of the individual. means other randomly generated numbers inside , which identifies the direction of the location upgrade of the individuals. In addition, means golden section number; and are coefficients, which integrate the golden section number.
+
+## Variable spiral search approach
+Combining the whale optimization algorithm (WOA), a spiral search tactic is presented in the rolling ball obstacle mode, foraging, and breeding stage of the DBO method. To tackle this, according to the spiral search principle, this work presented modifications to the obstacle mode, foraging, and breeding phase of the DBO for location updates. In particular, the arc tangent function is given to substitute the original tangent function in the obstacle location update, permitting a superior balance between time efficiency and performance. The Variable Spiral Search Strategy determines this tactic.
+In Eqs. (21) and (22), let and . and are randomly generated number vectors of size 1, using all elements distributed uniformly amongst , 1). The parameter value is established by the ratio to the iteration counts . The location is upgraded based on the spiral search principle. This update process incorporates directionality and randomness, allowing individuals to discover the search space successfully.
+Here, the parameters represent similar as in Eq. (14), and are randomly generated number vectors of size 1 , with every element distributed uniformly amongst , 1).
+Now, the parameters represent the same as those in Eq. (14). denotes a randomly generated number that follows a normal distribution, whereas means a randomly generated vector using elements in the interval of . The spiral coefficient is used only for the present location of the foraging DB, which helps prevent excessive time consumption and efficiently improves the method’s convergence speed.
+The IDBO model explains a fitness function (FF) to reach enhanced classifier performance. It defines a positive integer to illustrate the improved performance of the candidate solutions. The decrease of the classifier error rate is determined as the FF, as produced in Eq. (25).
+
+## XAI using LIME
+Finally, the XAI using LIME provides transparency and interpretability, allowing stakeholders to understand the decision-making process behind weather condition predictions32. This mode is chosen for its capacity to give clear, interpretable explanations for complex models, making it appropriate for enhancing transparency in DL-based weather prediction systems. LIME specializes in generating local approximations of model behaviour, giving information into individual anticipations. This model-agnostic approach allows it to work with diverse ML techniques, confirming flexibility. The simplicity and interpretability of LIME assist the stakeholders in comprehending how specific features influence model decisions. The model also emphasizes supremacy in explaining black-box models, particularly in time-sensitive applications such as weather detection, assisting in enhanced decision-making transparency.
+The LIME XAI model is used to offer wide-ranging explanations to predict what is provided by a black box method. The critical theory of LIME includes locally approximating the black box functionalities process using a strong, clear glass box approach, improving interpretation ability. This model gives perturbations by sensibly activating and deactivating particular superpixels through the instance. This model aims to describe the outcomes in a human-readable way and to determine the importance of the continual superpixels within the predicted examples. It improves the method, encourages transparencies and interpretability, and inspires assurance in DL methods by clarifying how the input features of a black box process affect its predictions. The first stage of using the LIME model on the new samples is to shatter it downwards into superpixels. This superpixel regulates the granularities of regions’ segmentation. A linked group of pixels with similar positions and colours is termed superpixels. The segmentation given by these methods is finer and more detailed, making it likely to recognize the critical areas to predict the result precisely.
+The XAI is applied to provide local justifications. This local justification is a method offered for each prediction distinctly. It contains dual key points: (i) calculating how every input affected the output, and (ii) expressing this result in a human-understandable way. However, each of the 3 XAI techniques acknowledged contains this fundamental point, and their methods and succeeding outcomes vary. For example, since the SHAP model processes shapely values through the complete area of the input images, the importance of the amalgamation of DL features between regions is vague. In LIME, the estimated outcomes of a fundamental classifier are not always correct. It just specifies whether areas of the sample influenced the likelihood scores of the last predictions. Therefore, it is essential to present prediction clarifications that associate all 3 XAI models.
+
+## Experimental result analysis
+In this section, the experimental validation of the CDAAWD-AVXAI model is verified under the DAWN dataset33. The simulation is performed by employing Python 3.6.5 tool on PC i5-8600k, 250GB SSD, GeForce 1050 Ti 4GB, 16GB RAM, and 1 TB HDD. The parameter settings are: learning rate: 0.01, activation: ReLU, epoch count: 50, dropout: 0.5, and batch size: 5. Table 1 represents the details of the dataset, which contains 600 images under four weather classes.
+Details of the dataset.
+Table 2; Fig. 5 present the adverse weather conditions detection of CDAAWD-AVXAI methodology under several epochs. The outcomes imply that the CDAAWD-AVXAI methodology correctly recognized the samples. With epoch 500, the CDAAWD-AVXAI technique presents an average , , , and of 94.25%, 88.60%, 88.50%, 88.53%, and 84.71%, correspondingly. Furthermore, with epoch 1000, the CDAAWD-AVXAI technique presents an average , , , and of 98.08%, 96.19%, 96.17%, 96.16%, and 94.90%, respectively. Besides, with epoch 1500, the CDAAWD-AVXAI technique presents an average , , , and of 96.67%, 93.33%, 93.33%, 93.32%, and 91.11%, correspondingly. Also, with epoch 2500, the CDAAWD-AVXAI approach presents an average , , , and of 98.83%, 97.67%, 97.67%, 97.66%, and 96.89%, respectively. At the same time, with epoch 3000, the CDAAWD-AVXAI approach presents an average , , , and of 98.25%, 96.52%, 96.50%, 96.49%, and 95.34%, correspondingly.
+Adverse weather conditions detection of CDAAWD-AVXAI model under various epochs.
+Average of CDAAWD-AVXAI model under various epochs.
+Figure 6 illustrates the training (TRA) and validation (VAL) outcomes of the CDAAWD-AVXAI technique under epoch 2500. The analysis is computed across an interval of 0–2500 epochs. The figure highlights that the TRA and VAL analysis displays an increasing tendency, which informed the capacity of the CDAAWD-AVXAI approach with superior performance across various iterations. This is followed by the TRA and VAL remaining closer across the epochs, which indicates inferior overfitting and shows the maximum outcome of the CDAAWD-AVXAI approach, guaranteeing reliable prediction on hidden samples.
+curve of CDAAWD-AVXAI model under Epoch 2500.
+Figure 7 demonstrates the TRA loss (TRALOS) and VAL loss (VALLOS) curves of the CDAAWD-AVXAI method under epoch 2500. The loss values are calculated over the range of 0–2500 epochs. The TRALOS and VALLOS values exemplify a reducing tendency, notifying the ability of the CDAAWD-AVXAI technique to balance a trade-off between generalization and data fitting. The constant reduction in loss values guarantees the higher performance of the CDAAWD-AVXAI technique and tunes the prediction outcomes over time.
+Loss curve of CDAAWD-AVXAI model under Epoch 2500.
+The comparative outcome of CDAAWD-AVXAI methodology with existing approaches is illustrated in Table 3; Fig. 834,35. The simulation result stated that the CDAAWD-AVXAI methodology outperformed maximum performances. Based on , the CDAAWD-AVXAI approach has higher of 98.83% while the Deep MeteCNN, Stacked ensemble, ResNet50 + LR, VGG16 + LR, Xception + LR, InceptionV3 + RF, and A VGG19 + RF approaches have lesser of 92.01%, 90.01%, 97.29%, 94.58%, 95.03%, 91.41%, and 93.67%, respectively. Besides, dependent on , the CDAAWD-AVXAI approach has a better of 97.67%, where the Deep MeteCNN, Stacked ensemble, ResNet50 + LR, VGG16 + LR, Xception + LR, InceptionV3 + RF, and A VGG19 + RF approaches have minimal of 97.03%, 86.33%, 97.04%, 94.84%, 95.12%, 91.71%, and 93.63%, correspondingly. Simultaneously, concerning , the CDAAWD-AVXAI approach has a superior of 97.66%, whereas the Deep MeteCNN, Stacked ensemble, ResNet50 + LR, VGG16 + LR, Xception + LR, InceptionV3 + RF, and A VGG19 + RF approaches have inferior of 97.14%, 85.99%, 97.10%, 94.62%, 95.01%, 91.51%, and 93.65%, respectively.
+Comparative analysis of CDAAWD-AVXAI model with existing techniques34,35.
+Comparative analysis of CDAAWD-AVXAI model with existing techniques.
+In Table 4; Fig. 9, the comparative results of the CDAAWD-AVXAI methodology are identified in terms of execution time (ET). The results suggest that the CDAAWD-AVXAI methodology obtains maximum performance. Based on ET, the CDAAWD-AVXAI technique provides lower ET of 2.88 s, whereas the Deep MeteCNN, Stacked ensemble, ResNet50 + LR, VGG16 + LR, Xception + LR, InceptionV3 + RF, and A VGG19 + RF techniques achieve greater ET values of 6.26 s, 5.73 s, 5.62 s, 8.14 s, 6.07 s, 8.83 s, and 8.14 s, respectively.
+ET outcome of CDAAWD-AVXAI approach with existing methods.
+ET outcome of CDAAWD-AVXAI approach with existing methods.
+Table 5; Fig. 10 illustrate the ablation study of the CDAAWD-AVXAI methodology. LIME and IDBO serve as baseline interpretable and optimization-driven approaches, respectively, illustrating decent classification ability. TCN and CapsNet depicts enhanced learning of temporal and spatial dependencies, reflecting in higher performance scores. The CDAAWD-AVXAI model outperforms all others, attaining the highest values across all metrics, confirming its superior ability in capturing critical features and optimizing classification accuracy.
+Result analysis of the ablation study of CDAAWD-AVXAI technique.
+Result analysis of the ablation study of CDAAWD-AVXAI technique.
+Table 6; Figs. 11 and 12 demonstrates the parameters and floating-point operations (FLOPs) for various gesture recognition models. The comparison exhibits that the CDAAWD-AVXAI model illustrates the highest efficiency with only 2.03 MB of parameters and 0.98 MB of FLOPs, making it highly appropriate for deployment in low-resource environments. In contrast, models like VGG-VD-16 and CaffeNet require significantly more resources, with parameters of 38.76 MB and 21.57 MB, and FLOPs of 16.29 MB and 25.56 MB respectively. SE-MDPMNet and GoogLeNet offer moderate complexity with parameters of 5.73 MB and 7.73 MB. Overall, the CDAAWD-AVXAI model attains a favorable trade-off between performance and computational cost.
+Comparison of parameters and flops for the CDAAWD-AVXAI method.
+Comparison of parameters for the CDAAWD-AVXAI method.
+Comparison of FLOPs for the CDAAWD-AVXAI method.
+
+## Conclusion
+In this article, a CDAAWD-AVXAI approach is introduced. The CDAAWD-AVXAI approach improves the safety and reliability of AVs by ensuring robust weather detection. Initially, the presented CDAAWD-AVXAI technique applies image pre-processing using an MF model to reduce noise and enhance the quality of input images. The CapsNet model is employed for feature extraction to recognize spatial hierarchies and capture intricate patterns from complex visual data. Moreover, the TCN model is utilized to detect adverse weather conditions. To further enhance performance, the hyperparameter tuning of the TCN model is performed by implementing the IDBO method. Finally, the XAI using LIME provides transparency and interpretability, allowing stakeholders to understand the decision-making process behind weather condition predictions. The stimulation study of the CDAAWD-AVXAI technique is performed under the DAWN dataset. The experimental validation of the CDAAWD-AVXAI technique portrayed a superior accuracy value of 98.83% over existing methods. The limitations of the CDAAWD-AVXAI technique comprise restricted evaluation on a single dataset, which may not fully depict the diversity of real-world weather scenarios. The absence of user-centered validation restricts insight into practical deployment challenges in autonomous systems. Furthermore, the model lacks adaptability testing under varying sensor configurations or degraded input quality. The method does not explore cross-domain transferability or multilingual environmental inputs. Real-time processing capabilities under constrained hardware conditions remain unexplored. Integration with broader vehicular decision-making systems was not addressed. Expanding the scope of testing, integrating multi-source inputs, and involving end-user feedback could enhance robustness and applicability.
+
+## Acknowledgements
+The authors extend their appreciation to Prince Sattam bin Abdulaziz University for funding this research work through the project number (PSAU/2024/01/31881)”.
+
+## Author contributions
+All done by Dr. Samah.
+
+## Data availability
+The data supporting this study’s findings are openly available in the Kaggle repository at https://data.mendeley.com/datasets/766ygrbt8y/3, reference number33.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data supporting this study’s findings are openly available in the Kaggle repository at https://data.mendeley.com/datasets/766ygrbt8y/3, reference number33.
+
+## Table Table 1: Details of the dataset.
+Weather | No. of images
+Fog | 150
+Snow | 150
+Rain | 150
+Sandstorms | 150
+Total Images | 600
+
+## Table Table 2: Adverse weather conditions detection of CDAAWD-AVXAI model under various epochs.
+Class Labels |  |  |  |  | 
+Epoch − 500
+Fog | 95.00 | 90.00 | 90.00 | 90.00 | 86.67
+Snow | 94.17 | 89.66 | 86.67 | 88.14 | 84.29
+Rain | 91.83 | 82.17 | 86.00 | 84.04 | 78.59
+Sandstorms | 96.00 | 92.57 | 91.33 | 91.95 | 89.29
+Average | 94.25 | 88.60 | 88.50 | 88.53 | 84.71
+Epoch − 1000
+Fog | 97.83 | 94.77 | 96.67 | 95.71 | 94.27
+Snow | 99.33 | 97.40 | 100.00 | 98.68 | 98.25
+Rain | 97.00 | 94.00 | 94.00 | 94.00 | 92.00
+Sandstorms | 98.17 | 98.60 | 94.00 | 96.25 | 95.08
+Average | 98.08 | 96.19 | 96.17 | 96.16 | 94.90
+Epoch − 1500
+Fog | 96.50 | 92.16 | 94.00 | 93.07 | 90.74
+Snow | 97.33 | 94.08 | 95.33 | 94.70 | 92.92
+Rain | 95.33 | 91.78 | 89.33 | 90.54 | 87.46
+Sandstorms | 97.50 | 95.30 | 94.67 | 94.98 | 93.32
+Average | 96.67 | 93.33 | 93.33 | 93.32 | 91.11
+Epoch − 2000
+Fog | 95.67 | 87.35 | 96.67 | 91.77 | 89.05
+Snow | 98.50 | 99.30 | 94.67 | 96.93 | 95.98
+Rain | 96.17 | 95.04 | 89.33 | 92.10 | 89.64
+Sandstorms | 97.00 | 94.00 | 94.00 | 94.00 | 92.00
+Average | 96.83 | 93.92 | 93.67 | 93.70 | 91.67
+Epoch − 2500
+Fog | 98.50 | 97.32 | 96.67 | 96.99 | 95.99
+Snow | 99.33 | 98.67 | 98.67 | 98.67 | 98.22
+Rain | 98.50 | 97.32 | 96.67 | 96.99 | 95.99
+Sandstorms | 99.00 | 97.37 | 98.67 | 98.01 | 97.35
+Average | 98.83 | 97.67 | 97.67 | 97.66 | 96.89
+Epoch − 3000
+Fog | 97.83 | 94.77 | 96.67 | 95.71 | 94.27
+Snow | 99.17 | 98.01 | 98.67 | 98.34 | 97.78
+Rain | 97.50 | 97.20 | 92.67 | 94.88 | 93.27
+Sandstorms | 98.50 | 96.08 | 98.00 | 97.03 | 96.03
+Average | 98.25 | 96.52 | 96.50 | 96.49 | 95.34
+
+## Table Table 3: Comparative analysis of CDAAWD-AVXAI model with existing techniques34,35.
+Model |  |  |  | 
+Deep MeteCNN | 92.01 | 97.03 | 97.14 | 97.14
+Stacked ensemble | 90.01 | 86.33 | 85.05 | 85.99
+ResNet50 + LR | 97.29 | 97.04 | 97.09 | 97.10
+VGG16 + LR | 94.58 | 94.84 | 95.58 | 94.62
+Xception + LR | 95.03 | 95.12 | 95.03 | 95.01
+InceptionV3 + RF | 91.41 | 91.71 | 91.41 | 91.51
+VGG19 + RF | 93.67 | 93.63 | 93.67 | 93.65
+CDAAWD-AVXAI | 98.83 | 97.67 | 97.67 | 97.66
+
+## Table Table 4: ET outcome of CDAAWD-AVXAI approach with existing methods.
+Approach | ET (sec)
+Deep MeteCNN | 6.26
+Stacked ensemble | 5.73
+ResNet50 + LR | 5.62
+VGG16 + LR | 8.14
+Xception + LR | 6.07
+InceptionV3 + RF | 8.83
+VGG19 + RF | 8.14
+CDAAWD-AVXAI | 2.88
+
+## Table Table 5: Result analysis of the ablation study of CDAAWD-AVXAI technique.
+Model |  |  |  | 
+LIME | 96.24 | 95.27 | 95.24 | 95.07
+IDBO | 96.84 | 95.80 | 95.82 | 95.81
+TCN | 97.60 | 96.45 | 96.39 | 96.34
+CapsNet | 98.20 | 97.08 | 97.10 | 96.93
+CDAAWD-AVXAI | 98.83 | 97.67 | 97.67 | 97.66
+
+## Table Table 6: Comparison of parameters and flops for the CDAAWD-AVXAI method.
+Technique | Parameters (MB) | FLOPs (MB)
+LCNN-BFF | 6.65 | 25.14
+GoogLeNet | 7.73 | 2.25
+CaffeNet | 21.57 | 25.56
+VGG-VD-16 | 38.76 | 16.29
+SE-MDPMNet | 5.73 | 3.90
+Contourlet CNN | 13.19 | 2.75
+CDAAWD-AVXAI | 2.03 | 0.98
+
+## Figure Fig. 1: Overall process of CDAAWD-AVXAI approach.
+
+## Figure Fig. 2: Architecture of CapsNet model.
+
+## Figure Fig. 3: Structure of TCN methodology.
+
+## Figure Fig. 4: Steps involved in the IDBO technique.
+
+## Figure Fig. 5: Average of CDAAWD-AVXAI model under various epochs.
+
+## Figure Fig. 6: curve of CDAAWD-AVXAI model under Epoch 2500.
+
+## Figure Fig. 7: Loss curve of CDAAWD-AVXAI model under Epoch 2500.
+
+## Figure Fig. 8: Comparative analysis of CDAAWD-AVXAI model with existing techniques.
+
+## Figure Fig. 9: ET outcome of CDAAWD-AVXAI approach with existing methods.
+
+## Figure Fig. 10: Result analysis of the ablation study of CDAAWD-AVXAI technique.
+
+## Figure Fig. 11: Comparison of parameters for the CDAAWD-AVXAI method.
+
+## Figure Fig. 12: Comparison of FLOPs for the CDAAWD-AVXAI method.

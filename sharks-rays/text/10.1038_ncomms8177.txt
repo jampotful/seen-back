@@ -1,0 +1,1564 @@
+Atomistic design of microbial opsin-based blue-shifted optogenetics tools
+Hideaki E. KATO, Motoshi Kamiya, Seiya Sugo, Jumpei Ito, Reiya Taniguchi, Ayaka Orito, Kunio Hirata, Ayumu Inutsuka, Akihiro Yamanaka, Andrés Daniel Maturana, Ryuichiro Ishitani, Yuki Sudo, Shigehiko Hayashi, Osamu Nureki (2015). Nature Communications. https://doi.org/10.1038/ncomms8177. doi:10.1038/ncomms8177. Licence: cc-by. Text from pdf.
+
+ARTICLE
+Received 4 Nov 2014 | Accepted 14 Apr 2015 | Published 15 May 2015
+
+DOI: 10.1038/ncomms8177
+
+OPEN
+
+Atomistic design of microbial opsin-based
+blue-shifted optogenetics tools
+Hideaki E. Kato1,*,w, Motoshi Kamiya2,*, Seiya Sugo2, Jumpei Ito3, Reiya Taniguchi1, Ayaka Orito3, Kunio Hirata4,
+Ayumu Inutsuka5, Akihiro Yamanaka5, Andrés D. Maturana3, Ryuichiro Ishitani1, Yuki Sudo6, Shigehiko Hayashi2
+& Osamu Nureki1
+
+Microbial opsins with a bound chromophore function as photosensitive ion transporters and
+have been employed in optogenetics for the optical control of neuronal activity. Molecular
+engineering has been utilized to create colour variants for the functional augmentation
+of optogenetics tools, but was limited by the complexity of the protein–chromophore interactions. Here we report the development of blue-shifted colour variants by rational design at
+atomic resolution, achieved through accurate hybrid molecular simulations, electrophysiology
+and X-ray crystallography. The molecular simulation models and the crystal structure reveal
+the precisely designed conformational changes of the chromophore induced by combinatory
+mutations that shrink its p-conjugated system which, together with electrostatic tuning,
+produce large blue shifts of the absorption spectra by maximally 100 nm, while maintaining
+photosensitive ion transport activities. The design principle we elaborate is applicable to other
+microbial opsins, and clariﬁes the underlying molecular mechanism of the blue-shifted action
+spectra of microbial opsins recently isolated from natural sources.
+
+1 Department of Biological Sciences, Graduate School of Science, The University of Tokyo, 2-11-16 Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan. 2 Department of
+Chemistry, Graduate School of Science, Kyoto University, Kyoto 606-8502, Japan. 3 Department of Bioengineering Sciences, Graduate School of
+Bioagricultural Sciences, Nagoya University, Furo-cho, Chikusa-ku, Nagoya 464-8601, Japan. 4 RIKEN SPring-8 Center, Hyogo 679-5148, Japan. 5 Department
+of Neuroscience II, Research Institute of Environmental Medicine, Nagoya University, Nagoya 464-8601, Japan. 6 Division of Pharmaceutical Sciences,
+Graduate School of Medicine, Dentistry, and Pharmaceutical Sciences, Okayama University, 1-1-1 Tsushima-naka, Kita-ku, Okayama 700-8530, Japan. * These
+authors contributed equally to this work. w Present address: Department of Molecular and Cellular Physiology, Stanford University School of Medicine,
+Stanford, California 94305, USA. Correspondence and requests for materials should be addressed to S.H. (email: hayashig@kuchem.kyoto-u.ac.jp) or to
+O.N. (email: nureki@bs.s.u-tokyo.ac.jp).
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+1
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+P
+
+hotoreceptor proteins have been widely utilized as biotechnological tools in the genetic techniques to optically control
+cell activities, called optogenetics1,2. One of the major
+families of such protein tools consists of microbial opsins,
+membrane proteins characterized by seven transmembrane
+helices that bind a chromophore, retinal, to a lysine residue of
+the protein through a protonated Schiff base linkage, RPSB3.
+Rhodopsins, the opsin–retinal complexes, exist in a wide variety
+of microbial species and serve in various physiological functions,
+such as photosynthesis and phototaxis. In optogenetics, some
+microbial opsins such as channelrhodopsins (ChRs) and
+archaerhodopsin-3 (AR3), which function as light-sensitive ion
+transporters, are heterologously expressed in animal neurons to
+excite and silence them, and consequently to control animal
+behaviours by illumination with light4–9.
+Similar to the ﬂuorescent proteins utilized in cell visualization,
+the functionalities of the microbial opsins in optogenetics
+have been diversiﬁed through genomic searches for analogous
+light-sensitive ion transporters and molecular engineering10.
+Colour variants, which enable colour-regulated dual-light
+activations of ion transporters, exemplify such augmentations
+of the functionality11–17. As seen in the visual receptors and
+various microbial rhodopsins, and demonstrated in an extensively
+engineered retinal-binding protein18, the absorption maximum of
+the RPSB chromophore can be tuned in a wide range of the
+visible region through protein–chromophore interactions.
+The strategy for developing the colour variants has involved
+extensive searches and screens, which in general, require vast
+resources and would quickly reach a limit for further extension due
+to combinatorial explosion. Alternatively, a rational approach of
+molecular engineering based on solid design principles could
+circumvent this problem. Nevertheless, a rational approach to
+create colour variants of microbial rhodopsins with large spectral
+shifts has remained challenging, even though their three-dimensional structures are available. For example, point mutations at 13
+positions introduced in phoborhodopsin (lmax ¼ 497 nm), guided
+based on the X-ray crystallographic structure19–22 to make the
+sequential and spatial alignments of the mutated residues in the
+binding pocket identical to those of a largely red-shifted microbial
+opsin, bacteriorhodopsin from Halobacterium salinarum (HsBR,
+lmax ¼ 568 nm), a light-driven proton pump, shifted the absorption
+maximum by 30 nm, which is only 40% of the overall 70 nm
+spectral shift of the native proteins23. This observation indicated
+that the creation of colour variants requires precise structural design
+at atomic resolution based on physicochemical considerations.
+In the present study, we rationally develop largely blue-shifted
+colour variants of microbial rhodopsins, using theoretical
+chemistry, biochemistry, electrophysiology and X-ray crystallography. We formulate atomistic design principles of synergetic
+point mutations that induce conformational changes of the
+chromophore, consequently leading to a large spectral shift.
+Together with a point mutation that alters the electrostatic
+environment, we successfully obtain—with only double to
+quadruple point mutations—colour variants of a number of
+microbial rhodopsins exhibiting remarkable spectral shifts of up to
+100 nm. This is twice as large as the maximum shift previously
+obtained by molecular engineering, while maintaining the
+photosensitive ion transport activities. The present study demonstrates that highly resolved atomistic design provides a strong
+basis for the production of colour variants through minimal
+modiﬁcation that is universally applicable to analogous proteins.
+Results
+Atomistic design principle. We ﬁrst designed colour variants
+of two of the most widely used optogenetics tools, ChR and
+2
+
+AR3, based on the available crystal structures of C1C2
+(ref. 24), a chimeric protein of ChRs that has been utilized in
+optogenetics25–27, and HsBR, as HsBR shares high sequence
+similarity with AR3. In the native proteins of C1C2 and AR3, as
+well as those of microbial rhodopsins with presently available
+X-ray crystallographic structures, the methyl groups at positions 1
+and 5 (C16, C17, and C18 methyl groups; see Fig. 1a) in the
+b-ionone ring of the chromophore are recognized by cavities
+created by the well-conserved residues of the binding pocket,
+which maintain the orientation of the ring alignment in the same
+plane as the polyene chain (Fig. 1b–g, Supplementary Fig 1 and
+Supplementary Table 1). Accordingly, the planar conformation at
+the C6–C7 bond, which connects the b-ionone ring with the
+polyene chain part, is ﬁxed.
+We introduced point mutations that enforce torsion around
+the C6–C7 bond from planarity in C1C2 and AR3 (Fig. 2), to
+shrink the p-conjugation and consequently to produce blue shifts
+of their absorption spectra3,28 (Supplementary Fig. 2). The C6–C7
+bond can be easily twisted, that is, the potential energy curve
+along the torsional coordinate is ﬂat29–31 (Supplementary Fig. 2).
+Theoretical studies30–35 have suggested that the signiﬁcant
+torsion around the C6–C7 bond by B30° in bovine rhodopsin
+(Supplementary Fig. 1 and Supplementary Table 1) is an
+important factor determining its absorption spectrum36.
+The mutation-enforced torsion around the C6–C7 bond was
+designed as follows (see also Fig. 2). First, the b-ionone ring was
+rotated by B140°, thus forming the 6-s-cis conformation. In this
+rotated conformation, the C18 methyl group, instead of the C16
+methyl group before the rotation, plunges into the cavity between
+Pro266 and Phe269 in C1C2. The rotation also moves the C17
+methyl group to the cavity where the C18 methyl group was
+located before the rotation. These two methyl groups therefore
+avoid steric conﬂict in the binding pocket, by the rotation of the
+b-ionone ring. On the other hand, the rotation induces the steric
+overlap of the C16 methyl group and the moiety at position 2 in
+the b-ionone ring with the side chains of Thr198 in C1C2. To
+remove the steric overlap, we replaced the amino acid with
+glycine, which has a smaller side chain. In the case of HsBR,
+Met118 and Ser141, which are located in the region corresponding to Thr198 in C1C2, are replaced with alanine and glycine. In
+addition, the rotation creates a cavity at Gly202 in C1C2 (Gly122
+in HsBR), which is ﬁlled by the C17 methyl group in the b-ionone
+ring before the rotation. Therefore, we replaced the glycine with
+alanine (and valine for AR3) to ﬁll the created cavity. Overall, the
+double and triple mutations of the amino acids around the
+b-ionone ring described above were introduced to stabilize its
+rotated conformation in the binding pocket. Further shifts due to
+electrostatic modulation were also introduced into AR3 by the
+rotation of the b-ionone ring and an additional mutation, A225T.
+Generally speaking, a more negative (positive) ﬁeld around the
+protonated Schiff base (the b-ionone ring) side of the chromophore shifts the absorption maximum to a shorter wavelength3,28.
+In the case of AR3, therefore, Ala225 (Ala215 in HsbR depicted in
+Fig. 2b) in the vicinity of the protonated Schiff base was replaced
+by threonine, to induce a further blue shift37–40. Moreover, the
+p-conjugation end of retinal and the neighbouring hydroxyl
+group of S151 (S141 in HsBR) in native AR3 are separated by the
+rotation of the b-ionone ring (Fig. 2b), giving rise to an additional
+blue-shift by weakening the electrostatic interaction.
+Structural models of C1C2 (Fig. 2a) and HsBR (Fig. 2b) were
+obtained by free energy geometry optimizations with the QM/
+MM RWFE-SCF method41,42 (Fig. 2 and Supplementary Table 2).
+Free energetically stable structures with strongly twisted
+conformations of the C6–C7 bond were determined for the
+designed mutants, T198G/G202A of C1C2 and M118A/G122A/
+S141G/A215T of HsBR (Fig. 2 and Supplementary Table 2).
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+18
+5
+4
+3
+
+6
+1
+
+7
+16
+
+19
+
+20
+
+9
+
+11 13
+
+8
+
+10
+
+12
+
+15
+14
+
+N
+
++
+
+Lys
+
+H
+
+2
+17
+β-ionone ring
+
+RPSB
+
+C
+
+T198
+
+K296 18
+P266
+
+K296
+
+C
+
+K216
+
+Intra
+cellular
+
+M118
+
+K216
+P186
+Intra
+cellular
+
+17
+16
+ATR
+
+18
+
+16
+
+G202
+F269
+
+S141
+17
+ATR
+G122
+W189
+
+M118
+
+T198
+Extra
+cellular
+
+ATR
+N
+
+N
+P266
+
+ATR
+
+ATR
+
+Extra
+cellular
+
+S141
+P186
+
+ATR
+
+G202
+
+G122
+
+F269
+
+W189
+
+Figure 1 | Opsin and chromophore structures of C1C2 and HsBR. (a) Chemical structure of the chromophore, RPSB, and its atom numbering. (b–d)
+Protein structure of C1C2 (PDB 3UG9). Overall structure (b), and close-up views of the chromophore binding pocket around the b-ionone ring of the alltrans retinal (ATR) in licorice (c) and van der Waals (vdW) (d) representations. (e–g) Protein structure of HsBR (PDB ID: 1C3W). Overall structure (e), and
+close-up views of the chromophore binding pocket around the b-ionone ring of ATR in licorice (f) and vdW (g) representations.
+
+Native (calculated model)
+
+Mutant (calculated model)
+
+K296
+
+K296
+
+T198
+
+T198G
+17
+
+18
+
+T198G/G202A
+
+16
+
+P266
+
+P266
+17
+16
+
+18
+
+ATR
+F269
+
+6-s-cis
+retinal
+G202A
+
+G202
+
+F269
+
+Native (calculated model)
+
+Mutant (calculated model)
+M118A
+
+M118
+K216
+A215
+
+M118A/G122A
+S141G/A215T
+A215T
+
+18
+
+S141
+
+S141G
+
+17
+
+16
+
+18
+
+6-s-cis
+retinal
+
+17
+
+16
+P186
+
+K216
+
+ATR
+G122
+W189
+
+P186
+
+G122A
+
+W189
+
+Figure 2 | Structural models of blue-shifted mutants. Structural models of
+blue-shifted mutants of C1C2 (a) and HsBR (b), determined by QM/MM
+RWFE-SCF calculations.
+
+The C6–C7 bond in the C1C2 mutant exhibited signiﬁcant
+torsion, by  27.7°. In the quadruple mutant of HsBR, the C6–C7
+bond is further twisted to  45.1°, and thus a larger spectral shift
+was predicted (Supplementary Fig. 2).
+The QM/MM free energy calculation showed that the
+free energy of the twisted 6-s-cis conformation is lower by
+ 1.1 kcal mol  1 than the planar 6-s-trans one in the C1C2
+mutant, indicating that the twisted 6-s-cis conformation is more
+
+stable. A small contribution of the chromophore–protein
+interaction (0.9 kcal mol  1) to the free energy difference
+indicated that the binding pocket was successfully designed to
+accommodate the twisted 6-s-cis chromophore without a
+signiﬁcant increase in the steric conﬂict, despite the large change
+in its molecular shape.
+Absorption spectra and functions of C1C2 and AR3. To verify
+the design principle, we measured the absorption spectra and ion
+transport activities of the designed mutant proteins. First, we
+expressed and puriﬁed the mutants, and measured their absorption spectra. The T198G/G202A mutant of C1C2 (C1C2GA)
+showed a blue-shifted absorption spectrum (lmax ¼ 455 nm) as
+compared with that of wild-type C1C2 (C1C2WT; lmax ¼ 476
+nm; Fig. 3a), which was well predicted by the torsion at the
+C6–C7 bond (Supplementary Table 2 and Supplementary Fig. 2).
+Notably, the mutant spectrum lacked the spectral shoulder that
+appears at B447 nm in the C1C2WT spectrum. The spectral
+shoulder is suggested to represent a vibrational ﬁne structure that
+is also observed in the absorption spectrum of phoborhodopsin
+(also known as sensory rhodopsin II, SRII), a microbial rhodopsin
+functioning as a phototaxis receptor, and experimentally
+examined by Takahashi et al.43. The disappearance of the
+vibrational ﬁne structure is explained well by the rotation of the
+b-ionone ring.
+As suggested by Takahashi et al.43, the possible causes for the
+lack of ﬁne structure are a wider distribution of the Franck–
+Condon vibrational modes in the excited state and/or a groundstate conformational heterogeneity inducing a larger electrostatic
+perturbation. Although there is no evidence that the distortion
+around the C6–C7 bond in the 6-s-cis conformation increases the
+ground-state conformational heterogeneity, the Franck–Condon
+vibrational distribution in the excited state is expected to be wider
+in the distorted conformation, since the rotation around the
+C6–C7 bond at the distorted angle changes the excitation energy
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+3
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+(C1C2)
+
+(AR3)
+M128A/
+G132V/
+A225T
+
+Absorbance (OD)
+
+T198G/G202A
+
+1.0
+
+WT
+
+500
+
+550
+
+1.0
+
+WT
+
+0.5
+
+0.5
+
+0.0
+400
+
+M128A/G132A/
+S151G/A225T
+
+450
+
+500
+
+550
+
+Wavelength (nm)
+
+0.0
+400
+
+450
+
+600
+
+Wavelength (nm)
+
+Figure 3 | Absorption spectra of wild-type and colour variants of C1C2 and AR3. (a) Absorption of spectra of C1C2 and its mutant. (b) Absorption
+spectra of AR3 and its mutants. The solutions of C1C2 contained 150 mM NaCl, 5% glycerol, 0.05% DDM, 0.01% CHS and 50 mM HEPES-NaOH (pH 7.0),
+and those of AR3 contained 1 M NaCl, 0.05% DDM and 50 mM Tris-HCl (pH 7.0). Absorption maxima of AR3 are summarized in Supplementary Table 4.
+
+more steeply than that at the planar angle, as shown in
+Supplementary Fig. 2.
+Another possible source for the enhancement of the vibrational
+ﬁne structure is the contribution of the second excited (S2) state,
+which lies close to the optically allowed ﬁrst excited (S1) one38,43.
+In this case, the disappearance of the shoulder in the mutant is
+also well explained by the rotation of the b-ionone ring, which
+separates the energy levels of the S1 and S2 states (Supplementary
+Fig. 2), and thus is expected to weaken the absorption intensity of
+the S2 state by intensity borrowing from the S1 state, through
+vibronic coupling.
+Alternatively, another possible origin of the spectral shoulder
+in the C1C2WT spectrum is the contribution of the twisted 6-s-cis
+conformation of the retinal chromophore, which may co-exist
+with the planar 6-s-trans conformation in C1C2WT, since the
+wavelength of the spectral shoulder coincides with the absorption
+maxima of the C1C2GA mutant. However, from a structural
+point of view, the X-ray crystallographic structure of C1C2WT24
+clearly shows that the 6-s-trans conformation is precisely
+recognized by the surrounding protein side chains (Fig. 1), and
+the 6-s-cis conformation in the binding pocket of C1C2WT would
+give rise to steric clash between the methyl group at the 16th
+position of the retinal chromophore and the side chain of Thr198.
+In fact, the present mutation of T198G in the C1C2GA mutant
+was designed to avoid the steric clash, by reducing the molecular
+volume of the side chain of Thr198. Other microbial rhodopsins
+with available structures also possess relatively bulky side
+chains at the corresponding positions, and were thus found to
+bind the chromophore in the 6-s-trans conformation as well
+(see Supplementary Fig. 1). C1C2WT is therefore suggested to
+exclusively bind the 6-s-trans conformation, as observed in the
+other microbial rhodopsins, and thus the spectral shoulder
+at 450 nm is unlikely to be due to a mixture of the 6-s-cis and
+6-s-trans conformations.
+Decomposition of the absorption spectra of C1C2WT and
+C1C2GA into the spectral components also showed that the
+spectral width of the component corresponding to the shoulder at
+450 nm in the spectrum of C1C2WT is signiﬁcantly narrower,
+and is approximately half of that of C1C2GA (Supplementary
+Fig. 3 and Supplementary Table 3), thus disfavouring the
+possibility of the mixture of the 6-s-cis and 6-s-trans conformations in C1C2WT as well.
+The absorption maximum of puriﬁed AR3, lmax ¼ 552 nm, was
+also drastically shifted to 454 nm by mutations at only three
+positions, M128A/G132V/A225T (Fig. 3b). The spectral shift by
+B100 nm of the mutant, which is still functional as a
+photosensitive ion transporter (see below), is the largest ever
+produced by the molecular engineering of rhodopsins so far, and is
+4
+
+twice as large as the largest one previously obtained for a triple
+mutant of AR3, M128A/S151A/A225T (lmax ¼ 500 nm)16. The
+blue shift of the absorption spectrum can also be controlled by
+point mutations at the designed positions. The M128A/G132A/
+S151G/A225T and M128A/S151A/A225T mutants slightly reduced
+the shifts to lmax ¼ 471 and 491 nm, respectively (Supplementary
+Table 4), and single and double mutants at those positions covered
+the entire spectral range from 450–550 nm (Fig. 3b).
+The remarkably large shifts are attained by the non-additive
+synergy of the multiple mutations (Supplementary Table 4),
+which clearly indicates the involvement of the atomistically
+designed conformational changes induced by the coupled
+mutations in the present study. Especially, the simultaneous
+mutations at positions 128 and 132 (118 and 122 in HsBR,
+respectively, depicted in Fig. 2b) gave rise to large synergetic
+shifts. Moreover, the larger spectral shift of the M128A/G132A/
+S151G/A225T mutant of AR3 than the shift of the T198G/G202A
+mutant of C1C2 was predicted by the computational models, in
+which the C6–C7 bond of the chromophore in the former is
+signiﬁcantly more twisted, as described above (Supplementary
+Table 2 and Supplementary Fig. 2).
+Next we examined the photosensitive ion transport activities of
+the mutants. The C1C2GA mutant expressed in HEK293 cells
+showed a slightly decreased, but still large photocurrent, as
+compared with C1C2WT (Fig. 4a,b and Supplementary Fig. 4),
+and exhibited a blue-shifted action spectrum consistent with its
+absorption spectrum (Supplementary Fig. 5). C1C2GA, fused to
+enhanced green ﬂuorescent protein (EGFP), was well expressed in
+mouse brain neurons (Supplementary Fig. 6), and showed a
+signiﬁcantly larger photocurrent (Fig. 4c,d) with light at a shorter
+wavelength (445 nm) which, in contrast, gives rise to a smaller
+photocurrent for C1C2WT (Supplementary Fig. 7). Indeed, the
+optical activation of C1C2GA at 445 nm was sufﬁcient to evoke
+the neural spikes ensuring the proper function in neurons
+(Fig. 4e). The photocurrents of the M128A/G132V/A225T
+mutant of AR3 as well as the wild type were also examined, by
+measuring the light-induced pH changes of the proteins
+expressed in E. coli (Supplementary Fig. 8a). For the mutant,
+we found a directionally inverted photocurrent, presumably due
+to structural changes of the retinal chromophore such as the
+rotation and/or a position shift of the b-ionone ring induced by
+the mutations (to be reported and discussed further elsewhere).
+The action spectra of the magnitude of pH change clearly showed
+that, similar to the absorption spectra, the activity of the pH
+change of the mutant is largely enhanced in the shorter
+wavelength region around 450 nm and is signiﬁcantly reduced
+around 550 nm, where the wild-type exhibits the maximal activity
+(Supplementary Fig. 8b).
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+0
+
+GA
+
+300
+200
+100
+0
+–100
+–200
+–300
+–400
+–500
+
+500 1,000 1,500 2,000
+Time (ms)
+
+Peak
+Current density
+(pA/pF)
+
+Current (pA)
+
+Current (pA)
+
+WT
+400
+200
+0
+–200
+–400
+–600
+–800
+–1,000
+
+30
+20
+10
+0
+
+0
+
+500
+
+1,000 1,500 2,000
+Time (ms)
+
+445 nm
+
+546 nm
+
+575 nm
+
+WT
+
+GA
+
+589 nm
+50 pA
+
+–400
+
+500 ms
+
+–200
+100 ms, 1 Hz 100 ms, 2 Hz 100 ms, 1 Hz 100 ms, 1 Hz 100 ms, 1 Hz
+
+–100
+0
+10.7 1.5 10.9 2.2 12.7 2.5 6.2 2.1 (mW)
+445
+
+549
+
+575
+
+589
+
+2s
+
+(nm)
+
+20 mV
+
+ΔpA
+
+–300
+
+Figure 4 | Channel properties of the C1C2GA mutant in HEK cells and mouse neurons. (a) Photocurrents of C1C2WT and its GA mutant. Photocurrents
+in C1C2-expressing HEK293 cells were measured at 16 different holding potentials. (b) The peak amplitudes of the photocurrents, normalized by the cell’s
+input capacitance. Values are means and s.e.m. of 8–10 experiments. (c,d) The peak amplitudes (c) and photocurrents (d) of the C1C2GA mutant in
+mouse neurons. (e) Current-clamp mode recording of C1C2GA, using light pulses at different wavelengths (100 ms, 1–2 Hz).
+
+Crystal structure of the C1C2GA mutant. The atomistically
+designed structural model that created the blue-shifted spectrum
+was veriﬁed by solving the crystal structure of the C1C2GA
+mutant. We expressed, puriﬁed and crystallized C1C2GA as
+previously described24, and obtained yellow crystals in the lipidic
+cubic phase under neutral pH conditions (pH 7.0; Fig. 5a,b). The
+structure was determined by the molecular replacement method,
+using the coordinates of C1C2WT (PDB ID: 3UG9)24, and
+reﬁned to 2.5 Å resolution (Table 1). As expected, the overall
+structure of C1C2GA at pH 7.0 is almost identical to that of
+C1C2WT at pH 6.0 (root mean squared deviation of 0.66 Å over
+all Ca atoms; Fig. 5b), except for the protonation states of
+titratable groups, the amino-terminal (N-terminal) segment, and
+the retinal-binding pocket.
+Since the pH of the crystallization conditions was different, the
+protonation states of several titratable residues were altered. We
+found that the pH differences in the crystallization conditions
+caused changes in the protonation states of Glu122, Asp40, His44
+and/or His47. As a consequence, Glu122, located on the
+extracellular side of TM2, lost the hydrogen bond with His173
+(Supplementary Fig. 9). Since the side chain of Glu122 is
+completely exposed to the bulk solvent, and the approximate pKa
+of Glu122 calculated by PROPKA is 5.4, Glu122 may be
+deprotonated under the neutral pH conditions. On the basis of
+the crystal structure of C1C2WT at pH 6.0, a previous study
+suggested that the hydrogen bond between Glu122 and His173
+contributes to the formation of the intracellular channel gate 3.
+Thus, we also assumed that Glu122 is deprotonated and exposed
+to the bulk solvent, at least in the ground state under
+physiological conditions, and its contribution to the formation
+of the channel gate is smaller than previously expected.
+The new feature of a binding site of an ion putatively assigned
+to an endogenous Zn2 þ appeared at the N-terminal segment in
+the crystal structure under the neutral pH conditions (Fig. 5c and
+Supplementary Fig. 10). The electron density map of C1C2GA
+clearly showed the N-terminal 10 residues (PDYVFHRAHE),
+which were disordered in the previous C1C2WT structure
+
+(Supplementary Fig. 10). These N-terminal residues form a short
+helix, which is located near the extracellular side of transmembrane helix 2 and extracellular loop 1 (Fig. 5b). Notably, Asp40,
+His44 and His47 on the N-terminal helix coordinate a cation with
+Asp142 on ECL1 (Fig. 5c and Supplementary Fig. 10). Owing to
+the strong electron density and the tetrahedral coordination by
+the His and Asp residues, this cation is most likely an endogenous
+Zn2 þ ion. As far as we know, this is the ﬁrst evidence to suggest
+that a putative Zn2 þ ion is bound to the extracellular side
+of ChR, and future studies will reveal the physiological role
+of this ion.
+At the binding pocket around the b-ionone ring, signiﬁcant
+changes in the electron density due to the mutations were
+detected. In contrast to C1C2WT, the electron density of
+C1C2GA clearly indicated the rotation of the b-ionone ring
+(Supplementary Fig. 11). The space where the C17 methyl group
+resides in C1C2WT becomes occupied by the methyl group of the
+alanine residue introduced by the mutation, and instead the
+C17 methyl group occupies the pocket formed by the threonine to
+glycine mutation. The C5 ¼ C6–C7 ¼ C8 dihedral angle changes
+from 177.7° to  31.4° (counterclockwise, positive), and consequently the retinal conﬁguration changes from 6-s-trans to 6-s-cis.
+The atomic resolution structure is in good agreement with the
+calculated model (Supplementary Fig. 12), and it strongly
+supports the present design principle that the simultaneous
+double mutations at positions 198 and 202 in C1C2 (118 and 122
+in HsBR, respectively) induce the rotation of the b-ionone ring,
+which leads to the signiﬁcant blue-shift of the absorption
+spectrum.
+Applicability of the design principle. The molecular modelling
+described above suggested that the design principle that guided
+us to produce the blue-shifted colour variants of C1C2 and
+AR3 is also applicable to other microbial rhodopsins as well.
+Therefore, we next measured the absorption spectra of puriﬁed
+mutants of other proton pump microbial rhodopsins, archaeal
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+5
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+Table 1 | Data collection and reﬁnement statistics.
+WT
+
+GA
+D142
+
+50 μm
+
+50 μm
+
+C1C2 GA
+D40
+
+H44
+
+Zn2+
+
+C
+
+H47
+
+K296
+
+G198
+17
+16
+
+P266
+
+A202
+
+18
+
+6-s-cis
+retinal
+
+F269
+Retinal
+
+N
+G198
+
+P266
+
+6-s-cis
+retinal
+A202
+
+Grey: C1C2WT
+Green: C1C2GA
+
+Data collection
+Space group
+Cell dimensions
+a, b, c (Å)
+Resolution (Å)*
+Rsym or Rmerge
+I/sI
+Completeness (%)
+Redundancy
+CC(1/2)w
+Reﬁnement
+Resolution (Å)
+No. of reﬂections
+Rwork/Rfree
+No. of atoms
+Protein
+Ligands
+Water
+B-factors
+Protein
+Ligands
+Water
+r.m.s. deviations
+Bond lengths (Å)
+Bond angles (°)
+
+C2221
+59.6, 142.4, 92.2
+50.0–2.50 (2.56–2.50)
+14.8 (175.4)
+11.8 (1.42)
+99.9 (100.0)
+9.8 (10.0)
+99.9 (62.1)
+
+37.1–2.50 (2.69–2.50)
+13941
+22.3/24.1 (30.0/36.6)
+2,259
+78
+19
+56.3
+60.1
+51.6
+0.003
+0.726
+
+r.m.s., root mean squared.
+*Highest-resolution shell is shown in parentheses.
+wCC1/2 values were calculated using the programme XDS.
+
+F269
+
+Figure 5 | X-ray crystallography of the C1C2GA mutant. (a) Photographs
+of C1C2WT (left) and C1C2GA mutant (right). (b) Side view of the
+superimposed structures of C1C2WT (grey) and C1C2GA (green). The
+regions around the putative Zn2 þ -binding site and the b-ionone ring of the
+retinal molecule are highlighted in the blue and yellow rectangles,
+respectively. The N-terminal region only seen in C1C2GA is coloured blue.
+The putative Zn2 þ , depicted by a cpk model, is coloured pink, and retinal
+molecules, depicted by stick models, are coloured grey (C1C2WT) and
+yellow (C1C2GA), respectively. (c) Magniﬁed view of the blue highlighted
+region in b. Pink spheres and black dashed lines represent Zn2 þ and
+hydrogen bonds, respectively. (d,e) Magniﬁed views of the yellow
+highlighted region in b, in which the retinal molecules and surrounding
+residues are shown as stick models (d) and cpk models (e).
+
+bacteriorhodopsin from Haloquadratum walsbyi (HwBR) and
+eubacterial rhodopsin from Gloeobacter violaceus (GR), engineered based on the same design principle (Fig. 6a,b and
+Supplementary Table 5). The mutants of HwBR, an orthologue of
+AR3, showed a large blue shift similar to those of AR3. Furthermore, a phylogenetically distant eubacterial GR from the
+archaeal rhodopsins (Fig. 6c) also produced similar large blue
+shifts by the mutations. The similarity of the spectral shifts,
+together with the blue shifts obtained for the mutant ChR C1C2,
+seen above, indicates the universality of the molecular mechanism
+underlying the observed spectral shifts, and consequently the high
+applicability of the rational approach across species separated by
+long evolutionary distances (Fig. 6c).
+Discussion
+In the present study, colour variants with large spectral shifts
+were created by altering the conformation of the chromophore,
+which is a novel and different strategy from that of changing
+6
+
+the electrostatic environment surrounding the chromophore,
+employed in previous studies of retinal-binding proteins18,23,44,45.
+Extensive mutations are not appropriate for producing a large
+spectral shift of the membrane proteins used as optogenetics
+tools. The b-ionone ring of the chromophore resides in the very
+hydrophobic membrane environment, and the introduction of
+highly polar groups to change the electrostatic environment or
+poorly packed groups in this region can easily damage the protein
+stability. Any changes in the electrostatic environment around the
+Schiff base group of the chromophore, which is situated in the
+middle of an ion channel, are also limited for preserving the ion
+transport functionalities, which require precise electrostatic
+tuning of the ion channels in the hydrophobic membrane
+environment. In fact, although a directed evolution experiment
+recently showed that a few combinatory mutations in GR
+generate blue shifts of absorption spectra by maximally 80 nm,
+the mutations that created shifts of more than 50 nm were found
+to abolish the proton pump activity46. The high spatial precision
+of the atomistic design in the present study minimized
+unnecessary modiﬁcations that could lead to loss of ion transport function. Therefore, it was possible to design the synergetic
+combinatory mutations in the highly packed hydrophobic region
+around the b-ionone ring, to give rise to the well-controlled
+conformational changes that remarkably alter the absorption
+spectra yet maintain the photosensitive ion transport activities.
+The use of modiﬁcations in the region far from the ion channel
+also leaves room for further engineering to change other
+properties, such as channel characteristics and protein stability.
+The present atomistic design driven by the physicochemical
+principle successfully identiﬁed the universality of molecular
+recognition for ligand binding, which can be exploited to
+extensively create blue-shifted colour variants of analogous
+microbial rhodopsins (Fig. 6). Furthermore, the present design
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+(GR)
+
+1.0
+
+487 nm
+M126A/
+G130V
+
+552 nm
+WT
+
+0.5
+
+0.0
+400
+
+450
+500
+550
+Wavelength (nm)
+
+600
+
+Absorbance (OD)
+
+Absorbance (OD)
+
+(HwBR)
+470 nm
+M126A/
+G130V/
+A223T
+
+1.0
+
+474 nm
+M158A/
+G162V/
+A256T
+
+499 nm
+M158A/
+G162V
+
+540 nm
+WT
+
+0.5
+
+0.0
+400
+
+450
+500
+550
+Wavelength (nm)
+
+600
+
+Ion channels
+PsChR
+CrChR2
+VcChR
+
+NaR
+Eubacterial
+H+ pumps
+
+CrChR1
+
+XR
+TR
+
+Cl– pumps
+
+NpHR SrHR
+GR
+HvHR
+ActR
+HwHR
+HsHR
+ESR
+HsSRII
+Sensors HvSRII
+PR
+NpSRII
+LR
+HvBR
+AR
+HwBR
+HsBR
+AR3
+Eukaryotic H+ pumps
+
+Archaeal H+ pumps
+
+Figure 6 | Absorption spectra and phylogenetic tree of HwBR and GR. (a,b) Absorption spectra of wild-type and colour variants of HwBR (a) and GR (b).
+The spectra obtained in the solutions containing 1 M NaCl and 0.05% DDM, with pHs adjusted to 7.0 with 50 mM Tris-HCl. (c) Phylogenetic tree of
+microbial opsins.
+
+sheds light on the underlying molecular mechanism of the
+signiﬁcantly blue-shifted action spectra of the recently
+isolated ChRs from Platymonas subcordiformis and Tetraselmis
+cordiformis (PsChR and TcChR, lmax ¼ 430–40 nm)14,17. We
+aligned the sequences of several ChRs, including C1C2WT,
+C1C2GA, PsChR and TcChR, and found that among all known
+ChRs, only C1C2GA, PsChR and TcChR simultaneously have
+glycine residues at position 198 and alanine residues at position
+202 (Supplementary Fig. 13). This ﬁnding strongly suggests that
+the blue-shifted absorption spectra of PsChR and TcChR
+originated from the rotated b-ionone ring of the retinal
+chromophore, as in C1C2GA. It is noteworthy that no
+structures of microbial rhodopsins from natural sources that
+bind the retinal chromophore in the 6-s-cis conformation have
+been found (see Supplementary Fig. 1). The hypothesis of the 6-scis conformation of the retinal chromophores in PsChR and
+TcChR may therefore provide novel insight into the architectures
+of the naturally evolved microbial rhodopsins. The evolutionary
+view also supports our physicochemical design principle to create
+the blue-shifted optogenetics tools.
+Previously, a triple mutant, M128A/S151A/A225T, of AR3
+with a blue shift by B50 nm (lmax ¼ 500 nm) was heuristically
+found, and the shift was tentatively interpreted to be attributed to
+rotation of the b-ionone ring based on QM/MM modelling16.
+However, much more drastic blue shifts of up to 100 nm with a
+threefold larger synergetic effect (Supplementary Table 4) were
+induced by the simultaneous double mutations at positions 128
+and 132 (198 and 202 in C1C2), which were absent in the
+previous mutant and were ﬁrst introduced in the present study.
+The observation of the signiﬁcantly larger shifts indicates that the
+simultaneous double mutations at positions 128 and 132 are
+required for the controlled rotation of the b-ionone ring, which
+was veriﬁed by the QM/MM free energy calculation and the X-ray
+
+crystallography in the present study. However, the moderate blue
+shift without the simultaneous double mutations in the previous
+study is not due to the rotation of the b-ionone ring, but to
+uncontrolled structural changes.
+In optogenetics applications, the colour variants developed in
+the present study can be employed for simultaneous neural
+activation and activity imaging47–50 in addition to dual
+activation11–17. The absorption spectra blue-shifted to
+B450 nm with the steep decay in the red edges signiﬁcantly
+widens the no-absorbance region that can be utilized for the
+activation of red ﬂuorescent proteins for imaging of calcium ions,
+and thus are expected to improve and augment the simultaneous
+manipulation/imaging techniques.
+The mechanistic generality underlying the design of the blueshifted mutants established in the present study permits the
+application of the same design principle for the development of
+colour variants of other microbial rhodopsins. Although the
+applicability of equivalent mutants of various microbial rhodopsins as optogenetics tools is not trivial, since the mutations can
+affect other properties in vivo such as expression level, protein
+stability and photocurrent, the present set of mutations represents
+a promising ﬁrst step toward the creation of mutants with
+signiﬁcant spectral shifts, which can subsequently be subjected to
+further maturation for the development of colour variants
+working as optogenetics tools.
+The present study demonstrated that molecular conformational design at atomic resolution, achieved by accurate hybrid
+molecular simulations and high resolution X-ray crystallography,
+can create novel variants that are unattainable by conventional
+rational design. The atomistic design will be a powerful approach
+to engineer various biotechnological protein tools with complex
+functionalities, which require precise control of the molecular
+structures by the mutations.
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+7
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+Methods
+Molecular simulations. HsBR was used as the model system for AR3 and HwBR,
+as in the previous study16. The X-ray crystallographic structure of HsBR by
+Luecke et al.20 (PDB ID: 1C3W) was employed for the initial structure. For the
+C1C2 chimera, the recently solved X-ray crystallographic structure by Kato et al.24
+(PDB ID: 3UG9) was used. A monomer taken from the X-ray structure of each
+protein was embedded into a POPC bilayer, and then ﬁlled with water molecules
+and counter ions to neutralize the systems. The numbers of POPC molecules were
+125 for HsBR and 118 for C1C2, and those of water molecules were 11,160 for
+HsBR and 19,757 for C1C2. The titration states of Asp95, Asp115 and Glu204 in
+HsBR, and those of Glu122, Glu129, Glu136 and Asp195 in C1C2 were set to be
+protonated. These systems were equilibrated by classical molecular dynamics (MD)
+calculations. The G122V/M126A/S141G/A215T mutant of HsBR and the T198G/
+G202A mutant of C1C2 with the retinal protonated Schiff base (RPSB) in the
+6-s-cis form were also modelled from their corresponding intact proteins. The force
+ﬁeld parameters were obtained from the CHARMM22/CMAP parameter set51–55.
+For RPSB, the previously determined parameters were employed29,38,56–60. Longrange electrostatic interactions were treated with the particle mesh Ewald method.
+All MD simulations were performed with the NAMD programme package61.
+The equilibrated systems were further reﬁned by the QM/MM RWFE-SCF
+method41, which combines QM/MM calculations and classical MD simulations.
+Thus, this method is capable of removing possible structural artifacts of the
+modelled mutations through sufﬁcient thermal relaxation by MD simulations,
+while maintaining the high accuracy of the structural determination of the
+electronically complex chromophore with QM treatment (Supplementary Fig. 14).
+The QM region consists of the side chain of Lys216 covalently binding RPSB with a
+boundary at Cb–Cg, Arg82 at Cb–Cg, Asp85 at Ca–Cb and Asp212 at Ca–Cb, and
+three water molecules in the binding pocket (Wat401, Wat402 and Wat406) for
+HsBR. These QM atoms in HsBR were kept ﬁxed in all of the classical MD
+trajectory calculations (that is, even in equilibration runs) to maintain the
+hydrogen bond network in this region. RPSB covalently bound to Lys296, with a
+boundary at Cd-Ce, was chosen as the QM region for C1C2. Hydrogen atoms were
+employed for the link atoms capping the QM–MM boundaries. The B3LYP
+functional was used for the QM/MM calculation in the QM/MM RWFE-SCF
+geometry optimization. We employed the 6–31 þ G** basis set for the carboxylate
+anion groups and water molecules in HsBR, 6–31G for the terminal CH3 groups
+involving link atoms, and 6–31G** for the others. In each cycle of sequential
+samplings by the classical MD simulations in the QM/MM RWFE-SCF free energy
+geometry optimizations, equilibrium simulations of 3 ns for HsBR and 4 ns for
+C1C2 were obtained, and the conformational samples from the last 2 ns for both
+HsBR and C1C2 were employed for the statistical averages. The sufﬁciently
+reweighted averages41 were conﬁrmed at the last steps of the free energy
+optimizations. The convergence criterion of the geometry optimization of the free
+energy surface for HsBR was set to 1.0  10  3 Hartree/Bohr for the largest
+component of the gradient of the QM region. For C1C2, the convergence criterion
+was decreased to 0.5  10  4 Hartree/Bohr, to improve the accuracy of the free
+energy calculation (see below). The QM/MM calculations were performed with a
+modiﬁed version of GAMESS62.
+To evaluate the relative stability of the 6-s-conformers, the free energy
+difference between the 6-s-trans and 6-s-cis conformers of the T198G/G202A
+mutant of C1C2 was calculated, according to the protocol described previously42.
+The optimized structure of the 6-s-trans T198G/G202A mutant of C1C2 was
+obtained by the same procedure as for the 6-s-cis conformer (Supplementary
+Table 2). The QM–MM interaction component of the free energy difference
+between these conformers was calculated using the Bennett acceptance ratio
+method63 (BAR). In the free energy calculation, the structural interpolation of the
+QM region was divided into the rotation around the C6–C7 bond by 140° and the
+remaining part. The rotation part was further divided into 15 points (every 10°
+from 0 to 140°), and the remaining part was also linearly divided into 10 points.
+The atomic charges of the QM atoms were linearly changed during the C6–C7
+rotation, and were kept ﬁxed during the calculation in the remaining part. An MD
+calculation for 40–60 ns was performed at each point, and 20,000 conﬁgurations
+from the last 10 ns of the trajectory were used for the free energy difference
+calculation with BAR. The total free energy difference between conformers was
+obtained by adding the QM internal energy component of the free energy to the
+QM–MM interaction component. The calculated free energy difference,
+ 1.1 kcal mol  1, comprised the internal contribution of  2.0 kcal mol  1
+coming solely from the structural difference of the chromophore, and
+0.9 kcal mol  1 from the interaction between the chromophore and the
+surrounding proteins. The free energy difference from the vibrational zero-point
+energy and the vibrational entropy was ignored, because the contribution is
+expected to be minor and it exhibited poor convergence behaviour.
+
+Protein expression and puriﬁcation of C1C2WT and C1C2GA. The C1C2WT
+and C1C2GA expression plasmids were constructed as previously described24.
+Virus-infected Sf9 insect cells were cultured in Sf900II (Invitrogen) at 27 °C for
+24 h, and then the temperature was reduced to 20 °C. Cells were harvested 72 h
+after infection. The pellets were disrupted by two passages through a microﬂuidizer
+at 15,000 p.s.i., and were resuspended in a buffer containing 300 mM NaCl, 50 mM
+Tris-HCl, pH 8.0, 5% glycerol and 0.1 mM phenylmethylsulfonyl ﬂuoride. The
+8
+
+preparation of the crude membranes and the puriﬁcation of the proteins were
+performed essentially according to the previously described methods24. Brieﬂy, the
+cell membranes were solubilized by n-dodecyl-b-D-maltoside (DDM) with
+cholesteryl hemisuccinate (CHS) and puriﬁed by chromatography on Ni2 þ afﬁnity
+and size-exclusion columns. Peak fractions were collected, concentrated to
+B10 mg ml  1 and stored at  80 °C until use.
+Crystallization of C1C2GA. C1C2 was mixed with monoolein (Sigma) in a 2:3
+protein to lipid ratio (w/w). Aliquots (100 nl) of the protein-LCP mixture were
+spotted on a 96-well sandwich plate and overlaid by 1 ml of precipitant solution by
+the crystallization robot, mosquito LCP (TTP LabTech). Crystals were obtained in
+28% (w/v) PEG500DME, 100 mM HEPES-NaOH, pH 7.0, 220 mM Li2SO4 and
+10 mM ATP. All crystals were incubated for 2–3 weeks in the dark. They were
+harvested using micromounts (MiTeGen), and were ﬂash-cooled in liquid nitrogen
+without any additional cryoprotectant.
+C1C2 electrophysiology in HEK cells. HEK293 cells were cultured in DMEM,
+supplemented with 10% fetal bovine serum, on poly-lysine-coated glass-bottom
+culture dishes (Matsunami). The cells were transfected with 1 mg of the expression
+plasmid for GFP-tagged C1C2WT or GFP-tagged C1C2GA, using Fugene6 (Promega). After 30 h, the cells were placed under an inverted microscope (IX-71,
+Olympus), in a bath solution containing 140 mM NaCl, 1 mM CaCl2, 2 mM MgCl2,
+10 mM HEPES and 5 mM glucose (pH 7.4 with NaOH). A borosilicate patch
+pipette (Harvard Apparatus) was ﬁlled with a pipette solution, containing
+140 mM KCl, 5 mM EGTA, 2 mM MgCl2 and 10 mM HEPES (pH 7.2 with KOH).
+Photocurrents were measured in the whole-cell conﬁguration. The cells were
+held at a membrane potential of  80 mV and depolarized by 10 mV voltage steps
+up to þ 70 mV. The light-induced currents were activated 200 ms after the
+depolarization step, by exposure to 442 nm or 470 nm light for 1,000 ms, elicited
+with an argon lamp coupled to a Polychrome V monochromator (Till Photonics).
+Photocurrents were measured with an Axopatch 200B ampliﬁer (Axon CNS,
+Molecular Devices) connected to an A/D converter, Digidata 1440 (Axon),
+controlled by the pClamp10.4 software (Axon). Absorption spectra of C1C2WT
+and the mutant were determined by measuring the photocurrent at  80 mV. Light
+illuminations were shifted from 340 to 580 nm at 6-nm intervals. Photocurrent
+intensities were corrected at each wavelength by the power density measured with
+thermopile (SSC, Japan), and then normalized to the maximum photocurrent. The
+maximum absorption was estimated at the graph peak. All data were analysed by
+the pClampﬁt10.4 (Axon CNS) and Origin (Light Stone) software.
+C1C2 electrophysiology in neurons. Seven-week-old C57BL/6J mice were injected with AAV-CMV-C1C2-2A-mCherry, and killed at 10 weeks of age. All AAV
+vectors were produced using the AAV Helper-Free System (Agilent Technologies
+Inc., Santa Clara, CA, USA), and puriﬁed basically according to the methods
+previously reported64. In brief, HEK293 cells were transfected with a pAAV vector
+plasmid that included a gene of interest, pHelper, and pAAV-RC (serotype DJ;
+purchased from Cell Biolabs Inc., San Diego, CA, USA), using the standard calcium
+phosphate method. Three days later, the transfected cells were collected and
+suspended in artiﬁcial cerebrospinal ﬂuid (124 mM NaCl, 3 mM KCl, 26 mM
+NaHCO3, 2 mM CaCl2 1 mM MgSO4, 1.25 mM KH2PO4, 10 mM D-glucose). After
+four freeze–thaw cycles, the cell lysate was treated with benzonase nuclease (Merck,
+Darmstadt, Germany) at 45 °C for 15 min, and centrifuged twice at 16,000g for
+10 min. The supernatant was used as the virus-containing solution. To measure the
+titre of the puriﬁed virus dissolved in artiﬁcial cerebrospinal ﬂuid, quantitative PCR
+was performed. The virus was stored at  80 °C in aliquots until use.
+Surgeries for AAV injections were conducted under pentobarbital anaesthesia
+(50 mg kg  1, intraperitoneal), using a stereotaxic instrument (David Kopf
+Instruments, Tujunga, CA, USA). Seven-week-old mice were injected
+stereotaxically into the LHA with recombinant AAV-CMV-C1C2-2A-mCherry
+(600 nl per injection, 2  1011 copies ml  1) with a glass micropipette and an air
+pressure injector system (Pneumatic PicoPump; World Precision Instruments Inc.,
+Sarasota, FL, USA). Injection sites were as follows: bregma 1.4 mm, lateral
+±0.7 mm, ventral  5.0 mm, for AAV-CMV-C1C2-2A-mCherry. Three weeks
+after the AAV injection, the mice were killed to perform electrophysiological
+experiments.
+Brains were quickly isolated in ice-cold cutting solution, consisting of 280 mM
+sucrose, 2 mM KCl, 10 mM HEPES, 0.5 mM CaCl2, 10 mM MgCl2, 10 mM glucose,
+pH 7.4 with NaOH, bubbled with 100% O2, and immediately cut coronally into
+350 mm-thick slices with a microtome (VTA-1200S, Leica Microsystems, Wetzlar,
+Germany). Slices containing the LHA were transferred to an incubation chamber
+ﬁlled with a physiological solution, containing 135 mM NaCl, 5 mM KCl, 1 mM
+CaCl2, 1 mM MgCl2, 10 mM HEPES, 10 mM glucose, pH 7.4 with NaOH, bubbled
+with 100% O2. The brain slices were then transferred to a recording chamber
+(RC-27L, Warner Instruments, Hamden, CT, USA) on a ﬂuorescence microscope
+stage (BX51WI; Olympus, Tokyo, Japan). The ﬂuorescence microscope was
+equipped with an infrared camera (C2741-79; Hamamatsu Photonics, Hamamatsu,
+Japan) for infrared differential interference contrast imaging and a CCD camera
+(IK-TU51CU, Olympus, Tokyo, Japan). Neurons with mCherry ﬂuorescence were
+subjected to electrophysiological recordings. Recordings were performed with an
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+Axopatch 200B ampliﬁer (Molecular Devices LLC, Sunnyvale, CA, USA), using a
+borosilicate pipette (GC150-10; Harvard Apparatus, Holliston, MA, USA) prepared
+by a micropipette puller (P-1000; Sutter Instruments, Novato, CA, USA), ﬁlled with
+an intracellular solution (4–10 MO) consisting of 138 mM K-gluconate, 8 mM
+NaCl, 10 mM HEPES, 0.2 mM EGTA-Na3, 2 mM MgATP and 0.5 mM Na2GTP,
+pH 7.3 with KOH. During recordings, cells were superfused with the extracellular
+solution at a rate of 1.6 ml min  1, using a peristaltic pump (Dynamax; Rainin
+Instrument LLC, Oakland, CA, USA). For optogenetic stimulation, blue light
+(475±17.5 nm, 2.5 mW) was generated by a SPECTRA light engine (Lumencor).
+The output signal was low-pass ﬁltered at 5 kHz and digitized at 10 kHz. Data were
+recorded on a computer through a Digidata 1322A A/D converter, using the
+pClamp software (version 10; Molecular Devices). Traces were processed for
+presentation using the Origin 9 software (Light Stone, Tokyo, Japan) and the
+Canvas14 software (ACD Systems, Victoria, Canada).
+Protein expression and puriﬁcation of proton pump microbial rhodopsins. The
+AR3, HwBR and GR expression plasmids were constructed as previously described16. The mutant genes were constructed by PCR, using a QuikChange SiteDirected Mutagenesis Kit (Stratagene, La Jolla, CA, USA) as described previously65.
+All constructed plasmids were analysed using an automated sequencer (ABI 3100)
+to conﬁrm the expected nucleotide sequences. The Escherichia coli DH5a strain
+was used as the host for DNA manipulation.
+For protein expression, transformed E. coli BL21(DE3) cells harbouring the
+plasmid were initially grown at 30 °C in 100 ml LB medium, supplemented with
+ampicillin (ﬁnal concentration 50 mg ml  1), and were directly inoculated into
+2 l LB medium containing ampicillin. The cells were grown overnight on a rotary
+shaker (MIR-220R, Sanyo Electric Co., Ltd., Osaka, Japan) at 18 °C, in medium
+containing 0.1% L-arabinose for AR3 and HwBR or 0.5 mM isopropyl-b-Dthiogalactoside for GR and 5 mM all-trans retinal. The cells were harvested by
+centrifugation at 4 °C, resuspended in buffer (50 mM MES, pH 6.5) containing 1 M
+NaCl and disrupted by sonication or passage through a French press. The
+preparation of crude membranes and the puriﬁcation of proteins were performed
+essentially by the previously described method66. In brief, the cell membranes were
+solubilized by n-dodecyl-b-D-maltoside (DDM, Dojindo Lab, Kumamoto, Japan)
+and puriﬁed by chromatography on an Ni2 þ afﬁnity column (GE Healthcare UK,
+Amersham Place, England). When necessary, the samples were further puriﬁed by
+anion exchange chromatography, as described previously66. The puriﬁed sample
+was concentrated and buffer exchanged to buffer A (1 M NaCl, 50 mM Tris-Cl and
+0.05% DDM, pH 7.0), using an Amicon Ultra ﬁlter (Millipore, Bedford, MA, USA).
+The proton transport activity was measured by monitoring pH changes, using a
+glass electrode. The E. coli cells expressing AR3 were harvested by centrifugation
+(4,800g, 3 min), and then were washed three times and resuspended in the solvent for
+the measurement (100 mM NaCl). A 7.5-ml portion of the cell suspension was kept
+in darkness, and then illuminated with the output of a 100 W Xe arc lamp (LM103,
+Asahi Spectra, Japan) through a long-pass glass ﬁlter for 5 min at a speciﬁc
+wavelength region. The power of the light was controlled by ND ﬁlters (0.0625, 0.125,
+0.25, 0.5, 1, 2.5 and 5 W) to measure the power dependence of the pumping activities.
+For the measurement of the action spectra, interference ﬁlters (FWHM ¼ 10 nm)
+were used to obtain the light at speciﬁc wavelengths, by ﬁltering the output of the
+same Xe arc lamp. The photon ﬂux of the light was measured by a calibrated multichannel detector (IRRAD-C2000 þ , Ocean Optics, USA), and the initial slopes at the
+speciﬁc wavelengths were measured to obtain the action spectrum.
+
+References
+1. Deisseroth, K. Controlling the brain with light. Sci. Am. 303, 48–55 (2010).
+2. Deisseroth, K. Optogenetics. Nat. Methods 8, 26–29 (2011).
+3. Ernst, O. P. et al. Microbial and animal rhodopsins: structures, functions, and
+molecular mechanisms. Chem. Rev. 114, 126–163 (2014).
+4. Zhang, F. et al. The microbial opsin family of optogenetic tools. Cell 147,
+1446–1457 (2011).
+5. Aston-Jones, G. & Deisseroth, K. Recent advances in optogenetics and
+pharmacogenetics. Brain Res. 1511, 1–5 (2013).
+6. Boyden, E. S., Zhang, F., Bamberg, E., Nagel, G. & Deisseroth, K. Millisecondtimescale, genetically targeted optical control of neural activity. Nat. Neurosci.
+8, 1263–1268 (2005).
+7. Li, X. et al. Fast noninvasive activation and inhibition of neural and network
+activity by vertebrate rhodopsin and green algae channelrhodopsin. Proc. Natl
+Acad. Sci. USA 102, 17816–17821 (2005).
+8. Ishizuka, T., Kakuda, M., Araki, R. & Yawo, H. Kinetic evaluation of
+photosensitivity in genetically engineered neurons expressing green algae lightgated channels. Neurosci. Res. 54, 85–94 (2006).
+9. Chow, B. Y. et al. High-performance genetically targetable optical neural
+silencing by light-driven proton pumps. Nature 463, 98–102 (2010).
+10. Mattis, J. et al. Principles for applying optogenetic tools derived from direct
+comparative analysis of microbial opsins. Nat. Methods 9, 159–172 (2012).
+11. Zhang, F. et al. Red-shifted optogenetic excitation: a tool for fast neural control
+derived from Volvox carteri. Nat. Neurosci. 11, 631–633 (2008).
+12. Yizhar, O. et al. Neocortical excitation/inhibition balance in information
+processing and social dysfunction. Nature 477, 171–178 (2011).
+
+13. Prigge, M. et al. Colour-tuned channelrhodopsins for multiwavelength
+optogenetics. J. Biol. Chem. 287, 31804–31812 (2012).
+14. Govorunova, E. G., Sineshchekov, O. A., Li, H., Janz, R. & Spudich, J. L.
+Characterization of a highly efﬁcient blue-shifted channelrhodopsin from the
+marine alga Platymonas subcordiformis. J. Biol. Chem. 288, 29911–29922
+(2013).
+15. Lin, J. Y., Knutsen, P. M., Muller, A., Kleinfeld, D. & Tsien, R. Y. ReaChR: a
+red-shifted variant of channelrhodopsin enables deep transcranial optogenetic
+excitation. Nat. Neurosci. 16, 1499–1508 (2013).
+16. Sudo, Y. et al. A blue-shifted light-driven proton pump for neural silencing.
+J. Biol. Chem. 288, 20624–20632 (2013).
+17. Klapoetke, N. C. et al. Independent optical excitation of distinct neural
+populations. Nat. Methods 11, 338–346 (2014).
+18. Wang, W. et al. Tuning the electronic absorption of protein-embedded alltrans-retinal. Science 338, 1340–1343 (2012).
+19. Pebay-Peyroula, E., Rummel, G., Rosenbusch, J. P. & Landau, E. M. X-ray
+structure of bacteriorhodopsin at 2.5 angstroms from microcrystals grown in
+lipidic cubic phases. Science 277, 1676–1681 (1997).
+20. Luecke, H., Schobert, B., Richter, H.-T., Cartailler, J.-P. & Lanyi, J. K.
+Structure of bacteriorhodopsin at 1.55Å resolution. J. Mol. Biol. 291, 899–911
+(1999).
+21. Luecke, H., Schobert, B., Lanyi, J. K., Spudich, E. N. & Spudich, J. L. Crystal
+structure of sensory rhodopsin II at 2.4 angstroms: insights into color tuning
+and transducer interaction. Science 293, 1499–1503 (2001).
+22. Royant, A. et al. X-ray structure of sensory rhodopsin II at 2.1-Å resolution.
+Proc. Natl Acad. Sci. USA 98, 10131–10136 (2001).
+23. Shimono, K., Ikeura, Y., Sudo, Y., Iwamoto, M. & Kamo, N. Environment
+around the chromophore in pharaonis phoborhodopsin: mutation analysis of
+the retinal binding site. Biochim. Biophys. Acta 1515, 92–100 (2001).
+24. Kato, H. E. et al. Crystal structure of the channelrhodopsin light-gated cation
+channel. Nature 482, 369–374 (2012).
+25. Lin, J. Y., Lin, M. Z., Steinbach, P. & Tsien, R. Y. Characterization of engineered
+channelrhodopsin variants with improved properties and kinetics. Biophys. J.
+96, 1803–1814 (2009).
+26. Wang, H. et al. Molecular determinants differentiating photocurrent properties
+of two channelrhodopsins from Chlamydomonas. J. Biol. Chem. 284,
+5685–5696 (2009).
+27. Berndt, A., Lee, S. Y., Ramakrishnan, C. & Deisseroth, K. Structure-guided
+transformation of channelrhodopsin into a light-activated chloride channel.
+Science 344, 420–424 (2014).
+28. Schulten, K. & Hayashi, S. Quantum Effects in Biology Ch. 11 (Cambridge Univ.
+Press, 2014).
+29. Tajkhorshid, E., Baudry, J., Schulten, K. & Suhai, S. Molecular dynamics study
+of the nature and origin of retinal’s twisted structure in bacteriorhodopsin.
+Biophys. J. 78, 683–693 (2000).
+30. Rajput, J. et al. Probing and modeling the absorption of retinal protein
+chromophores in vacuo. Angew. Chem. Int. Ed. 49, 1790–1793 (2010).
+31. Watanabe, H. C., Mori, Y., Tada, T., Yokoyama, S. & Yamato, T. Molecular
+mechanism of long-range synergetic color tuning between multiple amino acid
+residues in conger rhodopsin. Biophysics. (Oxf). 6, 67–78 (2010).
+32. Ferré, N. & Olivucci, M. Probing the rhodopsin cavity with reduced retinal
+models at the CASPT2//CASSCF/AMBER level of theory. J. Am. Chem. Soc.
+125, 6868–6869 (2003).
+33. Wanko, M. et al. Calculating absorption shifts for retinal proteins:
+computational challenges. J. Phys. Chem. B 109, 3606–3615 (2005).
+34. Coto, P. B., Strambi, A., Ferré, N. & Olivucci, M. The color of rhodopsins at the
+ab initio multiconﬁgurational perturbation theory resolution. Proc. Natl Acad.
+Sci. USA 103, 17154–17159 (2006).
+35. Fujimoto, K., Hayashi, S., Hasegawa, J. & Nakatsuji, H. Theoretical studies on
+the color-tuning mechanism in retinal proteins. J. Chem. Theory Comput. 3,
+605–618 (2007).
+36. Okada, T. et al. The retinal conformation and its environment in
+rhodopsin in light of a new 2.2Å crystal structure. J. Mol. Biol. 342, 571–583
+(2004).
+37. Shimono, K., Iwamoto, M., Sumi, M. & Kamo, N. Effects of three characteristic
+amino acid residues of Pharaonis phoborhodopsin on the absorption
+maximum. Photochem. Photobiol. 72, 141–145 (2000).
+38. Hayashi, S. et al. Structural determinants of spectral tuning in retinal proteinsbacteriorhodopsin vs sensory rhodopsin II. J. Phys. Chem. B 105, 10124–10131
+(2001).
+39. Ren, L. et al. Molecular mechanism of spectral tuning in sensory rhodopsin II.
+Biochemistry 40, 13906–13914 (2001).
+40. Spudich, E. N. et al. A transporter converted into a sensor, a phototaxis
+signaling mutant of bacteriorhodopsin at 3.0Å. J. Mol. Biol. 415, 455–463
+(2012).
+41. Kosugi, T. & Hayashi, S. QM/MM reweighting free energy SCF for geometry
+optimization on extensive free energy surface of enzymatic reaction. J. Chem.
+Theory Comput. 8, 322–334 (2012).
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+9
+
+ARTICLE
+
+NATURE COMMUNICATIONS | DOI: 10.1038/ncomms8177
+
+42. Kosugi, T. & Hayashi, S. Crucial role of protein ﬂexibility in formation of a
+stable reaction transition state in an a-amylase catalysis. J. Am. Chem. Soc. 134,
+7045–7055 (2012).
+43. Takahashi, T. et al. Color regulation in the archaebacterial phototaxis receptor
+phoborhodopsin (sensory rhodopsin II). Biochemistry 29, 8467–8474 (1990).
+44. Soppa, J. et al. Bacteriorhodopsin mutants of Halobacterium sp. GRB. II.
+Characterization of mutants. J. Biol. Chem. 264, 13049–13056 (1989).
+45. Krebs, M. P., Mollaaghababa, R. & Khorana, H. G. Gene replacement in
+Halobacterium halobium and expression of bacteriorhodopsin mutants. Proc.
+Natl Acad. Sci. USA 90, 1987–1991 (1993).
+46. Engqvist, M. K. et al. Directed evolution of Gloeobacter violaceus rhodopsin
+spectral properties. J. Mol. Biol. 427, 206–220 (2015).
+47. Guo, Z. V., Hart, A. C. & Ramanathan, S. Optical interrogation of neural
+circuits in Caenorhabditis elegans. Nat. Methods 6, 891–896 (2009).
+48. Chang, Y. F., Arai, Y. & Nagai, T. Optogenetic activation during detector
+‘‘dead time’’ enables compatible real-time ﬂuorescence imaging. Neurosci. Res.
+73, 341–347 (2012).
+49. Ohkura, M., Sasaki, T., Kobayashi, C., Ikegaya, Y. & Nakai, J. An improved
+genetically encoded red ﬂuorescent Ca2 þ indicator for detecting optically
+evoked action potentials. PLoS ONE 7, e39933 (2012).
+50. Akerboom, J. et al. Genetically encoded calcium indicators for multi-color
+neural activity imaging and combination with optogenetics. Front. Mol.
+Neurosci. 6, 2 (2013).
+51. MacKerell, Jr. A. D., Feig, M. & Brooks, III C. L. Extending the treatment of
+backbone energetics in protein force ﬁelds: Limitations of gas-phase quantum
+mechanics in reproducing protein conformational distributions in molecular
+dynamics simulations. J. Comput. Chem. 25, 1400–1415 (2004).
+52. MacKerell, Jr. A. D. et al. All-atom empirical potential for molecular modeling
+and dynamics studies of proteins. J. Phys. Chem. B 102, 3586–3616 (1998).
+53. Feller, S. E., Gawrisch, G. & MacKerell, Jr. A. D. Polyunsaturated fatty acids in
+lipid bilayers: intrinsic and environmental contributions to their unique
+physical properties. J. Am. Chem. Soc. 124, 318–326 (2002).
+54. Schlenkrich, M., Brickmann, J., MacKerell, Jr. A. D. & Karplus, M. in Biological
+Membranes: A Molecular Perspective From Computation And Experiment. (eds
+Merz, K. M. & Roux, B. ) 31–81 (Birkhäuser, 1996).
+55. Beglov, D. & Roux, B. Finite representation of an inﬁnite bulk system: Solvent
+boundary potential for computer simulations. J. Chem. Phys. 100, 9050–9063
+(1994).
+56. Tajkhorshid, E., Paizs, B. & Suhai, S. Conformational effects on the proton
+afﬁnity of the Schiff base in bacteriorhodopsin: a density functional study.
+J. Phys. Chem. B 101, 8021–8028 (1997).
+57. Tajkhorshid, E. & Suhai, S. Inﬂuence of the methyl groups on the structure,
+charge distribution, and proton afﬁnity of the retinal Schiff base. J. Phys. Chem.
+B 103, 5581–5590 (1999).
+58. Nina, M., Roux, B. & Smith, J. C. Functional interactions in bacteriorhodopsin:
+a theoretical analysis of retinal hydrogen bonding with water. Biophys. J. 68,
+25–39 (1995).
+59. Baudry, J., Crouzy, S., Roux, B. & Smith, J. C. Quantum chemical and free
+energy simulation analysis of retinal conformational energetics. J. Chem. Inf.
+Comput. Sci. 37, 1018–1024 (1997).
+60. Hayashi, S. & Ohmine, I. Proton transfer in bacteriorhodopsin: structure,
+excitation, IR spectra, and potential energy surface analyses by an ab initio
+QM/MM method. J. Phys. Chem. B 104, 10678–10691 (2000).
+61. Phillips, J. C. et al. Scalable molecular dynamics with NAMD. J. Comput. Chem.
+26, 1781–1802 (2005).
+
+10
+
+62. Schmidt, M. W. et al. General atomic and molecular electronic structure
+system. J. Comput. Chem. 14, 1347–1363 (1993).
+63. Bennett, C. H. Efﬁcient estimation of free energy differences from Monte Carlo
+data. J. Comput. Phys. 22, 245–268 (1976).
+64. Inutsuka, A. et al. Concurrent and robust regulation of feeding behaviors and
+metabolism by orexin neurons. Neuropharmacology 85, 451–460 (2014).
+65. Sudo, Y., Yuasa, Y., Shibata, J., Suzuki, D. & Homma, M. Spectral tuning in
+sensory rhodopsin I from Salinibacter ruber. J. Biol. Chem. 286, 11328–11336
+(2011).
+66. Sudo, Y. et al. Characterization of a signaling complex composed of sensory
+rhodopsin I and its cognate transducer protein from the eubacterium
+Salinibacter ruber. Biochemistry 48, 10136–10145 (2009).
+
+Acknowledgements
+We thank A. Kurabayashi and Sawako Tabuchi for technical support, and the beamline
+staff members at BL32XU of SPring-8 (Hyogo, Japan) for technical help during data
+collection. We also thank Keiichi Inoue for assistance with the AR3 experiments. This
+work was ﬁnancially supported by grants from the Japanese Ministry of Education,
+Culture, Sports, Science and Technology to S.H. (25104004 and 25291034), to
+Y.S. (23687019) and to O.N. (24227004), the Programme for Promotion of Basic
+and Applied Researches for Innovations in Bio-oriented Industry and Science and
+Technology Research Promotion Program for Agriculture, Forestry, Fisheries and
+Food Industry to S.H. Some computations were performed at the Research Center for
+Computational Science, Okazaki, Japan.
+
+Author contributions
+H.E.K. prepared the mutants, performed the structural determination and measured the
+spectral properties of C1C2GA. R.T. helped to purify the C1C2GA protein. J.I. and
+A.D.M. performed electrophysiology in HEK cells. A.I. and A.Y. performed electrophysiology in mouse neurons. K.H. assisted with the data collection of C1C2GA. M.K.
+and S.S. performed the computational modelling, Y.S. performed the experiments on
+AR3, HwBR and GR, M.K. and S.H. designed the computational modelling and H.E.K.,
+M.K., S.H. and O.N. wrote the manuscript.
+
+Additional information
+Accession codes: Protein Data Bank (PDB). The data for C1C2GA have been deposited
+under the accession codes 4YZI.
+Supplementary Information accompanies this paper at http://www.nature.com/
+naturecommunications
+Competing ﬁnancial interests: The authors declare no competing ﬁnancial interests.
+Reprints and permission information is available online at http://npg.nature.com/
+reprintsandpermissions/
+How to cite this article: Kato, H. E. et al. Atomistic design of microbial opsin-based
+blue-shifted optogenetics tools. Nat. Commun. 6:7177 doi: 10.1038/ncomms8177 (2015).
+This work is licensed under a Creative Commons Attribution 4.0
+International License. The images or other third party material in this
+article are included in the article’s Creative Commons license, unless indicated otherwise
+in the credit line; if the material is not included under the Creative Commons license,
+users will need to obtain permission from the license holder to reproduce the material.
+To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
+
+NATURE COMMUNICATIONS | 6:7177 | DOI: 10.1038/ncomms8177 | www.nature.com/naturecommunications
+
+& 2015 Macmillan Publishers Limited. All rights reserved.
+
+

@@ -1,0 +1,2307 @@
+Deep Learning Reveals Persistent Individual Signatures in Bat Echolocation Calls of the Greater Leaf-nosed Bat
+Aoqiang Li, Wantao Huang, Xinyuan Xie, Weiming Wen, Liang Ji, Huijun Zhang, Chengyun Zhang, Jinhong Luo (2026). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.64898/2026.03.31.715443. doi:10.64898/2026.03.31.715443. Licence: cc-by-nc. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+1
+
+Deep Learning Reveals Persistent Individual Signatures in Bat Echolocation Calls of the
+
+2
+
+Greater Leaf-nosed Bat
+
+3
+
+Aoqiang Li1, #, Wantao Huang2, #, Xinyuan Xie2, #, Weiming Wen2, Liang Ji2, Huijun Zhang1,
+
+4
+
+Chengyun Zhang2, *, Jinhong Luo1, 3*
+
+5
+
+1
+
+6
+
+of Genetic Regulation and Integrative Biology, School of Life Sciences, Central China Normal
+
+7
+
+University, Wuhan 430079, China.
+
+8
+
+2
+
+9
+
+China
+
+Key Laboratory of Pesticide & Chemical Biology of Ministry of Education, Hubei Key Laboratory
+
+School of Electronics and Communication Engineering, Guangzhou University, Guangzhou, 510006,
+
+10
+
+3
+
+11
+
+Central China Normal University, Wuhan, 430079, China.
+
+12
+
+#
+
+13
+
+*Correspondence to: jluo@ccnu.edu.cn or cyzhang@gzhu.edu.cn
+
+Hubei International Science and Technology Cooperation Base for Ecology and Environment,
+
+These authors have contributed equally to this work and share the first authorship
+
+14
+15
+
+Abstract
+
+16
+
+Intraspecific variation is a prerequisite for natural selection and can manifest in various phenotypic
+
+17
+
+traits, including vocal signals. However, classifying individuals based on their vocalizations, or
+
+18
+
+acoustic individual identification (AIID), remains a significant challenge. This is particularly true for
+
+19
+
+species that use rapidly varying echolocation calls for orientation. Here, we demonstrate that deep
+
+20
+
+learning can overcome the limitation of traditional methods and reveal persistent individual
+
+21
+
+signatures within bat echolocation calls. We recorded echolocation calls from 34 individuals of the
+
+22
+
+greater leaf-nosed bat (Hipposideros armiger) under controlled laboratory conditions, with 19
+
+23
+
+individuals recorded repeatedly over three months. We show that a convolutional neural network
+
+24
+
+(CNN) dramatically outperforms a traditional method, achieving an average identification accuracy
+
+25
+
+of 84% for single calls and 91% for call sequences. In contrast, the traditional Discriminant
+
+26
+
+Functional Analysis method achieved accuracies of only 39% and 47%, respectively. Through
+
+27
+
+systematically altering the temporal structure of echolocation calls in input sequences, we found that
+
+28
+
+temporal patterning enhances individual classification accuracy, suggesting it contributes to the
+
+29
+
+encoding of individual-specific information. This study revealed that echolocation calls of H.
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+30
+
+armiger can contain stable, individual identity that were previously undetectable. Our findings
+
+31
+
+highlight the potential of deep learning for non-invasive AIID and provide a methodological basis for
+
+32
+
+future studies aiming to monitor animals in more dynamic environments.
+
+33
+
+Keywords: Acoustic communication, Artificial intelligence, Biomarker, Bioacoustics, Wildlife
+
+34
+35
+
+1 INTRODUCTION
+
+36
+
+Intraspecific variation in genetic traits can provide individuals with adaptive advantages to drive
+
+37
+
+natural selection 1. Individual identification serves as the cornerstone of ecological and evolutionary
+
+38
+
+research, providing critical insights into population dynamics, social structures, and movement
+
+39
+
+ecology 2–4. To date, individual identification and tracking in the wild have relied heavily on
+
+40
+
+conventional techniques like mark-recapture and telemetry 5–7. However, these methods suffer from
+
+41
+
+significant limitations: they are labor-intensive, invasive, and susceptible to observer bias or
+
+42
+
+behavioral alterations in the study subjects 8–10.
+
+43
+
+Bioacoustic signals represent a promising alternative approach for individual identification, given
+
+44
+
+that vocalizations encode individual-specific features through genetic, environmental, and cultural
+
+45
+
+influences 11–14. Acoustic individual identification (AIID), which involves identifying individuals by
+
+46
+
+their calls, eliminates the need for making physical contact with the individual, allows efficient
+
+47
+
+long-term monitoring, and reduces personnel costs. Early AIID implementations using traditional
+
+48
+
+machine learning, including support vector machines, Hidden Markov Models, or Discriminant
+
+49
+
+Function Analysis (DFA) 15–17, demonstrated conceptual promise but suffered critical constraints:
+
+50
+
+reliance on expert knowledge and experience, vulnerability to ambient noise contamination and
+
+51
+
+inter-class spectral overlap, constrained generalizability under small-sample conditions, and
+
+52
+
+performance degradation caused by low signal-to-noise ratios (SNR) 18,19. These limitations critically
+
+53
+
+impair identification fidelity, often resulting in classification accuracy that falls below 50%, which is
+
+54
+
+insufficient for robust ecological inference and restricts researchers to studying individuals only in
+
+55
+
+specific contexts.
+
+56
+
+Recent advances in deep learning, particularly Convolutional Neural Networks (CNNs), offers
+
+57
+
+paradigm-shifting capabilities for pattern recognition, garnering increased attention from ecologists
+
+58
+
+20–22
+
+59
+
+CNNs autonomously extract discriminative features through hierarchical learning of spectrotemporal
+
+. Unlike traditional machine learning approaches that rely on hand-crafted feature extraction,
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+60
+
+patterns, bypassing error-prone manual feature selection while maintaining robustness to acoustic
+
+61
+
+variability 23. Such tools can automate the analysis of various types of data, ranging from species
+
+62
+
+abundance to behavioral patterns and derived from multiple data sources such as images or audio
+
+63
+
+recordings, which are widely used by ecologists for automated species identification, environmental
+
+64
+
+monitoring, ecological modelling or behavioral studies 24,25. Moreover, the use of deep learning
+
+65
+
+methods for individual identification has also become a subject of heightened research involving
+
+66
+
+diverse taxa, such as humans, primates, and birds 26–29. However, most existing applications focus on
+
+67
+
+image-based individual identification, while the use of acoustic signals for individual identification
+
+68
+
+remains underdeveloped. A key unresolved question is whether deep learning is suitable for AIID,
+
+69
+
+considering the pronounced intra-individual variability in vocal signals in many taxa 20.
+
+70
+
+Bat echolocation calls are well-known for their remarkable plasticity, which vary across behavioral
+
+71
+
+tasks, environments, and time 30–33, thus representing a highly challenging case for robust AIID. The
+
+72
+
+high flexibility of their calls has led to enduring scientific controversy over whether bat echolocation
+
+73
+
+calls truly encode individual signatures 34,35. Additionally, the physical and ecological demands of
+
+74
+
+echolocation may impose evolutionary constraints on vocal inter-individual variability. Because
+
+75
+
+echolocation calls must maintain acoustic features optimized for target detection and spatial
+
+76
+
+navigation, the extent of inter-individual variability may be more limited than in many
+
+77
+
+non-echolocating species, where variability in vocal signatures is important for individual
+
+78
+
+recognition. Determining whether stable individual signatures can still be extracted under such
+
+79
+
+constraints represents a key challenge for acoustic individual identification in echolocating mammals.
+
+80
+
+Notably, stability does not imply invariance of acoustic signals, but rather the persistence of
+
+81
+
+individual-specific information despite substantial within-individual variability across time and
+
+82
+
+context. Addressing this question would help to reconcile the debate whether individual signatures in
+
+83
+
+echolocation calls exist, and if so, it can facilitate an application of AIID as a powerful tool for the
+
+84
+
+behavior and ecology in a wide range of vocally active species.
+
+85
+
+Here, we first conducted a systematic literature search of peer-reviewed studies applying deep
+
+86
+
+learning to the acoustic identification of species and individuals, establishing baselines to evaluate
+
+87
+
+the performance of our models. We demonstrate that, comparable to species-level classification, deep
+
+88
+
+learning is a powerful method for AIID under controlled laboratory conditions, achieving up to 91%
+
+89
+
+accuracy even when applied to the challenging domain of bat echolocation calls.
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+90
+91
+
+2 MATERIALS AND METHODS
+
+92
+
+2.1 Literature survey
+
+93
+
+We first investigated whether deep learning has been successfully applied to acoustic identification
+
+94
+
+of species and individuals across taxa, and if so, with what accuracy. We conducted a systematic
+
+95
+
+literature search of peer-reviewed studies that applied deep learning to species and individual
+
+96
+
+identification based on acoustic signals. The literature search was performed using the Web of
+
+97
+
+Science "all databases" on February 28, 2025, with the following search terms: TS = “individual
+
+98
+
+identification” AND TS = “deep learn” or TS = “species identification” AND TS = “deep learn”.
+
+99
+
+After screening titles, abstracts, and keywords to exclude irrelevant publications, with particular
+
+100
+
+attention to removing studies based on image-based identification, we retained 107 studies focusing
+
+101
+
+on acoustic identification across multiple taxa, including birds, bats, amphibians, marine mammals,
+
+102
+
+and invertebrates (Table S1). For each relevant study, we extracted reported classification accuracy.
+
+103
+
+When data were presented in figures, we used the function “grabit.m” in MATLAB (R2021b,
+
+104
+
+MathWorks, USA) to extract the values 36. Furthermore, to compare the performances of AIID
+
+105
+
+between deep learning and non-deep learning methods, we also used the Web of Science “all
+
+106
+
+database” search and performed a search with the following terms: TS = “individual identification”
+
+107
+
+AND TS = “bats” to find studies on bat acoustic individual identification based on traditional
+
+108
+
+methods, which yielded 14 studies (Table S2). We extracted the classification accuracy (A) and
+
+109
+
+sample size (N), and additionally calculated the chance level or baseline chance accuracy (C) and the
+
+110
+
+normalized accuracy (Cohen's Kappa, κ) following equations:
+
+C  1 /N
+
+
+/1
+
+111
+
+2.2 Echolocation call recording
+
+112
+
+Thirty-four adult the greater leaf-nosed bats (Hipposideros armiger) were used for acoustic
+
+113
+
+individual identification (Figure 2A). These bats were captured from two geographical locations
+
+114
+
+separated by approximately 900 km. Fifteen individuals were caught from a cave located in
+
+115
+
+Hanzhong County, Shaanxi Province, China and transferred to the housing facility in Northeast
+
+116
+
+Normal University (NENU). Nineteen individuals were caught from a cave located in Xianning
+
+117
+
+County, Hubei Province, China and transferred to the housing facility in Central China Normal
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+118
+
+University (CCNU). Bats were kept in temperature and humidity regulated rooms with 12-hour
+
+119
+
+light-dark cycles. Bats had ad libitum access to water and food. Capture, housing and experimental
+
+120
+
+protocols were approved by the Institutional Animal Care and Use Committee of the respective
+
+121
+
+university (Permits: NENU-2018-03 and CCNU-IACUC201902191427).
+
+122
+
+We recorded the echolocation calls of individual bats hanging from a perch in echo-attenuated rooms,
+
+123
+
+with the walls and ceiling covered by thick acoustic foams and the floor by a nylon blanket 37–39. At
+
+124
+
+CCNU, recordings were conducted in a flight room (5 × 4 × 2.2 m) (Figure S1A). Individual bats
+
+125
+
+were recorded while hanging at a tripod approximately 1.5 m above the floor. A custom-made
+
+126
+
+ultrasonic microphone (based on SPU0410LR5H, Knowles Corporation, Itasca, IL, USA),
+
+127
+
+approximately 50 cm from the bat, was directed toward the bat. The microphone signals were
+
+128
+
+amplified via microphone preamplifiers (OctaMic II, RME, Haimhausen, Germany) and sampled
+
+129
+
+with au audio interface (Fireface 802, RME, Germany) at a rate of 192 kHz. The bats were recorded
+
+130
+
+multiple times per week over three months. At NENU, the recordings were provided by our
+
+131
+
+collaborators and were originally collected for a different experimental purpose. Echolocation calls
+
+132
+
+were recorded at a sampling rate of 250 kHz with an array of 16 ultrasonic microphones (NEUmic,
+
+133
+
+Ultra Sound Advice, UK) using a multichannel data acquisition board (PXIe 6358, National
+
+134
+
+Instruments, USA) via customer LabVIEW programs (Figure S1B). The recordings were conducted
+
+135
+
+in a flight room of 7 × 4.8 × 2.6 m size and the bat hang from a perch attached to the ceiling and
+
+136
+
+positioned 30 cm below it. The microphones were placed on the floor and pointed towards the bat.
+
+137
+
+The bats were recorded for five days in total. The recording time lasts for 5 seconds. A
+
+138
+
+comprehensive summary of the dataset is shown in Table S3. To combine the two recording datasets,
+
+139
+
+recordings sampled at 250 kHz were down-sampled to 192 kHz before further processing.
+
+140
+
+2.3 Call sequence segmentation
+
+141
+
+This study utilized two distinct datasets derived from labeled audio recordings. The first was
+
+142
+
+composed of standard 5-second call sequences, referred to as sequence-level identification. The
+
+143
+
+second dataset consisted of single calls, which were uniformly zero-padded to 1 second to maintain
+
+144
+
+dimensional consistency, referred to as call-level identification. The single calls were obtained by
+
+145
+
+processing call sequences through an Endpoint Detection Algorithm. Briefly, the call sequences
+
+146
+
+firstly underwent several preprocessing steps, including the removal of the DC component and
+
+147
+
+amplitude normalization, which collectively serve to enhance the stability and robustness of
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+148
+
+subsequent signal analysis and feature extraction. A Hamming window (length = 200 points) was
+
+149
+
+employed for audio framing, with adjacent frames overlapping by 120 points (60% overlap ratio) to
+
+150
+
+maintain signal continuity. Following the framing process, energy-entropy ratio features were
+
+151
+
+extracted, with high and low thresholds set to 0.1 times and 0.05 times the dynamic range,
+
+152
+
+respectively. To mitigate transient noise, a 10-point median filtering technique was employed.
+
+153
+
+Furthermore, dynamic thresholds were established by analyzing a leading 0.25-second silent segment,
+
+154
+
+combined with constraints of a minimum valid segment (5 frames) and maximum silent interval (8
+
+155
+
+frames), to precisely extract individual vocalization clips from each sequence.
+
+156
+
+2.4 Discriminant function analysis
+
+157
+
+Discriminant function analysis (DFA), a statistical classification method designed to identify optimal
+
+158
+
+linear combinations for distinguishing between two or more predefined groups, was implemented for
+
+159
+
+individual identification. We selected DFA due to its historical prevalence in bat acoustic studies,
+
+160
+
+allowing for a direct reference to prior literature. Two distinct models for bat individual identification
+
+161
+
+were constructed, utilizing call sequence datasets and single call datasets, respectively. For call-level
+
+162
+
+identification, the frequency spectrum surrounding the dominant second harmonic of the
+
+163
+
+echolocation calls (60–80 kHz) was firstly transformed to the Mel scale via a Discrete Fourier
+
+164
+
+Transform (DFT), which provide a nonlinear resampling of the frequency axis and a compact
+
+165
+
+representation of spectral information for machine-learning analysis. Mel-frequency representations
+
+166
+
+were chosen due to their widespread application in the machine learning community. Although the
+
+167
+
+Mel scale is essentially a logarithmic transformation that de-emphasizes higher frequencies,
+
+168
+
+restricting the frequency range to 60–80 kHz effectively preserves the spectral detail relevant to these
+
+169
+
+echolocation calls. Then, feature extraction employed a Discrete Cosine Transform (DCT) to derive
+
+170
+
+Mel-Frequency Cepstral Coefficients (MFCCs), Zero Crossing Rate (ZCR), and Spectral Centroid
+
+171
+
+(SC). Mean and standard deviation values of these features were calculated to generate
+
+172
+
+44-dimensional feature vectors (comprising 40 dimensions from 20 MFCCs, 2 dimensions from ZCR,
+
+173
+
+and 2 dimensions from SC), ensuring stability for subsequent model training and classification. For
+
+174
+
+individual identification, Linear Discriminant Analysis (LDA) was employed using Python’s librosa
+
+175
+
+library with the following parameters: no pre-emphasis, n_mfcc=20, frame size=2048 samples, hop
+
+176
+
+length=512 samples, and Hann window spectral smoothing. This pipeline maintained dimensional
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+177
+
+consistency across training and test sets while capturing stable acoustic characteristics for
+
+178
+
+classification. During analysis, the total dataset was partitioned with 10% allocated as the test dataset,
+
+179
+
+while the remaining 90% was divided into training and validation datasets through 5-fold
+
+180
+
+cross-validation. The same methodology was applied to the sequence-level identification.
+
+181
+
+2.5 Deep learning
+
+182
+
+The experiment uses the same datasets as the DFA model for comparative analysis, with
+
+183
+
+experimental conditions grouped into two main experiments: call- and sequence-level identification.
+
+184
+
+To investigate whether deep learning-based individual identification models rely on spectral features
+
+185
+
+and temporal cues. At the call-level, the following conditions were included: single call (original
+
+186
+
+single call datasets), multiple consecutive calls (sequences of 2 to 23 calls were extracted in their
+
+187
+
+natural, original order from the call sequences dataset), and multiple randomly selected calls (2 to 23
+
+188
+
+calls randomly sampled from different positions within the call sequences dataset, with no regard to
+
+189
+
+their original order). For the sequence-level, the conditions included: 5-second call sequences
+
+190
+
+(original single call datasets), 5-second time-reversal sequences (reversing the order of calls within
+
+191
+
+the sequences), 5-second position-random sequences (calls within the sequences randomly reordered,
+
+192
+
+disrupting natural temporal structure), and call-swapping sequences (hybrid sequences constructed
+
+193
+
+by replacing the spectral content of one individual’s calls with that of another, while preserving the
+
+194
+
+original temporal structure). By comparing classification performance across these conditions, we
+
+195
+
+tested three hypotheses. First, if temporal cues contribute to encode individual identity, disrupting
+
+196
+
+their natural order of calls should reduce classification accuracy. Second, if spectral features are the
+
+197
+
+primary carriers of identity information, preserving an individual's spectral content while altering its
+
+198
+
+temporal structure should still yield high accuracy. Conversely, if temporal patterns dominate,
+
+199
+
+sequences with preserved temporal structure but foreign spectral content should show better
+
+200
+
+performance. Third, the call-swapping experiment was designed to directly evaluate the relative
+
+201
+
+contribution of spectral and temporal features to individual identification. For all conditions except
+
+202
+
+single calls and 5-second call sequences, we employed endpoint detection using a ratio method to
+
+203
+
+identify the calls in each audio file, obtaining the starting and ending frames for each call. We
+
+204
+
+performed echo filtering and saved each call individually, when the interval between the previous
+
+205
+
+call and the current call is less than 0.01 seconds and the maximum amplitude of the previous call is
+
+206
+
+more than three times that of the current call.
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+207
+
+For individual identification, each condition firstly was partitioned with 10% allocated as the test
+
+208
+
+dataset, while the remaining 90% was divided into training and validation dataset through 5-fold
+
+209
+
+cross-validation. Each audio segment underwent Short-Time Fourier Transform (STFT) with a
+
+210
+
+4096-point Fourier window and 2048-point frame shift to compute time-frequency spectrograms. A
+
+211
+
+bandpass filter (55 to 85 kHz) was applied to retain frequency bands containing the dominant second
+
+212
+
+harmonic component. Concurrently, the spectrograms were converted to log-Mel spectrograms using
+
+213
+
+128 Mel filter banks for the 60-80 kHz frequency range to achieve dimensionality reduction 40. The
+
+214
+
+ResNest50d network was selected as the backbone for feature extraction and classification 41. This
+
+215
+
+choice was motivated by three main considerations 42,43. First, CNN architectures with integrated
+
+216
+
+attention mechanisms have been shown to substantially improve classification performance in
+
+217
+
+bioacoustic contexts, where features are subtle and background noise is complex. However, it is
+
+218
+
+worth noting that the split-attention mechanism in ResNeSt operates on grouped features along the
+
+219
+
+channel dimension rather than on spatial positions within the input spectrogram. As a result, the
+
+220
+
+attention weights do not directly indicate which time–frequency regions are most influential, limiting
+
+221
+
+the direct interpretability of the model's decisions in bioacoustic terms. Second, empirical evidence
+
+222
+
+indicates that ResNeSt50 outperforms other mainstream CNN architectures when processing
+
+223
+
+complex animal vocalization spectrograms, demonstrating its strong ability to capture intricate
+
+224
+
+time–frequency patterns. Third, the ResNeSt50d variant incorporates architectural enhancements
+
+225
+
+from the ResNet-D design, enabling the model to reduce feature map dimensionality while
+
+226
+
+preserving the structural integrity of acoustic signals. This helps minimize the loss of key
+
+227
+
+discriminative information, which is crucial for individual-level identification in bat echolocation
+
+228
+
+calls. Nevertheless, we also selected EfficientNet-B0 as the backbone network for feature extraction
+
+229
+
+and classification to provide a more comprehensive evaluation. During the training process, the
+
+230
+
+model parameters are iteratively updated using a Stochastic Gradient Descent (SGD) optimizer with
+
+231
+
+momentum, with an initial learning rate set to 0.01, a minimum learning rate of 0.0001. A cosine
+
+232
+
+annealing learning rate scheduling strategy was implemented, where the annealing cycle Tmax was set
+
+233
+
+to 100, matching the total training epochs. To explore the acoustic basis of individual signatures, we
+
+234
+
+separated each echolocation call into its constant frequency (CF) and frequency-modulated (FM)
+
+235
+
+components and performed individual recognition on each component independently. The CF and
+
+236
+
+FM components were separated by estimating the end of the CF component and the start of the FM
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+237
+
+component, using custom-written scripts in MATLAB 44,45. We trained our models on an NVIDIA
+
+238
+
+RTX 4090 GPU over 100 epochs with batch size of 32 and binary cross-entropy based on focal loss.
+
+239
+
+2.6 Statistical analysis
+
+240
+
+All statistical analyses were conducted using R Studio (v 2022.10.0+353, R version 4.2.2) and
+
+241
+
+MATLAB (R2021b, MathWorks, USA). Principal component analysis was used to examine the
+
+242
+
+variability of individual calls using the FactoMineR package based on acoustic parameters, including
+
+243
+
+peak frequency, call duration, bandwidth, and pulse interval. We employed the Bhattacharyya
+
+244
+
+coefficient to quantify the degree of overlap between individuals' call distributions in the reduced
+
+245
+
+feature space. A higher coefficient value indicates greater overlap, meaning that individuals are
+
+246
+
+difficult to distinguish based solely on these linearly transformed feature. We also employed
+
+247
+
+Mann-Whitney U test (as data normality was rejected according to Shapiro-Wilk test in the package
+
+248
+
+stats) to compare the differences in average accuracy between groups.
+
+249
+250
+
+3 RESULTS
+
+251
+
+3.1 Accuracy for acoustic identification of animal species by deep learning
+
+252
+
+We conducted a comprehensive review of 110 studies that evaluated acoustic identification of
+
+253
+
+species based on deep learning. These studies encompassed a broad range of species, from
+
+254
+
+well-studied taxa such as birds (67.29%) and bats (20.56%) to less frequently studied amphibian,
+
+255
+
+marine mammals, and invertebrates (Figure 1A; Table S1). Regarding the classification
+
+256
+
+performance, the overall average identification accuracy for all taxa was 0.89 ± 0.08 (mean ± SD),
+
+257
+
+with the highest average accuracy for marine mammals at 0.92 ± 0.03 (mean ± SD). For bats, the
+
+258
+
+average species-level identification accuracy was also high at 0.89 ± 0.08, and the lowest for
+
+259
+
+invertebrates at 0.86 and was derived from only a single study (Figure 1A). Additionally, we
+
+260
+
+systematically reviewed 17 studies focusing on the bats acoustic individual identification based on
+
+261
+
+traditional methods. We found the identification accuracy for individual bats based on traditional
+
+262
+
+methods was much lower, at 0.48 ± 0.22 (mean ± SD), with the normalized accuracy of 0.46 ± 0.23
+
+263
+
+(mean ± SD; Figure 1B; Table S2).
+
+264
+
+3.2 Substantial intra-individual variability in bat echolocation call across time
+
+265
+
+Apart for the individuals from NENU, we conducted three-month acoustic recording of H. armiger,
+
+266
+
+yielding a total of 17,584 standardized 5-second vocalization sequences. Figure 2B displays an
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+267
+
+example of the waveform of a 5-second call, as well as the waveform and spectrogram of a single
+
+268
+
+call. We found that call parameters such as peak frequency, duration, bandwidth, and pulse interval
+
+269
+
+varied considerably across different recording days, indicating that even for the same individual,
+
+270
+
+there is a high level of variability in multiple call features (Figure 2C). Principal component analysis
+
+271
+
+further revealed that most calls clustered together, with an average Bhattacharyya coefficient, which
+
+272
+
+is a measure of the amount of overlap between two statistical samples or populations, of 0.80 ± 0.14
+
+273
+
+(mean ± SD) for 20 individuals recorded on the same day, suggesting limited acoustic distinctiveness
+
+274
+
+among individuals (Figure 2D). Similar results were obtained for all individuals.
+
+275
+
+3.3 AIID by the traditional DFA
+
+276
+
+We first employed traditional methods to investigate AIID of bats. The results of the DFA showed
+
+277
+
+that the average classification accuracy based on single call for the 34 individuals was 0.39 ± 0.21.
+
+278
+
+Furthermore, no significant difference in classification accuracy was observed between the CCNU
+
+279
+
+and NENU sites (Mann-Whitney U test: P = 0.19; Figure 3A). For 5-second call sequences
+
+280
+
+recognition, the average classification accuracy improved to 0.47 ± 0.26, with classification accuracy
+
+281
+
+at the CCNU site significantly higher than that at NENU (Mann-Whitney U test: P = 0.02).
+
+282
+
+3.4 AIID by deep learning
+
+283
+
+In contrast, deep learning achieved markedly higher performance. The model showed stable
+
+284
+
+convergence throughout training, with classification accuracy consistently increasing and
+
+285
+
+cross-entropy loss decreasing as epochs progressed (Figure 3B). Although classification accuracy
+
+286
+
+varied among individuals based on single call, the majority exhibited relative high classification
+
+287
+
+accuracy (> 0.50), achieving an average classification accuracy of 0.84 ± 0.11 (mean ± SD) and the
+
+288
+
+normalized accuracy of 0.84 (Figure 3C and Figure S2A). Notably, accuracy at CCNU was
+
+289
+
+significantly higher than at NENU (0.90 vs. 0.77: Mann-Whitney U test: P = 0.002). Furthermore,
+
+290
+
+we observed a progressive increase in classification accuracy with the number of calls incorporated
+
+291
+
+into the analysis. Multiple consecutive calls consistently outperformed those constructed from
+
+292
+
+multiple randomly selected calls (Figure 3D), suggesting temporal sequence information may help
+
+293
+
+to enhance classification performance.
+
+294
+
+Compared to single-call analysis, the classification accuracy improved for most individuals under the
+
+295
+
+5-second call sequence paradigm, culminating in an overall mean accuracy of 0.91 ± 0.12 (mean ±
+
+296
+
+SD) and the normalized accuracy of 0.91 (Figure 3C). The classification accuracy at CCNU was
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+297
+
+also significantly higher than at NENU (Mann-Whitney U test: P < 0.001), reaching 0.97 compared
+
+298
+
+to 0.83. When using EfficientNet-B0 as the backbone network, the mean accuracy showed a slight
+
+299
+
+decrease but remained at 0.89 ± 0.10, and the classification accuracy at CCNU remained higher than
+
+300
+
+that at NENU (0.94 vs. 0.84: Mann-Whitney U test: P = 0.02; Figure S2B).
+
+301
+
+Figure 4A displays the schematic representation of 5-second time-reversal sequences and 5-second
+
+302
+
+position-random sequences. We observed that both time-reverse and position-random calls led to
+
+303
+
+statistically significant reductions in accuracy compared to natural sequences (Mann-Whitney U test,
+
+304
+
+all P < 0.01; Figure 4B), while no significant difference was observed between these two
+
+305
+
+modifications (Mann-Whitney U test; P = 0.14), suggesting that temporal cues play a key role in
+
+306
+
+encoding individual identity and that maintaining natural call order is critical for accurate recognition.
+
+307
+
+Besides, Figure 4C displays the schematic representation of call-swapping sequences. We found that
+
+308
+
+when synthesizing novel call profiles through recombination of spectral features and temporal
+
+309
+
+sequence information, individuals identified based on spectral features (feature dominated) exhibited
+
+310
+
+significantly higher accuracy than those identified from temporal sequence information (position
+
+311
+
+dominated) (Figure 4D). This indicates that the importance of spectral features in recognition is
+
+312
+
+greater than that of temporal sequence information. However, when each call was decomposed into
+
+313
+
+its CF and FM components and evaluated independently, the classification accuracy deteriorated
+
+314
+
+markedly (CF-only: 0.34 ± 0.28; FM-only: 0.30 ± 0.39; Figure S3).
+
+315
+316
+
+4 DISCUSSION
+
+317
+
+In this study, we successfully applied deep learning to AIID under controlled laboratory conditions
+
+318
+
+and achieved an unprecedented recognition accuracy of up to 0.91, which is comparable to the
+
+319
+
+benchmark for species identification (0.89 on average), despite the inherent challenge of discerning
+
+320
+
+minute individual vocal differences. This achievement is particularly striking given that individual
+
+321
+
+identification demands resolving acoustic variations orders of magnitude smaller than
+
+322
+
+between-species distinctions. In contrast, traditional methods, such as discriminant function analysis
+
+323
+
+(DFA), achieved accuracy approximately two times lower than that of the deep learning,
+
+324
+
+underscoring deep learning’s capacity to decode nonlinear spectrotemporal interactions impervious
+
+325
+
+to manual feature engineering. Our dataset, comprising 34 bats monitored over three months and
+
+326
+
+17,584 calls, demonstrates the natural range of vocal plasticity in bat echolocation calls. This
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+327
+
+variability, driven by factors such as environmental noise 46, behavioral states 47, and ontogenetic
+
+328
+
+changes 48, and social factors 49, has historically posed challenges for conventional methods 34,50.
+
+329
+
+The primary objective of this study was to establish a proof-of-concept under controlled conditions,
+
+330
+
+specifically to evaluate whether deep learning is suitable for AIID. Our results suggest that deep
+
+331
+
+neural networks effectively leverage hierarchical feature abstraction to isolate stable ’vocal
+
+332
+
+fingerprints’, even in groups with excessive intra-individual variability in acoustic signals, achieving
+
+333
+
+robustness where traditional methods tend to struggle 51. Although individual call features such as
+
+334
+
+frequency or duration vary substantially across time, the relative configuration and joint distribution
+
+335
+
+of these features appear to form a robust identity signature. Deep learning models are particularly
+
+336
+
+well suited to capture such distributed representations, enabling reliable identification even when
+
+337
+
+individual acoustic components are highly variable. In this context, our use of “reveals” refers to the
+
+338
+
+model’s ability to detect and utilize identity-relevant information, rather than to explicitly identify the
+
+339
+
+precise acoustic features involved. However, the noticeably higher classification accuracy at CCNU
+
+340
+
+compared to NENU suggests that site-specific factors may have influenced model performance,
+
+341
+
+potentially arising from acoustic artifacts introduced by differences in recording environments and
+
+342
+
+equipment, coupled with a lower signal-to-noise ratio (SNR) in the NENU recordings.
+
+343
+
+Our research highlights the crucial role of spectral features in individual identification, providing
+
+344
+
+compelling evidence for the encoding of individual information in the echolocation calls of bats.
+
+345
+
+Spectral features, such as frequency and bandwidth of echolocation calls, serve as distinctive
+
+346
+
+biological markers that allow researchers to differentiate between individuals within a species 52–54.
+
+347
+
+Studies have shown that variations in the frequency components of echolocation calls can reflect
+
+348
+
+individual identity, with certain bats exhibiting unique call characteristics that can be consistently
+
+349
+
+recognized across different contexts 55,56. Furthermore, the application of advanced bioacoustic
+
+350
+
+analysis techniques 30,38,57 has enabled researchers to automate the identification process by
+
+351
+
+analyzing these spectral features, thereby improving the efficiency and accuracy of individual
+
+352
+
+recognition. The encoding of individual labels through spectral characteristics is not merely an
+
+353
+
+analytical tool, but a critical aspect in the broader context of understanding bat ecology and behavior.
+
+354
+
+To further investigate the acoustic basis of individual signatures, we conducted a preliminary
+
+355
+
+analysis by separating each echolocation call into its CF and FM components and performing
+
+356
+
+recognition on each independently. Both CF-only and FM-only models yielded markedly lower
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+357
+
+accuracy (with averages below 35%), far below the 91% achieved with full-spectrum calls. This
+
+358
+
+suggests that individual identity is not encoded in isolated acoustic components, but rather
+
+359
+
+distributed across the full spectrotemporal structure. This may also explain the poor performance of
+
+360
+
+traditional approaches such as DFA, which rely on manually extracted features. However, we believe
+
+361
+
+this result should not be taken as direct evidence that FM bat echolocation calls cannot encode
+
+362
+
+individual signatures, for several reasons. First, we did not specifically fine-tune the model to
+
+363
+
+optimize performance; therefore, these results likely represent an underestimation of the potential
+
+364
+
+accuracy. Second, the FM component in CF-FM bats appears more stereotyped than in purely FM
+
+365
+
+bats. For instance, both the duration and bandwidth of the FM component in H. armiger exhibit a
+
+366
+
+much narrower dynamic range compared to those of many FM bats, such as the big brown bat 38,58.
+
+367
+
+Third, there is solid evidence that the echolocation calls of FM bats contain strong individual
+
+368
+
+signatures 52,54, although the number of individuals involved in previous analyses has typically been
+
+369
+
+limited. Furthermore, it is critical to interpret these findings within the constraints of the
+
+370
+
+methodology. The deep learning model identifies a robust acoustic signature that could facilitate
+
+371
+
+individual identification. This demonstrates the information encoding capacity of the calls but does
+
+372
+
+not constitute evidence that bats perceptually discriminate or cognitively utilize these cues. The
+
+373
+
+fundamental question of whether bats use these specific, model-derived features for social
+
+374
+
+recognition remains unanswered.
+
+375
+
+In addition to spectral features, when both spectral and temporal features are integrated, the
+
+376
+
+classification performance improves significantly, highlighting the value of temporal sequence
+
+377
+
+information in individual recognition tasks. This temporal pattern provides context and relational
+
+378
+
+dynamics that are essential for distinguishing between individuals, particularly in species where
+
+379
+
+vocalizations are complex and varied 59,60. Thus, the encoding of individual labels through
+
+380
+
+time-based characteristics is not just an auxiliary feature; it is a fundamental element that shapes how
+
+381
+
+organisms interact and communicate within their species 61. By incorporating temporal pattern into
+
+382
+
+identification frameworks, such as Recurrent Neural Networks 62, researchers can better understand
+
+383
+
+social structures, mating systems, and communication strategies in various species, lending insight
+
+384
+
+into behavioral ecology and evolution. However, it is worth noting that this study is that all
+
+385
+
+recordings were obtained from perching individuals. In many bat species, the timing of echolocation
+
+386
+
+pulses during flight is partially coupled with the wingbeat cycle, which can influence call emission
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+387
+
+patterns and temporal structure 63. Consequently, the importance of pulse interval as a discriminative
+
+388
+
+feature identified in our analysis may differ under flight conditions.
+
+389
+
+This study establishes bats as model organisms for advancing AIID development, where by
+
+390
+
+surmounting traditional methods limitations through deep learning, our framework enables
+
+391
+
+non-invasive individual studies at under controlled laboratory conditions. These results show great
+
+392
+
+promise for extrapolating to other acoustically active taxa. Echolocation signals are primarily under
+
+393
+
+stabilizing selection for reliable echo detection, which should theoretically minimize individual
+
+394
+
+variation. In contrast, many other animal vocalizations are under diversifying selection to encode
+
+395
+
+information such as individual identity, group membership, or reproductive status. With appropriate
+
+396
+
+adaptation to species-specific acoustic characteristics, such methods may be extended to other
+
+397
+
+vocally complex systems (e.g., cetaceans and songbirds), enabling novel insights into adaptive signal
+
+398
+
+evolution, dynamic social network topologies, host-pathogen coevolution, and anthropogenic impact
+
+399
+
+assessments 4.
+
+400
+
+Nevertheless, application of AIID to freely-ranging wild animals still faces considerable challenges.
+
+401
+
+First, our experiments were conducted on recordings of single bats in a resting state under controlled
+
+402
+
+laboratory conditions. In real ecological environments, bats often fly and move in groups. In such
+
+403
+
+cases, the complexity of acoustic data will significantly increase, potentially leading to a decrease in
+
+404
+
+identification accuracy. Moreover, echolocation calls produced across different behavioral contexts,
+
+405
+
+such as flight, foraging, or prey capture, may exhibit context-dependent acoustic variation driven by
+
+406
+
+task-specific sensorimotor demands, which could further influence the performance of CNN-based
+
+407
+
+individual identification. In addition, environmental complexities such as reflections and
+
+408
+
+reverberation in cluttered habitats and calls from conspecific and heterospecific individuals can
+
+409
+
+introduce spectral-temporal distortions, which require advanced algorithms for separating
+
+410
+
+overlapping calls64. A further limitation is that the present study employed a closed-set design, in
+
+411
+
+which all individuals included in the test set were also represented in the training set. In contrast,
+
+412
+
+real-world applications, such as long-term acoustic monitoring of wild animals, will inevitably
+
+413
+
+involve open-set scenarios, where calls from previously unobserved individuals must either be
+
+414
+
+identified as unknown or incorporated into the recognition system. The closed-set framework
+
+415
+
+adopted here therefore represents an initial step toward validating the feasibility of deep
+
+416
+
+learning-based individual identification under controlled conditions. Extending this approach to
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+417
+
+open-set recognition will be an important direction for future research, potentially involving
+
+418
+
+strategies such as novelty detection or incremental learning to enable robust performance in more
+
+419
+
+realistic ecological settings. Future research should focus on optimizing algorithms, expanding
+
+420
+
+datasets, and enhancing the robustness of models to evaluate whether individual signatures remain
+
+421
+
+detectable across diverse behavioral contexts and ecological environments, a prerequisite for
+
+422
+
+applying AIID to freely behaving wild populations.
+
+423
+424
+
+Author contributions
+
+425
+
+AL, HZ performed the literature survey; AL analyzed the survey data; WH, XX, WW conducted the
+
+426
+
+classification tasks; AL and JL drafted the manuscript; CZ, JL supervised the study.
+
+427
+428
+
+Acknowledgements
+
+429
+
+We thank Manman Lu and Xinyao Yang for collecting the recordings, Aiqing Lin and Jiang Feng for
+
+430
+
+permitting us to use the recordings from NENU, and Jianan Ding and Xuejiao Qin for their valuable
+
+431
+
+discussions. We are grateful to Longgang Pang for performing the initial individual classification
+
+432
+
+tests, which motivated this study. This work was supported by the National Natural Science
+
+433
+
+Foundation of China (32270535 and 32400395) and the China Postdoctoral Science Foundation
+
+434
+
+(30205202371).
+
+435
+436
+
+Data availability statement
+
+437
+
+The datasets and Rcode during the current study are available in the Figshare repository
+
+438
+
+(10.6084/m9.figshare.19613934).
+
+439
+440
+
+Conflict of interest statement
+
+441
+
+The authors declare no competing interests.
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+442
+443
+
+References
+
+444
+
+1. Darwin, C. On the Origin of Species. (Oxford University Press, Oxford, 1859).
+
+445
+
+2. Cantor, M. et al. The importance of individualtosociety feedbacks in animal ecology and
+
+446
+
+evolution. J Anim Ecol 90, 27–44 (2021).
+
+447
+
+3. Clutton-Brock, T. & Sheldon, B. C. Individuals and populations: the role of long-term,
+
+448
+
+individual-based studies of animals in ecology and evolutionary biology. Trends Ecol Evol 25,
+
+449
+
+562–573 (2010).
+
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+
+4. Sheldon, B. C., Kruuk, L. E. B. & Alberts, S. C. The expanding value of long-term studies of
+individuals in the wild. Nat Ecol Evol 6, 1799–1801 (2022).
+5. Dechmann, D. et al. Experimental evidence for group hunting via eavesdropping in echolocating
+bats. Proceedings of the Royal Society B: Biological Sciences 276, 2721 (2009).
+6. Greif, S., Borissov, I., Yovel, Y. & Holland, R. A. A functional role of the sky’s polarization
+pattern for orientation in the greater mouse-eared bat. Nat Commun 5, 4488 (2014).
+7. Goldshtein, A. et al. Acoustic cognitive map–based navigation in echolocating bats. Science 386,
+561–567 (2024).
+8. Camacho, C., Canal, D. & Potti, J. Lifelong effects of trapping experience lead to age-biased
+sampling: lessons from a wild bird population. Anim Behav 130, 133–139 (2017).
+9. McClintock, B. T. & White, G. C. A less fieldintensive robust design for estimating
+demographic parameters with mark–resight data. Ecology 90, 313–320 (2009).
+10. Terry, A. M., Peake, T. M. & McGregor, P. K. The role of vocal individuality in conservation.
+Front Zool 2, (2005).
+11. Aplin, L. M. Culture and cultural evolution in birds: a review of the evidence. Anim Behav 147,
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+
+179–187 (2019).
+12. Hyacinthe, C. et al. Acoustic signatures in Mexican cavefish populations inhabiting different
+caves. PLoS ONE 18, e0289574 (2023).
+13. Smith-Vidaurre, G., Perez-Marrufo, V. & Wright, T. F. Individual vocal signatures show reduced
+complexity following invasion. Anim Behav 179, 15–39 (2021).
+14. Teixeira, D., Maron, M. & Van Rensburg, B. J. Bioacoustic monitoring of animal vocal behavior
+for conservation. Conservat Sci and Prac 1, (2019).
+15. Fagerlund, S. Bird species recognition using support vector machines. EURASIP J. Adv. Signal
+Process. 2007, 038637 (2007).
+16. Putland, R. L., Ranjard, L., Constantine, R. & Radford, C. A. A hidden Markov model approach
+to indicate Bryde’s whale acoustics. Ecol Indic 84, 479–487 (2018).
+17. Tan, X., Lin, A., Sun, K., Jin, L. & Feng, J. Greater horseshoe bats recognize the sex and
+individual identity of conspecifics from their echolocation calls. Animals 12, 3490 (2022).
+18. Stowell, D. Computational bioacoustics with deep learning: a review and roadmap. PeerJ 10,
+e13152 (2022).
+19. Xie, J., Colonna, J. G. & Zhang, J. Bioacoustic signal denoising: a review. Artif Intell Rev 54,
+3575–3597 (2021).
+20. Knight, E. et al. Individual identification in acoustic recordings. Trends in Ecology & Evolution
+39, 947–960 (2024).
+
+484
+
+21. Oestreich, W. K., Oliver, R. Y., Chapman, M. S., Go, M. C. & McKenna, M. F. Listening to
+
+485
+
+animal behavior to understand changing ecosystems. Trends Ecol Evol 39, 961–973 (2024).
+
+486
+
+22. Stowell, D., Wood, M. D., Pamuła, H., Stylianou, Y. & Glotin, H. Automatic acoustic detection
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+487
+
+of birds through deep learning: the first bird audio detection challenge. Methods Ecol Evol 10,
+
+488
+
+368–380 (2019).
+
+489
+490
+491
+492
+493
+494
+
+23. Rundo, L. & Militello, C. Image biomarkers and explainable AI: handcrafted features versus
+deep learned features. Eur Radiol Exp 8, 130 (2024).
+24. Borowiec, M. L. et al. Deep learning as a tool for ecology and evolution. Methods Ecol Evol 13,
+1640–1660 (2022).
+25. Pichler, M. & Hartig, F. Machine learning and deep learning—A review for ecologists. Methods
+Ecol Evol 14, 994–1016 (2023).
+
+495
+
+26. Cao, Z. et al. Fine-grained image classification on bats using VGG16-CBAM: a practical
+
+496
+
+example with 7 horseshoe bats taxa (CHIROPTERA: Rhinolophidae: Rhinolophus) from
+
+497
+
+Southern China. Front Zool 21, 10 (2024).
+
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+
+27. Ferreira, A. C. et al. Deep learning-based methods for individual recognition in small birds.
+Methods in Ecology and Evolution 11, 1072–1085 (2020).
+28. Ranjan, R. et al. Deep Learning for Understanding Faces: Machines May Be Just as Good, or
+Better, than Humans. IEEE Signal Processing Magazine 35, 66–83 (2018).
+29. Schofield, D. et al. Chimpanzee face recognition from videos in the wild using deep learning. Sci.
+Adv. 5, eaaw0736 (2019).
+30. Ma, N., Xia, H., Zheng, H. & Luo, J. Prey evasiveness and masking noise jointly promote the
+ultrahigh call rate in echolocating bats. BMC Biol 23, 323 (2025).
+31. Moss, C. F. & Surlykke, A. Probing the natural scene by echolocation in bats. Front. Behav.
+Neurosci. 4, 33 (2010).
+32. Schnitzler, H. U., Moss, C. F. & Denzinger, A. From spatial orientation to food acquisition in
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+509
+510
+511
+512
+513
+
+echolocating bats. Trends Ecol Evol 18, 386–394 (2003).
+33. Li, A. et al. Robust Doppler Shift Compensation in Freely Flying Bats Under Acoustic
+Interference. Integr Zool https://doi.org/10.1111/1749-4877.70084 (2026).
+34. Jones, G. & Siemers, B. The communicative potential of bat echolocation pulses. J Comp
+Physiol A 197, 447–457 (2011).
+
+514
+
+35. Russo, D., Ancillotto, L. & Jones, G. Bats are still not birds in the digital era: echolocation call
+
+515
+
+variation and why it matters for bat species identification. Canadian Journal of Zoology 96,
+
+516
+
+63–78 (2018).
+
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+
+36. Li, A., Tian, X., Ma, N. & Luo, J. Habitat preference contributes to explaining the varied
+sensitivity of bats to anthropogenic noise. Biol Conserv 302, 110974 (2025).
+37. Ding, J. et al. Performance of Doppler shift compensation varies with environmental temperature
+and humidity in bats. Animal Behaviour 205, 35–46 (2023).
+38. Lu, M., Zhang, G. & Luo, J. Echolocating bats exhibit differential amplitude compensation for
+noise interference at a sub-call level. J Exp Biol 223, 225284 (2020).
+39. Wang, H. et al. Sensory error drives fine motor adjustment. Proc Natl Acad Sci USA 119,
+e2201275119 (2022).
+40. Zhang, C., Li, Q., Zhan, H., Li, Y. & Gao, X. One-step progressive representation transfer
+learning for bird sound classification. Applied Acoustics 212, 109614 (2023).
+
+527
+
+41. Zhang, H. et al. ResNeSt: Split-Attention Networks. in 2022 IEEE/CVF Conference on
+
+528
+
+Computer Vision and Pattern Recognition Workshops (CVPRW) 2735–2745 (2022).
+
+529
+
+doi:10.1109/CVPRW56347.2022.00309.
+
+530
+
+42. Azhari, M. F., Syah, G. M., Nurdiati, S., Khatizah, E. & Najib, M. K. Bioacoustic Sound
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+531
+
+Classification Based on Noise and Vocalizations Using Convolutional Neural Networks: A
+
+532
+
+Comprehensive Systematic Review. TJMCS 17, 472–484 (2025).
+
+533
+534
+535
+536
+537
+538
+
+43. Maclean, K. & Triguero, I. Identifying bird species by their calls in Soundscapes. Appl Intell 53,
+21485–21499 (2023).
+44. Liu, Z., Cao, Q., Lu, M. & Luo, J. Echolocation behaviour is highly sensitive to noise
+interference in flying Pratt’s roundleaf bats. Animal Behaviour 233, 123465 (2026).
+45. Wang, Q., Ye, H. & Luo, J. Task learning drives adaptive vocal adjustments in echolocating bats.
+Zool Res https://doi.org/10.24272/j.issn.2095-8137.2025.350 (2025).
+
+539
+
+46. Tressler, J., Schwartz, C., Wellman, P., Hughes, S. & Smotherman, M. Regulation of bat
+
+540
+
+echolocation pulse acoustics by striatal dopamine. The Journal of Experimental Biology 214,
+
+541
+
+3238–3247 (2011).
+
+542
+
+47. Schoeppler, D., Denzinger, A. & Schnitzler, H.-U. The resting frequency of echolocation signals
+
+543
+
+changes with body temperature in the hipposiderid bat Hipposideros armiger. Journal of
+
+544
+
+Experimental Biology 225, jeb243569 (2022).
+
+545
+
+48. Luo, J., Lingner, A., Firzlaff, U. & Wiegrebe, L. The Lombard effect emerges early in young bats:
+
+546
+
+implications for the development of audio-vocal integration. J Exp Biol 220, 1032–1037 (2017).
+
+547
+
+49. Hiryu, S. et al. Intra-individual variation in the vocalized frequency of the Taiwanese leaf-nosed
+
+548
+
+bat, Hipposideros terasensis, influenced by conspecific colony members. J Comp Physiol A 192,
+
+549
+
+807–815 (2006).
+
+550
+551
+552
+
+50. Guo, X., Luo, B., Liu, Y., Jiang, T.-L. & Feng, J. Cannot see you but can hear you: vocal identity
+recognition in microbats. Zool Res 36, 257–262 (2015).
+51. Bai, Z. & Zhang, X.-L. Speaker recognition based on deep learning: An overview. Neural
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+553
+554
+555
+556
+557
+
+Networks 140, 65–99 (2021).
+52. Barclay, R. M. R. & Jacobs, D. S. Interindividual communication by bats via echolocation. Can.
+J. Zool. 101, 128–143 (2023).
+53. Jiang, T. et al. Geographical and individual variation in echolocation calls of the intermediate
+leaf-nosed bat, Hipposideros larvatus. Ethology 116, 691–703 (2010).
+
+558
+
+54. Yovel, Y., Melcon, M. L., Franz, M. O., Denzinger, A. & Schnitzler, H. U. The voice of bats:
+
+559
+
+How greater mouse-eared bats recognize individuals based on their echolocation calls. PLoS
+
+560
+
+Comput Biol 5, (2009).
+
+561
+562
+
+55. Amichai, E., Blumrosen, G. & Yovel, Y. Calling louder and longer: how bats use biosonar under
+severe acoustic interference from other bats. Proc R Soc B 282, 20152064 (2015).
+
+563
+
+56. Suga, N., Niwa, H., Taniguchi, I. & Margoliash, D. The personalized auditory cortex of the
+
+564
+
+mustached bat: adaptation for echolocation. Journal of Neurophysiology 58, 643–654 (1987).
+
+565
+
+57. Luo, J., Goerlitz, H. R., Brumm, H. & Wiegrebe, L. Linking the sender to the receiver: Vocal
+
+566
+567
+568
+
+adjustments by bats to maintain signal detection in noise. Sci Rep 5, 18556 (2015).
+58. Surlykke, A. & Moss, C. F. Echolocation behavior of big brown bats, Eptesicus fuscus, in the
+field and the laboratory. J. Acoust. Soc. Am. 108, 2419–2429 (2000).
+
+569
+
+59. Bøttcher, A., Gero, S., Beedholm, K., Whitehead, H. & Madsen, P. T. Variability of the
+
+570
+
+inter-pulse interval in sperm whale clicks with implications for size estimation and individual
+
+571
+
+identification. J Acoust Soc Am 144, 365–374 (2018).
+
+572
+573
+574
+
+60. Carlson, N. V., Kelly, E. M. & Couzin, I. Individual vocal recognition across taxa: a review of
+the literature and a look into the future. Phil Trans R Soc B 375, 20190479 (2020).
+61. Amit, Y. & Yovel, Y. Bat vocal sequences enhance contextual information independently of
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+575
+576
+577
+
+syllable order. iScience 26, 106466 (2023).
+62. Salehinejad, H., Sankar, S., Barfett, J., Colak, E. & Valaee, S. Recent Advances in Recurrent
+Neural Networks. Preprint at https://doi.org/10.48550/arXiv.1801.01078 (2018).
+
+578
+
+63. Xia, H., Ma, N., Li, A. & Luo, J. Call production and wingbeat coupling is flexible and
+
+579
+
+species-specific in echolocating bats. Annals of the New York Academy of Sciences 1547,
+
+580
+
+105–115 (2025).
+
+581
+582
+583
+
+64. Zhang, K. et al. Separating overlapping bat calls with a bi-directional long short-term memory
+network. Integrative Zoology 17, 741–751 (2022).
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+Figure 1. Acoustic species identification in representative taxa and acoustic individual identification
+in echolocating bats. (A) Acoustic species identification across taxa using convolutional neural
+networks revealed an average accuracy of 0.89 ± 0.08 (mean ± SD). (B) All previous researches on
+acoustic individual identification in bats have used traditional machine learning methods, with an
+average accuracy of 0.48 ± 0.22 (mean ± SD).
+
+Figure 2 Intra-individual vocal variability in Hipposideros armiger under controlled laboratory
+conditions. (A) A portrait of H. armiger. (B) Examples of the echolocation call. The top panel
+displays the waveform of a 5-second echolocation sequence, while the bottom panel shows the
+waveform of a single call alongside the corresponding spectrogram and power spectrum. (C)
+Illustrations of daily variation in four call parameters (peak frequency, duration, bandwidth, and
+pulse interval) measured from one individual, representative of the general pattern observed across
+all individuals. (D) Principal Component Analysis (PCA) of 20 individuals recorded on the same day
+(left panel) and 34 individuals recorded across multiple days (right panel), with ellipses representing
+95% confidence intervals. The degree of overlap between individuals' calls was quantified by the
+Bhattacharyya coefficient, where a higher value indicates greater overlap.
+
+Figure 3. Comparison of acoustic individual identification performance in bats using traditional
+methods versus deep learning. (A) A comparison of classification accuracy between CCNU and
+NENU based on DFA for single-call and 5-second call sequence paradigms; (B) Changes in accuracy
+and loss for both the training dataset and validation dataset as epochs progress (mean ± sd); (C) A
+comparison of classification accuracy between CCNU and NENU based on deep learning for
+single-call and 5-second call sequence paradigms; (D) The variation in accuracy as the number of
+selected calls changes, with solid circles indicating consecutively selected calls and hollow circles
+representing randomly selected calls (mean ± sd).
+
+Figure 4. Exploring the importance of spectral features and temporal sequence information in
+individual identification. (A) Schematic representation of 5-second time-reversed (reversing the
+order of calls within the sequences) and randomly repositioned call sequences (calls within the
+sequences randomly reordered, disrupting natural temporal structure), illustrating the experimental
+
+bioRxiv preprint doi: https://doi.org/10.64898/2026.03.31.715443; this version posted April 2, 2026. The copyright holder for this preprint (which
+was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+design; (B) Comparison of accuracy among different groups; (C) Schematic representation of
+call-swapping sequences (hybrid sequences constructed by replacing the spectral content of one
+individual’s calls with that of another, while preserving the original temporal structure),
+demonstrating the approach used for synthesizing novel call profiles through the recombination of
+spectral features and temporal sequence information. (D) Comparison of accuracy among different
+groups. The numbers represent the corresponding identification counts.
+
+Figure S1. Schematic diagrams of the recording setups at CCNU (A) and NENU (B).
+
+Figure S2. A histogram illustrating the classification accuracy of DFA and deep learning across
+single-call and 5-second call sequence paradigms based on ResNest50d network (A), and a
+comparison of classification accuracy between CCNU and NENU based on EfficientNet-B0 network
+for 5-second call sequence paradigms (B). The center represents the overall classification accuracy,
+while the two sides indicate the classification accuracy at CCNU and NENU, respectively. Shared
+letters indicate no significant difference, and distinct letters indicate significant differences based on
+the Mann-Whitney U test.
+
+Figure S3. Classification accuracy for CF and FM components alone based on ResNest50d network,
+with 5-second sequence as inputs.
+
+

@@ -1,0 +1,5199 @@
+Identification of multiple transcription factor genes potentially involved in the development of electrosensory versus mechanosensory lateral line organs
+Martin Minařík, Melinda S. Modrell, J. Andrew Gillis, Alexander S Campbell, Isobel Fuller, Rachel Lyne, Gos Micklem, David Gela, Martin Pšenička, Clare V. H. Baker (2023). bioRxiv (Cold Spring Harbor Laboratory). http://dx.doi.org/10.1101/2023.04.14.536701. doi:10.1101/2023.04.14.536701. Licence: cc-by. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1
+
+Identification of multiple transcription factor genes potentially involved in the
+
+2
+
+development of electrosensory versus mechanosensory lateral line organs
+
+3
+4
+
+Martin Minařík1, Melinda S. Modrell1, J. Andrew Gillis2,3, Alexander S. Campbell1, Isobel
+
+5
+6
+7
+
+Fuller1, Rachel Lyne5, Gos Micklem5, David Gela4, Martin Pšenička4 and Clare V. H. Baker1*
+1
+
+Department of Physiology, Development & Neuroscience, University of Cambridge, Cambridge, UK
+
+8
+
+2
+
+Department of Zoology, University of Cambridge, Cambridge, UK
+
+9
+
+3
+
+Marine Biological Laboratory, 7 MBL Street, Woods Hole, MA 02543, USA
+
+10
+
+4
+
+Faculty of Fisheries and Protection of Waters, Research Institute of Fish Culture and Hydrobiology,
+
+11
+
+University of South Bohemia in České Budějovice, Vodňany, Czech Republic
+
+12
+
+5
+
+13
+
+*For correspondence: cvhb1@cam.ac.uk
+
+Department of Genetics, University of Cambridge, Cambridge, UK
+
+14
+15
+
+Abstract
+
+16
+
+In electroreceptive jawed vertebrates, embryonic lateral line placodes give rise to
+
+17
+
+electrosensory ampullary organs as well as mechanosensory neuromasts. Previous reports
+
+18
+
+of shared gene expression suggest that conserved mechanisms underlie electroreceptor and
+
+19
+
+mechanosensory hair cell development and that electroreceptors evolved as a
+
+20
+
+transcriptionally related 'sister cell type' to hair cells. We previously identified only one
+
+21
+
+transcription factor gene, Neurod4, as ampullary organ-restricted in the developing lateral line
+
+22
+
+system of a chondrostean ray-finned fish, the Mississippi paddlefish (Polyodon spathula). The
+
+23
+
+other 16 transcription factor genes we previously validated in paddlefish were expressed in
+
+24
+
+both ampullary organs and neuromasts. Here, we used our published lateral line organ-
+
+25
+
+enriched gene-set (arising from differential bulk RNA-seq in late-larval paddlefish), together
+
+26
+
+with a candidate gene approach, to identify 23 transcription factor genes expressed in the
+
+27
+
+developing lateral line system of a more experimentally tractable chondrostean, the sterlet
+
+28
+
+(Acipenser ruthenus, a small sturgeon), and/or that of paddlefish. Twelve are expressed in
+
+29
+
+both ampullary organs and neuromasts, consistent with conservation of molecular
+
+30
+
+mechanisms. Six are novel electrosensory-restricted transcription factor genes (Irx5, Satb2,
+
+31
+
+Insm1, Sp5, MafA and Rorc), and five are the first-reported mechanosensory-restricted
+
+32
+
+transcription factor genes (Foxg1, Sox8, Isl1, Hmx2 and Rorb). However, as previously
+
+33
+
+reported, Sox8 is expressed in ampullary organs as well as neuromasts in a shark
+
+34
+
+(Scyliorhinus canicula), suggesting the existence of lineage-specific differences between
+
+35
+
+cartilaginous and ray-finned fishes. Overall, our results support the hypothesis that ampullary
+
+36
+
+organs and neuromasts develop via largely conserved transcriptional mechanisms, and
+
+37
+
+identify multiple transcription factors potentially involved in the formation of electrosensory
+
+38
+
+versus mechanosensory lateral line organs.
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+39
+40
+
+Introduction
+
+41
+42
+
+In jawed anamniotes, mechanosensory hair cells are found in the inner ear, in the spiracular
+
+43
+
+organ associated with the first pharyngeal cleft (lost in amphibians, bichirs and teleosts; see
+
+44
+
+Norris and Hughes, 1920; von Bartheld and Giannessi, 2011), and in lateral line neuromasts:
+
+45
+
+small sense organs distributed in lines over the head and trunk, which respond to local water
+
+46
+
+movement (see e.g., Mogdans, 2019; Webb, 2021). In electroreceptive species (e.g.,
+
+47
+
+cartilaginous fishes, ray-finned fishes including the chondrostean paddlefishes and sturgeons,
+
+48
+
+and urodele amphibians like the axolotl), the lateral line system includes electrosensory
+
+49
+
+ampullary organs containing supporting cells and electroreceptors that detect weak electric
+
+50
+
+fields, primarily for hunting or avoiding predators (see e.g., Crampton, 2019; Leitch and Julius,
+
+51
+
+2019; Chagnaud et al., 2021).
+
+52
+
+Like hair cells, electroreceptors have an apical primary cilium (lost during maturation
+
+53
+
+in cochlear hair cells; Lu and Sipe, 2016) and basolateral ribbon synapses with afferent nerve
+
+54
+
+terminals (Jørgensen, 2005; Baker, 2019). However, electroreceptors lack the apical hair
+
+55
+
+bundle (staircase array of microvilli) where mechanoelectrical transduction occurs (Ó
+
+56
+
+Maoiléidigh and Ricci, 2019; Caprara and Peng, 2022). The main anamniote developmental
+
+57
+
+models - the teleost zebrafish and the frog Xenopus - lack ampullary organs: electroreception
+
+58
+
+was lost in the ray-finned bony fish radiation leading to teleosts, and in the lobe-finned bony
+
+59
+
+amphibian lineage leading to frogs (Baker et al., 2013; Baker, 2019; Crampton, 2019).
+
+60
+
+(Physiologically distinct lateral line electroreceptors evolved independently in some teleost
+
+61
+
+lineages; see e.g., Baker et al., 2013; Baker, 2019; Crampton, 2019.)
+
+62
+
+Neuromasts and ampullary organs, together with the neurons in lateral line ganglia
+
+63
+
+that provide their afferent innervation, develop from a series of cranial lateral line placodes
+
+64
+
+(Northcutt, 1997; Baker et al., 2013; Piotrowski and Baker, 2014). These either elongate to
+
+65
+
+form sensory ridges that fragment, with a line of neuromasts forming first in the ridge's centre
+
+66
+
+and ampullary organs (if present) forming later on the ridge's flanks (Northcutt, 1997;
+
+67
+
+Piotrowski and Baker, 2014). Alternatively, as in the ray-finned bony teleost zebrafish, lateral
+
+68
+
+line primordia migrate as cell collectives, depositing neuromasts in their wake (Piotrowski and
+
+69
+
+Baker, 2014). The lateral line placode origin of ampullary organs was first shown by grafting
+
+70
+
+and ablation in a lobe-finned bony tetrapod, the axolotl (Northcutt et al., 1995). Our DiI-
+
+71
+
+labelling studies in a chondrostean ray-finned fish (Mississippi paddlefish, Polyodon spathula)
+
+72
+
+(Modrell et al., 2011a) and a cartilaginous fish (little skate, Leucoraja erinacea) (Gillis et al.,
+
+73
+
+2012) showed that individual elongating lateral line placodes form ampullary organs and
+
+74
+
+neuromasts across all non-teleost jawed vertebrates (reviewed in Baker et al., 2013).
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+75
+
+What molecular mechanisms underlie the formation of ampullary organs versus
+
+76
+
+neuromasts within the same lateral line sensory ridge? We have identified a range of
+
+77
+
+ampullary organ-expressed genes in different electroreceptive vertebrates using a candidate
+
+78
+
+gene approach (O'Neill et al., 2007; Modrell et al., 2011a; Modrell et al., 2011b; Gillis et al.,
+
+79
+
+2012; Modrell and Baker, 2012; Modrell et al., 2017a; Modrell et al., 2017b). More recently,
+
+80
+
+we took an unbiased differential RNA-seq approach, comparing the transcriptome of late-
+
+81
+
+larval paddlefish gill-flaps (covered in ampullary organs, plus some neuromasts) versus fins
+
+82
+
+(no lateral line organs) (Modrell et al., 2017a). The resultant lateral line organ-enriched dataset
+
+83
+
+of around 500 genes (Modrell et al., 2017a) is not exhaustive: it includes most, but not all, of
+
+84
+
+the genes identified in paddlefish ampullary organs via the candidate gene approach (Modrell
+
+85
+
+et al., 2011a; Modrell et al., 2011b; Modrell et al., 2017a; Modrell et al., 2017b). In situ
+
+86
+
+hybridization for selected candidate genes from this dataset suggested that electroreceptors
+
+87
+
+and hair cells are closely related, e.g., late-larval ampullary organs express genes encoding
+
+88
+
+proteins essential for neurotransmission specifically at hair-cell (but not photoreceptor) ribbon
+
+89
+
+synapses in the basolateral cell membrane (Pangrsic et al., 2018; Moser et al., 2020), such
+
+90
+
+as vGlut3, otoferlin and Cav1.3 (Modrell et al., 2017a). Cav1.3 has also been identified as the
+
+91
+
+electrosensitive voltage-gated Ca2+ channel in the apical electroreceptor membrane (Bennett
+
+92
+
+and Obara, 1986; Bodznick and Montgomery, 2005) in shark and skate species (i.e., in
+
+93
+
+cartilaginous fishes) (Bellono et al., 2017; Bellono et al., 2018).
+
+94
+
+Developing ampullary organs also express key 'hair cell' transcription factor genes
+
+95
+
+including Atoh1, Pou4f3 (Brn3c) and Six1 (Modrell et al., 2011a; Butts et al., 2014; Modrell et
+
+96
+
+al., 2017a). These are critical for hair cell formation and, in combination with Gfi1, can drive
+
+97
+
+an immature 'hair cell-like' fate in mouse embryonic stem cells, adult cochlear supporting cells
+
+98
+
+and fibroblasts (see Roccio et al., 2020; Chen et al., 2021; Iyer and Groves, 2021; Iyer et al.,
+
+99
+
+2022). Co-expression of Atoh1, Pou4f3 and Gfi1 is sufficient to drive a more mature hair cell
+
+100
+
+fate in postnatal cochlear supporting cells (Chen et al., 2021). The expression of Atoh1,
+
+101
+
+Pou4f3 and Six1 in developing ampullary organs, as well as neuromasts, suggests that
+
+102
+
+molecular mechanisms underlying electroreceptor development are likely to be highly
+
+103
+
+conserved with those underlying hair cell formation (Modrell et al., 2011a; Modrell et al.,
+
+104
+
+2017a). Nevertheless, hair cells and electroreceptors are morphologically and functionally
+
+105
+
+distinct (Jørgensen, 2005; Baker, 2019). Validation of multiple candidate genes from the late-
+
+106
+
+larval paddlefish lateral line organ-enriched dataset had identified only a handful of genes with
+
+107
+
+expression in developing ampullary organs but not neuromasts (Modrell et al., 2017a). These
+
+108
+
+were the basic helix-loop-helix (bHLH) transcription factor gene Neurod4, plus two voltage-
+
+109
+
+gated potassium channel subunit genes (Kcna5, encoding Kv1.5, and Kcnab3, encoding the
+
+110
+
+accessory subunit Kvb3) and a calcium-chelating beta-parvalbumin, all presumably involved
+
+111
+
+in electroreceptor function (Modrell et al., 2017a).
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+112
+
+In recent years, another chondrostean fish, the sterlet (a sturgeon, Acipenser
+
+113
+
+ruthenus), has been developed as an experimentally tractable non-teleost model (see e.g.,
+
+114
+
+Saito and Psenicka, 2015; Chen et al., 2018; Baloch et al., 2019; Stundl et al., 2020; Du et al.,
+
+115
+
+2020; Stundl et al., 2022). In contrast to the limited Mississippi paddlefish spawning season,
+
+116
+
+many hundreds of sterlet embryos are available each week for up to several months in fully
+
+117
+
+equipped laboratory research facilities. We have therefore turned to the sterlet as a tractable
+
+118
+
+model for studying the molecular control of lateral line hair cell and electroreceptor
+
+119
+
+development. In the current study, we describe lateral line hair cell and electroreceptor
+
+120
+
+differentiation in the sterlet, and the expression in sterlet and/or paddlefish of almost all of the
+
+121
+
+remaining transcription factor genes from the paddlefish late-larval lateral line organ-enriched
+
+122
+
+dataset (Modrell et al., 2017a), plus a few additional candidates. We report expression within
+
+123
+
+the developing lateral line system of 23 novel transcription factor genes. Twelve - including
+
+124
+
+the key 'hair cell' transcription factor gene Gfi1 - were expressed in both ampullary organs and
+
+125
+
+neuromasts, supporting conserved molecular mechanisms. Six transcription factor genes
+
+126
+
+proved to be electrosensory-restricted, while five represent the first-reported mechanosensory
+
+127
+
+lateral line-restricted transcription factors. These eleven genes, plus ampullary organ-
+
+128
+
+restricted Neurod4 (Modrell et al., 2017a), are good candidates to be involved in the
+
+129
+
+development of electrosensory versus mechanosensory lateral line organs.
+
+130
+131
+
+Results
+
+132
+133
+
+Characterizing lateral line hair cell and electroreceptor development in sterlet
+
+134
+
+In order to use the sterlet as a more experimentally tractable model for lateral line organ
+
+135
+
+development than the Mississippi paddlefish (Modrell et al., 2011b; Modrell et al., 2011a;
+
+136
+
+Modrell et al., 2017b; Modrell et al., 2017a), we first characterized the timing and distribution
+
+137
+
+of lateral line hair cell and electroreceptor differentiation (staging according to Dettlaff et al.,
+
+138
+
+1993). The development of lateral line placodes, neuromasts and ampullary organs had
+
+139
+
+previously been described in the shovelnose sturgeon, Scaphirhynchus platorynchus (Gibbs
+
+140
+
+and Northcutt, 2004a); ampullary organ formation had also been described in a sturgeon in
+
+141
+
+the same genus as the sterlet, the Adriatic sturgeon, A. naccari (Camacho et al., 2007). In S.
+
+142
+
+platorynchus, all lateral line placodes were present at stage 30 and had started to elongate
+
+143
+
+into sensory ridges (Gibbs and Northcutt, 2004a). By the time of hatching at stage 36,
+
+144
+
+neuromast primordia were present within the sensory ridges at the centre of all the lateral line
+
+145
+
+placodes but only a few mature neuromasts had formed, specifically in the otic lateral line
+
+146
+
+(Gibbs and Northcutt, 2004a). At stage 41, roughly midway between hatching (stage 36) and
+
+147
+
+the onset of independent feeding (stage 45), ampullary organ primordia were present in the
+
+148
+
+lateral zones of the anterodorsal, anteroventral, otic and supratemporal sensory ridges (Gibbs
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+149
+
+and Northcutt, 2004a). At stage 45, mature ampullary organs were present in the infraorbital,
+
+150
+
+otic and posterior preopercular fields and ampullary organs continued to develop over the next
+
+151
+
+three weeks (Gibbs and Northcutt, 2004a). By stage 45 in A. naccari, in contrast, ampullary
+
+152
+
+organs are ultrastructurally mature at almost all sites and thought to be functional (Camacho
+
+153
+
+et al., 2007). Camacho et al. (2007) speculate that the difference is due to S. platorynchus
+
+154
+
+reaching stage 45 on day 4 post-hatching, leaving less time for completion of ampullary organ
+
+155
+
+development than in A. naccari, which reaches stage 45 on day 9 post-hatching.
+
+156
+
+To examine the formation and distribution of developing neuromasts and ampullary
+
+157
+
+organs in sterlet, we focused on the stages between stage 35, i.e., the stage before hatching
+
+158
+
+(stage 36), up to the onset of independent feeding at stage 45, which is reached in the sterlet
+
+159
+
+at 14 days post-fertilization (dpf; Zeiske et al., 2003). Figure 1 shows a temporal overview of
+
+160
+
+the expression by in situ hybridization (ISH) in sterlet of Eya4, an otic and lateral line
+
+161
+
+primordium marker that is eventually restricted to differentiated hair cells and electroreceptors
+
+162
+
+(Modrell and Baker, 2012; Baker et al., 2013) (Figure 1A-D) and Sox2, which is also expressed
+
+163
+
+by lateral line primordia and is eventually restricted to supporting cells in both ampullary
+
+164
+
+organs and neuromasts, with stronger expression in neuromasts (Modrell et al., 2017a)
+
+165
+
+(Figure 1E-H). (Sox2 is also expressed in taste buds on the barbels and around the mouth;
+
+166
+
+Figure 1E-H.) As a marker for differentiated hair cells and electroreceptors, we used Cacna1d,
+
+167
+
+which encodes the pore-forming alpha subunit of Cav1.3 and is expressed in hair cells and
+
+168
+
+electroreceptors across jawed vertebrates (Modrell et al., 2017a; Bellono et al., 2017; Bellono
+
+169
+
+et al., 2018) (Figure 1I-L; also see Supplementary Figure S1A-H). To identify electroreceptors
+
+170
+
+specifically, we cloned the two voltage-gated potassium channel subunit genes that we
+
+171
+
+identified as electroreceptor-specific in paddlefish (Modrell et al., 2017a): Kcnab3, encoding
+
+172
+
+the accessory subunit Kvb3 (Figure 1M-P; also see Supplementary Figure S1I-P) and Kcna5,
+
+173
+
+encoding Kv1.5, which shows the same expression pattern as Kcnab3 (data not shown.) The
+
+174
+
+earliest sign of neuromast hair cell differentiation was at stage 35 (Figure 1I; Supplementary
+
+175
+
+Figure S1A,B) with increasing numbers at all subsequent stages (Figure 1J-L; Supplementary
+
+176
+
+Figure S1C-H). Differentiated electroreceptors were not seen until stages 40-41, in some
+
+177
+
+ampullary organ fields (Figure 1I-K,M-O; Supplementary Figure S1I-N). By stage 45 (the onset
+
+178
+
+of independent feeding), all cranial neuromast lines and fields of ampullary organs with
+
+179
+
+differentiated electroreceptors could be identified (Figure 1D,H,L,P; Supplementary Figure
+
+180
+
+S1G,H,O,P). A schematic summary is shown in Figure 1Q-T.
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+
+Figure 1. Time-course of neuromast and ampullary organ development in sterlet. In situ
+hybridization at selected stages in sterlet, from stage 35 (the stage before hatching occurs, at stage 36)
+to stage 45, the onset of independent feeding. (A-D) Eya4 expression in sensory ridges and ampullary
+organ fields at stages 35 and 39 subsequently resolves into individual neuromasts and ampullary
+organs. (E-H) A paddlefish Sox2 riboprobe reveals Sox2 expression in sensory ridges at stage 35 that
+later resolves into a ring-like pattern in neuromasts, with weaker expression in ampullary organs from
+stage 41. Very strong expression is also seen in taste buds on the barbels and around the mouth. (I-L)
+Expression of Cacna1d, encoding the pore-forming alpha subunit of the voltage-gated calcium channel
+Cav1.3, reveals differentiated hair cells in a few neuromasts already at stage 35 in the otic line, near the
+otic vesicle, with increasing numbers later, and some differentiated electroreceptors already at stage
+41. Cacna1d is also weakly expressed in taste buds, most clearly on the barbels. (M-P) Expression of
+electroreceptor-specific Kcnab3 (encoding an accessory subunit for a voltage-gated K+ channel, Kvb3)
+shows some differentiated electroreceptors are present by stage 41, but not earlier. (Q-T) Schematic
+representation of sterlet lateral line development at stages 35, 39, 41 and 45. Abbreviations: app,
+anterior preopercular ampullary organ field; b, barbels; di, dorsal infraorbital ampullary organ field; dot,
+dorsal otic ampullary organ field; ds, dorsal supraorbital ampullary organ field; e, eye; gf, gill filaments;
+m, mouth; n, naris; o, otic vesicle; ppp, posterior preopercular ampullary organ field; S, stage; st,
+supratemporal ampullary organ field; vi, ventral infraorbital ampullary organ field; vs, ventral supraorbital
+ampullary organ field. Scale bar: 200 μm.
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+201
+
+'Hair cell' transcription factor genes expressed in developing ampullary organs include
+
+202
+
+Gfi1, Sox4 and Sox3
+
+203
+
+We previously showed that various transcription factor genes essential for hair cell
+
+204
+
+development - Six1, Eya1, Sox2, Atoh1, Pou4f3 (see Roccio et al., 2020; Iyer and Groves,
+
+205
+
+2021) - are expressed in developing paddlefish ampullary organs, as well as neuromasts
+
+206
+
+(Modrell et al., 2011b; Modrell et al., 2011a; Butts et al., 2014; Modrell et al., 2017a). We
+
+207
+
+confirm here that, in addition to Sox2 (Figure 1E-H; Figure 2A,B), Atoh1 and Pou4f3 are also
+
+208
+
+expressed in both types of lateral line organ in sterlet (Figure 2C-F). As noted earlier, Sox2
+
+209
+
+was expressed more strongly in neuromasts than ampullary organs (Figure 1G,H; Figure
+
+210
+
+2A,B). However, Atoh1 showed the converse pattern, with stronger expression in ampullary
+
+211
+
+organs than in neuromasts (Figure 2C,D). These differential expression patterns were also
+
+212
+
+seen at earlier stages (for Sox2, see Figure 1E-G; for Atoh1, see Supplementary Figure S2A-
+
+213
+
+D).
+
+214
+
+A key 'hair cell' transcription factor gene whose expression we had not previously
+
+215
+
+examined is the zinc-finger transcription factor gene Gfi1 (see Roccio et al., 2020; Chen et al.,
+
+216
+
+2021; Iyer and Groves, 2021; Iyer et al., 2022). Gfi1 was 12.0-fold enriched in late-larval
+
+217
+
+paddlefish operculum versus fin tissue (Modrell et al., 2017a). Sterlet Gfi1 proved also to be
+
+218
+
+expressed in developing ampullary organs, as well as neuromasts (Figure 2G,H).
+
+219
+
+In the mouse inner ear, the SoxC subfamily members Sox4 and Sox11 are co-
+
+220
+
+expressed in proliferating hair cell progenitor cells and newly born hair cells, and in
+
+221
+
+combination are essential for hair cell formation (Gnedeva and Hudspeth, 2015). Ectopic
+
+222
+
+expression of either gene converts supporting cells to hair cells (Gnedeva and Hudspeth,
+
+223
+
+2015). Although neither Sox4 nor Sox11 was present in the paddlefish lateral line-enriched
+
+224
+
+gene-set (Modrell et al., 2017a), we cloned sterlet Sox4, which proved to be expressed in both
+
+225
+
+ampullary organs and neuromasts, though more strongly in ampullary organs (Figure 2I,J).
+
+226
+
+This differential expression pattern was also seen at earlier stages (Supplementary Figure
+
+227
+
+S2E-H).
+
+228
+
+It has been reported that proliferative stem cells in zebrafish neuromasts express the
+
+229
+
+SoxB1 subfamily member Sox3, as well as Sox2, and that Sox3 is important for the formation
+
+230
+
+of the correct number of neuromast hair cells (preprint: Undurraga et al., 2019). A recent
+
+231
+
+single-cell RNA sequencing (scRNA-seq) study showed Sox3 expression at homeostasis in
+
+232
+
+multiple neuromast support cell types (Baek et al., 2022) including central cells, the immediate
+
+233
+
+precursors of regenerating hair cells (Romero-Carvajal et al., 2015; Lush et al., 2019). We had
+
+234
+
+previously used a candidate gene approach for lateral line placode markers to identify Sox3
+
+235
+
+expression in paddlefish lateral line primordia, neuromasts and also ampullary organs (Modrell
+
+236
+
+et al., 2011b). (Sox3 was 5.2-fold enriched in late-larval paddlefish operculum versus fin
+
+237
+
+tissue; Modrell et al., 2017a.) As expected, sterlet Sox3 was also expressed in both types of
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+
+Figure 2. Transcription factor genes essential for hair cell development, including Gfi1, are
+expressed in ampullary organs as well as neuromasts. In situ hybridization in sterlet at stage 45
+(the onset of independent feeding). Black arrowheads indicate examples of neuromasts; white
+arrowheads indicate examples of ampullary organs. (A,B) A paddlefish Sox2 riboprobe reveals strong
+Sox2 expression in neuromasts and weaker expression in ampullary organs (plus very strong
+expression in taste buds on the barbels and around the mouth). (C,D) Atoh1 is expressed more strongly
+in ampullary organs than in neuromasts. (E,F) Pou4f3 and (G,H) Gfi1 are expressed in both neuromasts
+and ampullary organs. (I,J) Sox4 is expressed in ampullary organs and very weakly in neuromasts.
+(K,L) Sox3 expression is weaker in neuromasts than in ampullary organs (the opposite to Sox2;
+compare with A,B). (M,N) For comparison, the differentiated hair cell and electroreceptor marker
+Cacna1d is expressed in both neuromasts and ampullary organs (and also weakly in taste buds). (O,P)
+For comparison, the electroreceptor marker Kcnab3 is expressed in ampullary organs only.
+Abbreviations: di, dorsal infraorbital ampullary organ field; e, eye; n, naris; S, stage; vi, ventral
+infraorbital ampullary organ field. Scale bar: 200 μm.
+
+254
+
+lateral line organ, though much more strongly in ampullary organs than in neuromasts (Figure
+
+255
+
+2K,L). Intriguingly, this was the opposite pattern to the other SoxB1 family member, Sox2
+
+256
+
+(Figure 2A,B). This differential expression pattern was also seen at earlier stages
+
+257
+
+(Supplementary Figure S2I-L). For comparison, Figure 2M and 2N show the hair cell and
+
+258
+
+electroreceptor marker Cacna1d, and Figure 2O and 2P show electroreceptor-specific Kcnab3
+
+259
+
+expression.
+
+260
+
+Thus, all the key 'hair cell' transcription factors are expressed in developing ampullary
+
+261
+
+organs as well as neuromasts (although several show differing levels of expression between
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+262
+
+the different organ types). These results provide further support for the hypothesis that
+
+263
+
+electroreceptors evolved as transcriptionally related sister cell types to lateral line hair cells
+
+264
+
+(Baker and Modrell, 2018).
+
+265
+266
+
+Additional transcription factor genes expressed in developing ampullary organs and
+
+267
+
+neuromasts
+
+268
+
+We cloned and analysed the expression of paddlefish and/or sterlet homologues of a further
+
+269
+
+33 transcription factor genes present in the late-larval paddlefish lateral line organ-enriched
+
+270
+
+dataset (Modrell et al., 2017a). (The paddlefish lateral line-enriched dataset also includes
+
+271
+
+fifteen other loci assigned to specific transcription factor/co-factor genes, for which cloning
+
+272
+
+and/or ISH failed in sterlet, or expression was inconsistent: Akna, Barx1, Egr2, Fev, Fhl2, Fhl5,
+
+273
+
+Litaf, Meis3, Nkx3-1, Not2, Osr1, Pou3f1, Spdef, Tbx22 and Vgll3.) Nine of the transcription
+
+274
+
+factor genes examined were expressed in developing ampullary organs as well as
+
+275
+
+neuromasts, like Gfi1 (see previous section). One was the zinc-finger transcription factor gene
+
+276
+
+Insm2 (19.9-fold lateral line-enriched in late-larval paddlefish; Modrell et al., 2017a), which
+
+277
+
+was expressed in both ampullary organs and neuromasts in paddlefish and sterlet (Figure 3A-
+
+278
+
+D). However, Insm2 expression was much stronger in ampullary organs than in neuromasts;
+
+279
+
+indeed in sterlet, Insm2 expression in neuromasts was often undetectable except in some
+
+280
+
+parts of the neuromast lines (Figure 3C,D). The PRD class homeobox transcription factor gene
+
+281
+
+Otx1 (18.7-fold lateral line-enriched; Modrell et al., 2017a) similarly showed much stronger
+
+282
+
+expression in ampullary organs than in neuromasts in both paddlefish and sterlet (Figure 3E-
+
+283
+
+H). Also expressed in both ampullary organs and neuromasts were two other homeobox
+
+284
+
+transcription factor genes, encoding TALE class Irx1 (Figure 3I,J; originally unassigned locus
+
+285
+
+111072; 8.3-fold lateral line-enriched, Modrell et al., 2017a) and LIM class Lhx6 (Figure 3K,L;
+
+286
+
+originally unassigned locus 12855; 3.5-fold lateral line-enriched, Modrell et al., 2017a). (The
+
+287
+
+Lhx6-like riboprobe recognises sequence from the 3' untranslated region of Lhx6-like mRNA,
+
+288
+
+as annotated in the sterlet reference genome; Du et al., 2020.)
+
+289
+
+The Notch target and effector gene Hey2 (2.9-fold lateral line-enriched, Modrell et al.,
+
+290
+
+2017b) was also expressed by both ampullary organs and neuromasts (Figure 3M,N). Three
+
+291
+
+originally unassigned loci in the paddlefish lateral line organ-enriched dataset (Modrell et al.,
+
+292
+
+2017a), all of whose closest UniProt matches had Pfam Hairy Orange and helix-loop-helix
+
+293
+
+DNA-binding domains (locus 52662, 2.7-fold lateral line-enriched; locus 27975, 2.9-fold lateral
+
+294
+
+line-enriched; locus 26264, 2.3-fold lateral line-enriched), proved to represent the related
+
+295
+
+Notch target and effector gene Hes5. We had previously published the expression of Hes5 in
+
+296
+
+both ampullary organs and neuromasts in a study on the role of Notch signalling in ampullary
+
+297
+
+organ versus neuromast development in paddlefish (Modrell et al., 2017b).
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+
+Figure 3. Other transcription factor genes expressed in ampullary organs and neuromasts. In
+situ hybridization in paddlefish or sterlet, showing genes expressed in both ampullary organs (white
+arrowheads indicate examples) and neuromasts (black arrowheads indicate examples). Higher power
+views in each case are of the same embryo shown in the preceding panel. (A-D) Insm2 at stage 45 in
+paddlefish (A,B) and sterlet (C,D). Neuromast expression is only detectable in some parts of the
+neuromast lines and is noticeably weaker than in ampullary organs. (E-H) Otx1 at stage 45 in paddlefish
+(E,F) and sterlet (G,H). Neuromast expression is considerably weaker than ampullary organ expression
+(almost undetectable in paddlefish). (I,J) Irx1 at stage 45 in paddlefish. Neuromast expression is weak
+and can be seen most clearly on the tip of the rostrum (black arrowheads in J). (K,L) Sterlet Lhx6-like
+at stage 46. (M,N) Sterlet Hey2 at stage 45. (O,P) Sterlet Tfap2 at stage 45. (Q,R) Sterlet Klf17 at stage
+45. (S,T) Sterlet Znf703 at stage 45. Expression in lateral line organs was often hard to detect in
+wholemount but expression in both neuromasts (NM) and ampullary organs (AO) was clear in
+skinmount (examples shown in inset in T). Strong expression is seen in gill filaments (white asterisk).
+(U-X) Sterlet Elf3. At stage 40 (U,V), Elf3 is expressed in a 'ring' pattern in neuromasts, and in scattered
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+313
+314
+315
+316
+317
+
+cells in the skin. By stage 43 (W,X), Elf3 expression is also seen in ampullary organs and more broadly
+throughout the skin. Abbreviations: AO, ampullary organ; di, dorsal infraorbital ampullary organ field; e,
+eye; m, mouth; n, naris; NM, neuromast; S, stage; vi, ventral infraorbital ampullary organ field. Scale
+bars: 200 μm except for inset in T: 50 μm.
+
+318
+
+Expression in developing ampullary organs and neuromasts was also seen for Tfap2d
+
+319
+
+(Figure 3O,P; 6.0-fold lateral line-enriched, Modrell et al., 2017a). This gene encodes
+
+320
+
+transcription factor AP-2 delta, which is a direct activator of Pou4f3 in retinal ganglion cell
+
+321
+
+progenitors (Hesse et al., 2011; Li et al., 2016). The Krüppel-like transcription factor gene
+
+322
+
+Klf17 (2.1-fold lateral line-enriched, originally annotated as Klf4; Modrell et al., 2017a) was
+
+323
+
+also expressed in both types of lateral line organ (Figure 3Q,R), as was the zinc finger
+
+324
+
+transcription factor gene Znf703 (2.3-fold lateral line-enriched, Modrell et al., 2017a), although
+
+325
+
+neuromast expression was often at the limits of detection in wholemount (Figure 3S,T).
+
+326
+
+However, Znf703 expression in neuromasts as well as ampullary organs was clear in
+
+327
+
+skinmount (Figure 3T, inset). The E74-like Ets domain transcription factor gene Elf3 (2.1-fold
+
+328
+
+lateral line-enriched, Modrell et al., 2017a) showed a 'ring-like' expression pattern in both
+
+329
+
+neuromasts and ampullary organs that was clearer prior to stage 45 as general expression
+
+330
+
+gradually developed throughout the skin (Figure 3U-X).
+
+331
+332
+
+Electrosensory-restricted lateral line expression: Irx5, Satb2, Insm1, Sp5, Mafa and
+
+333
+
+Rorc
+
+334
+
+Our original analysis of candidates from the late-larval paddlefish lateral line organ-enriched
+
+335
+
+dataset identified the bHLH gene Neurod4 as the first-reported transcription factor gene
+
+336
+
+restricted within the paddlefish lateral line to developing ampullary organs (Modrell et al.,
+
+337
+
+2017a). Here, we identified six more transcription factor genes whose lateral line expression
+
+338
+
+is restricted to ampullary organs in sterlet. Two encode homeodomain transcription factors:
+
+339
+
+the TALE class homeobox transcription factor gene Irx5 (1.9-fold lateral line-enriched in
+
+340
+
+paddlefish, Modrell et al., 2017a; Figure 4A-D) and the CUT class (SATB subclass) homeobox
+
+341
+
+transcription factor gene Satb2 (4.8-fold lateral line-enriched in paddlefish, Modrell et al.,
+
+342
+
+2017a), although its expression was weak (Figure 4E,F).
+
+343
+
+Two zinc-finger transcription factor genes similarly showed expression in sterlet
+
+344
+
+ampullary organs, but not neuromasts: Insm1 (3.1-fold lateral line-enriched, Modrell et al.,
+
+345
+
+2017a; Figure 4G,H) and Sp5 (2.6-fold lateral line-enriched, Modrell et al., 2017a; Figure 4I,J).
+
+346
+
+Sp5 was also expressed in the migrating posterior lateral line primordium on the trunk, but not
+
+347
+
+in trunk neuromasts (Figure 4K: compare with Sox2 expression in the migrating primordium
+
+348
+
+and developing neuromasts at the same stage, Figure 4L). (Insm1 was also expressed in cells
+
+349
+
+scattered throughout the skin; these are likely to be Merkel cells, which were shown to express
+
+350
+
+Insm1 in differential RNA-seq data from mouse; Hoffman et al., 2018.)
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+
+Figure 4. Transcription factor genes expressed in ampullary organs but not neuromasts. In situ
+hybridization at stage 45 in paddlefish or sterlet. White arrowheads indicate examples of ampullary
+organs; black arrowheads indicate examples of neuromasts. (A-D) Irx5 in paddlefish (A,B) and sterlet
+(C,D; using the paddlefish riboprobe). (E,F) Sterlet Satb2. (G,H) Sterlet Insm1 (also expressed in
+scattered cells throughout the skin, most likely Merkel cells). (I-K) Sterlet Sp5. Expression on the head
+is detected in ampullary organs but not neuromasts; on the trunk, weak expression is also visible in the
+migrating posterior lateral line primordium (arrow in K, different larva). The inset shows the position of
+the migrating primordium on the larval tail. (L) For comparison with panel K: Sox2 expression (using a
+paddlefish Sox2 riboprobe) is also seen in the migrating posterior lateral line primordium (arrow), as
+well as in developing neuromasts (black arrowheads). The inset shows the position of the migrating
+primordium on the larval tail. (M,N) Sterlet Mafa. (O,P) Sterlet Rorc. (Q,R) Sterlet Cacna1d for
+comparison, showing differentiated hair cells in neuromasts and electroreceptors in ampullary organs.
+(S,T) Sterlet Kcnab3 for comparison, showing differentiated electroreceptors only. Abbreviations: di,
+dorsal infraorbital ampullary organ field; e, eye; n, naris; pllp, posterior lateral line primordium; S, stage;
+vi, ventral infraorbital ampullary organ field. Scale bars: 200 μm except for insets in K,L: 1000 μm.
+
+368
+
+Two other transcription factor genes proved to be expressed in ampullary organs but
+
+369
+
+not neuromasts: the bZIP transcription factor gene Mafa (2.6-fold lateral line-enriched, Modrell
+
+370
+
+et al., 2017a; Figure 4M,N) and a retinoic acid receptor (RAR)-related orphan nuclear receptor
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+371
+
+gene, Rorc (14.3-fold lateral line-enriched, Modrell et al., 2017a; Figure 4O,P). For comparison
+
+372
+
+with the ampullary organ-restricted expression of the above-listed transcription factor genes,
+
+373
+
+Figure 4Q,R show Cacna1d expression in hair cells and electroreceptors, while Figure 4S,T
+
+374
+
+show electroreceptor-specific Kcnab3 expression.
+
+375
+376
+
+Sox8 is restricted to the mechanosensory lateral line in bony but not cartilaginous
+
+377
+
+fishes
+
+378
+
+The paddlefish lateral line organ-enriched gene-set included a single SoxE-class high-mobility
+
+379
+
+group (HMG)-box transcription factor gene, Sox10 (3.9-fold lateral line-enriched, Modrell et
+
+380
+
+al., 2017a). Comparison with the hair cell and electroreceptor marker Cacna1d (Figure 5A,B)
+
+381
+
+and the supporting cell marker Sox2 (Figure 5C,D) shows that paddlefish Sox10 was not
+
+382
+
+expressed within neuromasts or ampullary organs, but instead along nerves (Figure 5E,F).
+
+383
+
+Sox10 expression would be expected in nerve-associated Schwann cells, as these neural
+
+384
+
+crest-derived glial cells express Sox10 throughout their development and into the adult (see
+
+385
+
+e.g., Jessen and Mirsky, 2019).
+
+386
+
+Another SoxE-class HMG-box transcription factor gene, Sox8, was previously reported
+
+387
+
+to be expressed in developing ampullary organs in a shark, Scyliorhinus canicula (Freitas et
+
+388
+
+al., 2006). Given this, we also cloned Sox8 and the remaining SoxE class gene, Sox9, to test
+
+389
+
+their expression in paddlefish. Sox9 was expressed at late-larval stages in both neuromasts
+
+390
+
+and ampullary organs with a 'ring-like' distribution (Figure 5G,H). This is also consistent with
+
+391
+
+Sox9 expression in the developing mouse inner ear, where initial broad expression becomes
+
+392
+
+restricted to supporting cells, co-expressed with Sox2 (Mak et al., 2009; Jan et al., 2021).
+
+393
+
+Paddlefish Sox8 expression, in contrast to Sox9, was restricted to neuromasts at late-
+
+394
+
+larval stages (Figure 5I,J), also in a ring pattern suggestive of supporting cells rather than
+
+395
+
+centrally clustered hair cells (compare neuromast expression of Sox8 in Figure 5J with
+
+396
+
+Cacna1d in hair cells in Figure 5B and Sox2 expression in supporting cells in Figure 5D). Sox8
+
+397
+
+was also expressed in neuromasts on the trunk (Figure 5K), and at earlier stages, in the central
+
+398
+
+region of sensory ridges where neuromasts form (Figure 5L).
+
+399
+
+The mechanosensory lateral line-restricted expression of paddlefish Sox8 contrasts
+
+400
+
+with the reported expression of Sox8 in shark ampullary organs (Freitas et al., 2006). To test
+
+401
+
+this further, we cloned all three SoxE genes from the lesser-spotted catshark (Scyliorhinus
+
+402
+
+canicula). We confirmed that Sox8 is expressed in shark ampullary organs, as previously
+
+403
+
+reported (Freitas et al., 2006), as well as in neuromasts (Figure 5M,N), unlike the neuromast-
+
+404
+
+specific Sox8 expression seen in the late-larval paddlefish (Figure 5K,L). Sox9 was not
+
+405
+
+expressed in shark lateral line organs at all (Figure 5O,P), in striking contrast to paddlefish
+
+406
+
+Sox9 expression in both neuromasts and ampullary organs (Figure 5G,H). The only conserved
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+
+Figure 5. Lateral line expression of SoxE genes differs between chondrostean ray-finned bony
+fishes and cartilaginous fishes. In situ hybridization in late-larval paddlefish or catshark (S. canicula).
+White arrowheads indicate examples of ampullary organs; black arrowheads indicate examples of
+neuromasts. (A,B) For comparison, paddlefish Cacna1d expression at stage 46 reveals differentiated
+hair cells in neuromasts and electroreceptors in ampullary organs. (C,D) For comparison, paddlefish
+Sox2 expression at stage 46 identifies support cells in neuromasts and ampullary organs. (E,F)
+Paddlefish Sox10 expression at stage 46 is associated with cranial nerves, not in lateral line organs
+(compare with Cacna1d expression in panel A). (G,H) Paddlefish Sox9 at stage 46 is expressed in a
+'ring'-like pattern in neuromasts and ampullary organs (compare with panels A-D, especially in the
+ventral infraorbital ampullary organ field). (I-K) Paddlefish Sox8 expression at stage 46 is seen in a ring
+pattern in neuromasts only (compare panel J with panels B,D), including in neuromasts developing on
+the trunk (K). (L) At stage 37, paddlefish Sox8 is expressed in sensory ridges (white arrows). (M,N)
+Catshark Sox8 at stage 31 is expressed in both neuromasts and ampullary organs. (O,P) Catshark
+Sox9 expression at stage 31 is not seen in lateral line organs (compare with Sox8 in panels O,P). (QT) Catshark Sox10 expression at stage 31 seems to be in or near individual lateral line organs in wholemount (Q,R). However, in situ hybridization on sections shows that Sox10 is strongly expressed in cells
+(arrows) adjacent to neuromasts (S) and ampullary organs (T) that are likely associated with nerves.
+Above-background Sox10 expression is not seen in the lateral line organs themselves. Abbreviations:
+di, dorsal infraorbital ampullary organ field; e, eye; m, mouth; n, naris; S, stage; vi, ventral infraorbital
+ampullary organ field. Scale bars: A-L,N,P,R, 200 μm; M,O,Q, 500 μm; S,T, 10 μm.
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+429
+
+SoxE lateral line expression pattern between catshark and paddlefish was that of Sox10,
+
+430
+
+which ISH on sections confirmed to be restricted to axon-associated Schwann cells (Figure
+
+431
+
+5Q-T). Overall, these data reveal lineage-specific differences in SoxE transcription factor gene
+
+432
+
+expression within late-larval lateral line organs in a ray-finned chondrostean fish versus a
+
+433
+
+cartilaginous fish.
+
+434
+435
+
+Foxg1 is restricted to the mechanosensory lateral line
+
+436
+
+The winged-helix transcription factor gene Foxg1 was 11.4-fold enriched in late-larval (stage
+
+437
+
+46) paddlefish operculum vs. fin (Modrell et al., 2017a). Foxg1 proved to be restricted to the
+
+438
+
+mechanosensory lateral line in ray-finned chondrostean fishes. For comparison, Figure 6A-D
+
+439
+
+show Sox2 protein expression in supporting cells in neuromasts and (more weakly) in
+
+440
+
+ampullary organs in late-larval paddlefish (Figure 6A,B) and sterlet (Figure 6C,D). Sox2
+
+441
+
+immunostaining also labels taste buds, and individual cells scattered throughout the skin (most
+
+442
+
+likely Merkel cells, which express Sox2 in zebrafish, as well as mouse; Brown et al., 2023;
+
+443
+
+Bardot et al., 2013; Lesko et al., 2013; Perdigoto et al., 2014). Paddlefish Foxg1 expression
+
+444
+
+in the lateral line system at stage 45 (Figure 6E,F) was restricted to neuromast lines, but
+
+445
+
+excluded from the central domain of individual neuromasts where hair cells are found
+
+446
+
+(compare Figure 6F with Sox2 in Figure 6B). (Foxg1 expression was also seen in the olfactory
+
+447
+
+system, as expected; e.g., Kawauchi et al., 2009.) Paddlefish Foxg1 was expressed in the
+
+448
+
+migrating posterior lateral line primordium on the trunk, and in trunk neuromasts deposited by
+
+449
+
+the primordium (Figure 6G; compare with Sox2 immunostaining at the same stage, Figure
+
+450
+
+6H). Sterlet Foxg1 was expressed in the same pattern at stage 45 as in paddlefish (Figure 6I-
+
+451
+
+K; Figure 6L shows Sox2 immunostaining in the sterlet posterior lateral line primordium and
+
+452
+
+trunk neuromasts for comparison with sterlet Foxg1 expression in Figure 6K). Analysis at
+
+453
+
+earlier stages in sterlet showed that Foxg1 expression was restricted to the central zone of
+
+454
+
+sensory ridges where neuromasts form (Figure 6M-R). Thus, Foxg1 expression in the
+
+455
+
+developing lateral line system is restricted to the mechanosensory division, although it seems
+
+456
+
+to be excluded from differentiated hair cells.
+
+457
+458
+
+Mechanosensory-restricted lateral line expression of Hmx2, Isl1 and Rorb
+
+459
+
+The NKL class homeobox transcription factor gene Hmx2 (also known as Nkx5-2), which was
+
+460
+
+5.8-fold lateral line-enriched in late-larval paddlefish (Modrell et al., 2017a), also proved to be
+
+461
+
+restricted to the mechanosensory lateral line. For comparison, Figure 7A,B show Sox2
+
+462
+
+immunostaining at stage 45. At this stage, Hmx2 was expressed in a ring-like pattern at the
+
+463
+
+outer edge of developing neuromasts (Figure 7C,D; compare with Sox2 in Figure 7A,B).
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+
+Figure 6. Foxg1 is mechanosensory-restricted within the developing lateral line. Black
+arrowheads indicate examples of neuromasts; white arrowheads indicate examples of ampullary
+organs. (A-D) For comparison, Sox2 immunostaining at stage 45 in paddlefish (A,B) and sterlet (C,D)
+shows support cells in neuromasts (stronger staining) and ampullary organs (weaker staining). (Strong
+Sox2 expression is also seen in taste buds on the barbels and around the mouth, and in scattered cells
+in the skin, most likely Merkel cells.) (E-G) In situ hybridization for Foxg1 at stage 45 in paddlefish,
+showing a ring-like expression pattern in the neuromast lines (compare panel F with paddlefish Sox2 in
+B), as well as expression in the migrating posterior lateral line primordium (arrow in G, different larva)
+and developing trunk neuromasts (black arrowheads). Expression is also seen in the nares. The inset
+in G shows the position of the migrating primordium on the larval tail. (H) For comparison with G, Sox2
+immunostaining on the trunk at stage 45 in paddlefish shows the migrating posterior lateral line
+primordium (arrow) and developing neuromasts. The inset shows the position of the migrating
+primordium on the larval tail. (I-K) In situ hybridization for Foxg1 at stage 45 in sterlet similarly shows a
+ring pattern in neuromasts (compare panel J with sterlet Sox2 in D), as well as expression in the
+migrating posterior lateral line primordium (arrow in K, different larva) and developing trunk neuromasts
+(black arrowheads). Expression is also seen in the nares. The inset in K shows the position of the
+migrating primordium on the larval tail. (L) For comparison with K, Sox2 immunostaining on the trunk
+at stage 45 in sterlet shows weak expression in the migrating posterior lateral line primordium (arrow)
+and developing neuromasts. The inset shows the position of the migrating primordium on the larval tail.
+(M-P) In situ hybridization for sterlet Foxg1 at stage 36 (M,N) and stage 42 (O,P) shows ring-like
+expression already in developing neuromasts in sensory ridges, and no expression in developing
+ampullary organ fields (compare with sterlet Eya4 expression at stages 35 and 41 in Figure 1A,C).
+Abbreviations: di, dorsal infraorbital ampullary organ field; e, eye; n, naris; pllp, posterior lateral line
+primordium; S, stage; vi, ventral infraorbital ampullary organ field. Scale bars 200 μm except for insets
+in G,H,K,L: 1000 μm.
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+
+Figure 7. Hmx2 is mechanosensory-restricted within the developing lateral line system. Black
+arrowheads indicate examples of neuromasts; white arrowheads indicate examples of ampullary
+organs. (A,B) For comparison, Sox2 immunostaining in sterlet is shown at stage 45. Sox2 labels
+developing neuromasts (stronger staining) and scattered cells in the skin, most likely Merkel cells, as
+well as taste buds on the barbels and around the mouth. Expression is also seen in ampullary organs
+(weaker than in neuromasts). A patch of Sox2 expression at the spiracular opening (first gill cleft) may
+represent the spiracular organ. (C-F) In situ hybridization for sterlet Hmx2 at stage 45 in wholemount
+(C,D), Hmx2 is weakly expressed in a ring-like pattern in the neuromast lines, as well as in scattered
+cells in the skin, but appears to be absent from ampullary organs (compare D with Sox2 expression in
+B). A skinmount (E) with several ampullary organs from a stage 45 embryo revealed by post-ISH
+immunostaining for Sox2 (black metallographic deposits) confirms that ampullary organs do not express
+Hmx2 (purple). (The scattered Hmx2-positive skin cells may co-express Sox2, suggesting they are likely
+to be Merkel cells.) Hmx2 is also expressed in the trunk neuromast line (F), including the migrating
+posterior lateral line primordium (black arrow in J). The inset shows the position of the migrating
+primordium on the larval tail. (G) For comparison with H, Sox2 immunostaining at stage 37 labels
+developing neuromasts. Expression is also seen in the nasal capsule and otic vesicle, as well as eye.
+(H) Hmx2 expression at stage 37 is detected in neuromast lines, as well as in the otic vesicle. (I,J) For
+comparison with K and L, Sox2 immunostaining at stage 39 labels developing neuromasts and
+scattered cells in the skin, most likely Merkel cells, as well as taste buds on the barbels. Expression is
+also seen in the nasal capsule and the eye. (K,L) Hmx2 expression at stage 39 is detected in neuromast
+lines and scattered cells in the skin. Abbreviations: ao, ampullary organ; di, dorsal infraorbital ampullary
+organ field; e, eye; n, naris; o, otic vesicle; pllp, posterior lateral line primordium; S, stage; vi, ventral
+infraorbital ampullary organ field. Scale bars: 200 μm except for panel E: 50 μm and inset in F, 1000
+μm.
+
+518
+
+However, no expression was seen in ampullary organs (Figure 7C,D), confirmed in
+
+519
+
+skinmounts after post-ISH Sox2 immunostaining to identify ampullary organs (Figure 7E). As
+
+520
+
+an aside, Hmx2 expression was also seen in scattered skin cells (Figure 7C-E). Hmx2 was
+
+521
+
+not among the genes reported in a differential RNA sequencing study of adult mouse Merkel
+
+522
+
+cells (Hoffman et al., 2018). However, examination of sterlet skinmounts after post-ISH Sox2
+
+523
+
+immunostaining suggested the Hmx2-expressing skin cells may co-express Sox2 (Figure 7E),
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+524
+
+which would support their being Merkel cells. Alternatively, other scRNA-seq studies in mouse
+
+525
+
+and human have shown that Hmx2 is expressed by tuft (brush) cells in gut and airway epithelia
+
+526
+
+(Haber et al., 2017; Deprez et al., 2020), so it is possible the Hmx2-expressing skin cells in
+
+527
+
+paddlefish are chemosensory epithelial cells, like tuft cells (Kotas et al., 2023).
+
+528
+
+Hmx2 was also expressed in the migrating posterior lateral line primordium at stage
+
+529
+
+45 (Figure 7F), like Foxg1 (Figure 6K) and Sox2 (Figure 6L). Analysis at earlier stages, with
+
+530
+
+Sox2 immunostaining for comparison (Figure 7G-L), showed that Hmx2 was weakly
+
+531
+
+expressed in neuromast lines (and in the otic vesicle) at stage 37 (Figure 7H; compare with
+
+532
+
+Sox2 in Figure 7G) and at stage 39 (Figure 7K,L; compare with Sox2 in Figure 7I,J).
+
+533
+
+The LIM class homeobox transcription factor Isl1 was recently reported to promote a
+
+534
+
+more complete conversion by Atoh1 of mouse cochlear supporting cells to hair cells than does
+
+535
+
+Atoh1 alone (Yamashita et al., 2018). The only LIM homeobox genes in the paddlefish lateral
+
+536
+
+line organ-enriched dataset (Modrell et al., 2017a) are Lhx3, which we previously reported to
+
+537
+
+be expressed in ampullary organs as well as neuromasts (Modrell et al., 2017a); Lhx6-like
+
+538
+
+(originally unassigned locus 12855), with the same expression pattern (Figure 3K), and Lhx8,
+
+539
+
+which proved to be expressed in gill filaments, not lateral line organs (Supplementary Figure
+
+540
+
+S3J). Nevertheless, given the demonstrated role for Isl1 in promoting cochlear hair cell
+
+541
+
+formation (Yamashita et al., 2018), we cloned sterlet Isl1. For comparison, Figure 8A,B show
+
+542
+
+Sox2 immunostaining at stage 45, and Figure 8C,D show Cacna1d-expressing hair cells and
+
+543
+
+electroreceptors at stage 45. At this stage, Isl1 expression was weak, but restricted within the
+
+544
+
+lateral line system to neuromasts (Figure 8E,F). Examination at earlier stages revealed no
+
+545
+
+detectable expression at stage 36 (Figure 8G,H) and neuromast-restricted expression at
+
+546
+
+stages 39 and 40, when Isl1 seemed to be more strongly expressed than at stage 45 (Figure
+
+547
+
+8I-L).
+
+548
+
+Finally, we identified the RAR-related orphan nuclear receptor beta gene, Rorb (6.2-
+
+549
+
+fold lateral line-enriched; Modrell et al., 2017a), as being also restricted to neuromasts, with
+
+550
+
+no detectable expression in ampullary organs (Figure 8M-P). The onset of Rorb expression in
+
+551
+
+neuromasts was later even than Isl1, starting only at stage 41 (Figure 8M,N). It was intriguing
+
+552
+
+to see the mutually exclusive expression of Rorb in neuromasts (Figure 8O,P) and Rorc in
+
+553
+
+ampullary organs (Figure 4O,P).
+
+554
+
+Taken together, we have identified Sox8, Foxg1, Hmx2, Isl1 and Rorb as the first-
+
+555
+
+reported transcription factor genes restricted to the mechanosensory division of the lateral line
+
+556
+
+system in ray-finned fishes. Sox8 and Foxg1 are expressed in the central zone of sensory
+
+557
+
+ridges where neuromasts form and maintained in neuromasts, though apparently excluded
+
+558
+
+from differentiated hair cells. Hmx2 is expressed in sensory ridges and retained in neuromasts,
+
+559
+
+whereas Isl1 and Rorb are restricted to neuromasts as early as they can be detected.
+
+560
+
+The remaining transcription factor genes from the paddlefish lateral line organ18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+
+Figure 8. Isl1 and Rorb are mechanosensory-restricted within the developing lateral line system.
+Black arrowheads indicate examples of neuromasts; white arrowheads indicate examples of ampullary
+organs. (A,B) For comparison, Sox2 immunostaining in sterlet is shown at stage 45. Sox2 labels
+developing neuromasts (stronger staining) and scattered cells in the skin, most likely Merkel cells, as
+well as taste buds on the barbels and around the mouth. Expression is also seen in ampullary organs
+(weaker than in neuromasts). A patch of Sox2 expression at the spiracular opening (first gill cleft) may
+represent the spiracular organ. (C,D) For comparison, in situ hybridization for sterlet Cacna1d at stage
+45 shows expression in hair cells in neuromasts and electroreceptors in ampullary organs (and weak
+expression in taste buds on the barbels). (E,F) In situ hybridization for sterlet Isl1 at stage 45 shows
+weak spots of expression in neuromasts but not ampullary organs (compare with Cacna1d in C,D).
+Stronger expression is seen in taste buds on the barbels (black asterisk) and in gill filaments (white
+asterisk). (G-L) In situ hybridization for sterlet Isl1 at earlier stages shows no expression at stage 36
+(G,H), and expression in neuromasts (but not ampullary organs) at stage 39 (I,J), and stage 40 (K,L).
+From stage 39, Isl1 expression is also seen in taste buds on the barbels (asterisk in J) and in gill
+filaments. (M-P) In situ hybridization for sterlet Rorb at stage 41 (M,N), and stage 45 (O,P) shows
+neuromast-specific expression within the lateral line. Abbreviations: di, dorsal infraorbital ampullary
+organ field; e, eye; n, naris; pllp, posterior lateral line primordium; S, stage; vi, ventral infraorbital
+ampullary organ field. Scale bars: 200 μm.
+
+581
+
+enriched gene-set that we examined proved not to be expressed in lateral line organs, but
+
+582
+
+instead, e.g., in ectoderm around ampullary organs (Supplementary Figure S3A-D: Ehf, Foxi2
+
+583
+
+and Nkx2-3), or at the edge of the operculum, in taste buds and/or in developing gill filaments
+
+584
+
+(Supplementary Figure S3E-P: Foxe1, Foxl2, Gcm2, Hoxa2, Lhx8, Pou3f4, Sim2, Tbx1, Tlx1,
+
+585
+
+Tlx2 and Rax2).
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+586
+587
+
+Discussion
+
+588
+589
+
+In this study, we used our paddlefish lateral line organ-enriched gene-set (generated from
+
+590
+
+differential bulk RNA-seq at late larval stages; Modrell et al., 2017a), together with a candidate
+
+591
+
+gene approach, to identify 23 novel transcription factor genes expressed in developing lateral
+
+592
+
+line organs in sterlet and/or paddlefish. These data, together with our previous work in
+
+593
+
+paddlefish (Modrell et al., 2011b; Modrell et al., 2011a; Modrell et al., 2017b; Modrell et al.,
+
+594
+
+2017a), suggest extensive conservation of molecular mechanisms involved in electrosensory
+
+595
+
+and mechanosensory lateral line organ development. However, they also reveal a set of
+
+596
+
+transcription factor genes with restricted expression that may be involved in the development
+
+597
+
+of mechanosensory versus electrosensory organs. Of the 40 transcription factor genes with
+
+598
+
+validated expression during lateral line organ development in paddlefish and/or sterlet, 28
+
+599
+
+(70%) were expressed in both ampullary organs and neuromasts (Table 1). These include the
+
+600
+
+key 'hair cell' transcription factor genes Six1, Eya1, Sox2, Atoh1, Pou4f3 and Gfi1 (see Roccio
+
+601
+
+et al., 2020; Chen et al., 2021; Iyer and Groves, 2021; Iyer et al., 2022). We also identified
+
+602
+
+seven electrosensory-restricted and five mechanosensory-restricted transcription factor
+
+603
+
+genes (Table 1), as discussed further below.
+
+604
+
+While this work was ongoing, a differential RNA-seq study of regenerating ampullary
+
+605
+
+organs and neuromasts in the Siberian sturgeon (Acipenser baerii) was published (Wang et
+
+606
+
+al., 2020). This study compared dissected tissue samples containing stage 45 ampullary
+
+607
+
+organs or neuromasts relative to general epidermis, which identified 2074 lateral line organ-
+
+608
+
+enriched genes, of which 1418 were shared by ampullary organs and neuromasts; 539 were
+
+609
+
+ampullary organ-enriched, and 117 were neuromast-enriched (Wang et al., 2020). The
+
+610
+
+'common' stage 45 lateral line-organ dataset from the Siberian sturgeon (Wang et al., 2020)
+
+611
+
+included many of the candidate genes encoding transcription factors and differentiation
+
+612
+
+markers whose expression we have validated in both ampullary organs and neuromasts at
+
+613
+
+stage 45-46 in paddlefish and/or sterlet, e.g. Six1, Eya1, Atoh1, Pou4f3, Gfi1, Otof, and
+
+614
+
+Cacna1d (Modrell et al., 2011b; Modrell et al., 2011a; Modrell et al., 2017a; this study). The
+
+615
+
+ampullary organ-enriched dataset from the Siberian sturgeon (Wang et al., 2020) included
+
+616
+
+Sp5, which we identified here in sterlet as ampullary organ-restricted, but also Hmx2 and Rorb,
+
+617
+
+which we identified here as neuromast-restricted. Conversely, the neuromast-enriched
+
+618
+
+dataset (Wang et al., 2020) included Insm1, which we found in sterlet to be ampullary organ-
+
+619
+
+restricted. Furthermore, the 'common' dataset (Wang et al., 2020) included genes whose
+
+620
+
+expression in sterlet and paddlefish was either ampullary organ-specific (e.g., the voltage-
+
+621
+
+gated K+ channel genes Kcna5 and Kcnab3, as well as Neurod4; this study; Modrell et al.,
+
+622
+
+2017a), or mechanosensory-specific (e.g., Foxg1 and Isl1; this study).
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+623
+
+Overall, we think that the stage 45 Siberian sturgeon tissue dissections (Wang et al.,
+
+624
+
+2020) were unable to separate ampullary organs and neuromasts completely. Like our own
+
+625
+
+stage 46 paddlefish lateral line organ-enriched dataset (Modrell et al., 2017a), the stage 45
+
+626
+
+Siberian sturgeon datasets are not exhaustive (Wang et al., 2020): some of the genes whose
+
+627
+
+expression we have validated in stage 45-46 sterlet and/or paddlefish lateral line organs were
+
+628
+
+missing (e.g., Satb2, Sox2 and Sox8; this study; Modrell et al., 2017a). Nevertheless, this
+
+629
+
+differential RNA-seq study in late-larval Siberian sturgeon embryos (Wang et al., 2020)
+
+630
+
+provides an invaluable, independent resource from which to identify additional candidate
+
+631
+
+genes for future validation and functional investigation in vivo.
+
+632
+633
+
+Conserved
+
+molecular
+
+mechanisms
+
+are
+
+likely
+
+involved
+
+in
+
+the formation
+
+of
+
+634
+
+electroreceptors and hair cells
+
+635
+
+In this study, we identified twelve novel transcription factor genes expressed in both types of
+
+636
+
+lateral line organ in chondrostean ray-finned fishes, consistent with conservation of molecular
+
+637
+
+mechanisms. In particular, we highlight Gfi1 (see Roccio et al., 2020; Chen et al., 2021; Iyer
+
+638
+
+and Groves, 2021; Iyer et al., 2022) as being another key 'hair cell' transcription factor gene
+
+639
+
+expressed in developing ampullary organs as well as neuromasts, together with Atoh1,
+
+640
+
+Pou4f3, and Six1 (Modrell et al., 2011a; Modrell et al., 2017a). Gfi1-deficient hair cells fail to
+
+641
+
+mature and also upregulate neuronal differentiation genes such as Neurod1 and Pouf41,
+
+642
+
+suggesting that a key function of Gfi1 in hair cells is to repress neuronal genes that are initially
+
+643
+
+also expressed in hair cell progenitors (Matern et al., 2020). Gfi1 also acts indirectly to
+
+644
+
+increase Atoh1 transcriptional activity, by forming part of a transcriptional complex with Atoh1
+
+645
+
+and E proteins, in which neither Atoh1 nor Gfi1 binds the other directly and Gfi1 does not bind
+
+646
+
+DNA (Jen et al., 2022). Given shared expression in ampullary organs as well as neuromasts,
+
+647
+
+it seems likely that Gfi1 plays these roles in developing electroreceptors, as well as hair cells.
+
+648
+
+Intriguingly, however, Insm2 was recently reported as a direct target of both Atoh1 and Gfi1 in
+
+649
+
+mouse cochlear hair cells, and one of only a handful of genes (including Atoh1 itself) to be
+
+650
+
+repressed by Gfi1 during hair-cell maturation (Jen et al., 2022). Repression of Insm2 by Gfi1
+
+651
+
+in mature hair cells, but not electroreceptors, could explain the much weaker expression of
+
+652
+
+Insm2 that we saw in neuromasts versus ampullary organs at stage 45 (the onset of
+
+653
+
+independent feeding). This suggests the existence of both shared and divergent functions of
+
+654
+
+the same transcription factor within hair cells versus electroreceptors.
+
+655
+656
+
+Six novel ampullary organ-restricted transcription factor genes
+
+657
+
+We have identified six novel transcription factor genes expressed in developing ampullary
+
+658
+
+organs but not neuromasts in chondrostean ray-finned fishes, in addition to previously
+
+659
+
+published Neurod4 (Modrell et al., 2017a). Two of these, Irx5 and Satb2, encode
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+660
+
+homeodomain transcription factors. In C. elegans, unique combinations of homeodomain
+
+661
+
+transcription factors define all 118 neuron classes (Reilly et al., 2020) (also see Vidal et al.,
+
+662
+
+2022). Hence, members of this class of transcription factors are potentially good candidates
+
+663
+
+to be involved in controlling divergent fate specification and/or maintenance in closely related
+
+664
+
+cell types.
+
+665
+
+Irx5 is required for the terminal differentiation of a subset of cone bipolar cells in the
+
+666
+
+mouse retina (Cheng et al., 2005). In mouse and chicken, Irx5 is expressed within the otic
+
+667
+
+vesicle epithelium, including some prospective sensory patches (Bosse et al., 2000; Cardeña-
+
+668
+
+Núñez et al., 2016). However, by stage 34 in chicken (embryonic day 8), when hair cells are
+
+669
+
+fully differentiated, Irx5 is not expressed in any sensory patch, unlike some other Irx family
+
+670
+
+members (Cardeña-Núñez et al., 2016). In mouse, chicken and zebrafish, Irx5 (together with
+
+671
+
+other Irx family members) is expressed in otic placode-derived neurons (Bosse et al., 2000;
+
+672
+
+Houweling et al., 2001; Cardeña-Núñez et al., 2016; Lecaudey et al., 2005). In zebrafish, the
+
+673
+
+only reported expression of Irx5a in the lateral line system is in the secondary posterior lateral
+
+674
+
+line primordium (prim II) (Lecaudey et al., 2005). This migrates later than the primary posterior
+
+675
+
+lateral line primordium and contributes post-embryonically to lateral and dorsal branches of
+
+676
+
+the trunk lateral line (Sapède et al., 2002). However, the function of Irx5 in the primordium is
+
+677
+
+not known (Lecaudey et al., 2005) and the lack of reported expression in neuromasts is
+
+678
+
+consistent with its restriction to ampullary organs in paddlefish and sterlet.
+
+679
+
+Ampullary organ-restricted Satb2 encodes a homeodomain transcription factor and
+
+680
+
+chromatin-remodeller that is important for craniofacial development, including osteoblast
+
+681
+
+differentiation (reviewed by Huang et al., 2022). Its expression has not been reported in the
+
+682
+
+inner ear or lateral line system. The Satb2 gene is directly bound by Smad1/5 and upregulated
+
+683
+
+following over-expression of Bmp4 in cranial neural crest cells, suggesting that Satb2 is a
+
+684
+
+direct target of the Bmp signalling pathway (Bonilla-Claudio et al., 2012). This raises the
+
+685
+
+possibility that Bmp signalling may be important for ampullary organ development. Indeed,
+
+686
+
+Bmp4, Bmp5, Brinp3 (encoding BMP/retinoic acid-inducible neural-specific protein 3) and
+
+687
+
+Bambi (encoding a Bmp/activin inhibitor) are present in the 'common' lateral line organ-
+
+688
+
+enriched gene-set from stage 45 Siberian sturgeon (Wang et al., 2020). Brinp3 is also in the
+
+689
+
+ampullary organ-enriched gene-set (Wang et al., 2020). Our stage 46 paddlefish lateral line
+
+690
+
+organ-enriched gene-set also includes Bmp5, together with genes encoding the dual Bmp/Wnt
+
+691
+
+inhibitors Sostdc1 and Apcdd1 (Modrell et al., 2017a). Thus, the Bmp pathway is a promising
+
+692
+
+target for studies of ampullary organ development.
+
+693
+
+The other electrosensory-restricted transcription factor genes were Insm1, Mafa, Rorc
+
+694
+
+and Sp5. In the inner ear, transient expression of Insm1 in developing outer hair cells prevents
+
+695
+
+them from transdifferentiating into inner hair cells, by repressing a set of genes usually
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+696
+
+enriched in early inner hair cells (Wiwatpanit et al., 2018). It is possible, therefore, that Insm1
+
+697
+
+also acts in developing ampullary organs to repress hair cell-specific genes.
+
+698
+
+MafA synergises with Neurod1 (and Pdx1) to activate the insulin promoter in pancreatic
+
+699
+
+beta-cells (reviewed in Liang et al., 2022). Given the ampullary organ-restricted expression of
+
+700
+
+Neurod4 in the paddlefish lateral line system (Modrell et al., 2017a), this raises the possibility
+
+701
+
+that MafA could similarly synergise with Neurod4 to activate ampullary organ-specific target
+
+702
+
+genes.
+
+703
+
+Rorc encodes two isoforms of a ligand-dependent transcription factor, RAR-related
+
+704
+
+orphan nuclear receptor gamma (RORγ and RORγt), primarily studied for its roles in regulating
+
+705
+
+Th17 cell differentiation and thus autoimmune and inflammatory diseases (see Fauber and
+
+706
+
+Magnuson, 2014; Meijer et al., 2020; Ladurner et al., 2021). Endogenous ligands for RORγ
+
+707
+
+have not been confirmed, but it responds to sterols including the cholesterol precursor,
+
+708
+
+desmosterol (see Hu et al., 2015; Meijer et al., 2020). Retinoic acid has also been reported to
+
+709
+
+inhibit RORγ activity (Stehlin-Gaon et al., 2003). In the axolotl, ampullary organs were missing
+
+710
+
+and far fewer cranial neuromasts formed after retinoic acid treatment for one hour at late
+
+711
+
+gastrula/early neurula stages (Gibbs and Northcutt, 2004b). However, this most likely reflects
+
+712
+
+an effect on the lateral line placodes themselves, rather than organ formation directly (Gibbs
+
+713
+
+and Northcutt, 2004b). In any case, the mutually exclusive expression of ampullary organ-
+
+714
+
+restricted Rorc and neuromast-restricted Rorb is particularly intriguing (also see next section).
+
+715
+
+Finally, Sp5 encodes a Wnt/β-catenin effector (Kennedy et al., 2016), suggesting that
+
+716
+
+this signalling pathway might be important for ampullary organ development. Indeed, one of
+
+717
+
+the other ampullary organ-restricted genes, Irx5, is directly upregulated by Wnt/β-catenin
+
+718
+
+signalling in somatic cells of the gonad (Koth et al., 2020).
+
+719
+
+Overall, the ampullary organ-restricted expression of these six transcription factor
+
+720
+
+genes provides a starting point for identifying molecular mechanisms that may be important
+
+721
+
+for the formation of electrosensory lateral line organs.
+
+722
+723
+
+Five novel mechanosensory lateral line-restricted transcription factor genes
+
+724
+
+We identified five mechanosensory lateral line-restricted transcription factor genes: the first-
+
+725
+
+such genes reported in electroreceptive vertebrates. Of these, Hmx2, Isl1 and Rorb are
+
+726
+
+expressed in zebrafish lateral line placodes and/or neuromasts (Feng and Xu, 2010; Dufourcq
+
+727
+
+et al., 2006; Bertrand et al., 2007). Hmx2 and Isl1 both encode homeodomain transcription
+
+728
+
+factors. In zebrafish, Hmx2 is expressed throughout lateral line placode development, together
+
+729
+
+with the related gene Hmx3 (Feng and Xu, 2010). Morpholino knockdown experiments
+
+730
+
+suggested a redundant requirement for Hmx2 and Hmx3 for cell proliferation in the migrating
+
+731
+
+posterior lateral line primordium, and for normal neuromast formation (Feng and Xu, 2010).
+
+732
+
+Double mutant analysis of Hmx2 and Hmx3a suggested that the loss of neuromasts arises
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+733
+
+from stalling of the migrating primordium adjacent to the first few somites, hence failure to
+
+734
+
+deposit neuromasts (England et al., 2020). Recent scRNA-seq data from zebrafish also show
+
+735
+
+that Hmx2 is expressed specifically in anterior-posterior (A/P) support cells in neuromasts
+
+736
+
+(Baek et al., 2022).
+
+737
+
+We cloned Isl1 because it promotes a more complete conversion by Atoh1 of mouse
+
+738
+
+cochlear supporting cells to hair cells than does Atoh1 alone (Yamashita et al., 2018). In
+
+739
+
+zebrafish neuromasts, Isl1 is expressed in multiple support cell types including central support
+
+740
+
+cells (Lush et al., 2019; Baek et al., 2022), which divide symmetrically to form new hair cells
+
+741
+
+after hair cells are ablated (Romero-Carvajal et al., 2015; Lush et al., 2019). In neural crest-
+
+742
+
+derived sensory ganglia, Isl1 is expressed in all neurons and is necessary for nociceptor
+
+743
+
+lineage-specific gene expression, for repressing earlier-acting neurogenic transcription factors
+
+744
+
+- including direct repression of Neurod4, which is ampullary organ-specific in the paddlefish
+
+745
+
+lateral line (Modrell et al., 2017a) - and for repressing lineage-inappropriate genes (Sun et al.,
+
+746
+
+2008; Dykes et al., 2011). In the pancreas, Isl1 is a direct transcriptional repressor of Mafa
+
+747
+
+(Du et al., 2009), which we identified here as ampullary organ-restricted (see previous
+
+748
+
+section). We hypothesize that, in electroreceptive species, Isl1 may promote a hair cell fate
+
+749
+
+within neuromasts at least in part by repressing an electroreceptor fate, including by
+
+750
+
+repressing Neurod4 and Mafa.
+
+751
+
+Rorb, encoding RAR-related orphan nuclear receptor beta (RORβ), is expressed by
+
+752
+
+supporting cells in adult and embryonic neuromasts in zebrafish (Dufourcq et al., 2006;
+
+753
+
+Bertrand et al., 2007). Retinoic acid is a confirmed inhibitory ligand for RORβ (Stehlin-Gaon
+
+754
+
+et al., 2003). The reciprocal expression of Rorb in neuromasts and Rorc in ampullary organs
+
+755
+
+(see previous section) suggests that these ligand-dependent transcription factors play specific
+
+756
+
+roles in the development of mechanosensory versus electrosensory organs.
+
+757
+
+In contrast to Hmx2, Isl1 and Rorb, mechanosensory lateral line-restricted Foxg1 and
+
+758
+
+Sox8 are not expressed in the developing lateral line system of zebrafish or Xenopus (e.g.,
+
+759
+
+Dirksen and Jamrich, 1995; Papalopulu and Kintner, 1996; Toresson et al., 1998; Eagleson
+
+760
+
+and Dempewolf, 2002; Duggan et al., 2008; Zhao et al., 2009; O'Donnell et al., 2006; Martik
+
+761
+
+et al., 2019). As zebrafish and Xenopus only have a mechanosensory lateral line system
+
+762
+
+(Baker et al., 2013; Baker, 2019), this suggests Foxg1 and Sox8 may play specific roles in the
+
+763
+
+developing mechanosensory lateral line system of electroreceptive bony vertebrates, rather
+
+764
+
+than in lateral line primordium or neuromast development per se. (In cartilaginous fishes, i.e.,
+
+765
+
+sharks, Sox8 is expressed in ampullary organs as well as neuromasts; this study and (Freitas
+
+766
+
+et al., 2006)
+
+767
+
+In paddlefish and sterlet, Foxg1 was expressed in the central zones of lateral line
+
+768
+
+sensory ridges where neuromasts form, though excluded from the central domains of
+
+769
+
+neuromasts where hair cells differentiate. In the mouse olfactory epithelium, Foxg1 maintains
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+770
+
+a proliferative Sox2+ progenitor state (Kawauchi et al., 2009). Similarly, in the inner ear, Foxg1
+
+771
+
+is expressed by Sox2+ hair cell progenitors and supporting cells in sensory epithelia (Kiernan
+
+772
+
+et al., 2005; Dabdoub et al., 2008; Tasdemir-Yilmaz et al., 2021), although it is also expressed
+
+773
+
+by a subset of hair cells (Pauley et al., 2006). Foxg1 mouse mutants have reduced inner ear
+
+774
+
+sensory epithelia and a shortened cochlea with numerous additional rows of disorganized hair
+
+775
+
+cells (Pauley et al., 2006; Hwang et al., 2009). Conditional knockout of Foxg1 in supporting
+
+776
+
+cells in the neonatal mouse inner ear resulted in increased numbers of hair cells, potentially
+
+777
+
+by transdifferentiation of supporting cells (Zhang et al., 2019; Zhang et al., 2020). Overall,
+
+778
+
+Foxg1 is an exciting candidate for further investigation at the functional level.
+
+779
+
+Recent work on otic placode development in chicken embryos (Buzzi et al., 2022)
+
+780
+
+suggests that another of the chondrostean lateral line mechanosensory-restricted transcription
+
+781
+
+factors we identified, Sox8, could play an even earlier role than Foxg1. (Sox8 was expressed
+
+782
+
+in ampullary organs as well as neuromasts in cartilaginous fishes, however, suggesting
+
+783
+
+lineage-specific divergence of expression between cartilaginous and bony vertebrates.) Sox8
+
+784
+
+in chicken lies upstream of all other transcription factor genes in the otic gene regulatory
+
+785
+
+network, including Foxg1 (Buzzi et al., 2022). Ectopic expression of Sox8 in cranial ectoderm
+
+786
+
+drives the formation of ectopic otic vesicles and neurons (Buzzi et al., 2022). In paddlefish,
+
+787
+
+Sox8 displays a similar expression pattern to Foxg1 in elongating lateral line primordia and
+
+788
+
+neuromasts. As mentioned, Sox8 expression has not been reported in the developing lateral
+
+789
+
+line system in either Xenopus or zebrafish (O'Donnell et al., 2006; Martik et al., 2019). Given
+
+790
+
+the 'master regulator' role of Sox8 in otic placode development (Buzzi et al., 2022), it is
+
+791
+
+possible that Sox8 lies upstream of Foxg1 in lateral line primordium development specifically
+
+792
+
+in electroreceptive vertebrates (although it may play a separate, later role in ampullary organ
+
+793
+
+development in cartilaginous fishes).
+
+794
+795
+
+Conclusion
+
+796
+
+The data presented here, taken together with our previous results in paddlefish (Modrell et al.,
+
+797
+
+2011b; Modrell et al., 2011a; Modrell et al., 2017b; Modrell et al., 2017a), show that most
+
+798
+
+transcription factor genes expressed in developing lateral line organs in chondrostean ray-
+
+799
+
+finned fishes, including many that are required for hair cell development, are expressed in both
+
+800
+
+ampullary organs and neuromasts. This supports the hypothesis that the molecular
+
+801
+
+mechanisms underlying electrosensory and mechanosensory lateral line organ development
+
+802
+
+are highly conserved, and that electroreceptors likely evolved as transcriptionally related sister
+
+803
+
+cell types to lateral line hair cells (Modrell et al., 2017a; Baker and Modrell, 2018). Moreover,
+
+804
+
+in addition to ampullary organ-restricted Neurod4 (Modrell et al., 2017a), we have identified a
+
+805
+
+further eleven transcription factors (six that are electrosensory-restricted; five that are
+
+806
+
+mechanosensory-restricted) that could be involved in the formation of electrosensory versus
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+807
+
+mechanosensory organs. These are good candidates for functional experiments using
+
+808
+
+CRISPR/Cas9-mediated mutagenesis in sterlet (e.g., Chen et al., 2018; Baloch et al., 2019;
+
+809
+
+Stundl et al., 2022), the next step to further our understanding of the development of these
+
+810
+
+sensory (sister) cell types.
+
+811
+812
+
+Materials and Methods
+
+813
+814
+
+Embryo collection, staging and fixation
+
+815
+
+Fertilized sterlet (Acipenser ruthenus) eggs were obtained from adults bred at the Research
+
+816
+
+Institute of Fish Culture and Hydrobiology (RIFCH), Faculty of Fisheries and Protection of
+
+817
+
+Waters, University of South Bohemia in České Budějovice, Vodňany, Czech Republic. Sterlet
+
+818
+
+animal husbandry, in vitro fertilization and the rearing of embryos and yolk-sac larvae are
+
+819
+
+described in detail in Stundl et al. (2022). Sterlet embryos were staged according to Dettlaff et
+
+820
+
+al. (1993). Animal care was approved by the Ministry of Agriculture of the Czech Republic
+
+821
+
+(MSMT-12550/2016-3), followed the principles of the European Union Harmonized Animal
+
+822
+
+Welfare Act of the Czech Republic, and Principles of Laboratory Animal Care and National
+
+823
+
+Laws 246/1992 “Animal Welfare”, and was conducted in accordance with the Animal Research
+
+824
+
+Committee of RIFCH.
+
+825
+
+Mississippi paddlefish (Polyodon spathula) embryos were purchased from Osage
+
+826
+
+Catfisheries Inc. (Osage Beach, MO, USA) and reared at approximately 22°C in tanks with
+
+827
+
+filtered and recirculating water (pH 7.2 ± 0.7, salinity of 1.0 ± 0.2 ppt). Paddlefish embryos
+
+828
+
+were staged according to Bemis and Grande (1992). Lesser-spotted catshark (Scyliorhinus
+
+829
+
+canicula) egg cases were reared in a flow-through seawater system at the Station Biologique
+
+830
+
+de Roscoff, France. Catshark embryos were staged according to Ballard et al. (1993).
+
+831
+
+Upon reaching desired developmental stages, embryos/larvae of all three species
+
+832
+
+were euthanized via overdose of MS-222 (Sigma-Aldrich). Paddlefish and sterlet
+
+833
+
+embryos/yolk-sac larvae were fixed in modified Carnoy’s fixative (6 volumes 100% ethanol: 3
+
+834
+
+volumes 37% formaldehyde: 1 volume glacial acetic acid) for 3 hours at room temperature or
+
+835
+
+for 12-24 hours at 4°C, then dehydrated stepwise into ethanol and stored at -20°C. Catshark
+
+836
+
+embryos were fixed overnight at 4°C in 4% paraformaldehyde in phosphate-buffered saline
+
+837
+
+(PBS), washed three times in PBS, dehydrated stepwise into methanol and stored at -20°C.
+
+838
+839
+
+Generation of de novo transcriptome assemblies from late-larval sterlet heads
+
+840
+
+Sterlet yolk-sac larvae intended for RNA isolation were preserved in RNAlater (Invitrogen,
+
+841
+
+Thermo Fisher Scientific) and stored at -80°C until processed. Prior to RNA isolation, RNAlater
+
+842
+
+was removed, and heads were manually dissected from sterlet yolk-sac larvae: two at stage
+
+843
+
+40, two at stage 42, three at stage 45. RNA was then extracted using TRIzol reagent
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+844
+
+(Invitrogen, Thermo Fisher Scientific) according to the manufacturer's instructions. RNA
+
+845
+
+concentration was assessed using a Nanodrop N1000 spectrophotometer and integrity using
+
+846
+
+an Agilent 2100 Bioanalyzer (Cambridge Genomic Services, Department of Pathology,
+
+847
+
+University of Cambridge, UK). Samples with an RNA integrity number (RIN) greater than 9
+
+848
+
+were submitted for next-generation sequencing at The Centre for Applied Genomics, The
+
+849
+
+Hospital for Sick Children, Toronto, Canada. Libraries were prepared using the NEBNExt Ultra
+
+850
+
+Directional RNA library prep kit and sequenced on an Illumina HiSeq 2500, using Illumina v3
+
+851
+
+chemistry, following the multiplex paired-end protocol (2 x 125 bases).
+Reads were subjected to various quality controls, including high-quality read filtering
+
+852
+853
+
+based
+
+on
+
+the
+
+score
+
+value
+
+given
+
+in
+
+fastq
+
+files
+
+(FastQC
+
+version
+
+0.10.1;
+
+854
+
+http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), removal of reads
+
+855
+
+containing primer/adaptor sequences and read-length trimming using Trimmomatic-0.30
+
+856
+
+(Bolger et al., 2014). De novo assembly was performed using Velvet version 1.2.10 (Zerbino
+
+857
+
+and Birney, 2008) and Oases version 0.2.08 (Schulz et al., 2012). Velvet was run using
+
+858
+
+different k-mer lengths, k31, k43, k47, k53 and k63 along with other default parameters. Oases
+
+859
+
+was run using the same k-mer range. Results from these assemblies were merged, using
+
+860
+
+Velvet and Oases k-mer of k43. All assemblies were performed on a server with 64 cores and
+
+861
+
+512 GB of RAM. A second de novo assembly was carried out using Trinity version 2.6.6
+
+862
+
+(Grabherr et al., 2011) using default parameters. This Transcriptome Shotgun Assembly
+
+863
+
+project has been deposited at DDBJ/EMBL/GenBank under the accessions GKLU00000000
+
+864
+
+(Velvet-Oases assembly) and GKEF00000000 (Trinity assembly). The versions described in
+
+865
+
+this paper are the first versions, GKLU00000000 and GKEF01000000.
+
+866
+867
+
+Gene cloning and sequence verification
+
+868
+
+Total RNA was isolated from embryos using Trizol (Invitrogen, Thermo Fisher Scientific),
+
+869
+
+following the manufacturer’s protocol, and cDNA made using the Superscript III First Strand
+
+870
+
+Synthesis kit (Invitrogen, Thermo Fisher Scientific). To design gene-specific PCR primers or
+
+871
+
+synthetic gene fragments for paddlefish or sterlet, we used the previously published paddlefish
+
+872
+
+transcriptome assembly (NCBI Gene Expression Omnibus accession code GSE92470;
+
+873
+
+Modrell et al., 2017a) or the sterlet transcriptome assemblies reported here (deposited at
+
+874
+
+DDBJ/EMBL/GenBank under the accessions GKLU00000000 and GKEF01000000). To
+
+875
+
+design gene-specific PCR primers for lesser-spotted catshark, we used S. canicula RNAseq
+
+876
+
+data, publicly available via the Skatebase website (http://skatebase.org/skateblast-
+
+877
+
+skatebase%e2%80%8b/). Gene-specific primers (Supplementary file 1) were used to amplify
+
+878
+
+cDNA fragments under standard PCR conditions from cDNA and cloned into the pDrive
+
+879
+
+cloning vector (Qiagen) as previously described (Modrell et al., 2011a). Catshark cDNA
+
+880
+
+fragments were cloned into the pGEM-T Easy vector (Promega). Alternatively, synthetic gene
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+881
+
+fragments based on paddlefish or sterlet transcriptome data, with added M13 forward and
+
+882
+
+reverse primer adaptors, were ordered from Twist Bioscience. GenBank accession numbers
+
+883
+
+for sterlet (A. ruthenus), paddlefish (P. spathula) and catshark (S. canicula) cDNA fragments
+
+884
+
+are given in Supplementary file 1.
+
+885
+
+Individual clones were verified by sequencing (Department of Biochemistry
+
+886
+
+Sequencing Facility, University of Cambridge, UK, or Genewiz, Azenta Life Sciences, UK).
+
+887
+
+Sequence identity was checked using the National Center for Biotechnology Information
+
+888
+
+(NCBI) Basic Local Alignment Search Tool (BLAST; https://blast.ncbi.nlm.nih.gov/Blast.cgi;
+
+889
+
+McGinnis and Madden, 2004). Where BLAST results were inconclusive in establishing
+
+890
+
+sequence identity, we performed phylogenetic analysis using PhyML 3.0 (http://www.atgc-
+
+891
+
+montpellier.fr/phyml/; Guindon et al., 2010), including related amino acid sequences available
+
+892
+
+from the UniProt database (https://www.uniprot.org/; UniProt, 2023). Sterlet sequences whose
+
+893
+
+identity was still inconclusive following phylogenetic analysis were checked by BLAST against
+
+894
+
+the sterlet reference genome (Du et al., 2020).
+
+895
+896
+
+In situ hybridization and immunohistochemistry
+
+897
+
+Digoxigenin-labelled antisense riboprobes were synthesized from cloned cDNA fragments
+
+898
+
+(Supplementary file 1) using T7 or SP6 polymerases (Promega) and digoxigenin-labeled
+
+899
+
+dUTPs (Roche). Alternatively, synthetic gene fragments (Twist Bioscience) with added M13
+
+900
+
+forward and reverse primer adaptors were PCR-amplified under standard conditions using the
+
+901
+
+M13 forward primer, and the M13 reverse primer containing an overhang with the SP6
+
+902
+
+polymerase promoter. The PCR product was then used as a template for riboprobe synthesis
+
+903
+
+by in vitro transcription using SP6 polymerase and digoxigenin-labeled dUTPs (Roche). Each
+
+904
+
+riboprobe was tested a minimum of two times, using at least three embryos per stage.
+
+905
+
+Whole-mount in situ hybridization (ISH) was performed as previously described
+
+906
+
+(Modrell et al., 2011a). In some cases, sterlet and paddlefish yolk-sac larvae were processed
+
+907
+
+into pre-hybridization buffer as described (Modrell et al., 2011a), then stored at -20°C for up
+
+908
+
+to a month in this solution before continuing the protocol. For weaker riboprobes, overnight
+
+909
+
+incubations at 4°C in MABT (0.1 M maleic acid, 150 mM NaCl, 0.1% Tween-20, pH 7.5) and/or
+
+910
+
+NTMT (100 mM NaCl, 100 mM Tris, pH 9.5, 50 mM MgCl2, 0.1% Tween-20) were added prior
+
+911
+
+to the colour reaction, to increase the signal to background staining ratio.
+
+912
+
+Whole-mount immunostaining was performed as previously described (Metscher and
+
+913
+
+Müller, 2011). When using sterlet embryos or yolk-sac larvae that had not already been subject
+
+914
+
+to ISH, bleaching and proteinase K treatment were performed prior to immunostaining, as
+
+915
+
+described for ISH (Modrell et al., 2011a). A primary antibody against Sox2 (rabbit monoclonal,
+
+916
+
+ab92494; Abcam) was used at 1:200 and a horseradish peroxidase-conjugated goat anti-
+
+917
+
+rabbit antibody (Jackson ImmunoResearch) at 1:300. For the histochemical reaction, the
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+918
+
+metallographic peroxidase substrate EnzMet kit (Nanoprobes) was used according to the
+
+919
+
+manufacturer's instructions.
+
+920
+
+For skinmounts after whole-mount ISH and/or immunostaining, skin samples were
+
+921
+
+dissected using forceps and microcapillary needles and mounted on Superfrost Plus slides
+
+922
+
+(VWR) using Fluoroshield mounting medium with DAPI (Sigma-Aldrich).
+
+923
+
+For ISH on sections, embryos were embedded in paraffin wax and sectioned at 10 μm
+
+924
+
+as previously described (O'Neill et al., 2007). ISH on sections was performed as previously
+
+925
+
+described (O'Neill et al., 2007; Miller et al., 2017) except that slides were not treated with
+
+926
+
+proteinase K prior to hybridization and BMP Purple (Roche) was used for the colour reaction.
+
+927
+928
+
+Imaging and image processing
+
+929
+
+Whole-mount embryos and larvae were positioned in a slit in an agar-coated Petri dish with
+
+930
+
+PBS and imaged using a Leica MZFLIII dissecting microscope equipped with a MicroPublisher
+
+931
+
+5.0 RTV camera (QImaging) or a MicroPublisher 6 color CCD camera (Teledyne
+
+932
+
+Photometrics). Skinmounts and sections were imaged using a Zeiss AxioSkop 2 microscope
+
+933
+
+equipped with a Retiga 2000R camera and RGB pancake (QImaging) or a MicroPublisher 6
+
+934
+
+color CCD camera (Teledyne Photometrics). Images were acquired using QCapture Pro 6.0
+
+935
+
+or 7.0 software (QImaging) or Ocular software (Teledyne Photometrics). For most whole-
+
+936
+
+mount embryos and larvae, as well as skinmounts, a stack of images was taken by manually
+
+937
+
+focusing through the sample, then focus stacking was performed using Helicon Focus
+
+938
+
+software (Helicon Soft Limited). Images were processed in Adobe Photoshop (Adobe Systems
+
+939
+
+Inc.).
+
+940
+941
+
+Data availability statement
+
+942
+
+The Transcriptome Shotgun Assembly project has been deposited at DDBJ/EMBL/GenBank
+
+943
+
+under the accessions GKLU00000000 and GKEF00000000. The versions described in this
+
+944
+
+paper are the first versions, GKLU00000000 and GKEF00000000. The publication and
+
+945
+
+associated supplementary figures include representative example images of embryos from
+
+946
+
+each experiment. Additional raw data underlying this publication consist of further images of
+
+947
+
+these and other embryos from each experiment. Public sharing of these images is not cost-
+
+948
+
+efficient, but they are available from the corresponding author upon reasonable request.
+
+949
+950
+
+Ethics statement
+
+951
+
+Sterlet animal work was reviewed and approved by The Animal Research Committee of
+
+952
+
+Research Institute of Fish Culture and Hydrobiology, Faculty of Fisheries and Protection of
+
+953
+
+Waters, University of South Bohemia in České Budějovice, Vodňany, Czech Republic and
+
+954
+
+Ministry of Agriculture of the Czech Republic (MSMT-12550/2016-3).
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+955
+956
+
+Author contributions
+
+957
+
+CB conceived and designed the project with input from MSM, MM and AG, and wrote the
+
+958
+
+manuscript together with MM. MM performed most of the experiments, prepared all the
+
+959
+
+manuscript figures and made a significant contribution to the writing of the manuscript. MSM,
+
+960
+
+AG, AC and IF performed some experiments. RL undertook the transcriptome assembly with
+
+961
+
+support from GM. MP and DG were instrumental in enabling all work with sterlet embryos. All
+
+962
+
+authors read and commented on the manuscript.
+
+963
+964
+
+Funding
+
+965
+
+This work was supported by the Biotechnology and Biological Sciences Research Council
+
+966
+
+(BB/F00818X/1 and BB/P001947/1 to CB), the Leverhulme Trust (RPG-383 to CB) and the
+
+967
+
+Royal Society (Newton International Fellowship to AG). Additional support for MM was
+
+968
+
+provided by the Cambridge Isaac Newton Trust (grant 20.07[c] to CB) and by the School of
+
+969
+
+the Biological Sciences, University of Cambridge. AC was supported by a PhD research
+
+970
+
+studentship from the Anatomical Society. The work of MP was supported by the Ministry of
+
+971
+
+Education, Youth and Sports of the Czech Republic, projects CENAKVA (LM2018099),
+
+972
+
+Biodiversity (CZ.02.1.01/0.0/0.0/16_025/0007370) and Czech Science Foundation (20-
+
+973
+
+23836S). Collection of S. canicula embryos was funded by an Association of European Marine
+
+974
+
+Biological Laboratories ASSEMBLE award to AG.
+
+975
+976
+
+Rights Retention Statement
+
+977
+
+This work was funded by grants from the Biotechnology and Biological Sciences Research
+
+978
+
+Council (BB/F00818X/1 and BB/P001947/1). For the purpose of open access, the author has
+
+979
+
+applied a Creative Commons Attribution (CC BY) licence to any Author Accepted Manuscript
+
+980
+
+version arising.
+
+981
+982
+
+Acknowledgments
+
+983
+
+Thanks to Marek Rodina and Martin Kahanec for their help with sterlet spawns, and Michaela
+
+984
+
+Vazačová for her help with embryo incubation and fixation. Thanks to Tatjana Piotrowski and
+
+985
+
+her lab at the Stowers Institute for Medical Research (Kansas City, MO, USA) and Steve and
+
+986
+
+Pete Kahrs and the Kahrs family (Osage Catfisheries, Inc.) for hosting MSM during paddlefish
+
+987
+
+spawning seasons. Thanks to Christine Hirschberger and Rolf Ericsson for their help with
+
+988
+
+some of the in situ hybridization rounds.
+
+989
+
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+990
+
+Conflict of Interest: The authors declare that the research was conducted in the absence of
+
+991
+
+any commercial or financial relationships that could be construed as a potential conflict of
+
+992
+
+interest.
+
+993
+994
+
+References
+
+995
+
+Baek, S., Tran, N.T.T., Diaz, D.C., Tsai, Y.-Y., Acedo, J.N., Lush, M.E., Piotrowski, T., 2022.
+
+996
+
+Single-cell transcriptome analysis reveals three sequential phases of gene expression
+
+997
+
+during zebrafish sensory hair cell regeneration. Dev. Cell 57, 799-819.
+
+998
+
+Baker, C.V.H., 2019. The development and evolution of lateral line electroreceptors: insights
+
+999
+
+from comparative molecular approaches., in: B.A. Carlson, J.A. Sisneros, A.N. Popper,
+
+1000
+
+R.R. Fay (Eds.), Electroreception: Fundamental Insights from Comparative Approaches.
+
+1001
+
+Springer, Cham, pp. 25-62.
+
+1002
+1003
+1004
+1005
+
+Baker, C.V.H., Modrell, M.S., 2018. Insights into electroreceptor development and evolution
+from molecular comparisons with hair cells. Integr. Comp. Biol. 58, 329-340.
+Baker, C.V.H., Modrell, M.S., Gillis, J.A., 2013. The evolution and development of vertebrate
+lateral line electroreceptors. J. Exp. Biol. 216, 2515-2522.
+
+1006
+
+Ballard, W.W., Mellinger, J., Lechenault, H., 1993. A series of normal stages for development
+
+1007
+
+of Scyliorhinus canicula, the lesser spotted dogfish (Chondrichthyes: Scylorhinidae). J.
+
+1008
+
+Exp. Zool. 267, 318-336.
+
+1009
+
+Baloch, A.R., Franěk, R., Tichopád, T., Fučíková, M., Rodina, M., Pšenička, M., 2019. Dnd1
+
+1010
+
+knockout in sturgeons by CRISPR/Cas9 generates germ cell free host for surrogate
+
+1011
+
+production. Animals (Basel) 9, 174.
+
+1012
+
+Bardot, E.S., Valdes, V.J., Zhang, J., Perdigoto, C.N., Nicolis, S., Hearn, S.A., Silva, J.M.,
+
+1013
+
+Ezhkova, E., 2013. Polycomb subunits Ezh1 and Ezh2 regulate the Merkel cell
+
+1014
+
+differentiation program in skin stem cells. EMBO J. 32, 1990-2000.
+
+1015
+1016
+1017
+1018
+
+Bellono, N.W., Leitch, D.B., Julius, D., 2017. Molecular basis of ancestral vertebrate
+electroreception. Nature 543, 391-396.
+Bellono, N.W., Leitch, D.B., Julius, D., 2018. Molecular tuning of electroreception in sharks
+and skates. Nature 558, 122-126.
+
+1019
+
+Bemis, W.E., Grande, L., 1992. Early development of the actinopterygian head. I. External
+
+1020
+
+development and staging of the paddlefish Polyodon spathula. J. Morphol. 213, 47-83.
+
+1021
+
+Bennett, M.V.L., Obara, S., 1986. Ionic mechanisms and pharmacology of electroreceptors,
+
+1022
+
+in: T.H. Bullock, W. Heiligenberg (Eds.), Electroreception. Wiley, New York, pp. 157-181.
+
+1023
+
+Bertrand, S., Thisse, B., Tavares, R., Sachs, L., Chaumot, A., Bardet, P.L., Escrivà, H.,
+
+1024
+
+Duffraisse, M., Marchand, O., Safi, R., Thisse, C., Laudet, V., 2007. Unexpected novel
+
+1025
+
+relational links uncovered by extensive developmental profiling of nuclear receptor
+
+1026
+
+expression. PLoS Genet. 3, e188.
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1027
+
+Bodznick, D., Montgomery, J.C., 2005. The physiology of low-frequency electrosensory
+
+1028
+
+systems, in: T.H. Bullock, C.D. Hopkins, A.N. Popper, R.R. Fay (Eds.), Electroreception.
+
+1029
+
+Springer, New York, pp. 132-153.
+
+1030
+1031
+
+Bolger, A.M., Lohse, M., Usadel, B., 2014. Trimmomatic: a flexible trimmer for Illumina
+sequence data. Bioinformatics 30, 2114-2120.
+
+1032
+
+Bonilla-Claudio, M., Wang, J., Bai, Y., Klysik, E., Selever, J., Martin, J.F., 2012. Bmp signaling
+
+1033
+
+regulates a dose-dependent transcriptional program to control facial skeletal
+
+1034
+
+development. Development 139, 709-719.
+
+1035
+
+Bosse, A., Stoykova, A., Nieselt-Struwe, K., Chowdhury, K., Copeland, N.G., Jenkins, N.A.,
+
+1036
+
+Gruss, P., 2000. Identification of a novel mouse Iroquois homeobox gene, Irx5, and
+
+1037
+
+chromosomal localisation of all members of the mouse Iroquois gene family. Dev. Dyn.
+
+1038
+
+218, 160-174.
+
+1039
+
+Brown, T.L., Horton, E.C., Craig, E.W., Goo, C.E.A., Black, E.C., Hewitt, M.N., Yee, N.G., Fan,
+
+1040
+
+E.T., Raible, D.W., Rasmussen, J.P., 2023. Dermal appendage-dependent patterning of
+
+1041
+
+zebrafish atoh1a+ Merkel cells. eLife 12, e85800.
+
+1042
+
+Butts, T., Modrell, M.S., Baker, C.V.H., Wingate, R.J.T., 2014. The evolution of the vertebrate
+
+1043
+
+cerebellum: absence of a proliferative external granule layer in a non-teleost ray-finned
+
+1044
+
+fish. Evol. Dev. 16, 92-100.
+
+1045
+1046
+
+Buzzi, A.L., Chen, J., Thiery, A., Delile, J., Streit, A., 2022. Sox8 remodels the cranial ectoderm
+to generate the ear. Proc. Natl. Acad. Sci. U.S.A. 119, e2118938119.
+
+1047
+
+Camacho, S., Ostos, M.D.V., Llorente, J.I., Sanz, A., García, M., Domezain, A., Carmona, R.,
+
+1048
+
+2007. Structural characteristics and development of ampullary organs in Acipenser
+
+1049
+
+naccarii. Anat. Rec. (Hoboken) 290, 1178-1189.
+
+1050
+1051
+
+Caprara, G.A., Peng, A.W., 2022. Mechanotransduction in mammalian sensory hair cells. Mol.
+Cell. Neurosci. 120, 103706.
+
+1052
+
+Cardeña-Núñez, S., Sánchez-Guardado, L.Ó., Corral-San-Miguel, R., Rodríguez-Gallardo, L.,
+
+1053
+
+Marín, F., Puelles, L., Aroca, P., Hidalgo-Sánchez, M., 2016. Expression patterns of Irx
+
+1054
+
+genes in the developing chick inner ear. Brain Struct. Funct. 222, 2071-2092.
+
+1055
+
+Chagnaud, B.P., Wilkens, L.A., Hofmann, M., 2021. The ampullary electrosensory system –a
+
+1056
+
+paddlefish case study, in: B. Fritzsch (Ed.), The Senses: A Comprehensive Reference.
+
+1057
+
+Elsevier, pp. 215-227.
+
+1058
+1059
+
+Chen, J., Wang, W., Tian, Z., Dong, Y., Dong, T., Zhu, H., Zhu, Z., Hu, H., Hu, W., 2018.
+Efficient gene transfer and gene editing in sterlet. Front. Genet. 9, 117.
+
+1060
+
+Chen, Y., Gu, Y., Li, Y., Li, G.L., Chai, R., Li, W., Li, H., 2021. Generation of mature and
+
+1061
+
+functional hair cells by co-expression of Gfi1, Pou4f3, and Atoh1 in the postnatal mouse
+
+1062
+
+cochlea. Cell Rep. 35, 109016.
+
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1063
+
+Cheng, C.W., Chow, R.L., Lebel, M., Sakuma, R., Cheung, H.O.-L., Thanabalasingham, V.,
+
+1064
+
+Zhang, X., Bruneau, B.G., Birch, D.G., Hui, C.C., McInnes, R.R., Cheng, S.H., 2005. The
+
+1065
+
+Iroquois homeobox gene, Irx5, is required for retinal cone bipolar cell development. Dev.
+
+1066
+
+Biol. 287, 48-60.
+
+1067
+1068
+
+Crampton, W.G.R., 2019. Electroreception, electrogenesis and electric signal evolution. J.
+Fish Biol. 95, 92-134.
+
+1069
+
+Dabdoub, A., Puligilla, C., Jones, J.M., Fritzsch, B., Cheah, K.S., Pevny, L.H., Kelley, M.W.,
+
+1070
+
+2008. Sox2 signaling in prosensory domain specification and subsequent hair cell
+
+1071
+
+differentiation in the developing cochlea. Proc. Natl. Acad. Sci. U.S.A. 105, 18396-
+
+1072
+
+18401.
+
+1073
+
+Deprez, M., Zaragosi, L.E., Truchi, M., Becavin, C., Ruiz García, S., Arguel, M.J., Plaisant,
+
+1074
+
+M., Magnone, V., Lebrigand, K., Abelanet, S., Brau, F., Paquet, A., Pe’er, D., Marquette,
+
+1075
+
+C.H., Leroy, S., Barbry, P., 2020. A single-cell atlas of the human healthy airways. Am.
+
+1076
+
+J. Respir. Crit. Care Med. 202, 1636-1645.
+
+1077
+1078
+1079
+1080
+
+Dettlaff, T.A., Ginsburg, A.S., Schmalhausen, O.I., 1993. Sturgeon Fishes: Developmental
+Biology and Aquaculture. Springer-Verlag, Berlin.
+Dirksen, M.-L., Jamrich, M., 1995. Differential expression of fork head genes during early
+Xenopus and zebrafish development. Dev. Genet. 17, 107-116.
+
+1081
+
+Du, A., Hunter, C.S., Murray, J., Noble, D., Cai, C.-L., Evans, S.M., Stein, R., May, C.L., 2009.
+
+1082
+
+Islet-1 is required for the maturation, proliferation, and survival of the endocrine
+
+1083
+
+pancreas. Diabetes 58, 2059-2069.
+
+1084
+
+Du, K., Stöck, M., Kneitz, S., Klopp, C., Woltering, J.M., Adolfi, M.C., Feron, R., Prokopov, D.,
+
+1085
+
+Makunin, A., Kichigin, I., Schmidt, C., Fischer, P., Kuhl, H., Wuertz, S., Gessner, J.,
+
+1086
+
+Kloas, W., Cabau, C., Iampietro, C., Parrinello, H., Tomlinson, C., Journot, L.,
+
+1087
+
+Postlethwait, J.H., Braasch, I., Trifonov, V., Warren, W.C., Meyer, A., Guiguen, Y.,
+
+1088
+
+Schartl, M., 2020. The sterlet sturgeon genome sequence and the mechanisms of
+
+1089
+
+segmental rediploidization. Nat. Ecol. Evol. 4, 841-852.
+
+1090
+
+Dufourcq, P., Roussigné, M., Blader, P., Rosa, F., Peyrieras, N., Vriz, S., 2006. Mechano-
+
+1091
+
+sensory organ regeneration in adults: the zebrafish lateral line as a model. Mol. Cell.
+
+1092
+
+Neurosci. 33, 180-187.
+
+1093
+1094
+
+Duggan, C.D., Demaria, S., Baudhuin, A., Stafford, D., Ngai, J., 2008. Foxg1 is required for
+development of the vertebrate olfactory system. J. Neurosci. 28, 5229-5239.
+
+1095
+
+Dykes, I.M., Tempest, L., Lee, S.-I., Turner, E.E., 2011. Brn3a and Islet1 act epistatically to
+
+1096
+
+regulate the gene expression program of sensory differentiation. J. Neurosci. 31, 9789-
+
+1097
+
+9799.
+
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1098
+
+Eagleson, G.W., Dempewolf, R.D., 2002. The role of the anterior neural ridge and Fgf-8 in
+
+1099
+
+early forebrain patterning and regionalization in Xenopus laevis. Comp. Biochem.
+
+1100
+
+Physiol. B Biochem. Mol. Biol. 132, 179-189.
+
+1101
+
+England, S.J., Cerda, G.A., Kowalchuk, A., Sorice, T., Grieb, G., Lewis, K.E., 2020. Hmx3a
+
+1102
+
+has essential functions in zebrafish spinal cord, ear and lateral line development.
+
+1103
+
+Genetics 216, 1153-1185.
+
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113
+
+Fauber, B.P., Magnuson, S., 2014. Modulators of the nuclear receptor retinoic acid receptorrelated orphan receptor-γ (RORγ or RORc). J. Med. Chem. 57, 5871-5892.
+Feng, Y., Xu, Q., 2010. Pivotal role of hmx2 and hmx3 in zebrafish inner ear and lateral line
+development. Dev. Biol. 339, 507-518.
+Freitas, R., Zhang, G., Albert, J.S., Evans, D.H., Cohn, M.J., 2006. Developmental origin of
+shark electrosensory organs. Evol. Dev. 8, 74-80.
+Gibbs, M.A., Northcutt, R.G., 2004a. Development of the lateral line system in the shovelnose
+sturgeon. Brain Behav. Evol. 64, 70-84.
+Gibbs, M.A., Northcutt, R.G., 2004b. Retinoic acid repatterns axolotl lateral line receptors. Int.
+J. Dev. Biol. 48, 63-66.
+
+1114
+
+Gillis, J.A., Modrell, M.S., Northcutt, R.G., Catania, K.C., Luer, C.A., Baker, C.V.H., 2012.
+
+1115
+
+Electrosensory ampullary organs are derived from lateral line placodes in cartilaginous
+
+1116
+
+fishes. Development 139, 3142-3146.
+
+1117
+1118
+
+Gnedeva, K., Hudspeth, A.J., 2015. SoxC transcription factors are essential for the
+development of the inner ear. Proc. Natl. Acad. Sci. U.S.A. 112, 14066-14071.
+
+1119
+
+Grabherr, M.G., Haas, B.J., Yassour, M., Levin, J.Z., Thompson, D.A., Amit, I., Adiconis, X.,
+
+1120
+
+Fan, L., Raychowdhury, R., Zeng, Q., Chen, Z., Mauceli, E., Hacohen, N., Gnirke, A.,
+
+1121
+
+Rhind, N., di Palma, F., Birren, B.W., Nusbaum, C., Lindblad-Toh, K., Friedman, N.,
+
+1122
+
+Regev, A., 2011. Full-length transcriptome assembly from RNA-Seq data without a
+
+1123
+
+reference genome. Nat. Biotechnol. 29, 644-652.
+
+1124
+
+Guindon, S., Dufayard, J.F., Lefort, V., Anisimova, M., Hordijk, W., Gascuel, O., 2010. New
+
+1125
+
+algorithms and methods to estimate maximum-likelihood phylogenies: assessing the
+
+1126
+
+performance of PhyML 3.0. Syst. Biol. 59, 307-321.
+
+1127
+
+Haber, A.L., Biton, M., Rogel, N., Herbst, R.H., Shekhar, K., Smillie, C., Burgin, G., Delorey,
+
+1128
+
+T.M., Howitt, M.R., Katz, Y., Tirosh, I., Beyaz, S., Dionne, D., Zhang, M., Raychowdhury,
+
+1129
+
+R., Garrett, W.S., Rozenblatt-Rosen, O., Shi, H.N., Yilmaz, O., Xavier, R.J., Regev, A.,
+
+1130
+
+2017. A single-cell survey of the small intestinal epithelium. Nature 551, 333-339.
+
+1131
+
+Hesse, K., Vaupel, K., Kurt, S., Buettner, R., Kirfel, J., Moser, M., 2011. AP-2δ is a crucial
+
+1132
+
+transcriptional regulator of the posterior midbrain. PLoS ONE 6, e23483.
+
+34
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1133
+
+Hoffman, B.U., Baba, Y., Griffith, T.N., Mosharov, E.V., Woo, S.H., Roybal, D.D., Karsenty,
+
+1134
+
+G., Patapoutian, A., Sulzer, D., Lumpkin, E.A., 2018. Merkel cells activate sensory neural
+
+1135
+
+pathways through adrenergic synapses. Neuron 100, 1401-1413.e6.
+
+1136
+
+Houweling, A.C., Dildrop, R., Peters, T., Mummenhoff, J., Moorman, A.F.M., Rüther, U.,
+
+1137
+
+Christoffels, V.M., 2001. Gene and cluster-specific expression of the Iroquois family
+
+1138
+
+members during mouse development. Mech. Dev. 107, 169-174.
+
+1139
+
+Hu, X., Wang, Y., Hao, L.-Y., Liu, X., Lesch, C.A., Sanchez, B.M., Wendling, J.M., Morgan,
+
+1140
+
+R.W., Aicher, T.D., Carter, L.L., Toogood, P.L., Glick, G.D., 2015. Sterol metabolism
+
+1141
+
+controls T(H)17 differentiation by generating endogenous RORγ agonists. Nat. Chem.
+
+1142
+
+Biol. 11, 141-147.
+
+1143
+
+Huang, X., Chen, Q., Luo, W., Pakvasa, M., Zhang, Y., Zheng, L., Li, S., Yang, Z., Zeng, H.,
+
+1144
+
+Liang, F., Zhang, F., Hu, D.A., Qin, K.H., Wang, E.J., Qin, D.S., Reid, R.R., He, T.-C.,
+
+1145
+
+Athiviraham, A., El Dafrawy, M., Zhang, H., 2022. SATB2: A versatile transcriptional
+
+1146
+
+regulator of craniofacial and skeleton development, neurogenesis and tumorigenesis,
+
+1147
+
+and its applications in regenerative medicine. Genes Dis. 9, 95-107.
+
+1148
+
+Hwang, C.H., Simeone, A., Lai, E., Wu, D.K., 2009. Foxg1 is required for proper separation
+
+1149
+
+and formation of sensory cristae during inner ear development. Dev. Dyn. 238, 2725-
+
+1150
+
+2734.
+
+1151
+
+Iyer, A.A., Groves, A.K., 2021. Transcription factor reprogramming in the inner ear: turning on
+
+1152
+
+cell fate switches to regenerate sensory hair cells. Front. Cell. Neurosci. 15, 660748.
+
+1153
+
+Iyer, A.A., Hosamani, I., Nguyen, J.D., Cai, T., Singh, S., McGovern, M.M., Beyer, L., Zhang,
+
+1154
+
+H., Jen, H.I., Yousaf, R., Birol, O., Sun, J.J., Ray, R.S., Raphael, Y., Segil, N., Groves,
+
+1155
+
+A.K., 2022. Cellular reprogramming with ATOH1, GFI1, and POU4F3 implicate
+
+1156
+
+epigenetic changes and cell-cell signaling as obstacles to hair cell regeneration in
+
+1157
+
+mature mammals. eLife 11, e79712.
+
+1158
+
+Jan, T.A., Eltawil, Y., Ling, A.H., Chen, L., Ellwanger, D.C., Heller, S., Cheng, A.G., 2021.
+
+1159
+
+Spatiotemporal dynamics of inner ear sensory and non-sensory cells revealed by single-
+
+1160
+
+cell transcriptomics. Cell Rep. 36, 109358.
+
+1161
+
+Jen, H.-I., Singh, S., Tao, L., Maunsell, H.R., Segil, N., Groves, A.K., 2022. GFI1 regulates
+
+1162
+
+hair cell differentiation by acting as an off-DNA transcriptional co-activator of ATOH1,
+
+1163
+
+and a DNA-binding repressor. Sci. Rep. 12, 7793.
+
+1164
+1165
+
+Jessen, K.R., Mirsky, R., 2019. Schwann cell precursors; multipotent glial cells in embryonic
+nerves. Front. Mol. Neurosci. 12, 69.
+
+1166
+
+Jørgensen, J.M., 2005. Morphology of electroreceptive sensory organs, in: T.H. Bullock, C.D.
+
+1167
+
+Hopkins, A.N. Popper, R.R. Fay (Eds.), Electroreception. Springer, New York, pp. 47-
+
+1168
+
+67.
+
+35
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1169
+
+Kawauchi, S., Santos, R., Kim, J., Hollenbeck, P.L.W., Murray, R.C., Calof, A.L., 2009. The
+
+1170
+
+role of Foxg1 in the development of neural stem cells of the olfactory epithelium. Ann.
+
+1171
+
+N. Y. Acad. Sci. 1170, 21-27.
+
+1172
+
+Kennedy, M.W., Chalamalasetty, R.B., Thomas, S., Garriock, R.J., Jailwala, P., Yamaguchi,
+
+1173
+
+T.P., 2016. Sp5 and Sp8 recruit β-catenin and Tcf1-Lef1 to select enhancers to activate
+
+1174
+
+Wnt target gene transcription. Proc. Natl. Acad. Sci. U.S.A. 113, 3545-3550.
+
+1175
+
+Kiernan, A.E., Pelling, A.L., Leung, K.K., Tang, A.S., Bell, D.M., Tease, C., Lovell-Badge, R.,
+
+1176
+
+Steel, K.P., Cheah, K.S., 2005. Sox2 is required for sensory organ development in the
+
+1177
+
+mammalian inner ear. Nature 434, 1031-1035.
+
+1178
+1179
+
+Kotas, M.E., O’Leary, C.E., Locksley, R.M., 2023. Tuft cells: context- and tissue-specific
+programming for a conserved cell lineage. Annu. Rev. Pathol. 18, 311-335.
+
+1180
+
+Koth, M.L., Garcia-Moreno, S.A., Novak, A., Holthusen, K.A., Kothandapani, A., Jiang, K.,
+
+1181
+
+Taketo, M.M., Nicol, B., Yao, H.H.-C., Futtner, C.R., Maatouk, D.M., Jorgensen, J.S.,
+
+1182
+
+2020. Canonical Wnt/β-catenin activity and differential epigenetic marks direct sexually
+
+1183
+
+dimorphic regulation of Irx3 and Irx5 in developing mouse gonads. Development 147,
+
+1184
+
+dev183814.
+
+1185
+1186
+
+Ladurner, A., Schwarz, P.F., Dirsch, V.M., 2021. Natural products as modulators of retinoic
+acid receptor-related orphan receptors (RORs). Nat. Prod. Rep. 38, 757-781.
+
+1187
+
+Lecaudey, V., Anselme, I., Dildrop, R., Rüther, U., Schneider-Maunoury, S., 2005. Expression
+
+1188
+
+of the zebrafish Iroquois genes during early nervous system formation and patterning. J.
+
+1189
+
+Comp. Neurol. 492, 289-302.
+
+1190
+
+Leitch, D.B., Julius, D., 2019. Electrosensory transduction: comparisons across structure,
+
+1191
+
+afferent response properties, and cellular physiology., in: B.A. Carlson, J.A. Sisneros,
+
+1192
+
+A.N. Popper, R.R. Fay (Eds.), Electroreception: Fundamental Insights from Comparative
+
+1193
+
+Approaches. Springer, Cham, pp. 63-90.
+
+1194
+1195
+
+Lesko, M.H., Driskell, R.R., Kretzschmar, K., Goldie, S.J., Watt, F.M., 2013. Sox2 modulates
+the function of two distinct cell lineages in mouse skin. Dev. Biol. 382, 15-26.
+
+1196
+
+Li, X., Gaillard, F., Monckton, E.A., Glubrecht, D.D., Persad, A.R., Moser, M., Sauvé, Y.,
+
+1197
+
+Godbout, R., 2016. Loss of AP-2delta reduces retinal ganglion cell numbers and axonal
+
+1198
+
+projections to the superior colliculus. Mol. Brain 9, 62.
+
+1199
+1200
+
+Liang, J., Chirikjian, M., Pajvani, U.B., Bartolomé, A., 2022. MafA Regulation in β-Cells: From
+Transcriptional to Post-Translational Mechanisms. Biomolecules 12, 535.
+
+1201
+
+Lu, X., Sipe, C.W., 2016. Developmental regulation of planar cell polarity and hair-bundle
+
+1202
+
+morphogenesis in auditory hair cells: lessons from human and mouse genetics. WIREs
+
+1203
+
+Dev. Biol. 5, 85-101.
+
+1204
+
+Lush, M.E., Diaz, D.C., Koenecke, N., Baek, S., Boldt, H., St Peter, M.K., Gaitan-Escudero,
+
+1205
+
+T., Romero-Carvajal, A., Busch-Nentwich, E.M., Perera, A.G., Hall, K.E., Peak, A., Haug,
+36
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1206
+
+J.S., Piotrowski, T., 2019. scRNA-Seq reveals distinct stem cell populations that drive
+
+1207
+
+hair cell regeneration after loss of Fgf and Notch signaling. eLife 8, e44431.
+
+1208
+
+Mak, A.C.Y., Szeto, I.Y.Y., Fritzsch, B., Cheah, K.S.E., 2009. Differential and overlapping
+
+1209
+
+expression pattern of SOX2 and SOX9 in inner ear development. Gene Expr. Patterns
+
+1210
+
+9, 444-453.
+
+1211
+
+Martik, M.L., Gandhi, S., Uy, B.R., Gillis, J.A., Green, S.A., Simoes-Costa, M., Bronner, M.E.,
+
+1212
+
+2019. Evolution of the new head by gradual acquisition of neural crest regulatory circuits.
+
+1213
+
+Nature 574, 675-678.
+
+1214
+
+Matern, M.S., Milon, B., Lipford, E.L., McMurray, M., Ogawa, Y., Tkaczuk, A., Song, Y., Elkon,
+
+1215
+
+R., Hertzano, R., 2020. GFI1 functions to repress neuronal gene expression in the
+
+1216
+
+developing inner ear hair cells. Development 147, dev186015.
+
+1217
+1218
+
+McGinnis, S., Madden, T.L., 2004. BLAST: at the core of a powerful and diverse set of
+sequence analysis tools. Nucleic Acids Res. 32, W20-5.
+
+1219
+
+Meijer, F.A., Doveston, R.G., de Vries, R.M.J.M., Vos, G.M., Vos, A.A.A., Leysen, S.,
+
+1220
+
+Scheepstra, M., Ottmann, C., Milroy, L.-G., Brunsveld, L., 2020. Ligand-based design of
+
+1221
+
+allosteric retinoic acid receptor-related orphan receptor γt (RORγt) inverse agonists. J.
+
+1222
+
+Med. Chem. 63, 241-259.
+
+1223
+
+Metscher, B.D., Müller, G.B., 2011. MicroCT for molecular imaging: quantitative visualization
+
+1224
+
+of complete three-dimensional distributions of gene products in embryonic limbs. Dev.
+
+1225
+
+Dyn. 240, 2301-2308.
+
+1226
+
+Miller, S.R., Perera, S.N., Baker, C.V.H., 2017. Constitutively active Notch1 converts cranial
+
+1227
+
+neural crest-derived frontonasal mesenchyme to perivascular cells in vivo. Biol. Open 6,
+
+1228
+
+317-325.
+
+1229
+
+Modrell, M.S., Baker, C.V.H., 2012. Evolution of electrosensory ampullary organs:
+
+1230
+
+conservation of Eya4 expression during lateral line development in jawed vertebrates.
+
+1231
+
+Evol. Dev. 14, 277-285.
+
+1232
+
+Modrell, M.S., Bemis, W.E., Northcutt, R.G., Davis, M.C., Baker, C.V.H., 2011a.
+
+1233
+
+Electrosensory ampullary organs are derived from lateral line placodes in bony fishes.
+
+1234
+
+Nat. Commun. 2, 496.
+
+1235
+1236
+
+Modrell, M.S., Buckley, D., Baker, C.V.H., 2011b. Molecular analysis of neurogenic placode
+development in a basal ray-finned fish. genesis 49, 278-294.
+
+1237
+
+Modrell, M.S., Lyne, M., Carr, A.R., Zakon, H.H., Buckley, D., Campbell, A.S., Davis, M.C.,
+
+1238
+
+Micklem, G., Baker, C.V.H., 2017a. Insights into electrosensory organ development,
+
+1239
+
+physiology and evolution from a lateral line-enriched transcriptome. eLife 6, e24197.
+
+1240
+
+Modrell, M.S., Tidswell, O.R.A., Baker, C.V.H., 2017b. Notch and Fgf signaling during
+
+1241
+
+electrosensory versus mechanosensory lateral line organ development in a non-teleost
+
+1242
+
+ray-finned fish. Dev. Biol. 431, 48-58.
+37
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1243
+
+Mogdans, J., 2019. Sensory ecology of the fish lateral-line system: Morphological and
+
+1244
+
+physiological adaptations for the perception of hydrodynamic stimuli. J. Fish Biol. 95, 53-
+
+1245
+
+72.
+
+1246
+1247
+1248
+1249
+1250
+1251
+1252
+1253
+1254
+1255
+
+Moser, T., Grabner, C.P., Schmitz, F., 2020. Sensory processing at ribbon synapses in the
+retina and the cochlea. Physiol. Rev. 100, 103-144.
+Norris, H.W., Hughes, S.P., 1920. The spiracular sense-organ in elasmobranchs, ganoids and
+dipnoans. Anat. Rec. 18, 205-209.
+Northcutt, R.G., 1997. Evolution of gnathostome lateral line ontogenies. Brain Behav. Evol.
+50, 25-37.
+Northcutt, R.G., Brändle, K., Fritzsch, B., 1995. Electroreceptors and mechanosensory lateral
+line organs arise from single placodes in axolotls. Dev. Biol. 168, 358-373.
+Ó Maoiléidigh, D., Ricci, A.J., 2019. A bundle of mechanisms: inner-ear hair-cell
+mechanotransduction. Trends Neurosci. 42, 221-236.
+
+1256
+
+O’Donnell, M., Hong, C.-S., Huang, X., Delnicki, R.J., Saint-Jeannet, J.-P., 2006. Functional
+
+1257
+
+analysis of Sox8 during neural crest development in Xenopus. Development 133, 3817-
+
+1258
+
+3826.
+
+1259
+
+O’Neill, P., McCole, R.B., Baker, C.V.H., 2007. A molecular analysis of neurogenic placode
+
+1260
+
+and cranial sensory ganglion development in the shark, Scyliorhinus canicula. Dev. Biol.
+
+1261
+
+304, 156-181.
+
+1262
+1263
+
+Pangrsic, T., Singer, J.H., Koschak, A., 2018. Voltage-gated calcium channels: key players in
+sensory coding in the retina and the inner ear. Physiol Rev. 98, 2063-2096.
+
+1264
+
+Papalopulu, N., Kintner, C., 1996. A posteriorising factor, retinoic acid, reveals that
+
+1265
+
+anteroposterior patterning controls the timing of neuronal differentiation in Xenopus
+
+1266
+
+neuroectoderm. Development 122, 3409-3418.
+
+1267
+1268
+
+Pauley, S., Lai, E., Fritzsch, B., 2006. Foxg1 is required for morphogenesis and histogenesis
+of the mammalian inner ear. Dev. Dyn. 235, 2470-2482.
+
+1269
+
+Perdigoto, C.N., Bardot, E.S., Valdes, V.J., Santoriello, F.J., Ezhkova, E., 2014. Embryonic
+
+1270
+
+maturation of epidermal Merkel cells is controlled by a redundant transcription factor
+
+1271
+
+network. Development 141, 4690-4696.
+
+1272
+1273
+1274
+1275
+1276
+1277
+
+Piotrowski, T., Baker, C.V.H., 2014. The development of lateral line placodes: Taking a
+broader view. Dev. Biol. 389, 68-81.
+Reilly, M.B., Cros, C., Varol, E., Yemini, E., Hobert, O., 2020. Unique homeobox codes
+delineate all the neuron classes of C. elegans. Nature 584, 595-601.
+Roccio, M., Senn, P., Heller, S., 2020. Novel insights into inner ear development and
+regeneration for targeted hearing loss therapies. Hear. Res. 397, 107859.
+
+38
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1278
+
+Romero-Carvajal, A., Navajas Acedo, J., Jiang, L., Kozlovskaja-Gumbriene, A., Alexander, R.,
+
+1279
+
+Li, H., Piotrowski, T., 2015. Regeneration of sensory hair cells requires localized
+
+1280
+
+interactions between the Notch and Wnt pathways. Dev. Cell 34, 267-282.
+
+1281
+
+Saito, T., Psenicka, M., 2015. Novel technique for visualizing primordial germ cells in
+
+1282
+
+sturgeons (Acipenser ruthenus, A. gueldenstaedtii, A. baerii, and Huso huso). Biol.
+
+1283
+
+Reprod. 93, 96.
+
+1284
+
+Sapède, D., Gompel, N., Dambly-Chaudière, C., Ghysen, A., 2002. Cell migration in the
+
+1285
+
+postembryonic development of the fish lateral line. Development 129, 605-615.
+
+1286
+
+Schulz, M.H., Zerbino, D.R., Vingron, M., Birney, E., 2012. Oases: robust de novo RNA-seq
+
+1287
+
+assembly across the dynamic range of expression levels. Bioinformatics 28, 1086-1092.
+
+1288
+
+Stehlin-Gaon, C., Willmann, D., Zeyer, D., Sanglier, S., Van Dorsselaer, A., Renaud, J.-P.,
+
+1289
+
+Moras, D., Schüle, R., 2003. All-trans retinoic acid is a ligand for the orphan nuclear
+
+1290
+
+receptor ROR beta. Nat. Struct. Biol. 10, 820-825.
+
+1291
+
+Stundl, J., Pospisilova, A., Matějková, T., Psenicka, M., Bronner, M.E., Cerny, R., 2020.
+
+1292
+
+Migratory patterns and evolutionary plasticity of cranial neural crest cells in ray-finned
+
+1293
+
+fishes. Dev. Biol. 467, 14-29.
+
+1294
+
+Stundl, J., Soukup, V., Franěk, R., Pospisilova, A., Psutkova, V., Pšenička, M., Cerny, R.,
+
+1295
+
+Bronner, M.E., Medeiros, D.M., Jandzik, D., 2022. Efficient CRISPR mutagenesis in
+
+1296
+
+sturgeon demonstrates its utility in large, slow-maturing vertebrates. Front. Cell Dev.
+
+1297
+
+Biol. 10, 750833.
+
+1298
+
+Sun, Y., Dykes, I.M., Liang, X., Eng, S.R., Evans, S.M., Turner, E.E., 2008. A central role for
+
+1299
+
+Islet1 in sensory neuron development linking sensory and spinal gene regulatory
+
+1300
+
+programs. Nat. Neurosci. 11, 1283-1293.
+
+1301
+
+Tasdemir-Yilmaz, O.E., Druckenbrod, N.R., Olukoya, O.O., Dong, W., Yung, A.R., Bastille, I.,
+
+1302
+
+Pazyra-Murphy, M.F., Sitko, A.A., Hale, E.B., Vigneau, S., Gimelbrant, A.A.,
+
+1303
+
+Kharchenko, P.V., Goodrich, L.V., Segal, R.A., 2021. Diversity of developing peripheral
+
+1304
+
+glia revealed by single-cell RNA sequencing. Dev. Cell 56, 2516-2535.
+
+1305
+
+Toresson, H., Martinez-Barbera, J.P., Bardsley, A., Caubit, X., Krauss, S., 1998. Conservation
+
+1306
+
+of BF-1 expression in amphioxus and zebrafish suggests evolutionary ancestry of
+
+1307
+
+anterior cell types that contribute to the vertebrate telencephalon. Dev. Genes Evol. 208,
+
+1308
+
+431-439.
+
+1309
+
+Undurraga, C.A., Gou, Y., Sandoval, P.C., Nuñez, V.A., Allende, M.L., Riley, B.B., Hernández,
+
+1310
+
+P.P., Sarrazin, A.F., 2019. Sox2 and Sox3 are essential for development and
+
+1311
+
+regeneration
+
+1312
+
+https://doi.org/10.1101/856088.
+
+1313
+1314
+
+of
+
+the
+
+zebrafish
+
+lateral
+
+line.
+
+bioRxiv
+
+856088;
+
+doi:
+
+UniProt, Consortium, 2023. UniProt: the Universal Protein Knowledgebase in 2023. Nucleic
+Acids Res. 51, D523-D531.
+39
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1315
+
+Vidal, B., Gulez, B., Cao, W.X., Leyva-Díaz, E., Reilly, M.B., Tekieli, T., Hobert, O., 2022. The
+
+1316
+
+enteric nervous system of the C. elegans pharynx is specified by the Sine oculis-like
+
+1317
+
+homeobox gene ceh-34. eLife 11, e76003.
+
+1318
+1319
+
+von Bartheld, C.S., Giannessi, F., 2011. The paratympanic organ: a barometer and altimeter
+in the middle ear of birds? J. Exp. Zool. B Mol. Dev. Evol. 316, 402-408.
+
+1320
+
+Wang, J., Lu, C., Zhao, Y., Tang, Z., Song, J., Fan, C., 2020. Transcriptome profiles of
+
+1321
+
+sturgeon lateral line electroreceptor and mechanoreceptor during regeneration. BMC
+
+1322
+
+Genomics 21, 875.
+
+1323
+1324
+
+Webb, J.F., 2021. Morphology of the mechanosensory lateral line system of fishes, in: B.
+Fritzsch (Ed.), The Senses: A Comprehensive Reference. Elsevier, pp. 29-46.
+
+1325
+
+Wiwatpanit, T., Lorenzen, S.M., Cantú, J.A., Foo, C.Z., Hogan, A.K., Márquez, F., Clancy,
+
+1326
+
+J.C., Schipma, M.J., Cheatham, M.A., Duggan, A., García-Añoveros, J., 2018. Trans-
+
+1327
+
+differentiation of outer hair cells into inner hair cells in the absence of INSM1. Nature
+
+1328
+
+563, 691-695.
+
+1329
+
+Yamashita, T., Zheng, F., Finkelstein, D., Kellard, Z., Robert, C., Rosencrance, C.D., Sugino,
+
+1330
+
+K., Easton, J., Gawad, C., Zuo, J., 2018. High-resolution transcriptional dissection of in
+
+1331
+
+vivo Atoh1-mediated hair cell conversion in mature cochleae identifies Isl1 as a co-
+
+1332
+
+reprogramming factor. PLoS Genet. 14, e1007552.
+
+1333
+
+Zeiske, E., Kasumyan, A., Bartsch, P., Hansen, A., 2003. Early development of the olfactory
+
+1334
+
+organ in sturgeons of the genus Acipenser: a comparative and electron microscopic
+
+1335
+
+study. Anat. Embryol. (Berl.) 206, 357-372.
+
+1336
+1337
+
+Zerbino, D.R., Birney, E., 2008. Velvet: algorithms for de novo short read assembly using de
+Bruijn graphs. Genome Res. 18, 821-829.
+
+1338
+
+Zhang, S., Zhang, Y., Dong, Y., Guo, L., Zhang, Z., Shao, B., Qi, J., Zhou, H., Zhu, W., Yan,
+
+1339
+
+X., Hong, G., Zhang, L., Zhang, X., Tang, M., Zhao, C., Gao, X., Chai, R., 2019.
+
+1340
+
+Knockdown of Foxg1 in supporting cells increases the trans-differentiation of supporting
+
+1341
+
+cells into hair cells in the neonatal mouse cochlea. Cell. Mol. Life Sci. 77, 1401-1419.
+
+1342
+
+Zhang, Y., Zhang, S., Zhang, Z., Dong, Y., Ma, X., Qiang, R., Chen, Y., Gao, X., Zhao, C.,
+
+1343
+
+Chen, F., He, S., Chai, R., 2020. Knockdown of Foxg1 in Sox9+ supporting cells
+
+1344
+
+increases the trans-differentiation of supporting cells into hair cells in the neonatal mouse
+
+1345
+
+utricle. Aging (Albany NY) 12, 19834-19851.
+
+1346
+1347
+
+Zhao, X.-F., Suh, C.S., Prat, C.R., Ellingsen, S., Fjose, A., 2009. Distinct expression of two
+foxg1 paralogues in zebrafish. Gene Expr. Patterns 9, 266-272.
+
+1348
+
+40
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.04.14.536701; this version posted April 14, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY 4.0 International license.
+
+1349
+Expressed in
+ampullary organs
+and neuromasts
+Atoh1 [3,4]
+Elf3
+Eya1 [1]
+Eya2 [1]
+Eya3 [1]
+Eya4 [1]
+Gfi1
+Hes5 [5]
+Hey2
+Insm2
+Irx1
+Klf17
+Lhx3 [4]
+Lhx6-like
+Myt1 [4]
+Otx1
+Pou4f1 [4]
+Pou4f3 [4]
+Six1 [1]
+Six2 [1]
+Six4 [1]
+Sox1 [4]
+Sox2 [4]
+Sox3 [1]
+Sox4
+Sox9
+Tfap2d
+Znf703
+
+1350
+1351
+1352
+1353
+1354
+
+Electrosensoryrestricted
+
+Mechanosensoryrestricted
+
+Insm1
+Irx5
+Mafa
+Neurod4 [4]
+Rorc
+Satb2
+Sp5
+
+Foxg1
+Hmx2
+Isl1
+Rorb
+Sox8
+
+Table 1. Transcription factor genes expressed in developing lateral line organs in
+paddlefish and/or sterlet. Lateral line expression was reported either in this study or in
+previous papers, denoted by numbers in brackets: [1] Modrell et al. (2011b); [2] Modrell et al.
+(2011a); [3] Butts et al. (2014); [4] Modrell et al. (2017a); [5] Modrell et al. (2017b).
+
+41
+
+

@@ -1,0 +1,223 @@
+Deep computer vision with artificial intelligence based sign language recognition to assist hearing and speech-impaired individuals.
+Almjally A, Almukadi WS. (2025). Scientific reports. . doi:10.1038/s41598-025-09106-8. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Deep computer vision with artificial intelligence based sign language recognition to assist hearing and speech-impaired individuals
+
+## Abstract
+AbstractSign language (SL) is a non-verbal language applied by deaf and hard-of-hearing individuals for daily communication between them. Studies in SL recognition (SLR) have recently become essential developments. The current successes present the base for upcoming applications to assist the combination of deaf and hard-of-hearing people. SLR could help break down the obstacles for SL users in the community. In general, glove-based and vision-based techniques are the dual major types measured for SLR methods. Several investigators presented various techniques with significant development by deep learning (DL) models in computer vision (CV) and became performed to SLR. This study presents a novel Harris Hawk Optimization-Based Deep Learning Model for Sign Language Recognition (HHODLM-SLR) technique. The HHODLM-SLR technique mainly concentrates on the advanced automatic detection and classification of SL for hearing and speech-impaired individuals. Initially, the image pre-processing stage applies bilateral filtering (BF) to eliminate noise in an input image dataset. Furthermore, the ResNet-152 model is employed for the feature extraction process. The bidirectional long short-term memory (Bi-LSTM) model is used for SLR. Finally, the Harris hawk optimization (HHO) approach optimally adjusts the Bi-LSTM approach’s hyperparameter values, resulting in more excellent classification performance. The efficiency of the HHODLM-SLR methodology is validated under the SL dataset. The experimental analysis of the HHODLM-SLR methodology portrayed a superior accuracy value of 98.95% over existing techniques.Keywords: Deep learning, Harris Hawk optimization, Sign Language recognition, Image Pre-processing, Hearing and speaking individualsSubject terms: Computational biology and bioinformatics, Mathematics and computing
+
+## Introduction
+SL is the most significant method for deaf and hard-of-hearing individuals to communicate. A non-deaf-dumb individual doesn’t have the learning culture of SL even if they need to help disabled people1. Consequently, deaf and hard-of-hearing individuals live in isolation from other individuals. Nevertheless, disabled people need to interact with others in their social life. Thus, SLR is a substantial and developing investigation field2. Several SLR approaches have recently been advanced for assisting deaf and hard-of-hearing individuals. SL combines mouthing cues, hand gestures, and facial expressions to demonstrate numbers, alphabets, feelings, and words3. Every country has its SL with diverse hand gestures, like Indian SL (ISL) and American SL (ASL). With the enhanced usage of smartphones and computer devices, it became simpler to utilize them to assist communication with deaf and hard-of-hearing people4. According to WHO, deaf and hard-of-hearing people comprise more than five per cent of the global population. Thus, it is necessary to utilize technology to integrate disabled people into communities5. SLR focuses on developing approaches and models to properly recognize a sequence of developed signs and their meaning6.
+Multiple methods of SLR mistakenly treat the difficulty as gesture recognition. SL poses the challenge of being multi-channel, simultaneously transferring meaning over various modes. While SL linguistics analysis is still in its initial phases, it is already apparent that this generates multiple models utilized by speech recognition that are undesirable for SLR7. Moreover, openly accessible data sets are limited either in quantity or quality, interpreting various conventional CV learning models insufficient for the building classifier task8. Nevertheless, artificial intelligence (AI) includes numerous disciplines and intends to improve the growth of computer systems with the capability to perform tasks that conventionally require human intelligence. AI consists of various sub-disciplines, amongst DL and machine learning (ML) deliberated essential AI elements9. As a component of AI, ML aims to progress techniques that help the knowledge of autonomous acquisition and development of computer performance without specific programming. ML models attain expertise from data and then make judgments or forecasts by utilizing designs and managing statistical examinations10.
+This study presents a novel Harris Hawk Optimization-Based Deep Learning Model for Sign Language Recognition (HHODLM-SLR) technique. The HHODLM-SLR technique mainly concentrates on the advanced automatic detection and classification of SL for hearing and speech-impaired individuals. Initially, the image pre-processing stage applies bilateral filtering (BF) to eliminate noise in an input image dataset. Furthermore, the ResNet-152 model is employed for the feature extraction process. The bidirectional long short-term memory (Bi-LSTM) model is used for SLR. Finally, the Harris hawk optimization (HHO) approach optimally adjusts the Bi-LSTM approach’s hyperparameter values, resulting in more excellent classification performance. The efficiency of the HHODLM-SLR approach is validated under the SL dataset. The significant contribution of the HHODLM-SLR approach is listed below.
+The HHODLM-SLR model applies the BF model to pre-process input frames, effectively mitigating noise while preserving significant edge details. This improves the visual clarity of hand gestures, which is essential for accurate recognition. It also enhances the quality of features extracted in subsequent stages of the model.
+The HHODLM-SLR approach utilizes the ResNet-152 technique to extract deep, discriminative features from the pre-processed gesture images. This enables a more refined comprehension of complex hand shapes and positions. It strengthens the feature representation, which directly assists in enhanced recognition performance.
+The HHODLM-SLR method incorporates Bi-LSTM to capture temporal dependencies and contextual flow within sequences of sign gestures. This allows for enhanced interpretation of dynamic, time-varying patterns in sign language. It improves recognition accuracy by modelling past and future context in gesture sequences.
+The HHODLM-SLR methodology integrates the HHO model to fine-tune key hyperparameters such as learning rate and hidden layer size. This adaptive tuning approach improves model performance and accelerates convergence. It introduces a bio-inspired optimization layer that enhances overall training efficiency.
+The novelty of the HHODLM-SLR model is its unique integration of BF, deep residual feature extraction, and sequential modelling with a bio-inspired HHO method. These hybrid techniques form a robust, adaptive, end-to-end framework for sign language recognition. It effectively links low-level image enhancement with high-level temporal learning.
+
+## Related works
+Verma and Anand11 defined a method to assist deaf and hard-of-hearing people so that they are free to interact with persons who don’t have hearing and speech disabilities, depending upon the ISL methods. To discover a proper solution, it is necessary to advance a technique that can serve as a translator for deaf and hard-of-hearing individuals. Irvanizam et al.12 projected an application utilizing the ANN model with the principle of the BP approach for dealing with this investigation. Initially, this work performed pre-processing the image data sequentially by labelling and separating the dataset depending on the types of the alphabet and segmenting the datasets to remove noise in the image, yielding colour, dual segmentation, image edge detection, and grayscale. Afterwards, this work divides the dataset and disseminates it into testing and training sets with dual diverse dimensions. Harit et al.13 applied ML models and trained datasets to transform speech and text input in English into significant actions and the standard ISL gestures implemented by an animated avatar on the webpage. Marzouk et al.14 developed an SLR utilizing ARO with an SNN (SLR-AROSNN) model for people with disabilities. This technique applies the MobileNet method to derive vector features. SNN is used to classify and identify SL. In the initial phase, the SLR-AROSNN model generates ARO model usage to get enhanced sign recognition outcomes. Wyawahare et al.15 address these challenges over the growth of an application designed for individuals with hearing disabilities. This method acquires spoken language and decodes it into meaningful SL animations. The primary technology integrates CNN for accurate speech classification, guaranteeing precise recognition of spoken words. Furthermore, this technique applies RNN to take contextual speech, improving the clarity and authenticity of SL demonstration. In16, an intelligent learning-assisted prediction principles (ILAPP) technique is developed. ILAPP utilizes the ability of CNN for effective feature extraction and applies the renowned LeNet-5 technique for strong classification. This ILAPP method depicts an effective and efficient solution to this challenge. The foundation of ILAPP lies in its usage of CNN to remove crucial aspects from SL images, taking complicated designs and nuances vital for precise classification. The LeNet-5 technique is utilized for classification, helping from its established abilities in image recognition tasks. Alaimahal et al.17 developed a DL-based solution using LSTM networks to predict and detect actions performed by mute individuals, improving communication and inclusivity. Kabir et al.18 improve BdSL recognition using a Max Voting Ensemble technique, integrating multiple pre-trained deep neural networks (DNNs) to improve classification accuracy. Zhang and Jiang19 comprehensively analyze improvements, challenges, and opportunities in DL-based SLR, concentrating on recent research and exploring solutions for continuous SLR and practical implementation. Selvi et al.20 developed a real-time SLR system utilizing DL models to translate hand gestures into understandable formats, enhancing communication for the deaf and mute community. Debnath and IR21 developed a real-time gesture-based sign language detection system using CV and DL methods to recognize American SL gestures, facilitating communication between ASL users and non-users.
+Shanmugam et al.22 bridge communication gaps between individuals with and without hearing abilities by utilizing real-time CVs and CNNs to translate SL into spoken languages. Al Khuzayem et al.23 developed a mobile application that utilizes the DL model to translate isolated Saudi SL (ArSL) into text and audio, improving communication for deaf and hard-of-hearing individuals in Saudi Arabia. Lu and Liu24 propose a multi-sensor fusion methodology using the DE–XGBoost technique to improve SLR by incorporating hand gestures and finger curvature information. Kolkur et al.25 developed a system utilizing CNN to translate Indian SL (ISL) gestures into text, enabling more effectual communication for the deaf community. Uddin, Boletsis, and Rudshavn26 developed a system for recognizing Norwegian SL (NSL) gestures, specifically numbers 0 to 10, utilizing Mediapipe for feature extraction and LSTM networks for temporal modelling. Sharma et al.27 develop a DL approach for isolated SLR utilizing LSTM and deploy it into an interactive web application to assist SL learning and promote awareness. Maashi, Iskandar, and Rizwanullah28 developed a Smart Assistive Communication System for the Hearing-Impaired using SLR with Hybrid DL (SACHI-SLRHDL) in the IoT to improve communication accuracy and accessibility. Khan et al.29 introduced a secure and accurate mobile phone rating classification system using federated learning (FL) and term frequency-inverse document frequency (TF-IDF) models on a novel Flipkart review dataset. Akhila Thejaswi, Rai, and Pakkala30 proposed a real-time end-to-end SLR and sign language translation (SLT) system using CNN and graph-based methods to facilitate accurate communication between Indian Sign Language (ISL) users and non-sign language users. Kamal et al.31 presented a novel end-to-end binary view transformer (BVT) approach for speech recognition that improves frequency resolution and achieves robust accuracy on speech command datasets. Tripathi et al.32 developed a low-cost, portable sign language-to-text conversion system using an Arduino UNO IoT platform and finger flex sensors for assisting hearing and speech impaired individuals. Khan et al.33 proposed a transformer-based DL technique for automatic speaker identification (ASI) that improves accuracy and mitigates training time using multiple audio features across diverse datasets. Salam et al.34 introduced an upper limb gesture and SLR system using CNN to enhance communication for individuals with speech and hearing impairments. Kumar, Sasikala, and Arun35 proposed an image-based American Sign Language (ASL) recognition system using ML and DL techniques, achieving high accuracy and deploying a low-cost, portable solution on a Raspberry Pi 3b + microcontroller. Leiva et al.36 presented a cost-effective, real-time Pakistan Sign Language (PSL) recognition system using a sensor-equipped glove and ML classifiers to assist hearing-impaired individuals. Jagdish and Raju37 developed a DL-based SLR system that converts gesture images into text and voice, improving communication accessibility for hearing- and speech-impaired individuals.
+While crucial progress has been made in the field of SLR utilizing several DL models, various limitations and research gaps still exist. Many existing systems concentrate on specific SLs, namely ASL, BdSL, and ISL, with restricted attention to underrepresented languages like NSL and ArSL. Furthermore, many systems are affected by imbalances in datasets, particularly in real-world scenarios where diverse signing styles, speeds, and orientations exist. Using pre-trained models, while effective, may still cause difficulty in identifying continuous SL and co-articulation, resulting in misclassifications. Moreover, many systems fail to incorporate multiple modalities, such as finger curvature or body posture, which could enhance recognition accuracy. Despite advances, most models fail to function well in real-time or on mobile platforms due to resource limitations. The research gap is addressed by improving the diversity of datasets, enhancing the robustness of models to environmental discrepancies, and developing lightweight models that are scalable for practical applications in various devices. Additionally, exploring more effective multi-modal fusion methods and enhancing user independence in SLR systems is required. Incorporating real-time inference capabilities confirms responsiveness in interactive scenarios. Moreover, concentrating on adaptability across diverse sign languages and regional dialects can significantly broaden the usability of the system.
+
+## The proposed model
+This study proposes a novel HHODLM-SLR technique. The presented HHODLM-SLR technique mainly concentrates on the advanced automatic detection and classification of SL for disabled people. This technique comprises BF-based image pre-processing, ResNet-152-based feature extraction, BiLSTM-based SLR, and HHO-based hyperparameter tuning. Figure 1 represents the workflow of the HHODLM-SLR model.
+Workflow of HHODLM-SLR model.
+
+## Image Pre-preprocessing
+Initially, the HHODLM-SLR approach utilized BF to eliminate noise in an input image dataset38. This model is chosen due to its dual capability to mitigate noise while preserving critical edge details, which is crucial for precisely interpreting complex hand gestures. Unlike conventional filters, such as Gaussian or median filtering, that may blur crucial features, BF maintains spatial and intensity-based edge sharpness. This confirms that key contours of hand shapes are retained, assisting improved feature extraction downstream. Its nonlinear, content-aware nature makes it specifically efficient for complex visual patterns in sign language datasets. Furthermore, BF operates efficiently and is adaptable to varying lighting or background conditions. These merits make it an ideal choice over conventional pre-processing techniques in this application. Figure 2 represents the working flow of the BF model.
+BF framework.
+BF is a nonlinear image processing method employed for preserving edges, whereas decreasing noise in images makes it effective for pre-processing in SLR methods. It smoothens the image by averaging pixel strengths according to either spatial proximity or intensity similarities, guaranteeing that edge particulars are essential for recognizing hand movements and shapes remain unchanged. This is mainly valued in SLR, whereas refined edge features and hand gestures are necessary for precise interpretation. By utilizing BF, noise from environmental conditions, namely background clutter or lighting variations, is reduced, improving the clearness of the input image. This pre-processing stage helps increase the feature extraction performance and succeeding detection phases in DL methods.
+
+## Feature extraction using ResNet-152 model
+The HHODLM-SLR technique implements the ResNet152 model for feature extraction39. This model is selected due to its deep architecture and capability to handle vanishing gradient issues through residual connections. This technique captures more complex and abstract features that are significant for distinguishing subtle discrepancies in hand gestures compared to standard deep networks or CNNs. Its 152-layer depth allows it to learn rich hierarchical representations, enhancing recognition accuracy. The skip connections in ResNet improve gradient flow and enable enhanced training stability. Furthermore, it has proven effectualness across diverse vision tasks, making it a reliable backbone for SL recognition. This depth, performance, and robustness integration sets it apart from other feature extractors. Figure 3 illustrates the flow of the ResNet152 technique.
+Workflow of the ResNet152 model.
+The renowned deep residual network ResNet152 is applied as the pre-trained system in deep convolutional neural networks (DCNN) during this classification method. This technique is responsible for handling the problem of vanishing gradients. Then, the ResNet152 output is transferred to the SoftMax classifier (SMC) in the classification procedure. The succeeding part covers the process of categorizing and identifying characteristics. The fully connected (FC) layer, convolution layer (CL), and downsampling layers (DSL) are some of the most general layers that constitute a DCNN (FCL). The networking depth of DL methods plays an essential section in the model of attaining increased classifier outcomes. Later, for particular values, once the CNN is made deeper, the networking precision starts to slow down; however, persistence decreases after that. The mapping function is added in ResNet152 to reduce the influence of degradation issues.
+Here, denotes the function of mapping built utilizing a feedforward NN together with SC. In general, SC is the identity map that is the outcome of bypassing similar layers straight, and refers to representations of the function of residual maps. The formulation is signified by Eq. (2).
+During the CLs of the ResNet method, filtering is applied, and the down-sampling process is performed by a stride of 2. Next, short-cut networks were added, and the ResNet was built. An adaptive function is applied, as presented by Eq. (3), to enhance the dropout’s implementation now.
+Whereas denotes training sample counts, signifies the function of loss, and represents SMC output, the SMC is a kind of general logistic regression (LR) that might be applied to numerous class labels. The SMC outcomes are presented in Eq. (4).
+In such a case, the softmax layer outcome is stated. denotes the input vector component and refers to the total neuron counts established in the output layer. The presented model uses 152 10 adaptive dropout layers (ADLs), an SMC, and convolutional layers (CLs).
+
+## SLR using Bi-LSTM technique
+The Bi-LSTM model employs the HHODLM-SLR methodology for performing the SLR process40. This methodology is chosen because it can capture long-term dependencies in both forward and backward directions within gesture sequences. Unlike unidirectional LSTM or conventional RNNs, Bi-LSTM considers past and future context concurrently, which is significant for precisely interpreting the temporal flow of dynamic signs. This bidirectional learning enhances the model’s understanding of gesture transitions and co-articulation effects. Its memory mechanism effectually handles variable-length input sequences, which is common in real-world SLR scenarios. Bi-LSTM outperforms static classifiers like CNNs or SVMs when dealing with sequential data, making it highly appropriate for recognizing time-based gestures. Figure 4 specifies the Bi-LSTM method.
+Architecture of Bi-LSTM method.
+The presented DAE-based approach for removing the feature is defined here. Additionally, Bi-LSTM is applied to categorize the data. The model to solve classification problems consists of the type of supervised learning. During this method, the Bi‐LSTM classification techniques are used to estimate how the proposed architecture increases the performance of the classification. A novel RNN learning model is recommended to deal with this need, which may enhance the temporal organization of the structure. By the following time stamp, the output is immediately fed reverse itself RNN is an approach that is often applied in DL. Nevertheless, RNN acquires a slanting disappearance gradient exploding problem. At the same time, the memory unit in the LSTM can choose which data must be saved in memory and at which time it must be deleted. Therefore, LSTM can effectively deal with the problems of training challenges and gradient disappearance by mine time-series with intervals in the time-series and relatively larger intervals. There are three layers in a standard LSTM model architecture: hidden loop, output, and input. The cyclic HL, by comparison with the traditional RNN, generally contains neuron nodes. Memory units assist as the initial module of the LSTM cyclic HLs. Forget, input and output gates are the three adaptive multiplication gate components enclosed in this memory unit. All neuron nodes of the LSTM perform the succeeding computation: The input gate was fixed at time according to the output result of the component at the time in question and is specified in Eq. (5). The input accurate time is based on whether to include a computation to upgrade the present data inside the cell.
+A forget gate defines whether to preserve or delete the data according to the additional new HL output and the present-time input specified in Eq. (6).
+The preceding output outcome of the HL-LSTM cell establishes the value of the present candidate cell of memory and the present input data . * refers to element-to-element matrix multiplication. The value of memory cell state adjusts the present candidate cell and its layer forget and input gates. These values of the memory cell layer are provided in Eq. (7) and Eq. (8).
+Output gate is established as exposed in Eq. (9) and is applied to control the cell position value. The last cell’s outcome is , inscribed as Eq. (10).
+The forward and backward LSTM networks constitute the BiLSTM. Either the forward or the backward LSTM HLs are responsible for removing characteristics; the layer of forward removes features in the forward directions. The Bi-LSTM approach is applied to consider the effects of all features before or after the sequence data. Therefore, more comprehensive feature information is developed. Bi‐LSTM’s present state comprises either forward or backward output, and they are specified in Eq. (11), Eq. (12), and Eq. (13)
+
+## Hyperparameter tuning using the HHO model
+The HHO methodology utilizes the HHODLM-SLR methodology for accomplishing the hyperparameter tuning process41. This model is employed due to its robust global search capability and adaptive behaviour inspired by the cooperative hunting strategy of Harris hawks. Unlike grid or random search, which can be time-consuming and inefficient, HHO dynamically balances exploration and exploitation to find optimal hyperparameter values. It avoids local minima and accelerates convergence, enhancing the performance and stability of the model. Compared to other metaheuristics, such as PSO or GA, HHO presents faster convergence and fewer tunable parameters. Its bio-inspired nature makes it appropriate for complex, high-dimensional optimization tasks in DL models. Figure 5 depicts the flow of the HHO methodology.
+Workflow of the HHO technique.
+The HHO model is a bio-inspired technique depending on Harris Hawks’ behaviour. This model was demonstrated through the exploitation or exploration levels. At the exploration level, the HHO may track and detect prey with its effectual eyes. Depending upon its approach, HHO can arbitrarily stay in a few positions and wait to identify prey. Suppose there is an equal chance deliberated for every perched approach depending on the family member’s position. In that case, it might be demonstrated as condition or landed at a random position in the trees as , which is given by Eq. (14).
+The average location is computed by the Eq. (15).
+The movement from exploration to exploitation, while prey escapes, is energy loss.
+The parameter signifies the prey’s escape energy, and represents the maximum iteration counts. Conversely, denotes a random parameter that swings among for every iteration.
+The exploitation level is divided into hard and soft besieges. The surroundings and should be met in a soft besiege. Prey aims to escape through certain arbitrary jumps but eventually fails.
+and should meet during the hard besiege. The prey attempts to escape. This position is upgraded based on the Eq. (18).
+The HHO model originates from a fitness function (FF) to achieve boosted classification performance. It outlines an optimistic number to embody the better outcome of the candidate solution. The minimization of the classifier error ratio was reflected as FF. Its mathematical formulation is represented in Eq. (19).
+
+## Performance validation
+The performance evaluation of the HHODLM-SLR methodology is examined under the SL dataset42. The technique is simulated by employing Python 3.6.5 tool on PC i5-8600k, 250GB SSD, GeForce 1050Ti 4GB, 16GB RAM, and 1 TB HDD. The parameter settings are provided in the following: learning rate: 0.01, activation: ReLU, epoch count: 50, dropout: 0.5, and batch size: 5 The database contains 15,000 images below 10 class labels, as shown in Table 1.
+Details of the dataset.
+Figure 6 represents the classifier results of the HHODLM-SLR technique. The confusion matrices for both the training and testing phases highlight the robust classification performance of the HHODLM-SLR technique across all ten sign language classes. During TRPH, the model achieved high true positive counts with minimal misclassifications, showing effectual learning. In the TSPH phase, the confusion matrix illustrates that class predictions closely align with actual labels, specifically for frequently occurring signs like C-1, C-5, and C-10, which showed minimal error. Although minor confusion is seen among visually similar classes such as C-6 and C-8, the overall prediction accuracy remains consistent, assisted by clear separation in the PR and ROC curves, additionally validating the robustness of the model in classifying static sign language digits.
+Classifier results of (a-b) 70% TRPH and 30% TSPH confusion matrix and (c-d) curves of PR and ROC.
+Table 2; Fig. 7 present the SLR of the HHODLM-SLR method below 70%TRPH and 30%TSPH. The outcomes indicate that the HHODLM-SLR method correctly identified the samples. With 70%TRPH, the HHODLM-SLR technique presents an average , , , , , and Kappa of 98.93%, 94.66%, 94.63%, 94.64%, 94.04%, and 94.68%, correspondingly. Also, with 30%TSPH, the HHODLM-SLR technique presents an average , , , , , and Kappa of 98.95%, 94.72%, 94.74%, 94.72%, 94.14%, and 94.71%, respectively. These results highlight the robustness and consistency of the technique in performance across diverse evaluation metrics.
+SLR of HHODLM-SLR model under 70%TRPH and 30%TSPH.
+Average of HHODLM-SLR model under 70%TRPH and 30%TSPH.
+Figure 8 illustrates the training (TRA) and validation (VAL) analysis of the HHODLM-SLR approach. The values are calculated within the range of 0–30 epochs. The figure highlights that the TRA and VAL analysis exhibitions have a rising tendency, which informed the capacity of the HHODLM-SLR methodology with maximum outcomes over multiple iterations. Simultaneously, the TRA and VAL leftovers closer over the epochs, identifying inferior overfitting and exhibiting higher outcomes of the HHODLM-SLR methodology, assuring reliable prediction on hidden samples.
+curve of HHODLM-SLR model
+Figure 9 demonstrates the TRA loss (TRALOS) and VAL loss (VALLOS) curves of the HHODLM-SLR approach. The loss values are computed over the range of 0–30 epochs. It is denoted that the TRALOS and VALLOS values exemplify a decreasing trend, notifying the ability of the HHODLM-SLR methodology to balance a trade-off between data fitting and generalization. The constant reduction in loss values, in addition, ensures the maximal performance of the HHODLM-SLR methodology and tunes the prediction results over time.
+Loss curve of HHODLM-SLR model.
+
+## Comparison, processing time, and error analysis of the proposed HHODLM-SLR model
+Table 3; Fig. 10 study the comparison analysis of the HHODLM-SLR technique with the existing models43,44. The results emphasized that the Single PCANet + SVM, Inception V3, GoogLeNet, SignLan-Net- MobileNetV2, ORB + Nu-SVC, and MobileNetV1 models have reported worse performance. Meanwhile, the CNN technique has gained somewhat closer outcomes. At the same time, the proposed HHODLM-SLR approach reported superior performance with maximal , and of 94.72%, 94.74%, 98.95, and 94.72%, respectively.
+Comparative results of HHODLM-SLR methodology with existing models43,44.
+Comparative analysis of HHODLM-SLR methodology with existing models.
+In Table 4; Fig. 11, the comparative results of the HHODLM-SLR technique are identified in terms of processing time (PT). The PT for each technique is evaluated on a machine equipped with an NVIDIA GeForce GTX 1050Ti GPU. The outcomes imply that the HHODLM-SLR methodology gets higher performance. Depending on PT, the HHODLM-SLR methodology presents a lower PT of 6.95 s whereas the CNN, Single PCANet + SVM, Inception V3, GoogLeNet, SignLan-Net- MobileNetV2, ORB + Nu-SVC, and MobileNetV1 models achieve improved PT values of 10.89 s, 8.37 s, 10.71 s, 8.76 s, 17.61 s, 9.42 s, and 14.88 s, respectively.
+PT analysis of diverse techniques measured on a system with GeForce GTX 1050Ti GPU.
+PT result of HHODLM-SLR technique with existing methods.
+Table 5; Fig. 12 demonstrates the result analysis of the ablation study of HHODLM-SLR model with existing approaches. The BF model achieves an of 96.66%, with a of 92.43%, of 92.22%, and an of 92.13%. The ResNet-152 model improves these values to an of 97.20%, of 93.12%, of 92.90%, and of 92.72%. The HHO method additionally improves performance with an of 97.72%, of 93.64%, of 93.47%, and of 93.29%. The Bi-LSTM model achieves an of 98.41%, of 94.15%, of 94.06%, and of 94.09%. Finally, the proposed HHODLM-SLR model attains the highest metrics with an of 98.95%, of 94.72%, of 94.74%, and of 94.72%, indicating its superior efficiency.
+Result analysis of the ablation study of HHODLM-SLR model with existing approaches.
+Result analysis of the ablation study of HHODLM-SLR model with existing approaches.
+Table 6; Fig. 13 demonstrates the error analysis of the HHODLM-SLR methodology with existing techniques. The CNN attains an of 3.27%, of 7.52%, of 9.73%, and of 9.54%. The Single PCANet with SVM shows slightly better at 11.23%, but lower and of 7.25% and 6.57%, respectively. Inception V3 records an of 9.95%, of 7.70%, of 8.12%, and of 5.78%. GoogLeNet performs better in with 29.95%, though and remain low at 8.84% and 7.44%. SignLan-Net with MobileNetV2 and ORB with Nu-SVC report low around 1.27% and 9.54%, with ORB attaining a higher of 10.05%. MobileNetV1 attains an of 5.44% with moderate and around 7.55% and 7.33%. The proposed HHODLM-SLR technique exhibits the lowest at 1.05%, with , , and closely clustered around 5.28%. These results highlight significant challenges in the ability to generalize, indicating a need for further optimization and feature representation to enhance overall performance.
+Error analysis of HHODLM-SLR methodology with existing techniques.
+Error analysis of HHODLM-SLR methodology with existing techniques.
+
+## Conclusion
+This study proposes a novel HHODLM-SLR technique. The presented HHODLM-SLR technique mainly focuses on the advanced automatic detection and classification of SL for disabled people. Initially, BF performs image pre-processing to eliminate noise in an input image dataset. Furthermore, the ResNet-152 model is utilized for feature extraction. For the SLR, the Bi-LSTM model is implemented. Finally, the HHO model optimally adjusts the Bi-LSTM method’s hyperparameter values, resulting in better classification performance. The efficiency of the HHODLM-SLR methodology is validated under the SL dataset. The experimental analysis of the HHODLM-SLR methodology portrayed a superior accuracy value of 98.95% over existing techniques. The limitations of the HHODLM-SLR methodology comprise the usage of a single dataset, which may limit the generalizability of the findings across diverse real-world scenarios. The absence of cross-linguistic analysis averts the technique from being validated for multilingual or regional sign language discrepancies. Limited examination on real-time or user-interactive environments also raises issues about deployment feasibility. Furthermore, there is a lack of examination of factors such as varying lighting conditions, occlusions, and background complexity. The dataset imbalance across categories may have influenced biased learning. Future works may concentrate on integrating real-world, demographically diverse datasets and evaluating its performance under varying lighting conditions, occlusions, and backgrounds to mitigate bias and improve fairness, robustness, and adaptability across multilingual and interactive environments. Expanding the study to comprise diverse demographic groups can also improve fairness and accessibility.
+
+## Acknowledgements
+The authors extend their appreciation to the King Salman center For Disability Research for funding this work through Research Group no KSRG-2024- 242.
+
+## Author contributions
+Abrar Almjally: Conceptualization, methodology, validation, investigation, writing—original draft preparation, fundingWafa Sulaiman Almukadi: Conceptualization, software, methodology, writing—original draft preparation, writing—review and editing.
+
+## Data availability
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/muhammadkhalid/sign-language-for-numbers?select=Sign+Language+for+Numbers, reference number42.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/muhammadkhalid/sign-language-for-numbers?select=Sign+Language+for+Numbers, reference number42.
+
+## Table Table 1: Details of the dataset.
+Number Sign | Labels | No. of Images
+0 | C-1 | 1500
+1 | C-2 | 1500
+2 | C-3 | 1500
+3 | C-4 | 1500
+4 | C-5 | 1500
+5 | C-6 | 1500
+6 | C-7 | 1500
+7 | C-8 | 1500
+8 | C-9 | 1500
+9 | C-10 | 1500
+Total Images | 15,000
+
+## Table Table 2: SLR of HHODLM-SLR model under 70%TRPH and 30%TSPH.
+Classes |  |  |  |  |  | Kappa
+Training Phase (70%) | 
+C-1 | 98.86 | 94.45 | 94.09 | 94.27 | 93.63 | 94.32
+C-2 | 98.93 | 95.49 | 93.42 | 94.44 | 93.86 | 94.42
+C-3 | 98.96 | 94.45 | 95.26 | 94.85 | 94.28 | 95.05
+C-4 | 99.14 | 95.06 | 96.34 | 95.69 | 95.22 | 95.89
+C-5 | 99.03 | 96.43 | 93.64 | 95.01 | 94.49 | 95.02
+C-6 | 98.85 | 94.94 | 93.18 | 94.05 | 93.42 | 94.20
+C-7 | 98.81 | 93.66 | 94.47 | 94.06 | 93.40 | 93.94
+C-8 | 98.90 | 93.79 | 95.62 | 94.70 | 94.09 | 94.65
+C-9 | 98.92 | 94.15 | 95.30 | 94.72 | 94.13 | 94.86
+C-10 | 98.87 | 94.18 | 94.95 | 94.56 | 93.93 | 94.43
+Average | 98.93 | 94.66 | 94.63 | 94.64 | 94.04 | 94.68
+Testing Phase (30%) | 
+C-1 | 99.27 | 97.07 | 95.57 | 96.31 | 95.91 | 96.46
+C-2 | 98.91 | 95.76 | 93.97 | 94.86 | 94.25 | 94.81
+C-3 | 98.96 | 94.04 | 95.52 | 94.77 | 94.20 | 94.72
+C-4 | 99.16 | 95.11 | 96.75 | 95.92 | 95.46 | 95.96
+C-5 | 98.91 | 95.38 | 93.94 | 94.66 | 94.05 | 94.56
+C-6 | 98.69 | 94.43 | 93.04 | 93.73 | 93.00 | 93.50
+C-7 | 98.98 | 93.75 | 96.24 | 94.98 | 94.42 | 95.05
+C-8 | 99.07 | 93.84 | 96.48 | 95.14 | 94.63 | 95.35
+C-9 | 98.62 | 93.69 | 91.97 | 92.82 | 92.07 | 92.58
+C-10 | 98.91 | 94.13 | 93.90 | 94.02 | 93.42 | 94.12
+Average | 98.95 | 94.72 | 94.74 | 94.72 | 94.14 | 94.71
+
+## Table Table 3: Comparative results of HHODLM-SLR methodology with existing models43,44.
+Methodology |  |  |  | 
+CNN Classifier | 96.73 | 92.48 | 90.27 | 90.46
+Single PCANet + SVM | 88.77 | 91.79 | 92.75 | 93.43
+Inception V3 Method | 90.05 | 92.30 | 91.88 | 94.22
+GoogLeNet Model | 70.05 | 91.16 | 92.56 | 92.57
+SignLan-Net- MobileNetV2 | 98.73 | 91.61 | 93.02 | 92.27
+ORB + Nu-SVC | 90.46 | 92.35 | 93.90 | 89.95
+MobileNetV1 Method | 94.56 | 92.45 | 92.67 | 93.33
+HHODLM-SLR | 98.95 | 94.72 | 94.74 | 94.72
+
+## Table Table 4: PT analysis of diverse techniques measured on a system with GeForce GTX 1050Ti GPU.
+Technique | PT (sec) (GeForce 1050Ti)
+CNN Classifier | 10.89
+Single PCANet + SVM | 8.37
+Inception V3 Method | 10.71
+GoogLeNet Model | 8.76
+SignLan-Net- MobileNetV2 | 17.61
+ORB + Nu-SVC | 9.42
+MobileNetV1 Method | 14.88
+HHODLM-SLR | 6.95
+
+## Table Table 5: Result analysis of the ablation study of HHODLM-SLR model with existing approaches.
+Model |  |  |  | 
+BF | 96.66 | 92.43 | 92.22 | 92.13
+ResNet-152 | 97.20 | 93.12 | 92.90 | 92.72
+HHO | 97.72 | 93.64 | 93.47 | 93.29
+Bi-LSTM | 98.41 | 94.15 | 94.06 | 94.09
+HHODLM-SLR | 98.95 | 94.72 | 94.74 | 94.72
+
+## Table Table 6: Error analysis of HHODLM-SLR methodology with existing techniques.
+Technique |  |  |  | 
+CNN Classifier | 3.27 | 7.52 | 9.73 | 9.54
+Single PCANet + SVM | 11.23 | 8.21 | 7.25 | 6.57
+Inception V3 Method | 9.95 | 7.70 | 8.12 | 5.78
+GoogLeNet Model | 29.95 | 8.84 | 7.44 | 7.43
+SignLan-Net- MobileNetV2 | 1.27 | 8.39 | 6.98 | 7.73
+ORB + Nu-SVC | 9.54 | 7.65 | 6.10 | 10.05
+MobileNetV1 Method | 5.44 | 7.55 | 7.33 | 6.67
+HHODLM-SLR | 1.05 | 5.28 | 5.26 | 5.28
+
+## Figure Fig. 1: Workflow of HHODLM-SLR model.
+
+## Figure Fig. 2: BF framework.
+
+## Figure Fig. 3: Workflow of the ResNet152 model.
+
+## Figure Fig. 4: Architecture of Bi-LSTM method.
+
+## Figure Fig. 5: Workflow of the HHO technique.
+
+## Figure Fig. 6: Classifier results of (a-b) 70% TRPH and 30% TSPH confusion matrix and (c-d) curves of PR and ROC.
+
+## Figure Fig. 7: Average of HHODLM-SLR model under 70%TRPH and 30%TSPH.
+
+## Figure Fig. 8: curve of HHODLM-SLR model
+
+## Figure Fig. 9: Loss curve of HHODLM-SLR model.
+
+## Figure Fig. 10: Comparative analysis of HHODLM-SLR methodology with existing models.
+
+## Figure Fig. 11: PT result of HHODLM-SLR technique with existing methods.
+
+## Figure Fig. 12: Result analysis of the ablation study of HHODLM-SLR model with existing approaches.
+
+## Figure Fig. 13: Error analysis of HHODLM-SLR methodology with existing techniques.

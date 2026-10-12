@@ -1,0 +1,2573 @@
+A lateralised design for the interaction of visual memories and heading representations in navigating ants
+Antoine Wystrach, Florent Le Moël, Léo Clément, Sebastian Schwarz (2020). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/2020.08.13.249193. doi:10.1101/2020.08.13.249193. Licence: cc-by-nc. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+1
+
+A lateralised design for the interaction of visual memories and heading representations in
+
+2
+
+navigating ants.
+
+3
+
+Antoine Wystrach1*, Florent Le Moël1, Leo Clement1, Sebastian Schwarz1
+
+4
+5
+
+1
+
+6
+
+Toulouse, CNRS, Université Paul Sabatier, 31062 Toulouse cedex 9, France
+
+7
+
+*
+
+8
+
+Antoine Wystrach: antoine.wystrach@univ-tlse3.fr
+
+Centre de Recherches sur la Cognition Animale, Centre de Biologie Intégrative, Université de
+
+Corresponding author:
+
+9
+10
+
+Abstract:
+
+11
+
+The navigational skills of ants, bees and wasps represent one of the most baffling examples
+
+12
+
+of the powers of minuscule brains. Insects store long-term memories of the visual scenes
+
+13
+
+they experience 1, and they use compass cues to build a robust representation of directions
+
+14
+
+2,3
+
+15
+
+Mushroom Bodies (MB) 4–8, as well as how heading representations are formed in another
+
+16
+
+brain area called the Central Complex (CX) 9–12. However, how such memories and heading
+
+17
+
+representations interact to produce powerful navigational behaviours remains unclear 7,13,14.
+
+18
+
+Here we combine behavioural experiments with computational modelling that is strictly
+
+19
+
+based on connectomic data to provide a new perspective on how navigation might be
+
+20
+
+orchestrated in these insects. Our results reveal a lateralised design, where signals about
+
+21
+
+whether to turn left or right are segregated in the left and right hemispheres, respectively.
+
+22
+
+Furthermore, we show that guidance is a two-stage process: the recognition of visual
+
+23
+
+memories – presumably in the MBs – does not directly drive the motor command, but
+
+24
+
+instead updates a “desired heading” – presumably in the CX – which in turn is used to
+
+25
+
+control guidance using celestial compass information. Overall, this circuit enables ants to
+
+26
+
+recognise views independently of their body orientation, and combines terrestrial and
+
+27
+
+celestial cues in a way that produces exceptionally robust navigation.
+
+28
+
+. We know reasonably well how long-term memories are formed, in a brain area called the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+29
+
+Bilaterally decorrelated input to the CX produces goal-oriented paths.
+
+30
+
+We first investigated how information about the visual familiarity of the scenes – as
+
+31
+
+computed in the MB – could plausibly be sent to the CX for guidance given the known
+
+32
+
+circuitry of insect brains. Even though our current approach is an experimental one, the CX
+
+33
+
+circuitry is understood and conserved enough to make such effort possible using biologically
+
+34
+
+constrained neural modelling 12,15–17.
+
+35
+
+Recent studies have shown that the CX circuits can: 1) track the current heading, in two
+
+36
+
+substructures called Ellipsoid Body (EB) and Protocerebral Bridge (PB) 10,11,18; 2) retain a
+
+37
+
+desired heading representation for tens of seconds in the Fan-shaped Body (FB) 14; and 3)
+
+38
+
+compare both current and desired headings to output compensatory left/right steering
+
+39
+
+commands 14,19. The desired heading can be updated by bilateral signals to the FB from
+
+40
+
+external regions 14. Such a signal can plausibly come from the recognition of long-term visual
+
+41
+
+memories in the MB, which sends bilateral input to the FB through one relay in the Superior
+
+42
+
+Intermediate Protocerebrum (SIP). These observations led to the idea that navigation, such
+
+43
+
+as learnt route following, could emerge by having the MBs signalling to the CX when the
+
+44
+
+insect is facing its familiar route direction or not 7,13,14.
+
+45
+
+We thus tested the viability of this hypothesis by building a model of the CX, strictly based
+
+46
+
+on this connectivity (Fig. 1). Contrary to what was expected, our model shows that having
+
+47
+
+the bilateral ‘visual familiarity’ signals to the FB correspond with the moments when the
+
+48
+
+agent is facing the correct route direction did not allow straight routes to emerge. A
+
+49
+
+thorough search through the parameter space revealed that this configuration produces a
+
+50
+
+mediocre directionality at best, and is very sensitive to parameter change (Extended data fig.
+
+51
+
+1). Contrastingly, route following becomes extremely stable and robust to parameter
+
+52
+
+changes as soon as the signals to the FB from the left and right brain hemispheres
+
+53
+
+correspond to moments where the agent is oriented to the right or the left of its goal,
+
+54
+
+respectively (Fig. 1). Impressively, varying parameters (such as the time during which FB
+
+55
+
+neurons sustain their activity, or the heading angle away from the goal for which left or right
+
+56
+
+input signals are strongest) hardly has any effect: straight routes emerge as long as left and
+
+57
+
+right hemispheric inputs roughly correlate with a right and left heading bias, respectively
+
+58
+
+(Fig. 1, Extended data fig. 1). As a corollary, if left and right hemispheric inputs correlate
+
+59
+
+instead with left and right (rather than right and left) heading biases, a straight route in the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+60
+
+reverse direction emerges (Fig. 1). Thus, having the input signal correlate with moments
+
+61
+
+where the agent faces the goal direction corresponds to a zone of transition between two
+
+62
+
+stable regimes of route-following in opposite directions.
+
+63
+
+In other words, this suggests that recognising views when facing the goal may not be a good
+
+64
+
+solution, and instead, it shows that the CX circuitry is remarkably adapted to control a visual
+
+65
+
+course as long as the input signals from the visual familiarity of the scene to both
+
+66
+
+hemispheres are distinct, with one hemisphere signalling when the agent’s heading is biased
+
+67
+
+towards the right and the other, towards the left. This model makes particular predictions,
+
+68
+
+which we next tested with behavioural experiments.
+
+69
+70
+
+The recognition of familiar views triggers compensatory left or right turns.
+
+71
+
+Previous studies assumed that ants memorise views while facing the goal 20–22 and anti-goal
+
+72
+
+23–25
+
+73
+
+to recognise a learnt view as familiar 26–28. On the contrary, our modelling effort suggests
+
+74
+
+that ants should rather recognise views based on whether the route direction stands on
+
+75
+
+their ‘left or right’ rather than ‘in front or behind’. We put this idea to the test using an
+
+76
+
+open-loop trackball system enabling the experimenter to choose both the position and body
+
+77
+
+orientation of tethered ants directly in their natural environment 29. We trained ants along a
+
+78
+
+route and captured homing individuals just before they entered their nest to ensure that
+
+79
+
+these so-called zero-vector ants (ZV) could no longer rely on their path integration homing
+
+80
+
+vector 30. We recorded the motor response of these ants while mounted on the trackball
+
+81
+
+system, in the middle of their familiar route, far from the catchment area of the nest, when
+
+82
+
+fixed in eight different body orientations (Fig. 2a, b). Results show that, irrespective of their
+
+83
+
+body orientation, ants turned mostly towards the correct route direction (Fig. 2c). When the
+
+84
+
+body was oriented towards (0°, nest direction) or away (180°) from the route direction, ants
+
+85
+
+still showed a strong preference for turning on one side (to the left or to the right,
+
+86
+
+depending on individuals) (Fig. 2d). This was not the case when ants were tested in
+
+87
+
+unfamiliar surroundings (Fig. 2c, d), showing that the lateralised responses observed on the
+
+88
+
+familiar route was triggered by the recognition of the visual scene. This implies that ants can
+
+89
+
+recognise their route independently of their body orientation, and can derive whether the
+
+) directions, and that they must consequently align their body in these same directions
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+90
+
+route direction is towards their left or their right. Importantly, even when facing the route or
+
+91
+
+anti-route direction, recognition of familiar views appears to trigger a ‘left vs. right’ decision
+
+92
+
+rather than a ‘go forward vs. turn’ decision.
+
+93
+94
+
+Guidance based on memorised views involves the celestial compass.
+
+95
+
+We showed that the recognition of familiar views indicates whether the goal direction is
+
+96
+
+towards the left or right. In principle, guidance could thus be achieved by having these
+
+97
+
+left/right signals directly trigger the left or right motor command. An alternative would be,
+
+98
+
+as in our model, that such left/right signals can be used to update the ‘desired heading
+
+99
+
+directions’ in the CX, which in turn uses its own compass information to control steering (Fig.
+
+100
+
+1). This makes a counterintuitive prediction: if the recognition of familiar views triggers a
+
+101
+
+turn towards the correct side, reversing the direction of the compass representation in the
+
+102
+
+CX should immediately reverse the motor decision. We tested this prediction by mirroring
+
+103
+
+the apparent position of the sun in the sky by 180° to Cataglyphis velox ants tethered to our
+
+104
+
+trackball system. A previous study had shown that this manipulation was sufficient to shift
+
+105
+
+this species’ compass heading representation 31.
+
+106
+
+We first tethered well-trained ZV ants (i.e., captured just before entering the nest) on our
+
+107
+
+trackball system with their body orientation fixed perpendicularly to their familiar route
+
+108
+
+direction. As expected, ants in this situation turned towards the correct route direction (Fig.
+
+109
+
+3, left panels, natural sun), indicating that they correctly recognised familiar visual terrestrial
+
+110
+
+cues. When mirroring the apparent sun’s position by 180°, these ants responded by turning
+
+111
+
+in the opposite direction within one second (Fig. 3, left panel, mirrored sun). We repeated
+
+112
+
+the experiment by placing such ZV ants in the same compass direction but in an unfamiliar
+
+113
+
+location. In this situation, the ants turned in random directions (Fig. 3, middle panels),
+
+114
+
+showing that the direction initially chosen by the ants on their familiar route (Fig. 3, left
+
+115
+
+panels) was based on the recognition of terrestrial rather than celestial cues. It however
+
+116
+
+remains unclear whether the sun rotation had an impact on ants in unfamiliar terrain, as
+
+117
+
+ants in this situation regularly alternate between left and right turns anyway 25. Finally, to
+
+118
+
+ensure that the observed effect on route was not due to an innate bias at this particular
+
+119
+
+location, we repeated this experiment with ants tethered at the exact same route location
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+120
+
+and body orientation, but this time only with ants that were trained to an alternative
+
+121
+
+straight route, which was aligned with the tethered direction of the trackball (Fig. 3, right
+
+122
+
+panel). As expected, these ants showed no preference in turning direction at the group level,
+
+123
+
+although most individuals still strongly favoured one side rather than walking straight (Fig. 3
+
+124
+
+right panels). Interestingly, mirroring the sun significantly reversed the individual’s chosen
+
+125
+
+direction (even though they were aligned with their goal direction) (Fig. 3c right panels).
+
+126
+
+Taken together these results show that guidance based on learnt views is a two-stage
+
+127
+
+process: the recognition of visual memories – presumably through the MBs – does not
+
+128
+
+directly drive the motor command, but it instead signals a desired heading – presumably
+
+129
+
+through the CX –, which in turn is used to control guidance using celestial compass
+
+130
+
+information.
+
+131
+132
+
+A complex interaction between terrestrial and celestial guidance
+
+133
+
+The results from above point at a complex interaction between the use of long-term
+
+134
+
+memory of terrestrial cues – indicating whether the goal is left or right – and the heading
+
+135
+
+estimate based on compass cues. To further endorse the credibility of our proposed
+
+136
+
+guidance system, we used our model to explore how agents navigating along their familiar
+
+137
+
+route would react to a sudden 135° shift of the CX current celestial compass estimate, and
+
+138
+
+compared their behaviour to that of real homing ZV ants tested in a similar scenario, where
+
+139
+
+we shifted the sun position by 135° using a mirror (Fig. 4). Impressively, and despite the
+
+140
+
+nonlinear dynamics at play, the simulated shift in the CX model closely resembled the
+
+141
+
+response of the ants to the sun manipulation, adding credibility to the model and helping us
+
+142
+
+grasp the mechanisms at play (Fig. 4).
+
+143
+144
+
+General discussion
+
+145
+
+We showed that during view-based navigation, ants recognise views when oriented left and
+
+146
+
+right from their goal to trigger left and right turns. Facing in the correct route direction does
+
+147
+
+not trigger a ‘go forward’ command, but marks some kind of labile equilibrium point in the
+
+148
+
+system. Also, we show that the recognition of left or right familiar views does not drive the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+149
+
+motor decision directly but is perfectly suited to inform the CX, which in turn maintains the
+
+150
+
+desired heading using its own compass information. The advantage of this design is clear
+
+151
+
+considering that the recognition of learnt visual terrestrial cues is sensitive to variables such
+
+152
+
+as body orientation 31,32 or partial visual obstructions that must happen continuously when
+
+153
+
+navigating through grassy or leafy environments, making the visual familiarity signal
+
+154
+
+mediated by the MBs inherently noisy. In contrast, the CX provides a stable and sustained
+
+155
+
+heading representation by integrating self-motion 11 with multiple wide-field celestial 10 and
+
+156
+
+terrestrial cues 9,33. The CX is thus well suited to act as a heading buffer from the noisy MBs
+
+157
+
+signal, resulting in smooth and stable guidance control. In addition, the compass
+
+158
+
+representation in the CX enables to steer the direction of travel independently of the actual
+
+159
+
+body orientation 12. Our results thus explain how ants visually recognise a view using the
+
+160
+
+MBs and subsequently follow such direction backwards using the CX 31 or how ants can
+
+161
+
+estimate the actual angular error between the current and goal directions before initiating
+
+162
+
+their turn 34. Also, in addition to route following, such a lateralised design can produce
+
+163
+
+remarkably robust homing in complex environments (Wystrach et al., 2020 in prep).
+
+164
+
+Finally, the proposed circuit offers an interesting take on the evolution of navigation.
+
+165
+
+Segregating ‘turn left’ and ‘turn right’ signals between hemispheres evokes the widespread
+
+166
+
+tropotaxis, where orientation along a gradient is achieved by directly comparing the signals
+
+167
+
+intensities between physically distinct left and right sensors (e.g., antennae or eyes) in
+
+168
+
+bilateral animals 35–41. Comparing signals between hemispheres could thus be an ancestral
+
+169
+
+strategy in arthropods; and ancestral brain structures such as the CX accommodates well
+
+170
+
+such a bilateral design and may be constrained to receive such lateralised input to function
+
+171
+
+properly. The evolution of visual route-following in hymenoptera is a relatively recent
+
+172
+
+adaptation, and it cannot be achieved by directly comparing left and right visual inputs –
+
+173
+
+which is probably why each eye can afford to project to both hemispheres’ MBs 42,43.
+
+174
+
+Categorising learnt views as indicators of whether the goal is to the left or to the right, and
+
+175
+
+subsequently segregating this information in the left and right hemispheres may thus be an
+
+176
+
+evolutionary adaptation to fit the ancestrally needed bilateral inputs to the CX (Fig. 1).
+
+177
+
+How left and right visual memories are acquired and learnt when naive insects explore the
+
+178
+
+world for the first time remains to be seen. During their learning flights, wasps regularly
+
+179
+
+alternate between moments facing 45° to the left and 45° to the right of their goal, strongly
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+180
+
+supporting our claim that insect form such left and right memories 44. During their
+
+181
+
+meandering learning walks, ants tend to reverse turning direction when facing the nest or
+
+182
+
+anti-nest direction 21,23,45, however, they do expose their gaze in all directions, providing
+
+183
+
+ample opportunities to form a rich set of left and right visual memories 45. Our model shows
+
+184
+
+that the angle at which views are learnt does not need to be precisely controlled (Fig. 1c,d).
+
+185
+
+Views facing the nest may as well be included during learning and categorised as left, right or
+
+186
+
+both, explaining why most ants facing their goal usually choose to turn in one particular
+
+187
+
+direction while others turned less strongly. During learning, the first source of information
+
+188
+
+about whether the current body orientation is left or right from the goal probably results
+
+189
+
+from path integration. Interestingly, lateralised dopaminergic feedback from the Lateral
+
+190
+
+Accessory Lobes (LAL, a pre-motor area) to the MBs could represent an ideal candidate to
+
+191
+
+orchestrate such a categorisation of left/right memories (Wystrach et al., 2020 in prep).
+
+192
+
+Revisiting current questions in insect and robot navigation such as early exploration, route
+
+193
+
+following and homing 20,46–49; the integration of aversive memories 8,24,50, path integration
+
+194
+
+and views (51–54 or other sensory modalities ( 55–58 as well as seeking for underlying neural
+
+195
+
+correlates 5–7 – with such a lateralised design as a framework promises an interesting
+
+196
+
+research agenda.
+
+197
+198
+
+Acknowledgments: We thank the Profs. Jochen Zeil and Xim Cerda to provide us access to
+
+199
+
+field sites in ANU Canberra, Australia and Sevilla, Spain, respectively. We are grateful to the
+
+200
+
+Prof. Hansjuergen Dahmen for helping us setting the trackball device. We thank the Profs.
+
+201
+
+Rüdiger Wehner, Tom Collett and Paul Graham for fruitful discussions and comments on
+
+202
+
+earlier versions of the manuscript.
+
+203
+
+Authors contributions
+
+204
+
+Research design: AW. Data collection: AW, SS, FLM, LC. Trackball system design: FLM. Data
+
+205
+
+analysis: AW, SS, FLM. Modelling: AW. Manuscript writing: AW.
+
+206
+
+Funding
+
+207
+
+This work was funded by the ERC Starting Grant EMERG-ANT no. 759817 to AW.
+
+208
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+209
+
+Method
+
+210
+
+The trackball setup:
+
+211
+
+For both experiments (fig 2 and 3) we used the air-suspended trackball setup as described in
+
+212
+
+Dahmen et al., 2017 29; and chose the configuration where the ants are fixed in a given
+
+213
+
+direction and cannot physically rotate (if the ant tries to turn, the ball counter-rotates under
+
+214
+
+its legs). To fix ants on the ball, we used a micro-magnet and metallic paint applied directly
+
+215
+
+on the ant’s thorax. The trackball air pump, battery and computer were connected to the
+
+216
+
+trackball through 10 m long cables and hidden in a remote part of the panorama. The
+
+217
+
+trackball movements were recorded using custom software in C++, data was analysed with
+
+218
+
+Matlab and can be provided upon request.
+
+219
+220
+
+Routes setups and ant training in Cataglyphis velox:
+
+221
+
+For all experiments (fig. 2 and 3 and 4), Cataglyphis velox ants were constrained to forage
+
+222
+
+within a route using dug wood planks that prevented them to escape, while leaving the
+
+223
+
+surrounding panoramic view of the scenery intact (as described in Wystrach et al., 201259).
+
+224
+
+Cookie crumbs were provided ad libitum in the feeder positions for at least two days before
+
+225
+
+any tests. Some barriers dug into the ground created baffles, enabling us to control whether
+
+226
+
+ants were experienced with the route. Ants were considered trained when able to home
+
+227
+
+along the route without bumping into any such obstacle. These ants were captured just
+
+228
+
+before they entered their nest to ensure that they could not rely on path integration (so-
+
+229
+
+called ZV ants), marked with a metallic paint on the thorax and a colour code for individual
+
+230
+
+identification, and subjected to tests (see next sections).
+
+231
+232
+
+Routes setups and ant training in Myrmecia croslandi:
+
+233
+
+For the experiment with Myremcia croslandi ants (fig. 2), we used each individual’s natural
+
+234
+
+route, for which these long-lived ants have extensive experience 60. Individuals were
+
+235
+
+captured on their foraging trees, marked with both metallic paint and a colour code for
+
+236
+
+individual identification, given a sucrose solution or a prey and released where they had
+
+237
+
+been captured (on their foraging tree). Upon release, most of these ants immediately started
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+238
+
+to return home. We followed them while marking their route using flag pins every 50 cm (so
+
+239
+
+that their exact route was known). We captured the ants just before they entered their nests
+
+240
+
+and subjected them to the test on the trackball (see next section).
+
+241
+242
+
+Experimental protocol for the left/right trackball experiment (figure 2):
+
+243
+244
+
+1- An experienced ant was captured just before entering its nest, and marked with a drop of
+
+245
+
+metallic paint on the thorax.
+
+246
+
+2- A large opaque ring (30 cm diameter, 30 cm high) was set around the trackball setup.
+
+247
+
+3- The ant was fixed on the trackball within the opaque ring, which prevented her to see the
+
+248
+
+surroundings. Only a portion of sky above was accessible to the ant.
+
+249
+
+4- The trackball system (together with the opaque ring and the fixed ant within) was moved
+
+250
+
+to the desired position and rotated so that the ant was facing the desired direction.
+
+251
+
+5- One experimenter started recording the trackball movements (from the remote
+
+252
+
+computer), when another lifted the ring (so the ant could see the scenery) before leaving the
+
+253
+
+scene, letting the ant behave for at least 15 seconds post ring lifting.
+
+254
+
+6- The experimenter came back, replaced the ring around the trackball system, and rotated
+
+255
+
+the trackball system (following a pre-established pseudo random sequence) for the ant to
+
+256
+
+face in a novel direction.
+
+257
+
+7- We repeated steps 5 and 6 until the 8 possible orientations were achieved (the sequence
+
+258
+
+of orientations were chosen in a pseudo-random order so as to counter-balance orientation
+
+259
+
+and direction of rotation).
+
+260
+
+The data shown in fig. 2 for each orientation is averaged across 12 sec of recording (from 3
+
+261
+
+sec to 15 sec assuming ring lifting is at 0 sec). We decided to let 3 sec after ring lifting, as the
+
+262
+
+movements of the experimenter before he leaves the scenery might disturb the ants).
+
+263
+
+In all experiments, ants were tested only once.
+
+264
+265
+
+Experimental protocol for the mirror trackball experiments (figure 3):
+
+266
+267
+
+1- An experienced ant was captured just before entering its nest, and marked with a drop of
+
+268
+
+metallic paint on the thorax.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+269
+
+2- A large opaque ring (30 cm diameter, 30 cm high) was set around the trackball setup.
+
+270
+
+3- The ant was fixed on the trackball within the opaque ring, which prevented her to see the
+
+271
+
+surroundings. Only a portion of sky above was accessible to the ant.
+
+272
+
+4- The trackball system (together with the opaque ring and the fixed ant within) was moved
+
+273
+
+to the desired position and rotated so that the ant was facing the desired direction.
+
+274
+
+5- One experimenter started recording the trackball movements, when another lifted the
+
+275
+
+ring (so the ant could see the scenery) before leaving the scene, letting the ant behave for at
+
+276
+
+least 10 seconds post ring lifting.
+
+277
+
+5- Two experimenters simultaneously hid the real sun and projected the reflected sun using
+
+278
+
+a mirror, so that the sun appeared in the opposite position of the sky to the ant for at least 8
+
+279
+
+seconds.
+
+280
+
+Ants were tested only once, in one of the conditions.
+
+281
+282
+
+Experimental design and protocol for the mirror experiment with ants on the floor (figure 4):
+
+283
+284
+
+Cataglyphis velox ants were trained to a 10 meters-long route for at least two consecutive
+
+285
+
+days. A 240 × 120 cm thin wood board was placed on the floor in the middle of the route,
+
+286
+
+ensuring that the navigating ants walked smoothly without encountering small clutter over
+
+287
+
+this portion of the route. Homing ants were captured just before entering their nest and
+
+288
+
+released at the feeder as ZV ants. Upon release, these ZV ants typically resume their route
+
+289
+
+homing behaviour; at mid-parkour (halfway along the board section) the real sun was hidden
+
+290
+
+by one experimenter and reflected by another, using a mirror, for the sun to appear to the
+
+291
+
+ant 135° away from its original position in the sky. To ensure that each individual was tested
+
+292
+
+only once, tested ants were marked with a drop of paint after the procedure.
+
+293
+
+The ZV ants walking on the board were recorded using a Panasonic Lumix DMC-FZ200
+
+294
+
+camera on a tripod, and their paths were digitised frame by frame at 10 fps using image J.
+
+295
+
+We used four marks on the board to correct for the distortion due to the tilted perspective
+
+296
+
+of the camera’s visual field. Analysis of the paths were achieved with Matlab.
+
+297
+298
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+299
+
+The CX neural model.
+
+300
+
+The CX model circuitry and input signals are described in Extended data figure 2 (a-d), and
+
+301
+
+the different parameters used to obtain the output (motor command) are described in
+
+302
+
+Extended data figure 1. All the modelling has been achieved with Matlab, and can be
+
+303
+
+provided upon request.
+
+304
+305
+
+References
+
+306
+
+1. Collett, M., Chittka, L. & Collett, T. S. Spatial memory in insect navigation. Current biology : CB 23,
+
+307
+308
+309
+
+R789–R800 (2013).
+2. Collett, T. S. & Collett, M. Path integration in insects. Current Opinion in Neurobiology 10, 757–
+762 (2000).
+
+310
+
+3. Wystrach, A., Schwarz, S., Schultheiss, P., Baniel, A. & Cheng, K. Multiple sources of celestial
+
+311
+
+compass information in the central Australian desert ant Melophorus bagoti. Journal of
+
+312
+
+Comparative Physiology A 1–11 (2014).
+
+313
+
+4. Ardin, P., Peng, F., Mangan, M., Lagogiannis, K. & Webb, B. Using an Insect Mushroom Body
+
+314
+
+Circuit to Encode Route Memory in Complex Natural Environments. PLOS Computational Biology
+
+315
+
+12, e1004683 (2016).
+
+316
+
+5. Buehlmann, C. et al. Mushroom Bodies Are Required for Learned Visual Navigation, but Not for
+
+317
+
+Innate Visual Behavior, in Ants. Current Biology (2020) doi:10.1016/j.cub.2020.07.013.
+
+318
+
+6. Kamhi, J. F., Barron, A. B. & Narendra, A. Vertical Lobes of the Mushroom Bodies Are Essential
+
+319
+
+for View-Based Navigation in Australian Myrmecia Ants. Current Biology (2020)
+
+320
+
+doi:10.1016/j.cub.2020.06.030.
+
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+
+7. Webb, B. & Wystrach, A. Neural mechanisms of insect navigation. Current Opinion in Insect
+Science 15, 27–39 (2016).
+8. Wystrach, A., Buehlmann, C., Schwarz, S., Cheng, K. & Graham, P. Rapid Aversive and Memory
+Trace Learning during Route Navigation in Desert Ants. Current Biology 30, 1927-1933.e2 (2020).
+9. Kim, S. S., Hermundstad, A. M., Romani, S., Abbott, L. F. & Jayaraman, V. Generation of stable
+heading representations in diverse visual scenes. Nature 576, 126–131 (2019).
+10. Pfeiffer, K. & Homberg, U. Organization and Functional Roles of the Central Complex in the Insect
+Brain. Annual Review of Entomology 59, null (2014).
+11. Seelig, J. D. & Jayaraman, V. Neural dynamics for landmark orientation and angular path
+integration. Nature 521, 186–191 (2015).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+331
+332
+333
+334
+335
+
+12. Stone, T. et al. An Anatomically Constrained Model for Path Integration in the Bee Brain. Current
+Biology 27, 3069-3085.e11 (2017).
+13. Collett, M. & Collett, T. S. How does the insect central complex use mushroom body output for
+steering? Current Biology 28, R733–R734 (2018).
+14. Honkanen, A., Adden, A., Freitas, J. da S. & Heinze, S. The insect central complex and the neural
+
+336
+
+basis of navigational strategies. Journal of Experimental Biology 222, jeb188854 (2019).
+
+337
+
+15. Franconville, R., Beron, C. & Jayaraman, V. Building a functional connectome of the Drosophila
+
+338
+339
+340
+341
+342
+343
+344
+345
+
+central complex. eLife 7, e37017 (2018).
+16. Le Moël, F., Stone, T., Lihoreau, M., Wystrach, A. & Webb, B. The Central Complex as a Potential
+Substrate for Vector Based Navigation. Front. Psychol. 10, (2019).
+17. Pisokas, I., Heinze, S. & Webb, B. The head direction circuit of two insect species. eLife 9, e53985
+(2020).
+18. Heinze, S. & Homberg, U. Maplike representation of celestial E-vector orientations in the brain of
+an insect. Science 315, 995–997 (2007).
+19. Green, J., Vijayan, V., Pires, P. M., Adachi, A. & Maimon, G. A neural heading estimate is
+
+346
+
+compared with an internal goal to guide oriented navigation. Nature neuroscience 22, 1460–
+
+347
+
+1468 (2019).
+
+348
+
+20. Fleischmann, P. N., Rössler, W. & Wehner, R. Early foraging life: spatial and temporal aspects of
+
+349
+
+landmark learning in the ant Cataglyphis noda. Journal of Comparative Physiology A 204, 579–
+
+350
+
+592 (2018).
+
+351
+352
+
+21. Müller, M. & Wehner, R. Path Integration Provides a Scaffold for Landmark Learning in Desert
+Ants. Current Biology 20, 1368–1371 (2010).
+
+353
+
+22. Wystrach, A., Mangan, M., Philippides, A. & Graham, P. Snapshots in ants? New interpretations
+
+354
+
+of paradigmatic experiments. The Journal of Experimental Biology 216, 1766–1770 (2013).
+
+355
+
+23. Jayatilaka, P., Murray, T., Narendra, A. & Zeil, J. The choreography of learning walks in the
+
+356
+
+Australian jack jumper ant Myrmecia croslandi. Journal of Experimental Biology 221, jeb185306
+
+357
+
+(2018).
+
+358
+
+24. Möel, F. L. & Wystrach, A. Opponent processes in visual memories: A model of attraction and
+
+359
+
+repulsion in navigating insects’ mushroom bodies. PLOS Computational Biology 16, e1007631
+
+360
+
+(2020).
+
+361
+362
+363
+364
+
+25. Murray, T. et al. The role of attractive and repellent scene memories in ant homing (Myrmecia
+croslandi). Journal of Experimental Biology (2019) doi:10.1242/jeb.210021.
+26. Baddeley, B., Graham, P., Husbands, P. & Philippides, A. A model of ant route navigation driven
+by scene familiarity. PLoS Comput Biol 8, e1002336 (2012).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+365
+
+27. Wystrach, A., Cheng, K., Sosa, S. & Beugnon, G. Geometry, features, and panoramic views: Ants
+
+366
+
+in rectangular arenas. Journal of Experimental Psychology: Animal Behavior Processes 37, 420–
+
+367
+
+435 (2011).
+
+368
+
+28. Zeil, J. Visual homing: an insect perspective. Current Opinion in Neurobiology 22, 285–293 (2012).
+
+369
+
+29. Dahmen, H., Wahl, V. L., Pfeffer, S. E., Mallot, H. A. & Wittlinger, M. Naturalistic path integration
+
+370
+
+of Cataglyphis desert ants on an air-cushioned lightweight spherical treadmill. Journal of
+
+371
+
+Experimental Biology 220, 634–644 (2017).
+
+372
+373
+374
+375
+
+30. Wehner, R., Michel, B. & Antonsen, P. Visual navigation in insects: Coupling of egocentric and
+geocentric information. Journal of Experimental Biology 199, 129–140 (1996).
+31. Schwarz, S., Mangan, M., Zeil, J., Webb, B. & Wystrach, A. How Ants Use Vision When Homing
+Backward. Current Biology 27, 401–407 (2017).
+
+376
+
+32. Zeil, J., Hofmann, M. I. & Chahl, J. S. Catchment areas of panoramic snapshots in outdoor scenes.
+
+377
+
+Journal of the Optical Society of America a-Optics Image Science and Vision 20, 450–469 (2003).
+
+378
+
+33. Fisher, Y. E., Lu, J., D’Alessandro, I. & Wilson, R. I. Sensorimotor experience remaps visual input
+
+379
+
+to a heading-direction network. Nature 576, 121–125 (2019).
+
+380
+
+34. Lent, D. D., Graham, P. & Collett, T. S. Image-matching during ant navigation occurs through
+
+381
+
+saccade-like body turns controlled by learned visual features. Proceedings of the National
+
+382
+
+Academy of Sciences of the United States of America 107, 16348–16353 (2010).
+
+383
+384
+
+35. Borst, A. & Heisenberg, M. Osmotropotaxis inDrosophila melanogaster. Journal of comparative
+physiology 147, 479–484 (1982).
+
+385
+
+36. Cain, W. S. Differential sensitivity for smell:" noise" at the nose. Science 195, 796–798 (1977).
+
+386
+
+37. Duistermars, B. J., Chow, D. M. & Frye, M. A. Flies require bilateral sensory input to track odor
+
+387
+
+gradients in flight. Current Biology 19, 1301–1307 (2009).
+
+388
+
+38. Jékely, G. et al. Mechanism of phototaxis in marine zooplankton. Nature 456, 395–399 (2008).
+
+389
+
+39. Martin, H. Osmotropotaxis in the honey-bee. Nature 208, 59–63 (1965).
+
+390
+
+40. Matsuo, Y., Uozumi, N. & Matsuo, R. Photo-tropotaxis based on projection through the cerebral
+
+391
+
+commissure in the terrestrial slug Limax. Journal of Comparative Physiology A 200, 1023–1032
+
+392
+
+(2014).
+
+393
+
+41. Porter, J. et al. Mechanisms of scent-tracking in humans. Nature neuroscience 10, 27–29 (2007).
+
+394
+
+42. Habenstein, J., Amini, E., Grübel, K., el Jundi, B. & Rössler, W. The brain of Cataglyphis ants:
+
+395
+
+neuronal organization and visual projections. Journal of Comparative Neurology (2020).
+
+396
+
+43. Rössler, W. Neuroplasticity in desert ants (Hymenoptera: Formicidae)–importance for the
+
+397
+398
+399
+
+ontogeny of navigation. Myrmecological News 29, (2019).
+44. Stürzl, W., Zeil, J., Boeddeker, N. & Hemmi, J. M. How Wasps Acquire and Use Views for Homing.
+Current Biology 26, 470–482 (2016).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+400
+
+45. Zeil, J. & Fleischmann, P. N. The learning walks of ants (Hymenoptera: Formicidae). (2019).
+
+401
+
+46. Denuelle, A. & Srinivasan, M. V. Bio-inspired visual guidance: From insect homing to UAS
+
+402
+
+navigation. in 2015 IEEE International Conference on Robotics and Biomimetics (ROBIO) 326–332
+
+403
+
+(IEEE, 2015).
+
+404
+405
+406
+407
+408
+
+47. Kodzhabashev, A. & Mangan, M. Route Following Without Scanning. in Biomimetic and Biohybrid
+Systems 199–210 (Springer, 2015).
+48. Möller, R. Insect visual homing strategies in a robot with analog processing. Biological
+Cybernetics 83, 231–243 (2000).
+49. Philippides, A., de Ibarra, N. H., Riabinina, O. & Collett, T. S. Bumblebee calligraphy: the design
+
+409
+
+and control of flight motifs in the learning and return flights of Bombus terrestris. The Journal of
+
+410
+
+Experimental Biology 216, 1093–1104 (2013).
+
+411
+
+50. Schwarz, S., Clement, L., Gkanias, E. & Wystrach, A. How do backward walking ants ( Cataglyphis
+
+412
+
+velox ) cope with navigational uncertainty?
+
+413
+
+http://biorxiv.org/lookup/doi/10.1101/2019.12.16.877704 (2019)
+
+414
+
+doi:10.1101/2019.12.16.877704.
+
+415
+416
+417
+418
+419
+
+51. Freas, C. A. & Cheng, K. Limits of vector calibration in the Australian desert ant, Melophorus
+bagoti. Insect. Soc. 65, 141–152 (2018).
+52. Hoinville, T. & Wehner, R. Optimal multiguidance integration in insect navigation. Proceedings of
+the National Academy of Sciences 115, 2824–2829 (2018).
+53. Wehner, R., Hoinville, T., Cruse, H. & Cheng, K. Steering intermediate courses: desert ants
+
+420
+
+combine information from various navigational routines. J Comp Physiol A 202, 459–472 (2016).
+
+421
+
+54. Wystrach, A., Mangan, M. & Webb, B. Optimal cue integration in ants. Proceedings of the Royal
+
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+
+Society of London B: Biological Sciences 282, (2015).
+55. Buehlmann, C., Mangan, M. & Graham, P. Multimodal interactions in insect navigation. Animal
+Cognition 1–13 (2020).
+56. Buehlmann, C., Graham, P., Hansson, B. S. & Knaden, M. Desert ants locate food by combining
+high sensitivity to food odors with extensive crosswind runs. Current Biology 24, 960–964 (2014).
+57. Knaden, M. & Graham, P. The sensory ecology of ant navigation: from natural environments to
+neural mechanisms. Annual review of entomology 61, 63–76 (2016).
+58. Wystrach, A. & Schwarz, S. Ants use a predictive mechanism to compensate for passive
+displacements by wind. Current biology : CB 23, R1083–R1085 (2013).
+59. Wystrach, A., Beugnon, G. & Cheng, K. Ants might use different view-matching strategies on and
+off the route. The Journal of Experimental Biology 215, 44–55 (2012).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+433
+
+60. Narendra, A., Gourmaud, S. & Zeil, J. Mapping the navigational knowledge of individually
+
+434
+
+foraging ants, Myrmecia croslandi. Proceedings of the Royal Society B: Biological Sciences 280,
+
+435
+
+(2013).
+
+436
+437
+438
+
+61. Green, J. & Maimon, G. Building a heading signal from anatomically defined neuron types in the
+Drosophila central complex. Current Opinion in Neurobiology 52, 156–164 (2018).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+439
+
+Figure 1
+
+440
+441
+
+Figure 1. Bilaterally decorrelated input to Central Complex produces stable route heading.
+
+442
+
+a. The central complex (CX) sits at the centre of the brain but is wired to both hemispheres.
+
+443
+
+It receives bilateral inputs in the Fan-shaped Body (FB), where sustained activity of the FB
+
+444
+
+neurons (FBN) forms two representations of the goal heading. CPU1 neurons compare such
+
+445
+
+‘goal heading’ representations to the ‘compass-based current heading’ representation of the
+
+446
+
+Protocerebral Bridge (PB) neurons (TB1) and outputs bilateral signals to the left and right
+
+447
+
+Lateral Accessory Lobes (LALs), where they modulate motor neurons (MN) descending to the
+
+448
+
+thorax to control left and right turns, respectively (see extended figure 2, d, g for details of
+
+449
+
+the circuitry). b. Simulated inputs to the FBN neurons. We assumed that the input signals to
+
+450
+
+the FBN are body-orientation-dependant (as expected if resulting from visual familiarity of
+
+451
+
+the scene 28 such as outputted by the MBs 4. ‘directional bias’ indicates the direction relative
+
+452
+
+to the goal direction (0°) at which the left visual familiarity signals is highest in average (+45°
+
+453
+
+in this example). Right signal responds symmetrically for the other direction (-directional
+
+454
+
+bias). ‘Directional noise’ in the visual familiarity was implemented by shifting the input curve
+
+455
+
+response around its mean (i.e. the ‘directional bias’) at each time step by a random value
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+456
+
+(normal distribution with standard deviation given by ‘directional noise’). c. Paths resulting
+
+457
+
+given different directional biases. d. Path directional error (absolute angular error between
+
+458
+
+start-to-arrival beeline, and start-to-goal direction) after 200 steps, as a function of the visual
+
+459
+
+familiarity ‘directional bias’ (x axis) and ‘directional noise’ (y axis). c, d. Straight route
+
+460
+
+headings robustly emerge as long as left and right inputs send a signal when the body is
+
+461
+
+oriented right and left from the goal, respectively (i.e., directional bias > 0°) but not if both
+
+462
+
+inputs send a signal when facing the goal (i.e., directional bias = 0°). Orientation towards the
+
+463
+
+opposite direction emerges if left and right inputs signal inversely, that is, when the body is
+
+464
+
+oriented right and left from the goal respectively (i.e., directional bias < 0°). Robustness to
+
+465
+
+visual familiarity directional noise indicate that the direction in which views are learnt does
+
+466
+
+not need to be precisely controlled. See further analysis in Extended Data Fig. 1.
+
+467
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+468
+
+Figure 2.
+
+469
+470
+
+Figure 2. Ants visually recognise whether the goal direction is left or right. a. Homing ants
+
+471
+
+were captured at the end of their familiar route and fixed on the trackball (b) in 8 different
+
+472
+
+compass orientations. The route was rich in visual terrestrial cues (grey blobs). F: feeder, N:
+
+473
+
+nest. b. An individual Cataglyphis velox mounted on the trackball setup, holding its precious
+
+474
+
+cookie crumb. c. Turn ratio (degrees (right - left) / (right + left); mean ± se across individuals)
+
+475
+
+for the eight compass directions, on the familiar route or in the unfamiliar location (same
+
+476
+
+compass directions but unfamiliar surroundings) across 12 seconds of recording. d.
+
+477
+
+Proportion of time spent turning on the preferred side of each individual (mean ± se across
+
+478
+
+individuals). C: Cataglyphis velox (n=17), M: Myrmecia crosslandi (n=11).
+
+479
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+480
+
+Figure 3
+
+481
+482
+
+Figure 3. Rotation of celestial cues shift turning direction based on familiar terrestrial cues.
+
+483
+
+a. Schemes of the training and test condition. Homing ants were captured at the end of their
+
+484
+
+familiar route (black arrows: familiar route, F: feeder, N: nest) and fixed on the trackball with
+
+485
+
+their body always facing north, either on their route with the route direction 90° to the right
+
+486
+
+(left panel); or within unfamiliar surroundings (middle panel); or ants were trained along a
+
+487
+
+route oriented 90° to the previous one and released on their familiar route in the same
+
+488
+
+location and orientation, which this time is facing their route direction. b. Box plots indicate
+
+489
+
+average angular velocity (positive = right turn) each ant (dots) 5s before (white) and 5s after
+
+490
+
+(yellow) the apparent sun’s position is mirrored by 180°. Wilcoxon test for: ‘turn towards
+
+491
+
+the right with natural sun’ (left panel: n=6, p=0.0156; middle panel: n=12 p=0.9788; right
+
+492
+
+panel: n=12 p=0.9866), ‘mirror effect: turn direction reversal’ (left panel: n=6, p=0.0156,
+
+493
+
+power=0.9994; middle panel: n=12 p=0.3955; right panel: n=12 p=0.0320). c. Turning
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+494
+
+velocities (individuals in colour; median ± iqr of the distribution in grey) across time, before
+
+495
+
+and after the sun manipulation (t0). Arrows in the middle and left panels: the velocities of
+
+496
+
+some individuals have been inverted so that all individuals’ mean turn directions before the
+
+497
+
+manipulation are positive.
+
+498
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+499
+
+Figure 4
+
+500
+501
+
+Figure 4. Rotation of celestial cues affect ants route following as predicted. Paths (a) and
+
+502
+
+quantification of bearing and turns (b) of real (black and green) and simulated (blue) zero-
+
+503
+
+vector ants (i.e., deprived of path integration information) recapitulating a familiar straight
+
+504
+
+route while entering an area where we manipulated celestial compass cues (yellow). For the
+
+505
+
+‘Mirrored sun’ condition (green) the real sun was hidden from the ants and mirrored so as to
+
+506
+
+appear rotated by 135° counter clockwise in the sky. For the ‘sham’ condition (black), the
+
+507
+
+experimenters were standing in the same place and the real sun was also hidden, but only a
+
+508
+
+small piece of the sky (close to, but not including the sun) was mirrored for the ants.
+
+509
+
+Simulated ants (blue) result from the model presented in fig. 1. Sun rotation was modelled
+
+510
+
+as a 135° shift in the current heading representation (3-cell shift of the bump of activity in
+
+511
+
+the Protocerebral Bridge). Paths of both real and simulated ants were discretised (segments
+
+512
+
+of 12 cm for real ants, and of 3 steps for the simulations), before and after the sun rotation
+
+513
+
+onset point. Turns correspond to the absolute angle between two successive segments,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+514
+
+bearing indicates the direction of segments relative to the route (0°). Turns at ‘0’ on the x-
+
+515
+
+axes correspond to the angle between the segment preceding and following the shift of the
+
+516
+
+celestial compass. c. The effect observed in the simulations is quantitatively dependant on
+
+517
+
+the model’s parameters (here gain=1; motor noise=10; decay FBN=0.2; visual familiarity
+
+518
+
+directional bias ± noise=45°±10° see Extended Data Fig. 1 for a description of parameters),
+
+519
+
+but its key signature can be explained qualitatively. (i) Under normal situation the current
+
+520
+
+heading is maintained between the right and left goal heading representation in the Fan-
+
+521
+
+shaped Body (FB) (yellow and orange marks) and updated by right and left visual familiarity
+
+522
+
+signals. (ii) The sun rotation creates a sudden shift of the current heading representation in
+
+523
+
+the Protocerebral Bridge (PB) (purple curved arrow), although the agent is still physically
+
+524
+
+facing the actual route direction (black dot). This leads the agent to display a sudden left
+
+525
+
+turn to re-align its shifted heading representation with the FB goal heading that is held in
+
+526
+
+short term memory. (iii) This novel direction of travel is visually recognised as being ‘left of
+
+527
+
+the goal’, causing a strong lateralised signal in the right FB’s goal heading representation
+
+528
+
+(yellow). This biased activity triggers right turns, exposing the agent to new headings
+
+529
+
+recognised as ‘right of the goal’, and thus more signal sent to the right FB (yellow arcs),
+
+530
+
+favouring further right turns. (iv) Turning right eventually leads the agent to overshoot the
+
+531
+
+actual goal direction, recognise view as ‘right from the goal’ and thus signalling in the left FB
+
+532
+
+(orange). These signals are, at first, superimposed with the previous desired heading
+
+533
+
+representation, resulting in a period of conflicting guidance information causing meandering.
+
+534
+
+(v) The agent progressively updates its novel goal heading representation as the trace of the
+
+535
+
+previous desired heading fades out and the new one strengthens due to the incoming signals
+
+536
+
+from visual familiarity. In sum, motor decision results from complex dynamics between two
+
+537
+
+main factors: 1- how strong are the left and right visual familiarity signals updating the goal
+
+538
+
+heading representations (orange and yellow glow around the ‘Ant actual heading’ arrows),
+
+539
+
+which depend on whether the agent is oriented left or right from its goal; and 2- how well
+
+540
+
+the current heading representation (PB) matches the goal heading representation (more
+
+541
+
+detail in Extended Data Fig. 2).
+
+542
+543
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+544
+
+545
+
+Extended data figure 1.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+546
+
+Extended data figure 1. Parameter exploration of the Central Complex model (see fig 3). a.
+
+547
+
+This shows a parameter exploration for the CX model presented in Fig. 1 (see extended fig. 2
+
+548
+
+for details of the circuitry). - Path directional error (absolute angular error between start-to-
+
+549
+
+arrival and start-to-goal directions) and path tortuosity (index = 1 -
+
+550
+
+(beeline_distance/distance_walked)) after 200 steps are shown according to various
+
+551
+
+parameter ranges. For each point on the map, all the other parameters are chosen to
+
+552
+
+maximise for lowest path directionality error.
+
+553
+
+a. Same as Fig. 1d, except that for each point of the map, the other parameters are chosen
+
+554
+
+to maximise for lowest path directionality error instead of being fixed at an average range.
+
+555
+
+Note that in Fig. 1d, visual familiarity direction bias < 0 typically results in routes leading to
+
+556
+
+the opposite direction (i.e., path directional error close to 180°, see Fig. 1). Here, maximising
+
+557
+
+for lowest path directional error did not result in goal-oriented path, but selected
+
+558
+
+parameters yielding very high tortuosity, thus indicated that no parameter regime can yield
+
+559
+
+straight, directed route when visual familiarity bias is < 0. Note that straight, goal-oriented
+
+560
+
+paths emerge as long as the visual familiarity direction bias is > 0, that is, if the left
+
+561
+
+hemisphere inputs correlate with moments when the nest is on the left, and vice versa.
+
+562
+
+b. Visual familiarity directional bias is fixed at a value of 0°, meaning that both CX inputs
+
+563
+
+respond maximally when the agent is facing the goal direction. Note that in this condition,
+
+564
+
+regions of low path directional errors (blue) and region of low path tortuosity (white) do not
+
+565
+
+overlap. This means that one cannot obtain straight, goal-directed paths if left and right CX
+
+566
+
+inputs respond when the nest is located in front.
+
+567
+
+c. Visual familiarity directional bias is fixed at a value of +45°, meaning that left and right CX
+
+568
+
+inputs respond maximally when the agent is oriented 45° to the right or left from the goal
+
+569
+
+direction, respectively. Note that regions with low path directional errors (blue) and regions
+
+570
+
+of low path tortuosity (white) overlap well, showing a very large range of parameters for
+
+571
+
+which we can obtain straight, goal-directed paths. We found the robustness to parameters
+
+572
+
+remarkable: the model copes with motor noise up to 80°, visual familiarity direction noise up
+
+573
+
+to 90°, is insensitive to its vector-memory decay and operates across several orders of
+
+574
+
+magnitude for the gain.
+
+575
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+576
+
+Parameters’ description:
+
+577
+
+Visual familiarity directional bias: Indicates the absolute angle away from the goal at which
+
+578
+
+visual familiarity signals (i.e., the CX inputs) are highest, assuming 0° indicates the correct
+
+579
+
+goal direction. 0° indicates that both left and right inputs fire when the nest direction is
+
+580
+
+aligned with the current body orientation. Inversely, 180° indicates that left and right input
+
+581
+
+fire when the nest is right behind. Positive values (between 0° and 180°) indicate that the
+
+582
+
+left and right inputs fire when the nest direction is on the left and right hand side
+
+583
+
+respectively (the extent of the angular bias is given by the value). Negative values (between
+
+584
+
+0° and -180°) indicate a reversal, so that left and right input fire when the nest direction is on
+
+585
+
+the right and left hand side respectively. Visual familiarity directional noise: Represents the
+
+586
+
+extent of a systematic deviation from the visual familiarity directional bias angle. It is
+
+587
+
+implemented by shifting the input curve response (horizontal arrows in Fig. 1b) around its
+
+588
+
+mean (given by the ‘directional bias’) at each time step by random values drawn from a
+
+589
+
+normal distribution with standard deviation given by ‘directional noise’. It can be seen as
+
+590
+
+representing a directional noise when storing visual memories. High directional noise means
+
+591
+
+that the input signal will occasionally respond strongest when oriented in the other direction
+
+592
+
+than indicated by the visual familiarity directional bias. Robustness to visual familiarity
+
+593
+
+directional noise indicates that the orientation of the body does not need to be precisely
+
+594
+
+controlled during memory acquisition. Motor noise: at each time step, a directional ‘noise
+
+595
+
+angle’ is drawn randomly from a Gaussian distribution of ± SD = motor noise, and added to
+
+596
+
+the agent’s current direction. Memory decay: proportion of Fan-shaped Body Neurons (FBN,
+
+597
+
+see extended fig 2 for details) activity lost at each time step: For each FBN: Activity(t+1) =
+
+598
+
+Activity(t) × (1 - memory decay). This corresponds to the speed at which the memory of the
+
+599
+
+vector representation in the FBN decays. A memory decay = 1 means that the vector
+
+600
+
+representation in the FBN is used only for the current time step and entirely overridden by
+
+601
+
+the next inputs. A memory decay = 0 means that the vectors representation acts as a perfect
+
+602
+
+accumulator across the whole paths (as in PI), which is probably unrealistic. Motor gain: Sets
+
+603
+
+the gain to convert the motor neuron signals (see extended fig 2 for details) into an actual
+
+604
+
+turn amplitude (turn amplitude = turning neuron signal × gain). Note that here, the motor
+
+605
+
+gain is presented across orders of magnitude. One order of magnitude higher means that the
+
+606
+
+agent will be one order of magnitude more sensitive to the turning signal.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+607
+
+Extended data figure 2.
+
+608
+609
+610
+
+Extended data figure 2. Details of the CX model’s circuitry.
+
+611
+
+a-d. General scheme of the CX model as presented in figure 1 (left panel) and the
+
+612
+
+corresponding detailed circuitry (right panel). This model exploits the same circuit as the CX
+
+613
+
+model used for PI 12,14, except that FB input indicate visual familiarity rather than speed of
+
+614
+
+movement.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+615
+
+a. Current heading direction is modelled in the Protocerebral Bridge (PB) as a bump of
+
+616
+
+activity across 8 neurons forming a ring-attractor (purple), as observed in insects 14. Each
+
+617
+
+neuron responds maximally for a preferred compass direction, 45° apart from the neighbour
+
+618
+
+neurons (neuron 1 and 8 are functionally neighbours, closing the ring structure). Change in
+
+619
+
+the agent’s current compass orientation results in a shift of the bump of activity across the 8
+
+620
+
+neurons (we did not model how this is achieved from sensory cues, see 9,10,61 for studies
+
+621
+
+dedicated on this.
+
+622
+
+b. Visual familiarity signals fire according to the agent orientation relative to the goal
+
+623
+
+direction. Here the input curve indicates that right and left signals fire maximally when the
+
+624
+
+agent is oriented 50° (in average) left and right from its goal respectively (but see Fig. 1 and
+
+625
+
+Extended fig. 1 for variation of these parameters: ‘directional bias’ and ‘directional noise’).
+
+626
+
+c. These lateralised input signals excite two dedicated sets of FBN. These FBNs are
+
+627
+
+simultaneously inhibited by the current heading representation (purple), resulting in two
+
+628
+
+negative imprints of the current heading activity across the FBNs, which can be viewed as
+
+629
+
+two ‘view-based vectors’. FBNs show some sustained activity so that, across time, successive
+
+630
+
+imprints are superimposed, thus updating the ‘view-based-vectors’ (as for Path integration,
+
+631
+
+except that this sustained activity is not crucial). The sustainability of such a ‘view-based
+
+632
+
+vector’ depends on the FBN activity’s decaying rate, which can be varied in our model and
+
+633
+
+has little incidence on the agent’s success (Extended figure 1, parameter decay).
+
+634
+
+d. Motor control is achieved using the same circuitry as for Path integration 12. On each brain
+
+635
+
+hemisphere, neurons (called CPU1 in some species), compare the current compass heading
+
+636
+
+(purple) with their version of the FBN ‘view-based-vector’. Crucially, both FBN
+
+637
+
+representations are neurally shifted by 1 neuron (as if rotating the view-based-vector by 45°
+
+638
+
+clockwise or counter-clockwise depending on the hemisphere), resulting in an overall activity
+
+639
+
+in the CPU1 (sum of the 8 CPU1) indicating whether the view-based-vector points rather on
+
+640
+
+the left- (higher resulting activity in the left hemisphere) or right-hand side (higher resulting
+
+641
+
+activity in the right hemisphere). The CPU1 neurons sum their activity on descending motor
+
+642
+
+neurons (MN), which difference in activity across hemispheres triggers a left or right turn of
+
+643
+
+various amplitude, given a ‘motor gain’ that can be varied to make the agent more or less
+
+644
+
+reactive (Extended figure 1 for detailed parameter description). Numbers on the left indicate
+
+645
+
+neurons numbers. Letters on the right indicate brain areas (SIP: Superior Intermediate
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.08.13.249193; this version posted August 14, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC 4.0 International license.
+
+646
+
+Protocerebrum, PB: Protocerebral Bridge, FB: Fan-shaped Body, LAL: Lateral Accessory
+
+647
+
+Lobe).
+
+648
+
+e. Same as Fig. 4c, with added details of the PB (purple) and right and left FB (yellow and
+
+649
+
+orange) neural activity. Note that the FBNs order has been shifted (2,3,4,5,6,7,8,1 and
+
+650
+
+8,1,2,3,4,5,6,7) and inhibition exerted by the PB is represented (overlaid transparent purple,
+
+651
+
+1,2,3,4,5,6,7,8) as happens in the left and right CPU1 neuron (d). This way, the strength of
+
+652
+
+the motor signal for turning right and left– which correspond to the sum of non-inhibited
+
+653
+
+right and left CPU1 activity – can be inferred by looking at the area covered by non-occluded
+
+654
+
+yellow and orange FBN columns respectively.
+
+655
+
+With manipulation such as rotating the current compass information, it becomes apparent
+
+656
+
+that motor decision results from complex dynamics between two main factors: 1- how
+
+657
+
+strong are the left and right visual input signal updating the view-based-vectors
+
+658
+
+representation (represented by orange and yellow glow around the actual ant heading
+
+659
+
+arrows), which depend on whether the agent is oriented left or right from its goal and 2-
+
+660
+
+how well the current heading representation (PB) matches the rotated left and right shifted
+
+661
+
+FB view-based-vector current representations.
+
+

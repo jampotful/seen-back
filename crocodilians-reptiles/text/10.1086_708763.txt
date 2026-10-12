@@ -1,0 +1,2794 @@
+Looking for Mimicry in a Snake Assemblage Using Deep Learning
+Thomas de Solan, Julien P. Renoult, Philippe Géniez, Patrice David, Pierre‐André Crochet (2020). The American Naturalist. https://doi.org/10.1101/789206. doi:10.1086/708763. Licence: cc-by-nc. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+1
+
+MAJOR ARTICLE
+
+2
+
+Title: Looking for mimicry in a snake assemblage using deep learning
+
+3
+
+Running head: Deep learning to study mimicry.
+
+4
+5
+
+Keywords: imperfect mimicry, camouflage, Deep Neural Network, Batesian mimicry.
+
+6
+7
+8
+
+Abstract
+
+9
+
+Batesian mimicry, with its highly colorful species and astonishing mimic-model resemblance,
+
+10
+
+is a canonical example of evolution by natural selection. However, Batesian mimicry could also
+
+11
+
+occur in inconspicuous species and rely on subtle resemblance. Although potentially
+
+12
+
+widespread, such instances have been rarely investigated, such that the real frequency of
+
+13
+
+Batesian mimicry has remained largely unknown. To fill this gap, we developed a new
+
+14
+
+approach using deep learning to quantify the resemblance between putative mimics and
+
+15
+
+models from photographs. We applied this method to quantify the frequency of Batesian
+
+16
+
+mimicry in Western Palearctic snakes. Potential mimics were revealed by an excess of
+
+17
+
+resemblance with sympatric venomous snakes compared to random expectations. We found
+
+18
+
+that 8% of the non-venomous species were potential mimics, among which all were imperfect
+
+19
+
+mimics. This study is the first to quantify the frequency of Batesian mimicry in a whole
+
+20
+
+community of vertebrates, and shows that even concealed species can be reliably identified
+
+21
+
+as potential models. Our approach should prove useful to detect mimicry in other communities,
+
+22
+
+and more generally it highlights the benefits of deep learning for quantitative studies of
+
+23
+
+phenotypic resemblance.
+
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+24
+
+1. Introduction
+
+25
+
+Batesian mimicry occurs when palatable or harmless species resemble an unprofitable (e.g.
+
+26
+
+unpalatable or dangerous) model species, adopting some of its characteristics, and
+
+27
+
+consequently gaining protection from predators (Bates 1862). Mimicry is a canonical example
+
+28
+
+of evolution through natural selection; it was already discussed by Darwin with Wallace
+
+29
+
+(Darwin 1887) and still constitutes a proliferous field of research in ecology and evolution
+
+30
+
+(Sherratt 2002; Nishikawa et al. 2015; Joshi et al. 2017; Bosque et al. 2018). Nevertheless,
+
+31
+
+some fundamental aspects of this defensive strategy remain poorly known, notably its
+
+32
+
+frequency in plants and animals, mainly because detecting mimicry is no simple matter.
+
+33
+
+Historically, research on Batesian mimicry has long been confined to a few spectacular
+
+34
+
+cases, like hoverflies (Penney et al. 2012), butterflies (Kitamura and Imafuku 2015) or
+
+35
+
+kingsnakes (Brodie and Janzen 1995), which possess conspicuous colors and show a
+
+36
+
+resemblance between models and mimics so striking that it cannot be fortuitous. This
+
+37
+
+perfection itself is a double-edged sword. It served as an evidence of the Darwinian evolution,
+
+38
+
+but it also provided a distorted picture of what mimicry can be. Indeed, neither
+
+39
+
+conspicuousness nor high resemblance is a necessary condition for Batesian mimicry. Actually,
+
+40
+
+even when their overall appearance is inconspicuous or camouflaged, venomous species may
+
+41
+
+eventually be spotted by predators, which can recognize species using cues that have not
+
+42
+
+necessarily evolved as specific signals. Harmless and palatable species can mimic these cues
+
+43
+
+to gain additional protection from mimicry while being themselves cryptic (Barlow and Wiens
+
+44
+
+1977; Mound et al. 2005; Gianoli and Carrasco-Urra 2014; Corcobado et al. 2016). Moreover,
+
+45
+
+experimental evidence suggest that an imperfect resemblance between a mimic and its
+
+46
+
+model, known as imperfect mimicry, can still provide protection against predators (Dittrich et
+
+47
+
+al. 1993). Thus, most examples found in literature do not reflect the potential diversity of
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+48
+
+mimicry in nature. Focusing on these classic cases is likely to bias our perception of mimicry,
+
+49
+
+making us underestimate its frequency.
+
+50
+
+If we want to fully understand the role of mimicry in shaping phenotypic evolution in
+
+51
+
+natural communities, we need to go beyond the few exceptionally perfect cases to expose
+
+52
+
+common and imperfect products of natural selection. The detection of mimicry within a
+
+53
+
+community requires a quantification of the resemblance between species. In mimicry studies,
+
+54
+
+two main categories of methods have been traditionally used to estimate resemblance. The
+
+55
+
+first methods analyze predefined features; for example morphometric measures, the
+
+56
+
+geometry of color patterns or the distribution of orientations and spatial frequencies in light
+
+57
+
+changes in images (Penney et al. 2012; Taylor et al. 2016; Troscianko et al. 2017; Endler et al.
+
+58
+
+2018). These methods usually attempt to model physiological perceptual processes and thus
+
+59
+
+can provide information on the role of these processes in the evolution of mimicry. However,
+
+60
+
+by being confined to the studied processes, they may be limited for capturing the high
+
+61
+
+dimensionality of the feature space relevant for assessing visual resemblance (Zhang et al.
+
+62
+
+2018). The second category of methods relies on psychological tests with human subjects (e.g.,
+
+63
+
+Cuthill and Bennett 1993). These methods can provide more accurate assessments of overall
+
+64
+
+perceptual resemblance; however, extensive tests and very large sample size are necessary to
+
+65
+
+mitigate the individual variations between evaluators (Ishihara et al. 2001; Kitayama et al.
+
+66
+
+2003).
+
+67
+
+Artificial Intelligences, and especially deep convolutional neural networks (hereafter
+
+68
+
+DNNs), offer new opportunities to model perceptual resemblance (Jozwik et al. 2017; Cichy
+
+69
+
+and Kaiser 2019). For example, a psychophysical experiment conducted with thousands of
+
+70
+
+humans showed that DNN’s measure of resemblance between complex stimuli (e.g., pictures
+
+71
+
+of a crowd) predict the human averaged perceived resemblance better than any previous
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+72
+
+models (Zhang et al. 2018). Moreover, DNNs can estimate resemblance despite noisy
+
+73
+
+variations, that is, between stimuli that differ in position, orientation, occlusion and
+
+74
+
+illumination (Jozwik et al. 2017). Thus, DNNs are highly suited to exploit the nearly
+
+75
+
+inexhaustible resource of non-standardized photographs posted on the World Wide Web.
+
+76
+
+DNNs have revolutionized many scientific fields in recent years, including biology (e.g. in
+
+77
+
+genomics: Zhou and Troyanskaya 2015, medicine: Shen et al. 2017) but the potential of DNN
+
+78
+
+as a model of human and animal perception, which can handle very large databases of non-
+
+79
+
+standardized data, has been overlooked in visual ecology thus far.
+
+80
+
+Several cases of Batesian mimicry between venomous and non-venomous snakes of
+
+81
+
+the Western Palearctic (Europe, North Africa and the Middle-East) has been reported in
+
+82
+
+literature, sometime based on experimental validation or mimic behavior but mainly using a
+
+83
+
+human subjective assessment of the visual resemblance between potential model and mimic
+
+84
+
+(Gans 1961; Werner and Frankenberg 1982; Werner 1983; Valkonen et al. 2011a; Aubret and
+
+85
+
+Mangin 2014; Valkonen and Mappes 2014). None of the venomous model species in the study
+
+86
+
+area possesses highly conspicuous colors, and most of them are cryptic in their environment
+
+87
+
+(Turk 1958; Heatwole and Davison 1976; Werner 1983). However the zigzag dorsal patterns
+
+88
+
+of vipers has been shown to elicit avoidance in bird predators (Valkonen et al. 2011b) in
+
+89
+
+addition to providing camouflage (Santos et al. 2014). In spite of these case studies, no
+
+90
+
+attempt has been made to evaluate the extent of mimicry in the Western Palearctic snake
+
+91
+
+assemblage. Western Palearctic snakes thus appear as a good model to measure the
+
+92
+
+frequency of mimicry in situations more complicated than most classic examples described in
+
+93
+
+the literature. Here we incorporated DNN into a workflow to identify potential mimics among
+
+94
+
+all 122 snake species known in the Western Palearctic at the time of the study.
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+95
+
+To identify candidate mimics, we developed a method that quantifies the visual
+
+96
+
+resemblance between candidate mimics (in our example, the non-venomous Western
+
+97
+
+Palearctic snakes) and candidate models (venomous Western Palearctic snakes). We (i)
+
+98
+
+trained DNNs to recognize the candidate (venomous) models before (ii) using the DNNs to
+
+99
+
+assess the resemblance between candidate mimic (non-venomous) and candidate models. To
+
+100
+
+identify candidate mimics, we (iii) combined the information on resemblance with information
+
+101
+
+on distribution to detect non-venomous species that exhibit more phenotypic resemblance to
+
+102
+
+one or several models that live in sympatry than expected by chance. We found that 8% of the
+
+103
+
+non-venomous species were candidate mimics, among which almost all were imperfect
+
+104
+
+mimics to a human eye. A global test of the hypothesis that mimicry affected the evolution of
+
+105
+
+phenotype in the Western Palearctic snake assemblage was highly significant. We discuss this
+
+106
+
+result in the light of the known ecology of Western Palearctic snakes and of the validity of
+
+107
+
+modeling non-human predator vision using DNNs and regular images.
+
+108
+109
+
+2. Materials and Methods
+
+110
+
+We analyzed all snake species of the Western Palearctic (after the taxonomic list of Geniez
+
+111
+
+2015), 122 in total, with 35 venomous species and 87 non-venomous species. Table S1 lists all
+
+112
+
+species of the Western Palearctic indicating taxonomy, venomousness, the number of images
+
+113
+
+analyzed and the source of distribution data.
+
+114
+115
+
+(1) Image datasets
+
+116
+
+We created two image datasets, one for the non-venomous snakes (838 images; mean = 9.6
+
+117
+
+images per species) and one for the venomous snakes (1802 images; mean = 50.0 per
+
+118
+
+species; details in Table S1), with more images than average for the venomous species
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+119
+
+exhibiting high intraspecific polymorphism. Because images are rare for several of the
+
+120
+
+studied species, our datasets may appear small compared to those of other studies using
+
+121
+
+DNNs. However, recent investigations revealed that, with an appropriate training setup (see
+
+122
+
+transfer learning below), DNNs can reach very high performances even when trained on
+
+123
+
+limited dataset (Körschens et al. 2018) –this is confirmed by our results (see below).
+Some snake species consist of several well-separated morphotypes. As DNNs can
+
+124
+125
+
+solve nonlinear problems, we did not separate morphotypes. Rather, we expected the
+
+126
+
+models to learn that morphotypes represent a single species. We included images of distinct
+
+127
+
+individuals except for a few species for which only a few images were available. In addition
+
+128
+
+to the 35 species of Western Palearctic venomous snakes (each representing a distinct class
+
+129
+
+of pictures), we added one class of “foreign” venomous snakes to the venomous dataset.
+
+130
+
+This class was made of 80 photographs of 80 different species living outside the Western
+
+131
+
+Palearctic but in climates similar to those of the study area, i.e. temperate and desert (list of
+
+132
+
+the species used in Table S1). We selected only images showing a clear dorsal view of the
+
+133
+
+whole specimen (see Fig. 2 for examples). Eighty percent of the images were collected on
+
+134
+
+the Internet, the remaining being taken in the field by the authors or colleagues. An expert
+
+135
+
+herpetologist (PG) validated all identifications individually.
+
+136
+137
+
+(2) Geographic distribution dataset
+
+138
+
+We constructed distribution ranges from three types of data: (1) when available, we used
+
+139
+
+distribution maps downloaded from the IUCN Red List website (www.iucnredlist.org, accessed
+
+140
+
+on February 2018); (2) otherwise, we reconstructed by hand the spatialized distribution maps
+
+141
+
+from
+
+142
+
+http://apps.who.int/bloodproducts/snakeantivenoms/database/ website and from other
+
+pictures
+
+of
+
+distribution
+
+ranges
+
+found
+
+on
+
+the
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+143
+
+specialized literature; (3) when no distribution map was available, we built maps from
+
+144
+
+occurrence data found in the specialized literature (references listed in Table S1). We used
+
+145
+
+QGIS 2.18 (Quantum GIS Development Team 2013) to create the distribution maps. Each
+
+146
+
+distribution map was depicted by a spatialized polygon projected in WGS 84.
+
+147
+148
+
+(3) Methodological workflow
+
+149
+
+DNNs were first trained to recognize the different venomous species of the Western Palearctic
+
+150
+
+plus the “foreign” class (Figure 1A). Trained DNNs were then asked to classify pictures of non-
+
+151
+
+venomous snakes as venomous species plus the “foreign” category (Figure 1B). DNNs
+
+152
+
+provided, for each image, a probability of being attributed to each venomous species class.
+
+153
+
+The “foreign” class avoids forcing the networks to attribute an image to one of the potential
+
+154
+
+model even if it does not resemble any of the Western Palearctic venomous species. For each
+
+155
+
+non-venomous species, attribution probabilities were then averaged over all available
+
+156
+
+pictures to build a matrix of resemblance between non-venomous and venomous species with
+
+157
+
+averaged attribution probabilities as entries. These probabilities were transformed into
+
+158
+
+resemblance scores, i.e. in inversed ranks of probability (1/rank, in ascending order; Figure
+
+159
+
+1C). Thus, the classes of venomous snakes to which one particular nonvenomous snake was
+
+160
+
+attributed most often, i.e. ranking first or second, had the highest resemblance score. This
+
+161
+
+step allows to reduce the prediction variability that can arise between DNNs due to differences
+
+162
+
+of architectures or training algorithms (Sameen and Pradhan 2017; Kim et al. 2019). Next, we
+
+163
+
+deleted from this matrix all non-venomous species for which the “foreign” class received the
+
+164
+
+highest resemblance score, thus discarding species that were clearly not mimics, as well as the
+
+165
+
+foreign species class. In parallel, we built a sympatry matrix of the same size as the
+
+166
+
+resemblance matrix, which gives the proportion of the geographic distribution of each non-
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+167
+
+venomous species that overlaps with the distribution of each venomous species. Following a
+
+168
+
+previous study (Miller et al. 2019), we considered that the proportion of sympatry reflected
+
+169
+
+the potential extent of selection for mimicry. This, in fact, is an approximation as for a few
+
+170
+
+allopatric species pairs, distribution ranges may be close enough to allow predators
+
+171
+
+associating both snake species. Yet most allopatric pairs are distant by hundreds or thousands
+
+172
+
+of kilometers in our dataset, which limits this possibility (Pfennig and Mullen 2010). The last
+
+173
+
+step of our workflow was to calculate “total scores” by summing, for each non-venomous
+
+174
+
+species, the resemblance scores weighted (Hadamard product) by sympatry scores.
+
+175
+
+Our method did not include phylogenetic correction for the measure of the
+
+176
+
+resemblance because all the venomous and non-venomous snakes belong to two distant and
+
+177
+
+monophyletic clades. The resemblance between these clades thus cannot be attributed to
+
+178
+
+phylogenetic relationship.
+
+179
+
+Candidate mimics and models were identified statistically by comparing total scores to
+
+180
+
+a null distribution. This null distribution was generated by randomly shuffling the venomous
+
+181
+
+species in the sympatry matrix before calculating the resemblance score for each non-
+
+182
+
+venomous species, and by replicating this operation 50,000 times (Figure 1C). Species for
+
+183
+
+which the total scores fell in the right tail (e.g., the 5% highest scores) of the null distribution
+
+184
+
+were more similar to sympatric venomous species than expected by chance and were thus
+
+185
+
+considered candidate mimics (and their sympatric venomous species considered candidate
+
+186
+
+models).
+
+187
+
+We tested the same hypothesis of an excess of resemblance multiple times; thus, we
+
+188
+
+tested whether significant results could have arisen by chance. We used the Fisher’s method,
+
+189
+
+also named Fisher's combined probability test (Fisher 1925), to test if there was, across all the
+
+190
+
+non-venomous species, a significant excess of resemblance with the sympatric venomous
+
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+191
+
+snakes. We combined the p-values of the 27 non-venomous species that were not classified
+
+192
+
+as foreign venomous snakes into a X2 statistic and compared it to a chi-squared distribution
+
+193
+
+with 2 x 27 degrees of freedom. This effectively provides a global test of the hypothesis that
+
+194
+
+mimicry affected the evolution of phenotype in the Western Palearctic snake assemblage. All
+
+195
+
+statistical analyses were performed with R (Development Core Team 2008).
+
+196
+197
+
+(4) Image pre-processing
+
+198
+
+Snake images were squared (by cropping around snakes) and downsized to 299 x 299 pixels.
+
+199
+
+The venomous snake dataset was split into two: 90% of images were used for training and
+
+200
+
+10% for validation (i.e., to monitor performances while tuning training hyperparameters). We
+
+201
+
+used an image augmentation procedure to improve invariance to noisy variations and to limit
+
+202
+
+overfitting: before every training epoch, images were rotated with an angle sampled between
+
+203
+
+0° and 180°, randomly flipped horizontally and vertically, up to 20% zoomed in or out, and
+
+204
+
+RGB color channel randomly shifted by 0.2. Images of non-venomous snakes were squared
+
+205
+
+and downsized only.
+
+206
+207
+
+(5) DNN training and predictions
+
+208
+
+Training a DNN to recognize snake species from scratch would have required a very large
+
+209
+
+dataset of images to achieve good performances. Following other studies (e.g., Norouzzadeh
+
+210
+
+et al. 2018), we rather used “transfer learning”, in which a DNN pre-trained on a very large
+
+211
+
+dataset is fine-tuned with a new, smaller dataset. In this study, we transferred the Xception
+
+212
+
+network (Chollet 2017) pre-trained on ImageNet (a dataset of 14 million images belonging to
+
+213
+
+more than 20 000 classes; Deng et al. 2009). We tested other networks also trained on
+
+214
+
+ImageNet (ResNet, Alexnet), which all yielded qualitatively similar results but reached lower
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+215
+
+performance in species recognition. To limit overfitting, we replaced the original final
+
+216
+
+classification layer by a first fully-connected convolutional layer (2048 units), a dropout layer
+
+217
+
+(dropout probability: 0.7), a second fully-connected convolutional layer (256 units), a second
+
+218
+
+dropout layer (dropout probability: 0.7) and a 36-ways softmax classifier. The highest
+
+219
+
+performances were reached by fine-tuning all layers (with a very small learning rate) rather
+
+220
+
+than the last, added layers only. We trained three networks separately using three different
+
+221
+
+optimizers: Nadam (learning rate 0.00003, decay 0), Single Gradient Descent (learning rate
+
+222
+
+0.001, decay 0.00001, Nesterov momentum 0.9) and Adagrad (learning rate: 0.0005, decay:
+
+223
+
+0) (Zheng 2009; Ju et al. 2017). The training was stopped when we visually estimated that the
+
+224
+
+curves of validation loss did not decrease further for 20 consecutive epochs, i.e. after 50
+
+225
+
+epochs for training with Stochastic Gradient Descent, 120 epochs with Adagrad and 45 epochs
+
+226
+
+with Nadam (Figure S3).
+
+227
+
+We estimated the classification probabilities of each non-venomous snake image with
+
+228
+
+each of the three DNNs trained with different optimizers, before averaging probabilities across
+
+229
+
+DNNs. The whole training and prediction procedure was repeated 15 times, to produce 15
+
+230
+
+matrices of resemblance scores that were eventually averaged into a single resemblance
+
+231
+
+matrix. All DNN analyses were performed with the Keras library (Chollet 2015) in Python
+
+232
+
+language.
+
+233
+234
+
+(6) Test of background influence
+
+235
+
+To confirm that network predictions were effectively based on the snakes, and not on the
+
+236
+
+background, we replaced the background in 60 images. Snakes were cut out and pasted onto
+
+237
+
+photos of ground only. Ground photos depicted rock, dead leaves, plants and sand. Of the 60
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+238
+
+snake images, 20 belonged to venomous snakes, 20 to non-venomous candidate mimic snakes
+
+239
+
+and 20 to non-venomous non-candidate mimic snakes.
+
+240
+
+We used the 3x15 trained networks to predict the resemblance scores for the 60
+
+241
+
+images with a replaced background. We used non-parametric Multivariate Analysis Of
+
+242
+
+Variance, with adonis function of vegan package (Dixon 2003) in R, to test the effect of
+
+243
+
+background replacement on resemblance scores . We controlled variation between species by
+
+244
+
+entering species names as an explanatory variable. We checked for multivariate
+
+245
+
+homoscedasticity using the betadisper function of vegan package (non-significant, effect of
+
+246
+
+background: F = 0.15, p = 0.69).
+
+247
+248
+
+3. Results
+
+249
+
+After training, DNNs were able to recognize the species of a Western Palearctic venomous
+
+250
+
+snake with an accuracy of 77% ± 0.004 SE (evaluated on the validation dataset; random guess:
+
+251
+
+2.78% accuracy) and a top-3 accuracy of 92% ± 0.015 SE (probability that one of the three
+
+252
+
+classes with the highest prediction matches the correct class), indicating that DNNs learned
+
+253
+
+the most distinctive traits of each species. This is a remarkably high performance considering
+
+254
+
+the limited size of the training dataset, and the extreme resemblance among several vipers,
+
+255
+
+which makes their identification challenging even for experts when the geographic origin is
+
+256
+
+unknown (Geniez 2015). In comparison, a previous DNN-based analysis of species recognition
+
+257
+
+based on 35,200 training images from the Internet representing 289 species of reptiles
+
+258
+
+reached 45.9% and 80.9% top-1 and top-5 accuracy, respectively (Van Horn et al. 2018).
+
+259
+
+Comparing weighted resemblance scores to the null distribution, with a 5% threshold,
+
+260
+
+our method identified seven non-venomous species out of the 87 (8%) as candidate mimics of
+
+261
+
+venomous snakes: these species have a higher resemblance with their sympatric venomous
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+262
+
+species than with a random assemblage of venomous snakes (list of potential mimics and
+
+263
+
+models, Figure 2). Fisher’s method confirmed the overall significance of excessive
+
+264
+
+resemblance with sympatric venomous snakes across the tested non-venomous species set
+
+265
+
+(X2 = 109.3 , p < 0.001). In addition, resemblance scores were not driven by similarity between
+
+266
+
+image backgrounds, as they were not affected by shuffling backgrounds among images (non-
+
+267
+
+parametric MANOVA performed with 60 images, background effect: F = 0.74, p = 0.67).
+
+268
+269
+
+4. Discussion
+
+270
+
+We propose here a new automatic method to infer potential mimetic pairs and to evaluate
+
+271
+
+the frequency of mimicry within an entire group of organisms based on non-standardized
+
+272
+
+photographs. We applied it to quantify for the first time the extent of mimicry in an
+
+273
+
+assemblage of vertebrates at a continental scale (see Wilson et al. 2015 for a related work
+
+274
+
+with invertebrates). Although the hypothesis of mimicry would have to be validated
+
+275
+
+experimentally for each particular species pair, our analysis confirms the existence in
+
+276
+
+Western Palearctic snakes of a pattern typical of Batesian mimicry (i.e. pairwise resemblance
+
+277
+
+between sympatric pairs of unrelated nontoxic and toxic preys), and suggests that this
+
+278
+
+defensive strategy has influenced their phenotypic evolution. Finally, our analysis confirms
+
+279
+
+previous researches in demonstrating that DNNs can reach high level of accuracy even when
+
+280
+
+trained on small datasets (Hansen et al. 2018; Körschens et al. 2018; Mathis et al. 2018).
+
+281
+
+Several arguments from the natural history of snakes support the validity of our
+
+282
+
+method to identify mimics and models. Firstly, six of the seven species identified as potential
+
+283
+
+mimics by our method have been mentioned as such in the literature (Gans 1961; Werner and
+
+284
+
+Frankenberg 1982; Werner 1983; Valkonen et al. 2011a; Aubret and Mangin 2014; see Figure
+
+285
+
+2). Secondly, the mimicry hypothesis is supported for all the detected species by additional
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+286
+
+evidence of mimicry, based on behavioral or/and acoustic traits. The putative mimics Natrix
+
+287
+
+helvetica, N. maura, Coronella austriaca, Spalerosophis diadema and Telescopus fallax
+
+288
+
+displace their maxillary bones to produce a triangular head shape when disturbed, increasing
+
+289
+
+visual resemblance with their viper model (Werner and Frankenberg 1982; Werner 1983;
+
+290
+
+Valkonen et al. 2011a; Aubret and Mangin 2014). In addition, Natrix maura also produces a
+
+291
+
+hissing sound similar to the sympatric Vipera aspis and V. berus (Aubret and Mangin 2014)
+
+292
+
+while the non-venomous Dasypeltis sahelensis and its sympatric venomous Echis pyramidum
+
+293
+
+possess the same modified scales on the flanks that are rubbed to produce a similar warning
+
+294
+
+signal when disturbed (Gans 1961). Finally, even if it has never been reported yet as a potential
+
+295
+
+mimic in the literature, Hemorrhois nummifer shows the same behavioral and acoustic
+
+296
+
+warning signal as its sympatric vipers, Montivipera xanthina and Macrovipra lebetina (authors’
+
+297
+
+personal observation).
+
+298
+
+Remarkably, we found that even well camouflaged species (e.g., vipers of the genus
+
+299
+
+Pseudocerastes; Figure 2) could be a model for non-venomous species. The lack of any pattern
+
+300
+
+or color signaling venomousness in this species confirms that mimicry can be effective without
+
+301
+
+conspicuous traits, and advocate for a better separation between the concepts of Batesian
+
+302
+
+mimicry, communication signaling and conspicuousness. The link between these three
+
+303
+
+concepts seems to represent a historical legacy of the easier detection of mimicry when it
+
+304
+
+involves conspicuous aposematic models. The method presented here, which uses DNN-based
+
+305
+
+resemblance coupled with information on geographic co-occurrence, avoids a biased selection
+
+306
+
+favoring conspicuous organisms when studying Batesian mimicry.
+
+307
+
+An additional advantage of our DNN-based approach is its ability to suggest mimicry
+
+308
+
+even when resemblance is imperfect. Most of the species identified by our method are
+
+309
+
+imperfect mimics, at least from our human point of view, as their colors and patterns match
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+310
+
+only partially those of their model (Figure 2). Although any of the eleven non-exclusive
+
+311
+
+hypotheses proposed in the literature to explain imperfect mimicry (see Kikuchi and Pfennig
+
+312
+
+2013; Dalziell and Welbergen 2016 for a detailed list) could apply to Western Palearctic
+
+313
+
+snakes, only the “back-up signal” hypothesis is currently supported by ecological evidence.
+
+314
+
+This hypothesis suggests that imperfect mimicry can be reinforced by complementary signals
+
+315
+
+(Johnstone 1996). It is convincing especially for mimics that show similarities in behavioral,
+
+316
+
+morphological and acoustic warning signals with their sympatric venomous species (Gans
+
+317
+
+1961; Werner 1983; Valkonen et al. 2011a; Aubret and Mangin 2014). In addition to the eleven
+
+318
+
+hypotheses, one characteristic of the studied snakes could help explain how imperfect
+
+319
+
+mimicry can evolve. Some model species are highly variable, which may prevent predators
+
+320
+
+from associating a specific phenotype to venomousness (Kikuchi and Pfennig 2010) and thus
+
+321
+
+make them more careful and less likely to attack snakes with ambiguous phenotypes. This
+
+322
+
+explanation is plausible at least for the three candidate models Vipera ammodytes, V. berus
+
+323
+
+and V. aspis, which exhibit significant intraspecific and often intra-population variation in
+
+324
+
+coloration (Figure S2). More research is needed to evaluate the validity of these different
+
+325
+
+explanations and to determine why imperfect mimicry seems ubiquitous among Western
+
+326
+
+Palearctic snakes.
+
+327
+
+Although additional cues comfort the mimicry hypothesis for all detected species, our
+
+328
+
+method can only be used for suggesting candidate mimics and models, and a proper
+
+329
+
+demonstration of mimicry would require additional data. For instance, mimetic species are
+
+330
+
+likely to have similar size and ecology than their models. This information was not provided
+
+331
+
+by our photographs but may influence the plausibility of the mimicry hypothesis for some
+
+332
+
+species (see below). Moreover, most studies of interspecific resemblance, including our
+
+333
+
+method, are fundamentally limited in their ability to distinguish between mimicry and other
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+334
+
+factors of resemblance. For example, phylogenetic relatedness is a classical cause of
+
+335
+
+resemblance; however this hypothesis does not apply to our study as venomous and non-
+
+336
+
+venomous snakes belong to two distant, reciprocally monophyletic clades. Resemblance could
+
+337
+
+also arise by ecological convergence because of similar abiotic environmental constraints
+
+338
+
+(Rajpurohit et al. 2008), or similar selective pressures for camouflage (Stevens et al. 2013).
+
+339
+
+These factors could lead to overestimating the frequency of mimicry in our results. This issue
+
+340
+
+potentially affects all mimicry studies that do not test predator behavior in a natural
+
+341
+
+environment. However, because most studies focus on conspicuously colored and presumably
+
+342
+
+aposematic species (Brodie and Janzen 1995; Cheney and Marshall 2009; Penney et al. 2012)
+
+343
+
+researchers usually assume that resemblance can only be attributed to mimicry. This
+
+344
+
+assumption is seldom tested although even conspicuous colors may have camouflage function
+
+345
+
+(Mochida et al. 2015; Barnett et al. 2018). In Western Palearctic snakes, body colors are not
+
+346
+
+conspicuous. It would thus be interesting to perform predation tests in natural conditions to
+
+347
+
+investigate whether the features copied by potential mimics are those effectively used by
+
+348
+
+predators to recognize models (e.g., as in Kristiansen et al. 2018), and thus to confirm that
+
+349
+
+resemblance is effectively driven by mimicry. Nevertheless, as discussed previously all
+
+350
+
+identified mimics use behavioral or acoustic imitation in addition to color pattern and, as
+
+351
+
+resemblance in several ontogenetically independent traits can hardly be attributed to
+
+352
+
+ecological convergence, to our view mimicry remains the most likely explanation.
+
+353
+
+The ability to detect imperfect and non-conspicuous mimicry makes our method less
+
+354
+
+conservative compared to methods entirely based on human detection, for evaluating the
+
+355
+
+frequency of mimicry. Even so, we may have failed to identify potential mimic-model pairs.
+
+356
+
+First, the 5th percentile threshold in the null distribution used to interpret resemblance scores
+
+357
+
+is entirely conventional and may overlook some mimicry systems. We found two species
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+358
+
+below but close to the 5th percentile threshold. The first species, Dolichophis jugularis, displays
+
+359
+
+the same black coloration as its sympatric species Walterinnesia morgani, but it has a different
+
+360
+
+timing of activity (one is diurnal while the other is nocturnal) and is thus probably not a mimic.
+
+361
+
+The second species, Rhagerhis moilensis, resembles the sympatric Cerastes cerastes in
+
+362
+
+coloration but has a different size and shape (Geniez 2015). Mimicry hypothesis is implausible,
+
+363
+
+but cannot be discounted for this species. Therefore, the 5th percentile threshold should be
+
+364
+
+interpreted cautiously and we recommend not drawing firm conclusions without examining
+
+365
+
+species close to a decision threshold. Second, we may have failed to identify candidate mimics
+
+366
+
+and models because, for the non-venomous polymorphic species (e.g. Leviton 1970; Kark et
+
+367
+
+al. 1997; Mebert 2011), we could not test mimicry for each morphotype separately. Instead,
+
+368
+
+we had to analyze all the morphotypes together, and test mimicry at the species level. This
+
+369
+
+complicates the detection of mimicry as only some morphotypes of these polymorphic species
+
+370
+
+may mimic venomous snakes (e.g., in Hemorrhois ravergieri, Werner and Frankenberg 1982,
+
+371
+
+see below). Testing mimicry for each morphotype is possible knowing the precise geographical
+
+372
+
+distribution of each morphotype, but this information was not available for most polymorphic
+
+373
+
+species. These two limits may lead to an under-estimation of the mimicry frequency in natural
+
+374
+
+communities.
+
+375
+
+Among the species suggested as mimetic in literature, three were not identified in our
+
+376
+
+study (Gans 1961; Werner and Frankenberg 1982; Werner 1983). One of them, Hemorrhois
+
+377
+
+ravergieri is considered a mimic of the sympatric Vipera ammodytes transcaucasiana (Werner
+
+378
+
+and Frankenberg 1982). Our method failed to identify it as such probably because it exhibits
+
+379
+
+a strong polymorphism, with only some of its variants thought to mimic vipers (Werner and
+
+380
+
+Frankenberg 1982). A second species, Dasypeltis bazi, could have been missed by our
+
+381
+
+approach because of the limited number of pictures in our dataset (six in total, this rare and
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+382
+
+poorly-known species was recently described by Saleh and Sarhan 2016) and the marked
+
+383
+
+variation in coloration between individuals. However, the third unrecognized mimic,
+
+384
+
+Telescopus dhara (Werner 1983), is not polymorphic, and we believe that claims for mimicry
+
+385
+
+in this species are too optimistic, as it bears no particular resemblance with the proposed
+
+386
+
+model species, Echis coloratus, even from visual inspection.
+
+387
+
+Our study highlights the benefits of DNNs for studying resemblance between
+
+388
+
+phenotypes in ecology and evolution. DNNs have been previously used in ecology to analyze
+
+389
+
+big data, e.g., to identify species from camera trap images (Norouzzadeh et al. 2018).
+
+390
+
+However, their capacity to model biological perception has been thus far overlooked (Cichy
+
+391
+
+and Kaiser 2019). A growing body of literature in humans has shown that DNNs predict the
+
+392
+
+perceived resemblance between complex stimuli better than all other models, even those
+
+393
+
+specifically tuned with neurophysiological data (Yamins et al. 2014; Kriegeskorte 2015;
+
+394
+
+Kubilius et al. 2016). Of particular relevance for the study of camouflage and mimicry, one
+
+395
+
+study showed that whichever perceptual task a DNN is trained for (e.g., recognizing objects
+
+396
+
+from images, segmenting foreground in video frames), DNN accurately predicts perceptual
+
+397
+
+similarity even near the discrimination threshold (Zhang et al. 2018).
+
+398
+
+In mimicry systems (and more generally in most communication systems) the
+
+399
+
+relevant observer is not human. Are the performances of DNNs at reproducing human
+
+400
+
+perception also relevant to other animals? These performances are based on three
+
+401
+
+characteristics (Kriegeskorte 2015). The first one, the capacity of DNNs to solve high-level tasks
+
+402
+
+(Zhang et al. 2018), is shared by all animals. The second is their general architecture (a stack
+
+403
+
+of convolution, activation and pooling functions) which reproduces operations performed
+
+404
+
+sequentially and iteratively by neurons in the different human visual areas (Güçlü and van
+
+405
+
+Gerven 2015). Similar operations are also found, beyond humans, in at least all Vertebrates
+
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+406
+
+(Renoult et al. 2019). The third is the structure of input data. In this study, we used RGB images
+
+407
+
+that match human trichromatic vision (ie based on three cone types). Other animals have
+
+408
+
+different cone types (e.g., two in carnivores, four in birds), tuned to different wavelengths.
+
+409
+
+How these differences affect DNN models of perceptual space is a nearly unexplored avenue
+
+410
+
+of research (but see Bergeron and Fuller 2018). Yet indirect evidence suggests that the impact
+
+411
+
+would be relatively minor. Indeed, studies on bird plumages that used both RGB images and
+
+412
+
+bird-specific cone stimulations showed no qualitative differences (Dale et al. 2015; Miller et
+
+413
+
+al. 2019). Accordingly, several authors have argued that RGB images provide major insight into
+
+414
+
+ecology, evolution, and behavior in nonhuman species (Seddon et al. 2010; Bergeron and
+
+415
+
+Fuller 2018). In addition, in our particular case, the use of ranks to express relative
+
+416
+
+resemblance makes our mimicry-detection method insensitive to how precisely the similarity
+
+417
+
+measure produced by DNNs scales to similarity perceived by animals.
+
+418
+
+A potentially important limitation of RGB images, however, is to eliminate wavebands
+
+419
+
+to which humans –but not other vertebrates– are blind. The ultraviolets (UV), in particular,
+
+420
+
+may be problematic. Regarding our study, the main predators of snakes in the Western
+
+421
+
+Palearctic are non-primate mammals and raptors (Valkonen et al. 2011b): they have a very
+
+422
+
+limited UV vision and they most certainly do not use UV cues for foraging (Jacobs 2009; Lind
+
+423
+
+et al. 2013, 2014). Thus, UV-based mimicry seems unlikely in snakes. More generally, however,
+
+424
+
+one should keep in mind that DNNs will never detect resemblance from information not
+
+425
+
+present in the data.
+
+426
+
+Last, in our study we analyzed non-standardized images. Although standardization
+
+427
+
+removes irrelevant information from the data, we think that non-standardized images are
+
+428
+
+ecologically more relevant. Indeed, predators experience substantial variation in perceptual
+
+429
+
+conditions, in relation to snake position, background, shading, light intensity and color. This
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+430
+
+variation could affect the evolution of mimic phenotypes; for example, it has been suggested
+
+431
+
+to explain imperfect mimicry (relaxed selection hypothesis, Kikuchi and Pfennig 2013). While
+
+432
+
+RGB pictures from the Internet may not precisely match variation experienced by predators,
+
+433
+
+drastically limiting all variation (by standardization) would make the dataset un-natural.
+
+434
+
+Standardized images would be nevertheless useful in other contexts, e.g. to determine which
+
+435
+
+visual features contribute the most to deceive predators.
+
+436
+
+To conclude, Artificial Intelligence, here represented by DNNs, has a great potential for
+
+437
+
+the study of mimicry. We used it to detect candidate Batesian mimics and models among all
+
+438
+
+Western Palearctic snakes. We found that Batesian mimicry is a likely defensive strategy for
+
+439
+
+8% of non-venomous snakes. Although there is still room for methodological improvement,
+
+440
+
+DNNs already allow to measure resemblance while accounting for the high dimensionality of
+
+441
+
+visual phenotypes, simultaneously accounting for colors, texture, patterns and proportions,
+
+442
+
+and without requiring standardized data that may be difficult to collect for many species.
+
+443
+
+Through their ability to detect imperfect and non-conspicuous mimicry, DNNs further avoids
+
+444
+
+the bias of many mimicry studies towards colorful and spectacularly resembling species.
+
+445
+
+Finally, beyond mimicry, the ability to handle complex visual patterns makes DNNs highly
+
+446
+
+promising tools for modeling resemblance in general, with broad perspectives of applications
+
+447
+
+in evolution and ecology.
+
+448
+449
+450
+451
+452
+453
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+454
+455
+
+456
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+457
+
+Figure 1. Workflow of the three-step method used to detect candidate mimic species among
+
+458
+
+non-venomous snakes and candidate model species among venomous ones. (A) Training of
+
+459
+
+the artificial neural networks to recognize 35 venomous snake species plus the “foreign”
+
+460
+
+venomous snake class. (B) Measuring the resemblance of non-venomous snakes (one measure
+
+461
+
+per image) with each species of venomous snakes plus the “foreign” class. (C) Building the
+
+462
+
+resemblance matrix and the sympatry matrix, and testing an excess of resemblance between
+
+463
+
+sympatric species using a null distribution to identify candidate mimics.
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+464
+465
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+466
+
+Figure 2. The seven mimic and model species identified in our analysis (A-G) and one example
+
+467
+
+pair of sympatric but non-resembling species (H), with mimicry scores (red), quantiles 95%
+
+468
+
+(black dashed line) and the null distribution (blue) of each species pairs. Species framed in
+
+469
+
+yellow have been previously reported as mimetic in the literature (Gans 1961; Werner and
+
+470
+
+Frankenberg 1982; Werner 1983; Valkonen et al. 2011a; Aubret and Mangin 2014). (A)
+
+471
+
+Coronella austriaca – Vipera berus.
+
+472
+
+Hemorrhois nummifer – Montivipera xanthina. (D) Natrix helvetica – V. aspis. (E) N. maura –
+
+473
+
+V. latastei. (F) Spalerosophis diadema – Pseudocerastes fieldi. (G) Telescopus fallax – V.
+
+474
+
+ammodytes. (H) H. hippocrepis – V. latastei. Photo credits: Matthieu Berroneau, Olivier
+
+475
+
+Buisson, Luis García Cardenete, Alexandre Cluchier, Philippe Geniez, André Langenbach, Jean
+
+476
+
+Muratet, Gilles Pottier and Jean-François Trape.
+
+(B) Dasypeltis sahelensis – Echis pyramidum. (C)
+
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+490
+
+Aubret, F., and A. Mangin. 2014. The snake hiss: potential acoustic mimicry in a viper-
+
+491
+
+colubrid complex. Biological Journal of the Linnean Society 113:1107–1114.
+
+492
+
+Barlow, B. A., and D. Wiens. 1977. Host-parasite resemblance in australian mistletoes: the
+
+493
+
+case for cryptic mimicry. Evolution 31:69–84.
+
+494
+
+Barnett, J. B., C. Michalis, N. E. Scott-Samuel, and I. C. Cuthill. 2018. Distance-dependent
+
+495
+
+defensive coloration in the poison frog Dendrobates tinctorius, Dendrobatidae. Proceedings
+
+496
+
+of the National Academy of Sciences of the United States of America 115:6416–6421.
+
+497
+
+Bates, H. W. 1862. Contributions to an Insect Fauna of the Amazon Valley. Lepidoptera:
+
+498
+
+Heliconidae. Transactions of the Linnean Society of London 23:495–566.
+
+499
+
+Bergeron, Z. T., and R. C. Fuller. 2018. Using Human Vision to Detect Variation in Avian
+
+500
+
+Coloration: How Bad Is It? The American naturalist 191:269–276.
+
+501
+
+Bosque, R. J., J. P. Lawrence, R. Buchholz, G. R. Colli, J. Heppard, and B. Noonan. 2018.
+
+502
+
+Diversity of warning signal and social interaction influences the evolution of imperfect
+
+503
+
+mimicry. Ecology and Evolution 8:7490–7499.
+
+504
+
+Brodie, E. D., and F. J. Janzen. 1995. Experimental Studies of Coral Snake Mimicry:
+
+505
+
+Generalized Avoidance of Ringed Snake Patterns by Free-Ranging Avian Predators.
+
+506
+
+Functional Ecology 9:186–190.
+
+507
+
+Cheney, K. L., and N. J. Marshall. 2009. Mimicry in coral reef fish: how accurate is this
+
+508
+
+deception in terms of color and luminance? Behavioral Ecology 20:459–468.
+
+509
+
+Chollet, F. Keras (2015).
+
+510
+
+———. 2017. Xception: Deep learning with depthwise separable convolutions. Pages 1800–
+
+511
+
+1807 inProceedings - 30th IEEE Conference on Computer Vision and Pattern Recognition,
+
+512
+
+CVPR 2017.
+
+513
+
+Cichy, R. M., and D. Kaiser. 2019. Deep Neural Networks as Scientific Models. Trends in
+
+514
+
+Cognitive Sciences 23:305–317.
+
+515
+
+Corcobado, G., M. E. Herberstein, and S. Pekár. 2016. The role of ultraviolet colour in the
+
+516
+
+assessment of mimetic accuracy between Batesian mimics and their models: A case study
+
+517
+
+using ant-mimicking spiders. Science of Nature 103:90–101.
+
+518
+
+Cuthill, I. C., and A. T. D. Bennett. 1993. Mimicry and the eye of the beholder. Proceedings of
+
+519
+
+the Royal Society of London. Series B: Biological Sciences 253:203–204.
+
+520
+
+Dale, J., C. J. Dey, K. Delhey, B. Kempenaers, and M. Valcu. 2015. The effects of life history
+
+521
+
+and sexual selection on male and female plumage colouration. Nature 527:367–370.
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+522
+
+Dalziell, A. H., and J. A. Welbergen. 2016. Mimicry for all modalities. (A. Bourke, ed.)Ecology
+
+523
+
+Letters 19:609–619.
+
+524
+
+Darwin, C. 1887. Life and Letters of Charles Darwin. John Murray, London.
+
+525
+
+Deng, J., W. Dong, R. Socher, L.-J. Li, Kai Li, and Li Fei-Fei. 2009. ImageNet: A large-scale
+
+526
+
+hierarchical image database. Pages 248–255 in2009 IEEE Conference on Computer Vision
+
+527
+
+and Pattern Recognition. IEEE.
+
+528
+
+Development Core Team R: A Language and Environment for Statistical Computing. , Pub. L.
+
+529
+
+No. 2019 (2008). Austria.
+
+530
+
+Dittrich, W., F. Gilbert, P. Green, P. Mcgregor, and D. Grewcock. 1993. Imperfect Mimicry: A
+
+531
+
+Pigeon’s Perspective. Proceedings of the Royal Society B: Biological Sciences 251:195–200.
+
+532
+
+Dixon, P. 2003. VEGAN, a package of R functions for community ecology. Journal of
+
+533
+
+Vegetation Science 14:927–930.
+
+534
+
+Endler, J. A., G. L. Cole, and A. M. Kranz. 2018. Boundary strength analysis: Combining colour
+
+535
+
+pattern geometry and coloured patch visual properties for use in predicting behaviour and
+
+536
+
+fitness. (S. Blomberg, ed.)Methods in Ecology and Evolution 9:2334–2348.
+
+537
+
+Fisher, R. A. 1925. Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+
+538
+
+Gans, C. 1961. Mimicry in procryptically colored snakes of the genus Dasypeltis. Evolution
+
+539
+
+15:72–91.
+
+540
+
+Geniez, P. 2015. Serpents d’Europe, d’Afrique du Nord et du Moyen-Orient. Delachaux et
+
+541
+
+Niestlé SA, Paris.
+
+542
+
+Gianoli, E., and F. Carrasco-Urra. 2014. Leaf Mimicry in a Climbing Plant Protects against
+
+543
+
+Herbivory. Current Biology 24:984–987.
+
+544
+
+Güçlü, U., and M. A. J. van Gerven. 2015. Deep Neural Networks Reveal a Gradient in the
+
+545
+
+Complexity of Neural Representations across the Ventral Stream. The Journal of
+
+546
+
+neuroscience : the official journal of the Society for Neuroscience 35:10005–14.
+
+547
+
+Hansen, M. F., M. L. Smith, L. N. Smith, M. G. Salter, E. M. Baxter, M. Farish, and B. Grieve.
+
+548
+
+2018. Towards on-farm pig face recognition using convolutional neural networks. Computers
+
+549
+
+in Industry 98:145–152.
+
+550
+
+Heatwole, H., and E. Davison. 1976. A review of caudal luring in snakes with notes on its
+
+551
+
+occurrence in the Saharan sand viper, Cerastes vipera. Herpetologica 32:332–336.
+
+552
+
+Ishihara, K., S. Ishihara, M. Nagamachi, S. Hiramatsu, and H. Osaki. 2001. Age-related decline
+
+553
+
+in color perception and difficulties with daily activities–measurement, questionnaire, optical
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+554
+
+and computer-graphics simulation studies. International Journal of Industrial Ergonomics
+
+555
+
+28:153–163.
+
+556
+
+Jacobs, G. H. 2009. Evolution of colour vision in mammals. Philosophical Transactions of the
+
+557
+
+Royal Society B: Biological Sciences 364:2957–2967.
+
+558
+
+Johnstone, R. A. 1996. Multiple Displays in Animal Communication: `Backup Signals’ and
+
+559
+
+`Multiple Messages’. Philosophical Transactions of the Royal Society B: Biological Sciences
+
+560
+
+351:329–338.
+
+561
+
+Joshi, J., A. Prakash, and K. Kunte. 2017. Evolutionary Assembly of Communities in Butterfly
+
+562
+
+Mimicry Rings. The American Naturalist 189:E58–E76.
+
+563
+
+Jozwik, K. M., N. Kriegeskorte, K. R. Storrs, and M. Mur. 2017. Deep Convolutional Neural
+
+564
+
+Networks Outperform Feature-Based But Not Categorical Models in Explaining Object
+
+565
+
+Similarity Judgments. Frontiers in Psychology 8:1726–1754.
+
+566
+
+Ju, C., A. Bibaut, and M. J. van der Laan. 2017. The Relative Performance of Ensemble
+
+567
+
+Methods with Deep Convolutional Neural Networks for Image Classification. Journal of
+
+568
+
+Applied Statistics 0:1:19.
+
+569
+
+Kark, S., I. Warburg, and Y. L. Werner. 1997. Polymorphism in the snake Psammophis
+
+570
+
+schokarion both sides of the desert edge in Israel and Sinai. Journal of Arid Environments
+
+571
+
+37:513–527.
+
+572
+
+Kikuchi, D. W., and D. W. Pfennig. 2010. High-model abundance may permit the gradual
+
+573
+
+evolution of Batesian mimicry: an experimental test. Proceedings. Biological sciences
+
+574
+
+277:1041–8.
+
+575
+
+Kikuchi, D. W., and D. W. Pfennig. 2013. Imperfect Mimicry and the Limits of Natural
+
+576
+
+Selection. The Quarterly Review of Biology 88:297–315.
+
+577
+
+Kim, J., A.-D. Nguyen, and S. Lee. 2019. Deep CNN-Based Blind Image Quality Predictor. IEEE
+
+578
+
+Transactions on Neural Networks and Learning Systems 30:11–24.
+
+579
+
+Kitamura, T., and M. Imafuku. 2015. Behavioural mimicry in flight path of Batesian
+
+580
+
+intraspecific polymorphic butterfly Papilio polytes. Proceedings of the Royal Society B:
+
+581
+
+Biological Sciences 282:20150483.
+
+582
+
+Kitayama, S., S. Duffy, T. Kawamura, and J. T. Larsen. 2003. Perceiving an Object and Its
+
+583
+
+Context in Different Cultures. Psychological Science 14:201–206.
+
+584
+
+Körschens, M., B. Barz, and J. Denzler. 2018. Towards Automatic Identification of Elephants
+
+585
+
+in the Wild.
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+586
+
+Kriegeskorte, N. 2015. Deep Neural Networks: A New Framework for Modeling Biological
+
+587
+
+Vision and Brain Information Processing. Annual Review of Vision Science 1:417–446.
+
+588
+
+Kristiansen, E. B., S. D. Finkbeiner, R. I. Hill, L. Prusa, and S. P. Mullen. 2018. Testing the
+
+589
+
+adaptive hypothesis of Batesian mimicry among hybridizing North American admiral
+
+590
+
+butterflies. Evolution 72:1436–1448.
+
+591
+
+Kubilius, J., S. Bracci, and H. P. Op de Beeck. 2016. Deep Neural Networks as a Computational
+
+592
+
+Model for Human Shape Sensitivity. (M. Bethge, ed.)PLOS Computational Biology
+
+593
+
+12:e1004896.
+
+594
+
+Leviton, A. 1970. Review of the snakes of the genus Lytorhynchus. Proceedings of the
+
+595
+
+California Academy of sciences 37:249–274.
+
+596
+
+Lind, O., M. Mitkus, P. Olsson, and A. Kelber. 2013. Ultraviolet sensitivity and colour vision in
+
+597
+
+raptor foraging. The Journal of experimental biology 216:1819–26.
+
+598
+
+Lind, O., M. Mitkus, P. Olsson, and A. Kelber. 2014. Ultraviolet vision in birds: the importance
+
+599
+
+of transparent eye media. Proceedings of the Royal Society B: Biological Sciences
+
+600
+
+281:20132209–20132209.
+
+601
+
+Mathis, A., P. Mamidanna, K. M. Cury, T. Abe, V. N. Murthy, M. W. Mathis, and M. Bethge.
+
+602
+
+2018. DeepLabCut: markerless pose estimation of user-defined body parts with deep
+
+603
+
+learning. Nature Neuroscience 21:1281–1289.
+
+604
+
+Mebert, K. 2011. Geographic Variation of Morphological Characters in the Dice Snake (Natrix
+
+605
+
+tessellata). Mertensiella 18:11–19.
+
+606
+
+Miller, E. T., G. M. Leighton, B. G. Freeman, A. C. Lees, and R. A. Ligon. 2019. Ecological and
+
+607
+
+geographical overlap drive plumage evolution and mimicry in woodpeckers. Nature
+
+608
+
+Communications 10:1602.
+
+609
+
+Mochida, K., W. Y. Zhang, and M. Toda. 2015. The function of body coloration of the hai
+
+610
+
+coral snake Sinomicrurus japonicus boettgeri. Zoological Studies 54:33–39.
+
+611
+
+Mound, L. A., P. Reynaud, and P. Reynaud. 2005. Franklinothrips; a pantropical Thysanoptera
+
+612
+
+genus of ant-mimicking obligate predators (Aeolothripidae). Zootaxa 864:1.
+
+613
+
+Nishikawa, H., T. Iijima, R. Kajitani, J. Yamaguchi, T. Ando, Y. Suzuki, S. Sugano, et al. 2015. A
+
+614
+
+genetic mechanism for female-limited Batesian mimicry in Papilio butterfly. Nature Genetics
+
+615
+
+47:405–409.
+
+616
+
+Norouzzadeh, M. S., A. Nguyen, M. Kosmala, A. Swanson, M. S. Palmer, C. Packer, and J.
+
+617
+
+Clune. 2018. Automatically identifying, counting, and describing wild animals in camera-trap
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+618
+
+images with deep learning. Proceedings of the National Academy of Sciences of the United
+
+619
+
+States of America 115:E5716–E5725.
+
+620
+
+Penney, H. D., C. Hassall, J. H. Skevington, K. R. Abbott, and T. N. Sherratt. 2012. A
+
+621
+
+comparative analysis of the evolution of imperfect mimicry. Nature 483:461–464.
+
+622
+
+Pfennig, D. W., and S. P. Mullen. 2010. Mimics without models: causes and consequences of
+
+623
+
+allopatry in Batesian mimicry complexes. Proceedings. Biological sciences 277:2577–85.
+
+624
+
+Rajpurohit, S., R. Parkash, and S. Ramniwas. 2008. Body melanization and its adaptive role in
+
+625
+
+thermoregulation and tolerance against desiccating conditions in drosophilids.
+
+626
+
+Entomological Research 38:49–60.
+
+627
+
+Renoult, J. P., B. Guyl, T. C. Mendelson, A. Percher, J. Dorignac, F. Geniet, and F. Molino.
+
+628
+
+2019. Modelling the Perception of Colour Patterns in Vertebrates with HMAX. bioRxiv
+
+629
+
+552307.
+
+630
+
+Saleh, M., and M. Sarhan. 2016. The egg-eating snake (Colubridae: Dasypeltis) of Faiyum,
+
+631
+
+Egypt, with the description of a new species. Bulletin de la Société Herpétologique de France
+
+632
+
+160:25–48.
+
+633
+
+Sameen, M., and B. Pradhan. 2017. Severity Prediction of Traffic Accidents with Recurrent
+
+634
+
+Neural Networks. Applied Sciences 7:476.
+
+635
+
+Santos, X., M. Vidal-García, J. C. Brito, S. Fahd, G. A. Llorente, F. Martínez-Freiría, X.
+
+636
+
+Parellada, et al. 2014. Phylogeographic and environmental correlates support the cryptic
+
+637
+
+function of the zigzag pattern in a European viper. Evolutionary Ecology 28:611–626.
+
+638
+
+Seddon, N., J. A. Tobias, M. Eaton, A. Ödeen, and B. E. Byers. 2010. Human Vision Can
+
+639
+
+Provide a Valid Proxy for Avian Perception of Sexual Dichromatism. The Auk 127:283–292.
+
+640
+
+Shen, D., G. Wu, and H.-I. Suk. 2017. Deep Learning in Medical Image Analysis. Annual
+
+641
+
+Review of Biomedical Engineering 19:221–248.
+
+642
+
+Sherratt, T. N. 2002. The evolution of imperfect mimicry. Behavioral Ecology 13:821–826.
+
+643
+
+Stevens, M., C. P. Rong, and P. A. Todd. 2013. Colour change and camouflage in the horned
+
+644
+
+ghost crab Ocypode ceratophthalmus. Biological Journal of the Linnean Society 109:257–270.
+
+645
+
+Taylor, C. H., T. Reader, and F. Gilbert. 2016. Hoverflies are imperfect mimics of wasp
+
+646
+
+colouration. Evolutionary Ecology 30:567–581.
+
+647
+
+Troscianko, J., J. Skelhorn, and M. Stevens. 2017. Quantifying camouflage: how to predict
+
+648
+
+detectability from appearance. BMC Evolutionary Biology 17:7.
+
+649
+
+Turk, J. 1958. Observations on Snakes and Snake Bite in the Eastern Mediterranean Area.
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/789206; this version posted October 1, 2019. The copyright holder for this preprint (which was
+not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC 4.0 International license.
+
+650
+
+Journal of the Royal Army Medical 104:63–71.
+
+651
+
+Valkonen, J. K., and J. Mappes. 2014. Resembling a Viper: Implications of Mimicry for
+
+652
+
+Conservation of the Endangered Smooth Snake. Conservation Biology 28:1568–1574.
+
+653
+
+Valkonen, J. K., O. Nokelainen, and J. Mappes. 2011a. Antipredatory Function of Head Shape
+
+654
+
+for Vipers and Their Mimics. (I. Dworkin, ed.)PLoS ONE 6:e22272.
+
+655
+
+Valkonen, J., M. Niskanen, M. Björklund, and J. Mappes. 2011b. Disruption or aposematism?
+
+656
+
+Significance of dorsal zigzag pattern of European vipers. Evolutionary Ecology 25:1047–1063.
+
+657
+
+Van Horn, G., O. Mac Aodha, Y. Song, Y. Cui, C. Sun, A. Shepard, H. Adam, et al. 2018. The
+
+658
+
+INaturalist Species Classification and Detection Dataset.
+
+659
+
+Werner, Y. L. 1983. Behavioural triangulation of the head in three boigine snakes: possible
+
+660
+
+cases of mimicry. Israel Journal of Zoology 32:205–228.
+
+661
+
+Werner, Y. L., and E. Frankenberg. 1982. Head triangulation in two colubrine snakes:
+
+662
+
+probable behavioural reinforcement of batesian mimicry. Israel Journal of Zoology 31:137–
+
+663
+
+150.
+
+664
+
+Wilson, J. S., J. P. Jahner, M. L. Forister, E. S. Sheehan, K. A. Williams, and J. P. Pitts. 2015.
+
+665
+
+North American velvet ants form one of the world’s largest known Müllerian mimicry
+
+666
+
+complexes. Current Biology 25:R704–R706.
+
+667
+
+Yamins, D. L. K., H. Hong, C. F. Cadieu, E. A. Solomon, D. Seibert, and J. J. DiCarlo. 2014.
+
+668
+
+Performance-optimized hierarchical models predict neural responses in higher visual cortex.
+
+669
+
+Proceedings of the National Academy of Sciences of the United States of America 111:8619–
+
+670
+
+24.
+
+671
+
+Zhang, R., P. Isola, A. A. Efros, E. Shechtman, and O. Wang The Unreasonable Effectiveness of
+
+672
+
+Deep Features as a Perceptual Metric. , 2018 IEEE/CVF Conference on Computer Vision and
+
+673
+
+Pattern Recognition 586–595 (2018). IEEE.
+
+674
+
+Zheng, J. 2009. Predicting software reliability with neural network ensembles. Expert
+
+675
+
+Systems with Applications 36:2116–2122.
+
+676
+
+Zhou, J., and O. G. Troyanskaya. 2015. Predicting effects of noncoding variants with deep
+
+677
+
+learning-based sequence model. Nature methods 12:931–4.
+
+678
+
+29
+
+

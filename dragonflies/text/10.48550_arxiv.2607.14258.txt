@@ -1,0 +1,1580 @@
+DragonflyPol: Wide-Field Optical Linear Polarimetry with the Dragonfly Telephoto Array (Instrument Description and Commissioning)
+Mehrnoosh Tahani, Leo W. Hollberg, Hiroshi Akitaya, Jaeyeon Kim, Deborah M. Lokhorst, Roberto G Abraham, Pieter van Dokkum, W. Paul Bowman, Vishwa Koshene Gamage, Paras Regmi, Yasuo Doi, Koji S. Kawabata (2026). arXiv (Cornell University). https://arxiv.org/abs/2607.14258. doi:10.48550/arxiv.2607.14258. Licence: cc-by. Text from pdf.
+
+Draft version July 17, 2026
+Typeset using LATEX default style in AASTeX7.0.1
+
+DragonflyPol: Wide-Field Optical Linear Polarimetry with the Dragonfly Telephoto Array
+(Instrument Description and Commissioning)
+Mehrnoosh Tahani ,1 Leo Hollberg ,2 Hiroshi Akitaya ,3, 4 Jaeyeon Kim ,5, 6 Deborah Lokhorst
+Roberto Abraham ,8, 9 Pieter van Dokkum ,10, 9 William P. Bowman ,10, 9 Vishwa Koshene Gamage
+Paras Regmi ,1 Yasuo Doi 11 And Koji S. Kawabata 4
+
+,7
+,1
+
+(DragonflyPol and Dragonfly Teams)
+
+1 Department of Physics & Astronomy, University of South Carolina, Columbia, SC 29208, USA
+2 Department of Physics and Department of Geophysics, Stanford University, Stanford, California 94305, USA
+3 Astronomy Research Center, Chiba Institute of Technology, 2-17-1 Tsudanuma, Narashino, Chiba 275-0016, Japan
+4 Hiroshima Astrophysical Science Center, 1-3-1 Kagamiyama, Hiroshima University, Higashihiroshima, Hiroshima 739-8526, Japan
+5 School of Space Research, Kyung Hee University, 1732 Deogyeong-daero, Yongin-si, Gyeonggi-do 17104, Korea
+
+arXiv:2607.14258v1 [astro-ph.IM] 15 Jul 2026
+
+6 Department of Astronomy & Space Science, Kyung Hee University, 1732 Deogyeong-daero, Yongin-si, Gyeonggi-do 17104, Korea
+7 NRC Herzberg Astronomy & Astrophysics Research Centre, 5071 West Saanich Road, Victoria, BC V9E2E7, Canada
+8 Department of Astronomy & Astrophysics, University of Toronto, 50 Saint George Street, Toronto, ON M5S 3H4, Canada
+9 Dragonfly Focused Research Organization, 150 Washington Avenue, Santa Fe, NM 87501, USA
+10 Department of Astronomy, Yale University, New Haven, CT 06520, USA
+11 Department of Earth Science and Astronomy, Graduate School of Arts and Sciences, The University of Tokyo, 3-8-1 Komaba, Meguro,
+
+Tokyo 153-8902, Japan
+
+ABSTRACT
+We present DragonflyPol, a wide-field optical linear polarimetry capability implemented on the
+Dragonfly Telephoto Array. DragonflyPol leverages Dragonfly’s modular, multi-lens architecture to
+obtain simultaneous measurements in four linear polarization orientations (0◦ , 45◦ , 90◦ , and 135◦ )
+across a ∼ 5 deg 2 field of view, distributed across 44 polarized lens–detector units. Four additional
+units serve as unpolarized reference channels. We describe a broad range of science goals enabled
+by this capability, including magnetic field mapping and tomography, dust grain properties, CMB
+foreground characterization, and the three-dimensional structure of diffuse interstellar clouds. We
+integrate Canon polarizers and Baader Sloan r′ bandpass filters into the drop-in filter holders of
+the Canon lenses, and conduct a three-phase laboratory characterization program to select optimal
+polarimetric components, measure contrast ratios and transmission eﬀiciencies, and determine and
+mark the transmission axis of each polarizer with sub-degree repeatability. Laboratory measurements
+across all 44 deployed polarizers yield a mean noise-subtracted contrast ratio of 1228 ± 104 and a
+single-polarizer transmission eﬀiciency of ∼33% in the r′ band. On-sky commissioning, including
+twilight flat-field characterization and twilight-sky polarization measurements, confirms throughput
+stability across polarization groups and successful recovery of the expected Rayleigh scattering signal.
+DragonflyPol achieved first polarimetric light in September 2025.
+
+Keywords: Polarimetry (1278) — Optical astronomy (1776) — Starlight polarization (1571) — Galaxy
+magnetic fields (604) — Galaxies (573) — Interstellar medium (847) — Interdisciplinary
+astronomy (804)
+1. INTRODUCTION
+
+The Dragonfly Telephoto Array (R. G. Abraham & P. G. van Dokkum 2014) is an all-refractive mosaic telescope
+consisting of 48 commercial Canon 400 mm f/2.8 telephoto lenses arranged in two clusters of 24 units, each hosted on a
+dedicated robotic tracking mount (Figure 1). Its modular design enables rapid instrumentation upgrades by allowing
+each lens–detector unit to host distinct optical elements (e.g., filters or polarizers) while maintaining co-alignment and
+
+2
+
+Figure 1. The Dragonfly Telephoto Array (Mount 1), showing the 24 Canon 400 mm f /2.8 telephoto lenses with the DragonflyPol polarizer and bandpass filter assemblies installed. Image credit: DragonflyPol Collaboration.
+
+simultaneous imaging. The lenses incorporate nano-fabricated sub-wavelength anti-reflection coatings that suppress
+internal light scattering by an order of magnitude relative to conventional reflecting telescopes (R. G. Abraham & P. G.
+van Dokkum 2014). The reduced scattering and modular design give Dragonfly exceptional sensitivity to low surface
+brightness structures over a ∼5 deg2 field of view. Since its inception, Dragonfly has produced a series of discoveries
+in the low surface brightness universe (e.g., Y. Cohen et al. 2018; P. van Dokkum et al. 2019, 2022; Q. Liu et al. 2023).
+Dragonfly’s architecture offers several properties that are directly advantageous for wide-field optical polarimetry.
+Its modular design allows individual lens–detector units to be equipped with different polarizer orientations, enabling
+simultaneous measurement of multiple linear polarization states across the full field of view in a single exposure. This
+capability is diﬀicult to achieve with conventional single-aperture telescopes. The all-refractive optical design is particularly well-suited to polarimetry, as refractive optics with nano-fabricated anti-reflection coatings suppress scattering
+and minimize such systematics. In contrast, internal reflections in mirror-based telescopes introduce instrumental
+polarization that must be carefully characterized and corrected. Furthermore, Dragonfly’s exceptional sensitivity to
+low surface brightness emission means that the polarized signal from faint diffuse structures (such as Galactic cirrus)
+can be detected in practical integration times. The use of commercial telephoto lenses also simplifies polarimetric
+integration, as the drop-in rear filter slot of each lens provides a natural, repeatable mounting point for polarizer
+and filter assemblies without modification to the optical path. Together, these properties make Dragonfly a natural
+platform for a wide-field polarimetric facility, motivating the development of DragonflyPol, described in this paper.
+Several optical polarimetry facilities and surveys have recently advanced the field, including RoboPol (D. Blinov et al.
+2023), DIPOL-2 (V. Piirola et al. 2014), and the ongoing PASIPHAE survey (K. Tassis et al. 2018), which aims to map
+interstellar magnetic fields at high Galactic latitudes using a 1.3 m telescope with a 30′ ×30′ field of view. DragonflyPol
+and PASIPHAE complement each other: PASIPHAE targets high stellar density fields, while DragonflyPol’s large
+field of view (roughly 20 times larger than PASIPHAE) and exceptional surface brightness sensitivity make it uniquely
+suited to diffuse, low surface brightness structures such as Galactic cirrus and extended molecular cloud envelopes
+where individual stars are sparse. These diffuse environments are precisely where some of the most pressing open
+questions lie: how magnetic fields are organized in the low-density interstellar medium, how dust grain alignment
+varies across different physical conditions, and how large-scale Galactic magnetic structure connects to the small-scale
+
+3
+fields threading star-forming regions. No existing wide-field optical polarimetric facility combines Dragonfly’s field of
+view, surface brightness depth, and simultaneous multi-angle polarization measurement capability.
+DragonflyPol implements wide-field optical linear polarimetry on the Dragonfly Telephoto Array by equipping each
+lens–detector unit with a fixed linear polarizer and bandpass filter assembly. Polarizers are assigned orientations
+of 0◦ , 45◦ , 90◦ , and 135◦ in repeating groups across the array, enabling simultaneous measurement of all linear
+Stokes parameters in a single exposure. The groups are assigned for calibration purposes. The instrument achieved
+first light in September 2025, and commissioning observations are described in this paper. Calibration methodology,
+polarimetric performance characterization, and standard star results are presented in a companion paper (Tahani et al.
+in prep). This paper is organized as follows. Section 2 describes the science goals motivating DragonflyPol. Section 3
+provides an overview of the Dragonfly Telephoto Array architecture. Section 4 presents the laboratory characterization
+program used to select polarizer components and determine their transmission axis orientations. Section 5 describes
+the instrument configuration and on-sky commissioning observations. Section 6 summarizes our conclusions.
+2. SCIENCE GOALS
+
+DragonflyPol’s wide field of view, exceptional surface brightness sensitivity, and simultaneous multi-angle polarization
+capability enable a broad range of science goals, described below. Several of these goals, that have been diﬀicult to
+access with existing facilities, are uniquely addressed by DragonflyPol’s combination of field coverage and depth.
+Magnetic Field Mapping and Tomography —Starlight polarization by magnetically aligned dust grains traces the planeof-sky component of interstellar magnetic fields along the line of sight. When combined with stellar distances from
+Gaia, these measurements enable tomographic reconstruction of the three-dimensional magnetic field geometry of the
+interstellar medium (e.g., G. V. Panopoulou et al. 2019; Y. Doi et al. 2021; V. Pelgrims et al. 2024). To date, complete
+3D magnetic field vectors in 3D have been reconstructed in only two interstellar regions, incorporating both line-ofsight (M. Tahani et al. 2018) and plane-of-sky magnetic field observations and providing 6D magnetic maps of the
+Orion A and Perseus molecular clouds (M. Tahani et al. 2022a,b). These 6D studies demonstrate that magnetic fields
+preserve the imprint of large-scale Galactic fields and trace cloud formation and evolution, as previously suggested in
+line-of-sight field studies of J. L. Han & J. S. Zhang (2007). DragonflyPol’s wide field of view and surface brightness
+sensitivity make it well suited to extend such analyses to additional regions, particularly diffuse environments and
+cloud envelopes where stellar densities are lower and existing narrow-field instruments are less effective.
+Cloud and Star Formation —Magnetic fields play a significant role in the star-formation process. The orientation of
+magnetic fields with respect to density structures has important consequences for star formation (K. Pattle et al.
+2023). For example, magnetic fields parallel to an elongated filamentary cloud would resist the radial collapse of the
+cloud, while perpendicular fields would resist its azimuthal collapse. Understanding the roles that magnetic fields
+play in this process necessitates mapping both the 3D clouds and their 3D magnetic field vectors (M. Tahani 2022).
+Additionally, understanding how magnetic fields guide the transition from diffuse to dense gas is central to theories
+of molecular cloud formation and stellar birth. Previous multi-wavelength polarimetric studies of the Orion A and
+Perseus molecular clouds have revealed how large-scale magnetic field geometry connects to small-scale star-forming
+structures (M. Tahani et al. 2022a,b) and how these field morphologies reveal cloud formation history. However,
+extending these analyses to a broader sample of clouds and environments requires wide-field coverage with high
+surface brightness sensitivity. These polarimetry studies enabled the identification of superbubbles and bubbles that
+had shaped the magnetic field geometry and influenced cloud formation. In the case of the Perseus molecular cloud,
+the reconstructed field lines revealed a structure invisible in total-intensity emission that had shaped the field and
+influenced the cloud’s formation history; the presence of this structure was subsequently confirmed by independent
+kinematic observations (M. Kounkel et al. 2022). DragonflyPol’s large field of view enables simultaneous mapping of
+magnetic field morphologies across filaments, bubbles, shells, and their surrounding diffuse envelopes (M. Tahani et al.
+2026), connecting the fields threading star-forming regions to the larger Galactic environment and identifying their
+formation and evolution history.
+New Technique for Probing Magnetic Fields —Beyond established polarimetric methods, DragonflyPol’s linear polarimetry
+capability and wide-field coverage provide a platform for developing and testing new observational techniques for
+probing magnetic field structure in diffuse environments.
+
+4
+Dust Alignment and Properties —Dust grain alignment by magnetic fields is the physical mechanism underlying starlight
+polarization. However, the details of alignment eﬀiciency, grain composition, and size distribution across different interstellar environments are not fully understood. One of DragonflyPol’s goals is to compare optical polarization
+fractions in the r′ -band with far-infrared polarization measurements from other facilities such as Planck or the James
+Clerk Maxwell Telescope (where available; M. Tahani et al. 2023). Exploring this ratio enables us to probe how dust
+alignment eﬀiciency varies between the diffuse and dense regimes traced by optical extinction and thermal emission
+respectively (B. S. Hensley & B. T. Draine 2023). These comparisons provide constraints on grain alignment mechanisms and dust properties across diverse physical conditions, from dense molecular cloud cores to diffuse high-latitude
+cirrus. In the longer term, multi-band optical polarimetry with DragonflyPol-like configurations will enable direct
+study of the wavelength dependence of polarization eﬀiciency described by the Serkowski relation (K. Serkowski et al.
+1975). Observing polarization at multiple bands (such as g ′ and r′ ) and exploring Serkowski relation enable us to put
+further constraints on grain size and composition, and will further complement submillimeter polarimetry to build a
+more complete multi-wavelength picture of dust grain properties (B. S. Hensley & B. T. Draine 2023).
+Cosmic Microwave Background Foregrounds —Accurate characterization of Galactic dust polarization is essential for separating primordial signals from Galactic foreground contamination in cosmic microwave background (CMB) polarization
+studies, particularly for detecting B-mode polarization from primordial gravitational waves (e.g., Planck Collaboration et al. 2020). Wide-field optical polarimetry provides tomographic information on the plane-of-sky magnetic field
+component along the line of sight, which, when combined with stellar distances from Gaia, enables mapping of the
+three-dimensional distribution of polarizing dust layers contributing to the foreground signal. This three-dimensional
+view of the foreground dust is a key missing ingredient in current CMB foreground models, which largely treat the
+polarizing medium as a single layer. DragonflyPol’s combination of wide field of view and surface brightness sensitivity
+makes it well suited to map these foreground structures in diffuse high-latitude regions where CMB experiments are
+most sensitive.
+Three-Dimensional Structure of High-Latitude Diffuse Clouds —Different studies have explored the 3D spatial structure
+of some interstellar clouds (J. E. Großschedl et al. 2018; C. Zucker et al. 2021). However, the 3D structure of diffuse,
+high-latitude clouds remains poorly constrained. Polarimetry of scattered light offers an avenue for recovering 3D
+cloud geometry, as the polarization state of scattered light encodes information about the spatial distribution of the
+scattering medium itself (M. Kishimoto 1999; A. Konstantinou et al. 2022). This approach is distinct from magnetic
+field tomography: rather than tracing field geometry along the line of sight, it uses the polarization signature of
+scattered light to reconstruct where the scattering material is distributed in three dimensions. DragonflyPol’s wide
+field of view and exceptional sensitivity to low surface brightness emission make it well suited to applying and further
+developing these techniques across extended high-latitude structures, where the large angular scales involved make
+narrow-field instruments ineﬀicient. These observations may also be combined with complementary techniques such
+as Faraday tomography (M. A. Brentjens & A. G. de Bruyn 2005; C. L. Van Eck et al. 2017) to build a more complete
+picture of both the spatial structure and physical conditions of diffuse clouds.
+Galactic Magnetic Fields and Large-Scale Structure —On scales larger than individual clouds, the large-scale structure of
+the Galactic magnetic field and its relationship to the individual clouds remain incompletely mapped, particularly in
+the optical. Additionally, the magnetic field morphology of the Milky Way’s halo has puzzled different communities
+for decades (J. M. Dickey et al. 2022). Stellar polarimetry with DragonflyPol, with its ∼5 deg2 field of view, enables
+eﬀicient mapping of extended Galactic structures that are inaccessible to narrow-field polarimeters, including loops,
+shells, superbubbles, and high-latitude filaments. These observations will reveal how large-scale Galactic magnetic
+fields thread through and shape the diffuse ISM, and how field geometry at large scales connects to the smaller-scale
+fields threading molecular and diffuse clouds. Combined with existing radio and far-infrared datasets, DragonflyPol
+observations will contribute to building a coherent multi-wavelength picture of Galactic magnetic field structure across
+a wide range of physical scales.
+Optical Polarimetry of Nearby Galaxies —The polarization of light from nearby galaxies encodes information about both
+the magnetic field structure and dust grain properties within those systems. Optical polarimetry traces starlight
+polarization by aligned dust grains within the galaxy itself, as well as scattered light from dust in the interstellar
+medium, probing the plane-of-sky magnetic field geometry and dust distribution across the galactic disk and halo.
+DragonflyPol’s ∼ 2.8′′ pixel scale and wide field of view make it well suited to mapping polarization across the
+
+5
+Table 1. Bandpass filters used in laboratory measurements and commissioning (H. Akitaya et al. 2024).
+Filter
+SDSS/Sloan r′
+SDSS/Sloan g ′
+
+Effective wavelength (nm)
+636.4
+476.4
+
+Wavelength range (nm)
+571–703
+395–559
+
+Manufacturer
+Baader
+Baader
+
+extended disks and halos of nearby galaxies, where low surface brightness emission dominates. These observations
+will complement radio polarimetry and far-infrared dust emission maps of nearby systems, contributing to a multiwavelength picture of magnetic field structure and dust properties in external galaxies (J. P. Wisniewski et al. 2007).
+Transients and Serendipitous Discoveries —Polarimetry of transient sources, including supernovae, gamma-ray burst
+afterglows, and other variable phenomena, can reveal the geometry of the emitting region and the structure of surrounding circumstellar material. While transient science is not a primary focus of DragonflyPol, the instrument’s wide
+field of view makes serendipitous detection of polarized transients possible during routine survey operations. More
+broadly, wide-field polarimetric surveys of previously unexplored regions of parameter space have historically led to
+unexpected discoveries, and DragonflyPol’s unique combination of field coverage and surface brightness sensitivity may
+reveal polarized structures with no counterpart in existing total-intensity or narrow-field polarimetric surveys.
+Axion-Photon Coupling and Fundamental Physics —Axion-like particles are predicted to couple to photons, resulting in
+oscillation and rotation of the linear polarization angle of linearly-polarized light (T. Fujita et al. 2019; Y. Oshima et al.
+2023). Detection of this effect requires very high-precision polarization angle measurements, as the predicted signal
+is very subtle. DragonflyPol’s image stacking capability may offer a pathway toward achieving the polarization angle
+precision required for this study. While current commissioning results establish DragonflyPol as a stable platform
+for linear polarimetry, achieving the precision necessary for axion-photon coupling searches will require continued
+refinement of calibration procedures and systematic error characterization, and remains a longer-term goal of the
+project.
+3. DRAGONFLY OVERVIEW
+
+Each of the 48 units comprising the Dragonfly Telephoto Array is a completely independent system with its own
+optical path, detector, and control electronics. As shown in Figure 2, at the heart of each unit is a Canon 400 mm
+f/2.8 telephoto lens, chosen for its nano-fabricated sub-wavelength anti-reflection coatings that minimize internal light
+scattering. Focusing is handled by Birger Engineering adapters, which connect the Canon lens to the camera and
+provide the hardware interface for remote focus commands (R. G. Abraham & P. G. van Dokkum 2014; S. Danieli
+et al. 2020). The primary detectors are SBIG CCD cameras. Power is distributed to all components through DIN-rail
+mounted DC power supplies. Each unit is controlled by an Intel Compute Stick microcomputer, which sends focus
+commands to the lens through a Birger focuser module and exposure commands to the detectors through USB. This
+modular, self-contained architecture means that each unit can be independently configured, operated, and if necessary
+reconfigured without affecting the rest of the array. This independent, scalable property is particularly advantageous
+for polarimetric operations.
+Each lens unit accommodates a drop-in filter holder at the rear of the lens, as shown in the top-right panel of
+Figure 2. In this work we designed a system enabling a single filter holder to serve as the mounting structure for both
+the bandpass filter and polarizer. The Dragonfly team has previously used Baader SDSS/Sloan g ′ and r′ bandpass filters
+for imaging operations (S. Danieli et al. 2020). The laboratory characterization of these filters alongside candidate
+polarizers is described in Section 4.
+4. LABORATORY CHARACTERIZATION
+
+4.1. Overview, Goals, and Common Laboratory Setup
+During laboratory characterization we primarily focused on (i) selecting a compatible high-performance polarizer and
+bandpass filter combination for deployment on the array; (ii) measuring contrast ratios and transmission eﬀiciencies
+of candidate polarizers; (iii) designing a feasible mounting and deployment strategy given overall system constraints;
+and (iv) determining and marking the transmission axis of each polarizer with repeatable sub-degree precision. To
+achieve these goals, measurements were conducted in three distinct experimental phases. These phases had different
+optical components present in the beam path and are described in Sections 4.2, 4.3.1, and 4.4, respectively.
+
+6
+
+Figure 2. DragonflyPol component integration. Top: Canon 400 mm f/2.8 lens, focus electronics, CCD camera, and control
+microcomputer. Note that the lab-based testing used different electronics (focuser and powerbox) from the on-sky array, but
+the functionality and command structure is identical. Bottom: Drop-in filter holder containing a bandpass filter and polarizer,
+and installation at the rear filter slot of the lens.
+
+Several components were common to all three phases. The illumination source was a Thorlabs Quartz TungstenHalogen lamp (QTH10). The transmission axis orientation of one of the polarizers used in the setup was controlled
+using a Thorlabs Heavy Duty Rotation Stage (HDR50), driven by a Thorlabs two-channel benchtop stepper motor
+controller (BSC202). We controlled the motor controller via the Kinesis software interface. A Thorlabs two-axis
+microscopy joystick console (MJC2) was available for manual polarizer angle adjustment. A Thorlabs iris was placed
+in the beam path to reduce stray light and improve measurement repeatability. The specific detector, optical path
+components, and data acquisition method varied by phase and are described in the relevant subsections.
+4.2. Feasibility Tests: Full System Configuration
+As an initial feasibility test, measurements were carried out with the full optical system (one optical path unit among
+the 48 units) in place: a Canon 400 mm f/2.8 telephoto lens, a drop-in filter holder containing a candidate polarizer,
+
+7
+
+Figure 3. The polarizer was divided into four quadrants to examine position-dependent polarization effects. The illumination
+spot was translated to each quadrant to test whether the polarization axis orientation and contrast ratio varied across the
+aperture of the polarizer.
+
+a Birger Engineering focuser adapter, and an SBIG camera as the detector. In this setup the bandpass filter was
+located in front of the illumination source along with another polarizer to produce r′ -band, linearly polarized light.
+Image acquisition was performed using both MaxIm DL software and FITS image recording through the Raspberry
+Pi. In this configuration, contrast ratios were measured by comparing median pixel counts in images taken with two
+polarizers in parallel and orthogonal orientations. The goal in these initial measurements was to examine the feasibility
+of DragonflyPol, and confining the beam very well was not a priority. These measurements yielded contrast ratios
+significantly exceeding 100, demonstrating that even with standard commercial polarizers, the system could achieve
+polarization measurements with better than 1% precision. Additionally, the following tests were performed:
+• The lens was swapped between units to confirm that the lens itself did not alter the polarization axis orientation
+or contrast ratio.
+• Careful pressure was applied on the lens to examine the effect of flexure on polarization.
+• The illumination spot was moved/translated from the center to the four edges of the lens aperture, as shown in
+Figure 3, to test for position-dependent polarization effects.
+• The polarizer and bandpass filter were inclined by ∼ 10◦ with respect to the normal of the incident beam to
+simulate the maximum angle of incidence expected in the deployed configuration. By tilting the Canon polarizers
+from normal incidence we verified that the polarization contrast was not degraded significantly within the imaging
+cone angle of the Canon lenses at that location of the filter holder.
+These results established the feasibility of the DragonflyPol concept and motivated the more systematic characterization
+described in the following sections.
+4.3. Polarizer Selection
+4.3.1. Lens and Photodiode Configuration
+In the second experimental phase, the camera was removed and replaced by a large-area Si photodiode and transimpedance amplifier (Hamamatsu 8746-01) placed at the focal plane of the Canon lens as shown in Figure 4. This
+configuration allowed more controlled and quantitative measurements of contrast ratio and transmission eﬀiciency for
+each candidate polarizer, with the photodiode providing a direct, stable readout of transmitted intensity without the
+additional complexity of image acquisition and reduction.
+Four commercially available polarizer types were evaluated: Canon (circular polarizing filter), Edmund (linear),
+Hoya (linear), and Tiffen (linear). An additional (significantly cheaper) polarizer sourced online was tested briefly but
+discarded immediately due to poor optical quality. Although the Canon filter is technically a circular polarizing filter,
+it consists of a linear polarizer followed by a quarter-wave plate, as one polarizing unit. In our measurements it was
+used as a linear polarizer by orienting it such that the incident light passes through its linear polarizer component first,
+before its wave plate. Contrast ratios were measured by rotating the second polarizer between parallel and orthogonal
+orientations relative to the first and recording the photodiode output at each position. Canon and Edmund polarizers
+were tested in combination with both the Sloan r′ and g ′ bandpass filters, as they both showed higher performance
+compared to Tiffen and Hoya. Transmission eﬀiciency was measured as the ratio of the photodiode signal with a single
+polarizer in the beam to the signal with no polarizer present.
+
+8
+
+Lens and Photodiode Configuration
+rotation
+
+QTH10
+
+Bandpass
+
+Polarizer 1
+
+Canon 400mm
+
+Polarizer 2
+
+Photodiode
+
+Light source
+
+filter (Sloan r )
+
+(rotating)
+
+f/2.8 lens
+
+(fixed, filter holder)
+
+(focal point)
+
+0
+
+Figure 4. Schematic of the laboratory setup used in the lens and photodiode configuration (Section 4.3.1). The beam from the
+QTH10 light source passes through a Sloan r′ bandpass filter, a rotating polarizer, the Canon 400 mm f /2.8 lens, and a fixed
+polarizer installed in the drop-in filter holder. The Hamamatsu photodiode is placed at the focal plane of the lens.
+
+Representative results are as follows. Edmund–Edmund polarizer pairs achieved contrast ratios typically ≳ 2 × 103
+(noise-subtracted) depending on iris setting and geometry. Canon–Canon and Canon–Edmund combinations achieved
+contrast ratios of a few×103 (noise-subtracted), typically around 3 × 103 . While Tiffen polarizers exhibited high
+apparent transmission in some configurations, they showed poor contrast ratios (order ∼few) and were not considered
+further. Hoya polarizers had a higher contrast ratio (≳ 1000) compared to Tiffen but lower compared to Edmund and
+Canon.
+Transmission eﬀiciency measurements had a setup shown in the left panel of Figure 5. Canon polarizers achieved
+approximately 33% transmission in the r′ band with the Baader SLOAN r′ bandpass filter in place. We note that
+insertion of the bandpass filter reduces overall throughput from 43% in no-filter configuration to 33% when we add
+the bandpass filter, emphasizing the importance of characterizing the polarizers with bandpass filters in place.
+To test for position-dependent polarization effects, the illumination spot was translated to the four quadrants of
+the lens aperture (Figure 3). Contrast ratio and polarization axis orientation were found to be consistent across the
+aperture within measurement uncertainties. For the photodection amplifier different transimpedance resistance values
+were used depending on the measurement goal. For contrast ratio measurements, a high resistance (10 MΩ) was used to
+maximize sensitivity to the minimum signal in the crossed-polarizer state. For transmission eﬀiciency measurements,
+a lower resistance (1 MΩ) was used to prevent saturation. Unless otherwise noted, a single resistance value was
+maintained throughout a given measurement sequence. Canon circular polarizers were selected for deployment on
+DragonflyPol based on their combination of high contrast ratio, best transmission eﬀiciency across both bandpass
+filters, consistent performance across units, and straightforward mechanical integration into the drop-in filter holders
+of the Canon lenses.
+Figure 6 shows the measured photodiode response as a function of polarizer rotation angle for a representative Canon
+polarizer pair, confirming clean Malus’s law behavior across the full rotation range. In this setup, one Canon polarizer
+was placed in front of the lens and rotated through 180◦ , and the second was positioned in the drop-in filter holder of
+the lens.
+4.3.2. Polarizer and Photodiode Configuration (No Lens)
+In the third experimental phase, the Canon lens was removed from the setup to obtain cleaner, more controlled
+quantitative measurements of polarizer performance without potential contributions from the lens optics. In this
+configuration the beam path consisted of the QTH10 illumination source, iris, polarizer and bandpass filter assemblies,
+and the Hamamatsu photodiode directly, with no intervening optics. Based on the results of the previous phase, which
+demonstrated that Canon polarizers with the Sloan r′ bandpass filter provided the better contrast ratio compared to
+g ′ bandpass filter, all subsequent measurements and the final deployed configuration use the r′ bandpass filter.
+Contrast ratio measurements in this configuration confirmed and refined the results obtained in Section 4.3.1.
+Edmund–Edmund polarizer pairs achieved contrast ratios typically ≳ 103 (noise-subtracted) in optimized configurations. Canon–Canon and Canon–Edmund combinations achieved slightly higher contrast ratios. Transmission
+eﬀiciency measurements with the Sloan r′ bandpass filter confirmed Canon polarizers as the best-performing option, achieving approximately 33% single-polarizer transmission. Without the bandpass filter, transmission eﬀiciencies
+spanned ∼50–70% depending on polarizer type and geometry.
+
+9
+
+Figure 5. Laboratory setup for polarimetric characterization. Left: Setup used for transmission eﬀiciency measurements,
+showing the illumination source, polarizer, and bandpass filter assembly with photodiode readout. Right: Setup with the Canon
+400 mm f/2.8 lens in place. An additional beam-confining wall and iris were typically included in the configuration to reduce
+stray light, though not shown here.
+
+Measured
+Malus's law fit
+
+Average counts (×103)
+
+70
+60
+50
+40
+30
+20
+10
+0
+
+0
+
+25
+
+50
+
+75
+
+100
+
+125
+
+Polarizer angle ( )
+
+150
+
+175
+
+Figure 6. Measured photodiode response as a function of polarizer rotation angle for a Canon circular polarizer pair in the lens
+and photodiode configuration, with the Sloan r′ bandpass filter in place. The blue points show the measured average counts
+within the aperture at each rotation angle, and the solid curve shows the best-fit Malus’s law model.
+
+10
+
+Figure 7. Polarization axis scribing station developed for DragonflyPol. The setup enables repeatable transmission axis
+marking at better than 0.2◦ precision. Components include the QTH10 illumination source, Sloan r′ bandpass filter, pinhole,
+polarizing beamsplitter cube (reference axis), motorized rotation stage, and Hamamatsu photodiode readout.
+
+The illumination source was found to carry a small intrinsic linear polarization at the ∼1–2% level. This was
+identified by comparing measurements with and without a polarizer in the beam and is accounted for in calibration.
+Within measurement precision, no significant instrumental polarization contributions were identified from the tested
+bandpass filters or mechanical mounts.
+These measurements confirmed Canon circular polarizers in combination with the Sloan r′ bandpass filter as the
+optimal configuration for DragonflyPol deployment, providing the best combination of contrast ratio, transmission
+eﬀiciency, and consistency across units.
+4.4. Polarization Axis Marking
+Following the selection of Canon circular polarizers for deployment, a dedicated scribing station was developed to
+determine and mark the transmission axis of each polarizer unit with sub-degree repeatability (Figures 7 and 8).
+Precise knowledge of the transmission axis orientation of each polarizer is essential for accurate Stokes parameter
+reconstruction.
+The scribing station consists of the QTH10 illumination source, a Sloan r′ bandpass filter, a pinhole to define the
+beam, a polarizing beamsplitter cube serving as the reference axis, a motorized rotation stage, and the Hamamatsu
+photodiode readout. Several reference polarizer configurations were evaluated for establishing the reference axis,
+including a nanoparticle polarizer with a known transmission axis; the polarizing beamsplitter cube was found to
+provide the best combination of alignment precision and repeatability and was adopted as the reference standard for
+all subsequent scribing measurements.
+The transmission axis of each polarizer was determined by rotating it on the motorized stage and recording the
+photodiode output as a function of angle. The resulting intensity curve was fitted to locate the extrema, from which
+the transmission axis orientation was determined. A dedicated alignment setup was then used to mark the transmission
+axis orientation on the filter holder and align the polarizer with it. The bandpass filter and polarizer were subsequently
+fixed together within the filter holder unit using 3 to 4 dots of UV-cured adhesive (JBweld) applied at the sides, creating
+an integrated filter+polarizer assembly ready for installation. A machine-shopped protractor was used to mark the
+filter holder and align the polarizer assembly to the correct position angle during installation into the filter holder. The
+precision of the polarizer-to-filter-holder alignment is estimated to be better than 1◦ , and the scribing repeatability is
+better than 0.2◦ .
+
+11
+
+Scribing Station Configuration
+rotation
+
+QTH10
+
+Bandpass
+
+Light source
+
+filter (Sloan r 0)
+
+Pinhole
+
+PBS Cube
+
+Canon pol.
+
+(fixed reference)
+
+(rotating)
+
+Photodiode
+
+Polarizing beamsplitter cube
+(known transmission axis)
+
+Figure 8. Schematic of the polarization axis scribing station (Section 4.4). The beam from the QTH10 light source passes
+through a Sloan r′ bandpass filter, a pinhole, and a polarizing beamsplitter cube (PBS) serving as the fixed reference axis. The
+Canon circular polarizer under characterization is placed after the cube and rotated on the motorized stage; the photodiode
+records the transmitted intensity as a function of rotation angle, from which the transmission axis is determined.
+
+1600
+1400
+1000
+800
+600
+400
+200
+0
+
+Noise-subtracted CR
+Mean = 1228
+±1 = 104
+P01
+P02
+P03
+P04
+P05
+P06
+P07
+P08
+P09
+P10
+P11
+P12
+P13
+P14
+P15
+P16
+P17
+P18
+P19
+P20
+P21
+P22
+P23
+P24
+P25
+P26
+P27
+P28
+P29
+P30
+P31
+P32
+P33
+P34
+P35
+P36
+P37
+P38
+P39
+P40
+P41
+P42
+P43
+P44
+
+Contrast ratio
+
+1200
+
+Polarizer unit
+
+Figure 9. Noise-subtracted contrast ratios (blue) and raw contrast ratios (gray) for all 44 Canon circular polarizers measured
+during the scribing characterization session on 2025 August 14. The dashed line shows the mean noise-subtracted contrast
+ratio of 1228, and the shaded band indicates the ±1σ range (σ = 104). All units exceed a contrast ratio of 800, well above
+the minimum threshold established in feasibility tests. Measurements were performed using the Sloan r′ bandpass filter and a
+10 MΩ transimpedance resistance.
+
+Table 3 and Figure 9 present the scribing characterization results for all 44 Canon circular polarizers (P01–P44),
+measured on 2025 August 14. For each polarizer, the transmission axis was first located by finding the intensity
+minimum on the motorized rotation stage and zeroing the stage at that position. Voltages were then recorded at 0◦ ,
+45◦ , 90◦ , and 135◦ to verify Malus’s law behavior and confirm the axis determination. The measured V45 /V90 ratio
+is 0.498 ± 0.004 across all units, consistent with ideal Malus’s law behavior to within measurement precision. Raw
+contrast ratios range from 787 to 1158 with a mean of 1029 ± 73; noise-subtracted contrast ratios range from 891 to
+1411 with a mean of 1228 ± 104. All units exceed the minimum contrast ratio of 100:1 established in the feasibility
+tests (Section 4.2) by more than an order of magnitude. The scribing repeatability is better than 0.2◦ as described
+above.
+
+12
+
+2
+0.0
+1
+
+4
+90.0
+
+r
+P34
+
+1
+
+r
+P39
+
+9
+135.0
+1
+
+r
+P42
+
+14
+0.0
+4
+
+r
+P24
+
+19
+45.0
+4
+
+r
+P13
+
+7
+45.0
+1
+
+r
+P15
+
+12
+0.0
+3
+
+r
+P02
+
+17
+90.0
+4
+
+r
+P33
+
+22
+135.0
+4
+
+r
+P43
+
+Dragonfly 1
+
+Dragonfly 2
+
+1
+0.0
+
+1
+0.0
+
+11
+
+r
+P30
+
+5
+0.0
+2
+
+r
+P3
+
+10
+45.0
+3
+
+r
+P28
+
+15
+135.0
+3
+
+r
+P19
+
+20
+0.0
+5
+
+r
+P44
+
+24
+None
+None
+
+3
+45.0
+2
+
+r
+P23
+
+8
+135.0
+2
+
+r
+P41
+
+13
+90.0
+3
+
+r
+P32
+
+18
+45.0
+5
+
+r
+P22
+
+23
+135.0
+5
+
+6
+90.0
+
+4
+90.0
+
+r
+P38
+
+r
+P21
+
+2
+
+6
+
+11
+None
+
+9
+90.0
+
+r
+None
+
+r
+P18
+
+None
+
+14
+45.0
+
+r
+P35
+
+r
+P14
+
+19
+0.0
+
+r
+P16
+
+r
+P37
+
+r
+P10
+
+7
+135.0
+
+9
+
+21
+90.0
+5
+
+6
+
+8
+
+16
+90.0
+11
+
+2
+45.0
+
+8
+
+r
+P40
+
+r
+None
+
+8
+
+r
+P04
+
+12
+0.0
+9
+
+r
+P27
+
+17
+90.0
+9
+
+r
+P26
+
+22
+None
+None
+r
+None
+
+6
+
+r
+P01
+
+5
+None
+None
+r
+None
+
+10
+90.0
+7
+
+r
+P31
+
+15
+135.0
+9
+
+r
+P06
+
+20
+45.0
+10
+
+r
+P12
+
+24
+45.0
+8
+
+3
+135.0
+6
+
+r
+P05
+
+8
+45.0
+7
+
+r
+P20
+
+13
+45.0
+11
+
+r
+P09
+
+18
+0.0
+10
+
+r
+P25
+
+23
+90.0
+10
+
+6
+0.0
+7
+
+r
+P36
+
+11
+135.0
+7
+
+r
+P08
+
+16
+135.0
+11
+
+r
+P29
+
+21
+135.0
+10
+
+r
+P07
+
+r
+P17
+
+r
+P11
+
+Figure 10. Polarizer angle configuration for Mount 1 (left, Dragonfly 101–124) and Mount 2 (right, Dragonfly 201–224). Each
+circle represents one lens–detector unit. For each polarized unit, the bold number indicates the assigned polarization position
+angle (0◦ , 45◦ , 90◦ , or 135◦ ), the italic number indicates the Stokes group assignment (1–11), and the small text indicates the
+bandpass filter and polarizer assigned number. Units without a polarizer (Dragonfly 111, 124, 205, 222) are indicated by “None”.
+Group 11 is the only group spanning both mounts.
+5. INSTRUMENT CONFIGURATION, DESIGN, AND ON-SKY COMMISSIONING
+
+5.1. Opto-mechanical Integration and Polarizer Angle Configuration
+The DragonflyPol polarimetric capability is implemented by installing a polarizer and bandpass filter assembly into
+the drop-in filter holder at the rear of each Canon lens. Each assembly consists of a Canon polarizer and a Baader
+Sloan r′ bandpass filter, fixed together within the filter holder, as described in Section 4.4. This approach requires
+no modification to the Canon lens or camera, and the assemblies can be installed or removed independently on each
+unit without affecting the rest of the array. Of the 48 lens–detector units, 44 are equipped with polarizer assemblies.
+The remaining four units (Dragonfly 111, 124, 205, and 222) carry only an r′ bandpass filter without a polarizer,
+and serve as unpolarized reference channels for monitoring total intensity and tracking sky transparency variations
+during observations. The 44 polarized units are organized into 11 Stokes groups, each consisting of four lenses assigned
+fixed polarization position angles of 0◦ , 45◦ , 90◦ , and 135◦ respectively. Within each group, simultaneous imaging
+at all four polarization angles enables reconstruction of the linear Stokes parameters Q/I and U/I, and hence the
+polarization fraction and position angle, from a single set of exposures. Each polarization angle is represented by
+exactly 11 lenses across the full array, ensuring a balanced contribution to each Stokes parameter. Groups 1–5 are
+assigned to Mount 1 (Dragonfly 101–124) and Groups 6–10 to Mount 2 (Dragonfly 201–224). Group 11 is distributed
+across both mounts, with cameras 101 and 116 on Mount 1 and cameras 213 and 216 on Mount 2. This cross-mount
+assignment was intentional, both to satisfy the constraint that each group must contain exactly one lens at each of
+the four polarization angles given the physical distribution of available lens positions, and to provide an independent
+cross-check of the relative calibration between the two mounts. The polarizer angle configuration for both mounts is
+shown in Figure 10.
+5.2. On-Sky Commissioning
+Commissioning observations were carried out following integration of the polarizer+filter assemblies on the telescope. The primary goals were to validate (i) camera-to-camera throughput stability across the array, (ii) internal
+
+13
+
+2025-09-12 morning
+
+1e6
+
+PA=0
+PA=90
+PA=45
+PA=135
+
+1.4
+1.2
+
+7
+
+6
+
+6
+
+5
+
+5
+count [ADU]
+
+7
+
+0.4
+
+2
+
+2
+
+0.2
+
+1
+
+1
+
+0.8
+
+4
+
+0.6
+
+0.0
+
+4
+
+3
+
+2
+
+4
+
+6
+group #
+
+8
+
+10
+
+0
+
+2026-02-09 morning
+
+1e5
+
+count [ADU]
+
+count [ADU]
+
+1.0
+
+2026-02-08 morning
+
+1e5
+
+3
+
+2
+
+4
+
+6
+group #
+
+8
+
+10
+
+0
+
+2
+
+4
+
+6
+group #
+
+8
+
+10
+
+Figure 11. Total counts in twilight flat fields across the array, grouped by polarization angle (0◦ , 45◦ , 90◦ , 135◦ ). Signal levels
+are broadly stable across units sharing the same polarization orientation. Occasional missing points correspond to dropped
+frames; a temporary outlier was traced to a momentary malfunction and re-tested subsequently.
+
+consistency across polarization-angle groups, and (iii) successful measurement of a strong, predictable polarization
+signal from the twilight sky, specifically the linear polarization arising from Rayleigh scattering, whose degree and
+position angle can be calculated from the observing geometry and compared directly to the measured values. Twilight
+flat fields were obtained on three epochs (2025 September 12, 2026 February 8, and 2026 February 9) to evaluate
+detector and throughput stability across the array. Figure 11 shows the total counts in twilight flat fields grouped
+by polarization angle for each epoch. The signal levels are broadly stable across units sharing the same polarization
+orientation, confirming consistent throughput across the polarized lenses. Occasional missing points correspond to
+dropped frames or temporary malfunctions that were subsequently re-tested. The systematic difference in signal level
+between polarization-angle groups is the expected polarimetric response of the strongly polarized twilight sky: lenses
+whose transmission axes are aligned with the dominant sky polarization direction record the highest counts, while
+those orthogonal to it record the lowest. The uniformity of signal within each group is the diagnostic of instrumental
+throughput stability.
+The twilight sky provides a strong, predictable linear polarization signal arising from Rayleigh scattering of sunlight
+in the atmosphere, making it well suited for end-to-end validation of the polarimetric system. Table 2 summarizes
+the measured Stokes parameters, polarization degree, and position angles for all three epochs, alongside the expected
+position angles computed from the observing geometry. The measured position angles agree with the expected values
+to within ∆θ ≤ 1.6◦ across all three epochs, confirming accurate polarimetric response of the system. The measured
+polarization degrees range from 0.62 to 0.72, consistent with prior twilight-sky polarization measurements at similar
+Sun–target separation angles (T. W. Cronin et al. 2005). A full treatment of the polarimetric calibration performance
+is presented in the companion calibration paper (Tahani et al. in prep.).
+6. DISCUSSION AND CONCLUSIONS
+
+We have presented DragonflyPol, a wide-field optical linear polarimetry capability implemented on the Dragonfly
+Telephoto Array. DragonflyPol leverages Dragonfly’s modular, multi-lens architecture to obtain simultaneous measurements in four linear polarization orientations (0◦ , 45◦ , 90◦ , and 135◦ ) across a ∼ 5 deg 2 field of view. The polarizers are
+distributed across 44 polarized lens–detector units. The remaining four units serve as unpolarized reference channels.
+DragonflyPol commissioning demonstrates that wide-field optical linear polarimetry is achievable with the Dragonfly
+Telephoto Array using commercial components and a scalable multi-lens architecture. Laboratory characterization
+
+14
+Table 2. Representative twilight-sky polarization parameters in instrumental coordinates.
+Date (UT)
+Stokes q(=Q/I) (standard deviation)
+Stokes u(=U/I) (standard deviation)
+Polarization degree
+Polarization position angle (θobs )
+Expected position angle (θex )
+∆θ(= θex − θobs )
+Separation angle to the Sun
+Altitude of the Sun
+Separation angle to the Moon
+Altitude of the Moon
+Moon phase
+
+2025-09-12
+-0.72 (0.03)
++0.03 (0.03)
+0.72
+89.5◦
+87.9◦
+-1.6◦
+84.8◦
+-6.7◦
+31.1◦
+31.1◦
+64.4◦
+
+2026-02-08
+-0.46 (0.05)
+-0.42 (0.03)
+0.62
+111.5◦
+111.2◦
+-0.3◦
+80.8◦
+-6.8◦
+54.7◦
+54.7◦
+79.2◦
+
+2026-02-09
+-0.55 (0.04)
+-0.47 (0.04)
+0.72
+110.2◦
+110.8◦
+0.6◦
+80.9◦
+-6.7◦
+52.3◦
+52.3◦
+90.1◦
+
+confirms that Canon circular polarizers achieve noise-subtracted contrast ratios of ≈ 1000 (mean = 1228) across all
+44 deployed units, with a unit-to-unit standard deviation of 104. These polarizers establish a well-characterized and
+uniform polarimetric response across the array. The all-refractive optical design minimizes instrumental polarization
+from internal reflections. These reflections affect mirror-based telescopes and must be carefully modeled and corrected.
+The scribing procedure yields polarization axis marking repeatability better than 0.2◦ , and the protractor-based
+alignment of polarizers within filter holders achieves a position angle assignment precision of ∼ 1◦ across the array.
+On-sky commissioning confirms throughput stability across polarization groups and successful recovery of the expected
+twilight-sky Rayleigh scattering signal.
+Since first light in September 2025, DragonflyPol has undertaken an active observing program spanning a diverse
+range of science targets. Observations to date include wide-field polarimetric mapping of the Galactic cirrus clouds,
+Perseus molecular cloud, Loop I and Loop III interstellar structures, diffuse high-latitude fields, and several nearby
+galaxies including M51, M82, M101, and M27. Standard star observations (including both polarized and unpolarized
+standards) have been interleaved throughout the program to support ongoing calibration, with a particular focus on
+standard stars during the first few months of operations. Data reduction, calibration methodology, and science results
+from this program will be presented in future papers in this series.
+DragonflyPol represents a demonstration that wide-field optical polarimetry can be implemented using commercial
+components, with performance suitable for a broad range of Galactic and extragalactic science goals. The success of this
+program demonstrates a pathway for implementing novel polarimetric capabilities through modular telescope designs
+using commercial optical components. This modular approach is significantly more cost-effective than purpose-built
+polarimetric facilities and readily adaptable to other existing or future modular arrays. The instrument’s combination
+of field coverage, surface brightness sensitivity, and simultaneous multi-angle polarization measurement enables new
+wide-field optical polarimetric studies of cosmic magnetism, interstellar dust, and the diffuse interstellar medium.
+
+ACKNOWLEDGMENTS
+We gratefully acknowledge the KIPAC Innovation Grant, which made the initiation of this project possible, and the
+University of South Carolina startup fund, which supported the purchase of bandpass filters, polarizers, and filter
+holders for the full 48-unit array. HA was supported by the JSPS KAKENHI Grant-in-Aid for Scientific Research (C)
+25K07355. We are grateful for the assistance provided by Alpine Astronomy and Stanford machine shop. We thank
+the staff at New Mexico Skies Observatory for their outstanding support of this project, particularly Grady Owens.
+We dedicate a special remembrance to Eugene Malakhov, whose contributions to the success of DragonflyPol at New
+Mexico Skies were significant and whose presence is deeply missed. We acknowledge the use of Claude.ai (Anthropic)
+for manuscript refining assistance and Claude Code for programming support; all outputs were reviewed and verified
+by the authors.
+
+Facilities: New Mexico Skies Observatory.
+
+15
+APPENDIX
+
+A. POLARIZER SCRIBING CHARACTERIZATION DATA
+Table 3. Scribing characterization results for all 44 Canon circular polarizers (P01–P44), measured on 2025 August 14 using the polarization
+axis scribing station described in Section 4.4. The transmission axis of
+each polarizer was zeroed at the intensity minimum before scribing. Vmin
+is the photodiode voltage at 0◦ (transmission axis minimum), Vmax is the
+voltage at 90◦ (transmission axis maximum), and Vdark is the dark (box
+noise) voltage. Contrast ratios are computed both raw (Vmax /Vmin ) and
+noise-subtracted ((Vmax − Vdark )/(Vmin − Vdark )). All measurements use
+the Sloan r′ bandpass filter and a 10 MΩ transimpedance resistance.
+Polarizer
+P01
+P02
+P03
+P04
+P05
+P06
+P07
+P08
+P09
+P10
+P11
+P12
+P13
+P14
+P15
+P16
+P17
+P18
+P19
+P20
+P21
+P22
+P23
+P24
+P25
+P26
+P27
+P28
+P29
+P30
+P31
+P32
+P33
+P34
+P35
+
+Vmin (mV)
+9.48
+8.94
+8.30
+9.79
+9.44
+9.72
+9.47
+8.58
+9.01
+9.08
+9.33
+9.83
+8.44
+11.86
+10.60
+8.01
+8.61
+8.43
+9.36
+7.74
+8.31
+7.83
+8.98
+8.11
+8.47
+8.41
+8.54
+7.93
+7.93
+7.92
+9.04
+8.11
+8.00
+8.90
+8.72
+
+Vmax (V)
+9.027
+9.057
+9.063
+9.344
+9.035
+9.102
+9.213
+8.851
+8.914
+9.230
+9.243
+9.118
+8.922
+9.329
+9.221
+8.874
+9.086
+8.820
+9.121
+8.960
+8.912
+8.791
+8.968
+8.922
+9.033
+8.950
+9.007
+8.717
+8.872
+8.758
+9.075
+8.795
+8.688
+8.901
+8.962
+
+Vdark (mV)
+1.43
+1.43
+1.43
+1.41
+1.43
+1.43
+1.43
+1.41
+1.41
+1.41
+1.41
+1.41
+1.39
+1.39
+1.40
+1.40
+1.40
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+
+CR (raw)
+952
+1013
+1092
+954
+957
+936
+973
+1032
+989
+1017
+991
+928
+1057
+787
+870
+1108
+1055
+1046
+974
+1158
+1072
+1123
+999
+1100
+1066
+1064
+1055
+1099
+1119
+1106
+1004
+1084
+1086
+1000
+1028
+
+CR (noise-sub)
+1121
+1206
+1319
+1115
+1128
+1098
+1146
+1234
+1173
+1203
+1167
+1083
+1265
+891
+1002
+1342
+1260
+1253
+1144
+1411
+1288
+1365
+1181
+1327
+1276
+1275
+1260
+1333
+1356
+1341
+1186
+1309
+1314
+1185
+1222
+
+16
+Polarizer Vmin (mV)
+P36
+8.57
+P37
+8.97
+P38
+7.75
+P39
+8.55
+P40
+8.67
+P41
+8.00
+P42
+8.69
+P43
+8.18
+P44
+9.61
+Mean ± std:
+8.78 ± 0.80
+
+Vmax (V)
+9.008
+9.096
+8.830
+8.799
+8.796
+8.800
+8.719
+8.991
+8.971
+
+Vdark (mV)
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.39
+1.40
+1.58
+
+CR (raw)
+1051
+1014
+1139
+1029
+1015
+1100
+1003
+1099
+934
+
+CR (noise-sub)
+1254
+1200
+1388
+1229
+1208
+1331
+1194
+1326
+1117
+
+8.975 ± 0.162
+
+–
+
+1029 ± 73
+
+1228 ± 104
+
+REFERENCES
+Abraham, R. G., & van Dokkum, P. G. 2014, PASP, 126,
+55, doi: 10.1086/674875
+Akitaya, H., Morokuma, T., & Kawabata, K. S. 2024, in
+Society of Photo-Optical Instrumentation Engineers
+(SPIE) Conference Series, Vol. 13096, Ground-based and
+Airborne Instrumentation for Astronomy X, ed. J. J.
+Bryant, K. Motohara, & J. R. D. Vernet, 130963G,
+doi: 10.1117/12.3013630
+Blinov, D., Maharana, S., Bouzelou, F., et al. 2023, A&A,
+677, A144, doi: 10.1051/0004-6361/202346778
+Brentjens, M. A., & de Bruyn, A. G. 2005, A&A, 441, 1217,
+doi: 10.1051/0004-6361:20052990
+Cohen, Y., van Dokkum, P., Danieli, S., et al. 2018, ApJ,
+868, 96, doi: 10.3847/1538-4357/aae7c8
+Cronin, T. W., Warrant, E. J., & Greiner, B. 2005, in
+Society of Photo-Optical Instrumentation Engineers
+(SPIE) Conference Series, Vol. 5888, Polarization Science
+and Remote Sensing II, ed. J. A. Shaw & J. S. Tyo,
+204–211, doi: 10.1117/12.613053
+Danieli, S., Lokhorst, D., Zhang, J., et al. 2020, ApJ, 894,
+119, doi: 10.3847/1538-4357/ab88a8
+Dickey, J. M., West, J., Thomson, A. J. M., et al. 2022,
+ApJ, 940, 75, doi: 10.3847/1538-4357/ac94ce
+Doi, Y., Hasegawa, T., Bastien, P., et al. 2021, ApJ, 914,
+122, doi: 10.3847/1538-4357/abfcc5
+Fujita, T., Tazaki, R., & Toma, K. 2019, PhRvL, 122,
+191101, doi: 10.1103/PhysRevLett.122.191101
+Großschedl, J. E., Alves, J., Meingast, S., et al. 2018, A&A,
+619, A106, doi: 10.1051/0004-6361/201833901
+Han, J. L., & Zhang, J. S. 2007, A&A, 464, 609,
+doi: 10.1051/0004-6361:20065801
+Hensley, B. S., & Draine, B. T. 2023, ApJ, 948, 55,
+doi: 10.3847/1538-4357/acc4c2
+Kishimoto, M. 1999, ApJ, 518, 676, doi: 10.1086/307290
+
+Konstantinou, A., Pelgrims, V., Fuchs, F., & Tassis, K.
+2022, A&A, 663, A175,
+doi: 10.1051/0004-6361/202142580
+Kounkel, M., Deng, T., & Stassun, K. G. 2022, AJ, 164, 57,
+doi: 10.3847/1538-3881/ac7951
+Liu, Q., Abraham, R., Martin, P. G., et al. 2023, ApJ, 953,
+7, doi: 10.3847/1538-4357/acdee3
+Oshima, Y., Fujimoto, H., Kume, J., et al. 2023, PhRvD,
+108, 072005, doi: 10.1103/PhysRevD.108.072005
+Panopoulou, G. V., Tassis, K., Skalidis, R., et al. 2019,
+ApJ, 872, 56, doi: 10.3847/1538-4357/aafdb2
+Pattle, K., Fissel, L., Tahani, M., Liu, T., & Ntormousi, E.
+2023, in Astronomical Society of the Pacific Conference
+Series, Vol. 534, Protostars and Planets VII, ed.
+S. Inutsuka, Y. Aikawa, T. Muto, K. Tomida, &
+M. Tamura, 193, doi: 10.48550/arXiv.2203.11179
+Pelgrims, V., Mandarakas, N., Skalidis, R., et al. 2024,
+A&A, 684, A162, doi: 10.1051/0004-6361/202349015
+Piirola, V., Berdyugin, A., & Berdyugina, S. 2014, in
+Society of Photo-Optical Instrumentation Engineers
+(SPIE) Conference Series, Vol. 9147, Ground-based and
+Airborne Instrumentation for Astronomy V, ed. S. K.
+Ramsay, I. S. McLean, & H. Takami, 91478I,
+doi: 10.1117/12.2055923
+Planck Collaboration, Aghanim, N., Akrami, Y., et al.
+2020, A&A, 641, A6, doi: 10.1051/0004-6361/201833910
+Serkowski, K., Mathewson, D. S., & Ford, V. L. 1975, ApJ,
+196, 261, doi: 10.1086/153410
+Tahani, M. 2022, Frontiers in Astronomy and Space
+Sciences, 9, 940027, doi: 10.3389/fspas.2022.940027
+Tahani, M., Ordog, A., West, J., et al. 2026, arXiv e-prints,
+arXiv:2606.27346. https://arxiv.org/abs/2606.27346
+
+17
+Tahani, M., Plume, R., Brown, J. C., & Kainulainen, J.
+2018, A&A, 614, A100,
+doi: 10.1051/0004-6361/201732219
+Tahani, M., Glover, J., Lupypciw, W., et al. 2022a, A&A,
+660, L7, doi: 10.1051/0004-6361/202243322
+Tahani, M., Lupypciw, W., Glover, J., et al. 2022b, A&A,
+660, A97, doi: 10.1051/0004-6361/202141170
+Tahani, M., Bastien, P., Furuya, R. S., et al. 2023, ApJ,
+944, 139, doi: 10.3847/1538-4357/acac81
+
+Tassis, K., Ramaprakash, A. N., Readhead, A. C. S., et al.
+2018, arXiv e-prints, arXiv:1810.05652.
+https://arxiv.org/abs/1810.05652
+van Dokkum, P., Wasserman, A., Danieli, S., et al. 2019,
+ApJ, 880, 91, doi: 10.3847/1538-4357/ab2914
+van Dokkum, P., Shen, Z., Keim, M. A., et al. 2022,
+Nature, 605, 435, doi: 10.1038/s41586-022-04665-6
+Van Eck, C. L., Haverkorn, M., Alves, M. I. R., et al. 2017,
+A&A, 597, A98, doi: 10.1051/0004-6361/201629707
+Wisniewski, J. P., Bjorkman, K. S., Magalhães, A. M., &
+Pereyra, A. 2007, ApJ, 664, 296, doi: 10.1086/519155
+Zucker, C., Goodman, A., Alves, J., et al. 2021, ApJ, 919,
+35, doi: 10.3847/1538-4357/ac1f96
+
+

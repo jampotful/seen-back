@@ -1,0 +1,1442 @@
+Scalable semantic 3D mapping of coral reefs with deep learning
+Jonathan F. Sauder, Guilhem Banc‐Prandi, Anders Meibom, Devis Tuia (2024). Methods in Ecology and Evolution. http://arxiv.org/abs/2309.12804. doi:10.1111/2041-210x.14307. Licence: cc-by. Text from pdf.
+
+Scalable Semantic 3D Mapping of Coral Reefs
+with Deep Learning
+Jonathan Sauder,1,2,∗ Guilhem Banc-Prandi,2 Anders Meibom2,3 , Devis Tuia1
+1 Environmental Computational Science and Earth Observation Laboratory, École Polytechnique Fédérale de Lausanne, CH-1950 Lausanne, Switzerland
+
+arXiv:2309.12804v1 [cs.CV] 22 Sep 2023
+
+2 Laboratory for Biological Geochemistry, École Polytechnique Fédérale de Lausanne, CH-1015 Lausanne, Switzerland
+3 Center for Advanced Surface Analysis, University of Lausanne, CH-1015 Lausanne, Switzerland
+∗ To whom correspondence should be addressed; E-mail: jonathan.sauder@epfl.ch.
+
+Abstract
+
+Coral reefs are among the most diverse ecosystems on our planet, and essential to the
+livelihood of hundreds of millions of people who depend on them for food security, income
+from tourism and coastal protection. Unfortunately, most coral reefs are existentially threatened by global climate change and local anthropogenic pressures. To better understand the
+dynamics underlying deterioration of reefs, monitoring at high spatial and temporal resolution is key. However, conventional monitoring methods for quantifying coral cover and
+species abundance are limited in scale due to the extensive manual labor required. Although
+computer vision tools have been employed to aid in this process, in particular Structurefrom-Motion (SfM) photogrammetry for 3D mapping and deep neural networks for image
+segmentation, analysis of the data products creates a bottleneck, effectively limiting their
+scalability.
+This paper presents a new paradigm for mapping underwater environments from egomotion video, unifying 3D mapping systems that use machine learning to adapt to challenging conditions under water, combined with a modern approach for semantic segmentation
+of images.
+The method is exemplified on coral reefs in the northern Gulf of Aqaba, Red Sea, demonstrating high-precision 3D semantic mapping at unprecedented scale with significantly reduced required labor costs: a 100 m video transect acquired within 5 minutes of diving
+with a cheap consumer-grade camera can be fully automatically transformed into a semantic point cloud within 5 minutes. We demonstrate the spatial accuracy of our method and
+the semantic segmentation performance, and publish a large dataset of ego-motion videos
+from the northern Gulf of Aqaba, along with a dataset of video frames annotated for dense
+semantic segmentation of benthic classes.
+Our approach significantly scales up coral reef monitoring by taking a leap towards fully
+automatic analysis of video transects. The method democratizes coral reef transects by
+reducing the labor, equipment, logistics, and computing cost. This can help to inform conservation policies more efficiently. The underlying computational method of learning-based
+Structure-from-Motion has broad implications for fast low-cost mapping of underwater environments other than coral reefs.
+Keywords: Artificial Intelligence, Computer Vision, Coral Ecology, Coral Reefs, Machine Learning,
+Structure From Motion, Monocular Depth Estimation, Visual Odometry, Semantic Segmentation, 3D Vision
+1
+
+Introduction
+Coral reefs are among the most diverse ecosystems on the planet: despite covering less than 0.1% of the
+planet’s surface area, they host at least 32% of known marine species (Fisher et al., 2015). Up to half a
+billion people worldwide rely on the services provided by coral reefs, which include food security and
+tourism (NOAA, 2022). Coral reefs are at a decline worldwide Souter et al. (2021), as they locally suffer
+from detrimental human activities, and are globally threatened by increasingly warm oceans, which can
+cause corals to bleach and eventually die (Hughes et al., 2017; Knowlton and Jackson, 2008).
+Under current greenhouse gas emission trajectories (Masson-Delmotte et al., 2021), almost all warmwater coral reefs are projected to suffer significant losses of area or local extinction, even if global warming is limited to 1.5°C (Masson-Delmotte et al., 2018). Therefore, coral reefs are among the ecosystems
+that are most vulnerable to climate change. The frequency of mass bleaching events, in which vast areas
+of reefs bleach at once, will increase in the future (Dixon et al., 2022), giving many reefs little hope to
+recover in between.
+However, there is an extremely high variability in resilience to stresses between various regions,
+species, and even genotypes of the same species. Remarkably, regions with reefs that could withstand
+end-of-century ocean temperatures and acidity have been identified (Beyer et al., 2018). For example,
+in the Gulf of Aqaba in the northern Red Sea, prominent species of corals exhibit an exceptionally high
+thermal tolerance, promising to withstand sea temperature increase of more than 5°C (Fine et al., 2013;
+Voolstra et al., 2021; Krueger et al., 2017; Osman et al., 2018; Savary et al., 2021). Therefore, for corals
+in such refugia, the most imminent threats are local stresses, caused by destructive fishing practices,
+overtourism, urbanization of the coastlines, and associated local pollution. To ensure the survival of
+coral reefs until the end of the century and beyond, it is imperative to get a better understanding of
+the dynamics of how global temperature rise and local anthropogenic pollution damage coral reefs and
+evaluate if and how the reefs recover from them. This necessitates efficient methods for large scale
+monitoring at high spatial and temporal resolution.
+Conventional methods for monitoring corals are often inadequate in terms of scalability because
+they are highly labor intensive. The most universally recognized and applied method consists of line
+transects & photo quadrats (Obura et al., 2019; Prasil Delaval et al., 2021), in which photos of the seafloor
+inside a quadratic frame of a known reference size are taken along a straight transect line. Experts
+then analyze the photos, determining the presence of species and their health status, and subsequently
+extrapolate to larger areas. The results can be heavily biased by the exact locations of the quadrats,
+details in the photo quadrat protocol, and the human analysts processing the photos. This makes a direct
+comparison across studies challenging (Souter et al., 2021), with scientists essentially only agreeing on
+coarse metrics, such as the percentage of live coral cover. Most importantly, the involved manual effort of
+accurately managing and analyzing the photo quadrats, even for a relatively small transect, is very large.
+Nonetheless, transect lines can be rapidly deployed by divers and the GPS coordinates of the end-points
+
+2
+
+a) Our method
+
+b) Metashape
+
+Figure 1: Existing conventional SfM fails to produce a coherent point cloud from uncurated image
+collections such as video frames. This example shows the point clouds from a video transect in the King
+Abdullah Reef in Aqaba, Jordan. Leftmost panel: our proposed method creates a coherent point cloud for
+the whole transect in 310 seconds. Rightmost panel: Agisoft Metashape (AgiSoft, 2022) fails to capture
+a globally coherent structure and only produces a point cloud of a small section of the transect (aligning
+69 out of 1889 images) after 2 hours and 32 minutes, albeit at higher resolution than our method for
+the part successfully reconstructed. The colorful markers in the two zoomed in versions (center panels)
+show the same spatial features in the two point clouds.
+accurately determined by means of marker buoys. These logistical consideration make data acquisition
+along transects the de-facto standard for coral reef monitoring. To collect data even faster and with less
+logistical overhead than photo quadrats, video transects (Carleton and Done, 1995) can also be acquired.
+However, determining benthic cover from video is even more cumbersome for analysts due to lack of
+normalized reference objects and possible overlaps between video frames. Coral monitoring tools of the
+future absolutely must automate the labor-intensive process of analyzing transect data.
+A vast proportion of coral reefs are found in countries with restricted research resources. To date,
+coral reef monitoring efforts have heavily focused on accessible reefs in wealthy countries. One key aspect for scalable monitoring tools is that their costs in terms of required human resources to analyze the
+data and in terms of logistics of diving operations should be as low as possible. Furthermore, the required
+equipment should be available worldwide within a reasonable budget. While hyperspectral sensors can
+facilitate identification of corals (Chennu et al., 2017; Schürholz and Chennu, 2023; Asner et al., 2020),
+their price can be prohibitive for widespread use. On the other hand, the cost of underwater color cameras has dramatically fallen, which suggests computer vision tools can be applied to successfully scale
+automated semantic segmentation of living corals from color camera imagery.
+While many computer vision tools have been proposed to aid in coral reef monitoring, the scalability in terms of fully analyzed transects per time unit and money unit remains limited. The main lines
+of computer vision work can be summarized into computer-aided mapping, commonly realized with
+Structure-from-Motion (SfM) photogrammetry (Burns et al., 2015; Leon et al., 2015; Storlazzi et al.,
+2016; Alonso et al., 2019; Bongaerts et al., 2021; Raoult et al., 2017; Hopkinson et al., 2020; Urbina-
+
+3
+
+Figure 2: Example excerpts of 3D point clouds of different reef scenarios in their original RGB color,
+next to the points colorized by their predicted benthic class (top). A 100 m transect (bottom) can be
+covered by a diver in less than five minutes: the length of the created point clouds is limited only by the
+diver’s air availability and the camera’s battery capacity.
+Barreto et al., 2021), and benthic cover analysis systems, which use machine learning to recognize coral
+types and other benthic classes in images (Beijbom et al., 2012, 2015; Williams et al., 2019; Chen et al.,
+2021a; Schürholz and Chennu, 2023). However, underwater environments pose particular challenges to
+computer vision methods due to difficult lighting conditions and diffraction effects, caustics, non-linear
+attenuation and scenes with many dynamic objects. This implies that computer vision algorithms often
+only work reliably under controlled conditions. SfM mapping techniques, for example, are often brittle.
+They require carefully curated high-resolution image collections for 3D reconstruction or they will fail
+to create coherent 3D models, as shown in Figure 1. At the same time, they are limited in scale due to
+the involved computational cost: at a resolution allowing identification of individual coral colonies, the
+largest high-resolution 3D reconstructions cover 60 m in length, while taking days of computation time
+(Bongaerts et al., 2021). Similarly, systems for benthic cover classification are commonly restricted to
+photo quadrats or orthomosaics as opposed to general images of reef scenes, and are often only trained
+on datasets with sparse pixel annotations (Beijbom et al., 2012; Chen et al., 2021a; Yuval et al., 2021).
+The state-of-the-art is far from general-purpose semantic segmentation systems for coral reef scenes that
+work reliably across reef scenarios and conditions. Furthermore, it can be challenging to transfer results
+from benthic cover estimation into 3D reconstructions made with photogrammetry (Hopkinson et al.,
+2020). These limitations, and the manual labor to overcome them, have impeded computer vision tools
+from being applied under water at the same scale as in terrestrial settings.
+In this paper, we present an approach for 3D mapping and simultaneous semantic segmentation of
+coral reef areas that is significantly more scalable than existing approaches. The underlying paradigm
+of learning-based SfM photogrammetry uses deep neural networks that learn to adapt to challenging
+environments for computer vision algorithms, such as those posed under water. In particular, we show
+
+4
+
+that it is possible to create 3D maps of large areas of reef at resolution of individual coral colonies
+using a single affordable consumer-grade camera filming while being moved around the scene (’egomotion’ video). Our method requires no expensive computing infrastructure: on a computer with a single
+Graphics Processing Unit (GPU), the semantic segmentation and 3D reconstruction can be obtained in
+real video time. From a single SCUBA dive, it is possible to obtain a 3D point cloud of more than 1km
+length at the resolution of individual coral colonies, as shown in Figure 2.
+The proposed 3D mapping approach enjoys a powerful synergy with image-based semantic segmentation systems, which assign each pixel in an image to a specific semantic class. The semantic
+information can be directly transferred to the 3D models which in turn enables automated computation
+of ecological measures of interest, such as the area covered by each benthic class.
+We exemplify our approach, which we name DeepReefMap, on reef areas in the northern Gulf of
+Aqaba, publishing a large-scale dataset of ego-motion videos taken by divers in the area. Furthermore,
+we publish a dataset of video frames of reef scenes annotated for pixel-wise semantic segmentation
+of benthic classes. We train neural networks to reconstruct the 3D geometry from the videos and for
+semantic segmentation of 20 benthic classes. We find that the accuracy of the estimated 3D geometry
+from our method is competitive with a state-of-the-art conventional SfM pipeline, whereas our approach
+is more robust and two orders of magnitude faster. The semantic segmentation system is evaluated on
+three scenes that were not seen during training, where 84.1% of pixels are correctly classified. Our
+implementation is open source, alleviating the reliance on proprietary SfM software.
+
+Materials and Methods
+DeepReefMap creates 3D point clouds from uncurated ego-motion videos by using deep learning-based
+SfM and leveraging its synergy with semantic segmentation of benthic classes. An overview is shown in
+Figure 3. The remainder of this section describes in detail the data collection process, the learning-based
+SfM system and the semantic segmentation system.
+
+Collection of Ego-Motion Videos
+The collection of data from which 3D maps are created is particularly straightforward: a diver swims
+forward while being between 1 and 5 meters above a reef area, filming with a consumer-grade action
+camera as illustrated in Figure 3 (left). From a technical side, our method is agnostic to the video camera
+used. Consumer-grade action cameras were chosen because they are the cheapest options. The distance
+covered is only limited by logistical constrains such as the diver’s air reserves, the battery and memory
+capacity of the camera, the length of the reef, or the distance to the diving boat. Within a single SCUBA
+dive, a video covering more than 1 km of distance can routinely be taken.
+For this work, the dataset of ego-motion underwater video used was collected by divers from six reef
+sites in Eilat (Israel) and Aqaba (Jordan) between July 22, 2022 and Aug 25, 2022, on an expedition
+5
+
+Figure 3: An overview of the main method (DeepReefMap): a diver swims over a reef while taking video
+with a consumer-grade action camera. On the uncurated frames of this video, the learning-based SfM
+system is used to reconstruct the 3D geometry of the reef in real time. A semantic segmentation system
+is used to identify benthic classes, which can directly be transferred into the point cloud.
+of the Transnational Red Sea Center 1 . The videos cover a diverse set of scenes: from reefs with high
+structural complexity, over patchy reefs in seagrass meadows, to sites located close to human settlements,
+which are heavily exposed to human activity and the resulting pollution. The videos were collected in
+reefs ranging from 3 to 10 m in depth, with no particular constraint on the swim speed. Three 100
+m transects were filmed for benchmarking purposes, while the remaining videos are taken without any
+reference objects placed on the substrate in a free-roaming fashion.
+The videos were captured with GoPro Hero 10 cameras in the linear field-of-view mode at 1080p
+resolution and 30 frames per second with the stabilization setting on ‘smooth’. In order to increase the
+amount of video data captured during each dive, three cameras were attached side-by-side onto a rigid
+pole, with about 1m of space in between each camera. In total, there are 19 hours and 49 minutes of
+ego-motion video.
+The cameras were attached using simple handlebar mounts, and re-attached by hand before every
+dive without highly precise angle measurement, leading to a slight variation in camera angles between
+dives. Up to the precision of eye-balling the angles, the roll and yaw angles of the cameras were fixed
+at 0◦ . The pitch angle was deliberately varied between approximately −5◦ and −40◦ between dives in
+order to include diverse settings into the training dataset.
+
+Deep Learning-Based SfM
+The 3D mapping in our approach is realized using deep learning-based SfM (Zhou et al., 2017; Bian
+et al., 2021), in which neural networks are trained from example videos to specialize SfM photogrammetry to the challenging conditions to which it is exposed to in a reef environment. As opposed to con1
+
+http://trsc.org
+
+6
+
+ventional SfM, where strong assumptions on the color consistency of image features are made, leading
+to brittle reconstruction behavior, learning-based SfM can adapt to the challenges of underwater scenes.
+Learning-based SfM leverages the geometric relationship between overlapping images to formulate an
+unsupervised learning objective, meaning that it suffices to use a large dataset of unannotated video for
+training such a system, without ground-truth camera position or depth data.
+The underlying principle of learning-based SfM is to estimate the rigid transformation between pairs
+of images, formulating a differentiable loss function that provides a learning signal for a neural network.
+A schematic overview of a learning-based SfM system is shown in Figure 4. Consider two overlapping
+images Ia and Ib taken with the same camera at different locations and orientations. Let T̂a,b denote an
+estimate of the 6D camera pose transform (the 3D translation and 3D rotation) between the camera poses
+of the two images. Using an estimate of the depth D̂a of an image, i.e. the distance between the camera
+and each pixel, and choosing an appropriate camera model, one can take an image and its depth estimate
+to reproject Ia to the camera position of Ib , obtaining a reprojected image Iˆb :
+Iˆb = Reproject(Ia , D̂a , T̂a,b )
+
+(1)
+
+The reprojected image can then be compared to the original image, using a differentiable photometric
+loss function between the images in RGB space, denoted LP . This reprojection loss is calculated in both
+−1
+. In a similar fashion, the
+directions, by using D̂b and the inverse camera pose transform T̂b,a = T̂a,b
+estimated depths can be reprojected via the estimated pose transform and a regularization term RG that
+enforces their geometric consistency is added to the loss function (Bian et al., 2021). A smoothness regularization term RS on the estimated depths is added to deal with low-texture regions (Zhou et al., 2017).
+In state-of-the-art systems, a similar image-pair unsupervised formulation of optical flow is included in
+the training procedure, which we omit here for the sake of simplicity. The estimates of the depth and
+camera pose transform are predicted from the pair of images by a neural network f , which has a set of
+learnable parameters θ:
+D̂a , D̂b , T̂a,b = fθ (Ia , Ib )
+
+(2)
+
+Using the photometric loss and the regularization terms, the parameters of the neural network are
+then trained by gradient-based optimization to minimize the total expected loss over the data, which is
+empirically realized by training on the dataset of available pairs or overlapping images:
+h
+i
+min EIa ,Ib LP (Ia , Iˆa ) + RS (Iˆa , D̂a ) + LP (Ib , Iˆb ) + RS (Iˆb , D̂b ) + RG (D̂a , D̂b , T̂a,b )
+(3)
+θ
+
+Training a neural network on a sufficiently large and diverse dataset of videos enables accurate depth and
+pose estimation for the scenarios depicted in the training videos: the SfM system learns from examples
+to be robust against the challenging conditions posed by coral reef settings.
+For training our learning-based SfM system, video frames were extracted from the dataset of egomotion videos at a resolution of 608 × 352 px with 20 frames per second, leading to a total of 1.4
+7
+
+Figure 4: Schematic overview of a deep learning-based SfM setup. A neural network takes two overlapping images Ia and Ib and estimates their respective depths as well as the camera pose transformation
+between them. These estimates are used to project one image onto the other and compute a regularized
+photometric reprojection error, which acts as an unsupervised learning signal to train the involved neural
+networks.
+million video frames for training the system. Our implementation is based on the SC-SfMLearner (Bian
+et al., 2021), with the neural network architecture chosen to be a U-Net (Ronneberger et al., 2015)
+with a ResNet34 (He et al., 2016) backbone, which is selected due to its large receptive field size but
+fast inference speed. This neural network is trained for 1 million steps of batch size 5 using the Adam
+optimizer (Kingma and Ba, 2015) with a learning rate of 0.0001. More implementation & training details
+can be found in the appendix.
+Using a trained learning-based SfM system to create a 3D point cloud can be realized by iterating
+through all the frames of a video, selecting some or all pixels of each frame, projecting them out into
+3D space using the estimated depth and the camera intrinsics, and finally updating the camera position
+using the estimated camera pose transform. This can be done essentially at the speed of the forward pass
+of the trained neural networks: a U-Net with a ResNet-34 backbone can create a 3D point cloud from a
+video at 18 frames per second - essentially real video time. For better visual quality, the frames are added
+to the point cloud via integration though a truncated signed distance field (Curless and Levoy, 1996), a
+common technique in dense monocular 3D mapping. Naively integrating frames of an underwater video
+with this iterative technique will however lead to strong undesirable artifacts from the water surface, the
+background water column, and dynamic objects, such as fish and divers, as displayed in Figure 5. As a
+remedy, semantic segmentation can be employed.
+
+Semantic Segmentation
+There is a strong synergy between learning-based SfM systems and image-based semantic segmentation:
+information about the benthic composition can be transferred to the point cloud and unwanted classes that
+lead to artifacts in the point clouds can be removed. This Section describes our semantic segmentation
+8
+
+Figure 5: Using a trained semantic segmentation system, unwanted classes such as the background (dark
+blue) and human (in yellow) can be masked out in the point cloud creation process (top). This can
+alleviate artifacts from these classes, as illustrated by this example from the Japanese Garden Site in
+Eilat, showing the point cloud made with all classes (bottom left), the background removed (bottom
+center), and both unwanted classes removed (bottom right).
+system and dataset, as well as its interaction with the learning-based SfM system.
+We created a dataset of video frames that were annotated with 20 benthic classes of interest. In total,
+1997 patches of size 800 × 500 px were annotated for semantic segmentation with over 10000 polygons
+using the AIDE annotation software 2.0 (Kellenberger et al., 2020), which extracts patches from the full
+1920 × 1080 px video frames. Example patches and their labels are shown in Figure 6, showing how
+polygons are drawn around objects and some areas contain no label. Details on the label distribution
+from the 20 classes are provided in the appendix. Our dataset is the first dataset containing polygonlevel benthic segmentation labels of ‘general purpose’ reef scenes when compared to existing datasets
+in the coral reef domain, which have either focused on specific subdomains, such as photo quadrats
+(Beijbom et al., 2012) or orthomosaics (Yuval et al., 2021), or only provided sparse point labels instead
+of segmentation labels (Beijbom et al., 2012).
+The dataset of video frame patches contains patches from the three evaluation transects, where the
+patches were chosen to maximize spatial coverage and minimize spatial overlap between frames for each
+
+9
+
+transect. The dataset also includes patches chosen from various scenes, which were selected manually to
+get a good coverage of the label classes and of the diversity of the scenes from which video was captured
+but have no spatial overlap with the evaluation transects.
+Inherent Ambiguity While some classes, such as colorful live corals or fish, have distinct features
+that can be labeled consistently, other classes have a strong inherent ambiguity. In particular, it can be
+extremely hard even for expert human annotators to draw the line between rock, macroalgae-covered
+substrate, dead corals, and rubble. Furthermore, while some live coral is obviously alive and some dead
+coral is obviously dead, there are cases in which it is difficult to assign a health label for damaged corals.
+While maximal accuracy would necessitate an underwater side-by-side comparison of the pigmentation
+of the coral with a printed color chart and a lookup in benchmark pigmentation charts of the exact species
+
+Unlabeled
+Massive Coral
+Branching Coral
+Sand
+
+Rock
+Dark
+Sea Urchin
+Human
+
+Millepora
+Dead Branching Coral
+Dead Massive Coral
+Dead Coral
+
+Fish
+Background
+Trash
+Transect Line
+
+Figure 6: Example video frame patches of size 800×500 px and their annotations. In many video frames
+with annotations, portions of the image remain unlabeled.
+
+10
+
+at hand, the annotation was instead performed with best judgment of the annotators in such ambiguous
+cases. Lastly, many animals, such as fish and sea urchins, take shelter in holes. Due to the limited lighting, often only parts of the animal are discernible, and it is up to the annotator’s judgment where the
+animal ends and the class ‘dark’ begins.
+Training the Neural Network On the dataset of annotated video frames, we train a semantic segmentation neural network. In particular, we use the U-Net (Ronneberger et al., 2015) architecture with
+a ResNeXt50-32x4d (Xie et al., 2017) backbone. The input and output resolutions are chosen to be
+416 × 416 px. The backbone is initialized with weights pre-trained on the large-scale dataset ImageNet
+(Deng et al., 2009). The U-Net is trained to minimize the pixel-wise cross-entropy between the classes
+using the Adam (Kingma and Ba, 2015) optimizer with a learning rate of 0.0001 and a batch size of 32.
+Unlabeled pixels are omitted from the learning objective. Data augmentations are used to artificially increase the size of the dataset: images are randomly flipped horizontally, and randomly resized crops with
+scales between 0.5 to 1.4, and aspect ratio modifications between 0.7 and 1.4 are chosen. When using the
+trained semantic segmentation network to calculate the benthic classes of images, the full 1920 × 1080
+px image is divided into overlapping patches of size 800 × 500 px, which are resized to 416 × 416 px
+before being fed into the neural network, obtaining segmentations of the same size. The segmentation
+predictions are resized back to 800 × 500 px and re-stitched together (in image regions from overlapping
+predicted patches, the softmax class probabilities are averaged) to yield a semantic segmentation in the
+original video resolution.
+Use within learning-based SfM The creation of 3D point clouds from images using a learning-based
+SfM system iterates through the video frames, projecting image pixels with their depth into 3D space.
+With a trained semantic segmentation system, unwanted classes such as divers, fish, and background, can
+simply be excluded during this procedure by masking them out at the image level, as shown in Figure 5.
+For the remaining benthic classes of interest, the benthic class of the pixel is attached to the respective
+point in the 3D point cloud, facilitating automation of downstream ecological analysis.
+
+Evaluation
+Spatial Accuracy To evaluate the spatial accuracy of the 3D point clouds produced by DeepReefMap,
+another 38 m long video transect was collected on Aug 4, 2023 in the Japanese Garden in Eilat with
+placed ground markers. Divers measured the ground-truth distance between targets. We evaluate the
+accuracy of our method against the ground-truth and compare against the research standard COLMAP
+(Schönberger and Frahm, 2016) and the industry software Aigsoft Metashape (AgiSoft, 2022). In particular, ten markers were placed and twelve distances between 70 cm and 370 cm were measured by hand.
+Following this, an ego-motion video of this transect was taken with the default setup of our method,
+leading to a video of 2 minutes and 24 seconds. Then, top-down pictures of the same transect were taken
+11
+
+with the GoPro camera in linear photo mode (at 5568 × 4176 px resolution), following the protocol from
+Raoult et al. (2016). The top-down images acquisition took 6 minutes. These photos are taken in a way
+that excludes background haze, other divers, or large fish. DeepReefMap takes images of size 608 × 352
+px as input, so the top-down images are scaled and cropped accordingly (maintaining the aspect ratio) to
+be used as an input.
+We provide quantitative results as the mean absolute relative error from the ground truth distances:
+Mean Absolute Relative Error =
+
+
+1 X
+dij − dˆij dij .
+|D|
+i,j∈D
+
+Here D is the set of pairwise ground truth distances, dij is the ground truth distance between target
+i and target j, and dˆij is the measured distance using the ruler tool in Metashape. Before this, the
+ˆ
+coordinates of the point cloud from DeepReefMap are multiplied by a scalar factor of mean(d)/mean(d)
+in order to scale the point clouds to comparable size.
+Semantic Segmentation To evaluate the semantic segmentation system of our method, we evaluate on
+three 100 m line transects: two transects from different sites in the King Abdullah Reef in Jordan, and
+one from the Japanese Garden reef in Israel. We start by evaluating the semantic segmentation system
+both qualitatively and quantitatively, followed by a qualitative analysis of the 3D reconstructions and the
+respective automatic downstream ecological analysis.
+We separate the annotated video frames into a train and test dataset for each of the three evaluation
+transects, with the test set being formed by all annotated frames of the transect. This way, the transect on
+which we evaluate is unseen during training and there is definitely no overlap between the train and test
+images, thus giving an estimate to the system’s generalization performance on new data.
+Ortho-Projection Ortho-projected 2D maps from the 3D point clouds are created as follows: first, a
+2D occupancy grid on which the gravity vector (obtained from the camera’s inertial measurement unit)
+is the normal vector is chosen with a suitable grid cell size. In each 2D cell, the 30% of 3D points in the
+cell with the highest z-value (the lowest depth) are selected. To increase robustness against noisy points,
+the benthic class for the grid cell is chosen by (hard) majority voting of points present in the grid cell,
+whereas the RGB value and z-value for the grid cell are obtained through averaging the points. The true
+scale of the objects in the point cloud and 2D map can be obtained by scaling with objects of known
+reference size, for example a transect line.
+
+Results
+Spatial accuracy We present large-scale semantic 3D maps of coral reefs from six sites in the northern
+Gulf of Aqaba, created from video taken with one consumer-grade action camera. The output 3D point
+clouds have the semantic segmentation transferred directly from the video frame pixels to the 3D points,
+12
+
+which allows automatic downstream benthic cover estimation. Each 3D map is produced directly from a
+single video in real time, speeding up the analysis of video transects by orders of magnitudes compared
+to previous methods.
+A quantitative evaluation of the spatial accuracy is shown in Table 1. DeepReefMap is the only
+method that produces a point cloud encompassing all frames in the low resolution setting. The error of
+DeepReefMap in the ego-motion video setting is lower than in the top-down setting and is comparable to
+the error of the performance of COLMAP in the high-resolution top-down setting, which, however, took
+more than 100 times longer to compute. Note that both Metashape and COLMAP fail in reconstructing
+the point cloud in the low resolution and ego-motion settings despite the high overlap between images,
+and the area covered being relatively small (38 m).
+This is further highlighted in Figure 7, where the resulting point clouds are visualized for all methods. DeepReefMap and Metashape in the high resolution settings are the only ones providing both locally
+and globally coherent reconstructions. Metashape with the high-resolution images produces the best final
+spatial accuracy (see Table 1) at the cost of needing high resolution images and very long computation
+times, while DeepReefMap has much faster data acquisition and reconstruction time, and allows directly
+transfering semantic segmentation from the video frames to the 3D point cloud. COLMAP in the highresolution setting and DeepReefMap in the top-down low-resolution setting produce locally coherent
+point clouds that are not globally coherent, and are twisting inside themselves. The top-down images
+have an overlap of around 80-90%, making the pose between frames much bigger than for subsequent
+video frames. When the camera intrinsics do not account for the diffraction caused by even linear cameras under water (if no dome port is used), the re-projection is minimized by overestimating the rotation,
+leading to the characteristic rounded shape. For COLMAP, this happens despite the camera intrinsics to
+be set to a radial model. DeepReefMap for now assumes a linear camera model, and the gravity vector
+is not saved in GoPro images (which could be used to alleviate the twisting), unlike in videos.
+For a qualitative assessment, close-up screenshots from point clouds reconstructed by DeepReefMap
+are shown in Figure 8, demonstrating the level of detail that can be captured, and showing the diversity
+of scenes in which reconstruction works reliably.
+Table 1: Spatial accuracy with regards to ground-truth markers placed in the Japanese Garden video of
+Aug. 4, 2023. The cells marked with * denote point clouds which are locally coherent and complete, but
+not globally coherent.
+Method
+
+DeepReefMap (ours)
+Agisoft Metashape
+COLMAP
+
+Mean Absolute Relative Error
+Top-Down Top-Down
+Ego-Motion
+(Low-Res) (High-Res)
+7.84%
+9.84%∗
+Fail
+Fail
+1.85%
+Fail
+Fail
+6.58%∗
+
+13
+
+Processing Time Taken (seconds)
+Top-Down Top-Down
+Ego-Motion
+(Low-Res) (High-Res)
+320
+100
+9 870
+1 800
+21 850
+75 660
+1 550
+47 520
+
+Figure 7: Comparison of 3D Reconstructions using different input imagery. The top-down images are
+either of high resolution (last column, 5568×4176 px), or are downscaled to the lower input resolution of
+DeepReefMap (center column, 608 × 352 px). In general, only DeepReefMap and Metashape produced
+globally coherent point clouds. When compared low resolution imagery, only DeepReefMap on egomotion video yields satisfactory results.
+Semantic segmentation. To evaluate the semantic segmentation, we start with a qualitative assessment: we show video frames with their respective predicted benthic class, their ground-truth annotations,
+and the correctly and falsely predicted in Figure 9. Most polygons are entirely classified correctly. The
+largest visible misclassifications come from assigning the wrong class to an entire large area, such mis-
+
+Figure 8: Screenshots of various 3D reconstructions reef scenes from DeepReefMap. The top left screenshot is a close-up of the low-res top-down point cloud from Figure 7, demonstrating local coherence even
+when global coherence is not recovered due to absence of gravity vectors from the camera’s inertial measurement unit. The remaining images are from various ego-motion video scenes from the dataset.
+
+14
+
+classifying a patch of rubble as sand, or classifying a sea urchin tucked into a hole into the ‘dark’ class.
+To quantify the accuracy of the semantic segmentation system, we report the percentage of annotated
+pixels for which the neural network predicts the correct class as a metric. Computed accuracies for
+
+(a) RGB Video Frames
+
+(b) Neural Network Predictions
+
+(c) Ground Truth Annotations
+
+(d) Correct Classifications
+
+Figure 9: Example video frames from the three evaluation transects (top row), their respective benthic
+class predictions by the neural network (second row), the ground truth annotations (third row), and the
+mask of pixels which was labeled correctly and incorrectly (bottom row).
+
+15
+
+Table 2: The accuracy over all pixels, the mean accuracy over all classes, the accuracy for each individual
+class appearing in the three evaluation transects, and the number of pixels annotated in total and for
+each class in parentheses. Encrusting coral and soft coral did not visibly appear on the three evaluation
+transects.
+Transect
+King
+Abdullah
+(Sandy)
+King
+Abdullah
+(Rocky)
+Japanese
+Garden
+Israel
+
+Total
+Accuracy
+
+Mean
+Class
+Accuracy
+
+Massive
+Coral
+
+Branching
+Coral
+
+Sand
+
+Rock
+
+Rubble
+
+Dark
+
+Sea
+Urchin
+
+Dead
+Branching
+Coral
+
+Dead
+Massive
+Coral
+
+Dead
+Coral
+
+Macroalgae
+
+Fish
+
+Human
+
+Background
+
+Trash
+
+Transect
+Line
+
+86.65
+(20653k)
+
+65.83
+
+94.10
+(1272k)
+
+91.73
+(391k)
+
+98.36
+(9303k)
+
+66.19
+(890k)
+
+43.85
+(2017k)
+
+90.81
+(793)
+
+34.49
+(29k)
+
+57.31
+(744k)
+
+62.18
+(919k)
+
+30.42
+(222k)
+
+(0)
+
+72.71
+(67k)
+
+(0)
+
+97.47
+(3670k)
+
+9.12
+(27k)
+
+81.97
+(180k)
+
+79.84
+(14078k)
+
+70.08
+
+91.21
+(635k)
+
+89.06
+(432k)
+
+91.40
+(757k)
+
+83.12
+(2904k)
+
+56.32
+(2620k)
+
+90.61
+(1044k)
+
+62.69
+(129k)
+
+67.43
+(426k)
+
+26.01
+(555k)
+
+10.07
+(280k)
+
+(0)
+
+79.98
+(51k)
+
+(0)
+
+99.99
+(3576k)
+
+39.41
+(37k)
+
+93.84
+(152k)
+
+84.35
+(31114k)
+
+69.13
+
+93.65
+(4843k)
+
+81.61
+(1490k)
+
+98.04
+(3674k)
+
+81.03
+(2890k)
+
+53.19
+(40k)
+
+78.41
+(1500k)
+
+(0)
+
+48.85
+(835k)
+
+34.67
+(1464k)
+
+6.604
+(906k)
+
+57.58
+(433k)
+
+77.82
+(21k)
+
+80.59
+(207k)
+
+94.36
+(11948k)
+
+(0)
+
+81.43
+(427k)
+
+Massive Coral
+
+95.39
+
+0.22
+
+0.74
+
+0.00
+
+0.02
+
+3.41
+
+0.00
+
+0.23
+
+Branching Coral
+
+2.44
+
+81.13
+
+1.68
+
+0.00
+
+5.10
+
+9.45
+
+0.00
+
+0.20
+
+Dark
+
+3.42
+
+0.43
+
+85.16
+
+0.30
+
+0.39
+
+10.02
+
+0.00
+
+0.29
+
+Sea Urchin
+
+0.29
+
+0.14
+
+40.84
+
+55.84
+
+0.00
+
+2.74
+
+0.00
+
+0.14
+
+Millepora
+
+1.34
+
+0.24
+
+2.67
+
+0.00
+
+92.77
+
+2.61
+
+0.00
+
+0.36
+
+Non-Live-Coral Substrate
+
+2.71
+
+1.11
+
+1.52
+
+0.02
+
+0.12
+
+94.27
+
+0.01
+
+0.25
+
+Trash
+
+5.26
+
+1.32
+
+1.32
+
+0.00
+
+0.00
+
+46.05
+
+44.74
+
+1.32
+
+Transect Line
+
+1.26
+
+0.06
+
+0.50
+
+0.00
+
+0.00
+
+5.41
+
+0.00
+
+92.76
+
+Massive Coral
+
+Branching Coral
+
+Dark
+
+Sea Urchin
+
+Millepora
+
+Non-Live-Coral Substrate
+
+Trash
+
+Transect Line
+
+True label
+
+Massive Coral 93.72 0.39 0.13 1.35 0.01 0.84 0.00 0.07 0.18 2.45 0.37 0.19 0.12 0.00 0.05 0.00 0.14
+Branching Coral 2.58 78.95 0.12 1.19 0.07 1.23 0.01 2.61 10.42 0.20 1.00 1.29 0.05 0.00 0.14 0.00 0.16
+Sand 0.14 0.02 98.06 0.63 0.58 0.12 0.01 0.00 0.01 0.23 0.01 0.00 0.01 0.00 0.04 0.00 0.15
+Rock 2.01 0.58 1.72 80.42 2.68 2.04 0.03 0.10 1.03 2.67 2.64 3.26 0.08 0.00 0.32 0.01 0.41
+Rubble 0.69 0.19 22.2819.8150.44 0.24 0.01 0.00 0.86 2.79 2.38 0.01 0.04 0.00 0.00 0.14 0.10
+Dark 3.20 0.64 0.81 4.59 0.11 85.86 0.38 0.80 0.49 1.76 0.23 0.51 0.19 0.00 0.21 0.01 0.22
+Sea Urchin 0.04 0.09 0.66 1.95 0.33 40.7855.03 0.13 0.07 0.10 0.07 0.00 0.63 0.01 0.00 0.00 0.12
+Millepora 0.89 1.03 0.05 0.11 0.00 1.15 0.00 93.45 0.73 0.93 0.89 0.01 0.05 0.00 0.65 0.00 0.07
+Dead Branching Coral 1.23 15.41 1.52 7.28 2.16 1.91 0.05 0.75 55.17 1.32 9.43 3.53 0.03 0.00 0.05 0.00 0.17
+Dead Massive Coral 14.31 1.72 0.29 31.26 0.80 2.06 0.04 0.14 0.58 41.86 5.00 1.54 0.02 0.00 0.02 0.00 0.38
+Dead Coral 5.12 1.88 1.99 40.58 5.00 4.08 0.06 0.42 13.44 9.12 10.95 6.48 0.08 0.00 0.01 0.16 0.63
+Macroalgae 23.83 1.62 0.00 7.09 0.00 2.07 0.00 0.80 2.80 2.61 1.82 56.54 0.01 0.00 0.51 0.00 0.30
+Fish 3.68 4.48 1.45 2.23 0.34 7.01 0.10 0.87 0.58 0.71 0.32 0.00 75.73 0.17 1.94 0.01 0.37
+Human 1.21 0.05 1.04 0.00 0.00 0.01 0.00 0.00 0.00 0.01 0.00 0.00 8.87 81.35 6.03 0.02 1.39
+Background 0.45 0.29 0.31 0.95 0.15 0.57 0.00 0.30 0.01 0.54 0.00 0.00 0.05 0.01 96.36 0.00 0.01
+Trash 12.07 4.82 13.0311.72 4.74 3.68 0.00 2.44 0.07 0.66 0.33 0.13 24.58 0.00 0.03 20.72 0.98
+Transect Line 1.41 0.29 3.00 1.21 0.04 0.36 0.01 0.07 0.11 0.13 0.02 0.02 0.33 0.00 0.34 0.02 92.64
+Massive Coral
+Branching Coral
+Sand
+Rock
+Rubble
+Dark
+Sea Urchin
+Millepora
+Dead Branching Coral
+Dead Massive Coral
+Dead Coral
+Macroalgae
+Fish
+Human
+Background
+Trash
+Transect Line
+
+True label
+
+the individual label classes, as well as averaged over all classes and over all pixels are displayed in
+Table 2. All in all, the results are largely consistent for the three transects: the mean class accuracy
+is comparable between the three transects. Similarly, there is a large consistency between classes that
+are accurately classified: live massive coral, live branching coral, sand, transect line and sand, are all
+classified with at least 80% accuracy on all three evaluation transects. On the other hand, classes with
+the lowest accuracy are consistently trash and dead coral. The total accuracy is higher than the mean class
+accuracy because classes that are easily segmented, such as background or sand, have more and larger
+
+Predicted label
+
+Predicted label
+
+(a)
+
+(b)
+
+Figure 10: Confusion matrices on the three evaluation transects (a) evaluated at the image level with all
+classes present and (b) evaluated after projection on the point cloud level with all non-live-coral substrate
+classes summarized.
+
+16
+
+Sand
+
+58.6%
+
+Millepora
+Massive Coral
+Branching Coral
+Dead Coral
+Dead Massive Coral
+Dead Branching Coral
+Rubble
+
+0.7%
+8.7%
+5.5%
+2.5%
+3.4%
+3.7%
+6.0%
+10.9%
+
+Rock
+
+(a) King Abdullah Reef (Sandy)
+
+Sand
+
+Rock
+
+51.5%
+
+12.5%
+2.7%
+4.7%
+3.0%
+7.6%
+1.9%
+4.4%
+11.7%
+
+Millepora
+Massive Coral
+Branching Coral
+Dead Coral
+Dead Massive Coral
+Dead Branching Coral
+
+Rubble
+
+(b) King Abdullah Reef (Rocky)
+Sand
+Millepora
+19.7%
+0.3%
+16.1%
+
+Rock
+
+46.6%
+
+Massive Coral
+
+3.2%
+1.7%
+1.6%
+2.8%
+1.9%
+6.2%
+
+Branching Coral
+Macroalgae
+Dead
+Coral
+Dead Massive Coral
+Dead Branching Coral
+Rubble
+
+(c) Japanese Garden Israel
+
+Figure 11: Birds-eye view of the three evaluation transects of 100 m length with their RGB color, their
+semantic class, and their z-value (left), as well as a pie chart showing the percentage cover of the benthic
+substrate classes (right).
+annotated polygons. The main result is, that even with only a few hundred annotated image patches,
+the main benthic classes of interest can be detected with satisfactory accuracy using frame-wise dense
+segmentation neural networks.
+To better understand the misclassification errors on the image level, a confusion matrix of the union
+of the three evaluation transects is shown in Figure 10a. Over the three transects in total, a mean class
+17
+
+accuracy of 68.6% is reached with 84.1% of pixels being correctly classified.
+For the ‘trash’ class, which has the second lowest accuracy, many pixels are misclassified as fish, sand
+or rock. Marine litter is a strongly heterogeneous class: from aluminum cans that share bright colors with
+some fish, to pale-colored bits of cloth or plastic lying partially covered by sandy or rocky substrate. Most
+errors in the sea urchin and fish class are from misclassifications to ‘dark’. The majority of the remaining
+errors stem from the dead coral classes being confused with rock and rubble. To summarize, we find that
+a large portion of misclassifications are consistent with the challenges from the inherent ambiguity we
+faced while annotating the frames, as described above.
+The ability to distinguish the main classes of live coral from dead substrates in order to calculate the
+live coral cover is particularly important from an ecological perspective. This should be evaluated at the
+point cloud level, where unwanted classes and noisy or uncertain points have been removed, rather than
+at the image level. When rock, sand, rubble, macroalgae, and the dead coral classes are summarized into
+a non-live-coral substrate class, the mean class accuracy at the point cloud level is 80.2%, with 92.6% of
+points correctly classified. The remaining misclassifications are mostly from sea urchins being classified
+as dark, and trash being misclassified, as highlighted in Figure 10b.
+We show ortho-projections of the 3D models of the three evaluation transects in their RGB color,
+colorized by their benthic class and their z-value, along with the area covered by each static benthic class
+in Figure 11, with a chosen grid cell size of 5 cm. The benthic cover percentages are computed straight
+from the ortho-projection by normalizing by the number of occupied 2D grid cells. In photogrammetry,
+occlusion within the image frames creates ‘shadows’ in the point cloud, which can form holes in the 2D
+ortho-projection. For all three evaluated point clouds, holes that are completely enclosed in the 2D map
+account for less than 0.2% of the area. This means that they have almost no impact on the benthic cover
+analysis. The width of the point clouds depends on the height of the diver above the seafloor and the
+angle of the camera for the individual videos.
+
+Discussion
+This paper presents a novel approach for rapid 3D semantic mapping of coral reefs from only ego-motion
+videos taken with a single action camera. This approach significantly scales up the analysis of video
+transects. This has broad implications on coral reef monitoring and may inspire new research directions
+for mapping underwater environments in general. This Section discusses limitations as well as main
+future developments that will ultimately determine the impact of the method.
+For coral reef ecology purposes, any analysis largely depends on the quality of the segmentation system. While our system can demonstrably separate the main classes of interest with a high accuracy, there
+is a large potential to improve the semantic segmentation to unlock a more fine-grained and accurate
+ecological analysis. In particular, for a more precise ecological analysis that is applicable to reef areas
+beyond the northern Red Sea, a much larger and more comprehensive dataset of semantic segmentation
+
+18
+
+annotations must be created. This dataset should include scenes from more diverse reef environments,
+and annotations at the most precise taxonomic rank that is determinable from the images. With annotations down to the coral genus level and sufficiently large dataset size, opportunities for a higher level
+of sophistication in the deep learning process will become possible with more involved neural network
+architectures, training procedures, and the integration of information from multiple subsequent frames,
+which has the potential to lead to more precise semantic segmentation.
+The main methodological contribution in this work introduces the paradigm of learning-based SfM
+to underwater ecosystems mapping, which promises to tackle the challenging conditions of underwater
+environments by learning from large video collections. From a computer vision perspective, the underlying methods are rapidly evolving: learning-based SfM methods are improving dramatically with novel
+neural network architectures and better loss formulations (Martin et al., 2022) leading to better depth and
+pose estimates. Currently, while being significantly faster and more robust, learning-based SfM systems
+commonly do not reach the same accuracy as conventional SfM systems: global pose graph optimization is generally omitted in learning-based SfM and images fed into deep learning systems have to be
+significantly reduced in resolution due to limited GPU memory. Commonly, to match the final accuracy
+of conventional SfM, the estimated depths are scaled up using super-resolution procedures (Teed and
+Deng, 2020, 2021) and subsequently fed into conventional SfM systems along with the pose transformation estimates to be fine-tuned, at a substantial computational cost (Bian et al., 2021; Zhou et al.,
+2017). Nonetheless, while conventional SfM photogrammetry is an established research field dating
+back decades (Schönberger and Frahm, 2016), the advances in learning-based SfM have been staggering, promising to tackle current limitations in the near future. To the best of our knowledge, no previously
+existing conventional SfM system can reliably deliver 3D reconstructions from ego-motion videos of reef
+scenes, especially not at a comparable computational cost.
+Furthermore, like all SfM systems, learning-based SfM suffers from the fact that tiny errors in the
+camera pose transformations behave multiplicatively: while the 3D reconstructions look coherent on a
+local scale, the global trajectory of the point cloud is commonly increasingly erroneous as the covered
+distance increases. For terrestrial systems, the remedy is given by precise GPS devices. Even so, detecting when the camera revisits a place in 3D space, detecting so called loop closures, remains extremely
+challenging (Schönberger and Frahm, 2016; Chen et al., 2021b). Without an accurate positioning system
+under water, the described method is limited to 3D reconstructions without loop closures. Such positioning systems exist, but are orders of magnitude more expensive than the cameras we used, defeating
+the purpose of democratizing coral reef monitoring. In our proposed low-cost approach, just as in conventional coral reef monitoring methods, accurate geolocalization is thus only possible when markers
+with known GPS coordinates, such as transect lines, are visible. Nonetheless, as learning-based SfM
+methods evolve and improve, the effect of tiny inaccuracies in the pose transformations will become less
+detrimental.
+Another future work is the fusion of point clouds from multiple video mappings from the same areas,
+
+19
+
+allowing to fill the ’shadows’ in occluded views, and laying the foundation for more precise ecological
+analysis. This involve either merging the point clouds taken from cameras with different viewing angles,
+for example one front-facing and one rear-facing camera, or from multiple passes back and forth with
+one camera. Point clouds without holes from occlusion in them could, in principle, enable volumetric
+ecological analysis: beyond the areas covered by benthic classes, estimates for the biomass or the volume
+distribution of corals could be calculated.
+Without changing the underlying computational methods, our approach could be extended to other
+underwater environments, for example the submerged ecosystems of mangrove forests (Giardino et al.,
+2015), or to guide deep sea exploration & salvage operations (Jakobsson et al., 2021). With the availability of sizeable ego-motion video data from such scenarios, including a reasonably sized dataset of
+annotated video frames with the classes of interest, our approach should transfer seamlessly to such
+domains.
+
+Acknowledgments
+We thank Dr. Ali Al-Sawalmih and Tariq Al-Salman (Marine Science Station, Aqaba), Prof. Maoz Fine,
+Nahum Sela (InterUniversity Institute of Marine Science, Eilat), Dr. Assaf Zvuloni (Nature Reserve
+Authority Israel), and the Aqaba Special Economic Zone Authority for their support for enabling us to
+collect the videos. Freya Behrens is thanked for her help on computational 3D geometry. The data of this
+study were collected in the framework of the Transnational Red Sea Center hosted by the Laboratory for
+Biological Geochemistry at EPFL. This work was funded in part by FNS grant 205321 212614, as well
+as EPFL and the Transnational Red Sea Center.
+
+Author Contributions
+Jonathan Sauder and Devis Tuia conceived the ideas and designed methodology; Jonathan Sauder, Guilhem Banc-Prandi and Anders Meibom collected the data; Jonathan Sauder wrote the source code and
+analyzed the data, and led the writing of the manuscript; all authors contributed substantially to writing
+and revising the manuscript and gave final approval for publication.
+
+Data Availability
+Data is made available upon request. Upon final peer-reviewed publication, the data and source code will
+be made fully available.
+
+References
+AgiSoft. Metashape professional (version 1.8.3). http://www.agisoft.com/downloads/installer/, 2022.
+20
+
+Inigo Alonso, Matan Yuval, Gal Eyal, Tali Treibitz, and Ana C Murillo. Coralseg: Learning coral
+segmentation from sparse annotations. Journal of Field Robotics, 36(8):1456–1477, 2019.
+Gregory P Asner, Nicholas R Vaughn, Christopher Balzotti, Philip G Brodrick, and Joseph Heckler.
+High-resolution reef bathymetry and coral habitat complexity from airborne imaging spectroscopy.
+Remote Sensing, 12(2):310, 2020.
+Oscar Beijbom, Peter J Edmunds, David I Kline, B Greg Mitchell, and David Kriegman. Automated
+annotation of coral reef survey images. In 2012 IEEE conference on computer vision and pattern
+recognition, pages 1170–1177. IEEE, 2012.
+Oscar Beijbom, Peter J Edmunds, Chris Roelfsema, Jennifer Smith, David I Kline, Benjamin P Neal,
+Matthew J Dunlap, Vincent Moriarty, Tung-Yung Fan, Chih-Jui Tan, et al. Towards automated annotation of benthic survey images: Variability of human experts and operational modes of automation.
+PloS one, 10(7):e0130312, 2015.
+Hawthorne L Beyer, Emma V Kennedy, Maria Beger, Chaolun Allen Chen, Joshua E Cinner, Emily S
+Darling, C Mark Eakin, Ruth D Gates, Scott F Heron, Nancy Knowlton, et al. Risk-sensitive planning
+for conserving coral reefs under rapid climate change. Conservation Letters, 11(6):e12587, 2018.
+Jia-Wang Bian, Huangying Zhan, Naiyan Wang, Zhichao Li, Le Zhang, Chunhua Shen, Ming-Ming
+Cheng, and Ian Reid. Unsupervised scale-consistent depth learning from video. International Journal
+of Computer Vision, 129(9):2548–2564, 2021.
+Pim Bongaerts, Caroline E Dubé, Katharine E Prata, Johanna C Gijsbers, Michelle Achlatis, and Alejandra Hernandez-Agreda. Reefscape genomics: leveraging advances in 3d imaging to assess fine-scale
+patterns of genomic variation on coral reefs. Frontiers in Marine Science, page 875, 2021.
+JHR Burns, D Delparte, RD Gates, and M Takabayashi. Integrating structure-from-motion photogrammetry with geospatial software as a novel technique for quantifying 3d ecological characteristics of
+coral reefs. PeerJ, 3:e1077, 2015.
+JH Carleton and TJ Done. Quantitative video sampling of coral reef benthos: large-scale application.
+Coral Reefs, 14:35–46, 1995.
+Qimin Chen, Oscar Beijbom, Stephen Chan, Jessica Bouwmeester, and David Kriegman. A new deep
+learning engine for coralnet. In Proceedings of the IEEE/CVF International Conference on Computer
+Vision, pages 3693–3702, 2021a.
+Xieyuanli Chen, Thomas Läbe, Andres Milioto, Timo Röhling, Olga Vysotska, Alexandre Haag, Jens
+Behley, and Cyrill Stachniss. Overlapnet: Loop closing for lidar-based slam. arXiv preprint
+arXiv:2105.11344, 2021b.
+21
+
+Arjun Chennu, Paul Färber, Glenn De’ath, Dirk De Beer, and Katharina E Fabricius. A diver-operated
+hyperspectral imaging and topographic surveying system for automated mapping of benthic habitats.
+Scientific reports, 7(1):7122, 2017.
+Brian Curless and Marc Levoy. A volumetric method for building complex models from range images.
+In Proceedings of the 23rd annual conference on Computer graphics and interactive techniques, pages
+303–312, 1996.
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical image database. In 2009 IEEE conference on computer vision and pattern recognition, pages
+248–255. Ieee, 2009.
+Adele M Dixon, Piers M Forster, Scott F Heron, Anne MK Stoner, and Maria Beger. Future loss of
+local-scale thermal refugia in coral reef ecosystems. Plos Climate, 1(2):e0000004, 2022.
+Maoz Fine, Hezi Gildor, and Amatzia Genin. A coral reef refuge in the red sea. Global change biology,
+19(12):3640–3647, 2013.
+Rebecca Fisher, Rebecca A O’Leary, Samantha Low-Choy, Kerrie Mengersen, Nancy Knowlton, Russell E Brainard, and M Julian Caley. Species richness on coral reefs and the pursuit of convergent
+global estimates. Current Biology, 25(4):500–505, 2015.
+Claudia Giardino, Mariano Bresciani, Francesco Fava, Erica Matta, Vittorio E Brando, and Roberto
+Colombo. Mapping submerged habitats and mangroves of lampi island marine national park (myanmar) from in situ and satellite observations. Remote Sensing, 8(1):2, 2015.
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition.
+In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770–778,
+2016.
+Brian M Hopkinson, Andrew C King, Daniel P Owen, Matthew Johnson-Roberson, Matthew H Long,
+and Suchendra M Bhandarkar. Automated classification of three-dimensional reconstructions of coral
+reefs using convolutional neural networks. PloS one, 15(3):e0230671, 2020.
+Terry P Hughes, James T Kerry, Mariana Álvarez-Noriega, Jorge G Álvarez-Romero, Kristen D Anderson, Andrew H Baird, Russell C Babcock, Maria Beger, David R Bellwood, Ray Berkelmans, et al.
+Global warming and recurrent mass bleaching of corals. Nature, 543(7645):373–377, 2017.
+Martin Jakobsson, Christian Stranne, Rickard Fornander, Matt O’Regan, and Anton Wagner. El21estonia: Report of the ms estonia shipwreck site survey with rv electra, 2021.
+Benjamin Kellenberger, Devis Tuia, and Dan Morris. Aide: Accelerating image-based ecological surveys
+with interactive machine learning. Methods in Ecology and Evolution, 11(12):1716–1727, 2020.
+22
+
+Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International
+Conference on Learning Representations (ICLR), 2015.
+Nancy Knowlton and Jeremy B C Jackson. Shifting baselines, local impacts, and global change on coral
+reefs. PLoS biology, 6(2):e54, 2008.
+Thomas Krueger, Noa Horwitz, Julia Bodin, Maria-Evangelia Giovani, Stéphane Escrig, Anders Meibom, and Maoz Fine. Common reef-building coral in the northern red sea resistant to elevated temperature and acidification. Royal Society open science, 4(5):170038, 2017.
+Javier X Leon, Chris M Roelfsema, Megan I Saunders, and Stuart R Phinn. Measuring coral reef terrain
+roughness using ‘structure-from-motion’close-range photogrammetry. Geomorphology, 242:21–28,
+2015.
+Jaime Spencer Martin, Chris Russell, Simon Hadfield, and Richard Bowden.
+self-supervised monocular reconstruction: The design decisions that matter.
+arXiv:2208.01489, 2022.
+
+Deconstructing
+arXiv preprint
+
+Valérie Masson-Delmotte, Panmao Zhai, Hans-Otto Pörtner, Debra Roberts, Jim Skea, Priyadarshi R
+Shukla, Anna Pirani, Wilfran Moufouma-Okia, Clotilde Péan, Roz Pidcock, et al. Global warming of
+1.5 c. An IPCC Special Report on the impacts of global warming of, 1(5), 2018.
+Valérie Masson-Delmotte, Panmao Zhai, Anna Pirani, Sarah L Connors, Clotilde Péan, S Berger, N Caud,
+Y Chen, L Goldfarb, MI Gomis, et al. Climate change 2021: the physical science basis. Contribution
+of working group I to the sixth assessment report of the intergovernmental panel on climate change,
+page 2, 2021.
+NOAA. Fact sheet: Coral reefs. https://www.coast.noaa.gov/states/fast-facts/
+coral-reefs.html, 2022. Accessed: 2022-09-09.
+David O Obura, Greta Aeby, Natchanon Amornthammarong, Ward Appeltans, Nicholas Bax, Joe Bishop,
+Russell E Brainard, Samuel Chan, Pamela Fletcher, Timothy AC Gordon, et al. Coral reef monitoring,
+reef assessment technologies, and ecosystem-based management. Frontiers in Marine Science, 6:580,
+2019.
+Eslam O Osman, David J Smith, Maren Ziegler, Benjamin Kürten, Constanze Conrad, Khaled M ElHaddad, Christian R Voolstra, and David J Suggett. Thermal refugia against coral bleaching throughout the northern red sea. Global change biology, 24(2):e474–e484, 2018.
+Nina Prasil Delaval, Jeremy Wicquart, Francis Staub, and Serge Planes. Status of coral reef monitoring:
+An assessment of methods and data at the national level. International Coral Reef Initiative, 2021.
+
+23
+
+Vincent Raoult, Peter A David, Sally F Dupont, Ciaran P Mathewson, Samuel J O’Neill, Nicholas N
+Powell, and Jane E Williamson. Gopros™ as an underwater photogrammetry tool for citizen science.
+PeerJ, 4:e1960, 2016.
+Vincent Raoult, Sarah Reid-Anderson, Andreas Ferri, and Jane E Williamson. How reliable is structure
+from motion (sfm) over time and between observers? a case study using coral reef bommies. Remote
+Sensing, 9(7):740, 2017.
+Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: Convolutional networks for biomedical
+image segmentation. In International Conference on Medical image computing and computer-assisted
+intervention, pages 234–241. Springer, 2015.
+Romain Savary, Daniel J Barshis, Christian R Voolstra, Anny Cárdenas, Nicolas R Evensen, Guilhem
+Banc-Prandi, Maoz Fine, and Anders Meibom. Fast and pervasive transcriptomic resilience and acclimation of extremely heat-tolerant coral holobionts from the northern red sea. Proceedings of the
+National Academy of Sciences, 118(19):e2023298118, 2021.
+Johannes Lutz Schönberger and Jan-Michael Frahm. Structure-from-motion revisited. In Conference on
+Computer Vision and Pattern Recognition (CVPR), 2016.
+Daniel Schürholz and Arjun Chennu. Digitizing the coral reef: Machine learning of underwater spectral
+images enables dense taxonomic mapping of benthic habitats. Methods in Ecology and Evolution, 14
+(2):596–613, 2023.
+David Souter, Serge Planes, Jeremy Wicquart, Murray Logan, David Obura, and Francis Staub. Status
+of coral reefs of the world: 2020. Global Coral Reef Monitoring Network, 2021.
+Curt D Storlazzi, Peter Dartnell, Gerald A Hatcher, and Ann E Gibbs. End of the chain? rugosity and
+fine-scale bathymetry from existing underwater digital imagery using structure-from-motion (sfm)
+technology. Coral Reefs, 35(3):889–894, 2016.
+Zachary Teed and Jia Deng. Raft: Recurrent all-pairs field transforms for optical flow. In European
+conference on computer vision, pages 402–419. Springer, 2020.
+Zachary Teed and Jia Deng. Droid-slam: Deep visual slam for monocular, stereo, and rgb-d cameras.
+Advances in Neural Information Processing Systems, 34:16558–16569, 2021.
+Isabel Urbina-Barreto, Rémi Garnier, Simon Elise, Romain Pinel, Pascal Dumas, Vincent Mahamadaly,
+Mathilde Facon, Sophie Bureau, Christophe Peignon, Jean-Pascal Quod, et al. Which method for
+which purpose? a comparison of line intercept transect and underwater photogrammetry methods for
+coral reef surveys. Frontiers in Marine Science, 8:636902, 2021.
+
+24
+
+Christian R Voolstra, Jacob J Valenzuela, Serdar Turkarslan, Anny Cárdenas, Benjamin CC Hume,
+Gabriela Perna, Carol Buitrago-López, Katherine Rowe, Monica V Orellana, Nitin S Baliga, et al.
+Contrasting heat stress response patterns of coral holobionts across the red sea suggest distinct mechanisms of thermal tolerance. Molecular ecology, 30(18):4466–4480, 2021.
+Ivor D Williams, Courtney S Couch, Oscar Beijbom, Thomas A Oliver, Bernardo Vargas-Angel, Brett D
+Schumacher, and Russell E Brainard. Leveraging automated image analysis tools to transform our
+capacity to assess status and trends of coral reefs. Frontiers in Marine Science, page 222, 2019.
+Saining Xie, Ross Girshick, Piotr Dollár, Zhuowen Tu, and Kaiming He. Aggregated residual transformations for deep neural networks. In Proceedings of the IEEE conference on computer vision and
+pattern recognition, pages 1492–1500, 2017.
+Matan Yuval, Iñigo Alonso, Gal Eyal, Dan Tchernov, Yossi Loya, Ana C Murillo, and Tali Treibitz.
+Repeatable semantic reef-mapping through photogrammetry and label-augmentation. Remote Sensing,
+13(4):659, 2021.
+Tinghui Zhou, Matthew Brown, Noah Snavely, and David G Lowe. Unsupervised learning of depth
+and ego-motion from video. In Proceedings of the IEEE conference on computer vision and pattern
+recognition, pages 1851–1858, 2017.
+
+25
+
+Appendix: Data
+Table 3: Overview of the ego-motion video dataset from the Red Sea used to train the learning-based
+SfM system and the semantic segmentation system
+
+108
+
+Country
+
+Site
+
+Video
+Length
+
+Israel
+Jordan
+Jordan
+Jordan
+Jordan
+Jordan
+
+Japanese Garden
+MSS Reef
+South Port Phosphate Mine
+King Abdullah Reef
+North Beach
+Japanese Garden
+
+8h53
+3h37
+1h35
+3h12
+0h27
+2h3
+
+Number of Labeled Pixels by Class
+
+1000
+
+Video
+Frames
+640k
+260k
+115k
+231k
+32k
+147k
+
+Annotated
+Frame
+Patches
+821
+94
+134
+548
+202
+198
+
+Annotated
+Pixels
+165.9M
+11.4M
+39.9M
+89.7M
+39.4M
+26.3M
+
+Number of Image Patches with Class Present
+
+800
+107
+
+600
+400
+
+106
+
+Soft Coral
+Encrusting Coral
+Fish
+Sea Urchin
+Trash
+Transect Line
+Macroalgae
+Human
+Branching Coral
+Millepora
+Dead Branching Coral
+Dead Coral
+Dead Massive Coral
+Dark
+Rubble
+Seagrass
+Massive Coral
+Rock
+Sand
+Background
+
+0
+
+Soft Coral
+Human
+Encrusting Coral
+Macroalgae
+Seagrass
+Trash
+Sea Urchin
+Millepora
+Transect Line
+Rubble
+Dead Coral
+Background
+Fish
+Dead Branching Coral
+Dead Massive Coral
+Branching Coral
+Rock
+Dark
+Sand
+Massive Coral
+
+200
+
+Figure 12: The distribution of labeled pixels by label class (left), and the number of image patches in
+which a label class is annotated (right).
+
+Figure 13: Birds-eye view of the spatial evaluation transect (38 m in length) with ground truth markers
+placed. Red lines indicate the measured ground truth distances between markers that were measured by
+hand. Ortho-view made from high-resolution imagery with Agisoft Metashape.
+
+26
+
+Figure 14: Randomly selected video frames from the ego-motion video dataset, showing the diversity of
+the scenes: from patchy reefs on sea-grass covered seabeds in the South Phosphate Site (top row), over
+structurally complex reefs in the King Abdullah Reef (second row) and the Japanese Garden in Eilat
+(third row), scenes with extremely challenging caustics from the MSS Reef (fourth row), and the North
+Beach (bottom row), a site heavily impacted by humans, with visible litter.
+
+27
+
+Appendix: Implementation Details
+Our implementation of a learning-based SfM system is based on the Scale Consistent SfM-Learner (Bian
+et al., 2021), which in turn is based on the seminar learned SfM system (Zhou et al., 2017). To combat the
+fact that some video frames exhibit strong blur due to the conditions under water and the low-cost camera
+setup, we slightly modify the implementation of the Scale Consistent SfM-Learner such that the neural
+network receives information about a larger sequence of images at a time instead of only one. This is
+realized by adding a second ResNet-34 image encoder, which takes seven images that are concatenated
+along the channel (color) dimensions. The encoded features of the image sequence are concatenated
+with features from a ResNet-34 encoder which takes one image at a time. The depth is computed from
+the concatenation of a single image’s features with the sequence features, the pose is computed from
+the concatenation of two images’ features with the sequence features. This neural network architecture
+change is illustrated in Figure 15.
+
+Figure 15: Schematic Figure showing the architecture of the depth & pose estimation neural networks,
+which is a ResNet-34-encoder U-Net. One encoder encodes a sequence of seven images, the other
+encoder takes a single image as input. The features extracted by the encoders are concatenated along the
+channel dimension (denoted by ⊕). In this example, the calculation of the respective depths and camera
+pose transform of the third image Ic and fourth image Id are highlighted.
+Following this architecture change, we receive estimated depths and poses for all subsequent images in the image sequence (seven images at once). This means, that at point cloud creation time, the
+prediction acts as a sliding window, giving multiple depth estimates for each image, and multiple pose
+transform estimates for subsequent image pairs. Computing the variance of these predictions acts as a
+surrogate for uncertainty. In the point cloud creation process, the 35% of pixels with the highest depth
+uncertainty are excluded from being added to the point cloud. As a postprocessing step, the 20% of
+points in each point cloud with the highest depth uncertainty are removed.
+
+28
+
+

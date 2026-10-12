@@ -1,0 +1,326 @@
+Multi-strategy dung beetle optimization for robust indoor object detection and tracking for visually impaired people with hybrid deep learning networks
+Anwer Mustafa Hilal, Da’ad Albalawneh, Wided Bouchelligua, Mahir Mohammed Sharif (2025). Scientific Reports. https://doi.org/10.1038/s41598-025-08155-3. doi:10.1038/s41598-025-08155-3. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Multi-strategy dung beetle optimization for robust indoor object detection and tracking for visually impaired people with hybrid deep learning networks
+
+## Abstract
+AbstractVisually impaired people generally face many troubles in their everyday lives, and technical involvement might help them perform these tasks. Object detection is a significant aspect of computer vision (CV) and machine learning (ML), which plays a substantial part in recognizing and detecting objects in a video or image. Dissimilar objects are detected, and their shape, size, and position data are accurately acquired through object detection. Particularly, visually challenged people are not set to face sudden situations by themselves while moving. Hence, these situations are a significant attack on the protection of the visually impaired. A method is required all over the world to alleviate their day-to-day lives, since it is problematic to help visually impaired individuals in real life. This study proposes a novel Multi-Strategy Dung Beetle Optimization for Robust Object Detection and Tracking with Hybrid Deep Learning Networks (MSDBO-ODTHDLN) model. The proposed MSDBO-ODTHDLN model presents visually challenged people with real-time and reliable object detection and tracking capabilities. Initially, the median filter (MF) is employed in the image pre-processing stage to enhance edge detection and ensure the clarity of objects in diverse environments. Furthermore, the Mask R-CNN method is used for object detection to provide accurate localization and identification of objects within the environment. Moreover, the CapsNet model is the backbone for the feature extraction process to capture spatial hierarchies and intricate patterns. The hybrid method unites a convolutional neural network and a bidirectional long short-term memory (CNN-BiLSTM) model, which is utilized for object detection and classification. Finally, the multi-strategy dung beetle optimization (MSDBO)-based hyperparameter selection process is performed to adjust the analysis outcomes of the CNN-BiLSTM model. To exhibit the improved performance of the proposed MSDBO-ODTHDLN methodology, a comprehensive experimental analysis is conducted under the Indoor object detection dataset. The comparison analysis of the MSDBO-ODTHDLN methodology portrayed a superior accuracy value of 99.77% over existing models.Keywords: Dung beetle optimization, Object detection, Deep learning, Image pre-processing, Visually impaired peopleSubject terms: Computational biology and bioinformatics, Mathematics and computing
+
+## Introduction
+People affected by visual ailments and deficiency need help overcoming everyday tasks, like moving and discovering different environments. Current statistics from the World Health Organisation (WHO) have revealed that nearly 253 million individuals all over the globe are visually challenged, of whom 217 million suffer from slight vision. At the same time, 36 million are visionless1. Blindness is the inequity of neurological or physiological modules called a lack of discernment. The visual sense typically plays a significant part in helping humans attain a preferred destination, discover the accurate route in unknown/known indoor environments, or find the way in outdoor scenes2. Unfortunately, visually impaired people or the blind face a lot of challenges when doing such tasks and, most of the time, are confused or even scared. The lack of vision might impact professional, personal, and ecological relations and signify a restraint in everyday routines. Despite many developments in invention, blindness remains a crucial problem. Scholars are concentrating on this problem to develop supportive devices or helpers for visually challenged people3. A few navigation devices and structures are available for sightless people. Presently, developments in CV, multi-sensory research, wearable technology, and medical involvements have simplified the growth of many assistive technology solutions of non-invasive and invasive technology for visually challenged and blind persons4. In the present scenario, computer technologies are significant in human life. The effective use of these technologies by disabled persons is challenging.
+The design of an effective human-computer interface for disabled individuals is a vast assistance, which might rarely open employment chances for these persons5. For this drive, the study of computer-assistive technologies is attaining more attention and becoming very significant. Recently, dissimilar computer assistive technologies have been developed for dissimilar clusters of disabled people6. Object detection is one of the effective models for blind people to detect objects. The main intention is to perceive every instance of objects from one or numerous identified classes, like cars, people, or faces, in an image. Usually, only a tiny quantity of objects exists in the image. Still, there are many probable positions and measures at which they can arise; these need to be explored7. Object detection defines an example of a class where an object fits and assesses the position by formatting the bounding box around it. Perceiving a single class of objects from an image is termed single-class object detection, or identifying every object in an image is recognized as multi-class object detection8. Recently, deep learning (DL) technology has become more effective owing to the advanced outcomes gained in the areas of object detection, classification of images, and natural language processing (NLP)9. DL has gained massive popularity due to dual fold, the huge accessibility of databases and great graphics processing units (GPUs). As DL needs massive datasets and excellent sources to execute training, both necessities have previously been fulfilled in this modern era10. DL approaches based on convolutional neural networks (CNNs) are very effective for object detection and classification tasks.
+This study proposes a novel Multi-Strategy Dung Beetle Optimization for Robust Object Detection and Tracking with Hybrid Deep Learning Networks (MSDBO-ODTHDLN) model. The proposed MSDBO-ODTHDLN model presents visually challenged people with real-time and reliable object detection and tracking capabilities. Initially, the median filter (MF) is employed in the image pre-processing stage to enhance edge detection and ensure the clarity of objects in diverse environments. Furthermore, the Mask R-CNN method is used for object detection to provide accurate localization and identification of objects within the environment. Moreover, the CapsNet model is the backbone for the feature extraction process to capture spatial hierarchies and intricate patterns. The hybrid method unites a convolutional neural network and a bidirectional long short-term memory (CNN-BiLSTM) model, which is utilized for object detection and classification. Finally, the multi-strategy dung beetle optimization (MSDBO)-based hyperparameter selection process is performed to adjust the analysis outcomes of the CNN-BiLSTM model. To exhibit the improved performance of the proposed MSDBO-ODTHDLN methodology, a comprehensive experimental analysis is conducted under the Indoor object detection dataset. The significant contribution of the MSDBO-ODTHDLN methodology is listed below.
+The MSDBO-ODTHDLN model utilizes MF-based image pre-processing to enhance the quality of input images by mitigating noise and enhancing crucial features. This step ensures that the object detection algorithm performs more accurately by providing more precise data. By refining the image quality, the pre-processing stage assists in better feature extraction and object identification.
+The MSDBO-ODTHDLN technique employs Mask R-CNN to perform precise object detection, even in intrinsic and cluttered environments. This technique enables the segmentation of objects with high accuracy, improving detection robustness in challenging conditions. Mask R-CNN allows the system to distinguish and localize multiple objects simultaneously, enhancing efficiency.
+The MSDBO-ODTHDLN method integrates CapsNet to improve feature extraction, enabling more precise object recognition. This approach utilizes capsules to capture spatial hierarchies and relationships between features, enhancing the technique’s capability to recognize objects in diverse orientations. By utilizing CapsNet, the model attains improved generalization and accuracy in object detection.
+The MSDBO-ODTHDLN methodology incorporates CapsNet to improve feature extraction, enabling more robust object recognition. Using capsules captures complex spatial hierarchies, allowing for more accurate detection of objects in varied orientations. This integration enhances the model’s ability to handle intrinsic visual scenarios effectively.
+The MSDBO-ODTHDLN approach integrates CNN and BiLSTM to detect and classify tasks effectually. This hybrid approach utilizes CNN for feature extraction and BiLSTM to capture temporal dependencies, improving spatial and sequential understanding. The integration enhances detection accuracy and classification performance in dynamic environments.
+The MSDBO-ODTHDLN model integrates MSDBO to optimize hyperparameters, ensuring efficient and accurate performance. By fine-tuning the model’s parameters, MSDBO improves overall efficiency, detection, and classification results. This optimization strategy mitigates computational time and maximizes the model’s accuracy in complex scenarios.
+The hybrid approach integrates CNN-BiLSTM, Mask R-CNN, CapsNet, and MSDBO, creating an effective system for improved object detection, classification, and optimization. This integration allows the model to utilize the merits of each technique, ensuring enhanced accuracy and robustness across intrinsic environments. The novelty combines advanced DL techniques with an optimization algorithm, providing a comprehensive solution to real-time object detection and classification challenges. This unique fusion improves the model’s ability to handle complex tasks effectively.
+
+## Literature of works
+Jain et al.11 developed an innovative optimized deep fused learning (ODFL) technique. The input video undergoes pre-processing using a Gaussian filtering (GF) model to remove sound and improve frame characteristics. Afterwards, the FF technique applies the dense convolution feature fusion network (D-ConvFFN) to remove and fuse related aspects. Eventually, the enhanced refinedet-based fire hawk (ERFH) component is used to effectively identify many objects in video frames. The fire hawk optimizer (FFO) method is utilized for tuning, and once the objects are recognized, a softmax classifier categorizes them into diverse classes. The Hungarian-based SORT method is employed to track multiple objects. Abed et al.12 developed an AI-enabled scale-invariant object detection and tracking (AIE-SIODC) technique. It follows a dual-phase method, such as object classification and detection. In the early phase, the projected AIE-SIODC model employs Path Augmented RetinaNet (PA-RetinaNet) to enhance the feature extraction process. To develop the PA-RetinaNet approach network possibility, the deer hunting optimization (DHO) model is employed. Pathak et al.13 introduce a novel method of counterfeit recognition utilizing CNNs, a DL technology. The developed method comprises training CNNs on an authentic dataset and counterfeit Bangladeshi currency images. This method can automatically remove discriminative aspects from currency images by leveraging the CNN hierarchical structure. The CNN-based method provides multiple advantages compared with classical approaches that frequently depend on rule-based or manual inspection models. In14, a customizable and standalone solution is projected by utilizing classical visual recognition of landmarks employing a smartphone and updating about the neighbouring places, securing the user a sense of site. It utilized the features directed by the Accelerated Segment Test (FAST) for feature detection. It rotated the dual robust-independent elementary feature (ORB) model for matching attributes, employing the BRIEF descriptor, a brute-force approach with the KNN model. Wu and Lai15 improved multi-camera object detection and localization by incorporating YOLOv5 detection, spatial mapping, and feature matching for accurate recognition and tracking in complex environments. Yannawar16 introduces a solution method. This method is aimed at object detection and feature extraction, employing a CNN from a real-world video. An image acquisition gadget is applied to identify the objects, and object-detected data is delivered to the visually challenged individual over the audio modality. As the initial stage of the complete intellectual procedure, an object detection method is projected, which handles the live video stream captured over the acquisition devices. In17, a restoration-enhanced object detection system is introduced for unfavourable weather scenes, which is permitted by dubbed RDMNet, Degradation Modelling. Primarily, this work integrates the restoration idea into the system detection to capture more possible information on degraded images. Furthermore, this technique developed the degradation images and learned its multi-scale degraded demonstrations. Eventually, a multi-scale bi-directional feature fusion block is introduced, and a restoring weight decay training approach is presented.
+In18, an innovative structure is presented that employs artificial vision, explicitly an intellectual method depending on the CNN model. This method presents the user with a piece of data, comprising the located target position, and alarms the consumer through a voice message for unknown or known people. The developed study focuses on creating a user-friendly technology that accomplishes the primary requirement of physically disabled people, presenting them with portability, a simple interface, cost efficiency, and ease. Zhang19 proposed a depth feature extraction and image semantic augmentation (DFE-ISAR) model, which outperforms SceneNet-HHA (SENet-HHA), image semantic augmentation (ISA), and fully convolutional networks (FCN) models in Mean Intersection over Union (MIoU), Forward Intersection over Union (FIoU), pixel accuracy (PA), and mean accuracy (MA) metrics, ensuring higher segmentation accuracy and robustness. Gomaa20 presented a resilient semi-automatic unsupervised object detection method by integrating CNN-based YOLOv8 with background subtraction and clustering for improved detection and classification accuracy without manual labelling. Gomaa and Saad21 introduced a novel Residual Channel-attention (RCA) network for high-resolution remote sensing image scene classification, utilizing CNNs, channel attention, and squeeze-and-excitation (SE) mechanisms to improve multi-scale feature capture, classification accuracy, and address challenges in feature representation and spatial relationships. Gomaa and Abdalrazik22 proposed a reliable semi-automatic methodology for unsupervised object detection by integrating modified YOLOv4, background subtraction (BS) with low-rank decomposition, and clustering to refine detection results. Obayya et al.23 proposed the ODSDP-ADLMSSO model to enhance object detection by utilizing GF for image pre-processing, YOLOv7 for object detection, MobileNetV3 for feature extraction, a temporal convolutional network (TCN) for classification, and a Sparrow search optimization algorithm (SSOA) for hyperparameter selection. Gomaa, Abdelwahab, and Abo-Zahhad24 developed an efficient and robust real-time approach using Top-hat and Bottom-hat transformation, KLT tracker, K-means clustering, and a connecting algorithm for enhanced detection and tracking performance. Khadidos and Yafoz25 proposed the object detection model for visually impaired individuals with a metaheuristic optimization algorithm (ODMVII-MOA) model by utilizing the Wiener filter (WF) technique for image pre-processing, RetinaNet for object detection, EfficientNetB0 for feature extraction, LSTM-AE for classification, and the dandelion optimizer (DO) model for hyperparameter tuning. Afif et al.26 developed a DL-based object detection framework for indoor navigation of visually impaired individuals by utilizing an optimized YOLOv3 architecture and a custom dataset featuring 25 object categories. Li et al.27 presented Point Cloud and image VoteNet, which enhances 3D object detection by utilizing radar point cloud fusion, point cloud density parameters, and a Point-Fusion technique for early fusion of radar and image data to improve localization, size estimation, orientation, and classification accuracy. Dixit et al.28 improved obstacle detection and navigation for visually impaired individuals using smart glasses with continuous image capture, object detection, distance sensing, and speech-based interface, integrated with Raspberry Pi-powered smart shoes. Table 1 summarizes the recent studies on object detection and tracking techniques for diverse applications.
+Summary of recent studies on object detection and tracking techniques for various applications.
+The existing studies have shown significant progress, but various limitations and research gaps still exist. Many models, such as those based on CNNs, often face difficulty handling complex environmental factors such as adverse weather conditions, large-scale discrepancies, and object occlusions. Moreover, real-time performance in dynamic scenarios remains challenging, particularly in mobile applications for visually impaired individuals. The GF or feature extraction models restrict the adaptability of models to diverse real-world settings. Furthermore, while some systems utilize voice feedback or visual recognition, integrating these methods into fully autonomous and robust solutions for VI navigation is still lacking. The research gap is in improving the generalization of models across diverse environments, reducing computational overhead while improving detection accuracy, and creating seamless, real-time interactive systems for practical VI assistance.
+
+## Proposed methodology
+This article proposes a novel MSDBO-ODTHDLN model. The proposed model aims to provide visually challenged people with real-time and reliable object detection and tracking capabilities. To achieve that, the presented MSDBO-ODTHDLN technique involves numerous stages, such as image pre-processing, object detection, feature extraction, classification, and hyperparameter tuning. Figure 1 depicts the overall working procedure of the MSDBO-ODTHDLN technique.
+Overall working method of the MSDBO-ODTHDLN approach.
+
+## Image pre-processing using MF
+At first, the MSDBO-ODTHDLN method employs an MF during the image pre-processing stage to enhance edge detection and ensure the clarity of objects in diverse environments29. This model is chosen for its effectiveness in removing noise while preserving the edges of objects in an image, making it ideal for object detection tasks. Unlike other filtering techniques, such as GF or mean filters, MF is robust to salt-and-pepper noise, which is common in real-world scenarios. It works by replacing each pixel’s value with the median of the surrounding pixel values, thus mitigating image distortions while maintaining key structural data. This ability to preserve edges while mitigating noise makes MF an optimal choice for enhancing the quality of images before further processing. Furthermore, MF is computationally efficient and easy to implement, making it an ideal option in real-time applications where processing speed is crucial. MF presents a balanced tradeoff between simplicity and performance compared to more complex filtering methods.
+The MF is a nonlinear image processing model generally employed in object detection and tracking models for visually challenged individuals. It aids in decreasing noise and improving the quality of an input image by substituting every pixel value with the average of its adjacent pixels. This pre-processing stage enhances the accuracy and clarity of object detection, particularly in environments with fluctuating lighting conditions. The MF certifies more accurate object tracking and localization by filtering out noise. These mains are more trustworthy and effective navigation support for blind people.
+
+## Object detection using mask R-CNN
+Also, the Mask R-CNN technique is employed for object detection to provide accurate localization and classification of objects within the environment30. This method is highly effective in localizing and segmenting objects. Unlike conventional object detection models such as Faster R-CNN or YOLO, Mask R-CNN not only detects the bounding box of an object but also generates pixel-wise segmentation masks, giving a more precise comprehension of the object’s shape. This ability to simultaneously detect and segment objects makes it appropriate for applications requiring detailed object recognition. Moreover, this method is built on a region-based CNN architecture, which allows it to process images with multiple objects, maintaining high accuracy effectively. Its capability in handling intrinsic and overlapping objects in diverse environments distinguishes it from other detection models. Compared to models with a single task focus, Mask R-CNN presents a robust, multitasking approach, making it an ideal choice for applications needing detection and segmentation.
+According to CNN, Mask R-CNN (Regional CNN) is intended for sample segmentation tasks. It presents the abilities of Faster R‐CNN by enhancing Region of Interest (ROI) handling over the overview of the ROI alignment and adding a branch to predict segmentation masks on all ROIs. The Mask R‐CNN structure works in two phases: region proposal and sample segmentation with object detection. The following segments describe all phases.
+
+## Region proposal
+The region proposal phase classifies candidate ROIs in the image, which can comprise objects, thus permitting the following processing to concentrate on this region. The region proposal system initially handles the input image over a convolutional backbone network for removing features from the imagery. Usually, a variation of ResNet combined with a Feature Pyramid Network (FPN) serves as the backbone structure. The FPN improves the backbone by making a multiple-scale feature pyramid that permits the system to detect objects at different scales efficiently. The FPN attains this by building feature maps from the ResNet on numerous scales. It utilizes a top‐down pathway over lateral links by the feature mapping from the ResNet, to combine higher‐level semantical characteristics with lower‐level, higher‐resolution characteristics. The representation of multiple scales allows the system to detect either small or large objects effectively.
+Here, ResNeXt is applied as the backbone structure rather than the more normally applied ResNet in concrete crack detection investigations to gain a possible performance development. ResNeXt improves ResNet by utilizing numerous simpler paths in parallel inside all layers, permitting it to learn more different characteristics without making the complete approach much greater or more complicated. It is established that RexNeXt provides improved inference outcomes in various object detection tasks.
+After feature extraction, a region proposal network (RPN) works on the feature mapping output from the backbone. It utilizes a smaller convolutional network, which passes over the feature mapping and performs evaluation. At all locations, the RPN utilizes a set of pre-defined anchor boxes of various scales and feature ratios to produce these designs, which cover a different range of possible object sizes and shapes. The RPN returns the predicted object score for every anchor box, which designates the probability of the object to be present, and the adjusted anchor box directs.
+
+## Instance segmentation with bounding box
+The next phase enhances the ideas produced in the initial phase. It outputs the bounding boxes for object detection and sample segmentation masks, which signify the crack region in this case. It starts with the ROI Align layer, which removes fixed-size feature maps from all presented areas. ROI alignment builds upon its predecessor, ROI pooling, which is applied to faster R‐CNN. Utilizing bilinear interpolation maintains spatial information with significantly higher precision. This inhibits the quantization problem in ROI pooling, whereas the nonstop coordinates of the presented areas are passed to separate bin positions. The aligned feature maps are then handled by dual network heads: the object recognition head and the mask generation head. The object recognition head performs the bounding box regression and object classification utilizing fully connected (FC) layers. The mask generation head makes a class‐specific binary mask for all bounding boxes. This mask outlines the object shape inside the bounding box, like the crack’s region.
+
+## Feature extraction using CapsNet
+In addition, the CapsNet model is employed as the backbone for the feature extraction process to capture spatial hierarchies and intricate patterns31. This model presents significant merit in extraction due to its capability to preserve spatial hierarchies between features. Unlike conventional CNNs, which rely heavily on pooling layers that can lose spatial data, CapsNet utilizes capsules to encode part-whole relationships, making it more effective at recognizing objects in diverse orientations, perspectives, and deformations. This unique capability makes CapsNet useful for extracting detailed features in images with varying object poses. Furthermore, the dynamic routing mechanism of the model allows it to adaptively route information between capsules, improving its robustness to transformations like rotation and scaling. This makes CapsNet more effective and accurate for feature extraction, specifically in intrinsic and cluttered environments, compared to conventional CNN models that might struggle with such discrepancies. Therefore, CapsNet provides a more accurate and versatile solution for feature extraction, particularly in tasks that involve complex and dynamic objects. Figure 2 specifies the structure of the CapsNet technique.
+Architecture of the CapsNet model.
+The CapsNet method was introduced according to the concept of human visual object recognition. They postulate that in recognizing objects; humans tend to disregard unrelated particulars and communicate information about the central portions of the detected objects from visual information for high-level decision-making. In the same way, image attributes are capsules in the representation. High-level capsules cannot thoroughly combine all the data from all low-level capsules, but they particularly incorporate essential information.
+The structure of CapsNet, as demonstrated in, characterizes a higher-performance networking architecture for DL. In this setup, all features are considered by a vector recognized as a capsule. During the training of this structure, efficient image extraction of the features is attained. The features of all spatial objects are encapsulated inside vectors and slowly incorporated into clustering models. For the protection of the spatial data regarding information, it substitutes the layer of pooling generally established in CNNs, leading to a remarkably lower test error rate of 0.25% only on the MNIST database.
+The capsule’s feature vector has properties in which its direction epitomizes particular characteristics, whereas the length of the module (L2 norm) specifies the probability of the features’ existence. Additionally, it’s significant to recognize that all capsule module lengths continuously remain lower than 1. Compared to traditional neural networks (NNs), a dynamical routing model enables efficient data transfer between lower and upper layers in Caps Net.
+The capsule’s output and input vectors characterize the particular object category’s instantiation parameters. These vector directions designate specific features of the object, whereas their length indicates the probability of its presence. The dynamical routing model plays an essential part during prediction, guaranteeing correspondence between numerous predictions and stimulating capsules in the following layer. The length of the output vector of every imitates its likelihood of occurrence in the present input, requiring that it fall in the interval of -1). Nonlinear compression over promises that shorter vectors model length, whereas longer vectors are decreased to a length of 1. In the capsule stage, an activation function is completed utilizing a discriminating learning model as stated by Eq. (1).
+The capsule’s input vector is signified as , and its consistent output vector is described. Additionally, adding vector weights from each of the capsules to is equivalent to . These nonlinear compressions not only conserve the new vector direction, thus retaining the features of the instantiation parameters unaffected, but also limit the vector length in the interval ,1). The computation procedure to obtain the input vector contains Linear Routing and combination phases, as stated by Eq. (2).
+Mainly, refers to a linear combination of , which, even though not equivalent, compares to the FC system. It establishes the power of the link among the and capsules or characterizes the vector of prediction gained by increasing the vector of the output of the capsule in the previous layer by its equivalent weighted matrix. The procedure of computing is intended to upgrade utilizing a dynamic routing model iteratively. This process may get the input vector of the following capsule layers during routing. Dynamical routing is an essential element in capsule NNs, as its dynamical nature improves the system’s descriptive strength and enhances performance on noisy samples. This mechanism recognizes which sub-capsules must be upgraded in reverse propagation and underlines objects in the images.
+It contains gaining the vector of prediction by multiplying sub-capsule using a learnable matrix of viewpoint . The coupling coefficient among capsules is established utilizing the function of softmax as the increasing previous and fixed to in the primary iteration. Formerly, a function of squashing is applied to the weighted sum of , coupling coefficient, parent capsule , and consistent vector of prediction Finally, the scalar product is collected with to upgrade the coupling coefficient. This model permits dynamic routing to connect parent and child capsules rapidly.
+
+## Classification process using CNN-BiLSTM model
+For the object detection and classification process, the hybrid method uniting a CNN-BiLSTM model is employed32. This method integrates the merits of CNN and BiLSTM networks, making it highly effective for classification tasks, specifically when spatial and temporal features are involved. CNNs outperform in automatically extracting hierarchical features from image data, allowing for effective pattern recognition. At the same time, BiLSTMs capture sequential dependencies in data by processing data in both forward and backwards directions. This technique benefits intrinsic tasks such as object detection and classification, as the model enables it to comprehend context and temporal relationships. Using both CNN for feature extraction and BiLSTM for sequence learning, the CNN-BiLSTM model provides enhanced accuracy and robustness compared to conventional single-network architectures. It is advantageous in scenarios where spatial and temporal data are critical, such as video or sequence-based image classification tasks, presenting a superior solution over simpler models like CNNs or LSTMs alone. Figure 3 represents the architecture of the CNN-BiLSTM method.
+Structure of the CNN-BiLSTM model.
+CNN is a DL model, which handles images by allocating biases and weights to various attributes and then classifies the images. Its framework imitates the neural links inside the human brain. mainly comprises three layers. The main element is a convolutional layer, which removes features from the image utilizing kernels (filters). It carries out processes similar to convolution to make feature mapping, which emphasizes essential attributes of the image. Next, the pooling layer decreases the feature map’s spatial size to reduce computation efficiency while keeping significant features. The normal pooling model contains max pooling and average pooling. The FC layer is responsible for classification; it levels the feature mapping and uses activation functions to classify the image into various classes. Added processes inside comprise: Dropout, which avoids overfitting by arbitrarily neglecting specific neurons in training. Batch Normalization stabilizes and accelerates training by normalizing the input amongst layers. The activation functions, namely ELU, , and SoftMax, are applied to make the final classification results. For example, SoftMax is generally used for multiple-class difficulties as it allocates probabilities to all classes.
+LSTM is a particular configuration of a fundamental recurrent NN (RNN) model. An RNN is an artificial NN (ANN) with the memory property, as links between the layers create cycles. Nevertheless, after it arrives at memorizing longer-term sequential data, there are problems with RNN. Thus, for gapping, Long-Term Dependences change to RNN utilizing diverse gates, which lead to LSTM. This gate avoids vanishing gradient in traditional RNN by being capable of recording either short-term or long‐term memory besides the time-step. The gates contain Forget, Input, and Output gates. It can further operate in the reverse direction. Incorporating backwards and forward LSTM passes creates a Bi‐LSTM technique. It is reflected as precise in data storage. Bi-directional LSTM is applied to reexamine a portion of formerly trained features, and it relates the image in both forward and backwards directions, which includes stability to this method. The forget gate layer Eq. (3) is as known,
+The following layer is named the layer of the input gate ; here, the remembering state data is reoriented using the novel characteristics.
+The output from the forget gate layer is multiplied by the preceding vector of the cell state of the LSTM cells . This outcome is joined by the output from the input gate layer multiplied by the hidden layer (HL) vector from the preceding stage, then passes through the tanh function. Concurrently, they make the vector of the cell state for the following cell of the LSTM. After passing over the tasks of , this novel cell state is further multiplied by the preceding HL vector () that has penetrated the sigmoid function to make the HL vector for the following LSTM () cell.
+During this last layer, , some of the characteristics from the preceding state are integrated with the recently adapted attributes of the present cell, and the calculation is passed to the following state.
+whereas, signifies the input vector to the LSTM unit, and and correspondingly represent weighted vectors of input, output, and the forget gates.
+This method incorporates the benefits of either the CNN or the LSTM methods. The initial stage of the process contains the input layer for an image of dimensions x. The next stage is the CNN layer, where initial convolution is carried out on the input, and dissimilar processes are implemented, like dropout, normalization and pooling. Since the CNN layer’s last output is formed, it is initially compressed and provides for the layer of bi-directional LSTM. The variable or fixed-length vector representation as Bi-LSTM output is input to the dense or output layer for classifying different emotional classes, such as sad, happy, disgust, angry, fearful, surprised, and neutral.
+whereas, output layer’s output; the vector learned from the CNN-Bi LSTM approach; the bias and weight of the CNN‐Bi LSTM method.
+
+## Hyperparameter tuning using MSDBO approach
+At last, the multi-strategy MSDBO-based hyperparameter selection process is performed to enhance the analysis outcomes of the CNN-BiLSTM method33. This method effectually explores the search space while balancing exploration and exploitation. Inspired by the dung beetle’s behaviour, this optimization technique adapts to intrinsic, high-dimensional optimization problems by utilizing multiple strategies for a more flexible and robust search process. The method can also effectually handle intrinsic and nonlinear parameter spaces better than conventional optimization techniques like grid or random search, which may get stuck in local minima. Furthermore, the ability of the method to fine-tune hyperparameters over various iterations results in an enhanced performance of the model, improving accuracy and generalization. Unlike gradient-based methods, MSDBO does not require gradients, making it more appropriate for problems where gradients may be challenging to compute. This makes it an ideal choice for optimizing DL methods with many hyperparameters, ensuring faster convergence and improved results compared to conventional tuning methods. Figure 4 illustrates the working flow of the MSDBO technique.
+Working flow of the MSDBO method.
+This technique characterizes a comparatively new model, representing significant abilities in either local exploitation or global exploration after dealing with composite optimizer challenges. In the DBO architecture, all approaches following the DB’s behaviours are directed by a different collection of upgrading rules. A complete explanation of these behaviours and their related updated mechanisms is given in the following segments:
+(1) DBs show individual behaviour throughout the rolling dung balls process. This behaviour is classified into two main techniques: dancing and rolling behaviour. Lacking obstacles, the DB employs rolling behaviour inspired by the light source intensity. The mathematical expression for upgrading the location in this rolling behaviour is shown in Eq. (10):
+whereas characterizes the present number of iterations; signifies the location information of the DB in iteration, and is applied to model differences in light intensity.
+(2) Egg-laying DBs are involved in the rolling dung balls behaviour in selected regions, which are believed safer for determining oviposition and the following reproduction of their offspring. Once the selected safer region is selected, the spawning DB completes its reproductive actions, and the following adjustments to the position are established based on the computations presented in Eqs. (11) (14):
+During Eq. (11), refers to the positional information of spawning ball; signifies the present local optimum location; and signify random numbers spread at uniform in the interval of and designate the upper and lower limitations of the spawning region, individually; and represent the lower and upper borders of the optimizer difficult, correspondingly. signifies the maximal iteration count.
+(3) Smaller DBs are needed for finding food inside a restricted optimum foraging region. After these beetles are positioned inside this selected area, they participate in the foraging behaviour, and the upgrades to their location are defined based on the methods drawn in Eqs. (15)–(17):
+Here, exemplifies the positional information of the maller DB in iteration ; signifies the global optimum location; and characterize a random number distributed uniformly in the interval of 0 and 1; and represent the lower and upper limits of the optimum foraging region, correspondingly.
+(4) Once positioned close to the optimal food source, the stealing DB executes its stealing behaviour, and the location upgrade is computed as exposed in Eq. (18).
+Now, refers to the positional information of the thieving DB at iteration ; signifies the global optimum location; symbolizes a random number distributed at standard normal in the interval of means a constant value.
+Considering the limits of the DBO optimizer model to solve optimizer difficulties, which even tends to drop into local ideals and contain a comparatively slower convergence speed, this study presented an improved model, MSDBO. This model combines the spatial pyramid matching (SPM) mapping tactic, the Levy flight tactic, and the adaptive -distribution variation tactic.
+(1) SPM mapping.
+Chaotic mapping is a composite and stochastic model applied as a substitute to randomly initialized models for optimizer models, which is used in different optimizer models for its capability to enhance the randomness, diversity, speed of convergence, and the ability to leap out of the local optimum solution of the model. In comparison with the beginning of chaotic mapping techniques like tent mapping, circle mapping, and logistic mapping, in conventional optimizer methods, SPM mapping targets to split the searching region of the optimizer problem into numerous scales that contain the benefits of consuming a higher amount of unpredictability and randomness, and can make a sequence of random numbers distributed at uniform, such that its initializing DB individuals are as distributed uniformly as feasible. The model parameters are fixed to , and . The mathematical formulation is expressed below:
+Here, characterizes the chaos value of iteration ; refers to the modulo process; if and , the method is chaotic.
+(2) Levy Flight (LF).
+LF is a kind of arbitrary wandering using a likelihood distribution of step sizes presented, a probability distribution with long-tailed properties. In contrast, comparatively larger step sizes occur more commonly than through a normal distribution or other standard distributions, which permits LFs to explore more of the area and enhances the solution area diversity to be discovered. Global exploration utilizing the LF tactic permits DB individuals to be extensively distributed in the searching area to enhance global optimum discovery, preventing fall into local best solutions, and improve convergence speeds, as exposed in the LF expression in Eq. (20):
+Now, , and characterize the generated number at random, which is distributed uniformly inside the range and. The equation for is as shown in Eq. (21),:
+The positional information of the smaller DB foraging is upgraded by the LF approach to attain a superior balance between global exploration and local search. The location updated equation is displayed in Eq. (22):
+The MSDBO method originates from a fitness function (FF) for attaining enhanced classification outcomes. It defines a positive number to signify the better candidate solution performance. Here, the reduction of the classifier rate of error is reflected as FF. Its mathematical formulation is given in Eq. (23).
+
+## Performance analysis
+In this section, the experimental validation of the MSDBO-ODTHDLN technique is studied under the Indoor object detection dataset34. The dataset consists of 6642 counts below ten class labels as illustrated in Table 2.
+Details of the dataset.
+Figure 5 illustrates the classifier results of the MSDBO-ODTHDLN technique below 80%TRPH and 20%TSPH. The confusion matrices with precise classification and identification of all classes are displayed in Fig. 5a,b. Figure 5c presents the PR outcome, which indicates improved performance across all classes. Eventually, Fig. 5d demonstrates the ROC outcome, which signifies proficient performance with great ROC values for all classes.
+80% TRPH and 20% TSPH of (a,b) confusion matrices and (c,d) curves of PR and ROC.
+Table 3 and Fig. 6 depict the indoor object detection of the MSDBO-ODTHDLN approach below 80%TRPH and 20%TSPH. The performances signify that the MSDBO-ODTHDLN approach accurately recognized the samples. On 80%TRPH, the MSDBO-ODTHDLN method presents an average , , , , and of 99.68%, 96.18%, 87.81%, 90.93%, and 93.78%, correspondingly. In addition, on 20%TSPH, the MSDBO-ODTHDLN method provides an average , , , , and of 99.77%, 95.51%, 88.90%, 91.40%, and 94.37%, respectively.
+Indoor object detection of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+Average of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+Figure 7 illustrates the training (TRA) and validation (VAL) performances of the MSDBO-ODTHDLN method over 80%TRPH and 20%TSPH. The values of are computed across a period of 0–25 epochs. The figure emphasized that the values of TRA and VAL present an increasing trend, indicating the capacity of the MSDBO-ODTHDLN approach with maximum outcome through multiple repetitions. Also, the TRA and VAL values remain close through the epochs, indicating diminished overfitting and maximum performance of the MSDBO-ODTHDLN approach, ensuring steady prediction on hidden samples.
+curve of MSDBO-ODTHDLN method under 80%TRPH and 20%TSPH
+Figure 8 showcases the TRA loss (TRALOS) and VAL loss (VALLOS) graph of the MSDBO-ODTHDLN method under 80%TRPH and 20%TSPH. The loss values are computed throughout 0–25 epochs. The values of TRALOS and VALLOS exemplify a diminishing trend, which indicates the proficiency of the MSDBO-ODTHDLN technique in equalizing a tradeoff between data fitting and generalization. The progressive lessening in loss values also pledges the improved outcome of the MSDBO-ODTHDLN technique and gradually tunes the prediction results.
+Loss curve of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+Figure 9 displays the classifier performances of the MSDBO-ODTHDLN technique below 70%TRPH and 30%TSPH. The confusion matrices with precise identification and classification of all distinct classes are shown in Fig. 9a and b. Figure 9c exemplifies the PR examination, which resulted in superior outcomes across different classes. At last, Fig. 9d exemplifies the ROC study, which reveals proficient performances with great ROC values for all classes.
+70% TRPH and 30% TSPH of (a,b) confusion matrices and (c,d) curves of PR and ROC.
+Table 4 and Fig. 10 illustrate the indoor object detection of MSDBO-ODTHDLN approach below 70%TRPH and 30%TSPH. The performances indicate that the MSDBO-ODTHDLN approach accurately recognized the samples. Using 70%TRPH, the MSDBO-ODTHDLN method provides an average , , , , and of 99.61%, 95.91%, 88.95%, 91.80%, and 94.33%, respectively. In addition, using 30%TSPH, the MSDBO-ODTHDLN method presents an average , , , , and of 99.73%, 96.47%, 86.52%, 89.47%, and 93.17%, respectively.
+Indoor object detection of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+Average of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+Figure 11 depicts the TRA and VAL performances of the MSDBO-ODTHDLN technique below 70%TRPH and 30%TSPH. The values of are calculated through a period of 0–25 epochs. The figure underscored that the values of TRA and VAL display a cumulative trend, indicating the competency of the MSDBO-ODTHDLN technique with maximum outcome through various repetitions. Likewise, the TRA and VAL values remain close across the epochs, indicating lesser overfitting and superior performance of the MSDBO-ODTHDLN model, ensuring reliable prediction on hidden samples.
+curve of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH
+Figure 12 shows the TRA loss (TRALOS) and VAL loss (VALLOS) graph of the MSDBO-ODTHDLN approach below 70%TRPH and 30%TSPH. The loss values are computed across a period of 0–25 epochs. The values of TRALOS and VALLOS show a diminishing trend, which indicates the proficiency of the MSDBO-ODTHDLN method in harmonizing a tradeoff between data fitting and generalization. The successive reduction in loss values assures the maximum outcome of the MSDBO-ODTHDLN method and tunes the prediction results after a bit.
+Loss curve of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+Table 5 and Fig. 13 inspect and compare the MSDBO-ODTHDLN method with the existing methodologies19,35,36. The performances underscored that the DFE-ISAR, SENet-HHA, FCN, YOLOv9s, YOLOv10s, CenterNet, EfficientDet, RT-DETR-L, CIHD-YOLO, Libra RCNN, and Cascade RCNN + res2net + DCNv2 techniques indicated poorer performance. While, the proposed MSDBO-ODTHDLN approach got higher performance with enhanced , and of 99.77%, 95.51%, 88.90%, and 91.40%, respectively.
+Comparative analysis of MSDBO-ODTHDLN model with existing methodologies19,35]– [36.
+Comparative analysis of MSDBO-ODTHDLN model with existing methodologies.
+Table 6 and Fig. 14 depict the mAP analysis of the MSDBO-ODTHDLN technique below existing methodologies. The table values imply that the proposed MSDBO-ODTHDLN method has attained efficacious performance compared to other methodologies. The MSDBO-ODTHDLN method accomplished a maximum mAP of 90.11%, mAP@50 of 88.47%, and mAP@75 of 76.59%.
+mAP outcome of MSDBO-ODTHDLN model with existing methodologies.
+mAP outcome of MSDBO-ODTHDLN model with existing methodologies.
+Table 7 and Fig. 15 indicates the computational time (CT) analysis of the MSDBO-ODTHDLN technique with existing model. The MSDBO-ODTHDLN model achieved the lowest CT of 8.59 s, significantly outperforming existing methods. DFE-ISAR and Cascade RCNN + res2net + DCNv2 illustrated CTs of 12.69 and 13.13 s, respectively, while YOLOv10s and CenterNet attained 13.23 and 10.84 s. Models such as SENet-HHA, FCN, YOLOv9s, EfficientDet, CIHD-YOLO, Libra RCNN, and RT-DETR-L illustrated higher CTs, ranging from 15.52 to 19.52 s. These results emphasize the superior computational efficiency of the MSDBO-ODTHDLN model, making it a highly appropriate for real-time or resource-constrained applications without compromising accuracy.
+CT evaluation of MSDBO-ODTHDLN technique with existing models.
+CT evaluation of MSDBO-ODTHDLN technique with existing models.
+Table 8 and Fig. 16 demonstrates the ablation study of the MSDBO-ODTHDLN method. The ablation study highlights the individual and integrated contributions of each component by comparing its performance against CNN-BiLSTM, MSDBO, CapsNet, and Mask R-CNN. The MSDBO-ODTHDLN model achieved the highest of 99.77%, of 95.51%, of 88.90%, and of 91.40%, clearly outperforming all other models. Also, CNN-BiLSTM exhibited an of 99.10% and of 90.88%, while MSDBO attained an of 98.55% with an of 90.18%. CapsNet, focusing solely on feature extraction, attained an of 97.97% and of 89.44%, whereas Mask R-CNN showed the lowest overall performance with of 97.31% and of 88.91%. These outputs validate that integrating the overall components significantly improves the performance of the model.
+Result analysis of the ablation study of MSDBO-ODTHDLN method.
+Result analysis of the ablation study of MSDBO-ODTHDLN method.
+
+## Conclusion
+This study develops a novel MSDBO-ODTHDLN model. The proposed MSDBO-ODTHDLN model presents visually challenged people with real-time and reliable object detection and tracking capabilities. At first, the MSDBO-ODTHDLN method employs an MF during the image pre-processing stage to enhance edge detection and ensure the clarity of objects in diverse environments. Next, the Mask R-CNN method is used for object detection to provide precise localization and identification of objects within the environment. In addition, the CapsNet model is used as the backbone for the feature extraction process to capture spatial hierarchies and intricate patterns. The hybrid method uniting a CNN-BiLSTM model is exploited for object detection and classification. Finally, the multi-strategy MSDBO-based hyperparameter selection process is performed to optimize the analysis outcomes of the CNN-BiLSTM model. A comprehensive experimental analysis was made to exhibit the enhanced performance of the presented MSDBO-ODTHDLN technique. The comparative results reported the improved characteristics of the MSDBO-ODTHDLN technique. The limitations of the MSDBO-ODTHDLN technique comprise challenges related to scalability across diverse environments and discrepancies in object appearances under diverse lighting or occlusion conditions. The model may also experience mitigated accuracy in highly cluttered or dynamic scenes due to restricted contextual awareness. Moreover, the reliance on specific datasets may affect generalizability to unseen domains or real-world deployment scenarios. Real-time processing on low-power devices remains a concern due to computational intensity. Furthermore, the technique lacks adaptability to user-specific navigation preferences or feedback mechanisms. Future works may integrate continual learning to adapt to new environments without retraining from scratch. Expanding the dataset diversity and integrating multi-sensory input could improve robustness. Enhancing interpretability and explainability of predictions for better user trust and understanding is also suggested.
+
+## Acknowledgements
+The authors extend their appreciation to the King Salman center For Disability Research for funding this work through Research Group no KSRG-2024- 434.
+
+## Author contributions
+Anwer Mustafa Hilal: Conceptualization, methodology, validation, investigation, writing—original draft preparation, fundingHDa’ad Albalawneh: Conceptualization, methodology, writing—original draft preparation, writing—review and editingWided Bouchelligua: methodology, validation, writing—original draft preparationMahir Mohammed Sharif: software, validation, data curation, writing—review and editing.
+
+## Data availability
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/thepbordin/indoor-object-detection, reference number34.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data supporting this study’s findings are openly available in the Kaggle repository at https://www.kaggle.com/datasets/thepbordin/indoor-object-detection, reference number34.
+
+## Table Table 1: Summary of recent studies on object detection and tracking techniques for various applications.
+References | Techniques | Metrics | Findings
+11 | GF, D-ConvFFN, ERFH, FFO, Softmax classification, Hungarian-based SORT tracking | Detection accuracy, tracking precision | Achieved 99.16% and 99.42% accuracy on PETS S2 2009 and UA-DETRAC datasets, respectively, outperforming existing models
+12 | AIE-SIODC, PA-RetinaNet, DHO | Detection accuracy, classification precision | AIE-SIODC attained superior detection and tracking accuracy over existing DL models in varied scales and complex scenes
+13 | CNN, DL | Detection accuracy, classification performance | CNN-based model effectively detects counterfeit currency with superior accuracy and adaptability over conventional methods
+14 | ORB, FAST feature detection, BRIEF descriptor, Brute-force matching, kNN | Processing speed, detection accuracy, feature match rate | The model efficiently identifies landmarks in real-time, aiding visually impaired users with accurate location awareness
+15 | YOLOv5, spatial mapping, feature matching, homologous transformation, multi-camera fusion | mAP, run time, inference speed, accuracy | The YOLO-based multi-camera system attains high localization accuracy and effective tracking even under occlusions
+16 | CNNs, feature extraction, object detection, live video processing, audio feedback | Real-time processing, frame-by-frame analysis | This technique enables real-time object detection and gives navigational assistance to visually impaired individuals using audio feedback
+17 | Restoration-enhanced network, dual branch network, degradation modelling, multi-scale degradation representations, bi-directional feature fusion, restoration weight decay | Rain, haze, snow tests, performance comparison | The RDMNet method outperforms existing object detection models in adverse weather conditions, illustrating improved adaptability to degraded images
+18 | CNN, real-time object recognition, voice message alerts, obstacle detection, human and scene detection | Real-time performance, object detection accuracy | To develop an intelligent system for visually impaired individuals using CNN for real-time object and obstacle detection, providing voice alerts for improved navigation and autonomy
+19 | DFE-ISAR, SENet-HHA, ISA, FCN | MIoU, FIoU, PA, MA | The DFE-ISAR model outperforms SENet-HHA and FCN models in segmentation metrics, illustrating improved MIoU, FIoU, PA, and MA performance
+20 | CNN-based Yolov8, background subtraction, low-rank decomposition, clustering method | Map, detection accuracy, classification performance | The proposed framework significantly improves mAP and outperforms existing methods on object detection tasks
+21 | RCA, CNNs, channel attention mechanism, SE, Grad-CAM + + visualization | Classification accuracy, scene classification | The RCA network outperforms advanced models, achieving classification accuracies of 97%, 99%, and 96% on three datasets
+22 | Yolov4, BS, low-rank decomposition, clustering method, semi-automatic labelling | Map, Cdnet 2014 and UA-DETRAC datasets | The proposed model enhances mAP and eliminates the need for manual labelling, enhancing object detection performance on real-world surveillance benchmarks
+23 | GF, Yolov7, Mobilenetv3, TCN, SSOA | Accuracy, precision, sensitivity, specificity, F-score | The ODSDP-ADLMSSO model achieved a superior accuracy of 99.57%, outperforming existing techniques
+24 | Top-Hat and bottom-hat transformation, morphological operation, KLT tracker, K-means clustering, motion feature analysis, connecting algorithm | Recall, precision, tracking accuracy | This method achieved high recall, precision, and tracking accuracy while maintaining fast processing speed, outperforming existing vehicle detection and tracking approaches
+25 | WF, Retinanet, Efficientnetb0, LSTM-AE, DO | Accuracy, precision, recall, F1-score | The ODMVII-MOA model outperforms existing techniques with a superior accuracy of 99.69%
+26 | Yolov3, object detection, DL, dataset creation | Map | This method achieved a high mAP of 89.78%, illustrating robust performance in detecting indoor objects
+27 | Radar point cloud fusion, point cloud density parameters, point-fusion technique, early fusion of radar data and images | Localization accuracy, size and orientation estimation, object classification | The proposed method improves 3D object detection by integrating radar and image data, significantly improving accuracy and robustness
+28 | Smart glasses integration, continuous image capture, object detection algorithms, distance sensing module, speech-based interface, raspberry Pi processing | Obstacle detection accuracy, response time, user satisfaction | Integrated smart glasses and shoes enable accurate navigation and obstacle avoidance for visually impaired individuals
+
+## Table Table 2: Details of the dataset.
+Objects | Count
+Door | 562
+Cabinet door | 3890
+Refrigerator door | 879
+Window | 482
+Chair | 223
+Table | 248
+Cabinet | 208
+Couch | 24
+Opened door | 90
+Pole | 36
+Total | 6642
+
+## Table Table 3: Indoor object detection of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+Class labels |  |  |  |  | 
+TRPH (80%)
+Door | 99.68 | 97.82 | 98.46 | 98.14 | 99.13
+Cabinet door | 99.12 | 99.03 | 99.45 | 99.24 | 99.05
+Refrigerator door | 99.68 | 98.61 | 99.02 | 98.82 | 99.40
+Window | 99.70 | 97.19 | 98.70 | 97.94 | 99.24
+Chair | 99.85 | 97.33 | 98.38 | 97.85 | 99.14
+Table | 99.77 | 96.17 | 98.05 | 97.10 | 98.95
+Cabinet | 99.77 | 97.02 | 95.88 | 96.45 | 97.89
+Couch | 99.83 | 100.00 | 52.63 | 68.97 | 76.32
+Opened door | 99.66 | 93.65 | 80.82 | 86.76 | 90.37
+Pole | 99.70 | 85.00 | 56.67 | 68.00 | 78.30
+Average | 99.68 | 96.18 | 87.81 | 90.93 | 93.78
+TSPH (20%)
+Door | 99.85 | 99.07 | 99.07 | 99.07 | 99.49
+Cabinet door | 99.47 | 99.51 | 99.63 | 99.57 | 99.43
+Refrigerator door | 99.85 | 99.38 | 99.38 | 99.38 | 99.65
+Window | 99.92 | 98.97 | 100.00 | 99.48 | 99.96
+Chair | 99.70 | 90.48 | 100.00 | 95.00 | 99.85
+Table | 99.70 | 95.35 | 95.35 | 95.35 | 97.60
+Cabinet | 99.85 | 97.37 | 97.37 | 97.37 | 98.65
+Couch | 99.85 | 100.00 | 60.00 | 75.00 | 80.00
+Opened door | 99.85 | 100.00 | 88.24 | 93.75 | 94.12
+Pole | 99.70 | 75.00 | 50.00 | 60.00 | 74.96
+Average | 99.77 | 95.51 | 88.90 | 91.40 | 94.37
+
+## Table Table 4: Indoor object detection of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+Class labels |  |  |  |  | 
+TRPH (70%)
+Door | 99.57 | 96.49 | 98.47 | 97.47 | 99.07
+Cabinet door | 99.05 | 98.98 | 99.41 | 99.19 | 98.98
+Refrigerator Door | 99.53 | 98.04 | 98.36 | 98.20 | 99.03
+Window | 99.72 | 97.90 | 98.19 | 98.05 | 99.02
+Chair | 99.70 | 96.64 | 94.12 | 95.36 | 97.00
+Table | 99.66 | 95.77 | 95.77 | 95.77 | 97.79
+Cabinet | 99.57 | 93.15 | 93.15 | 93.15 | 96.46
+Couch | 99.81 | 92.86 | 61.90 | 74.29 | 80.94
+Opened door | 99.63 | 89.29 | 81.97 | 85.47 | 90.92
+Pole | 99.85 | 100.00 | 68.18 | 81.08 | 84.09
+Average | 99.61 | 95.91 | 88.95 | 91.80 | 94.33
+TSPH (30%)
+Door | 99.55 | 96.02 | 98.83 | 97.41 | 99.22
+Cabinet door | 99.60 | 99.57 | 99.74 | 99.66 | 99.57
+Refrigerator door | 99.70 | 98.53 | 99.26 | 98.89 | 99.51
+Window | 99.90 | 99.33 | 99.33 | 99.33 | 99.64
+Chair | 99.55 | 94.20 | 92.86 | 93.53 | 96.32
+Table | 99.90 | 100.00 | 96.61 | 98.28 | 98.31
+Cabinet | 99.80 | 95.31 | 98.39 | 96.83 | 99.12
+Couch | 99.90 | 100.00 | 33.33 | 50.00 | 66.67
+Opened door | 99.75 | 92.86 | 89.66 | 91.23 | 94.78
+Pole | 99.65 | 88.89 | 57.14 | 69.57 | 78.55
+Average | 99.73 | 96.47 | 86.52 | 89.47 | 93.17
+
+## Table Table 5: Comparative analysis of MSDBO-ODTHDLN model with existing methodologies19,35]– [36.
+Methodology |  |  |  | 
+MSDBO-ODTHDLN | 99.77 | 95.51 | 88.90 | 91.40
+DFE-ISAR | 95.39 | 92.48 | 79.59 | 90.41
+SENet-HHA | 92.10 | 94.71 | 79.56 | 89.51
+FCN | 97.83 | 94.26 | 83.34 | 89.95
+YOLOv9s | 91.40 | 93.64 | 87.11 | 89.55
+YOLOv10s | 93.32 | 94.77 | 82.32 | 90.24
+CenterNet | 99.26 | 94.71 | 87.46 | 89.62
+EfficientDet | 95.32 | 92.41 | 79.53 | 90.36
+RT-DETR-L | 92.04 | 94.63 | 79.51 | 89.45
+CIHD-YOLO | 97.77 | 94.19 | 83.26 | 89.89
+Libra RCNN | 93.99 | 95.11 | 87.50 | 90.67
+Cascade RCNN + res2net + DCNv2 | 97.28 | 94.69 | 83.95 | 89.58
+
+## Table Table 6: mAP outcome of MSDBO-ODTHDLN model with existing methodologies.
+Methodology | mAP (%) | mAP@50 (%) | mAP@75 (%)
+MSDBO-ODTHDLN | 90.11 | 88.47 | 76.59
+DFE-ISAR | 73.55 | 45.37 | 26.49
+SENet-HHA | 61.04 | 39.63 | 16.56
+FCN | 84.25 | 60.59 | 67.66
+YOLOv9s | 85.45 | 62.27 | 16.66
+YOLOv10s | 85.49 | 62.57 | 17.93
+CenterNet | 73.48 | 45.31 | 26.42
+EfficientDet | 60.97 | 39.55 | 16.48
+RT-DETR-L | 84.18 | 60.53 | 67.58
+CIHD-YOLO | 87.99 | 65.52 | 24.21
+Libra RCNN | 48.56 | 73.49 | 54.32
+Cascade RCNN + res2net + DCNv2 | 57.50 | 78.69 | 64.03
+
+## Table Table 7: CT evaluation of MSDBO-ODTHDLN technique with existing models.
+Methodology | CT (sec)
+MSDBO-ODTHDLN | 8.59
+DFE-ISAR | 12.69
+SENet-HHA | 18.70
+FCN | 15.52
+YOLOv9s | 17.89
+YOLOv10s | 13.23
+CenterNet | 10.84
+EfficientDet | 19.52
+RT-DETR-L | 17.41
+CIHD-YOLO | 18.89
+Libra RCNN | 19.17
+Cascade RCNN + res2net + DCNv2 | 13.13
+
+## Table Table 8: Result analysis of the ablation study of MSDBO-ODTHDLN method.
+Methodology |  |  |  | 
+MSDBO-ODTHDLN | 99.77 | 95.51 | 88.90 | 91.40
+CNN-BiLSTM | 99.10 | 94.99 | 88.31 | 90.88
+MSDBO | 98.55 | 94.39 | 87.76 | 90.18
+CapsNet | 97.97 | 93.88 | 87.07 | 89.44
+Mask R-CNN | 97.31 | 93.28 | 86.27 | 88.91
+
+## Figure Fig. 1: Overall working method of the MSDBO-ODTHDLN approach.
+
+## Figure Fig. 2: Architecture of the CapsNet model.
+
+## Figure Fig. 3: Structure of the CNN-BiLSTM model.
+
+## Figure Fig. 4: Working flow of the MSDBO method.
+
+## Figure Fig. 5: 80% TRPH and 20% TSPH of (a,b) confusion matrices and (c,d) curves of PR and ROC.
+
+## Figure Fig. 6: Average of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+
+## Figure Fig. 7: curve of MSDBO-ODTHDLN method under 80%TRPH and 20%TSPH
+
+## Figure Fig. 8: Loss curve of MSDBO-ODTHDLN model under 80%TRPH and 20%TSPH.
+
+## Figure Fig. 9: 70% TRPH and 30% TSPH of (a,b) confusion matrices and (c,d) curves of PR and ROC.
+
+## Figure Fig. 10: Average of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+
+## Figure Fig. 11: curve of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH
+
+## Figure Fig. 12: Loss curve of MSDBO-ODTHDLN model under 70%TRPH and 30%TSPH.
+
+## Figure Fig. 13: Comparative analysis of MSDBO-ODTHDLN model with existing methodologies.
+
+## Figure Fig. 14: mAP outcome of MSDBO-ODTHDLN model with existing methodologies.
+
+## Figure Fig. 15: CT evaluation of MSDBO-ODTHDLN technique with existing models.
+
+## Figure Fig. 16: Result analysis of the ablation study of MSDBO-ODTHDLN method.

@@ -1,0 +1,816 @@
+Visual analytics of sensor movement data for cheetah behaviour analysis
+Karsten Klein, Sabrina Jaeger-Honz, Joerg Melzheimer, Bettina Wachter, Heribert Hofer, Artur Baltabayev, Falk Schreiber (2021). Journal of Visualization. https://doi.org/10.1007/s12650-021-00742-6. doi:10.1007/s12650-021-00742-6. Licence: cc-by. Text from pdf.
+
+J Vis (2021) 24:807–825
+https://doi.org/10.1007/s12650-021-00742-6
+
+R E G UL A R P A P E R
+
+• Sabrina Jaeger • Jörg Melzheimer • Bettina Wachter • Heribert Hofer •
+Karsten Klein
+Artur Baltabayev • Falk Schreiber
+
+Visual analytics of sensor movement data for cheetah
+behaviour analysis
+
+Received: 21 April 2020 / Revised: 20 July 2020 / Accepted: 22 December 2020 / Published online: 21 February 2021
+ The Author(s) 2021
+
+Abstract Current tracking technology such as GPS data loggers allows biologists to remotely collect large
+amounts of movement data for a large variety of species. Extending, and often replacing interpretation based
+on observation, the analysis of the collected data supports research on animal behaviour, on impact factors
+such as climate change and human intervention on the globe, as well as on conservation programs. However,
+this analysis is difficult, due to the nature of the research questions and the complexity of the data sets. It
+requires both automated analysis, for example, for the detection of behavioural patterns, and human
+inspection, for example, for interpretation, inclusion of previous knowledge, and for conclusions on future
+actions and decision making. For this analysis and inspection, the movement data needs to be put into the
+context of environmental data, which helps to interpret the behaviour. Thus, a major challenge is to design
+and develop methods and intuitive interfaces that integrate the data for analysis by biologists. We present a
+concept and implementation for the visual analysis of cheetah movement data in a web-based fashion that
+allows usage both in the field and in office environments.
+Keywords Visual analytics  Animal movement analysis  Machine learning  Web-based systems 
+Animal behaviour
+
+1 Introduction
+Recent advances in tracking technology have greatly improved the ability of biologists to remotely collect
+large amounts of movement data for many different species from insects to fish to birds to mammals.
+Additional sensors on GPS tracking devices measure further information such as acceleration, temperature,
+magnetic field, and barometric pressure, which allow to gain a deeper insight not only in the characteristics
+of the movement, but also in the environment in which it occurred. Sensors can be equipped with solar
+panels and stream data in real-time and over long periods of time through mobile phone networks (Flack
+et al. 2018). The resulting data can serve a variety of purposes, including the analysis of movement patterns,
+resource selection, collective animal behaviour research, and also on a larger scale the investigation of
+migration and environmental issues such as the impact of climate change and human-made habitat alterations around the globe (Treep et al. 2016; Higuchi 2010; van Wijk et al. 2012). Finding methodologies to
+K. Klein (&)  S. Jaeger  A. Baltabayev  F. Schreiber
+University of Konstanz, Constance, Germany
+E-mail: karsten.klein@uni-konstanz.de
+J. Melzheimer  B. Wachter  H. Hofer
+Institute for Zoo and Wildlife Research, Berlin, Germany
+F. Schreiber
+Monash University, Melbourne, Australia
+
+808
+
+K. Klein et al.
+
+make good and efficient use of the large amounts of data has been identified as a major challenge at the
+interface between computer science and the life sciences (Demšar et al. 2015; Kays et al. 2015). In particular, solutions can greatly improve the investigation of rare species that are hard to study in the field.
+Integration of further data sources, such as land use and land cover (ESA CCI 2020; UNEP 2020) can help
+to better characterise environmental features in order to improve the investigation of influence factors for
+animal decision making and survival, as well as to resolve potential divergence in the interpretation of
+individual and population behaviour (Michelot et al. 2017). However, such integration complicates data
+processing and preparation for human analysis even further.
+In this paper, we present a concept for a web-based tool to analyse sensor data from cheetah (Acinonyx
+jubatus), and the results of an initial data analysis. The concept was conceived in a cooperation with experts
+that conduct evolutionary wildlife research for conservation, and who work with data on cheetah movement
+on a daily basis. Their research includes field work in Namibia, where one of the largest remaining freeranging cheetah population resides (Durant et al. 2017; Weise et al. 2017), and where they regularly catch
+and tag cheetahs for long-term monitoring (Melzheimer et al. 2018). The research questions that these
+biologists tackle target the behavioural patterns of cheetah, the social interaction between individuals,
+behavioural differences between specific subgroups or individuals, and major influence factors that determine the behaviour and reproductive performance.
+Our goal is to support these biologists in their work by fostering faster and more accurate analysis of the
+large amount of data that is now routinely collected, and where detailed manual inspection of all data points
+becomes very time consuming. An improved analysis of cheetah data will not only help to create insight into
+animal behaviour but can have practical consequences for conservation measures and local protection of
+animals and mitigation of human-wildlife conflict. A web-based solution allows our users to flexibly switch
+between settings in the office and in the field and is thus our solution of choice. This paper is an extended
+version of our previous publication (Klein et al. 2019b), giving a more in-depth description of the concept
+and use cases.
+The paper is structured as follows: Sect. 2 presents the background and related work, Sect. 3 describes
+the data used during the development, constituting one of the biggest existing cheetah movement data sets.
+Section 4 outlines our research questions and the application requirements, and Sect. 5 presents the visual
+analytics concept that informs the design of our application. Section 6 presents two use cases that exemplify
+how our implementation and concept can support the analysis of cheetah data, and Sect. 7 presents an initial
+evaluation. Section 8 concludes the paper and gives an outlook on future work.
+2 Background and related work
+With a shrinking population of currently approximately 7,000 individuals, the cheetah (see Fig. 1) is a
+threatened species, which faces a multitude of threats (Durant et al. 2017; Weise et al. 2017). The main
+reasons for their decline are human-wildlife conflicts, prey decline, and habitat loss and fragmentation. Most
+
+Fig. 1 Examples for the two spatial tactics of male cheetahs, i.e. a territorial male marking his territory at a marking tree, and
+floater sniffing the marking of the territory owner to assess his chances of success for an eventual territory takeover attempt.
+Images courtesy of Leibniz-IZW Cheetah Research Project
+
+Visual analytics of sensor movement data
+
+809
+
+cheetahs occur outside of protected areas, because protected areas often contain more dominant carnivore
+species such as lion (Panthera leo) and spotted hyenas (Crocuta crocuta) (Durant et al. 2017; Weise et al.
+2017) which steal their kills and threaten their offspring. Outside protected areas, however, they regularly
+come into conflict with humans, particularly livestock farmers (Durant et al. 2017; Weise et al. 2017).
+Cheetahs have to maintain a balance between many factors in their environment and trade off between
+factors such as prey densities, competitors, reproductive opportunities, environmental features, and human
+threats. The importance of these factors differs for male and female, as well as for younger and older
+cheetahs (Rostro-Garcı́a et al. 2015). Cheetahs become sexually mature at approximately 2 years of age, and
+females give birth to one to six cubs. They hide them in a lair of protected bush where they stay for the first 2
+months. Then, they start following the mother and stay together with her 1.5 years. The reproductive success
+of females is low in ecosystems where dominant predators occur, with only 23 % of cubs surviving to
+adulthood (Laurenson 1994). In ecosystems without such predators, survival is with 79 % much higher (Wachter et al. 2011). Maximum life span in the wild is approximately 13.5 years for females and some
+years less for males (Kelly et al. 1998). Males are roaming either solitarily or in coalitions of two or three
+males, mainly brothers (Caro 1994), whereas females roam alone or with their offspring.
+The cheetah is considered to be the fastest mammal on land, with top speeds of up to 100 km/h, and also
+one of the most wide-ranging carnivores regarding home range sizes. Cheetahs roam in home ranges with
+sizes up to several thousand square kilometers (Melzheimer et al. 2018), and thus need large connecting
+habitats to maintain a sustainable population. Cheetah behaviour and activity patterns are influenced by
+human impact, environmental features, social interaction, and the presence of dominant predators (Caro
+1994; Durant et al. 2004; Rostro-Garcı́a et al. 2015; Wachter et al. 2018). The social and spatial behaviour
+of cheetah is distinct from other mammal species and was first described by Caro and Collins (Caro 1994;
+Caro and Collins 1987) for the cheetah population in the Serengeti National Park in Tanzania. Recently,
+their unique socio-spatial system was confirmed for the Namibian cheetah population (Melzheimer et al.
+2018). The system is characterised by male cheetahs having two distinct spatial tactics. They either defend
+relatively small territories (territorial males) or they roam in large home ranges that encompass several
+territories (‘floaters’) (Caro 1994; Melzheimer et al. 2018), see Figs. 2 and 3 . Females use home ranges of
+sizes between the territories and the home ranges of floaters and overlap with both ranges of males (Caro
+1994; Melzheimer et al. 2018). The core areas of the territories contain several marking sites, often large
+trees, which are important for all cheetahs, i.e. the territorial males, the floaters, and the females, to
+exchange information using urine and scats (Caro 1994; Melzheimer et al. 2018), see Fig. 1. While territorial males mark the marking sites frequently, floaters do not mark, but only sniff at the markings. Floaters
+try to secure their own territory at some point of their life by taking over a territory from territorial males.
+Territorial fights often lead to the death of either the territory holder(s) or the challenger(s). A takeover
+usually start with floaters beginning to mark the marking sites and occurs over a period of approximately
+three months. Takeovers are only successful when the challengers have a similar or larger coalition size than
+the territory owners (Melzheimer et al. 2018). If the challengers were successful, they change their body
+shape within a few months. They gain muscle mass, and thus increase their body mass index (BMI) (Melzheimer et al. 2018). Owning a territory most likely gives males preferred access to females.
+Visual analytics of movement data is already a well investigated field, with a variety of use cases and
+data stemming from a range of different sensors such as GPS trackers (Andrienko et al. 2013; Andrienko
+and Andrienko 2013; Demšar et al. 2015; Willems et al. 2009). However, the large challenges associated
+with it are far from being resolved. These include the need to incorporate specific characteristics of the
+semantic context in the analysis (Baglioni et al. 2009), for example, for biological interpretation of behaviour, and the amount of data that is nowadays collected—creating large but often sparse data sets that may
+comprise several levels of spatial and temporal resolution. Visualising animal movements is a crossdisciplinary research opportunity for biologists and computer scientists that holds much promise for both
+parties (Kays et al. 2015; Reynolds 1987; Shamoun-Baranes et al. 2012) and can build upon work that
+focuses on the visualisation of time-oriented data (Aigner et al. 2011). For threatened species, the investigation of environmental factors and behavioural characteristics that influence or limit the reproductive
+performance are of particular interest. In their paper, Farrell et al. (2018) investigate the use of landscape
+characteristics and movement patterns to test predictions of habitat availability for bobcats as a response to
+climate change and human impact. Durant et al. (2017) examine environmental and anthropogenic factors
+affecting the viability of cheetahs and report on a delicate and dynamic balance of a multitude of influence
+factors. In another study, Rostro-Garcı́a et al. (2015) investigate potential impact factors on the habitat
+
+810
+
+K. Klein et al.
+
+selection of cheetahs and found that lion avoidance is an important factor in a trade-off with resource
+acquisition, which varies between different sex and age classes of cheetahs.
+Machine learning approaches have also been previously employed for analysing movement data, for
+example, Valletta et al. (2017) describe several applications of machine learning in animal behaviour
+research to introduce the field to biologists. They state that machine learning will play a crucial role to
+analyse data without a pre-formulated hypothesis and thereby aid the researchers in generating novel
+hypotheses. In their work, Grünewälder et al. (2012) classify feeding, mobile and stationary behaviour of
+cheetahs living in the Okavango Delta in Botswana. They applied Supported Vector Machines and a
+Hidden-Markov Model on accelerometer data embedded in GPS radio-collars. Cross-validation showed high
+predictive power of 83% to 94%, dependent on the task. With this approach, the authors managed to identify
+differences in daily activity and feeding time, dependent on season and sex. Browning et al. (2018) employ
+deep learning on GPS movement data to analyse foraging behaviour of seabirds and conclude that the GPS
+data alone is sufficient for accurate prediction. Hirakawa et al. (2018) investigate the use of machine
+learning for filling the gaps in movement recordings of streaked shearwater birds. Their conclusion is that
+their method can predict realistic paths without assumptions on the parametric distribution of the movement.
+In another study, Picardi et al. (2019) develop a method to locate nesting attempts of birds in order to
+estimate the reproductive success. They applied their method to GPS tracking data of three bird species
+during the breeding season and report good nest site location results for their data sets. Klein et al. (2019c)
+investigate the potential of immersive environments for visual analytics of bird movement and give corresponding design considerations.
+3 Cheetah movement data
+The Leibniz Institute for Zoo and Wildlife Research (Leibniz-IZW) runs a long-term research project on
+cheetahs on freehold farmland in central Namibia. Within a study area of approximately 40,000 km2 , more
+than 200 cheetahs were captured in box traps and fitted with a GPS-collar as described by Melzheimer et al.
+(2018), see Fig. 1a. GPS data were downloaded every two to three weeks from a small airplane equipped
+with antennas to locate the cheetah. The data were collected over more than a decade and is constantly
+updated and extended with current movement data. The complete data set takes up several dozen GB in size.
+We used a subset of the available data for the presented work, and all data sets used were retrieved from the
+Movebank data repository (Movebank 2020; Kranstauber et al. 2011) (access restricted due to wildlife
+protection reasons). These data sets commonly consist of GPS locations taken every 15 minutes, and
+acceleration data of the z-axis measured in bursts of 3.6 seconds length with a resolution of 10 Hz every two
+minutes. In general, temporal resolution might change not only between individuals, but also over the course
+of recording for a single individual. This might be the result of a change of sensors or sensor parameters, but
+also due to short high-resolution bursts of data being collected and sent. In addition, missing or incorrect
+values can occur due to sensor or communication issues. Analysts are usually aware of potential issues but
+need to spend time to check and correct (or discard) the data. In our preprocessing pipeline, such entries are
+filtered out before the visual analysis starts.
+Note that while the cheetah is considered to be the fastest mammal on land, current tracking technology
+does not allow to record detailed information on sprints during hunting. Due to restrictions in data storage
+and transmission, and a trade-off with energy consumption, only samples of movement parameters such as
+acceleration and speed are available. The other main trade-off is between longevity and resolution. One
+could sample with 1 Hz resolution but then the battery would only last a few hours. Usually the used collars
+record 30,000 GPS fixes during the battery lifetime.
+4 Research questions and application requirements
+We investigated the requirements for a visual analytics application that facilitates analysis of cheetah data in
+close cooperation with biologists from the Leibniz-IZW. This group of researchers from the department of
+evolutionary ecology conducts a research-based conservation project for cheetah. We identified research
+questions and requirements during discussions with these experts, and by studying the literature on cheetahs
+and their behaviour. Challenges from a computer science perspective were to design an interactive interface
+
+Visual analytics of sensor movement data
+
+811
+
+Fig. 2 Trajectory and density map of territorial cheetah movement. The visualisation clearly shows a main center of
+movement, in contrast to the multi-center scenario for the floater in Fig. 3
+
+Fig. 3 Trajectory and density map of floater cheetah movement over a time period of roughly one year. A density map is
+calculated to improve perception of landscape utilisation. The results are mapped on a colour gradient, yellow indicates high
+and white indicates low density. It can be seen that there is no clear focus region of movement that would indicate a territory
+home range
+
+that supports the investigation of these research questions and is easy to use for non–computer science users,
+to develop corresponding visual representations, and to develop the required automated analysis methods.
+4.1 Research questions
+The research questions that are asked in the investigation of cheetahs are on the one hand targeting the
+standard questions asked for animal behaviour, but on the other hand, they are focused on the specifics of
+cheetahs and their current situation, with the great threat arising from changes in the environment in general
+and human impact in particular.
+General research questions from the application area include:
+• What are behavioural patterns of cheetahs, e. g., feeding behaviour and male-female interactions?
+• How can such behavioural patterns be derived from collected movement data, making use of regular
+observations in the wild?
+
+812
+
+K. Klein et al.
+
+• What is the social interaction between individuals/coalitions or within coalitions?
+• How does the behaviour differ between specific subgroups or individuals, e.g. between sex and age
+classes?
+• What are the influence factors that determine the behaviour, including environmental factors?
+• What are the requirements and limiting factors for reproductive performance?
+For a long time, investigation of these questions was mainly based on observations in the field. Following,
+observing, and monitoring cheetahs in the field is, however, still a difficult and resource-intensive
+endeavour. On the other hand, movement of cheetahs can now be tracked for selected animals with
+relatively low effort. Thus, the availability of large movement data sets motivates the development of
+methods that support answering these questions based on movement data analysis. As a result, researchers
+need to analyse animal behaviour based on sensor-derived movement data, and derive additional
+information from it, for example, on reproduction biology and hunting.
+The data from movement sensors are used for initial data exploration and also for hypothesis testing. In
+addition to the need for visual inspection of raw data due to characteristics of cheetah behaviour, inspection
+is also required due to potential sensor issues and data errors. Purely manual inspection of the large amounts
+of data is not feasible, and thus automated analysis is required to support knowledge and hypothesis
+generation. The focus on movement data provided by sensors, however, deprives the analysts of the
+information on the environmental context in which the movement happened, which might be central to the
+decision making of the animal and thus important for the understanding of the behaviour. Environmental
+features such as water holes, trees and rock formations might strongly influence or trigger certain actions,
+and factors such as rivers, farms, and differences in vegetation might indicate obstacles or commuting
+corridors and thus affect the movement. Human interpretation of movement data therefore has to take into
+account the environment in which the movement happened, as the environmental context is very important
+for proper interpretation of the movement for behavioural analysis.
+Several basic behavioural patterns of cheetahs are well understood and can be at least partially characterised based on sensor data. One fundamental distinction that can be made for male cheetah is that some
+of them own a territory, while others roam in large home ranges visiting regularly the territories for a
+potential takeover. This leads to the classification of males into territorial males and floaters (Melzheimer
+et al. 2018). There are several indicators of males being territorial, such as a higher BMI and smaller home
+range size than the floaters. However, there are intermediate states when floaters are in the process of taking
+over a territory and change their movement behaviour over several months, so-called switchers. Also,
+though less frequent, there are territorial males that have two activity centers within their territory, so-called
+bipolar territorial males. Thus, separation between different classes of males is not clear-cut and needs
+human inspection for confirmation. See Figs. 2 and 3 for examples of the movement patterns for the two
+main classes of territorial and floater males.
+As behavioural patterns and spatial tactics might not only differ between individuals and coalitions, but
+also change over time, an inspection and comparison between individuals and between different time points
+is required. For example, female behaviour after giving birth might differ significantly from usual behaviour
+due to the care for the cubs in the lair, but behaviour after the first birth might also differ from subsequent
+ones in later years.
+In summary, we identified the following main requirements:
+R1 Show the movement in the environmental context in which it happened to support identification of
+environment features that are relevant for animal decision making, e.g. changes in vegetation and
+landscape such as mud pits, small elevations, and water holes.
+R2 Indicate movement hotspots, mainly areas with high revisitation rates on different temporal scales.
+R3 Support classification of animals and time periods, e. g., regarding territorial behaviour or reproductive
+states such as pregnancy.
+R4 Allow dynamic visualisation of the movement trajectories.
+R5 Make settings that lead to findings persistently storable and shareable.
+R6 Support comparison of different time periods, animals, and subgroups, as well as their interaction.
+4.2 Current analysis
+Typically spatial analyses are done using R and QGis. Both offer a wide range of possibilities, but with
+both, the analyses and particularly the visualisation of big data sets can be challenging for the less
+
+Visual analytics of sensor movement data
+
+813
+
+experienced user. For example, the visualisation of clusters is an important step during an initial exploration (Edwards et al. 2018) as well as during the actual testing of many biological predictions (Melzheimer
+et al. 2018). Within R, the package recurse (Bracis et al. 2018) offers quick detection of clusters of
+revisitation but without an easy-to-use visualisation tool. Major shortcomings of the current analysis are thus
+a lack of targeted visual representations, the integration of data into a single and intuitive interactive
+interface, and subsequently the need to switch between applications. In particular, the latter aspects make a
+holistic analysis difficult. In addition, junior researchers need to learn a wide variety of tools and interface in
+order to work with their data.
+Thus, a main motivation of our work was to provide an intuitive visual interface that allows analysis with
+comparable automated analysis methods as in the current analysis workflow.
+5 Visual analytics concept
+In respect of the research questions and requirements defined by interviews with experts (see Sect. 4), we
+developed design choices for our visual analytics environment for cheetah behaviour and movement
+analysis. These design choices are discussed in respect to the different research questions, followed by a
+description of the implementation of the visual analytics environment, as well as a detailed description of
+the implemented features.
+5.1 Design choices
+DC1 Provide a visualisation that shows imagery of the environment around the movement trajectory
+positions.
+DC2 Provide automated analysis of trajectories for detection of sites with certain revisitation patterns.
+DC3 Provide automated analysis of trajectories classification of behavioural patterns.
+DC4 Provide intuitive visualisations of analysis results within the environment representation to guide the
+analyst in the detection of specific locations and events, e. g. marking sites.
+DC5 Use a web-based system for platform-independent access and distribution without installation.
+DC6 Allow comparison of multiple individuals.
+DC7 Support storage and sharing of session setups.
+The rationale behind those choices is as follows: DC1 follows directly from R1, and DC2 allows us to
+support R2. DC3 is meant to support R2 and R3. DC4 and DC7 follow the general goal of creating
+graphical interfaces that can be used by non-computer scientists for data analysis without a difficult learning
+process. DC6 is meant to partially fulfill R6. The intended users are biologists who often carry out field
+work in order to collect the data. Thus, an easy-to-use setup that can be shared and runs on standard laptops
+is required. A browser-based solution does not require installation of an application on each computer that is
+used for analysis, e. g. during field work, and the same server setup can be shared by all researchers in a
+group.
+5.2 Implementation
+We implemented a visual analytics environment that follows our design choices. The environment is based
+on the Cesium framework (CesiumJS 2020) and employs R (R Core Team 2013) and Python (Python
+Core Team 2018) language scripts. We chose Cesium as the foundation of our environment, as it allows to
+create map-based visualisations that include animated trajectory representations. In addition, it also allows
+us to freely design and extend visualisations, data representations, and interactions. As Cesium provides
+web-based interactive visualisations (DC5), and features a VR-mode, it allows us to provide one implementation that can be used in the field in a normal browser setup, in mobile VR, and in immersive
+environments (Dwyer et al. 2018; Sommer et al. 2019). Furthermore, it provides a server-based solution
+that allows the user to connect from a client machine. Conversion of the input data formats, clustering
+methods, and density map computation are implemented in R. The computationally less expensive filtering
+for marking sites is done interactively in the browser via the user interface using javascript. In order to
+maximise the screen space for visualisation of the movement trajectories on the map, we hide the methods
+selection and tuning elements in a drop-down menu, see Fig. 4. On demand, the users can switch on features
+such as the density map or the convex hull for the home range estimation, and set the parameters such as the
+
+814
+
+K. Klein et al.
+
+time window and revisition rates for the detailed movement analysis. For further pre-processing and
+analysis, we implemented methods in Python and javascript, and make use of the machine learning libraries
+XGBoost (Chen and Guestrin 2016) and scikit-learn (Pedregosa et al. 2011).
+5.3 Features
+Movement trajectory visualisation After loading a movement trajectory file, the user can visualise the
+trajectory on a geographic map. The trajectory is represented as a sequence of points along the trajectory,
+with one point for each data time point at the corresponding longitude and latitude position. Different maps
+can be selected, for example, satellite imagery, terrain or street maps, and the point colour can be adjusted
+accordingly. In addition, a density map is computed that allows to highlight better where the cheetah spent
+the most time, avoiding misinterpretation due to overplotting, see Fig. 3. For assessment of the home range,
+a convex hull of the positions is calculated and can be visualised as a transparent polygon. Multiple animals
+can be compared to each other, see Fig. 5.
+Timeline and annotations Our implementation features the standard Cesium timeline, which allows to
+freely navigate in time through the movement data. The analyst can start an animation of the trajectory,
+which will then move a cheetah image over the map. The animation follows the position time-series in a
+speed that is freely adjustable by the analyst, and it can also be stopped or rewound interactively. As an
+alternative, the analyst can also investigate the movement within a user-specified sliding time-window.
+Window length and progress per time step can be set by the user in order to analyse changing moving
+patterns over a certain period of time. Figure 6 shows the user interface for the animation.
+Below the timeline, machine learning prediction results are visualised as a coloured bar. To do so, the
+predicted values over two weeks are summed up and divided by the number of values. This ratio is then
+assigned to one out of five colour bins, ranging from dark brown to white to dark green in equal size steps.
+
+Fig. 4 Menu and UI elements for local data loading, selection of different representations and analysis methods (left), as well
+as their interactive fine-tuning (right)
+
+Visual analytics of sensor movement data
+
+815
+
+Fig. 5 Comparison of movement data from two animals (DC6), a bipolar territorial male and a switching floater. For the
+bipolar territorial male, the heat map indicates the two activity centers within the territory, and for the floater the much larger
+and less densely covered roaming area can be easily identified
+
+Fig. 6 Movement animation running. The already covered movement trajectory at the current timepoint is indicated by a green
+polyline
+
+Clustering Large parts of the animals’ behaviour are associated with specific sites in the home range,
+including kill and feeding sites, marking sites, water holes, and the lair where the cubs are hidden. As the
+animal comes back to such sites regularly over a certain amount of time, revisitation pattern detection can
+help to identify these sites for later use in automated or visual analysis. Differences in the visitation rate, the
+regularity, and the stay time, can then provide indications for the interpretation of the site and its association
+with a specific behaviour or action. Thus, we implemented a clustering that allows the user to focus on
+regularly revisited spots in the home range. The movement visualisation can be restricted to show only
+cluster locations, limiting overplotting and visual complexity issues. Figure 7a shows assignment of
+movement locations to clusters, and Fig. 7b shows the depiction of cluster locations during the trajectory
+animation. The movement trajectory is clearly visible, and the analyst can investigate the site’s location and
+environmental characteristics, and also detect nearby clusters. Cluster points are colour-coded based on
+revisitation rate. We make use of the DBSCAN algorithm for clustering and together with the biologists
+found reasonable parameters for the detection of interesting sites.
+
+816
+
+K. Klein et al.
+
+Fig. 7 Our concept includes clustering as a pre-processing step in order to minimize visual clutter and to help in the
+identification of important movement hot spots
+
+Marking site prediction and visualisation Marking sites are an important means to characterise cheetah
+behaviour, as only male territory owners mark these characteristic landmarks to indicate ownership of the
+territory (Cornhill and Kerley 2020). In order to do so, they have to pay regular visits to these locations. The
+number and distribution of visits during a certain time span is influenced by a number of factors, for
+example, the home range size. We implemented a filtering approach for the computed movement clusters,
+which is based on the typical revisitation pattern for marking sites (rates, regularity, stay time), supporting
+DC2 and DC4. Users can look up the exact data for each cluster by clicking on it, see Fig. 8.
+Export In order to share or resume analysis with particular parameter settings, users need to be able to
+store and export these. This feature was a particular request by our collaborating biologists. In our
+implementation, users can label a certain configuration, containing settings and filter results, with a name,
+store it persistently, and export it as a CSV-format file. This way, users can switch between different
+settings, share these, or continue in a previous analysis without having to reconfigure the software manually
+(DC7).
+
+Fig. 8 Marking sites of a typical territorial cheetah. The revisitation rate was set to 10, i.e. only clusters with at least 10 visits
+during the time-window are shown
+
+Visual analytics of sensor movement data
+
+817
+
+6 Use cases
+In cooperation with our collaborators from biology, we used our concept implementation to analyse changes
+in animal behaviour, thereby targeting two of their main research questions. First, we wanted to know
+whether we can reliably predict pregnancy dates from the movement data of female cheetah, including an
+automated analysis based on machine learning methods, followed by interactive visual inspection. Secondly,
+we wanted to analyse the dynamics in the spatial tactics behaviour of male cheetah. The idea is to integrate
+visualisation of machine learning results in our visual analytics environment to help our collaborators
+analysing the results together with trajectory data and environment.
+6.1 Pregnancy prediction
+As a threatened species with a small and sparsely distributed population, cheetah face extinction if mortality
+rate exceeds recruitment rate. An important tool in monitoring both birth events and cub survival, is to
+predict a pregnancy of female cheetahs as soon as possible, and to use the opportunity to document the birth
+and monitor cub survival. This is currently difficult to achieve in the field, because the GPS data from the
+collars are only downloaded every two to three weeks by flying with an airplane. It is possible to identify
+from the GPS data that a female has given birth by visually detecting a cluster representing the lair, but
+planning a field trip for verification of the born cubs is time consuming and can be tight. For this reason, the
+visualisation of an early pregnancy indication or prediction in our visual analytics environment would help
+the field biologists to identify when to monitor an animal more closely and already start preparing the trip to
+visit the lair.
+During pregnancy, a change in movement dynamics and animal behaviour is expected, which might not
+be very obvious in the GPS data or distances travelled, and e. g. not easily conceived by simple visual
+inspection or rule-based analysis. After conception, the female cheetah is moving approximately three
+months on her own until she gives birth. Before she gives birth, it is likely that she is looking for a safe
+hiding site for her cubs, and thus changes her movements. Once the cubs are born, her movements change
+drastically. Because the cubs are not very mobile in the first two months and stay in the lair, the mother
+returns regularly to this place after hunting or resting further away, see Fig. 9. After that period, the cubs
+start to join the mother on her trips, but slow her moving speed down.
+To aid biologists in the pregnancy prediction task, a machine learning on GPS data was set up and a
+model pre-trained for further prediction and visualisation. As birth events are relatively rare, and GPS data
+are not available in a similar manner for all animals, data of 10 animals were selected. In total, 806,593 data
+points were collected, out of which 51,805 were labeled as pregnant based on pre-knowledge from
+observation. Before machine learning, the data sets were pre-processed in the scripting language Python, as
+described in the following. In general, the tag is obtaining a GPS position every 15 minutes. To save energy,
+the tag was scheduled such that if the tag does not record any movement during 30 minutes, for example,
+because the animal sleeps, the scheduled GPS positions are skipped until the animal becomes active
+again (Brown et al. 2012). This results in a discontinuity in time points of the raw data during times of no
+movement. The resulting gaps within the GPS data are filled up with the last GPS position available, which
+was recorded after arrival at the resting place during the first 30 minutes before the tag went inactive. This
+algorithm also fills missing locations due to bad satellite coverage which in our study amounts to less than
+one percent of the scheduled positions.
+To make the prediction independent from GPS locations, the distance value between two GPS locations
+was considered. Since a change in dynamics during the course of pregnancy is expected, not only the current
+distance value at a time point was considered, but the following 672 distance values were added to capture
+movement dynamics over 7 days. To capture similar movement patterns among the animals, data sets were
+cut off to begin and end at 12pm. To classify cheetahs as non-pregnant and pregnant, data points were
+labelled as pregnant six weeks before the birth event, since the change in behaviour of pregnancy is not
+expected from the conception date on, but with progressive duration. Also, to capture the last days of
+pregnancy and changed behaviour shortly after giving birth, labeling of data points as pregnant was
+extended until the cubs were approximately one week old.
+Due to the limited amount of documented pregnancies and information in our data sets, several machine
+learning models were pre-trained by using all data sets (except for one data set (here: animal)) for training.
+On the one data set left out, performance was evaluated and visualised. For all different models the XGBoost
+Classifier implemented in Python was used with standard settings, except for the number of estimators and
+
+818
+
+K. Klein et al.
+
+Fig. 9 Investigation of a female after giving birth to cubs. The birth lair is clearly visible in the map, as the female returns
+frequently to this location to feed the cubs
+
+maximum depth, which were changed to 100 and 5, respectively, after applying random under-sampling of
+the majority class (non-pregnant). In total, testing was performed on data of five different animals.
+The classification results were visualised on the timeline of Cesium, to help analyse performance of
+machine learning and to discover new pregnancies in the future at an early state. Predicted values were
+mapped to a colour scheme of dark brown (non-pregnant) to dark green (pregnant). In Fig. 9 the results for
+pregnancy prediction on one animal are shown, which delivered twice in the time course of the GPS data.
+The first birth took place on 10 December 2012, and is marked in dark green on the timeline, meaning a high
+probability of the female being pregnant. In addition, it is also easily possible to identify postpartum periods
+and the lair by visual inspection, as the movement pattern of the female changes significantly with relatively
+short trips around the lair and the frequent returns, which are marked as yellow high density points, see
+Fig. 9. For monitoring cub survival, it is crucial for our experts to identify the pregnancy in an early state.
+When looking at the time before the first delivery, the female is first marked as pregnant on 10 October
+2012, which is approximately two months before giving birth. Nevertheless, there is a two week window in
+between with higher uncertainty of pregnancy, which is indicated by the white colour. The second birth is
+temporally very close to the first birth. Normally, the cubs move with their mother for approximately 17 to
+19 months, before the mother is giving birth again. Our experts provided the information that in this case the
+cubs did not survive. By visual inspection of the movement data in our visual analytics environment, it was
+spotted that the cubs died approximately on 21 December 2012, because the period of frequent returns last
+usually eight weeks, but ends here suddenly in an early state. The second birth took place on 03 April 2013.
+It is in a window where pregnancy is marked as less likely (white), after a period of high probability of being
+pregnant, which starts on the 01 March 2013, approximately one month before giving birth. In this case, the
+prediction of birth events for this female worked well in both cases and a high probability was found one
+month before giving birth. Nevertheless, for other females the prediction was more difficult, as the period of
+frequent returns was sometimes misclassified as pregnant or the probability only increased close to the
+actual birth event. These problems might also occur due to the fact that several factors influence pregnancy
+for the individual female, for example, the number of previous birth events or the age and experience of the
+female. Thus, while our results are promising, there is still the potential for improvement and further
+markers that might indicate pregnancy and improve the predictive power.
+6.2 Territorial-floater prediction
+One important and difficult task is to classify territorial behaviour of male cheetah. In particular, there is the
+need to detect changes in the behaviour from one spatial tactic to the other, for example, when a floater starts
+to claim a territory (switcher). To this end, a machine learning model was pre-trained and predictions
+assessed and visualised for test cases in our visual analytics environment. It is known that the home range is
+one crucial, but insufficient, factor influencing the predictive power. Since the dynamics and movement
+
+Visual analytics of sensor movement data
+
+819
+
+behaviour change when a floater starts claiming a territory, we used the same approach for feature generation as for pregnancy prediction here, except that 288 distance values (3 days) were used to capture more
+detailed behavioural changes. Pre-processing of the data sets was also identical to female data sets described
+in Sect. 6.1 and target values were determined by a list of territorials, floaters and switchers provided by our
+domain experts. In total, 13 animals (1,270,838 data points) showed territorial, 19 animals (917,484 data
+points) floating, and one animal (28,417 data points) switching behaviour. As much more data are available
+for this classification task than for the females, all animals except for two territorial males, one floater and
+one switcher, were used for training of one machine learning model. The Random Forests Classifier
+implemented in Python was used with standard settings, except for the number of trees and maximum depth,
+which were changed to 200 and 7, respectively. In addition, random under-sampling of the majority class
+(territorial) was performed before applying machine learning. The classification results were visualised on
+the timeline of Cesium to help analysing the performance of the machine learning and to identify animal
+behaviour in the future. Predicted values for time segments were mapped to a colour scheme of dark brown
+(strong territorial behaviour) to light brown to white (unspecific behaviour) to light green to dark green
+(strong floating behaviour).
+Overall, the inspection of the machine learning classification showed good results on the test cases. One
+of the test cases is a bipolar territorial male and our classification marked it mostly as territorial. Our visual
+aggregation only shows one time period marked as floater, where the animal switches between its two
+activity centers, consistent with the bipolar behaviour. In total, 70% of data points are classified correctly.
+Also, one of the two floater test cases (animal A) had overall 68% of data points correctly classified and was
+overall mostly marked as floater over large periods of time, see Fig. 10. Still, there are sometimes uncertain
+predictions (white ranges) and one time period where it is classified as territorial. Probably this happened
+because floaters have periods of rather restricted local movements, and the one period with highest density
+where it resides for some time might indicate territorial behaviour.
+The most interesting case for our domain experts is the behaviour when males are switching between the
+two spatial tactics. Here, animal B changes its behaviour from floating to territorial over the course of time,
+which is also indicated by an interchanging pattern of the classification. With additional visual inspection, a
+small territory is already clearly visible, and also spending time there is mostly identified as territorial, see
+Fig. 11. Periods during which the animal shows floating behaviour are also mostly identified correctly, see
+Fig. 12. Nevertheless, switching behaviour poses a challenge to machine learning, as we have continuous
+and frequent changes between behaviour over long periods of time.
+Another good indicator of territorial behaviour is marking. Territorials mark several sites in their
+territories to claim them and exchange information with other cheetahs. Since marking is a continuous
+process where the territorial cheetah returns frequently for a short time, it can be analysed with a clustering
+
+Fig. 10 Screenshot showing floating behaviour of the male A. Animals with floating behaviour frequently cover huge areas
+compared to territorial males. The colour coding at the timeline (bottom) indicates that the behaviour is mainly classified as
+floater (light/dark green) by our machine learning. The exception of a time period classified as territorial is based on movement
+during that period mainly in a high density movement region (dark yellow region in the lower right)
+
+820
+
+K. Klein et al.
+
+Fig. 11 Switching behaviour of animal B. Here it has territorial behaviour, which is correctly classified as territorial (brown
+colour at timeline indicator). The density plot shows the focus on a relatively small area during that time period
+
+Fig. 12 Switching behaviour of animal B. Here it has floating behaviour, which is correctly classified as floater (green colour
+at timeline indicator). It can be seen that it roams over a large distance without a strong indication of a focus region
+
+approach in our visual analytics environment. To evaluate usability of our visual analytics framework in
+marking spot detection, a typical territorial and floater movement trajectories of approximately one year
+were analysed and compared.
+For the territorial cheetah the density map shown in Fig. 2 shows a major region of high revisitation
+(dark yellow) in the movement trajectory. The yellowish area indicates the major outline of the territory of
+the respective cheetah, as this is the area where it mainly spends time. In comparison, the density map of a
+typical floater looks different, see Fig. 3. There are three major regions of high revisitation (dark yellow). In
+addition, the floater moves regularly between them, as indicated by the yellowish connections. Overall, a lot
+more space is covered by the floater, and more area is revisited more frequently in comparison to the
+territorial. Nevertheless, density maps are not conclusive to distinguish territorial and floater behaviour
+completely, since also bipolar territorials exist, which own two territories which are frequently revisited and
+marked.
+By filtering for clusters and taking a closer look at the dense (dark yellow) areas, a better distinction
+between territorials and floaters is possible. When filtering the revisitation cluster of the territorial cheetah,
+we can see a number of clusters which are closely together, see Fig. 8. All of those clusters have a
+
+Visual analytics of sensor movement data
+
+821
+
+Fig. 13 The marking site of a territorial animal with the highest revisitation rate. The cluster is selected with a green square
+and shows the location of the marking site (DC2 and 4), which is at a tree
+
+revisitation rate of 39 to 103 with an average of 54.2 revisitations and on average 4 to 11 days until
+revisitation. This kind of regular revisitation over a long time span is a clear sign for a marking spot. When
+checking the individual marking spots further, it was clearly visible that they are located next to or at a tree,
+which is a typical marking spot for cheetahs, see Fig. 13. This will aid in the identification of new marking
+spots in the future, since the visualisation clearly shows which clusters are close to potential marking spots,
+e. g. a tree. Our collaborators evaluated the marking site prediction which is based on our clustering
+approach, and confirmed that the automatically selected clusters were exactly the marking sites of the
+cheetah, which were determined through observation and photo camera traps (DC2).
+The floater data set also has some cluster with frequent returns, see Fig. 14. In contrast to the territorial
+cheetah, they are more distributed and far away from each other. The revisitation rate is between 19 and 57
+and average revisitation is much lower with 32.7 compared to the territorial revisitation of 54.2. On average,
+the clusters are revisited every 4 to 17 days, which is longer compared to the territorial.
+It is known from literature that a floater walks between cheetah territories and does not spend much time
+in them. To confirm this, the sliding time window feature was used to compare movement of the animals
+two times for one week each time. For the territorial we can observe that in each week the clusters are
+located closely together and that the territorial mostly moves close to the frequently visited marking spots,
+see Fig. 15. In contrast, the floater moves much more, covers a huge area between these clusters (as
+highlighted in Fig. 14) and does not spend much time in one area, see Figure 16. This feature enables a good
+visual distinction between the two different types of animal behaviour evaluated here.
+7 Initial evaluation
+We conducted an informal evaluation with experts from the intended user group. In addition to our collaborators who where involved in the tool design, we provided the prototype implementation of our system
+to a group of biologists who conduct field work to capture, tag, and monitor cheetah, and who also routinely
+analyse the resulting data. They all gave us encouraging feedback, and reported that our implementation
+
+822
+
+K. Klein et al.
+
+Fig. 14 Clusters found in the movement trajectory of a floater animal. The clusters are distributed over a large area and were
+manually marked in orange
+
+Fig. 15 Examples of cluster pattern for territorial cheetah for two different weeks
+
+Fig. 16 Examples of cluster pattern for floater cheetah for two different weeks
+
+allowed them to reproduce findings from observations during field work based on movement data analysis.
+In particular, they mentioned that the tool improves the detection of marking sites which feature a range of
+characteristics that make it difficult to automatically derive them otherwise, and the search for kill sites in
+
+Visual analytics of sensor movement data
+
+823
+
+data sets that have not been previously explored. In addition, they suggested further features and
+improvements for future development.
+In order to gain a first impression of the usability of our interface beyond the direct feedback from our
+collaborators, we performed an evaluation based on the System Usability Scale (Brooke 2013). The SUS is
+a ten item form with response options on a five-point Likert-scale and provides a measure of people’s
+subjective perceptions of the usability of a system. Due to the small number of available experts for cheetah
+data analysis, we can only present the feedback of a few users. Nonetheless, the SUS is robust enough to
+give a reasonable indication of usability also with a small number of users. Four researchers completed our
+SUS form. From the comparison with a large set of SUS results (Bangor et al. 2008; Sauro 2011), an overall
+score of 68 on a scale of 0 to 100 is considered average, with a mean of around 70, and values in the 70s and
+80s being considered as acceptable and good, respectively. The average score in our expert feedback was
+85.625 with a range from 82.5 to 87.5. Note that, as we only have expert users, we can assume that there is
+no negative bias in the values based on the difficulty of the task (Sauro 2011). While we need to take into
+account the small number of responses so far, the results are encouraging and indicate that our design is at
+least not showing major flaws or shortcomings. In a more detailed analysis, we could distinguish between
+usability and learnability subscores, as such results might give further insight into the applicability of our
+tool in practice. However, given the small number of scores and recent research which suggests that such
+analysis is not recommended (Lewis and Sauro 2017), we refrain from a deeper analysis. From the user
+feedback we already identified minor issues with the interface design that we will have to fix, such as
+difficulties to interact with the cluster representations on certain zoom levels. In addition, naming of some
+options was not intuitive for the biologists, as more abstract terms were used. We will continue evaluations
+of our changing design over the course of future extensions and adjustments, e. g. by measuring task
+performance.
+8 Conclusion and outlook
+This paper presents a concept for a visual analytics tool to investigate cheetah movement data, and
+demonstrates the usefulness with an analysis of a large data set that spans several years. For analysis and
+inspection, the movement data needs to be put into the context of environmental data, which helps to
+interpret the behaviour. Given the increasing amount of movement data nowadays obtainable with modern
+tracking technologies, and the additional information on the environmental context in large online databases, this research contributes a novel system for visual data analytics and integration of such data. The
+presented approach received very positive feedback from our expert collaborators, and demonstrates that
+machine learning is a suitable approach for classifying spatial tactics and pregnancy prediction. It shows that
+visual exploration combined with automated analysis is a useful approach helping biologists in investigating
+their data. Within several iterations, we investigated the efficiency and intuitiveness of different design
+choices for practical use by our collaboration partners. We will continue this development in order to
+provide further features, in particular regarding the automated analysis, and to improve overall handling and
+design. The methods and system have been used for the analysis of cheetah movement data, but could be
+adapted to analyse a wide range of behaviour of different species. In order to provide long-term support and
+to guarantee availability and maintenance of the source-code, we are currently working on the integration of
+the components into our TEAMwISE framework (Klein et al. 2019a).
+Acknowledgements This work was supported by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)
+under Germany’s Excellence Strategy – EXC 2117 – 422037984 and Project-ID 251654672 – TRR 161. This is an extended
+version of the VINCI 2019 paper ‘Visual Analytics for Cheetah Behaviour Analysis’ (Klein et al. 2019b).
+Funding Open Access funding enabled and organized by Projekt DEAL
+
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International License,
+which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as
+you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons
+licence, and indicate if changes were made. The images or other third party material in this article are
+included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the
+material. If material is not included in the article’s Creative Commons licence and your intended use is not
+
+824
+
+K. Klein et al.
+
+permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly
+from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+
+References
+Aigner W, Miksch S, Schumann H, Tominski C (2011) Visualization of time-oriented data, 1st edn. Springer Publishing
+Company, Berlin
+Andrienko N, Andrienko G (2013) Visual analytics of movement: an overview of methods, tools and procedures. Inf Vis
+12(1):3–24. https://doi.org/10.1177/1473871612457601
+Andrienko G, Andrienko N, Bak P, Keim D, Wrobel S (2013) Visual analytics of movement. Springer, Berlin
+Baglioni M, Fernandes de Macêdo JA, Renso C, Trasarti R, Wachowicz M (2009) Towards semantic interpretation of
+movement behavior. In: Sester M, Bernard L, Paelke V (eds) Advances in GIScience. Springer, Heidelberg, pp 271–288
+Bangor A, Kortum PT, Miller JT (2008) An empirical evaluation of the system usability scale. Int J Hum–Comput Interact
+24(6):574–594. https://doi.org/10.1080/10447310802205776
+Bracis C, Bildstein KL, Mueller T (2018) Revisitation analysis uncovers spatio-temporal patterns in animal movement data.
+Ecography 41(11):1801–1811. https://doi.org/10.1111/ecog.03618
+Brooke J (2013) SUS: a retrospective. J Usability Stud 8:29–40
+Brown DD, Lapoint S, Kays R, Heidrich W, Kümeth F, Wikelski M (2012) Accelerometer-informed GPS telemetry: reducing
+the trade-off between resolution and longevity. Wildl Soc Bull 36(1):139–146. https://doi.org/10.1002/wsb.111
+Browning E, Bolton M, Owen E, Shoji A, Guilford T, Freeman R (2018) Predicting animal behaviour using deep learning: GPS
+data alone accurately predict diving in seabirds. Methods Ecol Evol 9(3):681–692. https://doi.org/10.1111/2041-210X.
+12926
+Caro TM (1994) Cheetahs of the Serengeti Plains: group living in an asocial species. The University of Chicago Press, Chicago
+Caro TM, Collins DA (1987) Male cheetah social organization and territoriality. Ethology 74(1):52–64. https://doi.org/10.
+1111/j.1439-0310.1987.tb00921.x
+CesiumJS (2020) cesiumjs API reference. http://cesiumjs.org/refdoc.html. Accessed 11 December 2019
+Chen T, Guestrin C (2016) XGBoost: a scalable tree boosting system. In: Proceedings of the 22nd ACM SIGKDD international
+conference on knowledge discovery and data mining, ACM, New York, USA, KDD ’16, pp 785–794. https://doi.org/10.
+1145/2939672.2939785
+Cornhill KL, Kerley GIH (2020) Cheetah communication at scent-marking sites can be inhibited or delayed by predators.
+Behav Ecol Sociobiol. https://doi.org/10.1007/s00265-020-2802-9
+Demšar U, Buchin K, Cagnacci F, Safi K, Speckmann B, Van de Weghe N, Weiskopf D, Weibel R (2015) Analysis and
+visualisation of movement: an interdisciplinary review. Mov Ecol 3(1):5
+Durant SM, Kelly M, Caro TM (2004) Factors affecting life and death in Serengeti cheetahs: environment, age, and sociality.
+Behav Ecol 15(1):11–22. https://doi.org/10.1093/beheco/arg098
+Durant SM, Mitchell N, Groom R, Pettorelli N, Ipavec A, Jacobson AP, Woodroffe R, Böhm M, Hunter LTB, Becker MS,
+Broekhuis F et al (2017) The global decline of cheetah acinonyx jubatus and what it means for conservation. Proc Natl
+Acad Sci 114(3):528–533. https://doi.org/10.1073/pnas.1611122114
+Dwyer T, Marriott K, Isenberg T, Klein K, Riche N, Schreiber F, Stuerzlinger W, Thomas BH (2018) Immersive analytics: an
+introduction. In: Marriott K, Schreiber F, Dwyer T, Klein K, Riche NH, Itoh T, Stuerzlinger W, Thomas BH (eds)
+Immersive analytics. Springer, Berlin, pp 1–23. https://doi.org/10.1007/978-3-030-01388-2_1
+Edwards S, Fischer M, Wachter B, Melzheimer J (2018) Coping with intrasexual behavioral differences: capture–recapture
+abundance estimation of male cheetah. Ecol Evol 8(18):9171–9180. https://doi.org/10.1002/ece3.4410
+ESA CCI (2020) CCI Open Data Portal. http://cci.esa.int/data. Accessed 12 July 2020
+Farrell LE, Levy DM, Donovan T, Mickey R, Howard A, Vashon J, Freeman M, Royar K, Kilpatrick CW (2018) Landscape
+connectivity for bobcat (Lynx rufus) and lynx (Lynx canadensis) in the Northeastern United States. PLoS ONE
+13(3):1–25. https://doi.org/10.1371/journal.pone.0194243
+Flack A, Nagy M, Fiedler W, Couzin ID, Wikelski M (2018) From local collective behavior to global migratory patterns in
+white storks. Science 360(6391):911–914. https://doi.org/10.1126/science.aap7781
+Grünewälder S, Broekhuis F, Macdonald D, Wilson A, Mcnutt J, Shawe-Taylor J, Hailes S (2012) Movement activity based
+classification of animal behaviour with an application to data from cheetah (acinonyx jubatus). PLoS ONE 7:e49120.
+https://doi.org/10.1371/journal.pone.0049120
+Higuchi H (2010) Bird migration and the conservation of the global environment. J Ornithol 153:1–12
+Hirakawa T, Yamashita T, Tamaki T, Fujiyoshi H, Umezu Y, Takeuchi I, Matsumoto S, Yoda K (2018) Can AI predict animal
+movements? Filling gaps in animal trajectories using inverse reinforcement learning. Ecosphere 9(10):e02447. https://doi.
+org/10.1002/ecs2.2447
+Kays R, Crofoot MC, Jetz W, Wikelski M (2015) Terrestrial animal tracking as an eye on life and planet. Science
+348(6240):aaa2478
+Kelly MJ, Laurenson MK, FitzGibbon CD, Collins DA, Durant SM, Frame GW, Bertram BC, Caro TM (1998) Demography of
+the serengeti cheetah (acinonyx jubatus) population: the first 25 years. J Zool 244(4):473–488. https://doi.org/10.1111/j.
+1469-7998.1998.tb00053.x
+Klein K, Aichem M, Sommer B, Erk S, Zhang Y, Schreiber F (2019a) Teamwise: Synchronised immersive environments for
+exploration and analysis of movement data. In: Proceedings of the 12th international symposium on visual information
+communication and interaction, association for computing machinery, New York, NY, USA, VINCI’2019. https://doi.org/
+10.1145/3356422.3356450
+
+Visual analytics of sensor movement data
+
+825
+
+Klein K, Jaeger S, Melzheimer J, Wachter B, Hofer H, Baltabayev A, Schreiber F (2019b) Visual analytics for cheetah
+behaviour analysis. In: Proceedings of the 12th international symposium on visual information communication and
+interaction, association for computing machinery, New York, NY, USA, VINCI’2019. https://doi.org/10.1145/3356422.
+3356435
+Klein K, Sommer B, Nim HT, Flack A, Safi K, Nagy M, Pand Feyer Y S, Zhang Rehberg K, Gluschkow A, Quetting M, Fiedler
+W, Wikelski M, Schreiber F (2019c) Fly with the flock: immersive solutions for animal movement visualization and
+analytics. J R Soc Interface 16(153):e794. https://doi.org/10.1098/rsif.2018.0794
+Kranstauber B, Cameron A, Weinzerl R, Fountain T, Tilak S, Wikelski M, Kays R (2011) The movebank data model for
+animal tracking. Environ Model Softw 26(6):834–835. https://doi.org/10.1016/j.envsoft.2010.12.005
+Laurenson MK (1994) High juvenile mortality in cheetahs (acinonyx jubatus) and its consequences for maternal care. J Zool
+234(3):387–408. https://doi.org/10.1111/j.1469-7998.1994.tb04855.x
+Lewis JJR, Sauro J (2017) Revisiting the factor structure of the system usability scale. J Usability Stud 12(4):183–192
+Melzheimer J, Streif S, Wasiolka B, Fischer M, Thalwitzer S, Heinrich SK, Weigold A, Hofer H, Wachter B (2018) Queuing,
+takeovers, and becoming a fat cat: Long-term data reveal two distinct male spatial tactics at different life-history stages in
+namibian cheetahs. Ecosphere 9(6):e02308. https://doi.org/10.1002/ecs2.2308
+Michelot T, Blackwell P, Matthiopoulos J (2017) Linking resource selection and step selection models for habitat preferences
+in animals. Ecology. https://doi.org/10.1002/ecy.2452
+Movebank (2020) Movebank data repository. http://www.movebank.org. Accessed 22 Jan 2020
+Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M, Prettenhofer P, Weiss R, Dubourg V,
+Vanderplas J, Passos A, Cournapeau D, Brucher M, Perrot M, Duchesnay E (2011) Scikit-learn: machine learning in
+Python. J Mach Learn Res 12:2825–2830
+Picardi S, Smith BJ, Boone ME, Frederick PC, Cecere JG, Rubolini D, Serra L, Pirrello S, Borkhataria RR, Basille M (2019) A
+data-driven method to locate nest sites and estimate reproductive outcome from avian telemetry data. bioRxiv. https://doi.
+org/10.1101/562025. https://www.biorxiv.org/content/early/2019/02/27/562025.full.pdf
+Python Core Team (2018) Python: a dynamic, open source programming language. Python Found Stat Comput. https://www.
+python.org/
+R Core Team (2013) R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing,
+Vienna, Austria. http://www.R-project.org/
+Reynolds CW (1987) Flocks, herds and schools: a distributed behavioral model. In: Proceedings of the 14th annual conference
+on computer graphics and interactive techniques, ACM, (SIGGRAPH ’87), pp 25–34
+Rostro-Garcı́a S, Kamler JF, Hunter LTB (2015) To kill, stay or flee: the effects of lions and landscape factors on habitat and
+kill site selection of cheetahs in South Africa. PLoS ONE 10(2):1–20. https://doi.org/10.1371/journal.pone.0117743
+Sauro J (2011) Sustisfied? Little-known system usability scale facts. UXPA User Experience Magazine 10(3): retrieved from
+http://uxpamagazine.org/sustified/
+Shamoun-Baranes J, van Loon EE, Purves RS, Speckmann B, Weiskopf D, Camphuysen CJ (2012) Analysis and visualization
+of animal movement. Biol Lett 8(1):6–9
+Sommer B, Diehl A, Aichem M, Meschenmoser P, Rehberg K, Weber D, Zhang Y, Klein K, Keim D, Schreiber F (2019) Tiled
+stereoscopic 3D display wall—concept, applications and evaluation. In: IS&T electronic imaging—stereoscopic displays
+and applications XX, pp 641–1–641–15
+Treep J, Bohrer G, Shamoun-Baranes J, Duriez O, de Moraes Frasson RP, Bouten W (2016) Using high-resolution GPS
+tracking data of bird flight for meteorological observations. Bull Am Meteorol Soc 97(6):951–961. https://doi.org/10.
+1175/BAMS-D-14-00234.1
+UNEP (2020) UNEP Environmental Data Online Database. http://geodata.grid.unep.ch/. Accessed 12 July 2020
+Valletta JJ, Torney CJ, Kings MJW, Thornton A, Madden J (2017) Applications of machine learning in animal behaviour
+studies. Anim Behav 124:203–220
+Wachter B, Thalwitzer S, Hofer H, Lonzer J, Hildebrandt T, Hermes R (2011) Reproductive history and absence of predators
+are important determinants of reproductive fitness: the cheetah controversy revisited. Conserv Lett 4:47–54. https://doi.
+org/10.1111/j.1755-263X.2010.00142.x
+Wachter B, Broekhuis F, Melzheimer J, Horgan J, Chelysheva E, Marker L, Mills M, Caro T (2018) Behavior and
+communication of free-ranging cheetahs, pp 121–134. https://doi.org/10.1016/B978-0-12-804088-1.00009-5
+Weise FJ, Vijay V, Jacobson AP, Schoonover RF, Groom RJ, Horgan J, Keeping D, Klein R, Marnewick K, Maude G,
+Melzheimer J, Mills G, van der Merwe V, van der Meer E, van Vuuren RJ, Wachter B, Pimm SL (2017) The distribution
+and numbers of cheetah (Acinonyx jubatus) in southern Africa. PeerJ 5:e4096. https://doi.org/10.7717/peerj.4096
+van Wijk RE, Kölzsch A, Kruckenberg H, Ebbinge BS, Müskens GJ, Nolet BA (2012) Individually tracked geese follow peaks
+of temperature acceleration during spring migration. Oikos 121(5):655–664
+Willems N, Van De Wetering H, Van Wijk JJ (2009) Visualization of vessel movements. Comput Gr Forum 28(3):959–966.
+https://doi.org/10.1111/j.1467-8659.2009.01440.x
+
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional
+affiliations.
+
+

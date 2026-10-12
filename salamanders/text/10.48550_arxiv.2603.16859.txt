@@ -1,0 +1,2456 @@
+SocialOmni: Benchmarking Audio-Visual Social Interactivity in Omni Models
+Tianyu Xie, Jinfa Huang, Yuexiao Ma, Rongfang Luo, Yan Yang, Qingchuan Ma, Wang Chen, Yuhui Zeng, Yixuan Zou, Zhiqiang Lu, Ruize Fang, Jiebo Luo, Rongrong Ji, Xiawu Zheng (2026). arXiv (Cornell University). https://arxiv.org/abs/2603.16859. doi:10.48550/arxiv.2603.16859. Licence: cc-by. Text from pdf.
+
+SocialOmni: Benchmarking Audio-Visual
+Social Interactivity in Omni Models
+
+arXiv:2603.16859v3 [cs.AI] 20 Sep 2026
+
+Tianyu Xie1 , Jinfa Huang2 , Yuexiao Ma3 , Rongfang Luo4 , Yan Yang4
+Qingchuan Ma1 , Wang Chen1 , Yuhui Zeng1 , Yixuan Zou1 , Zhiqiang Lu1
+Ruize Fang1 , Jiebo Luo2 , Rongrong Ji1 , Xiawu Zheng1,B
+1
+
+Xiamen University
+University of Rochester
+3
+Nanyang Technological University
+4
+Sichuan Agricultural University
+2
+
+B Corresponding Author
+
+Abstract
+Evaluating omni-modal large language models (OLMs) in multi-party dialogue requires more than answer correctness on pre-segmented inputs. We introduce SocialOmni, an offline diagnostic benchmark
+that separates three turn-level decisions: identifying who is speaking, deciding when a designated participant should enter at an annotated query time, and determining how that participant should continue the
+dialogue. SocialOmni contains 2,000 perception items and a quality-controlled core split of 200 interactiongeneration items, including naturally occurring speaker-visibility mismatches. Each item is independently
+checked by three human annotators. Evaluated systems receive only query-time-bounded multimodal evidence, while manually verified reference continuations are reserved for response judging. A complete
+three-judge ensemble scores every eligible response, with leave-one-judge-out and family-sensitivity audits. Across 11 OLMs, rankings vary substantially by axis, and coverage-adjusted scores reveal when high
+conditional response quality depends on selective turn entry. The protocol does not measure persistent
+streaming state or wall-clock latency.
+Email: Xiawu Zheng zhengxiawu@xmu.edu.cn
+
+Code: github.com/MAC-AutoML/SocialOmni
+
+Dataset: huggingface.co/datasets/alexisty/SocialOmni
+
+1
+
+Introduction
+
+Current OLM evaluation under-specifies the integrated decisions required for social dialogue. Omni-modal large language models combine audio, vision, and text within a unified generation interface [5, 7, 11, 17, 36, 37], but dialogue
+success also requires recognizing dynamic cues, selecting an appropriate entry point, and producing a socially coherent response. As summarized in Table 1, most benchmarks remain centered on static, accuracy-oriented understanding
+tasks [10, 15, 18, 41], leaving the integrated interaction decision largely unmeasured.
+The missing unit of analysis is the integrated conversational turn. At a single dialogue state, a model must identify
+the active speaker, determine whether a designated participant should enter, and produce a grounded continuation.
+SocialOmni targets this unit directly rather than introducing another static comprehension leaderboard; the Related
+Work section contrasts it with prior benchmark families and motivates our interaction-centered protocol.
+This missing turn-level evaluation matters because semantic correctness does not guarantee successful interaction. A
+delayed entry, premature interruption, or incoherent continuation can degrade user experience even when the propositional content is accurate [28, 30]. Correctness-only evaluation can therefore over-reward offline comprehension while
+1
+
+MAC-AutoML
+
+Table 1. Positioning of OLM benchmarks by diagnostic task, speaker-visibility stratification, and temporal granularity. 3 denotes
+an explicit task, ~ an indirect proxy, and 7 no explicit task.
+Benchmark
+OmniBench [18]
+OmniVideoBench [15]
+WorldSense [10]
+OmniEval [41]
+Daily-Omni [43]
+JointAVBench [3]
+OmniMMI [33]
+Omni-SafetyBench [26]
+SocialOmni (Ours)
+
+Types
+
+Who
+
+When
+
+How
+
+Visibility
+strata
+
+Temporal
+granularity
+
+Understanding
+Understanding
+Understanding
+Understanding
+Understanding
+Understanding
+Interaction
+Understanding
+Interaction
+
+7
+
+7
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+7
+7
+7
+7
+7
+7
+
+7
+7
+7
+7
+7
+7
+7
+7
+3
+
+•◦◦◦
+••◦◦
+••◦◦
+•◦◦◦
+••◦◦
+••◦◦
+•••◦
+•◦◦◦
+•••◦
+
+~
+
+~
+
+~
+
+7
+3
+
+7
+3
+
+7
+3
+
+under-penalizing interaction failures [38]. SocialOmni addresses this gap through three coordinated diagnostics:
+SocialOmni: Dimensions of Social Interactivity
+Who: identify the active speaker in a marked interval.
+When: decide whether the target should speak now.
+How: generate an appropriate reply for the target role.
+SocialOmni organizes the integrated turn as a diagnostic sequence from audio-visual grounding to turn-entry decision and contextual continuation. Who requires fine-grained speaker–content alignment, when integrates prosodic, lexical, and visual cues at an annotated state, and how tests whether the resulting continuation remains role-consistent
+and contextually appropriate. The benchmark contains 2,000 perception items and a quality-controlled core set of 200
+interaction-generation items across 15 dialogue categories in four broad domains, including naturally occurring speakervisibility mismatches. It does not reproduce a persistent full-duplex session or measure system latency.
+Evaluation across 11 OLMs supports a diagnostic profile rather than a single competence score. Model leadership
+changes across speaker attribution, turn-entry classification, gold-state generation, and coverage-adjusted response
+quality, so gains on one measure do not establish robustness on others. These descriptive rank reversals show that
+an understanding-centric score alone cannot characterize interaction behavior across these coupled decisions.
+Our contributions are threefold:
+i) Diagnostic Benchmark. We evaluate 2,200 items across the who, when, and how diagnostics.
+ii) Auditable Response Evaluation. Three judges score every response, with judge/family sensitivity audits.
+iii) Grounding Analysis. Visibility strata diagnose attribution failures without causal claims.
+
+2
+
+Related Work
+
+Omni-Modal Large Language Models. OLM development has broadened multimodal generation faster than
+interaction-focused evaluation. The field has progressed from perception-centric paradigms such as CLIP [27]
+and instruction-tuned VLMs such as Flamingo and LLaVA [1, 21, 22] to systems that couple text, vision, and
+audio [5, 7, 11, 17, 34, 36, 37]. Architectures now range from modular dispatch to native cross-modal generation [9, 23, 35, 38, 40], yet evaluation remains dominated by isolated request–response trials. Speaker grounding, turn
+entry, and socially appropriate continuation therefore remain comparatively under-tested.
+Answer-Centric Benchmarks for OLMs. Answer-centric benchmarks establish perception and reasoning quality but
+do not operationalize conversational entry. Broad-coverage omni suites [10, 15, 18, 41] and modality-specific benchmarks [6, 14, 16, 24, 31, 39, 42] evaluate question answering or retrieval over pre-segmented stimuli. Video benchmarks
+add temporal reasoning while retaining isolated prompt–response trials. Consequently, these suites do not test whether
+a designated participant should enter at a particular dialogue state or produce a fitting continuation.
+2
+
+MAC-AutoML
+2200videos
+
+15+ domains
+
+Fashion
+
+56
+
+64
+
+Travel
+
+70
+78
+
+Daily
+
+in
+
+co
+
+ns
+
+i st
+
+Video Context:
+(full)
+At timestamp [t],who is speaking:
+
+General
+
+50
+
+Perceptual Tasks
+
+2 tasks
+
+Others
+
+Art
+
+Health
+Technology
+
+2 visual models
+
+MiniOmni2
+
+(A) [Person description 1] : Gender confusion
+
+394
+
+(C) [Alternative]
+
+t
+en
+
+(D) [Alternative]
+
+20.00
+
+84
+
+VITA-1.5
+
+Qwen3-Omni
+
+Qwen3
+-Omni
+
+Qwen3-OmniThinking
+
+Qwen3-Omni-Thinking
+
+Qwen2.5-Omni
+
+Gemini 3 Falsh
+
+Video Context:
+(from 0.s - t.s)
+Question 1:Should speak at [t]?
+
+96
+
+Gemini
+2.5 Flash
+
+0.00
+
+Gemini 3 Falsh
+
+Generative Tasks
+
+Sports
+
+option
+generation
+
+omni models
+
+336
+110
+Entertainment
+Education
+
+Gemini 2.5 Pro
+Baichuan-Omni1.5 70.00
+60.00
+50.00
+40.00
+30.00
+20.00
+Qwen2.510.00
+Omni
+0.00
+
+Question 2:Should say Sth?
+(role-playing)
+
+136
+152
+
+consist
+
+ent
+
+286
+
+218
+
+(scoring) &
+
+(scoring)
+
+(human)
+
+Comparison of
+Generative Task
+Omni Models
+Qwen3-OmniThinking
+
+VITA-1.5
+
+Real
+Food
+
+(a) Benchmark data distribution
+
+score
+
+Comparison of
+Perceptual Task
+Omni Models
+
+Gemini 2.5 Pro
+
+60.00
+40.00
+
+Baichuan
+-Omni1.5
+
+(B) [Person description 2] : Gender confusion
+
+70
+
+GPT-4o
+80.00
+
+continue
+
+Gemini
+2.5 Flash
+
+Qwen3-OmniThinking
+GPT-4o
+
+OmniVinci
+
+GPT-4o
+
+VITA-1.5
+
+Qwen3-Omni
+
+(b) Models Performance
+
+Figure 1. SocialOmni overview. The benchmark uses two disjoint task splits totaling 2,200 items. The when task is a fixed-time
+classification over an observed prefix, while how evaluates responses only after a correctly detected gold-positive opportunity. The
+manually verified reference continuation is reserved for response judging. The profiles at right are illustrative; all quantitative
+rankings and values are reported in Table 2.
+
+Behavior-Centric Benchmarks for OLMs.
+Behavior-centric benchmarks move toward interaction, but typically
+isolate only part of the integrated turn. Social reasoning datasets [13, 25] target multi-speaker inference, while spokendialogue and full-duplex benchmarks [2, 12, 19, 20, 29, 32] emphasize turn-taking or interruption detection, often
+from audio alone. Multimodal interaction benchmarks [3, 4, 26, 33, 43] broaden audio-visual coverage. SocialOmni
+complements these efforts with one offline protocol spanning speaker attribution, fixed-time turn-entry classification,
+and conditional response generation. Its purpose is controlled cross-model diagnosis under a shared task definition and
+evaluation contract, not persistent-state or wall-clock latency evaluation.
+
+3
+
+SocialOmni
+
+SocialOmni evaluates an integrated conversational turn through three offline diagnostics. The tasks identify the active
+speaker (who), decide whether a designated participant should enter at an annotated query time (when), and generate
+an appropriate continuation after a correctly detected opportunity (how). Every model receives query-time-bounded
+evidence under a common task definition, with a disclosed adapter when an API cannot accept joint audio and visual
+input. The protocol does not measure persistent streaming state, wall-clock latency, or deployment eﬀiciency.
+
+3.1 Benchmark Construction
+Benchmark construction prioritizes dialogue clarity and reproducible item definitions. We compile search terms across
+15 dialogue categories in four broad domains: entertainment, professional, daily life, and narrative. From more than
+3,000 reviewed source videos, we retain 10–30 s segments with clear audio, visible conversational context, and licenses
+compatible with reconstruction. A source video may yield a clip, whereas a benchmark item denotes one evaluated
+query constructed from a retained clip. The resulting benchmark contains 2,000 perception items and 200 interactiongeneration items, with a mean clip duration of 25.0 s.
+Three-stage human verification defines every benchmark label. Each item is independently checked by three annotators
+drawn from a trained pool, covering speaker identity, spoken-content options, visibility, target-participant descriptions,
+query times, YES/NO turn-entry labels, and reference continuations. Cross-review and senior adjudication then resolve
+disagreements and verify the textual artifacts. The supplementary material reports annotation roles and agreement.
+
+3
+
+MAC-AutoML
+
+3.2 Data Stratification
+The perception split stratifies speaker attribution by naturally occurring visibility conditions. It contains 1,725 speakervisible items, where the active speaker is visually attributable at query time, and 275 speaker-visibility-mismatch items,
+including reaction shots, off-screen speech, partial occlusion, and weak identity cues. These cases are neither artificial audio swaps nor matched counterfactual interventions. The split therefore diagnoses grounding diﬀiculty without
+supporting a causal estimate of controlled audio-visual conflict.
+The interaction-generation split is a controlled aggregate diagnostic rather than a per-domain leaderboard. Each of its
+200 items must provide an identifiable target participant, an unambiguous query state, suﬀicient multimodal context, and
+a human-written continuation. We consequently report aggregate results with uncertainty and treat language-, culture-,
+and domain-specific conclusions as out of scope.
+
+3.3 Task Design
+Who: speaker attribution. The who task separates speaker grounding from content selection. At query interval t, a
+model receives video V , audio A, and four options formed by crossing speaker identity with spoken content. The options
+contain the correct identity–content pair and three distractors: wrong identity with correct content, correct identity with
+wrong content, and both wrong.
+When: fixed-time turn-entry classification. The when task evaluates turn entry at a single controlled dialogue state.
+For item i, annotators identify target participant Xi with a visible description and select query time ti . The model
+receives only prefix (Vi,≤ti , Ai,≤ti ) and answers whether Xi should begin a substantive turn using A (YES) or B (NO).
+Repeated prefix queries, first-response timing, and system latency remain outside the protocol.
+How: conditional response generation. The how task isolates continuation quality after a correctly detected opportunity. A model that correctly answers YES on a gold-positive item generates the next utterance for the same target
+participant Xi . Fillers and backchannels count as full turns only when the annotation targets that pragmatic function.
+The evaluated model never sees the human-authored reference continuation, which is reserved for response judging.
+
+3.4 Evaluation Protocol
+Speaker-attribution metrics quantify both aggregate accuracy and visibility-conditioned diﬀiculty. Non-parsable outputs count as incorrect; we report top-1 accuracy, macro-F1 over the four answer positions, and accuracy within the
+speaker-visible and visibility-mismatch strata. The gap ∆vis = Accvisible −Accmismatch is descriptive; naturally occurring,
+unmatched strata cannot identify causal visibility effects across models and dialogue settings.
+Turn-entry metrics characterize classification at the same annotated query states. We report accuracy, precision, recall,
+and macro-F1 over 200 binary decisions, with non-parsable outputs counted as incorrect. These metrics avoid imposing
+a universal timing window across dialogues.
+Response-generation metrics separate conditional quality from opportunity coverage. Let P = {i : yi = YES} denote
+gold-positive opportunities and Rm ⊆ P the items on which model m both predicts YES and returns a non-empty
+utterance. The three fixed judges independently score
+50, 75, 100}, and qmi is their complete
+∑ each response in {0, 25,Ens
++
+=
+|R
+|/|P|,
+Q
+=
+q
+/|R
+|,
+and
+Q
+mean. We define Cov+
+m
+Ens,m
+mi
+m
+m
+joint,m = Covm QEns,m . The conditional
+i∈Rm
+Ens
+score describes produced responses, whereas Qjoint assigns zero to missed positive opportunities. False-positive entry
+remains captured by when precision, so QEns
+joint is not a complete interaction utility for deployment.
+Judge completeness and sensitivity checks make the response score auditable. Every eligible response requires all three
+judge scores; failed calls are retried rather than averaged over a smaller pool. Leave-one-judge-out and same-family
+removal test dependence on any single evaluator or model family in the ensemble under evaluation.
+
+4
+
+Experiments
+
+The experiments test both cross-model performance and the failure patterns hidden by aggregate scores. We ask how
+current OLMs compare across the three diagnostics and which conclusions change after coverage, modality, visibility,
+and judge sensitivity are exposed explicitly.
+
+4
+
+MAC-AutoML
+Conversation Stream
+
+3s
+
+0s
+
+Timestamp 7s
+
+6s
+
+12s
+
+9s
+
+15s
+
+18s
+
+Video Context
+
+...
+
+Audio Context
+
+...
+Sarah voice: Mike, you never listen!
+
+Audio-Visual Inconsistent
+
+Audio-Visual Consistent
+
+Vision: Mike
+(Right , closed lips)
+
+Vision: Sarah
+(Left , speaking)
+
+Audio: Sarah
+(Left , voice active)
+
+Vision: Sarah
+(Left , voice active)
+
+Task I : Who Perception
+
+Task II : When + How Generation
+
+Query: At timestamp 3s , who is speaking?
+...
+
+...
+
+B Person B
+...
+
+...
+
+Acc ( )
+
+Macro-F1 ( )
+
+Il-A: When to enter
+
+C Person C
+D Person D
+Consistency Gap ( )
+
+Il-B: How to respond
+
+Turn boundary τ* (ground truth) at 3.0s
+
+A Person A
+
+τ*
+
+1.5s
+
+2.0s
+
+Interrupted
+（< 2.5s）
+
+2.5s
+Perfect
+（2.8-3.2s）
+
+3.0s
+
+3.5s
+
+4.0s
+
+Delayed
+（3.2-4.0s）
+
+TooLate
+（< 4.0s）
+
+NoResponse
+（< 6.0s）
+
+4.5s
+
+OLM response
+Wait, I was just.
+
+Reference
+I'm busy right now.
+
+Model output
+(entry decision)
+
+YES at t= 2.96s
+
+On-time rate (
+
+)
+
+Error: 0.04s
+
+0.781
+
+No response / wait
+(stay silent)
+
+Judge 1
+
+Judge 2
+
+Judge 3
+
+{25, 50,75,100}
+
+{25, 50,75,100}
+
+{25, 50,75,100}
+
+25
+
+25
+
+25
+
+50
+
+50
+
+50
+
+75
+
+75
+
+75
+
+100
+
+100
+
+100
+
+Mean /100
+
+66.7
+
+Figure 2. Study case for the three diagnostics. From one query-time-bounded conversation, SocialOmni tests speaker–content
+attribution (who), whether the designated participant should enter at the annotated state (when), and the role-consistent continuation
+produced after a correct positive decision (how). “Consistent” and “inconsistent” denote observed speaker-visibility alignment, not
+synthetic audio swapping.
+
+4.1 Setup
+Models. The evaluation covers eleven commercial and open-source systems: GPT-4o [11]; Gemini 2.5 Pro/Flash [5]
+and Gemini 3 Flash/Pro Preview [8]; Qwen3-Omni, Qwen3-Omni-Thinking, and Qwen2.5-Omni [35, 36]; OmniVinci [37]; VITA-1.5 [7]; and Baichuan-Omni-1.5 [17]. All use the common task contract through disclosed
+interfaces, with every attempted item retained in the strict denominator.
+Inputs. Input handling preserves the query-time boundary while exposing interface differences. Native omni interfaces consume truncated audio-video media directly. GPT-4o uses a disclosed cascade: gpt-4o-transcribe processes the truncated audio, and the chat endpoint receives its text with sampled frames. The Gemini relay accepts
+sampled frames but not raw audio, so its rows are visual-only baselines. Released metadata records these differences
+for cross-model interpretation. Evaluated models never receive the manually verified context or reference continuation
+reserved for judges.
+Metrics. The metrics preserve each diagnostic’s interpretation. We use accuracy and macro-F1 for who; accuracy,
+positive-class precision/recall/F1, and macro-F1 for when; and QEns , Cov.+ , and QEns
+joint for how. Table 2 reports point
+estimates; the supplementary material provides uncertainty and failure accounting for every evaluated system.
+
+4.2 Main Results
+Performance is strongly axis dependent. Table 2 assigns the best speaker attribution, turn-entry classification, conditional
+response quality, and coverage-adjusted response quality to different systems. These rank changes justify a diagnostic
+profile rather than a single social-competence score, but they do not establish causal independence among the axes.
+Coverage adjustment materially changes the interpretation of response quality. The GPT-4o cascade obtains the highest conditional score (76.50) but responds to only 30.47% of positive opportunities, reducing its joint score to 23.31.
+Qwen3-Omni-Thinking reaches 64.86 conditional and 30.40 joint quality, whereas VITA-1.5 combines 49.93 conditional quality with 88.28% coverage to obtain the highest joint score (44.08). Conditional quality alone therefore
+overstates systems that respond selectively at test time.
+5
+
+MAC-AutoML
+
+Algorithm 1 Fixed-prefix when–how evaluation
+Require: Items (Vi , Ai , ti , Xi , yi ); model f ; fixed judge set J
+1: for each item i do
+2:
+Query f on (Vi,≤ti , Ai,≤ti , Xi ) for YES/NO
+3:
+Record the binary prediction; count non-parsable output as incorrect
+4:
+if yi = YES and the prediction is YES then
+5:
+Generate target-participant response ŝi
+6:
+Score ŝi with every judge in J on {0, 25, 50, 75, 100}
+7:
+end if
+8: end for
++
+9: Report when classification metrics and Cov , QEns , QEns
+joint
+Table 2. Primary strict-denominator results. QGold forces generation at all 128 gold-positive opportunities; QEns is conditional on a
+non-empty true-positive response; Cov.+ and QEns
+joint retain the model’s entry policy.
+Model
+
+Interface
+
+Who
+
+When
+
+QGold
+
+QEns
+
+Cov.+
+
+QEns
+joint
+
+GPT-4o [11]
+Gemini 2.5 Pro [5]
+Gemini 2.5 Flash [5]
+Gemini 3 Flash [8]
+Gemini 3 Pro [8]
+Qwen3-Omni [36]
+Qwen3-Omni-Thinking [36]
+Qwen2.5-Omni [35]
+OmniVinci [37]
+VITA-1.5 [7]
+Baichuan-Omni-1.5 [17]
+
+Cascade
+Visual-only
+Visual-only
+Visual-only
+Visual-only
+Native AV
+Native AV
+Native AV
+Native AV
+Native AV
+Native AV
+
+35.05
+39.90
+33.70
+48.10
+45.40
+74.65
+67.65
+40.95
+29.75
+32.05
+22.45
+
+50.50
+52.50
+55.50
+49.50
+52.00
+58.00
+56.00
+60.50
+64.50
+65.50
+36.50
+
+77.15
+15.62
+21.35
+13.93
+21.55
+44.47
+67.77
+36.00
+40.82
+48.37
+18.36
+
+76.50
+12.37
+21.36
+17.61
+25.00
+42.59
+64.86
+33.14
+38.52
+49.93
+19.27
+
+30.47
+48.44
+42.97
+34.38
+32.03
+63.28
+46.88
+67.97
+70.31
+88.28
+12.50
+
+23.31
+5.99
+9.18
+6.05
+8.01
+26.95
+30.40
+22.53
+27.08
+44.08
+2.41
+
+Gold-state generation further separates continuation ability from entry policy. QGold forces every model to generate
+at the same 128 positive query states: GPT-4o leads this metric, while VITA-1.5 leads QEns
+joint by responding to more
+opportunities. These metrics answer distinct questions and neither replaces fixed-time when classification.
+
+4.3 Diagnostic Analysis
+Speaker attribution. Speaker attribution degrades under visibility mismatch for most, but not all, systems. Against
+a 25% uniform-random baseline, several models remain near or below chance after failures count as incorrect. Table 3
+shows gaps from −4.58 to +10.06 points across the naturally occurring strata. These gaps diagnose diﬀicult grounding
+conditions without estimating a causal audio-visual conflict effect; supplementary results report macro-F1 and Wilson
+intervals for every system and visibility stratum.
+Turn-entry classification. Turn-entry models exhibit distinct conservative and permissive policies. Because 128 of
+200 items are positive, always predicting YES reaches 64.00% accuracy but only 39.02 macro-F1. Reporting both
+metrics prevents prevalence from making a permissive policy appear strong; neither metric measures real-time latency.
+Simple pause and transcript-endpoint controls do not solve fixed-time turn entry. Table 4 shows that the strongest fixed
+pause rule reaches 63.50% accuracy and 57.15 macro-F1: it improves over always-YES macro-F1 but remains below
+the best OLM accuracy. We report every threshold to avoid selecting a pause duration on the test set.
+The GPT-4o cascade illustrates how interface and decision policy jointly shape a score. It predicts YES on 49 of 200
+items, including 39 true positives, and reaches 50.50% accuracy, 49.84 macro-F1, and 30.47% positive-opportunity
+coverage. Because the cascade converts truncated audio to text, these conservative-policy results characterize the adapter
+as well as the underlying model being evaluated.
+Input-channel ablations expose interface dependence without identifying causal modality contributions. Table S5 keeps
+the primary denominators fixed while comparing audio-only and video-only settings. Their model- and task-specific
+variation is interpreted as an interface effect.
+6
+
+MAC-AutoML
+
+Table 3. Speaker-visible and naturally occurring visibility-mismatch accuracy. The gap is descriptive, not causal.
+Model
+
+Visible
+
+Mismatch
+
+∆vis
+
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+35.59
+40.81
+34.20
+49.39
+46.78
+75.25
+68.35
+41.28
+30.09
+31.42
+23.13
+
+31.64
+34.18
+30.55
+40.00
+36.73
+70.91
+63.27
+38.91
+27.64
+36.00
+18.18
+
++3.96
++6.63
++3.66
++9.39
++10.06
++4.34
++5.08
++2.37
++2.45
+-4.58
++4.95
+
+Table 4. When-only controls. Pause rules use −35 dBFS; Random uses seed 13; Whisper + pause combines punctuation with a
+0.2-s pause.
+Baseline
+
+Acc.
+
+F1
+
+TP
+
+FP
+
+TN
+
+FN
+
+Always-NO
+Always-YES
+Majority
+Random
+Pause 0.2 s
+Pause 0.5 s
+Pause 1.0 s
+Whisper punct.
+Whisper + pause
+
+36.00
+64.00
+64.00
+54.00
+62.00
+63.50
+63.50
+50.50
+50.00
+
+26.47
+39.02
+39.02
+53.21
+47.92
+53.97
+57.15
+33.55
+39.90
+
+0
+128
+128
+67
+114
+109
+102
+101
+91
+
+0
+72
+72
+31
+62
+54
+47
+66
+57
+
+72
+0
+0
+41
+10
+18
+25
+0
+9
+
+128
+0
+0
+61
+14
+19
+26
+33
+43
+
+The ablation shows model-specific channel sensitivity: audio-only inputs are stronger for most native omni models on
+who, while video-only inputs generally reduce attribution and gold-state generation quality. GPT-4o shows a similarly
+large generation gap between its transcript-only and frames-only adapters. The complete per-model ablation table is
+provided in the supplementary material.
+Judge reliability. Response judging is complete and auditable, but its members are not interchangeable. All three
+judges score every non-empty true-positive response, and the audit reports pairwise agreement, leave-one-judge-out
+rankings, and same-family removal. The primary leaderboard is defined only by this fixed, fully observed judge protocol.
+Individual judges correlate with the ensemble while retaining distinct lower-tier orderings. Table 5 reports responselevel Spearman correlations of 0.76–0.90 against the complete ensemble and model-level Kendall correlations of 0.75–
+0.93. GPT-4o and Qwen3-Omni move any model by at most one rank, whereas Gemini 2.5 Pro moves one model by
+five ranks. On independent controls, each judge separates gold from shuffled continuations with AUC 0.93–1.00; FPR
+denotes shuffled candidates scored at least 75.
+Judge removal confirms that the ensemble ranking is not controlled by one evaluator. Each leave-one-out ranking has
+Kendall τ ≥ 0.93 and changes any model by at most one position; same-family removal preserves the complete ordering.
+We retain the complete ensemble and report these shifts explicitly rather than claiming that family preference is absent.
+Full per-model differences appear in the supplementary material for independent inspection.
+Score distributions still show evaluator differences. Pairwise response correlations range from 0.51 to 0.73, and pairwise MAE ranges from 17.22 to 28.27 points. Requiring all three scores fixes the response set, but averaging cannot
+remove rubric-interpretation differences. The ensemble is thus a reproducible surrogate rather than evidence of judge
+equivalence at the response level.
+The coverage-adjusted generation results remain stable under resampling. GPT-4o retains the strongest conditional quality, whereas VITA-1.5 retains the strongest coverage and joint utility; Qwen3-Omni-Thinking combines the secondhighest conditional quality with a joint score of 30.40. Table S2 reports the corresponding confidence intervals.
+Cross-axis model profiles. The joint profile identifies distinct strengths among leading systems. Qwen3-Omni obtains
+7
+
+MAC-AutoML
+
+Table 5. Primary-judge robustness audit. Top: each judge against the complete ensemble and independent sanity controls; bottom:
+leave-one-out rank sensitivity and pairwise response agreement.
+Audit
+
+ρr
+
+MAE
+
+τm
+
+Shift
+
+AUC
+
+FPR
+
+GPT-4o
+Gemini
+Qwen3
+
+0.90
+0.76
+0.90
+
+13.98
+17.25
+11.34
+
+0.89
+0.75
+0.93
+
+1
+5
+1
+
+1.00
+0.93
+0.97
+
+7.81
+10.16
+21.09
+
+Removal
+
+τm
+
+Shift
+
+w/o GPT
+w/o Gem.
+w/o Qwen
+Same-family
+
+0.93
+0.93
+0.96
+1.00
+
+1
+1
+1
+0
+
+Pair
+GPT / Gem.
+GPT / Qwen
+Gem. / Qwen
+
+ρr
+
+τr
+
+MAE
+
+0.51
+0.73
+0.59
+
+0.45
+0.64
+0.51
+
+28.27
+17.22
+24.06
+
+74.65% speaker attribution but 42.59 conditional response quality, so reliable speaker binding does not determine
+continuation quality. Qwen3-Omni-Thinking combines 67.65% attribution with 67.77 gold-state and 64.86 conditional
+quality, but 46.88% coverage lowers joint quality to 30.40. VITA-1.5 has 32.05% attribution, yet 65.50% turn-entry
+accuracy and 88.28% coverage produce the strongest joint score (44.08). These profiles expose each system’s limiting
+component under the common evaluation protocol.
+Gold-state decomposition. Forced generation separates continuation capacity from selective entry. GPT-4o remains
+strongest when every positive state is presented, with QGold = 77.15, so its high conditional score is not merely an
+artifact of choosing easy responses. Qwen3-Omni-Thinking remains strong across all gold states (67.77) and selected
+responses (64.86). VITA-1.5 is similarly consistent between QGold = 48.37 and QEns = 49.93 while covering most
+opportunities. Together, the metrics distinguish strong generation, selective generation, and broad coverage across the
+same 128 dialogue states for every model.
+
+4.4 Robustness and Interpretation
+The results support a diagnostic, rather than scalar, interpretation of SocialOmni. Leadership reverses across all three
+axes: Qwen3-Omni leads speaker attribution, VITA-1.5 leads fixed-time turn entry and joint response quality, and
+GPT-4o leads gold-state and conditional generation. Moreover, QEns measures produced-response quality, whereas
+QEns
+joint incorporates missed opportunities. Their separation reveals whether progress comes from stronger continuation
+generation or a more effective entry policy.
+Cross-channel comparisons reinforce the importance of speech-bearing evidence for continuation generation. Among
+configurations that return valid outputs, audio- or transcript-based inputs yield higher QGold than video-only inputs:
+GPT-4o scores 78.97 with transcript evidence versus 26.11 with frames, Qwen3-Omni scores 59.51 with audio versus
+18.75 with video, and VITA-1.5 scores 51.24 versus 22.14. These interface comparisons diagnose evidence sensitivity
+without asserting causal modality independence.
+Metric triangulation exposes policy differences hidden by accuracy. The always-YES control obtains 64.00% turn-entry
+accuracy because 128 of 200 items are positive, yet its macro-F1 is only 39.02. OmniVinci reaches 62.03 macro-F1 at
+similar accuracy, indicating stronger balance across entry and non-entry states. VITA-1.5 achieves the highest accuracy
+at 65.50%; together, the metrics separate balanced discrimination from opportunity capture in this split.
+Bootstrap intervals support the response-policy distinction. VITA-1.5’s positive-opportunity coverage interval is
+[81.56, 92.77], compared with [23.16, 38.92] for GPT-4o and [38.45, 55.48] for Qwen3-Omni-Thinking. Its joint-score
+advantage therefore reflects broad opportunity capture rather than a small set of favorable responses.
+Visibility strata provide an independent grounding stress test. The visible-to-mismatch gap reaches 10.06 points for
+Gemini 3 Pro and 9.39 for Gemini 3 Flash, while Qwen3-Omni remains strongest in both strata at 75.25% and 70.91%.
+The sign reversal for VITA-1.5 further shows that the partition is not a uniform diﬀiculty rescaling. Reporting both strata
+therefore reveals model-specific grounding behavior hidden by aggregate speaker accuracy.
+Independent judge checks support the central comparisons while exposing lower-tier sensitivity. Individual judges
+achieve model-level Kendall τ = 0.75–0.93 against the complete ensemble; the Gemini judge produces the largest
+single-judge shift of five ranks, but every leave-one-out ensemble changes models by at most one position. Together
+8
+
+MAC-AutoML
+
+with fixed-denominator baselines, visibility strata, and uncertainty intervals, these audits triangulate the benchmark’s
+principal comparisons across evidence and scoring views.
+The control suite verifies that stable ranking is accompanied by basic response discrimination. Across 236 positive and
+256 negative control candidates, the fixed three-judge reference-aware mean reaches gold-versus-shuffled AUC 0.99
+with a 74.67-point paired margin. This result supports the disclosed ensemble for comparative diagnosis, while the
+complete per-judge distributions remain available for independent reanalysis of judge behavior.
+
+5
+
+Conclusion
+
+SocialOmni reframes omni-model evaluation around the conversational turn: grounding who is speaking, deciding when
+a designated participant should enter, and determining how that participant should respond. Its 2,200-item benchmark,
+fixed-prefix protocol, gold-state generation track, and coverage-aware response metrics turn these coupled decisions into
+an auditable diagnostic profile. The accompanying visibility, modality, baseline, and judge-sensitivity analyses make
+the profile interpretable rather than reducing social interaction to a single opaque score.
+Evaluation of 11 OLMs yields three actionable findings. First, leadership changes across speaker attribution, turn entry,
+and response generation, so static understanding accuracy does not determine interaction quality. Second, gold-state and
+coverage-adjusted scores separate continuation ability from the policy that decides whether to speak. Third, visibility
+strata and input-channel ablations expose dependence on scene evidence and interfaces, while the judge audit quantifies
+open-ended evaluation sensitivity. Together, these results make SocialOmni a practical foundation for socially interactive
+omni-model development and comparison.
+Because each score maps to a distinct failure mode, the resulting profile gives developers concrete targets for improving speaker grounding, entry policy, and response quality while keeping progress across the three interaction stages
+separately measurable under a common evaluation contract.
+
+Reproducibility Statement
+The benchmark construction and fixed-prefix evaluation protocol are described in Section 3. Appendix A provides
+annotation procedures, model and inference details, response-scoring rules, and prompt templates. Appendix B reports
+uncertainty, failure accounting, and judge-sensitivity analyses to support interpretation and reproduction of the reported
+results.
+
+AI Use Statement
+In preparing this manuscript, we used an AI assistant for language polishing, manuscript formatting, and searching for
+related work. AI assistance was not used to generate research ideas, formulate hypotheses, design the methodology
+or experiments, or interpret the results. The authors take responsibility for the final content of the paper, including its
+claims and conclusions. Separately, the generative models evaluated as benchmark participants and used as response
+judges are components of the experimental protocol, as described in the paper and Appendix A.7.
+
+9
+
+MAC-AutoML
+
+References
+[1] Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc, Antoine Miech, Iain Barr, Yana Hasson, Karel Lenc, Arthur Mensch, Katie
+Millican, Malcolm Reynolds, et al. Flamingo: A visual language model for few-shot learning. arXiv preprint arXiv:2204.14198,
+2022. URL https://arxiv.org/abs/2204.14198.
+[2] Siddhant Arora, Zhiyun Lu, Chung-Cheng Chiu, Ruoming Pang, and Shinji Watanabe. Talking turns: Benchmarking audio
+foundation models on turn-taking dynamics. arXiv preprint arXiv:2503.01174, 2025. URL https://arxiv.org/abs/
+2503.01174.
+[3] Jianghan Chao, Jianzhang Gao, Wenhui Tan, Yuchong Sun, Ruihua Song, and Liyun Ru. JointAVBench: A benchmark for joint
+audio-visual reasoning evaluation. arXiv preprint arXiv:2512.12772, 2025. URL https://arxiv.org/abs/2512.1
+2772.
+[4] Sanjoy Chowdhury, Karren Dai Yang, Xudong Liu, Fartash Faghri, Pavan Kumar Anasosalu Vasu, Oncel Tuzel, Dinesh
+Manocha, Chun-Liang Li, and Raviteja Vemulapalli. AMUSE: Audio-visual benchmark and alignment framework for agentic
+multi-speaker understanding. arXiv preprint arXiv:2512.16250, 2025. URL https://arxiv.org/abs/2512.16250.
+[5] Gheorghe Comanici, Eric Bieber, Mike Schaekermann, Ice Pasupat, Noveen Sachdeva, Inderjit Dhillon, Marcel Blistein, Ori
+Ram, Dan Zhang, Evan Rosen, et al. Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context,
+and Next Generation Agentic Capabilities. arXiv preprint arXiv:2507.06261, 2025. URL https://arxiv.org/abs/25
+07.06261.
+[6] Chaoyou Fu, Yuhan Dai, Yongdong Luo, Lei Li, Shuhuai Ren, Renrui Zhang, Zihan Wang, Chenyu Zhou, Yunhang Shen,
+Mengdan Zhang, et al. Video-mme: The first-ever comprehensive evaluation benchmark of multi-modal llms in video analysis.
+In Proceedings of the Computer Vision and Pattern Recognition Conference, pages 24108–24118, 2025. URL https://op
+enaccess.thecvf.com/content/CVPR2025/html/Fu_Video-MME_The_First-Ever_Comprehensiv
+e_Evaluation_Benchmark_of_Multi-modal_LLMs_in_CVPR_2025_paper.html.
+[7] Chaoyou Fu, Haojia Lin, Xiong Wang, Yi-Fan Zhang, Yunhang Shen, Xiaoyu Liu, Yangze Li, Zuwei Long, Heting Gao, Ke Li,
+et al. Vita-1.5: Towards gpt-4o level real-time vision and speech interaction. arXiv preprint arXiv:2501.01957, 2025. URL
+https://arxiv.org/abs/2501.01957.
+[8] Google. Gemini 3: Introducing the latest gemini ai model from google. https://blog.google/products-and-p
+latforms/products/gemini/gemini-3/, 2025. Google Blog, Nov 18, 2025. Accessed: 2026-03-01.
+[9] Google AI for Developers. Release notes | gemini api | google ai for developers. https://ai.google.dev/gemini
+-api/docs/changelog, 2026. Documents launch/update records for gemini-3-pro-preview and gemini-3flash-preview. Accessed: 2026-03-01.
+[10] Jack Hong, Shilin Yan, Jiayin Cai, Xiaolong Jiang, Yao Hu, and Weidi Xie. WorldSense: Evaluating real-world omnimodal
+understanding for multimodal llms. arXiv preprint arXiv:2502.04326, 2025. URL https://arxiv.org/abs/2502.0
+4326.
+[11] Aaron Hurst, Adam Lerer, Adam P Goucher, Adam Perelman, Aditya Ramesh, Aidan Clark, AJ Ostrow, Akila Welihinda, Alan
+Hayes, Alec Radford, et al. GPT-4o System Card. arXiv preprint arXiv:2410.21276, 2024. URL https://arxiv.org/
+abs/2410.21276.
+[12] Shixin Jiang, Jiafeng Liang, Jiyuan Wang, Xuan Dong, Heng Chang, Weijiang Yu, Jinhua Du, Ming Liu, and Bing Qin.
+From specific-mllms to omni-mllms: a survey on mllms aligned with multi-modalities. In Findings of the Association
+for Computational Linguistics: ACL 2025, pages 8617–8652, 2025. doi: 10.18653/v1/2025.findings- acl.453. URL
+https://aclanthology.org/2025.findings-acl.453/.
+[13] Fanqi Kong, Weiqin Zu, Xinyu Chen, Yaodong Yang, Song-Chun Zhu, and Xue Feng. SIV-Bench: A video benchmark for
+social interaction understanding and reasoning. arXiv preprint arXiv:2506.05425, 2025. URL https://arxiv.org/ab
+s/2506.05425.
+[14] Bohao Li, Yuying Ge, Yixiao Ge, Guangzhi Wang, Rui Wang, Ruimao Zhang, and Ying Shan. Seed-bench-2: Benchmarking
+multimodal large language models. arXiv preprint arXiv:2311.17092, 2023. URL https://arxiv.org/abs/2311.1
+7092.
+[15] Caorui Li, Yu Chen, Yiyan Ji, Jin Xu, Zhenyu Cui, Shihao Li, Yuanxing Zhang, Jiafu Tang, Zhen Song, Dingling Zhang, Yinghui
+He, Haoxian Liu, Yuxuan Wang, Qiufeng Wang, Zhenhe Wu, Jiehui Luo, Zhiyu Pan, Weihao Xie, Chenchen Zhang, Zhaohui
+Wang, Jiayi Tian, Yanghai Wang, Zhe Cao, Minxin Dai, Kefeng Wang, Runzhe Wen, Ying Ma, Yaning Pan, Sungkyun Chang,
+Termeh Taheri, Haiwen Xia, Christos Plachouras, Emmanouil Benetos, Yizhi Li, Ge Zhang, Jian Yang, Tianhao Peng, Zili
+10
+
+MAC-AutoML
+
+Wang, Minghao Liu, Junran Peng, Zhao-Hui Zhang, and Jiaheng Liu. OmniVideoBench: Towards audio-visual understanding
+evaluation for omni mllms. arXiv preprint arXiv:2510.10689, 2025. URL https://arxiv.org/abs/2510.10689.
+[16] Kunchang Li, Yali Wang, Yinan He, Yizhuo Li, Yi Wang, Yi Liu, Zun Wang, Jilan Xu, Guo Chen, Ping Luo, et al. Mvbench:
+A comprehensive multi-modal video understanding benchmark. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pages 22195–22206, 2024. URL https://openaccess.thecvf.com/content/CV
+PR2024/html/Li_MVBench_A_Comprehensive_Multi-modal_Video_Understanding_Benchmark_C
+VPR_2024_paper.html.
+[17] Yadong Li, Jun Liu, Tao Zhang, Song Chen, Tianpeng Li, Zehuan Li, Lijun Liu, Lingfeng Ming, Guosheng Dong, Da Pan, et al.
+Baichuan-Omni-1.5 Technical Report. arXiv preprint arXiv:2501.15368, 2025. URL https://arxiv.org/abs/2501
+.15368.
+[18] Yizhi Li, Ge Zhang, Yi Ma, Ruibin Yuan, Kang Zhu, Hangyu Guo, Yiming Liang, Jiaheng Liu, Jian Yang, Siwei Wu,
+Xingwei Qu, Jinjie Shi, Xinyue Zhang, Zhen Yang, Xiangzhou Wang, Zhaoxiang Zhang, Zachary Liu, Emmanouil Benetos, Wenhao Huang, and Chenghua Lin. OmniBench: Towards the future of universal omni-language models. arXiv preprint
+arXiv:2409.15272, 2024. URL https://arxiv.org/abs/2409.15272.
+[19] Guan-Ting Lin, Jiachen Lian, Tingle Li, Qirui Wang, Gopala Anumanchipalli, Alexander H. Liu, and Hung-yi Lee. Fullduplex-bench: A benchmark to evaluate full-duplex spoken dialogue models on turn-taking capabilities. arXiv preprint
+arXiv:2503.04721, 2025. URL https://arxiv.org/abs/2503.04721.
+[20] Zhaojiang Lin, Yong Xu, Kai Sun, Jing Zheng, Yin Huang, Surya Teja Appini, Krish Narang, Renjie Tao, Ishan Kapil
+Jain, Siddhant Arora, et al. Wearvox: An egocentric multichannel voice assistant benchmark for wearables. arXiv preprint
+arXiv:2601.02391, 2025. URL https://arxiv.org/abs/2601.02391.
+[21] Haotian Liu, Chunyuan Li, Yuheng Li, and Yong Jae Lee. Improved baselines with visual instruction tuning. arXiv preprint
+arXiv:2310.03744, 2023. URL https://arxiv.org/abs/2310.03744.
+[22] Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Visual instruction tuning. arXiv preprint arXiv:2304.08485,
+2023. URL https://arxiv.org/abs/2304.08485.
+[23] Jiaheng Liu, Dawei Zhu, Zhiqi Bai, Yancheng He, Huanxuan Liao, Haoran Que, Zekun Wang, Chenchen Zhang, Ge Zhang,
+Jiebin Zhang, et al. A comprehensive survey on long context language modeling. arXiv preprint arXiv:2503.17407, 2025. doi:
+10.48550/arXiv.2503.17407. URL https://arxiv.org/abs/2503.17407.
+[24] Yuanzhan Liu, Haodong Duan, Yuanhan Zhang, Bo Li, Songyang Zhang, Wangbo Zhao, Yike Yuan, Jiaqi Wang, Conghui He,
+Ziwei Liu, Kai Chen, and Dahua Lin. MMBench: Is your multi-modal model an all-around player? European Conference on
+Computer Vision, 2023. URL https://arxiv.org/abs/2307.06281.
+[25] Leena Mathur, Marian Qian, Paul Pu Liang, and Louis-philippe Morency. Social genome: Grounded social reasoning abilities
+of multimodal models. Conference on Empirical Methods in Natural Language Processing, 2025. URL https://arxiv.
+org/abs/2502.15109.
+[26] Leyi Pan, Zheyu Fu, Yunpeng Zhai, Shuchang Tao, Sheng Guan, Shiyu Huang, Lingzhe Zhang, Zhaoyang Liu, Bolin Ding,
+Felix Henry, Lijie Wen, and Aiwei Liu. Omni-SafetyBench: A benchmark for safety evaluation of audio-visual large language
+models. arXiv preprint arXiv:2508.07173, 2025. URL https://arxiv.org/abs/2508.07173.
+[27] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell,
+Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervision. In International
+Conference on Machine Learning, pages 8748–8763, 2021. URL https://proceedings.mlr.press/v139/radfo
+rd21a.
+[28] Harvey Sacks, Emanuel A. Schegloff, and Gail Jefferson. A simplest systematics for the organization of turn-taking for conversation. Language, 50(4):696–735, 1974. doi: 10.2307/412243.
+[29] Ramaneswaran Selvakumar, Ashish Seth, Nishit Anand, Utkarsh Tyagi, Sonal Kumar, Sreyan Ghosh, and Dinesh Manocha.
+Multivox: A benchmark for evaluating voice assistants for multimodal interactions. arXiv preprint arXiv:2507.10859, 2025.
+URL https://arxiv.org/abs/2507.10859.
+[30] Gabriel Skantze. Turn-taking in conversational systems and human-robot interaction: A review. Computer Speech & Language,
+67:101178, 2021. doi: 10.1016/j.csl.2020.101178. URL https://doi.org/10.1016/j.csl.2020.101178.
+[31] Bin Wang, Xunlong Zou, Geyu Lin, Shuo Sun, Zhuohan Liu, Wenyu Zhang, Zhengyuan Liu, AiTi Aw, and Nancy Chen.
+Audiobench: A universal benchmark for audio large language models. In Proceedings of the 2025 Conference of the Nations
+11
+
+MAC-AutoML
+
+of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long
+Papers), pages 4297–4316, 2025. doi: 10.18653/v1/2025.naacl-long.218. URL https://aclanthology.org/2025.
+naacl-long.218/.
+[32] Ke Wang, Houxing Ren, Zimu Lu, Mingjie Zhan, and Hongsheng Li. Voiceassistant-eval: Benchmarking ai assistants across
+listening, speaking, and viewing. arXiv preprint arXiv:2509.22651, 2025. URL https://arxiv.org/abs/2509.226
+51.
+[33] Yuxuan Wang, Yueqian Wang, Borun Chen, Tong Wu, Dongyan Zhao, and Zilong Zheng. OmniMMI: A comprehensive
+multi-modal interaction benchmark in streaming video contexts. 2025 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR), 2025. doi: 10.1109/CVPR52734.2025.01763. URL https://arxiv.org/abs/2503.22952.
+[34] Zhifei Xie and Changqiao Wu. Mini-Omni2: Towards open-source GPT-4o with vision, speech and duplex capabilities. arXiv
+preprint arXiv:2410.11190, 2024. URL https://arxiv.org/abs/2410.11190.
+[35] Jin Xu, Zhifang Guo, Jinzheng He, Hangrui Hu, Ting He, Shuai Bai, Keqin Chen, Jialin Wang, Yang Fan, Kai Dang, Bin Zhang,
+Xiong Wang, Yunfei Chu, and Junyang Lin. Qwen2.5-Omni Technical Report. arXiv preprint arXiv:2503.20215, 2025. URL
+https://arxiv.org/abs/2503.20215.
+[36] Jin Xu, Zhifang Guo, Hangrui Hu, Yunfei Chu, Xiong Wang, Jinzheng He, Yuxuan Wang, Xian Shi, Ting He, Xinfa Zhu,
+Yuanjun Lv, Yongqi Wang, Dake Guo, He Wang, Linhan Ma, Pei Zhang, Xinyu Zhang, Hongkun Hao, Zishan Guo, Baosong
+Yang, Bin Zhang, Ziyang Ma, Xipin Wei, Shuai Bai, Keqin Chen, Xuejing Liu, Peng Wang, Mingkun Yang, Dayiheng Liu,
+Xingzhang Ren, Bo Zheng, Rui Men, Fan Zhou, Bowen Yu, Jianxin Yang, Le Yu, Jingren Zhou, and Junyang Lin. Qwen3-Omni
+Technical Report. arXiv preprint arXiv:2509.17765, 2025. URL https://arxiv.org/abs/2509.17765.
+[37] Hanrong Ye, Chao-Han Huck Yang, Arushi Goel, Wei Huang, Ligeng Zhu, Yuanhang Su, Sean Lin, An-Chieh Cheng, Zhen
+Wan, Jinchuan Tian, et al. OmniVinci: Enhancing architecture and data for omni-modal understanding llm. arXiv preprint
+arXiv:2510.15870, 2025. URL https://arxiv.org/abs/2510.15870.
+[38] Wenyi Yu, Siyin Wang, Xiaoyu Yang, Xianzhao Chen, Xiaohai Tian, Jun Zhang, Guangzhi Sun, Lu Lu, Yuxuan Wang, and
+Chao Zhang. SALMONN-omni: A codec-free llm for full-duplex speech understanding and generation. arXiv preprint
+arXiv:2411.18138, 2024. URL https://arxiv.org/abs/2411.18138.
+[39] Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng, Ruoqi Liu, Ge Zhang, Samuel Stevens, Dongfu Jiang, Weiming Ren,
+Yuxuan Sun, et al. MMMU: A massive multi-discipline multimodal understanding and reasoning benchmark for expert agi.
+arXiv preprint arXiv:2311.16502, 2023. URL https://arxiv.org/abs/2311.16502.
+[40] Danyang Zhang, Junhao Song, Ziqian Bi, Yingfang Yuan, Tianyang Wang, Joe Yeong, and Junfeng Hao. Mixture of experts in
+large language models. arXiv preprint arXiv:2507.11181, 2025. URL https://arxiv.org/abs/2507.11181.
+[41] Yiman Zhang, Ziheng Luo, Qiangyu Yan, Wei He, Borui Jiang, Xinghao Chen, and Kai Han. OmniEval: A benchmark for
+evaluating omni-modal models with visual, auditory, and textual inputs. arXiv preprint arXiv:2506.20960, 2025. URL https:
+//arxiv.org/abs/2506.20960.
+[42] Junjie Zhou, Yan Shu, Bo Zhao, Boya Wu, Shitao Xiao, Xi Yang, Yongping Xiong, Bo Zhang, Tiejun Huang, and Zheng
+Liu. Mlvu: Benchmarking multi-task long video understanding. 2025 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR), pages 13691–13701, 2025. URL https://openaccess.thecvf.com/content/CVPR2025
+/html/Zhou_MLVU_Benchmarking_Multi-task_Long_Video_Understanding_CVPR_2025_paper.h
+tml.
+[43] Ziwei Zhou, Rui Wang, and Zuxuan Wu. Daily-Omni: Towards audio-visual reasoning with temporal alignment across modalities. arXiv preprint arXiv:2505.17862, 2025. URL https://arxiv.org/abs/2505.17862.
+
+12
+
+MAC-AutoML
+
+Supplementary Material
+Contents
+A. Additional Method Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+14
+
+A.1 Human Annotation and Agreement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.2 Domain Definitions and Size Rationale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.3 Speaker-Visibility Stratification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.4 Perception Option Balance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.5 Fixed-Time Turn-Entry Protocol. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.6 Response Scoring and Coverage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.7 Judge Sensitivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.8 Model and Inference Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.9 Reproducibility and Release Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.10 Prompt Templates and Parsing Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+B. Additional Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+14
+14
+14
+14
+14
+14
+15
+15
+15
+16
+16
+
+B.1 Classification Reliability. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+B.2 Response-Evaluation Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+B.3 Blind Three-Annotator Calibration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+B.4 Representative Failure Cases . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+16
+16
+21
+21
+
+C. Reliability, Bias, and Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+23
+
+C.1 Three-Annotator Verification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+C.2 Target Identity and Visibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+C.3 Judge Alignment and Bias . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+C.4 Benchmark Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+23
+23
+23
+23
+
+13
+
+MAC-AutoML
+
+A
+
+Additional Method Details
+
+A.1 Human Annotation and Agreement
+Every benchmark item is independently checked by three trained human annotators before adjudication. For who, annotators verify the active speaker, spoken content, four answer options, and speaker-visibility stratum. For when, they
+verify the target-participant description, query time, and YES/NO label. For how, they verify the target role and write
+the reference continuation. Disagreements are cross-reviewed and resolved by a senior annotator. The reported preadjudication raw agreement is 94.2% for perception annotations and 91.8% for interaction-generation annotations. We
+distinguish these construction-stage figures from the adjudicated gold labels distributed with the benchmark; chancecorrected agreement cannot be reconstructed from the public adjudicated labels alone.
+
+A.2 Domain Definitions and Size Rationale
+The 15 dialogue categories are grouped into four broad domains: entertainment, professional, daily life, and narrative.
+Entertainment covers interactive media such as talk shows and podcasts; professional covers interviews, debates, and
+task-oriented settings; daily life covers everyday conversations; narrative covers scripted movie and drama scenes. These
+labels support stratification, but the 200-item interaction-generation split is not large enough for stable per-category
+leaderboards.
+The interaction-generation split is a manually curated diagnostic set. Scaling open-ended continuation indiscriminately
+can add ambiguity in target-role identification, query-state selection, and reference quality. Each retained item therefore
+requires a clearly described target participant, an agreed YES/NO entry label at the query time, suﬀicient audio-visual
+context, and a human-written continuation. This quality criterion motivates the 200-item core design; it does not imply
+that 200 items exhaust the diversity of social interaction.
+
+A.3 Speaker-Visibility Stratification
+The perception split contains 1,725 speaker-visible and 275 speaker-visibility-mismatch items. Labels are based on
+whether the active speaker can be attributed from the visible scene at the query time. Mismatch cases include off-screen
+speech, reaction shots, partial occlusion, and weak identity cues. They are naturally sampled rather than created by
+replacing audio or pairing unrelated clips. The visibility gap is therefore descriptive and may also reflect shot type,
+composition, or domain.
+
+A.4 Perception Option Balance
+The correct-option distribution over 2,000 who items is A: 569, B: 561, C: 453, and D: 417. We retain this natural
+imbalance and report macro-F1 in addition to accuracy. A non-parsable output counts as incorrect and as a false negative
+for its gold class; because it has no predicted class, it contributes no class-specific false positive.
+
+A.5 Fixed-Time Turn-Entry Protocol
+Each interaction item provides an annotated query time ti , target participant Xi , and binary label yi . The target is
+identified by a concrete visual description such as clothing, location, or a visible action. Every model receives evidence
+bounded by the same prefix ending at ti and answers whether Xi should start a substantive turn; disclosed adapters
+preserve this temporal boundary when an API lacks a joint media endpoint. The task does not repeatedly query earlier
+prefixes, estimate a first-YES timestamp, or include inference latency in the score.
+This fixed-time formulation avoids imposing a universal asymmetric timing window on heterogeneous conversations.
+It also makes the protocol interface-agnostic across APIs and open-source checkpoints. Native streaming evaluation,
+persistent dialogue state, first-token latency, and acceptable-entry intervals remain separate extensions.
+
+A.6 Response Scoring and Coverage
+For the policy-conditioned evaluation, a response is generated on a gold-positive item only when the model predicts YES.
+Only non-empty true-positive responses enter conditional quality QEns . Missed opportunities and empty responses are
+excluded from this conditional mean but contribute zero to QEns
+joint over the fixed 128 positive opportunities. Conditional
+quality is always reported with positive-opportunity coverage and the joint score. In the separate gold-state evaluation,
+QGold forces generation at all 128 positive query states regardless of the model’s entry prediction; failed or missing
+responses contribute zero to that fixed-denominator mean.
+14
+
+MAC-AutoML
+
+Each eligible non-empty response is scored independently by GPT-4o, Gemini 2.5 Pro, and Qwen3-Omni on
+{0, 25, 50, 75, 100}. The scale is interpreted as follows:
+• 100: contextually grounded, role-consistent, coherent, and pragmatically natural;
+• 75: appropriate overall, with minor genericness or missing detail;
+• 50: partly relevant but with a noticeable grounding, role, or coherence problem;
+• 25: weakly relevant, contradictory, or pragmatically inappropriate;
+• 0: unrelated, wrong-role, or incompatible with the dialogue state.
+Judges receive the manually verified dialogue context ending before the annotated continuation, the continuation itself as
+a reference, and the evaluated response. The reference is withheld from evaluated models. The rubric explicitly permits
+valid paraphrases and alternative continuations rather than treating lexical similarity as the objective.
+Every non-empty true-positive response requires all three judge scores, whose arithmetic mean defines its ensemble
+quality. Failed judge calls are retried rather than averaged over a smaller pool. The evaluation artifact stores raw outputs,
+parsed scores, retries, model versions, and invocation dates. Pairwise agreement, leave-one-judge-out rankings, and
+same-family removal test whether the main conclusions depend on one judge.
+
+A.7 Judge Sensitivity
+Single-judge comparisons and leave-one-judge-out checks use different rankings: the former compare one judge with
+the complete ensemble, whereas the latter compare the remaining two-judge mean with that ensemble. Thus the fiveposition shift for the Gemini judge is compatible with a maximum one-position shift in each leave-one-out ranking.
+Same-family removal preserves the complete ordering. These checks reveal sensitivity within the fixed reference-aware
+protocol but cannot eliminate reference-style or model-family bias.
+
+A.8 Model and Inference Details
+Commercial model identifiers cover GPT-4o [11], Gemini 2.5 Pro/Flash [5], and Gemini 3 Flash/Pro Preview [8].
+Open-source systems use Qwen3-Omni Instruct/Thinking [36], Qwen2.5-Omni [35], OmniVinci [37], VITA-1.5 [7],
+and Baichuan-Omni-1.5 [17]. For GPT-4o, the already truncated query prefix is converted to 16-kHz mono audio and
+transcribed by gpt-4o-transcribe; GPT-4o receives this machine transcript together with sampled prefix frames.
+The Gemini relay used in this evaluation accepts sampled frames through its OpenAI-compatible endpoint but does
+not expose the media audio track. We therefore retain Gemini as an explicitly interface-limited baseline rather than
+labeling it native audio-video inference. No adapter receives content after the query time, and evaluated models never
+receive the human reference continuation. Decoding uses temperature 0.3 and top-p 1.0 where exposed; judge decoding
+is deterministic where supported. Exact identifiers, invocation dates, request envelopes, preprocessing, timeout, retry
+settings, and interface metadata are retained with the versioned evaluation snapshot.
+
+A.9 Reproducibility and Release Scope
+The supplementary package provides adjudicated annotations, frozen evaluation results, and offline analysis scripts. The
+original video media are not included in the package. The released evaluation manifest fixes 2,000 perception items and
+200 interaction-generation items (video_0001–video_0200), matching every denominator reported in this paper.
+The public annotations include item IDs, media paths, labels, dialogue metadata, and the visible/mismatch field used in
+our stratified analysis. The public code repository is available at https://github.com/MAC-AutoML/Social
+Omni, and the public dataset, including video media, is available at https://huggingface.co/datasets/
+alexisty/SocialOmni. These public resources are distinct from the frozen evaluation snapshot described below.
+We distinguish the public dataset artifact from the versioned evaluation snapshot. The latter retains raw model text,
+parsed predictions, parse failures, response presence, judge scores, interface type, and run metadata; tables and figures
+are generated from that single snapshot. Automated checks verify fixed item IDs, model means, score support, and
+coverage identities. Source hashes, original download dates, and per-source licensing fields are not currently present in
+the public dataset repository, so we do not claim that those provenance fields can be reconstructed from the release.
+
+15
+
+MAC-AutoML
+
+Who
+
+When
+
+GPT-4o
+
+How
+
+GPT-4o
+
+GPT-4o
+
+Gemini 2.5 Pro
+
+Gemini 2.5 Pro
+
+Gemini 2.5 Pro
+
+Gemini 2.5 Flash
+
+Gemini 2.5 Flash
+
+Gemini 2.5 Flash
+
+Gemini 3 Flash
+
+Gemini 3 Flash
+
+Gemini 3 Flash
+
+Gemini 3 Pro
+
+Gemini 3 Pro
+
+Gemini 3 Pro
+
+Qwen3-Omni
+
+Qwen3-Omni
+
+Qwen3-Omni
+
+Qwen3-Omni-Thinking
+
+Qwen3-Omni-Thinking
+
+Qwen3-Omni-Thinking
+
+Qwen2.5-Omni
+
+Qwen2.5-Omni
+
+Qwen2.5-Omni
+
+OmniVinci
+
+OmniVinci
+
+OmniVinci
+
+VITA-1.5
+
+VITA-1.5
+
+Baichuan-Omni-1.5
+
+Accuracy
+0
+
+20
+
+40
+
+60
+
+Score (%)
+
+80
+
+Accuracy
+Macro-F1
+
+Baichuan-Omni-1.5
+
+100
+
+0
+
+20
+
+40
+
+60
+
+Score (%)
+
+80
+
+100
+
+VITA-1.5
+
+Conditional quality
+Coverage-adjusted
+
+Baichuan-Omni-1.5
+0
+
+20
+
+40
+
+60
+
+Score (%)
+
+80
+
+100
+
+Figure S1. Model-level diagnostic profiles. Who reports strict-denominator accuracy; when contrasts accuracy and macro-F1; how
+contrasts conditional ensemble quality with coverage-adjusted quality.
+
+A.10
+
+Prompt Templates and Parsing Rules
+
+SocialOmni Prompt Cards
+Who.
+Identify who says what in the marked interval. Answer only A, B, C, or D.
+When.
+You are an external dialogue observer. The target participant is [visual
+description]. Based only on the video and audio observed up to the current
+timestamp, should this participant begin a substantive speaking turn now?
+A means YES and B means NO. Answer only A or B.
+How.
+Write the next utterance that the target participant should say based
+only on the observed audio-visual prefix. Do not write speech for another
+participant. Output only the utterance.
+For who, only one letter in {A,B,C,D} is accepted. For when, option A denotes YES and option B denotes NO; normalized unambiguous A/B or YES/NO outputs are accepted and mapped to these labels. Other outputs count as incorrect.
+For policy-conditioned how, an empty output is excluded from conditional quality and contributes zero to the joint
+score; in the gold-state evaluation, it contributes zero to the fixed-denominator gold-state score.
+
+B
+
+Additional Results
+
+Figure S1 summarizes the principal model-level profiles behind the main tables. The point plots preserve the native
+metric scales and expose rank changes across speaker attribution, turn-entry classification, conditional response quality,
+and coverage adjustment.
+
+B.1 Classification Reliability
+Table S1 reports macro-F1 and Wilson intervals for both classification tasks. Request and parse failures are listed separately in Table S7, remain in the strict denominators, and enter the gold-class error terms used for recall and macro-F1.
+Positive-class precision, recall, and F1 are released in the canonical summary.
+
+B.2 Response-Evaluation Details
++
+The detailed response-level release retains every component score and satisfies QEns
+joint = QEns × Cov /100 when coverage is represented as a percentage. The remaining tables provide classification reliability, strict failure accounting,
+per-model family sensitivity, and additional sanity-control details.
+
+16
+
+MAC-AutoML
+
+Table S1. Strict classification results. CIs are Wilson 95% intervals for accuracy; When TP/FP/TN/FN counts cover parsed
+outputs, while failures remain in the 200-item metric denominator and are itemized separately.
+Model
+
+Who Acc.
+
+Who F1
+
+35.05
+39.90
+33.70
+48.10
+45.40
+74.65
+67.65
+40.95
+29.75
+32.05
+22.45
+
+31.18
+39.62
+33.64
+47.88
+45.20
+74.34
+67.94
+39.50
+30.00
+31.38
+11.60
+
+[32.99, 37.17]
+[37.78, 42.06]
+[31.66, 35.80]
+[45.92, 50.29]
+[43.23, 47.59]
+[72.70, 76.51]
+[65.57, 69.66]
+[38.81, 43.12]
+[27.79, 31.79]
+[30.04, 34.13]
+[20.68, 24.33]
+
+When CI
+
+TP/FP/TN/FN
+
+[43.63, 57.35]
+[45.60, 59.31]
+[48.57, 62.22]
+[42.65, 56.37]
+[45.10, 58.82]
+[51.07, 64.63]
+[49.07, 62.70]
+[53.59, 67.02]
+[57.65, 70.80]
+[58.68, 71.74]
+[30.14, 43.37]
+
+39/10/62/89
+62/28/43/66
+55/16/56/73
+44/16/55/84
+41/9/63/87
+81/37/35/47
+60/20/52/68
+87/38/34/41
+90/33/39/38
+113/54/18/15
+16/5/57/74
+
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+Model
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+When Acc.
+
+When F1
+
+50.50
+52.50
+55.50
+49.50
+52.00
+58.00
+56.00
+60.50
+64.50
+65.50
+36.50
+
+49.84
+52.20
+55.50
+49.47
+51.41
+55.65
+55.93
+57.52
+62.03
+55.45
+38.82
+
+Who CI
+
+Table S4 reports the complete fixed-state generation audit. Every model is prompted at the same 128 gold-positive
+query states, and missing generations remain in the denominator with zero quality. The modality rows are diagnostic
+interface variants rather than additional leaderboard entries; the audio-video or disclosed adapter row supplies QGold in
+the primary table.
+Strict failure accounting treats interface compliance as part of measured performance. Request or runtime failures are
+uncommon, while invalid outputs concentrate in a few open systems: OmniVinci has 263 unparsable who outputs,
+Qwen3-Omni-Thinking has 27, and Baichuan-Omni-1.5 has 48 unparsable when outputs. All such cases remain in the
+fixed denominators; the table reports them separately rather than silently removing them.
+The control audit exposes a sharp reference-sensitivity boundary. Reference-aware controls separate verified from shuffled continuations almost perfectly, whereas archived reference-free controls do not preserve that ordering. We therefore
+retain the fixed reference-aware ensemble for the primary score and avoid interpreting judge agreement as human equivalence.
+
+17
+
+MAC-AutoML
+
+Table S2. Three-judge conditional response quality and positive-opportunity adjustment.
+Model
+
+QEns
+
+Quality CI
+
+Cov.+
+
+Coverage CI
+
+QEns
+joint
+
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+76.50
+12.37
+21.36
+17.61
+25.00
+42.59
+64.86
+33.14
+38.52
+49.93
+19.27
+
+[67.31, 85.26]
+[8.20, 17.07]
+[15.30, 27.88]
+[10.98, 25.00]
+[18.29, 32.11]
+[35.39, 49.59]
+[57.50, 72.36]
+[29.60, 36.88]
+[31.94, 45.28]
+[43.88, 55.75]
+[10.42, 29.69]
+
+30.47
+48.44
+42.97
+34.38
+32.03
+63.28
+46.88
+67.97
+70.31
+88.28
+12.50
+
+[23.16, 38.92]
+[39.95, 57.01]
+[34.72, 51.63]
+[26.71, 42.95]
+[24.57, 40.54]
+[54.66, 71.13]
+[38.45, 55.48]
+[59.46, 75.43]
+[61.90, 77.54]
+[81.56, 92.77]
+[7.84, 19.34]
+
+23.31
+5.99
+9.18
+6.05
+8.01
+26.95
+30.40
+22.53
+27.08
+44.08
+2.41
+
+Table S3. Bootstrap 95% intervals for conditional response quality and Wilson 95% intervals for positive-opportunity coverage.
+Point estimates are in Table 2.
+QEns CI
+
+Cov.+ CI
+
+[67.3,85.3]
+[8.2,17.1]
+[15.3,27.9]
+[11.0,25.0]
+[18.3,32.1]
+[35.4,49.6]
+[57.5,72.4]
+[29.6,36.9]
+[31.9,45.3]
+[43.9,55.8]
+[10.4,29.7]
+
+[23.2,38.9]
+[40.0,57.0]
+[34.7,51.6]
+[26.7,43.0]
+[24.6,40.5]
+[54.7,71.1]
+[38.4,55.5]
+[59.5,75.4]
+[61.9,77.5]
+[81.6,92.8]
+[7.8,19.3]
+
+Model
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+18
+
+MAC-AutoML
+
+Table S4. Complete gold-state generation results. QGold is the three-judge reference-aware mean over the fixed 128 positive states;
+failed or missing responses score zero. CI is a 95% item bootstrap interval.
+Model
+
+Interface
+
+Valid QGold 95% CI
+
+Baichuan-Omni-1.5
+audio-video 128 (0 fail) 18.36 [14.32, 22.85]
+Gemini 2.5 Flash
+visual-only 128 (0 fail) 21.35 [17.64, 25.26]
+Gemini 2.5 Pro
+visual-only 128 (0 fail) 15.62 [11.91, 19.66]
+Gemini 3 Flash
+visual-only 128 (0 fail) 13.93 [10.68, 17.32]
+Gemini 3 Pro
+visual-only 125 (3 fail) 21.55 [17.97, 25.13]
+GPT-4o
+cascade 127 (1 fail) 77.15 [72.72, 81.38]
+OmniVinci
+audio-video 128 (0 fail) 40.82 [35.87, 46.22]
+Qwen2.5-Omni
+audio-video 128 (0 fail) 36.00 [32.75, 39.32]
+Qwen3-Omni
+audio-video 128 (0 fail) 44.47 [38.87, 50.07]
+Qwen3-Omni-Thinking audio-video 128 (0 fail) 67.77 [62.69, 72.85]
+VITA-1.5
+audio-video 128 (0 fail) 48.37 [42.58, 54.04]
+Model
+
+Variant
+
+QGold 95% CI
+
+Baichuan-Omni-1.5
+audio-only 8.98 [6.45, 11.79]
+Baichuan-Omni-1.5
+video-only 16.73 [12.89, 20.57]
+GPT-4o
+frames-only 26.11 [21.81, 30.47]
+GPT-4o
+transcript-only 78.97 [74.41, 83.33]
+OmniVinci
+audio-only 42.12 [36.91, 47.46]
+OmniVinci
+video-only 20.83 [17.25, 24.67]
+Qwen2.5-Omni
+audio-only 41.08 [35.94, 45.96]
+Qwen2.5-Omni
+video-only 1.95 [1.11, 2.93]
+Qwen3-Omni
+audio-only 59.51 [53.65, 65.30]
+Qwen3-Omni
+video-only 18.75 [15.36, 22.40]
+Qwen3-Omni-Thinking audio-only 66.73 [61.46, 71.94]
+Qwen3-Omni-Thinking video-only 26.63 [22.20, 31.12]
+VITA-1.5
+audio-only 51.24 [45.77, 56.90]
+VITA-1.5
+video-only 22.14 [17.71, 26.82]
+
+Table S5. Input-channel ablations. A/V denotes audio-only/video-only; T/F denotes GPT-4o transcript-only/frames-only adapters.
+Primary-interface scores remain in Table 2.
+Model
+GPT-4o
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+Pair
+T/F
+A/V
+A/V
+A/V
+A/V
+A/V
+A/V
+
+Who
+
+When
+
+QGold
+
+A/T
+
+V/F
+
+A/T
+
+V/F
+
+A/T
+
+V/F
+
+35.75
+71.45
+47.80
+41.45
+34.35
+35.15
+23.40
+
+30.50
+37.05
+34.80
+33.05
+28.30
+31.95
+27.15
+
+56.50
+33.00
+0.00
+24.50
+21.50
+60.50
+39.50
+
+36.00
+30.00
+0.00
+20.50
+20.00
+66.00
+7.00
+
+78.97
+59.51
+66.73
+41.08
+42.12
+51.24
+8.98
+
+26.11
+18.75
+26.63
+1.95
+20.83
+22.14
+16.73
+
+19
+
+MAC-AutoML
+
+Table S6. Judge-family sensitivity over eligible responses. N.A. denotes no eligible response; shift is the maximum
+leave-one-judge-out rank change.
+Model
+
+Resp. Full No-fam.
+
+GPT-4o
+39 76.50
+Gemini 2.5 Pro
+62 12.37
+Gemini 2.5 Flash
+55 21.36
+Gemini 3 Flash
+44 17.61
+Gemini 3 Pro
+41 25.00
+Qwen3-Omni
+81 42.59
+Qwen3-Omni-Thinking 60 64.86
+Qwen2.5-Omni
+87 33.14
+OmniVinci
+90 38.52
+VITA-1.5
+113 49.93
+Baichuan-Omni-1.5
+16 19.27
+
+∆ Shift
+
+71.79 -4.70
+13.91 +1.55
+22.27 +0.91
+16.76 -0.85
+26.22 +1.22
+42.13 -0.46
+63.54 -1.32
+28.02 -5.12
+38.52 +0.00
+49.93 +0.00
+19.27 +0.00
+
+0
+0
+1
+1
+1
+0
+0
+1
+1
+0
+1
+
+Table S7. Strict-denominator failure accounting. Request/runtime and parse failures are disjoint; all remain in the fixed
+denominators.
+Model
+GPT-4o
+Gemini 2.5 Pro
+Gemini 2.5 Flash
+Gemini 3 Flash
+Gemini 3 Pro
+Qwen3-Omni
+Qwen3-Omni-Thinking
+Qwen2.5-Omni
+OmniVinci
+VITA-1.5
+Baichuan-Omni-1.5
+
+W req.
+
+W parse
+
+T req.
+
+T parse
+
+Scored
+
+12
+6
+3
+6
+10
+0
+0
+0
+0
+0
+0
+
+1
+0
+2
+1
+0
+0
+27
+0
+263
+1
+0
+
+0
+1
+0
+1
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+48
+
+39
+62
+55
+44
+41
+81
+60
+87
+90
+113
+16
+
+Table S8. Supplementary final-extension inventory and selected sanity-control results. Detailed CSV/JSON snapshots remain the
+source of record.
+Sanity setting
+
+Pos. Neg. G/S AUC G–S
+
+Primary / ref.-aware 236 256
+Primary / ref.-free 236 256
+Snapshot family
+Rows
+Held-out / ref.-aware 236 256
+How@Gold groups 25 Held-out / ref.-free 236 256
+Modality groups
+32 GPT-4o / ref.-aware 236 256
+When baselines
+9 GPT-4o / ref.-free 236 256
+Sanity judge groups 16 Gemini / ref.-aware 236 256
+Gemini / ref.-free
+236 256
+Qwen3 / ref.-aware 236 256
+Qwen3 / ref.-free
+236 256
+
+20
+
+0.99 74.67
+0.53 1.69
+1.00 68.46
+0.46 -1.37
+1.00 75.00
+0.51 0.98
+0.93 79.88
+0.52 1.37
+0.97 69.14
+0.52 2.73
+
+MAC-AutoML
+
+Table S9. Blind three-annotator calibration on 200 final responses from ten systems. Annotator and LLM values are three-rater
+and three-judge means; tiers are Poor (< 25), Moderate (25–49.99), and Strong (≥ 50). GPT-4o is absent from this fixed subset.
+Statistic
+Response Pearson
+Response Spearman
+Model Pearson
+Tier agreement
+ICC(2,k)
+Within 25 points
+Model
+Qwen3-OmniThinking
+Qwen3-Omni
+OmniVinci
+Qwen2.5-Omni
+Gemini 3 Pro
+Gemini 2.5 Flash
+Gemini 2.5 Pro
+Gemini 3 Flash
+VITA-1.5
+Baichuan-Omni-1.5
+
+Estimate
+
+95% CI
+
+0.619
+0.572
+0.817
+80.0%
+0.925
+94.0%
+
+[0.492, 0.726]
+[0.458, 0.671]
+–
+–
+–
+–
+
+n
+
+Annotator
+
+LLM
+
+Tier (A/L)
+
+19
+
+61.40
+
+64.04
+
+Strong/Strong
+
+23
+25
+25
+15
+18
+19
+16
+29
+11
+
+40.22
+35.67
+32.33
+26.11
+17.13
+16.23
+15.62
+10.92
+10.61
+
+46.38
+35.67
+34.00
+22.78
+17.59
+16.67
+20.83
+41.67
+18.94
+
+Moderate/Moderate
+Moderate/Moderate
+Moderate/Moderate
+Moderate/Poor
+Poor/Poor
+Poor/Poor
+Poor/Poor
+Poor/Moderate
+Poor/Poor
+
+B.3 Blind Three-Annotator Calibration
+The blind three-annotator calibration assesses response quality without redefining the primary leaderboard. Three annotators, blinded to source-model identity, independently score 200 final responses from ten systems on the same
+{0, 25, 50, 75, 100} support as the ensemble; the analysis uses their per-response mean. GPT-4o is absent from this
+frozen subset, so the calibration does not define a complete model ranking.
+Human and ensemble assessments agree most clearly at the capability-tier level. Response-level Pearson correlation is
+0.619 (95% bootstrap CI [0.492, 0.726]), model-level Pearson correlation is 0.817, and eight of ten systems share the
+same descriptive Poor/Moderate/Strong tier (80%; κ = 0.655). The top two systems preserve their order, while most
+rank changes occur in the compressed low-quality region. Human ratings are internally reliable (ICC(2,k)= 0.925; 94%
+within 25 points). VITA-1.5 is the principal model-specific discrepancy, supporting continued human auditing rather
+than a claim of judge equivalence. Table S9 gives all model-level means.
+
+B.4 Representative Failure Cases
+The three cases isolate complementary failures in cross-modal binding, continued-turn reasoning, and role-consistent
+generation. They are diagnostic examples rather than additional benchmark subsets.
+Across the three cases, correct propositional content is insuﬀicient: successful interaction also requires binding speech
+to the right participant, distinguishing hesitation from turn completion, and preserving the target role when generating
+a continuation.
+
+21
+
+MAC-AutoML
+
+Who: speaker binding. The target
+speaker is the man on the right during the
+marked interval. A salient close-up of the
+other participant can attract the prediction
+even when audio and later visual context
+identify the correct speaker.
+
+Figure S2. Representative who failure.
+The visually dominant participant is not
+the active speaker.
+
+When: premature entry. The query lies
+in an ongoing turn containing a pauselike acoustic gap. The surrounding context remains pragmatically unfinished, but
+a fixed-prefix model can mistake the silence for turn completion.
+
+Figure S3. Representative when failure.
+A pause-like gap creates a
+premature-entry trap.
+
+22
+
+How: pragmatic fit. The target needs
+an empathetic continuation. Generic
+problem-solving advice can remain topically related while violating the target role
+and the social purpose of the exchange.
+
+Figure S4. Representative how failure.
+Topical relevance does not ensure
+role-consistent social fit.
+
+MAC-AutoML
+
+C
+
+Reliability, Bias, and Scope
+
+C.1
+
+Three-Annotator Verification
+
+Eight trained annotators participate in benchmark construction, with three independent checks assigned to every retained
+item before cross-review and senior adjudication. All task labels, dialogue text, and reference continuations are humanauthored or manually verified. Raw pre-adjudication agreement is 94.2% on perception and 91.8% on interactiongeneration annotations; Section A.1 details the annotation roles.
+
+C.2
+
+Target Identity and Visibility Labels
+
+The target participant in when is specified by a visible description rather than by the phrase “your turn.” For who,
+speaker identity and spoken content are independently varied across the four options. Visibility labels distinguish a
+clearly attributable on-screen speaker from naturally occurring off-screen, reaction-shot, occluded, or weak-cue cases.
+These labels support error stratification but do not constitute synthetic conflict pairs.
+
+C.3
+
+Judge Alignment and Residual Bias
+
+The scalable how protocol requires complete GPT-4o, Gemini 2.5 Pro, and Qwen3-Omni scores for every eligible
+response. Pairwise agreement, leave-one-judge-out rankings, same-family removal, and the blind three-annotator calibration in Section B.3 support broad quality stratification, but do not establish human equivalence or eliminate relatedfamily preference.
+Judges see one human continuation to clarify role and intent, whereas evaluated models do not. The reference-free and
+held-out sanity controls are supplementary sensitivity analyses, not replacements for the fixed three-judge referenceaware scores in the main results. Reliability conclusions are therefore specific to that primary protocol and do not
+establish reference-free judging reliability. Continued blind three-annotator calibration remains necessary as judges
+and response distributions change.
+
+C.4
+
+Benchmark Scope
+
+The 200 manually reviewed interaction-generation items support aggregate diagnosis rather than fine-grained perdomain ranking. Dense verification strengthens target identity, query-state, and response-quality labels, but does not
+remove uncertainty from set size, category coverage, or source diversity. Claims therefore remain limited to the evaluated clips, models, and protocol.
+The offline fixed-prefix protocol does not measure persistent state, deployment latency, interruption recovery, or multiturn adaptation. Its short, mostly third-person clips also leave multilingual and culture-specific norms, first-person interaction, backchannels, and longer dialogue for future evaluation. Interface gaps require similar care: the GPT-4o cascade
+preserves query-bounded transcript semantics but loses raw prosody, while the evaluated Gemini relay is visual-only.
+Native streaming and broader interaction settings are complementary extensions of this controlled cross-interface diagnostic.
+
+23
+
+

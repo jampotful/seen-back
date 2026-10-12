@@ -1,0 +1,869 @@
+Opsin Evolution in Flower-Visiting Beetles
+Camilla R. Sharkey, Gareth S. Powell, Seth Bybee (2021). Frontiers in Ecology and Evolution. https://doi.org/10.3389/fevo.2021.676369. doi:10.3389/fevo.2021.676369. Licence: cc-by. Text from pdf.
+
+BRIEF RESEARCH REPORT
+published: 14 June 2021
+doi: 10.3389/fevo.2021.676369
+
+Opsin Evolution in Flower-Visiting
+Beetles
+Camilla R. Sharkey 1* , Gareth S. Powell 2 and Seth M. Bybee 2
+1
+Department of Ecology, Evolution and Behavior, University of Minnesota, Saint Paul, MN, United States, 2 Department
+of Biology & Monte L. Bean Museum, Brigham Young University, Provo, UT, United States
+
+Edited by:
+Casper J. Van Der Kooi,
+University of Groningen, Netherlands
+Reviewed by:
+Markus Friedrich,
+Wayne State University, United States
+Jair E. Garcia,
+RMIT University, Australia
+*Correspondence:
+Camilla R. Sharkey
+camilla.r.sharkey@gmail.com
+
+Flowers have evolved signals that exploit the sensory systems of insect visitors. In the
+case of visual cues, color signals are thought to have been shaped in large part by the
+spectral sensitivity of key pollinators, such as hymenopterans. Beetles were some of the
+first plant pollinators, pre-dating the angiosperm radiation but with the exception of a
+few well-studied species, the evolution of flower-visiting beetle visual systems is poorly
+understood. Thus, the ability of beetles to detect and distinguish flower color signals and
+perhaps their potential role in shaping flower coloration is not well understood. Traditional
+models of pollinator visual systems often assume a putative tri- or tetrachromatic flowervisitor, as is found in bees, flies and butterflies. Beetles are unique among modern
+pollinators as ancestrally they did not possess the machinery for trichromatic vision,
+lacking the blue-sensitive photoreceptor class. Research on the evolution of visual genes
+responsible for wavelength sensitivity (opsins) has revealed that beetles with putative triand tetrachromatic visual systems have evolved independently, along multiple lineages.
+We explore the evolution of beetle visual genes using newly generated and publicly
+available RNA-seq data from 25 species with flower associations, including previously
+unexplored key flower-visitor groups and 20 non-flower visiting relatives. Our findings
+serve as a resource to inform and guide future studies on beetle-flower interactions,
+where insight from both signal and receiver is needed to better understand these poorly
+explored systems.
+Keywords: opsin, insect vision, pollinators, gene duplication, coleoptera (beetles)
+
+INTRODUCTION
+Specialty section:
+This article was submitted to
+Behavioral and Evolutionary Ecology,
+a section of the journal
+Frontiers in Ecology and Evolution
+Received: 05 March 2021
+Accepted: 14 May 2021
+Published: 14 June 2021
+Citation:
+Sharkey CR, Powell GS and
+Bybee SM (2021) Opsin Evolution
+in Flower-Visiting Beetles.
+Front. Ecol. Evol. 9:676369.
+doi: 10.3389/fevo.2021.676369
+
+Beetles were some of the earliest pollinators and remain the primary pollinators of ancient plant
+group, gymnosperms (Toon et al., 2020), while also functioning as common pollinators of more
+recent angiosperm (flowering plant) radiations. Angiosperm radiations during the Cretaceous cooccurred with accelerated diversification among the holometabolous insects that comprise the
+dominant insect pollinators: hymenopterans, lepidopterans, dipterans and coleopterans (Doyle,
+2012; Misof et al., 2014). This co-radiation is thought to be in part due to the establishment of
+close associations or mutualisms between pollinator and plant, which likely contributed to the
+diversification of floral pollinator signals seen in modern flowers (Bronstein et al., 2006; Cardinal
+and Danforth, 2013). It is estimated that there are over 77,000 extant beetle species with flower
+associations (Wardhaugh, 2015) and flower visitation in these species has arisen via various
+evolutionary routes. While some species have retained existing ancestral gymnosperm associations
+(e.g., Boganiidae) (Cai et al., 2018), pollination behavior likely transitioned in some beetle lineages
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+1
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+protein (subfunctionalization). In a number of coleopteran
+lineages, duplications of the UV opsin and subsequent
+subfunctionalization has led to the ability of these taxa to
+perceive blue wavelengths (Sharkey et al., 2017) by essentially
+“re-evolving” a dedicated blue-sensitive photoreceptor, for
+example in coccinellids (Lin, 1993) and chrysomelids (Döring
+and Skorupski, 2007). There is also evidence that flower-visiting
+lineages of beetles in the families Scarabaeidae, Nitidulidae,
+and Curculionidae have expanded their opsin repertoire,
+likely expanding their wavelength sensitivities (Sharkey et al.,
+2017). It is not known if this is true across the diversity of
+beetle pollinators.
+We explore opsin expansions across the diversity of
+beetle pollinators using publicly available RNA-seq data, opsin
+sequences and an additional nine transcriptomes generated
+in this study. We aimed to investigate the evolution of the
+visual genes (opsins) that underpin sensitivity to spectral
+(color) information. Transcriptome data allow us to examine
+the diversity of opsin genes and hence putative wavelength
+sensitivities, from these flower-visiting species and their close
+relatives. In addition, we examine relative eye size in these species
+as an indicator of visual system investment.
+
+from gymnosperms to angiosperms (e.g., Oedemeridae and
+Kateretidae) (Peris et al., 2017, 2020). In other beetle lineages,
+flower associations evolved without preexisting pollination
+behavior (e.g., Glaphyridae) (Sabatinelli et al., 2020), as in
+Anthophila (bees) (Cardinal and Danforth, 2013; Peters et al.,
+2017).
+Traditionally, flowers visited by beetles have been described as
+dull in coloration and highly scented, suggesting that beetles do
+not use or are not reliant on spectral cues to detect flowers (Faegri
+and Van der Pijl, 1979). Perhaps unsurprisingly, considering
+the diversity of beetles, as more beetle-flower interactions have
+been described it has become clear that many beetle species
+do use spectral information for flower detection. Pollinators in
+the families Meloidae (blister beetles), Glaphyridae (bumble-bee
+scarabs), and Scarabaeidae (monkey beetles), use color alone as
+a cue for flower detection (Dafni et al., 1990; Steiner, 1998; Van
+Kleunen et al., 2007; Paudel et al., 2017). In carabids and fireflies,
+heavier investment in vision (larger eyes) rather than olfaction
+(reduced antennae) has been shown to be driven by visually
+mediated tasks (Bauer and Kredler, 1993; Stanger-Hall et al.,
+2018). It is not yet known whether there are similar trade-offs
+between flower visiting beetles that utilize predominantly visual
+or olfactory cues. Angiosperms that are pollinated primarily by
+beetles span at least 34 families (Figure 1; Bernhardt, 2000)
+thus there are likely many beetle-flower associations still to be
+described and the role of visual cues to be determined.
+The role of insect pollinator visual systems in shaping floral
+color cues has been well studied in the context of hymenopteran
+pollination systems (e.g., Chittka, 1996; Dyer et al., 2012). The
+spectral sensitivities of hymenopteran UV-, blue- and greensensitive photoreceptors are positioned for optimum wavelength
+discrimination of floral spectral cues (Chittka and Menzel, 1992).
+Rather than tuning of insect spectral sensitivity, this relationship
+is thought to have arisen from spectral tuning of floral reflectance,
+to existing photoreceptor sensitivities (Chittka, 1996; Dyer
+et al., 2012). The underlying sensitivity of a photoreceptor is
+determined by the structure of a GPCR protein (opsin), which is
+coupled to a light-absorbing chromophore pigment. Unlike the
+vast majority of insects studied, including bees and butterflies,
+beetles lack a key opsin (SW) that typically confers sensitivity to
+blue wavelengths of light (Jackowska et al., 2007), lost prior to
+the radiation of beetles (Sharkey et al., 2017). Based on spectral
+sensitivity measurements of beetles with this ancestral condition,
+it is assumed that the ancestor of all beetles had a dichromatic
+UV-green color visual system (Gribakin, 1981; Warrant and
+McIntyre, 1990).
+The lack of a dedicated blue-sensitive photoreceptor
+channel impacts the discriminatory capabilities of certain
+wavelengths, particularly within the violet-blue region of
+the light spectrum where photon catch is low. The ancestral
+beetle visual system is less complex than bees, for example,
+which have retained all three insect opsin classes UV, SW
+and LW (long wavelength), resulting in UV- blue- and greensensitivity. Opsin duplication events are the major route for
+acquiring additional spectral channels. Duplications alone do
+not lead to novel spectral sensitivities; selection for changes
+in function is required via mutations that lead to changes in
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+MATERIALS AND METHODS
+RNA Extraction and Assembly
+Seven flower-visiting beetle species (Trirhabda eriodictyonis,
+Sibinia setosa, Tychius meliloti, Anthrenus lepidus, Mordella
+albosuturalis, Nitops pallipennis, and Anaspis rufa) were collected
+from flowers in southern Utah into RNAlater and later frozen
+(–80◦ C) until processed. Multiple individuals were pooled for
+RNA extraction with the exception of T. eriodictyonis where
+one male was used. Total RNA was extracted from adult whole
+bodies using Nucleospin spin columns (Clontech) and reverse
+transcribed into cDNAs using the Illumina TruSeq RNA v2 kit.
+Sequencing was done on an Illumina HiSeq 2,500 generating 100
+bp paired-end reads (BYU DNA sequencing center). RNA from
+two additional nitidulid species was extracted using the RNeasy
+Mini kit (Qiagen) and transcribed with the KAPA Stranded
+mRNA-Seq kit (Roche). Sequencing was completed on an
+Illumina HiSeq 2,500 generating 250 bp paired-end reads (BYU
+DNA sequencing center). Additionally, paired-end RNA-seq data
+from 36 species were downloaded from the Sequence Read
+Archive (SRA). Data were trimmed using Trimmomatic (Bolger
+et al., 2014), removing adapter sequences and poor-quality bases
+using the parameters: SLIDINGWINDOW:4:5 LEADING:5
+TRAILING:5 MINLEN:25. Trinity (v2.11.0) (Grabherr et al.,
+2011; Haas et al., 2013) was used to assemble the remaining
+reads. Completeness of assemblies was estimated by searching
+each for the presence of 1367 insect Benchmarking Universal
+Single-Copy Orthologs using BUSCO v5 (Simão et al., 2015;
+Seppey et al., 2019). See Supplementary Table 1 for all
+species information. Opsin sequences have been deposited in
+GenBank with accession numbers MW885977—MW886096 and
+RNA-seq data have been uploaded to the Sequence Read
+Archive (PRJNA718629).
+
+2
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+FIGURE 1 | Flower-visiting beetle families included in this study. From left to right: Cetoniinae (Trichaulax philipsii), Buprestidae (Acmaeodera sp.), Lycidae (Lycus
+sp.), Curculionidae and Nitidulidae (Aethina concolor). Images by: Chris Moeseneder, GSP, Russ Anderson, Steven Marshall, GSP.
+
+eyes in the dorsal view and used to calculate a percentage of
+lateral head space dedicated to eye tissue as viewed dorsally.
+We tested for a relationship between UV and LW opsin copy
+number (Pearson’s correlation test) and if flower visitation
+behavior predicted relative eye-size (one-way ANOVA). Both
+were included as predictors in the final MANOVA. Because LW
+and UV were not correlated, we chose to test the effects of relative
+eye size and flower visitation on both LW and UV opsin copy
+number (MANOVA). For the purpose of this analysis, species
+without UV opsin copies were omitted. All data met required
+assumptions, and no data transformations were performed. All
+eye size statistical tests were executed in SPSS 27 (IBMCorp.).
+
+Opsin Search
+1
+
+Coding regions were predicted using TransDecoder v5.5.0,
+retaining the longest open reading frame (ORF). All predicted
+ORFs were also BLASTed2 against a database of known arthropod
+opsins (orthodb EOG8NKF98), with the addition of Lampyridae
+and Thermonectus marmoratus full-length opsin copies with an
+e-value of 0.001. All remaining ORFs were searched against our
+insect opsin database using hmmscan in HMMER (v3.3) (Eddy,
+2011). Cross-contamination and pseudogenes were removed
+using phylogenies of DNA and protein opsin sequences and by
+examining alignments. Opsins with > 99% similarity in protein
+sequence, likely structurally and functionally identical, were
+removed (CD-hit v4.8.1; Li and Godzik, 2006; Fu et al., 2012).
+Duplicates with 100% sequence identity using local alignment
+(BLASTp) were considered to be one opsin gene (Anthocomus
+equestris and Pharaxonotha floridana; see asterisks Figure 2 and
+Supplementary Table 2).
+Final DNA sequences and additional insect opsins were
+subject to codon alignment (MAFFT v7.453; Katoh et al., 2002;
+Katoh and Standley, 2013) with automatic alignment strategy
+detection. Maximum likelihood opsin DNA gene trees were
+generated using IQ-tree (v1.6.12) (Minh et al., 2013; Nguyen
+et al., 2015). The substitution model GTR + F + I + G4
+was selected automatically using ModelFinder (Kalyaanamoorthy
+et al., 2017). A species topology was generated in Mesquite
+3.2 (Maddison and Maddison, 2018) based on McKenna et al.
+(2019). For statistical analyses, beetle species were categorized
+as obligate flower-visitors that require floral resources for food
+or reproduction (A), facultative flower visitors with known floral
+associations (e.g., facultative pollinators) but no reliance on floral
+resources for food or reproduction (B) and non-flower visitors
+with no known association with flowers (C).
+
+RESULTS
+Opsin Duplications
+A transcriptomics approach was taken to explore the putative
+wavelength sensitivities of flower visiting and non-flower visiting
+beetle species. To determine possible wavelength sensitivity
+expansions, RNA-seq data from 45 species spanning 26 families
+were mined for opsins and data were analyzed for the presence
+of duplication events. Nine transcriptomes from flower-visiting
+species were generated for this study to expand the diversity of
+sampled lineages. We recovered 120 opsin copies, 92 of which
+were full length copies with a minimum length of 101 amino
+acids. We classified 18 beetle species as obligate flower visitors
+(category A), seven as facultative flower visitors (category B), and
+20 with no known floral associations (category C). Additionally,
+we included 18 previously published beetle opsins from five
+category A species, 11 opsins from four category B species and
+14 opsins from five category C species (Sharkey et al., 2017;
+Supplementary Table 1).
+In our dataset both obligate (A) and facultative (B) flower
+visitors had 2-fold higher proportions of UV duplications
+present, 39.1 and 45.5%, respectively, than non-flower visitors (C)
+with only 20%. LW duplications were more common in obligate
+flower visitors (52.2%) than either facultative (18.2%) or nonflower visitors (12%). The prevalence of either opsin duplication
+was highest in obligate flower visitors (73.9%), lower in flowerassociated species (54.5%) and lowest in non-flower visitors
+sampled (28%). We report 33 independent opsin duplication
+events (12 UV and 21 LW), which have occurred across the
+diversity of Coleoptera (Figure 2). Duplication events occurred
+
+Eye Size Measurements and Statistics
+Relative eye size was generated using the measurement tools in
+Adobe Photoshop v.19.1.6 from high resolution habitus photos
+(available upon request due to copyright) with an unimpeded
+dorsal view of the head. Two measurements were taken for
+each photo: total head width including eyes, and interocular
+distance (see Supplementary Figure 1 for example image). These
+two measurements were used to generate the total width of the
+1
+2
+
+http://transdecoder.github.io
+https://blast.ncbi.nlm.nih.gov/
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+3
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+FIGURE 2 | Patterns of opsin duplication and flower-visitation behavior for 59 beetle species. The cladograms represent a simplified version of beetle relationships
+after McKenna et al. (2019) with the position of superfamilies indicated. The left-hand cladogram shows opsin duplication events with opsin copy number at the
+terminals and duplication events indicated on the branches. Duplication events were estimated using the opsin tree (see Supplementary Figure 2). Asterisks (*)
+denote cases where additional duplication copies were found but determined not to be functionally distinct (see Opsin Search Methods text). The right-hand
+cladogram reflects known behavioral categories for the level of flower visitation. No attempt at ancestral reconstruction was made due to the available taxon
+sampling.
+
+within all but one superfamily, Bostrichoidea, which has only
+a single flower-visiting lineage (the Dermestidae) represented
+by Anthrenus lepidus. Percent identity (sequence similarity) of
+aligned duplicate opsins (BLASTp, see text footnote 2) ranged
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+from 64 to 98% sequence identity and a mean of 80% (see
+Supplementary Table 2).
+Within Scarabaeoidea only flower visiting scarabs exhibit
+opsin duplications. These duplications were independent and
+
+4
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+solely among LW opsins in Heterochelus sp. and Eulasia
+bombylius with one and two duplications, respectively (Figure 2).
+Notably, Protaetia brevitarsis, which can commonly be found
+on flowers (B) but is not considered an obligate flower
+visitor, did not have opsin duplicates. Among the five Lycidae
+(Elateroidea) species sampled, the UV opsin duplicates present
+were orthologous (Figure 2 and Supplementary Figure 2) and
+therefore represent an early duplication event in this group. Two
+LW opsin copies were present in two lycid species Lycostomus
+kraatzi and Calopteron sp. However, this was not linked to flower
+visiting behavior with the former likely an obligate (A) and
+the latter only facultatively associated with flowers (B). Rather,
+these species are among the most derived members of this
+group and therefore highlight a potential ancestral LW opsin
+duplication event that occurred during the lycid radiation. All
+flower visiting members (A) of Cleroidea have either UV or LW
+duplicates. Each duplication event was independent, including
+within the subfamily Clerinae where a UV duplication occurred
+in Thanasimus formicarius and a LW duplication in the flower
+visitor Trichodes sinae.
+Coccinellid opsin UV duplicates have been previously
+examined (Sharkey et al., 2017). We add the species Chilocorus
+bijugus (tribe: Chilocorini), which has no known associations
+with flowers. No UV duplicate was recovered for this species
+making this species unique among the coccinellids sampled thus
+far. Our opsin phylogeny (Supplementary Figure 2) suggest
+that two separate UV duplication events occurred, one prior
+to the diversification of the tribe Coccinellini and the other
+along lineage sister to the rest of the coccinellids, Cryptolaemus
+montrouzieri (tribe: Coccidulini). We note only two opsin
+duplication events within the Tenebrionoidea, within the blister
+beetles Meloidae (Hycleus chodschenticus) (LW duplication) and
+tumbling flower beetles Mordellidae (Mordella sp. and Mordella
+albosuturalis) (UV duplication). Opsin orthologs are present in
+both Mordella species, suggesting that this duplicate may be
+shared among other members of this genus.
+A close relationship between flower visitation and opsin copy
+number can be clearly seen among the cucujoids (Figure 2).
+Single UV and LW opsin copies are present in all non-flower
+visiting species but UV and/or LW opsin duplications are present
+among all flower-visiting nitidulids sampled (Figure 2). The LW
+opsin duplicates form two clades shared among these species
+suggesting an early LW duplication event in Nitidulidae that has
+potentially been lost in the three non-flower visiting lineages.
+Two of the three obligate flower visiting weevils (Curculionidae)
+species possess additional opsin copies.
+While duplications more commonly occurred amongst flower
+visiting species (categories A and B), than in non-flower visitors
+(C), 26% of obligate flower visitors have retained the ancestral
+UV-LW opsin condition. Among the obligate flower visitors,
+four of the seven tenebrionid species sampled have single opsin
+copies, including both members of Scraptiidae (Scraptia sp. and
+Anaspis rufa), Oedemera nobilis (Oedemeridae), and Macrosiagon
+limbatum (Ripiphoridae) (Figure 2). Carpet beetle Anthrenus
+lepidus (Dermestidae: Bostrichoidea), Biphyllus sp. (Biphyllidae:
+Cleroidea) and two weevil species, Tychius meliloti and Sibinia
+setosa (Curculionidae: Curculionoidea) also did not have opsin
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+duplications. We did not recover UV opsins from four nonobligate flower visiting species, Rhagonycha fulva, Macrolycus
+sp., Aromia moschata or Ips typographus but LW opsins were
+recovered from all of these species.
+
+Eye Size, Flower Visitation and Opsin
+Copy Number
+Relative eye size was used as an approximate measure of
+visual investment across the species in this study. We found
+no significant correlation between UV and LW opsin copy
+number (p = 0.893). Flower visitation category (A, B or C) did
+significantly predict relative eye size (F = 8.52, df = 2, p < 0.001).
+Post hoc tests revealed obligate flower visiting species (A) have
+significantly larger eyes than those without any floral association
+(C) (p < 0.001, mean difference = 11.15%). Flower visitation
+category in conjunction with relative eye size was a significant
+predictor of LW copy number (F = 3.895, df = 32, p = 0.015),
+but not UV copy number (F = 2.06.11, df = 32, p = 0.122).
+While the overall model showed evidence for the combination of
+both flower visitation and eye size influencing LW copy number,
+neither was significant individually.
+
+DISCUSSION
+A previous study (Sharkey et al., 2017) found opsin duplications
+in four of five flower-visiting beetle species. While LW opsin
+duplications were not common generally, in the coleopterans
+sampled, they were ubiquitous among these flower-visitors. These
+findings suggested that there may be a selective advantage for
+duplications, such as an expansion of wavelength sensitivity,
+among species that may use floral cues. Our opsin analysis
+across numerous flower-visiting species of coleopterans suggests
+that associations with flowers has often led to or precedes the
+expansion of wavelength sensitivity through opsin duplication.
+We cannot attribute an opsin duplication event strictly to
+the evolution of flower visitation behavior due to associated
+factors, such as diurnality (Sondhi et al., 2021) and other
+visually guided behaviors (e.g., host-plant seeking), for which
+expanded wavelength sensitivity may be beneficial. However,
+by including closely related non-flower visiting relatives in
+this study, we show that duplication events and particularly
+LW opsin duplications, do commonly occur along lineages
+associated with flowers, more so than those that have no
+floral associations. The frequency of duplications varies among
+other pollinator groups. Hymenopterans exhibit relatively stable
+opsin copy numbers (Spaethe and Briscoe, 2004; Oeyen et al.,
+2020) but in contrast the opsin repertoire of lepidopterans is
+highly variable, particularly within the butterflies, Papilionoidea
+(Sondhi et al., 2021). Our finding that there have been many
+independent duplication events in flower-visiting coleopterans
+may be attributed to the ancestral loss of the SW opsin in this
+group, or as in butterflies, may suggest increased spectral richness
+of the visual system.
+Opsin duplications do not in all cases lead to new
+photoreceptor sensitivities, as is the extreme case in odonates,
+where there is a large excess of opsin copies (Futahashi et al.,
+
+5
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+visit (Martínez-Harms et al., 2012). This suggests a role for
+LW opsin duplication and subfunctionalization to expand longwavelength sensitivity for floral detection. Electrophysiological
+measurements of Protaetia brevitarsis (Cetoniinae), a facultative
+flower visitor, are in agreement with our finding that this
+species only has UV and green sensitivity (Lin and Wu, 1992)
+but curiously this species exhibits attraction to red over green
+stimuli (Cai et al., 2021). We have yet to find any opsin
+duplications in the eight additional scarabs examined thus far
+(Sharkey et al., 2017), highlighting flower-visiting scarabs as an
+interesting group to study visual systems and signals in the
+context of anthophily.
+Flower visitation is not always a predictor of an opsin
+duplication event; opsin duplications were absent from six
+flower-visiting lineages. It is possible that these species rely more
+heavily on olfaction than vision, and we may expect to see greater
+investment in these sensory structures (e.g., larger antennae),
+rather than vision (Bauer and Kredler, 1993; Stanger-Hall et al.,
+2018). Such sensory adaptations can be seen in the flabellate
+(fan-shaped) antennae of Macrosiagon limbatum (Ripiphoridae).
+Additionally, if odor was a primary cue in ancient cycads, as
+in modern species (Toon et al., 2020), lineages such as the
+false oil beetles (Oedemeridae) may have initially established
+olfactory rather than visual specializations that persisted after
+they transitioned to angiosperm hosts (Peris et al., 2017). A UVgreen color channel system may be adequate to detect floral
+cues commonly attractive to beetles, e.g., white and yellow
+(Reverté et al., 2016), but wavelength sensitivity expansion may
+be advantageous to detect floral cues that fall outside this spectral
+range (e.g., pink or violet).
+In this study we measured eye size as a proportion of
+the head (i.e., relative eye size), which has been used in
+prior studies of beetles to test relationships between visual
+investment and behavior (Bauer and Kredler, 1993; StangerHall et al., 2018). This does not give a perfect estimation
+of eye volume due to the variation in eye shape across
+coleopterans with extreme morphological diversity. However,
+using relative eye size to examine the potential link between
+flower visitation, opsin copy number and investment in vision
+reveals some interesting findings. For the species examined
+in this study, eye size was found to be predicted by flower
+visitation behavior with obligate flower visitors having larger
+eyes as a proportion of the head. This suggests that flowervisitation or associated visual ecology may have driven selection
+for greater investment in vision. Similarly, flower visitors were
+also more likely to have a greater LW opsin copy number,
+suggesting that an expansion of long-wavelength sensitivity is
+advantageous for behaviors associated with flower visitation in
+the species we have examined. This is certainly true among
+beetles that prefer orange and red flowers and have dedicated
+red-sensitive photoreceptors, but red flower visitation is not
+commonplace among other species with LW duplications
+examined herein. Interestingly, among all species, LW opsin
+copy number was not correlated with eye size suggesting that
+it is not eye size alone that predicts the number of opsin
+duplicates. This may point to greater visual specialization in
+flower visiting beetles.
+
+2015; Suvorov et al., 2016) compared to measured photoreceptor
+sensitivities (Laughlin, 1976; Yang and Osorio, 1991). In contrast,
+it has been shown that beetles are relatively conservative in opsin
+copy number (Sharkey et al., 2017). Therefore, opsin duplicates
+can be used as a guide for photoreceptor sensitivity diversity. For
+example, all sampled jewel beetles (Buprestidae) and Carabus sp.
+(Carabidae) have 2 UV and 2 LW opsin copies (Lord et al., 2016;
+Sharkey et al., 2017) that underpin UV-, blue-, green-, and redsensitive photoreceptors (Hasselmann, 1962; Meglič et al., 2020),
+demonstrating increased function of photoreceptor sensitivity for
+these groups as a result of opsin duplication. Further, the presence
+of blue-sensitive photoreceptors also aligns well with the presence
+of a UV opsin duplication, in coccinellids (Lin and Wu, 1992)
+and chrysomelids (Döring and Skorupski, 2007). Additionally,
+species with ancestral UV-green sensitivity and complementary
+opsin data only possess a single UV and a single LW opsin copy
+(e.g., Lampyridae and Dendroctonus) (Groberman and Borden,
+1982; Lall et al., 2010; Martin et al., 2015; Sander and Hall, 2015).
+UV opsins were absent in four species. The UV opsin typically
+has lower expression levels as often UV-sensitive photoreceptors
+are less numerous than long wavelength-sensitive receptors in
+insects. Thus, we cannot be sure whether this finding reflects
+inadequate sequencing depth in these species or a true opsin
+loss. The use of head or eye tissue rather than whole body
+specimens, or deeper sequencing, may be necessary for future
+studies. Additionally, opsin expressed in photoreceptors with
+low abundance, such as those used in highly specialized regions
+(e.g., the polarization-sensitive dorsal rim area) may also have
+low signal. Further study to determine opsin abundance and
+expression patterns is required to better understand how well
+opsin copy number is estimated from whole body specimens, in
+particular those with reduced eyes.
+Flowers commonly frequented by beetles have been
+traditionally described as dull in coloration (white, green or
+yellow) but highly scented, thought to exploit existing attraction
+to certain volatile compounds, such as skatole, attractive to
+coprophagous beetles (Schiestl and Dötterl, 2012). Despite
+compelling evidence that many beetles use floral visual cues
+for flower visitation, the study of associated visual adaptations
+is lacking. Scarab pollinators provide compelling evidence for
+vision as the primary cue for flower detection. Bumble-bee
+scarabs (Glaphyridae) and monkey beetles (Hopliini) use the
+dark center of a flower as a visual cue, termed “beetle marks”
+(Dafni et al., 1990; Johnson and Midgley, 2001). Other nonscarab beetle pollinators are also attracted to dark spots on
+flowers, e.g., nitidulids (Free and Williams, 1978) and mordellids
+(Westmoreland and Muntan, 1996).
+In scarab beetles, anthophagy (flower feeding) has evolved
+at least seven times (Ahrens et al., 2014). Three of these
+lineages have been sampled in this study: Glaphyridae, Hopliini
+and Cetoniinae. We found LW opsin duplications among
+the two lineages that are known to have preferences for red
+and orange flowers, Glaphyridae (Sabatinelli et al., 2020) and
+Hopliini (Johnson and Midgley, 2001). The bumble-bee scarab
+Pygopleurus israelitus (Glaphyridae) has both green- and redsensitive photoreceptors (λmax : 631 nm) the latter of which
+increase the conspicuousness of red bowl-shaped flowers they
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+6
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+beetle taxa and generated the species topology. All authors edited
+the manuscript and approved the submitted version.
+
+Our aim was to demonstrate that there is much more exciting
+work that needs to be done to better understand the evolution of
+beetle visual systems. This is particularly true for flower visitors,
+which have multiple origins within the majority of coleopteran
+superfamilies. Equally exciting is the large visual system diversity,
+morphological, molecular and certainly functional, among the
+anthophilous Coleoptera. In short, beetles represent a largely
+untapped area to study insect plant interactions at both the fine
+and coarse scales of evolution.
+
+FUNDING
+This project was made possible by funding from the National
+Science Foundation DEB-1655981 to SB.
+
+ACKNOWLEDGMENTS
+
+DATA AVAILABILITY STATEMENT
+
+We thank all the researchers who generated RNA-seq data that
+was used in this study. We are grateful to Nathan Lord and Gavin
+Martin for help with sample collection and processing. We also
+thank Alexandra Duffy for statistics advice.
+
+The datasets presented in this study can be found in online
+repositories. The names of the repository/repositories and
+accession number(s) can be found below: https://www.ncbi.nlm.
+nih.gov/, PRJNA718629.
+
+AUTHOR CONTRIBUTIONS
+
+SUPPLEMENTARY MATERIAL
+
+CS conceived the study, ran transcriptomic and phylogenetic
+analyses, and wrote the manuscript. GP advised on beetle taxa,
+collected and analyzed eye size measurements. SB advised on
+
+The Supplementary Material for this article can be found
+online at: https://www.frontiersin.org/articles/10.3389/fevo.2021.
+676369/full#supplementary-material
+
+REFERENCES
+
+Doyle, J. A. (2012). Molecular and fossil evidence on the origin of angiosperms.
+Annu. Rev. Earth Planet. Sci. 40, 301–326. doi: 10.1146/annurev-earth-042711105313
+Dyer, A. G., Boyd-Gerny, S., McLoughlin, S., Rosa, M. G. P., Simonov, V.,
+and Wong, B. B. M. (2012). Parallel evolution of angiosperm colour signals:
+common evolutionary pressures linked to hymenopteran vision. Proc. Biol. Sci.
+279, 3606–3615. doi: 10.1098/rspb.2012.0827
+Eddy, S. R. (2011). Accelerated profile HMM searches. PLoS Comput. Biol.
+7:e1002195. doi: 10.1371/journal.pcbi.1002195
+Faegri, K., and Van der Pijl, L. (1979). The principles of pollination ecology. Oxford,
+UK: Pergamon Press.
+Free, J. B., and Williams, I. H. (1978). The responses of the pollen beetle, Meligethes
+aeneus, and the seed weevil, Ceuthorhynchus assimilis, to oil-seed rape, Brassica
+napus, and other plants. J. Appl. Ecol. 15, 761–774. doi: 10.2307/2402773
+Fu, L., Niu, B., Zhu, Z., Wu, S., and Li, W. (2012). CD-HIT: Accelerated for
+clustering the next-generation sequencing data. Bioinformatics 28, 3150–3152.
+doi: 10.1093/bioinformatics/bts565
+Futahashi, R., Kawahara-Miki, R., Kinoshita, M., Yoshitake, K., Yajima, S., Arikawa,
+K., et al. (2015). Extraordinary diversity of visual opsin genes in dragonflies.
+Proc. Natl. Acad. Sci. 112, E1247–E1256. doi: 10.1073/pnas.1424670112
+Grabherr, M. G., Haas, B. J., Yassour, M., Levin, J. Z., Thompson, D. A., Amit, I.,
+et al. (2011). Full-length transcriptome assembly from RNA-Seq data without a
+reference genome. Nat. Biotechnol. 29, 644–652. doi: 10.1038/nbt.1883
+Gribakin, F. G. (1981). Automatic spectrosensitometry of photoreceptors in
+Lethrus (Coleoptera, Scarabaeidae). J. Comp. Physiol. A 142, 95–102. doi: 10.
+1007/BF00605481
+Groberman, L. J., and Borden, J. H. (1982). Electrophysiological response of
+Dendroctonus pseudotsugae and Ips paraconfusus (Coleoptera: Scolytidae) to
+selected wavelength regions of the visible spectrum. Can. J. Zool. 60, 2180–2189.
+doi: 10.1139/z82-279
+Haas, B. J., Papanicolaou, A., Yassour, M., Grabherr, M., Blood, P. D., Bowden,
+J., et al. (2013). De novo transcript sequence reconstruction from RNA-seq
+using the Trinity platform for reference generation and analysis. Nat. Protoc.
+8, 1494–1512. doi: 10.1038/nprot.2013.084
+Hasselmann, E. M. (1962). Über die relative spektrale Empfindlichkeit von Käferund Schmetterlingsaugen bei verschiedenen Helligkeiten. Zool. Jahrbucher 69,
+537–576.
+
+Ahrens, D., Schwarzer, J., and Vogler, A. P. (2014). The evolution of scarab beetles
+tracks the sequential rise of angiosperms and mammals. Proc. R. Soc. B Biol. Sci.
+281:20141470. doi: 10.1098/rspb.2014.1470
+Bauer, T., and Kredler, M. (1993). Morphology of the compound eyes as an
+indicator of life-style in carabid beetles. Can. J. Zool. 71, 799–810. doi: 10.1139/
+z93-105
+Bernhardt, P. (2000). Convergent evolution and adaptive radiation of beetlepollinated angiosperms. Plant Syst. Evol. 222, 293–320. doi: 10.1007/BF00
+984108
+Bolger, A. M., Lohse, M., and Usadel, B. (2014). Trimmomatic: a flexible
+trimmer for Illumina sequence data. Bioinformatics 30, 2114–2120. doi: 10.
+1093/bioinformatics/btu170
+Bronstein, J. L., Alarcón, R., and Geber, M. (2006). The evolution of plant –
+insect mutualisms. New Phytol. 172, 412–428. doi: 10.1111/j.1469-8137.2006.
+01864.x
+Cai, C., Escalona, H. E., Li, L., Yin, Z., Huang, D., and Engel, M. S. (2018). Beetle
+pollination of cycads in the mesozoic. Curr. Biol. 28, 2806–2812. doi: 10.1016/j.
+cub.2018.06.036
+Cai, H., Zhang, T., Su, Y., Wang, Z., Zhang, X., Wang, S., et al. (2021). Influence
+of trap color, type, and placement on capture efficacy for Protaetia brevitarsis
+(Coleoptera: Scarabaeidae). J. Econ. Entomol. 114, 225–230. doi: 10.1093/jee/
+toaa259
+Cardinal, S., and Danforth, B. N. (2013). Bees diversified in the age of eudicots.
+Proc. R. Soc. B Biol. Sci. 280:20122686. doi: 10.1098/rspb.2012.2686
+Chittka, L. (1996). Does bee color vision predate the evolution of flower color?
+Naturwissenschaften 83, 136–138. doi: 10.1007/s001140050263
+Chittka, L., and Menzel, R. (1992). The evolutionary adaptation of flower colours
+and the insect pollinators’ colour vision. J. Comp. Physiol. A 171, 171–181.
+doi: 10.1007/BF00188925
+Dafni, A., Bernhardt, P., Shmida, A., Ivri, Y., Greenbaum, S., O’Toole, C. H.,
+et al. (1990). Red bowl-shaped flowers: convergence for beetle pollination in
+the Mediterranean region. Isr. J. Bot. 39, 81–92.
+Döring, T. F., and Skorupski, P. (2007). Host and non-host leaves in the colour
+space of the Colorado potato beetle (Coleoptera: Chrysomelidae). Entomol.
+Gen. 29, 81–95. doi: 10.1127/entom.gen/29/2007/81
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+7
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+fostered the mega-radiation of parasitoid and eusocial Hymenoptera. Genome
+Biol. Evol. 12, 1099–1188. doi: 10.1093/GBE/EVAA106
+Paudel, B. R., Shrestha, M., Dyer, A. G., and Li, Q.-J. (2017). Ginger and the beetle:
+Evidence of primitive pollination system in a Himalayan endemic alpine ginger
+(Roscoea alpina, Zingiberaceae). PLoS One 12:e0180460. doi: 10.1371/journal.
+pone.0180460
+Peris, D., Labandeira, C. C., Barrón, E., Delclòs, X., Rust, J., and Wang, B.
+(2020). Generalist pollen-feeding beetles during the Mid-Cretaceous. iScience
+23:100913. doi: 10.1016/j.isci.2020.100913
+Peris, D., Pérez-de la Fuente, R., Peñalver, E., Delclòs, X., Barrón, E., and
+Labandeira, C. C. (2017). False blister beetles and the expansion of
+gymnosperm-insect pollination modes before angiosperm dominance. Curr.
+Biol. 27, 897–904. doi: 10.1016/j.cub.2017.02.009
+Peters, R. S., Krogmann, L., Mayer, C., Donath, A., Gunkel, S., Meusemann, K., et al.
+(2017). Evolutionary history of the Hymenoptera. Curr. Biol. 27, 1013–1018.
+doi: 10.1016/j.cub.2017.01.027
+Reverté, S., Retana, J., Gómez, J. M., and Bosch, J. (2016). Pollinators show flower
+colour preferences but flowers with similar colours do not attract similar
+pollinators. Ann. Bot. 118, 249–257. doi: 10.1093/aob/mcw103
+Sabatinelli, G., Eberle, J., Fabrizi, S., and Ahrens, D. (2020). A molecular phylogeny
+of Glaphyridae (Coleoptera: Scarabaeoidea): evolution of pollination and
+association with ‘Poppy guild’ flowers. Syst. Entomol. 45, 838–848. doi: 10.1111/
+syen.12429
+Sander, S. E., and Hall, D. W. (2015). Variation in opsin genes correlates with
+signalling ecology in North American fireflies. Mol. Ecol. 24, 4679–4696. doi:
+10.1111/mec.13346
+Schiestl, F. P., and Dötterl, S. (2012). The evolution of floral scent and olfactory
+preferences in pollinators: Coevolution or pre-existing bias? Evolution 66,
+2042–2055. doi: 10.1111/j.1558-5646.2012.01593.x
+Seppey, M., Manni, M., and Zdobnov, E. M. (2019). BUSCO: assessing genome
+assembly and annotation completeness. Methods Mol. Biol. 1962, 227–245.
+doi: 10.1007/978-1-4939-9173-0_14
+Sharkey, C. R., Fujimoto, M. S., Lord, N. P., Shin, S., McKenna, D. D., Suvorov, A.,
+et al. (2017). Overcoming the loss of blue sensitivity through opsin duplication
+in the largest animal group, beetles. Sci. Rep. 7:8. doi: 10.1038/s41598-01700061-7
+Simão, F. A., Waterhouse, R. M., Ioannidis, P., Kriventseva, E. V., and
+Zdobnov, E. M. (2015). BUSCO: Assessing genome assembly and annotation
+completeness with single-copy orthologs. Bioinformatics 31, 3210–3212. doi:
+10.1093/bioinformatics/btv351
+Sondhi, Y., Ellis, E. A., Bybee, S. M., Theobald, J., and Kawahara, A. (2021). Light
+environment drives evolution of color vision genes in butterflies and moths.
+Commun. Biol. 4:177. doi: 10.1038/s42003-021-01688-z
+Spaethe, J., and Briscoe, A. D. (2004). Early duplication and functional
+diversification of the opsin gene family in insects. Mol. Biol. Evol. 21, 1583–1594.
+doi: 10.1093/molbev/msh162
+Stanger-Hall, K. F., Lower, S. E. S., Lindberg, L., Hopkins, A., Pallansch, J., and
+Hall, D. W. (2018). The evolution of sexual signal modes and associated sensor
+morphology in fireflies (Lampyridae, Coleoptera). Proc. R. Soc. B Biol. Sci.
+285:20172384. doi: 10.1098/rspb.2017.2384
+Steiner, K. E. (1998). The evolution of beetle pollination in a South African orchid.
+Am. J. Bot. 85, 1180–1193. doi: 10.2307/2446351
+Suvorov, A., Jensen, N. O., Sharkey, C. R., Fujimoto, M. S., Bodily, P., Wightman,
+H. M. C., et al. (2016). Opsins have evolved under the permanent heterozygote
+model: insights from phylotranscriptomics of Odonata. Mol. Ecol. 26, 1306–
+1322. doi: 10.1111/mec.13884
+Toon, A., Terry, L. I., Tang, W., Walter, G. H., and Cook, L. G. (2020). Insect
+pollination of cycads. Austral. Ecol. 45, 1033–1058. doi: 10.1111/aec.12925
+Van Kleunen, M., Nänni, I., Donaldson, J. S., and Manning, J. C. (2007). The role
+of beetle marks and flower colour on visitation by monkey beetles (Hopliini)
+in the greater cape floral region, South Africa. Ann. Bot. 100, 1483–1489. doi:
+10.1093/aob/mcm256
+Wardhaugh, C. W. (2015). How many species of arthropods visit flowers?
+Arthropod. Plant. Interact. 9, 547–565. doi: 10.1007/s11829-015-9398-4
+Warrant, E. J., and McIntyre, P. D. (1990). Limitations to resolution in
+superposition eyes. J. Comp. Physiol. A 167, 785–803. doi: 10.1007/BF00189768
+Westmoreland, D., and Muntan, C. (1996). The influence of dark central florets on
+insect attraction and fruit production in Queen Anne’s Lace (Daucus carota L.).
+Am. Midl. Nat. 135, 122–129. doi: 10.2307/2426878
+
+Jackowska, M., Bao, R., Liu, Z., McDonald, E. C., Cook, T. A., and Friedrich,
+M. (2007). Genomic and gene regulatory signatures of cryptozoic adaptation:
+Loss of blue sensitive photoreceptors through expansion of long wavelengthopsin expression in the red flour beetle Tribolium castaneum. Front. Zool. 4:24.
+doi: 10.1186/1742-9994-4-24
+Johnson, S. D., and Midgley, J. J. (2001). Pollination by monkey beetles
+(Scarabaeidae: Hopliini): Do color and dark centers of flowers influence
+alighting behavior? Environ. Entomol. 30, 861–868. doi: 10.1603/0046-225X30.5.861
+Kalyaanamoorthy, S., Minh, B. Q., Wong, T. K. F., Von Haeseler, A., and Jermiin,
+L. S. (2017). ModelFinder: Fast model selection for accurate phylogenetic
+estimates. Nat. Methods 14, 587–589. doi: 10.1038/nmeth.4285
+Katoh, K., Misawa, K., Kuma, K., and Miyata, T. (2002). MAFFT: a novel method
+for rapid multiple sequence alignment based on fast Fourier transform. Nucleic
+Acids Res. 30, 3059–3066. doi: 10.1093/nar/gkf436
+Katoh, K., and Standley, D. M. (2013). MAFFT multiple sequence alignment
+software version 7: Improvements in performance and usability. Mol. Biol. Evol.
+30, 772–780. doi: 10.1093/molbev/mst010
+Lall, A. B., Cronin, T. W., Carvalho, A. A., de Souza, J. M., Barros, M. P., Stevani,
+C. V., et al. (2010). Vision in click beetles (Coleoptera: Elateridae): pigments and
+spectral correspondence between visual sensitivity and species bioluminescence
+emission. J. Comp. Physiol. A 196, 629–638. doi: 10.1007/s00359-010-0549-x
+Laughlin, S. B. (1976). The sensitivities of dragonfly photoreceptors and the
+voltage gain of transduction. J. Comp. Physiol. A 111, 221–247. doi: 10.1007/
+BF00606466
+Li, W., and Godzik, A. (2006). Cd-hit: A fast program for clustering and comparing
+large sets of protein or nucleotide sequences. Bioinformatics 22, 1658–1659.
+doi: 10.1093/bioinformatics/btl158
+Lin, J. T. (1993). Identification of photoreceptor locations in the compound eye
+of Coccinella septempunctata Linnaeus (Coleoptera, Coccinellidae). J. Insect
+Physiol. 39, 555–562. doi: 10.1016/0022-1910(93)90037-R
+Lin, J. T., and Wu, C. Y. (1992). A comparative study on the color vision of four
+coleopterous insects. Bull. Inst. Zool. Acad. Sin. 31, 81–88.
+Lord, N. P., Plimpton, R. L., Sharkey, C. R., Suvorov, A., Lelito, J. P.,
+Willardson, B. M., et al. (2016). A cure for the blues: opsin duplication
+and subfunctionalization for short-wavelength sensitivity in jewel beetles
+(Coleoptera: Buprestidae). BMC Evol. Biol. 16:107. doi: 10.1186/s12862-0160674-4
+Maddison, W., and Maddison, D. (2018). Mesquite: a modular system
+for evolutionary analysis. Version 3.2. Available Online at: http://www.
+mesquiteproject.org
+Martin, G. J., Lord, N. P., Branham, M. A., and Bybee, S. M. (2015). Review of the
+firefly visual system (Coleoptera: Lampyridae) and evolution of the opsin genes
+underlying color vision. Org. Divers. Evol. 15, 513–526. doi: 10.1007/s13127015-0212-z
+Martínez-Harms, J., Vorobyev, M., Schorn, J., Shmida, A., Keasar, T., Homberg, U.,
+et al. (2012). Evidence of red sensitive photoreceptors in Pygopleurus israelitus
+(Glaphyridae: Coleoptera) and its implications for beetle pollination in the
+southeast Mediterranean. J. Comp. Physiol. A 198, 451–463. doi: 10.1007/
+s00359-012-0722-5
+McKenna, D. D., Shin, S., Ahrens, D., Balke, M., Beza-Beza, C., Clarke, D. J., et al.
+(2019). The evolution and genomic basis of beetle diversity. Proc. Natl. Acad.
+Sci. U. S. A. 116, 24729–24737. doi: 10.1073/pnas.1909655116
+Meglič, A., Ilić, M., Quero, C., Arikawa, K., and Belušič, G. (2020). Two chiral types
+of randomly rotated ommatidia are distributed across the retina of the flathead
+oak borer Coraebus undatus (Coleoptera: Buprestidae). J. Exp. Biol. 223:225920.
+doi: 10.1242/jeb.225920
+Minh, B. Q., Nguyen, M. A. T., and Von Haeseler, A. (2013). Ultrafast
+approximation for phylogenetic bootstrap. Mol. Biol. Evol. 30, 1188–1195. doi:
+10.1093/molbev/mst024
+Misof, B., Liu, S., Meusemann, K., Peters, R. S., Donath, A., Mayer, C., et al. (2014).
+Phylogenomics resolves the timing and pattern of insect evolution. Science 346,
+763–767. doi: 10.1126/science.1257570
+Nguyen, L. T., Schmidt, H. A., Von Haeseler, A., and Minh, B. Q. (2015).
+IQ-TREE: A fast and effective stochastic algorithm for estimating maximumlikelihood phylogenies. Mol. Biol. Evol. 32, 268–274. doi: 10.1093/molbev/
+msu300
+Oeyen, J. P., Baa-Puyoulet, P., Benoit, J. B., Beukeboom, L. W., Bornberg-Bauer, E.,
+Buttstedt, A., et al. (2020). Sawfly genomes reveal evolutionary acquisitions that
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+8
+
+June 2021 | Volume 9 | Article 676369
+
+Sharkey et al.
+
+Opsin Evolution in Flower-Visiting Beetles
+
+Copyright © 2021 Sharkey, Powell and Bybee. This is an open-access article
+distributed under the terms of the Creative Commons Attribution License (CC BY).
+The use, distribution or reproduction in other forums is permitted, provided the
+original author(s) and the copyright owner(s) are credited and that the original
+publication in this journal is cited, in accordance with accepted academic practice.
+No use, distribution or reproduction is permitted which does not comply with
+these terms.
+
+Yang, E.-C., and Osorio, D. (1991). Spectral sensitivities of photoreceptors and
+lamina monopolar cells in the dragonfly, Hemicordulia tau. J. Comp. Physiol.
+A 169, 663–669. doi: 10.1007/BF00194895
+Conflict of Interest: The authors declare that the research was conducted in the
+absence of any commercial or financial relationships that could be construed as a
+potential conflict of interest.
+
+Frontiers in Ecology and Evolution | www.frontiersin.org
+
+9
+
+June 2021 | Volume 9 | Article 676369
+
+

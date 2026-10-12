@@ -1,0 +1,3701 @@
+An Intrinsic Oscillator Underlies Visual Navigation in Ants
+Léo Clément, Sebastian Schwarz, Antoine Wystrach (2022). Current Biology. https://doi.org/10.1101/2022.04.22.489150. doi:10.1016/j.cub.2022.11.059. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1
+
+An intrinsic oscillator underlies visual navigation in ants
+
+2
+3
+
+Leo Clement*, Sebastian Schwarz and Antoine Wystrach
+
+4
+5
+
+Centre de Recherches sur la Cognition Animale, CNRS, Université Paul Sabatier, Toulouse
+
+6
+
+31062 cedex 09, France
+
+7
+8
+9
+10
+11
+
+*Address of correspondence:
+
+12
+
+Léo Clément
+
+13
+
+Université Paul Sabatier
+
+14
+
+Centre de Recherches sur la Cognition Animale, CNRS
+
+15
+
+31062 Toulouse
+
+16
+
+Email: clement.leo@univ-tlse3.fr
+
+17
+
+Phone: +33561558444
+
+18
+19
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+21
+
+Abstract
+
+22
+23
+
+Controlling behavior implies a constant balance between exploration – to gather information
+
+24
+
+– and exploitation – to use this information to reach one’s goal. However, how this tradeoff is
+
+25
+
+achieved in navigating animals is unclear. Here we recorded the paths of two
+
+26
+
+phylogenetically distant visually navigating ant species (Myrmecia croslandi and
+
+27
+
+Iridomyrmex purpureus) using a trackball-treadmill directly in their habitat. We show that
+
+28
+
+both species continuously produce regular lateral oscillations with bursts of forward
+
+29
+
+movement when facing the general direction of travel, providing a remarkable tradeoff
+
+30
+
+between visual exploration across directions and movement areas. This dynamical signature
+
+31
+
+is conserved across navigational contexts but requires certain visual cues to be fully
+
+32
+
+expressed. Rotational feedback regulates the extent of turns, but is not required to produce
+
+33
+
+them, indicating that oscillations are generated intrinsically. Learnt visual information
+
+34
+
+modulates the oscillation’s amplitudes to fit the task at hand in a continuous manner: an
+
+35
+
+unfamiliar panorama enhances the amplitude of oscillations in both naïve and experienced
+
+36
+
+ants, favoring visual exploration; while a learnt familiar panorama reduces them, favoring
+
+37
+
+exploitation through. The observed dynamical signature readily emerges from a simple
+
+38
+
+neural-circuit model of the insect’s conserved pre-motor area known as the lateral accessory
+
+39
+
+lobe, endorsing oscillations as a core, ancestral way of moving in insects. We discuss the
+
+40
+
+importance and evolution of self-generated behaviors and how such an oscillator has been
+
+41
+
+exapted to various modalities, behaviors and way of moving.
+
+42
+43
+44
+
+Keywords: insect navigation, time series analysis, intrinsic oscillator, lateral accessory lobe.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+45
+
+Introduction
+
+46
+47
+
+Navigating through space implies both to acquire information (exploration) and to use this
+
+48
+
+information to move in the correct direction (exploitation). A way to acquire information is to
+
+49
+
+sample the environment by actively moving. Such ‘active-sampling’ is common across the
+
+50
+
+animal kingdom spanning from invertebrates (Dittmar et al., 2010; Gomez-Marin et al., 2011;
+
+51
+
+Lehrer, 1996) to vertebrates (Dawkins and Woodington, 2000; Otero-Millan et al., 2008;
+
+52
+
+Wachowiak, 2011; Wesson et al., 2008; Wolf et al., 2017). However, active sampling entails
+
+53
+
+movements that are typically different than moving toward the goal and thus require the animal
+
+54
+
+to solve a tradeoff. Achieving a balance between sampling actions (exploration) and goal-
+
+55
+
+directed actions (exploitation) lies at the core of the control of behavior but how it is achieved
+
+56
+
+and evolved in animals remains unclear.
+
+57
+
+One way to solve the exploration/exploitation tradeoff is to move in order to
+
+58
+
+maximize the information gain, for instance by using the so-called infotaxis (Hernandez-Reyes
+
+59
+
+et al., 2021; Vergassola et al., 2007). Climbing up an information gradient can lead directly
+
+60
+
+towards the goal if the source of information is emitted by the goal itself, such as when targeting
+
+61
+
+sound or odor sources. However, it is unclear how such a strategy could apply when one moves
+
+62
+
+without perceiving its final goal, such as during visual route following.
+
+63
+
+Another way of sampling the world is through the intrinsic production of
+
+64
+
+regular alternations between left and right turns along the path: lateral oscillations. Lateral
+
+65
+
+oscillations are observed in wide range of taxa (vertebrates: DeBose and Nevitt, 2008; Wolf et
+
+66
+
+al., 2017; invertebrates: Freas and Cheng, 2022; Iwano et al., 2010; Kanzaki et al., 1992; Namiki
+
+67
+
+and Kanzaki, 2016; Wystrach et al., 2016).
+
+68
+
+Oscillatory paths have been mainly studied in the context of olfaction, whether during plume
+
+69
+
+following in moths (Kuenen and Baker, 1983; Olberg, 1983; Kanzaki et al., 1992; Kuenen and
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+70
+
+Baker, 1983; Namiki et al., 2014), trail following in ants (Hangartner, 1967) or odor gradient
+
+71
+
+climbing in Drosophila larvae (Wystrach et al., 2016) and Caenorhabditis elegans (Izquierdo
+
+72
+
+and Lockery, 2010). The intrinsic production of oscillations enables an efficient sampling of
+
+73
+
+odor across locations and models show that oscillations modulated by odor perception enables
+
+74
+
+to reach the source in a remarkably effective way (Adden et al., 2020; Izquierdo and Lockery,
+
+75
+
+2010; Wystrach et al., 2016).
+
+76
+
+Beyond that, modeling also shows that the production of oscillations can be equally effective
+
+77
+
+during visual navigation tasks. For instance, having the amplitude of oscillation modulated by
+
+78
+
+familiarity of visual scenes can produce robust visual navigation behavior such as route-
+
+79
+
+following (Kodzhabashev and Mangan, 2015) or homing (Le Möel and Wystrach, 2020). It
+
+80
+
+also captures particular behavioral signatures observed in ants (Murray et al., 2020). Moreover,
+
+81
+
+visually guided insects such as ants (Graham and Collett, 2002; Lent et al., 2013, 2010;
+
+82
+
+Jayatilaka et al., 2017; Murray et al., 2020), wasps (Stürzl et al., 2016; Voss and Zeil, 1998) or
+
+83
+
+bumblebees (Philippides et al., 2013) do display oscillations, whose expression appears to be
+
+84
+
+coupled with visual perceptual cues. But whether these lateral oscillations are produced
+
+85
+
+internally, how exactly they interact with visual cues, and how they participate in the
+
+86
+
+exploration/exploitation tradeoff during a visual navigational task remains unclear.
+
+87
+
+Here, we focused on the expression of oscillations in two ecologically and
+
+88
+
+phylogenetically distant ant species known to use vision for navigation (Myrmecia croslandi
+
+89
+
+and Iridomyrmex purpureus). These insects are known to rely on two mains strategies to guide
+
+90
+
+their foraging journeys to an inconspicuous goal (Nardendra et al., 2013; Card et al., 2016, see
+
+91
+
+also SI1). The first strategy, commonly called path integration (PI), allows individuals to
+
+92
+
+continuously estimate the distance and compass direction that separates them from their nest
+
+93
+
+(or other starting points) during their foraging trip (Collett and Collett, 2017; Heinze et al.,
+
+94
+
+2018; Muller and Wehner, 1988). The second, commonly called view-based navigation,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+95
+
+involves the learning and subsequent recognition of learnt visual panorama (Collett and
+
+96
+
+Cartwright, 1983; Wehner, 1979; Zeil, 2012). To see how these navigational strategies do
+
+97
+
+interact with oscillation, and how they participate to the exploration /exploitation tradeoff
+
+98
+
+during a visual navigational task, we mounted ants of both species on a trackball device
+
+99
+
+(Dahmen et al., 2017). This device enabled us to record their motor behavior and control the
+
+100
+
+visual cue perceived directly in their natural environment. We characterized in detail whether
+
+101
+
+the obtained trajectories show a regular oscillatory pattern of movements and how these
+
+102
+
+patterns are influenced by the presence or absence of: (1) visual input, (2) learnt visual
+
+103
+
+terrestrial cues, (3) path integration homing vector and (4) rotational visual feedback. In both
+
+104
+
+species our results revealed the presence of a conserved pattern of oscillations generated
+
+105
+
+intrinsically, which comprises both angular and forward velocity components. The amplitude
+
+106
+
+of this dynamic signature is modulated by visual information in a way that is adapted to the
+
+107
+
+navigational tasks at hand. Finally, a simple neural circuit model of reciprocal inhibition
+
+108
+
+between left and right pre-motor area can readily explain the production of these movement
+
+109
+
+dynamics.
+
+110
+111
+
+Results
+
+112
+113
+
+Ants mounted on the trackball display their natural navigational behavior
+
+114
+
+We first investigated whether ants mounted on the trackball display the expected, natural
+
+115
+
+navigational behavior for different experimental conditions. When released on the ground in
+
+116
+
+their natural environment, both species studied here (Myrmecia croslandi and Iridomyrmex
+
+117
+
+purpureus) are known to rely on learnt terrestrial cues as well as, to a lesser extent, on PI (Card
+
+118
+
+et al., 2016 see Fig. S1 for preliminary experiment on I. purpureus; Murray et al., 2020;
+
+119
+
+Narendra et al., 2013; Zeil et al., 2014). Here we mounted ants mounted on the trackball in a
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+120
+
+way that enabled them to physically rotate and control their actual body orientation (Dahmen
+
+121
+
+et al., 2017). The trackball was placed in three distinct visual conditions: (1) along the
+
+122
+
+individual ant’s familiar route (F) therefore in presence of familiar terrestrial cues; (2) in an
+
+123
+
+unfamiliar location (U) 50 meters away from their usual route; or (3) without any visual
+
+124
+
+input: in complete darkness (D). For each of these visual conditions, ants were tested either
+
+125
+
+with (full-vector (FV) ants) or without (zero-vector (ZV) ants) path integration information.
+
+126
+
+While FV ants were captured at their feeding place (from their foraging tree (M. croslandi) or
+
+127
+
+from their trained feeder (I. purpureus)) and thus possess a PI homing vector pointing in the
+
+128
+
+food-to-nest compass direction, ZV ants were caught just before entering their nest and thus no
+
+129
+
+longer possess a PI homing vector.
+
+130
+131
+132
+133
+134
+
+Figure 1. Ants on the trackball display natural navigational behaviors. Data presented
+for both M. croslandi (A) and I. purpureus (B), tested in a familiar (green) or an unfamiliar
+panorama (purple) and in the dark (red). For each condition, individuals were tested either
+with (full vector) or without (zero vector) path integration information. The first column of
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+135
+136
+137
+138
+139
+140
+141
+142
+
+each condition shows the paths oriented to the theoretical direction of the nest (arrow). In the
+second column, each dot indicates the average circular vector calculated over the entire path
+of an individual, showing the mean direction and the average vector length (i.e., a point
+closer to the periphery indicates straighter paths). The R values indicate the length of the
+average resulting vector of the population. The direction (in familiar terrain) or theoretical
+direction (for FV in unfamiliar terrain) of the nest is 0°. Ants photography credit: Ajay
+Narendra.
+
+143
+
+For both species and irrespectively of the PI state (FV or ZV), ants mounted on the trackball
+
+144
+
+within their familiar visual route (i.e., in the presence of learnt terrestrial cues) displayed paths
+
+145
+
+that were oriented toward the nest direction (Fig. 1A, B first column; Rayleigh test with nest
+
+146
+
+as theoretical direction ps: M. croslandi: FV & ZV < 0.001; I. purpureus: FV & ZV < 0.001),
+
+147
+
+proving that they recognized and used the familiar terrestrial cues to orient. When tested in
+
+148
+
+unfamiliar surroundings, FV ants of both species were oriented toward the theoretical direction
+
+149
+
+of the nest as indicated by their PI (Fig. 1A, B second column, first row; Rayleigh test with PI
+
+150
+
+as theoretical direction ps: M. croslandi: FV< 0.001; I. purpureus: FV< 0.001); but ZV ants
+
+151
+
+showed random orientations (Rayleigh test ps: M. croslandi:
+
+152
+
+ZV=0.672). This confirms that the distant release points were indeed unfamiliar to the ants and
+
+153
+
+that both species relied on their PI when tested as FV ants. When tested in total darkness, ants
+
+154
+
+displayed randomly orientated paths in all conditions (Fig. 1A, B third column; Rayleigh test
+
+155
+
+ps: M. croslandi: FV=0.354; ZV=0.360; I. purpureus: FV=0.213, ZV=0.866), showing that the
+
+156
+
+chosen dark condition was effective in preventing ants using terrestrial or celestial cues for
+
+157
+
+orientation. Overall, these results demonstrate that both species use learnt terrestrial cues as
+
+158
+
+well as their PI to navigate when mounted on the trackball system (Fig. 1A, B).
+
+ZV=0.443; I. purpureus:
+
+159
+
+Independent of the PI state, the ants’ travel directions were more constant in familiar
+
+160
+
+terrain as compared to the other conditions (R values in Fig. 1A, B; Familiar vs. Unfamiliar &
+
+161
+
+Familiar vs. Dark, both species: ps < 0.001), showing that the recognition of learnt terrestrial
+
+162
+
+cues was most effective to maintain a constant direction of travel. With regards to the effect of
+
+163
+
+PI, FV ants tended to keep their direction more constant than ZV ants but this effect was small,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+164
+
+and reached significance only in unfamiliar terrain for I. purpureus (Fig. 1; FV vs. ZV p =
+
+165
+
+0.049) but not in familiar terrain (Fig. 1; FV vs. ZV both species: ps≥0.0589). Finally, there
+
+166
+
+was no difference between the PI state for both species in the dark condition (Fig. 1; FV vs.
+
+167
+
+ZV ps=1). Therefore, both species do use their PI to orient in unfamiliar terrain, but it seems
+
+168
+
+that PI has a limited impact on their path’s straightness.
+
+169
+170
+
+These results are consistent with what is observed in these species when naturally
+walking on the floor (Card et al., 2016; Narendra et al., 2013).
+
+171
+172
+
+Ants display regular lateral oscillations
+
+173
+
+To determine whether ants display regular lateral oscillations – that is, alternate between left
+
+174
+
+and right turns at a steady rhythm – we first used our video recordings to track the ant’s change
+
+175
+
+in body orientation when mounted on the trackball. The body angular velocity signal is
+
+176
+
+independent of the ant’s actual forward movement and thus a direct reading of its motor control
+
+177
+
+for turning. We conducted a Fourier analysis on autocorrelation coefficients of the angular
+
+178
+
+velocity time series to obtain a ‘power spectral density’ (see Fig. S2 for detailed method). The
+
+179
+
+obtained Fourier’s magnitudes are a measure of the regularity of the rhythms in the time series,
+
+180
+
+with high magnitude values indicating regular oscillation at the corresponding frequency (Fig.
+
+181
+
+S2). We thus selected the frequency corresponding to the highest magnitude (peak), that is, the
+
+182
+
+most salient rhythm in the signal. In all experimental conditions, the obtained peak fell in the
+
+183
+
+expected range of 0.2 to 1.5 Hz, as observed in other insect species (Lonnendonker, 1991;
+
+184
+
+Wystrach et al., 2016). It should be noted that this rhythm is 10 to 50 times slower than ants’
+
+185
+
+typical stepping frequency (Zollikofer, 1994) and thus are not the consequence of their
+
+186
+
+rhythmic walking gait per se but the product of an additional oscillatory mechanism. The
+
+187
+
+obtained Fourier magnitudes were higher than those obtained with the spectral density of a
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+188
+
+Gaussian white noise (Fig. 2A, B dashed line; Wilcoxon one-tail test: ps≤2.144e-03), showing
+
+189
+
+that ants displayed lateral oscillations with a higher regularity than random.
+
+190
+191
+
+The navigational context modifies the regularity of oscillations
+
+192
+
+We analyzed whether our different test conditions influenced the magnitude of the
+
+193
+
+individuals’ spectral density peaks, which indicates how regular the oscillations are. The
+
+194
+
+statistical model revealed no interaction between the effects of the visual panorama type and
+
+195
+
+the state of the path integrator (M. croslandi: AIC=-198.8, F2,101=0.434, p=0.647; I.
+
+196
+
+purpureus: AIC=-167, F2,90=0.232, p>0.79). The additive effect model (i.e., without
+
+197
+
+interaction, M. croslandi: AIC=-215.8; I. purpureus: AIC=-170.5) explains the variation of
+
+198
+
+the magnitude peaks relatively well (R2 for M. croslandi: marginal=56% & conditional=67%;
+
+199
+
+I. purpureus: 16%). The subsequent Anova revealed that the visual panorama type has a
+
+200
+
+significant effect on the regularity of oscillations in both species (panorama effect for M.
+
+201
+
+croslandi: F2,101=83.663, p < 0.001; I. purpureus: F2,90=10.038, p < 0.001); however, there
+
+202
+
+was no overall effect of the PI state (vector effect: M. croslandi: F1,101=1.291, p>0.200; I.
+
+203
+
+purpureus: F1,90=0.012, p>0.900).
+
+204
+
+For M. croslandi, the post-hoc analysis revealed that the magnitude peak varied
+
+205
+
+significantly across the three visual conditions (Fig. 2A, F vs. U: p<0.001; F vs. D: p=0.016;
+
+206
+
+U vs. D: p<0.001). These differences in peaks magnitudes show that the oscillations are most
+
+207
+
+regular in unfamiliar terrain, intermediate in familiar environment and least regular in the
+
+208
+
+dark (mean±se: U(FV+ZV)=171±19; F(FV+ZV)=68±6; D(FV+ZV)=50±3). Interestingly, the effect of
+
+209
+
+individuality is significant in M. croslandi (p=0.015), indicating that some individuals have a
+
+210
+
+better consistency in their oscillations than others, across conditions.
+
+211
+
+For I. pupureus, the post hoc analysis reveals that the regularity of the oscillations
+
+212
+
+does not differ between familiar and unfamiliar terrain (Fig. 2B, p>0.96, df=86, mean±se:
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+213
+
+F(FV+ZV) =41.59± 3; U(FV+ZV)=41±2) but both yield more regular oscillations than in the dark
+
+214
+
+(p< 0.001, mean±se: D(FV+ZV)=29.4±×1.45).
+
+215
+
+Overall, these differences confirm the existence of regular oscillations in both
+
+216
+
+unfamiliar and familiar terrain, regardless of the PI state. In the dark however, peak
+
+217
+
+magnitudes are significantly weaker, closer to Gaussian noise and with a wider frequency
+
+218
+
+range, suggesting that the Fourier’s peak in some individuals may result from noise (Fig. 2A,
+
+219
+
+B). If oscillations persist in the dark, their expression is at least greatly inhibited (Fig.2).
+
+220
+221
+
+222
+223
+224
+225
+226
+227
+228
+
+Figure 2. Oscillation characteristics vary across visual conditions. The graphs show the
+frequency and spectral density magnitude of the dominant oscillation (highest magnitude) in
+M. croslandi (A) and I. purpureus (B) (for method see method see Fig. S2 A, C, D, E). High
+frequencies indicate a fast-oscillatory rhythm and high magnitudes indicate a strong presence
+of this oscillation. Individuals were tested within a familiar panorama (green), an unfamiliar
+panorama (purple) or in the dark (red). Symbols indicate whether the state of the path
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+229
+230
+231
+232
+233
+234
+235
+236
+
+integration vector was full (round) or set to zero (triangles). Inserts show the mean frequency
+against the mean magnitude of each visual condition with the associated 95% confidence
+interval around the mean. The dashed black line represents the mean of the spectral density
+peak magnitudes resulting from 200 Gaussian white noise signals. The second row show an
+example path for each condition for M. croslandi across 100 s (c) and I. purpureus across 83
+s (D). Ants photography credit: Ajay Narendra.
+
+237
+
+The navigational context modulates the oscillation frequency
+
+238
+
+Myrmecia foragers tested in familiar panorama showed no differences in oscillation
+
+239
+
+frequencies across PI states (Wilcoxon test for repeated measures; F: FV vs. ZV p=0.635; U:
+
+240
+
+FV vs. ZV p=0.343). Again, independent of the PI state, the oscillatory frequencies were
+
+241
+
+significantly higher in familiar than in an unfamiliar visual panorama (p=0.023, mean±se:
+
+242
+
+F(FV+ZV) =0.37±0.036 Hz; U(FV+ZV) =0.19±0.008 Hz; Fig. 2A, C). Iridomyrmex purpureus
+
+243
+
+showed the same tendency to oscillate quicker in familiar than in unfamiliar terrain
+
+244
+
+(mean±se: F(FV+ZV) =0.83±0.056 Hz; U(FV+ZV) =0.63±0.037 Hz; Fig. 2B, D), but this effect did
+
+245
+
+not reach significance (ps ≥ 0.180).
+
+246
+
+Thus, the presence of familiar visual cues tends to increase the frequency of oscillations,
+
+247
+
+at least for M. croslandi (Fig. 2A, C), but the state of the PI vector (FV or ZV) had no
+
+248
+
+observable effect (mean±se in F: FV=0.38±0.05 Hz, ZV=0.34±0.04 Hz; U: FV=0.19±0.01Hz,
+
+249
+
+ZV=0.18±0.0009 Hz).
+
+250
+251
+
+The navigational context modulates the angular and forward velocity of oscillations
+
+252
+
+To investigate the dynamics of the ant oscillatory movements in more detail, we combined
+
+253
+
+for each ant its body angular velocity signal – obtained from video recording – with the
+
+254
+
+forward movement signal – obtained from the trackball movements. We reconstructed
+
+255
+
+‘average cycles’ for each individual by pooling the angular and forward velocity recordings
+
+256
+
+3s before and 3s after the moments where ants switch from a left to a right turn (when the
+
+257
+
+time series of the angular velocity crosses zero from negative to positive; see Fig. 3—figure
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+258
+
+supplements 1). That way, we can quantify each individual’s average dynamic of angular and
+
+259
+
+forward velocity and compare them across conditions.
+
+260
+
+For M. croslandi, the visual surrounding had a strong effect (p<0.001): ants
+
+261
+
+displayed higher angular velocities (Fig. 3A, inset boxplot upper row; mean±se:
+
+262
+
+U(FV+ZV)=129±4.8 deg/s; F(FV+ZV)=67.5±4.4 deg/s) and higher forward velocities (Fig. 3A,
+
+263
+
+inset boxplot second row, mean±se: U(FV+ZV)=4.8±0.34 cm/s; F(FV+ZV)=2.3± 0.2 cm/s) in an
+
+264
+
+unfamiliar environment. There was however neither an effect of the PI state on turn or
+
+265
+
+forward velocity (p>0.05) nor an interaction between the visual surrounding and the PI state
+
+266
+
+(mean peak of angular velocity model: AIC=160.9, interaction p>0.05; amplitude of forward
+
+267
+
+velocity model: AIC=109.9, interaction p=0.22). Therefore, the amplitude of lateral
+
+268
+
+oscillation within the path are higher in an unfamiliar panorama than in a familiar one
+
+269
+
+independently of the PI sate (Fig. 2 C). Interestingly, M. croslandi ants showed strong
+
+270
+
+individual idiosyncrasies across conditions (forward velocity peak amplitude: random effect,
+
+271
+
+p<0.05, R2 marginal=0.39, R2 conditional=0.61; angular velocity peak amplitude: random
+
+272
+
+effect, p>0.05, R2 marginal=0.5; R2 conditional=0.66).
+
+273
+
+For I. purpureus ants, none of the models reached significance (ps >0.05); showing
+
+274
+
+that the dynamics of angular velocities and forward velocity underlying the oscillations are
+
+275
+
+rather constant across navigational context (Fig. 3B insert). Showing no clear effect on the
+
+276
+
+amplitude of oscillation display withing the path (Fig. 2D).
+
+277
+278
+
+The conserved dynamics of lateral oscillations
+
+279
+
+To test for the existence of conserved oscillatory dynamics across individuals, each
+
+280
+
+individual average cycle (Fig. 3—figure supplements 1 for method example) was normalized
+
+281
+
+and averaged to obtain a cycle at the population level. To ensure that we pooled ants
+
+282
+
+oscillating at similar frequency ranges, we separated data from familiar and unfamiliar terrain
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+283
+
+and selected only individuals showing a peak frequency within 0.1 to 0.27 Hz for M.
+
+284
+
+croslandi (N=12) and within 0.26 to 1.04 Hz for I. purpureus (N=25). These frequency
+
+285
+
+ranges correspond to high magnitude, ensuring that they are not a consequence of noise. The
+
+286
+
+emerging population-averaged oscillation patterns show the existence of movement dynamics
+
+287
+
+that are consistent across individuals of both species, for both familiar and unfamiliar
+
+288
+
+environments (Fig. 3, Fig. 4). Forward velocity co-varies with angular velocity in a particular
+
+289
+
+way. Forward velocity is quite low when the ants reverse their turning direction (i.e., when
+
+290
+
+angular velocity crosses zero). In contrast, we observe two significant peaks of forward
+
+291
+
+velocity, which happen briefly (up to 1s) while the ant is sweeping to the left or right.
+
+292
+
+Remarkably, these peaks coincide well with the moment when the ants’ body orientation is
+
+293
+
+aligned with its overall direction of travel (Fig. 3, dashed lines) even though during these
+
+294
+
+moments the ants’ angular velocity is quite high. In other words, ants display large sweeps
+
+295
+
+from one side to the other and do not maximize the time they spent facing their goal
+
+296
+
+direction, which could be achieved by reducing angular speed at this moment. However, they
+
+297
+
+increase their forward velocity precisely while doing so.
+
+298
+299
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+
+Figure 3: Population-average cycle of oscillations shows how angular and forward
+velocities co-vary. Angular velocities (top-row) and forward velocity (bottom row) co-vary
+in a way that seem conserved across species (M. croslandi (A) and I. purpureus (B)) when on
+familiar route (green) or in unfamiliar terrain (purple). Population cycles have been
+reconstructed by merging full- (FV) and zero vector (ZV) data and normalizing the data
+amplitude within the individual’s average cycle (see Fig. 3 —figure supplements 1). Color
+areas around the mean curves represent the 95% confidence interval, based on the interindividual variation. Dashed lines represent the moment when the ants are facing their overall
+direction of travels. Insert boxplots show the actual distribution of the non-normalized mean
+peak of angular speed and forward velocity amplitude for the individuals’ average cycle (FV
+on the left, ZV on the right). Ants photography credit: Ajay Narendra.
+
+Figure 3—figure supplements 1: Methodology to obtain an average oscillation cycle. (A)
+We used the angular velocity signal to flag moments when the signal crosses 0 and goes up to
+positive angles (vertical dashed red lines). (B) We extracted portions of the signal of ±3s
+(large enough to contain a full oscillation cycle) around each of the flags, aligned them at flag
+= t0 and averaged them to obtain the individual’s average cycle (±95% confidence interval in
+grey) of the angular velocity signal. (C, D) The individual’s average cycle for the forward
+velocity signal was achieved using the angular velocity flags (vertical dashed red lines as in
+A).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+324
+325
+326
+327
+328
+329
+330
+331
+
+Figure 4: Dynamics of forward velocity are the same in familiar and unfamiliar
+panoramas. Reconstructed path (100 s) of M. croslandi individuals recorded in a familiar
+(A) and in an unfamiliar (B) panorama. Each path has been colored according to the forward
+velocity data (yellow forward movement; blue no forward movement). On both paths, the
+arrow indicates the theoretical direction of the nest. (C) Averaged cycle of the individual
+recordings in B, showing that forward and angular velocities’ peaks happen simultaneously.
+(D) Video of the individual corresponding to the paths shownin B.
+
+332
+333
+
+To ensure that these dynamics are not a consequence of being mounted on the
+
+334
+
+trackball set-up, we replicated the same analysis using tracks of M. croslandi ants recorded
+
+335
+
+directly on the ground while displaying learning walks around their nest (courtesy of Jochen
+
+336
+
+Zeil, see Zeil and Fleishmann 2019). The natural learning walks also showed regular
+
+337
+
+oscillations as well as the same dynamical relationship between angular and forward
+
+338
+
+velocities (Fig. 5). Ants walking on the ground also tend to increase their forward velocity
+
+339
+
+when they are aligned with their general direction of travel.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+340
+341
+
+Figure 5. Ant learning walks show similar dynamics of oscillation. Ants path and head
+
+342
+343
+344
+345
+346
+347
+348
+349
+
+orientation were recorded (25 Hz) during their learning walks directly on the ground. (A)
+Angular velocity (top-row) and forward velocity (bottom row) co-vary in a similar way than
+when recorded on the track ball (see Fig. 3). Population cycles have been normalized by the
+data amplitude within the individuals mean cycle (see Fig. 3—figure supplements 1 for
+example). Color areas around the mean curves represent the 95% confidence interval, based
+on the inter-individual variation. (B) Example path of an individual showing clear alternation
+between right (red) and left (blue) turn.
+
+350
+
+Oscillations are modulated by rotational feedback
+
+351
+
+To test whether oscillations result from an intrinsic oscillator rather than a servo-mechanism
+
+352
+
+based on sensory information, we investigated whether ants deprived of rotational feedback
+
+353
+
+(either via optic-flow or compass cues) would still oscillate. For that, ants were mounted on
+
+354
+
+the trackball in a way that prevented them from physically rotating their body on the ball:
+
+355
+
+when the ant tries to turn, it is the ball that counterturns. In other words, the fixed ant
+
+356
+
+experiences neither a change of body orientation nor visual rotational feedback when trying
+
+357
+
+to turn (see Fig. S2B). For this experiment, we used M. croslandi ants in unfamiliar terrain as
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+358
+
+this condition produced the clearest oscillations in our previous experiments (Fig. 2). To
+
+359
+
+control for potential effects of facing directions (depending on celestial or terrestrial visual
+
+360
+
+cues), we tested each ant fixed in eight subsequent different orientations with a 45° rotational
+
+361
+
+shift.
+
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+
+Figure 6. Ants still oscillate in the absence of rotational feedback. Zero vector ants were
+tethered on the trackball in a way that prevented actual body rotation; and teseted in an
+unfamiliar environment. (A) Distribution of the individual Fourier dominant peak frequency
+and magnitude based on the angular velocity’s spectral density time series (as in Fig. 2,
+method see Fig. S2 B, C, D, E). High frequency indicates a fast-oscillatory rhythm, and a
+high magnitude indicates a strong presence of this oscillatory rhythm. The color symbols
+represent the rotation relative to the theoretical nest direction (0°). The dashed black line
+represents the mean magnitude obtained from 200 Gaussian white noise signals (18.75). (B)
+Example paths of different individuals fixed in different orientations. (C) Example path from
+an ant that was free to rotate on the trackball, recorded in unfamiliar terrain in previous
+experiments. (B, C) In both situations, ants alternate regularly between right (blue) and left
+(red), but turns are sharper in the absence of rotational feedback.
+
+376
+
+Despite the absence of visual rotational feedback, the obtained peak magnitudes of the
+
+377
+
+angular velocity spectral density (Fourier analysis on autocorrelation coefficient, see
+
+378
+
+Methods) were much higher than expected from a Gaussian white noise (p<0.001) showing
+
+379
+
+clearly the presence of a regular alternation between left and right turns (Fig. 6). The ants’
+
+380
+
+body orientation relative to the world had no effect on the magnitudes (orientation:
+
+381
+
+F7,83=0.3729, p=0.914) nor did the other random parameters (individual p=0.933, sequence
+
+382
+
+p=0.473). The mean oscillation frequencies (mean±se: 0.17±0.007 Hz) were quite close to
+
+383
+
+what we observed when these ants were free to rotate in an unfamiliar environment
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+384
+
+(Wilcoxon test for repeated measures: ps=1, N=88, Fig. 6). Thus, ants can display regular
+
+385
+
+turning oscillations without rotational feedback, whether as a result of optic flow or a change
+
+386
+
+of orientation relative to directional cues such as the visual panorama, wind, celestial
+
+387
+
+compass cues or the magnetic field. Consequently, we are left with the conclusion that these
+
+388
+
+oscillations are generated intrinsically.
+
+389
+
+Interestingly, the absence of rotational feedback led to higher angular
+
+390
+
+velocities (mean: fixed=176 deg/s; free=128 deg/s; p<0.001), higher forward velocity (mean:
+
+391
+
+fixed=11 cm/s; free=5 cm/s; p<0.001) and slightly slower turn alternation (i.e., lower
+
+392
+
+frequency: fixed=0.16 Hz; free=0.19 Hz, p=0.0189) than ants that were free to physically
+
+393
+
+rotate on the ball (Fig. 7). Rotational sensory feedback is thus involved in limiting the
+
+394
+
+amplitude of the oscillations.
+
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+
+Figures 7: Absence of visual rotational feedback increases the amplitude of oscillation.
+Distribution of M. croslandi individuals’ average oscillation dynamics in unfamiliar terrain
+when recorded on the track ball either in fixed mode preventing rotational feedback (blue) or
+free (purple). Peak of angular velocity (A), peak of forward velocity (B) and frequency (C) of
+the individual’s average oscillation cycle show that ants move faster, turn faster and slightly
+longer in the absence of rotation feedback.
+
+407
+
+called lateral accessory lobes (LAL) (Namiki and Kanzaki, 2016a; Steinbeck et al., 2020).
+
+408
+
+The purpose of this model is not to match observed data quantitatively (Adden et al., 2020)
+
+The observed movement signature emerges readily from a simple neural circuit.
+We designed a simplistic neural model based on the circuitry of the insect pre-motor area so
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+409
+
+but simply to test whether the co-varying relationship observed between angular and forward
+
+410
+
+velocity can readily emerge from this type of circuit. Activation of the neurons in the left and
+
+411
+
+right pre-motor areas are known to mediate left and right turns respectively in insects (Berni,
+
+412
+
+2015; Berni et al., 2012; Iwano et al., 2010; Kanzaki, 2005; Namiki and Kanzaki, 2016b;
+
+413
+
+Steinbeck et al., 2020). Furthermore, these left and right regions are known to reciprocally
+
+414
+
+inhibit each other (Iwano et al., 2010; Berni et al., 2012; Namiki and Kanzaki, 2016b;
+
+415
+
+Steinbeck et al., 2020). Modelling two reciprocally inhibiting neurons with internal feedback
+
+416
+
+–that tries to maintain a basal activity (Fig. 8)– is sufficient to obtain the typical oscillatory
+
+417
+
+activity between left and right LAL (Iwano et al., 2010; Steinbeck et al., 2020), and thus
+
+418
+
+provides an explanation for the regular oscillations between left and right turns observed in
+
+419
+
+insects. Interestingly, we show here that simply assuming that forward velocity is controlled
+
+420
+
+by the sum of left and right output – while angular velocity results from their difference
+
+421
+
+(Adden et al., 2020; Steinbeck et al., 2020; Wystrach et al., 2016)– is sufficient for the
+
+422
+
+observed covariation to emerge (Fig. 8). The agent accelerates while facing its general
+
+423
+
+direction of travel and slows down at the end of its sweeping movement when its orientation
+
+424
+
+extends most to the left and the right (Fig. 8C, 4). What’s more, the emergence of this
+
+425
+
+particular relationship is robust to parameter change (Figure 8—figure supplements 1) and
+
+426
+
+thus a stable feature of either these types of circuits.
+
+427
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+428
+429
+430
+431
+432
+433
+434
+435
+
+Figure 8. Reciprocal inhibition between two units produces the observed relationship
+between angular and forward velocity.
+(A) Scheme of the model abstracted from the lateral accessory lobe (LAL). The Right (R) and
+Left (L) hemisphere neurons reciprocally inhibit each other (blue and red connection), while
+trying to sustain a basal firing rate through internal feedback (black arrow). (B) This results in
+the emergence of stable anti-phasic oscillatory activity between the R and L neurons (B,
+upper row). Assuming that angular velocity is controlled by the difference (B, middle row) –
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+436
+437
+438
+439
+440
+441
+442
+
+443
+444
+445
+
+and forward speed by the sum (B, bottom row) – between left and right activation is
+sufficient to elicit the movement dynamics observed in ants (see Fig. 3C). As ants, the model
+results in a zigzagging path where velocity drops during turn reversal, and increases when
+facing the overall direction of travel (Fig. 3, 4). While the model enables the modulation of
+amplitude and frequency of the oscillations, the forward/angular velocities relationship is
+quite robust to parameter change (Fig.8—figure supplements 1).
+
+Figure 8—figure supplements 1. The covariation between angular and forward velocity
+is robust to parameter change.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+
+Exploration of our abstract LAL model’s (figure 8) sensitivity to change in the two free
+parameters (inhibition strength and internal feedback strength). Regular oscillations between
+LAL neurons emerge in a wide space of parameters (functional range delineated by the
+dashed line, an example for a given parameter set (dot) is shown in (B)). While frequencies
+(right of middle row), Forward and Angular velocities (bottom row) can vary roughly across
+a factor 2 across the functional parameter range, the correlation between absolute angular and
+forward velocity is constrained around 1 (dashed arrows in the color bars indicate the
+variation in the functional range). This positive covariation indicates that the agent slows
+down (low forward velocity) when reversing turning direction (low absolute angular velocity)
+and accelerates (high forward velocity) in between, that is when sweeping past its general
+direction of travel. Outside of this functional range, regular oscillations disappear for extreme
+parameter sets. For instance, if one neuron overpowers the other due to too strong reciprocal
+inhibitory strength (C, overpowering); or inversely, due to the absence of reciprocal
+inhibition (strength <0.01) or a too strong internal adaptation preventing the neurons to
+modulate their baseline activity, and thus resulting in noise (A).
+
+462
+
+Discussion
+
+463
+
+An internally generated movement at the core of ant visual navigation
+
+464
+
+We recorded the detailed locomotor movements of two distantly related ant species – M.
+
+465
+
+croslandi and I. purpureus – using a trackball-treadmill device directly in their natural
+
+466
+
+environment. Both ant species displayed a similar rhythmical pattern of movement combining
+
+467
+
+continuous lateral oscillations with a synchronized variation of forward speed: ants slow down
+
+468
+
+– sometimes until a complete halt (see video Fig. 4D) – at the end of each left and right sweep,
+
+469
+
+that is, when their body is facing away from their overall direction of travel. Conversely, they
+
+470
+
+display a burst of forward speed in between, that is, when their body is aligned with their overall
+
+471
+
+direction of travel, even though during these moments angular speed is rather high (Figs. 3,
+
+472
+
+5A, S3). This generates oscillatory trajectories that optimizes the distance covered when facing
+
+473
+
+the general direction of travel – and thus the effective distance covered – while simultaneously
+
+474
+
+scanning left and right directions.
+
+475
+
+This particular movement signature is conserved whether ants are on their familiar route, in an
+
+476
+
+unfamiliar panorama (Fig. 3) or when displaying their natural learning walks around the nest
+
+477
+
+(Fig. 5A). Also, this movement signature is still expressed when the ant body is artificially
+
+478
+
+fixed on our trackball in a given orientation (Fig. 6; Fig. S3), which shows that it results from
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+479
+
+an internal process rather than a servomechanism based on external cues. Previous observations
+
+480
+
+assumed that ants accelerate when facing their goal direction as the response to the recognition
+
+481
+
+of familiar views when aligned in this particular direction (Baddeley et al., 2012; Kamhi et al.,
+
+482
+
+2020; Wystrach et al., 2013). Here we show that this acceleration is a product of an endogenous
+
+483
+
+process (that is also expressed in unfamiliar terrain), and thus stresses the often disregarded
+
+484
+
+importance of internally generated movement within the ‘sensorimotor’ loop (Brembs, 2021;
+
+485
+
+Gomez-Marin et al., 2011; Schroeder et al., 2010; Wolf et al., 2017; Yuste et al., 2005).
+
+486
+487
+
+Modulation of the exploration/exploitation balance
+
+488
+
+The described internally generated movement dynamic provides an embedded solution for the
+
+489
+
+compromise between exploration and exploitation. External visual cues can then modulate the
+
+490
+
+exploration/exploitation balance to the task at hand by simply adjusting the amplitude of this
+
+491
+
+endogenous dynamic. Higher amplitude oscillations optimize exploration in an unfamiliar
+
+492
+
+environment, while lower amplitudes favor ‘exploitation’ (straighter paths) on a familiar route.
+
+493
+
+Interestingly, this movement signature is equally useful, and used, during the acquisition of
+
+494
+
+learnt visual information, when naïve ants display their learning walk around the nest
+
+495
+
+(Jayatilaka et al., 2018) (Fig. 5). Optimising the acquisition of information requires to bias the
+
+496
+
+balance toward ‘exploration’ in the same manner as searching for familiar cues in an unfamiliar
+
+497
+
+environment does; thus it is not surprising to see here also high amplitude oscillations (Fig. 4,
+
+498
+
+3). The apparent different needs for the acquisition of information on the one hand and the use
+
+499
+
+of that information on the other hand, are thus solved with the same solution. The weaker
+
+500
+
+modulation observed in Iridiomyrmex may be explained by their strong use of chemical trails
+
+501
+
+(Carde et al., 2016), whose absence on the trackball may favor exploration in both visually
+
+502
+
+familiar and unfamiliar conditions.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+503
+
+Finally, we see in both species that the internally generated oscillations can be strongly – if not
+
+504
+
+entirely – inhibited when not needed, such as when moving in the dark (Fig. 2). Indeed,
+
+505
+
+oscillations are not always useful, and it may be advantageous to repress them in situations like
+
+506
+
+when inside the nest, or when trying to escape an aversive situation. It is thus expected that the
+
+507
+
+animal’s internal state as well as the presence/absence of relevant contextual information –
+
+508
+
+such as a visual panorama by opposition to no panorama at all – modulates the expression of
+
+509
+
+the internally produced oscillations in a similar vein as the male fly’s internal state continuously
+
+510
+
+tunes up or down the gain of circuits promoting visual pursuit (Hindmarsh Sten et al., 2021).
+
+511
+
+However, what specific type of visual information promotes the expression of oscillations
+
+512
+
+remains to be seen.
+
+513
+514
+
+Neural Implementation
+
+515
+
+In the insect brain, regular lateral oscillations seem to result from reciprocal contra-
+
+516
+
+lateral inhibitions between left and right hemispheric premotor areas, so-called Lateral
+
+517
+
+Accessory Lobes (LAL). These circuit results in the internal production of asymmetrical and
+
+518
+
+rhythmical excitation between left and right motor commands, so called flip-flop neurons
+
+519
+
+(Berni, 2015; Berni et al., 2012; Iwano et al., 2010; Kanzaki, 2005; Namiki and Kanzaki,
+
+520
+
+2016b; Steinbeck et al., 2020). Lateral oscillations are thus generated endogenously by
+
+521
+
+structure analogous to central generator patterns (CPG). CPGs sustain a wide range of
+
+522
+
+rhythmic functions such as chewing, breathing or various locomotor movements and can be
+
+523
+
+typically modulated by sensory input (Marder and Calabrese, 1996; McAuley et al., 1999;
+
+524
+
+Schroeder et al., 2010; Wolf et al., 2017; Yuste et al., 2005). Here however, rather than limb
+
+525
+
+movements, the CPG-like in the insects’ LAL controls the displacement of the whole animal
+
+526
+
+across space and thus, directly contributes to the navigational task.
+
+527
+
+The systematic positive covariation between angular and forward velocity observed here
+
+528
+
+(Figs. 3, 5, S3) are unlikely to result from physical body constraints (where one could expect
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+529
+
+the opposite, that is, a negative correlation between angular and forward velocities) and thus
+
+530
+
+suggests that the internal dynamics of the LAL control both turning and forward velocity
+
+531
+
+simultaneously. Remarkably, the observed relationship between forward and angular velocity
+
+532
+
+readily emerges from our toy model when simply assuming that forward speed results from
+
+533
+
+the overall excitation across both sides of the LAL; while turning velocities results from the
+
+534
+
+difference between left and right excitation (Fig. 8). Bursts of forward speed appear when one
+
+535
+
+side largely dominates over the other, that is when the ant is at the maximum speed of its
+
+536
+
+angular sweep and thus roughly aligned with its overall direction of travel. Inversely, a break
+
+537
+
+of forward speed occurs when the dominancy is reverted between LAL neurons, that is at the
+
+538
+
+moment where ant reverts their turning direction (Fig. 8), as we can see in our ant data (Fig.
+
+539
+
+3, 4, 5, S3). Certainly, we do not exclude that more complex circuitry could produce other
+
+540
+
+regimes of covariations but our simple model shows that this particular relationship between
+
+541
+
+forward and angular speed can readily emerge and is robust to modulation of the system. In
+
+542
+
+contrast, the oscillations’ amplitude and frequencies are somewhat sensitive to parameter
+
+543
+
+change, at least across a factor of 2 (Fig. 8—figure supplements 1). Therefore, we can easily
+
+544
+
+envision how various inputs into the LAL (such as pictured in Fig. 9) could modulate the
+
+545
+
+amplitude and frequency of the emerging oscillations as we observed in our various
+
+546
+
+conditions, without altering the fundamental relationship between forward and angular
+
+547
+
+velocities. Understanding how such inputs actually operate in insects opens the door to a
+
+548
+
+complexity that would be too vast to tackle here, but given the rapid development of
+
+549
+
+neurobiological tools and knowledge about the circuitry of the lateral accessory lobes, this
+
+550
+
+may constitute a realistic endeavour in the near future.
+
+551
+552
+553
+554
+555
+
+Evolutionary consideration
+Several clues point to the idea that displaying such oscillations is an ancestral way of moving,
+that predates at least the holometabolous insects’ common ancestor (around 300 Myr ago).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+556
+
+Indeed, comparable oscillations around 0.3-1Hz are observed in the two ant species studied
+
+557
+
+here but also in moths (Kanzaki et al., 1992; Kanzaki and Mishima, 1996; Kuenen and Baker,
+
+558
+
+1983; Olberg, 1983) Drosophila larvae (Wystrach et al., 2016), Colorado beetles
+
+559
+
+(Lonnendonker, 1991) and other insects (Namiki and Kanzaki, 2016a). Furthermore, the LAL
+
+560
+
+that likely produces these oscillations is an ancestral brain structure, largely conserved across
+
+561
+
+insects (Namiki and Kanzaki, 2016b, 2016a; Steinbeck et al., 2020).
+
+562
+
+Some have suggested that neural systems evolved at first to coordinate movements
+
+563
+
+endogenously (Keijzer et al., 2013; Yuste et al., 2005) whereas the modulation of these
+
+564
+
+movements by external sensory information originated only as a second step (Keijzer et al.,
+
+565
+
+2013). This view fits the observation that various multi-modal sensory cue converge to the
+
+566
+
+same conserved region (the LAL) to produce a remarkable variety of navigational behaviors
+
+567
+
+(Namiki et al., 2014; Namiki and Kanzaki, 2016b; Steinbeck et al., 2020). In crawling
+
+568
+
+Drosophila larvae oscillations are modulated by variations in odor concentration, resulting in
+
+569
+
+attraction toward (or repulsion from) the odor source (Wystrach et al., 2016). In flying male
+
+570
+
+moths, it is the detection of a female’s pheromone that modulates oscillations and enables the
+
+571
+
+insect to track the odor plume. In walking ants also, zigzagging paths seem to be modulated
+
+572
+
+by olfactory cues when following chemical trails (Hangartner, 1967). In wasps, the presence
+
+573
+
+of a proximal visual object appears to trigger zigzag flights, which may provide useful visual
+
+574
+
+depth information to the insect (Voss and Zeil, 1998). And finally, in visually navigating ants,
+
+575
+
+oscillations are modulated by the recognition of familiar views to support route-following,
+
+576
+
+visual exploration and the acquisition of visual memories in naïve individuals.
+
+577
+
+The modulation of oscillations by rotational visual cues, as we showed here in ants (Figs. 6,
+
+578
+
+7) might be ancestral to insects as we equally observe it in moths (Namiki et al., 2014;
+
+579
+
+Pansopha et al., 2014) (Namiki et al., 2014; Pansopha et al., 2014). This likely evolved
+
+580
+
+through connections between horizontal optic-flow detectors in the visual lobes (Busch et al.,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+581
+
+2018) and the LAL (Fig. 9), providing a useful feedback-control to calibrate the amplitude of
+
+582
+
+turns, and more generally participate in the widespread optomotor response. The modulation
+
+583
+
+of oscillations by the presence/absence of visual cues, and more particularly
+
+584
+
+familiar/unfamiliar visual cues however, must have appeared later with the evolution of
+
+585
+
+visual route-following and homing in hymenopteran, through direct or indirect connections
+
+586
+
+between the Mushroom bodies – the seat of navigational visual memories (Buehlmann et al.,
+
+587
+
+2020; Kamhi et al., 2020; Webb and Wystrach, 2016) – and the LAL (Fig. 9).
+
+588
+589
+
+Finally, the forward speed variation within the oscillation cycles presented here – which can
+
+590
+
+emerge readily from the LAL connectivity (Fig. 8) – has not been reported in other species
+
+591
+
+and thus could be a derived adaptation in ants. This may be an adaptation for walking. Even
+
+592
+
+though ants can decouple their body orientation from their direction of travel if needed
+
+593
+
+(Schwarz et al., 2017), walking sideways may be inefficient and preferably avoided due to
+
+594
+
+physical constraints on leg movements. Thus, slowing down when looking on the side may be
+
+595
+
+a compromise between the preference for walking forward (rather than sideways) and
+
+596
+
+avoiding drifting away from the desired travel direction. Alternatively, this dynamic may be
+
+597
+
+an adaptation for visual cue recognition in navigation, by opposition to the use of olfactory
+
+598
+
+cues. When tracking an odor plume or trail, movements off track to the left and right (and
+
+599
+
+crossing in between), provide useful information regarding the direction to follow. However,
+
+600
+
+such sideway displacement off the beeline become useless for visual recognition (gaze
+
+601
+
+orientation is what matters (Zeil 2012; Wystrach 2021)) and thus costly as they increase the
+
+602
+
+overall distance walked. In addition, pausing when looking on the side must improve the
+
+603
+
+efficiency of visual recognition due to gaze stabilization, which accommodates remarkably
+
+604
+
+well the idea that views are learnt and recognized when oriented left and right, rather than
+
+605
+
+toward and away from the goal (Stürzl et al., 2016; Wystrach et al., 2020).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+606
+
+These two hypotheses (i.e., adaptation to walking vs. visual recognition) could be tested
+
+607
+
+straightforwardly by investigating the existence of such burst of forward speed during route-
+
+608
+
+following in (1) walking ant species that do not use vision or in (2) flying insects that do use
+
+609
+
+vision and are known to oscillate (e.g., bees or wasps) (Egelhaaf et al., 2012; Stürzl et al.,
+
+610
+
+2016; Voss and Zeil, 1998). Overall, it is remarkable how a basal endogenous circuit
+
+611
+
+producing a rhythm can be exapted to receive such a diversity of modalities and produce such
+
+612
+
+a diversity of behaviours (Wystrach, 2021).
+
+613
+614
+
+615
+616
+
+Figure 9. An intrinsic oscillator at the core of visual navigation.
+
+617
+618
+619
+
+We propose a simple scheme to encompass our results. In this view, sensory input (in this
+case various innate and learnt visual information) act on behavior only indirectly, through the
+systematic modulation of an intrinsic oscillator. The latter ensures that an efficient movement
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+620
+621
+622
+623
+624
+625
+
+dynamic is preserved across navigational contexts, which would not necessarily be the case if
+various and potentially conflicting sensory information were directly modulating movement.
+This scheme also highlights the idea that action is not merely the product of perception. At
+the core of behavior lies an intrinsic, self-generated dynamic, which are modulated, rather
+than controlled, by sensory perception.
+
+626
+
+Conclusion
+
+627
+
+Tracking a pheromone plume using olfaction, walking along a route using learnt visual cues
+
+628
+
+or performing a learning walk as a naïve ant may appear as quite different tasks. However,
+
+629
+
+our results support the idea that the solution to these challenges is based on a shared
+
+630
+
+mechanisms: namely, the intrinsic production of left/right oscillations in a conserved pre-
+
+631
+
+motor area (Kanzaki et al., 1992; Kodzhabashev and Mangan, 2015; Le Möel and Wystrach,
+
+632
+
+2020; Murray et al., 2020; Pansopha et al., 2014; Steinbeck et al., 2020). This internally
+
+633
+
+generated movement dynamic provides a remarkably optimized solution to the compromise
+
+634
+
+between exploration and exploitation. Various sensory cues, through both innate or learnt
+
+635
+
+pathways, can alter the exploration/exploitation balance to fit the task at hand by simply
+
+636
+
+adjusting the amplitude of this endogenous dynamic. Evolution appears to have favored a
+
+637
+
+general-purpose steering mechanism and it is notable how such a simple and repetitive
+
+638
+
+oscillatory movement, generated intrinsically, accommodates such a diversity of input and be
+
+639
+
+useful for such a diversity of tasks across species, modalities and ways of moving (i.e.,
+
+640
+
+crawling, flying or walking).
+
+641
+642
+643
+644
+
+Methodology
+Study Animal & Experimental site
+
+645
+
+All experiments took place within an open grassy woodland at the National Australian
+
+646
+
+University, Canberra from Feb. to Mar. 2019. We had the opportunity to work with two
+
+647
+
+Australian endemic ant species: Myrmecia croslandi and Iridomyrmex purpureus. Myrmecia
+
+648
+
+croslandi workers are known to forage solitarily, with each individual either hunting on the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+649
+
+ground in the vicinity of the nest or navigating routinely back and forth toward the same
+
+650
+
+favorite foraging tree throughout her life span (Jayatilaka, 2014). These ants rely mainly on
+
+651
+
+learnt terrestrial visual cues to navigate but are also able to resort to PI when the visual
+
+652
+
+environment does not provide guidance (Jayatilaka et al., 2014, 2018; Narendra et al., 2013;
+
+653
+
+Zeil et al 2014). Eight nests of M. croslandi, that foraged on two distinct trees between 6.0
+
+654
+
+and 30.0 m away from the colony, were used in this study. Iridomyrmex purpureus ants form
+
+655
+
+large colonies and forage along pheromone trails that lead to food patches. Despite
+
+656
+
+employing pheromone trails for recruitment, this species also uses both learnt visual
+
+657
+
+information and path integration for navigation (Card et al., 2016). We also performed
+
+658
+
+navigational experiments with two I. purpureus nests to ensure that this species relies indeed
+
+659
+
+on both learnt visual terrestrial cues and path integration, which they did surprisingly well
+
+660
+
+(see Fig. S1). For the main experiment, a feeder was placed 7.0 m away from the nest and
+
+661
+
+foragers were free to familiarize themselves with the route for 72 h before being tested.
+
+662
+663
+664
+665
+
+Trackball system and data extraction
+
+666
+
+consists of a polystyrene ball held in levitation in an aluminum cup by an air flow. The
+
+667
+
+trackball has two sensors placed at 90° to the azimuth of the sphere, which record the
+
+668
+
+movements of this sphere and translate them into X and Y data retracing the path of the ant.
+
+669
+
+The X and Y acquisition of the trackball rotations happened at a 30 Hz frequency (i.e., 30
+
+670
+
+data points per second), enabling us to reconstruct the ant’s movements with high precision.
+
+671
+
+Additionally, a camera (640×480 pixels) recording from above provided details of the ant’s
+
+672
+
+body orientation, also at 30 Hz. We also analyzed M. croslandi learning walks recorded
+
+673
+
+directly on the natural ground. Head directions were obtained via video recordings at 25 Hz
+
+674
+
+(provided by Jochen Zeil).
+
+During tests, ants were mounted on a trackball device (Dahmen et al., 2017). This device
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+675
+
+In this study, we used two different trackball configurations to record the ants’ motor
+
+676
+
+responses: further referred to as ‘free ant’ and ‘fixed ant’ experiments, respectively.
+
+677
+
+ant experiment: two small wheels prevented the polystyrene ball from rotating in the
+
+678
+
+horizontal plane, however, all other degrees of freedom of the ball rotation were accessible
+
+679
+
+(Fig. S1 A; ‘closed-loop’ in Dahmen et al., 2017). Ants were attached on top of the ball by
+
+680
+
+putting magnetic paint on their thorax and a micro-magnet fixed at the bottom end of a single
+
+681
+
+dental thread that was in turn attached to a 0. 5 mm pin. Crucially, the pin was placed within
+
+682
+
+a glass capillary. This procedure enabled the ants to execute physical rotations on the ball (the
+
+683
+
+ball is not rotating horizontally) but prevented any translational movement. Ants could thus
+
+684
+
+execute body rotations and control the direction in which they faced but any attempt to go
+
+685
+
+forward or backward resulted in ball rotations.
+
+686
+
+Free
+
+Fixed ant experiment: the two small wheels were no longer in place. Hence, the ball
+
+687
+
+could now turn in any direction, including the horizontal plane (Fig. S1B; ‘open-loop’ in
+
+688
+
+Dahmen et al., 2017). Ants were tethered directly to a needle with a micro magnet (glued at
+
+689
+
+the end of the needle) and magnetic paint on their thorax. The top end of the needle was
+
+690
+
+glued to a small piece of paper sheet (0.5×2.5 cm). Consequently, the fixed ant could no
+
+691
+
+longer rotate, and the experimenter could choose in which direction she was facing. Any
+
+692
+
+attempt to move, including turning, by the ants resulted in ball rotations. This trackball
+
+693
+
+configuration was only conducted with the more robust M. croslandi.
+
+694
+695
+
+Free ant experiments: protocol
+
+696
+
+At the start of each test, the ant was mounted on the trackball device but surrounded by an
+
+697
+
+opaque cylinder (30×30 cm) that prevented the ant from seeing any cues from the visual
+
+698
+
+scenery around her. Once the ant was in place on the device, the whole apparatus was moved
+
+699
+
+to the desired test location in the field. Afterward, the surrounding cylinder was removed,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+700
+
+revealing the visual scenery to the ant and data recording began. To ensure a high level of
+
+701
+
+homing motivation, only individuals who had previously received a 40% sucrose solution
+
+702
+
+(for M. croslandi) or a food item (for I. purpureus) were tested. The recording period was 3.5
+
+703
+
+min for the robust M. croslandi and 1.5 min for the flimsier I. purpureus.
+
+704
+705
+706
+707
+708
+709
+710
+
+To test the impact of terrestrial visual cues on the oscillation behavior, ants were
+tested under three distinct conditions.
+Familiar (F): ants were tested along their habitual route, which therefore presents a
+familiar visual view.
+Unfamiliar (U): ants were tested at least 50 m away from the habitual route, which
+therefore presents an unfamiliar panorama.
+Dark (D): ants were tested in total darkness, within an opaque cylinder (30×30 cm)
+
+711
+
+covered with a red Plexiglas plate that transmitted only the low red wavelengths, which ants
+
+712
+
+cannot perceive (Aksoy and Camlitepe, 2018; Ogawa et al., 2015).
+
+713
+
+To test the impact of PI on oscillation behavior, ants were tested as either full- or zero
+
+714
+
+vector ants. Full vector (FV): ants were caught at the start of their inbound trip to the nest
+
+715
+
+(i.e., at the foraging tree for M. croslandi and at the feeder for I. purpureus). FV ants have an
+
+716
+
+informative homing PI vector, which points in the food-to-nest compass direction.
+
+717
+
+Consequently, FV ants can rely on both PI vector and the learnt visual scenery while being
+
+718
+
+tested. Zero vector (ZV): homing ants were captured just before entering the nest, that is, at
+
+719
+
+the end of their inbound trip. Hence, their PI homing vector is reduced to zero and thus no
+
+720
+
+longer directionally informative. Consequently, ZV ants can only rely on the learnt visual
+
+721
+
+scenery while being tested. For each of the three visual conditions FV and ZV ants were
+
+722
+
+tested, resulting in a total of six conditions.
+
+723
+724
+
+For I. purpureus, at least 16 ants were tested in each of the six conditions (F: FV&ZV
+=16; U: FV&ZV =17; D: FV=16 & ZV=17). Since I. purpureus forms very populous
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+725
+
+colonies with an abundance of foragers, all individuals were tested only once, in one of the
+
+726
+
+six conditions. The data obtained are therefore statistically independent. On the contrary, M.
+
+727
+
+croslandi forms sparsely populated colonies and individuals usually make only one foraging
+
+728
+
+trip per day (Jayatilaka 2014, a, b). Thus, it is time-consuming and challenging to capture,
+
+729
+
+mark and follow individuals throughout foraging trips. Individuals were therefore captured
+
+730
+
+(either at the foraging tree (FV) or before reaching their nest (ZV)) and tested successively in
+
+731
+
+a pseudo-random order in all three visual panoramas: Familiar (F), Unfamiliar (U) and in the
+
+732
+
+Dark (D). Both the sequence in which the visual conditions were experienced and the
+
+733
+
+individuality were included in the statistical models as it is likely that the state of the PI
+
+734
+
+vector will be modified across successive tests. Overall, 32 M. croslandi ants were tested
+
+735
+
+with some individuals tested as ZV or FV ants on two different days. At least 16 M. croslandi
+
+736
+
+ants were tested in each of the six conditions (F: FV&ZV =17; U: FV&ZV =17; D: FV=17 &
+
+737
+
+ZV =16). Overall, 101 recordings were obtained.
+
+738
+
+In the ‘free ant’ experiments, the ant’s body axis can turn without the ball movement.
+
+739
+
+We used the recorded videos to manually track the ants’ body orientation through time using
+
+740
+
+the free software Kinovea. We removed the first 3s of recording of each ant as the removal of
+
+741
+
+the opaque ring may have disrupted the behavior. Overall, the analyzed recording length was
+
+742
+
+100s (except for two ants: 84 and 99s) for M. croslandi individuals and 50s (except for two
+
+743
+
+ants: 49s) for I. purpureus ants. For details of the Fourier analysis (see below); nine paths of
+
+744
+
+I. purpureus were discarded (F FV=1, U FV = 1, U ZV =2, D FV =2, D ZV = 3) as the ants
+
+745
+
+displayed too many pauses.
+
+746
+747
+
+Fixed ant experiments: protocol
+
+748
+
+To test if oscillations are due to an intrinsic oscillator or caused by the fact that ants try to
+
+749
+
+keep a bearing toward an external stimulus, we conducted an additional experiment on M.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+750
+
+croslandi ants. We recorded foragers without an informative integration vector (ZV) in the
+
+751
+
+same unfamiliar environment (U) as before. But this time, ants were tested in eight different
+
+752
+
+orientations, covering the 360° azimuth by bins of 45°; and with one direction corresponding
+
+753
+
+to the food-to-nest compass direction. Each ant was tested in all eight orientations in a
+
+754
+
+pseudo-random sequence. To change the ant’s orientation, the experimenter would first place
+
+755
+
+the opaque cylinder (30×30 cm) around the trackball to prevent individuals from perceiving
+
+756
+
+any visual panorama, then rotate the whole set-up (trackball and mounted ant) and finally
+
+757
+
+remove the opaque cylinder to re-start data collection. Ants were recorded for at least 15s up
+
+758
+
+to 20s in each orientation. Eleven ants were tested in all eight orientations. Since the ants
+
+759
+
+were fixed, trackball rotations along the horizontal axis provided a direct measure of the
+
+760
+
+angular velocity of the attempted turn generated by the ant. Angular velocity time series were
+
+761
+
+then extracted from the trackball data. At the end, the available length of the recordings for
+
+762
+
+the analysis had 512 frames (~17s) except for 5 individuals (294,394,456,474,494 frames). It
+
+763
+
+should be noted here that prior to the Fourier analysis (see below) we added a series of 0s
+
+764
+
+(zero padding) at the end of the time series until it had a length of 3000 data points to match
+
+765
+
+the same recording length obtained in the free ant experiment). This permits to increases the
+
+766
+
+precision in the frequency range obtained from the Fourier analysis.
+
+767
+768
+
+Fourier analysis:
+
+769
+
+To reveal the occurrence of regular lateral oscillations, we choose to focus on the angular
+
+770
+
+velocity value (Fig. S1C), which constitutes a direct reading from the left/right motor control.
+
+771
+
+This time series was processed through three successive steps to obtain its ‘spectral density’,
+
+772
+
+according to the Wiener-Khinchin theorem. First, the signal was parsimoniously smoothed
+
+773
+
+with a moving median running of a length of five frames (0.17s) to reduce the influence of
+
+774
+
+the recording noise (Fig. S1D, dashed blue line). Then, the recorded time series was passed
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+775
+
+through an autocorrelation function (Fig. S1D). Finally, a Fourier transform was performed
+
+776
+
+on these autocorrelation coefficients, providing the power spectral density (Fig. S1E). With
+
+777
+
+this approach, the magnitudes obtained are independent from angular amplitudes of the
+
+778
+
+oscillations and thus can be directly compared across individuals. A high magnitude indicates
+
+779
+
+a strong oscillation for a given frequency. For each individual, the dominant frequency (i.e.,
+
+780
+
+presenting the highest peak magnitude) and its magnitude were extracted (Fig S1E, dashed
+
+781
+
+blue lines). To check whether these magnitudes indicate a significant regular oscillation, we
+
+782
+
+compared them to the average spectral density magnitude resulting from 200 Gaussian white
+
+783
+
+noise signals of the same length (within each species and experiment). Gaussian white noise
+
+784
+
+signals were obtained by drawing a sequence of random values drawn from a normal law.
+
+785
+
+These simulated signals were then processed through the exact same operations as the ants’
+
+786
+
+angular velocity recording: namely smoothing, autocorrelation, Fourier transformation and
+
+787
+
+extraction of the highest peak magnitude. The mean of the 200 highest magnitudes obtained
+
+788
+
+was then compared to the real ants’ equivalent magnitudes with a Wilcoxon one-tail test. As
+
+789
+
+each experimental group has been compared with this mean magnitude of the simulated
+
+790
+
+angular velocity signal, the p-value is subsequently adjusted using the Bonferroni correction.
+
+791
+792
+
+Average oscillatory cycle
+
+793
+
+To extract the average dynamics of an oscillation cycle, the mean cycles at the individual and
+
+794
+
+population levels were reconstructed as follows. First, we smoothed the angular velocity time
+
+795
+
+series of each individual by running twice a median with a window length of 31 frames for
+
+796
+
+M. croslandi (for both free and fixed experiments), 25 frames for data during learning walks
+
+797
+
+on the natural ground and seven frames for I. purpureus. This window length is much smaller
+
+798
+
+than one oscillatory cycle and thus smoothens the data without altering the cycle general
+
+799
+
+dynamics (Fig. 3—figure supplements 1A). Second, we indexed moments when the time
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+800
+
+series crosses 0 (from – to +) as t0; and extracted a window of ±90 frames around the t0
+
+801
+
+indices (±60 frames for I. purpureus; Fig. 3—figure supplements 1A). We then reconstructed
+
+802
+
+a mean cycle for each individual by averaging the individual’s extracted windows, aligned at
+
+803
+
+t0 (Fig. 3—figure supplements 1B). The individuals’ average forward speed dynamics during
+
+804
+
+one cycle was obtained in the same way by using the same indices t0 obtained from the
+
+805
+
+angular velocity data (Fig. 3—figure supplements 1C). For each ant, the mean angular
+
+806
+
+velocity peak and amplitude of forward velocity cycles were extracted for analysis. Finally,
+
+807
+
+we reconstructed the average cycle at the level of the population by averaging the mean cycle
+
+808
+
+of all individuals. Note that to do so, each individual’s mean cycle was first normalized to
+
+809
+
+show similar amplitudes (mean_cycle_normalised = mean_cycle/mean|mean_cycle_values|).
+
+810
+
+The goal was here to observe the cycle dynamics through time and not to estimate the inter-
+
+811
+
+individual variation in amplitude, which was analyzed previously using the individual’s mean
+
+812
+
+cycle amplitude. Note that the criterion used to align the time series (the change from a left to
+
+813
+
+a right turn) necessarily creates an artefact in the averaged angular velocity obtained.
+
+814
+
+Namely, an average change from left turn to right turn at t0. However, several factors indicate
+
+815
+
+the relevance of such pooling at the population level: (1) the period of the average cycle
+
+816
+
+corresponds to the mean frequency obtained from the Fourier transform. (2) we can observe a
+
+817
+
+significant reversal of the angular velocity before and after the mean oscillation cycle. (3) the
+
+818
+
+associated forward velocities co-vary in a significant way, indicating the existence of
+
+819
+
+conserved dynamics.
+
+820
+821
+
+Analysis of the ants’ direction of movement
+
+822
+
+We reconstructed the ant paths that derived from the trackball recording to determine the
+
+823
+
+mean direction of movement (mu) as well as the mean circular vector length (r, a measure of
+
+824
+
+dispersion) of each individual. The mean directions (mu) were analyzed using a Rayleigh test
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+825
+
+(from R package: Circular) that also includes a theoretical direction (analogous to the V-test).
+
+826
+
+To test whether the angular data are distributed uniformly as a null hypothesis or if they are
+
+827
+
+oriented toward the theoretical direction of the nest as indicated by the state of the PI or the
+
+828
+
+familiar panorama, the average vectors lengths (r) were analyzed via a Wilcoxon-Mann-
+
+829
+
+Whitney test with a Bonferroni correction for multiple testing.
+
+830
+831
+
+Model
+
+832
+
+For the free ant experiment, two types of models were tested: the first considering the
+
+833
+
+interaction between visual panorama and vector modalities, the second with simple additive
+
+834
+
+effect. It should be noted here that in case of deviation of the residuals of these models from
+
+835
+
+normality and or homoscedasticity, the response variables have been transformed. Only the
+
+836
+
+model presenting the lowest Akaike information criterion was retained and subsequently
+
+837
+
+analyzed via an analysis of variance (Anova), followed by a post-hoc analysis of Tukey's
+
+838
+
+rank comparison. Finally, for M. croslandi whose individuals were tested several times, the
+
+839
+
+models are mixed models that consider these two random variables. For some models, we
+
+840
+
+removed the sequence effect because of a singularity problem of this factor (i.e., the
+
+841
+
+information given by this variable is already contained in other variables). For fixed ant
+
+842
+
+experiments (which were tested only as ZV ants in an unfamiliar environment), the model
+
+843
+
+analyzed the effect of the condition of the subsequent rotations. All data were processed and
+
+844
+
+analyzed using free software R version 3.6.2.
+
+845
+846
+
+Acknowledgments
+
+847
+848
+
+We want to thank the Australian National University and particularly Jochen Zeil, Zoltán
+
+849
+
+Kócsi and Trevor Murray for their advice and technical support. We also thank Hansjürgen
+
+850
+
+Dahmen for providing us with the trackball system and Ajay Narendra for his incredible
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+851
+
+knowledge about the local Australian ants. We are grateful to all these people for their helpful
+
+852
+
+advice. We also thank Jochen Zeil, Paul Graham and Michael Mangan for their helpful
+
+853
+
+feedback on the manuscript. Finally, we thank ants tested in these experiments for their
+
+854
+
+participation.
+
+855
+856
+
+Additional information
+
+857
+
+Funding
+
+858
+
+Funder: European Research Council, Grant reference number: EMERG-ANT 759817,
+
+859
+
+Author: Antoine Wystrach
+
+860
+861
+
+Author contributions
+
+862
+
+LC Conception and Design of experiment, Data collection, Analysis and interpretation of
+
+863
+
+data, Drafting and revising the article. SS Conception and Design of experiment, Data
+
+864
+
+collection, Drafting and revising the article. AW Conception and Design of experiment, Data
+
+865
+
+collection, Analysis and interpretation of data, Drafting and revising the article, Supervision
+
+866
+
+of project.
+
+867
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+868
+869
+
+References
+
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+
+Adden A, Stewart TC, Webb B, Heinze S. 2020. A neural model for insect steering applied to
+olfaction and path integration (preprint). Neuroscience.
+doi:10.1101/2020.08.25.266247
+Aksoy V, Camlitepe Y. 2018. Spectral sensitivities of ants – a review. Animal Biol 68:55–73.
+doi:10.1163/15707563-17000119
+Baddeley B, Graham P, Husbands P, Philippides A. 2012. A Model of Ant Route Navigation
+Driven by Scene Familiarity. PLoS Comput Biol 8:e1002336.
+doi:10.1371/journal.pcbi.1002336
+Berni J. 2015. Genetic Dissection of a Regionally Differentiated Network for Exploratory
+Behavior in Drosophila Larvae. Current Biology 25:1319–1326.
+doi:10.1016/j.cub.2015.03.023
+Berni J, pulver SR, Griffith LC, Bate M. 2012. Autonomous Circuitry for Substrate
+Exploration in Freely Moving Drosophila Larvae. Current Biology 22:10.
+Brembs B. 2021. The brain as a dynamically active organ. Biochemical and Biophysical
+Research Communications 564:55–69. doi:10.1016/j.bbrc.2020.12.011
+Buehlmann C, Wozniak B, Goulard R, Webb B, Graham P, Niven JE. 2020. Mushroom
+Bodies Are Required for Learned Visual Navigation, but Not for Innate Visual
+Behavior, in Ants. Current Biology 30:3438-3443.e2. doi:10.1016/j.cub.2020.07.013
+Busch C, Borst A, Mauss AS. 2018. Bi-directional Control of Walking Behavior by
+Horizontal Optic Flow Sensors. Current Biology 28:4037-4045.e5.
+doi:10.1016/j.cub.2018.11.010
+Card A, McDermott C, Narendra A. 2016. Multiple orientation cues in an Australian trunktrail-forming ant, Iridomyrmex purpureus. Aust J Zool 64:227. doi:10.1071/ZO16046
+Dahmen H, Wahl VL, Pfeffer SE, Mallot HA, Wittlinger M. 2017. Naturalistic path
+integration of Cataglyphis desert ants on an air-cushioned lightweight spherical
+treadmill. J Exp Biol 220:634–644. doi:10.1242/jeb.148213
+Egelhaaf M, Boeddeker N, Kern R, Kurtz R, Lindemann JP. 2012. Spatial vision in insects is
+facilitated by shaping the dynamics of visual input through behavioral action. Front
+Neural Circuits 6. doi:10.3389/fncir.2012.00108
+Freas CA, Cheng K. 2022. The Basis of Navigation Across Species. Annu Rev Psychol
+73:217–241. doi:10.1146/annurev-psych-020821-111311
+Gomez-Marin A, Stephens GJ, Louis M. 2011. Active sampling and decision making in
+Drosophila chemotaxis. Nat Commun 2:441. doi:10.1038/ncomms1455
+Hangartner W. 1967. Spezifit/it und Inaktivierung des Spurphcromons yon Lasius fuliginosus
+Latr. und Orientierung der Arbeiterinnen im Duftfeld. Springer 57:34.
+doi:10.1007/BF00303068
+Hindmarsh Sten T, Li R, Otopalik A, Ruta V. 2021. Sexual arousal gates visual processing
+during Drosophila courtship. Nature 595:549–553. doi:10.1038/s41586-021-03714-w
+Iwano M, Hill ES, Mori A, Mishima Tatsuya, Mishima Tsuneko, Ito K, Kanzaki R. 2010.
+Neurons associated with the flip-flop activity in the lateral accessory lobe and ventral
+protocerebrum of the silkworm moth brain. J Comp Neurol 518:366–388.
+doi:10.1002/cne.22224
+Jayatilaka P, Murray T, Narendra A, Zeil J. 2018. The choreography of learning walks in the
+Australian jack jumper ant Myrmecia croslandi. J Exp Biol 221:jeb185306.
+doi:10.1242/jeb.185306
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+
+Jayatilaka P, Raderschall CA, Narendra A, Zeil J. n.d. Individual foraging patterns of the jack
+jumper ant Myrmecia croslandi (Hymenoptera: Formicidae) 10.
+Jayatilaka PWA. 2014. Individual foraging careers of the Jack Jumper ant, Myrmecia
+croslandi. thesis submitted for the degree of Doctor of Philosophy of the Australian
+180.
+Kamhi JF, Barron AB, Narendra A. 2020. Vertical Lobes of the Mushroom Bodies Are
+Essential for View-Based Navigation in Australian Myrmecia Ants. Current Biology
+30:3432-3437.e3. doi:10.1016/j.cub.2020.06.030
+Kanzaki R. 2005. Neural Basis of Odor-source Searching Behavior in Insect Brain Systems
+Evaluated with a Mobile Robot. Chemical Senses 30:i285–i286.
+doi:10.1093/chemse/bjh226
+Kanzaki R, Mishima T. 1996. Pheromone-Triggered ‘Fiipflopping’ Neural Signals Correlate
+with Activities of Neck Motor Neurons of a Male Moth, Bombyx mori. Zoological
+Science 13:79–87. doi:10.2108/zsj.13.79
+Kanzaki R, Sugi N, Shibuya T. 1992. Self-generated Zigzag Turning of Bombyx mori Males
+during Pheromone-mediated Upwind Walking(Physology). Zoological science 9:515–
+527.
+Keijzer F, van Duijn M, Lyon P. 2013. What nervous systems do: early evolution, input–
+output, and the skin brain thesis. Adaptive Behavior 21:67–85.
+doi:10.1177/1059712312465330
+Kodzhabashev A, Mangan M. 2015. Route Following Without Scanning In: Wilson SP,
+Verschure PFMJ, Mura A, Prescott TJ, editors. Biomimetic and Biohybrid Systems.
+Cham: Springer International Publishing. pp. 199–210. doi:10.1007/978-3-31922979-9_20
+Kuenen LPS, Baker TC. 1983. A non-anemotactic mechanism used in pheromone source
+location by flying moths. Physiol Entomol 8:277–289. doi:10.1111/j.13653032.1983.tb00360.x
+Le Möel F, Wystrach A. 2020. Opponent processes in visual memories: A model of attraction
+and repulsion in navigating insects’ mushroom bodies. PLoS Comput Biol
+16:e1007631. doi:10.1371/journal.pcbi.1007631
+Lonnendonker U. 1991. DYNAMIC PROPERTIES OF ORIENTATION TO A VISUALLY
+FIXATED TARGET BY WALKING COLORADO BEETLES. Journal of
+Experimental Biology 158:16.
+Murray T, Kócsi Z, Dahmen H, Narendra A, Le Möel F, Wystrach A, Zeil J. 2020. The role
+of attractive and repellent scene memories in ant homing ( Myrmecia croslandi ). J
+Exp Biol 223:jeb210021. doi:10.1242/jeb.210021
+Namiki S, Iwabuchi S, Pansopha Kono P, Kanzaki R. 2014. Information flow through neural
+circuits for pheromone orientation. Nat Commun 5:5919. doi:10.1038/ncomms6919
+Namiki S, Kanzaki R. 2016a. Comparative Neuroanatomy of the Lateral Accessory Lobe in
+the Insect Brain. Front Physiol 7. doi:10.3389/fphys.2016.00244
+Namiki S, Kanzaki R. 2016b. The neurobiological basis of orientation in insects: insights
+from the silkmoth mating dance. Current Opinion in Insect Science 15:16–26.
+doi:10.1016/j.cois.2016.02.009
+Narendra A, Gourmaud S, Zeil J. 2013. Mapping the navigational knowledge of individually
+foraging ants, Myrmecia croslandi. Proc R Soc B 280:20130683.
+doi:10.1098/rspb.2013.0683
+Ogawa Y, Falkowski M, Narendra A, Zeil J, Hemmi JM. 2015. Three spectrally distinct
+photoreceptors in diurnal and nocturnal Australian ants. Proc R Soc B 282:20150673.
+doi:10.1098/rspb.2015.0673
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+
+Olberg RM. 1983. Pheromone-triggered flip-flopping interneurons in the ventral nerve cord
+of the silkworm moth,Bombyx mori. J Comp Physiol 152:297–307.
+doi:10.1007/BF00606236
+Pansopha P, Ando N, Kanzaki R. 2014. Dynamic use of optic flow during pheromone
+tracking by the male silkmoth, Bombyx mori. Journal of Experimental Biology
+217:1811–1820. doi:10.1242/jeb.090266
+Schroeder CE, Wilson DA, Radman T, Scharfman H, Lakatos P. 2010. Dynamics of Active
+Sensing and perceptual selection. Current Opinion in Neurobiology 20:172–176.
+doi:10.1016/j.conb.2010.02.010
+Schwarz S, Mangan M, Zeil J, Webb B, Wystrach A. 2017. How Ants Use Vision When
+Homing Backward. Current Biology 27:401–407. doi:10.1016/j.cub.2016.12.019
+Steinbeck F, Adden A, Graham P. 2020. Connecting brain to behaviour: a role for general
+purpose steering circuits in insect orientation? J Exp Biol 223:jeb212332.
+doi:10.1242/jeb.212332
+Stürzl W, Zeil J, Boeddeker N, Hemmi JM. 2016. How Wasps Acquire and Use Views for
+Homing. Current Biology 26:470–482. doi:10.1016/j.cub.2015.12.052
+Voss R, Zeil J. 1998. Active vision in insects: an analysis of object-directed zig-zag flights in
+wasps ( Odynerus spinipes ?, Eumenidae). Journal of Comparative Physiology A:
+Sensory, Neural, and Behavioral Physiology 182:377–387.
+doi:10.1007/s003590050187
+Webb B, Wystrach A. 2016. Neural mechanisms of insect navigation. Current Opinion in
+Insect Science 15:27–39. doi:10.1016/j.cois.2016.02.011
+Wolf S, Dubreuil AM, Bertoni T, Böhm UL, Bormuth V, Candelier R, Karpenko S,
+Hildebrand DGC, Bianco IH, Monasson R, Debrégeas G. 2017. Sensorimotor
+computation underlying phototaxis in zebrafish. Nat Commun 8:651.
+doi:10.1038/s41467-017-00310-3
+Wystrach A. 2021. Movements, embodiment and the emergence of decisions. Insights from
+insect navigation. Biochemical and Biophysical Research Communications
+S0006291X21007348. doi:10.1016/j.bbrc.2021.04.114
+Wystrach A, Lagogiannis K, Webb B. 2016. Continuous lateral oscillations as a core
+mechanism for taxis in Drosophila larvae. eLife 5:e15504. doi:10.7554/eLife.15504
+Wystrach A, Le Moël F, Clement L, Schwarz S. 2020. A lateralised design for the interaction
+of visual memories and heading representations in navigating ants (preprint). Animal
+Behavior and Cognition. doi:10.1101/2020.08.13.249193
+Wystrach A, Mangan M, Philippides A, Graham P. 2013. Snapshots in ants? New
+interpretations of paradigmatic experiments. Journal of Experimental Biology
+216:1766–1770. doi:10.1242/jeb.082941
+Yuste R, MacLean JN, Smith J, Lansner A. 2005. The cortex as a central pattern generator.
+Nat Rev Neurosci 6:477–483. doi:10.1038/nrn1686
+Zeil J. 2012. Visual homing: an insect perspective. Current Opinion in Neurobiology 22:285–
+293. doi:10.1016/j.conb.2011.12.008
+Zeil J, Narendra A, Stürzl W. 2014. Looking and homing: how displaced ants decide where
+to go. Phil Trans R Soc B 369:20130034. doi:10.1098/rstb.2013.0034
+Zollikofer CPE. 1994. STEPPING PATTERNS IN ANTS. Journal of Experimental Biology
+192:107–118.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1011
+
+Supplemental information 1
+
+1012
+
+To this date, the navigational skills of Iridomyrmex purpureus have been investigated in only
+
+1013
+
+one study showing that these individuals are able to use terrestrial as well as celestial cues for
+
+1014
+
+orientation (Card et al 2016). Before using this species in our study, we performed similar
+
+1015
+
+experiments and found that this ant relies indeed on both sources of information to navigate.
+
+1016
+
+First, to test whether I. purpureus was able to use visual familiarity foragers were capured at
+
+1017
+
+the end of their inbound trip where the vector of integration was reduced to zero (ZV) and re-
+
+1018
+
+released (tested) along their route. Second, to test if I. purpureus was able to use celestial
+
+1019
+
+information foragers were captured at the feeder at the start of their inbound trip (FV) and re-
+
+1020
+
+released (tested) in an unfamiliar location ~50 m away (see Methodology).
+
+1021
+
+For tests, ants with a food item were released at the center of a goniometer divided in
+
+1022
+
+18 sectors (20° each) either in a familiar or unfamiliar surroudings. The taken directions of
+
+1023
+
+the tested ants were recorded at two points: 15 cm and 27 cm. We used the “corrected
+
+1024
+
+direction” for our analyses, which is the direction taken between these two points. Note, that
+
+1025
+
+after several tested individuals, the goniometers was rotate (180°) to prevent the use of
+
+1026
+
+chemichal trails.
+
+1027
+1028
+1029
+
+Figure S1: The meat ant Iridomyrmex purpureus uses both visual and celestial cues to
+navigate.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+
+(A) Circular histogram depicting the directional decisions of tested zero-vector ants (without
+informative integration vector). (B) Circular histogram depicting the directional decisions of
+tested full-vector ants (with informative integration vector). For A and B, nest direction is
+indicated by the 0° direction (black triangle). The arrow corresponds to the mean vector of
+the distribution. The 95% confidence interval of the mean is displayed as a colored arc. Each
+dot corresponds to one corrected direction obtained from one individual. Dots with a black
+rim are data recorded before rotation of the goniometers and the dots without black rim after
+rotation.
+
+1038
+1039
+
+First, the results show that ZV ants of I. purpureus use the familiar visual surrounding to
+
+1040
+
+orient toward their nest (Fig. S1A; Rayleigh test with nest as theoretical direction 0°;
+
+1041
+
+p<0.001). Secondly, in unfamiliar panorama results clearly show that FV ants followed the
+
+1042
+
+direction indicated by celestial cues (0° on the Fig. S1B; Rayleigh test p<0.001). Therefore,
+
+1043
+
+this species does not only rely on chemical trails but also on the visual panorama and the path
+
+1044
+
+integration during foraging.
+
+1045
+1046
+
+Supplemental information 2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+
+Figure S2: Trackball set-ups, recording and processing of the ants' trajectory. (A)
+Trackball set-up for ‘free ant experiment’ (top view). Two wheels prevent the sphere from
+rotating along the horizontal plane. Ants are free to rotate their body along the yaw axis to
+control in which direction they perceive the world. (B) Trackball set-up for ‘fixed ant
+experiment’ (side view). The two wheels have been removed, so the ball can turn in every
+direction. Ants are fixed in a way that prevent body rotations along the yaw axis, so they are
+forced to keep their bearing in the imposed direction. For A and B an example path has been
+plotted below the picture. (C) Angular velocity signal over time (recorded at 30 readings/sec)
+in an individual of the species M. croslandi (black) with smoothed signal superimposed
+(blue). (D) Autocorrelation carried out on the entire smoothed angular velocity signal. (E)
+Fourier transformation of the autocorrelation coefficients signal (shown in D) provides the
+‘spectral density’. This approach has the advantage to provide magnitudes that are directly
+comparable between individuals. For each individual, the frequency peak with the highest
+magnitude was extracted, indicating a strong oscillation of the angular velocity signal at that
+frequency (dashed blue lines).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.04.22.489150; this version posted April 22, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1066
+1067
+
+Supplemental information3:
+
+1068
+1069
+1070
+1071
+
+Figure S3: Absence of the rotational visual feedback does not modify the dynamical
+signature of oscillation behavior.
+
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+
+Angular velocities (top-row) and forward velocity (bottom row) co-varies in a way that seem
+conserved across experimental conditions (Fig. 3 & Fig. 5). Population cycles have been
+reconstructed by merging all rotational condition as there is no differences of amplitude of
+mean peak of angular velocity and mean forward amplitude cycles between rotational
+conditions (Anova: Df= F7,84= 1.0103, p≥0.432). Each individual signal has been normalized
+before pooling. Colored areas around mean curves represent the 95% confidence interval,
+based on the inter-individual variation.
+
+

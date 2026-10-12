@@ -1,0 +1,2023 @@
+Evaluating spatial and temporal patterns of tick exposure in the United States using community science data submitted through a smartphone application
+Pallavi A. Kache, Gebbiena M. Bron, Sandra Zapata-Ramirez, Jean I. Tsao, Lyric C. Bartholomay, Susan M. Paskewitz, Maria A. Diuk‐Wasser, María del Pilar Fernández (2023). Ticks and Tick-borne Diseases. https://research.wur.nl/en/publications/evaluating-spatial-and-temporal-patterns-of-tick-exposure-in-the-. doi:10.1016/j.ttbdis.2023.102163. Licence: cc-by. Text from pdf.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+Contents lists available at ScienceDirect
+
+Ticks and Tick-borne Diseases
+journal homepage: www.elsevier.com/locate/ttbdis
+
+Original article
+
+Evaluating spatial and temporal patterns of tick exposure in the United
+States using community science data submitted through a
+smartphone application
+Pallavi A. Kache a, 1, *, Gebbiena M. Bron b, c, 1, 2, Sandra Zapata-Ramirez a, Jean I. Tsao d, Lyric
+C. Bartholomay e, Susan M. Paskewitz b, Maria A. Diuk-Wasser a, 3, Maria del Pilar Fernandez a, f, 3
+a
+
+Department of Ecology, Evolution and Environmental Biology, Columbia University, 1200 Amsterdam Avenue, New York City, NY 10027, USA
+Department of Entomology, University of Wisconsin–Madison, 1630 Linden Dr, Madison, WI 53706, USA
+c
+Quantitative Veterinary Epidemiology, Wageningen University & Research, Droevendaalsesteeg 1, PB 6708, Lelystad, the Netherlands
+d
+Department of Fisheries and Wildlife, Michigan State University, 480 Wilson Rd #13, East Lansing, MI 48824, USA
+e
+Department of Pathobiological Sciences, University of Wisconsin–Madison, 2015 Linden Dr, Madison, WI 53706, USA
+f
+Paul G. Allen School for Global Animal Health, Washington State University, 1155 NE College Ave, Pullman, WA 99164, USA
+b
+
+A R T I C L E I N F O
+
+A B S T R A C T
+
+Keywords:
+Ticks
+Tick encounters
+Tick surveillance
+Community science
+Citizen science
+Mobile app
+
+Research initiatives that engage the public (i.e., community science or citizen science) increasingly provide
+insights into tick exposures in the United States. However, these data have important caveats, particularly with
+respect to reported travel history and tick identification. Here, we assessed whether a smartphone application,
+The Tick App, provides reliable and novel insights into tick exposures across three domains — travel history,
+broad spatial and temporal patterns of species-specific encounters, and tick identification. During 2019–2021, we
+received 11,424 tick encounter submissions from across the United States, with nearly all generated in the
+Midwest and Northeast regions. Encounters were predominantly with human hosts (71%); although one-fourth
+of ticks were found on animals. Half of the encounters (51%) consisted of self-reported peri‑domestic exposures,
+while 37% consisted of self-reported recreational exposures. Using phone-based location services, we detected
+differences in travel history outside of the users’ county of residence along an urbanicity gradient. Approximately
+75% of users from large metropolitan and rural counties had travel out-of-county in the four days prior to tick
+detection, whereas an estimated 50–60% of users from smaller metropolitan areas did. Furthermore, we
+generated tick encounter maps for Dermacentor variabilis and Ixodes scapularis that partially accounted for travel
+history and overall mirrored previously published species distributions. Finally, we evaluated whether a
+streamlined three-question sequence (on tick size, feeding status, and color) would inform a simple algorithm to
+optimize image-based tick identification. Visual aides of tick coloration and size engaged and guided users to­
+wards species and life stage classification moderately well, with 56% of one-time submitters correctly selecting
+photos of D. variabilis adults and 76% of frequent-submitters correctly selecting photos of D. variabilis adults.
+Together, these results indicate the importance of bolstering the use of smartphone applications to engage
+community scientists and complement other active and passive tick surveillance systems.
+
+1. Introduction
+In recent decades, there has been an increase in the geographic
+distribution and number of tick-borne infections caused by Ixodes spp.,
+
+Amblyomma spp., and Dermacentor spp. ticks in the United States(Alkishe
+and Peterson, 2022; Flenniken et al., 2022; Hahn et al., 2016; Kugeler
+et al., 2021; Telford and Goethert, 2004). The Northeast and Midwest
+regions of the country, in particular, face significant burdens of Lyme
+
+* Corresponding author.
+E-mail address: pak2136@columbia.edu (P.A. Kache).
+1
+These authors contributed equally as first author.
+2
+Wageningen Bioveterinary Research, Wageningen University & Research, Houtribweg 37, 8221 RA, Lelystad, The Netherlands.
+3
+These authors contributed equally as senior author.
+https://doi.org/10.1016/j.ttbdis.2023.102163
+Received 14 November 2022; Received in revised form 19 February 2023; Accepted 21 February 2023
+Available online 29 March 2023
+1877-959X/© 2023 The Authors. Published by Elsevier GmbH. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+disease and other Ixodes scapularis-borne diseases; while less frequent,
+albeit consequential, diseases including ehrlichiosis and Rocky Moun­
+tain spotted fever are caused by agents transmitted by Amblyomma
+americanum and Dermacentor variabilis (Nelson et al., 2015; Raghavan
+et al., 2019; Rosenberg et al., 2018). Given this shifting
+eco-epidemiological context, public health professionals must monitor
+risk levels for tick-borne diseases locally, rather than rely on broad,
+regional assessments. Understanding tick-borne disease risk for a local
+jurisdiction (e.g., county) involves evaluating tick-borne infection haz­
+ard, including which tick species are established locally (and which are
+emerging in neighboring counties); which areas within the county are of
+highest risk, and which pathogens are present among tick populations.
+Additionally, it requires assessing where, when, and how people are
+exposed to infected ticks, and their capacity to respond after a tick
+encounter (i.e., level of vulnerability) (Diuk-Wasser et al., 2021).
+Acquiring data on each contributing factor carries distinct challenges.
+First, active tick surveillance and pathogen screening programs are
+resource intensive, with limited funding constraining the scope and
+geographic scale of field-based sampling (Centers for Disease Control
+and Prevention, 2022; Foster et al., 2022; Hai et al., 2014; Lyons et al.,
+2022; Mader et al., 2021; Nieto et al., 2018). Second, retrospective tick
+exposure surveys are subject to recall bias, requiring respondents to
+generalize about tick encounters over long stretches of time (Fernandez
+et al., 2019; Runyan et al., 2013). And third, surveys evaluating how
+people respond to tick exposures are time consuming and typically only
+feasible at small scales. Additionally, aggregating data to understand
+tick exposure patterns across broad regions carries its own limitations.
+Currently, in the United States, syndromic surveillance for tick bites is
+conducted through emergency department visitations (i.e., ICD diag­
+nostic codes) (Centers for Disease Control and Prevention, 2021). While
+this provides a representative picture of the rate at which regional
+populations seek acute care for tick bites, critical information about the
+exposure (e.g., encounter location, tick species, and life stage) are
+missing, and necessary to inform tick-borne disease prevention.
+In the midst of these challenges, tick surveillance rooted in com­
+munity science (also called citizen science) offers a way to generate large
+volumes of data at broad (e.g., regional and national) scales in collab­
+oration with the public. In recent years, community science initiatives
+have emerged as a means to gather information on tick abundance and
+exposure—although the programs’ objectives and collection methods
+vary. Some programs, including one operated by Northern Arizona
+University, provided the public with free tick identification and path­
+ogen testing services (Nieto et al., 2018). During 20 months, Nieto et al.
+received over 16,000 physical tick submissions. Alongside ticks, their
+team requested information on the presumed tick exposure location, and
+with this information generated distribution maps that expanded upon
+previous records of species ranges. However, travel history was not
+collected and tick exposure locations provided by participants is subject
+to inaccuracies (Nieto et al., 2018). Recently, similar programs have
+emerged, although focused on specific geographic areas of interest
+(Hart et al., 2022). Other initiatives, including eTick in Canada and
+TickSpotters in the United States, use online photo submission systems,
+wherein participants send photos of ticks, information about the
+encounter, and a best-guess on the species identification to teams of
+trained entomologists who then review these data (Koffi et al., 2017;
+Kopsco et al., 2021a). Over four years, TickSpotters received ~31,500
+submissions from across the United States. With these data they asked a
+number of research questions including what factors were associated
+with participants’ correct (or incorrect) tick species identification
+(Kopsco et al., 2021a). Finally, apps including TickTracker guide users
+through identification keys and collect exposure information, but may
+not include expert validation (TickTracker, 2022).
+Although there are benefits to using crowd-sourced data, there are
+also limitations to the representativeness and quality of the data (Eisen
+and Eisen, 2021). Community science study populations are often biased
+based on socioeconomic status, recruitment effort, and interest in
+
+tick-borne diseases, creating challenges in comparing findings to the
+population at-large or to other data collection efforts (Fernandez et al.,
+2019). With respect to data quality, accuracy of species identification
+and the spatial precision of the encounter location are difficult to
+confirm (Bron et al., 2021; Eisen and Eisen, 2021). While physical tick
+submissions result in the highest quality assurance for species identifi­
+cation, establishing a pipeline for receiving ticks is time-intensive. As a
+first step, programs must direct sufficient resources towards participant
+recruitment. Often, for vector-borne diseases, target populations are
+incentivized by pathogen testing of submitted specimens (Hamer et al.,
+2018). This carries potential to overwhelm the resources of small
+research teams. Species identification via digital images eliminates the
+demand on physical resources and offers avenues of enhanced engage­
+ment with the public (Kopsco et al., 2021b). Although this method is
+sensitive to image quality and the experience level of the individual
+responsible for identifying the tick, identification can be verified by
+trained entomologists (Fernandez et al., 2019). Separately, with respect
+to exposure location, ticks may be detected on people or companion
+animals in locations far from where the encounter originally occurred
+(Centers for Disease Control and Prevention, 2022). Without detailed
+information on travel history or the duration of tick attachment, expo­
+sure location data are subject a high degree of uncertainty—and
+geographic distribution maps based self-reported data may lead to
+misrepresentations of risk
+In 2018, our team launched The Tick App as a survey tool to gather
+information on human behaviors and movements associated with tick
+exposure while also engaging users in tick reporting (Fernandez et al.,
+2019). The app uniquely captures information on daily activities, which
+is then crossed with geolocation information on movement patterns and
+land cover data associated with where users may be encountering
+different tick species. Given the potential caveats of community
+science-generated data, in this paper we assessed how tick encounter
+submissions reported through the app informs patterns of tick exposures
+across a range of spatial and temporal scales (Bron et al., 2021; Eisen and
+Eisen, 2021). Using descriptive analyses, we evaluated the degree to
+which The Tick App enhances understanding of three facets of tick
+exposure information. We first evaluated whether a streamlined
+three-question sequence (on tick size, feeding status, and color) would
+inform a simple identification algorithm to optimize image-based
+identification for our program. Next, we uncovered how app-based
+GPS data provides an understanding of tick encounter location.
+Finally, we examined whether encounter-level data could be aggregated
+to detect broad spatial and temporal patterns of tick exposure, including
+seasonal variation. We focused our analyses on three medically-relevant
+tick species, I. scapularis, A. americanum, and D. variabilis. Lessons
+learned here can provide a blueprint with which to design and evaluate
+future tick surveillance platforms, maximizing data quality and partic­
+ipant engagement.
+2. Materials and methods
+2.1. Data sources
+In this investigation, we used data from The Tick App during
+2019–2021. During this study period, the app was available to partici­
+pants 18 years and older living in the United States (Fernandez et al.,
+2019). We created a tick encounter database using two app features. The
+first was the “Daily Log”—a daily retrospective survey where users
+document their outdoor activities, any ticks encountered, and personal
+protection measures used to prevent tick bites. Users may also report
+tick encounters directly through the “Tick Report” feature. A tick
+encounter is defined as one or more ticks that a user reported finding on
+a single day. For each tick encounter submission users provided infor­
+mation on whom the tick(s) was found on (e.g., self, household member,
+or companion animal), when and where they think they picked up the
+tick(s) (e.g., the county and zip code; in a peri‑domestic versus
+2
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+recreational setting), and whether the tick(s) was attached. Self-reported
+peri‑domestic exposures included tick encounters that happened in “my
+yard” or “my neighbor’s property”, noting that for some users, “yards”
+encompassed larger swaths of private land (e.g., forested acreage and
+private pastures).
+We also asked users to visually assess the tick’s appearance and
+submit a photo of the tick. To assess appearance, users were asked to
+select the visual aide that most closely resembled their tick(s), charac­
+terizing size (big, medium, small), bloodfed status (flat, round [assumed
+to reflect ≥ 3 days of feeding to fully fed]), and color pattern (Fig. 1).
+Prompts of color patterns were: “all brown” (next to an image of an
+A. americanum male, which could also be perceived as Haemaphysalis
+longicornis, the Asian longhorned tick), “white dot” (image showing
+A. americanum female), “brown and white pattern” (image showing
+D. variabilis female, which we assumed would also be selected for
+D. variabilis males, other Dermacentor spp., and A. maculatum), or “black
+shield” (image showing I. scapularis female, which we assumed would
+also be selected for I. scapularis males and other Ixodes spp.). To maxi­
+mize simplicity in the user-experience, we presented a limited number of
+images for assessing coloration. We showed photos of unfed ticks only;
+one set of photos had the tick filling the frame and another set had the
+tick next to a pencil, for scale (Fig. 1c). Additionally, we did not specify
+anatomical cues for the tick species.
+Given that the tick may not have been available at the time of report
+submission, each question also included the option “I don’t know” to
+distinguish missing knowledge from skipped answers. Researchers
+
+trained in entomological classification gave each submitted photo a
+certainty score. The certainty score incorporated the researcher’s con­
+fidence in their ability to correctly identify the tick species. This was a
+qualitative score, considering the quality of the image, size of the tick in
+the image, and position of the tick. We used scores from 0–100. Scores of
+1–50 indicated “I cannot tell” (in this case, we asked users to submit a
+new photo); 51–70 indicated “I suspect it is ‘X’ species” (in certain cases
+we asked users for a new photo or a photo focusing on specific
+anatomical areas such as the mouth parts or scutum); 71–90 indicated “I
+am quite certain”; and 91–100, “I am certain.” Images with certainty
+scores above 70 were reviewed and classified according to species, life
+stage, sex, bloodfed status (yes, no, unknown), and the estimated
+feeding duration. Bloodfed status and duration was determined using
+visual assessments of relative scutal versus body length, comparing
+photos to reference tick growth comparison charts (TickEncounter,
+2021). Results were then emailed to the participant.
+To evaluate tick encounter locations we used both self-reported in­
+formation and GPS data. GPS data were collected for The Tick App users
+who enabled location services in the app (Fernandez et al., 2019). Users
+could opt to keep location services on continuously, allowing for GPS
+data to be collected at 15 min intervals, or only while The Tick App was
+in use. Recorded data consisted of the timestamp and coordinates
+(latitude and longitude) of the device, with an expected horizontal po­
+sition accuracy of 7–13 m based on smartphone GPS accuracy assess­
+ments from the literature (Merry and Bettinger, 2019; Tomaštík et al.,
+2017). Data were not recorded when users were outside of mobile
+
+Fig. 1. The Tick App interface with the tick identification screening sequence. Upon navigating to the Tick Report feature of The Tick App, users are asked the above
+three-questions sequence and prompted to submit a photo for identification (with visual aides on how to obtain a high-quality image).
+3
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+found on themselves or a household member/companion animal; 2)
+enabled location services; and 3) had at least three days of data and > 20
+daytime and evening (04:00 AM–11:59 PM) GPS points collected in a
+four-day period prior to when the tick was found. We restricted analyses
+to a four-day period, given evidence that a majority of people who
+experience a tick-bite remove adult ticks within 72 h (Yeh et al., 1995).
+To assess travel history, we compared the zip code, county, and state of a
+given GPS point to the participant’s jurisdiction of residence As a proxy
+for the duration of time spent in a given location, we analyzed the
+proportion of daytime and evening GPS points detected in a given
+location out of the total number of points collected within their four-day
+collection period. Additionally, we compared travel history
+out-of-county according to the county’s urbanicity classification
+(Table S2): large metropolitan, medium metropolitan, small metropol­
+itan, and rural counties.
+To estimate the land covers that users visited prior to tick detection,
+we extracted land cover classifications from the NLCD 2019 raster layer
+at a 30 m resolution (Dewitz, 2016). We reclassified land cover types
+into five categories (Table S3): developed (low-, medium-, and
+high-intensity development); grassy (consisting of open areas and
+grasslands, scrub); forested; planted/cultivated; and other (lichen,
+barren lands, wetlands, and open water). We examined the proportion of
+users’ GPS points that fell within each land cover class, according to
+users’ travel history (out-of-county travel: yes versus no; out-of-county
+travel on weekdays versus weekends) and exposure type (peri‑domes­
+tic versus recreational). We examined travel history and exposure var­
+iables separately as a way to validate this self-reported information.
+Finally, for users with GPS data and a photo submission, for each of the
+species we analyzed the proportion of time spent in the above land cover
+classes. NLCD extractions were conducted using the “raster” package in
+R (with no spatial buffer). For descriptive bivariate analyses of cate­
+gorical variables, we used nonparametric Mann-Whitney and
+Kruskal-Wallis tests.
+
+service range.
+Here, we used two subsets of The Tick App tick encounter database
+during 2019–2021. For the three-question sequence for tick photo sub­
+missions and geographic and seasonal patterns across species, we used
+data for participants residing in the Midwest and Northeast regions
+(Fig. 2a, Table S1). For GPS data, we included users located throughout
+the contiguous United States (Fig. 2b). This work was conducted in
+accordance with Institutional Review Board approved protocols
+(2018− 84, University of Wisconsin – Madison, WI, USA; and AAA3750M00Y01, Columbia University, New York, NY, USA).(Fig. 3)
+2.2. Analyses
+2.2.1. Three-question sequence for photo screening
+We assessed the degree to which visual aides were associated with
+tick species identification by trained entomologists, which would help to
+develop a simple identification algorithm. We used a multiple corre­
+spondence analysis (MCA) on our three-question screening variables
+(tick size, bloodfed status, and color pattern) and entomologistidentified tick species to examine whether user responses were associ­
+ated with a particular species. Analyses were conducted using the
+“FactoMine” package in R.
+Next, we evaluated whether user-selected tick size (the first question
+in the three-question sequence) served as a predictive feature for tick life
+stage and species. For this, we calculated the proportion of tick photos
+with a given entomologist-verified life stage and species assignment (e.
+g., adult I. scapularis) out of the number of photos with a given userselected tick size (Table 3). For the second question, we assessed
+whether users’ indication of the tick being flat or round corresponded to
+entomologist-determined bloodfed status. And for the third question, we
+assessed how users classified images of their tick based on visual aides
+and written prompts of the tick’s color patterning (Figs. 1 and 4).
+2.2.2. Location of tick encounters
+For tick encounter submissions across life stages, we conducted GPS
+analyses among participants who: 1) provided the date that the tick was
+
+2.2.3. Geographic and temporal variation across species
+To examine geographic patterns of The Tick App encounter
+
+Fig. 2. Diagram of tick encounter and GPS data submissions. 2a. To analyze tick encounters, we aggregated data from Daily Log and Tick Report (i.e., without Daily
+Log) entries. Approximately 79% of tick encounters were made up of Tick Reports. We restricted tick encounters to the Midwest and Northeast regions, where we
+actively recruited participants, and which made up 96% of submissions nationwide. Of these submissions, 50% included photos of the tick, allowing for speciesspecific analyses. 2b. To analyze mobility data associated with tick encounters, we matched the two datasets and restricted records to users with ≥20 GPS points
+available in the four days preceding tick detection, with 7.4% of the original tick encounter database meeting this criterium. Out of these entries, 80% submitted a
+photo of the tick, allowing for GPS and species-specific analyses.
+4
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+Fig. 3. Tick encounters with photo and GPS data submissions (2019–2021). 3a. Tick encounters with photo submissions were available for 352 counties in 24 states
+of the Midwest and Northeast regions of the Unites States. Most counties had between 1 and 12 tick encounters with photo submissions available for species-level
+analyses. Photo submissions were most widely available for counties in the states of Wisconsin and Michigan in the Midwest region. 3b. Tick encounters submissions
+with ≥20 daytime GPS points available in the four days preceding a tick encounter were available for 138 counties across 18 states in the continental United States.
+
+Fig. 4. Entomologist-verified classifications versus photo-based user-selected species for adult ticks. 4a. The left panel shows the entomologist-verified species
+identification based on submitted photos of adult ticks, and the right shows the user-selected photo based on visual guides (Fig. 1). For users with a Dermacentor
+variabilis tick, 60% selected the photo of a “brown and white pattern” tick corresponding to D. variabilis. 4b. For users with an Ixodes scapularis tick, 50% selected the
+photo of a tick with a “black shield” pattern, corresponding to I. scapularis ticks. 4c. For users with Amblyomma americanum females, 85% selected the photo of a tick
+with a “white dot” pattern corresponding to A. americanum females.
+
+submissions, we compared data submitted through the app with pub­
+lished county-level reports of I. scapularis and D. variabilis, using par­
+ticipants’ county of residence. With A. americanum making up only 7.5%
+of tick photo submissions, we did not generate maps for this species.
+Given that most tick encounter maps do not account for travel his­
+tory, we partially accounted for this with the data on hand. We mapped
+
+the counties where reports of I. scapularis and D. variabilis were gener­
+ated, excluding individuals with more than 20% of their GPS points
+outside the users’ home county in the four days prior to tick detection (in
+the case where both photo submissions and GPS data were available).
+With this data subset, we compared I. scapularis submissions to CDC
+surveillance datasets available through December 2021, as well as
+5
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+reports made publicly available by Centers for Disease Control and
+Prevention (2022), Kopsco et al. (2021b) and Nieto et al. (2018). We
+compared D. variabilis submissions to those published by the passive
+surveillance initiative by Nieto et al., and a review of the literature and
+records from the U.S. National Tick Collection and National Ecological
+Observatory Network conducted by Lehane et al. (2020) and Nieto et al.
+(2018). To demonstrate seasonal abundance patterns of The Tick App
+tick encounters, we used the submission date aggregated to the epide­
+miological week.
+
+Table 1
+Profile of tick encounter reporters in the Midwest and Northeast regions
+(2019–2021)a.
+
+3. Results
+
+Year
+
+2019
+
+2020
+
+2021
+
+2019–2021*
+
+Total Number of Tick
+Encounters Reports
+Unique Tick
+Encounter
+Reporters
+Gender: User data
+available
+Female
+
+N = 1960
+
+N = 3449
+
+N = 5506
+
+N = 10,915
+
+N = 899
+
+N = 1367
+
+N = 2559
+
+N = 4411
+
+N = 1958
+
+N = 3449
+
+N = 5506
+
+N = 10,913
+
+1160
+(59.2%)
+784
+(40.0%)
+4 (0.2%)
+
+2238
+(64.9%)
+1169
+(33.9%)
+5 (0.1%)
+
+3353
+(60.9%)
+2041
+(37.1%)
+18 (0.3%)
+
+6751
+(61.9%)
+3994
+(36.6%)
+27 (0.2%)
+
+10 (0.5%)
+N = 1953
+
+37 (1.1%)
+N = 3404
+
+94 (1.7%)
+N = 5462
+
+141 (1.3%)
+N = 10,819
+
+37 (1.9%)
+770
+(39.4%)
+357
+(18.3%)
+738
+(37.8%)
+51 (2.6%)
+N = 1960
+
+66 (1.9%)
+1224
+(36.0%)
+772
+(22.7%)
+1246
+(36.6%)
+96 (2.8%)
+N = 3449
+
+108 (2.0%)
+2271
+(41.6%)
+1151
+(21.1%)
+1815
+(33.2%)
+117 (2.1%)
+N = 5506
+
+211 (2.0%)
+4265
+(39.4%)
+2280
+(21.1%)
+3799
+(35.1%)
+264 (2.4%)
+N = 10,915
+
+1349
+(68.8%)
+611
+(31.2%)
+N = 1957
+
+2668
+(77.4%)
+781
+(22.6%)
+N = 3390
+
+4417
+(80.2%)
+1089
+(19.8%)
+N = 5348
+
+8434
+(77.3%)
+2481
+(22.7%)
+N = 10,695
+
+238
+(12.2%)
+1249
+(63.8%)
+222
+(11.3%)
+227
+(11.6%)
+21 (1.1%)
+N = 1960
+
+328 (9.7%)
+
+489 (9.1%)
+
+1055 (9.9%)
+
+1399
+(41.3%)
+787
+(23.2%)
+704
+(20.8%)
+172 (5.1%)
+N = 3449
+
+2057
+(38.4%)
+1218
+(22.8%)
+1387
+(25.9%)
+197 (3.7%)
+N = 5506
+
+4705
+(44.0%)
+2227
+(20.8%)
+2318
+(21.7%)
+390 (3.6%)
+N = 10,915
+
+1723
+(87.9%)
+237
+(12.1%)
+1 (1, 34)
+
+2564
+(74.3%)
+885
+(25.7%)
+1 (1, 85)
+
+4037
+(73.3%)
+1469
+(26.7%)
+1 (1, 136)
+
+8324
+(76.3%)
+2591
+(23.7%)
+1 (1, 182)
+
+N = 591
+
+N = 1792
+
+N = 2885
+
+N = 5268
+
+Male
+
+Between 2019 and 2021, we received 11,424 reports of tick en­
+counters through The Tick App. These reports were completed by 5335
+unique participants in the United States, with each tick encounter report
+representing one or more ticks that a user found on a single day. For the
+first set of analyses, we restricted reports to those from the Midwest and
+Northeast, leaving 10,915 records completed by 4411 participants
+(Table 1). Across all years, the majority of participants (62%) had one
+encounter, with a maximum of 182 encounters (Fig. S1). Half of the
+encounters (51%) resulted from self-reported peri‑domestic exposures,
+where users said that the tick was picked up in “my yard” or “my
+neighbor’s property”, while approximately 37% of encounters were
+from recreational exposure. For 12% of reports, participants were un­
+sure of their encounter type. According to self-reports, encounters were
+predominantly with human hosts (71%). Overall, less than half of the
+human-tick encounters (39%) involved an attached tick, although this
+proportion varied according to the species and life stage encountered
+(Tables 2 and S4). Approximately one-fourth of ticks were found on
+dogs; with, again, less than half involving an attached tick (45%). Hosts
+included other companion animals (e.g., cats, rabbits, turtle), wildlife (e.
+g., racoon), and livestock (e.g., horses, goats). Cat encounters included a
+higher proportion of attached ticks compared to other hosts (61%).
+Approximately 3.4% of ticks were found to be loose in the environment,
+either in the user’s home, vehicle or outdoors; with the remaining
+(1.8%) collected for research or unknown purposes.
+Half of the tick encounter submissions from the Midwest and
+Northeast included photos (N = 5440). We excluded 81 photos due to
+low image quality and retained 5359 for tick identification (Fig. 2a). A
+majority of the 2539 unique participants submitted a single photo
+(68%); however, 162 participants submitted five or more photos during
+the study period. Out of all submitted photos, 97% were verified as ticks
+and 91% were composed of three species of ticks: D. variabilis (56%),
+I. scapularis (29%), and A. americanum (7.0%). The remaining tick
+photos were either other (1.2%) or unknown tick species based on the
+photo submitted (4.3%). Across tick and host species, the majority of
+submissions consisted of adult ticks and very few (<1%) consisted of
+larvae (Table S5). For D. variabilis, over 99% were adults and for
+I. scapularis, 83% were adults. Among D. variabilis ticks associated with
+human hosts, 55% were adult females and 40% were adult males; while
+for I. scapularis ticks 58% were adult females and 12% were adult males.
+Adults made up a smaller proportion of A. americanum ticks associated
+with human hosts, with 26% adult female and 20% adult male (Table 2).
+For humans, while the majority of submissions were D. variabilis ticks,
+for dogs, there was roughly the same number of D. variabilis and
+I. scapularis; and for cats, the majority were I. scapularis (Table S6).
+Among participants with a confirmed tick encounter, 2848 users
+(44%) specified the date that the tick was found and enabled GPS
+location services within the app (Fig. 2b). A subset of 842 tick encounter
+reports, completed by 255 users, had sufficient GPS data recorded for
+further movement pattern analysis (i.e., >20 daytime and evening GPS
+points in the four days prior to tick detection), with a median of 170
+points per report (IQR: 63–870). A majority of reports came from users
+in the Midwest (82%), living in rural counties (54%) (Table S7). Finally,
+671 reports, completed by 177 users, included accompanying identifi­
+able photos of tick species, allowing for both movement and species-
+
+Other gender
+identity
+Prefer not to say
+Age Category: User
+data available
+18–22
+23–41
+42–53
+54–72
+73–99
+Region: User data
+available
+Midwest
+Northeast
+Lyme Disease
+Incidence Countyb:
+User data available
+High: Increasing
+High: No
+Change
+Low: Increasing
+Low: No Change
+No Cases
+Returning Users: User
+data available
+One-season user
+Return user
+Number of
+Encounters per
+User [Median (Min,
+Max)]
+Number of
+Submission with
+Images
+
+a
+Tick encounter reporters include unique users who submitted Daily Log or
+Tick Report (i.e., without Daily Log) entries. A tick encounter represents one or
+more ticks that a user reported finding on a single day.
+b
+We used Lyme disease case data publicly available from the Centers for
+Disease Control and Prevention (CDC) to estimate county-level Lyme disease
+incidence for The Tick App users in the Midwest and Northeast regions of the
+United States (2013–2017). We used the number of cases reported (confirmed
+and probable cases) per county and the population size obtained from the Na­
+tional Census in 2010 to estimate a 5-year period Lyme disease annual incidence
+per county and percentage change in cases within that period. This calculation is
+described in Fernandez et al., 2019 (Fernandez et al., 2019).
+
+6
+
+P.A. Kache et al.
+
+Table 2
+Summary of tick encounter photo submissions for human hosts by species (2019–2021) a..
+Ixodes scapularis
+
+Dermacentor variabilis
+
+Life stage
+
+Life stage
+Nymph
+0
+
+Larvae
+0
+
+Unk.
+0
+
+M
+
+86
+
+0
+
+0
+
+0
+
+Unk./
+NA
+Total
+
+2
+
+203
+
+6
+
+16
+
+Attached
+Yes
+
+513
+(69.5%)
+Adult
+321
+
+203
+(27.5%)
+Nymph
+165
+
+6
+(0.8%)
+Larvae
+5
+
+16
+(2.2%)
+Unk.
+15
+
+No
+
+183
+
+25
+
+1
+
+1
+
+Unk./NA
+
+9
+
+13
+
+0
+
+0
+
+Total
+Bloodfed
+Yes
+
+513
+(69.5%)
+Adult
+233
+
+203
+(27.5%)
+Nymph
+115
+
+6
+(0.8%)
+Larvae
+3
+
+16
+(2.2%)
+Unk.
+9
+
+No
+
+211
+
+40
+
+1
+
+1
+
+Unk./NA
+
+69
+
+48
+
+2
+
+6
+
+Total
+
+513
+(69.5%)
+
+203
+(27.5%)
+
+6
+(0.8%)
+
+16
+(2.2%)
+
+Life stage
+
+Total
+425
+(57.6%)
+86 (11.6%)
+
+Sex
+F
+
+Adult
+1196
+
+Nymph
+0
+
+Larvae
+0
+
+Unk.
+0
+
+M
+
+865
+
+0
+
+0
+
+0
+
+227
+(30.8%)
+738
+(100.0%)
+Total
+506
+(68.6%)
+210
+(28.5%)
+22 (2.9%)
+
+Unk./NA
+
+101
+
+1
+
+0
+
+5
+
+Total
+
+1
+(0.0%)
+Nymph
+1
+
+0 (0.0%)
+
+Attached
+Yes
+
+2162
+(99.7%)
+Adult
+874
+
+Larvae
+0
+
+5
+(0.3%)
+Unk.
+2
+
+No
+
+1242
+
+0
+
+0
+
+3
+
+Unk./NA
+
+46
+
+0
+
+0
+
+0
+
+Total
+
+1
+(0.0%)
+Nymph
+1
+
+0 (0.0%)
+
+Bloodfed
+Yes
+
+2162
+(99.7%)
+Adult
+465
+
+Larvae
+0
+
+5
+(0.3%)
+Unk.
+1
+
+No
+
+1404
+
+0
+
+0
+
+0
+
+Unk./
+NA
+Total
+
+293
+
+0
+
+0
+
+4
+
+2162
+(99.7%)
+
+1
+(0.0%)
+
+0 (0.0%)
+
+5
+(0.3%)
+
+738
+(100.0%)
+Total
+360
+(48.8%)
+253
+(34.3%)
+125
+(16.9%)
+738
+(100.0%)
+
+Data for across all host species are provided in Table S5.
+
+Total
+1196
+(55.2%)
+865
+(39.9%)
+107 (4.9%)
+
+Sex
+F
+
+Adult
+74
+
+Nymph
+0
+
+Larvae
+0
+
+Unk.
+0
+
+Total
+74 (25.9%)
+
+M
+
+58
+
+0
+
+0
+
+0
+
+58 (20.3%)
+
+Unk./NA
+
+5
+
+136
+
+8
+
+5
+
+2168
+(100.0%)
+Total
+877
+(40.5%)
+1245
+(57.4%)
+46 (2.1%)
+
+Total
+Attached
+Yes
+
+137
+(47.9)
+Adult
+82
+
+136
+(47.6%)
+Nymph
+93
+
+8
+(2.8%)
+Larvae
+7
+
+5
+(1.7%)
+Unk.
+4
+
+154
+(53.8%)
+286
+(100.0%)
+
+No
+
+52
+
+39
+
+1
+
+1
+
+186
+(65.0%)
+93 (32.5%)
+
+Unk./
+NA
+Total
+
+3
+
+4
+
+0
+
+0
+
+7 (2.4%)
+
+Bloodfed
+Yes
+
+137
+(47.9%)
+Adult
+38
+
+136
+(47.6%)
+Nymph
+83
+
+8
+(2.8%)
+Larvae
+5
+
+5
+(1.7%)
+Unk.
+0
+
+No
+
+73
+
+33
+
+0
+
+2
+
+Unk./
+NA
+Total
+
+26
+
+20
+
+3
+
+3
+
+286
+(100.0%)
+Total
+126
+(44.0%)
+108
+(37.8%)
+52 (18.2%)
+
+137
+(47.9%)
+
+136
+(47.6%)
+
+8
+(2.8%)
+
+5
+(1.7%)
+
+286
+(100.0%)
+
+2168
+(100.0%)
+Total
+467
+(21.5%)
+1404
+(64.8%)
+297
+(13.7%)
+2168
+(100.0%)
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+Adult
+425
+
+7
+
+Sex
+F
+
+a
+
+Amblyomma americanum
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+associations with any color pattern nor other visual cues included in the
+three-question sequence. Ixodes scapularis ticks were most closely asso­
+ciated with “small size” as indicated by the users, while D. variabilis ticks
+were most closely associated with “big size.” The user-selected shape
+(round versus flat) did not show a close association with tick bloodfed
+status. Nonetheless, the first two dimensions only explained 34% of the
+variance contained in the six screening variables, indicating that there is
+substantial variability in the user-selected features that limits the use of
+the size, bloodfed status, and color patterns as complete predictors of
+tick species.
+
+level analyses.
+3.1. Three-question sequence for photo screening
+In the first question of our sequence, we asked users to assess the size
+of the tick as big, medium, or small. Among users who reported finding a
+big or medium tick (N = 4228), 97% had an adult (Table 3). However,
+among users who reported finding a small tick (N = 581), only 46% had
+a juvenile (i.e., larvae or nymph). At the species level, among users that
+reported finding a big tick (N = 2463), 80% had encountered an adult
+D. variabilis tick. And among users that reported finding a small tick,
+39% had an I. scapularis adult and 32% had an I. scapularis juvenile tick.
+In the second question, we asked users whether the tick was flat or
+round (to coarsely determine the bloodfed status of the tick and ability
+to see color patterns on the tick) and compared this to entomologistverified bloodfed status. Using a conservative threshold (≥3 days
+feeding duration and ≥71 certainty score), approximately 7.8% of ticks
+(N = 408) were bloodfed. Eighty percent of these bloodfed ticks were
+reported as attached, 7.5% were reported as not attached, and 12.5% did
+not know the attachment status or did not respond. For these bloodfed
+ticks, users classified 68% as round. Users labeled 62% of bloodfed
+D. variabilis adults as round, and 74% of bloodfed I. scapularis adults as
+round. In an alternative framing, 95% of submissions classified as round
+by users were bloodfed for ≥3 days, based on the engorgement index.
+Finally, for the third question of our sequence assessing users’ clas­
+sification of tick color pattern, among users with confirmed adult
+D. variabilis, I. scapularis, and female A. americanum ticks, 58% selected
+the color pattern matching their respective species descriptions, as
+described in the Methods section (Fig. 4). This increased to 65% when
+we excluded bloodfed ticks from the analysis (Table S8). When users
+indicated color patterns that did not match entomologist-identified
+adult D. variabilis, I. scapularis, and female A. americanum, they most
+commonly selected the “all brown” photo showing male A. americanum
+(Fig. 4, Table S8). Notably, the proportion of entomologist-identified
+D. variabilis reports with users that selected the intended description of
+D. variabilis having a “brown and white pattern” was 56% among onetime submitters, 65% amongst users who submitted between five and
+nine reports, and 76% among users who submitted 10 or more reports
+(excluding bloodfeds from analysis).
+The MCA corroborated expected associations between expertidentified tick species and user-selected color patterns, as shown in
+the biplot of the first two dimensions (Fig. S4). Immature stages
+(comprised primarily of nymphs), however, did not show clear
+
+3.2. Location of tick encounters
+With the GPS data we initially assessed travel away from the users’
+residence (in the four days prior to finding the tick). A small percentage
+of reports (11%) included travel outside the participants’ state of resi­
+dence; whereas 61% of reports included travel outside the county and
+84% outside the zip code of residence (Fig. S5a). When assessing
+available self-reported travel history, 347 reports included the county
+where the user thought they picked up the tick, and 345 included the zip
+code (Table S9). Of the reports with this information available, we did
+not detect GPS points in the county or zip code where the user stated
+they picked up the tick (in the four days prior to tick detection) for 43
+(12%) and 50 (19%) reports, respectively. However, when we extended
+our search window to the 30 days prior to tick detection, an additional
+19 reports included GPS points within these locations.
+Out-of-county visitation in the four days prior to tick detection var­
+ied according to the urbanicity level of the users’ county of residence.
+Approximately three-quarters of users from large metropolitan and rural
+areas traveled out-of-county; whereas a smaller percentage, 50–63%, of
+users from small and medium metropolitan areas did (Fig. S5b). For
+travelers from large metropolitan and rural counties, more out-of-county
+visitation took place on weekends compared to weekdays; whereas
+travelers from medium and small metropolitan counties had higher outof-county visitation during the week (Fig. S5c).
+With respect to land cover, overall, users spent more time in devel­
+oped or planted/cultivated classes compared to forest, grasses, and other
+land covers. However, partitioned by travel history and urbanicity, outof-county travelers from medium and small metropolitan areas spent
+less time in developed areas, and more time in forested and planted/
+cultivated areas compared to non-travelers (Mann-Whitney test; p <
+0.01). Travelers from these urban counties spent more time in nondeveloped areas on weekends compared to on weekdays. Travelers
+from rural areas spent slightly more time in developed, grassy, and other
+land cover types, but less time in planted/cultivated areas compared to
+non-travelers (Fig. 5a); with more time in planted/cultivated areas on
+weekdays compared to on weekends (Mann-Whitney test; p < 0.01)
+(Fig. 5b).
+To validate self-reported exposure location, we examined both the
+urbanicity of the users’ county of residence and their land cover visi­
+tation patterns. More than half of users with self-reported peri‑domestic
+exposures were from rural counties (56%) while those with recreational
+exposures were from rural (44%) and medium metropolitan areas
+(21%). Across counties, users with peri‑domestic exposures spent a
+greater proportion of their time in planted/cultivated and developed
+land covers compared to other land cover types (Mann-Whitney test; p <
+0.01). Whereas users with recreational exposures spent a greater pro­
+portion of their time in developed land cover compared to planted/
+cultivated, grassy, forested, or other land cover classes (Mann-Whitney
+test; p < 0.01) (Fig. 5c).
+Among submissions with both GPS data and photos available, 363
+included encounters with D. variabilis, 42 with I. scapularis, and 10 with
+A. americanum. Among D. variabilis reports, 81% visited grassy areas,
+61% visited forest, and 52% visited planted/cultivated areas. However,
+when distinguishing the amount of time spent in different land cover
+types, we found significant differences (Kruskal-Wallis chi-squared; p <
+
+Table 3
+Tick size as a predictive feature of tick species and life stage a.
+User-selected tick
+size
+
+Entomologist-verified
+species ID
+
+Entomologist-verified life
+stage
+Adult (%)
+Juvenile
+(%)
+
+Big (N = 2463)
+
+Across species
+
+2418
+(98.2)b
+82 (3.3)
+1978 (80.3)
+358 (14.5)
+1666 (94.4)
+90 (5.1)
+903 (51.2)
+673 (38.1)
+301 (51.8)
+17 (2.9)
+55 (9.5)
+229 (39.4)
+
+Medium (N =
+1765)
+Small (N = 581)
+
+Amblyomma americanum
+Dermacentor variabilis
+Ixodes scapularis
+Across species
+Amblyomma americanum
+Dermacentor variabilis
+Ixodes scapularis
+Across species
+Amblyomma americanum
+Dermacentor variabilis
+Ixodes scapularis
+
+33 (1.3)
+25 (1.0)
+NA
+8 (0.3)
+90 (5.1)
+53 (3.0)
+NA
+37 (2.1)
+268 (46.1)
+84 (14.5)
+1 (0.2)
+183 (31.5)
+
+a
+
+Proportions represent the number of ticks with a life stage and species
+identification out of the number of ticks classified as being big, medium, or
+small.
+b
+Example interpretation: 98.2% of ticks classified by users as big were veri­
+fied by entomologists as adult ticks.
+8
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+Fig. 5. Land cover exposure by county of residence, exposure type, and species. 5a. Boxplot comparing five-category land cover classifications between travelers
+versus non-travelers for medium and small metropolitan counties and rural counties. 5b. Among travelers, boxplot comparing five-category land cover classifications
+for weekdays versus weekends for medium and small metropolitan counties and rural counties. 5c. Boxplot comparing five-category land cover classifications for
+peri‑domestic versus recreational exposures (“Other” land cover class is excluded from plot due to low percentages. The median proportion of GPS points in other
+land cover was 3.2% for peri‑domestic exposures and 2.9% for recreational exposures). 5d. Boxplot comparing five-category land cover classifications for the three
+tick species (“Other” land cover class is excluded from plot due to low percentages —the median proportion of GPS points in other land cover was 0.0% for Der­
+macentor variabilis; 0.0% for Ixodes scapularis; and 3.1% for Amblyomma americanum).
+
+Fig. 6. Comparison of Dermacentor variabilis
+and Ixodes scapularis reports with known re­
+cords. 6a. County map comparing The Tick App
+Dermacentor variabilis reports with known re­
+cords from Nieto et al. and Lehane et al. With
+The Tick App records, we excluded individuals
+who had more than 20% of their GPS points
+outside of their county of residence. We iden­
+tified 44 counties that did not have records of
+D. variabilis in these reviewed sources (shown in
+red), and 278 counties that matched known
+records of where the species has been reported
+(shown in teal). 6b. County map comparing The
+Tick App Ixodes scapularis reports with known
+records from CDC (2021) surveillance data,
+(Kopsco et al., 2021b and Nieto et al., 2018).
+We identified three counties with new reports
+of I. scapularis (shown in red), and 241 counties
+that matched known records of where the spe­
+cies has been reported (shown in teal).
+
+9
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+travel history by local context. We parsed out the proportion of time
+spent in natural versus developed areas, and within-county versus
+out-of-county based on users’ self-reported information. These distinc­
+tions enhance our understanding of tick-encounter locations, and indi­
+cate important areas for integration with field-based research.
+Understanding where tick encounters have occurred, accounting for
+travel history, is key to determining whether local risk is emerging or
+established. Given the volume of cases in endemic regions, state health
+departments often have limited capacity to conduct case investigations
+and collect travel history data. Those that do, gather this data in a va­
+riety of ways—including open-ended questions about travel in the 30
+days prior to symptom onset, or specific questions about the destination
+county and reason for travel (Michigan Department of Health and
+Human Services, 2022; West Virginia Department of Health and Human
+Resources, 2022). Additionally, at the time of analysis, travel history
+was not publicly available for concurrently operating community
+science-based surveillance programs (Kopsco et al., 2021b; Nieto et al.,
+2018). With location services through The Tick App, we have started to
+address gaps in knowledge regarding travel history in tick encounter
+risk. Among our submissions, we noted that while a majority of reports
+included travel outside the users’ county and zip code of residence, only
+11% included travel out-of-state and less than 2% included travel
+inter-regionally, indicating that most travel-associated encounters do
+not involve long-distance travel. We also detected a greater percentage
+of GPS points in the counties and zip codes where users reported picking
+up the tick when using a 30-day window prior to tick detection (as
+opposed to four days). This discrepancy may reveal oversights as to
+users’ dates of travel, a lack of familiarity with the length of time that
+ticks remain attached, or potential survival of ticks in clothing or
+equipment followed by subsequent tick-host encounters.
+Travel history is essential when aiming to incorporate community
+science-derived data into tick distribution maps (Eisen and Eisen, 2021).
+Often, such distribution maps are based on users’ residential informa­
+tion, under the assumption that encounters occur within-county. We
+observed a high degree of out-of-county travel in the days preceding tick
+detection, and therefore urge caution when interpreting these maps as
+providing precise information on tick encounter risk. However, by
+aggregating information from multiple encounter reports and data
+sources, we strengthen preliminary indications that tick species are
+emerging for a given jurisdiction or surrounding area (Porter et al.,
+2021). These data also provide preliminary locations for field-based,
+active surveillance to ultimately confirm tick presence within the area.
+When examining time spent in different land covers, the substantial
+proportion of time spent in both developed and planted/cultivated land
+cover classes likely reflects blurred social and spatial boundaries be­
+tween urban and rural areas in the Midwest, United States (Lichter and
+Brown, 2011). Nevertheless, with GPS data we gleaned information on
+activity patterns associated with travel history among heterogeneous
+subpopulations. For instance, nearly three-quarters of tick encounter
+submissions for residents living in large metropolitan and rural counties
+had travel history out-of-county in the four days preceding the tick
+encounter; whereas just over half of medium and small metropolitan
+residents did. Additionally, travelers from medium and small metro­
+politan areas spent less time in developed land cover, and more time in
+forested, planted/cultivated, and other landscapes compared to
+non-travelers; with more time spent in natural areas on weekends.
+Travelers from rural counties, on the other hand, spent slightly more
+time in developed, grassy, and other landscapes, but significantly less
+time in planted/cultivated land cover types compared to non-travelers.
+Transportation studies in the United States have indicated that rural
+residents are more mobile than urban residents, on average covering
+38% more mileage per day, with a higher proportion of households
+having a vehicle available (Pucher and Renne, 2005; Santos et al.,
+2011). Socioeconomic transitions have affected the travel patterns of
+rural workers, such that they often commute to surrounding urban or
+other rural counties for commercial activities and work, potentially
+
+0.01), with users spending significantly more time in planted/cultivated
+land covers compared to forested or grassy land cover types (Dunn’s test;
+p < 0.01) (Fig. 5d). For encounters with I. scapularis, 88% visited forest;
+52% visited planted/cultivated areas and 60% visited grassy areas.
+Finally, among A. americanum encounters, nine included time spent in
+grassy areas; only two reports included >1% of GPS points in forested
+areas. Due to low sample size, we did not examine statistical differences
+in the time spent in each land cover for I. scapularis or A. americanum.
+3.3. Geographic and temporal variation across species
+County-level tick encounter submissions reflected known distribu­
+tions for D. variabilis and I. scapularis. To partially account for travel
+history, we excluded data from 60 individuals who had more than 20%
+of GPS points outside of their county of residence. With this restricted
+data, during 2019–2021, we received D. variabilis reports from 322 out
+of the 1404 counties (23%) in the Northeast and Midwest regions of the
+United States; 44 counties did not have records of D. variabilis published
+in Lehane et al. (2020) and Nieto et al. (2018) (Fig. 6a). A subset of these
+counties (N = 4) had tick encounter submissions from multiple users,
+with more than one life stage identified, and no out-of-county travel
+documented, providing multiple lines of preliminary evidence that the
+tick species may be present locally. We received I. scapularis reports from
+259 out of the 1404 counties (18%) in the region (Fig. 6b). Three
+counties in Michigan did not have previous records of I. scapularis,
+compared to 2021 CDC tick surveillance reports as well as data pub­
+lished by Centers for Disease Control and Prevention (2022), Kopsco
+et al. (2021b) and Nieto et al. (2018) (Fig. S6).
+We also assessed whether temporal patterns of photo submissions
+corresponded to the species’ known phenologies (Fig. S3). For
+I. scapularis, we received 963 photo submissions across all months.
+However, we noted seasonal differences in when adult versus nymphal
+ticks were reported. For adults, there were two distinct peaks in sub­
+missions. The first peak occurred between late March–May, reflecting
+questing activity for overwintering populations; the second took place
+between late September–November, corresponding to increases in
+autumnal populations. Notably, the earliest report was January 5–14th
+(2021) and the latest December 10–20th (2019), providing consistent
+winter detections. For nymphs, we received photo submissions between
+April–November, with a peak in June. Across all years, the earliest
+submissions were April 5–12th in the Midwest (2021) and the latest
+November 9–16th (2020) for the Midwest and Northeast regions. For
+A. americanum, we received 345 adult and nymphal photos between
+April–September of our study period. For D. variabilis, we received 2971
+adult photo submissions between April–late August. Across species,
+while the Midwest region had a larger volume of photos than the
+Northeast, we did not observe marked differences in the temporal pat­
+terns of submissions between regions.
+4. Discussion
+The Tick App is designed to better understand tick exposures in the
+United States and provide users with new tools for understanding ticks
+and tick-bite prevention. The app joins the ranks of other community
+science research programs in producing a robust dataset of both human
+and companion animal encounters with medically-relevant ticks across
+expansive geographic regions (Kopsco et al., 2021c; Saleh et al., 2019).
+With reports primarily generated from the Midwest and Northeast,
+United States, and skewed towards the Midwest, D. variabilis ticks made
+up the largest proportion of submissions. This differed from the Tick­
+Spotters program, for example, which had data skewed towards the
+Northeast region and received similar proportions of D. variabilis and
+I. scapularis ticks (Kopsco et al., 2021b). Therefore, we emphasize the
+importance of socio-ecological context when assessing tick hazard and
+exposure from passive tick report programs (Bron et al., 2020). Our
+study offers new insights by examining tick encounter location and
+10
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+correctly identified their specimens as ticks, with only 3% of photo
+submissions comprising of non-tick arthropods, comparable to the
+TickSpotters program which reported 5% of photos being non-ticks
+(Kopsco et al., 2021a). Prompts of tick coloration and size guided
+users towards species and life stage classification moderately well, with
+65% of users with D. variabilis adults “correctly” selecting the image of a
+“brown and white pattern” tick and 62% classifying I. scapularis adults as
+having a “black shield” (excluding bloodfed ticks attached three or more
+days). Additionally, users classified bloodfed ticks as round with mod­
+erate success; bloodfed I. scapularis adults were classified as round to a
+greater extent than D. variabilis adults. Future efforts may involve
+modifying and validating this three-question sequence to increase the
+reliability of user-selected photo classifications. Furthermore, this sim­
+ple algorithm may be integrated with emerging machine learning
+techniques to expediate tick identification processes and minimize
+human error (Justen et al., 2021; Kopsco et al., 2021a).
+Interestingly, we found that users with 10 or more submissions of
+adult ticks were more successful in differentiating adult species
+compared to the overall user population. This is indicative of a generally
+well-informed user sub-group, or highlights a potential role of The Tick
+App in knowledge-building around tick species recognition (Fernandez
+et al., 2019). Future studies are planned to evaluate The Tick App as an
+educational tool. Eisen and Eisen (2021) comment that user-based tick
+identification without expert validation should be incorporated judi­
+ciously, and with approximately 60% of all adult species identified
+correctly, we concur and strongly caution against the use of this infor­
+mation for medical decision-making. However, with tick burdens on the
+rise in the United States, public knowledge-building and empowerment
+around tick exposures are important (and measurable) outcomes.
+Therefore, we find it important to continue engaging with users in
+species identification. Increasingly, ecologists are harnessing commu­
+nity science data via mobile applications such as eBird and iNaturalist
+for educational and research purposes. eBird investigations incorporate
+observer expertise scores, where the assessment of observer metrics and
+inclusion of these data in species distribution models has been shown to
+improve model performance (Johnston et al., 2018). As initiatives for
+tick species identification gain traction, we see the potential for inte­
+grating statistical corrections and expert indices as a means of data
+quality assurance.
+Furthermore, we find community science to be of critical impor­
+tance, both to address current data gaps and to confront the current
+socio-scientific context in the United States. Specifically, there is a
+landscape of unfamiliarity, misconception, and contentiousness sur­
+rounding ticks and tick-borne disease information (situated within
+sentiments towards public health and scientific institutions more
+broadly) (Beck et al., 2022; Hook et al., 2015; Mattoon et al., 2021). For
+example, Kopsco et al., found that some survey respondents are more
+likely to trust non-traditional sources of tick-borne disease prevention
+information (e.g., online forums) compared to established public health
+sources (e.g., the Centers for Disease Control and Prevention) (Kopsco
+et al., 2022). Yet, in a knowledge, attitudes and behavior survey in the
+Midwest, participants were more likely to use personal prevention
+strategies if they had seen tick-borne disease prevention messages
+compared to participants who had not seen such messages (Beck et al.,
+2022). Approximately 40% of the aforementioned study respondents
+found online or printed materials useful, and 22% indicated that they
+would find a smartphone app very helpful. In contrast to printed ma­
+terials, a smartphone app has the potential to build community and
+engage hard-to-reach information seekers in a bidirectional manner
+(Cardona, 2013). In particular, lack of tick-borne disease awareness and
+language barriers have been identified as contributing factors in the
+under- and delayed diagnosis of Lyme disease among Spanish-speaking
+populations in the United States (Beck et al., 2022; Hu et al., 2019;
+Maxwell et al., 2022). A future direction of The Tick App will be to make
+the platform available in additional languages, starting with Spanish.
+Our study has several limitations, as with any passive surveillance
+
+explaining our observation of more travel to developed areas and less
+travel to planted/cultivated areas on weekends (Lichter and Brown,
+2011). Given that natural areas are riskier for tick encounters, travel
+out-of-county may pose a greater issue for data reliability (with respect
+to encounter location) among urban county residents compared to rural
+ones. An important caveat to the generalizability of these results is that
+two-thirds of the study period took place after the start of the COVID-19
+pandemic, during which travel restrictions shifted outdoor activity
+patterns in the United States. In a previous investigation, we found that
+self-reported peri‑domestic activity was higher for Tick App users in
+medium and small metropolitan areas compared to those in large
+metropolitan areas, potentially explaining the lower proportion of users
+from these smaller urban areas that traveled outside of their home
+jurisdiction (Fernandez et al., 2021).
+With respect to exposure type, users with self-reported peri‑domestic
+exposures spent more time in planted/cultivated land covers. Agricul­
+tural landscapes, therefore, may be an under-recognized setting for tick
+exposures. Furthermore, exposures seem to occur while users are con­
+ducting activities around the property, whether related to landscape
+maintenance or farming. Based on users’ self-reported outdoor activ­
+ities, both in rural and metropolitan counties, primary peri‑domestic
+activities included gardening, mowing the lawn, and removing brush
+from their yard (for approximately 60, 30, and 9% of surveys submit­
+ted); nonetheless, in rural counties, users also reported conducting
+agricultural activities in approximately 9% of surveys (versus ~3% in
+metropolitan counties) (unpublished results from The Tick App). Users
+with recreational exposures spent a higher proportion of their time in
+developed land covers, and visited planted/cultivated, forested, grassy,
+and other land covers (including open water) to a lesser extent. This
+indicates that users with recreational exposures spend much of their
+time in low-risk, developed land covers, but may travel to natural areas
+to conduct the commonly reported outdoor activities, including hiking,
+bird watching, fishing, and spending time at the beach (Bron et al.,
+2020). To better understand self-report data, qualitative and mixed
+methods studies are warranted to disentangle perceived land covers and
+activities of risk, compared to the actual time spent conducting activities
+in these landscapes.
+By merging GPS and photo submission data, we explored land cover
+types that may contribute to different tick species exposures—although
+with a limited sample size. We found that users who encountered
+D. variabilis spent significantly more time in planted/cultivated areas
+compared to forested areas. This corresponds to documented habitat
+associations of D. variabilis, where adult ticks are detected primarily in
+open areas—for example at highest densities clustered in agricultural
+areas and more rarely in wooded habitat with dense vegetation
+(Mathisson et al., 2021; Stein et al., 2008; Trout Fryxell et al., 2015). We
+did not have sufficient submissions with I. scapularis or A. americanum
+for statistical comparisons. Even still, I. scapularis encounters were
+associated with individuals who spent more time in forested land cover
+compared to planted/cultivated or grassy areas, and reflects what is
+known about I. scapularis as a primarily forest-dwelling species. And the
+10 submissions with A. americanum corresponded to individuals who
+spent a greater proportion of time in grassy areas compared to plan­
+ted/cultivated or forested areas. While there is not yet a consensus on
+habitat associations for A. americanum, multiple investigations (con­
+ducted in different geographic locations in the United States) have
+indicated their negative association with high-density vegetation, and
+adult female preference for open canopy sunlight (Ferrell and Brin­
+kerhoff, 2018; Koch and Burg, 2006; Mathisson et al., 2021; Trout
+Fryxell et al., 2015). These results indicate that we may be able to detect
+user visitation patterns that correspond with known tick habitat asso­
+ciations. This also suggests that human mobility data should be inte­
+grated with field studies of tick densities to further our understanding
+both tick hazard and exposure.
+We also explored whether user-selected photos can inform a simple
+algorithm for species identification. We found that a majority of users
+11
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+
+participation, and to all partner institutions, agencies, and enthusiasts
+who promoted the initiative. We are also thankful to Megan Porter,
+Hannah Fenelon, and Patricia Siy, Heather Kopsco, Lee Ann Lyons,
+Sydney Ring, and many others for efforts in photo screening and tick
+identification. We thank the Center for Health Enhancement Systems
+Studies (CHESS), and in particular Adam Maus, Dave Gustafson Jr., and
+Katherine Wright for building and maintaining The Tick App. This
+publication was supported by Cooperative Agreements #U01 CK000505
+and #U01 CK000509, funded by the Centers for Disease Control and
+Prevention (CDC) and the National Science Foundation’s Dynamics of
+Integrated Socio-Environmental Systems (CNH2) program (Award
+#1924061). Its contents are solely the responsibility of the authors and
+do not necessarily represent the official views of CDC or the U.S.
+Department of Health and Human Services.
+
+and observational study. Our conclusions are limited to a population
+that uses smartphone technology and frequently engages in outdoor
+activities, and therefore, cannot be generalized to the general popula­
+tion. Given that The Tick App is marketed as an app to better understand
+human exposure to ticks, we expect that people at greater risk of tick
+encounters and previous tick exposure use it more frequently, intro­
+ducing self-selection bias. Moreover, our population does not include
+people under 18 years of age, limiting conclusions for younger age
+groups. Additionally, in part due to detection biases, our database was
+highly skewed towards D. variabilis submissions, precluding robust
+analysis for I. scapularis and A. americanum or cross-species comparisons.
+However, the data suggest that The Tick App user base is continuing to
+expand, indicating potential to address such research questions in the
+future. Finally, GPS data were available for only a small percentage of
+overall tick encounter submissions, and even when data were available,
+we were limited by the number of points that were recorded. While the
+inclination is an aspiration towards larger datasets, we caution the need
+to balance the granularity of the information collected with the confi­
+dentiality and privacy of users. For example, with location services, we
+were legally obligated to ask users whether they chose to have their
+location data taken continuously, or only while using the application.
+Based on our observations that more tick encounter reports are gener­
+ated via Tick Reports as opposed to Daily Logs, users may be opening the
+app with the specific intent of submitting a tick report rather than log­
+ging their activities over time. While location data provide novel in­
+sights into mobility patterns and land cover exposure, such restrictions
+importantly safeguard user protection.
+This paper provides descriptive analyses demonstrating how The
+Tick App contributes to current passive tick encounter surveillance
+across tick identification, travel history and habitat exposure, as well as
+spatial and temporal patterns of species-specific tick encounters. We
+emphasize the importance of complementing this information with
+field-based entomological and social surveys to assess local risk of tickborne diseases incorporating environmental hazard, exposure, and
+vulnerability.
+
+Supplementary materials
+Supplementary material associated with this article can be found, in
+the online version, at doi:10.1016/j.ttbdis.2023.102163.
+References
+Alkishe, A., Peterson, A.T., 2022. Climate change influences on the geographic
+distributional potential of the spotted fever vectors Amblyomma maculatum and
+Dermacentor andersoni. PeerJ 10, e13279.
+Beck, A., Bjork, J., Biggerstaff, B.J., Eisen, L., Eisen, R., Foster, E., Signs, K., Tsao, J.I.,
+Kough, E., Peterson, M., 2022. Knowledge, attitudes, and behaviors regarding tickborne disease prevention in Lyme disease-endemic areas of the upper Midwest,
+United States. Ticks Tick Borne Dis. 13, 101925 https://doi.org/10.1016/j.
+ttbdis.2022.101925.
+Bron, G.M., Fernandez, M.D.P., Bartholomay, L.C., Diuk-Wasser, M.A., Paskewitz, S.M.,
+Tsao, J.I., 2021. Comment on Eisen and Eisen (2020) ‘benefits and drawbacks of
+citizen science to complement traditional data gathering approaches for medically
+important hard ticks (Acari: ixodidae) in the United States’ regarding the tick app
+and research-based citizen science. J. Med. Entomol. 58, 991–993. https://doi.org/
+10.1093/jme/tjaa288.
+Bron, G.M., Fernandez, M. del P., Larson, S.R., Maus, A., Gustafson, D., Tsao, J.I., DiukWasser, M.A., Bartholomay, L.C., Paskewitz, S.M., 2020. Context matters:
+contrasting behavioral and residential risk factors for Lyme disease between highincidence states in the Northeastern and Midwestern United States. Ticks Tick Borne
+Dis. 11, 101515.
+Cardona, O.D., 2013. The need for rethinking the concepts of vulnerability and risk from
+a holistic perspective: a necessary review and criticism for effective risk
+management. Mapping Vulnerability. Routledge, pp. 37–51.
+Centers for Disease Control and Prevention, 2022. Surveillance for Ixodes scapularis and
+pathogens found in this tick species in the United States. https://www.cdc.gov/tic
+ks/resources/TickSurveillance_Iscapularis-P.pdf (accessed 11 July 2022).
+Centers for Disease Control and Prevention, 2021. National Syndromic Surveillance
+Program. Tick Bite Data Tracker. https://www.cdc.gov/ticks/tickedvisits/index.
+html. accessed 13 July 2022.
+Dewitz, J., 2016. National Land Cover Database. US Geological Survey Data Release,
+Sioux Falls, SD, USA.
+Diuk-Wasser, M.A., VanAcker, M.C., Fernandez, M.P., 2021. Impact of land use changes
+and habitat fragmentation on the eco-epidemiology of tick-borne diseases. J. Med.
+Entomol. 58, 1546–1564.
+Eisen, L., Eisen, R.J., 2021. Benefits and drawbacks of citizen science to complement
+traditional data gathering approaches for medically important hard ticks (Acari:
+ixodidae) in the United States. J. Med. Entomol. 58, 1–9. https://doi.org/10.1093/
+jme/tjaa165.
+Fernandez, M.P., Bron, G.M., Kache, P.A., Larson, S.R., Maus, A., Gustafson Jr, D.,
+Tsao, J.I., Bartholomay, L.C., Paskewitz, S.M., Diuk-Wasser, M.A., 2019. Usability
+and feasibility of a smartphone app to assess human behavioral factors associated
+with tick exposure (The Tick App): quantitative and qualitative study. JMIR Mhealth
+Uhealth 7, e14769. https://doi.org/10.2196/14769.
+Fernandez, P., Bron, G., Kache, P., Tsao, J., Bartholomay, L., Hayden, M., Ernst, K.,
+Berry, K., Diuk-Wasser, M., 2021. Shifts in outdoor activity patterns in the time of
+COVID-19 and its implications for exposure to vector-borne diseases in the United
+States. Res. Sq. https://doi.org/10.21203/rs.3.rs-502309/v1.
+Ferrell, A.M., Brinkerhoff, R.J., 2018. Using landscape analysis to test hypotheses about
+drivers of tick abundance and infection prevalence with Borrelia burgdorferi. Int. J.
+Environ. Health Res. 15, 737. https://doi.org/10.3390/ijerph15040737.
+Flenniken, J.M., Tuten, H.C., Rose Vineer, H., Phillips, V.C., Stone, C.M., Allan, B.F.,
+2022. Environmental drivers of Gulf Coast tick (Acari: ixodidae) range expansion in
+the United States. J. Med. Entomol. 59, 1625–1635. https://doi.org/10.1093/jme/
+tjac091.
+Foster, E., Burtis, J., Sidge, J.L., Tsao, J.I., Bjork, J., Liu, G., Neitzel, D.F., Lee, X.,
+Paskewitz, S., Caporale, D., 2022. Inter-annual variation in prevalence of Borrelia
+burgdorferi sensu stricto and Anaplasma phagocytophilum in host-seeking Ixodes
+scapularis (Acari: ixodidae) at long-term surveillance sites in the upper midwestern
+
+CRediT authorship contribution statement
+Pallavi A. Kache: Data curation, Methodology, Investigation,
+Formal analysis, Visualization, Writing – original draft, Writing – review
+& editing. Gebbiena M. Bron: Conceptualization, Methodology, Formal
+analysis, Investigation, Data curation, Writing – review & editing,
+Project administration, Supervision. Sandra Zapata-Ramirez: Data
+curation, Data curation, Writing – review & editing. Jean I. Tsao:
+Conceptualization, Methodology, Writing – review & editing, Funding
+acquisition. Lyric C. Bartholomay: Conceptualization, Methodology,
+Writing – review & editing, Funding acquisition. Susan M. Paskewitz:
+Conceptualization, Methodology, Writing – review & editing, Funding
+acquisition. Maria A. Diuk-Wasser: Conceptualization, Methodology,
+Writing – review & editing, Funding acquisition, Supervision. Maria del
+Pilar Fernandez: Conceptualization, Methodology, Investigation, Data
+curation, Writing – review & editing, Project administration,
+Supervision.
+Declaration of Competing Interest
+None declared.
+Data availability
+Data will be made available on request.
+Acknowledgments
+The authors are very grateful to all users of The Tick App for their
+12
+
+P.A. Kache et al.
+
+Ticks and Tick-borne Diseases 14 (2023) 102163
+assessment from a Lyme disease endemic community. BMC Infect. Dis. 21, 1–11.
+https://doi.org/10.1186/s12879-021-06622-6.
+Maxwell, S.P., McNeely, C.L., Brooks, C., Thomas, K., 2022. Triangulating the new
+frontier of health geo-data: assessing tick-borne disease risk as an occupational
+hazard among vulnerable populations. Int. J. Environ. Health Res. 19, 9449. https://
+doi.org/10.3390/ijerph19159449.
+Michigan Department of Health & Human Services, 2022. 2022 guidelines for the
+reporting of lyme disease cases using the michigan disease surveillance system
+(MDSS).
+Merry, K., Bettinger, P., 2019. Smartphone GPS accuracy study in an urban environment.
+PLOS ONE 14, e0219890. https://doi.org/10.1371/journal.pone.0219890.
+Nelson, C.A., Saha, S., Kugeler, K.J., Delorey, M.J., Shankar, M.B., Hinckley, A.F.,
+Mead, P.S., 2015. Incidence of clinician-diagnosed Lyme disease, United States,
+2005–2010. Emerg. Infect. Dis. 21, 1625. https://doi.org/10.3201/eid2109.150417.
+Nieto, N.C., Porter, W.T., Wachara, J.C., Lowrey, T.J., Martin, L., Motyka, P.J.,
+Salkeld, D.J., 2018. Using citizen science to describe the prevalence and distribution
+of tick bite and exposure to tick-borne diseases in the United States. PLoS One 13,
+e0199644. https://doi.org/10.1371/journal.pone.0199644.
+Porter, W.T., Wachara, J., Barrand, Z.A., Nieto, N.C., Salkeld, D.J., 2021. Citizen science
+provides an efficient method for broad-scale tick-borne pathogen surveillance of
+Ixodes pacificus and Ixodes scapularis across the United States. Msphere 6. https://doi.
+org/10.1128/mSphere.00682-21 e00682-21.
+Pucher, J., Renne, J.L., 2005. Rural mobility and mode choice: evidence from the 2001
+national household travel survey. Transportation 32, 165–186. https://doi.org/
+10.1007/s11116-004-5508-3 (Amst).
+Raghavan, R.K., Peterson, A.T., Cobos, M.E., Ganta, R., Foley, D., 2019. Current and
+future distribution of the lone star tick, Amblyomma americanum (L.)(Acari: ixodidae)
+in North America. PLoS One 14, e0209082. https://doi.org/10.1371/journal.
+pone.0209082.
+Rosenberg, R., Lindsey, N.P., Fischer, M., Gregory, C.J., Hinckley, A.F., Mead, P.S., Paz
+Bailey, G., Waterman, S.H., Drexler, N.A., Kersh, G.J., 2018. Vital signs: trends in
+reported vectorborne disease cases—United States and territories, 2004–2016. Morb.
+Mortal. Wkly. Rep. 67, 496. https://doi.org/10.15585/mmwr.mm6717e1.
+Runyan, J.D., Steenbergh, T.A., Bainbridge, C., Daugherty, D.A., Oke, L., Fry, B.N., 2013.
+A smartphone ecological momentary assessment/intervention “app” for collecting
+real-time data and promoting self-awareness. PLoS One 8, e71325. https://doi.org/
+10.1371/journal.pone.0071325.
+Saleh, M.N., Sundstrom, K.D., Duncan, K.T., Ientile, M.M., Jordy, J., Ghosh, P., Little, S.
+E., 2019. Show us your ticks: a survey of ticks infesting dogs and cats across the USA.
+Parasit. Vectors 12, 1–11. https://doi.org/10.1186/s13071-019-3847-3.
+Santos, A., McGuckin, N., Nakamoto, H.Y., Gray, D., Liss, S., 2011. Summary of Travel
+Trends: 2009 National Household Travel Survey. United States. Federal Highway
+Administration.
+Stein, K.J., Waterman, M., Waldon, J.L., 2008. The effects of vegetation density and
+habitat disturbance on the spatial distribution of ixodid ticks (Acari: ixodidae).
+Geospat. Health 2, 241–252. https://doi.org/10.4081/gh.2008.247.
+Telford, S., Goethert, H., 2004. Emerging tick-borne infections: rediscovered and better
+characterized, or truly ‘new’? Parasitology 129, S301–S327. https://doi.org/
+10.1017/s0031182003004669.
+TickEncounter, 2021. Tick Growth Comparison Charts. The University of Rhode Island.
+https://web.uri.edu/tickencounter/fieldguide/tick-growth-comparison-charts/.
+accessed 22 August 2022.
+TickTracker, 2022. https://ticktracker.com/(accessed 19 September 2022).
+Tomaštík Jr., J., Tomaštík Sr., J., Saloň, Š., Piroh, R., 2017. Horizontal accuracy and
+applicability of smartphone GNSS positioning in forests. For. Int. J. For. Res. 90,
+187–198.
+Trout Fryxell, R.T., Moore, J., Collins, M., Kwon, Y., Jean-Philippe, S., Schaeffer, S.,
+Odoi, A., Kennedy, M., Houston, A., 2015. Habitat and vegetation variables are not
+enough when predicting tick populations in the Southeastern United States. PLoS
+One 10, e0144092. https://doi.org/10.1371/journal.pone.0144092.
+West Virginia Department of Health and Human Resources, 2022. Lyme Disease
+Reporting Form. http://www.wvdhhr.org/bph/oehp/sdc/PDFs/IDEP/Report_Card.
+pdf (accessed 19 September 2022).
+Yeh, M.-.T., Bak, J.M., Hu, R., Nicholson, M.C., Kelly, C., Mather, T.N., 1995.
+Determining the duration of Ixodes scapularis (Acari: ixodidae) attachment to tickbite victims. J. Med. Entomol. 32, 853–858. https://doi.org/10.1093/jmedent/
+32.6.853.
+
+United States: implications for public health practice. Ticks Tick Borne Dis. 13,
+101886 https://doi.org/10.1016/j.ttbdis.2021.101886.
+Hahn, M.B., Jarnevich, C.S., Monaghan, A.J., Eisen, R.J., 2016. Modeling the geographic
+distribution of Ixodes scapularis and Ixodes pacificus (Acari: ixodidae) in the
+contiguous United States. J. Med. Entomol. 53, 1176–1191. https://doi.org/
+10.1093/jme/tjw076.
+Hai, V.V., Almeras, L., Socolovschi, C., Raoult, D., Parola, P., Pagès, F., 2014. Monitoring
+human tick-borne disease risk and tick bite exposure in Europe: available tools and
+promising future methods. Ticks Tick Borne Dis 5, 607–619. https://doi.org/
+10.1016/j.ttbdis.2014.07.022.
+Hamer, S.A., Curtis-Robles, R., Hamer, G.L., 2018. Contributions of citizen scientists to
+arthropod vector data in the age of digital epidemiology. Curr. Opin. Insect. Sci. 28,
+98–104. https://doi.org/10.1016/j.cois.2018.05.005.
+Hart, C.E., Bhaskar, J.R., Reynolds, E., Hermance, M., Earl, M., Mahoney, M.,
+Martinez, A., Petzlova, I., Esterly, A.T., Thangamani, S., 2022. Community engaged
+tick surveillance and tickMAP as a public health tool to track the emergence of ticks
+and tick-borne diseases in New York. PloS Glob. Public Health, e0000215. https://
+doi.org/10.1371/journal.pgph.0000215.
+Hook, S.A., Nelson, C.A., Mead, P.S., 2015. US public’s experience with ticks and tickborne diseases: results from national HealthStyles surveys. Ticks Tick Borne Dis. 6,
+483–488. https://doi.org/10.1016/j.ttbdis.2015.03.017.
+Hu, S.Y., Starr, J.A., Gharpure, R., Mehta, S.P., Feldman, K.A., Nelson, C.A., 2019.
+Knowledge and prevention of tickborne diseases among Hispanic and non-Hispanic
+residents of Maryland and Virginia. Zoonoses Public Health 66, 805–812.
+Johnston, A., Fink, D., Hochachka, W.M., Kelling, S., 2018. Estimates of observer
+expertise improve species distributions from citizen science data. Methods Ecol.
+Evol. 9, 88–97. https://doi.org/10.1111/2041-210X.12838.
+Justen, L., Carlsmith, D., Paskewitz, S.M., Bartholomay, L.C., Bron, G.M., 2021.
+Identification of public submitted tick images: a neural network approach. PLoS One
+16, e0260622. https://doi.org/10.1371/journal.pone.0260622.
+Koch, K., Burg, J., 2006. Relative abundance and survival of the tick Amblyomma
+americanum collected from sunlit and shaded habitats. Med. Vet. Entomol. 20,
+173–176. https://doi.org/10.1111/j.1365-2915.2006.00617.x.
+Koffi, J., Savage, J., Thivierge, K., Lindsay, L., Bouchard, C., Pelcat, Y., Ogden, N., 2017.
+Evaluating the submission of digital images as a method of surveillance for Ixodes
+scapularis ticks. Parasitology 144, 877–883. https://doi.org/10.1017/
+S0031182017000117.
+Kopsco, H.L., Duhaime, R.J., Mather, T.N., 2021a. Assessing public tick identification
+ability and tick bite riskiness using passive photograph-based crowdsourced tick
+surveillance. J. Med. Entomol. 58, 837–846. https://doi.org/10.1093/jme/tjaa196.
+Kopsco, H.L., Duhaime, R.J., Mather, T.N., 2021b. Crowdsourced tick image-informed
+updates to U.S. county records of three medically important tick species. J. Med.
+Entomol. https://doi.org/10.1093/jme/tjab082 tjab082.
+Kopsco, H.L., Krell, R., Connally, N.P., Mather, T., 2022. Identifying trusted sources of
+Lyme disease prevention information among internet users. Prim. Care 9, 8–2.
+Kugeler, K.J., Schwartz, A.M., Delorey, M.J., Mead, P.S., Hinckley, A.F., 2021. Estimating
+the frequency of Lyme disease diagnoses, United States, 2010–2018 Emerg. Infect.
+Dis. 27, 616. https://doi.org/10.3201/eid2702.202731.
+Lehane, A., Parise, C., Evans, C., Beati, L., Nicholson, W.L., Eisen, R.J., 2020. Reported
+county-level distribution of the American dog tick (Acari: ixodidae) in the contiguous
+United States. J. Med. Entomol. 57, 131–155. https://doi.org/10.1093/jme/tjz119.
+Lichter, D.T., Brown, D.L., 2011. Rural America in an urban society: changing spatial and
+social boundaries. Annu. Rev. Sociol. 37, 565–592. https://doi.org/10.1146/
+annurev-soc-081309-150208.
+Lyons, L.A., Mateus-Pinilla, N., Smith, R.L., 2022. Effects of tick surveillance education
+on knowledge, attitudes, and practices of local health department employees. BMC
+Public Health 22, 1–15. https://doi.org/10.1186/s12889-022-12667-2.
+Mader, E.M., Ganser, C., Geiger, A., Harrington, L.C., Foley, J., Smith, R.L., MateusPinilla, N., Teel, P.D., Eisen, R.J., 2021. A survey of tick surveillance and control
+practices in the United States. J. Med. Entomol. 58, 1503–1512. https://doi.org/
+10.1093/jme/tjaa094.
+Mathisson, D.C., Kross, S.M., Palmer, M.I., Diuk-Wasser, M.A., 2021. Effect of vegetation
+on the abundance of tick vectors in the northeastern United States: a review of the
+literature. J. Med. Entomol. 58, 2030–2037. https://doi.org/10.1093/jme/tjab098.
+Mattoon, S., Baumhart, C., Barsallo Cochez, A.C., MacQueen, D., Snedeker, J., Yancey, C.
+B., Gatch, M., Mader, E.M., 2021. Primary care clinical provider knowledge and
+experiences in the diagnosis and treatment of tick-borne illness: a qualitative
+
+13
+
+

@@ -1,0 +1,240 @@
+pymovements: A Python Package for Eye Movement Data Processing
+Daniel G. Krakowczyk, David R. Reich, Jakob Chwastek, Deborah N. Jakobi, Paul Prasse, Assunta Maria Aurica Süss, Oleksii Turuta, Paweł Kasprowski, Lena A. Jäger (2023). ACM Symposium on Eye Tracking Research and Applications (ETRA). http://arxiv.org/abs/2304.09859. doi:10.1145/3588015.3590134. Licence: cc-by. Text from pdf.
+
+arXiv:2304.09859v1 [cs.HC] 11 Apr 2023
+
+pymovements: A Python Package
+for Eye Movement Data Processing
+Daniel G. Krakowczyk
+
+David R. Reich
+
+Jakob Chwastek
+
+daniel.krakowczyk@uni-potsdam.de
+University of Potsdam
+Potsdam, Germany
+
+david.reich@uni-potsdam.de
+University of Potsdam
+Potsdam, Germany
+
+jakob.chwastek@uni-potsdam.de
+University of Potsdam
+Potsdam, Germany
+
+Deborah N. Jakobi
+
+Paul Prasse
+
+Assunta Süss
+
+deborahnoemie.jakobi@uzh.ch
+University of Zurich
+Zurich, Switzerland
+
+paul.prasse@uni-potsdam.de
+University of Potsdam
+Potsdam, Germany
+
+assunta.suess@uni-potsdam.de
+University of Potsdam
+Potsdam, Germany
+
+Oleksii Turuta
+
+Paweł Kasprowski
+
+Lena A. Jäger
+
+oleksii.turuta@nure.ua
+Kharkiv National University of Radio
+Electronics
+Kharkiv, Ukraine
+
+pawel.kasprowski@polsl.pl
+Silesian University of Technology
+Gliwice, Poland
+
+jaeger@cl.uzh.ch
+University of Zurich
+Zurich, Switzerland
+University of Potsdam
+Potsdam, Germany
+
+ABSTRACT
+We introduce pymovements: a Python package for analyzing eyetracking data that follows best practices in software development,
+including rigorous testing and adherence to coding standards. The
+package provides functionality for key processes along the entire
+preprocessing pipeline. This includes parsing of eye tracker data
+ﬁles, transforming positional data into velocity data, detecting gaze
+events like saccades and ﬁxations, computing event properties like
+saccade amplitude and ﬁxational dispersion and visualizing data
+and results with several types of plotting methods. Moreover, pymovements also provides an easily accessible interface for downloading and processing publicly available datasets. Additionally,
+we emphasize how rigorous testing in scientiﬁc software packages
+is critical to the reproducibility and transparency of research, enabling other researchers to verify and build upon previous ﬁndings.
+
+CCS CONCEPTS
+
+Due to its ease of use and ﬂexibility, Python has become a popular choice among researchers for processing and analyzing eye
+movement data. In this paper, we introduce a new Python package
+called pymovements that provides a set of tools for the processing
+and analysis of eye movement data.
+Data preprocessing functionality of the pymovements package
+includes conversion between positional and velocity gaze data and
+detection of gaze events like ﬁxations and saccades by using dispersion-based and velocity-based methods. Users can also plot eye
+movement data using various visualization functions, including
+heatmaps and trace plots.
+The pymovements package also contains a small library of publicly available datasets that can be downloaded using an accessible
+interface. The package is designed to be extensible, with additional
+datasets expected to be added in the near future. The source code is
+available online at https://github.com/aeye-lab/pymovements and
+is licensed under the MIT License.
+
+• Applied computing → Psychology.
+
+KEYWORDS
+eye movements, preprocessing, event detection, software packages,
+scientiﬁc computing
+
+1
+
+INTRODUCTION
+
+Eye movements are a valuable tool in understanding viewers’ or
+readers’ cognitive processes, state of mind, or other characteristics
+as they are considered “a window to the mind and brain” [7]. They
+are widely used across disciplines, including cognitive psychology,
+linguistics, neuroscience, and human-computer interaction. Hence,
+eye tracking methodology in general and the processing and analysis of eye tracking data in particular is an interdisciplinary ﬁeld
+of research that is essential for the above mentioned disciplines.
+
+2 RELATED WORK
+There exist numerous other Python packages and tools that can
+be used to process or analyze eye movement data [1–3, 5, 6]. However, all these packages lack thorough testing and a comprehensive documentation which are prerequisites for trustworthy results
+in scientiﬁc research. In contrast, pymovements applies a rigorous
+testing scheme following best practices in software engineering
+including an extensive documentation with assisting tutorials.
+Moreover, none of these packages are speciﬁcally optimized for
+performance. pymovements on the other hand leverages features
+from the Polars dataframe package, which is programmed in Rust
+and one of the fastest dataframe software available [4].
+Finally, the initiative to provide and maintain a library of publicly available datasets with eye movement data is a distinguishing
+feature of pymovements.
+
+Krakowczyk et al.
+
+3
+
+PACKAGE DESIGN
+
+pymovements is structured around a central module, the dataset
+module, which provides a uniﬁed interface for working with eye
+movement datasets. This module makes it easy to load eye movement data and save relevant results for a given eye movement
+study. The dataset class provides access to the key functionality
+needed for preprocessing: from transforming positional signals into
+velocity signals, over detecting gaze events such as (micro-)saccades
+and ﬁxations, up to analyzing speciﬁc properties for detected events,
+such as saccade amplitude or ﬁxational dispersion.
+The dataset class is very ﬂexible to allow for a seamless integration of own local datasets. Each dataset object holds recording
+session parameters, gaze dataframes for raw eye gaze signals and
+event dataframes, which contain the detected events within the eye
+gaze signals. These dataframes are organized in a consistent manner, making it easy to work with multiple datasets and compare
+results across studies.
+pymovements also provides a simple interface to access publicly
+available datasets. Except for an example toy dataset, all these public datasets are not part of the pymovements package, but are definitions on where to ﬁnd dataset resources online with additional
+details on how to load the input data to be consistent across several datasets. This implementation is aimed to be simple enough to
+facilitate the inclusion of additional datasets, even to researchers
+without any Python programming experience. The pymovements
+package then automatically takes care of downloading the particular dataset.
+
+4
+
+DOCUMENTATION
+
+pymovements comes with a comprehensive online documentation
+that explains each function and module in detail along with examples of typical usage. In addition to this, we provide detailed and
+comprehensive step-by-step tutorials that guide users through the
+entire data processing pipeline enabling them to use pymovements
+to its full potential. These tutorials cover key use cases in eye movement data processing and are accompanied by a small example toy
+dataset. The documentation is automatically generated from the
+source code and uploaded to the web hoster with each new update, such that it always reﬂects the most recent state of the package. For each update all examples and tutorials are veriﬁed to run
+successfully and to produce the expected results.
+
+5
+
+TESTING
+
+Testing is one of the most important software development processes to maintain high quality and consistency of the software.
+pymovements has a robust testing pipeline to ensure that additions
+to the codebase are thoroughly tested and reviewed before being
+accepted. Every proposed change must have at least one approving review to be incorporated and must pass all existing tests and
+checks of the testing pipeline. We enforce a 100% test coverage and
+a consistent coding style by obligatory linting and type checking.
+
+6
+
+INTEGRATION WITH EXISTING
+SOFTWARE
+
+The pymovements package supports native integration with other
+Python libraries, such as Polars, Pandas, NumPy, and Matplotlib.
+
+All of the obtained data during processing can be easily exported
+into commonly used ﬁle formats such as CSV and Feather ﬁles. Furthermore, pymovements is compatible with the R programming language through the reticulate package. This means that researchers
+can use pymovements’ functionality within the R environment, allowing for seamless integration with R’s extensive library of statistical tools and visualization packages.
+
+7 FUTURE WORK
+pymovements is an evolving package that is continuously being improved and expanded to meet the needs of researchers. We plan to
+add functionality to allow researchers to analyze reading behavior
+and expand the package’s capabilities by including visual stimuli
+such as image and video data into the analysis pipeline.
+To increase the versatility of the package, we plan to add more
+event detection algorithms and public dataset deﬁnitions. Additionally, we are working on adding parsing support for more eye
+trackers, enabling researchers to process and analyze data from a
+wider range of eye-tracking systems.
+
+8 BROADER IMPACT
+One of the key beneﬁts of pymovements is its ability to unify the
+work across diﬀerent research groups working with eye movement
+preprocessing pipelines. By providing a standardized rigorously
+tested interface, pymovements helps to ensure that analyses can
+be easily reproduced and veriﬁed by other researchers, increasing
+the transparency and reliability of eye movement research. Due to
+its permissive open-source license researchers can contribute their
+own methods and datasets, increasing both the visibility of their
+own work and the feature set of the software. pymovements has
+thus the potential to have a broad impact on the ﬁeld of eye movement research, facilitating greater collaboration and reproducibility across diﬀerent research groups.
+
+ACKNOWLEDGMENTS
+This work was partially funded by the German Federal Ministry of
+Education and Research (grant 01IS20043) and is based upon work
+from COST Action MultiplEYE, CA21131, supported by COST (European Cooperation in Science and Technology).
+
+REFERENCES
+[1] Ben Acland, Tom Wallis, and orthographic-pedant. 2016.
+cili: Cili v0.5.4.
+https://doi.org/10.5281/zenodo.48843
+[2] Amanda Doucette. 2019. sideeye v1.0.0a13. https://pypi.org/project/sideeye/
+[3] Upamanyu Ghose and Arvind Srinivasan. 2021.
+PyTrack-NTU v1.1.1.
+https://pypi.org/project/PyTrack-NTU/
+[4] Jan
+Gorecki.
+2021.
+Database-like
+ops
+benchmark.
+https://h2oai.github.io/db-benchmark/
+[5] Thomas
+Kübler.
+2020.
+Perception-Engineers-Toolbox
+v0.2.3.
+https://pypi.org/project/Perception-Engineers-Toolbox/
+[6] Hiroyuki Sogo. 2019. GazeParser v0.11.1. https://pypi.org/project/GazeParser/
+[7] Roger P. G. Van Gompel, Martin H. Fischer, Wayne S. Murray, and Robin Hill
+(Eds.). 2007. Eye Movements: A Window on Mind and Brain. Elsevier Science
+Limited.
+
+

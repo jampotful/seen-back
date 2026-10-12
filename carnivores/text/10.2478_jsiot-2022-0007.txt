@@ -1,0 +1,1349 @@
+Leveraging High Resolution Remote Sensing Images for Vehicle Classification using Sea Lion Optimization with Deep Learning Model
+Zainab Salih Ageed, Hajar Maseeh Yasin, Zryan Najat Rashid, Subhi R. M. Zeebaree (2022). Journal of Smart Internet of Things. https://doi.org/10.2478/jsiot-2022-0007. doi:10.2478/jsiot-2022-0007. Licence: cc-by. Text from pdf.
+
+Journal of Smart Internet of Things (JSIoT)
+VOL 2023, No.02 | 97-113 | 2023
+DOI: 10.2478/jsiot-2022-0007
+
+Article
+
+Leveraging High Resolution Remote Sensing
+Images for Vehicle Classification using Sea Lion
+Optimization with Deep Learning Model
+Zainab Salih Ageed1, Hajar M. Yasin2, Zryan Najat Rashid3, and Subhi R. M. Zeebaree4,*
+1
+
+Computer Science Department, College of Science, Nawroz University, Duhok, Iraq
+
+2
+
+IT Department, Technical College of Informatics-Akre, Duhok Polytechnic University, Duhok, Iraq
+
+3
+
+Computer Network Department, Technical College of Informatics, Sulaimani Polytechnic University, Sulaimani,
+Iraq
+4
+
+Energy Engineering Department, Technical College of Engineering, Duhok Polytechnic University, Duhok, Iraq
+
+*Corresponding author: Subhi R. M. Zeebaree (email: subhi.rafeeq@dpu.edu.krdi)
+Received 25 November 2022; Accepted 30 November 2022; Issue Published 15 December 2023
+
+Abstract: High-resolution remote sensing data renders worldwide images faster than traditional data
+collection strategies. Hence small objects such as cars are easily detected. Vehicle recognition on aerial
+remote sensing images (RSIs) in the complicated background of urban zones has always gained a lot of
+interest in the remote sensing field. The automatic vehicles enumeration research domain plays a significant
+role in several applications, including traffic management and monitoring. Target detection technology will
+be a crucial part of computer vision (CV) technology, and target detection techniques were enforced in
+several domains. Therefore, this study develops a new Vehicle Recognition and Classification using Sea
+Lion Optimization with Deep Learning (VRC-SLODL) model on RSI. In the presented VRC-SLODL
+technique, the major intention lies in recognising and classifying vehicles present in the images. The
+bilateral filtering (BF) technique can initially improve the RSI quality. The VRC-SLODL technique
+employs a modified residual network (ResNet) model to produce a set of feature vectors. Finally, the SLO
+algorithm with long short-term memory (LSTM) model is employed for vehicle classification, where the
+SLO algorithm acts as a hyperparameter optimizer. The experiments were performed on a benchmark
+dataset to examine the better performance of the VRC-SLODL technique. The obtained values reported the
+improved classification performance of the VRC-SLODL technique over other models.
+Keywords: Remote sensing images; sealion optimization; deep learning; vehicle classification; target
+detection
+Copyright © 2023 Journal of Smart Internet of Things (JSIoT) published by Future Science for Digital Publishing and Sciendo . This
+is an open access article license CC BY (https://creativecommons.org/licenses/by/4.0/)
+
+JSIoT, VOL .2023, No. 2, 98
+1. Introduction
+With the progression of remote sensing technologies, remote sensing images (RSI) have seen
+exponential growth [1]. Compared with aerospace RSI, aerial RSI has the merits of accurate
+geometric correction, large imaging scale, and high resolution. Thus, aerial remote sensing is
+considered a significant remote sensing way [2, 3]; it generally leverages balloons or aeroplanes as
+working platforms, and flying altitude lies from meters to kilometres. In aerial RSI, vehicle
+recognition was a crucial technology in military and civil surveillance [4], like urban planning and
+traffic management. Still, the technique of manual analysis for vehicle detection has low data usage
+and poor data timeliness, which can be affected easily by subjective consciousness, physical
+conditions, and mentality [5, 6]. Thus, it is mostly required for executing automated vehicle
+recognition on RSI accurately and efficiently.
+Remote sensing target recognition was to spot the object of interest in RSI after predicting the
+location and type of this target [7]. In the conventional recognition database, the target was focused.
+In contrast, the aviation data was not, and object strength in the aviation image generally appeared
+in arbitrary orientation that relies on the perception of the Earth vision platform [8, 9]. Object
+recognition refers to identifying samples of semantic objects of some classes (like birds, humans,
+or aeroplanes) in video and digital images. Minor target recognition was problematic in target
+recognition tasks [10]. The RSI study has vital applications in environmental management, military,
+transport planning, and disaster management. In addition, vehicles in RSI as a special category,
+whether civilian transportation or military, have a significant meaning and are simultaneously very
+difficult [11].
+Though the obtainability of high-resolution satellite images hastens the object recognition task
+and automates such applications, vehicle identification from satellite images is difficult [12]. The
+reason behind this is that even in high spatial resolution images, vehicles were visible as minute
+spots unidentifiable from foreground areas to identify [13, 14]. Categorizing the identified vehicles
+was very serious since it sometimes could not differentiate small and large vehicles utilizing the
+eye itself from high-resolution images. Over the years, DL approaches were broadly employed in
+several research domains, and the evolving advancement of convolutional neural networks (CNN)
+made certain enhancements [15]. Kim et al. [16] examine integrating more predictive layers as to
+typical Yolov3 utilizing spatial pyramid pooling to complement the recognition accuracy of
+vehicles to huge scale change or make occlusion by another object. In [17], an innovative nearby
+ground vehicle recognition method in aerial infrared images dependent upon a CNN was presented.
+The UAV and infrared sensor utilized during this application can be initially established.
+Afterwards, a new aerial moving environment was created, and an aerial infrared vehicle database
+was unprecedentedly created. The authors released this database (NPU_CS_UAV_IR_DATA)
+utilized in the subsequent study under this domain. Afterwards, an end-to-end CNN was
+constructed. A real-time ground vehicle method was generated with huge counts of detection
+features being iteratively learned.
+In [18], a new end-to-end DL network, such as orientation-aware feature fusion single-stage
+detection (OAFF-SSD), was designed to precise recognition of dense several creating vehicles
+utilizing images in UAV. The projected OAFF-SSD contains 3 important elements as a multi-level
+extracting feature, new feature fusion, and novel orientation-aware bounding box (OABB) offer
+and regression. In the meantime, detailed approaches can be selected for the fast convergence of
+trained loss. In [19], a productive and effective moving vehicle recognition system in aerial infrared
+image orders was presented using fast image registration and the YOLOv3 network. Because of
+insufficiency of infrared vehicle instances, transfer learning (TL) was established for training the
+enhanced YOLOv3 network. Koga et al. [20] examine an unsupervised domain adaptation (DA)
+approach, which could not need to be labelled trained data and, therefore, could preserve
+recognition efficiency in targeted domain at a minimal cost. The authors executed Correlation
+[98]
+
+JSIoT, VOL .2023, No. 2, 99
+alignment (CORAL) DA and adversarial DA to region-related vehicle detectors and enhanced the
+recognition precision by over 10% from the objective domain.
+This study develops a new Vehicle Recognition and Classification using Sea Lion Optimization
+with Deep Learning (VRC-SLODL) model on RSI. In the presented VRC-SLODL technique, the
+RSI quality can be initially improved by the bilateral filtering (BF) technique. The VRC-SLODL
+technique employs a modified residual network (ResNet) model to generate a set of feature vectors.
+Finally, the SLO method with long short-term memory (LSTM) model was exploited for vehicle
+classification, where the SLO algorithm acts as a hyperparameter optimizer. The experiments were
+performed on a benchmark dataset to examine the better performance of the VRC-SLODL method.
+2. The Proposed VRC-SLODL Model
+In this study, we have introduced a new VRC-SLODL algorithm developed for vehicle
+classification on RSI. In the presented VRC-SLODL technique, the major intention lies in
+recognising and classifying vehicles present in the images. It encompasses four major processes:
+BF-based preprocessing, modified ResNet feature extraction, LSTM classification, and SLO-based
+hyperparameter tuning. Fig. 1 illustrates the overall procedure of the VRC-SLODL system.
+
+Figure 1: Overall process of VRC-SLODL system
+2.1. BF-based Preprocessing
+At the primary level, the quality of the RSI can be enhanced by the BF technique. A BF can be
+exploited for de‐noising the input images. The BF used spatial weighted averaging without the help
+of smoothing edges [21]. With the combination of two Gaussian filters, this could be accomplished
+in the spatial domain, one operating and in the intensity domain, the other functioning. The intensity
+and spatial distance were applied for weight, and it is expressed below:
+
+[99]
+
+JSIoT, VOL .2023, No. 2, 100
+1
+
+𝐹(𝑝) = 𝑁 ∑𝑧𝜖𝑆(𝑝) 𝑒
+
+−‖𝑞−𝑝‖2 −𝐹(𝑞)−𝐹(𝑝) 2
+𝐹(𝑞)
+2𝜀𝑒2
+2𝐸𝑆2
+
+(1)
+
+From the expression, 𝑆(𝑝) represents the pixel spatial neighbourhood (𝑝), 𝜀𝑒 and 𝜀𝑟 symbolize
+the variable directs weight in intensity domain and spatial begin to reduce and 𝑁 specifies the
+normalization constant.
+𝑒
+
+−‖𝑞−𝑝‖2
+2𝜀2
+𝑒
+
+𝑒
+
+−𝐹(𝑞)−𝐹(𝑝) 2
+2𝜀2
+𝑒
+
+(2)
+
+BF was exploited in tone mapping, volumetric de‐noising, and other applications like denoising
+images. They may generate basic conditions for down‐sampling the crucial procedure and attain
+acceleration by formulating 2 modest non-linearity and augmented space. The BF can be applied
+as linear convolution.
+2.2. Feature Extraction using modified ResNet Model
+The VRC-SLODL technique employed the modified ResNet model for producing a set of
+feature vectors. The representation capability of the model becomes strong once the network is
+strengthened [22]. In other words, the model extracts additional features from the image. However,
+the network is complex to train. The initial problem encountered during training is gradient
+exploding or vanishing. The amount of calculation increases rapidly due to the surge in the number
+of layers. The gradient becomes unstable in the backpropagation model. For the gradient vanishing
+problems, researcher workers developed various solutions, namely batch normalization,
+initialization of MSRABN, etc. A further challenge is network degradation, viz., with the rise of
+network depth, the model efficiency becomes poor. Especially, the training accuracy would be
+decreased. In the case of overfitting, the training accuracy must be higher. ResNet resolves these
+obstacles using residual learning. Note that ResNet gives two choices, residual mapping and
+identity mapping. Let us assume that the network's input has obtained the optimum level. In other
+words, is optimum. The residual mapping will be set to once they continue to deepen the network.
+Currently, the network has identity mapping. The crucial thing is that network deepening won’t
+reduce the model performance.
+Formally, indicates the original mapping, and then the stacked non-linear layer fits another
+mapping of . Now, represents the residual mapping. The original mapping transformed into
+This study uses Modified ResNet‐152, a variation of ResNet‐152, as a recognizer to categorize
+facial expressions. In the Modified ResNet‐152 framework, the initial layer is 77 convolutions.
+Next, there are four major components with 9 layers, layers, layers, and 9 layers correspondingly.
+Lastly, implement the softmax, global average pooling, and a 7‐way FC layer.
+2.3. LSTM-based Classification
+Here, the LSTM model is used for vehicle classification. Once the feature is made, they are
+inputted into LSTM classification for allotting the appropriate class. LSTM is an exclusive RNN
+model with RNN features, while the memory cell sequence was exploited to improve the learning
+procedure of time series and randomly handling input datasets [23]. Furthermore, the input dataset's
+long-term dependence is captured to prevent the gradient disappearance of data communication, a
+significant enhancement to capture the active modification of time sequence. It is the most
+productive RNN structure and is widely applied. This approach incorporated the input gate, output
+gate, output unit, input unit, and memory cells.
+Input gate:
+𝑔𝑖 = 𝜎(𝑊𝑖𝑥 ⋅ 𝑋𝑧 + 𝑊𝑖ℎ ⋅ ℎ𝑧−1 + 𝑏𝑖 )
+
+(3)
+[100]
+
+JSIoT, VOL .2023, No. 2, 101
+Forget gate:
+𝑔𝑓 = 𝜎(𝑊𝑓𝑥 ⋅ 𝑋𝑧 + 𝑊𝑓ℎ ⋅ ℎ𝑧−1 + 𝑏𝑓 )
+
+(4)
+
+Output gate:
+𝑔𝑜 = 𝜎(𝑊𝑜𝑥 ⋅ 𝑋𝑧 + 𝑊𝑜ℎ ⋅ ℎ𝑧−1 + 𝑏𝑜 )
+
+(5)
+
+Input unit:
+𝐶−∈𝛽(𝑊𝑐𝑥 ⋅𝑋𝑧+𝑊𝑐ℎ ⋅ℎ𝑧−1 +𝑏𝑐 )
+
+(6)
+
+Memory cell:
+𝐶𝑧 = 𝑔𝑓 ⋅ 𝐶𝑧−1 + 𝑔𝑖 ⋅ 𝐶−∈
+
+(7)
+
+Output unit:
+ℎ𝑧 = 𝑔0 ⋅ 𝜃(𝐶𝑡 )
+
+(8)
+
+𝑦 = 𝜙(𝑊𝑦 ⋅ ℎ𝑧 + 𝑏𝑦 )
+
+(9)
+
+From the expression, , , and correspondingly characterize the nonlinear activation function;
+signifies the resulting unit function; and represent the weight and bias coefficients that are
+implemented for establishing the connection amongst the units.
+2.4. Hyperparameter Tuning using SLO Algorithm
+In this work, the SLO algorithm acts as a hyperparameter optimizer. SLO has been proposed
+to resolve global‐scale optimization [24]. It stimulates the hunting behavior of sea lions, including
+how they use their tail and whiskers or capture and encircle prey. SLO provides more competitive
+outcomes than other PSO techniques. SLO is given in the following. Initially, SLO creates (the
+size of population) ‐dimension solution through standard distribution in the searching space. Next,
+in the swarming of sea lions, they recognize the position of prey and gathers others who join
+subgroups for organizing the net, ensuring encircling model. The prey will be regarded as the
+solution nearby or the current optimum solution to the optimum solution. This behaviour is given
+as follows.
+𝑖𝑛𝑖𝑡
+𝑚𝑖𝑛
+𝑚𝑎𝑥
+𝑚𝑖𝑛
+𝑋𝑖𝑗
+= 𝑋𝑖𝑗
++ 𝑟𝑎𝑛𝑑𝑖,𝑗 (𝑋𝑖𝑗
+− 𝑋𝑖,𝑗
+)
+
+(10)
+
+Whereas:
+𝑖 = 1,2, … , 𝑁
+𝑗 = 1,2, … , 𝐷
+𝑖𝑛𝑖𝑡
+𝑋𝑖,𝑗
+indicates the initial location vector of 𝑡ℎ𝑒𝑖-𝑡ℎ solution;
+𝑚𝑖𝑛
+𝑋𝑖,𝑗
+represent the minimal value for 𝑡ℎ𝑒𝑗-𝑡ℎ parameter of 𝑖-𝑡ℎ solutions;
+𝑚𝑎𝑥
+𝑋𝑖𝑗
+symbolizes the maximum value for a 𝑗-𝑡ℎ parameter of 𝑖𝑖-𝑡ℎ solutions;
+
+𝑟𝑎𝑛𝑑indicates a random integer within [0,1].
+The solution is estimated for fitness based on the objective function.
+𝑋𝑔+1 = 𝑋𝑏𝑒𝑠𝑡 − 𝐶|2𝑟𝑋𝑏𝑒𝑠𝑡 − 𝑋𝑔 |
+𝐶 = 2 (1 − 𝑔
+
+𝑔
+
+𝑚𝑎𝑥
+
+(11)
+
+)
+
+(12)
+
+Whereas:
+
+[101]
+
+JSIoT, VOL .2023, No. 2, 102
+𝑔
+
+𝑋𝑏𝑒𝑠𝑡 indicates the location vector of the optimum solution;
+𝑋𝑔 characterize sea lions in iteration 𝑔;
+𝑔signifies the existing iteration of generations;
+𝑔𝑚𝑎𝑥 embodies the maximal amount of generations;
+𝑟symbolizes a arbitrary number withinand 1;
+that is multiplied by 2 to improve search range;
+𝑋𝑔+1 signify the novel location of the searching agent afterwards upgrading;
+𝐶embodies a parameter with a linearly declined value from two to zero, which indicates the
+encircling model once they move to the prey and encircle them.
+Once the sea lion identifies a prey, it calls other members to create and gather a net for capturing
+prey. Sea lions are regarded as leaders, and it leads a group of sea lions towards them and decides
+the group's behaviour. The mathematical expression of this behaviour can be given in the following:
+𝑆𝑃𝑙𝑒𝑎𝑑𝑒𝑟 =
+
+(13)
+
+𝑉1 = 𝑠𝑖𝑛(𝜃)
+
+(14)
+
+𝑉2 = 𝑠𝑖𝑛(𝜙)
+
+(15)
+
+Whereas:
+𝑆𝑃𝑙𝑒𝑎𝑑𝑒𝑟 characterize value that demonstrates decisions of leader ensued by others;
+𝜃characterize the angle of voice reflection in the water;
+𝜙signifies the angle of voice refraction in the water;
+In this study, 𝜃 = 2𝜋𝑟 and 𝜑 = 2𝜋(1 − 𝑟), whereas 𝑟 denotes the random value within[0,1].
+The hunting activity of sea lions led by the leader is defined below:
+Dwindling encircling method: These behaviours depend on the value of 𝐶, and it declined
+linearly from 2 to 0. Hence it enables searching space round the present optimum location to force
+and shrink other searching agents for updating the searching space. Consequently, a recently
+upgraded location of the sea lion is positioned wherever in searching space between its existing
+location and position of optimum agent.
+Circling updating location: Sea lion chases bait ball of fish and hunts them beginning from the
+edge, with 𝑚 a random integer within [−1, 1].
+𝑋𝑔+1 = 𝑋𝑏𝑒𝑠𝑡 + 𝑐𝑜𝑠(2𝜋𝑚)|𝑋𝑏𝑒𝑠𝑡 − 𝑋𝑔 |
+Searching for prey (Exploration stage)
+In this stage, the searching agent upgrades the location according to the randomly chosen sea
+lion. The condition which enables the exploitation stage to perform was once the value of 𝐶 is
+higher than 1, and procedure of identifying novel agent can be formulated as follow:
+𝑔
+
+𝑔
+
+𝑋𝑔+1 = 𝑋𝑟𝑎𝑛𝑑 − 𝐶|2𝑟𝑋𝑟𝑎𝑛𝑑 − 𝑋𝑔 |
+
+(17)
+
+𝑡
+In Eq. (17), 𝑋𝑟𝑎𝑛𝑑
+represents the sea lions randomly chosen from the existing population. 𝑟
+
+represents random integer range from zero to one.
+The work results show that SLO faces noticeable issues with nature‐inspired techniques,
+including slow convergence and being trapped in local optimal. In the presented method, the
+exploration and exploitation stage for ISLO is enhanced than the original SLO algorithm.
+[102]
+
+JSIoT, VOL .2023, No. 2, 103
+
+Algorithm 1: Pseudocode of SLO Algorithm
+
+Input: Population size N, the maximal amount of generations 𝑔𝑚𝑎𝑥
+Output: The better solution 𝑋𝑏𝑒𝑠𝑡
+Randomly initialize the Sea Lion population 𝑋𝑖 (𝑖 = 1,2, … , 𝑛)
+Arrange the population by the fitness values and find the better global solution 𝑋𝑏𝑒𝑠𝑡
+𝑔=1
+While 𝑔 < 𝑔𝑚𝑎𝑥 do
+Compute the value of 𝐶 using Eq. (12)
+Compute 𝑆𝑃𝑙𝑒𝑎𝑑𝑒𝑟 by Eq. (11)
+for 𝑖 < 𝑁 do
+if 𝑆𝑃𝑙𝑒𝑎𝑑𝑒𝑟 < 0.25 then
+if 𝐶 ∨ 1 then
+Upgrade the position of the existing searching agent by Eq. (11)
+Else
+Choose a random agent 𝑋𝑟𝑎𝑛𝑑 from the existing population
+Upgrade the position of the current individual using Eq. (17)
+end if
+else
+Upgrade present searching agent position by Eq. (16)
+end if
+Check the bound and compute the fitness of the novel solution.
+Replace the older solution with the newer one if the fitness value is better 20:
+end for
+
+[103]
+
+JSIoT, VOL .2023, No. 2, 104
+Sort the population and Upgrade the global optimal solution 𝑋𝑏𝑒𝑠𝑡
+𝑔 =𝑔+1
+end while
+Return: 𝑋𝑏𝑒𝑠𝑡
+
+3. Results and Discussion
+In this section, the experimental result analysis of the VRC-SLODL method conducted on the
+VEDAI dataset [25]. The dataset comprises 3687 instances with nine class labels, as shown in Table
+1. Fig. 2 showcases the sample images.
+Class
+
+Table 1: Details of VEDAI Dataset
+No. of Instances
+
+Car
+
+1340
+
+Truck
+
+300
+
+Van
+
+100
+
+Pickup Car
+
+950
+
+Boat
+
+170
+
+Camping Car
+
+390
+
+Other
+
+200
+
+Plane
+
+47
+
+Tractor
+
+190
+
+Total Number of Instances
+
+3687
+
+[104]
+
+JSIoT, VOL .2023, No. 2, 105
+
+Figure 2: Sample images
+Fig. 3 provides the confusion matrices of the VRC-SLODL method on vehicle classification
+results. The figure pointed out that the VRC-SLODL scheme has properly classified different types
+of vehicles under all aspects.
+
+[105]
+
+JSIoT, VOL .2023, No. 2, 106
+
+Figure 3: Confusion matrices of VRC-SLODL system (a-b) TR and TS databases of 90:10
+and (c-d) TR and TS databases of 80:20
+Table 2 shows detailed vehicle classification results of the VRC-SLODL model under 90% of
+TR and 10% of TS datasets. Fig. 4 illustrates a brief vehicle classification outcome of the VRCSLODL approach on 90% of the TR datasets. On car class, the VRC-SLODL model has obtained
+an 𝑎𝑐𝑐𝑢𝑦 of 98.31%, 𝑝𝑟𝑒𝑐𝑛 of 96.66%, 𝑟𝑒𝑐𝑎𝑙 of 98.75%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 97.70%, and MCC of 96.38%.
+Simultaneously, on van class, the VRC-SLODL method has gained 𝑎𝑐𝑐𝑢𝑦 of 99.10%, 𝑝𝑟𝑒𝑐𝑛 of
+88.46%, 𝑟𝑒𝑐𝑎𝑙 of 76.67%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 82.14%, and MCC of 81.90%.Parallelly, on boat class, the
+VRC-SLODL technique has attained 𝑎𝑛𝑎𝑐𝑐𝑢𝑦 of 99.07%, 𝑝𝑟𝑒𝑐𝑛 of 89.68%, 𝑟𝑒𝑐𝑎𝑙 of 90.26%,
+𝐹𝑠𝑐𝑜𝑟𝑒 of 89.97%, and MCC of 89.48%. Finally, ontractor class, theVRC-SLODL approach has
+gained 𝑎𝑐𝑐𝑢𝑦 of 99.19%, 𝑝𝑟𝑒𝑐𝑛 of 94.94%, 𝑟𝑒𝑐𝑎𝑙 of 88.76%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 91.74%, and MCC of
+91.37%.
+Table 2: Vehicle classification outcome of VRC-SLODL method under 90:10 of TR/TS
+databases
+
+Class
+
+𝐴𝑐𝑐𝑢𝑦
+
+𝑃𝑟𝑒𝑐𝑛
+
+𝑅𝑒𝑐𝑎𝑙
+
+𝐹𝑠𝑐𝑜𝑟𝑒
+
+96
+
+9
+
+9
+
+M
+CC
+
+Training Phase (90%)
+Car
+
+98
+
+[106]
+
+9
+
+JSIoT, VOL .2023, No. 2, 107
+.31
+Truck
+Van
+Pickup Car
+Boat
+
+98
+.88
+99
+
+Plane
+Tractor
+Average
+
+7.70
+
+6.38
+
+91
+
+9
+4.95
+
+9
+3.43
+
+9
+2.83
+
+88
+
+7
+6.67
+
+8
+2.14
+
+8
+1.90
+
+97
+
+9
+8.25
+
+9
+7.79
+
+9
+7.02
+
+89
+
+9
+0.26
+
+8
+9.97
+
+8
+9.48
+
+92
+
+9
+4.80
+
+9
+3.85
+
+9
+3.13
+
+93
+
+8
+7.36
+
+9
+0.34
+
+8
+9.86
+
+96
+
+6
+0.47
+
+7
+4.29
+
+7
+6.08
+
+94
+
+8
+8.76
+
+9
+1.74
+
+9
+1.37
+
+93
+
+8
+7.81
+
+9
+0.14
+
+8
+9.78
+
+.46
+98
+
+.85
+
+.33
+99
+
+.07
+
+.68
+98
+
+.70
+Other
+
+8.75
+
+.96
+
+.10
+
+Camping
+Car
+
+.66
+
+.92
+98
+
+.98
+
+.53
+99
+
+.46
+
+.30
+99
+
+.19
+
+.94
+98
+
+.95
+
+.53
+
+Training Phase (10%)
+Car
+Truck
+Van
+Pickup Car
+Boat
+
+97
+
+.83
+
+97
+.10
+
+9
+7.10
+
+9
+7.10
+
+9
+5.37
+
+10
+0.00
+
+10
+0.00
+
+1
+00.00
+
+1
+00.00
+
+1
+00.00
+
+99
+
+10
+0.00
+
+9
+0.00
+
+9
+4.74
+
+9
+4.74
+
+96
+
+9
+8.95
+
+9
+7.92
+
+9
+7.19
+
+88
+
+9
+3.75
+
+9
+0.91
+
+9
+0.53
+
+93
+
+9
+0.91
+
+9
+1.95
+
+9
+0.89
+
+85
+.00
+
+9
+4.44
+
+8
+9.47
+
+8
+9.04
+
+99
+
+10
+0.00
+
+5
+0.00
+
+6
+6.67
+
+7
+0.52
+
+98
+
+85
+
+8
+0.95
+
+8
+2.93
+
+8
+1.95
+
+93
+
+8
+8.46
+
+9
+0.19
+
+9
+0.03
+
+.73
+98
+.92
+99
+.19
+
+Camping
+Car
+
+.91
+.24
+98
+
+.10
+Other
+Plane
+Tractor
+Average
+
+.02
+98
+
+.92
+.46
+.10
+
+.00
+98
+
+.92
+
+.92
+
+Fig. 5 demonstrates a brief vehicle classification outcome of the VRC-SLODL approach on
+10% of the TS database. On car class, the VRC-SLODL algorithm has attained an 𝑎𝑐𝑐𝑢𝑦 of 97.83%,
+[107]
+
+JSIoT, VOL .2023, No. 2, 108
+𝑝𝑟𝑒𝑐𝑛 of 97.10%, 𝑟𝑒𝑐𝑎𝑙 of 97.10%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 97.10%, and MCC of 95.37%. In parallel, on van
+class, the VRC-SLODL algorithm has 𝑎𝑛𝑎𝑐𝑐𝑢𝑦 of 99.73%, 𝑝𝑟𝑒𝑐𝑛 of 100%, 𝑟𝑒𝑐𝑎𝑙 of 90%, 𝐹𝑠𝑐𝑜𝑟𝑒
+of 94.74%, and MCC of 94.74%. Parallelly, in boat class, the VRC-SLODL technique has achieved
+𝑎𝑛𝑎𝑐𝑐𝑢𝑦 of 99.19%, 𝑝𝑟𝑒𝑐𝑛 of 88.24%, 𝑟𝑒𝑐𝑎𝑙 of 93.75%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 90.91%, and MCC of 90.53%.
+Lastly, on tractor class, the VRC-SLODL methodology has obtained an 𝑎𝑐𝑐𝑢𝑦 of 98.10%, 𝑝𝑟𝑒𝑐𝑛
+of 85%, 𝑟𝑒𝑐𝑎𝑙 of 80.95%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 82.93%, and MCC of 81.95%.
+
+Figure 4: Result analysis of VRC-SLODL approach on 90% of TR database
+
+Figure 5: Result analysis of VRC-SLODL approach on 10% of TS database
+Table 3 shows a brief vehicle classification outcome of the VRC-SLODL technique under 80%
+of TR and 20% of TS databases.
+Fig. 6 portrays a brief vehicle classification outcome of the VRC-SLODL algorithm on 80%
+[108]
+
+JSIoT, VOL .2023, No. 2, 109
+of the TR datasets. On car class, the VRC-SLODL method has attained 𝑎𝑛𝑎𝑐𝑐𝑢𝑦 of 97.69%, 𝑝𝑟𝑒𝑐𝑛
+of 95.42%, 𝑟𝑒𝑐𝑎𝑙 of 98.42%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 96.90%, and MCC of 95.09%. In parallel, on van class, the
+VRC-SLODL technique has attained an 𝑎𝑐𝑐𝑢𝑦 of 98.30%, 𝑝𝑟𝑒𝑐𝑛 of 83.67%, 𝑟𝑒𝑐𝑎𝑙 of 49.40%,
+𝐹𝑠𝑐𝑜𝑟𝑒 of 62.12%, and MCC of 63.55%. Concomitantly, on boat class, the VRC-SLODL approach
+has gained 𝑎𝑐𝑐𝑢𝑦 of 98.41%, 𝑝𝑟𝑒𝑐𝑛 of 85.59%, 𝑟𝑒𝑐𝑎𝑙 of 77.10%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 81.12%, and MCC of
+80.41%. Finally, on tractor class, the VRC-SLODL approach has gained 𝑎𝑐𝑐𝑢𝑦 of 98.91%, 𝑝𝑟𝑒𝑐𝑛
+of 88.73%, 𝑟𝑒𝑐𝑎𝑙 of 86.90%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 87.80%, and MCC of 87.19%.
+Table 3: Vehicle classification outcome of VRC-SLODL method under 80:20 of TR/TS
+databases
+Class
+
+𝐴𝑐𝑐𝑢𝑦
+
+M
+
+𝑃𝑟𝑒𝑐𝑛
+
+𝑅𝑒𝑐𝑎𝑙
+
+𝐹𝑠𝑐𝑜𝑟𝑒
+
+CC
+
+Training Phase (80%)
+Car
+
+9
+7.69
+
+9
+5.42
+
+9
+8.42
+
+9
+6.90
+
+9
+5.09
+
+Truck
+
+9
+8.34
+
+8
+8.16
+
+9
+1.53
+
+8
+9.81
+
+8
+8.93
+
+Van
+
+9
+8.30
+
+8
+3.67
+
+4
+9.40
+
+6
+2.12
+
+6
+3.55
+
+9
+7.73
+
+9
+3.56
+
+9
+8.05
+
+9
+5.75
+
+9
+4.25
+
+9
+8.41
+
+8
+5.59
+
+7
+7.10
+
+8
+1.12
+
+8
+0.41
+
+9
+8.10
+
+9
+0.37
+
+9
+2.09
+
+9
+1.22
+
+9
+0.16
+
+Other
+
+9
+8.61
+
+8
+8.73
+
+8
+3.44
+
+8
+6.01
+
+8
+5.32
+
+Plane
+
+9
+8.88
+
+7
+2.73
+
+2
+1.05
+
+3
+2.65
+
+3
+8.76
+
+Tractor
+
+9
+8.81
+
+8
+8.73
+
+8
+6.90
+
+8
+7.80
+
+8
+7.19
+
+Average
+
+9
+8.32
+
+8
+7.44
+
+7
+7.55
+
+8
+0.38
+
+8
+0.41
+
+Pickup
+Car
+Boat
+Camping
+Car
+
+Training Phase (20%)
+Car
+
+9
+7.70
+
+9
+4.85
+
+9
+8.85
+
+9
+6.81
+
+9
+5.06
+
+Truck
+
+9
+7.29
+
+8
+3.33
+
+8
+5.94
+
+8
+4.62
+
+8
+3.14
+
+Van
+
+9
+8.24
+
+7
+0.00
+
+4
+1.18
+
+5
+1.85
+
+5
+2.89
+
+9
+7.02
+
+9
+0.72
+
+9
+7.78
+
+9
+4.12
+
+9
+2.24
+
+9
+8.51
+
+9
+3.75
+
+7
+6.92
+
+8
+4.51
+
+8
+4.18
+
+Pickup
+Car
+Boat
+
+[109]
+
+JSIoT, VOL .2023, No. 2, 110
+
+Camping
+
+9
+8.51
+
+8
+9.87
+
+9
+5.95
+
+9
+2.81
+
+9
+2.04
+
+Other
+
+9
+8.37
+
+9
+3.02
+
+8
+1.63
+
+8
+6.96
+
+8
+6.30
+
+Plane
+
+9
+9.19
+
+1
+00.00
+
+3
+3.33
+
+5
+0.00
+
+5
+7.50
+
+Tractor
+
+9
+8.64
+
+9
+4.87
+
+8
+2.22
+
+8
+8.10
+
+8
+7.63
+
+Average
+
+9
+8.16
+
+9
+0.05
+
+7
+7.09
+
+8
+1.08
+
+8
+1.22
+
+Car
+
+Fig. 7 illustrates a brief vehicle classification outcomes of the VRC-SLODL model on 20% of
+the TS database. On car class, the VRC-SLODL model has obtained an 𝑎𝑐𝑐𝑢𝑦 of 97.70%, 𝑝𝑟𝑒𝑐𝑛
+of 94.85%, 𝑟𝑒𝑐𝑎𝑙 of 98.85%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 96.81%, and MCC of 95.06%. Simultaneously, on van class,
+the VRC-SLODL approach has obtained 𝑎𝑐𝑐𝑢𝑦 of 98.24%, 𝑝𝑟𝑒𝑐𝑛 of 70%, 𝑟𝑒𝑐𝑎𝑙 of 41.18%, 𝐹𝑠𝑐𝑜𝑟𝑒
+of 51.85%, and MCC of 52.89%. Simultaneously, on boat class, the VRC-SLODL approach has
+achieved 𝑎𝑐𝑐𝑢𝑦 of 98.51%, 𝑝𝑟𝑒𝑐𝑛 of 93.75%, 𝑟𝑒𝑐𝑎𝑙 of 76.92%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 84.51%, and MCC of
+84.18%. Finally, on tractor class, the VRC-SLODL method has gained 𝑎𝑐𝑐𝑢𝑦 of 98.64%, 𝑝𝑟𝑒𝑐𝑛 of
+94.87%, 𝑟𝑒𝑐𝑎𝑙 of 82.22%, 𝐹𝑠𝑐𝑜𝑟𝑒 of 88.10%, and MCC of 87.63%.
+
+Figure 6: Result analysis of VRC-SLODL method on 80% of TR dataset
+
+[110]
+
+JSIoT, VOL .2023, No. 2, 111
+
+Figure 7: Result analysis of VRC-SLODL method on 20% of TS dataset
+For exhibiting the enhanced performance of the VRC-SLODL approach, a comparative
+𝑎𝑐𝑐𝑢𝑦 examination with existing models takes place in Table 4. The obtained values inferred that
+the LeNet model had shown decreased performance with an 𝑎𝑐𝑐𝑢𝑦 of 80.02%. In contrast, the
+AlexNet model has reported a slightly improved 𝑎𝑐𝑐𝑢𝑦 of 88.92%. Moreover, the VGG-16 model
+has tried to accomplish a moderately reasonable 𝑎𝑐𝑐𝑢𝑦 of 94.38%. But the VRC-SLODL model
+has shown superior performance with an 𝑎𝑐𝑐𝑢𝑦 of 98.95%. These results signified the betterment
+of the VRC-SLODL method over other DL methods.
+Table 4: Accuracy analysis of VRC-SLODL technique with recent systems
+Methods
+
+𝐴𝑐𝑐𝑢𝑦 (%
+)
+
+LeNet
+
+80.02
+
+AlexNet
+
+88.92
+
+VGG-16
+
+94.38
+
+VRCSLODL
+
+98.95
+
+4. Conclusion
+In this study, we have introduced a new VRC-SLODL method developed for vehicle
+classification on RSI. In the presented VRC-SLODL technique, the major intention lies in
+recognising and classifying vehicles present in the images. Firstly, the quality of the RSI can be
+enhanced by the BF technique. The VRC-SLODL technique employed by the modified ResNet
+model is used to produce a set of feature vectors. Eventually, the SLO algorithm with the LSTM
+approach is used for vehicle classification, where the SLO algorithm acts as a hyperparameter
+optimizer. The experiments were conducted on a benchmark dataset to examine the better
+performance of the VRC-SLODL method. The obtained values reported the improved classification
+performance of the VRC-SLODL technique over other models. In the upcoming years, the
+[111]
+
+JSIoT, VOL .2023, No. 2, 112
+performance of the VRC-SLODL method can be improvized by fusion-based DL models.
+References
+[1] X. Wu, W. Li, D. Hong, J. Tian, R. Tao et al., "Vehicle detection of multi-source remote sensing data using
+active fine-tuning network," ISPRS Journal of Photogrammetry and Remote Sensing, vol. 167, pp. 39-53, 2020,
+doi: 10.1016/j.isprsjprs.2020.06.016
+[2] M. Mandal, M. Shah, P. Meena, S. Devi and S.K. Vipparthi, "AVDNet: A small-sized vehicle detection
+network for aerial visual data," IEEE Geoscience and Remote Sensing Letters, vol. 17, no. 3, pp.494-498, 2019.
+[3] S.A. Ahmadi, A. Ghorbanian and A. Mohammadzadeh, "Moving vehicle detection, tracking and traffic
+parameter estimation from a satellite video: A perspective on a smarter city," International journal of remote
+sensing, vol. 40, no. 22, pp. 8379-8394, 2019.
+[4] Y. Koga, H. Miyazaki and R. Shibasaki, "A CNN-based method of vehicle detection from aerial images using
+hard example mining," remote sensing, vol. 10, no. 1, p. 124, 2018.
+[5] B. Ma, Z. Liu, F. Jiang, Y. Yan, J. Yuan et al., "Vehicle detection in aerial images using rotation-invariant
+cascaded forest," IEEE Access, vol. 7, pp. 59613-59623, 2019, doi: 10.1109/ACCESS.2019.2915368.
+[6] H. Song, H. Liang, H. Li, Z. Dai and X. Yun, "Vision-based vehicle detection and counting system using deep
+learning in highway scenes," European Transport Research Review, vol. 11, no. 1, pp. 1-16, 2019.
+[7] F. Zhang, C. Li and F. Yang, "Vehicle detection in urban traffic surveillance images based on convolutional
+neural networks with feature concatenation," Sensors, vol. 19, no. 3, p. 594, 2019.
+[8] S. Zhang, G. He, H.B. Chen, N. Jing and Q. Wang, "Scale adaptive proposal network for object detection in
+remote sensing images," IEEE Geoscience and Remote Sensing Letters, vol. 16, no. 6, 2019, pp.864-868.
+[9] K. Li, G. Wan, G. Cheng, L. Meng and J. Han, "Object detection in optical remote sensing images: A survey
+and a new benchmark," ISPRS Journal of Photogrammetry and Remote Sensing, vol. 159, pp. 296-307, 2020,
+doi: 10.48550/arXiv.1909.00133.
+[10] H. Yao, R. Qin and X. Chen, "Unmanned aerial vehicle for remote sensing applications—A review," Remote
+Sensing, vol. 11, no. 12, p. 1443, 2019.
+[11] R. Bibi, Y. Saeed, A. Zeb, T.M. Ghazal, T. Rahman et al., "Edge AI-based automated detection and
+classification of road anomalies in VANET using deep learning," Computational intelligence and neuroscience,
+2021, doi: 10.1155/2021/6262194.
+[12] S.M. Azimi, E. Vig, R. Bahmanyar, M. Körner and P. Reinartz, "Towards multi-class object detection in
+unconstrained remote sensing imagery," In Asian conference on computer vision, pp. 150-165, 2018, doi:
+10.1007/978-3-030-20893-6_10.
+[13] J. Rabbi, N. Ray, M. Schubert, S. Chowdhury and D. Chao, "Small-object detection in remote sensing images
+with end-to-end edge-enhanced GAN and object detector network," Remote Sensing, vol. 12, no. 9, p. 1432,
+2020.
+[14] X. Zhang, L. Han, L. Han and L. Zhu, "How well do deep learning-based methods for land cover classification
+and object detection perform on high resolution remote sensing imagery?," Remote Sensing, vol. 12, no. 3, p.
+417, 2020.
+[15] S.A. Ahmadi, A. Ghorbanian and A. Mohammadzadeh, "Moving vehicle detection, tracking and traffic
+parameter estimation from a satellite video: A perspective on a smarter city," International journal of remote
+sensing, vol. 40, no. 22, pp. 8379-8394, 2019.
+[16] K.J. Kim, P.K. Kim, Y.S. Chung and D.H. Choi, "Multi-scale detector for accurate vehicle detection in traffic
+surveillance data," IEEE Access, vol. 7, pp. 78311-78319, 2019, doi: 10.1109/ACCESS.2019.2922479.
+[17] X. Liu, T. Yang and J. Li, "Real-time ground vehicle detection in aerial infrared imagery based on
+convolutional neural network," Electronics, vol. 7, no. 6, p. 78, 2018.
+[18] Y. Guo, Y. Xu and S. Li, "Dense construction vehicle detection based on orientation-aware feature fusion
+convolutional neural network," Automation in Construction, vol. 112, p. 103124, 2020, doi:
+10.1016/j.autcon.2020.103124
+[19] X.X. Zhang and X. Zhu, "Moving vehicle detection in aerial infrared image sequences via fast image
+registration and improved YOLOv3 network," International Journal of Remote Sensing, vol. 41, no. 11, pp.
+4312-4335, 2020.
+[20] Y. Koga, H. Miyazaki and R. Shibasaki, "A method for vehicle detection in high-resolution satellite images
+that uses a region-based object detector and unsupervised domain adaptation," Remote Sensing, vol. 12, no. 3,
+p. 575, 2020.
+[21] M. Elhoseny and K. Shankar, "Optimal bilateral filter and convolutional neural network based denoising
+
+[112]
+
+JSIoT, VOL .2023, No. 2, 113
+method of medical image measurements," Measurement, vol. 143, pp. 125-135, 2019, doi:
+10.1016/j.measurement.2019.04.072
+[22] W. Xu and R.S. Cloutier, "A facial expression recognizer using modified ResNet-152," EAI Endorsed
+Transactions on Internet of Things, vol. 7, no. 28, p. e5, 2022.
+[23] A. Girma, X. Yan and A. Homaifar, "Driver identification based on vehicle telematics data using LSTMrecurrent neural network," In EEE 31st International Conference on Tools with Artificial Intelligence (ICTAI),
+pp. 894-902, 2019, doi: 10.1109/ICTAI.2019.00127.
+[24] B.M. Nguyen, T. Tran, T. Nguyen and G. Nguyen, "An Improved Sea Lion Optimization for Workload
+Elasticity Prediction with Neural Networks," International Journal of Computational Intelligence Systems, vol.
+15, no. 1, pp. 1-26, 2022.
+[25] S. Razakarivony and F. Jurie, “Vehicle detection in aerial imagery: A small target detection benchmark,”
+Journal of Visual Communication and Image Representation, vol. 34, pp. 187–203, 2016,
+doi:10.1016/j.jvcir.2015.11.002.
+
+[113]
+
+

@@ -1,0 +1,916 @@
+Dolphin-Inspired Target Detection for Sonar and Radar
+T.G. Leighton, P. J. WHITE (2015). Archives of Acoustics. https://doi.org/10.2478/aoa-2014-0037. doi:10.2478/aoa-2014-0037. Licence: cc-by-nc-nd. Text from pdf.
+
+Copyright c 2014 by PAN – IPPT
+
+ARCHIVES OF ACOUSTICS
+
+DOI: 10.2478/aoa-2014-0037
+
+Vol. 39, No. 3, pp. 319–332 (2014)
+
+Dolphin-Inspired Target Detection for Sonar and Radar
+Timothy LEIGHTON, Paul WHITE
+Institute of Sound and Vibration Research (ISVR)
+Faculty of Engineering and the Environment
+University of Southampton
+Highfield, Southampton SO17 1BJ, UK; e-mail: T.G.Leighton@soton.ac.uk
+(received May 28, 2014; accepted July 24, 2014 )
+Gas bubbles in the ocean are produced by breaking waves, rainfall, methane seeps, exsolution, and a
+range of biological processes including decomposition, photosynthesis, respiration and digestion. However
+one biological process that produces particularly dense clouds of large bubbles, is bubble netting. This
+is practiced by several species of cetacean. Given their propensity to use acoustics, and the powerful
+acoustical attenuation and scattering that bubbles can cause, the relationship between sound and bubble nets is intriguing. It has been postulated that humpback whales produce ‘walls of sound’ at audio
+frequencies in their bubble nets, trapping prey. Dolphins, on the other hand, use high frequency acoustics for echolocation. This begs the question of whether, in producing bubble nets, they are generating
+echolocation clutter that potentially helps prey avoid detection (as their bubble nets would do with manmade sonar), or whether they have developed sonar techniques to detect prey within such bubble nets
+and distinguish it from clutter. Possible sonar schemes that could detect targets in bubble clouds are
+proposed, and shown to work both in the laboratory and at sea. Following this, similar radar schemes are
+proposed for the detection of buried explosives and catastrophe victims, and successful laboratory tests
+are undertaken.
+Keywords: sonar, radar, cetacean, dolphin, whale, mines, explosives, nonlinear, wake.
+
+1. Introduction
+Bubbles are the most powerful naturally-occurring
+scatterers of sound (Leighton, 2007). Humans have
+spent over a century researching this interaction for
+a range of applications (Ainslie, Leighton, 2009).
+These include attempts to derive beneficial effects from
+bubble acoustics, in fields as diverse as: climate science
+for air/sea transfer (Thorpe, 1992; Farmer et al.,
+1993; Phelps, Leighton, 1998; Deane, Stokes,
+1999; Brooks et al., 2009; Vagle et al., 2010)
+and seabed methane (Klusek et al., 1995; Lyons
+et al., 1996; Tegowski et al., 2006; McGinnis et al.,
+2006; Leighton, Robb, 2008; Leighton, White,
+2012); the processing and monitoring of pharmaceuticals and food (Campbell, Mougeot, 1999; Skumiel et al., 2013), and of fuel and coolant (Leighton
+et al., 2012a); the generation of microfluidic devices
+(Carugo et al., 2011); ultrasonic cleaning (Leighton
+et al., 2005; Offin et al., 2014); and, in biomedicine,
+the provision of acoustic contrast agents and drug delivery vectors (Ferrara et al., 2007), and the use of
+
+cavitation as a therapy monitor (McLaughlan et al.,
+2010; Leighton et al., 2008a). Studies also include
+attempts to mitigate or exploit the detrimental effects of bubbles, for example in the cavitation erosion of turbines and propellers (Leighton et al., 2003;
+Szantyr, Koronowicz, 2006), ship noise and its environmental impact (Kozaczka, Grelowska, 2004;
+Parks et al., 2007; Grelowska et al., 2013), and the
+sonar clutter that oceanic bubbles can produce. With
+improvements in computing resources, and increases
+in the power of sonar sources and the bandwidth of
+receivers (Kozaczka, Grelowska, 1999; Ainslie,
+2010), it became clear that the bubbles can readily be driven to produce nonlinear effects (Leighton
+et al., 1997; 2004a; Lauterborn et al., 2008; Baranowska, 2012), although the models used in sonar
+studies to describe such scattering were predominantly
+linear and steady state (Clarke, Leighton, 2000;
+Ainslie, Leighton, 2011). This paper reviews investigations into whether the inherent nonlinearity
+in bubble acoustics can improve sonar performance in
+bubbly water.
+
+320
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+
+In the last twenty years, military sonar that was
+designed in the Cold War for the deep, dark, quiet
+waters of the Arctic, has been deployed in shallow
+coastal regions (Leighton, Balleri, 2012), where its
+operation is compromised by the presence of bubbles
+from breaking waves, river outflows, biological activity
+and decomposition etc. Whales and dolphins have however spent millions of years evolving acoustic systems
+to work in such environments. This paper describes
+how speculation on whether humpback whales hunt by
+blowing bubble nets to form impassable walls of sound,
+led to further speculation of how dolphins echolocate
+successfully when they use bubble nets. This in turn
+led to the development of the world’s only manmade
+sonar system that can operate in bubbly water; and,
+furthermore, to radar technology for the detection of
+buried explosives and catastrophe victims.
+
+2. Do whales call in spirals?
+This study was stimulated around 15 years ago by
+an old aerial photograph (Fig. 1a; Williams, 1988)
+of a humpback whale generating what appeared to be
+a circular net of bubbles. This well-known process is
+used by the whales to catch prey that do not cross
+
+the wall of bubbles, and so are trapped within the
+‘bubble net’, making an easy meal for the whales
+when they swim up from the base of the net, mouths
+agape (Sharpe, Dill, 1997; Valsecchi et al., 2002).
+The reason why fish and other prey do not cross the
+bubble wall was not clear. Consequently the following
+hypothesis was formed: if whales were to generate
+loud signals in the appropriate frequency range, these
+would be trapped within the net, forming a ‘wall of
+sound’ that the prey would not cross (particularly if
+the frequencies resonated with their swim bladders)
+(Leighton, 2004; Leighton et al., 2004b). This
+hypothesis was strengthened by two subsequent
+observations. The first was that the calls that whales
+made when they hunted with bubble bets were unlike
+the calls they made at any other time, and moreover
+these calls are very loud containing energy up to
+the low kHz regime (which assists in trapping the
+sound). The second was that more recent photographs
+revealed that the bubble nets tended to have spiral,
+not circular, geometry (Fig. 1b-d). Ray theory indicated that the spiral net in the photograph not only
+generated an acoustic trap, but produced a quiet zone
+(Fig. 2; Leighton et al., 2007a; 2007b). This quiet
+zone, which is where presumably the prey congregate
+coincided with the location where the whales lunge
+
+Fig. 1. (a) Aerial view of a humpback bubble net (photograph by A. Brayton, reproduced from Williams (1988)). (The
+author has obtained permission from the publisher but has been unable to contact the photographer.) (b)–(d) Three
+images illustrating the formation of a spiral bubble net, the feeding whales breaking the surface (above the yellow arrow) in frame (d). (Photographs (b)–(d) by Tim Voorheis/www.gulfofmaineproductions.com. Photographs were taken in
+compliance with United States Federal regulations for aerial marine mammal observation).
+
+Fig. 2. Plan view of 2D spiral bubble net. (a) A single ray is launched. It reflects off the outer wall of the bubble-free arm
+of the spiral, the grazing angle decreasing each time (34◦ at A; 29◦ at B; 23◦ at C; 19◦ at D; 16◦ at E; 13◦ at F). At each
+reflection, not only does a reflected ray propagate further into the bubble-free arm, but a refracted ray propagates into the
+bubbly-arm of the spiral. Attenuation is not included. (b) A beam of rays is launched into the spiral. The spiral generates
+clear regions which are both bubble-free and quiet (see Leighton et al. (2007a; 2007b), for details).
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+
+feed in Fig. 2d (the same net was used to generate the
+geometry of Fig. 2). Although none of the hypotheses
+in this unsponsored work were proven, they produced
+a significant amount of public attention (Theunissen,
+Habershon-Butche, 2008; Bass et al., 2009). In particular it informed the issue of the scattering by bubbles of the higher frequencies associated with dolphin
+echolocation, the topic of Sec. 3.
+
+3. Does dolphin echolocation ever benefit
+from nonlinearities?
+Humpback whales use sound for communication
+and (as described in Sec. 2) putatively to herd prey.
+If this occurred, they would be aided by the fact that
+at the frequencies in question (audio frequencies and
+lower) the scattering and refraction of the sound field
+can be used to shape the sound field to form the acoustic net. Dolphins, however, exploit higher frequencies
+in order to echolocate, and at such frequencies scatter
+by bubbles produces strong clutter.
+
+321
+
+The authors were therefore intrigued by TV
+footage (Byatt et al., 2001) that showed dolphins
+hunting with bubble nets (Fig. 3). This activity raised
+a formidable question. Unlike humpback whales,
+dolphins and porpoises use short sonar pulses of
+higher frequency (up to about 100 microsecond
+duration, with centre frequencies up to roughly
+100 kHz, the upper limits depending on the species).
+Whilst a bubble net would be a boon for shaping the
+long-duration feeding calls of the humpback whales to
+form acoustic traps, the best manmade echolocating
+sonar of the day would not work in the bubble nets
+the dolphins were making. This is because the bubbles
+would scatter the sonar pulses so strongly as to
+generate clutter, making it impossible to identify
+the true targets (the fish). If a dolphin were to be
+considered as just a sonar system (e.g. in terms of
+power, bandwidth etc.), it is ‘mediocre’ compared to
+the best manmade sonar (Au, Martin, 2012). Therefore the existence of film footage showing dolphins
+bubble netting raised a dilemma that did not occur
+
+Fig. 3. (a) Common dolphins herd sardines with bubble nets. (b) A dolphin starts to release a cloud of bubbles (arrowed)
+from its blowhole. A moment later (c) the dolphin (1) swims on, leaving behind the expanding cloud (2). Other dolphins
+(incl. 3) enter the frame. (d) The sardines school within a wall of bubbles and are trapped. Images courtesy of The Blue
+Planet (BBC).
+
+322
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+
+for the humpback whales (who do not exploit high frequencies to echolocate to find prey, as dolphins do).
+That dilemma is that, when forming bubble nets, either the dolphins are ‘blinding’ their most spectacular
+sensory apparatus when hunting (their sonar), or they
+have some unknown ability that allows their sonar to
+distinguish fish from bubble clutter.
+We know that, despite only modest hardware, the
+dolphins have extraordinary sonar capabilities. The
+source of this performance is not clear, but the dolphin
+has several clear advantages: the sonar is mounted on a
+“platform” (the dolphin’s body) that is very agile and
+so can interrogate a target from many different angles;
+and the processing is undertaken in a brain that has
+evolved over around 10 million years in an oceanic environment. In the underwater bubble clouds that dolphins contend with under breaking waves or in bubble
+nets, the bubbles can easily cause the speed of sound
+to vary by a factor of 2 over sub-second timescales
+(Birkin et al., 2003; Leighton et al., 2007b), causing
+not just clutter but range ambiguities and artifacts.
+Yet the fact is that, rather than avoid such environments, some species of dolphins have specialized to
+hunt in shallow coastal waters where breaking waves
+occur, and some have evolved to hunt with bubble nets
+In the absence of data taken on echolocation whilst
+wild dolphins hunt, we addressed the question of
+whether it was possible to design any sonar signal
+that could detect targets in bubble clouds. We proposed that a sonar signal might be able to distinguish between fish and bubble clutter if it consisted
+of two closely-spaced pulses that were identical except
+that the second had opposite polarity with respect
+to the first, a scheme we called TWIPS (the Twin
+Inverted Pulse Sonar) (Leighton, 2004; Leighton
+et al., 2010).
+Simply put, the scheme relies on the fact that, when
+driven by a sufficiently strong acoustic field, bubbles
+scatter the sound nonlinearly. Bubbles are mechanical
+oscillators: when driven by the oscillating pressure of
+a sonar pulse, they expand and contract, and the inertia associated from this motion is invested primarily in
+the surrounding liquid (which must move as the bubble changes volume), whilst the stiffness of the bubble
+oscillator is provided by the gas (which, when compressed, resists that compression). However the bubble is only a linear oscillator when driven to pulsate
+at infinitesimal amplitude, because the stiffness of the
+gas varies with the amplitude of bubble wall displacement (Leighton et al., 2010). As a crude extreme example, the bubble can for example expand as far as
+it likes, but cannot be compressed to a size smaller
+than its initial volume. In practice the nonlinearity is
+observable in the scattered signal at very small amplitudes of pulsation. At such a time, the scattering
+from the bubble is not simply a linear function of the
+incident sonar signal, but is better described by a func-
+
+tion containing quadratic, cubic and even higher nonlinearities.
+In the following discussions, the pulses will be represented by numbers, for illustrative purposes: for the
+full explanation, where the waveform is mathematically described, see references (Leighton et al., 2010;
+2012b). Consider the TWIPS signal: if the first pulse
+is represented by ‘+1’, then the second pulse is represented by ‘−1’ since it is identical except that it has
+opposite phase (Fig. 4a). The fish will scatter the two
+pulses linearly and (in over-simplified terms) if the dolphin were to subtract the echo of the second pulse
+from the echo of the first (to form a signal we will
+call P− ), the scattering from the fish would be strong
+[1 − (−1) = 2]. However even though the quadratic
+nonlinearity in the scatter from the bubbles will not
+appear in the P− signal [12 − (−1)2 = 0], nevertheless
+the linear component of the bubble clutter will feature
+strongly in P− . Therefore to distinguish the linearly
+scattering fish from the bubble scatter, the dolphin
+would add the same two echoes to form P+ . Objects
+that are linear scatterers (e.g. fish at these high frequencies) will disappear [1 + (−1) = 0], as will the
+linear component of the scatter from bubbles, but the
+nonlinear quadratic component of bubbles will remain
+[12 + (−1)2 = 2]. Fish will have been identified by the
+fact that they are strong in P− but weak in P+ [In practice, because bubbles are such powerful scatterers, enhancing their scatter using P+ is not difficult, and this
+technique is now routinely used in biomedical imaging
+(Burns et al., 2006); however suppressing their scatter
+using P− is not so simple, and Leighton et al., (2010)
+used the function P− /P+ to achieve this]. Although in
+principle it is not required, the interpretation of the signals is aided by filtering the returned signals around
+the first harmonic before subtraction (to form P1− ),
+and filtering them around the second harmonic before
+addition (to form P2+ ). The power of the techniques
+comes, not just from the differences between the two
+pulses (which is nevertheless key, in that they provide
+different signals from linear and nonlinear scatterers),
+but also, crucially, from their similarity, because that
+similarity enables certain combinations of the echoes
+to generate zeros, so enabling high contrast and ready
+identification of linear and nonlinear scatterers.
+The use of two pulses to interrogate the nonlinearity means that the incident waveform can have very
+great bandwidth, and for example consist of frequency
+modulated chirp signals that extend for over an octave: a sensor based on nonlinear scattering of just one
+waveform cannot cover such a wide bandwidth (and so
+benefit form enhanced resolution) because of the spectral ambiguities that would result.
+To formulate the processing more rigorously, consider two pulses (ψ1 (t) and ψ2 (t), each of duration T
+and with an inter-pulse time τ ). If ψ2 (t) = Γ ψ1 (t),
+then TWIPS signals are generated if Γ = −1. In re-
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+
+323
+
+Fig. 4. (a) The two sonar pulses used in this particular test, as measured 2.6 m in front of the sonar in clear water in a
+test tank. The 50 ms interval between pulses is chosen to be sufficiently short that the environment (especially the bubbly
+wake) has not evolved too much between the two pulses as to make TWIPS inoperable, but long enough to mean that,
+for ranges up to around 37.5 m, only one pulse is in the water at once, avoiding range ambiguities. (b) Photograph of the
+stern of the MV Red Osprey as the vessel containing the TWIPS sonar entered its wake, moments before the data of panels
+(c)–(e) were taken. In panels (c)–(d), the same set of data is processed three ways. Pairs of TWIPS pulses are emitted
+with 1 s between the start of each pair, and the number of the pair is recorded on the horizontal axis. The two-way time
+of flight (a proxy for the range) is given on the vertical axis. The panels show the result of processing (c) in a conventional
+sonar manner, (d) using the P− /P+ TWIPS function, and (e) using the P+ TWIPS function. For details on the processing
+and the colour scale, see Leighton et al. (2010).
+
+sponse to the outgoing signal Ψ (t) = ψ1 (t)+Γ ψ1 (t−τ )
+each scatterer produces at the receiver a contribution
+to the echo that takes the form y(t) = y1 (t) + y2 (t − τ )
+in which yk (t) (where k = 1, 2) represents the convolution of the incident pulse and the impulse response
+function, specifically yk (t) = h(t) ∗ ψk (t) =
+R
+h(t − t0 )ψk (t0 ) dt0 . Assume that the detection system uses a matched filter (Burdic, 1984) that is
+scaled such that its overall gain is unity. In such circumstances, if the outputs of the matched filter for
+yk (t) are denoted Yk (t) where k = 1, 2, it follows
+that Y2 (t) = Γ Y1 (t). For linear scatterers, y2 (t) =
+h(t) ∗ ψ2 (t) = Γ y1 (t) and Y2 (t) = Γ Y1 (t). As indicated
+above, the power of TWIPS rests not so much in the
+difference between the pulses, but in their similarity,
+so that knowledge of the Γ used in the emitting pulses
+allows the linear scattering to be reduced to zero (or as
+close as noise, reverberation etc. allow) by forming the
+TWIPS function Y1 (t) − Y2 (t)/Γ , the smoothed amplitude of which is denoted P− . This allows the linear
+
+scatterers to be distinguished from the bubbles, where
+no such simple scaling occurs.
+The function PM − is the end-product of a fourstage process, specifically: (i) dividing the echo of the
+second pulse by Γ , (ii) subtracting the echo of the second pulse from that of the first, then (iii) applying a
+band filter (that has a centre frequency that is M times
+the centre frequency of the incident pulses) to the result, and then (iv) taking the temporal average of the
+envelope of the resulting signal over the duration (T )
+of the pulse. In similar vein, PN + is obtained by: (i) dividing the echo of the second pulse by Γ , (ii) adding
+the echo of the first pulse to that of the second, then
+(iii) applying a band filter (that has a centre frequency
+that is N times the centre frequency of the incident
+pulses) to the result, and then (iv) taking the temporal average of the envelope of the resulting signal over
+the duration (T ) of the pulse.
+A sequence of simulation and tank tests were undertaken, before finally towing a downwards-looking
+
+324
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+
+TWIPS sonar through the wakes of large passing ships
+of opportunity (Leighton et al., 2010; 2011), attempting to see the linearly-scattering seabed. One such ship
+was the Isle of Wight car ferry, the MV Red Osprey
+(Fig. 4b). This vessel has 3953 gross register tonnage,
+and is 93.22 m in length and has 17.5 m beam, having
+a capacity for 895 passengers plus 220 cars. The conventional sonar signal was dominated by the bubbles in
+the wake (Fig. 4c), with the linearly scattering seabed
+barely visible. Without the prior knowledge that the
+wake sits above the seabed, there is nothing inherent
+in the conventional sonar return (Fig. 4c) to identify
+which is which, and the implications of identifying fish
+in a dolphin bubble net are clear.
+However from the logic outlined above, a preliminary identification of the seabed can be made by the
+feature that stands out strongly when the second pulse
+is subtracted from the first to form the TWIPS signal P− /P+ (Fig. 4d). This preliminary identification
+is confirmed by the secondary test, that said feature
+disappears when the two pulses are added together to
+form P+ (Fig. 4e). The bubbles in the wake are identified because they exhibit the opposite behavior.
+Although this represented the world’s first sonar
+that could distinguish linearly scattering targets from
+bubble clutter in ships wakes, these tests had not
+proven that dolphins benefit from nonlinearities when
+echolocating bubble clouds: it had only shown that
+a sonar relying on such principles could achieve the
+task. There was no conclusive proof that dolphins
+used a TWIPS-like process. Pairs of pulses have been
+recorded from some species of dolphin, where the phase
+of the second is the inverse of the first, and if these
+were of sufficient amplitude they could be used in a
+
+TWIPS-like processing regardless of whether the dolphins generated the second pulse directly or whether
+it was caused by a reflection of the first pulse from the
+air/water interface. There was no evidence that the
+pulses from such species were of sufficient amplitude
+to generate bubble nonlinearities, and whilst some dolphins can generate pulses of sufficiently amplitude to
+drive bubbles nonlinearly, there was no evidence that
+these species generated pairs of pulses with phase inversion (Leighton et al., 2010; Finfer et al., 2012).
+Therefore whilst a successful sonar had been made using Γ = −1 in the above scheme to generate TWIPS,
+there is no hard evidence that any dolphins emit pulse
+trains characterized by Γ = −1. However they are
+known to vary their pulse amplitude in a train, an
+output that can be described in the above formulation by using 0 < Γ < 1 (or indeed >1, if the second
+pulse has greater amplitude than the first, although
+for simplicity we will restrict the formulation here to
+0 < Γ < 1). That is to say, many echolocating dolphins
+emit trains of clicks in rapid succession, clicks that are
+similar in form except that the amplitude varies. Such
+variation has been known about for years, but without
+adequate explanation. We proposed that, rather than
+being an accident, this amplitude variation might purposefully supply pairs of pulses with another difference
+that could exploit the fact that bubble clutter scatters
+nonlinearly, whilst the fish do not (Leighton et al.,
+2012b).
+We tested a range of pulses, in test tanks and simulation (Chua et al., 2012; Leighton et al., 2012b).
+Figure 5 shows a pulse pair based on clicks, where
+each click in the pair consists of two synchronous
+downchirps, each covering a distinct frequency range,
+
+Fig. 5. (a) A pulse pair made up from two clicks, each click being a commonly-accepted representation of a click from an
+Atlantic Bottlenose dolphin. For this illustration, the second pulse is identical to the first, but with half the amplitude.
+(b) The spectrum of the first click, which has a peak-to-peak amplitude of approximately 226 dB re 1 µPa m. The BiaPSS
+scattering from (c) fish and (d) bubbles, are shown.
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+
+and as such is a commonly accepted to typify a form
+of emission from the Atlantic bottlenose dolphin (Tursiops truncatus; Capus et al., 2007). Whilst substitution of Γ = −1 in the above formulation described
+TWIPS, use of 0 < Γ < 1 described BiaPPS (Biased Pulse Summation Sonar). Just as TWIPS could
+be explained in an oversimplified manner using ‘+1’
+and ‘−1’ for the outgoing pulses, so to can BiaPSS in
+the following manner. Consider the case when the second pulse has an amplitude that is, say, one half that
+of the first pulse, but they are in other ways very similar, then consider how they scatter from fish (Fig. 5c)
+and bubbles (Fig. 5d). The fish scatters back a number
+‘1’ immediately followed by a ‘1/2’ (from the first and
+second pulses consecutively), whilst the bubbles scat2
+ter back number ‘12 ’ immediately followed by a ‘(1/2) ’.
+Since bubbles are strong acoustic scatterers, for conventional sonar the fish will be hidden by the ‘clutter’
+that the bubbles cause. This is rectified in two stages,
+first by making the fish more easily detectable. This is
+done by multiplying the second echo by 2 (or whatever
+was the ratio of the amplitudes of the two pulses sent
+out) and then adding it to the first echo. The echo from
+the fish is amplified more strongly (1+2× 1/2 = 2) than
+2
+is the echo from the bubbles (12 + 2 × (1/2) = 11/2).
+However although this might make the sonar echo
+from the fish detectable, it does not help distinguish it
+from the strong echoes produced by the bubbles. This
+is rectified in the second stage of processing, wherein
+(having identified a possible fish but wishing to ensure
+it is not a bubble cloud), the second echo is first multiplied by 2 and then subtracted from the first echo.
+If the target is a real fish, it becomes invisible to the
+sonar (1 − 2 × 1/2 = 0), whilst if it is a bubble it re2
+mains (12 − 2 × (1/2) = 1 − 1/2 = 1/2). In this way,
+by the addition and subtraction of the same two sonar
+echoes, the fish can be detected and distinguished from
+the bubbles.
+We developed a practical sonar system using this
+BiaPSS (Biased Pulse Summation Sonar) that, like
+TWIPS, was effective at enhancing the detectability
+of fish in bubble clutter, and distinguishing them from
+clutter (Leighton et al., 2012b). Given that modern
+amplifiers and emitters tend to more easily produce
+high fidelity copies of pulses that have differing amplitudes, as opposed to opposing phases, BiaPSS sources
+were more practical to produce than TWIPS sources.
+
+4. The implications of TWIPS and BiaPSS
+By the 1990s we had a sonar heritage from the
+Cold War, where systems were designed for detecting large submarines crossing through the deep, dark,
+quiet waters under the polar icecap between Soviet and
+NATO waters. These were unsuited to detecting small
+targets in the turbid shallow waters that had come
+
+325
+
+to characterize more recent naval engagements: Fig. 6
+clearly shows how the coastal waters of the Gulf contain suspended muddy sediments brought down by the
+Tigris and Euphrates, and whilst suspended muddy
+sediment can degrade sonar performance (Richards
+et al., 2003), bubbles generated by breaking waves and
+biogenic processing etc. cause far greater problems to
+sonar (Richards, Leighton, 2001).
+
+Fig. 6. True-colour satellite image (from the Moderate
+Resolution Imaging Spectroradiometer MODIS carried by
+NASA) of sediment carried by the Tigris and Euphrates
+Rivers. The sediment laden waters of the Persian Gulf
+(November 1, 2001) appear light brown where they enter
+the northern end of the Persian Gulf and then gradually
+dissipate into turquoise swirls as they drift southward (Image courtesy Jacques Descloitres, MODIS Land Rapid Response Team at NASA GSFC).
+
+Figure 7 (image adapted from Bachkosky et al.,
+2000) records the cost of the damage to three vessels in
+the Gulf, compared to the cost of the mine of the type
+that caused that damage (there was also injury and
+loss of life). The contrast in cost is stark, although the
+complexity of deployment needs to be considered: although the deployment of a minefield requires purchase
+of many mines, of which only one might cause damage, the suspicion that a minefield exists (even where
+it does not) can delay operations and slow the delivery of humanitarian aid, hamper trade, and tie up resources. In 1988, a simple contact mine costing $1,500
+(an Iranian SADAF-02) almost sank the Samuel B.
+Roberts (FFG-58), causing nearly $96 million of damage. During the first Gulf War, Iraq laid 1242 mines
+and even though many were nonfunctional or ineffec-
+
+326
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+a)
+
+b)
+
+Fig. 7. Comparison of just the financial damage done to
+three vessels and the cost of the mines that caused them
+(image adapted from Bachkosky et al. (2000)).
+
+tively laid, three mines seriously damaged two U.S.
+warships, Princeton (CG-59) and Tripoli. These mines
+were laid in water 20–50 m deep. The implications of
+providing a type of sonar that can operate in bubbly
+shallow waters are clear.
+From the earliest days, however, we recognized that
+the equations governing the TWIPS and BiaPSS detection and classification schemes discussed in this paper
+were generic and not specifically linked to sonar, and as
+soon as we had evidence that TWIPS worked, we published the possibility that they might be used with lidar
+to detect combustion products, with MRI to discriminate between tissues, and with radar to detect covert
+electronics (covert bugging devices, and the threat of
+improvised explosive devices – IEDs – being particularly germane) (Leighton et al., 2007c; 2008b). We
+experimentally tested the concept of TWIPR (Twin
+Inverted Pulse Radar) by emitting pairs of radar
+pulses, the second being identical to the first but having inverted phase (Fig. 8) at various targets. In this
+case the target of interest is a nonlinear scatterer, and
+the clutter is the linear scatterer (which practically
+speaking could be soil, vegetation, clothing etc.), or
+nonlinear scatteres in which we are not interested.
+Figure 9 shows (a) the arrangement of the source
+and the receiver with a mobile phone in the position
+of the target, (b) a ‘target of interest’, dipole+diode
+target that is typical of the sort of circuitry we wish
+to detect (a half-wavelength dipole which resonates at
+2 GHz and whose input terminals are connected to a
+BAT54 Schottky diode), (c) a large sheet of aluminium
+and (d) a rusty bench clamp. The latter two (Fig. 9c, d)
+are representative of clutter that might be buried near
+
+Fig. 8. (a) Time history of one radar pulse in the pair, showing the normalised amplitude of the Gaussian-modulated
+waveform used. (b) The normalised amplitude (in dB) of
+the waveform used in frequency domain. The measured
+power referenced to 1 mW measured at 1 m is 35 dB m.
+
+the target of interest (Fig. 9b), because it is important that TWIPR not only detects the ‘target of interest’ but can also distinguish it from other buried
+scrap that might otherwise cause false alarms, too
+many of which can compromise an operation. In principle such discrimination should be possible because,
+as Fig. 10 shows, different objects scatter radar with
+differing nonlinearities. TWIPR might therefore distinguish soil and vegetation (which scatter radar linearly)
+from semiconductors (which generate odd and even
+harmonics when scattering radar pulses). Moreover,
+these scatterers could also be discriminated from rusty
+metal, which predominantly generates odd harmonics.
+The results when the pulses are processed by
+TWIPR are shown in Fig. 11, which plots P2+ /P1−
+(expressed in dB). Consequently, the colours for
+which P2+ /P1− <1 (the blues) indicate scattering that
+is predominantly linear, and the colours for which
+P2+ /P1− >1 (the yellows, oranges and reds) indicates
+that the detected scattering that is predominantly
+nonlinear (the receiver could only detect up to the
+quadratic nonlinearity). The ‘target of interest’ is
+by far the most nonlinear feature, more than 28 dB
+stronger than the next most nonlinear item, and over
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+
+327
+
+Fig. 9. (a) The general experimental layout, and the targets: (b) a BAT54 Schottky diode (dipole+diode target); (c) a piece
+of 34 × 40 cm2 aluminium plate mounted on an iron stand; and (d) a rusty bench clamp. One of the mobile phones can
+be seen in the target position in panel (a).
+
+Fig. 10. Schematic of the expected characteristic for using TWIPR to distinguish between linear scatterers (here exemplified
+by soil and vegetation), semiconductors, and rusty metal.
+
+328
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+
+Fig. 11. Colour map of the ratio P2+ /P1− expressed in dB for the targets studied here. The dB value of the ratio for each
+target is denoted above the target position: note that the signal from the dipole + diode target is so strong that it exceeds
+the +20 dB full-scale deflection of the plot. The amplitudes of P1− have been normalised by a value of 107 so as to obtain
+a meaningful comparison with P2+ . For details see Leighton et al. (2013).
+
+50 dB stronger than the massive aluminium plate. For
+further details, see Leighton et al. (2013).
+Preliminary results are also shown for two models
+of mobile phone, when they are ‘on’, ‘off’, and ‘on but
+with a simcard that is not genuine’. These are only
+preliminary results as the effect on nonlinear scattering generated by TWIPR pulses when mobile phones
+communicate with base-stations is beyond the scope
+of this article. Furthermore, this investigation was limited in that it only had access to a narrowband radar
+source, so that it could not for example use a chirp
+to identify resonances in the circuitry of the mobile
+phone, and exploit the nonlinearities that could be excited at those resonances. A broadband radar system
+would therefore allow the ‘TWIPR fingerprint’ of a
+range of common devices to be logged. This has implications for the rescue of buried catastrophe victims.
+Consider the fact that the diode+dipole target shown
+in Fig. 9b measures 6.3 cm in length, weighs 2.8 g,
+costs less than 1 Euro, is very simple to manufacture
+and requires no batteries. Given these features, and the
+fact that they can easily be tuned to scatter specific
+resonances to provide a unique identifier to a broadband TWIPR pulse, they offer the possibility of tags
+for animals or autonomous vehicles hidden in foliage,
+underground or in infrastructure (pipelines, conduits,
+etc.); and for humans entering hazardous areas, particularly where they might be underground or buried.
+If a hazard is expected (for rescue workers, miners or
+climbers in avalanche areas), tags can be carried, tuned
+with a number of resonances so that each carrier can
+be identified by their TWIPR fingerprint. The results
+
+of Fig. 11 suggest that, if tags are not carried, TWIPR
+can carry the bandwidth to search for mobile phone
+resonances, and so offer the possibility of locating victims by identifying the TWIPR scatter from their mobile phones (e.g. in collapsed buildings), even when the
+phones are turned off, damaged, or the batteries have
+no charge remaining. Furthermore, if the TWIPR fingerprint of the item that is used to locate and identify
+the carrier (a tag, a phone etc.) is known, then it could
+be distinguished from other circuitry in the vicinity
+(clutter).
+
+5. Conclusions
+These preliminary tests demonstrate sonar and
+radar schemes for detecting and distinguishing nonlinear and linear targets and clutter in various combinations. These include linear targets in nonlinear clutter (for TWIPS and BiaPSS) and nonlinear targets
+in linear clutter (TWIPR). Given sufficient bandwidth
+and knowledge of the TWIPS/BiaPSS/TWIPR fingerprint, one type of nonlinear scatterer might be distingsuihed from another, for example in distinguishing
+sea mines from other scatteres. These results suggest
+that such pulse processing schemes would potentially
+also be operable with other electromagnetic radiations
+(MRI, LIDAR etc.).
+For these schemes to work, the amplitude of the
+pulse incident on the target must be sufficiently high
+at the target. In many applications, this might suggest
+bistatic operation with remotely deployable sources,
+placing the source sufficiently close to the target to
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+
+excite nonlinear scatter which is then detected remotely.
+The propositions that humpback whales generate
+a wall of sound when hunting with bubble nets, and
+that (when echolocating in bubbly water) dolphins
+exploit the nonlinearity in scattering that a bubble
+can produce, are unproven. Nevertheless these propositions have provided narratives that have stimulated
+outreach to the public for engineering and science in
+TV shows, school visits, science exhibitions, and to
+accompany whale watching tours. Although they are
+only speculative, both narratives now appear accepted
+in the media and popular science articles, despite the
+fact that, following publication by the authors drawing attention to the extraordinary implications of the
+video of dolphins bubble netting (Leighton, 2004),
+the authors could find no observations of this in the
+peer-reviewed literature other than a brief mention in
+Acevedo et al. (2011), a text otherwise devoted to
+humpback whales, for which there is ample evidence
+of bubble netting (Sharpe, Dill, 1997; Rendell,
+Whitehead, 2001; Valsecchi et al., 2002), but not
+of the formation of ‘walls of sound’. This contrasts with
+the phenomenon of dolphins blowing bubble rings,
+which is well-reported (Gewalt, 1989; Marten et al.,
+1996; Read et al., 2003) perhaps because it needs only
+visual measurements (as opposed to high frequency
+acoustics) and can be observed in captivity, whereas
+dolphin bubble netting has been observed only in the
+wild and with large pods. Certainly questions remain
+as to whether dolphins do exploit such processing, primarily in terms of whether they possess the requisite
+receiver bandwidth. Such questions will not be answered by this team with the current funding record.
+However from the speculation behind these propositions, this paper records the development of the only
+two sonars that are currently capable of detecting objects in bubbly waters of for example large ship wakes.
+Furthermore, we have shown the potential for a radar
+version of this technology to detect targets of interest
+and discriminate them from clutter.
+
+Acknowledgments
+The authors are very grateful to the colleagues who
+donated their time and resources in support of this
+largely unfunded programme: Daniel Finfer, Gim Hwa
+Chua, Kenneth Tong, Hugh Griffiths, Justin Dix and
+David Daniels.
+
+References
+1. Ainslie M. (2010), Principles of Sonar Performance
+Modelling, Springer Praxis Books, ISBN: 978-3-54087661-8.
+
+329
+
+2. Ainslie M.A., Leighton T.G. (2009), Near resonant
+bubble acoustic cross-section corrections, including examples from oceanography, volcanology, and biomedical
+ultrasound, J. Acoust. Soc. Am., 126, 5, 2163–2175.
+3. Ainslie M.A., Leighton T.G. (2011), Review of theory for scattering and extinction cross-sections, damping factors and resonance frequencies of spherical gas
+bubbles, J. Acoust. Soc. Am., 130, 5, 3184–3208 (doi:
+10.1121/1.3628321).
+4. Au W.W.L., Martin S.W. (2012), Why dolphin
+biosonar performs so well in spite of mediocre ‘equipment’, IET Radar, Sonar & Navigation, 6, 6, 566–575
+(doi: 10.1049/iet-rsn.2011.0194).
+5. Acevedo J., Plana J., Aguayo-Lobo A., Pastene L.A. (2011), Surface feeding behavior of humpback
+whales in the Magellan Strait, Revista de Biologı́a Marina y Oceanografı́a, 46, 3, 483–490.
+6. Bachkosky J.M., Brancati T., Conley D.R., Douglass J.W., Gale P.A., Held D., Hettche L.R.,
+Luyten J.R., Peden I.C., Rumpf R.L., Salkind A.,
+Sinnett J.M., Smith K.A., Whistler Jr. G.E.
+(2000), Unmanned Vehicles in Mine Countermeasure,
+Naval Research Advisory Committee Report, Arlington, 2000.
+7. Baranowska A. (2012), Theoretical studies of nonlinear generation efficiency in a bubble layer, Archives
+of Acoustics, 37, 3, 287–294 (doi: 10.2478/v10168-0120037-0).
+8. Bass K., Leith B., Attenborough S.D. (2009), Nature’s Great Events: 3-The Great Feast (BBC Consumer Publishing).
+9. Burdic W.S. (1984), Underwater acoustic system
+analysis, Prentice-Hall Signal Processing series, Englewood Cliffs, NJ: Prentice-Hall, Inc.
+10. Birkin P.R., Leighton T.G., Power J.F., Simpson M.D., Vincotte A.M.L., Joseph P.F. (2003),
+Experimental and theoretical characterisation of sonochemical cells. Part 1: Cylindrical reactors and their
+use to calculate speed of sound, J. Phys. Chem. A, 107,
+306–320.
+11. Burns P.N., Wilson S.R. (2006), Microbubble Contrast for Radiological Imaging: 1. Principles, Ultrasound Quarterly, 22, 1, 5–13.
+12. Byatt A., Fothergill A., Holmes M., Attenborough S.D. (2001), The Blue Planet (BBC Consumer
+Publishing).
+13. Brooks I.M., Yelland M.J., Upstill-Goddard R.C., Nightingale P.D., Archer S.,
+d’Asaro E., Beale R., Beatty C., Blomquiuist B.,
+Bloom A.A., Brooks B.J., Cluderay J., Coles D.,
+Dacey J., DeGrandpre M., Dixon J., Drennan W.M., Gabriele J., Goldson L., HardmanMountford N., Hill M.K., Horn M., Hsueh P.-C.,
+Huebert B., de Leeuwuw G., Leighton T.G.,
+
+330
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+Liddicicoat M., Lingard J.J.N., McNeil C., McQuaid J.B., Moat B.I., Moore G., Neill C., Norris S.J., O’Doherty S., Pascal R.W., Prytherch J.,
+Rebozo M., Sahlee E., Salter M., Schuster U.,
+Skjelvan I., Slagter H., Smith M.H., Smith P.D.,
+Srokosz M., Stephens J.A. , Taylor P.K., Telszewski M., Walsh R., Ward B., Woolf D.K.,
+Young D., Zemmmmelink H. (2009), UK–SOLAS
+field measurements of Air–Sea Exchange: Instrumentation, Bulletin of the American Meteorological
+Society, 90, 629–644 (doi: 10.1175/2008BAMS2578.1).
+
+24. Grelowska G., Kozaczka E., Kozaczka S., Szymczak W. (2013) Underwater noise generated by a small
+ship in the shallow sea, Archives of Acoustics, 38, 3,
+351–356 (doi: 10.2478/aoa-2013-0041).
+
+14. Campbell G.M., Mougeot E. (1999), Creation and
+characterisation of aerated food products, Trends Food
+Sci. Technol., 10, 283–296.
+
+27. Kozaczka E., Grelowska G. (2004), Shipping noise,
+Archives of Acoustics, 29, 2, 169–176.
+
+15. Capus C., Pailhas Y., Brown K., Lane D.M.
+(2007), Bio-inspired wideband sonar signals based on
+observations of the bottlenose dolphin (Tursiops truncatus), J. Acoust. Soc. Am., 121, 594–604 (doi:
+10.1121/1.2382344).
+16. Carugo D., Ankrett D.N., Glynne-Jones P.,
+Capretto L., Boltryk R.J., Zhang X., Townsend P.A., Hill M. (2011), Contrast agent-free sonoporation: The use of an ultrasonic standing wave microfluidic system for the delivery of pharmaceutical
+agents, Biomicrofluidics, 5, 4, 044108.
+17. Chua G.H., White P.R., Leighton T.G. (2012),
+Use of clicks resembling those of the Atlantic bottlenose
+dolphin (Tursiops truncatus) to improve target discrimination in bubbly water with biased pulse summation
+sonar, IET Radar Sonar & Navigation, 6, 6, 510–515
+(doi: 10.1049/iet-rsn.2011.0199).
+18. Clarke J.W.L., Leighton T.G. (2000), A method
+for estimating time-dependent acoustic cross-sections
+of bubbles and bubble clouds prior to the steady state,
+Journal of the Acoustical Society of America, 107, 4,
+1922–1929.
+19. Deane G.B., Stokes M.D. (1999), Air entrainment
+processes and bubble size distributions in the surf zone,
+J. Phys. Oceanogr., 29, 1393–1403.
+20. Farmer D.M., McNeil C.L., Johnson B.D. (1993),
+Evidence for the importance of bubbles in increasing air-sea gas flux, Nature, 361, 620–623 (doi:
+10.1038/361620a0).
+21. Ferrara K., Pollard R., Borden M. (2007), Ultrasound microbubble contrast agents: fundamentals and
+application to gene and drug delivery, Annu. Rev.
+Biomed. Eng., 9, 415–447.
+22. Finfer D.C., White P.R., Chua G.H., Leighton T.G. (2012), Review of the occurrence of multiple
+pulse echolocation clicks in recordings from small odontocetes, IET Radar Sonar & Navigation, 6, 6, 545–555
+(doi: 10.1049/iet-rsn.2011.0348).
+23. Gewalt E. (1989), Orinoco-Freshwater-dolphins (Inia
+geoffrensis) using self-produced air bubble ‘rings’ as
+toys, Aquatic Mammals, 15.2, 73–79.
+
+25. Klusek Z., Sutin A., Matveev A., Potapov A.
+(1995), Observation of nonlinear scattering of acoustical waves at sea sediments, Acoust. Lett., 18, 198–203.
+26. Kozaczka W., Grelowska G. (1999), An experimental investigation of the finite amplitude wave,
+Archives of Acoustics, 24, 1, 75–84.
+
+28. Lauterborn W., Kurz T., Mettin R., Koch P.,
+Kröninger D., Schanz D. (2008), Acoustic cavitation and bubble dynamics, Archives of Acoustics, 33,
+4, 609–617.
+29. Leighton T.G. (2004), From seas to surgeries, from
+babbling brooks to baby scans: The acoustics of gas bubbles in liquids, International Journal of Modern Physics
+B, 18, 25, 3267–314.
+30. Leighton T.G (2007), What is ultrasound?, Progress
+in Biophysics and Molecular Biology, 93, 1–3, 3–83.
+31. Leighton T.G., Baik K., Jiang J. (2012a), The
+use of acoustic inversion to estimate the bubble
+size distribution in pipelines, Proceedings of the
+Royal Society London A, 468, 2461–2484 (doi:
+10.1098/rspa.2012.0053).
+32. Leighton T.G., Balleri A. (2012), Biologicallyinspired radar and sonar systems, Guest Editorial for
+Special Issue of IET Radar, Sonar and Navigation, 6,
+6, 507–509 (doi: 10.1049/iet-rsn.2012.0146).
+33. Leighton T.G., Birkin P.R., Hodnett M., Zeqiri B., Power J.F., Price G.J., Mason T., Plattes M., Dezhkunov N., Coleman A.J. (2005), Characterisation of measures of reference acoustic cavitation (COMORAC): An experimental feasibility trial,
+[in:] Bubble and Particle Dynamics in Acoustic Fields:
+Modern Trends and Applications, A.A. Doinikov [Ed.],
+Research Signpost, Kerala, Research Signpost, 37–94.
+34. Leighton T.G., Chua G.H., White P.R. (2012b),
+Do dolphins benefit from nonlinear mathematics when
+processing their sonar returns?, Proceedings of the
+Royal Society London A, 468, 2147, 3517–3532 (doi:
+10.1098/rspa.2012.0247) (see Royal Society video at
+http://rspa.royalsocietypublishing.org/content/suppl/
+2012/07/19/rspa.2012.0247.DC1).
+35. Leighton T.G., Chua G.H., White P.R.,
+Tong K.F., Griffiths H.D., Daniels D.J. (2013),
+Radar clutter suppression and target discrimination
+using twin inverted pulses, Proceedings of the Royal
+Society London A, 469, 2160, 20130512-[14pp] (doi:
+10.1098/rspa.2013.0512).
+36. Leighton T.G., Farhat M., Field J.E., Avella F.
+(2003), Cavitation luminescence from flow over a hy-
+
+T. Leighton, P. White – Dolphin-Inspired Target Detection for Sonar and Radar
+drofoil in a cavitation tunnel, Journal of Fluid Mechanics, 480, 43–60.
+37. Leighton T.G., Fedele F., Coleman A., McCarthy C., Ryves S., Hurrell A., De Stefano A., White P.R. (2008a), A passive acoustic device for real-time monitoring the efficacy of shockwave
+lithotripsy treatment, Ultrasound in Medicine and Biology, 34, 10, 1651–1665.
+38. Leighton T.G., Finfer D., Grover E., White P.R.
+(2007a), An acoustical hypothesis for the spiral bubble
+nets of humpback whales and the implications for whale
+feeding, Acoustics Bulletin, 22, 1, 17–21.
+39. Leighton T.G., Finfer D.C., White P.R. (2007b),
+Cavitation and cetacean, Revista de Acustica, 38, 3/4,
+37–81.
+40. Leighton T.G., Finfer D.C., White P.R. (2007c),
+Sonar which penetrates bubble clouds (Invited Paper),
+Proceedings of the Second International Conference on
+Underwater Acoustic Measurements, Technologies and
+Results, Heraklion, Crete, Greece, 25–29 June, 555–
+562.
+41. Leighton T.G., White P.R., Finfer D.C. (2008b),
+Hypotheses regarding exploitation of bubble acoustics by
+cetaceans, Proceedings of the 9th European Conference
+on Underwater Acoustics, (ECUA2008), Paris, France,
+29 June – 4 July, 77–82.
+42. Leighton T.G., Finfer D.C., White P.R.,
+Chua G.H., Dix J.K. (2010), Clutter suppression
+and classification using Twin Inverted Pulse Sonar
+(TWIPS), Proceedings of the Royal Society A, 466,
+3453–3478.
+43. Leighton T.G., Finfer D.C., Chua G.H.,
+White P.R., Dix J.K. (2011), Clutter suppression and classification using Twin Inverted Pulse
+Sonar in ship wakes, Journal of the Acoustical Society
+of America, 130, 5, 3431–3437.
+44. Leighton T.G., Meers S.D., White P.R. (2004a),
+Propagation through nonlinear time-dependent bubble
+clouds, and the estimation of bubble populations from
+measured acoustic characteristics, Proceedings of the
+Royal Society A, 460, 2049, 2521–2550.
+
+331
+
+48. Leighton T.G., White P.R. (2012), Quantification of undersea gas leaks from carbon capture and
+storage facilities, from pipelines and from methane
+seeps, by their acoustic emissions, Proceedings of
+the Royal Society London A, 468, 485–510 (doi:
+10.1098/rspa.2011.0221).
+49. Lyons A.P., Duncan M.E., Anderson A.L., Hawkins J.A. (1996), Predictions of the acoustic scattering
+response of free-methane bubbles in muddy sediments,
+J. Acoust. Soc. Am., 99, 163–172.
+50. Marten K., Shariff K., Psarakos S., White D.J.
+(1996), Ring bubbles of dolphins, Scientific American,
+275, 83–87.
+51. McGinnis D.F., Greinert J., Artemov Y., Beaubien S.E., Wuest A. (2006), Fate of rising methane
+bubbles in stratified waters: How much methane
+reaches the atmosphere?, J. Geophysical Research,
+111, C09007 (doi: 10.1029/2005JC003183).
+52. McLaughlan J., Rivens I., Leighton T.G., ter
+Haar G. (2010), A study of bubble activity generated
+in ex-vivo tissue by high intensity focused ultrasound
+(HIFU), Ultrasound in Medicine and Biology, 36, 8,
+1327–1344.
+53. Offin D.G., Birkin P.R., Leighton T.G. (2014),
+An electrochemical and high-speed imaging study of
+micropore decontamination by acoustic bubble entrapment, Phys. Chem. Chem. Phys., 16, 4982–4989 (doi:
+10.1039/C3CP55088E).
+54. Parks S.E., Clark C.W., Tyack P.L. (2007), Shortand long-term changes in right whale calling behavior: The potential effects of noise on acoustic communicatiom, J. Acoust. Soc. Am., 122, 3725–3731 (doi:
+10.1121/1.2799904).
+55. Phelps A.D., Leighton T.G. (1998), Oceanic bubble
+population measurements using a buoy-deployed combination frequency technique, IEEE Journal of Oceanic
+Engineering, 23, 4, 400–410.
+56. Read A.J., Waples D.M., Urian K.W., Swanner D. (2003), Fine-scale behaviour of bottlenose dolphins around gillnets, Proc. R. Soc. Lond. B, 270, S90–
+S92 (doi: 10.1098/rsbl.2003.0021).
+
+45. Leighton T.G., Ramble D.G., Phelps A.D. (1997),
+The detection of tethered and rising bubbles using multiple acoustic techniques, Journal of the Acoustical Society of America, 101, 5, 2626–2635.
+
+57. Richards S.D., Leighton T.G. (2001), Acoustic sensor performance in coastal waters: solid suspensions
+and bubbles, [in:] “Acoustical Oceanography”, Leighton
+T.G., Heald G.J., Griffiths H., Griffiths G. [Eds.], Proceedings of the Institute of Acoustics, 23, 2, 399–406
+(ISBN 1901656349).
+
+46. Leighton T.G., Richards S.D., White P.R.
+(2004b), Trapped within a ‘wall of sound’: A possible mechanism for the bubble nets of humpback whales,
+Acoustics Bulletin, 29, 24–29.
+
+58. Richards S.D., Leighton T.G., Brown N.R.
+(2003), Visco-inertial absorption in dilute suspensions
+of irregular particles, Proc. R. Soc. Lond. A, 459, 2038,
+2153–67.
+
+47. Leighton T.G., Robb G.B.N. (2008), Preliminary
+mapping of void fractions and sound speeds in gassy
+marine sediments, J. Acoust. Soc. Am., 124, 5, EL313–
+EL320 (doi: 10.1121/1.2993744).
+
+59. Sharpe F.A., Dill L.M. (1997), The behaviour of Pacific herring schools in response to artificial humpback
+whale bubbles, Canadian Journal of Zoology-Revue
+Canadienne de Zoologie, 75, 725–730.
+
+332
+
+Archives of Acoustics – Volume 39, Number 3, 2014
+
+60. Skumiel A., Józefczak A., Heller K., Hornowski T., Wielgusz K. (2013), Investigation of ultrasonic emulsifying processes of a linseed oil and water mixture, Archives of Acoustics, 38, 3, 297–301 (doi:
+10.2478/aoa-2013-0036).
+
+64. Thorpe S. (1982), On the clouds of bubbles formed by
+breaking wind-waves in deep water, and their role in
+air-sea gas transfer, Philos. Trans. R. Soc. London A,
+304, 155–210.
+
+61. Szantyr J.A., Koronowicz T. (2006), Hydroacoustic activity of the ship propeller operation, Archives of
+Acoustics, 31, 4, 481–487.
+
+65. Vagle S., McNeil C., Steiner N. (2010), Upper
+ocean bubble measurements from the NE Pacific and estimates of their role in air-sea gas transfer of the weakly
+soluble gases nitrogen and oxygen, J. Geophysical Research, 115, C12054 (doi: 10.1029/2009JC005990).
+
+62. Tegowski J., Klusek Z., Jaromir J. (2006), Nonlinear acoustical methods in the detection of gassy
+sediments, [in:] Acoustic Sensing Techniques for the
+Shallow Water Environment, A. Caiti, N.R. Chapman, J.-P. Herman, S.M. Jesus [Eds.], Springer, Berlin,
+pp. 125–136.
+63. Theunissen A., Habershon-Butche D. (2008), National Geographic, Humpbacks: Cracking the Code,
+Television documentary.
+
+66. Valsecchi E., Hale P., Corkeron P., Amos W.
+(2002), Social structure in migrating humpback whales
+(Megaptera novaeangliae), Molecular Ecology, 11, 507–
+518.
+67. Williams H. (1988), Whale Nation, Jonathan Cape,
+London.
+
+

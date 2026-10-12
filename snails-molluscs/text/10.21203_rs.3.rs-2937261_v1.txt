@@ -1,0 +1,1659 @@
+A computer vision sensor for the parallelization of actively regulated capillary slug flow microreactors
+Anoj Winston Gladius, Jonas A. Mylenbusch, David W. Agar (2023). Research Square. http://dx.doi.org/10.21203/rs.3.rs-2937261/v1. doi:10.21203/rs.3.rs-2937261/v1. Licence: cc-by. Text from pdf.
+
+A computer vision sensor for the parallelization of
+actively regulated capillary slug ow microreactors
+Anoj Winston Gladius (  anoj.gladius@tu-dortmund.de )
+TU Dortmund University
+Jonas A. Mylenbusch
+TU Dortmund University
+David William Agar
+TU Dortmund University
+
+Research Article
+Keywords: Slug ow, ow sensor, machine learning, video imaging, computer vision, epoxidation, methyl
+oleate, parallelization, microreactor
+Posted Date: May 22nd, 2023
+DOI: https://doi.org/10.21203/rs.3.rs-2937261/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: No competing interests reported.
+
+A computer vision sensor for the parallelization of actively regulated capillary
+slug flow microreactors
+Anoj Winston Gladius1, *, Jonas A. Mylenbusch1 and David William Agar1
+1 Laboratory for Chemical Reaction Engineering, Department of Biochemical and Chemical Engineering, TU Dortmund
+
+University, Emil-Figge-Straße 66, 44227 Dortmund, Germany.
+* Correspondence: anoj.gladius@tu-dortmund.de
+Abstract: In this work, a computer vision sensor for the extraction of slug length, slug velocity and phase ratio from
+capillary liquid-liquid slug flows from video feeds in real-time, including the necessary post-processing algorithms, is
+developed. The developed sensor is shown to be capable of simultaneously monitoring multiple capillaries and provides
+reasonable accuracy at less than 3.5 % mean relative error. Subsequently, the sensor is used for the control of a parallelized
+and actively regulated dual-channel slug flow capillary microreactor setup. As a model reaction, the solvent-free
+epoxidation of methyl oleate with hydrogen peroxide and a phase-transfer catalyst based on tungstophosphoric acid and a
+quaternary ammonium salt to yield the product 9,10-epoxystearic acid methyl ester is conducted. A space-time yield of
+0.679 kg L-1 h-1 is achieved.
+Keywords: Slug flow, flow sensor, machine learning, video imaging, computer vision, epoxidation, methyl oleate,
+parallelization, microreactor
+
+1 Introduction and motivation
+The energy consumption of the process industry plays a significant role in the total global energy demand (Elzinga
+et al. 2014; Kim et al. 2017; Tam et al. 2009). Chemical processes are core components of most industries and are the
+largest consumers of energy in the industrial sector. Considering the global threats emerging from excessive energy
+consumption, it is imperative to design and operate efficient processes with significantly reduced environmental
+footprint. Defined by Ramshaw (1983) as “Devising exceedingly compact plant which reduces both the ‘main plant
+item’ and the installations costs.” and Stankiewicz & Moulijn (2000) as “Any chemical engineering development that
+leads to a substantially smaller, cleaner, and more energy-efficient technology.”, Chemical engineers, since the 1970s
+have slowly began exploring intensified processes to better meet the demands of the ever-increasing global economic
+engine. This development of chemical processes with emphasis on increased selectivity, space-time yield, and
+decreased specific energy consumption is commonly referred to as process intensification (Aubin et al. 2010). One of
+the four generic principles of Process Intensification according to Gerven & Stankiewicz (2009) is the targeted
+enhancement of mass and heat transfer rates. This is typically achieved in micro-scale equipment, such as
+microreactors, due to their significant increase in specific interfacial area. Because of this, parameters relevant for
+efficiency can differ by several orders of magnitude compared to conventional-scale systems (Lerou et al. 2010).
+This paper focuses on sustainability and process intensification, by coupling the efficiency of the microreactor
+systems with the efficiency increase in deploying cutting edge technology for system automation by scaling up micro
+reactors for production level quantities, using sustainable green chemicals to produce in-demand products. A computer
+vision sensor for liquid-liquid capillary slug flow parameters is developed and applied in control of parallel capillary
+slug flow microreactors. These newly developed sensors enable observing multiple microreactors at once in real-time
+and the developed control system helps in using these high frequency control inputs to intelligently actuate the
+microreactor plant. The paper concludes with the proof of concept of a scaled-up (dual-channel) reaction system using
+the developed sensor and control system.
+Capillary slug flow is a multiphase flow pattern characterized by the regular occurrence of capsule-shaped segments, or “slugs”,
+made up of a disperse phase, separated from each other by liquid segments made up of the continuous phase. The wetting behaviour
+of each liquid toward the capillary material determines which phase acts as the continuous phase. The disperse phase is completely
+enclosed by the continuous phase, which forms a thin liquid film at the tube wall of height h wf, as presented in Figure 1. The well-
+
+1
+
+defined flow pattern provides a uniform interfacial area and internal circulation patterns, creating a favourable environment for
+mass transfer processes between the two phases. This makes the capillary slug flow regime a subject of active research in the
+intensification of liquid-liquid contactors. It is, for example, well-established that the advantages of the capillary slug flow may be
+used to intensify mass-transfer-limited liquid-liquid multiphase reactions (Kashid et al. 2005; Kashid et al. 2011). Additionally, the
+use of capillary tubes with an inner diameter of ≤ 1 mm provides a high volume-specific surface area, intensifying heat- and mass
+transfer across the capillary wall. (Taha and Cui 2004)
+Wetting Phase
+
+Non-Wetting Phase
+
+hwf
+
+R
+R0
+vs
+
+Ls
+Capillary
+
+Lu
+
+Figure 1: Schematic representation of liquid-liquid capillary slug flow.
+
+Liquid-liquid capillary slug flows are characterized by three parameters: The slug length L s, the translational slug
+velocity vs and the volumetric phase ratio φ = V̇continuous / V̇disperse between continuous and disperse phase, where V̇
+describes a volumetric flow rate (Arsenjuk et al. 2020b). Gladius et al. (2021) go as far as to show that the use of a
+liquid-liquid slug flow capillary microreactor (SFCMR) enables control over conversion and selectivity in the solventfree, phase-transfer catalysed epoxidation of methyl oleate (MO) to 9,10-Epoxystearic acid methyl ester (EAME), by
+adjusting these slug flow parameters. As shown in the reaction scheme in Figure 2, hydrogen peroxide is used as a
+“green” oxidant (Anastas and Warner 2000). The reaction is carried out using tungstophosphoric acid (TPA) as the
+oxidation catalyst and quaternary ammonium salt Aliquat 336 (Q) as a phase transfer catalyst, enabling high yields
+without the need for a solvent (Kozhevnikov et al. 1998).
+H3C
+
+H3C
+
+O
+[TPA/Q]
++H2O2
+
+O
+H3C
+
+-H2O
+
+O
+O
+
+O
+H3C
+
+Figure 2: Reaction scheme of the solvent-free, phase-transfer catalyzed epoxidation of methyl oleate (MO) to 9,10-Epoxystearic
+acid methyl ester (EAME) using hydrogen peroxide with tungstophosphoric acid (TPA) as oxidation catalyst and quaternary
+ammonium salt Aliquat 336 (Q) as phase transfer catalyst (Gladius et al. 2021).
+
+As the favourable effects associated with the liquid-liquid slug flow regime only appear in small capillaries, the
+scale-up of equipment like SFCMRs remains a challenge, with strongly limited throughput as the trade-off for
+intensified mass transfer (Kashid et al. 2015). Numbering-up by using parallel channels is one of the commonly
+employed methods of scale-up in capillary microreactors, and is the strategy used in this work. In the case of twophase microreactors, Kashid et al. (2010) differentiate between external and internal numbering-up, where the former
+describes the simple replication of entire devices to increase capacity, while the latter describes the replication of
+structures within a device as a means of scale-up. External numbering-up usually produces more predictable results
+but introduces redundancy and complexity. Internal numbering-up, on the other hand, aims to limit redundancy during
+numbering-up by replicating only (sub)structures with fixed dimensions and scaling all other structures and devices
+(Kockmann et al. 2011; Kockmann and Roberge 2011; Zhang et al. 2017).
+2
+
+Prior research shows that for even fluid distribution in all parallel channels of a multi-capillary liquid-liquid
+contactor, some additional considerations must be made (Kashid et al. 2010): Although all parallel capillaries are
+nominally identical, manufacturing tolerances, corrosion, solid precipitation, or deposition are non-negligible for the
+fluid distribution across parallel capillaries at the micro scale. Therefore, to achieve uniform results across all units,
+vs, φ and Ls must be measured and regulated in each capillary (Arsenjuk et al. 2020b; Vietinghoff et al. 2020). For this
+purpose, Arsenjuk et al. (2020b) developed a concept for the active regulation of multichannel liquid-liquid contactors
+with the ability to control all slug flow parameters across several parallel capillaries. This is achieved by using
+pressure-controlled distributors, temperature-controlled microchannels acting as rheological flow control valves (socalled thermorheological valves) and a type of adjustable slug flow generator capable of continuously altering slug
+length. A flowsheet of the concept is depicted in Figure 3.
+
+Figure 3: Flowsheet of the parallel slug flow reactor control concept developed by Arsenjuk et al. (2020b).
+B. M. A. Wolffenbuttel et al (2002) provides a summary of the four most common sensing techniques employed
+in liquid-liquid slug flow monitoring, including impedance-, absorbance- and reflectance sensors, as well as video
+imaging, which is concluded to be slow and elaborate. In addition, Arsenjuk et al. (2020b) and Vietinghoff et al.
+(2020) describe the use of infrared (IR) optical sensors. While the IR-based sensor may be realized in a non-intrusive
+and cost-effective way, at least one sensor per parallel capillary is required and the sensor is prone to irregularities in
+the slug flow pattern as well as requiring precise positioning. Moreover, adding reactants into the system, instead of
+inert substances, further increase the need for a sophisticated monitoring system to run the plant seamlessly and
+improve scalability. To address this, a video-based approach where raw video feed of the monitored capillaries is
+processed in real time by a computer vision algorithm to measure the slug length L s, phase ratio φ, and slug velocity
+vs in multiple parallel capillaries is developed. By using a camera as the primary sensor equipment, multiple capillaries
+may be monitored using only one piece of hardware while the use of modern computer vision software allows for
+robust detection of the relevant slug flow features. In addition, the use of a camera and machine learning methods
+opens the possibility of future extensions to the image processing algorithm capable of making information usually
+gathered by visual inspection available to an automated control system.
+The use of a camera is made possible by leveraging recent advances in neural-network-based object detection
+algorithms. Research by Joseph Redmon (2018) and Bochkovskiy et al. (2020) gave rise to the YOLO-class of object
+detection algorithms. YOLO – an acronym for “you only look once”– is an object detector based on a convolutional
+neural network (CNN), capable of classifying and localizing objects within an image in a fast and efficient manner.
+Its speed is due to the single-pass working principle, where localization and classification is done on the entire image
+in one pass of the network. In contrast, algorithms like the R-CNN series, which employ a two-stage approach, first
+localize objects, and subsequently classify them in another algorithm sub-structure (Girshick et al. 2014). While the
+single-pass approach is slightly less accurate, it is efficient and capable of enabling real-time object detection on video
+3
+
+feeds. As a CNN-based object detector, YOLO is also easily adaptable and may be retrained to detect many types of
+objects, provided labelled data sets exist (Simon Haykin 2009).
+The general structure of the YOLO-type object detection algorithm is shown in Figure 4, where the input to the
+algorithm is the full image, represented as a tensor with three colour channels. The image is fed into the backbone,
+which consists of several convolutional layers responsible for feature extraction and down sampling of the image. The
+neck collects feature maps at different scales of the backbone and carries out pooling operations. Lastly, the head is
+responsible for predicting bounding box locations and objectness scores which represent the output of the algorithm.
+Due to the single-pass nature of YOLO, many overlapping bounding boxes are predicted for a singular object, making
+it necessary to cull bounding boxes by non-max suppression, taking into account the objectness scores and
+intersection-over-union values. (Bochkovskiy et al. 2020; Redmon et al. 2015)
+
+Input Image
+
+Backbone
+
+Neck
+
+Head
+
+Figure 4: Generalized structure of a YOLO-type single-pass object detector. (Bochkovskiy et al. 2020)
+
+As YOLO-type object detection algorithms only classify and locate objects in an image, further post processing of
+YOLO’s outputs is necessary to determine the desired slug flow parameters from images or video feeds. To achieve
+this, two different algorithms are developed in this work and compared in terms of performance and accuracy.
+
+2 Methods & Materials
+To develop the computer vision slug flow sensor, it was necessary to collect training data to retrain the YOLO
+object detector for the application in the system at hand. Furthermore, algorithms to extract and process the desired
+data from the output of the object detector were designed. To validate the resulting sensor as well as to test its
+performance, experimental setups were created. Specifically, one setup consists of a single capillary fed by syringe
+pumps to generate images for training and the determination of basic indicators of sensor performance. A second
+experimental setup was created to demonstrate the ability of the sensor developed in this work to serve as part of a
+feedback control loop for a dual channel SFCMR carrying out the solvent-free epoxidation of methyl oleate in two
+parallel capillaries.
+2.1
+
+Experimental setups
+
+A two-phase system consisting of technical grade ca. 70 wt.% methyl oleate (Sigma Aldrich, impurities consist of
+methyl stearate and methyl palmitate) as the continuous organic phase and demineralized water as the disperse (i.e.,
+slug-forming) phase is used in sensor and controller development. In the test setup, syringe pumps send the two phases
+to a variable-geometry slug generator where the slug flow is formed (Arsenjuk et al. 2020a). By varying the geometry
+of the slug generator, the emerging slug length can be altered. The slugs flow through a flexible, transparent plastic
+capillary made of fluoroethylene propylene (FEP), with a nominal inner diameter of 1 mm. A section of the capillary
+4
+
+tube is coiled and fixed on top of a white surface to simulate a multi-capillary setup. Above this the camera is
+positioned. The setup is illustrated in Figure 5.
+
+Figure 5: Flow diagram of the plant.
+
+The camera setup consists of a vertical height-adjustable stand holding the camera (with specifications shown in
+Table 1) in place, in a location with minimum interference from external light sources. The video feed is transferred
+to a computer for processing via USB 3.0. The use of a single capillary and syringe pumps allows for slug length Ls,
+phase ratio φ and slug velocity vs to be set and controlled precisely for sensor development and testing.
+Table 1: Camera settings for training and validation dataset collection
+
+Camera type
+Lens
+Software
+Resolution
+Camera distance from capillaries
+Max. Frames per second
+Video codec and format
+
+The Imaging Source DFK 37BUX265
+Computar H0514MP2, 5mm
+IC Capture 2.4
+1280 x 720
+50 - 250 mm
+20
+MJPEG/AVI
+
+The data collected on the single-capillary test setup was then used to design the capillary reactor test setup. A flow
+diagram of the dual-channel liquid-liquid SFCMR is shown in Figure 6. It consists of two pressurized stainless-steel
+holding vessels B1 and B2, thermorheological flow control valves TRV 1-4, automatically adjustable slug generators
+SG 1 and 2, phase separator B4, and automatically adjustable control valves VC8, VC11 and VC12 (Swagelok SSSS1-A). Here, the computer vision sensor fulfils the measurement functionality of slug length controllers GIC 1 & 2,
+phase ratio controllers QFI(C) 1 & 2, as well as slug velocity controllers SI(C) 1 & 2. The reaction zones (REAC)
+consist of FEP capillary with a length of 15 m each, suspended in a water bath at 60°C. The reactants are pressurized
+to 0.5 MPa in the holding vessels for propulsion to the slug generators.
+
+5
+
+N2
+(0.5 MPa)
+
+Slug length
+control
+B1
+
+B2
+
+1
+GIC
+
+1
+2
+
+Level control
+1
+QFI
+
+1
+SI
+
+REAC
+3
+
+Methyl oleate +
+Catalyst
+
+Phase ratio
+control
+
+4
+TRVs
+
+Organic
+phase
+
+1
+LIC
+
+SG1
+
+VC8
+
+H2O2
+
+VC11
+
+SG2
+
+2
+GIC
+
+2
+QFIC
+
+B4
+3
+PIC
+
+2
+SIC
+VC12
+
+Aqueous
+phase
+
+Slug velocity control
+Figure 6: Flow diagram of the dual-channel SFCMR setup including main control loops, pressurized holding vessels B1 and B2,
+thermorheological valves TRV 1-4, slug generators SG 1 and 2, reaction zones (REAC) with a length of 15 m each, phase
+separator B4, and automatically adjustable control valves VC8, VC11 and VC12.
+
+The control targets are: 1) Both channels should achieve and maintain a set average parameters v̄s, φ̄, and L̄s and
+2) parameters vs,i, φi, and Ls,i should remain similar in both channels during normal operation to ensure predictable
+results during numbering-up. Because both reactors are connected both supply-side as well as down-stream, they act
+as interconnected channels. As a practical means of addressing the coupling behaviour brought on by this, control of
+φi and vs,i is decomposed into control of the average across all reactor channels, as well as control of the difference
+between both channels using the “Delta-Controller” developed for this task. Further details on this can be found in
+Appendix A. Slug length Ls is controlled by setting the slug generator insertion depth. This is done on a per-channel
+basis as the adjustment of slug length shows little coupling with the other parameters.
+2.2
+
+Epoxidation catalyst
+
+As previously mentioned, the solvent-free epoxidation of methyl oleate using hydrogen peroxide requires a catalyst
+to achieve meaningful conversion. Contrary to previous works, here the active species consisting of
+TPA (H3[PW12O40]) and Q (N[(CH3)(C8H17)3]Cl) is not formed in-situ, but rather pre-synthesized (Gladius et al.
+2021). This is done as the component TPA is present as a solid at room temperature and promotes the decomposition
+of the 35 %-w H2O2 used to conduct the reaction. Secondly, TPA has been found to cause deposits within the TRVs,
+especially during cooling.
+Because full or partial blockages are detrimental to the performance of micro reactors in general, a different
+approach is necessary. Therefore, the active species – also referred to as Venturello Complex (Q3[PW12O40(O)]) –
+which presents as an ionic liquid soluble in methyl oleate, is prepared according to a modified procedure adapted from
+kinetic studies by Maiti et al. (2019), as well as Wang and Huang (2004). For a detailed description of the preparation
+procedure used in this work refer to Appendix B.
+2.3
+
+Computer vision slug flow sensor
+
+The three parameters of interest – slug length Ls, volumetric phase ratio φ, and slug velocity vs – can be divided
+into two groups: Spatial and temporal. In principle, determining Ls and φ requires spatial detection and classification
+in single video frames, while vs estimation requires extraction of temporal information on the detections in sequential
+video frames. As shown in Figure 7, raw image data is first captured and pre-processed, which includes cropping and
+resizing of the frame, as well as converting the image data into a suitable array format. Next, the object detection
+6
+
+algorithm determines spatial parameters, which are also stored in internal memory. Finally, using current and previous
+spatial data, temporal processing takes place to yield the corresponding parameter.
+
+Memory
+
+Raw
+Image
+
+Image
+Capture
+
+Object
+Detection
+
+Temporal
+Processing
+
+Temporal
+Parameters
+Spatial
+Parameters
+
+Figure 7: Schematic representation of the image processing algorithm to extract slug flow parameters from a sequence of raw
+images.
+
+The algorithm is implemented using Python with its packages Keras and TensorFlow for machine-learning tasks,
+OpenCV for image processing and NumPy for numerical operations. As the use of graphics processing units (GPU)
+provides speed advantages over typical central processing units (CPU) in the calculations associated with artificial
+neural networks, GPUs are employed in this work (Raina et al. 2009). Specifically, the Nvidia GeForce GPUs
+RTX2070 (training and inference), and 940M (inference) are used to provide benchmarks at different levels of
+hardware capability and cost.
+2.3.1 Spatial parameter estimation using object detection
+As convolutional neural networks (CNN) have found widespread application in computer vision tasks involving
+object detection – often vastly outperforming prior methods in terms of accuracy and speed – the use of a CNN-based
+algorithm for the extraction of information on spatial slug flow parameters from a video feed appears reasonable (Gu
+et al. 2015; Mahony et al. 2019). For this, two possible solutions can be considered: In the first, a pre-existing object
+detector network is trained on hand-labelled images of slugs in capillaries, and the two parameters are calculated using
+elementary geometry on the detection coordinates. Alternatively, a custom network that directly estimates the two
+parameters from a raw video feed could be developed. While the latter may result in a fast, purpose-built solution, it
+would likely be very time-consuming. Therefore, the large volume of available research is leveraged by using the
+existing YOLO object detection algorithm at the core of the computer vision slug flow sensor. In addition to being
+fast and simple to re-train for the detection of slugs, the YOLO algorithm holds two major benefits for the use in a
+slug flow sensor: Its outputs are in the form of rectangular bounding boxes around detected objects, which
+conveniently approximate the shape of a slug, and detection of multiple objects per frame is inherently supported,
+allowing the monitoring of multiple channels with minor additional post-processing (Bochkovskiy et al. 2020).
+As the YOLO-algorithm has received much attention in recent years, several versions with slightly different
+architectures have been developed by the original authors and others. Therefore, the versions YOLOv3 and YOLOv4,
+as well as the reduced model YOLOv4-tiny, are investigated for the use in the computer vision slug flow sensor.
+YOLOv3 employs the full Darknet53 backbone, a feature pyramid network as the neck and three YOLOv3 heads,
+while YOLOv4 uses the CSPDarknet53 backbone, including several optimizations over Darknet53 which make it
+more accurate but also slower in certain instances, as well as pooling layers and a path aggregation network as the
+neck (Bochkovskiy et al. 2020; Joseph Redmon 2018). The heads of YOLOv4 remain unchanged from previous
+iterations. YOLOv4-tiny uses the smaller CSPDarknet53-tiny backbone with a feature pyramid network neck and two
+YOLOv3 heads, instead of three (Jiang et al. 2020). All versions of YOLO are implemented using the TensorFlow
+machine learning framework. As inputs, square images with a width σ of 416 pixels and 608 pixels are tested, and one
+class (slug) is defined for classification, resulting in the models YOLOv3-608, YOLOv4-608, YOLOv4-416 and
+YOLOv4-tiny-416, where the number refers to the width of the image the model accepts as its input.
+
+7
+
+The dataset used for training, validation and testing consists of 340 unique images at different slug lengths L s
+(1.8 – 8.3 mm), as well as varying slug velocities v s (0 – 26 mm s-1). All images were captured at a camera height of
+120 mm. To further improve the robustness of the training result, the dataset is augmented by flipping images
+horizontally and vertically, as well as adjusting brightness up and down by up to 40%, resulting in a set of 819 images.
+The set is split into a training set (80%), validation set (10%), and testing set (10%).
+The output of the object detector is a matrix of normalized bounding box coordinates with the structure illustrated
+in Figure 8 below. The bounding boxes determined by the object detector approximate the slugs as rectangles. As the
+detections appear in the coordinate matrix in no order, an algorithm is introduced which dynamically assigns channel
+coordinates according to the y-components of the detection matrix and sorts the detections into their respective
+channels on each frame.
+
+1 x1,1 y1,1 x1,2 y1,2
+
+1
+
+2 x2,1 y2,1 x2,2 y2,2
+
+:
+
+i
+
+n
+
+:
+
+2
+
+:
+
+(x 1,2,y1,2)
+
+:
+
+:
+
+:
+
+:
+
+:
+
+n xn,1 yn,1 xn,2 yn,2
+
+Detections
+
+Coordinate Data
+
+(x 1,1,y 1,1)
+
+Figure 8: On the left, bounding boxes (red) approximate the shape of slugs (blue) within an image. On the right, the
+corresponding output of the object detector in the form of a coordinate matrix C.
+
+The vector of estimated slug lengths L⃗s = (Ls,1 ,...,Ls,nc ) is determined from the coordinate matrix C shown in Figure
+8. Here, each element of ⃗Ls denotes the maximum estimated slug length of a respective channel within a frame, while
+𝑛𝑐 is the number of detected channels in the frame. With the horizontal coordinates xi,1, and xi,2 from matrix C, as well
+as the pixel density 𝑑𝑝 (in pixels per millimeter), the length of a slug 𝐿𝑠,𝑖 for a row of matrix C can be determined as
+follows:
+(𝑥𝑖,2 − 𝑥𝑖,1 ) ∙ 𝑑𝑝 = 𝐿𝑠,𝑖
+
+Eq. 1
+
+As a single channel may have multiple slugs in a single frame, a means of reducing the detected slug lengths to
+one slug per channel is necessary. For the larger model YOLOv4-416, which could be trained to exclude partial slugs
+at the edge of the frame, applying the channel-wise average appeared suitable. The smaller model YOLOv4-416-tiny,
+on the other hand, could not be trained the exclude partial slugs, therefore the channel-wise maximum was used to
+return sensible slug length estimations.
+In addition to the slug length measurements, the detection coordinate matrix C and channel coordinates are used
+to create a binary sequence array S, which is used in the channel-wise estimation of volumetric phase ratios 𝜑𝑘 .
+𝑠1,1
+𝑺=[ ⋮
+𝑠𝑛𝑐,1
+
+… 𝑠1,𝜎
+⋱
+⋮ ],
+… 𝑠𝑛𝑐 ,𝜎
+
+𝑠𝑘,𝑚 ∈ (0, 1)
+
+Eq. 2
+
+This is achieved by initializing an array of binary values the size of the input image with zero. Using the detection
+coordinates, the initialized array is augmented by writing ones at the indices enclosed by the bounding boxes creating
+the binary stencil array A. Lastly, the array is simplified by including only the rows at the channel coordinates, yielding
+the binary sequence array S of size nc×σ. A graphical representation of this algorithm is shown in Figure 9.
+
+8
+
+Detected channel
+y-coordinates
+
+x
+y
+a) σ
+
+nc
+σ
+σ
+Bounding box
+coordinates
+
+Binary stencil array
+A
+
+Sequence array
+S
+
+b)
+
+Figure 9: a) Algorithm for the creation of the binary sequence array S. The bounding box coordinates are used to create the
+binary stencil array A, which is reduced to include only the rows at the detected channel y-coordinates 𝑦̂𝑐 . This yields the binary
+sequence array S. b) A single row of a sequence array S next to the image it was generated from.
+
+From the sequence array S, the vector of estimated volumetric phase ratios 𝜑⃗ = (φ1 ,...,φnc ) can be calculated
+according to Eq. 3, where J is a σ×nc matrix of ones and ⊘ denotes the element-wise, or Hadamard, division between
+the resulting vectors.
+𝜑
+⃗ = [𝑺 𝑱] ⊘ [( 𝑱𝑻 − 𝑺) 𝑱 ]
+
+Eq. 3
+
+For the validity of Eq. 2, it is assumed that slug detections which include the entire width of the frame do not occur.
+As slugs of this length lie outside the intended working range of the sensor, this limitation is acceptable.
+2.3.2 Slug velocity estimation by temporal processing of spatial slug flow measurements
+Estimation of the vector of slug velocities 𝑣𝑠 = (vs,1 ,...,v𝑠,nc ) is possible by considering consecutive images from a
+video feed and evaluating the movement of the detected slugs for each respective channel. For this, two approaches
+are developed and investigated: In the first, the YOLO object detector is extended by an additional neural network
+structure which accepts a series of the sequence arrays S(t) of consecutive images from a video feed as its input and
+returns the vector of estimated slug velocities 𝑣𝑠 = (vs,1 ,...,v𝑠,nc ) as its output. In the second approach, consecutive
+sequence arrays S(t) are processed using an explicit calculation scheme, based on matrix-vector operations.
+The neural network approach is realized using a long short-term memory network (LSTM) to create a robust
+algorithm for accurate and precise slug velocity estimation. LSTM networks are a widely used variant of recurrent
+neural networks (RNN) introduced by Hochreiter and Schmidhuber (1997), which tackle important shortcomings of
+recurrent networks developed previously. During the training of RNN, error signals flowing through the feedback
+loop tend to either (a) blow up or (b) vanish since the evolution of the backpropagated error exponentially depends on
+the size of the weights. Case (a) may lead to oscillating weights, while in case (b) learning to bridge long time lags
+can take prohibitively long or does not work at all. The originally proposed architecture solves this by enforcing
+constant error flow-through internal states of specific units and truncated gradients at certain points (Hochreiter and
+Schmidhuber 1997). There are several LSTM variants found in the literature, of which the one introduced by Gers et
+9
+
+al. (1999) will be outlined here, as this version is implemented in the Keras API. The central idea behind the LSTM
+architecture is a memory cell that can maintain its state over time, and non-linear gating units that regulate the
+information flow into and out of the cell (Greff et al. 2016). In addition to the input and output gates, the cell described
+by Gers et al. (1999) also uses a forget gate which can decide what information will be discarded from the cell state.
+This modification is introduced as the authors observed that the cell states often tend to grow linearly during the
+presentation of a time series, which leads to the saturation of the output activation function and thus vanishing of the
+gradients during training.
+Several iterations of the LSTM slug velocity estimator were considered, with the best results achieved by the model
+5-LSTM(256-128)-FC(64-32-16). It accepts an array of five nc×400 centre subsets S̲ from a moving window of
+consecutive sequence arrays S, beginning at the time of measurement t m, as its input. Each of the five subsets S̲ is fed
+into an LSTM block with batch normalization and 20% dropout. After this, alternating fully connected layers and
+batch normalization are used. This structure is shown in Figure 10.
+Input
+
+Dimension
+
+tm-4)
+
+tm-3)
+
+tm-2)
+
+tm-1)
+
+tm)
+
+LSTM
+
+LSTM
+
+LSTM
+
+LSTM
+
+LSTM
+
+(nc, 400, 5)
+
+(nc, 256, 5)
+20% Dropout + BN
+(nc, 256, 5)
+LSTM
+
+LSTM
+
+LSTM
+
+LSTM
+
+LSTM
+(nc, 128)
+
+20% Dropout + BN
+(nc, 128)
+Fully Connected + BN
+(nc, 64)
+Fully Connected + BN
+(nc, 32)
+Fully Connected + BN
+(nc, 16)
+Linear output
+Output
+vs(tm)
+
+Figure 10: Structure of the LSTM slug velocity detector 5-LSTM(256-128)-FC(64-32-16).
+
+The explicit calculation scheme, on the other hand, is meant to be a simple and fast approach to the problem of
+slug velocity estimation. For this, two core operations are necessary: First, the number of detected slugs in each
+channel is determined from the sequence array S(tm) at the time of measurement tm, which is subsetted into its left σ1 columns 𝑆1̅ and its right σ-1 columns 𝑆2̅ . By subtracting the two submatrices and taking the absolute value of each
+element, the edges of the detected slugs are highlighted in the resulting matrix B. The row-wise sum, here achieved
+by multiplying B with (σ-1)×nc matrix of ones Jn, yields the vector 𝑛⃗𝑡 of total transitions in each channel:
+𝑠1,1
+𝑆1̅ = [ ⋮
+𝑠𝑛𝑐 ,1
+𝐵=[
+10
+
+𝑠1,2
+… 𝑠1,𝜎−1
+⋱
+⋮ ] , 𝑆2̅ = [ ⋮
+𝑠𝑛𝑐,2
+… 𝑠𝑛𝑐,𝜎−1
+
+|𝑠1,1 − 𝑠1,2 |
+⋮
+|𝑠𝑛𝑐,1 − 𝑠𝑛𝑐,2 |
+
+… 𝑠1,𝜎
+⋱
+⋮ ]
+… 𝑠𝑛𝑐 ,𝜎
+
+… |𝑠1,𝜎−1 −𝑠1,𝜎 |
+]
+⋱
+⋮
+… |𝑠𝑛𝑐,𝜎−1 − 𝑠𝑛𝑐,𝜎 |
+
+Eq. 4
+
+Eq. 5
+
+𝑛⃗𝑡 = 𝑩 𝑱𝒏
+
+Eq. 6
+
+With this, the vector of estimated slug velocities 𝑣𝑠 is determined by subtracting the two consecutive sequence
+arrays S(tm-1) and S(tm), taking the element-wise absolute value to yield matrix 𝑆∆ (𝑡𝑚 ), and finally applying the rowwise sum as well as scaling factor f, dependent on frame-time tf and pixel density dp:
+𝑆∆ (𝑡𝑚 ) = [
+
+|𝑠1,1 (𝑡𝑚−1 ) − 𝑠1,1 (𝑡𝑚 )|
+⋮
+|𝑠𝑛𝑐,1 (𝑡𝑚−1 ) − 𝑠𝑛𝑐,1 (𝑡𝑚 )|
+𝑓=
+
+… |𝑠1,𝜎 (𝑡𝑚−1 )−𝑠1,𝜎 (𝑡𝑚 )|
+]
+⋱
+⋮
+… |𝑠𝑛𝑐,𝜎 (𝑡𝑚−1 ) − 𝑠𝑛𝑐 ,𝜎 (𝑡𝑚 )|
+
+1
+𝑡𝑓 𝑑𝑝
+
+𝑣𝑠 (𝑡𝑚 ) = 𝑓 {[𝑺∆ (𝑡𝑚 ) 𝑱] ⊘ 𝑛⃗𝑡 }
+
+Eq. 7
+
+Eq. 8
+
+Eq. 9
+
+As Eq. 9 is only valid so long as no element of n
+⃗ t is zero, safeguards must be in place. Because channel detection
+is performed on every frame, in the absence of slugs in one channel, the channel is simply not detected as such, and
+no estimated slug velocity is calculated.
+
+3 Results
+In the following section, the different versions of the computer vison slug flow sensor developed in this work are
+evaluated. Furthermore, the performance of the most efficient version of the sensor developed in this work, YOLOv4416-tiny with explicit temporal processing, is implemented as part of the dual-channel liquid-liquid SFCMR setup and
+executed using the GeForce 940M mobile GPU to simulate the use of edge devices available for industrial settings.
+3.1
+
+Performance of the computer vision slug flow sensor
+
+Important performance indicators of the computer vision slug flow sensor are its accuracy in estimating spatial
+and temporal slug flow parameters, as well as the maximum possible sampling rate on a video stream. Figure 11 shows
+a graphical user interface, designed to observe the computer vision slug flow sensor during operation. In this case,
+four parallel channels are monitored simultaneously. The indicators “YOLO time” and “PP time” show the execution
+time for the YOLO object detector and the post-processing including channel detection, spatial, and temporal
+processing, respectively.
+
+11
+
+Figure 11: Slug detection on four channels. YOLO Time, PP time, slug length Ls, slug velocity vs and volumetric phase ratio phi
+(φ) and their respective units have been shown at the top left corner for each individual slug in an array form.
+
+Owing to the way the YOLO class of models infer from images, it is expected that increasing the number of objects
+in an image does not increase the inference time (Redmon et al. 2015). This is confirmed by the data presented in
+Figure 12, as execution time barely increases with the number of channels as in the case of the model YOLOv4-416.
+
+Temporal Proc. RNN
+
+a)
+
+YOLOv4-416
+
+Spatial Proc.
+YOLOv4-416
+
+70
+
+60
+
+Execution time / ms
+
+Execution time / ms
+
+70
+
+Temporal Proc. Explicit
+
+b)
+
+Spatial Proc.
+
+50
+40
+30
+20
+10
+
+60
+50
+40
+30
+20
+10
+
+0
+
+0
+1
+
+4
+
+Number of Channels
+
+8
+
+1
+
+4
+
+8
+
+Number of Channels
+
+Figure 12: Execution times of the individual sections of the algorithm (object detection, spatial processing, and temporal
+processing), using the YOLOv4-416 object detection model, using a) RNN-based, and b) explicit temporal processing. Hardware:
+CPU – Intel i7-6500U, GPU – Nvidia RTX 2070.
+
+12
+
+Execution time of the object detector is instead dictated primarily by the version of YOLO used as well as the
+input size of the object detector. This is shown in Figure 13, where execution time decreases as the size of the input
+frame decreases. It is also apparent that for this task, YOLOv4 holds a clear speed advantage over the older YOLOv3.
+
+Execution time / ms
+
+100
+
+80
+
+60
+
+40
+
+20
+
+0
+YOLOv3-608
+
+YOLOv4-608
+
+YOLOv4-416
+
+Model
+
+Figure 13: Execution time of inference on a single capillary using different versions and input sizes of YOLO. Hardware: CPU –
+Intel i7-6500U, GPU – Nvidia RTX 2070.
+
+30
+
++ 5%
+
+a)
+
+- 5%
+
+25
+20
+15
+10
+
+Explicit
+RNN
+Parity
+
+5
+0
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+Actual slug velocity / mm s
+
+30
+-1
+
+Estimated slug length / mm
+
+Estimated slug velocity / mm s-1
+
+The computer vision slug flow sensor’s accuracy can be ascertained from the parity plots in Figure 14: Plots a)
+and b) compare average estimates by the computer vision slug flow sensor with average manual measurements of
+five-second video segments. Measurements are taken at a constant phase ratio φ of 1. For comparison purposes, results
+are shown for temporal parameter estimation by both RNN and explicit calculation scheme, as well as spatial
+parameter estimation by YOLOv4-416 and YOLOv4-416-tiny.
+11
+
++ 5%
+
+b)
+
+10
+
+- 5%
+
+9
+8
+7
+6
+5
+
+YOLOv4-416
+YOLOv4-416-tiny
+Parity
+
+4
+3
+2
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+Actual slug length / mm
+
+Figure 14: Parity plots for slug velocity vs (a) and slug length Ls (b). The plots compare mean estimates by the computer vision
+slug flow sensor with mean manual measurements of five-second video segments of a single capillary. Measurements are taken at
+a constant phase ratio φ of 1. For comparison purposes, results are shown for temporal parameter estimation by both RNN and
+explicit calculation scheme, as well as spatial parameter estimation by YOLOv4-416 and YOLOv4-416-tiny.
+
+The mean absolute error of slug length estimation is 0.22 mm for YOLOv4-416-tiny and 0.15 mm for
+YOLOv4-416, resulting in mean relative errors of 3.41 % and 3.30 % for slug length estimation across all tested
+13
+
+settings, respectively. The maximum relative error for slug length estimation is no more than 7.0 % for both models,
+with the highest relative errors occurring at the edge of the tested range of slug lengths. Similarly, the mean absolute
+errors of slug velocity estimation are 0.35 mm s-1 and 0.47 mm s-1 for explicit calculation scheme and RNN,
+respectively. The mean relative errors are 2.5 % for the explicit calculation scheme and 3.5 % for the RNN. The
+maximum relative error is no more than 7.3 % at the low end of the tested range of slug velocities.
+As YOLO is a data-based model, its accuracy of object detection is limited by the labelled data used for training.
+Furthermore, as indicated by parity plot Figure 14 b), the estimation accuracy appears to be less accurate at slug lengths
+which were not included in the training set (1.8 mm, 2.2 mm, 3.0 mm, 6.0 mm, and 8.3 mm), resulting in an
+underestimation of slug length at the high end of the scale.
+Figure 15 shows the results of a dynamic test run at a constant phase ratio of 1. Slug length is manually decreased
+in frequent, small steps over two minutes to avoid severely irregular flow patterns during the transience. The inverse
+response of slug length to the adjustment of slug generator geometry, as described previously by Arsenjuk et al.
+(2020a), can be observed at each step. The detected slug velocity values exhibit some variation, showing peaks at
+points where the slug length is adjusted. This slight dependency of velocity on the slug length is expected due to the
+characteristics of the slug generator, which undergoes a change of its internal volume at the time of slug length
+adjustment. As the slug length curves show, both YOLOv4-416 as well as YOLOv4-416-tiny perform similarly,
+however the full model tends to show deeper troughs and slightly slower response to slug length changes. This is
+likely less due to the different intrinsic capabilities of the two models. Instead, this effect is caused by the different
+post-processing for each model. Taking the channel-wise average, as with YOLOv4-416, leads to a delay in response
+time but returns more precise estimates, while applying a channel-wise maximum leads to a faster response time,
+especially in situations where the slug length is increasing, but also the over-estimation of slug lengths as long as slugs
+longer than the most recent one is visible within the frame.
+
+24
+
+10
+
+20
+
+8
+
+18
+
+Slug velocity (explicit)
+Slug velocity (RNN)
+Slug length (YOLOv4-416-tiny) 6
+Slug length (YOLOv4-416)
+
+16
+14
+12
+
+Slug length / mm
+
+Slug velocity / mm s-1
+
+22
+
+4
+
+10
+8
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+90
+
+100
+
+110
+
+Time / s
+
+Figure 15: Dynamic test run with decreasing slug length at a constant velocity – unfiltered data. Phase ratio φ = 1.
+Figure 16 shows the results of second dynamic test run where the slug velocity is changed at a constant slug length
+setting and a phase ratio of 1. A notable detail in this run is the non-dependence of slug length on slug velocity.
+
+14
+
+5
+
+4
+
+25
+20
+
+3
+15
+10
+
+Slug velocity (RNN)
+Slug velocity (explicit)
+Slug length (YOLOv4-416-tiny)
+Slug length (YOLOv4-416)
+
+5
+
+2
+
+0
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+Slug length / mm
+
+Slug velocity / mm s-1
+
+30
+
+1
+90
+
+Time / s
+
+Figure 16: Dynamic test run with decreasing velocity at unchanged slug generator setting – unfiltered data. Phase ratio φ = 1.
+
+It is visible that both the explicit, as well as the RNN-based algorithm, show very similar dynamics. The estimates
+provided by the RNN-based algorithm appear to be slightly smoother than those returned by the explicit temporal
+processing scheme. This is likely caused by the fact that the RNN-based approach uses samples from five consecutive
+points in time, making the RNN-based algorithm exhibit properties of a filter. A similar reduction of variability in the
+results of the explicit temporal processing scheme can be achieved by employing a simple moving average filter at
+the expense of a fast response time.
+All development and testing discussed above was conducted with cropped, but otherwise unadulterated images
+and video feed at native camera resolution and a vertical camera height of 120 mm. Considering the goal of developing
+a computer vision slug flow sensor suitable for the fast and flexible parallelization of capillaries (e.g., in capillary
+reactors), the degree to which the sensor algorithm can function at different camera heights as well as with scaled
+video feed without re-training was investigated. As the number of capillaries visible in each frame is dependent on the
+distance of the camera from the capillaries, the robustness of the developed sensor algorithm is tested using camera
+distances between 50 and 200 mm. Additionally, because the distance of the camera from the capillaries cannot be
+increased arbitrarily without compromising clarity, higher resolution images are captured and scaled to the input size
+of the respective object detection models. The results are shown in Figure 17:
+
+15
+
+Figure 17: Average absolute errors observed in slug length estimation (actual slug length of 5.6 mm) using YOLOv4-416 with
+video feed of sizes 512 x 512 px, 608 x 608 px, and 800 x 800 px scaled to 416 x 416 px at different camera heights between 50
+and 200 mm.
+
+The error is lowest at camera heights closest to 120 mm – the height used to record the training data. Consequently,
+YOLOv4-416 performs less accurately at camera heights deviating from the camera height used for the training data,
+however, even at camera heights of up to 183 mm, the average absolute error could be acceptable for many applications
+at 5.1% while yielding a 52.5% increase in view window width available for additional capillaries. Furthermore, the
+average absolute error rises quickly with a decrease in camera height despite expectation that a more detailed image
+should lead to a more accurate estimate. As the YOLO-class of models has no prior “knowledge” of slugs, this would
+be a misconception. Additionally, the lager view window may be beneficial to estimation accuracy in the sense that it
+offers a larger number of slugs for averaging, making the computer vision slug flow sensor relatively less sensitive to
+disturbances and failed detections. Similarly, capturing video using larger resolutions and scaling it to fit the model
+input size results in less accurate results, the further the resolution used deviates from the resolution used for training.
+A notable detail is the relatively high accuracy of YOLOv4-416 at a camera height of 86 mm and a capture resolution
+of 800 x 800 px. This is likely caused by the opposing effects of scaling the image down, which results in reduction
+in size of the slugs in the view window and the reduction in camera height, which increases the size of the slug,
+indicating that the size of the slug within the image relative to the total size of the image is a critical variable for
+training and should be considered in the selection of training data sets for future iterations of the sensor.
+
+3.2
+
+Sensor performance in feedback control loops
+
+To evaluate the performance of the sensor as part of a feedback control system and present a low-redundancy
+control concept for such reactor setups, it is implemented in the two-capillary liquid-liquid SFCMR carrying out the
+solvent-free epoxidation of methyl oleate to 9,10-epoxystearic acid methyl ester presented in section 2.1.
+3.2.1 Slug length control
+Because the slug lengths only have a minor impact on the other slug flow parameters and vice versa, their control
+is rather uncomplicated in terms of inter- and intra-capillary coupling and can be achieved using separate SISO PIcontrollers. Figure 18 shows a simultaneous step change of both reactors’ slug length setpoints:
+
+16
+
+Slug length / mm
+
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+300
+
+SL Reactor 1
+SL Reactor 2
+Setpoint
+
+400
+
+500
+
+600
+
+700
+
+800
+
+Time / s
+Figure 18: Slug length setpoint change.
+
+After the step change, the system takes about 60 seconds to bring the slug lengths of both reactors to within a 10%
+margin of the setpoint and about 100 seconds until fully settled. A notable challenge in slug length control lies in the
+fact that long slug lengths over five millimeters effectively produce fewer measurement updates due to the fixed size
+of the measurement window, leading to lag effects and an emphasis on the natural variation of the slugs produced by
+the slug generators. Furthermore, the system response to a change in slug generator position elicits an inverse response.
+In combination, this leads to oscillations as seen between 380 and 500 seconds. These oscillations may be reduced by
+the reduction of the PI-controller gain at the cost of a slower step response and a longer settling time. Ultimately, slug
+lengths greater than six millimeters are not particularly relevant for the task at hand (the epoxidation of methyl oleate)
+and thus present an extreme case, but in future iterations, a controller gain schedule could help mitigate the effect of
+these nonlinearities.
+3.2.2 Slug velocity and phase ratio control
+A set of step inputs to the phase ratio setpoint is depicted in Figure 19. Between zero and 600 seconds, the setpoint
+tracking for both reactors is satisfactory, keeping within a 10% margin of the setpoint for 91.8% of the time. At a
+phase ratio of 6 and after step inputs to the phase ratio setpoint, the process shows more variability, mostly in the form
+of oscillations about a mean. This behavior settles once the “Delta”-controller becomes active, which is indicated by
+a change in the TRV temperatures.
+
+8
+
+Phase ratio / -
+
+80
+
+PR Reactor 1
+PR Reactor 2
+Setpoint
+TRV1 Temp.
+TRV3 Temp
+
+7
+6
+
+70
+60
+
+50
+
+5
+40
+
+4
+
+30
+
+3
+
+20
+
+2
+1
+0
+
+200
+
+400
+
+600
+
+800
+
+Time / s
+
+Figure 19: Phase ratio setpoint changes.
+
+17
+
+1000
+
+10
+1200
+
+Temperature / °C
+
+9
+
+30
+
+6
+
+25
+
+5.5
+5
+
+20
+
+4.5
+15
+
+4
+10
+
+SV Reactor 1
+SV Reactor 2
+Setpoint
+Phase Sep. Pressure Setpoint
+Pressure Phase Sep.
+
+5
+0
+0
+
+200
+
+400
+
+600
+
+800
+
+3.5
+
+Pressure / bar
+
+SV / mm s-1
+
+The results of step inputs to the slug velocity setpoint are shown in Figure 20: As the slug velocity control system
+is realized as a cascaded loop, setpoint changes take several minutes to conclude while the “Delta-Controller” keeps
+the error between the two reactors below a deviation of 15% for 88.5% of the time. Between 200 seconds and 400
+seconds, the phase separator pressure does not track its setpoint. This happens because the actuator, control valve
+VC12, is saturated (i.e., fully closed). Notably, this behavior is only present for a slug velocity setpoint of 15 mm s -1
+and thus represents the lower boundary of the reactors’ operating range.
+
+3
+2.5
+
+1000
+
+Time / s
+Figure 20: Slug velocity setpoint changes.
+
+The inherent smoothing provided by the spatial processing appears to aid in providing suitable feedback signals to
+the controllers, however, in some cases a more rapid sensor response could bear the potential to improve both
+disturbance rejection as well as step responses.
+3.2.3 Reactor startup performance
+In addition to the control system’s ability to switch between and maintain setpoints, it is important the system can
+be brought into operation quickly and reliably to avoid unnecessary chemical waste.
+In general, the startup procedure consists of three steps: From the standby state (i.e., all shut-off valves are in the
+open position, but the flow is halted by the control valves), the controllers for the phase separator pressure, and level
+are switched on to start the flow of reactants. Once stable slug flow is present in both reactors, the slug velocity, phase
+ratio, and slug length control are switched on. From there, the controllers first attempt to bring the average phase ratio
+and slug length to their setpoints. Once the setpoints of the averages are within their margins for 30 seconds, the
+“Delta-Controller” begins its operation (i.e., it enters its active state). Figure 21 and Figure 22 show this process.
+
+18
+
+PR Reactor 1
+PR Reactor 2
+Setpoint
+TRV1 Temp.
+TRV3 Temp.
+
+5
+
+PR / -
+
+4
+3
+
+2
+1
+0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+100
+90
+80
+70
+60
+50
+40
+30
+20
+10
+0
+600
+
+Temperature / °C
+
+6
+
+Time / s
+
+35
+
+60
+
+30
+
+50
+
+25
+
+40
+
+20
+
+SV Reactor 1
+SV Reactor 2
+Setpoint
+TRV2 Temp
+TRV4 Temp
+
+15
+10
+
+30
+20
+10
+
+5
+0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+Temperature / °C
+
+SV / mm s-1
+
+Figure 21: Phase ratio during startup procedure.
+
+0
+600
+
+Time / s
+Figure 22: Slug velocity during startup procedure.
+
+In general, the system behaves as intended and the startup process illustrates the actions of the “Delta-Controller”
+on step 3 well, where the individual reactor’s slug flow parameters slowly converge. However, Figure 22 shows that
+at an average slug velocity of 20 mm s-1 the “Delta-Controller” is unable to fully converge the two reactors’ slug
+velocities, indicated by the TRV temperatures at the edges of their working range. The error approaches zero only
+once a higher slug velocity is set as reference. This is likely caused by the interference between the TRVs responsible
+for controlling phase ratio error and those controlling slug velocity error. If the aqueous phase is throttled, the phase
+ratio of the respective reactor must also increase, leading to “competition” or coupling between the control loops.
+Throughout the step tests shown above, the computer vision slug flow sensor performs adequately. During the first
+stage of the startup procedure (halted flow) the sensor tends to return false measurements until the operating
+parameters are brought to within the sensor’s operating range, however by employing an open loop control scheme
+during this phase, the sensor’s limitations can be overcome.
+3.2.4 Reaction performance
+To confirm the functionality of the SFCMR, an epoxidation reaction was carried out at a phase ratio of 3, a slug
+velocity of 28 mm s-1, and a methyl oleate to catalyst ratio of 80 g g -1. Because the parallel-capillary reactor includes
+the phase separator, which provides 4.40 ml of holdup volume to the organic phase, the samples are drawn after three
+residence times of the system to ensure the system operates at steady state. The results are displayed in Figure 23.
+
+19
+
+Selectivity SEP/MO /
+mol mol-1
+
+Conversion XMO /
+mol mol-1
+
+0.3
+
+0.2
+
+0.1
+
+0
+
+1
+0.8
+0.6
+0.4
+0.2
+0
+
+Conversion
+
+Selectivity
+
+Figure 23: Conversion and selectivity achieved in the SFCMR.
+
+Figure 24 shows the space-time-yields achieved in the parallel-capillary SFCMR, a single-capillary of the SFCMR
+as well as in stirred-batch mode.
+
+Space-time-yield
+/ kg L-1 h-1
+
+0.8
+0.6
+0.4
+0.2
+
+0
+Batch (interpolated)
+
+Single-capillary
+
+Parallel-capillary
+
+Figure 24: Space-time-yields of the epoxidation of methyl oleate in batch, single-capillary slug flow, and parallel-capillary-slug
+flow modes. φ – 3, MO:Cat (Methyloleat:Catalyst Ratio)– 80 g g-1
+
+Overall, the parallel-capillary SFCMR performs similarly to the single-capillary SFCMR, indicating that
+numbering-up was successful and reaction conditions in the two parallel-capillary reactors were like the reaction
+conditions in a single-capillary reactor.
+
+4 Discussion and outlook
+A computer vision sensor for the extraction of slug length, slug velocity and phase ratio from capillary liquidliquid slug flows from video feeds in real-time, including the necessary post-processing algorithms has been developed
+and tested. The developed sensor is capable of simultaneously monitoring multiple capillaries and provides reasonable
+accuracy at less than 3.5 % mean relative error. The sensor then has been used for the control of a parallelized and
+actively regulated dual-channel slug flow capillary microreactor setup.
+The solvent-free epoxidation of methyl oleate with hydrogen peroxide and a phase-transfer catalyst based on
+tungstophosphoric acid and a quaternary ammonium salt to yield the product 9,10-epoxystearic acid methyl ester
+yielded a space-time yield of 0.679 kg L-1 h-1. Though this yield is less than the 1.29 kg L-1 h-1 shown by Gladius
+et al. (2021), the partial/full clogging of capillary using the reported catalyst system, has been shown to be limited in
+this work. This is a trade-off between pure reactor performance and maintenance of systems. The space time yield
+achieved in this work is nevertheless better than the 0.08 kg L-1 h-1 space-time yield from the batch process.
+
+20
+
+For both versions of the spatial processing algorithm, models could be trained with data of greater variety (i.e.
+different camera heights), as well as a wider variation in slug parameters. It is to be noted that the model training was
+generally done on a single capillary, however, the testing and experimentation was scaled directly to multiple
+capillaries without the need for retraining. Theoretically, the limiting factors for the machine learning-based
+approaches to run in a parallelized computational setup are the GPU capabilities as well as the camera configuration.
+The computer vision sensor developed in this work provides great potential for the parallelization of channels
+using centralized processing hardware. While approaches like the IR-based sensor presented by Vietinghoff et al.
+(2020) could quickly lead to market-ready solutions, the use of decentralized microcontrollers provides little room for
+sublinear cost scaling. On the other hand, the IR-based sensor can deliver slug flow measurements with very low
+latency while video-based approaches inherently depend on a type of moving window, introducing filter
+characteristics which imply loss of detail and increased latency.
+Additionally, the necessity of a GPU to execute inference on machine learning models in real time could be
+misconstrued as a drawback. However, a relatively cheap consumer-grade GPU (Nvidia RTX 2070) with cost lower
+than most of the sensing equipment available for microfluidics in the market today is used in this work. With the
+increasing rate of advancements in computer vision, the next step could be the use of independent edge devices
+(individual microchips such as Nvidia Jetson, Intel Neural Compute Stick, etc) with computational performance like
+the GeForce 940M GPU employed in the dual-channel SFCMR setup, further reducing the development and
+implementation costs.
+Furthermore, the video input from these sensors could also be used to train complex image/video recognition
+algorithms to detect complicated reaction parameters and in turn use the levers of slug flow to control these parameters.
+Examples include, stagnant zones inside the slug, vortices and irregular flow patterns, mixing rates, internal
+reactant/product circulation, mass transfer in/out of the slug, capillary clogging, etc.
+Author Contribution: Anoj Winston Gladius: conceptualization, methodology, investigation, writing—original
+draft preparation; Jonas A. Mylenbusch: conceptualization, methodology, investigation, writing, and visualization;
+David William Agar: supervision—review and editing.
+Funding: The authors acknowledge financial support by Deutsche Forschungsgemeinschaft and TU Dortmund
+University within the funding program Open Access Publishing.
+Acknowledgments: The authors acknowledge the contribution of Balazs Bordas, Rajasekhar Marella and
+Konstantin Jauk in helping with the with initial data collection and research on using Machine Learning and camera
+imaging to determine slug flow parameters.
+Data availability: The datasets generated during and/or analysed during the current study are available from the
+corresponding author on reasonable request.
+Conflicts of Interest: The authors declare no conflict of interest.
+
+21
+
+5 References
+Anastas PT, Warner JC (2000) Green chemistry: Theory and practice, 1st edn. Oxford University Press, Oxford
+Arsenjuk L, Asshoff M, Kleinheider J, Agar DW (2020a) A device for continuous and flexible adjustment of liquidliquid slug size in micro-channels. J Flow Chem 10:409–422. https://doi.org/10.1007/s41981-019-00064-7
+Arsenjuk L, Vietinghoff N von, Gladius AW, Agar DW (2020b) Actively homogenizing fluid distribution and slug
+length of liquid-liquid segmented flow in parallelized microchannels. Chemical Engineering and Processing Process Intensification 156:108061. https://doi.org/10.1016/j.cep.2020.108061
+Aubin J, Ferrando M, Jiricny V (2010) Current methods for characterising mixing and flow in microchannels.
+Chemical Engineering Science 65:2065–2093
+B. M. A. Wolffenbuttel et al (2002) Novel method for non-intrusive measurement of velocity and slug length in twoand three-phase slug flow in capillaries. Meas. Sci. Technol. 13:1540–1544
+Elzinga D, Baritaud M, Bennett S, Burnard K, af Pales, Philibert C, Cuenot F, D’Ambrosio D, Dulac J, Heinen S,
+others (2014) Energy technology perspectives 2014: harnessing electricity’s potential. International Energy
+Agency (IEA), Paris, France
+Gers FA, Schmidhuber J, Cummins F (1999) Learning to Forget, Continual Prediction with LSTM. In: Proceedings
+of the 9th International Conference on Artificial Neural Networks, vol 2, pp 850–855
+Girshick R, Donahue J, Darrell T, Malik J (2014) Rich Feature Hierarchies for Accurate Object Detection and
+Semantic Segmentation. In: 2014 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, pp 580–
+587
+Gladius AW, Vondran J, Ramesh Y, Seidensticker T, Agar DW (2021) Slug flow as tool for selectivity control in the
+homogeneously
+catalysed
+solvent-free
+epoxidation
+of
+methyl
+oleate.
+J
+Flow
+Chem.
+https://doi.org/10.1007/s41981-021-00199-6
+Greff K, Srivastava RK, Koutnik J, Steunebrink BR, Schmidhuber J (2016) LSTM: A Search Space Odyssey.
+Transactions on Neural Networks and Learning Systems 28:2222–2232
+Hochreiter S, Schmidhuber J (1997) Long short-term memory. Neural Computation 9:1735–1780
+Jiang Z, Zhao L, Li S, Jia Y (2020) Real-time object detection method based on improved YOLOv4-tiny.
+https://doi.org/10.48550/arXiv.2011.04244
+Kashid MN, Gerlach I, Goetz S, Franzke J, Acker JF, Platte F, Agar DW, Turek S (2005) Internal Circulation within
+the Liquid Slugs of a Liquid−Liquid Slug-Flow Capillary Microreactor. Ind. Eng. Chem. Res. 44:5003–5010.
+https://doi.org/10.1021/ie0490536
+Kashid MN, Gupta A, Renken A, Kiwi-Minsker L (2010) Numbering-up and mass transfer studies of liquid–liquid
+two-phase
+microstructured
+reactors.
+Chemical
+Engineering
+Journal
+158:233–240.
+https://doi.org/10.1016/j.cej.2010.01.020
+Kashid MN, Renken A, Kiwi-Minsker L (2011) Gas‐liquid and liquid‐liquid mass transfer in microstructured reactors.
+Chemical Engineering Science 66:3876–3897
+Kashid MN, Renken A, Kiwi-Minsker L (2015) Microstructured devices for chemical processing. Wiley-VCH,
+Weinheim
+Kim Y, Park LK, Yiacoumi S, Tsouris C (2017) Modular chemical process intensification: a review. Annual review
+of chemical and biomolecular engineering 8:359–380
+Kockmann N, Roberge DM (2011) Scale-up concept for modular microstructured reactors based on mixing, heat
+transfer, and reactor safety. Chemical Engineering and Processing: Process Intensification 50:1017–1026
+Kockmann N, Gottsponer M, Roberge DM (2011) Scale-up concept of single-channel microreactors from process
+development to industrial production. Chemical Engineering Journal 167:718–726
+Kozhevnikov IV, Mulder GP, Steverink-de Zoete MC, Oostwal MG (1998) Epoxidation of oleic acid catalyzed by
+peroxo phosphotungstate in a two-phase system. Journal of Molecular Catalysis A: Chemical 134:223–228.
+https://doi.org/10.1016/S1381-1169(98)00039-9
+Lerou JJ, Tonkovich AL, Silva L, Perry S, McDaniel J (2010) Microchannel reactor architecture enables greener
+processes. Chemical Engineering Science 65:380–385
+Mahony NO, Campbell S, Carvalho A, Harapanahalli S, Velasco-Hernandez G, Krpalkova L, Riordan D, Walsh J
+(2019) Deep Learning vs. Traditional Computer Vision. https://doi.org/10.48550/arXiv.1910.13796
+22
+
+Maiti SK, Snavely WK, Venkitasubramanian P, Hagberg EC, Busch DH, Subramaniam B (2019) Reaction
+Engineering Studies of the Epoxidation of Fatty Acid Methyl Esters with Venturello Complex. Ind. Eng. Chem.
+Res. 58:2514–2523. https://doi.org/10.1021/acs.iecr.8b05977
+Raina R, Madhavan A, Ng AY (2009) Large-scale deep unsupervised learning using graphics processors. In: Danyluk
+A, Bottou L, Littman M (eds) Proceedings of the 26th Annual International Conference on Machine Learning ICML '09. ACM Press, New York, New York, USA, pp 1–8
+Ramshaw C (1983) Higee’ distillation-an example of process intensification. Chemical Engineer:13–14
+Simon Haykin (2009) Neural Networks and Learning Machines, 3rd edn.
+Stankiewicz AI, Moulijn JA, others (2000) Process intensification: transforming chemical engineering. Chemical
+engineering progress 96:22–34
+Taha T, Cui ZF (2004) Hydrodynamics of slug flow inside capillaries. Chemical Engineering Science 59:1181–1190
+Tam C, Baron R, Gielen D, Taylor M, Taylor P, Trudeau N, Patel M, Saygin D (2009) Energy Technology Transitions
+for Industry: Strategies for the next Industrial Revolution. International Energy Agency, Paris, France
+Vahur S, Teearu A, Peets P, Joosu L, Leito I (2016) ATR-FT-IR spectral collection of conservation materials in the
+extended region of 4000-80 cm⁻¹. Anal Bioanal Chem 408:3373–3379. https://doi.org/10.1007/s00216-0169411-5
+van Gerven T, Stankiewicz A (2009) Structure, energy, synergy, time. The fundamentals of process intensification.
+Industrial & engineering chemistry research 48:2465–2474
+Vietinghoff N von, Lungrin W, Schulzke R, Tilly J, Agar DW (2020) Photoelectric Sensor for Fast and Low-Priced
+Determination of Bi- and Triphasic Segmented Slug Flow Parameters. Sensors (Basel) 20.
+https://doi.org/10.3390/s20236948
+Wang M-L, Huang T-H (2004) Kinetic Study of the Epoxidation of 1,7-Octadiene under Phase-Transfer-Catalysis
+Conditions. Ind. Eng. Chem. Res. 43:675–681. https://doi.org/10.1021/ie030253b
+Zhang J, Wang K, Teixeira AR, Jensen KF, Luo G (2017) Design and scaling up of microchemical systems: a review.
+Annual review of chemical and biomolecular engineering 8:285–305
+ZHANG H, ZHU B, XU Y (2006) Composite membranes of sulfonated poly(phthalazinone ether ketone) doped with
+12-phosphotungstic acid (H3PW12O40) for proton exchange membranes. Solid State Ionics 177:1123–1128.
+https://doi.org/10.1016/j.ssi.2006.05.010
+
+23
+
+Appendix A: Controller design for interconnected capillary slug flow micro reactors
+Because both reactors of the capillary SFCMR are connected at both the supply side as well as down-stream, they
+act as interconnected channels. As a practical means of addressing the coupling behaviour brought on by this, control
+of φi and vs,I is decomposed into control of the average across all reactor channels, as well as control of the difference
+between both channels, using the “Delta-Controller” developed for this task, with a block diagram representation
+shown in Figure 25. The average phase ratio φ̄ between organic and aqueous phase across all channels is controlled
+by proportional-integral-controller (PI) QFIC2 using flow control valve VC8, which adjusts the relative flow
+resistance between organic and aqueous supply. The average slug velocity v̄s is controlled in a cascaded control loop
+by PI-controller SIC2, which sets the pressure reference in settler-type phase separator B4. The pressure in phase
+separator B4, in turn, is controlled by PIC3 using valve VC12.
+
+Δ12 =
+
+ΔPR
+ΔSV
+
+K1
+
+Δ12
+-
+
+CΔ12
+
+G1
+
+G2
+
+PR1
+SV1
+PR2
+SV2
+
+Figure 25: Block diagram representation of the “Delta-Controller”, where C∆12 is of the form of a standard PI-controller with a
+proportional gain and an integrator, K1 is a simple gain, G1 and G2 represent the plant while ∆12 is the difference in φ and vs
+between the two channels, respectively.
+
+The temperatures for both pairs of TRVs, with the purpose of fine adjustment of the flow distribution, is set using
+the “Delta-Controller”. This controller arrangement effectively designates a main reactor and a follower. The “DeltaController” is made up of a PI controller C∆12 with constant gain and an integrator, as well as a constant gain K1 which
+is used to extend the controller’s working range. A more detailed analysis of coupling effects within multichannel
+liquid-liquid slug flow setups, the working principles of the slug generator, as well as the TRVs used here is provided
+by Arsenjuk et al. and shall not be discussed further (Arsenjuk et al. 2020a; Arsenjuk et al. 2020b).
+
+Appendix B: Preparation of the epoxidation catalyst
+In a procedure adapted from Maiti et al. (2019) to produce the Venturello Complex Q3[PW12O40(O)], 2.88 g of
+TPA (Carl Roth GmbH & Co. KG) are added to 12 ml of 50 %-w H2O2 (Carl Roth GmbH & Co. KG) and stirred until
+dissolved. The resulting solution is diluted with 18 ml of distilled water and stirred for an additional ten minutes. To
+the solution, 2.42 g of Q (Alfa Aesar) in 60 ml ethyl acetate are added dropwise over five minutes and stirred for 30
+minutes at room temperature and a stirring speed of 800 rpm. After settling and separation of the phases, the organic
+phase is desiccated over anhydrous magnesium sulfate for 30 minutes. In a vacuum distillation apparatus, the ethyl
+acetate is evaporated from the organic phase at 40°C and collected for reuse. The active catalyst species appears as a
+highly viscous liquid with a light-yellow hue and is stored at 6°C to prevent deterioration. As the catalyst is prepared
+with a two-to-one excess of Q, free Q is present in the product.
+The catalyst is analysed by ATR-FTIR. Peaks at 3000-2800 cm-1 and 1465 cm-1 are associated with the methyl
+groups of Q, while peaks at 1077 cm-1 (P-O) at 974 cm-1 (W=O) and 816 cm-1 (W-O-W) show that all components of
+the catalyst are present (Vahur et al. 2016; Wang and Huang 2004; ZHANG et al. 2006). In addition, trial reactions
+are conducted in stirred batches: 3 g of technical grade methyl oleate, 1.27 g of 35 %-w H2O2 and 0.0676 g of catalyst
+are heated to 60°C and stirred at 400 rpm for one hour. The reaction is quenched using distilled ice water, which is
+24
+
+added to the mixture rapidly. The products are analysed using an Agilent 7693A GC-FID device equipped with an
+Agilent 19091J-413 column. The methyl palmitate contained in the technical grade methyl oleate reactant is used as
+a reference to determine reaction progress. Under these conditions a conversion of methyl oleate of 84.4% at a
+selectivity toward 9,10-Epoxystearic acid methyl ester of 89.9% is observed, falling in line with the results obtained
+in other works (Kozhevnikov et al. 1998). As a control, by adding no catalyst, the same procedure shows no
+measurable conversion, further confirming the produced catalyst’s efficacy.
+
+25
+
+

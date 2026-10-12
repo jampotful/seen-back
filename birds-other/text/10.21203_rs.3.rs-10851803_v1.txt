@@ -1,0 +1,961 @@
+The Quantum Lens: Noise-Assisted Sensitivity in Avian Magnetoreception
+Ciann-Dong Yang, Wei‐Ju Chen (2026). Research Square. https://doi.org/10.21203/rs.3.rs-10851803/v1. doi:10.21203/rs.3.rs-10851803/v1. Licence: cc-by. Text from pdf.
+
+The Quantum Lens: Noise-Assisted Sensitivity in
+Avian Magnetoreception
+Ciann-Dong Yang
+
+National Cheng Kung University
+Wei-Ju Chen
+National Cheng Kung University
+
+Article
+Keywords:
+Posted Date: September 9th, 2026
+DOI: https://doi.org/10.21203/rs.3.rs-10851803/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: No competing interests reported.
+
+The Quantum Lens: Noise-Assisted Sensitivity
+in Avian Magnetoreception
+Ciann-Dong Yang* and Wei-Ju Chen
+*cdyang@mail.ncku.edu.tw
+Department of Aeronautics and Astronautics,
+National Cheng Kung University, Tainan, Taiwan
+
+Abstract
+Avian magnetoreception based on the radical-pair mechanism explains how migratory birds
+navigate using the geomagnetic field. However, how these microscopic quantum states persist against
+environmental noise in vivo remains a fundamental challenge. We address this by presenting a
+scalable vectorized state-space framework of open quantum dynamics under decoherence, universally
+applicable to arbitrary n-particle spin-coupled systems. By vectorizing the density matrix in the
+Lindblad master equation, we map the spin dynamics from Hilbert to Liouville space, bypassing
+traditional numerical bottlenecks. Crucially, leveraging initial singlet-state constraints reduces the
+active decoherence operators from 64 to 16, significantly accelerating open-system simulations.
+Projecting triplet yields onto a virtual retina model reveals that environmental noise exerts dual,
+pathway-dependent effects on navigation accuracy. While singlet–singlet relaxation ( 𝑆𝑆 and
+longitudinal phase dephasing (𝑆 0 degrade sensitivity through contrast washout, transverse phase
+dephasing (𝑆 ± acts counterintuitively as a "quantum lens". This transverse channel filters off-axis
+noise, concentrating triplet yields at the retinal center to enhance magnetic sensitivity by 35.2%.
+These findings demonstrate that environmental noise can be constructively harnessed, offering a new
+design paradigm for noise-tolerant, high-precision bionic quantum compasses.
+
+Introduction
+The extraordinary ability of migratory birds to navigate across global distances with pinpoint
+accuracy represents one of nature's most compelling sensory phenomena, bridging behavioral biology
+with quantum physics. Over the past several decades, empirical studies have established that various
+migratory species possess an innate, highly sensitive capacity to detect and orient themselves relative
+to the Earth's weak geomagnetic field1,2,3. The foundational discovery of this geomagnetic sensor
+dates back to the 1960s, when Wiltschko and Merkel first observed abnormal orientation behaviors
+in European robins under controlled artificial magnetic fields1. Subsequent behavioral assays revealed
+that this avian sensor is an inclination compass operating under strict light-dependent constraints;
+specifically, it requires short-wavelength blue light (approximately 443 nm to initiate the underlying
+sensory cascade2, whereas longer wavelengths, such as red light (around 630 nm , have been shown
+to disrupt magnetic orientation4. Beyond migratory passerines, sensory navigation models involving
+1
+
+both visual and magnetic cues have been extensively documented in other avian species, such as
+homing pigeons5, which may also utilize geomagnetic intensity gradients for long-distance
+orientation6.
+To elucidate the biophysical and chemical kinetics of this compass, Schulten7 proposed the
+radical-pair mechanism in 1978. Under this quantum-mechanical framework, light-induced excitation
+of retinal photoreceptors—most notably cryptochrome (
+in the bird's eye—triggers an
+intramolecular electron transfer that generates a spin-correlated, spatially separated radical pair8
+( +∙ −∙ , as shown schematically in Fig. 1. This radical pair dynamically fluctuates between a spinsinglet state |𝑆⟩ and three spin-triplet states, | + ⟩ , | 0 ⟩ , and | − ⟩ . Because the coherent
+interconversion rate between these states is highly sensitive to the orientation of the weak
+
+geomagnetic field vector 0 , the subsequent spin-selective chemical reactions yield distinct product
+ratios9,10. For a comprehensive review of the physical principles and biological constraints governing
+this biophysical sensor, see Hore and Mouritsen11. To model how these microscopic reactions
+translate into macroscopic sensory perception, Ritz et al.8 proposed projecting the simulated angledependent triplet yields Φ onto a hemispherical virtual retina. This model produces a shaded visual
+gradient that migratory birds perceive as a directional compass spot, providing a direct mapping
+between quantum mechanics and biological perception.
+However, moving from idealized, isolated spin dynamics to realistic biological environments
+requires an open-quantum-system treatment. In vivo, the radical-pair system is embedded within a
+warm, wet, and noisy cellular microenvironment where it inevitably interacts with surrounding
+nuclear spins and thermal baths, triggering quantum decoherence and rapidly eroding quantum
+superposition states9. Historically, this environmental noise—whether originating from localized
+thermal fluctuations or measurement-induced wavefunction collapse—has been considered strictly
+detrimental, a parasitic process that degrades the sensitivity of both biological compasses and
+artificial quantum sensors10,12. Yet, emerging paradigms in quantum biology suggest that biological
+systems may have evolved to constructively harness environmental noise, much like noise-assisted
+energy transfer in photosynthetic complexes13. A critical challenge remains in systematically
+analyzing how distinct, pathway-specific decoherence channels influence the spatial projection of
+triplet yields on the retina, particularly because simulating open quantum dynamics under noise
+introduces formidable mathematical and computational complexities14.
+Specifically, the primary bottleneck in simulating open-system quantum dynamics lies in the
+operator form of the governing Lindblad master equation15. Unlike closed-system unitary dynamics
+governed by the Liouville equation, the non-unitary Lindblad equation lacks a generalized, closedform analytical solution for complex, multi-particle spin systems. Direct numerical integration of
+these operator-form differential equations is computationally expensive, prone to numerical
+instability, and scales poorly with the number of coupled nuclear spins. Consequently, researchers
+have struggled to efficiently simulate and map the direct relationship between environmental
+dephasing rates and the resulting macroscopic retinal patterns16.
+2
+
+Fig. 1 Reaction pathway and decoherence dynamics of bionic avian magnetoreception. Light excitation
+generates a spin-correlated radical pair ( + − initially in the singlet state 𝑆.
+of retinal cryptochrome (
+The system undergoes coherent spin interconversion modulated by the geomagnetic field ( 0 among singlet
+and triplet (
+products
+state 𝑆 and triplet states ( + , 0 , − . Spin-selective reactions yield singlet (
+and
+, before completing the closed-loop recombination back to DA. Under
+governed by rate constants
+open system decoherence, destructive relaxation (𝑆𝑆 and longitudinal dephasing (𝑆 0 pathways erode retinal
+image contrast. Conversely, transverse phase dephasing (𝑆 ± functions as a "quantum lens", concentrating
+triplet yields at the retinal center to enhance magnetic sensitivity by up to 35.2%.
+
+To overcome these computational and theoretical limitations, this paper presents a novel,
+computationally efficient modeling framework that couples open quantum dynamics directly with
+macroscopic visual rendering. The core academic contributions of this work are fourfold:
+1. Methodological Innovation via Scalable Vectorized State-Space Mapping: We introduce a
+mathematical transformation that vectorizes the density matrix, mapping the system operators
+from Hilbert space to Liouville space17. This transformation successfully converts the
+3
+
+operator-form Lindblad equation into a vectorized system of first-order, linear ordinary
+differential equations (ODEs . Importantly, this state-space framework is universally
+applicable to any arbitrary n-particle spin-coupled system, completely bypassing traditional
+numerical bottlenecks and scaling limitations associated with Hilbert-space calculations.
+2. Systematic Categorization of Biological Noise Pathways: Leveraging the physical constraint
+that the radical pair is initially photo-excited into a singlet state, we mathematically reduce
+the possible decoherence operators for a three-particle system from 64 down to 16 key active
+operators. We systematically categorize these 16 operators into three physically distinct
+pathways: singlet-singlet relaxation (𝑆𝑆 , longitudinal phase dephasing (𝑆 0 , and transverse
+phase dephasing ( 𝑆 ± , providing a rigorous mathematical framework for analyzing
+
+environmental interference.
+
+3. Discovery of the Constructive "Quantum Lens" Phenomenon: Through extensive simulations
+projected onto our virtual retina, we demonstrate a counterintuitive biophysical finding. While
+
+relaxation (𝑆𝑆 and longitudinal phase dephasing ( 𝑆 0 severely degrade navigation by
+washing out visual contrast, transverse phase dephasing (𝑆 ± acts as an active, constructive
+force. By selectively filtering off-axis spin fluctuations, the 𝑆 ± channel concentrates triplet
+yields at the retinal center, sharpening the directional compass pattern and enhancing magnetic
+sensitivity by up to 35.2%, as summarized in Fig. 1.
+4. Theoretical Foundations for Bionic Quantum Sensors: From an engineering standpoint, our
+results prove that high-sensitivity quantum sensing does not require the absolute elimination
+of decoherence. Instead, by selectively engineering specific dephasing channels or exploiting
+natural dephasing symmetries, our work provides a theoretical blueprint and quantum control
+parameters for developing noise-tolerant, high-precision, and GPS-free bionic quantum
+compasses.
+
+Results
+Destructive Decoherence Channels: Singlet-Singlet Relaxation (
+and Longitudinal hhase
+Dephasing (
+Our numerical simulations reveal that environmental interactions generally destroy the radical
+pair’s coherence, severely eroding the bird’s orientation performance. We first evaluated singlet–
+singlet (𝑆𝑆 relaxation, which comprises the amplitude relaxation channel
+1 and the singlet phase
+dephasing channel
+2 . These two channels freeze the radical-pair population within the singlet
+manifold, dynamically hindering the necessary coherent transition into triplet states.
+Consequently, the overall triplet yield Φ ( , ) drops precipitously across all angles
+(the
+angle between the axis of a magnetoreceptor and the geomagnetic field . As illustrated in Fig. 2, the
+triplet yield curves flatten globally and exhibit a unique, non-uniform crossover point at ≈ 77∘
+under moderate noise rates ( 1 < 100
+. As the dephasing rate increases to 1 = 100 , the
+magnetic sensitivity
+(the maximum peak-to-peak amplitude variation of the triplet yield Φ
+falls dramatically from the noise-free baseline of 0.3504 down to 0.0584. When projected onto the
+4
+
+virtual retina, this quantum degradation manifests as a complete loss of bright-dark image contrast.
+The darker pointing signal at the center fades rapidly into a uniform background, rendering the visual
+compass blind to the geomagnetic direction. This global flattening of the angular triplet yield and the
+corresponding contrast washout on the virtual retina are quantitatively mapped and visualized in Fig.
+2. Because
+1 and
+2 preserve the same singlet projection, they produce mathematically
+identical yield curves and visual outputs.
+
+Fig. 2 Degradation of magnetic sensitivity and visual compass contrast under singlet–singlet (SS
+for various
+relaxation. (a Angle-dependent triplet yields Φ ( , 1 ) as a function of the inclination angle
+SS relaxation rates 1 . Increasing the relaxation rate flattens the spatial anisotropy of the triplet yield globally,
+rendering the distribution progressively insensitive to the orientation of the geomagnetic field. (b Grayscale
+projections of the triplet yield Φ ( , 1 ) onto the hemispherical virtual retina across four representative
+decoherence rates 1 . At elevated decoherence rates 1 ≫ , severe contrast washout obliterates the central
+directional spot, rendering the avian compass blind to geomagnetic orientation.
+
+A similar yet physically distinct degradation occurs under longitudinal phase dephasing (the 𝑆 0
+pathway , governed by channel
+3 . Unlike the 𝑆𝑆 pathway, the triplet yield curves Φ ( ) under
+𝑆 0 dephasing do not exhibit a crossover point; instead, they decay monotonically over the entire
+range of
+as the dephasing rate 3 increases. This anisotropic decay profile is clearly reflected in
+the sharper suppression at the retinal center ( → 0∘ where 0 alignment dominates, contrasted
+with the resilient periphery. This uneven spatial decay rapidly flattens the directional signal.
+Quantitatively, the magnetic sensitivity
+further to 0.1406 at
+
+3 = 10
+
+drops from 0.3504 to 0.2035 at
+
+, drops to 0.0432 at
+5
+
+3 = 100
+
+3 =5
+
+, collapses
+
+, and eventually vanishes to a near-
+
+zero value of 0.0030 at 3 = 1000 . The virtual retina projections confirm that 𝑆 0 dephasing
+rapidly washes out the visual contrast, leaving a bright, uniform image that completely fails to convey
+geomagnetic orientation. Figure 3 shows the monotonic decay of triplet yields and the progressive
+erasure of the directional pointing signal under longitudinal phase dephasing.
+
+Fig. 3 Degradation of magnetic sensitivity and visual compass contrast under longitudinal phase
+. (a Monotonic decay of the angle-dependent triplet yields Φ ( ) across the entire
+dephasing (
+spatial range of
+with an increasing longitudinal dephasing rate 3 (from 0 to 1000
+. Unlike
+the 𝑆𝑆 pathway, no crossover behavior is observed, indicating a global suppression of the directional
+signal. (b Virtual retina projections visualizing the progressive loss of compass contrast. As the
+dephasing rate increases, the dark central directional spot undergoes severe erosion, eventually
+dissolving into a uniform background. Under extreme dephasing ( 3 = 1000 , the magnetic
+collapses from the noise-free baseline of 0.3504 down to 0.0030, culminating in
+sensitivity
+complete compass blindness in vivo.
+The Constructive Channel: Transverse hhase Dephasing (
+hhenomenon
+
+and the QQuantum LensQ
+
+±
+
+The most significant and counterintuitive finding of this research is that environmental noise
+does not universally degrade sensory performance. Transverse phase dephasing 𝑆 ± , governed by
+and
+the dephasing channels
+4 (for transitions to the parallel spin | + ⟩ = |↑↑⟩
+5 (for
+transitions to | − ⟩ = |↓↓⟩ , acts as an active, constructive force in avian magnetoreception.
+While the introduction of 𝑆 ± dephasing does cause a slight decrease in the total absolute triplet
+
+yield, its spatial modulation mode is highly selective. As illustrated in Fig. 4, rather than uniformly
+flattening the signal across all angles, 𝑆 ± dephasing acts as an effective spatial filter that selectively
+
+dampens off-axis spin fluctuations. As the decoherence rate
+6
+
+4
+
+(or
+
+5
+
+increases, the triplet yield at
+
+intermediate and peripheral angles ( = 30∘ to 70∘ decreases substantially, whereas the triplet yield
+
+at the retinal center ( < 10∘ remains remarkably stable.
+
+Fig. 4 Comprehensive mechanism and quantitative validation of the constructive Qquantum lensQ effect.
+(a Conceptual schematic of the multi-scale biophysical cascade, illustrating the radical-pair spin dynamics
+embedded within the retinal microenvironment. (b Comparison of the destructive decoherence pathways
+(singlet–singlet relaxation 𝑆𝑆 and longitudinal phase dephasing 𝑆 0 against the constructive transverse
+channel (𝑆 ± and 𝑆 − . As the transverse dephasing rate 4 escalates to 100 , the spatial anisotropic
+filter dampens off-axis geomagnetic fluctuations, localizing and concentrating the triplet yields at the center
+of the virtual retina. This selective focusing mechanism counterintuitively elevates the magnetic sensitivity
+from the noise-free baseline of 0.3504 to a peak value of 0.4739. This 35.2% sensitivity enhancement
+demonstrates the viability of utilizing environmental noise as a quantum resource, providing a definitive
+paradigm for engineering high-precision bionic quantum magnetometers.
+
+This non-uniform, highly localized suppression significantly sharpens the spatial gradient of the
+triplet-yield distribution on the virtual retina. Consequently, the magnetic sensitivity
+—defined as
+the peak-to-peak yield difference—counterintuitively increases. From the noise-free baseline of
+0.3504,
+rises to 0.4674 at 4 = 5
+(a 33.4% enhancement , and reaches a maximum of 0.4739
+at 4 = 100 , representing an extraordinary 35.2% enhancement in visual compass resolution.
+Even under extreme dephasing conditions ( 4 = 1000
+, where the 𝑆𝑆 and 𝑆 0 pathways are
+completely blind, the 𝑆 ± channel still preserves a remarkably high sensitivity of 0.4687 (33.8%
+above the noise-free baseline .
+
+This sharpening effect functions analogously to a "quantum focusing lens". By suppressing
+peripheral noise and filtering off-axis fluctuations, it concentrates the darker, directional-pointing
+signal on the center of the virtual retina. This concentration dramatically enhances the contrast and
+7
+
+edge definition of the visual compass pattern, providing the bird with significantly upgraded
+navigation accuracy under noisy environmental conditions. This counterintuitive 'quantum lens' effect,
+which sharpens the spatial gradient to enhance directional sensitivity under transverse dephasing, is
+comprehensively validated in Fig. 4.
+Our simulations also confirm that the dephasing channels
+4 (𝑆 + and
+5 (𝑆 − yield
+mathematically identical triplet curves and visual compass patterns. This identical behavior is
+mathematically justified by the physical symmetry of the parallel-spin states. Since both states
+represent parallel-spin configurations (| + ⟩ = |↑↑⟩ and | − ⟩ = |↓↓⟩ of the radical pair, they occupy
+
+identical energy levels and follow symmetric transition pathways under isotropic environmental noise,
+leading to identical dephasing dynamics.
+Quantitative Sensitivity Mapping and Bionic Implications
+To establish a rigorous comparative benchmark of open-system performance, we mapped the
+across all three pathways under varying decoherence rates
+simulated magnetic sensitivity
+$\lambda$, as systematically summarized in the comprehensive mechanistic framework in Fig. 5.
+At moderate to high noise rates ( = 10
+to 100
+, where the 𝑆𝑆 and 𝑆 0 pathways have
+already experienced a severe loss of sensitivity (
+dropping to 0.0584 and 0.0432, respectively , the
+𝑆 ± pathway maintains its peak performance, holding a sensitivity of 0.4739. Even under the most
+severe dephasing limits ( = 1000
+, the 𝑆 ± pathway retains over 99% of its peak enhanced
+
+performance, contrasting sharply with the complete failure of the other channels.
+
+This divergence in behaviors is rooted in the distinct quantum symmetries of the dissipative
+
+channels. The destructive 𝑆𝑆 and 𝑆 0 dephasing pathways act isotropically, disrupting the
+anisotropic spin state transitions driven by the external geomagnetic field. In contrast, the 𝑆 ±
+
+pathway targets the transverse spin channels. Because these transverse states are coupled to the offaxis components of the local magnetic field, introducing phase noise specifically into these channels
+dampens off-axis fluctuations. This selective dephasing acts as a natural noise-filtering mechanism,
+demonstrating that high-precision quantum sensors do not necessarily require the complete
+elimination of environmental dephasing. Instead, by engineering dephasing control or exploiting
+natural dephasing symmetries, high-performance, GPS-free bionic quantum compasses can be
+successfully realized.
+
+8
+
+Fig. 5 Mechanistic framework and decoherence pathways of the avian quantum compass. The left-toright cascade depicts the light-driven activation of cryptochrome (DA to generate a spin-correlated radical
+pair [D+∙ A−∙ ], which undergoes coherent singlet-triplet interconversion modulated by the geomagnetic field
+0 . Under open-system dynamics, environmental noise triggers distinct decoherence channels. Destructive
+relaxation 𝑆𝑆 and longitudinal dephasing 𝑆 0 disrupt spin coherence, resulting in an 88% collapse in
+and blinding the compass. Conversely, transverse phase dephasing 𝑆 ± acts
+magnetic sensitivity
+counterintuitively as a 'quantum lens', filtering off-axis noise and concentrating directional signals at the retinal
+center to enhance sensitivity by 35.2%.
+
+Discussion
+Mechanistic Divergence of Open-System Decoherence Channels
+The open-system spin dynamics simulated in this study reveal a stark, symmetry-driven
+divergence between destructive environmental noise pathways (𝑆𝑆 and 𝑆 0 and the constructive
+9
+
+transverse channel (𝑆 ± . This behavior demonstrates that the macroscopic sensory output of the
+
+radical-pair mechanism is intimately governed by the underlying quantum symmetries of its
+dissipative channels.
+
+The singlet–singlet relaxation (𝑆𝑆 channel, which encompasses both amplitude relaxation (ℒ 1
+and singlet phase dephasing (ℒ 2 , restricts transitions entirely within the initial singlet subspace. At
+high noise rates ( ≫
+, this channel acts as a "singlet trap," hindering coherent spin interconversion
+to the triplet states. Consequently, the total triplet yield is suppressed globally, flattening the spatial
+distribution across the retina and culminating in complete contrast washout.
+Conversely, the longitudinal phase dephasing (𝑆 0 channel (ℒ 3 acts as an isotropic dephasing
+force that systematically erodes the phase coherence between the singlet state and the central, nonparallel triplet state | 0 ⟩. Because maintaining this phase relationship is crucial for preserving the
+anisotropic response of the radical pair, 𝑆 0 dephasing directly degrades the directional signature of
+the avian compass. This degradation is highly angle-dependent, with the most severe signal
+attenuation at the retinal center where the external geomagnetic field-alignment effect is strongest.
+Under both 𝑆𝑆 and 𝑆 0 pathways, the results align with the classical view of quantum biology:
+environmental interactions act as detrimental perturbations that degrade sensory performance.
+The QQuantum LensQ Mechanism of Transverse Dephasing ( ±
+In contrast to these destructive channels, transverse phase dephasing (𝑆 ± , governed by ℒ 4
+
+and ℒ 5 plays an actively constructive role. Rather than uniformly suppressing the directional signal,
+𝑆 ± dephasing functions as a highly selective spatial filter that dampens off-axis spin fluctuations.
+
+This channel targets the parallel-spin triplet states (𝑆 + and 𝑆 − . Because these transverse states
+couple directly to the perpendicular components of the external geomagnetic field, introducing phase
+noise specifically into these channels selectively suppresses peripheral spin transitions.
+This localized suppression sharpens the spatial gradient of the triplet yield on the hemispherical
+
+retina, raising the directional sensitivity
+from the noise-free baseline of 0.3504 to a peak of
+0.4739—a 35.2% enhancement. This sharpening effect acts analogously to a "quantum lens,"
+focusing the directional pointer at the retinal center and significantly enhancing the contrast of the
+visual compass pattern under noisy conditions. This aligns with prior theoretical works suggesting
+that radical-pair systems can sustain noise-resistant quantum coherence under specific environmental
+couplings18. Furthermore, our model confirms that ℒ 4 ( 𝑆 + and ℒ 5 ( 𝑆 − yield identical
+physical outcomes. This degeneracy is rooted in the spin symmetry of the parallel triplet states;
+occupying identical energy levels, they undergo symmetric transition pathways under isotropic
+environmental noise, leading to identical dephasing dynamics.
+The physical viability of exploiting such dephasing channels over functional timescales is further
+corroborated by the recent discovery of millisecond-lived radical pairs in avian Cryptochrome 4 19,
+suggesting that biological evolution has achieved sophisticated control over spin lifetimes and noisefiltering mechanisms in vivo.
+Biological Relevance and Evolutionary Adaptation
+10
+
+These findings challenge the traditional paradigm that biological quantum coherence must be
+completely isolated from environmental noise to remain functional. Historically, the warm, wet, and
+noisy cellular microenvironment of the avian retina was considered too hostile to preserve functional
+quantum superposition states. However, our model suggests that migratory birds may have evolved
+to actively harness environmental decoherence rather than merely tolerating it. Indeed, recent
+landmark empirical studies have confirmed that Cryptochrome 4 (Cry4 from migratory songbirds
+exhibits pronounced in vitro magnetic sensitivity, significantly outperforming that of non-migratory
+species 20. This biological differentiation supports the hypothesis that evolutionary pressures have
+actively shaped the microenvironment of avian photoreceptors to optimize spin-selective signaling.
+By exploiting naturally occurring dephasing symmetries in retinal cryptochromes, avian systems
+could potentially utilize transverse dephasing (𝑆 ± as a physiological resource to sharpen their
+
+directional visual signals. This "noise-assisted" sensory adaptation is conceptually analogous to
+quantum transport in photosynthetic complexes, where environmental noise assists energy transfer
+efficiency. Evolutionary pressure may have thus fine-tuned the local biochemical structures
+surrounding the flavin and tryptophan radicals in cryptochrome to selectively suppress destructive
+
+isotropic dephasing channels (𝑆𝑆 and 𝑆 0 while preserving or enhancing the constructive transverse
+channel (𝑆 ± .
+Engineering haradigms for Bionic Quantum Sensors
+From an engineering perspective, the constructive role of 𝑆 ± dephasing provides a new design
+
+paradigm for high-precision quantum technologies. Currently, a major bottleneck in developing
+bionic compasses and quantum magnetometers is the extreme difficulty of maintaining absolute
+quantum coherence. Our research demonstrates that high-sensitivity quantum sensing does not
+require complete elimination of dephasing. Instead of pursuing costly and complex isolation
+techniques, developers can employ active quantum control, such as Lyapunov-based trajectory
+tracking21,22, to artificially engineer and exploit the constructive 𝑆 ± dephasing channel. This
+
+approach offers a theoretical blueprint for robust, noise-tolerant, and GPS-free bionic quantum
+sensors23 that thrive in naturally noisy real-world environments.
+Model Limitations and Future Outlook
+
+While this work establishes a robust theoretical framework, certain physical and computational
+simplifications warrant note. Crucially, although our current numerical simulations and concrete
+physical discussions are restricted to a three-particle spin-coupled system (comprising a radical pair
+and a single nitrogen nucleus to ensure computational tractability, the general mathematical
+formulation and vectorized state-space framework developed in this study are universally applicable
+to any arbitrary n-particle spin-coupled system. This scalability is a key advantage of our Liouvillespace formulation, which bypasses traditional Hilbert-space scaling bottlenecks and allows for the
+seamless expansion to more complex multi-nuclear structures. In biological reality, real-world avian
+cryptochromes contain a complex network of multiple nuclear spins that could introduce multi-body
+quantum entanglement and hyperfine interactions. Additionally, our simulation focused on quantum
+11
+
+decoherence channels, omitting macro-environmental factors such as ambient light fluctuations and
+temperature variations that influence chemical kinetics. Future studies incorporating multi-nuclei
+structures using our general n-particle mathematical formulation, alongside temperature-dependent
+non-Markovian noise processes24,25 that exhibit memory effects and entanglement oscillations, will
+be essential to fully model avian magnetoreception in nature.
+
+Methods
+To systematically evaluate how environmental noise influences the avian magnetic compass, we
+modeled open-system spin dynamics using the Lindblad master equation. By vectorizing the system
+density matrix, we converted the operator-form differential equations into a computationally efficient
+state-space model. This formulation allowed us to track the evolution of the spin density operator for
+a three-particle system (a radical pair and a single nitrogen nucleus and project the resulting spinselective triplet yield onto a hemispherical virtual retina model. Here, we present the quantitative
+findings of our simulations, categorizing the sixteen essential decoherence operators into three
+physical pathways: relaxation decoherence, phase decoherence in the longitudinal channel, and phase
+decoherence in the transverse channels (see Supplementary Fig. S1 for the comprehensive simulation
+workflow .
+Spin Hamiltonian of a Three-harticle Radical-hair System
+To model the biophysical mechanism of avian magnetoreception, we consider an open-system
+quantum model consisting of a three-particle spin-1/2 system: a spatially separated but spin-correlated
+radical pair coupled to a single nitrogen nucleus. The coherent spin evolution of this system is
+governed by the spin Hamiltonian operator ˆ :
+ˆ =
+ˆ
+ˆ
+ˆ ̂ ˆ
+(1)
+0 ⋅ ( 1 + 2) + 1 ⋅ 1 ⋅
+
+= 5.788 × 10−5 eV/T denotes the
+Bohr magneton, and 0 represents the local geomagnetic field vector. The operators ˆ 1 and ˆ 2
+represent the spin vectors of the two radical electrons, while ˆ represents the nuclear spin vector of
+the nitrogen nucleus. The anisotropic hyperfine coupling tensor ̂ 1 describes the hyperfine
+where
+
+≈ 2.0023 represents the free-electron
+
+-factor,
+
+interaction between the first electron spin ˆ 1 and the nuclear spin ˆ . Following realistic biophysical
+constraints, the tensor is defined as:
+̂ 1 = [0
+0
+
+0
+
+0
+
+0
+0]
+
+(2)
+
+where , , and
+signify the spatial coupling coefficients along the , , and
+axes,
+respectively. To prevent the complete loss of magnetic sensitivity associated with isotropic coupling
+
+( = = , we configure an anisotropic profile with = = 0 eV and = 7.46 × 10−6 eV. The
+geomagnetic field vector 0 is parameterized in spherical coordinates relative to the photoreceptor
+molecule's reference frame.
+Open Quantum Dynamics and the Lindblad Master Equation
+12
+
+To represent the realistic biological environment accurately, the spin dynamics must be
+simulated under an open-quantum-system framework. The time evolution of the density operator
+̂( ) in the presence of an active cellular environment is formulated under the Markovian
+
+approximation using the non-unitary Lindblad master equation15:
+̂( ) = − [ ̂ , ̂] +
+ℏ
+
+( ̂)
+
+22
+
+1
+= − [ ̂ , ̂( )] + ∑ ([ ̂ ̂( ), ̂ † ] + [ ̂ , ̂( ) ̂ † ])
+ℏ
+2
+=1
+
+(3)
+
+where ̂ is the spin Hamiltonian operator defined in Eq. (1 and
+is the dissipative propagator
+2
+̂
+with respective dephasing or relaxation rates .
+consisting of 2 decoherence operators
+
+In a three-particle spin-1/2 system, the complete Hilbert space is spanned by 23 = 8 basis states.
+The radical-pair electrons can be in one of the four possible entangled states, including the singlet
+state |𝑆⟩ = (|↑↓⟩ − |↓↑⟩)/√2 and three triplet states | 0 ⟩ = (|↑↓⟩ + |↓↑⟩)/√2 , | + ⟩ = |↑↑⟩ and
+| − ⟩ = |↓↓⟩. These four radical-pair spin states coupled with the two nuclear spin states form the eight
+
+basis states, |𝑆 ⟩ , |𝑆 ⟩ , | 0 ⟩ , | 0 ⟩ , | − ⟩ , | − ⟩ , | + ⟩ , | + ⟩ , allowing for 8 × 8 = 64
+possible transition operators ̂ that describe arbitrary relaxation and dephasing processes.
+
+The 64 decoherence operators can be divided into relaxation decoherence and phase decoherence
+based on where they appear in the density operator. The relaxation decoherence operator is in the
+form of
+̂ = | ⟩⟨ |,
+(4)
+
+where | ⟩ is one of the eight basis states. When the system is open, interaction with the environment
+causes energy exchange and hence changes the elements of the system density operator. The
+relaxation decoherence occurs only on the main diagonal of the density operator, which indicates a
+change of the “population” of the quantum system.
+The phase decoherence operator is defined as
+̂ = | ⟩⟨ |,
+≠ ,
+(5)
+where | ⟩ and | ⟩ represent two different spin states. The phase decoherence channels describe
+the non-unitary transitions that erode the quantum system’s relative phases. These dephasing
+processes selectively suppress the off-diagonal terms of the density operator without transferring
+energy or altering diagonal populations. As these off-diagonal coherences decay, the phase
+information carried by the density matrix is progressively degraded, resulting in the irreversible loss
+of the system's original quantum information.
+
+Symmetry-Driven Dimensionality Reduction and Biophysical Interpretation of ̂
+( ̂) in the Lindblad master equation theoretically accommodates
+The dissipative propagator
+22 = 64 possible transition operators ̂ (for an
+= 3 spin system describing arbitrary
+
+relaxation and dephasing processes. However, a critical physical constraint arises from the initial
+photophysical excitation of the radical-pair system. Upon absorption of short-wavelength blue light
+(approx. 443 nm , the photo-induced electron transfer within the retinal cryptochrome (DA strictly
+13
+
+generates the radical pair D+∙ A−∙ in a spin-singlet configuration: |𝑆⟩ = (|↑↓⟩ − |↓↑⟩)/√2 .
+Combined with the nuclear spin states of the nitrogen nucleus | ⟩ = |↑⟩ and | ⟩ = |↓⟩, the active
+initial subspace of the system is strictly restricted to the singlet-coupled states {|𝑆 ⟩, |𝑆 ⟩}. Because
+the open quantum system only evolves from this initial singlet manifold, any environmental noise
+channels that do not couple to or originate from this subspace remain physically inactive. This
+symmetry-driven boundary reduces the number of relevant, active decoherence operators from 64
+down to 16 key transitions.
+By analyzing the final transition states, these 16 active operators are systematically categorized
+into five distinct dissipative channels ℒ 1 through ℒ 5 , which physically map onto three distinct
+environmental noise pathways:
+
+(a Singlet-Singlet (SS Relaxation hathway ( 1 and
+2
+This pathway governs quantum transitions where the final states remain confined within the
+singlet subspace. It comprises amplitude relaxation ( 1 , governed by the operator:
+̂1 = |𝑆 ⟩⟨𝑆 |+|𝑆 ⟩⟨𝑆 |
+and phase Dephasing (
+
+2
+
+governed by operator
+̂2 = |𝑆 ⟩⟨𝑆 |+|𝑆 ⟩⟨𝑆 |
+
+(6)
+
+(7)
+Because both channels operate exclusively within the singlet subspace, they act to trap the radical
+
+, this singletpair in its initial singlet configuration. At elevated decoherence rates ( ≫
+trapping mechanism suppresses coherent singlet-to-triplet spin interconversion, globally
+flattening the triplet yields.
+(b Longitudinal hhase Dephasing (
+hathway This channel describes phase erosion between the singlet |𝑆⟩ and the central, non-parallel triplet
+
+state | 0 ⟩ = (|↑↓⟩ + |↓↑⟩)/√2. It is governed by the decoherence operator:
+̂3 = |𝑆 ⟩⟨ 0 |+|𝑆 ⟩⟨ 0 |+|𝑆 ⟩⟨ 0 |+|𝑆 ⟩⟨ 0 |
+(8)
+This dephasing pathway is highly angle-dependent, with the most severe phase decay occurring
+
+at the retinal center ( → 0∘ , where the aligning effect of the external magnetic field is strongest,
+and a milder decay at the periphery ( → 90∘ . This uneven spatial decay flattens the directional
+signal and erodes the visual contrast of the perceived compass.
+(c Transverse hhase Dephasing ( ± hathway and
+
+This pathway characterizes phase dephasing between the singlet state |𝑆⟩ and the parallel-spin
+triplet states, | + ⟩ = |↑↑⟩ and | − ⟩ = |↓↓⟩. The dynamics are governed by
+̂4 = |𝑆 ⟩⟨ + | + |𝑆 ⟩⟨ + | + |𝑆 ⟩⟨ + | + |𝑆 ⟩⟨ + |
+(9)
+̂5 = |𝑆 ⟩⟨ − | + |𝑆 ⟩⟨ − | + |𝑆 ⟩⟨ − | + |𝑆 ⟩⟨ − |
+(10)
+Because the transverse triplet states | + ⟩ and | − ⟩ directly couple to the perpendicular, off-axis
+components of the external geomagnetic field, phase noise in these specific channels selectively
+dampens off-axis spin fluctuations. This selective dephasing acts as a constructive spatial filter,
+concentrating triplet yields at the retinal center and sharpening the visual compass contrast.
+
+Methodological Innovation via Density Matrix Vectorization
+14
+
+A major computational bottleneck in simulating open-system quantum dynamics lies in the
+operator-form representation of the Lindblad master equation, Eq. (3 . Unlike the unitary Liouville
+equation for closed systems, which often permits analytical or computationally straightforward
+solutions, the non-unitary Lindblad equation lacks a generalized, closed-form analytical solution for
+complex multi-particle spin systems under environmental noise. Direct numerical integration of the
+operator-form differential equation is computationally expensive and difficult to integrate into
+standard numerical schemes.
+To bypass this computational bottleneck, we implement an isomorphic vectorization mapping
+that projects the density matrix ( ) from Hilbert space into Liouville space17. This transformation
+restructures the × density matrix ( ) (where
+= 23 = 8 for our = 3 spin system into
+an
+
+2
+
+-dimensional column vector | ( )⟩⟩:
+11
+
+[ ̂] = [ ⋮
+
+1
+
+⋯
+⋱
+⋯
+
+1
+
+⋮ ]
+
+11
+
+↔
+
+Hilbert − Liouville
+
+| ⟩⟩ =
+
+12
+
+⋮
+
+1
+
+[
+
+21
+
+⋮
+
+]
+
+(11)
+
+By applying this vectorization mapping systematically to each operator term in the Lindblad equation,
+the original operator-form differential equation is transformed into a vectorized, first-order system of
+ordinary differential equations (ODEs
+| ⟩⟩ = (ℒ + ℒ )| ⟩⟩
+
+(12)
+
+where the vectorized Hamiltonian propagator ℒ = − [ ̂ , ̂( )]/ℏ and the vectorized dissipative
+
+propagator
+
+are represented in the Liouville space via Kronecker tensor product
+ℒ =− ( ⊗
+ℏ
+22
+
+Here,
+and
+operator ̂ ,
+
+1
+ℒ = ∑
+2
+=1
+
+−
+
+⊗ )
+
+(2 ̅ ⊗
+
+− ⊗
+
+(13)
+†
+
+−( † ) ⊗ )
+
+(14)
+
+are the matrix representations of the Hamiltonian operator ̂ and the decoherence
+denotes the
+×
+identity matrix, ⊗ represents the Kronecker tensor product,
+
+and † indicate the transpose and
+overbar denotes complex conjugate, and the superscripts
+conjugate transpose of the matrices, respectively. Crucially, in Eq. (14 , the summation is restricted
+to the 16 active symmetry-driven decoherence operators ̂ derived previously, rather than the full
+
+64 possible transitions, significantly reducing the dimensionality and computational complexity of
+the dissipative propagator.
+
+This linear ODE form is highly compatible with standard, highly efficient numerical integration
+algorithms (such as Runge-Kutta schemes in C++ or MATLAB . This state-space formulation
+completely bypasses the traditional numerical hurdles of operator-form differential equations,
+15
+
+enabling rapid, stable, and computationally cheap simulations of open quantum dynamics under
+arbitrary noise conditions. The rigorous mathematical proof validating the general applicability of
+this tensor mapping to arbitrary n-particle spin systems via mathematical induction is detailed in
+Supplementary Information.
+The hrojection of Triplet Yield onto a Visual Compass
+To bridge microscopic quantum spin dynamics with macroscopic sensory perception, we project
+the simulated angle-dependent triplet yields Φ onto a hemispherical virtual retina model. This
+mapping translates chemical reaction yields into a spatial visual gradient that migratory birds can
+perceive as a shaded directional compass.
+(a Quantitative Formulation of Chemical Yields
+The instantaneous fractional singlet population ( ) of the radical pair is extracted by tracing
+
+the density operator over the singlet subspace:
+
+( ) = Tr ( ̂ ( ))
+
+(15)
+
+where ̂ = |𝑆 ⟩⟨𝑆 |+|𝑆 ⟩⟨𝑆 | is the singlet projection operator, and ( ) represents the timedependent density matrix solved from the vectorized state-space ODE, Eq. (12 in Liouville space.
+Assuming that both singlet and triplet recombination pathways proceed via first-order kinetics with
+an identical chemical decay rate constant
+and triplet yield Φ are computed as:
+Φ =
+
+∫
+
+∞
+
+= , the final time-integrated singlet yield Φ
+
+=
+
+( ) −
+
+0
+
+, Φ =1−Φ
+
+(16)
+
+(b Hemispherical Retinal Geometry and Spatial Discretization
+To simulate the spatial distribution of these yields across the bird’s eye, we construct a
+
+hemispherical virtual retina of unit radius ( = 1 centered at the origin of a body-fixed coordinate
+system X-Y-Z. In this coordinate frame, the positive X-axis is aligned with the bird's instantaneous
+flight direction, the Y-axis points to the left, and the Z-axis points vertically upward, establishing the
+hemispherical coordinate framework of the virtual retina relative to the bird's flight direction (Fig. 6,
+left panel .
+The hemispherical surface of the retina is mathematically discretized into 91 concentric latitude
+circles, spaced at 1° intervals of the retinal coordinate angle 0 (where 0° ≤ 0 ≤ 90° . Each
+concentric circle is further partitioned into 360 evenly spaced sensory spots at 1° azimuthal intervals,
+representing the uniform distribution of photophysical magnetoreceptors. For a given circle at
+coordinate angle 0 , its radius
+are geometrically defined by:
+
+and the displacement of its center
+
+0
+
+along the negative X-axis
+
+(17)
+= sin 0 = sin 0 ,
+0 = − cos 0 = − cos 0
+Under a local geomagnetic field vector 0 oriented at a pitch angle
+relative to the flight
+direction (X-axis , the local angle
+between the molecular alignment axis of a magnetoreceptor at
+position 0 and the geomagnetic vector is given by:
+=
+
+0−
+
+16
+
+(18)
+
+Fig. 6 Multi-Scale Mapping and Biochemical hathway of the Avian Quantum Compass. The left panel
+defines a hemispherical virtual retina model comprising 91 concentric circles and 360 individual sensory points,
+establishing the geometric coordinate system for local magnetoreceptors relative to the geomagnetic vector
+0 . The center panel outlines the radical-pair mechanism, depicting light-driven singlet-triplet state transitions
+in retinal cryptochrome. The right panel illustrates the grayscale projection of angle-dependent triplet yields
+Φ ( ) , showing how the resulting visual compass spot remains dynamically and stably aligned with the
+.
+geomagnetic direction across various flight pitch angles
+
+(c Yield-to-Color Transduction and Grayscale Visual Mapping
+To visualize the computed triplet yield Φ ( ) at each discrete coordinate, we define a yieldto-color transduction formula that maps the spatial yield distribution into a grayscale image. In the
+
+standard RGB color space, a pure grayscale intensity requires identical coordinates ( = =
+ranging from 0 (absolute black to 255 (absolute white . We formulate the contrast-enhanced mapping
+function as:
+(19)
+= C75% {127 + 255[1 − 2Φ ( , )]∆Φ },
+
+where ∆Φ = max(Φ ) − min(Φ ) represents the maximum peak-to-peak yield difference across
+all coordinates, and C75% = 0.75 is a contrast-scaling coefficient that dynamically uplifts image
+contrast by 75% to prevent saturation and optimize visual clarity.
+Under this mapping rule, a higher local triplet yield maps to a darker grayscale value, while a
+lower yield produces a brighter value. Because the triplet yield Φ ( ) reaches its maximum when
+
+the molecular axis aligns with the geomagnetic field vector (i.e., at small , this projection generates
+a distinctive dark central spot at the retinal location corresponding to the geomagnetic direction. This
+shaded gradient remains dynamically stable and reliably tracks the geomagnetic vector regardless of
+
+the bird's flight pitch
+, as visually demonstrated by the grayscale projections of the visual compass
+spot across various flight angles in Fig. 6 (right panel .
+17
+
+(d Quantitative Metrics of Compass herformance: Magnetic Sensitivity (
+To evaluate the directional performance of the avian compass quantitatively under different
+parameters and open-system noise rates, we define the magnetic sensitivity
+= Φ ,max − Φ ,min = Φ ,max − Φ ,min
+
+as:
+(20)
+
+which represents the maximum peak-to-peak amplitude variation of the yield across the entire spatial
+range of
+
+. This metric directly quantifies the system's capacity to differentiate directional changes
+relative to the external geomagnetic field. A higher
+corresponds to a sharper, more contrast-rich
+visual pattern, indicating a highly sensitive and robust biological orientation sensor.
+
+Author Contributions
+C.-D.Y. conceived the study, designed the research, and performed the mathematical derivations. W.J.C. carried out the computer simulations and analyzed the data. Both authors co-wrote, reviewed,
+and approved the final manuscript.
+
+Competing interests
+The authors declare no competing interests.
+
+Data availability
+All data generated or analyzed during this study are included in this published article and in the
+supplementary information.
+
+Acknowledgements
+This research was supported by the National Science and Technology Council, Taiwan, under Grant
+No. NSTC 115-2221-E-006-017
+
+References
+1. Wiltschko, W. & Merkel, F. M. Orientierung zugunruhiger Rotkehlchen im statischen
+Magnetfeld. Verh. dt. Zool. Ges. 59, 362–367 (1966 .
+2. Wiltschko, W. & Wiltschko, R. Magnetic compass of European robins. Science. 176, 62–64,
+DOI: https:// doi .org/ 10.1126 / science . 176.4030.62 (1972 .
+3. Wiltschko, W. & Wiltschko, R. Magnetic orientation in birds. J. Exp. Biol. 199, 29–38 (1996 .
+4. Wiltschko, W. & Wiltschko, R. Red Light Disrupts Magnetic Orientation of Migratory
+Birds. Nature. 364, 525–527, DOI: https:// doi .org/10.1038/364525a0 (1993 .
+5. Schmidt-Koenig, K. & Walcott, C. Tracks of pigeons homing with frosted lenses. Animal
+Behav. 26, 480–486, DOI: https:// doi .org/10.1016/0003-3472(78 90065-9 (1978 .
+
+18
+
+6. Dennis, T. E., Rayner, M. J. & Walker, M. M. Evidence that pigeons orient to geomagnetic
+intensity during homing. Proc. R. Soc. London Ser. B 274, 1153–1158, DOI:
+https://doi.org/10.1098/ rspb.2007.3768 (2007 .
+7. Schulten, K., Swenberg, C. E. & Weller, A. A proposal for the magnetic field strength effect
+on the orientational behavior of migratory birds. Z. Phys. Chem. 111, 1–5 (1978 .
+8. Ritz, T., Adem, S. & Schulten, K. A Model for Photoreceptor-Based Magnetoreception in
+Birds. Biophys. J. 78, 707–718, DOI: https:// doi .org/10.1016/s0006-3495(00 76629-x
+(2000 .
+9. Gauger, E. M., Rieper, E., Morton, J. J. L., Benjamin, S. C. & Vedral, V. Sustained Quantum
+Coherence and Entanglement in the Avian Compass. Phys. Rev. Lett. 106, 040503, DOI:
+https:// doi .org/10.1103/physrevlett.106.040503 (2011 .
+10. Bandyopadhyay, J. N., Paterek, T. & Kaszlikowski, D. Quantum Coherence and Sensitivity
+of Avian Magnetoreception. Phys. Rev. Lett. 109, 110502, DOI: https:// doi .org/
+10.1103/physrevlett.109.110502 (2012 .
+11. Hore, P. J. & Mouritsen, H. The Radical-Pair Mechanism of Magnetoreception. Annu. Rev.
+Biophys. 45, 299–344 (2016 .
+12. Poonia, V. S., Kondabagil, K., Saha, D. & Ganguly, S. On the functional window of the avian
+compass. Phys. Rev. E 95, 052417, DOI: https:// doi .org/10.1103/physreve.95.052417 (2017 .
+13. Plenio, M. B. & Huelga, S. F. Dephasing-assisted transport: quantum networks and
+biomolecules. New J. Phys. 10, 113019, DOI: https://doi.org/10.1088/13672630/10/11/113019 (2008 .
+14. Tiersch, M. & Briegel, H. J. Decoherence in the chemical compass: the role of decoherence
+for avian magnetoreception. Philos. Trans. R. Soc. A 370, 4517-4540, DOI: https://doi.org/
+10.1098/rsta. 2011.0488 (2012 .
+15. Lindblad, G. On the generators of quantum dynamical semigroups. Commun. Math. Phys. 48,
+119–130 (1976 .
+16. Poonia, V. S., Saha, D. & Ganguly, S. State transitions and decoherence in the avian
+compass. Phys. Rev. E 91, 052709, DOI: https:// doi .org/10.1103/physreve.91.052709 (2015 .
+17. Havel, T. F. Robust procedures for converting among Lindblad, Kraus and matrix
+representations of quantum dynamical semigroups. Journal of Mathematical Physics, 44(2 ,
+534–557 (2003 .
+18. Dellis, A. T. & Kominis, I. K. Noise-resistant quantum coherence in the radical-pair
+mechanism. Chem. Phys. Lett. 543, 159–162 (2012 .
+19. Sheppard, J. V., et al. Millisecond-lived radicals in white-throated sparrow cryptochrome
+4. Nat. Chem. 15, 1070–1076 (2023 .
+20. Xu, J., et al. Magnetic sensitivity of cryptochrome 4 from a migratory songbird. Nature 594,
+535–540 (2021 .
+21. Cong, S. & Zhang, Y. Y. Superposition state preparation based on Lyapunov stability theorem
+in quantum systems. China Univ. Sci. Tech. 38, 821-827 (2008 .
+19
+
+22. Coron, J., Grigoriu, A., Lefter, C. & Turinici, G. Quantum control design by Lyapunov
+trajectory tracking for dipole and polarizability coupling. New J. Phys. 11, 105034, DOI:
+https:// doi .org/10.1088/1367-2630/11/10/105034 (2009 .
+23. Cai, J. & Plenio, M. B. Chemical Compass Model for Avian Magnetoreception as a Quantum
+Coherent Device. Phys. Rev. Lett . 111, 230503, DOI: https:// doi .org/10.1103/
+physrevlett.111.230503 (2013 .
+24. Maniscalco, S., Olivares, S. & Paris, M.G.A. Entanglement oscillations in non-Markovian
+quantum
+channels. Phys.
+Rev.
+A 75, 062119,
+DOI:
+https:// doi .org/10.1103/
+physreva.75.062119 (2007 .
+25. Haikka, P. & Maniscalco, S. Non-Markovian dynamics of a damped driven two-state
+system. Phys. Rev. A 81, 052103, DOI: https:// doi .org/10.1103/physreva.81.052103 (2010 .
+
+20
+
+Supplementary Files
+This is a list of supplementary les associated with this preprint. Click to download.
+
+fi
+
+SupplementaryInformationR3.pdf
+
+

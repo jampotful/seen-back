@@ -1,0 +1,1478 @@
+Bioinspired navigation based on distributed mechanoreception in the leech
+Jeffrey P. Gill, Sebastian T. Nichols, Mobina Motevalian, Bruno Mota, Cynthia M. Harley, Brian D. Taylor (2026). npj Robotics. https://doi.org/10.1038/s44182-026-00082-3. doi:10.1038/s44182-026-00082-3. Licence: cc-by-nc-nd. Text from pdf.
+
+npj | robotics
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Bioinspired navigation based on
+distributed mechanoreception in
+the leech
+Check for updates
+1
+
+,4
+
+1
+
+2
+
+3
+
+1234567890():,;
+
+1234567890():,;
+
+Jeffrey P. Gill , Sebastian T. Nichols , Mobina Motevalian , Bruno Mota , Cynthia M. Harley &
+Brian K. Taylor1
+
+Water waves help aquatic animals locate environmental stimuli. While previous studies suggest that
+leech mechanoreceptors have evolved to respond to relevant wave frequencies, it remains unclear
+how information from multiple sensors is combined and processed. This work presents a simpliﬁed
+computational model that mimics leech goal seeking behavior in an agent-based simulation. A
+simulated leech (agent) was tasked with ﬁnding the source of an artiﬁcial water wave stimulus. The
+agent’s distributed mechanoreceptor array detected wave motion, which was processed with a
+computational neuroscience Winner-Take-All (WTA) framework to generate motion commands. The
+computational model’s performance aligned with data from animal experiments. The model also
+enables us to address questions about how different patterns of sensor ablation or placement might
+affect navigation performance in the animal. In this way, our model can complement animal
+experiments by enabling questions to be posed that are challenging to address with live animals.
+Furthermore, through considering how biological systems may process distributed information, our
+study may also provide insights into novel approaches for processing data from multiple sensors in
+man-made systems.
+
+Invertebrates and vertebrates alike use arrays of sensors to detect
+sensory stimuli, a phenomenon known as distributed sensing. Distributed sensing is found across a wide variety of sensory modalities
+that include mechanoreception1,2, visual sensation3, and potentially
+magnetoreception4,5. As an example, Fig. 1 shows an illustration of a
+leech and its more than 294 multimodal visual sensors and mechanoreceptors distributed across its body. This array of multimodal
+receptors is used to locate prey within the leech’s aquatic environment.
+Understanding distributed sensing is essential for understanding how
+animals combine data from multiple sensors to effectively behave and
+navigate in their environment. Beyond enhancing our understanding
+of navigation in biological systems, the study of distributed sensing and
+computational neuroscience/neuromorphic computing approaches
+may provide several beneﬁts for man-made systems6, including but not
+limited to: 1) enhancing system robustness to individual sensor failures, 2) using simpler and/or lower quality sensors that collectively
+provide actionable data7, and 3) developing systems that use lower size,
+weight, cost, and power.
+
+Leeches are an attractive organism for studying distributed sensing as
+they have more than 294 distributed sensors (known as sensilla) and a
+relatively simple nervous system ( ~ 104 neurons vs. ~ 105 for the common
+fruit ﬂy). The leech nervous system is comprised of segmental ganglia that,
+along with a relatively simple brain, help to coordinate motion between each
+segment of the animal (for review see ref. 8). While the majority of neurophysiological study has been limited to the medicinal leech, Hirudo verbana, ecological ﬁeld studies tell us that different leech species can be
+identiﬁed by the layout of their sensors9. Further, these different species of
+leech live in a variety of habitats and seek different prey, suggesting that an
+individual species’ sensor layout may confer ecological advantages in a
+speciﬁc species’ ecological niche.
+Previous studies have sought to elucidate the relationship between
+sensory stimulation, neural responses (i.e., spike rate frequency), motor
+commands, and organism-level behavior10–13. However, it is still unclear
+how sensory information is processed such that it can direct a locomotor
+response. Furthermore, it is unknown how ablating (i.e., disabling) different
+sensors or sensor groups via damage or other malfunctions would affect
+
+1
+
+Department of Mechanical and Aerospace Engineering, Case Western Reserve University, Cleveland, OH, USA. 2Instituto de Física, Universidade Federal do Rio
+De Janeiro, Rio de Janeiro, Brazil. 3Department of Natural Sciences, Metropolitan State University, Saint Paul, MN, USA. 4Unafﬁliated: Sebastian T. Nichols.
+e-mail: bkt2@case.edu
+
+npj Robotics | (2026)4:24
+
+1
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+navigation performance. Experiments of this type can be difﬁcult to perform
+on live animals, owing to the large number of sensors (294+) and the small
+size of individual sensors (approx. 20 micron diameter). Furthermore,
+surgical manipulations can lead to impacts on behavior that are outside of
+those caused by the loss of a sensor itself.
+To address these questions, in the present study, we employ a computational approach that combines computational neuroscience with agentbased modeling. Speciﬁcally, we use the winner-take-all (WTA) computational neuroscience framework described by Wilson14 in conjunction with
+an agent-based model (ABM) to enable a simulated leech to navigate to a
+water wave source solely using mechanosensation. The WTA network (also
+known as a neural ﬁeld15,16) uses populations of neurons that can inhibit or
+excite the activity of their neighbors. This type of neural organization has
+been shown to be capable of tasks such as path integration and categorical
+decisions14. We chose this model formulation because of its demonstrated
+biological relevance and ability in navigation and orientation contexts (see
+Section 3 for further discussion).
+We tasked a simulated agent (i.e., a ﬁctive animal) that processes
+sensory information using a neural ﬁeld to perform distributed mechanoreception as a means of navigating from a starting point to a goal. Rather
+than try to simulate every detail of the leech precisely, we made several useful
+abstractions to preserve the nature of the problem we are investigating while
+simultaneously simplifying our study (see Table 1 for details). Speciﬁcally,
+our simulated leech model only has 24 mechanoreceptor “populations” to
+more easily employ Wilson’s pre-existing model14 as compared to over 294
+multisensory sensilla and sensory neurons in live leeches. This allowed for
+easier implementation while providing the ability to add or subtract sensors
+for comparison or additional studies (see Section “Sensor Quality”). Our
+model also only has an effective peripheral nervous system vs. leeches that
+have segmental ganglia and a “head” brain. Finally, our model moves as a
+rigid body as compared to a leech that swims through water with an
+undulating motion.
+Despite these abstractions, this model enabled us to examine the
+impact of intrinsic features (e.g., number of sensors, the level of neural
+activation required for salient stimulus perception (i.e., the neural threshold)), and extrinsic features such as the impact of wave frequency on the
+ability of the agent to locate the water wave stimulus. Additionally, we
+ablated (i.e., disabled) different combinations of sensors to simulate both
+sensory ablation and to examine the performance of our agent in response to
+different sensor layouts. Our model reproduced ﬁnd rates (i.e., percentage of
+leeches that successfully navigate to a target) similar to those observed in
+animal experiments17. Our model also demonstrated how leech behavior
+
+Fig. 1 | Leeches have 14 sensilla on each of their 21 segments that are positioned
+around the circumference of a single segmental ring.
+
+might be altered by different patterns of sensor ablation. Finally, our model
+demonstrates how different sensor layouts may affect performance. The fact
+that our model is able to recapitulate real-world animal behavior with so
+many abstractions and with no tuning or optimization of our model’s
+parameters suggests that it is a reasonable approach to modeling leech
+behavior (see Section “Discussion” and Table 1). Incorporating additional
+complexity and features would likely improve the model’s ﬁdelity and
+predictive power in novel environments where it is difﬁcult to perform in
+vivo animal experiments.
+Much of our present study is based on work developed in Nichols18,
+which was later adapted for magnetoreception in Nichols et al.19. The present study expands on these works in two substantial ways. First, the present
+study incorporates the impact of water wave amplitude on sensing, an
+important step that we have not previously undertaken. Second, the present
+study explores the effects of sensor ablation, which allows us to examine the
+effects of different sensor layouts and the impact of sensors being damaged
+and unusable.
+
+Results
+As leeches of different ecological niches differ in sensor position and
+number, we wanted to examine potential impacts of this on our model.
+Thus, we ﬁrst consider the performance of the simulated agent in locating
+the source of a water wave stimulus when all of its sensors are functioning
+normally. We then examine how performance is affected by ablating (i.e.,
+disabling) subsets of sensors. This allowed us to examine the impact of
+changing either the number of available sensors or the sensor layout.
+Additionally, we explore the effects of varying sensor quality by modifying
+our sensor model so that the sensors inherently provide more errant data,
+and of varying the number of sensors present.
+In all simulations, the agent began ~76 cm away from a water wave
+source, with a random initial heading. It was given up to 180 s to reach its
+goal, the water wave source. A trial was considered successful if the agent
+remained within 4 cm of the goal for 5 s consecutively. For every combination of model parameters considered below, we report the performance of the agent as the proportion of 50 trials in which the goal was
+successfully reached. The agent had 24 sensors, each of which is connected to a neural population. These neural populations had speciﬁc
+rules underlying their interactions: Each population did not excite or
+inhibit its 4 nearest neighbors, and its 7 most distant neighbors. A
+population inhibited all 12 of its other neighbors (see Section “Methods”
+for details). As an additional parameter, because natural sensors may
+incur damage or be subject to environmental noise, Noise and uncertainty are added to the model by adding noise to the input, noise to the
+direction of the input, or randomness into the direction that the
+agent moves.
+To examine the role of neural sensitivity in this navigation task, a
+parameter called the neural threshold was varied to examine the model’s
+performance under different conditions. This is a threshold level of neural
+activity at which a neural population’s response is considered to be salient
+and is allowed to inﬂuence the agent’s perceived direction of the water wave
+source. We found this parameter to be critical to both the agent’s ability to
+ﬁnd the water wave source and the conditions under which it was able
+to do so.
+
+Table 1 | Description of our model’s simpliﬁcations and abstractions vs. a real-world leech
+Our Model
+
+Real Leech
+
+Sensory Modalities
+
+Mechanical
+
+Mechanical, Visual, Chemical
+
+Sensory Number
+
+24
+
+Over 294
+
+Locomotion
+
+Rigid Body
+
+Soft body that swims via undulation or crawls
+
+Sensory Processing
+
+Computational Neuroscience “Cell Populations”
+
+Multilevel Processing (e.g., Brain, Inter/Intra Ganglia)
+
+Segmental Ganglia
+
+No
+
+Yes
+
+"Head” Brain
+
+No
+
+Yes
+
+npj Robotics | (2026)4:24
+
+2
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Article
+
+Fig. 2 | Agent trajectories in response to stimulus from different wave frequencies. a intermediate wave frequencies (b), and high wave frequencies (c) for a
+neural threshold of 0.15. Agents started in the lower-left corner (marked with an X)
+with a random initial orientation and attempted to locate their target, the water wave
+source in the upper-right corner (marked with a cross). Leaving the area plotted here
+was permitted, as was returning to it. 50 trials are shown in each panel. Trajectories
+with gray-scale coloring failed to reach the target within the allotted time.
+
+Trajectories with dark blue or purple coloring successfully reached the target within
+the allotted time. For low wave frequencies, the agent fails to navigate to the target
+due to being under-stimulated (0% success rate), tending to wander in a straight path
+with its initial orientation. At high wave frequencies, the agent fails to navigate to the
+target due to being over-stimulated (2% success rate), tending to turn frequently and
+randomly. At intermediate wave frequencies, the agent is able to successfully ﬁnd the
+target (80% success rate), tending to turn towards its goal in a directed manner.
+
+Fig. 3 | Find rate vs. water wave frequency for different neural thresholds in the
+model and for live adult leeches. In the model results (gray lines), for a given neural
+threshold, there is a wave frequency range at which the model leech most often ﬁnds
+its target. As neural threshold increases (gray lines of increasing darkness), this
+“preferred” frequency also increases. Across all neural thresholds investigated, the
+best performance (greatest ﬁnd rate) is obtained by the model in approximately the
+8–12 Hz range (shaded box). In live animal experiments (blue line), adult leeches
+
+relying on mechanosensory cues showed a similar best performance in the 8–12 Hz
+range (data reproduced from Harley et al.17). For the model, the range of neural
+thresholds that generated preferred frequencies best aligned with live animal data
+was between 0.02 and 0.2. Results for a neural threshold of 0.15 (bold gray line) were
+generated for the purpose of visualizing data at an intermediate value. Each gray data
+point represents 50 simulation trials. Animal experiments had 15–18 trials per wave
+frequency. Error bars represent the binomial standard deviation.
+
+Normal functioning
+The simulated agent responded to water waves in a frequency-dependent
+manner. This is illustrated by trajectory plots shown in Fig. 2A–C. Wave
+frequencies that are too low (Fig. 2A) or high (Fig. 2C) relative to the neural
+threshold result in under- or overstimulation, respectively, and ultimately
+unsuccessful navigation behavior. Under-stimulated behavior resulted in
+the agent rarely turning and nearly always missing the goal, tending instead
+to travel in straight lines. Overstimulated behavior resulted in the agent
+tending to turn too frequently and randomly, wandering along an undirected path, again nearly always missing its goal. If the frequency and neural
+threshold were varied with each other appropriately, navigation success
+could be achieved (Fig. 2B).
+Because sensor stimulation increases with wave frequency, the interaction between the neural threshold and wave frequency is important for the
+agent’s performance. Figure 3 plots the success rate of the simulated agent as
+a function of the wave frequency for a range of neural thresholds. As the
+
+neural threshold increased and the sensor more sensitive, the stimulus
+frequencies at which the agent was successfully able to locate the target
+increased. Beyond a neural threshold value of 0.2, it became harder for the
+agent to differentiate frequencies near its preferred frequency, resulting in
+the peak of each curve widening as the frequency intensity increased.
+We found that a neural threshold between 0.02 and 0.2 resulted in a
+peak success rate for the agent at stimulus wave frequencies of approximately between 8 Hz and 12 Hz (Fig. 3, shaded box). This is comparable to
+the results of laboratory experiments with live adult leeches (Fig. 3, blue
+line–live leech data taken from ref. 17). It is also comparable to the frequency
+of 13.5 Hz, which Piephoff et al.20 noted corresponds to the phase velocity
+minimum of water at 15 °C (see Section “Discussion” for a deeper discussion). These comparisons helped to validate our model against real-world
+animal behavior. Interestingly, we found that across the range of neural
+thresholds we investigated the best performance was found in the 8–12 Hz
+range (Fig. 3).
+
+npj Robotics | (2026)4:24
+
+3
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Because a real leech’s lateral (i.e., side) sensors may be stimulated from
+the tangential motion of water over them (e.g., ref. 20) we varied the angular
+sensitivity of our sensors to account for increasingly sensitive lateral sensors.
+We found similar performance through a variety of lateral sensitivities (see
+Fig. 10 for summary data, section 4.2 for implementation description, and
+Eq. (8) for mathematical detail).
+Sensor ablation at the same frequency
+To examine the impact of sensor number and location on the agent’s ability
+to localize the stimulus, we performed additional simulations in which
+subsets of the agent’s 24 sensors were ablated (i.e., disabled) throughout an
+entire trial so that they could not be activated by any level of stimulation. The
+control case was running the agent with all sensors available and active (i.e.,
+no ablation). We ablated the following subsets of sensors:
+
+• the 12 odd-numbered sensors;
+• the 12 even-numbered sensors;
+• the rightmost 7 sensors, with preferred headings within ± 45° of the
+agent’s rightward vector;
+• the leftmost 7 sensors, with preferred headings within ± 45° of the
+agent’s leftward vector.
+These ablation experiments allowed us to determine how the agent
+performs with reduced numbers of sensors across the body. To further
+examine the role of sensor location in localization ability, we also performed
+several similar ablation experiments that effectively changed the placement
+of sensors around the body. In these experiments, we ablated:
+• the frontmost 7 sensors, with preferred headings within ± 45° of the
+agent’s forward vector;
+• the rearmost 7 sensors, with preferred headings within ± 45° of the
+agent’s backward vector;
+• both the frontmost 7 sensors and the rearmost 7 sensors, similar to
+descriptions 5 and 6
+In these experiments, the neural threshold was ﬁxed at 0.15, an
+intermediate value of neural threshold that was found to generate model
+results that align with behavioral data from ref. 17 (see Fig. 3). The stimulus
+wave frequency was 11 Hz.
+The left- and right-ablated agents suffered dramatic performance
+reductions as compared to the control case (Fig. 4A). As one might expect,
+left-ablated agents were biased towards right turns, and right-ablated agents
+were biased towards left turns. Odd and even-ablated agents also experienced dramatic performance reductions compared to the control case
+(Fig. 4A).
+For our sensor placement experiments (Fig. 4B), we saw a reduction in
+performance when the rear sensors were removed, since agents that started
+facing away from the target had difﬁculty detecting the waves. Interestingly,
+removing the front sensors alone did not impact performance compared to
+the control (80% success in both cases), but it did have a noticeable effect on
+the shapes of trajectories, causing them to gradually curve toward the target,
+rather than head straight towards it (Fig. 4B).
+Sensor ablation at different frequencies
+In addition to different ablation conﬁgurations at the same frequency, we
+performed sensor ablations at different water wave frequencies to determine
+whether performance depended on frequency. For most sensor conﬁgurations, we found that performance could be improved by changing the frequency of the water wave stimulus. To summarize the results, we plotted
+ﬁnd rate vs. water wave frequency in increments of 1 Hz with a neural
+threshold of 0.15 (Fig. 5). Only the cases of the right- and left- ablated
+sensors remain universally low (i.e., less than about 20%) for all frequencies.
+As was shown earlier in Fig. 3, the control case had a peak ﬁnd rate at 11 Hz.
+Each of the ablation cases (excluding right- and left- ablated sensors) had
+peak ﬁnd rates that were shifted towards higher frequencies (12 Hz for evennpj Robotics | (2026)4:24
+
+and front-ablations, 13 Hz for odd- and rear ablations, and 18 Hz for frontand-rear-ablation). In addition to having a higher frequency, these ablation
+cases often had wider peaks. Interestingly, the best performances seen when
+only front sensors were ablated (98% success at 12 Hz) and when both front
+and rear sensors were ablated (88% success at 18 Hz). Both of these cases had
+better performance than the control case’s best performance (80% success
+at 11 Hz).
+Sensor quality
+In this paradigm, we modiﬁed our sensor model by enabling the cyan term
+of Eq. (9). This allowed all sensors to provide spurious measurements,
+increasing the chances for the neural ﬁeld to provide an incorrect perception
+of the wave source’s direction. This simulates a response to environmental
+noise, a less than ideal sensor, or inherent imperfections in sensory data or
+the nervous system. In this paradigm, we tested the agent with 8, 24, and 72
+sensors to examine how performance changes with the number of sensors
+(Fig. 6). In general, the maximum possible ﬁnd rate increased as the number
+of sensors increased. For 8 sensors, the maximum ﬁnd rate was about 55% at
+a frequency of 16 Hz for a neural threshold of 0.5. With 24 sensors, neural
+thresholds of 0.15 and 0.5 yielded ﬁnd rates of about 60% at 8 Hz and 12 Hz.
+For 72 sensors, a neural threshold of 0.5 yielded about 70% success at 8 Hz.
+For comparison, we also ran our “high quality” sensor model with 8, 24, and
+72 sensors and found that performance appeared to be similar in all cases
+(see Section 3 for details).
+
+Discussion
+Despite its simplicity, our model was able to recapitulate behavioral results
+observed in real-world leech navigation. Speciﬁcally, we were able to
+reproduce the rates at which leeches localize our stimulus at their preferred
+water-wave stimulus frequency (Fig. 3).
+The model’s behavior at low, high, or intermediate stimulus frequencies is explained by the dependence of sensor activation on stimulus
+wave frequency (see Sec. “Methods” for full model description). Low wave
+frequencies equate to low wavenumber (Eq. (1)), leading to weak activation
+of sensors (Eq. (8)). This in turn leads to weak activation of neural populations that make up the neural ﬁeld responsible for processing sensory
+input (Eqs. (10)–(11)) and potentially no populations exceeding the
+aforementioned neural threshold. When none of the neural populations are
+above the neural threshold, the agent is programmed to either remain
+stationary or make random small angle turns before moving forward (See
+section 4 for implementation details). A similar behavior occurs in leeches
+during their navigation behavior21,12. This results in the behavior seen in
+Fig. 2A, where the agent tends to move in relatively straight lines, ignoring
+the goal.
+Conversely, high wave frequencies lead to strong activation of many
+sensors, including sensors that are not well aligned with the wave source,
+ultimately resulting in many supra-threshold neural populations. When
+there are multiple supra-threshold neural populations, the agent is programmed to select one at random for determining turning direction before
+moving forward. When the random selection is made from many populations encoding distinct directions, this results in the behavior seen in Fig. 2C,
+where the agent tends to turn too frequently and in random directions, again
+not reaching the goal.
+There are, therefore, two major failure modes for the agent. The
+ﬁrst is under-stimulation by waves of low frequency (or low amplitude)
+relative to the neural threshold, leading to too few supra-threshold
+neural populations, and effectively failing to sense any water waves.
+The second is over-stimulation by waves of high frequency (or high
+amplitude) relative to the neural threshold, leading to too many suprathreshold neural populations, and effectively sensing that water waves
+are approaching from many directions. Between these extremes, for
+combinations of neural threshold and wave frequency that maximize
+the success rate, there are only a small number of supra-threshold
+populations with similar encoded directions, leading to directed
+motion toward the wave source, as seen in Fig. 2B. In summary, for a
+4
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Article
+
+Fig. 4 | Ablation and placement experiments. Conﬁgurations of our ablation (a)
+and placement (b) experiments, along with sample trajectories and the ﬁnd-rates
+generated by these conﬁgurations for a neural threshold of 0.15 and a water wave
+frequency of 11 Hz. Conditions are labeled by the sensors that are ablated. The
+control case (i.e., “None”) shows the best performance of the bold gray line in Fig. 3.
+Symbols above each schematic correspond to symbols used in Fig. 5. Trajectories
+
+with gray-scale coloring failed to reach the target within the allotted time. Trajectories with dark blue or purple coloring successfully reached the target within the
+allotted time. In general, removing sensors leads to decreased performance. Interestingly, removing only the front sensors does not diminish performance at this wave
+frequency, but does change the behavior of the agent, creating trajectories that
+usually curve toward the target.
+
+given stimulus wave frequency, the neural threshold in our model is the
+critical parameter for controlling whether there are too few, too many,
+or (most performantly) a small set of supra-threshold populations.
+It is worth noting here that in many biological systems, if overstimulated, the sensory system may be able to dampen its response. For
+example, when speaking or exposed to loud noises, middle ear muscles
+contract, decreasing the amount of pressure put on the eardrum and thus
+dampening the sound22. In the case of loud sounds, this decreases the
+probability of damage to the inner ear. In the case of self-generated
+sound, this same mechanism decreases the possibility of sensor fatigue
+or interference with other stimuli. It is possible that the leech could
+employ a similar mechanism of signal dampening when overstimulated.
+Indeed, leeches are known to have a decreased sensory response when
+swimming, which causes a high level of self-induced water ﬂow around
+the sensors23.
+
+Our results revealed a shift in frequency preference when we adjusted
+the neural threshold, something which could be of interest in animals. If
+present in animals, this would provide a rather simple means of adapting the
+system to respond to different stimuli. This is something we see in leeches as
+they age and is thought to be related to age-associated changes in prey
+preference17,24. How might this change in sensor sensitivity happen in a
+living organism? The neurons involved could change their threshold
+through changing membrane dynamics. Such a mechanism would allow for
+the occurrence of similar changes to our model in the animal’s frequency
+preference, which could provide a fast means of adapting to new food
+sources or new niches. We note here that the neural threshold in this study
+was set as a threshold level of neural activity at which a neural population’s
+response is considered to be salient. Also, all neurons in this study had the
+same inhibitory and excitatory connectivity to their neighbors. In reality,
+neurons might not have identical connectivity to their neighbors, and the
+
+npj Robotics | (2026)4:24
+
+5
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Article
+
+Fig. 5 | Find rate vs. water wave frequency for different sensor ablations and
+placement conﬁgurations with a neural threshold of 0.15. The control case (i.e.,
+“No sensors distorted”) is plotted with a bold gray line and represents the same data
+as the bold gray line in Fig. 3. The frequency range, 8–12 Hz, over which the control
+case and live animals (see Fig. 3) perform best is indicated by the shaded box.
+Trajectories shown in Fig. 4 correspond to the data points shown here for 11 Hz
+waves. With the exception of unilateral ablations (right or left), which severely
+harmed performance, 5 of 7 conﬁgurations have a “preferred” frequency range at
+
+which they are able to ﬁnd the target, which was generally higher than the control’s
+8–12 Hz. 4 of 7 conﬁgurations were able to ﬁnd the target ≳ 60% of the time at these
+higher frequencies. Interestingly, the best performances, seen when only front
+sensors were ablated (98% success at 12 Hz) and when both front and rear sensors
+were ablated (88% success at 18 Hz), were both better than the control’s best performance (80% success at 11 Hz). Each data point represents 50 simulation trials.
+Error bars represent the binomial standard deviation.
+
+connectivity that does exist would likely be a function of intrinsic development and exposure to different extrinsic experiences. Therefore, neural
+threshold would not necessarily be a parameter, but rather an emergent
+property of the nervous system as a whole that can potentially adapted as
+needed via development or evolution to respond to a variety of environments. This will be explored in a future study.
+Across the range of neural thresholds we explored in this study, our
+simulated leeches showed a global performance maximum for water waves
+in the 8–12 Hz range, agreeing with experimentally observed live animal
+data (Fig. 3). Other parameters in our model that we did not systematically
+vary, such as water depth (see sec. “Water waves”), the number of neural
+nodes or the time constants of neural decay or inactivation (see sec. “Neural
+processing”), or the speed of the agent (see sec. “Motion model”) may affect
+this global maximum, and we would like to explore these possibilities in
+future work.
+To examine the impact of sensor placement and number on the agent’s
+localization ability, we performed ablation experiments at a neural threshold
+of 0.15, a value that gives an 80% ﬁnd rate at water wave stimulus frequency
+of 11 Hz (Fig. 4). For this water wave frequency, sensor ablation, especially
+unilateral ablation of the left or right side, generally reduced performance
+compared to no ablation (Fig. 4). Ablation of the front sensors in this case
+did not reduce performance. However, it is worth noting that forward sensor
+ablation changed the agent’s behavior so that it approached its goal indirectly. When we examined the effects of ablation and sensor placement across
+other wave frequencies (Fig. 5), we saw a shift in the performance curves to
+higher frequencies for most sensor ablation conditions, which was likely a
+compensatory mechanism of responding to stronger stimuli with fewer
+sensors. While it would make sense that decreasing the number of sensors
+would change the ability of the model to localize a stimulus, some of what we
+see is not a decrease in success, but rather a shift in preference toward a
+higher frequency stimulus (Fig. 5). Interestingly, we see a shift in Hirudo
+verbana frequency preferences as they develop, a difference which is related
+to changes in both the sensitivity and number of their sensillae17. Younger
+leeches which have fewer well-developed mechanoreceptors, prefer lower
+frequencies than their adult counterparts. Our results suggest that the
+number of sensors impacts the preferred stimulus frequency but not
+necessarily localization ability. Our model more accurately reﬂects adult
+leeches than juveniles. Speciﬁc differences between our results and live
+animal experiments with juveniles are likely due to the fact that our model
+
+contains only a single sensory modality, and does not account for less well
+developed juvenile sensors or neural connectivity. Developmental sensory
+changes will be explored in future studies.
+When we examine speciﬁc layouts, we note that the only conﬁgurations that are truly unsuccessful occur when sensors on one entire side of the
+agent are ablated, suggesting that animals would likely compare sensory
+information from their two sides to be able to appropriately navigate. Perhaps of interest is that while right and left ablations had similar outcomes,
+disabling front sensors or rear sensors, respectively, had quite different
+outcomes. Ablating the rear sensors resulted in a minor shift from the
+8–12 Hz preferred stimulus frequency range to ~10–13 Hz (Fig. 5), and
+decreased ability to localize the wave source (from 80% at 11 Hz without
+ablations to 50% at 13 Hz with rear ablations). In contrast, disabling the
+front sensors shifted the preferred frequency more, to ~11–16 Hz, and
+increased the performance within this new range (from 80% at 11 Hz
+without ablations to 98% at 12 Hz with from ablations). The reason for the
+sizable increase in peak performance when front sensors are ablated is not
+entirely clear. However, it is possible that the rear and side sensors enable the
+agent to sense and reorient towards the goal over a wide range of body
+orientations. In contrast, when only using the front and side sensors, when
+the agent is oriented with the direction of wave propagation, it may effectively become blind to wave stimuli because the rear sensors that are facing
+into the waves cannot be stimulated.
+The model makes clear that changing the number and location of
+sensors impacts the frequency of peak response. This becomes more
+interesting in our model organism, which often exhibits different sensor
+layouts for different ecological niches, suggesting a mechanism to further
+adapt animals to the prey within their niche. Future studies could further
+explore this possibility.
+Based on our model’s ﬁnd rate success with 24 sensors, one may ask,
+why would a leech have 294 sensors when prey and other targets could be
+localized with a smaller number? Leeches are capable of a wide range of
+behaviors beyond simply localizing prey, such as avoiding predators, ﬁnding
+mates, and moving around obstacles in their environment. A larger number
+of sensors may help them to execute this diversity of behaviors. Further, a
+larger number of sensors may offer a level of redundancy in the event that
+subsets of sensors are injured or damaged. This would be true especially if
+the sensors are of relatively low quality. Indeed, when we ran our initial “high
+quality” model with only 8 sensors, the performance was similar to 24 or
+
+npj Robotics | (2026)4:24
+
+6
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Article
+
+Fig. 6 | Sensor noise and number of sensors affects
+frequency dependent performance. For these trials,
+we used the cyan noise term in Eq. (9) for different
+numbers of sensors. For 8 sensors, ﬁnd rate performance ≤50% for all neural thresholds. At 24 sensors,
+performance is slightly above 50% for neural
+thresholds of 0.15 and 0.5. For 72 sensors, performance is above 70% for a neural threshold of 0.5. For
+both 24 and 72 sensors, peak performance occurs
+between 8 and 12 Hz.
+
+72 sensors. However, when we changed the noise model to be representative
+of lower quality sensors, we observed that the number of sensors affected
+performance. In particular, higher ﬁnd rates seemed possible for larger
+sensor numbers between stimulus frequencies of 8 Hz and 12 Hz for a neural
+threshold of 0.5, higher than the threshold of 0.15 used in the rest of our
+study. This makes sense because in this scenario, a larger proportion of
+npj Robotics | (2026)4:24
+
+sensors around the agent can provide errant data. This means that the
+threshold at which a sensor is deemed salient needs to be higher to ensure
+that spurious data does not corrupt performance. Also, in the “high quality”
+paradigm, only the sensors in the nominally correct locations can be stimulated, so fewer sensors would not degrade performance. In contrast, in
+the “low quality” paradigm, sensor errors can come from all around the
+7
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+agent. Thus, with fewer sensors, even one error can have adverse effects
+because it appears as a concentration of sensors, while with more sensors,
+errors around the body can be overcome by a concentration of mostly
+correct sensor data elsewhere. While simulations can provide the agent with
+an ideal stimulus in a quiet environment, this seldom happens in the life of
+the animal. Different types of stimuli can make water waves, and the animal
+may have incurred sensor damage through attempted predation or other life
+events. As such, sensory systems are more likely to be able to adapt to an
+environment, down regulating sources of errant data and ﬁltering both
+environmental and sensory noise. In this case, it would seem that the leech is
+able to use its sensor abundance to overcome issues that may arise as a result
+of sensor simplicity. Simply put, it can narrow the range of stimuli it
+responds to to increase saliency. This in silico experiment enabled us to
+address questions in ways that could not be directly attempted in a live
+animal. Indeed, surgical manipulations like cutting visual sensory nerves or
+covering individual sensors either through inserting items under the skin or
+gluing them to the skin have all failed or resulted in drastically altered
+behaviors, likely as a result of the trauma caused by the amount of
+manipulation needed to ablate 294 sensors.
+While neural threshold and sensor location are important and can tune
+the response of the agent, additional factors not present in this model could
+be used to further tune the systemic response to wave properties. In general,
+water waves in natural environments are a superposition of different water
+waves with different frequencies and amplitudes. As discussed in the
+development of a single-sensor physics and computational neurosciencebased leech mechanoreceptor model by Piephoff et al.20, leech mechanoreceptors may be tuned to the phase velocity minimum of water, which is
+13.5 Hz. Brieﬂy, the phase velocity minimum is the point at which the effects
+of gravity and surface tension on a wave are balanced. It is also the point at
+which the wave’s phase velocity is equal to its group velocity. Piephoff et al.20
+discuss that wave components at the phase velocity minimum would travel
+with the least amount of amplitude damping and waveform distortion, even
+over long distances. Piephoff et al.20 also describe leeches as relatively
+indiscriminate feeders, feeding on a variety of animals that generate different
+wave frequencies. Thus, the signal most relevant to a leech is possibly the one
+that simply indicates the presence of any potential meal in their habitat, even
+from a relatively far distance. That Piephoff et al.20 found individual
+mechanoreceptors might respond best to waves around 13.5 Hz, our present
+study ﬁnds that a simulated leech with only mechanoreception has peak ﬁnd
+rates for various sensor conﬁgurations around 13.5 Hz, and that both of
+these simulated studies agree with real-world animal experiments suggests
+that our model is a reasonable representation of real-world animal behavior,
+and might be used to make predictions of animal behavior in scenarios that
+would be difﬁcult to test in vivo. It is worth noting here that the leech has
+sensor modalities not included in the model such as chemosensation which
+would ﬁne-tune navigation in the short range.
+At this point, it is important to consider what our model is capable of
+given its simpliﬁcations and abstractions (see Table 1). The fact that our
+model has so many abstractions yet is able to recapitulate real-world animal
+behavior suggests that it is a reasonable approach to modeling leech behavior. Adding additional complexity and features would likely only improve
+its ﬁdelity and predictive power in novel environments in which it is difﬁcult
+to perform in vivo animal experiments. It is important to note that, while we
+used a WTA neural architecture based on its abilities to do path-integration
+and categorical decisions14, and while WTA-like mechanisms are believed to
+be involved in localizing stimuli in other species (e.g., spatial localization in
+barn owls25,26), to the authors’ knowledge, there is not currently direct
+physiological evidence for a WTA neural architecture in the leech. Lewis and
+Kristan27 explored this experimentally and with modeling for a different
+sensory-response behavior: the local bending reﬂex. Like our model, theirs
+used cosine-weighted tuning curves and preferred directions for sensory
+and interneuronal layers of a neural network. However, unlike our model,
+their model lacked WTA inhibitory connections between the interneurons.
+In our model, these inhibitory connections enhance the salience of a singular
+stimulus direction. Although those authors concluded that a WTA
+npj Robotics | (2026)4:24
+
+Article
+mechanism was unlikely for the bending reﬂex they were studying, there are
+important differences between the bending reﬂex and the task of navigating
+to a target. Navigation to a target likely involves higher-level information
+processing at the level of the whole organism, unlike the local bend reﬂex,
+which is segmental and was studied in isolated segments. The bending reﬂex
+is a response to local stimuli, and it is possible that distant stimuli are
+processed differently. For distant stimuli, WTA frameworks are common in
+other animals. Whether a WTA mechanism is involved in leech prey
+localization and navigation is still undetermined. A live-animal experiment
+that combines the approaches of Harley et al.17 and Lewis and Kristan27—
+where multiple wave stimuli are present, and the animal could be observed
+either to pick one or else to choose an intermediate heading—could be
+insightful for determining whether WTA mechanisms are involved at this
+level of processing. That a simple WTA-based model was able to recapitulate
+real-world leech behavior demonstrates that, at the very least, it is able to
+capture essential components of the leech’s behavior.
+The work here offers potential lessons and inspiration for engineered
+systems. As is discussed in section 4, the sensors in our model are not high
+quality (i.e., noise is present), and the model itself has stochasticity built into
+it (e.g., turning in random directions when under-stimulated, random
+population selections when overstimulated). Also, as our ablation and
+placement experiments suggest, for two of the seven different sensor conﬁgurations, the agent can locate the target ≳ 60% of the time across a range of
+different stimulus frequencies (roughly 11–20 Hz). Two other sensor conﬁgurations can locate the target with similar accuracy for frequencies
+between 12 Hz and 15 Hz. Furthermore, as indicated by Piephoff et al.20,
+leech mechanoreceptors may be tuned to detect minimally distorted signals
+from far-away disturbances. Taken together, these facts suggest that even
+when different sensors are absent in different conﬁgurations, the agent can
+still succeed. This means that with low quality noisy sensors that may or may
+not be present due to events such as physical damage, this kind of sensory
+processing paradigm can robustly locate targets. These are all traits that are
+desired in manmade systems. The biologically-derived distributed sensing
+and processing approach presented here can be adapted for mobile systems
+that need to locate (or evade) a particular stimulus source, even if that source
+is somewhat distant, or if the mobile platform suffers sensor uncertainty or
+damage. Additionally, the distributed sensing and processing approach in
+this work could be applied to other man-made platforms in a variety of other
+use cases where data from multiple sensors could help to provide a more
+complete and/or actionable picture of a system’s current health and capabilities (e.g., sensors on a prosthetic device, automated monitoring of the
+loading on a structure).
+In future studies, we would like to take several steps. First, we would
+like to further vary the number of sensors and neural populations in our
+model to determine how many, or how few sensors are needed before
+performance qualitatively changes, or before the system’s performance
+degrades to an unacceptable level. For example, with 24 sensors and a
+neural threshold of 0.15, the agent’s peak ﬁnd rate (80%) occurs at 11 Hz.
+However, when the even or odd sensors are ablated, the peak ﬁnd rate shifts
+to 62% at 12–13 Hz or to 70% at 13 Hz, respectively; more exploration is
+needed to determine when the peak rate starts to shift. Related to this point,
+a parametric study and/or sensitivity analysis investigating the relationship
+between all of the model’s underlying parameters and output performance
+could be useful in further characterizing our system’s performance, especially for expanding it to a tool that can be used alongside real-world
+biological hypothesis testing, or in the development of neuromorphic
+engineered systems. In adding further functionality to our model, we
+would like to model the multimodal nature of leech sensing17. Engineered
+systems frequently assimilate data from multiple sensory modalities to
+execute their tasks (e.g., using range and bearing to different features for
+navigation). This model only demonstrates a single means of combining
+data across sensors. In the future, we would like to compare the neural ﬁeld
+approach described here to classically engineered data fusion, state estimation approaches, and control approaches, speciﬁcally computational
+complexity and regions of applicability.
+8
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+Fig. 7 | Flow chart illustrating how our simulation
+works. At a high level, water wave motion causes
+stimulation of the mechanoreceptors distributed
+around the agent. Mechanoreceptor stimulation
+leads to neural processing via the neural ﬁeld and its
+constituent neural populations. The neural population’s distribution of activity leads to motion commands that move the agent.
+
+In biology, the neural threshold or sensitivity of an animal is not
+unchanging. Indeed, more receptors can be added making cell to cell
+communication more sensitive, the ion concentrations within a cell can
+change changing its excitability, the prevalance of channels in the
+membrane could change, interneurons could offer additional inhibition or excitation– sensory systems are capable of dynamic modulation. We have even seen in leeches that as they grow their
+mechanosensory sensilla develop more hairs, making them more
+sensitive to environemental change. Further, leeches are known for
+regulating their sensory input in a context dependent manner during
+swimming.
+
+Methods
+Figure 7 provides an illustrative ﬂow-chart summary of our model. A
+simulated agent (representing a leech from the species Hirudo verbana)
+sensed a mechanically generated water wave stimulus via mechanoreception
+(a simpliﬁcation from real leech mechanoreception and vision) via distributed sensing. Distributed sensory information was processed using a
+neural ﬁeld. A behavioral algorithm transformed the neural responses into
+behavioral actions that were used to the agent towards the wave source.
+Restricting sensing to mechanoreception is similar to unimodal sensation
+experiments performed with real world animals17. Our methods are similar
+to those presented in ref. 28. However, for completeness and to account for
+the newly incorporated sensation of wave amplitude, we represent the
+methods here.
+Water waves
+Water waves were modeled as gravity (rather than surface tension) driven
+2D surface waves that satisfy the dispersion relation: a relationship that
+deﬁnes how the wavelength λ depends on wave frequency or angular frequency ω. Gravity waves were used to generate baseline behavioral data in
+response to the simplest form of a mechanosensory stimulus, with surface
+tension effects being left for future study. The dispersion relation can be
+npj Robotics | (2026)4:24
+
+written as follows:
+ω2 ¼ gk tanhðkhÞ
+k ¼ jkj ¼
+
+2π
+2π
+; ω¼
+λ
+T
+
+ð1Þ
+ð2Þ
+
+where “tanh” is the hyperbolic tangent, k is the wave vector, and k is the
+wavenumber. The absolute value bars denote the vector magnitude. The
+dispersion relation in Eq. (1) shows the spatial relationship for water
+movement based on the gravitational constant g and the water depth h. Eq.
+(2) shows the relationships between the wavenumber k and spatial wavelength λ, and between the angular frequency ω and temporal period T.
+Since there is already data on leech navigation performance as a
+function of wave frequency17, we used these frequencies as inputs into the
+dispersion relation (Eq. (1)) to calculate wavelength at speciﬁc water depths
+and wave frequency inputs. The surface elevation of these waves was
+modeled with the following equations29–31:
+
+
+ηðx; tÞ ¼ A jx  xg j sinðθðx; tÞÞ
+(
+AðrÞ ¼
+
+0:9252
+ﬃ 3=2 ;
+pcm
+r
+
+0:6035 cm;
+
+r > 2:35 cm
+r ≤ 2:35 cm
+
+θ ðx; tÞ ¼ k  x  ωt
+
+ð3Þ
+ð4Þ
+ð5Þ
+
+Eq. (3) deﬁnes the wave’s elevation η at time t and position x = {x, y}. Eq. (4)
+describes the wave amplitude envelope A as decreasing with the inverse of
+the square root of the distance r = ∣x − xg∣ from the wave source32–34. The
+wave source is a sinusoidally oscillating disk of radius 2.35 cm, and the
+constants 0.9252 cm3/2 and 0.6035 cm were chosen to produce waves of
+amplitude 0.4 cm at a distance 3 cm from the edge of the disk (i.e., at r =
+9
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+Fig. 8 | Mechanosensory detection model.
+Mechanosensory detection in our model is illustrated through an agent with its distributed sensors
+(dashed black arrows, radiating from elliptical
+agent) and sample mechanosensory inputs shown as
+wave vectors (solid blue arrows, originating from a
+common source in (a)). The wave vectors carry
+information about the direction and magnitude of
+the oncoming water wave, which the agent can sense
+and process to orient itself towards the target location. Each sensor detects the component of the wave
+vector parallel to its characteristic sensor vector via
+vector projection (b). The vertical dotted line in (b)
+geometrically represents this projection, and the red
+arrow is the resulting vector. The magnitude of these
+projected vectors vary from strong detection (large
+red bars in (a) to low detection (small yellow bars in
+(a) depending on the alignment difference between
+the sensor detection vector di and the wave vector ki.
+Sensor activation is further scaled by the wave
+amplitude envelope A at each sensor location (not
+illustrated here; see Eq. (8)).
+
+5.35 cm). These values were chosen to match the live animal experiments
+performed by Harley et al.17. Eq. (5) represents the phase of the wave in both
+space and time.
+A visual representation of this point source water wave is shown in the
+bottom of Fig. 7. λ is the distance between two consecutive concentric peaks.
+The next section gives a description of the wave vector k.
+Sensor detection
+We modeled the leech as a 2D ellipse that is 10 cm long and 1 cm wide.
+These measurements are based approximately on the size of an adult in
+the leech species Hirudo verbana35. This approach was deemed acceptable for mirroring Harley et al.17, which primarily examined leech
+behavior in 2D. Whereas real leeches are highly ﬂexible and use an
+undulating motion while swimming, for simplicity, our ellipse is rigid
+and of constant size. More realistic body kinematics will be examined in
+future studies.
+Using the model presented by Wilson [14, Section 7.2] as a template, we
+provided our simulated leech with 24 neural populations (also referred to as
+nodes) equally spaced around its perimeter, with represented angles spaced
+at 15° increments, the same arrangement presented in Wilson14. Each
+population represents an aggregate of individual sensors that are sensitive to
+a particular range of directions.
+Real leeches sense water waves via sensory hairs (i.e., cilia) distributed along their body17. Properly simulating all aspects of water wave
+mechanosensation and processing is an area of active investigation (e.g.,
+ref. 20), and can be computationally intensive. Because we are concerned
+with organism-level behavior, we use a simpliﬁed approach for water
+wave detection.
+To determine the direction of the oncoming stimulus, the agent calculates the angle (ϕ) between the stimulus direction and the sensor location.
+For mathematical convenience, this is done using the sensor detection
+vector (di) (black dashed arrows in Fig. 8), and the wave vector (ki) (i.e., a line
+pointing from the stimulus origin xg = {xg, yg} to the ith sensor’s location xi =
+{xi, yi} (blue arrows in Fig. 8) with magnitude k ¼ 2π
+λ ).
+The wave vector ki is given as
+
+ki ¼
+
+xi  xg
+jxi  xg j
+
+k
+
+ð6Þ
+
+Eq. (6) is used to determine the incidence angle ϕi, and Eqs. (4) and (6)
+are used together to determine the signal intensity Ii (red arrow in Fig. 8B) of
+npj Robotics | (2026)4:24
+
+the wave with respect to the ith sensor.
+ϕi ¼ arccos
+(
+Ii ¼
+
+k i  di
+jki jjdi j
+
+ð7Þ
+
+
+
+ðki  di Þ jddij2  A jxi  xg j ;
+
+jϕi j < 90
+
+0;
+
+jϕi j ≥ 90
+
+i
+
+I i ¼ jIi j þ ζ
+
+ð8Þ
+ð9Þ
+
+Eq. (7) calculates the angle between the two vectors. If the angle is less
+than 90°, then the wave is within the sensor’s range of detection and it can
+continue to measure the wave’s magnitude. We calculate the magnitude at
+the ith sensor by ﬁrst using Eq. (8) to project the wave vector onto the sensory
+detection vector. We then scale the result by the wave amplitude envelope A.
+Finally, we use Eq. (9) to ﬁnd the magnitude of the scaled, projected vector
+(Ii). This magnitude value (Ii) approximates the stimulus strength at the
+given sensor and also measures the sensor’s alignment with the oncoming
+wave. Because the magnitude of Ii depends on the wavenumber k and the
+amplitude envelope A (through Eqs. (6), (8), and (9)), and Ii serves as an
+input to our neural ﬁeld (see Section 4.3 for details), we would expect the
+activity of the neural ﬁeld to increase as the wavenumber or amplitude
+increases. However, because we did not vary the constants in the amplitude
+envelope equation (Eq. (4)) in this study, the only wave amplitude variation
+the agent experiences is a relatively small amplitude increase as it nears the
+wave source, which did not seem to have much effect on the model’s performance. Instead, because we systematically varied wave frequency,
+wavenumber had the greatest effect on neural activity. We note that the ﬁrst
+term of Eq. (9) represents the magnitude of the stimulus, while the second
+cyan term represents zero mean Gaussian noise that was added speciﬁcally
+for modifying sensor quality (see Section “Sensor Quality”). Noise was set to
+be 30% of the maximum possible input stimulus at a given location. In other
+words, the sensory input operates at an effective signal to noise ratio of
+roughly 10 decibels (10 logð0:32 Þ ¼ 10 dB), which represents a noise level
+where the signal remains dominant but sufﬁciently introduces meaningful
+uncertainty. This affected the baseline signal substantially enough to affect
+results without dominating the underlying signal. Future studies could vary
+this parameter to further investigate the impact of sensor quality.
+We note two important points at this juncture. First, information was
+detected and processed among all sensors simultaneously (see Section 4.3
+for details). Second, in our simulation, sensors whose directions are directly
+10
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+Fig. 9 | An illustration of the sensor distribution
+on our simulated leech in response to a water wave
+stimulus. In the right panel, the orange arc represents the pattern of stimulation in our study. The
+purple, blue, and green lines represent alternative
+patterns of stimulation that could depend on the
+mechanical properties of individual sensors.
+
+Fig. 10 | Varying the angular threshold of Eq. (8)
+from 100° through 135° does not subtantially affect
+performance relative to an angular threshold of 90°.
+
+opposed to the direction of a wave vector are maximally stimulated. Sensors
+that are perpendicular to the wave vector are minimally stimulated, while
+sensors aligned with the wave vector are not stimulated. We felt that this was
+a reasonable approach as in the real world sensors with directional components that oppose a water wave (i.e., sensors pointing into a ﬂow) would
+be maximally stimulated, while sensors with components in the direction of
+the wave would be minimally stimulated (i.e., sensors pointing in the
+direction of a ﬂow). While the speciﬁc distribution of stimulation would
+depend on the physical properties of the individual sensory hairs (e.g.,
+sensor stiffness and damping), the general pattern would be the same stimulation of sensors on the front and sides of the body (Fig. 9). Also, this
+allowed for relatively simple expansion of the previous work presented in
+ref. 28. A point of concern with our model as presented is that lateral (i.e.,
+side) sensors that are tangential to the ﬂow may not be stimulated, even
+though from other works (e.g., ref. 20), these sensors should be stimulated,
+possibly more than others. To ensure that performance did not change when
+these tangential sensors are more readily incorporated, we varied the
+angular threshold (90° in Eq. (8)) through values of 90°, 100°, 110°, 120°, and
+135°. This allowed sensors tangential to the wave and even some that point
+along the direction of the wave to be stimulated and provide input into the
+neural ﬁeld. Each of these angular thresholds produced similar behaviors
+(see Fig. 10 for summary data). In the future, we would like to incorporate
+phenomena akin to interaural time differences to examine how differences
+in both spatial and temporal processing impact the ability to detect frequency, wavelength, or a mixture of both. We would also like to use more
+realistic distributions of sensor activation based on the mechanics of individual sensors, although this may require the determination of parameters
+that are currently unknown20, accounting for the undulatory motion of leech
+locomotion, and a more realistic sensor model that better captures which
+sensors should be stimulated based on the wave’s direction. The sensor
+model would have to be intrinsically tied to undulatory motion of the body.
+
+npj Robotics | (2026)4:24
+
+Neural processing
+A neural ﬁeld is composed of neural populations (also referred to as nodes).
+Each population responds to a preferred input. These populations can
+interact with each other through excitatory and inhibitory connections.
+Neural ﬁelds are useful for studying the aggregate behavior of populations of
+neurons, vs. examining the performance of individual neurons or the collective performance of a set of individual neurons that are synaptically
+connected14,36. While details of our neural ﬁeld approach can be found in
+[ref. 14, section 7.2], we summarize here for completeness.
+In our study, the neural ﬁeld has 24 nodes. Each node is paired with and
+receives excitation from a set of sensors sensitive to speciﬁc directional
+inputs. Nodes inhibit neighboring nodes at intermediate distances by convolving the activity of the network via negative weights in a weighting array
+(Fig. 11). This results in the nodes having a distribution of activity, with one
+or some of the nodes having activity that exceeds a threshold (i.e., a “winning” neuron or set of neurons). Because each node represents a physical
+direction, as illustrated in Fig. 11, the winning neuron and its neighbors
+encode a perceived direction, which the agent uses to control its motion.
+Mathematically, the neural ﬁeld’s stimulation, evolution of activity, and
+determination of an encoded direction are represented in Eqs. (10), (11),
+and (12):
+
+Ej ¼
+
+n
+
+
+X
+I i cosðΩj  Ωi þ noiseÞ
+i¼1
+
+τ
+Ωinterp ¼ 15
+
+þ
+
+ð10Þ
+
+dRj
+¼ Rj þ ðEj  W  RÞþ
+dt
+
+ð11Þ
+
+Rselect1  Rselectþ1
+þ Ωselect
+2ðRselectþ1  2Rselect þ Rselect1 Þ
+
+ð12Þ
+
+11
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+Fig. 11 | Simpliﬁed schematic representation of the winner-take-all (WTA)
+network layout with 6 populations (based on Wilson [14, Fig. 7.5]—our actual
+network uses 24 populations). In this example, the pink node in the upper middle
+left receives a sensor input and inhibits more distant neighbors (grayed out nodes on
+the right). Nearby nodes (top and bottom left) and very distant nodes are not
+inhibited. Each node inhibits its intermediate-distance neighbors like this. In our
+implementation, one node is selected at random among nodes with activations above
+a neural threshold parameter. The selected node’s activation (Rselect), along with the
+activations of its nearest neighbors (Rselect−1 and Rselect+1) are used together via
+parabolic interpolation to obtain an accurate estimate of the direction of a wave
+source (i.e., a perceived direction).
+
+The jth neural node may receive excitation from each of the n = 24
+sensors. The excitation from the ith sensor to the jth node scales with the
+stimulus strength Ii (Eq. (9)) and with the similarity in the preferred
+direction Ωj of the jth node and the preferred direction Ωi of the ith sensor.
+The + subscript indicates a nonlinear activation function that sets equal to
+zero any excitation from sensors that differ in preferred angle from that of
+the node by more than 90°. In this way, a sensor that is aligned with the
+node’s preferred direction will provide maximum stimulation to that node,
+while sensors that are not aligned with the node’s preferred direction will
+provide minimal or no stimulation. Gaussian noise (i.e., the term in red in
+Eq. (10)) with mean 0° and standard deviation 90° is also added to the cosine
+term to represent noise in neural processing. All sensory inputs are summed
+to compute the total excitatory sensory input for the jth node, Ej, in Eq. (10).
+The activation level of the jth neural node, Rj, is governed by a differential equation with time constant τ = 0.5 s (Eq. (11)). The node receives
+npj Robotics | (2026)4:24
+
+excitatory sensory inputs (Ej), as well as inhibitory inputs from other neural
+nodes ( − W*R). W is a synaptic weighting array that is convolved with the
+array of all neural node activations, R. Per Wilson [14, Section 7.2], W
+inhibits intermediate-distance nodes, but does not affect near or far
+neighboring nodes (Fig. 11—see sec. “Results” for the speciﬁc layout used in
+our study).
+To model the biological phenomena of over- and under-stimulation,
+we set a constant, called the neural threshold, which is varied between
+simulations in this study. Nodes with activation levels Rj that exceed this
+threshold are considered salient. The preferred direction Ωj encoded by
+these salient nodes can inﬂuence the perceived direction of the wave source.
+Ideally, just one or a few nodes with preferred directions corresponding to
+the true direction of the wave source will reach this threshold. Setting the
+threshold too low can cause many nodes to produce salient signals, leading
+to over-stimulation. Setting the threshold too high can cause no nodes to
+reach an activity level at which they are considered salient, leading to understimulation.
+At each time step, one node is selected at random from among all nodes
+with activations above the neural threshold parameter (see sec. “Motion
+model” for handling the case when no neural node activations exceed the
+threshold). The activation level of the selected node (Rselect) with preferred
+direction Ωselect, along with the activations of its two nearest neighbors
+(Rselect−1, Rselect+1), are used together to estimate the perceived direction of
+the stimulus wave source, Ωinterp, via parabolic interpolation (Eq. (12)),
+which is more accurate than the 15° intervals encoded by the nodes’ preferred directions, and an approach that has been used in this type of neural
+modeling37. The perceived direction is used to determine bearing changes
+for our motion model (see sec. “Motion model”). Because this study focused
+on neuromechanics underlying distributed sensation and motor control or
+actuation, we elected to use the parabolic interpolation method for computing a perceived direction rather than implement additional neural
+populations to accomplish this task. An additional neural population could
+be implemented to select the perceived direction, which would increase the
+biological relevance of our model.
+The activity of all nodes (i.e., Rj’s) is updated every time step. Based
+on both preliminary observations and biological considerations, the
+sensors take measurements for 2 s, and are inactive for 6 s. In Eq. (11),
+this corresponds to the excitatory and inhibitory input terms being
+active with nonzero values for 2 s, and then both being set to a value of
+zero for 6 s. This 6 s rest period allows neural node activity to decay,
+preventing the winner-take-all network from becoming “stuck” with one
+winning node inhibiting all others even as the agent turns and sensory
+inputs change. This helped ensure that later measurements are not
+corrupted by information from earlier measurements, and is also biologically inspired as a neuron’s response can decay over time after a
+stimulus is presented. This also reﬂects spiking patterns commonly
+observed in single celled neuron responses38,21,12.
+Motion model
+The agent’s orientation and position at time t are deﬁned by its bearing βt, its
+center of mass {xc,t, yc,t}, and the positions of its 24 sensors {xi,t, yi,t}. During
+each time step, the agent ﬁrst rotates around its center of mass by a change in
+bearing, Δβ, and then travels forward at a constant speed s for the full
+duration of the time step, Δt = 0.1 s. New values are calculated for the next
+discrete time, t + Δt, according to Eqs. (13)-(17):
+
+
+
+Δβ ¼ kp Ωinterp Δt
+
+ð13Þ
+
+βtþΔt ¼ βt þ Δβ
+
+ð14Þ
+
+
+ 
+sΔt cosðβtþΔt Þ
+Δx
+¼
+sΔt sinðβtþΔt Þ
+Δy
+
+ð15Þ
+
+12
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+
+"
+
+xc;tþΔt
+yc;tþΔt
+
+"
+
+xi;tþΔt
+yi;tþΔt
+
+#
+
+
+
+#
+
+"
+¼
+
+cosðΔβÞ  sinðΔβÞ
+¼
+sinðΔβÞ cosðΔβÞ
+
+xc;t
+
+#
+
+yc;t
+
+ "
+
+xi;t
+yi;t
+
+
+þ
+
+Δx
+Δy
+
+#
+
+"
+
+
+xc;t
+yc;t
+
+
+ð16Þ
+#!
+
+"
+þ
+
+xc;t
+yc;t
+
+#
+
+
+þ
+
+Δx
+Δy
+
+
+
+ð17Þ
+Assuming at least one neural node’s activation exceeded the neural
+threshold (i.e., deemed to be salient), the neural ﬁeld returns a perceived
+direction (Eq. (12)). Using Eq. (13), the agent converts the perceived angle
+Ωinterp into a change in bearing, Δβ, using the constant kp = 0.4 s−1. kp is
+similar in nature to a proportional control constant. During testing of our
+model, we found that larger values could cause motion oscillations, while
+smaller values could result in slow turning. The value chosen was found to
+provide a good balance of these phenomena, though it is not necessarily an
+optimal value. Eq. (14) updates the agent’s bearing. Based on our agent’s size
+and behavioral studies that suggest leeches crawl their body length about
+every 6.4 s21, our simulated leech moves at s = 1.56 cm/s. Using Eq. (15), Eq.
+(16), and its new bearing, the agent calculates the distances {Δx, Δy} that its
+center of mass travels, and updates its center of mass. Eq. (17) updates the
+positions of the agent’s sensors, ﬁrst by rotating them around the previous
+center of mass, and then by translating them by {Δx, Δy}.
+If no neural population exceeded the neural threshold, which can occur
+especially during the 6-second windows when sensors are inactive, the agent
+chooses a uniformly random integer angle on the interval [ − 45°, + 45°] for
+Ωinterp, rotates via Eqs. (13) and (14), and then has a 40% chance of not
+moving forward at all. This model behavior is inspired by the real behavior
+of the leech when a stimulus is too weak to be detected, and the leech may
+not move or may turn randomly. The 45° angle was chosen for simplicity,
+but can be adjusted in future studies that aim to improve model ﬁdelity.
+We note here that this model of motion is greatly simpliﬁed from a
+leech’s actual crawling or swimming behavior. We plan to incorporate more
+detailed and physically relevant forms of locomotion in future studies.
+Simulation setup and quantiﬁcation
+We compared the performance of our simulated agent to real-world leech
+behavior observed in Harley et al.17. In those in vivo experiments, leeches
+explored a circular arena of diameter 83 cm, with water ﬁlled to a depth of
+2 cm. Our simulations take place in an unbounded plane, but our plots are
+cropped to show an arena of approximately the same diameter. Thus, our
+simulated leeches may leave the plotted region and return to it. Agents begin
+~76 cm from their target.
+We gave the simulated agent 180 seconds to explore and sense the
+behavioral arena. It had to stay within 4 cm of the target location for at least
+5 s to count as a successful ﬁnd. While these times were shortened from the
+animal experiments to reduce simulation run time, they produce similar
+trajectories.
+A point source gravity wave propagated outwards from a northeastern
+position in the arena (Fig. 2), while our agent always started at a southwestern position relative to the wave source.
+To compare our model to Harley et al.17, we ran our model for a range
+of water wave stimulus frequencies (1 Hz to 24 Hz, in 1 Hz increments) and
+several neural thresholds that followed a pseudo logarithmic sequence
+(0.001, 0.005, 0.02, 0.05, 0.2, 0.5, 1). In addition to these values, we performed
+a set of trials at a neural threshold of 0.15 to visualize ﬁnd rate results at an
+intermediate value between 0.05 and 0.2. All trials were performed at a depth
+of 2 cm to match the live-animal work done by Harley et al.17. Navigational
+performance was measured by computing the ﬁnd rate across 50 trials for
+each parameter combination. A ‘ﬁnd’ is deﬁned as the agent successfully
+locating the source, and the ﬁnd rate is the proportion of successful ﬁnds
+across all of the trials for a given combination of water wave frequency and
+neural threshold. When a ﬁnd occurs during the simulation, the trial terminates and is marked as a success. Similar to Harley et al.17, we plot ﬁnd rate
+against wave frequency so that we may compare our simulation to real
+npj Robotics | (2026)4:24
+
+animal behavior. These simulations were performed in batches using cloud
+computing provided by Google Colab, collectively taking several
+hours to run.
+
+Data availability
+Data availability Table S1 in Supplementary Information contains all
+simulation results.
+
+Code availability
+Code is provided as electronic supplementary material (please note that this
+script may take several hours to run): https://github.com/qbeslab/
+LeechNavigationNeuralFields.
+Received: 31 January 2025; Accepted: 1 March 2026;
+
+References
+1.
+2.
+3.
+4.
+
+5.
+6.
+
+7.
+8.
+
+9.
+
+10.
+11.
+12.
+
+13.
+
+14.
+15.
+16.
+17.
+
+18.
+
+19.
+
+Zimmerman, A., Bai, L. & Ginty, D. D. The gentle touch receptors of
+mammalian skin. Science 346, 950–954 (2014).
+Zill, S., Schmitz, J. & Büschges, A. Load sensing and control of
+posture and locomotion. Arthropod Struct. Dev. 33, 273–286 (2004).
+Harley, C.M., Asplen, M.K. Annelid vision. (Oxford Research
+Encyclopedias, 2018).
+Walker, M. A model for encoding of magnetic ﬁeld intensity by
+magnetitebased magnetoreceptor cells. J. Theor. Biol. 250, 85–91
+(2007).
+Taylor, B. K. Validating a model for detecting magnetic ﬁeld intensity
+using dynamic neural ﬁelds. J. Theor. Biol. 408, 53–65 (2016).
+McDonnell, M. D. et al. Engineering intelligent electronic systems
+based on computational neuroscience. Proc. IEEE 102, 646–651
+(2014).
+Hochner, B. An embodied view of octopus neurobiology. Curr. Biol.
+22, R887–92 (2012).
+Harley, C. Neurobiology of Locomotion and Behavior in Leeches.
+Frontiers in Invertebrate Physiology: A Collection of Reviews. 91–151
+(Apple Academic Press, 2024).
+Sawyer, Roy T. North American freshwater leeches, exclusive of the
+Piscicolidae, with a key to all species 46. Illinois biological
+monographs; v. 46 (1972).
+Lockery, S. R. & Kristan, W. B. Distributed processing of sensory. J.
+Neurosci. 10, 1811–1815 (1990).
+Kristan, W. B., Calabrese, R. L. & Friesen, W. O. Neural control of leech
+behavior. Prog. Neurobiol. 76, 279–327 (2005).
+Wagenaar, D. A. A classic model animal in the 21st century: recent
+lessons from the leech nervous system. J. Exp. Biol. 218, 3353–3359
+(2015).
+Moshtagh-Khorasani, M., Miller, E. W. & Torre, V. The spontaneous
+electrical activity of neurons in leech ganglia. Physiol. Rep. 1, e00089
+(2013).
+Wilson, H. Spikes, Decisions, and actions: the dynamical foundations
+of neuroscience. (Oxford University Press, 1999).
+Trappenberg, T. P. Fundamentals of computational neuroscience.
+(Oxford University Press, 2010).
+Coombes, S. et al. (2014) Neural ﬁelds: theory and applications.
+(Berlin, Heidelberg, Springer-Verlag, 1996).
+Harley, C. M., Cienfuegos, J. & Wagenaar, D. A. Developmentally
+regulated multisensory integration for prey localization in the
+medicinal leech. J. Exp. Biol. 214, 3801–3807 (2011).
+Nichols, S. Bioinspired Navigation Based on Distributed Sensing in
+the Leech Using Dynamic Neural Fields, Senior Honors Thesis,
+University of North Carolina, Chapel Hill, https://doi.org/10.17615/
+6yz9-6d68.
+Nichols, S., Havens, L. & Taylor, B. Sensation to navigation: a
+computational neuroscience approach to magnetic ﬁeld navigation. J.
+Comp. Physiol. A 208, 167–176 (2022).
+
+13
+
+Article
+
+https://doi.org/10.1038/s44182-026-00082-3
+20. Piephoff, F., Taylor, B. K., Kehl, C. E., Mota, B. & Harley, C. M.
+Biomechanics of transduction by mechanosensory cilia for
+prey detection in aquatic organisms. J. Theor. Biol. 583, 111782
+(2024).
+21. Harley, C. M. & Wagenaar, D. A. Scanning behavior in the medicinal
+leech Hirudo verbana. PLoS ONE 9, e86120 (2014).
+22. Borg, E. & Counter, S. A. The middle-ear muscles. Sci. Am. 261, 74–81
+(1989).
+23. Harley, C. M., Rossi, M., Cienfuegos, J. & Wagenaar, D. Discontinuous
+locomotion and prey sensing in the leech. J. Exp. Biol. 216,
+1890–1897 (2013).
+24. Elliott, J. M. Population size, weight distribution and food in a
+persistent population of the rare medicinal leech, Hirudo medicinalis.
+Freshw. Biol. 53, 1502–1512 (2008).
+25. Zhang, L. & Mysore, S. P. The barn owl in systems and behavioral
+neuroscience: Progress and promise. Curr. Opin. Neurobiol. 91,
+102983 (2025).
+26. Knudsen, E. I. Control from below: The role of a midbrain network in
+spatial attention. Eur. J. Neurosci. 33, 1961–1972 (2011).
+27. Lewis, J. E. & Kristan, W. B. A neuronal network for computing
+population vectors in the leech. Nature 391, 76–79 (1998).
+28. Nichols, S. T., Gill, J. P., Mota, B., Harley, C. M., & Taylor, B. K.
+Bioinspired Navigation Based on Distributed Sensing in the Leech
+Using Dynamic Neural Fields. In N. S. Szczecinski, V. Webster-Wood,
+M. Tresch, W. R. P. Nourse, A. Mura, & R. D. (Quinn, Biomimetic and
+Biohybrid Systems Cham, 2025).
+29. Plawsky, J. L. Transport phenomena fundamentals, Taylor and
+Francis (2001).
+30. Dingemans, M. W. Water wave propagation over uneven bottoms:
+Linear wave propagation (Vol. 13). (World Scientiﬁc, 1997).
+31. Craik, ADD. Wave interactions and ﬂuid ﬂows. (Cambridge University
+Press, 1988).
+32. Haberman, R. Applied Partial Differential Equations: with Fourier
+series and boundary value problems (4 ed.). (Prentice Hall, 2004).
+33. Lamb, H. Hydrodynamics. (Dover Publications, 1945).
+34. Giancoli, D. C. Physics for Scientists and Engineers (3 ed., Vol. 1).
+Prentice Hall (2000).
+35. Kutschera, U. & Elliott, J. The European medicinal leech Hirudo
+medicinalis L.: Morphology and occurrence of an endangered
+species. Zoosyst. Evolut. 90, 2 (2014).
+36. Izhikevich, E. M. Dynamical systems in neuroscience. (MIT Press,
+2010).
+37. Wilson, H. R., Ferrera, V. P. & Yo, C. A psychophysically motivated
+model for two-dimensional motion perception. Vis. Neurosci. 9, 79–97
+(1992).
+38. Lehmkuhl, A. M., Muthusamy, A. & Wagenaar, D. A. Responses to
+mechanically and visually cued water waves in the nervous system of
+the medicinal leech. J. Exp. Biol. 221, jeb171728 (2018).
+
+Serrapilheira Institute (grant Serra-1709-16981) and CNPq (PQ 2017
+312837/2017-8).
+
+Author contributions
+J.G. edited and revised much of the code, implemented and performed the
+ablation and placement experiments, and directly contributed to the
+“Results and Methods” sections. S.N. conceptualized and wrote the initial
+code base for the study.MM implemented and performed experiments
+varying the number of sensors and sensor quality, and assisted with editing
+the manuscript. B.M. provided critical feedback and knowledge about the
+physics of wave motion. C.H. assisted with study conceptualization and
+provided expertise and ﬁrst hand biological experience on leech behavior
+and experimentation. She also helped to edit the manuscript and place the
+work in a biological context. B.T. helped conceptualize the study and
+provided direct supervision for J.G. and S.N. He also participated in writing
+all sections of the manuscript and helped to place the work in the context of
+future engineered systems development.
+
+Competing interests
+The authors declare no competing interests.
+
+Additional information
+Supplementary information The online version contains
+supplementary material available at
+https://doi.org/10.1038/s44182-026-00082-3.
+Correspondence and requests for materials should be addressed to
+Brian K. Taylor.
+Reprints and permissions information is available at
+http://www.nature.com/reprints
+Publisher’s note Springer Nature remains neutral with regard to
+jurisdictional claims in published maps and institutional afﬁliations.
+
+Acknowledgements
+
+Open Access This article is licensed under a Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International License,
+which permits any non-commercial use, sharing, distribution and
+reproduction in any medium or format, as long as you give appropriate
+credit to the original author(s) and the source, provide a link to the Creative
+Commons licence, and indicate if you modiﬁed the licensed material. You
+do not have permission under this licence to share adapted material
+derived from this article or parts of it. The images or other third party
+material in this article are included in the article’s Creative Commons
+licence, unless indicated otherwise in a credit line to the material. If material
+is not included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted use,
+you will need to obtain permission directly from the copyright holder. To
+view a copy of this licence, visit http://creativecommons.org/licenses/bync-nd/4.0/.
+
+This work was partially supported by a grant from the Air Force Ofﬁce of
+Scientiﬁc Research (FA9550-20-1-0399). B. Mota is supported by Fundacao
+
+© The Author(s) 2026
+
+npj Robotics | (2026)4:24
+
+14
+
+

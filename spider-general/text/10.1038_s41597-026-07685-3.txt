@@ -1,0 +1,1181 @@
+Chromosome-level genome assembly of the jumping spider Spartaeus platnicki
+Zhiyong Yang, Aidie Chen, Feng Zhang, Junxia Zhang (2026). Scientific Data. https://doi.org/10.1038/s41597-026-07685-3. doi:10.1038/s41597-026-07685-3. Licence: cc-by. Text from pdf.
+
+Scientific Data
+
+https://doi.org/10.1038/s41597-026-07685-3
+
+Article in Press
+
+Chromosome-level genome assembly of the
+jumping spider Spartaeus platnicki
+Zhiyong Yang, Aidie Chen, Feng Zhang & Junxia Zhang
+
+Received: 6 January 2026
+Accepted: 19 June 2026
+
+S
+
+We are providing an unedited version of this manuscript to give early access to its
+findings. Before final publication, the manuscript will undergo further editing. Please
+note there may be errors present which affect the content, and all legal disclaimers
+apply.
+
+PR
+
+ES
+
+Cite this article as: Yang, Z., Chen, A.,
+Zhang, F. et al. Chromosome-level
+genome assembly of the jumping
+spider Spartaeus platnicki. Sci Data
+(2026). https://doi.org/10.1038/
+s41597-026-07685-3
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+If this paper is publishing under a Transparent Peer Review model then Peer
+Review reports will publish with the final article.
+
+© The Author(s) 2026. Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source,
+provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included
+in the article's Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article's Creative
+Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission
+directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+
+ARTICLE IN PRESS
+
+Chromosome-level genome assembly of the jumping spider Spartaeus platnicki
+Zhiyong Yang1,2,3, Aidie Chen1,2,3, Feng Zhang1,2,3* & Junxia Zhang1,2,3*
+
+1Key Laboratory of Zoological Systematics and Application of Hebei Province, College of Life Sciences, Hebei University,
+
+Baoding, Hebei 071002, P. R. China
+2Hebei Basic Science Center for Biotic Interaction, Hebei University, Baoding, Hebei 071002, P. R. China
+3Engineering Research Center of Ecological Safety and Conservation in Beijing-Tianjin-Hebei (Xiong’an New Area) of MOE,
+
+Baoding, Hebei 071002, P. R. China
+*Correspondence to:
+
+S
+
+Feng Zhang, Junxia Zhang
+
+ES
+
+Key Laboratory of Zoological Systematics and Application of Hebei Province, College of Life Science, Hebei University, 180
+Wusi East Road, Baoding, Hebei, 071002, PR China
+
+PR
+
+Email: dudu06042001@163.com, jxzhang1976@163.com
+
+IN
+
+Abstract
+
+Jumping spiders, a diverse and charismatic group of invertebrates, are renowned for their highly
+
+LE
+
+specialized visual systems, complex courtship behaviours, and broad ecological adaptability. However,
+the persistent lack of high-quality genomic resources has hindered investigations into the genetic basis
+
+C
+
+and phenotypic evolution of these key traits. To address this gap, we performed a de novo assembly of a
+
+TI
+
+chromosome-level genome for Spartaeus platnicki, a species representing the basal lineages of jumping
+
+R
+
+spiders. This assembly, achieved by integrating PacBio HiFi long reads, Illumina short reads, RNA-seq,
+
+A
+
+and Hi-C data, comprises 15 pseudo-chromosomes including the X1 and X2 sex chromosomes, spanning
+a total length of 3.71 Gb with a scaffold N50 of 262 Mb and a BUSCO completeness of 98.60%.
+Repetitive elements account for approximately 65.57% of the genome. We annotated 15,660 proteincoding genes, achieving a BUSCO completeness of 97.60%. This high-quality genome establishes a
+foundational resource for investigating the genetic architecture underlying key traits and their phenotypic
+evolution in jumping spiders.
+Background & Summary
+Spiders represent one of the most diverse groups of terrestrial predators, with over 53,000 known
+species1. Among them, jumping spiders (Salticidae) constitute the most species-rich lineage,
+encompassing nearly 7,000 described species1. They have successfully colonized most terrestrial
+environments worldwide, and are particularly noted for their high spatial acuity vision2. Current
+phylogenetic frameworks divide Salticidae into seven subfamilies: the highly diverse Salticinae, which
+
+ARTICLE IN PRESS
+
+accounts for over 90% of the family's species diversity, and six other subfamilies collectively referred to
+as "basal lineages" or "non-salticines", representing less than 10% of the diversity3. While the Salticinae
+are crucial for genomic investigations, obtaining high-quality genomic data from the basal lineages is also
+essential for a comprehensive understanding of the family's evolutionary history.
+We here focus on Spartaeus platnicki, a species commonly found in rocky crevices of southern
+China's montane forests (Fig. 1). As a representative of the basal subfamily Spartaeinae, S. platnicki
+exhibits distinct traits compared to Salticinae, such as the notably larger posterior median eyes3, and the
+construction of moderate-sized silky sheets that often have a role in prey capture—a behavior uncommon
+in most salticids, which typically do not build webs for predation4,5. Thus, S. platnicki serves as a critical
+model for understanding morphological and behavioral evolution in jumping spiders.
+
+ES
+
+S
+
+Building on the first reference genome of Salticinae, Salticus scenicus (BioProject: PRJEB72162),
+generated by the Wellcome Sanger Institute Tree of Life Programme, we present the first chromosome-
+
+PR
+
+level genome assembly for a basal lineage jumping spider. Genome sequencing of S. platnicki yielded
+742.97 Gb of clean data from PacBio HiFi, Illumina, Hi-C, and RNA-seq platforms (Table 1). The final
+
+IN
+
+assembly spans 3.71 Gb, with a scaffold N50 of 262 Mb, comprising 15 pseudo-chromosomes and 97
+unplaced scaffolds (Table 2). The assembly exhibits high completeness, with BUSCO score of 98.60%
+
+LE
+
+(Table 2). Repetitive elements account for 65.57% (2.44 Gb) of the genome (Table 3). A total of 15,660
+protein-coding genes were predicted (Table 2), with a BUSCO completeness score of 97.60%. This high-
+
+TI
+
+C
+
+quality, chromosome-level assembly and comprehensive annotation provide a valuable genomic resource.
+It fills a fundamental phylogenetic gap in spider genomics and provides a cornerstone for comparative
+
+A
+
+R
+
+evolutionary studies across the entire Salticidae family.
+Methods
+Sample collection, extraction, and sequencing. Multiple adult females and males of Spartaeus platnicki
+(NCBI: txid426839) were collected from Huaping National Nature Reserve, Guangxi Zhuang
+Autonomous Region (GZAR), China in 2024. The fresh samples were immediately flash-frozen in liquid
+nitrogen and then stored at −80 °C until use. The species identification was conducted through a
+meticulous comparison of somatic and genitalic characteristics of the specimens with reliable and
+authoritative taxonomic literature. Ethical approval for animal use was not required for this study.
+A multi-platform sequencing strategy was employed to generate a high-quality, chromosome-level
+reference genome for S. platnicki. Genomic DNA was extracted from fresh tissue using the
+cetyltrimethylammonium bromide (CTAB) method. DNA integrity was assessed by agarose gel
+electrophoresis, and purity was evaluated using spectrophotometric measurements to meet the standards
+
+ARTICLE IN PRESS
+
+required for library construction. To achieve both high accuracy and long contiguity, short-read and longread sequencing technologies were combined.
+Short-insert (200–400 bp) paired-end libraries were prepared for both female and male individuals
+using the Agencourt AMPure XP-Medium Kit (Beckman Coulter, USA) and sequenced on the DNBSEQT7 platform. The short-read data were primarily used for k-mer analysis to estimate the genome size,
+heterozygosity, and repeat elements, as well as for assembly polishing and annotation support. In addition,
+sex chromosomes were inferred by comparing the sequencing depth difference across the assembled
+scaffolds in the male sample. Long-read sequencing was conducted using the PacBio Sequel Revio
+platform. Genomic DNA was sheared into ~20 kb fragments using the Megaruptor (Diagenode
+B06010001, Liege, Belgium) and concentrated with AMPure® PB Beads (Pacific Biosciences 100-265-
+
+ES
+
+S
+
+900). Libraries were constructed with the SMRTbell® Express Template Prep Kit 3.0 (Pacific Biosciences
+#PN 101-853-100, CA, USA), including overhang removal, DNA damage repair, end repair, A-tailing,
+
+PR
+
+adapter ligation, and nuclease digestion. Size selection was performed using the SageELF (Sage Science
+ELF000) or BluePippin (Sage Science BLU0001) systems to obtain uniform 20 kb inserts. All PacBio
+
+IN
+
+HiFi sequencing was conducted by Berry Genomics (Beijing, China).
+To achieve chromosome-level scaffolding, Hi-C sequencing was performed to capture the three-
+
+LE
+
+dimensional chromatin conformation. Chromatin was cross-linked with formaldehyde, digested with
+MboI, end-repaired, biotinylated, proximity-ligated, de-crosslinked, and purified for Hi-C library
+
+TI
+
+C
+
+construction. Hi-C libraries were sequenced on the DNBSEQ-T7 platform by Berry Genomics.
+For transcriptome sequencing, total RNA was extracted using the TRIzol™ Reagent Kit (Invitrogen,
+
+R
+
+USA), and strand-specific mRNA-seq libraries were prepared with the VAHTS mRNA-seq v2 Library
+
+A
+
+Prep Kit (Vazyme, China) to support gene structure prediction and functional annotation. To obtain fulllength transcripts for precise gene model annotation, RNA was extracted using the RNAprep Pure Plant
+Plus Kit (DP441), and ONT PromethION libraries were prepared using SQK-PCS109 and SQK-PBK004
+kits (Benagen, Wuhan, China).
+All sequencing data were integrated through a hybrid assembly workflow, in which PacBio HiFi
+reads served as the assembly backbone, Illumina reads were used for polishing, and Hi-C data provided
+chromosome anchoring. Transcriptomic data—including both short-read RNA-seq and full-length ONT
+transcripts—were incorporated to assist gene prediction and functional annotation, ultimately yielding a
+chromosome-level, high-quality reference genome.
+Genome survey and assembly. Quality control and trimming of the raw BGI next-generation sequencing
+data were performed using fastp v0.23.46. Specifically, bases with quality scores below 20 were removed
+(> Q20), duplicate sequences were discarded (-D), poly-G/X tails were trimmed (-g -x), reads containing
+
+ARTICLE IN PRESS
+
+more than 10% low-quality bases were filtered out (-u 10), and base correction was conducted using
+overlapping reads (-c). Genome survey was conducted based on the k-mer profiling, with k-mers counted
+using khist.sh (BBMap v38.907). Using a k-mer size of 21, the haploid genome size estimated to be 3.63
+Gb, with a heterozygosity of 1.46% and a repeat sequence of 58.91%.
+HiFi reads were generated using pbccs v6.4.08 with a minimum base quality of Q20. k-mer spectra
+(21-mer and 31-mer) were constructed using yak v0.19 for downstream analysis. De novo assembly of the
+HiFi reads was performed using Hifiasm v0.24.010 with the ‘-l 3’ parameter, which removes contigs with
+coverage below 3× (1/10 of the mean) to minimize artifacts from sequencing errors or contamination. The
+assembly was polished iteratively with NextPolish2 v0.2.111: the first round used HiFi reads alignments
+generated by Minimap2 v2.7 (-ax lr:hqae)12, followed by two rounds with Illumina paired-end reads.
+
+ES
+
+S
+
+Redundant contigs were subsequently removed with Purge_dups v1.2.513 based on sequence similarity
+and coverage depth using default settings (-2 -a 70).
+
+PR
+
+The chromosome-level assembly was generated by scaffolding contigs into pseudo-chromosomes
+using Hi-C data. Hi-C reads were processed with chromap v0.2.614 for alignment, duplicate removal and
+
+IN
+
+extraction of valid interaction pairs. Scaffolding was carried out in two rounds with YAHS v1.215 under
+default parameters. Following the first round, the assembly was inspected and manually corrected with
+
+LE
+
+Juicebox v1.11.0816 based on Hi-C contact heatmap patterns, and the corrected assembly was then used as
+input for a second round of scaffolding with YAHS to produce the final chromosome-scale pseudo-
+
+TI
+
+C
+
+chromosomes (Fig. 3).
+
+The coverage of pseudo-chromosomes was estimated using SAMtools v1.1017, with input alignment
+
+R
+
+files generated by Minimap2 from HiFi and WGS reads. Assembly completeness was assessed with
+
+A
+
+BUSCO v5.7.118 against the arachnida_odb10 database. In addition, WGS and RNA-seq data were
+aligned back to the assembled genome using Minimap2 to evaluate assembly completeness and accuracy,
+and alignment rates were calculated using SAMtools. Potential contamination in the assembly was
+screened with MMseqs2 v1319, using BLASTN-like searches against the NCBI nucleotide (nt) database
+and the UniVec Core database. Assembly accuracy was evaluated with Merqury v1.320, which estimates
+the consensus quality value (QV) and produces k-mer spectrum plots based on k-mer co-occurrence
+between the assembly and HiFi sequencing reads. The final genome assembly was 3.71 Gb with 99.36%
+of the sequences assembled into 15 pseudo-chromosomes (Fig. 2, Table 2).
+Transposable element annotation. A de novo repeat library was initially constructed using
+RepeatModeler v2.0.521 with LTR structure detection enabled (-LTRStruct). This library was subsequently
+merged with Dfam 3.722 and RepBase-2018102623 to generate the final reference repeat database.
+Repetitive elements were identified and masked using RepeatMasker v4.1.524 against the reference repeat
+
+ARTICLE IN PRESS
+
+library. In total, repeats spanned 2.44 Gb, accounting for 65.57% of the genome (Table 3). The most
+abundant repeat types were unclassified elements (28.47%), followed by DNA transposons (21.88%),
+LTR retrotransposons (8.86%), LINEs (5.18%) and SINEs (1.18%).
+To further investigate the expansion of transposable element (TE), the TE landscape was assessed
+using the calcDivergenceFromAlign.pl script included in RepeatMasker v4.1.5, which calculates the
+Kimura 2-Parameter (K2P) divergence for each TE family. Our findings suggest that the TEs of Spartaeus
+platnicki may have undergone three rounds of expansion (Fig. 4).
+Non-coding RNA annotation. Non-coding RNAs (ncRNAs) were annotated by identifying rRNAs,
+snRNAs and miRNAs though searches against the Rfam database using Infernal v1.1.525, and by
+
+ES
+
+S
+
+predicting tRNAs with tRNAscan-SE v2.0.1226. Low-confidence tRNAs were filtered out using
+“EukHighConfidenceFilter” script provided in tRNAscan-SE. A total of 14,600 ncRNAs were predicted
+
+PR
+
+in the genome (Table 4).
+
+IN
+
+Protein-coding gene annotation. Protein-coding genes were predicted from the repeat-masked genome
+using MAKER v3.01.0427, following an integrative strategy that combined ab initio prediction, transcript
+
+LE
+
+evidence, and protein homology support.
+
+For ab initio gene prediction, BRAKER v3.0.628 and GeMoMa v1.929 were employed, integrating
+
+TI
+
+C
+
+RNA-seq and protein evidence to improve accuracy. BRAKER performed automated training of Augustus
+v3.4.030 and GeneMark-ETP31, incorporating arthropod protein sequences from OrthoDB1132 and
+
+R
+
+transcriptome alignments. GeMoMa, which leverages protein homology and intron position conservation,
+
+A
+
+was run with parameters “GeMoMa.c=0.4 GeMoMa.m=200000” using high-quality genome assemblies,
+protein sequences, and annotation files from one insect (Drosophila melanogaster), one crustacean
+(Daphnia magna), and four arachnids (Dermacentor silvarum, Tetranychus urticae, Argiope bruennichi,
+and Uloborus diversus). Predictions from BRAKER and GeMoMa were merged into a single file
+(ab.gff3) and supplied to MAKER as ab initio evidence.
+Transcript-based evidence was obtained by aligning RNA-seq reads to the genome with HISAT2
+v2.2.133, followed by genome-guided transcript assembly using StringTie v2.2.134. Homology-based
+evidence was incorporated using the same protein dataset applied in the GeMoMa analysis.
+The final structural annotation predicted 15,660 protein-coding genes, with an average of 8.80 exons
+per gene, mean exon length of 354.80 bp, and mean intron length of 8,829.40 bp (Table 2).
+Predicted proteins were first searched against protein databases, including UniProtKB (Swiss-Prot +
+TrEMBL), using Diamond v2.1.7.16135 in very sensitive mode (–very-sensitive -e 1e-5) to assign putative
+gene functions. Conserved domains, motifs, Gene Ontology (GO) terms, and pathway information
+
+ARTICLE IN PRESS
+
+(KEGG, Reactome) were further annotated by searching the Pfam36 database with InterProScan v5.70102.037 and by using eggNOG-mapper v2.1.1238 against the eggNOG v5.0.239 database. The results from
+these analyses were integrated to generate the final functional annotation of protein-coding genes (Table
+2).
+Visualization of genomic features. Genomic feature analysis was conducted using TBtools II v2.36340.
+Chromosome length, the proportion of unknown bases (N), and GC content were calculated with the
+“Fasta Stats” module. The spatial distributions of repetitive elements (including LTRs, LINEs, and DNA
+transposons) and gene density were analyzed in non-overlapping 100-kb windows based on repeat and
+gene annotation files. All datasets were normalized and integrated in TBtools II to generate a Circos plot
+
+ES
+
+S
+
+(Fig. 2) for visualization.
+
+PR
+
+Data Records
+
+All raw sequencing data have been deposited in the NCBI Sequence Read Archive (SRA) under the
+
+IN
+
+accession numbers SRR31847034–SRR3184703741–44 for the female and SRR31842152–
+SRR3184215445–47 for the male. The genome assembly has been released under JBHFNZ00000000048.
+
+LE
+
+The annotation files are available in Science Data Bank49.
+
+TI
+
+C
+
+Technical Validation
+
+Potential contaminant sequences were detected using BLASTN-like searches against the NCBI nucleotide
+
+R
+
+(nt) and UniVec databases with a minimum sequence identity threshold of 0.8 (‘--min-seq-id 0.8’)
+
+A
+
+implemented in MMseqs2 v13. Sequences showing over 80% similarity were further examined through
+online BLASTN searches against the NCBI nt database, and those exhibiting more than 90% identity
+were considered contaminants and removed from the assembled scaffolds.
+The completeness of assembly was assessed using BUSCO V5.7.1 with the arthropoda_odb 10
+dataset (n = 2,934). Mapping rates were estimated by aligning the clean reads of Illumina and PacBio
+sequences to the final assembly using Minimap2. The assembled genome showed a BUSCO completeness
+of 98.60% (Table 2).
+Based on BUSCO evaluation, the predicted protein-coding genes were 74.0% single-copy, 23.6%
+duplicated, 0.1% fragmented, and 2.3% missing orthologs (Table 2).
+Code Availability
+All data processing was performed strictly following the instructions and guidelines of the respective
+bioinformatic software packages, and no custom scripts or in-house code were used in this study.
+
+ARTICLE IN PRESS
+
+References
+1.
+
+World Spider Catalog 2026. World Spider Catalog. Version 26. Natural History Museum Bern, online
+at http://wsc.nmbe.ch, accessed on 2 January 2026.
+
+2.
+
+Harland, D. P., Li, D. & Jackson, R. R. How Jumping Spiders See the World. in How Animals See the
+World: Comparative Behavior, Biology, and Evolution of Vision (eds Lazareva, O. F., Shimizu, T. &
+Wasserman, E. A.) (Oxford University Press, 2012).
+
+3.
+
+Maddison, W. P. A phylogenetic classification of jumping spiders (Araneae: Salticidae). J. Arachnol.
+
+ES
+
+Jackson, R. R. & Pollard, S. D. Web-building and predatory behaviour of Spartaeus spinimanus and
+
+PR
+
+4.
+
+S
+
+43, 231 (2015).
+
+Spartaeus thailandicus, primitive jumping spiders (Araneae, Salticidae) from South-east Asia. J.
+
+Su, K. F., Meier, R., Jackson, R. R., Harland, D. P. & Li, D. Convergent evolution of eye
+
+LE
+
+5.
+
+IN
+
+Zool. 220, 561–567 (1990).
+
+ultrastructure and divergent evolution of vision-mediated predatory behaviour in jumping spiders. J.
+
+Chen, S., Zhou, Y., Chen, Y. & Gu, J. fastp: an ultra-fast all-in-one FASTQ preprocessor.
+
+R
+
+6.
+
+TI
+
+C
+
+Evol. Biol. 20, 1478–1489 (2007).
+
+A
+
+Bioinformatics 34, i884–i890 (2018).
+7.
+
+BBMap. sitename https://sourceforge.net/projects/bbmap/ (2025).
+
+8.
+
+PacificBiosciences/ccs. PacBio (2025).
+
+9.
+
+lh3/yak: Yet another k-mer analyzer. GitHub https://github.com/lh3/yak.
+
+10. Cheng, H., Concepcion, G. T., Feng, X., Zhang, H. & Li, H. Haplotype-resolved de novo assembly
+using phased assembly graphs with hifiasm. Nat. Methods 18, 170–175 (2021).
+11. Hu, J. et al. NextPolish2: a repeat-aware polishing tool for genomes assembled using HiFi long reads.
+Genom. proteom. bioinform. 22, qzad009 (2024).
+12. Li, H. Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics 34, 3094–3100
+(2018).
+
+ARTICLE IN PRESS
+
+13. Guan, D. et al. Identifying and removing haplotypic duplication in primary genome assemblies.
+Bioinformatics 36, 2896–2898 (2020).
+14. Zhang, H. et al. Fast alignment and preprocessing of chromatin profiles with Chromap. Nat.
+Commun. 12, 6566 (2021).
+15. Zhou, C., McCarthy, S. A. & Durbin, R. YaHS: yet another Hi-C scaffolding tool. Bioinformatics 39,
+btac808 (2022).
+16. Durand, N. C. et al. Juicer provides a one-click system for analyzing loop-resolution Hi-C
+
+S
+
+experiments. Cell Syst. 3, 95–98 (2016).
+
+ES
+
+17. Danecek, P. et al. Twelve years of SAMtools and BCFtools. GigaScience 10, giab008 (2021).
+
+PR
+
+18. Manni, M., Berkeley, M. R., Seppey, M., Simão, F. A. & Zdobnov, E. M. BUSCO update: novel and
+streamlined workflows along with broader and deeper phylogenetic coverage for scoring of
+
+IN
+
+eukaryotic, prokaryotic, and viral genomes. Mol. Biol. Evol. 38, 4647–4654 (2021).
+
+LE
+
+19. Steinegger, M. & Söding, J. MMseqs2 enables sensitive protein sequence searching for the analysis
+
+C
+
+of massive data sets. Nat. Biotechnol. 35, 1026–1028 (2017).
+
+TI
+
+20. Rhie, A., Walenz, B. P., Koren, S. & Phillippy, A. M. Merqury: reference-free quality, completeness,
+
+A
+
+R
+
+and phasing assessment for genome assemblies. Genome Biol. 21, 245 (2020).
+21. Flynn, J. M. et al. RepeatModeler2 for automated genomic discovery of transposable element
+families. Proc. Natl. Acad. Sci. USA 117, 9451–9457 (2020).
+22. Storer, J., Hubley, R., Rosen, J., Wheeler, T. J. & Smit, A. F. The Dfam community resource of
+transposable element families, sequence models, and genome annotations. Mob. DNA 12, 2 (2021).
+23. Bao, W., Kojima, K. K. & Kohany, O. Repbase Update, a database of repetitive elements in
+eukaryotic genomes. Mob. DNA 6, 11 (2015).
+24. Download Page. https://www.repeatmasker.org/RepeatMasker/.
+25. Nawrocki, E. P. & Eddy, S. R. Infernal 1.1: 100-fold faster RNA homology searches. Bioinformatics
+29, 2933–2935 (2013).
+
+ARTICLE IN PRESS
+
+26. Chan, P. P. & Lowe, T. M. tRNAscan-SE: Searching for tRNA Genes in Genomic Sequences. in Gene
+Prediction: Methods and Protocols (ed. Kollmar, M.) 1–14 (Springer New York, New York, NY,
+2019).
+27. Holt, C. & Yandell, M. MAKER2: an annotation pipeline and genome-database management tool for
+second-generation genome projects. BMC Bioinformatics 12, 491 (2011).
+28. Brůna, T., Hoff, K. J., Lomsadze, A., Stanke, M. & Borodovsky, M. BRAKER2: automatic
+eukaryotic genome annotation with GeneMark-EP+ and AUGUSTUS supported by a protein
+
+S
+
+database. NAR Genom. Bioinform. 3, lqaa108 (2021).
+
+ES
+
+29. Keilwagen, J., Hartung, F., Paulini, M., Twardziok, S. O. & Grau, J. Combining RNA-seq data and
+
+PR
+
+homology-based gene prediction for plants, animals and fungi. BMC Bioinformatics 19, 189 (2018).
+30. Stanke, M., Diekhans, M., Baertsch, R. & Haussler, D. Using native and syntenically mapped cDNA
+
+IN
+
+alignments to improve de novo gene finding. Bioinformatics 24, 637–644 (2008).
+
+LE
+
+31. Brůna, T., Lomsadze, A. & Borodovsky, M. GeneMark-ETP significantly improves the accuracy of
+
+C
+
+automatic annotation of large eukaryotic genomes. Genome Res. 34, 757–768 (2024).
+
+TI
+
+32. Kuznetsov, D. et al. OrthoDB v11: annotation of orthologs in the widest sampling of organismal
+
+A
+
+R
+
+diversity. Nucleic Acids Res. 51, D445–D451 (2023).
+33. Kim, D., Paggi, J. M., Park, C., Bennett, C. & Salzberg, S. L. Graph-based genome alignment and
+genotyping with HISAT2 and HISAT-genotype. Nat. Biotechnol. 37, 907–915 (2019).
+34. Kovaka, S. et al. Transcriptome assembly from long-read RNA-seq alignments with StringTie2.
+Genome Bio. 20, 278 (2019).
+35. Buchfink, B., Reuter, K. & Drost, H.-G. Sensitive protein alignments at tree-of-life scale using
+DIAMOND. Nat. Methods 18, 366–368 (2021).
+36. El-Gebali, S. et al. The Pfam protein families database in 2019. Nucleic Acids Res. 47, D427–D432
+(2019).
+37. Paysan-Lafosse, T. et al. InterPro in 2022. Nucleic Acids Res. 51, D418–D427 (2023).
+
+ARTICLE IN PRESS
+
+38. Cantalapiedra, C. P., Hernández-Plaza, A., Letunic, I., Bork, P. & Huerta-Cepas, J. eggNOG-mapper
+v2: functional annotation, orthology assignments, and domain prediction at the metagenomic scale.
+Mol. Biol. Evol. 38, 5825–5829 (2021).
+39. Huerta-Cepas, J. et al. eggNOG 5.0: a hierarchical, functionally and phylogenetically annotated
+orthology resource based on 5090 organisms and 2502 viruses. Nucleic Acids Res. 47, D309–D314
+(2019).
+40. Chen, C. et al. TBtools: an integrative toolkit developed for interactive analyses of big biological
+
+S
+
+data. Mol. Plant 13, 1194–1202 (2020).
+
+ES
+
+41. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31847034 (2026).
+
+PR
+
+42. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31847035 (2026).
+43. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31847036 (2026).
+
+IN
+
+44. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31847037 (2026).
+
+LE
+
+45. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31842152 (2026).
+
+C
+
+46. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31842153 (2026).
+
+TI
+
+47. NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRR31842154 (2026).
+
+A
+
+R
+
+48. NCBI GenBank https://identifiers.org/ncbi/insdc:JBHFNZ000000000.1 (2026).
+49. Science Data Bank https://doi.org/10.57760/sciencedb.33657 (2025).
+
+Acknowledgements
+This work was supported by the National Natural Science Foundation of China (Junxia Zhang; grant no.
+32570518). We thank Kun Yu and Yi Ni for their assistance with sample collection.
+Author Contributions
+J.Z. and F.Z. were responsible for the experimental design. J.Z. and Z.Y. contributed to sample collection.
+Z.Y., A.C. and J.Z. contributed to data analyses. Z.Y. and A.C. performed data visualization. Z.Y. and A.C
+
+ARTICLE IN PRESS
+
+wrote the draft manuscript. J.Z. and F.Z. reviewed and edited the manuscript. All authors read and
+approved the final version of the manuscript.
+Competing Interests
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+The authors declare no competing interests.
+
+Figures
+
+Fig. 1 Habitats and live specimens of Spartaeus platnicki.
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+ARTICLE IN PRESS
+
+Fig. 2 Genomic features of Spartaeus platnicki. See Tables 2–4 for more detailed statistics.
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+ARTICLE IN PRESS
+
+Fig. 3 Hi-C interaction heatmap of the 15 pseudo-chromosomes in Spartaeus platnicki. Darker
+color indicates higher interaction frequencies.
+
+ARTICLE IN PRESS
+
+Fig. 4 Interspersed repeat landscape based on CpG-adjusted Kimura 2-parameter (K2P)
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+divergence. (a) Including unclassified repeats; (b) Excluding unclassified repeats.
+
+ARTICLE IN PRESS
+
+Tables
+Type
+
+Number of reads
+
+Data size (Gb)
+
+Length per read (bp)
+
+Length N50 (bp)
+
+Sequencing coverage (×)
+
+WGS
+
+2,358,701,388
+
+353.81
+
+150
+
+-
+
+95.26
+
+HiFi
+
+8,664,664
+
+122.80
+
+14,172.11
+
+14,070
+
+33.06
+
+Hi-C
+
+1,589,678,130
+
+238.45
+
+150
+
+-
+
+64.20
+
+RNA-sr
+
+111,089,494
+
+16.66
+
+150
+
+-
+
+-
+
+RNA-ONT
+
+5,083,839
+
+11.25
+
+2,212.58
+
+2,615
+
+-
+
+Table 1. Statistics of the DNA sequence data used for the de novo genome assembly of Spartaeus
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+platnicki.
+
+ARTICLE IN PRESS
+
+Statistics
+
+Assembly size (bp)
+Number of pseudo-chromosomes (sizes
+bp)
+Number of scaffolds/contigs
+
+3,714,248,756
+
+Longest scaffold/contig (Mb)
+
+323.776/127.383
+
+N50 scaffold/contig length (Mb)
+
+262.304/26.018
+
+GC content (%)
+
+33.87
+
+BUSCO completeness (%)
+
+98.60
+
+97/349
+
+93.60
+
+D
+
+5.00
+
+F
+
+0.20
+
+M
+
+1.20
+
+BGI
+
+98.07
+
+ES
+
+HiFi
+
+Mapping ratio of reads (%)
+
+15 (3,690,651,725)
+
+S
+
+S
+
+Assembly
+
+Content
+
+RNA-sr
+
+PR
+
+RNA-ONT
+
+99.91
+90.30
+98.97
+15,660
+
+Number of predicted protein sequences
+
+19,504
+
+Mean gene length (bp)
+
+69,188.10
+
+Mean protein length (aa)
+
+564.30
+97.60
+
+IN
+
+Number of protein-coding genes
+
+LE
+
+Protein-coding genes
+
+R
+
+A
+
+Structure Annotation
+
+TI
+
+C
+
+BUSCO completeness (%)
+S
+
+74
+
+D
+
+23.6
+
+F
+
+0.1
+
+M
+
+2.3
+
+Exon
+Mean number of exons per gene
+
+8.80
+
+Mean exon length (bp)
+
+354.80
+
+CDS
+Number of CDSs per gene
+
+8.40
+
+Mean CDS length (bp)
+
+195.80
+
+Intron
+
+Function Annotation
+
+Number of introns per gene
+
+7.70
+
+Mean intron length (bp)
+
+8,829.40
+
+Type
+
+Number
+
+UniProt
+
+14,909 (95.20%)
+
+InterProScan
+
+12,964 (82.78%)
+
+eggNOG
+
+14,007 (89.44%)
+
+KEGG orthologs (ko)
+
+9,459 (60.40%)
+
+KEGG pathway
+
+5,917 (37.78%)
+
+GO (combined)
+
+11,784 (75.24%)
+
+Table 2. Summary statistics of the Spartaeus platnicki genome assembly and annotation.
+
+ARTICLE IN PRESS
+
+Type
+
+Number
+
+Length (bp)
+
+Percentage (%)
+
+DNA
+
+2,683,855
+
+812,690,195
+
+21.88
+
+LINE
+
+615,705
+
+192,459,906
+
+5.18
+
+LTR
+
+1,116,487
+
+329,456,451
+
+8.86
+
+SINE
+
+226,012
+
+43,916,157
+
+1.18
+
+Unknown
+
+5,122,020
+
+1,057,366,351
+
+28.47
+
+Total
+
+9,764,079
+
+2,435,889,060
+
+65.57
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+ES
+
+S
+
+Table 3. Summary of repetitive elements in Spartaeus platnicki.
+
+Copies
+
+riboswitch
+
+1
+
+ribozyme
+
+2,015
+
+miRNA
+
+4,098
+
+leader
+
+1
+
+rRNA
+
+116
+
+sRNA
+
+2
+
+snRNA
+
+775
+
+tRNA
+
+7,034
+
+Other
+
+558
+
+Total
+
+14,600
+
+ES
+
+Class
+
+S
+
+ARTICLE IN PRESS
+
+A
+
+R
+
+TI
+
+C
+
+LE
+
+IN
+
+PR
+
+Table 4. Summary of non-coding RNAs in Spartaeus platnicki.
+
+

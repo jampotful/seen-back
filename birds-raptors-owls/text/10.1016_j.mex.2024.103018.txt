@@ -1,0 +1,219 @@
+ViT-HHO: Optimized vision transformer for diabetic retinopathy detection using Harris Hawk optimization
+Vishal Awasthi, Namita Awasthi, Hemant Kumar, Shubhendra Singh, Prabal Pratap Singh, Poonam Dixit, Rashi Agarwal (2024). MethodsX. https://www.ncbi.nlm.nih.gov/pmc/articles/11543537. doi:10.1016/j.mex.2024.103018. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# ViT-HHO: Optimized vision transformer for diabetic retinopathy detection using Harris Hawk optimization
+
+## Abstract
+AbstractDiabetic retinopathy (DR) is a significant cause of vision impairment globally, emphasizing the importance of timely and precise detection to prevent severe consequences. This study presents an optimized Vision Transformer (ViT) model that incorporates Harris Hawk Optimization (HHO) to improve the automated detection of diabetic retinopathy (DR). The ViT architecture utilizes self-attention mechanisms to capture local and global features in retinal images. Additionally, HHO optimizes key hyperparameters to maximize the performance of the model. The proposed ViT-HHO model achieved exceptional performance on the APTOS-2019 and IDRiD datasets. Specifically, it achieved 99.83 % accuracy, 99.78 % sensitivity, 99.85 % specificity, and 99.80 % AUC-ROC on the APTOS-2019 dataset, surpassing traditional CNNs and alternative optimization techniques. The model exhibited strong generalization on the IDRiID dataset, achieving an accuracy of 99.11 % and an AUC-ROC of 99.12 %. The ViT-HHO model demonstrates the potential for enhancing the clinical detection of diabetic retinopathy (DR), providing high precision and reliability.•An optimized Vision Transformer (ViT) model was developed using HHO for improved detection of Diabetic Retinopathy (DR).•The model was validated on the APTOS-2019 and IDRiID datasets, demonstrating superior accuracy and AUC-ROC metrics.•The model's generalization and robustness were demonstrated through comprehensive performance evaluations.Keywords: Vision transformer, Harris hawk optimization, Diabetic retinopathy, Multi-head self attentionMethod name: ViT-HHO: Vision Transformer Optimized by Harris Hawk Optimization for Diabetic Retinopathy Detection
+Specifications table
+
+## Background
+Diabetic retinopathy (DR) is a prominent pathological condition that results in vision loss in individuals with diabetes and has substantial consequences for worldwide public health. Diabetic retinopathy is a diabetes syndrome characterized by long-term high blood glucose levels leading to gradual deterioration of the retinal blood vessels [1]. If left untreated, it might result in substantial vision impairment. Timely identification of diabetic retinopathy is essential for successful treatment. Nevertheless, the existing detection techniques mainly depend on the manual assessment of retinal fundus pictures by ophthalmologists who have received particular training. This laborious procedure is time-consuming, resource-intensive, and susceptible to inconsistency in analytical results. Hence, it is essential to create automated and dependable screening methods [2].
+The progression of diabetic retinopathy (DR) involves many phases, beginning with moderate non-proliferative DR, which is distinguished by microaneurysms. Furthermore, the moderate and severe non-proliferative phases are distinguished by the gradual blockage of the blood vessels in the retina [3]. Proliferative diabetic retinopathy (DR) is characterized by the development of aberrant retinal blood vessels, resulting in significant visual impairment and even blindness if not well treated. A common disorder, diabetic retinopathy (DR), affects more than one-third of the 463 million individuals diagnosed with diabetes [4]. Estimates indicate that the occurrence of diabetic retinopathy (DR) in India will rise as the prevalence of diabetes continues to rise. Diabetic retinopathy (DR) affects 18–22 % of diabetes patients [5].
+Convolutional Neural Networks (CNNs) use in deep learning has shown notable efficacy in automating Diabetic Retinopathy (DR) diagnosis. Deep neural networks (CNNs) effectively extract local characteristics such as texture and edges from medical pictures. The detection of pathological indications such as microaneurysms and exudates relies on the existence of these characteristics [6,7]. However, CNNs have limitations in capturing long-range dependencies and global contextual information, crucial for identifying complex, spatially distributed patterns in retinal images. Dosovitskiy et al. proposed Vision Transformers (ViTs), ViT have emerged as a promising alternative to CNNs, effectively capturing both local and global image relationships using self-attention mechanisms. While CNNs are suitable for tasks requiring detailed feature extraction and context-aware analysis, their limitations are being addressed by ViTs [8].
+Optimization techniques such as Particle Swarm Optimization (PSO), Genetic Algorithms (GA), and Bayesian Optimization are often used to improve the performance of deep learning models via hyperparameter adjustment. Nevertheless, these techniques often encounter obstacles such as premature convergence and restricted capacity to investigate search spaces with many dimensions. These limitations might impede their efficiency in finding optimal solutions for intricate models like Vision Transformers. Heidari et al. proposed Harris Hawk Optimization (HHO) method, is renowned for its ability to balance exploration and exploitation costs efficiently. Motivated by the collaborative hunting behavior shown by Harris Hawks, the search techniques of this algorithm possess adaptability to various problem landscapes, rendering it highly suitable for intricate optimization problems [9].
+This paper introduces the ViT-HHO, a model of a Vision Transformer optimized using Harris Hawk Optimization. The ViT-HHO is specifically designed for the automated identification of diabetic retinopathy. Its purpose is to enhance the performance of the Vision Transformer in medical image processing tasks by optimizing key hyperparameters like the learning rate, attention number, and embedding dimension. The successful implementation of the ViT-HHO model could significantly improve the accuracy and efficiency of diabetic retinopathy diagnosis, thereby advancing the field of medical imaging. This study evaluates the ViT-HHO's performance using two well-recognized datasets, namely APTOS-2019 [10] and IDRiD [11].
+
+## Method details
+The proposed methodology combines a Vision Transformer (ViT) model with Harris Hawk Optimization (HHO) for tuning hyperparameters in the detection of Diabetic Retinopathy (DR). The methodology aims to enhance ViT's feature extraction capabilities by leveraging the global context modeling ability of transformers, which addresses the limitations of traditional convolutional models. The key components of the methodology include data preprocessing, the Vision Transformer architecture, HHO-based hyperparameter optimization, and the model evaluation process. Fig. 1 illustrates the suggested systematic approach for diagnosing diabetic retinopathy.
+Proposed methodology of Diabetic Retinopathy Classification.
+
+## Preprocessing
+Preprocessing is a crucial step in preparing retinal images for deep learning models. Implementing this technique leads to notable enhancements in image quality, ensures consistency in the input data, and enhances the overall performance of the model. This study employed preprocessing techniques to ensure the high quality and suitability of retinal images for training in the Vision Transformer (ViT) model. The techniques used to address specific challenges related to detecting diabetic retinopathy include resizing, enhancing contrast, normalizing, and augmenting data.
+In order to maintain consistency across the dataset, the images were resized to 224 × 224 pixels to meet the input size criteria of the ViT model. After resizing, the image was subjected to Contrast Limited Adaptive Histogram Equalization (CLAHE) [12] to improve its contrast. The CLAHE method enhances the visibility of important retinal features, such as microaneurysms and exudates, by applying specific contrast expansion techniques. The image was partitioned into smaller tiles and subjected to local histogram equalization with a controlled contrast clipping limit to prevent excessive noise amplification [12]. This process led to the enhancement of details, making them more distinguishable. The pixel values were normalized to a range of 0 to 1 to stabilize training and promote faster convergence. Data augmentation techniques improved the model's robustness and prevented overfitting. The preprocessing pipeline included techniques such as applying random rotations of up to 30° to simulate different angles of retinal image capture, horizontal and vertical flipping to accommodate various orientations, and random zooming within a range of [0.9, 1.1] to introduce slight variations in scale [13]. The transformations increased the diversity of the training data and enhanced the model's generalization capabilities to unseen data. Fig. 2 depicts the preprocessing pipelines.
+Preprocessing pipeline of fundus image.
+
+## Vision transformer
+The Vision Transformer (ViT) [8] architecture is a promising alternative to convolutional neural networks (CNNs) for image classification tasks. Vision Transformers (ViTs) distinguish themselves from Convolutional Neural Networks (CNNs) by utilizing self-attention mechanisms, originally designed for natural language processing, to extract features. ViTs can effectively model long-range dependencies and capture local and global image features. Visual Transformers (ViTs) are highly suitable for medical image analysis tasks, including detecting diabetic retinopathy. This is because ViTs can capture local and global patterns in retinal images. Visual Transformers (ViTs) provide a strong framework for visual recognition in medical imaging through multi-head attention and a feed-forward network. Fig. 3 depicts the Vision Transformer models.
+1. Patch Embedding
+Vision Transformer model.
+The initial stage of the Vision Transformer algorithm entails dividing the input image into a sequence of patches with a consistent size. The image X∈RH×W×C, with dimensions H×W×C, is partitioned into N non-overlapping patches of size P×P. The number of patches, N, can be calculated using the formula N=(H×W)/P2.
+The patch is subsequently transformed into a vector of size P2·C. The flattened patches are projected into a lower-dimensional embedding space using a learnable projection matrix E∈R(P2·C)×D, where D is the dimensionality of the embedding. The purpose of this projection is to reduce the dimensionality of the patches, making them more manageable for subsequent processing.
+Here, Z0∈RN×D is the sequence of embedded patches, and Epos∈RN×D represents the positional encodings that retain spatial information, which is lost during the flattening process [14].
+2. Transformer Encoder
+The patch sequence Z0 is processed by several transformer encoder layers. Each encoder layer consists of two main components: multi-head self-attention and a feed-forward network (FFN). The self-attention mechanism allows the model to assess the importance of each patch relative to all others, capturing both local and global contextual information.
+Multi-Head Self Attention (MHSA): The Multi-head attention (MHSA) of the transformer encoder layer is shown in Fig. 4.
+Multi-head self attention (MHSA) mechanism.
+Given the input Ml∈RN×Dat layer l, the self-attention mechanism computes attention scores for each patch relative to all others. For each attention head, three linear projections—query Ql, key Kl, and value Vl are computed
+where WQl,WKl,WVl∈RD×d are learnable weight matrices, and d is the dimensionality of each attention head.
+The attention scores are computed using the scaled dot-product attention
+Multi-head attention aggregates the outputs of multiple attention heads are
+where h is the number of attention heads, and WOl∈Rhd×Dis a learnable projection matrix.
+Feed Forword Networks (FFN): Following the attention operation, a position-wise feed-forward network is applied to each patch embedding independently.
+where W1l∈RD×Dff and W2l∈RDff×D are weight matrices, b1l and b2l are biases, and GELU is the activation function [15].
+The output is subsequently processed using a residual connection and layer normalization.
+3. Classification Head (MLP)
+The final output, obtained with precision, is a result of applying a classification head to the first patch embedding, obtained after passing through multiple transformer encoder layers.
+where L is the number of encoder layers, Wcls∈RD×C is the weight matrix for classification, C is the number of classes, and y^ is the predicted class probability distribution.
+
+## Harris hawk optimization (HHO) algorithm
+The Harris Hawk Optimization (HHO) algorithm proposed by Heidari et al. [9], is a very efficient metaheuristic method for addressing intricate optimization problems, drawing inspiration from the cooperative hunting techniques used by Harris Hawks. The HHO algorithm emulates the dynamic pursuit, unexpected launch, and offensive tactics of hawks in the wild, enabling it to effectively manage the trade-off between exploration and exploitation in search areas with many dimensions. This study aims to enhance the performance of the Vision Transformer (ViT) in detecting diabetic retinopathy by using Hot Optimization (HHO) to optimize the hyperparameters, including the learning rate, number of attention heads, and feed-forward network size.
+The HHO algorithm has five essential stages that replicate the hunting behavior of Harris hawks: exploration (seeking for prey), shift from exploration to exploitation (encircling the prey), and exploitation (firing at the prey).
+1. Exploration Phase
+During the exploration phase, Harris hawks randomly search for prey by updating their positions based on a randomly selected hawk and a distance factor. The position of each hawk (representing a hyperparameter configuration) is updated according to:
+where Xt is the current position of the hawk at iteration t, Xrand(t) is the randomly selected hawk's position, Xprey(t) is the position of the prey (optimal solution). r1,r2,r3,r4,r5 are random numbers uniformly distributed in [0, 1]. UB andLB are the upper and lower bounds of the search space.
+In this phase, the hawks search widely across the solution space, ensuring a diverse exploration of potential hyperparameter configurations [16].
+2. Transition from Exploration to Exploitation
+The energy level of the prey impacts the transition phase, which decreases throughout iterations. The equation represents the energy level E
+where E0 is the initial energy of the prey, t is the current iteration, and T is the maximum number of iterations.
+The transition from exploration to exploitation depends on |E|; when |E|<1, the algorithm shifts toward local exploitation. The energy level can be adaptively adjusted to facilitate a seamless transition between global exploration and local exploitation.
+3. Exploitation Phase
+In this stage, the hawks show their adaptability by systematically searching in close proximity to their prey. They use tactics that can be mild or harsh, adjusting them based on their energy level and distance.
+Soft Besiege (when the prey escapes):(10)Xt+1=ΔX(t)−E|JXprey(t)−Xt|
+Hard Besiege (when the prey is exhausted):(11)Xt+1=Xprey(t)−E|ΔX(t)|
+where ΔX(t)=Xpe(t)−Xt is the difference between the current position and the prey's position, and J is a random jump strength coefficient.
+
+## Method validation
+
+## Dataset description
+The study employed two benchmark datasets, namely the Indian Diabetic Retinopathy Image Dataset (IDRiD) and the Asia Pacific Tele-Ophthalmology Society (APTOS-2019) dataset, to train and evaluate the proposed model. The IDRiD dataset includes 516 images with a resolution of 4288 × 2848 pixels, while the APTOS 2019 dataset contains 3662 images, each with a resolution of 1024 × 1024 pixels. The dataset underwent preprocessing and augmentation before partitioning into training, validation, and test sets. The data was divided in a ratio of 75:15:10 to ensure equal representation of all severity levels of Diabetic Retinopathy (DR). Fig. 5 depicts a sample image from the APTOS-2019 dataset.
+Sample image from APTOS-2019 dataset for DR.
+Table 1, Table 2 present the distribution of fundus images according to the severity stages of Diabetic Retinopathy (DR). The severity stages include No DR (Healthy), Mild Non-Proliferative DR, Moderate Non-Proliferative DR, Severe Non-Proliferative DR, and Proliferative DR. The data for Table 1 is obtained from the IDRiID dataset. In contrast, the data for Table 2 is obtained from the APTOS-2019 dataset.
+IDRiD dataset distribution.
+APTOS 2019 dataset distribution.
+
+## Experimental setups
+The experiments were performed on an Intel Core i7 processor, 32 GB RAM, and an 8 GB NVIDIA GeForce RTX 4060 GPU running on Linux. The implementation employed PyTorch, a widely recognized deep learning framework incorporating CUDA support for GPU acceleration.
+The Vision Transformer model was trained and validated using the APTOS-2019 dataset, a benchmark dataset for diabetic retinopathy. The dataset consists of retinal fundus images classified into five categories, ranging from 0 (Healthy) to 4 (proliferative DR). To maximize performance, the hyperparameters of the model were optimized using Harris Hawk Optimization (HHO) during the training and validation processes.
+The model was trained using the ADAM optimizer, which was chosen for its adaptive learning rate adjustment based on gradient moments [17]. The training process was conducted using the ADAM optimizer with a batch size of 32, a learning rate of 0.001, and 100 epochs, which ensured stability and efficiency. The model was optimized for optimal performance on the APTOS-2019 dataset using dynamic hyperparameter tuning with HHO, resulting in improved outcomes.
+
+## Results and discussion
+This section provides a detailed analysis of the Vision Transformer (ViT) model optimized using Harris Hawk Optimization (HHO) to detect diabetic retinopathy. The analysis encompasses several key components: (1) the selection of ViT as the preferred architecture, (2) the optimization of ViT parameters using the APTOS-2019 dataset, (3) a comparison of various optimization algorithms applied to ViT, (4) a performance evaluation involving a confusion matrix, ROC-AUC curves, and training/testing accuracy and loss curves on the APTOS-2019 dataset, and (5) an assessment of the model's generalizability on the IDRiID dataset.
+We evaluated six deep learning models, namely VGG16, ResNet50, Inception-v3, EfficientNet-B0, DenseNet-121, and Vision Transformer (ViT), without optimization, using the APTOS-2019 dataset. The models' performance was evaluated using accuracy, sensitivity, specificity, F1-score, and AUC-ROC metrics.
+The ViT demonstrated superior performance across all evaluation metrics, as presented in Table 3. The ViT's self-attention mechanism allows it to capture local and global patterns in retinal images, making it suitable for tasks that involve detailed feature extraction and classification. The hyperparameters used for the ViT model are summarized in Table 4.
+Performance comparison of baseline models on the APTOS-2019 dataset.
+ViT hyperparameters used in this study.
+The ViT's performance, particularly its AUC-ROC of 96.92 %, underscores its efficacy for diabetic retinopathy detection, affirming its selection as the baseline architecture for further optimization.
+A systematic grid search was performed to fine-tune important hyperparameters such as patch size, embedding dimensions, number of transformer layers, and attention heads, followed by Harris Hawk Optimization (HHO). The objective was to determine the most effective setup that maximizes the model's performance. The hyperparameters employed in the HHO process are presented in Table 5.
+HHO hyperparameters for ViT optimization.
+Various techniques, including Particle Swarm Optimization (PSO) [18], Bat Algorithm (BAT) [19], Grey Wolf Optimization (GWO) [20], Multi-Verse Optimization (MVO) [21], Whale Optimization (WO) [22], Firefly Optimization (FFO) [23], Harris Hawk Optimization (HHO) [9], were employed to identify the most effective optimization algorithm for ViT. The results, derived from the significant APTOS-2019 dataset, are presented in Table 6.
+Performance comparison of optimization algorithms on ViT model (APTOS-2019 Dataset).
+The Harris Hawk Optimization (HHO) algorithm demonstrated superior performance to other algorithms, achieving the highest levels of accuracy and AUC-ROC across all evaluations. HHO is an adaptive algorithm that effectively explores and exploits the high-dimensional search space needed for ViT hyperparameter tuning. Particle Swarm Optimization (PSO) and Whale Optimization (WO) have shown reasonable performance but are less effective in converging to the global optimum. This highlights the advantages of HHO in complex optimization tasks.
+The ViT-HHO model was thoroughly assessed on the APTOS-2019 dataset, exhibiting outstanding performance on various important metrics. The model attained an accuracy of 99.83 %, sensitivity of 99.78 %, specificity of 99.85 %, F1-score of 99.81 %, and an AUC-ROC of 99.80 %. The results demonstrate the model's high precision in accurately distinguishing between various stages of diabetic retinopathy, effectively reducing false positives and negatives.
+Fig. 6, displays the confusion matrix for the model's performance on the testing dataset. The confusion matrix effectively displays the distribution of true positives, false positives, and false negatives, highlighting the model's reliability and robustness. The number of misclassifications in the matrix indicates the model's effectiveness in accurately identifying and classifying retinal images across various stages of DR.
+Confusion matrix for proposed ViT + HHO on APTOS-2019 datset.
+The optimized ViT-HHO model was tested on the IDRiD dataset to assess its generalizability. The IDRiD dataset exhibits different image characteristics and a more balanced class distribution compared to the APTOS-2019 dataset. Despite the observed variations, the model consistently achieved high performance, maintaining elevated accuracy, sensitivity, and specificity levels. The performance metrics achieved on the IDRIiD dataset are summarized in Table 7. The model's consistent performance demonstrates its resilience and applicability in various clinical settings, affirming its potential for reliable use in automated diabetic retinopathy detection systems.
+Performance of optimized ViT on the IDRiD dataset.
+We evaluate our model's effectiveness by comparing it to other advanced methods for detecting diabetic retinopathy. This study employs the APTOS-2019 and IDRID datasets described in Table 8. This assessment evaluates the performance and efficiency of our proposed model compared to other contemporary techniques.
+Performance metrics of the proposed ViT-HHO model on IDRID dataset.
+The ViT-HHO model exhibited outstanding performance in detecting diabetic retinopathy on the APTOS dataset, surpassing state-of-the-art models in key metrics. The accuracy of 99.83 % is notably higher than that of 97.27 % reported by Nahiduzzaman et al. [24] and 94 % reported by M. Chetoui and Akhloufi [25]. The ViT-HHO model demonstrated exceptional sensitivity (99.78 %) and specificity (99.85 %), resulting in high detection rates for cases of diabetic retinopathy and accurate classification of non-diseased cases. The model's F1-Score of 99.81 % and AUC-ROC of 99.80 % demonstrate its balanced and robust performance, making it a dependable tool for clinical applications.
+The model's effectiveness was validated on the IDRID dataset, demonstrating consistently high accuracy (99.11 %) and a strong AUC-ROC (99.12 %), indicating its ability to generalize across datasets with different characteristics. The results confirm the superiority and adaptability of the ViT-HHO model, making it suitable for real-world deployment in diabetic retinopathy screening programs.
+
+## Limitations
+Our study does have a number of limitations that should be considered. Firstly, the size of the dataset, IDRID, was relatively small, and the class distribution was not balanced well enough, which could affect the model's generalizability across different diabetic retinopathy severity levels. Another issue was the Vision Transformer, which, while optimized using Harris Hawk Optimization and showing improved performance, still required a high level of computational resources, something which may make it difficult to implement in resource-limited clinical settings. Moreover, we were unable to perform external validation using a more extensive, more varied dataset, restricting how well our findings could apply to other populations or imaging modalities. Finally, although our focus was on detecting diabetic retinopathy, broadening the model's applicability to other retinal diseases was not covered within the scope of this work, which could have increased the study's clinical utility.
+
+## Ethics statements
+Publicly available dataset, thus no permission required.
+
+## CRediT authorship contribution statement
+Vishal Awasthi: Conceptualization, Methodology. Namita Awasthi: Visualization, Investigation. Hemant Kumar: Conceptualization, Methodology, Validation, Data curation, Writing – original draft. Shubhendra Singh: Visualization, Validation. Prabal Pratap Singh: Software, Validation. Poonam Dixit: Conceptualization, Investigation. Rashi Agarwal: Supervision, Conceptualization.
+
+## Declaration of competing interest
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+## Acknowledgments
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+## Footnotes
+Related research article: None
+For a published article: None
+
+## Data availability
+I have linked the open source dataset which is used in this research.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+I have linked the open source dataset which is used in this research.
+
+## Table : 
+Subject area: | Computer Science
+More specific subject area: | Deep Learning, Biomedical Imaging
+Name of your method: | ViT-HHO: Vision Transformer Optimized by Harris Hawk Optimization for Diabetic Retinopathy Detection
+Name and reference of original method: | None
+Resource availability: | Dataset: (1) APTOS2019: https://www.kaggle.com/c/aptos2019-blindness-detection(2) IDRID: https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid
+
+## Table Table 1: IDRiD dataset distribution.
+DR Severity Level | Total Images | Training (75 %) | Validation (15 %) | Test (10 %)
+No DR (Healthy) | 134 | 101 | 20 | 13
+Mild Non-Proliferative DR | 104 | 78 | 16 | 10
+Moderate Non-Proliferative DR | 104 | 78 | 16 | 10
+Severe Non-Proliferative DR | 72 | 54 | 11 | 7
+Proliferative DR | 102 | 76 | 15 | 11
+Total | 516 | 387 | 78 | 51
+
+## Table Table 2: APTOS 2019 dataset distribution.
+DR Severity Level | Total Images | Training (75 %) | Validation (15 %) | Test (10 %)
+No DR (Healthy) | 1805 | 1354 | 271 | 180
+Mild Non-Proliferative DR | 370 | 277 | 55 | 38
+Moderate Non-Proliferative DR | 999 | 749 | 150 | 100
+Severe Non-Proliferative DR | 193 | 145 | 29 | 19
+Proliferative DR | 295 | 222 | 44 | 29
+Total | 3662 | 2747 | 549 | 366
+
+## Table Table 3: Performance comparison of baseline models on the APTOS-2019 dataset.
+Model | Accuracy (%) | Sensitivity (%) | Specificity (%) | F1-Score (%) | AUC-ROC (%)
+VGG16 | 93.12 | 92.85 | 93.35 | 92.96 | 93.40
+ResNet50 | 94.21 | 94.07 | 94.34 | 94.15 | 94.40
+Inception-v3 | 94.89 | 94.52 | 95.02 | 94.77 | 95.05
+EfficientNet-B0 | 95.73 | 95.38 | 95.88 | 95.61 | 95.85
+DenseNet-121 | 95.11 | 94.83 | 95.26 | 95.04 | 95.31
+Vision Transformer (ViT) | 96.85 | 96.44 | 97.07 | 96.65 | 96.92
+
+## Table Table 4: ViT hyperparameters used in this study.
+Parameter | Value/ Range
+Input image (H x W x C) | 224 × 224 × 3
+Patch size (P) | 16
+Number of Patches (N) | 196
+Embedding Dimension | 768
+Transformer Layer | 8
+Attention head | 3
+Dimension of each attention head | 64
+Positional embedding dimension | 768
+Dimensionalty of FFN | 3072
+
+## Table Table 5: HHO hyperparameters for ViT optimization.
+Parameter | Value/ Range
+Population size | 50
+Max iteration | 100
+Convergence criterion | 10–6
+Exploration-Exploitation Balance | Dynamically adjusted
+Escape Energy (E) | [−2, 2]
+Initial Hawk Positions | Random within defined ranges
+
+## Table Table 6: Performance comparison of optimization algorithms on ViT model (APTOS-2019 Dataset).
+Optimization Algorithm | Accuracy (%) | Sensitivity (%) | Specificity (%) | F1-Score (%) | AUC-ROC (%)
+PSO | 96.35 | 96.10 | 96.45 | 96.25 | 96.10
+WO | 96.10 | 95.85 | 96.20 | 96.00 | 96.00
+BAT | 96.50 | 96.30 | 96.60 | 96.40 | 96.40
+MVO | 96.70 | 96.55 | 96.85 | 96.65 | 96.55
+FFO | 96.45 | 96.20 | 96.50 | 96.35 | 96.30
+GWO | 97.00 | 96.85 | 97.15 | 96.95 | 96.90
+Harris Hawk Optimization (HHO) | 99.83 | 99.78 | 99.85 | 99.81 | 98.80
+
+## Table Table 7: Performance of optimized ViT on the IDRiD dataset.
+Model | Accuracy (%) | Sensitivity (%) | Specificity (%) | F1-Score (%) | AUC-ROC (%)
+ViT-HHO | 99.11 | 99.04 | 99.18 | 99.10 | 98.12
+
+## Table Table 8: Performance metrics of the proposed ViT-HHO model on IDRID dataset.
+Models | Dataset | Accuracy (%) | Sensitivity (%) | Specificity (%) | F1-Score (%) | AUC-ROC (%)
+Nahiduzzaman et al. [24] | APTOS | 97.27 | 96.00 | 95.00 | – | 98.83
+Chetoui and Akhloufi [25] | APTOS | 94.00 | 93.00 | 93.00 | – | 93.00
+Oulhadj et al. [26] | APTOS | 88.18 | 80.00 | 76.00 | 78.00 | –
+ViT (ours) | APTOS | 96.85 | 96.44 | 97.07 | 96.65 | 96.92
+ViT-HHO (ours) | APTOS | 99.83 | 99.78 | 99.85 | 99.81 | 98.80
+ViT-HHO (ours) | IDRID | 99.11 | 99.04 | 99.18 | 99.10 | 98.12
+
+## Figure Fig. 1: Proposed methodology of Diabetic Retinopathy Classification.
+
+## Figure Fig. 2: Preprocessing pipeline of fundus image.
+
+## Figure Fig. 3: Vision Transformer model.
+
+## Figure Fig. 4: Multi-head self attention (MHSA) mechanism.
+
+## Figure Fig. 5: Sample image from APTOS-2019 dataset for DR.
+
+## Figure Fig. 6: Confusion matrix for proposed ViT + HHO on APTOS-2019 datset.

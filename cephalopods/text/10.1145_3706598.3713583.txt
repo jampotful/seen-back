@@ -1,0 +1,2188 @@
+The Many Tendrils of the Octopus Map
+Eduardo Puerta, Shani Claire Spivak, Michael Correll (2025). CHI Conference on Human Factors in Computing Systems. http://arxiv.org/abs/2501.14903. doi:10.1145/3706598.3713583. Licence: cc-by. Text from pdf.
+
+The Many Tendrils of the Octopus Map
+Eduardo Puerta∗
+Shani Spivak∗
+
+Michael Correll
+m.correll@northeastern.edu
+Roux Institute, Northeastern University
+Portland, ME, USA
+
+arXiv:2501.14903v1 [cs.HC] 24 Jan 2025
+
+puerta.e@northeastern.edu
+spivak.s@northeastern.edu
+Northeastern University
+Boston, MA, USA
+
+
+
+
+  
+
+
+Figure 1: An octopus map of past ACM CHI conference locations. How does the visual motif of the octopus combined with the
+global expanse of the data points impact the perceived intent or motives of CHI?
+
+Abstract
+
+CCS Concepts
+
+Conspiratorial thinking can connect many distinct or distant ills to
+a central cause. This belief has visual form in the octopus map: a
+map where a central force (for instance a nation, an ideology, or an
+ethnicity) is depicted as a literal or figurative octopus, with extending tendrils. In this paper, we explore how octopus maps function
+as visual arguments through an analysis of historical examples as
+well as a through a crowd-sourced study on how the underlying
+data and the use of visual metaphors contribute to specific negative or conspiratorial interpretations. We find that many features
+of the data or visual style can lead to “octopus-like” thinking in
+visualizations, even without the use of an explicit octopus motif.
+We conclude with a call for a deeper analysis of visual rhetoric,
+and an acknowledgment of the potential for the design of data
+visualizations to contribute to harmful or conspiratorial thinking.
+
+• Human-centered computing → Geographic visualization;
+Empirical studies in visualization.
+
+∗ These authors contributed equally to this work.
+
+Please use nonacm option or ACM Engage class to enable CC licenses
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+© 2025 Copyright held by the owner/author(s).
+ACM ISBN 978-1-4503-XXXX-X/18/06
+https://doi.org/10.1145/3706598.3713583
+
+Keywords
+visual rhetoric, persuasive cartography, critical cartography
+ACM Reference Format:
+Eduardo Puerta, Shani Spivak, and Michael Correll. 2025. The Many Tendrils
+of the Octopus Map. In CHI Conference on Human Factors in Computing
+Systems (CHI ’25), April 26-May 1, 2025, Yokohama, Japan. ACM, New York,
+NY, USA, 20 pages. https://doi.org/10.1145/3706598.3713583
+
+1
+
+Introduction
+
+Ironically, once you’ve been exposed to this visual genre, you start
+seeing it everywhere. An enemy, hitherto imagined as a distant
+or diffuse threat, is revealed as a sinister octopus, a “soft alien intelligence” (De Luca Comandini [20], as quoted in Ronnberg [93])
+that is grasping and acquisitive. This enemy, Them (with a capital
+“T”), may have a central body somewhere, with a single goal, but
+They also have many tentacles that extend outwards encompassing
+every corner of the map. Severing one tentacle may be straightforward, but such an effort is pointless without defeating the central
+cephalopod body. When employed in a cartographic context, we
+term this conspiratorial and adversarial metaphor an octopus map
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+(Figure 1). The octopus map, either in the literal form of an octopus
+menacing a geographic region, or more indirectly as a form of “sensationalized” [75] cartography with a central but ubiquitous force,
+has centuries of precedent in political cartoons and propaganda.
+In this paper, we examine octopus maps through both an analysis
+of historical examples as well as an empirical study with the goal
+of assessing the visual and structural forms of these maps and their
+ensuing rhetorical function. We have encountered a rich space of
+octopus maps throughout history, from varied uses in iconography
+in political cartoons to more “data-driven” (but still ideological)
+cartographic forms. We find the octopuses of these maps portraying a diverse set of enemies including religious groups, ideologies,
+wartime adversaries, and abstract concepts. We assert that the octopus map forms a “visual argument” [11] that communicates a
+specific view of an adversary as a grasping and acquisitive threat.
+We hold that this visual argument rests on two pillars: first, on the
+structure of the data: that is, that certain networks and connections
+lead to their contents as being perceived as more intrinsically “octopodal” based on their graph-theoretic properties like centrality
+and connectedness. Second, on the visual metaphors [118, 119] and
+design choices made in representing these data, from representations intended to be neutral to intentionally sensationalized forms.
+In our crowdsourced evaluation, we find that, even without the
+use of a literal octopus motif, the various data or visual properties
+associated with octopus maps can nonetheless encourage threatening views of the data they represent. That is, implicit “octopus-like”
+design choices in maps can perform similar rhetorical work, and
+result in similar negative judgments about their subjects, as in maps
+with more intentionally biased or sensationalized designs.
+Therefore, while the octopus maps we discuss may reflect particularly egregious or overtly biased examples of visual rhetoric, we
+contend that the structure of data in collaboration with visual design contribute to an intended visual argument in all visualizations,
+not just a narrow slice of intentionally propagandized maps. Just as
+statistics can be cast as a form of “principled argument” [1], so too
+can visualizations perform a great deal of rhetorical and argumentative work [49, 54, 60], including emotional appeals [18]. In the
+midst of the “rapid rise” [59] of emotional appeals in data visualization, and the ubiquity of data visualizations among conspiratorial
+groups [43, 63], we point to a need to examine the unique persuasive power of charts and maps, which often take advantage of a
+(falsely) assumed trustworthiness or objectivity of data [23, 37, 70–
+72]. Visualizations are not just the dispassionate communication of
+insights in data, but can also be exploited to fan the flames of fear,
+hatred, and xenophobia [105].
+Content warning: this paper contains images depicting racist, antisemitic, xenophobic, fascist, and other hate-based or dehumanizing
+ideologies and attitudes.
+
+1.1
+
+Contributions
+
+In this paper, we provide the following contributions:
+(1) We provide a historical and visual overview of the octopus
+map as a genre of persuasive cartography and data visualization, with a particular focus on how both visual properties
+and data properties of these maps can produce “octopus-like”
+rhetorical impacts.
+
+Puerta & Spivak et al.
+
+(2) We deconstruct octopus maps based on these visual and
+structural components and conduct an empirical study to
+measure the impact of these properties on rhetorical outcomes.
+(3) We reflect on design implications for visualization designers
+in light of the moral, ethical, and rhetorical concerns that
+arise from the explicit or implicit use of persuasive design
+techniques in data visualization and cartography generally.
+
+2
+
+Related Work
+
+Our analysis of octopus maps draws on several existing, and occasionally interconnected, areas of research:
+(1) Persuasive cartography (as part of larger projects on critical
+cartography [26]).
+(2) Visual metaphors and the implicit or explicit visual rhetoric
+of these metaphors, with a particular focus on the visual
+metaphors of graph visualization, and the perception and
+visualization of structures in networks.
+
+2.1
+
+Persuasive Cartography
+
+Persuasive cartography focuses on the inherent rhetorical power
+of maps. That is, considering maps not as purely objective stores
+of equally objective data, but as intrinsically persuasive artifacts
+that contain implicit or explicit perspectives, biases, and interpretations [71, 72, 110]. While all maps have persuasive elements, Judith
+Tyner defined “persuasive maps” as those which are created by
+manipulating various cartographic elements through distortion,
+selection, symbolization, and choice of text and title [102]. Of particular relevance to our work is prior work by Muehlenhaus on
+persuasive maps [74–77]. Specifically, prior work on how certain
+visual features (like map projection, choice of symbols, and perceived dynamism) are associated with persuasive maps [76], and
+the existence of coherent visual genres of “sensationalist” [77] persuasive maps. In his study of 256 persuasive maps, Muehlenhaus
+found that while sensationalized or confrontational titles were not
+only rarely used, more subtle design choices, such as hue and the
+use of flow arrows, were common [76].
+One potential function of these sensationalist maps is to present
+an enemy as a threat or merely a threatening presence, which can
+be accomplished through the use of tools like flow lines and arrows, color, shading, and projection [72, 76]. These techniques can
+produce unintended rhetorical impacts. For instance, in work influential to our decomposition of “octopus-like” elements, van Houtum
+& Lacy [105] refer to the “trap” into which many cartographers
+fall when portraying migration data, where techniques common in
+persuasive cartography xenophobically portray migrants as exterior threats that are invading or subverting a country. Even a map
+made by scholarly cartographers, without sufficient care, “peddles a
+crude distortion of undocumented migration that smoothly splices
+into the xenophobic tradition of propaganda cartography” [105].
+For instance, the use of large colorful arrows to represent flows
+of migrants into a country mirrors maps used during wartime to
+depict invasions by exterior foes.
+
+The Many Tendrils of the Octopus Map
+
+2.2
+
+Visual Metaphors
+
+At its core, and stripped of emotional appeals, the octopus map is
+merely a visualization of a network structure superimposed with
+cartography: a central node with multiple edges fanning out across
+the map. Much of the intended persuasive work therefore relies
+on the visual metaphors [88], rhetorical framing [49], and conventions [54] used in the design and presentation of these data. We
+focus on prior work with respect to two notable components: the
+use of tentacles or tentacle-like representations of the graph structure (the structural component), and the choice of an octopus to
+represent the central node (the pictorial component). This structure
+also follows the semantic visual metaphor design process described
+by Cruz, consisting of the “adaption of the structural metaphor”
+and the “introduction of visual cues” [28, 29].
+2.2.1 Structural Metaphors. Metaphors aid the understanding of a
+domain by grounding it in another one [61]. While often associated
+with verbal language, metaphors can also be visual [88]. Cox, for
+example, argues that all data visualizations are metaphors that map
+data into forms to aid human understanding [25]. These metaphors
+can range from the “parts to whole” metaphor employed by pie
+charts to the use of lines to denote trends [114]. Cox also proposes
+a metaphor ↔ content spectrum, and argues that some metaphors
+have become conventional representations of data, like the nodelink diagram to represent graphs [25]. Similarly, Ziemkiewicz and
+Kosara characterize visual metaphors broadly as the structures
+that form a framework to understand data [117]. They found that
+participants reason about visual metaphors similarly to verbal ones,
+specifically to create mental models of the data [118]. Similarly,
+they found that the structure of the visualization metaphor can
+impact the implied dynamics [119] of points and their relations. In
+both cases, the form of the data can impact the ways that people
+reason about it. For example, they found participants perceived
+organizations presented in bubble charts as “fun” and “unserious”
+while those depicted in waffle charts as “bulky” and “regimented”.
+We propose that octopus maps similarly encourage conspiratorial
+interpretations of data, in line with other examples of conspiratorial
+visualizations that emphasize that “everything is connected” [43].
+In this paper, we focus specifically on how visual metaphors
+can impact the perception of the graph data that make up the
+octopus. The metaphor of the node-link diagram is dominant in
+graph visualization, having emerged from the 19th century with
+organizational charts, and in the 20th century with sociograms
+[22], as cited by Freeman [40]. These sociograms established many
+design conventions in modern node-link diagrams, such as the use
+of color and shape to denote attributes of nodes and edges [73].
+The use of circular layouts likewise place important and connected
+individuals in the center of these visualizations.
+While node-link diagrams might be the standard metaphor for
+network data, networks have also been represented through visual encodings like rivers to represent dynamic hierarchies [13],
+clusters of bubbles [108], or literal trees [19, 56]. Often, the goal
+of these alternate encodings is not sheer novelty’s sake, but to reexpress graph data in ways that make certain properties easier to
+detect. For example, treemaps more directly present hierarchical
+metaphors [53, 117], adjacency matrices can highlight clusters and
+cliques [81], and edge bundling may emphasize or simplify trends in
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+connectedness [38, 103, 109]. We note the visual similarity between
+the cartographically dispersed tentacles of octopus maps and flow
+maps, which use the width of the edges connecting geographical
+locations to show flows across space—for example the migration of
+people [101].
+We also draw attention to the role of metaphors in the space
+of science communication. For example, Olson et al. [82] describe
+metaphors as “key tools that are vital to science” for visual communication in biology: ways of creating, reinforcing, and unifying
+conceptions of the field through shared terminology. Olson et al.
+draw from philosophy and the study of linguistics to highlight characteristic properties of these metaphors, such as expressiveness
+(the degree to which a metaphor evokes the underlying phenomena), paraphraseability (the degree to which a metaphor can be
+replaced by equivalent or more specific terminology) and, perhaps
+most relevant to our work, an extension of Yablo’s [112] notion of
+silliness (the degree to which a metaphor contains aspects that are
+not true or relevant: for instance, the entity depicted as an octopus
+in the octopus map is almost never a literal sea creature that breaths
+underwater, has mile-long tentacles, or shoots ink). Part of the function of the octopus map is to map these “silly” characteristics onto
+a target (to portray it as a literal grasping entity with intentionality and purpose). Similarly, Pokojná et al. [88] utilize Lakhoff and
+Johnson’s [61] framework of conceptual metaphors to characterize
+the types of visual metaphors used in scientific storytelling and
+data visualization. Conceptual metaphors are defined by mapping
+properties of one domain (e.g. the alien property of cephalopods)
+to another domain (e.g. some group of people or idea), and are
+classified based on how much or the kind of meaning they map.
+These span from solely graphical, called imagistic metaphors, to
+metaphors that map whole entities and structures from the source
+to the target, denominated structural metaphors.
+2.2.2 Pictorial Visualizations. Pictorial elements in data visualization have a long and occasionally contentious record. Often, these
+visual components that do not directly encode data are disparaged
+under the (occasionally misleading) umbrella of “chartjunk” [2]. Yet,
+recent research has pointed to potential benefits for these kinds
+of “embellishments” [29]. Especially for octopus maps, where the
+rhetorical goals include affective appeals and engagement, the inclusion of “infographic” styles of pictorial visuals [46] has empirical
+benefits. For instance, improvements in memorability [9] and time
+spent lingering on the data [45].
+The pictoral elements most relevant to our work are the use
+of anthropomorphic and zoomorphic imagery in maps. There is a
+long history of using monsters or other animals in cartography, for
+instance to denote (or populate) unknown regions of the world [12,
+104] in European maps from at least the Renaissance era onwards.
+In other cases, the entity itself is used as a metonym for a country
+as a whole, with well-known examples including the 16th century
+Europa Regina (where the continent of Europe was depicted as a
+queen with various countries making up her constituent parts)
+and Leo Belgicus [68] (where the Low Countries are depicted as
+a lion rampant, with geographic information depicted inside its
+“body”). Though many animals have been used to symbolize empires,
+countries, religions, and social and political entities, the octopus
+in particular is unique in its widespread and consistent use across
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+eras, regions, and cultures [30, 102, 115]. The octopus has been
+used to incite fear, outrage, sympathy, disgust, and nationalism, all
+typically as part of a call to action.
+For the communication of conspiratorial threat, the octopus
+itself is an especially apt symbol. The octopus and semiotically
+or psychologically related symbols like the medusa, kraken, or
+hydra [20, 93, 94] have many negative cultural connotations that
+are useful for the designer of an octopus map. Cross-cultural fear of
+being captured or sucked in by the tentacles of an octopus recur in
+our dreams [21]. Each tentacle appears to move independently and
+with a mind of its own, a phenomena that Aristotle called poluplokon
+noema: a “multi-modal intelligence” [21] that is a non-human form
+of consciousness that both fascinates and repels [41]. The sinister
+connotations of the symbol of the octopus (or, an equivalent term
+seen in some of our maps, “devilfish”) suggest a particular negative
+view of the data.
+Octopus maps may be a special case where pictorial visualizations are especially useful for the (often nefarious) rhetorical goals
+of the designer. For one, the actual nature of the data (say, the
+specific graph structure) is often less important than an affective
+appeal (to, say, the omnipresence or seriousness of the threat). The
+disfluency or increased error rate observed in certain heavily pictorial or infographic-style visualizations may therefore be largely
+irrelevant, or even a “beneficial difficulty” [48]—these maps may
+function more as a form of “casual infovis” [89] directed towards
+non-experts and reliant on confirming existing attitudes towards
+the data they contain.
+
+3
+
+The Octopus Map and its Subspecies
+
+In this section, we explore a set of historical examples of octopus
+imagery in maps to both better define our genre of interest as well
+as to portray the scope, longevity, and diversity of this genre. As
+prior work illustrates [24], modern visualization practices are often
+highly influenced by historical precedents, and analyses of historical examples can provide inspiration or guidance for rhetorical
+goals or design problems that recur across centuries. Our examples are sourced variously from the last author’s personal corpus
+(amassed from 2022 onwards) of 81 examples encountered in the
+wild, as well as from museum collections [7, 90], blogs [39], and
+magazine articles [67, 78, 84, 113]. We were skeptical of the existence of satisfactorily complete or thematically exhaustive corpora,
+and so selected our corpus of examples for breadth and variety
+rather than representative completeness. Octopus maps are, in a
+somewhat contradictory fashion, ubiquitously produced but rarely
+preserved: per Barber et al. [7], “the survival of [propaganda maps]
+is extremely rare as despite being mass produced for a large audience, they were rapidly discarded and destroyed”. Likewise, there
+are many examples of maps that do not depict literal octopuses but
+are relevant in more borderline or implicit ways (see §3.3). We note
+also that, while our corpus contains both historical and contemporary examples of octopuses representing entities as varied as the
+“Evil Literature Menace”, Los Angeles, and Scientology, our decision
+to reproduce in this paper only images in the public domain or open
+archives bias the figures in this paper towards examples from the
+late 19th and mid 20th century: the earliest example reproduced in
+this paper dates from 1877 (Figure 2).
+
+Puerta & Spivak et al.
+
+Figure 2: The Serio-Comic War Map for the Year 1877 by Frederick W. Rose, published shortly after Russia attacked the
+Ottoman Empire in response to the Turkish massacre of
+Christian Bulgarians. Here Russia is depicted as the expansionist octopus, battling the Turkish Empire and grasping
+for various other countries, including Finland, Poland, and
+Persia.
+
+Not all usages of octopus iconography are octopus maps. For
+instance, political cartoons often employ an octopus to represent a
+variety of concepts, and the resulting cartoons may lack specific
+cartographic meaning, beyond the labelling of tentacles to indicate
+connected ills (Figure 3). While we collected examples of these
+non-cartographic octopus maps in order to better assess the design
+techniques that can emphasize octopus-like rhetoric, in this paper
+we focus mostly on the use of the octopus motif in persuasive
+cartography.
+We organize the examples in this section by first considering
+what we think of as canonical examples (where a country in a geographic region is portrayed as an octopus, with tentacles extending
+towards or around its neighbors). We then discuss cases that expand on this definition (for instance when, rather than a country,
+an ideology is the center of the octopodal body) or problematize it
+(as when octopus-like rhetoric is implicitly rather than explicitly
+conveyed).
+
+3.1
+
+The Canonical Octopus Map
+
+As mentioned, we consider the canonical octopus map to be a map
+where a country (or a synecdoche or other metonym for that country, such as its leader or national personification) in a geographic
+region is depicted as an octopus, with the tentacles of this octopus extending to neighboring countries or regions. These tentacles
+usually denote some negative relation such as actual or intended
+conquest, control, or other subversion of victims. For instance, one
+of the earliest known examples of an octopus map was published
+by Fred W. Rose in 1877 during the Russo-Ottoman War (Figure 2).
+
+The Many Tendrils of the Octopus Map
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+(a) From 1899, “The Menace of the Hour” depicts the new electric subway system (b) A 1904 illustration by Udo Keppler depicting the Standard Oil company as an
+in New York City as a monopolistic octopus
+octopus grasping for other industries and centers of government, including the
+U.S. Capitol and the White House
+
+Figure 3: Political cartoons using the octopus motif, in both cases implying monopolizing entities as octopuses acquisitively
+grasping for control.
+The map depicts Europe, with most countries represented by human figures, while Russia is depicted as an octopus with tentacles
+outstretched, reaching for its neighbors.
+War, as a quintessential and dramatic adversarial relation between countries, is a rich source of octopus maps. In addition to
+the Russo-Ottoman example above, octopus maps are present for
+many major 19th and 20th century conflicts, including the RussoJapanese War, World War I, World War II, the Vietnam War, and
+the Cold War era [70]. In many examples, victimized countries
+are not anthropomorphized as in Rose’s map, but are instead left
+as cartographic areas or represented by flags. For instance, the
+1882 American political cartoon “The Devilfish in Egyptian Waters” shows John Bull (the national personification of the United
+Kingdom) with octopus-like tentacles (each with a human hand)
+grasping for colonial acquisitions around the world [3] that are
+more iconic than geographic. The octopus is the central figure in
+these examples, emphasized through color, size and symbology.
+We note that octopus maps can be produced by both sides of
+a conflict, using similar visual rhetoric to produce opposing arguments. For instance, during World War I, an Entente propaganda
+map shows a Prussian octopus with an Austro-Hungarian junior
+partner (Figure 4a), with Prussian territorial gains from 1772 onwards used as evidence of Prussia’s goal of expansion and dominion.
+But a contemporaneous map from the Central Powers shows the
+British Empire’s acquisition of overseas territory from 1609 onwards as part of a campaign of control over the oceans (Figure 4b).
+This battle of maps also occurred in the Second World War—while
+depicting Germany or the ideology of fascism as an octopus was
+common in Allied propaganda (as in Figure 5), there are also examples from Axis powers (or countries occupied by Axis powers)
+severing the tentacles of the American “Dollar Octopus” [66] or
+suggesting that Axis actions were part of a “methodical” plan to
+“amputate” the tentacles of the English imperial octopus [98].
+
+3.2
+
+The Ideological Octopus
+
+The tentacles of the octopus map do not exclusively denote martial conquest. Other maps cast colonialism, imperialism, and other
+
+forms of domination or control as tentacles. Social movements have
+also leveraged the looming figure of the octopus to decry monopolies, industries, specific companies, and trade practices (Figure 3).
+In Central America, the United Fruit Company was commonly referred to as el pulpo (“the octopus”). United Fruit established a vast
+network of infrastructure supporting the banana market from the
+1870s to the mid-20th century. While no longer in operation, the
+company remains a symbol of American imperialism and greed
+owing to its long history of corruption, violence, and environmental destruction in Central and South America [16, 17]. The U.S.
+imperialist octopus therefore appears in octopus maps of Central
+American anti-imperialists (Figure 6).
+W.B. Northrop presents another example of this ideological octopus by portraying landlordism as the cephalopod’s body with its
+tendrils physically surrounding the areas of the city owned by notable English aristocrats (Figure 7). Specifically, Northrop used this
+visual motif to criticize British inequality, inspired by land reform
+proposals of liberal politician David Lloyd George. The octopus
+portrays landlords as the Octopium Landlordicus, or the “Fishy (Rent
+Eating) Creature”.
+In a more recent example from the International Journal of Cartography, Zanin and Lambert [115] examine design choices for an
+octopus map of arms sales by the NATO military alliance. They
+assess the impact of factors like map projection, color choice, and
+circle proportions, while also clearly stating the rhetorical purpose
+of the map to call out the scale and impact of arms sales from NATO
+countries and question existing hegemonic structures.
+However, these ideological octopus maps can also dehumanize religious or ethnic groups. For instance, early editions of the
+influential antisemitic text The Protocols of the Elders of Zion had
+covers depicting a Jewish octopus, snake, or spider encircling the
+globe [14], a motif that recurs in Nazi propaganda decades later.
+Fear of Jewish financial control is also part of the implicit rhetorical work in Figure 8: while the title is “The English Octopus”, a
+smirking octopus representing the Rothschild family obscures the
+already simplified and distorted cartography of the map. Given the
+history and ubiquity of octopus motifs in antisemitic work, there
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+Puerta & Spivak et al.
+
+(a) A circa 1916 octopus map from an unknown author titled “The Prussian Octopus”
+depicting Prussia as a central octopus subjugating neighboring regions. The date and (b) A circa 1917 octopus map titled “Freedom of the Seas” [4] from an unknown author
+context of the acquisition of each bit of territory is labelled in situ. Austria-Hungary is depicting England as a central octopus with tentacles extending to its far-flung island
+depicted as a (perhaps reluctant) subsidiary octopus with its own acquisitions, but still colonies. Other versions of this poster occasionally include the subtitle “England the
+under the watchful eye (and tentacle) of Prussia.
+bloodsucker of the world” [39]. The caption includes the date of control of each island.
+
+Figure 4: Two octopus maps from opposite sides of the first World War, each using similar designs and data to cast their opponent
+as an octopus. On the left, Prussia’s century of territorial change casts it as an acquisitive octopus, with the Austro-Hungarian
+empire a subordinate but nonetheless acquisitive partner in crime. On the right, English colonial acquisitions across the world
+from the 7th century onward are cast as part of a plan of control of the world’s oceans.
+are debates on the extent to which the octopus, per se, represents
+an intrinsically antisemitic symbol [31].
+
+3.3
+
+The Implicit Octopus
+
+The octopus has no monopoly on persuasive cartography. Many of
+the rhetorical goals of an octopus map (such as showing centrality or
+connectedness, or conveying menace) can be accomplished through
+other means. We were especially interested in how techniques or
+designs common to octopus maps could appear in other forms of
+maps or visualizations, and so implicitly or subtly convey what
+octopus maps might show overtly.
+Some early examples of octopus map-like structures are route
+maps like the 1837 railway traffic map by Sir Henry Harness for the
+Irish Railway Commissioners, in which passenger flow is shown
+as a network overlaid on a map ([44], as cited by Robinson [92]).
+In this map, thick lines emanate from Dublin to convey the city’s
+centrality and the ability to reach even the most remote parts of
+Ireland, although the map does not explicitly sensationalize or
+propagandize these flows. We note that many of the visual features
+we observe in octopus maps can be beneficial for reading route
+maps and other flow diagrams. For example, curved lines have been
+shown to be more effective than straight lines in flow maps, and
+are often preferred by users [6, 96]. Central nodes included in flow
+maps, rather than areas, can also lead to lower error rates in viewer
+interpretation [52].
+Other implicit examples rely heavily on network diagrams, but
+lack cartographic elements. One example is They Rule, an interactive visualization showing the interlinked boards of the top 100
+US companies in 2021 [83]. The resulting graphs are often interconnected and expansive, creating an octopus-like interpretation
+
+of the many links between major corporations. Other edge cases
+include visualizations that depict an oppressive or controlling force
+without incorporating the same central, directional force of an octopus map. Although the authors of this work were divided on this
+particular example, there are also implicitly octopodal elements in
+the “Pyramid of the Capitalist System” [79], a 1911 poster made
+for The Industrial Magazine and since then remixed, repurposed,
+or otherwise reused for anti-capitalist rhetoric into the modern
+age. In the poster, a bag of money labelled “Capitalism” is at the
+top of pyramidal structure of social classes: from the government
+leaders who “rule you” to the military who “shoot at you” and then,
+finally, the workers and farmers crushed under the weight at the
+bottom. The resulting graph structure is implicit—various layers
+are associated in a hierarchy with a central figure on top. However,
+the rhetorical message of a central controlling force is similar to
+more explicitly octopodal examples.
+It is these implicit “octopus-like” designs, and the sometimes
+fuzzy boundary between overtly sensationalized octopus maps and
+more allegedly neutral (but still potentially octopodal) designs,
+that motivated us to decompose and then evaluate the visual and
+structural elements of the canonical octopus map in the following
+sections.
+3.3.1 The Benevolent Octopus. While many examples of the octopus map portray the octopus as a villain, some depict it as a
+benevolent force (Figure 9). These examples are less common, but
+they represent an alternative version of the form worth discussing.
+In these cases, the long reach and solid grasp of tentacles can be
+seen as protective or even triumphant. For instance, a Japanese
+map from the Russo-Japanese war (Figure 9a) casts an octopus as
+
+The Many Tendrils of the Octopus Map
+
+Figure 5: The cover of a 1935 antifascist magazine depicting
+Adolf Hitler as a fascist octopus with tendrils around neighboring lands [5]. Note that, at the point of this publication,
+many of the acquisitions noted here had yet to occur (for
+instead, Austria in the Anschluss of 1938, or Alsace-Lorraine
+as part of terms of the armistice after the fall of France in
+1940).
+a symbol of Japanese victory and a tool for the expulsion of the
+enemy.
+However, given the generally negative associations of the octopus, other maps that seek to portray omnipresent connection often
+employ the implicit structures we mention in the previous section,
+producing maps that have much in common visually or stylistically
+with octopus maps while avoiding the negative connotations of the
+octopus motif. For instance, in Edward Linley Sambourne’s 1892
+caricature of British business magnate Cecil Rhodes (Figure 9b), the
+prospect of Rhodes’ proposed but never completed “Cape to Cairo”
+rail and telegraph line is represented by Rhodes himself standing
+across the African continent holding his line, connecting British
+colonies in Africa.
+As a second example, B. Milleret’s [69] 1931 illustration is a
+particularly striking example of using visual metaphors associated
+with octopus maps to depict (purportedly) benevolent rather than
+threatening relationships. Commissioned by the French Army, the
+caption reads “It is with 769,000 people that France ensures peace
+and the benefits of its civilization to 60 million native peoples.”
+While other maps in this paper have used far-flung colonial possessions to build visual arguments for a country as a threatening or
+oppressive force, in this map France is a depicted as a central “sun”,
+with tentacular rays of light reaching out to each of its colonial
+possessions throughout the world.
+While less overtly ideologically laden, other forms that convey
+octopus-like arguments or designs without intending threat or
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+Figure 6: The 1930 cover of Ante los Bárbaros (“Before the
+Barbarians”) by J. M. Vargas Vila, an anti-imperialist work
+accusing the United States of using the First World War as
+cover to continue its imperialist ambitions in the western
+hemisphere without European interference.
+proposing action are the route maps put out by airlines. Central
+hub airports are connected by arcs to destinations across the globe
+representing available flights. The resulting map gives the impression of a benevolent omnipresence: that the airline goes wherever
+you need to be.
+
+4
+
+Dissecting the Octopus Map
+
+While our historical examples have a variety of different styles, data,
+and rhetorical targets, we maintain that the overall visual arguments
+embodied by these maps have commonalities. Not all juxtapositions
+of graphs and cartography are octopodal in nature: creating sensationalized octopus-like impressions (of, say, a nefarious controlling
+body with multiple independent arms of attack), seems to involve
+a confluence of implicit or explicit choices in graphical structure
+and representation.
+After several rounds of debate and iteration among the co-authors,
+we propose the following central components of a prototypical octopus map. We also describe some of the relevant visual and rhetorical
+characteristics, specifically in relation to how the octopus mimics
+elements of conspiratorial thinking. We choose these properties
+because they allow us to analyze octopus maps via two complementary lenses: through the structure of the data underlying the map (in
+most cases, as a network of connections occurring in a spatial area)
+as well as the visual techniques layered atop this data (such as the
+decision to depict edges as literal tentacles). The confluence of these
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+Puerta & Spivak et al.
+
+Centrality: while there might appear to be a number of
+disconnected or diffuse threats, they are in fact connected
+to a single central body. Assigning blame for diverse ills
+to a single cause is the sine qua non of conspiratorial
+thinking [34–36, 51]. While centrality is straightforward
+in octopus maps—there is a literal octopus body with
+tentacles—it is also a property of graphs in general, and
+visual elements like alignment, layout, and visual motifs
+can also amplify perceived centrality [76].
+
+Figure 7: 1909 political cartoon by W. B. Northrop titled
+“Landlordism Causes Unemployment,” showing the octopus
+of landlordism strangling London, with particular neighborhoods annotated with the specific area and rent amounts
+controlled by individual landowners. Image courtesy Persuasive Maps: PJ Mode Collection, Cornell University Library.
+
+Tentacularity: this central body possesses a number of
+“tentacles”: directional threats that may appear to have some
+degree of independent control while still following the will
+of the central body. For octopus maps, this agency can
+be conveyed through visual dynamism in the tentacles,
+with the idea that each independent limb represents a
+threat and is seeking to control even if the other limbs
+are engaged elsewhere. Implicitly, tentacularity can be
+conveyed through styling to suggest incipient connections.
+Reach: These tentacles are connected to many, most, or even
+all of the potential targets. The idea that “everything is connected”, is fundamental in conspiratorial thinking [57].
+The juxtaposition of graph structure and cartographic
+space in octopus maps affords two ways of communicating omnipresence: through large numbers of edges, or
+having the edges take up large portions of the visual or
+cartographic space (e.g., the long reach of tentacles in
+Figure 4b).
+Intentionality: Despite the occasional independent movements of visualized threats, they are ultimately perceived
+to be part of an intentional strategy. Conspiracy theories
+often assign agency to small groups [34, 35] with the “intention to conspire” [80]. Visually, intentionality can be
+signaled through labels, direct cues like a sequential order of targets, with tentacles grasping for new targets, or
+more subtle cues like the gaze behavior of the octopus (as
+in Figure 6)— even subtle choices in visualization design
+can produce perceptions of causality [111].
+
+Figure 8: 1894 depiction of the Rothschilds (a prominent Jewish family highly associated with the 18th and 19th century
+European banking) as an octopus from a pamphlet written
+by William Hope Harvey in support of moving away from
+the gold standard and towards “bimetalism”.
+
+components, we hold, lends itself to the particularly conspiratorial
+nature of these sensationalized maps. However, we also maintain
+that some of these elements can act to produce “octopus-like” interpretations of maps that otherwise stray from the canonical form
+we lay out in subsection 3.1. Our user study (§5) specifically explores the extent to which these various individual components
+can be elided or altered in maps while still contributing to overall
+octopodal arguments.
+
+Grabby: The action of these tentacles is to acquire or control
+their targets. Denoting a relationship is not enough; the
+octopus has to have some influence over the objects in the
+grasp of its tentacles. Studies have linked a sense of powerlessness, often blamed on an external entity thought
+to have taken that agency away, to a propensity for conspiratorial thinking [34, 51, 99, 100]. This grabbiness can
+be very literal, with arms wrapping around victims (Figure 9), or it can pierce through the target, as shown in the
+NATO octopus [115]. Mere connection to a large number of targets could instead denote reciprocal or mutual
+relationships.
+
+The Many Tendrils of the Octopus Map
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+(b)
+(a)
+
+Figure 9: (a) 1904 print by Kiyochika Kobayashi of a Japanese victory from the Russo-Japanese war, with a victorious admiral
+sitting atop an octopus holding fish-like captured Russian ships in its tentacles. (b) 1892 political cartoon published in Punch
+magazine and illustrated by English cartoonist Edward Linley Sambourne depicts British business magnate Cecil Rhodes as a
+giant standing over the continent holding a telegraphic line, referencing his "Cape to Cairo" rail and telegraph line efforts to
+connect most of the British colonies in Africa.
+Threat: The ultimate goal of this octopus is, from the
+perspective of the reader, nefarious or threatening. While
+benevolent octopus maps do exist (see Figure 9), in most
+cases conspiratorial thinking requires “malevolent or forbidden acts” [35]. Threat is difficult to convey through
+data alone, but relies on framing effects and assumptions.
+Visually, this threat can be indicated through the expression of the octopus (although we note a variety of expressions in our corpus, from the malevolent glee in Figure 3a
+to the almost bashful Austro-Hungarian octopus in Figure 4a) or portraying negative impacts of the tentacle
+connections (such as targets struggling under a tentacle’s grasp). However, non-visual elements like biased or
+slanted titles can also influence the perception of patterns
+in data [58].
+
+Taken together, these interconnected components present an
+implicit visual argument: a centralized, nefarious body is employing multiple levers of control in multiple places to undermine or
+victimize large parts of some region or system. There are occasional
+modifications or exceptions to this general form. For instance, drawing a connection from an octopus to the semiotically similar gorgon
+or hydra [94], one can depict one or more tentacles being severed,
+either to show that the threat will remain as long as the central
+body remains, and/or that the task of defeating the octopus may be
+long and arduous. Centrality can also be violated, such as AustriaHungary acting as a second octopus under Prussia’s implied control
+in Figure 4a. In §3.3 we also note the existence of the benevolent
+octopus, where, rather than threatening, the octopus figure is meant
+to be a figure of self-identification or even exterior protection.
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+5
+
+Evaluating the Octopus Map
+
+We performed a preregistered1 crowd-sourced study to assess the
+rhetorical impact of the visual and structural components of the
+octopus map. That is, while the designers of such maps may intend for the octopus to be read as a centralized nefarious force,
+is this how these maps are interpreted by mass audiences? And
+would a less sensationalized version of the same information accomplish the same rhetorical goals? Of particular interest to us was
+whether, even for maps without explicitly octopus-inspired motifs,
+some of the more “implicit” signatures of octopus maps could inspire similar conspiratorial or adversarial responses. Motivating
+this question was prior work suggesting that these techniques (like
+directional arrows and threatening colors) can produce xenophobic
+or threatening perceptions of migrant data or other sorts of population flows [105], as well as the existence of, rather than a simple
+dichotomy between sensationalized and non-sensationalized persuasive maps, a continuum of attitudes around how the look and
+feel of maps are seen as sensationalized [75].
+Our intention with this study was therefore neither to fully map
+out the design space of octopus maps nor to precisely quantify
+how persuasive these maps are. The enormous visual and dataset
+variability of the maps just as encountered in our corpus (let alone
+in the space of persuasive cartography more generically) would
+seem to preclude a thorough investigation of the full combinatorial design space, especially for a research team of our size. The
+key importance (and sensitivity) of framing information [49] and
+individual priors [85] in visualization rhetoric would also limit the
+generalizability of any quantitative results on persuasion. Rather,
+our goal was to assess the ability of the central argument of the
+octopus map to “survive” across forms that lack one or more of the
+visual or data-based traits we identify in §4.
+We wished to provide an interpretative task that afforded both
+positive and negative interpretations of the data. We therefore opted
+to assess participant responses to octopus and octopus-like maps
+of a fictitious militarist country in a fictitious geographic region.
+This scenario limits our ability to draw tight connections with how
+sensationalist framings of data connect to real-world shifts in opinion or propensity to action, but allows us to more directly test for
+how different features of the data or design of these maps produce
+rhetorical impacts, without having to collect detailed information
+on prior attitudes (as in similar empirical looks at persuasive visualizations such as Pandey et al. [85]) or bring up as many of the
+strong emotions associated with these maps in real-world settings.
+Our decision was motivated by the entanglement of these maps
+with existing real-world sources of hate and discrimination, and
+general sensitivity around the subjects of the octopus maps in our
+corpus. We also note that prior work has shown that elaborate narrative framings do not always have predictable or expected impacts
+on crowd-sourced task performance [33]. We therefore elected for
+a relatively simple framing: a fictitious country has a number of
+military bases in neighboring countries in the region. While this
+scenario is by no means free from connections and prior beliefs
+about, e.g., the military in general (and we include an exploratory
+analysis searching for these real-world connections), it was our
+1 https://osf.io/8n5ah/?view_only=7f14c46cd644467fbe89c6ce4c01eb2a
+
+Puerta & Spivak et al.
+
+supposition that the emotional affect engendered by the manipulation of the various octopus-like features of these data would have
+rhetorical impact— that participants would see the country as, e.g.,
+engaged in a plot for regional hegemony, or engaged to undermine
+the sovereignty of its neighbors, or even as a benevolent protector.
+Additional study information including survey instruments, stimuli, anonymized participant data, and analyses,
+are available at https://osf.io/56e9u/.
+
+5.1
+
+Methods
+
+After soliciting consent, we showed participants an octopus or
+octopus-like map of a highlighted country within a fictitious geographic region with the following prompt: “This is a map showing a
+fictional country, Huskiland, that appeared in an international newspaper. The map depicts Huskiland’s military bases in the region.”
+We chose this framing as it affords both benevolent (Huskiland as
+leader of a protective military alliance) and malevolent (Huskiland
+as regional threat) interpretations.
+Participants then rated their agreement with the following statements on a 7-point rating scale from 1-Strongly disagree to 7Strongly agree. Each of these questions was intended to directly
+link to the components of the visual argument of the octopus map
+as discussed in §4. The label prefixing each question was not presented to participants, but denotes which question corresponds to
+which rhetorical component:
+(1) Centrality: Huskiland is a central military power in the
+region.
+(2) Tentacularity: Huskiland is expanding its military reach.
+(3) Reach: Huskiland is already present in many of the countries
+in the region.
+(4) Intentionality: Huskiland’s placement of bases is part of
+an intentional military strategy.
+(5) Grabby: Huskiland uses these bases to exert military or
+political control over its neighbors.
+(6) Threat: Huskiland is a threat to the peace and stability of
+the region.
+Note that these questions are rhetorically loaded: the data itself
+did not provide direct evidence for or against many of these propositions. Rather, our goal was to solicit how much of the implicit or
+explicit visual argument was communicated in the resulting map.
+As a first order attempt to capture the success or failure of the “octopus map” visual argument, we sum the scores of these six questions
+into a single “octopodality” scale value; many of our subsequent
+analyses are based on this overall value, as a proxy for the overall
+“success” of the visual argument (although note that, commensurate with other scales developed as part of psychological research,
+we would not expect, nor did we empirically observe, individual
+question components of this scale to have identical distributions or
+variability; see §5.3 for more details).
+In addition to a CAPTCHA on the survey itself, we included a
+validation question as a check for comprehension of the underlying
+map data and to exclude “click-through” behavior. Participants
+who did not correctly answer this question were compensated but
+otherwise excluded from our analysis:
+• In how many countries in the region does Huskiland
+have military bases?
+
+The Many Tendrils of the Octopus Map
+
+We lastly solicited a free-text question:
+• How would you describe the relationship between Huskiland and its neighbors in the region?
+After the main tasks, we collected participant demographics.
+We considered including post-tests for assessing both visualization
+literacy (e.g., the VLAT or mini-VLAT [86]) and propensity for
+belief in conspiracies [15], but ultimately elected not to collect
+additional information beyond gender, age, education, and selfreported familiarity with maps and charts. This decision was driven
+by both a desire to keep the task as short as possible, and also a lack
+of strong hypotheses linking visual or data features to high or low
+scores on these scales. This lack of solicitation of prior attitudes is
+somewhat at odds with prior work on persuasive visualizations [85],
+but we note that a) our decision to employ fictional settings was
+meant to reduce (although not eliminate) the impact of potential
+biases or prior beliefs and b) our research questions (around the
+preservation of the general visual argument of the octopus map
+across less explicitly sensationalized forms) are less concerned with
+the extent to which the octopus map’s visual argument is ultimately
+successful in, e.g., changing people’s minds about the potential
+malevolence of a particular entity.
+5.1.1 Stimuli. Each stimulus was a variation of the same base map
+of a fictional continent. On this continent, Huskiland was a centrally
+located country connected to several other countries in the region.
+To make the map itself, we used a Fantasy Map Generator [42], to
+weaken any potential connection between our maps and real-world
+geopolitics.
+The primary variation among stimuli was the representation
+of Huskiland and its bases in neighboring countries. In line with
+Muehlenhaus’ [76] observation that different cartographic designs
+are viewed as more or less persuasive or sensationalized, we wished
+to explore a gradient of varying map designs, ranging from the relatively straightforward maps that avoid the menacing arrows and
+sensationalized colors of “propaganda cartography” [105] all the
+way to what we viewed as the canonical octopus form (see subsection 3.1). We note that this space of potential map designs is
+quite large. In general terms, there are many representatives along
+this potential gradient of seemingly neutral to fully sensationalized
+maps, each of which with their own design parameters around
+the use of color, map projection, glyph design, titling, etc. Even
+within the specific condition of the octopus map, we note diversity
+in factors such as the octopus’ location, expression, style of tentacle (whether touching, grasping, or piercing its victims). We are
+skeptical that a single experiment could meaningfully or reliably
+explore more than a fraction of this space. We instead focus on this
+purported gradient of more or less sensationalized techniques for
+mapping inter-country relationships, with the goal of assessing the
+extent to which the central octopus argument we lay out in §4 is
+or is not conveyed across these increasingly “octopodal” levels.
+We therefore varied three factors independently across maps:
+Color, 2 levels: Either a more neutral gray color, or a red color
+we intended to be more sensationalized [72], sampled from a map
+(of a communist octopus) from our corpus.
+Edge Type, 4 levels: We represented a connection between
+Huskiland and a country through the use of color alone, as a
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+node-link diagram without directionality, as a more sensationalized form of node-link diagram with directional arrows [105], or
+using a literal octopus motif with tentacles for edges.
+Connection, 2 levels: Out of the 14 possible countries, Huskiland had bases in either four (low connection), or eight (high
+connection).
+Altogether, these factors resulted in 2 x 2 x 4 = 16 total maps.
+Figure 10 shows all of these combinations. Full size versions are
+included in our supplemental material.
+5.1.2 Participants. We recruited our participants from the Prolific2
+crowdworking platform, limiting our participant pool to residents
+of the United States who were between the ages of 18-65 and selfreported as fluent in English. We compensated participants $1,
+based on a target rate of $12/hour and an expected task duration of
+5 minutes as assessed from internal piloting. Metrics from Prolific
+reported an actual average task duration of 3 minutes 30 seconds,
+for an observed rate of $17.16/hour.
+We recruited a total of 300 participants, of whom 44 failed our
+preregistered exclusion criteria, for a final participant pool of 256
+participants. We note that, of those who failed the exclusion criteria
+(which was to correctly answer “In how many countries in the
+region does Huskiland have military bases?”), 40/44 (91%) gave an
+answer that was only one number off, indicating a potential ambiguity in the question or stimuli rather than necessarily inattention.
+We include the full data set of 300 participants in our supplemental
+materials but, as per our preregistration, present analyses of only
+256. The supplement also includes an analysis of the frequency of
+these validation failures by condition as an (admittedly incomplete)
+form of attrition analysis [116], where—in line with prior work
+such as Moere et al. [107] that suggest that stylistic embellishments
+do not reliably impede the accuracy of reading data values—we
+did not observe any consistent pattern of errors among conditions,
+although we note that our study was not sufficiently powered nor
+were our methods for detecting attrition sufficiently sophisticated
+to detect the systematic patterns of attrition that might indicate
+failure in our assumption of random assignment.
+Of the 256 participants, 134 were female, 115 male, and 7 reported other gender identities or declined to state. In terms of age,
+the plurality of participants (95) were between 25-34 years old. In
+terms of education, the plurality (109) had the highest educational
+attainment of a bachelor’s degree. On a 7-point rating scale, participants generally reported a high familiarity with graphs (𝑀 = 6.0,
+𝑆𝐷 = 0.9), maps (𝑀 = 6.0, 𝑆𝐷 = 1.1), and, to a lesser extent, political
+cartoons (𝑀 = 5.1, 𝑆𝐷 = 1.5). Additional demographic information
+is reported in our supplemental material.
+5.1.3 Analyses. We preregistered two sets of analyses. The first
+was a quantitative analysis of aggregate rating scores with respect
+to the map condition, our summative scale of “octopodality”, which
+we intended to function as the extent to which our participants
+agreed with what we view of as the overall visual argument of the
+canonical octopus map. We summed all six 1-7 rating scales into a
+single metric that corresponds with the degree of agreement with
+an overall octopus-like visual argument (as laid out in section 4). In
+2 https://www.prolific.com/
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Puerta & Spivak et al.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 10: The sixteen stimuli from our crowdsourced experiment, showing the arrangement of extraterritorial military
+bases around a fictional country, Huskiland. We varied the Color (either a gray meant to be neutral, or a red meant to be
+more sensationalized), Edge Type (representing connections via color, node-link markers, arrows, or an octopus motif), and
+Connection (either four or eight external bases).
+keeping with other related scales (such as propensity to conspiratorial thought [15], octopodality was a simple summation of items,
+resulting in valid values from 6 (if a participant rated all items as
+“1”) to 42 (if a participant rated all items as “7”). We preregistered a
+one-way ANOVA on the impact of the 16 map conditions on overall
+rating, using Tukey’s Test of Honest Significant Difference (HSD)
+as a post-hoc test to generate clusters of maps with similar ratings.
+While we did not have any specific pairwise map hypotheses, we
+did predict (but did not instantiate into specific hypotheses) that
+maps with more sensationalized “octopus-like” components, either
+identified by us as hallmarks of octopus maps or by others as hallmarks of sensationalist maps (i.e., threatening colors or arrows)
+would cluster together with higher ratings.
+The second set of preregistered analyses investigates the connection between our aggregate “octopodality” rating and the overall sentiment derived from the visual argument of the map. We
+note that our prompt was free of explicit information on the role
+of Huskiland with respect to its neighbors, or the valence of the
+relationship, and that, even in the sensationalized octopus condition, there are no markers (like frowning faces, dripping blood,
+knives or other weapons) that have been used in other octopus
+or octopus-like maps as tools to reinforce the malevolent intent
+of the octopus. We estimated sentiment, taking the response to
+our free-text question and coding it as either Positive (indicating
+that Huskiland was seen as a benevolent, protective, or otherwise
+
+positive force), Negative (Huskiland as a threatening, controlling,
+or otherwise negative force), and Neutral (mentioning both positive
+and negative aspects of the relationship, or where the response was
+too ambiguous to assign polarity). We opted for manual coding of
+trinary sentiment analysis rather than the use of automated sentiment analysis methods for the following reasons: one, since each
+participant was providing short textual responses to a single map,
+we did not think the resulting responses would be long or detailed
+enough to reliably produce meaningful or consistent automated
+sentiment scores. Two, our decision to intentionally restrict the size
+and complexity of the experimental meant that we were able to read
+each response in detail, which we believed to afford more detailed
+and accurate interpretations than automated sentiment analysis
+methods. Reading the responses in detail allowed us to conduct
+some additional qualitative analysis, which we discuss in subsubsection 5.3.2. Three, we were interested in the specific rhetorical
+impact of the stimuli and reviewing participants’ own descriptions
+of the relationship between Huskiland and its neighbors allowed
+for a deeper understanding of their interpretations (investigating
+which parts of the implicit argument appeared to have the most
+impact, rather than a shift of aggregate polarity) complementing the
+qualitative and quantitative analysis conducted on the responses.
+
+The Many Tendrils of the Octopus Map
+
+In the supplemental material, we include a comparison of our manual tags with the Qualtric’s “TextIQ”3 sentiment analysis model,
+highlighting areas of substantial (but important) disagreement.
+Our hypothesis was that participants who responded higher on
+our octopodality scale, and so imbued the map with more of the
+components we felt were intrinsic to octopus-like visual arguments,
+would be more likely to describe Huskiland negatively, as detected
+in a one-way ANOVA of the impact derived sentiment on aggregate
+rating, with a post-hoc Tukey HSD test to determine which, if any,
+of the three sentiment groups were significantly different.
+Deviations from preregistration: we made two notable deviations
+from our preregistration. The first is that, while we had initial predictions about the relative rankings of maps with respect to our
+aggregate measure, we did not have strong hypotheses about the relative impact of individual factors (which we viewed merely as tools
+for generating plausible maps rather than an a priori structured
+or complex design space) and so planned on an analysis treating
+each of the 16 map conditions independently. However, post-hoc
+analysis showed a ranking where maps with low Connection were
+consistently rated lower on our rating scales than maps high Connection. To explore these sorts of patterns we performed a second,
+three-way ANOVA of the impact of Color, Edge Type, and Connection on aggregate rating. We caution that this analysis was post-hoc,
+and that the experimental design is underpowered with respect to
+assessing three-way interactions.
+The second deviation concerns the qualitative coding: we had
+preregistered two coders would independently code results, and
+then would meet to resolve any disagreements. However, all three
+authors had time to independently code, and so we opted for more
+coders. Of the mismatches (59/256 = 23% of codes), we resolved
+differences with voting (57/59 of mismatches), or additional discussion if there was still a disagreement in polarity (2/59 of mismatches). The use of three coders meant that we could not use our
+preregistered metric of inter-rater reliability, Cohen’s 𝜅, which is
+only appropriate for a single pair of raters. We instead opted for
+the conceptually similar Fleiss’ 𝜅, which was 0.764, or “substantial
+agreement” as per the categorical levels of Landis & Koch [62].
+Our preregistration includes several areas of analysis (such as
+exploration of emergent patterns for qualitative responses), where
+we had no strong hypotheses but wished to reactively explore any
+patterns of interest. Since these analyses were by nature post hoc,
+as per our preregistration, we explicitly label them as exploratory,
+and report them separately in §5.3.
+Lastly, our supplemental material includes additional post hoc
+analyses around scale construction, correlation, and attrition analysis that were not part of our preregistration (nor connected to our
+preregistered hypotheses), but that provide additional details that
+contextualize our results or address methodological concerns.
+
+5.2
+
+Preregistered Results
+
+All analyses and figures are available in our supplemental material
+as an R markdown file. In keeping with the theme of the paper, we
+graphically report our results using octopus-like star glyphs [106].
+More traditional charts are available in the supplemental material.
+3 https://www.qualtrics.com/support/survey-platform/data-and-analysis-
+
+module/text-iq/sentiment-analysis/
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+A one-way ANOVA indicated that map type was a significant
+factor in average aggregate rating (𝐹 (15, 240) = 2.82, 𝑝 = 0.00046).
+However, a post-hoc Tukey’s HSD did not identify any statistically
+significant pairwise differences.
+The modal participant described the relationship between Huskiland and its neighbors in terms we judged to be negative (106/256 =
+41.4%), although the plurality of participants described the relationship in either neutral (77/256 = 30.1%) or positive (73/256 = 28.5%)
+terms. There was a connection between the sentiment of the freetext used to describe the relationship between Huskiland and its
+neighbors, and aggregate rating. A one-way ANOVA of the impact of sentiment on aggregate rating found a significant difference (𝐹 (2, 253) = 26.9, 𝑝 = 2.55𝑒 − 11). A post-hoc Tukey’s HSD
+found that participants who described the relationship negatively
+rated the maps significantly higher in aggregate rating (𝑀 = 33.2,
+𝑆𝐷 = 3.8) than those who used neutral (𝑀 = 30.2, 𝑆𝐷 = 4.0) or positive (𝑀 = 28.9, 𝑆𝐷 = 4.2) language. Figure 12 explores this result
+in additional detail. We note, however, that we do not propose, nor
+does our experimental design support, a particular causal linkage
+underlying this effect (e.g., if those who view the relationship as
+negative are more likely to rate the map highly, or vice versa).
+
+5.3
+
+Exploratory and Additional Analyses
+
+5.3.1 Exploratory Quantitative Analyses. In our analysis of aggregate octopodality above, we noticed a consistent clustering where
+maps with high Connection were rated more highly than maps
+with low Connection. Figure 11 shows our results in more detail, broken out by all 16 map conditions and 6 rating items. In
+a deviation from our preregistration, we conducted a three-way
+ANOVA treating Color, Edge Type, and Connection as independent factors. Connection emerged as having a significant impact
+on overall rating (𝐹 (15, 240) = 32.9, 𝑝 = 2.94𝑒 − 08). A post-hoc
+Tukey’s HSD indicated a significant difference in aggregate rating
+between maps, with low Connection rated lower in aggregate
+(𝑀 = 29.6, 𝑆𝐷 = 4.2) than maps with high Connection (𝑀 = 32.6,
+𝑆𝐷 = 4.1). Both the study authors and some participants remarked
+on the visual properties of maps with differing levels of Connection. In the low Connection condition, where the octopus has
+only four tentacles that touch only immediate neighbors, one participant (P8) even described the octopus as “cute.” (c.f. P280 in the
+high Connection condition, where Huskiland’s neighbors were
+“wrapped in tentacles that don’t seem to want to let go.”).
+While we had no strong hypotheses as to the degree to which
+the six components of the visual argument of the octopus map
+would be reported by participants, and focused our analyses on the
+aggregate of these features to better capture the visual argument
+as a whole, we did observe variability within responses, as visible
+in the aggregate glyph on the left of Figure 11. We performed a
+one-way ANOVA on the impact of each of our six scale items on
+individual rating and found a significant effect (𝐹 (5, 1530) = 75.4,
+𝑝 =< 2𝑒 − 16). A post-hoc Tukey’s HSD identified that our question
+around Threat was rated significantly lower on average (𝑀 = 4.08,
+𝑆𝐷 = 1.15, compared to an average of 𝑀 = 5.18 for all ratings)
+than all other ratings, with our question around Grabby-ness rated
+significantly higher than Threat but lower than the remaining
+four items (𝑀 = 4.93,𝑆𝐷 = 1.18). As mentioned, we had no strong
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+Puerta & Spivak et al.
+
+All Maps
+Centrality
+
+Th
+
+1
+
+Tentacularity
+
+Th
+
+Reach
+
+Intentionality
+
+7
+
+Ce
+
+Th
+
+7
+
+Ce
+
+Th
+
+7
+
+Ce
+
+Th
+
+7
+
+Ce
+
+Th
+
+7
+
+Ce
+
+Th
+
+7
+
+4
+
+4
+
+4
+
+4
+
+4
+
+4
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+7
+
+Gr Te
+
+In
+
+Re
+
+Ce
+
+Th
+
+Gr Te
+
+7
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Re
+
+Th
+
+1
+
+4
+
+Te
+
+Ce
+
+7
+
+4
+
+Re
+
+Grabby
+
+Th
+
+1
+
+In
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Gr Te
+
+7
+
+Gr Te
+
+Re
+
+In
+
+Re
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Gr Te
+
+7
+
+Gr Te
+
+In
+
+Re
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Gr Te
+
+7
+
+Gr Te
+
+In
+
+Re
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Gr Te
+
+7
+
+Gr Te
+
+In
+
+Re
+
+In
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Gr Te
+
+7
+
+Gr Te
+
+In
+
+Re
+
+Gr
+
+Gr
+
+In
+
+7
+
+Ce
+
+4
+
+1
+
+Gr Te
+
+Ce
+
+Low
+
+Te
+
+Ce
+
+4
+
+High
+
+4
+
+7
+
+High
+
+7
+
+Threat
+
+1
+
+Gr Te
+
+In
+
+Re
+
+In
+
+Figure 11: Star glyphs of our results for each map condition shown to participants, split up by maps with high (top row) and
+low (bottom row) Connection. Each arm redundantly encodes participant’s average Likert scale ratings along our six axes of
+octopodality as both hue and length, and the center of each glyph is colored based on the average across all six axes. The large
+glyph on the left shows the average rating for each of our sixth octopus aspects across all conditions. There were no significant
+pairwise difference in aggregate rating across map types, but there were significant differences between maps with high or low
+connection.
+Ratings by Sentiment
+
+Negative
+Th
+
+7
+
+Neutral
+Ce
+
+Th
+
+4
+
+Re
+
+Ce
+
+Th
+
+4
+
+1
+
+Te
+
+7
+
+Positive
+
+In
+
+Re
+
+Ce
+
+4
+
+1
+
+Gr Te
+
+7
+
+1
+
+Gr Te
+
+In
+
+Re
+
+Gr
+
+In
+
+Figure 12: Star glyphs of the relationship between the sentiment polarity we coded in participant’s free text responses,
+and the participant’s Likert scale rating of the maps they saw
+along our six axes of octopodality. Participants who described
+the relationship between Huskiland and its neighbors in negative terms rated the maps significantly higher on average
+than those who were positive, neutral, or whose stance we
+could not determine.
+hypotheses around potential differences in these ratings, but we do
+note that both the Grabby item and Threat include terms, “military
+or political control” and “threat”, respectively, that are connected
+with negative attitudes in ways that are less prominent for the other
+items. The supplemental material includes a more detailed analysis
+of the correlation between our scale metrics.
+Lastly, while our preregistered quantitative analyses focused on
+the differences in octopodality among maps, we note the overall high
+ratings on our scale (𝑀 = 31.1. 𝑆𝐷 = 4.4 out of a maximum potential value of 42). The combination of a lack of significant difference
+between map types, an (admittedly exploratory) significant difference between a data-based (Connection) rather than design-based
+map feature, and this generally high rating suggests that what we
+term to be the overall visual argument can be successfully conveyed
+even in maps that eschew what we view as overtly sensationalized
+visual metaphors and designs.
+
+5.3.2 Exploratory Qualitative Analysis. As mentioned, we intentionally chose a fictional map and scenario in order to minimize
+(although, admittedly, not eliminate) the impact of prior knowledge
+or conceptions in the rhetorical impact of our maps. Nevertheless,
+given the iconic connection of octopus maps and historical propaganda campaigns, we performed an exploratory analysis of the
+responses to our free-text question (“How would you describe the
+relationship between Huskiland and its neighbors in the region?”)
+both to observe any connections to real-world or historical scenarios as well as to assess the rationale behind judgments in polarity
+in finer detail. In keeping with our intentionally narrow scope of
+the experimental task (a short response to a single map), we note
+that these responses comprised on average less than 20 words (M
+= 16.35, SD = 12.42): about 35% of responses were 10 words of less
+(more information on the distribution of response lengths is in the
+supplemental material). As such, while all paper authors kept notes
+of emergent themes and interesting features, we did not perform a
+formal thematic analysis.
+One relevant question was the extend to which our fictional setting was or was not demonstrably entangled with existing framing
+and prejudices around real-world geopolitics. One paper author
+conducted a review of the free text responses looking for real-world
+political allusions, and then an additional analysis of term frequency
+based on common terms encountered during our pre-registered
+qualitative analysis. The full results of these searches are available
+in our supplemental material.
+In keeping with our U.S. participant pool, we found that some
+participants framed their responses through the lens of US-centered
+current or historical events and alliances, with some responses
+invoking the US and its allies in describing the relationship between
+Huskiland and its neighbors. In the cases of two such responses,
+Huskiland’s relationship with its neighbors is described in positive
+or neutral terms. For example, P16 commented, “my assumption
+is that Huskiland and its neighbors have a military defense treaty
+similar to the US and its allies, with the US having military bases
+
+The Many Tendrils of the Octopus Map
+
+in most of its allies countries.” P87 found the relationship “similar
+to the united states to the countries that they put military bases in.”
+Still, P15 found the relationship to be context-dependent, similar
+to our discussion in §3.1, noting, “It could be protective, like the
+NATO alliance or aggressive like the AXIS [sic] alliance.”
+Another emergent research question was around the particular
+characterization of the relationships (and the extent to which these
+words aligned with the “graspy” and “tentacular” components of
+the implicit argument underlying our stimuli), in particular across
+our categories of overall sentiment. One paper author also ran an
+analysis of tokens used in responses and found that, excluding
+stopwords, some of the same words were frequently used within
+responses coded as either positive or negative. Within the positively
+coded responses, some of the most commonly used words include
+variations of ”allies” (used 13 times in responses coded as positive,
+3 for negative, 2 for neutral), “protect” (used 11 times in responses
+coded as positive, 1 for negative, 5 for neutral), and “friend” (used
+11 times in responses coded as positive, 2 for negative, 2 for neutral). Positive responses were also more likely to use variations of
+the words “allow” (used 9 times in responses coded as positive, 1
+for negative, 2 for neutral) and “agreement” (used in 6 times in
+responses coded as positive, 0 for negative, 4 for neutral), characterizing the relationship between Huskiland and its neighbors as a
+willing partnership. Some of the most commonly used non-neutral
+words used in responses coded as negative include variations of
+“control” (used 26 times in responses coded as negative, 1 for positive, 2 for neutral) and “power” (used 19 times in responses coded
+as negative, 4 for positive, 6 for neutral). We also found that participants whose responses were coded as negative used some version
+of the words “tense” (9 for negative, 0 for positive and neutral),
+“invade or invasive” (4 for negative, 0 for positive and neutral), and
+“oppress” (4 for negative, 0 for positive and neutral) to describe the
+relationship between Huskiland and its neighbors.
+
+6
+
+Discussion
+
+Octopus maps are a cohesive visual genre of persuasive cartography
+with well over a century of precedent. These maps have an intended
+visual argument in which an entity is cast as a central threatening
+body with wide reaching connections, acquisitive intent, and a nefarious goal. Beyond the literal use of an octopus, octopus maps
+have commonalities in the visual strategies they use to persuade
+and the structure of the data they use for this persuasion. Crucially,
+these maps can take on rhetorical frames [49] that can implicitly promote “octopus-like” visual arguments even without literal
+cephalopod imagery. The implicit or explicit visual arguments that
+arise from octopus maps are useful for many potential rhetorical
+goals: to villainize an enemy in wartime, cast aspersions on ideologies viewed as subversive or dangerous, or to promote (potentially
+conspiratorial) connections between events that would otherwise
+seem unrelated. It is possible to identify “octopus-like” framings
+and design patterns in a wide range of maps and visualizations.
+Our results suggest that the presence of a literal octopus is not
+necessary for viewers to assume negative intent or produce octopuslike conclusions, even with relatively little prompting. We find that
+even maps we designed to be relatively free of overtly sensationalized persuasive elements could still engender negative sentiments
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+and attributions of ill-intent in similar magnitudes to designs more
+directly inspired by propaganda posters and conspiracy theorists.
+Furthermore, while we caution the uncritical use of this evidence,
+our exploratory analysis suggests that the structure of the data (i.e.,
+the number and connection of nodes) may have a larger impact
+on the rhetorical success of a sensationalized map than more traditional flourishes, like threatening arrows or grasping tentacles. The
+very act of framing a country as having large numbers of unilateral (although, admittedly in our experimental framing, explicitly
+militaristic) connections to its neighbors may intrinsically suggest
+adversarial and acquisitive relationships.
+However, we note that the selection and framing of these data is
+just as much a design choice as how edges and nodes are visualized.
+An example from Muehlenhaus [77] shows how the large number
+of U.S. military assets near Iran can support two opposing octopuslike framings. Per one map, published in an article in the Daily
+Mail, “How Iran can strike US targets in the Middle East: Missiles,
+sea mines, drones and battle-hardened jihadist militias stand ready
+throughout the region amid mounting tensions” [50], Iran is cast
+implicitly as an octopus-like threat with multiple tentacular avenues
+of attack throughout the region. Yet, an Al Jazeera infographic,
+“Map: US bases encircle Iran” [87] uses similar data to implicitly
+depict an American octopus, with multiple nearby bases poised to
+attack internally into Iran.
+We acknowledge that octopus maps are an extreme example of
+rhetorical structure in charts: the adversarial and conspiratorial
+nature of these maps are often obvious, relying on well-worn tropes
+and existing wellsprings of animus or conspiratorial thought. Still,
+other forms of data design are not free from such considerations.
+We charge designers to consider the implicit and explicit visual
+arguments in their designs carefully and with intention. We also sign
+on to the underpinnings of projects like Data Feminism [27, 32] that
+hold that structures of oppression and exclusion make themselves
+felt in the ways that data are collected, structured, and visualized,
+sometimes without even conscious awareness of the designers of
+these visualizations.
+
+6.1
+
+Design and Ethical Implications
+
+We recognize that, while the modal reader of this paper might
+encounter an octopus or octopus-like map in their day-to-day (a
+perhaps unfortunate side effect of this work is that the authors now
+have started seeing the hallmarks of these maps almost everywhere
+we look), they are unlikely to be specifically asked to design or
+evaluate an octopus map of their own. Our implications for design
+therefore concern—much as Rensink [91] dubs scatterplots to be
+the “fruit flies” of graphical perception work for their utility as a
+test bed— the extent to which octopus maps can serve as meaningful “fruit flies” for the space of visual rhetoric and persuasive
+cartography. While once again urging the reader to avoid overinterpreting or over-generalizing the results we produce from an
+idiosyncratic corpus and an intentionally tightly-scaled empirical
+analysis, we believe that our results can provide guidance (even if
+only inchoate) across three critical areas of visualization research,
+ethics, and design.
+6.1.1 Sensationalization in Data Visualization and Cartography.
+There is a temptation among visualization designers (especially in
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+academic visualization) to (falsely) view one’s work as “the mere
+reporting or structuring of objective fact” [23], with the work of persuasion or rhetorical appeals seen as the exclusive purview of bad
+or manipulative actors. Our results, however, suggest that cartography and visualization cannot be neatly divided into sensationalized
+“persuasive” maps and charts versus more “neutral” charts without
+overt rhetorical intent. Persuasive elements are not merely a visual
+style that is applied on top of otherwise neutral data to render it
+sensationalized; choices of how to frame, select, and structure the
+underlying data can all perform important rhetorical or persuasive
+work, regardless if edges in a graph are grasping red tentacles or
+neutral gray lines. Even designers who are careful to avoid the
+design hallmarks of propaganda maps can still find their audiences
+captured by conspiratorial or adversarial views.
+Readers, too, bring their own expectations and contexts with
+them to maps and charts, further complicating the possibility of any
+clear dichotomy between neutral or sensationalized views of data.
+The good intent of visualization designers is not sufficient to avoid
+moral culpability for how visualizations can be misinterpreted or
+misused for conspiratorial ends. An example is the rhetorical use of
+visualizations of COVID-19 data [63], where seemingly laudatory
+data literacy activities like questioning sources, assessing positionality, and conducting alternative analyses were used to support
+conspiratorial thinking.
+We do, however, echo the advice of van Houtum [105] and the
+principles in resources like the “Do No Harm Guide” [95] to avoid
+the (sometimes subtle) design choices that can marginalize or disparage vulnerable populations. While our empirical findings suggest
+that some of the impacts of avoiding such visual design choices
+may be small or stochastic, or at the very least dwarfed buy other
+considerations in how maps are interpreted, the duties and responsibilities to the people represented in our datasets charge us to take
+every effort to avoid the language of invasion and subversion, visual
+or otherwise. We also charge readers of data visualizations to avoid
+the temptation to be satisfied by a surface-level judgment that, just
+because a visualization lacks the hallmarks of a sensationalized
+map, that it is therefore free from the many ways that designers
+can manipulate or mislead their audiences [64, 65].
+
+6.1.2 Visual Metaphors. The use of the metaphor of the octopus is
+entangled with a wide array of implicit and explicit meanings, some
+of which are situated in specific historical and cultural contexts.
+Attempting to understand the octopus map without understanding
+the octopus motif is to elide large portions of the designer’s intent
+on how these maps are meant to be read. However, we hold that
+these sorts of entanglements are not unique to extreme examples
+like the octopus map, but that the complexities of visual metaphors
+run through even the most quotidian of charts and maps. For instance, as per Ziemkiewicz and Kosara [118], whether nodes in a
+tree are perceived as being contained by their parents or are descended from their parents can be influenced by both the visual
+representation used and also the preconceptions of the viewer.
+The impact of a visual metaphor is influenced by a number of
+factors (like familiarity, priming, and expressiveness), not all of
+which are directly amenable to standard evaluative methods in
+graphical perception. Exploring or evaluating a visualization for its
+
+Puerta & Spivak et al.
+
+metaphorical content may look more like Bares et al.’s close reading [8], or Pokojná et al.’s deconstruction [88] than a straightforward
+quantitative assessment of visual encodings with respect to their
+legibility or efficiency. More than suggesting the necessity of adapting or creating methods for visualization research or design, we
+believe that visual metaphors are also a crucial part of rethinking
+visualization pedagogy. Visualization literacy is potentially less of
+a process of learning how to decode or extract data values from
+charts but also a process of building familiarity with common visual
+metaphors and genres.
+6.1.3 Visualization Rhetoric. As mentioned, at a low level of description of the underlying data, an octopus map is merely a juxtaposition of a graph structure with cartography. Yet, the emotional and
+propaganda purposes to which these maps have been employed suggest that there are intended rhetorical goals for these maps above
+and beyond simply reading and understanding the underlying data.
+There is more to the success or failure of such visualizations than
+the efficiency with which data values are extracted [10] (in Aristotlean terms, the logos of a visual argument): the ethos and pathos
+of a chart are likewise increasingly critical to the chart’s intended
+and actual impact [59]. The octopus map is therefore a visual argument [11]: it has an intended context, and intended audience, and
+intended interpretation.
+Our empirical results that fail to identify an obvious difference between octopus maps and less overtly manipulative designs suggest
+one (or, likely, both) of two conclusions: either (as we suggest above)
+that this apparent boundary between propagandist and “neutral”
+cartographer is more porous than prior work assumed and/or that
+we lack the empirical tools to holistically assess the implicit rhetorics
+of data visualization. While prior work has asserted that implicit
+rhetorics shape our conception of data visualization in ways large
+and small [54, 60], empirical evaluation of these claims is likely
+to require new approaches and new methods. For instance, more
+precise elicitation methods [47], better accounting for Bayesian priors [55], and longitudinal assessments of not just comprehension
+of a single data visualization, but of how the persuasive power of a
+data visualization integrates into a holistic information ecosystem
+of existing narratives and perspectives.
+
+6.2
+
+Limitations
+
+We reiterate several key limitations in both of our historical analysis
+and crowd-sourced study.
+For our historical analysis, we note that biases in what propaganda maps are or are not retained and archived likely prevents
+anything like a truly representative corpus of octopus maps. Our
+analysis of the corpus we did collect likewise focuses on the visual
+and topical forms of these maps: we are not historians, and the sheer
+breadth of time periods, languages, cultural settings, and political
+viewpoints we encountered in our search necessitate lacunae in
+our understandings of the finer details or broader impacts of these
+maps.
+With respect to the design of our crowd-sourced study, we note
+that our desire to keep the scope of the experiment relatively small
+and the amount of data collected in line with what we as a research team could meaningfully and individually analyze precludes
+meaningful empirical data on several pertinent research questions.
+
+The Many Tendrils of the Octopus Map
+
+Beyond our previously stated admission that our choice of stimuli
+includes only a fraction of the potentially relevant design and measurement space, our study design does not afford analysis of preand post-exposure shifts in attitudes (as in common in other works
+on visualization rhetoric [85]), and is not sufficiently powered to robustly identify complex interaction effects. We also note that, while
+our choice of a scenario using a fictional country was made in an
+attempt to ameliorate potential biases from real-world geopolitics,
+we are under no illusions that any truly “bias-free” prompt exists,
+and the prior assumptions or ready-to-hand examples of military relationships could (and, for some participants where their responses
+made explicit mention of historical or contemporary examples, did)
+influence how our maps were read. A potential avenue of future
+work would be to see just how innocuous a task setting can be
+while still producing conspiratorial interpretations (as an example,
+whether “octopus-like” maps of airline destinations or trade routes
+could be read as negatively monopolistic or expansionist), although
+we are cognizant of the fragility and unreliability of such framing
+effects in crowd-sourced studies [33].
+With respect to the results from our study, our preregistered
+results generally fail to identify reliable effects, and much of our
+statistically significant results are based on non-preregistered or
+exploratory findings that we would encourage readers to take with
+a grain of salt, at least in the absence of follow-on confirmatory
+work. We wish to avoid over-claiming, and, in lieu of conducting a large number of (potentially underpowered) analyses with
+a high number of “researcher degrees of freedom” [97], default to
+providing sufficient detail and data in the supplemental material
+for future replication or re-analysis. However, as mentioned, we
+view our negative findings as interesting in their own right, as
+they suggest at the very least that octopus maps are not obviously
+and reliably distinct from their less-sensationalizes cousins along
+the rhetorical components we identified, and as an existence proof
+that participants can and do draw conspiratorial and “octopus-like”
+conclusions from a variety of comparatively anodyne map designs
+with relatively little prompting.
+
+6.3
+
+Conclusion
+
+The octopus map is a particularly striking example of a sensationalized form of data visualization: a form of map that draws on an
+extended history of conspiratorial thinking to promote a particularly sinister view of an entity and its relationship to a geographic
+expanse. Nation-states, corporations, ideologies, and even abstract
+concepts have all been portrayed as a central controlling octopus.
+Yet, the implicit and explicit visual argument of the octopus map
+is not unique, but is visible in more subtle guises in the ways that
+even well-meaning designers choose to convey geographic flows
+and networks. These implicit octopus forms have rhetorical power,
+impacting the ways that viewers interpret the data underlying maps
+and charts, bending them towards adversarially and conspiratorial
+framings. In short, we hold that the many sinister tendrils of octopus maps extend throughout the ways that data are conceived of,
+visualized, and interpreted.
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+Acknowledgments
+Thank you to Laura Anna Garrison, Jane Adams, and Racquel Fygenson for their feedback on this paper. We also acknowledge funding
+support from Khoury College.
+
+References
+[1] Robert P Abelson. 1995. Statistics as principled argument. Psychology Press,
+United Kingdom. https://doi.org/10.4324/9781410601155
+[2] Derya Akbaba, Jack Wilburn, Main T. Nance, and Miriah Meyer. 2021. Manifesto
+for Putting ’Chartjunk’ in the Trash 2021! arXiv:2109.10132 [cs.HC] https:
+//arxiv.org/abs/2109.10132
+[3] Hamza Akengin. 2022. An assessment of the use of cartoons in political geography and geopolitics. , 286–297 pages. https://doi.org/10.32003/igge.977582
+[4] Anonymous. 1917 (circa). Freiheit der Meere. https://digitalcollections.hoover.
+org/objects/14104/freiheit-der-meere-. Hoover Institution Library and Archives.
+[5] Anonymous. 1935. Fight Against War and Fascism. http://hdl.handle.net/2333.
+1/9s4mw893. The Tamiment Library and Robert F. Wagner Labor Archives.
+[6] Moshe Bar and Maital Neta. 2006. Humans Prefer Curved Visual Objects.
+Psychological Science 17, 8 (2006), 645–648. https://doi.org/10.1111/j.1467-9280.
+2006.01759.x PMID: 16913943.
+[7] Peter Barber, Tom Harper, et al. 2010. Magnificent maps: Power, propaganda and
+art. British Library, United Kingdom. https://doi.org/10.1111/j.1475-4959.2010.
+00390_2.x
+[8] Annie Bares, Daniel F. Keefe, and Francesca Samsel. 2020. Close Reading for
+Visualization Evaluation. IEEE Computer Graphics and Applications 40, 4 (2020),
+84–95. https://doi.org/10.1109/MCG.2020.2993889
+[9] Scott Bateman, Regan L. Mandryk, Carl Gutwin, Aaron Genest, David McDine,
+and Christopher Brooks. 2010. Useful junk? the effects of visual embellishment
+on comprehension and memorability of charts. In Proceedings of the 2010 CHI
+Conference on Human Factors in Computing Systems. Association for Computing
+Machinery, New York, NY, USA, 2573–2582. https://doi.org/10.1145/1753326.
+1753716
+[10] Enrico Bertini, Michael Correll, and Steven Franconeri. 2020. Why shouldn’t
+all charts be scatter plots? beyond precision-driven visualizations. In 2020 IEEE
+Visualization Conference (VIS). IEEE, Utah, USA, 206–210. https://doi.org/10.
+1109/VIS47514.2020.00048
+[11] J Anthony Blair. 2012. The possibility and actuality of visual arguments. Springer,
+Netherlands, 205–223. https://doi.org/10.1007/978-94-007-2363-4_16
+[12] Erin C Blake. 1999. Where Be Dragons? Mercator’s World 4, 4 (1999), 80–80.
+[13] F. Bolte, M. Nourani, E. D. Ragan, and S. Bruckner. 2021. SplitStreams: A Visual
+Metaphor for Evolving Hierarchies. IEEE TVCG 27, 08 (aug 2021), 3571–3584.
+https://doi.org/10.1109/TVCG.2020.2973564
+[14] Stephen Eric Bronner. 2003. A rumor about the Jews: Antisemitism, conspiracy,
+and the Protocols of Zion. Oxford University Press, United Kingdom. https:
+//doi.org/10.1007/978-3-319-95396-0
+[15] Robert Brotherton, Christopher C French, and Alan D Pickering. 2013. Measuring belief in conspiracy theories: The generic conspiracist beliefs scale. Frontiers
+in psychology 4 (2013), 279. https://doi.org/10.3389/fpsyg.2013.00279
+[16] Marcelo Bucheli. 2005. Bananas and Business. New York University Press, New
+York, NY. https://doi.org/10.18574/nyu/9781479838226.001.0001
+[17] Marcelo Bucheli. 2008. Multinational corporations, totalitarian regimes and economic nationalism: United Fruit Company in Central America, 1899–1975. Business History 50, 4 (2008), 433–454. https://doi.org/10.1080/00076790802106315
+[18] Sarah Campbell and Dietmar Offenhuber. 2019. Feeling numbers: The emotional
+impact of proximity techniques in visualization. Information Design Journal 25,
+1 (2019), 71–86. https://doi.org/10.1075/idj.25.1.06cam
+[19] E. B. Chlan and Penny Rheingans. 2004. A Botanically Inspired HighDimensional Visualization with Multivariate Glyphs. In Eurographics / IEEE
+VGTC Symposium on Visualization, Oliver Deussen, Charles Hansen, Daniel
+Keim, and Dietmar Saupe (Eds.). The Eurographics Association, the Netherlands,
+231–236. https://doi.org/10.2312/VisSym/VisSym04/231-236
+[20] Federico De Luca Comandini. 1988. The octopus: Metamorphoses of an imaginal
+animal. https://www.springpublications.com/springjournal_index.html. Spring
+48 (1988), 91–107.
+[21] Federico De Luca Comandini. 1991. Dream Psychology and Jungian Clinical
+Attitude. https://nla.gov.au/nla.cat-vn1182455. In Personal and Archetypal Dynamics in the Analytical Relationship: Proceedings of the Eleventh International
+Congress for Analytical Psychology, Paris, 1989. Daimon, Switzerland, 181.
+[22] Carlos D. Correa. 2017. History and Evolution of Social Network Visualization.
+Springer New York, New York, NY, 1001–1017. https://doi.org/10.1007/978-14614-7163-9_102-1
+[23] Michael Correll. 2019. Ethical dimensions of visualization research. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems.
+Association for Computing Machinery, New York, NY, USA, 1–13. https:
+//doi.org/10.1145/3290605.3300418
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+[24] Michael Correll and Laura Garrison. 2024. When the Body Became Data: Historical Data Cultures and Anatomical Illustration. In Proceedings of the 2024 CHI
+Conference on Human Factors in Computing Systems. Association for Computing
+Machinery, New York, NY, USA, 1–18. https://doi.org/10.1145/3613904.3642056
+[25] Donna J. Cox. 2004. The Art and Science of Visualization: Metaphorical Maps
+and Cultural Models. Technoetic arts: a journal of speculative research 2, 2 (2004),
+71–80. https://doi.org/10.1386/tear.2.2.71/0
+[26] Jeremy W Crampton and Jonh Krygier. 2018. An introduction to critical cartography. ACME: An International E-Journal for Critical Geographies 4, 1 (2018),
+11–33. https://doi.org/10.14288/acme.v4i1.723
+[27] Caroline Criado Pérez. 2019. Invisible Women: Exposing Data Bias in a World
+Designed for Men. Vintage Books, New York, NY. https://doi.org/10.3399/
+bjgp20X709745
+[28] Pedro Cruz. 2015. Wrongfully right: applications of semantic figurative
+metaphors in information visualization. https://doi.org/10.13140/RG.2.1.1365.
+6727
+[29] Amaral Melo da Cruz, Pedro Miguel. 2016. Semantic Figurative Metaphors
+in Information Visualization. Ph. D. Dissertation. Universidade de Coimbra.
+https://www.proquest.com/dissertations-theses/semantic-figurativemetaphors-information/docview/2700777571/se-2
+[30] Imre Josef Demhardt. 2023. Maps in History: Allegorical maps in human shapes.
+International Journal of Cartography 9, 1 (2023), 136–137. https://doi.org/10.
+1080/23729333.2022.2135067
+[31] E.J. Dickson. 2023.
+Is This Cute Lil’ Guy an Antisemitic Hate Symbol? https://www.rollingstone.com/culture/culture-features/blue-octopussymbol-jews-antisemitism-history-1234907199/.
+[32] Catherine D’ignazio and Lauren F Klein. 2023. Data feminism. MIT press,
+Boston, MA. https://doi.org/10.7551/mitpress/11805.001.0001
+[33] Evanthia Dimara, Anastasia Bezerianos, and Pierre Dragicevic. 2017. Narratives in crowdsourced evaluation of visualizations: A double-edged sword?. In
+Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. Association for Computing Machinery, New York, NY, USA, 5475–5484.
+https://doi.org/10.1145/3025453.3025870
+[34] Karen M. Douglas and Robbie M. Sutton. 2018. Why conspiracy theories
+matter: A social psychological analysis. European Review of Social Psychology 29, 1 (2018), 256–298. https://doi.org/10.1080/10463283.2018.1537428
+arXiv:https://doi.org/10.1080/10463283.2018.1537428
+[35] Karen M. Douglas and Robbie M. Sutton. 2023. What Are Conspiracy Theories? A
+Definitional Approach to Their Correlates, Consequences, and Communication.
+Annual Review of Psychology 74, Volume 74, 2023 (2023), 271–298. https://doi.
+org/10.1146/annurev-psych-032420-031329
+[36] Karen M. Douglas, Robbie M. Sutton, Mitchell J. Callan, Rael J. Dawtry, and
+Annelie J. Harvey. 2016. Someone is pulling the strings: hypersensitive agency
+detection and belief in conspiracy theories. Thinking & Reasoning 22, 1 (2016),
+57–77. https://doi.org/10.1080/13546783.2015.1051586
+[37] Johanna Drucker. 2012. Humanistic theory and digital scholarship. Debates in
+the digital humanities 150 (2012), 85–95. https://doi.org/10.5749/minnesota/
+9780816677948.003.0011
+[38] Ozan Ersoy, Christophe Hurter, Fernando Paulovich, Gabriel Cantareiro, and
+Alex Telea. 2011. Skeleton-Based Edge Bundling for Graph Visualization. IEEE
+TVCG 17, 12 (2011), 2364 – 2373. https://doi.org/10.1109/TVCG.2011.233
+[39] Michelle Farran. 2013. Vulgar Army: Octopus in Propaganda and Political
+Cartoons. https://vulgararmy.tumblr.com/.
+[40] Linton c. Freeman. 2000. Visualizing Social Networks.
+https://api.
+semanticscholar.org/CorpusID:9481042
+[41] Peter Godfrey-Smith. 2016. Other minds: The octopus, the sea, and the deep origins
+of consciousness. Farrar, Straus and Giroux, New York,NY.
+[42] Max Haniyeu. 2017. Fantasy Map Generator. https://github.com/Azgaar/
+Fantasy-Map-Generator Accessed on February 22, 2024.
+[43] Matthew N. Hannah. 2021.
+A Conspiracy of Data: QAnon, Social
+Media, and Information Visualization.
+Social Media + Society 7, 3
+(2021), 20563051211036064.
+https://doi.org/10.1177/20563051211036064
+arXiv:https://doi.org/10.1177/20563051211036064
+[44] Henry Drury Harness. 1838. Atlas to accompany 2d report of the Railway
+Commissioners Ireland.
+[45] Steve Haroz, Robert Kosara, and Steven L Franconeri. 2015. Isotype visualization:
+Working memory, performance, and engagement with pictographs. In Proceedings of the 33rd annual Proceedings of ACM SIGCHI. Association for Computing
+Machinery, New York, NY, 1191–1200. https://doi.org/10.1145/2702123.2702275
+[46] Lane Harrison, Katharina Reinecke, and Remco Chang. 2015. Infographic Aesthetics: Designing for the First Impression. In Proceedings of the 33rd Annual
+Proceedings of ACM SIGCHI (CHI ’15). Association for Computing Machinery,
+New York, NY, USA, 1187 – 1190. https://doi.org/10.1145/2702123.2702545
+[47] Jessica Hullman. 2016. Why evaluating uncertainty visualization is error prone.
+In Proceedings of the Sixth Workshop on Beyond Time and Errors on Novel Evaluation Methods for Visualization. Association for Computing Machinery, New
+York, NY, USA, 143–151. https://doi.org/10.1145/2993901.2993919
+
+Puerta & Spivak et al.
+
+[48] Jessica Hullman, Eytan Adar, and Priti Shah. 2011. Benefitting InfoVis with
+Visual Difficulties. IEEE TVCG 17, 12 (2011), 2213–2222. https://doi.org/10.1109/
+TVCG.2011.175
+[49] Jessica Hullman and Nick Diakopoulos. 2011. Visualization Rhetoric: Framing
+Effects in Narrative Visualization. IEEE TVCG 17, 12 (2011), 2231–2240. https:
+//doi.org/10.1109/TVCG.2011.255
+[50] Ross Ibbetson. 2019.
+How Iran can strike US targets in the Middle East: Missiles, sea mines, drones and battle-hardened jihadist
+militias stand ready throughout the region amid mounting tensions.
+https://www.dailymail.co.uk/news/article-7053631/SCENARIOS-Irans-reachputs-U-S-forces-allies-striking-range.html.
+[51] Roland Imhoff and Martin Bruder. 2014. Speaking (Un–)Truth to Power: Conspiracy Mentality as A Generalised Political Attitude. European Journal of
+Personality 28, 1 (2014), 25–43. https://doi.org/10.1002/per.1930
+[52] Bernhard Jenny, Daniel M. Stephen, Ian Muehlenhaus, Brooke E. Marston, Ritesh
+Sharma, Eugene Zhang, and Helen Jenny. 2016. Design principles for origindestination flow maps. Cartography and Geographic Information Science 45, 1
+(nov 2016), 62–75. https://doi.org/10.1080/15230406.2016.1262280
+[53] B. Johnson and B. Shneiderman. 1991. Tree-maps: a space-filling approach
+to the visualization of hierarchical information structures. , 284-291 pages.
+https://doi.org/10.1109/VISUAL.1991.175815
+[54] Helen Kennedy, Rosemary Lucy Hill, Giorgia Aiello, and William Allen. 2016.
+The work that visualisation conventions do. Information, Communication &
+Society 19, 6 (2016), 715–735. https://doi.org/10.1080/1369118X.2016.1153126
+[55] Yea-Seul Kim, Logan A Walls, Peter Krafft, and Jessica Hullman. 2019. A bayesian
+cognition approach to improve data visualization. In Proceedings of the 2019 CHI
+Conference on Human Factors in Computing Systems. Association for Computing
+Machinery, New York, NY, USA, 1–14. https://doi.org/10.1145/3290605.3300912
+[56] E. Kleiberg, H. van de Wetering, and J.J. van Wijk. 2001. Botanical visualization
+of huge hierarchies. https://doi.org/10.1109/INFVIS.2001.963285
+[57] Peter Knight. 2002. Conspiracy nation: The politics of paranoia in postwar America.
+NYU Press, New York, NY.
+[58] Ha-Kyung Kong, Zhicheng Liu, and Karrie Karahalios. 2018. Frames and slants
+in titles of visualizations on controversial topics. In Proceedings of the 2018 CHI
+conference on human factors in computing systems. Association for Computing
+Machinery, New York, NY, USA, 1–12. https://doi.org/10.1145/3173574.3174012
+[59] Charles Kostelnick. 2016. The re-emergence of emotional appeals in interactive
+data visualization. Technical Communication 63, 2 (2016), 116–135.
+[60] Charles Kostelnick and Michael Hassett. 2003. Shaping information: The rhetoric
+of visual conventions. SIU Press, Carbondale, IL. https://doi.org/10.1177/
+1050651905278320
+[61] George. Lakoff and Mark Johnson. 1980. Metaphors we live by. University of
+Chicago Press, Chicago, IL.
+[62] J Richard Landis and Gary G Koch. 1977. The measurement of observer
+agreement for categorical data. Biometrics 33, 1 (1977), 159–174. https:
+//doi.org/10.2307/2529310
+[63] Crystal Lee, Tanya Yang, Gabrielle D Inchoco, Graham M Jones, and Arvind
+Satyanarayan. 2021. Viral visualizations: How coronavirus skeptics use orthodox
+data practices to promote unorthodox science online. In Proceedings of the
+2021 CHI Conference on Human Factors in Computing Systems. Association for
+Computing Machinery, New York, NY, USA, 1–18. https://doi.org/10.1145/
+3411764.3445211
+[64] Maxim Lisnic, Alexander Lex, and Marina Kogan. 2024. "Yeah, this graph
+doesn’t show that": Analysis of Online Engagement with Misleading Data
+Visualizations. In Proceedings of the 2024 CHI Conference on Human Factors in
+Computing Systems. Association for Computing Machinery, New York, NY, USA,
+1–14. https://doi.org/10.1145/3613904.3642448
+[65] Maxim Lisnic, Cole Polychronis, Alexander Lex, and Marina Kogan. 2023. Misleading beyond visual tricks: How people actually lie with charts. In Proceedings of the 2023 CHI conference on human factors in computing systems.
+Association for Computing Machinery, New York, NY, USA, 1–21. https:
+//doi.org/10.1145/3544548.3580910
+[66] Louis Emile Manche. 1942. De Dollarpoliep. https://digital.library.cornell.edu/
+catalog/ss:19343543. P.J. Mode collection of persuasive cartography, #8548.
+Division of Rare and Manuscript Collections, Cornell University Library..
+[67] Allison Meier. 2017. The Octopus, a Motif of Evil in Historical Propaganda
+Maps. https://hyperallergic.com/375900/the-map-octopus-a-propaganda-motifof-spreading-evil/.
+[68] Peter Meurer. 2008. Europa Regina. 16th century maps of Europe in the form of
+a queen. , 355-370 pages.
+[69] B Milleret. 1931. “C’est avec 76.900 hommes que la France...”. https://www.
+photo.rmn.fr/archive/93-005939-2C6NU0HUTYB5.html.
+[70] PJ Mode. 2017. “Not Maps At All”’ – What Is Persuasive Cartography? And
+Why Does It Matter? The Portolan 100 (2017), 8–26.
+[71] Mark S. Monmonier. 1995. Drawing the line : tales of maps and cartocontroversy.
+Cartographic Perspectives 22 (1995), 15. https://doi.org/10.14714/CP22.781
+[72] Mark S. Monmonier. 1996. How to lie with maps (2nd ed.). University of Chicago
+Press, Chicago, IL. https://doi.org/10.2307/2685420
+
+The Many Tendrils of the Octopus Map
+
+[73] J.L. Moreno. 1934. Who shall survive? A new approach to the problem of human
+interrelations. Nervous and Mental Disease Publishing Company, Baltimore,
+MD. https://doi.org/10.1037/10648-000
+[74] Ian Muehlenhaus. 2012. Beyond Biased: Exploring the Relationship between
+Map Design Style and Map Reader Persuasion. https://cartogis.org/autocarto/
+autocarto-2012/.
+[75] Ian Muehlenhaus. 2012. If looks could kill: The impact of different rhetorical
+styles on persuasive geocommunication. The Cartographic Journal 49, 4 (2012),
+361–375. https://doi.org/10.1179/1743277412Y.0000000032
+[76] Ian Muehlenhaus. 2013. The design and composition of persuasive maps. Cartography and Geographic Information Science 40, 5 (2013), 401–414. https:
+//doi.org/10.1080/15230406.2013.783450
+[77] Ian Muehlenhaus. 2014. Going viral: The look of online persuasive maps. Cartographica: The International Journal for Geographic Information and Geovisualization 49, 1 (2014), 18–34. https://doi.org/10.3138/carto.49.1.1830
+[78] Attila Nagy. 2015. 21 Bizarre Maps That Depict Nations As Animals, People,
+And Monsters. https://gizmodo.com.au/2015/03/21-bizarre-anthropomorphicmaps-that-turn-nations-into-animals/.
+Pyramid of the Capital[79] Nedeljkovich, Brashich, and Kuharich. 1911.
+ist System. https://commons.wikimedia.org/wiki/Category:Pyramid_of_the_
+Capitalist_System_(1911).
+[80] Kenzo Nera, Paul Bertin, and Olivier Klein. 2022. Conspiracy theories as opportunistic attributions of power. Current Opinion in Psychology 47 (2022), 101381.
+https://doi.org/10.1016/j.copsyc.2022.101381
+[81] Mershack Okoe, Radu Jianu, and Stephen Kobourov. 2019. Node-Link or Adjacency Matrices: Old Question, New Insights. IEEE TVCG 25, 10 (2019), 2940–2952.
+https://doi.org/10.1109/TVCG.2018.2865940
+[82] Mark E. Olson, Alfonso Arroyo-Santos, and Francisco Vergara-Silva. 2019. A
+User’s Guide to Metaphors In Ecology and Evolution. Trends in Ecology &
+Evolution 34, 7 (2024/12/04 2019), 605–615. https://doi.org/10.1016/j.tree.2019.
+03.001
+[83] Josh On. 2002. They rule. https://muse.jhu.edu/article/19991/pdf. Leonardo 35,
+5 (2002), 496–496.
+[84] Nick Ottens. 2017. The Octopus in Political Cartoons. https://neverwasmag.
+com/2017/08/the-octopus-in-political-cartoons/.
+[85] Anshul Vikram Pandey, Anjali Manivannan, Oded Nov, Margaret Satterthwaite,
+and Enrico Bertini. 2014. The persuasive power of data visualization. IEEE
+TVCG 20, 12 (2014), 2211–2220. https://doi.org/10.1109/TVCG.2014.2346419
+[86] Saugat Pandey and Alvitta Ottley. 2023. Mini-VLAT: A Short and Effective
+Measure of Visualization Literacy. Computer Graphics Forum 42, 3 (2023), 1–11.
+https://doi.org/10.1111/cgf.14809
+[87] Ben Piven. 2012. Map: US bases encircle Iran. https://www.aljazeera.com/news/
+2012/5/1/map-us-bases-encircle-iran.
+[88] Hana Pokojná, Tobias Isenberg, Stefan Bruckner, Barbora Kozlíková, and Laura
+Garrison. 2025. The Language of Infographics: Toward Understanding Conceptual Metaphor Use in Scientific Storytelling. IEEE Transactions on Visualization
+and Computer Graphics 31, 1 (2025), 371–381. https://doi.org/10.1109/TVCG.
+2024.3456327
+[89] Zachary Pousman, John Stasko, and Michael Mateas. 2007. Casual Information
+Visualization: Depictions of Data in Everyday Life. IEEE TVCG 13, 6 (2007),
+1145–1152. https://doi.org/10.1109/TVCG.2007.70541
+[90] Katherine Reagan, Rhea Garen, David Lurvey, Simon Ingall, PJ Mode, Hannah
+Marshall, Jasmine Burns, Manolo Bevia, Jenn Colt, Melissa Wallace, Danielle
+Mericle, and Tre Berney. 2024. Cornell University – PJ Mode Collection of
+Persuasive Cartography. https://persuasivemaps.library.cornell.edu/.
+[91] Ronald A Rensink. 2018. Information Visualization and the Study of Visual
+Perception. Journal of Vision 18, 10 (2018), 1350–1350.
+[92] Arthur H. Robinson. 1955. The 1837 Maps of Henry Drury Harness. The Geographical Journal 121, 4 (1955), 440–450. http://www.jstor.org/stable/1791753
+[93] Ami Ronnberg and Kathleen Martin. 2010. The book of symbols. Taschen
+Cologne, Koln, Germany.
+[94] Jacques Schnier. 1956. Morphology of a symbol: The octopus. https://www.jstor.
+org/stable/26301509. American Imago 13, 1 (1956), 3–31.
+[95] Jonathan Schwabish, Amy Feng, et al. 2021. Do No Harm Guide: Applying Equity
+Awareness in Data Visualization. https://www.urban.org/research/publication/
+do-no-harm-guide-applying-equity-awareness-data-visualization.
+[96] Paul J. Silvia and Christopher M. Barona. 2009. Do People Prefer Curved Objects?
+Angularity, Expertise, and Aesthetic Preference. Empirical Studies of the Arts 27,
+1 (2009), 25–42. https://doi.org/10.2190/EM.27.1.b
+[97] Joseph P Simmons, Leif D Nelson, and Uri Simonsohn. 2011. False-positive
+psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological science 22, 11 (2011), 1359–1366.
+https://doi.org/10.1177/0956797611417632
+[98] S.P.K. 1942. Confiance – ses amputations se poursuivent méthodiquement.
+https://digital.library.cornell.edu/catalog/ss:19343465. P.J. Mode collection of
+persuasive cartography, #8548. Division of Rare and Manuscript Collections,
+Cornell University Library..
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+[99] Ana Stojanov, Jesse M. Bering, and Jamin Halberstadt. 2020. Does Perceived Lack
+of Control Lead to Conspiracy Theory Beliefs? Findings from an online MTurk
+sample. PloS one 15, 8 (2020). https://doi.org/10.1371/journal.pone.0237771
+[100] Ana Stojanov, Jamin Halberstadt, Jesse M. Bering, and Nikolina Kenig. 2021.
+Examining a domain-specific link between perceived control and conspiracy
+beliefs: a brief report in the context of COVID-19. Current Psychology 42, 8
+(2021). https://doi.org/10.1007/s12144-021-01977-0
+[101] Waldo Tobler. 1987. Experiments In Migration Mapping By Computer. Cartography and Geographic Information Science - CARTOGR GEOGR INF SCI 14 (04
+1987), 155–163. https://doi.org/10.1559/152304087783875273
+[102] Judith A Tyner. 1982. Persuasive Cartography. Journal of Geography 81 (1982),
+140–144. https://doi.org/10.1080/00221348208980868
+[103] Matthew van der Zwan, Valeriu Codreanu, and Alexandru Telea. 2016. CUBu:
+Universal Real-Time Bundling for Large Graphs. IEEE TVCG 22, 12 (2016),
+2550–2563. https://doi.org/10.1109/TVCG.2016.2515611
+[104] Chet Van Duzer. 2017. Hic sunt dracones: the geography and cartography of
+monsters. In The Ashgate research companion to monsters and the monstrous.
+Routledge, New York, NY, 427–476. https://doi.org/10.4324/9781315241197
+[105] Henk Van Houtum and Rodrigo Bueno Lacy. 2020. The migration map trap.
+On the invasion arrows in the cartography of migration. Mobilities 15, 2 (2020),
+196–219. https://doi.org/10.1080/17450101.2019.1676031
+[106] Christian van Onzenoodt, Pere-Pau Vázquez, and Timo Ropinski. 2022. Out
+of the plane: Flower vs. star glyphs to support high-dimensional exploration
+in two-dimensional embeddings. IEEE TVCG 29 (2022), 5468–5482. https:
+//doi.org/10.1109/TVCG.2022.3216919
+[107] Andrew Vande Moere, Martin Tomitsch, Christoph Wimmer, Boesch Christoph,
+and Thomas Grechenig. 2012. Evaluating the Effect of Style in Information
+Visualization. IEEE Transactions on Visualization and Computer Graphics 18, 12
+(2012), 2739–2748. https://doi.org/10.1109/TVCG.2012.221
+[108] Ľuboš Ukrop, Martin Jakubéci, and Peter Kapec. 2010. Metaphorical Visualizations of Graph Structures. https://api.semanticscholar.org/CorpusID:201732936
+[109] Markus Wallinger, Daniel Archambault, David Auber, Martin Nöllenburg, and
+Jaakko Peltonen. 2022. Edge-Path Bundling: A Less Ambiguous Edge Bundling
+Approach. IEEE TVCG 28, 1 (2022), 313–323. https://doi.org/10.1109/TVCG.
+2021.3114795
+[110] Denis Wells and John Fels. 1992. The Power of Maps. Guilford Press, New York,
+NY.
+[111] Cindy Xiong, Joel Shapiro, Jessica Hullman, and Steven Franconeri. 2019. Illusion
+of causality in visualized data. IEEE TVCG 26, 1 (2019), 853–862. https://doi.
+org/10.1109/TVCG.2019.2934399
+[112] Stephen Yablo. 2000. A paradox of existence. In Empty names, fiction, and the
+puzzles of non-existence. CSLI Publications Stanford, Stanford, CA, 275–312.
+[113] Lauren Young. 2016.
+The Most Popular Sea Creature in Cartography. https://www.atlasobscura.com/articles/the-most-popular-sea-creature-incartography.
+[114] Jeff Zacks and Barbara Tversky. 1999. Bars and lines: A study of graphic
+communication. Memory & Cognition 27, 6 (Nov. 1999), 1073–1079. https:
+//doi.org/10.3758/BF03201236
+[115] Christine Zanin and Nicolas Lambert. 2021. OCTOPUS MAPPING one of the
+MADMAPS: NATO Octopus, control over the weapons’ sales. International
+Journal of Cartography 7, 2 (2021), 128–133. https://doi.org/10.1080/23729333.
+2021.1917057
+[116] Haotian Zhou and Ayelet Fishbach. 2016. The pitfall of experimenting on the
+web: How unattended selective attrition leads to surprising (yet false) research
+conclusions. Journal of personality and social psychology 111, 4 (2016), 493.
+https://doi.org/10.1037/pspa0000056
+[117] Caroline Ziemkiewicz and Robert Kosara. 2008. The Shaping of Information by
+Visual Metaphors. IEEE TVCG 14, 6 (2008), 1269–1276. https://doi.org/10.1109/
+TVCG.2008.171
+[118] Caroline Ziemkiewicz and Robert Kosara. 2009. Preconceptions and Individual
+Differences in Understanding Visual Metaphors. Computer Graphics Forum 28,
+3 (2009), 911–918. https://doi.org/10.1111/j.1467-8659.2009.01442.x
+[119] Caroline Ziemkiewicz and Robert Kosara. 2010. Implied dynamics in information
+visualization. In Proceedings of the International Conference on Advanced Visual
+Interfaces (AVI ’10). Association for Computing Machinery, Roma, Italy, 215–222.
+https://doi.org/10.1145/1842993.1843031
+
+A
+
+Figure Credits
+• Figure 3a: 1899 political cartoon “The Menace of the Hour”
+by George Luks for The Verdict magazine. Public domain
+from Wikimedia Commons.
+• Figure 3b: 1904 political cartoon “Next” by Udo Keppler for
+Puck magazine. Public domain from The Library of Congress
+Prints and Photographs.
+
+CHI ’25, April 26-May 1, 2025, 2025, Yokohama, Japan
+
+• Figure 2: 1877 “Serio-Comic War Map for the Year 1877” by
+Frederick W. Rose. Public domain from Wikimedia Commons.
+• Figure 4a: 1916 or 1917 propaganda poster “The Prussian
+Octopus” by an unknown author. Public domain from Wikimedia Commons.
+• Figure 4b: Circa 1917 propaganda poster “Freiheit der Meere”
+[Freedom of the Seas] by an unknown author. Public domain
+from The Hoover Institution Library and Archives.
+• Figure 5: 1935 cover illustration of an issue of the magazine
+Fight: Against War and Fascism by an unlisted author. Public
+domain from The Tamiment Library and Robert F. Wagner
+Labor Archives.
+• Figure 6: 1930 cover of the 1917 book Ante los Bárbaros [Before the Barbarians] by José Mariá Vargas Vila. Public domain
+from Wikimedia Commons.
+
+Puerta & Spivak et al.
+
+• Figure 7: 1909 political cartoon by W. B. Northrop titled
+“Landlordism Causes Unemployment.” © Cornell University
+– PJ Mode Collection of Persuasive Cartography and reproduced under Creative Commons Attribution-NonCommercialShareAlike 3.0 (CC BY-NC-SA 3.0) Unported License. Cornell
+University – PJ Mode Collection of Persuasive Cartography.
+• Figure 8: 1894 illustration “The English Octopus - It Feeds on
+Nothing but Gold” from the pamphlet Coin’s Financial School
+by William Hope Harvey. Public domain from Wikimedia
+Commons.
+• Figure 9: 1904 print by Kiyochika Kobayashi, “The Japanese
+Octopus of Port Arthur.” Public domain from The Library of
+Congress Prints and Photographs.
+• Figure 9b: 1892 political cartoon published in Punch magazine and illustrated by English cartoonist Edward Linley
+Sambourne. Public domain from Wikimedia Commons.
+Received 20 February 2007; revised 12 March 2009; accepted 5 June 2009
+
+

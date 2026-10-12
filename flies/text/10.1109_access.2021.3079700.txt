@@ -1,0 +1,794 @@
+A Deep Convolutional Neural Network for Classification of Aedes Albopictus Mosquitoes
+Gereziher W. Adhane, Mohammad Mahdi Dehshibi, David Masip (2021). IEEE Access. https://doi.org/10.1109/access.2021.3079700. doi:10.1109/access.2021.3079700. Licence: cc-by. Text from pdf.
+
+Received April 16, 2021, accepted May 8, 2021, date of publication May 12, 2021, date of current version May 21, 2021.
+Digital Object Identifier 10.1109/ACCESS.2021.3079700
+
+A Deep Convolutional Neural Network for
+Classification of Aedes Albopictus Mosquitoes
+GEREZIHER ADHANE , MOHAMMAD MAHDI DEHSHIBI ,
+AND DAVID MASIP , (Senior Member, IEEE)
+Department of Computer Science, Universitat Oberta de Catalunya, 08018 Barcelona, Spain
+
+Corresponding author: Gereziher Adhane (gadhane@uoc.edu)
+This work was supported in part by the Spanish Ministry of Science, Innovation and Universities (FEDER funds) under Grant
+RTI2018-095232-B-C22, in part by the NVIDIA Hardware Grant Program, and in part by the EU Horizon 2020 Program under Grant
+874735.
+
+ABSTRACT Monitoring the spread of disease-carrying mosquitoes is a first and necessary step to control
+severe diseases such as dengue, chikungunya, Zika or yellow fever. Previous citizen science projects have
+been able to obtain large image datasets with linked geo-tracking information. As the number of international
+collaborators grows, the manual annotation by expert entomologists of the large amount of data gathered by
+these users becomes too time demanding and unscalable, posing a strong need for automated classification
+of mosquito species from images. We introduce the application of two Deep Convolutional Neural Networks
+in a comparative study to automate this classification task. We use the transfer learning principle to train two
+state-of-the-art architectures on the data provided by the Mosquito Alert project, obtaining testing accuracy
+of 94%. In addition, we applied explainable models based on the Grad-CAM algorithm to visualise the most
+discriminant regions of the classified images, which coincide with the white band stripes located at the legs,
+abdomen, and thorax of mosquitoes of the Aedes albopictus species. The model allows us to further analyse
+the classification errors. Visual Grad-CAM models show that they are linked to poor acquisition conditions
+and strong image occlusions.
+INDEX TERMS Asian tiger mosquito, Aedes albopictus mosquito, alert project, class activation map,
+convolutional neural network, explainable deep learning.
+
+I. INTRODUCTION
+
+Developing automated tools for identifying and classifying mosquito species can be beneficial to entomologists
+who study the life cycle, distribution, ecology, behaviour,
+and population dynamics of mosquitoes in order to minimise or monitor the spread of mosquito-borne diseases [1].
+Conventional approaches used in ecology are highly dependent on human expertise, spectral analysis of wingbeat waveforms [2], [3] and larval DNA analysis [4]. Since these
+approaches cannot be commonly used to study larger populations of mosquitoes, the development of automated tools
+to classify mosquito species is demanded. The vision-based
+classification of mosquito species has recently been used in
+several studies [5]–[9] and shown promising results when
+applied to images captured in laboratory settings. However,
+the development of tools trained with a wide range of images
+The associate editor coordinating the review of this manuscript and
+approving it for publication was Gangyi Jiang.
+VOLUME 9, 2021
+
+captured in uncontrolled conditions (i.e., taken by volunteers
+using smartphones) could enable the ecologist to identify
+larger numbers of species of mosquitoes to address environmental concerns caused by the spread of these species [10].
+The Mosquito Alert citizen science platform [1] was
+launched in 2014 to help combating the spread of
+disease-carrying mosquitoes in Spain. The purpose of this
+project, coordinated by a team in a small network of academic institutions in Spain (CEAB-CSIC, UPF, CREAF, and
+ICREA), is to raise awareness among the population and
+build expert-validated citizen science networks to monitor
+and control disease-carrying mosquitoes. The platform brings
+together citizens, entomologists, public health authorities and
+mosquito control services to help reduce mosquito-borne
+diseases in Spain, and is currently expanding and adjusting
+its tools for combating disease-carrying mosquitoes across
+Europe and worldwide.
+The Asian tiger mosquito (Aedes albopictus) is one of
+the first disease-carrying species that was targeted in the
+
+This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+
+72681
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+platform. This species is invasive in Europe and landed in
+Spain in 2004 near Barcelona, where it currently resides.
+Since then, it has invaded all of the eastern coasts of Spain and
+has rapidly invaded the southern and western (inland) regions
+of the Iberian Peninsula.
+The data collection method for this platform is mainly
+based on images of tiger mosquitoes and mosquito breeding sites submitted by residents. The submitted images are
+then inspected, each validated and classified through visual
+inspection by a team of three entomologists, along with
+another expert in the event of a dispute, to be included in the
+database and the public online map with a classification label.
+However, the potential increase in the number of images
+submitted as the project expands makes the hand-crafted
+inspection of the images one of the scalability challenges
+of the project. The team has therefore already begun to
+develop automated tools to obtain integrated and real-time
+information on the spread of mosquitoes in order to promote
+the development of preventive strategies to combat various
+mosquito-borne diseases [10].
+Following [10], we proposed an explainable deep learning
+architecture to classify Aedes albopictus from other mosquito
+species. More specifically, inspired by the VGG architecture [11] and the Grad-CAM visualisation [12], we proposed to use a deep convolutional neural network (CNN)
+in which the CNN component extracts discriminative features, and the Grad-CAM explains the CNN learnt features
+(see Figure 1). We used the concept of transfer learning
+to address small sample sizes in the target domain. Our
+architecture was then adapted from the ImageNet domain by
+fine-tuning with 6378 (tiger and non-tiger mosquitoes) samples in the target domain. Deep learning models are usually
+trained using millions of samples. When we compare this
+scale to the total number of images in the Mosquito Alert
+project, we can consider this classification task as a sort
+of small sample size problem. The Grad-CAM visualisation
+component gives fine-grained explanations of the predicted
+classes to explain to researchers or entomologists how the
+proposed architecture sees or perceives Aedes albopictus
+species. The accuracy obtained (close to 94%) are consistent
+with [10] (where ResNet 50 was used as a decision rule
+instead of VGG).
+The explainability allows us to examine the regions that the
+model uses to distinguish the tiger mosquitoes. It also enables
+us to extract the relevant cues for evaluating classification
+errors and fine-tuning the architecture’s parameters. In addition, the visualisation component allows entomologists to
+identify the key mosquitoes’ body regions used by deep
+learning to classify the associated classes. In our experiments,
+we compared VGG16 [11] and ResNet50 [13] architectures
+to show the effect of fine-tuning on samples belonging to
+the target domain. We also determined the morphological
+characteristics of the Aedes albopictus species selected by
+CNNs to show the superiority of the proposed methodology
+compared to entomologists, where the input images are not
+of sufficient quality for visual inspection.
+72682
+
+The rest of this paper is organised as follows: Section II
+surveys the previous studies. The proposed methodology
+is detailed in Section III. Section IV presents experiments
+results. Finally, Section V concludes the paper.
+II. RELATED WORK
+
+Rapid and accurate identification of insects has important
+applications like detection of disease vectors and understanding of biological diversity. Due to the variety of species
+and similarities between families of the same species, insect
+identification has always been a challenging task for entomologists and taxonomists. Many studies have proposed automated systems [2], [3], [14]–[21] to identify and classify
+insects. Among different species of insects, the identification
+of mosquitoes is important due to their impact on the outbreaks of infectious diseases such as yellow fever, dengue,
+Zika and chikungunya. Strategies for automatic mosquito
+detection can be categorised into audio and visual feature
+analysis categories. In order to analyse the audio features,
+researchers mainly used acoustic wingbeat recordings [2],
+[3], [14], [15]. For instance, Cator et al. [22], [23] used optical
+sensors to record the wingbeat audio of the Aedes aegypti
+mosquito species. They observed that the male and female
+species shifted their wingbeat frequency to match during
+mating.
+Recently, convolutional neural networks (CNN) achieved
+expert-level performance in different tasks, ranging from
+image analysis [24] to health risk assessment [25]. Several
+studies have trained different CNN architectures on small
+image datasets captured in laboratory settings to track, identify and classify mosquitoes [5], [8].
+Schreiber et al. [26] used CNN to classify adult Aedes
+aegypti mosquito species by analysing wingbeat audio
+recorded by smartphones. They trained a binary, multiclass
+and ensemble of binary classifiers with the recording spectrogram to represent mosquito wingbeat frequency over time.
+Since wingbeat recordings were performed in an environment
+with minimal background noise, the efficiency of classifiers
+in the processing of recordings in a noisy environment may
+be reduced. In addition, this method is expensive due to the
+expense of optical sensors and the difficulty of obtaining
+high-quality audio recordings.
+Faud et al. [27] and Ortiz et al. [8] suggested CNN-based
+mosquito classification techniques for larvae images. They
+fine-tuned pre-trained CNNs with a small dataset and
+achieved high classification accuracy. Their approaches can
+identify whether a mosquito from larvae is a vector. Since
+data acquisition and experiments were carried out in the
+laboratory setting, the use of these tools by taxonomists and
+health workers in the field is not feasible. Pre-trained CNN
+architectures were investigated in [9] to identify six different
+species of mosquitoes with similar morphological structure.
+On a small sample of data set, they used transfer learning
+to train the proposed architecture. They achieved high classification accuracy and could locate each mosquito species’
+discriminative regions. However, the images were gathered
+VOLUME 9, 2021
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+FIGURE 1. The pipeline of the proposed methodology for the classification of in-the-wild tiger mosquitoes species, where
+the Grad-CAM component gives fine-grained explanations of the predicted classes.
+
+in a laboratory setting, and data augmentation technique was
+used to increase the number of samples. As a result, the discriminative regions for some of the mosquito images could
+needlessly be transformed, resulting in inaccurate identification of the species of mosquitoes.
+Motta et al. [28] implemented an automated morphological
+classification tool using LeNet, AlexNet and GoogLeNet to
+facilitate the automatic classification of adult mosquitoes.
+The main objective was to develop a tool that entomologists
+and health workers can use in real-world settings to encourage volunteers to participate in controlling the vector-borne
+disease. Although they reported fine-grained classification
+accuracy, the generalisability of these methods for the classification of data acquired in-the-wild is not remarkable.
+Rodriguez et al. [29] have created an application to facilitate the verification of submitted photos by citizens for the
+Alert project. This application could verify a portion of the
+collected reports which enabled entomologists to focus on
+larger reports. They compared the performance of Naive
+Bayes, K-nearest neighbour, decision tree and random forest
+classifiers when applied to features such as date of submission, location and user history (previous valid reports,
+submission frequency, accuracy, and mobility).
+Pataki et al. [10] trained a deep learning model using the
+mosquito alert [1] data set and looked at several aspects of the
+data collected from citizens, such as the quality, geographical
+diversity and number and usefulness of the submitted images.
+The quality and usefulness of citizen-submitted mosquito
+images were evaluated over time and place. They also looked
+at the current regional distribution and dynamics of invasive
+species, which is a practical way to keep track of the spread
+of vectors in colonised territories.
+Motivated by [9], [10], [28] and owning to the availability
+and pervasive usage of smartphones that allow volunteers
+to send pictures of mosquitoes species, we fine-tuned the
+VOLUME 9, 2021
+
+FIGURE 2. Anatomy of Aedes albopictus mosquito. This image is taken
+from https://us.biogents.com/aedes-albopictus-asian-tiger-mosquito/.
+
+pre-trained VGG16 [11] on ImageNet [30] to classify Aedes
+albopictus mosquito species. To fine-tune the model, we used
+images taken with smartphones and digital cameras by citizen scientists participating in the Mosquito Alert platform.
+The experimental results show 94% accuracy in the classification of tiger mosquito species, where the morphological
+characteristics inspected by the networks are consistent with
+the visual elements used by expert annotators. The use of
+Grad-CAM [12] has shown that the key components of tiger
+mosquito specimens that support network convergence are
+the white band on the legs, abdomen patches, head, and
+thorax, see Figure 2 for the anatomy of Aedes albopictus.
+Details of the proposed methodology are given in the following section.
+III. METHODOLOGY
+
+We formulate this task as a binary classification problem in
+which the response Y ∈ {0, 1} is predicted given the input
+image X ∈ RC×H ×W with number of channels C, height H
+72683
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+and width W , and the loss is measured by the cross-entropy.
+Given a dataset of n mosquito images D = {(xi , yi )}ni=1 , our
+goal is to learn a neural network F(x) = E[Y|X = x] that
+minimises the loss function in a way that yi = 1 if the i-th
+sample is Aedes albopictus, and yi = 0 otherwise. Instead of
+using a random weight initialisation, we used a pre-trained
+VGG16 (F) [11] with ImageNet [30] as a starting point for
+learning rich representations of features. We used the transfer
+learning concept to fine-tune F to the mosquito classification
+task, providing a faster and easier convergence while using a
+limited number of training images. Since the input size of F
+is 3 × 224 × 224, we need to scale H and W in our dataset.
+In addition to scaling, we normalise input images using
+z-score method (see Eq. 1) with which the dataset has mean
+and standard deviation values of 0 and 1, respectively.
+x − X̄
+,
+σr
+1 Pn
+1 Pn
+X̄ =
+(xi − X̄ )2 .
+i=1 xi , σ =
+n
+n i=1
+
+in Eq. 2 resemblances the global average pooling over height
+and width to obtain a feature map of shape [k, 1, 1]. To generate the heatmap LGrad−CAM , in which the ROI is highlighted,
+we apply ReLU activation function to the weighted sum of
+the alpha values as in Eq. 3.
+!
+X
+c
+LGrad−CAM
+= ReLU
+αkc Ak
+(3)
+k
+
+As a result of applying global average pooling and ReLU
+activation function, the size of the heatmap is smaller than the
+original input image. The generated heatmap must therefore
+be up-sampled to fit the size of the original input image.
+Figure 3 shows four samples of the dataset along with the
+generated heatmap.
+
+z=
+
+(1)
+
+where X̄ and σ are the mean and standard deviation of dataset.
+The modified VGG16 architecture consists of 13 convolution layers with stride 1 × 1 and padding [1, 1, 1, 1]. Each
+convolution layer follows by a max-pooling and rectifier
+linear unit (ReLU). The architecture tail contains two fully
+connected, ReLU and dropout layers, which are serially connected. Finally, there is a softmax module which is followed
+by a cross-entropy loss function to map the feature vector
+into tiger or non-tiger mosquito classes. The pipeline of the
+architecture is presented in Figure 1.
+The softmax also calculates the gradients of the identified
+class that is used in the backpropagation phase. This gradient
+generates the heatmaps of the convolutional feature maps.
+The neuron importance weights (α) are given by the winning
+class gradients and feature maps of the last convolutional
+layer. We used Grad-CAM [12] visualisation algorithm to
+compare the gradient of a predicted class with its final convolutional layer and to weight it against the corresponding
+class. This module helps to generate explanation by using
+the preserved spatial information in the convolutional layers
+during training phase and generate a heatmap visualisation
+that focus on the region of interest (ROI) with a higher
+resolution.
+Gradient-based Class Activation Maps (Grad-CAMs) are
+generated from the gradient score of the predicted class
+ỹ = F(x 0 ) with respect to the feature map of the last convolution layer. More formally, for resized input image x 0 , let
+Ak (i, j) denote the k-th activation unit in the last convolutional
+layer, the neuron importance weight corresponding to class c
+for unit k is given by Eq. 2
+H0 W0
+
+αkc (i, j) =
+
+X X ∂ ỹc
+1
+.
+H0 × W0
+∂Ak (i, j)
+
+(2)
+
+i=1 j=1
+
+where α describes the importance of visual patterns at different spatial locations for a given class c. Double summation
+72684
+
+FIGURE 3. Examples of tiger mosquito images’ heatmap visualisation
+from the last convolutional layer.
+
+IV. EXPERIMENTS
+
+We evaluate our methodology in three experiments: (1) training and validation of the deep architecture on data set
+annotated by expert entomologists; (2) training the model
+on data annotated by expert entomologists and testing it
+with data submitted by volunteers, i.e., tiger mosquitoes
+with not-classified confidence level; and (3) explainability.
+We present the experiments’ characteristics by providing
+descriptions of the data set, the architecture and the visual
+analysis of ROIs using Grad-CAM.
+A. DATA SET
+
+The Mosquito Alert platform [1] to monitor and control
+diseases-carrying mosquitoes is open sourced.1 The data collection process for this platform relies on images mosquitoes
+and mosquito breeding sites submitted by volunteers. The
+photos submitted are then inspected, validated and classified
+by a team of three expert entomologists and, in case of doubt,
+by a super-expert assigning a final classification, in coordination with the other three experts.
+Each image is categorised into one of four classes (Aedes
+albopictus, Aedes aegypti, other species, cannot tell). The
+experts mark each image’s classification as confirmed, probable, or not-classified in each category. In this work, we used
+3364 images labelled as confirmed Aedes albopictus cases
+1 The
+curated database with the images can
+at http://www.mosquitoalert.com/en/mosquito-images-dataset
+
+be
+
+found
+
+VOLUME 9, 2021
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+FIGURE 4. Sample of tiger [first row] and non-tiger [second row] mosquitoes from the Mosquito Alert
+data set.
+
+as positive samples (i.e., tiger), and 3014 Aedes aegypti and
+other species as negative samples, i.e., non-tiger. As a result,
+the architecture is trained using a total number of 6378 tiger
+and non-tiger images. Figure 4 shows five tiger and five other
+mosquito species samples collected in the wild.
+B. ARCHITECTURE DETAILS AND EVALUATION METRICS
+
+For a fair comparison, the following hyperparameters were
+used in all classification models. Both VGG16 [11] and
+ResNet50 [13] architectures were pre-trained on ImageNet [30] with input size of H 0 , W 0 = 224. All models
+were trained end-to-end in PyTorch [31] using the Tesla
+K80 GPU, where the implementations are available at.2
+In the training of the two architectures, stochastic gradient
+descent with momentum algorithm [31] was used to update
+learning parameters with initial learning rate and momentum
+of 0.001 and 0.7, respectively. The learning rate decays by
+a factor of gamma = 0.1 every 7 epochs using StepLR
+scheduler. We fed networks with a mini-batch size of 64 and
+the optimisation stopped after 25 epochs. In the experiments,
+we did not use data augmentation to avoid unrealistic changes
+in micro-morphological patterns of mosquitoes’ body that
+could have skewed the final results. We also checked the
+validation in each epoch to manage the small sample size.
+We used the accuracy and loss of classification to measure
+the performance of the model. To provide more insight into
+the performance of predictive model, we calculated precision,
+recall, and F1, see Eq. 4.
+TP
+TP
+, Recall =
+,
+TP + FP
+TP + FN
+Precision × Recall
+F1 = 2 ×
+.
+(4)
+Precision + Recall
+where TP, FP and FN stand for true positive, false positive
+and false negative, respectively.
+
+This is then compared to the output of the model in classifying
+images that have been tagged as not-classified. In addition,
+we randomly selected 150 mosquito images (clear and damaged images of tiger and non-tiger) to observe the predictive
+scores concerning their visualisation in order to explain the
+main sources of CNN-induced errors.
+In the first training policy, we considered the labelled
+images by experts and used the k-fold cross-validation strategy to evaluate the classifier performance on unseen data.
+We set the number of folds to five. In this way, the model
+was trained on four subsets and validated on the remaining
+subset. The model’s performance is tracked by its accuracy
+and loss obtained by each fold’s weighted mean operation,
+see Figures 5 and 6. We also computed each fold’s accuracy
+and reported the average 5-fold results in Table 1 with the
+95% confidence interval.
+TABLE 1. The average classification accuracy and loss of VGG16 and
+ResNet50 are reported at 95% confidence intervals.
+
+Precision =
+
+C. EXPERIMENTAL RESULTS
+
+In our experiments, we first assess the efficiency of the proposed approach in annotated cases by expert entomologists.
+2 The implementation is available at: https://github.com/ageryw/Mosquito
+Classification
+VOLUME 9, 2021
+
+Figures 5 and 6 demonstrate that the VGG 16 architecture
+achieves a good trade-off between efficiency and number of
+parameters and outperforms ResNet50 during training and
+validation in both experimental setups. In theory, any deep
+CNN architecture can be used with our approach. However,
+given that deep CNN requires training on large labelled data
+sets, the use of deeper architectures such as VGG19 [11],
+ResNet101 [13] or GoogLeNet [32] in our task with a limited
+number of representative data can reduce generalizability.
+This statement was validated by comparing the performance
+metrics of VGG16 and ResNet50 for this study.
+72685
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+TABLE 2. Performance of the proposed approach compared to competing methods considering class-wise recall, precision, and F1 score. Here, TP, TN, FP
+and FN stand for true positive, true negative, false positive and false negative, respectively.
+
+FIGURE 7. [left] Accuracy and [right] Loss of VGG16 and ResNet50 in
+training with expert-annotated data and testing with volunteer-annotated
+images.
+
+FIGURE 5. Training progress in the accuracy and loss of (a) VGG16 and
+(b) ResNet50. Each plot contains progress for 5 folds.
+
+FIGURE 8. Sample of images for error analysis, showing (a) correct
+predictions and (b) prediction with errors.
+FIGURE 6. Validation progress curves obtained during 5-fold cross
+validation for [left] VGG16 and [right] ResNet50.
+
+Tables 2 reports precision, recall and F1 metrics for
+fine-tuned VGG16 and ResNet50 on the second experiment
+setup. In this setup, we used labelled mosquito datasets validated by a team of experts (confirmed Aedes albopictus)
+to train and Not-classified tiger mosquito images to test the
+models. Not-classified cases are tiger mosquitoes submitted
+by volunteers but not confirmed by expert entomologists of
+the Mosquito Alert Platform. Although Pataki et al. [10]
+reported a higher True Positive (TP) rate, they predict the positive class at the cost of accepting more non-tiger mosquitoes
+as tiger mosquitoes, i.e., a significantly higher False Positive (FP) rate.
+Figure 7 shows the accuracy and loss for the second set of
+experiments in which, compared to ResNet50, VGG16 has
+72686
+
+relatively higher accuracy and less loss. In order to understand the primary source of CNN-induced error, we randomly
+picked 150 mosquito images (clear and damaged images of
+the tiger (positive) and non-tiger (negative)) to observe their
+visualisation prediction scores. The tiger mosquito image is
+described as a clear image if the image was taken in moderate
+lighting, the legs are not broken, the white stripes on the legs,
+abdomen and thorax are visible, and the head is observable.
+We observed that the model could distinguish between tiger
+mosquitoes and non-tiger mosquitoes with lower accuracy
+when the images were of poor quality, distorted, occluded
+due to pose, or when the mosquito’s size was relatively small
+compared to the image itself, see Figure 8.
+Therefore, training the model with more data not only
+reduces errors caused by poor image quality but also
+VOLUME 9, 2021
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+FIGURE 9. Examples of Grad-CAMs for the (a) tiger and (b) non-tiger
+mosquitoes species generated from the last convolutional layer.
+
+improves the model’s ability to discriminate morphological patterns and, as a result, the mosquito type. The use
+of a Grad-CAM [12], a heatmap that highlights supportive
+pixels in the image for the classifier, revealed that for an
+image predicted as tigers (see Figure 9(a)), the major key
+parts strongly activated around the thorax and central part
+of the mosquito. For non-tiger mosquito input images (see
+Figure 9(b)), however, the legs and abdomen are strongly
+highlighted and the areas around the wings are slightly
+highlighted.
+In order to gain insight into the network, we also created
+the heatmap of the shallow, middle and deep layers of the
+CNN model. Figure 10 provides an example of Grad-CAM
+visualisations for a tiger mosquito image at these layers.
+We observed that the legs, antennae, and proboscis are highlighted as key parts in the shallow layers. The head, thorax,
+and abdomen are strongly highlighted in the middle layers,
+while portions of the legs are marginally highlighted. Finally,
+in the deeper layer, the areas around the thorax are highlighted
+that direct the network to determine the class of the input
+image. The Grad-CAMs generated, specifically, at deeper
+layers of the trained model indicate that the areas used by
+the model to detect the type of mosquito are similar to those
+used by the entomologists.
+It should be noted that human experts use a hierarchical
+structure based on three main features of different weights to
+achieve a standardised classification. In fact, the observation
+of white stripes in the thorax leads to immediate identification
+of Aedes albopictus with a high degree of certainty. The
+stripes in the abdomen and the rear legs are inspected in case
+of doubt. In mosquitoes, antennae are usually used to classify
+gender, although there is a very high gender divergence in
+cephalic areas. In this data set, the majority of tiger mosquito
+images belong to females. As a result, in addition to the
+VOLUME 9, 2021
+
+FIGURE 10. Visualisation of discriminative regions of images predicted as
+tiger mosquitoes; the white stripes in the legs and antennae are slightly
+highlighted in the shallow layers, whereas the thorax is strongly
+highlighted in the middle and deeper layers.
+
+FIGURE 11. (a) Examples of tiger input images predicted as non-tiger.
+(b) Examples of non-tiger input images predicted as tiger. The Grad-CAMs
+were generated from the last convolution layer.
+
+determination of the species, what is discriminated with in
+shallow layers could be correlated to gender.
+72687
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+as tiger, the morphological similarity of key parts (e.g., striped
+legs and abdominal patches) to tiger mosquitoes is the main
+cause of the error, see Figure 13.
+To sum up, after careful examination of the misclassified
+tiger images, we found the following two explanations for
+model confusion:
+1) The thorax or abdominal parts, which are more informative for the model in the middle and deeper layers for
+identifying tiger mosquitoes, are damaged or occluded
+in the input image.
+2) The legs, which are important for the model in shallow
+layers to locate the mosquito, are either broken or invisible in the input image.
+V. CONCLUSION
+
+FIGURE 12. Visualisation of discriminative regions for tiger images
+predicted as non-tiger in the shallow, middle and deeper layers and their
+respective accuracy.
+
+FIGURE 13. Visualisation of discriminative regions for non-tiger images
+predicted as tiger in the shallow, middle and deeper layers and their
+respective accuracy.
+
+Figure 11 shows examples of misclassified images with
+Grad-CAMS and their prediction scores. For tiger images
+that have been misclassified as non-tiger, the morphological
+patterns of the mosquito body (e.g., legs and thorax) are
+severely damaged or occluded, see Figure 12. On the other
+hand, for non-tiger mosquitoes, that have been misclassified
+72688
+
+Mosquitoes are the vectors for infectious diseases such as yellow fever, malaria, dengue, Zika, and chikungunya. An estimated 228 million cases of malaria infection with an overall
+death toll of 405,000 cases have been recorded in 2019 [33],
+requiring efficient mechanisms for early detection and control of mosquito-borne diseases. Mosquito Alert [1] is an
+expert-validated citizen science platform launched in 2014 to
+monitor and control disease-carrying mosquitoes. On this
+platform, people can upload images and reports of tiger
+mosquitoes and other invasive mosquitoes to be validated by
+expert entomologists. As the platform expands, support tools
+have been provided to assist experts in the validation of the
+reports submitted.
+Pataki et al. [10] used mosquito Alert [1] data set and
+developed a deep learning model to distinguish between tiger
+and non-tiger mosquitoes. However, the objective of that
+work was not to enhance the classification efficiency of the
+model. Instead, they were mainly concerned with assessing
+the usability of the labelled images in terms of space and
+time, as well as the geographic distribution and dynamics of
+invasive species. In this study, we developed a vision-based
+approach to enhance the validation process and characterise
+morphological features of tiger mosquitoes. We presented a
+deep convolutional neural network based on VGG16 architecture [11] to identify Aedes albopictus. This approach achieved
+a good trade-off between efficiency and number of parameters and outperformed competing approaches in the experimental setups. The data standardisation and fine-tuning of
+the architecture on Mosquito Alert data set helped to address
+the small sample size problem and to achieve training and
+validation accuracy of 94.61 ± 0.24% and 93.86 ± 0.54%,
+respectively.
+In addition, we studied the discriminative regions of
+tiger mosquitoes by visualising the target position using the
+gradient-weighted class activation map. By visualising the
+discriminative regions, we have identified the white band
+stripes in the legs, the abdominal patches, the head, and thorax
+as the main regions used by the classifier to classify the different species. We also observed that most of the classification
+errors were caused by significant damage to the main areas
+of the mosquito body.
+VOLUME 9, 2021
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+For future work, as the Mosquito Alert platform is scaling
+to cover broader geographical areas outside Spain, this study
+will be expanded to the classification of multiple species
+of mosquitoes and their breeding sites. We also plan to
+develop an end-to-end deep learning architecture to learn
+the most discriminating features from the key regions identified by heatmap visualisation. We plan to incorporate the
+explainability criteria into the learning loop, combining the
+heatmaps associated to each class with an anatomical model
+of the relevant regions of the animal in terms of discriminability. Failure from focusing on the key regions should
+result on a penalty on the learning loss, promoting classifiers
+that focus on the a priori knowledge of the classification
+task.
+ACKNOWLEDGMENT
+
+The authors would like to thank the Mosquito team
+(http://www.mosquitoalert.com/en/about-us/team/) for their
+work in keeping the system operative, even in harsh financial
+times, and most especially the team of volunteer entomology
+experts that have validated mosquito pictures from Mosquito
+Alert during the period 2014 to 2019: Mikel Bengoa, Sara
+Delacour, Ignacio Ruiz, Maria Àngeles Puig, Pedro María
+Alarcon-Elbal, Rosario Melero-Alcíbal, Simone Mariani, and
+Santi Escartin. They also would like to thank the Mosquito
+Alert Community (anonymous citizens) who have participated year by year, making all this data collection system
+worth it.
+REFERENCES
+[1] (2018). Mosquito Alert: A Citizen Platform for Studying and Which
+Transmit Global Diseases Controlling Mosquitos. Accessed: May 2020.
+[Online]. Available: http://www.mosquitoalert.com/en/
+[2] T.-H. Ouyang, E.-C. Yang, J.-A. Jiang, and T.-T. Lin, ‘‘Mosquito vector
+monitoring system based on optical wingbeat classification,’’ Comput.
+Electron. Agricult., vol. 118, pp. 47–55, Oct. 2015.
+[3] Z. Li, Z. Zhou, Z. Shen, and Q. Yao, ‘‘Automated identification of mosquito
+(diptera: Culicidae) wingbeat waveform by artificial neural network,’’ in
+Proc. IFIP Int. Conf. Artif. Intell. Appl. Innov. Boston, MA, USA: Springer,
+2005, pp. 483–489.
+[4] C. Walton, R. G. Sharpe, S. J. Pritchard, N. J. Thelwell, and R. K. Butlin,
+‘‘Molecular identification of mosquito species,’’ Biol. J. Linnean Soc.,
+vol. 68, nos. 1–2, pp. 241–256, Sep. 1999.
+[5] K. Okayasu, K. Yoshida, M. Fuchida, and A. Nakamura, ‘‘Vision-based
+classification of mosquito species: Comparison of conventional and deep
+learning methods,’’ Appl. Sci., vol. 9, no. 18, p. 3935, Sep. 2019.
+[6] C. Lorenz, A. S. Ferraudo, and L. Suesdek, ‘‘Artificial neural network
+applied as a methodology of mosquito species identification,’’ Acta Tropica, vol. 152, pp. 165–169, Dec. 2015.
+[7] B. Kesavaraju and S. Dickson, ‘‘New technique to count mosquito adults:
+Using ImageJ software to estimate number of mosquito adults in a trap,’’
+J. Amer. Mosquito Control Assoc., vol. 28, no. 4, pp. 330–333, Dec. 2012.
+[8] A.
+Sanchez-Ortiz,
+A.
+Fierro-Radilla,
+A.
+Arista-Jalife,
+M. Cedillo-Hernandez, M. Nakano-Miyatake, D. Robles-Camarillo,
+and V. Cuatepotzo-Jiménez, ‘‘Mosquito larva classification method based
+on convolutional neural networks,’’ in Proc. Int. Conf. Electron., Commun.
+Comput. (CONIELECOMP), 2017, pp. 1–6.
+[9] J. Park, D. I. Kim, B. Choi, W. Kang, and H. W. Kwon, ‘‘Classification
+and morphological analysis of vector mosquitoes using deep convolutional
+neural networks,’’ Sci. Rep., vol. 10, no. 1, pp. 1–12, Dec. 2020.
+[10] B. A. Pataki, J. Garriga, R. Eritja, J. R. B. Palmer, F. Bartumeus, and
+I. Csabai, ‘‘Deep learning identification for citizen science surveillance of
+tiger mosquitoes,’’ Sci. Rep., vol. 11, no. 1, pp. 1–12, Dec. 2021.
+
+VOLUME 9, 2021
+
+[11] K. Simonyan and A. Zisserman, ‘‘Very deep convolutional networks for
+large-scale image recognition,’’ 2014, arXiv:1409.1556. [Online]. Available: http://arxiv.org/abs/1409.1556
+[12] R. R. Selvaraju, A. Das, R. Vedantam, M. Cogswell, D. Parikh, and
+D. Batra, ‘‘Grad-CAM: Why did you say that?’’ 2016, arXiv:1611.07450.
+[Online]. Available: http://arxiv.org/abs/1611.07450
+[13] K. He, X. Zhang, S. Ren, and J. Sun, ‘‘Deep residual learning for image
+recognition,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR),
+Jun. 2016, pp. 770–778.
+[14] H. Mukundarajan, F. J. H. Hol, E. A. Castillo, C. Newby, and M. Prakash,
+‘‘Using mobile phones as acoustic sensors for high-throughput mosquito
+surveillance,’’ Elife, vol. 6, 2017, Art. no. e27854.
+[15] A. B. B. Wilke, R. D. O. Christe, L. C. Multini, P. O. Vidal,
+R. Wilk-da-Silva, G. C. de Carvalho, and M. T. Marrelli, ‘‘Morphometric
+wing characters as a tool for mosquito identification,’’ PLoS ONE, vol. 11,
+no. 8, Aug. 2016, Art. no. e0161643.
+[16] L. Feng, B. Bhanu, and J. Heraty, ‘‘A software system for automated
+identification and retrieval of moth images based on wing attributes,’’
+Pattern Recognit., vol. 51, pp. 225–241, Mar. 2016.
+[17] M. Martineau, D. Conte, R. Raveaux, I. Arnault, D. Munier, and
+G. Venturini, ‘‘A survey on image-based insect classification,’’ Pattern
+Recognit., vol. 65, pp. 273–284, May 2017.
+[18] H.-P. Yang, C.-S. Ma, H. Wen, Q.-B. Zhan, and X.-L. Wang, ‘‘A tool
+for developing an automatic insect identification system based on wing
+outlines,’’ Sci. Rep., vol. 5, no. 1, pp. 1–11, Oct. 2015.
+[19] A. M. M. De Los Reyes, A. C. A. Reyes, J. L. Torres, D. A. Padilla,
+and J. Villaverde, ‘‘Detection of Aedes Aegypti mosquito by digital image
+processing techniques and support vector machine,’’ in Proc. IEEE Region
+10 Conf. (TENCON), Nov. 2016, pp. 2342–2345.
+[20] M. Fuchida, T. Pathmakumar, R. Mohan, N. Tan, and A. Nakamura,
+‘‘Vision-based perception and classification of mosquitoes
+using support vector machine,’’ Appl. Sci., vol. 7, no. 1, p. 51,
+Jan. 2017.
+[21] Y. Chen, A. Why, G. Batista, A. Mafra-Neto, and E. Keogh, ‘‘Flying insect
+detection and classification with inexpensive sensors,’’ J. Visualized Exp.,
+vol. 92, pp. 1–9, 2014, Art. no. e52111.
+[22] L. J. Cator, B. J. Arthur, L. C. Harrington, and R. R. Hoy, ‘‘Harmonic
+convergence in the love songs of the dengue vector mosquito,’’ Science,
+vol. 323, no. 5917, pp. 1077–1079, Feb. 2009.
+[23] L. J. Cator, B. J. Arthur, A. Ponlawat, and L. C. Harrington, ‘‘Behavioral
+observations and sound recordings of free-flight mating swarms of Ae.
+Aegypti (diptera: Culicidae) in Thailand,’’ J. Med. Entomol., vol. 48, no. 4,
+pp. 941–946, Jul. 2011.
+[24] A. Krizhevsky, I. Sutskever, and G. E. Hinton, ‘‘ImageNet classification
+with deep convolutional neural networks,’’ Commun. ACM, vol. 60, no. 6,
+pp. 84–90, May 2017.
+[25] R. Zeleznik et al., ‘‘Deep convolutional neural networks to predict cardiovascular risk from computed tomography,’’ Nature Commun., vol. 12,
+no. 1, pp. 1–9, 2021.
+[26] M. S. Fernandes, W. Cordeiro, and M. Recamonde-Mendoza, ‘‘Detecting Aedes Aegypti mosquitoes through audio classification with convolutional neural networks,’’ Comput. Biol. Med., vol. 129, Feb. 2021,
+Art. no. 104152.
+[27] M. A. M. Fuad, M. R. A. Ghani, R. Ghazali, T. AhmadIzzuddin,
+M. F. Sulaima, Z. Jano, and T. Sutikno, ‘‘Training of convolutional neural
+network using transfer learning for Aedes Aegypti larvae,’’ Telkomnika,
+vol. 16, no. 4, pp. 1894–1900, 2018.
+[28] D. Motta, A. Á. B. Santos, I. Winkler, B. A. S. Machado, D. A. D. I. Pereira,
+A. M. Cavalcanti, E. O. L. Fonseca, F. Kirchner, and R. Badaró, ‘‘Application of convolutional neural networks for classification of adult mosquitoes
+in the field,’’ PLoS ONE, vol. 14, no. 1, Jan. 2019, Art. no. e0210829.
+[29] A. R. García, F. Bartumeus, and R. Mestre, ‘‘Machine learning assists
+the classification of reports by citizens on disease-carrying mosquitoes,’’
+in Proc. SoGood, Data Sci. Social Good, 1st Workshop Data Sci.
+Social Good Co-Located Eur. Conf. Mach. Learn. Princ. Pract. Knowl.
+Dicovery Databases (ECML-PKDD), Riva del Garda, Italy, Sep. 2016,
+pp. 1–11.
+[30] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang,
+A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and L. Fei-Fei, ‘‘ImageNet large scale visual recognition challenge,’’ Int. J. Comput. Vis.,
+vol. 115, no. 3, pp. 211–252, Dec. 2015.
+
+72689
+
+G. Adhane et al.: Deep CNN for Classification of Aedes Albopictus Mosquitoes
+
+[31] A. Paszke et al., ‘‘Pytorch: An imperative style, high-performance deep
+learning library,’’ in Proc. Adv. Neural Inf. Process. Syst., H. Wallach,
+H. Larochelle, A. Beygelzimer, F. d’Alché-Buc, E. Fox, and R. Garnett,
+Eds. Red Hook, NY, USA: Curran Associates, 2019, pp. 8024–8035.
+[32] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan,
+V. Vanhoucke, and A. Rabinovich, ‘‘Going deeper with convolutions,’’
+in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2015,
+pp. 1–9.
+[33] WHO. (2019). World Malaria Report 2019. Accessed: Jun. 2020. [Online].
+Available:
+https://www.who.int/malaria/publications/world-malariareport-2019/World-Malaria-Report-2019-briefing-kit-eng.pdf?ua=1
+
+MOHAMMAD MAHDI DEHSHIBI received the
+Ph.D. degree from IAU, Iran, in 2017. He was
+also a Visiting Researcher with the Unconventional Computing Laboratory, UWE, Bristol, U.K.
+He is currently a Postdoctoral Research Fellow
+with the Universitat Oberta de Catalunya, Spain.
+He has contributed to over 50 articles published in
+scientific journals and international conferences.
+His research interests include affective and unconventional computing.
+
+GEREZIHER ADHANE received the M.Sc. degree
+from Osmania University, India, in 2014. He is
+currently pursuing the Ph.D. degree with the Universitat Oberta de Catalunya, Spain. His research
+interests include deep learning, computer vision,
+and fairness in AI.
+
+DAVID MASIP (Senior Member, IEEE) received
+the Ph.D. degree, in 2005. Since February 2007,
+he has been a Professor with the Computer Science
+Multimedia and Telecommunications Department,
+Universitat Oberta de Catalunya. Since 2015,
+he has been the Director of the Doctoral School.
+He is currently the Director of the Scene Understanding and Artificial Intelligence Laboratory and
+a member of the BCN Perceptual Computing
+Laboratory. He studied computer vision at the Universitat Autonoma de Barcelona. He was awarded for the best thesis in the
+computer science.
+
+72690
+
+VOLUME 9, 2021
+
+

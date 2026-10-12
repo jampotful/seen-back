@@ -1,0 +1,1962 @@
+Mimetic butterfly wings through mimetic butterfly eyes
+Andrew Dang, Gary D. Bernard, Furong Yuan, Aide Macias-Muñoz, Ryan I. Hill, Justin P. Lawrence, Aline Giselle Rangel Olguin, Armando Luis‐Martínez, Sean P. Mullen, Jorge Llorente-Bousquets, Adriana D. Briscoe (2023). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/2023.10.05.561098. doi:10.1101/2023.10.05.561098. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Mimetic butterfly wings through mimetic butterfly eyes: Evidence that brightness
+vision helps Adelpha fessonia identify potential mates
+
+Andrew Dang1, Gary D. Bernard2, Furong Yuan1,3, Aide Macias-Muñoz1,4, Ryan I. Hill5,
+J. P. Lawrence1,6, Aline G. Rangel Olguin1,7,8, Armando Luis-Martínez9, Sean P.
+Mullen10, Jorge Llorente-Bousquets9, Adriana D. Briscoe1
+
+1
+
+Department of Ecology and Evolutionary Biology, University of California, Irvine, CA
+
+2
+
+Department of Electrical & Computer Engineering, University of Washington, Seattle,
+
+WA
+3
+
+Department of Process Development, Lonza Houston Inc, Houston, TX
+
+4
+
+Department of Ecology and Evolutionary Biology, University of California, Santa Cruz,
+
+CA
+5
+
+Department of Biological Sciences, University of the Pacific, Stockton, CA
+
+6Lyman Briggs College, Michigan State University, East Lansing, MI
+7
+
+Centro de Ciencias Genómicas, Universidad Nacional Autónoma de México, Mexico
+
+8
+
+Department of Physiology, McGill University, Canada
+
+9
+
+Museo de Zoología, Departamento de Biología Evolutiva, Facultad de Ciencias,
+
+Universidad Nacional Autónoma de México, Ciudad de México, Mexico
+10
+
+Department of Biology, Boston University, Boston, MA
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Abstract
+Müllerian mimicry arises when conspicuous unprofitable species share a color pattern,
+gaining protection because predators learn and avoid the warning colors of a bad meal.
+Coloration also has other functions. For example, how does one butterfly recognize another
+of the same species to mate? Color vision is thought to play a key role in driving the
+
+evolution of animal color patterns via natural or sexual selection, while achromatic
+(brightness) vision is often ignored as a possible mechanism for species recognition.
+Here we find evidence that brightness vision rather than color vision helps some
+mimetic Adelpha butterflies identify potential mates while their co-mimetic wing
+coloration is indiscriminable to avian predators. To do so, we examined the visual
+system of the butterfly Adelpha fessonia, a member of a diverse genus of butterflies
+comprising over 200 taxa with multiple mimicry complexes. We characterized the
+photoreceptors of A. fessonia using RNA-seq, eyeshine, epi-microspectrophotometry,
+optophysiology and comparative sequence analysis. We used these data to model the
+discriminability of wing color patches of A. fessonia in relation to those of its sympatric
+co-mimic, A. basiloides, through A. fessonia and avian visual systems. Adult A. fessonia
+eyes express three visual opsin mRNAs encoding long wavelength-, blue-, and
+ultraviolet-sensitive rhodopsins with peak sensitivities (lmax values) at 530 nm, ~431 nm
+and 355 nm, respectively. Red-reflecting ommatidia, found in other nymphalid butterflies
+such as monarchs and Heliconius butterflies, are absent from the eyeshine of A.
+fessonia, indicating A. fessonia eyes lack heterogeneously expressed red filtering
+pigments and red-sensitive photoreceptors. Visual models of Adelpha wing coloration
+suggests that A. fessonia can distinguish conspecifics from co-mimics using achromatic
+vision. Avian predators, on the other hand, cannot distinguish between co-mimic wing
+color using either chromatic or achromatic cues. Taken together, these results suggest
+that mimetic wing color patterns and visual systems have evolved in tandem to maintain
+mimicry while avoiding mating between look-alike species.
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Introduction
+Müllerian mimicry is an effective defensive strategy against predators where
+multiple unprofitable species adopt the same conspicuous appearance and contribute to
+predators avoiding the conspicuous signal. These defenses include but are not limited
+to chemical, physiological, and behavioral defenses. Limenitis butterflies provide several
+examples of such a phenomenon with some species mimicking other defended species.
+For instance, L. archippus (viceroy) benefits from the defenses of its co-mimics, Danaus
+plexippus (monarch) and D. gillippus (queen), as avian predators learn to associate
+distastefulness with the similar wing patterns of both species (Prudic et al. 2007, 2019).
+Though mimicry can involve other sensory modalities such as auditory mimicry in moths
+(O’Reilly et al. 2019), most studies of mimicry emphasize coloration and vision.
+Studies of mimicry have generally focused on the targeting of prey by predators
+(Rowland et al. 2007; Thurman and Seymoure 2015; McClure et al. 2019). Examples
+include avian predators learning to avoid brightly colored frogs (Darst and Cummings
+2006) and aposematic butterflies (Chai et al. 1986; Prudic et al. 2002; Finkbeiner et al.
+2018), and carnivores learning to avoid mimetic snakes (Pfennig et al. 2001). However,
+the perceptual capabilities of prey and predator considered jointly have only been
+investigated relatively recently (Bybee et al. 2012; Llaurens et al. 2014; Dalbosco
+Dell’Aglio et al. 2018). For most birds, moth and butterfly larvae and adults comprise a
+key component of their diet, and lepidopteran abundance is positively correlated with
+bird reproductive success (Nell et al. 2023). Despite these studies, there is still a dearth
+in knowledge of the visual systems of lepidopteran prey and how these systems
+contribute to the evolution and maintenance of butterfly aposematism and mimicry.
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+This study focuses on the visual system of Adelpha fessonia, a member of a
+genus, which contains many species with a white stripe on their wings. The genus
+Adelpha consists of over 100 described species and a similar number (~100) of
+subspecies (Willmott 2003a) ranging from the southern United States to South America.
+Moreover, recent phylogenies suggest that Limenitis (Ebel et al. 2015) and the Asian
+genus Athyma (Wu et al. 2019) should also be included in Adelpha. Among Adelpha
+adults, wing patterns involve multiple convergent wing coloration patterns suggesting
+multiple mimicry complexes (Willmott 2003a). For example, at least seven Adelpha
+species in Venezuela have independently evolved an orange band bordering on and
+touching the white band of the dorsal hindwing (Willmott 2003a). A study in Costa Rica
+and Ecuador deploying clay model butterflies and counting bird attacks found that
+mimetic Adelpha wing color patterns are an effective defense mechanism against
+predators (Finkbeiner et al. 2018). This study and others (Finkbeiner et al. 2017) have
+highlighted the frequency-dependent benefits conferred on the mimic by the model and
+have also revealed some nuances in the classification of a butterfly species as either
+model or mimic. A study of natural populations of the model Danaus gilippus (queen)
+butterfly and its mimic L. archippus (viceroy) in Florida found that unpalatability of the
+mimic increases where the model is rare, transforming both species in those
+geographical localities into co-mimics (Prudic et al. 2019).
+Our focal taxon, Adelpha fessonia fessonia, can be found near streams from
+Panama to Mexico, and occasionally in the lower Rio Grande Valley in Texas (Willmott
+2003a). Adelpha fessonia fessonia (hereafter just A. fessonia) has orange forewing tips,
+with conspicuous white bands on both wings (Fig. 1A) that likely act to reduce predation
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+in multiple ways: by signaling escape potential, by signaling unpalatability and/or by
+disrupting prey recognition (Fig. 1 A,B; Stobbe and Schaefer, 2008). The white stripe
+also likely influences mating success (Lederer 1960). Like other Adelpha butterflies, A.
+fessonia fly in a quick and unpredictable manner, likely causing predators to expend
+more energy in catching the prey than obtaining them, thus associating butterflies with
+similar patterns as being too costly to bother catching (Gibson 1974; Mallet and Singer
+1987; Páez et al. 2021). Adelpha fessonia may be distasteful, obtaining toxins from the
+plants that they consume as larvae. While there is a diversity of larval host plants used
+by species in the genus, A. fessonia consumes Rubiaceae plants in the genus Randia
+as larvae (Willmott 2003a). Adults may also maintain unpalatability by feeding on white
+Cordia flowers, which are Boraginaceae plants that are hypothesized to contribute to
+the distastefulness of unpalatable Adelpha species (Hill and Mullen 2019). Across the
+genus, larval host plant diversity is correlated with increasing Adelpha species diversity,
+suggesting an evolutionary arms race between Adelpha butterflies and their host plants
+(Ebel et al. 2015; Mullen et al. 2011).
+Although many species of Adelpha share the general orange-tip and white band
+appearance, Adelpha fessonia is unique in having the white stripe continuously
+unbroken from the costa to the anal margin (Willmott 2003a). A second species, A.
+basiloides, is similar in having some white expanding into the discal cell, with a small
+break in the white stripes differentiating the two. These species share common localities
+in the United States, Mexico (e.g., Luis-Martínez et al. 2022), Guatemala, Belize, El
+Salvador, Honduras, Nicaragua, Costa Rica, and Panama (Willmott 2003a) which,
+combined with their similar wing patterns, suggests they are mimics of each other. Their
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+shared color pattern may lead to generalization from predators to avoid unprofitable
+prey. Strengthening the case for mimicry is that in Central America A. basiloides white
+band is wide, matching A. fessonia and other taxa, but in western Ecuador, A.
+basiloides white band is narrow, matching several other Adelpha species present there
+(Willmott 2003a).
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Figure 1. Adelpha fessonia wings, compound eyes, and eyeshine. Photographs of a
+female (left column) and male (right column) Adelpha fessonia wings (A and B), eyes (C
+and D) and eyeshine (E and F).
+
+For many butterflies in the family Nymphalidae, which includes the
+Adelpha/Limenitis genera, vision is based on three opsin-based photoreceptors (Frentiu
+et al. 2007a,b; Pohl et al. 2009). This is commonly found in flower foraging insects as
+seen in honeybees (Peitsch et al. 1992), bumblebees (Spaethe and Briscoe 2005), and
+hawkmoths (White 2003). Typically, these photopigments are encoded by two short
+wave-sensitive opsin genes (UVRh and BRh) and one long wave-sensitive (LWRh)
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+opsin gene (Briscoe 2008; Briscoe and Chittka 2001) although exceptions exist (Mulhair
+et al. 2023; Kuwalekar et al. 2022; Sondhi et al. 2021). Opsin proteins together with a
+light-absorbing 11-cis-3-hydroxy retinal chromophore are the constituent parts of
+photoreceptor molecules that are sensitive to particular wavelengths of light. Amino acid
+substitutions in the chromophore binding pocket domain of the opsin protein can
+spectrally tune the wavelength of peak absorbance (lmax) of the photopigment
+(Wakakuwa et al. 2010). Additional photoreceptor classes can also be produced via
+opsin gene duplication or from single opsins expressed together with photostable
+filtering pigments that coat the rhabdom (Arikawa et al. 2009).
+Lepidoptera rely on vision to navigate and interact with their world. Adelpha
+fessonia is no exception. However, little is known about how the visual system of
+Adelpha butterflies affects their ability to detect potential mates whilst living in habitats
+shared by communities of co-mimics. A PCR-based survey of opsins expressed in adult
+eyes of L. arthemis astyanax and L. archippus yielded three opsin mRNA transcripts,
+encoding ultraviolet (UV)-sensitive, blue-sensitive and long wavelength (LW)-sensitive
+opsin mRNAs, respectively (Pohl et al. 2009). Moreover, the potential for variation in
+opsins among these butterflies was demonstrated in a separate study where the lmax
+values of the LW-sensitive rhodopsins were shown to differ by as much as 31 nm
+(Frentiu et al. 2007a). In this study, we investigate the visual photopigments of Adelpha
+fessonia using next-generation sequencing. We first extracted RNA from eye and brain
+tissue of A. fessonia and related species and built transcriptome assemblies. We then
+quantified opsin expression levels using this RNA-seq data. We used epimicrospectrophotometry (epi-MSP) and optophysiology to measure the λmax values of A.
+
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+fessonia LW- and UV-sensitive photopigments, respectively. We inferred the λmax value
+of the A. fessonia blue-sensitive photopigment using comparative sequence analysis
+and functional expression data for Adelpha/Limenitis blue absorbing rhodopsins. We
+then modeled A. fessonia color vision using the spectral sensitivities generated from this
+study. Color space modeling of model and mimic wing coloration provides evidence that
+the orange patches of Adelpha wings may be a predator-specific signal whilst A.
+fessonia may be able to use achromatic vision to distinguish conspecifics from comimics by the differential brightness of the white stripes of their wings. Our efforts
+represent the first comprehensive study of the visual system of a butterfly species in the
+genus Adelpha and lays the foundation for future studies of the contribution of Adelpha
+butterflies’ vision to the evolution of anti-predator defenses including mimicry.
+
+Materials and Methods
+
+Photographs of butterflies
+
+Whole mount specimen photos were taken with a Canon 5D Mk III and Canon 100mm
+f/2.8L macro lens with an off camera diffused flash. Each head photo is a stack of 50
+photos taken with a Canon 5D Mk III and Canon MP-E 65mm 1-5x macro lens under
+constant, diffused lighting. Plane of focus was incrementally moved from the front to the
+back of the head with an automated slider rail. Photos were stacked with Zerene
+Stacker v.1.04 (Zerene Systems LLC, Richland). Final composite photos as well as
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+whole mount photos were edited with Adobe Photoshop Lightroom 6 to adjust exposure
+and color correction.
+
+Photographs of butterfly eyeshine
+
+The apparatus for eyeshine photos was the same as for epi-microspectrophotometry
+(for details, see Fig. 1 of Briscoe and Bernard 2005). Briefly, it is a Leitz Ortholux-Pol
+microscope equipped with a Leitz 620-257 low stray-light Epi-illuminator, fed by a 45 w
+quartz-halogen lamp in an Ealing housing. Optics were a Leitz 8X/0.18P objective and
+16X eyepieces. A Uniblitz shutter controlled exposure time. An Olympus TG-1 digital
+camera was attached to an eyepiece. Settings of the camera were: macro; iso 1600;
+zoom 4.0; focal length 18; metering mode 3; F/4.9; exposure program 2; color profile
+sRGB IEC61966-2.1; and 1920 x 2560 pixels. An intact butterfly was mounted in a
+slotted plastic tube fixed to the goniometric stage, then oriented to set the eye’s
+direction of view. The microscope was adjusted to center the eyeshine patch in the field
+of view, focused on the cornea. After several minutes of dark-adaptation, a photo was
+taken using a 0.5 sec flash.
+
+Specimen collection, RNA extraction, Sanger sequencing and RNA-seq
+
+Ebel et al. (2015) demonstrated that Eurasian and North American Limenitis species are
+embedded in North American Adelpha making the genus Adelpha paraphyletic. We
+follow Willmott (2003a) and the more recent updates by Prudic et al. (2008) and Rush et
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+al. (2023) for Adelpha taxonomy. Adult butterflies from eight Adelpha species (A.
+basiloides, A. californica, A. celerio, A. donyssa, A. ethelda, A. iphiclus, A. leucerioides,
+A. pithys) and three Limenitis species (L. lorquini, L. weidemeyerii, and L. archippus)
+were initially collected from various localities in Oaxaca, Mexico and the U.S.A. in 20072009 and used for Sanger sequencing. Adult individuals from ten additional species (A.
+boreas, A. cocala, A. cytherea, A. erotia, A. heraclea, A. leucophthalma, A. malea, A.
+naxia, A. phylaca and A. celerio) were subsequently collected from Costa Rica in 20152017 using aerial insect nets, or were reared on host plants on which they were found in
+the field [permit #’s: R-003-2016-OT-CONAGEBIO; R-021-2016-OT-CONAGEBIO].
+Limenitis arthemis astyanax was collected in Florida in 2016 and A. fessonia was
+obtained from the Costa Rica Entomological Supply in 2017 and these specimens were
+used for RNA-seq. Live adults were dissected into RNAlater (Invitrogen) by removing
+and bisecting the head between the eyes, removing the walking legs, and cutting the
+thorax in half between the middle and hind legs and removing the abdomen then
+submerging the tissues in RNAlater solution. Tissues were stored in a refrigerator
+whenever possible in the field and stored at -20° C upon arriving at the laboratory.
+Specimen collection locality data is given in Table 1.
+
+RNA was extracted from all specimens using the Trizol (Invitrogen) extraction method.
+Opsin sequences for A. iphiclus, A. leuceroides, A. basioloides, A. ethelda, A. donyssa,
+A. pithys, L. weidemeyerii, L. lorquini, L. archippus, and A. californica were obtained
+using RT-PCR with degenerate PCR primers and direct Sanger sequencing of the PCR
+products (see Frentiu et al. 2007b for methods). For the other samples, TruSeq RNA
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Sample Preparation Kit v2 (Illumina) was used to prepare libraries for 100 bp paired-end
+RNA-seq. Sequencing was done on a HiSeq 2500 at the UCI Genomics HighThroughput Facility.
+
+De novo transcriptome assembly
+
+We built head tissue de novo Trinity assemblies for each of 11 Adelpha and 1 Limenitis
+species (Table 2). Raw reads were trimmed for quality and parsed using custom scripts.
+To create the de novo transcriptome assemblies, we used the Trinity pipeline
+(trinityrnaseq_r2012-06-08v2) on the University of California’s Legacy High Performance
+Computing cluster (HPC2) (Grabherr et al. 2011; Haas et al. 2013). We deposited the
+resulting Trinity assemblies for A. boreas, A. celerio, A. cocala, A. cytherea, A. erotia, A.
+fessonia, A. heraclea, A. leucophthalma, A. malea, A. naxia, A. phylaca and Limenitis
+arthemis in Dryad (DOI: XX.XXXX/XXXXXX) and the corresponding raw RNA-seq data
+in ArrayExpress under E-MTAB-XXX.
+
+The transcriptomes were searched for opsin sequences using BLASTX and Heliconius
+melpomene opsin query sequences (Macias-Munoz et al. 2019). Sequences with
+identity of more than 20% and an e-value greater than 1E-10 were extracted and
+translated into amino acid sequence using Orf Predictor with the blastx option before
+testing their homology by reciprocal blast hit (Min et al. 2005). UV, B and LW opsin
+sequences from Adelpha and Limenitis species either obtained through Sanger or RNA
+sequencing were annotated and deposited in GenBank with accession numbers:
+XXXXXXX-XXXXXXX (Table 1).
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Phylogenetic Analysis
+
+The evolutionary history of each opsin gene family member was inferred by translating
+and then aligning the complete nucleotide coding sequence for each opsin. After
+manual inspection, the maximum likelihood method based on the Tamura-Nei model
+(Tamura and Nei 1993) as implemented in MEGA7 (Kumar et al. 2016) was used to
+build trees rooted with outgroup nymphalid taxa, Danaus plexippus and Vanessa cardui.
+Initial tree(s) for the heuristic search were obtained by applying Neighbor-Join and
+BioNJ algorithms to a matrix of pairwise distances estimated using the Maximum
+Composite Likelihood (MCL) approach, and then selecting the topology with the highest
+log likelihood value. Support for each node was evaluated out of 100 bootstrap
+replicates.
+
+Quantifying opsin gene expression in Adelpha fessonia
+To determine the involvement of opsins in vision, we looked at the mRNA expression
+levels of the three A. fessonia visual opsins (ultraviolet, blue and longwave) along with
+four other members of the opsin gene family (unclassified opsin, RGR-like opsin,
+pteropsin, and RH7)(Macias-Muñoz et al. 2019) in eye + brain tissue using Kallisto
+(v0.46.2) RNA quantification (Bray et al. 2016). A custom BLAST database was made
+from the de novo Trinity assembly for A. fessonia. Protein query sequences for each
+opsin gene of interest were aligned against the custom BLAST database and corrected
+A. fessonia sequences were added to the de novo transcriptome assembly.
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Transcriptome-wide gene expression (in TPMs) was then quantified in Kallisto by
+matching reads from A. fessonia RNA-seq libraries to k-mer type in pseudoalignments
+as opposed to direct read alignments (Bray et al. 2016). Expression levels were
+visualized by graphing the log base 2 of the TPM for each gene.
+
+Testing for selection in the blue opsins of Adelpha
+
+Adelpha blue opsins have either a tyrosine or a phenylalanine at amino acid position
+195. This amino acid substitution causes a spectral tuning shift in Pieris rapae and
+Limenitis arthemis blue-absorbing rhodopsins (Frentiu et al. 2015; Wakakuwa et al.
+2010). The Y195F substitution red shifts the blue opsin’s peak from ~431 nm to ~435
+nm. To identify possible positively selected sites, we first generated opsin sequence
+alignments in MEGA-X (Kumar et al. 2016; Yang and Nielsen 2002). Then we used a
+site-specific maximum likelihood model to test for selection. We made the assumption
+that the ratio of nonsynonymous to synonymous substitution rates (ω) is constant
+across the branches of the phylogeny but possibly different among sites. The multiple
+sequence alignments and phylogenetic trees were analyzed in EasyCodeML, a
+graphical frontend for PAML 4.9j (Phylogenetic Analysis by Maximum Likelihood) (Gao
+et al. 2019; Yang 2007). Site models used were M1a vs M2a (neutral vs positive) where
+support for positive selection is given if M2a provides a better fit than M1a using
+likelihood-ratio tests (Edgar 2004; Kumar et al. 2018; Yang et al. 2000).
+
+Epi-microspectrophotometry
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+In vivo reflectance spectra of nymphalid butterfly eyeshine can be used to
+determine the absorbance spectrum of a long wavelength-absorbing visual pigment (LW
+rhodopsin) due to the rapid decay of the metarhodopsin photoproduct and relatively
+slow recovery of rhodopsin (for details see Frentiu et al. 2007b Supplementary
+materials). Repeated flashes of bright long-wavelength light convert a substantial
+fraction of LW rhodopsin to metarhodopsin, which then decays exponentially leaving the
+eye in a partially bleached state. With sufficient additional time in the dark there is
+substantial recovery of rhodopsin, so that difference spectra compared to the partially
+bleached state is an estimate of the absorbance spectrum of LW rhodopsin.
+Spectral measurements of eyeshine from Adelpha spp. are challenging because
+their corneas exhibit structural, iridescent reflections that are a source of substantial
+glare, perturbing measurements from the fully dark-adapted eye. To reduce the
+influence of corneal glare from A. fessonia, the eye was treated for ten hours with 1 sec
+566 nm flashes every 90 sec, which created a total bleach of LW rhodopsin and very
+bright eyeshine. Allowing rhodopsin to recover in the dark for two hours created a
+difference spectrum that was fit very well by a R530 rhodopsin template.
+A similar strategy was employed for A. californica. A bright partial bleach was
+created with forty minutes of 5 sec Schott OG590 flashes every 60 sec. A reference
+spectrum was measured after waiting for metarhodopsin to decay. Then the eye was
+treated with a single 3 sec Hoya O58 flash, and a second spectrum measured after
+metarhodopsin decayed. The difference spectrum was well fit by the R530 template.
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Optophysiology
+Photoreceptor cells of butterfly eyes exhibit intracellular pupillary responses to
+bright light that cause easily measured decreases in eyeshine reflectance. Spectral
+sensitivity functions can be measured in a double-beam epi-MSP. The monitoring beam
+is set up to measure continuously the reflectance of eyeshine from the deep
+pseudopupil, with long-wavelength light that itself is so far below threshold that there is
+no decrease in reflectance after that beam is first turned on. The stimulating beam, from
+a wavelength-adjustable and intensity-adjustable monochromatic source, presents
+flashes to the eye that are sufficiently bright to cause decreased monitoring reflectance.
+To eliminate stimulus artifacts in these measurements, the quantum-counting
+photomultiplier is covered by a cutoff filter that transmits the monitoring beam but blocks
+the stimulating flashes.
+It is important to choose the wavelength content of the monitoring beam, so it is
+reflected well by the tapetum. For most nymphalids, the tapetum reflects well from the
+UV out to a long-wavelength cutoff ranging from 650 nm to 700 nm or more, depending
+on the species and the eye-region. For A. fessonia and A. californica, however, the
+cutoff wavelength is only 600 nm, beyond which the reflectance drops abruptly. For our
+experiment with an A. fessonia female, therefore, we chose a monitoring beam created
+by a 600 nm interference filter covered by a density 2.0 neutral filter. The eye region
+selected was the same as for the epi-MSP bleaching experiment. The stimulus-blocking
+filter covering the PMT was Schott OG590. Stimulating flashes of either 60 sec or 10
+sec duration were delivered every 4 min, as required to achieve stable response by the
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+end of the flash. The criterion response chosen was a 7% decrease in reflectance
+monitored and recorded by a digital oscilloscope. For wavelengths ranging from 340 nm
+to 580 nm every 10 nm, the criterion response was achieved. At the end of the
+experimental session, all quantum fluxes that created criterion responses were
+measured with a factory-calibrated Hamamatsu S1226BK photodiode. The spectral
+sensitivity data were computed as the reciprocal of those quantum fluxes vs
+wavelength. The good fit of an R355 template to the pupillary sensitivity data shows that
+only the UV-sensitive R355 photoreceptors contribute to responses in the range 340 nm
+– 380 nm. Similarly, the fit of an R530 template from 490 nm – 580 nm shows that only
+the green-sensitive R530 receptors contribute to long-wavelength sensitivity, confirming
+the MSP estimate that the L rhodopsin of A. fessonia is R530. In the range 390 nm –
+480 nm, the elevated sensitivity of data argues for a contribution from blue-sensitive
+rhodopsin, but its spectral position was not determined in these experiments.
+
+HEK293 cell culture expression, reconstitution, and UV-visible spectroscopy of
+BRh visual pigment
+In a previous site-directed mutagenesis study of Adelpha/Limenitis BRh opsins, we
+identified a Y195F substitution which led to a ~4 nm spectral red shift in peak
+absorbance of the reconstituted photopigment relative to the wildtype BRh opsin that
+had a Y at site 195 (Frentiu et al. 2015). In that study, however, we did not report data
+from a wild-type BRh opsin sequence with F at site 195. Since A. fessonia and A.
+basiloides differ at this site, we decided to report below the outcome of expressing a
+wildtype BRh opsin which is very similar in sequence and which has a F amino acid at
+
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+site 195, namely that of L. lorquini. Methods for the functional expression of L. lorquini
+are detailed in Frentiu et al. (2015). Total RNAs were extracted from a single adult L.
+lorquini head using Trizol (Invitrogen). cDNAs were then synthesized using a Marathon
+cDNA amplification kit (BD Biosciences, Franklin Lakes, NJ). The BRh coding region
+was cloned into pGEM-T easy vector (Promega). A short oligonucleotide sequence
+encoding the 1D4 epitope of bovine rhodopsin (STTVSKTETSQVAPA) was added
+before the stop codon. The tagged cDNA fragments were subcloned into expression
+vector pcDNA3.1(+) (Invitrogen). Transient transfection of HEK293 cells by plasmid
+DNA was carried out by Lipofectamine 2000 (Invitrogen). The cells were replated 2 days
+after transfection and treated with 1 mg/mL G418 sulfate (EMD Chemicals Inc.,
+Gibbstown, NJ) for 2 weeks. Twelve cell clones were chosen, expanded, and screened
+by western blotting. The clone having the highest expression level was then expanded
+to 15 plates of cells. The cultured cells were incubated with 1 mM 11-cis-retinal for 2
+days and collected by centrifugation under dim red light. The collected cells were
+incubated with 40 mM 11-cis-retinal for 1 h at 4 °C. The reconstituted visual pigments
+were extracted using 1% n-dodecyl b–D-maltoside (DDM) (Sigma-Aldrich, Saint Louis,
+MO) in 10 ml of extraction buffer (pH 6.7) (250 mM sucrose, 120 mM KCl, 10 mM
+MOPS, 5 mM MgCl2, 1 mM DTT, 1 Roche protease inhibitor cocktail tablet) (Vought et
+al. 2000) via gentle rotation for 1 h at 4 °C. The visual pigments were then purified by
+immunoaffinity chromatography. Briefly, the crude extract was mixed with Sepharose
+beads conjugated with 1D4 IgG (University of British Columbia, Canada) overnight at
+4 °C. The beads were then washed with 50 ml of wash buffer, pH 6.6 (20% glycerol,
+120mM KCl, 5mM MgCl2, 50mM HEPES, and 0.1% DDM) (Vought et al. 2000). The
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+visual pigments were eluted with 50 mM competing peptide (Quality Controlled
+Biochemicals, Hopkinton, MA) in wash buffer and measured in a Hitachi U-3310 UV-Vis
+spectrophotometer at 0°C. Spectral data represent the average of 5–8 scans. λmax was
+estimated by least-squares fitting of the data to a visual pigment template (Stavenga et
+al. 1993).
+
+Reflectance of Adelpha fessonia and A. basiloides wings
+
+Wings of A. fessonia samples were obtained from live specimens purchased
+from the Costa Rica Entomological Supply while A. basiloides wings were obtained from
+dry specimens in the collection of the Museo de Zoología Alfonso L. Herrera in the
+Universidad Nacional Autónoma de México. Dry samples were rehydrated overnight
+before wings were excised. Wing reflectance measurements of 3 males and 2 females
+each of A. fessonia and A. basiloides (n=10 butterflies total) were taken using previously
+described methods (Bybee et al. 2012; Finkbeiner et al. 2017b).
+Briefly, measurements were taken on the orange spots and white stripes of their
+right forewings as these patches could possibly elicit responses from conspecifics or
+avian predators. The fixed probe holder (Ocean Optics RPH-1) was placed so that the
+axis of the illuminating and detecting bifurcating fiber (Ocean Optics 400-7-UV/VIS) was
+45 degrees to the plane of the wings. Illumination was provided by a deuterium-halogen
+tungsten lamp (Ocean Optics DH-2000) with the reflectance spectra measured by an
+Ocean Optics USB2000 spectrometer. Measurements were recorded on OOIBase32
+and smoothed and plotted using the r package, “pavo” (Maia et al. 2019).
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Visual modeling of Adelpha fessonia wings through the eyes of predator and prey
+
+We used the receptor-noise model to predict whether A. fessonia and avian
+predators can distinguish between A. fessonia and A. basiloides orange patches and
+white stripes (Vorobyev and Osorio 1998). The reflective distribution of the measured
+stimuli from the reflectance measurements were plotted on a triangular A. fessonia color
+space and avian tetrahedral color spaces of ultraviolet and violet capable birds. Using
+the “vismodel” function from “pavo”, we calculate the quantum catches at each
+photoreceptor. For the avian models, we use the built-in averages for UV-sensitive and
+violet-sensitive visual systems for chromatic distances and the double-cone sensitivity
+of the blue tit and chicken for luminance distances of UV-sensitive and violet-sensitive,
+respectively. For A. fessonia, we use λmax values corresponding to 355 nm, 431 nm, and
+530 nm, respectively, for the chromatic distances and the 530 nm photoreceptor for
+luminance distances. The color spaces were then generated using the “plot” and
+“colspace” functions (Maia et al. 2019).
+Chromatic and achromatic distances between the orange patches and white
+stripes in A. fessonia and A. basiloides were calculated using the “bootcoldist” function.
+Bootcoldist allows us to perform a bootstrap measurement with a 95% confidence
+interval to determine if the color distance measurement exceeds a theoretical
+discrimination threshold (Maia et al. 2019). A JND threshold of one is typically used.
+However, spectra separated by a JND threshold of one could still be impossible to
+distinguish between each other and so we use a threshold of two as used for bird
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+plumages (Meneses-Giorgi and Cadena 2021). We use a relative receptor density of
+1:2:2:4 (ultraviolet:short:medium:long-wave receptors) along with a Weber fraction of
+0.1 for both chromatic and achromatic receptors for the UV-sensitive bird model (Kelber
+et al. 2003; Maier and Bowmaker 1993). For the violet-sensitive bird model, we use a
+relative receptor density of 1:2:4:4 (short:short:medium:long) as well as a Weber
+fraction of 0.1 for both chromatic and achromatic receptors (Kram et al. 2010). Over a
+period of years we tried to obtain additional pupae of A. fessonia from our Costa Rican
+source to perform in situ hybridization on this species but were unsuccessful. Therefore,
+Adelpha fessonia’s relative receptor density of 0.15, 0.13, 1 (UV:short:long) was
+approximated from a Limenitis arthemis opsin in situ hybridization image (Frentiu et al.
+2015). Photoreceptor density was manually performed by counting a random sample of
+102 intact ommatidia and normalizing the photoreceptors in proportion to the long-wave
+sensitive photoreceptor. We used a Weber fraction of 0.05 for both chromatic and
+achromatic receptors (Koshitaka et al. 2008). Illumination and background settings were
+set to forest shade and green, respectively, to simulate the natural habitat of Adelpha
+butterflies and their avian predators. Calculated color distances were then plotted using
+rstudio’s “plot” function.
+
+Results
+
+Adelpha fessonia has sexually monomorphic eyes
+Photographs of A. fessonia compound eyes and eyeshine do not show any obvious
+dimorphism between the two sexes (Fig. 1C-F). Eyes of both sexes are characterized
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+by heterogeneity in the color of the eyeshine across the retina with blue, green, and
+yellow-green-reflecting ommatidia (Fig. 1E, F). The lack of red ommatidia suggests an
+absence of red-sensitive photoreceptor cells (with λmax ≥600+ nm) in A. fessonia. A
+previous study found that in the ommatidia of nymphalids without saturated red
+eyeshine, there was no evidence for R3-8 photoreceptor cells that were red-sensitive
+(Briscoe and Bernard 2005). This does not preclude, however, a second class of long
+wavelength-sensitive photoreceptor cell with a peak sensitivity >530 nm due to optical
+filtering of the basal R9 cell by the overlying R1-8 photoreceptor cells (Belušic et al.
+2021). Even without evidence for red-sensitive photoreceptor cells, it is still expected
+that A. fessonia will have UV-, blue- and LW-sensitive photoreceptor cells,
+corresponding to each kind of opsin.
+
+UV, blue and LW visual opsins of Adelpha fessonia
+
+Indeed, our BLAST searches of the A. fessonia transcriptome assembly yielded three
+visual opsin transcripts corresponding to one UV, one blue, and one LW opsin and three
+additional transcripts encoding an RGR-like opsin, a pteropsin, and Rh7 opsin. A similar
+number of visual opsin transcripts (n=3) was found in the other surveyed
+Adelpha/Limenitis species except for A. leucerioides, where we found two LW opsin
+mRNA transcripts, and evidence of a species-specific gene duplication (Fig. 2C). Across
+all three visual opsin phylogenies constructed using the expanded RNA-seq data, the
+following sister taxa were recovered: A. heraclea - A. naxia, A. boreas - A. leucerioides,
+A. donyssa - A. pithys, and A. celerio - A. californica, although the bootstrap support for
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+A. boreas - A. leucerioides was <60% (Fig. 2A-C). The genus Limenitis was recovered
+as a monophyletic clade with high bootstrap support. Lastly, the site-specific maximum
+likelihood model showed no evidence of positive selection occurring among the blue
+opsin gene in Adelpha lineages.
+
+A
+
+UV opsin
+71
+97
+
+B
+
+B opsin
+
+Adelpha erotia
+
+92
+98
+
+Adelpha malea
+Adelpha phylaca
+Adelpha iphiclus
+Adelpha heraclea
+
+100
+
+76 96
+
+Adelpha naxia
+
+Adelpha leucophthalma
+
+99
+
+63
+
+Adelpha ethelda
+
+88
+94
+
+60
+88
+60
+
+97
+
+80
+
+Adelpha iphiclus
+
+95
+
+100
+
+96
+
+Limenitis archippus 514 nm
+
+Limenitis weidemeyerii 530 nm
+100
+96 Limenitis lorquini 530 nm
+Adelpha pithys
+
+Adelpha celerio Phe
+
+0.050
+
+Adelpha californica 530 nm
+Limenitis arthemis 545 nm
+
+Limenitis arthemis Tyr 430.9 nm
+Limenitis lorquini Phe 435.1 nm
+
+Adelpha fessonia 530 nm
+Adelpha celerio
+
+98
+
+100
+
+0.050
+
+Adelpha ethelda
+
+Adelpha basiloides
+
+Adelpha donyssa Phe
+
+Adelpha californica Phe
+62
+
+Adelpha leucerioides LW2
+
+Adelpha cytherea
+
+Adelpha ethelda Tyr
+
+Limenitis weidemeyerii Phe
+
+Adelpha californica
+
+Adelpha leucerioides LW1
+
+Adelpha leucopthalma
+
+Limenitis archippus Tyr 431.1 nm
+
+100
+
+Limenitis archippus
+
+Adelpha celerio
+
+Adelpha naxia
+Adelpha boreas
+
+Adelpha pithys Tyr
+
+Limenitis lorquini
+97
+
+Adelpha heraclea
+100
+
+Adelpha cytherea Tyr
+
+Adelpha pithys
+Limenitis weidemeyerii
+
+Adelpha cocala
+
+Adelpha iphiclus Tyr
+
+Adelpha donyssa
+
+100
+
+Adelpha heraclea Tyr
+Adelpha naxia Tyr
+
+Adelpha basiloides Phe
+
+Adelpha fessonia 355 nm
+
+Limenitis arthemis
+
+Adelpha erotia
+
+Adelpha fessonia Tyr
+
+95
+
+Adelpha cytherea
+
+100
+
+Adelpha phylaca
+
+Adelpha erotia Phe
+
+Adelpha leucophthalma Phe
+
+Adelpha basiloides
+
+76
+
+89
+
+Adelpha phylaca Phe
+
+Adelpha cocala Phe
+
+Adelpha cocala
+
+99
+
+Adelpha malea
+
+100
+
+Adelpha malea Phe
+
+Adelpha leucerioides Phe
+
+Adelpha leucerioides
+
+72
+
+LW opsin
+
+Adelpha boreas Phe
+
+Adelpha boreas
+
+100
+
+C
+
+Adelpha donyssa
+
+0.020
+
+Figure 2. Phylogenies of Adelpha UV, blue, and LW opsins. (A) UV, (B) blue and (C)
+LW opsin nucleotide phylogenies reconstructed using maximum likelihood, the TamuraNei model (Tamura and Nei 1983), and 100 bootstrap replicates. Bootstrap support
+values <60% are not shown. The blue opsin amino acid at site 195, either phenylalanine
+(Phe) or tyrosine (Tyr), is shown for each species together with λmax values of the blueabsorbing Limenitis rhodopsins (Frentiu et al. 2015). λmax values of the LW-absorbing
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+rhodopsins are also shown (Frentiu et al. 2015). Scale bar = substitutions/site. A recent
+duplication of the LW opsin gene is observed in A. leucerioides.
+
+Visual opsins mRNAs are highly expressed in A. fessonia heads
+
+We found that the UV, blue, LW, and unclassified opsins were highly expressed
+in A. fessonia head tissue while RGR-like opsin, pteropsin, and RH7 were not (Fig. 3).
+The LW opsin was the most highly expressed whereas the blue and UV opsin followed
+closely with similar expression levels. This is to be expected as these three opsins are
+expressed in the compound eyes of Limenitis (Frentiu et al. 2015). The unclassified
+opsin, a candidate retinochrome, was also highly expressed though not as high in
+comparison to another nymphalid butterfly, Heliconius melpomene (Macias-Muñoz et al.
+2019). In addition, the expression levels of the RGR-like opsin are much lower than that
+of H. melpomene. However, this may be due to differences in the times of day that the
+tissue were harvested and/or in the size of photoreceptor cells relative to secondary
+pigment cells within which the visual opsins and unclassified opsin, respectively, are
+expressed.
+
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+log2(TPM)
+
+15
+
+10
+
+5
+
+0
+UVRh
+
+BRh
+
+LWRh Unclassified Pteropsin
+
+RGR
+
+Rh7
+
+Figure 3. Expression of opsin genes in Adelpha fessonia eye + brain tissue (n=5)
+measured using RNA-seq data and Kallisto quantification. Y-axis is in transcripts per
+million on a log2 scale. Error bars indicate standard error.
+
+λmax values of Adelpha fessonia LW and UV rhodopsins
+
+Adelpha fessonia and A. californica LW rhodopsins from dark adapted and partially
+bleached eyes show peak absorbance at 530 nm (Fig. 4A) similar to the λmax values of
+Limenitis lorquini and L. weidmeyerii (Frentiu et al. 2007a,b; Frentiu et al. 2015.
+
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Normalized Absorbance
+
+A
+
+Pupillary sensitivity
+
+600625650
+
+A. fessonia
+A. californica
+R530
+
+1.0
+0.8
+0.6
+0.4
+0.2
+
+0
+400
+B
+
+500
+
+1.2
+
+450
+
+500
+
+550
+
+600
+
+650
+
+0
+700
+
+540
+
+580
+
+Wavelength (nm)
+0.7
+
+LOG-SDATA
+0.6 R530
+R355
+0.5
+0.4
+0.3
+0.2
+0.1
+0
+340
+
+380
+
+420
+
+460
+
+500
+
+Wavelength (nm)
+
+Figure 4. Epi-microspectrophotometry and pupillary sensitivity of Adelpha fessonia
+eyes. (A) Normalized absorbance spectra of Adelpha fessonia and A. californica long
+wavelength-absorbing rhodopsins. Dots indicate experimental spectra of A. fessonia
+(orange) and A. californica (blue) and green dotted lines indicate rhodopsin template
+with peak absorbance at 530 nm (R530) (Palacios et al. 1996). (B) A. fessonia UV- and
+long wavelength rhodopsin sensitivity measured using optophysiology. Experimental
+pupillary sensitivity of A. fessonia (orange dots). Dotted lines indicate fits to a
+computational model which includes both R355 (grey) and R530 (green) rhodopsins.
+
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Pupillary sensitivities of A. fessonia peak in the UV and LW
+
+The pupillary sensitivity data of A. fessonia as shown in Fig. 2B was computed as the
+reciprocal of quantum fluxes versus wavelength. The good fit of an R355 template to the
+pupillary sensitivity data shows that only the UV-sensitive R355 photoreceptors
+contribute to responses in the range 340-380 nm. Similarly, the fit of an R530 template
+from 490-580 nm shows that only the green-sensitive R530 receptors contribute to longwavelength sensitivity, confirming the epi-microspectrophotometry estimate that the LW
+rhodopsin of A. fessonia is R530. In the range 390-480 nm the elevated sensitivity of
+data argues for a minor contribution from a blue-sensitive rhodopsin, but its spectral
+peak could not be determined from these experiments. Pigments in the 530 nm region
+are the most abundant and easiest pigments to measure, hence the higher sensitivity
+when compared to the peaks near R355. The experimentally determined 355 nm and
+530 nm peaks of A. fessonia physiological response to light are driven by the UV- and
+LW-sensitive photopigments. The differing abundances of each pigment and the
+photoconversions of each rhodopsin to metarhodopsin (which has a peak in the bluish
+range) make it difficult to measure the λmax value of the blue-absorbing rhodopsin.
+
+The blue-absorbing rhodopsins of Adelpha/Limenitis
+
+To bypass technical challenges of measuring the blue rhodopsin in vivo using either epimicrospectrophotometry or optophysiology, we aligned and compared the blue opsins of
+
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+22 species in the Limenitis/Adelpha genera. Then we used absorbance spectra data
+from HEK293-expressed rhodopsins of species in the Limenitis clade to infer the
+absorbance peaks of the Adelpha fessonia blue-sensitive rhodopsin, including data from
+a previously unstudied species and close relative of A. fessonia, L. lorquini.
+
+The blue-absorbing rhodopsin of Limenitis lorquini has a peak absorbance at 435.1 nm
+and a phenylalanine at the known spectral tuning site, amino acid 195 (Fig. 5A, D).
+Limenitis arthemis and L. archippus have peak absorbances of 430.9 nm and 431.1 nm,
+respectively (Frentiu et al. 2015), and both have a tyrosine at amino acid 195 (Fig. 5B
+and C). A substitution of phenylalanine to tyrosine at amino acid 195 in L. arthemis
+results in a red-shifted pigment with a λmax of 435.1 nm (Fig. 5C). As seen from the
+amino acid alignment in Fig. 5D, A. fessonia has tyrosine at position 195 suggesting
+that the blue-absorbing rhodopsin of A. fessonia has a peak absorbance at around 431
+nm.
+
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+0.020
+
+A
+
+Limenitis lorquini
+
+0.016
+
+Absorbance
+
+F195
+
+435.1 nm
+
+0.012
+
+0.008
+
+0.004
+
+0
+350
+
+400
+
+450
+
+500
+
+550
+
+600
+
+Wavelength (nm)
+
+Absorbance
+
+0.060
+
+D
+
+0.048
+
+B
+
+430.9 nm
+
+0.020
+
+L. arthemis
+Y195
+
+0.016
+
+0.036
+
+0.012
+
+0.024
+
+0.008
+
+0.012
+
+0.004
+
+0
+350
+
+A. fessonia
+A. basiloides
+L. archippus
+L. arthemis
+L. lorquini
+
+400
+
+450
+
+500
+
+550
+
+600
+
+L. arthemis
+Y195F
+
+C
+
+0
+350
+
+435.1 nm
+
+400
+
+450
+
+500
+
+550
+
+600
+
+Wavelength (nm)
+
+135
+195
+|
+|
+LGCDIYAVLGSLSGIGGAMTNAVIAFDRYKTISSPLDGRLNRVQAALLIAFTWFWALPFTFLPAFKVWGRYVPEGFLTTCS
+LGCDIYAVLGSLSGIGGAMTNAVIAFDRYKTISSPLDGRLNRVQAALLIAFTWFWALPFTFLPAFKVWGRFVPEGFLTTCS
+LGCDIYAVLGSLSGIGGAMTNAVIAFDRYKTISSPLDGRLNRVQAALLIAFTWFWALPFTFLPAFKVWGRYVPEGFLTTCS
+LGCDIYAVLGSLSGIGGAMTNAVIAFDRYKTISSPLDGRLNRVQAALLIAFTWFWALPFTILPAFKVWGRYVPEGFLTTCS
+LGCDIYAVLGSLSGIGGAMTNAVIAFDRYKTISSPLDGRLNRVQAALLIAFTWFWALPFTFLPAFKVWGRFVPEGFLTTCS
+
+Figure 5. Limenitis blue-absorbing rhodopsin dark spectra based on heterologous
+expression in HEK 293 cells. Dark spectra of (A) wildtype Limenitis lorquini, (B) wildtype
+L. arthemis and (C) F195Y mutant L. arthemis blue-absorbing rhodopsins. Spectra of
+(B) and (C) reproduced with permission from Frentiu et al. (2015). (D) Partial amino acid
+alignment of the blue opsin of representative species indicating the location of two
+amino acid sites, 135 and 195, with known spectral tuning effects (Wakakuwa et al.
+2004; Frentiu et al. 2015; Liénard et al. 2021).
+
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Adelpha fessonia may distinguish white wing stripes that avian predators
+probably cannot
+
+The dorsal white stripes and orange patches of most Adelpha wings look mostly
+indistinguishable between species (Fig. 6A) and so we investigated if this is also true for
+A. fessonia and their avian predators. The white stripes on the dorsal portion of A.
+basiloides show brighter reflectance in the 300 to 500 nm range compared to A.
+fessonia wings while the orange patches overlapped throughout the UV-vis range (Fig.
+
+A. basiloides
+
+A. fessonia
+
+B
+
+A. fessonia
+A. basiloides
+
+0
+
+A
+
+Reflectance (%)
+20 40 60 80
+
+6B).
+
+UV
+
+D
+
+300
+
+400
+
+500
+600
+Wavelength (nm)
+
+700
+
+0
+
+Contrast (JND)
+4
+2
+
+6
+
+C
+
+B
+
+G
+
+Chromatic
+
+Achromatic
+
+Figure 6. Visual modeling suggests Adelpha fessonia and A. basiloides white wing
+patches are distinguishable achromatically when viewed through the eyes of A.
+fessonia. (A) Photographs of dorsal right forewings of A. fessonia (left) and A. basiloides
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+(right) with scale bar representing 1 centimeter. (B) Reflectance measurements of A.
+fessonia orange wing patch (orange), A. fessonia white wing stripe (black), A. basiloides
+orange wing patch (dashed red), and A. basiloides white wing stripe (dashed grey). (C)
+A. fessonia orange patch (orange), A fessonia white stripe (white), A. basiloides orange
+patch (red), and A. basiloides white stripe (grey) mapped in the trichromatic color space
+for the A. fessonia visual system. (D) Distances between the two species’ wing color
+patches as viewed through the A. fessonia visual system. Color distances are in units of
+chromatic contrast (JND) between A. fessonia and A. basiloides wings with a JND
+threshold (dotted line) of 2. Points and bars are bootstrapped mean values with 95%
+confidence intervals.
+
+Chromatic diagrams show that the clusters for the orange patches and white
+stripes overlapped in both A. fessonia and the two bird (UV and violet) visual models
+(Fig. 6C, 7A and C). All three models did not pass the JND threshold of two in the
+chromatic space for the orange patches or the white stripes. This is also the case when
+looking at achromatic calculations for the orange patches (Fig. 6D, 7B and D). However,
+A. fessonia did exceed the JND threshold for the white stripes in the achromatic
+contrast space (Fig. 6D) while both violet- and UV-sensitive bird systems did not (Fig.
+7B and D). As predictive tools, these models will require behavioral studies to confirm.
+
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+V
+
+C
+V
+
+M
+
+SW
+UV
+
+L
+
+UV
+
+M
+
+SW
+
+0
+
+2
+
+4
+
+B
+
+Contrast (JND)
+6 0
+
+2
+
+4
+
+6
+
+A
+
+Chromatic
+
+Achromatic
+
+L
+
+Figure 7. Adelpha fessonia and A. basiloides orange patches and white stripes are
+likely indistinguishable to avian predators. Coloration of A. fessonia orange patch
+(orange), A fessonia white stripe (white), A. basiloides orange patch (red), and A.
+basiloides white stripe (grey) in tetrahedral color spaces for violet-sensitive (A) and UVsensitive (B) avian visual systems. (C) Color distances between A. fessonia and A.
+basiloides wing patches for violet-sensitive (top) and UV-sensitive (bottom) avian visual
+systems. Color distances are in units of chromatic contrast (JND) between A. fessonia
+and A. basiloides wings with a JND threshold (dotted line) of 2. Points and bars are
+bootstrapped mean values with 95% confidence intervals. UV=ultraviolet, V=violet,
+SW=blue, M=RH2, L=LWS.
+
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Discussion
+
+Our experiments allow us to characterize the photopigments of Adelpha fessonia
+eyes. As we have shown, A. fessonia possesses three photopigment types consistent
+with the potential trichromacy of other nymphalid butterflies. Our study has also shown
+that A. fessonia eyes are not obviously sexually dimorphic, measured the peak
+sensitivities of their photopigments, and quantified opsin gene expression levels. In
+addition, A. fessonia is unlikely to have color vision in the red range (>600 nm).
+Characterizing the photopigments of A. fessonia eyes allowed us to model A. fessonia
+vision and provide us with hints of their perception of the world. While these
+experiments were performed on A. fessonia, these findings are relevant to studying the
+evolution and ecology of visual perception in Adelpha butterflies more broadly.
+
+The presence of heterogeneous eyeshine in butterfly eyes consisting of yellowand red-reflecting ommatidia is not universal (Briscoe and Bernard 2005; Stavenga et
+al. 2001). While eyeshine could be locally uniform, there are instances where
+heterogeneity occurs that could be indicative of adaptations that optimize spectral
+discrimination in the yellow, orange and red range of the visible light spectrum. The
+patterns resulting from this heterogeneity can vary greatly between species though
+some species may share similar motifs. Lycaenidae, and certain nymphalid subfamilies,
+Nymphalinae and Charaxinae, share a red and yellow motif with the nymphalid
+subfamily Heliconiinae (Stavenga 2002). This red eyeshine in Heliconius butterflies is
+indicative of the presence of red photoreceptors resulting from the presence of filtering
+
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+pigments (Zaccardi et al. 2006) and of the presence of optical filtering by overlying
+photoreceptor cells (Belušic et al. 2021). These red filtering pigments have been
+demonstrated to cause behavioral differences in butterfly species that have them and
+those that do not. Heliconius erato, a species possessing red filtering pigments, was
+able to differentiate between red and orange stimuli while Vanessa atalanta, a species
+without red filtering pigments, was not (Zaccardi et al. 2006). Adelpha fessonia has a
+yellow/green/blue eyeshine pattern like what is seen in other nymphalids such as
+Hypolimnas bolina, denoting a lack of a red photoreceptor (Stavenga et al. 2001).
+It was expected that A. fessonia vision would have three major spectral classes
+of photoreceptors as described in other nymphalids (Briscoe 2008). We expect genes
+involved in vision to be highly expressed in head tissue. RNA-seq quantification showed
+high expression levels of the three light sensitive opsin mRNAs (LW, blue, and UV) that
+are directly involved in vision along with an unclassified opsin that is also expressed in
+nymphalid butterfly secondary pigment cells (Fig. 3)(Macias-Muñoz et al. 2019).
+Adelpha fessonia has a low expression of RH7, a gene associated with light sensing
+circadian rhythms, unlike the high expression found in Manduca sexta (Feuda et al.
+2016; Macias-Muñoz et al. 2019).
+We found the peak absorbances (lmax) of A. fessonia photopigments in the
+ultraviolet, blue, and long wavelength portions of the light spectrum corresponding to
+355 nm, 431 nm, and 530 nm, respectively, based on optophysiology and epimicrospectrophotometry on living eyes as well on comparative sequence analysis (Figs.
+4 and 5). Previously, amino acid substitutions at two sites were shown to be crucial for
+spectral tuning in blue-absorbing visual pigments in the small white butterfly, Pieris
+34
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+rapae (Wakakuwa et al. 2010). In the case of P. rapae’s blue-absorbing pigment, a F to
+Y at position 177 caused a 4 nm blue shift. Conversely, site-directed mutagenesis of the
+opposite mutation (Y to F at site 195) in Limenitis BRh opsins caused the same
+magnitude of effect, although in the opposite direction (Fig. 3C-E and Frentiu et al.
+2015). Importantly, functional expression of wildtype L. lorquini and mutant L. arthemis
+astyanax opsins, which both have a F at site 195 have the same peak absorbance of
+435 nm, while wildtype L. arthemis astyanax and L. archippus, with a Y at site 195 both
+have a peak absorbance at 431 nm. Given the A. fessonia BRh shares a Y at site 195
+with L. arthemis and L. archippus, it is highly likely its blue photopigment has a spectral
+peak at 431 nm, while that of A. basiloides, having a F at this site is likely to have a
+peak closer to 435 nm. Do these small spectral tuning effects have an impact on these
+butterflies’ fitness? If so, then it is likely to be very small as we did not find any evidence
+of positive selection occurring in the blue opsins of the Adelpha lineage via a PAML sitespecific test. The evolutionary reason behind why some species have the tyrosine
+phenotype and others have the phenylalanine phenotype is currently unknown but
+raises the question of whether or not this small tuning effect has an impact on the
+butterflies’ visual capabilities. What are the evolutionary benefits of one phenotype
+versus another and why do some members of the Adelpha/Limenitis clade possess the
+tyrosine or the phenylalanine phenotype? How does their vision affect their vast
+diversity? Although differing peak sensitivities in Adelpha BRh photoreceptors could
+cause variation in their visual perceptions which might play a role in creating and
+maintaining the color of objects they interact with, available evidence suggest that BRh
+is evolving conservatively in Adelpha/Limenitis spp.
+
+35
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+We have to make the distinction of whether or not phenotypic similarities are a
+byproduct of shared ancestry between sister species or of convergent evolution
+between two unrelated species. For example, A. fessonia and A. basiloides’ similar wing
+patterns may be the result of shared ancestry as seen in their opsin phylogenies (Fig.
+2). However, these phylogenies provide only weak evidence that A. fessonia and A.
+basiloides are sister species for several reasons. First, our species sampling in Adelpha
+is very incomplete relative to the diversity in the genus, with samples selected to span
+the diversity, rather than provide a test of species relationships. Furthermore, A.
+fessonia immature stages do not resemble those of A. basiloides, and A. basiloides is
+very likely sister to A. plesaure based on immature morphology and the phylogenetic
+analysis of Ebel et al. (2015). In addition, A. fessonia is thought to be sister to A.
+gelania based on similarities in their genitalia, despite looking different in wing pattern
+and wing shape (Willmott, 2003a). Supporting the hypothesis of convergent wing
+patterns is the fact that the putative sister taxa Adelpha plesaure and A. gelania do not
+resemble A. basiloides and A. fessonia, respectively. Whether or not their color patterns
+are the result of shared ancestry, it can be argued that these similar patterns are
+maintained because of mimicry as there would be little evolutionary incentive to diverge
+from an effective signal that advertises their unprofitability.
+
+Butterflies are visually dependent creatures capable of discerning a plethora of
+visual stimuli (Finkbeiner et al. 2017b, Finkbeiner et al. 2021). Behaviors such as mate
+selection and host/food plant location have not been studied in-depth with A. fessonia,
+but with these data, the groundwork has been set to do so. Our study could also
+
+36
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+potentially lead to better understanding of how mimetic nymphalids are able to correctly
+identify conspecifics for mating. Adelpha fessonia eye morphology and wing color
+patterns (in the visible spectrum) are not apparently sexually dimorphic (Fig. 1A-F). Due
+to their lack of a red sensitive opsin or a redshifting filtering pigment, A. fessonia is
+unlikely to possess red color vision. This means that they may not be able to distinguish
+the orange patches on the wings of their own versus another similar-looking species like
+A. basiloides. Even if their tiny R9 cell is red-shifted due to optical filtering by overlying
+photoreceptor cells, the orange wing reflectance spectra between the two species are
+likely to be too similar to be distinguishable to A. fessonia. Under either scenario, the
+orange aposematic signal is most likely used as a signal to ward off predators (Páez et
+al. 2021). As butterflies are capable of learning and distinguishing between small
+differences in wavelengths in visual stimuli, it is possible that A. fessonia is using other
+visual signal features to discriminate conspecifics from co-mimics (Koshitaka et al.
+2008).
+Our modeling provided evidence that A. fessonia can discriminate between the
+white stripes of A. fessonia and A. basiloides achromatically and that avian predators
+are unable to distinguish the two species’ white stripes. Studies in color vision typically
+focus on the impact of chromatic cues and control for achromatic information (Kelber et
+al. 2003). However, most visual stimuli have a combination of chromatic and achromatic
+cues, and both should be accounted for when making predictions (Olsson et al. 2018).
+Recent studies have shown that achromatic cues do elicit behavioral responses,
+particularly in Papilio xuthus foraging behavior (Kinoshita et al. 2012). It is plausible that
+achromatic cues could be used in other ecological behaviors such as mate selection
+
+37
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+and that A. fessonia is using the white stripe to determine conspecific individuals from
+A. basiloides. There is a vested interest for butterflies to distinguish conspecifics.
+Quickly finding conspecifics can improve mating success as the butterfly would not
+needlessly expend time or energy courting the wrong orange and white butterfly. In
+addition, hybridization between two different species typically results in a lower fitness
+for the hybrid such as the case of reduced feeding abilities in hybrid Limenitis butterflies
+(Kramer et al. 2018). In rare cases such as in Heliconius butterflies, speciation can
+occur via hybridization (Mavárez et al. 2006) though this is likely not an issue for A.
+fessonia and A. basiloides. Even though modeling is a powerful predictive tool,
+behavioral assays will still need to be done to confirm A. fessonia and bird colordiscerning capabilities.
+
+In this study, we have characterized the photopigments of Adelpha fessonia and
+modeled their visual capabilities. Using the measured peak sensitivities of their three
+photopigments, we created color space models to quantify their potential color
+discrimination abilities. The physiological data we have presented here will be useful in
+investigating those stimuli in the natural environment to which these butterflies may
+respond. Lastly, the behavioral and ecological significance of this physiological data
+needs further investigation. Even with modeling data, we will need to verify our
+predictions with behavioral experiments. Comparison of these species’ eyes with those
+of others can help to expand upon our knowledge of how a prey’s sensory system
+contributes to the generation and maintenance of biodiversity.
+
+38
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Acknowledgments
+We thank Omar Ávalos, Francesca Frentiu, Fred Gagnon, Blanca Claudia Hernández,
+Maita Kuvhenguhwa, Gordon Pratt, Marysol Trujano, and Andrew Warren for assistance
+with specimen collection, the Costa Rica Entomological Supply for providing pupae, and
+Maita Kuvhenguhwa and Zachary Johnston for technical support. This work was
+supported by NSF DEB-1342706 to R.I.H. and DEB-1342759 and IOS-1656260 to
+A.D.B
+Author contributions:
+A.D., G.D.B, S.P.M, and A.D.B. designed research; A.D., G.D.B., A.M.M., F.Y., R.I.H,
+J.P.L, A.G.R.O., A.L.-M., J.L.B. performed research; A.D., G.D.B., F.Y., A.M.M.,
+A.G.R.O., and A.D.B. analyzed data; A.D. and A.D.B. wrote the paper.
+
+39
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+References
+Aiello A (1984). Adelpha (Nymphalidae): Deception on the wing. Psyche, 91: 1–45.
+https://doi.org/10.1155/1984/87930
+Arikawa K, Pirih P and Stavenga DG (2009). Rhabdom constriction enhances filtering
+by the red screening pigment in the eye of the Eastern Pale Clouded yellow
+butterfly, Colias erate (Pieridae). Journal of Experimental Biology, 212: 2057–
+2064. https://doi.org/10.1242/jeb.030692
+Beccaloni GW, Viloria AL, Hall SK and Robinson GD (2008). Catalogue of the
+hostplants of the Neotropical butterflies. Sociedad Entomológica Aragonesa,
+Monografías Tercer Milenio, Vol. 8 Zaragoza, Spain.
+Belušic G, Ilić M, Meglič A, Pirih P (2021). Red-green opponency in the long visual fibre
+photoreceptors of brushfoot butterflies (Nymphalidae) Proceedings of the Royal
+Society B, 288: 20211560. https://doi.org/10.1098/rspb.2021.1560
+Blackiston D, Briscoe AD, and Weiss MR (2011). Color vision and learning in the
+monarch butterfly, Danaus plexippus (Nymphalidae). Journal of Experimental
+Biology, 214: 509–520. https://doi.org/10.1242/jeb.048728
+Bray NL, Pimentel H, Melsted P and Pachter L (2016). Near-optimal probabilistic RNAseq quantification. Nature Biotechnology, 34: 525–527.
+https://doi.org/10.1038/nbt.3519
+Briscoe AD (2008). Reconstructing the ancestral butterfly eye: Focus on the opsins.
+Journal of Experimental Biology, 211: 1805–1813.
+https://doi.org/10.1242/jeb.013045
+Briscoe AD and Bernard GD (2005). Eyeshine and spectral tuning of long wavelength-
+
+40
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+sensitive rhodopsins: No evidence for red-sensitive photoreceptors among five
+Nymphalini butterfly species. Journal of Experimental Biology, 208: 687–696.
+https://doi.org/10.1242/jeb.01453
+Briscoe AD and Chittka L (2001). The evolution of color vision in insects. Annual Review
+of Entomology, 46: 471–510. https://doi.org/10.1146/annurev.ento.46.1.471
+Bybee SM, Yuan F, Ramstetter MD, Llorente-Bousquets J, Reed RD, Osorio D and
+Briscoe AD (2012). UV photoreceptors and UV-yellow wing pigments in
+Heliconius butterflies allow a color signal to serve both mimicry and intraspecific
+communication. The American Naturalist, 179: 38–51.
+https://doi.org/10.1086/663192
+Chai P (1986). Field observations and feeding experiments on the responses of rufoustailed jacamars (Galbula ruficauda) to free-flying butterflies in a tropical
+rainforest. Biological Journal of the Linnean Society, 29: 161-189.
+Cronin TW, Johnsen S, Marshall NJ and Warrant EJ (2014). Visual Ecology. Princeton
+University Press.
+Dalbosco Dell’Aglio D, Troscianko J, Mcmillan WO, Stevens M and Jiggins CD (2018).
+The appearance of mimetic Heliconius butterflies to predators and conspecifics.
+Evolution, 72: 2156–2166.
+https://doi.org/10.1111/evo.13583
+Darst CR and Cummings ME (2006). Predator learning favours mimicry of a less-toxic
+model in poison frogs. Nature, 440: 208–211.
+https://doi.org/10.1038/nature04297
+Dion E, Pui LX, Weber K and Monteiro A (2020). Early-exposure to new sex pheromone
+
+41
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+blends alters mate preference in female butterflies and in their offspring. Nature
+Communications, 11:53. https://doi.org/10.1038/s41467-019-13801-2
+Ebel ER, DaCosta JM, Sorenson MD, Hill RI, Briscoe AD, Willmott KR and Mullen SP
+(2015). Rapid diversification associated with ecological specialization in
+Neotropical Adelpha butterflies. Molecular Ecology, 24: 2392–2405.
+https://doi.org/10.1111/mec.13168
+Edgar RC (2004). MUSCLE: Multiple sequence alignment with high accuracy and high
+throughput. Nucleic Acids Research, 32:1792–1797.
+https://doi.org/10.1093/nar/gkh340
+Feuda R, Marlétaz F, Bentley MA and Holland PWH (2016). Conservation, duplication,
+and divergence of five opsin genes in insect evolution. Genome Biology and
+Evolution, 8:579–587. https://doi.org/10.1093/gbe/evw015
+Finkbeiner SD and Briscoe AD (2021). True UV color vision in a female butterfly with
+two UV opsins. Journal of Experimental Biology, 224:jeb242802.
+https://doi.org/10.1242/jeb.242802
+Finkbeiner SD, Briscoe AD and Mullen SP (2017a). Complex dynamics underlie the
+evolution of imperfect wing pattern convergence in butterflies. Evolution, 71:
+949–959. https://doi.org/10.1111/evo.13165
+Finkbeiner SD, Fishman DA, Osorio D and Briscoe AD (2017b). Ultraviolet and yellow
+reflectance but not fluorescence is important for visual discrimination of
+conspecifics by Heliconius erato. Journal of Experimental Biology, 220:1267–
+1276. https://doi.org/10.1242/jeb.153593
+Finkbeiner SD, Salazar PA, Nogales S, Rush CE, Briscoe AD, Hill RI, Kronforst MR,
+
+42
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Willmott KR and Mullen SP (2018). Frequency dependence shapes the adaptive
+landscape of imperfect Batesian mimicry. Proceedings of the Royal Society B,
+285: https://doi.org/10.1098/rspb.2017.2786
+Frentiu FD and Briscoe AD (2008). A butterfly eye’s view of birds. Bioessays, 30: 11-12.
+Frentiu FD, Bernard GD, Cuevas CI, Sison-Mangus MP, Prudic KL and Briscoe AD
+(2007a). Adaptive evolution of color vision as seen through the eyes of
+butterflies. Proceedings of the National Academy of Sciences U.S.A.,
+104(Supplement 1): 8634–8640. https://doi.org/10.1073/pnas.0701447104
+Frentiu FD, Bernard GD, Sison-Mangus MP, Van Zandt Brower A and Briscoe AD
+(2007b). Gene duplication is an evolutionary mechanism for expanding spectral
+diversity in the long-wavelength photopigments of butterflies. Molecular Biology
+and Evolution, 24: 2016–2028. https://doi.org/10.1093/molbev/msm132
+Frentiu FD, Yuan F, Savage WK, Bernard GD, Mullen SP and Briscoe AD (2015). Opsin
+clines in butterflies suggest novel roles for insect photopigments. Molecular
+Biology and Evolution, 32: 368–379. https://doi.org/10.1093/molbev/msu304
+Gao F, Chen C, Arab DA, Du Z, He Y and Ho SYW (2019). EasyCodeML: A visual tool
+for analysis of selection using CodeML. Ecology and Evolution, 9:3891–3898.
+https://doi.org/10.1002/ece3.5015
+Gibson DO (1974). Batesian mimicry without distastefulness? Nature, 250: 77–79.
+https://doi.org/10.1038/250077a0
+Grabherr MG, Haas BJ, Yassour M, Levin JZ, Thompson DA, Amit I, Adiconis X, Fan L,
+Raychowdhury R, Zeng Q, Chen Z, Mauceli E, Hacohen N, Gnirke A, Rhind N, di
+Palma F, Birren BW, Nusbaum C, Lindblad-Toh K, … Regev A (2011). Full-
+
+43
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+length transcriptome assembly from RNA-Seq data without a reference genome.
+Nature Biotechnology, 29: 644–652. https://doi.org/10.1038/nbt.1883
+Haas BJ, Papanicolaou A, Yassour M, Grabherr M, Blood PD, Bowden J, Couger MB,
+Eccles D, Li B, Lieber M, MacManes MD, Ott M, Orvis J, Pochet N, Strozzi F,
+Weeks N, Westerman R, William T, Dewey CN, … Regev, A. (2013). De novo
+transcript sequence reconstruction from RNA-seq using the Trinity platform for
+reference generation and analysis. Nature Protocols, 8: 1494–1512.
+https://doi.org/10.1038/nprot.2013.084
+Hill RI and Mullen SP (2019). Adult feeding as a potential mechanism for unprofitability
+in Neotropical Adelpha (Limenitidini, Limenitidinae, Nymphalidae). Journal of the
+Lepidopterists’ Society, 73: 66. https://doi.org/10.18473/lepi.73i1.a11
+Kelber A, Vorobyev M and Osorio D (2003). Animal colour vision—Behavioural tests
+and physiological concepts. Biological Reviews, 78:81–118.
+https://doi.org/10.1017/S1464793102005985
+Kinoshita M, Takahashi Y and Arikawa K (2012). Simultaneous brightness contrast of
+foraging Papilio butterflies. Proceedings of the Royal Society B: Biological
+Sciences, 279: 1911–1918. https://doi.org/10.1098/rspb.2011.2396
+Koshitaka H, Kinoshita M, Vorobyev M and Arikawa K (2008). Tetrachromacy in a
+butterfly that has eight varieties of spectral receptors. Proceedings of the Royal
+Society B: Biological Sciences, 275: 947–954.
+https://doi.org/10.1098/rspb.2007.1614
+Kram YA, Mantey S and Corbo JC (2010). Avian cone photoreceptors tile the retina as
+five independent, self-organizing mosaics. PLoS One, 5:e8992.
+
+44
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+https://doi.org/10.1371/journal.pone.0008992
+Kramer VR, Reiter KE and Lehnert MS (2018). Proboscis morphology suggests reduced
+feeding abilities of hybrid Limenitis butterflies (Lepidoptera: Nymphalidae).
+Biological Journal of the Linnean Society, 125: 535–546.
+https://doi.org/10.1093/biolinnean/bly132
+Kristiansen EB, Finkbeiner SD, Hill RH, Prosa L, Mullen SP. 2018. Testing the adaptive
+hypothesis of Batesian mimicry among hybridizing North American admiral
+butterflies. Evolution, 72: 1436-1448.
+Kumar S, Stecher G, Li M, Knyaz C and Tamura K (2018). MEGA X: Molecular
+evolutionary genetics analysis across computing platforms. Molecular Biology
+and Evolution, 35: 1547–1549. https://doi.org/10.1093/molbev/msy096
+Kumar S, Stecher G and Tamura K (2016). MEGA7: Molecular evolutionary genetics
+analysis version 7.0 for bigger datasets. Molecular Biology and Evolution, 33:
+1870–1874. https://doi.org/10.1093/molbev/msw054
+Kuwalekar M, Dechmukh R, Baral S, Padvi A, Kunte K (2022) Duplication and subfunctionalization characterize diversification of opsin genes in the Lepodoptera.
+bioRxiv, https://doi.org/10.1101/2022.10.31.514481
+Lederer G (1960). Verhaltensweisen der Imagines und der Entwicklungsstadien von
+Limenitis camilla camilla L. (Lep. Nymphalidae). Z. Tierpsychologie, 1715: 521–
+546.
+Liénard MA, GD Bernard, A Allen, J-M Lassance, S Song, R Rabideau Childers, N Yu,
+D Ye, A Stephenson, WA Valencia-Montoya, S Salzman, MRL Whitaker, M
+Calonje, F Zhang, NE Pierce (2021). The evolution of red color vision is linked to
+
+45
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+coordinated rhodopsin tuning in lycaenid butterflies. Proceedings of the National
+Academy of Sciences, U.S.A. 118:e2008986118.
+Llaurens V, Joron M, Théry M. (2014). Cryptic differences in colour among Müllerian
+mimics: how can the visual capacities of predators and prey shape the evolution
+of wing colours? Journal of Evolutionary Biology, 27:531-540,
+https://doi.org/10.1111/jeb.12317
+Luis-Martínez A, Ávalos-Hernández O, Trujano-Ortega M, Arellano-Covarrubias A,
+Vargas-Fernández I, Llorente-Bousquets J (2022). Distribution, diversity, and
+endemism of Nymphalidae (Lepidoptera: Papilionoidea) in Loxicha Region,
+Oaxaca, Mexico. Revista de Biología Tropical, 70: 363-407.
+https://doi.org/10.15517/rev.biol.trop..v70i1.48821
+Macias-Muñoz A, Rangel Olguin AG and Briscoe AD (2019). Evolution of
+phototransduction genes in Lepidoptera. Genome Biology and Evolution,
+11:2107–2124. https://doi.org/10.1093/gbe/evz150
+Maia R, Gruson H, Endler JA and White TE (2019). pavo 2: New tools for the spectral
+and spatial analysis of colour in r. Methods in Ecology and Evolution, 10: 1097–
+1107. https://doi.org/10.1111/2041-210X.13174
+Maier EJ and Bowmaker JK (1993). Colour vision in the passeriform bird, Leiothrix
+lutea: Correlation of visual pigment absorbance and oil droplet transmission with
+spectral sensitivity. Journal of Comparative Physiology A, 172:295–301.
+https://doi.org/10.1007/BF00216611
+Mallet J, Jiggins C and McMillan W (1998). Mimicry and warning colour at the boundary
+between races and species. Undefined.
+
+46
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+https://www.semanticscholar.org/paper/Mimicry-and-warning-colour-at-theboundary-between-MalletJiggins/e61e06a41841fe29f2fddc3b72b6d0274bf1d786
+Mallet J and Singer MC (1987). Individual selection, kin selection, and the shifting
+balance in the evolution of warning colours: The evidence from butterflies.
+Biological Journal of the Linnean Society, 32: 337–350.
+https://doi.org/10.1111/j.1095-8312.1987.tb00435.x
+Mavárez J, Salazar CA, Bermingham E, Salcedo C, Jiggins CD and Linares M (2006).
+Speciation by hybridization in Heliconius butterflies. Nature, 441: 868–871.
+https://doi.org/10.1038/nature04738
+McClure M, Clerc C, Desbois C, Meichanetzoglou A, Cau M, Bastin-Héline L,
+Bacigalupo J, Houssin C, Pinna C, Nay B, Llaurens V, Berthier S, Andraud C,
+Gomez, EM (2019). Why has transparency evolved in aposematic butterflies?
+Insights from the largest radiation of aposematic butterflies, the Ithomiini.
+Proceedings of the Royal Society B, 286: 20182769,
+https://doi.org/10.1098/rspb.2018.2769
+McCulloch KJ, Osorio D and Briscoe AD (2016). Sexual dimorphism in the compound
+eye of Heliconius erato: A nymphalid butterfly with at least five spectral classes of
+photoreceptor. Journal of Experimental Biology, 219: 2377–2387.
+https://doi.org/10.1242/jeb.136523
+Meneses-Giorgi MA and Cadena CD (2021). Plumage convergence resulting from
+social mimicry in birds? A tetrachromatic view. Animal Behaviour, 180: 337–361.
+https://doi.org/10.1016/j.anbehav.2021.08.018
+
+47
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Min XJ, Butler G, Storms R and Tsang A (2005). OrfPredictor: Predicting protein-coding
+regions in EST-derived sequences. Nucleic Acids Research, 33(Web Server
+issue), W677-80. https://doi.org/10.1093/nar/gki394
+Montero SV. 2018. Aplicación de modelos de nicho ecológico para la identificación
+potential de procesos de especiación críptica en Adelpha basiloides
+(Lepidoptera: Nymphalidae) en el territorio de Costa Rica. Gaudeamus, 10:1-16.
+Mulhair PO, Crowley L, Boyes DH, Lewis OT, Holland PWH (2023) Opsin gene
+duplication in Lepidoptera: retrotransposition, sex linkage, and gene expression.
+bioRxiv, https://doi.org/10.1101/2023.08.16.552946
+Mullen SP, Savage WK, Wahlberg N and Willmott KR (2011). Rapid diversification and
+not clade age explains high diversity in neotropical Adelpha butterflies.
+Proceedings of the Royal Society B, 278: 1777–1785.
+https://doi.org/10.1098/rspb.2010.2140
+Mullen SP, VanKuren NW, Zhang W, Nallu S, Kristiansen EB, Wuyun Q, Liu K, Hill RI,
+Briscoe AD, Kronforst MR (2020) Distangling population history and character
+evolution among hybridizing lineages. Molecular Biology and Evolution, 37:12951305, https://doi.org/10.1093/molbev/msaa004
+Nell CS, Riley P, Burger J, Preson KL, Treseder KK, Kamada D, Moore K, Mooney KA.
+2023. Consequences for arthropod community structure for an at-risk
+insectivorous bird. PLoS One, 18: e0281081,
+https://doi.org/10.1371/journal.pone.0281081.
+Olsson P, Lind O and Kelber A (2018). Chromatic and achromatic vision: Parameter
+choice and limitations for reliable model predictions. Behavioral Ecology, 29:
+
+48
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+273–282. https://doi.org/10.1093/beheco/arx133
+Oprian DD, Molday RS, Kaufman RJ and Khorana HG (1987). Expression of a synthetic
+bovine rhodopsin gene in monkey kidney cells. Proceedings of the National
+Academy of Sciences, U.S.A., 84: 8874–8878.
+https://doi.org/10.1073/pnas.84.24.8874
+O’Reilly LJ, Agassiz DJL, Neil TR and Holderied MW (2019). Deaf moths employ
+acoustic Müllerian mimicry against bats using wingbeat-powered tymbals.
+Scientific Reports, 9:1444. https://doi.org/10.1038/s41598-018-37812-z
+Páez E, Valkonen JK, Willmott KR, Matos-Maraví P, Elias M and Mappes J (2021).
+Hard to catch: Experimental evidence supports evasive mimicry. Proceedings of
+the Royal Society B, 288: 20203052. https://doi.org/10.1098/rspb.2020.3052
+Palacios AG, Goldsmith TH and Bernard GD (1996). Sensitivity of cones from a cyprinid
+fish (Danio aequipinnatus) to ultraviolet and visible light. Visual Neuroscience,
+13:411. https://doi.org/10.1017/S0952523800008099
+Peitsch D, Fietz A, Hertel H, de Souza J, Ventura DFand Menzel R (1992). The spectral
+input systems of hymenopteran insects and their receptor-based colour vision.
+Journal of Comparative Physiology A, 170: 23–40.
+https://doi.org/10.1007/BF00190398
+Pfennig DW, Harcombe WR and Pfennig KS (2001). Frequency-dependent Batesian
+mimicry. Nature, 410: 323–323. https://doi.org/10.1038/35066628
+Platt AP and Allen JF (2006). Sperm precedence and competition in doubly-mated
+Limenitis arthemis-astyanax butterflies (Rhopalocera: Nymphalidae). Annals of
+the Entomological Society of America, 94: 654–663.
+
+49
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+https://doi.org/10.1603/0013-8746(2001)094[0654:spacid]2.0.co;2
+Platt AP and Brower LP(2006). Mimetic versus disruptive coloration in intergrading
+populations of Limenitis arthemis and astyanax butterflies. Evolution, 22: 699.
+https://doi.org/10.2307/2406897
+Pohl N, Sison-Mangus MP, Yee EN, Liswi SW, Briscoe AD (2009). Impact of duplicate
+gene copies on phylogenetic analysis and divergence time estimates in
+butterflies. BMC Evolutionary Biology, 9:99 doi:10.1186/1471-2148-9-99
+Prudic KL, Shapiro A, Clayton NS (2002). Evaluating a putative mimetic relationship
+between two butterflies, Adelpha bredowii and Limenitis lorquini. Ecological
+Entomology, 27: 68-75, https://doi.org/10.1046/j.0307-6946.2001.00384.x
+Prudic KL, Khera S, Sólyom A, Timmermann BN (2007) Isolation, identification, and
+quantification of potential defensive compounds in the viceroy gutterfly and its
+larval host–plant, Carolina willow. Journal of Chemical Ecology 33: 1149–1159,
+https://doi.org/10.1007/s10886-007-9282-5
+Prudic KL, Warren AD, Llorente-Bousquets J (2008). Molecular and morphological
+evidence reveals three species within the California sister butterfly, Adelpha
+bredowii (Lepidoptera: Nymphalidae: Limenitidinae). Zootaxa 1819:1-24,
+https://doi.org/10.11646/zootaxa.1819.1.1
+Prudic KL, Timmermann BN, Papaj DR, Ritland DB, Oliver JC (2019) Mimicry in viceroy
+butterflies is dependent on abundance of the model queen butterfly.
+Communication Biology 2: 68. https://doi.org/10.1038/s42003-019-0303-z
+Rosser N, Freitas AVL, Huertas B, Joron M, Lamas G, Mérot C, Simpson F, Willmott
+KR, Mallet J and Dasmahapatra KK (2019). Cryptic speciation associated with
+
+50
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+geographic and ecological divergence in two Amazonian Heliconius butterflies.
+Zoological Journal of the Linnean Society, 186: 233–249.
+https://doi.org/10.1093/zoolinnean/zly046
+Rowland HM, Ihalainen E, Lindström L, Mappes J, Speed MP (2007). Co-mimics have a
+mutualistic relationship despite unequal defences. Nature, 448: 64-67,
+https://doi.org/10.1038/nature05899
+Rush CE, Freitas AVL, Magaldi L, Willmott KR, Hill RI. (2023). One generalist or several
+specialists? Comparative analysis of the polyphagous butterfly Adelpha serpa
+celerio and its serpa-group relatives. Zool. Scripta 52: 475-493
+Savage WK and Mullen SP (2009). A single origin of Batesian mimicry among
+hybridizing populations of admiral butterflies (Limenitis arthemis) rejects an
+evolutionary reversion to the ancestral phenotype. Proceedings of the Royal
+Society B: Biological Sciences, 276: 2557–2565.
+https://doi.org/10.1098/rspb.2009.0256
+Sondhi Y, Ellis EA, Bybee SM, Theobald JC and Kawahara AY (2021). Light
+environment drives evolution of color vision genes in butterflies and moths.
+Communications Biology, 4: 1–11. https://doi.org/10.1038/s42003-021-01688-z
+Spaethe J and Briscoe AD (2005). Molecular characterization and expression of the UV
+opsin in bumblebees: Three ommatidial subtypes in the retina and a new
+photoreceptor organ in the lamina. Journal of Experimental Biology, 208: 2347–
+2361. https://doi.org/10.1242/jeb.01634
+Stavenga DG (2002). Reflections on colourful ommatidia of butterfly eyes. Journal of
+Experimental Biology, 205: 1077–1085.
+
+51
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Stavenga DG, Kinoshita M, Yang EC and Arikawa K (2001). Retinal regionalization and
+heterogeneity of butterfly eyes. Die Naturwissenschaften, 88: 477–481.
+https://doi.org/10.1007/s001140100268
+Stavenga DG, Smits RP and Hoenders BJ (1993). Simple exponential functions
+describing the absorbance bands of visual pigment spectra. Vision Research, 33:
+1011–1017. https://doi.org/10.1016/0042-6989(93)90237-Q
+Stobbe N and Schaefer HM (2008). Enhancement of chromatic contrast increases
+predation risk for striped butterflies. Proceedings of the Royal Society B, 275:
+1535–1541. https://doi.org/10.1098/rspb.2008.0209
+Tamura K and Nei M (1993). Estimation of the number of nucleotide substitutions in the
+control region of mitochondrial DNA in humans and chimpanzees. Molecular
+Biology and Evolution, 10: 512–526.
+https://doi.org/10.1093/oxfordjournals.molbev.a040023
+Telles FJ, Kelber A and Rodríguez-Gironés MA (2016). Wavelength discrimination in
+the hummingbird hawkmoth Macroglossum stellatarum. Journal of Experimental
+Biology, 219: 553–560. https://doi.org/10.1242/jeb.130484
+Thurman TJ and Seymoure BM (2016). A bird’s eye view of two mimetic tropical
+butterflies: coloration matches predator’s sensitivity. Journal of Zoology, 298:
+159-168.
+Vorobyev M and Osorio D (1998). Receptor noise as a determinant of colour thresholds.
+Proceedings of the Royal Society B, 265: 351–358.
+https://doi.org/10.1098/rspb.1998.0302
+Vought BW, Salcedo E, Chadwell LV, Britt SG, Birge RR and Knox BE (2000).
+
+52
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Characterization of the primary photointermediates of Drosophila rhodopsin.
+Biochemistry, 39: 14128–14137. https://doi.org/10.1021/bi001135k
+Wakakuwa M, Stavenga DG, Kurasawa M and Arikawa K (2004). A unique visual
+pigment expressed in green, red and deep-red receptors in the eye of the small
+white butterfly, Pieris rapae crucivora. Journal of Experimental Biology, 207:
+2803–2810. https://doi.org/10.1242/jeb.01078
+Wakakuwa M, Terakita A, Koyanagi M, Stavenga DG, Shichida Y and Arikawa K
+(2010). Evolution and mechanism of spectral tuning of blue-absorbing visual
+pigments in butterflies. PLoS One, 5: e15015.
+https://doi.org/10.1371/journal.pone.0015015
+White RH (2003). The retina of Manduca sexta: Rhodopsin expression, the mosaic of
+green-, blue- and UV-sensitive photoreceptors, and regional specialization.
+Journal of Experimental Biology, 206: 3337–3348.
+https://doi.org/10.1242/jeb.00571
+Willmott KR (2003a). The genus Adelpha: Its systematics, biology and biogeography
+(Lepidoptera: Nymphalidae: Limenitidini). Scientific Publishers: Gainesville,
+Florida.
+Willmott KR (2003b). Cladistic analysis of the Neotropical butterfly genus Adelpha
+(Lepidoptera: Nymphalidae), with comments on the subtribal classification of
+Limenitidini. Systematic Entomology, 28: 279–322. https://doi.org/10.1046/j.13653113.2003.00209.x
+Wu L-W, Chiba H, Lees DC, Ohshima Y and Jeng M-L (2019). Unravelling relationships
+among the shared stripes of sailors: Mitogenomic phylogeny of Limenitidini
+
+53
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.10.05.561098; this version posted October 7, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+butterflies (Lepidoptera, Nymphalidae, Limenitidinae), focusing on the genera
+Athyma and Limenitis. Molecular Phylogenetics and Evolution, 130: 60–66.
+https://doi.org/10.1016/J.YMPEV.2018.09.020
+Yang Z (2007). PAML 4: Phylogenetic analysis by maximum likelihood. Molecular
+Biology and Evolution, 24:1586–1591. https://doi.org/10.1093/molbev/msm088
+Yang Z and Nielsen R (2002). Codon-substitution models for detecting molecular
+adaptation at individual sites along specific lineages. Molecular Biology and
+Evolution, 19: 908–917. https://doi.org/10.1093/oxfordjournals.molbev.a004148
+Yang Z, Nielsen R, Goldman N and Pedersen AM (2000). Codon-substitution models
+for heterogeneous selection pressure at amino acid sites. Genetics, 155: 431–
+449. https://doi.org/10.1093/genetics/155.1.431
+Zaccardi G, Kelber A., Sison-Mangus MP, Briscoe AD (2006). Color discrimination in
+the red range with only one long-wavelength sensitive opsin. Journal of
+Experimental Biology, 209:1944–1955. https://doi.org/10.1242/jeb.02207
+
+54
+
+

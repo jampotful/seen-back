@@ -1,0 +1,341 @@
+Successful Creation of Regular Patterns in Variant Maps from Bat Echolocation Calls
+Dennis Manuel Heim, Olga Heim, P. A. Zeng, Jeffrey Zheng (2018). Springer eBooks. https://doi.org/10.1007/978-981-13-2282-2_25. doi:10.1007/978-981-13-2282-2_25. Licence: cc-by. Text from pdf.
+
+Successful Creation of Regular Patterns
+in Variant Maps from Bat Echolocation
+Calls
+D. M. Heim, O. Heim, P. A. Zeng and Jeffrey Zheng
+
+Abstract We created variant maps based on bat echolocation call recordings and
+outline here the transformation process and describe the resulting visual features.
+The maps show regular patterns while characteristic features change when bat call
+recording properties change. By focusing on specific visual features, we found a
+set of projection parameters which allowed us to classify the variant maps into two
+distinct groups. These results are promising indicators that variant maps can be used
+as basis for new echolocation call classification algorithms.
+Keywords Echolocation · Algorithms · Morphometry · Fourier · Analysis
+Quaternions
+
+This work was supported by NSF of China (61362014), Yunnan Advanced Overseas Scholar
+Project and the Key Project on Electric Information and Next Generation IT Technology of Yunnan
+(2018ZI002).
+D. M. Heim
+Key Laboratory of Quantum Information of Yunnan, Yunnan University, Kunming, China
+e-mail: dennis.heim@gmx.net
+O. Heim
+Leibniz Institute for Zoo and Wildlife Research, 10315 Berlin, Germany
+O. Heim
+Animal Ecology, Institute of Biochemistry and Biology, University of Potsdam, 14469 Potsdam,
+Germany
+e-mail: bats@o-heim.de
+P. A. Zeng
+Yunnan University, Kunming, China
+e-mail: 895158562@qq.com
+J. Zheng (B)
+Key Laboratory of Yunnan Software Engineering, Yunnan University,
+Yunnan 650091, Kunming, China
+e-mail: conjugatelogic@yahoo.com
+© The Author(s) 2019
+J. Zheng (ed.), Variant Construction from Theoretical Foundation to Applications,
+https://doi.org/10.1007/978-981-13-2282-2_25
+
+391
+
+392
+
+D. M. Heim et al.
+
+1 Introduction
+The identification of echolocation calls is essential to the research and conservation
+of bat species [1]. However, automatic classification algorithms have not yet been
+proven capable of providing 100% correct classifications or getting close enough
+to this ideal performance [2]. Since our approach of using variant maps [3] shows
+already promising results, we are confident that it will continue adding valuable
+contributions to the field of automatic bat call identification.
+Automated bat echolocation call identification algorithms were developed since
+the late 1990s [4–7]. At that time, multivariate discriminant function analysis or
+neural networks were used for the classification of the calls. Since then, other methods
+have been applied, e.g., algorithms of pattern recognition [8], support vector machines
+[9], hierarchical ensembles of neural networks [9, 10], geometric morphometry [11],
+machine learning [12], CART [13], and random forest classification [14]. For a
+critical analysis of the performance of the applied methods, we refer to [2] and the
+references therein.
+Using variant maps for the classification of bat echolocation calls differ completely from these conventional techniques. The main difference is the preprocessing
+step, where the recordings are transformed into variant maps. This step offers the
+possibility to analyze the bat call recordings from a completely different point of
+view. It provides additional degrees of freedom which allow a further optimization
+of the identification process, e.g., by supplementing the information obtained from
+a Fourier analysis of the bat calls.
+Our method to transform the bat call recordings is based on measures proposed by
+Zheng [15] in the 1990s to partition special phase spaces in binary image analysis.
+These methods were extended in the 2010s [3, 16] and successfully used to classify
+quantum interactions [17, 18], differently encrypted messages [19], and noncoding
+DNA [20, 21].
+Similar to these works, we transform the bat call recordings using variant measures
+to obtain variant maps. Each recording contains several calls of one bat species. We
+used calls of four aerial-hawking bat species in this study. Recordings were made at
+three types of crop fields far away from woody vegetation. The created variant maps
+have a regular structure, but characteristic features vary strongly with each recording.
+These results show that variant maps can be used to extract usable information from
+bat echolocation recordings.
+
+2 Transformation
+The processed bat echolocation calls were recorded with a sampling rate of 500 kHz
+and saved as “raw” 16-bit audio files. In the following, we describe in four steps
+(A–D) how we transformed these files into variant maps.
+
+Successful Creation of Regular Patterns in Variant Maps …
+
+393
+
+Step A: From analogue to digital audio
+In a recording of data length N , the amplitude of the bat echolocation calls is stored
+in N samples. Each sample corresponds to a floating-point number of 16 bits. For
+simplicity, we transformed the floating-point numbers to integer numbers of 16 bits.
+Step B: From digital audio to quaternions
+Next, we transform the integer sequence into a sequence of four metastates {⊥, +,
+−, } which resemble the quaternions {Bottom, Plus, Minus, Top}. For this step,
+we select the i-th sample Ai and its next neighbor Ai+1 and define the difference
+ΔA = Ai+1 − Ai and local average L = (Ai + Ai+1 )/2. Additionally, we require
+the maximum Amax and minimum Amin of the current sequence to define a middle
+value V = (Amin + Amax )/2 and we define a tolerance T . Using these values, we
+transform the integer sequence A1 · · · A N into a sequence of quaternions B1 · · · B N
+using the rules
+if ΔA < T and L > V :
+
+Bi = 
+
+if ΔA < T and L ≤ V : Bi = ⊥
+if ΔA ≥ T and Ai > Ai+1 : Bi = −
+if ΔA ≥ T and Ai < Ai+1 : Bi = + .
+As an example, the values T = 4 and V = 10 lead to the sequence
+Ai 0 3 3 2 0 8 20 20 11
+Ai+1 3 0 8 6 4 3 15 18 13 .
+Bi ⊥ ⊥ + + + − −  
+Step C: From quaternions to meta-measures
+We subdivide the quaternion sequence into segments of length M and obtain, in
+this way, S = N /M segments. For each segment, we define four meta-measures
+{M⊥ , M+ , M− , M }. One measure represents the number of associated quaternions
+in one segment. These meta-measures satisfy the relations 0 ≤ M⊥ , M+ , M− , M ≤
+M and M⊥ + M+ + M− + M = M. The quaternion sequence with N units is now
+represented by S segments where each segment contains four meta-measures.
+Step D: From meta-measures to variant maps
+There are many possibilities to combine meta-measures for the creation of variant
+maps [3, 15–21]. To transform the bat echolocation calls into 2D color maps, we
+defined for each segment of meta-measures the axis values X = M+ + M⊥ and
+Y = M⊥ + M− + M . One Z value is obtained by counting the number of segments
+where one specific X –Y combination was found. Each Z value is represented by a
+color in an (M + 1) × (M + 1) matrix.
+As an example, we depicted in Fig. 1 the variant map of an echolocation call
+recording from the bat species Nyctalus noctula. It has a data length N = 967,139
+and we chose a segment length M = 237. At the position X = 80 and Y = 200
+marked by a white circle, the color indicates a value Z = 10. That is, we found 10
+segments where the conditions M+ + M⊥ = 80 and M⊥ + M− + M = 200 apply.
+
+394
+
+D. M. Heim et al.
+
+Fig. 1 The variant map of an echolocation call recording from the species Nyctalus noctula created
+by following the processing steps A–D described in Sect. 2. We highlighted the position X = 80
+and Y = 200 by a white circle to illustrate the processing step D. At this position, the conditions
+M+ + M⊥ = 80 and M⊥ + M− + M = 200 apply. Further visual features are discussed in Sect. 3
+in more detail
+
+White areas indicate regions without any projection point on this sequence. For a
+discussion of further visual features which appear in this figure we refer to Sect. 3.
+These types of maps offer the possibility to visualize long data sequences with
+>106 samples on compact matrices. We use this scheme to transform each bat call
+recording into a 2D color figure. It can be optimized for the identification of bat
+species, recording locations or times.
+
+3 Variant Maps
+Our main result is that all variant maps created from bat echolocation calls show
+regular patterns while characteristic visual features vary with each recording. In the
+following, we describe the data we processed in detail and discuss the visual features
+we observed.
+
+Successful Creation of Regular Patterns in Variant Maps …
+
+395
+
+3.1 Data Description
+We processed 44 files which were recorded in August 2012 in the Uckermark region
+(Brandenburg, Germany) [22]. Each recording contains only calls of one of the four
+European bat species Nyctalus noctula, Pipistrellus nathusii, Pipistrellus pipistrellus,
+or Pipistrellus pygmaeus. These files were recorded on arable fields cultivated with
+three different crop types: corn (C), rapeseed (R), or wheat (W). The record length
+varies between 30 s and 2 min.
+
+3.2 Visual Features
+We transformed all 44 files of bat calls into variant maps by steps A to D described in
+Sect. 2. That is, we used the axis values X = M+ + M⊥ and Y = M⊥ + M− + M
+and a segment length M = 237. By focusing on the visual features, we clustered the
+resulting maps into two groups. A typical member of each group is shown in Fig. 2.
+One group consists only of maps showing patterns which have two significant
+maxima with values >105 . We call members of this group double-maxima maps.
+The example shown in Fig. 2a has maxima at the positions X = 0, Y = 237 and X = 120,
+Y = 200. Besides these two maxima, there are distinct positions on diagonal areas
+with values of the orders 1–103 .
+All other maps belong to the group of non-double-maxima maps. As an example,
+the map in Fig. 2b has its significant maximum at the position X = 0, Y = 237 while
+other projection regions have values of the orders 1–103 . In addition, most values of
+interest are located around a diagonal region and form a slat band on the map.
+All 44 resulting maps are shown in Figs. 3 and 4. They are separated into doublemaxima maps (Fig. 3) and non-double-maxima maps (Fig. 4). In principle, it is
+possible to further subdivide the variant maps by identifying additional visual features. However, since we did not yet find a direct connection between visual features
+and bat call properties, a further subdivision goes beyond the scope of this manuscript
+and will be the topic of a future publication.
+
+3.3 Discussion
+On all generated maps, the positions on the left-down triangle area are empty. This
+is because our choice of axis obeys X + Y ≥ M. Empty positions in the right-upper
+area appear because the bat call recordings consist of discrete short pulses with a
+longer time period of silence in between.
+Similarly, other visual characteristics in the colored areas can be directly related to
+properties of the bat call recordings. As an example, a signal of constant frequency
+can be transformed into a single position on a variant map by choosing suitable
+
+396
+
+D. M. Heim et al.
+
+(a)
+
+(b)
+
+Fig. 2 Variant maps of a Pipistrellus nathusii and b Nyctalus noctula, both recorded on a rapeseed
+field. The figures were created by applying the transformation process described in Sect. 2. a which
+shows a typical double-maxima map with two significant maxima, while b belongs to the group
+of non-double-maxima maps
+
+Successful Creation of Regular Patterns in Variant Maps …
+
+397
+
+Fig. 3 These variant maps show double-maxima patterns. They have two significant maxima with
+values >105 . The axis ranges are the same as in Fig. 2. Each map origins from a bat echolocation
+recording on a corn (C), rapeseed (R), or wheat (W) field
+
+parameters. This means that by optimizing the variant map transformation, it is
+possible to focus on features of the initial bat echolocation call for the creation of
+variant maps.
+This is the first time to our knowledge that quaternion structures have been used
+to transform bat calls. Our transformation process could be used to add optimizing
+parameters to current bat call identification schemes and in this way form the basis
+for a new identification algorithm.
+
+398
+
+D. M. Heim et al.
+
+Fig. 4 These variant maps show non-double-maxima patterns. That is, they explicitly do not have
+two distinct maxima with values >105 in contrast to the double-maxima maps shown in Fig. 3
+
+4 Summary and Outlook
+We transformed 44 bat echolocation files into variant maps. All created variant maps
+have a similar structure and can be classified by focusing on specific visual features.
+As an example, we found a set of projection parameters which allowed us to classify
+the recordings into double-maxima and non-double-maxima maps.
+Features like this can be traced back to the signal nature of the recordings. In
+this way, variant maps offer the possibility to focus on individual features of bat
+echolocation calls. Since there are multiple numbers of possible combinations to
+create variant maps, we are very positive that a suitable projection combination can
+be found to fulfill our ultimate goal of identifying single bat species.
+In order to meet this target, it is necessary to process a much higher number of
+bat calls to create a sufficiently large database for the effective determination of
+possible projections and associated maps. This would form the perfect basis for the
+development of a new echolocation call identification algorithm.
+
+Successful Creation of Regular Patterns in Variant Maps …
+
+399
+
+Acknowledgements We thank C. C. Voigt for providing the processed bat echolocation data and
+S. A. Troxell for revising the manuscript. Financial support by the National Science Foundation of
+China NSFC (No. 61362014) and the Overseas Higher-level Scholar Project of Yunnan Province,
+China, is gratefully acknowledged. Moreover, we appreciate the financial support by the Federal
+Ministry of Science, Research and Culture in Brandenburg, the University of Potsdam, the Leibniz
+Institute for Zoo and Wildlife Research and the Deutsche Forschungsgemeinschaft (Vo 890/22).
+
+References
+1. H.-U. Schnitzler, E.K.V. Kalko, Echolocation by insect-eating bats. Bioscience 51(7), 557
+(2001). https://doi.org/10.1641/0006-3568(2001)051[0557:EBIEB]2.0.CO;2
+2. D. Russo, C.C. Voigt, The use of automated identification of bat echolocation calls in acoustic
+monitoring: a cautionary note for a sound analysis. Ecol. Indic. 66, 598 (2016). https://doi.org/
+10.1016/j.ecolind.2016.02.036
+3. J.Z.J. Zheng, C.H. Zheng, A framework to express variant and invariant functional spaces for
+binary logic. Front. Electr. Electron. Eng. China 5(2), 163–172 (2010). https://doi.org/10.1007/
+s11460-010-0011-4
+4. P.E. Zingg, Akustische Artidentifikation von Fledermäusen (Mammalia: Chiroptera) in der
+Schweiz, Revue suisse de zoologie, vol 97 (1990). http://www.biodiversitylibrary.org/part/
+92388, Genve, Kundig [etc.], 263
+5. N. Vaughan, G. Jones, S. Harris, Identification of British bat species by multivariate analysis of echolocation call parameters. Bioacoustics 7(3), 189 (1997). https://doi.org/10.1080/
+09524622.1997.9753331
+6. S. Parsons, G. Jones, Acoustic identification of twelve species of echolocating bat by discriminant function analysis and artificial neural networks. J. Exp. Biol. 203(17), 2641 (2000). http://
+jeb.biologists.org/content/203/17/2641
+7. D. Russo, G. Jones, Identification of twenty-two bat species (Mammalia: Chiroptera) from
+Italy by analysis of time-expanded recordings of echolocation calls. J. Zool. 258(1), 91 (2002).
+https://doi.org/10.1017/S0952836902001231
+8. M.K. Obrist, R. Boesch, P.F. Flückiger, Variability in echolocation call design of 26 Swiss bat
+species: consequences, limits and options for automated field identification with a synergetic
+pattern recognition approach. Mammalia mamm 68(4), 307 (2007). https://doi.org/10.1515/
+mamm.2004.030
+9. R.D. Redgwell, J.M. Szewczak, G. Jones, S. Parsons, Classification of echolocation calls
+from 14 species of bat by support vector machines and ensembles of neural networks. Algorithms 2(3), 907 (2009) Molecular Diversity Preservation International. https://doi.org/10.
+3390/a2030907
+10. C.L. alters, R. reeman, A. Collen, C. Dietz, M. Brock Fenton, G. Jones, M.K. Obrist, S.J.
+Puechmaille, T. Sattler, B.M. Siemers, S. Parsons, K.E. Jones, A continental-scale tool for
+acoustic identification of European bats. J. Appl. Ecol. 49(5), 1064 (2012). https://doi.org/10.
+1111/j.1365-2664.2012.02182.x
+11. N. MacLeod, J. Krieger, K.E. Jones, Geometric morphometric approaches to acoustic signal
+analysis in mammalian biology. Hystrix. Ital. J. Mammal. 24(1), 110 (2013). https://doi.org/
+10.4404/hystrix-24.1-6299
+12. M.D. Skowronski, J.G. Harris, Acoustic detection and classification of microchiroptera using
+machine learning: lessons learned from automatic speech recognition. J. Acoust. Soc. Am.
+119(3), 1817 (2006). https://doi.org/10.1121/1.2166948
+13. D.G. Preatoni, M. Nodari, R. Chirichella, G. Tosi, L.A. Wauters, A. Martinoli, Identifying bats
+from time-expanded recordings of search calls: comparing classification methods. J. Wildlife
+Manage. 69(4), 1601 (2005). https://doi.org/10.2193/0022-541X(2005)69[1601:IBFTRO]2.0.
+CO;2
+
+400
+
+D. M. Heim et al.
+
+14. U. Marckmann, V. Runkel, Die automatische Rufanalyse mit dem batcorder-System. Version
+1.01. ecoObs GmbH, (2010). http://www.ecoobs.de/downloads/Automatische-Rufanalyse-10.pdf
+15. Z.J. Zheng, in Conjugate Transformation of Regular Plan Lattices for Binary Images (Monash
+University, 1994)
+16. J.Z.J. Zheng, C.H.H. Zheng, T.L. Kunii, in A Framework of Variant Logic Construction for Cellular Automata, Cellular Automata - Innovative Modelling for Science
+and Engineering, ed. by A. Salcido (InTech, 2011), pp. 326–352. https://doi.org/10.
+5772/15400, http://www.intechopen.com/books/cellular-automata-innovative-modelling-forscience-and-engineering/a-framework-of-variant-logic-construction-for-cellular-automata
+17. J. Zheng, C. Zheng, Variant measures and visualized statistical distributions. Acta Photonica
+Sinica 40(9), 1397–1404 (2011). http://www.photon.ac.cn/EN/abstract/article_15668.shtml,
+https://doi.org/10.3788/gzxb20114009.1397
+18. J. Zheng, C. Zheng, Variant simulation system using quaternion structures. J. Mod. Opt. 59(5),
+484–490 (2012). https://doi.org/10.1080/09500340.2011.636152
+19. H. Wang, J. Zheng, in Proceedings of the 14th Australian Information Warfare and Security
+Conference, vol. 14, Perth (2013). http://ro.ecu.edu.au/isw/53
+20. J. Zheng, J. Luo, W. Zhou, Pseudo DNA sequence generation of non-coding distributions using
+variant maps on cellular automata. Appl. Math. 5(1), 153 (2014). https://doi.org/10.4236/am.
+2014.51018
+21. J. Zheng, W. Zhang, J. Luo, W. Zhou, R. Shen, Variant map system to simulate complex
+properties of DNA interactions using binary sequences. Adv. Pure Math. 3, 5 (2013) Scientific
+Research Publishing. https://doi.org/10.4236/apm.2013.37A002
+22. O. Heim, A. Schröder, J. Eccard, K. Jung, C.C. Voigt, Seasonal activity patterns of European
+bats above intensively used farmland. Agric. Ecosyst. Environ. 130, 233 (2016). http://www.
+media/dheim/Bond/Desktop/physics/paper/olga/2016-heim-seasonality.pdf, https://doi.org/
+10.1016/j.agee.2016.09.002
+
+Open Access This chapter is licensed under the terms of the Creative Commons Attribution 4.0
+International License (http://creativecommons.org/licenses/by/4.0/), which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as long as you give appropriate
+credit to the original author(s) and the source, provide a link to the Creative Commons license and
+indicate if changes were made.
+The images or other third party material in this chapter are included in the chapter’s Creative
+Commons license, unless indicated otherwise in a credit line to the material. If material is not
+included in the chapter’s Creative Commons license and your intended use is not permitted by
+statutory regulation or exceeds the permitted use, you will need to obtain permission directly from
+the copyright holder.
+
+

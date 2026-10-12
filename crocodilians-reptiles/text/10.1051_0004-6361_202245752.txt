@@ -1,0 +1,5121 @@
+CROCODILE
+Jean Hayoz, Gabriele Cugno, Sascha P. Quanz, Polychronis Patapis, Eleonora Alei, Markus J. Bonse, Felix Dannert, Emily O. Garvin, Timothy D. Gebhard, Björn S. Konrad, Lia F. Sartori (2023). Astronomy and Astrophysics. http://arxiv.org/abs/2309.10587. doi:10.1051/0004-6361/202245752. Licence: cc-by. Text from pdf.
+
+Astronomy & Astrophysics manuscript no. main
+September 20, 2023
+
+©ESO 2023
+
+CROCODILE
+Incorporating medium-resolution spectroscopy of
+close-in directly imaged exoplanets into atmospheric retrievals
+via cross-correlation
+J. Hayoz1,⋆ , G. Cugno1, 2 , S. P. Quanz1 , P. Patapis1 , E. Alei1, 3 , M. J. Bonse1 , F. A. Dannert1, 3 , E. O. Garvin1 ,
+T. D. Gebhard1, 4 , B. S. Konrad1, 3 , L.F. Sartori1
+
+arXiv:2309.10587v1 [astro-ph.EP] 19 Sep 2023
+
+1
+
+ETH Zurich, Institute for Particle Physics and Astrophysics, Wolfgang-Pauli-Strasse 27, CH-8093 Zurich, Switzerland
+Department of Astronomy, University of Michigan, Ann Arbor, MI 48109, USA
+3
+National Center of Competence in Research PlanetS, Switzerland
+4
+Max Planck Institute for Intelligent Systems, Max-Planck-Ring 4, 72076 Tübingen, Germany
+2
+
+Received 21.12.2022; accepted 28.08.2023
+ABSTRACT
+Context. The investigation of the atmospheres of closely separated, directly imaged gas giant exoplanets is challenging due to the
+
+presence of stellar speckles that pollute their spectrum. To remedy this, the analysis of medium- to high-resolution spectroscopic data
+via cross-correlation with spectral templates (cross-correlation spectroscopy) is emerging as a leading technique.
+Aims. We aim to define a robust Bayesian framework combining, for the first time, three widespread direct-imaging techniques, namely
+photometry, low-resolution spectroscopy, and medium-resolution cross-correlation spectroscopy in order to derive the atmospheric
+properties of close-in directly imaged exoplanets. Current atmospheric characterisation frameworks are indeed either not compatible
+with all three observing techniques or they lack the commitment to efficient sampling strategies that allow high-dimensional forward
+models.
+Methods. Our framework CROCODILE (cross-correlation retrievals of directly imaged self-luminous exoplanets) naturally combines the
+three techniques by adopting adequate likelihood functions. To validate our routine, we simulated observations of gas giants similar to
+the well-studied β Pictoris b planet and we explored the parameter space of their atmospheres to search for potential biases.
+Results. We obtain more accurate measurements of atmospheric properties when combining photometry, low- and medium-resolution
+spectroscopy into atmospheric retrievals than when using the techniques separately as is usually done in the literature. Indeed, the
+combined fit is, on average, 20% more accurate than fitting only medium-resolution cross-correlation spectroscopy. We find that
+medium-resolution (R ≈ 4000) K-band cross-correlation spectroscopy alone is not suitable to constrain the atmospheric properties of
+our synthetic datasets; however, this problem disappears when simultaneously fitting photometry throughout the Y and M bands and
+low-resolution (R ≈ 60) spectroscopy between the Y and H bands. Our thorough testing demonstrates that free chemistry is a suitable
+forward model to retrieve the atmospheric thermal and chemical properties of cloudless gas giants at chemical equilibrium.
+Conclusions. CROCODILE provides a robust statistical framework to interpret medium-resolution spectroscopic data of close-in directly
+imaged exoplanets, where speckles originating from stellar stray light render the extraction of the continuum difficult. Our framework
+allows the atmospheric characterisation of directly imaged exoplanets using the high-quality spectral data that will be provided by
+the new generation of instruments such as the Enhanced Resolution Imager and Spectrograph (ERIS) at the Very Large Telescope,
+the Mid-Infrared Instrument (MIRI) aboard the James Webb Space Telescope, and in the future the Mid-infrared ELT Imager and
+Spectrograph (METIS) at the Extremely Large Telescope.
+Key words. planets and satellites: atmospheres – methods: data analysis – techniques: imaging spectroscopy – techniques: high
+
+angular resolution
+
+1. Introduction
+
+CO ice might enhance the abundance of CO gas within the CO
+iceline (Öberg & Bergin 2016), or dust transport processes such
+Determining the ratios of elemental abundances in the atmosphere as grain growth, settling, and vertical mixing can affect the C/O
+of exoplanets is emerging as a key analysis to unwrap the history ratio depending on the location of snowlines and pressure bumps
+of their formation. Nascent planets do indeed inherit some of the in the disk (van der Marel et al. 2021). Furthermore, the chemical
+chemical properties of the protoplanetary disk at the location of composition of a planet can drastically change after formation due
+their formation: Öberg et al. (2011) showed that the molecular to the later accretion of surrounding material while it migrates.
+snowlines are expected to directly affect the atmospheric carbon- For instance, the accretion of ice-rich planetesimals can lead to
+to-oxygen (C/O) number ratio. Further processes that modify the the enrichment of metals in the atmosphere of hot Jupiters (Morchemical composition of the disk can add nuance to this initial dasini et al. 2016), or affect the initial atmospheric C/O ratio
+picture; for example, the inward drift of pebbles covered with inherited from core accretion or gravitational collapse and its
+initial location with respect to the water and CO2 icelines (Nowak
+⋆
+
+e-mail: jhayoz@ethz.ch
+
+Article number, page 1 of 22
+
+A&A proofs: manuscript no. main
+
+et al. 2020). Currently, the details of gas giant formation are still
+mostly unconstrained. Many interconnected physical processes
+are believed to influence their final bulk and atmospheric composition. This creates model degeneracies that prevent us from
+unequivocally inverting their full formation history (Mollière et al.
+2022). Nevertheless, on a case-by-case basis, measurements of
+atmospheric composition might be leveraged to identify specific
+aspects of formation processes; for example, a high N/O ratio may
+indicate a large orbital distance during formation (Piso et al. 2016;
+Ohno & Fortney 2022). Meanwhile population analyses might
+identify statistical trends to inform formation models (Hoch et al.
+2022).
+It is particularly important to develop robust statistical frameworks in light of the new generation of telescopes and instruments
+that have recently started operating or are coming up this decade:
+the James Webb Space Telescope (JWST) with its Mid-Infrared
+Instrument (MIRI; Wells et al. 2015), capable of integral field
+spectroscopy at a spectral resolution of R ∼ 1500–3500 between
+4.9 and 28.3 µm; the new Enhanced Resolution Imager and Spectrograph (ERIS; Davies et al. 2018) at the Very Large Telescope
+(VLT), which contains the newly refurbished Integral Field Unit
+(IFU) SPIFFIER (George et al. 2016), upgraded from the SPectrometer for Infrared Faint Field Imaging (SPIFFI) within the old
+Spectrograph for INtegral Field Observations in the Near Infrared
+(SINFONI), with a spectral resolution of R ≈ 5000–10 000 in
+the J, H, and K bands; and finally the Mid-infrared ELT Imager
+and Spectrograph (METIS; Brandl et al. 2021) on the upcoming
+Extremely Large Telescope (ELT), which allows long-slit spectroscopy at low and medium resolution (R ≈ 400–1900), as well
+as integral field spectroscopy at high resolution (R ≈ 100 000) in
+the L and M bands.
+The first measurement of the atmospheric C/O ratio of
+an exoplanet was performed by Madhusudhan et al. (2011),
+who applied an atmospheric fitting code to Spitzer and groundbased photometric data of the transiting hot Jupiter WASP-12b.
+Since then, many atmospheric retrieval codes have been developed for photometric and spectroscopic data of both transiting
+and directly imaged exoplanets; for example, readers can refer to CHIMERA (Line et al. 2013), NEMESIS (Lee et al. 2012),
+Tau-REx (Waldmann et al. 2015), HELIOS-RETRIEVAL (Lavie
+et al. 2017), and petitRADTRANS (Mollière et al. 2019). On the
+direct-imaging side, the first proposed strategy to measure the atmospheric C/O ratio has been the combination of photometric and
+low-resolution (R < 1000) spectroscopic data: for example, Lavie
+et al. (2017) analysed HR 8799 data from Bonnefoy et al. (2016)
+and Zurlo et al. (2016) with the VLT Spectro-Polarimetric Highcontrast Exoplanet REsearch instrument (SPHERE; Beuzit et al.
+2019) and the Gemini Planet Imager (GPI; Macintosh et al. 2014);
+Mollière et al. (2020) studied HR 8799 e more closely with additional VLTI/GRAVITY spectro-interferometric data; and Nowak
+et al. (2020) observed β Pictoris b with VLTI/GRAVITY to measure its atmospheric C/O ratio. More recently, Ruffio et al. (2021)
+observed the HR 8799 system with the OH-Suppressing Infrared
+Integral Field Spectrograph (OSIRIS; Quirrenbach et al. 2003;
+Larkin et al. 2006) at the Keck Observatory in the K band at
+medium spectral resolution (R ≈ 4000) and measured stellar C/O
+ratios for the b, c, and d planets, contradicting the previous findings of Lavie et al. (2017) of the supersolar C/O ratio for the b
+planet, hinting at a possible discrepancy between measurements
+at low versus medium spectral resolution. Finally, Xuan et al.
+(2022) simultaneously analysed photometric and low- and highresolution spectroscopic data of the brown dwarf HD 4747 B
+to derive its C/O ratio, while Wang et al. (2023) additionally
+considered medium-resolution spectroscopy while applying the
+Article number, page 2 of 22
+
+same framework based on Wang et al. (2020) to constrain the
+atmospheric parameters of HR 8799 c.
+Several studies have explored how to leverage mediumresolution spectroscopy to investigate the atmospheric composition of directly imaged gas giants, in particular when using
+cross-correlation with spectral templates — a method informally
+called cross-correlation spectroscopy (CCS). Relying on it, Hoeijmakers et al. (2018) introduced the technique of molecular mapping, which consists in applying a spectral cross-correlation to
+the spectrum in each spatial pixel (spaxel) of the datacube of an
+integral field unit (IFU), thereby unveiling the imprint of each
+molecule in the atmosphere of the observed exoplanet. Instead of
+filtering out the starlight as part of data post-processing, Ruffio
+et al. (2019) — later improved by Ruffio et al. (2021) — defined
+a joint likelihood function of the forward model for the planetary
+atmosphere and stellar point spread function (PSF), allowing to
+constrain the barycentric radial velocity of the exoplanet as well
+as the atmospheric parameters using a grid of BT-Settl models
+(Allard 2013) after marginalising over the stellar PSF model.
+The molecular mapping technique resulted in the detection
+of water and carbon monoxide in the atmospheres of β Pic b
+(Hoeijmakers et al. 2018) and HIP 65426 b Petrus et al. (2021)
+using K-band medium-resolution (R ≈ 5000) spectroscopic data
+obtained with VLT/SINFONI (Eisenhauer et al. 2003), as well
+as in the atmosphere of HR 8799 b (Petit dit de la Roche et al.
+2018) using H- and K-band medium-resolution (R ≈ 4000) spectroscopic data obtained with Keck/OSIRIS. Cugno et al. (2021)
+applied the technique to K-band spectroscopic data of the forming planet PDS 70 b taken with VLT/SINFONI, and quantified
+the extinction of the surrounding dusty environment required to
+explain the non-detection of H2 O and CO. Patapis et al. (2022)
+examined the feasibility and limiting factors of applying molecular mapping with the Mid-Infrared Instrument (MIRI; Wells
+et al. 2015) on the James Webb Space Telescope (JWST) using
+mock observations of the systems HR 8799 and GJ 504, and
+predicted the detectability of H2 O, CO, CH4 , and NH3 in the
+atmospheres of directly imaged gas giants. Using the joint modelling of the stellar PSF and exoplanet atmosphere, Ruffio et al.
+(2019) inferred the barycentric radial velocity (RV) of the planets HR 8799 b and c using H- and K-band medium-resolution
+(R ≈ 4000) spectroscopic data from Keck/OSIRIS, while Ruffio
+et al. (2021) constrained the C/O ratios of the HR 8799 b, c, and
+d planets.
+Arguably, the frameworks described in these studies are missing at least one of two key ingredients, namely 1. the simultaneous
+consideration of archival photometric and low-resolution spectroscopic data on top of the newly published medium-resolution
+spectroscopic data within the Bayesian framework, or 2. the commitment to a full-on atmospheric retrieval by exploring the whole
+parameter space using dedicated sampling algorithms to not only
+find the maximum likelihood estimator, but also derive the full
+posterior distribution.
+With this study, we propose a new framework to combine
+low resolution spectrophotometric and cross-correlation spectroscopic data into a full Bayesian statistical framework to derive atmospheric properties of directly imaged exoplanets and
+to prepare for newly commissioned and future instruments. To
+that end, we built upon the work of Brogi & Line (2019), who
+defined a Bayesian statistical framework combining low- and
+high-resolution spectroscopy with the original purpose of deriving atmospheric properties of transiting exoplanets. We present
+our framework CROCODILE (CROss-COrrelation retrievals of
+
+J. Hayoz et al.: CROCODILE
+
+Directly Imaged self-Luminous Exoplanets)1 , which embeds the
+radiative transfer routine petitRADTRANS (Mollière et al. 2019)
+into the mathematical framework of Brogi & Line (2019).
+In Sect. 2, we present the main parts of CROCODILE, namely
+the Bayesian estimator, the modification of the log-likelihood
+function to include the spectral cross-correlation between model
+and data, and our forward model for the atmosphere of gas giant
+exoplanets. In Sect. 3, we put CROCODILE to a full battery of
+tests, including a comparison between a regular atmospheric
+retrieval running on low-resolution spectroscopy (LRS) and
+photometry and a pure cross-correlation-based retrieval, as well
+as a review of the performance of CROCODILE when applied to
+a large portion of the parameter space of the atmospheres of gas
+giants. Finally, we discuss the implications of our findings as
+well as future opportunities for CROCODILE in Sect. 4, before
+summarising our work in Sect. 5
+
+2. CROCODILE: A Bayesian framework to combine
+all direct-imaging observing techniques into
+atmospheric retrievals
+CROCODILE is composed of a Bayesian estimator coupled to a
+forward model for the emission spectra of gas giants. More precisely, the routine starts with the prior distributions of the model
+parameters, from which the Bayesian estimator samples a set
+of input parameters for the simulator. The forward model computes the spectrum from the sampled parameters, before formatting it to the observing techniques that make up the data, that is
+photometry, low-resolution spectroscopy, or continuum-removed
+medium-resolution spectroscopy. These synthetic model spectra
+are used together with the data to calculate the sum of the three
+log-likelihood functions associated to each observing technique.
+Finally, the log-prior is added to the log-likelihood to obtain the
+log-posterior which is then used to update the sampled points according to a nested sampling algorithm. The input of CROCODILE
+is the data, the forward model, the opacity database, and the priors.
+Its output is the posterior distribution of the forward model, from
+which the posterior thermal structure, chemistry, and spectrum
+can be computed. A conceptual sketch of CROCODILE is shown
+in Fig. 1, while we describe its implementation in the following
+sections.
+
+CROCODILE
+DATA
+
+BAYESIAN ESTIMATOR
+log ℒ ≈
+
+Photometry: 𝑑PH
+
+𝑁PH
+
+𝑑PH,𝑖 − 𝑚PH,𝑖
+1
+− ෍
+2
+2
+𝜎PH,𝑖
+
+2
+
+𝑖=1
+
+LRS: 𝑑LRS
+
+−
+
+1
+−1
+𝑑
+− 𝑚LRS T 𝑊LRS
+(𝑑LRS − 𝑚LRS )
+2 LRS
+
+CCS: 𝑑CCS
+
+−
+
+𝑁CCS
+log(𝑠𝑑 2 − 2𝐾 + 𝑠𝑚 2 )
+2
+
+Nested Sampling
+ℒ⟼𝜃
+
+INPUT
+Data
+Forward model
+Opacity database
+Priors
+
+Solver
+petitRADTRANS
+Chemistry Free
+p-T profile Guillot profile
+
+OUTPUT
+Posteriors
+
+Resample to format of data
+𝜃 ⟼ (𝑚PH , 𝑚LRS , 𝑚CCS )
+
+FORWARD MODEL
+
+Fig. 1: Schematic of our atmospheric retrieval framework
+CROCODILE. The input of the routine is the data — which can be
+photometry, low-, or medium-resolution spectroscopy — , the
+forward model, the opacity database, and the priors. CROCODILE
+starts by sampling parameters from the prior, from which the
+forward model is evaluated. It is then compared to the data by
+computing the sum of the log-likelihood functions corresponding
+to the three observing techniques, from which new parameters
+are sampled and the loop restarts. The output is the posterior
+distribution of the forward model.
+
+p(θ | d) =
+
+p(d | θ)p(θ)
+,
+p(d)
+
+(1)
+
+where the vector θ denotes the parameters of the forward
+model (e.g. the equilibrium temperature, surface gravity, or chemical composition), d the data, p(d | θ) ≡ L(θ) Rthe likelihood
+function, p(θ) the prior distribution, and p(d) = Θ p(d | θ)p(θ)
+2.1. The Bayesian estimator
+the evidence defined as the integral of the likelihood function
+Atmospheric retrievals are a well-established framework within multiplied by the prior over the parameter space Θ. Calculating
+the exoplanet community (for a review, readers can refer to the likelihood function is expensive since it requires to evaluate
+Madhusudhan 2018). Fundamentally, they seek to invert the the forward model including the computationally heavy radiadata, meaning that, for a given model describing the transfer of tive transfer routine. Therefore, we need an efficient parameter
+electromagnetic radiation through the atmosphere of exoplanets, sampling method to reduce the number of evaluations of the forthey estimate how well each combination of parameters of ward model. Our code CROCODILE makes use of the software
+said model explains the data. Essentially, they contain three pymultinest (Buchner et al. 2014), which is broadly used in
+components, namely 1. the data (which is usually obtained via the community of atmospheric retrievals (e.g. Lavie et al. 2017;
+photometry or spectroscopy), 2. the forward model (which maps Mollière et al. 2019, 2020; Konrad et al. 2022), a Python implethe parameters of the exoplanetary atmosphere to an emission mentation of MultiNest (Feroz et al. 2009, 2019) which utilises
+or transmission spectrum), and 3. a Bayesian inference algorithm the multimodal nested sampling algorithm from Skilling (2006).
+The choice of the likelihood function L(θ) depends on the
+that takes in the data as well as prior knowledge and calculates a
+posterior probability distribution over the parameter space of the noise statistics of the data, which depend on the observing and
+model. Bayes’ theorem (Bayes 1763) provides the mathematical post-processing techniques used. Typically, photometric data dPH
+framework by formulating the problem as the computation of obtained by different instruments or in different observing conditions are statistically independent of each other, allowing the
+the posterior distribution:
+decomposition of the likelihood function into a product of like1
+CROCODILE is available as a Python package at https://github. lihood functions for each datapoint. Furthermore, the noise in
+com/JHayoz/CROCODILE
+high-contrast imaging data is usually assumed to be independent
+Article number, page 3 of 22
+
+A&A proofs: manuscript no. main
+
+identically distributed Gaussian, leading to the following loglikelihood function (ignoring constant factors that only depend
+on the data):
+
+
+NPH
+dPH,i − mPH,i (θ) 2
+1X
+log LPH (θ) ≈ −
+,
+2 i=1
+σ2PH,i
+
+(2)
+
+s2d =
+s2m (θ) =
+
+1
+
+N
+CCS
+X
+
+NCCS i=1
+1
+
+N
+CCS
+X
+
+NCCS i=1
+1
+
+N
+CCS
+X
+
+2
+dCCS,i
+
+(5)
+
+m2CCS,i (θ)
+
+(6)
+
+dCCS,i mCCS,i (θ) .
+(7)
+NCCS i=1
+where mPH (θ) is the synthetic photometric data obtained by
+evaluating the forward model at the parameter θ, and σPH is the
+In Eq. 7, the cross-covariance K is linked to the crossuncertainty associated to the data dPH .
+correlation
+C over the relation:
+For low-resolution spectroscopic data dLRS , the noise statistics can be more intricate, since different wavelength channels of
+q
+a spectrum might be correlated (e.g. Todorov et al. 2016; MadK
+≡
+C
+s2d s2m ,
+(8)
+husudhan 2018; Mollière et al. 2019; Nowak et al. 2020). In this
+case, the likelihood function is often chosen as a multivariate
+meaning that either the cross-correlation C or the crossnormal distribution (again ignoring constant factors):
+covariance K can be computed as long as the right variable is used
+in Eq. 4. For the sake of completeness, we provide the derivation
+of Eq. 4 used by Brogi & Line (2019) in appendix A. So far, we
+1
+have kept the explicit dependency of the model M on the param−1
+(dLRS − mLRS (θ)) ,
+log LLRS (θ) ≈ − (dLRS − mLRS (θ))T WLRS
+eter θ for the sake of mathematical rigorousness; however, we
+2
+(3) have dropped the dependency of the model spectrum on the frame
+of reference. Whereas the effect is insignificant for photometry
+and low-resolution spectroscopy of close-by stellar systems, the
+where mLRS (θ) is the synthetic low-resolution spectrum that Doppler shift created by the radial velocity vR of the target exois obtained by evaluating the forward model at the parameter θ planet with respect to the observatory indeed becomes significant
+(Greco & Brandt 2016). The covariance matrix WLRS describes at medium spectral resolution. More precisely, for a spectrum
+the correlation of the data across spectral channels and needs to at spectral resolution R and at wavelength λ, and therefore with
+vR
+be computed for each observation (e.g. Nowak et al. 2020).
+channel spacing ∆λ = Rλ , the Doppler shift ∆λ
+λ = c (with c the
+speed of light in vacuum) resulting from the radial velocity vR is
+equal to the wavelength spacing of the spectrum when vR = Rc .
+2.2. Incorporating cross-correlation spectroscopy into
+At medium spectral resolution (R ≈ 5000), this effect occurs
+atmospheric retrievals
+with a radial velocity of vR ≈ 60 km s−1 , whereas it requires a
+Cross-correlation spectroscopy (CCS; Sparks & Ford 2002) was much higher radial velocity (vR > 600 km s−1 ) at low spectral
+introduced to the field of exoplanet direct-imaging to leverage resolution (R < 500). Hence, the forward model for medium- and
+the full spectral resolution of spectrographs. With the exception high-resolution spectroscopy needs to be Doppler-shifted to the
+of M stars, the high temperatures found in the photosphere of reference frame of the observed spectrum. Instead of computing it
+stars prevent the atoms from bonding into molecules. For that once and for all before the retrieval or adding it in as a parameter
+reason, stellar spectra only show atomic absorption lines in the of the model, we incorporated it into the algorithm by taking
+infrared range, which differ significantly from the molecular ab- the maximum of the cross-covariance K over a range of radial
+sorption lines found in colder objects such as brown dwarfs and velocity
+gas giant exoplanets. Therefore, it is possible to filter out the
+stellar spectrum and cross-correlate the residuals with molecular
+K (θ, vR ) ,
+(9)
+spectral templates, thereby picking up the signal of molecules K (θ) = v0max
+≤vR ≤v1
+present in the atmosphere of the low-mass companion, for examwhere K (θ, vR ) is the cross-covariance where the model is
+ple using high-resolution spectral differential imaging (HRSDI;
+e.g. Hoeijmakers et al. 2018; Haffert et al. 2019; Cugno et al. Doppler shifted by the radial velocity vR , and v0 and v1 are the
+lower and higher bounds of the range of radial velocities con2021).
+To incorporate HRSDI-treated IFU data into atmospheric re- sidered. To Doppler shift the forward model spectrum, we used
+trievals, we followed the framework of Brogi & Line (2019), the methods dopplerShift and crosscorrRV from the Python
+who expanded the conventional Gaussian likelihood function package PyAstronomy (Czesla et al. 2019), and we−1selected rabetween v0 = −400 and v1 = 400 km s in steps of
+from Eq. 2 by assuming constant noise across all spectroscopic dial velocities
+−1
+channels and replacing the standard deviation by its maximum 0.5 km s , which corresponds to 0.8% of the wavelength spacing
+likelihood estimator, thereby making the cross-covariance K be- at medium spectral resolution R = 5000. The size of the steps
+have conservatively been chosen small because Doppler-shifting
+tween model and data appear in the log-likelihood function:
+the spectra is a cheap computational operation relative to the cost
+of computing the forward model.
+These algorithms use interpolation to Doppler shift spectra,
+
+
+NCCS
+log LCCS (θ) ≈ −
+log s2d − 2K (θ) + s2m (θ) ,
+(4) which can lead to non-conservation of the total flux. To limit this
+2
+effect, we applied the Doppler shift before down-sampling the
+spectra to a lower spectral resolution when simulating data. On
+the other hand, the routine crosscorrRV interpolates the already
+with the following definitions
+K (θ) =
+
+Article number, page 4 of 22
+
+J. Hayoz et al.: CROCODILE
+
+down-sampled forward model to the Doppler shifted wavelength
+before computing the correlation. To understand how the use of
+interpolation might negatively affect the cross-correlation, we implemented and tested an algorithm which first applies the Doppler
+shift before down-sampling and computing the correlation. To
+quantify the improvement, we simulated three spectra using our
+forward model from Sect. 3.3: one data spectrum with added
+random scatter, and two template spectra with different model
+parameters. We then computed the likelihood ratio (Eq. 4) between the two template spectra using both algorithms. The new
+algorithm did not significantly change the results: the likelihood
+ratios differed by 0.03%. However, the new algorithm was slower
+by a factor of 1000 due to the extra down-sampling step, which
+would become a bottleneck during retrievals. Hence, we did not
+use our new algorithm in this work and continued evaluating
+Eq. 4 using the routine crosscorrRV. We note that the issue
+discussed here might yield a different result with another combination of spectral resolution and wavelength range. Therefore, we
+recommend caution when using an interpolation-based Doppler
+shifting algorithm; in particular, the test described above should
+be repeated when working with alternate datasets.
+Finally, it is worth stating explicitly that the spectral data
+dCCS is assumed to have been reduced using HRSDI, and thus its
+continuum has been removed. Therefore, the model also needs to
+be high-pass filtered with the same cutoff frequency as the data.
+We describe our high-pass filter in Sect. 3.2.
+2.3. Combining data from different instruments
+
+In the two previous sections, we motivated our choice of loglikelihood functions associated to photometric, low-resolution
+spectroscopic, and cross-correlation spectroscopic data. To integrate all three techniques into one framework, we need to compute
+their joint likelihood function:
+L (θ) = p(dPH , dLRS , dCCS | θ) .
+
+(10)
+
+In general, the joint likelihood functions of two datasets d1
+and d2 depends on their conditional probability p(d1 , d2 | θ) =
+p(d1 | d2 θ)p(d2 | θ). In this work, we assumed that all datasets
+are independent of each other, that is p(d1 | d2 θ) = p(d1 | θ).
+This assumption should hold whenever two datasets come from
+different telescopes or different instruments, or if they were taken
+on different nights or under different meteorological conditions.
+Therefore, we can apply this argument recursively to the joint
+likelihood function given above to obtain
+p(dPH , dLRS , dCCS | θ) = p(dPH | θ)p(dLRS | θ)p(dCCS | θ) ,
+
+(11)
+
+which translates to the following log-likelihood function for
+CROCODILE:
+log L (θ) = log LPH (θ) + log LLRS (θ) + log LCCS (θ)
+
+NPH
+dPH,i − mPH,i (θ) 2
+1X
+≈−
+2 i=1
+σ2PH,i
+1
+−1
+(dLRS − mLRS (θ))T WLRS
+(dLRS − mLRS (θ))
+2
+
+
+NCCS
+−
+log s2d − 2K (θ) + s2m (θ) .
+(12)
+2
+−
+
+2.4. The forward model
+
+The forward model of an atmospheric retrieval is composed of
+two parts, namely the theoretical model describing the chemical and thermal properties of the planetary atmosphere, and a
+radiative transfer routine that calculates the spectrum escaping
+from it. For the latter, we utilised petitRADTRANS (Mollière
+et al. 2019), which solves the radiative transfer equation on a
+discrete 1D plane-parallel atmosphere. It can be used in two spectral modes, namely the high-resolution line-by-line mode (lbl;
+λ/∆λ = 106 ) or the medium-resolution correlated-k (c-k) approximation (λ/∆λ = 103 ). We used the lbl mode when calculating
+spectra of instruments with a spectral resolution higher than 1000,
+and the other for lower resolution or photometry. We set the number of atmospheric layers on which the radiative transfer equation
+is solved to 100 between a top and bottom pressure of 10−6 and
+102 bar.
+For the physical model of the atmosphere, two main approaches are used in the literature, namely self-consistent (Seager
+et al. 2005; Burrows et al. 2008; Fortney et al. 2008; Moses et al.
+2011; Gandhi & Madhusudhan 2017) and free models (Todorov
+et al. 2016; Lavie et al. 2017; Nowak et al. 2020; Mollière et al.
+2020). Self-consistent models aim to account for the known relevant physical processes that might take place in a planetary
+atmosphere and therefore implement physical constraints such
+as hydrodynamical, thermodynamical, and chemical equilibria,
+and sometimes even disequilibria due to dynamical interactions
+such as, for example, winds (Gandhi & Madhusudhan 2018) or
+photochemistry (Moses et al. 2011). Evidently, the risk of this
+approach is to falsely account for the relevant physical processes,
+for example by wrongly assuming chemical equilibrium (Madhusudhan 2018). The solution to that problem is to leave out
+physical consistency and adopt a parameterised model that is flexible enough to simultaneously account for both well-known and
+unknown physical processes. The disadvantage of that approach
+is that it often requires a higher-dimensional model and that it
+might return physically impossible solutions. In this work, we
+selected a mixed approach with a physically motivated analytical thermal structure combined with free chemistry. Indeed, we
+are mainly interested in constraining the abundances of specific
+molecules, therefore requiring to fit for each of them independently, whereas investigating the diversity of thermal structures
+that can be constrained by atmospheric retrievals is beyond the
+scope of this work.
+Specifically, our free chemistry model was parameterised by
+the mass fractions Xi of the molecular abundances which are
+assumed to be constant vertically across all atmospheric layers (e.g. Todorov et al. 2016; Line et al. 2017). The rest of the
+atmospheric mass was made of 75% molecular hydrogen and
+25% helium (Line et al. 2012). We considered the line opacities of H2 O, CO, CO2 , CH4 , H2 S, FeH, TiO, K, and VO, at
+low (c-k) and high resolution (lbl) depending on the spectral
+resolution of the instrument for which the spectrum was calculated. We included Rayleigh scattering of molecular hydrogen
+and helium together with the Collision-Induced Absorption (CIA)
+cross-sections of H2 -H2 and H2 -He. The line lists and opacities
+used in this study were downloaded at the online documentation
+of petitRADTRANS2 and are listed in Table 1 for reference.
+We parameterised the thermal structure of the atmosphere
+with the analytic semi-grey model derived by Guillot (2010).
+It is parameterised by six quantities, of which the equilibrium
+2
+
+The documentation of petitRADTRANS is available
+https://petitRADTRANS.readthedocs.io/en/latest/
+content/available_opacities.html
+
+at
+
+Article number, page 5 of 22
+
+A&A proofs: manuscript no. main
+
+Table 1: Line lists and opacities included.
+
+3. Tests on simulated data
+
+In the following, we aim to demonstrate the capability of
+CROCODILE to recover the thermal and chemical properties of
+H2
+...
+HITRAN
+the atmospheres of gas giants using a common combination of
+H2 O
+HITEMP
+HITEMP
+ground-based techniques in the near and mid infrared such as
+CO
+HITEMP
+HITEMP
+photometry, low-resolution spectroscopy (LRS), and mediumCH4
+ExoMolOP YT14
+resolution cross-correlation spectroscopy (MRCCS). We thereCO2
+ExoMolOP HITEMP
+fore submit it to a full series of tests that we describe and justify
+H2 S
+ExoMolOP HITRAN
+in the following.
+FeH
+ExoMolOP YT14
+As a preliminary test of CROCODILE, we checked our
+TiO
+ExoMolOP ExoMolOP
+statistical framework in Sect. 3.3 for potential mistakes or
+K
+VALD
+VALD
+biases. For this, we controlled our implementation of the
+VO
+ExoMolOP ExoMolOP
+cross-correlation-based likelihood given by Eq. 4 by running
+a retrieval with MRCCS data alone. Then, we tested our
+Rayleigh
+implementation of the regular retrieval framework on LRS and
+H2
+DW62
+DW62
+photometric (LRSP) data. Finally, we tested the implementation
+He
+CD65
+CD65
+of CROCODILE on the combination of the three techniques.
+Quasi-continuum
+To test CROCODILE in a meaningful way, we considered a
+H2-H2 CIA
+BR, RG12
+BR, RG12
+realistic study case for ground-based instruments. This had the
+H2-He CIA
+BR, RG12
+BR, RG12
+following two consequences, namely first that we chose a wellknown target to simulate for which some atmospheric properties
+Notes. The acronyms given above stand for the following references: have been derived already, and second we assumed a realistic
+ExoMolOP: Chubb et al. (2021), HITEMP: Rothman et al. (2010), HI- list of instruments to simulate spectroscopic and photometric
+TRANS: Rothman et al. (2013), YT14 = Yurchenko & Tennyson (2014), observations with. To that end, we selected β Pictoris b (Lagrange
+VALD: Piskunov et al. (1995), DW62: Dalgarno & Williams (1962),
+et al. 2010) as a bright and young exoplanet that was observed
+CD65: Chan & Dalgarno (1965), BR: Borysow et al. (1988, 1989); Borysow & Frommhold (1989); Borysow et al. (2001); Borysow (2002), by many instruments and was the object of several atmospheric
+studies (e.g. Hoeijmakers et al. 2018; Stolker et al. 2020; Nowak
+RG12: Richard et al. (2012).
+et al. 2020). We describe this target and the used instruments in
+detail in Sect. 3.1 and 3.2, and show the results of that test in
+Sect. 3.4.
+Furthermore, we show that combining MRCCS with LRSP
+temperature T equ and surface gravity g are free parameters of
+generally
+allows to better constrain the forward model as comour forward model, whereas the other four are fixed: the average
+pared
+to
+using
+only LRSP data as it has been done until now, by
+opacity in the infrared κIR = 0.01 cm2 /g, the ratio of the average
+applying
+our
+framework
+to different values of the parameter space
+opacity in the optical and infrared γ = κV /κIR = 0.4, the interior
+of
+the
+atmospheres
+of
+gas
+giants (readers can refer to Sect. 3.1 for
+temperature T int = 200 K, and the bottom pressure P0 = 100 bar.
+details). The results of that test are presented in Sect. 3.5.
+The last parameter was the planet radius R which, together
+with the distance from the Earth d, served to scale the atmo- 3.1. Simulated targets
+spheric spectrum down by a multiplicative factor of R2 /d2 , since
+petitRADTRANS calculates the flux escaping the top of the To test our method, we need to know the ground truth values of the
+parameters of an exoplanetary atmosphere and see if we can reatmosphere of the planet per unit surface.
+trieve them truthfully. However, it would not be realistic (namely:
+In this study, we purposefully ignored clouds, which are too optimistic) to use the same chemical model to simulate such
+known to be present in the atmospheres of gas giant exoplanets an atmosphere that we use as our forward model. In particular,
+(Nowak et al. 2020; Mollière et al. 2020). However, considering the underlying chemical model of our target should have a more
+clouds would add too much complexity to our model and would complex chemistry than our simple forward model. Therefore,
+dilute our message. Indeed, the modelling of clouds is an issue whereas our forward model assumed free chemistry as we dethat all atmospheric retrieval frameworks face and therefore need scribed in Sect. 2.4, for our simulated targets we chose the chemito be investigated separately.
+cal equilibrium model that was computed by easyCHEM from Mollière et al. (2017)3 as a first approximation of the chemistry of an
+Finally, we ignored rotational broadening and limb darkenexoplanetary atmosphere, not accounting for clouds (Burrows &
+ing. Indeed, Palma-Bifani et al. (2023) included both parameters
+Sharp 1999), vertical mixing (Griffith & Yelle 2000), or other prointo their retrieval on VLT/SINFONI J-, H-, and K-band spectrocesses causing disequilibrium chemistry. Concretely, it was calcuscopic observations of AB Pic b and reported an erratic behaviour
+lated in the following way: we set the pressure-temperature profile
+of their posteriors, which was probably due to the insufficient
+as well as the carbon-to-oxygen (C/O) ratio and metallicity (Fe/H)
+spectral resolution of VLT/SINFONI. Furthermore, there was no
+and the code calculated the resulting steady-state molecular abunnoticeable correlation between vsin(i) and any other parameter
+dances at chemical equilibrium in each layer of the atmosphere
+in their published 2-D corner-plots (figures 7 and 8). Similarly,
+by minimising the Gibbs free energy. We considered the opacities
+Bryan et al. (2020) measured the rotational broadening of the
+of H2 O, CO, CH4 , CO2 , H2 S, NH3 , FeH, HCN, TiO, PH3 , K,
+planetary-mass companion 2MASS J01225093–2439505 using
+VO, and Na (i.e. HCN in addition to the opacities included in
+high-resolution (R ≈ 25000) spectroscopic observations taken
+with Keck/NIRSPEC and reported no significant dependence on 3 A grid of molecular abundances pre-computed by easyCHEM can be
+the C/O ratio of the atmospheric models used to cross-correlate found at https://petitradtrans.readthedocs.io/en/latest/
+with the data.
+content/notebooks/poor_man.html
+Opacity
+
+Article number, page 6 of 22
+
+c-k
+
+lbl
+
+J. Hayoz et al.: CROCODILE
+
+Table 2: Parameter values assumed for the simulated datasets.
+ID
+
+T equ (K)
+
+C/O
+
+Fe/H
+
+1
+2
+3
+4
+5
+6
+7
+
+1742
+1400
+2000
+1742
+1742
+1742
+1742
+
+0.49
+0.53
+0.47
+0.32
+1.04
+0.46
+0.52
+
+0.61
+0.59
+0.62
+0.75
+0.38
+−1.02
+1.76
+
+Notes. Each row corresponds to a simulated atmosphere used to compute
+synthetic MRCCS, LRS, and photometric measurements as described in
+Sect. 3.2.
+
+Nowak et al. 2020). We included more opacities here than in our
+forward model described in Sect. 2.4. Moreover, we also included
+Rayleigh scattering of molecular hydrogen and helium together
+with the Collision-Induced Absorption (CIA) cross-sections of
+H2 -H2 and H2 -He. Finally, we used the same p-T profile as our
+forward model (Guillot 2010). The spectra of our synthetic targets
+were also generated with petitRADTRANS (Mollière et al. 2019).
+As mentioned above, we aim to test CROCODILE on a meaningful subspace of exoplanetary atmospheres. In particular, we
+considered the three parameters that control the chemical equilibrium model, namely the equilibrium temperature, the carbonto-oxygen ratio, and the metallicity, and we selected a baseline
+equal to the values derived for β Pic b by Nowak et al. (2020),
+namely T equ = 1742 K, C/O = 0.44, and Fe/H = 0.66 dex, and subsequently varied each of these parameters. Table 2 summarises
+the full list of exoplanetary atmospheres simulated. We point
+out that the values given in the table did not exactly match the
+input values used for easyCHEM (which were 0.3, 0.44, and 1 for
+C/O and -1, 0.66, and 2 for Fe/H), since we only considered the
+gaseous content of the atmosphere and not the liquid and solid
+reactants available with easyCHEM. The values given in Table 2
+are the mean C/O ratio and metallicity along the vertical extent
+of the simulated atmospheres after removing all opacities from
+non-gaseous reactants.
+Additionally, our simulated targets had a planetary radius
+Rp = 1.36 RJ (Nowak et al. 2020) and an arbitrary radial velocity
+of vR = 31 km s−1 , the former being a parameter of the forward
+model while the latter only plays a role at medium (or higher)
+spectral resolution and gets determined at every computation of
+the likelihood function using Eq. 9. Finally, our model of the
+targets implicitly included six more parameters which were kept
+fixed between the data and the forward model. Five of these
+describe the p-T profile and are the same as given in Sect. 2.4.
+The remaining parameter was the distance d = 19.75 pc to
+β Pictoris b as measured by Gaia Collaboration (2018).
+
+in Sec. 3.1 in either the full spectral resolution line-by-line
+mode (R ≈ 106 ) for VLT/SINFONI and VLTI/GRAVITY or
+the correlated-k approximation (R ≈ 1000) for VLT/SPHERE
+and photometry.
+Photometry was calculated by integrating the spectrum multiplied by the normalised filter transmission function, which we
+downloaded with the Python package species (Stolker et al.
+2020)4 . We estimated the uncertainty of the photometric flux by
+taking the same relative error as the real measurement, and added
+normally distributed random scatter with standard deviation equal
+to the estimated uncertainty.
+For the VLTI/GRAVITY instrument, the resampling from
+the petitRADTRANS to the observation bins was done using the
+Python package spectRES (Carnall 2017) which preserves the
+total flux. We then estimated the uncertainty of the synthetic
+fluxes by scaling the covariance matrix of the real measurement
+to the simulated spectrum. To create realistic flux measurements,
+we added a random (multivariate normally distributed) scatter
+to each flux bin with a covariance matrix equal to the simulated
+covariance matrix. For VLT/SPHERE, where we had no access
+to a spectrum of β Pic b, we chose a simpler approach by setting
+the uncertainty to 10% (which is an optimistic estimation of
+the errorbars found in Fig. 11 of Langlois et al. (2021)) and
+added normally distributed random scatter in the same way as for
+photometry.
+Concerning the VLT/SINFONI MRCCS data, we first applied
+a Doppler shift with a radial velocity of 31 km s−1 to the spectrum
+before resampling the spectrum using spectRES. To match the
+treatment of HRSDI, we applied a low-pass filter consisting of a
+Gaussian filter with standard deviation of 4.9 nm to compute the
+continuum, which we subsequently subtracted from the spectrum.
+We found the value of 4.9 nm by repeating our preliminary test
+from Sect. 3.3 for different filter sizes (readers can refer to App. C
+for details); however, we note that the optimal filter size should
+be investigated separately when using a real observation. To
+add random scatter to our MRCCS data, we aimed to reproduce
+the signal-to-noise ratio (S/N) of the real observations that we
+considered. Therefore, we generated a continuum-removed
+spectrum using the values retrieved by Nowak et al. (2020) for
+β Pic b and cross-correlated it with the SINFONI spectrum from
+Hoeijmakers et al. (2018). We then took the ratio of the peak of
+the cross-correlation function to its standard deviation 200 km s−1
+away from the peak (similar to Cugno et al. 2021) and obtained
+a value of 14.4. Thus, when we simulated SINFONI spectra,
+we added Gaussian noise with a standard deviation such that
+the CCF between noisy and clean spectra also yielded the same
+ratio of the peak to standard deviation. This made the synthetic
+SINFONI planet spectra similar (in terms of S/N) to the β Pic b
+data presented in Hoeijmakers et al. (2018).
+3.3. Verifying the framework of CROCODILE
+
+To verify the statistical framework used in CROCODILE, we submitted it to a preliminary test in an idealised setup. To that end, we
+For each of the seven synthetic targets described above, as well as created yet another synthetic target with the same free chemistry
+for each evaluation of our forward model, we recreated synthetic as in our forward model. More precisely, we used the same p-T
+photometry, LRS, and MRCCS by matching the instrumental profile as in our simulated atmosphere 1 from Table 2 but changed
+characteristics of the archival datasets of β Pic b listed in Ta- the chemical composition to only contain H2 O and CO with verble 3. Considering real observations of β Pic b enabled us to tically constant mass fractions equal to −1.8 dex and −1.6 dex
+simulate realistic measurement uncertainties and random noise respectively. Moreover, we did not add any random scatter confor each instrument in a straightforward way, thereby creating tained in our low-resolution datasets to ensure that, if the retrieval
+a realistic synthetic dataset. To simulate the format recorded by did not converge to the input values, it was not because of the
+each of these instruments, we started by computing a spectrum
+with petitRADTRANS using the atmospheric model described 4 https://github.com/tomasstolker/species
+3.2. Synthetic data
+
+Article number, page 7 of 22
+
+A&A proofs: manuscript no. main
+
+Table 3: List of observations of β Pic b used for our simulations.
+Instrument
+
+Band
+
+Technique
+
+Wavelength (µm)
+
+R
+
+Reference
+
+VLT/SPHERE/IFS
+VLTI/GRAVITY
+VLT/SINFONI
+LCO/VisAO
+VLT/NACO
+Gemini/NICI
+VLT/NACO
+VLT/SPHERE/IRDIS
+VLT/NACO
+VLT/SPHERE/IRDIS
+VLT/NACO
+VLT/NACO
+VLT/NACO
+VLT/NACO
+
+Y-H
+K
+K
+Ys
+J
+ED286
+H
+K12.1
+Ks
+K12.2
+NB374
+Lp
+NB405
+Mp
+
+LRS
+LRS
+MRCCS
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+PHOT
+
+0.96–1.63
+1.97–2.49
+2.09–2.45
+0.99
+1.28
+1.59
+1.67
+2.11
+2.15
+2.26
+3.74
+3.81
+4.07
+4.79
+
+30
+500
+4000
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+
+...
+Nowak et al. (2020)
+Hoeijmakers et al. (2018)
+Males et al. (2014)
+Currie et al. (2013)
+Males et al. (2014)
+Currie et al. (2013)
+Lagrange et al. (2020)
+Bonnefoy et al. (2011)
+Lagrange et al. (2020)
+Stolker et al. (2020)
+Stolker et al. (2019)
+Stolker et al. (2020)
+Stolker et al. (2019)
+
+Notes. The VLT/SPHERE/IFS spectrum is not public and therefore we do not put a reference next to it, however we do refer to Langlois et al.
+(2021) to estimate the errorbars of our synthetic spectra.
+
+Article number, page 8 of 22
+
+Tequ = 1740.41+6.13
+6.34
+True: 1742.00
+
+logg = 4.37+0.04
+0.04
+logg
+
+1.8 1.6 1.4 1.21.25 1.50 1.75 2.00 2.25 4.2 4.5 4.8 5.1
+
+True: 4.35
+
+R = 1.36+0.01
+0.01
+
+R
+
+True: 1.36
+
+H2O = 1.79+0.02
+0.02
+
+H2 O
+
+True: -1.80
+
+CO = 1.61+0.08
+0.08
+True: -1.60
+
+R
+
+1.4
+
+1.6
+
+H2 O
+
+1.2
+2.0
+0
+1.7
+5
+1.5
+0
+1.2
+5
+
+logg
+
+1.8
+
+5.1
+1.2
+5
+1.5
+0
+1.7
+5
+2.0
+0
+2.2
+5
+
+4.8
+
+4.5
+
+Tequ
+
+4.2
+
+16
+80
+17
+60
+18
+40
+19
+20
+
+CO
+
+2.0 1.7 1.5 1.2
+0 5 0 5
+
+noise but rather because of a mistake in our framework. Finally,
+we reduced the amount of random scatter by a factor of three
+in the MRCCS data with respect to the synthetic observations
+introduced in Sect. 3.2 instead of removing it completely because
+otherwise the argument of the logarithm could become zero if the
+forward model matches the simulated data.
+We first ran CROCODILE on MRCCS data alone to test the
+implementation of the likelihood function based on the crosscorrelation function (Eq. 4). We then tested the implementation
+of the regular likelihood function based on the residuals between
+data and model (Eq. 3) using only LRSP. Finally, we checked that
+the combination of MRCCS together with LRSP via the addition
+of their log-likelihood functions was also valid. We show the
+resulting 2D posterior distributions of these three evaluations of
+CROCODILE in Fig. 2.
+The three tests yielded educative results: the retrieval on LRSP
+data alone yielded perfectly centred posteriors with small uncertainty as can be expected from the lack of random scatter in the
+data. In particular, the abundances of water and carbon monoxide
+were well constrained due to the good coverage of their spectral
+features by the VLT/SPHERE/IFS/Y-H and VLTI/GRAVITY/K
+low-resolution spectroscopic data. On the other hand, the retrieval
+on MRCCS data yielded a systematic overestimation of the temperature, surface gravity, radius, and H2 O abundance, while the
+abundance of CO was constrained very accurately. Furthermore,
+the radius seemed correlated with the surface gravity and the
+abundances of H2 O and CO, and to a lesser extent to T equ .
+These correlations can be tentatively explained by the removal
+of the continuum in the treatment of the MRCCS data in the
+following way. Without continuum, the radius only has the role
+of scaling the absorption lines, which is counteracted on the one
+hand by the surface gravity, which in the p-T model from Guillot
+(2010) brings the same temperatures at higher pressures, which
+reduces the thermal gradient between the top of the atmosphere
+and the region at optical depth of unity and hence decreases the
+strength of the line. The molecular abundances also counteract
+the scaling effect of the radius by increasing the height at which
+the optical depth reaches unity, thereby also reducing the thermal
+gradient between the top of the atmosphere and the emitting
+layer. Interestingly, if the radius is already known and fixed to a
+previously measured value during the retrieval, then the results
+
+CO
+
+Fig. 2: Resulting posterior distributions for our preliminary test
+that controls our implementation of CROCODILE using the same
+chemistry as input as our forward model, namely vertically constant abundances of H2 O and CO, and reduced random scatter.
+The orange posterior shows the results of the retrieval using only
+MRCCS data to test the implementation of the cross-correlation
+likelihood function, the blue posterior is for the regular framework using only LRSP, and the green posterior shows the result
+for the combination of MRCCS and LRSP data. The dashed red
+line shows the ground truth used as input.
+improve greatly as can be seen in Fig. D.1 in the appendix. Indeed,
+the abundances of H2 O and CO and the surface gravity were all
+retrieved within 1σ with a smaller uncertainty; however, the
+temperature was still equally overestimated. This test indirectly
+hints that if the radius — or any other flux scaling parameter —
+
+J. Hayoz et al.: CROCODILE
+
+H2 O
+
+Tequ = 1743.21+9.22
+9.12
+
+CH4
+
+CO
+
+True: 1742.00
+
+logg = 4.40+0.05
+0.05
+logg
+R
+1.5 3.0 4.5 6.0 4.0 4.8 5.6 6.4 7.2
+
+True: 4.35
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+CO2
+
+2
+
+1
+
+H2 S
+
+10
+
+8
+
+6
+
+FeH
+
+4
+
+2
+
+0
+
+4
+
+2
+
+0
+
+4
+
+2
+
+0
+
+R = 1.36+0.02
+0.02
+True: 1.36
+
+10
+
+8
+
+6
+
+TiO
+
+4
+
+2
+
+0
+
+10
+
+8
+
+6
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+10
+
+8
+
+6
+
+K
+
+4
+
+2
+
+0
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+10
+
+8
+
+6
+
+VO
+
+H2 O
+CO
+2.5 2.0 1.5 1.0 0.5 2.0 1.5 1.0 0.5
+
+H2O = 1.83+0.03
+0.03
+
+logg
+
+R
+
+H2 O
+
+2.5
+2.0
+1.5
+1.0
+0.5
+
+6.0
+2.0
+1.5
+1.0
+0.5
+
+Tequ
+
+4.0
+4.8
+5.6
+6.4
+7.2
+1.5
+3.0
+4.5
+
+15
+00
+17
+50
+20
+00
+22
+50
+
+CO = 1.67+0.11
+0.11
+
+CO
+
+Fig. 3: Results of the three retrievals of the same simulated atmosphere using different combinations of the synthetic spectra
+of β Pic b: the SINFONI MRCCS-only retrieval in orange, the
+LRSP-only retrieval in blue, and the retrieval using all techniques
+in green. The off-axis panels show the projected 2D posterior
+distributions of the main model parameters (readers can refer to
+the description in Sect. 2.4). The indicated values above each
+histogram on the diagonal refer to the median and 1-sigma uncertainty for CROCODILE. For the molecular abundances, we omit
+the logarithm in front of the names of the molecules for the sake
+of readability. The dashed red line represents the true parameter
+value, and it is not shown for the abundances given the different
+chemical treatment between simulated observations and forward
+model.
+
+is set as fixed parameter to a wrong value, then there is a high
+risk to bias the results when using MRCCS data only.
+Finally, when combining LRSP and MRCCS data, the results
+were slightly more accurate than when used on LRSP data alone.
+In particular the abundance of CO was retrieved with a 25%
+smaller 1σ spread. In summary, this test verified the statistical
+framework of CROCODILE and already showed the systematics
+that appear when using only MRCCS data.
+3.4. Case study: A synthetic β Pictoris b
+
+After validating our statistical framework, we investigated possible biases by applying it to the synthetic targets described in
+Sect. 3.1, which span across a portion of the parameter space
+around the gas giant β Pic b. First, we give a more in-depth report
+for our baseline in this subsection while we describe all our results
+in the next. Figure 3 compares the posterior distributions obtained
+with MRCCS data only, with LRSP, or with MRCCS and LRSP
+simultaneously; the posterior distributions of the molecular abundances are shown in Fig 4; and the retrieved thermal profiles, C/O
+ratio, and metallicity Fe/H are presented in Fig. 5. Our retrieval
+setup and priors are described in App. B.
+
+Fig. 4: Retrieved posterior distributions of all the molecular abundances included in the three retrievals of the experiment described
+in 3.4. The solid red lines represent the profile (in log scale) of
+each molecular abundance along the vertical extent of the atmosphere between 100 bar at the bottom and 10−6 bar at the top.
+The results obtained with MRCCS data only (in orange
+in Fig. 3) showed that the surface gravity, planet radius, and
+abundances of water and carbon monoxide all yielded Gaussian
+marginal distributions with the simulated values outside of 1σ
+of the mean. The equilibrium temperature was overestimated by
+1σ resulting in a p-T profile that was about 150 K too hot at all
+altitudes relative to the ground truth, similarly to the planetary
+radius which was also overestimated. This behaviour is identical
+to what we observed in the previous section, with similar correlations between the same parameters, once again demonstrating the
+effects of the removal of the continuum. The posterior distributions of the molecular abundances resulted in a good constraint of
+CO with a large standard deviation of 0.4 dex. The abundance of
+H2 O was overestimated by 1 dex, while we obtained correct upper
+bounds (i.e. the true value was indeed lower than the bound) for
+CH4 and CO2 , and uniform posteriors for FeH, TiO, H2 S, K, and
+VO, which is expected from the weak spectral signatures of these
+molecules in the K band. The C/O ratio and metallicity did not
+get retrieved within 1σ, despite large standard deviations of 0.14
+and 0.5 dex respectively.
+When we applied CROCODILE to LRSP data only (in blue in
+Fig. 3), the equilibrium temperature, surface gravity, and planetary radius were retrieved within 1σ with a precision of 10 K,
+0.05 dex, and 0.015 RJ respectively. The p-T profile was well
+constrained, with the true profile less than 20 K away from the
+posterior median. Contrary to the abundances of H2 O and CO
+which were well constrained with Gaussian posterior distributions, the abundances of FeH, K, and VO resulted in an upper
+bound, where the posterior maximum correctly identified an upper bound and lower values were not totally ruled out.
+This can be attributed to the strong features produced by those
+molecules at short wavelengths, identified by the low-resolution
+SPHERE/IFS data. For the other molecules, we obtained correct
+upper bounds with the true abundances at lower values. The C/O
+ratio and metallicity were accurately retrieved within 1σ with a
+spread of 0.06 and 0.09 dex respectively.
+Finally, when we applied CROCODILE to all three techniques
+(in green in Fig. 3), we obtained equivalent constraints on all
+parameters, with a negligible improvement on the spread of the
+Article number, page 9 of 22
+
+Pressure [bar]
+
+A&A proofs: manuscript no. main
+
+10 6
+10 5
+10 4
+10 3
+10 2
+10 1
+100
+101
+102
+
+Thermal profile
+True Tequ: 1742 K
+MRCCS: 1900+126
+115 K
+LRSP: 1744+99 K
+CROCODILE: 1743+99 K
+
+3.5. Exploration of the parameter space
+
+1500 1600 1700 1800 1900 2000 2100 2200 2300
+Temperature [K]
+
+C/O ratio
+MRCCS: 0.30+0.14
+0.11
+LRSP: 0.48+0.06
+0.06
+
+Probability distribution
+
+H and K band cross-correlation spectroscopic observations taken
+with the same instrument but processed differently.
+In summary, our test seemed to further confirm the systematics of the retrieval on K-band MRCCS data observed in the
+previous section, while these systematics disappear when combined with LRSP data. In the next section, we investigate whether
+that is still the case when changing the input atmosphere.
+
+CROCODILE: 0.48+0.05
+0.05
+True C/O: 0.49
+
+0.0
+
+0.2
+
+0.4
+0.6
+C/O ratio (MMR)
+
+0.8
+
+[Fe/H]
+Probability distribution
+
+MRCCS: 1.54+0.57
+0.50
+LRSP: 0.56+0.09
+0.08
+CROCODILE: 0.58+0.11
+0.08
+True [Fe/H]: 0.61
+
+Since our results — derived for a simple synthetic model of
+β Pic b — might depend on the input atmosphere, we next explored how our framework fares in the parameter space around
+it as described in 3.1. The model setup and priors used for our
+retrievals were the same as in the previous section (readers can
+refer to App. B for details). Fig. 6 reports the scores of three
+metrics applied to our retrievals in order to compare the results of
+the three techniques. Fig 7 focuses on the fifth atmospheric model
+as it is discussed below, while the fitted SEDs and posterior p-T
+profiles are shown in Fig. 8 and Fig. 9 respectively. Figure E.1 in
+the appendix summarises all the resulting posterior distributions
+of the seven synthetic targets defined in Sect. 3.1, while the tables
+F.2, F.3, and F.4 in App. F report the numerical values.
+In order to quantitatively compare the results obtained by
+LRSP, MRCCS, or LRSP+MRCCS, we computed a slightly
+modified Mahalanobis distance dθ (Eq. 13), the relative error
+ϵθ (Eq. 14), and the mean squared error MSEθ (Eq. 15) from the
+marginalised posterior distribution of each parameter θ and for
+each simulated atmosphere:
+dθ = (θ̂ − θT )/σθ
+
+(13)
+
+ϵθ = (θ̂ − θT )/θT
+
+(14)
+
+MSEθ =
+
+0.5
+
+1.0
+
+1.5
+
+2.0
+2.5
+[Fe/H] (dex)
+
+3.0
+
+3.5
+
+Fig. 5: Results of the experiment described in 3.4. Top panel:
+thermal profiles retrieved for each technique (MRCCS: orange,
+LRSP: blue, CROCODILE: green). The two levels of opacity correspond to the 16 to 84 and the 2 to 98 percentile envelopes of the
+thermal profile. The legend reports the median and 64 % confidence interval retrieved for the equilibrium temperature. Middle
+and bottom panel: posterior distributions of the C/O ratio and
+metallicity Fe/H inferred from the retrieved abundances for each
+technique. The dashed lines represent the posterior median. The
+dashed red line shows the ground truth in every panel.
+
+C/O ratio and the accuracy of the metallicty. Interestingly, the
+lower C/O ratio constrained by MRCCS relative to LRSP is similar to the inconsistent C/O ratios that have been reported for the
+HR 8799 b planet: Lavie et al. (2017) used photometric and lowresolution H- and K-band spectroscopic data from KECK/OSIRIS
+(binned down to a resolution of 60 to increase the S/N) and obtained a value close to unity, while Ruffio et al. (2021) derived
+a much lower value of 0.578 on medium-resolution (R ≈ 4000)
+Article number, page 10 of 22
+
+NS
+X
+
+1
+(θi − θT )2 .
+NS i=1
+
+(15)
+
+In the equations above, θ̂ is the posterior median, θT is the
+ground truth of parameter θ, σθ is the distance of the median from
+the closest bound of the 68th percentile confidence interval (i.e.
+if θ < θ̂, then σθ is equal to the difference between the median
+and the 16th percentile, and the difference between the median
+and the 84th percentile otherwise), and θi denotes the NS points
+sampled by the nested algorithm. We choose these three metrics
+for the following reasons. First, the Mahalanobis metric measures
+the distance from the ground truth in terms of standard deviations (more precisely here in terms of 68th percentile confidence
+interval), meaning that a bad score is obtained when the uncertainty is underestimated. Second, the relative error measures the
+accuracy with which the parameters are retrieved. Finally, the
+mean squared error measures the quality of the median posterior
+as an estimator for the ground truth as it incorporates both its
+variance and its bias. Since the true molecular abundances have
+non-constant vertical profiles, θT represents the point of the true
+profile closest to the retrieved value, that is (θ̂ − θT ) is zero if there
+is an atmospheric layer where the retrieved abundance matches
+the true value. Figure 6 summarises the results of these three
+metrics for each retrieval case and for each technique (MRCCS,
+LRSP, or MRCCS+LRSP, i.e. CROCODILE), and by averaging
+over three groups of parameters: the molecular abundances, the
+physical parameters T equ , log(g), and R, and the C/O ratio and
+metallicity.
+The retrieval using MRCCS data alone resulted in the worst
+overall score with respect to every metric and for every subgroup
+
+Simulated atmosphere
+Simulated atmosphere
+
+Mean squared error
+
+C/O and Fe/H
+
+1
+2
+3
+4
+5
+6
+7
+
+Relative error
+
+T, log(g), R
+
+1
+2
+3
+4
+5
+6
+7
+
+Mahalanobis distance
+MRCCS
+LRSP
+CROCODILE
+
+Molecular abundances
+
+1
+2
+3
+4
+5
+6
+7
+
+Simulated atmosphere
+
+J. Hayoz et al.: CROCODILE
+
+0
+
+1
+
+d =(
+
+2
+
+T)/
+
+[]
+
+3
+
+4 0.0
+
+0.2
+
+0.4
+
+=(
+
+0.6
+
+0.8
+
+T)/ T
+
+1.0
+
+1.2
+
+MSE = 1/NS ( i
+
+T)2 [a.u.]
+
+Fig. 6: Scores of the three metrics summarising the results of our exploration of the parameter space of gas giants using LRSP,
+MRCCS, or LRSP+MRCCS (CROCODILE). Each column of panels represents a different metric, and the three rows refer to different
+parameters grouped together. Within each panel, the score is shown for each technique and for each simulated atmosphere (c.f.
+Table 2 for the input parameters), and averaged over the group of parameters. The dotted lines show the average score over the seven
+cases.
+of parameters, except for the molecular abundances with the
+Mahalanobis metric. This can be explained by the broad posterior distributions obtained with the technique, meaning that the
+ground truth was more often contained within the 68th percentile
+confidence interval although the retrieved value was significantly
+far from the true value, especially for T equ , log(g), and R. Combining MRCCS with LRSP data lead to the lowest relative error
+and mean squared error for all groups of parameters, and yielded
+approximately equal Mahalanobis distance than the retrievals on
+LRSP-only data. Overall, that is across all the cases, the combined fit on LRSP and MRCCS data achieved to retrieve 68% of
+the parameters within 0.7σ, against 0.6σ for the LRSP-only fit
+and 1.1σ for the MRCCS-only fit, while the same proportion of
+the parameters was retrieved with a relative error of less than 6%
+for LRSP+MRCCS, against 8% for LRSP and 28% for MRCCS.
+Hence, the combined fit on MRCCS and LRSP data was overall
+slightly more accurate and resulted in less underestimation of
+the uncertainty than the fit on LRSP data only, while the fit on
+MRCCS data only was largely inaccurate.
+It is worth noting which molecule could be constrained and
+in what scenario. While the abundances of H2 O and CO resulted
+in narrow posterior distributions, those of CO2 , H2 S, TiO, and
+K almost were never retrieved accurately, with at most upper
+bounds and only a good constraint of K at high C/O ratio. This
+can be explained by the strong absorption features of H2 O and
+CO included in the spectral range covered by our synthetic data,
+while this is not the case for CO2 , H2 S, TiO, and K. This can be
+
+seen in Fig. 10, where we illustrate the spectral signatures of the
+molecules included in our retrieval by computing the absolute
+difference in flux between the full chemical model at equilibrium
+and when each molecule is removed successively. The abundance
+of CH4 seemed to be retrievable when it was significantly higher
+in the input atmosphere, namely at low temperature and at high
+C/O ratio. Finally, FeH, and VO obtained similar results with
+mostly correct upper bounds and a few good constraints of FeH at
+high C/O ratio and low metallicity when LRSP data was included,
+which can be explained by the spectral features of FeH and VO
+that are covered by the VLT/SPHERE/IFS Y − H-band LRS data
+but were not included in the MRCCS data.
+Looking at Fig. 6 case by case, it seems that there is one
+case that yielded relatively worst scores than the others when including LRSP data (i.e. LRSP alone or combined with MRCCS),
+namely at high C/O ratio (case 5). Indeed, all three subgroups
+of parameters resulted in relatively higher Mahalanobis distance
+and relative error than the other cases. This can be understood
+better in Fig. E.1: the retrieved surface gravity, the abundances of
+CO and K as well as the metallicity all overestimated the ground
+truth by a few σ. However, this is more due to the small spread of
+the posterior distributions (as is the case for the surface gravity),
+quickly resulting in large Mahalanobis distance, or to the fact
+that the ground truth itself is a small number (for example the
+metallicity), also resulting in a large relative error. Looking at the
+mean squared error, the fifth case actually obtained fairly similar
+scores to the others.
+Article number, page 11 of 22
+
+A&A proofs: manuscript no. main
+
+H2S [dex]
+
+R [RJ] logg/g0 [dex] Tequ [K]
+
+3000
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+FeH [dex]
+
+2000
+
+4.1. Applicability of CROCODILE
+
+6
+
+8
+
+1.0
+
+1.5
+
+2.0
+
+TiO [dex]
+
+4
+
+K [dex]
+
+H2O [dex]
+
+4. Discussion
+
+6
+
+3
+
+0
+VO [dex]
+
+CO [dex]
+
+9
+
+1
+
+0
+
+C/O
+
+CH4 [dex]
+
+2
+
+1.0
+
+1.5
+
+2.0
+
+[Fe/H]
+
+CO2 [dex]
+
+7.5 5.0 2.5
+
+9
+
+6
+
+3
+
+0
+
+4.2. Future opportunities
+
+0
+
+2
+
+Fig. 7: Posterior distributions obtained for the retrievals of our
+simulated atmosphere 5 (cf. Table 2) using CROCODILE on MRCCS data alone (orange), on LRSP data (blue), and on both
+MRCCS+LRSP combined (green). The input values are shown
+as dashed red lines.
+Finally, the quality of an atmospheric retrieval is usually estimated from the fit to the input spectrum, which we provide in
+Fig. 8. Remembering that all our datasets contained random scatter corresponding to their errorbar, the spectral fit — computed
+using the median of the posterior distributions of each parameter
+— showed no significant deviation from the LRSP data when it
+was included in the fit. Non-surprisingly, the retrieval using only
+MRCCS data did not match the LRSP data due to its inability
+to constrain the continuum and thus the thermal profile of the
+atmosphere. Indeed, as shown in Fig. 9, the temperature-pressure
+profile was largely unconstrained by the MRCCS data with a 1σ
+envelope of 200 K mostly overestimating the input profile except
+in the cases 6 and 7. Both the fit on LRSP data only and the
+combined fit were able to precisely constrain the thermal profile.
+Article number, page 12 of 22
+
+The results presented in the last section show the robustness of
+the framework of CROCODILE to retrieve the parameters of a
+diverse population of gas giant atmospheres across a range of
+temperatures and chemical composition. However, our analysis
+also showed that the addition of K-band SINFONI MRCCS data
+along the list of LRSP data in the retrieval did not significantly
+improve our results: the posterior distributions mostly matched,
+with a slight gain of accuracy and better estimation of the uncertainty as reported in Sect. 3.5. We argue that this is because of
+the high-quality K-band VLTI/GRAVITY spectrum at a spectral
+resolution of R ≈ 500 which can already constrain the abundance
+of CO on its own, and hence the medium-resolution spectrum
+provided by VLT/SINFONI does not add much information that
+is not already there. To demonstrate this point, we repeated the
+retrievals on case 1, however this time we excluded the GRAVITY
+spectrum from the fit. The results of this final test are presented in
+Fig. 11 and in Table F.5 in App. F. Indeed, the low-resolution Yto H-band VLT/SPHERE spectrum together with the photometric
+points were not enough on their own to constrain the molecular
+abundance of CO, leading to a mostly undetermined C/O ratio and
+a poorly constrained metallicity. When the K-band SINFONI data
+was added to the fit, the difference was significant: the abundance
+of CO became well constrained, leading to a good estimation of
+the C/O ratio (C/O= 0.41+0.17
+−0.16 against the input value of 0.49) and
+accurate constraint of the metallicity (Fe/H= 0.61+0.30
+−0.23 against the
+input value of 0.61).
+While Sect. 3.5 demonstrated the robustness of CROCODILE
+against different input atmospheres, this last test showed its actual
+strength. Namely, it allows the combination of low signal-to-noise
+cross-correlation spectroscopic data together with a few photometric points and low-resolution spectroscopic data to measure
+the molecular abundances of closely separated directly imaged
+low-mass companions, without the need for high-quality spectroscopic data such as measured by VLTI/GRAVITY.
+
+The major disadvantage of removing the continuum to perform
+cross-correlation with spectral templates is made obvious in
+Fig. E.1: the information carrying the temperature is mostly
+lost with the continuum, rendering its determination almost impossible using only cross-correlation and further degrading the
+determination of the other parameters such as surface gravity,
+C/O ratio, and metallicity. It therefore seems that the continuum
+should not be removed. If it is true that molecular lines present in
+substellar companions differ enough from the atomic lines found
+in stellar spectra, then this fact stays true if the continuum of
+the planet can be retrieved. Several studies are indeed able to
+retrieve the continuum of directly imaged low-mass companions
+using medium-resolution spectroscopy: for example Daemgen
+et al. (2017) and Petrus et al. (2021) were able to measure the
+spectrum of the planetary-mass objects HD 106906 b and HIP
+65426 b using VLT/SINFONI, while most recently Miles et al.
+(2022) released the spectrum of the young brown dwarf VHS
+1256 b taken with the NIRSpec IFU and MIRI MRS onboard
+JWST, the highest fidelity spectrum to date of a planetary-mass
+object, which will undoubtedly yield the most robust derivation
+of the atmospheric properties of a planetary-mass object to date.
+The point of our study is not that the continuum of those
+spectra could have been removed with similar constraints for
+
+1) Baseline
+Flux [10 15Wm 1 m 1]
+
+2
+
+5) High C/O
+Flux [10 15Wm 1 m 1]
+
+2
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+1
+
+2
+
+3
+
+4
+
+5
+
+1
+
+2
+
+3
+
+4
+
+5
+
+1
+
+2
+
+3
+
+4
+
+5
+
+1
+
+2
+
+3
+
+4
+
+5
+
+1
+
+2
+
+3
+
+4
+
+5
+
+2
+
+3
+
+4
+
+5
+
+1
+0
+
+4
+2
+0
+
+10.0
+7.5
+5.0
+2.5
+0.0
+10.0
+7.5
+5.0
+2.5
+0.0
+
+7) High Fe/H
+Flux [10 15Wm 1 m 1]
+
+6) Low Fe/H
+Flux [10 15Wm 1 m 1]
+
+4
+
+10.0
+7.5
+5.0
+2.5
+0.0
+
+4) Low C/O
+Flux [10 15Wm 1 m 1]
+
+3) High T
+Flux [10 15Wm 1 m 1]
+
+6
+
+2) Low T
+Flux [10 15Wm 1 m 1]
+
+J. Hayoz et al.: CROCODILE
+
+4
+2
+0
+
+1
+
+Wavelength [ m]
+
+Fig. 8: Comparison of the fitted spectra to our simulated datasets 1 to 7 (cf. Table 2) using CROCODILE on MRCCS data alone
+(orange), on LRSP data (blue), and on both MRCCS+LRSP combined (green). The fitted spectra were calculated using our forward
+model from the posterior median of the retrieved distributions shown in Fig. E.1. The 11 colourful crosses represent the simulated
+photometric values and their corresponding uncertainty and equivalent width; the orange and blue error bars show the simulated
+Y H-band VLT/SPHERE/IFS and K-band VLTI/GRAVITY spectra and corresponding uncertainties; and the contiuum-subtracted
+light green spectrum shows the simulated VLT/SINFONI MRCCS data.
+the atmosphere of the exoplanet, but rather to enable the study
+of close-in low-mass companions where the continuum cannot
+be extracted at all (or at least not within reasonable integration
+
+times) due to contamination by stellar speckles, as is the case in
+Hoeijmakers et al. (2018), Cugno et al. (2021), Ruffio et al. (2021),
+and Wang et al. (2021). Indeed, future direct-imaging searches for
+Article number, page 13 of 22
+
+A&A proofs: manuscript no. main
+
+10 2
+100
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+2) Low T
+Pressure [bar]
+
+10 6
+10 4
+10 2
+100
+102
+
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+3) High T
+Pressure [bar]
+
+10 6
+10 4
+10 2
+
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+4) Low C/O
+Pressure [bar]
+
+10 4
+10 2
+100
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+5) High C/O
+Pressure [bar]
+
+10 6
+10 4
+10 2
+
+10 15
+10 16
+10 17
+10 18
+10 19
+10 20
+10 21
+0.8
+
+1.0
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+Wavelength [ m]
+CH4
+H2 S
+CO2
+VO
+
+2.0
+
+2.2
+
+2.4
+
+TiO
+K
+
+2.6
+
+FeH
+
+Fig. 10: Absolute difference between the spectrum calculated
+with the full chemical model used for our simulated atmosphere
+1 (as described in Table 2) and spectra where each molecule
+included in our framework was removed one after the other. For
+example water shows a large difference due to its absorption
+features throughout the whole range. The black lines indicate
+the spectral coverage of the different spectroscopic instruments
+included in our tests.
+
+100
+102
+10 6
+
+5. Summary and conclusion
+The results of this work are summarised in the following:
+
+10 4
+10 2
+
+– We adapted the statistical framework of Brogi & Line (2019)
+from exoplanet transit spectroscopy to the different observational techniques of directly imaged exoplanets, including
+photometry, low-resolution spectroscopy, and medium (and
+higher) resolution cross-correlation spectroscopy, which can
+constrain the atmospheric properties of gas giant exoplanets such as temperature-pressure profile and chemical composition. Our Python routine, called CROCODILE, is freely
+available for download on GitHub.5
+– We thoroughly tested our framework, first on a synthetic atmosphere created with the same input as our forward model
+to verify the framework, and then on a grid of atmospheres
+at chemical equilibrium to test the ability of our free forward model to robustly constrain atmospheric properties in a
+realistic scenario.
+– We find that using medium-resolution cross-correlation spectroscopy alone leads to a generally poor constraint of the
+atmospheric parameters due to the loss of the continuum. The
+results improved a lot when fixing the planetary radius to
+its ground truth. However, we noticed strong correlations between the radius and the surface gravity and the molecular
+abundances of H2 O and CO This means that fixing the radius
+to a wrong value might strongly bias the retrieved values.
+– We further find that combining medium-resolution crosscorrelation spectroscopy to photometry and low-resolution
+spectroscopy leads to an accurate determination of the atmospheric parameters. Indeed, 68% of the parameters were
+retrieved within 0.9σ of the ground truth, with no systematical bias despite the different chemical model used in the
+forward model and in the simulated data.
+– Our last test shows that low-quality (i.e. high noise) mediumresolution (R ≈ 4000) K-band cross-correlation spectroscopy,
+
+100
+102
+
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+1000
+
+1200
+
+1400
+
+1600
+
+1800
+
+2000
+
+2200
+
+2400
+
+2600
+
+10 6
+
+7) High Fe/H
+Pressure [bar]
+
+10 14
+
+2600
+
+10 6
+
+102
+
+10 13
+
+H2 O
+CO
+
+100
+102
+
+6) Low Fe/H
+Pressure [bar]
+
+Absolute flux difference [Wm 2 m 1]
+
+1) Baseline
+Pressure [bar]
+
+10 4
+
+102
+
+Spectral signatures of the molecules considered
+SPHERE/IFS/Y-H
+GRAVITY/K
+SINFONI/K
+
+Thermal profile
+
+10 6
+
+10 4
+10 2
+100
+102
+
+Temperature [K]
+
+Fig. 9: Posterior thermal profiles obtained for the retrievals of our
+simulated atmospheres 1 to 7 (cf. Table 2) using CROCODILE on
+MRCCS data alone (orange), on LRSP data (blue), and on both
+MRCCS+LRSP combined (green). The different envelopes of
+each colour represent the 68th, 95th, and 99th percentile credible
+intervals — corresponding to 1σ, 2σ, and 3σ of a normal distribution — of the posterior distributions of the retrieved thermal
+profiles. The input p-T profiles are shown as dashed red lines.
+
+exoplanets will focus more and more on the innermost regions of
+planetary systems, where radial velocity searches indicate that the
+occurrence rate of planets is higher (Cumming et al. 2008; Fulton
+et al. 2021). However, at such close separations, the location of a
+planet is only at a few resolution elements from the central star.
+There, the stellar PSF is still so intense that extracting medium
+and high spectral resolution spectra for such planets will come
+at the cost of the continuum — at least initially. That is when
+CROCODILE — and similar statistical frameworks based on the
+cross-correlation of continuum-removed spectra with spectral
+models (e.g. Ruffio et al. 2021) — comes into play by enabling a
+full Bayesian analysis to characterise more and more challenging
+directly imaged exoplanets.
+Article number, page 14 of 22
+
+5
+
+https://github.com/JHayoz/CROCODILE
+
+J. Hayoz et al.: CROCODILE
+
+H2S [dex]
+2000
+
+2500
+
+9
+
+6
+
+3
+
+0
+
+2.5
+
+5.0
+
+7.5
+
+9
+
+6
+
+3
+
+0
+
+1.0
+
+1.5
+
+2.0
+
+9
+
+6
+
+3
+
+0
+
+K [dex]
+
+TiO [dex]
+
+FeH [dex]
+
+1500
+
+H2O [dex]
+
+R [RJ] logg/g0 [dex] Tequ [K]
+
+1) Baseline
+
+1
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+VO [dex]
+
+9
+
+6
+
+3
+
+0
+
+C/O
+
+9
+
+9
+
+6
+
+3
+
+0 0.0
+
+9
+
+6
+
+3
+
+0
+
+0.5
+
+1.0
+
+[Fe/H]
+
+CO2 [dex]
+
+CH4 [dex]
+
+CO [dex]
+
+2
+
+0
+
+2
+
+Fig. 11: Posterior distributions obtained when removing the synthetic VLTI/GRAVITY data from the atmospheric fit. The input atmosphere is the same as case 1 (cf. Table 2), and as in
+Fig. 7 we also compare the results when applying CROCODILE
+to MRCCS data alone (orange), LRSP data (blue), and on both
+MRCCS+LRSP combined (green). However, this time the lowresolution spectroscopy only included synthetic VLT/SPHERE
+data in the Y − H bands. The input values are shown as dashed
+red lines.
+
+when combined with photometry, leads to an equivalently
+accurate constraint of the abundance of CO than high-quality
+(i.e. low noise) low-resolution (R ≈ 500) K-band spectroscopy. To put into perspective, the actual observations that
+our synthetic data is based on was acquired in 2.5 hrs of
+integration time for VLT/SINFONI on one telescope (Hoeijmakers et al. 2018) versus 1.4 hrs for VLTI/GRAVITY on four
+telescopes (Nowak et al. 2020), that is the medium-resolution
+cross-correlation spectroscopy required less than half of the
+
+total telescope time that was required for the low-resolution
+spectro-interferometry.
+– Our work shows that medium-resolution cross-correlation
+spectroscopy in the K band is best interpreted alongside
+Y − M-band photometry and, if available, low-resolution spectroscopy in the Y − H bands, to robustly infer the atmospheric
+properties of gas giant exoplanets.
+– In summary, CROCODILE provides the statistical framework
+to interpret medium- (and possibly higher-) resolution spectroscopic data alongside photometric and low-resolution spectroscopic data of directly imaged gas giant exoplanets at close
+separations to their host star, where the continuum of their
+spectrum can only be extracted reliably at low spectral resolution due to the pollution by the stellar PSF. CROCODILE allows
+the measurement of the atmospheric properties of gas giants
+such as the pressure-temperature profile and the abundances
+of individual molecules. In the future, we plan to add the option to choose between different thermal, chemical, and cloud
+models, in order to allow model selection via computation of
+Bayes’ factor between competing models.
+With the arrival of the next generation of exoplanet directimaging instruments such as ERIS at the VLT, MIRI onboard
+JWST, and the upcoming METIS at the ELT, it is crucial to define
+robust statistical frameworks that take into account the intricacies
+of the different observational and post-processing techniques,
+while acknowledging the risk of model degeneracies. In particular,
+such frameworks should be validated on a representative subset of
+the parameter space of exoplanetary atmospheres to identify the
+limits of applicability of the forward model before being carried
+out on real data.
+Acknowledgements. The authors thank the anonymous referee for their constructive insights which helped to improve the quality of this work. JH and SPQ
+gratefully acknowledge the financial support from the Swiss National Science
+Foundation (SNSF) under project grant number 200020_200399. GC, PP, EOG
+thank the SNSF for financial support under grant numbers P500PT_206785 and
+200020_200399. MJB acknowledges the financial support from ETH Zurich.
+This work has been carried out within the framework of the NCCR PlanetS supported by the Swiss National Science Foundation under grants 51NF40_182901
+and 51NF40_205606. Some of our plots were made using the Python package
+corner.py developed by Foreman-Mackey (2016). Contributions: the authors
+listed in this article are ordered according to the following: JH built the framework,
+did the analysis, and wrote the paper; GC, SPQ, and PP provided feedback and
+supervision during the whole project; while the rest of the co-authors, who are
+ordered alphabetically, provided feedback in later stages of the project.
+
+References
+Allard, F. 2013, Proc. Int. Astron., 8, 271
+Bayes, T. 1763, Phil. Trans. R. Soc., 53, 370
+Beuzit, J.-L., Vigan, A., Mouillet, D., et al. 2019, A&A, 631, A155
+Bonnefoy, M., Lagrange, A. M., Boccaletti, A., et al. 2011, A&A, 528, L15
+Bonnefoy, M., Zurlo, A., Baudino, J. L., et al. 2016, A&A, 587, A58
+Borysow, A. 2002, A&A, 390, 779
+Borysow, A. & Frommhold, L. 1989, ApJ, 341, 549
+Borysow, A., Frommhold, L., & Moraldi, M. 1989, ApJ, 336, 495
+Borysow, A., Jørgensen, U. G., & Fu, Y. 2001, J. Quant. Spectr. Rad. Transf., 68,
+235
+Borysow, J., Frommhold, L., & Birnbaum, G. 1988, ApJ, 326, 509
+Brandl, B., Bettonvil, F., Van Boekel, R., et al. 2021, The Messenger, 182, 22
+Brogi, M. & Line, M. R. 2019, ApJ, 157, 114
+Bryan, M. L., Chiang, E., Bowler, B. P., et al. 2020, AJ, 159, 181
+Buchner, J., Georgakakis, A., Nandra, K., et al. 2014, A&A, 564, A125
+Burrows, A., Budaj, J., & Hubeny, I. 2008, ApJ, 678, 1436
+Burrows, A. & Sharp, C. M. 1999, ApJ, 512, 843
+Carnall, A. C. 2017, arXiv e-prints [1705.05165]
+Chan, Y. M. & Dalgarno, A. 1965, Proc. Phys. Soc., 85, 227
+Chubb, K. L., Rocchetto, M., Yurchenko, S. N., et al. 2021, A&A, 646, A21
+
+Article number, page 15 of 22
+
+A&A proofs: manuscript no. main
+Cugno, G., Patapis, P., Stolker, T., et al. 2021, A&A, 653, A12
+Cumming, A., Butler, R. P., Marcy, G. W., et al. 2008, PASP, 120, 531
+Currie, T., Burrows, A., Madhusudhan, N., et al. 2013, ApJ, 776, 15
+Czesla, S., Schröter, S., Schneider, C. P., et al. 2019, PyA: Python astronomyrelated packages
+Daemgen, S., Todorov, K., Quanz, S. P., et al. 2017, A&A, 608, A71
+Dalgarno, A. & Williams, D. A. 1962, ApJ, 136, 690
+Davies, R., Esposito, S., Schmid, H. M., et al. 2018, in Ground-based and Airborne
+Instrumentation for Astronomy VII (SPIE)
+Eisenhauer, F., Abuter, R., Bickert, K., et al. 2003, in SPIE Proceedings Volume
+4841: Instrument Design and Performance for Optical/Infrared Ground-based
+Telescopes (SPIE)
+Feroz, F., Hobson, M. P., & Bridges, M. 2009, MNRAS, 398, 1601
+Feroz, F., Hobson, M. P., Cameron, E., & Pettitt, A. N. 2019, OJAp, 2, 10
+Foreman-Mackey, D. 2016, JOSS, 1, 24
+Fortney, J. J., Lodders, K., Marley, M. S., et al. 2008, ApJ, 678, 1419
+Fulton, B. J., Rosenthal, L. J., Hirsch, L. A., et al. 2021, ApJS, 255, 14
+Gaia Collaboration. 2018, VizieR Online Data Catalog, 345
+Gandhi, S. & Madhusudhan, N. 2017, MNRAS, 472, 2334
+Gandhi, S. & Madhusudhan, N. 2018, MNRAS, 474, 271
+George, E. M., Gräff, D., Feuchtgruber, H., et al. 2016, in SPIE Proceedings
+Volume 9908: Ground-based and Airborne Instrumentation for Astronomy VI
+(SPIE)
+Greco, J. P. & Brandt, T. D. 2016, ApJ, 833, 134
+Griffith, C. A. & Yelle, R. V. 2000, ApJ, 532
+Guillot, T. 2010, A&A, 520, A27
+Haffert, S. Y., Bohn, A. J., de Boer, J., et al. 2019, Nature Astronomy, 3
+Hoch, K. K. W., Konopacky, Q. M., Theissen, C. A., et al. 2022, arXiv e-prints
+[2212.04557]
+Hoeijmakers, H. J., Schwarz, H., Snellen, I. A. G., et al. 2018, A&A, 617, A144
+Konrad, B. S., Alei, E., Quanz, S. P., et al. 2022, A&A, 664, A23
+Lagrange, A.-M., Bonnefoy, M., Chauvin, G., et al. 2010, Science, 329, 57
+Lagrange, A. M., Rubini, P., Nowak, M., et al. 2020, A&A, 642, A18
+Langlois, M., Gratton, R., Lagrange, A.-M., et al. 2021, A&A, 651, A71
+Larkin, J., Barczys, M., Krabbe, A., et al. 2006, in SPIE Proceedings Volume
+6269: Ground-based and Airborne Instrumentation for Astronomy (SPIE)
+Lavie, B., Mendonça, J. M., Mordasini, C., et al. 2017, ApJ, 154, 91
+Lee, J.-M., Fletcher, L. N., & Irwin, P. G. J. 2012, MNRAS, 420, 170
+Line, M. R., Marley, M. S., Liu, M. C., et al. 2017, ApJ, 848, 83
+Line, M. R., Wolf, A. S., Zhang, X., et al. 2013, ApJ, 775, 137
+Line, M. R., Zhang, X., Vasisht, G., et al. 2012, ApJ, 749, 93
+Macintosh, B., Graham, J. R., Ingraham, P., et al. 2014, PNAS, 111, 12661
+Madhusudhan, N. 2018, in Handbook of Exoplanets (Springer International
+Publishing), 2153–2182
+Madhusudhan, N., Harrington, J., Stevenson, K. B., et al. 2011, Nature, 469, 64
+Males, J. R., Close, L. M., Morzinski, K. M., et al. 2014, ApJ, 786
+Miles, B. E., Biller, B. A., Patapis, P., et al. 2022, arXiv e-prints [2209.00620]
+Mollière, P., Molyarova, T., Bitsch, B., et al. 2022, ApJ, 934, 74
+Mollière, P., Stolker, T., Lacour, S., et al. 2020, A&A, 640
+Mollière, P., Van Boekel, R., Bouwman, J., et al. 2017, A&A, 600, A10
+Mollière, P., Wardenier, J. P., Van Boekel, R., et al. 2019, A&A, 627
+Mordasini, C., van Boekel, R., Mollière, P., et al. 2016, ApJ, 832, 41
+Moses, J. I., Visscher, C., Fortney, J. J., et al. 2011, ApJ, 737, 15
+Nowak, M., Lacour, S., Mollière, P., et al. 2020, A&A, 633, A110
+Ohno, K. & Fortney, J. J. 2022, arXiv e-prints [2211.16877]
+Palma-Bifani, P., Chauvin, G., Bonnefoy, M., et al. 2023, A&A, 670, A90
+Patapis, P., Nasedkin, E., Cugno, G., et al. 2022, A&A, 658, A72
+Petit dit de la Roche, D. J. M., Hoeijmakers, H. J., & Snellen, I. A. G. 2018, A&A,
+616, A146
+Petrus, S., Bonnefoy, M., Chauvin, G., et al. 2021, A&A, 648, A59
+Piskunov, N. E., Kupka, F., Ryabchikova, T. A., Weiss, W. W., & Jeffery, C. S.
+1995, A&AS, 112, 525
+Piso, A.-M. A., Pegues, J., & Öberg, K. I. 2016, ApJ, 833, 203
+Quirrenbach, A., Larkin, J. E., Krabbe, A., Barczys, M., & LaFreniere, D. 2003,
+in SPIE Proceedings Volume 4841: Instrument Design and Performance for
+Optical/Infrared Ground-based Telescopes, ed. M. Iye & A. F. M. Moorwood,
+1493
+Richard, C., Gordon, I., Rothman, L., et al. 2012, J. Quant. Spectr. Rad. Transf.,
+113, 1276
+Rothman, L., Gordon, I., Babikov, Y., et al. 2013, J. Quant. Spectr. Rad. Transf.,
+130, 4
+Rothman, L., Gordon, I., Barber, R., et al. 2010, J. Quant. Spectr. Rad. Transf.,
+111, 2139
+Ruffio, J.-B., Konopacky, Q. M., Barman, T., et al. 2021, AJ, 162, 290
+Ruffio, J.-B., Macintosh, B., Konopacky, Q. M., et al. 2019, AJ, 158, 200
+Seager, S., Richardson, L. J., Hansen, B. M. S., et al. 2005, ApJ, 632, 1122
+Skilling, J. 2006, Bayesian Analysis, 1
+Sparks, W. B. & Ford, H. C. 2002, ApJ, 578, 543
+
+Article number, page 16 of 22
+
+Stolker, T., Bonse, M. J., Quanz, S. P., et al. 2019, A&A, 621, A59
+Stolker, T., Quanz, S. P., Todorov, K. O., et al. 2020, A&A, 635, A182
+Todorov, K. O., Line, M. R., Pineda, J. E., et al. 2016, ApJ, 823, 14
+van der Marel, N., Bosman, A. D., Krijt, S., et al. 2021, A&A, 653, L9
+Waldmann, I. P., Tinetti, G., Rocchetto, M., et al. 2015, ApJ, 802, 107
+Wang, J., Wang, J. J., Ma, B., et al. 2020, AJ, 160, 150
+Wang, J., Wang, J. J., Ruffio, J.-B., et al. 2023, AJ, 165, 4
+Wang, J. J., Ruffio, J.-B., Morris, E., et al. 2021, AJ, 162, 148
+Wells, M., Pel, J.-W., Glasse, A., et al. 2015, PASP, 127, 646
+Xuan, J. W., Wang, J., Ruffio, J.-B., et al. 2022, ApJ, 937, 54
+Yurchenko, S. N. & Tennyson, J. 2014, MNRAS, 440, 1649
+Zurlo, A., Vigan, A., Galicher, R., et al. 2016, A&A, 587, A57
+Öberg, K. I. & Bergin, E. A. 2016, ApJ, 831, L19
+Öberg, K. I., Murray-Clay, R., & Bergin, E. A. 2011, ApJ, 743, L16
+
+J. Hayoz et al.: CROCODILE
+
+Appendix A: Derivation of the log-likelihood
+function for cross-correlation spectroscopy
+
+N
+
+In the following, we provide the derivation of the log-likelihood
+function log LCCS given in Eq. 4 originally developed by Brogi &
+Line (2019), but adapted to our notation. Let d = (d1 , ..., dN ) be
+the measured continuum-removed spectrum of an observed exoplanet with N spectral channels and m (θ, vR ) =: m = (m1 , ..., mN )
+be the associated forward model. For the sake of readability, we
+drop the dependency on the model parameters θ and the radial
+velocity VR in the following. We assume that the data is of the
+form d = am + n, with a scaling factor a and noise n = (n1 , ..., nN ),
+where the components obey a normal distribution with a common
+standard deviation σ, that is ni ∼ N (0, σ). Brogi & Line (2019)
+choose a = 1 and scale their model spectrum by the stellar flux
+and the area ratio between the planet and the star. In our study, the
+data and the forward model were created with the same scaling
+factor, therefore a = 1 also holds here. However, if the observed
+spectrum is provided in arbitrary units, then one could replace
+the multiplicative factor R2 /d2 used in our forward model by a
+and treat is as a nuisance parameter.
+The likelihood function associated to the noise statistics is
+given by
+
+L= √
+
+1
+2πσ2
+
+!N
+
+
+ N
+ X (di − mi )2 
+ ,
+
+exp −
+2
+2σ
+i=1
+
+(A.1)
+
+which leads to the following log-likelihood function (ignoring
+constant additive terms):
+
+N
+
+log L ≈ −N log σ −
+
+1 X
+(di − mi )2 .
+2σ2 i=1
+
+(A.2)
+
+The variable σ represents the uncertainty associated to each
+spectral channel and is assumed to be constant for all spectral
+channels. It is challenging to compute due to the pollution by
+telluric absorption lines or stellar light. Therefore, we replace it
+by its maximum likelihood estimator σ̂:
+
+s2d =
+
+1 X 2
+d
+N i=1 i
+
+s2m =
+
+1 X 2
+m
+N i=1 i
+
+K=
+
+1 X
+di mi ,
+N i=1
+
+(A.5)
+
+N
+
+(A.6)
+
+N
+
+(A.7)
+
+which corresponds to Eq. 4. For the sake of clarity, we note
+here again that instead of the cross-covariance K, one can use
+the normalised cross-correlation C by using Eq. 8 and inserting it
+into the log-likelihood function:
+
+
+N
+log s2d − 2K + s2m
+2
+q
+
+
+N
+≈ − log s2d − 2C s2d s2m + s2m .
+2
+
+log L ≈ −
+
+(A.8)
+(A.9)
+
+Appendix B: The retrieval setup
+Our atmospheric retrieval was setup in the following configuration. We set the equilibrium temperature T equ and logarithm of
+the surface gravity log g as free retrievable parameters governing
+the thermal structure. Implicitly, the thermal structure from Guillot (2010) contains four more parameters which were kept fixed
+in the simulated datasets and in the forward model: the average
+opacity in the infrared κIR = 0.01 cm2 /g, the ratio of the average
+opacity in the optical and infrared γ = κV /κIR = 0.4, the interior
+temperature T int = 200 K, and the bottom pressure P0 = 100 bar.
+For the free parameters governing the chemical composition, we
+included the logarithms of the mass fractions (assumed to be
+vertically constant) of the following molecules: H2 O, CO, CO2 ,
+CH4 , H2 S, FeH, TiO, K, and VO. Finally, we set the abundances
+of H2 and He equal to 75 % and 25 % of the remaining mass
+fraction in each layer. The last free parameter of the model was
+the radius of the planet R. The priors used in this study are given
+in Table B.1.
+Table B.1: Priors used.
+Parameter
+
+Prior
+
+Parameter
+
+Prior
+
+Tequ
+
+U(0, 5000)
+
+log(CO2 )
+
+U(−10, 0)
+
+log(g/g0 )
+
+U(1, 8)
+
+log(H2 S)
+
+U(−10, 0)
+
+R
+
+U(0.1, 10)
+
+log(FeH)
+
+U(−10, 0)
+
+log(H2 O)
+
+U(−10, 0)
+
+log(TiO)
+
+U(−10, 0)
+
+log(CO)
+
+U(−10, 0)
+
+log(K)
+
+U(−10, 0)
+
+log(CH4 )
+
+U(−10, 0)
+
+log(VO)
+
+U(−10, 0)
+
+N
+1 X
+
+0=
+
+∂ log L
+N
+(di − mi )2
+=− + 3
+∂σ
+σ σ i=1
+
+σ̂2 =
+
+1 X
+(di − mi )2 .
+N i=1
+
+N
+
+(A.3)
+
+By inserting σ̂ back into Eq. A.2 and expanding the product
+(di − mi )2 = di2 − 2di mi + m2i , we finally obtain:
+
+
+N 
+ N
+ 1 X
+N
+2
+2
+log L ≈ − log 
+d − 2di mi + mi  −
+2
+N i=1 i
+2
+
+
+N
+≈ − log s2d − 2K + s2m ,
+2
+with the definitions
+
+(A.4)
+
+Appendix C: Derivation of the optimal size of the
+Gaussian filter
+We derived the optimal size of the Gaussian filter used to remove
+the continuum of our synthetic medium-resolution spectroscopic
+Article number, page 17 of 22
+
+A&A proofs: manuscript no. main
+
+Testing the size of the filter
+
+Tequ = 1804.49+23.66
+21.56
+True: 1742.00
+
+36.8
+logg = 4.45+0.08
+0.09
+
+29.4
+
+True: 4.35
+
+H2O = 1.83+0.04
+0.04
+True: -1.80
+
+CO = 1.73+0.11
+0.11
+True: -1.60
+
+60
+
+100
+
+logg
+
+H2 O
+
+1.2
+2.0
+0
+1.7
+5
+1.5
+0
+1.2
+5
+
+1.4
+
+1.6
+
+1.8
+
+5.1
+
+4.8
+
+4.5
+
+4.2
+
+20
+
+40
+
+Tequ
+
+19
+
+60
+
+18
+
+17
+
+16
+
+80
+
+2.0
+
+Fig. C.1: Scores for different sizes of the Gaussian filter used
+to remove the continuum of the synthetic medium-resolution
+spectroscopic data used in this work.
+
+0
+
+1.7
+
+5
+
+80
+
+0
+
+40
+
+Relative score (%)
+
+1.5
+
+20
+
+CO
+
+0
+
+1.2
+
+5
+
+1.2
+
+H2 O
+
+Mean squared error
+Relative distance
+Mahalanobis
+
+2.4
+
+1.6
+
+1.4
+
+4.9
+
+4.2
+
+7.4
+
+1.2
+
+4.5
+
+14.7
+
+4.8
+
+logg
+
+5.1
+
+22.1
+
+1.8
+
+Size of Gaussian filter [nm]
+
+49.0
+
+CO
+
+Fig. D.1: Resulting posterior distributions of our preliminary
+data with the following test. We repeated the setup of Sect. 3.3 test on MRCCS data when fixing the radius to its simulated
+on MRCCS data alone for filter sizes of 1.2, 2.4, 4.9, 7.4, 14.7, value (orange), compared to the previous results with the radius
+22.1, 29.4, 36.8, and 49 nm (corresponding to 5, 10, 20, 30, 60, included as free parameter (grey: old results on MRCCS data,
+90, 120, 150, and 200 spectral bins at the spectral resolution blue: only LRSP, green: MRCCS and LRSP). The dashed red line
+of VLT/SINFONI), and computed the same three metrics as in shows the ground truth used as input.
+Sect. 3.5. To obtain an overall score for each of the three metrics,
+we multiplied the results for each parameter together, and divided
+by the worst score to give the results as percentages. The result Appendix E: Results: Exploration of the parameter
+of this analysis is shown in Fig. C.1. The filter size at 4.9 nm
+space
+outperformed all other filters with respect to the Mahalanobis
+and relative distance, and was a close second in terms of mean
+squared error (7.0% against 5.4%).
+
+Appendix D: Results: Verification of the framework
+
+Article number, page 18 of 22
+
+J. Hayoz et al.: CROCODILE
+
+1500
+
+2000
+
+4
+
+6
+
+1.0
+
+1.5
+
+2
+
+1
+
+2) Low T
+
+2500
+
+1500
+
+4
+
+2.0
+
+3) High T
+
+2000
+
+5
+
+4) Low C/O
+
+2000
+
+2500
+
+1500
+
+2000
+
+4
+
+6
+
+1.0
+
+1.5
+
+6
+
+7
+
+4
+
+6
+
+1.0
+
+1.5
+
+2.0
+
+1.0
+
+1.5
+
+2.0
+
+2
+
+1
+
+2
+
+1
+
+0
+
+1
+
+3
+
+5) High C/O
+
+6) Low Fe/H
+
+1500 2000 2500 3000
+
+2.0
+
+1
+
+0
+
+1500 2000 2500
+
+4
+
+6
+
+8
+
+2
+
+1.0
+
+1.5
+
+2.0
+
+1.0
+
+1.5
+
+0
+
+4
+
+3
+
+9
+
+6
+
+3
+
+7) High Fe/H
+
+4
+
+6
+
+1500
+
+8
+
+4
+
+2.0
+
+1.0
+
+2
+
+1.5
+
+2000
+
+2500
+
+6
+
+1.5
+
+1.0
+
+2.0
+
+0.5
+
+0.0
+
+CO [dex]
+
+H2O [dex]
+
+R [RJ] logg/g0 [dex] Tequ [K]
+
+1) Baseline
+
+1
+
+2
+
+2
+
+1
+
+0
+
+4
+
+2
+
+0
+
+2
+
+7.5
+
+1
+
+0
+
+4
+
+3
+
+2
+
+10
+
+5
+
+0
+
+CH4 [dex]
+
+2
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+5.0
+
+2.5
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+9
+
+6
+
+3
+
+0
+
+C/O
+
+VO [dex]
+
+K [dex]
+
+TiO [dex]
+
+FeH [dex]
+
+H2S [dex]
+
+CO2 [dex]
+
+9
+
+0.00 0.25 0.50 0.75
+
+0.0
+
+0.5
+
+1.0 0.00 0.25 0.50 0.75
+
+1.0
+
+1.5
+
+0
+
+2
+
+2.0 0.00 0.25 0.50 0.75 0.00 0.25 0.50 0.75
+
+[Fe/H]
+
+0.00 0.25 0.50 0.75
+
+1
+
+2
+
+3
+
+0
+
+2
+
+0
+
+1
+
+2
+
+3
+
+1
+
+2
+
+3
+
+2
+
+0
+
+2
+
+1
+
+2
+
+3
+
+Fig. E.1: Comparison of the posterior distributions obtained for the retrievals of our simulated atmospheres 1 to 7 (cf. Table 2) using
+CROCODILE on MRCCS data alone (orange), on LRSP data (blue), and on both MRCCS+LRSP combined (green). The posterior
+distributions are shown as histograms of the sampled parameters and are to be read row by row for each model parameter and
+column by column to compare to the other input atmospheres. The input values are shown as dashed red lines. The input molecular
+abundances — which were calculated at chemical equilibrium and therefore vary vertically with the pressure and the temperature —
+are shown as functions of the atmospheric layers between 102 and 10−6 bar in logarithmic scale. The posterior distributions of the
+C/O ratio and metallicity Fe/H are inferred from the posterior distributions of the molecular abundances.
+
+Appendix F: Detailed numerical results of our study
+
+Article number, page 19 of 22
+
+A&A proofs: manuscript no. main
+
+Table F.1: List of posterior median and 68th percentile credible interval for our verification of the statistical framework of CROCODILE
+(cf. Sect. 3.3).
+Parameter
+
+Truth
+
+MRCCS
+
+LRSP
+
+MRCCS+LRSP
+
+MRCCS w/o R
+
+Tequ
+
+[K]
+
+1742
+
+1823+41
+−46
+
+1742+7
+−7
+
+1740+6
+−6
+
+1804+24
+−22
+
+log(g/g0 )
+
+[dex]
+
+4.35
+
+4.71+0.22
+−0.21
+
+4.35+0.05
+−0.05
+
+4.37+0.04
+−0.04
+
+4.45+0.08
+−0.09
+
+R
+
+[RJ ]
+
+1.36
+
+1.56+0.18
+−0.15
+
+1.36+0.01
+−0.01
+
+1.36+0.01
+−0.01
+
+0.00+0.00
+−0.00
+
+H2 O
+
+[dex]
+
+-1.8
+
+-1.64+0.13
+−0.17
+
+-1.80+0.03
+−0.03
+
+-1.79+0.02
+−0.02
+
+-1.83+0.05
+−0.04
+
+CO
+
+[dex]
+
+-1.6
+
+-1.57+0.17
+−0.17
+
+-1.59+0.11
+−0.11
+
+-1.61+0.08
+−0.08
+
+-1.73+0.11
+−0.11
+
+Table F.2: List of posterior median and 68th percentile credible interval for the retrievals based only on MRCCS data.
+Parameter
+
+1) Baseline
+
+2) Low T
+
+3) High T
+
+4) Low C/O
+
+5) High C/O
+
+6) Low Fe/H
+
+7) High Fe/H
+
+Tequ
+
+[K]
+
+1900+126
+−115
+
+1675+120
+−119
+
+2272+159
+−167
+
+1850+110
+−111
+
+2102+160
+−177
+
+1727+168
+−171
+
+1732+100
+−112
+
+log(g/g0 )
+
+[dex]
+
+5.55+0.62
+−0.58
+
+5.20+0.46
+−0.43
+
+5.98+0.49
+−0.58
+
+5.53+0.57
+−0.52
+
+6.85+0.63
+−0.81
+
+3.59+0.73
+−0.77
+
+4.83+0.51
+−0.41
+
+R
+
+[RJ ]
+
+2.84+2.10
+−0.87
+
+1.49+0.41
+−0.25
+
+4.34+1.91
+−1.86
+
+3.24+1.63
+−1.07
+
+4.30+2.76
+−1.76
+
+1.21+0.20
+−0.14
+
+1.90+0.59
+−0.45
+
+H2 O
+
+[dex]
+
+-1.07+0.49
+−0.38
+
+-1.58+0.28
+−0.21
+
+-0.71+0.32
+−0.52
+
+-0.69+0.32
+−0.40
+
+-5.84+2.13
+−2.59
+
+-3.50+0.33
+−0.29
+
++0.22
+-0.60−0.28
+
+CO
+
+[dex]
+
+-1.21+0.45
+−0.42
+
+-1.64+0.32
+−0.31
+
+-1.02+0.38
+−0.53
+
+-1.13+0.37
+−0.44
+
+-1.22+0.40
+−0.41
+
+-3.51+0.37
+−0.36
+
++0.27
+-0.67−0.35
+
+CH4
+
+[dex]
+
+-5.74+2.44
+−2.83
+
+-5.02+1.49
+−3.37
+
+-5.96+2.77
+−2.66
+
+-6.06+2.34
+−2.49
+
+-1.89+0.48
+−0.58
+
+-7.41+1.66
+−1.69
+
++2.07
+-6.73−2.04
+
+CO2
+
+[dex]
+
+-6.17+2.48
+−2.33
+
+-6.31+2.38
+−2.35
+
+-5.90+2.55
+−2.58
+
+-6.17+2.54
+−2.43
+
+-6.38+2.53
+−2.35
+
+-6.81+2.06
+−2.04
+
++2.48
+-5.93−2.54
+
+H2 S
+
+[dex]
+
+-3.37+2.57
+−4.21
+
+-2.68+1.60
+−4.68
+
+-4.01+2.97
+−3.67
+
+-4.27+3.28
+−3.58
+
+-5.74+2.80
+−2.69
+
+-3.44+0.77
+−3.85
+
++3.04
+-3.96−3.80
+
+FeH
+
+[dex]
+
+-5.81+2.72
+−2.64
+
+-6.06+2.63
+−2.44
+
+-5.88+2.72
+−2.48
+
+-5.41+2.75
+−2.88
+
+-6.84+2.16
+−2.07
+
+-6.72+2.07
+−2.10
+
++3.03
+-5.07−3.08
+
+TiO
+
+[dex]
+
+-5.87+2.96
+−2.64
+
+-5.73+2.91
+−2.71
+
+-5.71+2.75
+−2.71
+
+-5.39+2.79
+−2.80
+
+-6.05+2.38
+−2.54
+
+-6.59+2.28
+−2.20
+
++2.78
+-5.40−2.89
+
+K
+
+[dex]
+
+-3.90+2.29
+−3.92
+
+-4.54+3.14
+−3.55
+
+-3.11+1.55
+−4.02
+
+-3.61+2.29
+−3.78
+
+-5.88+2.49
+−2.62
+
+-6.03+2.25
+−2.63
+
++3.37
+-4.85−3.20
+
+VO
+
+[dex]
+
+-5.41+2.96
+−2.98
+
+-5.34+3.02
+−3.03
+
+-5.21+2.95
+−2.97
+
+-5.45+2.86
+−2.91
+
+-5.05+3.11
+−3.15
+
+-5.97+2.62
+−2.58
+
++2.91
+-5.45−2.96
+
+C/O
+
+[dex]
+
+0.30+0.14
+−0.11
+
+0.32+0.15
+−0.12
+
+0.25+0.12
+−0.09
+
+0.19+0.11
+−0.08
+
+1.29+0.41
+−0.22
+
+0.35+0.12
+−0.12
+
+0.35+0.17
+−0.14
+
+Fe/H
+
+[dex]
+
+1.54+0.57
+−0.50
+
+1.05+0.52
+−0.35
+
+1.79+0.57
+−0.57
+
+1.80+0.54
+−0.48
+
+0.97+0.48
+−0.44
+
+-0.76+0.50
+−0.44
+
+2.17+0.48
+−0.43
+
+Article number, page 20 of 22
+
+J. Hayoz et al.: CROCODILE
+
+Table F.3: List of posterior median and 68th percentile credible interval for the retrievals based only on LRSP data.
+Parameter
+
+1) Baseline
+
+2) Low T
+
+3) High T
+
+4) Low C/O
+
+5) High C/O
+
+6) Low Fe/H
+
+7) High Fe/H
+
+Tequ
+
+[K]
+
+1744+9
+−9
+
+1400+6
+−6
+
+2007+15
+−14
+
+1738+9
+−9
+
+1796+26
+−25
+
+1742+19
+−20
+
+1739+8
+−8
+
+log(g/g0 )
+
+[dex]
+
+4.39+0.06
+−0.06
+
+4.31+0.07
+−0.08
+
+4.36+0.15
+−0.19
+
+4.41+0.10
+−0.15
+
+4.60+0.05
+−0.04
+
+4.30+0.13
+−0.15
+
+4.52+0.26
+−0.28
+
+R
+
+[RJ ]
+
+1.36+0.02
+−0.02
+
+1.37+0.01
+−0.01
+
+1.35+0.02
+−0.02
+
+1.37+0.01
+−0.01
+
+1.33+0.04
+−0.04
+
+1.35+0.02
+−0.02
+
+1.36+0.01
+−0.01
+
+H2 O
+
+[dex]
+
+-1.83+0.03
+−0.03
+
+-1.80+0.03
+−0.03
+
+-1.74+0.05
+−0.05
+
+-1.52+0.03
+−0.03
+
+-4.05+0.06
+−0.07
+
+-3.39+0.07
+−0.08
+
++0.06
+-0.91−0.06
+
+CO
+
+[dex]
+
+-1.67+0.11
+−0.11
+
+-1.70+0.08
+−0.08
+
+-1.54+0.34
+−0.36
+
+-1.68+0.19
+−0.19
+
+-0.99+0.17
+−0.20
+
+-3.21+0.13
+−0.14
+
++0.55
+-1.24−0.96
+
+CH4
+
+[dex]
+
+-7.32+1.78
+−1.81
+
+-4.16+0.05
+−0.06
+
+-7.41+1.78
+−1.72
+
+-6.39+1.98
+−2.47
+
+-3.05+0.04
+−0.04
+
+-7.71+1.61
+−1.56
+
++2.14
+-6.98−1.98
+
+CO2
+
+[dex]
+
+-6.57+2.36
+−2.25
+
+-6.34+2.44
+−2.51
+
+-6.54+2.45
+−2.29
+
+-6.22+2.50
+−2.49
+
+-7.41+1.92
+−1.77
+
+-7.31+1.92
+−1.80
+
++2.63
+-6.24−2.42
+
+H2 S
+
+[dex]
+
+-5.92+2.70
+−2.71
+
+-4.60+2.28
+−3.73
+
+-5.34+3.20
+−3.13
+
+-5.03+3.14
+−3.29
+
+-6.81+2.21
+−2.13
+
+-6.70+2.22
+−2.25
+
++2.97
+-5.30−3.05
+
+FeH
+
+[dex]
+
+-7.95+0.97
+−1.40
+
+-9.09+0.62
+−0.60
+
+-6.66+1.09
+−2.16
+
+-7.90+1.00
+−1.40
+
+-6.36+0.16
+−0.17
+
+-6.85+0.14
+−0.15
+
++0.99
+-8.04−1.23
+
+TiO
+
+[dex]
+
+-7.82+1.53
+−1.47
+
+-7.41+1.30
+−1.70
+
+-4.65+0.43
+−2.25
+
+-7.67+1.41
+−1.52
+
+-7.72+1.40
+−1.55
+
+-7.34+0.99
+−1.80
+
++1.81
+-7.20−1.84
+
+K
+
+[dex]
+
+-4.06+0.18
+−0.38
+
+-7.02+1.51
+−2.04
+
+-3.48+0.59
+−2.47
+
+-4.17+0.28
+−1.24
+
+-4.58+0.15
+−0.15
+
+-5.61+0.38
+−1.10
+
++1.97
+-6.34−2.40
+
+VO
+
+[dex]
+
+-8.04+0.77
+−1.25
+
+-9.08+0.67
+−0.61
+
+-7.56+1.15
+−1.59
+
+-8.16+0.83
+−1.18
+
+-8.88+0.78
+−0.76
+
+-8.98+0.70
+−0.66
+
++0.95
+-8.44−1.00
+
+C/O
+
+[dex]
+
+0.48+0.06
+−0.06
+
+0.45+0.04
+−0.04
+
+0.50+0.17
+−0.18
+
+0.31+0.09
+−0.08
+
+1.01+0.01
+−0.00
+
+0.50+0.06
+−0.06
+
+0.23+0.26
+−0.19
+
+Fe/H
+
+[dex]
+
+0.56+0.09
+−0.08
+
+0.56+0.08
+−0.07
+
+0.71+0.32
+−0.23
+
+0.72+0.16
+−0.11
+
+1.06+0.20
+−0.21
+
+-1.00+0.11
+−0.11
+
+1.32+0.41
+−0.24
+
+Table F.4: List of posterior median and 68th percentile credible interval for the retrievals based on both MRCCS and LRSP data.
+Parameter
+
+1) Baseline
+
+2) Low T
+
+3) High T
+
+4) Low C/O
+
+5) High C/O
+
+6) Low Fe/H
+
+7) High Fe/H
+
+Tequ
+
+[K]
+
+1743+9
+−9
+
+1403+6
+−6
+
+2010+15
+−14
+
+1739+9
+−9
+
+1781+23
+−23
+
+1753+19
+−18
+
+1736+7
+−8
+
+log(g/g0 )
+
+[dex]
+
+4.40+0.05
+−0.05
+
+4.33+0.07
+−0.08
+
+4.42+0.11
+−0.13
+
+4.46+0.08
+−0.09
+
+4.58+0.03
+−0.03
+
+4.32+0.11
+−0.13
+
+4.54+0.15
+−0.16
+
+R
+
+[RJ ]
+
+1.36+0.02
+−0.02
+
+1.36+0.01
+−0.01
+
+1.35+0.02
+−0.02
+
+1.37+0.01
+−0.01
+
+1.34+0.03
+−0.03
+
+1.34+0.02
+−0.02
+
+1.37+0.01
+−0.01
+
+H2 O
+
+[dex]
+
+-1.83+0.03
+−0.03
+
+-1.80+0.03
+−0.03
+
+-1.77+0.04
+−0.04
+
+-1.52+0.03
+−0.03
+
+-4.10+0.07
+−0.07
+
+-3.38+0.07
+−0.07
+
++0.04
+-0.91−0.04
+
+CO
+
+[dex]
+
+-1.67+0.11
+−0.11
+
+-1.68+0.08
+−0.08
+
+-1.74+0.25
+−0.24
+
+-1.73+0.15
+−0.17
+
+-1.08+0.14
+−0.16
+
+-3.29+0.12
+−0.12
+
++0.27
+-0.97−0.29
+
+CH4
+
+[dex]
+
+-7.47+1.79
+−1.67
+
+-4.14+0.06
+−0.06
+
+-7.49+1.84
+−1.66
+
+-6.89+1.94
+−2.08
+
+-3.09+0.03
+−0.03
+
+-7.46+1.67
+−1.71
+
++2.01
+-7.12−1.90
+
+CO2
+
+[dex]
+
+-6.72+2.22
+−2.25
+
+-6.66+2.33
+−2.21
+
+-6.55+2.25
+−2.31
+
+-6.56+2.41
+−2.22
+
+-7.37+1.82
+−1.80
+
+-7.41+1.85
+−1.72
+
++2.62
+-6.29−2.46
+
+H2 S
+
+[dex]
+
+-5.26+3.03
+−3.26
+
+-2.28+0.37
+−2.97
+
+-3.33+2.20
+−4.38
+
+-1.92+0.94
+−4.97
+
+-6.61+2.24
+−2.35
+
+-6.34+2.46
+−2.48
+
++1.78
+-2.44−4.69
+
+FeH
+
+[dex]
+
+-7.86+0.92
+−1.41
+
+-9.09+0.64
+−0.60
+
+-7.00+1.27
+−1.92
+
+-8.03+1.03
+−1.30
+
+-6.43+0.16
+−0.17
+
+-6.80+0.13
+−0.14
+
++0.98
+-8.07−1.20
+
+TiO
+
+[dex]
+
+-7.80+1.50
+−1.47
+
+-7.30+1.32
+−1.84
+
+-4.80+0.54
+−2.92
+
+-7.74+1.56
+−1.51
+
+-7.83+1.44
+−1.46
+
+-7.38+1.06
+−1.79
+
++1.73
+-7.25−1.82
+
+K
+
+[dex]
+
+-4.08+0.18
+−0.41
+
+-6.71+1.30
+−2.19
+
+-3.20+0.37
+−0.77
+
+-4.17+0.22
+−0.82
+
+-4.61+0.14
+−0.15
+
+-5.51+0.35
+−0.85
+
++2.06
+-6.55−2.34
+
+VO
+
+[dex]
+
+-7.97+0.72
+−1.35
+
+-9.05+0.67
+−0.64
+
+-7.88+1.28
+−1.37
+
+-8.28+0.92
+−1.15
+
+-8.90+0.80
+−0.76
+
+-9.01+0.72
+−0.67
+
++0.95
+-8.42−1.02
+
+C/O
+
+[dex]
+
+0.48+0.05
+−0.05
+
+0.46+0.04
+−0.04
+
+0.41+0.13
+−0.11
+
+0.29+0.07
+−0.07
+
+1.02+0.01
+−0.00
+
+0.45+0.05
+−0.05
+
+0.36+0.14
+−0.13
+
+Fe/H
+
+[dex]
+
+0.58+0.11
+−0.08
+
+0.63+0.09
+−0.08
+
+0.65+0.45
+−0.19
+
+0.81+0.42
+−0.17
+
+0.96+0.16
+−0.17
+
+-1.03+0.11
+−0.10
+
+1.57+0.40
+−0.24
+
+Article number, page 21 of 22
+
+A&A proofs: manuscript no. main
+
+Table F.5: List of posterior median and 68th percentile credible interval for our retrieval excluding the synthetic VLTI/GRAVITY data
+(cf. Sect. 4.1).
+Parameter
+
+Article number, page 22 of 22
+
+MRCCS
+
+LRSP
+
+MRCCS+LRSP
+
+Tequ
+
+[K]
+
+1900+126
+−115
+
+1757+17
+−17
+
+1748+15
+−15
+
+log(g/g0 )
+
+[dex]
+
+5.55+0.62
+−0.58
+
+4.47+0.09
+−0.13
+
+4.43+0.09
+−0.09
+
+R
+
+[RJ ]
+
+2.84+2.10
+−0.87
+
+1.34+0.02
+−0.02
+
+1.35+0.02
+−0.02
+
+H2 O
+
+[dex]
+
+-1.07+0.49
+−0.38
+
+-1.83+0.10
+−0.09
+
+-1.87+0.07
+−0.07
+
+CO
+
+[dex]
+
+-1.21+0.45
+−0.42
+
+-4.99+2.93
+−3.19
+
+-1.85+0.32
+−0.31
+
+CH4
+
+[dex]
+
+-5.74+2.44
+−2.83
+
+-7.53+1.93
+−1.56
+
+-7.37+1.84
+−1.76
+
+CO2
+
+[dex]
+
+-6.17+2.48
+−2.33
+
+-6.70+2.10
+−2.13
+
+-6.79+2.15
+−2.11
+
+H2 S
+
+[dex]
+
+-3.37+2.57
+−4.21
+
+-5.58+2.91
+−2.86
+
+-2.46+1.09
+−4.72
+
+FeH
+
+[dex]
+
+-5.81+2.72
+−2.64
+
+-8.10+1.03
+−1.22
+
+-8.14+1.06
+−1.23
+
+TiO
+
+[dex]
+
+-5.87+2.96
+−2.64
+
+-7.80+1.45
+−1.42
+
+-7.81+1.46
+−1.43
+
+K
+
+[dex]
+
+-3.90+2.29
+−3.92
+
+-4.03+0.23
+−0.28
+
+-4.05+0.21
+−0.28
+
+VO
+
+[dex]
+
+-5.41+2.96
+−2.98
+
+-8.13+0.81
+−1.17
+
+-8.19+0.84
+−1.15
+
+C/O
+
+[dex]
+
+0.30+0.14
+−0.11
+
+0.00+0.26
+−0.00
+
+0.41+0.17
+−0.16
+
+Fe/H
+
+[dex]
+
+1.54+0.57
+−0.50
+
+0.20+0.37
+−0.12
+
+0.61+0.30
+−0.23
+
+

@@ -1,0 +1,5086 @@
+Mechanisms of punctuated vision in fly flight
+Benjamin Cellini, Wael Salem, Jean-Michel Mongeau (2021). Current Biology. https://doi.org/10.1101/2020.12.16.422884. doi:10.1016/j.cub.2021.06.080. Licence: cc-by. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1
+
+Title
+
+2
+
+Mechanisms of punctuated vision in fly flight
+
+3
+4
+5
+
+Authors
+Benjamin Cellini, Wael Salem, Jean-Michel Mongeau
+
+6
+7
+
+Affiliations
+
+8
+
+Department of Mechanical Engineering, The Pennsylvania State University, University
+
+9
+
+Park, PA 16802
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+10
+
+ABSTRACT
+
+11
+
+To guide locomotion, animals control their gaze via movements of their eyes, head, and/or body,
+
+12
+
+but how the nervous system controls gaze during complex motor tasks remains elusive. Notably,
+
+13
+
+eye movements are constrained by anatomical limits, which requires resetting eye position. By
+
+14
+
+studying tethered, flying flies (Drosophila) in a virtual reality flight simulator, we show that
+
+15
+
+ballistic head movements (saccades) reset eye position, are stereotyped and leverage elastic
+
+16
+
+recoil of the neck joint, enabling mechanically assisted redirection of gaze. Head reset saccades
+
+17
+
+were of proprioceptive origin and interrupted smooth movements for as little as 50 ms, enabling
+
+18
+
+punctuated, near-continuous gaze stabilization. Wing saccades were modulated by head
+
+19
+
+orientation, establishing a causal link between neck signals and execution of body saccades.
+
+20
+
+Furthermore, we demonstrate that head movements are gated by behavioral state. We propose a
+
+21
+
+control architecture for biological and bio-inspired active vision systems with limits in sensor
+
+22
+
+range of motion.
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+23
+
+MAIN TEXT
+
+24
+25
+
+INTRODUCTION
+
+26
+
+Animals move their eyes, head and/or body to stabilize and shift gaze. In particular, eye
+
+27
+
+movements display a variety of dynamic modes, consisting of interacting slow- and fast-phases
+
+28
+
+(Land, 1992). In response to continuous motion, human eyes will alternate between periods of
+
+29
+
+slow stabilizing movements and rapid, anti-directional shifts in gaze called “saccades”, a motor
+
+30
+
+pattern generally referred as optokinetic nystagmus (Purves et al., 2004). Periods of slow eye
+
+31
+
+movements and saccades are widespread in the animal kingdom, observed in primates, birds, fish,
+
+32
+
+crabs, and a variety of insects, although the physiological mechanisms enabling eye movements
+
+33
+
+vary across phyla (Land, 2019). In insects, the eyes cannot move independently of the head, thus
+
+34
+
+saccades are performed via both head and body movements (Collett and Land, 1975; Land, 1973).
+
+35
+
+Revealing the strategies insects use to control gaze, specifically how and why they perform
+
+36
+
+saccades, can provide unique insights into how eye movements are coordinated in locomoting
+
+37
+
+animals.
+
+38
+
+Analogous to humans, in flying flies a rotating cylinder with vertical stripe elicits smooth
+
+39
+
+movement and rapid reset saccades of the body and head (Collett and Land, 1975; Land, 1973;
+
+40
+
+Mongeau and Frye, 2017). Similarly, as in humans, fly vision is also punctuated, combining
+
+41
+
+continuous and discrete movements (Cellini and Mongeau, 2020a; Collett and Land, 1975; Land,
+
+42
+
+1973; Mongeau et al., 2019; Mongeau and Frye, 2017). Functionally, reset saccades prevent the
+
+43
+
+eyes from reaching their anatomical limits, which is a fundamental constraint on gaze stabilizing
+
+44
+
+systems across phyla. Healthy humans can move their eyes ~±45° about yaw (Shin et al., 2016),
+
+45
+
+whereas in Drosophila head movements about yaw have a limit of about ~±15° from body midline
+
+46
+
+(Cellini and Mongeau, 2020b; Fox and Frye, 2014). A visual control system combining smooth
+
+47
+
+movement and reset saccades could therefore overcome these classes of strict anatomical limits.
+
+48
+
+Whereas the interaction between smooth body movements and body saccades in flies has been
+
+49
+
+revealed, how head movements contribute to gaze stabilization remains poorly understood. Head
+
+50
+
+saccades are generally coupled with body saccades in flies and in bees and may aid in reducing
+
+51
+
+motion blur during a body saccade (Boeddeker et al., 2010; Schilstra and van Hateren, 1998),
+
+52
+
+however the dynamics and control of head saccades during gaze stabilization remain elusive. How
+
+53
+
+are head smooth movements and saccades coordinated and how are head reset saccades triggered?
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+54
+
+To what extent are head and wing saccades coupled? Revealing these interactions are critical to
+
+55
+
+understanding the punctuated nature of fly vision and coordination in flight, and ultimately its
+
+56
+
+underlying neural control circuitry.
+
+57
+
+We investigated saccadic head and wing movements in rigidly tethered Drosophila during gaze
+
+58
+
+stabilization. Because the head and wings displayed distinct smooth and saccadic dynamics we
+
+59
+
+modeled the visuomotor response as a hybrid (switching) system (Cellini and Mongeau, 2020b;
+
+60
+
+Goebel et al., 2012). We confirm that during continuous visual motion, a stereotyped reset saccade
+
+61
+
+is triggered when the head nears its anatomical limit, wherein the head moves in the opposite
+
+62
+
+direction of the visual stimulus. Flies leveraged passive elastic forces of the neck joint, providing
+
+63
+
+an instantaneous acceleration at the start of a head reset saccade. In between saccades, flies reduced
+
+64
+
+retinal slip by up to 70% via smooth head movements. This stabilize-and-reset strategy enabled
+
+65
+
+flies to stabilize gaze quasi-continuously, overcoming neck joint anatomical limits. By correlating
+
+66
+
+saccade rate with the head’s excursion, we uncovered the role of proprioceptive feedback from the
+
+67
+
+neck sensory system in generating saccades. Head and wing saccades were triggered concurrently
+
+68
+
+but fixing the head reduced the wing saccade rate, further implicating proprioceptive feedback.
+
+69
+
+Finally, we demonstrate that head movements are gated by behavioral state. We outline a
+
+70
+
+framework detailing how the stabilize-and-reset strategy may apply to any noncontinuous active
+
+71
+
+vision system, such as mammal eyes. Altogether, our results reveal the function and mechanism
+
+72
+
+of head reset saccades in an active vision system.
+
+73
+74
+
+RESULTS
+
+75
+76
+
+Head reset saccades are stereotyped and punctuate smooth movement stabilization
+
+77
+
+Free flight body saccades in flies appear stereotyped (Muijres et al., 2015; Tammero and
+
+78
+
+Dickinson, 2002a). We hypothesized that head saccades would be similarly stereotyped because
+
+79
+
+head and body movements are generally coordinated (Van Hateren et al., 1999). To test this
+
+80
+
+hypothesis, we elicited an optomotor response in rigidly tethered flies by presenting constant
+
+81
+
+velocity visual stimuli (position ramp), which has been shown to trigger head reset saccades
+
+82
+
+(Figure 1A, Video 1) (Duistermars et al., 2012; Land, 1973). We developed a method to detect
+
+83
+
+head saccades based on the dynamics of head position and velocity and culled saccades across
+
+84
+
+experimental trials (Figure Supplement 1) (see Methods). Head saccades were interspersed
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+85
+
+between bouts of smooth movements and had a significant influence on head trajectories (Figure
+
+86
+
+1B).
+
+87
+
+We examined saccade dynamics by extracting each saccade and aligning it to the time it
+
+88
+
+reached peak velocity (Figure 2A). The angular position and velocity of head saccades were
+
+89
+
+strongly stereotyped across all stimulus speeds, consisting of a near-symmetric velocity spike
+
+90
+
+lasting ~50 ms (Figure 2A). By examining the duration, amplitude, and peak velocity of saccades,
+
+91
+
+we found that none of the visually elicited head saccade dynamics were robustly influenced by
+
+92
+
+stimulus speed (Figure 2B). Overall, there was more variation in saccade rate. Specifically, flies
+
+93
+
+performed more saccades with increasing stimulus speed up to 120°s-1, at which point saccade rate
+
+94
+
+began to decrease. The difference in saccade rate across stimulus speeds suggests that the saccade
+
+95
+
+trigger mechanism may be dependent on visual motion. Based on these findings, we conclude that
+
+96
+
+head reset saccade dynamics are stereotyped but visual motion may influence their trigger.
+
+97
+98
+
+Head saccades are anti-directional with respect to visual motion
+
+99
+
+Head saccades were triggered predominantly in the direction opposite of visual motion (Figure
+
+100
+
+2A,C). This anti-directional characteristic has been observed in previous work studying the head
+
+101
+
+optomotor response in flies, locusts, and other invertebrates (Duistermars et al., 2012; Land, 2019,
+
+102
+
+1973; Shepheard, 1974). Anti-directional head saccades appear akin to “return” eye saccades in
+
+103
+
+mammals that underlie optokinetic nystagmus, wherein the eyes will smoothly move in one
+
+104
+
+direction before rapidly returning to the center position (Purves et al., 2004). Here we refer to anti-
+
+105
+
+directional head saccades in flies as “reset” saccades, to emphasize the beginning of a new smooth
+
+106
+
+gaze stabilization period after each saccade. Head reset saccades were of opposite direction to body
+
+107
+
+saccades measured in a magnetic tether in previous work, wherein co-directional saccades
+
+108
+
+accounted for 70% of all saccades (Mongeau and Frye, 2017), although this behavior could be
+
+109
+
+influenced by restricting body motion in the rigid tether. Surprisingly, co-directional head saccades
+
+110
+
+were exceedingly rare, making up less than 2% of all saccades (Figure Supplement 2). Previous
+
+111
+
+work showed that anti-directional body saccade dynamics are less sensitive to visual motion speed
+
+112
+
+than their co-directional counterparts, which is consistent with the head saccade tuning described
+
+113
+
+here (Mongeau and Frye, 2017).
+
+114
+115
+
+Head reset saccades are triggered when the head is oriented near its anatomical limit
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+116
+
+Another metric to characterize how head saccades may be initiated is the angular orientation
+
+117
+
+of the head relative to the body midline. Unlike the body, which is unconstrained and able to move
+
+118
+
+freely through space (unless tethered), in Drosophila the head has hard anatomical constraints that
+
+119
+
+limit its range of motion to ~±15° about yaw (Cellini and Mongeau, 2020b; Fox and Frye, 2014).
+
+120
+
+Therefore, the angular orientation of the head could play an important role in the initiation of head
+
+121
+
+saccades. Head reset saccades were triggered when the head was oriented near its anatomical limit,
+
+122
+
+i.e. head saccades triggered during counterclockwise rotation initiated near the left-side anatomical
+
+123
+
+limit and vice-versa (Figure 2C). On average, flies engaged in smooth gaze stabilization until the
+
+124
+
+head reached ±9° from body midline, then triggered a reset saccade (Figure 2C, Video 1). Head
+
+125
+
+orientation at the end of a saccade was similarly clustered near the opposing side (~7.5°), moving
+
+126
+
+the head through nearly its full range of motion. This is notably distinct from return eye saccade
+
+127
+
+in primates, which end near the visual center (Purves et al., 2004). Taken together, these results
+
+128
+
+demonstrate that head reset saccades are triggered when the head nears its anatomical limits.
+
+129
+
+However, the exact sensory trigger mechanism, whether of visual or proprioceptive origin, is
+
+130
+
+unclear.
+
+131
+132
+
+Spontaneous head saccades are distinct from visually elicited head reset saccades
+
+133
+
+We hypothesized that head saccades performed in the absence of visual motion might display
+
+134
+
+different characteristics than visually elicited head saccades, as the role of the head is task
+
+135
+
+dependent about the yaw axis (Fox and Frye, 2014; Geiger and Poggio, 1977). We presented flies
+
+136
+
+with a static panorama and compared the dynamics of spontaneous and visually elicited reset
+
+137
+
+saccades (Figure 2A–D). Compared to visually elicited saccades, the peak velocity, amplitude, and
+
+138
+
+duration of spontaneous head saccades were reduced overall and were slightly more symmetric
+
+139
+
+due to the similar pre- and post-peak durations (ANOVA, DOF = 5, p < 0.001) (Figure 2A,B). The
+
+140
+
+reduced spontaneous head saccade dynamics were likely due to the more central trigger position
+
+141
+
+during saccade initiation (Figure 2C). Because flies were not stabilizing a moving panorama, the
+
+142
+
+head maintained a more neutral orientation. Therefore, the head was limited to a smaller range of
+
+143
+
+motion amplitude when performing a saccade. For spontaneous and visually elicited saccades,
+
+144
+
+amplitude and peak velocity were highly correlated (r ≈ 0.7 for both, p < 0.001) therefore it follows
+
+145
+
+that the peak velocity of spontaneous head saccades was also reduced compared to visually elicited
+
+146
+
+saccades (Figure 2D). Amplitude and duration were correlated to a lesser extent (r = 0.4, p < 0.001)
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+147
+
+while peak velocity and duration exhibited a slight negative correlation (r = -0.3, p < 0.001).
+
+148
+
+Spontaneous saccades occurred at a rate more than two times lower than visually elicited saccades,
+
+149
+
+demonstrating that visual motion influences the trigger of saccades (Figure 2B). Taken together,
+
+150
+
+spontaneous head saccades are distinct from visually elicited saccades and appear to have a
+
+151
+
+different trigger mechanism.
+
+152
+153
+
+Head roll during head reset saccades is feedforward
+
+154
+
+In addition to head turns in yaw, flies also rapidly rolled their head during reset saccades
+
+155
+
+(Figure Supplement 4A, Video 2). Prior work demonstrated that compensatory head yaw
+
+156
+
+movements are present during body mechanical roll perturbations, suggesting that yaw and roll
+
+157
+
+coupling may be inherent to head control (Nalbach and Hengstenberg, 1994). The body banks
+
+158
+
+during free flight saccades, thus flies simultaneously roll their head to compensate for body roll
+
+159
+
+and maintain a level gaze (Schilstra and van Hateren, 1998; Van Hateren et al., 1999). Because
+
+160
+
+head roll is present in rigidly tethered flies—where body movement is abolished—head roll during
+
+161
+
+a saccade may consist largely of a feedforward (open-loop) motor command (Figure
+
+162
+
+Supplement 2B,C). It was previously thought that compensatory head roll is reflexive, initiated
+
+163
+
+primarily via feedback from flies’ mechanosensory organs—e.g. the halteres or prosternal
+
+164
+
+organs—however our findings suggest that this may not be the case during saccades
+
+165
+
+(Hengstenberg, 1988; National et al., 1986; Van Hateren et al., 1999). Magnetically tethered flies
+
+166
+
+also roll their head during a body saccade, although body motion is restricted to yaw; however,
+
+167
+
+minute body roll movement or feedback from the body yaw axis could have triggered head roll via
+
+168
+
+mechanosensory feedback (Kim et al., 2017). Our results provide strong evidence that head roll is
+
+169
+
+part of a feedforward motor command that could anticipate body roll during a saccade.
+
+170
+171
+
+Flies leverage passive elasticity of the neck joint to initiate head reset saccades
+
+172
+
+In free and magnetically tethered flight, to terminate a body saccade a fly actively brakes
+
+173
+
+(decelerates) by applying a counter torque (Bender and Dickinson, 2006; Fry et al., 2003; Mongeau
+
+174
+
+and Frye, 2017; Muijres et al., 2015). The profile of a head saccade displays a similar rapid
+
+175
+
+deceleration that could also be indicative of active braking (Figure 3A). However, flies could rely
+
+176
+
+on passive mechanics of the neck joint to damp out head motion. Furthermore, if the neck were
+
+177
+
+sufficiently elastic, flies could also take advantage of spring forces to rapidly execute head
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+178
+
+saccades. To isolate the possible role of passive mechanics in head saccades and reveal the braking
+
+179
+
+mechanism (active vs. passive), we measured the passive response of the head in anesthetized flies.
+
+180
+
+In short, we displaced the head from its neutral position (0°) to near its anatomical limit, where
+
+181
+
+head saccades typically begin (Figure 2C). We then rapidly released the head, allowing us to
+
+182
+
+evaluate the passive response of the head-neck system (Figure 3B, Video 3). The observed passive
+
+183
+
+response began at the initial displacement and rapidly moved back towards the neutral position
+
+184
+
+(0°), indicative of a natural stiffness within the neck joint (Figure 3C). Interestingly, the response
+
+185
+
+decayed slowly with no overshoot, thus pointing to a significant amount of damping (Figure 3C).
+
+186
+
+To reveal the contribution of passive mechanics during head saccades, we compared the
+
+187
+
+passive head response and actively controlled head saccade trajectories (Figure 3D). For
+
+188
+
+comparison, we only used passive response data for initial displacements less than 12° from the
+
+189
+
+neutral position to maintain consistency with the typical head reset saccade trigger position (Figure
+
+190
+
+2C). Strikingly, the passive response and active saccade trajectories were similar within the first
+
+191
+
+10–15ms, suggesting that flies may exploit the elasticity of the neck joint when initiating head
+
+192
+
+saccades (Figure 3D). Indeed, at the onset the initial acceleration could be generated passively as
+
+193
+
+opposed to directly by muscle activation (Figure 3D). However, once past this initial time frame,
+
+194
+
+active control would be necessary to continue moving the head, as all passively generated forces
+
+195
+
+would be damped out (Figure 3D). The passive mechanics accounted for ~65% of the peak velocity
+
+196
+
+achieved during head saccades (Figure 3D). Interestingly, the passive and active (saccade) peak
+
+197
+
+velocity scaled similarly with the initial head orientation (passive: r = -0.8, p < 0.001, active: r = -
+
+198
+
+0.89, p < 0.001), further implicating passive elasticity as a mechanism for the initial acceleration
+
+199
+
+in saccades (Figure Supplement 3).
+
+200
+
+To reveal the role of passive breaking as flies terminate a head saccade, we approximated the
+
+201
+
+damping in the system by fitting a first-order exponential to the passive response (Figure 3B). The
+
+202
+
+time constant τ was ~25 ms, roughly half the duration of an active head reset saccade (Figure 3D,E,
+
+203
+
+Figure 2B). The initial displacement had little effect on the time constant (r = 0.1, p = 0.4), typical
+
+204
+
+of a linear system (Figure Supplement 3). Remarkably, we found no significant difference between
+
+205
+
+the time constants of the passive response and active saccades (t-test, p = 0.3) (Figure 3E). The
+
+206
+
+similar time constants suggest that flies may rely primarily on passive damping to terminate a head
+
+207
+
+saccade, although there may still be an active braking component (Figure 3D,E). Taken together,
+
+208
+
+the similarity in time constants between the passive response and active saccades and the fact that
+
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+209
+
+the passive response can account for about two thirds of active saccade velocity suggest that flies
+
+210
+
+leverage passive mechanics to rapidly accelerate the head at the onset of a saccade. Furthermore,
+
+211
+
+flies may take advantage of natural neck damping to terminate a head saccade, thereby simplifying
+
+212
+
+control.
+
+213
+214
+
+Head reset saccades enable flies to reduce retinal slip by up to 70% during smooth intervals
+
+215
+
+To elucidate the functional role of head saccades during gaze stabilization and gain further
+
+216
+
+insights into their trigger, we analyzed the smooth component of head movements for moving
+
+217
+
+visual stimuli (Figure 4A). Flies actively compensated for visual motion via smooth head
+
+218
+
+movements, as expected during the optomotor response (Duistermars et al., 2012; Land, 1973).
+
+219
+
+However, the head could only stabilize gaze for less than one second before reaching its anatomical
+
+220
+
+limit (Figure 4A,B, Video 1,4). The head had a stereotyped response during inter-saccade
+
+221
+
+intervals: after a preceding saccade, the head would rapidly accelerate until reaching a peak
+
+222
+
+velocity, then decelerate at a lesser rate until reaching near-zero velocity, signifying the head had
+
+223
+
+neared its anatomical limit (Figure 4A,B). The decreasing velocity over the length of the interval
+
+224
+
+could be a result of the passive mechanical properties of the neck joint, where the restoring force
+
+225
+
+at the neck increases as the head orientation deviates from the neutral orientation (Figure 3C,D).
+
+226
+
+By the time the head neared the anatomical limit, a reset saccade was generally triggered (Figure
+
+227
+
+4A, 2B). Interestingly, retinal slip speed (or velocity error) had little influence on saccade
+
+228
+
+initiation, as the retinal slip at the start of each saccade was approximately equal to the stimulus
+
+229
+
+speed due to the attenuation of stabilizing head movements (ANOVA, DOF = 4, p < 0.001) (Figure
+
+230
+
+4A,C). We also calculated the built-up velocity error over time, or the integrated error, and found
+
+231
+
+that this too scaled with stimulus speed (ANOVA, DOF: 4, p < 0.001) (Figure 4C). Unlike co-
+
+232
+
+directional body saccades in a magnetic tether that were triggered in response to wide-field
+
+233
+
+stimulus, the integrated error was not constant across stimulus speeds, and therefore may not serve
+
+234
+
+as a trigger for head reset saccades (Figure 4C) (Mongeau and Frye, 2017). These findings
+
+235
+
+therefore favor a proprioceptive-based trigger determined by the orientation of the head relative to
+
+236
+
+the thorax.
+
+237
+
+Head intervals were tuned to stimulus speed and head saccades enabled flies to quasi-
+
+238
+
+continuously stabilize gaze. During stabilization, the initial acceleration of the head correlated with
+
+239
+
+stimulus speed and reached peak speeds near the actual stimulus speed (Figure 4B). Because flies
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+240
+
+increased the speed of head movements for faster stimuli, the time the head took to reach saturation
+
+241
+
+was decreased (Figure 4B). This result provides an explanation for the increasing saccade rate
+
+242
+
+observed with increasing stimulus speed at lower stimulus velocities (Figure 2B), as flies would
+
+243
+
+have to perform more reset saccades to continue performing stabilizing smooth movements.
+
+244
+
+Without reset saccades at the end of each interval, gaze stabilization would quickly become futile,
+
+245
+
+as the head would simply reach its anatomical limit and remain there. However, the hybrid,
+
+246
+
+saccadic control scheme allowed flies to solve this problem by rapidly resetting their head
+
+247
+
+orientation, enabling gaze stabilization to begin anew during the next smooth interval.
+
+248
+
+Occasionally, the head reached its anatomical limit and remained there for a longer period (more
+
+249
+
+than 1 s), thus a head saccade was not immediately triggered (Figure 4A, D). This suggests that
+
+250
+
+flies may be able to inhibit the saccade reflex or that the trigger may be inherently stochastic.
+
+251
+
+To understand the extent to which flies could reduce retinal slip error during saccade-enabled
+
+252
+
+smooth intervals, we computed the mean head velocity during stabilization, defined from the onset
+
+253
+
+of stabilizing smooth movements to saturation (head velocity = 0 °s-1) (Figure 4A). We then
+
+254
+
+divided the mean speed by the stimulus speed to compute a (unitless) compensatory gain (Figure
+
+255
+
+4E). On average, flies reduced retinal slip by up to 70% at low speeds and 30% at high speeds.
+
+256
+
+This is in line with prior work showing that flies can compensate for oscillatory stimuli via smooth
+
+257
+
+head movements by up to 60% (Cellini and Mongeau, 2020b), although the exact gain was
+
+258
+
+dependent on stimulus speed and head inertial delays could have a greater influence during
+
+259
+
+oscillatory motion. Compensatory head movements that reduce retinal slip have been shown to
+
+260
+
+double the range of visual motion speeds encoded by the flies active vision system (head + visual
+
+261
+
+system) and map the effective dynamic range of the stimulus onto the optimum of the motion
+
+262
+
+vision pathway (Cellini and Mongeau, 2020b). Effectively, head movements shape and slow down
+
+263
+
+inputs to the eyes. However, the effects of head movements were previously thought to be limited
+
+264
+
+to stimuli moving within the head’s anatomical limits. Here we show that flies can still slow down
+
+265
+
+inputs to their visual system via a combination of smooth head movements and head saccades,
+
+266
+
+even for stimuli that move well beyond the anatomical limits of the head. Taken together, although
+
+267
+
+reset head saccades do not directly contribute to gaze stabilization, they allow flies to stabilize
+
+268
+
+gaze effectively during punctuated smooth intervals.
+
+269
+270
+
+Spontaneous head movements oscillate at 15 Hz in the presence of visual features
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+271
+
+Intriguingly, in the presence of a static stimulus, flies exhibited smaller oscillatory head
+
+272
+
+movements between spontaneous head saccades (Figure Supplement 5A, Video 5). These head
+
+273
+
+movements contained notable frequency components between 11–18 Hz with a peak around 15
+
+274
+
+Hz, possibly part of an internal “search” strategy flies executed in the absence of visual motion
+
+275
+
+(Figure Supplement 5C) (Geiger and Poggio, 1977). We measured the amplitude of these head
+
+276
+
+movements to be ~2° in the 11–18 Hz frequency band across spatial wavelengths of 22.5, 30, and
+
+277
+
+60° (Figure Supplement 5D). These head movements were absent when flies were presented with
+
+278
+
+a uniform background, suggesting that this search program is dependent on visual features (Figure
+
+279
+
+Supplement 5B–D, Video 6)(t-test, p < 0.001). In contrast, wing movements displayed no such
+
+280
+
+oscillations (Figure Supplement 5C). This is consistent with prior work showing that head and
+
+281
+
+wing movements are less correlated in the absence of visual motion (Cellini and Mongeau, 2020b).
+
+282
+
+The oscillatory head movements we observed are distinct from head “jitter”, which has been
+
+283
+
+reported primarily in the pitch plane (Rosner et al., 2009; Van Hateren et al., 1999). Jitter
+
+284
+
+frequencies in the studies were concentrated near wingbeat and haltere stroke frequencies, which
+
+285
+
+are greater than 120 Hz for fruit flies and blowflies, and far away from the frequency band of the
+
+286
+
+head movements we observed (Rosner et al., 2009; Van Hateren et al., 1999). Spontaneous head
+
+287
+
+saccade frequency also moderately decreased when flies were presented with a uniform
+
+288
+
+background, consistent with previous work (Wolf and Heisenberg, 1980) suggesting that overall
+
+289
+
+background luminance and/or visual features influence the trigger of spontaneous head saccades
+
+290
+
+(Figure Supplement 5E). Taken together, we show that even in the absence of visual motion, fly
+
+291
+
+eyes are not still and are punctuated by rapid spontaneous movements. These movements are
+
+292
+
+consistent with illusory motion in the absence of external motion (Salem et al., 2020). Although
+
+293
+
+we cannot infer the functional role of these head movements with confidence, they may be part of
+
+294
+
+a search strategy for active vision systems and may even serve to refresh visual inputs in a way
+
+295
+
+similar to human micro-saccades (Martinez-Conde and Macknik, 2017).
+
+296
+297
+
+Head movements are gated by behavioral state
+
+298
+
+For faster visual stimuli, the head reached its anatomical limits more quickly during smooth
+
+299
+
+intervals (Figure 4A,B). Therefore, reset saccade rate would presumably increase with stimulus
+
+300
+
+speed, however intriguingly this was not always the case at higher speeds (Figure 2B). Flies would
+
+301
+
+not always perform a head saccade immediately when the anatomical limit was reached (Figure
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+302
+
+4A,D). Thus, flies did not reduce retinal slip during these periods as the head remained near the
+
+303
+
+edge of the thorax. But flies are physically capable of robust gaze stabilization enabled by reset
+
+304
+
+saccades, even at the highest stimulus speed presented in this study (Video 4). So, what could be
+
+305
+
+causing flies to keep their heads at their anatomical limit instead of performing head saccades to
+
+306
+
+reset gaze direction?
+
+307
+
+We noted that flies would occasionally extend their legs, indicative of a fictive landing
+
+308
+
+response (Ache et al., 2019; Borst, 1986; Goodman, 1960; Tammero and Dickinson, 2002b; van
+
+309
+
+Breugel and Dickinson, 2012) (Figure 5A, Video 7). Leg extension occurred more frequently at
+
+310
+
+higher stimulus speeds, consistent with work showing that flies switch from forward flight to
+
+311
+
+expansion avoidance based on the rate of expansion optic flow (Figure 5B) (Liu et al., 2019; Reiser
+
+312
+
+and Dickinson, 2013). Here, however, we show that flies can switch to a landing state based on
+
+313
+
+the rate of rotational optic flow. Interestingly, during leg extension, flies seldom generated head
+
+314
+
+reset saccades, and the head consequently remained near its anatomical limit (Figure 5C). We
+
+315
+
+hypothesized that when flies enter a landing state, head movements may be modulated differently.
+
+316
+
+To test this hypothesis, we used machine vision to detect the leg extension reflex (see Methods).
+
+317
+
+Using the tracked leg kinematics, we classified bouts of flight into binary states: stabilizing flight
+
+318
+
+and landing, and pooled head movements across these states. Less than 5% of all head saccades
+
+319
+
+occurred when flies were extending their legs (N = 3,571 saccades, same as 30° wavelength data
+
+320
+
+from Figure 2) (Figure 5C). Correspondingly, during leg extension the head operated at overall
+
+321
+
+lower angular velocities and greater excursion, consistent with the head remaining at its anatomical
+
+322
+
+limit instead of performing a reset saccade (Figure 5D, Video 8). These results provide a possible
+
+323
+
+explanation for the reduced influence of stimulus speed on head saccade rate at higher speeds
+
+324
+
+(Figure 2B): flies were operating in a different behavioral state under these conditions.
+
+325
+
+Furthermore, these results imply that flies can escape the inner-loop head gaze stabilization reflex
+
+326
+
+active during forward flight, via an outer-loop initiation of landing and suppression of head reset
+
+327
+
+saccades (Hardcastle and Krapp, 2016). Altogether, the behavioral state of the fly gates stabilizing
+
+328
+
+head movements and saccades.
+
+329
+330
+
+The head saccade trigger implicates proprioceptive feedback
+
+331
+
+When flies are actively engaged in gaze stabilization, i.e. not extending their legs, most
+
+332
+
+evidence points to the angular position of the head playing the largest role in triggering a saccade
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+333
+
+(Figure 2C, 4A). Therefore, proprioceptive feedback could drive the initiation of head saccades.
+
+334
+
+Specifically, flies could sense the angular position of their head, and when the head nears the
+
+335
+
+anatomical limit of the head-thorax joint, a neural command of mechanosensory origin could be
+
+336
+
+sent to trigger a reset saccade. The cumulative distribution function of saccade trigger positions
+
+337
+
+suggests that the mechanism consists of a soft threshold ~9° from the head neutral position (Figure
+
+338
+
+6A). Based on these findings, we hypothesized that saccade rate would be influenced by the
+
+339
+
+operating range of the head; specifically, flies would perform saccades less frequently for visual
+
+340
+
+stimuli that did not drive the head near its anatomical limits. To test this hypothesis, we provided
+
+341
+
+flies with wide-field, sinusoidal visual motion at combinations of five amplitudes spanning 3.75°–
+
+342
+
+18.75° and six frequencies spanning 0.5–12 Hz corresponding to distinct mean speeds (see
+
+343
+
+Methods) (Figure 6B, Video 9–12). The head response was tuned to each distinct combination of
+
+344
+
+stimulus amplitude and frequency, leading to distributions of head positions of varying widths
+
+345
+
+(Figure Supplement 6A). The distributions were correlated with the gain of head movements
+
+346
+
+during smooth movements (Cellini and Mongeau, 2020b). Generally, stimuli with larger amplitude
+
+347
+
+and lower frequency elicited head movements with the widest distributions, whereas lower
+
+348
+
+amplitude and higher frequency combinations generated the narrowest distributions (Figure
+
+349
+
+Supplement 6A). We parameterized each distribution by twice the mean of its absolute value,
+
+350
+
+which approximated the operating range of the head (Figure 6B,C, Figure Supplement 6A).
+
+351
+
+We discovered that the operating range of the head had a strong influence on saccade rate
+
+352
+
+(Figure 6D, Figure Supplement 6B). While the oscillatory stimuli elicited less saccades overall
+
+353
+
+than the ramp stimuli, we observed a strong correlation between the head’s operating range and
+
+354
+
+saccade rate (r = 0.61, p < 0.001). Neither the stimulus amplitude (r = 0.29), frequency (r = 0.34),
+
+355
+
+or mean speed (r = 0.21) were correlated as strongly with saccade rate as the operating range of
+
+356
+
+the head. These results demonstrate the role of head orientation, as opposed to visual information,
+
+357
+
+in triggering head saccades. Effectively, a larger operating range increased a fly’s chance of
+
+358
+
+moving its head to its anatomical limit, and thus increased the probability that a saccade was
+
+359
+
+triggered. The stimuli corresponding to the narrowest distributions of head movements still elicited
+
+360
+
+some saccades, but at a rate similar to spontaneous saccades rates (Figure Supplement 6B). This
+
+361
+
+point was further supported by comparing the head orientation at saccade initiation across stimuli.
+
+362
+
+The majority of saccades initiated within an overall narrow operating range were triggered nearer
+
+363
+
+to the head center line, similar to the start orientation for saccades performed for a static
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+364
+
+background (Figure Supplement 6B; Figure 2C). On the other hand, saccades for wider head
+
+365
+
+angular distributions were triggered near the head’s anatomical limit (Figure Supplement 6B).
+
+366
+
+These head saccades usually preceded changes in stimulus velocity, confirming that they were
+
+367
+
+indeed “reset” saccades (Figure 6B, Video 10). Taken together, these results support the
+
+368
+
+hypothesis that the activation of head saccades is based on a position-based threshold. This
+
+369
+
+mechanical threshold is stochastic and is likely influenced by spatiotemporal visual information as
+
+370
+
+well as endogenous stochastic processes. However, our results provide strong evidence in favor of
+
+371
+
+proprioceptive feedback as the driving mechanism in head saccade activation.
+
+372
+373
+
+The head and wings switch between smooth and saccadic control simultaneously
+
+374
+
+If the origin of head reset saccades is truly based on proprioceptive information from the neck
+
+375
+
+sensory system, how does this trigger influence body saccades (via wing saccades) and are head
+
+376
+
+and body saccades always coupled? Indeed, a head-based proprioceptive trigger might suggest that
+
+377
+
+the head could perform reset saccades independently of the body. However, prior work showed
+
+378
+
+that head and body saccades are coupled in free flight (Schilstra and van Hateren, 1998) and in
+
+379
+
+magnetically tethered paradigms (Kim et al., 2017), although these studies analyzed spontaneous
+
+380
+
+saccades exclusively. Smooth head and wing movements in rigidly tethered flight are also coupled
+
+381
+
+when presented with a moving panorama (Cellini and Mongeau, 2020b; Duistermars et al., 2012;
+
+382
+
+Kim et al., 2015), but can be decoupled about yaw for simultaneous small- and wide-field motion
+
+383
+
+(Fox and Frye, 2014), thereby suggesting that a parallel visual pathway may elicit wing steering
+
+384
+
+responses. To elucidate head-wing interactions, we tracked wingbeat kinematics and compared
+
+385
+
+them to head kinematics. In the rigid tether paradigm, the difference between left and right
+
+386
+
+wingbeat amplitude (ΔWBA) is roughly proportional to the yaw torque acting on the body
+
+387
+
+(Tammero et al., 2004) (Figure 1A). Therefore, saccadic wing movements, i.e. hitches in ΔWBA,
+
+388
+
+indicate fictive body saccades.
+
+389
+
+We developed an algorithm to detect and extract wing saccades from ΔWBA traces (see
+
+390
+
+Methods) and then classified head saccades as either 1) having an accompanying wing saccade
+
+391
+
+within a 100 ms window or 2) not having an accompanying wing saccade (Figure 7A, Video 13).
+
+392
+
+About 50% of head reset saccades had an accompanying wing saccade, but some head reset
+
+393
+
+saccades occurred without a clearly identifiable wing saccade (Figure 7A, Figure Supplement 7A).
+
+394
+
+However, wing movements around head saccades without an accompanying wing saccade still
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+395
+
+showed a general positive correlation with head movements (Figure Supplement 7B). The lesser
+
+396
+
+peak velocity and amplitude of these wing movements rendered detection highly challenging, as
+
+397
+
+they were not sufficiently above the noise floor. This was especially problematic in trials with a
+
+398
+
+high saccade rate (Video 4). Wing saccade detection parameters could be tuned to detect these
+
+399
+
+wing hitches, with the caveat of an increased false-positive rate (see Methods). Although we could
+
+400
+
+not achieve a one-to-one detection between head and wing saccades, the general trend of ΔWBA
+
+401
+
+around all head saccades indicates that head and wings perform reset saccades concurrently with
+
+402
+
+the wing response leading the head by ~5–10 ms (Figure 7B,C). Flies did not actively ‘brake’ via
+
+403
+
+a negative ∆WBA signal to terminate saccades and instead followed a trajectory closely mirroring
+
+404
+
+the head.
+
+405
+
+Interestingly, head and wing saccades lasted for a similar duration of ~50 ms, as evidenced by
+
+406
+
+the clear switch from saccadic to smooth control around each head saccade (Figure 6B,C, Figure
+
+407
+
+4A). This is in contrast to prior work suggesting that wing saccades last upwards of 500 ms in
+
+408
+
+rigidly tethered flies (Heisenberg and Wolf, 1986; Wolf and Heisenberg, 1980). This discrepancy
+
+409
+
+spawns from conflicting definitions of the time scale of wing saccades. Prior studies have classified
+
+410
+
+spontaneous wing saccades as long duration spikes in ΔWBA, consisting of an initial spike in
+
+411
+
+ΔWBA followed by a slow decay back baseline. We observed these same ΔWBA spikes in flies
+
+412
+
+presented with a static background (Figure 7C, Figure Supplement 5A, Video 5). However, using
+
+413
+
+raw ΔWBA to classify fictive body saccades in rigid tether paradigms is problematic, as the lack
+
+414
+
+of reafferent feedback—presumably from the halteres—could artificially exaggerate the transient
+
+415
+
+response (Bender and Dickinson, 2006; Dickinson and Muijres, 2016). We contend that wing
+
+416
+
+saccades should be classified by the rate of change of ΔWBA (see Methods), therefore only the
+
+417
+
+initial spike above baseline ΔWBA should define saccade duration. This is a more precise method
+
+418
+
+of classifying flight into smooth and saccadic bouts, in addition to being more consistent with the
+
+419
+
+duration of body saccades in free flight (Muijres et al., 2015). If wing saccades did truly last 500
+
+420
+
+ms, then this would imply that the head and wings were often operating under different control
+
+421
+
+(smooth vs. saccadic), which did not seem to be the case here. Taken together, head and wing reset
+
+422
+
+saccades are under simultaneous control and have similar durations in the rigid tether.
+
+423
+424
+
+Proprioceptive feedback influences both head and wing saccade initiation
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+425
+
+Thus far our results suggest that 1) head saccades are triggered primarily by proprioceptive
+
+426
+
+feedback and 2) head and wing saccades are triggered concurrently. But does proprioceptive
+
+427
+
+head feedback directly influence wing saccade control? For a purely vision-based saccade
+
+428
+
+trigger, one might predict that head-fixed flies perform saccades more frequently, due to the lack
+
+429
+
+of stabilizing smooth head movements resulting in increased retinal slip error. However, based
+
+430
+
+on our findings, we hypothesized that wing saccade rate in head-fixed flies would be less than
+
+431
+
+that in head-free flies, due to the head never reaching its anatomical limit. To test this hypothesis,
+
+432
+
+we presented head-fixed flies with the same ramp stimuli presented to head-free flies and
+
+433
+
+compared the overall ΔWBA response and wing saccade rate (Figure 8, Video 13). Head-fixed
+
+434
+
+flies exhibited a greater mean wing response with less intra- and inter-trial variance than head-
+
+435
+
+free flies (t-test, p < 0.001)(Figure 8A,B). Without reset saccades, we would expect the wing
+
+436
+
+response to be larger and less variable, thus these results suggest that wing saccades in head-
+
+437
+
+fixed flies occur less frequently, if at all, and/or with reduced amplitude. To confirm this, we
+
+438
+
+culled wing saccades from head-free and head-fixed ΔWBA traces and found that head-fixed
+
+439
+
+flies did indeed perform reset saccades less frequently (t-test, p < 0.001) (Figure 8C). Wing
+
+440
+
+proprioceptive feedback could also influence the reset saccade trigger. In the rigid tether,
+
+441
+
+restricting body motion causes the ΔWBA signals to operate in a broader range than in free flight
+
+442
+
+(Dickinson and Muijres, 2016)(see Video 4).
+
+443
+
+We hypothesized that a threshold in wing angular excursion could provide a signal to initiate
+
+444
+
+a reset saccade. To uncover the possible role of wing proprioceptive feedback, we compared the
+
+445
+
+ΔWBA distributions at the start and end of a saccade in head-free flies (Figure Supplement 8). In
+
+446
+
+addition, we compared saccade start and end distributions for the left and right WBA separately
+
+447
+
+(Figure Supplement 8). Compared to head saccade start and end distributions (Figure 2C), the
+
+448
+
+wing start and end distributions significantly overlapped in all cases and were not distinct from
+
+449
+
+the ΔWBA distribution, suggesting that neither absolute WBA nor ΔWBA may provide a robust
+
+450
+
+trigger signal for saccade initiation. Indeed, absolute wingbeat amplitude can vary substantially
+
+451
+
+in flies and therefore may not provide a salient trigger signal (Duistermars et al., 2007). In
+
+452
+
+conjunction with our prior findings, these results strongly implicate proprioceptive feedback of
+
+453
+
+head orientation as the primary origin for the trigger of both head and wing reset saccades.
+
+454
+455
+
+Discussion
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+456
+
+By combining smooth head movement and reset saccades, flies stabilize gaze in a punctuated
+
+457
+
+manner, overcoming anatomical limits in a way analogous to vertebrate eye reflexes. Head reset
+
+458
+
+saccades were strongly stereotyped and interrupted smooth movement gaze stabilization for as
+
+459
+
+little as 50 ms, representing less than 5% of total flight time (Figure 2). Flies leveraged the
+
+460
+
+elasticity of the neck joint to initiate head reset saccades, demonstrating the role of passive
+
+461
+
+mechanics in head control (Figure 3). Head saccades enables flies to quasi-continuously stabilize
+
+462
+
+visual motion, reducing retinal slip by up to 70% between head saccades (Figure 4). Reset saccades
+
+463
+
+were initiated when the head was near its anatomical limits and their rate was highly dependent on
+
+464
+
+the operating angular range of the head, implicating proprioceptive feedback in saccade initiation
+
+465
+
+(Figure 2C, 6). Visually and spontaneous head saccades were triggered at different absolute head
+
+466
+
+positions, suggesting different trigger origins (Figure 2C). Higher stimulus speeds elicited a
+
+467
+
+landing response, which suppressed head smooth movements and saccades, demonstrating that
+
+468
+
+behavioral state gates head visuomotor responses (Figure 5). Lastly, the head and wings switched
+
+469
+
+between smooth and saccadic control concurrently but fixing the head significantly reduced wing
+
+470
+
+saccade rate (Figure 7,8). These results further support the role of proprioceptive feedback in
+
+471
+
+triggering reset saccades. To our knowledge, we demonstrate for the first time that wing control
+
+472
+
+can be directly influenced by head movements. Taken together, our work demonstrates the critical
+
+473
+
+function of a hybrid strategy for visuomotor control that provides a robust solution to overcome
+
+474
+
+sensor saturation limits.
+
+475
+476
+
+Reset saccades as a hybrid control solution for systems with saturation nonlinearities
+
+477
+
+In the task studied here, the dynamics of the head are inherently nonlinear due to the anatomical
+
+478
+
+range of the joint. In control theory, this class of nonlinearity is categorized as a saturation
+
+479
+
+nonlinearity. Essentially, when the head is saturated (oriented at anatomical limit; Figure 4A), no
+
+480
+
+matter how much control effort (torque at neck joint) is applied, the head will remain in this state.
+
+481
+
+Interestingly, if a fly’s stabilization control strategy were purely linear, the head would saturate
+
+482
+
+quickly and remain at its anatomical limit, rendering further efforts to stabilize gaze futile (Figure
+
+483
+
+4A,B). We confirm that flies solve this problem by performing a rapid head and wing reset saccade
+
+484
+
+when the head nears this saturated region, allowing stabilizing movements to begin anew (Figure
+
+485
+
+2C, Video 1). Because reset saccades lasted ~50 ms, flies experienced only a momentary
+
+486
+
+disruption of smooth gaze stabilizing movements. Overall, flies were able to spend ~95% of the
+
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+487
+
+time performing stabilizing head movements. From a design perspective, it would be optimal for
+
+488
+
+flies to reset their head orientation as fast as possible so as to minimize the periods where gaze is
+
+489
+
+not stabilized, which is consistent with the constant rapid saccade dynamics we observed across
+
+490
+
+stimulus speeds. The switch from smooth to saccadic control comprises a hybrid control scheme
+
+491
+
+that allows flies to deal with the head’s saturation nonlinearity while still performing the given
+
+492
+
+task (gaze stabilization) (Figure 9A). This concept can be illustrated by artificially removing
+
+493
+
+saccades from a fly’s head and wing trajectories (see Methods) and observing the continuous
+
+494
+
+stabilization response (Figure 9B). Altogether, the hybrid mechanism allows the smooth controller
+
+495
+
+to operate in the region where it is most effective (i.e. not saturated). Crucially, this strategy only
+
+496
+
+applies to a velocity sensitive control system like the gaze stabilization reflex, as opposed to a
+
+497
+
+position sensitive one like object localization, where reset saccades would result in swiftly
+
+498
+
+increasing error. Flies seldom perform reset saccades during object tracking tasks, thus supporting
+
+499
+
+this notion (Mongeau and Frye, 2017).
+
+500
+501
+
+Proprioceptive mechanisms
+
+502
+
+The consistent head orientation at the time of saccade initiation, the influence of the head’s
+
+503
+
+operating range on saccade rate, and the decrease in saccade rate in head-fixed flies strongly
+
+504
+
+suggest that reset saccades are triggered by proprioceptive feedback (Figure 2C, 6, 8). Flies most
+
+505
+
+likely monitor the orientation of their head and initiate a reset saccade when the head reaches some
+
+506
+
+predefined threshold near the anatomical limit (Figure 8). Neural recording within the neck motor
+
+507
+
+system of soldier flies showed that a pair of mechanosensory hair fields located on the prothorax,
+
+508
+
+the prosternal organs (PO), encode information regarding head posture about yaw, pitch, and roll
+
+509
+
+(Paulk and Gilbert, 2006). However, in blow flies, unilaterally shaving the PO results in a postural
+
+510
+
+bias primarily about the roll and pitch axes, with less of an influence observed in yaw (Preuss and
+
+511
+
+Hengstenberg, 1992). This result suggests that there may be other mechanosensory mechanisms
+
+512
+
+involved in the control of head yaw. Flies have additional mechanoreceptors that may be involved
+
+513
+
+in head control, including the prothoracic chordotonal organs (CO) and several larger hairs on the
+
+514
+
+back the head (Strausfeld et al., 1987). Altogether, reset saccades are most likely triggered by the
+
+515
+
+stimulation of mechanosensory organs at the base of the fly neck. Our work provides testable
+
+516
+
+hypotheses concerning the physiological mechanisms involved in triggering reset saccades.
+
+517
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+518
+
+Potential for a conserved mechanism across species
+
+519
+
+In addition to fruit flies, blow flies (Land, 1973), hover flies (Collett and Land, 1975), locusts
+
+520
+
+(Kien and Land, 1978), beetles (Varju and Bolz, 1980), and mantids (Lea and Mueller, 1977; Liske
+
+521
+
+and Mohren, 1984) perform reset saccades of the head and/or body during visuomotor tasks.
+
+522
+
+Presumably, other insects have a similar proprioceptive mechanism that enables this behavior. The
+
+523
+
+locusts’ neck sensory system contains the myochordotonal organs (Shepheard, 1973), similar to
+
+524
+
+the CO in flies, which have a strong influence on head saccade during yaw gaze stabilization.
+
+525
+
+Interestingly, reset saccades virtually disappear when these organs are cut, suggesting that a
+
+526
+
+proprioceptive mechanism may be necessary (Shepheard, 1974). A similar concept applies to
+
+527
+
+mantids, where the reset saccade rate in response to a moving target is nearly cut in half when hairs
+
+528
+
+at the base of the neck are shaved, and saccade speed and amplitude increase (Liske and Mohren,
+
+529
+
+1984). Intriguingly, the idea of proprioceptive triggered reset saccades may span multiple
+
+530
+
+taxonomic classes, as eye movements in crabs (Horridge, 1967) and primates (Cheng and
+
+531
+
+Outerbridge, 1974) display remarkably similar movement patterns. Indeed, mammal eyes have
+
+532
+
+multiple proprioceptive mechanisms that could influence saccade control during optokinetic
+
+533
+
+nystagmus (Donaldson, 2000), however, to our knowledge the mechanisms underlying the trigger
+
+534
+
+of reset saccades during optokinetic nystagmus is not known in humans and non-human primates.
+
+535
+
+Altogether, a proprioceptive saccade trigger may be a conserved characteristic of active vision
+
+536
+
+systems.
+
+537
+538
+
+Head-wing interactions
+
+539
+
+To our knowledge, we demonstrated for the first time that head orientation influences wing
+
+540
+
+saccades (Figure 8), establishing a causal link. Prior work has shown that 93% of saccades in free
+
+541
+
+flight can be linked to salient visual features in a fly’s environment (Censi et al., 2013). The
+
+542
+
+remaining saccades were attributed to unobservable internal states or spontaneous behavior.
+
+543
+
+Intriguingly, the reset saccades studied here could provide a possible explanation for a portion of
+
+544
+
+these “spontaneous” saccades. We propose that some of these saccades could be triggered by head
+
+545
+
+saturation, presumably measured by the PO or CO, or even by stochastic processes underling
+
+546
+
+proprioceptive feedback from hair plates. Smooth wing steering gain and coordination is also
+
+547
+
+influenced by head movements during gaze stabilization tasks (Cellini and Mongeau, 2020b).
+
+548
+
+Furthermore, fixing the head of a fly at an angle in complete darkness results in a wing steering
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+549
+
+response in the same direction of the head, demonstrating that head orientation alone (without
+
+550
+
+visual influences) affects wing control (Liske, 1977). These studies, in conjunction with our
+
+551
+
+findings, present an avenue for future work that investigates links between proprioceptive feedback
+
+552
+
+from the neck sensory system and flight control.
+
+553
+554
+
+Neural control of saccades
+
+555
+
+Our results pose testable hypotheses concerning how reset saccades might be initiated in the
+
+556
+
+fly nervous system. The first possibility is that neck proprioceptors (PO, CO, etc.) sense when the
+
+557
+
+head is near its anatomical limit which triggers coordinated head and wing reset saccades via direct,
+
+558
+
+descending pathways to the head and wing motor centers. Head and wing neuropils are innervated
+
+559
+
+by many mutual descending neurons (DN) and head position influences wing steering efforts in
+
+560
+
+flies, thus the head-neck sensory system could directly influence both head and wing control
+
+561
+
+(Cellini and Mongeau, 2020b; Liske, 1977; Namiki et al., 2018). At present, it is not known
+
+562
+
+whether the saccade motor program is initiated peripherally or from more central brain processes.
+
+563
+
+Our results suggest that head angular position is linked to the trigger of reset saccades, but because
+
+564
+
+wing saccades precede head saccades, the saccade motor program may be located more centrally
+
+565
+
+(Figure 9A). We believe this is the more likely scenario because wing saccades precede head
+
+566
+
+saccades by ~5 ms (Figure 7). If saccades were triggered via direct pathways from the neck that
+
+567
+
+bypass the central brain, it would be reasonable to expect that head saccades would precede wings
+
+568
+
+saccades due to the shorter distance signals would have to travel. Furthermore, motor-related
+
+569
+
+efference copies act on peripheral visual interneurons during fictive saccades, suggesting that these
+
+570
+
+saccade-related signals originate from more central brain processes (Kim et al., 2017, 2015). Taken
+
+571
+
+together, our work suggests that saccades may originate from a motor program located more
+
+572
+
+centrally within the nervous system of Drosophila.
+
+573
+574
+
+Effect of behavioral state on head movements
+
+575
+
+We found that coordinated smooth and saccadic head and wing movements are an integral
+
+576
+
+component of the gaze stabilization system but that these sensorimotor processes are not always
+
+577
+
+active (Figure 5). For high retinal slip speeds flies shifted to a landing state which significantly
+
+578
+
+reduced head smooth movements and saccades (Figure 5A). Flies rarely performed reset saccades
+
+579
+
+during landing and instead maintained a persistent head orientation biased towards one side, in the
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+580
+
+direction of the visual stimulus (Figure 5C,D). This implies that the behavioral state is somehow
+
+581
+
+inhibiting the saccade command center. At present, it is unclear how landing might modulate
+
+582
+
+visuo-motor processing. A possibility is that the saccade trigger is influenced by neuromodulators
+
+583
+
+acting at the periphery that inhibit neck sensory afferents. The response range, gain, and latency
+
+584
+
+of visual processing in flies is also influenced by state-dependent neuromodulation, which could
+
+585
+
+play a role in the suppression of head movements (Ache et al., 2019; Longden and Krapp, 2009;
+
+586
+
+Maimon et al., 2010). Why head movements are reduced during landing is intriguing, as corrective
+
+587
+
+head movements would presumably be critical during this task (Liu et al., 2019). However,
+
+588
+
+restricting body movements may complicate the functional interpretation of head saccade
+
+589
+
+suspension during landing. One possibility is that flies were attempting to perform a co-directional
+
+590
+
+turn in the direction of visual motion which, because of the rigid tether, simply resulted in a
+
+591
+
+continuously saturated head position during landing.
+
+592
+593
+
+Effects of restricting body motion
+
+594
+
+Our results show that rigidly tethered flies regularly perform reset saccades (Figure 2), but it
+
+595
+
+remains unclear whether head reset saccades are common in free flight where the body is free to
+
+596
+
+move. It could be that reset saccades are less prominent in freely flying flies due to body
+
+597
+
+movements that reduce the probability of the head reaching a saturated state. Furthermore, body
+
+598
+
+movements can rapidly reduce retinal slip, thereby in free flight head movements might be very
+
+599
+
+small to compensate for similarly small visual drift (Cellini and Mongeau, 2020b; Van Hateren et
+
+600
+
+al., 1999). However, over time, the accumulated drift may be sufficient to generate a reset saccade
+
+601
+
+via spatiotemporal integration of visual and/or mechanical origin, as demonstrated in a magnetic
+
+602
+
+tether (Mongeau and Frye, 2017). Unlike the head, the body has no anatomical constraints
+
+603
+
+restricting its range of motion, thus flies could stabilize gaze via a combination of head and body
+
+604
+
+movements that would seldom require a reset saccade. Nevertheless, reset body saccades have
+
+605
+
+been observed in freely flying hover flies, demonstrating that this behavior is not limited to rigidly
+
+606
+
+tethered flight (Collett and Land, 1975). Furthermore, reset body and head saccades are performed
+
+607
+
+by magnetically tethered flies, where the body is constrained to yaw but the head is free to move
+
+608
+
+(Land, 1973; Mongeau and Frye, 2017). In response to wide-field visual motion, magnetically
+
+609
+
+tethered flies performed reset saccades with a rate of ~0.15 Hz, more than five times less than the
+
+610
+
+rate reported here, although this result was dependent on stimulus speed (Mongeau and Frye,
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+611
+
+2017). This suggests that reset saccades are activated less often in flies with unrestricted body
+
+612
+
+dynamics. Nevertheless, the consistent head orientation of magnetically tethered blowflies at the
+
+613
+
+instance of reset saccades (~10–15° from midline) supports our proposed proprioceptive-based
+
+614
+
+trigger (Land, 1973)(Figure 9A). Moreover, prior studies showed that co-directional body saccades
+
+615
+
+in magnetically tethered and freely flying fruit flies are immediately followed by a rapid anti-
+
+616
+
+directional head movement. Although these studies did not interpret this anti-directional
+
+617
+
+movement as a separate saccade, the dynamics suggest that it is indeed a reset saccade, presumably
+
+618
+
+executed to recenter the head to body midline (Kim et al., 2017; Van Hateren et al., 1999). An
+
+619
+
+exciting avenue for future research will be to elucidate the role of the head and its influence on
+
+620
+
+flight control in paradigms with unrestricted body dynamics.
+
+621
+622
+623
+
+Bio-inspired applications
+With a growing interest in bio-inspired technology, many recent studies have focused on the
+
+624
+
+development of vision sensors inspired by insect eyes for autonomous vehicles (Serres and
+
+625
+
+Viollet, 2018). A particular focus has been placed on understanding and instantiating the
+
+626
+
+physiological and motion processing mechanisms that make insects such proficient flyers.
+
+627
+
+However, less emphasis has been placed on one of the most defining features of insect vision:
+
+628
+
+insect eyes move via head movements, and are thus active visual sensors (Bajcsy, 1988). As
+
+629
+
+current micro-air vehicles have recently begun to incorporate movable sensors, roboticists and
+
+630
+
+engineers should consider saccade-inspired hybrid control for vision systems with saturation
+
+631
+
+nonlinearities (Iyer et al., 2020). For example, a recent study developed a wireless steerable
+
+632
+
+vision sensor for insect-scale flying systems (Iyer et al., 2020). This sensor can be actuated
+
+633
+
+through ~60° in yaw via a piezo-based actuator, and thus has saturation constraints analogous to
+
+634
+
+the mechanics of an insect head. In order to continuously stabilize gaze, this sensor’s movement
+
+635
+
+could be programmed to perform reset “saccades”. A proprioceptive sensor, analogous to the PO
+
+636
+
+or CO in flies, would be all that is required to implement this control scheme. Altogether, this
+
+637
+
+hybrid control strategy has important applications for active vision systems in insect-scale robots
+
+638
+
+and beyond that must overcome limits in sensor range of motion.
+
+639
+640
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+641
+
+MATERIALS AND METHODS
+
+642
+643
+
+Animal preparation
+
+644
+
+We prepared the animals for each experiment according to a protocol that has been previously
+
+645
+
+described (Reiser and Dickinson, 2008). Briefly, we cold-anesthetized 3–5 day old females flies
+
+646
+
+(wild-type Drosophila melanogaster) by cooling them on a Peltier stage maintained at
+
+647
+
+approximately 4°C. We fixed flies to tungsten pins (A-M Systems) by applying a small drop of
+
+648
+
+UV-activated glue (XUVG-1, Newall) to the thorax. The pin was placed on the thorax projecting
+
+649
+
+forward at an angle of approximately 90°. For head-fixed experiments, a small drop of glue was
+
+650
+
+placed atop the neck joint. After a minimum 30-minute period of recovery, flies were used for
+
+651
+
+experiments.
+
+652
+653
+
+Experimental protocol
+
+654
+
+The rigid-tether arena has been described elsewhere (Reiser and Dickinson, 2008). Briefly, the
+
+655
+
+display consists of a cylindrical array of 96 × 32 light emitting diodes (LEDs, each subtending
+
+656
+
+3.75° on the eye) that wrap around the fly, subtending 330° horizontally and 112° vertically (Figure
+
+657
+
+1A). Flies were rigidly mounted to a rod inside the arena and illuminated from above with a single
+
+658
+
+940 nm LED (Figure 1A). Flies were attached to a rigid rod and placed in the arena at an angle
+
+659
+
+near the natural flight angle (~45° in pitch). The position of the fly was adjusted until the fly was
+
+660
+
+in the frame, and in focus of the camera. Flies then underwent a closed-loop bar fixation period of
+
+661
+
+approximately ten seconds to ensure that the wings were being accurately measured and that the
+
+662
+
+flies were not visually impaired. Flies that failed to fixate the bar were not used for experiments.
+
+663
+
+All experimental trials were interspersed with closed-loop bar fixation bouts of five seconds to
+
+664
+
+ensure attentiveness throughout the length of the experiment. We recorded videos of the fly from
+
+665
+
+above at 200 frames per second (fps) with an infrared-sensitive camera (acA640-120gm, Basler).
+
+666
+
+During trials, video frames were collected using an external trigger, and synced to the start of
+
+667
+
+visual motion. We acquired signals (stimulus position and camera trigger) at 5 kHz.
+
+668
+669
+
+Visual stimuli
+
+670
+
+In order to study the dynamics of the hybrid visual system of flies, we designed a visual stimulus
+
+671
+
+that elicited both smooth and saccadic head movements in yaw. Previous work showed that
+
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+672
+
+oscillatory wide-field movements with smaller amplitudes and intermediate velocities elicit mostly
+
+673
+
+smooth head movements in rigidly tethered flies (Cellini and Mongeau, 2020b). Although there is
+
+674
+
+little prior work investigating head saccade activation in rigidly tethered flies, body saccades have
+
+675
+
+been shown to occur frequently for constant velocity wide- and small-field motion (Mongeau and
+
+676
+
+Frye, 2017). Therefore, we used constant velocity, wide-field visual stimuli, which proved
+
+677
+
+sufficient to elicit robust smooth and saccadic movements. Individual flies were presented with
+
+678
+
+velocities of 30, 60, 90, 120, 150 °s-1 in both directions at fixed spatial wavelengths and in
+
+679
+
+randomized order. The spatial wavelengths of the panorama presented were 22.5°, 30°, 60°. All
+
+680
+
+stimuli were presented at the maximum contrast offered by the LED arena, near a 100% Michelson
+
+681
+
+contrast. When investigating spontaneous saccades, we displayed a stationary panorama at the
+
+682
+
+same wavelengths and contrasts as the moving stimuli but added a all-on, all-off, and randomized
+
+683
+
+spatial wavelength grating.
+
+684
+
+To investigate how the operating angular range of the head affected head saccades, we employed
+
+685
+
+sinewave visual motion at amplitudes of 3.75°, 7.5°, 11.25°, 15°, and 18.75° at frequencies of 0.5
+
+686
+
+Hz, 1 Hz, 2 Hz, 3.5 Hz, 6.5 Hz, and 12 Hz. These visual stimuli have been further described in
+
+687
+
+past work exploring smooth head movements in Drosophila (Cellini and Mongeau, 2020b).
+
+688
+
+Sinewave motion can be described using the mean speed, 𝑠
+
+689
+
+of the sinewave and 𝑓 is the frequency of oscillation. We use this metric to compare stimuli with
+
+690
+
+similar mean speeds, but with different amplitudes and frequencies.
+
+4𝐴𝑓, where 𝐴 is the amplitude
+
+691
+692
+
+Kinematic measurements
+
+693
+
+We used custom computer-vison software (MATLAB, MathWorks, Natick, MA, USA) to track
+
+694
+
+the angle of the head relative to the body and left and right wingbeat amplitude (WBA) in units of
+
+695
+
+degrees. Briefly, we manually defined the head rotation point on the neck and the initial angle of
+
+696
+
+the head. Then we automatically tracked features on the fly head (base of the antennae) and
+
+697
+
+measured the change in angle of the feature relative to the rotation point for every frame. We also
+
+698
+
+measured WBA in each frame using an edge detection algorithm similar to Kinefly (Suver et al.,
+
+699
+
+2016). Because flies flapping frequency exceeds 200 Hz, the leading edge of the blur of each wing
+
+700
+
+approximates WBA.
+
+701
+
+Head roll was measured using the relative width of the left and right eye in every video frame
+
+702
+
+(Kim et al., 2017) (Video 2). The lighting for these experiments was adjusted to ensure a clear
+
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+703
+
+distinction between the fly head and compound eyes. In short, we stabilized recorded frames in
+
+704
+
+the head yaw reference frame using our yaw measurements. Then we measured the pixel intensity
+
+705
+
+in a region surrounding the center of the head along the horizontal axis. The mean intensity
+
+706
+
+displayed two distinct peaks representing the left and right eyes, where the width of the peaks
+
+707
+
+corresponded to the width of each eye in pixels. We computed the roll index, defined as
+Roll Index
+
+L
+L
+
+R
+R
+
+Eq. 1
+
+708
+
+where 𝐿 and 𝑅 are the widths of the left and right eye, respectively. This index is linearly related
+
+709
+
+to the true head roll by a constant calibration factor in tethered flies (Kim et al., 2017). We used
+
+710
+
+this calibration factor to approximate head roll in a similar experimental paradigm.
+
+711
+
+To tack the legs, we trained an artificial neural network using the pose estimation Python library
+
+712
+
+DeepLabCut (Video 7) (Nath et al., 2019). We used a training dataset of ~1,500 frames of labeled
+
+713
+
+images consisting of the left and right front legs, and a test dataset consisting of ~500 labeled
+
+714
+
+frames. After training for more than 100,000 iterations we achieved a test accuracy within 3 pixels.
+
+715
+
+Because our analysis was not concerned with the precise movements of the legs, we classified
+
+716
+
+frames as either having 1) leg extension or 2) no leg extension. We then applied a median filter to
+
+717
+
+the binary classification for all the frames in each experiment to remove instances where flies only
+
+718
+
+momentarily extended or did not extend their legs.
+
+719
+720
+
+Head saccade detection
+
+721
+
+To detect flight saccades, we used an Angular-Velocity based Saccade Detector (AVSD), which
+
+722
+
+works by analyzing the angular heading of the body/head (Censi et al., 2013). We implemented an
+
+723
+
+AVSD with parameters tuned specifically to Drosophila head movements (Figure Supplement 1).
+
+724
+
+For each trial, we computed the velocity of the head using the central difference formula (Figure
+
+725
+
+Supplement 1A) and then applied a 10 Hz low-pass filter to the velocity signal (Figure
+
+726
+
+Supplement 1B). We pooled the filtered velocity data points across all trials and computed the
+
+727
+
+standard deviation (Figure Supplement 1G). For each trial, we selected a saccade threshold equal
+
+728
+
+to 1.5 of the overall standard deviations from the trial’s median velocity. For experiments with a
+
+729
+
+static background and sinusoidal stimuli, we used the median of the absolute value of the velocity
+
+730
+
+signal. We used the MATLAB findpeaks routine to detect spikes in the filtered velocity signal
+
+731
+
+which were considered putative saccades (Figure Supplement 1B). We also ensured that all spikes
+
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+732
+
+lasted within the expected time frame for saccades (10–100 ms). Because we detected peaks in the
+
+733
+
+filtered signal and the spike dynamics were therefore attenuated, we set a window around each
+
+734
+
+peak in the raw signal to find the true peak (Figure Supplement 1C). We applied another threshold
+
+735
+
+set at 2 standard deviations from the median of the raw velocity at this step to ensure that we did
+
+736
+
+not mistakenly detect the faster smooth intervals (such as for 150°s-1 stimuli) (Figure
+
+737
+
+Supplement 1G). We determined the start and end of a saccade by finding when the velocity
+
+738
+
+returned to 25% of the peak velocity (Figure Supplement 1C). Saccades where the head moved
+
+739
+
+less than 4° were rejected to avoid detecting the occasional large velocity spike during smooth
+
+740
+
+intervals. Saccades less than the amplitude and/or the velocity threshold were exceedingly rare as
+
+741
+
+shown by the distribution of saccade dynamics (Figure 2B). Furthermore, the velocity and
+
+742
+
+amplitude thresholds were visually confirmed to be effective on ~1000 experimental trials. Next,
+
+743
+
+we extracted the position and velocity of the head during each saccade and interval-saccade
+
+744
+
+interval (smooth movement) (Figure Supplement 1D). We normalized saccades to their peak time
+
+745
+
+and interval-saccade intervals to their start time for later analysis (Figure Supplement 1E).
+
+746
+
+Intervals at the start and end of trials were not bounded by saccades and were therefore not included
+
+747
+
+in our analysis. We removed saccades by shifting each smooth interval by the negative value of
+
+748
+
+the previous saccade amplitude and interpolating between subsequent intervals (Figure
+
+749
+
+Supplement 1F). This procedure allowed us to approximate the smooth dynamics of the head
+
+750
+
+(Figure 9B).
+
+751
+752
+
+Wing saccade detection
+
+753
+
+Prior work has demonstrated that flies attempt to perform body saccades while rigidly tethered
+
+754
+
+(Wolf and Heisenberg, 1980). These fictive saccades manifest as torque spikes which are produced
+
+755
+
+by hitches in ∆WBA. We refer to these hitches as wing saccades. While head saccades are
+
+756
+
+relatively straightforward to detect, wing saccades were much less discernible due to the larger
+
+757
+
+measurement noise floor. This was exacerbated for trials with a high saccade rate (e.g. Video 4).
+
+758
+
+We found that manually detecting wing saccades was not feasible, as wing saccades were not
+
+759
+
+nearly as visually distinct as head saccades overall. Prior studies have attempted to classify wing
+
+760
+
+saccades using algorithms that focus on the entire above-baseline spike in ∆WBA (Aptekar et al.,
+
+761
+
+2012; Bender and Dickinson, 2006), however here we show that head and wings saccades may be
+
+762
+
+best classified by analyzing the change in ∆WBA (Figure 7). We found that we could use the same
+
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+763
+
+angular velocity-based algorithm we applied for head saccade for wing saccade detection (Figure
+
+764
+
+Supplement 1). We low-pass filtered wing data with an 8 Hz cut-off frequency and set the
+
+765
+
+amplitude cut-off to 4°. We only culled wing saccades for trials with 30°s-1 stimulus velocity, as
+
+766
+
+the lower saccade rate and noise floor facilitated detection.
+
+767
+768
+
+Protocol to measure passive response
+
+769
+
+To measure the passive response of the head, we anesthetized flies using the anesthetic agent
+
+770
+
+triethylamine (commercially available as FlyNap, Carolina Biological Supply) which immobilized
+
+771
+
+flies for approximately 45 minutes. We mounted the anesthetized flies on a rigid rod by applying
+
+772
+
+a small drop of UV-activated glue (XUVG-1, Newall) to the thorax, similar to the experiments
+
+773
+
+described above. We then displaced the head using a rod oriented to one side of the fly (Figure
+
+774
+
+3B). We displaced the head using a manual micrometer while observing displacements with a
+
+775
+
+camera which provided a high-resolution view of the head-neck joint. We ensured that the majority
+
+776
+
+of the displacement was due to the angular offset of the head, as opposed to translational offsets at
+
+777
+
+the base of the neck. The initial angular displacement was varied from realistic values at the onset
+
+778
+
+of head reset saccades (Figure 2C; less than 20°) to displacements that are less naturalistic (range:
+
+779
+
+20°–40°). However, the initial displacement had little effect on our conclusions, specifically the
+
+780
+
+estimate of the time constant (Figure Supplement 3). After displacing the head, we rapidly moved
+
+781
+
+the rod holding the head away from the fly, allowing the passive response to begin. We recorded
+
+782
+
+videos of the fly from above at 300 frames per second with an infrared-sensitive camera (acA640-
+
+783
+
+120gm, Basler) (Video 3). Each head response was measured using custom computer-vision
+
+784
+
+software (described above). A first-order exponential model of the form
+ℎ 𝑡
+
+𝑏
+
+𝑎𝑒
+
+Eq. 2
+
+785
+
+was fit to the experimental data (Figure 3). The head response ℎ 𝑡 was modeled as a function of
+
+786
+
+time 𝑡, and free parameters 𝑎, 𝑏, and time constant 𝜏. The coefficient of determination (R2) fit was
+
+787
+
+greater than 0.9. The active saccade response was fit with the same model form and had an R2 in
+
+788
+
+the same range as the passive response.
+
+789
+790
+
+Statistical Analysis
+
+791
+
+For all box plots, the central line is the median, the bottom and top edges of the box are the 25th
+
+792
+
+and 75th percentiles and the whiskers extend to ±2 standard deviations. Violin plots (Figure 4D)
+
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+793
+
+used a kernel density function to approximate the distribution. When performing linear regression,
+
+794
+
+we report the Pearson correlation coefficient (r). The sigmoid fit to the cumulative distribution
+
+795
+
+function (Figure 6A) is of the form
+𝑦
+
+796
+
+𝑎
+
+1
+𝑒
+
+Eq. 3
+
+where a and b are free parameters.
+
+797
+798
+
+Acknowledgments
+
+799
+
+We thank Susheel Dharmadhikari for laboratory assistance. This material is based upon work
+
+800
+
+supported by the Air Force Office of Scientific Research under award number FA9550-20-1-
+
+801
+
+0084.
+
+802
+803
+
+Author contributions: B.C. and J.M.M. contributed to the design of experiments. B.C.
+
+804
+
+performed the experiments. B.C. and W.S. analyzed the data. B.C. and J.M.M. wrote the
+
+805
+
+manuscript.
+
+806
+807
+
+Competing interests: The authors declare no competing interests.
+
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+808
+
+Supplementary Materials
+
+809
+810
+
+Figure Supplement 1. Head saccade detection method.
+
+811
+
+Figure Supplement 2. Co-directional saccade.
+
+812
+
+Figure Supplement 3. Passive mechanics response, related to Figure 3.
+
+813
+
+Figure Supplement 4. Heal roll during saccades.
+
+814
+
+Figure Supplement 5. Spontaneous head movements.
+
+815
+
+Figure Supplement 6. Head operating range, related to Figure 6.
+
+816
+
+Figure Supplement 7. Head and wing saccades, related to Figure 7.
+
+817
+
+Figure Supplement 8. Wing orientation at saccade initiation, related to Figure 8.
+
+818
+
+Video 1. A real-time experimental trial showing head and wing movements in response to
+
+819
+
+constant velocity visual motion at -60°s-1 and 30° spatial wavelength.
+
+820
+
+Video 2. Illustration of our method of estimating roll from a top view of a fly.
+
+821
+
+Video 3. Passive mechanics experiment.
+
+822
+
+Video 4. Same as Video 1 but for 150°s-1 visual motion at 22.5° spatial wavelength.
+
+823
+
+Video 5. Same as Video 1 but for a static background at 30° spatial wavelength.
+
+824
+
+Video 6. Same as Video 1 but for no spatial features in complete darkness (no LED
+
+825
+
+lights).
+
+826
+
+Video 7. Same as Video 1 but for 150°s-1 visual motion.
+
+827
+
+Video 8. Same as Video 1 but for 120°s-1 visual motion.
+
+828
+
+Video 9. Same as Video 1 but for sinewave visual motion at 3.75° amplitude and 2 Hz
+
+829
+
+oscillation frequency.
+
+830
+
+Video 10. Same as Video 1 but for 18.75° amplitude.
+
+831
+
+Video 11. Same as Video 1 but for 6.5 Hz oscillation frequency.
+
+832
+
+Video 12. Same as Video 1 but for 6.5 Hz oscillation frequency.
+
+833
+
+Video 13. Same as Video 1 but for 30°s-1 visual motion.
+
+834
+835
+
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+836
+
+REFERENCES
+
+837
+
+Ache JM, Namiki S, Lee A, Branson K, Card GM. 2019. State-dependent decoupling of sensory
+
+838
+
+and motor circuits underlies behavioral flexibility in Drosophila. Nat Neurosci 22:1132–
+
+839
+
+1139. doi:10.1038/s41593-019-0413-4
+
+840
+
+Aptekar JW, Shoemaker PA, Frye MA. 2012. Figure tracking by flies is supported by parallel
+
+841
+
+visual streams. Curr Biol 22:482–487. doi:10.1016/j.cub.2012.01.044
+
+842
+
+Bajcsy R. 1988. Active perception. Proc IEEE 76:966–1005. doi:10.1109/5.5968
+
+843
+
+Bender JA, Dickinson MH. 2006. Visual stimulation of saccades in magnetically tethered
+
+844
+845
+
+Drosophila. J Exp Biol 209:3170–82. doi:10.1242/jeb.02369
+Boeddeker N, Dittmar L, Stürzl W, Egelhaaf M. 2010. The fine structure of honeybee head and
+
+846
+
+body yaw movements in a homing task. Proc R Soc B Biol Sci 277:1899–1906.
+
+847
+
+doi:10.1098/rspb.2009.2326
+
+848
+849
+850
+851
+852
+853
+
+Borst A. 1986. Time course of the Houseflies’ landing response. Biol Cybern 54:379–383.
+doi:10.1007/BF00355543
+Cellini B, Mongeau J-M. 2020a. Hybrid visual control in fly flight: insights into gaze shift via
+saccades. Curr Opin Insect Sci 42:23–31. doi:10.1016/j.cois.2020.08.009
+Cellini B, Mongeau J-M. 2020b. Active vision shapes and coordinates flight motor responses in
+flies. Proc Natl Acad Sci U S A 117:23085–23095. doi:10.1073/pnas.1920846117
+
+854
+
+Censi A, Straw AD, Sayaman RW, Murray RM, Dickinson MH. 2013. Discriminating External
+
+855
+
+and Internal Causes for Heading Changes in Freely Flying Drosophila. PLoS Comput Biol
+
+856
+
+9:e1002891. doi:10.1371/journal.pcbi.1002891
+
+857
+858
+859
+860
+
+Cheng M, Outerbridge JS. 1974. Inter-saccadic interval analysis of optokinetic nystagmus.
+Vision Res 14:1053–1058. doi:10.1016/0042-6989(74)90201-6
+Collett TS, Land MF. 1975. Visual control of flight behaviour in the hoverfly Syritta pipiens L. J
+Comp Physiol A 99:1–66. doi:10.1007/BF01464710
+
+861
+
+Dickinson MH, Muijres FT. 2016. The aerodynamics and control of free flight manoeuvres in
+
+862
+
+Drosophila. Philos Trans R Soc B Biol Sci 371:20150388. doi:10.1098/rstb.2015.0388
+
+863
+
+Donaldson IML. 2000. The functions of the proprioceptors of the eye muscles. Philos Trans R
+
+864
+865
+866
+
+Soc London Ser B Biol Sci 355:1685–1754. doi:10.1098/rstb.2000.0732
+Duistermars BJ, Care RA, Frye MA. 2012. Binocular interactions underlying the classic
+optomotor responses of flying flies. Front Behav Neurosci 6:6.
+
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+867
+868
+
+doi:10.3389/fnbeh.2012.00006
+Duistermars BJ, Reiser MB, Zhu Y, Frye MA. 2007. Dynamic properties of large-field and
+
+869
+
+small-field optomotor flight responses in Drosophila. J Comp Physiol A Neuroethol Sens
+
+870
+
+Neural Behav Physiol 193:787–99. doi:10.1007/s00359-007-0233-y
+
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+
+Fox JL, Frye MA. 2014. Figure-ground discrimination behavior in Drosophila. II. Visual
+influences on head movement behavior. J Exp Biol 217:570–9. doi:10.1242/jeb.080192
+Fry SN, Sayaman R, Dickinson MH. 2003. The aerodynamics of free-flight maneuvers in
+Drosophila. Science 300:495–8. doi:10.1126/science.1081944
+Geiger G, Poggio T. 1977. On head and body movements of flying flies. Biol Cybern 25:177–
+180. doi:10.1007/BF00365214
+Goebel R, Sanfelice RG, Teel AR. 2012. Hybrid Dynamical Systems: Modeling, Stability, and
+Robustness. Princeton University Press.
+Goodman JL. 1960. The Landing Responses of Insects: I. The Landing Response of the Fly,
+Lucilia Sericata, and Other Calliphorinae. J Exp Biol 37:854–878.
+Hardcastle BJ, Krapp HG. 2016. Evolution of Biological Image Stabilization. Curr Biol
+26:R1010–R1021. doi:10.1016/j.cub.2016.08.059
+Heisenberg M, Wolf R. 1986. Vision in Drosophila. Genetics in Microbehavior. Studies of Brain
+
+884
+
+Function, Volume 12. M. Heisenberg , R. Wolf. Q Rev Biol 61:141–141.
+
+885
+
+doi:10.1086/414849
+
+886
+
+Hengstenberg R. 1988. Mechanosensory control of compensatory head roll during flight in the
+
+887
+
+blowfly Calliphora erythrocephala Meig. J Comp Physiol A 163:151–165.
+
+888
+
+doi:10.1007/BF00612425
+
+889
+
+Horridge GA. 1967. Position of Onset of Fast Phase in Optokinetic Nystagmus 216:1004–1005.
+
+890
+
+Iyer V, Najafi A, James J, Fuller S, Gollakota S. 2020. Wireless steerable vision for live insects
+
+891
+892
+893
+
+and insect-scale robots. Sci Robot 5:839.
+Kien J, Land MF. 1978. The fast phase of optokinetic nystagmus in the locust. Physiol Entomol
+3:53–57. doi:10.1111/j.1365-3032.1978.tb00132.x
+
+894
+
+Kim AJ, Fenk LM, Lyu C, Maimon G. 2017. Quantitative Predictions Orchestrate Visual
+
+895
+
+Signaling in Drosophila. Cell 168:280-294.e12. doi:10.1016/j.cell.2016.12.005
+
+896
+897
+
+Kim AJ, Fitzgerald JK, Maimon G. 2015. Cellular evidence for efference copy in Drosophila
+visuomotor processing. Nat Neurosci 18:1247–55. doi:10.1038/nn.4083
+
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+898
+899
+900
+901
+902
+903
+904
+905
+
+Land M. 2019. Eye movements in man and other animals. Vision Res 162:1–7.
+doi:10.1016/j.visres.2019.06.004
+Land MF. 1992. Visual tracking and pursuit: Humans and arthropods compared. J Insect Physiol
+38:939–951. doi:10.1016/0022-1910(92)90002-U
+Land MF. 1973. Head Movement of Flies during Visually Guided Flight. Nature 243:299–300.
+doi:10.1038/243299a0
+Lea JY, Mueller CG. 1977. Saccadic head movements in mantids. J Comp Physiol ? A 114:115–
+128. doi:10.1007/BF00656812
+
+906
+
+Liske E. 1977. The influence of head position on the flight behaviour of the fly. Calliphora
+
+907
+
+erythrocephala. J Insect Physiol 23:375–379. doi:10.1016/0022-1910(77)90276-1
+
+908
+
+Liske E, Mohren W. 1984. Saccadic head movements of the praying mantis, with particular
+
+909
+
+reference to visual and proprioceptive information. Physiol Entomol 9:29–38.
+
+910
+
+doi:10.1111/j.1365-3032.1984.tb00678.x
+
+911
+
+Liu P, Sane SP, Mongeau J-M, Zhao J, Cheng B. 2019. Flies land upside down on a ceiling using
+
+912
+
+rapid visually mediated rotational maneuvers. Sci Adv 5:eaax1877.
+
+913
+
+doi:10.1126/sciadv.aax1877
+
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+
+Longden KD, Krapp HG. 2009. State-Dependent Performance of Optic-Flow Processing
+Interneurons. J Neurophysiol 102:3606–3618. doi:10.1152/jn.00395.2009
+Maimon G, Straw AD, Dickinson MH. 2010. Active flight increases the gain of visual motion
+processing in Drosophila. Nat Neurosci 13:393–399. doi:10.1038/nn.2492
+Martinez-Conde S, Macknik SL. 2017. Unchanging visions: the effects and limitations of ocular
+stillness. Philos Trans R Soc Lond B Biol Sci 372. doi:10.1098/rstb.2016.0204
+Mongeau J-M, Cheng KY, Aptekar J, Frye MA. 2019. Visuomotor strategies for object approach
+and aversion in Drosophila melanogaster. J Exp Biol 222. doi:10.1242/jeb.193730
+Mongeau JM, Frye MA. 2017. Drosophila Spatiotemporally Integrates Visual Signals to Control
+Saccades. Curr Biol 27:2901-2914.e2. doi:10.1016/j.cub.2017.08.035
+
+924
+
+Muijres FT, Elzinga MJ, Iwasaki NA, Dickinson MH. 2015. Body saccades of Drosophila
+
+925
+
+consist of stereotyped banked turns. J Exp Biol 218:864–75. doi:10.1242/jeb.114280
+
+926
+
+Nalbach G, Hengstenberg R. 1994. The halteres of the blowfly Calliphora II. Three-dimensional
+
+927
+
+organization of compensatory reactions to real and simulated rotations. J Comp Physiol A
+
+928
+
+175:695–708. doi:10.1007/BF00191842
+
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+929
+
+Namiki S, Dickinson MH, Wong AM, Korff W, Card GM. 2018. The functional organization of
+
+930
+
+descending sensory-motor pathways in Drosophila. Elife 7. doi:10.7554/eLife.34272
+
+931
+
+Nath T, Mathis A, Chen AC, Patel A, Bethge M, Mathis MW. 2019. Using DeepLabCut for 3D
+
+932
+
+markerless pose estimation across species and behaviors. Nat Protoc 14:2152–2176.
+
+933
+
+doi:10.1038/s41596-019-0176-0
+
+934
+
+National A, Horridge GA, Hengstenberg R, Sandeman DC, Hengstenberg R. 1986.
+
+935
+
+Compensatory head roll in the blowfly Calliphora during flight . Proc R Soc London Ser B
+
+936
+
+Biol Sci 227:455–482. doi:10.1098/rspb.1986.0034
+
+937
+938
+939
+
+Paulk A, Gilbert C. 2006. Proprioceptive encoding of head position in the black soldier fly,
+Hermetia illucens (L.) (Stratiomyidae). J Exp Biol 209:3913–3924. doi:10.1242/jeb.02438
+Preuss T, Hengstenberg R. 1992. Structure and kinematics of the prosternal organs and their
+
+940
+
+influence on head position in the blowfly Calliphora erythrocephala Meig. J Comp Physiol
+
+941
+
+A 171. doi:10.1007/BF00194581
+
+942
+943
+944
+
+Purves D, Augustine GJ, Fitzpatrick D, Hall WC, LaMantia A-S, McNamara JO, Williams SM.
+2004. Neuroscience, 3rd ed., Neuroscience, 3rd ed.
+Reiser MB, Dickinson MH. 2013. Visual motion speed determines a behavioral switch from
+
+945
+
+forward flight to expansion avoidance in Drosophila. J Exp Biol 216:719–32.
+
+946
+
+doi:10.1242/jeb.074732
+
+947
+948
+949
+950
+951
+
+Reiser MB, Dickinson MH. 2008. A modular display system for insect behavioral neuroscience.
+J Neurosci Methods 167:127–39. doi:10.1016/j.jneumeth.2007.07.019
+Rosner R, Egelhaaf M, Grewe J, Warzecha AK. 2009. Variability of blowfly head optomotor
+responses. J Exp Biol 212:1170–84. doi:10.1242/jeb.027060
+Salem W, Cellini B, Frye MA, Mongeau J-M. 2020. Fly eyes are not still: a motion illusion in
+
+952
+
+Drosophila flight supports parallel visual processing. J Exp Biol 223:jeb212316.
+
+953
+
+doi:10.1242/jeb.212316
+
+954
+955
+956
+957
+958
+959
+
+Schilstra C, van Hateren JH. 1998. Stabilizing gaze in flying blowflies. Nature.
+doi:10.1038/27114
+Serres JR, Viollet S. 2018. Insect-inspired vision for autonomous vehicles. Curr Opin Insect Sci
+30:46–51. doi:10.1016/j.cois.2018.09.005
+Shepheard P. 1974. Control of head movement in the locust, Schistocerca gregaria. J Exp Biol
+60:735–67.
+
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+960
+961
+962
+
+Shepheard P. 1973. Musculature and innervation of the neck of the desert locust, Schistocerca
+gregaria (Forskål). J Morphol 139:439–464. doi:10.1002/jmor.1051390406
+Shin Y, Lim HW, Kang MH, Seong M, Cho H, Kim JH. 2016. Normal range of eye movement
+
+963
+
+and its relationship to age. Acta Ophthalmol. doi:10.1111/j.1755-3768.2016.0499
+
+964
+
+Strausfeld NJ, Seyan HS, Milde JJ, Seyan HS, Strausfeld NJ. 1987. The neck motor system of
+
+965
+
+the fly Calliphora erythrocephala. J Comp Physiol A 160:205–224.
+
+966
+
+doi:10.1007/BF00609728
+
+967
+
+Suver MP, Huda A, Iwasaki N, Safarik S, Dickinson MH. 2016. An Array of Descending Visual
+
+968
+
+Interneurons Encoding Self-Motion in Drosophila. J Neurosci 36:11768–11780.
+
+969
+
+doi:10.1523/JNEUROSCI.2277-16.2016
+
+970
+971
+
+Tammero LF, Dickinson MH. 2002a. The influence of visual landscape on the free flight
+behavior of the fruit fly Drosophila melanogaster. J Exp Biol 205:327–343.
+
+972
+
+Tammero LF, Dickinson MH. 2002b. Collision-avoidance and landing responses are mediated
+
+973
+
+by separate pathways in the fruit fly, Drosophila melanogaster. J Exp Biol 205:2785–2798.
+
+974
+975
+
+Tammero LF, Frye MA, Dickinson MH. 2004. Spatial organization of visuomotor reflexes in
+Drosophila. J Exp Biol 207:113–122. doi:10.1242/jeb.00724
+
+976
+
+van Breugel F, Dickinson MH. 2012. The visual control of landing and obstacle avoidance in the
+
+977
+
+fruit fly Drosophila melanogaster. J Exp Biol 215:1783–1798. doi:10.1242/jeb.066498
+
+978
+
+Van Hateren JH, Schilstra C, Hateren, Schilstra. 1999. Blowfly flight and optic flow. II. Head
+
+979
+980
+981
+
+movements during flight. J Exp Biol 202:1491–1500.
+Varju D, Bolz J. 1980. Head movements of the mealworm beetle Tenebrio molitor. Biol Cybern
+36:109–115. doi:10.1007/BF00361079
+
+982
+
+Wolf R, Heisenberg M. 1980. On the fine structure of yaw torque in visual flight orientation of
+
+983
+
+Drosophila melanogaster. J Comp Physiol A 140:69–80. doi:10.1007/BF00613749
+
+984
+985
+
+34
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+986
+
+FIGURES AND TABLES
+
+987
+988
+
+Figure 1. Experimental paradigm. A) Virtual reality flight arena. Flies were rigidly tethered to
+
+989
+
+a tungsten pin and placed in the center of the arena. Head and wing movements were measured
+
+990
+
+from frames acquired with a high-speed camera (200 fps) placed above the fly. The video frame
+
+991
+
+shows the head orientation (cyan line) and left and right wingbeat amplitudes (red lines). B) An
+
+992
+
+example experimental trial for a 30° spatial wavelength panorama moving at -60°s-1 (see Video 1).
+
+993
+
+The head orientation and velocity are shown, and each saccade is highlighted.
+
+994
+995
+
+Figure 2. Head reset saccades are strongly stereotyped and anti-directional with respect to
+
+996
+
+visual motion. A) Angular position and velocity trajectories of head saccades across different
+
+997
+
+stimulus speeds at 30° spatial wavelength. Saccades were aligned to the peak velocity. Counter-
+
+998
+
+clockwise intervals were inverted and pooled with clockwise intervals. Solid lines: mean. Shaded
+
+999
+
+regions: ±1 standard deviation. Grey lines: individual saccades. B) Comparison of saccade
+
+1000
+
+dynamics and rates across stimulus speeds for 22.5°, 30°, and 60° spatial wavelengths pooled.
+
+1001
+
+Symmetry is the ratio of time-to-peak velocity and saccade duration, so values below 0.5 indicate
+
+1002
+
+the saccades start faster than they end. C) Polar histogram of head angular position at the start
+
+1003
+
+(green) and end (red) of each saccade. D) Relationship between saccade dynamics. r is the
+
+1004
+
+correlation coefficient. Counter-clockwise intervals were inverted and pooled with clockwise
+
+1005
+
+intervals. Moving stimulus: n = 40 flies, N = 15,295 saccades. Static stimulus: n = 8 flies, N = 359
+
+1006
+
+saccades.
+
+1007
+1008
+
+Figure 3. Flies leverage passive elasticity of the neck joint to initiate head reset saccades. A)
+
+1009
+
+Angular position and acceleration of head saccades across different stimulus speeds at 30° spatial
+
+1010
+
+wavelength. Saccades were aligned to the peak velocity. Counter-clockwise intervals were
+
+1011
+
+inverted and pooled with clockwise intervals. Solid colored lines: grand mean. Grey lines:
+
+1012
+
+individual fly means. B) Protocol to study the tuning of the neck joint’s passive response. The
+
+1013
+
+head of an anesthetized fly was displaced to near the edge of its anatomical range then subsequently
+
+1014
+
+released. The resulting response was then measured using custom computer vision tools. C) The
+
+1015
+
+position, velocity, and acceleration response of the head after release. Each response was fit with
+
+1016
+
+a 1st-order exponential to determine the time constant of the decay. Solid lines: mean. Grey lines:
+
+35
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1017
+
+individual trials. D) Comparison of mean passive response (black) with mean head active saccade
+
+1018
+
+trajectory (red) for a 60°s-1 stimulus. For comparison to active saccades, only passive responses
+
+1019
+
+with a starting position of less than 12° were used to compute the mean (black line). E) Comparison
+
+1020
+
+of time constants for passive responses and active saccades. There was no statistically significant
+
+1021
+
+difference in the time constants (t-test, p = 0.3). Passive: n = 6 flies, N = 66 trials. Active: n = 12
+
+1022
+
+flies. N = 3,571 trials.
+
+1023
+1024
+
+Figure 4. Reset saccades enable flies to reduce retinal slip by up to 70% during smooth
+
+1025
+
+intervals. A) Mean angular head position and velocity intervals across stimulus speeds for
+
+1026
+
+clockwise stimulus motion, at 30° spatial wavelength. Counter-clockwise intervals were inverted
+
+1027
+
+and pooled with clockwise intervals. Colored lines change to white after the mean interval time.
+
+1028
+
+Shaded regions:
+
+1029
+
+typical smooth interval where the head rapidly accelerates, reaches peak speed, and then
+
+1030
+
+decelerates to near zero velocity as the head reaches its anatomical limit (saturates). B) Comparison
+
+1031
+
+of smooth head movement interval dynamics across stimulus speeds pooled across spatial
+
+1032
+
+wavelengths. Dynamics were extracted from the mean interval trajectory for each fly at each
+
+1033
+
+stimulus speed. C) Distributions of velocity error (retinal slip) and integrated velocity error across
+
+1034
+
+all intervals for each stimulus speed pooled across spatial wavelengths. D) Probability density
+
+1035
+
+estimate of smooth interval periods. We bounded the y-axis to three seconds because 98% of
+
+1036
+
+smooth head movement intervals fell within this range. E) Mean gain (mean head speed divided
+
+1037
+
+by stimulus speed; solid lines) for all combinations of stimulus speed and wavelength, plotted
+
+1038
+
+against temporal frequency. Shaded regions: ±1 standard deviation. 22.5° spatial wavelength: n =
+
+1039
+
+16 flies, N = 4,409 intervals. 30° spatial wavelength: n = 12 flies, N = 3,571 intervals. 60° spatial
+
+1040
+
+wavelength: n = 12 flies, N = 3,817 saccades.
+
+1 standard deviation. Grey lines: individual intervals. Inset: illustration of a
+
+1041
+1042
+
+Figure 5. Head movements are gated by behavioral state. A) Example trial for -120°s-1 stimulus
+
+1043
+
+motion at 30° spatial wavelength (Video 3). Pink background: flies performing gaze stabilization
+
+1044
+
+via a combination of smooth and saccadic head movements. Grey background: flies initiating a
+
+1045
+
+landing or collision avoidance response, as classified by leg extension (inset). Cyan traces: head
+
+1046
+
+saccades. B) Percent of time flies spent extending their legs vs. stimulus speed. Flies rarely
+
+1047
+
+extended their legs at lower speeds, so the upper and lower boxplot quartiles are equal to the
+
+36
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1048
+
+median (0%). Distributions represent the means for each fly at each stimulus speed. Grey markers:
+
+1049
+
+outliers. C) Distribution of saccades occurring during leg extension divided by the total number of
+
+1050
+
+saccades across all stimulus speeds. D) Distributions of head angular positions and velocities while
+
+1051
+
+stabilizing (no leg movements) and landing (leg extension) across all stimulus speeds. Counter-
+
+1052
+
+clockwise intervals were inverted and pooled with clockwise intervals. t-test, *** = p < 0.001. 30°
+
+1053
+
+spatial wavelength: n = 12, N = 4,091 saccades.
+
+1054
+1055
+
+Figure 6. The head saccade trigger implicates proprioceptive feedback. A) Distribution of
+
+1056
+
+head saccade trigger positions (top, same as Figure 2C) and the corresponding cumulative
+
+1057
+
+distribution function with a sigmoid fit (bottom; see Methods). B) Example trials for sinusoidal
+
+1058
+
+stimulus motion at 1 Hz oscillation frequency with an amplitude of 3.75° (top) and amplitude of
+
+1059
+
+18.75° (bottom). Red dashed lines: range of head movements for each stimulus. C) Distributions
+
+1060
+
+of head angular positions for 1 Hz with 3.75° and 18.75° amplitude sinewave visual stimuli. D)
+
+1061
+
+Correlation between head operating range and saccade rate (r = 0.61, p < 0.001). Each data point
+
+1062
+
+represents an individual fly’s response at a given stimulus amplitude-frequency combination.
+
+1063
+
+3.75°: n = 8 flies, N = 746 saccades. 7.5°: n = 10 flies, N = 602 saccades. 11.25°: n = 11 flies, N =
+
+1064
+
+957 saccades. 15°: n = 10 flies, N = 1,068 saccades. 18.25°: n = 11 flies, N = 1,057 saccades.
+
+1065
+1066
+
+Figure 7. The head and wings switch between smooth and saccadic control simultaneously.
+
+1067
+
+A) Example trial showing the head (blue) and ΔWBA (red) response to a stimulus moving at 30°s-
+
+1068
+
+1
+
+1069
+
+were detected within a 100 ms interval. Grey area: only a head saccade was detected. B) Head
+
+1070
+
+position and velocity aligned to head saccade velocity peak time and ΔWBA position and velocity
+
+1071
+
+aligned relative to the head, such that the true time difference between head and ΔWBA was
+
+1072
+
+maintained. Data for synchronous head-wing saccades (green window) is shown. Inset: relative
+
+1073
+
+difference in the peak times of head and wing saccades. Each ΔWBA trace was normalized to the
+
+1074
+
+mean of the first and last 300 ms. Counterclockwise saccades were inverted and pooled with
+
+1075
+
+clockwise saccades Shaded regions: ±1 standard deviation. C) Same as B) but for saccades
+
+1076
+
+detected during the presentation of a static background. Each ΔWBA trace was normalized to the
+
+1077
+
+mean of the first 300 ms. 30°s-1 background: n = 12 flies, N = 829 head saccades. Static
+
+1078
+
+background: n = 8 flies, N = 359 saccades.
+
+with a 30° spatial wavelength. Saccades are highlighted. Green area: a head and wing saccade
+
+37
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1079
+1080
+
+Figure 8. Proprioceptive feedback influences both head and body saccade initiation. A) The
+
+1081
+
+mean response of the head (blue) and ΔWBA (red) for head-free flies, along with the mean ΔWBA
+
+1082
+
+(black) for head fixed flies, presented with a 30°s-1 stimulus at 30° spatial wavelength. Shaded
+
+1083
+
+regions: ±1 standard deviation. B) The distributions of intra-trial means and standard deviations
+
+1084
+
+for head-free and head-fixed flies. Colors follow same scheme as in A). C) Saccade rates for the
+
+1085
+
+head and wings in head-free flies for a 30°s-1 stimulus as well as wing saccade rates for head-fixed
+
+1086
+
+flies for the same stimulus. Same color scheme as in previous panels. t-test, *** = p < 0.001. Head-
+
+1087
+
+free: n = 12 flies, Head-fixed: n = 12 flies
+
+1088
+1089
+
+Figure 9. Summary of findings. A) Proposed control scheme describing how reset saccades are
+
+1090
+
+triggered. The velocity-based stabilization reflex (low-level) is switched-off by an outer-loop
+
+1091
+
+saccade motor command when a fly senses that its head is oriented near its anatomical limit. The
+
+1092
+
+fly presumably senses its head orientation via a proprioceptive mechanism. The saccade motor
+
+1093
+
+commands result in a rapid reset of head and wing position, leveraging the passive elasticity of the
+
+1094
+
+neck joint. Head orientation feeds back to alter the fly’s perceived visual motion (retinal slip). The
+
+1095
+
+fly continuously monitors retinal slip and is more likely to exit the stabilization reflex via an outer-
+
+1096
+
+loop initiation of landing for higher retinal slip speeds. Landing inhibits the saccade motor
+
+1097
+
+program. B) Using an example flight trial for continuous visual motion, here we show the head
+
+1098
+
+(blue) and wing (red) responses with saccades artificially removed and the smooth intervals
+
+1099
+
+interpolated together (see Methods). The actual head and wing responses are shown for
+
+1100
+
+comparison. Saccades and the corresponding interpolated data are highlighted in grey. The
+
+1101
+
+stimulus is shown for comparison (black).
+
+1102
+1103
+
+38
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1104
+
+Figure 1
+
+1105
+
+1106
+
+39
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1107
+
+Figure 2
+
+1108
+
+1109
+
+40
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1110
+
+Figure 3
+
+1111
+
+1112
+
+41
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1113
+
+Figure 4
+
+1114
+
+1115
+
+42
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1116
+
+Figure 5
+
+1117
+
+1118
+
+43
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1119
+
+Figure 6
+
+1120
+
+1121
+
+44
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1122
+
+Figure 7
+
+1123
+
+1124
+
+45
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1125
+
+Figure 8
+
+1126
+
+1127
+
+46
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1128
+
+Figure 9
+
+1129
+
+1130
+
+47
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1131
+
+Supplementary Materials
+
+1132
+1133
+
+Supplementary Figures
+
+1134
+1135
+
+48
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1136
+1137
+
+49
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1138
+
+Figure Supplement 1. Head saccade detection method. A) Raw head trajectory in response to a
+
+1139
+
+150 °s-1 counterclockwise rotating background at 30° spatial wavelength (left). We estimated the
+
+1140
+
+head’s velocity using the central difference formula (right). B) Low-pass filtered head response.
+
+1141
+
+We detected peaks in the head’s filtered velocity signal using a thresholding algorithm. Pink
+
+1142
+
+markers indicate the peak velocity of putative saccades and the dashed lines represent the detection
+
+1143
+
+thresholds in both directions. C) The raw head response with the true peaks indicated by blue
+
+1144
+
+markers. In order to be considered saccades, velocity spikes had to pass a second threshold
+
+1145
+
+indicated by the blue dashed lines. Green and red markers indicate the start and end of each saccade
+
+1146
+
+respectively. D) The raw head response with all saccades highlighted in distinct colors and the
+
+1147
+
+preceding smooth inter-saccade interval highlighted in a dulled version for the same color. The
+
+1148
+
+black line indicates data that is neither a saccade nor an inter-saccade interval. E) Extracted
+
+1149
+
+saccades and inter-saccade intervals using the same color scheme as D). Saccade were aligned to
+
+1150
+
+their peak time and intervals aligned to their start time. F) The raw head response with saccades
+
+1151
+
+removed and each inter-saccade interval shifted to the head position right before the succeeding
+
+1152
+
+saccade was triggered (left). The grey curve indicates the shifted intervals while the red curve
+
+1153
+
+indicates the interpolated data the replaces each saccade. The original saccades are shown with the
+
+1154
+
+same color scheme as D). The black line overlayed on the raw head velocity (right) is the low-pass
+
+1155
+
+filtered response, demonstrating a quasi-continuous velocity when saccades were removed. G) The
+
+1156
+
+distribution of head velocity data points (left) and filtered velocity data points (right) with the
+
+1157
+
+saccade detection threshold indicates by the dashed lines with the same color scheme as B) and
+
+1158
+
+C).
+
+1159
+1160
+
+50
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1161
+1162
+1163
+
+Figure Supplement 2. Co-directional saccade. Example head trajectory in response to a 30 °s-1
+
+1164
+
+clockwise rotating background at 30° spatial wavelength. Anti-directional (reset) saccades are
+
+1165
+
+highlighted in cyan while the one co-directional saccade is in highlighted red. Co-directional
+
+1166
+
+saccades were rarely observed (making up less than 2% of a saccades) and therefore this trial is
+
+1167
+
+not representative of our data.
+
+1168
+1169
+
+51
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1170
+1171
+1172
+
+Figure Supplement 3. Passive mechanics response, related to Figure 3. The peak velocity (top,
+
+1173
+
+p < 0.001) and fit, first-order order time constant (bottom, p = 0.4) of the head’s free response for
+
+1174
+
+various initial displacements. Green lines indicate the linear best fit. n = 6 flies.
+
+1175
+1176
+
+52
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1177
+1178
+1179
+
+Figure Supplement 4. Head roll during saccades. A) Example head trajectory in response to a
+
+1180
+
+30 °s-1 counterclockwise rotating background at 30° spatial wavelength. Head yaw (blue) smoothly
+
+1181
+
+follows the stimulus and saccades move in the opposite direction. During each clockwise yaw
+
+1182
+
+saccade, the head rolls (purple) counterclockwise. The roll index was estimated using the ratio of
+
+1183
+
+the projected widths of each eye. Inset: example of the head at a large yaw and roll orientation
+
+1184
+
+(dorsal view). Same experimental trial as shown in Video 2. B) The head yaw position and velocity
+
+1185
+
+(blue) aligned to head yaw saccade velocity peak time, and head roll position and velocity (purple)
+
+1186
+
+aligned relative to yaw, such that the true time difference between yaw and roll was maintained.
+
+1187
+
+Stimulus: 30°s-1 rotating background at 30° spatial wavelength. Counterclockwise saccades were
+
+1188
+
+inverted and pooled with clockwise saccades. C) Same as B) but for saccades detected during the
+
+53
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1189
+
+presentation of a static background. Shaded regions: ±1 standard deviation. 30°s-1 background: n
+
+1190
+
+= 5 flies, N = 809 saccades. Static background: n = 8 flies, N = 547 saccades.
+
+1191
+1192
+
+54
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1193
+1194
+1195
+
+Figure Supplement 5. Spontaneous head movements. A) Example head response for a static
+
+1196
+
+background with 30° spatial wavelength. Note the small oscillatory head movements between
+
+1197
+
+saccades. Saccades are highlighted in cyan. B) Same as A) but for a uniform (dark) background.
+
+1198
+
+Note the absence of oscillatory head movements. C) The frequency domain representation of head
+
+1199
+
+(top) and wing (bottom) movements (calculated via a Fast Fourier transform) for flies presented
+
+1200
+
+with gratings of various spatial wavelengths. Grey lines: individual trials. Black curve: mean
+
+55
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1201
+
+response. Shaded area: ± 1 STD. Note the difference in the head response for gratings with salient
+
+1202
+
+visual features and uniform gratings between 11–18 Hz (dashed red lines). D) The distribution of
+
+1203
+
+the amplitude of oscillatory head movements between 11–18 Hz for gratings with salient features
+
+1204
+
+(left) and uniform gratings (right). *** = p < 0.001. E) The distribution of the head saccades rates
+
+1205
+
+for gratings with salient features (left) and uniform gratings (right). n = 8 flies.
+
+1206
+
+56
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1207
+
+57
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1208
+
+Figure Supplement 6. Head operating range, related to Figure 6. A) The distribution of all
+
+1209
+
+head orientations for sinusoidal visual stimulus at distinct amplitude-frequency combinations. The
+
+1210
+
+dashed grey lines indicate the operating range of the head for each distribution, calculated as twice
+
+1211
+
+the mean of the absolute value of all data points. B) The total head orientation distributions
+
+1212
+
+(colored) compared to the distributions of saccade start orientations (black, normalized for
+
+1213
+
+counterclockwise saccades). The p-values comparing the total head distribution to the saccade start
+
+1214
+
+orientations are shown above and the operating range and saccade rate distributions are shown
+
+1215
+
+below. 3.75°: n = 8 flies, N = 746 saccades. 7.5°: n = 10 flies, N = 602 saccades. 11.25°: n = 11
+
+1216
+
+flies, N = 957 saccades. 15°: n = 10 flies, N = 1,068 saccades. 18.25°: n = 11 flies, N = 1,057
+
+1217
+
+saccades.
+
+1218
+1219
+
+58
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1220
+1221
+1222
+
+Figure Supplement 7. Head and wing saccades, related to Figure 7. A) The distribution of the
+
+1223
+
+percent of head saccades that had an identifiable wing saccade within 100 ms for ramp visual
+
+1224
+
+stimulus and for a static background. Ramp: n = 12 flies, N = 829 head saccades. Static
+
+1225
+
+background: n = 8 flies, N = 359 saccades. B) The head and wing response for head saccades that
+
+1226
+
+did not have an identifiable wing saccade within 100 ms for ramp visual stimulus. Note the smaller
+
+1227
+
+amplitude of the wing response, which made detecting these potential saccades highly challenging
+
+1228
+
+without a correspondingly higher false positive rate. Counterclockwise saccades were inverted and
+
+1229
+
+pooled with clockwise saccades. Shaded regions: ±1 standard deviation. n = 12 flies, N = 302 head
+
+1230
+
+saccades.
+
+1231
+1232
+
+59
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1233
+1234
+1235
+
+Figure Supplement 8. Wing orientation at saccade initiation, related to Figure 8. The
+
+1236
+
+distribution of left and right wingbeat amplitudes (left & right respectively; bottom) and ∆WBA
+
+1237
+
+(top) at the start (green) and end (red) of each head saccade. Counter-clockwise saccade ∆WBA
+
+1238
+
+were inverted and pooled with clockwise saccade ∆WBA. Similarly, left- and right-wing WBA
+
+1239
+
+were normalized so that all wing saccades were clockwise. Compared to head start and end
+
+1240
+
+distributions (Figure 2C), there is a significant overlap between the distributions across left, right,
+
+1241
+
+and ∆WBA data. n = 12 flies, N = 829 head saccades.
+
+1242
+1243
+1244
+
+60
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1245
+
+Movie Captions
+
+1246
+1247
+
+Video 1. A real-time experimental trial showing head and wing movements in response to constant
+
+1248
+
+velocity visual motion at -60°s-1 and 30° spatial wavelength (data same as Figure 1C). The captured
+
+1249
+
+video of the fly is shown inside an artificially recreated virtual reality arena (not to scale) with
+
+1250
+
+head and wing tracking overlaid on top of the recorded video. The corresponding motion of the
+
+1251
+
+visual display, head, and ΔWBA are shown to the right, synchronized with the video. The video
+
+1252
+
+was captured at 200 frames per second but subsampled to 50 frames per second for display
+
+1253
+
+purposes.
+
+1254
+1255
+
+Video 2. Illustration of our methods of estimating roll from a top view of a fly.
+
+1256
+1257
+
+Video 3. Passive mechanics experiment. The head is displaced and released, and the corresponding
+
+1258
+
+free response is shown. Shown three times in real time and once slowed down by ~6X.
+
+1259
+1260
+
+Video 4. Same as Video 1 but for 150°s-1 visual motion at 22.5° spatial wavelength.
+
+1261
+1262
+
+Video 5. Same as Video 1 but for a static background at 30° spatial wavelength.
+
+1263
+1264
+
+Video 6. Same as Video 1 but for no spatial features in near-complete darkness (LED lights off).
+
+1265
+1266
+
+Video 7. Same as Video 1 but for 150°s-1 visual motion. Note the extension of the fly’s legs tracked
+
+1267
+
+by markers on the left and right front legs.
+
+1268
+1269
+
+Video 8. Same as Video 1 but for 120°s-1 visual motion. Note the switch from stabilizing head
+
+1270
+
+movements and saccades to a landing response.
+
+1271
+1272
+
+Video 9. Same as Video 1 but for sinewave visual motion at 3.75° amplitude and 2 Hz oscillation
+
+1273
+
+frequency. The stimulus position is also shown on the same axes as head position, indicated by the
+
+1274
+
+green curve.
+
+1275
+
+61
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.12.16.422884; this version posted December 16, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1276
+
+Video 10. Same as Video 1 but for 18.75° amplitude.
+
+1277
+1278
+
+Video 11. Same as Video 1 but for 6.5 Hz oscillation frequency.
+
+1279
+1280
+
+Video 12. Same as Video 1 but for 12 Hz oscillation frequency.
+
+1281
+1282
+
+Video 13. Top: same as Video 1 but for 30°s-1 visual motion. Head and wings are plotted on the
+
+1283
+
+same axes for comparison. Bottom: Same as top, but for a head-fixed fly.
+
+62
+
+

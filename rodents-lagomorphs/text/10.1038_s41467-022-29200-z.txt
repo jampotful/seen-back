@@ -1,0 +1,1431 @@
+Reduced neural activity but improved coding in rodent higher-order visual cortex during locomotion
+Amelia J. Christensen, Jonathan W. Pillow (2022). Nature Communications. https://doi.org/10.1038/s41467-022-29200-z. doi:10.1038/s41467-022-29200-z. Licence: cc-by. Text from pdf.
+
+ARTICLE
+https://doi.org/10.1038/s41467-022-29200-z
+
+OPEN
+
+Reduced neural activity but improved coding in
+rodent higher-order visual cortex during
+locomotion
+1234567890():,;
+
+Amelia J. Christensen1 ✉ & Jonathan W. Pillow
+
+2
+
+Running profoundly alters stimulus-response properties in mouse primary visual cortex (V1),
+but its effect in higher-order visual cortex is under-explored. Here we systematically investigate how visual responses vary with locomotive state across six visual areas and three
+cortical layers using a massive dataset from the Allen Brain Institute. Although previous work
+has shown running speed to be positively correlated with neural activity in V1, here we show
+that the sign of correlations between speed and neural activity varies across extra-striate
+cortex, and is even negative in anterior extra-striate cortex. Nevertheless, across all visual
+cortices, neural responses can be decoded more accurately during running than during stationary periods. We show that this effect is not attributable to changes in population activity
+structure, and propose that it instead arises from an increase in reliability of single-neuron
+responses during locomotion.
+
+1 Department of Neuroscience, Washington University, St. Louis, MO, USA. 2 Princeton Neuroscience Institute & Department of Psychology, Princeton
+University, Princeton, NJ, USA. ✉email: pillow@princeton.edu
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+1
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+T
+
+o understand perception, it is important to study how
+contextual variables (like behavioral state) affect the
+representation of sensory information in neural populations. Locomotion, a highly ethological behavior in rodents, is
+accompanied by pronounced changes in the magnitude and
+consistency of neural responses to visual stimuli1–9. For example,
+in mouse V1, ﬁring rates increase2, response variability
+decreases4,9, noise correlations decrease8, and signal-to-noise
+ratio (SNR) increases8 during bouts of running. These observations have led to a prevalent view in which running acts to
+enhance visual representations both in activity level and coding
+accuracy1–4,8,10. Here we used the Allen Institute Brain
+Observatory11 dataset to quantify how running speed affects
+visual responses in six visual cortical regions, evaluating hundreds
+to thousands of cells in each region and cortical layer. Our results
+highlight a dissociation between changes in activity level and
+coding accuracy in different locomotive states and visual regions.
+Results
+Single neuron running-speed tuning. We evaluated locomotion
+tuning in primary visual cortex (V1), lateral visual cortex (VISl)
+(‘LM’, or secondary visual cortex), posterior medial visual cortex
+(VISpm) (a putative ventral stream region12), anterior lateral
+visual cortex (VISal), anterior medial visual cortex (VISam), and
+
+rostral lateral visual cortex (VISrl) (putative dorsal stream
+regions12), in cortical layers 2/3, 4, and 5 (Fig. 1a). In all regions,
+there existed a diversity of tuning to running speed, including
+neurons whose activity (as measured by normalized Ca2+
+ﬂuorescence) was positively correlated with running, neurons
+whose activity was negatively correlated with running speed, and
+neurons with signiﬁcant but non-monotonic correlation with
+running speed (Fig. 1b). A substantial fraction of neurons in all
+regions and layers were tuned to running speed, however more
+neurons were signiﬁcantly modulated during running when the
+modulation was calculated during stimulus presentation (with all
+stimuli in the allen institute dataset – natural movies, natural
+images, drifting gratings, static gratings, and locally sparse noise –
+included), than when correlation was calculated in the absence of
+a visual stimulus (Fig. 1c, d). This was consistent regardless of
+whether we considered only natural stimuli (natural movies,
+natural images) or artiﬁcial stimuli (drifting gratings, static
+gratings, locally sparse noise) (Supplemental Fig. 1f, g).
+However, surprisingly, we found that in some higher order
+visual cortices (especially VISam, VISpm, and VISrl), increased
+running speed was often correlated with decreased neural activity,
+as indicated by negative average neural correlation coefﬁcients
+(Fig. 1e, f). The transition from net positive correlation to
+running to net negative correlation to running progressed along
+
+b)
+
+a)
+
+d)
+
+c)
+stimulus
+
+example running tuning curves
+.07
+
+spontaneous
+
+.35
+
+100
+
+VISp
+VISam
+
+0
+
+0
+
+20
+
+VISl
+
+VISl
+
+20
+VISal
+
+VISp
+
+VISpm
+
+VISl
+
+0
+
+20
+
+0
+
+.06
+
+.04
+
+0
+
+0
+
+20
+VISrl
+
+VISal
+VISpm
+VISrl
+
+VISam
+
+f)
+
+non-monotonic
+positive corr.
+negative corr.
+
+.8
+.6
+.4
+.2
+0.0
+VISl
+
+VISal
+
+VISpm VISrl
+
+VISam
+
+average correlation between
+
+fraction of cells
+
+1.0
+
+layer 2/3
+
+layer 5
+
+layer 4
+
+0
+
+g)
+
+stimulus
+average correlation between
+
+e)
+
+VISam
+0
+
+20
+
+layer 2/3
+
+0
+
+0
+20
+running speed (cm/s)
+
+percent of cells tuned
+
+0
+0
+.22
+
+0
+
+layer 5
+
+.8
+
+0.2
+
+percent of cells tuned, averaged
+across cortical layers
+
+0.1
+
+100
+
+0.0
+-0.1
+-0.2
+-0.3
+
+VISam
+
+VISrl
+VISp
+
+VISl
+
+VISal VISpm VISrl
+
+VISam
+
+VISal
+
+VISpm
+
+spontaneous
+0.1
+VISl
+
+0.0
+
+VISp
+
+-0.1
+
+percent of cells tuned
+
+VISpm
+
+layer 4
+
+0
+VISal
+
+percent of cells tuned
+
+VISrl
+
+VISp
+
+100
+
+VISp
+
+-0.2
+-0.3
+
+0
+VISp
+
+VISl
+
+VISal VISpm VISrl VISam
+
+Fig. 1 Net correlation between neural activity and locomotion varies widely across different extrastriate regions. a Schematic of regions included in
+study. b Example non-monotonic, monotonically decreasing, and monotonically increasing tuning curves for running speed, top to bottom. Example cells
+are VISp layer 2/3. Error envelope represents standard error margin. c Overall fraction of neurons signiﬁcantly tuned to running in each region and Cre-line,
+calculated during visual stimulus presentation. d Same as (c) except calculated in the absence of visual stimuli. e Fraction of cells displaying different tuning
+types to running speed across the visual regions we examined. f Average correlation coefﬁcient between neural activity and running in each visual region,
+amongst neurons displaying signiﬁcant (p < 0.05) monotonic tuning to running. Error bars are 95% conﬁdence interval for the mean estimate calculated via
+1000 bootstraps. g Visualization of spatial distribution of overall tuning to running in the visual regions. Cell numbers included in each analysis can be
+found in Supplementary Fig. 1. Source data are provided as a Source Data ﬁle.
+2
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+b)
+
+a)
+
+c)
+
+decoder performance:
+all neurons
+p = 7.34e-09, WSR
+
+0.6
+
+stationary score
+
+0.8
+
+0.6
+stationary score
+
+0.8
+
+0.4
+
+0.4
+
+0.2
+
+0.2
+
+0.0
+
+0.0
+
+-0.2
+0.0
+
+0.2
+0.4
+0.6
+running score
+
+0.8
+
+0.6
+0.4
+0.2
+
+0.2
+0.0
+-0.2
+0.0
+
+VISp VISl VISal VISpmVISrl VISam
+g)
+
+0.2
+0.4
+0.6
+running score
+
+0.8
+
+VISp VISl VISal VISpmVISrl VISam
+
+h)
+decoder performance:
+positively tuned neurons removed
+0.6
+
+0.8
+p = 3.74e-08, WSR
+
+0.6
+
+stationary score
+
+stationary score
+
+0.8
+
+0.4
+
+0.6
+0.4
+
+0.4
+0.2
+0.2
+
+0.0
+
+0.0
+0.8
+
+0.4
+
+0.6
+
+0.2
+0.4
+0.0
+0.2
+-0.2
+
+-0.2
+0.2
+0.4
+0.6
+running score
+
+VISpm
+VISp
+
+VISl
+
+0.8
+
+p = 5.72e-08, WSR
+
+0.0
+
+VISam
+
+VISrl
+VISal
+
+p = 2.47e-08, WSR
+
+0.6
+
+decoder performance:
+0.8
+
+d)
+decoder performance:
+positively tuned neurons removed
+
+0.0
+
+f)
+
+e)
+
+VISal
+VISam
+VISl
+VISp
+VISpm
+VISrl
+
+0.0
+VISp VISl VISal VISpmVISrl VISam
+
+0.0
+
+0.2
+0.4
+0.6
+running score
+
+0.8
+
+VISp VISl VISal VISpmVISrl VISam
+
+Fig. 2 Decoding performance (multinomial logistic regression) is improved during running relative to stationary periods, independent of net neural
+tuning or noise correlations. a Average fraction of correctly classiﬁed visual stimuli during running and stationary periods (average over ten 50:50 train/
+test splits). Each data point is an individual experiment. Colors indicate brain region recorded. b Data from (a) displayed separated into visual regions in
+dataset, only including experiments in which the difference between running and stationary periods was signiﬁcant (in either direction). Each dot is an
+individual experiment. c, d Same as (a), (b) but excluding neurons that increase their activity during running. e, f Same as a. but trial-shufﬂed to remove
+noise correlations. g, h Same as a. but excluding neurons that increase their activity during running and trial-shufﬂed to remove noise correlations. Different
+decoders, all layers, and differential effect of pupil diameter and running speed are presented in Supplemental Figs. 4–7. Cell and dataset numbers for each
+region and condition can be found in Supplementary Table 1. All error bars are 95% conﬁdence intervals of mean estimate calculated via 1000 bootstraps.
+Statistics are calculated via Wilcoxon Sign Rank test, two tailed. Source data are provided as a Source Data ﬁle.
+
+the anterior-posterior axis (Fig. 1g). This effect was speciﬁc to
+periods when a stimulus was presented, the sign of the average
+correlation coefﬁcient was more varied (across all regions) when
+no stimulus was present (Fig. 1f). These trends were consistent
+when we separately analyzed data from natural and artiﬁcial
+visual stimuli (Supplementary Fig. 1f, g). Thus, in general,
+anterior extra striate regions had both a higher fraction of cells
+tuned to running, and a higher fraction of cells suppressed by
+running (Fig. 1f, g). When we repeated these analyses using pupil
+diameter as an indicator of the animals behavioral state instead of
+locomotion speed, the results were almost identical (Supplementary Fig. 1d), consistent with the interpretation that both
+locomotion and pupil diameter are indicators of a generally
+aroused state which underlies the neural changes we observe. This
+observed net negative correlation of running with neural activity
+level in anterior extra striate regions is reminiscent of the
+running/activity correlation previously observed in somatosensory and auditory cortices, and differs from that previously
+observed in V1. However, all regions we evaluated (including V1)
+had many cells tuned both positively and negatively to running,
+leading us to question the relationship between visual encoding
+accuracy and the overall sign of population-locomotion
+correlation.
+Population decoding. To investigate this question, we sought to
+test whether, despite the diversity of running evoked changes in
+
+magnitude of neural activity, visual coding ﬁdelity (as assessed by
+decoding performance) was improved in all visual regions8,13.
+To assess decoding performance, we trained a linear classiﬁer
+(multinomial logistic regression) to decode which of 8 different
+drifting gratings were presented to a mouse. Decoding performance was signiﬁcantly higher for responses during running than
+for responses during stationary periods (Fig. 2a). This trend was
+also present in each individual visual region (Fig. 2b), despite the
+fact that in many of these regions, net neural activity decreased
+during periods of locomotion. Indeed, when we excluded from all
+datasets any neurons whose activity increased during locomotion,
+we observed the same improvement of decoding performance
+(Fig. 2c, d). We also performed a control analysis to try to
+separate the inﬂuence of arousal and locomotion, to determine
+whether a large variability in behavioral states underlying the
+“stationary” condition might contribute to poor decoding
+performance (Supplemental Fig. 6). We did not ﬁnd an effect
+of pupil diameter on decoding during the stationary periods.
+However, it is possible that this is due to the relatively small
+number of trials included in this analysis, due to constraints of
+balancing conditions.
+To investigate what changes in neural response statistics (other
+than overall magnitude of response) led to this improvement in
+classiﬁer performance, we analyzed the noise correlations of
+population responses. Previous work has shown that noise
+correlations in V1 decrease during running7,8, and this has been
+proposed to be a primary reason for improved decoding accuracy
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+3
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+population tuning curve
+
+a)
+
+0.2
+
+20.0
+17.5
+
+0.3
+
+0.0
+
+0.2
+0.1
+
+dataset count
+
+−0.2
+
+0.0
+−0.1
+
+−0.4
+
+12.5
+10.0
+
+2.5
+
+−0.6
+0
+
+1
+
+2
+3
+4
+5
+6
+7
+0
+1
+2
+3
+4
+stimulus ID (sorted from lowest to highest average response, per neuron)
+
+c)
+
+7.5
+5.0
+
+−0.2
+−0.3
+
+p = 5e-37
+
+15.0
+
+population tuning curve schematic
+
+5
+
+6
+
+0.0
+
+7
+
+−1.0
+
+−0.8
+
+−0.4
+
+−0.2
+
+0.0
+
+variance of ndividual responses
+
+variance of average responses
+
+reliability:
+
+variance of
+average
+responses
+
+running
+
+average neural activity
+
+−0.6
+
+d)
+
+variance of
+individual
+
+10 −1
+p=2e-8
+
+10 −3
+−4
+10
+
+responses
+
+−3
+10
+
+−1
+−2
+10
+10
+stationary
+
+stationary
+
+average Δf/f (z-score )
+
+0.5
+0.4
+
+b)
+
+negatively correlated cells
+stationary
+running
+
+positively correlated cells
+
+10 −1
+10 −3
+−4
+10
+
+0
+10
+
+−3
+10
+
+−1
+−2
+10
+10
+running
+
+0
+10
+
+stimuli sorted from least to most preferred
+VISam
+
+VISrl
+VISal
+
+VISpm
+
+e)
+VISp
+
+p=7e-8
+
+0.5
+
+g)
+Stationary fraction correct
+
+stationary reliability
+
+0.6
+
+0.4
+0.3
+0.2
+0.1
+0.0
+0.0
+
+f)
+
+0.1
+
+0.2
+0.4
+0.3
+running reliability
+
+0.5
+
+excluding top 25% of changed
+reliability neurons
+
+WSR p = .003
+
+0.8
+
+40
+
+0.6
+
+20
+
+0.4
+
+0
+
+0.2
+
+-20
+-40
+
+0.0
+
+0.6
+
+0.0 0.2 0.4 0.6 0.8 1.0
+Running fraction correct
+
+VISp VISl VISal VISpm VISrl VISam
+
+WSR p = .15
+
+excluding top 50% of changed
+reliability neurons
+
+h)
+Stationary fraction correct
+
+0.3
+change in reliability
+
+1.0
+
+VISl
+
+0.2
+0.1
+0.0
+
+−0.1
+0.0
+
+0.1
+0.2
+0.3
+change in decoding accuracy
+
+0.4
+
+1.0
+
+60
+40
+20
+0
+-20
+-40
+-60
+
+0.8
+0.6
+0.4
+0.2
+0.0
+0.0 0.2 0.4 0.6 0.8 1.0
+Running fraction correct
+
+VISp VISl VISal VISpm VISrl VISam
+
+Fig. 3 Increased reliability accounts for decoding results. a Population tuning curves separately plotted for neurons that have a negative correlation
+coefﬁcient with running speed, and those that have a positive correlation tuning curve. Neural responses were z-scored across all stimuli before being split
+into running and stationary groups, then sorting according to their average response to each stimulus. Dff z-score is averaged across all cells. 2577 cells
+positively correlated, and 3209 negatively correlated cells were included in this analysis, error bars are 95% conﬁdence on the mean estimate determined
+by 1000 bootstraps. b histogram comparing the average change in neural activity for the preferred stimuli, vs. all other stimuli. Percent difference is
+averaged across all cells in a particular imaging dataset before plotting. 39 – mouse datasets were included in this analysis, only cells signiﬁcantly tuned to
+drifting gratings and running speed were included in this analysis, datasets without enough running or stationary periods to calculate tuning were excluded
+(see methods). A positive value corresponds to cases where the average response is higher during running, and a negative value corresponds to cases
+where the average response is lower during running. c Schematic of reliability calculation. d Scatter plots of variance of average responses and variance of
+individual responses—the numerator and denominator of the reliability metric, respectively. Values were averaged over all neurons in each mouse- dataset,
+a total of 61 datasets were included in this analysis. e Reliability as deﬁned in panel “d”, averaged across all neurons per mouse-dataset, in running vs.
+stationary periods. A total of 61 mouse-datasets were included in this analysis. f Correlation between decoding performance and average percent change in
+reliability in each experiment. Error envelope is deﬁned by 1000 bootstrap resamples and reﬁtting of the linear regression line. g Same as 2a, b except
+decoders trained excluding top 25% of cells with the most changed reliability (h). Same as (g) except decoders trained excluding top 50% of cells with the
+most changed reliability. Cell and mouse-dataset numbers as in Fig. 2—Supplementary Table 1. P values are Wilcoxon sign rank test against the null
+hypothesis of equal distribution medians, two tailed. Error bars on histograms are 95% conﬁdence intervals on the mean estimate determined by 1000
+bootstraps. ΔF/F (dff): change in ﬂuorescence over baseline ﬂuorescence. See methods for details. Source data are provided as a Source Data ﬁle.
+
+4
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+during running compared to during stationary periods13.
+Additionally, increased behavioral discrimination performance
+in mice during cholinergic modulation (which is typically present
+during locomotion) has been attributed to de-correlated neural
+activity patterns3. To determine whether decreased noise
+correlations during running epochs were responsible for the
+increases in classiﬁer performance we observed, we compared
+decoder performance on data that were trial shufﬂed. Surprisingly, we found that—although trial shufﬂing slightly reduced the
+size of the improvement in decoding accuracy during running—a
+robust difference in decoder performance between running and
+stationary periods persisted for shufﬂed data (Fig. 2e, f). We were
+nevertheless curious whether a combination of increased response
+levels during running and reduced noise correlations could
+account for the difference in decoding performance, as has been
+previously suggested13. We therefore repeated our decoding
+analysis on a dataset that was trial shufﬂed after removing all
+neurons excited by running; surprisingly, the difference in
+decoding between running and stationary periods was still
+present (Fig. 2g, h). These trends were consistent across multiple
+choices of classiﬁer (Supplementary Figs. 4 and 5).
+Neural encoding reliability. Motivated by these ﬁndings, we
+hypothesized that individual neurons might encode the stimulus
+identity more reliably when the animal was running, even if their
+overall activity did not increase. To assess the relationship
+between stimulus encoding and running-speed correlation, we
+restricted our correlation analysis to the same drifting gratings
+stimulus used for our decoding analysis. We ﬁrst examined the
+distribution of running speed – activity correlations across the
+visual regions, similarly to our analysis from Fig. 1. We observed
+that, although in general drifting gratings responsive neurons
+tend to be more positively correlated with running than drifting
+gratings non-responsive neurons (Supplemental Fig. 8a, b), neurons in all regions showed a diversity of running speed – activity
+correlations. When we examined population tuning curves we
+found that in cells whose overall activity during the drifting
+gratings stimulus set increased when running, the primary effect
+on the population tuning curve was to increase the response to
+the most preferred stimuli (Fig. 3a, left),. In contrast, in cells
+whose overall activity during the drifting gratings stimulus set
+decreased when running, the primary effect on the population
+tuning curve was a decrease in response to the least preferred
+stimuli (Fig. 3a, right). Thus, in tuned cells, even a net neural
+activity decrease during locomotion might increase the signal to
+noise ratio, and thus the decodability of visual stimuli (Fig. 3b). In
+these data a selective reduction in background activity (aka
+activity during the non-preferred stimuli) is the primary cause of
+the overall activity reduction we previously observed, when
+marginalizing across all stimuli (Fig. 3d).
+Indeed, we found that even neurons whose activity did not
+increase during running showed increased ‘reliability’, deﬁned as
+the variance of each neuron’s average response to each image
+divided by the total variance of each neuron’s response10, and this
+improved reliability was correlated with the increased decoding
+performance (Fig. 3e, f). We excluded the top 25% and top 50% of
+neurons whose reliability changed in each separate experimental
+session, and retrained and tested decoders. We found that,
+although the decoders still performed similarly to decoders
+trained with all neurons, with 25% of neurons excluded the
+difference between running and stationary decoding accuracy was
+greatly diminished, and it was abolished when the top 50% of
+neurons with changed reliability were excluded (Fig. 3g, h). Thus,
+unlike previous reports based on data from V1, we found
+increased decoding accuracy correlated with increased ﬁdelity in
+
+ARTICLE
+
+single neuron responses and was not explainable entirely by
+decreased noise correlations or increased overall activity levels.
+Leaky integrate and ﬁre models. Lastly, we sought to investigate
+possible physiological mechanisms underlying the increased
+reliability of single-neuron responses during running. It has been
+previously reported that during periods of locomotion, background membrane voltage ﬂuctuations of neurons in V1
+decrease8,9. We performed simulations of leaky integrate and ﬁre
+neurons (LIF) to determine whether this decreased membrane
+voltage ﬂuctuation could explain the increased reliability in
+neurons whose activity either decreased or did not change during
+running. We added Gaussian noise to the membrane voltage of
+LIF neurons, while driving them with input current corresponding to randomized presentation of 15 different input current levels, corresponding to Gaussian shaped tuning to the 15
+different simulated stimuli (Fig. 4a). As expected, we observed
+that increasing the peak input current increased the neuron’s
+ﬁring rate and its reliability, and that adding noise to the membrane potential also increased the neuron’s ﬁring rate, but
+reduced its reliability (Fig. 4b, Supplemental Fig. 9c). We chose
+two noise levels reﬂective of levels measured in vivo (19 (mV)2
+and 36 (mV)2) for running and stationary epochs respectively4,
+and simulated responses across a range of peak input current
+amplitudes (Fig. 4c). We found a sharp increase in reliability of
+these simulated responses between noise variances of 36 (mV)2
+and 19 (mV)2, implying that neurons had signiﬁcant room to
+decrease or maintain their activity levels while still improving
+reliability (Fig. 4d). In combination with the observation that
+lowered background noise itself can lead to lower ﬁring rates
+without changes the mean synaptic drive to a neuron, our
+simulations explain how a neuron’s activity level could easily be
+reduced by ~50% during locomotion, while its response reliability
+nonetheless increased. There are many important features of
+actual cortical circuits (such as recurrence between visual areas,
+and even the fact that higher order visual areas receive input from
+lower order visual regions, which may already have running speed
+modulated activity), which are not included in these simulations.
+These simulations are intended to show that all else being equal,
+simply the changing background noise can cause all of the effects
+we observe in our data (e.g. would, in the absence of other factors,
+both decrease ﬁring rates and increase response reliability). Further experimentation and physiological measurements will be
+required to establish whether a reduction in membrane voltage
+ﬂuctuations during locomotion explains the enhancement in
+decoding performance we observed, however our simulations are
+consistent with this hypothesis.
+Discussion
+A normative theory that accounts for the enhancement in both
+activity and coding accuracy of visual neurons during locomotion
+proposes that running triggers a visual selective-attention
+mechanism, as vision is the most navigationally-important
+sense for rodents14. This hypothesis is supported by the observation that correlation to running is largely negative in both
+motor and somatosensory cortices15. However, we observed a
+striking diversity in the type of neural activity changes during
+locomotion across different visual cortical regions. Surprisingly,
+neurons in some higher order visual areas were more likely to be
+negatively correlated with running than positively correlated with
+running, in contrast to previous results showing response
+enhancement V1. This negative correlation is not easily reconcilable with theories that explain the running speed modulation in
+V1 simply by enhanced ‘attention’ to vision during running.
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+5
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+input
+current
+
+a)
+300ms
+
+LIF
+25(mV)
+
+nd
+
+ou
+gr
+
+membrane voltage
+
+0
+
+...
+
+...
+
+-20
+-40
+-60
+-80
+
+k
+ac
+
+b
+
+36(mV)
+
+‘running’ - (19mV)
+Vmem variance
+
+0
+-20
+-40
+-60
+-80
+
+e)
+
+‘stationary’ - 36(mV)
+Vmem variance
+
+16
+
+104.32
+
+0.6
+
+83.11
+noise level (mV )
+
+.24
+running
+
+.2
+.16
+
+68.67
+
+0.4
+
+49.49
+
+0.2
+
+32.03
+
+0.0
+
+16.43
+
+-0.2
+
+4.38
+
+-0.4
+.18
+4.5
+
+5.0
+
+3.5
+
+4.0
+
+2.5
+
+0
+3.0
+
+3.5
+2.0
+2.5
+3.0
+average input current (nA)
+
+2.0
+
+.12
+1.5
+
+1.5
+
+0
+-20
+-40
+-60
+-80
+
+d)
+
+c)
+
+stationary
+
+reliability
+
+membrane voltage membrane voltage
+
+b)
+
+rho = -.62
+p = 0.006
+0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+fraction of neurons tuned to running
+
+peak input current (nA)
+
+Fig. 4 LIF model demonstrating how membrane voltage noise can impact neural reliability. a Schematic explaining LIF simulation with additive Gaussian
+noise corresponding to membrane voltage measured during stationary (top) and running (bottom) epochs b Firing rate versus noise level and peak input
+current. c Example of LIF simulations corresponding to running and stationary periods with current injection. d Reliability versus input current for running
+and stationary membrane voltage noise levels. Error envelope standard deviation over 10 independent runs of model simulation. e Correlation between
+fraction of neurons tuned to running in each region and cre-line and the average correlation coefﬁcient to running measured in that region and cre-line.
+Wald test with t distribution statistic, against the null hypothesis the slope is zero, two-sided. 18 data points are presented, one for each region and cre-line
+analyzed. Underlying cell numbers as in Supplementary Fig. 1h, i.
+
+However, despite the trend towards running-induced suppression in higher order visual cortices, running still enhanced
+the representations of visual stimuli, as measured by decoding
+accuracy. This effect was not attributable to noise correlations or
+increased magnitude of neural activity, but instead was explainable by increased reliability of individual neural responses.
+Physiologically, both the decrease in activity we observed, and
+the increase in reliability could result from lower background
+membrane voltage ﬂuctuations during locomotion8. Considering
+that activity in somatosensory and motor cortex are also negatively correlated with running15, it is possible that this negative
+correlation we observe is a more generic cortical phenomenon.
+However, it is also possible that the running induced negative
+correlation to running seen in somatosensory cortex and motor
+cortex15 are mechanistically distinct from what we see in some
+higher order visual cortices, as these regions are likely to be
+spuriously activated by any running related signals, such as
+interoception, whisking, etc. It’s possible the negative correlation
+to running in motor and somatosensory signals instead acts to
+dampen these abundant signals.
+Alternately, given that the correlation with running speed
+seems to be dependent on how strongly a neuron is driven by a
+particular stimulus, it’s possible that as a community we are just
+better at selecting stimuli that speciﬁcally drive V1 neurons than
+almost any other region, and thus V1 is the region in which
+stimulus-gain effects are the most obvious.
+Similarly, our results could be a downstream consequence of a
+difference in distribution of preferred stimuli type across the difference visual regions—as previous authors have noticed that
+neurons with particular tuning preferences (namely those tuned to
+6
+
+high spatial frequencies16) are more likely to be positively correlated with running. This effect has been described as a potential
+rodent analog of spatial attention. However this is unlikely to
+completely explain our results–the published data on spatial frequency selectivity in mouse higher order visual cortex12 does not
+correlate with the distribution of running speed selectivity we have
+observed. For example, in Marshel et al. AL has the lowest spatial
+selectivity, and PM has the highest spatial selectivity, whereas in
+our data AL and PM have relatively similar overall distributions of
+neural correlations with locomotion speed.
+An important caveat to our work is that although we have only
+measured and analyzed Ca2+ ﬂuorescence as a proxy for neural
+activity, many previous theoretical studies on neural tuning, neural
+response gain, and even our own work on neural reliability through
+LIF simulations relied on analyzing neural ﬁring rates. Ca2+ activity
+is a fundamentally different measure of neural activity and in many
+cases only bears a noisy, non-linear relationship to neural ﬁring rates.
+In particular Ca2+ sensors display a non-linear activity/ﬂuorescence
+relationship, with saturation both at high and low ﬁring rates, which
+could potentially impact analysis of neural response reliability, and
+overall correlation to running. In particular, small changes in neural
+activity when ﬁring rates are low can be difﬁcult to detect with
+GCaMP. This could limit our ability to detect decreases in spontaneous activity and decreases in activity evoked in response to presentation of non-preferred stimuli. Further work should be done to
+verify these ﬁndings with electrophysiology.
+In either case, these results highlight previously unknown
+differences in running speed modulation in primary visual cortex
+and posterior and anterior higher order visual cortices and
+highlight important questions for future work.
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+Methods
+Data collection. We analyzed data from the publicly available Allen Institute for
+Brain Science Brain Observatory data set. Their full data collection methodology
+can be found in the white paper11. In brief, transgenic mice expressing GCaMP6f in
+laminar-speciﬁc subsets of cortical pyramidal neurons underwent intrinsic signal
+imaging to map their visual cortical regions before cranial windows were implanted
+above the desired visual region. Mice were habituated to head ﬁxation before
+imaging sessions in which they were shown either a mean luminance blank screen,
+natural scenes, natural movies, locally sparse noise, or drifting or static gratings.
+These data were collected over four different experimental session per mouse, each
+of which lasted ~1 h. Stimulus types were interleaved throughout each session, for
+example in session A mice are presented with 10 min of drifting gratings, followed
+by 10 min of a natural movie, followed by 5 min of a different natural movie,
+followed by another 10 min of drifting gratings, followed by 5 minutes of spontaneous activity (mean luminance blank screen), etc. The full details of each stimulus
+design, and the order in which they were presented is described in the Stimulus Set
+and Response analysis white paper in the Allen Institute documentation (http://
+help.brain-map.org/display/observatory/Documentation?preview=/10616846/
+10813485/VisualCoding_VisualStimuli.pdf).
+Neuropil corrected normalized ﬂuorescence change (ΔF/F) traces for each cell
+were extracted using automated, structural ROI based-methods (See Allen Institute
+white paper for details). ΔF/F was calculated using a rolling-window baseline
+method. The baseline was calculated as a windowed mean of the windowed mode.
+The mode kernel width is 5400 frames (3 min), and the mean kernel width is 3000
+frames (1.667 min). The raw, neuropil-corrected ﬂuorescence was then baselinesubtracted and baseline-normalized. Eye movements, pupil area and locomotion
+speed were recorded for some experiments, here we only analyzed experiments for
+which pupil area was available. We analyzed data from the Cux2-Cre-ERT2 (layer
+2/3), rbp4-Cre (layer 5), and Rorb-Ires-Cre (layer 4) mice, as data from these
+transgenic lines were available for all regions in the data set.
+Running speed tuning. For our analyses of running speed tuning, we selected mice
+who ran for at least one quarter of the stimulus presentation period (to ensure
+enough data-points to accurately calculate tuning). We also excluded mice whose
+maximum running speed was less than 15 cm per second, to ensure enough of a
+range of running speeds were present to accurately assess correlations. We estimated running-speed tuning curves by ﬁrst binning data into 20 equal-sized bins
+(i.e., 20 quantiles) of running speed, ranging from zero to the maximum speed
+attained by each mouse, and taking the mean neural activity in each bin, effectively
+creating a non-parametric ‘tuning curve’ to running. To determine whether a
+neuron’s activity was signiﬁcantly modulated by running, we compared the neuron’s running-speed tuning curve to a running-speed tuning curve computed from
+randomly permuted data using Levene’s t test of variance; we considered a neuron
+tuned if its non-shufﬂed tuning curve had signiﬁcantly more variance than it’s
+shufﬂed tuning curve5. We calculated Spearman’s rho on the binned data, to
+determine whether each neuron was monotonically tuned to running. We considered neuron with a statistically signiﬁcantly negative rho to be negatively correlated with running, and a statistically signiﬁcantly positive rho to be positively
+correlated with running. Neurons whose activity were not statistically signiﬁcant
+monotonically correlated to running speed, but that had passed levene’s t test of
+variance were considered “non-monotonically” tuned to running. We used an
+alpha-level of p = 0.05 for our estimate of signiﬁcant tuning. We calculated this
+tuning both separately for natural (natural scenes and natural movies), artiﬁcial
+(drifting gratings, static gratings, and noise stimuli), and spontaneous activity. We
+found that tuning was similar across natural and artiﬁcial stimulus conditions, and
+therefore grouped them together in the main text (but see Supplemental Fig. 1).
+Note, during the presentation of some stimuli there were blank periods in between
+subsequent stimuli presentations, e.g. between presentation of different orientations of drifting gratings. These data were discarded for this analysis, and were not
+considered as part of either the spontaneous or stimulus datasets. When we refer to
+“spontaneous” periods, we are referring to the 10 min blocks of mean luminance
+blank screens during each experimental session (a total of 30 minutes of data for
+each mouse).
+Gaussian tuning model. As in Saleem et al.5 three different Gaussian models were
+ﬁt to the neural tuning curves. The models were differentiated by constraints on the
+locations of the center parameter. The ﬁrst model was a monotonically increasing
+model where we constrained the center of the Gaussian to fall higher than the
+highest running speed, the second model was a monotonically decreasing model
+where we constrained the center of the Gaussian to fall lower than the lowest
+running speed, and the third model was one where the center was allowed to fall
+within the highest and lowest values. We determined which model ﬁt the data best
+10 repetitions of a cross validation procedure where we split the data into 75%
+training, 25% test set before creating the tuning curves that we ﬁt the models to.
+Drifting gratings analysis. Drifting grating selectivity indices were obtained via
+the AllenSDK. Again, the full details of the calculations performed by the Allen
+institute can be found here: http://help.brain-map.org/display/observatory/
+Documentation?preview=/10616846/10813485/VisualCoding_VisualStimuli.pdf.
+
+Neurons were classiﬁed as signiﬁcantly responsive to drifting gratings if a one-way
+anova between all responses obtained during all the different stimulus conditions
+(different grating direction and temporal frequencies) was less than 0.05. Drifting
+grating selectivity index was deﬁned as (Rpreferred − Rnull) / (Rpreferred + Rnull) where
+Rpreferred is the average neural response to the stimulus that neuron responded the
+most to, and Rnull is the average neural response to the stimulus orthogonal to the
+preferred stimulus.
+Decoding analysis. We performed all decoding analyses on the Drifting Gratings
+dataset from the Allen Institute Brain Observatory. Details of this dataset can be
+found in their white paper11, but brieﬂy: each mouse was presented with 75
+repetitions of 8 drifting gratings of different directions, for 2 s per presentation,
+with a 1 s blank period in between stimuli. Each grating presentation had a spatial
+frequency of 0.04 cpd and a temporal frequency randomly selected from a set of 5
+different temporal frequencies. We performed decoding of grating direction while
+ignoring temporal frequency. For the purposes of the decoding analysis, we
+excluded individual experiments in which fewer than 10 neurons were recorded—
+this exclusion criteria mainly applied to lower levels of VISrl in the analyses when
+considering all neurons except those with positive tuning to running. Note that
+decoding analyses included data from additional mice that were excluded from the
+speed tuning curve analyses (due to insufﬁcient time spent running). Decoding
+analyses that excluded neurons with positive tuning to running, however, only
+included data from the subset of mice whose tuning curves had been well
+characterized.
+To perform decoding, we extracted a vector of neural population activity for
+each trial by normalized averaging ﬂuorescence (ΔF/F) over a 2 s window that was
+offset by 330 ms (10 imaging frames) from the beginning of stimulus presentation.
+This time window was chosen by selecting the window that maximized the R2
+prediction performance of held out trials from the PSTH. To compare decoding
+during running vs. during stationary periods, we split the data into “running trials”
+(trials with average velocity > 3 cm/s, but whose minimum velocity did not drop
+below 0.5 cm/s) and “stationary trials” (trials with average speed < 0.5 cm/s but
+whose maximum speed did not exceed 3 cm/s). We randomly sub-sampled the data
+to ensure equal number of trials per visual stimulus class in both running and nonrunning subsets. For the data presented in the main paper, we performed decoding
+of neural responses using an 8-way multinomial logistic regression (MLR)
+classiﬁer, as implemented in the scikit-learn17 python package. Classiﬁer weights
+were learned via the LBFGS algorithm, and no regularization was applied. Classiﬁer
+performance was assessed via a cross-validation procedure: fraction of correctly
+labeled stimuli on a test set comprising 50% of the data was averaged over 10
+random (class balanced) train-test splits. For shufﬂing analyses, we randomly
+permuted each neuron’s responses across trials (within the same class) so that
+population response vectors contained non-simultaneous responses, breaking trial
+to trial correlations between simultaneously recorded neurons. In the ﬁgures,
+decoders were both trained and tested on shufﬂed data, although in separate
+analysis we either only tested or only trained on the shufﬂed data, without
+signiﬁcantly different results. The main results are consistent across different
+decoder types, with results obtained with Gaussian Naïve Bayes and Multi-Class
+Support Vector machines (evaluated in a one-vs-rest scheme) are presented in the
+Supplemental Materials.
+We assessed each cell’s reliability, deﬁned as the variance of the average ΔF/F
+response across different stimuli divided by the total variance across responses to
+all stimuli10. Thus, if a cell has high variance of response across all stimuli (e.g. a
+greater dynamic range in its responses to different stimuli types), with low trial to
+trial noise, it is considered to be extremely reliable – thus, a single measurement of
+that neuron’s response contains a large amount of information about stimulus
+identity.
+Leaky integrate and ﬁre simulations. To examine the possible effects of membrane voltage ﬂuctuation on response reliability, we performed simulations of leaky
+integrate and ﬁre neurons, using Euler’s method. Membrane voltage was initialized
+to 70 mV, and then integrated over time according to the following differential
+equation:
+ 
+
+dV
+Cm
+ð1Þ
+þ gl V  El ¼ Iapp
+dt
+If V > Vthresh ; V ¼ El
+
+ð2Þ
+
+Cm : membrane capacitance
+gl : leak conductance
+El : resting membrane potential
+Iapp : applied current
+Vthresh : Threshold voltage
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+7
+
+ARTICLE
+
+NATURE COMMUNICATIONS | https://doi.org/10.1038/s41467-022-29200-z
+
+The following parameters were used Vthresh: −49 mV, Vinit: −70 mV,
+integration time step = 0.05 ms, Cm = 490 pF, gl = 16 pS, El = −65 mV. For
+Supplementary Fig. 7, we did an additional simulation with resting membrane
+potential (El) of 68 mV and 70 mV for running and stationary periods respectively,
+to match the resting membrane potentials measured in vivo4,9.
+We created a Gaussian shaped tuning curve across 15 different stimuli to deﬁne
+the input current generated by each stimulus (as illustrated in Fig. 4). We simulated
+different levels of membrane voltage ﬂuctuation by adding independent Gaussian
+noise to membrane voltage at each time step. Noise variance levels of 19 mV2 and
+36 mV2 were empirically determined to match values recorded in vivo for running
+and stationary animals. We simulated presenting 300 ms trials of each stimulus 10
+times in a randomized order, and calculated reliability in the same fashion as
+described above.
+Reporting summary. Further information on research design is available in the Nature
+Research Reporting Summary linked to this article.
+
+Data availability
+Data is freely available through the Allen Institute Brain Observatory11. Source data and
+minimal plotting code to recreate the ﬁgures are included with this paper.
+
+Code availability
+Code to reproduce all ﬁgures is freely available on the authors github repository
+github.com/achristensen56/AIBSmouselocomotion.
+
+Received: 14 November 2017; Accepted: 4 March 2022;
+
+12. Marshel, J. H., Garrett, M. E., Nauhaus, I. & Callaway, E. M. Functional
+specialization of seven mouse visual cortical areas. Neuron 72, 1040–1054
+(2011).
+13. Dadarlat, M. C. & Stryker, M. P. Locomotion Enhances Neural Encoding of
+Visual Stimuli in Mouse V1. J. Neurosci. 37, 3764–3775 (2017).
+14. Huberman, A. D. & Niell, C. M. What can mice tell us about how vision
+works? Trends Neurosci. 34, 464–473 (2011).
+15. Fisher, S. P. et al. Stereotypic wheel running decreases cortical activity in mice.
+Nat. Commun. 7, 13138 (2016).
+16. Mineault, P. J., Tring, E., Trachtenberg, J. T. & Ringach, D. L. Enhanced
+spatial resolution during locomotion and heightened attention in mouse
+primary visual cortex. J. Neurosci. 36, 6382–6392 (2016).
+17. Pedregosa, F. et al. Scikit-learn: machine learning in python. J. Mach. Learn.
+Res. 12, 2825–2830 (2011).
+
+Acknowledgements
+A.J.C. was supported by a Texas Instruments Stanford Graduate Fellowship; J.W.P. was
+supported by grants from the McKnight Foundation, Simons Collaboration on the
+Global Brain (SCGB AWD1004351) and the NSF CAREER Award (IIS-1150186).
+
+Author contributions
+A.J.C. and J.W.P. conceived the study, A.J.C. performed the analyses, and A.J.C. and
+J.W.P. wrote the manuscript.
+
+Competing interests
+The authors declare no competing interests.
+
+Additional information
+Supplementary information The online version contains supplementary material
+available at https://doi.org/10.1038/s41467-022-29200-z.
+
+References
+1.
+
+Fu, Y. et al. A cortical circuit for gain control by behavioral state. Cell 156,
+1139–1152 (2014).
+2. Niell, C. M. & Stryker, M. P. Modulation of visual responses by behavioral
+state in mouse visual cortex. Neuron 65, 472–479 (2010).
+3. Pinto, L. et al. Fast modulation of visual perception by basal forbrain
+cholinergic neurons. Nature 16, 1857–1863 (2013).
+4. Bennett, C., Arroyo, S. & Hestrin, S. Subthreshold mechanisms underlying
+state-dependent modulation of visual responses. Neuron 80, 350–357 (2013).
+5. Saleem, A. et al. Integration of visual motion and locomotion in mouse visual
+cortex. Nat. Neurosci. 16, 1864–1869 (2013).
+6. Ayaz, A., Saleem, A. B., Schölvinck, M. L. & Carandini, M. Locomotion
+controls spatial integration in mouse visual cortex. Curr. Biol. 23, 890–894
+(2013).
+7. Dipoppa, M. et al. Vision and locomotion shape the interaction between
+neuron types in mouse visual cortex. Neuron 98, 602–615 (2018).
+8. Vinck, M., BatistaBrito, R., Knoblich, U. & Cardin, J. A. Arousal and
+locomotion make distinct contributions to cortical activity patterns and visual
+encoding. Neuron 86, 740–754 (2015).
+9. Polack, P. O., Friedman, J. & Golshani, P. Cellular mechanisms of brain-statedependent gain modulation in visual cortex. Nat. Neurosci. 16, 1331–1339
+(2013).
+10. Froudarakis, E. et al. Population code in mouse V1 facilitates read-out of
+natural scenes through increased sparseness. Nat. Neurosci. 17, 851–857
+(2014).
+11. de Vries, S. E. J. et al. A large-scale standardized physiological survey reveals
+functional organization of the mouse visual cortex. Nat. Neurosci. 23, 138–151
+(2020).
+
+8
+
+Correspondence and requests for materials should be addressed to Amelia J.
+Christensen.
+Peer review information Nature Communications thanks Dario Ringach and the other,
+anonymous, reviewer(s) for their contribution to the peer review of this work. Peer
+reviewer reports are available.
+Reprints and permission information is available at http://www.nature.com/reprints
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in
+published maps and institutional afﬁliations.
+
+Open Access This article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as long as you give
+appropriate credit to the original author(s) and the source, provide a link to the Creative
+Commons license, and indicate if changes were made. The images or other third party
+material in this article are included in the article’s Creative Commons license, unless
+indicated otherwise in a credit line to the material. If material is not included in the
+article’s Creative Commons license and your intended use is not permitted by statutory
+regulation or exceeds the permitted use, you will need to obtain permission directly from
+the copyright holder. To view a copy of this license, visit http://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2022
+
+NATURE COMMUNICATIONS | (2022)13:1676 | https://doi.org/10.1038/s41467-022-29200-z | www.nature.com/naturecommunications
+
+

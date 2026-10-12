@@ -1,0 +1,1133 @@
+Rail Vehicle Localization and Mapping With LiDAR-Vision-Inertial-GNSS Fusion
+Yusheng Wang, Weiwei Song, Yidong Lou, Yi Zhang, Fei Huang, Zhiyong Tu, Qiangsheng Liang (2022). IEEE Robotics and Automation Letters. http://arxiv.org/abs/2112.08563. doi:10.1109/lra.2022.3190093. Licence: public-domain. Text from pdf.
+
+1
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+
+Rail Vehicle Localization and Mapping with
+LiDAR-Vision-Inertial-GNSS Fusion
+Yusheng Wang, Graduate Student Member, IEEE, Weiwei Song, Yidong Lou, Yi Zhang, Fei Huang,
+Zhiyong Tu, and Qiangsheng Liang
+Abstract—In this paper, we present a global navigation satellite
+system (GNSS) aided LiDAR-visual-inertial scheme, RailLoMerV, for accurate and robust rail vehicle localization and mapping.
+RailLoMer-V is formulated atop a factor graph and consists of two
+subsystems: an odometer assisted LiDAR-inertial system (OLIS)
+and an odometer integrated Visual-inertial system (OVIS). Both
+the subsystem exploits the typical geometry structure on the
+railroads. The plane constraints from extracted rail tracks are
+used to complement the rotation and vertical errors in OLIS.
+Besides, the line features and vanishing points are leveraged to
+constrain rotation drifts in OVIS. The proposed framework is
+extensively evaluated on datasets over 800 km, gathered for more
+than a year on both general-speed and high-speed railways, day
+and night. Taking advantage of the tightly-coupled integration of
+all measurements from individual sensors, our framework is
+accurate to long-during tasks and robust enough to grievously
+degenerated scenarios (railway tunnels). In addition, the real-time
+performance can be achieved with an onboard computer.
+
+(a)
+
+RailLoMer-V system
+
+(b)
+
+(c)
+
+(d)
+
+(e)
+
+Index Terms—train, multi-sensor, localization and mapping,
+
+I. INTRODUCTION
+
+P
+
+RECISE rail vehicle localization and long-term railroad
+environment monitoring is of critical importance for
+safety operation on railway. The current positioning
+strategy is still dominated by trackside systems, which not only
+lack efficiency and accuracy for real-time applications, but also
+require large civil investment for construction and successive
+maintenance. In addition, the power supply of typical section
+needs to be cut off for infrastructure maintenance, and the
+trackside systems work not properly for high-speed railway
+maintenance vehicles.
+Recent advances in sensor technology and railway signal
+standardization have prompted research of onboard sensors.
+With the flexibility of installation and accurate positioning in
+open districts, the global navigation satellite system (GNSS)
+have attracted many researchers. Besides, the track geometry,
+IMU, odometer can supplement the system at GNSS outages.
+However, these approaches merely acquire the train state data
+without consideration of the environmental information. To
+cope with this problem, integration with perception sensors, is
+also required, and many previous works have employed mobile
+mapping system (MMS). As a direct-georeferencing method,
+
+Fig. 1. Overview of the proposed RailLoMer-V system. (a) is
+an example of maintenance vehicle equipped with RailLoMerV system. (b) and (c) denotes two typical environments, with
+(b) the day view of general-speed railway and (c) is the night
+view of high-speed railway tunnel. (d) and (e) is the respective
+colored-mapping and LiDAR mapping result of (b) and (c).
+MMS-based solution requires a series of post processing and
+survey-grade instruments. Therefore, they are not satisfactory
+for real-time rail vehicle location and large deployment.
+Different from commonly used unmanned aerial vehicles
+(UAV) and unmanned ground vehicles (UGV), researchers are
+pretty open in choosing localization sensors and computation
+units for rail applications. With the framework of estimating
+train state and mapping the surrounding in the meantime,
+simultaneously localization and mapping (SLAM) is a
+promising approach towards rail vehicle localization and
+environment monitoring problems. However, a number of
+difficulties affect the application of SLAM on rail vehicles.
+
+2
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+1)
+Long-Time Constrained Motions: the rail vehicles are
+constrained to move along planar trajectories, leading to
+spurious information gain to the unobservable directions for
+IMU biases. This potential observability issue will result in
+large scale drift for many Visual-inertial approaches.
+2)
+Repetitive Features: shown in Fig. 1 (b) and (c), the
+mainly observable features are the repetitive rail tracks and
+suspension clamps, which is challenging for feature tracking
+based methods.
+3)
+No Revisited Places: many SLAM approaches employ
+the place descriptor to detect revisited places, and correct the
+accumulated drifts atop the detected loops. However, there are
+no revisited places for trains, which put forward higher
+requirements for low drift pose estimation.
+To tackle these challenges, we propose RailLoMer-V, an
+accurate and robust system for rail vehicle localization and
+mapping. RailLoMer-V fuses multi-modal information with a
+tightly-coupled manner. Our design of RailLoMer presents the
+following contributions:
+1) We propose a framework that tightly fuses LiDAR, IMU,
+rail vehicle wheel odometer, camera, and GNSS through
+sliding window based factor graph formulation.
+2) We fully leverage the geometric information of sensor
+measurements, where plane constraints from extracted
+rail tracks and vanishing point are utilized to increase
+system accuracy and robustness.
+3) Our framework is evaluated with data gathered over a year,
+covering various scales, weathers, and railways.
+To the best of the authors’ knowledge, RailLoMer-V is the
+first solution to real-time and large-scale rail vehicle SLAM.
+Some of the mapping results are shown in Fig. 1, denoting the
+capability of handling diverse railroad scenarios.
+II. RELATED WORK
+Prior works on train localization methods and LiDAR-visualinertial SLAM are extensive. In this section, we briefly review
+works on train localization and LiDAR-visual-inertial SLAM.
+A. Train Positioning Solutions
+The most common train positioning system is based on
+trackside sensors, such as a Balise [1], [2]. This system divides
+the railroad into individual blocks, where a Balise is placed at
+the beginning of each block. When a train passes over it, the
+Automatic Train Control (ATC) system detects and locates that
+a train is within that block. Considering its large capital
+investment and low localization efficiency, many researchers
+seek to supplement the limitations with either onboard sensors
+or feature matching based methods.
+The onboard sensors include radio frequency identification
+(RFID) [3], Doppler radar [4], GNSS receivers [5], IMU [6],
+and the tachometer or odometer [7]. The feature-matching
+methods first establish the feature database, then the real-time
+positions can be acquired through matching with the database.
+Such database consists of track signature, digital track line, or
+laser scan features [8].
+
+The potential of SLAM for rail vehicles localization and
+mapping has not been well investigated. One of the early works,
+RailSLAM, jointly estimated the train state and validated the
+correctness of initial track map based on a general Bayesian
+theory [9]. The performance of Visual-inertial odometry on rail
+vehicles have been extensively evaluated in [10], [11],
+indicating that the Visual-inertial odometry is not reliable for
+railroad applications. But the LiDAR-visual-inertial based
+SLAM is still an open problem for railway applications.
+B. LiDAR-Visual-Inertial SLAM
+To increase system robustness against sensor failures, fusion
+of multi-modal sensing capabilities has been explored in many
+scholarly works. These schemes can be categorized into either
+loosely-coupled [12], [13] or tightly-coupled approaches [14]–
+[16]. And the geometric structures can be employed to further
+avoid degeneracy at self-repetitive districts. Huang et.al. extract
+point and line features from images, and use LiDAR to assign
+depth information as well as scale correction [17]. Compared
+with point-only approaches, their method greatly reduces the
+feature ambiguity and achieves accurate estimation accuracy.
+The detected line segments can be also used to find vanishing
+point [18] for additional rotation constraint. Wisth et.al.
+propose to utilize line and planar primitives from LiDAR and
+track them over multiple scans [19]. The lightweight expression
+of the features allows for real-time execution on limited
+computation resource.
+From the discussion of the literature, we can see that the rail
+vehicle SLAM has not been well solved and evaluated. And this
+paper seeks to achieve real-time, low-drift and robust odometry
+and mapping for large-scale railroad environments with
+geometric structure assisted LiDAR-visual-inertial SLAM.
+III. PROBLEM STATEMENT
+We seek to estimate the trajectory and map the surrounding of a
+rail vehicle with multi-sensor measurements, in which the state
+estimation procedure can be formulated as a maximum-a-posterior
+(MAP) problem.
+We denote ∙ , ∙ , ∙ and ∙ as the world, body,
+camera and odometer frame. In addition, we define ∙ as the
+transform from world frame to the IMU frame. We use both
+rotation matrix and quaternion to represent rotation. Besides,
+we denote ⊗ as the multiplication between two quaternions. ∙̂
+is denoted as the estimation of a certain quantity.
+A. State Definition
+The train state at time
+=
+
+is defined as follows:
+
+, ,
+
+,
+
+,
+
+,
+
+1
+
+where ∈ ℝ , ∈ ℝ , and ∈ SO 3 are the position, linear
+velocity, and orientation vector.
+and
+are the usual IMU
+gyroscope and accelerometer biases. And is the scale factor
+of the odometer.
+
+1
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+
+Fig. 2. The system framework of our approach, with the graph structure illustrated in the dashed box. Given the input LiDAR point
+cloud and monocular image, we extract the point, line, and vanishing point for each image, and track image frames with scale
+corrected by assigned depth information. Besides, the rail tracks are detected and extracted, with the rail track planes as plane
+constraints. All the measurements are jointly optimized with a sliding window based graph formulation.
+
+B. Maximum-a-Posterior Problem
+Given the measurements !" and the history of states #" , the
+MAP problem can be formulated as:
+#"∗ = argmax + #" |!" ∝ + #. +/ !" |#" 0
+
+2
+
+#*
+
+If the measurements are conditionally independent, then (2)
+can be solved through least squares minimization:
+"
+
+# = argmin 4 4‖6
+∗
+
+#*
+
+89
+
+‖7
+
+3
+
+where 6 is the residual of the error between the predicted and
+measured value.
+
+C. Sliding Window Based Optimization
+To ensure the real-time performance of the optimization
+scheme, we exploit keyframes to establish sliding windows. For
+a sliding window of :; keyframes, the optimal states are
+obtained through minimizing:
+7
+
+DE
+
+7
+
+DℒE
+
+DC E
+
+89
+
+89
+DIE
+
+7
+
+min<=6> = ? 4=6ℐA = ? 4 6ℒA ? 4=6CA = ?
+#
+
+DℳE
+
+7
+
+89
+
+DGE
+
+7
+
+DHE
+
+7
+
+7
+
+4 =6ℳA = ? 4=6GA = ? 4=6HA = ? 4=6IA = J
+89
+
+89
+
+89
+
+89
+
+4
+
+where 6> is the prior factor marginalized by Schur-complement
+[20], 6ℐA is the residual of IMU/odometer preintegration result.
+6ℒA and 6CA define the residual of LiDAR and plane constraints.
+6ℳA , 6GA , and 6HA denote the residual of reprojection, line
+segment, and vanishing point terms. The residual of global
+positioning system is 6IA .
+IV. METHODOLOGY
+The system overview and the constructed graph is shown in
+Fig. 2, we now describe the measurements and residuals of the
+factors in detail.
+
+A. IMU/Odometer Preintegration Factor
+The raw accelerometer and gyroscope measurements, LM and
+O , are given by:
+N
+LM" = L" ?
+
+*
+
+P ?
+
+*
+
+?Q ,
+
+O " = N" ?
+N
+
+R* ? QR
+
+5
+
+] *M =
+
+? Q^ _
+
+6
+
+?Q c
+
+7
+
+where Q and QR are the zero-mean white Gaussian noise, with
+Q ∼ U V, W7 , QR ∼ U V, W7R . The gravity vector in the
+world frame is denoted as P = X0,0, Z[\ . And the model of
+odometer sensor is given by:
+where ] * denotes the scale factor of the odometer modeled as
+random walk, with Q^_ ∼ U V, W7^_ . Then the pose estimation
+can be achieved through synchronously collected gyroscope
+and odometer output, and the displacement within two
+consecutive frames k and k+1 can be given as:
+
+O *ab
+=
+*
+
+*ab
+*
+
+where Q c is also the zero-mean white Gaussian noise. Based
+thereupon and the preintegration form in [20], we can formulate
+the discrete form of preintegrated IMU/odometer information
+h * ,i
+h * k as:
+O * ,g
+O * ,j
+between k and k+1 ef
+Aab
+
+Aab
+
+Aab
+
+Aab
+
+1
+h *l ? m i
+O *Aab = f
+O *A ? g
+O *A LM n o
+f
+A
+2
+h * =g
+h * ?m i
+O *A LM n o
+g
+Aab
+A
+
+A
+
+l
+
+1
+O *Aab = i
+O *A ⊗ p1
+i
+q
+O n o RA l
+N
+2
+
+h * =j
+h * ? m ri
+h A ]M A M A l
+O *A s m
+j
+Aab
+A
+A
+
+A
+
+l 7
+
+8
+
+Finally, the residual of preintegrated IMU/odometer data
+
+elf **ab lg **ab lu **ab l
+
+l
+
+\
+
+lj **ab l] k is given as:
+
+2
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+
+⎡
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎣
+
+*
+
+h * ,w =
+6ℐ v
+*ab
+
+1
+O **ab ⎤
+? P ∆ "7 n * ∆ " } n f
+2
+⎥
+*
+h *
+/ *ab ? P ∆ " n * 0 n g
+⎥
+*ab
+⎥
+•9
+•9
+O **ab s €
+2 ~/ * 0 ⊗ / *ab 0 ⊗ ri
+⎥
+7:‚
+⎥
+n *
+*ab
+⎥
+n *
+⎥
+*ab
+⎥
+*ab
+*
+*
+h
+r *ab n * ? *ab *ab s n j *ab
+⎥
+⎦
+] *ab n ] *
+
+{
+
+*ab
+
+n
+
+*
+
+9
+
+where X∙[7:‚ is used to take out the last four elements from a
+is the displacement between odometer and
+quaternion. *ab
+*ab
+the IMU measured by a total station.
+
+B. LiDAR-Related Factors
+Since the range measuring error in the axial direction is large
+for short-distance, we first remove the too close points from
+LiDAR. Then we apply the IMU/odometer increment model to
+correct LiDAR point motion distortion with linear interpolation.
+We follow the work of [21] to extract two sets of feature
+points from denoised and distortion-free point cloud. The edge
+features ‡ are selected with high curvature and the planar
+features ˆ are with low curvature. Then we take the fused
+feature points to perform scan registration with the edge and
+planar patch correspondence computed through point-to-line
+and point-to-plane distances:
+‰ℰ* =
+‰•* =
+
+‹/ " n Œ9Ž 0 × / " n Œ7Ž 0‹
+•
+
+’
+
+•
+•
+‹Œ9Ž n Œ7Ž ‹
+
+•
+
+10
+
+/ " n ‘9Ž 0 r/‘9Ž n ‘7Ž 0 × /‘9Ž n ‘“Ž 0s
+•
+
+•
+
+•
+
+•
+
+‹/‘9Ž n ‘7Ž 0 × /‘9Ž n ‘“Ž 0‹
+•
+
+•
+
+•
+
+•
+
+•
+
+11
+
+here " represents the scan point in the global frame.
+•
+•
+•
+•
+•
+Œ9Ž , Œ7Ž and ‘9Ž , ‘7Ž , ‘“Ž are from the 5 nearest points
+of a current edge or planar feature point sets in the global frame.
+Suppose the number of edge and planar correspondences is :”
+and :• in the current frame, the residual can be calculated using:
+D•
+
+6ℒ* = 4 ‰ℰA
+89
+
+7
+
+D—
+
+? 4 ‰•– 7
+˜89
+
+12
+
+We notice that the LiDAR-only odometry with LiDAR of
+limited FoV is over-sensitive to the vibrations caused by the
+joint of rail tracks and the rail track turnouts, where errors may
+appear in the pitch direction. Besides, the two rail tracks are not
+of the same height at turnings, and the LiDAR-only odometry
+will keep this roll divergence even in the following straight
+railways. Illustrated in [22], the planar features from segmented
+ground can effectually constrain the roll and pitch rotation.
+However, the angle-based ground extraction is not robust for
+railways as the small height variations will be ignored by the
+
+segmentation, which will generate large vertical divergence for
+large-scale mapping tasks.
+We hereby employ the rail track plane to provide ground
+constraints. We first detect the track bed area using the LiDAR
+sensor mounting height and angle. With the assumption of the
+LiDAR is centered between two rail tracks, we can set two
+candidate areas around the left and right rail tracks and search
+the points with local maximum height over the track bed. Two
+straight lines can then be fixed using random sample consensus
+(RANSAC) [23] method. Finally, we exploit the idea of region
+growing [24] for further refinement. As a prevailing
+segmentation algorithm, region growing examines neighboring
+points of initial seed area and decides whether to add the point
+to the seed region or not. We set the initial seed area within the
+distance of 5 m ahead of the LiDAR, and the distance threshold
+of the search region to the fitted line is set to 0.07 m, which is
+the width of the track head.
+We are now able to define a plane with the two sets of rail
+track points using RANSAC. And the ground plane ™ can be
+parameterized by the normal direction vector š› and a distance
+scalar œ› , ™ = Xš\› , œ› [\ . Then the correspondence of each
+ground point between two consecutive scan k and • ? 1 can be
+established by:
+•*ab
+•
+
+•
+
+= ž•**ab •*
+
+ž•**ab = ž• ž **ab
+
+13
+
+14
+
+where •*ab and •* is the same point expressed in frame Ÿ" 9
+and Ÿ" with the corresponding transformation defined by
+•
+
+ž•**ab = ¡
+
+•*ab
+•* ,
+
+•*ab
+•* ¢ .
+
+Based thereon, the ground plane
+
+measurement residual can be expressed as:
+•
+
+*
+6C* = ™" 9 n ž•*ab
+™"
+
+15
+
+C. Visual-Related Factors
+Different from UAVs or UGVs with arbitrary movements,
+the rail vehicles are limited to highly-constrained motions, such
+as long-time consistent velocities, constant linear accelerations
+at accelerate or braking stage, and no rotations. According to
+[25], moving with constant acceleration or without rotating can
+introduce locally unobservable IMU biases, generating illconditioned or even rank-deficient information matrix and
+result in significant scale drift for VINS. Therefore, we leverage
+the IMU bias estimated by LiDAR-inertial odometry at the
+initialization stage, and associate relative depth information to
+extracted feature points on image keyframes. The scale drift can
+then be corrected by odometer aided VINS and the scale
+correction optimization in [17].
+Since more scale correction is added, the £ n ¤ translational
+accuracy can be significantly improved. However, the
+rotational error is still not evitable, and we introduce two
+additional structure constraints for further refinement.
+We can extract the line segments with LSD [26] as shown in
+Fig. 3. Assuming ¥ = X¦9 , ¦7 , ¦“ [’ is the projection of a line
+
+3
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+feature on the image plane [27], and § as the midpoint of the
+line feature, the line feature reprojection error can be defined as:
+
+6G* =
+
+§’ ¥
+
+16
+
+¨¦97 ? ¦77
+
+Besides, the rotation drift can be effectually constrained with
+detected vanishing point as illustrated in [28]. We hereby utilize
+the vanishing point to constrain the camera orientation. Suppose
+©" is the attitude of the detected vanishing point in the • -th
+frame, and the corresponding vanishing point error can be
+expressed following [18]:
+
+6H* = ©" × /
+
+*
+
+©" 0
+
+17
+
+Fig. 3. Extracted LSD (left) and vanishing point (right) from a
+single frame.
+
+D. GNSS Factors
+The accumulated drifts of the system can be corrected using
+RTK measurements. The GNSS factor is added when the
+estimated position covariance is larger than the reported GNSS
+covariance in [29]. However, we find that the reported GNSS
+covariance is not trustworthy sometimes, and may yield blurred
+or inconsequent mapping result. We hereby model the GNSS
+measurements ª" with additive noise, and the global position
+residual can be defined as:
+6I* = *
+1
+? P ∆ "7 n
+2
+
+*
+
+n
+
+n
+
+O
+∆ " nf
+*
+
+*
+
+*
+*ab
+
+16
+
+where
+is the transformation from the receiver antenna to the
+IMU, which can be obtained from installation configuration.
+Note that we only consider the single point positioning (SPP)
+result as input due to the inconsistent 4G communication
+quality for long railroads.
+
+V. EXPERIMENTS
+
+A. Hardware Setup
+We conduct a series of experiments with various kinds of
+maintenance vehicles on two railroads: one is a freight traffic
+railway for general-speed trains, the other is a manned traffic
+railway for high-speed trains. According to the safety principle
+on the railroad, we can only carry out the former experiments
+in the daytime, and the latter in the midnight.
+The overview of the system installment and hardware setup
+is shown in Fig. 4, including a Hikvision camera, a Livox
+Horizon LiDAR, and a MTi-680G 1 integrated navigation
+system. Additionally, the system also incorporates a wheel
+odometer. All the sensors are hardware-synchronized with a ublox EVK-M8T GNSS timing evaluation kit using GNSS pulse
+per second. Besides, we employ an onboard computer, with i910980HK CPU (2.4 GHz, octa-core), 64GB RAM, for real-time
+processing. All our algorithms are implemented in C++ and
+executed in Ubuntu Linux using the ROS [31]
+The details of the four datasets are listed in TABLE II. And
+the ground truth is kept by the post processing result of a
+MPSTNAV M39 GNSS/INS integrated navigation system 2
+(with RTK corrections sent from Qianxun SI).
+We evaluate the proposed framework with R2LIVE, FASTLIO2, LiLi-OM, Lio-Livox 3 , and VINS-Mono. For ablation
+study, we define RailLoMer-V w/o GNSS, RailLoMer-V w/o
+ODO, and RM-LVI as no GNSS factor, no odometer factor, and
+the LiDAR-visual-inertial part of our proposed system.
+
+(a)
+(b)
+Fig. 4. Illustration of two kinds of installment based on different
+types of maintenance vehicles. (a) is the longitudinal-way on
+the general-speed railway maintenance vehicle. (b) is the
+lateral-way on the high-speed railway maintenance vehicle.
+And the red, green, blue box indicates Hikvision camera, Livox
+Horizon LiDAR, and MTi-680G, respectively.
+TABLE II
+DETAILS OF ALL THE SEQUENCES FOR EVALUATION
+
+E. Map Management
+To reduce the mapping blurry caused by frequent GNSS
+aided optimization, We propose a submap-based two-stage
+map-to-map registration, which first creates submaps based on
+local optimization, then leverage the GNSS information for
+submap-to-submap registration using the normal distribution
+transform (NDT) [30]. In practice, 30 keyframes are maintained
+in each submap, which can reduce the mapping blurry caused
+by frequent correction.
+1
+2
+
+https://www.xsens.com/mti-680g
+http://www.whmpst.com/en/imgproduct.php?aid=29
+
+Name
+Duration (sec)
+Distance (km)
+General-speed railway sequence gathered at daytime
+HQ-Long
+1325
+25.2
+HQ-Short
+423
+6.3
+High-speed railway sequence gathered at midnight
+CH-Long
+715
+6.5
+CH-Short
+336
+2.4
+CH-Tunnel
+475
+4.2
+3
+
+https://github.com/Livox-SDK/LIO-Livox
+
+1
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+TABLE III
+ACCURACY EVALUATION FOR ALL THE SEQUENCES
+Absolute Trajectory Error (ATE) RMSE [m] / MAX [m], with - and indicates meaningless result.
+
+R2LIVE
+FAST-LIO2
+LiLi-OM
+Lio-Livox
+VINS-Mono
+RailLoMer-V
+RailLoMer-V w/o GNSS
+RailLoMer-V w/o ODO
+RM-LVI
+
+(a) FAST-LIO2
+
+HQ-Long
+
+HQ-Short
+
+CH-Long
+
+CH-Short
+
+CH-Tunnel
+
+-/-/447.5 / 1896.93
+-/-/0.36 / 1.8
+299.58 / 866.57
+1.64 / 5.41
+349.65 / 1078.5
+
+6.36 / 32.68
+8.53 / 29.73
+7.95 / 31.5
+18.97 / 48.46
+142.47 / 288.6
+0.35 / 0.84
+2.35 / 4.53
+1.47 / 2.11
+2.48 / 5.56
+
+4.35 / 7.47
+5.56 / 8.64
+5.23 / 9.67
+7.58 / 12.77
+145.7 / 293.63
+0.49 / 1.43
+2.1 / 3.52
+0.73 / 1.71
+2.37 / 4.72
+
+2.32 / 5.53
+4.06 / 9.7
+3.51 / 5.17
+5.42 / 6.66
+17.63 / 35.4
+0.45 / 1.47
+0.96 / 1.77
+0.47 / 1.82
+1.24 / 3.8
+
+27.59 / 79.81
+39.68 / 107.54
+18.57 / 64.21
+32.68 / 98.57
+-/0.57 / 2.95
+3.67 / 6.55
+8.08 / 39.49
+11.33 / 47.68
+
+(b) LiLi-OM
+(c) Lio-Livox
+Fig. 5. The trajectory evaluation on HQ-Long for various methods.
+
+B. Evaluation
+We now present a series of evaluation to qualitatively and
+quantitatively analyze our proposed framework, and TABLE III
+summarizes the root mean square error (RMSE) and maximum
+positioning error (MAX) metrics of various methods.
+Benchmarking Results: Our system can achieve
+1)
+decimeter grade accuracy for all the sequences. However, the
+performances of other approaches are not admirable. For the
+small-scale test, the incorrectly initialized gravity vector
+accelerates the vertical error accumulation. The maintenance
+vehicle starts at a big turning in CH-Short. As the two rail tracks
+are not of the same height at turning, the gravity vector cannot
+be initialized correctly, and the selected methods all work not
+properly without additional constraints. For the large-scale test,
+the vision-only method shows terrible performance with
+constant velocity. This highly-constrained motion results in
+insufficient axis excitement, and generates great scale drift.
+2)
+Robustness Towards Direction of Motion: Different
+from unmanned ground vehicles (UGV) or automated vehicles,
+which are always moving forward while data gathering, the rail
+vehicles also comprise a long-time backward motion. And we
+employ HQ-Long, a backward motion only sequence, to study
+the effect of motion direction. Presented in TABLE III and Fig.
+5, the filter-based algorithm R2LIVE and FAST-LIO2 see an
+enormous divergence in 6-DoF on this sequence. However, the
+optimization-based algorithms are insensitive to this influence.
+
+(d) RailLoMer-V
+
+Fig. 6. Visual illustration of the repetitive structures in the highspeed railway tunnel.
+3)
+Robustness Towards Degeneracy: Shown in Fig. 6, the
+tunnels of high-speed railway are with smooth man-made walls,
+repetitive rail tracks and suspension clamps. We believe these
+districts as one of the most difficult scenarios for SLAM, and
+we challenge our system with CH-Tunnel, comprised of three
+consecutive tunnels (with the longest 1.7 km long). With the
+assistance of odometer and GNSS, the longitudinal divergence
+and accumulated errors can be well-eliminated, and our
+proposed system can maintain an accurate trajectory. On the
+contrary, the other methods either ‘stops’ or ‘moves backward’
+towards grievously degenerated scenarios.
+4)
+Weather Influence: The general-speed railway datasets
+are collected in the summer. whereas the high-speed railway
+datasets are gathered in the winter. Since the rail tracks become
+wet and slippery in the winter midnight, the wheel slip is
+unavoidable, and the proposed RailLoMer-V system has a
+relatively low performance in the winter.
+
+1
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+
+(a) HQ-Long
+
+(b) HQ-Short
+
+(c) CH-Long
+
+(d) CH-Short
+
+(f) CH-Tunnel
+(e) CH-Tunnel
+Fig. 7. The real-time mapping result of each sequence. (a) and (b) are from the general-speed railway experiment, with the color
+coded by height variations. (c) and (d) are the high-speed railway experiment mapping aligned with Google Map. (e) and (f)
+presents the novelty of tunnel experiment.
+5)
+Ablation Study: It is seen that the odometer can well
+constrain the longitudinal displacement at degenerated areas,
+and the RailLoMer-V w/o GNSS has a better performance than
+RailLoMer-V w/o ODO in CH-Tunnel. However, the odometer
+contribution is not evident for feature-rich districts, and the
+RM-LVI sees a similar accuracy with RailLoMer-V w/o GNSS
+for the other sequences.
+6)
+High Precision Map Construction: We show that our
+proposed method is accurate enough to build large-scale map of
+railroad environments. The real-time mapping is shown in Fig.
+7, in which the clear and well-matched result with the satellite
+image indicates that our proposed method is of high precision.
+
+TABLE IV
+THE AVERAGE TIME CONSUMPTION IN MS
+
+HQ-Long
+HQ-Short
+CH-Long
+CH-Short
+CH-Tunnel
+
+OLIS
+
+OVIS
+
+Fusion
+
+33.7
+28.8
+30.3
+29.5
+27.4
+
+34.1
+31.6
+33.2
+31.5
+30.7
+
+52.5
+37.6
+45.2
+39.6
+39.4
+
+2
+> REPLACE THIS LINE WITH YOUR MANUSCRIPT ID NUMBER (DOUBLE-CLICK HERE TO EDIT) <
+
+C. Runtime Analysis
+The average runtime for processing each scan in different
+scenarios is shown in TABLE IV, denoting the proposed system
+capable of real-time operation for all conditions. Besides, the
+time has not seen a large growth with increased distance.
+VI. CONCLUSION
+We have proposed RailLoMer-V, an accurate and robust
+localization and mapping framework for rail vehicles in this
+paper. Our system fuses measurements from LiDAR, camera,
+IMU, train odometer, and GNSS with a tightly-coupled manner.
+Besides, we leverage additional geometric structure constraints
+to cope with the highly-repeated environments. Our proposed
+system shows decimeter grade positioning accuracy through
+evaluations over various illumination conditions, different
+scales, and degenerated districts.
+We hope that our experimental work and evaluation could
+inspire follow-up works to explore more intelligent systems for
+railroad applications, especially for facility and environment
+monitoring. From our four-year experience staying with various
+railroad maintenance vehicles, a small advance towards
+automation will save tremendous amount of manpower for
+construction and maintenance.
+ACKNOWLEDGMENT
+We would like to thanks colleagues from Hefei power supply
+section, China Railway, for their kind support.
+REFERENCES
+[1] Y. Wu, J. Weng, Z. Tang, X. Li, and R. H. Deng, “Vulnerabilities, attacks,
+and countermeasures in balise-based train control systems,” IEEE
+Transactions on intelligent transportation systems, vol. 18, no. 4, pp. 814–
+823, 2016.
+[2] R. Cheng, Y. Song, D. Chen, and L. Chen, “Intelligent localization of a
+high-speed train using LSSVM and the online sparse optimization
+approach,” IEEE Transactions on Intelligent Transportation Systems, vol.
+18, no. 8, pp. 2071–2084, 2017.
+[3] A. Buffi and P. Nepa, “An RFID-based technique for train localization
+with passive tags,” in 2017 IEEE International Conference on RFID
+(RFID), 2017, pp. 155–160.
+[4] Z. Wang, G. Yu, B. Zhou, P. Wang, and X. Wu, “A train positioning
+method based-on vision and millimeter-wave radar data fusion,” IEEE
+Transactions on Intelligent Transportation Systems, 2021.
+[5] D. Lu and E. Schnieder, “Performance evaluation of GNSS for train
+localization,” IEEE transactions on intelligent transportation systems, vol.
+16, no. 2, pp. 1054–1059, 2014.
+[6] J. Otegui, A. Bahillo, I. Lopetegi, and L. E. Díez, “Evaluation of
+experimental GNSS and 10-DOF MEMS IMU measurements for train
+positioning,” IEEE Transactions on Instrumentation and Measurement,
+vol. 68, no. 1, pp. 269–279, 2018.
+[7] J. Liu, B. Cai, and J. Wang, “Track-constrained GNSS/odometer-based
+train localization using a particle filter,” in 2016 IEEE Intelligent Vehicles
+Symposium (IV), 2016, pp. 877–882.
+[8] T. Daoust, F. Pomerleau, and T. D. Barfoot, “Light at the end of the tunnel:
+High-speed lidar-based train localization in challenging underground
+environments,” in 2016 13th Conference on Computer and Robot Vision
+(CRV), 2016, pp. 93–100.
+[9] O. Heirich, P. Robertson, and T. Strang, “RailSLAM-Localization of rail
+vehicles and mapping of geometric railway tracks,” in 2013 IEEE
+International Conference on Robotics and Automation, 2013, pp. 5212–
+5219.
+[10] F. Tschopp et al., “Experimental comparison of visual-aided odometry
+methods for rail vehicles,” IEEE Robotics and Automation Letters, vol. 4,
+no. 2, pp. 1815–1822, 2019.
+
+[11] M. Etxeberria-Garcia, M. Labayen, F. Eizaguirre, M. Zamalloa, and N.
+Arana-Arexolaleiba, “Monocular visual odometry for underground
+railway scenarios,” in Fifteenth International Conference on Quality
+Control by Artificial Vision, 2021, vol. 11794, p. 1179402.
+[12] J. Zhang and S. Singh, “Laser–visual–inertial odometry and mapping with
+high robustness and low drift,” Journal of Field Robotics, vol. 35, no. 8,
+pp. 1242–1264, 2018.
+[13] Z. Wang, J. Zhang, S. Chen, C. Yuan, J. Zhang, and J. Zhang, “Robust
+high accuracy visual-inertial-laser slam system,” in 2019 IEEE/RSJ
+International Conference on Intelligent Robots and Systems (IROS), 2019,
+pp. 6636–6641.
+[14] X. Zuo et al., “Lic-fusion 2.0: Lidar-inertial-camera odometry with
+sliding-window plane-feature tracking,” in 2020 IEEE/RSJ International
+Conference on Intelligent Robots and Systems (IROS), 2020, pp. 5112–
+5119.
+[15] J. Lin, C. Zheng, W. Xu, and F. Zhang, “R2LIVE: A Robust, Real-time,
+LiDAR-Inertial-Visual tightly-coupled state Estimator and mapping,”
+arXiv preprint arXiv:2102.12400, 2021.
+[16] T. Shan, B. Englot, C. Ratti, and D. Rus, “LVI-SAM: Tightly-coupled
+Lidar-Visual-Inertial Odometry via Smoothing and Mapping,” arXiv
+preprint arXiv:2104.10831, 2021.
+[17] S.-S. Huang, Z.-Y. Ma, T.-J. Mu, H. Fu, and S.-M. Hu, “Lidar-monocular
+visual odometry using point and line features,” in 2020 IEEE International
+Conference on Robotics and Automation (ICRA), 2020, pp. 1091–1097.
+[18] P. Wang, Z. Fang, S. Zhao, Y. Chen, M. Zhou, and S. An, “Vanishing
+Point Aided LiDAR-Visual-Inertial Estimator,” in 2021 IEEE
+International Conference on Robotics and Automation (ICRA), 2021, pp.
+13120–13126.
+[19] D. Wisth, M. Camurri, S. Das, and M. Fallon, “Unified Multi-Modal
+Landmark Tracking for Tightly Coupled Lidar-Visual-Inertial Odometry,”
+IEEE Robotics and Automation Letters, vol. 6, no. 2, pp. 1004–1011, 2021.
+[20] T. Qin, P. Li, and S. Shen, “Vins-mono: A robust and versatile monocular
+visual-inertial state estimator,” IEEE Transactions on Robotics, vol. 34,
+no. 4, pp. 1004–1020, 2018.
+[21] J. Zhang and S. Singh, “LOAM: Lidar Odometry and Mapping in Realtime.,” in Robotics: Science and Systems, 2014, vol. 2, no. 9.
+[22] T. Shan and B. Englot, “Lego-loam: Lightweight and ground-optimized
+lidar odometry and mapping on variable terrain,” in 2018 IEEE/RSJ
+International Conference on Intelligent Robots and Systems (IROS), 2018,
+pp. 4758–4765.
+[23] M. A. Fischler and R. C. Bolles, “Random sample consensus: a paradigm
+for model fitting with applications to image analysis and automated
+cartography,” Communications of the ACM, vol. 24, no. 6, pp. 381–395,
+1981.
+[24] R. Adams and L. Bischof, “Seeded region growing,” IEEE Transactions
+on pattern analysis and machine intelligence, vol. 16, no. 6, pp. 641–647,
+1994.
+[25]K. J. Wu, C. X. Guo, G. Georgiou, and S. I. Roumeliotis, “Vins on wheels,”
+in 2017 IEEE International Conference on Robotics and Automation
+(ICRA), 2017, pp. 5155–5162.
+[26] R. G. Von Gioi, J. Jakubowicz, J.-M. Morel, and G. Randall, “LSD: A fast
+line segment detector with a false detection control,” IEEE transactions
+on pattern analysis and machine intelligence, vol. 32, no. 4, pp. 722–732,
+2008.
+[27] G. Zhang, J. H. Lee, J. Lim, and I. H. Suh, “Building a 3-D line-based map
+using stereo SLAM,” IEEE Transactions on Robotics, vol. 31, no. 6, pp.
+1364–1377, 2015.
+[28] D. Zou, Y. Wu, L. Pei, H. Ling, and W. Yu, “StructVIO: visual-inertial
+odometry with structural regularity of man-made environments,” IEEE
+Transactions on Robotics, vol. 35, no. 4, pp. 999–1013, 2019.
+[29] T. Shan, B. Englot, D. Meyers, W. Wang, C. Ratti, and D. Rus, “Lio-sam:
+Tightly-coupled lidar inertial odometry via smoothing and mapping,” in
+2020 IEEE/RSJ International Conference on Intelligent Robots and
+Systems (IROS), 2020, pp. 5135–5142.
+[30] P. Biber and W. Straßer, “The normal distributions transform: A new
+approach to laser scan matching,” in Proceedings 2003 IEEE/RSJ
+International Conference on Intelligent Robots and Systems (IROS
+2003)(Cat. No. 03CH37453), 2003, vol. 3, pp. 2743–2748.
+[31] M. Quigley et al., “ROS: an open-source Robot Operating System,” in
+ICRA workshop on open source software, 2009, vol. 3, no. 3.2, p. 5.
+
+

@@ -1,0 +1,237 @@
+W-Net: A boundary-aware cascade network for robust and accurate optic disc segmentation
+Shuo Tang, Chongchong Song, Defeng Wang, Yang Gao, Yuchen Liu, Wang Lv (2023). iScience. https://www.ncbi.nlm.nih.gov/pmc/articles/10790032. doi:10.1016/j.isci.2023.108247. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# W-Net: A boundary-aware cascade network for robust and accurate optic disc segmentation
+
+## Abstract
+SummaryAccurate optic disc (OD) segmentation has a great significance for computer-aided diagnosis of different types of eye diseases. Due to differences in image acquisition equipment and acquisition methods, the resolution, size, contrast, and clarity of images from different datasets show significant differences, resulting in poor generalization performance of deep learning networks. To solve this problem, this study proposes a multi-level segmentation network. The network includes data quality enhancement module (DQEM), coarse segmentation module (CSM), localization module (OLM), and fine segmentation stage module (FSM). In FSM, W-Net is proposed for the first time, and boundary loss is introduced in the loss function, which effectively improves the performance of OD segmentation. We generalized the model in the REFUGE test dataset, GAMMA dataset, Drishti-GS1 dataset, and IDRiD dataset, respectively. The results show that our method has the best OD segmentation performance in different datasets compared with state-of-the-art networks.
+
+## Introduction
+Accurate optic disc (OD) segmentation has a great significance for computer-aided diagnosis of different types of eye diseases. For example, accurate OD segmentation can locate retinal blood vessels, which is one of the important steps to calculate central retinal artery equivalent (CRAE) and central retinal vein equivalent (CRVE), and these two parameters are important for early detection and diagnosis of diabetes and hypertension.1 In addition, OD segmentation also helps to establish a retinal frame, which can be used to determine the location of many retinal abnormalities, such as exudates, edema, microaneurysms, and hemorrhages.2
+Recently, convolutional neural networks (CNN) for medical image segmentation have been more satisfactory than traditional human-based feature extraction methods. The fully convolutional neural network (FCN)3 solves the problem of pixel-by-pixel classification (i.e., semantic segmentation) using CNN. The emergence of U-Net4 has contributed significantly to the wide application of CNNs in medical image segmentation. To extend the use of U-Net, Zhou et al. added a multi-layer adaptive depth mechanism to U-Net and proposed U-Net++.5 Considering that the receptive field limits the model, Google’s team employed a segmentation framework of the DeepLab series using atrous convolution.6,7,8,9 Inspired by the U-Net, DeepLab v3+7 adopted a fusion strategy of multi-scale features to advance the segmentation performance. In the field of OD segmentation of CFP, Hua zhu et al. presented a multi-stage segmentation method that firstly localizes the OD, then performs spatial transformation using polar coordinate transformation, and finally uses M-Net for segmentation.10
+Despite the demonstrated utility of OD segmentation, there is no universally accepted method capable of segmenting accurately and efficiently across a wide variety of datasets. A fundamental assumption of deep learning is that the distribution of samples is independent and identical. That is, the model will perform well if the data distribution between the training and testing dataset is similar to the appearance of the images. However, due to different acquisition devices and methods, the acquired images vary significantly in resolution, size, contrast, sharpness, etc. We refer to this difference between datasets as domain shift. In this study, we use four OD datasets: GAMMA dataset, Drishti-GS1 dataset, and IDRiD dataset. The differences between these datasets are meticulously presented and analyzed in Figure 1 and Table 1. Current methods are usually trained on a particular dataset and can only perform well on the corresponding test set. However, in cases where the differences between the test and training set images are more pronounced, or the image contrast is poor, the inference ability of the model is often unsatisfactory. For example, M-Net10 shows outstanding segmentation performance on the REFUGE dataset, yet when the model is used to infer other datasets, its performance becomes unsatisfying, as shown in Figure 2.Figure 1Examples of different datasetsFrom left to right are REFUGE’s training dataset, validation dataset, test dataset, Drishiti-GS1 dataset, and IDRiD dataset.Table 1An overview of the datasetsDatasetNumber of imagesResolutionRGBTrain4002056 × 212427.37 ± 7.1042.79 ± 9.5171.86 ± 15.18Val4001634 × 163454.88 ± 9.7768.92 ± 10.88104.37 ± 12.79Test4001634 × 163456.51 ± 9.1569.03 ± 10.48102.99 ± 12.48Drishti-GS1101(1741–1845) × (2046–2468)12.95 ± 5.8240.80 ± 12.0985.61 ± 21.31GAMMA1002000 × 29921934 × 195610.23 ± 8.4733.08 ± 10.5866.73 ± 16.16IDRiD812848 × 428817.01 ± 14.6357.83 ± 10.34118.32 ± 15.03Train, Val, and Test are three subsets of the REFUGE dataset. Drishti-GS1 and IDRiD contain Train and Test, respectively, in the corresponding datasets. GAMMA contains only the Train subset. (1741–1845) × (2046–2468) indicates that in the Drishti-GS1 dataset, the horizontal resolution is distributed from 1741 to 1845, and the vertical resolution is distributed from 2046 to 2468.Figure 2Segmentation performance of M-Net in different OD datasets
+Examples of different datasets
+From left to right are REFUGE’s training dataset, validation dataset, test dataset, Drishiti-GS1 dataset, and IDRiD dataset.
+An overview of the datasets
+Train, Val, and Test are three subsets of the REFUGE dataset. Drishti-GS1 and IDRiD contain Train and Test, respectively, in the corresponding datasets. GAMMA contains only the Train subset. (1741–1845) × (2046–2468) indicates that in the Drishti-GS1 dataset, the horizontal resolution is distributed from 1741 to 1845, and the vertical resolution is distributed from 2046 to 2468.
+Segmentation performance of M-Net in different OD datasets
+In order to obtain a model with good generalization performance and accurate OD segmentation results on different datasets, we propose a multi-level segmentation model, which is trained on a single dataset and has good OD segmentation results on different datasets. Some researchers have proposed many effective methods, which can be divided into two categories based on whether the majority of the network is generative adversarial networks (GAN)11,12,13 or semi-supervised.14,15,16
+
+## Generative adversarial networks
+The fundamental idea of the GAN methods is to learn the image distribution from the source and target domains. In the inference phase, the images in the target domain are transformed into the source domain, and the transformed images are segmented. In clinical practice, the generator adds extra and false information to the transformed images, which does not fully reflect the real situation of the patient. In addition, this false information will also affect the segmentation accuracy.
+
+## Semi-supervised networks
+The semi-supervised approach obtains a segmentor by gold-standard learning of the source domain data, then applies the model to images in the target domain to obtain pseudo-labels. Again, researchers will fine-tune the model under the supervision of pseudo-labels to solve the problem of the data domain transfer. The deficiencies of these methods can already be reflected in principle. If we want to generalize the model on a new dataset, we need to retrain or fine-tune the model with the new dataset. Accordingly, the generalization performance of this model will be limited. Zhu et al. developed a generic OD and OC segmentation network for multi-device CFP to address these issues.17 The authors mixed CFPs from different datasets and then trained and tested them on the mixed dataset. This approach performs well on the hybrid dataset but may not work well for images without similar distribution in the hybrid dataset.
+
+## Results
+
+## Evaluation metric
+In this study, the segmentation performance is evaluated by Dice Coefficient, IOU, and Hausdorff Distance, respectively:(Equation 1)Dice(pred,gt)=2×(pred∩gt)pred+gt(Equation 2)IOU(pred,gt)=pred∩gtpred∪gt(Equation 3)H(A,B)=max(h(A,B),h(B,A))where pred is the prediction result, and gt is the annotation information of the dataset. In our experiments, pred and gt are binary images. We use the average Dice and the minimum Dice to represent the generalization performance. The average Dice can reflect the segmentation performance for most cases, whereas the minimum Dice can reflect the performance for the worst quality images. In a sense, the minimum Dice represents the generalization performance more correctly.
+
+## Comparison experiments results
+On each dataset, we trained FCN, UNet, UNet++, PSPNet, deeplabv3+, MNet, CE-Net, pOSAL, and W-Net, respectively. In this study, we produce the average Dice Coefficient, Hausdorff Distance, and IOU of W-Net and each SOTA model to compare the average segmentation performance of the models. In addition, we also produce the minimum Dice Coefficient to compare the worst segmentation performance of the models. In addition, we also calculate the minimum Dice Coefficient to compare the worst segmentation performance of the models. The larger the Dice Coefficient and IOU, the better the segmentation performance, and the smaller the Hausdorff Distance, the better the segmentation performance.
+It can be seen from Table 2 that W-Net is only slightly lower than CE-Net on the training set of REFUGE and does not exceed 0.7 percentage points. However, in the Drishiti-GS1, GAMMA, and IDRiD datasets, the segmentation performance of W-Net is better than other SOTA models. Especially on the IDRiD dataset, W-Net is 3.95% higher than the best performing pOSAL model. In addition, as shown in Tables 3 and 4, we also calculated the average Hausdorff Distance and average IOU, further verifying that the average segmentation performance of W-Net in the other three datasets is better than other SOTA models.Table 2The average Dice of ablation experimentsAvg DiceREFUGE TrainREFUGE ValREFUGE TestDrishiti-GS1GAMMAIDRiDFCN0.95960.95770.95430.95340.8580.8095UNet0.95320.9540.95340.94230.87230.8173Unet++0.95250.94880.94590.42470.61970.7963PSPNet0.95930.95540.9550.94690.88940.8403deeplabV3+0.95630.9560.95190.88080.89670.8605Mnet0.96250.96190.79530.94980.8980.739pOSAL0.96960.95360.96010.95330.93830.913CE-Net0.97960.95190.95120.92170.88620.9077W-Net0.97830.97490.96110.95340.9410.9525Table 3The average IOU of ablation experimentsAvg IOUREFUGE TrainREFUGE ValREFUGE TestDrishiti-GS1GAMMAIDRiDFCN0.92320.91960.91370.91240.79420.7385UNet0.91240.91290.91190.89460.810.756Unet++0.91080.90410.90080.33240.63260.7029PSPNet0.92240.91540.91470.90140.81530.7699deeplabV3+0.91750.91650.90940.83310.83450.7905Mnet0.92860.92720.6760.9070.83060.5925pOSAL0.94140.91230.9240.91180.89680.8533CE-Net0.96020.90970.90790.87210.8040.8535W-Net0.95680.95170.95120.91370.88980.9078Table 4The average Hausdorff Distance of ablation experimentsAvg HausdorffREFUGE TrainREFUGE ValREFUGE TestDrishiti-GS1GAMMAIDRiDFCN0.23570.18910.23480.42521.16677.3951UNet0.42430.25150.25780.72031.500613.7276Unet++0.41070.61881.082455.016416.282438.4777PSPNet0.23460.20270.2250.58451.44592.3588deeplabV3+0.34270.21470.26892.20181.817114.4152Mnet0.21710.17414.8730.54991.95717.9059pOSAL0.12020.22380.16780.35944.61721.5848CE-Net0.05840.26630.33091.95672.99935.844W-Net0.06750.06880.07110.38350.5550.5354
+The average Dice of ablation experiments
+The average IOU of ablation experiments
+The average Hausdorff Distance of ablation experiments
+More importantly, W-Net’s OD segmentation performance is significantly better than other SOTA models when segmenting OD images with large differences in training datasets. It can be seen from Table 5 that when the image is segmented with a large difference from the training dataset, some SOTA models will appear in the extreme case of dice = 0, and the OD image cannot be segmented. At this time, the minimum Dice Coefficient of W-Net can still get 64.57%, which is 18.62% higher than the best performing Mnet model, and its OD segmentation performance is significantly better than other SOTA models. In summary, compared with other SOTA models, the average segmentation performance of W-Net trained with a single dataset in the other three datasets is slightly improved, and it has obvious advantages in the segmentation of pictures with large differences. Therefore, the model has better generalization performance.Table 5The minimum Dice of ablation experimentsMin DiceREFUGE TrainREFUGE ValREFUGE TestDrishiti-GS1GAMMAIDRiDFCN0.68910.86510.78360.737500UNet0.44850.77020.72910.761500Unet++0.57130.66420.1111000PSPNet0.81480.86930.75330.767600deeplabV3+0.64740.82380.6968000Mnet0.68770.81310.38340.76610.45950.5418pOSAL0.83040.82120.81770.813500CE-Net0.93960.71610.78220.00060.39370W-Net0.93260.92590.87220.86540.64570.856
+The minimum Dice of ablation experiments
+
+## Ablation experiments results
+To verify the effectiveness of the multi-level segmentation framework and boundary loss function, two ablation experiments are conducted. Because the backbone of W-Net is CE-Net,23 CE-Net is used to verify the effectiveness of the multi-level segmentation framework. CE-Net1 was OD segmentation only by CE-Net, and CE-Net2 is OD segmentation using CE-Net as FEM in the multi-level segmentation framework. The ablation results are shown in Tables 6 and 7. By comparing the average Dice of CE-Net1 and CE-Net2, we can conclude that the multi-stage segmentation model is less effective than the single stage in the case of a similar image (test dataset). Nevertheless, the advantages of the multi-stage model can be fully revealed by generalizing images from other datasets. We believe that there are two reasons for the composition of this phenomenon. On the one hand, information reduction is caused by cropping and resampling. On the other hand, the interpolation method adopted cannot be adapted to the original image in the postprocess. By comparing the minimum Dice of CE-Net1 and CE-Net2, we can clearly find that the multi-stage segmentation model can handle relatively difficult images to segment in the OD region. This fully reflects the effectiveness of this method in improving the robustness of the model.Table 6The average Dice of ablation experimentsMethodTrainValTestDrishti-GS1GAMMAIDRiDCE-Net10.97960.95190.95120.92170.88620.9077CE-Net20.97350.97510.94640.96990.92640.9450W-Net-no-BL0.97820.97670.96020.95460.93860.9516W-Net0.97830.97490.96110.95340.9410.9525Table 7The minimum Dice of ablation experimentsMethodTrainValTestDrishti-GS1GAMMAIDRiDCE-Net10.93960.71610.78220.00620.39370CE-Net20.93020.93860.82180.83720.58440.7149W-Net-no-BL0.91780.8770.87640.80440.64130.8304W-Net0.93260.92590.87220.86540.64570.8560
+The average Dice of ablation experiments
+The minimum Dice of ablation experiments
+In order to verify the effectiveness of the loss function, an ablation experiment of boundary loss is carried out. It can be seen from Equation 15 that the loss function of the left branch in W-Net consists of boundary loss and Dice loss. When setting α = 1, β = 0.5, there is only dice loss and no boundary loss in the loss function. The experimental results are shown in the "W-Net-no-BL" rows of Tables 6 and 7. When setting α = β = 0.4, the loss function of W-Net consists of boundary loss and dice loss and achieves the best generalization performance. The experimental results are shown in the "W-Net" row of Tables 6 and 7.
+
+## Influence of super parameter
+In order to make our proposed method work with better performance, we conducted the following experiments. First, we analyzed the parameters α and β, and the results are shown in Table 8. The generalization performance is best and most stable when α = 0.4 and β = 0.4. At this point, the output is equivalent to being influenced by the left and right branches. Our explanation for this is that the nature of W-Net is a voting mechanism, and the performance of the left and right branches is comparable, so it can achieve good results under the same influence. Secondly, we wanted to know which strategy facilitates generalization in the case of using boundary loss, fine-tune training, or direct training. We set the same parameters to direct training and fine-tune training, and the experimental results are shown in Table 8. With these experiments, we can conclude similarly to that in18: when using boundary loss, we first need to learn the region information and then fine-tune the model under boundary supervision.Table 8The average Dice of parameter setting experimentsFine-tuneαβTrainValTestDrishti-GS1GAMMAIDRiD1False0.70.30.97710.97800.95930.95070.93770.95062False0.60.40.9770.97630.95940.95640.93830.95103False0.50.50.97820.97670.96020.95460.93880.95254False0.40.60.97720.97740.95990.95380.93840.95125True0.450.450.97830.97670.96040.95590.93880.95266True0.40.40.97830.97490.96110.95340.9410.95257False0.450.450.97330.97150.95970.94310.93860.95058False0.40.40.96720.96520.95890.93030.94030.9487
+The average Dice of parameter setting experiments
+
+## Discussion
+In this study, we combine the prior knowledge of manual segmentation of OD and develop a multi-stage segmentation framework to accommodate the problem of data domain shift. This framework can be divided into four modules: data quality enhancement module (DQEM), OD coarse segmentation module (CSM), OD localization module (OLM), and fine segmentation stage module (FSM). Our proposed model’s average Dice and minimum Dice metrics are more advanced in all four datasets than the state-of-the-art (SOTA) method. Particularly, for the FSM module, we innovatively proposed W-Net. With multiple branches, W-Net learned boundary information while learning the region information, and the multi-branch structure can also achieve the purpose of ensemble learning.
+More importantly, we implement cross-dataset testing in this paper. The comparative experiments show that our proposed method can achieve comparable performance with the SOTA method with good-quality images and far outperforms the SOTA method in images with poor contrast. This can be clearly seen in our comparative experiments that the robustness of the multi-stage W-Net model is far superior to other SOTA methods. These experiments show that our proposed method dramatically improves robustness without retraining on new datasets.
+
+## Limitations of the study
+Our work can effectively improve the robustness of OD segmentation; unfortunately there are two main limitations. On the one hand, the multi-stage cascading method has defects, and on the other hand, our method cannot effectively improve the segmentation performance of images with better quality.
+In the multi-stage cascading method, we only used CycleGAN as the DQEM module and used two data sets as the training sets of DQEM. In order to further improve the generalization of the model, we can use multiple advanced generative adversarial networks, such as MedGAN,27 stylegan,28,29,30,31 Pixel2style2pixel GAN,32 and Encoder4Editing33 to perform data enhancement on the four data sets respectively. Through adversarial learning, synthetic images are generated from the source domain to the target domain and from the target domain to the source domain, and the synthetic images are added to the training set for training together. Ultimately, the types of annotated images can be greatly increased, thereby improving the generalization of the model.
+There are three main reasons why our model cannot improve the segmentation performance of good-quality images: the performance ceiling of OD segmentation, the accuracy loss caused by the resampling process of our method, and the limitation of the way the model extracts features. The limitation caused by the second reason can be improved by directly training the segmentation network through the GAN method described earlier instead of multi-stage method. For the limitation of the way the model extracts features, inspired by ViT,25 it is necessary to have a deeper understanding of the reasons why Transformer34 is successful in natural language processing. Models like Swin Transformer,35 SegFormer,36 SegNeXt, etc. can be used for feature extraction.
+
+## Future expectations
+One of our future research focuses on replacing our CFM with the newly proposed self-attention-based structure24,25,26 to enhance the performance of OD localization, which may combine positional information to determine the location of OD. We propose a generalized OD multi-stage segmentation framework and W-Net. Furthermore, we will explore other segmentation tasks in the future using the W-Net proposed in this paper, such as retinal blood vessel segmentation and arterial and vein segmentation in CFP.
+
+## STAR★Methods
+
+## Key resources table
+REAGENT or RESOURCESOURCEIDENTIFIERDeposited dataREFUGEOrlando J I et al.18https://refuge.grand-challenge.org/Drishti-GS1Sivaswamy J19http://cvit.iiit.ac.in/projects/mip/drishti-gs/mip-dataset2/enter.phpGAMMAWu J et al.38https://aistudio.baidu.com/aistudio/competition/detail/90IDRiDPorwal P20https://idrid.grand-challenge.org/Software and algorithmsCycle-GANZhu J-Y et al.11https://github.com/junyanz/CycleGANResnet −101He K et al.22https://github.com/zhanghang1989/ResNeStSA-UnetGuo, Changlu et al.39https://github.com/clguo/SA-UNetCE-NetGu Z et al.23https://github.com/Guzaiwang/CE-NetW-netThis paperhttps://github.com/ts66666/ODPytorchVersion1.11.0https://pytorch.org/docs/1.11/PythonVersion 3.8.0https://www.python.org/downloads/release/python-380/
+
+## Resource availability
+
+## Lead contact
+Further information and requests for resources and reagents should be directed to and will be fulfilled by the lead contact, Defeng Wang (Dfwang@buaa.edu.cn).
+
+## Materials availability
+This study did not generate any new unique materials.
+
+## Experimental model and study participant details
+All experiments in this paper were run with python3.8.0 coding on ubuntu 20.04. The framework used for implementation is Pytorch on NVIDIA GTX1080Ti with 11GB memory. Our training process consists of 4 modules, and the training details are shown in below table. It should be noted that in the FSM, we adopted the mechanism of early termination to avoid overfitting. That is, the training will be terminated if the overall loss does not drop in 20 epochs or the learning rate for 10 epochs is less than 5e−7.The training settings in our workModuleNetworkOptimizerEpochsLearning rateLoss functionQSEMCycle-GANAdam betas: (0.5, 0.999)200Strategy: poly learning rateInitial: 0.0002Decay iters: 50Adversarial lossCycle lossCSMSA-UNetSGD momentum = 0.9100Strategy: plateauPatience: 50Factor: 0.9Initial: 0.01Dice lossOLMResNet101SGD momentum = 0.9100Strategy: plateauPatience: 50Factor: 0.9Initial: 0.0001Cross-entropy lossFSMW-NetAdam1000Strategy: poly learning rateInitial: 0.0002Power: 0.9Boundary lossDice loss
+The training settings in our work
+The training sets used in DQEM are Val and IDRiD. The training set of domain A is IDRiD, and domain B is IDRiD. The input image is the original image cropped out of the retinal foreground region and resampled to 256 × 256. Moreover, the IDRiD dataset is used here as the training set for domain B because the data contrast in this dataset is deficient. We can use any dataset, even a clinically collected dataset, to replace it.
+We collect training sets from Train and Val. First, we translate the images into the target domain using the trained model in DQEM. Our training data consit of both translated and augmented images (three times random rotations, three times random color transformation, and three times random noise added to translated images). The input size of CSM is 256 × 256.
+The training datasets of OLM are from Train and Val. Firstly, the foreground regions of these two datasets are cropped. We augment these foreground images with the data augmentation of CFM, and we call these images the original images. Then we resize the original image to 128 × 128. Afterward, we crop the images with a kernel (stride 8 and size 32). Next, we perform an inverse transformation with the cropped position information to get the corresponding patches from the original image. Then we resample these patches to 224 × 224. We definite the patch containing the entire OD area as positive examples and the other patches as negative examples. Finally, we randomly remove negative examples so that the number of positive samples is comparable to negative ones.
+The training data sources for FSM are Train and Val. We follow the steps in the flowchart in Figure 2 to obtain images that only contain the whole OD and their annotation results. The input of this module is 256 × 256.
+
+## Method details
+The multi-stage OD segmentation is presented in below figure, which maintains four modules: data quality enhancement module (DQEM), OD coarse segmentation module (CSM), OD localization module (OLM), and fine segmentation module (FSM). In FSM, we propose the W-net structure, as shown in below figure.Multi-stage OD segmentation in CFP flowchartIn the order of the arrows, the sequence is preprocessing, data quality enhancement, coarse optic disc segmentation, optic disc positioning, optic disc fine segmentation, and postprocessing.Illustration of the proposed W-NetThe left branch is to learn boundary information of OD. The right branch is to learn region information. The backbone is similar to CE-Net. The last down-sampling layer adopts a dense atrous convolution module (DAC) and residual multi-kernel pooling module (RMP).
+Multi-stage OD segmentation in CFP flowchart
+In the order of the arrows, the sequence is preprocessing, data quality enhancement, coarse optic disc segmentation, optic disc positioning, optic disc fine segmentation, and postprocessing.
+Illustration of the proposed W-Net
+The left branch is to learn boundary information of OD. The right branch is to learn region information. The backbone is similar to CE-Net. The last down-sampling layer adopts a dense atrous convolution module (DAC) and residual multi-kernel pooling module (RMP).
+For the convenience of description, we denote the image to be segmented as I∈Rh×w×3, where h and w represent the height and width of each input scan, respectively.
+
+## Data quality enhancement module (DQEM)
+To apply OD segmentation to different data domains and improve model inference’s robustness, we first use Cycle-GAN11 for data quality enhancement. The DQEM module transforms various CFPs into similar image domains, thus improving the contrast of the OD region of the CFPs. In this way, we achieve the purpose of improving the robustness of the CSM. In this process, the foreground needs to be cropped initially, and we denote it as Icrop∈R256×256×3. The output of this module is Icycle∈R256×256×3. In general, the computational procedure of DQEM can be summarized as:(Equation 4)Icycle=GA(Icrop)(Equation 5)Icrop=R(I∗Imask)
+Here, R(⋅) stands for resampling function, which interpolates the input image to 256 × 256×3 by bilinear interpolation. Imask is an image generated by thresholding the grayscale image of image I that only contains the retinal foreground. When the gray level of the gray image of image I is greater than 5, the pixel value of Imask is 1, otherwise it is 0. Then we use the largest connected area as Imask.
+It is worth noting that the images generated by Cycle-GAN may change the original features, such as generating structures that are not present in the input.
+This false information generated by GANs will affect the segmentation accuracy. The reason we can use a GAN is that our next stage of segmentation is a coarse segmentation whose purpose is to localize the OD region rather than segmentation.
+
+## Coarse segmentation module (CSM)
+CSM segments the image Icycle generated by DQEM. CSM does not need to produce fine segmentation, i.e., we allow the model to recognize non-OD regions as OD regions and tolerate rough boundaries as well. In other words, we do not pursue accuracy, but only the recall of CSM. We use SA-UNet to perform a coarse segmentation of OD. As shown in the below figure, compared with the U-Net block, the SA-UNet block adds DropBlock and batch normalization (BN) layer,39 which can enhance important features and suppress unimportant features, thereby improving the network’s representation ability. In addition, Spatial Attention Module (SAM) is introduced into SA-UNet, aggregates the channel information of a feature map by using the maximum pooling and average pooling, generates two 2D maps Fsmp, and Fsmp, and then concatenated and convolved by a standard convolution layer, producing our 2D spatial attention map. Spatial attention can enhance important features and suppress unimportant ones, thus improving the representation ability of the network, the final output of SAM is calculated as:PCS=F⋅MS(F)=F⋅σ(f7×7([MaxPool(F);AvgPool(F)]))=F⋅σ(f7×7([FmpS;FapS]where the input image is F∈RH×W×C and the output image is PCS∈RH×W×C. f7 × 7(·) denotes a convolution operation with a kernel size of 7 and σ (·) represents the Sigmoid function.Original U-Net block (left), SA-Unet block (right)
+Original U-Net block (left), SA-Unet block (right)
+We denote the probability map of the SA-UNet outputs as Pcs, and the output of this module as ODcs.(Equation 6)ODcs={1Pcs≥T0Pcs<Twhere T is the threshold value. In this paper, T = 0.3×max (Pcs). This way, this stage’s output can contain at least one OD region.
+
+## OD localization module (OLM)
+Due to the setting method of T, there are many false positive regions in ODcs, and the role of OLM is to determine which region contains OD. The positional between the ODcs and image I has a corresponding mapping relationship. Therefore, for each connected region Ri of ODcs, the corresponding region R0i can be found in image I. According to the actual situation, we crop out IPi∈Rhi×wi×3 in the image I as the corresponding region Ri. After that, we use ResNet10122 to divide IPi into patches that contain the whole OD and patches that do not contain the OD, and keep only the IPi that contains the whole OD, which we denote as IP. The cropping strategy is to crop the hi×wi region on the image I with the center of each connected region as the center. In this paper, hi=wi=0.4×min⁡(h,w), and we can express this process as(Equation 7)IP=∑iIPi∗øi(Equation 8)øi={1POL≥T0POL<Twhere i is the index of the connected region. POL is the output probability of the OD localization model ResNet101. T is the threshold value, T = max (POL).
+
+## Fine segmentation module (FSM)
+Figure in method details shows W-net with a W-shaped decoder (left branch) -encoder (middle) -decoder (right branch) structure, which consists of two branches similar to CE-Net23 and shares the same down sampling feature maps. In the encoder module, we use the first four feature extraction blocks of the pre-trained ResNet-3422 without the average pooling layer and the fully connected layer. Between the encoder and decoder is the context extractor module, which is composed of DAC block and RMP block. This module is described in detail in DAC module and RMP module. In each step of the decoder includes a 1 × 1 convolution, 3 × 3 transpose convolution and 1 × 1 continuous convolution, the number of feature channels is halved. Then, the corresponding feature map of the encoder is connected by skip connection block, the final output is the same size as the original input mask. Prior knowledge suggests that the boundary of OD is circular or elliptical. Accordingly, we use the boundary loss inspired by21 to make the model learn the edge information of OD. For the left branch, boundary loss21 is used as the loss function so that the network can learn more edge information. For the right branch, dice loss is used to get more region information. Combining the boundary features and region features of both left and right branches, the loss functions of the left and right branches are added together as the final loss function, and finally the output image of OD segmentation is obtained.
+
+## DAC module and RMP module
+The backbone of the network is borrowed from CE-Net.23 The dense atrous convolution module (DAC) and the residual multi-kernel pooling module (RMP) are used in the last down-sampling layer. As shown in below figure, the DAC module has three branches. The atrous rate fields of the convolution kernel of each branch are 3, 7, 9, and 19. Finally, a 1 × 1 convolution in each branch is used for feature channel sorting, while the other branch does not perform any operation. Using a large atrous rate broadens the atrous rate field of the model without enlarging the computational effort, allowing more comprehensive features to be extracted, while using a smaller atrous rate convolution allows more subtle features. We can express it as,(Equation 9)Fout[j]=∑k=04Conv(Fin[j])where for the jth input feature map Fin[j], its output Fout[j] is the sum of the five branches. Conv(⋅) is a cascaded atrous convolution operation performed on each branch.Illustration of DAC and RMP moduleOn the left is the DAC module, which has 5 branches: 4 atrous convolution branches and 1 feature branch. The DAC module improved the receptive field without increasing the number of parameters. On the right is the RMP module, which has 4 pooling kernels (2 × 2, 3 × 3, 5 × 5, 6 × 6) and a 1 × 1 convolution layer. The RMP module improved the ability to learn features of different scales.
+Illustration of DAC and RMP module
+On the left is the DAC module, which has 5 branches: 4 atrous convolution branches and 1 feature branch. The DAC module improved the receptive field without increasing the number of parameters. On the right is the RMP module, which has 4 pooling kernels (2 × 2, 3 × 3, 5 × 5, 6 × 6) and a 1 × 1 convolution layer. The RMP module improved the ability to learn features of different scales.
+In semantic segmentation, pooling layers can broaden37 the atrous rate field of convolution kernels, but reduce the accuracy. To solve this problem, we use an RMP module like CE-Net. The RMP module has multiple pooling kernels that can extract different levels of contextual information. And we use 1 × 1 convolution at each layer of the pooling operation to reduce the dimensionality of the feature map to 1/N of the original dimensionality, where N is the number of channels of the original feature map. Then, we up-sample the low-dimensional feature map and obtain features of the same size as the original feature map through bilinear interpolation. Finally, we concatenate the original features with the up-sampled feature map as output. This process can be expressed as follows,(Equation 10)Fpool[i]=up{conv1[Maxpool(Fin)[i]]}(Equation 11)Fout=Fpool[0],Fpool[1],⋅⋅⋅,Fpool[k]where Fpool[i] represents the output corresponding to the i-pooling kernel. up(⋅) means to interpolate in a bilinear fashion. conv1(⋅) is a 1∗1 convolution operation. K is the number of pooling kernels, which is taken as k = 4 in this paper. The sizes of the pooling kernels are 2 × 2, 3 × 3, 5 × 5, and 6 × 6, respectively.
+The decoding structure uses 1 × 1 convolution-3×3 deconvolution-1×1 convolution. The skip connection part is performed with the residual connection module in CE-Net, i.e., the output feature is the sum of different input features.
+
+## Quantification and statistical analysis
+To accommodate the circular structure of the OD, in the left boundary branch, we add boundary loss21 to the training process of W-Net. The theory of adding boundary loss has been verified in.21 The computational procedure can be formulated as follows(Equation 12)BL(y,y)=∑qφy(q)Sθ(q)(Equation 13)φy(q)={Dy(q)q∉y−Dy(q)q∈ywhere Sθ(q) is the forward output result of the network model yl at point q, and Dy(q) is the distance between point q and the closest point Z∂G(q) on the contour ∂y.
+Thus, the loss of our left branch can be expressed as,(Equation 14)Dice(y,y)=1−2×y×yy+y(Equation 15)LL(y,yl)=βDice(y,yl)+(0.5−β)×BL(y,yl)where yl is the output of the left branch and y is the label corresponding to the input. β is a hyperparameter that will be discussed in the influence of super parameter section. In the right branch, the loss we use is Dice loss, which is,(Equation 16)LR(y,yr)=Dice(y,yr)where yr is the output of the left branch and y is the label corresponding to the input. We use the weighted loss as our final loss function:(Equation 17)L(yl,yr,y)=LL(y,yl)+αLR(y,yr)where α is a hyperparameter, which we will explain in detail in the experiments and results section.
+
+## Table Table 1: An overview of the datasets
+Dataset | Number of images | Resolution | R | G | B
+Train | 400 | 2056 × 2124 | 27.37 ± 7.10 | 42.79 ± 9.51 | 71.86 ± 15.18
+Val | 400 | 1634 × 1634 | 54.88 ± 9.77 | 68.92 ± 10.88 | 104.37 ± 12.79
+Test | 400 | 1634 × 1634 | 56.51 ± 9.15 | 69.03 ± 10.48 | 102.99 ± 12.48
+Drishti-GS1 | 101 | (1741–1845) × (2046–2468) | 12.95 ± 5.82 | 40.80 ± 12.09 | 85.61 ± 21.31
+GAMMA | 100 | 2000 × 29921934 × 1956 | 10.23 ± 8.47 | 33.08 ± 10.58 | 66.73 ± 16.16
+IDRiD | 81 | 2848 × 4288 | 17.01 ± 14.63 | 57.83 ± 10.34 | 118.32 ± 15.03
+
+## Table Table 2: The average Dice of ablation experiments
+Avg Dice | REFUGE Train | REFUGE Val | REFUGE Test | Drishiti-GS1 | GAMMA | IDRiD
+FCN | 0.9596 | 0.9577 | 0.9543 | 0.9534 | 0.858 | 0.8095
+UNet | 0.9532 | 0.954 | 0.9534 | 0.9423 | 0.8723 | 0.8173
+Unet++ | 0.9525 | 0.9488 | 0.9459 | 0.4247 | 0.6197 | 0.7963
+PSPNet | 0.9593 | 0.9554 | 0.955 | 0.9469 | 0.8894 | 0.8403
+deeplabV3+ | 0.9563 | 0.956 | 0.9519 | 0.8808 | 0.8967 | 0.8605
+Mnet | 0.9625 | 0.9619 | 0.7953 | 0.9498 | 0.898 | 0.739
+pOSAL | 0.9696 | 0.9536 | 0.9601 | 0.9533 | 0.9383 | 0.913
+CE-Net | 0.9796 | 0.9519 | 0.9512 | 0.9217 | 0.8862 | 0.9077
+W-Net | 0.9783 | 0.9749 | 0.9611 | 0.9534 | 0.941 | 0.9525
+
+## Table Table 3: The average IOU of ablation experiments
+Avg IOU | REFUGE Train | REFUGE Val | REFUGE Test | Drishiti-GS1 | GAMMA | IDRiD
+FCN | 0.9232 | 0.9196 | 0.9137 | 0.9124 | 0.7942 | 0.7385
+UNet | 0.9124 | 0.9129 | 0.9119 | 0.8946 | 0.81 | 0.756
+Unet++ | 0.9108 | 0.9041 | 0.9008 | 0.3324 | 0.6326 | 0.7029
+PSPNet | 0.9224 | 0.9154 | 0.9147 | 0.9014 | 0.8153 | 0.7699
+deeplabV3+ | 0.9175 | 0.9165 | 0.9094 | 0.8331 | 0.8345 | 0.7905
+Mnet | 0.9286 | 0.9272 | 0.676 | 0.907 | 0.8306 | 0.5925
+pOSAL | 0.9414 | 0.9123 | 0.924 | 0.9118 | 0.8968 | 0.8533
+CE-Net | 0.9602 | 0.9097 | 0.9079 | 0.8721 | 0.804 | 0.8535
+W-Net | 0.9568 | 0.9517 | 0.9512 | 0.9137 | 0.8898 | 0.9078
+
+## Table Table 4: The average Hausdorff Distance of ablation experiments
+Avg Hausdorff | REFUGE Train | REFUGE Val | REFUGE Test | Drishiti-GS1 | GAMMA | IDRiD
+FCN | 0.2357 | 0.1891 | 0.2348 | 0.4252 | 1.1667 | 7.3951
+UNet | 0.4243 | 0.2515 | 0.2578 | 0.7203 | 1.5006 | 13.7276
+Unet++ | 0.4107 | 0.6188 | 1.0824 | 55.0164 | 16.2824 | 38.4777
+PSPNet | 0.2346 | 0.2027 | 0.225 | 0.5845 | 1.4459 | 2.3588
+deeplabV3+ | 0.3427 | 0.2147 | 0.2689 | 2.2018 | 1.8171 | 14.4152
+Mnet | 0.2171 | 0.1741 | 4.873 | 0.5499 | 1.9571 | 7.9059
+pOSAL | 0.1202 | 0.2238 | 0.1678 | 0.3594 | 4.6172 | 1.5848
+CE-Net | 0.0584 | 0.2663 | 0.3309 | 1.9567 | 2.9993 | 5.844
+W-Net | 0.0675 | 0.0688 | 0.0711 | 0.3835 | 0.555 | 0.5354
+
+## Table Table 5: The minimum Dice of ablation experiments
+Min Dice | REFUGE Train | REFUGE Val | REFUGE Test | Drishiti-GS1 | GAMMA | IDRiD
+FCN | 0.6891 | 0.8651 | 0.7836 | 0.7375 | 0 | 0
+UNet | 0.4485 | 0.7702 | 0.7291 | 0.7615 | 0 | 0
+Unet++ | 0.5713 | 0.6642 | 0.1111 | 0 | 0 | 0
+PSPNet | 0.8148 | 0.8693 | 0.7533 | 0.7676 | 0 | 0
+deeplabV3+ | 0.6474 | 0.8238 | 0.6968 | 0 | 0 | 0
+Mnet | 0.6877 | 0.8131 | 0.3834 | 0.7661 | 0.4595 | 0.5418
+pOSAL | 0.8304 | 0.8212 | 0.8177 | 0.8135 | 0 | 0
+CE-Net | 0.9396 | 0.7161 | 0.7822 | 0.0006 | 0.3937 | 0
+W-Net | 0.9326 | 0.9259 | 0.8722 | 0.8654 | 0.6457 | 0.856
+
+## Table Table 6: The average Dice of ablation experiments
+Method | Train | Val | Test | Drishti-GS1 | GAMMA | IDRiD
+CE-Net1 | 0.9796 | 0.9519 | 0.9512 | 0.9217 | 0.8862 | 0.9077
+CE-Net2 | 0.9735 | 0.9751 | 0.9464 | 0.9699 | 0.9264 | 0.9450
+W-Net-no-BL | 0.9782 | 0.9767 | 0.9602 | 0.9546 | 0.9386 | 0.9516
+W-Net | 0.9783 | 0.9749 | 0.9611 | 0.9534 | 0.941 | 0.9525
+
+## Table Table 7: The minimum Dice of ablation experiments
+Method | Train | Val | Test | Drishti-GS1 | GAMMA | IDRiD
+CE-Net1 | 0.9396 | 0.7161 | 0.7822 | 0.0062 | 0.3937 | 0
+CE-Net2 | 0.9302 | 0.9386 | 0.8218 | 0.8372 | 0.5844 | 0.7149
+W-Net-no-BL | 0.9178 | 0.877 | 0.8764 | 0.8044 | 0.6413 | 0.8304
+W-Net | 0.9326 | 0.9259 | 0.8722 | 0.8654 | 0.6457 | 0.8560
+
+## Table Table 8: The average Dice of parameter setting experiments
+ | Fine-tune | α | β | Train | Val | Test | Drishti-GS1 | GAMMA | IDRiD
+1 | False | 0.7 | 0.3 | 0.9771 | 0.9780 | 0.9593 | 0.9507 | 0.9377 | 0.9506
+2 | False | 0.6 | 0.4 | 0.977 | 0.9763 | 0.9594 | 0.9564 | 0.9383 | 0.9510
+3 | False | 0.5 | 0.5 | 0.9782 | 0.9767 | 0.9602 | 0.9546 | 0.9388 | 0.9525
+4 | False | 0.4 | 0.6 | 0.9772 | 0.9774 | 0.9599 | 0.9538 | 0.9384 | 0.9512
+5 | True | 0.45 | 0.45 | 0.9783 | 0.9767 | 0.9604 | 0.9559 | 0.9388 | 0.9526
+6 | True | 0.4 | 0.4 | 0.9783 | 0.9749 | 0.9611 | 0.9534 | 0.941 | 0.9525
+7 | False | 0.45 | 0.45 | 0.9733 | 0.9715 | 0.9597 | 0.9431 | 0.9386 | 0.9505
+8 | False | 0.4 | 0.4 | 0.9672 | 0.9652 | 0.9589 | 0.9303 | 0.9403 | 0.9487
+
+## Table : 
+REAGENT or RESOURCE | SOURCE | IDENTIFIER
+Deposited data
+
+REFUGE | Orlando J I et al.18 | https://refuge.grand-challenge.org/
+Drishti-GS1 | Sivaswamy J19 | http://cvit.iiit.ac.in/projects/mip/drishti-gs/mip-dataset2/enter.php
+GAMMA | Wu J et al.38 | https://aistudio.baidu.com/aistudio/competition/detail/90
+IDRiD | Porwal P20 | https://idrid.grand-challenge.org/
+
+Software and algorithms
+
+Cycle-GAN | Zhu J-Y et al.11 | https://github.com/junyanz/CycleGAN
+Resnet −101 | He K et al.22 | https://github.com/zhanghang1989/ResNeSt
+SA-Unet | Guo, Changlu et al.39 | https://github.com/clguo/SA-UNet
+CE-Net | Gu Z et al.23 | https://github.com/Guzaiwang/CE-Net
+W-net | This paper | https://github.com/ts66666/OD
+Pytorch | Version1.11.0 | https://pytorch.org/docs/1.11/
+Python | Version 3.8.0 | https://www.python.org/downloads/release/python-380/
+
+## Table : The training settings in our work
+Module | Network | Optimizer | Epochs | Learning rate | Loss function
+QSEM | Cycle-GAN | Adam betas: (0.5, 0.999) | 200 | Strategy: poly learning rateInitial: 0.0002Decay iters: 50 | Adversarial lossCycle loss
+CSM | SA-UNet | SGD momentum = 0.9 | 100 | Strategy: plateauPatience: 50Factor: 0.9Initial: 0.01 | Dice loss
+OLM | ResNet101 | SGD momentum = 0.9 | 100 | Strategy: plateauPatience: 50Factor: 0.9Initial: 0.0001 | Cross-entropy loss
+FSM | W-Net | Adam | 1000 | Strategy: poly learning rateInitial: 0.0002Power: 0.9 | Boundary lossDice loss
+
+## Figure Figure 1: Examples of different datasetsFrom left to right are REFUGE’s training dataset, validation dataset, test dataset, Drishiti-GS1 dataset, and IDRiD dataset.
+
+## Figure Figure 2: Segmentation performance of M-Net in different OD datasets
+
+## Figure : Multi-stage OD segmentation in CFP flowchartIn the order of the arrows, the sequence is preprocessing, data quality enhancement, coarse optic disc segmentation, optic disc positioning, optic disc fine segmentation, and postprocessing.
+
+## Figure : Illustration of the proposed W-NetThe left branch is to learn boundary information of OD. The right branch is to learn region information. The backbone is similar to CE-Net. The last down-sampling layer adopts a dense atrous convolution module (DAC) and residual multi-kernel pooling module (RMP).
+
+## Figure : Original U-Net block (left), SA-Unet block (right)
+
+## Figure : Illustration of DAC and RMP moduleOn the left is the DAC module, which has 5 branches: 4 atrous convolution branches and 1 feature branch. The DAC module improved the receptive field without increasing the number of parameters. On the right is the RMP module, which has 4 pooling kernels (2 × 2, 3 × 3, 5 × 5, 6 × 6) and a 1 × 1 convolution layer. The RMP module improved the ability to learn features of different scales.

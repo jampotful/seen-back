@@ -1,0 +1,2383 @@
+Through eagle eyes—the potential of satellite-derived LAI time series to estimate masting events and tree-ring width of European beech
+Juliane Stolz, Matthias Forkel, Ernst van der Maaten, Jan Martin, Marieke van der Maaten‐Theunissen (2023). Regional Environmental Change. https://doi.org/10.1007/s10113-023-02068-5. doi:10.1007/s10113-023-02068-5. Licence: cc-by. Text from pdf.
+
+Regional Environmental Change (2023) 23:74
+https://doi.org/10.1007/s10113-023-02068-5
+
+ORIGINAL ARTICLE
+
+Through eagle eyes—the potential of satellite‑derived LAI time series
+to estimate masting events and tree‑ring width of European beech
+Juliane Stolz1,2
+
+· Matthias Forkel3 · Ernst van der Maaten1 · Jan Martin2 · Marieke van der Maaten‑Theunissen1
+
+Received: 17 August 2022 / Accepted: 6 April 2023 / Published online: 23 May 2023
+© The Author(s) 2023
+
+Abstract
+Masting is a well-known phenomenon in forest science in which trees recurrently produce exceptional high seed
+amounts throughout their lifespan. Occurring simultaneously across wide regions, masting may impact carbon sequestration and carbon cycling of forest ecosystems. To identify masting-induced changes in tree canopies, remote sensing
+methods may offer a suitable tool, though so far only few studies have used RS methods to investigate the relationship
+between masting and tree-ring width (TRW). Therefore, we employed a regional network of 19 European beech sites
+along a precipitation gradient in north-eastern Germany, providing time series of TRW (1961–2017) and categorical masting data (1992–2020). Combined with leaf area index (LAI) from the medium-resolution satellite sensors
+SPOT-VGT/PROBA-V and MODIS, we assessed the relationship between all three parameters by correlation analysis.
+Furthermore, we identified common climatic drivers and spatial masting patterns along gradients of water availability.
+We found negative relationships for both TRW and LAI with masting and a positive correlation for TRW with LAI
+for SPOT-VGT/PROBA-V data. Contrary, MODIS LAI provided no significant relationships. Water availability did
+not impact masting occurrence or intensity. The climate correlations showed that masting and TRW are commonly
+driven by summer climate in June and July, while we found no correlations between climate and LAI. We conclude that
+medium-resolved SPOT-VGT/PROBA-V LAI is suitable to observe masting but not to estimate TRW. Nonetheless, the
+results should be thoroughly interpreted in the context of uncertainties of RS measurements and complex interactions
+of different environmental drivers.
+Keywords Fructification · Tree growth · Leaf area index · Climate sensitivity · Remote sensing
+
+Introduction
+Communicated by José Valentin Roces-Diaz
+* Juliane Stolz
+juliane.stolz@tu-dresden.de
+Matthias Forkel
+matthias.forkel@tu-dresden.de
+Ernst van der Maaten
+ernst.vandermaaten@tu-dresden.de
+Jan Martin
+jan.martin@lfoa-mv.de
+Marieke van der Maaten‑Theunissen
+marieke.theunissen@tu-dresden.de
+1
+
+Chair of Forest Growth and Woody Biomass Production, TU
+Dresden, Tharandt, Germany
+
+2
+
+Landesforst Mecklenburg-Vorpommern, Schwerin, Germany
+
+3
+
+Junior Professorship in Environmental Remote Sensing, TU
+Dresden, Dresden, Germany
+
+European beech (Fagus sylvatica L.; in the following called
+beech) is one of the most widespread and dominant broadleaved tree species throughout Europe, with high economic
+and ecological importance (Leuschner and Ellenberg 2017).
+Consequently, beech has established itself as one of the most
+popular study species within the field of dendroscience,
+especially in light of climate change impact (Leuschner
+2020). Despite high research efforts that focus on climategrowth relationships or climate adaptation mechanisms, a
+comparatively small number of studies investigated one of
+the main characteristics of this tree species: its pronounced
+masting behavior.
+Generally, the term masting describes the spatially synchronized seed production across wide regions. Here, the
+magnitude of seed production fluctuates throughout a tree’s
+lifespan, resulting in years with lower or higher amounts of
+
+13
+
+Vol.:(0123456789)
+
+74 Page 2 of 14
+
+seeds (Kelly 1994; Pesendorfer et al. 2021). The so-called
+mast years are years in which exceptional high amounts of
+seeds are produced (LaMontagne and Boutin 2009), ultimately leading to a shift of leaf-fruit ratio within the canopy.
+Most studies show that beech masting is driven by distinct temperature/drought conditions in summer over multiple years (Hacket-Pain et al. 2015; Vacchiano et al. 2017;
+Mund et al. 2020). More specifically, masting is commonly
+triggered by a sequence of cold/moist summers 2 years
+before masting (t−2) and warm/dry summers 1 year before
+(t−1) and during the mast year (t0). Beside these primary
+climate controls, other factors may impact the occurrence
+of masting as well, such as soil moisture (Müller-Haubold
+et al. 2015) or nutrient supply (Mund et al. 2020). Furthermore, Nussbaumer et al. (2020) highlighted that masting might be also interrupted by extreme summer drought
+and heat, eventually leading to the abortion of fruits. As a
+consequence, even if climatic conditions for masting were
+previously met, trees may not show a distinct masting
+behavior. While these additional factors (e.g., soil moisture, nutrient supply, and extreme summer drought) were
+shown to impact masting to certain extents, all three studies
+reported that climatic drivers, such as summer temperature and/or precipitation, had an overall stronger impact
+on masting. Consequently, these additional factors may
+be seen as secondary controls, which have the potential
+to alter masting occurrence or intensity. Because studies
+investigating the secondary controls remain scarce, we cannot say for sure to which extent masting is impacted by
+these parameters. Therefore, it is necessary to investigate
+masting within the context of multiple environmental drivers and not solely based on climate conditions.
+Hacket-Pain et al. (2015) highlighted a strong negative
+relationship between masting and tree-ring width (in the
+following called TRW). While masting is primarily and
+predominantly controlled by summer conditions of the
+two previous years, t−2 and t−1 (Hacket-Pain et al. 2015;
+Müller-Haubold et al. 2015; Vacchiano et al. 2017; Mund
+et al. 2020; Bogdziewicz et al. 2021b), TRW is often
+reported to be sensitive to summer climate conditions
+of the current growing year, t0 (Scharnweber et al. 2011;
+Vacchiano et al. 2017; Harvey et al. 2020). Unfortunately,
+tree growth and consequently TRW are not impacted by
+climate alone but are also driven by site-specific soil water
+availability (Mund et al. 2010; Scharnweber et al. 2013),
+inter-specific competition/facilitation effects (Houpert et al.
+2018; Vanhellemont et al. 2019), and even by masting itself
+(Hacket-Pain et al. 2017).
+Previous masting research mainly focused on the interaction between climate, TRW, and/or masting (Mund et al.
+2010, 2020; Hacket-Pain et al. 2015, 2018), spatial patterns in masting (Vacchiano et al. 2017; Bogdziewicz et al.
+2021a), or mast-limiting climatic factors (Nussbaumer et al.
+
+13
+
+Regional Environmental Change (2023) 23:74
+
+2020). Mund et al. (2020) emphasized that the relationship
+between masting and TRW cannot be considered a simple
+trade-off; instead it is a complex interaction network of different environmental drivers. Following, the relationship
+between TRW and masting plays a key role in the understanding of beech growth under climate change and new
+approaches are needed to investigate this relationship.
+Here, the availability of RS data across large areas offers
+great potential for studying forest ecosystem dynamics under
+climate change, for example, by assessing the general forest condition (Buras et al. 2021), detecting and quantifying
+the impact of late frost (Menzel et al. 2015; Bascietto et al.
+2018; Olano et al. 2021), and drought events (Shekhar et al.
+2020), or by identifying and mapping insect-induced defoliation and consequent tree mortality (Townsend et al. 2012;
+Senf et al. 2017; Spruce et al. 2019). Rogers et al. (2018)
+showed that early warning signals of tree mortality are even
+evident up to 2 decades before tree death. In this study, we
+aim to disentangle the relationship of TRW and masting in
+regard to their diverse environmental drivers using RS data.
+We assume that masting events can be detected with
+multi-spectral RS observations and consequently derived
+products because masting is associated with a reduction in
+leaf area (Müller-Haubold et al. 2015) and hence should
+cause a reduction in the absorption of blue and green light as
+well as a reduction of reflectance in near-infrared. However,
+as observations within a pixel of a RS image are usually
+a mixture of the reflectance from tree canopies, adjacent
+herbaceous vegetation, and soil/background, disentangling
+the effect of masting in single remote sensing images might
+be challenging. Nonetheless, small inter-annual differences
+in leaf development and cover can be commonly retrieved
+from time series of spectral vegetation indices or of biophysical parameters such as leaf area index (LAI) in studies
+of land surface phenology (Rodriguez-Galiano et al. 2015;
+Forkel et al. 2015). For example, Jolly et al. (2022) showed
+that heavy flowering, as proxy for subsequent masting, was
+detectable within the canopy of southern beech forests
+(genus Fuscospora and Lophozonia) using RS data. Many
+studies around the world set a strong focus on early masting
+detection and monitoring to enable preventive pest control
+of seed predators (Elliott and Kemp 2016; Jolly et al. 2022).
+European masting research, on the other hand, focuses more
+often on growth-productive traits, such as tree-ring width.
+Here, Decuyper et al. (2020) reported that TRW of European
+beech is assessable with remotely sensed enhanced vegetation index data (EVI derived from MODIS satellites) if
+physical damage occurs to the tree canopy. While the aforementioned study did not incorporate the masting aspect, it
+nonetheless shows that canopy-impacting characteristics
+should be detectable with RS data.
+Thus, we are convinced that a study incorporating masting, TRW, and RS data will improve our understanding of
+
+Page 3 of 14 74
+
+Regional Environmental Change (2023) 23:74
+
+Materials and methods
+The BDF‑network
+In this study, we employ a network of 19 beech sites situated
+along a precipitation gradient in the north-eastern German
+lowlands (Fig. 1a). This region is characterized by a transition from a more maritime climate in the west to a continental one in the east (659–458 mm annual precipitation).
+The regularly managed beech sites are part of a permanent
+observation network of the state forestry service, Landesforst Mecklenburg-Western Pomerania. Soil status (soil
+type, water availability, and nutrient levels) and tree vitality
+(crown condition and fructification) are recorded at distinct
+time intervals (for more details, see Dieckmann 2004).
+
+Climate data
+Average monthly temperatures and total monthly precipitation sums were derived as 1 × 1 ­km2 grid data for the
+time period 1900–2020 from the German Weather Service
+(DWD Climate Data Center 2020a, b). We extracted the
+climate data for each study site (Fig. 1b) and calculated
+
+LAI
+JA
+
+4
+3
+
+54.4
+
+2
+
+900
+
+12
+
+b)
+
+800
+
+10
+
+700
+
+8
+
+600
+500
+
+6
+
+400
+
+Temp. (°C)
+
+a)
+
+Prec. (mm)
+
+the complex interaction network of different environmental drivers of masting and TRW. At the same time, this
+study enables us to assess the potential of remote-sensing
+approaches to estimate masting. This is especially important because the possibility of acquiring masting data via
+remote sensing approaches harbors significant merit for
+masting research by enabling constant monitoring of seed
+production across large scales. Up to this moment, we are
+not aware of existing studies investigating masting and
+tree-ring width using RS data in a combined approach.
+With the help of already available time series data of
+TRW, in-field measured masting, and remotely sensed LAI,
+we aim to disentangle the relationship between these target
+parameters. We hypothesize that (I) the target parameters
+are strongly interrelated, with TRW and LAI negatively
+correlating to masting, while LAI and TRW positively correlate with each other. Furthermore, secondary controls
+may impact masting, and thus we expect that (II) masting
+abundance and intensity increase with higher site-specific
+water availability. Lastly, we assume that the relationship
+between the target parameters is predominantly climateimpacted; more specifically, we hypothesize that (III) the
+three target parameters are driven by summer climate.
+
+Masting (%)
+
+1
+
+DH
+VI
+
+54.0
+
+RN
+
+WD
+
+GO
+
+GW
+
+SD
+
+LS
+
+RO
+
+0.25
+0.00
+
+0.9
+0.6
+
+CA
+
+KO
+
+6
+
+LAI
+
+LT
+
+12
+
+Longitude
+
+13
+
+Fig. 1  Map of the BDF-Network and raw data time series. a The
+remotely sensed leaf area index (LAI) of forest areas in Mecklenburg-Western Pomerania. Shown is the maximum LAI (SPOT-VGT/
+PROBA-V data) averaged for the months of June–August for the time
+period 1999–2000. Forest areas are classified with ESA CCI land cover
+map (ESA 2014), while non-forest areas are masked. The white circles
+and labels represent the 19 beech study sites. b Annual precipitation
+sums (columns) and annual mean temperature (line) averaged across
+all 19 study sites for the time period 1960–2020. The black bars/ red
+
+14
+
+e)
+
+5
+4
+3
+
+11
+
+d)
+
+1.2
+
+0.3
+
+TK
+
+53.2
+
+Mast class
+0
+1
+2
+3
+
+0.50
+
+1.5
+
+RI
+
+SW
+
+53.6
+
+c)
+
+0.75
+
+SL
+
+GT
+
+TRW
+
+Latitude
+
+GF
+
+1.00
+
+Data
+PROBAV
+MODIS
+
+1960
+
+1980
+
+2000
+
+2020
+
+shadings represent standard deviations for precipitation and temperature,
+respectively. c Abundance of mast events for the time period 1992–
+2020. Different categories of masting intensity are displayed by gray
+shading: 0 = no; 1 = low; 2 = medium; 3 = heavy masting. d Mean treering width (TRW) chronology of all 19 study sites (black line) for the
+time period 1961–2017. Gray shading represents standard deviation. e
+Remotely sensed LAI series for the time period 2000–2020. Red line/
+shading represents PROBA-V data across all study sites with respective
+standard deviations. Gray line/shading shows MODIS data
+
+13
+
+74 Page 4 of 14
+
+Regional Environmental Change (2023) 23:74
+
+The information about masting occurrence and intensity
+was obtained from field observations done by the state
+forestry service. For the period 1992–2012, masting data
+was acquired annually. Since 2015, the observations took
+place every 5 years (Fig. 1c). The masting intensity was
+visually estimated for each tree individually by 4 categories: 0 = no masting, 1 = low masting, 2 = medium masting, and 3 = heavy masting. Afterwards, the masting data
+was averaged for each site, resulting in 19 masting time
+series. In the last step, these averages were assigned to
+the masting classes 0, 1, 2, and 3 using the thresholds
+0–0.5, > 0.5–1.5, > 1.5–2.5, and > 2.5, respectively.
+
+After the exclusion of observations with poor quality as
+described above, we applied a 3-time-step rolling maximum
+filter (calculation across three consecutive observations) to
+each LAI time series to reduce further noise and applied
+then a smoothing spline to interpolate missing values. Temporal means and maximum values were computed from this
+smoothed time series. This resulted in the following LAI
+parameters: mean ­LAIannual, mean ­LAIMay-Jul, max. ­LAIannual,
+max. ­LAIApr-May, max. L
+­ AIMay–Jul, max. L
+­ AIJun–Aug, max.
+­LAISep–Nov. In the end, the maximum L
+­ AIJun–Aug processed
+with a rolling maximum and smoothing spline showed the
+most abundant and highest significances throughout all study
+sites. As the literature reports that the summer months are of
+utmost importance for TRW and masting of European beech,
+we worked with ­LAIJun–Aug (in the following called LAI)
+for the rest of our analyses. This evaluation process resulted
+in 19 LAI time series for the SPOT-VGT/PROBA-V and
+MODIS dataset each, ranging from 1999 to 2020 and from
+2000 to 2020, respectively (Fig. 1e).
+
+Tree‑ring width data
+
+Water gradients
+
+The data on TRW was taken from a previous study focusing on the BDF-Network (Stolz et al. 2021). For each study
+site, raw tree-ring series were detrended using a fixed cubic
+smoothing spline with a 50% frequency cut-off at 30 years.
+Site chronologies were calculated using a bi-weight robust
+mean (Cook and Kairiukstis 1990), resulting in 19 TRW
+chronologies with a common overlap period ranging from
+1961 to 2017 (Fig. 1d). Calculations were done with the
+R-package dplR (version 1.7.2, Bunn 2008, 2010) in R (R
+Core Team 2021).
+
+Site-specific water availability may affect the abundance
+and intensity of masting events. Consequently, we investigated if the mast frequency and intensity are related to
+the water availability along different water gradients. To
+account for possible variations in the water availability
+proxies, we choose three different datasets: (i) a climatic
+gradient employing the annual precipitation sums for each
+study site, (ii) in-field measurements of the effective field
+capacity (= amount of water available for tree growth), and
+(iii) remotely sensed soil water index (= SWI) at different
+T-values (10–100) using the ASCAT SWI dataset (Copernicus Service Information 2018). A higher T-value represents
+stronger time-lagging between surface soil moisture and soil
+moisture at certain depths and thus describes deeper soil
+layers. A pre-evaluation showed that the chosen T-value had
+no drastic effect on the SWI observations (Fig. S1, Supplements), thus we decided to go with the SWI_020 representing soil layers at T-value = 20, which was proven to be a constant value with rather low error rates (Wagner et al. 1999).
+To keep consistency in data availability across our network,
+we chose the time period 2001–2011 in which masting data
+for all 19 study sites was available. The remotely sensed SWI
+was limited to the time period 2007–2011. We counted the
+number of occurring mast years of each masting category
+and present these data in sorted order along the three different water gradients.
+
+the standardized precipitation evapotranspiration index
+­(SPEI6-month) using the R-package SPEI aggregated across a
+6-months scale (version 1.7, Beguería and Vicente-Serrano
+2017).
+
+Masting data
+
+Leaf area index data
+We used two different datasets of remotely sensed LAI
+with medium spatial resolution to account for differences in
+temporal coverage, sensor properties, and the applied corrections for atmospheric distortions and clouds. The first
+dataset employs merged observations from the SPOT-VGT
+and PROBA-V sensors (in the following called SPOT-VGT/
+PROBA-V). The SPOT-VGT/PROBA-V LAI (Copernicus
+Service Information 2017) has a spatial resolution of 1 km
+with observations at a 10-day interval. The dataset has been
+already intensively smoothed, corrected for distortions, and
+gap-filled (Fuster et al. 2020). The Moderate Resolution
+Imaging Spectroradiometer (MODIS)-LAI (Knyazikhin
+et al. 1999) has a spatial resolution of 500 m with an observation frequency of 8 days. The original MOD15A2H LAI
+product comes with quality flags, which we used to exclude
+all observations that were not flagged as good quality (i.e.,
+observations with dead detectors, un-produced pixels, water,
+cloud, cloud shadows, or snow cover).
+
+13
+
+Data analyses
+To investigate the relationship between our target parameters, we conducted correlation analyses for each parameter
+
+Page 5 of 14 74
+
+Regional Environmental Change (2023) 23:74
+
+used species distribution maps (provided by the state forestry service Landesforst Mecklenburg-Western Pomerania)
+to extract species composition and coverage (%) for each
+study site. We chose a 1 km perimeter to ensure that both
+datasets, the lower resolved SPOT-VGT/PROBA-V LAI
+as well as the MODIS LAI data, are encompassed in this
+assessment. Afterward, we correlated beech cover with the
+correlation strengths of LAI × mast and TRW × LAI to assess
+the impact of beech coverage.
+The visualization and statistics for all figures and analyses
+were done in R (R Core Team 2021) and RStudio (RStudio
+Team 2020).
+
+against each other. We used Spearman rank correlations for
+the relationship between TRW against mast and LAI against
+mast, while Pearson correlation was used for TRW against
+LAI. Correlation analyses were done for the BDF-network
+as a whole, as well as for each single study site to account
+for site-specific relationships.
+To explain the resulting parameter correlations and to
+identify possible common climatic drivers, we conducted
+climate correlations for each target parameter. Climate correlations were done for a 3-year period, including the current year and the two previous years, because masting is
+commonly known to be influenced by climate conditions
+in this time period. The analysis period ranged from June
+to December 2 years before (t−2), across the entire year
+before (t−1), and up to September of the current growing
+year (t0). For consistency, we used this period for all three
+target parameters. We used the R package Hmisc (version
+4.6–0, Harrell Jr. 2021) to correlate matrices of the target
+parameters (TRW, masting, and LAI) with climate data
+(temperature, precipitation, and ­SPEI6-month). Again, we
+used Pearson’s correlations for the relationship between
+climate × TRW and climate × LAI, while Spearman’s rank
+correlation was applied for climate × mast, resulting in climate correlation coefficients for each study site and each
+month within our analysis period. Both parameter correlations and climate correlations were done for the common
+data interval 2000–2012, as well as for three prolonged
+calculation periods distinctive to the 3 parameter combinations: TRW × mast (1992–2012), LAI × mast (2000–2012),
+TRW × LAI (2000–2017).
+To discuss site-specific LAI correlations in more detail
+and to assess the applicability of the available LAI data,
+we checked the coverage and homogeneity of beech forests
+within a 1 km perimeter surrounding our study sites. We
+
+2.0
+
+rho = −0.33 p = 2.5e−07
+
+a)
+
+7
+
+Results
+Parameter correlations
+To assess the relationship between the three target parameters (TRW, masting, and remotely sensed LAI), we performed correlation analyses across the whole network as
+well as for individual study sites separately. At first, we
+analyzed the parameter correlations at the network scale
+for a data interval common for all three target parameters
+(2000–2012). The relationships between the target parameters correspond to our expectations, but only when including the LAI derived from SPOT-VGT/PROBA-V sensors
+(Fig. 2): TRW × mast (Fig. 2a) and LAI × mast (Fig. 2b)
+were related negatively, while TRW × LAI (Fig. 2c) showed
+a weak positive correlation. Contrary, MODIS LAI was not
+significantly correlated to either target parameter (Fig. S2,
+Supplements). Because the common data interval is rather
+short, parameter correlations were calculated also across
+the individual overlapping periods for each set of target
+rho = −0.1 p = 0.12
+
+b)
+
+2.0
+
+r = 0.034 p = 0.59
+
+c)
+
+6
+1.5
+
+5
+
+1.0
+
+4
+
+TRW
+
+LAI
+
+TRW
+
+1.5
+
+3
+2
+
+0.5
+
+1.0
+
+0.5
+
+1
+0.0
+
+0
+0
+
+1
+
+2
+
+3
+
+0.0
+0
+
+Mast class
+
+Fig. 2  Parameter correlations at network scale. Shown are the correlations for a tree-ring width × masting, b remotely sensed LAI × masting, c TRW × remotely sensed LAI. The LAI correlations originate
+from SPOT-VGT/PROBA-V data. The boxplots display: median, 25th
+
+1
+
+2
+
+Mast class
+
+3
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+LAI
+
+and 75th percentiles together with the 1.5 interquartile range (whiskers) and outliers. The label above the boxplots and scatterplots show
+Spearman-correlation and Pearson-correlation coefficients and their
+p-values, respectively
+
+13
+
+74 Page 6 of 14
+
+Water gradient
+We found a higher number of non-mast events in comparison
+to low, medium, and high mast for all three water gradients (Fig. 3). Apparently, there was no visible trend, neither
+positive nor negative, in the number of mast events along
+the water gradients. Furthermore, mast events of the same
+intensity were equally distributed across all study sites, irrespective of water availability.
+
+Climate correlations
+For TRW, we found significant positive correlations with
+SPEI in current June and with temperature in May one year
+before (t−1). Additionally, there were significant negative
+correlations with precipitation in October in t−2 (Fig. 4a).
+The climate correlations for masting showed the most
+pronounced signals of all three target parameters (Fig. 4b).
+For the summer month of July 2 years before (t−2), we see
+significant negative/positive correlations for temperature/
+precipitation and SPEI, respectively. This pattern is inverted
+in t−1 with significant positive correlations for temperature
+
+13
+
+a)10
+
+Mast class
+0
+1
+2
+3
+
+Nb. of masting events
+
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+575 610 614 621 636 640 655 658 659 662 678 683 692 699 708 715 720 721 745
+
+Precipitation (mm)
+
+b)10
+Nb. of masting events
+
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+130 143 253 264 267 278 282 284 296 309 325 328 329 335 335 341 347 365 381
+
+Effective field capacity
+
+c) 5
+Nb. of masting events
+
+parameters to tap the full data range. Thus, we used separate
+calculation periods for the three-parameter combinations:
+TRW × mast, LAI × mast, and TRW × LAI. While the parameter correlations with prolonged intervals showed slight significance (Fig. S3, Supplements), the overall response direction did not change compared to the results of the parameter
+correlations across the common interval 2000–2012 (Fig. 2).
+To untangle the relationship between TRW and LAI,
+we performed the target parameter correlation also for
+subsets of the data. When the data of the mast years, e.g.,
+masting class = 3, was excluded, the relationship between
+TRW × LAI turned out to be insignificant (Fig. S4, Supplements). Additional group-wise correlations between TRW
+and LAI for each masting category supported this finding.
+Here, the relationship between TRW and LAI was insignificant for masting categories 0, 1, and 2, representing no to
+moderate masting (data not shown).
+The site-scale analyses produced similar results for SPOTVGT/PROBA-V data (Fig. S5, Supplements) and MODIS
+data (Fig. S6, Supplements), respectively. Here, most study
+sites show a trend of decreasing TRW with increasing mast
+intensity. While SPOT-VGT/ PROBA-V correlations showed
+a visual trend that is in line with the network-scale analysis, the direction of MODIS correlations differed drastically
+from site to site. The site-specific results are not as pronounced as the network-scale analysis because the general
+data range is restricted to the overlap period of TRW and
+mast data (2000–2017), with nmast ≤ 15 limiting the statistical power for site-specific analyses.
+
+Regional Environmental Change (2023) 23:74
+
+4
+
+3
+
+2
+
+1
+
+0
+54
+
+54
+
+55
+
+55
+
+56
+
+56
+
+56
+
+56
+
+58
+
+58
+
+59
+
+SWI (T−value = 20)
+
+61
+
+61
+
+62
+
+63
+
+63
+
+Fig. 3  Site-specific masting abundance in relation to three different
+water gradients: a climatic precipitation gradient, b field measurements of effective field capacity, and c remotely sensed soil water
+index (SWI) at T-value 20. Single study sites (n = 19) are sorted with
+increasing water availability gradient at the x-axis, while the abundance of masting years is shown on the y-axis. The data time period
+ranges between 2001 and 2011 for a and b and between 2007 and
+2011 for c. Different masting categories are decoded by gray shading:
+0 = no; 1 = low; 2 = medium; 3 = heavy masting. Water gradients are
+ordered from left to right with increasing water availability
+
+and negative correlations for precipitation and SPEI. The
+climate correlations in t0 are not as distinct as in the previous years. Still, there exists some significant negative/
+positive correlation for temperature/precipitation and SPEI,
+
+Page 7 of 14 74
+
+Regional Environmental Change (2023) 23:74
+
+t−2
+**
+*
+*
+*
+
+*
+
+*
+
+**
+**
+*
+*
+
+*
+*
+*
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+*
+
+*
+
+−0.5
+
+*
+*
+
+*
+*
+
+*
+
+*
+**
+*
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+*
+
+*
+*
+**
+
+*
+**
+
+*
+
+0.0
+
+−1.0
+
+*
+
+*
+*
+
+*
+*
+
+0.5
+
+Time
+
+*
+*
+
+*
+
+*
+
+**
+**
+**
+**
+**
+*
+**
+**
+
+**
+*
+*
+*
+*
+**
+*
+*
+
+*
+**
+**
+**
+*
+*
+*
+
+**
+**
+
+**
+*
+
+*
+
+*
+*
+*
+
+**
+
+*
+*
+
+*
+*
+**
+
+*
+*
+*
+**
+**
+*
+
+JU
+
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+*
+
+**
+*
+**
+**
+**
+*
+**
+*
+*
+*
+***
+**
+*
+***
+*
+*
+**
+**
+**
+**
+*
+**
+**
+*
+
+*
+*
+**
+*
+*
+*
+*
+
+t0
+*
+
+*
+
+*
+
+*
+
+**
+
+*
+
+*
+*
+
+*
+*
+
+*
+
+**
+*
+
+*
+
+*
+
+Rho−value
+1.0
+
+**
+
+*
+
+*
+
+*
+*
+*
+
+0.5
+0.0
+−0.5
+−1.0
+
+*
+
+**
+*
+
+*
+*
+
+*
+
+*
+
+*
+
+SPEI
+
+*
+
+*
+
+*
+
+*
+*
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+**
+
+t−1
+
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+
+t−2
+**
+*
+*
+**
+**
+*
+**
+*
+
+Precipitation
+
+Time
+t−2
+
+t−1
+
+t0
+
+*
+*
+**
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+*
+*
+*
+
+*
+*
+*
+*
+
+*
+*
+*
+*
+*
+
+JU
+
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+*
+
+*
+*
+**
+*
+
+*
+*
+*
+*
+*
+
+*
+*
+
+*
+*
+*
+
+*
+
+*
+
+*
+*
+
+*
+
+0.0
+−0.5
+−1.0
+
+*
+
+*
+
+*
+
+0.5
+
+*
+*
+
+*
+*
+**
+
+*
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+*
+
+SPEI
+
+*
+*
+
+*
+
+*
+*
+
+*
+
+*
+
+*
+
+**
+**
+*
+
+*
+
+*
+**
+
+*
+*
+
+Precipitation
+
+*
+
+*
+
+*
+
+*
+
+*
+
+**
+
+*
+
+*
+
+*
+*
+
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+
+*
+
+*
+**
+
+R−value
+1.0
+
+**
+
+Temperature
+
+*
+
+*
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+O
+C
+T
+N
+O
+V
+D
+EC
+
+Climate variables
+
+*
+
+*
+
+**
+
+R−value
+1.0
+
+*
+
+Temperature
+
+Climate variables
+
+*
+
+JA
+N
+FE
+B
+M
+AR
+AP
+R
+M
+AY
+JU
+N
+JU
+L
+AU
+G
+SE
+P
+
+*
+**
+**
+
+c)
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+
+t0
+
+*
+
+b)
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+
+t−1
+*
+
+SPEI
+
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+KO
+LS
+SL
+WD
+VI
+JA
+RN
+GF
+LT
+DH
+GT
+SD
+SW
+GW
+GO
+TK
+RO
+RI
+CA
+
+Precipitation
+
+Climate variables
+
+a)
+
+Temperature
+
+Fig. 4  Climate correlations for
+all three target parameters: a
+tree-ring width, b masting, and
+c SPOT-VGT/PROBA-V LAI.
+The climate correlations were
+calculated over the common
+data interval of 2000–2012.
+The panel columns display the
+correlation values for June to
+December 2 years before (t−2),
+for January to December 1 year
+before (t−1), and for January
+to September of the current
+growing year (t0). Depending
+on the input variable, values
+represent Pearson’s r (a and c)
+or Spearman’s rho correlation
+coefficients. The climate parameter used for the analyses are
+sorted from top to bottom: mean
+monthly temperature, monthly
+precipitation sum, and 6-month
+SPEI. Single rows display
+values for individual study sites
+(n = 19). Positive/negative correlation values are represented
+by red/blue color, respectively.
+Asterisks highlight significant
+correlations
+
+Time
+
+13
+
+74 Page 8 of 14
+
+1.0
+
+Correlation strength
+LAI x mast
+
+respectively. Furthermore, we found significant positive correlations for temperature in April of the current year.
+The climate correlations for remotely sensed LAI are
+patchy for both SPOT-VGT/PROBA-V (Fig. 4c) and MODIS
+LAI (Fig. S7, Supplements). For SPOT-VGT/PROBA-V, we
+found some significant correlations for summer temperature
+in July and negative correlations of SPEI in t−2. Nonetheless, the correlations seem site-specific. Here, some study
+sites react either stronger to SPEI in t−1 or t−2, while others
+showed no significance at all. In comparison, we see no pattern in the climate correlation of MODIS data at all.
+
+Regional Environmental Change (2023) 23:74
+
+0.5
+0.0
+
+−0.5
+−1.0
+0
+
+Impact of beech cover
+
+Discussion
+Complex relationships between TRW and masting
+are driven by summer climate
+Throughout the literature, TRW of beech is reported to be
+impacted by a multitude of different climate factors ranging from temperature in spring (Mund et al. 2010, 2020)
+and October (Drobyshev et al. 2010) up to SPEI during the
+summer period of the current year (Hacket-Pain et al. 2015,
+2017). Additionally, Hacket-Pain et al. (2015) showed that
+the temperature in July during the two years preceding the
+current growth year may be of similar importance. Generally, the most pronounced climate correlations are reported
+for the summer period May–July, in which beech growth
+mainly occurs (van der Maaten et al. 2018). Similarly, our
+study identified S
+­ PEIJUN in the current year, followed by
+May temperature in t−1, as main climatic drivers for TRW.
+While the climate signal of TRW may vary to certain
+extents, masting is reported to be driven by a distinct climate
+pattern. Here, Mund et al. (2010) reported that masting is
+triggered by a sequence of moist and cool summer conditions in t−2, followed by warm and dry conditions in t−1.
+In agreement with the literature, we found strong climate
+signals in June for temperature, precipitation, and SPEI
+throughout the whole analysis period. The high correlation
+coefficients, especially within the 2 years before the current
+growing year, mark the strong climate dependence of masting in European beech. The pronounced climatic pattern of
+cold summer conditions in t−2 and warm summer conditions
+in the following year, t−1, might be interpreted as evidence of
+
+13
+
+1.0
+
+Correlation strength
+TRW x LAI
+
+While we found no significant impact of beech cover on the
+correlation strength between LAI and the other target parameters, tendencies of decreasing and increasing correlation
+strength for LAI × mast and TRW × LAI can be observed,
+respectively (Fig. 5). Contrastingly, for MODIS data, we
+see this trend only for LAI × mast (Fig. S8, Supplements).
+
+r = −0.43 p = 0.1
+
+a)
+
+10
+
+20
+
+30
+
+40
+
+50
+
+60
+
+r = 0.36 p = 0.16
+
+b)
+
+0.5
+0.0
+
+−0.5
+−1.0
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+60
+
+Beech cover (%)
+
+Fig. 5  Impact of beech coverage on the parameter correlation strength
+of SPOT-VGT/PROBA-V data. Here, plots display the strength of
+parameter correlations for each study site (n = 19) in relation to beech
+coverage (%) for a LAI × mast and b TRW × LAI. The labels above the
+scatterplots show Pearson correlation coefficients and their p-values
+
+the ∆T-hypothesis. Here, Kelly et al. (2013) state that mast
+behavior is promoted by the temperature difference of the
+2 years prior to masting. Nonetheless, underlying mechanisms driving masting are still partially understood, and
+other non-climatic factors might control masting behavior,
+too. For example, masting could be driven by precipitation
+recharge and consequent higher nitrogen uptake (Geßler
+et al. 2005), which was previously proven to facilitate
+masting in Fagus crenata (Han et al. 2014). Furthermore,
+higher soil water availability positively impacts fine root
+abundance (Müller-Haubold et al. 2015), which eventually
+leads to increased nutrient uptake. While we found strong
+and uniform correlations between masting and summer
+precipitation in t−1 and t−2 which support our assumption
+that water availability is of high importance for masting, we
+found no tendencies of increasing masting abundance nor
+intensity along the water availability gradient. One possible explanation for these contradicting findings may be that
+the water availability gradient within our network is plainly
+
+Regional Environmental Change (2023) 23:74
+
+not distinct enough. Here, our 19 study sites range between
+almost optimal conditions for all three water availability
+proxies: precipitation (575–745 mm), effective field capacity (130–381 mm), and RS soil water index (54–63%), thus
+reacting similarly across the complete spatial scale. A second possible explanation might be that the found pattern in
+July precipitation in t−2 and t−1 could be a cofounded impact
+of solar radiation. Müller-Haubold et al. (2015) emphasized
+that the solar radiation in June and July in t−1 was the main
+impact factor of masting. Thus, an underlying solar radiation signal below our precipitation signal might explain the
+significant values within the climate correlations while the
+findings across the water gradients remain insignificant. Following, we cannot agree to our second research hypothesis
+that masting abundance and intensity are increasing with
+higher site-specific water availability. Here, further investigations with stronger differences in site-specific water availability and quantitative measure of masting intensity may be
+needed to provide conclusive answers.
+Many studies on beech masting report a strong negative
+interrelationship between TRW and masting (Drobyshev
+et al. 2010; Hacket-Pain et al. 2015, 2017; Mund et al. 2020).
+Still, interpretations differ between either a straight tradeoff of wood production and fruit biomass (Drobyshev et al.
+2010; Müller-Haubold et al. 2015) or complex system of
+sink and source limitations (Mund et al. 2020). For example, Hacket-Pain et al. (2015) highlighted that TRW may be
+either impacted directly by summer climate or indirectly by
+masting, which is driven by summer climate, suggesting an
+interacting control of climate and masting on TRW (HacketPain et al. 2017). In our study, we report a strong negative
+correlation between TRW and masting. The analyses with
+remotely sensed LAI data support the assumption of a complex climate-driven interplay of TRW and masting.
+
+Remotely sensed LAI is not suitable for tree‑ring
+width estimation
+In this study, we showed that TRW and remotely sensed LAI
+are only slightly correlated to each other when considering
+the individual data interval (Fig. S3, Supplements). To disentangle the relationship between TRW and LAI in more detail,
+a subsequent investigation for each individual masting category highlighted that only TRW during heavy masting (category 3) exhibited this weak positive relationship (Fig. S4,
+Supplements). This means that TRW is not assessable with
+RS LAI during years of no, low, or medium masting intensity. These findings are in line with Decuyper et al. (2020),
+who highlighted that TRW is only assessable with RS data
+(EVI from MODIS satellites) if physical damage occurs to
+the tree canopy directly. Additionally, the climate-parameter
+correlations (Fig. 4) suggest that TRW and LAI are driven
+in different manners. While TRW was found to be largely
+
+Page 9 of 14 74
+
+impacted by summer climate in the current growing season,
+LAI showed no distinct climate correlation pattern. Following and in line with Decuyper et al. (2020), we highlight that
+more discrete climatic effects that cause no physical damage
+to the tree canopy are hard to disentangle. Regarding our
+initial hypotheses, we can say that TRW and LAI are not
+related to each other (hypothesis I) and that this relationship
+is not commonly driven by summer climate (hypothesis III).
+
+Mast detection via remote sensing—is LAI
+an appropriate proxy?
+Most studies on masting detection employ spectral or vegetation indices, such as EVI and NDVI (Fernández-Martínez
+et al. 2015; Garcia et al. 2021; Jolly et al. 2022), as surrogates of photosynthetic active leaf area. But spectral indices may introduce a certain uncertainty when investigating
+masting. For example, Wang et al. (2005) reported a strong
+linear relationship between LAI and NDVI during the period
+of leaf unfolding and senescence but found no clear relationship during periods of closed canopy, in which masting
+would mainly occur. Consequently, vegetation indices such
+as NDVI may not be appropriate for masting identification.
+Under the assumption that “heavy flowering leads to eventual masting,” studies on RS masting detection also often
+concentrate on time periods prior to masting, thus enhancing
+possibilities for early seed predator pest control (Jolly et al.
+2022). Still, Nussbaumer et al. (2020) showed that masting
+could be canceled by secondary controls, i.e., extreme summer heat and drought, even shortly before masting itself.
+Consequently, we highlight the necessity to directly detect
+masting during the time it occurs and, from this, derive
+methods to forecast masting to enable management adjustments as early as possible. In our study, we showed that
+masting is slightly correlated with SPOT-VGT/PROBA V
+LAI when regarding a sufficiently long data period (Fig. S3,
+Supplements). Following, we state that remotely sensed LAI
+might bear the potential to detect and assess masting.
+While RS LAI might be an appropriate proxy for masting,
+one question remains: Is the LAI representative for our study
+sites? We found clear but weak relationships between our
+target parameters when including the SPOT-VGT/PROBAV LAI. The findings incorporating MODIS data revealed
+some uncertainties. This poses the question: what may be
+the difference between SPOT-VGT/PROBA-V and MODIS
+LAI? Initially, we assumed that the finer-resolved MODIS
+LAI would represent our data better at stand level because of
+less background noise from the surrounding area. To investigate this, we used forest coverage maps with a perimeter
+of 1 km surrounding our study sites, completely encompassing the extent of SPOT-VGT/PROBA-V (1 km) and MODIS
+(500 m) LAI data. Surprisingly, we found that beech coverage seems to have a greater impact on correlation strength
+
+13
+
+74 Page 10 of 14
+
+for the coarser resolved SPOT-VGT/PROBA-V data than
+for the finer-resolved MODIS data. Following, differences
+between both RS datasets are not driven by spatial resolution
+alone. The better performance of the lower resolved SPOTVGT/PROBA-V data could be explained by a higher quality
+of temporal smoothing and gap filling. Here, validation studies show that the SPOT-VGT/PROBA-V data performs better than MODIS LAI and fAPAR products (Camacho et al.
+2013; Fuster et al. 2020; Nestola et al. 2017) or other LAI
+data at higher spatial resolutions (Brown et al. 2020). Thus,
+patterns between tree growth and climate might be stronger
+at larger scales (or at coarser spatial resolution) because sitespecific factors are reduced. Similar findings were reported
+by Zhao et al. (2020), who found that PROBA-V LAI at
+1 km resolution performed better than MODIS LAI at 500 m
+for study sites in tropical and subtropical evergreen forests in
+China. Nonetheless, they also highlighted that the generally
+reported uncertainties of RS products might be substantially
+underestimated (Zhao et al. 2020).
+In that sense, we conclude that SPOT-VGT/PROBA-V LAI
+may be a suitable proxy for masting assessment and bears
+promising potential for masting assessment in the future, but
+the findings should be evaluated in light of possible measurement uncertainties accompanying RS data in general.
+
+Limitations of masting detection using RS data
+While current ready-to-use SPOT-VGT/PROBA-V and
+MODIS LAI products are convenient, they also hold some
+limitations. Here, the short temporal range of RS LAI time
+series often does not match the longer TRW and masting time series. Consequently, low observation numbers
+decrease the statistical power of our analyses, especially
+when sub-setting to individual site scales. Additionally, the
+coarse spatial resolution (500 m/1 km) of RS LAI presents a
+challenge for our study sites, which extend only up to 5000
+­m2. A possible solution would be to use combined high-resolution time series from Landsat and Sentinel-2 observations
+that are becoming more frequently used to study phenological events (Bolton et al. 2020; Kowalski et al. 2020). Garcia
+et al. (2021) showed that it is possible to detect masting
+in white spruce with Landsat data by applying moistureoriented vegetation indices, which even perform better
+than photosynthesis and color-oriented indices. However,
+the short temporal overlap of combined Landsat/Sentinel-2
+observations (since 2016) and the low temporal frequency
+of older Landsat observations still hamper investigations of
+long-term climate-tree growth relationships. Ongoing developments produce longer and continuous LAI time series
+by applying temporal high-resolution meteorological data
+(Zhu et al. 2020) or by combining MODIS LAI (MorenoMartínez et al. 2020) with Landsat imagery. While many
+of these methods are new or still in development, our focus
+
+13
+
+Regional Environmental Change (2023) 23:74
+
+was on ready-to-use RS-LAI products that are easy to use
+for forest ecologists who want to tap into the vast research
+field of remote sensing.
+Next to resolution-related issues, mast-induced changes
+in the tree canopy are often hard to distinguish from other
+impacts, such as defoliation by late frost, drought, or pests
+(McDowell et al. 2015; Buras et al. 2021). Thus, adding
+environmental information for RS approaches, i.e., climate
+station data, is highly recommended (Buras et al. 2021).
+McDowell et al. (2015) showed that these limitations could
+be partly offset by identifying distinct spectral signatures
+in canopy change. For example, bark beetle-caused mortality is characterized by a pattern of needle discoloration
+and consecutive needle loss (Wulder et al. 2008). Following,
+knowledge about canopy changes throughout time is highly
+valuable, and RS masting detection would certainly improve
+by such a spectral signature approach in the future.
+Lastly, when working with RS LAI, we should not limit
+our considerations to technological restrictions alone but keep
+emphasis on ecological and physiological aspects as well.
+Within our study, we assumed that masting is theoretically
+similarly detectable with ground-based measurements and RS
+approaches. For white spruce, Garcia et al. (2021) reported
+that cone production during non-mast years occurs within the
+top one-third of the crown, whereas cones are more widely
+distributed throughout the canopy during mast years. What
+would be, if beech trees produce fruits at lower canopy levels
+while maintaining higher leaf biomass at the canopy surface to
+optimize photosynthetic gain? Following this train of thought,
+masting would be better detectable from ground observations,
+while RS measurements may detect the green canopy from up
+above only, thus underestimating masting. Horticultural studies
+on the vertical distribution of fruits within the canopy showed
+that fruit abundance and quality are changing within canopy
+layers (Farina et al. 2005; Feng et al. 2014). But, similar studies on forestry tree species are mainly missing from the literature. Consequently, phenological studies investigating the fruit
+distribution within the tree canopy may improve our understanding of masting ecology in forestry tree species, and we
+highlight the need to conduct such investigations in the future.
+
+Mast in context of climate change
+In the context of global warming, the climate report of
+Mecklenburg-Western Pomerania forecasts an increase in average
+temperature up to 3.7 °C by 2100 (DWD 2018). This might lead
+to prolonged vegetation periods, but also to concomitant extreme
+events and increasing risks for late frost damage. And this may
+have especial implications for European beech because late frost
+events may lead to defoliation up to nearly 100%, causing strong
+reductions in growth (Menzel et al. 2015; Principe et al. 2017).
+While this impact on growth was evident in southern Germany
+for a late frost event in 2011, our data indicates no effects of
+
+Page 11 of 14 74
+
+Regional Environmental Change (2023) 23:74
+
+late frost within our study region overall. On the contrary, our
+data shows that the year 2011 is one of the stronger mast years
+within our data set (Fig. 1c), i.e., with a medium masting intensity
+across all sites (Table S1, Supplements). Whereas our study
+sites under more maritime and thus warmer climate might be
+protected to a certain extent against late frost events, the trees in
+southern Germany are exposed to a more continental climate.
+Nonetheless, global warming may have especial implications
+on beech populations at low elevations because an earlier start
+of the vegetation period increases the risk of late-frost damage
+(Bascietto et al. 2018). This is in line with our findings that
+displayed significant positive temperature correlations of masting
+during April of the current year (Fig. 4b). Alternatively, this
+correlation may be interpreted as a pollination signal with warm
+conditions in spring that may promote seed production through
+effective pollen flow (cf. studies on other species such as oak,
+Caignard et al. 2017; Lebourgeois et al. 2018).
+In this study, we employed a space-for-time approach to
+infer information about masting under potential future climate conditions. But against our hypothesis, we found no such
+trend of increasing masting abundance or intensity along the
+gradient. In the first paragraph of the discussion, we highlighted two possible explanations for the missing trend: (a) a
+too-narrow climate gradient and (b) an underlying solar radiation signal possibly underlying the found precipitation signal
+(Fig. 4b). In line with Müller-Haubold et al. (2015), our study
+could not give evidence that water availability might impact
+masting behavior. Thus, forecasted change in precipitation
+regime (DWD 2018) might not impact masting behavior as
+strongly as other drivers. Here, temperature could play a more
+pronounced role. Recent studies showed that climate warming affects mean seed productivity, interannual variability,
+and synchrony (Bogdziewicz et al. 2021a, b). Furthermore,
+Nussbaumer et al. (2020) showed that mast can be canceled
+by extreme summer climate conditions due to early fruit abortion. Albeit these mast-limiting factors can be considered secondary control mechanisms, already observed and forecasted
+increases in climatic extreme events (DWD 2018) emphasize
+the growing risk of climate change.
+Following, climate change impacts masting in a complex
+way with interactions between mast triggering and post-mast
+limiting factors (Bogdziewicz et al. 2021b). We state that RS
+masting detection based on pre-masting periods may be not
+as reliable, thus new or improved RS approaches are needed
+to detect and assess masting accordingly.
+
+including MODIS LAI did not yield any significant relationships, while partially significant correlations between
+our target parameters were found when using SPOT-VGT/
+PROBA-V LAI. This observation highlights that relying on
+single RS data sources may have great implications for study
+results. To decipher the causes of differences between RS
+products, devoted studies would be needed. While masting and TRW are commonly driven by summer climate,
+remotely sensed LAI shows only a few site-specific climate
+signals but is mostly decoupled from climate. Furthermore,
+it seems that masting is not driven by site-specific water
+availability. All in all, we can say that remotely sensed
+SPOT-VGT/PROBA V LAI bears the potential to observe
+masting but not TRW. Nonetheless, these findings should
+always be discussed in regard to general uncertainties of RS
+measurements and the complex interaction network of different environmental drivers of masting and TRW.
+Supplementary Information The online version contains supplementary material available at https://d​ oi.o​ rg/1​ 0.1​ 007/s​ 10113-0​ 23-0​ 2068-5.
+Acknowledgements Our special thanks go to Christine Wessollek, who
+helped in processing the remotely sensed LAI data. Furthermore, we
+thank Eric A. Thurm, who provided and processed data on the species
+composition of our study sites. We are grateful to Metthew E. Garcia,
+one anonymous reviewer, and the editor who helped to improve a former version of this manuscript. This study was financially supported
+by the Eva Mayr-Stihl Foundation.
+Funding Open Access funding enabled and organized by Projekt
+DEAL.
+Data availability The datasets generated and/or analyzed during this
+study are available from the corresponding author on reasonable
+request.
+
+Declarations
+Conflict of interest The authors declare no competing interests.
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long
+as you give appropriate credit to the original author(s) and the source,
+provide a link to the Creative Commons licence, and indicate if changes
+were made. The images or other third party material in this article are
+included in the article's Creative Commons licence, unless indicated
+otherwise in a credit line to the material. If material is not included in
+the article's Creative Commons licence and your intended use is not
+permitted by statutory regulation or exceeds the permitted use, you will
+need to obtain permission directly from the copyright holder. To view a
+copy of this licence, visit http://​creat​iveco​mmons.​org/​licen​ses/​by/4.​0/.
+
+Conclusion
+This study assessed the potential to estimate masting events
+and TRW with remotely sensed LAI. We used time series of
+TRW, categorical masting data, SPOT-VGT/PROBA-V, and
+MODIS LAI and investigated their relationship. Analyses
+
+References
+Bascietto M, Bajocco S, Mazzenga F, Matteucci G (2018) Assessing
+spring frost effects on beech forests in Central Apennines from
+remotely-sensed data. Agric for Meteorol 248:240–250. https://​
+doi.​org/​10.​1016/j.​agrfo​rmet.​2017.​10.​007
+
+13
+
+74 Page 12 of 14
+Beguería S, Vicente-Serrano SM (2017) SPEI: Calculation of the
+standardised precipitation-evapotranspiration index. version 1.7
+https://​CRAN.R-​proje​ct.​org/​packa​ge=​SPEI
+Bogdziewicz M, Hacket-Pain A, Ascoli D, Szymkowiak J (2021a)
+Environmental variation drives continental-scale synchrony of
+European beech reproduction. Ecology 102:1–10. https://​doi.​org/​
+10.​1002/​ECY.​3384
+Bogdziewicz M, Hacket-Pain A, Kelly D, Thomas PA, Lageard J et al
+(2021b) Climate warming causes mast seeding to break down by
+reducing sensitivity to weather cues. Glob Chang Biol 27:1952–
+1961. https://​doi.​org/​10.​1111/​GCB.​15560
+Bolton DK, Gray JM, Melaas EK, Moon M, Eklundh L et al (2020)
+Continental-scale land surface phenology from harmonized Landsat 8 and Sentinel-2 imagery. Remote Sens Environ 240:111685.
+https://​doi.​org/​10.​1016/J.​RSE.​2020.​111685
+Brown LA, Meier C, Morris H, Pastor-Guzman J, Bai G et al (2020)
+Evaluation of global leaf area index and fraction of absorbed
+photosynthetically active radiation products over North America
+using Copernicus ground based observations for validation data.
+Remote Sens Environ 247:111935. https://d​ oi.o​ rg/1​ 0.1​ 016/J.R
+​ SE.​
+2020.​111935
+Bunn AG (2008) A dendrochronology program library in R (dplR).
+Dendrochronologia 26:115–124. https://d​ oi.o​ rg/1​ 0.1​ 016/j.d​ endro.​
+2008.​01.​002
+Bunn AG (2010) Statistical and visual crossdating in R using the dplR
+library. Dendrochronologia 28:251–258. https://d​ oi.o​ rg/1​ 0.1​ 016/J.​
+DENDRO.​2009.​12.​001
+Buras A, Rammig A, Zang CS (2021) The European forest condition
+monitor: using remotely sensed forest greenness to identify hot
+spots of forest decline. Front Plant Sci 12:1–19. https://​doi.​org/​
+10.​3389/​FPLS.​2021.​689220/​FULL
+Caignard T, Kremer A, Firmat C, Nicolas M, Venner S et al (2017)
+Increasing spring temperatures favor oak seed production in
+temperate areas. Sci Reports 71(7):1–8. https://​doi.​org/​10.​1038/​
+s41598-​017-​09172-7
+Camacho F, Cernicharo J, Lacaze R, Baret F, Weiss M (2013) GEOV1:
+LAI, FAPAR essential climate variables and FCOVER global time
+series capitalizing over existing products. Part 2: Validation and
+intercomparison with reference products. Remote Sens Environ
+137:310–329. https://​doi.​org/​10.​1016/J.​RSE.​2013.​02.​030
+Cook ER, Kairiukstis LA (1990) Methods of dendrochronology: applications in the environmental sciences. Springer, Dordrecht
+Copernicus Service Information (2017) PROBA-V LAI, Product
+version V2.0.2. http://​land.​coper ​nicus.​eu/​global/​produ​cts/​lai
+. Accessed 10 Feb 2022
+Copernicus Service Information (2018) Soil water index - SWI. Product version V3(1):1. https://​land.​coper​nicus.​eu/​global/​produ​cts/​
+swi. Accessed 10 Feb 2022
+Decuyper M, Chávez RO, Čufar K, Estay SA, Clevers JGPW et al
+(2020) Spatio-temporal assessment of beech growth in relation
+to climate extremes in Slovenia – an integrated approach using
+remote sensing and tree-ring data. Agric For Meteorol 287:107925.
+https://​doi.​org/​10.​1016/J.​AGRFO​RMET.​2020.​107925
+Dieckmann O (2004) Waldböden auf den Bodendauerbeobachtungsflächen-Forst im Zeitraum 1986 bis 2001 und Folgen für die
+Bestandsernährung und Baumvitalität. Mitteilungen aus dem Forstlichen Versuchswesen Mecklenburg-Vorpommern, Landesamt
+für Forsten und Großschutzgebiete Mecklenburg-Vorpommern,
+Schwerin
+Drobyshev I, Övergaard R, Saygin I, Niklasson M, Hickler T et al
+(2010) Masting behaviour and dendrochronology of European
+beech (Fagus sylvatica L.) in southern Sweden. For Ecol Manage
+259:2160–2171. https://​doi.​org/​10.​1016/J.​FORECO.​2010.​01.​037
+DWD (2018) Klimareport Mecklenburg-Vorpommern. Deutscher
+Wetterdienst, Offenbach am Main, Germany
+
+13
+
+Regional Environmental Change (2023) 23:74
+DWD Climate Data Center (2020a) Grids of monthly averaged daily
+air temperature (2m) over Germany, version v1.0. https://​opend​
+ata.​dwd.​de/​clima​te_​envir​onment/​CDC/​grids_​germa​ny/​month​ly/​
+air_​tempe​rature_​mean/
+DWD Climate Data Center (2020b) Grids of monthly total precipitation over Germany, version v1.0. https://​opend​ata.​dwd.​de/​clima​
+te_​envir​onment/​CDC/​grids_​germa​ny/​month​ly/​preci​pitat​ion/
+Elliott G, Kemp J (2016) Large-scale pest control in New Zealand
+beech forests. Ecol Manag Restor 17:200–209. https://​doi.​org/​10.​
+1111/​EMR.​12227
+ESA (2014) Land cover CCI product user guide, version 2.0
+Farina V, Lo Bianco R, Inglese P (2005) Vertical distribution of crop
+load and fruit quality within vase- and Y-shaped canopies of
+`elegant lady’ peach. HortScience 40:587–591. https://​doi.​org/​
+10.​21273/​HORTS​CI.​40.3.​587
+Feng F, Li M, Ma F, Cheng L (2014) Effects of location within the tree canopy on carbohydrates, organic acids, amino acids and phenolic compounds in the fruit peel and flesh from three apple (Malus × domestica)
+cultivars. Hortic Res 1:1–7. https://​doi.​org/​10.​1038/​hortr​es.​2014.​19
+Fernández-Martínez M, Garbulsky M, Peñuelas J, Peguero G, Espelta
+JM (2015) Temporal trends in the enhanced vegetation index and
+spring weather predict seed production in Mediterranean oaks. Plant
+Ecol 216:1061–1072. https://​doi.​org/​10.​1007/​S11258-​015-​0489-1
+Forkel M, Migliavacca M, Thonicke K, Reichstein M, Schaphoff S et al
+(2015) Codominant water control on global interannual variability
+and trends in land surface phenology and greenness. Glob Chang
+Biol 21:3414–3435. https://​doi.​org/​10.​1111/​GCB.​12950
+Fuster B, Sánchez-Zapero J, Camacho F, García-Santos V, Verger A et al
+(2020) Quality assessment of PROBA-V LAI, fAPAR and fCOVER
+collection 300 m products of Copernicus Global Land Service.
+Remote Sens 12:1017. https://​doi.​org/​10.​3390/​RS120​61017
+Garcia M, Zuckerberg B, LaMontagne JM, Townsend PA (2021)
+Landsat-based detection of mast events in white spruce (Picea
+glauca) forests. Remote Sens Environ 254:112278. https://​doi.​
+org/​10.​1016/j.​rse.​2020.​112278
+Geßler A, Jung K, Gasche R, Papen H, Heidenfelder A et al (2005)
+Climate and forest management influence nitrogen balance of
+European beech forests: microbial N transformations and inorganic N net uptake capacity of mycorrhizal roots. Eur J for Res
+124:95–111. https://​doi.​org/​10.​1007/​S10342-​005-​0055-9
+Hacket-Pain AJ, Friend AD, Lageard JGA, Thomas PA (2015) The influence of masting phenomenon on growth-climate relationships in trees:
+explaining the influence of previous summers’ climate on ring width.
+Tree Physiol 35:319–330. https://​doi.​org/​10.​1093/​treep​hys/​tpv007
+Hacket-Pain AJ, Lageard JGA, Thomas PA (2017) Drought and reproductive effort interact to control growth of a temperate broadleaved tree species (Fagus sylvatica). Tree Physiol 37:744–754.
+https://​doi.​org/​10.​1093/​treep​hys/​tpx025
+Hacket-Pain AJ, Ascoli D, Vacchiano G, Biondi F, Cavin L et al (2018)
+Climatically controlled reproduction drives interannual growth variability in a temperate tree species. Ecol Lett 21:1833–1844. https://​
+doi.​org/​10.​1111/​ele.​13158
+Han Q, Kabeya D, Iio A, Inagaki Y, Kakubari Y (2014) Nitrogen storage dynamics are affected by masting events in Fagus
+crenata. Oecologia 174:679–687. https:// ​ d oi. ​ o rg/ ​ 1 0. ​ 1 007/​
+S00442-​013-​2824-3
+Harrell Jr FE (2021) Hmisc: Harrell miscellaneous. R package version
+4.6–0. https://​CRAN.R-​proje​ct.​org/​packa​ge=​Hmisc
+Harvey JE, Smiljanić M, Scharnweber T, Buras A, Cedro A et al (2020)
+Tree growth influenced by warming winter climate and summer
+moisture availability in northern temperate forests. Glob Chang
+Biol 26:2505–2518. https://​doi.​org/​10.​1111/​gcb.​14966
+Houpert L, Rohner B, Forrester DI, Mina M, Huber MO (2018) Mixing
+effects in Norway spruce-European beech stands are modulated
+by site quality, stand age and moisture availability. Forests 9:83.
+https://​doi.​org/​10.​3390/​f9020​083
+
+Regional Environmental Change (2023) 23:74
+Jolly B, Dymond JR, Shepherd JD, Greene T, Schindler J (2022) Detection of southern beech heavy flowering using Sentinel-2 imagery.
+Remote Sens 14:1–12. https://​doi.​org/​10.​3390/​RS140​71573
+Kelly D (1994) The evolutionary ecology of mast seeding. Trends Ecol
+Evol 9:465–470. https://​doi.​org/​10.​1016/​0169-​5347(94)​90310-7
+Kelly D, Geldenhuis A, James A, Holland EP, Plank MJ et al (2013) Of
+mast and mean: differential-temperature cue makes mast seeding
+insensitive to climate change. Ecol Lett 16:90–98. https://​doi.​org/​
+10.​1111/​ELE.​12020
+Knyazikhin Y, Glassy J, Privette JL, Tian Y, Lotsch A et al (1999)
+MODIS leaf area index (LAI) and fraction of photosynthetically active radiation absorbed by vegetation (FPAR) product
+(MOD15). Algorithm Theor. basis Doc.:1–130 http://e​ ospso.g​ sfc.​
+nasa.​gov/​atbd/​modis​tables.​html
+Kowalski K, Senf C, Hostert P, Pflugmacher D (2020) Characterizing
+spring phenology of temperate broadleaf forests using Landsat and
+Sentinel-2 time series. Int J Appl Earth Obs Geoinf 92:102172.
+https://​doi.​org/​10.​1016/J.​JAG.​2020.​102172
+LaMontagne JM, Boutin S (2009) Quantitative methods for defining mast-seeding years across species and studies. J Veg Sci
+20:745–753. https://​doi.​org/​10.​1111/J.​1654-​1103.​2009.​01068.X
+Lebourgeois F, Delpierre N, Dufrêne E, Cecchini S, Macé S et al
+(2018) Assessing the roles of temperature, carbon inputs and
+airborne pollen as drivers of fructification in European temperate deciduous forests. Eur J for Res 137:349–365. https://​doi.​
+org/​10.​1007/​S10342-​018-​1108-1
+Leuschner C (2020) Drought response of European beech (Fagus sylvatica L.)—a review. Perspect Plant Ecol Evol Syst 47:125576.
+https://​doi.​org/​10.​1016/j.​ppees.​2020.​125576
+Leuschner C, Ellenberg H (2017) Ecology of Central European Forests: Vegetation Ecology of Central Europe, 6th edn. Springer
+International Publishing
+McDowell NG, Coops NC, Beck PSA, Chambers JQ, Gangodagamage
+C et al (2015) Global satellite monitoring of climate induced vegetation disturbances. Trends Plant Sci 20:114–123. https://d​ oi.o​ rg/​
+10.​1016/j.​tplan​ts.​2014.​10.​008
+Menzel A, Helm R, Zang C (2015) Patterns of late spring frost leaf damage and recovery in a European beech (Fagus sylvatica L.) stand
+in south-eastern Germany based on repeated digital photographs.
+Front Plant Sci 6:1–13. https://​doi.​org/​10.​3389/​FPLS.​2015.​00110
+Moreno-Martínez Á, Izquierdo-Verdiguier E, Camps-Valls G, Maneta M, Muñoz-Marí J et al (2020) Down-scaling Modis vegetation products with Landsat GAP filled surface reflectance in
+Google Earth Engine. In: International Geoscience and, Remote
+Sensing Symposium (IGARSS), Waikoloa, pp 2320–2323
+Müller-Haubold H, Hertel D, Leuschner C (2015) Climatic drivers of
+mast fruiting in European beech and resulting C and N allocation shifts. Ecosystems 18:1083–1100. https://​doi.​org/​10.​1007/​
+s10021-​015-​9885-6
+Mund M, Kutsch WL, Wirth C, Kahl T, Knohl A et al (2010) The influence of climate and fructification on the inter-annual variability
+of stem growth and net primary productivity in an old-growth,
+mixed beech forest. Tree Physiol 30:689–704. https://​doi.​org/​10.​
+1093/​treep​hys/​tpq027
+Mund M, Herbst M, Knohl A, Matthäus B, Schumacher J et al (2020)
+It is not just a ‘trade-off’: indications for sink- and source-limitation to vegetative and regenerative growth in an old-growth
+beech forest. New Phytol 226:111–125. https://​doi.​org/​10.​1111/​
+nph.​16408
+Nestola E, Sánchez-Zapero J, Latorre C, Mazzenga F, Matteucci G
+et al (2017) Validation of PROBA-V GEOV1 and MODIS C5
+& C6 fAPAR products in a deciduous beech forest site in Italy.
+Remote Sens 9:1–28. https://​doi.​org/​10.​3390/​RS902​0126
+Nussbaumer A, Meusburger K, Schmitt M, Waldner P, Gehrig R et al
+(2020) Extreme summer heat and drought lead to early fruit
+
+Page 13 of 14 74
+abortion in European beech. Sci Rep 10:1–11. https://​doi.​org/​
+10.​1038/​s41598-​020-​62073-0
+Olano JM, García-Cervigón AI, Sangüesa-Barreda G, Rozas V,
+Muñoz-Garachana D et al (2021) Satellite data and machine
+learning reveal the incidence of late frost defoliations on Iberian beech forests. Ecol Appl 31:1–11. https://​doi.​org/​10.​1002/​
+EAP.​2288
+Pesendorfer MB, Ascoli D, Bogdziewicz M, Hacket-Pain A,
+Pearse IS et al (2021) The ecology and evolution of synchronized reproduction in long-lived plants. Philos Trans R Soc B
+376:20200369. https://​doi.​org/​10.​1098/​RSTB.​2020.​0369
+Príncipe A, van der Maaten E, van der Maaten-Theunissen M,
+Struwe T, Wilmking M et al (2017) Low resistance but high
+resilience in growth of a major deciduous forest tree (Fagus
+sylvatica L.) in response to late spring frost in southern Germany. Trees - Struct Funct 31:743–751. https://​doi.​org/​10.​1007/​
+s00468-​016-​1505-3
+R Core Team (2021) R: A language and environment for statistical
+computing. R Foundation for Statistical Computing, Vienna.
+https://​www.R-​proje​ct.​org/
+Rodriguez-Galiano VF, Dash J, Atkinson PM (2015) Characterising
+the land surface phenology of Europe using Decadal MERIS
+Data. Remote Sens 7:9390–9409. https://​d oi.​o rg/​1 0.​3 390/​
+RS707​09390
+Rogers BM, Solvik K, Hogg EH, Ju J, Masek JG et al (2018) Detecting early warning signals of tree mortality in boreal North
+America using multiscale satellite data. Glob Chang Biol
+24:2284–2304. https://​doi.​org/​10.​1111/​GCB.​14107
+RStudio Team (2022) RStudio: integrated development for R. RStudio, PBC, Boston. http://​www.​rstud​io.​com/
+Scharnweber T, Manthey M, Criegee C, Bauwe A, Schröder C et al
+(2011) Drought matters – declining precipitation influences
+growth of Fagus sylvatica L. and Quercus robur L. in northeastern Germany. For Ecol Manage 262:947–961. https://​doi.​
+org/​10.​1016/j.​foreco.​2011.​05.​026
+Scharnweber T, Manthey M, Wilmking M (2013) Differential radial
+growth patterns between beech (Fagus sylvatica L.) and oak
+(Quercus robur L.) on periodically waterlogged soils. Tree
+Physiol 33:425–437. https://​doi.​org/​10.​1093/​treep​hys/​tpt020
+Senf C, Seidl R, Hostert P (2017) Remote sensing of forest insect
+disturbances: Current state and future directions Europe PMC
+Funders Group. Int J Appl Earth Obs Geoinf 60:49–60. https://​
+doi.​org/​10.​1016/j.​jag.​2017.​04.​004
+Shekhar A, Chen J, Bhattacharjee S, Buras A, Castro AO et al (2020)
+Capturing the impact of the 2018 European drought and heat
+across different vegetation types using OCO-2 solar-induced
+fluorescence. Remote Sens 12:3249. https://​doi.​org/​10.​3390/​
+RS121​93249
+Spruce JP, Hicke JA, Hargrove WW, Grulke NE, Meddens AJH
+(2019) Use of MODIS NDVI products to map tree mortality
+levels in forests affected by mountain pine beetle outbreaks.
+Forests 10:811. https://​doi.​org/​10.​3390/​F1009​0811
+Stolz J, van der Maaten E, Kalanke H, Martin J, Wilmking M et al
+(2021) Increasing climate sensitivity of beech and pine is not
+mediated by adaptation and soil characteristics along a precipitation gradient in northeastern Germany. Dendrochronologia
+67:125834. https://​doi.​org/​10.​1016/J.​DENDRO.​2021.​125834
+Townsend PA, Singh A, Foster JR, Rehberg N, Kingdon CC et al
+(2012) A general Landsat model to predict canopy defoliation
+in broadleaf deciduous forests. Remote Sens Environ 119:255–
+265. https://​doi.​org/​10.​1016/j.​rse.​2011.​12.​023
+Vacchiano G, Hacket-Pain A, Turco M, Motta R, Maringer J et al
+(2017) Spatial patterns and broad-scale weather cues of beech
+mast seeding in Europe. New Phytol 215:595–608. https://​doi.​
+org/​10.​1111/​NPH.​14600
+
+13
+
+74 Page 14 of 14
+van der Maaten E, Pape J, van der Maaten-Theunissen M,
+Scharnweber T, Smiljanić M et al (2018) Distinct growth
+phenology but similar daily stem dynamics in three co-occurring
+broadleaved tree species. Tree Physiol 38:1–9. https://​doi.​org/​
+10.​1093/​treep​hys/​tpy042
+Vanhellemont M, Sousa-Silva R, Maes SL, Van den Bulcke J,
+Hertzog L et al (2019) Distinct growth responses to drought for
+oak and beech in temperate mixed forests. Sci Total Environ
+650:3017–3026. https://​doi.​org/​10.​1016/j.​scito​tenv.​2018.​10.​054
+Wagner W, Lemoine G, Rott H (1999) A method for estimating soil
+moisture from ERS scatterometer and soil data. Remote Sens Environ 70:191–207. https://​doi.​org/​10.​1016/​S0034-​4257(99)​00036-X
+Wang Q, Adiku S, Tenhunen J, Granier A (2005) On the relationship of
+NDVI with leaf area index in a deciduous forest site. Remote Sens
+Environ 94:244–255. https://​doi.​org/​10.​1016/J.​RSE.​2004.​10.​006
+
+13
+
+Regional Environmental Change (2023) 23:74
+Wulder MA, White JC, Coops NC, Butson CR (2008) Multi-temporal analysis of high spatial resolution imagery for disturbance
+monitoring. Remote Sens Environ 112:2729–2740. https://​doi.​
+org/​10.​1016/J.​RSE.​2008.​01.​010
+Zhao Y, Chen X, Smallman TL, Flack-Prain S, Milodowski DT et al (2020)
+Characterizing the error and bias of remotely sensed LAI products:
+an example for tropical and subtropical evergreen forests in South
+China. Remote Sens 12:3122. https://​doi.​org/​10.​3390/​RS121​93122
+Zhu X, Li J, Liu Q (2020) Generating spatial-temporal continuous LAI
+time-series from Landsat using neural network and meteorological
+data. In: International Geoscience and Remote Sensing Symposium (IGARSS), Waikoloa, pp 4505–4508
+Publisher's Note Springer Nature remains neutral with regard to
+jurisdictional claims in published maps and institutional affiliations.
+
+

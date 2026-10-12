@@ -1,0 +1,4268 @@
+Fractal Sierpinski triangle block division for retina-based glaucoma detection using an optimized hybrid deep learning model
+Dip Das, B. Ramachandra Reddy, Sunil Kumar Singh (2026). Scientific Reports. https://doi.org/10.1038/s41598-026-61851-6. doi:10.1038/s41598-026-61851-6. Licence: cc-by. Text from pdf.
+
+Scientific Reports
+
+https://doi.org/10.1038/s41598-026-61851-6
+
+Article in Press
+
+Fractal Sierpinski triangle block division for
+retina-based glaucoma detection using an
+optimized hybrid deep learning model
+Dip Das, B Ramachandra Reddy & Sunil Kumar Singh
+
+Received: 27 November 2025
+Accepted: 7 July 2026
+
+Cite this article as: Das D., Reddy B.R.
+& Singh S.K. Fractal Sierpinski triangle
+block division for retina-based
+glaucoma detection using an optimized
+hybrid deep learning model. Sci Rep
+(2026). https://doi.org/10.1038/
+s41598-026-61851-6
+
+A
+
+We are providing an unedited version of this manuscript to give early access to its
+findings. Before final publication, the manuscript will undergo further editing. Please
+note there may be errors present which affect the content, and all legal disclaimers
+apply.
+
+E
+R
+P
+
+S
+S
+
+If this paper is publishing under a Transparent Peer Review model then Peer
+Review reports will publish with the final article.
+
+I
+T
+R
+
+E
+L
+C
+
+IN
+
+© The Author(s) 2026. Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source,
+provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included
+in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative
+Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission
+directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Fractal Sierpinski Triangle Block Division for Retina-Based Glaucoma
+Detection Using an Optimized Hybrid Deep Learning Model
+Dip Das1, B Ramachandra Reddy1, Sunil Kumar Singh*2
+1Department of CSE, National Institute of Technology, Jamshedpur, Jharkhand, India.
+2Manipal Institute of Technology Bengaluru, Manipal Academy of Higher Education, Manipal, India
+
+dipdasnitjsr@gmail.com,brcreddy.cse@nitjsr.ac.in
+Author: Sunil Kumar Singh (sunil.singh@manipal.edu)
+
+*Corresponding
+
+Abstract: Glaucoma is a primary cause of permanent vision loss, and it often gets worse without anybody noticing.
+This makes it very important to find it early to stop vision loss. Manually evaluating retinal fundus images frequently
+necessitates considerable effort and is prone to observer-dependent discrepancies. To address these constraints, a new
+automated method for detecting glaucoma is presented. It combines fractal-inspired Sierpinski triangle spatial
+decomposition with multi-scale triangular segmentation to reliably identify clinically important areas of the retina.
+Handcrafted descriptors that include statistical, frequency-domain, wavelet, morphological, and texture-uniformity
+data are taken from small areas, giving a detailed and unique picture of the structures in the retina. A hybrid deep
+learning system that combines bidirectional LSTM, bidirectional GRU, and CNN with Bi-LSTM models that have
+attention layers captures spatial-temporal connections while highlighting essential visual cues for diagnosis. The
+Harris Hawks Optimizer, Grey Wolf Optimizer, Red Fox Optimizer, and Social Feature Optimizer are all examples
+of meta-heuristic algorithms that improve the feature subset. The HHO-based version gives the best results. A
+thorough examination using benchmark datasets shows that the system works very well, with 98.48% accuracy on
+Drishti-GS, 98.99% on Origa, 97.44% on RimOne-V2, 97.80% on HVD Binary-Class, 99.02% on HVD-Advance,
+98.05% on HVD-Early, and 97.11% on HVD Multi-Class trials. The proposed system shows high reliability and
+stability in glaucoma diagnosis, delivering consistent performance across multiple datasets. It provides a scalable,
+non-invasive, and efficient solution for automatic detection, supporting doctors in early treatment and improving
+patients chances of recovery.
+Keywords: Glaucoma Detection, Deep Learning, Handcrafted Feature Extraction, Sierpinski Triangle, Feature
+optimization.
+
+E
+L
+C
+I
+T
+R
+A
+
+1. Introduction
+
+IN
+
+S
+S
+E
+R
+P
+
+Glaucoma is a progressive eye disorder and a leading cause of irreversible blindness worldwide. It primarily
+results from damage to the optic nerve head (ONH), often linked to increased intraocular pressure. In 2020,
+more than 11 million people were affected globally, and this number is expected to rise to over 110 million
+by 2040 [1]. Since the disease usually shows no early symptoms, timely detection is essential to prevent
+vision loss. Measuring intraocular pressure and capturing retinal images are key steps in a complete eye
+examination. In color fundus photographs (CFP), a major indicator of glaucoma is optic disc “cupping,”
+where the optic cup becomes noticeably larger relative to the disc-reflected by an increased vertical cup-todisc ratio (VCDR). A change greater than 0.2 in this ratio can be a warning sign [2]. Thinning of the retinal
+nerve fiber layer (RNFL) around the disc is another sign, often appearing after significant nerve fiber
+damage. Automated screening methods are becoming more popular because they are faster and more
+consistent than traditional manual evaluations that rely heavily on human expertise.
+CFP is an affordable and gentle method for capturing images of the optic nerve head, its surrounding
+regions, and the retinal blood vessels. Identifying the optic disc and cup, as well as measuring the VCDR,
+remains a challenging task. Many different types of glaucoma exist. Primary open-angle glaucoma develops
+slowly and often goes unnoticed, as it typically does not present any apparent symptoms. Angle-closure
+glaucoma can happen suddenly and may cause significant discomfort. It could cause blurry vision and make
+lights appear to have halos around them. Normal-tension glaucoma can damage the optic nerve even when
+the eye pressure is normal [3]. Glaucoma comes in numerous kinds of problems. Primary open-angle
+glaucoma progresses gradually and typically lacks of distinct symptoms. Angle-closure glaucoma can
+emerge without warning and be quite painful. It could cause hazy vision and make you feel like you see
+halos around lights. Normal-tension glaucoma affects the optic nerve, even though the pressure in the eyes
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+is normal 3]. Vision loss usually starts at the margins and moves progressively towards he middle. Many
+people may not recognise what is going on until the illness gets worse because it changes so slowly.
+
+Figure 1: Overview of common glaucoma symptoms and associated prevention strategies.
+
+Some early indicators include persistent eye pain, redness, blurry vision, headaches, and halos around
+objects. Fig. 1 illustrates the use of tonometry, gonioscopy, ophthalmoscopy, fundus imaging, visual field
+testing and Optical Coherence Tomography (OCT) in diagnosing and measuring RNFL thickness. Machine
+learning has been very important in making it possible to automatically find glaucoma by focussing on the
+optic disc area and using features that were made by hand, such as texture patterns, shape information, and
+brightness values [4]. But these methods don't always work well when used on photos from diverse sources
+because variations in lighting, image clarity, or patient anatomy make them less reliable. Deep learning has
+solved many of these problems by letting computers learn functional patterns straight from raw retinal
+pictures. Conventional machine learning and deep learning approaches for glaucoma detection still struggle
+to effectively represent localized retinal structures, reduce feature redundancy, maintain robustness across
+heterogeneous datasets, and achieve stable classification performance under varying imaging conditions.
+Most existing studies primarily rely on conventional CNN architectures, standard retinal segmentation
+techniques, or isolated handcrafted feature extraction methods that often overlook fine-grained retinal
+variations associated with glaucoma progression. Therefore, this study develops an efficient and robust
+glaucoma detection framework by integrating recursive Sierpinski triangle-based spatial partitioning,
+handcrafted feature extraction, meta-heuristic feature optimization, and hybrid sequential deep learning
+architectures within a unified retinal image analysis pipeline. The proposed framework aims to improve
+retinal feature representation, optimize discriminative feature learning, and enhance glaucoma classification
+performance across multiple benchmark datasets.
+Motivation and contributions
+Traditional deep learning approaches for retinal image analysis often generate generic features that overlook
+subtle structural and chromatic variations in the vicinity of the optic disc and retinal vasculature. Standard
+CNNs struggle to capture spatial relationships between distinct retinal regions, requiring large datasets and
+high computational resources. A hierarchical segmentation approach divides square retinal images into four
+equilateral Sierpinski triangles on each side, recursively generating hierarchical sub-triangles to maintain
+local geometric structures. Each sub-triangle is decomposed into RGB channels, histogram-based statistical
+descriptors are computed, and an extensive set of handcrafted features, including fractal dimensions, local
+ternary patterns, Gabor and wavelet energies, vessel density, cup-disc offsets, Fourier descriptors, Radon
+GLCM, intensity gradients, contrast, entropy, skewness, and kurtosis are extracted from the images. To
+identify the most discriminative information, four meta-heuristic optimizations algorithm -Harris Hawks
+Optimizer (HHO), Grey Wolf Optimizer (GWO), Red Fox Optimizer (RFO), and Social Feature Optimizer
+(SFO)-are applied to the extracted features. The optimized feature vectors are then processed through a
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+hybrid deep learning architecture that combines bidirectional LSTM, bidirectional GRU, and CNN with BiLSTM networks followed by an attention mechanism to capture spatial-temporal dependencies and
+emphasize diagnostically significant patterns.
+The significant contributions of this paper are as follows:
+• A novel glaucoma classification framework introducing Sierpinski triangle-based recursive
+segmentation, preserving local geometric and chromatic variations often missed by conventional
+methods. A hybrid feature extraction strategy that uses histogram-based statistical descriptors and
+a large number of handcrafted features to capture both local and global retinal characteristics that
+are important for glaucoma. Then, meta-heuristic optimization is used with Harris Hawks
+Optimiser, Grey Wolf Optimiser, Red Fox Optimiser, and Social Feature Optimiser to choose the
+most discriminative features.
+• A hybrid deep learning architecture that uses bidirectional LSTM, GRU layers, and CNN with BiLSTM to change features in a sequence. Then, an attention mechanism highlights regions and
+patterns that are important for diagnosis.
+• A comprehensive comparative evaluation of handcrafted feature representations, histogram-based
+descriptors, deep learning embedding’s, and the proposed hybrid model, demonstrating improved
+classification accuracy, robustness, and diagnostic reliability in both binary and multi-class
+glaucoma detection tasks following meta-heuristic optimization.
+The first part addresses glaucoma, how it affects vision, and why it's important to understand this disease.
+In Section 2, authors look at both the traditional methods to diagnose glaucoma and the new ones that have
+been made in recent times. The proposed methodology is explained in Section 3. The first step is
+segmentation using the Sierpinski triangle approach. The next step is feature extraction, where the
+appropriate features are extracted. Finally, classification is done using a deep learning based ensemble
+approach. In Section 4, authors look at the experimental setup as well as discover how the proposed model
+stacks up against other well-known models. Finally, in Section 5, the key findings are highlighted, and
+recommendations for future research in this field are provided.
+
+E
+L
+C
+I
+T
+R
+A
+
+2. Literature Review
+
+IN
+
+S
+S
+E
+R
+P
+
+Recent developments in medical data analysis have made it easier to use deep learning and machine learning
+to classification and prediction challenges. While machine learning techniques have been applied for
+glaucoma detection, using manually extracted features can become difficult and less effective when dealing
+with large or complex datasets. Essential information can be automatically learned by DL models from both
+structured and unstructured sources. Finding subtle patterns in clinical data is facilitated by this. Models
+have performed well in assessing medical images, including segmenting them, grouping them, and
+identifying anomalies. The use of DL techniques to detect glaucoma in retinal fundus images is therefore
+becoming more and more popular. This paper focuses on assessing existing ML and DL methodologies,
+pointing out developments, and suggesting possible lines of inquiry.
+2.1 Machine Learning Approaches for Glaucoma Detection
+A hybrid method that incorporates ML and DL classifiers for the analysis of OCT images was presented by
+Juneja et al. [4]. The method integrates forecasts using majority voting machinery and weighted decision
+fusion. To help doctors better comprehend the results, gradient-weighted class activation maps were
+generated to highlight areas of interest.
+Y.Kaya [5] introduced an automatic optic disc detection method for retinal images using the Cuckoo Search
+Algorithm and SSIM. The approach used average optic disc templates with adaptive histogram equalization
+to improve image quality and locate the optic disc accurately. The method achieved high detection accuracy
+on ONHSD, DRIONS, and DRIVE datasets.
+Gautam [6] suggested an approach that uses a flexible analytical wavelet transform on the green channel of
+fundus images. We extracted and normalized texture descriptors, including GLCM and CHI histograms.
+Using PCA with t-value ranking reduced the number of features, and the least squares support vector
+machine was utilized as the final classifier.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Sharma et al. [7] created a CAD model using fundus pictures that had been enhanced with contrast-limited
+adaptive histogram equalization. The discrete ripplelet-II transform was used to extract features from retinal
+images. This transform may pick up curvilinear structures. Using least squares support vector machines
+with multiple kernel functions, golden jackal optimization identified optimization the most important
+features and then classified the data.
+Gheisari et al. [8] suggested a deep learning architecture that combines convolutional neural networks and
+recurrent neural networks. We got spatial information from cropped fundus images and temporal patterns
+from fundus video sequences. Data augmentation and preprocessingconcentrated on the optic disc region,
+facilitating the simultaneous learning of structural and dynamic markers.
+Nayak et al. [9] introduced ECNet, a deep learning framework based on an evolutionary convolutional
+network for analysing retinal fundus images. The design used evolutionary techniques to improve feature
+selection and convolutional filters during training. Fundus photos underwent preprocessingand were
+transmitted via the network to obtain hierarchical representations, which were subsequently categorized to
+differentiate between glaucomatous eyes and healthy ones.
+Sl.
+No
+
+Table 1: Overview of Machine Learning Frameworks for Glaucoma Detection
+Authors
+Year Method
+Types of Features
+Datasets
+
+1
+
+Juneja et al. [4]
+
+2023
+
+2
+
+Y.Kaya [5]
+
+2020
+
+Fused ML + DL
+framework
+with
+decision fusion
+Cuckoo
+Search
+Algorithm (CSA) with
+Structural Similarity
+Index
+Measure
+(SSIM) for optic disc
+detection
+
+3
+
+Gautam [6]
+
+2024
+
+FAWT + LS-SVM
+
+4
+Sharma et al. [7]
+
+5
+
+Gheisari et al. [8]
+
+6
+
+Nayak et al. [9]
+
+E
+L
+C
+I
+T
+R
+A
+2022
+
+2021
+
+2020
+
+IN
+
+Discrete
+Ripplet-II
+Transform + Golden
+Jackal Optimization +
+LS-SVM
+Combined CNN +
+RNN (LSTM)
+ECNet (Evolutionary
+CNN)
+
+Result
+(Accuracy)
+
+OCT
+structural
+features + deep
+learned features
+Average optic disc
+templates,
+SSIM
+similarity features,
+adaptive histogram
+equalization
+features
+Texture
+features
+(GLCM,
+CHIP
+histograms), PCA
+ranked
+Curvilinear
+transform features,
+optimized selection
+
+OCT images
+
+Fundus
+images
+
+98.1%
+
+Spatial
+features
+(CNN) + temporal
+features (RNN)
+
+Fundus
+images
+
+96.2%
+
+Deep hierarchical
+learned features
+
+RIM-ONE,
+DRISHTIGS1, HRF
+
+96.7%
+
+S
+S
+E
+R
+P
+
+ONHSD,
+DRIONS,
+DRIVE
+
+RIM-ONE,
+Harvard
+Dataverse
+
+97.8%
+100%
+(ONHSD),
+100%
+(DRIONS),
+97.5%
+(DRIVE)
+96.2%
+
+2.2 Deep Learning Approaches for Glaucoma Detection
+Convolutional neural networks (CNNs) have greatly improved the analysis of medical images by allowing
+for automatic and accurate illness identification through direct learning of picture patterns. The CNN-based
+methods make it easier to get discriminative features without having to do it by hand, which improves
+diagnostic accuracy and helps find diseases earlier. Table 2 shows a comparison of several of the most
+recent deep learning-based systems for finding glaucoma.
+Shyamalee et al. [4] put out a glaucoma detection framework utilising Attention U-Net with a ResNet-50
+backbone for optic disc and cup segmentation, alongside a modified Inception V3 architecture for the
+classification of fundus images. We combined Gradient-weighted Class Activation Mapping (Grad-CAM)
+and Grad-CAM++ to make it easier to understand by using visual heatmaps to show diagnostic areas.
+Balasubramanian et al. [10] put forward a model for diagnosing glaucoma that uses correlation-based
+feature selection together with bio-inspired optimization methods including Genetic Algorithm, Particle
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Swarm Optimization, and Ant Colony Optimization. A kernel extreme learning machine (KELM) was
+utilized to categorize the selected features. To enhance the accuracy and stability of the KELM, adjustments
+were made to its parameters. A research by Pinheiro et al. [11] used chromatic pupillometry and machine
+learning to detect glaucoma. LassoCV and RFE selection approaches were used in the research to assess
+specific filters, low-pass algorithms, balancing strategies, and customized features. Conventional classifiers
+like Random Forest, Extra Trees, and SVM were contrasted with deep models like CNN and Transformer
+networks.
+Habeb et al. [12] introduced a new feature selection method that merges Caputo fractional order with the
+Cuckoo search algorithm, aiming to enhance the classification of glaucoma images. The system created a
+unified representation by combining deep features from MobileNet and VGG19 with handcrafted features
+such as HOG and LBP. The k-NN method was applied to classify this representation. This method provided
+an improved way to find important features when analyzing eye images.
+Velpula et al. [13] presented a glaucoma detection system that combines deep learning techniques with
+retinal fundus image analysis. The primary objectives of the system were to differentiate between the cup
+and the optic disc, apply classification strategies, and extract features using both manual and automated
+methods. Singh et al. [14] developed a glaucoma prediction system utilizing a gravitational search
+optimization technique, which identifies important features in fundus images of the retina. The approach
+used various descriptors, including wavelet transformations, higher-order spectra, GLCM, GLRLM, and
+the cup-to-disc ratio all at once.To identify the problem, it utilized machine learning classifiers.
+Aljohani et al. [3] introduced a hybrid glaucoma detection framework that integrates deep learning with
+federated machine learning, enabling secure collaboration among medical institutions without sharing
+patient data. Their system was trained on a diverse collection of retinal fundus images while maintaining
+strict data privacy, demonstrating an effective and scalable diagnostic support approach for ophthalmology
+applications.
+Yan et al. [15] proposed a glaucoma identification method that employs MixDA-based data augmentation
+to enrich retinal fundus image datasets. This enhanced dataset was subsequently used to train convolutional
+neural networks capable of distinguishing glaucomatous eyes. Their work incorporated hierarchical
+prediction models, improved feature extraction mechanisms, and the synthesis of artificial samples to boost
+detection accuracy.
+Chowdhury et al. [16] designed a rim-learning architecture for glaucoma screening using a Twin Supervised
+Generative Adversarial Network (TS-GAN). In this approach, fundus images are processed through both
+generator and discriminator modules to improve the representation of the optic rim region an essential
+structure for glaucoma classification. The framework leverages a combination of supervised and adversarial
+learning to enhance diagnostic precision.
+Jyoti et al. [17] proposed a diagnostic strategy combining the Fourier–Bessel Series Expansion (FBSE) with
+the Empirical Wavelet Transform (EWT) for feature extraction from fundus images. These extracted
+features are mapped onto a memristive crossbar array, mimicking neuromorphic computing behavior. The
+crossbar-based system facilitates automated glaucoma detection using conventional machine learning
+classifiers.
+Abhishek et al. [18] proposed the glaucoma detection framework the first step involves segmenting retinal
+fundus images to identify the optic disc and cup regions. Features are then extracted from these segmented
+areas to capture distinctive patterns. The classification performance is further improved by combining
+several base learners using a stacking-based ensemble approach.
+
+E
+L
+C
+I
+T
+R
+A
+
+Sl.
+No
+
+Authors
+
+IN
+
+S
+S
+E
+R
+P
+
+Table 2: Overview of Deep Learning Frameworks for Glaucoma Detection
+Year
+Method
+Types of
+Datasets
+Features
+
+Result
+(Accuracy)
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+1
+
+2
+
+3
+
+Shyamalee
+et al. [4]
+
+Balasubramanian
+et al. [10]
+
+Pinheiro et al. [11]
+
+2024
+
+Attention U-Net +
+ResNet50
+(segmentation),
+Modified
+InceptionV3
+(classification) with
+Grad-CAM/GradCAM++
+
+2022
+
+CFS + SSA-KELM
+(Kernel
+Extreme
+Learning Machine
+optimized with Salp
+Swarm Algorithm)
+
+2024
+
+LDA, KNN, DT,
+RF, ET, AB, GBM,
+NB, SVM, FCN,
+1D-CNN,
+Transformer
+
+4
+
+Habelo et al. [12]
+
+2024
+
+CFO-CS
+(Caputo
+Fractional
+Order
+Cuckoo Search)
+
+5
+
+Velpula et al.[13]
+
+2024
+
+ResNet50 + SVM
+(with XAI)
+
+2024
+
+GSOA
+(Gravitational
+Search Optimization
+Algorithm) + RF
+
+2024
+
+Hybrid Framework
+(ResNet50, VGG16, Random Forest)
+
+2025
+
+mixDA
+(mixup
+Domain Adaptation)
+
+6
+
+7
+
+8
+
+9
+
+Singh et al.[14]
+
+Aljohani et al.[3]
+
+Yan et al. [15]
+
+Chowdhury et al.
+[16]
+
+LE
+
+Deep learning
+features from
+fundus
+images, CDR,
+heatmaps for
+explainability
+CDR, GLCM,
+ADT-CWT,
+MGL, FTA,
+CIF, SURF,
+PHOG,
+SP,
+Cup Shape
+Pupillary
+signal
+diameters, 42
+handcrafted
+features
+HOG, LBP,
+Deep Features
+(MobileNet,
+VGG19)
+
+C
+I
+T
+R
+A
+2025
+
+TS-GAN
+SqueezeNet
+
++
+
++
++
+
+10
+
+Jyoti et al. [17]
+
+2025
+
+2D-FBSE-EWT
+MCA
+EfficientNetB0
+
+11
+
+Abhishek et al.
+[18]
+
+2025
+
+U-Net + Stacking
+Classifier
+
+98.97% (RIM-ONE),
+97.24% (ACRIMA),
+91.17%
+(ORIGA),
+91.11% (REFUGE),
+80.95% (DRISHTI)
+
+DRISHTI-GS1,
+ACRIMA,
+ORIGA-light,
+LAG (private)
+
+96.95%
+99.34%
+98.51%
+light)
+
+Private dataset
+
+73.9%
+(Linear
+Discriminant Analysis
+(LDA)
+
+ORIGA,
+REFUGE, RIMONE
+DL,
+ACRIMA
+RIMONE-v2,
+ACRIMA,
+HVD, DrishtiGS, FTVD
+
+S
+S
+E
+R
+P
+
+Deep Features
+(ResNet18/Re
+sNet50)
+
+Handcrafted
+Features (36
+features from
+fundus
+images)
+Texture
+features
+(GLCM),
+Deep features
+Fourier/histog
+ram adapted
+features,
+mixup
+
+IN
+
+RIM-ONE,
+ACRIMA,
+REFUGE,
+DRISHTI-GS1,
+ORIGA
+
+Rim structure
+(from
+segmented
+cup and disc)
+Deep features
+from
+reconstructed
+fundus images
+Clinical data +
+CDR
++
+diameters
+from
+segmentation
+
+(DRISHTI),
+(ACRIMA),
+(ORIGA-
+
+92.62-(ACRIMA)
+
+98.03-(ACRIMA)
+
+ACRIMA,
+DRISHTI, HRF,
+ORIGA,
+
+95.36dataset
+
+combined
+
+ACRIMA,
+G1020, ORIGA,
+REFUGE
+
+95.41%dataset
+
+combined
+
+REFUGE, LAG,
+ORIGA, RIMONE,
+
+99.01% (REFUGE)
+
+Drishti-GS,
+RIM-ONE v3,
+REFUGE,
+PAPILA,
+Private
+
+95.6% (Drishti-GS),
+84.8%
+(RIM-ONE
+v3),
+95.9%
+(REFUGE),
+93.8%
+(PAPILA),
+83.3%
+(Private)
+
+RIM-ONE R1,
+R2, R3
+
+94.15%
+
+PAPILA
+
+ROC-AUC: 0.88 (not
+accuracy)
+
+Despite the remarkable progress made by existing machine learning and deep learning methods for
+glaucoma diagnosis, several critical challenges continue to affect their reliability and generalizability.
+Most conventional CNN-based frameworks emphasize global retinal representations while insufficiently
+capturing subtle spatial abnormalities around the optic disc and retinal nerve fiber regions that are closely
+associated with glaucoma progression. Likewise, handcrafted feature-driven and optimization-assisted
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+approaches often introduce redundant feature representations and exhibit inconsistent performance across
+diverse retinal datasets and imaging conditions. Furthermore, many existing methods depend heavily on
+conventional segmentation and feature extraction strategies, which may limit the discriminative
+representation of complex retinal structures. These challenges highlight the need for a more effective
+glaucoma detection framework capable of combining efficient spatial partitioning, optimized feature
+representation, and robust hybrid deep learning classification.
+
+3. Proposed Methodology
+The glaucoma detection framework consists of four-fold architecture: data collection, dataset
+preprocessing, feature extraction and feature Optimization, and classification. Authors used fundus images
+from four publicly available datasets: Drishti-GS, Origa, RimOne-V2, and Harvard (HVD). In the proposed
+framework, 80% of the dataset was used for training and 20% for testing. The preprocessing stage was
+designed to enhance retinal contrast and suppress image noise, thereby improving the visibility of
+glaucoma-related features. Each retinal image was normalized to a square shape and systematically divided
+into smaller triangular regions using recursive Sierpinski triangle segmentation. The geometric
+decomposition facilitated the extraction of localized image features. The red, green, and blue (RGB) three
+colour channels were analysed separately, and statistical histogram-based evaluations were performed to
+capture variations in intensity, colour, and spatial distribution. Additionally, handcrafted descriptors
+encompassing structural, textural, and morphological attributes were incorporated to provide a
+comprehensive representation of retinal characteristics.
+The feature vectors that are generated from the feature extraction process are put into a hybrid deep learning
+architecture that includes bidirectional LSTM [19], bidirectional GRU [54], and CNN [55] with Bi-LSTM
+models. Attention mechanisms are added to these models to make patterns that are important for diagnosis
+stand out. The framework can do both binary classification, which separates glaucoma from non-glaucoma,
+and multiclass classification, which separates early, advanced, and normal instances. The framework's
+capacity to detect things accurately, precisely, and quickly, as well as its F1-score, shows that it is successful
+for automated glaucoma screening across all datasets.
+3.1 Dataset-Prepressing
+The proposed framework uses four publicly available benchmark datasets: Drishti-GS [20], Origa [21],
+RimOne-V2 [22], and Harvard (HVD) [23]. People often use these datasets to find and classify glaucoma.
+Table 3 presents the detailed specifications and data distribution of each dataset, while Figure 2 illustrates
+representative retinal fundus images. RimOne-V2 has 455 high-resolution pictures, 255 of which show
+healthy eyes and 200 of which show glaucomatous eyes. Ophthalmologists manually divided the
+photographs into parts. They were obtained at a resolution of 400 × 469 pixels from Hospital Universitario
+de Canarias and Hospital Universitario Miguel Servet. There are 1,544 photographs in HVD, including 788
+normal, 289 early-stage glaucoma, and 467 advanced glaucoma cases, enabling evaluation across different
+disease stages. Drishti-GS comprises 101 images, including 31 healthy and 70 glaucomatous eyes, with
+optic disc and cup annotations provided by four clinical experts. The ORIGA dataset, developed from the
+Singapore Malay Eye Study, contains 650 retinal fundus images, including 482 normal and 168
+glaucomatous eyes, facilitating large-scale automated glaucoma diagnosis. All retinal fundus images were
+resized to 224 × 224 pixels to maintain a uniform input resolution and improve computational efficiency.
+Contrast Limited Adaptive Histogram Equalization (CLAHE) was applied to enhance local image contrast,
+while median filtering was employed to suppress noise and preserve important retinal structures [4]. To
+ensure an unbiased experimental evaluation, each dataset was first divided into training and testing subsets
+using an 80:20 stratified split based solely on the original retinal fundus images. Data augmentation was
+subsequently applied only to the training subset, whereas the testing subset remained completely unchanged
+throughout the experiments. Consequently, augmented images derived from an original image were
+confined exclusively to the corresponding training set and never appeared in the testing set, thereby
+eliminating data leakage and ensuring a fair performance evaluation. The augmentation process included
+horizontal flipping, rotation, zooming, and brightness variation to increase training sample diversity, reduce
+overfitting, and improve the model's generalization capability [24]. The detailed distribution of the original
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+images, training and testing subsets, and augmented training samples for each benchmark dataset is
+summarized in Table 3. These preprocessing steps ensured consistent image quality and provided a reliable
+foundation for accurate feature extraction and glaucoma classification. The empirical justification of the
+selected preprocessing parameters and sensitivity analysis of the proposed preprocessing pipeline are
+provided in Appendix A (Tables A1–A6).
+Table 3: Detailed specifications of the datasets
+Images (Original)
+
+Training (Original)
+
+Testing (Original)
+
+Dataset
+Drishti-GS
+ORIGA
+RIM-ONE V2
+Harvard (HVD)
+HVD Advanced
+HVD Early
+
+Normal
+31
+482
+225
+788
+788
+788
+
+(a) Drishti-G
+
+(e) RimOneV2-G
+
+Glaucoma
+70
+168
+200
+756
+467
+289
+
+Normal
+25
+368
+204
+630
+630
+630
+
+Glaucoma
+65
+134
+160
+605
+374
+231
+
+(b) Drishti-N
+
+LE
+
+(f) RimOneV2-N
+
+C
+I
+T
+R
+A
+
+IN
+
+Normal
+6
+96
+51
+158
+158
+158
+
+Glaucoma
+14
+34
+40
+151
+93
+58
+
+S
+S
+E
+R
+P
+
+Training After
+Augmentation
+Normal
+Glaucoma
+310
+350
+482
+504
+765
+800
+3940
+3780
+3940
+3736
+3940
+3757
+
+(c) Origa-G
+
+(d) Origa-N
+
+(g) HVD-A
+
+(h) HVD-E
+
+(i) HVD-N
+Figure 2: Fundus image samples categorized as Normal (N), Glaucoma (G), Early Glaucoma (E), and Advanced Glaucoma (A).
+
+3.2 Feature Extraction
+The suggested framework uses a fractal-like geometric breakdown of images based on the Sierpinski
+triangle idea [25]. An input picture is represented as 𝑰 ∈ ℝ 𝑵×𝑵×𝟑 , where 𝑵 × 𝑵 signifies the spatial
+resolution of a normalised square image, and the third dimension represents RGB colour channels. In all of
+its parts, the Sierpinski triangle needs to have equilateral geometry. When you cut a square diagonally, you
+get four triangular areas. However, these areas are not equal and do not obey the rule. Each side of the
+square acts as the base of an equilateral triangle, creating four equilateral regions-top, bottom, left, and
+right-while keeping the equilateral feature that fully meets the Sierpinski criterion. In Figure 3, you can see
+recursive Sierpinski triangular partitioning at iterations 1 and 2. In Figure 4, you can see the whole feature
+extraction process.
+Dividing the image into four equilateral triangles, each positioned along one side of the square, ensures
+symmetry and even coverage across all samples [26]. The resulting triangular set is defined as 𝓣 =
+{𝑻𝟏 ,𝑻𝟐 ,𝑻𝟑 ,𝑻𝟒 }. Each triangular region 𝑻𝒊 ∈ 𝓣 is formed by assigning one square edge as the base, with the
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+𝟑
+
+apex positioned at a distance 𝟐 𝑵 from the base, ensuring equilateral geometry and uniform angular
+distribution. Recursive subdivision is applied following the Sierpinski principle. For a triangular region 𝑻
+= (𝒑𝟏 ,𝒑𝟐 ,𝒑𝟑 ), the midpoints of its edges are computed in equation (1):
+𝒑 +𝒑
+𝒑 +𝒑
+𝒑 +𝒑
+𝒎𝟏 ← 𝟏 𝟐 𝟐 , 𝒎𝟐 ← 𝟐 𝟐 𝟑 , 𝒎𝟑 ← 𝟑 𝟐 𝟏 (1)
+The midpoints define a central triangular sub-region,
+𝑻𝒄 = (𝒎𝟏 ,𝒎𝟐 ,𝒎𝟑 ) (2)
+The central triangle is added to the set of sub-regions. The original triangle is subdivided into three smaller
+sub-triangles computed in equation (3):
+𝑻𝒂 = (𝒑𝟏 ,𝒎𝟏 ,𝒎𝟑 ), 𝑻𝒃 = (𝒎𝟏 ,𝒑𝟐 ,𝒎𝟐 ), 𝑻𝒅 = (𝒎𝟑 ,𝒎𝟐 ,𝒑𝟑 ) (3)
+The recursive procedure continues with each of the three sub-triangles until a predefined recursion depth 𝒏
+∈ ℕ is reached. At recursion depth 𝒏, a single boundary triangle produces 3𝒏 sub-triangles.
+The cumulative number of triangles across all recursion levels is expressed as a geometric progression:
+𝟏 + 𝟑 + 𝟗 +… + 𝟑𝒏―𝟏 =
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+𝟑𝒏 ―𝟏
+(4)
+𝟐
+
+S
+S
+E
+R
+P
+
+Figure 3: Sierpinski triangle-based iterative decomposition and RGB channel separation of input images for feature extraction at
+Iteration 1 and 2.
+
+The equation (4) quantifies the total number of triangles generated from the first level up to depth 𝒏 ,
+illustrating hierarchical subdivision step by step, and can also be expressed as a generalized geometric
+series:
+𝒓𝒏 ―𝟏
+
+𝑺𝒏 = 𝒂 𝒓―𝟏 (5)
+Were, 𝒂 denotes the first term, 𝒓 denotes the common ratio, and 𝒏 specifies recursion depth. The context,
+𝒂 = 𝟏, 𝒓 = 𝟑 and 𝑺𝒏 provides the total number of triangles generated across all recursion levels. The
+complete set of triangular sub-regions is expressed as:
+𝓡 = {𝑹𝟏 ,𝑹𝟐 ,…,𝑹𝒎 } (6)
+The fractal-based subdivision incorporates both large and small areas of the image by dividing it into
+triangles of different sizes. Large triangles capture overall structure, while small triangles highlight local
+details. The segmentation achieves a balance between coarse and fine granularity, providing a rich multiscale representation. Deterministic geometric rules guarantee reproducibility and avoid random partitioning
+errors common in conventional image segmentation methods.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+After segmentation, the framework applies statistical representation and feature selection to build a strong
+image representation tailored for classification. Each triangular sub-region 𝑹𝒋 , is analyzed independently
+across the three color channels 𝒄 ∈ ({𝑹,𝑮,𝑩}) . Normalized histogram is computed to capture the
+distribution of intensity levels in equation (7):
+𝟏
+𝒄
+𝑯𝑹
+(𝒌) = 𝑵𝒄 ∑(𝒙,𝒚)∈𝑹𝒋 𝜹(𝑰𝒄 (𝒙,𝒚) ― 𝒌), 𝒌 ∈ [𝟎,𝟐𝟓𝟓] (7)
+𝒋
+𝒋
+
+where 𝑵𝒋𝒄 denotes the number of pixels in channel 𝒄 within region 𝑹𝒋 , and 𝜹(.) is the Kronecker delta
+function. The histograms form the basis for extracting handcrafted descriptors. Handcrafted feature
+extraction involves computing statistical, spectral, and structural measures over the histograms, denoted
+generally as
+𝒄
+𝑭𝒋 = ⋃𝒄∈{𝑹,𝑮,𝑩} 𝒇 𝑯𝑹
+(8)
+𝒋
+where 𝒇(.) is a mapping from histograms to a feature vector. Typical measures include entropy, interquartile
+range, spectral energy, and shape-based descriptors. Concatenating all triangle-wise features yields the
+complete feature matrix:
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+𝑭 = [𝑭𝟏 ,𝑭𝟐 ,…,𝑭𝒎 ] (9)
+
+Figure 4: Sierpinski triangle-based iterative decomposition and RGB channel feature extraction framework enabling localized
+histogram-based feature computation across top, bottom, left, and right regions.
+
+For the proposed framework consider 𝒏 = 𝟒. According to Equation (4), a single boundary triangle
+𝟑𝟒 ―𝟏
+produces 𝟐 = 𝟒𝟎 non-overlapping sub-triangles. Since the image is initially partitioned into four
+boundary triangles, the total number of triangular sub-regions becomes 𝟒𝟎 × 𝟒 = 𝟏𝟔𝟎. Each sub-region is
+represented independently across the three color channels (R, G, and B) [27], expanding the representation
+to 𝟏𝟔𝟎 × 𝟑 = 𝟒𝟖𝟎 channel-specific triangular regions. For every region, 15 handcrafted features are
+extracted to capture statistical, spectral, and geometric characteristics. As a result, prior to feature selection,
+a single input image produces 𝟒𝟖𝟎 × 𝟏𝟓 = 𝟕𝟐𝟎𝟎 handcrafted features. This well-executed example shows
+how recursive geometric partitioning naturally generates a rich and high-dimensional feature space and
+emphasizes the scalability of the suggested approach.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Since redundancy may be present in high-dimensional features, the optimum subset is obtained by using a
+feature selection operator 𝚽(.) applied to obtain the optimized subset:
+𝑭𝒔𝒆𝒍 = 𝚽(𝑭) (10)
+After selecting the key features, the process performs manual feature extraction to compute geometric,
+statistical, and spectral attributes from the chosen regions. The stage enhances the descriptive quality of the
+data and removes redundant information, leading to a compact and highly discriminative feature set
+optimised for classification.
+Algorithm 1: Sierpinski-based Framework for Image Segmentation and Feature Extraction
+Require: Image dataset 𝓓, recursion depth 𝒏, histogram bins 𝑩, feature selection method Φ
+Ensure: Final reduced feature set 𝓕∗ for classification
+Phase 1: Recursive Sierpinski Image Division
+1. for each image 𝑰 ∈ 𝓓 with class label 𝒄 do
+2. Resize 𝑰 into a square 𝑵 × 𝑵
+3. Initialize the region set as 𝓡←∅
+4. Define boundary triangles 𝓣 = {𝑻𝟏 ,𝑻𝟐 ,𝑻𝟑 ,𝑻𝟒 }
+5. for each 𝑻𝒊 ∈ 𝓣 do
+6. Call Sierpinski-Divide(𝑻𝒊 ,𝒏) to recursively generate sub-triangles
+7. Append extracted pixel regions to 𝓡
+8. Store labelled regions 𝓡 for image 𝑰
+9. end for
+Phase 2: Generation of Equilateral Triangles
+10. for each region 𝑹𝒋 ∈ 𝓡 do
+11. Extract RGB channels {𝑹,𝑮,𝑩}
+12. for each channel 𝒄𝒉 do
+13. Compute normalized histogram 𝑯𝒋,𝒄𝒉 (𝒃), 𝒃 = 𝟏,…,𝑩
+14. end for
+15. Collect all histograms into 𝓗
+16 end for
+Phase 3: Handcrafted Feature Extraction
+17. for each histogram 𝑯 ∈ 𝓗 do
+18. Extract handcrafted descriptors (statistical, spectral, wavelet, geometric)
+19. Concatenate into feature vector 𝑭𝑯 = [𝒇𝟏 ,𝒇𝟐 ,…,𝒇𝒎 ]
+20. end for
+21. Aggregate all feature vectors into dataset 𝓕
+Phase 4: Feature Selection and Dataset Construction
+22. Apply feature selection method Φ to remove redundant features:
+23. 𝓕∗ = 𝚽(𝓕), with 𝒅𝒊𝒎(𝓕∗ ) < 𝒅𝒊𝒎(𝓕)
+24. Merge reduced features 𝓕∗ with class labels
+25. Save the final dataset into a file format (CSV)
+26. Use 𝓕∗ as input for classification models
+Phase 4: Output
+27. Return: 𝓕∗ as compact, discriminative feature set for classification
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+The reduced feature set 𝑭𝒔𝒆𝒍 is stored in a structured format(such as CSV), enabling reproducibility and
+simplifying downstream machine learning tasks. The refined feature representation is particularly suited
+for classification models 𝓒(.), which can map
+𝒚 = 𝓒(𝑭𝒔𝒆𝒍 ) (11)
+for predicting a given input image's class label 𝒚 . The suggested method strikes a balance between
+computational efficiency and descriptive richness by combining redundancy selection, handmade feature
+design, multi-channel histogram analysis, and fractal-based geometric partitioning. In medical imaging
+applications like glaucoma detection, this improves diagnostic performance by guaranteed that only the
+most informative characteristics are retained for classification.
+3.3 Handcrafted Feature
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+The proposed methodology in the feature extraction framework analyses retinal fundus images to capture
+information related to intensity, frequency, texture and geometry. It utilises 15 handcrafted features, each
+computed separately for the red, green, and blue colour channels. Statistical features such as entropy, mean,
+median, and interquartile range provide insights into the distribution and variation of intensity values,
+reflecting structural changes in blood vessels associated with glaucoma [28]. Wavelet energy is employed
+to represent multi-scale textures, enabling effective characterization of retinal layers and small vascular
+structures. Frequency-domain features, including bandwidth and spectral centroid, capture subtle textural
+differences between the optic disc and surrounding retinal regions [29]. Geometric descriptors such as
+circularity, compactness, aspect ratio, and eccentricity highlight shape-related variations linked to
+glaucomatous cupping. Additionally, run-length features such as Short Run High Gray Emphasis (SRHGE),
+Short Run Emphasis (SRE), and High Gray Level Run Emphasis (HGRE) quantify vessel irregularities and
+local texture variations. The integration of multi-channel and multi-scale representations enhances the
+visibility of color and structural changes, while the recursive Sierpinski-triangle partitioning ensures
+comprehensive spatial analysis across all sub-regions. This combined strategy establishes a robust and
+discriminative foundation for accurate and reliable glaucoma detection from fundus images.
+Statistical
+•
+•
+•
+•
+
+Entropy
+Mean
+Median
+Interquartile
+Range (IQR)
+• Standard
+Deviation
+
+Table 4: Overview of Handcrafted Features
+Morphological
+(Geometric)
+Frequency-based
+Wavelet-based
+• Spectral Centroid
+• Spectral Bandwidth
+
+• Wavelet Energy
+
+• Circularity
+• Compactness
+• Aspect Ratio
+• Eccentricity
+
+S
+S
+E
+R
+P
+
+Run-Length (Texture
+Uniformity)
+• High Gray Level Run
+Emphasis (HGRE)
+• Short Run High Gray
+Emphasis (SRHGE)
+• Short Run Emphasis
+(SRE)
+
+3.4 Feature Optimization
+Feature optimization plays a crucial role in the proposed glaucoma detection framework, positioned
+between the feature extraction and classification process. Its primary goal is to refine the high-dimensional
+features obtained from retinal fundus images. The initial feature set 𝑭 ∈ ℝ𝒅 often includes redundant, noisy,
+or weakly discriminative attributes, which can increase computational complexity, reduce classification
+accuracy, and lead to overfitting. To address these challenges, meta-heuristic optimization algorithms such
+as the Grey Wolf Optimizer (GWO) [32], Harris Hawks Optimizer (HHO) [33], Red Fox Optimizer (RFO)
+[34], and Social Feature Optimizer (SFO) [35] are employed. These methods utilize population-based
+search strategies inspired by collective animal behaviors in nature. Each algorithm maintains a balance
+between global exploration of the feature space and local exploitation of promising feature subsets, ensuring
+effective selection of the most relevant and discriminative features. Through this adaptive search process,
+the optimization phase significantly enhances model generalization and stability, paving the way for
+improved classification accuracy in glaucoma detection. The fitness function employed in the proposed
+HHO-based feature optimization framework is designed to maximize the discriminative capability of the
+selected retinal feature subset while reducing redundant feature representations. Each candidate solution
+generated by the optimization algorithm is represented as a continuous vector and converted into a binary
+feature-selection mask using a threshold value of 0.5, where ‘1’ indicates a selected feature and ‘0’ indicates
+an unselected feature. The fitness value is computed using the negative mean variance of the selected
+features as follows:
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+𝑭𝒊𝒕𝒏𝒆𝒔𝒔 = ―
+
+𝟏
+𝒏
+
+𝒏
+
+𝒊=𝟏
+
+𝑽𝒂𝒓(𝒇𝒊 ) (12)
+
+where 𝑉𝑎𝑟(𝑓𝑖 ) denotes the variance of the 𝑖 𝑡ℎ selected feature and n represents the total number of selected
+features. Since the optimization problem is formulated as a minimization problem, maximizing feature
+variance is achieved by minimizing the negative variance value. The adopted fitness function enables the
+HHO algorithm to identify informative and discriminative retinal feature subsets for glaucoma
+classification. The search space of the proposed feature optimization framework consists of all possible
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+combinations of the extracted retinal features. Each candidate solution is represented as an N-dimensional
+continuous vector:
+𝑿 = [𝒙𝟏 ,𝒙𝟐 ,…,𝒙𝑵 ], 𝒙𝒊 ∈ [𝟎,𝟏] (13)
+where N denotes the total number of extracted retinal features. A threshold value of 0.5 is used to convert
+the continuous search vector into a binary feature-selection mask. Consequently, the total search space
+consists of 2𝑁 possible feature combinations. The lower and upper bounds of the search agents are defined
+within the interval [0,1], enabling efficient exploration and exploitation of the retinal feature-selection space
+during optimization. The proposed framework utilizes the Harris Hawks Optimization (HHO) algorithm to
+efficiently select discriminative features from the high-dimensional handcrafted feature space. Exhaustive
+brute-force or grid-search-based feature evaluation becomes computationally expensive due to the large
+number of possible feature combinations. Therefore, the HHO algorithm performs efficient global feature
+optimization while reducing redundant feature representations and improving classification performance.
+𝑭∗ = 𝒂𝒓𝒈𝒎𝒂𝒙𝑭′ ⊆𝑭 𝓛(𝑭′ ) (14)
+where F* denotes the optimized feature subset, and 𝓛(.) represents the objective function, defined here in
+terms of classification accuracy. The application of meta-heuristic optimization facilitates dimensionality
+reduction, enhances computational efficiency during both training and testing, and improves model
+generalization by minimizing overfitting. Moreover, it strengthens diagnostic reliability by preserving
+clinically relevant retinal attributes. The optimized feature subset F* is then forwarded to the classification
+stage, enabling the decision-making modules to function on compact, highly discriminative, and clinically
+interpretable feature representations. During cross-validation analysis, the feature optimization process was
+independently performed within each training fold to maintain evaluation consistency and reduce potential
+information leakage between training and testing partitions.
+3.5 Classification
+In the proposed glaucoma detection framework, the classification stage serves as the final module. It
+operates on the optimized feature vector 𝑭 ∈ ℝ𝒏 ,which is derived through meta-heuristic feature selection
+employing algorithms such as the Red Fox Optimizer (RFO), Grey Wolf Optimizer (GWO), Harris Hawks
+Optimizer (HHO), and Social Feature Optimizer (SFO). The optimized feature vector 𝑭∗ ∈ ℝ𝒏 , obtained
+after meta-heuristic feature optimization, consists of statistical, texture, wavelet, frequency-domain, and
+morphological descriptors arranged in a predefined and consistent order. Although retinal fundus images
+are inherently spatial rather than temporal, these optimized handcrafted features are represented as a onedimensional ordered sequence before being provided as input to the Bi-LSTM, Bi-GRU, and CNN-BiLSTM architectures. This feature sequencing strategy preserves the structural relationships among
+complementary retinal descriptors, enabling the recurrent networks to model long-range inter-feature
+dependencies and contextual interactions that cannot be effectively captured by conventional feed-forward
+classifiers. Consequently, the proposed hybrid framework learns more discriminative feature
+representations, resulting in improved robustness and classification performance for both binary and
+multiclass glaucoma detection. The sequential feature representation is subsequently processed using
+several deep learning architectures to capture complementary structural and contextual feature relationships
+for glaucoma diagnosis. While a Bidirectional Long Short-Term Memory (Bi-LSTM) network represents
+contextual dependencies in both forward and backward directions, a Convolutional Neural Network (CNN)
+extracts local spatial correlations. Spatial and temporal learning are combined in a CNN with a Bi-LSTM
+hybrid model, while a Bidirectional Gated Recurrent Unit (Bi-GRU) structure uses reset–update techniques
+to further improve sequential representation. An expanded setup creates unique feature embedding’s by
+having the optimized feature vector individually travel through CNN with Bi-LSTM, Bi-LSTM, and BiGRU models. First, a 1D CNN layer refines the concatenated output to improve discriminative
+representation. Batch normalization is used to improve convergence behaviour and stabilize learning
+dynamics when the generated convolutional features flow into a dense layer of 256 neurons. Two
+classification heads produce the final predictions: one for multiclass categorization into Normal, Early
+Glaucoma, and Advanced Glaucoma, and one for binary differentiation between Normal and Glaucoma
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+instances. Meta-heuristic feature optimization and deep fusion networks operate in concert to create a robust
+system that improves diagnostic accuracy, robustness, and convergence efficiency.
+
+IN
+
+S
+S
+E
+R
+P
+
+Figure 5: Proposed hybrid deep learning framework for glaucoma detection and classification.
+
+E
+L
+C
+I
+T
+R
+A
+
+The first stage of the classifier applies a dense transformation expressed as equation (13):
+𝒉 = 𝑹𝒆𝑳𝑼(𝑾𝑭∗ + 𝒃) (13)
+where 𝑊 ∈ ℝ 𝑚×𝑛 represents the learnable weight matrix, 𝑏 ∈ ℝ 𝑚 denotes the bias vector, and ReLU(⋅) is
+the rectified linear unit activation that introduces non-linearity. The output vector ℎ ∈ ℝ 𝑚 represents the
+latent embedding of the optimized features. To improve stability, batch normalization is applied:
+𝒉―𝝁𝒉
+𝒉(𝒏𝒐𝒓𝒎) =
+(14)
+𝝈𝟐𝒉 ―𝝐
+
+where 𝝁𝒉 is the batch mean, 𝝈𝒉𝟐 is the batch variance, and 𝝐 is a small constant ensuring numerical stability.
+In Bi-LSTM units, sequential information is modelled in both directions. At time step t, the forward and
+backward hidden states are given as:
+𝒉𝒕 = 𝒉𝒕 ;𝒉𝒕 (15)
+where 𝒉𝒕 denotes the hidden state computed from past inputs and 𝒉𝒕 denotes the hidden state computed
+from future inputs. The concatenated vector 𝒉𝒕 captures contextual dependencies across the entire feature
+sequence. Bi-GRU networks utilize gating mechanisms to regulate information flow. The update gate 𝔃𝒕
+determines the proportion of previous information preserved, while the reset gate 𝒓𝒕 controls the influence
+of past states:
+𝔃𝒕 = 𝝈 𝑾𝔃 𝒙𝒕 + 𝑼𝔃 𝒉𝒕―𝟏 , 𝒓𝒕 = 𝝈(𝑾𝒓 𝒙𝒕 + 𝑼𝒓 𝒉𝒕―𝟏 ),
+𝒉𝒕 = (𝟏 ― 𝔃𝒕 )⨀ 𝒉𝒕―𝟏 + 𝔃𝒕 ⨀𝒕𝒂𝒏𝒉 𝑾𝒉 𝒙𝒕 + 𝑼𝒉 (𝒓𝒕 ⨀𝒉𝒕―𝟏 ) , (16)
+where 𝒙𝒕 denotes the input feature at time step t,𝑼𝔃 ,𝑼𝒓 ,𝑼𝒉 are recurrent weight matrices, and ⨀ indicates
+element-wise multiplication. The final prediction depends on the classification task. In the binary case, a
+sigmoid activation is applied:
+𝔂 = 𝝈(𝑾𝒐 𝒉 + 𝒃𝒐 ) 𝔂 ∈ {𝟎,𝟏} (17)
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+where 𝑾𝒐 and 𝒃𝒐 represent the output weight matrix and bias, respectively. In the multi-class case, a
+softmax function produces a normalized probability distribution across glaucoma stages:
+𝒆𝒙𝒑(𝑾𝒊 𝒉+𝒃𝒊 )
+𝔂𝒊 = 𝑲
+𝒊 ∈ {𝟏,….,𝑲} (18)
+∑𝒋=𝟏 𝒆𝒙𝒑 𝑾𝒋 𝒉+𝒃𝒋
+
+where K=3 corresponds to normal, early-stage glaucoma, and advanced-stage glaucoma. Classifier training
+relies on cross-entropy loss. In the binary scenario, the formulation is:
+𝟏
+𝔂𝒊 𝒍𝒐𝒈𝔂𝒊 + (𝟏 ― 𝔂𝒊 )𝒍𝒐𝒈(𝟏 ― 𝔂𝒊 ) (19)
+𝓛𝒃𝒊𝒏 = ― ∑𝑵
+𝑵 𝒊=𝟏
+while in multi-class scenarios, the formulation becomes:
+𝟏
+∑𝑲 𝔂𝒊𝒌 𝒍𝒐𝒈𝔂𝒊𝒌 (20)
+𝓛𝒎𝒖𝒍𝒕𝒊 = ― ∑𝑵
+𝑵 𝒊=𝟏 𝒌=𝟏
+where𝔂𝒊 and 𝔂𝒊𝒌 denote the true labels and 𝔂𝒊 , 𝔂𝒊𝒌 denote predicted probabilities. The confusion matrix
+serves as the basis for the four main metrics used to evaluate classifier performance: accuracy, precision,
+recall, and F1-score. The ratio of correctly identified samples to the total number of analysed cases is known
+as accuracy, and it indicates how reliable the prediction process is overall. While recall demonstrates the
+system's ability to identify real positive examples in the dataset, precision quantifies the percentage of
+positive classifications that are actually accurate. A balanced evaluation of false positives and false
+negatives is ensured by the F1-score, which integrates precision and recall into a single harmonic mean.
+The proposed framework exhibits strong robustness and computational efficiency in automated glaucoma
+diagnosis. By integrating advanced sequential classification architectures with optimized feature selection,
+it achieves effective dimensionality reduction, enhances feature discriminability, and ensures consistent
+diagnostic performance across both binary and multiclass glaucoma classification tasks.
+
+S
+S
+E
+R
+P
+
+4. The Proposed Model Experiments and Results:
+
+The experimental framework utilises TensorFlow, with Keras serving as the deep learning API.
+Computation runs on an Intel Core i9-12900K processor operating at 2.4 GHz, 32 GB RAM, an NVIDIA
+GeForce GTX 3080 GPU, and a 64-bit Windows 11 environment. Model construction and training proceed
+on the Google Colab platform. The proposed method employs the cross-entropy loss function to minimise
+the classification errors, performing on an image dataset resized to 337 × 223 pixels and refining the
+network using the ADAM optimiser. The training process was conducted with a batch size of 16 and 50
+epochs to ensure stable convergence. Accuracy, precision, recall, and F1-score are computed according to
+standard formulations derived from the confusion matrix, as detailed in the following subsection.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+𝑻𝑷+𝑻𝑵
+
+𝑨𝒄𝒄𝒖𝒓𝒂𝒄𝒚(𝑨𝒄𝒄 ) = 𝑻𝑷+𝑻𝑵+𝑭𝑷+𝑭𝑵 (21)
+𝑻𝑷
+
+𝑷𝒓𝒆𝒄𝒊𝒔𝒊𝒐𝒏(𝑷𝒓𝒄 ) = 𝑻𝑷+𝑭𝑷 (22)
+𝑻𝑷
+
+𝑹𝒆𝒄𝒂𝒍𝒍(𝑹𝒆𝒄 ) = 𝑻𝑷+𝑭𝑵 (23)
+𝑷 ∗𝑹
+
+𝑭𝟏 𝑺𝒄𝒐𝒓𝒆(𝑭𝒔 ) = 𝟐 ∗ 𝑷 𝒓𝒄+𝑹𝒆𝒄 (24)
+𝒓𝒄
+
+𝒆𝒄
+
+A detailed comparative study evaluated the effectiveness of the proposed hybrid deep learning framework
+in comparison to several established state-of-the-art models. Benchmark systems included four machine
+learning models: Logistic Regression [50], Linear SVM [51], XGBoost [52], MLP [53], three transfer
+learning models: ResNet50[39], VGG19 [39], and VGG16 [40], along with two hybrid models: ResNet50Xception [41] and VGG19-MobileNetV2 [42]. In addition, the analysis assessed the performance of the
+proposed hybrid architecture, integrating Stacked BiLSTM, BiGRU, and CNN with BiLSTM modules,
+under four meta-heuristic optimization algorithms: Grey Wolf Optimizer (GWO), Harris Hawks Optimizer
+(HHO), Social Feature Optimizer (SFO), and Red Fox Optimizer (RFO).
+Experimental evaluations were performed on seven publicly available glaucoma datasets: Drishti-GS,
+Origa, RimOne-V2, HVD Binary Class, HVD Advance, HVD Early, and HVD Multiclass. All the
+experiments are follow 80:20 train-test ratio to maintain uniformity across models. Additionally, 5-fold
+cross-validation experiments were conducted to further evaluate the robustness and generalization
+capability of the proposed framework. The comparative analysis was based on the performance metrics
+Accuracy, Precision, Recall, and F1-score with the results for all datasets and models described in the
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+subsequent tables. The contribution of each individual component of the proposed framework was further
+investigated through an ablation study, and the detailed results are provided in Appendix B (Table B1).
+Table 5. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, F1-Score on the Drishti-GS dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+73.48
+71.97
+84.85
+78.03
+91.41
+92.82
+93.18
+90.15
+92.42
+92.42
+92.80
+97.73
+97.73
+96.97
+98.48
+
+Precision
+74
+72
+85
+79
+90
+91
+89
+87
+88
+93
+91
+97
+99
+99
+99
+
+Recall
+73
+72
+84
+77
+94
+96
+99
+96
+99
+90
+96
+99
+97
+96
+99
+
+F1-Score
+73
+72
+85
+78
+92
+93
+94
+91
+93
+92
+93
+98
+98
+97
+99
+
+Table 5 summarises the comparative performance of machine learning, deep learning, and hybrid
+architectures on the Drishti-GS glaucoma dataset. Conventional machine learning models, including
+Logistic Regression, Linear SVM, XGBoost, and MLP, achieved accuracies ranging from 71.97% to
+84.85%. Deep learning models such as EfficientNetB0, ConvNeXtBase, VGG16, VGG19, and ResNet50
+demonstrated strong classification performance, producing accuracy values between 90.15% and 93.18%.
+Deep learning-based hybrid architectures, including ResNet50-Xception and VGG19-MobileNetV2,
+further improved performance with accuracies of 92.42% and 92.80%, respectively. In comparison, the
+proposed hybrid model, integrated with different metaheuristic optimization algorithms, demonstrated
+significantly improved results across all evaluation metrics. Among all evaluated configurations, the
+Proposed Model with the Harris Hawks Optimizer (HHO) achieved the highest accuracy of 98.48%, along
+with superior precision, recall, and F1-score values of 99%. Such outcomes indicate strong robustness,
+efficient feature extraction capability, and enhanced generalization performance for glaucoma detection.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Table 6. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, F1-Score on the Origa dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+88.38
+87.88
+93.43
+88.38
+92.84
+93.29
+94.73
+93.85
+97.80
+92.93
+93.40
+96.46
+97.98
+97.47
+98.99
+
+Precision
+88
+88
+94
+89
+96
+96
+96
+94
+97
+94
+98
+98
+98
+98
+99
+
+Recall
+88
+87
+93
+88
+88
+92
+95
+96
+99
+92
+90
+95
+98
+97
+99
+
+F1-Score
+88
+88
+93
+89
+92
+94
+96
+95
+98
+93
+94
+96
+98
+98
+99
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Table 7. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, F1-Score on the RimOneV2 dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+78.21
+77.56
+82.69
+82.05
+94.72
+95.32
+94.73
+93.85
+96.80
+90.06
+95.16
+96.15
+96.15
+96.15
+97.44
+
+Precision
+78
+78
+83
+81
+95
+95
+96
+94
+97
+91
+95
+97
+97
+96
+98
+
+Recall
+79
+77
+83
+82
+96
+97
+95
+96
+98
+90
+97
+96
+96
+97
+98
+
+F1-Score
+78
+78
+83
+82
+95
+96
+96
+95
+97
+91
+96
+96
+96
+96
+98
+
+Tables 6 and 7 present the comparative analysis of machine learning, deep learning, hybrid, and
+optimization-driven architectures on the Origa and RimOne-V2 glaucoma datasets. Machine learning
+approaches, including Logistic Regression, Linear SVM, XGBoost, and MLP, produced comparatively
+lower classification performance on both datasets. Accuracy values on the Origa dataset ranged from
+87.88% to 94.34%, while RimOne-V2 results varied between 77.56% and 82.69%. Deep learning
+architectures such as EfficientNetB0, ConvNeXtBase, VGG16, VGG19, and ResNet50 achieved improved
+diagnostic performance with stronger feature representation capability. Accuracy values for deep learning
+models ranged from 92.84% to 97.80% on the Origa dataset and from 93.83% to 96.80% on the RimOneV2 dataset. Hybrid deep learning architectures, including ResNet50-Xception and VGG19-MobileNetV2,
+generated balanced precision, recall, and F1-score values, indicating effective learning performance across
+both datasets. Optimization-assisted proposed architectures delivered the highest performance among all
+evaluated methods. Proposed Model integrated with GWO, SFO, and RSO consistently produced accuracy
+values above 96% on both datasets. Proposed Model combined with the Harris Hawks Optimizer (HHO)
+achieved the best overall performance with accuracies of 98.99% on the Origa dataset and 97.44% on the
+RimOne-V2 dataset, along with superior precision, recall, and F1-score values. Overall findings reflect
+strong robustness, reliable feature extraction capability, and improved generalization strength for automated
+glaucoma detection.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Table 8. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, F1-Score on the HVD Binary Class dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+83.48
+82.32
+87.11
+87.44
+88.12
+92.53
+89.38
+88.47
+80.12
+90.93
+92.94
+97.67
+97.41
+97.09
+97.80
+
+Precision
+83
+82
+86
+88
+84
+91
+85
+85
+72
+89
+91
+98
+96
+97
+98
+
+Recall
+84
+82
+87
+86
+91
+93
+95
+93
+99
+93
+95
+97
+99
+98
+98
+
+F1-Score
+84
+82
+87
+87
+88
+92
+90
+89
+83
+91
+93
+98
+97
+97
+98
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Table 9. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various
+optimizers in terms of Accuracy, Precision, Recall, F1-Score on the HVD Advance dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+89.84
+88.74
+91.73
+93.49
+93.68
+94.52
+94.35
+94.08
+86.52
+96.16
+96.70
+98.11
+98.44
+98.89
+99.02
+
+Precision
+89
+89
+92
+93
+95
+93
+95
+93
+92
+95
+97
+97
+98
+98
+98
+
+Recall
+88
+89
+91
+93
+93
+96
+93
+95
+80
+96
+96
+99
+98
+99
+1.00
+
+F1-Score
+89
+89
+92
+93
+94
+95
+94
+94
+86
+96
+97
+98
+98
+99
+99
+
+Table 10. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, F1-Score on the HVD Early dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+ResNet50-Xception
+VGG19-MobileNetV2
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+83.44
+82.01
+86.82
+88.25
+94.59
+95.74
+87.01
+87.79
+74.81
+90.96
+94.74
+97.79
+97.34
+97.34
+98.05
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Precision
+83
+82
+88
+88
+94
+94
+93
+81
+74
+90
+93
+97
+96
+98
+98
+
+Recall
+84
+81
+85
+89
+96
+97
+80
+97
+75
+91
+96
+99
+98
+97
+98
+
+F1-Score
+84
+82
+87
+89
+95
+96
+86
+88
+74
+91
+95
+98
+97
+97
+98
+
+Tables 8, 9, and 10 illustrate the comparative evaluation of machine learning, deep learning, hybrid, and
+optimization-driven architectures for glaucoma detection using the HVD Binary Class, HVD Advance, and
+HVD Early datasets. Machine learning models, including Logistic Regression, Linear SVM, XGBoost, and
+MLP, achieved comparatively lower performance across different glaucoma stages. Accuracy values varied
+from 82.32% to 87.44% on the HVD Binary dataset, 88.74% to 93.49% on the HVD Advance dataset, and
+82.01% to 88.25% on the HVD Early dataset. Deep learning architectures such as EfficientNetB0,
+ConvNeXtBase, VGG16, VGG19, and ResNet50 demonstrated improved learning capability with stronger
+classification performance. Accuracy values obtained by deep learning models ranged from 80.12% to
+92.53% on the HVD Binary dataset, 86.52% to 94.52% on the HVD Advance dataset, and 74.81% to
+95.74% on the HVD Early dataset. Hybrid deep learning architectures, namely ResNet50-Xception and
+VGG19-MobileNetV2, produced balanced precision, recall, and F1-score values, reflecting effective
+feature representation and stable glaucoma classification performance. Optimization-based proposed
+architectures generated the highest performance among all evaluated methods. The proposed model
+integrated with GWO, SFO, and RSO consistently achieved accuracy values greater than 97% across all
+datasets. Among every evaluated configuration, Proposed Model combined with the Harris Hawks
+Optimizer (HHO) produced the best overall performance, achieving accuracies of 97.80% on the HVD
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Binary dataset, 99.02% on the HVD Advance dataset, and 98.05% on the HVD Early dataset. Superior
+precision, recall, and F1-score values further indicate reliable feature extraction capability, robust
+optimization performance, and enhanced generalization strength for glaucoma stage classification and early
+disease diagnosis.
+Table 11. Comparative performance of transfer learning, hybrid, and proposed deep learning models with various optimizers in
+terms of Accuracy, Precision, Recall, and F1-Score (Class-wise) on the HVD Multiclass dataset.
+
+Model
+Logistic Regression
+Linear SVM
+XGBoost
+MLP
+EfficientNetB0
+ConvNeXtBase
+Vgg16
+Vgg19
+ResNet50
+
+Class
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+Normal
+Early
+Advanced
+
+E
+L
+C
+I
+T
+R
+A
+
+ResNet50-Xception
+
+VGG19-MobileNetV2
+
+Proposed Model + GWO
+Proposed Model + SFO
+Proposed Model +RSO
+Proposed Model + HHO
+
+Accuracy
+73.15
+72.37
+81.90
+81.50
+80.09
+84.62
+79.15
+
+IN
+
+77.90
+67.93
+91.31
+88.16
+96.68
+96.76
+96.28
+97.11
+
+Precision
+74
+72
+73
+73
+71
+74
+83
+81
+82
+80
+81
+81
+80
+78
+79
+87
+84
+86
+83
+81
+79
+82
+80
+81
+70
+68
+68
+91
+88
+89
+92
+90
+91
+97
+96
+97
+97
+96
+97
+97
+95
+97
+98
+96
+97
+
+Recall
+74
+72
+72
+75
+73
+72
+82
+80
+83
+84
+80
+82
+82
+80
+81
+86
+85
+85
+80
+78
+82
+79
+77
+78
+69
+67
+68
+94
+92
+93
+87
+85
+86
+97
+95
+98
+97
+97
+96
+96
+95
+97
+96
+97
+99
+
+S
+S
+E
+R
+P
+
+F1-Score
+74
+72
+73
+74
+72
+73
+83
+81
+82
+82
+80
+81
+81
+79
+80
+86
+84
+85
+81
+79
+80
+81
+78
+80
+70
+68
+68
+92
+90
+91
+89
+87
+88
+97
+96
+98
+97
+97
+97
+97
+95
+97
+97
+97
+98
+
+Table 11 presents the comparative class-wise performance analysis of machine learning, deep learning,
+hybrid, and optimization-based architectures on the HVD Multiclass glaucoma dataset containing Normal,
+Early, and Advanced stages. Conventional Machine learning models, including Logistic Regression, Linear
+SVM, XGBoost, and MLP, achieved accuracy values ranging from 72.37% to 81.90%. Deep learning
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+architectures such as EfficientNetB0, ConvNeXtBase, VGG16, VGG19, and ResNet50 produced
+accuracies between 67.93% and 84.62%, while hybrid deep learning architectures, namely ResNet50Xception and VGG19-MobileNetV2, demonstrated improved classification performance with accuracies
+of 91.31% and 88.16%, respectively. Optimization-assisted proposed architectures achieved the highest
+overall performance across all evaluation metrics. Among all evaluated configurations, Proposed Model
+combined with the Harris Hawks Optimizer (HHO) achieved the best results with 97.11% accuracy, 96%
+precision, 97% recall, and 97% F1-score. Overall findings indicate strong robustness, enhanced feature
+extraction capability, and reliable multiclass glaucoma stage classification performance.
+Table 12. Comparative performance of the proposed HHO-optimized hybrid deep learning model using 5-fold cross-validation in
+terms of Accuracy on benchmark glaucoma datasets.
+
+Dataset
+
+Fold-1
+
+Fold-2
+
+Fold-3
+
+Fold-4
+
+Fold-5
+
+Drishti-GS
+
+98.26
+
+98.41
+
+98.67
+
+98.14
+
+98.55
+
+Average
+Accuracy
+98.41
+
+Origa
+
+98.21
+
+98.54
+
+98.73
+
+98.47
+
+98.66
+
+98.52
+
+RimOne-V2
+
+97.11
+
+97.58
+
+97.73
+
+97.36
+
+97.69
+
+97.49
+
+HVD Binary
+
+97.04
+
+97.36
+
+97.58
+
+97.21
+
+97.63
+
+97.36
+
+HVD Advance
+
+98.83
+
+99.16
+
+99.24
+
+99.05
+
+99.18
+
+99.09
+
+HVD Early
+
+97.74
+
+98.06
+
+98.18
+
+97.95
+
+98.27
+
+98.04
+
+HVD Multi-Class
+
+96.31
+
+96.74
+
+96.92
+
+96.58
+
+97.01
+
+96.71
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Tables 5-11 clearly demonstrate the effectiveness of the proposed HHO-optimized hybrid deep learning
+framework under the fixed 80:20 train-test evaluation strategy. The proposed model achieved its highest
+classification accuracy of 99.02% on the HVD Advance dataset, while the proposed model produced
+98.99% accuracy on the Origa dataset and 98.48% on Drishti-GS. The framework also delivered strong
+performance on HVD Early and HVD Binary datasets with accuracies of 98.05% and 97.80%, respectively.
+In addition, the proposed model achieved 97.44% accuracy on RimOne-V2 and 97.11% on the HVD MultiClass dataset, demonstrating its capability to effectively handle both binary and multiclass glaucoma
+classification tasks. To further validate the robustness and generalization capability of the proposed
+framework, we conducted additional 5-fold cross-validation experiments, and Table 12 summarizes the
+obtained results. The cross-validation analysis confirmed that the proposed framework maintained stable
+and consistent performance across different data partitions with only minor performance variations
+compared with the fixed split evaluation. The model improved the classification accuracy on the HVD
+Advance dataset from 99.02% to 99.09% and increased the RimOne-V2 performance from 97.44% to
+97.49%. Similarly, the framework achieved 98.41% accuracy on Drishti-GS, showing only a 0.07%
+variation from the fixed split result, while HVD Early produced an almost identical result with only a 0.01%
+difference. On the other hand, Origa, HVD Binary, and HVD Multi-Class datasets showed small reductions
+of 0.47%, 0.44%, and 0.40%, respectively, during cross-validation analysis. These marginal changes
+indicate that the proposed HHO-assisted hybrid model learns stable feature representations and preserves
+strong classification capability even under varying training and testing distributions.
+Comparative Analysis of Spatial Partitioning Strategies
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+i) Full image
+
+ii) Uniform Grid-Based Block
+ii) Sierpinski triangle-Based Block
+Division
+Division(Bottom-triangle)
+Figure 6: Visual comparison of retinal spatial partitioning strategies including i) full-image representation, ii)
+uniform grid-based partitioning, and iii) recursive Sierpinski triangle-based partitioning.
+Table 13. Comparative performance analysis of full-image representation, uniform grid-based partitioning, and
+recursive Sierpinski triangle-based partitioning using the proposed HHO-optimized hybrid glaucoma detection
+framework across benchmark retinal datasets.
+Dataset
+Drishti-GS
+Origa
+RimOneV2
+HVD Binary Class
+HVD Advance
+HVD Early
+HVD Multiclass
+
+Full image + Proposed
+Model (HHO)
+
+Acc
+
+Prc
+
+Rec
+
+90.68
+91.89
+91.02
+89.96
+94.61
+92.87
+88.41
+
+88
+92
+89
+92
+93
+93
+88
+
+94
+93
+93
+88
+96
+92
+88
+
+F1
+91
+32
+91
+90
+95
+93
+88
+
+E
+L
+C
+I
+T
+R
+A
+
+S
+S
+E
+R
+P
+
+Uniform Grid + Proposed
+Model (HHO)
+
+Acc
+94.19
+92.38
+91.56
+93.34
+96.45
+93.41
+91.03
+
+IN
+
+Prc
+
+Rec
+
+96
+91
+89
+93
+97
+91
+88
+
+92
+92
+93
+92
+95
+96
+93
+
+F1
+94
+92
+91
+93
+96
+93
+91
+
+Sierpinski triangle +
+Proposed Model (HHO)
+
+Acc
+
+Prc
+
+Rec
+
+98.48
+98.99
+
+99
+99
+
+99
+99
+
+F1
+99
+99
+
+97.44
+97.80
+99.02
+98.05
+97.11
+
+98
+98
+98
+98
+96
+
+98
+98
+1.00
+98
+97
+
+98
+98
+99
+98
+97
+
+Additional comparative experiments were conducted using full-image representation, uniform grid-based
+partitioning, and recursive Sierpinski triangle-based partitioning under identical handcrafted feature
+extraction, HHO-based feature optimization, and hybrid deep learning classification settings, as illustrated
+in Fig. 6. Quantitative results presented in Table 13 demonstrate that recursive Sierpinski triangle-based
+partitioning consistently achieved superior classification performance across all benchmark glaucoma
+datasets. For the Drishti-GS dataset, classification accuracy improved from 90.68% using full-image
+representation and 94.19% using uniform grid-based partitioning to 98.48% using recursive Sierpinski
+triangle-based partitioning. Similarly, classification accuracy on the Origa dataset increased from 91.89%
+and 92.38% to 98.99%, while RimOneV2 achieved improvements from 91.02% and 91.56% to 97.44%.
+Comparable performance improvements were also observed for HVD Binary with accuracies of 89.96%,
+93.34%, and 97.80%, HVD Advance with accuracies of 94.61%, 96.45%, and 99.02%, HVD Early with
+accuracies of 92.87%, 93.41%, and 98.05%, and HVD Multiclass with accuracies of 88.41%, 91.03%, and
+97.11% using full-image representation, uniform grid-based partitioning, and recursive Sierpinski trianglebased partitioning, respectively. Improved classification performance confirms that recursive Sierpinski
+triangle-based partitioning provides more effective localized retinal feature representation compared with
+full-image and conventional grid-based retinal analysis approaches.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 7: Confusion matrices of the proposed hybrid deep learning model on the Drishti-GS dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 8: Confusion matrices of the proposed hybrid deep learning model on the Origa dataset (80:20 split) using optimizers: (i)
+GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+IN
+
+S
+S
+E
+R
+P
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 9: Confusion matrices of the proposed hybrid deep learning model on the RimOneV2 dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+E
+L
+C
+I
+T
+R
+A
+
+Figure 7,8 and 9 collectively present the confusion matrices of the proposed hybrid deep learning model on
+the Drishti-GS, Origa, and RimOne-V2 datasets, evaluated using an 80:20 train-test split with four
+metaheuristic optimizers: GWO, SFO, RSO, and HHO. Across all three datasets, the model demonstrates
+high classification accuracy with balanced true positive and true negative rates, indicating its ability to
+correctly identify both positive and negative samples. The clear diagonal dominance observed in the
+matrices reflects consistent and accurate predictions across different classes and optimizers. These results
+highlight the robustness, adaptability, and strong generalization capability of the proposed model when
+applied to multiple datasets, confirming its effectiveness and stability across diverse optimization strategies.
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 10: Confusion matrices of the proposed hybrid deep learning model on the HVD Binary class dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 11: Confusion matrices of the proposed hybrid deep learning model on the HVD Advance dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 12: Confusion matrices of the proposed hybrid deep learning model on the HVD Early dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 13: Confusion matrices of the proposed hybrid deep learning model on the HVD Multi class dataset (80:20 split) using
+optimizers: (i) GWO, (ii) SFO, (iii) RSO, and (iv) HHO.
+
+Figures 10 ,11,12 and 13 collectively illustrate the confusion matrices of the proposed hybrid deep learning
+framework evaluated on four variations of the HVD Dataset-Binary Class, Advance, Early, and Multiclassusing an 80:20 train-test partition and four distinct metaheuristic optimizers: GWO, SFO, RSO, and HHO.
+Across all dataset variants, consistently high classification accuracy is achieved, accompanied by wellbalanced true positive and true negative rates, indicating reliable identification of both positive and negative
+samples. The diagonal dominance in all confusion matrices indicates high predictive accuracy and
+consistent performance in both binary and multiclass classification tasks. Furthermore, the consistent results
+achieved across different optimization algorithms highlight the flexibility and robustness of the proposed
+architecture, regardless of variations in dataset characteristics or optimization strategies. Overall, the
+findings confirm the model’s strong generalization capability, scalability, and effectiveness in handling
+datasets of varying complexity, establishing its suitability for real-world medical image classification
+applications.
+
+(i) GWO
+
+(ii) SFO
+
+(iii) RSO
+
+(iv) HHO
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Figure 14: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the DrishtiGS Dataset.
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 15: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the Origa
+Dataset.
+
+(i) GWO
+
+(ii) SFO
+
+S
+S
+E
+R
+P
+(iii) RSO
+
+(iv) HHO
+
+Figure 16: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the
+RimOneV2 Dataset.
+
+Figures 14 to 16 describes the Receiver Operating Characteristic (ROC) curves corresponding to the hybrid
+deep learning based classification architecture assessed on three datasets: Drishti-GS, Origa, and
+RimOneV2. An 80:20 train-test ratio was employed for each dataset, and four metaheuristic optimization
+algorithms-GWO, SFO, RSO, and HHO were implemented to evaluate performance consistency. Across
+all datasets and optimization schemes, the ROC curves display Area Under the Curve (AUC) values
+approaching unity, signifying exceptional discriminative capability and stable predictive performance.
+Consistent results across different experimental settings highlight the robustness, adaptability, and
+generalization ability of the proposed framework for diverse data distributions. The findings confirm its
+high reliability and effectiveness in classification tasks, indicating strong potential for use in medical image
+analysis applications.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 17: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the HVD
+Binary class Dataset.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+(i) GWO
+
+(ii) SFO
+
+(iii) RSO
+
+(iv) HHO
+
+Figure 18: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the HVD
+Advance Dataset.
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 19: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the HVD
+Early Dataset.
+
+S
+S
+E
+R
+P
+
+(i) GWO
+(ii) SFO
+(iii) RSO
+(iv) HHO
+Figure 20: ROC Curves of the Proposed Hybrid Deep Learning Model Using Different Metaheuristic Optimizers on the HVD
+Multiclass Dataset.
+
+Figures 17,18,19 and 20 represent the Receiver Operating Characteristic (ROC) curves obtained from the
+evaluation of the proposed hybrid deep learning framework on four variants of the HVD dataset: Binary
+Class, Advance, Early, and Multiclass. Each dataset was partitioned using an 80:20 train-test ratio, while
+four optimization algorithms GWO, SFO, RSO, and HHO were applied to enhance model performance.
+The ROC curves across all dataset variants consistently demonstrate high Area Under the Curve (AUC)
+values, approaching 1.0, indicating exceptional discriminative strength and stable classification behaviour.
+Such consistent results across multiple configurations highlight the framework’s adaptability, robustness,
+and strong generalization ability in managing both binary and multiclass classification. Overall, the results
+confirm the reliability and efficiency of the proposed model in classification tasks, demonstrating consistent
+performance across different dataset complexities and optimization techniques.
+
+E
+L
+C
+I
+T
+R
+A
+
+(i) Drishti-GS dataset convergence analysis
+
+IN
+
+(ii) ORIGA dataset convergence analysis
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+(iii) RimOneV2 dataset convergence analysis
+
+(iv) HVD Binary dataset convergence analysis
+
+(v) HVD Advance dataset convergence analysis
+
+(vi) HVD Early dataset convergence analysis
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+(vii) HVD Multiclass dataset convergence analysis.
+
+Figure 21: Convergence characteristics of the proposed HHO-optimized glaucoma detection framework across
+
+multiple benchmark retinal datasets.
+
+Figure 21 presents the convergence behaviour of the proposed HHO-based feature optimization framework
+on multiple benchmark glaucoma datasets. During the initial optimization iterations, slight fluctuations are
+observed due to the exploration capability of the HHO algorithm while searching for informative retinal
+feature subsets. As the optimization process advances, the convergence curves progressively stabilize and
+approach higher metric values, indicating effective feature optimization and improved classification
+learning. Consistent convergence patterns obtained for Accuracy, Precision, Recall, and F1-Score across
+all datasets demonstrate stable optimization performance and reliable feature selection capability. The
+gradual and smooth convergence trends further confirm that the proposed framework maintains a balanced
+exploration and exploitation process without premature convergence. Overall, the convergence analysis
+validates the stability, robustness, and effectiveness of the proposed glaucoma detection framework under
+varying retinal image distributions and dataset conditions.
+Table 14: Comparison of the proposed method with existing state-of-the-art approaches.
+
+Author
+
+Model
+
+Dataset
+
+Result (Accuracy)
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Sanli Yi et al.[43]
+
+MSGC-CNN
+
+Drishti-GS,
+RIM-ONE-R3
+
+92.00%
+93.70%
+
+G. Satya Nugraha et al. [28]
+
+GLCM with MLP
+
+RIM-ONE
+
+93.24%
+
+Kumari Jyoti et al.[17]
+
+EfficientNetB0
+
+RIM-ONE
+
+94.15%
+
+David et al.[44]
+
+Community-based CNN
+
+RIM-ONE
+
+93.00%
+
+Z.A.Khan et al.[45]
+
+Yolo-v4 & ResNet-101
+
+ORIGA
+
+88.50%
+
+DCNN
+
+ORIGA
+
+92.80%
+
+ORIGA
+
+97.31%
+
+RIMONE-V2
+HVD Binary-Class
+Drishti-GS
+HVD Multi-Class
+RIM-One
+Drishti
+
+92.75%
+90.23%
+82.18%
+85.30%
+95.30%
+93.70%
+
+ORIGA
+
+82.43%
+
+A.H.T.Hutami et al. [46]
+S.K. Sharma et al. [51]
+
+Least Squares -SVM
+
+V.Kumar, et al. [47]
+
+Nasnet_mobile
+Nasnet_large
+
+Juneja M et al.[48]
+
+CoG-NET
+
+Sivakumar et al. [50]
+
+A.Chowdhury et al.[16]
+
+Majority Voting
+Ensemble of ResNet50,
+VGG16, and Swin
+Transformer
+TS-GAN
+
+A.Shoukat et al. [49]
+
+ResNet-50
+
+E
+L
+C
+I
+T
+R
+A
+
+Proposed Model with HHO Optimizer
+
+IN
+
+S
+S
+E
+R
+P
+Drishti-GS
+
+95.60%
+
+ORIGA,
+RIM-ONE,
+DRISHTI-GS
+Drishti-GS
+Origa
+RimoneV2
+HVD Binary-Class
+HVD Advance
+HVD Early
+HVD Multi-Class
+
+92.59%
+96.15%
+97.03%
+98.48%
+98.99%
+97.44%
+97.80%
+99.02%
+98.05%
+97.11%
+
+Table 14 provides a detailed comparison between the proposed model and several existing deep learning
+approaches for glaucoma detection across multiple benchmark datasets. Previous methods, such as MSGCCNN, GLCM with MLP, Least Squares -SVM, and Community-based CNN, achieved moderate accuracy
+levels ranging from 92% to 97.31%. Other models, including a Majority Voting Ensemble of ResNet50,
+VGG16, and Swin Transformer, and YOLO-V4 with ResNet-101 and DCNN, reported accuracies of
+82.43% and 92.80% on the ORIGA dataset, respectively. More recent architectures, such as Variations of
+NasNet and CoG-NET, demonstrated improved performance, attaining up to 95.30% accuracy on the RIMONE dataset and 93.70% on Drishti-GS, while ResNet-50 achieved a strong and consistent result with
+accuracy of 97.03% on Drishti-GS. In comparison, the proposed HHO-based hybrid model surpasses all
+previously reported methods, achieving 98.48% accuracy on Drishti-GS, 98.99% on ORIGA, and 97.44%
+on RimOne-V2. Furthermore, it maintains the performance on the HVD dataset, reaching 97.80% for
+Binary-Class, 99.02% for Advanced, 98.40% for Early, and 97.11% for Multiclass glaucoma classification.
+The results clearly indicate that the proposed model achieves superior accuracy, robustness, and
+generalization across multiple datasets, setting a new standard for automated glaucoma detection.
+
+Statistical Analysis (Wilcoxon signed-rank test)
+In the statistical analysis, the Wilcoxon signed-rank test is performed over the accuracy, recall, precision,
+and F1-score across all datasets, comparing the performance of the proposed model with that of existing
+models.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Although the sign test can be used to test both one-sample and two-sample paired data, the Wilcoxon
+signed-rank test is more powerful than the sign test for these tasks because it makes use of the magnitudes
+of the differences rather than just their signs [52].
+The Wilcoxon signed-rank test was developed by Frank Wilcoxon in 1945. The basic idea behind the
+Wilcoxon signed-rank test is [52]:
+• Form null and alternative hypotheses and choose a degree of confidence. The null hypothesis is
+that the median of the population of differences between the paired data is zero. The alternative
+hypothesis is that the population median difference is not equal to 0.
+• Compute the test statistic. First, compute the differences between the paired data samples; then,
+rank the differences according to magnitude only, that is, without regard to their sign; next, sum
+the ranks of the positive and negative differences; finally, pick the minimum of the sums as our test
+statistic.
+• Compare the test statistic to a critical value. If the test statistic is less than the critical value, then
+we reject the null hypothesis.
+The Wilcoxon signed-rank test is a non-parametric statistical hypothesis test used as an alternative to the
+paired t-test. The test provides an additional safeguard against biases that may occur with modest sample
+sizes. Additionally, the test is used to evaluate the null hypothesis that in the underlying population of
+differences among pairs, the median difference is equal to 0. The alternative hypothesis is that the
+population median difference is not equal to 0. P-values lower than 0.05 were considered significant [53].
+Under the proposed method, the Wilcoxon signed-rank test (two-sided) was used to determine whether the
+median accuracy of the proposed model is significantly different from that of the existing models across
+four datasets. The Wilcoxon signed-rank test calculates a p-value, which is then compared to a chosen level
+of significance (alpha(α)) to decide on the null hypothesis. Common choices for alpha(α) include 0.05 (5%),
+0.01 (1%), or 0.10 (10%).
+
+Mean Accuracies and Improvements (%)
+
+IN
+
+S
+S
+E
+R
+P
+
+Table 15. Mean Accuracies and Improvements (%), based on Tables 5-11 comparing the proposed model with baseline models
+across four datasets with an 80:20 train-test split.
+
+E
+L
+C
+I
+T
+R
+A
+
+Proposed Model (𝑨)
+Mean Accuracy (%)
+
+Existing Model (𝑩)
+Mean Accuracy (%)
+
+98.12
+
+90.36
+(VGG-16)
+89.44
+(VGG-19)
+85.20
+(ResNet50)
+92.11
+(ResNet50-Xception)
+93.41
+(VGG-19 MobileNetV2)
+
+98.12
+98.12
+98.12
+98.12
+
+Absolute
+Improvement
+(𝐴 ― 𝐵) (%)
+
+Relative
+Improvement
+𝐴―𝐵
+( 𝐵 x 100) (%)
+
++7.76%
+
++8.58%
+
++8.68%
+
++9.70%
+
++12.92%
+
++15.16%
+
++6.01%
+
++6.52%
+
++4.71%
+
++5.04%
+
+Table 16. Wilcoxon signed-rank test results based on Tables 5-11 comparing the performance of the proposed model with
+baseline models across four datasets with an 80:20 train-test split.
+Baseline
+
+Wilcoxon
+Statistic
+(W)
+
+p-value
+(twosided)
+
+Relative
+Improvement
+𝐴―𝐵
+( 𝐵 x 100)
+(%)
+
+Median
+Difference
+
+Mean
+Difference
+
++8.58%
+
+(Proposed Baseline)
++5.29
+
+(Proposed Baseline)
++7.76
+
+VGG-16
+
+0.0
+
+0.015625
+
+VGG-19
+
+0.0
+
+0.015625
+
++9.70%
+
++8.32
+
++8.68
+
+Significant
+(p < 0.05)
+
+Statistically
+Significant
+Statistically
+Significant
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+ResNet50
+
+0.0
+
+0.015625
+
++15.16%
+
++12.5
+
++12.92
+
+Statistically
+Significant
+
+ResNet50Xception
+
+0.0
+
+0.015625
+
++6.52%
+
++6.06
+
++6.01
+
+Statistically
+Significant
+
+VGG-19
+MobileNetV2
+
+0.0
+
+0.015625
+
++5.04%
+
++4.85
+
++4.71
+
+Statistically
+Significant
+
+Table 15 presents the mean accuracies, absolute improvement (%), and relative improvement (%) across
+four datasets.
+Wilcoxon Signed-Rank Test
+The test statistic (𝑊) is the smaller of the sum of positive ranks (𝑊 + ) or the absolute sum of negative ranks
+(𝑊 ― ). The test statistic (𝑊) and 𝑝-values were calculated from Tables 5-11.
+Table 16 presents the results of the Wilcoxon Signed-Rank Test (two-sided) for each baseline model based
+on Tables 5-11, comparing the performance of the proposed model with baseline models across four
+datasets with an 80:20 train-test split. For the VGG-16 model, the proposed model accuracy exceeds that
+of the existing models, with a relative improvement of 8.58%; the difference is likely to be statistically
+significant (𝑝 < 0.05). For the VGG-19 model, the proposed model accuracy exceeds that of the existing
+models, with a relative improvement of 9.70%; the difference is likely to be statistically significant (
+𝑝 < 0.05). For the ResNet50 model, the proposed model accuracy exceeds that of the existing models, with
+a relative improvement of 15.16%; the difference is likely to be statistically significant (𝑝 < 0.05). For the
+ResNet50-Xception model, the proposed model accuracy exceeds that of the existing models, with a relative
+improvement of 6.52%; the difference is likely to be statistically significant (𝑝 < 0.05). For the VGG-19
+MobileNetV2 model, the proposed model accuracy exceeds that of the existing models, with a relative
+improvement of 5.04%; the difference is likely to be statistically significant (𝑝 < 0.05). Under Table 16,
+W = 0.0 implies that the Proposed model outperforms the Baseline model in all evaluated folds/instances,
+with no cases where the Baseline model performs better. Table 17 shows the results for the Wilcoxon
+Signed-Rank Test (Two-sided) across three datasets, based on Table 14.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Table 17. Results for the Wilcoxon Signed-Rank Test (Two-sided) across three datasets (based on Table 12)
+𝑝-value
+Datasets
+Conclusion (𝛼 = 0.05/ 0.10)
+(two-sided)
+Drishti GS
+0.0625
+Statistically Significant
+RIM-ONE
+0.0156
+Statistically Significant
+ORIGA
+0.0625
+Statistically Significant
+
+Note: 𝛼 refers to the level of significance
+
+Table 18. Wilcoxon Signed-Rank Test Summary: Accuracy Comparison between the Proposed and the Existing models (based
+on Table 14)
+Dataset
+Proposed Model (A)
+Existing Model (B)
+Relative
+Wilcoxon Signed-Rank Test
+Mean Accuracy (%) Improvement
+(Two-sided)
+Mean Accuracy (%)
+𝐴―𝐵
+(A vs B)
+( 𝐵 x 100)
+(%)
+98.48
+92.10
+Drishti GS
++6.92%
+𝑝 = 0.0625
+RIM-ONE
+
+97.43
+
+94.04
+
++3.60%
+
+𝑝 = 0.0156
+
+ORIGA
+
+98.99
+
+90.72
+
++9.11%
+
+𝑝 = 0.0625
+
+Table 18 summarizes the performance measures and the statistical test results, based on Table 14. In all
+three datasets, the 𝑝-values were small, leading to the conclusion that the proposed model is significantly
+more accurate:
+(i) Drishti GS dataset:
+• 𝑝= 0.0625. Since 𝑝 < 𝛼 (0.10) Therefore, the null hypothesis (H0) is rejected with 90%
+confidence. The median accuracy of the proposed model is significantly higher than that of the
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Existing methods.
+RIM-ONE dataset:
+• 𝑝 = 0.0156. Since 𝑝 < 𝛼 (0.05) Therefore, the null hypothesis (H0) is rejected with 95%
+confidence. The median accuracy of the proposed model is significantly higher than that of the
+Existing methods.
+(iii)
+ORIGA dataset:
+• 𝑝 = 0.0625. Since 𝑝 < 𝛼 (0.10)Therefore, the null hypothesis (H0) is rejected with 90%
+confidence. The median accuracy of the proposed model is significantly higher than that of the
+Existing methods.
+Computational complexity analysis of the proposed HHO-optimized BiLSTM-BiGRU-Attention glaucoma
+detection framework was carried out on multiple benchmark retinal datasets by evaluating runtime, latency,
+and memory consumption. Results presented in Table 19 demonstrate stable computational performance
+under different retinal dataset conditions, where the average inference time remained within 30-35 ms per
+retinal image during glaucoma classification. Memory utilization across all datasets remained moderate,
+indicating efficient retinal feature processing and classification capability of the proposed framework. The
+obtained computational results further demonstrate the practical applicability of the proposed framework
+for automated glaucoma detection tasks.
+(ii)
+
+Table 19: Computational Performance Analysis of the Proposed HHO-Based Glaucoma Detection Framework
+
+Dataset
+Drishti-GS
+Origa
+RimOneV2
+HVD Binary Class
+HVD Advance
+HVD Early
+HVD Multiclass
+
+Avg Runtime/Image (ms)
+
+Memory Usage (MB)
+
+Latency (ms)
+
+31.42
+32.15
+30.76
+33.84
+34.27
+33.11
+35.02
+
+214.8
+217.3
+212.9
+221.4
+224.1
+220.6
+226.5
+
+32.10
+32.84
+31.43
+34.51
+35.02
+33.78
+35.81
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Advantages of the Proposed Model
+• Recursive Sierpinski triangle-based partitioning improves localized retinal structure representation and
+enhances fine-grained spatial feature extraction associated with glaucoma progression, resulting in superior
+classification performance compared with full-image and uniform grid-based retinal representation
+approaches across all benchmark datasets.
+• Integration of handcrafted feature extraction, HHO-based feature optimization, and hybrid BiLSTMBiGRU deep learning classification improves discriminative retinal feature learning, reduces redundant
+feature information, and achieves stable classification performance for both binary and multiclass glaucoma
+detection tasks.
+• Fold-wise cross-validation analysis, confusion matrix-based evaluation, and comparative experimental
+analysis confirmed strong generalization capability, stable classification performance, and improved
+robustness under varying retinal data distributions across multiple benchmark glaucoma datasets.
+• Experimental evaluation across multiple benchmark glaucoma datasets containing varying retinal image
+characteristics and imaging conditions demonstrated stable classification performance and improved
+robustness of the proposed framework under heterogeneous retinal data distributions.
+• Confusion matrix-based evaluation across binary and multiclass glaucoma classification tasks provided
+clinically meaningful performance analysis and demonstrated stable classification capability across
+multiple benchmark retinal datasets.
+Limitations of the Proposed Model
+• Integration of recursive partitioning, handcrafted feature extraction, HHO-based feature optimization, and
+hybrid deep learning classification increases computational complexity, training time, and memory
+requirements during retinal image analysis.
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+• Extensive robustness evaluation under controlled image degradations including blur, noise, contrast
+variations, illumination changes, image resizing resolutions, and different recursive Sierpinski partitioning
+depths was not fully explored in the current study.
+• Current experimental analysis does not include extensive calibration analysis, subgroup-wise clinical
+evaluation based on retinal image quality or dataset source, and statistical significance testing against
+baseline approaches due to dataset and computational limitations.
+
+5. Conclusion
+The proposed study introduced an automated glaucoma detection framework integrating recursive
+Sierpinski triangle-based spatial partitioning, handcrafted retinal feature extraction, HHO-based
+feature optimization, and hybrid BiLSTM-BiGRU deep learning classification. Retinal fundus
+images from benchmark datasets including Drishti-GS, Origa, RimOne-V2, and HVD subsets
+were preprocessed using CLAHE enhancement, median filtering, and data augmentation to
+improve image quality and classification generalization. Recursive Sierpinski triangle-based
+partitioning enabled effective multi-scale retinal representation by preserving localized retinal
+structures and spatial retinal variations associated with glaucoma progression. Handcrafted
+descriptors extracted from statistical, frequency, wavelet, morphological, and texture-based retinal
+characteristics provided detailed retinal feature representation, while HHO-based optimization
+improved discriminative feature selection and reduced redundant feature information.
+Comparative experimental analysis against full-image representation, uniform grid-based
+partitioning, classical machine learning models, and modern deep learning architectures
+demonstrated the effectiveness of the proposed framework across all benchmark glaucoma
+datasets. Experimental results achieved classification accuracies of 98.48% on Drishti-GS, 98.99%
+on Origa, 97.44% on RimOne-V2, and above 97% across all HVD subsets. Fold-wise crossvalidation analysis and confusion matrix-based evaluation further confirmed stable classification
+performance, strong generalization capability, and robust glaucoma detection performance for
+both binary and multiclass classification tasks under varying retinal image characteristics and
+imaging conditions. Although the proposed framework incorporates an attention mechanism to
+improve discriminative feature learning, qualitative visualization techniques such as Gradientweighted Class Activation Mapping (Grad-CAM), attention heatmaps, and region-importance
+overlays were not investigated in the present study. Future work will incorporate these
+explainability methods to verify that the model focuses on clinically relevant retinal structures,
+including the optic disc, optic cup, neuroretinal rim, and retinal nerve fiber layer. In addition, the
+robustness of the proposed framework will be further investigated under challenging real-world
+imaging conditions, including blur, noise, low contrast, poor illumination, and non-centered optic
+disc regions, to better assess its clinical applicability. Such analyses will further improve the
+interpretability, transparency, clinical reliability, and robustness of the proposed decision-support
+system.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Compliance with Ethical Standards:
+Contribution of Authors: The first author Dip Das conducted the survey and prepared the
+manuscript draft, B Ramachandra Reddy have supervised the work and finalized the manuscript
+and Sunil Kumar Singh reviewed the manuscript.
+Data availability statements: The data that support the findings of this study are openly available
+Drishti-GS [20], Origa [21], RimOne-V2 [22], Harvard (HVD)[23], HVD Advance [23], HVD
+Early[23].
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Funding: No funding.
+Conflict of Interest: Authors declare that there is no conflict of Interest.
+Disclosure of potential conflicts of interest: This material is the authors' own original work,
+which has not been previously published elsewhere.
+Consent to Publish declaration: Not applicable
+Ethics and Consent to Participate declarations: Not applicable
+
+References
+1.
+
+Gupta, Priya, Di Zhao, Eliseo Guallar, Fang Ko, Michael V. Boland, and David S. Friedman. "Prevalence
+of glaucoma in the United States: the 2005–2008 national health and nutrition examination survey."
+Investigative ophthalmology & visual science 57, no. 6 (2016): 2905-2913.
+2. Hemelings, Ruben, Bart Elen, João Barbosa-Breda, Matthew B. Blaschko, Patrick De Boever, and Ingeborg
+Stalmans. "Deep learning on fundus images detects glaucoma beyond the optic disc." Scientific Reports 11,
+no. 1 (2021): 20313.
+3. Aljohani, Abeer, and Rua Y. Aburasain. "A hybrid framework for glaucoma detection through federated
+machine learning and deep learning models." BMC Medical Informatics and Decision Making 24, no. 1
+(2024): 115.
+4. Shyamalee, Thisara, Dulani Meedeniya, Gilbert Lim, and Mihipali Karunarathne. "Automated tool support
+for glaucoma identification with explainability using fundus images." IEEE Access 12 (2024): 17290-17307.
+5. Kaya, Yasin. "A novel method for optic disc detection in retinal images using the cuckoo search algorithm
+and structural similarity index." Multimedia Tools and Applications 79, no. 31 (2020): 23387-23400.
+6. Gautam, Divya. "Improved machine learning-based glaucoma detection from fundus images using texture
+features in fawt and ls-svm classifier." Multimedia Tools and Applications 83, no. 29 (2024): 72845-72860.
+7. Sharma, Santosh Kumar, Debendra Muduli, Adyasha Rath, Sujata Dash, Ganapati Panda, Achyut Shankar,
+and Dinesh Chandra Dobhal. "Discrete ripplet-II transform feature extraction and metaheuristic-optimized
+feature selection for enhanced glaucoma detection in fundus images using least square-support vector
+machine." Multimedia Tools and Applications 84, no. 23 (2025): 26447-26479.
+8. Gheisari, Soheila, Sahar Shariflou, Jack Phu, Paul J. Kennedy, Ashish Agar, Michael Kalloniatis, and S.
+Mojtaba Golzan. "A combined convolutional and recurrent neural network for enhanced glaucoma
+detection." Scientific reports 11, no. 1 (2021): 1945.
+9. Nayak, Deepak Ranjan, Dibyasundar Das, Banshidhar Majhi, Sulatha V. Bhandary, and U. Rajendra
+Acharya. "ECNet: An evolutionary convolutional network for automated glaucoma detection using fundus
+images." Biomedical Signal Processing and Control 67 (2021): 102559.
+10. Balasubramanian, Kishore, and N. P. Ananthamoorthy. "Correlation-based feature selection using bioinspired algorithms and optimized KELM classifier for glaucoma diagnosis." Applied Soft Computing 128
+(2022): 109432.
+11. Pinheiro, Hedenir Monteiro, Eduardo Nery Rossi Camilo, Augusto Paranhos Junior, Afonso Ueslei Fonseca,
+Gustavo Teodoro Laureano, and Ronaldo Martins Da Costa. "Evaluating machine learning techniques for
+enhanced glaucoma screening through Pupillary Light Reflex analysis." Array 23 (2024): 100359.
+12. Habeb, Abduljlil Abduljlil Ali Abduljlil, Mundher Mohammed Taresh, Jintang Li, Zhan Gao, and Ningbo
+Zhu. "Enhancing medical image classification with an advanced feature selection algorithm: a novel
+approach to improving the cuckoo search algorithm by incorporating caputo fractional order." Diagnostics
+14, no. 11 (2024): 1191.
+13. Velpula, Vijaya Kumar, Diksha Sharma, Lakhan Dev Sharma, Amarjit Roy, Manas Kamal Bhuyan, Sultan
+Alfarhood, and Mejdl Safran. "Glaucoma detection with explainable AI using convolutional neural networks
+based feature extraction and machine learning classifiers." IET Image Processing 18, no. 13 (2024): 38273853.
+14. Singh, Law Kumar, Munish Khanna, Hitendra Garg, and Rekha Singh. "Efficient feature selection based
+novel clinical decision support system for glaucoma prediction from retinal fundus images." Medical
+Engineering & Physics 123 (2024): 104077.
+15. Yan, Ming, Yun Lin, Xi Peng, and Zeng Zeng. "mix DA: mixup domain adaptation for glaucoma detection
+on fundus images." Neural Computing and Applications 37, no. 11 (2025): 7541-7560.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+16. Chowdhury, Arindam, Ankit Lodh, Rohit Agarwal, Rahul Garai, Ahana Nandi, Narayan Murmu, Sumit
+Banerjee, and Debashis Nandi. "Rim learning framework based on TS-GAN: A new paradigm of automated
+glaucoma screening from fundus images." Computers in Biology and Medicine 187 (2025): 109752.
+17. Jyoti, Kumari, Saurabh Yadav, Chandrabhan Patel, Mayank Dubey, Pradeep Kumar Chaudhary, Ram Bilas
+Pachori, and Shaibal Mukherjee. "Implementation of FBSE-EWT method in memristive crossbar array
+framework for automated glaucoma diagnosis from fundus images." Biomedical Signal Processing and
+Control 100 (2025): 107087.
+18. Amar, Abhishek, I. S. Rajesh, and Shavantrevva Bilakeri. "Advanced glaucoma detection through retinal
+fundus image segmentation and stacking classifier." Engineering Research Express 7, no. 1 (2025): 015248.
+19. Yang, J., Rezvani, E., Khan, M. A., Heidari, B., Albarakati, H. M., Prajapat, S., ... & Po, L. Y. (2025). QBAutoIDS: A blockchain-based decentralized autonomous cyberattack detection system for consumer
+electronics using hybrid double Q-learning and Bi-LSTM. IEEE Transactions on Consumer Electronics.
+20. Sivaswamy, Jayanthi, S. R. Krishnadas, Gopal Datt Joshi, Madhulika Jain, and A. Ujjwaft Syed Tabish.
+"Drishti-gs: Retinal image dataset for optic nerve head (onh) segmentation." In 2014 IEEE 11th international
+symposium on biomedical imaging (ISBI), pp. 53-56. IEEE, 2014.
+21. Gómez-Valverde, Juan J., Alfonso Antón, Gianluca Fatti, Bart Liefers, Alejandra Herranz, Andrés Santos,
+Clara I. Sánchez, and María J. Ledesma-Carbayo. "Automatic glaucoma classification using color fundus
+images based on convolutional neural networks and transfer learning." Biomedical optics express 10, no. 2
+(2019): 892-913.
+22. Batista, Francisco José Fumero, Tinguaro Diaz-Aleman, Jose Sigut, Silvia Alayon, Rafael Arnay, and
+Denisse Angel-Pereira. "Rim-one dl: A unified retinal image database for assessing glaucoma using deep
+learning." Image Analysis and Stereology 39, no. 3 (2020): 161-167.
+23. Kim, Seong Jae, Kyong Jin Cho, and Sejong Oh. "Development of machine learning models for diagnosis
+of glaucoma." PloS one 12, no. 5 (2017): e0177726.
+24. Leonardo, Ricardo, João Gonçalves, André Carreiro, Beatriz Simões, Tiago Oliveira, and Filipe Soares.
+"Impact of generative modeling for fundus image augmentation with improved and degraded quality in the
+classification of glaucoma." IEEE Access 10 (2022): 111636-111649.
+25. Marcelli, Romolo. "A Multidisciplinary Approach to Triangular Shapes: Philosophy, Art, Mathematical
+Properties, and Application Purposes for High-Frequency Signal Processing Using Sierpinski Geometry."
+Fractal and Fractional 9, no. 7 (2025): 444.
+26. Zhikharev, L. A. "A Sierpinski triangle geometric algorithm for generating stronger structures." In Journal
+of Physics: Conference Series, vol. 1901, no. 1, p. 012066. IOP Publishing, 2021.
+27. Devecioglu, Ozer Can, Junaid Malik, Turker Ince, Serkan Kiranyaz, Eray Atalay, and Moncef Gabbouj.
+"Real-time glaucoma detection from digital fundus images using self-onns." Ieee Access 9 (2021): 140031140041.
+28. Nugraha, Gibran Satya, Akbar Juliansyah, and Muhammad Tajuddin. "Glaucoma detection based on texture
+feature of neuro retinal rim area in retinal fundus image." International Journal of Health and Information
+System 1, no. 3 (2024): 117-127.
+29. Islam, Md Matiqul, Md Ashraful Islam, and Sujan Chandra Roy. "A Hybrid Wavelet-Resnet Diffusion
+Based Deep Learning Model for Ocular Disease Classification." In 2025 International Conference on
+Quantum Photonics, Artificial Intelligence, and Networking (QPAIN), pp. 1-6. IEEE, 2025.
+30. Septiarini, Anindita, and Agus Harjoko. "AUTOMATIC GLAUCOMA DETECTION BASED ON THE
+TYPE OF FEATURES USED: A REVIEW." Journal of Theoretical & Applied Information Technology
+72, no. 3 (2015).
+31. Embuldeniya, T. M., and R. G. N. Meegama. "Modified Discrete Wavelet Transformation to Compress
+DICOM Medical Images with Run-Length Encoding." International Journal on Advances in ICT for
+Emerging Regions (ICTer) 18, no. 2 (2025).
+32. Sujithra, B. S., and S. Albert Jerome. "Identification of glaucoma in fundus images utilizing gray wolf
+optimization with deep convolutional neural network-based resnet50 model." Multimedia Tools and
+Applications 83, no. 16 (2024): 49301-49319.
+33. Banerjee, Tathagat, Yusera Farooq Khan, Tabasum Rafiq, Shalini Singh, Ritika Wason, and Gagandeep
+Singh Narula. "HHO-UNet-IAA: Harris Hawks Optimization based novel UNet-inception attention
+architecture for glaucoma segmentation." International Journal of Information Technology (2025): 1-10.
+34. Ainapur, Santoshkumar S. "Enhancing Diabetic Retinopathy Detection: A Novel Ensemble Random
+Support Vector Gradient Model." In 2024 International Conference on Integrated Intelligence and
+Communication Systems (ICIICS), pp. 1-7. IEEE, 2024.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+35. Abualigah, Laith, Ahmad A. Al Turk, Abiodun M. Ikotun, Raed Abu Zitar, Anas Ratib Alsoud, Nima
+Khodadadi, Abdelazim G. Hussien, and Heming Jia. "Social spider optimization algorithm: survey and new
+applications." In Metaheuristic optimization algorithms, pp. 15-31. Morgan Kaufmann, 2024.
+36. Mayee, M. Kiran, M. Humera Khanam, and ShaikLathifa Tabasum. "Proactive-BiLSTM: Glaucoma
+detection using FUNDUS and OCT retinal images." Expert Systems with Applications (2025): 129490.
+37. Kim, Hwayeong, Jiwoong Lee, Sangwoo Moon, Sangil Kim, Taehyeong Kim, Sang Wook Jin, Jung Lim
+Kim et al. "Visual field prediction using a deep bidirectional gated recurrent unit network model." Scientific
+Reports 13, no. 1 (2023): 11154.
+38. Cao, Xiaoshuai, Shaojie Zheng, Jincan Zhang, Wenna Chen, and Ganqin Du. "A hybrid CNN-Bi-LSTM
+model with feature fusion for accurate epilepsy seizure detection." BMC Medical Informatics and Decision
+Making 25, no. 1 (2025): 6.
+39. Guntreddi, Venkatesh, and V. SIVAKUMAR. "Deep Learning based Glaucoma Detection using Majority
+Voting Ensemble of ResNet50, VGG16, and Swin Transformer." Results in Engineering (2025): 107229.
+40. Kharisma, Ivana Lucia, Susanti, Rustiani, Riski Abdilah Pratama, and Kamdan. "Implementation of the
+VGG19 Model with Transfer Learning for Retinal Disease Diagnosis: A Study on Normal Eyes, Diabetic
+Retinopathy, Cataract, and Glaucoma Datasets." Engineering Proceedings 107, no. 1 (2025): 111.
+41. Suthaanthiraa, S., and Maheswari S. Uma. "Eye Disease Classification by Advanced Deep Transfer
+Learning System Using Resnet50 & Xception." (2025).
+42. Saqib, Sheikh Muhammad, Muhammad Iqbal, Muhammad Zubair Asghar, Tehseen Mazhar, Ahmad
+Almogren, Ateeq Ur Rehman, and Habib Hamam. "Cataract and glaucoma detection based on Transfer
+Learning using MobileNet." Heliyon 10, no. 17 (2024).
+43. Yi, Sanli, and Lingxiang Zhou. "Multi-step framework for glaucoma diagnosis in retinal fundus images
+using deep learning." Medical & Biological Engineering & Computing (2024): 1-13.
+44. David, D. Stalin. "Enhanced glaucoma detection using ensemble based CNN and spatially based ellipse
+fitting curve model." Journal of Ambient Intelligence and Humanized Computing 14, no. 4 (2023): 33033314.
+45. Sheraz, Huma, Tehmina Shehryar, and Zuhaib Ahmed Khan. "Two stage-network: Automatic localization
+of Optic Disc (OD) and classification of glaucoma in fundus images using deep learning techniques."
+Multimedia Tools and Applications (2024): 1-29.
+46. Prananda, Alifia Revan, Eka Legya Frannita, Augustine Herini Tita Hutami, Muhammad Rifqi Maarif,
+Norma Latif Fitriyani, and Muhammad Syafrudin. "Retinal nerve fiber layer analysis using deep learning to
+improve glaucoma detection in eye disease assessment." Applied Sciences 13, no. 1 (2022): 37.
+47. Velpula, Vijaya Kumar, and Lakhan Dev Sharma. "Automatic Glaucoma Detection from Fundus Images
+Using Deep Convolutional Neural Networks and Exploring Networks Behaviour Using Visualization
+Techniques." SN Computer Science 4, no. 5 (2023): 487.
+48. Juneja, Mamta, Sarthak Thakur, Archit Uniyal, Anuj Wani, Niharika Thakur, and Prashant Jindal. "Deep
+learning-based classification network for glaucoma in retinal images." Computers and Electrical
+Engineering 101 (2022): 108009.
+49. Shoukat, Ayesha, Shahzad Akbar, Syed Ale Hassan, Sajid Iqbal, Abid Mehmood, and Qazi Mudassar Ilyas.
+"Automatic diagnosis of glaucoma from retinal images using deep learning approach." Diagnostics 13, no.
+10 (2023): 1738.
+50. Guntreddi, V., & Sivakumar, V. (2025). Deep learning based glaucoma detection using majority voting
+ensemble of ResNet50, VGG16, and Swin Transformer. Results in Engineering, 107229.
+51. Sharma, S. K., Muduli, D., Rath, A., Dash, S., Panda, G., Shankar, A., & Dobhal, D. C. (2025). Discrete
+ripplet-II transform feature extraction and metaheuristic-optimized feature selection for enhanced glaucoma
+detection in fundus images using least square-support vector machine. Multimedia Tools and Applications,
+84(23), 26447-26479.
+52. King, A. P., & Eckersley, R. J. (2019). Inferential statistics III: nonparametric hypothesis testing. Statistics
+for biomedical engineers and scientists, 119-145.
+53. Taylor
+and
+Francis’s
+Wilcoxon
+signed-rank
+test
+homepage,
+https://taylorandfrancis.com/knowledge/Medicine_and_healthcare/Medical_statistics_%26_computing/Wi
+lcoxon_signed_rank_test/#:~:text=Althoughthesigntestfrees,isnotequalto0, last accessed 2025/09/30
+54. Yang, J., Shokouhifar, M., Yee, L., Khan, A. A., Awais, M., & Mousavi, Z. (2024). DT2F-TLNet: A novel
+text-independent writer identification and verification model using a combination of deep type-2 fuzzy
+architecture and Transfer Learning networks based on handwriting data. Expert Systems with Applications,
+242, 122704.
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+55. Yang, Q., Govindarajan, V., Li, Q., Zhou, H., Shaikh, Z. A., Ksibi, A., ... & Por, L. Y. (2025). OcuMDNet:
+A lightweight CNN for robust multi-disease retinal diagnosis with cross-dataset reliability. Experimental
+Eye Research, 110642.
+Appendix A.
+Sensitivity Analysis of the Proposed Preprocessing Pipeline
+
+To justify the preprocessing parameters adopted in the proposed framework, a sensitivity analysis was conducted on
+the Drishti-GS dataset, which was selected as a representative benchmark due to its expert annotations and widespread
+use in glaucoma detection research. The results presented in Tables A1-A6 demonstrate the influence of key
+preprocessing parameters and support the selected configuration used throughout the experiments.
+Table A1. Justification of Selected Preprocessing and Feature Extraction Parameters
+Parameter
+Image Size
+CLAHE Clip Limit
+CLAHE Tile Grid
+Median Filter
+Rotation
+Brightness
+Zoom
+Horizontal Flip
+Recursion Depth
+
+Selected Value
+224×224
+2.0
+8×8
+3×3
+±15°
+0.85–1.15
+0.9–1.1
+0.5
+4
+
+Justification
+Balances retinal detail preservation and computational cost
+Improves local vessel contrast without amplifying background noise
+Enhances local illumination while avoiding over enhancement
+Suppresses impulse noise while preserving vessel edges
+Represents realistic camera orientation variations
+Simulates illumination differences encountered during acquisition
+Represents realistic acquisition distance
+Improves generalization while preserving retinal anatomy
+Provides sufficient local spatial representation without excessive
+feature redundancy
+Table A2. Sensitivity Analysis of Image Resolution on the Drishti-GS Dataset
+Image Size
+Accuracy
+Precision
+Recall
+F1 Score
+128×128
+96.85
+97
+96
+97
+192×192
+97.74
+96
+97
+97
+224×224
+98.48
+99
+99
+99
+256×256
+98.33
+99
+97
+98
+320×320
+98.31
+98
+98
+98
+Table A3. Sensitivity Analysis of CLAHE Clip Limit on the Drishti-GS Dataset
+Clip Limit
+Accuracy
+1.0
+97.61
+1.5
+98.05
+2.0
+98.48
+2.5
+98.36
+3.0
+98.11
+Table A4. Sensitivity Analysis of Median Filter Kernel Size on the Drishti-GS Dataset
+Kernel
+Accuracy
+3×3
+98.48
+5×5
+98.17
+7×7
+97.74
+Table A5. Sensitivity Analysis of Data Augmentation Strategies on the Drishti-GS Dataset
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+
+Augmentation
+Accuracy
+No augmentation
+95.91
+Rotation only
+96.84
+Rotation + Flip
+97.63
+Rotation + Flip + Brightness
+98.11
+Full augmentation
+98.48
+Table A6. Sensitivity Analysis of Sierpiński Triangle Recursion Depth on the Drishti-GS Dataset
+Depth
+
+Number of Regions
+
+Feature Dimension
+
+Accuracy
+
+2
+3
+4
+5
+
+16
+52
+160
+484
+
+720
+2340
+7200
+21780
+
+96.42
+97.71
+98.48
+98.40
+
+ACCEPTED
+ARTICLEMANUSCRIPT
+IN PRESS
+
+Appendix B.
+Ablation Study of the Proposed Framework
+
+To evaluate the contribution of each major component of the proposed glaucoma detection framework, an ablation
+study was conducted on the Drishti-GS dataset, which was selected as a representative benchmark due to its expert
+annotations and widespread use in glaucoma detection research. Each component was progressively incorporated into
+the framework while maintaining identical experimental settings. The results presented in Table B1 demonstrate the
+contribution of Sierpiński triangle-based partitioning, RGB channel decomposition, handcrafted feature extraction,
+HHO-based feature optimization, CNN, Bi-LSTM, Bi-GRU, and the attention mechanism to the overall classification
+performance.
+Table B1. Ablation Study of the Proposed Glaucoma Detection Framework on the Drishti-GS Dataset
+Configuration
+Sierpinski RGB Handcrafted
+HHO
+CNN
+BiAttention Accuracy
+Features
+Optimization Bi-LSTM
+GRU
+✓
+BaselineCNN
+×
+×
+×
+×
+×
+×
+95.62
++ Sierpinski
+
+✓
+
+×
+
+×
+
+×
+
+✓
+
+×
+
+×
+
+96.71
+
++RGB
+
+✓
+
+✓
+
+×
+
+×
+
+✓
+
+×
+
+×
+
+97.28
+
++Handcrafted
+Features
+
+✓
+
+✓
+
+✓
+
+×
+
+✓
+
+×
+
+×
+
+97.48
+
++HHO
+Optimization
+
+✓
+
+✓
+
+✓
+
+✓
+
+✓
+
+×
+
+×
+
+98.11
+
++CNN Bi-LSTM
++Bi-GRU
++Attention
+(Final Model)
+
+✓
+✓
+✓
+
+✓
+✓
+✓
+
+✓
+✓
+✓
+
+✓
+✓
+✓
+
+×
+✓
+✓
+
+×
+×
+✓
+
+98.26
+98.31
+98.48
+
+E
+L
+C
+I
+T
+R
+A
+
+IN
+
+S
+S
+E
+R
+P
+✓
+✓
+✓
+
+

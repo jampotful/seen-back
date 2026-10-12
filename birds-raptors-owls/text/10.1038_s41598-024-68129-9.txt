@@ -1,0 +1,220 @@
+Research on the perception method of tiny objects in low-light and wide-field video.
+Xie Z, Jia Z, Zhou G, Shi B. (2024). Scientific reports. . doi:10.1038/s41598-024-68129-9. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Research on the perception method of tiny objects in low-light and wide-field video
+
+## Abstract
+AbstractAt present, many trackers exhibit commendable performance in well-illuminated scenarios but overlook target tracking in low-light environments. As night falls, the tracker's accuracy drops dramatically. Challenges such as high image resolution, intricate backgrounds, uneven illumination, and the resemblance between targets and backgrounds in Hawk-Eye surveillance videos make tracking small objects in low-light and wide-field scenarios exceedingly difficult for previous trackers. To address these challenges, this paper introduces an innovative approach by integrating the difference constraint method into the CF (correlation filters) tracker, which generates a change-aware mask using inter-frame difference information. In addition, a dual regression model and inter-frame difference constraint term are introduced to restrict each other for dual filter learning. In this paper, we construct a new benchmark comprising 41 night surveillance sequences captured by Hawk-Eye cameras. Exhaustive experiments are conducted on this benchmark. The results show that the proposed method maintains superior accuracy, surpasses state-of-the-art trackers in this dataset, and achieves a real-time performance of 27 fps on a single CPU, substantially advancing tiny object tracking on Hawk-Eye surveillance videos in low light and in night scenes.Subject terms: Electrical and electronic engineering, Information theory and computation, Imaging and sensing
+
+## Introduction
+Visual object tracking (VOT) is widely used in surveillance video, robot vision, and automation. VOT predicts the location and size of objects, which is an important field of study in computer vision. According to previous research, the discriminant correlation filter-based tracking algorithm has excellent potential in VOT. With the wide application of high-performance surveillance cameras and the increasing demand for multi-scene application of tracking algorithms, tracking in dark scenes requires more research attention. However, most trackers work well during the day when the target is easily distinguishable from the background. Night is also a common application scenario for target tracking, but it is challenging to capture high-quality images at night. Nighttime images are accompanied by a large amount of random noise, which causes adverse interference to target recognition and feature extraction. The contrast degradation of an image leads to more severe background clutter. The uneven illumination distribution in the image (with and without streetlight illumination areas) and the complex sources of light (thermal and non-thermal emitting light sources) make the object's color characteristics deviate from frame to frame. This poses a significant challenge to the trackers and reduces the accuracy of the tracking methods at night.
+Now, 24-h uninterrupted video surveillance is ubiquitous. At night, current target tracking research cannot effectively solve the problems of low illumination and wide field of view target tracking. To improve the efficiency of safety protection and reduce the workload of monitoring personnel, it is necessary to establish a low illumination and wide field of view target tracking laboratory. With the popularity of digital and high-definition equipment further promoting the development of the video surveillance field, Hawk-Eye surveillance cameras have also been widely used. Hawk-Eye cameras have a unique visual mechanism, divided structurally into a front central concave area and side central concave areas. The side central concave areas have a larger field of view and, by overlapping the left and right sides, constitute an even larger field of view. Hawk-Eye cameras feature high resolutions, long ranges, and large fields of view, resulting in images with a small percentage of target object pixels, high background-target similarities, and higher requirements for real-time tracker performance.
+Object tracking in low-light and wide-field conditions confronts several difficulties as follows: (1) The target size is relatively small in the image and can be regarded as a tiny object. Moreover, the background is more complex than usual, making the target is easily occluded. (2) In the dark, it is difficult to distinguish the tiny target from the background and extract the geometric and color features. (3) Significant noise in the image seriously interferes with the tracking accuracy. (4) Insufficient computing resources hinder real-time tracking in low-light and wide-field conditions.
+It is imperative to research tiny object tracking with low-light and wide-field. First, there is an increasing demand for object tracking in low-light scenes in daily life. Second, the current SOTA trackers have poor robustness in tiny object tracking with low-light and wide-field. Therefore, the research results have wide application prospects. Previously, visual tracking algorithms rarely tracked small targets with low-light and wide-field, but this is of great significance for expanding security surveillance applications and reducing labor costs. For visual target tracking at night, many related studies have added the SOTA dark enhancement algorithm into the preprocessing part of the tracking algorithm1–3 to enhance the image. Then, the preprocessed image is used as the input for object feature extraction and matching, to implement the object tracking. However, there are several disadvantages: (1) Existing enhancement algorithms are overwhelmingly slower than 24 fps. Therefore, embedding the enhancement algorithm will cause the tracking algorithm to not meet the real-time performance. (2) The better image produced by the enhancer depends only on human subjective feelings, not on the machine, which means that the enhancer does not have a quantifiable standard against which to improve the tracking accuracy. (3) The enhancer not only enhances the image but also increases the random noise, severely distracting the tracker.
+This paper proposes a new tiny target tracking algorithm, CATrack, which is suitable for low light and wide field scenes, which is proven through extensive experiments and theoretical arguments. It ensures the real-time performance and robustness of tracking. Specifically, we propose using a change detection algorithm to detect the image interframe difference information. However, the interframe difference mask is disturbed by lots of random noise, making its effect insignificant. Therefore, we assume that the images obey a normal distribution according to the 3σ criterion, with automatic detection of the actual faintly changed and unchanged areas of the images. This assumption allows us to eliminate the vast majority of the interference noise and achieve excellent extractions of changing regions and implement background recognition. We use the faint change mask to obtain the target region of interest, extract the target information, train the target filter and train the background filter based on the no-change area. The proposed method can maintain real-time performance and excellent tracking accuracy in low-light and wide-fields.
+Many researchers use enhancers as the entry point, combining enhancers and CF-based trackers, solving the problem of low tracking accuracy in the dark. We propose for the first time to use the image differences for object tracking. The weakly varying mask is obtained by detecting the weak motion of the tiny target. A dual regression model is introduced, and temporal regularization is added to the model to construct the algorithm, which is more sensitive to small target motion perception and is more generalized in the dark and for wide fields. No previous studies have focused on the low-light, wide-field and the small target perception. Therefore, this paper collected a new night Hawk-Eye camera monitoring dataset containing 41 sequences of tiny targets as the experimental benchmark.
+The research contributions of this paper are as follows:
+We propose to use the temporal-spatial information of the video. The weak change perception mask of low-light image is acquired and combined with CF structure for real-time tiny target tracking in the low-light and wide-field, without using the dark enhancement model.
+Temporal regularization is introduced into the dual regression equation, which improves the tracking performance of the algorithm in the case of fast-moving, deformation, and motion blur.
+A new night Hawk-Eye image dataset has been constructed, and the proposed algorithm and the comparison algorithm have been extensively tested on this dataset to demonstrate the efficiency and robustness of CATrack.
+
+## Related works
+We use change detection to preprocess images. Change detection is the process of identifying the differences in the state of the same object or phenomenon by observing it at different times and can be universally classified into three categories. The first category is as in Refs.4–6, where deep learning is introduced into the field of change detection, which is the end-to-end method, with the advantage of high accuracy and the disadvantage of high computational resource requirements. The second category is the nondeep learning methods by principal component analysis theory, discrete wavelet change theory and nondownsampled contour wavelet change theory7,8. The third category is the traditional methods, such as logarithmic log ratio and mean ratio. After a substantial amount of comparison work, we finally selected the log ratio for image change detection. Since it converts a large amount of multiplicative random noise generated by the images under dark conditions into additive noise, it alleviates the noise problem. In addition, we find that the change information applies to the target filter, which improves the performance of the proposed method. Related night trackers such as Ref.9 enhance the tracking accuracy of the tracking algorithms in low-light images by processing the images with CE10 and LIME11 enhancement algorithms before tracking; 12 chose to embed a high-speed dark enhancement algorithm13 into the tracking framework, Ref.14 by enhancing low-light images with ME-Net and combining it with a tracking framework.
+Tracking approaches are generally divided into two types. The first type is the DL-based (deep learning) trackers, which learn similarities between target images and search regions through end-to-end offline training, which requires large amounts of data for pretraining. However, there are no data-set for low-light and wide-fields. The other type of tracking approach is when the CF-based tracker mainly uses the correlation between the predicted image and the template image to determine the target position during the tracking process. H.K. Galoogahi et al.15 used actual translation to generate negative samples, which expanded the search area and mitigated the boundary effect. F. Li et al.16 introduced a temporal regularization term in the DCF to prevent the filter model from overfitting. Tracking at night places additional demands on the tracker. B. Li et al.12 proposed a dual regression model to enhance the robustness of the tracker in the dark. However, they all ignore small target tracking. However, tracking tiny targets in the dark is a scenario they generally overlook. The proposed method uses a double regression model with a time regularization term. In the tracking process, the information of the previous frame is used to improve the tracking performance.
+There is no public datasets for visual tracking of small targets with low-light and wide-fields. In order to verify the effectiveness of the proposed method, our team used the Hawk-Eye camera to capture lots of image sequences and produced a new dataset used in this paper. In the fourth part of this paper, the production of relevant data, the comparison algorithm, and the evaluation method is described in detail.
+In this paper, the proposed method differs from the previous methods in the following aspects.
+The change detection method is first exploited to CF-based tracker. By change constraint, our method has robust ability in tiny object tracking in low-light and wide-fields.
+Different from conventional night tracker, where the preprocessing part selects the low light image enhancement model, the pretreatment part in our method selects the change aware model and can segment the changed and the unchanged area of the image due to the change aware mask. The different information has a good effect on finding tiny targets under low light.
+It has no public benchmark and no data available. Hence we constructed newly dataset, which is screened by a Hawk-Eye camera at night.
+
+## Proposed method
+The CATrack flow chart is shown in Fig. 1, which is divided into the image preprocessing stage, model training stage, and weighted response fusion stage. As the Hawk-Eye camera screen the f-th frame at night, CATrack conducts change detection at first to achieve area division and mask generation. Specifically, form a difference mask by the logarithmic difference of f-th frame and f-1-th frame. Then we use denoising methods twice. We used median filtering at first and then set a secondary denoising threshold based on the 3σ criterion in statistics to remove the residual noise. Finally, a precise aware mask is generated. Then, the dual regression model is trained by changed regions and unchanged regions according to the mask. The background filter and target filter generate the corresponding response maps in the image, respectively, and the weighted responses are fused to obtain the final response to locate the target position.
+The flowchart of the proposed CATrack. RGB represents the pretreatment stage, model training stage, and target detection and Location stage, respectively. The image in the figure has been processed by an image enhancement algorithm for the purpose of giving a better view of the flow chart. (Created by draw.io url: https://app.diagrams.net/).
+
+## Pretreatment stage
+We introduced Log-Ratio (LR) in the image preprocessing stage. Input the current frame RGB image It∈R(w×h×3) and its previous frame RGB image It-1∈R(w×h×3). The Log-Ratio operator is calculated as :
+where k∈{R,G,B}, ϕk(It(i,j)) denotes the natural logarithm operation of the pixel values of the t-th frame image at location (i,j) in channel k, α is a constant, and γR+γG+γB=1. DILR(i,j,I) denotes the logarithmic ratio operator of the (t-1)-th frame image to the t-1th frame image to obtain the inter-frame difference mask.
+where Iob(xh,yh) and Ibg(xz,yz) represent pixel of target region and pixel of background region respectively.n(x,y) represents multiplicative noise produced by sensor materials, environment and electronic components when acquiring image sequence.
+Low-light and wide-fields images of tiny targets in the image accounted for a low proportion of the general small targets, usually less than 400 pixels, about 0.02 ‰ of the Hawk Eye surveillance image. Therefore, The random noise of low light images seriously impacts the recognition and tracking of small objects. Image denoising is imperative. The multiplicative noise in the image, such as Gaussian and Poisson noise, is transformed into additive noise by natural logarithm operation. After obtaining the difference mask between frames in Eq. (1), the mean filter is used to filter out the other noise.
+It is disappointing that the difference mask has much noise after the LR operation and the mean filtering operation. We base on the properties of the mask that the actual moving target will have a higher probability density in the disparity map, while the opposite is true for subtle background perturbations and sensor-generated noise. In this paper, we assume that the images are normally distributed, and the energy of the moving target will concentrate within 3σ. Based on this assumption, we set a threshold to distinguish the target from the background to obtain the target-aware region.
+where Ω· is the median filter with template 3,3, and σ is the standard deviation in the normal distribution, σ=1n∑i=1n[(xi,yi)-(x¯,y¯)]2, and (x¯,y¯) denotes the mean image pixel value.
+The inter-frame difference mask segments the faint change region from the scene and determines the tiny object motion region according to the faint change region, which achieves more robust tracking of small targets in the dark. Figure 2 demonstrates the suppression effect of our preprocessing algorithm on low illumination noise and the nice tiny object recognition effect.
+Image preprocessing stage visualization. The first column is the original image, the second column is the low-light enhancement performed to make the visualized image better viewed, and the third column is the difference map generated by the algorithm (Created by draw.io url: https://app.diagrams.net/).
+
+## Model training stage
+
+## Review BACF
+BACF has excellent tracking performance by using positive and negative target samples to train the filter and introducing factual backgrounds as negative samples.
+BACF extends the search area of the image to the C dimension. BACF introduces a binary matrix P whose dimension is C×D in the traditional correlation filter, equivalent to getting the middle D elements in the sample. Pfd[△τj] is equivalent to cropping a small image block in a circularly shifted sample of the image. P can be obtained by looking up the table. λ is the regularization term parameter.
+
+## Review ADTRACK
+ADTrack adopts BACF as the baseline tracker and introduces a dual filter model, which contains a target filter ho and a background filter hg, and the dual filters are mutually constrained to promote each other.
+where ⋆ denotes circular correlation operator, which achieves dense sampling of samples by cyclic shifting. fg denotes the background feature map, and fo is the target region feature map. The last term is a constraint in Eq. (5). ho and hg are mutually constrained and jointly trained.
+
+## Proposed method
+We introduce a dual filter regression model, which trains the background filter and target filter jointly. Base on this model, we add the temporal information of the background and target to train the dual filter model. Therefore, we propose the following regression objectives.
+where ⋆ denotes circular correlation operator, which achieves dense sampling of samples by cyclic shifting. λ is the regularization term parameter, ε is the temporal regularization term, and μ is a parameter used to control the influence of the constraint. fg denotes the feature information extracted from the background, while fo=m⊙fg indicates the target feature map, where m denotes the change aware mask.
+Subproblem hg′.
+To solve for hg, we introduce the auxiliary variable z.
+where ⊗ denotes Kronecker product, IM is the M-order unit matrix, and P is the cropping matrix obtained by looking up the table. Here, hg=[hg1T,hg2T,...,hgNdT]T∈RMNd.
+To solve the optimal solution hg, we suppose that ho is given. In combination with Eqs. (7) and (6), the augmented Lagrangian form of hg is as follows:
+where ρ=(IM⊗PThg-z)Tθ+γ2||IM⊗PThg-z||22, θ=[θg1T,θg2T,...θgNdT]T∈RMNd is Lagrangian vector. The optimal solution of Eq. (8) can be obtained by ADMM17 iteration.
+Find the partial derivative about hg for Eq. (8):
+We can find the closed-form solution hg′ as follow:
+Subproblem ho′.
+Similarly, we introduced auxiliary variables z. The same as solving the subproblem hg′, we assume that hg is given and find the optimal solution of ho. Finally, we can find the closed-form solution ho′ as follow:
+Subproblem z′.
+In solving the subproblem z′, Eq. (6) is first transformed from the spatial domain to the Fourier domain through the discrete Fourier transform. According to the discrete Fourier transform, there is the following formula:
+where υ=TIM⊗PTFMhg-z^, denotes the Fourier transform of the signal.Superscript * indicates the complex conjugate, which executes complex conjugation operation on a vector or matrix. T is the transpose operator, performing conjugate transpose on complex vectors or matrices. Directly solving the above equation is arithmetically intensive, and thus Eq. (12) is split into subproblems for an accelerated solution.
+After the discrete Fourier transform, the correlation operation between the image samples and the training filter transform into the multiplication of elements in the Fourier domain. Since each pixel is independent, the problem can be divided into T subproblems, t=1,2,...,T, x(t)=[x1(t),x2(t),...,xk(t)]. Therefore, Eq. (12) can be written as:
+By taking the partial derivative of Eq. (13) and setting it to zero, we can obtain the following equation:
+According to the Sherman-Morrison formula, we can simplify the calculation of matrix inverse and reduce the time complexity. Equation 14 can be written as:
+where x^f(t)=f^(t)Tf^(t), x^θ(t)=f^(t)Tθ^, x^wg(t)=f^(t)Th^k, b=x^f(t)+Tγ, and b is scalar.
+
+## Lagrangian update
+The Lagrange multiplier is updated as follows:
+where w^k=(FPT⊗IM)wk, i represents the i-th iteration. In this paper, we executed three times iterations.
+
+## Model update
+Similarly, we also adopt the online update strategy of samples to improve the robustness of our algorithm to tiny target tracking under low-light and wide-fields.
+where η is online adaptation update rate.
+
+## Object detection and tracking
+The dual filter model is trained by the (i-1)-th frame image, and the model that adapts to the closest feature of the target is obtained. The target location in the i-th frame image is detected by using the filter trained in the (i-1)-th frame. The formula for generating the response map R of the model in the i-th frame is as follows:
+where F-1 denotes inverse Fourier transform. q^gi,c represents the signal extracted in channel c of the image of the i-th frame, and q^oi,c represents the target signal extracted through the target mask in the (i + 1)-th frame image of the c channel. ρ is the parameter that controls the fusion weight of the response map of the target filter.
+
+## Experiment
+This section presents the results of the experiments. This paper's experiments were conducted on the MATLAB R2017b platform. The computer hardware configuration is an Intel i7 4700HQ CPU, 2.4GHz, and a 8G RAM. The regression equation parameters in CATrack are as follows: the regularization parameters ε=0.01, constraint term weight control parameters μ set 200. The hyperparameters of ADMM γmax=10000, γ0=1. The number of filter iterations is 3, and the Gaussian response parameter is set to 0.051.
+
+## Dataset
+To evaluate the tracker's performance, we captured a series of video sequences at night using a Hawkeye camera and selected some typical small target sequences as benchmarks.
+Aiming at the problem of insufficient datasets, this paper constructs a large-scale tiny target object tracking dataset by performing video acquisition and data processing on low-illuminance wide-field scenes. The newly produced dataset in this paper differs from the previous datasets in that: 1. It was taken with a fixed Hawk-Eye camera; 2. The dataset was taken under extremely low-light conditions at night; 3. the number of target pixels in this dataset is less than 400, which meets the definition of tiny targets. This dataset contains more than 15,000 pictures, which are divided into 41 manually calibrated video sequences. The new dataset was annotated with attributes, including 41 illumination variation (IV), 10 scale variation (SV), 22 occlusion (OCC), 21 deformation (DEF), 30 motion blur (MB), 11 fast motion (FM), 18 in-plane rotation (IPR) and 39background clutter (BC) sequences. The above attributes were annotated according to the standards of the OTB100 dataset. The datasets used during the current study available from the corresponding author on reasonable request.
+
+## Comparison algorithms
+The proposed algorithm and 14 SOTA algorithms, including AutoTrack18, ECO19, ADTrack12, STAPLE20, C-COT21, ASRCF22, CF223, SCT424, BACF15, MCCT&MCCT_H25, ARCF_H&ARCF_HC26, GFSDCF27, are comprehensively evaluated in newly sequences. All parameters in the comparison tracker adopted in this paper keep the official initial parameters to ensure that these trackers can obtain more convincing results in the evaluation. The performance of the tracker is judged according to the AUC (area under curve) of the success plots and the DP (distance precision) of the precision plots.
+
+## Evaluation criterion
+Success plots and precision plots evaluated all trackers. The success plots reveals the ratio of successful frames to the entire sequence when the IOU score surpasses the predefined threshold. IOU score indicates the intersection and union ratio of the GT and traker predict box in the same frame. The precision plots judge the tracking accuracy by the distance between the target center predicted by the tracker and the actual center manually marked. The higher the ratio of the video frame whose distance is less than the threshold to the whole video sequence, the higher the tracking accuracy. The OPE (one-pass evaluation) method is used for testing. OPE indicates that the tracker predicts target localization for all subsequent frames based on the GT (ground-truth) in the first frame of the sequence.
+
+## Experimental analysis
+Tables 1 and 2 lists the AUC evaluation of different attribute image sequences of the proposed algorithm and comparison algorithm in the new dataset. Similarly, Table 2 lists the DP evaluation. The first, second, and third digits of corresponding attribute performance are marked in the table with red, green, and blue fonts, respectively.
+Results of AUC comparison of 10 trackers.
+Results of DP comparison of 10 trackers.
+In Table 1, we show the AUC evaluation of 9 trackers, and the overlap rate threshold is set to 0.5. It can be seen from the table that, except for the IPR attribute, the proposed algorithm can reach the top three in the video sequences of each challenge attribute. After experimental analysis and observation, the main reason for CATrack slightly lower performance in IPR is that the target mask generated by differential perception quickly updates the target model rotated in the plane, while the dual filter limits the update speed of the target model to be too fast, which makes CATrack have excellent performance in most situations in the dark. However, when faced with IPR attributes, the accuracy of the algorithm is not excellent enough.
+In Table 2, we show the DP evaluation of 9 trackers, and the CLE (center location error) threshold is set to 20. According to Table 2, where the proposed method ranks the first in most attributes. It is worth noting that since we introduce weak change detection in the image preprocessing stage, we have very excellent robustness. The proposed method shows excellent tracking performance for tiny targets in low illuminance and wide field video.
+Table 3 compares each tracker's fps when they only use a single CPU. CATrack can not only meet the accurate tracking of tiny targets in wide-field video at night but also meet the demand of real-time tracking in the case of HD video data stream. According to Table 3, CATrack ranks first in AUC and DP among all comparison algorithms. In addition, CATrack achieves 27 fps, meeting the requirements for real-time performance.
+Results of FPS comparison of 10 trackers.
+Table 4 selects the tracker in comparison algorithms, using CNN features to compare with the CATrack. The results illustrate that the tracker using CNN features in the new dataset fails to maintain the advantages of tracking a tiny object in low-light and wide-filed, without real-time performance. Since they do not have enough relevant image data to train the network, ending up their poor performance.
+Comparison with CNN-based feature trackers.
+Table 5 demonstrat the effectiveness of different versions of the proposed algorithm in tracking. After comprehensive consideration, we selected ADTrack12 as the benchmark tracker because we incorporated its concept of using mask training for dual filters. OURs_V1 denotes the version of the proposed algorithm without the change perception module. OURs_V2 indicates the version without the constraint term. OURs represents the complete version of the proposed method, including both the change perception module and the constraint term. The results clearly demonstrate that the proposed method achieved an improvement of more than 16‰ in both AUC and DP.
+Results of the ablation study.
+
+## Overall evaluation
+Figure 3 shows the comparison of the tracking success rate and accuracy of the proposed method and various comparison trackers in the new dataset. It can be seen that the proposed method has achieved the first rank in the new dataset and reached the performance of the current SOTA algorithm. In the comparison algorithm, AutoTrack18,, ADTrack12, STAPLE20, ASRCF22, SCT424, BACF15, MCCT_H25, ARCF_H&ARCF_HC26 use handmade features which include fHOG, HOG, CN and so on. ECO19, C-COT21, CF223, MCCT25, GFSDCF27 utilize CNN features. The success rate decreases with the increase of the overlap threshold. The proposed method obtained an AUC score of 0.764 in the success plots. Precision Plots in terms of distance accuracy (DP) of center point error. The proposed method received first place with a score of 0.937 in the new dataset. The overall experiments demonstrate the excellent performance of the algorithm in this paper on tracking a tiny object in low-light and wide-filed.
+Overall evaluation. The evaluation index of the success plots is AUC, and the evaluation index of the precision plots is DP. (Created by matlab url: https://ww2.mathworks.cn/).
+
+## Qualitative analysis
+The tiny target video sequences shown in Fig. 4, such as Runner, Soccer, eBike, Bike, and Walkman, are from the newly low-light Hawkeye video dataset. As shown in the figure, we can see that the target has a very low percentage of pixels in the images, usually less than 0.02‰ in an HD video image. In the sequences Runner, Walkman, and Soccer, it can be seen that BACF15 and AutoTrack18, in the face of small target tracking, performed a large gap between the scale estimate and the actual scale of the target. In the sequences Basketball1, Basketball2, Bike1, and Bike2, the comparison algorithms have lost the tiny target in dark scenes. However, the proposed method can track small targets better, showing the advantages of this paper's algorithm in tracking small targets with a wide field in the face of low light.
+Visualization of some tracking sequence. (Created by draw.io url: https://app.diagrams.net/).
+
+## Robustness evaluation
+In this section, we will discuss the robustness of the tracker. SRE (spatial robustness evaluation) and TRE (temporal robustness evaluation) are commonly used to verify the robustness of trackers, both based on OPE. SRE moved the initial GT by 10% in 12 directions, including 8 spatial directions and 4 scale directions. TRE divides a sequence into 20 segments and takes the statistical average. SRE and TRE respectively add perturbations to the initialization of the tracker in space and time, verifying spatial robustness and temporal robustness respectively.
+Figure 5a,b shows the TRE Precision Plots and Success Plots camparing our algorithm with other algorithm. Our algorithm ranks first in DP and second in AUC. This evaluation indicates that, compared to other algorithms, our algorithm is more robust in tracking tiny targets in low-light and wide-field scenarios with different temporal initializations. Figure 5c,d shows the SRE precision plots and success plots comparing our algorithm with other algorithm. It can be seen that our algorithm achieved the best ranking in DP but performed relatively poorly in AUC. Through our analysis, it is mainly since the preprocessing stage of the proposed algorithm is too sensitive to space perturbation, which leads to the instability of the generated masks and finally makes our performance inferior.
+SRE & TRE (Created by matlab url: https://ww2.mathworks.cn/).
+
+## Conclusion
+In this study, we introduce a novel change-aware tracker (CATrack) designed to maintain robustness and precision while tracking small objects under low-light and wide-field conditions, all while ensuring real-time performance. Our approach for handling low-light tiny object tracking incorporates inter-frame difference constraints and adds temporal regularization in a dual regression model. CATrack initially obtains a weak change mask of the target based on inter-frame difference information, which is then utilized for training dual filters. In the dual regression model, the target-aware filter and the background-aware filter constrain each other during training iterations and mutually enhance each other during target tracking. Additionally, we integrate temporal information into the dual regression model to prevent model overfitting. The proposed method has so far achieved more robust real-time tracking of tiny targets under low-light and wide-field conditions. Moreover, a newly tiny target dataset for low-light and wide-field has been constructed in this paper. In this dataset, the proposed method outperforms most comparative tracking algorithms, albeit with limitations in spatial robustness. Notably, the algorithm in this paper exhibits challenges in change awareness; it struggles to re-locate the target when it is partially or completely occluded or disappears from the field of view. Nonetheless, this work establishes a research direction for low-light target tracking without relying on image enhancement techniques. The algorithm is straightforward, easily implementable, and has minimal hardware requirements. We aim to provide valuable insights for researchers in related fields and plan to further optimize the algorithm while exploring the integration of deep learning methods into low-light tracking in future work.
+
+## Author contributions
+Conceptualization and methodology, X.Z.; software, X.Z.; validation, G.Z.; formal analysis, Z.J.; data curation and writing original draft preparation, X.Z. and B.S; writing-review and editing, Z.J. All authors have read and agreed to the published version of the manuscript.
+
+## Funding
+This work was supported by the National Science Foundation of China (62261053) and Tianshan Talent Training Project—Xinjiang Science and Technology Innovation Team Program (2023TSYCTD0012).
+
+## Data availability
+The datasets analysed during the current study available from the corresponding author on reasonable request.
+
+## Code availability
+All custom code and algorithms used in this paper have been publicly stored in [https://github.com/aaxxron/CATrack] and can be accessed via [https://github.com/aaxxron/CATrack].
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher's note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The datasets analysed during the current study available from the corresponding author on reasonable request.
+All custom code and algorithms used in this paper have been publicly stored in [https://github.com/aaxxron/CATrack] and can be accessed via [https://github.com/aaxxron/CATrack].
+
+## Table Table 1: Results of AUC comparison of 10 trackers.
+Tracker | IV | SV | OCC | DEF | MB | FM | IPR | BC
+ADTrack12 | 0.747 | 0.847 | 0.695 | 0.732 | 0.738 | 0.708 | 0.801 | 0.740
+AutoTrack18 | 0.692 | 0.833 | 0.616 | 0.710 | 0.689 | 0.675 | 0.811 | 0.683
+GFSDCF27 | 0.702 | 0.682 | 0.667 | 0.653 | 0.632 | 0.608 | 0.559 | 0.696
+ARCF_H26 | 0.666 | 0.795 | 0.556 | 0.692 | 0.663 | 0.639 | 0.812 | 0.658
+ARCF_HC26 | 0.695 | 0.769 | 0.640 | 0.685 | 0.663 | 0.682 | 0.749 | 0.691
+ASRCF22 | 0.671 | 0.791 | 0.670 | 0.736 | 0.643 | 0.617 | 0.678 | 0.666
+MCCT25 | 0.634 | 0.735 | 0.590 | 0.647 | 0.564 | 0.595 | 0.600 | 0.628
+MCCT_H25 | 0.644 | 0.725 | 0.575 | 0.604 | 0.598 | 0.570 | 0.693 | 0.640
+BACF15 | 0.666 | 0.766 | 0.541 | 0.687 | 0.651 | 0.607 | 0.744 | 0.653
+OURs | 0.756 | 0.841 | 0.711 | 0.796 | 0.772 | 0.713 | 0.795 | 0.746
+
+## Table Table 2: Results of DP comparison of 10 trackers.
+Tracker | IV | SV | OCC | DEF | MB | FM | IPR | BC
+ADTrack12 | 0.922 | 0.987 | 0.858 | 0.870 | 0.894 | 0.989 | 0.988 | 0.918
+AutoTrack18 | 0.849 | 0.985 | 0.722 | 0.824 | 0.825 | 0.885 | 0.970 | 0.841
+GFSDCF27 | 0.870 | 0.893 | 0.818 | 0.834 | 0.823 | 0.838 | 0.825 | 0.864
+ARCF_H26 | 0.833 | 0.986 | 0.710 | 0.795 | 0.804 | 0.881 | 0.967 | 0.825
+ARCF_HC26 | 0.839 | 0.897 | 0.752 | 0.808 | 0.811 | 0.881 | 0.922 | 0.830
+ASRCF22 | 0.821 | 0.864 | 0.817 | 0.826 | 0.760 | 0.834 | 0.817 | 0.812
+MCCT25 | 0.797 | 0.854 | 0.760 | 0.822 | 0.755 | 0.805 | 0.790 | 0.786
+MCCT_H25 | 0.795 | 0.920 | 0.668 | 0.739 | 0.756 | 0.797 | 0.877 | 0.784
+BACF15 | 0.787 | 0.896 | 0.653 | 0.759 | 0.750 | 0.799 | 0.867 | 0.776
+OURs | 0.937 | 0.986 | 0.888 | 0.940 | 0.946 | 0.998 | 0.985 | 0.934
+
+## Table Table 3: Results of FPS comparison of 10 trackers.
+Tracker | Venue | AUC | DP | FPS
+ADTrack | 22 TMC | 0.747 | 0.922 | 28.466
+AutoTrack | 20 CVPR | 0.692 | 0.849 | 22.785
+GFSDCF | 19 ICCV | 0.702 | 0.870 | 0.292
+ARCF_H | 19 ICCV | 0.666 | 0.833 | 12.218
+ARCF_HC | 19 ICCV | 0.695 | 0.839 | 9.538
+ASRCF | 19 CVPR | 0.671 | 0.821 | 1.254
+MCCT | 18 CVPR | 0.634 | 0.797 | 0.924
+MCCT_H | 18 CVPR | 0.644 | 0.795 | 13.416
+BACF | 17 ICCV | 0.666 | 0.787 | 30.168
+ECO | 17 CVPR | 0.690 | 0.844 | 1.938
+C-COT | 16 ECCV | 0.565 | 0.745 | 0.502
+STAPLE | 16 CVPR | 0.617 | 0.775 | 17.251
+SCT4 | 16 CVPR | 0.006 | 0.437 | 38.455
+CF2 | 15 ICCV | 0.241 | 0.442 | 1.182
+OURs | OURs | 0.764 | 0.937 | 27.160
+
+## Table Table 4: Comparison with CNN-based feature trackers.
+Tracker | GFSDCF | MCCT | STRCF_Deep | ECO | C-COT | CF2 | OURs
+AUC | 0.702 | 0.634 | 0.734 | 0.690 | 0.565 | 0.241 | 0.764
+DP | 0.870 | 0.797 | 0.852 | 0.844 | 0.745 | 0.442 | 0.937
+FPS | 0.292 | 0.924 | 2.236 | 1.938 | 0.502 | 1.182 | 27.160
+
+## Table Table 5: Results of the ablation study.
+Tracker | OURs | OURs_V2 | OURs_V1 | ADTrack
+AUC | 0.764 | 0.756 | 0.751 | 0.747
+σ(‰) | 22.8 | 12 | 5.3 | 0
+DP | 0.937 | 0.935 | 0.922 | 0.922
+σ(‰) | 16.3 | 14.1 | 0 | 0
+
+## Figure Figure 1: The flowchart of the proposed CATrack. RGB represents the pretreatment stage, model training stage, and target detection and Location stage, respectively. The image in the figure has been processed by an image enhancement algorithm for the purpose of giving a better view of the flow chart. (Created by draw.io url: https://app.diagrams.net/).
+
+## Figure Figure 2: Image preprocessing stage visualization. The first column is the original image, the second column is the low-light enhancement performed to make the visualized image better viewed, and the third column is the difference map generated by the algorithm (Created by draw.io url: https://app.diagrams.net/).
+
+## Figure Figure 3: Overall evaluation. The evaluation index of the success plots is AUC, and the evaluation index of the precision plots is DP. (Created by matlab url: https://ww2.mathworks.cn/).
+
+## Figure Figure 4: Visualization of some tracking sequence. (Created by draw.io url: https://app.diagrams.net/).
+
+## Figure Figure 5: SRE & TRE (Created by matlab url: https://ww2.mathworks.cn/).

@@ -1,0 +1,2019 @@
+Dragonfly: Multi-Resolution Zoom-In Encoding Enhances Vision-Language Models
+Rahul Thapa, Kezhen Chen, Covert, Ian, Rahul Chalamala, Ben Athiwaratkun, Shuaiwen Leon Song, James Zou (2024). arXiv (Cornell University). http://arxiv.org/abs/2406.00977. doi:10.48550/arxiv.2406.00977. Licence: cc-by. Text from pdf.
+
+D RAGONFLY : M ULTI -R ESOLUTION Z OOM -I N E NCOD ING E NHANCES V ISION -L ANGUAGE M ODELS
+Rahul Thapa1,2∗ Kezhen Chen1∗ Ian Covert2
+Shuaiwen Leon Song1 James Zou1,2
+1
+Together AI 2 Stanford University 3 Caltech
+
+Rahul Chalamala1,3
+
+Ben Athiwaratkun1
+
+arXiv:2406.00977v2 [cs.CV] 14 Oct 2024
+
+A BSTRACT
+Recent advances in vision-language models (VLMs) have demonstrated the advantages of processing images at higher resolutions and utilizing multi-crop features to
+preserve native resolution details. However, despite these improvements, existing
+vision transformers (ViTs) still struggle to capture fine-grained details from less
+prominent objects, charts, and embedded text, limiting their effectiveness in certain
+tasks. In this paper, we extend recent high-resolution and multi-crop techniques by
+not only preserving the native resolution, but zooming in beyond it and extracting
+features from a large number of image sub-crops. This enhancement allows our
+model to better capture fine-grained details, overcoming the limitations of current
+ViTs. To manage the increased token count and computational complexity, we
+demonstrate that a simple mean-pooling aggregation over tokens is effective. Our
+model, Dragonfly, achieves competitive performance on general-domain tasks such
+as ScienceQA and AI2D, and excels in tasks requiring fine-grained image understanding, including TextVQA and ChartQA. Among models in the 7-8B parameter
+range, Dragonfly consistently ranks at the top across ten general-domain benchmarks, achieving the highest or second-highest scores in most cases, outperforming
+models that are significantly larger or trained on larger datasets. Our biomedical
+model, Dragonfly-Med, sets new benchmarks on several medical tasks, achieving
+91.6% accuracy on SLAKE (compared to 84.8% for Med-Gemini), a 67.1% token
+F1 score on Path-VQA (compared to 62.7% for Med-PaLM M), and state-of-the-art
+results across the majority of image captioning tasks. Overall, our work highlights
+the persistent challenge of engineering visual representations with fixed-resolution
+ViTs, and proposes a simple yet effective solution to address this issue and boost
+performance in both general and specialized domains. Our codebase is available at
+https://github.com/togethercomputer/Dragonfly.
+
+1
+
+I NTRODUCTION
+
+Vision-language models (VLMs) represent an exciting and rapidly evolving field, offering new
+possibilities for open-ended visual tasks by leveraging the knowledge and reasoning abilities of large
+language models (LLMs). Ongoing research explores how best to integrate visual information into
+LLMs, with many recent advances using image encoders to map visual data into the latent space of
+LLMs by dividing images into patch-level tokens, which are then aligned with the LLM during visual
+instruction tuning (Liu et al., 2023b;a; Yang et al., 2023; Li et al., 2023b; Xu et al., 2024; McKinzie
+et al., 2024; Laurençon et al., 2024; You et al., 2023; Zhang et al., 2024).
+Early VLMs processed images at fixed, low resolutions, requiring high-resolution images to be downsampled to fit model input dimensions (Liu et al., 2023b; Alayrac et al., 2022). This downsampling
+often causes shape distortion, loss of fine details, and reduced overall visual richness—especially for
+tasks that demand fine-grained visual understanding. To address this limitation, recent works have
+demonstrated the benefits of using higher-resolution encoders, where avoiding excessive downsampling improves performance across various tasks (Bai et al., 2023; Zhang et al., 2024; Chen et al.,
+2023b; Laurençon et al., 2024; McKinzie et al., 2024). Moreover, approaches such as Llava-1.5 (Liu
+et al., 2023a) and Llava-UHD (Xu et al., 2024) use multi-crop techniques, where an image is divided
+∗
+
+Equal contribution. Corresponding author: rthapa84@stanford.edu
+
+1
+
+into multiple crops, enabling models to process images at or near their native resolution. This aligns
+with the conventional wisdom in computer vision that preserving images near their original resolution
+retains crucial information, which is vital for tasks requiring fine-grained visual understanding, such
+as text recognition in charts or other dense visual content Li et al. (2024c); Beyer et al. (2024);
+McKinzie et al. (2024).
+In this paper, we extend the high-resolution encoding approach by introducing a novel strategy:
+featurizing images with multiple crops that zoom beyond the native resolution. By magnifying images
+to this level, we aim to address the limitations of existing vision transformers (ViTs), particularly
+their difficulty in extracting fine-grained details from less prominent objects, charts, and embedded
+text (Li et al., 2023a; Bai et al., 2023; Hong et al., 2024; Ye et al., 2023). While one might expect that
+zooming beyond native resolution adds no additional information and should not help if ViTs are
+functioning perfectly, in practice, they often miss subtle image details. As a result, zooming in helps
+capture information that ViTs currently struggle to extract. However, this high-resolution zoom-in
+and multi-crop method presents a new challenge: the number of image tokens increases with higher
+resolutions and additional crops, significantly expanding context length and computational demands.
+For example, images are converted into 576 visual tokens using the CLIP ViT-L/14@336px backbone
+(Radford et al., 2021). With five image crops, this number already exceeds 2,800 tokens (Liu et al.,
+2023a), and our zooming in beyond native resolution requires substantially more crops. To manage
+this token complexity, we explore various options to compress visual tokens into a manageable
+context length. Empirically, we find that a simple mean-pooling approach is effective, and we adopt
+this method in our model.
+In summary, our contributions are as follows:
+• We introduce Dragonfly, a new large VLM that processes images using multiple image crops
+that zoom beyond native resolution. By employing simple mean-pooling aggregation on highresolution crops, Dragonfly efficiently reduces visual token counts while preserving fine-grained
+image details. Dragonfly excels on general-domain benchmarks such as ScienceQA and AI2D,
+and performs especially well in tasks requiring fine-grained image understanding, like ChartQA
+and TextVQA. Among models in the 7-8B parameter range, Dragonfly consistently ranks at the
+top across ten general-domain benchmarks, achieving the highest or second-highest scores in
+most cases, outperforming models that are significantly larger or trained on larger datasets.
+• We highlight the model’s strong performance on biomedical tasks, where detailed image comprehension is critical. When fine-tuned on a biomedical instruction-tuning dataset, Dragonfly-Med
+achieves state-of-the-art or competitive results across benchmarks such as VQA, image captioning,
+and radiology report generation. Notable outcomes include 91.6% accuracy on SLAKE, a 67.1
+token F1 score on Path-VQA, and a 50.9 CIDEr score on MIMIC-CXR captioning—these are the
+highest reported numbers to the best of our knowledge.
+• We curate a dataset of 2 million supervised fine-tuning samples for the general domain and
+1.4 million for the biomedical domain. While most of the data is publicly available, we carefully balance and deduplicate the dataset across multiple tasks. For the biomedical domain,
+we also ensure the dataset is balanced across various image modalities. Our codebase is available at https://github.com/togethercomputer/Dragonfly, and both models are
+released on HuggingFace.
+
+2
+
+R ELATED W ORK
+
+Vision-Language Models (VLMs) The advancement of VLMs has significantly impacted artificial
+intelligence, extending the reasoning capabilities of LLMs to the visual domain. Most of these models
+are developed through visual instruction-tuning, which merges vision and language by integrating
+pretrained ViTs and LLMs (Liu et al., 2023b;a; Dai et al., 2023; Yang et al., 2023; Li et al., 2023b;
+Xu et al., 2024; McKinzie et al., 2024; Laurençon et al., 2024; You et al., 2023; Awadalla et al., 2023).
+For example, Liu et al. (2023b) employs a fully connected layer to map image embeddings produced
+by a pretrained CLIP encoder (Radford et al., 2021) into the embedding space of an LLM (Chiang
+et al., 2023). This straightforward approach has enabled the emergence of powerful capabilities,
+such as visual question answering, image captioning, and multimodal reasoning, allowing models
+to interpret and interact with both visual and textual data simultaneously. Important design choices
+2
+
+Quest ion: What is so funny about this image?
+Dragonf ly Response: The humor in this image comes
+from the surreal juxtaposition of a dog's face with the
+body of the Mona Lisa, a famous painting by Leonardo da
+Vinci. The Mona Lisa is known for her enigmatic smile and
+is often considered one of the most famous paintings in
+the world. By combining the dog's face with the body of
+the Mona Lisa, the artist has created a whimsical and
+amusing image that plays on the viewer 's expectations
+and familiarity with the original paintings. The contrast
+between the dog's natural, expressive features and the
+serene, mysterious expression of the Mona Lisa creates a
+humerous effect that is likely to elicit laughter.
+
+Quest ion: What is unsual about this image?
+Dragonf ly Response: The unusal aspect of this
+image is the man ironing clothes on the back of
+a moving taxi. This is not a common sight as
+ironing is typically done indoors or in a
+stationary location.
+Follow up Quest ion: What should you do if
+you encounter this?
+Dragonf ly Response: If you encounter this
+unsual sight, you should first ensure your
+safety and the safety of others. Do not
+approach the man or the ironing setup, as it
+might be dangerous due to the moving vehicle
+and the hot iron. You could also consider
+reporting this behavior to local authorities or
+the taxi company, as it may not be legal or safe.
+
+Quest ion: How long has the drink on the right
+been aged?
+Gold Answer : 10 years
+Dragonf ly Response: 10 years
+
+Quest ion: What is the license plate of this Bus?
+Gold Answer : AHC411
+Dragonf ly Response: AHC411
+
+Quest ion: What is the difference between the new car
+market in 2006 and 2008?
+Dragonf ly Response: The new car market in 2006 was
+valued at 32.4 billion British pounds, while the new car
+market in 2008 was valued at 28.1 billion British pounds.
+This represents a decrease of 4.3 billion British pounds in
+the value of the new car market between 2006 and 2008.
+
+Figure 1: Examples generated by Dragonfly, showcasing its diverse capabilities, including world
+knowledge and humor, multi-turn question-answering, OCR, and chart understanding.
+within this approach are still being investigated, and many models still downscale input images to
+fixed, low resolutions, leading to the loss of fine visual details.
+High-Resolution Inputs and Fine-Grained Details Handling high-resolution inputs in VLMs
+presents significant challenges, particularly due to the increase in image tokens, which leads to greater
+computational demands. Recently, a multi-crop approach has emerged that attempts to overcome
+the limitations of ViTs processing images at a fixed resolution (Liu et al., 2023b). However, using
+multiple crops significantly increases the number of visual tokens. LLaVA-UHD (Xu et al., 2024)
+is another multi-crop approach that segments native-resolution images into smaller slices to retain
+3
+
+Resize and Split
+into crops
+
+Sub-Images
+
+Token
+Embeddings
+
+Token Embeddings
+in LM space
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+...
+
+Compressed
+Tokens
+
+High Resolution
+
+Original Image
+Medium Resolution
+
+Low Global Resolution
+
+Figure 2: Overview of our proposed Dragonfly framework. The original image is resized into low,
+medium, and high resolutions. The medium- and high-resolution images are divided into crops
+matching the encoder’s training resolution. All sub-crops pass through a shared vision encoder
+to produce visual tokens. The projection layer then maps the visual tokens to the language space.
+Afterward, the mean-pooling layer reduces the embeddings from each sub-crop into 36 tokens.
+detailed visual information while managing the number of tokens using a perceiver resampler (Jaegle
+et al., 2022). Additionally, approaches like Qwen-VL (Bai et al., 2023), PaLI-3 (Chen et al., 2023b),
+and PaLI-X (Chen et al., 2023b) have been explored to gradually scale input resolution, but they
+must still downsize large images and potentially lose critical information. Additionally, capturing
+fine-grained, local details—essential for tasks like segmentation and object detection—remains a
+challenge for models like CLIP, which are trained on global image-level captions and often miss
+important regional semantics (Wu et al., 2023; Xu et al., 2022; Zhong et al., 2022). One potential
+way to overcome these limitations is to zoom in beyond the native resolution of an image, which
+enables models to extract even finer details that may not be captured at standard resolutions. By
+focusing on smaller regions of the image at higher magnification, this approach helps to compensate
+for the shortcomings of current ViTs in capturing localized features that may be lost when images are
+processed in a single fixed-resolution crop.
+Biomedical Applications of VLMs VLMs have shown significant potential in general domains,
+sparking growing interest in their application to various biomedical tasks. Models such as BiomedGPT
+(Zhang et al., 2023a) and LLaVA-Med (Li et al., 2024a) integrate medical imaging and text from the
+scientific literature to address specialized tasks in multiple biomedical domains. General-purpose
+models have also been adapted for medical applications, including Med-PaLM (Tu et al., 2024),
+Med-Flamingo (Moor et al., 2023) and Med-Gemini (Saab et al., 2024), showcasing the potential of
+VLMs to tackle complex vision-language tasks.
+
+3
+
+D RAGONFLY A RCHITECTURE
+
+We introduce our multi-crop visual encoding approach and the strategies employed to manage the
+large number of visual tokens resulting from it. The workflow of our architecture is illustrated in
+Fig. 2.
+3.1
+
+M ULTI - RESOLUTION V ISUAL E NCODING
+
+We employ a multi-resolution visual encoding strategy using a shared image encoder trained on
+a fixed resolution of R × R. Following techniques from previous works (Liu et al., 2023a; Xu
+et al., 2024), our framework processes larger images by dividing them into multiple crops, each
+matching the encoder’s expected resolution. Specifically, given an image I, we resize it into three
+4
+
+distinct resolutions: a low-resolution image I l of size R × R, a medium-resolution image I m of size
+xm R × y m R, and a high-resolution image I h of size xh R × y h R. The medium- and high-resolution
+m
+m
+h
+h
+images are then divided into crops, resulting in two sets of crops, {Iim }xi=1×y and {Ijh }xj=1×y , with
+each sub-image aligned to the encoder’s training resolution R × R. We adopt a simplied version of
+any-resolution segmentation method from Xu et al. (2024) to divide images into crops. This method
+selects a resolution grid from a pre-defined set of grids that approximately match the original image’s
+aspect ratio. For medium resolution, the possible grids are {(2, 2), (1, 4), (4, 1)}, which each result
+in four crops. For high resolution, we use the grids {(6, 6), (3, 12), (12, 3)}, which each produce 36
+crops in total.
+The image encoder encodes each sub-image into a sequence of visual tokens {v1 , . . . , vn }. These
+tokens, extracted from the various crops, are projected into the latent space of the language model
+via a projection layer P , generating a corresponding sequence of projected tokens {t1 , . . . , tn }. The
+projected tokens from different crops are concatenated to form a comprehensive representation of
+the image, which is then used for understanding by the LLM. However, due to the large number
+of crops, especially from the high-resolution set, incorporating all these crops can result in longer
+context lengths that either exceed the capacity of many LLMs or become prohibitively expensive. In
+the following sections, we discuss strategies to mitigate these challenges.
+3.2
+
+T OKEN AGGREGATION
+
+Our objective is to compress visual information from medium- and high-resolution images while
+preserving the fine-grained details from these magnified views. This compression is essential to
+manage the increased number of tokens generated from multiple high-resolution crops, which would
+otherwise result in excessive computational demands. Based on our experiments, we find that a
+simple mean pooling strategy effectively reduces the number of visual tokens while still retaining the
+benefits of zooming to higher resolutions.
+All images are resized to 336 × 336 and processed using the CLIP ViT-L/14@336px model, which
+outputs 576 tokens. For the low-resolution image, we retain all 576 tokens. For the medium- and
+high-resolution images, the image is divided into 40 total crops (4 for medium resolution and 36 for
+high resolution). Each sub-image is encoded with 576 tokens, which are reshaped into a 24 × 24
+token grid. We then compress this representation, applying mean pooling with stride 4 to reduce it to
+a grid of size 6 × 6, or 36 tokens per sub-image. All 40 crops are then concatenated with separator
+tokens placed between them, forming the complete image representation that is passed to the LLM.
+This includes 576 tokens from the low-resolution image, 4 × 36 = 144 tokens from the medium
+resolution, and 36 × 36 = 1, 296 tokens from the high resolution, yielding a total of 2,016 image
+tokens.
+
+4
+
+E XPERIMENTS AND R ESULTS
+
+In this section, we first introduce our experimental setup, and then present ablations and baseline
+comparisons to validate our design choices for multi-resolution visual encoding. Next, we evaluate
+Dragonfly against other models of similar scale across multiple general-domain benchmarks. Finally,
+we continue training Dragonfly on a biomedical dataset, resulting in Dragonfly-Med, and assess its
+performance on biomedical tasks.
+4.1
+
+E XPERIMENTAL S ETUP
+
+Dragonfly uses Llama3.1-8B-Chat (Meta AI, 2024) as the language backbone and CLIP ViTL/14@336px (Radford et al., 2021) as the image encoder. CLIP ViT-L/14@336px accepts images
+with a resolution of 336 × 336, and our highest resolution is either 2016 × 2016 or 1008 × 4032,
+depending on the aspect ratio of the image. An analysis of the resolutions across our training data
+revealed that with out multi-resolution encoding approach, 99.5% of images are magnified beyond
+their native resolution, 95% of the images are zoomed in by at least 2×, and 65% are zoomed in by
+at least 4×. A cumulative density plot of the zoom-in ratio for images in our dataset is provided in
+Fig. 4.
+5
+
+Table 1: Ablation study results evaluating the impact of different image resolutions on model
+performance across multiple benchmarks. The table compares the performance of Dragonfly using
+low (L), medium (M), and high (H) resolutions individually, as well as in various combinations.
+Metric
+AI2D
+ScienceQA
+ChartQA
+Pope-f1
+GQA
+TextVQA
+VizWiz
+MME
+
+L
+
+M
+
+H
+
+L+M
+
+L+H
+
+L+M+H
+
+60.6
+76.0
+21.6
+82.2
+49.5
+40.0
+57.4
+1205.3
+
+61.8
+76.2
+48.4
+87.1
+53.1
+55.0
+59.9
+1311.6
+
+60.4
+76.0
+54.1
+86.0
+52.9
+56.4
+56.0
+1364.0
+
+64.5
+79.2
+52.9
+87.5
+54.6
+60.9
+58.7
+1227.4
+
+63.6
+79.0
+56.2
+87.7
+55.2
+65.2
+59.7
+1397.8
+
+64.2
+79.7
+56.2
+87.7
+55.7
+66.5
+61.7
+1438.9
+
+For training Dragonfly, we adopt the two-stage visual instruction-tuning framework introduced by
+Liu et al. (2023b). In the first stage, the LLM and vision encoder are frozen, with only the projection
+layer being trained. This stage allows the projection layer to effectively learn how to map visual
+tokens into the language space. The model is trained for one epoch on the LLaVA-Pretrain dataset
+(Liu et al., 2023b), which consists of 558K image-text pairs, using a global batch size of 64 and a
+learning rate of 2e-5.
+In the second stage, the entire model undergoes fine-tuning on a high-quality visual instructiontuning dataset. During this stage, the LLM learns to process visual information, thereby optimizing
+the model’s performance in vision-language tasks. For this supervised fine-tuning, we curated a
+dataset comprising 2M image-instruction samples from various sources, which include detailed image
+descriptions, complex reasoning tasks, and diverse visual question-answering tasks. Further details
+about the general domain instruction-tuning dataset are provided in Appendix A. The model is trained
+for one epoch with a global batch size of 16 and a learning rate of 2e-6.
+Stage 1 training lasted approximately 4 hours, and Stage 2 training lasted 32 hours on 3 nodes of 8
+NVIDIA H100 GPUs, utilizing DeepSpeed ZeRO (Microsoft, 2021) for distributed training. More
+details about our training hyperparameters are presented in Table 8.
+Using this experimental setup, we first validate our design choices for the multi-resolution encoding by
+conducting multiple ablations and comparing them against baselines and alternative token reduction
+strategies. Training all baseline models on the full 2M instruction-tuning dataset is time-intensive,
+so we randomly sampled 700K samples from our supervised fine-tuning mixture to perform these
+ablations. All hyperparameters are kept the same as in the main experiments.
+
+4.2
+
+M ULTIPLE I MAGE R ESOLUTIONS IS I MPORTANT
+
+In evaluating whether high-resolution features alone are sufficient or if combining multiple resolutions
+leads to better performance, we trained six separate models using different combinations of image
+resolutions. For low resolution, we used all 576 tokens; for medium resolution, 4 × 36 tokens; and
+for high resolution, 36 × 36 tokens. The results, as presented in Table 1, provide several key insights
+into the role of image resolution. First, models utilizing medium or high-resolution images generally
+outperform those relying solely on low-resolution inputs across most benchmarks, underscoring
+the significance of higher resolutions in capturing fine-grained visual details. Second, combining
+resolutions—either low + medium or low + high—consistently exceeds the performance of individual
+resolutions, particularly on tasks like ChartQA and TextVQA. This demonstrates that blending global
+context from low-resolution images with detailed features from higher resolutions is especially
+effective for tasks requiring fine-grained image details. Finally, the best overall performance is
+achieved by integrating all three resolutions (low + medium + high), confirming that leveraging a full
+spectrum of image resolutions yields the highest scores across most benchmarks. These findings are
+consistent with conclusions drawn by models such as Llava-1.5-HD, which similarly highlight the
+advantages of combining multiple image resolutions Liu et al. (2023b).
+6
+
+Table 2: Performance comparison of multiple token reduction strategies for encoding high-resolution
+images against Dragonfly. The first model uses CLIP ViT-L/14@336px for low resolution and CLIP
+ViT-B/32 for medium and high resolutions, the second model is similar to Dragonfly but uses the
+IDEFICS2 perceiver resampler to reduce the number of tokens, and the third is our implementation
+of LLaVA-1.5-HD.
+Benchmark
+
+Dual Encoder
+
+Perceiver Resampler
+
+Llava-1.5-HD
+
+Mean-Pooling (Dragonfly)
+
+AI2D
+ScienceQA
+ChartQA
+POPE-f1
+GQA
+TextVQA
+VizWiz
+MME
+
+61.7
+79.5
+36.6
+86.2
+51.8
+48.5
+60.4
+1314.9
+
+60.4
+70.0
+48.0
+84.4
+53.4
+52.6
+56.8
+1385.3
+
+63.8
+79.3
+54.0
+85.7
+54.1
+64.0
+56.1
+1414.0
+
+64.2
+79.7
+56.4
+87.7
+55.7
+66.5
+61.7
+1438.9
+
+4.3
+
+M EAN -P OOLING IS AN E FFECTIVE T OKEN R EDUCTION S TRATEGY
+
+We explored several alternative token reduction strategies to compare against our mean pooling
+approach. The first alternative, Dual Encoder, processes low-resolution images with CLIP ViTL/14@336px, while handling medium- and high-resolution sub-images with CLIP ViT-B/32@224px,
+generating 49 tokens per sub-image. Each encoder uses its own single-layer projection module,
+producing a total of 2,536 image tokens. As shown in Table 2, this approach performs worse than our
+mean-pooling method across most benchmarks, with significant gaps in tasks like ChartQA (36.6 vs.
+56.4) and TextVQA (48.5 vs. 66.5). This demonstrates that managing the number of visual tokens by
+using a smaller, lower-resolution model is not optimal. Instead, leveraging a stronger encoder and
+compressing its output is more effective for extracting high-resolution details.
+The second alternative uses a learned compression method, replacing the mean pooling layer with
+the IDEFICS2 perceiver resampler (Laurençon et al., 2024; Jaegle et al., 2022). This resampler uses
+3 layers and 36 latent vectors, resulting in 2,016 tokens—matching the token count from our mean
+pooling approach. While a learned approach like the perceiver resampler could in principle perform
+better, it does not in this case, as seen in Table 2. For example, it underperforms on benchmarks like
+TextVQA (52.6 vs. 66.5) and ChartQA (48.0 vs. 56.4). This discrepancy may be due to the data
+scale, where the simpler mean-pooling approach proves to be more effective.
+Additionally, we implemented a version of LLaVA-1.5-HD (Liu et al., 2023a), which processes
+low- and medium-resolution images using the same ViT and LLM backbone as our model but does
+not compress visual tokens or use high-resolution images. Our LLaVA-1.5-HD implementation
+generates a total of 2,880 visual tokens. Incorporating high-resolution features in LLaVA-1.5-HD
+improves performance over the other two baselines. However, the simple mean-pooling strategy
+with high-resolution image features still outperforms LLaVA-1.5-HD across all benchmarks, further
+reinforcing the value of generating features from zoomed-in sub-crops.
+In short, the simple mean-pooling approach, when combined with high-resolution features and a
+powerful image encoder, consistently outperforms other token reduction strategies across benchmarks,
+particularly for tasks requiring fine-grained visual details.
+4.4
+
+D ISENTANGLING R ESOLUTION AND M ULTI -C ROP B ENEFITS
+
+Our previous results demonstrate improved performance from our multi-resolution encoding strategy.
+However, it remains unclear whether these gains are primarily due to the higher image resolution
+preserving more information or the multi-crop approach generating separate features for each subimage. While our method provides both benefits over a single-crop, fixed-resolution approach, we
+now conduct an experiment to disentangle their relative importance. Specifically, we test: 1) the
+effect of generating multi-crop features from an image already downsized to low resolution, which
+limits the ability to preserve extra raw image information compared to the standard single-resolution
+approach, and 2) the effect of generating multi-crop features from an image that retains its native
+7
+
+Table 3: Ablation study results evaluating the impact of zooming in. The table compares performance
+using low resolution and medium resolution, pooled down to 576 tokens, with versions starting from
+the low-resolution image and starting from the native-resolution image.
+Metric
+
+LowResolution
+
+Medium-Resolution from
+Low-Resolution
+
+Medium-Resolution from
+Native-Resolution
+
+AI2D
+ScienceQA
+ChartQA
+POPE
+GQA
+TextVQA
+VizWiz
+MME Perception
+
+60.6
+76.0
+21.6
+83.4
+49.5
+40.0
+57.4
+1205.3
+
+62.9
+77.6
+52.4
+85.1
+54.7
+57.4
+58.0
+1398.9
+
+61.7
+76.9
+56.6
+86.8
+54.9
+61.2
+56.7
+1444.7
+
+resolution, allowing it to preserve more raw image information than both the standard low resolution
+approach and 1).
+For the first experiment, we rescaled all images to a low resolution of 336 × 336, with the lowresolution performance consistent with Table 1. From this baseline, we conducted an experiment
+where we zoomed in 2×, generating images of size 672 × 672 and producing four crops from the
+rescaled image. Each crop was passed through the ViT, generating 576 tokens (24 × 24), which we
+then pooled down to 144 tokens per crop, for a total of 576 tokens across all crops. This matches
+the total token count of the low-resolution model. In Table 3, this represents the column "MediumResolution from Low-Resolution", and it outperforms the "Low-Resolution" model in all benchmarks,
+particularly excelling in tasks like ChartQA and TextVQA, where localized information is critical.
+This suggests that the multi-crop approach itself, even without preserving additional raw image
+information, significantly contributes to improved performance, likely by enabling more focused
+processing of image sub-regions.
+For the second experiment, without first rescaling to low resolution, we worked directly from the
+native-resolution image and resized it to 672 × 672, producing four crops from the resized image.
+Each crop was passed through the ViT, generating 576 tokens (24 × 24), which we then pooled
+down to 144 tokens per crop, for a total of 576 tokens across all crops. In Table 3, this represents
+the column "Medium-Resolution from Native-Resolution." There are two key observations here.
+First, as expected from previous results, this model outperforms the "Low-Resolution" baseline
+across all tasks. Second, it also outperforms the "Medium-Resolution from Low-Resolution" model
+on a majority of the tasks (5/8), highlighting the importance of preserving raw image information.
+However, these results indicate that most of the performance gains come from featurizing sub-crops,
+which remains the most important part of our approach.
+4.5
+
+M AIN R ESULTS
+
+Table 4: Comparison of Dragonfly with existing VLMs of similar number of parameters across
+various benchmarks. The best performance is indicated in bold and the second-best is underlined.
+Model
+
+Backbone
+
+#Data
+
+VQAv2
+
+VQAT
+
+POPE
+
+SQA
+
+VizWiz
+
+AI2D
+
+ChartQA
+
+MME
+
+MMB/MMBCN
+
+InstructBLIP
+Qwen-VL-Chat
+LLaVA-1.5
+VILA
+LLaVA-NeXT
+MM1-7B-Chat
+mPLUG-Owl2
+Monkey
+SPHINX
+SPHINX-2k
+ShareGPT4V-7B
+VisionLLM v2-chat
+InternVL-7B
+
+Vicuna-7B
+Qwen-7B
+Vicuna-7B
+Llama2-7B
+Vicuna-7B
+MM1-7B
+Llama2-7B
+Qwen-7B
+Llama2-7B
+Llama2-7B
+Vicuna-7B
+Vicuna-7B
+Vicuna-7B
+
+130M
+1.4B
+1.2M
+61M
+1.2M
+>2B
+401M
+1B
+1B
+1B
+1.8M
+22M
+>28.7B
+
+78.2
+78.5
+79.9
+81.8
+82.3
+79.4
+80.3
+78.1
+80.7
+80.6
+81.4
+79.3
+
+50.1
+61.5
+58.2
+64.4
+64.9
+72.8
+58.2
+51.6
+61.2
+66.3
+57.0
+
+85.9
+85.5
+86.5
+86.6
+86.2
+67.6
+80.7
+87.2
+87.5
+86.4
+
+60.5
+68.2
+66.8
+68.2
+70.1
+72.6
+68.7
+69.4
+69.3
+70.6
+68.4
+94.4
+66.2
+
+34.5
+38.9
+50.0
+57.8
+57.6
+45.3
+54.5
+61.2
+39.9
+44.9
+57.2
+54.6
+52.5
+
+62.3
+54.8
+66.6
+62.6
+-
+
+65.7
+18.2
+54.8
+65.1
+-
+
+1487.5
+1510.7
+1533.0
+1519.0
+1529.3
+1450.2
+1476.1
+1470.7
+1567.4
+1512.5
+1525.1
+
+36.0/23.7
+60.6/56.7
+63.4/58.3
+68.9/61.7
+67.4/60.6
+72.3/63.5/66.9/56.2
+65.9/57.9
+68.8/62.2
+77.1/67.6
+64.6/57.6
+
+Dragonfly (Ours)
+
+Llama3-8B
+
+2.9M
+
+81.0
+
+73.6
+
+87.9
+
+79.5
+
+59.0
+
+67.9
+
+71.2
+
+1538.1
+
+71.9/66.1
+
+8
+
+Quest ion: What is present?
+Gold Answer : acute peritonitis
+Dragonf ly Response: acute
+peritonitis
+
+Quest ion: What diseases are
+included in the picture?
+Gold Answer : Cardiomegaly
+Dragonf ly Response: Cardiomegaly
+
+Quest ion: Does this image show
+metastatic choriocarcinoma with
+extensive vascularization?
+Gold Answer : yes
+Dragonf ly Response: yes
+
+Figure 3: Examples of biomedical VQA. The figure shows three questions along with their gold
+standard answers and the corresponding responses from the Dragonfly-Med model.
+
+Following our validation of design choices in the previous experiments, we now train our model on
+a scaled-up instruction-tuning dataset of 2 million samples and compare Dragonfly against other
+open-source VLMs. The results, presented in Table 4, evaluate the models across ten established
+benchmarks, including general-domain visual question answering datasets (ScienceQA, VQAv2 ,
+VizWiz; Lu et al. 2022; Antol et al. 2015; Gurari et al. 2018), chart interpretation and OCR-based VQA
+datasets (ChartQA and TextVQA; Masry et al. 2022; Singh et al. 2019), hallucination assessment
+datasets (POPE; Yifan et al. 2023), and other standard benchmarks such as AI2D (Kembhavi et al.,
+2016), MME (Fu et al., 2023), MMB (Liu et al., 2023c), and MMBCN (the Chinese-language version
+of MMB).
+One of the key areas where Dragonfly excels is in tasks requiring fine-grained visual understanding,
+such as TextVQA and ChartQA. For instance, Dragonfly achieves a score of 73.6 on TextVQA and
+71.2 on ChartQA, outperforming all other models in the table. By comparison, Qwen-VL-Chat (Bai
+et al., 2023), trained on over 400 times more data, scores only 61.5 on TextVQA and 65.7 on ChartQA.
+This result aligns with previous research (Beyer et al., 2024), which emphasizes the importance of
+high-resolution images for tasks involving intricate visual details, such as text recognition and chart
+interpretation.
+Additionally, Dragonfly achieves the best performance on POPE-f1 (87.9) and ranks second-best on
+VizWiz (59.0), MME (1538.1), ScienceQA (79.5), and MMBCN (66.1). The models that outperform
+Dragonfly on certain benchmarks, such as MM1-7B-Chat (McKinzie et al., 2024) and Monkey (Li
+et al., 2024c), are trained on significantly larger datasets with over 1 billion samples.
+As shown in Table 10, Dragonfly also competes strongly against 13B-17B models across various
+benchmarks. It outperforms all 13B models on TextVQA, ChartQA, and MMBCN , while achieving
+second-best performance on POPE, ScienceQA, VizWiz, AI2D, and MMB, competing against
+powerful models such as CogVLM-17B-Chat (Wang et al., 2023a). This underscores Dragonfly’s
+efficiency in leveraging high-resolution, zoomed-in image features and a powerful visual encoder.
+It is important to note that these comparisons involve several differences, including variations in
+training stages, data, and underlying ViTs and LMs. Despite these differences, Dragonfly remains
+competitive, particularly on text and chart interpretation tasks, even though it uses significantly less
+data than many other models. This highlights the utility of our zoomed-in encoding strategy and
+suggests that its effectiveness would likely increase with additional training data.
+4.6
+
+B IOMEDICAL D OMAIN A DAPTATION
+
+This section outlines our approach to adapting the model for the biomedical domain, enabling its
+evaluation across a range of specialized and challenging tasks. Starting with a model checkpoint
+instruction-tuned on our general-domain dataset, we implemented a three-step training process
+tailored specifically for the biomedical domain to create Dragonfly-Med.
+9
+
+The first stage involved tuning the projection layer and vision encoder, which is critical given the
+limited exposure of the standard CLIP encoder to biomedical images. The training dataset for this
+phase primarily comprised short caption datasets from sources like LLaVA-Med (Li et al., 2024a),
+OpenPath (Huang et al., 2023a), and MedICaT (Subramanian et al., 2020), supplemented by general
+domain datasets from LLaVA-Pretrain (Liu et al., 2023b). This phase included approximately 1.16M
+image-text pairs, split roughly evenly between the general and biomedical domains. Stage 1 took
+approximately 24 hours to train on 8 NVIDIA H100 GPUs.
+In the second stage, we jointly trained the vision encoder, language model, and projection layer. We
+used a diverse set of datasets, including LLaVA-Med-Instruct (Li et al., 2024a), MIMIC-III-CXR
+(Johnson et al., 2019), OpenPath (Huang et al., 2023a), ROCO (Pelka et al., 2018), Kaggle DR, and
+DDR (Li et al., 2019). Additionally, we included training sets from benchmark datasets such as
+VQA-RAD (Lau et al., 2018), SLAKE (Liu et al., 2021), Path-VQA (He et al., 2020), IU X-Ray,
+and Peir Gross (Demner-Fushman et al., 2016). The dataset totaled 723K image-text pairs, with
+approximately 15% from the general domain and 85% from the biomedical domain. General domain
+datasets included SVIT (Zhao et al., 2023b), ShareGPT4V (Chen et al., 2023a), and ArXivCap (Li
+et al., 2024b). Stage 2 took about 30 hours on 8 NVIDIA H100 GPUs.
+The final stage involved fine-tuning using combined training datasets from our benchmark tasks:
+VQA-RAD, SLAKE, Path-VQA, IU X-Ray, Peir Gross, and subsets of ROCO and MIMIC-CXR,
+totaling 50K image-text pairs. We fine-tuned a single model end-to-end on this aggregated training
+data to optimize performance across all tasks simultaneously. Stage 3 required approximately 4 hours
+of training on 8 NVIDIA H100 GPUs.
+Table 5: Medical image captioning and clinical report generation evaluation results. For MIMIC-CXR,
+we specifically focus on generating the findings section of the radiology report.
+Dataset
+
+Metric
+
+BiomedGPT
+
+SOTA
+
+Dragonfly-Med (Ours)
+
+IU X-Ray
+
+ROUGE-L
+METEOR
+CIDEr
+
+28.5
+12.9
+40.1
+
+44.8 (Zhou et al., 2021)
+24.2 (Huang et al., 2023b)
+43.5 (Wang et al., 2023b)
+
+29.1
+30.5
+61.7
+
+Peir Gross
+
+ROUGE-L
+METEOR
+CIDEr
+
+36.0
+15.4
+122.7
+
+36.0 (Zhang et al., 2023a)
+15.4 (Zhang et al., 2023a)
+122.7 (Zhang et al., 2023a)
+
+42.0
+40.2
+198.5
+
+ROCO
+
+ROUGE-L
+METEOR
+CIDEr
+
+18.2
+7.8
+24.2
+
+18.2 (Zhang et al., 2023a)
+7.8 (Zhang et al., 2023a)
+24.2 (Zhang et al., 2023a)
+
+19.2
+15.5
+45.2
+
+MIMIC-CXR
+
+ROUGE-L
+METEOR
+CIDEr
+
+23.8
+14.2
+14.7
+
+33.5 (Zhou et al., 2021)
+19.0 (Zhou et al., 2021)
+50.9 (Miura et al., 2020)
+
+25.2
+23.6
+50.9
+
+Table 6: Biomedical VQA evaluation results.
+Dataset
+
+Metric
+
+LLaVA-Med
+
+Med-Gemini
+
+SOTA
+
+Dragonfly-Med(Ours)
+
+VQA-RAD
+
+Acc (closed)
+Token F1
+
+84.2
+-
+
+69.7
+50.1
+
+87.1 (Tanwani et al., 2022)
+62.1 (Tu et al., 2024)
+
+78.1
+61.4
+
+SLAKE
+
+Acc (closed)
+Token F1
+
+83.2
+-
+
+84.8
+75.8
+
+91.6 (Yuan et al., 2023)
+89.3 (Tu et al., 2024)
+
+91.6
+89.3
+
+Path-VQA
+
+Acc (closed)
+Token F1
+
+91.7
+-
+
+83.3
+58.7
+
+91.7 (Li et al., 2024a)
+62.7 (Tu et al., 2024)
+
+90.6
+67.1
+
+The results, as reported in Table 5 and Table 6, are based on this fine-tuned model and evaluated against
+the official held-out test sets of the respective benchmarks (details of the biomedical benchmarks
+are provided in Appendix C). For VQA tasks, we use accuracy and token-level F1 (Tu et al., 2024),
+while for image captioning and radiology report generation tasks, we use standard metrics such as
+ROUGE-L (Lin, 2004), METEOR (Banerjee & Lavie, 2005), and CIDEr (Vedantam et al., 2015).
+These metrics evaluate the fluency of text and the recognition of synonyms and word stems, with
+CIDEr specifically tailored for assessing text descriptions of images.
+10
+
+Dragonfly-Med achieves strong performance across multiple benchmarks. On the image captioning
+task, Dragonfly-Med delivers state-of-the-art or competitive results on several metrics across these
+datasets. Notably, on the Peir Gross and ROCO datasets, Dragonfly-Med outperforms existing
+methods on all three metrics: ROUGE-L, METEOR, and CIDEr. On the other two captioning
+benchmarks (IU X-Ray and MIMIC-CXR), Dragonfly-Med achieves state-of-the-art performance on
+two out of three evaluation metrics.
+For VQA tasks, Dragonfly-Med attains an accuracy of 91.6% and a token F1 score of 89.3% on
+the SLAKE dataset, matching the current state-of-the-art. Similarly, on Path-VQA, Dragonfly-Med
+sets a new state-of-the-art performance with a token F1 score of 67.1, surpassing the much larger
+Med-PaLM-M model, which scores 62.7. Additionally, Dragonfly-Med consistently outperforms
+Med-Gemini, a significantly larger model, on all VQA tasks. These results further highlight the
+fine-grained understanding and reasoning capabilities of the Dragonfly-Med architecture. Fig. 3
+presents a few examples from our evaluation tasks, along with Dragonfly-Med’s responses.
+
+5
+
+D ISCUSSION AND C ONCLUSION
+
+High-resolution image inputs help capture fine-grained visual details, which are critical for tasks
+such as OCR and reading charts. Our study demonstrates that leveraging powerful vision encoders
+and pushing image resolutions beyond native sizes enhances the model’s ability to identify subtle
+visual cues. Zooming in beyond native resolution allows the model to capture fine-grained details
+that might otherwise be missed, particularly in small objects, dense text, and chart details. We show
+that a multi-resolution encoding strategy, paired with a simple mean pooling compression approach,
+provides an effective and computationally efficient solution, preserving both global context and fine
+details. Dragonfly even surpasses larger models in several benchmarks while utilizing fewer tokens
+and less data.
+Despite the strong performance of Dragonfly, there are several limitations to our approach. First,
+while we’ve demonstrated competitive performance using much smaller datasets than other models,
+further investigation is needed to explore the potential for even greater improvements as the approach
+scales with larger supervised fine-tuning datasets. Second, while the increased resolution and multiple
+image crops enhance the model’s visual understanding, they come at the cost of higher computational
+demands in the vision encoder. Having said that, by applying mean pooling to compress sub-image
+representations, we ensure that the context length passed to the LLM remains manageable and
+mitigates the impact of these additional FLOPs.
+Interestingly, the strong performance of our simple approach—zooming in beyond native resolution
+and mean pooling the tokens—highlights a broader issue: the fixed-resolution approach of current
+vision transformers is inherently limiting. While multi-crop strategies offer some improvement, they
+introduce complexity and increased computational demands. Moving forward, VLMs should adopt
+native-resolution architectures that can process images at various scales in a single pass, preserving
+all the information without requiring multiple crops. Additionally, improved training strategies are
+needed to ensure that models retain the same level of detail as if magnified sub-crops were processed
+individually.
+
+R EFERENCES
+Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc, Antoine Miech, Iain Barr, Yana Hasson, Karel
+Lenc, Arthur Mensch, Katherine Millican, Malcolm Reynolds, et al. Flamingo: a visual language
+model for few-shot learning. Advances in Neural Information Processing Systems, 35:23716–
+23736, 2022.
+Stanislaw Antol, Aishwarya Agrawal, Jiasen Lu, Margaret Mitchell, Dhruv Batra, C Lawrence Zitnick,
+and Devi Parikh. Vqa: Visual question answering. In Proceedings of the IEEE international
+conference on computer vision, pp. 2425–2433, 2015.
+Anas Awadalla, Irena Gao, Josh Gardner, Jack Hessel, Yusuf Hanafy, Wanrong Zhu, Kalyani Marathe,
+Yonatan Bitton, Samir Gadre, et al. OpenFlamingo: An open-source framework for training large
+autoregressive vision-language models. arXiv preprint arXiv:2308.01390, 2023.
+11
+
+Jinze Bai, Shuai Bai, Shusheng Yang, Shijie Wang, Sinan Tan, Peng Wang, Junyang Lin, Chang Zhou,
+and Jingren Zhou. Qwen-VL: A versatile vision-language model for understanding, localization,
+text reading, and beyond. arXiv preprint arXiv:2308.12966, 2023.
+Satanjeev Banerjee and Alon Lavie. METEOR: An automatic metric for mt evaluation with improved
+correlation with human judgments. In Proceedings of the acl workshop on intrinsic and extrinsic
+evaluation measures for machine translation and/or summarization, pp. 65–72, 2005.
+Lucas Beyer, Andreas Steiner, André Susano Pinto, Alexander Kolesnikov, Xiao Wang, Daniel
+Salz, Maxim Neumann, Ibrahim Alabdulmohsin, Michael Tschannen, Emanuele Bugliarello, et al.
+PaliGemma: A versatile 3b vlm for transfer. arXiv preprint arXiv:2407.07726, 2024.
+Guiming Hardy Chen, Shunian Chen, Ruifei Zhang, Junying Chen, Xiangbo Wu, Zhiyi Zhang, Zhihong Chen, Jianquan Li, Xiang Wan, and Benyou Wang. ALLaVA: Harnessing gpt4v-synthesized
+data for a lite vision-language model. arXiv preprint arXiv:2402.11684, 2024a.
+Lin Chen, Jinsong Li, Xiaoyi Dong, Pan Zhang, Conghui He, Jiaqi Wang, Feng Zhao, and Dahua
+Lin. ShareGPT4V: Improving large multi-modal models with better captions. arXiv preprint
+arXiv:2311.12793, 2023a.
+Xi Chen, Josip Djolonga, Piotr Padlewski, Basil Mustafa, Soravit Changpinyo, Jialin Wu, Carlos Riquelme Ruiz, Sebastian Goodman, Xiao Wang, Yi Tay, et al. Pali-x: On scaling up a
+multilingual vision and language model. arXiv preprint arXiv:2305.18565, 2023b.
+Zhe Chen, Jiannan Wu, Wenhai Wang, Weijie Su, Guo Chen, Sen Xing, Muyan Zhong, Qinglong
+Zhang, Xizhou Zhu, Lewei Lu, et al. Internvl: Scaling up vision foundation models and aligning
+for generic visual-linguistic tasks. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pp. 24185–24198, 2024b.
+Wei-Lin Chiang, Zhuohan Li, Zi Lin, Ying Sheng, Zhanghao Wu, Hao Zhang, Lianmin Zheng,
+Siyuan Zhuang, Yonghao Zhuang, Joseph E. Gonzalez, Ion Stoica, and Eric P. Xing. Vicuna: An
+open-source chatbot impressing gpt-4 with 90%* chatgpt quality, March 2023. URL https:
+//lmsys.org/blog/2023-03-30-vicuna/.
+Wenliang Dai, Junnan Li, Dongxu Li, Anthony Meng Huat Tiong, Junqi Zhao, Weisheng Wang,
+Boyang Li, Pascale Fung, and Steven Hoi. InstructBLIP: Towards general-purpose vision-language
+models with instruction tuning. arXiv preprint arXiv:2303.12345, 2023. 2, 3.
+Dina Demner-Fushman, Marc D Kohli, Marc B Rosenman, Sonya E Shooshan, Laritza Rodriguez,
+Sameer Antani, George R Thoma, and Clement J McDonald. Preparing a collection of radiology examinations for distribution and retrieval. Journal of the American Medical Informatics
+Association, 23(2):304–310, 2016.
+Chaoyou Fu, Peixian Chen, Yunhang Shen, Yulei Qin, Mengdan Zhang, Xu Lin, Jinrui Yang, Xiawu
+Zheng, Ke Li, Xing Sun, et al. MME: A comprehensive evaluation benchmark for multimodal
+large language models. arXiv preprint arXiv:2306.13394, 2023.
+Danna Gurari, Qing Li, Abigale J Stangl, Anhong Guo, Chi Lin, Kristen Grauman, Jiebo Luo, and
+Jeffrey P Bigham. Vizwiz grand challenge: Answering visual questions from blind people. In
+Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 3608–3617,
+2018.
+Xuehai He, Yichen Zhang, Luntian Mou, Eric Xing, and Pengtao Xie. Pathvqa: 30000+ questions for
+medical visual question answering. arXiv preprint arXiv:2003.10286, 2020.
+Wenyi Hong, Weihan Wang, Qingsong Lv, Jiazheng Xu, Wenmeng Yu, Junhui Ji, Yan Wang, et al.
+Cogagent: A visual language model for gui agents. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition (CVPR), pp. 14281–14290, 2024.
+Zhi Huang, Federico Bianchi, Mert Yuksekgonul, Thomas Montine, and James Zou. Leveraging
+medical twitter to build a visual–language foundation model for pathology ai. bioRxiv, pp. 2023–03,
+2023a.
+12
+
+Zhongzhen Huang, Xiaofan Zhang, and Shaoting Zhang. Kiut: Knowledge-injected u-transformer
+for radiology report generation. In Proceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, pp. 19809–19818, 2023b.
+Andrew Jaegle, Sebastian Borgeaud, Jean-Baptiste Alayrac, Carl Doersch, Catalin Ionescu, David
+Ding, Skanda Koppula, Daniel Zoran, Andrew Brock, Evan Shelhamer, Olivier Hénaff, Matthew M.
+Botvinick, Andrew Zisserman, Oriol Vinyals, and Joāo Carreira. Perceiver IO: A general architecture for structured inputs & outputs. arXiv preprint arXiv:2107.14795, 2022.
+Baoyu Jing, Pengtao Xie, and Eric Xing. On the automatic generation of medical imaging reports.
+arXiv preprint arXiv:1711.08195, 2017.
+Alistair EW Johnson, Tom J Pollard, Seth J Berkowitz, Nathaniel R Greenbaum, Matthew P Lungren,
+Chih-ying Deng, Roger G Mark, and Steven Horng. MIMIC-CXR, a de-identified publicly
+available database of chest radiographs with free-text reports. Scientific data, 6(1):317, 2019.
+Aniruddha Kembhavi, Mike Salvato, Eric Kolve, Minjoon Seo, Hannaneh Hajishirzi, and Ali Farhadi.
+A diagram is worth a dozen images. arXiv preprint arXiv:1603:07396, 2016.
+Jason J Lau, Soumya Gayen, Asma Ben Abacha, and Dina Demner-Fushman. A dataset of clinically
+generated visual questions and answers about radiology images. Scientific data, 5(1):1–10, 2018.
+Hugo Laurençon, Léo Tronchon, Matthieu Cord, and Victor Sanh. What matters when building
+vision-language models? arXiv preprint arXiv:2403.11703, 2024.
+Bo Li, Peiyuan Zhang, Jingkang Yang, Yuanhan Zhang, Fanyi Pu, and Ziwei Liu. Otterhd: A
+high-resolution multi-modality model. arXiv preprint arXiv:2311.04219, 2023a.
+Bo Li, Yuanhan Zhang, Liangyu Chen, Jinghao Wang, Jingkang Yang, and Ziwei Liu. Otter: A
+multi-modal model with in-context instruction tuning. arXiv preprint arXiv:2305.03726, 2023b.
+Chunyuan Li, Cliff Wong, Sheng Zhang, Naoto Usuyama, Haotian Liu, Jianwei Yang, Tristan
+Naumann, Hoifung Poon, and Jianfeng Gao. LLaVA-Med: Training a large language-and-vision
+assistant for biomedicine in one day. Advances in Neural Information Processing Systems, 36,
+2024a.
+Lei Li, Yuqi Wang, Runxin Xu, Peiyi Wang, Xiachong Feng, Lingpeng Kong, and Qi Liu. Multimodal
+ArXiv: A dataset for improving scientific comprehension of large vision-language models. arXiv
+preprint arXiv:2403.00231, 2024b.
+Tao Li, Yingqi Gao, Kai Wang, Song Guo, Hanruo Liu, and Hong Kang. Diagnostic assessment of
+deep learning algorithms for diabetic retinopathy screening. Information Sciences, 501:511–522,
+2019.
+Zhang Li, Biao Yang, Qiang Liu, Zhiyin Ma, Shuo Zhang, Jingxu Yang, Yabo Sun, Yuliang Liu, and
+Xiang Bai. Monkey: Image resolution and text label are important things for large multi-modal
+models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+pp. 26763–26773, 2024c.
+Chin-Yew Lin. Rouge: A package for automatic evaluation of summaries. In Text summarization
+branches out, pp. 74–81, 2004.
+Ji Lin, Hongxu Yin, Wei Ping, Pavlo Molchanov, Mohammad Shoeybi, and Song Han. Vila: On
+pre-training for visual language models. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pp. 26689–26699, 2024.
+Ziyi Lin, Chris Liu, Renrui Zhang, Peng Gao, Longtian Qiu, Han Xiao, Han Qiu, Chen Lin, Wenqi
+Shao, Keqin Chen, et al. Sphinx: The joint mixing of weights, tasks, and visual embeddings for
+multi-modal large language models. arXiv preprint arXiv:2311.07575, 2023.
+Bo Liu, Li-Ming Zhan, Li Xu, Lin Ma, Yan Yang, and Xiao-Ming Wu. Slake: A semanticallylabeled knowledge-enhanced dataset for medical visual question answering. In 2021 IEEE 18th
+International Symposium on Biomedical Imaging (ISBI), pp. 1650–1654. IEEE, 2021.
+13
+
+Haotian Liu, Chunyuan Li, Yuheng Li, and Yong Jae Lee. Improved baselines with visual instruction
+tuning. arXiv preprint arXiv:2310.03744, 2023a.
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Visual instruction tuning. NeurIPS
+2023, 2023b.
+Haotian Liu, Chunyuan Li, Yuheng Li, and Yong Jae Lee. Improved baselines with visual instruction
+tuning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+pp. 26296–26306, 2024a.
+Haotian Liu, Chunyuan Li, Yuheng Li, Bo Li, Yuanhan Zhang, Sheng Shen, and Yong Jae Lee.
+Llava-next: Improved reasoning, ocr, and world knowledge. arXiv preprint arXiv:2401.12345,
+2024b. 7, 35, 36.
+Yuan Liu, Haodong Duan, Yuanhan Zhang, Bo Li, Songyang Zhang, Wangbo Zhao, Yike Yuan, Jiaqi
+Wang, Conghui He, Ziwei Liu, et al. Mmbench: Is your multi-modal model an all-around player?
+arXiv preprint arXiv:2307.06281, 2023c.
+Pan Lu, Swaroop Mishra, Tony Xia, Liang Qiu, Kai-Wei Chang, Song-Chun Zhu, Oyvind Tafjord,
+Peter Clark, and Ashwin Kalyan. Learn to explain: Multimodal reasoning via thought chains for
+science question answering. In The 36th Conference on Neural Information Processing Systems
+(NeurIPS), 2022.
+Ahmed Masry, Do Xuan Long, Jia Qing Tan, Shafiq Joty, and Enamul Hoque. ChartQA: A benchmark
+for question answering about charts with visual and logical reasoning. ACL 2022 Findings, 2022.
+Brandon McKinzie, Zhe Gan, Jean-Philippe Fauconnier, Sam Dodge, Bowen Zhang, Philipp Dufter,
+Dhruti Shah, Xianzhi Du, Futang Peng, Floris Weers, Anton Belyi, Haotian Zhang, Karanjeet
+Singh, Doug Kang, Ankur Jain, Hongyu Hè, Max Schwarzer, Tom Gunter, Xiang Kong, Aonan
+Zhang, Jianyu Wang, Chong Wang, Nan Du, Tao Lei, Sam Wiseman, Guoli Yin, Mark Lee, Zirui
+Wang, Ruoming Pang, Peter Grasch, Alexander Toshev, and Yinfei Yang. MM1: Methods, analysis
+& insights from multimodal llm pre-training. arXiv preprint arXiv:2403.09611, 2024.
+Meta AI. Introducing meta LLaMA 3: The most capable openly available llm to date.
+https://ai.meta.com/blog/meta-llama-3/, 2024.
+Microsoft. Deepspeed: Extreme-scale model training for everyone. https://www.deepspeed.
+ai/, 2021. Accessed: 2024-10-12.
+Yasuhide Miura, Yuhao Zhang, Emily Bao Tsai, Curtis P Langlotz, and Dan Jurafsky. Improving
+factual completeness and consistency of image-to-text radiology report generation. arXiv preprint
+arXiv:2010.10042, 2020.
+Michael Moor, Qian Huang, Shirley Wu, Michihiro Yasunaga, Yash Dalmia, Jure Leskovec, Cyril
+Zakka, Eduardo Pontes Reis, and Pranav Rajpurkar. Med-Flamingo: a multimodal medical
+few-shot learner. In Machine Learning for Health (ML4H), pp. 353–367. PMLR, 2023.
+Obioma Pelka, Sven Koitka, Johannes Rückert, Felix Nensa, and Christoph M Friedrich. Radiology
+objects in context (roco): a multimodal image dataset. In Intravascular Imaging and Computer
+Assisted Stenting and Large-Scale Annotation of Biomedical Data and Expert Label Synthesis:
+7th Joint International Workshop, CVII-STENT 2018 and Third International Workshop, LABELS
+2018, Held in Conjunction with MICCAI 2018, Granada, Spain, September 16, 2018, Proceedings
+3, pp. 180–189. Springer, 2018.
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal,
+Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual
+models from natural language supervision. In International conference on machine learning, pp.
+8748–8763. PMLR, 2021.
+Khaled Saab, Tao Tu, Wei-Hung Weng, Ryutaro Tanno, David Stutz, Ellery Wulczyn, Fan Zhang,
+Tim Strother, Chunjong Park, Elahe Vedadi, et al. Capabilities of gemini models in medicine.
+arXiv preprint arXiv:2404.18416, 2024.
+14
+
+Amanpreet Singh, Vivek Natarajan, Meet Shah, Yu Jiang, Xinlei Chen, Dhruv Batra, Devi Parikh, and
+Marcus Rohrbach. Towards vqa models that can read. In Proceedings of the IEEE/CVF conference
+on computer vision and pattern recognition, pp. 8317–8326, 2019.
+Sanjay Subramanian, Lucy Lu Wang, Sachin Mehta, Ben Bogin, Madeleine van Zuylen, Sravanthi
+Parasa, Sameer Singh, Matt Gardner, and Hannaneh Hajishirzi. Medicat: A dataset of medical
+images, captions, and textual references. arXiv preprint arXiv:2010.06000, 2020.
+Ajay K Tanwani, Joelle Barral, and Daniel Freedman. Repsnet: Combining vision with language
+for automated medical reports. In International Conference on Medical Image Computing and
+Computer-Assisted Intervention, pp. 714–724. Springer, 2022.
+Tao Tu, Shekoofeh Azizi, Danny Driess, Mike Schaekermann, Mohamed Amin, Pi-Chuan Chang,
+Andrew Carroll, Charles Lau, Ryutaro Tanno, Ira Ktena, et al. Towards generalist biomedical ai.
+NEJM AI, 1(3):AIoa2300138, 2024.
+Ramakrishna Vedantam, C Lawrence Zitnick, and Devi Parikh. Cider: Consensus-based image
+description evaluation. In Proceedings of the IEEE conference on computer vision and pattern
+recognition, pp. 4566–4575, 2015.
+Weihan Wang, Qingsong Lv, Wenmeng Yu, Wenyi Hong, Ji Qi, Yan Wang, Junhui Ji, Zhuoyi Yang,
+Lei Zhao, Xixuan Song, et al. Cogvlm: Visual expert for pretrained language models. arXiv
+preprint arXiv:2311.03079, 2023a.
+Zhanyu Wang, Lingqiao Liu, Lei Wang, and Luping Zhou. METransformer: Radiology report
+generation by transformer with multiple learnable expert tokens. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition (CVPR), pp. 11558–11567, June 2023b.
+Jiannan Wu, Muyan Zhong, Sen Xing, Zeqiang Lai, Zhaoyang Liu, Wenhai Wang, Zhe Chen, Xizhou
+Zhu, Lewei Lu, Tong Lu, et al. VisionLLM v2: An end-to-end generalist multimodal large language
+model for hundreds of vision-language tasks. arXiv preprint arXiv:2406.08394, 2024.
+Size Wu, Wenwei Zhang, Lumin Xu, Sheng Jin, Xiangtai Li, Wentao Liu, and Chen Change Loy.
+Clipself: Vision transformer distills itself for open-vocabulary dense prediction. arXiv preprint
+arXiv:2310.01403, 2023.
+Mengde Xu, Zheng Zhang, Fangyun Wei, Yutong Lin, Yue Cao, Han Hu, and Xiang Bai. A simple
+baseline for open-vocabulary semantic segmentation with pre-trained vision-language model. In
+European Conference on Computer Vision, pp. 736–753. Springer, 2022.
+Ruyi Xu, Yuan Yao, Zonghao Guo, Junbo Cui, Zanlin Ni, Chunjiang Ge, Tat-Seng Chua, Zhiyuan Liu,
+Maosong Sun, and Gao Huang. Llava-uhd: an lmm perceiving any aspect ratio and high-resolution
+images. arXiv preprint arXiv:2403.11703, 2024.
+Zhengyuan Yang, Linjie Li, Jianfeng Wang, Kevin Lin, Ehsan Azarnasab, Faisal Ahmed, Zicheng
+Liu, Ce Liu, Michael Zeng, and Lijuan Wang. MM-REACT: Prompting chatgpt for multimodal
+reasoning and action. arXiv preprint arXiv:2303.11381, 2023.
+Jiabo Ye, Anwen Hu, Haiyang Xu, Qinghao Ye, Ming Yan, Guohai Xu, Chenliang Li, et al. UReader:
+Universal ocr-free visually-situated language understanding with multimodal large language model.
+arXiv preprint arXiv:2310.05126, 2023.
+Qinghao Ye, Haiyang Xu, Jiabo Ye, Ming Yan, Anwen Hu, Haowei Liu, Qi Qian, Ji Zhang, and
+Fei Huang. mplug-owl2: Revolutionizing multi-modal large language model with modality
+collaboration. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pp. 13040–13051, 2024.
+Li Yifan, Du Yifan, Zhou Kun, Wang Jinpeng, Xin Zhao Wayne, and Wen Ji-Rong. Evaluating object
+hallucination in large vision-language models. In The 2023 Conference on Empirical Methods
+in Natural Language Processing, 2023. URL https://openreview.net/forum?id=
+xozJw0kZXF.
+15
+
+Haoxuan You, Haotian Zhang, Zhe Gan, Xianzhi Du, Bowen Zhang, Zirui Wang, Liangliang Cao,
+Shih-Fu Chang, and Yinfei Yang. Ferret: Refer and ground anything anywhere at any granularity.
+arXiv preprint arXiv:2310.07704, 2023.
+Zheng Yuan, Qiao Jin, Chuanqi Tan, Zhengyun Zhao, Hongyi Yuan, Fei Huang, and Songfang Huang.
+Ramm: Retrieval-augmented biomedical visual question answering with multi-modal pre-training.
+In Proceedings of the 31st ACM International Conference on Multimedia, pp. 547–556, 2023.
+Haotian Zhang, Haoxuan You, Philipp Dufter, Bowen Zhang, Chen Chen, Hong-You Chen, Tsu-Jui
+Fu, William Yang Wang, Shih-Fu Chang, Zhe Gan, and Yinfei Yang. Ferret-v2: An improved
+baseline for referring and grounding with large language models. arXiv preprint arXiv:2403.11703,
+2024.
+Kai Zhang, Jun Yu, Zhiling Yan, Yixin Liu, Eashan Adhikarla, Sunyang Fu, Xun Chen, Chen Chen,
+Yuyin Zhou, Xiang Li, et al. BiomedGPT: A unified and generalist biomedical generative pretrained transformer for vision, language, and multimodal tasks. arXiv preprint arXiv:2305.17100,
+2023a.
+Sheng Zhang, Yanbo Xu, Naoto Usuyama, Hanwen Xu, Jaspreet Bagga, Robert Tinn, Sam Preston,
+Rajesh Rao, Mu Wei, Naveen Valluri, et al. BiomedCLIP: a multimodal biomedical foundation
+model pretrained from fifteen million scientific image-text pairs. arXiv preprint arXiv:2303.00915,
+2023b.
+Bo Zhao, Boya Wu, Muyang He, and Tiejun Huang. SVIT: Scaling up visual instruction tuning.
+arXiv preprint arXiv:2307.04087, 2023a.
+Bo Zhao, Boya Wu, and Tiejun Huang. Svit: Scaling up visual instruction tuning. arXiv preprint
+arXiv:2307.04087, 2023b.
+Yiwu Zhong, Jianwei Yang, Pengchuan Zhang, Chunyuan Li, Noel Codella, Liunian Harold Li,
+Luowei Zhou, Xiyang Dai, Lu Yuan, Yin Li, et al. Regionclip: Region-based language-image pretraining. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition,
+pp. 16793–16803, 2022.
+Yi Zhou, Lei Huang, Tao Zhou, Huazhu Fu, and Ling Shao. Visual-textual attentive semantic consistency for medical report generation. In Proceedings of the IEEE/CVF International Conference on
+Computer Vision, pp. 3985–3994, 2021.
+
+A
+
+G ENERAL D OMAIN T RAINING DATA D ESCRIPTION
+
+We curated a vision instruction-tuning dataset using samples from ShareGPT4V (Chen et al., 2023a),
+ALLaVA (Chen et al., 2024a), SVIT (Zhao et al., 2023a), and selected tasks from Cauldron (Laurençon
+et al., 2024). Initially, we combined the samples from these four sources, resulting in nearly 9 million
+data points. Through experimentation with the training data, we derived several key insights:
+• Increasing the number of training samples during visual instruction tuning improves the model’s
+performance on commonsense reasoning tasks but also increases the likelihood of hallucination.
+To mitigate this, the model benefits from training on specialized data.
+• Deduplicating the training samples is crucial. Duplicate samples can introduce bias during
+training, negatively impacting model performance.
+• Question-answering data enhances benchmark performance but can reduce the detail and length
+of generated text.
+Based on these insights, we first deduplicated the image-instruction pairs. Since SVIT and
+ShareGPT4V share the same image set, and SVIT generates multiple instructions per image, we
+randomly selected eight instructions per image to scale the dataset. The Cauldron dataset, a vast
+collection of 50 high-quality datasets converted to user/assistant format, included some datasets
+related to math or coding, which caused misalignment during training. As a result, we excluded
+five datasets from Cauldron. After processing and deduplication, our final training set contained 2
+million image-instruction pairs. Additionally, we included text-only data from OpenHermes and
+MathInstruct to maintain the model’s zero-shot capabilities.
+16
+
+100%
+
+Cumulative Percentage
+
+80%
+
+60%
+
+40%
+
+20%
+
+0%
+22
+
+20
+22
+21
+21
+Ratios of Dragonfly Max-Resolution to Native Resolution of Images
+
+23
+
+Figure 4: Ratio of maximum resolution of our high resolution image to the native resolution of the
+original image. We used all of our training dataset to calculate this ratio, which comprised data from
+multiple different sources and tasks. First, we matched each image into one of the aspect ratios with
+the algorithm mentioned in 4.1. Then, we calculated the ratio between the longest dimension in our
+max-resolution to the longest dimension in the native resolution of the image. From the plot, we can
+see that 65% of the images in our training cohort are zoomed-in by at least 4x the native resolution.
+Table 7: Summary of the evaluation benchmarks for general domain.
+Task
+
+Dataset
+v2
+
+Description
+
+Split
+
+Metrics
+
+General VQA
+
+VQA
+ScienceQA
+VizWiz
+AI2D
+
+VQA on natural images.
+Multi-choice VQA on a diverse set of science topics.
+VQA on images taken by visually impaired users.
+VQA on diagrams and other artificial images.
+
+test-dev
+test
+test
+test
+
+Accuracy (↑)
+Accuracy (↑)
+Accuracy (↑)
+Accuracy (↑)
+
+Text-oriented VQA
+
+TextVQA
+ChartQA
+
+VQA on natural images containing text.
+VQA on various types of charts and graphs.
+
+val
+test
+
+Exact Match (↑)
+Accuracy (↑)
+
+LVLM Benchmarks
+
+MMBench
+MMBenchCN
+POPE
+MME
+
+Multi-choice VQA on a diverse set of topics.
+Multi-choice VQA on a diverse set of topics in Chinese.
+Multi-choice VQA for testing hallucinations.
+Multi-modal evaluation benchmark for general VQA abilities.
+
+test
+test
+overall
+test
+
+Accuracy (↑)
+Accuracy (↑)
+Accuracy (↑)
+Accuracy (↑)
+
+B
+
+B IOMEDICAL T RAINING DATA D ESCRIPTION
+
+Many public datasets were used in the training and evaluation of Dragonfly. All datasets were
+de-identified. Open datasets were used following their existing licenses.
+B.1
+
+LL AVA-M ED
+
+LLaVA-Med is a dataset for instruction-following tasks involving multi-round conversations about
+biomedical images, generated using the language-only model GPT-4 (Li et al. (2024a)). Specifically,
+the model is prompted to generate questions and answers in multi-round formats based on an image
+caption, as if it could view the image itself. To assemble the image captions and their contexts,
+LLaVA-Med utilizes PMC-15M (Zhang et al. (2023b)) to select images that contain a single plot.
+From these, it samples 60,000 image-text pairs from the five most prevalent imaging modalities:
+CXR (chest X-ray), CT (computed tomography), MRI (magnetic resonance imaging), histopathology,
+and gross pathology. The dataset also extracts sentences referencing the image from the original
+17
+
+Table 8: Selected hyperparameters for Stage 1 and Stage 2 training of Dragonfly.
+Hyperparameter
+Stage 1 Stage 2
+Batch Size
+Learning Rate
+LR Scheduler
+Warmup Steps Ratio
+Max Sequence Length
+Tune Projection Layer
+Tune Vision Encoder
+Tune LLM
+
+64
+2e-5
+cosine
+0.01
+4096
+✓
+×
+×
+
+16
+2e-6
+cosine
+0.01
+4096
+✓
+✓
+✓
+
+Table 9: Model architectures and data usage details for our model and baseline models.
+Model
+
+LLM Backbone
+
+Vision Base
+
+#Data
+
+Max res
+
+InstructBLIP (Dai et al., 2023)
+Qwen-VL-Chat (Bai et al., 2023)
+LLaVA-1.5 (Liu et al., 2024a)
+VILA (Lin et al., 2024)
+LLaVA-NeXT (Liu et al., 2024b)
+MM1-7B-Chat (McKinzie et al., 2024)
+mPLUG-Owl2 (Ye et al., 2024)
+Monkey (Li et al., 2024c)
+SPHINX (Lin et al., 2023)
+SPHINX-2k (Lin et al., 2023)
+ShareGPT4V-7B (Chen et al., 2023a)
+VisionLLM v2-chat (Wu et al., 2024)
+InternVL-7B (Chen et al., 2024b)
+
+Vicuna-7B
+Qwen-7B
+Vicuna-7B
+Llama2-7B
+Vicuna-7B
+MM1-7B
+Llama2-7B
+Qwen-7B
+Llama2-7B
+Llama2-7B
+Vicuna-7B
+Vicuna-7B
+Vicuna-7B
+
+CLIP-g/14
+CLIP-bigG
+CLIP-L/14
+CLIP-L/14
+CLIP-L/14
+CLIP-H
+CLIP-L/14
+CLIP-BigG
+Mixed Encoders
+Mixed Encoders
+CLIP-L/14
+CLIP-L/14
+InternViT-6B
+
+130M
+1.4B
+1.2M
+51M
+1.2M
+>2B
+401M
+1B
+1B
+1B
+1.8M
+22M
+>28.7B
+
+224×224
+448×448
+336×336
+364×364
+672×672
+378×378
+448×448
+896×1344
+448×448
+762×762
+336×336
+336×336
+224×224
+
+InstructBLIP (Dai et al., 2023)
+LLaVA-1.5 (Liu et al., 2024a)
+VILA (Lin et al., 2024)
+LLaVA-NeXT (Liu et al., 2024b)
+LLaVA-UHD (Xu et al., 2024)
+InternVL-13B (Chen et al., 2024b)
+CogVLM-17B-Chat (Wang et al., 2023a)
+
+Vicuna-13B
+Vicuna-13B
+Llama2-13B
+Vicuna-13B
+Vicuna-13B
+Vicuna-13B
+Vicuna-7B
+
+CLIP-g/14
+CLIP-L/14
+CLIP-L/14
+CLIP-L/14
+CLIP-L/14
+InternViT-6B
+EVA2-CLIP-E
+
+130M
+1.2M
+51M
+1.2M
+1.2M
+>28.7B
+>1.5B
+
+224×224
+336×336
+364×364
+672×672
+672×1008
+364×364
+490×490
+
+Dragonfly (Ours)
+
+Llama3-8B
+
+ViT-L/14
+
+2.9M
+
+2016×2016 or
+1008×4032
+
+PubMed articles to provide additional context to the captions. LLaVA-Med offers two primary
+versions of the dataset: (i) 60K-IM, which includes inline mentions as context, and (ii) 60K, a
+similar-sized dataset that excludes inline mentions in its self-instruct generations. Furthermore, a
+supplementary dataset of 500,000 image-caption pairs is available for alignment purposes. Data link:
+https://github.com/microsoft/LLaVA-Med
+B.2
+
+M EDICAT
+
+Medicat (Subramanian et al. (2020)) is a dataset of medical figures, captions, subfigures/subcaptions,
+and inline references that enables the study of these figures in context. It consists of 217,000
+images from 131,000 open-access PubMed Central and includes captions, inline references for 74%
+of figures, and manually annotated subfigures and subcaptions for a subset of figures. Data link:
+https://github.com/allenai/medicat.
+B.3
+
+MIMIC-III-CXR
+
+The MIMIC-III-CXR dataset (Johnson et al. (2019)) is a substantial publicly available collection of
+chest radiographs, containing 377,110 images derived from 227,827 imaging studies conducted at the
+Beth Israel Deaconess Medical Center from 2011 to 2016. Each image in the dataset is paired with
+18
+
+Table 10: Comparison between Dragonfly and existing LMMs across various benchmarks. Bold
+numbers indicate the best performance among all the 13B models, while underlined numbers represent
+the second-best performance.
+Model
+
+Backbone
+
+#Data
+
+VQAv2
+
+VQAT
+
+POPE
+
+SQA
+
+VizWiz
+
+AI2D
+
+ChartQA
+
+MME
+
+MMB/MMBCN
+
+InstructBLIP
+LLaVA-1.5
+VILA
+LLaVA-NeXT
+LLaVA-UHD
+InternVL-13B
+CogVLM-13B-Chat
+
+Vicuna-13B
+Vicuna-13B
+Llama2-13B
+Vicuna-13B
+Vicuna-13B
+Vicuna-13B
+Vicuna-7B
+
+130M
+1.2M
+51M
+1.2M
+1.2M
+6B
+>1.5B
+
+80.0
+80.8
+82.8
+81.7
+80.2
+82.3
+
+50.7
+61.3
+66.6
+67.1
+67.7
+58.7
+70.4
+
+78.9
+85.9
+84.2
+86.2
+89.1
+87.1
+87.9
+
+63.1
+71.6
+73.7
+73.6
+72.0
+70.1
+91.2
+
+33.4
+53.6
+60.6
+60.6
+56.1
+54.6
+-
+
+59.5
+70.0
+-
+
+18.2
+62.2
+-
+
+1212.8
+1531.3
+1570.1
+1575.0
+1535.0
+1546.9
+-
+
+66.9/63.6
+70.3/64.3
+70.0/64.4
+68.0/64.8
+66.5/61.9
+77.6/-
+
+Dragonfly (Ours)
+
+Llama3-8B
+
+2.9M
+
+81.0
+
+73.6
+
+87.9
+
+79.5
+
+59.0
+
+67.9
+
+71.2
+
+1538.1
+
+71.9/66.1
+
+structured labels extracted from free-text radiology reports. The dataset is organized into training,
+validation, and testing subsets, with 368,960 images allocated for training, 2,991 for validation, and
+5,159 for testing. To ensure patient confidentiality, all images have been de-identified. Data link:
+https://physionet.org/content/mimic-cxr-jpg/2.1.0/
+B.4
+
+O PENPATH
+
+OpenPath dataset is an expansive collection of 208,414 pathology image-text pairs, making it
+the largest publicly available pathology image dataset annotated with text descriptions (Huang
+et al. (2023a)). This dataset was meticulously curated using popular pathology-related hashtags
+recommended by the United States and Canadian Academy for Pathology (USCAP) and the Pathology
+Hashtag Ontology projects. It spans images gathered from Twitter and other internet sites, including
+the LAION dataset, collected between March 21, 2006, and November 15, 2022. The dataset consists
+of three main components: (1) Tweets, with 116,504 image-text pairs; (2) Replies, comprising 59,869
+pairs from highly liked responses; and (3) PathLAION, which adds 32,041 pairs from broader internet
+sources. Data link: https://github.com/PathologyFoundation/plip.
+B.5
+
+K AGGLE DR (D IABETIC R ETINOPATHY )
+
+The Kaggle website organized a DR detection challenge in 2015 Li et al. (2019). The California
+Healthcare Foundation sponsored the competition. The Kaggle DR dataset consists of 88,702 color
+fundus images, including 35,126 samples for training and 53,576 samples for testing. Different
+devices captured the images under various conditions (e.g., resolutions) at multiple primary care
+sites throughout California and elsewhere. For each subject, two images of the left and right eyes
+were collected with the same resolution. Clinicians rate each image for the presence of DR on
+a scale of 0–4 according to the ETDRS scale. Data link: https://www.kaggle.com/c/
+diabetic-retinopathy-detection.
+B.6
+
+DDR
+
+DDR is a diabetic retinopathy dataset (Li et al. (2019)) that comprises 13,673 color fundus images
+collected from 147 hospitals across 23 provinces in China between 2016 and 2018, ensuring a broad
+demographic spread by including images from patients aged 1 to 100, averaging 54.13 years, and
+almost evenly split between males (48.23%) and females (51.77%). These images, derived from
+9,598 patients and captured using 42 types of fundus cameras, adhere to stringent photographic
+standards to ensure clarity and appropriate exposure, focusing on crucial retinal structures and lesions.
+All images have been desensitized for widespread usage and graded for diabetic retinopathy (DR)
+severity by seven trained graders using the International Classification of Diabetic Retinopathy,
+supplemented by consensus and consultation with experienced specialists where necessary. Data link:
+https://github.com/nkicsl/DDR-dataset.
+B.7
+
+ROCO
+
+The Radiology Objects in Context (ROCO) dataset is a comprehensive collection of over 81,000 radiology images derived from PubMedCentral’s open-access biomedical literature (Pelka et al. (2018)).
+19
+
+The dataset focuses on analyzing visual elements and semantic relationships within radiological
+imagery. It includes a variety of medical imaging modalities such as Computer Tomography (CT),
+Ultrasound, X-ray, Fluoroscopy, Positron Emission Tomography (PET), Mammography, Magnetic
+Resonance Imaging (MRI), and Angiography. Each image is accompanied by detailed metadata,
+including captions, keywords, and identifiers from the Unified Medical Language System (UMLS).
+The ROCO dataset also features an out-of-class set of approximately 6,000 images, ranging from
+synthetic radiology figures to digital art, to aid in improving prediction and classification tasks.
+The dataset is split into training, validation, and test sets with 70,308, 8,782, and 8,786 images,
+respectively.
+B.8
+
+VQA-RAD
+
+The VQA-RAD dataset (Lau et al. (2018)) contains 314 radiology images and 2,244 questionanswer pairs obtained from CT, MRI, and X-ray examinations, covering three anatomical regions:
+the head, abdomen, and chest. It features a diverse range of question styles, categorized into
+11 types: modality, plane, organ system, abnormalities, etc. Among these, 58% of the questionanswer pairs are closed-ended (yes/no), with the remaining 42% being open-ended. The dataset
+is segmented into a training set of 1,790 QA pairs and a testing set of 451 QA pairs. Our model
+was trained on the official training set and evaluated on the official test set. Data link: https:
+//huggingface.co/datasets/flaviagiammarino/vqa-rad.
+B.9
+
+SLAKE
+
+The Slake-VQA dataset, annotated by expert physicians (Liu et al. (2021)), is a comprehensive
+bilingual (English and Chinese) VQA dataset. It includes 642 images and 14,028 question-answer
+pairs across three imaging modalities: CXR, CT, and MRI. This dataset spans various radiological
+areas, covering body regions such as the brain, neck, chest, abdomen, and pelvic cavity. It contains
+9,849 VQA samples designated for training, 2,109 for validation, and 2,070 for testing. The questions
+vary widely, featuring both open-ended (free-form) and closed-ended (yes/no) types that assess
+different image characteristics like plane, quality, position, organ, abnormality, size, color, shape,
+and pertinent medical knowledge. We utilized only the English-language examples from the official
+dataset divisions, comprising 4,919 training, 1,053 validation, and 1,061 test examples. Our model
+was trained on the official training set and evaluated on the official test set. Data link: https:
+//www.med-vqa.com/slake/
+B.10
+
+PATH -VQA
+
+This dataset comprises question-answer pairs relating to pathology images (He et al. (2020)). It
+encompasses a variety of question formats, including open-ended and closed-ended (yes/no) questions.
+The dataset is constructed through automated techniques and draws from two open-access pathology
+textbooks and a digital library. It encompasses a total of 32,632 question-answer pairs derived from
+4,289 images. The dataset is partitioned into official training, validation, and test subsets, containing
+19,654, 6,259, and 6,719 QA pairs, respectively. Our model was trained on the official training set and
+evaluated on the official test set. Data link: https://github.com/UCSD-AI4H/PathVQA/
+tree/master/data
+B.11
+
+IU X- RAY
+
+The IU X-ray dataset, detailed in Demner-Fushman et al. (2016), is available through the Open
+Access Biomedical Image Search Engine (OpenI). This collection includes radiological exams or
+cases, each associated with one or more images, a radiology report, and two sets of tags. The
+reports consist of four sections: Comparison, Indication, Findings, and Impression, with the latter
+two sections useful for image captioning. The dataset features two types of tags: MTI tags derived
+automatically from the report text by the Medical Text Indexer and manual tags assigned by two
+trained coders. Overall, it comprises 3,955 reports and 7,470 frontal and lateral X-ray images. The
+dataset is divided into 6,698 samples in the training set and 745 samples in the test set. Data link:
+https://github.com/nlpaueb/bioCaption
+20
+
+B.12
+
+P EIR G ROSS
+
+The Peir Gross dataset, initially utilized for captioning in research by Jing et al. (2017), features
+photographs from medical cases sourced from the Pathology Education Informational Resource
+(PEIR) digital library intended for educational purposes in pathology. This dataset includes 7,443
+images from the Gross collections across 21 pathology sub-categories in PEIR, with each image
+paired with a descriptive single-sentence caption. It is organized into two subsets: 5,172 images for
+training and 1,289 for testing. Data link: https://github.com/nlpaueb/bioCaption
+
+C
+
+B IOMEDICAL B ENCHMARKS
+
+The details of our evaluation benchmarks are discussed in Section B. A benchmark summary table is
+also included in 11.
+Table 11: Summary of the biomedical evaluation benchmark, which includes vision question answering, image captioning, and report generation across radiology and pathology modalities. We
+finetuned the model using a subset of the official training set and evaluated it on the official testing
+set. It should be noted that for MIMIC-CXR and ROCO, we utilized only a portion of the training
+dataset. Furthermore, for MIMIC-CXR, we selected only those subsets of the test set, including a
+findings section.
+Task Type
+Modality
+Dataset
+Split
+Train
+
+Test
+
+Visual Question
+Answering
+
+Radiology
+Radiology
+Pathology
+
+VQA-RAD
+Slake-VQA
+Path-VQA
+
+1,790
+4,919
+19,654
+
+451
+1,053
+6,719
+
+Report Generation
+
+Chest X-ray
+
+MIMIC-CXR
+
+25,000
+
+3,513
+
+Radiology
+Radiology
+Pathology
+
+ROCO
+IU X-RAY
+Peir Gross
+
+25,000
+6,698
+5,172
+
+8,786
+745
+1,289
+
+Image Captioning
+
+Table 12: Selected hyperparameters for Stage 1 and Stage 2 training of Dragonfly-Med.
+Hyperparameter
+Stage 1 Stage 2
+Batch Size
+Learning Rate
+LR Scheduler
+Warmup Steps Ratio
+Max Sequence Length
+Tune Projection Layer
+Tune Vision Encoder
+Tune LLM
+
+21
+
+64
+2e-5
+cosine
+0.01
+4096
+✓
+✓
+×
+
+16
+2e-6
+cosine
+0.01
+4096
+✓
+✓
+✓
+
+

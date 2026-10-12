@@ -1,0 +1,1062 @@
+Termite Retinex: a new implementation based on a colony of intelligent agents
+Gabriele Simone, Giuseppe Audino, Ivar Farup, Fritz Albregtsen, Alessandro Rizzi (2014). Journal of Electronic Imaging. https://doi.org/10.1117/1.jei.23.1.013006. doi:10.1117/1.jei.23.1.013006. Licence: cc-by. Text from pdf.
+
+Termite Retinex: a new
+implementation based on a colony of
+intelligent agents
+Gabriele Simone
+Giuseppe Audino
+Ivar Farup
+Fritz Albregtsen
+Alessandro Rizzi
+
+Journal of Electronic Imaging 23(1), 013006 (Jan–Feb 2014)
+
+Termite Retinex: a new implementation based on
+a colony of intelligent agents
+Gabriele Simone,a,* Giuseppe Audino,b Ivar Farup,a Fritz Albregtsen,c and Alessandro Rizzib
+
+a
+Gjøvik University College, Faculty of Computer Science and Media Technology, The Norwegian Colour and Visual Computing Laboratory,
+P.O. Box 191, N-2802 Gjøvik, Norway
+b
+Universitá degli Studi di Milano, Dipartimento di Informatica e Comunicazione, I-20135 Milano, Italy
+c
+University of Oslo, Department of Informatics, P.O. Box 1080 Blindern, N-0316 Oslo, Norway
+
+Abstract. The original presentation of Retinex, a spatial color correction and image enhancement algorithm
+modeling the human vision system, as proposed by Land and McCann in 1964, uses paths to explore the
+image in search of a local reference white point. The interesting results of this algorithm have led to the development of many versions of Retinex. They follow the same principle but differ in the way they explore the image,
+with, for example, random paths, random samples, convolution masks, and variational formulations. We propose
+an alternative way to explore local properties of Retinex, replacing random paths by traces of a specialized
+swarm of termites. In presenting the spatial characteristics of the proposed method, we discuss differences
+in path exploration with other Retinex implementations. Experiments, results, and comparisons are presented
+to test the efficacy of the proposed Retinex implementation. © The Authors. Published by SPIE under a Creative Commons
+Attribution 3.0 Unported License. Distribution or reproduction of this work in whole or in part requires full attribution of the original
+publication, including its DOI. [DOI: 10.1117/1.JEI.23.1.013006]
+Keywords: Retinex; ant colony system; spatial color algorithm; image enhancement.
+Paper 12537P received Dec. 22, 2012; revised manuscript received Nov. 28, 2013; accepted for publication Dec. 11, 2013; published
+online Jan. 17, 2014.
+
+1 Introduction
+During the past decades a significant amount of research has
+been undertaken to understand human visual perception,
+which is not a trivial task as the human visual system
+(HVS) has complex and robust mechanisms to acquire useful
+information from the environment. In particular, the color
+appearance of an area is influenced by the chromatic content
+of the other areas of the scene. This psychophysiological
+phenomenon is referred to as locality of color perception.
+In order to deal with this locality in image appearance,
+different image processing methods and frameworks have
+been developed with the intent to exhibit behaviors similar
+to the HVS, such as Automatic Color Equalization (ACE),1
+Spatio-Temporal Retinex-inspired (STRESS),2 image Color
+Appearance Model (iCAM), and its evolutions,3,4 and the
+various Retinex implementations, which are the interest of
+this work.
+The original Retinex model of lightness and color perception was proposed by Land and McCann about 50 years
+ago.5,6 In the light of current developments, there has
+been a renewed interest in color appearance.7,8 The principal
+assumption of the Retinex theory is that the sensation of
+color comes from a comparison among the various areas in
+the scene. In this comparison performed separately on each
+of the three color channels, a series of ratios and products
+among the various parts of the image are computed to calculate each pixel appearance. In this way, the appearance of
+each pixel depends on what surrounds the pixel; therefore,
+pixels of the same value can trigger different sensations.
+This locality of perception is achieved, in the original
+*Address all correspondence to: Gabriele Simone, E-mail: gabriele.simone@
+hig.no
+
+Journal of Electronic Imaging
+
+proposal from Land and McCann, by long paths scanning
+across the image, accounting for pixel ratio computation in
+each chromatic channel. The details of the ratio-productreset Retinex algorithm will be presented later in the paper.
+Different implementations and analysis have been developed since this first work, and these can be divided into three
+major groups, which differ in the way they achieve locality.
+The first group explores the image using paths or extracting
+random pixels around the pixel of interest or computing
+ratios with neighbors in a multilevel framework.9–11 The second group instead computes values over the image with convolution masks or weighting distances.12,13 The third group
+uses differential mathematical techniques based on Poissontype equations and variational approaches (e.g., Refs. 14, 15,
+16 and 17).
+Recent implementations constructed to investigate the
+effects of different spatial samplings replace paths with random sprays, for example, two-dimensional point distributions across the image, hence the name Random Spray
+Retinex (RSR).18 All these algorithms require a high density
+of samples in order to lower the amount of noise, but they
+never sample the whole image in order to keep the local
+effect. Furthermore, the number of sampling points that are
+needed increases drastically and consequently also the computational time, when increasing the size of the image.
+In this work we start from the random path approach
+of the first group. In particular, we focus on the Brownian
+motion models.10,19 Here, the idea of the paths is implemented
+using a swarm intelligence model. Swarm intelligence can
+be considered a branch of artificial intelligence techniques
+dealing with the modeling of the collective behavior of
+simple agents interacting with the environment and among
+themselves. These models, in general physically or biologically inspired, provide metaheuristics for a wide set of
+
+013006-1
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+combinatorial optimization problems. There are several
+families of swarm intelligence, and among them is the ant
+colony system (ACS),20 upon which we base our work.
+The first studies on the development of artificial ants date
+back to the 1990s and is based on the work of Dorigo et al.20
+The idea is derived from the behavior of real ants foraging
+for food. In this context, the objective is to understand how
+almost blind animals, such as ants, can manage to establish
+the shortest path routes from their colony to feeding sources
+and back. Biological studies have shown that social insects
+coordinate their activities via stigmergy, a form of indirect
+communication mediated by modifications of the environment. In the case of ants, the communication among individuals, or between individuals and the environment, is based on
+the production of a chemical substance called pheromone.
+Inspired by these behavioral properties of the ants, Dorigo
+et al. developed the so-called ACS for solving computational
+problems. Today their pioneering work has been diversified
+to solve a wider class of numerical problems.21
+In this work, we propose a new implementation of
+Retinex, following the approach of the first group, in particular substituting the Brownian paths with a so-called termite
+colony exploration of the image, a diversified and tuned
+model for image processing derived from the ACS for traveling salesman problem (TSP). In daily life, termites are also
+known as white ants, and as this model attempts an eager
+exploration in search of the local reference white, we have
+called our algorithm Termite Retinex (TR).
+The rest of this paper is organized as follows. Section 2
+briefly describes the ACS system, followed by our proposal
+TR in Sec. 3. Section 4 presents the method of evaluation,
+and next, the results are presented and discussed in Sec. 6.
+Finally, in Sec. 7, conclusions are drawn.
+2 Ant Colony System Model
+The basic motivation of the presented work is to implement
+an alternative way to explore the image, driven by mechanisms different from simple randomness. To this aim, we
+have chosen a swarm intelligence method. Many of them can
+be suitable for this purpose; however, in this paper, we are
+more interested in testing if this approach can be successful
+rather than choosing the best swarm intelligence method.
+For this reason, we have chosen the ACS since it is one of
+the first and for its simplicity.
+The following is a brief introduction to the first ACS
+model proposed by Dorigo et al.20 and the TSP since this
+is relevant for our proposal. The TSP is an NP-hard problem
+in combinatorial optimization and theoretical computer science, where given a list of cities and their pairwise distances,
+the task is to find the shortest possible tour that visits each
+city exactly once. ACS has been shown to be able to converge to the optimal solution of instances of this problem
+with short computational time, when cities are on a plane,
+and a path (edge) exists between each pair of cities (i.e.,
+the TSP graph is completely connected).22
+Three ideas from natural ant behavior are transferred to
+the artificial ant colony.
+
+An artificial ant k in city r chooses the city s to move to
+among those that do not belong to its working memory M k
+by applying the following probabilistic formula:23
+8
+α
+β
+< Pðτr;s Þ ðηαr;s Þ β if s ∈
+= Mk
+ðτr;u Þ ðηr;u Þ
+;
+(1)
+pk ðr; sÞ ¼ u∈=Mk
+:
+0
+otherwise
+where τr;u is the amount of pheromone trail on edge ðr; uÞ,
+ηr;u is a heuristic function called visibility, which is the
+inverse of the distance between cities r and u, and α and
+β are parameters that allow a user to control the importance
+of the trail versus the visibility. The memory Mk is the tabu
+list of the k’th ant, which contains the cities that it has already
+visited. City s is inserted in the list when the ant transits from
+city r to city s. The choice criteria of the parameters α and β
+can differ widely according to the problem for which the ACS
+is used. A guideline on how to choose the values of the different parameters for the TSP problem can be found in Ref. 22.
+3 Termite Retinex
+The original Retinex model developed by Land and
+McCann5,6 is based on computing the relative channel lightness (L) at a point i as the mean value of the relative channel
+lightnesses (l) computed along N random paths from point j
+to the point i (Fig. 1).
+PN i;j
+l
+i
+(2)
+L ¼ h¼1 h ;
+N
+where
+li;j
+h ¼
+
+x¼j
+
+
+δ log
+
+
+I xþ1∈path
+;
+I x∈path
+
+(3)
+
+where I x is the lightness intensity of the pixel x, I xþ1 is the
+lightness intensity of the pixel x þ 1, h is indicating the path,
+and δ represents a threshold mechanism.
+8
+ 
+
+
+
+I
+>
+< 1 if  log xþ1∈path
+I x∈path  > Threshold
+ 
+
+δ¼
+:
+(4)
+>
+: 0 if  log I xþ1∈path  ≤ Threshold
+I x∈path
+The threshold mechanism helps to discount slow varying
+gradients; however, it has been proven that the algorithm
+maintains its fundamental properties even without it.24
+During the computation of l along the path h, the value
+
+1. The preference for paths with a high pheromone level,
+2. The higher rate of growth of the amount of pheromone
+on shorter paths,
+3. The trail mediated communication among ants.
+Journal of Electronic Imaging
+
+i
+X
+
+013006-2
+
+Fig. 1 N random paths from point j to the point i.
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+of l can become positive. In terms of image, this means that a
+lighter area is found. In this case, a reset mechanism triggers,
+forcing the relative lightness to the unitary value, making the
+average computation restart from this area.
+The reset mechanism forces to restart the chain of ratios
+(sum of logs) from the point of reset by considering the lightness value found at the reset point as the new local reference
+white. The point i can be either along the path, like in the
+original Retinex, or always at the end of the path, like in the
+Milano (MI)-Retinex family. This difference is discussed in
+Ref. 8. We have chosen to implement the Termites using the
+MI-Retinex approach. This results in higher computational
+costs but is an easier way to test and control the Termite
+swarm and the overall behavior.
+A Brownian motion method is used to generate these
+paths,10,19 which has been extensively studied from a theoretical point of view. Brainard and Wandell25 described them
+formally using stochastic methods: for a large number of
+very long paths, the method converges; for infinitely long
+paths, the image tends to the original image globally normalized by its channel maximum values. This limit behavior has
+no interest since it loses the local behavior. Brownian paths
+work efficiently for a path-based Retinex (Fig. 2), but the
+approach has some drawbacks. Its computational complexity
+is low, OðN log NÞ, where N is the number of pixels,
+but processing a whole image requires a large amount of
+memory. Thus, performing as many visits as desirable for
+each pixel becomes unfeasible when the image is too large.
+When attempting to model the human vision system, an
+important characteristic to consider is the locality of the visual sensation.8,26 The way the image is explored affects
+the influence that the surrounding pixels have on the final
+estimate of the visual sensation. The main objective of the
+use of a colony of termites is to model a novel method
+by which the image content is explored, and thus the locality
+of perception, with an alternative mechanism. As consequence, a new set of parameters is created to describe and
+investigate the local behavior of Retinex.
+In order to create TR, ACS requires some modifications,
+which comprises the following assumptions and constraints:
+1. Pixels are considered as cities: a termite can choose to
+move only to one of the eight neighboring pixels (no
+jumps). Exploring larger neighborhoods and allowing
+
+the termite to jump might lead to not discovering
+the proper reference white.
+2. The choice of a pixel is based on its distance and intensity value: the visibility η is substituted with the bilateral distance c as defined below, which we will refer to
+as closeness.
+3. There is a higher preference for paths with a low poison, as we want divergence, in order to explore different areas of the image: the poison is the inverse to the
+amount of pheromone: θ ¼ 1∕τ, which acts as a repulsion force, inverse of the attraction force, pheromone
+in ACS.
+So in our modified model, an artificial termite k in pixel r
+chooses to move to the pixel s among those that belong to the
+eight-neighborhood N 8 and that do not currently belong to its
+working memory Mk by applying the following probabilistic
+formula:
+8
+α
+β
+Pðθs Þ ðcr;s Þα
+<
+if s ∈
+= Mk and s ∈ N 8
+ðθu Þ ðcr;u Þβ
+pk ðr; sÞ ¼ u∈=Mk and u∈N8
+;
+:
+0
+otherwise
+(5)
+where θu is the amount of poison on pixel u, cr;u is the bilateral distance between pixels r and u, and α and β are parameters weighting the importance of the poison versus the
+closeness, which is directly related to the brightness of the
+pixel. In that case, all the surrounding pixels have the same
+probability, one pixel is drawn randomly with uniform probability. In our model, the memory Mk is the tabu list of
+the k’th termite, which contains the coordinates of the pixels
+that the termite has already visited. This list is updated by
+inserting the coordinates of pixel s when the termite transits
+from pixel r to pixel s. Reminding that the poison is the
+inverse of the amount of pheromone, once a termite has
+transited on pixel u, the quantity of poison on pixel u is
+updated as follows:
+τu ¼ τu þ Q;
+
+(6)
+
+1
+;
+τu
+
+(7)
+
+θu ¼
+
+Fig. 2 Traditional Brownian motion investigation on the left, pseudo-Brownian motion investigation proposed by Montagna and Finlayson19 on the right. Images provided with courtesy by Montagna and
+Finlayson.19
+
+Journal of Electronic Imaging
+
+013006-3
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+where Q is a chosen amount of poison, according to how
+strong a divergence is desired. As in Retinex model, each
+pixel is treated independently; after processing a pixel, the
+amount of poison at all pixels must be reset to the initial
+value of 1 before starting to process a new pixel.
+We underline that Eq. (5) uses the same convex combination as Eq. (1) but with a different leading principle:
+a trade-off between the brightness of a pixel to choose and
+the quantity of poison found on the pixel. In the case of high
+values of β, a pixel is chosen, even if already visited by
+another termite. On the contrary, high values of α force
+a termite to choose another direction.
+The bilateral distance cr;u is defined as follows:
+cr;u ¼
+de ¼
+
+de þ dv
+pﬃﬃﬃ ;
+2
+
+(8)
+
+qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+ðxr − xu Þ2 þ ðyr − yu Þ2 ;
+
+dv ¼ jIðxr ; yr Þ − Iðxu ; yu Þj;
+
+(9)
+
+simple distance based only in intensity values [Eq. (10)].
+An example is shown Fig. 3. This phenomenon of preference
+for the diagonal pixel gradually disappears with a high number of termites and with the participation of the poison.
+4 Algorithm Characteristics
+4.1 Parameters Tuning
+In the TSP problem, all the metaheuristics attempt to find
+the optimal solution. In the field of spatial color algorithms
+(SCAs),26 the optimal solution depends on the task of the
+algorithm. In the work that we are presenting, the goal of
+the filtering is a qualitative emulation of the HVS for an
+unsupervised image enhancement.
+TR is a novel method to explore the image content alternative to Brownian randomness. Tuning the TR parameters
+properly can make the termites’ paths similar to Brownian
+method; however, regarding this similarity, we would like
+to highlight two important points.
+1. TR is an MI-Retinex implementation that differs from
+the original Retinex and also from the version by
+Montagna and Finlayson19 and does not need to travel
+across the whole set of pixels in the image.
+2. The poison is a feature that prevents the paths from
+a complete randomness since it affects locality and
+can be used as a tuning parameter in order to obtain
+different spatial effects.
+
+(10)
+
+where de and dv are the distance in coordinates and in intensity values, respectively, I is the image channel, and ðx; yÞ
+are the coordinates of the pixels.
+The use of the bilateral distance is known to be a suitable
+tool for edge-preserving.27 In our model, it is possible to
+notice from Eq. (8) that when a termite has to choose
+among eight neighboring pixels with same intensity values,
+the preference goes to one of the four diagonal pixels with
+respect to the vertical and horizontal ones. This scheme is
+motivated and justified by the fact that the presence of
+halos are reduced in the final image with respect to the
+
+In the case of TR, choosing the number of termites and
+the length of their path is a trade-off between the computational cost of the algorithm and the locality of the filtering.
+Introducing too many termites and paths that are too long
+
+Fig. 3 Original on the top, halos appearing using only the simple distance on intensity values in the
+bottom-left, using bilateral distance in the bottom-right.
+
+Journal of Electronic Imaging
+
+013006-4
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+may lead to a higher computational cost. Moreover, as we are
+interested in finding a local reference white and not the
+global white of the image, a termite should never touch
+all the pixels of the image. On the other side, paths that
+are too short can be a constraint on the locality, and too
+few termites due to insufficient image sampling can lead
+to a high chromatic noise. Examples of results using different
+spatial investigations are shown in Figs. 4 and 5. In general, a
+large number of termites traveling for a long path (number of
+pixels N s ) is needed in order to investigate a wide neighborhood for searching the local reference white. In the examples
+of Figs. 4 and 5, it can be noticed that overincreasing k · Ns
+results in a loss of the local effect, as evidenced by the light
+background in the details bottom right that is darker than
+the one above and the one on the left, both with a lower
+sampling.
+The poison θ and the weight α, which control the divergence of the swarm, are also essential for investigation: low
+values of θ strongly enforce termites to choose different
+directions from each other, while high values of θ make termites converge. An example of the behavior of the swarm
+with different values of α and β with constant quantity of
+poison Q ¼ 1 is shown in Fig. 6, while an example of
+
+constant values of α and β and increasing quantity of poison
+Q in steps of a factor of 10 from 10−4 to 1 is shown in Fig. 7.
+A preliminary test among few people was run just too
+quickly preset the Q value. The presence versus the absence
+of halos was the chosen criterion that led to the use of value
+1. In fact, in Fig. 7, it is easy to notice that low values of Q
+introduce halos in the filtered image.
+A rule of thumb derived from a small sampling from a
+previous investigation suggests that N s ≈ 70% of the length
+of the diagonal of the image results in a good score in observers’ image quality preferences.28,29 Regarding α, β, and Q,
+the suggested starting values are 0.1, 0.9, and 1, respectively.
+We underline to the reader that the parameters α, β, and Q do
+not change during pixel recomputation; they are kept constant for the whole processing of the image.
+As a result of more comprehensive set of experiments, we
+can confirm this rule of thumb as a starting value for the
+parameter setting. Since the choice of parameters is affected
+by the image content, a finer tuning could be necessary. We
+remind that these settings mean that the poison θ has very
+low importance, while the closeness c has very high importance. This causes a termite to simply choose a pixel based
+on its closeness even if it has been previously visited by
+another termite, resulting in a milder change in contrast.
+
+Fig. 4 Results obtained on varying the number of termites k and path
+length N s . The different configurations lead to a loss of details in some
+cases and in an increase of noise in others.
+
+Journal of Electronic Imaging
+
+013006-5
+
+Fig. 5 Details of Fig. 4.
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+Fig. 6 Termite investigation with two different configurations of α and
+β and quantity of poison Q ¼ 1. The path of each termite is distinguished by a different color. A high value of α and a low value of β
+make the termite swarm to explore a wide area of the image as
+shown in the bottom-left, while a low value of α and a high value of
+β make the termite swarm to explore a smaller area of the image as
+shown in the bottom-right.
+
+These tests, presented in the following section, will allow
+us to rewrite Eqs. (5) and (6) as follows:
+8
+ðθs Þ0.1 ðcr;s Þ0.9
+<P
+if s ∈ N 8
+α
+β
+pk ðr; sÞ ¼ u∈N8 ðθu Þ ðcr;u Þ
+;
+(11)
+:
+0
+otherwise
+τu ¼ τu þ 1;
+
+(12)
+
+1
+:
+τu
+
+(13)
+
+θu ¼
+
+We highlight that Eq. (5) becomes simplified as the
+memory Mk is no longer applied in Eq. (11), allowing
+the termite to revisit a pixel.
+
+4.2 Computational Complexity
+The computational complexity of the original ACS proposed
+by Dorigo et al.20 is OðNC · n3 Þ, where NC is the number of
+ant cycles and n is the number of cities in an instance of the
+TSP problem. Despite its higher computational complexity,
+the ACS reaches the optimal solution of the TSP problem in
+a shorter computational time than other heuristics.30 In our
+case, the ant cycle is not necessary because we do not need
+to converge to an optimal solution, and furthermore, at each
+pixel recomputation, each termite does not have to touch all
+the pixels. As a consequence, the computational complexity
+of the Termite Retinex is given by
+Oðk · N s · nÞ;
+
+(14)
+
+where k is the number of termites, N s is the number of pixels
+(length of the path) visited by a termite, and n in this case is
+the number of pixels in the image. The TR follows the same
+computational complexity of other SCAs, such as RSR18
+or STRESS,2 which have a computational complexity of
+OðN · M · nÞ, where N is the number of iterations, M is
+Journal of Electronic Imaging
+
+Fig. 7 Original on the top followed by termites with α ¼ 0.1, β ¼ 0.9
+and increasing quantity of poison Q.
+
+the number of samples, and n is the number of pixels in
+the image.
+As each pixel recomputation is independent from each
+other, and termites can be seen as autonomous coworkers,
+TR has been implemented in compute unified device architecture (CUDA) to exploit parallel computing on GPU.
+This leads to a gain in speed of approximately a factor of
+60 with respect to a CPU-based implementation. The performances have been tested on Intel i3-2310M with 4.0 GB of
+RAM, Windows 7 64 bit and a GeForce GT 540M as GPU.
+With this configuration, which is just an entry-level configuration for home use, whose performances are very different
+from a typical high-level laboratory configuration,31 TR
+takes ∼7 min to process a 512 × 512 image with the rule of
+thumb mentioned above.
+5 TR and Color Constancy
+The scientific discussion about color constancy (CC) started
+in the late 19th century with the study of the appearances of
+objects in different illuminations. In 1872, Hering wrote:
+“The approximate constancy of the colors of seen objects,
+in spite of large quantitative or qualitative changes of the
+general illumination of the visual field, is one of the most
+noteworthy and most important facts in the field of physiological optics. Without this approximate constancy, a piece
+of chalk on a cloudy day would manifest the same color as
+a piece of coal does on a sunny day, and in the course of
+a single day it would have to assume all possible colors that
+lie between black and white.”32 As it can be noticed from this
+quote, the relation between the physics of light and the visual
+appearance it produces has a long scientific history.
+In digital imaging literature, two main different
+approaches to CC can be found according to their goal in
+modeling this phenomenon: computer vision CC (in some
+scholar work referred as computational CC, but we prefer
+to refer it as CV CC since both CCs have computational
+aspects) and human vision CC (HV CC). They have distinct
+goals, different kind of outcomes are expected, and different
+measures of performance are required.
+CV CC has the goal of separating illuminant from reflectance or alternatively estimating the physical reflectance of
+objects in different illuminants, or alternatively estimating the
+
+013006-6
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+illuminant spectral or colorimetric component. Separating
+reflectance from the illuminant in the color signal (reflectance illumination) is a well-known ill-posed problem;33,34
+thus these algorithms need constraints or assumptions on
+the scene content, illumination, or geometry. In the case of
+reflectance estimation, the measurement of the error could
+be the difference at each wavelength between the actual measured surface reflectance and the estimated one, but this
+is not practical and dependent on the devices involved.
+Thus, the scaled integrated reflectance or its chromatic coordinates is often used. As well, in the case of illuminant estimation, the correlated color temperature or its chromatic
+coordinates is used. In any case, CV CC aims to totally cancel the interaction between reflectance and illumination.
+For a detailed overview on CV CC, the reader can refer to
+Ref. 35.
+In HV CC, illuminant component is not totally canceled;
+it generates appearances that are close to reflectance, but
+show significant departures from reflectance. These departures serve as important signatures of the underlying visual
+mechanisms.8 Algorithms belonging to the Retinex family,
+and thus TR, share this approach and attempt to mimic the
+response of human vision.
+These two approaches to CC start from the same scientific
+history and have common points and differences. Both
+Fig. 9 Original in the middle, that processed by TR on the right, and
+that processed by RSR on the left.
+
+Fig. 8 Original in the middle, that processed by Termite Retinex (TR)
+on the right, and that processed by Random Spray Retinex (RSR) on
+the left.
+
+Journal of Electronic Imaging
+
+Fig. 10 Different details of Fig. 6. Original in the middle, that processed by TR on the right, and that processed by RSR on the left.
+
+013006-7
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+Fig. 11 First experiment results: observers overall preference of TR with respect to its original on the nine
+tested images.
+
+approaches introduce a sort of normalization with regard to the
+illuminant but can differ in the estimated pixel output according to the use of spatial arrangement of the scene. CV CC aims
+at computing reflectance and HV CC aims at computing
+appearance. These two different outputs are sometimes considered identical. This comes from early experiments that
+proved that appearance correlates with scaled integrated
+reflectance,36 but this has been found to hold true only for
+flat surfaces in uniform illumination.37,38 There are many
+examples in which human appearance does not correlate
+
+with reflectance.39 The simplest example is simultaneous contrast: HV CC reports different appearance of grays on white
+and black surrounds, while CV CC has to report these grays
+as identical.8 For many years, these two variables, reflectance
+and appearance, have been treated as a unique correlated feature. This has been the incorrect assumption in many cases of
+weak differentiation between CV CC and HV CC. Moreover,
+considering these two approaches as similar has led to simplified assumption about vision, in some cases useful for CV CC,
+but unrealistic for HV CC.
+
+Fig. 12 Second experiment results of the first round: observers overall preference of TR with respect to
+RSR on the nine tested images.
+
+Journal of Electronic Imaging
+
+013006-8
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+Fig. 13 Second experiment results of the second round: observers preference in terms of perceived
+noise of TR and RSR on the nine tested images.
+
+The first HV CC algorithm has been Retinex by Land and
+McCann.5 In the original Retinex algorithm and in all its
+derived versions, the spatial locality of the filtering is dependent on the image content and on the way the image is
+explored. As presented in the above sections, TR can be
+regarded as a tool to investigate locality.
+In 1983, Land retired as Polaroid Chairman of the Board
+and presented the first departure from the original Retinex
+model. He simplified the algorithm and lost some of its most
+powerful properties. In these latter papers, Land describes
+two versions: the first was the same as Land and McCann6
+but without the reset40 and the second calculates a designator8 driven by the average pixel values.41 The first used
+a series of paths that began in the surround and traveled to
+a central pixel of interest. Since each path did not reset, it
+used the average of pixel values as a way of normalizing
+the output to the maxima in each waveband. Thus, the
+calculation became a Gray World comparison, instead of
+the White Patch behavior of the original Retinex. The paper
+discussed calculating color appearances found in a flat color
+Mondrian uniformly illuminated. The designator of the 1986
+paper calculates the ratio of a central area to an extended
+fixed surround. This meant that the threshold operation was
+replaced by averaging over a large area, and the Gray World
+average in 1983 was replaced with local-average dependence
+in 1986. Land emphasized that the designator was still the
+three-channel Retinex model of color.
+These two variants were easier to formalize and consequently simpler to implement; this gave rise to a renewed
+interest about Retinex, starting from the 1997 work from
+NASA.42 Following Land 1986 and the derived NASA implementation, this local averaging approach has had a good success, obtaining interesting color normalization results, mainly
+without dealing with the problem of visual appearance.
+HV CC can be of inspiration for CV CC algorithms, such
+as Ebner’s work.43 This relevant work in the field of CV CC
+starts with a clear differentiation between the two kinds of
+Journal of Electronic Imaging
+
+CC, while at the same time presenting some similar features.
+It is based on local space averaging as Land designator, and
+it addresses the problem of high computational cost with
+a parallel implementation. Parallel and multilevel implementations are useful ways to get closer to the amazing efficiency of the human vision system. It also differs from the
+classic CV CC evaluation methods presented above since it
+uses an object recognition task, a method also used in similar
+applications of HV CC algorithms.44
+Qualitative and quantitative measurements of how accurately HV CC algorithms are able to predict the HVS visual
+appearance should be the metric for HV CC algorithms.26
+For a correct quantitative evaluation, any model of vision
+has strict requirements concerning calibration of input information; however, calibrating the input image is a delicate
+process that cannot be done with generic images acquired
+in unknown conditions. Thus, in many cases, these algorithms
+are used as image enhancers. Among the many image
+enhancers available in the literature, the algorithms like
+TR, inspired by the original Retinex and MI-Retinex models,
+have some interesting properties. Basically, they behave as
+edge enhancer and gradient suppressors, whose intensities
+
+013006-9
+
+Fig. 14 An example of unsupervised color correction.
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+Fig. 15 An example of unsupervised dynamic range stretching.
+
+and localities depend on the chosen parameters. Regarding
+these algorithms being used as image enhancers, tests have
+proven that a filtering that goes qualitatively in the direction
+of the human visual appearance in the major part of the
+cases increases the user preferences.45–47 For this reason and
+since we present TR as an alternative formalization of RSR
+and other MI-Retinex implementations, we have tested TR
+performances as described in the following section.
+6 Test Results and Discussion
+6.1 Experiments
+Since the perceived quality of two images and the perception
+of single attributes, such as contrast or noise, are not influenced by the environment in which they are observed,48,49
+
+two experiments in uncontrolled environments with human
+observers were performed in order to evaluate the quality of
+TR. A set of nine images displayed in an sRGB color space,
+chosen following the recommendations from Refs. 50 and
+51, were evaluated in a pairwise comparison for both experiments, on a neutral gray background by a total of 20 observers. All the participants were recruited from the computer
+science field with most of them having knowledge of image
+processing.
+In the first experiment, each image was processed using
+TR and was compared to its original. Observers were asked
+to choose one of the images based on their overall preference. No indications of any image quality attribute were
+given to the participants.52 Most of the participants of this
+first experiment also performed the second experiment.
+
+Fig. 16 Examples of unsupervised tone rendering of famous high-dynamic-range images.56 (a)
+Memorial, (b) Duomo, (c) Vancouver Building, (d) Convention center.
+
+Journal of Electronic Imaging
+
+013006-10
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+Fig. 17 An example of path of one termite with memory active on
+the left and memory disabled on the right. In green the pixels that
+the termite have revisited. A continuous loop visit between only
+two pixels is prevented by the poison update.
+
+In the second experiment, each image processed using TR
+was compared to the same image processed using RSR. In
+the first task, the observers were asked to choose the image
+according to their overall preference, while in the second
+task, they were asked to choose the image according to
+their preference only in terms of perceived noise. All the participants for this second experiment performed both the first
+and second tasks. This second experiment was designed with
+the purpose of evaluating the path-based sampling mechanism of TR against a spray-based one such as RSR.
+Figures 8 and 9 show the nine original images in the
+middle, the corresponding processed by TR on the right, and
+the corresponding processed by RSR on the left. Figure 10
+shows different details of Fig. 6. Figure 11 shows the preference of the 20 observers on the tested images for the first
+experiment. It can be noticed that TR succeeds on all the
+images, with three of them having a preference equal to
+100%. A sign-test at 95% confidence interval shows that TR
+is significantly better than the original. The sign-test is
+
+a nonparametric statistical test that is a useful alternative to
+the familiar two-sample t-test in the case where the data do
+not follow the normal distribution.
+Figure 12 shows the overall preference of the 20 observers
+in the second experiment, where TR was compared to RSR.
+TR is preferred for all the nine tested images. Figure 13
+shows the preference in terms of perceived noise of the
+20 observers for TR and RSR. TR is able to render less
+noisy scenes for all the images with respect to RSR except
+for Fig. 2, where the preferences are tied. A sign-test at 95%
+confidence interval shows that TR is significantly better than
+RSR. Furthermore, the same test shows that TR is able to
+process images with higher quality and less noise with
+respect to RSR. In conclusion, from these tests, we can suggest TR as new effective version of path-based Retinex with
+the particular novelty of swarm intelligence behavior.
+6.2 Properties of TR
+Retinex is a white patch algorithm8 and TR follows the same
+behavior. The brighter areas in the image are mapped toward
+white, and this is performed locally in a way that is edgepreserving. Furthermore, like other SCAs,26 TR tends to
+produce images whose histograms are flatter than those of
+the originals. It also performs automatic color correction
+(Fig. 14) and dynamic range maximization if starting from
+a low dynamic range image (Fig. 15). In case of high
+dynamic range images, like other SCAs, TR can be used
+directly as a local tone-rendering operator. Examples are
+shown in Fig. 16.
+6.3 Implementation Issues
+As mentioned in Sec. 4.2, TR has been implemented in
+CUDA, like it has been done for other SCAs. In this
+
+Fig. 18 On the top, results of TR on Fig. 4 with memory active and disabled, respectively. On the bottom,
+the difference map calculated using the Euclidean color difference formula for small-medium color
+differences in log-compressed OSA-UCS space (ΔE E ).53,54 ΔE E reports highest color differences
+around 4.0, which in terms of image differences are perceptual, but acceptable differences.55
+
+Journal of Electronic Imaging
+
+013006-11
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+
+case, another interesting issue to consider is the memory M k,
+which affects if a termite can revisit a pixel and then choose
+another direction. As the memory Mk is a tabu list associated
+to each termite k, memory overhead may occur for a large
+number of termites and a long path.
+A test on the same nine images shows that by disabling
+the memory Mk, which simply means not recording in the
+tabu list which pixels the k’th termite has visited and
+allowing it to walk through them again (Fig. 17), TR renderings are similar to the ones with memory Mk active. An
+example is shown in Fig. 18. The differences shown in
+Fig. 18(c) are calculated using the Euclidean color difference
+formula for small-medium color differences in log-compressed Optical Society of America Uniform Color Space
+(OSA-UCS) space (ΔEE ),53,54 which reports highest color
+differences around 4.0, which in terms of image differences
+are perceptual, but acceptable differences55 to present to the
+observers. No particular difference was reported from the
+participants in terms of perceived quality and noise. As benefit, the computational load decreases and a further gain in
+speed is achieved. However, the memory Mk can be used as
+a tuning parameter in order to obtain slightly different spatial
+effects.
+7 Conclusions
+We have developed a novel implementation of Retinex,
+reconsidering the idea of the paths and using an existing
+swarm intelligence model inspired from a biological process.
+This new algorithm named TR has been originated from the
+modification of the ACS model proposed by Dorigo et al.20
+In this case, the purpose of TR is not the optimization of
+some constraints but an exploration of the image content
+tuned, in particular, by two parameters, α and β, which
+weight the relative importance of the so-called poison and of
+the so-called closeness. Results report low importance of
+the poison and high importance of the closeness, which
+causes the termite swarm to concentrate to a particular
+region of an image.
+We have carried out two perceptual experiments in order
+to evaluate the quality of TR. A first experiment on nine
+images with 20 observers confirms the efficacy of the
+method on all the tested images in comparison to the original. A sign-test at 95% confidence interval shows that images
+processed with TR are significantly better than the original
+images. A second experiment shows that the overall performance of TR is higher than RSR, and a sign-test at 95% confidence interval confirms this statement.
+In conclusion, we have presented a novel effective version
+of path-based Retinex with the particular novelty of swarm
+intelligence behavior.
+Acknowledgments
+This work has been funded by the Research Council of
+Norway over the SHP project. The authors would like to
+thank Marius Pedersen and Jon Yngve Hardeberg (Gjøvik
+University College) for their useful feedback and
+suggestions.
+References
+1. A. Rizzi, C. Gatta, and D. Marini, “From Retinex to automatic color
+equalization: issues in developing a new algorithm for unsupervised
+color equalisation,” J. Electron. Imaging 13(1), 75–84 (2004).
+
+Journal of Electronic Imaging
+
+2. Ø. Kolås, I. Farup, and A. Rizzi, “Spatio-temporal retinex-inspired
+envelope with stochastic sampling: a framework for spatial color
+algorithms,” J. Imaging Sci. Technol. 55(4), 1–10 (2011).
+3. M. D. Fairchild and G. M. Johnson, “The iCAM framework for image
+appearance, image differences, and image quality,” J. Electron. Imaging
+13(1), 126–138 (2004).
+4. J. Kuang, G. M. Johnson, and M. D. Fairchild, “iCAM06: a refined
+image appearance model for HDR image rendering,” J. Vis. Commun.
+Image Represent. 18(6), 406–414 (2007).
+5. E. H. Land, “The Retinex,” Am. Sci. 52(2), 247–64 (1964).
+6. E. H. Land and J. J. McCann, “Lightness and Retinex theory,” J. Opt.
+Soc. Am. 61(1), 1–11 (1971).
+7. J. J. McCann, “Retinex at 40,” J. Electron. Imaging 13(1), 6–7 (2004).
+8. J. J. McCann and A. Rizzi, The Art and Science of HDR Imaging, John
+Wiley, Hoboken, New Jersey (2011).
+9. J. Frankle and J. J. McCann, “Method and apparatus for lightness
+imaging,” U.S. Patent No. 4,384,336 (1983).
+10. D. Marini and A. Rizzi, “A computational approach to color adaptation
+effects,” Image Vis. Comput. 18(13), 1005–1014 (2000).
+11. B. Funt, F. Ciurea, and J. J. McCann, “Retinex in MATLAB,”
+J. Electron. Imaging 13(1), 48–57 (2004).
+12. D. J. Jobson, Z. Rahman, and G. A. Woodell, “Properties and performance of a center/surround Retinex,” IEEE Trans. Image Process. 6(3),
+451–462 (1997).
+13. K. Barnard and B. Funt, “Investigations into multi-scale Retinex,” in
+Color Imaging in Multimedia, pp. 9–17, John Wiley and Sons,
+Hoboken, New Jersey (1998).
+14. R. Kimmel et al., “A variational framework for Retinex,” Int. J. Comput.
+Vis. 52(1), 7–23 (2003).
+15. M. Bertalmío et al., “Perceptual color correction through variational
+techniques,” IEEE Trans. Image Process. 16(4), 1058–1072 (2007).
+16. J. M. Morel, A. B. Petro, and C. Sbert, “A pde formalization of Retinex
+theory,” IEEE Trans. Image Process. 19(11), 2825–2837 (2010).
+17. G. Simone and I. Farup, “Spatio-temporal Retinex-like envelope with
+total variation,” in Sixth European Conf. on Color in Graphics, Imaging
+and Vision, IS&T, Amsterdam, The Netherlands (2012).
+18. E. Provenzi et al., “Random spray Retinex: a new Retinex implementation to investigate the local properties of the model,” IEEE Trans.
+Image Process. 16(1), 162–171 (2007).
+19. R. Montagna and G. D. Finlayson, “Constrained pseudo-Brownian
+motion and its application to image enhancement,” J. Opt. Soc. Am.
+A 28(8), 1677–1688 (2011).
+20. M. Dorigo, V. Maniezzo, and A. Colorni, “The ant system: optimization
+by a colony of cooperating agents,” IEEE Trans. Syst. Man Cybern. B
+26(1), 29–41 (1996).
+21. M. Dorigo and T. Stützle, Ant Colony Optimization, MIT Press,
+Cambridge, Massachusetts (2004).
+22. M. Dorigo and L. M. Gambardella, “Ant colonies for the traveling salesman problem,” Biosystems 43(2), 73–81 (1997).
+23. M. Dorigo, V. Maniezzo, and A. Colorni, “Ant system: an autocatalytic
+optimizing process,” Technical Report 91-016, Dipartimento di
+Elettronica e Informazione-Politecnico di Milano, Italy (1991).
+24. E. Provenzi, L. D. Carli, and A. Rizzi, “Mathematical definition and
+analysis of the Retinex algorithm,” J. Opt. Soc. Am. A 22(12),
+2613–2621 (2005).
+25. D. H. Brainard and B. A. Wandell, “Analysis of the Retinex theory of
+color vision,” J. Opt. Soc. Am. A 3(10), 1651–1661 (1986).
+26. A. Rizzi and J. J. McCann, “On the behavior of spatial models of color,”
+Proc. SPIE 6493, 649303 (2007).
+27. C. Tomasi and R. Manduchi, “Bilateral filtering for gray and color
+images,” in Proc. of the Sixth Int. Conf. on Computer Vision, pp.
+839–846, IEEE Computer Society, Bombay, India (1998).
+28. G. Audino, “Termites: a Retinex implementation based on a colony of
+intelligent cooperating agents,” Master’s thesis, University of MilanoDICO, Italy (2012).
+29. G. Simone et al., “Termites: a Retinex implementation based on
+a colony of agents,” Proc. SPIE 8292, 82920N (2012).
+30. M. Dorigo and L. Gambardella, “Ant colony system: a cooperative
+learning approach to the travelling salesman problem,” IEEE Trans.
+Evol. Comput. 1(1), 53–66 (1997).
+31. Y.-K. Wang and W.-B. Huang, “Acceleration of the retinex algorithm
+for image restoration by GPGPU/CUDA,” Proc. SPIE 7872, 78720E
+(2011).
+32. E. Hering, Outline of a Theory of Light Sense, L. M. Hurvich and
+D. Jameson, Trans., Harvard University Press, Cambridge, p. 1964
+(1905).
+33. K. Barnard, V. Cardei, and B. Funt, “A comparison of computational
+color constancy algorithms—Part i: Methodology and experiments with
+synthesized data,” IEEE Trans. Image Process. 11(9), 985–996 (2002).
+34. K. Barnard et al., “A comparison of computational color constancy
+algorithms. ii. Experiments with image data,” IEEE Trans. Image
+Process. 11(9), 985–996 (2002).
+35. M. Ebner, Color Constancy, Wiley, Hoboken, New Jersey (2007).
+36. J. J. McCann, S. P. McKee, and T. H. Taylor, “Quantitative studies in
+Retinex theory a comparison between theoretical predictions and
+
+013006-12
+
+Jan–Feb 2014 • Vol. 23(1)
+
+Simone et al.: Termite Retinex: a new implementation based on a colony of intelligent agents
+observer responses to the colormondrian experiments,” Vis. Res. 16(5),
+445–458 (1976).
+37. C. Parraman, A. Rizzi, and J. J. McCann, “Colour appearance and
+colour rendering of HDR scenes: an experiment,” Proc. SPIE 7241,
+72410R (2009).
+38. C. Parraman, J. J. McCann, and A. Rizzi, “Artist’s colour rendering of
+HDR scenes in 3-d Mondrian colour-constancy experiments,” Proc.
+SPIE 7528, 752802 (2010).
+39. J. Albers, Interaction of Color, Yale University Press, New Haven
+(1975).
+40. E. H. Land, “Recent advances in Retinex theory and some implications
+for cortical computations: color vision and the natural image,” Proc.
+Natl. Acad. Sci. U. S. A. 80(16), 5163–5169 (1983).
+41. E. H. Land, “An alternative technique for the computation of the designator in the Retinex theory of color vision,” PNAS 83(10), 3078–3080
+(1986).
+42. D. J. Jobson, Z. U. Rahman, and G. A. Woodell, “A multiscale Retinex
+for bridging the gap between color images and the human observation
+of scenes,” IEEE Trans. Image Process. 6(7), 965–976 (1997).
+43. M. Ebner, “Color constancy based on local space average color,” Mach.
+Vis. Appl. 20(5), 283–301 (2009).
+44. G. Ciocca et al., “Retinex preprocessing of uncalibrated images for
+color based image retrieval,” J. Electron. Imaging 12(1), 161–172
+(2003).
+45. A. Rizzi et al., “Automatic lightness and color adjustment of visual
+interfaces,” in Human Computer Interaction, Torino, Italy (2003).
+46. C. Parraman and A. Rizzi, “Searching user preferences in printing: a proposal for an automatic solution,” in Printing Technology SpB06 (2006).
+47. C. Parraman and A. Rizzi, “User preferences in color enhancement for
+unsupervised printing methods,” Proc. SPIE 6493, 64930U (2007).
+48. S. Zuffi et al., “Controlled and uncontrolled viewing conditions in
+the evaluation of prints,” Proc. SPIE 6807, 680714 (2008).
+49. G. Simone, M. Pedersen, and J. Hardeberg, “Measuring perceptual contrast in uncontrolled environments,” in European Workshop on Visual
+Information Processing, Paris, France, pp. 102–107 (2010).
+50. J. Holm, I. Tastl, and T. Johnson, “Definition & use of the ISO 12640-3
+reference color gamut,” in Fourteenth Color Imaging Conf.: Color
+Science and Engineering Systems, Technologies, Applications,
+pp. 62–68, IS&T/SID, Scottsdale, AZ (2006).
+51. CIE, “CIE 156:2004, Guidelines for the evaluation of gamut mapping
+algorithms,” CIT Central Bureau, Vienna (2004).
+52. M. Pedersen et al., “Attributes of image quality for color prints,”
+J. Electron. Imaging 19(1), 011016 (2010).
+53. C. Oleari, M. Melgosa, and R. Huertas, “Euclidean color-difference formula for small-medium color differences in log-compressed OSA-UCS
+space,” J. Opt. Soc. Am. A 26(1), 121–134 (2009).
+54. G. Simone, C. Oleari, and I. Farup, “Performance of the Euclidean
+color-difference formula in log-compressed OSA-UCS space applied
+to modified image-difference metrics,” in 11th Congress of the Int.
+Colour Association, Sydney, Australia, pp. 81 (2009).
+55. J. Y. Hardeberg, Acquisition and Reproduction of Color Images:
+Colorimetric and Multispectral Approaches, Dissertation. com,
+Parkland, Florida (2001).
+
+Journal of Electronic Imaging
+
+56. E. Reinhard et al., High Dynamic Range Imaging—Acquisition, Display
+and Image-Based Lighting, Morgan Kaufmann Publisher, San
+Francisco, California (2005).
+Gabriele Simone received his bachelor of information technology in
+2005 and master of information science and technology degree in
+2007, both at University of Milan, Department of Information
+Technology, Italy. He is currently pursuing his PhD in color imaging
+at University of Oslo, and he was a member of The Norwegian Colour
+and Visual Computing Laboratory at Gjøvik University College and
+with main research topics contrast measure, image difference metrics, and tone mapping algorithms in HDR images.
+Giuseppe Audino received his bachelor of digital communication
+degree in 2009 and master of information technology for communication degree in 2012, both at University of Milan, Department of
+Computer Science, Italy. He was a member of the The Norwegian
+Colour and Visual Computing Laboratory at Gjøvik University
+College in 2011, and his main research topic is swarm intelligent
+methods for image processing and code optimization using GPU
+programming.
+Ivar Farup received his MSc degree in physics from the Norwegian
+University of Science and Technology, Trondheim, Norway, in 1994
+and his PhD in applied mathematics from the University of Oslo,
+Oslo, Norway, in 2000. He is currently a full professor at Gjøvik
+University College, Norway, mainly focusing on color science and
+image processing.
+Fritz Albregtsen is Cand. Real. from Department of Theoretical
+Astrophysics, University of Oslo, 1978. He has been with the
+Department of Informatics, University of Oslo, since 1983, as professor of digital image processing since 1997. He has coauthored more
+than 150 peer-reviewed research papers. His main research activities
+are at present analysis medical microscopy images and automatic
+segmentation of medical images. In addition, he is working on general
+quantitative metrics for image quality.
+Alessandro Rizzi is an associate professor at the Department of
+Computer Science, University of Milano, teaching fundamentals of
+digital imaging, multimedia video, and human–computer interaction.
+He is one of the founders of the Italian Color Group and a member
+of several program committees of conferences related to color and
+digital imaging. Since 1990, he is researching in the field of digital imaging and vision. He is particularly interested in the perceptual issues
+related with digital imaging and lighting.
+
+013006-13
+
+Jan–Feb 2014 • Vol. 23(1)
+
+

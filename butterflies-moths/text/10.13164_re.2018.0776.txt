@@ -1,0 +1,606 @@
+Novel Butterfly Slot Based Chipless RFID Tag
+Muhammad Ali Riaz, Yasseer Abdullah, Hira Shahid, Yasar Amin, Adeel Akram, Hannu Tenhunen (2018). Radioengineering. https://doi.org/10.13164/re.2018.0776. doi:10.13164/re.2018.0776. Licence: cc-by. Text from pdf.
+
+M. A. RIAZ, Y. ABDULLAH, H. SHAHID, ET AL., NOVEL BUTTERFLY SLOT BASED CHIPLESS RFID TAG
+
+776
+
+Novel Butterfly Slot Based Chipless RFID Tag
+Muhammad Ali RIAZ 1 , Yassin ABDULLAH 1 , Humayun SHAHID 1 , Yasar AMIN 1 , Adeel AKRAM 1 ,
+Hannu TENHUNEN 2,3
+1 ACTSENA Research Group, University of Engineering and Technology, 47050-Taxila, Pakistan
+2 iPack VINN Excellence Center, Royal Institue of Technology, SE-16440, Stockholm, Sweden
+3 TUCS, University of Turku, Turku-20520, Finland
+
+ali.riaz@uettaxila.edu.pk
+Submitted May 5, 2018 / Accepted June 19, 2018
+
+Abstract. A compact chipless RFID tag with robust readable features is presented in this paper. The tag is made up of
+novel concentric butterfly slot resonators. Bit data is encoded
+in the frequency signature of the tag. Each slot corresponds
+to a resonance peak representing a bit ‘1’, whereas an absence of the peak signifies a bit ‘0’. Proposed resonator design demonstrates insensitivity to different polarization and
+incident angles of the linearly polarized impinging electromagnetic wave. The tag operates in the frequency band of
+4.7–9.7 GHz, limited within the license-free ultra wide-band.
+Rogers RT/duroid® 5880 substrate is used to realize a 10-bit
+capacity design that spans 14 × 14 mm2 resulting in a bit
+density of 5.1 bits/cm2 .
+
+Keywords
+Radio frequency identification (RFID), chipless tag,
+electromagnetic signature, Radar Cross-Section (RCS)
+
+1. Introduction
+Radio frequency identification (RFID) is a technique
+used to identify unique objects using radio frequency waves
+in a wireless medium [1]. A standard RFID tag primarily consists of a silicon chip (IC) and a transceiving antenna. Tag
+information is stored in the chip that modifies the received
+interrogating signal based on coded information and sends it
+back to the reader. An antenna is incorporated with the IC
+to facilitate efficient reception and transmission of wireless
+RF signals [2]. However, the antenna adds an additional bulk
+to the overall tag size [3], spanning over a substantial surface
+area of the tag as compared to that of the IC. Moreover, the
+use of IC serves as a hindrance to bringing down the cost per
+tag [4]. A minimum power of 15 dBm is required to operate
+the IC, and its terminal impedance also needs to be perfectly
+matched to that of the antenna that further complicates the
+operating model [5]. Chipless RFID tags are proposed to alleviate the economic constraint of RFID tags by eliminating
+the need of the IC [6–10]. Furthermore, frequency selective
+surface (FSS) based chipless RFID tags [11] neither require
+an integrated antenna nor exhibit minimum power requireDOI: 10.13164/re.2018.0776
+
+ments: making the tag more compact and power efficient.
+Chipless RFID tags are termed as the barcode of the future [6], [7]. The manufacturing process of the tag is fairly
+simple and similar to that of the optical barcode, since the
+tag can be produced by using printing processes. Unlike barcodes, chipless RFID tags can efficiently communicate over
+non-line of sight scenarios and offer higher read range.
+Chipless RFID tags are primarily classified into timedomain and frequency domain based tags. Although chipless RFID tags are not very common from a commercial
+point of view, the only ones available are Surface Acoustic Wave (SAW) tags [12–14]. SAW principally converts
+the electromagnetic waves into many slower acoustic components and makes use of piezoelectric components. SAW
+tags are time domain based tags having relatively low data
+capacity [13] and involve a complex sub-micron lithographic
+process for manufacturing [15]. Another proposed timedomain RFID tag is the transmission delay line tag [16] that
+works on the principle of producing time delay in the received
+signal through an inductor-capacitor (LC) transmission line
+elements. The delay profile in the time domain is then used
+to identify the data stored in the tag. Time delay tags are typically larger in size in comparison with other chipless RFID
+tags [16–18].
+Frequency domain chipless RFID tags are designed
+to encode bit sequences in the frequency domain through
+presence or absence of resonant peaks, signified as data
+bits. These are further categorized into retransmission and
+RCS-based tags. In retransmission based tags, a multiresonant RF circuit is used to encode bit sequences with a pair
+of identical cross-polar antennas for receiving and transmitting electromagnetic waves [19]. Unlike circuit-based tags,
+RCS-based tags do not require antennas to operate. These
+tags are made up of multi-resonant frequency selective surfaces to achieve substantial absorption of EM waves at resonant frequencies [20]. The multi-resonant elements are usually placed in a nested manner to efficiently utilize the surface
+area. Although RCS based chipless RFID tags offer low-cost
+solution for mass production, enhancement of bit capacity
+and density are constrained due to multiple reasons, such
+as: limited operating frequency band [22], inter-resonator
+ELECTROMAGNETICS
+
+RADIOENGINEERING, VOL. 27, NO. 3, SEPTEMBER 2018
+
+777
+
+coupling [15], [21], and presence of higher order harmonics [23]. Although recently proposed RCS based chipless
+RFID tags [15, 20, 24] are compact having low production
+cost, spectral efficiency has not been taken into consideration. Operating over a wide band at higher frequencies
+requires advanced reading system, resulting in higher reader
+setup cost. On the other hand, a narrow band tag design at
+low frequencies serves as a constraint to achieving smaller
+tag size, since low-frequency resonating elements are larger
+in size and must be placed at a certain gap to minimize mutual
+coupling effects. Moreover, second and third harmonics of
+low-frequency resonating elements also hamper the utilization of a wider band.
+In this paper, a novel butterfly shaped slot resonator is
+proposed. Furthermore, a compact chipless RFID tag having
+a size of 1.96 cm2 is designed using a set of these resonators,
+providing a spectral efficiency of 2 bits/GHz while maintaining a competitive bit density of 5.1 bits/cm2 and a capacity of 10 bits. The tag operates in the frequency band of
+4.7–9.7 GHz and its performance is analyzed over different
+polarization and incident angles of the impinging electromagnetic wave. Having a capacity of 10 bits the design is
+realized using Rogers RT/duroid® 5880 substrate.
+
+2. Resonant Element Design
+
+Fig. 1. Geometric construction of resonating element.
+
+Construction of polarization insensitive geometric
+structure and its parameters are illustrated in Fig. 1. A pair of
+similar ellipses is used to design the resonator. Each ellipse is
+defined by two parameters: the large diameter Da and a small
+diameter Db . A rotation of +45° and −45° in the XY-plane
+is applied to each ellipse, and the two elements are finally
+added to obtain the resulting butterfly shape.
+The structure is realized on a 14 × 14 mm2 , 0.508 mm
+thick, Rogers RT/duroid® 5880 substrate as a slot resonator as
+illustrated in Fig. 2. A slot width is introduced, keeping outer
+boundary of the elliptical slot defined by Da and Db . The
+physical parameters of the tag are optimized to achieve substantial electromagnetic absorption near 5 GHz without repetitions in the FSS structure while having minimal 2nd and 3rd
+harmonic resonances. The optimized values for Da , Db are
+obtained as 16 mm and 10.53 mm respectively, having a slot
+width, w of 0.23 mm.
+Horizontally polarized electromagnetic wave is used
+for analyzing the electromagnetic performance of the tag
+having a single sample of the proposed resonator using
+CST MICROWAVE STUDIO® (CST® MWS® ). The radar
+cross section (RCS) of the tag is shown in Fig. 2, displaying a resonance at 5.1 GHz as its fundamental frequency
+component. It is worth noting that the proposed resonator
+has negligible 2nd and 3rd harmonics since no major resonances are observed near 10.2 GHz and 15.3 GHz. Although,
+a band of 4.7–9.7 GHz is utilized in this work to achieve
+higher spectral efficiency, the capacity of the proposed tag in
+Sec. 3 can be enhanced by nesting high-frequency resonators
+at the cost of much sophisticated reader setup.
+
+Fig. 2. Butterfly shaped slot resonator (a) geometry and (b) its
+frequency response.
+
+778
+
+M. A. RIAZ, Y. ABDULLAH, H. SHAHID, ET AL., NOVEL BUTTERFLY SLOT BASED CHIPLESS RFID TAG
+
+Surface current distribution of the slot resonator at its
+resonant frequency of 5.11 GHz is depicted in Fig. 3 for
+a horizontally polarized incident plane wave. A high surface current is observed around the top and bottom sides
+of the resonator that signifies inductive behavior, whereas
+low surface current density areas indicate capacitive profile. A standing wave mode is created at resonant frequency
+through the interplay of these capacitive and inductive components as shown in surface current distribution, and electric
+field intensity. Moreover, λ/4 resonance is validated through
+simulation using (CST® MWS® ) as illustrated by the surface
+current distribution as shown in Fig. 3 (a).
+The resonator design primarily offers compact features
+and geometrical symmetry owing to high bit density and orientation independent operability. Moreover, nesting of additional multi-resonant elements is possible within the same
+tag size. Having five reflection and four rotational symmetries as shown in Fig. 4, the symmetric, curved shape of the
+resonator not only reduces the harmonic components but also
+makes it polarization insensitive.
+The electromagnetic performance of the tag having
+a single butterfly shaped resonator is analyzed at a variety
+of polarization angles using CST® MWS® . Although, the
+overall RCS magnitude response of the tag moves downwards with the change in polarization angle, the resonance
+frequency remains almost unchanged and no spurious peaks
+are observed. Since the structure is 90° - rotationally symmetric, similar frequency response is observed for polarization
+angles of 0° and 90°.
+Fig. 4. (a) Symmetry of the resonator and (b) RCS response at
+different polarization angles.
+
+3. Overall Tag Design
+Nesting of additional butterfly resonators is introduced
+in the tag presented in Sec. 2 to obtain multiple resonances
+while maintaining a compact footprint. The resonators are
+placed at a gap, g = 0.23 mm which is same as that of the
+slot width w. Ground plane on the bottom side of the tag
+is not used since the design is slot resonator based. Negative etching has been applied to obtain the overall resonating
+structure.
+
+Fig. 3. (a) Surface current distribution and (b) electric field intensity in the plane of resonator at 5.11 GHz.
+
+Size comparison of a prototype chipless RFID tag
+with a euro coin having ten nested resonators is shown in
+Fig. 5. The outermost slot element resonates at a minimum frequency, corresponding to least significant bit (LSB).
+Whereas, the most significant bit (MSB) is related the smallest slot element that resonates at maximum frequency. Although additional resonating elements may be added on either
+side, more surface area of the tag is required to accommodate
+larger elements: resulting in a decline of bit density. Moreover, an introduction of smaller elements results in higher
+resonant frequencies, decreasing the spectral efficiency of
+the tag.
+
+RADIOENGINEERING, VOL. 27, NO. 3, SEPTEMBER 2018
+
+Fig. 5. 10 bit chipless RFID tag.
+
+779
+
+Fig. 6. Computed RCS response for different bit sequences.
+
+Exact dimensions of resonators with reference to each
+bit position are provided in Tab. 1. These dimensions are
+parametrically chosen to limit the operating band of the tag
+within 5–10 GHz for ensuring a combination of high spectral
+and bit density. Bit encoding is achieved through addition and
+removal of slot resonators. Removal of each slot resonator
+corresponds to the absence of its corresponding resonance
+peak in the RCS of the tag and vice versa. Presence of each
+resonance signifies a bit ‘1’, whereas, its absence is considered as a bit ‘0’.
+Bit Position
+Da [mm]
+Db [mm]
+Bit Position
+Da [mm]
+Db [mm]
+
+LSB
+16
+10.53
+5
+11.4
+5.93
+
+1
+15.08
+9.61
+6
+10.48
+5.01
+
+2
+14.16
+8.69
+7
+9.56
+4.09
+
+3
+13.24
+7.77
+8
+8.64
+3.17
+
+4
+12.32
+6.85
+MSB
+7.72
+2.25
+
+Tab. 1. Dimensions of slot resonators.
+
+4. Results and Discussion
+The proposed tag prototype variants with all ones,
+all zeros, and random sequence are shown in Fig. 6 with
+their respective computed electromagnetic response obtained
+through CST® MWS ® . The RCS response of all one’s prototype demonstrates ten distinct resonances, using the same
+amount of nested elements. A random sequence is obtained
+through removal of resonators resulting in the absence of corresponding resonant peaks. However, a slight shift in each
+resonant frequency is observed for different combinations,
+because of its dependence on the physical parameters of the
+corresponding resonator, and the elements in its surroundings. The resulting resonant frequency is hence produced
+through a combination of resonator geometry and mutually
+coupled effects introduced by surrounding resonators. Each
+resonance is assigned a spectral neighborhood of 300 MHz
+
+Fig. 7. Oblique incidence performance.
+
+to allow for accurate detection of bit positions under frequency shift circumstances, which is mentioned in Fig. 6 as
+a shaded region. A gap of 0.23 mm is chosen between resonators to ensure minimal coupling effects while maintaining
+compact size of the tag. The design offers avoidance of overlapping resonances, limiting them within the corresponding
+spectral neighborhood.
+The oblique incidence electromagnetic performance of
+the tag shown in Fig. 7 is computed using CST® MWS® . This
+demonstrates the readability of the tag in a leaning position
+with respect to the impinging electromagnetic wave. A shift
+in resonant frequencies with a reduction in RCS magnitude
+is observed as the tag is tilted. Since the band of operation
+is limited for each bit, it needs to be ensured that frequency
+shifts at oblique incident angles remain within these limits. According to the computed results, the tag operates at
+incident angles of up to 30°. This limitation is primarily
+introduced by the resonant frequency around 9 GHz, that
+lies at the edge of its corresponding frequency band as depicted in Fig. 7.
+
+780
+
+M. A. RIAZ, Y. ABDULLAH, H. SHAHID, ET AL., NOVEL BUTTERFLY SLOT BASED CHIPLESS RFID TAG
+
+A standard measurement setup procedure is utilized that
+is mentioned in detail elsewhere [25]. Measurements for the
+tag have been performed using a two-port vector network
+analyzer (VNA) R&S ZVL-13, and a pair of identical linearly polarized horn antennas. Continuous wave stepped
+frequency technique is employed to detect the backscattered
+power from the tag, that is recorded throughout the frequency
+sweep process. For the band of 4.7–10.7 GHz, the VNA
+transmits 0 dBm of power. The tag is placed in the far-field
+region, at a distance of 35 cm from the interrogating antennas. Two reference measurements, one with no tag, and
+one with a full-metallic plate of comparable dimensions with
+known RCS are carried out prior to commencing with testing
+with the tag prototype. The procedure is concluded with the
+measurements for the tag prototype in place.
+
+The measured RCS response of the tag for different bit
+sequences is shown in Fig. 10. As discussed previously,
+a shift in resonant frequencies is observed primarily due to
+two reasons: 1) difference of mutual coupling among resonators for a variety of bit combinations and 2) slight impairments in the resonating structure introduced by fabrication
+process. The tag design caters both challenges, since the
+measured resonant frequencies lie within their corresponding
+frequency spectrum. Each resonance peak can be automatically detected using the difference between local maxima
+and minima of the measured RCS profile within the assigned
+frequency band.
+
+A comparison between measured and computed results
+for the tag having all 1’s configuration is reported in Fig. 8.
+Although, a slight shift in resonant frequencies is observed,
+which is due to the structural infirmity of realized tag introduced through the fabrication process. All resonances
+are distinctly observable with good absorption levels. This
+demonstrates that the proposed FSS tag structure needs not
+to be repeated to achieve satisfactory absorption at resonant
+frequencies resulting in a compact design. Furthermore,
+no spurious peaks are observed in either computed or experimental results: validating 1:1 correspondence between
+resonators and data bits.
+Figure 9 illustrates the measured and computed response of the proposed tag with random bit sequence. Removal of the slot resonators results in complete disappearance of corresponding resonance, depicting the bit sequence
+reconfigurability of the tag. However, an increase in electromagnetic absorption level of low-frequency slot resonators is
+observed in the absence of their neighboring elements. Despite a slight shift of the resonant frequencies due to change
+in the mutual coupling, no spurious peak or significant variation, such as flattening of neighboring peaks is observed.
+
+Fig. 8. Measured and computed response for all 1’s sequence.
+
+Fig. 9. Measured and computed response for random sequence.
+
+Fig. 10. Measured RCS response for different bit sequences.
+
+RADIOENGINEERING, VOL. 27, NO. 3, SEPTEMBER 2018
+
+Figure 11 shows the measured RCS of the tag at a variety
+of oblique incident angles in comparison with the computed
+RCS. Although the resonance peaks are uniquely identifiable,
+they must lie within their corresponding frequency band for
+accurate bit detection. It is observed that measured frequency shifts due to the slanted orientation of the tag can
+be accommodated for incident angles of up to 20°. However, at 30° orientation, the measured resonance near 9 GHz
+slips out of its corresponding frequency band. Although this
+work utilizes same bandwidth for all resonances, this limitation maybe alleviated through assigning wider bands for high
+frequency peaks.
+The measured RCS response at a variety of polarization
+angles is shown in Fig. 12. It is evident that the resonant
+frequencies and magnitude have very slight variations. Due
+to the 90° -rotational symmetry of the resonator design, its
+response remains the same at 0° and 90° polarization angles.
+For chipless RFID tags, this is a highly sought-after feature
+in terms of its practical utilization. The resonator design is
+hence polarization insensitive.
+
+781
+
+5. Conclusions
+A novel butterfly resonator based chipless RFID tag has
+been proposed. The compact tag carrying 10 bits comprises
+of non-repetitive 14 × 14 mm2 slot based FSS structure offering 1:1 bit to resonator correspondence. The tag is realized
+using a 0.508 mm thick, Rogers RT/duroid® 5880 substrate.
+Encoding of bit sequences is achieved through addition and
+removal of nested elements resulting in a presence or absence of the correlated resonant peak in the frequency domain. The design offers robust readable features including
+polarization insensitivity and operability at oblique incidence
+angles extending up to 30° of the impinging electromagnetic
+wave. The design operates within the frequency band of
+4.7–10.7 GHz and offers a combination of high bit density
+and spectral efficiency of 5.1 bits/cm2 and 2 bits/GHz respectively.
+
+A comparison of the proposed work with recently proposed FSS based chipless RFID tags is shown in Tab. 2.
+The tag offers 10 bits of information within a compact
+size of 1.96 cm2 operating within the frequency band of
+4.7–9.7 GHz. Typically, tag designs are oriented towards
+achieving higher bit density (bits/cm2 ) to pack higher information within a compactly sized tag. However, spectral
+efficiency (bits/GHz) is often not taken into consideration,
+that may result in high reader setup cost. Although, hexagonal loop resonator based tag [24] offers a slightly higher
+bit density, its spectral efficiency is less than half to that of
+the proposed design. Furthermore, it requires a wide band
+of 4–19 GHz that requires a more sophisticated setup to operate. Hence, the proposed design offers a combination of
+both: high bit, and high spectral efficiency with robust readability.
+
+Resonator Shape
+Butterfly (this work)
+T-shape [15]
+Hexagon [24]
+Circular Loop [26]
+Triangular [20]
+Rectangular [11]
+Resonator Shape
+Butterfly (this work)
+T-shape [15]
+Hexagon [24]
+Circular Loop [26]
+Triangular [20]
+Rectangular [11]
+
+Tag Size
+[cm2 ]
+1.96
+2.25
+2.30
+2.36
+8.00
+9.00
+
+No. of
+Bits
+10
+10
+14
+09
+10
+05
+Spectral
+Bit
+EffiDensity
+ciency
+2
+[bits/cm ]
+[bits/GHz]
+5.10
+2.00
+4.44
+1.11
+6.08
+0.93
+3.80
+1.12
+1.21
+1.42
+1.23
+0.83
+
+Frequency
+Band [GHz]
+4.7–9.7
+6.0–15.0
+4.0–19.0
+6.0–14.0
+4.0–11.0
+2.0–8.0
+
+Fig. 11. Measured and computed RCS response at oblique incidence.
+
+Polarization
+Insensitivity
+Yes
+No
+Yes
+Yes
+No
+Yes
+
+Tab. 2. Comparison with existing chipless RFID tag designs.
+
+Fig. 12. Measured RCS response at different polarization angles.
+
+782
+
+M. A. RIAZ, Y. ABDULLAH, H. SHAHID, ET AL., NOVEL BUTTERFLY SLOT BASED CHIPLESS RFID TAG
+
+Acknowledgments
+This work is financially backed by UET, Taxila via the
+ACTSENA research group funding. Furthermore, National
+Institute of Electronics, Islamabad is acknowledged for extensive support during prototype fabrication phase.
+
+References
+[1] FINKENZELLER, K. RFID Handbook: Fundamentals and Applications in Contactless Smart Cards, Radio Frequency Identification
+and near Field Communication. 3rd ed., rev. New York (USA): Wiley,
+2010. ISBN: 9780470665121
+[2] KHAN, U. H., ASLAM, B., KHAN, J., et al. A novel asterisk-shaped
+circularly polarized RFID tag for on-metal applications. Applied Computational Electromagnetic Society Journal, 2016, vol. 31, no. 9,
+p. 1035–1042. ISSN: 1054-4887
+[3] DEY, S., SAHA, J. K., KARMAKAR, N. C. Smart sensing: Chipless RFID solutions for the internet of everything.
+IEEE Microwave Magazine, 2015, vol. 16, no. 10, p. 26–39.
+DOI: 10.1109/MMM.2015.2465711
+[4] KARMAKER, N. C. Tag, You’re it radar cross section of chipless
+RFID tags. IEEE Microwave Magazine, 2016, vol. 17, no. 7, p. 64–74.
+DOI: 10.1109/MMM.2016.2549160
+[5] KHAN, U. H., RASHEED, H., ASLAM, B., et al. Localization of compact circularly polarized RFID tag using ToA technique. Radioengineering, 2017, vol. 26, no. 1, p. 147–153.
+DOI: 10.13164/re.2017.0147
+[6] PRERADOVIC, S., KARMAKAR, N. C. Chipless RFID: Bar code of
+the future. IEEE Microwave Magazine, 2010, vol. 11, no. 7, p. 87–97.
+DOI: 10.1109/MMM.2010.938571
+[7] PRERADOVIC, S., KARMAKAR, N. C. Multiresonator-Based
+Chipless RFID. 1st ed., rev. New York (USA): Springer, 2012.
+ISBN: 9781461420958
+
+[15] RIAZ, M. A., SHAHID, H., ASLAM, S. Z., et al. Novel
+T-shaped resonator based chipless RFID tag. IEICE Electronics Express, 2017, vol. 14, no. 18, p. 20170728–20170728.
+DOI: 10.1587/elex.14.20170728
+[16] CHAMARTI, A., VARAHRAMYAN, K. Transmission delay line
+based ID generation circuit for RFID applications. IEEE Microwave
+and Wireless Components Letters, 2006, vol. 16, no. 11, p. 588–590.
+DOI: 10.1109/LMWC.2006.884897
+[17] SCHUBLER, M., MANDEL, C., MAASCH, M., et al. Phase modulation scheme for chipless RFID-and wireless sensor tags. In Proceedings of the Asia Pacific Microwave Conference. Singapore, 2009,
+p. 229–232. DOI: 10.1109/APMC.2009.5385319
+[18] ZHENG, L., RODRIGUEZ, S., ZHANG, L., et al. Design and implementation of a fully reconfigurable chipless RFID tag using Inkjet
+printing technology. In Proceedings of the IEEE International Symposium on Circuits and Systems. Seattle (USA), 2008, p. 1524–1527.
+DOI: 10.1109/ISCAS.2008.4541720
+[19] SUMI, M., DINESH, R., NIJAS, C. M., et al. Frequency coded chipless RFID tag using spurline resonators. Radioengineering, 2014,
+vol. 23, no. 1, p. 203–208. ISSN: 1805-9600
+[20] RAUF, S., RIAZ, M. A., SHAHID, H., et al. Triangular loop
+resonator based compact chipless RFID tag. IEICE Electronics Express, 2017, vol. 14, no. 4, p. 20161262–20161262.
+DOI: 10.1587/elex.14.20161262
+[21] MACHAC, J., POLIVKA, M. Influence of mutual coupling on performance of small scatterers for chipless RFID tags. In Proceedings
+of the 24th International Conference Radioelektronika. Bratislava
+(Slovakia), 2014, p. 1–4. DOI: 10.1109/Radioelek.2014.6828412
+[22] KHAN, M. M., TAHIR, F. A., CHEEMA, H. M. Frequency band
+utilization enhancement for chipless RFID tag through place value
+encoding. In Proceedings of the IEEE International Symposium on
+Antennas and Propagation (APSURSI). Fajardo (Puerto Rico), 2016,
+p. 1477–1478. DOI: 10.1109/APS.2016.7696445
+[23] ISLAM, M. A., KARMAKAR, N. A compact printable dualpolarized chipless RFID tag using slot length variation in
+‘I’ slot resonators. In Proceedings of the European Microwave Conference (EuMC). Paris (France), 2015, p. 96–99.
+DOI: 10.1109/EuMC.2015.7345708
+
+[8] PERRET, E. Radio Frequency Identification and Sensors: From
+RFID to Chipless RFID. New York (USA): Wiley, 2014.
+ISBN: 9781119054016
+
+[24] IQBAL, M. S., SHAHID, H., RIAZ, M. A., et al. FSS inspired polarization insensitive chipless RFID tag. IEICE Electronics Express,
+2017, vol. 14, no. 10, p. 1–6. DOI: 10.1587/elex.14.20170243
+
+[9] REZAIESARLAK, R., MANTEGHI, M. Chipless RFID. Switzerland: Springer, 2015. ISBN: 9783319101699
+
+[25] VENA, A., PERRET, E., TEDJINI, S. Chipless RFID tag using hybrid coding technique. IEEE Transactions on Microwave
+Theory and Techniques, 2011, vol. 59, no. 12, p. 3356–3364.
+DOI: 10.1109/TMTT.2011.2171001
+
+[10] KARMAKAR, N. C., ZOMORRODI, M., DIVARATHNE,
+C. Advanced Chipless RFID. Hoboken (USA): Wiley, 2016.
+ISBN: 9781119-227311
+[11] COSTA, F., GENOVESI, S., MONORCHIO, A. A Chipless RFID
+based on multiresonant high-impedance surfaces. IEEE Transactions on Microwave Theory and Techniques, 2013, vol. 61, no. 1,
+p. 146–153. DOI: 10.1109/TMTT.2012.2227777
+[12] PLESSKY, V. P., REINDL, L. M. Review on SAW RFID tags. IEEE
+Transactions on Ultrasonics, Ferroelectrics, and Frequency Control,
+2010, vol. 57, no. 3, p. 654–668. DOI: 10.1109/tuffc.2010.1462
+[13] VENA, A., PERRET, E., TEDJINI, S. Design rules for chipless RFID
+tags based on multiple scatterers. Annals of Telecommunications,
+2013, vol. 68, no. 7, p. 361–374. DOI: 10.1007/s12243-013-0358-7
+[14] ZHONG, Y. Y., CHEN, Z. J., WANG, X. C., et al. Anti-collision SAW
+tags based on CIDT. In Proceedings of the Symposium on Piezoelectricity, Acoustic Waves, and Device Applications (SPAWDA). Jinan
+(China), 2015, p. 137–142. DOI: 10.1109/SPAWDA.2015.7364458
+
+[26] MARTINEZ, M., VAN DER WEIDE, D. Compact slot-based chipless RFID tag. In Proceedings of the IEEE RFID Technology
+and Applications Conference (RFID-TA). Tampere, (Finland), 2014,
+p. 233–236. DOI: 10.1109/RFID-TA.2014.6934234
+
+About the Authors . . .
+Muhammad Ali RIAZ received his M.S. and B.S. degree in Electrical Engineering from Iowa State University
+in 2010 and 2009 respectively. From January 2009 to December 2010 he was a Research Assistant with the Department of Electrical and Computer Engineering, Iowa State
+University. He is currently an Assistant Professor and a parttime Doctoral Researcher with ACTSENA research group at
+University of Engineering and Technology, Taxila.
+
+RADIOENGINEERING, VOL. 27, NO. 3, SEPTEMBER 2018
+
+Yassin ABDULLAH received his B.S. degree in Telecommunication Engineering from Taiz University, Yemen in
+2012. He got scholarship for the Masters in University and
+Engineering Technology, Taxila. He is currently working
+towards the M.Sc. degree and his research interest fields are
+signal processing and chipless RFID Technology.
+Humayun SHAHID received his B.S. degree in Communication Systems Engineering from Institute of Space Technology, Islamabad in the year 2008, and his M.S. degree in
+Signal Processing from Nanyang Technological University,
+Singapore in the year 2011. His current research interests
+include antenna design, microwave engineering and RFID
+technology. He currently serves as an Assistant Professor at
+the Telecommunication Engineering Department, University
+of Engineering and Technology, Taxila.
+Yasar AMIN is a Chairman and Associate Professor of the
+Telecommunication Engineering Department, University of
+Engineering and Technology, Taxila, Pakistan. He is the
+founder of ACTSENA Research Group at UET Taxila, Pakistan. He did his B.Sc. in Electrical Engineering in 2001 with
+specialization in Telecommunication, and M.Sc. in Electrical
+Engineering in 2003 with specialization in System-on-Chip
+Design from the Royal Institute of Technology (KTH), Sweden. His Ph.D. is in Electronic and Computer Systems from
+the Royal Institute of Technology (KTH), Sweden, with the
+research focus on printable green RFID antennas for embedded sensors, while he has MBA in Innovation and Growth
+from Turku School of Economics, University of Turku, Finland. He has done several specialized courses from Stanford
+University, California, USA and Massachusetts Institute of
+Technology (MIT), USA. He has supervised over 15 M.Sc.
+thesis, and presently supervising 8 doctoral thesis. He is
+presently serving as a leading Guest Editor at two international journals and an active reviewer of more than a dozen
+
+783
+
+well reputed international journals. He has contributed to
+over 20 journal papers, over 30 reviewed international conference papers. Dr. Yasar is a member of IEEE, IET, ACM
+and ACES.
+Adeel AKRAM received his B.S. degree in Electrical Engineering from the University of Engineering and Technology,
+Lahore, Pakistan in 1995. He received his M.S. degree in
+Computer Engineering from the National University of Sciences and Technology (NUST), Pakistan and his Ph.D. in
+Electrical Engineering from the University of Engineering
+and Technology (UET) Taxila, Pakistan, in 2000 and 2007
+respectively. He is the Dean of Faculty of Telecommunication
+and Information Engineering at UET Taxila. His research interests include microwave and communication systems and
+is leading a 5G Wireless Communication research group at
+UET Taxila, Pakistan.
+Hannu TENHUNEN is a chair professor of Electronic Systems at Royal Institute of Technology (KTH), Stockholm,
+Sweden. Prof. Tenhunen has held professor position as
+full professor, invited professor or visiting honorary professor in Finland (TUT, UTU), Sweden (KTH), USA (Cornel U), France (INPG), China (Fudan and Beijing Jiaotong
+Universities), and Hong Kong (Chinese University of Hong
+Kong), and has an honorary doctorate from Tallinn Technical University. He has been the director of multiple national
+large-scale research programs or being an initiator and director of national or Knowledge and Innovation Community
+EIT ICT Labs. European graduate schools. He has actively
+contributed to VLSI and SoC design in Finland and Sweden
+via creating new educational programs and research directions, most lately at European level as being the EU-level
+Education Director of the new European flagship initiative
+European Institute of Technology and Innovations (EIT), and
+its Knowledge and Innovation Community EIT ICT Labs.
+
+

@@ -1,0 +1,273 @@
+Automated seafood freshness detection and preservation analysis using machine learning and paper-based pH sensors.
+Kumaravel B, Amutha AL, Mary TPM, Agrawal A, Singh A, Saran S, Govindarajan N. (2025). Scientific reports. . doi:10.1038/s41598-025-08177-x. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Automated seafood freshness detection and preservation analysis using machine learning and paper-based pH sensors
+
+## Abstract
+Seafood, including fish, prawns and various marine products, is a critical component of global nutrition due to its high protein content, essential fatty acids, vitamins and minerals. Traditional methods for assessing seafood freshness such as sensory evaluation and microbiological analysis are labor-intensive, time-consuming and often require specialized equipment. To address these limitations, this research presents an automated freshness detection system for refrigerated fish using machine learning and evaluates the effectiveness of different packaging techniques. Six seafood varieties: Mackerel, Sardine, Prawn, Pomfret, Red Snapper and Cuttlefish were stored under refrigeration and packaged using three methods: vacuum, shrink, and normal packaging. A paper-based pH sensor integrated with Methyl Red and Bromocresol Purple was utilized as a freshness indicator. This sensor effectively monitored spoilage by capturing L*, a*, and b* color values over time. Key parameters, including protein content, lipid content, and Total Volatile Basic Nitrogen (TVB-N) levels, were measured throughout the storage period to assess changes in fish quality. These measurements were used to train a Random Forest (RF) model, aimed at accurately predicting the pH values of the samples. The model’s performance was evaluated using standard metrics such as Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE). Among the tested varieties, Pomfret and Mackerel displayed the lowest MSE values (0.004625 and 0.005034, respectively), indicating high predictive reliability. The RMSE values, representing average prediction error magnitude, were also minimal for Pomfret (0.068007) and Mackerel (0.070949). Furthermore, MAE values confirmed robust predictions, with Pomfret (0.065833) and Mackerel (0.062933) achieving the least deviation from actual measurements. The study demonstrates the effectiveness of the paper-based pH sensor as a visual indicator of spoilage, while the RF-based prediction model offers a reliable method for ensuring food safety and quality during cold-chain storage. Integrating sensor-based monitoring with advanced packaging presents a viable solution for extending the shelf life of seafood and enhancing consumer safety.
+
+## Introduction
+Seafood, including fish, prawns, cuttlefish and other marine products, forms a vital part of the global diet due to its high nutritional value. Rich in high-quality proteins, vitamins, minerals and essential fatty acids such as Eicosa-Pentaenoic Acid (EPA) and Docosa-Hexaenoic Acid (DHA), seafood offers numerous health benefits. These polyunsaturated fatty acids (PUFAs) contribute to improved brain function, cardiovascular health and reduced inflammation1,2. In India, the fisheries and aquaculture sector support over 14 million livelihoods and contributes significantly to national food security and economic growth through exports.
+One of the major challenges in the seafood industry is maintaining product freshness during storage and distribution. The quality and shelf life of seafood are greatly influenced by packaging methods. Conventional packaging materials provide limited protection against oxygen, which can accelerate spoilage. In contrast, vacuum packaging reduces oxygen exposure, thereby inhibiting the growth of aerobic bacteria and delaying oxidative degradation. Similarly, shrink packaging helps retain moisture and forms a tight seal, further reducing oxygen penetration. Both vacuum and shrink packaging have proven effective in extending the shelf life of perishable seafood products3.
+Spoilage in seafood is typically accompanied by biochemical changes, including the release of basic nitrogenous compounds like ammonia, which increases the pH of fish tissue. This change in pH can be detected using pH-sensitive colorimetric indicators. Methyl Red (MR) changes from red to yellow and Bromocresol Purple (BCP) shifts from yellow to purple as pH rises, offering a simple, real-time visual indication of spoilage4. These indicators, when embedded in paper-based biosensors, provide a non-invasive and cost-effective method for monitoring seafood freshness directly on the product.
+In addition to visual indicators, scientific techniques such as Fourier Transform Infrared (FTIR) Spectroscopy are employed to analyze the chemical composition of seafood. FTIR can detect molecular changes in proteins and lipids that occur during spoilage, offering insights into degradation pathways5. Another widely accepted metric is the Total Volatile Basic Nitrogen (TVB-N) level, which measures the concentration of nitrogenous compounds like trimethylamine, dimethylamine and ammonia byproducts of microbial and enzymatic activity during spoilage6,7.
+Despite the accuracy of these analytical methods, they are often time-consuming, require specialized equipment and may not be feasible for real-time monitoring across all fish species. Recent advancements in non-destructive technologies such as spectral imaging and Nuclear Magnetic Resonance (NMR) spectroscopy have addressed some of these limitations, but broad applicability remains a challenge8.
+To overcome these barriers, the seafood industry is increasingly exploring the use of Artificial Intelligence (AI) and automation. Machine Learning (ML) and Deep Learning (DL) techniques have demonstrated great potential in automating food quality assessment, reducing subjectivity and enabling real-time decision-making9–13. These technologies can improve accuracy and efficiency in detecting seafood freshness while minimizing manual intervention14–16.
+The novelty of this research lies in the integration of a non-invasive, paper-based pH biosensor system with machine learning techniques to enable real-time and accurate assessment of seafood freshness under refrigerated conditions. Unlike traditional sensory and microbiological methods, this approach offers a low-cost, rapid and scalable solution by using colorimetric indicators (Methyl Red and Bromocresol Purple) and correlating their L*, a*, b* color values with spoilage progression. Furthermore, the study systematically compares the effectiveness of three different packaging methods namely normal, vacuum and shrink across six commonly consumed seafood varieties. By incorporating biochemical markers such as protein, lipid content and TVB-N levels into a random forest model to predict freshness, this work presents a comprehensive framework that enhances the monitoring of seafood quality. This multifaceted strategy positions the research as a significant advancement in the automation and accuracy of seafood quality evaluation.
+
+## Materials and methods
+
+## Fish sampling
+Fresh fish samples, including Mackerel (Scomber scombrus), Sardine (Sardina pilchardus), Prawn (Metapenaeus dobsoni), Black Pomfret (Parastromateus niger), Red Snapper (Lutjanus campechanus) and Cuttlefish (Sepiida), were collected immediately after harvest from the seashore market in Royapuram, Chennai, Tamil Nadu. The samples were transported to the laboratory in an ice box to maintain freshness. Upon arrival, the fish were sliced, beheaded, filleted and washed with tap water. The cleaned samples were then divided and packed using three different packaging methods: vacuum packaging, shrink packaging and regular packaging with low-density polyethylene covers. All samples were stored under refrigeration at 4 °C.
+
+## Sensor preparation
+The paper-based pH sensor was prepared using two colorimetric dyes—Methyl Red and Bromocresol Purple as shown in Fig. 1 ref.17. After preparation, the sensor was placed on the surface of each fish sample. The change in color of the paper sensor was measured using a Hunter Lab Colorimeter.Fig. 1Preparation of paper based sensors.
+Preparation of paper based sensors.
+
+## Quality analysis
+The six types of fish samples, packed using three different packaging methods, were sampled at intervals of 3 days from day 0 to day 12. The experiment was conducted in triplicate. Quality parameters were analyzed at each interval. The pH of the samples was measured using a pH meter. The color values of the paper-based sensors were measured using a HunterLab XE Color Quest and used as the primary dataset. The color attributes were expressed in terms of L*, a*, and b* values, representing Lightness, Redness, and Yellowness for positive color values, and Blackness, Greenness, and Blueness for negative color values in the dried samples.
+Protein content was estimated using Lowry’s method18. Fat content was determined using a Soxhlet apparatus, with petroleum ether as the solvent. Fourier Transform Infrared (FTIR) Spectral analysis was performed using a Shimadzu Irtracer 100, which has a spectral range of 4400–500 cm⁻1.
+Total Volatile Basic Nitrogen (TVB-N) levels were determined using a steam distillation method with trichloroacetic acid as the solvent. The distillate was titrated with 0.01 N Hydrochloric Acid using a Rosolic Acid indicator, with the endpoint indicated by a pale pink color. TVB-N was calculated using the formula shown in Eq. (1):1\documentclass[12pt]{minimal} \usepackage{amsmath} \usepackage{wasysym} \usepackage{amsfonts} \usepackage{amssymb} \usepackage{amsbsy} \usepackage{mathrsfs} \usepackage{upgreek} \setlength{\oddsidemargin}{-69pt} \begin{document}$$\text{TVBN }(\text{mg }/ 100\text{ gm}) = \frac{\left(N\right)14\left(300+W\right)\times {V}_{1}}{500}$$\end{document}TVBN(mg/100gm)=N14300+W×V1500where,
+V1 = Volume of standard acid consumed.
+W = water content of sample (g / 100 g).
+
+## Random forest model
+The parameters such as L*, a*, b*, dE, protein, TVB-N, pH and fat content were obtained using the methods described above. These measurements were recorded for the different packaging methods over a 12-day period with sampling every 3 days. The collected data was used to train a random forest regression model, a powerful machine learning technique for predicting pH values.
+The methodology for pH value estimation with random forest regression follows several key steps:1. Data Collection: Gather a comprehensive dataset that includes all relevant features, including color metrics (L*, a*, b*, dE), protein content, TVB-N, pH and fat.2. Data Preprocessing: Clean the dataset by handling missing values and outliers, normalizing numerical variables, and encoding categorical variables appropriately to prepare the data for model training.3. Dataset Splitting: The dataset was divided into two subsets: a training set and a testing set. The training set was used for model training, while the testing set was used for model evaluation.4. Model Training: The random forest algorithm creates an ensemble of decision trees, where each tree is trained on a random subset of the training data with replacement. A random subset of features is considered at each split, helping reduce overfitting and improving model generalization.5. Hyperparameter Tuning: The hyperparameters of the random forest algorithm, such as the number of trees, the maximum depth of the trees and the minimum number of samples required to split a node, were optimized using techniques like grid search or randomized search to improve model performance.6. Model Evaluation: The model’s performance was evaluated using appropriate regression metrics, including Mean Absolute Error (MAE), Mean Squared Error (MSE) and Root Mean Squared Error (RMSE). These metrics help assess how well the model predicts the pH values compared to actual values.7. Model Iteration and Updates: Based on evaluation results, the model was iteratively improved by adjusting hyperparameters and feature selection techniques to enhance prediction accuracy. Additionally, the model was continuously monitored and updated to maintain its accuracy across different fish varieties, packaging methods and storage conditions.
+1. Data Collection: Gather a comprehensive dataset that includes all relevant features, including color metrics (L*, a*, b*, dE), protein content, TVB-N, pH and fat.
+2. Data Preprocessing: Clean the dataset by handling missing values and outliers, normalizing numerical variables, and encoding categorical variables appropriately to prepare the data for model training.
+3. Dataset Splitting: The dataset was divided into two subsets: a training set and a testing set. The training set was used for model training, while the testing set was used for model evaluation.
+4. Model Training: The random forest algorithm creates an ensemble of decision trees, where each tree is trained on a random subset of the training data with replacement. A random subset of features is considered at each split, helping reduce overfitting and improving model generalization.
+5. Hyperparameter Tuning: The hyperparameters of the random forest algorithm, such as the number of trees, the maximum depth of the trees and the minimum number of samples required to split a node, were optimized using techniques like grid search or randomized search to improve model performance.
+6. Model Evaluation: The model’s performance was evaluated using appropriate regression metrics, including Mean Absolute Error (MAE), Mean Squared Error (MSE) and Root Mean Squared Error (RMSE). These metrics help assess how well the model predicts the pH values compared to actual values.
+7. Model Iteration and Updates: Based on evaluation results, the model was iteratively improved by adjusting hyperparameters and feature selection techniques to enhance prediction accuracy. Additionally, the model was continuously monitored and updated to maintain its accuracy across different fish varieties, packaging methods and storage conditions.
+This methodology enables consumers, suppliers and industry professionals to harness the power of machine learning for the automatic detection of pH values in seafood samples, thereby facilitating effective freshness monitoring and quality control.
+
+## Experimental results
+
+## Development of paper-based dual sensors
+Paper-based sensors using Methyl Red (MR) and Bromocresol Purple (BCP) indicators were successfully developed. As shown in Fig. 2a,b, the MR sensors exhibited a pinkish-red coloration, while the BCP sensors appeared yellow under initial conditions. These sensors are pH-sensitive: an increase or decrease in pH causes the MR sensor to change from pinkish-red to yellow, whereas the BCP sensor transitions from yellow to purple. These color transitions are illustrated clearly in Fig. 3a,b.Fig. 2(a) Methyl red (MR) sensor. (b) Bromocresol purple (BCP) sensor.Fig. 3(a) Change in the MR sensor. (b) Change in the BCP sensor.
+(a) Methyl red (MR) sensor. (b) Bromocresol purple (BCP) sensor.
+(a) Change in the MR sensor. (b) Change in the BCP sensor.
+
+## Fish packaging with different packaging techniques
+After cleaning and filleting, all six varieties of fish were packaged using three different methods: conventional, vacuum, and shrink packaging. Low-Density Polyethylene (LDPE) and Polypropylene (PP) pouches were used for this purpose. Figure 4a,b,c show the packaging methods implemented.Fig. 4(a) Conventional packaging. (b) Vacuum packaging. (c) Shrink packaging.
+(a) Conventional packaging. (b) Vacuum packaging. (c) Shrink packaging.
+
+## Colour analysis of the sensors
+pH indicators used for monitoring the freshness of food typically alter their color in response to changes in the chemical composition of food samples during storage (Listyarini et al., 2018). Similarly, the color of paper-based dual sensors prepared using Methyl Red (MR) and Bromocresol Purple (BCP) indicators shifted when placed over fish samples stored under three different packaging conditions in refrigeration. To evaluate the effectiveness of these sensors, pH buffer solutions ranging from 3 to 7, with an incremental difference of 0.1, were prepared. These solutions were used to observe the corresponding color changes.
+The results are presented in a graph, where the total color difference (dE) is plotted along the y-axis and the three different packaging configurations of the fish samples are plotted along the x-axis. Figure 5 illustrates the dE values of the MR sensor across different pH ranges, while Fig. 6 displays the dE values of the BCP sensor for the same pH ranges.Fig. 5dE values of MR sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.Fig. 6dE values of BCP sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.
+dE values of MR sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.
+dE values of BCP sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.
+As the pH levels in the package headspace increase during storage, volatile gases are released into the atmosphere (Fatemeh et al., 2017). Consequently, the color of the sensors changes, indicating the freshness of each sample. The findings reveal that the total color difference is more pronounced in the pH range between 4 and 6 compared to other ranges. The data further suggest that the sensors become darker as the pH approaches a more basic state, causing the color of the indicators to change accordingly.
+The color of both sensors placed over the fish samples for a period of 12 days, with observations recorded at 3-day intervals, indicated that the overall color change in the sensors for Mackerel, Sardine, Cuttlefish, and Pomfret samples was relatively higher compared to Prawn and Red Snapper.
+Figure 7 presents the dE values against the pH values for the MR and BCP sensors attached to vacuum-packed Sardine and Mackerel samples stored at refrigerated temperatures. Figure 8 illustrates the dE values against the pH values for MR and BCP sensors attached to vacuum-packed Prawn and Cuttlefish samples under the same storage conditions. Similarly, Fig. 9 displays the dE values against the pH values for MR and BCP sensors linked to vacuum-packed Red Snapper and Pomfret samples kept at refrigerator temperature.Fig. 7dE values of MR and BCP sensors attached with sadrine and mackerel stored at refrigerator temperature.Fig. 8dE values of MR and BCP sensors attached with prawn and cuttle fish stored at refrigerator temperature.Fig. 9dE values of MR and BCP sensors attached with Red snapper and Pomfret stored at refrigerator temperature.
+dE values of MR and BCP sensors attached with sadrine and mackerel stored at refrigerator temperature.
+dE values of MR and BCP sensors attached with prawn and cuttle fish stored at refrigerator temperature.
+dE values of MR and BCP sensors attached with Red snapper and Pomfret stored at refrigerator temperature.
+
+## Estimation of pH
+After the death of the fish, blood circulation halts, cutting off its oxygen supply. As a result, enzymes in the muscle break down glycogen into its component molecules, producing lactic acid. This process causes a decline in the pH of the fish muscle. The production of lactic acid continues until the glycogen supply is completely exhausted. Following this stage, rigor mortis sets in, characterized by muscle stiffness, which is then gradually followed by a decrease in stiffness and an increase in pH, leading to muscle softening (Tavares et al., 2021).
+Data collected and presented in Table 1 shows that on the zeroth day (immediately after harvest), the pH was approximately 7, indicating that the fish was freshly caught and retained a high level of nutritional value. Fresh fish typically have a pH range of 6.0 to 6.5, characterized by firm flesh and no foul smell. Moderately fresh fish exhibit a pH range of 6.5 to 6.8, with a softer texture and mild odor, but are still considered edible. In contrast, spoiled fish have a pH greater than 6.8, sometimes exceeding 7.5, accompanied by a slimy texture and a strong ammonia-like odor. This correlation between fish freshness and pH during cold storage was also reviewed by Abbas et al.19.Table 1pH estimation of fish samples stored under refrigerated temperature (4 °C) using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.Fish sampleDayspHdEBCPMRRegularVacuumShrinkRegularVacuumShrinkRegularVacuumShrinkMackerel0th6.72 ± 0.046.72 ± 0.046.72 ± 0.0445.72 ± 0.0845.72 ± 0.0845.72 ± 0.0823.31 ± 1.9423.31 ± 1.9423.31 ± 1.943rd6.46 ± 0.026.897.0122.21 ± 0.8540.92 ± 0.1035.51 ± 1.6622.21 ± 0.8525.65 ± 0.4232.96 ± 0.986th6.44 ± 0.016.566.5831.1 ± 0.4953.17 ± 1.6440.28 ± 0.3831.1 ± 0.4933.17 ± 1.2240.53 ± 0.659th6.15 ± 0.016.186.238.4 ± 0.5962.17 ± 0.5755.92 ± 2.1038.4 ± 0.5941.36 ± 1.6743.32 ± 1.1412th5.97 ± 0.035.996.0141.28 ± 0.0962.53 ± 0.7358.86 ± 0.2041.28 ± 0.0943.61 ± 0.2245.88 ± 0.10Sardine0th6.78 ± 0.026.78 ± 0.0526.78 ± 0.0236.36 ± 0.2136.36 ± 0.2136.36 ± 0.2124.31 ± 1.9124.31 ± 1.9124.31 ± 1.913rd6.34 ± 0.026.666.6928.25 ± 0.3934.78 ± 0.441.61 ± 0.0728.25 ± 0.3938.87 ± 0.1837.39 ± 0.196th6.24 ± 0.026.396.337.47 ± 0.1641.07 ± 0.6351.62 ± 0.0937.47 ± 0.1643.77 ± 1.2744.46 ± 0.359th6.22 ± 0.036.36.1040.97 ± 0.3545.48 ± 0.4655.25 ± 0.9140.97 ± 0.3545.39 ± 0.5150.11 ± 0.5812th5.96 ± 0.046.106.3941.79 ± 0.4444.9 ± 0.0954.43 ± 0.1441.79 ± 0.4456.93 ± 0.1352.01 ± 0.01Red snapper0th6.82 ± 0.056.82 ± 0.056.82 ± 0.0539.8 ± 0.1539.8 ± 0.1539.8 ± 0.1523.47 ± 1.4223.47 ± 1.4223.47 ± 1.423rd6.075 ± 0.16.22 ± 0.226.01 ± 0.0431.02 ± 0.9720.90 ± 5.1259.31 ± 0.1617.01 ± 2.817.30 ± 0.3528.76 ± 0.476th5.95 ± 0.026.16 ± 0.015.91 ± 0.0956.7 ± 0.1726.49 ± 2.2149.28 ± 1.5537.49 ± 0.1030.63 ± 1.6925.06 ± 0.649th5.65 ± 0.046.035 ± 0.025.72 ± 033.63 ± 1.1052.85 ± 0.1739.14 ± 0.7536.03 ± 1.636.11 ± 0.0334.94 ± 0.8612th5.51 ± 0.055.97 ± 0.0425.65 ± 0.0439.62 ± 1.5627.55 ± 0.5437.33 ± 0.5733.50 ± 0.9528.27 ± 0.4850.76 ± 0.14Cuttlefish0th6.26 ± 0.056.26 ± 0.056.26 ± 0.0539.76 ± 0.0739.76 ± 0.0739.76 ± 0.0716.6 ± 0.8816.6 ± 0.8816.6 ± 0.883rd5.82 ± 0.036.15 ± 0.0426.005 ± 0.0324.3 ± 1.0460.14 ± 0.7349.18 ± 1.1417.4 ± 0.5745.55 ± 2.835.38 ± 3.176th5.73 ± 0.015.575 ± 0.035.76 ± 0.0345.01 ± 3.3454.75 ± 0.945.71 ± 3.245.1 ± 2.940.35 ± 1.135.42 ± 1.889th5.67 ± 0.025.10 ± 0.025.66 ± 0.0443.19 ± 0.7740.83 ± 0.5133.18 ± 0.3843.54 ± 0.330.26 ± 0.1835.97 ± 0.2512th5.5 ± 0.055.01 ± 0.125.605 ± 0.1066.73 ± 2.2451.83 ± 0.2449.93 ± 0.6854.12 ± 0.6540.47 ± 0.0954.12 ± 0.65Pomfret0th6.60 ± 0.346.60 ± 0.346.60 ± 0.3435.28 ± 1.4635.28 ± 1.4635.28 ± 1.4623.52 ± 0.0223.52 ± 0.0223.52 ± 0.023rd5.94 ± 0.036.24 ± 0.046 ± 0.0251.9 ± 1.5133.2 ± 0.563.47 ± 1.0322.52 ± 0.4234.8 ± 1.9834.49 ± 1.016th5.855 ± 0.046.03 ± 0.025.93 ± 0.0646.26 ± 0.1449.57 ± 3.167.38 ± 0.2233.02 ± 0.5942.32 ± 0.344.45 ± 2.909th5.71 ± 0.025.94 ± 0.035.83 ± 0.1237.84 ± 0.9835.8 ± 0.4234.5 ± 0.3930.91 ± 0.5528.49 ± 0.1946.9 ± 0.0312th5.58 ± 0.0425.78 ± 0.085.71 ± 0.0256.85 ± 0.144.21 ± 0.1943.54 ± 0.3250.67 ± 0.6341.66 ± 0.0737.55 ± 0.89Prawn0th6.81 ± 0.026.81 ± 0.026.81 ± 0.0232.07 ± 0.1832.07 ± 0.1832.07 ± 0.1821.51 ± 1.7821.51 ± 1.7821.51 ± 1.783rd6.49 ± 0.026.566.6721.42 ± 0.3723.17 ± 0.4236.32 ± 0.8621.42 ± 0.3723.58 ± 3.0123.37 ± 0.756th6.46 ± 0.026.546.5840.40 ± 0.4626.28 ± 0.6344.41 ± 0.9940.40 ± 0.4630.15 ± 0.6326.11 ± 0.749th6.3 ± 0.036.486.5431.96 ± 0.2449.85 ± 0.3946 ± 0.4631.96 ± 0.2440.18 ± 0.4527.45 ± 1.0112th5.89 ± 0.026.316.2229.06 ± 0.0755.81 ± 0.6953.53 ± 0.2529.06 ± 0.0738.81 ± 0.4331.68 ± 0.97
+pH estimation of fish samples stored under refrigerated temperature (4 °C) using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.
+As the number of storage days increased, the pH initially decreased but then began to rise gradually. This is attributed to the emission of TVB-N, which is accompanied by the production of alkaline bacterial metabolites19.
+
+## Estimation of protein
+Fish, particularly Mackerel, Sardine, and Pomfret, are well-known for their high protein content. To quantify the protein levels in fresh fish samples, Lowry’s method was employed, and the results are presented in Table 2. When the experiment was repeated at 3-day intervals, it was observed that the protein content gradually decreased over time. This decline was not abrupt but progressive. The reduction in protein levels is primarily attributed to autolysis, an intrinsic breakdown of proteins and fats caused by a series of complex enzyme reactions.Table 2Protein estimation of fish samples stored under refrigerated temperature using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.Fish sampleDaysAmount of protein (g/100g)RegularVacuumShrinkMackerel0th18.26 ± 0.3518.48 ± 0.3818.34 ± 0.413rd13.92 ± 0.0117.64 ± 0.00418.02 ± 0.0086th10.47 ± 0.0315.12 ± 0.0317.89 ± 0.0089th7.45 ± 0.0212.01 ± 0.00815.67 ± 0.00812th7.01 ± 0.0079.16 ± 0.0213.31 ± 0.004Sardine0th13.50 ± 0.2113.50 ± 0.2113.50 ± 0.213rd13.06 ± 0.0312.03 ± 0.4313.34 ± 0.036th11.15 ± 0.0310.33 ± 0.0313.14 ± 0.029th9.88 ± 0.019.84 ± 0.0111.23 ± 0.0112th6.60 ± 0.0414.96 ± 0.3010.96 ± 0.01Red snapper0th22.39 ± 0.4322.39 ± 0.4322.39 ± 0.433rd20.33 ± 0.2220.44 ± 0.2818.62 ± 0.256th18.84 ± 0.121219.84 ± 0.1216.34 ± 0.19th17.51 ± 0.2318.92 ± 0.3515.35 ± 0.3512th17.36 ± 0.0516.55 ± 0.6112.48 ± 0.26Cuttlefish0th16.2 ± 0.9216.2 ± 0.9216.2 ± 0.923rd14.36 ± 0.3215.31 ± 0.5414.22 ± 0.436th12.22 ± 0.1114.34 ± 0.0713.33 ± 0.279th10.59 ± 0.2113 ± 0.6214.03 ± 1.6912th9.41 ± 0.0712.51 ± 0.4410.12 ± 0.02Pomfret0th16.4 ± 0.2516.4 ± 0.2516.4 ± 0.253rd13.67 ± 0.9314.25 ± 0.1612.32 ± 0.916th12.87 ± 0.1913.48 ± 0.4610.76 ± 0.489th11.85 ± 0.4512.81 ± 0.2610.01 ± 0.4712th10.23 ± 0.7912.48 ± 0.328.94 ± 0.588Prawn0th19.30 ± 0.0419.30 ± 0.0419.30 ± 0.043rd17.75 ± 0.0318.02 ± 0.00919.12 ± 0.0086th12.25 ± 0.0416.15 ± 0.0118.84 ± 0.0089th11.05 ± 0.0313.63 ± 0.0215.73 ± 0.00812th8.33 ± 0.00811.26 ± 0.0513.70 ± 0.04
+Protein estimation of fish samples stored under refrigerated temperature using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.
+Since the samples were stored under refrigerated conditions, the rate and extent of protein degradation were significantly minimized. Shenouda et al. (1980) demonstrated that several factors contribute to protein loss in fish during refrigeration, including enzyme-mediated activity of trimethylamine oxide (TMAO), an increase in solute concentration, dehydration, the formation of ice crystals, and accretion.
+
+## Estimation of fat
+Hydrolysis and oxidation are two distinct chemical reactions that occur during the processing and storage of fish, both contributing to the reduction of fat content. During lipid hydrolysis, free fatty acids are released, leading to the denaturation of proteins as their structure is compromised (Bashir et al., 2021). It was observed that the fat content decreased progressively as the storage period increased.
+After being refrigerated for 12 days, the fat content in the fatty fish Mackerel and Sardine dropped from 12 to 9 g and 11 to 9 g, respectively. A similar trend was observed in the other four fish samples: Red Snapper, Cuttlefish, Pomfret and Prawn. The results are summarized in Table 3. The reduction in lipid content during refrigerated storage is primarily attributed to oxidation. This oxidative reaction generates peroxides, which accelerate the degradation of fish quality (A. Keyvan et al., 2008).Table 3Fat estimation of fish samples stored under refrigerated temperature using three packaging conditions.Fish sampleDaysAmount of fat (g/5g)RegularVacuumShrinkMackerel0th20.98 ± 0.0220.98 ± 0.0220.98 ± 0.023rd13.4 ± 0.1515.1 ± 0.0615.7 ± 0.066th11.7 ± 0.0711.6 ± 0.00112.49 ± 0.029th8 ± 0.0029 ± 0.00210 ± 0.0412th2 ± 0.025.5 ± 0.0036.7 ± 0.006Sardine0th3rd11.8 ± 0.0314.8 ± 0.0714.98 ± 0.046th11 ± 0.1012 ± 0.0113.1 ± 0.029th9 ± 0.00110.6 ± 0.0019.75 ± 0.0312th8.3 ± 0.039.8 ± 0.0019.03 ± 0.16Red snapper0th3.653.653.653rd2.93 ± 0.193.14 ± 0.113.12 ± 0.036th2.28 ± 0.052.95 ± 0.042.88 ± 0.059th1.77 ± 0.82.40 ± 0.211.87 ± 0.0612th0.76 ± 0.041.01 ± 0.050.9 ± 0.07Cuttlefish0th3.73 ± 0.923.73 ± 0.923.73 ± 0.923rd3.11 ± 0.073.27 ± 0.043.16 ± 0.056th2.75 ± 0.092.98 ± 0.012.95 ± 0.029th1.92 ± 0.052.58 ± 0.032.26 ± 0.05512th1.57 ± 0.022.01 ± 0.0661.93 ± 0.101Pomfret0th2.63 ± 0.252.63 ± 0.252.63 ± 0.253rd2.15 ± 0.052.28 ± 0.0552.13 ± 0.036th1.60 ± 0.031.7 ± 0.071.53 ± 0.129th1.25 ± 0.11.2 ± 0.11.02 ± 0.0412th0.83 ± 0.080.99 ± 0.020.79 ± 0.44Prawn0th16.8 ± 0.0816.8 ± 0.0816.8 ± 0.083rd13 ± 0.0814.6 ± 0.0714.85 ± 0.046th11 ± 0.0612.4 ± 0.0112.32 ± 0.039th7 ± 0.038.9 ± 0.0028.97 ± 0.0312th5.01 ± 0.048.03 ± 0.0048.6 ± 0.06
+Fat estimation of fish samples stored under refrigerated temperature using three packaging conditions.
+
+## Results of random forest model
+The random forest model was trained using data collected from six different varieties of fish, each packed using different packaging methods. Table 4 presents the observed values for L*, a*, b*, dE, pH, protein and fat over a period of 0 to 12 days under refrigerated conditions.Table 4Collected data using six varieties of fishes.Methyl redBromocresol purpleTrail 1Trail 1NamedEdEDaysPackageProteinTVB-NpHFatMackerel23.31 ± 1.9445.72 ± 0.080Vacuum18.75 ± 0.089.38 ± 0.486.7220.98 ± 0.02Sardine24.31 ± 1.9136.36 ± 0.210Vacuum13.50 ± 0.2112.11 ± 0.516.385.32 ± 0.03Pomfret23.52 ± 0.0235.28 ± 1.460Vacuum16.4 ± 0.257.23 ± 0.466.60 ± 0.342.63Red snapper23.47 ± 1.4239.8 ± 0.150Vacuum22.39 ± 0.437.51 ± 0.126.82 ± 0.053.65Prawn21.51 ± 1.7832.07 ± 0.180Vacuum19.30 ± 0.0410.21 ± 0.456.8116.8 ± 0.08Cuttle fish16.6 ± 0.8839.76 ± 0.070Vacuum16.2 ± 0.927.18 ± 0.2126.26 ± 0.053.73Mackerel23.31 ± 1.9445.72 ± 0.080Shrink18.75 ± 0.089.38 ± 0.486.7220.98 ± 0.02
+Collected data using six varieties of fishes.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the Prawn variety is shown in Fig. 10. The decision tree possesses several essential characteristics that define its structure and functionality. At the root node, the initial condition is established as protein ≤ 11.775, which splits the dataset into two branches: the left branch if the condition is true, and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, further divisions occur based on criteria such as package ≤ 0.5. Similarly, the right subtree branches off according to parameters like TVB-N ≤ 11.32 and dE ≤ 34.73.Fig. 10Decision tree from random forest for prawn.
+Decision tree from random forest for prawn.
+Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. Each node in the tree displays the number of samples that reach that specific point. Additionally, the squared error at each node serves as a measure of predictive accuracy, where smaller values signify better performance.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the fish variety Pomfret is shown in Fig. 11. This decision tree possesses several key characteristics that define its structure and functionality. At the root node, the initial condition is established as protein ≤ 14.175, which divides the dataset into two branches: the left branch if the condition is true and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, additional splits occur based on criteria such as TVB-N ≤ 15.035. Similarly, in the right subtree, divisions are made according to parameters like dE ≤ 28.66.Fig. 11Decision tree from random forest for Pomfret.
+Decision tree from random forest for Pomfret.
+Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. These leaf nodes mark the completion of the decision-making path, where the model assigns a prediction based on the features observed.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the fish variety Red Snapper is shown in Fig. 12. This decision tree possesses several key characteristics that define its structure and functionality. At the root node, the initial condition is established as protein ≤ 21.77, which divides the dataset into two branches: the left branch if the condition is true and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, additional splits occur based on criteria such as TVB-N ≤ 11.815. Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. These leaf nodes mark the end of the decision-making path, where the model makes its final prediction based on the observed features.Fig. 12Decision tree from random forest for red snapper.
+Decision tree from random forest for red snapper.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the fish variety Sardine is shown in Fig. 13. This decision tree possesses several key characteristics that define its structure and functionality. At the root node, the initial condition is established as fat ≤ 12.545, which divides the dataset into two branches: the left branch if the condition is true and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, additional splits occur based on criteria such as TVB-N ≤ 23.715. Similarly, the right subtree is divided according to parameters like TVB-N ≤ 18.08. Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. These leaf nodes mark the conclusion of decision paths, where the model outputs its final prediction based on the observed features.Fig. 13Decision tree from random forest for sardine.
+Decision tree from random forest for sardine.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the fish variety Mackerel is shown in Fig. 14. This decision tree possesses several key characteristics that define its structure and functionality. At the root node, the initial condition is established as protein ≤ 9.84, which divides the dataset into two branches: the left branch if the condition is true and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, additional splits occur based on criteria such as TVB-N ≤ 22.67. Similarly, the right subtree is divided according to parameters like dE ≤ 28.83. Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. These leaf nodes mark the end of decision paths, where the model outputs its final prediction based on the observed features.Fig. 14Decision tree from random forest for mackerel.
+Decision tree from random forest for mackerel.
+The random forest model was trained separately for each variety of fish. The decision tree generated for the fish variety Cuttlefish is shown in Fig. 15. This decision tree exhibits several key characteristics that define its structure and functionality. At the root node, the initial condition is set as TVB-N ≤ 22.23, which divides the dataset into two branches: the left branch if the condition is true and the right branch if it is false. Intermediate nodes further refine the data subsets. For example, in the left subtree, additional splits occur based on criteria such as fat ≤ 3.125. Leaf nodes, represented as terminal boxes, indicate the final predictions of the tree. These leaf nodes mark the end of decision paths, where the model outputs its final prediction based on the observed features.Fig. 15Decision tree from random forest for Cuttle fish.
+Decision tree from random forest for Cuttle fish.
+The random forest model generates multiple decision trees during the training phase. When testing the model, an unknown sample is provided, and the model predicts its pH value. The performance of the random forest model is assessed using evaluation metrics such as Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE). Table 5 presents the predicted pH values alongside the corresponding evaluation metrics.Table 5MAE, MSE and RMSE values.S.NoFish typeMSERMSEMAEPredicted pH Values1Mackerel0.0050340.0709490.062933[6.1288 6.3068 6.7436]2Sardine0.0524190.2289530.142333[6.3112 6.4641 6.3999]3Prawn0.0218780.1479120.126867[6.3401 6.3272 6.7821]4Pomfret0.0046250.0680070.065833[5.86612 5.87182 6.5202 ]5Red snapper0.0128930.1135470.107973[5.87892 5.79684 6.732]6Cuttlefish0.1049920.3240240.22476[5.6548 5.7156 6.19612]
+MAE, MSE and RMSE values.
+The freshness of the fish is classified into three categories namely Fresh, Moderately Fresh, and Spoiled based on the predicted pH values using the trained Random Forest model. The freshness category for each fish type on the 15th day of vacuum storage is shown in Table 6.Table 6Freshness classification of fish samples based on predicted pH values.S.NoFish typePredicted pH Value on 15th day of vacuum storageFreshness category1Mackerel5.75768Fresh2Sardine6.5458Moderately fresh3Prawn5.85712Fresh4Pomfret6.5341Moderately fresh5Red snapper5.97256Fresh6Cuttlefish6.3252Fresh
+Freshness classification of fish samples based on predicted pH values.
+
+## Conclusion
+In conclusion, the paper-based dual sensors were successfully developed, and their efficiency was evaluated by comparing the color values obtained from buffer solutions with those of the sensors placed over refrigerated fish samples. The total amount of protein and fat in the fish samples stored under refrigeration for an extended period showed a gradual decline. This decrease is attributed to the refrigeration process, which, through the formation of ice crystals, inhibits the chemical reactions that typically lead to fish spoilage. As a result, the depletion of nutrients was less severe.
+The rate of spoilage in vacuum packaging was found to be significantly slower compared to conventional and shrink packaging. This clearly demonstrated that vacuum packaging is the most effective method for preserving fish. After 12 days of storage, there was only about a 2% reduction in the total protein and fat content of the fish samples. Following the rigor mortis phase, the pH levels of the samples initially dipped slightly but began to rise again after a few days. After being refrigerated at 4 °C (± 3 °C) for a period of 12 days, the fish samples underwent TVB-N Estimation. The results indicated that the fish remained safe for consumption, as the level of volatile nitrogen in all six fish samples was less than 35 mgN/100 g.
+Furthermore, the automation of freshness detection for refrigerated fish using a random forest model was successfully developed. The evaluation metrics Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE) demonstrated that the model accurately detected the freshness of the fish. This is particularly significant for advancing food processing automation.
+
+## Table Table 1: pH estimation of fish samples stored under refrigerated temperature (4 °C) using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.
+Fish sample | Days | pH | dE
+BCP | MR
+Regular | Vacuum | Shrink | Regular | Vacuum | Shrink | Regular | Vacuum | Shrink
+Mackerel | 0th | 6.72 ± 0.04 | 6.72 ± 0.04 | 6.72 ± 0.04 | 45.72 ± 0.08 | 45.72 ± 0.08 | 45.72 ± 0.08 | 23.31 ± 1.94 | 23.31 ± 1.94 | 23.31 ± 1.94
+3rd | 6.46 ± 0.02 | 6.89 | 7.01 | 22.21 ± 0.85 | 40.92 ± 0.10 | 35.51 ± 1.66 | 22.21 ± 0.85 | 25.65 ± 0.42 | 32.96 ± 0.98
+6th | 6.44 ± 0.01 | 6.56 | 6.58 | 31.1 ± 0.49 | 53.17 ± 1.64 | 40.28 ± 0.38 | 31.1 ± 0.49 | 33.17 ± 1.22 | 40.53 ± 0.65
+9th | 6.15 ± 0.01 | 6.18 | 6.2 | 38.4 ± 0.59 | 62.17 ± 0.57 | 55.92 ± 2.10 | 38.4 ± 0.59 | 41.36 ± 1.67 | 43.32 ± 1.14
+12th | 5.97 ± 0.03 | 5.99 | 6.01 | 41.28 ± 0.09 | 62.53 ± 0.73 | 58.86 ± 0.20 | 41.28 ± 0.09 | 43.61 ± 0.22 | 45.88 ± 0.10
+Sardine | 0th | 6.78 ± 0.02 | 6.78 ± 0.052 | 6.78 ± 0.02 | 36.36 ± 0.21 | 36.36 ± 0.21 | 36.36 ± 0.21 | 24.31 ± 1.91 | 24.31 ± 1.91 | 24.31 ± 1.91
+3rd | 6.34 ± 0.02 | 6.66 | 6.69 | 28.25 ± 0.39 | 34.78 ± 0.4 | 41.61 ± 0.07 | 28.25 ± 0.39 | 38.87 ± 0.18 | 37.39 ± 0.19
+6th | 6.24 ± 0.02 | 6.39 | 6.3 | 37.47 ± 0.16 | 41.07 ± 0.63 | 51.62 ± 0.09 | 37.47 ± 0.16 | 43.77 ± 1.27 | 44.46 ± 0.35
+9th | 6.22 ± 0.03 | 6.3 | 6.10 | 40.97 ± 0.35 | 45.48 ± 0.46 | 55.25 ± 0.91 | 40.97 ± 0.35 | 45.39 ± 0.51 | 50.11 ± 0.58
+12th | 5.96 ± 0.04 | 6.10 | 6.39 | 41.79 ± 0.44 | 44.9 ± 0.09 | 54.43 ± 0.14 | 41.79 ± 0.44 | 56.93 ± 0.13 | 52.01 ± 0.01
+Red snapper | 0th | 6.82 ± 0.05 | 6.82 ± 0.05 | 6.82 ± 0.05 | 39.8 ± 0.15 | 39.8 ± 0.15 | 39.8 ± 0.15 | 23.47 ± 1.42 | 23.47 ± 1.42 | 23.47 ± 1.42
+3rd | 6.075 ± 0.1 | 6.22 ± 0.22 | 6.01 ± 0.04 | 31.02 ± 0.97 | 20.90 ± 5.12 | 59.31 ± 0.16 | 17.01 ± 2.8 | 17.30 ± 0.35 | 28.76 ± 0.47
+6th | 5.95 ± 0.02 | 6.16 ± 0.01 | 5.91 ± 0.09 | 56.7 ± 0.17 | 26.49 ± 2.21 | 49.28 ± 1.55 | 37.49 ± 0.10 | 30.63 ± 1.69 | 25.06 ± 0.64
+9th | 5.65 ± 0.04 | 6.035 ± 0.02 | 5.72 ± 0 | 33.63 ± 1.10 | 52.85 ± 0.17 | 39.14 ± 0.75 | 36.03 ± 1.6 | 36.11 ± 0.03 | 34.94 ± 0.86
+12th | 5.51 ± 0.05 | 5.97 ± 0.042 | 5.65 ± 0.04 | 39.62 ± 1.56 | 27.55 ± 0.54 | 37.33 ± 0.57 | 33.50 ± 0.95 | 28.27 ± 0.48 | 50.76 ± 0.14
+Cuttlefish | 0th | 6.26 ± 0.05 | 6.26 ± 0.05 | 6.26 ± 0.05 | 39.76 ± 0.07 | 39.76 ± 0.07 | 39.76 ± 0.07 | 16.6 ± 0.88 | 16.6 ± 0.88 | 16.6 ± 0.88
+3rd | 5.82 ± 0.03 | 6.15 ± 0.042 | 6.005 ± 0.03 | 24.3 ± 1.04 | 60.14 ± 0.73 | 49.18 ± 1.14 | 17.4 ± 0.57 | 45.55 ± 2.8 | 35.38 ± 3.17
+6th | 5.73 ± 0.01 | 5.575 ± 0.03 | 5.76 ± 0.03 | 45.01 ± 3.34 | 54.75 ± 0.9 | 45.71 ± 3.2 | 45.1 ± 2.9 | 40.35 ± 1.1 | 35.42 ± 1.88
+9th | 5.67 ± 0.02 | 5.10 ± 0.02 | 5.66 ± 0.04 | 43.19 ± 0.77 | 40.83 ± 0.51 | 33.18 ± 0.38 | 43.54 ± 0.3 | 30.26 ± 0.18 | 35.97 ± 0.25
+12th | 5.5 ± 0.05 | 5.01 ± 0.12 | 5.605 ± 0.10 | 66.73 ± 2.24 | 51.83 ± 0.24 | 49.93 ± 0.68 | 54.12 ± 0.65 | 40.47 ± 0.09 | 54.12 ± 0.65
+Pomfret | 0th | 6.60 ± 0.34 | 6.60 ± 0.34 | 6.60 ± 0.34 | 35.28 ± 1.46 | 35.28 ± 1.46 | 35.28 ± 1.46 | 23.52 ± 0.02 | 23.52 ± 0.02 | 23.52 ± 0.02
+3rd | 5.94 ± 0.03 | 6.24 ± 0.04 | 6 ± 0.02 | 51.9 ± 1.51 | 33.2 ± 0.5 | 63.47 ± 1.03 | 22.52 ± 0.42 | 34.8 ± 1.98 | 34.49 ± 1.01
+6th | 5.855 ± 0.04 | 6.03 ± 0.02 | 5.93 ± 0.06 | 46.26 ± 0.14 | 49.57 ± 3.1 | 67.38 ± 0.22 | 33.02 ± 0.59 | 42.32 ± 0.3 | 44.45 ± 2.90
+9th | 5.71 ± 0.02 | 5.94 ± 0.03 | 5.83 ± 0.12 | 37.84 ± 0.98 | 35.8 ± 0.42 | 34.5 ± 0.39 | 30.91 ± 0.55 | 28.49 ± 0.19 | 46.9 ± 0.03
+12th | 5.58 ± 0.042 | 5.78 ± 0.08 | 5.71 ± 0.02 | 56.85 ± 0.1 | 44.21 ± 0.19 | 43.54 ± 0.32 | 50.67 ± 0.63 | 41.66 ± 0.07 | 37.55 ± 0.89
+Prawn | 0th | 6.81 ± 0.02 | 6.81 ± 0.02 | 6.81 ± 0.02 | 32.07 ± 0.18 | 32.07 ± 0.18 | 32.07 ± 0.18 | 21.51 ± 1.78 | 21.51 ± 1.78 | 21.51 ± 1.78
+3rd | 6.49 ± 0.02 | 6.56 | 6.67 | 21.42 ± 0.37 | 23.17 ± 0.42 | 36.32 ± 0.86 | 21.42 ± 0.37 | 23.58 ± 3.01 | 23.37 ± 0.75
+6th | 6.46 ± 0.02 | 6.54 | 6.58 | 40.40 ± 0.46 | 26.28 ± 0.63 | 44.41 ± 0.99 | 40.40 ± 0.46 | 30.15 ± 0.63 | 26.11 ± 0.74
+9th | 6.3 ± 0.03 | 6.48 | 6.54 | 31.96 ± 0.24 | 49.85 ± 0.39 | 46 ± 0.46 | 31.96 ± 0.24 | 40.18 ± 0.45 | 27.45 ± 1.01
+12th | 5.89 ± 0.02 | 6.31 | 6.22 | 29.06 ± 0.07 | 55.81 ± 0.69 | 53.53 ± 0.25 | 29.06 ± 0.07 | 38.81 ± 0.43 | 31.68 ± 0.97
+
+## Table Table 2: Protein estimation of fish samples stored under refrigerated temperature using three packaging conditions. Mean ± SD at p < 0.05 level for triplicate data.
+Fish sample | Days | Amount of protein (g/100g)
+Regular | Vacuum | Shrink
+Mackerel | 0th | 18.26 ± 0.35 | 18.48 ± 0.38 | 18.34 ± 0.41
+3rd | 13.92 ± 0.01 | 17.64 ± 0.004 | 18.02 ± 0.008
+6th | 10.47 ± 0.03 | 15.12 ± 0.03 | 17.89 ± 0.008
+9th | 7.45 ± 0.02 | 12.01 ± 0.008 | 15.67 ± 0.008
+12th | 7.01 ± 0.007 | 9.16 ± 0.02 | 13.31 ± 0.004
+Sardine | 0th | 13.50 ± 0.21 | 13.50 ± 0.21 | 13.50 ± 0.21
+3rd | 13.06 ± 0.03 | 12.03 ± 0.43 | 13.34 ± 0.03
+6th | 11.15 ± 0.03 | 10.33 ± 0.03 | 13.14 ± 0.02
+9th | 9.88 ± 0.01 | 9.84 ± 0.01 | 11.23 ± 0.01
+12th | 6.60 ± 0.04 | 14.96 ± 0.30 | 10.96 ± 0.01
+Red snapper | 0th | 22.39 ± 0.43 | 22.39 ± 0.43 | 22.39 ± 0.43
+3rd | 20.33 ± 0.22 | 20.44 ± 0.28 | 18.62 ± 0.25
+6th | 18.84 ± 0.1212 | 19.84 ± 0.12 | 16.34 ± 0.1
+9th | 17.51 ± 0.23 | 18.92 ± 0.35 | 15.35 ± 0.35
+12th | 17.36 ± 0.05 | 16.55 ± 0.61 | 12.48 ± 0.26
+Cuttlefish | 0th | 16.2 ± 0.92 | 16.2 ± 0.92 | 16.2 ± 0.92
+3rd | 14.36 ± 0.32 | 15.31 ± 0.54 | 14.22 ± 0.43
+6th | 12.22 ± 0.11 | 14.34 ± 0.07 | 13.33 ± 0.27
+9th | 10.59 ± 0.21 | 13 ± 0.62 | 14.03 ± 1.69
+12th | 9.41 ± 0.07 | 12.51 ± 0.44 | 10.12 ± 0.02
+Pomfret | 0th | 16.4 ± 0.25 | 16.4 ± 0.25 | 16.4 ± 0.25
+3rd | 13.67 ± 0.93 | 14.25 ± 0.16 | 12.32 ± 0.91
+6th | 12.87 ± 0.19 | 13.48 ± 0.46 | 10.76 ± 0.48
+9th | 11.85 ± 0.45 | 12.81 ± 0.26 | 10.01 ± 0.47
+12th | 10.23 ± 0.79 | 12.48 ± 0.32 | 8.94 ± 0.588
+Prawn | 0th | 19.30 ± 0.04 | 19.30 ± 0.04 | 19.30 ± 0.04
+3rd | 17.75 ± 0.03 | 18.02 ± 0.009 | 19.12 ± 0.008
+6th | 12.25 ± 0.04 | 16.15 ± 0.01 | 18.84 ± 0.008
+9th | 11.05 ± 0.03 | 13.63 ± 0.02 | 15.73 ± 0.008
+12th | 8.33 ± 0.008 | 11.26 ± 0.05 | 13.70 ± 0.04
+
+## Table Table 3: Fat estimation of fish samples stored under refrigerated temperature using three packaging conditions.
+Fish sample | Days | Amount of fat (g/5g)
+Regular | Vacuum | Shrink
+Mackerel | 0th | 20.98 ± 0.02 | 20.98 ± 0.02 | 20.98 ± 0.02
+3rd | 13.4 ± 0.15 | 15.1 ± 0.06 | 15.7 ± 0.06
+6th | 11.7 ± 0.07 | 11.6 ± 0.001 | 12.49 ± 0.02
+9th | 8 ± 0.002 | 9 ± 0.002 | 10 ± 0.04
+12th | 2 ± 0.02 | 5.5 ± 0.003 | 6.7 ± 0.006
+Sardine | 0th |  |  | 
+3rd | 11.8 ± 0.03 | 14.8 ± 0.07 | 14.98 ± 0.04
+6th | 11 ± 0.10 | 12 ± 0.01 | 13.1 ± 0.02
+9th | 9 ± 0.001 | 10.6 ± 0.001 | 9.75 ± 0.03
+12th | 8.3 ± 0.03 | 9.8 ± 0.001 | 9.03 ± 0.16
+Red snapper | 0th | 3.65 | 3.65 | 3.65
+3rd | 2.93 ± 0.19 | 3.14 ± 0.11 | 3.12 ± 0.03
+6th | 2.28 ± 0.05 | 2.95 ± 0.04 | 2.88 ± 0.05
+9th | 1.77 ± 0.8 | 2.40 ± 0.21 | 1.87 ± 0.06
+12th | 0.76 ± 0.04 | 1.01 ± 0.05 | 0.9 ± 0.07
+Cuttlefish | 0th | 3.73 ± 0.92 | 3.73 ± 0.92 | 3.73 ± 0.92
+3rd | 3.11 ± 0.07 | 3.27 ± 0.04 | 3.16 ± 0.05
+6th | 2.75 ± 0.09 | 2.98 ± 0.01 | 2.95 ± 0.02
+9th | 1.92 ± 0.05 | 2.58 ± 0.03 | 2.26 ± 0.055
+12th | 1.57 ± 0.02 | 2.01 ± 0.066 | 1.93 ± 0.101
+Pomfret | 0th | 2.63 ± 0.25 | 2.63 ± 0.25 | 2.63 ± 0.25
+3rd | 2.15 ± 0.05 | 2.28 ± 0.055 | 2.13 ± 0.03
+6th | 1.60 ± 0.03 | 1.7 ± 0.07 | 1.53 ± 0.12
+9th | 1.25 ± 0.1 | 1.2 ± 0.1 | 1.02 ± 0.04
+12th | 0.83 ± 0.08 | 0.99 ± 0.02 | 0.79 ± 0.44
+Prawn | 0th | 16.8 ± 0.08 | 16.8 ± 0.08 | 16.8 ± 0.08
+3rd | 13 ± 0.08 | 14.6 ± 0.07 | 14.85 ± 0.04
+6th | 11 ± 0.06 | 12.4 ± 0.01 | 12.32 ± 0.03
+9th | 7 ± 0.03 | 8.9 ± 0.002 | 8.97 ± 0.03
+12th | 5.01 ± 0.04 | 8.03 ± 0.004 | 8.6 ± 0.06
+
+## Table Table 4: Collected data using six varieties of fishes.
+ | Methyl red | Bromocresol purple |  |  |  |  |  | 
+ | Trail 1 | Trail 1 |  |  |  |  |  | 
+Name | dE | dE | Days | Package | Protein | TVB-N | pH | Fat
+Mackerel | 23.31 ± 1.94 | 45.72 ± 0.08 | 0 | Vacuum | 18.75 ± 0.08 | 9.38 ± 0.48 | 6.72 | 20.98 ± 0.02
+Sardine | 24.31 ± 1.91 | 36.36 ± 0.21 | 0 | Vacuum | 13.50 ± 0.21 | 12.11 ± 0.51 | 6.38 | 5.32 ± 0.03
+Pomfret | 23.52 ± 0.02 | 35.28 ± 1.46 | 0 | Vacuum | 16.4 ± 0.25 | 7.23 ± 0.46 | 6.60 ± 0.34 | 2.63
+Red snapper | 23.47 ± 1.42 | 39.8 ± 0.15 | 0 | Vacuum | 22.39 ± 0.43 | 7.51 ± 0.12 | 6.82 ± 0.05 | 3.65
+Prawn | 21.51 ± 1.78 | 32.07 ± 0.18 | 0 | Vacuum | 19.30 ± 0.04 | 10.21 ± 0.45 | 6.81 | 16.8 ± 0.08
+Cuttle fish | 16.6 ± 0.88 | 39.76 ± 0.07 | 0 | Vacuum | 16.2 ± 0.92 | 7.18 ± 0.212 | 6.26 ± 0.05 | 3.73
+Mackerel | 23.31 ± 1.94 | 45.72 ± 0.08 | 0 | Shrink | 18.75 ± 0.08 | 9.38 ± 0.48 | 6.72 | 20.98 ± 0.02
+
+## Table Table 5: MAE, MSE and RMSE values.
+S.No | Fish type | MSE | RMSE | MAE | Predicted pH Values
+1 | Mackerel | 0.005034 | 0.070949 | 0.062933 | [6.1288 6.3068 6.7436]
+2 | Sardine | 0.052419 | 0.228953 | 0.142333 | [6.3112 6.4641 6.3999]
+3 | Prawn | 0.021878 | 0.147912 | 0.126867 | [6.3401 6.3272 6.7821]
+4 | Pomfret | 0.004625 | 0.068007 | 0.065833 | [5.86612 5.87182 6.5202 ]
+5 | Red snapper | 0.012893 | 0.113547 | 0.107973 | [5.87892 5.79684 6.732]
+6 | Cuttlefish | 0.104992 | 0.324024 | 0.22476 | [5.6548 5.7156 6.19612]
+
+## Table Table 6: Freshness classification of fish samples based on predicted pH values.
+S.No | Fish type | Predicted pH Value on 15th day of vacuum storage | Freshness category
+1 | Mackerel | 5.75768 | Fresh
+2 | Sardine | 6.5458 | Moderately fresh
+3 | Prawn | 5.85712 | Fresh
+4 | Pomfret | 6.5341 | Moderately fresh
+5 | Red snapper | 5.97256 | Fresh
+6 | Cuttlefish | 6.3252 | Fresh
+
+## Figure Fig. 1: Preparation of paper based sensors.
+
+## Figure Fig. 2: (a) Methyl red (MR) sensor. (b) Bromocresol purple (BCP) sensor.
+
+## Figure Fig. 3: (a) Change in the MR sensor. (b) Change in the BCP sensor.
+
+## Figure Fig. 4: (a) Conventional packaging. (b) Vacuum packaging. (c) Shrink packaging.
+
+## Figure Fig. 5: dE values of MR sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.
+
+## Figure Fig. 6: dE values of BCP sensor at different pH range. Mean ± SD at p < 0.05 level for triplicate data.
+
+## Figure Fig. 7: dE values of MR and BCP sensors attached with sadrine and mackerel stored at refrigerator temperature.
+
+## Figure Fig. 8: dE values of MR and BCP sensors attached with prawn and cuttle fish stored at refrigerator temperature.
+
+## Figure Fig. 9: dE values of MR and BCP sensors attached with Red snapper and Pomfret stored at refrigerator temperature.
+
+## Figure Fig. 10: Decision tree from random forest for prawn.
+
+## Figure Fig. 11: Decision tree from random forest for Pomfret.
+
+## Figure Fig. 12: Decision tree from random forest for red snapper.
+
+## Figure Fig. 13: Decision tree from random forest for sardine.
+
+## Figure Fig. 14: Decision tree from random forest for mackerel.
+
+## Figure Fig. 15: Decision tree from random forest for Cuttle fish.

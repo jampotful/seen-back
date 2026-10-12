@@ -1,0 +1,210 @@
+Bionic Spider Robot Control Based on Image Processing Algorithm
+Qingsheng Shi, Wei Cheng, Ke Lü (2018). . https://doi.org/10.2991/acaai-18.2018.3. doi:10.2991/acaai-18.2018.3. Licence: cc-by-nc. Text from pdf.
+
+Advances in Intelligent Systems Research (AISR), volume 155
+2018 International Conference on Advanced Control, Automation and Artificial Intelligence (ACAAI 2018)
+
+Bionic Spider Robot Control Based on Image
+Processing Algorithm
+Qingsheng Shi* , Cheng Wei and Ke Lu
+College of Electrical Engineering, Henan University of Technology, Zhengzhou 450001, China
+* Corresponding author
+
+Abstract—Compared to wheeled and tracked robots, bionic
+robots are playing an increasingly important role in search,
+rescue, anti-terrorism and scientific investigation. The vision
+processing system is the vital part of the bionic robot system, and
+its algorithm determines the overall control performance of the
+system. In the paper, a bionic spider robot control strategy is
+proposed based on image processing algorithm. The object
+grasping of is taken as the control object, and the simulation
+experiment is carried out based on the self-made system. The
+experimental results show that the proposed control strategy
+based on image processing algorithm is feasible and effective.
+Keywords- image processing; bionic spider robot; edge
+detection; object grasping
+
+I.
+INT RODUCT ION
+Co mpared with wheeled and tracked mobile robots,
+walking robots have unique advantages in rugged terrain [1].
+The emergence of bionic walking robot shows the advantages
+of walking robot. The walking trajectory of the robot is a series
+of discrete footprints, motion only discrete point of contact
+with the ground, the extent of damage to the environment is
+small, the rough terrain adaptability [2-3]. Therefore, bionic
+walking robots are more and more widely used in scientific
+exp loration, scientific experiments, search, rescue and other
+conditions.
+Bionic spider robot, as a typical bionic robot, through the
+nature of the spider in the biological movement of the body to
+simulate the completion of specific tasks [4-6]. As the core
+subsystem of humanoid spider robot, the vision system
+determines the performance of the system task. This paper
+studies the application of image processing algorithm in bionic
+spider robot object grasping operation. Using color camera to
+collect the surrounding environment photos, color enables the
+robot to distinguish the color, through the edge detection
+algorithm for image processing, which can screen the target
+contour features. After the image processing, the robot is able
+to obtain the position and orientation parameters of the target
+object as the judgment basis of the moving displacement, and
+then perform the grasping task.
+II.
+
+CONT ROL ST RAT EGY OF BIONIC SPIDER ROBOT BASED
+ON IMAGE PROCESSING A LGORIT HM
+
+Image processing is the core of bionic spider robot control
+strategy. The process mainly includes six steps: the first step:
+gray; the second step: Gauss filter; the third step: compute the
+
+gradient magnitude and direction; the fourth step: non
+maximu m suppression; the fifth step: selection of threshold; the
+sixth step: edge detection. Specific as follows:
+The first step: grayscale [7]. This function is imp lemented
+by our custom function ImageProcessLoadImage (). First, read
+the pixel data fro m the camera module to handling fro m LCD
+GRAM, a total of 320*480=153600 pixels, in this process will
+be in accordance with the RGB565 mode of the color pixels of
+2 bytes split out three color co mponents, mask definition RGB,
+R accounted for 5, G accounted for 6, B accounted for 5.
+According to the following formula, the 8 bit gray image is
+calculated:
+
+Gray  0.299R  0.587G  0.114B
+Gray
+image
+conversion
+ImageProcessLoadImage
+(ImageResource* bmpImg) called void; after the function reads
+the pixel data fro m the LCD GRAM in the RGB565 mode
+according to the pixel resolution of 3 colors, as shown above
+the gray value according to the formula, the b mpImg parameter
+is the heap address stored gray data.
+The second step: image Gauss filtering. The realization of
+image Gauss filtering can be realized by two times of one
+dimension Gauss kernel two t imes weighted, that is to say, first
+one-dimensional X direction convolution, and the result is
+further one-dimensional Y direction convolution.
+The third step: to calculate the gradient and direction, the
+gradient of the gray value of the image is generally
+approximated by the first order finite difference, so that the two
+derivatives of the partial derivative of the image in the direction
+of X and y can be obtained. We use the commonly used Sobel
+operator [8]. For the image to be detected edge I, respectively
+in the horizontal (x) direction and vertical direction (y)
+direction of differentiation, the method is the image I and
+convolution kernel Gx and Gy convolution, formula is
+expressed as follows:
+
+  1 0 1
+ 1  2  1
+
+
+Gx   2 0 2 * I , G y   0
+0
+0  * I
+  1 0 1
+ 1
+2
+1 
+After that, each point on the gradient image obtained in
+horizontal and vertical directions is executed:
+
+G  Gx2  G y2
+
+Copyright © 2018, the Authors. Published by Atlantis Press.
+This is an open access article under the CC BY-NC license (http://creativecommons.org/licenses/by-nc/4.0/).
+
+10
+
+Advances in Intelligent Systems Research (AISR), volume 155
+
+G is the gradient image obtained by Sobel.
+The fourth step: non maximu m suppression. Non maxima
+suppression of amplitude image, can further eliminate non edge
+noise, more importantly, can refine the edge. The suppression
+logic is: along the gradient direction of the point, compare the
+amplitude of the previous two points, if the point is greater than
+the previous two points, then retain, if the point is less than the
+previous two points, then set to 0.
+The fifth step: double threshold selection. The mechanism
+of double threshold is first to specify a low threshold and a high
+threshold, high threshold for the whole image is generally the
+gray level distribution of the 70%, and the high threshold fo r
+the low threshold of 1.5 to 2 t imes the size of; gray value
+greater than the high threshold, set to 255, gray value is less
+than the low threshold, set to 0; gray value between high and
+low threshold, observed 8 pixels pixels near if there is a gray
+value of 255, if not 255, said this is a local maxima, isolated to
+be excluded, set to 0; if 255, said this is a talk the other edge
+"border", set to 255, then repeat the steps until the investigation
+after a pixel.
+The sixth step: use the above interface function edge
+detection.
+III.
+
+EXPERIMENT AL SIMULAT ION AND A NALYSIS
+
+In order to verify the effectiveness of the proposed control
+strategy, based on the self-made system, the circular bottle cap
+was used as the grasping task, and the experimental verification
+was carried out under the laboratory conditions, as shown in
+figure 1.
+
+It can be seen from Figure 2 that by using the designed
+control strategy, the spider robot can effectively capture the
+object by processing the image of the captured object.
+IV.
+
+CONCLUSIONS
+
+The application of image processing algorithm in bionic
+spider robot control is studied in this paper. By gray, Gauss
+filter, grad ient calculation, non maxima suppression, double
+threshold selection and edge detection operation, realizes the
+image processing of the bionic spider robot grasping object,
+and system steering image processing based on the results of
+objects quickly complete object action.
+A CKNOWLEDGMENT
+
+This work is supported by National Natural Science
+Foundation (NNCF) of China under Grant 61403124
+REFERENCES
+[1]
+
+[2]
+[3]
+[4]
+[5]
+
+[6]
+[7]
+[8]
+
+D P Miller.Multiple behaviour-controlled micro-robots for planetary
+surface missions[C]. Proceedings of the IEEE International Conference
+on Systems,Man and Cybernetics.USA:IEEE, 1990:289-292.
+F Delcomyn,ME Nelson.Architectures for a biomimetic hexapod
+robot[J].Robotics and Autonomous Systems,2000,30(1):5-15.
+LIU Jing ZHAO Xiao-guang T AN Min.Legged Robots: A Review[J].
+ROBOT ,2006,28(1):81-88.
+PENG Qian,LI Hongyan.design of Bionic and detectable spider robot
+system[J].research and exploration in laboratory,2016,35(12):84-87.
+M Ghayour ， A Zareei. Inverse Kinematic Analysis of a Hexapod
+Spider-Like Mobile Robot[J].Advanced Materials Research, 2011, 403408: 5061-5067.
+SHI Wenzao, WANG Ping.Desgin and implementation of bionic spider
+robot[J].Electronic Sci.&Tech.2013,26(3):90-92.
+Rafael C. Gonzalez, Richard E. Woods.Digital Image Processing (Third
+Edition), Publishing House oof Electronics Industry, 2011.
+XU Yanlei,ZHAO Jiyin,JIAO Yubin.Study of edge detection method for
+noisy image[J].Application research of computers, 2009,26(1): 387-389.
+
+FIGURE I. IMAGE ACQUISIT ION
+
+FIGURE II. ROBOT GRASPING RESULT S
+
+11
+
+

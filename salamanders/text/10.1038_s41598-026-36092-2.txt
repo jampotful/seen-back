@@ -1,0 +1,197 @@
+Deep learning based individual identification and population estimation of the yellow spotted mountain newt (Neurergus derjugini)
+Zahra Rahmdel, Somaye Vaissi, Payam Faramarzi, Pouria Dowlatshahi, Mohammad-Sedigh Mohammadyan, Zeynab Taheri-Khas (2026). Scientific Reports. https://doi.org/10.1038/s41598-026-36092-2. doi:10.1038/s41598-026-36092-2. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Deep learning based individual identification and population estimation of the yellow spotted mountain newt (Neurergus derjugini)
+
+## Abstract
+AbstractThe yellow-spotted mountain newt (Neurergus derjugini), an endangered amphibian endemic to the Zagros Mountains, faces critical threats from habitat loss and climate change. Effective conservation requires reliable population monitoring, yet traditional marking methods are invasive and impractical. This study presents a non-invasive, image-based approach combining geometric computer vision and deep learning for individual identification and population estimation. We captured 549 adult N. derjugini in their natural habitat, photographing dorsal patterns under standardized conditions. A geometric pipeline (HSV thresholding, morphological operations) extracted yellow spot features (area, circularity, count), achieving 93% detection accuracy. Three convolutional neural networks (CNNs)—DenseNet121, EfficientNetB0, and InceptionV3—were fine-tuned for phenotypic classification, with DenseNet121 attaining the highest accuracy (99.11%) and AUC (0.98). Region-specific analysis showed optimal performance when combining head and trunk patterns (96.32% accuracy). A mark-recapture framework, applied to two sampling sessions (n = 332 and 217 individuals), identified 65 recaptures, yielding a Lincoln-Petersen population estimate of 1108 individuals. Our results demonstrate that deep learning outperforms traditional methods in robustness and scalability, particularly under variable field conditions. This study advances amphibian conservation by providing a rapid, ethical, and scalable tool for monitoring endangered species. Future directions include expanding datasets for temporal stability validation and deploying mobile applications for real-time field use. By integrating AI with ecological research, this work highlights the transformative potential of automated identification in biodiversity conservation.Supplementary InformationThe online version contains supplementary material available at 10.1038/s41598-026-36092-2.Keywords: Deep learning, Non-invasive monitoring, Convolutional neural networks, Mark-recapture, Smartphone images, Amphibian conservationSubject terms: Computational biology and bioinformatics, Ecology, Ecology
+
+## Introduction
+Accurate identification of individuals is fundamental to wildlife ecology and conservation, forming the basis for population estimation, survival analysis, reproductive assessment, and movement studies1–4. For amphibians, which are often cryptic, habitat-specialized, and highly sensitive to environmental disturbance, reliable individual-based monitoring is particularly important5,6. This need is amplified by the global decline of amphibians, with approximately 41% of species currently classified as threatened on the IUCN Red List7.
+Conventional amphibian monitoring approaches, including visual encounter surveys, capture–mark–recapture, and larval counts, are widely used but often suffer from low detectability, observer bias, and logistical constraints in complex or aquatic habitats8–12. Invasive identification techniques such as toe clipping, tissue sampling, or passive integrated transponder (PIT) tagging may negatively affect animal welfare, alter behavior, or reduce survival, and frequently require permits for protected species13–20. These limitations restrict their applicability for long-term monitoring of threatened amphibian populations.
+Non-invasive identification methods offer important alternatives. Genetic approaches based on DNA extracted from feces, skin swabs, or environmental samples can provide high accuracy but are costly, technically demanding, and dependent on high-quality samples, which are difficult to obtain consistently for many amphibians21–23. Photographic identification using natural body patterns represents a practical, low-cost, and non-invasive solution24. This method avoids physical handling, prevents tag loss, and minimizes behavioral disturbance25,26. Several amphibian species, particularly salamanders and newts, exhibit individually unique and temporally stable color patterns, making them well suited to image-based identification27,28.
+Despite these advantages, manual photographic matching becomes increasingly inefficient and error-prone as the number of individuals grows, limiting its usefulness for population-scale studies29. Recent advances in computer vision and deep learning provide effective solutions to this challenge30. Convolutional neural networks (CNNs) can automatically extract discriminative features from images and perform high-accuracy classification and re-identification31,32. While deep learning has been widely adopted for individual identification in mammals and, more recently, birds and reptiles33–44, its application to amphibians remains limited45, representing a significant methodological gap in conservation research.
+The yellow-spotted mountain newt (Neurergus derjugini) is an ideal candidate for automated individual identification. This vulnerable species inhabits mountainous streams and springs in western Iran and eastern Iraq and is threatened by habitat loss, water pollution, climate change, and illegal collection46. Individuals display distinctive yellow spot patterns that remain stable over time and vary markedly among individuals47. Current population estimates for N. derjugini vary substantially among localities, highlighting the need for accurate, repeatable, and non-invasive monitoring tools.
+In this study, we develop and evaluate a deep learning–based framework for individual identification and population estimation of N. derjugini using smartphone-acquired images. By integrating digital image processing with machine learning, we present a scalable and cost-effective approach tailored to amphibian field conditions. To our knowledge, this is the first study to apply deep learning for individual recognition in the genus Neurergus. Our approach addresses key limitations of conventional amphibian census techniques and provides a robust tool for long-term population monitoring and conservation planning of threatened amphibians.
+
+## Result
+
+## Geometric analysis
+A traditional computer vision approach was applied to detect and quantify yellow spot patterns in N. derjugini using HSV-based color segmentation. All images were converted from RGB to HSV color space, and predefined threshold values corresponding to yellow hues were used to isolate spot regions. To improve segmentation quality and reduce noise, morphological operations including opening and closing were applied to the binary masks.
+The proportion of yellow spot coverage was then calculated as the ratio of the total detected spot area to the overall body area of each individual. Using this geometric approach, the average detection accuracy reached 93% for full-body images and 87% for cropped images restricted to the head and trunk regions.
+
+## Deep learning models
+For phenotypic variant typing based on yellow spot morphology, three convolutional neural network (CNN) models—DenseNet121, EfficientNetB0, and InceptionV3—were systematically compared. The dataset comprised 549 manually annotated images, partitioned into a training set (329 images; 60%), validation set (110 images; 20%), and test set (110 images; 20%).
+All models were trained under identical experimental conditions, using four batch sizes, a learning rate of 0.001, and 16 training epochs. Model performance was assessed using classification accuracy, training time, and the area under the receiver operating characteristic curve (AUC).
+Under these standardized conditions, DenseNet121 achieved the highest classification accuracy (99.11%), demonstrating superior capability in distinguishing phenotypic variants of N. derjugini. EfficientNetB0 closely followed with an accuracy of 98.97%, offering the most favorable balance between predictive performance and computational efficiency. InceptionV3 also performed competitively, achieving an accuracy of 98.86%. Detailed comparative results are provided in Table 1.
+Training parameters and classification performance of CNN Models.
+
+## DenseNet121 performance
+Figure 1 illustrates the performance of the DenseNet121 model for individual re-identification based on dorsal spot patterns, as represented by the confusion matrix and the receiver operating characteristic (ROC) curve. The model achieved high re-identification accuracy, with most individuals correctly matched to their corresponding reference images. Correct predictions ranged from 88 to 100 matches across individuals, indicating strong and consistent model performance. Minor misidentifications were observed, primarily involving visually similar dorsal patterns, but these errors were infrequent and did not substantially affect overall accuracy.
+ROC curve and confusion matrix for DenseNet121. Figures were generated using Python 3.10.
+The ROC curve demonstrates excellent discriminative capability, with an area under the curve (AUC) of 0.98, reflecting a high true positive rate and a low false positive rate across threshold values. Although DenseNet121 required the longest training time among the evaluated models (462 s), its high re-identification accuracy and robust pattern discrimination support its suitability for image-based individual recognition in conservation-focused applications (Fig. 1; Table 1).
+
+## EfficientNetB0 performance
+Figure 2 illustrates the performance of the EfficientNetB0 model for individual re-identification based on dorsal spot patterns, as shown by the confusion matrix and receiver operating characteristic (ROC) curve. The model demonstrated high re-identification accuracy, with correct matches ranging from 88 to 100 individuals, indicating strong discrimination among visually similar patterns. Several individuals were matched with perfect accuracy, while a small number of misidentifications occurred, primarily among individuals with highly similar spot configurations.
+ROC curve and confusion matrix for EfficientNetB0. Figures were generated using Python 3.10.
+The ROC curve further confirms the strong discriminative performance of EfficientNetB0, yielding an area under the curve (AUC) of 0.97, which reflects a high true positive rate and low false positive rate across decision thresholds. Notably, EfficientNetB0 required the shortest training time among the evaluated models (435 s), highlighting its suitability for applications where computational efficiency, rapid retraining, or near–real-time inference is a priority (Fig. 2; Table 1).
+
+## InceptionV3 performance
+Figure 3 illustrates the performance of the InceptionV3 model for individual re-identification based on dorsal spot patterns, as shown by the confusion matrix and receiver operating characteristic (ROC) curve. The model achieved consistently high re-identification accuracy, with correct matches ranging from 88 to 100 individuals. Several individuals were recognized with near-perfect or perfect accuracy, indicating strong robustness of the learned feature representations. Minor misidentifications were observed in a small number of cases, typically involving individuals with highly similar dorsal spot configurations, but overall error rates remained low.
+ROC curve and confusion matrix for InceptionV3. Figures were generated using Python 3.10.
+The ROC curve further underscores the robust discriminative capability of the InceptionV3 model, yielding an area under the curve (AUC) of 0.98, which reflects a high true positive rate and a low false positive rate across decision thresholds. In terms of computational efficiency, InceptionV3 required a moderate training time (451 s), offering a balanced trade-off between predictive performance and computational demand (Fig. 3; Table 1).
+
+## Region-specific spot detection accuracy
+The mean individual re-identification accuracy of each CNN model was evaluated across four anatomical regions: head, trunk, combined head and trunk, and entire body. Accuracy was defined as the proportion of individuals correctly re-identified based on dorsal spot patterns within each selected region. As shown in Table 2, DenseNet121 consistently outperformed the other models across all regions, achieving the highest accuracy for the combined head and trunk region (96.32%) and for entire body images (93.49%).
+Mean spot detection accuracy (%) across anatomical Regions.
+EfficientNetB0 exhibited stable and moderate performance, with re-identification accuracies ranging from 84.32% for the head region to 90.11% for the combined head and trunk region. In contrast, InceptionV3 showed the lowest re-identification performance, particularly for the head region (78.19%), suggesting reduced robustness when limited spatial information was available.
+
+## Mark-recapture population estimation
+In the final phase of the study, a mark–recapture analysis was conducted to estimate the population size of N. derjugini. During the first sampling session, 332 individuals were recorded, followed by 217 individuals in the second session. Using our custom image-based individual identification system, which integrates the DenseNet121 architecture with combined head and trunk morphological features, 65 individuals were reliably re-identified across both sampling occasions. These values were incorporated into the Lincoln–Petersen estimator, resulting in an estimated population size of 1108 individuals.
+
+## Discussion
+Non-invasive, image-based identification has become increasingly valuable in conservation biology, especially for species vulnerable to handling stress. Amphibians, including N. derjugini, are particularly suited for photographic identification (Photo-ID) due to their delicate, permeable skin and heightened stress responses. Our study demonstrates that geometric image processing and deep learning-based classification can effectively identify individual N. derjugini based on yellow spot patterns. This builds upon work in other taxa such as Eurycea tonkawae28, Salamandra salamandra48, and Hydromantes species49, where pattern-based identification has proven effective. Crucially, our work expands these methods by evaluating a dual-framework approach under various operational conditions. Unlike earlier studies that relied on manual or semi-automated tools, our system provides both automated accuracy and scalability, which is crucial for field studies involving rare, elusive, or range-restricted amphibians.
+Photographic monitoring has repeatedly proven to be a reliable and non-disruptive technique for amphibians. For example, Salamandrina perspicillata was successfully identified using ventral markings50, while Eurycea tonkawae showed improved accuracy over traditional tagging through head pigmentation patterns28. In addition, tools like “Foto-Spottr”51 and HotSpotter52 have streamlined spot-based amphibian identification. However, some researchers note limitations: Waye52 reported that temporal variation in Ambystoma tigrinum spot patterns can hinder consistent identification over time. These observations justify our integration of deep learning techniques. Takaya5 showed that CNN-based classifiers effectively (EfficientNetV2) distinguished individual Andrias japonicus using large image datasets. In line with these findings, our study confirms that combining standardized imaging protocols with deep learning algorithms yields a powerful, scalable strategy for amphibian conservation, capable of addressing pattern variability and enhancing recognition accuracy.
+To segment yellow spots in N. derjugini, we employed a geometric approach utilizing HSV color space and morphological filtering. This method capitalized on the contrast between the bright yellow spots and the darker background of the newt’s skin, enabling consistent and robust extraction. HSV decomposition allowed for precise color-based detection, while morphological operations like erosion and dilation refined the segmentation output by eliminating noise without compromising spot integrity. Our pipeline achieved segmentation accuracy between 87 and 93%, with reduced performance in cases of faint pigmentation or overlapping patterns. These limitations highlight the constraints of purely rule-based approaches in variable field conditions. To address this, we introduced CNN-based segmentation models capable of contextual learning, which significantly improved accuracy in complex backgrounds. This multi-step segmentation protocol balances interpretability and precision, making it well-suited for ecological applications where lighting and surface variability are inherent.
+We evaluated the classification performance of three deep learning architectures—DenseNet121, InceptionV3, and EfficientNetB0—for phenotypic pattern recognition. Among them, DenseNet121 achieved the highest accuracy (99.11%) and an AUC of 0.98, consistently delivering stable results across cross-validation folds. Its dense connectivity likely facilitates effective gradient propagation and feature reuse, which is particularly advantageous for moderately sized datasets. InceptionV3 also demonstrated high sensitivity (AUC = 0.98); however, its comparatively lower precision may suggest a tendency toward overfitting. EfficientNetB0 offered the best computational efficiency, with a modest trade-off in accuracy, making it suitable for scenarios where speed and scalability are critical. Notably, all models exhibited improved classification performance when trained on combined head and trunk images, highlighting the value of integrating multiple anatomical regions for enhanced phenotypic discrimination. These findings underscore the potential of CNNs to detect complex morphological traits that may be overlooked by traditional analytical methods. Moreover, the reproducibility and adaptability of these models across datasets suggest they are well suited for long-term monitoring of amphibian populations, including in remote or resource-constrained environments.
+A comparative evaluation of geometric and CNN-based methods revealed distinct but complementary strengths. Geometric approaches are lightweight, fast, and easy to implement, making them ideal for rapid assessments or environments with minimal computational infrastructure. In contrast, CNN-based classification models offer superior performance and robustness in handling environmental variability and image imperfections. Our dual-method framework allows researchers to select a methodology tailored to specific research constraints, such as image quality, sample size, or field conditions. The application of these methods to N. derjugini represents a scalable, low-impact monitoring strategy that is especially suitable for cryptic, range-limited amphibians. By demonstrating that both geometric and CNN-based tools can reliably support conservation tasks, our study serves as a practical model for similar applications in other endangered amphibians where traditional marking is infeasible or unethical.
+Beyond methodological advances, our study provides important conservation insights for N. derjugini. Using our image-based identification system, we conducted a mark–recapture analysis, estimating a population size of approximately 1108 individuals. This estimate was derived from 332 individuals recorded in the first sampling session, 217 in the second, and 65 individuals recaptured between sessions. These results demonstrate the potential of automated image-based recognition tools to generate robust population estimates while minimizing disturbance to sensitive amphibian populations. Our findings align with previous research on related species, such as Sharifi and Afroosheh (2014)53, who employed yellow spot patterns for individual identification in N. microspilotus. They reported comparable recapture rates and limited movement distances (mean = 49.19 ± 71.75 m), supporting the reliability of dorsal spot patterns for individual tracking in aquatic environments. The short interval between our two survey occasions, conducted during the peak breeding season when adults exhibit high site fidelity, maximized detectability and recapture probability. This proof-of-concept framework illustrates how non-invasive, image-based methods can provide preliminary demographic data and facilitate population monitoring in threatened amphibian species without the need for frequent handling or invasive marking procedures.
+However, potential biases inherent to the applied mark–recapture framework should be carefully considered. The Lincoln–Petersen estimator assumes a closed population between sampling sessions, meaning no births, deaths, immigration, or emigration occur. In reality, N. derjugini may exhibit localized movements within or between breeding streams, particularly during the reproductive season, which could violate this assumption. Additionally, unequal capture probability among individuals, driven by behavior, microhabitat preferences, or differential detectability, may introduce further bias. Although our short 13-day interval likely minimizes these effects and previous studies suggest high site fidelity, such potential violations must be acknowledged. The automated re-identification method ensures accurate recognition of recaptured individuals but cannot account for undetected immigration, emigration, or differential detectability. Therefore, the population estimate should be interpreted as an approximation under Lincoln–Petersen assumptions. Future studies should incorporate open-population models (e.g., Jolly-Seber) or additional sampling occasions to better capture population dynamics, improve precision, and allow for a more comprehensive understanding of demographic parameters while still leveraging non-invasive, deep learning–based identification approaches for conservation monitoring.
+Overall, our study demonstrates that automated, image-based re-identification can provide reliable preliminary population estimates for endangered amphibians and can be integrated into long-term monitoring frameworks, provided the underlying assumptions of closed-population models are carefully considered. The effectiveness of image-based identification ultimately depends on the biological stability of phenotypic traits. Although dorsal spot patterns have been shown to be stable in N. derjugini after metamorphosis47, comprehensive longitudinal validation across life stages is still lacking. Vaissi et al.47 observed that while the number of spots increases during larval development, the adult pattern remains consistent in size and shape—functioning much like a fingerprint. If N. derjugini follows a similar developmental trajectory, static image-based recognition would offer a biologically valid method for long-term monitoring. Verifying this, however, requires longitudinal datasets that track individuals across developmental stages. Integrating computer vision approaches with genetic analyses could further enhance individual identification and help uncover genotype–phenotype relationships. Additionally, future work could benefit from the application of explainable AI (XAI) tools to improve model transparency and biological interpretability. Collectively, our findings highlight how combining AI, field ecology, and phenotypic data can enable scalable, non-invasive monitoring strategies for amphibian conservation in the face of rapid environmental change.
+
+## Conclusion
+This study demonstrates that use geometric image processing and deep learning classification provides a powerful, non-invasive framework for individual identification in N. derjugini. By leveraging distinct yellow spot patterns and applying both traditional image segmentation techniques and convolutional neural networks, we achieved high accuracy in identifying individuals under varied environmental conditions. Geometric methods offer fast and interpretable results ideal for field applications, while deep learning models enhance precision and robustness, especially in complex or low-quality imagery. Together, these complementary approaches support scalable and ethical monitoring of this endangered amphibian species. Despite limitations such as a relatively small dataset, the methodology presented here lays the groundwork for broader adoption of AI-assisted conservation tools. Future efforts should focus on expanding datasets, validating pattern stability over time, and integrating genetic data to further strengthen individual recognition frameworks. Ultimately, this approach not only advances species-specific conservation for N. derjugini but also serves as a model for other cryptic or range-restricted amphibians in urgent need of innovative monitoring strategies.
+
+## Materials and methods
+
+## Ethics approval
+The permission to captured photographed newts and all animal care protocols used in this study were handled according to the guidelines and regulations provided by was obtained the research ethics approval committee, Faculty of Science, Razi University (Approval ID: IR.RAZI.REC.51704). Furthermore, the manuscript follows the recommendations in the ARRIVE guidelines. Immediately after photographing the newts were released into the wild at the same location with the cooperation of conservationists.
+
+## Study species and field site
+This study focused on the Yellow-Spotted Mountain Newt (N. derjugini), an endangered salamandrid endemic to the Zagros Mountains of western Iran. Fieldwork was conducted at Kawat Stream (34°52′ N, 46°30′ E), a well-documented breeding site located within the Hawraman region54. Sampling was carried out during the 2024 reproductive season (April–June), when adults exhibit peak surface activity and strong site fidelity.
+Two standardized visual encounter surveys were conducted on 21 May and 3 June 2024, between 09:00 and 17:00, corresponding to the peak breeding period to maximize detectability while minimizing disturbance to this endangered species. Microhabitats, including cobblestone crevices, submerged boulders, and aquatic vegetation, were systematically searched along the entire length of the stream.
+Although limited to two sampling occasions, this design was selected as a pilot framework to evaluate the feasibility of deep learning–based individual identification and population estimation. The short interval between surveys (13 days) supports the assumption of demographic closure, as no significant births, deaths, immigration, or emigration are expected within this period. Recapture probability was addressed through automated individual re-identification, whereby individuals detected on both survey dates were recognized using deep learning–based image matching and treated as recaptures within a two-sample capture–recapture framework. This approach is particularly suitable for endangered amphibians, where increasing sampling frequency may elevate stress and conservation risk.
+
+## Image collection and metadata acquisition
+A total of 549 adult N. derjugini individuals were captured, photographed, and released at their point of capture. Each specimen was placed in a custom-built imaging box (30 × 20 × 20 cm) featuring diffused natural lighting and a non-reflective white background to minimize glare and standardize image quality. High-resolution dorsal images (32 MP) were captured using a vertically positioned Samsung Galaxy smartphone camera from a fixed height of 30 cm. Images were saved in RGB format and labeled with unique identifiers (e.g., ND2024_001). Associated metadata, including GPS coordinates, date of capture, and habitat descriptors, were recorded for each individual using structured field datasheets.
+
+## Computing environment and software libraries
+All image processing, analysis, and model training procedures were implemented in Python 3.10 on a Windows 11 workstation equipped with an Intel Core i7 processor, 32 GB RAM, and an NVIDIA GeForce RTX 3050 GPU (16 GB VRAM). The following libraries were employed:
+Image processing: OpenCV (v4.11.0.86), Imutils (v0.5.4), NumPy (v1.24.3).
+Data handling: Pandas (v2.0.3), openpyxl (v3.1.5).
+Visualization: Matplotlib (v3.7.5).
+Deep learning: TensorFlow (v2.13.0), Keras (v2.13.1).
+Graphical user interface (GUI (development: Tkinter (v8.5).
+Executable compilation: PyInstaller (v6.11.1).
+
+## Image preprocessing and morphometric feature extraction
+To ensure uniformity, all images were resized to 600 × 400 pixels. Yellow spot detection involved a multi-step pipeline:
+Grayscale conversion: cv2.cvtColor().
+Noise reduction: Gaussian blur (kernel size 3 × 3).
+Adaptive thresholding: Gaussian method (cv2.adaptiveThreshold(); block size = 9, C = 3).
+Morphological operations: Opening and closing using cv2.morphologyEx().
+Contour detection: cv2.findContours() was used to extract yellow spot boundaries.
+For each detected contour, the following geometric features were computed:
+Area (pixels2): cv2.contourArea().
+Perimeter (pixels): cv2.arcLength().
+Circularity: 4π × Area / (Perimeter2).
+Aspect ratio: width / height of bounding box.
+Centroid coordinates (X, Y): calculated from image moments.
+Spot count: total number of contours detected.
+All extracted data were compiled into structured CSV files for further statistical and machine learning analysis.
+
+## Body area estimation and head localization
+The body area of each individual was estimated using HSV color space thresholding to isolate the dark pigmentation characteristic of N. derjugini. RGB images were converted to the HSV color space, and segmentation was performed using a fixed threshold range (lower bound: [200, 120, 80]; upper bound: [255, 255, 255]), selected empirically to maximize contrast between the newt’s body and the surrounding substrate. Following thresholding, binary masks were refined using morphological operations to reduce noise and ensure continuity of the detected body region, from which body area was calculated.
+Head localization was implemented using a custom detect_head() function. This algorithm identified prominent contours within the upper half of the segmented body mask, assuming a standardized image orientation in which the head region is positioned anteriorly. Among detected contours, the largest contiguous region within this upper section was selected as the head proxy, providing a consistent approximation of head location without manual intervention.
+The analysis interface supported region-specific morphometric and pattern-based assessments by allowing users to select predefined anatomical regions, including the entire body, head, trunk, or a combined head–trunk region (Fig. 4). This modular design enabled evaluation of the contribution of different body regions to individual identification and matching performance (Fig. 4).
+Segmentation of dorsal body regions in Neurergus derjugini for phenotypic pattern analysis. (A) Head; (B) Trunk; (C) Head and trunk; (D) Entire body. These regions were used to evaluate the impact of region-specific patterning on classification performance in deep learning models. Colored bounding boxes and contours indicate the segmented areas. Figures were generated using Python 3.10.
+
+## Phenotypic classification: geometric and deep learning approaches
+Two complementary analytical pipelines were employed to assess phenotypic variation based on dorsal spot patterns of N. derjugini.
+
+## Traditional computer vision approach
+Individual re-identification was performed using geometric features extracted from segmented dorsal spot contours. Seven quantitative features were measured for each individual: (1) number of yellow spots, (2) total area of yellow spots (pixels), (3) mean area of yellow spots (pixels), (4) percentage of yellow coverage relative to total body area, (5) total body area (pixels), (6) circularity index of yellow spots, and (7) total image pixel count, which was used for size normalization. These features were combined to compute similarity scores between individuals for re-identification.
+
+## Deep learning approach
+Three pre-trained convolutional neural networks (CNNs)—DenseNet121, EfficientNetB0, and InceptionV3—were fine-tuned for dorsal pattern–based individual recognition. For each model, the original classification head was replaced with a custom architecture consisting of a Global Average Pooling layer, a Dropout layer (rate = 0.5), and a Dense softmax output layer. Input images were resized to 100 × 100 pixels for DenseNet121 and EfficientNetB0, and to 299 × 299 pixels for InceptionV3.
+
+## Data augmentation and model training
+The image dataset was split into training (60% of the dataset- 329 images), validation (20% of the dataset-110 images), and test (20% of the dataset-110 images) subsets. To enhance model robustness and mitigate overfitting, data augmentation was applied using Keras’s ImageData Generator with the following parameters:
+Rotation range: ± 45°.
+Width/height shifts: ± 5%.
+Zoom range: 0.9–1.1×.
+Horizontal and vertical flipping.
+Brightness range adjustment.
+Training was conducted using the Adam optimizer (learning rate = 0.001, batch size = 32). Early stopping with a patience of 10 epochs monitored validation loss. “Detection accuracy” refers to individual re-identification accuracy, i.e., the percentage of recaptured individuals correctly matched to their initial capture image using either geometric features or deep learning embeddings. Model performance on the test set was evaluated using accuracy, precision, recall, F1-score, and area under the receiver operating characteristic curve (ROC-AUC).
+
+## Graphical user interface (GUI) for image analysis
+A custom-built GUI was developed using Tkinter to streamline image analysis for researchers. Key functionalities included:
+Image loading and preview.
+Anatomical region selection (entire body, head, trunk, combined head and trunk).
+Preprocessing and spot detection pipeline execution.
+Display of morphometric features and spot statistics.
+Deep learning classification with confidence score output.
+Export of results to Excel format.
+Batch processing of multiple images.
+The application was compiled into a standalone executable (.exe) using PyInstaller and is publicly available via the project’s GitHub repository.
+
+## Mark-recapture population estimation
+An automated mark-recapture module was integrated into the analysis pipeline to estimate the local population size of N. derjugini. The module used morphometric and spot pattern similarity to identify recaptured individuals across the two survey dates. Data from both sessions were exported to Excel files and compared using a predefined similarity threshold to match individuals. Population size was estimated using the Lincoln-Petersen55 formula:
+where N = estimated population size. M = number of individuals captured in the first session (n = 332).C = number of individuals captured in the second session (n = 217). R = number of recaptures identified based on spot pattern similarity.
+This non-invasive, image-based approach offered an efficient and ethical means for monitoring wild amphibian populations over time.
+
+## Supplementary Information
+Below is the link to the electronic supplementary material.
+Supplementary Material 1
+
+## Acknowledgements
+We are deeply grateful to Ms. Shima Vaissi for her invaluable assistance during fieldwork. Her contributions were instrumental to the successful completion of this project.
+
+## Author contributions
+S.V. conceived and designed the study. S.V., Z.R., P.F., P.D., M.S.M., and Z.T.K conducted fieldwork and collected data. P.F. performed data analysis in collaboration with S.V. S.V. wrote the manuscript. All authors reviewed and approved the final manuscript.
+
+## Funding
+This work was financially supported by the Department of Environment, Islamic Republic of Iran, and Razi University.
+
+## Data availability
+The datasets generated and analyzed during the current study, including annotated images, extracted morphometric features, and training/validation/test sets, are available from the corresponding author upon reasonable request. The source code for image preprocessing, morphometric analysis, deep learning classification, and population estimation is included in the supplementary materials (Supplementary Files 1 and 2). Additionally, a compiled standalone executable (.exe) of the image analysis application, along with installation instructions, will be made publicly accessible via the project’s GitHub repository.
+
+## Competing interests
+The authors declare no competing interests.
+
+## Ethics approval
+All methods in this study were carried out in accordance with relevant guidelines and regulations.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Supplementary Materials
+Supplementary Material 1
+
+## Data Availability Statement
+The datasets generated and analyzed during the current study, including annotated images, extracted morphometric features, and training/validation/test sets, are available from the corresponding author upon reasonable request. The source code for image preprocessing, morphometric analysis, deep learning classification, and population estimation is included in the supplementary materials (Supplementary Files 1 and 2). Additionally, a compiled standalone executable (.exe) of the image analysis application, along with installation instructions, will be made publicly accessible via the project’s GitHub repository.
+
+## Table Table 1: Training parameters and classification performance of CNN Models.
+Model | Batch size | Validation split | Learning rate | Epochs | Accuracy (%)
+DenseNet121 | 4 | 2 | 0.001 | 16 | 99.11
+EfficientNetB0 | 4 | 2 | 0.001 | 16 | 98.97
+InceptionV3 | 4 | 2 | 0.001 | 16 | 98.86
+
+## Table Table 2: Mean spot detection accuracy (%) across anatomical Regions.
+Model | Head only | Trunk only | Head and trunk | Entire body
+DenseNet121 | 87.48 | 89.37 | 96.32 | 93.49
+EfficientNetB0 | 84.32 | 87.87 | 90.11 | 89.76
+InceptionV3 | 78.19 | 84.31 | 87.42 | 86.85
+
+## Figure Fig. 1: ROC curve and confusion matrix for DenseNet121. Figures were generated using Python 3.10.
+
+## Figure Fig. 2: ROC curve and confusion matrix for EfficientNetB0. Figures were generated using Python 3.10.
+
+## Figure Fig. 3: ROC curve and confusion matrix for InceptionV3. Figures were generated using Python 3.10.
+
+## Figure Fig. 4: Segmentation of dorsal body regions in Neurergus derjugini for phenotypic pattern analysis. (A) Head; (B) Trunk; (C) Head and trunk; (D) Entire body. These regions were used to evaluate the impact of region-specific patterning on classification performance in deep learning models. Colored bounding boxes and contours indicate the segmented areas. Figures were generated using Python 3.10.

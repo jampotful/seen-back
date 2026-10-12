@@ -1,0 +1,235 @@
+A butterfly metasurface with efficient multi-functional polarization conversion operating in the Ku-Ka band
+Haoyu Zhang, Lijian Zhang, Peng Song, Yunhong Li, Chuang Gao, Penghui Xin, Tian Liu (2024). Scientific Reports. https://doi.org/10.1038/s41598-024-81357-3. doi:10.1038/s41598-024-81357-3. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# A butterfly metasurface with efficient multi-functional polarization conversion operating in the Ku-Ka band
+
+## Abstract
+AbstractA highly efficient and multi-functional butterfly polarization conversion metasurface is proposed for the Ku-Ka frequency range, designed to reduce the radar cross-section. The suggested converter enables dual frequency bands linear-to-cross (LX) and linear-to-circular (LC) polarization transformations. The efficiency of cross-polarization conversion exceeds 90% over the frequency ranges of 14.57–16.30 GHz and 25.70–37.03 GHz, with relative bandwidths of 11% and 36%, respectively. Reflections of left-hand (LHCP) and right-hand circularly polarized (RHCP) waves are realized within the frequency ranges of 17.78–25.31 GHz and 37.38–37.73 GHz, with relative bandwidths of 35% and 0.9%. The oblique incidence significantly affects the metasurface conversion performance, and the proposed model manifests angular robustness up to 60°. Additionally, the butterfly metasurfaces are deployed in a triangular chessboard configuration to achieve radar cross section (RCS) reduction spanning the frequency bands of 14–15.17 GHz, 24.60–35.20 GHz, and 36.30–38 GHz. Drawing from simulation results and test-based validation data, the proposed converter holds promising applications in wireless communication, antenna engineering, and radar stealth.Keywords: Metasurface, Multi-functional, Polarization conversion, Dual-band, Angular stability, RCS reductionSubject terms: Materials science, Optics and photonics, Physics
+
+## Introduction
+Metasurfaces with unique electromagnetic properties have significant potential in the field of communications. Through flexible design, they can achieve polarization conversion(PC) of electromagnetic waves in various forms, thus improving the polarization state of signals and enhancing the communication capability and efficiency of communication systems in complex electromagnetic environments1. In radar systems, metasurfaces are utilized to control polarization scattering characteristics, thereby enhancing the accuracy of target detection and identification2. Therefore, precise control over the polarization state of electromagnetic waves is indispensable. However, conventional polarization control devices suffer from issues such as high energy consumption, complex structures, and high costs3,4, significantly diminishing their conversion performance. Hence, metasurfaces with outstanding characteristics remain of great research value.
+The polarization types of metasurfaces include three types of polarization conversion: linear–linear polarization5–9, linear-circular polarization10–12, and circular polarization13. Due to the efficient electromagnetic polarization control capability of metasurfaces, various polarization conversion devices have been proposed successively. For instance, in reference14,15, Liu et al. introduced a broadband LX polarization conversion metasurface composed of tilted end-loaded H-shaped resonators, achieving conversion efficiency exceeding 0.9 across the 9.83–29.37 GHz frequency range. Additionally, they presented a LC polarization conversion metasurface consisting of an open loop and a square patch, achieving less than 3 dB conversion loss in the 29–41.5 GHz and 52.5–61.5 GHz frequency bands, demonstrating excellent conversion characteristics. In16,17, Kamal et al. and Lin et al. proposed metasurfaces for PC across multiple frequency bands. Kamal’s design, featuring two square split-ring resonators with a unit cell period of 7 mm, and Lin’s design, utilizing reflective resonators with a period of 8 mm, both achieve polarization conversion over various frequency ranges. In18,19, Zhang et al. and Nguyen et al. introduced metasurfaces based on curved square rings with diagonal split strips, and double-angled square patches, respectively. Zhang’s metasurface demonstrates various types of polarization conversion across multiple frequency bands within the 2–16 GHz range, while Nguyen’s metasurface achieves LX and LC polarization conversion in the 8–12 GHz, 7.42–7.6 GHz, and 13–13.56 GHz frequency bands. Although these devices have excellent polarization conversion capabilities, their large unit cell period20, dielectric substrate thickness21, and the limitation to single-band22 or single type of polarization conversion , such as LX polarization or circular polarization (CP)23,24, greatly restrict their application in the microwave frequency band. Only a few conversion devices simultaneously exhibit cross-polarization and circular polarization conversion characteristics25–27. Furthermore, based on the polarization conversion characteristics of metasurfaces, extensive research has been conducted on reducing radar cross section. In28, Coskun et al. introduced a broadband polarization conversion metasurface. They studied the unit cell characteristics using equivalent circuit analysis and achieved RCS reduction through a checkerboard arrangement. In29, Liu et al. proposed a cross-polarization conversion unit composed of two tilted asymmetric triangular split-ring resonators. They arranged the resonators in a triangular chessboard pattern to achieve RCS reduction in the cross-polarization frequency band, demonstrating good electromagnetic stealth performance.
+Currently, significant progress has been made in the research of RCS reduction based on the electromagnetic properties of metasurfaces30–35. However, devices that simultaneously achieve polarization conversion and RCS reduction have not received sufficient research attention. The limitation of single-type polarization conversion also restricts the versatility of these devices36. In37, Khan et al. proposed a multifunctional and efficient polarization converter capable of achieving LX polarization conversion in three bands and LC polarization conversion in four bands, suitable for C-K bands. Additionally, in38, Tahir et al. introduced a fish-like metasurface operating in the X-band. This metasurface achieves LX polarization conversion in the 8–11 GHz range and LC polarization conversion in two frequency bands: 7.5–7.7 GHz and 11.5–11.9 GHz. However, the focus of these studies remains on achieving polarization conversion, with the proposed units not addressing RCS reduction. Therefore, in increasingly complex electromagnetic environments, designing metasurfaces that are efficient, dual-band, capable of multiple polarization conversion types, and also reduce RCS remains a key research focus.
+This paper presents an anisotropic butterfly metasurface polarization converter operating in the Ku-Ka bands, which addresses the challenge of simultaneously achieving dual-band LX polarization conversion and dual-band LC polarization conversion, while also reducing RCS. The proposed design features small unit cell periods and thin dielectric substrates. Within the frequency range of the Ku-Ka band, it not only converts incident LP waves into cross-polarized waves within the frequency ranges of 14.57–16.30 GHz and 25.70–37.03 GHz (PCR > 90%), but also reflects LHCP waves and RHCP waves within the frequency bands of 17.78–25.31 GHz and 37.38–37.73 GHz, respectively (AR < 3 dB). The designs were validated for sensitivity to PCR and AR across various incident angles, demonstrating polarization conversion capability even at a steep 60° angle of incidence. Additionally, leveraging the phase cancellation principle, the formula for calculating radar RCS reduction was analyzed. Subsequently, a 1-bit coding approach was applied to metasurfaces arranged in a triangular chessboard configuration to achieve RCS reduction, thereby enabling electromagnetic stealth capabilities.
+
+## Stepwise evaluation of the model design
+As depicted in Fig. 1, the butterfly metasurface proposed in this study and its corresponding functionalities are demonstrated. Under linear polarization electromagnetic wave incidence, efficient multi-functional polarization transformation is obtained spanning the frequency bands of 14–38 GHz. Based on the polarization characteristics of the model, at least 10 dB reduction in RCS is achieved with optimal array arrangement. Fig. 1a illustrates the conversion process of the resonant unit performing LX polarization and LC polarization, along with representations of incident (reflected) LP waves, LHCP, and RHCP representing left-hand and right-hand circular polarization (CP) waves, respectively. Fig. 1b presents the triangular chessboard configuration based on the phase cancellation principle used for RCS reduction. Fig. 1c depicts the polarization conversion model of the butterfly metasurface, where yellow represents copper metal and purple represents the dielectric substrate polytetrafluoroethylene (PTFE).
+Functional diagram of the butterfly metasurface for polarization transformation and RCS reduction.
+Resonant metasurface model design and evolution are predicated on the anisotropic nature of the electromagnetic structure, progressively achieving optimal metasurface structural design through parameter simulation and optimization. The proposed butterfly resonator undergoes optimization through four critical steps, as illustrated in Fig. 2. Table 1 presents the variations in key parameters during the evolution from Unit-1 to Unit-4. Fig. 3 shows the corresponding simulation results throughout the model’s evolution.Under y-polarized electromagnetic wave incidence, it’s observed that the resonator in Unit-1 achieves only linear-cross polarization conversion within a narrow low-frequency range. Additionally, as the frequency shifts to higher values, it is found that the co-polarized coefficient approaches 0 dB, while the cross-polarized coefficient becomes excessively large, indicating no polarization conversion occurs. This is attributed to the strong isotropy of Unit-1, as illustrated in Fig. 3a. In Unit-2, by adjusting the length of the rectangle in the upper right corner of resonant Unit-1 from l = 0.9 mm to l = 0.44 mm, an enhancement in the effective frequency band for polarization conversion is observed. This improvement is particularly significant in the Ka-band frequency range, as depicted in Fig. 3b.
+Evolution process of the butterfly metasurface.
+Parameter changes during the evolution of the metasurface.
+Evolutionary process data graph of the butterfly metasurface. (a) Resonant unit-1 (b) Resonant unit-2 (c) Resonant unit-3 (d) Resonant unit-4.
+Unit-3 extends the outer ring from Unit-2 and retains openings with an arc length b = 1.98 mm in the first and third quadrants. It was observed that the polarization conversion capability significantly improves within the 14–38 GHz frequency range. This enhancement is attributed to the reduced length of the rectangle in the upper right corner and the extension of the outer ring, which enhance the resonator’s anisotropy and thus improving its polarization conversion capability, as depicted in Fig. 3(c).In Unit-4, increasing the arc length of the outer ring openings in Unit-3 to b = 2.17 mm further enhances the anisotropy. This modification enables the butterfly metasurface to achieve dual-band, high-efficiency polarization conversion across the entire Ku-Ka frequency band, as illustrated in Fig. 3d.
+
+## Design and analysis of units
+
+## Configuration of the butterfly metasurface unit structure
+The proposed polarization conversion unit, as illustrated in Fig. 4, adopts a three-layer sandwich structure. The upper layer comprises an anisotropic butterfly resonator, while the intermediate layer consists of a dielectric substrate, and the lowermost layer is metallic ground. Both the upper layer and the metallic ground employ copper with a thickness of and a conductivity of as the model material. The dielectric substrate in the middle isolates the butterfly resonator from the bottom. The dielectric layer is filled with PTFE, with a relative electric permittivity denoted as and a loss tangent represented by , and has a thickness of . The tilted rectangular unit is sloped at 45° relative to the horizontal orientation and coincides with the origin of the coordinates. To achieve optimal simulation results, we conducted size optimization of the model structure using CST simulation software. Fig. 4a illustrates the simulation conditions of the model, while Fig. 4b displays the optimized parameters of the unit. Fig. 4c provides a side view of the designed model. In Table 2, the optimized parameters of the resonant unit model are shown, with the initial coordinates of b set to (− 0.59, − 0.59, 1.634).
+(a) Simulation condition setup (b) Resonator shape and parameter configuration (c) side view.
+Optimal parameter values.
+When a beam of electromagnetic waves is vertically incident on the resonator along the z-axis, the relationship between the electric field components of the incident and reflected waves on the x- and y-axis can be represented by the Jones matrix36:
+where and represent the electric field intensity vectors of the reflected waves on the x- and y-axis, respectively; and represent the electric field intensity vectors of the incident waves on the x- and y-axis, respectively; and represent the incident electromagnetic waves and reflected electromagnetic waves, respectively. The co-polarized reflection coefficients and represent the reflections from x to x and y to y, respectively, while the cross-polarized reflection coefficients and represent the reflections from y to x and x to y, respectively. With the reflection coefficients in Eq. (1), the PCR for y-polarized incident waves can be expressed as37:
+At the same time, under y-polarized wave incidence conditions, the co-polarized and cross-polarized reflection amplitudes generating circularly polarized reflected waves should satisfy , with the phase difference meeting (where k is an integer), where and are the phases corresponding to the co- and cross-polarization coefficients. To evaluate the conversion efficiency of circularly polarized reflected waves, the axial ratio is used for characterization, defined by the formula25:
+where is denoted as25:
+Additionally, the conversion performance of circularly polarized reflected waves is evaluated using Stokes parameters. Introducing parameters I, V, Q and U, under y-polarized incident electromagnetic waves, I, V, Q and U, can be respectively described as11:
+The conversion performance of circular polarization is quantified using the ellipticity E, defined as , where . According to this equation, the ellipticity E varies between − 1 and 1. When and (where k is an integer), the ellipticity value E is − 1, indicating the reflected wave is converted to left-hand circular polarization . Conversely, when (where k is an integer), the ellipticity E value is 1, indicating the reflected wave is converted to right-hand circular polarization. The energy conversion efficiency of circular polarization is given by Eq. (9) 11:
+
+## Equivalent circuit and working principle of the butterfly metasurface unit
+To further investigate the polarization conversion principle of the proposed metasurface, we developed an equivalent circuit using ADS software. Based on the simulation results shown in Fig. 3d, we performed a layer-by-layer analysis of the physical interactions among the top layer, dielectric layer, and bottom layer of the metasurface. The analysis indicates that the surface currents on the top-layer resonators induce inductance, while the gaps between different parts of the resonant units and the edge charge accumulation around the units form capacitance. Consequently, the top layer of the resonant unit can be equivalently modeled as two series RLC branches and one LR branch. Additionally, each of the interfaces between the top layer, dielectric layer, and bottom layer can be represented by an equivalent RLC branch. By optimizing the simulations and combining the equivalent circuits of the top layer with those of the other components, we obtained the overall equivalent circuit model of the metasurface unit, as shown in Fig. 5a. The optimized circuit parameters for each part of the equivalent circuit are as follows: ,,,,,,,,, , , , , .
+(a) Equivalent circuit of the resonant unit (b) Polarization conversion principle of the butterfly metasurface.
+Meanwhile, we decompose the y-axis incident polarized electromagnetic waves, generating u and v components while maintaining them perpendicular to each other, laying the foundation for a thorough analysis and understanding of the polarization conversion mechanism of the butterfly resonator. The polarization principle is illustrated in Fig. 5b, where the u- and v-axes are obtained by counterclockwise rotation of the coordinate axes by 45°. Through this decomposition, the two different forms of waves (incident and reflected), and can be represented by the formulas:
+In which, and are the reflection components on the u- and v-axes, respectively, and and are unit polarization vectors. In the u-v coordinate system, the co-polarization coefficients are denoted by and , and the cross-polarization coefficients are denoted by and . The co-polarization phases are represented by and , meanwhile, the phase difference is indicated by . According to the polarization conversion principle, when the phase difference satisfies under the conditions and , cross-polarization conversion can be achieved. When the phase difference , the resonator achieves circular polarization conversion. Furthermore, when , the reflected wave will be altered to RHCP wave, and when , the reflected wave will be morphed into LHCP wave. In essence, the electromagnetic polarization conversion generated by metasurfaces is due to their anisotropy and strong electromagnetic response. The relationship between the uppermost layer current and lowermost layer current of the resonant model and the electric and magnetic fields can be expressed as37:
+where, J and M are current density and magnetic flux density respectively, and are self-coupled electronic polarization and magnetic polarization, and are mutual coupling electromagnetic polarization, E and H represent the electric field and the magnetic field intensity.
+
+## Simulation results of metasurface unit
+Under the premise of frequency domain analysis, floquet port boundary conditions are set for the resonator unit, and various parameters of the model are simulated and evaluated within the frequency range of 14–38 GHz. From the simulation data in Fig. 6, the following information can be obtained: Firstly, under y-polarized electromagnetic wave incidence, the cross-polarization amplitude is near to 0 within the frequency band of 14.57–16.30 GHz and 25.70–37.03 GHz, while the co-polarization amplitude is below − 10 dB. Within the frequency range of 17.78–25.31 GHz and 37.38–37.73 GHz, the co-polarization amplitude and the cross-polarization amplitude are approximately equal, with resonant points located at 15.33 GHz, 26.15 GHz, 27.36 GHz, and 33.73 GHz, respectively. Their co-polarization peaks are − 50 dB, − 43 dB, − 51 dB and − 60 dB, as shown in Fig. 6(a). Secondly, within the frequency span of 17.78–25.31 GHz, the phase difference between co- and cross-polarization is , while within the frequency range of 37.38–37.73 GHz, the phase difference is . These phase differences assess the conditions for circular polarization (CP) conversion, as depicted in Fig. 6(b). To evaluate the effectiveness of the butterfly resonator in achieving LX polarization and LC polarization transformation, simulations for PCR, AR and E were conducted, and the data are showcased in Fig. 6c, d. Several aspects can be observed from Fig. 6c: firstly, within the frequency ranges of 14.57–16.30 GHz and 25.70–37.03 GHz, cross-polarization conversion occurred, with relative bandwidths of 11% and 36% respectively. The conversion efficiency PCR exceeded 90% in both ranges and remained above 97% within the frequency ranges of 14.96–15.78 GHz and 25.92–36.64 GHz. Moreover, at the resonant points located at 15.33 GHz, 26.15 GHz, 27.36 GHz, and 33.73 GHz, the polarization conversion efficiency approached 100%. In addition, the conversion efficiency for left-hand circular polarization (LHCP) and right-hand circular polarization (RHCP) exceeds 95%, indicating that the proposed butterfly metasurface has a highly efficient energy conversion efficiency.As depicted in Fig. 6d ,it can be observed that within the frequency ranges of 17.78–25.31 GHz and 37.38–37.73 GHz, the AR values were below 3 dB, indicating successful linear-to-circular polarization conversion, with fractional bandwidths of 35% and 0.9%. Meanwhile, within the frequency range of 17.78–25.31 GHz, the normalized ellipticity E approached -1, indicating that the reflected wave was transformed into LHCP wave; within the frequency range of 37.38–37.73 GHz, the normalized ellipticity E approached 1, manifesting that the reflected wave was transformed into RHCP wave.
+(a) Co-polarization and cross-polarization amplitude of y-polarized electromagnetic waves under normal incidence (b),, (c) PCR and (d) AR value and E value.
+In the u- and v-axis, in accordance with the simulated data depicted in Fig. 7, the following phenomena can be observed: The co- and cross-polarized coefficient satisfy and , as shown in Fig. 7a. In the frequency band of 14.57–16.30 GHz and 25.70–37.03 GHz, the phase difference is achieved, realizing cross-polarization. While in the frequency interval of 17.78–25.31 GHz, the phase difference , resulting in the reflection wave transformed into LHCP wave. In the frequency range of 37.38–37.73 GHz, the.
+Simulated u-v polarized data results: (a) Reflection amplitude for co-polarization and cross-polarization (b) phase, phase difference.
+phase difference , generating RHCP wave, as depicted in Fig. 7b.
+
+## Surface current analysis of the metasurface unit
+To gain deeper insights into the physical mechanism responsible for the linear-to-circular polarization conversion in the proposed design, as illustrated in Fig. 8, we selected two frequency points: 21.14 GHz from the LC polarization band (17.78–25.31 GHz) and 33.62 GHz from the LX polarization band (25.70–37.03 GHz). The current flow directions at 0°, 90°, 180°, and 270° phases were then simulated for both frequency points. Furthermore, with the overall surface current directions represented by vector arrows. At the frequency of 21.14 GHz, as shown in Fig. 8a, the surface current on the resonant unit at a phase of 0° primarily flows towards the upper left. When the phase shifts to 90°, the current direction reverses towards the lower left, as depicted in Fig. 8b. At 180°, the overall current flow is opposite to that at 0°, now directed towards the lower right, as depicted in Fig. 8c. However, when the phase shifts to 270°, the current flows towards the upper right, as shown in Fig. 8d. In contrast, at 33.62 GHz within the LX polarized band, the surface current at phases of 0° and 270° both point towards the upper right, as shown in Fig. 8e, g. Similarly, at 90° and 180°, the current flows consistently towards the lower left, as depicted in Fig. 8f, h. The vector arrows clearly indicate that within the LC polarized band, the surface current at 21.14 GHz undergoes a rotational behavior as the phase changes from 0° to 270°. This controlled rotation of the surface current as a function of phase is the key mechanism enabling the linear-to-circular polarization conversion. However, at 33.62 GHz in the LX polarized band, the surface current does not exhibit such rotational behavior as the phase changes.
+Surface current distributions on the metasurface at 21.14 GHz and 33.62 GHz: (a), (b), (c), and (d) show the current flow at 21.14 GHz for phase angles of 0°, 90°, 180°, and 270°, respectively; (e), (f), (g), and (h) illustrate the current flow at 33.62 GHz for the same phase angles.
+Fig. 9 demonstrates the allocation of surface currents induced on the uppermost and lowermost surfaces of the resonator unit at resonance frequency of 15.33 GHz, 26.18 GHz, 27.36 GHz and 33.73 GHz. Simulation reveals that at the resonance frequency of 15.33 GHz, the surface electric currents induced on the uppermost and lowermost surfaces of the butterfly resonator are parallel but in opposite directions, thus forming a strong magnetic resonance effect. However, at the resonance frequencies of 26.18 GHz, 27.36 GHz and 33.73 GHz, the surface currents induced on the top and lower surfaces of the butterfly resonator are parallel-aligned and in the same direction, resulting in a strong electric resonance effect. The generation of this effect also partially reveals the mechanism of polarization conversion.
+Surface electric current allocation of the metasurface at the resonant points of 15.33 GHz, 26.18 GHz, 27.36 GHz and 33.73 GHz: (a), (b), (c) and (d) top layer current distribution; (e), (f), (g) and (h) bottom layer current distribution.
+
+## Angular stability under oblique incidence
+Under ideal conditions, electromagnetic waves act on the metasurface in a vertical incidence manner. However, when the incident angle becomes oblique, the sensitivity of conversion efficiency and bandwidth to the incident angle becomes more critical. Therefore, the relationships between PCR and AR with the incidence angle and frequency were simulated separately.The following information can be observed from Fig. 10: Firstly, in the frequency band of 14.57–16.30 GHz, with the growth of the oblique incident angle, the conversion bandwidth slightly narrows and shifts towards higher frequencies. However, the conversion efficiency remains above 90% throughout and exhibits excellent performance in linear polarization transformation. In the frequency band of 25.92–36.64 GHz, for incident angles between 0° and 15°, good broadband polarization conversion can be maintained. Between 15° and 30°, the reflected wave achieves polarization conversion in both a broadband and a narrowband range. However, between 30° and 60°, polarization conversion is limited to a narrowband range, as shown in Fig. 10a. This can be anticipated as the proposed butterfly metasurface serves as a polarization converter based on multiple plasmon resonances, thereby reducing sensitivity to incident angles. Secondly, during the variation of the incident angle spanning from 0° to 52°, the conversion bandwidth of AR gradually decreases with increasing angle, leading to a slight reduction in conversion efficiency, but remains below 3 dB overall. Meanwhile, a narrowband of circular polarization appears in the range of 45° to 60°, as demonstrated in Fig. 10b.
+(a) Variation of PCR with incident angle (b) Variation of AR with incident angle.
+
+## RCS reduction of butterfly metasurface
+The proposed metamaterial surface follows the principle of phase cancellation to achieve the reduction of radar cross section. When the resonant unit itself and the mirror unit are exposed to the same electromagnetic wave, the amplitudes of co-polarized reflections and cross-polarized reflections are approximately equal, and the phase difference of the cross-polarized coefficients falls within the range of , while the phase difference of the co-polarized reflection coefficients is . This satisfies the prerequisite for RCS reduction. Fig. 11a illustrates the schematic structure of the resonant unit and the mirror unit, denoted as ‘1’ and ‘0’ respectively. The reflection amplitudes are represented by and , and the co-polarized phases and cross-polarized phases of the resonant unit and the mirror unit are denoted as , , , and . The cross polarized coefficients and co-polarized coefficients are depicted as and respectively. These conditions can be expressed by the following formulas:
+(a) Model structure of resonant unit ‘1’ and mirror unit ‘0’ (b) Triangle array of units rotated 0°,90°, 180° and 270°.
+Meanwhile, the reflected electric field of individual unit in the array can be formulated as:
+From Fig. 12(a, b), it can be noticed that, under the incidence of y-polarized electromagnetic waves, the cross-polarized amplitude and co-polarized amplitude of unit ‘1’ and its mirror unit ‘0’ are nearly equal. Additionally, the phase difference corresponding to the co-polarized reflection coefficient between the resonant model and the mirror unit is , while the phase difference corresponding to the cross-polarized reflection coefficient is .
+Resonance unit ‘1’ and Mirror unit ‘0’ (a) Reflection coefficients (b) Phase difference.
+Based on the designed model, a checkerboard configuration is adopted with a triangular arrangement, and transient analysis is conducted using CST Microwave Studio. The supercell is rotated clockwise by 90° as a step to achieve optimized arrangement. When electromagnetic waves are vertically incident, due to energy conservation, the electromagnetic energy reflected in the normal direction is dispersed to four different directions, thereby reducing the concentration of energy reflected in a single direction. Fig. 11(b) illustrates the checkerboard array with a triangular arrangement. The performance of RCS reduction after the special arrangement can be quantified by the formula35:
+Under the same scale of PEC, the RCS reduction of the array with triangular chessboard configuration can be approximated as follows35:
+By deriving Eq. (22), it can be concluded that the arrangement of the metasurface array to achieve RCS reduction of 10 dB or more is closely related to the PCR of the resonant units. When the amplitude of the cross-polarization approaches 0 dB and the amplitude of the co-polarization is higher than − 10 dB, higher cross-polarization conversion efficiency can be obtained in the corresponding frequency range, thus achieving at least 10 dB of RCS reduction. Fig. 13a, b respectively illustrate the PCR of the resonant units and the RCS reduction under the arrangement of the triangular array. From Fig. 13a, b, it can be observed that: Firstly, the proposed resonant unit and its mirror image exhibit similar PCR, achieving over 90% conversion efficiency in the frequency ranges of 14.57–16.30 GHz and 25.70–37.03 GHz. Secondly, the array configuration of the triangular array enables the proposed metasurface to achieve radar cross section reduction of 10 dB or more in the frequency ranges of 14–15.17 GHz, 24.60–35.20 GHz, and 36.30–38 GHz, with fractional bandwidths of 8.1%, 35%, and 4.6%, and the maximum reduction peak is 25 dB. The triangular array arrangement induces mutual coupling between resonant units, which is the reason why the metasurface achieves RCS reduction of 10 dB or more in frequency bands where PCR is less than 90%. Table 3 presents a comparison between the performance of our research work and existing polarization conversion devices. From Table 3, it is evident that our research work demonstrates superior performance compared to other metasurfaces, with advantages including smaller periods, lower profiles, higher angular robustness, and multifunctional polarization. This highlights the excellent performance of our design.
+(a) PCR of resonance unit ‘1’ and mirror unit ‘0’ (b) RCS reduction of triangular array.
+Contrast of the research work with extant polarization converters.
+9.1–12.4
+15.55–23.8
+24.71–30
+LP-LP
+LP-LP
+LP-LP
+30.7
+41.9
+19.4
+5.4–9.0
+14.6–16.1
+LP-LP
+LP-LP
+93
+99
+50
+9.8
+45
+30
+8–12
+7.42–7.6
+13–13.56
+LP-LP
+LP-CP
+LP-CP
+40
+2.4
+4.2
+1 mm-FR-4
+2 mm-Air
+3.16–3.52
+7.19–8.61
+LP-LP
+LP-LP
+10.7
+8.9
+9.38–13.36
+14.84–20.36
+LP-LP
+LP-LP
+98.21
+99.32
+35
+31.36
+10.2–14.0
+15.3–20.7
+LP-LP
+LP-LP
+32
+30
+8–11
+7.5–7.7
+11.5–11.9
+LP-LP
+LP-CP
+LP-CP
+31.6
+0.03
+0.03
+60
+30
+30
+14.57–16.30
+25.70–37.03
+17.78–25.31
+37.38–37.73
+LP-LP
+LP-LP
+LP-CP
+LP-CP
+>90
+>97
+11
+36
+35
+0.9
+polarization conversion
+RCS
+
+## Experimental validation and simulation verification
+To validate the effectiveness of the butterfly resonant unit, we made two samples for experiments. The top layer of the sample adopts the butterfly resonance unit printed from 0.017 mm thick copper, and the dielectric layer is composed of 1.6 mm polytetrafluoroethylene, with 0.017 mm thick copper attached on the back. Each sample is composed of 26 × 26 units, with a total size of 156 × 156 mm2. All tests were conducted in a microwave anechoic chamber. Fig. 14a, b respectively depict the two fabricated test samples (RCS test sample and reflection coefficient test sample). Fig. 14(c) illustrates the measurement setup in the microwave anechoic chamber.We used three sets of horn antennas, which were HB-0118-SMAF, HB-SGA-42–25 and HB-SGA-28–25 (horizontally placed as the transmitting antenna, vertically placed as the receiving antenna) for testing, and the frequency ranges of these horn antennas covered the broadband 1–18 GHz, 18–26.5 GHz and 26.5–40 GHz, respectively. The horn antenna was fixed on the scanning frame and joined to the German N5225A Vector Network Analyzer (VNA) through a Coaxial Line. To guarantee the accuracy of the test, the sample was placed directly in front of the horn antenna, and kept the same horizontal height with the center of the horn antenna. During the measurement, the calibration plate of the same size was first used for normalization processing, and then the signals were collected when the two horn antennas were kept horizontal (HH), and the collected signals were processed by the vector network analyzer to obtain the test data of co-polarization coefficient. For the cross-polarization coefficient test, the emitting antenna was kept horizontal and the receiving antenna was rotated 90° vertically (HV) to collect cross-polarization measurement data. Fig. 14d, e are the contrast between the simulation data and the measured data of the butterfly metasurface reflection coefficient and RCS, respectively. It can be observed that the overall trend of the measured data is in close accordance with the simulation results, which fully displays that the suggested model is effective and feasible. However, the measured results show obvious deviations around the resonance point. On the one hand, the deviations are caused by the processing errors during the production of the real object, and on the other hand, the deviations caused by the calibration and test environment between the horn antenna and the sample.
+(a) Fabricated RCS test sample (b) Fabricated reflection coefficient test sample (c) Microwave anechoic chamber measurement configuration (d) Simulation and measured data results comparison of reflection coefficient (e) Simulation and measured results comparison of RCS.
+
+## Conclusion
+The paper presents and investigates a butterfly metasurface operating in the Ku-Ka band to achieve multifunctional polarization conversion and reduce radar cross section. Through simulation and experimental verification, its conversion efficiency and RCS reduction performance are evaluated within the frequency range of 14–38 GHz. The converter not only performs dual-band linear-cross polarization conversion (PCR > 90%), but also efficiently converts linearly polarized (LP) incident waves into LHCP waves and RHCP waves (AR < 3). Additionally, the PCR and AR exhibit robust performance against oblique incidence angles. The polarization conversion characteristics of the resonant unit and mirror unit are derived and theoretically analyzed. Based on 1-bit coded triangular chessboard configuration, over 10 dB RCS reduction is achieved in the frequency ranges of 14–15.17 GHz, 24.60–35.20 GHz, and 36.30–38 GHz. Furthermore, the proposed design offers advantages such as low profile, miniaturization, and relative inexpensive of the dielectric substrate (PTFE). Given these features, the proposed butterfly metasurface holds great potential for applications including wireless communication and electromagnetic stealth.
+
+## Acknowledgements
+This work is supported by the Natural Science Basic Research Program of Shaanxi Province, (2024JC-YBQN-0312) and the Key Projects of Natural Science Basic Research Program of Shaanxi Province (2022JZ-35).
+
+## Author contributions
+Haoyu Zhang: conceptualization, methodology, software, writing—original draft, visualization. Lijian Zhang: conceptualization, formal analysis, resources. Peng Song: formal analysis, data curation. Yunhong Li: investigation, methodology. Chuang Gao: validation, investigation. Penghui Xin: resources, investigation. Tian Liu: supervision, investigation, project administration. All authors reviewed the manuscript.
+
+## Data availability
+The data that support the fndings of this study are available from the authors upon reasonable request. For details, please contact corresponding author Lijian Zhang.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## Contributor Information
+Lijian Zhang, Email: sharpsword@xpu.edu.cn.
+Tian Liu, Email: sdqdlt@qdu.edu.cn.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data that support the fndings of this study are available from the authors upon reasonable request. For details, please contact corresponding author Lijian Zhang.
+
+## Table Table 1: Parameter changes during the evolution of the metasurface.
+Variable(mm)/Unit | Unit-1 | Unit-2 | Unit-3 | Unit-4
+l | 0.9 | 0.44 | 0.44 | 0.44
+g | 0.28 | 0.28 | 0.28 | 0.28
+r | 2.76 | 2.76 | 2.76 | 2.76
+b | 2.76 | 2.76 | 1.98 | 2.17
+
+## Table Table 2: Optimal parameter values.
+Parameter | p | g | l | d | r | a | c | e | b | r1
+Value(mm) | 6 | 0.28 | 0.44 | 1.5 | 2.76 | 1.39 | 0.25 | 1.64 | 2.21 | 2.4
+
+## Table Table 3: Contrast of the research work with extant polarization converters.
+Ref | Unit Size (mm) | Dielectric Thickness (mm) and Type | incident angle | Frequency Band (GHz) | Polarization Type | PCR (%) | Conversion Bandwidth (%) | Function/Application
+9 | 8 mm | 2 mm-F4-B | No | 9.1–12.415.55–23.824.71–30 | LP-LPLP-LPLP-LP | >90 | 30.741.919.4 | polarization conversion
+16 | 7 mm | 3.2 mm-Rogers RO4003 | No | 5.4–9.014.6–16.1 | LP-LPLP-LP | 9399 | 509.8 | polarization conversion
+19 | 6.92 mm | 1.6 mm-FR-4 | 4530 | 8–127.42–7.613–13.56 | LP-LPLP-CPLP-CP | >80 | 402.44.2 | polarization conversion
+20 | 15 mm | 1 mm-FR-42 mm-Air | 30 | 3.16–3.527.19–8.61 | LP-LPLP-LP | >90 | 10.78.9 | polarization conversion
+21 | 10 mm | 3 mm-F4-B | 60 | 9.38–13.3614.84–20.36 | LP-LPLP-LP | 98.2199.32 | 3531.36 | polarization conversion
+31 | 10 mm | 3 mm-F4-B | 45 | 10.2–14.015.3–20.7 | LP-LPLP-LP | >90 | 3230 | Polarization conversion RCS
+38 | 7 mm | 1.6 mm-FR-4 | 45 | 8–117.5–7.711.5–11.9 | LP-LPLP-CPLP-CP | >90 | 31.60.030.03 | polarization conversion
+This work | 6 mm | 1.6 mm-PTFE | 603030 | 14.57–16.3025.70–37.0317.78–25.3137.38–37.73 | LP-LPLP-LPLP-CPLP-CP | >90>97 | 1136350.9 | polarization conversionRCS
+
+## Figure Fig. 1: Functional diagram of the butterfly metasurface for polarization transformation and RCS reduction.
+
+## Figure Fig. 2: Evolution process of the butterfly metasurface.
+
+## Figure Fig. 3: Evolutionary process data graph of the butterfly metasurface. (a) Resonant unit-1 (b) Resonant unit-2 (c) Resonant unit-3 (d) Resonant unit-4.
+
+## Figure Fig. 4: (a) Simulation condition setup (b) Resonator shape and parameter configuration (c) side view.
+
+## Figure Fig. 5: (a) Equivalent circuit of the resonant unit (b) Polarization conversion principle of the butterfly metasurface.
+
+## Figure Fig. 6: (a) Co-polarization and cross-polarization amplitude of y-polarized electromagnetic waves under normal incidence (b),, (c) PCR and (d) AR value and E value.
+
+## Figure Fig. 7: Simulated u-v polarized data results: (a) Reflection amplitude for co-polarization and cross-polarization (b) phase, phase difference.
+
+## Figure Fig. 8: Surface current distributions on the metasurface at 21.14 GHz and 33.62 GHz: (a), (b), (c), and (d) show the current flow at 21.14 GHz for phase angles of 0°, 90°, 180°, and 270°, respectively; (e), (f), (g), and (h) illustrate the current flow at 33.62 GHz for the same phase angles.
+
+## Figure Fig. 9: Surface electric current allocation of the metasurface at the resonant points of 15.33 GHz, 26.18 GHz, 27.36 GHz and 33.73 GHz: (a), (b), (c) and (d) top layer current distribution; (e), (f), (g) and (h) bottom layer current distribution.
+
+## Figure Fig. 10: (a) Variation of PCR with incident angle (b) Variation of AR with incident angle.
+
+## Figure Fig. 11: (a) Model structure of resonant unit ‘1’ and mirror unit ‘0’ (b) Triangle array of units rotated 0°,90°, 180° and 270°.
+
+## Figure Fig. 12: Resonance unit ‘1’ and Mirror unit ‘0’ (a) Reflection coefficients (b) Phase difference.
+
+## Figure Fig. 13: (a) PCR of resonance unit ‘1’ and mirror unit ‘0’ (b) RCS reduction of triangular array.
+
+## Figure Fig. 14: (a) Fabricated RCS test sample (b) Fabricated reflection coefficient test sample (c) Microwave anechoic chamber measurement configuration (d) Simulation and measured data results comparison of reflection coefficient (e) Simulation and measured results comparison of RCS.

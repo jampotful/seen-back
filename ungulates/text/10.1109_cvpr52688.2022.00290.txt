@@ -1,0 +1,1550 @@
+Temporally Efficient Vision Transformer for Video Instance Segmentation
+Shusheng Yang, Xinggang Wang, Yu Li, Yuxin Fang, Jiemin Fang, Wenyu Liu, Xun Zhao, Ying Shan (2022). IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings - IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings. http://arxiv.org/abs/2204.08412. doi:10.1109/cvpr52688.2022.00290. Licence: cc-by. Text from pdf.
+
+Temporally Efficient Vision Transformer for Video Instance Segmentation
+Shusheng Yang1,3 *, Xinggang Wang1†, Yu Li4∗ , Yuxin Fang1 ,
+Jiemin Fang2,1 , Wenyu Liu1 , Xun Zhao3 , Ying Shan3
+1
+
+School of EIC, Huazhong University of Science & Technology
+Institute of Artificial Intelligence, Huazhong University of Science & Technology
+3
+Applied Research Center (ARC), Tencent PCG 4 International Digital Economy Academy (IDEA)
+2
+
+Abstract
+Recently vision transformer has achieved tremendous
+success on image-level visual recognition tasks. To effectively and efficiently model the crucial temporal information within a video clip, we propose a Temporally Efficient
+Vision Transformer (TeViT) for video instance segmentation (VIS). Different from previous transformer-based VIS
+methods, TeViT is nearly convolution-free, which contains
+a transformer backbone and a query-based video instance
+segmentation head. In the backbone stage, we propose a
+nearly parameter-free messenger shift mechanism for early
+temporal context fusion. In the head stages, we propose a
+parameter-shared spatiotemporal query interaction mechanism to build the one-to-one correspondence between video
+instances and queries. Thus, TeViT fully utilizes both framelevel and instance-level temporal context information and
+obtains strong temporal modeling capacity with negligible
+extra computational cost. On three widely adopted VIS
+benchmarks, i.e., YouTube-VIS-2019, YouTube-VIS-2021,
+and OVIS, TeViT obtains state-of-the-art results and maintains high inference speed, e.g., 46.6 AP with 68.9 FPS
+on YouTube-VIS-2019. Code is available at https://
+github.com/hustvl/TeViT.
+
+1. Introduction
+Video Instance Segmentation (VIS) [62] is a representative and challenging video understanding task that requires
+detecting, segmenting and tracking video instances across
+frames simultaneously. Similar to other instance-level
+video recognition tasks, making full use of temporal context information is critical for building high-performance
+VIS systems. Vision transformer (ViT) [14], which is based
+on self-attention [51], has shown strong long-range context modeling ability and obtained great successes on im* This work was done while Shusheng Yang and Yu Li were at Applied
+Research Center (ARC), Tencent PCG.
+† Corresponding author, E-mail: xgwang@hust.edu.cn.
+
+age classification [14, 16, 22, 32, 47, 50, 54], object detection [7, 34, 44, 68], semantic segmentation [12, 43, 59], instance segmentation [13, 18, 66], and video recognition [1,
+4, 15, 33, 37, 65, 67].
+Recently, how to design ViTs for instance-level video
+understanding, especially VIS, becomes an emerging problem. Different from the detection transformers [7,17,34,44,
+68], semantic segmentation transformers [12,43,59], and instance segmentation transformers [13, 18, 66], which focus
+on 2D contextual information modeling, VIS transformers
+additionally require to perform temporal context modeling.
+To this end, VisTR [57] firstly proposes a transformer encoder to fuse patch features from a sequence of frames using
+a CNN backbone and leverages a query-based decoder to
+predict video instances, IFC [23] introduces memory tokens
+to store frame-level features and performs cross-frame feature interaction by computing self-attention among memory
+tokens, and then decodes instance-level results using a conditional mask head.
+In this paper, we focus on the efficiency of modeling temporal information for ViT-based VIS. This is a
+very important problem since (1) computing self-attention
+among all video patches has extremely high time and space
+complexity [57], (2) additional multi-head self attention
+(MHSA) layers for temporal modeling have extra parameters and are sensitive to pre-training [23], (3) the CNN or
+transformer backbones in these methods [23,38,57,64] only
+support single frame feature extraction and fail to capture
+temporal information in the backbone stage. To remedy the
+above issues, we present Temporally Efficient ViT (TeViT)
+to fully utilize temporal contextual information for efficient
+and effective video instance segmentation.
+TeViT contains a transformer backbone and a series of
+query-based VIS heads. In the backbone stage, we use
+messenger tokens [16] to extract intra-frame information
+via self-attention and propose a messenger shift mechanism
+for frame-level context modeling, in which messenger tokens are divided into several groups to perform temporal
+shift with various of time steps. Different from previous
+
+VIS methods, the messenger shift transformer enables early
+temporal feature fusion. In the head stages, we convert
+the QueryInst [18] instance segmentation head into our VIS
+head by reusing the multi-head self-attention (MHSA) [51]
+parameters for instance-level temporal information interaction. The instance-level MHSA fuses the features for a single video instance among input frames, thus it realizes the
+concept of a video instance as a query.
+Experiments are conducted on three large-scale VIS
+datasets, i.e., YouTube-VIS-2019 [62], YouTube-VIS2021 [61], and OVIS [40]. New state-of-the-art (SoTA) performance has been obtained, e.g., TeViT obtains 46.6 AP
+with 68.9 FPS on YouTube-VIS-2019. Our main contributions are summarized as follows.
+• TeViT is the first video instance segmentation transformer that can efficiently capture temporal contextual
+information at both frame level and instance level.
+• Benefiting from the flexibility of self-attention, the
+proposed temporal modeling modules, i.e., messenger
+token shift and spatiotemporal query interaction, both
+are friendly to the image-level pre-trained models, cost
+marginal extra computation overhead and parameters.
+• TeViT is a nearly convolution-free framework and obtains SoTA VIS results. In TeViT, the concepts of
+“early temporal feature fusion” and “a video instance
+as a query” shield lights on how to build effective video
+transformers for instance-level recognition tasks.
+
+2. Related Work
+Video instance segmentation. How to achieve efficiently
+temporal modeling is always the focus of video tasks, such
+as video object segmentation (VOS) [5, 5, 39], multi-object
+tracking and segmentation (MOTS) [52] and VIS [62].
+Though VOS and MOTS are very related with VIS, MOTS
+mainly focuses on the urban scene understanding and VOS
+aims at tracking specific object by a given mask. Representative VIS works are reviewed as follows. MaskTrack R-CNN [62] extends Faster R-CNN [41] and Mask
+R-CNN [20] to VIS with a tracking branch and external memory that saves instance features across multiple
+frames. MaskProp [3] builds on the Hybrid Task Cascade Network [10] and propagates instance region features
+to adjacent frames to perform temporal modeling. STEmSeg [2] treats video clip as 3D spatiotemporal volume and
+captures temporal information by 3D convolutional backbone network. CompFeat [19] refines temporal features at
+both frame-level and instance-level. CrossVIS [63] introduces a crossover learning scheme upon [45, 46] to make
+use of contextual information across video frames. SeqMask R-CNN [27] establishes temporal relation across
+frames by adding an extra sequence propagation head upon
+
+Mask R-CNN. Both VisRGNN [24] and VisSTG [53] model
+temporal information in VIS by a graph neural network.
+VisTR [57] proposes the first fully end-to-end VIS method
+upon DETR [7], temporal contexts are fused by the multihead attention mechanism in transformer encoder layers.
+IFC [23] presents inter-frame communication to exchange
+frame-level information. In this paper, we present a temporally efficient framework to model temporal contexts at
+both frame-level and instance-level.
+Vision Transformer. Transformer [51] is firstly proposed
+to model long-range sequence data in natural language process (NLP). ViT [14] firstly adopts transformer to image
+domain. After that various high-performance vision transformers [16, 22, 32, 47, 50, 54, 55] have been proposed as
+backbones for image understanding. Beyond serving as
+backbone networks, transformer has motivated lots of novel
+object detection [7, 17, 34, 44, 68], instance segmentation
+[13, 18, 66], and semantic segmentation [12, 43, 59] frameworks. Recently, VisTR [57], IFC [23], QueryTrack [64],
+and TCIS [38] bring transformer to video instance segmentation and achieve excellent performance. In this paper,
+we investigate how to efficiently model temporal context
+across video frames and propose TeViT. TeViT is a nearly
+convolution-free transformer while VisTR and IFC both use
+ResNet [21] backbone.
+Temporal context modeling. Temporal context modeling
+is the key issue in video understanding. A lot of works
+[8, 9, 48, 49, 60] model temporal context by 3D convolutional block. TSM [28] proposes an efficient temporal shift
+module by moving the convolutional feature map along
+the temporal dimension. Non-local network [56] applies
+self-attention to capture long-range spatiotemporal dependencies directly. Recently, TimeSformer [4], ViViT [1],
+VidTR [67], and MViT [15] extend ViT to capture spatiotemporal context for video classification. Video Swin
+Transformer [33] extends Swin Transformer [32] to video
+by conducting shift window MHSA in both space and
+time. TokShift [65] proposes a temporal shift mechanism
+on CLASS tokens of ViT. Different from these video transformers focus on video classification, we target at building
+temporally efficient transformer for instance-level video understanding.
+
+3. Method
+3.1. Overall Architecture
+The overall architecture of our VIS method TeViT is
+shown in Fig. 1, which contains a transformer-based backbone network and a query-driven head network. Given a
+sequence of video frames, the transformer backbone performs feature extraction and generates multi-scale pyramid
+features. The query-driven head network takes randomly
+initialized instance queries with backbone feature maps to
+
+…
+
+…
+
+Inverse Shift
+<latexit sha1_base64="k3qDhDql7zJh4koP6HLHSFYdrbY=">AAACCnicbVDLSgMxFM34rPU16tJNtAiuyowUdVl0o7uK9gGdoWTSTBuaZIYkI5Rh1m78FTcuFHHrF7jzb8y0I2jrgcDhnHPJvSeIGVXacb6shcWl5ZXV0lp5fWNza9ve2W2pKJGYNHHEItkJkCKMCtLUVDPSiSVBPGCkHYwuc799T6SikbjT45j4HA0EDSlG2kg9+8DjSA8lT69FHiMZ9OCPdDukoc56dsWpOhPAeeIWpAIKNHr2p9ePcMKJ0JghpbquE2s/RVJTzEhW9hJFYoRHaEC6hgrEifLTySkZPDJKH4aRNE9oOFF/T6SIKzXmgUnmW6pZLxf/87qJDs/9lIo40UTg6UdhwqCOYN4L7FNJsGZjQxCW1OwK8RBJhLWppWxKcGdPnietk6p7Wq3d1Cr1i6KOEtgHh+AYuOAM1MEVaIAmwOABPIEX8Go9Ws/Wm/U+jS5Yxcwe+APr4xsd7Zsu</latexit>
+
+Dynamic Conv
+<latexit sha1_base64="fGnu4JYHdSRdbF3Du3NiOc32KZw=">AAACCXicbVDLSsNAFJ3UV62vqEs3g0VwVRIRdVmsC5cV7AOaUCbTSTt0MhNmJoUQsnXjr7hxoYhb/8Cdf+O0DaKtBy4czrmXe+8JYkaVdpwvq7Syura+Ud6sbG3v7O7Z+wdtJRKJSQsLJmQ3QIowyklLU81IN5YERQEjnWDcmPqdCZGKCn6v05j4ERpyGlKMtJH6NvQipEcyym5SjiKKc+j9SA3BJ3nfrjo1Zwa4TNyCVEGBZt/+9AYCJxHhGjOkVM91Yu1nSGqKGckrXqJIjPAYDUnPULOVKD+bfZLDE6MMYCikKa7hTP09kaFIqTQKTOf0SLXoTcX/vF6iwys/ozxONOF4vihMGNQCTmOBAyoJ1iw1BGFJza0Qj5BEWJvwKiYEd/HlZdI+q7kXtfO782r9uoijDI7AMTgFLrgEdXALmqAFMHgAT+AFvFqP1rP1Zr3PW0tWMXMI/sD6+AYpr5ql</latexit>
+
+…
+
+MHSA + FFN
+
+…
+
+MHSA + FFN
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+…
+
+NS ⇥
+<latexit sha1_base64="5HM7zRDpVSBYkT/NRpYWMhWbCoI=">AAAB83icbVBNS8NAEJ3Ur1q/qh69LBbBU0lE1GPRiyepaD+gCWWz3bZLN5uwOxFK6N/w4kERr/4Zb/4bt20O2vpg4PHeDDPzwkQKg6777RRWVtfWN4qbpa3tnd298v5B08SpZrzBYhnrdkgNl0LxBgqUvJ1oTqNQ8lY4upn6rSeujYjVI44THkR0oERfMIpW8u+62cOE+Cgibrrlilt1ZyDLxMtJBXLUu+UvvxezNOIKmaTGdDw3wSCjGgWTfFLyU8MTykZ0wDuWKmqXBNns5gk5sUqP9GNtSyGZqb8nMhoZM45C2xlRHJpFbyr+53VS7F8FmVBJilyx+aJ+KgnGZBoA6QnNGcqxJZRpYW8lbEg1ZWhjKtkQvMWXl0nzrOpdVM/vzyu16zyOIhzBMZyCB5dQg1uoQwMYJPAMr/DmpM6L8+58zFsLTj5zCH/gfP4A1Y2RkQ==</latexit>
+
+…
+
+MHSA + FFN
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+…
+
+…
+
+⇥NH
+<latexit sha1_base64="mxgv84yZz800Jnfyb3fWQ8ZojCk=">AAAB83icbVBNS8NAEJ3Ur1q/qh69LBbBU0lE1GPRS09SwX5AE8pmu22XbjZhdyKU0L/hxYMiXv0z3vw3btsctPXBwOO9GWbmhYkUBl332ymsrW9sbhW3Szu7e/sH5cOjlolTzXiTxTLWnZAaLoXiTRQoeSfRnEah5O1wfDfz209cGxGrR5wkPIjoUImBYBSt5PsoIm7IfS+rT3vlilt15yCrxMtJBXI0euUvvx+zNOIKmaTGdD03wSCjGgWTfFryU8MTysZ0yLuWKmpXBdn85ik5s0qfDGJtSyGZq78nMhoZM4lC2xlRHJllbyb+53VTHNwEmVBJilyxxaJBKgnGZBYA6QvNGcqJJZRpYW8lbEQ1ZWhjKtkQvOWXV0nroupdVS8fLiu12zyOIpzAKZyDB9dQgzo0oAkMEniGV3hzUufFeXc+Fq0FJ585hj9wPn8AxeKRhg==</latexit>
+
+MHSA
+<latexit sha1_base64="Nkne6dmFaEMtIaUcjkV6sc9K0SU=">AAAB9HicbVDLSgMxFL1TX7W+qi7dBIvgqsyIqMuqm26EivYB7VAyaaYNTTJjkimUod/hxoUibv0Yd/6NmbYLbT0QOJxzL/fkBDFn2rjut5NbWV1b38hvFra2d3b3ivsHDR0litA6iXikWgHWlDNJ64YZTluxolgEnDaD4W3mN0dUaRbJRzOOqS9wX7KQEWys5HcENgMl0rvqw/WkWyy5ZXcKtEy8OSnBHLVu8avTi0giqDSEY63bnhsbP8XKMMLppNBJNI0xGeI+bVsqsaDaT6ehJ+jEKj0URso+adBU/b2RYqH1WAR2MgupF71M/M9rJya88lMm48RQSWaHwoQjE6GsAdRjihLDx5ZgopjNisgAK0yM7algS/AWv7xMGmdl76J8fn9eqtzM68jDERzDKXhwCRWoQg3qQOAJnuEV3pyR8+K8Ox+z0Zwz3zmEP3A+fwCrPZIL</latexit>
+
+Shift
+<latexit sha1_base64="86kABkroB+8qDqsKdDUfXqHCXNc=">AAAB9XicbVDLSgMxFM3UV62vqks3wSK4KjNS1GXRjcuK9gHtWDJppg1NMkNyRylD/8ONC0Xc+i/u/Bsz7Sy09UDgcM693JMTxIIbcN1vp7Cyura+UdwsbW3v7O6V9w9aJko0ZU0aiUh3AmKY4Io1gYNgnVgzIgPB2sH4OvPbj0wbHql7mMTMl2SoeMgpASs99CSBkZbp3YiHMO2XK27VnQEvEy8nFZSj0S9/9QYRTSRTQAUxpuu5Mfgp0cCpYNNSLzEsJnRMhqxrqSKSGT+dpZ7iE6sMcBhp+xTgmfp7IyXSmIkM7GSW0ix6mfif100gvPRTruIEmKLzQ2EiMEQ4qwAPuGYUxMQSQjW3WTEdEU0o2KJKtgRv8cvLpHVW9c6rtdtapX6V11FER+gYnSIPXaA6ukEN1EQUafSMXtGb8+S8OO/Ox3y04OQ7h+gPnM8fGVKS6g==</latexit>
+
+…
+
+MHSA + FFN
+
+…
+
+MHSA + FFN
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+…
+
+MHSA + FFN
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+…
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+…
+
+…
+
+…
+
+…
+
+MHSA
+<latexit sha1_base64="Nkne6dmFaEMtIaUcjkV6sc9K0SU=">AAAB9HicbVDLSgMxFL1TX7W+qi7dBIvgqsyIqMuqm26EivYB7VAyaaYNTTJjkimUod/hxoUibv0Yd/6NmbYLbT0QOJxzL/fkBDFn2rjut5NbWV1b38hvFra2d3b3ivsHDR0litA6iXikWgHWlDNJ64YZTluxolgEnDaD4W3mN0dUaRbJRzOOqS9wX7KQEWys5HcENgMl0rvqw/WkWyy5ZXcKtEy8OSnBHLVu8avTi0giqDSEY63bnhsbP8XKMMLppNBJNI0xGeI+bVsqsaDaT6ehJ+jEKj0URso+adBU/b2RYqH1WAR2MgupF71M/M9rJya88lMm48RQSWaHwoQjE6GsAdRjihLDx5ZgopjNisgAK0yM7algS/AWv7xMGmdl76J8fn9eqtzM68jDERzDKXhwCRWoQg3qQOAJnuEV3pyR8+K8Ox+z0Zwz3zmEP3A+fwCrPZIL</latexit>
+
+MHSA
+
+Messenger Token
+Instance Query
+<latexit sha1_base64="NampM/ufcFlpgJcW5UaOIqJTlv4=">AAAC33icjVHLSsNAFD3GV31H3ekmWARXJZWiLkU3boQKrRZsKZN0WkPzYmYiSCm4cydu/QG3+jfiH+hfeGeMoBbRCUnOnHvPmbn3emkYSOW6L2PW+MTk1HRhZnZufmFxyV5eOZVJJnxe95MwEQ2PSR4GMa+rQIW8kQrOIi/kZ17/UMfPLrmQQRLX1FXKWxHrxUE38Jkiqm2vNSOmLkQ0OOZS8rjHhdN0akmfx8O2XXRLrlnOKCjnoIh8VRP7GU10kMBHhggcMRThEAySnnOU4SIlroUBcYJQYOIcQ8ySNqMsThmM2D59e7Q7z9mY9tpTGrVPp4T0ClI62CRNQnmCsD7NMfHMOGv2N++B8dR3u6K/l3tFxCpcEPuX7jPzvzpdi0IXe6aGgGpKDaOr83OXzHRF39z5UpUih5Q4jTsUF4R9o/zss2M00tSue8tM/NVkalbv/Tw3w5u+JQ24/HOco+B0u1TeKVVOKsX9g3zUBaxjA1s0z13s4whV1Mn7Gg94xJPFrBvr1rr7SLXGcs0qvi3r/h0s35pc</latexit>
+
+MHSA
+
+<latexit sha1_base64="Nkne6dmFaEMtIaUcjkV6sc9K0SU=">AAAB9HicbVDLSgMxFL1TX7W+qi7dBIvgqsyIqMuqm26EivYB7VAyaaYNTTJjkimUod/hxoUibv0Yd/6NmbYLbT0QOJxzL/fkBDFn2rjut5NbWV1b38hvFra2d3b3ivsHDR0litA6iXikWgHWlDNJ64YZTluxolgEnDaD4W3mN0dUaRbJRzOOqS9wX7KQEWys5HcENgMl0rvqw/WkWyy5ZXcKtEy8OSnBHLVu8avTi0giqDSEY63bnhsbP8XKMMLppNBJNI0xGeI+bVsqsaDaT6ehJ+jEKj0URso+adBU/b2RYqH1WAR2MgupF71M/M9rJya88lMm48RQSWaHwoQjE6GsAdRjihLDx5ZgopjNisgAK0yM7algS/AWv7xMGmdl76J8fn9eqtzM68jDERzDKXhwCRWoQg3qQOAJnuEV3pyR8+K8Ox+z0Zwz3zmEP3A+fwCrPZIL</latexit>
+
+<latexit sha1_base64="Nkne6dmFaEMtIaUcjkV6sc9K0SU=">AAAB9HicbVDLSgMxFL1TX7W+qi7dBIvgqsyIqMuqm26EivYB7VAyaaYNTTJjkimUod/hxoUibv0Yd/6NmbYLbT0QOJxzL/fkBDFn2rjut5NbWV1b38hvFra2d3b3ivsHDR0litA6iXikWgHWlDNJ64YZTluxolgEnDaD4W3mN0dUaRbJRzOOqS9wX7KQEWys5HcENgMl0rvqw/WkWyy5ZXcKtEy8OSnBHLVu8avTi0giqDSEY63bnhsbP8XKMMLppNBJNI0xGeI+bVsqsaDaT6ehJ+jEKj0URso+adBU/b2RYqH1WAR2MgupF71M/M9rJya88lMm48RQSWaHwoQjE6GsAdRjihLDx5ZgopjNisgAK0yM7algS/AWv7xMGmdl76J8fn9eqtzM68jDERzDKXhwCRWoQg3qQOAJnuEV3pyR8+K8Ox+z0Zwz3zmEP3A+fwCrPZIL</latexit>
+
+Patch Token
+<latexit sha1_base64="a+i2xeSh0jMTnnkYOpzsugoRiBU=">AAACCHicbVDLSsNAFJ3UV62vqEsXDhbBVUmkqMuiG5cV+oImlMl00g6dzISZiVBClm78FTcuFHHrJ7jzb5y0EbT1wIXDOfdy7z1BzKjSjvNllVZW19Y3ypuVre2d3T17/6CjRCIxaWPBhOwFSBFGOWlrqhnpxZKgKGCkG0xucr97T6Sigrf0NCZ+hEachhQjbaSBfexFSI9llDaRxuMMevBHaIkJ4dnArjo1Zwa4TNyCVEGB5sD+9IYCJxHhGjOkVN91Yu2nSGqKGckqXqJIjPAEjUjfUI4iovx09kgGT40yhKGQpriGM/X3RIoipaZRYDrzK9Wil4v/ef1Eh1d+SnmcaMLxfFGYMKgFzFOBQyoJ1mxqCMKSmlshHiOJsDbZVUwI7uLLy6RzXnMvavW7erVxXcRRBkfgBJwBF1yCBrgFTdAGGDyAJ/ACXq1H69l6s97nrSWrmDkEf2B9fANWZpox</latexit>
+
+<latexit sha1_base64="U5/c+B/Vix60bzSqaNCPuGl/XFs=">AAACC3icbVA9SwNBEN2LXzF+nVraLAbBKtxJUMugjXYJmA9IQtjbTJIlu3vH7p5wHOlt/Cs2ForY+gfs/DdukhM08cHA470ZZuYFEWfaeN6Xk1tZXVvfyG8WtrZ3dvfc/YOGDmNFoU5DHqpWQDRwJqFumOHQihQQEXBoBuPrqd+8B6VZKO9MEkFXkKFkA0aJsVLPPe4IYkZKpLdSGyIpTHAH/2i1GFQy6blFr+TNgJeJn5EiylDtuZ+dfkhjAdJQTrRu+15kuilRhlEOk0In1hAROiZDaFsqiQDdTWe/TPCJVfp4ECpb0uCZ+nsiJULrRAS2c3qlXvSm4n9eOzaDy27KZBQbkHS+aBBzbEI8DQb3mQJqeGIJoYrZWzEdEUWosfEVbAj+4svLpHFW8s9L5Vq5WLnK4sijI3SMTpGPLlAF3aAqqiOKHtATekGvzqPz7Lw57/PWnJPNHKI/cD6+Afsbm6k=</latexit>
+
+Figure 1. The overall illustration of our TeViT framework. TeViT contains a messenger shift transformer backbone and a series of
+spatiotemporal query-driven instance heads. The messenger shift mechanism performs efficient frame-level temporal modeling by simply shifting messenger tokens along the temporal axis. Spatiotemporal query interaction conducts two successive and parameter-shared
+multi-head self attention (MHSA) with feed forward network (FFN) upon video instance queries. The “Dynamic Conv” design follows
+QueryInst [18]. Best viewed in color.
+
+T
+
+<latexit sha1_base64="1wcDglfkfaTccVXLui0/nJv1YY0=">AAACBnicbVDLSgMxFL1TX7W+Rl2KECyCqzJTiroRim5cVrQPaIeSyWTa0MzDJCOUoSs3/oobF4q49Rvc+Tem7SjaeiDcwzn3cnOPG3MmlWV9GrmFxaXllfxqYW19Y3PL3N5pyCgRhNZJxCPRcrGknIW0rpjitBULigOX06Y7uBj7zTsqJIvCGzWMqRPgXsh8RrDSUtfcv0ZnyEad2wR7P7X8Xbtm0SpZE6B5YmekCBlqXfOj40UkCWioCMdStm0rVk6KhWKE01Ghk0gaYzLAPdrWNMQBlU46OWOEDrXiIT8S+oUKTdTfEykOpBwGru4MsOrLWW8s/ue1E+WfOikL40TRkEwX+QlHKkLjTJDHBCWKDzXBRDD9V0T6WGCidHIFHYI9e/I8aZRL9nGpclUpVs+zOPKwBwdwBDacQBUuoQZ1IHAPj/AML8aD8WS8Gm/T1pyRzezCHxjvX+y3lkE=</latexit>
+
+<latexit sha1_base64="2rNPHmV5EweM6q/dUGT/OLY3IYE=">AAAB8XicbVDLSgMxFL1TX7W+qi7dBIvgqsxIqS6L3bisYB/YDiWTZtrQJDMkGaEM/Qs3LhRx69+482/MtLPQ1gOBwzn3knNPEHOmjet+O4WNza3tneJuaW//4PCofHzS0VGiCG2TiEeqF2BNOZO0bZjhtBcrikXAaTeYNjO/+0SVZpF8MLOY+gKPJQsZwcZKjwOBzUSJtDkflitu1V0ArRMvJxXI0RqWvwajiCSCSkM41rrvubHxU6wMI5zOS4NE0xiTKR7TvqUSC6r9dJF4ji6sMkJhpOyTBi3U3xspFlrPRGAns4R61cvE/7x+YsIbP2UyTgyVZPlRmHBkIpSdj0ZMUWL4zBJMFLNZEZlghYmxJZVsCd7qyeukc1X16tXafa3SuM3rKMIZnMMleHANDbiDFrSBgIRneIU3RzsvzrvzsRwtOPnOKfyB8/kD0s+RBw==</latexit>
+
+<latexit sha1_base64="6HLb4FTvNSXHpdQrk9OEiacS+68=">AAACKHicdVDLSsNAFJ3UV62vqEs3g0VwVRIpKohY1IXLCvYBTSiTyaQdOpnEmYmlhH6OG3/FjYgi3folTtssbKsHBg7n3MOde7yYUaksa2TklpZXVtfy64WNza3tHXN3ry6jRGBSwxGLRNNDkjDKSU1RxUgzFgSFHiMNr3cz9htPREga8Qc1iIkbog6nAcVIaaltXt3CS+hcOEmMhIj60HlMkA8dP+rzGeE/v20WrZI1AVwkdkaKIEO1bb7rME5CwhVmSMqWbcXKTZFQFDMyLDiJJDHCPdQhLU05Col008mhQ3ikFR8GkdCPKzhRfydSFEo5CD09GSLVlfPeWPzLayUqOHdTyuNEEY6ni4KEQRXBcWvQp4JgxQaaICyo/ivEXSQQVrrbgi7Bnj95kdRPSvZpqXxfLlauszry4AAcgmNggzNQAXegCmoAg2fwCj7Ap/FivBlfxmg6mjOyzD6YgfH9Aw25pq0=</latexit>
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+MHSA + FFN
+
+Messenger Patch
+<latexit sha1_base64="xwTLZBxkToYxAogLhAzD8bV5Bi0=">AAAC13icjVHLSsNAFD2Nr1pftS7dBIvgqiQi6rLoxo1QwVbFlpJMxxqaFzMTUYq4E7f+gFv9I/EP9C+8M0ZQi+iEJGfOvefM3Hv9NAykcpyXgjU2PjE5VZwuzczOzS+UFystmWSC8SZLwkQc+57kYRDzpgpUyI9Twb3ID/mRP9jV8aMLLmSQxIfqKuWdyOvHwVnAPEVUt1xpR546F9Fwn0vJ4z4X191y1ak5ZtmjwM1BFflqJOVntNFDAoYMEThiKMIhPEh6TuHCQUpcB0PiBKHAxDmuUSJtRlmcMjxiB/Tt0+40Z2Paa09p1IxOCekVpLSxSpqE8gRhfZpt4plx1uxv3kPjqe92RX8/94qIVTgn9i/dZ+Z/dboWhTNsmxoCqik1jK6O5S6Z6Yq+uf2lKkUOKXEa9yguCDOj/OyzbTTS1K5765n4q8nUrN6zPDfDm74lDdj9Oc5R0FqvuZs192CjWt/JR13EMlawRvPcQh17aKBJ3pd4wCOerBPrxrq17j5SrUKuWcK3Zd2/A4Psl2w=</latexit>
+
+<latexit sha1_base64="skt4MkfROMst7EayZ6D0K7Pl4VI=">AAAB9XicbVDLSgMxFL1TX7W+qi7dBIvgqsyIqMuiG5cV7APasWTStA1NZobkjlKG/ocbF4q49V/c+Tdm2llo64HA4Zx7uScniKUw6LrfTmFldW19o7hZ2tre2d0r7x80TZRoxhsskpFuB9RwKULeQIGSt2PNqQokbwXjm8xvPXJtRBTe4yTmvqLDUAwEo2ilh66iONIqrVNko2mvXHGr7gxkmXg5qUCOeq/81e1HLFE8RCapMR3PjdFPqUbBJJ+WuonhMWVjOuQdS0OquPHTWeopObFKnwwibV+IZKb+3kipMmaiAjuZpTSLXib+53USHFz5qQjjBHnI5ocGiSQYkawC0heaM5QTSyjTwmYlbEQ1ZWiLKtkSvMUvL5PmWdW7qJ7fnVdq13kdRTiCYzgFDy6hBrdQhwYw0PAMr/DmPDkvzrvzMR8tOPnOIfyB8/kDA/6S3A==</latexit>
+
+Shift
+<latexit sha1_base64="86kABkroB+8qDqsKdDUfXqHCXNc=">AAAB9XicbVDLSgMxFM3UV62vqks3wSK4KjNS1GXRjcuK9gHtWDJppg1NMkNyRylD/8ONC0Xc+i/u/Bsz7Sy09UDgcM693JMTxIIbcN1vp7Cyura+UdwsbW3v7O6V9w9aJko0ZU0aiUh3AmKY4Io1gYNgnVgzIgPB2sH4OvPbj0wbHql7mMTMl2SoeMgpASs99CSBkZbp3YiHMO2XK27VnQEvEy8nFZSj0S9/9QYRTSRTQAUxpuu5Mfgp0cCpYNNSLzEsJnRMhqxrqSKSGT+dpZ7iE6sMcBhp+xTgmfp7IyXSmIkM7GSW0ix6mfif100gvPRTruIEmKLzQ2EiMEQ4qwAPuGYUxMQSQjW3WTEdEU0o2KJKtgRv8cvLpHVW9c6rtdtapX6V11FER+gYnSIPXaA6ukEN1EQUafSMXtGb8+S8OO/Ox3y04OQ7h+gPnM8fGVKS6g==</latexit>
+
+S=1 1 2 2
+<latexit sha1_base64="1wcDglfkfaTccVXLui0/nJv1YY0=">AAACBnicbVDLSgMxFL1TX7W+Rl2KECyCqzJTiroRim5cVrQPaIeSyWTa0MzDJCOUoSs3/oobF4q49Rvc+Tem7SjaeiDcwzn3cnOPG3MmlWV9GrmFxaXllfxqYW19Y3PL3N5pyCgRhNZJxCPRcrGknIW0rpjitBULigOX06Y7uBj7zTsqJIvCGzWMqRPgXsh8RrDSUtfcv0ZnyEad2wR7P7X8Xbtm0SpZE6B5YmekCBlqXfOj40UkCWioCMdStm0rVk6KhWKE01Ghk0gaYzLAPdrWNMQBlU46OWOEDrXiIT8S+oUKTdTfEykOpBwGru4MsOrLWW8s/ue1E+WfOikL40TRkEwX+QlHKkLjTJDHBCWKDzXBRDD9V0T6WGCidHIFHYI9e/I8aZRL9nGpclUpVs+zOPKwBwdwBDacQBUuoQZ1IHAPj/AML8aD8WS8Gm/T1pyRzezCHxjvX+y3lkE=</latexit>
+
+D=# " # "
+<latexit sha1_base64="rG46Q4p0dTFibopIG+KUPH8HMuc=">AAACKHicdVDLSgMxFM3UV62vUZdugkVwVWakqCBiURcuK9gHdIaSyWTa0ExmTDKWMvRz3PgrbkQU6dYvMW1nYVs9EDg5596b3OPFjEplWSMjt7S8srqWXy9sbG5t75i7e3UZJQKTGo5YJJoekoRRTmqKKkaasSAo9BhpeL2bsd94IkLSiD+oQUzcEHU4DShGSktt8+oWXkLnwvGjPkdCRH3oPCbIh04Sz1z/89tm0SpZE8BFYmekCDJU2+a7noWTkHCFGZKyZVuxclMkFMWMDAtOIkmMcA91SEtTjkIi3XSy6BAeacWHQST04QpO1N8dKQqlHISergyR6sp5byz+5bUSFZy7KeVxogjH04eChEEVwXFq0KeCYMUGmiAsqP4rxF0kEFY624IOwZ5feZHUT0r2aal8Xy5WrrM48uAAHIJjYIMzUAF3oApqAINn8Ao+wKfxYrwZX8ZoWpozsp59MAPj+wcPp6at</latexit>
+
+<latexit sha1_base64="xUixBDMru9aR0bToxEW4Y5k0Sb4=">AAACA3icbVDLSsNAFJ34rPUVdaebwSIIQkmkqMuqULpRKtoHtKFMppN26GQSZiZCCQE3/oobF4q49Sfc+TdO2gjaemDgzDn3cu89bsioVJb1ZczNLywuLedW8qtr6xub5tZ2QwaRwKSOAxaIloskYZSTuqKKkVYoCPJdRpru8DL1m/dESBrwOzUKieOjPqcexUhpqWvudnykBsKPr6q358nRz69SuU66ZsEqWmPAWWJnpAAy1LrmZ6cX4MgnXGGGpGzbVqicGAlFMSNJvhNJEiI8RH3S1pQjn0gnHt+QwAOt9KAXCP24gmP1d0eMfClHvqsr0x3ltJeK/3ntSHlnTkx5GCnC8WSQFzGoApgGAntUEKzYSBOEBdW7QjxAAmGlY8vrEOzpk2dJ47honxRLN6VC+SKLIwf2wD44BDY4BWVQBTVQBxg8gCfwAl6NR+PZeDPeJ6VzRtazA/7A+PgGypuXoA==</latexit>
+
+C
+G
+<latexit sha1_base64="hhg9ZD0+V7f/N5cilDXL2zulXIc=">AAAB8XicbVDLSgMxFL1TX7W+qi7dBIvgqsxIqS6LLnRZwT6wHUomzbShSWZIMkIZ+hduXCji1r9x59+YaWehrQcCh3PuJeeeIOZMG9f9dgpr6xubW8Xt0s7u3v5B+fCoraNEEdoiEY9UN8CaciZpyzDDaTdWFIuA004wucn8zhNVmkXywUxj6gs8kixkBBsrPfYFNmMl0tvZoFxxq+4caJV4OalAjuag/NUfRiQRVBrCsdY9z42Nn2JlGOF0VuonmsaYTPCI9iyVWFDtp/PEM3RmlSEKI2WfNGiu/t5IsdB6KgI7mSXUy14m/uf1EhNe+SmTcWKoJIuPwoQjE6HsfDRkihLDp5ZgopjNisgYK0yMLalkS/CWT14l7YuqV6/W7muVxnVeRxFO4BTOwYNLaMAdNKEFBCQ8wyu8Odp5cd6dj8Vowcl3juEPnM8f2OORCw==</latexit>
+
+MHSA + FFN
+
+S=1 1 2 2
+D=" # " #
+
+<latexit sha1_base64="pAjeVmG8I4uxsEVkET7XcUObPCU=">AAAB8XicbVDLSgMxFL1TX7W+qi7dBIvgqsxIqS6LblxW6AvboWTSTBuaZIYkI5Shf+HGhSJu/Rt3/o2ZdhbaeiBwOOdecu4JYs60cd1vp7CxubW9U9wt7e0fHB6Vj086OkoUoW0S8Uj1AqwpZ5K2DTOc9mJFsQg47QbTu8zvPlGlWSRbZhZTX+CxZCEj2FjpcSCwmSiRtubDcsWtugugdeLlpAI5msPy12AUkURQaQjHWvc9NzZ+ipVhhNN5aZBoGmMyxWPat1RiQbWfLhLP0YVVRiiMlH3SoIX6eyPFQuuZCOxkllCvepn4n9dPTHjjp0zGiaGSLD8KE45MhLLz0YgpSgyfWYKJYjYrIhOsMDG2pJItwVs9eZ10rqpevVp7qFUat3kdRTiDc7gED66hAffQhDYQkPAMr/DmaOfFeXc+lqMFJ985hT9wPn8A7KSRGA==</latexit>
+
+Inverse Shift
+<latexit sha1_base64="k3qDhDql7zJh4koP6HLHSFYdrbY=">AAACCnicbVDLSgMxFM34rPU16tJNtAiuyowUdVl0o7uK9gGdoWTSTBuaZIYkI5Rh1m78FTcuFHHrF7jzb8y0I2jrgcDhnHPJvSeIGVXacb6shcWl5ZXV0lp5fWNza9ve2W2pKJGYNHHEItkJkCKMCtLUVDPSiSVBPGCkHYwuc799T6SikbjT45j4HA0EDSlG2kg9+8DjSA8lT69FHiMZ9OCPdDukoc56dsWpOhPAeeIWpAIKNHr2p9ePcMKJ0JghpbquE2s/RVJTzEhW9hJFYoRHaEC6hgrEifLTySkZPDJKH4aRNE9oOFF/T6SIKzXmgUnmW6pZLxf/87qJDs/9lIo40UTg6UdhwqCOYN4L7FNJsGZjQxCW1OwK8RBJhLWppWxKcGdPnietk6p7Wq3d1Cr1i6KOEtgHh+AYuOAM1MEVaIAmwOABPIEX8Go9Ws/Wm/U+jS5Yxcwe+APr4xsd7Zsu</latexit>
+
+Figure 2. An illustration of the messenger shift mechanism. Messenger tokens are first segmented into several groups (4 in the figure) and then shifted along the temporal axis with different stride
+(S) and direction (D) to exchange frame-level information. For
+every two successive messenger shift mechanisms, we apply an inverse shift operation. As shown in figure above, the shift direction
+(D) of each token group in the second shift mechanism (right) is
+exactly inverse to the first (medium). Messenger tokens are shown
+by green cubes, while blue cubes denote the patch tokens.
+
+predict video instances. Our whole network is end-to-end
+for both training and inference.
+
+3.2. Messenger Shift Transformer Backbone
+In previous VIS methods, the backbone networks only
+perform feature extraction in per-frame fashion [23, 57] and
+neglect the rich contextual information inherent in video
+frames. In contrast, inspired by MSG-Transformer [16],
+we propose messenger shift transformer (MsgShifT) which
+performs highly efficient temporal context modeling in a
+bottom-up manner, as shown in Fig. 1 (left). Without loss of
+generality, we build MsgShifT based on the pyramid vision
+transformer (PVT) [54, 55].
+To be specific, given an input video with T frames of
+T
+resolution H × W , denoted as {xi }i=1 ∈ RT ×3×H×W , we
+
+first divide these frames into T × HW
+P 2 patch tokens frameby-frame, where P denotes the size of each patch. Then we
+feed the flattened patch tokens to a linear projection and get
+
+T
+embedded patches fi0 i=1 with size of T × HW
+P 2 × C, C
+denotes the channel dimension. Meanwhile, a group of randomly initialized learnable embeddings with size of M × C
+are introduced as messenger tokens, denoted as m0 , where
+M indicates the number of messenger tokens. Then we simply copy and concatenate messenger tokens with patch tokens:
+  \left \{[f_i^0, m_i^0]\right \}_{i=1}^T \in \mathbb {R}^{T \times \left (\frac {HW}{P^2}+M\right ) \times C}, 
+(1)
+where m0i indicates the copycat of messenger tokens m0 .
+
+T
+The concatenated joint tokens [fi0 , m0i ] i=1 are taken as
+inputs for our MsgShifT.
+Our transformer architecture consists of NS = 4 stages
+and each stage has the same architecture as in Fig. 1 (left).
+The multi-head self attention (MHSA) and feed forward
+network (FFN) act on the concatenated joint tokens in a
+per-frame manner:
+  \left \{[f_i^l, m_i^l]\right \}_{i=1}^T = \left \{\mathrm {FFN}^{l}\left (\mathrm {MHSA}^{l}\left ([f_i^{l-1}, m_i^{l-1}]\right )\right )\right \}_{i=1}^T. 
+(2)
+Next, a messenger shift manipulation performs temporal information exchange across video frames.
+In short, the messenger shift mechanism takes temporal
+
+T
+messenger tokens mli i=1 as inputs and builds temporal
+context modeling by shifting messenger tokens along the
+temporal axis. Fig. 2 gives a detailed illustration. First,
+messenger tokens are divided into G = 4 groups and shifted
+along the temporal axis with different time steps (S = 1
+
+or 2) and direction (forward or backward). With various
+time steps and directions, messenger tokens are able to
+achieve temporal context exchange with both past and future frames. Moreover, for every two messenger shift operations, we apply an inverse operation to the second one,
+which implies the messenger tokens will be shifted back
+to their original corresponding frames after two contiguous
+messenger shift manipulations. This design aims to maintain a stable temporal receptive field as the network goes
+deeper.
+After the above process, the messenger tokens and patch
+tokens go through one of four stages, and the output tokens
+
+T
+are reshaped to feature maps Fi1 i=1 which is 41 smaller
+than the original image. In the same way, using the output
+messenger tokens and patch tokens of prior stage as inputs,
+
+T
+we obtain the following pyramid feature maps Fi2 i=1 ,
+ 3 T
+
+T
+Fi i=1 and Fi4 i=1 , whose strides are 8, 16 and 32 pixels with respect to the input image. The pyramid feature
+
+T
+maps Fi1 , Fi2 , Fi3 , Fi4 i=1 will be used to predict video
+instances in the head network.
+MsgShifT performs early temporal fusion in the backbone network, while the previous transformer-based VIS
+approaches [23, 38, 57, 64] only perform temporal feature
+fusion using transformer encoders after image-level feature
+extraction. It is almost parameter-free, friendly to imagelevel pre-training models, and brings negligible computation costs. The messenger tokens are randomly initialized
+and the shift manipulation has no parameter, so this module is insensitive to the pre-training process, which will be
+further discussed in the experiments in Tab. 6.
+
+3.3. Spatiotemporal Query Interaction Head
+MsgShifT achieves frame-level spatiotemporal context
+modeling. Meanwhile, in the VIS head network, our
+method still emphasizes temporally efficient spatiotemporal context modeling, but at the instance level. To this end,
+we propose a spatiotemporal query interaction (STQI) head
+network based on the recent SoTA query-based image-level
+instance segmentation method, i.e., QueryInst [18].
+As shown in Fig. 1 (right), our head network contains
+NH = 6 STQI heads and takes a fixed-length instance
+queries Q ∈ RNq ×C along with pyramid features extracted
+
+T
+by MsgShifT Fi1 , Fi2 , Fi3 , Fi4 i=1 as inputs, and generates Nq × T instance predictions. Nq and C denotes the
+numbers and the channel dimensions of instance query respectively. Instance queries Q are randomly initialized and
+optimized during training. Additionally, our VIS network
+also contains a set of proposal boxes B ∈ RNq ×4 as prior
+proposals, for more details about this, we refer readers to
+QueryInst [18].
+Instance queries are firstly copied by T times to each
+frame. Two successive and parameter-shared MHSA mod-
+
+ules act on instance queries along spatial and temporal dimensions:
+  \hat {Q}^{1:T}_{1:N_q} = \left \{\mathrm {MHSA}\left (Q^{i}_{1:N_q}\right )\right \}_{i=1}^{T}, \label {eq:spatial_query_mhsa} 
+
+(3)
+
+  \widetilde {Q}^{1:T}_{1:N_q} = \left \{\mathrm {MHSA}\left (\hat {Q}^{1:T}_{j}\right )\right \}_{j=1}^{N_q}. \label {eq:temporal_query_mhsa} 
+
+(4)
+
+“1:K” denotes ranging from 1 to K. Enhanced instance
+e are fed into a dynamic convolution module and
+queries Q
+perform interactions with instance region features. Its output serves as the input queries of the next head. Finally, task
+specific heads (i.e., classification head, box head and mask
+head) predict a sequence of video instances:
+  \left \{\hat {y}_{i}^{t}\right \}_{1:N_q}^{1:T} = \left \{\left (\hat {p}^{t}_{i}(c), \hat {b}_{i}^{t}, \hat {m}_{i}^{t}\right )\right \}_{1:N_q}^{1:T}, 
+
+(5)
+
+where p̂(c), b̂ and m̂ denotes predicted confidence scores,
+bounding boxes and instance foreground masks, respectively.
+The advantages of STQI mainly stem from the minimum
+modifications on the still-image instance prediction head
+in [18]. STQI achieves highly efficient temporal context
+modeling at instance-level by a parameter-shared MHSA
+(Eq. 3 and Eq. 4) while does not involve extra parameters.
+
+3.4. Matching and Loss Function
+The loss function is motivated by [7]. We first compute
+the one-to-one assignment between predicted instances and
+ground-truth annotations. The ground-truth annotations are
+denoted as follows:
+  \left \{y_{j}^{t}\right \}_{1:N_{gt}}^{1:T} = \left \{\left (c_{j}^t, b_{j}^t, m_{j}^t\right )\right \}_{1:N_{gt}}^{1:T}, 
+(6)
+in which Ngt indicates the number of ground-truth video instances, c, b and m indicates the category, bounding box and
+mask respectively. We then perform sequence-level bipartite matching between predictions and annotations by Hungarian algorithm [26]. The cost matrix with size of Nq ×Ngt
+between each predicted video instance and each annotation
+is defined as follows.
+  \begin {aligned} \mathcal {L}_{Hung}(\hat {y}^{1:T}_i, {y}^{1:T}_j) & = \lambda _{cls} \cdot \mathcal {L}_{cls}(\hat {p}_{i}^{1:T}(c), p_j^{1:T}) \\ & +\lambda _{L1} \cdot \mathcal {L}_{L1}(\hat {b}_{i}^{1:T}, b_{j}^{1:T}) \\ & +\lambda _{giou} \cdot \mathcal {L}_{giou}(\hat {b}_{i}^{1:T}, b_{j}^{1:T}), \end {aligned} 
+(7)
+
+where Lcls indicates the focal loss [29] for classification,
+LL1 and Lgiou indicates the L1 loss and GIoU loss [42]
+respectively. λcls , λL1 , λgiou ∈ R are hyper-parameters
+which we simply follow [18, 44, 68]. Besides we use dice
+coefficient [35] to optimize mask predictions. For more details, please refer to [18].
+
+Method
+
+Backbone
+
+MaskTrack R-CNN [62]
+MaskTrack R-CNN [62]
+SipMask [6]
+SG-Net [31]
+SG-Net [31]
+CrossVIS [63]
+CrossVIS [63]
+STEm-Seg [2]
+STEm-Seg [2]
+MaskProp [3]
+MaskProp [3]
+MaskProp [3]
+SeqMask R-CNN [27]
+SeqMask R-CNN [27]
+VisTR [57]
+VisTR [57]
+EfficientVIS [58]
+EfficientVIS [58]
+IFC [23]
+IFC [23]
+TeViT (ours)
+TeViT (ours)
+
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+STSN-X-101
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+ResNet-50
+ResNet-101
+MsgShifT
+MsgShifT
+
+MST
+
+✓
+
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+
+✓
+✓
+✓
+✓
+✓
+
+FPS
+
+AP
+
+AP50
+
+AP75
+
+AR1
+
+AR10
+
+32.8
+28.6
+34.1
+−
+−
+39.8
+35.6
+3.0
+−
+−
+−
+−
+−
+−
+51.1
+43.5
+36.0
+32.0
+107.1
+89.4
+68.9
+68.9
+
+30.3
+31.9
+33.7
+34.8
+36.3
+36.3
+36.6
+30.6
+34.6
+40.0
+42.5
+46.6
+40.4
+43.8
+36.2
+40.1
+37.9
+39.8
+41.2
+42.6
+45.9
+46.6
+
+51.1
+53.7
+54.1
+56.1
+57.1
+56.8
+57.3
+50.7
+55.8
+−
+−
+−
+63.0
+65.5
+59.8
+64.0
+59.7
+61.8
+65.1
+66.6
+69.1
+71.3
+
+32.6
+32.3
+35.8
+36.8
+39.6
+38.9
+39.7
+33.5
+37.9
+42.9
+45.6
+51.2
+43.8
+47.4
+36.9
+45.0
+43.0
+44.7
+44.6
+46.3
+50.4
+51.6
+
+31.0
+32.5
+35.4
+35.8
+35.9
+35.6
+36.0
+31.6
+34.4
+−
+−
+44.0
+41.1
+43.0
+37.2
+38.3
+40.3
+42.1
+42.3
+43.5
+44.0
+44.9
+
+35.5
+37.7
+40.1
+40.8
+43.0
+40.7
+42.0
+37.1
+41.6
+−
+−
+52.6
+49.7
+53.2
+42.4
+44.9
+46.6
+49.8
+49.6
+51.4
+53.4
+54.3
+
+Table 1. Comparisons on YouTube-VIS-2019 dataset [62]. “✓” under “MST” indicates using multi-scale training strategy, The FPS is
+measured with a single TESLA V100 GPU. All methods in the figure are organized into four groups. According to their basic architectures,
+the first two groups of methods are built upon CNN architecture, while the last two are transformer-based. According to their training
+inference paradigms, the first group follows the online and track-by-detect fashion, while the rest all follow offline and sequence-insequence-out paradigm.
+
+3.5. Online and Offline Inference
+Our method is flexible for both offline and online inference. Under the offline scenario, our TeViT takes the
+whole video clips as inputs and then outputs all possible
+video instances with a single run. No post-tracking process
+is needed. When it comes to the near online [2] scenario,
+an entire video is split into several overlapping segments.
+TeViT takes clips in time order and generates predictions.
+A rule-based post-tracking procedure is applied to linking
+instances across different video clips. For instances from
+two overlapping video clips, we first compute the similarity
+score between each instance, and then a Hungarian matcher
+gives the assignment according to the similarity matrix. The
+similarity score is defined as a combination of box IoU and
+mask IoU.
+
+4. Experiments
+4.1. Datasets and Evaluation Metrics
+We evaluate TeViT on three challenging video instance
+segmentation benchmarks, i.e., YouTube-VIS-2019 [62],
+YouTube-VIS-2021 [61], and OVIS [40]. YouTube-VIS2019 is the first dataset that focuses on the VIS problem. It
+
+contains 40 common object categories, 4, 883 unique video
+instances and about 131k high-quality instance-level annotations. YouTube-VIS-2021 dataset is the new version of
+YouTube-VIS-2019 with 1.5× more video frames and 2×
+more annotations. OVIS dataset aims to explore the VIS
+problem under high-occlusion scenarios. It consists of 296k
+high-quality instance masks and 5.80 instances per video
+from 25 semantic categories. Following previous works,
+we report the performance on the validation set for all three
+datasets. We follow the standard VIS evaluation metrics defined in [62].
+
+4.2. Implementation Details
+TeViT is built upon the mmdetection toolbox [11]. Unless otherwise noted, hyper-parameters follow the settings
+of QueryInst [18]. We use N q = 100 video instance
+queries as [18, 23]. Due to the temporal efficient designs
+in TeViT, we do not need to create pseudo video data, e.g.
+[2, 23], to train the temporal modeling parameters, instead,
+we first train a transformer-based QueryInst for imagelevel instance segmentation on the COCO dataset [30] and
+then initialize TeViT with the COCO pre-trained QueryInst
+weights. Besides, we provide a MindSpore [36] implementation of TeViT.
+
+Methods
+
+AP
+†
+
+MaskTrack R-CNN [62, 63]
+SipMask† [6, 63]
+CrossVIS [63]
+IFC [23]
+TeViT
+
+28.6
+31.7
+34.2
+35.2
+37.9
+
+AP50 AP75 AR1 AR10
+
+Methods
+
+AP
+
+AP50 AP75 AR1 AR10
+
+48.9
+52.5
+54.4
+57.2
+61.2
+
+SipMask† [6, 63]
+MaskTrack R-CNN† [62, 63]
+STEm-Seg‡ [2, 40]
+CrossVIS [63]
+CMaskTrack R-CNN‡ [40]
+TeViT
+
+10.3
+10.9
+13.8
+14.9
+15.4
+17.4
+
+25.4
+26.0
+32.1
+32.7
+33.9
+34.9
+
+29.6
+34.0
+37.9
+37.5
+42.1
+
+26.5
+30.8
+30.4
+−
+35.1
+
+33.8
+37.8
+38.2
+−
+44.6
+
+7.8 7.9 15.8
+8.1 8.3 15.2
+11.9 9.1 20.0
+12.1 10.3 19.8
+13.1 9.3 20.0
+15.0 11.2 21.8
+
+Table 2. Comparisons with previous VIS methods on YouTube-VIS2021 datasets. Methods with superscript “†” are reported in [63].
+
+Table 3. Comparisons on OVIS dataset. Methods with superscript
+“†” and “‡” are reported in [63] and [40] respectively.
+
+When training on the VIS datasets, we use the
+AdamW [25] optimizer with an initial learning rate of
+0.00025, and a weight decay of 0.0001. Especially, the
+backbone learning rate is slightly lower with a multiplier
+set to 0.1. We also apply gradient clipping with a maximal
+gradient norm of 0.1. TeViT is trained with a batch size
+of 16 and a clip length of T = 5. The total training process contains 12 epochs, and the learning rate is decreased
+by 10 at the 8-th and 11-th epoch respectively. For example, our TeViT can be trained in about 4 hours with 8 Tesla
+V100 GPUs on YouTube-VIS-2019, which is much faster
+than previous transformer-based method (i.e., VisTR [57]).
+The number of instance queries Nq is set to 100 for all experiments. Following [62], all input frames are resized to
+360 × 640 in single-scale experiments. Settings of multiscale training simply follow [6]. For inference, all frames
+are resized to 360 × 640 regardless of the training setups.
+During inference, we use T = 36 for most results and report the near online results in ablation study. For main results, we evaluate our framework on YouTube-VIS-2019,
+YouTube-VIS-2021, and OVIS datasets, with PVT-B1 [55]
+based MsgShifT as backbone.
+It’s noted that all reported results in main results and ablation studies are average performance from multiple runs
+(i.e., we choose five different random seeds and run each
+random seed for three times). The standard deviations (i.e.,
+σAP in following tables) are calculated in the same way.
+
+shows the final results of several VIS methods and ours
+on YouTube-VIS-2021 dataset. Due to the video length in
+YouTube-VIS-2021 is longer than our inference clip length
+(T = 36), TeViT performs near online tracking described
+in Sec. 3.5 on this dataset. TeViT obtains 37.9 AP, outperforming the previous state-of-the-art method by 2.7 AP.
+Main results on OVIS dataset. The results on the OVIS
+dataset are shown in Tab. 3. Our method also performs near
+online inference on OVIS dataset. TeViT achieves a relatively higher performance of 17.4 AP on the val split,
+surpassing previous state-of-the-art methods. Compared
+to CMaskTrack R-CNN [40] which presents an elaboratedesigned feature calibration plug-in to alleviate occlusion,
+our TeViT still gains 2.0 AP improvement, which shows
+that our temporal context modeling designs are helpful to
+segment occluded instances.
+
+4.3. Main Results
+Main results on YouTube-VIS-2019 dataset. We compare
+our TeViT to state-of-the-art methods on YouTube-VIS2019 dataset in Tab. 1. The longest video in YouTube-VIS2021 dataset only contains 36 frames, so that our TeViT
+executes fully offline inference on this dataset. Without
+bells and whistles, our TeViT achieves 45.9 AP when using
+a single-scale training strategy and outperforms the previous state-of-the-art methods by a large margin. Multi-scale
+training strategy further boosts the performance to 46.6 AP.
+Meanwhile, our method also achieves competitive inference
+speed. With about 10 AP higher, our method is still faster
+than VisTR.
+Main results on YouTube-VIS-2021 dataset. Tab. 2
+
+4.4. Ablation Study
+Effect of frame-level & instance-level temporal context
+modeling. We investigate the effects of messenger shift
+mechanism and spatiotemporal query interaction individually and simultaneously in Tab. 4. Using messenger shift
+mechanism and spatiotemporal query interaction individually brings 0.6 and 2.7 AP improvements respectively. The
+results show that both frame-level and instance-level temporal context modeling can obviously improve VIS performance. In addition, the instance-level one brings more
+significant performance gain. The two designs together
+brings 3.4 (> 0.6 + 2.7) AP improvements over a highperformance baseline. Besides the remarkable performance
+improvements, our designs only bring 0.27% computation overhead on our baseline (82.19 GFLOPs vs. 81.97
+GFLOPs), which demonstrates our design is very efficient.
+Variants of spatiotemporal query interaction. In Tab. 5,
+we investigate the effectiveness of our spatiotemporal query
+interaction comparing to its variants. A naive query interaction method in [18] without using temporal interaction, denoted as “Spatial Only”, serves as a baseline. “Fused SpaceTime” in the Row 2 denotes fusing video instance queries
+together and performing spatial and temporal interaction
+within a single MHSA, which is the same as in [57]. As
+the results show: (1) Our spatiotemporal query interaction
+
+MSM STQI GFLOPs
+✓
+✓
+
+✓
+✓
+
+AP ±σAP
+
+AP50 AP75 AR1 AR10
+
+81.97
+42.5 ± 0.47
+67.6 44.0 43.0 52.7
+82.19 43.1↑(+0.6) ± 0.71 67.2 47.8 43.5 52.4
+81.97 45.2↑(+2.7) ± 0.85 68.9 50.2 44.0 53.0
+82.19 45.9↑(+3.4) ± 0.58 69.1 50.4 44.0 53.4
+
+Table 4. Component-wise analysis on TeViT. MSM denotes the
+messenger shift mechanism and STQI denotes spatiotemporal query
+interaction. Without applying STQI implies only one MHSA is performed for query interaction within each frame (excluding Eq. 4).
+Manip.
+
+AP ± σAP
+
+AP50
+
+AP75
+
+None
+
+45.2 ± 0.85
+
+68.9
+
+50.2
+
+MHSA + FFN
+
+44.5 ± 1.07
+
+69.2
+
+49.3
+
+Shift
+
+45.9 ± 0.58
+
+69.1
+
+50.4
+
+Table 6. Study of the manipulations upon
+messenger tokens. Our method obtains the
+highest AP and a relatively stable performance (σAP ) among all settings.
+
+Interaction
+
+AP
+
+AP50 AP75 AR1 AR10
+
+Spatial Only [18]
+
+43.1
+
+67.2 47.8 43.5 52.4
+
+Fused Space-Time [57] 43.9↑(+0.8) 69.5 48.4 42.9 52.0
+Ours
+
+45.9↑(+2.7) 69.1 50.4 44.0 53.4
+
+Table 5. Variants of spatiotemporal query interaction. “Spatial
+Only” denotes the image-level instance segmentation heads in [18],
+“Fused Space-Time” denotes applying MHSA to all video instance
+queries at a single run, which is the same as in [57].
+
+Manip.
+
+AP
+
+AP50
+
+AP75
+
+M
+
+AP
+
+None
+Conv
+MHSA + FFN
+Msg Shift
+
+45.2
+41.8
+43.1
+45.9
+
+68.9
+63.7
+67.2
+69.1
+
+50.2
+45.1
+49.1
+50.4
+
+8
+
+45.3
+
+16
+
+45.4
+
+32
+
+45.9
+
+69.1
+
+Table 7. Study of frame-level feature
+aggregation. Compared to other framelevel feature manipulations, our messenger shift (Row 4) obtains the best results.
+
+achieves the best performance among three variants. (2)
+Compared to the spatial-only query interaction, joint spatiotemporal query interaction brings only 0.8 AP improvements. However, our method achieves 2.7 AP gains. We
+argue this is because the one-to-one corresponding between
+instance queries are misaligned in the joint spatiotemporal
+attention, while ours is not.
+Different messenger token manipulation methods. We
+compare our messenger shift mechanism with two other optional manipulations in Tab. 6. None indicates there are no
+extra manipulations conducted on messenger tokens, thus
+no temporal information is employed. MHSA+FFN stands
+for the same operation in [23] which performs extra MHSA
+and FFN on messenger tokens, and Shift denotes our messenger shift mechanism. Different from [23], we do not
+conduct any extra pre-training process so that both the messenger tokens and MHSA layers with FFN are randomly
+initialized and trained from scratch. As results have shown:
+(1) Our method achieves the best AP and outperforms None
+by 0.7 AP and MHSA + FFN by 1.4 AP. (2) Compared
+to conducting MHSA + FFN upon messenger tokens, our
+method obtains a more stable performance. MHSA + FFN
+shows more fluctuating final results (see σAP in Tab. 6)
+while ours is much more stable. The results confirm that
+the randomized MHSA + FFN is unable to capture temporal context while our parameter-free shift operation works.
+Different manipulations on frame-level feature aggregation. We also compare our messenger shift mechanism
+with other optional frame-level feature aggregation manipulations in Tab. 7. None indicates no manipulation is conducted to aggregate frame-level temporal features. Conv.
+and MHSA + FFN denotes using newly introduced con-
+
+AP50
+
+AP75
+
+AR1
+
+AR10
+
+69.0
+
+48.9
+
+44.5
+
+52.4
+
+70.3
+
+49.9
+
+44.0
+
+51.7
+
+50.4
+
+44.0
+
+53.1
+
+Table 8. Impact of messenger token numbers.
+M indicates the number of messenger tokens.
+We increase M from 8 to 32 and observe the
+effects on final performance.
+
+volution layers or transformer layers to achieve temporal
+feature aggregation. As results have shown, our messenger
+shift mechanism achieves the best performance (i.e., 45.9
+AP) compared to its all counterparts. Meanwhile, we observe apparent performance decrease by using newly introduced Conv. or MHSA + FFN as aggregation layers. We
+infer such a performance decrease comes from the enormous newly introduced parameters, while our messenger
+shift mechanism eliminates this performance decrease by
+the nearly parameter-free design.
+Number of messenger tokens. In Tab. 8, we test our
+method with number of messenger tokens increases from
+8 to 32. Compared to less messenger tokens (M = 8, 16),
+more messenger tokens (M = 32) achieves better results.
+Unless specified, our experiments are conducted with 32
+messenger tokens.
+Training and inference clip length. We also investigate
+the effects of clip length in both the training and testing
+phase. From Tab. 9, we find that: (1) Our method shows
+great tolerance to short length of training clip. Only trained
+with 2 or 3 frames, our method can effectively learn temporal context and obtains comparable results to previous methods. (2) The performance improvements by increasing the
+length of the training clip gradually gets saturated. Increasing training clip length from 2 to 3 and 3 to 5 brings 3.2 AP
+and 1.6 AP gains respectively while increasing training clip
+length from 5 to 7 only obtains slight 0.4 AP profit. Besides,
+a longer training clip requires more training computations
+and memory budgets. To this end, we set the training clip
+length of our method to T = 5 as a compromise between
+performance and training costs.
+Tab. 10 gives the results of TeViT under different in-
+
+T
+
+AP
+
+AP50
+
+AP75
+
+AR1
+
+AR10
+
+2
+
+41.1
+
+64.8
+
+44.3
+
+41.2
+
+50.2
+
+3
+
+44.3
+
+69.2
+
+49.3
+
+43.7
+
+52.1
+
+5
+
+45.9
+
+68.9
+
+50.2
+
+44.0
+
+53.0
+
+7
+
+46.3
+
+71.9
+
+51.6
+
+44.0
+
+53.4
+
+Table 9. Effect of training clip length on AP. “T” indicates the number of frames for each video clip during training.
+
+Method
+
+MST
+
+FPS
+
+AP
+
+AP50 AP75 AR1 AR10
+
+VisTR [57]
+IFC [23]
+✓
+Ours w/o. Eq. 4
+Ours
+Ours
+✓
+
+51.1
+107.1
+78.1
+76.8
+76.8
+
+36.2
+41.2
+36.8
+41.7
+42.3
+
+59.8
+65.1
+78.3
+67.8
+67.6
+
+36.9
+44.6
+38.8
+44.8
+44.0
+
+37.2
+42.3
+38.3
+41.3
+43.0
+
+42.4
+49.6
+46.2
+49.9
+52.7
+
+T
+
+S
+
+AP
+
+AP50
+
+AP75
+
+AR1
+
+AR10
+
+5
+5
+10
+15
+20
+36
+
+1
+3
+5
+8
+10
+18
+
+42.1
+41.7
+44.1
+44.7
+46.0
+45.9
+
+66.8
+63.2
+66.4
+67.0
+67.5
+68.9
+
+46.7
+46.1
+48.3
+48.7
+50.0
+50.2
+
+41.5
+41.8
+42.9
+43.4
+43.7
+44.0
+
+51.3
+50.8
+51.9
+52.5
+53.1
+53.0
+
+Table 10. Study the impact of clip length and stride during inference
+phase. “T” and “S” indicates the clip length and overlapping stride
+respectively.
+Train
+
+Inference
+
+AP
+
+AP50 AP75
+
+AR1
+
+AR10
+
+learnable
+
+learned
+
+45.9
+
+68.9
+
+50.2
+
+44.0
+
+53.0
+
+learnable
+
+zero
+
+45.5↓(−0.4)
+
+68.5
+
+49.9
+
+43.8
+
+52.5
+
+learnable
+
+random
+
+45.6↓(−0.3)
+
+68.2
+
+49.7
+
+43.7
+
+52.4
+
+Table 11. Comparisons with ResNet-50 as backbone.
+
+Table 12. Revisiting messenger tokens in inference phase.
+
+ference settings. “T” indicates the input clip length during the inference phase, and “S” indicates strides. It shows
+that our TeViT obtains promising performance under various inference setups. Even with T = 5 and S = 3, TeViT
+still achieves 41.7 AP, which indicates TeViT can serve as
+a strong baseline for both offline and online video understanding scenarios.
+
+specific information in themselves. On the contrary, they
+play the role of summarizing frame-level contexts, and exchanging them across adjacent frames.
+
+Performance under ResNet backbone. We compare our
+method with previous transformer-based methods using
+ResNet-50 [21] as backbone network in Tab. 11. As results show, our method achieves 41.7 AP on YouTube-VIS2019 dataset with single-scale training (Row 4), even outperforming VisTR and IFC with multi-scale training strategy. The performance goes a step further to 42.3 AP when
+the multi-scale strategy is applied (Row 5). It’s worth noting that with ResNet-50 as backbone network, the messenger tokens, and messenger shift mechanism are unable to
+proceed, so our method achieves such high performance
+with only the STQI mechanism. We also investigate the improvements by our STQI head. Simply taking off the spatial
+MHSA in Eq. 4, the final performance drops from 41.7 AP
+to 36.8 AP (Row 3), demonstrating the effectiveness of our
+STQI head directly.
+Revisiting messenger tokens.
+Inspired by MSGTransformer [16], we re-initialize messenger tokens in inference phase and obvious the influence on performance in
+Tab. 12. As the results show, when we re-initialize messenger tokens to zero, the performance merely drops 0.4
+AP (compare Row 2 to Row 1). Randomly initialize the
+messenger token in inference phase leads to a similar performance decrease (Row 3). We think this phenomenon implies that the messenger tokens contain only a few or not
+
+5. Conclusion
+In this paper, we provide lightweight and effective solutions to fully exploit temporal context for VIS. Based on existing ViTs and query-based image-level instance segmentation methods, we proposes the TeViT VIS method that
+contains the messenger shift and spatiotemporal query interaction mechanisms. TeViT performs both frame-level
+and instance-level temporal feature interactions while only
+bringing a few parameters and marginal extra computational
+costs. Experiments on YouTube-VIS-2019, YouTube-VIS2021, and OVIS show that TeViT can obtain remarkably better results than previous SoTA methods, e.g., IFC,
+VisTR, MaskProp, and STEm-Seg. We believe the proposed temporal context modeling mechanisms have great
+potential to be extended to other video understanding tasks.
+Limitations. Although the extensive experiments have
+demonstrated the capacity and efficiency of our TeViT on
+temporal context modeling, it still suffers effects from occlusion, motion deformation and long time-span videos
+(i.e., results of TeViT in Tab. 2 and Tab. 3 are far from satisfying). We leave these promising directions as future work.
+Broader impact. Although our research does not make direct negative impacts in society, it may be misused by illegal video applications, which could be a potential invasion
+to human privacy.
+Acknowledgement. This work was in part supported by
+NSFC (No. 61876212 and No. 61733007) and CAAIHuawei MindSpore Open Fund.
+
+References
+[1] Anurag Arnab, Mostafa Dehghani, Georg Heigold, Chen
+Sun, Mario Lučić, and Cordelia Schmid. Vivit: A video vision transformer. In ICCV, 2021. 1, 2
+[2] Ali Athar, Sabarinath Mahadevan, Aljosa Osep, Laura LealTaixé, and Bastian Leibe. Stem-seg: Spatio-temporal embeddings for instance segmentation in videos. In ECCV,
+2020. 2, 5, 6
+[3] Gedas Bertasius and Lorenzo Torresani. Classifying, segmenting, and tracking object instances in video with mask
+propagation. In CVPR, 2020. 2, 5
+[4] Gedas Bertasius, Heng Wang, and Lorenzo Torresani. Is
+space-time attention all you need for video understanding?
+In ICML, 2021. 1, 2
+[5] Sergi Caelles, Jordi Pont-Tuset, Federico Perazzi, Alberto
+Montes, Kevis-Kokitsi Maninis, and Luc Van Gool. The
+2019 davis challenge on vos: Unsupervised multi-object segmentation. arXiv preprint arXiv:1905.00737, 2019. 2
+[6] Jiale Cao, Rao Muhammad Anwer, Hisham Cholakkal, Fahad Shahbaz Khan, Yanwei Pang, and Ling Shao. Sipmask:
+Spatial information preservation for fast image and video instance segmentation. In ECCV, 2020. 5, 6
+[7] Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas
+Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-toend object detection with transformers. In ECCV, 2020. 1,
+2, 4
+[8] Joao Carreira and Andrew Zisserman. Quo vadis, action
+recognition? a new model and the kinetics dataset. In CVPR,
+2017. 2
+[9] Joao Carreira and Andrew Zisserman. Quo vadis, action
+recognition? a new model and the kinetics dataset. In CVPR,
+2017. 2
+[10] Kai Chen, Jiangmiao Pang, Jiaqi Wang, Yu Xiong, Xiaoxiao Li, Shuyang Sun, Wansen Feng, Ziwei Liu, Jianping Shi,
+Wanli Ouyang, et al. Hybrid task cascade for instance segmentation. In CVPR, 2019. 2
+[11] Kai Chen, Jiaqi Wang, Jiangmiao Pang, Yuhang Cao, Yu
+Xiong, Xiaoxiao Li, Shuyang Sun, Wansen Feng, Ziwei Liu,
+Jiarui Xu, et al. Mmdetection: Open mmlab detection toolbox and benchmark. arXiv preprint arXiv:1906.07155, 2019.
+5
+[12] Bowen Cheng, Alex Schwing, and Alexander Kirillov. Perpixel classification is not all you need for semantic segmentation. NeurIPS, 2021. 1, 2
+[13] Bin Dong, Fangao Zeng, Tiancai Wang, Xiangyu Zhang, and
+Yichen Wei. Solq: Segmenting objects by learning queries.
+NeurIPS, 2021. 1, 2
+[14] Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov,
+Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner,
+Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is
+worth 16x16 words: Transformers for image recognition at
+scale. In ICLR, 2021. 1, 2
+[15] Haoqi Fan, Bo Xiong, Karttikeya Mangalam, Yanghao Li,
+Zhicheng Yan, Jitendra Malik, and Christoph Feichtenhofer.
+Multiscale vision transformers. In ICCV, 2021. 1, 2
+
+[16] Jiemin Fang, Lingxi Xie, Xinggang Wang, Xiaopeng Zhang,
+Wenyu Liu, and Qi Tian. Msg-transformer: Exchanging local spatial information by manipulating messenger tokens. In
+CVPR, 2022. 1, 2, 3, 8
+[17] Yuxin Fang, Bencheng Liao, Xinggang Wang, Jiemin Fang,
+Jiyang Qi, Rui Wu, Jianwei Niu, and Wenyu Liu. You
+only look at one sequence: Rethinking transformer in vision
+through object detection. NeurIPS, 2021. 1, 2
+[18] Yuxin Fang, Shusheng Yang, Xinggang Wang, Yu Li, Chen
+Fang, Ying Shan, Bin Feng, and Wenyu Liu. Instances as
+queries. In ICCV, 2021. 1, 2, 3, 4, 5, 6, 7
+[19] Yang Fu, Linjie Yang, Ding Liu, Thomas S Huang, and
+Humphrey Shi. Compfeat: Comprehensive feature aggregation for video instance segmentation. In AAAI, 2020. 2
+[20] Kaiming He, Georgia Gkioxari, Piotr Dollár, and Ross Girshick. Mask r-cnn. In ICCV, 2017. 2
+[21] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+Deep residual learning for image recognition. In CVPR,
+2016. 2, 8
+[22] Zilong Huang, Youcheng Ben, Guozhong Luo, Pei Cheng,
+Gang Yu, and Bin Fu. Shuffle transformer: Rethinking spatial shuffle for vision transformer. arXiv preprint
+arXiv:2106.03650, 2021. 1, 2
+[23] Sukjun Hwang, Miran Heo, Seoung Wug Oh, and Seon Joo
+Kim. Video instance segmentation using inter-frame communication transformers. NeurIPS, 2021. 1, 2, 3, 4, 5, 6, 7,
+8
+[24] Joakim Johnander, Emil Brissman, Martin Danelljan, and
+Michael Felsberg.
+Learning video instance segmentation with recurrent graph neural networks. arXiv preprint
+arXiv:2012.03911, 2020. 2
+[25] Diederik P Kingma and Jimmy Ba. Adam: A method for
+stochastic optimization. arXiv preprint arXiv:1412.6980,
+2014. 6
+[26] Harold W Kuhn. The hungarian method for the assignment
+problem. Naval research logistics quarterly, 1955. 4
+[27] Huaijia Lin, Ruizheng Wu, Shu Liu, Jiangbo Lu, and Jiaya Jia. Video instance segmentation with a propose-reduce
+paradigm. In ICCV, 2021. 2, 5
+[28] Ji Lin, Chuang Gan, and Song Han. Tsm: Temporal shift
+module for efficient video understanding. In ICCV, 2019. 2
+[29] Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and
+Piotr Dollár. Focal loss for dense object detection. In ICCV,
+2017. 4
+[30] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays,
+Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence
+Zitnick. Microsoft coco: Common objects in context. In
+ECCV, 2014. 5
+[31] Dongfang Liu, Yiming Cui, Wenbo Tan, and Yingjie Chen.
+Sg-net: Spatial granularity network for one-stage video instance segmentation. In CVPR, 2021. 5
+[32] Ze Liu, Yutong Lin, Yue Cao, Han Hu, Yixuan Wei, Zheng
+Zhang, Stephen Lin, and Baining Guo. Swin transformer:
+Hierarchical vision transformer using shifted windows. In
+ICCV, 2021. 1, 2
+[33] Ze Liu, Jia Ning, Yue Cao, Yixuan Wei, Zheng Zhang,
+Stephen Lin, and Han Hu. Video swin transformer. arXiv
+preprint arXiv:2106.13230, 2021. 1, 2
+
+[34] Depu Meng, Xiaokang Chen, Zejia Fan, Gang Zeng,
+Houqiang Li, Yuhui Yuan, Lei Sun, and Jingdong Wang.
+Conditional detr for fast training convergence. In ICCV,
+2021. 1, 2
+[35] Fausto Milletari, Nassir Navab, and Seyed-Ahmad Ahmadi.
+V-net: Fully convolutional neural networks for volumetric
+medical image segmentation. In 3DV, 2016. 4
+[36] MindSpore. https://github.com/mindsporeai/mindspore. 5
+[37] Daniel Neimark, Omri Bar, Maya Zohar, and Dotan Asselmann. Video transformer network. In ICCV, 2021. 1
+[38] Thuy C Nguyen, Tuan N Tang, Nam LH Phan, Chuong H
+Nguyen, Masayuki Yamazaki, and Masao Yamanaka. 1st
+place solution for youtubevos challenge 2021: Video instance segmentation. arXiv preprint arXiv:2106.06649,
+2021. 1, 2, 4
+[39] Seoung Wug Oh, Joon-Young Lee, Ning Xu, and Seon Joo
+Kim. Video object segmentation using space-time memory
+networks. In ICCV, 2019. 2
+[40] Jiyang Qi, Yan Gao, Yao Hu, Xinggang Wang, Xiaoyu Liu,
+Xiang Bai, Serge Belongie, Alan Yuille, Philip Torr, and
+Song Bai. Occluded video instance segmentation: Dataset
+and challenge. NeurIPS, 2021. 2, 5, 6
+[41] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun.
+Faster r-cnn: Towards real-time object detection with region
+proposal networks. NeurIPS, 2015. 2
+[42] Hamid Rezatofighi, Nathan Tsoi, JunYoung Gwak, Amir
+Sadeghian, Ian Reid, and Silvio Savarese. Generalized intersection over union: A metric and a loss for bounding box
+regression. In CVPR, 2019. 4
+[43] Robin Strudel, Ricardo Garcia, Ivan Laptev, and Cordelia
+Schmid. Segmenter: Transformer for semantic segmentation. In ICCV, 2021. 1, 2
+[44] Peize Sun, Rufeng Zhang, Yi Jiang, Tao Kong, Chenfeng
+Xu, Wei Zhan, Masayoshi Tomizuka, Lei Li, Zehuan Yuan,
+Changhu Wang, et al. Sparse r-cnn: End-to-end object detection with learnable proposals. In CVPR, 2021. 1, 2, 4
+[45] Zhi Tian, Chunhua Shen, and Hao Chen. Conditional convolutions for instance segmentation. In ECCV, 2020. 2
+[46] Zhi Tian, Chunhua Shen, Hao Chen, and Tong He. Fcos: A
+simple and strong anchor-free object detector. IEEE PAMI,
+2020. 2
+[47] Hugo Touvron, Matthieu Cord, Matthijs Douze, Francisco
+Massa, Alexandre Sablayrolles, and Hervé Jégou. Training
+data-efficient image transformers & distillation through attention. In ICML, 2021. 1, 2
+[48] Du Tran, Lubomir Bourdev, Rob Fergus, Lorenzo Torresani,
+and Manohar Paluri. Learning spatiotemporal features with
+3d convolutional networks. In ICCV, 2015. 2
+[49] Du Tran, Heng Wang, Lorenzo Torresani, Jamie Ray, Yann
+LeCun, and Manohar Paluri. A closer look at spatiotemporal
+convolutions for action recognition. In CVPR, 2018. 2
+[50] Ashish Vaswani, Prajit Ramachandran, Aravind Srinivas,
+Niki Parmar, Blake Hechtman, and Jonathon Shlens. Scaling
+local self-attention for parameter efficient visual backbones.
+In CVPR, 2021. 1, 2
+
+[51] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia
+Polosukhin. Attention is all you need. NeurIPS, 2017. 1, 2
+[52] Paul Voigtlaender, Michael Krause, Aljosa Osep, Jonathon
+Luiten, Berin Balachandar Gnana Sekar, Andreas Geiger,
+and Bastian Leibe. Mots: Multi-object tracking and segmentation. In CVPR, 2019. 2
+[53] Tao Wang, Ning Xu, Kean Chen, and Weiyao Lin. End-toend video instance segmentation via spatial-temporal graph
+neural networks. In ICCV, 2021. 2
+[54] Wenhai Wang, Enze Xie, Xiang Li, Deng-Ping Fan, Kaitao
+Song, Ding Liang, Tong Lu, Ping Luo, and Ling Shao. Pyramid vision transformer: A versatile backbone for dense prediction without convolutions. In ICCV, 2021. 1, 2, 3
+[55] Wenhai Wang, Enze Xie, Xiang Li, Deng-Ping Fan, Kaitao
+Song, Ding Liang, Tong Lu, Ping Luo, and Ling Shao.
+Pvtv2: Improved baselines with pyramid vision transformer.
+CVM, 2022. 2, 3, 6
+[56] Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. In CVPR, 2018. 2
+[57] Yuqing Wang, Zhaoliang Xu, Xinlong Wang, Chunhua Shen,
+Baoshan Cheng, Hao Shen, and Huaxia Xia. End-to-end
+video instance segmentation with transformers. In CVPR,
+2021. 1, 2, 3, 4, 5, 6, 7, 8
+[58] Jialian Wu, Sudhir Yarram, Hui Liang, Tian Lan, Junsong
+Yuan, Jayan Eledath, and Gerard Medioni. Efficient video
+instance segmentation via tracklet query and proposal. In
+CVPR, 2022. 5
+[59] Enze Xie, Wenhai Wang, Zhiding Yu, Anima Anandkumar,
+Jose M Alvarez, and Ping Luo. Segformer: Simple and efficient design for semantic segmentation with transformers.
+NeurIPS, 2021. 1, 2
+[60] Saining Xie, Chen Sun, Jonathan Huang, Zhuowen Tu, and
+Kevin Murphy. Rethinking spatiotemporal feature learning:
+Speed-accuracy trade-offs in video classification. In ECCV,
+2018. 2
+[61] Ning Xu, Linjie Yang, Jianchao Yang, Dingcheng Yue,
+Yuchen Fan, Yuchen Liang, and Thomas S. Huang. Youtubevis dataset 2021 version. https://youtube- vos.
+org/dataset/vis, 2021. 2, 5
+[62] Linjie Yang, Yuchen Fan, and Ning Xu. Video instance segmentation. In ICCV, 2019. 1, 2, 5, 6
+[63] Shusheng Yang, Yuxin Fang, Xinggang Wang, Yu Li, Chen
+Fang, Ying Shan, Bin Feng, and Wenyu Liu. Crossover
+learning for fast online video instance segmentation. In
+ICCV, 2021. 2, 5, 6
+[64] Shusheng Yang, Yuxin Fang, Xinggang Wang, Yu Li, Ying
+Shan, Bin Feng, and Wenyu Liu. Tracking instances as
+queries. arXiv preprint arXiv:2106.11963, 2021. 1, 2, 4
+[65] Hao Zhang, Yanbin Hao, and Chong-Wah Ngo. Token shift
+transformer for video classification. In ACM MM, 2021. 1, 2
+[66] Wenwei Zhang, Jiangmiao Pang, Kai Chen, and
+Chen Change Loy. K-net: Towards unified image segmentation. NeurIPS, 2021. 1, 2
+[67] Yanyi Zhang, Xinyu Li, Chunhui Liu, Bing Shuai, Yi Zhu,
+Biagio Brattoli, Hao Chen, Ivan Marsic, and Joseph Tighe.
+Vidtr: Video transformer without convolutions. In ICCV,
+2021. 1, 2
+
+[68] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang,
+and Jifeng Dai. Deformable detr: Deformable transformers
+for end-to-end object detection. In ICLR, 2021. 1, 2, 4
+
+

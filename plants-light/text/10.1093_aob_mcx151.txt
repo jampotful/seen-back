@@ -1,0 +1,2582 @@
+Subtle variation in shade avoidance responses may have profound consequences for plant competitiveness
+Franca J. Bongers, Pierik R., Niels P. R. Anten, Jochem B. Evers (2017). Annals of Botany. https://research.wur.nl/en/publications/subtle-variation-in-shade-avoidance-responses-may-have-profound-c. doi:10.1093/aob/mcx151. Licence: cc-by-nc-nd. Text from pdf.
+
+Subtle variation in shade avoidance responses may have profound
+consequences for plant competitiveness
+Bongers, F. J., Pierik, R., Anten, N. P. R., & Evers, J. B.
+This is a "Post-Print" accepted manuscript, which has been published in "Annals of
+Botany"
+This version is distributed under a non-commercial no derivatives Creative Commons
+(CC-BY-NC-ND) user license, which permits use, distribution, and
+reproduction in any medium, provided the original work is properly cited and not
+used for commercial purposes. Further, the restriction applies that if you remix,
+transform, or build upon the material, you may not distribute the modified material.
+Please cite this publication as follows:
+Bongers, F. J., Pierik, R., Anten, N. P. R., & Evers, J. B. (2017). Subtle variation in
+shade avoidance responses may have profound consequences for plant
+competitiveness. Annals of Botany. DOI: 10.1093/aob/mcx151
+You can download the published version at:
+https://doi.org/10.1093/aob/mcx151
+
+1
+
+Subtle variation in shade avoidance responses may have profound consequences
+
+2
+
+for plant competitiveness
+
+3
+
+1,2,*
+
+4
+
+5
+
+6
+
+7
+
+Franca J Bongers
+1
+
+2
+
+1
+
+, Ronald Pierik , Niels PR Anten , Jochem B Evers
+
+Centre for Crop Systems Analysis, Wageningen University, Wageningen, the Netherlands.
+2
+
+Plant Ecophysiology, Utrecht University, Utrecht, the Netherlands.
+*Corresponding author: francajbongers@gmail.com
+
+8
+
+9
+
+1
+
+Running title: Variation in shade avoidance responses influence competitiveness
+
+10
+
+1
+
+11
+
+Abstract
+
+12
+
+Background and Aims: Although phenotypic plasticity has been shown to be beneficial for
+
+13
+
+plant competitiveness for light, there is limited knowledge on how variation in these plastic
+
+14
+
+responses plays a role in determining competitiveness.
+
+15
+
+Methods: A combination of detailed plant experiments and functional-structural plant (FSP)
+
+16
+
+modelling was used that captures the complex dynamic feedback between the changing plant
+
+17
+
+phenotype and the within-canopy light environment in time and 3D space. Leaf angle increase
+
+18
+
+(hyponasty) and changes in petiole elongation rates in response to changes in the ratio
+
+19
+
+between red and far-red light, two important shade avoidance responses in Arabidopsis
+
+20
+
+thaliana growing in dense population stands, were chosen as a case study for plant plasticity.
+
+21
+
+Measuring and implementing these responses into an FSP model, allowed to simulate plant
+
+22
+
+phenotype as an emergent property of the underlying growth and response mechanisms.
+
+23
+
+Key results: Both the experimental and model results showed that substantial differences in
+
+24
+
+competitiveness may arise between genotypes with only marginally different hyponasty or
+
+25
+
+petiole elongation responses, due to the amplification of plant growth differences by small
+
+26
+
+changes in plant phenotype. In addition, it illustrated that strong competitive responses do not
+
+27
+
+necessarily have to result in a tragedy of the commons; success in competition going at the
+
+28
+
+expense of community performance.
+
+29
+
+Conclusions: Together these findings indicate that selection pressure could likely have
+
+30
+
+played a role in fine-tuning the sensitive shade avoidance responses found in plants. The
+
+31
+
+model approach presented here, provides a novel tool to further analyse how natural selection
+
+32
+
+could have acted on the evolution of plastic responses.
+
+33
+34
+
+Key-words: Arabidopsis, competition, functional-structural plant model, phenotypic
+
+35
+
+plasticity, shade avoidance, tragedy of the commons
+
+2
+
+36
+
+Introduction
+
+37
+
+Plants compete for resources with their neighbours, which influences species composition and
+
+38
+
+vegetation dynamics in both natural (Kiaer et al. 2013; Kunstler et al. 2016) and managed
+
+39
+
+plant communities (Olsen et al. 2005; Yu et al. 2015). Plants experience both above and
+
+40
+
+belowground competition, and the relative importance of the degree of competition for plant
+
+41
+
+performance depends on the availability of resources, e.g. nutrients or light (Kiaer et al.
+
+42
+
+2013). The degree of competition for resources and therefore plant functioning is influenced
+
+43
+
+by differences in plant phenotype, created by the component traits and their values (Kunstler
+
+44
+
+et al. 2016). These values can be genotype specific but may also be modulated by
+
+45
+
+environmental factors through phenotypic plasticity. Phenotypic plasticity is the ability of a
+
+46
+
+genotype to express multiple phenotypes in various environments (Bradshaw 1965; Sultan
+
+47
+
+2000).
+
+48
+
+Here we emphasize that expression of different phenotypes in different environments
+
+49
+
+is mediated by dynamic organ-level responses to environmental signals. From an evolutionary
+
+50
+
+perspective one can argue that plants have evolved to optimize plastic responses to maximize
+
+51
+
+resource acquisition in different environments (Sultan 2000). Plastic responses to changes in
+
+52
+
+vegetation density and the associated light conditions constitute a well-known form of
+
+53
+
+phenotypic plasticity in plants, called the shade avoidance syndrome (SAS; Casal 2012;
+
+54
+
+Ballaré & Pierik 2017). Increase in stem or petiole extension rate, reduction in branch
+
+55
+
+production, increase in leaf inclination (hyponasty) and advanced flowering time are typical
+
+56
+
+SAS responses that plants exhibit when encountering increased competition for light, though
+
+57
+
+the combination of responses differ between species.
+
+58
+
+Relations between species, component traits and their values, and their relationship
+
+59
+
+with competitiveness have been studied intensively to understand ecosystem processes
+
+3
+
+60
+
+(Dybzinski et al. 2011; Farrior et al. 2013; Bardgett et al. 2014; Kunstler et al. 2016). For
+
+61
+
+instance, game-theoretical studies suggest that because plants compete for resources, plants
+
+62
+
+can evolve traits associated with a relatively large investment in resource harvesting (e.g.
+
+63
+
+leaves, stems and roots) instead of reproduction. This means that under competition, natural
+
+64
+
+selection can result in plant traits that will not optimize performance of the plant population,
+
+65
+
+also referred to as a tragedy of the commons (ToC, Falster & Westoby 2003; McNickle &
+
+66
+
+Dybzinski 2013). The existence of such a ToC may have profound consequences for
+
+67
+
+vegetation performance (Anten and Vermeulen 2016). However, studies that evaluate the role
+
+68
+
+of resource-harvesting traits for competition often do not take phenotypic plasticity into
+
+69
+
+account (but see e.g. Dybzinski et al. 2013). Analysing how plastic responses affect
+
+70
+
+competition is challenging because plastic responses affect trait values that influence the
+
+71
+
+dynamic interaction between plant phenotype and environmental conditions and signals.
+
+72
+
+Environmental signals elicit plastic responses that induce small trait changes which in turn
+
+73
+
+change the light climate and thus modify the environmental signals. Furthermore small
+
+74
+
+changes early in plant development eventually can be amplified into substantial consequences
+
+75
+
+for competitiveness. Although phenotypic plasticity is identified to be beneficial for plant
+
+76
+
+performance, illustrated by adequate stem or petiole length matching to different
+
+77
+
+environments (Schmitt et al. 1995; Dudley and Schmitt 1996; Pierik et al. 2003; Weijschede
+
+78
+
+et al. 2008), it is unknown to what extent subtle variation in the plastic response itself has
+
+79
+
+consequences for plant performance in competitive settings. Large consequences of such
+
+80
+
+subtle variation would likely result in strong selection for a fine-tuned detection and signal-
+
+81
+
+transduction system.
+
+82
+
+Our main objective was to determine to what extent differences in plastic responses
+
+83
+
+between neighbouring plants affect the outcome of competition for light, considering the
+
+84
+
+dynamic feedback between plant phenotype and environment. We use SAS responses in
+4
+
+85
+
+Arabidopsis thaliana (Arabidopsis) as a case study for phenotypic plasticity. Arabidopsis
+
+86
+
+rosettes show two major SAS responses: increased leaf angle (hyponasty) and petiole
+
+87
+
+elongation (Pierik & de Wit, 2014). When Arabidopsis plants are grown in dense stands, leaf
+
+88
+
+angles will first increase due to physical touching among growing leaves (de Wit et al. 2012).
+
+89
+
+This resulting vertical stand structure will change the ratio of red to far-red (R:FR) light
+
+90
+
+scattered by the elevated leaves. This decrease of R:FR light is the most important signal for
+
+91
+
+the subsequent induction of further leaf hyponasty and petiole elongation (Pierik & de Wit,
+
+92
+
+2014). To quantify the effect of differences in these SAS responses on plant competitiveness,
+
+93
+
+we used a combination of detailed plant experiments and functional-structural plant (FSP)
+
+94
+
+modelling (Bongers et al. 2014). FSP models can capture the dynamic feedback between the
+
+95
+
+changing plant phenotype and the surrounding light environment by simulating plant
+
+96
+
+phenotypic development and biomass growth over time in three dimensions at the organ level
+
+97
+
+(Vos et al. 2010; Evers 2016). We implemented phenotypic plasticity as the ability to express
+
+98
+
+organ-level plastic responses: changes in the rate of petiole elongation and changes in the rate
+
+99
+
+of hyponasty. These plastic responses were modelled using response curves that relate organ
+
+100
+
+change to R:FR (Gautier et al. 2000; Evers and Vos 2013). In parallel with model analysis,
+
+101
+
+variation in these plastic responses was explored in experiments using Arabidopsis mutants.
+
+102
+
+Ultimately, by simulating the R:FR distribution as a function of the dynamic 3D plant
+
+103
+
+phenotypes that are created by the interaction of resource acquisition and growth at the organ
+
+104
+
+level, plastic responses at the organ level were quantitatively linked to whole-plant
+
+105
+
+performance during competition.
+
+106
+107
+
+Material and Methods
+
+108
+
+Plant experiments
+
+5
+
+109
+
+Three independent experiments were conducted to obtain organ-level growth data, petiole
+
+110
+
+elongation response curves, and plant phenotype and performance of various genotypes of
+
+111
+
+Arabidopsis thaliana, for model design and validation (outlined in Fig. 1). To obtain organ-
+
+112
+
+level growth data, wild-type Col-0 plants were used. To explore the variation in SAS
+
+113
+
+responses we tested various Arabidopsis mutants for their SAS responses (Fig. 2 and Fig. S1,
+
+114
+
+Supplementary Information). For model validation the genotypes hfr1-5 and rot3-1 were
+
+115
+
+used because of their clear distinct levels of petiole elongation (Fig. 2). Arabidopsis seeds
+
+116
+
+were sown on potting soil (mix Z2254, Primasta B.V., the Netherlands), stratified for 4 days
+
+117
+
+at 4°C in the dark after which they germinated and grew in a growth chamber with 9-hour
+
+118
+
+photoperiod of 200 µmol m-2 s-1 PAR and R:FR ratio of 2.3, 20 °C and 70% relative humidity.
+
+119
+
+Ten days after germination, seedlings were transplanted to individual 19 ml pots (Ø 2.5 cm)
+
+120
+
+and plants grew in the same growth chamber with bottom up watering for soil water
+
+121
+
+saturation.
+
+122
+
+Experiments for model design
+
+123
+
+To obtain organ-level growth data, Arabidopsis wild-type Col-0 was grown solitarily (referred
+
+124
+
+to as ‘low density’ in the results) or in high density stands of 7 x 7 plants with inter plant
+
+125
+
+distance (IPD) of 2.5 cm, until bolting. During stand development, R:FR measurements were
+
+126
+
+taken in the high-density stands at seven locations with a LI-COR1800 spectroradiometer
+
+127
+
+(LiCor, Lincoln, USA) using a glass fiber with cosine corrector (SKL 904, spectroSense2,
+
+128
+
+Skye, United Kingdom). R:FR was calculated from the irradiance within the wavelengths of
+
+129
+
+654-664 nm for R and 724-734 nm for FR light. Per location in the stand, readings in four
+
+130
+
+horizontal directions were taken and the average calculated. Between day 21 and day 46,
+
+131
+
+plants were harvested every 2-4 days, and in each harvest two high-density stands and 10
+
+132
+
+individually grown plants were selected. In each stand the outer two rows of plants were
+
+133
+
+excluded from the harvest to diminish border-effects. Before every harvest, leaf angle of rank
+6
+
+134
+
+number 8 and 10 were measured with a protractor. For every harvested plant, laminas and
+
+135
+
+petioles were scanned (at 600 dpi). For all leaves with a rank higher than 6 and with a distinct
+
+136
+
+petiole, all laminas and petioles were pooled separately and dried for 48 hours to obtain
+
+137
+
+lamina and petiole dry weight. The remaining aboveground plant material was pooled and
+
+138
+
+dried to get total aboveground biomass. Root material was not harvested. Leaf scans were
+
+139
+
+analysed with ImageJ (https://imagej.net) to collect petiole length and width and lamina area,
+
+140
+
+length, width and shape. Petiole length and lamina area were used to determine parameter
+
+141
+
+values for the organ-growth function (Supplementary Information - Material and
+
+142
+
+Methods). Data of all harvested plants per developmental stage and density were used to
+
+143
+
+calculate trait value averages. All parameter values used in the model and extracted from this
+
+144
+
+experiment are given in Table S1, Supplementary Information.
+
+145
+
+To obtain petiole elongation-response curves for three Arabidopsis genotypes, 10-day-
+
+146
+
+old seedlings were transplanted in 70 ml pots (Ø 5 cm) and grown for 28 days at which time
+
+147
+
+they were subjected to one of eight R:FR ratios (2.3, 1.6, 1.2, 1.0, 0.7, 0.5, 0.2 and 0.1) for 24
+
+148
+
+hours, n = 12 per R:FR. These eight different R:FR ratios were created by supplementing
+
+149
+
+normal light (R:FR 2.3) with FR LEDs (730 nm; Philips Green Power, The Netherlands).
+
+150
+
+Two petioles per plant (start length 4 - 6 mm) were measured at the start and end of the
+
+151
+
+experiment with a digital calliper. The relative elongation per petiole was calculated and the
+
+152
+
+mean of the two petioles per plant was used for further analysis. Relative elongation of all
+
+153
+
+genotypes was described with:
+
+154
+
+P = b * R:FR –a
+
+155
+
+where P is the relative petiole elongation (mm mm-1 24h-1), a a slope coefficient and b the
+
+156
+
+elongation rate at R:FR 1. Parameters were fitted for each genotype separately.
+
+7
+
+(1)
+
+157
+
+Experiments for model validation
+
+158
+
+Three different Arabidopsis genotypes (Col-0, hfr1-5, rot3-1) were grown solitarily (low
+
+159
+
+density) or in high-density stands of 8 x 8 plants (IPD of 2.5 cm) composed of plants of the
+
+160
+
+same genotype (monoculture) or plants of two genotypes grown in a checkerboard pattern
+
+161
+
+(mixtures; Keuskamp et al. 2010). After 46 days of growth, five solitary plants per genotype
+
+162
+
+and five replicated plots per genotype specific monocultures and mixtures were harvested. For
+
+163
+
+all solitary plants and three plants per genotype per plot, laminas and petioles were scanned,
+
+164
+
+dried and measured similar to the first experiment. The mean values of the middle 16 or 8
+
+165
+
+plants per genotype per plot were calculated and used as independent values for further
+
+166
+
+analysis. Paired student’s T-test was used to test significant difference between genotypes
+
+167
+
+within the mixture, and unpaired student’s T-test was used to test significant difference
+
+168
+
+between monocultures.
+
+169
+
+Model description
+
+170
+
+A functional-structural plant (FSP) model (Vos et al. 2010; Evers 2016) of Arabidopsis
+
+171
+
+rosette growth and development was constructed using the simulation platform GroIMP v1.5
+
+172
+
+(https://sourceforge.net/projects/groimp). The rosettes were represented as a collection of
+
+173
+
+leaves that were composed of petioles and laminas. An additional root compartment
+
+174
+
+functioned only as a sink for carbon assimilates. The leaves were provided with values for
+
+175
+
+reflectance, transmittance and absorbance of PAR, R and FR light, which were used by the
+
+176
+
+radiation model to simulate the light environment and calculate the absorption of PAR and
+
+177
+
+perception of R:FR. The appearance rate and shape of the leaves were based on empirical data
+
+178
+
+and the leaves grew in time in three dimensions based on light interception, photosynthesis
+
+179
+
+and carbon-allocation mechanisms (Explained in more detail in Supplementary Information
+
+180
+
+- Material and Methods and in Evers and Bastiaans (2016)). During each simulated time
+
+181
+
+step (representing 24 hours) individual leaves absorbed PAR that was converted to an amount
+8
+
+182
+
+of carbon through photosynthesis, and perceived R:FR that determined the shade avoidance
+
+183
+
+responses (see below). Therefore, simulated plant growth depended on the level of
+
+184
+
+competition for light that individual plants experienced with neighbouring plants: plant
+
+185
+
+phenotype, size and biomass were thus an emergent property of the simulated model
+
+186
+
+scenarios. Parameter values for organ structure, physiological processes and environment
+
+187
+
+signals were obtained from the experiments described above and from literature (Table S1).
+
+188
+
+The complete model is available on request from the corresponding author.
+
+189
+
+Shade avoidance responses
+
+190
+
+Two SAS responses were included: hyponasty (by touching and by R:FR) and petiole
+
+191
+
+elongation (by R:FR). Hyponasty by leaf touching is induced upon mechanical interaction at
+
+192
+
+the tips of two growing leaves before the R:FR in a canopy decreases significantly (de Wit et
+
+193
+
+al. 2012). This touch-induced hyponasty was simulated to occur when the distance between
+
+194
+
+lamina tips of neighbouring leaves was smaller than 2 mm. Hyponasty induced by R:FR
+
+195
+
+perception was simulated to happen when the perception of R:FR by the lamina was below a
+
+196
+
+threshold value of 0.5. In every model time-step (24 hours), when touch or low R:FR
+
+197
+
+threshold criteria were met, leaf angle increased by a fixed amount, for which either a default
+
+198
+
+value of 16 degrees (based on measurements on Col-0) was used or a scenario-dependent
+
+199
+
+value (see below Model scenarios). The leaf angle over time was therefore a function of the
+
+200
+
+number of time steps in which touch or low R:FR perception occurred, with a maximum leaf
+
+201
+
+angle of 80 degrees (see Supplementary Information – Video for hyponastic response of
+
+202
+
+Arabidopsis plants in high density). Leaves with rank number up to six did not become
+
+203
+
+hyponastic.
+
+204
+
+The second SAS response incorporated in the model was relative petiole elongation.
+
+205
+
+RFR ratios perceived at lamina level were used as input for the response curves (Kozuka et al.
+9
+
+206
+
+2010). The petiole response curve based on Arabidopsis type Col-0 was used as default
+
+207
+
+setting (Fig. 2B), for other settings see Model scenarios. The fitted function for the relative
+
+208
+
+petiole elongation obtained from the petiole elongation experiment was normalized for
+
+209
+
+growth at control R:FR light (R:FR 2.3). This way the relative petiole elongation rate could be
+
+210
+
+simulated in addition to petiole growth by carbon allocation. Petiole elongation and related
+
+211
+
+extra investment of substrates was modelled in two steps. First the petiole elongated by
+
+212
+
+multiplying the petiole length with the relative petiole elongation value (representing cell
+
+213
+
+expansion without extra biomass demand; Sasidharan et al. 2010; Huber et al. 2014). Second,
+
+214
+
+the longer elongated petiole increased its carbon demand to correct for the needed biomass
+
+215
+
+corresponding to the length (representing increased biomass allocation to the petiole; Poorter
+
+216
+
+et al. 2012; de Wit et al. 2015). Petioles could only show the elongation response during the
+
+217
+
+actual growth phase. Petiole length over time was therefore a result of daily calculated carbon
+
+218
+
+growth based on PAR absorption and petiole elongation based on R:FR perception.
+
+219
+
+Model scenarios
+
+220
+
+In all scenarios, plants were simulated solitarily (representing low density) or in high-density
+
+221
+
+monocultures or mixtures (consisting of 8 x 8 plants and IPD of 2.5 cm) for 46 days
+
+222
+
+(Supplementary Information - Video), and different plant types were created by adjusting
+
+223
+
+relevant SAS response values. In Scenario 1, three plant types were simulated solitarily and in
+
+224
+
+monocultures to test the extent to which the model could simulate Arabidopsis phenotype and
+
+225
+
+growth: The first plant type had default SAS response values as measured for Arabidopsis
+
+226
+
+wild-type Col-0 (referred to as ‘Col-0’) in the experiment, two additional plant types had
+
+227
+
+either no hyponastic responses (‘noHypo’) or no petiole-elongation response (‘noPE’). The
+
+228
+
+R:FR ratio in the vegetation stand was captured by placing virtual sensors at soil level that
+
+229
+
+measured R:FR from four directions, to mimic the measurements of R:FR in the experimental
+
+230
+
+Arabidopsis stands. Dynamic changes of leaf angle, petiole length, lamina area and total
+10
+
+231
+
+aboveground biomass of these plant types were compared with data from experimentally
+
+232
+
+grown Col-0 Arabidopsis grown in low or high density stands. In Scenario 2 we simulated
+
+233
+
+two plant types with different values for their petiole elongation curves as measured for the
+
+234
+
+hfr1-5 and rot3-1 Arabidopsis genotypes (0.073 for ‘hfr1-5’ and 0.028 for ‘rot3-1’ plant type)
+
+235
+
+in low and high density stands to validate if variation in the petiole elongation responses
+
+236
+
+curve could result in distinct petiole length differences at low and high density. Of these
+
+237
+
+simulated plant types the petiole lengths per rank after 46 days of growth were compared with
+
+238
+
+measured petiole lengths after 46 days of the two corresponding Arabidopsis genotypes.
+
+239
+
+To quantify the impact of variation in plastic response curves on plant performance in
+
+240
+
+competitive settings, and to determine if stronger response curves would result in high plant
+
+241
+
+competitiveness but sub-optimal population performance (tragedy of the commons), four
+
+242
+
+additional scenarios were simulated (Scenario 3-6). In these scenarios, mixtures of two plant
+
+243
+
+types, placed in a checkerboard design, and the associated monocultures, were simulated for
+
+244
+
+46 days. Organ growth, light absorption and total aboveground biomass during the
+
+245
+
+development of the stands were recorded as model output. In Scenario 3, two plant types were
+
+246
+
+only different in their petiole elongation response curve; ‘Col-0’ having a slope of 0.054 and
+
+247
+
+‘hfr1-5’ of 0.073 (respectively matching the measured Col-0 and hfr1-5 Arabidopsis
+
+248
+
+genotypes). Simulated total aboveground biomass was compared with total aboveground
+
+249
+
+biomass measured from the validation experiment with these same genotypes. In Scenario 4,
+
+250
+
+two plant types had different hyponastic responses but similar petiole elongation response
+
+251
+
+curves; plants increased their angle with 10 (’10deg’) or 15 (’15deg’) degrees per hyponastic
+
+252
+
+event. These hyponasty values were chosen based on observed variation in hyponastic values
+
+253
+
+of different Arabidopsis genotypes (data not shown). To analyse if competitiveness depends
+
+254
+
+on the difference in plastic responses between two competing plant types, we simulated
+
+255
+
+mixtures with distinct differences between the plastic response values of the two plant types.
+11
+
+256
+
+In all mixtures a ‘wild-type’ plant type competed with a ‘competitor’ plant type that had a
+
+257
+
+different value for the petiole elongation response (Scenario 5) or the hyponastic response
+
+258
+
+(Scenario 6). The ‘wild-type’ plant type had a petiole elongation response value of 0.054 and
+
+259
+
+a hyponastic response value of 20 degrees. The absolute difference in aboveground biomass
+
+260
+
+of the ‘competitor’ compared to the ‘wild-type’ was a measure for the degree of
+
+261
+
+competitiveness. In addition, over the same range of petiole elongation and hyponastic
+
+262
+
+response values, monoculture stands were simulated. All model simulations were replicated
+
+263
+
+10 times to capture the variation in plant growth created by the stochastic nature of the light
+
+264
+
+model and the random plant rotation angle. The mean values of the middle 16 (monocultures)
+
+265
+
+or 8 (mixtures) plants per genotype per plot were calculated and used as independent values
+
+266
+
+for further analysis.
+
+267
+268
+
+Results
+
+269
+
+Variation in the petiole elongation response curve
+
+270
+
+Arabidopsis genotypes showed a gradually increasing relative petiole elongation with
+
+271
+
+decreasing R:FR (Fig. 2A and S1). Col-0 and hfr1-5 showed only a marginally different
+
+272
+
+elongation response, where rot3-1 clearly had a lower relative petiole elongation rate at the
+
+273
+
+same R:FR conditions compared to the other two. However, all the fitted curves had distinct
+
+274
+
+slope values for their response curves: 0.054 for Col-0, 0.073 for hfr1-5 and 0.028 for rot3-1.
+
+275
+
+The normalization procedure resulted in three response curves with distinct slopes that all
+
+276
+
+increased with decreasing R:FR ratio (Fig. 2B).
+
+277
+
+Test model design (Scenario 1)
+
+278
+
+During the development of a dense Arabidopsis stand, leaf area index (LAI) increased and
+
+279
+
+R:FR ratio decreased in time (Fig. S2). This decrease in R:FR is primarily created by
+12
+
+280
+
+increased leaf angles through the touching of leaves (de Wit et al. 2012). Consequently, the
+
+281
+
+R:FR decrease induced hyponastic and petiole elongation responses that further change plant
+
+282
+
+phenotype. The dynamic change of leaf angle and petiole length of experimentally grown
+
+283
+
+plants in low and high density stands were best simulated by the plant type that included both
+
+284
+
+SAS responses (referred to as ‘Col-0’) (Fig. 3). When the hyponastic responses were set to
+
+285
+
+zero (‘noHypo’), plants did not become hyponastic in high density compared to the ‘Col-0’
+
+286
+
+type. The simulated ‘Col-0’ plants increased the leaf angles slightly later during stand
+
+287
+
+development than the experimentally measured leaf angles. Plants that had no petiole
+
+288
+
+elongation response (‘noPE’) could not grow longer petioles in high density compared to low
+
+289
+
+density, illustrating that the petiole elongation response curve included in ‘Col-0’ plant type is
+
+290
+
+needed to simulate long petiole lengths in high density population stands. Overall, when
+
+291
+
+including the SAS response values based on wild-type Col-0 (‘Col-0’), the model predictions
+
+292
+
+were in good agreement with the experimental aboveground biomass accumulated during
+
+293
+
+stand development in low and high density stands (Fig. 3C).
+
+294
+
+Validation of the petiole elongation response curve (Scenario 2)
+
+295
+
+Validation of the petiole elongation response curve (Scenario 2) revealed that the magnitude
+
+296
+
+of the experimentally observed petiole length difference between hfr1-5 plants grown in low
+
+297
+
+or high density stands was predicted by the model that used the ‘hfr1-5’ response curve,
+
+298
+
+although petiole lengths of leaves with high ranks were underestimated (Fig. 4A). In addition,
+
+299
+
+the model predicted no petiole length difference when using the ‘rot3-1’ response curve,
+
+300
+
+which is in agreement with the experimentally observed petiole lengths of rot3-1 plants
+
+301
+
+grown in low or high density stands (Fig. 4B). In absolute terms the model overestimated
+
+302
+
+petiole lengths due to the higher constitutive growth of the simulated Arabidopsis plants
+
+303
+
+compared to the natural rot3-1 plants.
+
+304
+
+13
+
+305
+
+Impact of variation in plastic response values on plant performance (Scenarios 3 and 4)
+
+306
+
+‘Col-0’ and ‘hfr1-5’ plant types had different simulated aboveground biomass after they were
+
+307
+
+grown 46 days together in a mixture but not when simulated separately in monocultures
+
+308
+
+(Scenario 3; Fig. 5A). This difference of plant performance in monocultures compared to
+
+309
+
+mixtures was also observed in the experimental data with Col-0 and hfr1-5 Arabidopsis
+
+310
+
+genotypes (Fig. 5B). In this scenario, the ‘hfr1-5’ type had slightly longer petioles than ‘Col-
+
+311
+
+0’ both in the monocultures and mixture, but the laminas of ‘hfr1-5’ absorbed more PAR than
+
+312
+
+‘Col-0’ only in the mixture (Fig. 6A,B). The higher PAR absorption at the individual lamina
+
+313
+
+level resulted in higher simulated whole-plant PAR absorption for ‘hfr1-5’ compared to ‘Col-
+
+314
+
+0’ in the mixture, whereas in the monocultures there was no difference between the two plant
+
+315
+
+types for lamina or whole-plant PAR absorption (Fig. 6C). Thus, in direct mixed competition
+
+316
+
+the plant type with the slightly stronger petiole elongation response (as reflected in a higher
+
+317
+
+slope in the petiole elongation-R:FR curve) had higher performance because it created slightly
+
+318
+
+longer petioles that could put laminas in a better lit part of the canopy.
+
+319
+
+In the monocultures and the mixture of Scenario 4, in which the strength of the
+
+320
+
+hyponastic response was tested, both plant types showed increased leaf angles at the same
+
+321
+
+developmental stage during stand development, but the ’15deg’ plant type increased its leaf
+
+322
+
+angle faster (Fig. 7A). In the mixture, this faster increase resulted in higher lamina PAR
+
+323
+
+absorption that also resulted in higher whole-plant PAR absorption, compared to the weaker
+
+324
+
+’10deg’ plant type (Fig. 7B,C). In the monocultures, the slightly higher leaf angle of the
+
+325
+
+stronger ’15deg’ type did not result in higher lamina or whole plant PAR absorption
+
+326
+
+compared to the ’10deg’ type. These model simulations could not be validated due to the lack
+
+327
+
+of appropriate Arabidopsis mutants that have distinct hyponastic responses but overall similar
+
+328
+
+growth forms.
+
+14
+
+329
+
+Competitiveness depends on the difference in plastic responses (Scenario 5 and 6)
+
+330
+
+To determine how subtle variation in plastic responses can affect plant competitiveness, we
+
+331
+
+simulated multiple mixtures in which a ‘wild-type’ competed with a ‘competitor’ with a
+
+332
+
+different value for the petiole elongation response (Fig. 8A, Scenario 5) or with a different
+
+333
+
+value for the hyponastic response (Fig. 8B, Scenario 6). The plant type with the stronger
+
+334
+
+petiole elongation response always had a higher aboveground biomass, but when the
+
+335
+
+difference in response was very large, the difference in aboveground biomass increased only
+
+336
+
+marginally (Fig. 8A). The plant type with the stronger hyponastic response had only a higher
+
+337
+
+aboveground biomass with absolute hyponastic values up to 30 degrees (Fig. 8B). Increasing
+
+338
+
+the difference in plastic responses when the absolute hyponastic response was larger than 40
+
+339
+
+had no effect or a negative effect on competitiveness. When plant types with increased SAS
+
+340
+
+response values grew in monocultures, the aboveground biomass of the plants decreased
+
+341
+
+slightly (Fig. S3), indicating that performance at population level is sub-optimal when plants
+
+342
+
+increase their plastic response strength.
+
+343
+344
+
+Discussion
+
+345
+
+In this study we showed that small differences in petiole elongation or hyponastic responses
+
+346
+
+to changes in R:FR conditions can strongly affect plant phenotype and competitiveness.
+
+347
+
+Model simulations illustrated that subtle variation in SAS response curves could influence
+
+348
+
+competitiveness for light because a small change in a structural trait (petiole length or leaf
+
+349
+
+angle) affected the interaction between plant phenotype and light environment, which had
+
+350
+
+direct consequences for simulated PAR absorption and subsequently growth (Figs 6 and 7).
+
+351
+
+Part of the model simulations were validated with a plant competition experiment that
+
+352
+
+resulted in similar biomass accumulation in monocultures and mixtures for two Arabidopsis
+
+353
+
+genotypes with similar petiole elongation response curves as used in the model simulations.
+15
+
+354
+
+Model assumptions
+
+355
+
+Before going on to the implications of our work we briefly reflect on the model assumptions,
+
+356
+
+such that our findings can be properly interpreted. For model simplicity, only touch and R:FR
+
+357
+
+ratio were the environmental cues that induced the studied SAS responses. It is however
+
+358
+
+known that additional canopy-related light cues, notably decrease in blue and PAR light
+
+359
+
+intensity, are involved in shade avoidance (e.g. Casal, 2012; Pierik & de Wit, 2014) and can
+
+360
+
+strengthen low R:FR responses (de Wit et al. 2016). In all scenarios, parameters related to leaf
+
+361
+
+optical properties and photosynthesis were set to be independent of light conditions or leaf
+
+362
+
+developmental stage. A decrease in potential photosynthesis with canopy depth (Anten et al.
+
+363
+
+1995) was not considered, as we assumed that such acclimations of photosynthetic parameters
+
+364
+
+would be negligible in relatively young and quickly developing Arabidopsis leaves compared
+
+365
+
+to the role of phenotypic change due to the SAS responses studied. In addition, we assumed
+
+366
+
+that chloroplasts in the petioles contributed to PAR absorption and photosynthesis, in contrast
+
+367
+
+to other light competition models which make a clear distinction between height growth
+
+368
+
+through investments in stems and branches that were considered to not contribute directly to
+
+369
+
+CO2 fixation and light harvesting organs (leaves) that do fix carbon (Anten 2005; Dybzinski
+
+370
+
+et al. 2011). We checked the photosynthetic contribution of petioles, and concluded that even
+
+371
+
+without petiole photosynthesis plants with a slightly different plastic response curve have
+
+372
+
+different performances in mixture but equal performances in monocultures (Fig. S4).
+
+373
+
+Regarding plasticity costs, only two direct consequences of phenotypic changes were
+
+374
+
+considered: 1) substrates invested in petiole length were consequently not available for lamina
+
+375
+
+growth and 2) inclined leaf angles could potentially absorb less light than leaves with a
+
+376
+
+horizontal position. Other indirect costs, such as vulnerability of strongly hyponastic leaves
+
+377
+
+and long petioles to mechanical damage or hydraulic limitations, were not taken into account.
+
+378
+
+Overall, the model predicted the observed relative differences in biomass production between
+16
+
+379
+
+genotypes with different petiole elongation responses well qualitatively (Fig. 5), suggesting
+
+380
+
+that costs and benefits of the petiole elongation response were reasonably well captured in the
+
+381
+
+current model regarding Arabidopsis responses. Modelling the induction of both SAS
+
+382
+
+responses was based on R:FR perception at the lamina (Kozuka et al. 2010). However, details
+
+383
+
+on site of perception versus site of response may differ between species, organs and responses
+
+384
+
+(Casal and Smith 1988a; b; Maddonni et al. 2002). The kind of organ-level plant modelling
+
+385
+
+presented in this paper makes it possible to explore the environmental context of R:FR
+
+386
+
+distributions and functional implications of localized signalling.
+
+387
+
+388
+
+Tragedy of the commons
+
+389
+
+Tragedy of the commons in light competition assumes that plants investing relatively more in
+
+390
+
+light harvesting compared to neighbour plants are the most successful competitors, but
+
+391
+
+because of the costs associated with this investment, such plants will perform less when
+
+392
+
+growing as monocultures (Falster and Westoby 2003; McNickle and Dybzinski 2013). This
+
+393
+
+conflict between individual-based selection and population performance has been proposed to
+
+394
+
+have major consequences for vegetation functioning and knowledge of this phenomenon may
+
+395
+
+provide input for crop management and breeding systems (Anten and Vermeulen 2016). Our
+
+396
+
+experimental results showed that the plant type with the stronger petiole response and thus a
+
+397
+
+higher petiole investment, outcompeted the individual with the weaker response in the
+
+398
+
+mixtures but had equal performance in monoculture (Fig. 5). This is in contrast to (mostly
+
+399
+
+theoretical) studies that evaluate tragedy of the commons in competition for light. Additional
+
+400
+
+model simulations also illustrated that although the competitiveness increased with stronger
+
+401
+
+plastic responses, the population-level performance decreased only marginally (Fig. 8 and
+
+402
+
+Fig. S3). These results suggest that selection on shade avoidance responses that favour light
+
+17
+
+403
+
+competition does not necessarily result in strong decrease of population-level performance.
+
+404
+
+The extent to which these results can be extrapolated to other plant types such as forest trees
+
+405
+
+or crops that often have different growth forms and associated SAS responses than
+
+406
+
+Arabidopsis, still needs to be explored. However, if the pattern that small difference in SAS
+
+407
+
+responses affect competitive ability with limited or no impact on monoculture performance
+
+408
+
+extends to crops, it could provide useful breeding targets.
+
+409
+
+Promising avenues
+
+410
+
+In this study we described plasticity as trait responses to a range of changing environmental
+
+411
+
+conditions during the lifetime of the individual plant. Differences in degree of plasticity were
+
+412
+
+described by different shapes of the response curves (Fig. 2), and these differences in
+
+413
+
+response curves allowed quantification of how variation in trait responses would affect plant
+
+414
+
+competitiveness. The sensitivity of plant competiveness to small differences in plastic
+
+415
+
+responses due to mutations (i.e. use of Arabidopsis mutants like hfr1-5 and rot3-1) suggest
+
+416
+
+that selection on finely tuned signal transduction pathways is likely. Quantifying more
+
+417
+
+contributors to the signal transduction pathway that influence plastic responses could be a
+
+418
+
+next step in breeding programs that search for optimal plastic genotypes to deal with changing
+
+419
+
+environments.
+
+420
+
+A next step with this model approach could be to analyse how natural selection could
+
+421
+
+have acted on plastic responses in plants. Analysing how natural selection could have acted
+
+422
+
+on trait values has often been approached by using game theoretical models (Falster &
+
+423
+
+Westoby 2003; McNickle & Dybzinski 2013). However, analysing selection for plastic
+
+424
+
+responses is challenging because a model system needs to consider i) the possibility of a
+
+425
+
+single genotype to express multiple phenotypes, ii) the dynamic interaction between
+
+426
+
+phenotypic changes and changes in environmental conditions and iii) variation in plasticity
+
+427
+
+that is incorporated by a single parameter. The model system presented here complies with
+18
+
+428
+
+these three requirements, because genotypes varied in their plastic responses due to different
+
+429
+
+values of a single parameter. In that manner it extends on previous game theoretical studies
+
+430
+
+(e.g. Dybzinski et al. 2013; Vermeulen 2015) by explicitly considering dynamic
+
+431
+
+environmental trait responses rather than environment-dependent trait values. We thus argue
+
+432
+
+that our approach provides a novel way to analyse natural selection for plasticity (Bongers et
+
+433
+
+al., 2014).
+
+434
+435
+
+Conclusions
+
+436
+
+In this paper we illustrated that substantial difference in competitiveness may arise between
+
+437
+
+phenotypes with slightly different SAS response levels, due to the amplification of plant
+
+438
+
+growth differences by small changes in plant phenotype. These findings indicate that selection
+
+439
+
+pressure could have played a role in fine-tuning the sensitive shade avoidance responses
+
+440
+
+found in plants.
+
+441
+442
+
+Supplementary Information
+
+443
+
+Material and Methods: Detailed information of model description.
+
+444
+
+Video: Visualization of Arabidopsis plants growing in low and high density vegetation stand,
+
+445
+
+simulated by the functional-structural plant model.
+
+446
+
+Table S1: Overview of all used parameters in the FSP model of Arabidopsis, with parameter
+
+447
+
+description, unit, value and source of parameter value.
+
+448
+
+Figure S1: Experimentally obtained petiole elongation response curves from five Arabidopsis
+
+449
+
+genotypes.
+
+450
+
+Figure S2: Dynamically changing R:FR and Lamina Area Index (LAI) during the
+
+451
+
+development of a high density Arabidopsis stand (1600 plants m-2)
+
+19
+
+452
+
+Figure S3: Simulated aboveground biomass of an individual plant related to the plastic
+
+453
+
+response value of the plants in the monoculture
+
+454
+
+Figure S4: Simulated total aboveground biomass of an individual plant growing in
+
+455
+
+monoculture or mixture.
+
+456
+457
+
+Acknowledgements
+
+458
+
+We thank J. de Vries for help with model development and M.F. Fouce Fernández and
+
+459
+
+members of the UU Plant Ecophysiology team for help with harvesting plant experiments. We
+
+460
+
+also thank two anonymous reviewers for their constructive comments on an earlier version of
+
+461
+
+this manuscript. This work was supported by the Netherlands Organisation for Scientific
+
+462
+
+Research [ALW grant no. 821.01.014 to N.P.R.A, VIDI grant no. 86412.003 to R.P].
+
+463
+
+Authors' Contributions
+
+464
+
+All authors designed the research; FJB performed experiments, model simulations and data
+
+465
+
+analysis; All authors interpreted the data; FJB led the writing of the manuscript. All authors
+
+466
+
+contributed critically to the drafts and gave final approval for publication.
+
+467
+
+References
+
+468
+
+Anten NPR. 2005. Optimal photosynthetic characteristics of individual plants in vegetation
+
+469
+
+stands and implications for species coexistence. Annals of Botany 95: 495–506.
+
+470
+
+Anten NPR, Schieving F, Werger MJA. 1995. Patterns of light and nitrogen distribution in
+
+471
+
+relation to whole canopy carbon gain in C3 and C4 mono- and dicotyledonous species.
+
+472
+
+Oecologia 101: 504–513.
+
+473
+
+Anten NPR, Vermeulen PJ. 2016. Tragedies and Crops: Understanding Natural Selection To
+20
+
+474
+
+Improve Cropping Systems. Trends in Ecology & Evolution 31: 429–439.
+
+475
+
+Ballaré CL, Pierik R. 2017. The Shade Avoidance Syndrome: Multiple signals and
+
+476
+
+ecological outputs. Plant, Cell and Environment.
+
+477
+
+Bardgett RD, Mommer L, De Vries FT. 2014. Going underground: root traits as drivers of
+
+478
+
+ecosystem processes. Trends in Ecology & Evolution 29: 692–699.
+
+479
+
+Bongers FJ, Evers JB, Anten NPR, Pierik R. 2014. From shade avoidance responses to
+
+480
+
+plant performance at vegetation level : using virtual plant modelling as a tool. New
+
+481
+
+Phytologist 204: 268–272.
+
+482
+
+Bradshaw AD. 1965. Evolutionary Significance of Phenotypic Plasticity in Plants In:
+
+483
+
+Advances in Genetics.115–155.
+
+484
+
+Casal JJ. 2012. Shade Avoidance In: The Arabidopsis Book. American Society of Plant
+
+485
+
+Biologists, e0157.
+
+486
+
+Casal JJ, Smith H. 1988a. Persistent effects of changes in phytochrome status on internode
+
+487
+
+growth in light-grown mustard: Occurrence, kinetics and locus of perception. Planta 175:
+
+488
+
+214–20.
+
+489
+
+Casal JJ, Smith H. 1988b. The loci of perception for phytochrome control of internode
+
+490
+
+growth in light-grown mustard: Promotion by low phytochrome photoequilibria in the
+
+491
+
+internode is enhanced by blue light perceived by the leaves. Planta 176: 277–82.
+
+492
+
+Dudley SA, Schmitt J. 1996. Testing the Adaptive Plasticity Hypothesis : Density-Dependent
+
+493
+
+Selection on Manipulated Stem Length in Impatiens capensis. American Naturalist 147: 445–
+
+494
+
+465.
+
+495
+
+Dybzinski R, Farrior CE, Ollinger S, Pacala SW. 2013. Interspecific vs intraspecific
+21
+
+496
+
+patterns in leaf nitrogen of forest trees across nitrogen availability gradients. New Phytologist
+
+497
+
+200: 112–121.
+
+498
+
+Dybzinski R, Farrior C, Wolf A, Reich PB, Pacala SW. 2011. Evolutionarily Stable
+
+499
+
+Strategy Carbon Allocation to Foliage, Wood, and Fine Roots in Trees Competing for Light
+
+500
+
+and Nitrogen: An Analytically Tractable, Individual-Based Model and Quantitative
+
+501
+
+Comparisons to Data. The American Naturalist 177: 153–166.
+
+502
+
+Evers JB. 2016. Simulating Crop Growth and Development Using Functional-Structural
+
+503
+
+Plant Modeling In: Canopy Photosynthesis:From Basics to Applications.219–236.
+
+504
+
+Evers JB, Bastiaans L. 2016. Quantifying the effect of crop spatial arrangement on weed
+
+505
+
+suppression using functional-structural plant modelling. Journal of Plant Research 129: 339–
+
+506
+
+351.
+
+507
+
+Evers JB, Vos J. 2013. Modeling branching in cereals. Frontiers in Plant Science 4: 399.
+
+508
+
+Falster DS, Westoby M. 2003. Plant height and evolutionary games. Trends in Ecology &
+
+509
+
+Evolution 18: 337–343.
+
+510
+
+Farrior CE, Dybzinski R, Levin S a, Pacala SW. 2013. Competition for water and light in
+
+511
+
+closed-canopy forests: a tractable model of carbon allocation with implications for carbon
+
+512
+
+sinks. The American naturalist 181: 314–30.
+
+513
+
+Gautier H, Mech R, Prusinkiewicz P, Varlet-Grancher C. 2000. 3D Architectural
+
+514
+
+Modelling of Aerial Photomorphogenesis in White Clover (Trifolium repens L.) using L-
+
+515
+
+systems. Annals of Botany 85: 359–370.
+
+516
+
+Huber H, de Brouwer J, von Wettberg EJ, During HJ, Anten NPR. 2014. More cells,
+
+517
+
+bigger cells or simply reorganization? Alternative mechanisms leading to changed internode
+
+22
+
+518
+
+architecture under contrasting stress regimes. New Phytologist 201: 193–204.
+
+519
+
+Keuskamp DH, Pollmann S, Voesenek LACJ, Peeters AJM, Pierik R. 2010. Auxin
+
+520
+
+transport through PIN-FORMED 3 (PIN3) controls shade avoidance and fitness during
+
+521
+
+competition. Proceedings of the National Academy of Sciences 107: 22740–22744.
+
+522
+
+Kiaer LP, Weisbach AN, Weiner J. 2013. Root and shoot competition: a meta-analysis.
+
+523
+
+Journal of Ecology 101: 1298–1312.
+
+524
+
+Kozuka T, Kobayashi J, Horiguchi G, et al. 2010. Involvement of auxin and brassinosteroid
+
+525
+
+in the regulation of petiole elongation under the shade. Plant Physiology 153: 1608–18.
+
+526
+
+Kunstler G, Falster D, Coomes DA, et al. 2016. Plant functional traits have globally
+
+527
+
+consistent effects on competition. Nature 529: 1–15.
+
+528
+
+Maddonni GA, Otegui ME, Andrieu B, Chelle M, Casal JJ. 2002. Maize leaves turn away
+
+529
+
+from neighbors. Plant Physiology 130: 1181–9.
+
+530
+
+McNickle GG, Dybzinski R. 2013. Game theory and plant ecology. Ecology Letters 16:
+
+531
+
+545–55.
+
+532
+
+Olsen J, Kristensen L, Weiner J, Griepentrog HW. 2005. Increased density and spatial
+
+533
+
+uniformity increase weed suppression by spring wheat. Weed Research 45: 316–321.
+
+534
+
+Pierik R, Visser EJW, De Kroon H, Voesenek LACJ. 2003. Ethylene is required in tobacco
+
+535
+
+to successfully compete with proximate neighbours. Plant, Cell & Environment 26: 1229–
+
+536
+
+1234.
+
+537
+
+Pierik R, de Wit M. 2014. Shade avoidance: phytochrome signalling and other aboveground
+
+538
+
+neighbour detection cues. Journal of Experimental Botany 65: 2815–2824.
+
+539
+
+Poorter H, Niklas KJ, Reich PB, Oleksyn J, Poot P, Mommer L. 2012. Biomass allocation
+23
+
+540
+
+to leaves, stems and roots: Meta-analyses of interspecific variation and environmental control.
+
+541
+
+New Phytologist 193: 30–50.
+
+542
+
+Sasidharan R, Chinnappa CC, Staal M, et al. 2010. Light quality-mediated petiole
+
+543
+
+elongation in Arabidopsis during shade avoidance involves cell wall modification by
+
+544
+
+xyloglucan endotransglucosylase/hydrolases. Plant Physiology 154: 978–90.
+
+545
+
+Schmitt J, Mccormac AC, Smith H. 1995. A Test of the Adaptive Plasticity Hypothesis
+
+546
+
+Using Transgenic and Mutant Plants Disabled in Phytochrome-Mediated Elongation
+
+547
+
+Responses to Neighbors. American Naturalist 146: 937–953.
+
+548
+
+Sultan SE. 2000. Phenotypic plasticity for plant development, function and life history.
+
+549
+
+Trends in Plant Science 5: 537–542.
+
+550
+
+Vermeulen PJ. 2015. On selection for flowering time plasticity in response to density. New
+
+551
+
+Phytologist 205: 429–439.
+
+552
+
+Vos J, Evers JB, Buck-Sorlin GH, Andrieu B, Chelle M, de Visser PHB. 2010.
+
+553
+
+Functional-structural plant modelling: a new versatile tool in crop science. Journal of
+
+554
+
+Experimental Botany 61: 2101–15.
+
+555
+
+Weijschede J, Berentsen R, Kroon H De, Huber H. 2008. Variation in petiole and
+
+556
+
+internode length affects plant performance in Trifolium repens under opposing selection
+
+557
+
+regimes. Evolutionary Ecology 22: 383–397.
+
+558
+
+de Wit M, Kegge W, Evers JB, et al. 2012. Plant neighbor detection through touching leaf
+
+559
+
+tips precedes phytochrome signals. Proceedings of the National Academy of Sciences 109:
+
+560
+
+14705–14710.
+
+561
+
+de Wit M, Keuskamp DH, Bongers FJ, et al. 2016. Integration of Phytochrome and
+
+24
+
+562
+
+Cryptochrome Signals Determines Plant Growth during Competition for Light. Current
+
+563
+
+Biology 26: 1–7.
+
+564
+
+de Wit M, Ljung K, Fankhauser C. 2015. Contrasting growth responses in lamina and
+
+565
+
+petiole during neighbor detection depend on differential auxin levels. New Phytologist 3:
+
+566
+
+198–209.
+
+567
+
+Yu Y, Stomph TJ, Makowski D, van der Werf W. 2015. Temporal niche differentiation
+
+568
+
+increases the land equivalent ratio of annual intercrops: A meta-analysis. Field Crops
+
+569
+
+Research 184: 133–144.
+
+570
+
+571
+
+25
+
+572
+
+Figure 1 Overview of the research design, in which three independent experiments
+
+573
+
+(bordered in green) are combined with functional-structural plant (FSP) modelling
+
+574
+
+(bordered in red) to address three questions (bordered in black). Data of organ growth
+
+575
+
+and detailed plastic responses of Arabidopsis were used to develop an FSP model that
+
+576
+
+included two plastic responses of the shade avoidance syndrome (SAS); hyponasty and
+
+577
+
+petiole elongation. The model design was tested by comparing phenotypic and performance
+
+578
+
+data from plant experiment and model simulation (Scenario 1; bordered in grey). Additional
+
+579
+
+model simulations and plant experiments were performed to validate model output (Scenario
+
+580
+
+2 & 3) and answer the three research questions (Scenario 2 – 6). See Supplementary Video
+
+581
+
+for a visualisation of Arabidopsis plants growing in high and low population density.
+
+582
+
+583
+
+Figure 2 Petiole elongation response curves from three Arabidopsis genotypes. (A)
+
+584
+
+Measured relative petiole elongation at different R:FR ratios for Col-0 (black - circle), hfr1-5
+
+585
+
+(red-square) and rot3-1 (blue-triangle) with genotype specific fitted curves (equation 1).
+
+586
+
+Experimental data represents mean ± SD (n=12). (B) Petiole elongation response curves for
+
+587
+
+the corresponding Arabidopsis genotypes that were used in the model..
+
+588
+
+589
+
+26
+
+590
+
+Figure 3 Experimentally and simulated obtained data of plant phenotype and
+
+591
+
+performance. (A) Leaf angle change of plant growing in a high-density stand obtained from
+
+592
+
+experimental data (square) and simulated for plant types that did (‘Col-0’- red line) or did not
+
+593
+
+(‘NoHypo’ – black line) exhibit hyponastic responses. (B) Petiole length change of plants
+
+594
+
+growing in low (open/dotted) and high (solid) density stands, from experimental data
+
+595
+
+(symbols) and simulated for plant types that did not show petiole elongation (‘noPE’ – black
+
+596
+
+line) or did show petiole elongation (‘Col-0’ – red line). Petiole rank number 12 was used as
+
+597
+
+it was representative for other leaf ranks. (C) Total aboveground biomass of a plant growing
+
+598
+
+in low (open/dotted) and high (solid) density stands, from experimental data (symbols) and
+
+599
+
+simulated by the default plant type ‘Col-0’ (lines) that included both hyponastic and petiole
+
+600
+
+elongation responses. Experimental data represent mean ± SD with n=10 for low and n=18 for
+
+601
+
+high density). Simulated data represents mean (n=10).
+
+602
+
+603
+
+Figure 4 Petiole lengths of all leaf ranks per plant after 46 days of growth of two
+
+604
+
+Arabidopsis genotypes. (A) Petiole lengths of hfr1-5 and (B) rot3-1 plants from
+
+605
+
+experimental data (symbols) or simulated by the model (lines) in low (dotted blue) and high
+
+606
+
+(solid red) population density stands. Experimental data represent mean ± SD (with n=10 for
+
+607
+
+low and n=18 for high density). Simulated data represents mean (n=10).
+
+608
+
+27
+
+609
+
+Figure 5 Total aboveground biomass of an individual Arabidopsis plant grown in a
+
+610
+
+monoculture or mixture for 46 days. Plant biomass simulated by the model (A, Scenario 3)
+
+611
+
+or obtained from experimental data (B). Simulated plant types ‘Col-0’ (dotted) and ‘hfr1-5’
+
+612
+
+(solid) had 0.054 and 0.073 or their response curves, respectively. Simulated data represents
+
+613
+
+mean ± SD (n=10). Experimental data represent mean ± SD (n=5) and ns; not significant and
+
+614
+
+*; P<0.05.
+
+615
+
+616
+
+Figure 6 Simulated leaf and plant characteristics during the development of Arabidopsis
+
+617
+
+monocultures (black) or mixtures (red) existing of two genotypes with distinct petiole
+
+618
+
+elongation response curves (Scenario 3). ‘hfr1-5’ type (solid line) had a stronger petiole
+
+619
+
+elongation response curve than ‘Col-0’ type (dotted line), shown in Fig. 2b. (A) Petiole
+
+620
+
+length, (B) lamina absorbed PAR and (C) whole plant absorbed PAR during stand
+
+621
+
+development. Leaf rank number 12 was used to visualise petiole length and lamina PAR
+
+622
+
+absorption and was representative for other leaf ranks.
+
+623
+
+624
+
+Figure 7 Simulated leaf specific and whole plant characteristics during the development
+
+625
+
+of Arabidopsis monocultures (black) or mixtures (red) existing of two genotypes with
+
+626
+
+distinct hyponastic responses (Scenario 4). The ‘15deg’ plant type (solid line) had a
+
+627
+
+stronger hyponastic response than the ’10deg’ plant type (dotted line). (A) Leaf angle, (B)
+
+628
+
+lamina absorbed PAR and (C) whole plant absorbed PAR during stand development. Leaf
+
+629
+
+rank number 12 was used to visualise petiole length and lamina PAR absorption and was
+
+630
+
+representative for other leaf ranks.
+
+28
+
+631
+
+Figure 8 Simulated performance difference related to the difference in plastic response
+
+632
+
+values of ‘wild-type’ and ‘competitor’ plant types in high density mixtures (Scenario 6).
+
+633
+
+Performance difference was calculated by the aboveground biomass of the ‘competitor’ minus
+
+634
+
+the aboveground biomass of the ‘wild-type’ plant type. Performance difference related to the
+
+635
+
+difference in (A) petiole elongation response curve value (Scenario 5) or (B) hyponastic
+
+636
+
+response value. Also expressed the absolute petiole elongation and hyponastic response
+
+637
+
+values for the two plant types. Data represents mean ± SD (n=10).
+
+638
+
+639
+
+29
+
+

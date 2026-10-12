@@ -1,0 +1,354 @@
+When a glimpse is enough: Partial mimicry of jumping spiders by insects
+Carlos E. Muñoz-Amezcua, Horacio Tapia‐McClung, Dinesh Rao (2023). Behavioural Processes. http://dx.doi.org/10.21203/rs.3.rs-2828147/v1. doi:10.1016/j.beproc.2023.104956. Licence: cc-by. Text from pdf.
+
+When a glimpse is enough: partial mimicry of
+jumping spiders by insects
+Carlos E. Muñoz-Amezcua
+Wolfram Alpha LLC
+Horacio Tapia-McClung
+Instituto de Investigaciones en Inteligencia Artificial, Universidad Veracruzana, Mexico
+Dinesh Rao (  vrao@uv.mx )
+Inbioteca, Universidad Veracruzana
+
+Perspective
+Keywords: Partial mimicry, jumping spiders, neural nets, tephritid flies
+Posted Date: April 19th, 2023
+DOI: https://doi.org/10.21203/rs.3.rs-2828147/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+
+Page 1/12
+
+Abstract
+Many flies and moths mimic the frontal appearance of jumping spiders. This type of mimicry, which we
+term as Partial mimicry, can be distinguished from Batesian mimicry since the mimic has spider
+resembling patterns only in certain parts of the body, and not the entire body. The presence of spider like
+patterns is obvious only at certain angles suggesting that the mimic is frequently targeted by its
+predators from particular angles. We tested this hypothesis using Deep Convolutional Neural Networks
+(DCNNs). First, we trained the network on images of forward facing jumping spiders, where features such
+as the large principal eyes, small lateral eyes and outstretched legs were evident. Then we tested the
+classifier on images of jumping spider mimicking flies and moths. A probability value according to the
+likelihood of the image being a jumping spider or not was assigned by the classifier. We show that the
+classifierwas more likely to misidentify mimicking flies and moths as jumping spiders, but that this
+probability varied according to the species tested. We further tested it on images of flies from different
+angles and by taking into consideration the visual acuity of potential predators. Our results suggest that
+1. Neural networks can be efficient toolsfor testing evolutionary hypotheses, 2. partial mimicry may be a
+result of the effect of the signaling angle and orientation of the mimics in combination with the likelihood
+that predators may depend on cognitive shortcuts to identify insects as prey. Further experiments
+incorporating the properties of the visual system of predators (such as vision in ultraviolet) would result
+in a better understanding of the evolution of partial mimicry.
+
+Introduction
+Visual signals are widely used in animal communication between conspecifics (e.g., courtship displays,
+male aggression (Stevens 2013)) and heterospecifics (e.g., warning signals, misdirection (Ruxton et al.
+2004)). For a visual signal to be effective, the relative positioning of the sender and the receiver is critical.
+The correct geometrical alignment of the receiver with respect to the sender allows for the evolution of
+strategies such as private channels of communication and inhibition of eavesdropping by predators
+(Cummings et al. 2003).
+Visually hunting predators use the physical appearance of their prey to detect, recognize and attack their
+prey. Due to the different types of predation strategies, prey need to optimize their defense mechanisms
+to survive attacks from different predators. One of the many defensive strategies used by prey is the
+evolution of body coloration and appearance that mimic the species that have physical or chemical
+defenses (Batesian mimicry; (Ruxton et al. 2004)). While examples of Batesian mimicry are widespread
+(e.g., Monarch butterflies, Coral snakes), little attention has been paid to the effect of predator cognition
+and vision with respect to their geometrical alignment with the prey (Echeverri et al. 2021). If there is
+selection pressure by a predator that approaches a prey at a relatively consistent orientation, we would
+expect to see the evolution of body markings only on certain parts of the body. In a sense, this is what we
+see in strategies that have been termed visual deflection or misdirection (Ruxton et al. 2004; RobledoOspina and Rao 2022). In these cases, the prey has distinctive and conspicuous markings in non-vital
+parts of the body that invite an attack, such that the prey can escape without too much damage as a
+Page 2/12
+
+result of the attack (Chotard et al. 2022). Predators are usually in motion before and during an attack and
+often have to make decisions very quickly leading to speed-accuracy tradeoffs (Ings and Chittka 2008;
+Chittka et al. 2009). Prey body patterns that result in a mis-categorization of the identity of the prey by the
+predator or misdirect the attack trajectory take advantage of the cognitive and visual biases of the
+predator's visual system.
+Another strategy used by many prey species is the mimicking of the appearance of other species but only
+on certain parts of the body. The canonical example for this strategy is seen in jumping spider-like leg
+patterns on the wings of some tephritid flies and moths (Eisner 1985; Greene et al. 1987; Mather and
+Roitberg 1987; Hasson 1995; Rota and Wagner 2006; Rao and Díaz-Fleischer 2012). This mimicry doesn't
+extend to the whole body of the prey, it is only at certain angles and distances does the mimicry become
+apparent. We designate this as Partial Mimicry and define it as the occurrence of patterns and colors on
+
+only certain body parts of the mimic that reflect some salient component of their model. We distinguish
+this from traditional Batesian mimicry by the fact that the mimic does not resemble the whole body of the
+model. Furthermore, we can distinguish partial mimicry from imperfect mimicry (McLean et al. 2019),
+since the component being mimicked has high fidelity but only to the specific salient body component.
+Jumping spider like markings are widely present across many insects, with the most common being the
+wing markings of tephritid flies and metalmark moths. There is a wide diversity of insects that possess
+jumping spider like patterns, specifically large frontal eyes, outstretched front pairs of legs, and general
+stance (Hill et al. 2019). Tephritid flies (e.g., Ceratitis capitata, Rhagoletis pomonella, Zonosemata
+
+vittigera, Anastrepha ludens) perform a wing display that deters attacks from jumping spiders (Eisner
+1985; Greene et al. 1987; Mather and Roitberg 1987; Hasson 1995; Rota and Wagner 2006; Rao and DíazFleischer 2012). This mimicry has been termed ‘predator mimicry’, suggesting that the prey mimics the
+appearance of its own predator, but other studies have shown that the motion component of the display
+is probably more important due to the movement biases of the jumping spider's visual system (Rao and
+Díaz-Fleischer 2012; Rao et al. 2022).
+However, in these examples, mimicry has been defined by human observers. Since humans are very good
+at attributing pattern where there is none (Pareidolia (Liu et al. 2014)) and given the logistical difficulties
+in testing animal perceptions of mimicry at scale, there is a need for an objective method to categorize
+the degree of resemblance. An earlier study showed that Deep Convolutional Neural Networks (DCNNs)
+are a useful method to approach to characterize protective resemblance in snakes (Solan et al. 2020). In
+this study, we used a DCNN to classify jumping spider faces with images obtained from citizen science
+platforms such as iNaturalist (https://www.inaturalist.org). We then tested it on reported jumping spider
+partial mimics and tested the effect of insect prey orientation on the probability of being categorized as a
+jumping spider. We hypothesize that 1. Partial mimics of jumping spiders contain sufficient resemblance
+to jumping spiders and result in a mis-categorization by the DCNN, and 2. Mis-categorization only occurs
+at certain angles and 3. Mis-categorization is dependent on the visual acuity and identity of the predator.
+
+Methods
+Page 3/12
+
+Image Acquisition for training
+We used 1022 images to train and validate the neural net classifier. The database was divided into two
+sets, one containing 273 images of jumping spiders and one containing 749 images of an assortment of
+small land arthropods to represent the range of body shapes and patterns a jumping spider might
+encounter. Images of jumping spiders were obtained by downloading a dataset from GBIF (Global
+Biodiversity Information Facility; GBIF.org) which included all occurrence data which had an iNaturalist
+research grade observation of a species within the family Salticidae. We then obtained a random sample
+of 500 images and manually selected the ones showing a clear frontal view of the spider, and then
+cropped the images to remove most of the background. Images for the non-spider set were obtained from
+iNaturalist with a search for research grade observations of non-crustacean arthropods, with a time
+window of one week to constrain the number of results to a manageable size. We curated this dataset by
+removing orders with less than 20 records as well as Endeostigmata (mites) because of their size, and
+spiders (Araneae). Of the remaining records, we selected a random sample of 500 images. To avoid a
+bias towards over-represented species (such as bees or butterflies) we selected a maximum of 50 images
+per order. These images were then cropped to remove most of the background and any images where the
+organism was not in focus or partially covered by vegetation were discarded.
+
+Neural net training
+While training a DCNN for image classification usually requires a much larger than the one used in this
+study, a technique called transfer learning can dramatically reduce the number of images required to
+obtain a high accuracy classifier (Körschens et al. 2018; Norouzzadeh et al. 2018; Solan et al. 2020). We
+used this technique on a pretrained network (EfficientNet; Tan and Le 2019) to classify images into two
+categories corresponding to jumping spider or not jumping spider. All training and analysis were done
+using Wolfram Mathematica Version 13 (Wolfram Inc, Champaign, USA). The code, images and details of
+the training process are available online
+[https://github.com/CarlosErnestoMA/PartialMimicryWithMachineLearning].
+
+Test 1: Proof of concept
+As a proof of concept, we tested the DCNN against a randomly chosen jumping spider (Maripanthus
+draconis). As a control we tested the classifier against an ant mimicking jumping spider (Myrmarachne
+
+sp.) in two orientations (side view and frontal view). We also tested the classifier against two spider
+mimicking tephritid flies (Rhagoletis pomonella and Ceratitis capitata) and a non-mimicking fly (Musca
+domestica).
+
+Test 2: Other mimicking insects
+We chose 6 insects (Pscocoptera sp, Olethreutes arcuella, Brenthia sp., Acentropinae sp, Gelastopsis
+insignis, Rhotana maculata) that have been reported to mimic jumping spiders (Hill et al. 2019). These
+were run through the DCNN classifier.
+
+Test 3: Mimicking fly from different angles
+Page 4/12
+
+We chose a single species of tephritid fly for this test. Ceratitis capitata has been previously studied as a
+mimic of jumping spiders (Hasson 1995). We selected photographs of C. capitata taken at different
+angles.
+
+Test 4: Incorporating visual acuity of a model predator
+Based on the results of the earlier test, we selected the orientation with highest probability of being
+identified as a jumping spider. We transformed the image accounting for the visual acuity of two
+potential predators (Vespa vulgaris, a predatory wasp with a visual acuity value of 0.5 cycles per degree,
+(Feller et al. 2021) and Phiddipus audax, a jumping spider of visual acuity value of 3.86 (Rao et al. 2022))
+using the QCPA plugin (Berg et al. 2019) in ImageJ (Schnieder et al., 2012. The images were resized for
+uniformity but retained spatial acuity information according to the transformation as seen from 3
+behaviorally relevant distances (2 cm, 5 cm, 10 cm). These images were then tested using the classifier.
+
+Looking inside the net
+We used an algorithm based on gradient ascent (Nguyen et al. 2014) to generate images which
+maximized the output of one of the neurons which encodes the classification result (Wolfram 2023). We
+started with an image with random pixel values, and iteratively modified it in a way which increases the
+activation of the target neuron. After a few iterations, an image was obtained which was classified either
+as a spider or non-spider with a high confidence.
+
+Results
+
+Test 1: Proof of concept
+The jumping spider image was assigned a probability value of 0.99 of being identified as a spider by the
+DCNN classifier. The ant-mimicking jumping spider had only a 0.62 probability of being a spider whereas
+the same spider from the frontal perspective gave a probability value of 0.88 of being a spider (Fig. 1A).
+Two of the jumping spider mimicking flies were assigned probability values of 0.41 and 0.71 respectively,
+whereas the non-mimicking fly was assigned as non-spider with 0.99 probability (Fig. 1B).
+
+Test 2: Other insects
+Except for Rhotana maculata, all other jumping spider mimics obtained probability values of higher than
+0.5 from the DCNN classifier.
+
+Test 3: Orientation and predator acuity
+The orientation of a selected spider mimicking fly affected the probability value assigned by the DCNN.
+The probability value of the fly being mis-categorized as a jumping spider was seen in only one
+orientation (Fig. 2A, first image). When run through images that were simulated according to the visual
+acuity of a model predator, probability values decreased with distance but stayed above the 0.5
+probability mark for the wasp predator, but stayed consistent for the spider predator.
+Page 5/12
+
+Discussion
+In this study, we proposed a new subcategory of mimetism that we designate as Partial Mimicry and
+used DCNNs to evaluate the concept using images of insects and spiders. We distinguish this type of
+mimicry from Batesian mimicry since only a part of the model is mimicked. Natural selection due to
+predator pressure could lead to the evolution of partial mimicry if we assume that most attacks occur at
+particular angles. For examples, in the case of Scarlet snakes that mimic coral snakes, the ventral side of
+the snake does not possess the characteristic patterns of the coral snakes (Kikuchi and Pfennig, 2010).
+Even if there is no attack, predators may be dissuaded from approaching palatable prey if they come
+across them at these angles. Furthermore, the presence of these patterns may also serve to misdirect
+predator attention and consequent attacks away from vital body parts such as the head. Different
+predators may respond to the mimicry at different distances according to their visual acuity. From a
+sexual selection point of view, there is some evidence that males may incorporate patterns and
+colouration that resemble predators into their courtship repertoire, perhaps in order to sustain the
+attention of females (Harris and Morehouse 2020) but this needs to be tested further.
+An interesting implication of partial mimicry is that it leads to the idea that predators use some sort of a
+gestalt view (~ cognitive template, but see (Sung et al. 2021) ) while hunting. Just the mere suggestion
+that the insect in front of the predator may be something else, perhaps something dangerous, may be
+enough to dissuade them from carrying out the attack. Predators may use these cognitive shortcuts to
+recognize their prey, and since they usually need to decide on an attack while in motion, they may be
+prone to making speed-accuracy tradeoffs. Another implication is that the direction of attack, or the
+approach angle is of greater importance in governing predator prey interactions. The effect of geometric
+alignment, in conjunction with visual acuity of the predator has hitherto been neglected in the design of
+predator-prey interaction studies, and promises to be a fruitful avenue of research (Echeverri et al. 2017).
+Predator prey interactions need to be placed in an explicitly geometry-aware visual ecology context.
+There are several caveats to this study. We found that the orientation of the insect in the image greatly
+influences the probability values of the DCNN categories, which inhibits the use of multiple images to test
+the network unless the photos are taken of different individuals in a fairly standardized manner. The
+inherent problem with using these networks is that often the 'reasoning' behind the DCNN's assignment of
+probability values is a mystery. To address this, we generated an artificial image that hints at the possible
+cues used by the DCNN to categorize jumping spiders (Fig. 3), but the result was inconclusive. The main
+difference between the jumping spider artificial image and the non-spider image is that the former seems
+to have a distinct spot perhaps representing the principal eyes of the spider, while the non-spider image is
+missing this feature. Another caveat is represented by the low probability score assigned to a debrid
+planthopper (Fig. 1C, last image), which to human eyes clearly resembles a spider. We expect newer
+techniques in the future may enable us to pinpoint what features are used by the DCNN, but for now we
+are unable to elaborate further.
+
+Page 6/12
+
+The use of citizen science images along with computer vision techniques has see a boom in recent years,
+and while it may not adequately substitute controlled ethological experiments, there is potential for using
+these techniques to rapidly test concepts that can then be followed up with rigorous experimentation. By
+incorporating more aspects of the predator's visual system (such as UV, polarization vision etc) along
+with the geometry of alignment and motion components, human biases in the design and execution of
+predator prey interaction studies can be controlled.
+
+Declarations
+Acknowledgements
+This study makes use of many images posted to repositories such as iNaturalist. The full credit list is
+available in the supplementary material. We thank Glauco Machado and Wayne Maddison for helpful
+comments on the study.
+Author roles
+Conceptualization CMA, HTM, DR
+Coding CMA
+Writing (first draft) DR
+Writing and Editing CMA, HTM, DR
+Visualization DR
+Supplementary information
+Supplementary information is available at
+htps://github.com/CarlosErnestoMA/PartialMimicryWithMachineLearning
+
+References
+1. Berg, C. P. van den, J. Troscianko, J. A. Endler, N. J. Marshall, and K. L. Cheney. 2019. Quantitative
+Colour Pattern Analysis (QCPA): A comprehensive framework for the analysis of colour patterns in
+nature. Methods in Ecology and Evolution 11:316–332.
+2. Chittka, L., P. Skorupski, and N. E. Raine. 2009. Speed–accuracy tradeoffs in animal decision making.
+Trends in Ecology and Evolution 24:400–407.
+3. Chotard, A., J. Ledamoisel, T. Decamps, A. Herrel, A. S. Chaine, V. Llaurens, and V. Debat. 2022.
+Evidence of attack deflection suggests adaptive evolution of wing tails in butterflies. Proceedings of
+the Royal Society B 289:20220562.
+
+Page 7/12
+
+4. Cummings, M. E., G. G. Rosenthal, and M. J. Ryan. 2003. A private ultraviolet channel in visual
+communication. Proceedings of the Royal Society of London. Series B: Biological Sciences
+270:897–904.
+5. Echeverri, S. A., A. E. Miller, J. Chen, E. W. McQueen, M. Plakke, M. Spicer, K. L. Hoke, et al. 2021. How
+Signaling Geometry Shapes the Efficacy and Evolution of Animal Communication Systems.
+Integrative and Comparative Biology 61:787–813.
+6. Echeverri, S.A., Morehouse, N.I. and Zurek, D.B., 2017. Control of signaling alignment during the
+dynamic courtship display of a jumping spider. Behavioral Ecology, 28(6), pp.1445-1453.
+7. Eisner, T. 1985. A fly that mimics jumping spiders. Psyche: A Journal of Entomology. 92(1), 103-104
+8. Feller, K. D., C. R. Sharkey, A. McDuffee-Altekruse, H. D. Bracken-Grissom, N. P. Lord, M. L. Porter, and
+L. E. Schweikert. 2021. Surf and turf vision: Patterns and predictors of visual acuity in compound eye
+evolution. Arthropod Structure and Development 60:101002.
+9. Greene, E., L. J. Orsak, and D. W. Whitman. 1987. A Tephritid Fly Mimics the Territorial Displays of Its
+Jumping Spider Predators. Science 236:310–312.
+10. Harris, O.K. and Morehouse, N., 2020, March. Predator-mimicking sensory exploitation in the
+courtship display of Maratus jumping spiders. In Integrative And Comparative Biology (Vol. 60, pp.
+E339-E339). OXFORD UNIV PRESS INC.
+11. Hasson, O. 1995. A Fly in Spiders Clothing - What Size the Spider. Proceedings of the Royal Society
+of London. Series B: Biological Sciences 261:223–226.
+12. Hill, D., Abhijit, and J. P. Burini. 2019. Do jumping spiders (Araneae: Salticidae) draw their own
+portraits? Peckhamia 179.1:1–14.
+13. Ings, T., and L. Chittka. 2008. Speed-Accuracy Tradeoffs and False Alarms in Bee Responses to
+Cryptic Predators. Current Biology 18:1520–1524.
+14. Kikuchi, D.W. and Pfennig, D.W., 2010. Predator cognition permits imperfect coral snake mimicry. The
+American Naturalist, 176(6), pp.830-834.
+15. Körschens, M., B. Barz, and J. Denzler. 2018. Towards Automatic Identification of Elephants in the
+Wild. arXiv preprint arXiv:1812.04418.
+16. Liu, J., J. Li, L. Feng, L. Li, J. Tian, and K. Lee. 2014. Seeing Jesus in toast: Neural and behavioral
+correlates of face pareidolia. Cortex 53:60–77.
+17. Mather, M. H., and B. D. Roitberg. 1987. A Sheep in Wolfs Clothing - Tephritid Flies Mimic Spider
+Predators. Science 236:308–310.
+18. McLean, D. J., G. Cassis, D. W. Kikuchi, G. Giribet, and M. E. Herberstein. 2019. Insincere Flattery?
+Understanding the Evolution of Imperfect Deceptive Mimicry. The Quarterly Review of Biology
+94:395–415.
+19. Nguyen, A., Yosinski, J. and Clune, J., 2015. Deep neural networks are easily fooled: High confidence
+predictions for unrecognizable images. In Proceedings of the IEEE conference on computer vision
+
+and pattern recognition (pp. 427-436).
+Page 8/12
+
+20. Norouzzadeh, M. S., A. Nguyen, M. Kosmala, A. Swanson, M. S. Palmer, C. Packer, and J. Clune. 2018.
+Automatically identifying, counting, and describing wild animals in camera-trap images with deep
+learning. Proceedings of the National Academy of Sciences 115:E5716–E5725.
+21. Rao, D., and F. Díaz-Fleischer. 2012. Characterisation of Predator-Directed Displays in Tephritid Flies.
+Ethology 118:1165–1172.
+22. Rao, D., Long, S.M., Tapia-McClung, H., Salgado-Espinosa, K., Narendra, A., Aguilar-Arguello, S.,
+Robledo-Ospina, L., Rodriguez-Morales, D. and Jakob, E.M., 2022. Visual signals in the wing display
+of a tephritid fly deter jumping spider attacks. Journal of Experimental Biology, 225(24), p.jeb244223.
+23. Robledo-Ospina, L. E., and D. Rao. 2022. Dangerous visions: a review of visual antipredator strategies
+in spiders. Evolutionary Ecology 36(2), 163-180.
+24. Rota, J., and D. L. Wagner. 2006. Predator Mimicry: Metalmark Moths Mimic Their Jumping Spider
+Predators. PLoS ONE 1:e45.
+25. Ruxton, G. D., T. N. Sherratt, and M. P. Speed. 2004. Avoiding attack: The evolutionary ecology of
+crypsis, warning signals, and mimicry. Oxford University Press, New York.
+26. Schneider, C. A., W.S. Rasband, & K. W. Eliceiri. 2012. NIH Image to ImageJ: 25 years of image
+analysis. Nature Methods, 9(7), 671–675.
+27. Solan, T. de, J. P. Renoult, P. Geniez, P. David, and P.-A. Crochet. 2020. Looking for Mimicry in a Snake
+Assemblage Using Deep Learning. The American Naturalist 196:74–86.
+28. Stevens, M. 2013. Sensory Ecology, Behaviour, and Evolution. Oxford University Press, Oxford, U.K.
+29. Sung, J. Y., O. K. Harris, N. M. Hensley, A. P. Chemero, and N. I. Morehouse. 2021. Beyond Cognitive
+Templates: Re-Examining Template Metaphors Used for Animal Recognition and Navigation.
+Integrative and Comparative Biology 61:825–841.
+30. Tan, M., and Q. V. Le. 2019. EfficientNet: Rethinking Model Scaling for Convolutional Neural
+Networks. In International conference on machine learning, pp. 6105-6114. PMLR.
+31. Wolfram. Wolfram Inc. Available at: https://www.wolfram.com/language/12/neural-networkframework/visualize-the-insides-of-a-neural-network.html (Accessed: March 17, 2023).
+
+Figures
+
+Page 9/12
+
+Figure 1
+Probability of spiders and insects being identified as a jumping spider (frontal view) by the DCNN.
+Sections in green represent probability of being classified as a jumping spider, and sections in gray
+represent probability of being classified as a non-spider. A. A randomly chosen jumping spider, an antmimicking jumping spider (lateral view) and the frontal view of the ant mimicking spider; B. Two jumping
+spider mimics from the family Tephritidae and a non-mimicking fly; C. Six jumping spider mimics from
+Page 10/12
+
+different insect orders (see text for details). Image credits: Nicky Bay, Wikipedia Commons,
+@akamatsudoh, Pavel Kirillov, WonGun Kim, tjeales.
+
+Figure 2
+Probability of a spider mimicking fly, Ceratitis capitata being identified as a jumping spider (frontal view)
+by the DCNN. Sections in green represent probability of being classified as a jumping spider, and sections
+in gray represent probability of being classified as a non-spider. A. Photos of the fly taken at different
+angles; B,C. Photo of the fly at different simulated distances according to the visual acuity of a model
+wasp predator and jumping spider respectively. Image Credits: FAO, IUCN Global Invasive Species
+Database, Daniel Feliciano, Scott Bauer.
+
+Page 11/12
+
+Figure 3
+Artificial image classified as A. spider and B. non-spider by the DCNN (see text for details).
+
+Page 12/12
+
+

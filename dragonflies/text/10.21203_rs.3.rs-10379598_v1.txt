@@ -1,0 +1,1680 @@
+A Dragonfly-Inspired Heterogeneous Sensing System for Task-Driven Multi-Modal Perception
+Chong Han, Zitong Fang, Yejian Lyu, Weijun Gao (2026). Research Square. https://doi.org/10.21203/rs.3.rs-10379598/v1. doi:10.21203/rs.3.rs-10379598/v1. Licence: cc-by. Text from pdf.
+
+A Dragon y-Inspired Heterogeneous Sensing
+System for Task-Driven Multi-Modal Perception
+Chong Han
+
+Shanghai Jiao Tong University
+Zitong Fang
+Shanghai Jiao Tong University
+Yejian Lyu
+Shanghai Jiao Tong University
+Weijun Gao
+Shanghai Jiao Tong University
+
+Article
+Keywords:
+Posted Date: August 4th, 2026
+DOI: https://doi.org/10.21203/rs.3.rs-10379598/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+
+fl
+
+Additional Declarations: There is NO Competing Interest.
+
+1
+
+2
+
+A Dragonfly-Inspired Heterogeneous Sensing
+System for Task-Driven Multi-Modal Perception
+
+3
+
+Zitong Fang1 , Yejian Lyu1 , Weijun Gao1 , Chong Han1*
+
+4
+
+1 Terahertz Wireless Communications Interdisciplinary Research Center
+
+5
+
+(TWC IRC), Shanghai Jiao Tong University, Shanghai, 200240, China.
+
+6
+
+*Corresponding author(s). E-mail(s): chong.han@sjtu.edu.cn;
+
+7
+
+Abstract
+
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+
+26
+27
+28
+29
+30
+31
+
+As artificial intelligence (AI) moves from digital interpretation to embodied
+action, robotic perception must move beyond visible-scene description towards
+physical representations. Inspired by dragonfly compound eyes, DragonflyTeraVision is proposed as a task-driven heterogeneous sensing architecture
+for physically interpretable environment reconstruction. The system integrates
+panoramic vision for dense semantics, Light Detection and Ranging (LiDAR)
+for metric line-of-sight (LoS) geometry and monostatic terahertz (THz) sensing for propagation-aware structure and material-sensitive reflection responses.
+A task-driven agent decomposes each sensing objective, selects modalityspecific processing modules and associates their outputs through physics-guided
+multi-modal constraints. As a demonstration, Dragonfly-TeraVision reconstructs
+semantic three-dimensional (3D) geometry in an indoor environment, by detecting THz-derived hidden structural evidence beyond optical/LiDAR visibility
+and associating semantic surfaces with material-sensitive THz responses. This
+work establishes a route towards environment reconstruction for embodied
+sensing systems that links visual semantics, metric geometry and materialsensitive THz propagation and reflection responses within a unified physical scene
+representation.
+
+As artificial intelligence (AI) moves from digital interpretation towards physical
+action, perception becomes a central interface between computation and the world.
+For embodied AI, autonomous robots and physical agents, sensing must support
+action, interaction and decision-making in changing real-world scenes, rather than only
+recognizing object categories or estimating depth [1–6]. Visual recognition, semantic mapping and simultaneous localization and mapping (SLAM) have substantially
+1
+
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+
+advanced this goal by linking images, point clouds and spatial maps [7–11]. However,
+these advances primarily recover image appearance and line-of-sight (LoS) geometry,
+referring to surfaces that are directly visible. In reality, physical environments also
+contain occluded structures, reflective surfaces and material-dependent responses that
+are not directly captured by appearance or LoS geometry. A sensing system designed
+to “see the world” therefore requires a representation that combines semantic identity,
+metric geometry, hidden or non-line-of-sight (NLoS) content and material-sensitive
+physical attributes.
+Biological perception offers a design reference for converting wide-field, incomplete
+sensory inputs into behaviorally relevant representations. Dragonflies provide a particularly relevant example: their compound eyes provide broad visual coverage, while
+specialized visual neurons selectively encode target features in complex scenes [12, 13].
+During prey interception, their steering behavior is consistent with internal models
+that predict target and body motion, rather than a simple reaction to instantaneous
+visual input [14]. This combination of wide-field observation, task-relevant feature
+selection and predictive perceptual organization suggests an architectural principle
+for engineered sensing. Rather than treating sensor measurements as raw signals for
+uniform fusion, a multi-modal sensing system can use heterogeneous sensing modalities to capture complementary aspects of a scene. A central agent, analogous to a
+biological brain, then selects and associates task-relevant observations into a common
+physical representation. Similar abstractions from animal perception and navigation
+have recently enabled efficient robotic systems [15–17].
+The engineering counterpart of this principle is not to add sensors indiscriminately,
+but to combine sensing modalities with complementary physical contrast mechanisms.
+For physical-world perception, Dragonfly-TeraVision follows this principle by combining panoramic vision, Light Detection and Ranging (LiDAR) and terahertz (THz)
+sensing. Panoramic vision observes dense texture, color and object-level context, making it suitable for semantic interpretation, but images alone are ambiguous in metric
+scale and provide little direct access to hidden structures or material-dependent electromagnetic (EM) properties [18, 19]. LiDAR converts visible surfaces into an accurate
+three-dimensional (3D) geometric scaffold and has become central to robotic mapping,
+ranging and camera–LiDAR perception [20–26]. However, LiDAR is fundamentally
+constrained to LoS measurement, which measures exposed surfaces, while semantic
+and material attributes must be inferred from additional information. Different from
+vision and LiDAR, THz sensing introduces another physical contrast thanks to the
+large bandwidth, which supports delay-resolved propagation measurements, and interaction with matter enables material-sensitive reflection responses and, for selected
+non-metallic occluders, penetration or NLoS observations [27–34]. These properties
+make THz sensing a natural complement to vision and LiDAR for hidden-object
+and material-aware perception, although THz measurements are sparse, directiondependent and difficult to interpret without semantic and geometric context. Thus,
+the three modalities should not be viewed as interchangeable sensors, but as heterogeneous perceptual modalities that contribute different parts of a physical scene
+representation, analogous to compound eyes of a dragonfly.
+
+2
+
+Fig. 1 Conceptual illustration of Dragonfly-TeraVision. a, Dragonfly compound-eye-inspired
+multi-modal sensing system integrating panoramic vision, LiDAR and THz sensing as complementary perceptual modalities. b, Multi-modal fusion of vision semantics, LiDAR geometry and THz
+scattering/penetration responses into a semantic–geometric–material scene map. c, Opaque-cup
+hidden-object sensing task, where THz signals reveals concealed objects and material-sensitive reflection responses beyond the visible cup surfaces.
+
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+
+Multi-modal sensing and fusion have been widely studied in autonomous driving,
+semantic mapping, wearable sensing and robotic perception, where cameras, LiDAR,
+inertial sensors, radar, tactile sensors and soft sensors are combined to improve robustness or accuracy [22, 35–41]. These studies show the value of complementary sensing,
+but most fusion pipelines are optimized for predefined outputs such as object detection, depth completion, localization, kinematics estimation or semantic maps. In
+parallel, agentic frameworks are emerging for robotic mapping, embodied language
+models and embodied decision-making, suggesting that task-level reasoning can help
+coordinate perception, simulation and action [2, 42–44]. However, task-driven agentic integration of vision, LiDAR and THz sensing for semantic, geometric, NLoS and
+material-aware perception remains largely unexplored. In particular, propagation- and
+material-sensitive THz observations are rarely connected to semantic and geometric
+scene representations through an explicit sensing workflow.
+In this work, we propose Dragonfly-TeraVision, a dragonfly-inspired heterogeneous
+sensing system for task-driven multi-modal perception, as illustrated in Fig. 1. The
+system integrates panoramic optical vision, LiDAR and monostatic THz sensing as
+complementary perceptual modalities, enabling a physical scene representation that
+jointly describes visible semantics, metric geometry, hidden structures and materialsensitive attributes. A task-driven agent coordinates the sensing workflow according
+3
+
+a
+
+b
+Inputs
+Agent
+
+Task
+
+Outputs
+
+Sensing brain
+
+Semantic
+Geometry
+
+NLoS
+Completion
+
+Material
+Association
+
+Multi-modal
+Map
+
+Parse task
+objective
+
+Task-specific
+representation
+semantic geometry +
+NLoS + material cues
+
+Select sensing skills
+modality modules
+
+Data Sensing eyes
+Vision
+• panoramic image
+• semantic mask
+
+>_
+
+Execute workflow
+
+Selected sensing
+evidence
+
+ordered sensing skills
+
+task-routed channel
+outputs
+
+Record provenance
+
+c
+
+parameters + checksums
+
+LiDAR
+• point cloud
+• LoS geometry
+
+Skill library
+Workflow provenance
+Vision skills
+
+semantic projection
+
+LiDAR skills
+
+ICP
+
+</>
+
+RANSAC
+
+✓
+
+data, parameters, logs,
+and provenance
+
+THz
+• MPC estimates
+• material reference
+
+Other Modalities
+
+THz skills
+Fusion skills
+
+tracking
+
+SAGE
+V-L
+
+L-T
+
+Skills of other modalities
+
+V-T
+
+mapping
+multi-modal
+
+Extensible skills
+
+Fig. 2 Dragonfly-TeraVision architecture. a, Task-driven sensing workflow. A perception
+objective and an extensible data manifest are used to select processing units from a modular library,
+execute an ordered workflow and generate task-specific outputs with provenance records. b, Photograph of the integrated sensing platform. c, Schematic diagram of the integrated sensing platform,
+showing the co-located panoramic camera, LiDAR unit, THz TRx and mechanical rotator.
+
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+
+107
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+
+to the perception objective and the available data manifest. It selects the relevant
+sensing skills from a modular library and associates their outputs as task-specific
+evidence within a common scene representation. The data manifest and skill library
+are extensible, so the framework is not limited to the three modalities and processing modules demonstrated here. We demonstrate the system in a 16-position
+indoor L-shaped hallway experiment. Dragonfly-TeraVision constructs semantic metric geometry, reveals hidden structures behind a curtain through THz-assisted NLoS
+sensing, links material attributes to semantic regions such as walls, doors and curtains,
+and detects hidden objects in opaque cups when camera and LiDAR observations
+are limited to external surfaces. By incorporating THz-derived hidden-object and
+material responses into semantic-geometric scene understanding, the system extends
+conventional visible-scene perception towards task-driven physical world perception.
+
+Dragonfly-TeraVision architecture
+At the architectural level, the dragonfly analogy is used to motivate distributed observation followed by selective perceptual organization. Compound eyes collect many
+visual samples, whereas the nervous system integrates distributed signals to support navigation, target tracking and environmental awareness. The relevant principle
+is therefore not a simple addition of independent views. Instead, multiple perceptual observations of objects, spatial layout, motion, occlusion, and surface properties
+are selected and interpreted according to the behavioral task. Future embodied AI
+and robotic sensing systems face an analogous requirement. To construct a physical understanding of the surrounding world, they must organize semantic identity,
+4
+
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+
+149
+
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+
+metric location, hidden structures and material-dependent sensing responses into a
+task-relevant representation.
+Dragonfly-TeraVision follows this principle at the system level. As shown in Fig. 2a,
+heterogeneous sensing “eyes” are coupled to a task-driven “brain”, so that visible
+semantics, metric geometry, hidden structures and material-sensitive responses can
+be treated as complementary descriptions of the same physical scene. The integrated
+sensing platform is shown in Fig. 2b and c, where a panoramic fisheye camera, LiDAR
+and a monostatic THz transceiver (TRx) are co-located as artificial sensing eyes with
+distinct physical contrast mechanisms. The panoramic fisheye camera records dense
+appearance and semantic context over a wide field of view. LiDAR measures LoS metric
+geometry and provides the spatial scaffold of the visible environment. THz sensing captures propagation-resolved EM responses, including scattering, penetration-enabled
+hidden-object cues and material-sensitive reflection characteristics.
+The agent provides the corresponding computational organization. Rather than
+treating the three modalities as independent pipelines, it selects task-relevant observations and processing modules according to the sensing objective. The input consists
+of a task objective and an extensible data manifest. The task objective specifies the
+desired inference, such as semantic geometry, hidden-object sensing or material-aware
+interpretation. The data manifest records the available sensing modalities, calibration
+information, coordinate frames and processing status. Although the present implementation focuses on three functions of panoramic vision, LiDAR and THz sensing,
+the manifest is not restricted to these modalities and can be extended to additional
+sensors once their data formats and calibration information are defined.
+Given the task objective and data manifest, relevant sensing skills are selected from
+a modular skill library and assembled into an ordered workflow. In the demonstrations
+reported here, the skill library contains representative modules for vision-based semantic segmentation, LiDAR point-cloud registration, THz multipath-component (MPC)
+extraction, spatial mapping, NLoS scattering extraction and material association.
+Other sensing or fusion algorithms can be incorporated through the same input–
+output interface. The selected skills are then executed in sequence, and their outputs
+are routed into a common task-specific representation. A web-based implementation
+of the task-driven agent is demonstrated in Supplementary Video 1.
+
+Heterogeneous sensing modalities
+The experiment is conducted in an indoor L-shaped hallway to instantiate the heterogeneous sensing modality inputs before task-driven integration. The scene contains
+representative structural and material elements, including walls, floor, ceiling, doors,
+corridor corners and a curtain. Sixteen sensing positions are deployed along the hallway with an inter-position spacing of 1.5 m, and the sensor platform is positioned
+at a height of 2 m, as shown in Fig. 3a and b. The co-located platform integrates a
+QooCam 8K fisheye panoramic camera, a Livox HAP (TX) LiDAR, and a monostatic
+THz transceiver (TRx) on the same rotator platform. At each sensing position, the
+three sensing modalities produce complementary raw measurements: i) red–green–blue
+(RGB) equirectangular panoramic images with a resolution of 7680 × 3840 pixels, ii)
+
+5
+
+a
+
+b
+
+c
+
+d
+
+e
+
+g
+
+h
+
+f
+
+Fig. 3 Heterogeneous sensing modalities in an indoor L-shaped hallway. a, Experimental
+setup showing the vector network analyzer (VNA)-based THz channel sounder and the co-located
+multi-modal sensing platform. b, Plan-view schematic of the L-shaped hallway, 16 sensing positions
+and curtain occluder. c,e,g, Representative measurements: panoramic RGB image from the vision
+modality, registered LiDAR point cloud from the 16 sensing positions and THz PADP, respectively.
+d,f,h, Modality-specific processed outputs: Mask2Former semantic segmentation of the panoramic
+image, RANSAC-based extraction of dominant LoS planar structures from the LiDAR point cloud
+and SAGE-based MPC extraction followed by spatial mapping of THz-derived scattering points,
+respectively.
+
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+
+LiDAR point clouds collected from three viewing orientations of 0◦ , 120◦ and 240◦ ,
+and iii) THz angular frequency responses acquired from 290 to 310 GHz with a bandwidth of 20 GHz, corresponding to a delay resolution of approximately 0.05 ns. The
+LiDAR field of view is 120◦ horizontal and 25◦ vertical per scan, while 3D THz angular scanning is performed over the azimuth range of [0◦ : 5◦ : 355◦ ] and the elevation
+range of [−20◦ : 5◦ : 20◦ ]. As a result, this configuration provides visual, geometric
+and propagation-sensitive measurements of the same physical environment. Additional
+specifications are summarized in Supplementary Table 1.
+Representative raw data from the three modalities show complementary observations of the same hallway. The panoramic RGB image provides a dense visual record
+of scene appearance, including surface texture, object boundaries and continuous wall,
+floor, ceiling, door and curtain regions (Fig. 3c). The registered LiDAR point cloud,
+obtained by aligning measurements from the 16 sensing positions, provides a metrically grounded 3D description of exposed LoS surfaces, in which dominant structural
+elements such as walls, floor and ceiling are clearly resolved (Fig. 3e). By contrast, the
+THz power–angle–delay profile (PADP) represents the propagation structure in the
+delay–angle domain, where strong components correspond to reflections and scattering
+from surrounding objects and surfaces (Fig. 3g). These observations therefore capture
+
+6
+
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+
+203
+
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+
+appearance, metric geometry and propagation behavior from the same physical scene,
+forming complementary modality inputs for subsequent modality-specific processing.
+Modality-specific processing converts these observations into interpretable evidence for later task-driven association. For the vision modality, semantic segmentation
+is performed using ADE20K-pretrained Mask2Former [45, 46], yielding a dense
+semantic map with labels for ceiling, wall, floor, door, curtain and other visible
+structures (Fig. 3d). For the LiDAR modality, point clouds from the 16 sensing
+positions are aligned by iterative closest point (ICP) registration [47], after which
+orthogonality-constrained random sample consensus (RANSAC) is used to extract
+dominant LoS planar structures [48], providing a metrically grounded geometric scaffold of the visible hallway (Fig. 3f). For the THz modality, calibrated angular frequency
+responses are processed using space-alternating generalized expectation-maximization
+(SAGE)-based MPC extraction [33, 49] to estimate the delay, angle and power of
+dominant propagation components. These components are then spatially mapped into
+the 3D coordinate system as sparse, power-coded scattering points that represent
+propagation-derived structural evidence (Fig. 3h). These outputs therefore constitute
+modality-specific descriptors of semantic labels, geometry and propagation responses,
+rather than a unified scene representation.
+The complementarity of these modality-level observations defines the input space
+for the task-driven multi-modal agent. Together, these modalities provide heterogeneous physical contrast, with optical appearance supporting semantic cues, LiDAR
+ranging constraining LoS geometry and THz propagation responses carrying hiddenstructure and material-sensitive evidence. The agentic integration framework is
+therefore required to select and associate complementary evidence according to the
+sensing objective, rather than treating the inputs as interchangeable data streams.
+
+Task-driven multi-modal perception
+Task-driven multi-modal perception is formulated as a scene-construction problem
+rather than a set of pairwise fusion tasks. By analogy with biological perception,
+a physical scene can be organized as a set of attributes, including object identity,
+appearance, shape, location, occlusion and material properties. Dragonfly-TeraVision
+follows this principle by keeping the modality-level descriptors from all heterogeneous sensing eyes available to the task-driven agent. Given a sensing objective, the
+agent decomposes the objective into required scene attributes and routes the relevant
+evidence from vision, LiDAR and THz sensing into a common physical representation. In the L-shaped hallway, this organization produces semantic metric geometry,
+THz-assisted hidden-structure evidence, semantic-material association and a unified
+semantic–geometric–material scene model, as shown in Fig. 4.
+Physically interpretable reconstruction first requires establishing what visible
+structures are present and where they are located. This function is mainly supported
+by panoramic vision and LiDAR. Vision-derived semantic labels identify scene categories such as walls, floor, ceiling, doors, windows, lights, signs, banisters and the
+curtain region, whereas LiDAR provides the metric scaffold of exposed LoS surfaces.
+By assigning semantic labels to the registered LiDAR point cloud, scene-category
+
+7
+
+a
+
+c
+
+b
+
+d
+
+Fig. 4 Task-driven multi-modal perception in the L-shaped hallway. a, THz-assisted
+LoS–NLoS structural perception. Registered LiDAR geometry provides the visible LoS scaffold,
+while THz-derived scattering points supply propagation-derived structural evidence near the curtainoccluded region. b, Semantic-material association between panoramic semantic regions and THz
+material-sensitive responses, where representative THz paths are projected onto visible regions to
+link reflection-loss estimates with wall and door surfaces. c, Semantic metric geometry from anchoring vision-derived semantic labels to the registered LiDAR point cloud. d, Unified tri-modal scene
+representation combining semantic labels, metric geometry, THz-assisted hidden-structure evidence
+and material-sensitive attributes within a common physical scene model.
+
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+
+information is anchored to 3D hallway surfaces, producing semantic metric geometry
+(Fig. 4c). The resulting map retains the curtain as both a visible semantic region and
+an occluding boundary, linking the visible scene representation to the hidden-region
+sensing task.
+For the task of sensing what lies beyond visible surfaces, hidden-structure perception extends the semantic metric geometry by incorporating evidence beyond optical
+and LiDAR visibility. In the hallway experiment, the curtain is placed in front of
+a metallic door and adjacent wall, so the visible modalities mainly describe the
+curtain surface and surrounding LoS geometry. THz-derived scattering points provide propagation-derived structural evidence near this occluded region (Fig. 4a). The
+enlarged view shows spatially distinct THz responses from the curtain and the hidden
+door/wall region, indicating that THz sensing supplements the visible LiDAR scaffold
+with NLoS structural information to form a more complete geometric description of
+the hallway around the occluded region.
+Material-aware interpretation uses the same heterogeneous evidence pool for a different scene attribute. THz specular paths provide reflection-loss estimates, but the
+propagation paths alone cannot identify whether the reflecting surface corresponds to
+a wall, a door or another semantic region. Panoramic semantic segmentation identifies visible regions without directly measuring their material-sensitive response. The
+agent therefore associates selected near-normal-incidence THz paths with semantic
+masks from panoramic vision (Fig. 4b). Representative paths projected onto wall and
+
+8
+
+a
+
+b
+
+Geometry
+Accuracy
+
+Representation
+Completeness
+
+c
+
+Material
+Awareness
+
+Vision
+LiDAR
+Semantic
+Understanding
+
+NLoS
+Perception
+
+THz
+DragonflyTeraVision
+
+Fig. 5 Capability comparison and THz-enabled hidden-object sensing. a, Qualitative fivedimensional comparison of vision, LiDAR, THz sensing and Dragonfly-TeraVision across geometry
+accuracy, semantic understanding, NLoS perception, material awareness and scene representation
+completeness. b, Opaque-cup hidden-ball measurement setup. One cup is empty and three visually
+opaque cups contain balls made of steel, glass and wood. c, THz PDPs for the four cases. The
+first peak corresponds to the common paper-cup wall reflection, whereas the delayed second peak
+indicates a hidden ball. The compensated second-peak strengths provide material-sensitive reflectionloss estimates.
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+
+257
+
+258
+259
+260
+261
+262
+263
+264
+265
+266
+
+door regions yield reflection-loss values consistent with cement and metal responses,
+respectively, linking semantic regions to material-sensitive THz evidence.
+The final tri-modal representation integrates these task-specific interpretations
+within a common scene model (Fig. 4d). Vision contributes semantic categories,
+LiDAR anchors these categories to metric LoS geometry, and THz sensing adds
+propagation-derived hidden-structure evidence and material-sensitive THz reflection
+responses. The resulting representation describes what visible structures are present,
+where they are located, whether additional structural evidence exists beyond the visible occluder, and which material-related THz responses are associated with selected
+semantic regions. This result illustrates the role of the task-driven multi-modal agent
+in coordinating heterogeneous observations. Instead of simply accumulating sensor
+outputs, the agent organizes them according to the perceptual function required for
+physically interpretable environment reconstruction. This representation provides the
+basis for the capability comparison and controlled hidden-object sensing analysis
+below.
+
+Capability comparison and hidden-object sensing
+The tri-modal scene model enables a system-level comparison between individual
+sensing modalities and the integrated Dragonfly-TeraVision architecture (Fig. 5a and
+Table 1). The comparison provides a qualitative capability map rather than a universal
+ranking of sensor performance. Scene representation completeness refers to the ability of a sensing configuration to encode semantic identity, metric location, hidden or
+NLoS content and material-sensitive THz reflection response within a common physical scene model. Vision, LiDAR and THz sensing each contribute different elements
+of this representation, whereas Dragonfly-TeraVision organizes the complementary
+evidence according to the sensing objective.
+
+9
+
+Table 1 Complementary capabilities of vision, LiDAR, THz sensing and Dragonfly-TeraVision.
+
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+
+Capability
+
+Vision
+
+LiDAR
+
+THz sensing
+
+Dragonfly-TeraVision
+
+Geometry accuracy
+
+Appearance cues
+with limited
+metric scale
+
+Accurate LoS
+3D surfaces
+
+Sparse delay–angle
+structural cues
+
+Semantic 3D geometry with
+THz structural evidence
+
+Semantic understanding
+
+Dense scenecategory labels
+
+Limited without
+association
+
+No direct semantic
+labels
+
+Semantics linked to metric
+and THz evidence
+
+NLoS perception
+
+Blocked by
+opaque or
+occluding surfaces
+
+Direct LoS surfaces only
+
+Penetration and
+scattering cues
+
+Hidden evidence placed in
+visible scene context
+
+Material awareness
+
+Appearancebased inference
+
+Geometry without material
+response
+
+Reflection-loss
+response
+
+THz reflection loss associated with semantic regions
+
+Representation
+completeness
+
+Visible semantic
+description
+
+Metric visiblesurface scaffold
+
+Propagation and
+material evidence
+
+Visible semantics, metric
+geometry, hidden evidence
+and material-sensitive THz
+response
+
+The individual modalities exhibit distinct capability profiles. Panoramic vision
+provides dense appearance and semantic context, with its physical access constrained to optically visible surfaces and image-domain evidence. LiDAR supplies
+metrically accurate LoS geometry and forms a reliable spatial scaffold, while semantic labels, material response and concealed structure require additional evidence
+beyond geometric returns. THz sensing contributes propagation-sensitive information,
+including penetration-enabled hidden-object cues and material-sensitive reflection
+responses, although the evidence is sparse, directional and dependent on scan geometry. Dragonfly-TeraVision improves scene representation completeness by preserving
+these different physical meanings and associating them through the task-driven sensing
+agent, rather than treating the modalities as interchangeable data streams.
+Hidden-object and material sensing form a stringent test of this capability profile.
+In this task, the relevant scene content lies beyond the visible boundary accessible to
+camera and LiDAR. To isolate this condition, an opaque-cup benchmark is conducted
+with one empty cup and three cups containing steel, glass and wood balls (Fig. 5b).
+The cups are visually opaque and geometrically similar from the outside, restricting
+vision and LiDAR to external appearance and surface geometry. THz measurements
+exploit partial penetration through the paper cup and resolved delayed reflections
+from the concealed object.
+The THz power delay profiles (PDPs) separate the common cup-wall response
+from hidden-object responses (Fig. 5c). The first peak appears in all four cases and
+corresponds to reflection from the paper-cup wall, confirming that the same visible
+boundary is present across the measurements. A second delayed peak appears near
+3.28 ns for the steel, glass and wood cases, corresponding under the monostatic roundtrip model to an approximately 0.49 m one-way propagation distance between the THz
+TRx and the dominant hidden-ball reflection point. In the empty-cup case, labeled
+“cover”, this second response falls below the noise floor. After compensation for freespace path loss (FSPL) and two-way paper-cup penetration loss, the reflection-loss
+
+10
+
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+
+307
+
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+
+values of the delayed peaks are compared with a THz time-domain spectroscopy (THzTDS) material database [33], yielding reflection-loss estimates consistent with steel,
+glass and wood, respectively. The detailed measurement procedure and PDP-based
+detection of the concealed balls are shown in Supplementary Video 2.
+This controlled benchmark substantiates the role of THz sensing in the overall
+architecture. When visible modalities describe only the external surface, THz measurements provide hidden-object evidence and material-sensitive reflection responses
+that can be routed into the task-specific representation. Together with the hallway
+experiment, these results show that Dragonfly-TeraVision extends visible-scene reconstruction towards physical scene interpretation, in which semantics, metric geometry,
+occlusion state and material-sensitive THz reflection response are organized within
+one scene representation.
+
+Conclusions
+As embodied AI moves into physical environments, robotic perception is increasingly
+expected to move beyond visible layout towards representations that capture how
+a scene is structured, occluded and physically constituted. Such perception requires
+semantic identity, metric location, hidden structure and material-sensitive THz
+response to be organized as coupled attributes of the same environment. DragonflyTeraVision addresses this requirement through a heterogeneous sensing architecture
+inspired by dragonfly compound eyes in which panoramic vision, LiDAR and monostatic THz sensing act as complementary sensing eyes, while an agentic integration
+framework functions as the task-driven agent. Rather than accumulating independent
+sensor outputs, the framework decomposes each sensing objective and assembles the
+relevant semantic, geometric, propagation-derived and material-sensitive evidence into
+a common physical scene representation.
+The indoor hallway experiment demonstrates this principle at the scene level.
+Dragonfly-TeraVision anchors vision-derived semantic labels to metric LoS geometry,
+uses THz-derived scattering evidence to supplement the visible LiDAR scaffold near
+a curtain-occluded region and associates selected semantic surfaces with materialsensitive THz reflection responses. The opaque-cup benchmark further isolates the
+hidden-object capability under controlled occlusion. When camera and LiDAR observations are restricted to external cup surfaces, delayed THz reflections reveal concealed
+balls, and the compensated reflection-loss estimates are consistent with steel, glass
+and wood. Together, these results establish Dragonfly-TeraVision as an experimental
+route towards embodied perception systems that organize what an environment looks
+like, where its structures are, what remains hidden and how selected materials respond
+to THz sensing within one physically interpretable representation.
+
+11
+
+332
+
+Methods
+
+333
+
+Vision processing
+
+334
+335
+336
+337
+338
+339
+340
+341
+342
+
+Panoramic vision images are processed to extract dense semantic information.
+Mask2Former [45], initialized with weights trained on the ADE20K scene parsing dataset, is used to generate pixel-level semantic predictions from the captured
+panoramic images. For each image, the predicted class-associated masks are converted
+into a semantic label map by assigning each pixel to the category with the highest
+confidence score.
+The resulting semantic map is transformed into the angular domain to match the
+LiDAR and THz representations. For an equirectangular image with width W and
+height H, pixel coordinate (u, v) is mapped to azimuth ϕ and elevation θ as
+ϕ(u) = 2π
+
+343
+
+u
+,
+W
+
+θ(v) =
+
+π
+v
+−π .
+2
+H
+
+(1)
+
+The angular semantic mask is written as
+Svis (ϕ, θ) = {c(ϕ, θ), p(ϕ, θ)},
+
+(2)
+
+346
+
+where c(ϕ, θ) is the predicted semantic category and p(ϕ, θ) is the corresponding confidence score. Scene-relevant categories, including wall, floor, ceiling, door and indoor
+objects, are retained for cross-modal association.
+
+347
+
+LiDAR processing
+
+344
+345
+
+348
+349
+350
+351
+352
+353
+354
+355
+356
+
+LiDAR point clouds are processed to generate a metric LoS geometric map. At each
+sensing position, three scans from different viewing orientations are locally combined
+to increase angular coverage and reduce view-dependent missing regions. The locally
+merged point clouds from the 16 sensing positions are globally registered using the
+ICP algorithm. This step compensates for position and orientation errors introduced
+by mobile-platform placement and movement, producing a globally consistent point
+cloud of the hallway.
+Dominant planar structures are extracted from the registered point cloud using
+orthogonality-constrained RANSAC. Each candidate plane is represented as
+nT p + d = 0,
+
+357
+358
+359
+360
+361
+
+(3)
+
+where n is the unit normal vector, p is a 3D point and d is the plane offset. Surface
+normals are estimated from the registered point cloud and used to guide the RANSAC
+process. Parallel and orthogonal relationships among candidate planes are imposed
+because the main indoor LoS structures are walls, floors and ceilings. Accepted planes
+are organized into a LoS geometric map,
+K
+
+GLoS = {Πk = (nk , dk , Ik )}k=1 ,
+
+12
+
+(4)
+
+363
+
+where Πk denotes the kth extracted planar structure and Ik is the corresponding inlier
+set.
+
+364
+
+THz propagation and material processing
+
+362
+
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+
+THz measurements are processed to extract propagation-derived structural evidence
+and material-sensitive reflection-loss estimates from calibrated angular frequency
+responses. The overall procedure follows signal-processing approaches used in previous THz sensing and propagation-analysis studies [27–29, 50]. Calibrated frequency
+responses are transformed into the delay domain to obtain impulse responses. For
+each azimuth-elevation pointing direction, the response contains a superposition
+of propagation components caused by reflections and scattering from surrounding
+structures.
+Candidate MPC regions are first identified using connected-component analysis in
+the delay-azimuth-elevation domain. The angle-delay power distribution is thresholded
+and represented as a 3D connectivity graph, where neighboring cells with similar delay
+and angular positions are grouped into a connected domain. Within each connected
+domain, an element-wise SAGE algorithm is applied to estimate the delay and complex
+amplitude of local MPCs. A 3D MPC tracking procedure is then performed across
+adjacent azimuth-elevation cells, and the direction of each tracked MPC is refined by
+maximum-likelihood angle estimation using the antenna radiation pattern.
+The extracted MPC parameters are represented as
+MTHz =
+
+382
+383
+384
+
+385
+
+387
+388
+
+α̂q , τ̂q , ϕ̂q , θ̂q
+
+oQ
+
+iT
+cτ̂q h
+cos θ̂q cos ϕ̂q , cos θ̂q sin ϕ̂q , sin θ̂q ,
+2
+
+390
+391
+
+(5)
+
+(6)
+
+where c is the speed of light.
+Material-sensitive THz reflection responses are estimated from selected specular components. For the qth dominant reflection, the reflection loss is estimated by
+compensating the measured MPC power with the two-way free-space propagation loss,
+Lrefl,q = PMPC,q − Lfs,q ,
+
+389
+
+,
+
+q=1
+
+where α̂q , τ̂q , ϕ̂q and θ̂q denote the estimated complex amplitude, delay, azimuth angle
+and elevation angle of the qth MPC, respectively. Under the monostatic single-bounce
+assumption, each reflected MPC is back-projected into a 3D scattering point as
+r̂q =
+
+386
+
+n
+
+(7)
+
+where PMPC,q is the calibrated MPC power in dB and Lfs,q is the corresponding twoway FSPL. The estimated reflection-loss values are compared with reference material
+responses from THz-TDS [33, 34].
+
+13
+
+392
+
+393
+394
+395
+396
+397
+398
+399
+400
+
+401
+402
+403
+404
+
+Opaque-cup hidden-ball measurement
+The opaque-cup hidden-ball experiment uses calibrated THz frequency responses measured for the empty-cup, steel-ball, glass-ball and wood-ball cases. The measured
+complex frequency responses are normalized by the calibration response and transformed into the delay domain using an inverse fast Fourier transform to obtain PDPs.
+The first dominant peak, which appears in all cases, is attributed to reflection from
+the paper-cup wall. A delayed peak near 3.28 ns is attributed to the hidden-ball reflection when a ball is present. Under the monostatic round-trip model, the corresponding
+one-way distance is
+cτball
+,
+(8)
+Rball =
+2
+where τball is the delay of the hidden-ball reflection peak.
+For material identification, the reflection loss of the hidden ball is estimated from
+the delayed peak after compensating for FSPL and the two-way penetration loss
+through the paper cup,
+Lrefl,ball = Prx,ball − Lfs,ball − 2Lpen,cup ,
+
+(9)
+
+408
+
+where Prx,ball is the calibrated received power of the hidden-ball reflection peak, Lfs,ball
+is the FSPL for the corresponding round-trip propagation path and Lpen,cup is the oneway paper-cup penetration loss measured by THz-TDS. The resulting reflection-loss
+values are compared with the THz-TDS material database reported in [33].
+
+409
+
+Multi-modal association and scene representation
+
+405
+406
+407
+
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+
+Vision–LiDAR association anchors visual semantic labels to metric 3D structures. For
+each sensing position, the LiDAR point cloud is projected onto the corresponding
+equirectangular panoramic image using the calibrated camera–LiDAR pose. Each projected LiDAR point is matched with the pixel at the same viewing direction, and the
+semantic label of this pixel is obtained from the Mask2Former segmentation result.
+After semantic label assignment, local semantic–geometric observations from different
+sensing positions are transformed into the common global coordinate system using the
+LiDAR registration results.
+LiDAR–THz integration combines visible LoS geometry with THz-derived structural information from occluded regions. The globally registered LiDAR point cloud is
+retained as the geometric scaffold for directly observable surfaces. THz-derived scattering points are transformed into the same global coordinate frame and interpreted
+as propagation-derived structural evidence. This integration allows visible LiDAR
+geometry and THz-inferred hidden structures to be represented within a unified
+reconstruction.
+Vision–THz semantic-material integration associates THz reflection responses
+with semantic regions. Selected near-normal-incidence specular components are used
+because they provide more stable reflection-loss estimates than weak diffuse or grazingangle components. For each selected THz path, the estimated azimuth and elevation
+angles are projected onto the panoramic semantic mask. The semantic label at the
+
+14
+
+431
+
+projected angular location is combined with the THz reflection-loss estimate to assign
+material-related attributes to visually identified structures.
+
+432
+
+Agent formulation
+
+430
+
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+
+The task-driven agent is formulated as an extensible organizer for sensing data and
+processing units. The task specification defines the sensing objective, such as semantic
+geometry construction, hidden-object sensing, NLoS structural sensing or materialaware interpretation. The data manifest describes the available sensing modalities, file
+locations, calibration information, coordinate frames and processing status. In this
+work, the manifest includes panoramic vision images and semantic masks, LiDAR
+point clouds and LoS geometric maps, THz MPC estimates and THz material reference
+measurements.
+Let D = {Dm }M
+m=1 denote the manifest-defined collection of available sensing data,
+where each Dm corresponds to one modality or data source. Let K = {kn }N
+n=1 denote
+the processing library, where each unit kn has a specified input type, output type and
+parameter set. A task is represented as
+T = (o, C, P),
+
+445
+446
+447
+448
+
+449
+
+where o is the sensing objective, C denotes task constraints and P contains algorithmic
+parameters.
+Given T , the agent determines the task-specific data subset DT ⊆ D and selects
+an ordered workflow
+WT = (ki1 , ki2 , . . . , kiL ),
+(11)
+where kiℓ ∈ K is the ℓth selected processing unit. The workflow selection is written as
+WT = π(T , D, K),
+
+450
+451
+
+452
+
+454
+455
+456
+457
+
+458
+459
+
+460
+461
+
+(12)
+
+where π(·) denotes the task-to-workflow selection rule. By initializing X0 = DT ,
+workflow execution is expressed as
+Xℓ = kiℓ (Xℓ−1 ; Piℓ ) ,
+
+453
+
+(10)
+
+ℓ = 1, 2, . . . , L,
+
+(13)
+
+where Xℓ is the intermediate result after the ℓth processing unit and Piℓ ⊆ P denotes
+its parameters. The final output RT = XL may be a semantic geometric map, an
+NLoS structural result, a material-associated representation or a unified multi-modal
+scene model. For each task, the selected workflow, input data identifiers, calibration
+files, parameter settings, intermediate outputs and final representation are recorded
+to preserve workflow provenance and support reproducibility.
+Data availability. The datasets generated and analyzed during the current study
+are available from the corresponding author upon reasonable request.
+Code availability. The code used for data processing and multi-modal association
+is available from the corresponding author upon reasonable request.
+
+15
+
+462
+
+463
+
+464
+465
+
+466
+467
+
+468
+469
+
+470
+471
+472
+
+473
+474
+
+475
+476
+477
+
+478
+479
+
+480
+481
+482
+
+483
+484
+
+485
+486
+
+487
+488
+
+489
+490
+
+491
+492
+
+493
+494
+
+References
+[1] From embodied intelligence to physical AI. Nat Mach Intell 8, 491–492 (2026).
+[2] Liu, X., Zhang, J., Zhou, S. et al. Towards deployment-centric multimodal AI
+beyond vision and language. Nat Mach Intell 7, 1612–1624 (2025).
+[3] Yang, G.-Z. et al. The grand challenges of science robotics. Sci. Robot. 3, eaar7650
+(2018).
+[4] Duan, J., Yu, S., Tan, H. L. et al. A survey of embodied AI: From simulators to
+research tasks. IEEE Trans. Emerg. Topics Comput. Intell. 6, 230–244 (2022).
+[5] Mon-Williams, R., Li, G., Long, R. et al. Embodied large language models enable
+robots to complete complex tasks in unpredictable environments. Nat Mach Intell
+7, 592–601 (2025).
+[6] Li, S. L., Zhang, A., Chen, B. et al. Controlling diverse robots by inferring
+Jacobian fields with deep networks. Nature 643, 89–95 (2025).
+[7] Cadena, C. et al. Past, present, and future of simultaneous localization and
+mapping: Toward the robust-perception age. IEEE Trans. Robot. 32, 1309–1332
+(2016).
+[8] Garg, S., Sunderhauf, N., Dayoub, F. et al. Semantics for robotic mapping,
+perception and interaction: a survey. Found. Trends Robot. 8, 1–224 (2020).
+[9] McCormac, J., Handa, A., Davison, A. & Leutenegger, S. SemanticFusion: Dense
+3D semantic mapping with convolutional neural networks. In Proc. IEEE
+International Conference on Robotics and Automation 4628–4635 (IEEE, 2017).
+[10] Guo, Y., Wang, H., Hu, Q. et al. Deep learning for 3D point clouds: a survey.
+IEEE Trans. Pattern Anal. Mach. Intell. 43, 4338–4364 (2021).
+[11] Kirillov, A., Mintun, E., Ravi, N. et al. Segment anything. In Proc. IEEE/CVF
+International Conference on Computer Vision 4015–4026 (IEEE, 2023).
+[12] O’Carroll, D. Feature-detecting neurons in dragonflies. Nature 362, 541–543
+(1993).
+[13] Lancer, B. H., Evans, B. J. E., Fabian, J. M. et al. Preattentive facilitation of
+target trajectories in a dragonfly visual neuron. Commun Biol 5, 829 (2022).
+[14] Mischiati, M. et al. Internal models direct dragonfly interception steering. Nature
+517, 333–338 (2015).
+[15] Ou, D., Hagenaars, J. J., Jankowski, M. R. et al. Efficient robot navigation
+inspired by honeybee learning flights. Nature 653, 1039–1046 (2026).
+
+16
+
+495
+496
+
+497
+498
+499
+
+500
+501
+
+502
+503
+
+504
+505
+506
+
+507
+508
+509
+510
+
+511
+512
+513
+
+514
+515
+
+516
+517
+518
+
+519
+520
+
+521
+522
+
+523
+524
+
+525
+526
+
+527
+528
+
+[16] Hu, Z.-Y., Zhang, Y.-L., Pan, C. et al. Miniature optoelectronic compound eye
+camera. Nat. Commun. 13, 5634 (2022).
+[17] Zhang, L., Zhan, H., Liu, X. et al. A wide-field and high-resolution lensless
+compound eye microsystem for real-time target motion perception. Microsyst.
+Nanoeng. 8, 83 (2022).
+[18] Fleming, R. W. Visual perception of materials and their properties. Vis. Res.
+94, 62–75 (2014).
+[19] Schwartz, G. & Nishino, K. Recognizing material properties from images. IEEE
+Trans. Pattern Anal. Mach. Intell. 42, 1981–1995 (2020).
+[20] Feng, D. et al. Deep multi-modal object detection and semantic segmentation
+for autonomous driving: Datasets, methods, and challenges. IEEE Trans. Intell.
+Transp. Syst. 22, 1341–1360 (2021).
+[21] Qiu, J. et al. DeepLiDAR: Deep surface normal guided depth prediction for outdoor scene from sparse LiDAR data and single color image. In Proc. IEEE/CVF
+Conference on Computer Vision and Pattern Recognition 3313–3322 (IEEE,
+2019).
+[22] Ping, P., Zhang, X., Tao, L. et al. A comprehensive survey on multi-sensor
+information processing and fusion for BEV perception in autonomous vehicles.
+Inf. Fusion 126, 103653 (2026).
+[23] Zhang, X., Kwon, K., Henriksson, J. et al. A large-scale microelectromechanicalsystems-based silicon photonics LiDAR. Nature 603, 253–258 (2022).
+[24] Tachella, J., Altmann, Y., Mellado, N. et al. Real-time 3D reconstruction
+from single-photon lidar data using plug-and-play point cloud denoisers. Nat.
+Commun. 10, 4984 (2019).
+[25] Jiang, Y., Karpf, S. & Jalali, B. Time-stretch LiDAR as a spectrally scanned
+time-of-flight ranging camera. Nat. Photon. 14, 14–18 (2020).
+[26] Lukashchuk, A., Yildirim, H. K., Bancora, A. et al. Photonic-electronic integrated
+circuit-based coherent LiDAR engine. Nat. Commun. 15, 3134 (2024).
+[27] Mittleman, D. M. Twenty years of terahertz imaging. Opt. Express 26, 9417–9431
+(2018).
+[28] Valusis, G., Lisauskas, A., Yuan, H. et al. Roadmap of terahertz imaging 2021.
+Sensors 21, 4092 (2021).
+[29] Li, X., Li, J., Li, Y. et al. High-throughput terahertz imaging: progress and
+challenges. Light Sci Appl 12, 233 (2023).
+
+17
+
+529
+530
+
+531
+532
+
+533
+534
+535
+
+536
+537
+538
+
+539
+540
+541
+
+542
+543
+544
+
+545
+546
+
+547
+548
+
+549
+550
+
+551
+552
+553
+
+554
+555
+
+556
+557
+558
+
+559
+560
+561
+
+[30] Li, X., Mengu, D., Yardimci, N. T. et al. Plasmonic photoconductive terahertz
+focal-plane array with pixel super-resolution. Nat. Photon. 18, 139–148 (2024).
+[31] Li, J., Li, X., Yardimci, N. T. et al. Rapid sensing of hidden objects and defects
+using a single-pixel diffractive terahertz sensor. Nat. Commun. 14, 6791 (2023).
+[32] Wang, G., Li, M., Liu, Q. et al. Terahertz integrated sensing and mobile communications empowered by a 220-GHz-band portable device. Nat. Commun. 16,
+11719 (2025).
+[33] Fang, Z., Lyu, Y., Yu, Z. et al. Environment reconstruction in terahertz monostatic sensing: Joint millimeter-level geometry mapping and material identification.
+IEEE J. Sel. Top. Electromagn. Antennas Propag. 1, 265–277 (2025).
+[34] Lyu, Y., Yuan, Z., Wymeersch, H. et al. Environment-aware channel measurement
+and modeling for terahertz monostatic sensing. IEEE Trans. Wireless Commun.
+25, 13369–13383 (2026).
+[35] Baltrusaitis, T., Ahuja, C. & Morency, L.-P. Multimodal machine learning: A
+survey and taxonomy. IEEE Trans. Pattern Anal. Mach. Intell. 41, 423–443
+(2018).
+[36] Fazeli, N., Oller, M., Wu, J. et al. See, feel, act: hierarchical learning for complex
+manipulation skills with multisensory fusion. Sci. Robot. 4, eaav3123 (2019).
+[37] Duan, S., Shi, Q. & Wu, J. Multimodal sensors and ML-based data fusion for
+advanced robots. Adv. Intell. Syst. 4, 2200213 (2022).
+[38] Mao, Q., Liao, Z., Yuan, J. et al. Multimodal tactile sensing fused with vision
+for dexterous robotic housekeeping. Nat. Commun. 15, 6871 (2024).
+[39] Jin, Y., Zhou, Y. M., Pathak, P. et al. Minimal-calibration multimodal wearable
+sensing for long-duration three-dimensional shoulder kinematics. Nat. Sens. 1,
+502–512 (2026).
+[40] Li, S., Wu, T., Xu, J. et al. Biomimetic multimodal tactile sensing enables humanlike robotic perception. Nat. Sens. 1, 52–62 (2026).
+[41] Wu, X., Zhu, C., Zheng, L. et al. A cross-modal epidermal sensor enables singlechannel fusion of biopotential and biomechanical signals. Nat. Sens. 1, 315–327
+(2026).
+[42] Driess, D., Xia, F., Sajjadi, M. S. M. et al. PaLM-E: an embodied multimodal
+language model. In Proc. International Conference on Machine Learning 8469–
+8488 (IMLS, 2023).
+
+18
+
+562
+563
+564
+
+565
+566
+
+567
+568
+569
+
+570
+571
+
+572
+573
+
+574
+575
+576
+
+577
+578
+
+[43] Zitkovich, B., Yu, T., Xu, S. et al. RT-2: vision-language-action models transfer
+web knowledge to robotic control. In Proc. Conference on Robot Learning 2165–
+2183 (PMLR, 2023).
+[44] Li, Y., Akbar, A., Liu, C. et al. Mapping capability-centric agentic simulations
+for SLAMs on quadruped robots. Nat. Sens. 1, 366–377 (2026).
+[45] Cheng, B., Misra, I., Schwing, A. G. et al. Masked-attention mask transformer
+for universal image segmentation. In Proc. IEEE/CVF Conference on Computer
+Vision and Pattern Recognition 1290–1299 (IEEE, 2022).
+[46] Zhou, B. et al. Semantic understanding of scenes through the ADE20K dataset.
+Int. J. Comput. Vis. 127, 302–321 (2019).
+[47] Besl, P. J. & McKay, N. D. A method for registration of 3-D shapes. IEEE Trans.
+Pattern Anal. Mach. Intell. 14, 239–256 (2002).
+[48] Fischler, M. A. & Bolles, R. C. Random sample consensus: A paradigm for model
+fitting with applications to image analysis and automated cartography. Commun.
+ACM 24, 381–395 (1981).
+[49] Fessler, J. A. & Hero, A. O.
+Space-alternating generalized expectationmaximization algorithm. IEEE Trans. Signal Process. 42, 2664–2677 (1994).
+
+581
+
+[50] Lyu, Y., Huang, Z., Schwarz, S. et al. Hybrid channel modeling and environment
+reconstruction for terahertz monostatic sensing. IEEE Trans. Wireless Commun.
+24, 8492–8504 (2025).
+
+582
+
+Competing interests.
+
+583
+
+Additional information.
+
+579
+580
+
+The authors declare no competing interests.
+Supplementary information is available for this paper.
+
+19
+
+Supplementary Files
+This is a list of supplementary les associated with this preprint. Click to download.
+SupplementaryInformation.pdf
+1.TaskdrivenAgent.mp4
+
+fi
+
+2.HiddenBall.mp4
+
+

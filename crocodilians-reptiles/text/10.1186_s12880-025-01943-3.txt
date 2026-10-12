@@ -1,0 +1,170 @@
+Application of snake model imaging selection and analysis to the ultrasound diagnosis of white matter damage in preterm infants.
+He X, Wang H, Zhu L, Wang N. (2025). BMC medical imaging. . doi:10.1186/s12880-025-01943-3. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Application of snake model imaging selection and analysis to the ultrasound diagnosis of white matter damage in preterm infants
+
+## Abstract
+AbstractBackgroundApproximately 20% to 30% of preterm infants may develop white matter injury. Early detection of brain injury is of great significance for clinical practice. The snake model is a boundary detection technology used in image processing and computer vision. It automatically locates the closed boundaries of objects in the image by simulating the behavior of elastic snakes. The quantitative ultrasound segmentation technique using the snake model can improve the accuracy of the diagnosis of early white matter injury.MethodsIn this retrospective single-center study, cranial ultrasound scans from 60 preterm infants with clinically confirmed WMD and 40 healthy controls were analyzed. Five regions of interest (ROIs) around key brain structures were automatically delineated by the snake model, and mean grayscale values were measured. Reproducibility was assessed via inter- and intra-observer analyses, and receiver operating characteristic (ROC) curves determined optimal thresholds for WMD prediction.ResultsThe snake model achieved a mean area under the ROC curve (AUC) of 0.87 for ROI1, 0.85 for ROI2, and 0.82 for ROI3, with corresponding sensitivities of 0.82, 0.70, and 0.63 and specificities of 0.88, 0.85, and 0.88. The average Dice coefficient across ROIs was 0.75, and The total coefficient of variation was 6.7%, which was less than 10%, indicating high reproducibility.ConclusionsQuantitative analysis of ultrasound images with the snake model demonstrates promising accuracy and reproducibility for early WMD detection in preterm infants. Future multicenter studies with larger cohorts are warranted to validate these findings.Clinical trial numberNot applicable.Supplementary InformationThe online version contains supplementary material available at 10.1186/s12880-025-01943-3.Keywords: Brain damage, Preterm infant, Ultrasound grayscale value
+
+## Introduction
+Brain damage in preterm infants primarily manifests as deep lesions in the white matter surrounding the lateral ventricles. White matter damage (WMD) significantly impairs neurodevelopment and quality of life, often resulting in infantile cerebral palsy [1, 2]. Cranial ultrasound is the first-line neuroimaging modality in neonates due to its safety and bedside availability; however, early post-injury edema produces subtle echogenic changes amid low contrast, high noise, and complex anatomy, making prompt diagnosis difficult [3].
+In recent years, image segmentation has enabled both quantitative and qualitative analysis of medical ultrasound images. Ultrasonic segmentation techniques have successfully assisted clinical detection of various conditions—including cardiovascular, breast, prostate, gallbladder, liver, and obstetric/gynecologic diseases—and one prominent method is the active contour (“snake”) model, which extracts object boundaries by evolving a deformable spline toward image gradients. Although snake-based segmentation has been applied to several anatomical regions [4–8]its use in neonatal cranial ultrasound remains limited.
+Therefore, this study evaluated the combined use of a snake model and cranial ultrasound to quantify grayscale values for diagnosing white matter damage (WMD) in preterm infants. We applied threshold segmentation and morphological filtering to predefined regions of interest (ROIs) in ultrasound images from both WMD cases and healthy controls. Mean grayscale values within each ROI were measured as proxies for white matter echogenicity and compared between groups. This quantitative approach was then assessed for its potential to improve early detection of neonatal brain injury.
+
+## Materials and methods
+
+## Study design and participants
+We conducted a retrospective, single-center diagnostic accuracy study of 60 preterm infants with clinically confirmed white matter damage (WMD) and 40 healthy newborn controls admitted between October 2022 and April 2024. These newborns have been diagnosed with brain injury by MRI, and the MRI results are taken as the reference standard. Inclusion criteria for the WMD group were: gestational age < 37 weeks, postnatal age ≤ 7 days (median gestational age: 30 weeks before birth), presence of perinatal risk factors (e.g., prolonged rupture of membranes, chorioamnionitis, or significant birth asphyxia), 1-minute Apgar score < 7, and neurological signs consistent with WMD. Controls were gestational-age-matched healthy newborn infants. Written informed consent was obtained from all parents or guardians, and the Institutional Ethics Committee approved the study protocol.
+
+## MRI diagnosis criteria
+White matter damage (WMD) was confirmed using magnetic resonance imaging (MRI) with T1- and T2-weighted sequences to assess periventricular vulnerability associated with immature cerebrovascular regulation [9, 10]. Following the diagnostic criteria described by Doria et al. [11] and Back et al. [10], WMD was defined by one or more of the following findings: periventricular T1 hyperintensity on T1-weighted images, reflecting early injury such as gliosis or mineralization [9, 11]; focal cystic lesions in the periventricular white matter, visible as cystic changes on both T1- and T2-weighted images and diagnostic of cystic periventricular leukomalacia [10, 12]; and ventriculomegaly, or enlargement of the lateral ventricles, seen on T1- and T2-weighted images and indicative of white matter volume loss secondary to injury [9, 13]. In less severe cases, diffuse excessive high signal intensity (DEHSI) on T2-weighted images was recorded as a non-cystic form of WMD. These imaging features correspond to the evolving spectrum of white matter injury in preterm infants, which includes both cystic and non-cystic forms. The American Academy of Pediatrics further recognizes cystic formation, ventriculomegaly, and white matter signal abnormalities as key MRI markers for the diagnosis and risk stratification of periventricular leukomalacia and white matter injury in preterm infants [14].
+
+## Image acquisition
+Cranial ultrasound was performed using a Hitachi EUB-7000HV scanner with a 5.5–7.5 MHz sector probe (C715) and system gain set at 100 dB. Standard coronal and sagittal views through the anterior fontanelle were acquired and saved in DICOM format at a resolution ≥ 300 dpi.
+
+## ROI definition and segmentation
+Five regions of interest (ROIs) per hemisphere were predefined, as shown in Fig. 1: (1) periventricular white matter near the anterior horn (ROI1), (2) periventricular white matter near the posterior horn (ROI2), (3) basal ganglia region (ROI3), (4) choroid plexus (ROI4), and (5) cerebellar vermis (ROI5). ROI1,3,4 were extracted from coronal section images, and ROI2,5 were extracted from sagittal section images. The active contour (“snake”) model threshold segmentation algorithm was used for automatic image segmentation. When the boundary confidence was low, experienced medical professionals made minimal manual adjustments based on the approximate shape of the white matter region in the premature infant’s brain in the image, thereby extracting the boundary related to the white matter region as the initial contour [15]. To ensure the accuracy of the segmentation of the white matter region in premature infants as much as possible, the number of iterations and energy parameters were set as follows: Number of iterations 1500 ~ 2000, Elasticity coefficient (alpha) 0.4–0.6, Rigidity coefficient (beta) 0.08–0.12, Iteration step size (gamma) 0.3–0.6. All ultrasound examinations were performed by the same three radiologists, who have more than ten years of experience in ultrasound examination.
+Ultrasound images of the brain parenchyma. Ultrasound images showing five predefined regions of interest (ROIs; white outlines) in neonatal cranial scans. Panels: (A) ROI1, periventricular white matter near anterior horn; (B) ROI2, periventricular white matter near posterior horn; (C) ROI3, basal ganglia region; (D) ROI4, choroid plexus; (E) ROI5, cerebellar vermis
+
+## Reliability assessment
+Three blinded operators independently segmented all ROIs on two occasions separated by Three days. The repeatability coefficient (EV), reproducibility coefficient (AV) and Total coefficient of variation (CV) were calculated. All the coefficients < 10% were considered indicative of high measurement reliability.
+
+## Statistical analysis
+All analyses were performed using SPSS 17.0 (IBM, Armonk, NY, USA). Continuous variables are presented as mean ± standard deviation. Normality of continuous variables was assessed by the Shapiro–Wilk test, with all distributions conforming to normality (p > 0.05). Group differences were assessed by independent-samples t-test (two-tailed, p < 0.05 significant). Receiver operating characteristic (ROC) curves determined optimal grayscale thresholds for WMD detection, reporting area under the curve (AUC), sensitivity, and specificity.
+
+## Results
+
+## Participant characteristics
+A total of 60 preterm infants with clinically confirmed WMD and 40 gestational-age-matched healthy controls were included; all ultrasound images met predefined diagnostic quality criteria. Gestational age and birth weight did not differ significantly between groups (both p > 0.05).
+
+## ROI grayscale comparisons
+Mean ± SD grayscale values, t-values and p-values for ROIs1–5 are presented in Table 1. Figure 2 shows the comparison chart of the average gray values of the five ROIs. In the WMD group (n = 60) versus controls (n = 40):
+Mean ± SD grayscale values, t-values and p-values for rois in WMD vs. control groups
+Data are expressed as the mean ± standard deviation
+Mean ± SD grayscale values for five white matter regions of interest (ROIs) in cranial ultrasound images of preterm infants with white matter damage (WMD; n = 60) versus healthy controls (n = 40)
+ROI definitions:
+ROI1, periventricular white matter near anterior horn;
+ROI2, periventricular white matter near posterior horn;
+ROI3, basal ganglia region;
+ROI4, choroid plexus;
+ROI5, cerebellar vermis
+Five ROIs average grayscale value comparison chart for preterm PVL group and normal control group. Bar chart showing mean grayscale values for five predefined regions of interest (ROIs) in cranial ultrasound images: ROI1: periventricular white matter near anterior horn ROI2: Periventricular white matter near posterior horn ROI3: Basal ganglia region ROI4: Choroid plexus ROI5: Cerebellar vermis Grayscale values were significantly higher in the PVL group for ROIs 1–3 (p < 0.01), indicating increased echogenicity in these periventricular regions. No significant differences were observed for ROIs 4–5. Abbreviations: PVL, periventricular leukomalacia; SD, standard deviation; ROI, region of interest
+ROI1 (anterior periventricular white matter): 123.024 ± 12.455 vs. 101.261 ± 10.326 (t = 9.10, p < 0.01).
+ROI2 (posterior periventricular white matter): 118.450 ± 13.162 vs. 100.806 ± 10.069 (t = 7.17, p < 0.01).
+ROI3 (basal ganglia region): 115.483 ± 12.876 vs. 100.039 ± 10.509 (t = 6.30, p < 0.01).
+ROI4 (choroid plexus): 125.058 ± 5.831 vs. 124.918 ± 3.654 (t = 0.135, p > 0.05).
+ROI5 (cerebellar vermis): 123.914 ± 5.419 vs. 122.922 ± 3.723 (t = 1.009, p > 0.05).
+Between groups: The mean grayscale values of background echoes in ROI1, ROI2, and ROI3 of infants with WMD were significantly higher than those of normal newborns, indicating that these regions are vulnerable to damage. ROI4 and ROI5 were less affected.
+Comparison among ROI1, ROI2, and ROI3 within the white matter damage group:
+ROI1 vs. ROI2: 123.024 ± 12.455 vs. 118.450 ± 13.162 (t = 3.26, p < 0.01).
+ROI1 vs. ROI3: 123.024 ± 12.455 vs. 115.483 ± 12.876 (t = 3.77, p < 0.01).
+ROI2 vs. ROI3: 118.450 ± 13.162 vs. 115.483 ± 12.876 (t = 1.48, p > 0.05).
+There were significant differences between ROI1 and ROI2, as well as between ROI1 and ROI3, while no significant difference was observed between ROI2 and ROI3. This reflects that ROI1 is the most vulnerable region.
+
+## Repeatability and reproducibility
+Three blinded operators each segmented and measured all ROIs on three occasions over three days. The resulting metrics (Table 2) were:
+Repeatability and reproducibility metrics (EV, AV, CV)
+Mean grayscale values of ROIs are shown. SD, standard deviation
+Equipment variation (EV), appraiser variation (AV), and overall coefficient of variation (CV) for grayscale measurements across five ROIs in 60 preterm infants with WMD. Measurements were independently performed by three blinded operators on three occasions over three days. EV and AV quantify intra- and inter-operator variability, respectively
+Equipment variation (EV): 3.6%.
+Appraiser variation (AV): 5.7%.
+Overall CV (EV + AV): 6.7%.
+Segmentation overlap between repeated ROI delineations was quantified using the Dice similarity coefficient to assess contour agreement. These values indicate excellent intra- and inter-operator consistency for snake-model–based measurements.
+
+## Diagnostic accuracy by ROC analysis
+ROC curves (Fig. 3) yielded the following discrimination metrics for predicting WMD:
+ROC curves for ROI grayscale thresholds Receiver operating characteristic (ROC) curves for grayscale-based discrimination of white matter damage in preterm infants. Panels: (A) ROI1: AUC = 0.892 ± 0.032, optimal cutoff = 114.505, sensitivity = 0.817, specificity = 0.875; (B) ROI2: AUC = 0.845 ± 0.038, cutoff = 111.445, sensitivity = 0.700, specificity = 0.850; (C) ROI3: AUC = 0.815 ± 0.041, cutoff = 112.745, sensitivity = 0.633, specificity = 0.875
+ROI1: AUC = 0.892 ± 0.032 (p < 0.01); cutoff = 114.505; sensitivity = 0.817; specificity = 0.875.
+ROI2: AUC = 0.845 ± 0.038 (p < 0.01); cutoff = 111.445; sensitivity = 0.700; specificity = 0.850.
+ROI3: AUC = 0.815 ± 0.041 (p < 0.01); cutoff = 112.745; sensitivity = 0.633; specificity = 0.875.
+These precise thresholds demonstrated robust discrimination between preterm infants with and healthy newborn.
+
+## Discussion
+In this study, we combined cranial ultrasound with a snake-model–based segmentation approach to quantitatively analyze periventricular white matter echogenicity in preterm infants. By applying threshold-based segmentation and edge extraction within predefined ROIs, we measured mean grayscale values as indices of white matter density and demonstrated the method’s potential for early WMD diagnosis.
+Although advances in perinatal care have improved survival rates among preterm infants, the burden of neonatal neurological disorders—ranging from intraventricular hemorrhage(IVH) to periventricular leukomalacia(PVL)—has increased [16, 17]. In severe cases, preterm brain injury may manifest as intraventricular hemorrhage or periventricular leukomalacia [18]; notably, high-grade PVL confers a worse neurodevelopmental prognosis than comparable IVH lesions, with PVL grades III–IV associated with significantly higher odds of motor delay (OR 17.2) and cerebral palsy (OR 12.3) than high-grade IVH [19, 20]. White matter injury refers to abnormal signals or structural changes in the white matter of the brain, usually manifested as damage or reduced integrity of neurons. In premature infants, the definition and assessment of white matter injury are particularly important because delayed brain development in premature infants is more likely to be affected. This paper takes the MRI results as the reference standard. Children with brain injury combined with cerebral hemorrhage are not included in this study. The present study focused on periventricular leukomalacia, which manifests as deep lesions in the peri-lateral ventricular white matter and progresses through four ultrasound-defined stages: stage 1, increased periventricula echogenicity (edema) within 1 week after birth; stage 2, relatively normal periventricular echogenicity prior to cystic evolution during 1–3 weeks after birth; stage 3, development of cysts from week 2; and stage 4, resolution of cysts by 1–3 months after birth [21, 22]. Ultrasound imaging is invaluable for visualizing these echogenic and cystic changes; however, detecting stage-1 edema on conventional scans remains challenging due to low contrast, speckle noise, and the complex architecture of neonatal white matter, often delaying timely diagnosis. Conventional cranial ultrasound performed within the first week of life cannot reliably differentiate transient periventricular flaring, an effect of prematurity, from white matter damage (WMD), since both present as diffuse periventricular echogenicity. Subsequent follow-up ultrasound at day 7–10 is therefore essential: resolution of increased echogenicity on the repeat scan makes progressive injury unlikely, whereas persistence beyond one week indicates underlying white matter damage [23]. Furthermore, gray-scale ultrasonography is relatively insensitive to early diffuse WMI/edema during the first postnatal week, as early interstitial water accumulation produces subtle echogenic changes that are often masked by speckle noise and normal tissue variation [24]. In our study, application of the Snake model for ROI segmentation revealed that all control infants (n = 60) exhibited mean grayscale values below the optimal cutoff points derived from WMD cases, in each of the three examined regions (ROI1, ROI2, ROI3), thereby confirming the model’s ability to distinguish pathological echogenicity from normal maturational variants [25].
+Diffusion-weighted MRI (DWI) has been recommended as the most useful method for visualizing early cerebral edema. Recent DWI studies have demonstrated that preterm birth induces a pronounced topological reorganization of the neonatal structural connectome, which characterized by reductions in shortest path length, clustering coefficient, and modularity, alongside the emergence of additional “connector” hubs linking disparate modules [26]. These macrostructural trajectories have been further characterized in multi-modal MRI reviews, which integrate diffusion kurtosis imaging, myelin water fraction relaxometry, and neurite orientation dispersion and density imaging to establish normative baselines for early white matter maturation in fetuses and infants [27].
+Spatiotemporal analysis of the thalamus from the third trimester through early infancy reveals a clear lateral-to-medial gradient in microstructural maturation and a posterior-to-anterior sequence of thalamocortical connectivity, with thalamofrontal pathways emerging last. These structural and connectivity gradients are predictive of later cognitive and sensorimotor outcomes, underscoring their functional relevance in early brain development [28]. Regional diffusion tensor metrics in periventricular white matter provide complementary evidence that variations in fiber integrity correlate with neurodevelopmental trajectories at two years of age, echoing the spatial-specific maturation patterns detected by Zheng et al. [26]. and further substantiated by Rogers et al. [29]. Collectively, these findings underscore the necessity for term-equivalent and longitudinal MRI assessments to distinguish transient maturational variants from enduring disruptions in white matter integrity in preterm infants.
+Zhu, Dalin, et al. [30]. explored the correlation between clinical features and total maturation score by Magnetic resonance imaging (MRI) in very low birth weight preterm infants with brain injury at term postmenstrual age. Zhang, Qing et al. [31]. evaluated the diagnostic value of brain ultrasound, computed tomography (CT), magnetic resonance imaging (MRI), and other imaging methods for midbrain injury in premature infants. MRI plays an important role in the early diagnosis of brain injury in premature infants, identification of brain injury types (such as white matter injury and hemorrhage), assessment of brain development maturity, and prediction of neurodevelopmental outcomes, with significantly increased sensitivity. However, DWI provides only the mean diffusivity of tissue without directional diffusion information, is costly, requires highly trained operators, and lacks portability for bedside use. In contrast, cranial ultrasound is inexpensive, easy to operate, feasible for repeated bedside use, and provides high-resolution imaging of pathology in deep or central brain regions. Consequently, cranial ultrasound has become the first-line modality for detecting brain damage in preterm infants. In a large longitudinal cohort, Choi et al. [32]. elaborated in detail on the special manifestations of brain injury in premature infants in ultrasound imaging, underscoring its high positive predictive value for early brain damage.
+Our quantitative findings—significantly elevated mean grayscale values in ROI 1–3 among WMD infants, with ROI1 being the most obvious—align with the known vulnerability of the germinal matrix and periventricular regions to hypoxic–ischemic injury [33–35]. The embryonic matrix around the ventricles is rich in capillaries, has a loose structure, and the cells of the vascular walls are rich in mitochondria, with a high oxygen consumption and is extremely sensitive to hypoxia. Meanwhile, the cerebrovascular circulation of premature infants is not fully developed. Therefore, the white matter around the ventricles is prone to ischemic injury. The choroidal plexus has relatively abundant blood flow and is not easily damaged during mild to moderate hypoperfusion. The vermis of the cerebellum develops relatively late and has a more complete blood flow regulation mechanism, with a lower risk of damage [10]. Therefore, the average gray values of ROI4 and ROI5 show no significant difference from those of healthy newborns. The snake model’s automated ROI delineation enhances objectivity and reproducibility compared with manual methods.
+Previous work has employed grayscale metrics for ultrasound-based diagnosis in other contexts, such as neonatal brain injury and Parkinson’s disease, supporting the broader applicability of computer-aided analysis [36, 37]. By standardizing imaging parameters and using ROC curve thresholds (ROI1 = 114.505; ROI2 = 111.445; ROI3 = 112.745), we achieved sensitivities of 0.817, 0.700, and 0.633 and specificities of 0.875, 0.850, and 0.875, respectively, for detecting early WMD.
+Importantly, repeatability (EV = 3.6%), reproducibility (AV = 5.7%; overall CV = 6.7%) metrics confirm that the technique yields consistent measurements across operators and sessions [38, 39]. To ensure comparability of these grayscale measurements both within and between subjects, we employed the same ultrasound system, operator, and imaging parameters for all ROI analyses and evaluated predictive performance via receiver operating characteristic curves [40, 41]. These reliability data support clinical translation of the approach.
+Limitations of our single-center, moderate-sample study include potential selection bias and limited generalizability. Future multicenter studies should validate grayscale thresholds across diverse populations and investigate integration with advanced imaging modalities.
+
+## Conclusion
+Our snake-model–driven quantitative analysis of cranial ultrasound images accurately identifies elevated grayscale values in periventricular white matter and basal ganglia—key sites of injury in preterm infants with WMD—and reveals both anatomical development and pathological status. By standardizing ROI delineation and grayscale measurement, this approach enhances diagnostic accuracy, reduces operator-related variability, and supports early clinical decision-making. Despite the study’s modest, single-center sample, these findings demonstrate strong reproducibility and predictive utility, suggesting that this bedside-compatible tool can guide timely neuroprotective interventions, improve monitoring of disease progression, and ultimately help prevent long-term neurodevelopmental disability.
+
+## Supplementary Information
+Below is the link to the electronic supplementary material.
+Supplementary Material 1
+
+## Acknowledgements
+Not applicable.
+
+## Author contributions
+X.H designed the whole study, case collection, document retrieval, ultrasonic examination, data analysis, wrote the article, and confirmed the authenticity of the article; H.W, L.Z and N.W executed case collection, ultrasonic examination, wrote the article, and confirmed the authenticity of the article; All authors approved the final article.
+
+## Funding
+Not applicable.
+
+## Data availability
+The datasets provided or analyzed within the current study are not publicly available due Data security, but are available from the corresponding author on reasonable request.
+
+## Declarations
+
+## Human ethics and consent to participate
+All parents or legal guardians provided informed consent for study participation, and the medical ethics committee of the hospital (Guangzhou Women and Children’s Medical Center), approved both the consent form and the study protocol. This study was conducted strictly in accordance with the ethical standard of the World Medical Association Declaration of Helsinki.
+
+## Consent for publication
+Not applicable.
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Supplementary Materials
+Supplementary Material 1
+
+## Data Availability Statement
+The datasets provided or analyzed within the current study are not publicly available due Data security, but are available from the corresponding author on reasonable request.
+
+## Table Table 1: Mean ± SD grayscale values, t-values and p-values for rois in WMD vs. control groups
+Group | ROI1 | ROI2 | ROI3 | ROI4 | ROI5
+Brain damage ( n = 60) | 123.024 ± 12.455 | 118.450 ± 13.162 | 115.483 ± 12.876 | 125.058 ± 5.831 | 123.914 ± 5.419
+Control ( n = 40) | 101.261 ± 10.326 | 100.806 ± 10.069 | 100.039 ± 10.509 | 124.918 ± 3.654 | 122.922 ± 3.723
+t-value | 9.10 | 7.17 | 6.30 | 0.135 | 1.009
+p-value | < 0.01 | < 0.01 | < 0.01 | > 0.05 | > 0.05
+
+## Table Table 2: Repeatability and reproducibility metrics (EV, AV, CV)
+Operator measurement | ROI1 | ROI2 | ROI3 | ROI4 | ROI5 | Mean
+A1 | 122.798 | 118.382 | 115.185 | 124.823 | 124.823 | 120.9766
+A2 | 122.903 | 118.073 | 114.915 | 124.855 | 123.788 | 120.9068
+A3 | 122.726 | 118.037 | 115.266 | 124.812 | 123.824 | 120.9330
+Mean | 122.809 | 118.164 | 115.122 | 124.830 | 123.769 | 120.9388
+SD | 0.177 | 0.345 | 0.351 | 0.043 | 0.129 | 0.209
+B1 | 123.398 | 118.769 | 115.769 | 125.265 | 123.907 | 121.425
+B2 | 123.097 | 118.457 | 115.882 | 125.140 | 123.902 | 121.2956
+B3 | 123.348 | 118.749 | 115.638 | 125.121 | 123.816 | 121.3344
+Mean | 123.281 | 118.664 | 115.763 | 125.242 | 123.875 | 121.3650
+SD | 0.301 | 0.329 | 0.244 | 0.144 | 0.091 | 0.2218
+C1 | 122.845 | 118.345 | 115.709 | 125.202 | 123.964 | 121.2130
+C2 | 122.879 | 118.613 | 115.370 | 125.118 | 124.154 | 121.2268
+C3 | 123.222 | 118.608 | 115.613 | 124.986 | 124.176 | 121.3210
+Mean | 122.982 | 118.522 | 115.564 | 125.102 | 124.098 | 121.2536
+SD | 0.377 | 0.268 | 0.339 | 0.216 | 0.212 | 0.2824
+Mean ROI value | 123.024 | 118.450 | 115.483 | 125.058 | 123.914 | 121.1858
+Repeatability (equipment variation) = 3.6 |  | 
+Reproducibility (appraiser variation) = 5.7 |  | 
+Repeatability & reproducibility = 6.7 |  | 
+
+## Figure Fig. 1: Ultrasound images of the brain parenchyma. Ultrasound images showing five predefined regions of interest (ROIs; white outlines) in neonatal cranial scans. Panels: (A) ROI1, periventricular white matter near anterior horn; (B) ROI2, periventricular white matter near posterior horn; (C) ROI3, basal ganglia region; (D) ROI4, choroid plexus; (E) ROI5, cerebellar vermis
+
+## Figure Fig. 2: Five ROIs average grayscale value comparison chart for preterm PVL group and normal control group. Bar chart showing mean grayscale values for five predefined regions of interest (ROIs) in cranial ultrasound images: ROI1: periventricular white matter near anterior horn ROI2: Periventricular white matter near posterior horn ROI3: Basal ganglia region ROI4: Choroid plexus ROI5: Cerebellar vermis Grayscale values were significantly higher in the PVL group for ROIs 1–3 (p < 0.01), indicating increased echogenicity in these periventricular regions. No significant differences were observed for ROIs 4–5. Abbreviations: PVL, periventricular leukomalacia; SD, standard deviation; ROI, region of interest
+
+## Figure Fig. 3: ROC curves for ROI grayscale thresholds Receiver operating characteristic (ROC) curves for grayscale-based discrimination of white matter damage in preterm infants. Panels: (A) ROI1: AUC = 0.892 ± 0.032, optimal cutoff = 114.505, sensitivity = 0.817, specificity = 0.875; (B) ROI2: AUC = 0.845 ± 0.038, cutoff = 111.445, sensitivity = 0.700, specificity = 0.850; (C) ROI3: AUC = 0.815 ± 0.041, cutoff = 112.745, sensitivity = 0.633, specificity = 0.875

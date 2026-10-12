@@ -1,0 +1,1057 @@
+Ocelots in the moonlight: Influence of lunar phase on habitat selection and movement of two sympatric felids
+Maksim Sergeyev, Jason V. Lombardi, Michael E. Tewes, Tyler A. Campbell (2023). PLoS ONE. https://doi.org/10.1371/journal.pone.0286393. doi:10.1371/journal.pone.0286393. Licence: cc-by. Text from pdf.
+
+PLOS ONE
+RESEARCH ARTICLE
+
+Ocelots in the moonlight: Influence of lunar
+phase on habitat selection and movement of
+two sympatric felids
+Maksim Sergeyev ID1¤a*, Jason V. Lombardi1¤b, Michael E. Tewes1, Tyler A. Campbell2
+1 Caesar Kleberg Wildlife Research Institute, Texas A&M University Kingsville, Kingsville, TX, United States
+of America, 2 East Foundation, San Antonio, TX, United States of America
+
+a1111111111
+a1111111111
+a1111111111
+a1111111111
+a1111111111
+
+¤a Current address: Colorado State University, Fort Collins, CO, United States of America
+¤b Current address: Wildlife Health Laboratory, California Department of Fish and Wildlife, Rancho Cordova,
+CA, United States of America
+* ecomakismsergeyev@gmail.com
+
+Abstract
+OPEN ACCESS
+Citation: Sergeyev M, Lombardi JV, Tewes ME,
+Campbell TA (2023) Ocelots in the moonlight:
+Influence of lunar phase on habitat selection and
+movement of two sympatric felids. PLoS ONE
+18(11): e0286393. https://doi.org/10.1371/journal.
+pone.0286393
+Editor: Stephanie S. Romanach, U.S. Geological
+Survey, UNITED STATES
+Received: February 15, 2023
+Accepted: May 12, 2023
+Published: November 30, 2023
+Peer Review History: PLOS recognizes the
+benefits of transparency in the peer review
+process; therefore, we enable the publication of
+all of the content of peer review and author
+responses alongside final, published articles. The
+editorial history of this article is available here:
+https://doi.org/10.1371/journal.pone.0286393
+Copyright: © 2023 Sergeyev et al. This is an open
+access article distributed under the terms of the
+Creative Commons Attribution License, which
+permits unrestricted use, distribution, and
+reproduction in any medium, provided the original
+author and source are credited.
+
+Various landscape and environmental factors influence animal movement and habitat selection. Lunar illumination affects nocturnal visual perception of many species and, consequently, may influence animal activity and habitat selection. However, the effects of varying
+moon stage may differ across taxa. Prey species often reduce activity during highly visible
+periods of night while predators may increase activity or alter their habitat use. Ocelots (Leopardus pardalis) and bobcats (Lynx rufus), two nocturnal predatory felids that coexist in
+southern Texas, may also alter their behavior in response to the phase of the moon. To evaluate the effects of lunar phase on habitat selection of ocelots and bobcats, we executed a
+step selection analysis using high-frequency GPS-telemetry data collected on each species
+(ocelot, N = 8; bobcat, N = 13) in southern Texas during 2017–2021 and compared step
+length during new versus full moons. We predicted that ocelots would increase use of dense
+thornshrub to reduce their visibility during a full moon. However, as bobcats are habitat generalists and are more active during crepuscular periods, we predicted less influence of
+moon phase on activity. Ocelots did not alter habitat selection in response to lunar phase
+but moved shorter distances during full moon phases. Conversely, bobcats selected for
+greater vegetation cover during full moons, possibly to facilitate hunting during brighter periods, but exhibited no difference in movement across lunar phase. We provide, to our knowledge, the first example of habitat selection by predators in relation to lunar phase and show
+differences across new versus full moons by ocelots and bobcats such that ocelots alter
+step length but not habitat selection while bobcats altered habitat selection but not step
+length in response to shifting lunar phase. Further, we suggest the high potential for ocelotvehicle collisions on darker nights due to increased movement by ocelots and poor visibility
+for drivers.
+
+Data Availability Statement: Any R code and
+bobcat GPS data used in the analysis available in
+Github repository: https://github.com/
+MaksimSergeyev/LunarPhasePLOSOneData-Code.
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+1 / 13
+
+PLOS ONE
+
+Funding: Cooperative funding was provided by
+East Foundation, U.S. Fish and Wildlife Service, the
+Brown Foundation, the Tim and Karen Hixon
+Foundation and the Feline Research Program at the
+Caesar Kleberg Wildlife Research Institute. Funders
+had no role in study design, data collection and
+analysis, or decision to publish with the exception
+of the East Foundation which played a role in data
+collection, manuscript review and decision to
+publish.
+Competing interests: The authors have declared
+that no competing interests exist.
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Introduction
+Movement and habitat use of animals can depend on a wide range of biotic and abiotic factors
+across temporal scales [1–3]. For nocturnal animals, their activity patterns can be shaped by
+night length and temperature, as well as moon phase and luminosity [4, 5]. The moon impacts
+terrestrial processes through gravitational effects, tidal shifts, and lunar illumination, all of
+which vary throughout the lunar cycle [6]. Effects of varying lunar phases on animal behavior
+have been described for various mammals, birds, and insects [4, 5]. Influence of lunar stage
+may occur at larger scales, as in the case of population cycles [7] or may result in fine-scale differences in behavior of individuals [5]. The influence of varying lunar phase differs across taxa
+and may have differing impacts on predators versus prey species.
+Lunar illumination impacts the detection ability of visually oriented species, both predators
+and prey [8] and may influence foraging success and risk of predation [9]. Changes in lunar
+illumination can have differing effects across species and can be moderated by visual acuity of
+the species and habitat cover [10]. Prey species may reduce activity levels during periods of
+heightened predation risk [11]. At night, greater illumination during a full moon is associated
+with an increased risk of predation for small mammals while the darkness during a new moon
+creates a reduced risk of predation [12]. As a result, many prey species alter their behavior during full moons and will typically reduce activity and alter habitat use to minimize vulnerability
+[5]. White-footed mice (peromyscus leucopus) foraged more selectively and abandoned foraging more readily during full moons [13]. Cricetid rodents (Phyllotis darwini) reduced total
+food consumption during full moons [8]. Snowshoe hares (Lepus americanus) decreased distances moved during brighter nights [11]. While predation risk increases with visibility, it is
+also worth noting that foraging efficiency may increase, as well as ability for prey to detect
+predators [14]. As a result, predators may alter their behavior in response to changes in activity
+and habitat selection of prey.
+The behavior of predators is often driven by the behavior of prey species [15], therefore, as
+prey alter their activity around lunar phases, predators may adjust their behavior accordingly.
+In response to decreased activity of prey species, predators may respond by either increasing
+effort expended on searching for prey or reduce distance traveled to conserve energy and
+increase efficiency [16]. Red foxes (Vulpes vulpes) and maned wolves (Chrysocyon brachyurus)
+often reduce movement during full moons, likely to conserve energy during periods of less
+prey availability [16, 17]. Conversely, predators may also increase activity during new moons
+when visibility is lowest. Iberian lynx (Lynx pardinus) reduced overall movement but concentrated hunting efforts on areas with greater prey density during new moons [17]. Attacks on
+humans (Homo sapiens) by African lions (Panthera leo) increased 2–4 times after a full moon,
+when illumination was lower, compared to the period preceding a full moon [18]. The
+increased luminosity of full moons may also facilitate higher levels of increased nocturnal
+activity for less nocturnal species, as in the case of cheetahs (Acinonyx jubatus) and African
+wild dogs (Lycaon pictus), leading to increased activity during brighter periods [19, 20]. Predators may hunt more successfully due to increased visibility on brighter nights [21], however,
+the likelihood of detection by prey also increases [14]. To offset increased detectability by prey,
+predators may alter habitat selection, for example increasing use of vegetation cover to aid in
+camouflage or ambush hunting strategies.
+The ocelot (Leopardus pardalis) is a medium-sized felid native throughout Central and
+South America, as well as the southern tip of Texas in the United States [22, 23]. Ocelots are
+strongly associated with dense vegetation cover across their geographic range [22, 24, 25]. Ocelots are nocturnal [22, 26], and generally rest during the day and hunt and patrol territory at
+night [26]. Further, their favored prey species (small rodents) have been found to alter use of
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+2 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+microhabitats in response to changing lunar phases [27]. As such, ocelots may respond by
+altering movement and habitat selection in response to changing illumination. To remain
+camouflaged and facilitate hunting strategies, ocelots may further increase use of dense vegetation during brighter stages of the moon. Like other felids, bobcats (Lynx rufus) hunt at night,
+however, their eyes are smaller and less adapted to nocturnal vision than other nocturnal
+felines [12, 28]. Bobcats exhibited greater diurnal and crepuscular activity compared to ocelots
+[26] and utilized a wider range of land cover types [26, 29]. As such, bobcats may exhibit less
+response to changing lunar phases than a strongly nocturnal species with a narrower habitat
+niche such as the ocelot [26].
+For nocturnal species, conditions at night can be greatly influenced by the phase of the
+moon. Visibility can greatly change between new and full moons, and with it the behavior of
+wildlife. Felids frequently hunt at night and, as such, may be greatly influenced by varying luminosity across moon phases [18]. Studies on the effects of lunar phase on wildlife are limited and
+have largely focused on prey species [30, 31]. Less is known about the behavior of nocturnal
+predators in response to shifting lunar phase. We examined differences in daily movement and
+habitat selection of ocelots and bobcats in response to varying lunar phase. If varying lunar
+phases create ecologically meaningful differences in visibility or prey activity, ocelots and bobcats will respond by altering movement and habitat selection. We predicted that ocelots would
+increase use of dense vegetation cover during brighter periods and decrease movement during
+full moons. We predicted less effect of shifting lunar phase on the activity and habitat selection
+of bobcats as they are more active during diurnal and crepuscular periods and use a broader
+range of cover types than ocelots. Understanding the factors that influence activity and habitat
+use will improve overall understanding of the ecology of ocelots and foraging ecology of the species. By identifying differences in habitat selection between ocelots and bobcats, we can better
+understand how coexistence is facilitated and, ultimately, improve conservation of a threatened,
+native carnivore. In addition, understanding the factors that influence nocturnal movement can
+potentially improve recovery and conservation efforts to minimize the impact of vehicle collisions, the largest source of mortality for Texas ocelots [32, 33].
+
+Methods
+Study area
+We conducted this study on the East Foundation’s El Sauz Ranch and the Yturria Family’s San
+Francisco Ranch located in Willacy and Kenedy counties in the southern tip of Texas, USA
+(Fig 1). The El Sauz Ranch (113 km2) is an operational cattle (Bos taurus indicus) ranch with
+an emphasis on jointly managing land for native wildlife. The ranch features a variety of landscape features ranging from areas of woody vegetation cover, grasslands, prairies, sand dunes,
+coastal wetlands, and anthropogenic water features. The San Francisco Ranch (25.9 km2) manages land for hunting of ungulates, land stewardship, and the conservation of ocelots [26]. This
+ranch also features two conservation easements (totaling 1.98 km2), managed by the US Fish
+and Wildlife Service Lower Rio Grande Valley National Wildlife Refuge Complex [26], which
+contain highly dense patches of woody and herbaceous vegetation. Patches of woody vegetation in these area are comprised of crucifixion thorn (Castela emoryi), live oak (Quercus virgininiaI), lotebush (Ziziphus obtusifola), desert olive (Forestiera angustifolia), snake-eyes
+(Phaulothamnus spinescens), honey mesquite (Prosopis glandulosa), white brush (Aloysia gratissima), lime prickly ash (Zanthoxylum fagara), crucita (Chromolaena odorata), spiny hackberry (Celtis pallida), and thornshrub (Acacia farnesiana) [23, 25, 26].
+The region has a subtropical and semi-arid climate and temperatures in the area typically
+range from 10˚C to 36˚C; mean annual temperature is 23˚C [34, 35]. Woody vegetation in the
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+3 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Fig 1. Study area for examining habitat selection and movement rates of ocelots (Leopardus pardalis) and bobcats (Lyn rufus)
+during new and full moons from 2017 to 2021. The left polygon denotes the Yturria Family’s San Francisco Ranch, and the right
+polygon denotes the East Foundation’s El Sauz Ranch in Willacy and Kenedy counties, Texas, USA. Figure was created in ESRI ArcMap
+10.8.1.
+https://doi.org/10.1371/journal.pone.0286393.g001
+
+area forms patches of dense canopy that can provide some reprieve from the extreme heat during the day. The area receives inconsistent rainfall leading to periodic drought; mean annual
+rainfall is 68 cm with seasonal variation, typically greater in the spring [34, 35]. This area has
+very low light pollution and is considered Bortle class 3, rural sky [36].
+
+Animal captures
+We captured 8 ocelots (3 males and 5 females) and 13 bobcats (7 males and 6 females) between
+January 2017 and May 2021. All captured animals were of adult age. We used single-door
+Tomahawk box-traps (108 x 55 x 40cm; Tomahawk Trap Co., Tomahawk, WI, USA). We
+baited the box-traps with a live chicken (Gallus gallus) or pigeon (Columbia livia) contained in
+a separate compartment inaccessible to the trapped animal. Captured ocelots and bobcats were
+immobilized using a 4:1 mixture of tiletamine hydrochloride and zolazepam hydrochloride
+(TelazolTM, Zoetis, Florham Park, NJ, USA) at a dose of 5mg/kg in 2017 [37] and a mixture of
+ketamine hydrochloride (4–5 mg/kg) and medetomidine HCl (0.05 mg/kg) and received a
+reversal of 5 mg of atipamezole per 1 mg medetomidine (ZooPharm, Laramie, WY, USA)
+from 2019–2021 [23, 26]. Each individual was then fitted with a Lotek Minitrack GPS or Litetrack satellite Iridium-GPS collar (LotekTM, New Market, ON, Canada). Collars recorded locations every 30–60 minutes and were programmed to automatically drop after either 4–6
+month period or a 12-month period. Capture and handling of wildlife were conducted in
+accordance with United States Fish and Wildlife Service permit (#PRT-676811), Texas Parks
+and Wildlife Department permit (#SP0190-600), and Texas A&M University Kingsville Institutional Animal Care and Use Committee protocols (2012-12-20B-A2, 2019-2-28A-2-28B).
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+4 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Analysis
+Habitat selection. We compared habitat selection during new moons versus full moons. As
+we were interested in nocturnal behavior, we removed locations collected during the day (sunrise–sunset) and conducted analyses on nighttime locations (sunset–sunrise). Lunar phase of each
+GPS location was classified using the ‘lunar.phase’ function in the ‘lunar’ package in R (version
+4.1.2) [38, 39]. We used the 4-phase classification (new, full, waxing, and waning) and retained
+only locations collected during the new and full moons. We determined habitat selection using a
+step selection framework and created 10 random steps for each observed step, based on the step
+length and turning angle between successive steps [40]. We obtained landscape characteristics
+using light image detection and ranging (LiDAR) data flown by the United States Geological Survey in 2018 [41]. LiDAR data were classified using LP360 by GeoCue and landscape rasters were
+created at a spatial resolution of 10 m [26]. Data were classified into one of the following classes:
+water, road, buildings, ground, and vegetation. To understand how use of landscape characteristics
+differed between lunar phases, we considered the following landscape variables: % vertical canopy
+cover, distance to dense cover (> 75% canopy; m), distance to open areas (< 25% canopy; m),
+patch area of dense cover (m2) and density of 0–1 m vegetation (points per cell; 26). We selected
+these variables to characterize the horizontal and vertical structure of dense vegetation and open,
+non-wooded areas characterized by bare ground and open herbaceous cover. We modeled habitat
+selection using mixed-effect logistic regression models in the ‘survival’ package in R [38–40, 42].
+We evaluated a linear model that included the five landscape variables described and a random
+intercept of animal ID [40] separately for data collected during new moons versus full moons for
+ocelots and bobcats and compared selection between lunar phases and between species.
+Step length. We evaluated differences in step length between new moons and full moons
+using an analysis of variance (ANOVA). In addition, we examined the effect of nocturnal conditions on the step length of ocelots and bobcats. Specifically, we examined the effect of changing illumination and night length on step length. Illumination was obtained for each GPS
+location using the ‘lunar.illumination’ function in the ‘lunar’ package in R [38, 39]. We
+obtained the length of night by using the ‘daylength’ function in the ‘geosphere’ package in R
+[43] and subtracting this value from 24 (the total diel period). We modeled step length of ocelots and bobcats as a function of night length and illumination using mixed effect linear regression models and the ‘lmer’ function in the ‘lme4’ package in R [39, 44].
+
+Results
+Habitat selection—Ocelots
+We collected a total of 4,567 and 4,101 GPS locations from ocelots during the full and new moon
+respectively. Habitat selection of ocelots was highly similar between new and full moons (Table 1;
+Fig 2). Across lunar phase, ocelots selected closer to dense cover (> 75% canopy cover; OR = 0.58,
+95% CI = [0.44, 0.76] during full moons and 0.56, 95% CI = [0.39, 0.79] during new moons), greater
+vertical canopy cover (OR = 1.78, 95% CI = [1.53, 2.06] during full moons and 1.61, 95% CI = [1.38,
+1.88] during new moons), and higher density of 0–1 m vegetation (OR = 1.49, 95% CI = 1.29, 1.71
+during full moons and 1.36, 95% CI = [1.26, 1.47 during new moons). Ocelots selected larger
+patches of dense cover during new moons (OR = 1.14, 95% CI = [0.99, 1.31]; α = 0.07) but used
+larger patches in proportion to availability during full moons (OR = 1.04, 95% CI = [0.94, 1.16]).
+
+Habitat selection–Bobcats
+We collected a total of 7,132 and 7,158 GPS locations from bobcats during the full and new
+moon respectively. Habitat selection of bobcats differed between new and full moons (Table 2;
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+5 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Table 1. Habitat selection of ocelots (Leopardus pardalis) during new and full moons in southern Texas, USA from 2017–2021, modeled using mixed-effect logistic
+regression models. Models included distance to open areas (< 25% canopy cover; ‘DistLowCover’), distance to dense cover (> 75% canopy cover; ‘DistHeavyCover’),
+patch area of dense cover (‘PatchArea’), percent vertical canopy cover (‘CanopyCover’) and density of 0–1 m vegetation (Density1mVeg). Each model included animal ID
+as a random intercept; all variables were scaled and centered by standard deviation.
+New Moon
+
+Coef
+
+exp(Coef)
+
+Std. Error(coef)
+
+p Value
+
+DistLowCover
+
+0.0911
+
+1.0954
+
+0.0250
+
+0.3013
+
+DistHeavyCover
+
+-0.5851
+
+0.5571
+
+0.1454
+
+0.0009
+
+PatchArea
+
+0.1303
+
+1.1392
+
+0.0598
+
+0.0710
+
+CanopyCover
+
+0.4758
+
+1.6092
+
+0.0413
+
+< 0.0001
+
+Density1mVeg
+
+0.3060
+
+1.3580
+
+0.0183
+
+< 0.0001
+
+DistLowCover
+
+0.0847
+
+1.0883
+
+0.0241
+
+0.4170
+
+DistHeavyCover
+
+-0.5522
+
+0.5757
+
+0.1552
+
+0.0001
+
+PatchArea
+
+0.0443
+
+1.0453
+
+0.0336
+
+0.3917
+
+CanopyCover
+
+0.5752
+
+1.7775
+
+0.0417
+
+< 0.0001
+
+Density1mVeg
+
+0.3977
+
+1.4884
+
+0.0168
+
+< 0.0001
+
+Full Moon
+
+https://doi.org/10.1371/journal.pone.0286393.t001
+
+Fig 2). During full moons, bobcats selected closer to dense cover (OR = 0.73, 95% CI = [0.60,
+0.87]) and larger patches of dense cover (OR = 1.12, 95% CI = [1.08, 1.17]), however, during
+new moons bobcats used these areas in proportion to availability (OR = 0.84, 95% CI = [0.68,
+1.04] for distance to dense cover and 1.03, 95% CI = [0.93, 1.14] for patch area of dense cover).
+Across lunar phase, bobcats selected closer to open areas (< 25% canopy cover; OR = 0.89,
+95% CI = [0.81, 0.98] during full moons and 0.89, 95% CI = [0.83, 0.96] during new moons),
+greater vertical canopy cover (OR = 1.11, 95% CI = [1.00, 1.25] during full moons; α = 0.06
+and 1.17, 95% CI = [1.06, 1.30] during new moons), and greater density of 0–1 m vegetation
+(OR = 1.10, 95% CI = [1.05, 1.14] during full moons and 1.11, 95% CI = [1.06, 1.15] during
+new moons).
+
+Step length–Ocelots & bobcats
+Ocelots moved greater distances during new moons compared to full moons (F value = 5.36,
+p = 0.021; mean step length between 30 min locations = 122.83 m during full moons and
+131.57 during new moons; Fig 3). Step length of ocelots was positively associated with length
+of night, such that each increasing hour of night was associated with an average of 10.32 m
+greater step length ocelots (Table 3). Increasing illumination was negatively associated with
+movement, such that each unit increase in illumination was associated with 11.26 m shorter
+step length by ocelots.
+Step length of bobcats did not differ between new moons and full moons (F value = 2.65,
+p = 0.104; mean step length between 30 min locations = 120.24 m during full moons and
+124.08 during new moons). Bobcats moved greater distances during longer nights, such that
+each hour increase in the length of night was associated with 10.58 m greater step length by
+bobcats. Varying illumination did not affect the step length of bobcats.
+
+Discussion
+Habitat selection and movement of wildlife are influenced by a variety of abiotic factors [45].
+Among these, changing lunar phase has the potential to influence habitat selection of predators
+and prey species [9, 14]. Prey species may reduce movement or select for more secure habitat
+during brighter periods, the predation risk hypothesis, or alternatively may increase movement
+due to increased foraging success and predator detection, the visual acuity hypothesis [46].
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+6 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Fig 2. Coefficient estimates from model of habitat selection of ocelots (Leopardus pardalis) and bobcats (Lynx rufus) during new
+and full moons in southern Texas, USA from 2017–2021. We used mixed effect logistic regression models that included distance to
+open areas (< 25% canopy cover; ‘DistLowCover’), distance to dense cover (> 75% canopy cover; ‘DistHeavyCover’), patch area of
+dense cover (‘PatchArea’), percent vertical canopy cover (‘CanopyCover’) and density of 0–1 m vegetation (Density1mVeg). Each model
+included animal ID as a random intercept; all variables were scaled and centered by standard deviation.
+https://doi.org/10.1371/journal.pone.0286393.g002
+
+Predators may similarly adjust their movement and habitat selection in response to changing
+prey behavior [15], however, habitat selection of predators in response to changing lunar
+phase remains largely undocumented. We examined habitat selection and movement of ocelots and bobcats during new and full moons and observed differences between species and
+lunar phase. Further, our findings reveal new insights that add to a growing literature regarding the biology, coexistence and interactions of these sympatric felids in parts of their shared
+geographic range.
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+7 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Table 2. Habitat selection of bobcats (Lynx rufus) during new and full moons in southern Texas, USA from 2017–2021, modeled using mixed-effect logistic regression models. Models included distance to open areas (< 25% canopy cover; ‘DistLowCover’), distance to dense cover (> 75% canopy cover; ‘DistHeavyCover’), patch
+area of dense cover (‘PatchArea’), percent vertical canopy cover (‘CanopyCover’) and density of 0–1 m vegetation (Density1mVeg). Each model included animal ID as a
+random intercept; all variables were scaled and centered by standard deviation.
+New Moon
+
+Coef
+
+exp(Coef)
+
+Std. Error(coef)
+
+p Value
+
+DistLowCover
+
+-0.1132
+
+0.8930
+
+0.0209
+
+0.0022
+
+DistHeavyCover
+
+-0.1713
+
+0.8426
+
+0.0316
+
+0.1096
+
+PatchArea
+
+0.0332
+
+1.0338
+
+0.0246
+
+0.5170
+
+CanopyCover
+
+0.1577
+
+1.1708
+
+0.0219
+
+0.0025
+
+Density1mVeg
+
+0.1032
+
+1.1087
+
+0.0133
+
+< 0.0001
+
+DistLowCover
+
+-0.1157
+
+0.8907
+
+0.0208
+
+0.0228
+
+DistHeavyCover
+
+-0.3196
+
+0.7264
+
+0.0383
+
+0.0005
+
+PatchArea
+
+0.1148
+
+1.1216
+
+0.0246
+
+< 0.0001
+
+CanopyCover
+
+0.1084
+
+1.1145
+
+0.0225
+
+0.0602
+
+Density1mVeg
+
+0.0932
+
+1.0977
+
+0.0136
+
+< 0.0001
+
+Full Moon
+
+https://doi.org/10.1371/journal.pone.0286393.t002
+
+Contrary to our first prediction, habitat selection of ocelots was highly consistent between
+lunar phases. With the exception of selecting for larger patches during new moons, habitat
+selection was nearly identical between new and full moons. Selection for larger patches during
+new moons may be potentially explained by differences in habitat selection of prey, wherein
+
+Fig 3. Step length (m) of ocelots (Leopardus pardalis) and bobcats (Lynx rufus) during new and full moons in southern Texas, USA
+from 2017–2021. Boxes represent the range from the lower quartile to the upper quartile; horizontal black line denotes the median
+value. Whiskers represent 1.5X of the interquartile range. Step length differed between new and full moons for ocelots but not bobcats,
+wherein ocelots moved greater distances during new moons compared to full moons.
+https://doi.org/10.1371/journal.pone.0286393.g003
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+8 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Table 3. Estimates from mixed effect linear model describing step length as a function of length of night (‘NightLength’) and lunar illumination (‘Illumination’) for ocelots (Leopardus pardalis; top) and bobcats (Lynx rufus;
+bottom) in South Texas, USA from 2017–2021.
+Ocelots
+Estimate
+
+Std. Error
+
+Intercept
+
+25.9080
+
+40.6690
+
+p Value
+0.5318
+
+NightLength
+
+10.3190
+
+2.2070
+
+< 0.0001
+
+Illumination
+
+-11.2590
+
+3.8610
+
+0.0036
+p Value
+
+Bobcats
+Estimate
+
+Std. Error
+
+Intercept
+
+0.5666
+
+22.9948
+
+0.980
+
+NightLength
+
+10.5778
+
+1.6018
+
+< 0.001
+
+Illumination
+
+-3.2758
+
+2.4766
+
+0.1860
+
+https://doi.org/10.1371/journal.pone.0286393.t003
+
+prey species may remain within larger patches during darker nights due to poor foraging efficiency and in response, ocelots may be increasing use of these larger patches of dense vegetation. Ocelots have been documented altering their habitat selection because of increased lunar
+illumination, avoiding open areas and increasing use of dense vegetation during brighter lunar
+periods [22, 27], however, we did not document such a relationship. These differences may be
+attributable to an attempt to reduce overlap with larger, more dominant felids such as jaguar
+(Panthera onca) and puma (Puma concolor; absent in our study area), which did not alter their
+movement during moon phases [47]. Further, ocelots have strong eyesight and are adept at
+nocturnal hunting, such that they may be able to effectively hunt regardless of the presence or
+absence of light on the landscape [14, 28, 48]. We did, however, observe differences in movement such that ocelots moved less during full moons than new moons and had shorter step
+lengths with increasing illumination, partially supporting our first prediction. Past literature
+has shown contrasting results on the activity of ocelots in relation to lunar phase. Ocelots
+showed the greatest movement during darker nights surrounding the new moon [22, 49], consistent with our results. In other locations, however, movement of ocelots was unrelated to
+lunar phase [50–52] or increased during brighter periods [14], contrasting our results. The differences observed in these studies may be attributable to some combination of differences in
+the vegetation communities, presence of more dominant felids, or activity of prey in response
+to the lunar phase. Activity of ocelots and their prey species overlapped in relation to lunar
+phase and any differences in activity of prey were thought to relate to differences in visual ability of the species [14, 51]. A similar pattern of reduced movement during full moons was
+observed in maned wolves, also attributed to temporal differences in prey availability [16].
+Data on preferred prey within our study area were not collected during the duration of our
+study, however, we may expect similar overlap between ocelots and their prey species which
+may suggest greater activity during darker nights and explain the greater movement rate of
+ocelots during new moons.
+We found partial support for our second prediction. Bobcats exhibited differences in habitat selection between new and full moons, in that during full moons, bobcats selected for larger
+patches of cover and selected closer to dense cover. This difference in habitat selection may be
+due to activity of prey or related to reducing detection while hunting. We also observed some
+trends that appeared in contrast to the behavior of ocelots, wherein ocelots selected larger
+patches of cover during new moons while bobcats used cover at a greater extent during full
+moons. While we were unable to find a comparison for habitat selection of bobcats in relation
+to lunar phase, bobcats and ocelots did exhibit contrasting activity patterns regarding
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+9 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+movement wherein ocelots were most active during new moons, consistent with our results,
+while bobcats were more active during the daytime on dark nights and at night on brighter
+nights [12, 49]. Bobcats are described as having vision less suited for nighttime predation compared to other feline species [12, 28]. As such, they may take advantage of hunting during
+brighter periods but require greater vegetation cover for camouflage, while in contrast ocelots
+may rely on their superior vision to hunt effectively during darker nights. We observed no difference in step length of bobcats between lunar phase, contrasting prior studies [12, 49], however, we did observe differences in habitat selection of bobcats but not ocelots that may
+provide support for the visual acuity hypothesis.
+Changing lunar conditions have the potential to influence the movement and habitat selection of nocturnal species [9, 16]. Past studies have examined activity levels of various carnivores in relation to moonlight, including ocelots and bobcats [17, 49, 53–55], as well as other
+mammals [8, 9, 11] using camera traps, however, our study provides the novel approach of
+also incorporating habitat selection in relation to lunar phase using high-frequency GPS data.
+In doing so, we provide evidence of differing responses to shifting lunar phase by two sympatric felids and show that ocelots alter step length but not habitat selection while bobcats altered
+habitat selection but not step length in response to shifting lunar phase. These differences
+between species may help to facilitate coexistence during shifting nocturnal environments (i.e.,
+new moons versus full moons). Further, we provide some potential evidence for the visual acuity hypothesis, wherein ocelots, the more visually adept species increase movement during the
+darkest periods, potentially to mirror activity of prey. In contrast, bobcats, the more crepuscular species with less developed nocturnal vision [26, 28], showed greater selection for vegetation cover during brighter periods, potentially to facilitate hunting without detection by prey.
+Identifying the abiotic factors that influence movement and habitat selection are essential
+to understanding the ecology of a species and can provide insight into interspecific coexistence, foraging ecology, and recovery efforts for endangered species such as the ocelot. Our
+results may also have applications for wildlife-road ecology studies, wherein lunar periods of
+higher movement may influence the timing and where species successfully cross roadways
+[33] or succumb to vehicle-collisions [32, 56–58]. In the case of ocelots, understanding the factors that influence movement can play a vital role in management by better identifying periods
+of higher movement which may influence ocelot-vehicle collisions, an important source of
+mortality for Texas ocelots [32]. As such, darker nights may be particularly high-risk for vehicle collisions due to decreased visibility and higher movement rates of ocelots.
+
+Acknowledgments
+We would like to thank all of our technicians and collaborators on the project that made this
+study possible. This is manuscript number 098 of the East Foundation and manuscript number
+23–105 of the Caesar Kleberg Wildlife Research Foundation.
+
+Author Contributions
+Conceptualization: Maksim Sergeyev, Jason V. Lombardi, Michael E. Tewes.
+Data curation: Maksim Sergeyev, Jason V. Lombardi.
+Formal analysis: Maksim Sergeyev.
+Funding acquisition: Michael E. Tewes, Tyler A. Campbell.
+Methodology: Maksim Sergeyev, Jason V. Lombardi.
+Project administration: Michael E. Tewes, Tyler A. Campbell.
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+10 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+Writing – original draft: Maksim Sergeyev.
+Writing – review & editing: Maksim Sergeyev, Jason V. Lombardi, Michael E. Tewes, Tyler A.
+Campbell.
+
+References
+1.
+
+Long J. and Nelson T. 2015. Home range and habitat analysis using dynamic time geography. Journal
+of Wildlife Management 79:481–490.
+
+2.
+
+Horne J.S., and Garton E.O. 2006. Selecting the best home range model: an information-theoretic
+approach. Ecology. 87:1146–1152. https://doi.org/10.1890/0012-9658(2006)87[1146:stbhrm]2.0.co;2
+PMID: 16761593
+
+3.
+
+Harvey P.H., and Clutton-Brock T.H. 1981. Primate home-range size and metabolic needs. Behavioral
+Ecology and Sociobiology. 8:151–155.
+
+4.
+
+Gannon M. R., and Willig M. R. 1997. The effect of lunar illumination on movement and activity of the
+red fig-eating bat (Stenoderma rufum). Biotropica. 29:525–529.
+
+5.
+
+Gursky S. 2002. Lunar philia in a nocturnal primate. International Journal of Primatology. 24:351–367.
+
+6.
+
+Chakraborty U. 2018. Effects of different phases of the lunar month on living organisms, Biological
+Rhythm Research. https://doi.org/10.1080/09291016.2018.1526502
+
+7.
+
+Archibald H. L. 2014. The enigma of the 10-year wildlife population cycle solved? Evidence that the periodicity and regularity of the cycel are driven by a lunar zeitgeber. The Canadian Field-Naturalist.
+128:327–340.
+
+8.
+
+Vasquez R. A. 1994. Assessment of predation risk via illumination level: facultative central place foraging in the cricetid rodent Phyllotis darwini. Behavioral Ecology and Sociobiology. 34:375–381.
+
+9.
+
+Kotler B. P., Brown J., Mukherjee S., Berger-Tal O., and Bouskila A. 2010. Moonlight avoidance in gerbils reveals a sophisticated interplay among time allocation, vigilance and state-dependent foraging.
+Proceedings of the Royal Society. 277:1469–1474. https://doi.org/10.1098/rspb.2009.2036 PMID:
+20053649
+
+10.
+
+Prugh L. R., and Golden C. D. 2013. Does moonlight increase predation risk? Meta-analysis reveals
+divergent responses of nocturnal mammals to lunar cycles. Journal of Animal Ecology 83:504–514.
+https://doi.org/10.1111/1365-2656.12148 PMID: 24102189
+
+11.
+
+Griffin P. C., Griffin S. C., Waroquiers C., and Mills L. S. 2005. Mortality by moonlight: predation risk and
+the snowshoe hare. Behavioral Ecology. 16:938–944.
+
+12.
+
+Rockhill A.P., DePerno C. S., and Powell R.A. 2013. The effect of illumination and time of day on movements of bobcats (Lynx rufus). PLoS ONE 8(7): e69213. https://doi.org/10.1371/journal.pone.0069213
+PMID: 23861963
+
+13.
+
+Fanson B. 2010. Effect of direct and indirect cues of predation risk on the foraging behavior of the whitefooted mouse (Peromyscus leucopus). Northeastern Naturalist. 17:19–28.
+
+14.
+
+Huck M., Juarez C. P., and Fernandez-Duque E. 2017. Relationship between moonlight and nightly
+activity patterns of the ocelot (Leopardus pardalis) and some of its prey species in Formosa, Northern
+Argentina. Mammalian Biology. 82:57–64.
+
+15.
+
+Lima S. L. 2002. Putting predators back into behavioral predator-prey interactions. TRENDS in Ecology
+& Evolution 17:70–75.
+
+16.
+
+Sabato M. A. L., Bandeira de Melo L. F., Vaz Magni E. M., Young R. J., and Coelho C. M. 2006. A note
+on the effect of the full moon on the activity of wild maned wolves, Chrysocyon brachyurus. Behavioral
+Processes. 73:228–230.
+
+17.
+
+Penteriani V., Kuparinen A., del Mar Delgado M., Palomares F., Lopez-Bao J. V. Fedriani J. M, et al.
+2013. Responses of a top and a meso predator and their prey to moon phases. Oecolgia. 173:753–
+766. https://doi.org/10.1007/s00442-013-2651-6 PMID: 23579570
+
+18.
+
+Packer C., Swanson A., Ikanda D., and Kushnir H. Fear of Darkness, the Full Moon and the Nocturnal
+Ecology of African Lions. PLoS ONE 6(7): e22285. https://doi.org/10.1371/journal.pone.0022285
+PMID: 21799812
+
+19.
+
+Cozzi G., Broekhuis F., McNutt J. W., Turnbull L. A., Macdonald D. W., and Schmid B. 2012. Fear of the
+dark or dinner by moonlight? Reduced temporal partitioning among Africa’s large carnivores. Ecology.
+93:2590–2599. https://doi.org/10.1890/12-0017.1 PMID: 23431590
+
+20.
+
+Rasmussen G. S. A., and Macdonald D. W. 2012. Masking of the zeitgeber: African wild dogs mitigate
+persecution by balancing time. Journal of Zoology. 286:232–242.
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+11 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+21.
+
+Clarke J.A., 1983. Moonlight’s influence on predator/prey interactions between short-eared owls (Asio
+tlammeus) and deermice (Peromyscus maniculatus). Behav. Ecol. Sociobiol. 13, 205–209, https://doi.
+org//10.1007/BF00299924
+
+22.
+
+Di Bitetti M. S., Paviolo A., and De Angelo C. 2006. Density, habitat use and activity patterns of ocelots
+(Leopardus pardalis) in the Atlantic Forest of Misiones, Argentina. Journal of Zoology. 270:153–163.
+
+23.
+
+Lombardi J. V., Perotto-Baldivieso H. L., Sergeyev M., Veals A. M., Schofield L., Young J. H., et al.
+2021. Landscape structure of woody cover patches for endangered ocelots in Southern Texas. Remote
+Sensing 13, 4001 https://doi.org/10.3390/rs13194001.
+
+24.
+
+Harveson P. M., Tewes M. E., Anderson G. L., and Laack L. L. 2004. Habitat use by ocelots in south
+Texas: implications for restoration. Wildlife Society Bulletin 32:948–954.
+
+25.
+
+Lombardi J. V., Sergeyev M., Tewes M. E., Schofield L. R., Wilkins R. N. 2022. Spatial capture-recapture and LiDAR-derived vegetation metrics reveal high densities of ocelots on Texas ranchlands. Frontiers in Conservation Science 3: 136
+
+26.
+
+Sergeyev M., Holbrook J. D., Lombardi J. V., Campbell T. A., Tewes M. E. 2022. Behaviorally mediated
+coexistence of ocelots, bobcats, and coyotes Using Hidden Markov Models. Oikos. https://doi.org/10.
+1111/oik.09480
+
+27.
+
+Emmons LH, Sherman P, Bolster D, Goldizen A, Terborgh J. 1989. Ocelot behavior in moonlight. In:
+Redford KH, Eisenberg JF (Eds.). Advances in neotropical mammalogy. Gainesville, Florida: The
+Sandhill Crane Press, Inc. pp. 233–242.
+
+28.
+
+Banks M. S., Sprague W. W., Schmoll J., Parnell J A. Q, Love G. D. 2015. Why do animal eyes have
+pupils of different shapes? Sci. Adv. 1, e1500391. https://doi.org/10.1126/sciadv.1500391 PMID:
+26601232
+
+29.
+
+Janecka J. E., Davis I., Tewes M. E., Haines A. M., Caso A., Blankenship T. L., et al. 2016. Genetic differences in the response to landscape fragmentation by a habitat generalist, the bobcat and a habitat
+specialist, the ocelot. Conservation Genetics 17: 1093–1108
+
+30.
+
+Fallows C., Fallows M. and Hammerschlag N. 2016. Effects of lunar phase on predator-prey interactions between white shark (Carcharodon carcharias) and Cape fur seals (Arctocephalus pusillus pusillus). Environmental Biology of Fishes, 99(11), pp.805–812.
+
+31.
+
+Palmer M.S., Fieberg J., Swanson A., Kosmala M. and Packer C. 2017. A ‘dynamic’ landscape of fear:
+prey responses to spatiotemporal variations in predation risk across the lunar cycle. Ecology letters, 20
+(11), pp.1364–1373. https://doi.org/10.1111/ele.12832 PMID: 28901034
+
+32.
+
+Blackburn A., Anderson C. J., Veals A. M., Tewes M. E., Wester D. B., Young J. H. Jr, et al. 2021. Landscpe patterns of ocelot-vehicle collision sites. Landscape Ecology 36:497–511.
+
+33.
+
+Lombardi JV, Yamashita TJ, Blackburn A, Young JH Jr, Tewes ME, Anderson CJ. 2023. Examining the
+spatial structure of a hypothesized road effect zone for ocelots in Texas. Urban Ecosystems.
+
+34.
+
+Norwine J. and Kuruvilla J. (eds.). 2007. The changing climate of south Texas 1900–2100—Problems
+and prospects, impacts and implications: Texas A&M–Kingsville, 158 p.
+
+35.
+
+Haines A. M., Tewes M. E., Lack L. L., Horne J. S., and Young J. H. 2006. A habitat-based population
+viability analysis for ocelots (Leopardus pardalis) in the United States. Biological Conservation
+132:424–436.
+
+36.
+
+Light Pollution Map. 2023. Lightpollutionmap.info
+
+37.
+
+Shindle D. B., and Tewes M. E. 2000. Immobilization of wild ocelots with tiletamine and zolazepam in
+southern Texas. Journal of Wildlife Disease 36:546–550. https://doi.org/10.7589/0090-3558-36.3.546
+PMID: 10941742
+
+38.
+
+Lazaridis E. 2022. lunar: Lunar Phase & Distance, Seasons and Other Environmental Factors. (Version
+0.2–01).
+
+39.
+
+RCoreTeam. 2022. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
+
+40.
+
+Muff S., Signer J., and Fieberg J. 2019. Accounting for individual-specific variation in habitat-selection
+studies: efficient estimation of mixed-effects models using Bayesian or frequentist computation. Journal
+of Animal Ecology 89:80–92. https://doi.org/10.1111/1365-2656.13087 PMID: 31454066
+
+41.
+
+United States Geological Survey (USGS). South Texas Lidar, 2018-02–23.
+
+42.
+
+Therneau T. 2022. A Package for Survival Analysis in R. R package version 3.4–0, https://CRAN.Rproject.org/package=survival.
+
+43.
+
+Hijmans R. J. 2017. geosphere: Spherical trigonometry. Retrieved from https://cran.r-project.org/
+package=geosphere.
+
+44.
+
+Bates D., Mächler M., Bolker B., and Walker S. 2015 “Fitting Linear Mixed-Effects Models Using lme4.”
+Journal of Statistical Software, 67(1), 1–48. https://doi.org/10.18637/jss.v067.i01
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+12 / 13
+
+PLOS ONE
+
+Lunar phase influences movement and habitat selection of sympatric felids
+
+45.
+
+HilleRisLambers J., Harsch M. A., Ettinger A. K., Ford K. R., and Theobald E. J. 2013. How will biotic
+interactions influence climate change-induced range shifts? Annals of the New York Academy of Sciences 1297:112–125. https://doi.org/10.1111/nyas.12182 PMID: 23876073
+
+46.
+
+Botts R. T., Eppert A. A., Wiegman T. J., Blankenship S. R., Rodriguez A., Wagner A. P., et al. 2020.
+Does moonlight increase predation risk for elusive mammals in Costa Rica? Tropical Conservation Science 13:1–21.
+
+47.
+
+Harmsen B. J., Foster R. J., Silver S. C., Ostro L. E. T., and Doncaster C. P. 2011. Jaguar and puma
+activity patterns in relation to their main prey. Mammalian Biology 76:320–324.
+
+48.
+
+Kitchener A.C., Van Vallkenburgh B., and Yamaguchi N. 2010. Felid form and function. In: Macdonald
+D.W., Loveridge A.J. (Eds.), Biology and Conservation of Wild Felids. Oxford University Press,
+Oxford, pp. 83–106
+
+49.
+
+Leonard J. P., Tewes M. E., Lombardi J. V., Wester D. W., Campbell T. A. 2020. Effects of sun angle,
+lunar illumination, and diurnal temperature on temporal movement rates of sympatric ocelots and bobcats in South Texas. PLoS One 15(4): e0231732. https://doi.org/10.1371/journal.pone.0231732 PMID:
+32324759
+
+50.
+
+Maffei L., Noss A. J., Cuellar E., and Rumiz D. I. 2005. Ocelot (Felis pardalis) population densities,
+activity and ranging behavior in the dry forests of Eastern Bolivia: data from camera trapping. Journal of
+Tropical Ecology. 21:349–353.
+
+51.
+
+Pratas-Santiago L. P., Gonçalves A. L. S., da Maia Soares A. M. V., and Spironello W. R. 2016. The
+moon cycle effect on the activity patterns of ocelots and their prey. Journal of Zoology 299:275–283.
+
+52.
+
+Widmer C. E., Perilli M. L. L., Matushima E. R., and Azevedo F. C. C. 2017. Live-trapping ocelots (Leopardus pardalis): traps, baits, injuries, immobilization and costs. Biota Neotropica 17(1): e20150125
+
+53.
+
+Racheva V., Zlatanova D., Peshev D., and Markova E. 2012. Camera traps recorded use of sett sites
+by badgers (Meles meles L., Mammalia) in different habitats. Acta Zoologica Bulgarica 64:145–150.
+
+54.
+
+Symmank M. E., Comer C. E., Kroll J. C. 2014. Using infrared-triggered cameras to monitor activity of
+forest carnivores. Southeastern Naturalist. 13:172–183.
+
+55.
+
+Melville H. I. A. S., Conway W. C., Hardin J. B., Comer C. E., and Morrison M. L. 2020. Abiotic variables
+influencing nocturnal movements of bobcats and coyotes. Wildlife Biology https://doi.org/10.2981/wlb.
+00601
+
+56.
+
+Carvalho N. C., Bordignon M. O., and Shapiro J. T. 2014. Fast and furious: a look at the death of animals on the highway MS-080, Southwestern Brazil. Iheringia, Sér. Zool. 104
+
+57.
+
+Steiner W, Schöll E. M., Leisch F., Hackländer K. 2021. Temporal patterns of roe deer traffic accidents:
+Effects of season, daytime and lunar phase. PLoS ONE 16(3): e0249082. https://doi.org/10.1371/
+journal.pone.0249082 PMID: 33784325
+
+58.
+
+Jarvis L.E., Grant R.A. and SenGupta A. 2021. Lunar phase as a cue for migrations to two species of
+explosive breeding amphibians—implications for conservation. European Journal of Wildlife Research,
+67(1), pp.1–11.
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0286393 November 30, 2023
+
+13 / 13
+
+

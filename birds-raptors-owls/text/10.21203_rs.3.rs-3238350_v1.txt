@@ -1,0 +1,1477 @@
+Badminton Hawk-Eye Challenge: A Lightweight Badminton Detection Network Based on Feature Pyramid
+Hua Jin, Zhiheng Qiang, Jingrui Yan, Xing Zhang, Changda Wang (2023). Research Square. http://dx.doi.org/10.21203/rs.3.rs-3238350/v1. doi:10.21203/rs.3.rs-3238350/v1. Licence: cc-by. Text from pdf.
+
+Badminton Hawk-Eye Challenge: A Lightweight
+Badminton Detection Network Based on Feature
+Pyramid
+Hua Jin (  jinhua@ujs.edu.cn )
+Jiangsu University
+Zhiheng Qiang
+Jiangsu University
+Jingrui Yan
+Nanjing University of Posts and Telecommunications
+Xing Zhang
+Jiangsu University
+Changda Wang
+Jiangsu University
+
+Research Article
+Keywords: Badminton, Hawk-eye, MobileNet, YOLO, Inter-frame Difference
+Posted Date: August 10th, 2023
+DOI: https://doi.org/10.21203/rs.3.rs-3238350/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: No competing interests reported.
+
+Badminton Hawk-Eye Challenge: A Lightweight
+Badminton Detection Network Based on Feature
+Pyramid
+Hua Jin1*, Zhiheng Qiang1 , Xing Zhang1 , Changda Wang1 ,
+Jingrui Yan2
+1* School of Computer Science and Communication Engineering, Jiangsu
+
+University, 301 Xuefu Road, Zhenjiang, Jiangsu, China.
+2 Nanjing University of Posts and Telecommunications, Nanjing, Jiangsu,
+
+China.
+*Corresponding author(s). E-mail(s): jinhua@ujs.edu.cn;
+Abstract
+The utilization of Hawk-eye technology is a reliable method to ensure the fairness and precise while playing. However, due to the high hardware cost such an
+application in amateur badminton matches is nearly impossible. To address this
+problem, this study proposes a convolutional neural network (CNN) based on
+the feature pyramid structure for badminton place’s detection. The model incorporates the improved MobileNetV3 structure with the CBAM mixed attention
+mechanism, the improved CSP structure designed to reduce redundant computation, and reach low memory access through redundant feature information. Its
+objective is that we aim to develop a lightweight model. Furthermore, we have
+incorporated the NWD loss function and frame difference to improve the accuracy
+of the model. Morphological processing is then employed to divide the outline of
+the badminton with the boundary line of the field and determine whether it is out
+of bounds. The model is experimentally evaluated on the badminton dataset created by us. The results indicate that the precise reaches 82.8%, and the map0.5
+reaches 76.8% of the compared YOLOv5 algorithm. Furthermore, the GFLOPs
+and parameter quantity of the proposed model are reduced to 34.9% and 50.46%
+of the compared YOLOv5 algorithm. Based on which we designed a challenge
+system for amateur badminton enthusiasts. Our lightweight Hawk-Eye challenge
+system has much lower hardware costs than the existing Hawk-Eye Challenge
+system, and is flexible in hardware deployment.
+Keywords: Badminton, Hawk-eye, MobileNet, YOLO, Inter-frame Difference
+
+1
+
+1 Introduction
+Hawk-Eye, officially named the ”Instant Replay System” was developed by engineers at Roke Manor Research Limited in Hampshire, England in 2001. Its purpose
+was to provide referees with a tool to make accurate decisions during sports matches,
+including cricket, tennis, and badminton. The system tracks and records the ball’s trajectory and displays graphic images of its path. The technology is patented by Paul
+Hawkins and David Sherry, with ”Hawk-Eye” deriving from Hawkins’ name. The system utilizes 8 to 10 high-speed cameras, four computers, and a large screen to confirm
+whether a ball has crossed the boundary line or landed on it. If a player or coach
+believes that a decision regarding the ball is incorrect, they can appeal to the referee
+and request the use of the Hawk-Eye technology. The application of Hawk-Eye ensures
+fairness and precise in sports matches, enhancing their watchability and entertainment
+value.
+
+Fig. 1 An overview of our lightweight Hawk-Eye Challenge.
+
+The principle of Hawk-Eye technology is not complex but requires precise calculation and processing. Firstly, the computer divides the three-dimensional space of the
+playing field into millimeter-measured units. Then, multiple high-speed cameras are
+set up to capture the basic data of the ball’s flight trajectory from different angles
+simultaneously. When the player serves or the ball lands, the cameras transmit the
+captured images to the computer for analyzing the ball’s trajectory through image
+processing algorithms. Next, through 3D reconstruction technology, the player, net,
+and field elements are established, and the computer generates a three-dimensional
+image show the movement trajectory using the data. Finally, using real-time imaging
+technology, the system presents the three-dimensional rendered scene model, motion
+path, and landing point to the audience and referees on a large screen. The Hawk-Eye
+technology enables referees to judge controversial decisions and make correct decision
+during the game.
+
+2
+
+However, the use of Hawk-Eye technology in amateur badminton matches has
+limitations. Not only requires high-quality camera equipment and computer vision
+technology, but also accurate data processing and analysis ability [1]. Factors such as
+field size and shape, player, and audience position also need to be considered to ensure
+the system’s precise and stability. Moreover, professional technicians are required to
+operate and maintain the system, increasing the cost of usage.
+As the physical fitness and skill level of amateur badminton enthusiasts improve,
+the ball’s speed also increases, making it increasingly challenging for referees to make
+judgments with the naked eye. Therefore, it is necessary to introduce the substitutions of Hawk-Eye system in amateur matches. On that account, this paper proposes a
+convolutional neural network (CNN) based on the feature pyramid structure for badminton detection, by which to build a lightweight Hawk-Eye system for badminton
+amateurs. The paper uses an improved MobileNetV3 BNeck structure and partial
+convolution to reduce the network’s parameters and memory access. We also design
+a loss function that is more suitable for detecting small targets like badminton and
+weakens the sensitivity of traditional IoU loss functions to position deviations in small
+object detection. We construct a lightweight Hawk-Eye challenge system for amateur
+badminton enthusiasts, which achieves badminton detection, landing frame discrimination, badminton contour segmentation, etc. We simplify the research work as a
+flowchart shown in Figure 1. The contributions of the paper are as follows:
+1.We propose a lightweight CNN for the detection of badminton shuttlecocks
+accurately and efficiently.
+2.We redesigned the CSP structure based on the idea of redundant information to
+accelerate processing speed
+3.We integrate frame difference into the neural network for reducing interference
+from background environment during detection and redundant computing.
+4.We implement a lightweight Hawk-Eye challenge system for amateur badminton
+enthusiasts, which integrates badminton detection, falling point frame discrimination,
+badminton segmentation, etc.
+
+2 Related Works
+Currently, research on the Hawk-Eye system mainly falls into two categories:
+traditional tracking algorithms which based methods and deep learning algorithms
+methods. However, these studies often start from a single domain, such as target
+detection, trajectory tracking, and contour segmentation.
+Hawk-Eye systems based on traditional tracking algorithms usually use optical
+flow or differential methods to capture the motion trajectory of the ball and judge
+whether the ball is out of bounds through target feature extraction. For example, Fan
+et al.[2] proposed a method based on an enhanced frame difference method, Sengar
+et al.[3] used frame difference method and W4 algorithm to overcome foreground
+ghosting problem, Xin et al.[4] proposed based on four inter-frame differential method
+and optical flow algorithm to improve the processing speed of optical flow algorithms
+and reduce the impact of environmental factors such as lighting. Li et al.[5] proposed
+algorithm improves the classic Gaussian mixture background models to remove the
+
+3
+
+undesirable subtraction results due to sudden illumination change. Hui Ma et al.[6]
+proposed a robust automatic calibration algorithm for badminton courts.
+Hawk-Eye systems based on deep learning algorithms capture the position, tracking trajectory, and instance segmentation of the ball through neural network learning.
+Badminton detection is essentially the detection of small targets[7]. With continuous research on deep learning and computer vision, several two-stage algorithms such
+as R-CNN[8], Fast R-CNN[9], Faster R-CNN[10], and SPPNet[11] have been developed since 2014. However, two-stage algorithms are relatively inefficient and cannot
+meet real-time requirements. In contrast, single-stage algorithms do not require candidate region classification, so they run faster but with slightly lower precise. Common
+single-stage object detection algorithms include YOLO[12–15] and SSD[16]. Many
+studies have been conducted to comprehensively improve the detection performance
+of small targets, including: Modifying the backbone network of the network, Attention
+Mechanism, Data Augmentation.
+Modifying the backbone network of the network: The backbone network[17–23]
+is crucial as a target feature extractor. Depending on the performance of different
+backbone networks, corresponding modifications can be made. For example, Li Hang
+et al.[24] used skip connections to reduce the number of parameters, accelerate the
+propagation of features in the network, and alleviate the problem of gradient disappearance. Zheng Qiumei et al.[25] used 1×1 and 3×3 alternating convolutions to
+avoid information loss caused by downsampling operations, focusing on shallow feature
+information and removing redundant convolution layers. In addition, WANG[26] proposed an improved feature pyramid model AF-FPN to enhance network information
+extraction capabilities.
+Attention Mechanism: The introduction of attention mechanism is an effective
+method to improve the feature expression ability of small targets. Through channel attention mechanism[27] and spatial attention mechanism[28], neural networks
+can focus on channels and regions that are relevant to the task, and then allocate
+appropriate weights to improve the model’s attention and recognition ability to small
+targets.
+Data Augmentation: Data augmentation can also improve the robustness and precise of small target detection. Geometric transformations, color
+transformations,Mosaic[15], Mixup[29], Cutout[30], Cutmix[31], Fmix[32], GAN[33],
+Autoaugment[34], and other methods can increase the diversity of training data,
+thereby improving the model’s generalization ability and recognition precise.
+For the Hawk-Eye challenge, it is also necessary to track the trajectory of the ball
+and determine the landing point. For example, Huang et al.[35, 36] proposed TrackNet
+network, which is trained not only to recognize the ball image from a single frame
+but also to learn the flight mode from continuous frames. Wei et al.[37] used dynamic
+Bayesian network to predict the position of the tennis ball’s landing point to achieve
+the judgment of the landing area. Ahmed et al.[38] established an Hawk-Eye detection
+system based on the Mask R-CNN model to achieve segmentation of the target.
+
+4
+
+3 Methodology
+In CNNs, as the network depth increases, the model can acquire richer target feature information, thereby improving the precise of target prediction. However, this
+deep network is also prone to losing target location information, especially for small
+targets. Therefore, researchers widely adopt the FPN+PAN[15] structure to improve
+the performance of convolutional neural networks. FPN[39] is a top-down feature
+pyramid that enhances the entire pyramid’s information by passing strong semantic features from higher layers. However, enhancing semantic information alone is
+not enough to solve the problem of losing target location information, so PAN[40]
+introduces a bottom-up pyramid structure on the basis of FPN to supplement lowlevel localization features. Studies have shown that the FPN+PAN structure performs
+extremely well in terms of precise.
+
+Fig. 2 The FPN + PAN structure.
+
+Although FPN+PAN has shown a significant advantage in improving precise, in
+practical applications, such as mobile devices and embedded devices, computing power
+is often limited, so there is a need to build a small and efficient model. This paper
+aims to design a small and fast model based on the MobileNetV3 structure and an
+improved CSP structure that reduces redundant memory accesses. Figure 3. shows
+our network structure.
+
+3.1 Backbone Structure
+In the backbone part, we evaluated the We evaluated the current popular
+lightweight network models. Zhang et al.[41] proposed a lightweight CNN architecture
+called ShuffleNet, while Tan et al. introduced a novel lightweight backbone network
+called EfficientNet[42] based on the balance between network depth, width, and resolution. Additionally, the MobileNet[43–45] series greatly increased the possibility of
+application in resource-constrained scenarios such as mobile devices.
+Considering our practical application, we evaluated the Bneck structure in the
+MobileNetV3 network. The Bneck structure consists of an inverted residual structure and channel attention mechanism. The inverted residual structure consists of
+pointwise convolution, depthwise convolution, and pointwise convolution, where the
+depthwise convolution applies a convolution kernel to each input channel and the
+pointwise convolution uses a 1×1 convolution to aggregate the output. Compared to
+
+5
+
+(a) The network structure.
+
+(b) Branch structure in network structure.
+
+Fig. 3 Backbone Structure.
+
+standard convolution, depthwise convolution is more efficient. However, it only filters
+input channels and does not aggregate them to form new features. Therefore, pointwise
+convolution is used to aggregate features for the output of the depthwise convolution.
+Pointwise convolution is used to achieve information fusion between channels. This
+structure can improve the network’s expressive power and performance. Additionally, the Bneck structure uses squeeze-and-excitation modules (SE channel attention
+mechanism) to address the problem of loss caused by differences in the importance of
+different channels in the feature maps. First, the backbone part increases the dimensionality through 1×1 convolution, expanding the number of channels in the input
+feature layer. Then, feature extraction is performed through a 3×3 depthwise separable convolution. The obtained feature layer is then subjected to global average pooling
+and two fully connected layers to calculate the weight of each channel and adjust the
+channel weight for the attention mechanism. Finally, the output is reduced through
+1×1 convolution.
+
+Fig. 4 BNeck structure combined with CBAM attention mechanism.
+
+6
+
+While the channel attention mechanism only focuses on the channel dimension of
+the feature map and ignores the spatial dimension of the target information[46], we
+added spatial attention mechanism after the channel attention mechanism, forming
+a CBAM[46] hybrid attention mechanism. The spatial attention module focuses on
+which part of the input image contains more important information to form the channel
+attention module. To calculate the spatial attention, average pooling and max pooling
+are applied along the channel direction of each feature point, and the results are
+stacked to generate the channel information of an effective feature map. Thereafter, a
+one-channel standard convolution is used, followed by a Sigmoid activation function,
+to obtain a two-dimensional spatial attention map which represents the weight Ms
+(Ms ∈ R1×H×W ) of each feature point in the input feature map. Finally, the weights
+are multiplied with input feature maps channel by channel.
+Table 1 The backbone network structure.
+Input
+
+Structure
+
+Size
+
+6402 ×3
+3202 ×16
+1602 ×16
+802 ×24
+802 ×24
+402 ×40
+402 ×40
+402 ×40
+402 ×48
+402 ×48
+202 ×96
+202 ×96
+202 ×96
+
+CBS
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+BNeck
+CBS
+
+3×3
+3×3
+3×3
+3×3
+5×5
+5×5
+5×5
+5×5
+5×5
+5×5
+5×5
+5×5
+1×1
+
+Channel Attention
+
+Spatial Attention
+
+√
+
+√
+
+√
+√
+√
+√
+√
+√
+√
+√
+√
+
+√
+√
+√
+√
+√
+√
+√
+√
+√
+
+The CBAM hybrid attention mechanism extracts more comprehensive and accurate target features. The feature F (F ∈ RC×H×W ) obtained from the depthwise
+convolution is multiplied element-wise with the channel weight Mc (Mc ∈ RC×1×1 ) to
+obtain the channel feature Fc. Then, the input is passed through the spatial attention
+module to obtain the spatial feature. The channel feature Fc is multiplied elementwise with the spatial feature Ms to obtain the final feature Fs. The algorithm formula
+is as follows, where δ denotes activation function, σ denotes the sigmoid function,
+W1 ∈ RC/r×C , W2 ∈ RC×C/r denotes the full connection layer, r denotes the proportion of dimensionality reduction and increase and f 7×7 represents a convolution
+operation with the filter size of 7 × 7.
+Fc = Mc(F) = σ(W2 δ(W1 (F))).
+
+(1)
+
+Fs = Ms(Fc) = σ(f 7×7 ([AvgP ool(Fc); M axP ool(Fc)])).
+
+(2)
+
+Fig 4. shows the structure of the Bneck structure with spatial attention mechanism
+being added. Table 1. shows our backbone network structure.
+
+7
+
+3.2 Imporoved CSP Structure
+The Cross-Stage Partial (CSP) structure[47] is a common neural network module
+designed to enhance the network’s feature extraction and generalization capabilities.
+By introducing auxiliary branches, the CSP structure can better capture features of
+different scales and perform well on multiple tasks and datasets. Its structure is shown
+in Figure 3(b).
+However, as the network becomes deeper, the drawbacks of the CSP structure are
+also apparent describe as follows:
+1.High computational complexity: The CSP structure requires multiple convolution
+operations on the feature map, resulting in high computational complexity, requiring
+significant computing resources and time.
+2.Large memory access cost: The branch structure in the CSP structure requires
+more space to store its results, including the weights and biases contained in each
+branch, as well as a series of intermediate results stored in memory for updates and
+calculations during backpropagation. When the number of branches increases and the
+structure becomes more complex, it will lead to an increase in memory access costs.
+As more modules similar to the CSP structure are introduced, it increases frequent memory access, and even if the total number of parameters decreases, it may
+not accurately translate into a reduction in network latency. In addition, the relationship between network latency and FLOPs (total number of operations) and FLOPS
+(operations per second) are not a simple linear relationship.
+Latency =
+
+F LOP s
+.
+F LOP S
+
+(3)
+
+Fig. 5 Height similarity of the same layer feature map in different channels.
+
+Although increasing the number of channels in feature maps can increase the
+richness of features in neural networks, it also increases memory access frequent. Networks such as ShuffleNet[41] and GhostNet[48] use depthwise or group convolution
+to extract spatial features. However, in the process of reducing FLOPs, operators are
+often affected by the side effects of increased memory access. For example, in practical
+applications, to ensure that the precise of DWConv is not reduced, it is usually necessary to perform dimensionality expansion on its feature map, which can lead to a
+several-fold increase in memory access. At the same time, we found that as the number of channels increased, as shown in Figure 5, feature maps have high similarity
+between different channels.
+8
+
+Fig. 6 Network structure of partial convolution.
+
+Based on the idea of partial convolution proposed by Chen[49], we illustrate the
+design of partial convolution in Figure 6. Partial convolution exploits redundancy in
+the feature map and systematically applies regular convolution only on a subset of
+input channels without affecting the remaining channels.
+To update the CSP structure, we construct our CSPfast structure by simply applying regular convolution for spatial feature extraction on a contiguous subset of Cp
+channels in the input channels and keeping the remaining channels unchanged. We set
+Cp to be 1/4 of the original channels, so theoretically, the parameter count of partial
+convolution is only 1/16 of regular convolution. The flops of partial convolution are
+given by:
+H × W × K2 × Cp2 .
+
+(4)
+
+Therefore, our designed CSPFast structure, as shown in Figure 3(b), reduces redundant computation and memory overhead while fully utilizing the redundancy in the
+feature map. Each CSPFast block has a partial convolution layer followed by two
+pointwise convolution layers. The middle pointwise convolution layer serves to allow
+feature information to flow through all channels with an expanded number of channels
+and includes a Shortcut to reuse input features.
+
+3.3 LOSS
+Small objects are difficult to detect and recognize accurately by models due to their
+sizes. The sensitivity to objects of different scales varies greatly based on the Intersection over Union (IoU) loss function. As shown in Figure 7, for small objects, slight
+positional deviations lead to a significant decrease in IoU, which causes inaccurate
+label assignment.
+
+Fig. 7 The IoU between large targets (left) and small targets (right) at the same deviation.
+
+9
+
+To reduce the sensitivity of IoU to positional deviations of small objects, a loss
+function based on Wasserstein distance is devised, namely Normalized Wasserstein
+Distance (NWD)[50]. Wasserstein distance is a method for measuring the difference
+between two probability distributions. The basic idea of Wasserstein distance is to
+view a probability distribution as a collection of points whose mass (i.e., probability)
+is distributed over the entire space. It measures the distance between two distributions
+by computing the minimum cost of transforming one distribution into another.
+For small objects, foreground pixels and background pixels are concentrated at the
+center and edges of the BBox, respectively. To give the center pixel of the BBox the
+highest importance while gradually decreasing the importance of the outer expansion
+area, the weights of different pixels in the bounding box are measured. First, the BBox
+is re-modeled as a two-dimensional Gaussian distribution, and the IoU between the
+predicted and true boxes is transformed into two Gaussian distributions. Secondly, a
+design is proposed that uses Wasserstein distance to measure the distribution distance
+between the two Gaussian distributions.
+For the shape of a badminton, an ellipse is more suitable for the two-dimensional
+Gaussian distribution projection of the BBox, and the center has the highest weight.
+As the weight gradually decreases from the center to the edge, the distribution function
+is best set as an ellipse. Assuming that the rectangular BBox is (x0 , y0 , w, h),(x0 , y0 ) is
+the center of the rectangle, (w, h) is the length and width of the rectangle, the formula
+for constructing the inscribed ellipse of the rectangle is:
+(y − y0 )2
+(x − x0 )2
+= 1.
++
+w 2
+(2)
+( h2 )2
+
+(5)
+
+The probability density function of the two-dimensional Gaussian distribution is
+given by the following equation:
+f (L/µ, Σ) =
+
+exp(− 12 (L − µ)T Σ−1 (L − µ))
+
+.
+(6)
+2
+2π |Σ|
+where L, µ, and Σ represent the coordinates (x, y) of the Gaussian distribution,
+mean vector, and covariance matrix, respectively. The equation is satisfied when:
+1
+(7)
+− (L − µ)T Σ−1 (L − µ) = 1.
+2
+The ellipse in Equation(5) will be the density contour of the two-dimensional Gaussian distribution. Therefore, the target bounding box Bbox = (x0 , y0 , w, h) can be
+modeled as a two-dimensional Gaussian distribution N(µ, Σ):
+" 2
+#
+ 
+w
+x0
+0
+µ=
+, Σ = 4 h2 .
+(8)
+y0
+0 4
+For two two-dimensional Gaussian distributions A = N(µA , ΣA ) and B = N(µB ,
+ΣB ), the Wasserstein distance between A and B is defined as:
+1
+
+2
+
+1
+
+1
+
+W22 (A, B) = ∥µA − µB ∥2 + T r(ΣA + ΣB − 2(ΣB 2 ΣA ΣB 2 ) 2 ).
+It can be simplified as:
+10
+
+(9)
+
+2
+
+1
+
+1
+
+W22 (A, B) = ∥µA − µB ∥2 + ΣA 2 − ΣB 2
+
+2
+F
+
+.
+
+(10)
+
+Substituting the two distributions A and B and normalizing them yields:
+W22 (A, B) = exp(
+
+
+
+w A hA
+,
+x A , yA ,
+2 2
+
+T 
+T
+w B hB
+, xB , yB ,
+,
+2
+2
+
+2
+
+).
+
+(11)
+
+2
+
+Therefore, the loss function:
+LossN W D = 1 − W22 (A, B).
+
+(12)
+
+Normalized Wasserstein Distance (NWD) based on Gaussian distribution is used
+to calculate the similarity between predicted and ground truth targets, which is insensitive to the scale of the targets and is more suitable for measuring the similarity
+between small targets. In our badminton detection task, the scale of the shuttlecock
+changes from small to medium as it approaches, so we add an NWD loss to the loss
+function to compensate for the deficiency of IoU loss in detecting small targets. We
+construct a proportion coefficient R to balance the NWD loss and IoU loss:
+Loss = RLossN W D + (1 − R)LossIoU .
+
+(13)
+
+3.4 Inter-frame Difference
+Inter-frame difference[51] is a motion detection method based on pixel changes.
+It can detect moving objects by comparing pixel value differences between adjacent
+frames. When the pixel difference between two frames exceeds the set threshold, it can
+be considered as object motion at that pixel. By inter-frame difference of all pixels,
+the contour and position information of the moving object can be obtained. However,
+it is susceptible to threshold setting, changes in lighting, and motion speed.
+
+Fig. 8 Issues arising in badminton detection.
+
+In the badminton hawk-eye detection system, accurate detection of the shuttlecock landing position is crucial. By detecting the shuttlecock position, its motion
+
+11
+
+trajectory can be analyzed to identify key frames for subsequent judgment of landing position. However, as shown in Figure 8, when there are small white objects in
+the background during detection, they may be mistaken as shuttlecocks, or the presence of other shuttlecocks in the background may also affect the precise of subsequent
+trajectory analysis. At the same time, badminton targets are sparsely distributed in
+space, resulting in a large amount of computational redundancy during detection.
+To address this issue, we used Inter-frame difference method to locate the motion
+badminton regions before neural network detection shown in (14) and (15) where
+Dn , fn , Rn denotes difference image and grayscale value image and binarization image
+after Inter-frame Difference and T represents threshold. We calculated the difference
+between frames and adjusted an appropriate threshold to identify the areas with
+significant changes, which were the regions containing motion badminton.
+Dn (A, B) = |fn (x, y) − fn−1 (x, y)| .
+(
+255 , Dn (x, y) > T
+Rn (x, y) =
+.
+0
+, else
+
+(14)
+(15)
+
+Detecting these regions was more advantageous in reducing background interference and improving detection accuracy. Figure 9(a). presents the unprocessed video
+frame Figure 9(b). shows the frame difference operation applied to the unprocessed
+video frame in Figure 9, we combined frame difference with detection region preprocessing to select the regions with motion. These regions represent the presence of falling
+badminton balls, and our goal is to detect the falling badminton balls and analyze
+their motion trajectory to find key frames for subsequent processing.
+
+Fig. 9 The preprocessing of video frames by combining inter-frame difference.(a) first line:Normal
+consecutive video frames.(b) middle line:Video frames after inter-frame difference.(c) last
+line:Preprocessing the detection area by combining inter-frame difference.
+
+12
+
+4 Experiment and Results
+4.1 Dataset
+To train the badminton detection algorithm, we created a badminton dataset
+named badminton-dataset, which includes 6,500 images with high diversity. Figure 10.
+shows some sample images from the badminton-dataset. The size of the dataset has
+a significant impact on the precise and generalizability of the algorithm. The dataset
+contains a sufficient number of samples, covering different scenes and angles, badminton with different sizes and densities, various lighting conditions, static images, and
+frames extracted from videos, images of the badminton in stationary and falling states,
+badminton with different colors and shapes, and images captured by different devices,
+including Raspberry Pi, mobile phones, and high-speed cameras. This enhances the
+generalizability of the algorithm, making it applicable to various practical scenarios.
+
+Fig. 10 Badminton dataset.
+
+4.2 Metrics
+The commonly used metrics for evaluating object detection models are the number
+of parameters and GFLOPs, where the number of parameters measures the size of the
+model, and GFLOPs measures the complexity and computational cost of the model,
+with a lower value indicating a faster model.
+In this paper, we evaluate the performance of the algorithm using precision, recall,
+mean average precision (mAP) as comprehensive measure of detection performance,
+mAP0.5, mAP0.5:0.95, number of parameters, and inference time. Precision is used
+to measure the precise of the algorithm, while recall is used to measure the missed
+detection rate of algorithms. The formulas for calculating precision and recall are
+shown in (16) and (17):
+TP
+.
+(16)
+TP + FP
+TP
+.
+(17)
+Recall =
+TP + FN
+TP represents the number of samples predicted as positive that are actually positive, while FN is the number of positive samples predicted as negative. A higher
+value of P indicates higher detection precise, while R represents more comprehensive
+detection.
+P recision =
+
+13
+
+On the basis of the Precision-Recall curve, a data evaluation form can be obtained
+by calculating the average of the Precision values corresponding to each Recall value,
+defined as the average precision (AP), whose formula is:
+AP =
+
+n−1
+X
+
+(ri+1 − ri ) Pinter (ri + 1) .
+
+(18)
+
+i=1
+
+where r1 , r2 ...rn corresponds to the Recall value at the first interpolated Precision
+interval, which is sorted in ascending order. The mAP value is the average precise for
+all categories, calculated by taking the mean of the average precision values for each
+category, as shown in formula (19):
+Σki=1 APi
+.
+(19)
+k
+where mAP0.5 represents the mAP value when IOU is set to 0.5; mAP0.5:0.95
+represents the average mAP value for IOU ranging from 0.5 to 0.95 with a step size
+of 0.05.
+mAP =
+
+4.3 Experimental Results and Analysis
+All experiments were conducted on a 64-bit Windows operating system, Nvidia
+3090 graphics card, PyTorch 1.11, and CUDA11.3. We compared the FLOPs,
+parameter count, and time consumption of commonly used convolution methods to
+demonstrate the significant advantages of the deep convolution and partial convolution used in our designed backbone network over the partial convolution referenced in
+CSPFast. YOLOv5 is the most famous FPN+PAN structure, so we conducted comparative experiments on our network to verify the performance of the structure we
+used.
+
+Fig. 11 Structure diagram of the lightweight Hawk-Eye challenge system.
+
+14
+
+4.3.1 The Lightweight Hawk-Eye Challenge System for Amateur
+Badminton Players
+We have devised a Hawk-Eye Challenge System for amateur badminton enthusiasts, which consists of an acquisition terminal, a control terminal and a service
+processing terminal. The service processing terminal is used for processing the video
+captured by the acquisition terminal. By sending control commands through the control terminal, the video captured by the acquisition terminal is transmitted to the
+service processing terminal for frame-by-frame video processing, including badminton
+detection, trajectory analysis, and judgment of whether the shuttlecock is out of
+bounds. The final landing point of the shuttlecock is determined and the result is
+returned to the referee. The acquisition terminal can be divided into two parts, as
+shown in Figure 12: (a) is a Raspberry Pi collection node equipped with a high-speed
+camera and (b) is a smartphone running a WeChat mini-program. A smartphone can
+be placed at the back boundary line of the badminton court as the shuttlecock moves
+relatively slowly at this position. A Raspberry Pi collection node with a high-speed
+camera can be placed at the sideline of the badminton court as the shuttlecock moves
+relatively fast at this position.
+
+Fig. 12 Interface of the acquisition terminal and control terminal, (a) Using a Raspberry Pi Collection Terminal. (b) Using WeChat program to collect terminals. (c) Acquisition terminal selection
+acquisition location map. (d) Control terminal initiate a challenge. (e) Control terminal parameter
+settings.
+
+15
+
+The referee’s control terminal can set parameters for the acquisition terminal and
+send a challenge signal. When the acquisition terminal receives the challenge signal
+from the control terminal, it uploads the latest recorded footage for the Hawk-Eye
+Challenge, and returns the result to the referee’s control terminal to assist with the
+final judgment.
+Our system has much lower hardware costs than the existing Hawk-Eye challenge
+system. Whether using mobile devices or cameras connected to embedded hardware,
+it has good scalability and elasticity, especially when our acquisition terminal uses
+badminton enthusiasts’ own phones, which hardly requires hardware costs.
+
+4.3.2 Comparison of Common Convolution Methods
+We compared five types of convolutions, including Conv, Depth-Conv, GSConv,
+PConv, and DCNConv, by conducting 4000 computational tests on them with a batch
+size of 8, an image size of 2562 , input and output channels of 128, and a convolution
+kernel size of 32. The Cp channel of the partial convolution was set to one-quarter of
+the channel to obtain the total time consumption, average time consumption, FLOPs,
+and parameter count of each convolution type.Assuming the convolution kernel size is
+K, Cin is the number of input channels, and Cout is the number of output channels,
+the computational complexity of a regular convolution for an output feature map of
+size Wout ×Hout ×Cout can be expressed as follows:
+Wout × Hout × Cout × Cin × K2 .
+
+(20)
+
+For deep convolution, it only performs convolution operations on each channel of the
+input feature map separately, which means each channel has a different convolution
+kernel. The computational complexity of each deep convolution can be expressed as
+follows:
+Wout × Hout × Cin × K2
+
+(21)
+
+For partial convolution, it only performs convolution operations on a portion of the
+input feature map’s Cp channels, and the computational complexity of each partial
+convolution can be expressed as follows:
+Wout × Hout × Cp2 × K2
+
+(22)
+
+From Table 2, it can be seen that both partial convolution and deep convolution
+significantly reduce the computational and parameter complexity compared to traditional convolution, by a factor of 1/16 and 1/8, respectively. Specifically, both partial
+convolution and deep convolution adopt a local perception approach that only considers effective pixels in the input data, enabling the network to greatly reduce its
+parameter count and achieve lightweight network design. Meanwhile, we replace the
+C3 module in the 17th, 20th, and 23rd layers of the network structure with CSPFast
+based on YOLOv5s, YOLOv5m, and YOLOv5l to verify the improvement of CSPFast
+in terms of parameter count, GFLOPs, and computation time (in milliseconds), as
+shown in Table 3, which demonstrates that our CSPFast module can save a significant
+amount of GFLOPs and parameters, especially when the network is deeper and wider.
+
+16
+
+Table 2 Comparison table of each convolutional parameter.
+Type
+
+Total time/s
+
+Average time/s
+
+GFLOPs
+
+Parameters
+
+Conv
+Depth-Conv
+GSConv
+DCNConv
+PConv
+
+47.12329
+49.93101
+70.36638
+287.97444
+65.90714
+
+0.01571
+0.01664
+0.02346
+0.09599
+0.02197
+
+77.578
+9.731
+39.762
+16.576
+5.100
+
+147840
+18304
+75712
+31387
+9472
+
+4.3.3 Ablation Experiment
+The basic parameter settings are as follows: epoch is set to 500, batch size is set to
+32, initial learning rate is 0.01, and both warming up and Mosaic data augmentation
+are used for training. A new test set is also established to calculate the precise(P),
+recall(R), mAP0.5, and mAP0.5:0.95 on the test set, which includes video frames
+extracted from the process of a falling badminton and static badminton images, with
+various poses, scales, and images captured by different devices.
+During the training process, the box loss graph on the validation set is shown on
+the left of Figure 13, and the objectness loss graph is shown on the right of Figure
+13. The smaller the box loss, the more accurate the detection box, and the smaller
+the objectness loss, the more accurate the object detection. From Figure 13, it can be
+seen that the loss value rapidly decreases at the beginning of the training process, and
+with the increase of training time, the training loss gradually decreases and fluctuates
+near the boundary value. When epoch is 400, the loss decreases to a stable level, and
+the model converges.
+We conducted ablation experiments to analyze the performance improvement
+brought by our backbone network, CSPFast structure, and NWD + IoU loss function.
+
+Fig. 13 Boundary Box Loss and Detection Loss.
+
+Our MobileNet+CBAM+CSPFast model and other models, including Yolov5s +
+C3, Yolov5s + CSPFast, MobileNet + SE + C3, MobileNet + CBAM + C3, and
+MobileNet + SE + CSPFast, were evaluated on our test dataset in terms of six metrics:
+GFLOPs and parameter count, precise, recall rate, mAP0.5, and mAP0.5:0.95. Our
+
+17
+
+MobileNet + CBAM + CSPFast model refers to a MobileNet model with a backbone
+network that uses CBAM attention mechanism and our constructed CSPFast module.
+We compared our designed MobileNet + CBAM backbone network with MobileNet
++ SE and Yolov5s, and compared our designed CSPFast structure with C3 structure.
+A.In comparison between SE and CBAM modules
+We plotted heatmaps of the models with added SE and CBAM attention modules
+for small and medium object detection in the first and second layers, respectively, to
+visualize the key areas the network focused on in badminton detection. Fig 14 shows
+the results, with the first group of images corresponding to the first-layer small object
+detection and the second group corresponding to the second-layer medium object
+detection.
+
+Fig. 14 Comparison heatmaps of SE module and CBAM module in the small object detection layer
+(left) and the medium object detection layer (right).
+
+The heatmaps are based on the MobileNet + CBAM + CSPFast, MobileNet +
+SE + CSPFast, MobileNet + CBAM + C3, and MobileNet + SE + C3 structures.
+Qualitative analysis of the heatmaps shows that for the first layer used for small
+object detection, either CBAM+CSPFast or CBAM in the CBAM+C3 structure has
+better detection performance. However, for the second layer used for medium object
+detection, the SE module is affected by some background. A quantitative analysis
+of the model evaluation results in Table 4 shows that the structures using CBAM
+modules have varying degrees of improvement in the four metrics of precision, recall,
+mAP0.5, and mAP0.5:0.95 compared to those using SE modules. Model 12 had a 0.5%,
+1.2%, 1.5%, and 1.2% improvement in the four metrics over Model 11, respectively.
+Model 10 had a 0.4%, 9.3%, 3%, and 0.8% improvement in the four metrics over
+Model 9, respectively. Model 6 had a 1.4%, 2.8%, 0.5%, and 0.7% improvement in
+the four metrics over Model 5, respectively. Model 4 had a 6%, 9.4%, 1.2%, and 0.8%
+improvement in the four metrics over Model 3, respectively.
+B.Comparison between CSPfast module and C3 module
+Model 6 using CSPfast module showed an improvement of 0.3% and 0.9% in
+mAP0.5 and mAP0.5:0.95 respectively compared to model 4 using C3 module. However, there was a significant reduction in parameter count and GFLOPs by 646800 and
+1.1 respectively. Model 5 using CSPfast module showed an improvement of 1.5% and
+18
+
+1.7% in mAP0.5 and mAP0.5:0.95 respectively compared to model 3 using C3 module. Additionally, there was a reduction in parameter count and GFLOPs by 556800
+and 1.1 respectively. Table 5 showed that the use of CSPfast structure resulted in a
+speed improvement of 1-3ms in detection speed compared to C3 structure.
+C.Comparison between NWD loss function and IoU loss function
+We compared our six models using NWD loss and NWD+IoU loss, and Table 4
+showed that our model performed relatively better when using NWD+IoU loss. Our
+model using NWD+IoU loss showed an improvement of 1.4% in precise and a negligible
+change in recall by 0.4%, while mAP0.5 and mAP0.5:0.95 improved by 2.1% and 6.4%
+respectively compared to only using NWD loss. We found that using only NWD or
+IoU loss resulted in a decrease in precise, recall, mAP0.5, and mAP0.5:0.95, which
+was expected because NWD is more suitable for detecting small objects while our test
+set contained objects of different scales. Overall, using NWD+IoU loss yielded better
+results for all models compared to using only NWD or IoU loss.
+
+4.3.4 Trajectory Analysis and Landing Point Determination
+To more accurately analyze the trajectory of a badminton shuttlecock, we first
+filtered the motion areas in the scene using frame difference techniques, as shown in
+Figure 15. The benefit of this approach is that it effectively avoids the impact of false
+detections on subsequent trajectory analysis. Specifically, we removed static noise in
+the background through frame difference operations, thereby improving the precise
+and recall rate of shuttlecock detection. After the motion area was detected, we further
+detected the shuttlecock in this area. This enabled us to more accurately analyze the
+trajectory of the shuttlecock and improve the precise of trajectory analysis.
+
+Fig. 15 Comparison heatmaps of SE module and CBAM module in the small object detection layer
+(left) and the medium object detection layer (right).
+
+19
+
+Table 3. Influence of C3 and CSPFast on the model.
+17th layer
+
+20th layer
+
+23rd layer
+
+times/ ms
+
+GFLOPs
+
+params
+
+times/ms
+
+GFLOPs
+
+params
+
+times/ms
+
+GFLOPs
+
+params
+
+s+CSPFast
+
+1.89
+
+7.1
+
+68608
+
+1.6
+
+5.35
+
+207360
+
+1.89
+
+5.31
+
+826368
+
+m+CSPFast
+
+4.79
+
+20.25
+
+196224
+
+3.99
+
+16.32
+
+634368
+
+2.29
+
+16.24
+
+2531328
+
+l+CSPFast
+
+7.58
+
+43.62
+
+423424
+
+4.89
+
+36.65
+
+1426432
+
+3.79
+
+36.52
+
+5695488
+
+s+C3
+
+2.19
+
+9.38
+
+90880
+
+3.09
+
+7.63
+
+296448
+
+2.19
+
+7.59
+
+1182720
+
+m+C3
+
+5.29
+
+30.51
+
+296448
+
+3.59
+
+26.58
+
+1035264
+
+3.79
+
+26.5
+
+4134912
+
+l+C3
+
+6.78
+
+70.99
+
+690688
+
+4.89
+
+64.02
+
+2495488
+
+3.99
+
+63.88
+
+9971712
+
+Table 4. Impact of Different Methods on the Model.
+Structure
+
+loss
+
+GFLOPs
+
+Parameters
+
+P
+
+R
+
+mAP0.5
+
+mAP0.5:0.95
+
+Yolov5s+C3 (1)
+
+16.6
+
+7063542
+
+81.3
+
+69.3
+
+77.5
+
+48.4
+
+Yolov5s+CSPfast (2)
+
+15.3
+
+6506742
+
+82.7
+
+65.8
+
+78.9
+
+49.8
+
+MobileNet+SE+C3 (3)
+
+NWD+
+
+6.8
+
+4120158
+
+80.1
+
+62.4
+
+74.3
+
+46.7
+
+MobileNet+CBAM+C3 (4)
+
+IoU
+
+6.9
+
+4211049
+
+86.1
+
+71.8
+
+75.5
+
+47.5
+
+MobileNet+SE+CSPfast (5)
+
+5.7
+
+3563358
+
+81.4
+
+65.4
+
+75.3
+
+47.7
+
+Ours (6)
+
+5.8
+
+3564249
+
+82.8
+
+68.2
+
+76.8
+
+48.9
+
+Yolov5s+C3 (7)
+
+16.6
+
+7063542
+
+85.3
+
+66.8
+
+74.5
+
+44.6
+
+Yolov5s+CSPfast (8)
+
+15.3
+
+6506742
+
+84.1
+
+65.9
+
+73.6
+
+45.2
+
+6.8
+
+4120158
+
+78.5
+
+57.8
+
+68
+
+40.3
+
+6.9
+
+4211049
+
+79.9
+
+67.1
+
+71
+
+41.1
+
+MobileNet+SE+CSPfast (11)
+
+5.7
+
+3563358
+
+80.9
+
+67.4
+
+72.2
+
+41.6
+
+Ours (12)
+
+5.8
+
+3564249
+
+85.4
+
+68.6
+
+73.7
+
+42.8
+
+MobileNet+SE+C3 (9)
+MobileNet+CBAM+C3 (10)
+
+NWD
+
+Table 5. Influence of different methods on the detection speed of the model.
+Structure
+
+GFLOPs
+
+Parameters
+
+time/ms
+
+Yolov5s+C3
+
+16.6
+
+7063542
+
+43.5
+
+Yolov5s+CSPfast
+
+15.3
+
+6506742
+
+40.3
+
+MobileNet+SE+C3
+
+6.8
+
+4120158
+
+33.1
+
+MobileNet+CBAM+C3
+
+6.9
+
+4211049
+
+35.7
+
+MobileNet+SE+CSPfast
+
+5.7
+
+3563358
+
+30.2
+
+Ours
+
+5.8
+
+3564249
+
+32.4
+
+Fig. 16 Comparison heatmaps of SE module and CBAM module in the small object detection layer
+(left) and the medium object detection layer (right).
+
+The trajectory of a shuttlecock falling to the ground is relatively simple and fixed.
+Figure 16. shows the annotated trajectory position of the detected shuttlecock center.
+We can use the change in slope of the shuttlecock’s falling trajectory to determine
+the landing frame. During the shuttlecock’s descent, the slope of its falling trajectory
+changes with its state. Therefore, when the shuttlecock is about to land, the slope of
+its falling trajectory will change dramatically. By detecting the slope change, we can
+determine the landing frame of the shuttlecock. Then, we can perform morphological
+processing on the shuttlecock in that frame to determine if it is out of bounds. By
+dividing the shuttlecock’s contour with the boundary line of the field, we can determine
+if the shuttlecock is out of bounds.
+
+5 Conclusion
+This paper proposes a convolutional neural network (CNN) designed with feature pyramid structure for badminton detection. The model combines MobileNetV3
+architecture and an improved CSP structure that reduces redundant computation and
+memory access to create a small and fast model. The main part of the network introduces the BNeck structure with CBAM attention mechanism to compensate for the
+traditional BNeck’s lack of spatial information. To address the problem of high similarity and redundancy in feature map information, the CSPFast structure based on
+the partial convolution idea is proposed to replace the traditional CSP structure. Furthermore, the loss function based on the combination of NWD loss and IoU loss is
+redesigned to improve detection performance for small badminton targets.
+Experimental results show that our model achieves comparable precise, recall,
+mAP0.5, and mAP0.5:0.95 with the original YOLOv5s model, reaching 82.8%, 68.2%,
+75.8%, and 48.4%, respectively, while reducing GFLOPs and parameter count to 34.9%
+and 50.46%, meeting the requirement for lightweight network structure. Moreover,
+badminton detection, trajectory analysis, and landing point judgment are integrated
+into a single system to meet the needs of amateur badminton players. Our lightweight
+Hawk-Eye challenge system has much lower hardware costs than the existing HawkEye challenge system, and our lightweght Hawk-Eye challenge system is flexible
+
+21
+
+in hardware deployment and has good scalability, indicating practical value of our
+proposed model.
+
+References
+[1] Yan Baodong. Hawkeye technology using tennis match. Computer Modelling and New Technologies, 18:400–402, 2014. http://www.cmnt.lv/uploadfiles/ns− 23crt− 067.pdf.
+[2] Yong Fan, Liwei Tian, and Lei Yang. Moving object detection based on enhanced
+frame difference. In Third International Conference on Computer Science and
+Communication Technology (ICCSCT 2022), volume 12506, pages 310–315.
+SPIE, 2022. https://doi.org/10.1117/12.2662562.
+[3] Sandeep Singh Sengar and Susanta Mukhopadhyay. Moving object detection based on frame difference and w4. Signal, Image and Video Processing,
+11:1357–1364, 2017. https://doi.org/10.1007/s11760-017-1093-8.
+[4] Liu Xin and Jin Xuanhong. Algorithm for object detection and
+tracking
+combined
+on
+four
+inter-frame
+difference
+and
+optical
+flow methods. Opto-Electronic Engineering, 45(8):170665–1, 2018.
+https://cn.oejournal.org/article/doi/10.12086/oee.2018.170665.
+[5] Ying-Hong Li, Chang-Zhen Xiong, Yi-Xin Yin, and Ya-Li Liu. Moving
+object detection based on edged mixture gaussian models. In 2009 International Workshop on Intelligent Systems and Applications, pages 1–5, 2009.
+https://doi.org/10.1109/iwisa.2009.5072961.
+[6] Hui Ma and Xuan Ding. Robust automatic camera calibration in badminton court recognition. In 2022 IEEE Asia-Pacific Conference on Image
+Processing, Electronics and Computers (IPEC), pages 893–898. IEEE, 2022.
+https://doi.org/10.1109/ipec54454.2022.9777532.
+[7] LIN Hao, LI Leixiao, YANG Yanyan, MENG Chuang, GAO Jing, LI Kecen,
+WANG Xiaoqiang. Survey of one-stage small object detection methods in deep
+learning. Journal of Frontiers of Computer Science and Technology, 16(1):41,
+2022. http://fcst.ceaj.org/EN/10.3778/j.issn.1673-9418.2110003.
+[8] Ross Girshick, Jeff Donahue, Trevor Darrell, and Jitendra Malik. Rich feature
+hierarchies for accurate object detection and semantic segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages
+580–587, 2014. https://doi.org/10.1109/cvpr.2014.81.
+[9] Ross Girshick. Fast r-cnn. In Proceedings of
+national conference on computer vision, pages
+https://doi.org/10.1109/iccv.2015.169.
+
+22
+
+the IEEE
+1440–1448,
+
+inter2015.
+
+[10] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster
+r-cnn: Towards real-time object detection with region proposal networks. Advances in neural information processing systems, 28, 2015.
+https://doi.org/10.1109/tpami.2016.2577031.
+[11] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Spatial pyramid
+pooling in deep convolutional networks for visual recognition. IEEE transactions on pattern analysis and machine intelligence, 37(9):1904–1916, 2015.
+https://doi.org/10.1109/tpami.2015.2389824.
+[12] Joseph Redmon, Santosh Divvala, Ross Girshick, and Ali Farhadi. You only
+look once: Unified, real-time object detection. In Proceedings of the IEEE
+conference on computer vision and pattern recognition, pages 779–788, 2016.
+https://doi.org/10.1109/cvpr.2016.91.
+[13] Joseph Redmon and Ali Farhadi. Yolo9000: better, faster, stronger. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages
+7263–7271, 2017. https://doi.org/10.1109/cvpr.2017.690.
+[14] Joseph Redmon and Ali Farhadi. Yolov3: An incremental improvement. arXiv
+preprint arXiv:1804.02767, 2018. https://doi.org/10.48550/arXiv.1804.02767.
+[15] Alexey Bochkovskiy, Chien-Yao Wang, and Hong-Yuan Mark Liao. Yolov4: Optimal speed and accuracy of object detection. arXiv preprint arXiv:2004.10934,
+2020. https://doi.org/10.48550/arXiv.2004.10934 Focus to learn more.
+[16] Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed,
+Cheng-Yang Fu, and Alexander C Berg. Ssd: Single shot multibox detector.
+In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The
+Netherlands, October 11–14, 2016, Proceedings, Part I 14, pages 21–37. Springer,
+2016. https://doi.org/10.48550/arXiv.1512.02325.
+[17] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.
+https://doi.org/10.48550/arXiv.1409.1556.
+[18] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Spatial pyramid
+pooling in deep convolutional networks for visual recognition. IEEE transactions on pattern analysis and machine intelligence, 37(9):1904–1916, 2015.
+https://doi.org/10.1109/tpami.2015.2389824.
+[19] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770–778, 2016.
+https://doi.org/10.1109/cvpr.2016.90.
+
+23
+
+[20] Andrew G Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun
+Wang, Tobias Weyand, Marco Andreetto, and Hartwig Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint
+arXiv:1704.04861, 2017. https://doi.org/10.48550/arXiv.1704.04861.
+[21] Gao Huang, Zhuang Liu, Laurens Van Der Maaten, and Kilian Q Weinberger.
+Densely connected convolutional networks. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 4700–4708, 2017.
+https://doi.org/10.1109/cvpr.2017.243.
+[22] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed,
+Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 1–9, 2015.
+https://doi.org/10.1109/cvpr.2015.7298594.
+[23] Xiangyu Zhang, Xinyu Zhou, Mengxiao Lin, and Jian Sun. Shufflenet: An
+extremely efficient convolutional neural network for mobile devices. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages
+6848–6856, 2018. https://doi.org/10.1109/cvpr.2018.00716.
+[24] Hang Li and Ming Zhu. A small object detection algorithm based on on deep
+convolutional neural network. Computer Engineering and Science, 42(04):649,
+2020. DOI: CNKI:SUN:JSJK.0.2020-04-011.
+[25] Qiumei Zheng, Lulu Wang and Fenghua Wang. Small object detection in traffic
+scene based on improved convolutional neural network. Computer Engineering,
+46(6):26–33, 2020. Doi:10.19678/j.issn.1000-3428.0056462.
+[26] Junfan Wang, Yi Chen, Zhekang Dong, and Mingyu Gao. Improved yolov5
+network for real-time multi-scale traffic sign detection. Neural Computing
+and Applications, 35(10):7853–7865, 2023. https://doi.org/10.1007/s00521-02208077-5.
+[27] Xian Zhong, Oubo Gong, Wenxin Huang, Lin Li, and Hongxia Xia. Squeezeand-excitation wide residual networks in image classification. In 2019 IEEE
+International Conference on Image Processing (ICIP), pages 395–399. IEEE,
+2019. https://doi.org/10.1109/icip.2019.8803000.
+[28] Xizhou Zhu, Dazhi Cheng, Zheng Zhang, Stephen Lin, and Jifeng Dai. An empirical study of spatial attention mechanisms in deep networks. In Proceedings of
+the IEEE/CVF international conference on computer vision, pages 6688–6697,
+2019. https://doi.org/10.1109/iccv.2019.00679.
+[29] Hongyi Zhang, Moustapha Cisse, Yann N Dauphin, and David LopezPaz. mixup:
+Beyond empirical risk minimization. arXiv preprint arXiv:1710.09412, 2017.
+https://doi.org/10.48550/arXiv.1710.09412.
+
+24
+
+[30] Terrance DeVries and Graham W Taylor. Improved regularization of convolutional neural networks with cutout. arXiv preprint arXiv:1708.04552, 2017.
+https://doi.org/10.48550/arXiv.1708.04552.
+[31] Sangdoo Yun, Dongyoon Han, Seong Joon Oh, Sanghyuk Chun, Junsuk Choe, and Youngjoon Yoo. Cutmix: Regularization strategy to
+train strong classifiers with localizable features. In Proceedings of the
+IEEE/CVF international conference on computer vision, pages 6023–6032, 2019.
+https://doi.org/10.1109/iccv.2019.00612.
+[32] Ethan Harris, Antonia Marcu, Matthew Painter, Mahesan Niranjan,
+Adam Pr ugel-Bennett, and Jonathon Hare. Fmix:Enhancing mixed
+sample data augmentation. arXiv preprint arXiv:2002.12047, 2020.
+https://doi.org/10.48550/arXiv.2002.12047.
+[33] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David WardeFarley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative
+adversarial networks. Communications of the ACM, 63(11):139–144, 2020.
+https://doi.org/10.48550/arXiv.1406.2661.
+[34] Ekin D Cubuk, Barret Zoph, Dandelion Mane, Vijay Vasudevan, and Quoc V
+Le. Autoaugment: Learning augmentation policies from data. arXiv preprint
+arXiv:1805.09501, 2018. https://doi.org/10.48550/arXiv.1805.09501.
+[35] Yu-Chuan Huang. TrackNet: Tennis Ball Tracking from Broadcast Video by
+Deep Learning Networks. Master Thesis, National Chiao Tung University,
+Taiwan, April 2018.
+[36] Yu-Chuan Huang, I-No Liao, Ching-Hsuan Chen, Tsı̀-Uı́ İk, and Wen-Chih
+Peng. Tracknet: A deep learning network for tracking high-speed and tiny
+objects in sports applications. In 2019 16th IEEE International Conference on
+Advanced Video and Signal Based Surveillance (AVSS), pages 1–8. IEEE, 2019.
+https://doi.org/10.1109/avss.2019.8909871.
+[37] Xinyu Wei, Patrick Lucey, Stuart Morgan, and Sridha Sridharan. Forecasting
+the next shot location in tennis using fine-grained spatiotemporal tracking data.
+IEEE Transactions on Knowledge and Data Engineering, 28(11):2988–2997.
+https://doi.org/10.1109/tkde.2016.2594787.
+[38] Ahmed Abdelmoamen Ahmed and Mathias Echi. Hawk-eye: An ai-powered
+threat detector for intelligent surveillance cameras. IEEE Access, 9:63283–63293,
+20. https://doi.org/10.1109/access.2021.3074319.
+[39] Tsung-Yi Lin, Piotr Dollar, Ross Girshick, Kaiming He, Bharath Hariharan
+and Serge Belongie. Feature pyramid networks for object detection. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages
+2117–2125, 2017. https://doi.org/10.1109/cvpr.2017.106.
+
+25
+
+[40] Shu Liu, Lu Qi, Haifang Qin, Jianping Shi, and Jiaya Jia. Path aggregation network for instance segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 8759–8768, 2018.
+https://doi.org/10.1109/cvpr.2018.00913.
+[41] Ningning Ma, Xiangyu Zhang, Hai-Tao Zheng, and Jian Sun. Shufflenet v2:
+Practical guidelines for efficient cnn architecture design. In Proceedings of
+the European conference on computer vision (ECCV), pages 116–131, 2018.
+https://doi.org/10.1007/978-3-030-01264-9− 8.
+[42] Mingxing Tan and Quoc Le. Efficientnet: Rethinking model scaling for convolutional neural networks. In International conference on machine learning, pages
+6105–6114. PMLR, 2019. https://doi.org/10.48550/arXiv.1905.11946.
+[43] Andrew G Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun
+Wang, Tobias Weyand, Marco Andreetto, and Hartwig Adam. Mobilenets: Effificient convolutional neural networks for mobile vision applications. arxiv 2017.
+arXiv preprint arXiv:1704.04861. https://doi.org/10.48550/arXiv.1704.04861.
+[44] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and LiangChieh Chen. Mobilenetv2: Inverted residuals and linear bottlenecks. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages
+4510–4520, 2018. https://doi.org/10.1109/cvpr.2018.00474.
+[45] Andrew Howard, Mark Sandler, Grace Chu, Liang-Chieh Chen, Bo Chen,
+Mingxing Tan, Weijun Wang, Yukun Zhu, Ruoming Pang, Vijay Vasudevan, et al. Searching for mobilenetv3. In Proceedings of the IEEE/CVF
+international conference on computer vision, pages 1314–1324, 2019.
+https://doi.org/10.1109/iccv.2019.00140.
+[46] Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In So Kweon. Cbam: Convolutional block attention module. In Proceedings of the European conference
+on computer vision (ECCV), pages 3–19, 2018. https://doi.org/10.1007/978-3030-01234-2− 1.
+[47] Chien-Yao Wang, Hong-Yuan Mark Liao, Yueh-Hua Wu, Ping-Yang Chen,
+Jun-Wei Hsieh, and I-Hau Yeh. Cspnet: A new backbone that can enhance
+learning capability of cnn. In Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition workshops, pages 390–391, 2020.
+https://doi.org/10.1109/cvprw50498.2020.00203.
+[48] Kai Han, Yunhe Wang, Qi Tian, Jianyuan Guo, Chunjing Xu, and Chang
+Xu. Ghostnet: More features from cheap operations. In Proceedings of the
+IEEE/CVF conference on computer vision and pattern recognition, pages
+1580–1589, 2020. https://doi.org/10.1109/cvpr42600.2020.00165.
+
+26
+
+[49] Jierun Chen, Shiu-hong Kao, Hao He, Weipeng Zhuo, Song Wen, ChulHo Lee, and S-H Gary Chan. Run, don’t walk: Chasing higher flops
+for faster neural networks. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages 12021–12031, 2023.
+https://doi.org/10.48550/arXiv.2303.03667.
+[50] Jinwang Wang, Chang Xu, Wen Yang, and Lei Yu. A normalized gaussian
+wasserstein distance for tiny object detection. arXiv preprint arXiv:2110.13389,
+2021. https://doi.org/10.48550/arXiv.2110.13389.
+[51] Yang Luye. Bird detection algorithm based on yolo and inter frame difference method. Modern Information Technology, 2021. DOI:10.19850/j.cnki.20964706.2021.01.024.
+
+27
+
+

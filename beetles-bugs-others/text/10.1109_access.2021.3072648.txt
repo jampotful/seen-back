@@ -1,0 +1,1190 @@
+Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration Based on Firefly Algorithm and Backpropagation Fuzzy Neural Network
+Hao Zhang, Ruijun Zhang, Qin He, Lixin Liu (2021). IEEE Access. https://doi.org/10.1109/access.2021.3072648. doi:10.1109/access.2021.3072648. Licence: cc-by. Text from pdf.
+
+Received March 27, 2021, accepted April 8, 2021, date of publication April 12, 2021, date of current version April 20, 2021.
+Digital Object Identifier 10.1109/ACCESS.2021.3072648
+
+Variable Universe Fuzzy Control of High-Speed
+Elevator Horizontal Vibration Based on Firefly
+Algorithm and Backpropagation Fuzzy Neural
+Network
+HAO ZHANG
+
+1 , RUIJUN ZHANG
+
+1 , QIN HE1 , AND LIXIN LIU2
+
+1 School of Mechanical and Electrical Engineering, Shandong Jianzhu University, Jinan 250101, China
+2 Shandong Fuji Zhiyu Elevator Company Ltd., Dezhou 253400, China
+
+Corresponding author: Ruijun Zhang (zhangruijun@sdjzu.edu.cn)
+This work was supported in part by the Shandong Province Nature Science Foundation of China under Grant ZR2017MEE049, and in part
+by the Key Research Development Project of Shandong Province of China under Grant 2018GSF121004.
+
+ABSTRACT To effectively suppress the horizontal vibration of a high-speed elevator car caused by
+uncertainties such as the irregularity of guide rails and the piston wind in the hoistway, this paper proposes
+a new variable universe fuzzy control method for semi-active guide shoes with magnetorheological (MR)
+dampers based on the firefly algorithm and backpropagation (FA-BP) algorithm fuzzy neural network (FNN).
+First, the dynamic model of a car system is constructed, and the FNN system based non-parametric model of
+the MR damper is established with the original MR damper data collected from experiments. Then, a variable
+universe fuzzy main controller is presented to control the input current of the MR damper. As for its variable
+universe contraction-expansion factors, another FNN auxiliary controller is designed to accurately adjust
+the universe. Furthermore, the FA-BP algorithm is utilized to train the FNN auxiliary controller. Finally,
+the elevator experiment is carried out to analyze the characteristics of horizontal vibration, and simulation
+tests are conducted using the measured excitation signal and two kinds of simulated excitation signals,
+respectively. The results show that the proposed controller has a lower horizontal vibration acceleration,
+tilt angle acceleration and other index values than the passive controller or the FNN controller, indicating
+that the proposed control method can effectively suppress the horizontal vibration of a high-speed elevator.
+This study can provide the technical foundation for intelligent vibration control of high-speed elevators.
+INDEX TERMS Firefly algorithm, fuzzy neural network, semi-active guide shoe, variable universe fuzzy
+control, vibration control.
+
+I. INTRODUCTION
+
+With the increasing number and height of high-rise buildings,
+elevators with higher speeds are inevitably being developed.
+However, the horizontal vibration of the lift car caused by
+uncertainties such as irregular excitation of guide rail, piston
+wind in the hoistway and the swinging of hoisting rope will
+also intensify, which will greatly affect the riding comfort of
+passengers and even cause severe reactions such as dizziness
+and vomiting. In addition, the instruments on the car will also
+be affected by vibration, which could cause life shortening
+or even failure, eventually leading to more serious safety
+The associate editor coordinating the review of this manuscript and
+approving it for publication was Haibin Sun
+
+57020
+
+.
+
+accidents. Therefore, horizontal vibration suppression is one
+of the key problems to be solved in the field of high-speed
+elevators.
+Guide shoes are the primary units for elevator horizontal vibration control. In which, the semi-active guide shoe
+refers to the guide shoe whose stiffness coefficient K of the
+elastic element is not variable and damping coefficient C
+of the damping element is variable. Because of their simple structure, high reliability and low energy consumption,
+semi-active guide shoes have been widely used in high-speed
+elevators. Among the adjustable dampers, the magnetorheological (MR) damper is a promising damping element with
+high reliability and can output continuously variable damping
+force. Its response time is less than 1 ms and the required
+
+This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+control current is not more than 10 A, which currently makes
+it an ideal choice for a damping element in semi-active guide
+shoes [1], [2]. However, due to the non-Newtonian fluid
+characteristics of MR fluid under the action of the magnetic
+field, MR dampers have obvious strong nonlinear characteristics, such as hysteresis and yield, which greatly increase
+the difficulty of establishing an accurate parametric model
+and make it hard to calculate the ideal control current during
+operation.
+To this end, Stanway [3] constructed a Bingham plastic
+model of an electrorheological damper. Although the model
+is simple and easy to analyze, it cannot describe the hysteretic characteristics of the damper. Bouc and Wen [4], [5]
+introduced hysteretic variables into the model, which can systematically describe the nonlinear hysteretic characteristics of
+MR dampers. To further analyze the dynamic characteristics
+of MR dampers, Spencer [6] proposed a phenomenological
+model based on the Bouc-Wen model, which has greatly
+advanced the parametric modeling of MR dampers. Although
+the model can accurately describe the dynamic response of
+the MR damper, there are too many parameters needed to be
+measured and identified, which leads to the increased time
+delays and makes it difficult to use for actual engineering.
+After those, the parametric modeling still cannot be used
+to establish a relatively accurate mathematical model with
+fewer parameters [7]. Therefore, it is necessary to utilize new
+modeling methods to ensure the accuracy of the model and
+to be as simple and efficient as possible, thereby providing
+an accurate and practical model basis for the next step in
+researching vibration control methods.
+In our previous study [8], the main factors causing the
+horizontal vibration of high-speed elevator cars were rail
+irregularity and unsteady air flow represented by piston wind.
+The vibration under the influence of such complex coupling
+factors determines the complexity and accuracy requirements
+for the control method. Among the existing vibration control
+methods, fuzzy control takes the both requirements above
+into account and does not depend on the control model,
+which has been widely studied by scholars. Kanjuro [9]
+proposed a fuzzy-based multimodal vibration controller, and
+the experimental results show that the controller has high
+vibration suppression performance. Tairidis [10] proposed
+a fuzzy logic vibration controller of intelligent plates and
+used the genetic algorithm to improve the controller performance. However, the design of a fuzzy controller is highly
+dependent on the expert experience. When there are deviations or even errors in the existing experience, the performance of the control system will be greatly degraded [11].
+In addition, the accuracy of traditional fuzzy control is limited by fuzzy partition. If the number of fuzzy partitions is
+added to improve the control accuracy, the steady-state error
+will be increased and the reliability of the controller will
+be reduced.
+Therefore, to overcome the shortcomings of the above conventional fuzzy control, Li [12] proposed variable universe
+fuzzy control, pointing out that the discourse universe of
+VOLUME 9, 2021
+
+fuzzy variables can be compact with decreasing system error,
+and vice versa. To a certain extent, it solves the problem of
+over-dependence on expert experience, and could precisely
+densify the control of some target domains. The ability of
+local targeted densifying control makes the variable universe
+fuzzy method widely studied by scholars and successfully
+applied to robot control [13], crane positioning control [14]
+and other fields. However, the range of the discourse universe
+depends on a parameter called the contraction-expansion
+factor, which is not a variable that can be obtained by
+expert experience. Moreover, in the current related research,
+the control methods for the contraction-expansion factor are
+not unified: mathematical functions, integral adjustment and
+multi-population genetic algorithm are used in [15]–[17],
+respectively, to describe and optimize the scaling of the factor.
+Although they optimize the control effect to varying degrees,
+the description of the factor has a crucial impact on the control
+effect of the variable universe fuzzy control, and the control
+methods mentioned above are still not accurate.
+To this end, Pang [18] used fuzzy neural network (FNN)
+to control the contraction-expansion factor, and improved the
+control effect through the learning ability of FNN. However,
+the commonly used backpropagation (BP) algorithm requires
+a large number of iterations to train the network to approximate the ideal output. This seriously reduces the engineering
+practicability of the controller due to the time and resources
+required by the training. In addition, as a result of the poor
+global optimization ability of the BP algorithm, once it falls
+into the local optimum, it will need more iterations to jump
+out of the pseudo-optimum point [19]. Therefore, the FNN
+controller training needs improved algorithm to achieve a
+higher convergence rate as far as possible on the guarantee
+of the global optimization ability.
+Therefore, based on the firefly algorithm and backpropagation (FA-BP) algorithm FNN, this paper proposes a new
+variable universe fuzzy controller for MR damper semi-active
+guide shoes, referred to as FAFNN-VFC. The originality of
+this paper is as follows:
+The non-parametric model of an MR damper is established based on the FNN system, and its accuracy is
+verified by experimental comparison. This model does
+not depend on the damper object and is more practical
+in engineering.
+• A variable universe fuzzy control method based on
+FA-BP algorithm FNN is proposed. This method is suitable for complex excitation and control models, and the
+accuracy and training speed of the controller are highly
+improved by FAFNN, which provides an effective and
+practical control method for the intelligent control of
+complex vibration, such as the horizontal vibration of
+high-speed elevators.
+• A real elevator experiment is carried out to analyze the
+horizontal vibration characteristics of the elevator car,
+and the actual response data set is used for the controller
+training. Furthermore, the effectiveness of the controller
+•
+
+57021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+FIGURE 2. Internal structure of the MR damper.
+
+FIGURE 1. Semi-active control model for horizontal vibration of car
+system.
+
+is proved by simulation tests under the actual excitation,
+random excitation and impulse excitation of the guide
+rail.
+II. SEMI-ACTIVE CONTROL MODEL OF LIFT CAR AND
+NON-PARAMETRIC MODEL OF MR DAMPER
+A. THE LIFT CAR SEMI-ACTIVE CONTROL DYNAMIC
+MODEL ESTABLISHMENT
+
+The dynamic model of horizontal vibration semi-active
+control for a high-speed elevator car system is shown in Figure 1. It is mainly composed of the lift car and 4 semiactive guide shoes, which are axisymmetrically distributed.
+The guide shoe is simplified as a mass-spring-damper system
+with mass mi (i = 1 ∼ 4) and equivalent spring stiffness ks .
+The controllable damping force fi (i = 1 ∼ 4) is provided
+by the MR damper used in this paper, and then the guide
+wheel with equivalent stiffness kt closely fits against the
+guide rail. The horizontal vibration displacement of the car
+and four guide shoes are xc and xi (i = 1 ∼ 4), respectively.
+Meanwhile, considering other uncertain excitation such as
+aerodynamic force, the coupling force on the car is denoted
+as fc . mc represents the mass of the lift car; Ic represents the
+moment of inertia; θ denotes the tilt angle displacement at the
+gravity center of car body; l1 and l2 represent the longitudinal
+distances from the gravity center to the upper and lower guide
+shoes, respectively.
+For the connection points between each guide shoe and
+the car, their horizontal displacements have the following
+relationship:
+
+xc1 = xc − l1 tan θ ≈ xc − l1 θ
+
+
+
+x = x + l tan θ ≈ x + l θ
+c2
+c
+2
+c
+2
+
+x
+=
+x
++
+l
+tan
+θ
+≈
+x
++
+l
+c3
+c
+1
+c
+1θ
+
+
+
+xc4 = xc − l2 tan θ ≈ xc − l2 θ
+57022
+
+(1)
+
+Then, the dynamic equations of the car system are as follows:
+
+m1 ẍ1 = ks (x1 − xc + l1 θ) + kt (xr1 − x1 ) + f1
+
+
+
+
+
+m2 ẍ2 = ks (x2 − xc − l2 θ) + kt (xr2 − x2 ) + f2
+
+
+
+
+
+m3 ẍ3 = ks (x3 − xc − l1 θ) + kt (xr3 − x3 ) + f3
+
+
+
+m ẍ = k (x − x + l θ) + k (x − x ) + f
+4 4
+s 4
+c
+2!
+t r4
+4
+4
+(2)
+4
+4
+
+P
+P
+
+mc ẍc = ks
+x
+−
+4x
++
+f
++
+f
+
+i
+c
+i
+c
+
+
+i=1
+i=1
+
+
+
+
+
+Ic θ̈ = l1 [ks (x1 + x3 − 2xc ) + f1 + f3 ]
+
+
+
+− l2 [ks (x2 + x4 − 2xc ) + f2 + f4 ]
+
+T
+Define Xs
+=
+=
+ẍc , θ̈ ,
+[x1 , x2 , x3 , x4 ]T , Ẍc
+Xcs = [xc − l1 θ, xc + l2 θ, xc + l1 θ, xc − l2 θ]T , Xr =
+[xr1 , xr2 , xr3 , xr4 ]T , FMRD = [f1 , f2 , f3 , f4 ]T , Xud =
+[x1 + x3 − 2xc , x2 + x4 − 2xc ]T , Fud = [f1 + f3 , f2 + f4 ]T
+and Fc = [fc , 0]T , then EQUATION (2) can be expressed
+in matrix form as
+(
+Ms Ẍs = ks (Xs − Xcs ) + kt (Xr − Xs ) + FMRD
+(3)
+Mc Ẍc = ks QXud + QFud + Fc
+where each matrix is represented as follows:
+
+
+m1 0 0 0
+
+
+
+
+ 0 m2 0 0 
+ , Mc = mc 0 , Q = 1 1 .
+Ms = 
+ 0 0 m3 0 
+0 Ic
+l1 −l2
+0 0 0 m4
+B. NON-PARAMETRIC MODELING OF MR DAMPER
+
+To suppress the vibration of the car in the above model,
+the damping force needs to be adjusted in real time according
+to the excitation and the displacement of the car. The internal
+basic structure of the MR damper used in this paper is shown
+in Figure 2. To continuously control the damping force,
+the current in the coil should be adjusted continuously to
+change the magnetic field, and to further modify the damping
+coefficient of the MR damper.
+However, the use of MR fluid also brings strong nonlinear
+characteristics such as hysteresis and yield. If the conventional parametric modeling method is used, the identification
+and measurement of the newly introduced parameters will
+increase the time delay, which will reduce the practicability
+and control effectiveness of the model. Compared with the
+MR damper widely adopted in automobile suspension, the
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+FIGURE 3. Adaptive FNN non-parametric modeling of MR damper.
+
+MR damper for elevator guide shoes lacks typical products,
+which usually needs independent design and customization.
+This further increases the cost of parameter optimization and
+trial-and-error in parametric modeling.
+Therefore, this paper uses non-parametric modeling [20]
+and introduces FNN to adaptively adjust the parameters,
+so that the model does not depend on a specific damper.
+It only needs to train FNN through measurement data to
+quickly establish the response model of the target MR
+damper. As shown in Figure 3, the model consists of two
+parts: one is based on the FNN I to switch the output level
+k of the damping force according to the control current input
+into the coil; the other is based on the FNN II to estimate
+the damping force u under standard current according to the
+displacement and velocity of the MR damper piston. Finally,
+the output damping force of the MR damper is obtained by
+calculating f = k × u.
+To verify the accuracy of the established model, experimental data were collected for comparative analysis in this
+paper. Utilizing the sine wave with amplitude of 5 mm and
+frequency of 2 Hz, 5 Hz and 10 Hz as the excitation sources,
+respectively, the magnitude of MR damping force with control currents of 0, 1 A, 2 A, 3 A and 4 A was measured
+repeatedly on the vibration mechanics testing platform. For
+simplicity, this paper only shows the response comparison
+between the MR damping force and displacement under three
+kinds of control currents using typical 5 Hz frequency excitation, as shown in Figure 4.
+It can be seen that the relationship curve of the established
+model is highly consistent with the experimental response
+and properly reflect the nonlinear characteristics of the MR
+damper. This indicates that the FNN non-parametric model
+can accurately simulate the actual output response of the MR
+damper.
+III. VARIABLE UNIVERSE FUZZY CONTROLLER BASED ON
+FIREFLY ALGORITHM FUZZY NEURAL NETWORK
+
+The horizontal vibration of high-speed elevators is a complex
+coupling vibration influenced by uncertain excitation such
+as guide rail irregularity and piston wind in the hoistway.
+To study its vibration characteristics and guide the design of
+controllers, this paper specifically measures and analyzes the
+excitation signal in actual operation, as shown in Section IV.A
+VOLUME 9, 2021
+
+FIGURE 4. Comparison of model and actual response under 5 Hz
+excitation.
+
+FIGURE 5. The structure of FAFNN-VFC.
+
+below. It can be seen that the coupling vibration signal is characterized as high-frequency low-amplitude excitation and
+occasional short-time strong-amplitude excitation. To further
+improve the control accuracy, the control of the local universe
+with low-amplitude needs to be densified.
+The variable universe fuzzy control method can densify the
+control of the local universe without increasing the number
+of fuzzy partitions and fuzzy rules [21]. Therefore, to realize the precise control for horizontal coupling vibration of
+high-speed elevators, a variable universe fuzzy controller
+based on FNN combined with the firefly algorithm and backpropagation algorithm is proposed in this paper. The structure
+of the proposed FAFNN-VFC is shown in Figure 5.
+57023
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+T-S fuzzy control is used in this variable universe fuzzy
+main controller. The T-S fuzzy controller can be divided into
+the premise network and the consequent network, and both of
+their inputs are the horizontal acceleration ẍc and the relative
+velocity 1v between the car and the guide shoe. β̄j denote the
+normalized output value of the premise network under each
+fuzzy rule, while the final output can be expressed as follows:
+yij = pij0 + pij1 x1 + · · · + pijn xn
+(i = 1, 2, · · · , r; j = 1, 2, · · · , m)
+m
+X
+yi =
+β̄i · yij
+
+The main controller is a Takagi-Sugeno (T-S) variable
+universe fuzzy controller, whose inputs are the car horizontal
+acceleration ẍc and velocity 1v between the lift car and the
+guide shoe. The fuzzy universe is adjusted by the variable
+universe contraction-expansion factors α1 and α2 to precisely
+control the input current of the MR damper in the guide shoe.
+Then, to further increase the engineering practicability of
+the controller, the control accuracy and the convergence training speed of the controller need to be improved. On the one
+hand, the contraction-expansion factor in the main controller
+is the key to improve the control accuracy. Considering the
+lack of standard control methods for this factor, this paper
+designs another auxiliary controller based on the Mamdani
+FNN. On the other hand, due to the large number of undetermined parameters introduced by FNN, this paper combines
+the FA and BP algorithm to globally optimize and quickly
+converge, and to realize the efficient learning and training of
+the FNN auxiliary controller.
+A. VARIABLE UNIVERSE FUZZY MAIN CONTROLLER
+
+In essence, the fuzzy controller is a kind of interpolator [22].
+When the fuzzy controller needs to approximate the ideal
+output more accurately, it is necessary to densify the fuzzy
+partition and fuzzy rules in the target universe, which will
+enlarge the steady-state error of the controller. By dynamically adjusting the size of the universe, densifying control
+can be achieved skillfully in another way. This is the principle of variable universe fuzzy control, which is highly
+suitable for complex excitation and control models [23], [24].
+It can be expressed as follows: Set the input of the controller
+as xi (i = 1, 2, · · · , n) and the corresponding n-dimensional
+fuzzy universe as Xi = [−Ei , Ei ], the output as j and the corresponding universe as J = [−U , U ]. By changing variable
+universe contraction-expansion factors, the universe will be
+dynamically adjusted to:
+(4)
+(5)
+
+where αi (xi ) and ϑ (j) are contraction-expansion factors, and
+their dynamic influence on the universe is shown in Figure 6.
+57024
+
+(7)
+
+j=1
+
+FIGURE 6. Dynamic adjustment of the universe.
+
+Xi (xi ) = [−αi (xi ) Ei , αi (xi ) Ei ]
+J (j) = [−ϑ (j) U , ϑ (j) U ]
+
+(6)
+
+where yij represents the output of the consequent network, pijn
+represents the adaptive parameters, xn represents the input of
+networks, x1 = ẍc , x2 = 1v, r and m represent the number of
+network outputs and fuzzy rules, respectively, and yi represent
+the final output of the whole network.
+In this paper, the main function of the T-S variable universe
+fuzzy main controller is to accurately output the control
+current I of the MR damper according to the running conditions to provide the required damping force. Considering its
+requirements for accuracy and stability, the initial universe
+is defined as {−1, 1} and divided into seven fuzzy subsets,
+i.e., {NL (negative large), NM (negative middle), NS (negative small), ZO (zero), PS (positive small), PM (positive
+middle), PL (positive large)}, and all of them use the Gaussian
+function as membership functions.
+Of note, there are three kinds of adjustable parameters in
+the main controller: the Gaussian function center c, the width
+σ and the weight pijn of the consequent network. The initial
+value of these parameters is set based on existing expert
+experience to determine the approximate range of the ideal
+parameter value and is then gradually refined to converge
+to the ideal value through the following optimization and
+training, so that the fuzzy controller can approximate the ideal
+output. The evaluation function of the controller is defined as:
+4
+X
+F = RMS(ẍc ) + RMS(θ̈) + RMS(
+xci − xi )
+
+(8)
+
+i=1
+
+where RMS represent the root mean square.
+Considering the complex and highly nonlinear characteristics of the lift car horizontal vibration excitation, to ensure
+that the final control effects meet the requirements under
+actual working conditions, the horizontal vibration data of
+the car were collected through elevator experiments in this
+paper. To avoid repetition, these will be specifically described
+in Section IV.A. Afterwards, take the collected data in training
+group as training samples and EQUATION (8) as evaluation
+function to train and optimize the main controller by importing them into MATLAB.
+B. FNN AUXILIARY CONTROLLER
+
+For the contraction-expansion factors α1 and α2 of the
+main controller, using the FNN control method [25], [26],
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+network, respectively, the supervised error function is defined
+as:
+r
+
+E=
+
+1X
+(ti − yi )2
+2
+
+(13)
+
+i=1
+
+where the BP algorithm can be described as:
+
+∂E
+
+
+cij (k + 1) = cij (k) − β
+
+
+∂cij
+
+
+
+∂E
+σij (k + 1) = σij (k) − β
+∂σij
+
+
+
+
+∂E
+
+
+ ωij (k + 1) = ωij (k) − β
+∂ωij
+
+FIGURE 7. The structure of FNN.
+
+the auxiliary controller is designed. As shown in Figure 7,
+this FNN adopts a Mamdani forward network with two inputs
+and two outputs; ẍc and 1v are the car horizontal acceleration
+input and velocity input between the car and the guide shoe,
+respectively. Each input has seven fuzzy partitions expressed
+as {NL, NM, NS, ZO, PS, PM, PL}.
+The first and the second layers are the input layer and the
+fuzzy layer, where the Gaussian function is selected as the
+fuzzy membership function:
+
+2 . 2 
+(2)
+fij = exp − xi − cij
+σij
+(i = 1, 2; j = 1, 2, . . . mi )
+(9)
+where xi represent the inputs of the first layer, x1 = ẍc ,
+x2 = 1v; cij and σij represent the center and width of the
+Gaussian membership function, respectively; and mi represents the number of fuzzy partitions of the ith input.
+The third layer of the network is the inference layer, which
+chooses the smaller value:
+!
+n
+n
+o
+Y
+(3)
+(2) (2)
+fj = min x1i1 , x2i2
+j = 1, 2, · · · , m; m =
+mi (10)
+i=1
+
+The fourth and fifth layers are the normalization layer and the
+output layer, where the centroid method is used to realize the
+defuzzification:
+X
+m
+(4)
+(3)
+(3)
+fj = fj
+fj
+(11)
+(5)
+fi =
+
+m
+X
+
+(4)
+ωij · fj
+
+m=1
+
+β (r) = β0 e
+(12)
+
+j=1
+
+where ωij represents the weight of the ith output in the jth
+(5)
+(5)
+normalization layer nodes; f1 and f2 denote the network
+outputs α1 and α2 , respectively. Therefore, it can be seen that
+the FNN has three kinds of learning parameters: center cij ,
+width σij and weight ωij , which will be trained and learned
+by the following algorithm.
+C. FA-BP ALGORITHM
+
+For FNN training, the BP algorithm is generally used to make
+the network outputs approximate the expectations. Assuming
+that yi and ti are the actual and expected outputs of the
+VOLUME 9, 2021
+
+where β > 0 represents the learning rate. However, the
+training speed and output accuracy of the BP algorithm are
+highly dependent on the initial value of the parameters in the
+network, and improper initialization of the parameters will
+make the network fall into a local optimum [27].
+In recent years, swarm intelligence algorithms such as
+particle swarm optimization [28], artificial bee colony algorithm [29] and firefly algorithm [30] have been widely studied by scholars to replace the BP algorithm. Among them,
+FA is a heuristic algorithm proposed by Yang in 2009 [31].
+Compared with other swarm intelligence algorithms, FA has
+a higher convergence speed under the premise of the excellent
+global search ability, and has outstanding performance in
+global optimization with multiple local extremum points [32].
+The basic idea of the FA can be described as:
+n fireflies Xi (i = 1, 2, . . . , n) are randomly distributed
+in the D-dimensional search space, and the position
+Xi = (Xi1 , Xi2 , . . . , XiD )T of the ith firefly represents the
+feasible solution. The brightness I of a firefly at the current
+position is directly proportional to the fitness function value
+f (Xi ) corresponding to the feasible solution. All fireflies
+will attract each other regardless of gender. The relative
+attractiveness β (r) is described as:
+v
+u D
+uX
+2
+rij = Xi − Xj = t
+Xjm − Xim
+(15)
+−γ r 2
+
+i=1
+
+(14)
+
+(16)
+
+where rij represents the distance between the fireflies i and j,
+β0 represents the attractiveness at the initial position r = 0,
+and γ represents the light absorption coefficient. In each iteration, each firefly moves toward the fireflies that are brighter
+than itself. The equation of firefly i moving towards firefly j
+can be expressed as:
+
+
+
+
+1
+−γ rij2
+k+1
+k
+k
+k
+(17)
+Xi
+= Xi + β0 e
+Xj − Xi + α rand −
+2
+where α represents the compensation randomization parameter and rand denotes a random number generator uniformly
+distributed in [0, 1]. The brightest firefly moves randomly
+around itself.
+57025
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+FIGURE 9. Comparison of the training error convergence.
+
+FIGURE 8. FA-BP algorithm flow chart.
+
+However, it should be pointed out that although FA has a
+high global optimization efficiency, like most swarm intelligence algorithms, in the late iterations, its local convergence
+speed slows and the optimization accuracy is insufficient.
+As a result, when it is used as the training algorithm of
+FNN alone, the final output performance is poor. Therefore,
+the FA-BP algorithm is used in this paper to train FNN, and
+its algorithm flow chart is shown in Figure 8.
+In the early iterations, the FA is used for quick global
+optimization. When iterating to the maximum number or the
+output reaches the expected accuracy, the optimal firefly’s
+position is substituted into the FNN as the optimized solution
+for the initial parameter. Then, the BP algorithm is used to
+learn and train, so that it can quickly approximate the ideal
+output.
+By selecting the same parameter setting and initial value,
+the FA-BP algorithm, the BP algorithm and the FA are used
+to train the FNN auxiliary controller, respectively. The error
+convergence comparison of the mean value from experimental results in multiple times is shown in Figure 9:
+It can be seen that the FA-BP algorithm and the FA have
+good convergence speeds at the initial stage of iterations.
+However, after 20 iterations, the convergence speed of the
+FA decreases, while the FA-BP algorithm and the BP algorithm still maintain a certain decline speed. At the end of
+the iterations, the FA fails to make the network converge
+to a higher accuracy, while the FA-BP algorithm achieves
+that with fewer iterations than the BP algorithm. From the
+above analysis, the FA-BP algorithm not only ensures the
+convergence accuracy but also improves the training speed,
+which could further increase the engineering practicability of
+the controller.
+57026
+
+FIGURE 10. Experimental data measurement of 7m/s high-speed elevator.
+
+IV. EXPERIMENT AND SIMULATION
+A. ELEVATOR EXPERIMENT
+
+To analyze the complex coupling horizontal vibration characteristics of a high-speed elevator and to obtain the vibration
+excitation data under real running conditions for training
+and simulation tests, the elevator experiment was carried
+out in this paper. As shown in Figure 10., the experiment
+date was October 5, 2020, the experiment site was the
+120 m elevator test tower in Dezhou, Shandong Province.
+The experimental instrument was the DT-4A elevator acceleration tester. The measurement range of the horizontal
+vibration acceleration was ±1.2 m/s2 , and the measurement
+accuracy was ±0.005 m/s2 . The experiment object was the
+FJ14-90000 7 m/s high-speed elevator. During the experiment, the DT-4A tester was placed at the equivalent centroid
+of the elevator car, and it ran repeatedly to collect a large
+amount of original acceleration data.
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+TABLE 1. Numerical values of the elevator car.
+
+FIGURE 11. Data flow of the elevator experiment.
+
+To improve the engineering practicability of the proposed
+controller and to further test the effectiveness of the controller
+under actual excitation, the experimental data were used as
+shown in Figure 11.
+The original data after normalization are substituted into
+the lift car model established in Section II.A above, and then
+the external force of the car and ideal control current under
+actual running conditions are calculated as the processed
+vibration response data set. First, the vibration characteristics of the data set are analyzed to guide the design of the
+controller in Section III, so that the controller can precisely
+suppress the vibration. Then, the data set is divided into
+two groups: one group is used as the training data set to
+learn and train the variable universe fuzzy main controller in
+Section III.A above; the other group, as the actual excitation
+signal in Section IV.B below, is applied to the car system in
+the simulation test to verify the effectiveness of the controller
+proposed in this paper.
+The detailed parameters of the 7 m/s elevator car system
+are shown in Table 1.
+Based on the above parameters, the horizontal excitation
+of the car under actual running conditions was calculated and
+analyzed in the frequency domain. For simplicity, only the
+vibration excitation data of a 7 m/s constant speed section are
+shown in Figure 12.
+VOLUME 9, 2021
+
+FIGURE 12. Excitation (a) time domain curve (b) frequency domain curve
+at 7 m/s constant speed section.
+
+It can be seen from the time domain curve that the horizontal vibration excitation of the 7 m/s high-speed elevator is concentrated in the range of ±100 N for most of the time, and the
+excitation value reaches more than 120 N a few times. From
+the frequency domain curve, it is observed that the vibration
+excitation is mainly concentrated in the range of 2-12 Hz, and
+there are peaks at the frequencies of 5 Hz and 10 Hz. This
+shows that the excitation signals of the high-speed elevator
+are mostly low-amplitude and high-frequency signals with
+occasionally short-time strong-amplitude signals under the
+coupling influence of many uncertain factors.
+Thus, to achieve the precise and effective control of the
+horizontal vibration of high-speed elevators, not only should
+the strong-amplitude excitation in the whole universe be
+57027
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+fully suppressed but also the low-amplitude high-frequency
+excitation which occupies most of the running time should
+also be noted, and this local universe signal should be further
+densified for control. The design of the controller should,
+therefore, not only ensure the global control response but
+also have the ability to control the local universe with higher
+precision.
+Based on the above analysis, this paper designs the following three parts of simulation tests to fully verify the control
+effect of the proposed FAFNN-VFC. In Section IV.B, the testing data set obtained from the elevator experiment is used
+as the excitation signal to measure the control ability of the
+controller under actual working conditions. In Section IV.C,
+normally distributed random signal is used as the guide rail
+excitation to simulate the controller in the low-amplitude
+and high-frequency signal universe. Finally, in Section IV.D,
+the guide rail pulse excitation signal is used to determine
+the control effectiveness of the controller for occasional
+strong-amplitude excitation.
+B. ACTUAL EXCITATION SIMULATION
+
+To verify the control effect of the proposed controller under
+actual running conditions, the testing data set obtained from
+the above elevator experiment were used as excitation signals
+for testing.
+For the comparison, the passive controller and FNN controller were selected as the comparison objects. The passive
+controller was the same as the passive guide shoe system
+used in the elevator experiment above, and its parameters
+are shown in Table 1. The FNN controller used T-S FNN,
+and its parameter settings were the same as the proposed
+variable universe fuzzy controller. To objectively evaluate the
+control effect, the same training data set as the FAFNN-VFC
+was used for this FNN controller, and the number of training
+iterations was set to be the same. The comparison controllers
+in Section IV.C and Section IV.D simulation tests were set in
+the same way, and will not be repeated below.
+The excitation signal was imported into MATLAB to simulate the response of each controller with the lift car model.
+The results are shown in Figure 13.
+It can be seen from the time domain curve that compared
+with the FNN semi-active control and the passive control,
+the amplitude of horizontal vibration acceleration of the proposed FAFNN-VFC is greatly reduced, especially for the
+occasional strong-amplitude excitation. It can also be seen
+from the frequency domain curve that the proposed controller
+can effectively control the acceleration at most frequencies,
+and it significantly improves the high-frequency vibration in
+the range of 4-10 Hz.
+To further verify the control effect of the proposed
+FAFNN-VFC, Table 2. shows the numerical comparison of
+the horizontal acceleration ẍc and the damping force f of
+different controllers under the actual excitation. Compared
+with the passive controller, the root mean square (RMS)
+values of horizontal acceleration of the FNN controller and
+the proposed FAFNN-VFC are reduced by 44.4% and 74.3%,
+57028
+
+FIGURE 13. The comparisons of (a) time domain and (b) frequency
+domain horizontal vibration acceleration under actual excitation.
+TABLE 2. Comparison of the numerical responses under actual excitation.
+
+respectively, and the RMS values of the required damping
+force are reduced by 44.1% and 72.9%, respectively.
+From the above data, it can be seen that the proposed
+FAFNN-VFC can effectively suppress the low-amplitude
+high-frequency vibration and the occasional strong-amplitude
+vibration, and the damping force of each guide shoe is
+also greatly reduced. It has been fully shown that the variable universe fuzzy controller based on the FA-BP FNN
+can densify the control in the local area of low-amplitude
+vibration while ensuring the global control effect. The effectiveness of the controller’s response to the actual excitation
+from high-speed elevator car horizontal vibration has been
+verified.
+C. RANDOM EXCITATION SIMULATION
+
+The excitation signal for guide rail surface irregularity caused
+by manufacturing and installation is mostly a low-amplitude
+and high-frequency signal. To verify the control effect of
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+TABLE 3. Comparison of the numerical responses under random
+excitation of the guide rail.
+
+FIGURE 14. The comparisons of (a) time domain and (b) frequency
+domain horizontal vibration acceleration under random excitation of the
+guide rail.
+
+tion of the guide rail. The vibration of approximately 4 Hz
+frequency is significantly reduced, and the high-frequency
+vibration above 6 Hz is also effectively suppressed. Similarly,
+it can be seen from Figure 15. that the amplitude of tilt angle
+acceleration has decreased to a certain extent, and the peak
+value of tilt angle acceleration in the frequencies of 3-6 Hz
+has also been reduced.
+To further verify the control effect of the proposed FAFNNVFC, Table 3. shows the numerical comparison of horizontal
+acceleration ẍc , tilt angle acceleration θ̈ and damping force f
+under random excitation of the guide rail. Compared with the
+passive guide shoe, the RMS values of horizontal acceleration
+of the FNN controller and the proposed controller are reduced
+by 35.4% and 62.9%, respectively. The RMS values of tilt
+angle acceleration are reduced by 27.6% and 46.9%, respectively, and the RMS values of damping force are reduced by
+34.9% and 61.7%, respectively.
+From the above data, it can be seen that the proposed
+FAFNN-VFC can effectively control the low-amplitude highfrequency signal excitation such as the random excitation of
+the guide rail, and the tilt angle acceleration and required
+control force are also improved to varying degrees. The
+results show that the variable universe fuzzy control based
+on FA-BP FNN can precisely control the low-amplitude
+high-frequency vibration signal represented by guide rail
+irregularity excitation.
+D. IMPULSE EXCITATION SIMULATION
+
+FIGURE 15. The comparisons of (a) time domain and (b) frequency
+domain tilt angle acceleration under random excitation of the guide rail.
+
+the proposed controller on this kind of excitation, a standard
+normally distributed random signal with mean value of 0
+and standard deviation of 16 mm2 was used as the random
+excitation of guide rail irregularity in the simulation test. The
+results are shown in Figure 14. and Figure 15.
+It can be seen from Figure 14. that, compared with the
+FNN semi-active control and the passive control, the amplitude of horizontal vibration acceleration of the proposed
+FAFNN-VFC is greatly reduced under the random excitaVOLUME 9, 2021
+
+Considering the convex or concave welding seam and the
+joint step caused by uneven docking between two guide rails
+due to manufacturing and installation errors, the guide shoes
+will be subjected to a large impact load in a very short time
+when passing through the joint. This kind of excitation is
+mostly shown as a strong-amplitude signal in a very short
+time, which can be expressed in the form of impulse signal [33]. Therefore, a simulation test for an impulse excitation signal is designed in this section. The impulse signal
+is shown in Figure 16. and the simulation results are shown
+in Figure 17. and Figure 18.
+It can be seen from Figure 17. that, compared with the
+FNN semi-active control and the passive control, the amplitude of horizontal vibration acceleration for the proposed
+57029
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+FIGURE 16. Impulse excitation signal of the guide rail.
+
+FIGURE 18. The comparisons of (a) time domain and (b) frequency
+domain tilt angle acceleration under the impulse excitation of the guide
+rail.
+TABLE 4. Comparison of numerical responses under the impulse
+excitation of the guide rail.
+
+FIGURE 17. The comparisons of (a) time domain and (b) frequency
+domain horizontal vibration acceleration under the impulse excitation of
+the guide rail.
+
+FAFNN-VFC is greatly reduced under the impulse excitation
+of the guide rail, especially the convergence rate to zero
+after the impulse is significantly improved. In the frequency
+domain, the vibration peak at 2 Hz is significantly controlled,
+and the high-frequency vibration above 4 Hz is also effectively suppressed. Similarly, it can be seen from Figure 18.
+that the convergence rate of the tilt angle acceleration after
+the impulse is significantly improved, and the peak value of
+the tilt angle acceleration in the frequencies of 4-6 Hz is also
+greatly reduced.
+To further verify the control effect of the proposed FAFNNVFC, Table 4. shows the numerical comparison of horizontal
+57030
+
+acceleration ẍc , tilt angle acceleration θ̈ and damping force f
+under the impulse excitation of the guide rail. Compared with
+the passive controller, the RMS values of horizontal acceleration of the FNN controller and the proposed controller are
+reduced by 40.2% and 74.7%, respectively. The RMS values
+of tilt angle acceleration are reduced by 40.4% and 71.1%,
+respectively, and the RMS values of the required damping
+force are reduced by 36.9% and 73.8%, respectively.
+From the above data, it can be seen that the proposed
+FAFNN-VFC has a significant control effect on the occasional strong-amplitude signal, such as the impulse excitation
+of the guide rail, and the tilt angle acceleration and required
+control force are also greatly reduced. The results show that
+the variable universe fuzzy control based on FA-BP FNN
+has a good control effect on the occasional strong-amplitude
+signal represented by the impact load at the rail joint.
+V. CONCLUSION
+
+To suppress the horizontal vibration of a high-speed elevator
+lift car caused by uncertainties such as rail irregularity and
+VOLUME 9, 2021
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+piston wind in the hoistway, a new variable universe fuzzy
+controller based on FA-BP FNN is proposed for car system
+using MR dampers. The main conclusions are as follows:
+(1) The dynamic model of the car and the non-parametric
+model of the MR damper based on the FNN system are
+established. The accuracy of the MR damper model is verified
+by comparison with experimental data, which shows that
+the model can precisely simulate the horizontal vibration
+response of the car.
+(2) An experiment with a 7 m/s high-speed elevator is carried out, and the vibration characteristics of the experimental
+data are analyzed to explore the requirements for controller
+design. The results show that the car horizontal vibration
+signal mainly presents as a low-amplitude high-frequency
+signal and occasional strong-amplitude signal.
+(3) Simulation tests are carried out by three kinds of
+signals: the actual excitation, the random excitation and
+the impulse excitation. The results show that the proposed
+FAFNN-VFC can reduce the max and RMS values of the
+car’s horizontal vibration acceleration by more than 62%,
+and the tilt angle acceleration and required damping force
+are reduced by more than 46% and 61%, respectively, which
+are far better than the passive control and the FNN control.
+The effectiveness of the proposed controller is fully proved,
+and the control method is suitable for the horizontal vibration
+control of high-speed elevators.
+The proposed control method provides important guidance
+for researchers who study vibration control for high-speed
+elevators and other systems with similar vibration characteristics. In future research, we will further consider the
+high-dimensional coupled vibration control of high-speed
+elevators and the development of an actual controller.
+REFERENCES
+[1] R. Ahamed, M. M. Ferdaus, and Y. Li, ‘‘Advancement in energy harvesting magneto-rheological fluid damper: A review,’’ Korea-Aust. Rheol.
+J., vol. 28, no. 4, pp. 355–379, Nov. 2016.
+[2] F. Gao, Y.-N. Liu, and W.-H. Liao, ‘‘Optimal design of a magnetorheological damper used in smart prosthetic knees,’’ Smart Mater. Struct., vol. 26,
+no. 3, Mar. 2017, Art. no. 035034.
+[3] R. Stanway, J. L. Sproston, and N. G. Stevens, ‘‘Non-linear modelling of
+an electro-rheological vibration damper,’’ J. Electrostatics, vol. 20, no. 2,
+pp. 167–184, Dec. 1987.
+[4] R. Bouc, ‘‘A Mathematical Model for Hysteresis,’’ Acta Acustica United
+Acustica, vol. 24, no. 1, pp. 16–25 and 197, 1971.
+[5] V. K. Wen, ‘‘Method for random vibration of hysteretic systems,’’ J. Eng.
+Mech., vol. 102, pp. 249–263, Apr. 1976.
+[6] B. F. Spencer, S. J. Dyke, M. K. Sain, and J. D. Carlson, ‘‘Phenomenological model for magnetorheological dampers,’’ J. Eng. Mech., vol. 123,
+no. 3, pp. 230–238, Mar. 1997.
+[7] D. H. Wang and W. H. Liao, ‘‘Magnetorheological fluid dampers: A review
+of parametric modelling,’’ Smart Mater. Struct., vol. 20, no. 2, Feb. 2011,
+Art. no. 023001.
+[8] R. Zhang, S. Qiao, Q. Zhang, and L. Liu, ‘‘Universal modeling of unsteady
+airflow in different hoistway structures and analysis of the effect of ventilation hole parameters,’’ J. Wind Eng. Ind. Aerodyn., vol. 194, Nov. 2019,
+Art. no. 103987.
+[9] K. Makihara, C. Kuroishi, and H. Fukunaga, ‘‘Adaptive multimodal vibration suppression using fuzzy-based control with limited structural data,’’
+Smart Mater. Struct., vol. 22, no. 7, Jul. 2013, Art. no. 075031.
+[10] G. Tairidis, G. Foutsitzi, P. Koutsianitis, and G. E. Stavroulakis, ‘‘Fine
+tuning of a fuzzy controller for vibration suppression of smart plates using
+genetic algorithms,’’ Adv. Eng. Softw., vol. 101, pp. 123–135, Nov. 2016.
+VOLUME 9, 2021
+
+[11] A. Sala, ‘‘On the conservativeness of fuzzy and fuzzy-polynomial control
+of nonlinear systems,’’ Annu. Rev. Control, vol. 33, no. 1, pp. 48–58,
+Apr. 2009.
+[12] H. Li, Z. Miao, and J. Wang, ‘‘Variable universe stable adaptive fuzzy
+control of nonlinear system,’’ Sci. China Ser. E, Technol. Sci., vol. 45, no. 3,
+pp. 225–240, 2002, doi: 10.1016/S0898-1221(02)00192-X.
+[13] S. Nurmaini and Chusniah, ‘‘Differential drive mobile robot control using
+variable fuzzy universe of discourse,’’ in Proc. Int. Conf. Electr. Eng.
+Comput. Sci. (ICECOS), Palembang, IN, USA, Aug. 2017, pp. 50–55, doi:
+10.1109/ICECOS.2017.8167165.
+[14] A. Aksjonov, V. Vodovozov, and E. Petlenkov, ‘‘Self-scaling laboratory
+crane fuzzy logic control with anti-swing regulation,’’ in Proc. 57th Int.
+Sci. Conf. Power Electr. Eng. Riga Tech. Univ. (RTUCON), Riga, Latvia,
+Oct. 2016, pp. 1–6, doi: 10.1109/RTUCON.2016.7763088.
+[15] L. Mingxue, Y. Guolai, L. Xiaoqing, and B. Guixiang, ‘‘Variable universe
+fuzzy control of adjustable hydraulic torque converter based on multipopulation genetic algorithm,’’ IEEE Access, vol. 7, pp. 29236–29244,
+2019, doi: 10.1109/ACCESS.2019.2892181.
+[16] S. Aziz, H. Wang, Y. Liu, J. Peng, and H. Jiang, ‘‘Variable universe
+fuzzy logic-based hybrid LFC control with real-time implementation,’’
+IEEE Access, vol. 7, pp. 25535–25546, 2019, doi: 10.1109/ACCESS.
+2019.2900047.
+[17] M. Zheng, Z. Yuelin, and W. Jinxin, ‘‘The research of course control based on variable universe fuzzy PID,’’ in Proc. 5th Int. Conf.
+Mechatronics Robot. Eng. (ICMRE), Rome, Italy, 2019, pp. 88–92, doi:
+10.1145/3314493.3314522.
+[18] H. Pang, F. Liu, and Z. Xu, ‘‘Variable universe fuzzy control for vehicle
+semi-active suspension system with MR damper combining fuzzy neural
+network and particle swarm optimization,’’ Neurocomputing, vol. 306,
+pp. 130–140, Sep. 2018.
+[19] J. Whittington and R. Bogacz, ‘‘Theories of error back-propagation in the
+brain,’’ Trends Cogn. Sci., vol. 23, no. 3, pp. 235–250, 2019.
+[20] K. K. Ahn, D. Q. Truong, and M. A. Islam, ‘‘Modeling of a magnetorheological (MR) fluid damper using a self tuning fuzzy mechanism,’’
+J. Mech. Sci. Technol., vol. 23, no. 5, pp. 1485–1499, May 2009.
+[21] L. Qin, J. Hu, H. Li, and W. Chen, ‘‘Fuzzy logic controllers for specialty
+vehicles using a combination of phase plane analysis and variable universe approach,’’ IEEE Access, vol. 5, pp. 1579–1588, 2017, doi: 10.1109/
+ACCESS.2017.2656124.
+[22] A. Modirrousta, M. Shokrian Zeini, and T. Binazadeh, ‘‘Non-linear optimal
+fuzzy control synthesis for robust output tracking of uncertain microelectro-mechanical systems,’’ Trans. Inst. Meas. Control, vol. 39, no. 8,
+pp. 1146–1160, Aug. 2017.
+[23] N. Wang, S.-F. Su, J. Yin, Z. Zheng, and M. J. Er, ‘‘Global asymptotic model-free trajectory-independent tracking control of an uncertain
+marine vehicle: An adaptive universe-based fuzzy control approach,’’
+IEEE Trans. Fuzzy Syst., vol. 26, no. 3, pp. 1613–1625, Jun. 2018, doi:
+10.1109/TFUZZ.2017.2737405.
+[24] Z. Cao and S. Zheng, ‘‘MR-SAS and electric power steering variable
+universe fuzzy PID integrated control,’’ Neural Comput. Appl., vol. 31,
+no. 4, pp. 1249–1258, Apr. 2019.
+[25] C. Sun, W. He, and J. Hong, ‘‘Neural network control of a flexible
+robotic manipulator using the lumped spring-mass model,’’ IEEE Trans.
+Syst., Man, Cybern. Syst., vol. 47, no. 8, pp. 1863–1874, Aug. 2017, doi:
+10.1109/TSMC.2016.2562506.
+[26] Z.-C. Qiu and T.-X. Wang, ‘‘Fuzzy neural network vibration control
+on a piezoelectric flexible hinged plate using stereo vision detection,’’
+J. Intell. Mater. Syst. Struct., vol. 30, no. 4, pp. 556–575, Mar. 2019, doi:
+10.1177/1045389X18818766.
+[27] N. Leema, H. K. Nehemiah, and A. Kannan, ‘‘Neural network classifier
+optimization using differential evolution with global information and back
+propagation algorithm for clinical datasets,’’ Appl. Soft Comput., vol. 49,
+pp. 834–844, Dec. 2016.
+[28] R. Qayyum, K. Kamal, T. Zafar, and S. Mathavan, ‘‘Wood defects classification using GLCM based features and PSO trained neural network,’’ in
+Proc. 22nd Int. Conf. Autom. Comput. (ICAC), Sep. 2016, pp. 273–277.
+[29] P. Paliwal and D. Kumar, ‘‘ABC based neural network approach for
+churn prediction in telecommunication sector,’’ Smart Innov. Syst. Technol.
+(ICTIS), Ahmedabad, Gujarat, vol. 84, 2017, pp. 343–349.
+[30] H. N. Nhu, S. Nitsuwat, and M. Sodanil, ‘‘Prediction of stock price using
+an adaptive neuro-fuzzy inference system trained by firefly algorithm,’’ in
+Proc. Int. Comput. Sci. Eng. Conf. (ICSEC), Nakorn Pathom, Thailand,
+Sep. 2013, pp. 302–307, doi: 10.1109/ICSEC.2013.6694798.
+57031
+
+H. Zhang et al.: Variable Universe Fuzzy Control of High-Speed Elevator Horizontal Vibration
+
+[31] X.-S. Yang, ‘‘Firefly algorithms for multimodal optimization,’’ in Stochastic Algorithms: Foundations and Applications—SAGA (Lecture Notes in
+Computer Science), vol. 5792. Berlin, Germany: Springer-Verlag, 2009,
+pp. 169–178.
+[32] I. Fister, I. Fister, X.-S. Yang, and J. Brest, ‘‘A comprehensive review of
+firefly algorithms,’’ Swarm Evol. Comput., vol. 13, pp. 34–46, Dec. 2013.
+[33] S. Cao, Q. He, and R. Zhang, ‘‘Robust control of high-speed elevator
+transverse vibration based on LMI optimization,’’ Control Eng. Appl.
+Inform., vol. 22, no. 1, pp. 72–83, 2019.
+
+HAO ZHANG was born in Jinan, China.
+He received the B.S. degree in computer science
+and technology from the College of Computer
+Science, Sichuan University, Chengdu, in 2018.
+He is currently pursuing the M.S. degree with the
+School of Mechanical and Electrical Engineering,
+Shandong Jianzhu University, Jinan.
+His current research interests include machine
+learning and intelligent control.
+
+RUIJUN ZHANG received the B.S. degree in
+mechanical engineering from Shandong Jianzhu
+University, Jinan, in 1985, the M.S. degree in
+mechanical engineering from the Harbin Institute
+of Technology, Harbin, in 1990, and the Ph.D.
+degree in mechanical and electronic engineering
+from the School of Automation, Beijing University
+of Posts and Telecommunications, China, in 2015.
+From 2003 to 2009, he was an Associate Professor with the School of Mechanical and Electrical
+Engineering, Shandong Jianzhu University. Since 2009, he has been a Professor with the School of Mechanical and Electrical Engineering, Shandong
+Jianzhu University. He is the author of six books and more than 90 articles.
+His research interests include multi-field coupling vibration theory, system
+dynamics, and intelligent control.
+
+57032
+
+QIN HE received the B.S. degree in mechanical
+design and manufacturing from Jinan University,
+Jinan, in 2001, the M.S. degree in mechanical
+manufacturing and automation from the Lanzhou
+University of Technology, in 2004, and the Ph.D.
+degree in control science and engineering from
+the National University of Defense Technology,
+Changsha, in 2018.
+From 2012 to 2019, she was an Associate Professor with the School of Mechanical and Electrical Engineering, Shandong Jianzhu University, Jinan. Since 2019, she has
+been a Professor with the School of Mechanical and Electrical Engineering,
+Shandong Jianzhu University. She is the author of five books, and more
+than 20 articles. Her research interests include robust control and intelligent
+control.
+
+LIXIN LIU was born in Dezhou. He graduated from Dezhou Secondary Vocational School,
+Dezhou, in 1997.
+Since 2012, he has been a Senior Engineer
+with Shandong Fuji Zhiyu Elevator Company Ltd.,
+Dezhou. He is the author of more than ten articles
+and more than 90 inventions. His research interests
+include experiment design and elevator test.
+
+VOLUME 9, 2021
+
+

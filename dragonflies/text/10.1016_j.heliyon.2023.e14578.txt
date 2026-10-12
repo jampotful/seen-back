@@ -1,0 +1,227 @@
+Sustainable development of fuel cell using enhanced weighted mean of vectors algorithm
+Manish Kumar Singla, Jyoti Gupta, Parag Nijhawan, Mohammed H. Alsharif, Mun-Kyeom Kim (2023). Heliyon. https://www.ncbi.nlm.nih.gov/pmc/articles/10025917. doi:10.1016/j.heliyon.2023.e14578. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Sustainable development of fuel cell using enhanced weighted mean of vectors algorithm
+
+## Abstract
+Using the mathematical model of a Direct Methanol Fuel Cell (DMFC) stack, a new optimum approach is presented for estimating the seven unknown parameters i.e., (eo, α, R, jeid, C1, β,req) optimally. Specifically, a method is proposed for minimization of the Sum of Squared Errors (SSE) associated with the estimated polarization profile, based on the experimental data from simulations. The Enhanced Weighted mean of vectors (EINFO) algorithm is a novel metaheuristic method that is proposed to achieve this goal. An analysis of the results of this method is then compared to various metaheuristic algorithms such as the Particle Swarm Optimization (PSO), Sine Cosine Algorithm (SCA), Dragonfly Algorithm (DA), Atom Search Optimization (ASO), and Weighted mean of vectors (INFO) well known in literature. As a final step to confirm the proposed approach's effectiveness, the sensitivity analysis is carried out using temperature changes, along with comparison against different approaches described in the literature to demonstrate its superiority. After comparison of parameter estimation and different operating temperature a non-parametric test is also performed and compared with the rest of the metaheuristic algorithms used in the manuscript. From these tests it is concluded that the proposed algorithm is superior to the rest of the compared algorithms.
+
+## Introduction
+A growing number of research projects are devoted to environmental and ecological issues [[1], [2], [3]]. Research in this area is focused on developing clean energy sources, which is most important. The low carbon footprint and efficiency of fuel cells make them one of the most preferred energy sources today. Additionally, the production of electricity from fuel cells is not influenced by the weather, unlike that of solar and wind energy sources. Direct methanol fuel cell technology will be the main emphasis (DMFC). This fuel cell is regarded as one of the top rivals for low power applications (from less than a watt to several megawatts) because to its liquid fuel and minimal CO2 emissions, as well as low activation temperature.
+In order to examine the performance-affecting factors for DMFC cells, analytical models [[4], [5], [6], [7], [8]], semi-empirical equations [[9], [10], [11], [12], [13]], and mechanistic models [[14], [15], [16], [17], [18], [19], [20], [21]] have all been taken into account. One of the main areas of interest is semi-empirical models. Yang et al. [11] developed a fuel cell model with an equivalent circuit that successfully addresses nonlinear resistors, capacitors, and an inductor. A model of a DMFC type fuel cell was published by Yang et al. [12] that takes into account four operating parameters, such as temperature, methanol concentration, and methanol and air flow rates.
+Compared to the PEMFC and SOFC fuel cells, the number of publications in the literature devoted to the modelling of the DMFC seems to be quite minimal. Mostly researchers estimate the unknown parameters using meta heuristic algorithm like swam based algorithms [22,23], genetic based algorithms [24] and currently focusing on artificial intelligence based algorithms [25,26]. Most of these works have had great difficulty in solving the Butler–Volmer equation. To make the intricacy of this equation simpler in their writings, the authors use assumptions and approximations. The performance of the models suggested for retracing experimental data of the current density curve and stack voltage (J-V) of DMFC stacks may be adversely affected by the application of certain approximations and assumptions. The key optimization approach used in earlier publications for parameter extraction is Newton-Raphson [[9], [10], [11], [12], [13]]. The drawback of this type of optimization strategy is that it has demonstrated a high sensitivity to beginning values and is difficult to differentiability and convexity. Researchers also noted that metaheuristic methods were not used for the extraction of parameters from the DMFC stack models, despite the fact that these approaches were demonstrated to conduct optimization better than other optimization strategies. They may, for instance, be used to extract properties from models of solar cells, PEMFC [27], SOFC fuel cells, and other systems. The paper's main contribution is outlined in the highlights below:•Using a distinct EINFO methodology, the DMFC model's parameters are optimally retrieved.•Real experimental data collected in various climatic conditions are used to confirm the performance of the proposed strategy, which is then compared to other well-established approaches.•The calculation time of the fuel cell model is computed in order to evaluate the effectiveness and precision of the suggested algorithm.•To check the consistency and robustness of the proposed algorithm the convergence curve, and different operating temperature, results are obtained.•Non-parametric statistical test i.e., Friedman Ranking Test, Wilcoxon rank sum test is done for finding the significance of parameter estimation of DMFC.
+Using a distinct EINFO methodology, the DMFC model's parameters are optimally retrieved.
+Real experimental data collected in various climatic conditions are used to confirm the performance of the proposed strategy, which is then compared to other well-established approaches.
+The calculation time of the fuel cell model is computed in order to evaluate the effectiveness and precision of the suggested algorithm.
+To check the consistency and robustness of the proposed algorithm the convergence curve, and different operating temperature, results are obtained.
+Non-parametric statistical test i.e., Friedman Ranking Test, Wilcoxon rank sum test is done for finding the significance of parameter estimation of DMFC.
+
+## DMFC mathematical modeling
+In a fuel cell, chemical energy is transformed into electrical energy. It continuously converts chemical energy into electrical energy and heat. The fuel cell transforms the chemical energy provided by a fuel and an oxidant into water and electrical energy. The fuel cell is different from a battery in that it runs constantly while receiving fuel rather than storing energy. The mathematical modelling of the DMFC stack is our goal and schematic of DMFC is represented in Fig. 1. To extract the model's unidentified parameters i.e., (eo, α, R, jeid, C1, β,req), the EINFO metaheuristic algorithm is adopted. The DMFC cell voltage is represented in equation (1) [10].(1)vcell=Eact−Econ−Erev−EohmWhere the cell voltage is represented by vcell, the concentration polarization is represented by Econ, the activation polarization is represented by Eact, the reversible polarization is represented by Erev, and the ohmic polarization is represented by Eohm.Fig. 1Schematic of DMFC [28].Fig. 1
+Schematic of DMFC [28].
+The electrochemical equation of DMFC is given in following equations:
+Equation (2) represents the anode side electrochemical reaction:(2)CH3OH+H2O→6H++6e−+CO2
+Equation (3) represents the cathode side electrochemical reaction:(3)32O2+6H++6e−→3H2O
+Equation (4) represents the overall electrochemical reaction:(4)CH3OH+32O2→2H2O+CO2+Heat(a)Expression for Activation Loss Voltage:
+Expression for Activation Loss Voltage:
+The overvoltage needed to energize the electrodes is represented by the activation voltage. Using the Butler-Volmer equation, the current density jmax will be expressed in equation (5) to estimate the value of the activation voltage [9]:(5)jmax=jeid[e(αnFRTEact)−e−((1−α)FRTEact)]Where exchange current density is represented by jeid, and the value of α lies between the 0 and 1. The calculation of the activation voltage of equation (5) cannot be solved analytically in its current form. The voltage Eact will be replaced by Econ, Erev, Eohm, and vcell in the first exponential of the equation to solve this problem, which results in the following equation (6):(6)jmax=jeid[e(αnFRT(Econ−Eohm−Erev−vcell))−e−((1−α)nFRTEact)]
+Finally, the expression for the new activation voltage may be expressed in equation (7):(7)Eact=RT[log(jmax+jeide(αnFRT(Econ−Eohm−Erev−vcell)))−log(jeid)]αnF(b)Expression for Ohmic Loss Voltage:
+Expression for Ohmic Loss Voltage:
+The term “ohmic loss voltage” refers to the resistances that are added in response to the movement of ions, electrons, and material across a membrane. The following equation (8) represents the ohmic voltage [10]:(8)Eohm=RjcdWhere the internal resistance of the fuel cell is represented by R, and he current density is denoted by jcd.(c)Expression for Concentration Loss Voltage:
+Expression for Concentration Loss Voltage:
+The voltage loss due to mass transportation is indicated by the voltage loss of concentration. The concentration voltage may be expressed in equation (9) using Fick's law [12]:(9)Econ=−RTβnFln(1−jmaxjlimit)In equation (9) jmax is briefly represented in equation (10):(10)jmax=Erev−vcell−Rjcdrcon+ractWhere the empirical coefficient parameter is denoted by β, and the limit current density is represented by jlimit.(d)Expression for Reversible Loss Voltage:
+Expression for Reversible Loss Voltage:
+The energetic activity in the fuel cell, which includes the forming and breaking of bonds at the level of the electrodes, leads to the reversible voltage. The Nernst equation may be used to explain the reversible voltage as shown in equation (11) [21]:(11)Erev=eo+RTnF[log(cCH3OH)+32log(po2)]−RTnF[2log(pH2O)+32log(pco2)]Where eo is the potential for the reaction between methanol and oxygen, pCH3OH is the partial pressure of methanol present at the anode, pH2O is the partial pressure of water at the cathode, which is 1, when liquid water is produced, po2 is the partial pressure of oxygen at the cathode, is pco2 the partial pressure CO2, R is the universal gas constant (8.314 J/molK), F is the Faraday's constant (94,485 c/mol) and number of electrons is represented by n. In general, experimental access to the pressures of CO2 and H2O is not possible. Due to these factors, the term −RTnF[2log(pH2O)+32log(pc2o)] will equal C1, making C1 a parameter that has to be established. The reversible voltage equation therefore becomes as shown in equation (12):(12)Erev=eo+RTnF[log(cCH3OH)+32log(po2)]+C1Where the temperature of cell in K (Kelvin) is denoted by T.(e)Expression for Fuel Cell Voltage:
+Expression for Fuel Cell Voltage:
+Based on previous theoretical developments, the following equation (13a), (13b), (13c), (13d), (13e) can be the expression of the fuel cell voltage Vcell:(13a)vcell=Eact−Econ−Erev−EohmWith(13b)Eact=RT[log(jmax+jeide(αnfrt(Econ−Eohm−Erev−vcell)))−log(jeid)]αnF(13c)Eohm=Rjcd(13d)Econ=−RTβnFln(1−jmaxjlimit)(13e)Erev=eo+RTnF[log(cCH3OH)+32log(po2)]+C1
+The seven unknown parameters y are given by equations (13a), (13b), (13c), (13d), (13e) in the form y = [eo, α, R, jeid, C1, β,req].
+
+## Problem formulation
+For the purpose of estimating the parameters of DMFC, this research suggests a new, better approach called EINFO. Utilizing optimization methods, output voltage is predicted for each input of current density. Equation (14) illustrates the objective function of the SSE (Sum of Square Error) metric, which is used to compare predicted and experimental output voltages.(14)SSE=MIN(F=∑i=1N(Vactual−Vi)2)
+The constraints of the DMFC is represented in equations (15), (16), (17), (18), (19), (20), (21):(15)eomin≤eo≤eomax(16)βmin≤β≤βmax(17)αmin≤α≤αmax(18)Rmin≤R≤Rmax(19)jeidmin≤jeid≤jeidmax(20)reqmin≤req≤reqmax(21)C1min≤C1≤C1maxWhere N represents the number of data points Vactual is the experimental output voltage and Vi is the predicted output voltage using various optimization algorithms. The main goal of this paper is to minimize the SSE value for obtaining better performance as well as more accuracy and precision in order to estimate the parameters of DMFC.
+
+## Method
+In this part, the suggested improved INFO (EINFO) algorithm is provided after a brief description of the weighted mean of vectors (INFO) methodology.
+
+## Weighted mean of vectors (INFO)
+In 2022, the INFO method was presented [29]. Using four key stages—initialization, updating rule, vector combining, and lastly local search—this technique's concept relies on a strong structure and updating the vectors' positions.Step 1Initialization Stage: A population of n vectors in a D-dimensional search space compensate the INFO approach. The following equation (22) produces a random beginning population:(22)Xn=Xmin+rand(0,1).(Xmax−Xmin)Where Xn is the nth vector, Xmin,Xmax are the limits of the solution domain in each problem and rand(0,1) is a random number defined in the range of [0, 1].Step 2Updating Rule: Through the search process, this step broadens the population. This operation produces new vectors by using the weighted mean of the vectors. The following equation (23) is the updating rule's key formulation:(23)ifrand<0.5z1liter=xliter+σ×MeanRule+randn×(xbs−xa1iter)(f(xbs)−f(xa1iter)+1)z2liter=xbs+σ×MeanRule+randn×(xa1iter−xbiter)(f(xa1iter)−f(xa2iter)+1)elsez1liter=xaiter+σ×MeanRule+randn×(xa2iter−xa3iter)(f(xa2iter)−f(xa3iter)+1)z2iiter=xbt+σ×MeanRule+randn×(xa1iter−xa2iter)(f(xa1iter)−f(xa2iter)+1)endWhere z1liter and z2liter denote the new vectors in the gth generation; and σ is the scaling rate of a vector, as shown in equation (24) as:(24)σ=2α×rand−αStep 3Vector Combining: The two vectors generated in the preceding section (z1liter and z2liter) (and) are merged with vector xliter based on the INFO method to build the population's diversity as shown in equation (29.1), (29.2), (29.3):ifrand<0.5ifrand<0.5(25.1)uliter=z1liter+μ.|z1liter−z2liter|else(25.2)uliter=z2liter+μ.|z1liter−z2liter|endelse(25.3)uliter=xliterendWhere μ is equal to 0.05 × randn.Step 4Local Search: The capability of this stage prevent the algorithm to drop into local minima. The local operator is considered using the global location (xbestiter). According to this operator, a novel vector can be produced around global position (xbestiter) as shown in equation 26.1 to 26.4:ifrand<0.5ifrand<0.5(26.1)uliter=xbs+randn×(MeanRule+randn×(xbsiter−xa1iter))else(26.2)uliter=xrnd+randn×(MeanRule+randn×(υ1×xbs−υ2×xrnd))endend(26.3)xrnd=φ×xavg+(1−φ)×(φ×xbt+(1−φ)×xbs)(26.4)xavg=(xa+xb+xc)3Where φ is a random number in the range of (0, 1); and xrnd is a new solution that combines the components of the three solutions (xavg, xbt and xbs) randomly. This increases the randomness nature of the proposed algorithm to better search in the solution space. υ1 and υ2 are two random numbers given by the following equation (29.1), (29.2), (29.3):(26.5)υ1={2×randifp>0.51otherwise(26.6)υ2={randifp<0.51otherwiseWhere p refers to a random number in the range of (0, 1).
+Initialization Stage: A population of n vectors in a D-dimensional search space compensate the INFO approach. The following equation (22) produces a random beginning population:(22)Xn=Xmin+rand(0,1).(Xmax−Xmin)Where Xn is the nth vector, Xmin,Xmax are the limits of the solution domain in each problem and rand(0,1) is a random number defined in the range of [0, 1].
+Updating Rule: Through the search process, this step broadens the population. This operation produces new vectors by using the weighted mean of the vectors. The following equation (23) is the updating rule's key formulation:(23)ifrand<0.5z1liter=xliter+σ×MeanRule+randn×(xbs−xa1iter)(f(xbs)−f(xa1iter)+1)z2liter=xbs+σ×MeanRule+randn×(xa1iter−xbiter)(f(xa1iter)−f(xa2iter)+1)elsez1liter=xaiter+σ×MeanRule+randn×(xa2iter−xa3iter)(f(xa2iter)−f(xa3iter)+1)z2iiter=xbt+σ×MeanRule+randn×(xa1iter−xa2iter)(f(xa1iter)−f(xa2iter)+1)endWhere z1liter and z2liter denote the new vectors in the gth generation; and σ is the scaling rate of a vector, as shown in equation (24) as:(24)σ=2α×rand−α
+Vector Combining: The two vectors generated in the preceding section (z1liter and z2liter) (and) are merged with vector xliter based on the INFO method to build the population's diversity as shown in equation (29.1), (29.2), (29.3):ifrand<0.5ifrand<0.5(25.1)uliter=z1liter+μ.|z1liter−z2liter|else(25.2)uliter=z2liter+μ.|z1liter−z2liter|endelse(25.3)uliter=xliterendWhere μ is equal to 0.05 × randn.
+Local Search: The capability of this stage prevent the algorithm to drop into local minima. The local operator is considered using the global location (xbestiter). According to this operator, a novel vector can be produced around global position (xbestiter) as shown in equation 26.1 to 26.4:ifrand<0.5ifrand<0.5(26.1)uliter=xbs+randn×(MeanRule+randn×(xbsiter−xa1iter))else(26.2)uliter=xrnd+randn×(MeanRule+randn×(υ1×xbs−υ2×xrnd))endend(26.3)xrnd=φ×xavg+(1−φ)×(φ×xbt+(1−φ)×xbs)(26.4)xavg=(xa+xb+xc)3Where φ is a random number in the range of (0, 1); and xrnd is a new solution that combines the components of the three solutions (xavg, xbt and xbs) randomly. This increases the randomness nature of the proposed algorithm to better search in the solution space. υ1 and υ2 are two random numbers given by the following equation (29.1), (29.2), (29.3):(26.5)υ1={2×randifp>0.51otherwise(26.6)υ2={randifp<0.51otherwiseWhere p refers to a random number in the range of (0, 1).
+
+## Proposed enhanced efficient optimization (EINFO) algorithm
+The development is called the high and low velocity ratios based on the Marine predator algorithm (MPA) [30,31]. This way was proposed to solve the possibility of the optimal value may drop into local minima. This modification depends on two stages. The first stage is the high-velocity ratio situation. This stage's mathematical model is shown in equation 27.1 to 27.3:(27.1)iter<13itermax(27.2)S=RB→⨂(E−RB→⨂Xn(iter))(27.3)Xn(iter+1)=Xn(iter)+P.RB→⨂SWhere RB→ is a vector of random integers from the Normal distribution that reflect Brownian motion. The notation ⨂ depicts entry-by-entry multiplications. The new position is simulated by multiplying RB→ by previous position, P = 0.5 is a constant, and RB→ is a vector of uniform random values in the range [0, 1]. This situation occurs during the first third of iterations when the step size is large, indicating a high level of exploratory ability. iter is the current iteration while itermax is the maximum one. The fittest solution (E) is designated as a best position to form a matrix as shown in equation (28):(28)E=[Xb1.1iter⋯Xb1.diter⋮⋱⋮Xbn.1iter⋯Xbn.diter]Where, Xb denotes the best solution, which is copied n times to create the E matrix. n denotes the number of search agents, whereas d denotes the number of dimensions.
+The second stage is the low velocity ratio. This stage occurs near the end of the optimization process, which is typically associated with high exploitation capability. Lévy is the best approach for low-velocity ratios. This stage is depicted as shown in equation (29.1), (29.2), (29.3):(29.1)iter>13itermax(29.2)S=RL→⨂(RL→⨂E−Xn(iter))(29.3)Xn(iter+1)=E+P.CF⨂S
+In the Lévy method, multiplying RL and E, whereas adding the step size to position to aid in the updating of location. The fittest solution (E) is designated as a best position to form a matrix as shown in equation (30):(30)E=[Xb1.1iter⋯Xb1.diter⋮⋱⋮Xbn.1iter⋯Xbn.diter]
+Additional feature of EINFO is increasing the chances of escape from local optima. The Fig. 2 and Fig. 3 depicts the flowchart and pseudocode of proposed algorithm, respectively. The place of high and low velocity ratios in the proposed algorithm are presented in this figure. This modification leads to enhance the exploration of the proposed EINFO algorithm.Step 1InitializationSet the initial parameters (dim, population, size, maximum iteration)Generate initial populationCalculate the objective function of each vectorDetermine the best vectorStep 2Updating RuleCalculate the vector Z1iiter&Z2iiter using equation 23Step 3Vector CombiningCalculate the vector Uiiter using equation 25Step 4Local SearchCalculate the local search operate using equation 26Step 5High & low velocity ratiofor iter <1/3 iter maxCalculate the high velocity ration using equation 27Update the best vectorthenfor iter >1/3 iter maxCalculate the low velocity ration using equation 29Update the best vectorStep 6Return Vector Xbest,jg as the final solutionFigure 2Proposed algorithm flowchart.Figure 2Fig. 3Pseudocode of EINFOFig. 3
+InitializationSet the initial parameters (dim, population, size, maximum iteration)Generate initial populationCalculate the objective function of each vectorDetermine the best vector
+Set the initial parameters (dim, population, size, maximum iteration)
+Generate initial population
+Calculate the objective function of each vector
+Determine the best vector
+Updating RuleCalculate the vector Z1iiter&Z2iiter using equation 23
+Calculate the vector Z1iiter&Z2iiter using equation 23
+Vector CombiningCalculate the vector Uiiter using equation 25
+Calculate the vector Uiiter using equation 25
+Local SearchCalculate the local search operate using equation 26
+Calculate the local search operate using equation 26
+High & low velocity ratiofor iter <1/3 iter maxCalculate the high velocity ration using equation 27Update the best vectorthenfor iter >1/3 iter maxCalculate the low velocity ration using equation 29Update the best vector
+for iter <1/3 iter max
+Calculate the high velocity ration using equation 27
+Update the best vector
+then
+for iter >1/3 iter max
+Calculate the low velocity ration using equation 29
+Update the best vector
+Return Vector Xbest,jg as the final solution
+Proposed algorithm flowchart.
+Pseudocode of EINFO
+
+## Results and discussion
+The recently utilized metaheuristic algorithms PSO [32], DA [33], ASO [34], SCA [35], and INFO [28] are used to validate the proposed algorithm. The technical and operational data of the tested stack are displayed in Table 1. Table 2 displays the boundaries of the control variables for the DMFC stack. The estimated values of the control variables (eo, α, r, jeid, C1, β,req) were calculated by resolving the optimization problem. In order to produce a precise DMFC stack model, these properties will be used.Table 1Data sheet of DMFC [10].Table 1ModelDataSurface of Plate A [cm2]25Cathode Side Oxygen Pressure [bar]1.35Reservoir Side Oxygen Pressure [bar]1.5Oxygen Flowrate [ml/min]200Methanol Flowrate [ml/min]1.94Temperature [oC]80Table 2DMFC upper and lower bounds [10].Table 2ParametersLower BoundUpper Boundeo (V)0.831.23α01R03jeid00.3C1−4.8−0.5β02req050
+Data sheet of DMFC [10].
+DMFC upper and lower bounds [10].
+
+## DMFC parameter estimation
+Every programme has been coded in MATLAB 2020a and has been executed 20 times. All the algorithms are iterated at the same of search agents i.e. 30 and maximum no of iterations i.e. 1000 whereas the rest of the parameters of all the algorithms are kept standard. The suggested EINFO is used to estimate the parameters of DMFCs, and its performance and efficiency are further evaluated in comparison to a number of other algorithms, including PSO, INFO, DA, SCA, and ASO. The DMFC parameter estimation at STC (Standard Temperature Condition), with SSE and computation time is shown in Table 3. Fig. 4 shows, the sum of square error, standard deviation, I–V and P–V graph and computation time at standard temperature condition. The suggested approach outperforms the other comparable metaheuristic algorithms, it may be shown from these scattering figures. Table 4 displays the DMFC's statistics results. The DMFC convergence curve at STC is shown in Fig. 5. The suggested method outperforms the other examined algorithms, according to this figure.Table 3DMFC parameter estimation.Table 3Parameters/AlgorithmsPSODAASOSCAINFOProposed Algorithm (EINFO)eo (V)0.84580.85741.22591.22990.89650.8994α0.52310.45870.55070.25980.35870.8879R2.95871.24101.32581.54231.00281.2054jeid0.12540.12480.21940.15920.12490.1670C1−0.8955−0.1131−0.8532−0.1131−0.9416−0.5814β0.13680.57430.25871.23050.15741.5840req12.71621.07815.55712.71116.17114.258SSE1.54E-021.04E-041.31E-041.12E-031.57E-081.77E-10Computation Time (Sec)2.9081.5891.8971.9951.1151.252Fig. 4(a) Sum of Square Error (b) Standard Deviation (c) Computational Time (d) Convergence Curve at STC (e) V–I Graph (f) P–I Graph.Fig. 4Table 4DMFC statistical results.Table 4Parameters/AlgorithmsPSODAASOSCAINFOProposed Algorithm (EINFO)Minimum1.54E-021.04E-041.31E-041.12E-031.57E-081.77E-10Maximum2.35E-021.47E-042.19E-042.40E-036.49E-085.34E-10Average1.90E-021.27E-041.79E-041.56E-033.34E-082.89E-10Standard Deviation (S.D)3.16E-031.72E-053.85E-055.16E-042.12E-081.48E-10Fig. 5(a) Convergence Curve at 60 °C (b) 70 °C (c) 90 °C.Fig. 5
+DMFC parameter estimation.
+(a) Sum of Square Error (b) Standard Deviation (c) Computational Time (d) Convergence Curve at STC (e) V–I Graph (f) P–I Graph.
+DMFC statistical results.
+(a) Convergence Curve at 60 °C (b) 70 °C (c) 90 °C.
+
+## Convergence analysis
+The parameter estimation for the DMFC at various operating temperatures is shown in Table 5. The parameter is extracted at different temperature i.e. 60, 70 and 90 °C respectively. At different temperature SSE and computation time is calculated as represented in Table 5. According to this table, the suggested method performs much better than the rest of the examined algorithms in terms of SSE and calculation time. Fig. 5 shows the convergence curve at various temperatures. This shows that the suggested hybrid method is more accurate and precise than existing meta-heuristic algorithms because of its faster rate of convergence. The SSE at various temperatures is seen in Fig. 6. Additionally, it may be inferred from this that the suggested method is superior to the rest of the algorithms evaluated. Fig. 7 shows the computational time at various operating temperatures, and it can be inferred that the suggested method performs significantly better than existing algorithms from this as well. Fig. 8, Fig. 9 represents the I–V graphs and I–P graphs at different operating temperature of the proposed algorithm respectively.Table 5Parameter estimation of DMFC at different operating temperature.Table 5Temperature (oC)Parameters/AlgorithmsPSODAASOSCAINFOProposed Algorithm (EINFO)60eo (V)0.25890.35870.45280.54780.21480.2105α0.10480.33260.38880.26730.20020.3301R1.02511.24122.23582.95872.66872.0627jeid0.16700.17660.22550.15970.11480.1282C1−0.9416−0.9816−0.4070−0.9066−0.4117−0.8773β0.13600.04000.03810.03210.02410.0341req16.17117.75422.16015.75911.53812.325SSE1.69E-021.17E-041.62E-041.16E-031.65E-081.82E-10Computation Time (Sec)2.7481.8741.9912.0541.1581.02170eo (V)0.32540.89140.58971.12580.59680.2358α0.11050.58740.19970.26250.30240.3425R1.02542.89502.03361.03272.05171.1691jeid0.15920.23540.16480.18910.11610.1955C1−0.8532−0.2893−0.1115−0.9162−0.7818−0.9298β0.05740.52100.12030.28020.29250.3177req15.88723.92116.93618.94411.30819.253SSE1.89E-021.26E-041.64E-041.49E-032.51E-082.35E-10Computation Time (Sec)2.8952.1662.5911.2911.2581.11390eo (V)0.59870.65870.56210.32540.32100.4897α0.11240.27070.28980.32890.45430.2901R1.00081.05871.12252.53321.27051.2243jeid0.12490.23580.14830.17570.22970.1465C1−0.1131−0.8532−0.1154−0.1066−0.1173−0.1163β0.13620.29700.25610.25710.45320.1407req12.71123.69414.43117.45422.25514.243SSE2.04E-021.39E-042.17E-041.62E-034.50E-083.18E-10Computation Time (Sec)2.7541.2261.5872.3691.1871.024Fig. 6(a) Sum of Square Error at 60 °C (b) 70 °C (c) 90 °C.Fig. 6Fig. 7(a) Computational Time at 60 °C (b) 70 °C (c) 90 °C.Fig. 7Fig. 8(a) I–V Graph at 60 °C (b) 70 °C (c) 90 °C.Fig. 8Fig. 9(a) I–P Graph at 60 °C (b) 70 °C (c) 90 °C.Fig. 9
+Parameter estimation of DMFC at different operating temperature.
+(a) Sum of Square Error at 60 °C (b) 70 °C (c) 90 °C.
+(a) Computational Time at 60 °C (b) 70 °C (c) 90 °C.
+(a) I–V Graph at 60 °C (b) 70 °C (c) 90 °C.
+(a) I–P Graph at 60 °C (b) 70 °C (c) 90 °C.
+
+## Non-parametric test
+Based on the Friedman Ranking Test [[36], [37], [38], [39]], Table 6 compares the parameter estimation of DMFC using the proposed algorithm with INFO, DA, ASO, SCA, and PSO respectively. It is evident from the results that the proposed algorithm is more efficient, accurate, precise, and robust than various other meta-heuristic algorithms. Second, the Wilcoxon rank sum test is applied in this test. It seems to be a simple, yet secure, and reliable non-parametric method for combined statistical analysis when samples are independent, and it is prominent and present in dynamic programming, as shown in Table 7.Table 6Friedman ranking test.Table 6AlgorithmFriedman rankingProposed Algorithm1INFO2SCA5ASO4DA3PSO6Table 7Wilcoxon rank sum test.Table 7AlgorithmINFODAASOSCAPSOProposed Algorithm2.0104e-122.0123e-122.0142e-122.0180e-121.9822e-12
+Friedman ranking test.
+Wilcoxon rank sum test.
+
+## Conclusion
+The paper proposes a newly developed algorithm, EINFO, for obtaining the optimal solution to the DMFC parameter estimation optimization problem. Based on the results obtained, the following conclusions were drawn:1.A new algorithm i.e., EINFO algorithm has been proposed.2.At Standard Temperature Conditions, Parameter Estimation of DMFC is performed using EINFO, and the results show that the proposed hybrid algorithm offers better performance and more accuracy than various other meta-heuristic algorithms, including the SSE and computational time.3.This study presents a convergence graph and different operating temperature curves which clearly demonstrate one of the highest speed of convergence of the proposed algorithm over other meta-heuristic algorithms.4.In addition, a complete statistical analysis was conducted using Friedman Ranking Test and Wilcoxon rank sum test methods to demonstrate the efficiency, performance, and robustness of the proposed algorithm, with EINFO securing a first place ranking thus indicating that EINFO is the most effective.
+A new algorithm i.e., EINFO algorithm has been proposed.
+At Standard Temperature Conditions, Parameter Estimation of DMFC is performed using EINFO, and the results show that the proposed hybrid algorithm offers better performance and more accuracy than various other meta-heuristic algorithms, including the SSE and computational time.
+This study presents a convergence graph and different operating temperature curves which clearly demonstrate one of the highest speed of convergence of the proposed algorithm over other meta-heuristic algorithms.
+In addition, a complete statistical analysis was conducted using Friedman Ranking Test and Wilcoxon rank sum test methods to demonstrate the efficiency, performance, and robustness of the proposed algorithm, with EINFO securing a first place ranking thus indicating that EINFO is the most effective.
+The proposed algorithm has better performance than various other meta-heuristic algorithms, as it is more accurate and precise. The application of this method can be explored in other areas for better results. This proposed algorithms cam be solved to different complex engineering problems like parameter estimation of solar PV, optimal sizing of renewable energy system, thermal scheduling, etc.
+
+## Author contribution statement
+Manish Kumar Singla: Performed the experiments; Analyzed and interpreted the data; Wrote the paper.
+Jyoti Gupta: Analyzed and interpreted the data.
+Parag Nijhawan: Conceived and designed the experiments.
+Mohammed H. Alsharif: Performed the experiments.
+Mun Kyeom Kim: Conceived and designed the experiments; Contributed reagents, materials, analysis tools or data.
+
+## Funding statement
+Professor Mun Kyeom Kim was supported by National Research Foundation [2020R1A2C1004743].
+
+## Data availability statement
+The data that has been used is confidential.
+
+## Declaration of interest's statement
+The authors declare no conflict of interest.
+
+## Table Table 1: Data sheet of DMFC [10].
+Model | Data
+Surface of Plate A [cm2] | 25
+Cathode Side Oxygen Pressure [bar] | 1.35
+Reservoir Side Oxygen Pressure [bar] | 1.5
+Oxygen Flowrate [ml/min] | 200
+Methanol Flowrate [ml/min] | 1.94
+Temperature [oC] | 80
+
+## Table Table 2: DMFC upper and lower bounds [10].
+Parameters | Lower Bound | Upper Bound
+eo (V) | 0.83 | 1.23
+α | 0 | 1
+R | 0 | 3
+jeid | 0 | 0.3
+C1 | −4.8 | −0.5
+β | 0 | 2
+req | 0 | 50
+
+## Table Table 3: DMFC parameter estimation.
+Parameters/Algorithms | PSO | DA | ASO | SCA | INFO | Proposed Algorithm (EINFO)
+eo (V) | 0.8458 | 0.8574 | 1.2259 | 1.2299 | 0.8965 | 0.8994
+α | 0.5231 | 0.4587 | 0.5507 | 0.2598 | 0.3587 | 0.8879
+R | 2.9587 | 1.2410 | 1.3258 | 1.5423 | 1.0028 | 1.2054
+jeid | 0.1254 | 0.1248 | 0.2194 | 0.1592 | 0.1249 | 0.1670
+C1 | −0.8955 | −0.1131 | −0.8532 | −0.1131 | −0.9416 | −0.5814
+β | 0.1368 | 0.5743 | 0.2587 | 1.2305 | 0.1574 | 1.5840
+req | 12.716 | 21.078 | 15.557 | 12.711 | 16.171 | 14.258
+SSE | 1.54E-02 | 1.04E-04 | 1.31E-04 | 1.12E-03 | 1.57E-08 | 1.77E-10
+Computation Time (Sec) | 2.908 | 1.589 | 1.897 | 1.995 | 1.115 | 1.252
+
+## Table Table 4: DMFC statistical results.
+Parameters/Algorithms | PSO | DA | ASO | SCA | INFO | Proposed Algorithm (EINFO)
+Minimum | 1.54E-02 | 1.04E-04 | 1.31E-04 | 1.12E-03 | 1.57E-08 | 1.77E-10
+Maximum | 2.35E-02 | 1.47E-04 | 2.19E-04 | 2.40E-03 | 6.49E-08 | 5.34E-10
+Average | 1.90E-02 | 1.27E-04 | 1.79E-04 | 1.56E-03 | 3.34E-08 | 2.89E-10
+Standard Deviation (S.D) | 3.16E-03 | 1.72E-05 | 3.85E-05 | 5.16E-04 | 2.12E-08 | 1.48E-10
+
+## Table Table 5: Parameter estimation of DMFC at different operating temperature.
+Temperature (oC) | Parameters/Algorithms | PSO | DA | ASO | SCA | INFO | Proposed Algorithm (EINFO)
+60 | eo (V) | 0.2589 | 0.3587 | 0.4528 | 0.5478 | 0.2148 | 0.2105
+α | 0.1048 | 0.3326 | 0.3888 | 0.2673 | 0.2002 | 0.3301
+R | 1.0251 | 1.2412 | 2.2358 | 2.9587 | 2.6687 | 2.0627
+jeid | 0.1670 | 0.1766 | 0.2255 | 0.1597 | 0.1148 | 0.1282
+C1 | −0.9416 | −0.9816 | −0.4070 | −0.9066 | −0.4117 | −0.8773
+β | 0.1360 | 0.0400 | 0.0381 | 0.0321 | 0.0241 | 0.0341
+req | 16.171 | 17.754 | 22.160 | 15.759 | 11.538 | 12.325
+SSE | 1.69E-02 | 1.17E-04 | 1.62E-04 | 1.16E-03 | 1.65E-08 | 1.82E-10
+Computation Time (Sec) | 2.748 | 1.874 | 1.991 | 2.054 | 1.158 | 1.021
+70 | eo (V) | 0.3254 | 0.8914 | 0.5897 | 1.1258 | 0.5968 | 0.2358
+α | 0.1105 | 0.5874 | 0.1997 | 0.2625 | 0.3024 | 0.3425
+R | 1.0254 | 2.8950 | 2.0336 | 1.0327 | 2.0517 | 1.1691
+jeid | 0.1592 | 0.2354 | 0.1648 | 0.1891 | 0.1161 | 0.1955
+C1 | −0.8532 | −0.2893 | −0.1115 | −0.9162 | −0.7818 | −0.9298
+β | 0.0574 | 0.5210 | 0.1203 | 0.2802 | 0.2925 | 0.3177
+req | 15.887 | 23.921 | 16.936 | 18.944 | 11.308 | 19.253
+SSE | 1.89E-02 | 1.26E-04 | 1.64E-04 | 1.49E-03 | 2.51E-08 | 2.35E-10
+Computation Time (Sec) | 2.895 | 2.166 | 2.591 | 1.291 | 1.258 | 1.113
+90 | eo (V) | 0.5987 | 0.6587 | 0.5621 | 0.3254 | 0.3210 | 0.4897
+α | 0.1124 | 0.2707 | 0.2898 | 0.3289 | 0.4543 | 0.2901
+R | 1.0008 | 1.0587 | 1.1225 | 2.5332 | 1.2705 | 1.2243
+jeid | 0.1249 | 0.2358 | 0.1483 | 0.1757 | 0.2297 | 0.1465
+C1 | −0.1131 | −0.8532 | −0.1154 | −0.1066 | −0.1173 | −0.1163
+β | 0.1362 | 0.2970 | 0.2561 | 0.2571 | 0.4532 | 0.1407
+req | 12.711 | 23.694 | 14.431 | 17.454 | 22.255 | 14.243
+SSE | 2.04E-02 | 1.39E-04 | 2.17E-04 | 1.62E-03 | 4.50E-08 | 3.18E-10
+Computation Time (Sec) | 2.754 | 1.226 | 1.587 | 2.369 | 1.187 | 1.024
+
+## Table Table 6: Friedman ranking test.
+Algorithm | Friedman ranking
+Proposed Algorithm | 1
+INFO | 2
+SCA | 5
+ASO | 4
+DA | 3
+PSO | 6
+
+## Table Table 7: Wilcoxon rank sum test.
+Algorithm | INFO | DA | ASO | SCA | PSO
+Proposed Algorithm | 2.0104e-12 | 2.0123e-12 | 2.0142e-12 | 2.0180e-12 | 1.9822e-12
+
+## Figure Fig. 1: Schematic of DMFC [28].
+
+## Figure Figure 2: Proposed algorithm flowchart.
+
+## Figure Fig. 3: Pseudocode of EINFO
+
+## Figure Fig. 4: (a) Sum of Square Error (b) Standard Deviation (c) Computational Time (d) Convergence Curve at STC (e) V–I Graph (f) P–I Graph.
+
+## Figure Fig. 5: (a) Convergence Curve at 60 °C (b) 70 °C (c) 90 °C.
+
+## Figure Fig. 6: (a) Sum of Square Error at 60 °C (b) 70 °C (c) 90 °C.
+
+## Figure Fig. 7: (a) Computational Time at 60 °C (b) 70 °C (c) 90 °C.
+
+## Figure Fig. 8: (a) I–V Graph at 60 °C (b) 70 °C (c) 90 °C.
+
+## Figure Fig. 9: (a) I–P Graph at 60 °C (b) 70 °C (c) 90 °C.

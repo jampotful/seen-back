@@ -1,0 +1,2588 @@
+Identification of snails and parasites of medical importance via convolutional neural network: an application for human schistosomiasis
+Zac Yung-Chun Liu, Andy J. Chamberlin, Pretom Shome, Isabel J. Jones, Gilles J. Riveau, Raphael Abdoulaye Ndione, Lydie Bandagny, Nicolas Jouanard, Paul Van Eck, Ton Ngo, Susanne H. Sokolow, Giulio A. De Leo (2019). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/713727. doi:10.1101/713727. Licence: cc-by. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+1
+
+Identification of snails and parasites of medical importance
+
+2
+
+via convolutional neural network: an application for human
+
+3
+
+schistosomiasis
+
+4
+5
+
+Zac Yung-Chun Liu1*, Andy J. Chamberlin1*, Pretom Shome1, Isabel J. Jones1, Gilles Riveau2,
+
+6
+
+Raphael A. Ndione2, Lydie Bandagny2, Nicolas Jouanard2,3, Paul Van Eck4, Ton Ngo4, Susanne
+
+7
+
+H. Sokolow1,5, and Giulio A. De Leo1,6
+
+8
+9
+
+Keywords: computer vision, Schistosomiasis, neglected tropical disease, deep learning, neural
+
+10
+
+networks
+
+11
+12
+
+Manuscript submission to PLOS Neglected Tropical Diseases
+
+13
+14
+15
+16
+
+1Hopkins Marine Station, Stanford University, Pacific Grove, CA 93950, USA.
+
+17
+
+2Centre de Recherche Biomédicale Espoir pour la Santé, BP 226 Saint-Louis, Senegal.
+
+18
+
+3Station d'Innovation Aquacole (SIA), à Université Gaston Berger, Sanar, BP524 Saint-Louis,
+
+19
+
+Senegal.
+
+20
+
+4IBM Silicon Valley Lab, San Jose, CA 95141, USA.
+
+21
+
+5Department of Ecology, Evolution, and Marine Biology and Marine Science Institute, University
+
+22
+
+of California, Santa Barbara, CA 93106, USA.
+
+23
+
+6Woods Institute for the Environment, Stanford University, Pacific Grove, CA 93950, USA
+
+24
+25
+26
+27
+28
+
+*Send correspodence to: zacycliu@stanford.edu and achamb@stanford.edu
+
+29
+30
+31
+32
+
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+33
+34
+
+Abstract
+Schistosomiasis is a debilitating parasitic disease infecting over 250 million people with
+
+35
+
+nearly 800 million people at risk worldwide, primarily in sub-Saharan Africa. Transmission to
+
+36
+
+humans involves freshwater snails as intermediate hosts, which are particularly prevalent in
+
+37
+
+developing countries where dams and water resource projects have expanded freshwater snail
+
+38
+
+habitat. At our study sites in the lower Senegal River Basin, we have collected more than 5,500
+
+39
+
+images of the 7 freshwater snail species (grouped into 4 categories) most frequently
+
+40
+
+encountered in this aquatic ecosystem, 5 of which amplify and transmit either urinary or
+
+41
+
+intestinal human schistosomiasis, with the other 2 species responsible for the transmission of
+
+42
+
+less common parasitic diseases of humans and/or livestock. We have also collected over 5,100
+
+43
+
+images of 11 classes of trematodes, including human and non-human schistosomes. It takes a
+
+44
+
+great deal of training and expertise to accurately classify these organisms morphologically. In
+
+45
+
+recent years, deep convolutional neural networks (CNNs) have proven to be highly efficient for
+
+46
+
+image recognition tasks across many object categories. Here we demonstrate classification
+
+47
+
+capacity for snail and parasite images and test our model's performance against 8 highly-trained
+
+48
+
+human parasitologists with experience taxonomically classifying snail and parasite species from
+
+49
+
+the Senegal River Basin in West Africa. We establish and train a single CNN end-to-end directly
+
+50
+
+from images with only pixels and labels as inputs. Applying this state-of-the-art algorithm, we
+
+51
+
+are able to classify images of 4 snail categories with 99.64% accuracy and images of 11
+
+52
+
+parasite categories with 88.14% accuracy, which rivals highly-trained human parasitologists.
+
+53
+
+The trained algorithm could next be deployed to mobile devices for use in remote field settings
+
+54
+
+by local technicians, and significantly improve monitoring snail and parasite occurrence in the
+
+55
+
+field for disease control purposes.
+
+56
+57
+
+Author Summary
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+58
+
+Schistosomiasis is a neglected tropical disease (NTD) infecting over 250 million people
+
+59
+
+worldwide. The current approach to mitigate this disease in endemic regions is community or
+
+60
+
+school-based mass drug administration. However, parasites are primarily transmitted through
+
+61
+
+environmental reservoirs where freshwater snails serve as intermediate hosts. People use the
+
+62
+
+contaminated water sources for their daily tasks and get re-infected after drug treatment.
+
+63
+
+Therefore, drug administration alone is not effective for schistosomiasis control in such high
+
+64
+
+transmission settings. Recent studies show that snail population control is essential to reduce
+
+65
+
+disease transmission risks. To discern between parasitic worms of humans in snails and those
+
+66
+
+of other non-human species is a necessary step to precisely quantify transmission risk for
+
+67
+
+human schistosomiasis. However, it takes a great deal of expertise to train lab and field
+
+68
+
+technicians to accurately classify snail and parasite species. Artificial intelligence (AI)-powered
+
+69
+
+computer vision algorithms have recently proven to be highly efficient for image recognition
+
+70
+
+tasks. We have collected thousands of snail and parasite images in Senegal during 2015-2018.
+
+71
+
+Using these images as training data, we developed an AI model that classifies images of 4 snail
+
+72
+
+categories and 11 parasite categories with, in some cases, higher accuracy than well-trained
+
+73
+
+human parasitologists. This model could next be deployed to mobile devices for use in remote
+
+74
+
+field settings to support local technicians to identify transmission hotspots and target control.
+
+75
+76
+77
+
+Introduction
+Most human parasitic infections, such as schistosomiasis, onchocerciasis, lymphatic
+
+78
+
+filariasis, and malaria, are diseases of poverty: even while effective drugs to treat people exist,
+
+79
+
+the most affected communities are too poor to access them. Global health efforts have
+
+80
+
+attempted to fill this gap by delivering needed medication to rural communities in some of the
+
+81
+
+poorest countries through mass drug administration programs, a strategy that takes a practical
+
+82
+
+approach to control, treating whole communities, affordably, without regard to individual
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+83
+
+infection status. Yet because many parasites are transmitted through environmental reservoirs,
+
+84
+
+vectors, or intermediate hosts unaffected by this scheme, reinfection after treatment can be a
+
+85
+
+major impediment to achieving control using drugs alone. Thus, complementing human
+
+86
+
+treatment with transmission control, by identifying and eliminating hotspots of vectors and
+
+87
+
+reservoirs in the environment, could be most effective. Yet, this approach is severely hindered
+
+88
+
+by a lack of ecological research capacity in poor countries to identify, monitor, and affordably
+
+89
+
+eliminate relevant vectors and parasites with minimal environmental damage.
+
+90
+
+Human schistosomiasis is the second most important parasitic disease in the world
+
+91
+
+behind malaria, affecting over 250 million people in over 70 tropical and subtropical countries.
+
+92
+
+The majority of cases occur in sub-Saharan Africa, where, in recent decades, the expansion of
+
+93
+
+dams and water management infrastructure has resulted in the expansion of freshwater snail
+
+94
+
+habitat and human-water contact. These changes have benefited transmission of schistosoma
+
+95
+
+worms, which have a complex life cycle (Fig 1) involving: (1) a final vertebrate host (humans),
+
+96
+
+where the adult worms live and reproduce sexually, and (2) an intermediate freshwater snail
+
+97
+
+host where the larval stages of the worms develop via asexual reproduction. People are infected
+
+98
+
+through contact with water contaminated by free-living stages of the parasites that shed daily by
+
+99
+
+infected snails. Upon contact, the parasite penetrates skin and enters the bloodstream.
+
+100
+
+Therefore, infected snails in the freshwater environment are the source of rapid infection and re-
+
+101
+
+infection of humans in endemic areas [4]. And, despite the rise in preventive chemotherapy
+
+102
+
+campaigns in the last several decades, just as many people suffer from schistosomiasis today
+
+103
+
+as did 50 years ago [5].
+
+104
+
+Reducing snail populations using molluscicides has been an effective way to reduce
+
+105
+
+transmission of human schistosomiasis because snails serve as intermediate hosts of the
+
+106
+
+parasite [1, 2], but widespread mollusciciding has fallen out of favor because it is expensive and
+
+107
+
+can lead to non-target toxic effects in the environment [3]. New ways to treat environments
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+108
+
+safely (e.g. natural plant-based molluscicides, or biological control using natural enemies) and
+
+109
+
+to target treatments only where infected snails are abundant are desperately needed.
+
+110
+111
+
+Figure 1. The life cycle of Schistosoma spp. parasites. The adult worms live and reproduce
+
+112
+
+sexually within the human host, releasing eggs into the environment that hatch and seek an
+
+113
+
+intermediate freshwater snail host, where the larval stages of the worms develop via asexual
+
+114
+
+reproduction. Cercariae are released from snails and seek human hosts, completing the
+
+115
+
+lifecycle.
+
+116
+117
+
+In sub-Saharan Africa, there are two main species of schistosoma parasites that infect
+
+118
+
+humans and use different snail species as an intermediate host: Biomphalaria (for Schistosoma
+
+119
+
+mansoni) and Bulinus (for Schistosoma hematobium) [1]. Detecting the abundance and spatial
+
+120
+
+distribution of both snail species and human schistosoma parasites is essential to design control
+
+121
+
+strategies aimed at reducing the environmental reservoir of the disease and/or administering
+
+122
+
+anthelminthic drugs where transmission risk is highest. Proper classification of snail species and
+
+123
+
+of parasites relevant to human health is the crucial first step to deploy effective control
+
+124
+
+strategies.
+
+125
+
+One of the most underrated tasks in the fight against schistosomiasis and other
+
+126
+
+helminthiases is accurate classification of snail and parasite species. Attempting this on the
+
+127
+
+basis of morphology is a labor-intensive, time-consuming job that requires a great deal of
+
+128
+
+training experience and expertise. Morphological differences between Bulinus spp. and
+
+129
+
+Biomphalaria spp. snails at the genus level are clear to any trained naturalist, but distinguishing
+
+130
+
+the specific snail species that are involved in the transmission of human schistosoma parasites
+
+131
+
+might be challenging for students and technicians in their early field and laboratory experience
+
+132
+
+or without continuing training. An additional challenge is that the same snail species that carry
+
+133
+
+human parasites can also be infected with a wide variety of livestock and wildlife parasites,
+
+134
+
+some of which are morphologically similar (and in some cases, even indistinguishable) to
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+135
+
+human schistosome larvae [6]. As a consequence, visual identification of parasite species
+
+136
+
+during snail dissection can be tricky even for experienced parasitologists. Misidentification of
+
+137
+
+snail infections as human schistosomes, when in fact they are cryptic species that do not harm
+
+138
+
+people, may interfere with cost-effectively deploying badly needed control in areas where
+
+139
+
+resources are limited to begin with.
+
+140
+
+To address this issue, we developed a computational method with the capacity to
+
+141
+
+automatically identify snails and parasites from photographs taken with a cell phone
+
+142
+
+camera. We apply convolutional neural networks (CNNs), a deep learning application in
+
+143
+
+computer vision, to identify the images and compare results to those of trained human
+
+144
+
+parasitologists.
+
+145
+
+Holmström et al. (2017) [7] conducted a proof-of-concept study on mobile digital
+
+146
+
+microscopy using deep learning for the detection of soil-transmitted helminthes and
+
+147
+
+Schistosoma haematobium eggs in human excreta, which could aid in medical diagnosis of
+
+148
+
+infected people, but cannot improve identification or mapping of high risk environments. Here,
+
+149
+
+we offer a new tool for automated detection and classification of larval parasites released from
+
+150
+
+medically relevant freshwater snails in Senegal. The goal of this study was to provide a proof of
+
+151
+
+concept that the application of the latest computer vision classification algorithms, powered by
+
+152
+
+artificial intelligence (AI) technology, may help to improve snail and parasites identification in
+
+153
+
+capacity-limited, resource-poor areas where schistosomiasis is endemic.
+
+154
+155
+
+Materials and Methods
+
+156
+
+Datasets
+
+157
+
+During environmental monitoring of snails and parasites in the Senegal River Basin
+
+158
+
+during 2016-2018, we collected 5,543 images of four genera of medically important and
+
+159
+
+common freshwater snails -- (1) Bulinus, (2) Biomphalaria, (3) Lymnaea, and (4) Melanoides --
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+160
+
+and 5,140 images of parasitic cercariae, from 11 morphospecies liberated from the
+
+161
+
+Biomphalaria and Bulinus spp. snails encountered and dissected. Table 1 summarizes the
+
+162
+
+numbers of images in each category and Fig 2 shows examples for each snail and parasite
+
+163
+
+category in our dataset. Snail photographs were taken by mobile phone devices and cameras
+
+164
+
+with similar resolution (at least 1024x768 pixels) and taken from similar angles, zoom,
+
+165
+
+backgrounds, and lighting; while parasite images were taken from the same cell phones through
+
+166
+
+dissecting microscopes, with the same uniformity. In addition, all parasite images were
+
+167
+
+processed to grayscale. The removal of color was performed to further decrease lighting and
+
+168
+
+time of day artifacts that could affect computer vision results. The detailed protocols for image
+
+169
+
+collection and quality control are provided in the supplemental materials (see S1 Appendix).
+
+170
+
+Initial identification of snails and parasites was performed by trained parasitologists in the field.
+
+171
+
+Cases of disagreement between specialists were resolved.
+
+172
+
+Accuracy of field identifications were verified by molecular barcoding technique: at the
+
+173
+
+time of shedding or dissection, in all fork-tailed cercariae liberated from snails were placed
+
+174
+
+individually on WhatmanFTA© cards and sequenced to distinguish human-infective Schistosoma
+
+175
+
+haematobium and S. haematobium–bovis hybrids from S. bovis (schistosome parasite of cattle)
+
+176
+
+and other non-human furcocercous (forktailed) trematode species [8]. The identification of the
+
+177
+
+parasites was based on multi-locus analyses with one mitochondrial (cox1) and two nuclear
+
+178
+
+(ITS1+2 and 18S) genes [9]. Cercariae on FTA cards were accessioned into the
+
+179
+
+Schistosomiasis Collection at the Natural History Museum (SCAN) [10].
+
+180
+181
+
+Table 1. Summary of numbers of images for each snail and parasite species; numbers of
+
+182
+
+images for the split of training (80%) and validation set (20%).
+Snail class
+Number of images
+
+Biomphalaria
+
+Bulinus
+
+Lymnaea
+
+Melanoides
+
+466
+
+4215
+
+725
+
+137
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+Training
+
+374
+
+3372
+
+580
+
+109
+
+Validation
+
+92
+
+843
+
+145
+
+28
+
+183
+Parasite class
+
+HS
+
+NHS1
+
+NHS2 AM
+
+BO
+
+EC
+
+GY
+
+ME
+
+PP
+
+PT
+
+XI
+
+Number of images
+
+1008
+
+638
+
+107
+
+442
+
+224
+
+332
+
+152
+
+196
+
+806
+
+231
+
+1004
+
+Training
+
+806
+
+510
+
+86
+
+354
+
+179
+
+266
+
+121
+
+156
+
+645
+
+185
+
+803
+
+Validation
+
+202
+
+128
+
+21
+
+88
+
+45
+
+66
+
+31
+
+40
+
+161
+
+46
+
+201
+
+184
+185
+
+Abbreviations of parasite classes as follow, HS: Human-schisto, NHS1: Nonhuman- schisto
+
+186
+
+forktail type I, NHS2: Nonhuman- schisto forktail type II, AM: Amphistome, BO: Bovis, EC:
+
+187
+
+Echino, GY: Gymno, ME: Metacerc, PP: Parapleurolophocercous, PT: Parthenitae, XI-
+
+188
+
+Xiphidiocercariae.
+
+189
+190
+
+Figure 2. Image examples for snail and parasite classes. For snail classes, A-1 and A-2:
+
+191
+
+Biomphalaria. B-1 and B-2: Bulinus. C-1 and C-2: Lymnaea. D-1 and D-2: Melanoides. For
+
+192
+
+parasite classes, HS: Human-schisto, NHS1: Nonhuman- schisto forktail type I, NHS2:
+
+193
+
+Nonhuman- schisto forktail type II, AM: Amphistome, BO: Bovis, EC: Echino, GY: Gymno, ME:
+
+194
+
+Metacerc, PP: Parapleurolophocercous, PT: Parthenitae, XI-Xiphidiocercariae.
+
+195
+196
+
+All Biomphalaria and Bulinus spp. snails were also identified to morphospecies by both
+
+197
+
+trained parasitologists and genetic barcoding. Total genomic DNA was isolated from a small
+
+198
+
+amount of snail tissue using the DNeasy Blood and Tissue kit (Qiagen, UK) according to
+
+199
+
+manufacturer’s instructions. Amplification of a partial cytochrome oxidase 1 (cox1) sequence
+
+200
+
+was carried out on snail vouchers [11]. PCR and sequencing conditions were chosen as
+
+201
+
+previously published [12]. Sequencing was performed on an Applied Biosystems 3730XL
+
+202
+
+analyser (Life Technologies, UK) [9]. The field ID guidelines for morphologies of snails and
+
+203
+
+parasites are provided in the supplemental materials (see S2 Appendix).
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+204
+
+For imagery of snails and parasites, we strategically avoided extensive processing of
+
+205
+
+images, since the ultimate goal is to create a CNN capable of classification of images of variable
+
+206
+
+quality and resolution. We anticipate that many technicians will be taking pictures directly from
+
+207
+
+mobile devices in the field. So, in the preparation of our training data, images that were severely
+
+208
+
+blurry were removed from the test and validation sets, but were still used in training. For each
+
+209
+
+class of snails and parasites, we randomly divided the dataset into training and validation set,
+
+210
+
+containing 80% and 20% of the total images, respectively (Table 1). There was no overlap
+
+211
+
+between the training set and the validation set.
+
+212
+
+Training Algorithm
+
+213
+
+Deep learning algorithms with recent advances in computation and large datasets have
+
+214
+
+been shown to be comparable with, and even exceed, human performance in various object
+
+215
+
+recognition and computer vision tasks, including applications to diagnose human disease (e.g.,
+
+216
+
+ImageNet challenge [13], breast cancer histology images [14], and skin cancer images [15]).
+
+217
+
+Convolutional neural networks (CNNs) learn key features directly from the training images by
+
+218
+
+the optimization of the classification loss function [16,17] and therefore have minimal need for a
+
+219
+
+priori knowledge to design a classification system. Thus, the performance is less biased by the
+
+220
+
+assumptions of the researchers [13,18].
+
+221
+
+In this study, we utilized VGG16 pre-trained model [19], a 16-layer CNN architecture,
+
+222
+
+which was trained on approximately 1.28 million images with 1,000 categories. VGG16 was
+
+223
+
+used by the VGG team (Visual Geometry group at the University of Oxford) in the 2014
+
+224
+
+ImageNet Large Scale Visual Recognition Challenge. We trained VGG16 on our snail and
+
+225
+
+parasite images using transfer learning [20]. Transfer learning is defined as exporting
+
+226
+
+knowledge from previously learned sources to a target task [21]. The network architecture
+
+227
+
+established here has convolutional-pooling layer pairs (max-pooling), followed by a fully-
+
+228
+
+connected network [17]. The network architecture is illustrated in S1 Fig. The CNN is trained
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+229
+
+end-to-end directly from image labels and raw pixels, with a VGG16 network for photographic
+
+230
+
+images of snails and another separated network for microscopic images of parasites.
+
+231
+
+We adopted the training patches as 64x64 pixels for input layers in the consistent with
+
+232
+
+VGG16 network architecture, to ensure the patch size was sufficient to cover the relevant
+
+233
+
+structures and morphologies of snail and parasites. We first initialized the weights with the
+
+234
+
+VGG-16 pre-trained on ImageNet dataset, then froze the bottom of the network and just trained
+
+235
+
+the top of the VGG-16 convolutional networks (S1 Fig). The fully-connected layers were
+
+236
+
+composed of Rectified Linear Units (i.e., the ReLU activation function), to avoid the vanishing
+
+237
+
+gradients and to improve the training speed [22]. The output layer was composed of 4 neurons
+
+238
+
+for snail classification, corresponding to each of the four classes that are normalized with a
+
+239
+
+softmax activation function. For the parasite classification task, 11 neurons were set up in the
+
+240
+
+same manner. The model was trained with 80% of the training set, and validated on the
+
+241
+
+remaining images not used for training. Note that the validation set is randomly selected for
+
+242
+
+each epoch, which is the measure of the number of times all of the training images are used
+
+243
+
+once to update the network weights [17]. The network weights were initialized randomly, and an
+
+244
+
+adaptive learning rate gradient-descent back-propagation algorithm [22] was used for weight
+
+245
+
+update. Here we selected categorical cross-entropy as a loss function in the model. In these two
+
+246
+
+classification tasks, the CNN outputs a probability distribution over 4 classes of snails and 11
+
+247
+
+classes of parasites.
+
+248
+
+Since our dataset was rather small comparing with recent studies using CNNs for image
+
+249
+
+recognition tasks [13], here we applied the techniques of dropout and regularization to
+
+250
+
+overcome the overfitting of training data [17]. We implemented the CNN model with VGG16
+
+251
+
+network in a Python environment with the Keras package [23], and Google's deep learning
+
+252
+
+framework, TensorFlow [24].
+
+253
+
+Data Augmentation
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+254
+
+CNN algorithms work best for balanced dataset, i.e., when the categories of objects that
+
+255
+
+need to be identified are equally represented in the dataset [17]. Our dataset was unbalanced:
+
+256
+
+for example, Bulinus snails comprised about 75% of total snail images, since this snail genus
+
+257
+
+was most common in the field sites. Thus, we applied a data augmentation approach and used
+
+258
+
+rotation and shifting [25] to generate more images for the snail and parasites species that were
+
+259
+
+underrepresented in the dataset. Mirroring was not used Bulinus and Lymnaea spp due to the
+
+260
+
+diagnostic value of their coil orientation (i.e. Bulinus is sinistral and Lymnaea is dextral). We also
+
+261
+
+applied Gaussian noise to the background of parasite training images [26] to ensure that the
+
+262
+
+model did not learn background artifacts, but focused only on learning the morphologies of the
+
+263
+
+parasite objects. In this study, we used a Keras defined generator for automating data
+
+264
+
+augmentation [23]; every item of every batch was randomly changed according to the following
+
+265
+
+settings: (1) rotation range = 20, (2) width shift range = 0.2, (3) height shift range = 0.2, and (4)
+
+266
+
+shear range = 0.15. In practice, rotations and shifting allowed us to increase the size of the
+
+267
+
+dataset without deteriorating its quality. Data augmentation used here further improved the
+
+268
+
+datasets and CNN predicting performance.
+
+269
+
+Model deployment
+
+270
+
+After building and training the CNN model, we then deployed the trained model and
+
+271
+
+network weights to establish a web application for inference using TensorFlow.js [27], which is a
+
+272
+
+library for executing machine learning algorithms in JavaScript. TensorFlow.js is compatible with
+
+273
+
+the Python-based TensorFlow and Keras APIs, allowing our Keras model to be converted to a
+
+274
+
+JavaScript format that can be run in a web browser. This makes it accessible on any device with
+
+275
+
+a modern browser including both smartphones and common laptop computers. Using browser
+
+276
+
+storage and caching APIs, the web application can even be used in areas with limited or no
+
+277
+
+internet connectivity.
+
+278
+
+Ethics Statement
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+279
+
+Freshwater snails were collected in collaboration with Centre de Recherche Biomédicale
+
+280
+
+Espoir pour la Santé in Senegal who obtained the permission to conduct the field snail
+
+281
+
+collection, from The Direction de l'Environement et des Etablissements Classés with the
+
+282
+
+identification number “N°002302 MEDD/DEEC/yn”. In this study, we use photos of snails for the
+
+283
+
+machine learning model training and validation, therefore, there was no direct use of snails in
+
+284
+
+the field environment.
+
+285
+286
+287
+
+Results
+We evaluated our CNN model's performance with metrics of accuracy, sensitivity,
+
+288
+
+specificity, and F1 score on the test set. With the optimized CNN architecture, we obtained
+
+289
+
+99.6% accuracy (proportion of correct classifications, either true positive or true negative) for the
+
+290
+
+4 snail genera and 88.14% for the 11 parasite morphospecies. The optimized dropout rates for
+
+291
+
+the convolutional layer [17] for the snail dataset was 0.6 and for parasite dataset was 0.75. For
+
+292
+
+the parasite set, we ran a second analysis with only 3 classes of parasites relevant to map risk
+
+293
+
+for schistosomiasis transmission, namely: human schistosomes, non-human forktail cercariae,
+
+294
+
+and other trematode morphotypes. The overall accuracy for the 3 parasite classes increased to
+
+295
+
+92.41%. The sensitivity of distinguishing human schistosomes from non-human parasites was
+
+296
+
+83.66%. Fig 3 shows the confusion matrix of our method over the 4 snail general and 11
+
+297
+
+parasite morphotypes, along with details of true positive (TP), true negative (TN), false positive
+
+298
+
+(FP), and false negative (FN) outcomes.
+
+299
+300
+
+Figure 3: Confusion matrix of classification on test set. (a) results of snail image set, labels:
+
+301
+
+0-Biomphalaria, 1: Bulinus, 2: Lymnaea, 3: Melanoides. (b) results of parasite image set, labels:
+
+302
+
+0: Amphistome, 1: Bovis, 2: Echino, 3: Gymno, 4: Human-schisto, 5: Metacerc, 6:
+
+303
+
+Parapleurolophocercous, 7: Parthenitae, 8: Nonhuman- schisto forktail type I, 9: Nonhuman-
+
+304
+
+schisto forktail type II, 10: Xiphidiocercariae. (c) Combining other trematodes as one category,
+
+305
+
+labels: 0: Schisto, 1: Non-human forktail type I, type II, and Bovis, 2: Other trematodes.
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+306
+307
+
+Sensitivity, specificity, recall, precision, and F1 score for each categories were
+
+308
+
+calculated as follows:
+
+309
+
+sensitivity = recall = TP / (TP + FN)
+
+(1)
+
+310
+
+specificity = TN / (TN + FP)
+
+(2)
+
+311
+
+precision = TP/ (TP + FP)
+
+(3)
+
+312
+
+F1 score = (
+
+𝑟𝑒𝑐𝑎𝑙𝑙 ‒ 1 + 𝑝𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛 ‒ 1 ‒ 1
+)
+2
+
+(4)
+
+313
+
+Sensitivity measures the proportion of positives that are correctly identified; in our case,
+
+314
+
+we focused on the percentage of human schistosomes correctly identified. Specificity measures
+
+315
+
+the proportion of negatives that are correctly identified; in our case, we focused on the
+
+316
+
+percentage of non-human forktailed cercariae (some of which can potentially be visually similar
+
+317
+
+and hard to distinguish from human schistosomes) that are correctly identified as non-human
+
+318
+
+schistosomes. Precision is a measure of a classifier’s exactness, while recall is a measure of a
+
+319
+
+classifier’s completeness. Low precision indicates a large number of false positives, while low
+
+320
+
+recall indicates many false negatives. F1 score conveys the balance between precision and
+
+321
+
+recall and is defined as the harmonic mean of precision and sensitivity. Our results showed that
+
+322
+
+the CNN produced high sensitivity and specificity (> 84%) as well as F1 score (> 0.84) in all
+
+323
+
+categories. The metrics to measure classification performances are shown in Table 2 and
+
+324
+
+demonstrate the robustness of the CNN training algorithm for the tasks of image recognition for
+
+325
+
+both snails and parasites, despite the low sample size we had to work with.
+
+326
+327
+
+Table 2. Results of sensitivity(%) and specificity(%) of CNN model.TP: true positive, TN: true
+
+328
+
+negative, FP: false positive, FN: false negative.
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+Snail class
+
+TP
+
+TN
+
+FP
+
+FN
+
+sensitivity(%)
+
+specificity(%)
+
+F1 score
+
+Biomphalaria
+
+92
+
+1020
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Bulinus
+
+843
+
+265
+
+4
+
+0
+
+100.00
+
+98.51
+
+0.99
+
+Lymnaea
+
+145
+
+963
+
+0
+
+4
+
+97.31
+
+100.00
+
+0.99
+
+Melanoides
+
+28
+
+1084
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Parasite
+
+TP
+
+TN
+
+FP
+
+FN
+
+sensitivity(%)
+
+specificity(%)
+
+F1 socre
+
+Schisto
+
+169
+
+795
+
+32
+
+33
+
+83.66
+
+96.13
+
+0.84
+
+Non-human
+forktail
+
+164
+
+820
+
+15
+
+30
+
+84.53
+
+99.51
+
+0.91
+
+Other
+trematodes
+
+618
+
+365
+
+31
+
+15
+
+97.63
+
+92.17
+
+0.96
+
+329
+
+class
+
+330
+331
+332
+
+Comparison with human parasitologist performance
+To validate our deep learning approach, we compared the direct performance of the
+
+333
+
+CNN to 8 human parasitology experts. For each image, the parasitologists were asked to
+
+334
+
+identify the category of the snails and parasites. We prepared 30 snail images from among the 4
+
+335
+
+categories and 120 parasite images from among the 11 morphotypes in the computer’s
+
+336
+
+validation sets. For each test, previously unseen, molecularly verified images of trematode
+
+337
+
+cercariae and snails were displayed, and parasitologists are asked to identify them from among
+
+338
+
+the same categories of snails and parasites that the computer vision algorithm trained on.
+
+339
+
+Identification guidelines were provided along with the quiz. The sample quiz is included in
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+340
+
+supplement materials (see S3 Appendix). The metrics to measure human parasitologists’
+
+341
+
+performances and compare with the computer’s, such as sensitivity, specificity, rand F1 score
+
+342
+
+are shown in Table 3 and Fig 4. The CNN generated a malignancy probability P per image. We
+
+343
+
+then fix a threshold probability t such that the prediction ŷ for any image is ŷ = P ≥ t, and the
+
+344
+
+blue curve (Fig 4) is drawn by sweeping t in the interval 0–1. The area under the curve (AUC) is
+
+345
+
+the CNN’s measure of performance, with a maximum value of 1. The AUC for human
+
+346
+
+schistosomes, non-human forktailed cercariae, and other trematodes were 0.96, 0.95, 0.98,
+
+347
+
+respectively. The CNN achieved superior performance to a parasitologist if the sensitivity–
+
+348
+
+specificity point of the parasitologist lies below the blue curve, which most do. Note that
+
+349
+
+sensitivity and specificity of human parasitologists to correctly distinguish cryptic human
+
+350
+
+schistosome and non-human-schistosome species (Schistosoma bovis) was significantly lower
+
+351
+
+than the CNN.
+
+352
+353
+
+Table 3. Results of sensitivity(%) and specificity(%) of 8 human parasitologists
+Snail class
+
+TP
+
+TN
+
+FP
+
+FN
+
+sensitivity(%)
+
+specificity(%)
+
+F1 score
+
+Biomphalaria
+
+2
+
+8
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Bulinus
+
+3
+
+7
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Lymnaea
+
+3
+
+7
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Melanoides
+
+2
+
+8
+
+0
+
+0
+
+100.00
+
+100.00
+
+1.00
+
+Parasite
+class
+
+TP
+
+TN
+
+FP
+
+FN
+
+sensitivity(%)
+
+specificity(%)
+
+F1 socre
+
+Schisto
+
+15
+
+99
+
+5
+
+1
+
+93.75
+
+95.19
+
+0.83
+
+Non-human
+forktail
+
+19
+
+95
+
+3
+
+5
+
+79.17
+
+96.94
+
+0.83
+
+354
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+Other
+trematodes
+
+78
+
+40
+
+0
+
+2
+
+97.50
+
+100.00
+
+0.98
+
+355
+356
+
+Figure 4: Comparison of classification performance with CNN and parasitologist. The
+
+357
+
+CNN outperforms any parasitologist whose sensitivity and specificity point (in red color) falls
+
+358
+
+below the blue curve of the CNN. The green points represent the average of the parasitologists
+
+359
+
+(average sensitivity and specificity of all red points), with error bars denoting one standard
+
+360
+
+deviation. We simplify the 11 classes of parasite to only 3 classes of interest for schistosomiasis
+
+361
+
+environmental risk mapping: (a) human schistosomes, (b) non-human forktail cercariae, and (c)
+
+362
+
+other trematode morphotypes. The area under the curve (AUC) for each case is over 95%. The
+
+363
+
+CNN achieves superior performance to a parasitologist if the sensitivity–specificity point of the
+
+364
+
+parasitologist lies below the blue curve.
+
+365
+366
+
+Discussion
+
+367
+
+In this work we developed and presented a deep learning model that is capable of
+
+368
+
+accurately classifying images of human Schistosomiasis larval parasites and intermediate host
+
+369
+
+snails to benefit environmental monitoring and control of this debilitating disease. The accuracy
+
+370
+
+of our models matched and in most cases exceeded highly trained field experts that we tested it
+
+371
+
+against. Our convolutional neural network (CNN) classification performed better for snail
+
+372
+
+recognition than for parasite recognition. This is because snail morphologies are generally more
+
+373
+
+distinct, and it is easier to take high quality pictures of snails than parasites. This decreases the
+
+374
+
+risk of erroneous classification of snails, as reflected by the small number of false positives and
+
+375
+
+false negatives in our model evaluation. Parasites, on the other hand, show more complex
+
+376
+
+morphologies and variation, even within a species, which makes discrimination of trematode
+
+377
+
+cercariae more challenging, as reflected by the slightly large number of false negative and false
+
+378
+
+positive classification.
+
+379
+
+A benefit of CNN is that models can be trained with rather limited image datasets using
+
+380
+
+data augmentation approaches. Because we detected a low number of morphologically similar
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+381
+
+forked-tail human and non-human schistosoma parasites, we used rotation and shifting
+
+382
+
+methods to effectively increase the number of images used in training. We had the advantage of
+
+383
+
+also having video footage of living, mobile cercariae. As in our case, in the future, collecting
+
+384
+
+video imagery of parasites to generate many unique still-images of cercariaes an easy way to
+
+385
+
+increase samples for training CNN models.
+
+386
+
+In addition to building a deep learning model, we have also developed a workflow for
+
+387
+
+image collection and quality control for other researchers to follow, to quickly build an image
+
+388
+
+database that can facilitate identification of medically-important snails and their parasites with
+
+389
+
+the click of a cell phone and a pre-trained computer vision model. The protocol for image
+
+390
+
+collection is provided in the supplemental materials (see Appendix S2). We hope that user
+
+391
+
+photos can ultimately be used to create a global database of medically important snail and
+
+392
+
+parasite species, and the species they co-exist with that are not relevant to human health,
+
+393
+
+useful for further model training. When collecting the samples in the field, we also suggest that
+
+394
+
+GPS locations be recorded, which can facilitate the application of these data for precision
+
+395
+
+mapping of snail and parasite distribution in space and time. We take inspiration from online
+
+396
+
+platforms that encourage citizen science and crowdsourcing activities, similar to iNaturalist,
+
+397
+
+NaturNet, MycoMap, etc. iNaturalist, for example, has the image classification capacity to
+
+398
+
+immediately suggest an object name right after a user has uploaded an image to the platform.
+
+399
+
+To encourage the development of our specific platform and for translating it for use on
+
+400
+
+other medically-relevant parasites, vectors, and non-human hosts found in the environment, our
+
+401
+
+code, image sets, and neural network weights are provided in a public repository, which also
+
+402
+
+includes detailed documentation to assist researchers in following our workflow to (1) reproduce
+
+403
+
+the results, and (2) build new models using their own image datasets. We have also deployed
+
+404
+
+our classification model to a web application that allows researchers to select their own images
+
+405
+
+of snail and parasites to obtain the classification prediction, which is the probability of an object
+
+406
+
+of belonging to a specific class. Even though it takes a considerable computing power to
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+407
+
+properly train a CNN image classification model, once trained and deployed, a CNN can provide
+
+408
+
+a result in a fraction of a second on a smartphone and a common laptop computer.
+
+409
+
+In conclusion, this study demonstrates the effectiveness of deep learning in image
+
+410
+
+recognition tasks for classification of medically relevant snails and their parasitic infections. We
+
+411
+
+apply a computer vision model, using a single convolutional neural network trained on a
+
+412
+
+relatively low number of cell-phone and dissecting microscope acquired images. Thus, we have
+
+413
+
+developed a proof of concept for this technology to be applied in resource-poor settings where
+
+414
+
+schistosomiasis is endemic and where identification of hotspots of transmission is desperately
+
+415
+
+needed to target interventions. Our model matched the performance of 8 highly trained human
+
+416
+
+parasitologists familiar with snail and parasite diversity in the study region. In light of its success,
+
+417
+
+we’ve deployed our product as a publically-accessible web application. In the future this method
+
+418
+
+could be deployed on mobile devices with minimal cost, and holds the potential for substantial
+
+419
+
+improvement for monitoring and identifying snail and schistosomiasis hotspots. Deep learning is
+
+420
+
+a powerful tool that can help fill the capacity gap limiting our understanding of the environmental
+
+421
+
+components of transmission for more affordable, efficient, and effective control of neglected
+
+422
+
+tropical diseases.
+
+423
+424
+
+Acknowledgement
+
+425
+
+This work was supported by a grant from the Bill and Melinda Gates Foundation
+
+426
+
+(OPP1114050), an Environmental Ventures Program grant from the Stanford University Woods
+
+427
+
+Institute for the Environment, a SEED grant from the Freeman Spogli Institute at Stanford
+
+428
+
+University, a Human Centered Artificial Intelligence grant from Stanford University, a grant from
+
+429
+
+the National Institutes of Health (R01TW010286), and a grant from the National Science
+
+430
+
+Foundation (1414102). We thank Tim White and Richard Grewelle for their suggestions and
+
+431
+
+comments for this project. We thank the parasitologists who participated in the quiz that was
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+432
+
+designed to compare the performances of CNN and human experts on snails and parasites
+
+433
+
+image classification. We also thank IBM open source group, especially Yi Hong Wang, Chin
+
+434
+
+Huang, Ted Chang, Catherine Diep, Winnie Tsang, and Thomas Truong for providing guidance,
+
+435
+
+education, and cloud resources to establish the CNN model deployment process and host the
+
+436
+
+web application. Open Source code packages, image dataset, and web application can be
+
+437
+
+accessed via this link (https://github.com/deleo-lab/schisto-parasite-classification).
+
+438
+439
+
+Author Contributions
+
+440
+
+ZYCL and AC built, trained, and validated the CNN model.
+
+441
+
+AC, IJJ, and SHS organized and labeled the image dataset.
+
+442
+
+AC, IJJ, SHS, GR, NJ, RN, and GADL conducted the field works.
+
+443
+
+PS performed the initial training and testing.
+
+444
+
+PVE and TN deployed the CNN model and created the web application.
+
+445
+
+GADL conceived the idea and supervised the project in all perspectives.
+
+446
+447
+448
+
+References
+1. Sokolow SH, Huttinger E, Jouanard N, Hsieh MH, Lafferty KD, Kuris AM, Riveau G,
+
+449
+
+Senghor S, Thiam C, N’Diaye A, Faye DS. Reduced transmission of human
+
+450
+
+schistosomiasis after restoration of a native river prawn that preys on the snail
+
+451
+
+intermediate host. Proceedings of the National Academy of Sciences. 2015 Aug
+
+452
+
+4;112(31):9650-5.
+
+453
+
+2. Sokolow SH, Wood CL, Jones IJ, Swartz SJ, Lopez M, Hsieh MH, Lafferty KD, Kuris
+
+454
+
+AM, Rickards C, De Leo GA. Global assessment of schistosomiasis control over the past
+
+455
+
+century shows targeting the snail intermediate host works best. PLoS neglected tropical
+
+456
+
+diseases. 2016 Jul 21;10(7):e0004794.
+
+457
+
+3. Sokolow SH, Jones IJ, Jocque M, La D, Cords O, Knight A, Lund A, Wood CL, Lafferty
+
+458
+
+KD, Hoover CM, Collender PA. Nearly 400 million people are at higher risk of
+
+459
+
+schistosomiasis because dams block the migration of snail-eating river prawns.
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+460
+
+Philosophical Transactions of the Royal Society B: Biological Sciences. 2017 Apr
+
+461
+
+24;372(1722):20160127.
+
+462
+
+4. Steinmann P, Keiser J, Bos R, Tanner M, Utzinger J. Schistosomiasis and water
+
+463
+
+resources development: systematic review, meta-analysis, and estimates of people at
+
+464
+
+risk. The Lancet infectious diseases. 2006 Jul 1;6(7):411-25.
+
+465
+
+5. Sokolow SH, Wood CL, Jones IJ, Swartz SJ, Lopez M, Hsieh MH, Lafferty KD, Kuris
+
+466
+
+AM, Rickards C, De Leo GA. Global assessment of schistosomiasis control over the past
+
+467
+
+century shows targeting the snail intermediate host works best. PLoS neglected tropical
+
+468
+
+diseases. 2016 Jul 21;10(7):e0004794.
+
+469
+
+6. Abbasi I, King CH, Sturrock RF, Kariuki C, Muchiri E, Hamburger J. Differentiation of
+
+470
+
+Schistosoma haematobium from related schistosomes by PCR amplifying an inter-
+
+471
+
+repeat sequence. The American journal of tropical medicine and hygiene. 2007 May
+
+472
+
+1;76(5):950-5.
+
+473
+
+7. Holmström O, Linder N, Ngasala B, Mårtensson A, Linder E, Lundin M, Moilanen H,
+
+474
+
+Suutala A, Diwan V, Lundin J. Point-of-care mobile digital microscopy and deep learning
+
+475
+
+for the detection of soil-transmitted helminths and Schistosoma haematobium. Global
+
+476
+
+health action. 2017 Jun 30;10(sup3):1337325.
+
+477
+
+8. Webster BL, Rabone M, Pennance T, Emery AM, Allan F, Gouvras A, Knopp S, Garba
+
+478
+
+A, Hamidou AA, Mohammed KA, Ame SM. Development of novel multiplex microsatellite
+
+479
+
+polymerase chain reactions to enable high-throughput population genetic studies of
+
+480
+
+Schistosoma haematobium. Parasites & vectors. 2015 Dec;8(1):432.
+
+481
+
+9. Wood CL, Sokolow SH, Jones IJ, Chamberlin AJ, Lafferty KD, Juris AM, Jocques M,
+
+482
+
+Hopkins S, Adams G, Schneider M, Buck JC, Lund A, Garcia-Vedrenne AE, Fiorenza E,
+
+483
+
+Rohr JR, Allan F, Webster B, Rabone M, Webster JP, Bandagny L, Ndione R, Senghor
+
+484
+
+S, Schacht A-M, Jouanard N, Riveau G, and De Leo GA. Precision mapping of snail
+
+485
+
+habitat provides a powerful indicator of human schistosomiasis transmission. In review-
+
+486
+
+Proceedings of the National Academy of Sciences. 2019 June.
+
+487
+488
+489
+
+10. Emery AM, Allan FE, Rabone ME, Rollinson D. Schistosomiasis collection at NHM
+(SCAN). Parasites & vectors. 2012 Dec;5(1):185.
+11. Vrijenhoek R. DNA primers for amplification of mitochondrial cytochrome c oxidase
+
+490
+
+subunit I from diverse metazoan invertebrates. Mol Mar Biol Biotechnol. 1994;3(5):294-
+
+491
+
+9.
+
+492
+
+12. Kane RA, Stothard JR, Emery AM, Rollinson D. Molecular characterization of freshwater
+
+493
+
+snails in the genus Bulinus: a role for barcodes?. Parasites & Vectors. 2008 Dec;1(1):15.
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+494
+
+13. Russakovsky O, Deng J, Su H, Krause J, Satheesh S, Ma S, Huang Z, Karpathy A,
+
+495
+
+Khosla A, Bernstein M, Berg AC. Imagenet large scale visual recognition challenge.
+
+496
+
+International journal of computer vision. 2015 Dec 1;115(3):211-52.
+
+497
+
+14. Araújo T, Aresta G, Castro E, Rouco J, Aguiar P, Eloy C, Polónia A, Campilho A.
+
+498
+
+Classification of breast cancer histology images using convolutional neural networks.
+
+499
+
+PloS one. 2017 Jun 1;12(6):e0177544.
+
+500
+
+15. Esteva A, Kuprel B, Novoa RA, Ko J, Swetter SM, Blau HM, Thrun S. Dermatologist-
+
+501
+
+level classification of skin cancer with deep neural networks. Nature. 2017
+
+502
+
+Feb;542(7639):115.
+
+503
+504
+
+16. LeCun Y, Bengio Y. Convolutional networks for images, speech, and time series. The
+handbook of brain theory and neural networks. 1995 Apr;3361(10):1995.
+
+505
+
+17. LeCun Y, Bengio Y, Hinton G. Deep learning. Nature. 2015 May;521(7553):436.
+
+506
+
+18. Spanhol FA, Oliveira LS, Petitjean C, Heutte L. Breast cancer histopathological image
+
+507
+
+classification using convolutional neural networks. In2016 international joint conference
+
+508
+
+on neural networks (IJCNN) 2016 Jul 24 (pp. 2560-2567). IEEE.
+
+509
+510
+511
+512
+513
+514
+515
+
+19. Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image
+recognition. arXiv preprint arXiv:1409.1556. 2014 Sep 4.
+20. Pan SJ, Yang Q. A survey on transfer learning. IEEE Transactions on knowledge and
+data engineering. 2010 Oct;22(10):1345-59.
+21. Bahadori MT, Liu Y, Zhang D. A general framework for scalable transductive transfer
+learning. Knowledge and information systems. 2014 Jan 1;38(1):61-83.
+22. Nair V, Hinton GE. Rectified linear units improve restricted boltzmann machines.
+
+516
+
+InProceedings of the 27th international conference on machine learning (ICML-10) 2010
+
+517
+
+(pp. 807-814).
+
+518
+
+23. Chollet, F. and others (2015). Keras. https://github.com/keras-team/keras
+
+519
+
+24. Abadi M, Barham P, Chen J, Chen Z, Davis A, Dean J, Devin M, Ghemawat S, Irving G,
+
+520
+
+Isard M, Kudlur M. Tensorflow: A system for large-scale machine learning. In12th
+
+521
+
+{USENIX} Symposium on Operating Systems Design and Implementation ({OSDI} 16)
+
+522
+
+2016 (pp. 265-283).
+
+523
+524
+
+25. Dosovitskiy A, Springenberg JT, Brox T. Unsupervised feature learning by augmenting
+single images. arXiv preprint arXiv:1312.5242. 2013 Dec 18.
+
+525
+
+26. Courbariaux M, Bengio Y, David JP. Binaryconnect: Training deep neural networks with
+
+526
+
+binary weights during propagations. InAdvances in neural information processing
+
+527
+
+systems 2015 (pp. 3123-3131).
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+528
+
+27. Smilkov D, Thorat N, Assogba Y, Yuan A, Kreeger N, Yu P, Zhang K, Cai S, Nielsen E,
+
+529
+
+Soergel D, Bileschi S. TensorFlow. js: Machine Learning for the Web and Beyond. arXiv
+
+530
+
+preprint arXiv:1901.05350. 2019 Jan 16.
+
+531
+532
+
+Supporting Information Legends
+
+533
+
+Supplement Figure S1
+
+534
+
+VGG-16 architecture illustration.
+
+535
+536
+
+Supplement Appendix
+
+537
+
+S1. Protocols for image collection and quality control
+
+538
+
+S2. Field ID guidelines for morphologies of snails and parasites
+
+539
+
+S3. Sample quiz on snail and parasite classification for human parasitologists
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/713727; this version posted July 24, 2019. The copyright holder for this preprint (which was not
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under
+a CC-BY 4.0 International license.
+
+

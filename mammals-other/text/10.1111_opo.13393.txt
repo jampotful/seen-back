@@ -1,0 +1,405 @@
+Extracting full information from OCT scans-signs of early age-related macular degeneration within inner retinal layers by local neighbourhood statistics. Part II: Results.
+Wagner M, Sommerer J, Rauscher FG. (2025). Ophthalmic & physiological optics : the journal of the British College of Ophthalmic Opticians (Optometrists). . doi:10.1111/opo.13393. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Extracting full information from OCT scans—signs of early age‐related macular degeneration within inner retinal layers by local neighbourhood statistics. Part II: Results
+
+## Abstract
+AbstractBackground and ObjectivesAssociations between the occurrence of early age related macular degeneration (AMD) and alterations in retinal layer thicknesses have been reported, based on classical processing of optical coherence tomography (OCT) data by noise removal and subsequent image segmentation. However, speckle noise within OCT data itself bears a substantial part of the total information. For this reason, we designed an omics‐type approach for full exploitation of OCT data, which was able to identify signs of early AMD throughout the retina as a whole.MethodsA nested case‐control study was designed with 200 early AMD cases and 200 healthy controls. For each participant, within a randomly selected OCT scan and a randomly selected column therein, manual grading was performed for 26 retinal feature positions. At every position, a total of 3792 descriptors were computed, based on nonlinear transformations of OCT data, first‐order neighbourhood statistics and Haralick features. Equivalence and differences between cases and controls were tested for each descriptor at every graded position. Results of multiple testing were expressed in terms of false and true discovery rates controlled by the Benjamini–Yekutieli procedure.ResultsIn terms of the amount and disparity of true discoveries, overall non‐equivalence was found for early AMD and healthy groups. Strong difference signals were observed at the internal limiting membrane and two central retinal positions, particularly for descriptors emphasising speckle noise.ConclusionsBetween the retinae of healthy controls and early AMD patients, significant differences were observed at the level of local neighbourhood statistics within OCT data. Thus, independent evidence was obtained for AMD affecting not only the outer retinal layers but the retina as a whole, even in the early stages of the disease. Within OCT data, both cartoon and speckle bear essential parts of the total information. We pursued a constructive, completely documented, traceable and repeatable approach without invoking artificial intelligence methods.Keywords: age‐related macular degeneration, computer‐generated endpoints, inner retina, local neighbourhood statistics, nested case‐control study, optical coherence tomography
+
+## Key points
+Early age‐related macular degeneration affects not only the outer retinal layers but the retina as a whole.
+Signs of disease are detected by omics‐type analysis of optical coherence tomography data.
+Speckle noise within optical coherence tomography data bears a substantial part of the total information.
+
+## INTRODUCTION
+
+## Scientific background
+Age‐related macular degeneration (AMD), a progressive retinal disease without known cure, 1 , 2 , 3 , 4 starts in its early, preclinical stage with the accumulation of small deposits of extracellular debris within the outermost layers of the retina. These evolve into different types of lesions as drusen or subretinal drusenoid deposits, 5 which constitute the paramount biomarker for the identification of AMD. However, during the process of formation, early lesions are not identifiable with certainty in coloured fundus images, 6 and may even be overlooked by optical coherence tomography (OCT) imaging due to subsampling in most acquisition protocols. Consequently, there is considerable interest in finding alternative AMD biomarkers in addition to visible lesions.
+Previous research on this topic has mainly focused on AMD‐associated thickness alterations of certain retinal layers or entire layer complexes, see Brandl et al., 7 Nusinowitz et al. 8 and Trinh et al. 9 for example. Unfortunately, the determination of layer thicknesses depends strongly on the OCT device being used (as well as on the built‐in software packages). 10 Furthermore, most of the reported thickness alterations clearly fall within the error limits of the segmentation procedures being used. For this reason, in the present investigation, together with the parallel manuscript Wagner et al., 11 we pursued a completely different, 'omics'‐type approach.
+In Wagner et al., 11 it was proven that much more information can be extracted from OCT data by evaluation of a large set of local descriptors than by the classical paradigm of image processing (standard visualisation, denoising and subsequent image segmentation). The descriptors are built by nonlinear transformations of raw OCT data, resulting in 12 different image modes and subsequent application of neighbourhood statistics within local windows around previously determined retinal feature positions. In particular, the information from speckle noise, which is inherently present in OCT data but has been almost completely neglected as yet, is made available by this method. This approach is realised in the framework of a nested case‐control study with 200 pairs of early AMD cases and healthy controls. These were matched in a 1:1 ratio by seven parameters, including age and smoking, as main AMD risk factors.
+The present article is concerned with the statistical analysis of the data obtained in Wagner et al. 11 After performing statistical tests for equivalence as well as for differences in mean descriptor values between cases and controls, multiple testing was accounted for, not by control of the family‐wise error rate (FWER; i.e., to maintain a joint significance level by simultaneous alpha‐level correction of all tests involved) but rather by control of the false discovery rates for whole sets of tests and descriptors. The device dependence of the approach is likely reduced by this procedure as well.
+
+## Aims of the study
+In summary, the present investigation aims to establish independent biomarkers for early AMD, which are neither related to the observation of drusen or other lesions nor to comparative analysis of retinal layer thicknesses. To achieve this goal, we introduced an ‘omics’‐type description of OCT data, preparing meaningful, sufficiently large, and diverse sets of local neighbourhood descriptors. Based on these descriptor sets, we performed multiple statistical tests for equivalence as well as for differences between early AMD cases and healthy controls. Biomarkers for early AMD were obtained by evaluating the false and true discovery rates for whole ensembles of statistical tests. This approach was tested in the framework of a nested case‐control study with 200 pairs of early AMD patients and healthy controls, which were matched by seven parameters, including the main non‐genetic AMD risk factors. The analysis revealed that even in the earliest preclinical stages of the disease, signs of AMD can be observed throughout the retina as a whole, and in its inner parts far from the position of lesion formation.
+
+## Outline
+For the reader's convenience, we summarise the methods and notations introduced in Wagner et al. 11 (see Sections 2.1 to 2.4), namely, the choice of participants, matching procedure, OCT data acquisition and building of different image modes and local neighbourhood descriptors. In Section 2.5, a detailed explanation of two key ingredients of the statistical approach is provided, namely, the TOST methodology for equivalence testing 12 and the treatment of large ensembles of simultaneously performed statistical tests by controlling the rates of true and false discoveries rather than by alpha‐level correction. 13 Hereafter, the statistical analysis plan is described, including sensitivity analysis (Sections 2.6 to 2.8). In Sections 3 and 4, the results of the statistical analysis are presented and discussed in detail. In particular, the question of the reliability of comparative retinal layer thickness analyses is considered. The results of equivalence as well as of difference testing (expressed in terms of true discoveries) were interpreted as clear signals for early AMD influencing not only the outermost retinal layers where lesion formation takes place but rather the retina as a whole. Section 5 provides the conclusions. Two appendices contain the assignment of discoveries for equivalence and difference to all single descriptors and the results of sensitivity analysis.
+
+## MATERIALS AND METHODS
+
+## Nested case‐control study design
+We created a nested case‐control design, first selecting 200 early AMD cases at random and then matching them in a 1:1 ratio with 200 healthy controls by seven phenotypes (sex, age, body mass index (BMI), smoking, socioeconomic status, diabetes and non‐high‐density lipoprotein (HDL) cholesterol level). AMD stage was assessed using the three‐continent classification (TCC) scheme. 14 Details of AMD classification and the matching procedure can be found in Wagner et al. 11 All participants were taken from the LIFE Adult Baseline population cohort, consisting of about 10,000 randomly selected inhabitants of the city of Leipzig (Saxonia, Germany) between 40 and 79 years of age. 15 , 16 The Leipzig Research Centre for Civilisation Diseases (LIFE) Adult study follows the tenets of the Declaration of Helsinki and was approved by the responsible institutional ethics board of the Medical Faculty of the Leipzig University (approval numbers 2632009–14122009, 263/09‐ff, 201/17‐ek). Written informed consent was obtained from all participants. Data use was approved by the institutional review board of the Leipzig Research Centre for Civilisation Diseases (LIFE).
+
+## OCT image data and manual grading
+OCT‐volume scans of the macular area were generated using a commercially available spectral‐domain device (Spectralis HRA + OCT, Heidelberg Engineering, heidelbergengineering.com). For the subsequent image analysis, the use of raw data is mandatory; see Section 2.3. Accordingly, raw data were exported, per the specification of the export function. 17 For each subject, one eye, a single slide of 496 × 512 pixels format (B‐scan) from the respective volume scan and a single column from the respective B‐scan were selected at random. For this column, the positions of 26 features from the vitreous body, retina and choroid, as defined in Staurenghi et al., 18 were graded manually, see Wagner et al. 11
+
+## Image modes
+For each B‐scan, a total of 12 image modes were defined, generated by different nonlinear transformations of the original raw OCT data. Three basic modes were considered, namely, the raw data I0 themselves (rawdat), its usual greyscale image representation I04 (gimdat) and its logarithmic transformation (lograw). Within the basic modes, we further separated a denoised background image (‘cartoon’) and speckle by application of the Rudin‐Osher‐Fatemi TV regularisation procedure, see Rudin et al. 19 and Bredies et al. 20 Denoised, cartoon‐like image modes obtained in this way were denoted by rawreg, gimreg and logreg, while the parts containing pure speckle were denoted as rawspe, gimspe and logspe. Finally, the speckle modes were subjected to adaptive greyscale binning, thus obtaining three further histogram‐equalised speckle modes, that is, rawsvg, gimsvg and logsvg. Note that six image modes (rawdat, rawreg, rawspe, lograw, logreg and logspe) consist of continuous data while the remaining six modes (gimdat, gimreg, gimspe, rawsvg, gimsvg and logsvg) comprise greyscale‐binned data. In summary, within the basic modes, cartoon and speckle are superimposed, while for the regularised modes, speckle is removed, and six modes consist exclusively of speckle noise. In the following sections, we will get evidence that these speckle modes bear an indispensable part of the total information. For more details, see Wagner et al. 11
+
+## Descriptors based on neighbourhood statistics
+We pursued an ‘omics’ type approach in line with Haralick et al. 21 and Larue et al., 22 defining around each graded position nine different formats of rectangular windows (or submatrices) and calculating from the values therein certain quantities defined by first‐order statistics (mean, variance, range, etc.) and Haralick features (autocorrelation, cluster tendency, homogeneity, etc.) for each image mode. 11
+Every descriptor δ is defined by (a) the image mode used (12 modes), (b) the size of the window W around the position of interest (9 sizes) and (c) the statistical quantity to be calculated (12 quantities for continuous data or 35 quantities for greylevel data). In the case of greyscale‐binned data, some quantities depend on the number 2q of histogram classes used in the calculation (2 possible values of q). For the immediate evaluation of data at the position of interest, we considered a further descriptor, which is formally obtained by calculation of the mean in a window of (1 × 1) pixel size. Thus, we arrived at 109 or 523 descriptors for every image mode with continuous or greylevel data, respectively, and 3792 descriptors in total. For all cases and controls, each descriptor was evaluated at every graded retinal feature position.
+All descriptors are labelled by seven‐digit numbers. The first two digits encode the image mode, the middle three digits the statistical quantity and the last two digits the window size and the value of q, if applicable. More precisely, the leading digits 01, 02, …, 12 encode the image modes rawdat, rawreg, rawspe, rawsvg, gimdat, gimreg, gimspe, gimsvg, lograw, logreg, logspe and logsvg, respectively. The statistical quantities are identified by the three‐digits subscripts 001, …, 121 using the definitions provided in Wagner et al. 11 The last digits 00, 01, 02, …, 09 encode the window sizes 1×1, 3×3, 3×5, …, 7×7, either without specification of q or with the choice of q=4. The last digits 11, 12, …, 19 encode the window sizes 3×3, 3×5, …, 7×7 but with choice of q=5. For example, the descriptor δ0811009 employs the image mode 08 (gimsvg) for the calculation of the quantity 110 (Haralick energy) in a window encoded by 09 (size 7×7 pixels by use of q=4; thus evaluating a greylevel histogram with 16 classes).
+The subsets of all descriptors based on a certain image mode m are denoted by Sm. Within Sm, the descriptors will be arranged in ascending order of the labels which are read as integers. In this context, descriptors may be denoted alternatively with subscripts, for example, δi.
+
+## Statistical analysis: Two key ingredients
+
+## Equivalence testing: TOST methodology
+In mathematical statistics, a well‐known principle states that the exact identity μ′=μ′′ of two population means of a continuous variable can never be inferred from a statistical hypothesis test. In particular, lacking significance of a test against the null hypothesis of identity (i.e., a difference test) will not prove the validity of this null hypothesis. Instead, one may test for a nearby identity μ′≈μ′′ of the means against the null hypothesis H0: “μ′−μ′′≥b” where b>0 is a given equivalence margin, which is often derived from clinical experience. In fact, H0 is a composed hypothesis since the inequality for the absolute value of the difference reads as:
+Then the corresponding alternative hypothesis is a composed one as well, reading as Ha: and μ′−μ′′<b”.
+In practice, an equivalence test to the significance level α against the composed hypothesis H0 consists of two separate one‐sided subtests of the same type against both parts of H0 (by acronym, this approach is called TOST methodology: 'two one‐sided subtests'). 12 , 23 We test first against H10: “μ′−μ′′≤−b” and secondly against H20: , obtaining the p‐values p1 and p2, respectively. Since both subtests rely on the same test statistics, both may be performed at the same uncorrected significance level α. The p‐value for the composite test is obtained as p= Max p1p2. Thus, the equivalence test becomes significant if and only if p1≤α as well as p2≤α.
+
+## Multiple testing: Disadvantages of the classical alpha‐level correction
+As usual for ‘omics’‐type approaches with very large numbers of statistical tests being performed simultaneously, one must cope with the problem of type‐I‐error cumulation. Here, two completely different strategies may be pursued. The first is to control the so‐called family‐wise error rate (FWER), that is, to maintain a joint significance level. This is effected by application of alpha‐level corrections, for example, the classical Bonferroni correction. Assume, for example, that 1000 simultaneous tests T1, …, T1000 against null hypotheses H10, …, H10000 are performed. In order to conserve a joint significance level of α=0.05, the Bonferroni correction requires to strengthen the significance level to α′=0.05/1000 for every single test. If all null hypotheses are true then a single test produces a true‐negative outcome with a probability of 1−0.05/1000. Consequently, the probability for receiving true‐negative outcomes in all tests is 1−0.05/10001000, and the probability for receiving at least one false‐positive outcome amongst all tests is calculated as
+However, for paired Wilcoxon and Welch tests to be applied in the subsequent analysis, strengthening of the alpha level leads to a dramatic loss of power for the detection of small effects. For example, when applying a two‐sided paired Wilcoxon test to a sample with N=200, replacement of α=0.05 by α′=0.05/1000 results in a reduction of power from 93.0% to 25.0% for a typical Cohen's effect size of d=0.25. In the same situation, the power of the two‐sided paired Welch test reduces from 94.0% to 27.6%. Consequently, it is to be expected that small effects will remain largely undetected using this strategy.
+
+## True and false discovery rates
+In order to avoid this problem, a completely different paradigm has been established, now widely used in computational biology, see Korthauer et al. 13 Instead of limiting the joint probability of false‐positive outcomes by alpha‐level correction, rather, we control the so‐called false‐discovery rate (FDR) within a certain subset of tests. The idea is to select a subset of tests, say T1, …, Tk, for which the null hypotheses H10, …, Hk0 will be rejected (these tests are called ‘discoveries’) but without specifying the outcome of a single test from this subset as true‐positive or false‐positive. Instead, the selection procedure must guarantee that for a fixed proportion of tests among T1, …, Tk, say at most 5%, rejection of the null hypothesis results in a false‐positive outcome (false discoveries). Complementary, among the selected subset of tests, a rate of at least 95% of tests with true‐positive outcome (true discoveries) will be ensued. As a result, we obtain a statement about the properties of a subset of tests as a whole. The price to pay is that nothing can be said about the trustworthiness of a single test alone which can be only qualified as a discovery or not. However, it cannot be decided whether a given discovery is a true or a false one. Nevertheless, from the existence of sufficiently large sets of true discoveries, valid statistical information may be inferred about the entities under investigation.
+
+## Control of the false discovery rate by Benjamini–Yekutieli step‐up procedure
+In the following, we adopt the step‐up procedure described in Benjamini and Yekutieli, 24 p.1169, Theorem 1.3. Assume that m statistical tests T1, T2, …, Tm against the null hypotheses H10, H20,…, Hm0 result in p‐values p1≤p2≤…≤pm, which are numbered in ascending order. Specifying a false‐discovery rate ϑ∈0,1, we calculate stepnumbers s1=1⋅ϑ/m⋅Hm, s2=2⋅ϑ/m⋅Hm, …, sm=m⋅ϑ/m⋅Hm where Hm=∑i=1m1/i denotes the mth harmonic number. Now we search for the largest index k, 1≤k≤m, with pk≤sk (Figure 1). If such an index exists, we may reject the null hypotheses H10, …, Hk0 and qualify the tests T1, …, Tk as discoveries. Among them, rates of at most ϑ⋅100% false discoveries and at least 1−ϑ⋅100% true discoveries are guaranteed in the sense of expected values. When applying the Benjamini–Yekutieli procedure to equivalence tests, the combined p‐value from both subtests must be considered.
+Illustration of the Benjamini–Yekutieli step‐up procedure. The x‐axis shows the indices of the tests, which are ordered by increasing p‐value. The y‐axis shows p‐values and stepnumbers. m, total number of tests included; k, optimal index found by the procedure (equals to the number of discoveries).
+The Benjamini–Yekutieli procedure offers two main advantages. First, this particular procedure is independent of possible dependencies or even negative correlations between the test statistics in T1, …, Tm, thus providing a conservative estimation of the FDR among them. Second, it applies not only to the full set of tests performed in the course of the investigations but remains valid for every subset of tests to be specified. Consequently, the tests can be grouped by the underlying image mode, and the target FDR ϑ can be appropriately varied.
+
+## Statistical analysis: Equivalence testing
+The statistical analysis of the descriptor sets was performed in two steps. The first step identified a subset of descriptors which behaved identically for early AMD and healthy participants by testing for equivalence. The second step looked for signs of difference between the groups, identifying a further subset of descriptors accepted as true discoveries when testing for differences. We analysed all positions where gradings for at least 80 matched pairs were available, see Table 4 of Wagner et al. 11
+
+## Specification of margins for equivalence testing
+In contrast to situations where practical (often clinical) experience can be evoked for the determination of reasonable margins b for equivalence testing, we had no prior information about the variation of the descriptors defined above. Consequently, we adopted a formal approach, relying on the sample mean μ^Δ and empirical standard deviation σ^Δ of value differences for a given descriptor at a specific position for paired samples of equal size N. The 95% confidence interval for μ^Δ is given by
+where Q97.5χ2N−1 and Q2.5χ2N−1 denote the 97.5% and 2.5% quantiles of a chi‐square distribution with df=N−1 degrees of freedom. Scaling Cohen's effect size μ^Δ/σ^Δ by 0.1 and replacing the empirical standard deviation by the lower bound of its 95% confidence interval, the following margin was obtained:
+to be used in the subsequent equivalence testing.
+
+## Paired Wilcoxon signed‐rank test for equivalence
+For each descriptor and retinal feature position, a sample of values was available for early AMD and healthy participants. Since the subjects were matched and no prior information about the distribution of the descriptor values within the populations was available, we specified a paired nonparametric test, namely the paired Wilcoxon signed‐rank test. Applying the TOST methodology described in Section 2.5.1, two one‐sided subtests with the equivalence margins from Section 2.6.1. were performed. Each equivalence test was identified by the number of the descriptor tested and the position where this descriptor was applied.
+
+## True discoveries for Wilcoxon equivalence tests
+The set TE of all equivalence tests was divided into mutually disjointed subsets TEm,k, each collecting all tests involving descriptors from the set Sm related to the image mode m at a single position k, thus comprising 109 or 523 tests, respectively. For example, the test ensemble for rawdat mode at position 4 (internal limiting membrane) was denoted by TE1,4, see Section 2.4. To each test ensemble, we applied the Benjamini–Yekutieli procedure with fixed FDR ϑ=0.05. As a result, for every image mode and position, we obtained a set of discoveries Em,k,0.05 with respect to equivalence; each containing 95% of true discoveries. All discoveries with respect to equivalence are indicated in Appendix A.
+
+## Statistical analysis: Difference testing
+
+## Paired Wilcoxon signed‐rank test for differences
+For each descriptor and retinal feature position, we performed a paired two‐sided Wilcoxon signed‐rank test against the null hypothesis H0: “μΔ=0”, thus testing for differences between early AMD and healthy participants. Again, each difference test was identified by the number of the descriptor tested and the position where this descriptor was applied.
+
+## True discoveries for Wilcoxon difference tests
+In order to identify both discoveries and true discoveries for the difference tests, we formed the test ensembles TDm,k=TEm,k∖Em,k,0.05, each collecting for a given image mode and a given position all tests related to the descriptors where no equivalence had been discovered at the step before. For each test ensemble TDm,k, the Benjamini–Yekutieli procedure was applied for every false discovery rate ϑ∈0.01,0.02,…,0.99, thus obtaining (possibly empty) sets Dm,k,0.01, Dm,k,0.02, …, Dm,k,0.99 of discoveries with respect to difference. For every set Dm,k,ϑ, we calculated the number of true discoveries where noninteger results were rounded to the next integer below. Among these numbers, the largest one was selected and reported together with the FDR ϑ giving rise to it. For this FDR, all discoveries with respect to difference are indicated in Appendix A.
+
+## Sensitivity analysis
+
+## Paired t‐test for equivalence
+Not only the two‐sided t‐test but also the one‐sided t‐test turn out to be surprisingly robust against violation of normality assumptions about the continuous variable. 25 , 26 Consequently, as a sensitivity analysis, we repeated the equivalence testing as described above, but used the paired t‐test rather than the paired Wilcoxon signed‐rank test. In particular, the same equivalence margins as above were employed. Subsequently, we applied the Benjamini–Yekutieli procedure to the same test ensembles as described above. The results are indicated in Appendix B.
+
+## Paired t‐test for differences
+The difference testing was repeated precisely as described above using the paired t‐test instead of the paired Wilcoxon signed‐rank test. Again, the Benjamini–Yekutieli procedure was applied as described above, with the results documented in Appendix B.
+
+## RESULTS
+
+## Graphical summary of all discoveries
+The statistical findings are summarised in Figure 2. For each image mode, we created a combined barplot of discoveries and true discoveries among paired Wilcoxon equivalence tests as well as difference tests arranged by feature positions. Note that each bar in Figure 2 represents a complete test ensemble TEm,k. In order to balance the different sizes of the ensembles TEm,k for different image modes, scale was specified as a percentage rather than absolute size. The results of the sensitivity analysis are presented in Appendix B.
+Summary of discoveries for paired Wilcoxon tests. Dark blue—amount of false discoveries for equivalence. Light blue—amount of true discoveries for equivalence. Brown—amount of false discoveries for differences. Orange—amount of true discoveries for differences. Grey—amount of difference tests not qualified as discoveries. Scale is in percent (of total number N of tests available), directed to the left for equivalence and to the right for differences. Total length of each bar is 100%.
+
+## Results of equivalence testing
+
+## Discoveries for paired equivalence tests
+In Table 1, for every image mode, the total number of discoveries for paired Wilcoxon equivalence tests is presented, along with the number of true discoveries amongst them while the FDR ϑ=0.05 was fixed, and the percentage of TDs in relation to the total size of the test ensemble TEm,k. For tests qualified as discoveries within ensembles of 109 or 523 members, it holds that p≤0.0095=s109=0.05/H109 or p≤0.0073=s523=0.05/H523, respectively. The analogous results from sensitivity analysis, performing paired t‐tests for equivalence instead of Wilcoxon tests are shown in Table B1 in Appendix B.
+Discoveries for paired Wilcoxon equivalence tests.
+Note: Tests are grouped by image modes rawdat, …, logsvg as defined in Section 2.3.
+Abbreviations: D, number of discoveries; Perc., percentage of true discoveries related to total size of test ensemble TEm,k; Pos., position; TD, number of true discoveries.
+
+## Results of equivalence testing
+In general, the percentage of true discoveries (TDs) for equivalence was not very large. The percentage exceeded 50% in very few cases, only for 20 out of 240 test ensembles TEm,k. Moreover, these cases were restricted to only three image modes (rawdat, rawreg and gimreg). Within these modes, the strongest equivalence was observed at the middle retinal positions (positions 09–14), at dark regions within the choroid (position 23) and noise underneath the choroid (position 25). In contrast, for three other modes (rawsvg, logspe and logsvg), the percentage of TDs never exceeded 25%, whilst for three further modes (rawspe, lograw and logreg), the percentage of TDs was even less than 10% at every position. In sensitivity analysis, the amount of equivalence discovered was generally smaller.
+
+## True discoveries related to a reference position
+In this analysis, position 25 (noise underneath retina/choroid signal) plays a special role. At this position, the reflectivity signal is almost completely absent, and only signal‐independent speckle noise will be registered. Thus, one may reasonably expect that the properties of this noise, as expressed in terms of neighbourhood descriptors, should be very similar for cases and controls. Consequently, we consider position 25 as a reference position and calibration point for the subsequent interpretation of the equivalence testing results.
+With respect to the behaviour at this reference position, the image modes can be subdivided into three groups. Group A contains rawspe, lograw, logreg and logsvg modes, where overall absence of equivalence was observed and in particular, TDs for equivalence at position 25 were (almost or completely) absent. Group B is formed from rawsvg, gimdat, gimspe, gimsvg and logspe modes, with a low to moderate extent of equivalence at position 25 and percentages of roughly the same magnitude throughout all the other positions. For the three remaining image modes, that is, rawdat, rawreg and gimreg, which form Group C, we observed a large extent of equivalence at position 25. At the same time, these modes exhibited at certain positions considerable lowering of the equivalence percentage in comparison with position 25 (e.g., at positions 15–22 in rawdat mode). In sensitivity analysis, these latter observations were generally confirmed.
+
+## Results of difference testing
+
+## Discoveries for paired difference tests
+True discoveries for paired Wilcoxon difference tests were obtained for 27 test ensembles TDm,k. These results are given in Table 2. For each case, feature position, image mode, the size of TDm,k, the FDR applied, the number of discoveries and TDs, the percentage of TDs in relation to the total size of the ensemble TEm,k and the maximal p‐value for the tests qualified as discoveries were documented. In Figure A1, it is indicated for each descriptor whether the related equivalence and difference tests were qualified as a discovery or not. Furthermore, all 21 cases where true discoveries for paired t‐tests for difference were obtained in sensitivity analysis appear in Table B2 in Appendix B.
+Discoveries for paired Wilcoxon difference tests.
+Note: The percentage of true discoveries is related to total size of test ensemble TEm,k; maximal p‐value is related to all discoveries. Image modes rawdat, … logsvg are defined in Section 2.3.
+Abbreviations: FDR, false discovery rate; Pos., position; TDm,k, test ensembles defined in Section 2.7.2.
+
+## Results of difference testing
+True discoveries for paired Wilcoxon difference testing, as listed in Table 2, comprised five positions. The strongest signal for the difference between early AMD and healthy patients was observed at position 04 (inner limiting membrane, ILM) with TDs for all 12 image modes. The percentage of TDs ranged from 0.9% to 37.6%, with a mean of 16.7%. Sensitivity analysis confirmed TDs in nine out of 12 modes, with percentages ranging from 0.8% to 21.6% and a mean of 14.4%. TDs in the rawspe, lograw and logreg modes were not confirmed.
+Other strong difference signals at inner retinal positions were observed at position 11 (outer plexiform layer, OPL) (for gimdat mode and all six speckle modes) and at position 12 (outer nuclear layer (ONL) border) (for three speckle modes, namely, rawspe, rawsvg, and gimsvg). Percentages of TDs ranged from 0.6% to 28.3%, with a mean of 10.9%, or from 8.2% to 32.7% with a mean of 22.0%, respectively. Sensitivity analysis confirmed TDs at position 11 for six out of the seven modes (rawspe was not confirmed), and for all three modes at position 12. Percentages in sensitivity analysis ranged from 1.9% to 25.4% with a mean of 10.2% or from 0.9% to 26.6% with a mean of 11.7%, respectively.
+At position 21 (Bruch's membrane), weak difference signals were obtained for three different modes (rawsvg, gimspe and logreg). The percentage of TDs ranged from 0.6% to 5.5% with a mean of 2.2%. Sensitivity analysis confirm TDs only for the logreg mode (7.3%).
+A further weak difference signal was obtained at position 23 (dark choroid regions) for two modes (rawspe and lograw), with the percentage ranging from 2.8% to 4.6% with a mean of 3.7%. Both observations were not confirmed in sensitivity analysis. On the other hand, sensitivity analysis showed additional weak signals at position 10 (inner nuclear layer, INL) (for rawreg mode, 2.8%) and again at position 21 (for lograw mode, 0.9%; not observed in primary analysis).
+
+## DISCUSSION
+
+## Do we need alternative biomarkers for early AMD?
+The characteristic lesions (drusen and subretinal drusenoid deposits) found in the outermost retinal layers constitute the paramount biomarker for the presence of AMD. However, in the early, preclinical stage of the disease, these lesions are encountered just as they are being formed. Very little is known about the driving forces, dynamics and possible reversibility of this process. This fact alone justifies both conceptual and clinical interest in the search for alternative AMD biomarkers besides these lesions. Furthermore, early lesions can be easily overlooked by standard eye imaging techniques. As pointed out by Pead et al., 6 early AMD lesions may remain completely invisible in coloured fundus images or may not be clearly identifiable in such images. Surprisingly, such lesions may also be overlooked by OCT imaging due to the subsampling inherent in most acquisition protocols. For example, in the OCT data used in the present study, the distance between adjacent B‐scans was about 60 μm, which is equal or greater than the typical diameter of an early drusen. Consequently, small lesions situated between the scanning planes may be completely missed by OCT imaging, and therefore the number of early lesions in volume scans could be grossly underestimated. Therefore, it is reasonable to look for other AMD biomarkers. In view of the metabolic and inflammatory processes contributing to AMD development, 3 the existence of such biomarkers is highly probable.
+
+## A first candidate: Thickness alterations of retinal layers or layer complexes
+Commercial OCT devices are supplied with built‐in software packages, including applications to provide segmentations of the retinal borders as well as of certain retinal layers or OCT reflectivity bands. These programs also perform automated calculations of layer thicknesses. Taking advantage of this, a growing body of literature concerned with associations between early or intermediate AMD and thickness changes in the retina as a whole or within certain retinal layers has appeared. To the best of the authors' knowledge, the phenotypes analysed therein encompass: (1) mean thickness of the retina as a whole or of its inner part, (2) mean thickness of single retinal layers, averaged over certain macular subfields, as defined by the Early Treatment Diabetic Retinopathy Study (ETDRS) grid 27 and (3) pointwise maps for thickness differences in single retinal layers, see Table 3. A further class of papers studied alteration of retinal layer thickness not in relation to the stage of AMD but rather to specific genetic variants, which are known to be related to increased risk of AMD development, for example, Kaye et al., 28 Zekavat et al. 29 and Zouache et al. 30
+Reported associations between early AMD and other retinal phenotypes.
+aEyes (number): Early age‐related macular degeneration (AMD)/healthy. bMean age (years): early AMD patients/healthy patients. Result type: 1—thickness difference of whole retina or its inner part, 2—thickness differences of layers or layer complexes, 3—pointwise maps for thickness differences, 4—differences between neighbourhood descriptors for retinal features.
+Abbreviations: BMI, body mass index; HDL, high‐density lipoprotein.
+Not surprisingly, early AMD has been found to be related to thickening of the RPE complex at least in the central EDTRS subfield. 7 , 8 , 31 Regarding the inner part of the retina as a whole, Abdolrahimzadeh et al. 32 reported thinning in individuals with early AMD. This was supported by Brandl et al. 7 (thinning of ONL), Lamin et al. 31 (thinning of GCL‐IPL complex and INL) and Muftuoglu et al. 33 (thinning of IPL and RNFL‐GCL‐IPL complex). The pointwise difference maps calculated by Trinh et al. 9 and Wang et al. 34 show complex thinning/thickening patterns throughout eight or 10 retinal layers or OCT reflectivity bands.
+
+## Critical discussion of thickness analyses
+Thickness measurements as included in all of the studies cited above, are afflicted with a number of serious methodological problems. First, the measurements were based on largely undocumented, ‘black‐box’ commercial software packages provided by the OCT device manufacturers. Therefore, the repeatability of the measurements is at least questionable. Second, the quality of the layer segmentations obtained in this manner is often very poor. Brandl et al., 7 Muftuoglu et al., 33 Nusinowitz et al. 8 and Trinh et al. 9 reported the need for extensive manual corrections to be applied to the segmentations in order to make them suitable for statistical analysis. A third, more fundamental problem arises from the fact that contrast jumps within the OCT data frequently extend over segments of several pixels (see the intensity profile for the ILM contrast jump in Figure 5 of Wagner et al. 11 as a typical example). Consequently, for any segmentation procedure being applied to OCT data, an error tolerance of at least ±1 pixel should be accepted. This means that most reported thickness differences—even if shown to be statistically significant—fall into the range of the systematic error inherent to segmentation methods. For example, Muftuoglu et al., 33 p. 1481, Table 2, reported three significant differences of IPL thickness between the control and early AMD groups of 3.3 μm, 2.9 μm and 3.2 μm. However, for the Heidelberg Spectralis device used in their study, the depth of a single pixel is already 3.87 μm. Fourth, as discussed in Section 4.7. below, all results are strongly device‐dependent.
+In summary, the reported associations between early AMD and thickness alterations for particular retinal layers and EDTRS subfields in the literature seem to indicate an influence of early AMD, not only on the damaged outer layers but also on the retina as a whole. However, these investigations should be complemented by observations of other phenotypes, generated by an independent methodology.
+
+## An independent approach pursued in the present study
+Indeed, the ‘omics’ type methodology in line with Haralick et al. 21 and Larue et al., 22 as applied in the present study, is fundamentally different from layer segmentation and subsequent thickness measurements. In contrast with the mostly undocumented commercial segmentation algorithms, this investigation pursued a fully documented, externally repeatable approach without ‘black boxes’. The adopted statistical approach also differed from the investigations cited above. Instead of an (often conservative) alpha‐level correction, multiple testing was accounted for through control of the FDR. Consequently, the results are expressed as numbers or percentages of TDs related to whole test ensembles, instead of the significance of single tests.
+It should be noted that this study involved a very young early AMD sample (mean age of 62 years) of moderate size (200 pairs). Moreover, cases and controls were matched for seven parameters while in the papers cited in Section 4.2, there was, at best, matching for age, sex and refractive error—see Table 3. In the current approach, which was not related to thickness measurements at all, there was no need for control of refractive error.
+
+## Interpretation of the results of equivalence and difference testing
+In general, the results of equivalence testing showed a fairly low extent of TDs across all image modes. There are two possible reasons for this observation, whose influence cannot be distinguished a priori. Either (i) there really was a low degree of equivalence between cases and controls or (ii) there was an overall lack of power for detecting the existing equivalence. In view of the fairly conservative choice of equivalence margins (see Section 2.6.2), this second reason cannot be ruled out. Nevertheless, the analysis provides a reasonable proxy for the power to be expected, namely, the percentage of TDs for equivalence at reference position 25. As mentioned in Section 3.2.3, the data captured around this reference position consisted almost exclusively of speckle noise while the reflectance signal was absent. Consequently, at this position, a nearly complete equivalence of cases and controls is to be expected. Then the TD percentage which was actually observed can be understood as a measure for the cumulative power of the statistical analysis procedure related to whole test emsembles TEm,k rather than to specific individual tests.
+If a low TD percentage is found at position 25, then a substantial lack of power may reasonably be assumed, and the real equivalence behaviour cannot be inferred from the results. Therefore, no further conclusions can be drawn from the results for the image modes in Groups A and B (Section 3.2.3).
+For the three members of Group C, namely, rawdat, rawreg and gimreg modes, the situation was different. Observing large TD percentages at position 25 (86%, 83%, and 61%) and assuming that the cumulative power varied only moderately within the modes, one may conclude that the substantial lowering of the TD percentages above the reference position can be attributed to a real missing of equivalence. In sensitivity analysis, the mutual relations between TD percentages were confirmed for rawdat and rawreg modes. Consequently, one may interpret both of these last observations as a first indication for non‐equivalence of early AMD cases and healthy controls or positively, as an explicit signal for the influence of early AMD on the retina as a whole.
+For the acceptance of signals from difference testing, we required consistency between primary and sensitivity analyses. For the latter, a total of 19 out of 27 primary observations of difference within descriptor sets at positions 04, 11, 12 and 21 were confirmed. Eight primary observations were not confirmed (particularly at position 23). It may be concluded that the differences observed by neighbourhood statistics at positions 04 (ILM), 11 (OPL), 12 (ONL border) and 21 (Bruch's membrane) can be considered to be true.
+In summary, the results from equivalence as well as from difference testing may be considered as independent confirmation of the early AMD signals from the inner retinal layers as reported in the literature discussed in Sections 4.2 and 4.3.
+
+## Implications for the role of speckle within retinal OCT data
+The present results make a strong case for a full analysis of OCT data, exploiting particularly the information which is hidden in speckle. In the analysis of equivalence testing, pure speckle was used as a reference point for calibration. In difference testing, signals at positions 11 and 12 came predominantly or exclusively from the analysis of speckle modes.
+
+## Limitations of the present investigation
+As mentioned in Wagner et al., 11 limitations include the moderate sample size (200 pairs) resulting in a lack of data for some retinal positions, which then had to be excluded from subsequent analysis, and the fact that the very expensive manual grading was performed only once. For equivalence testing, in the absence of any advance information, completely ‘synthetic’ equivalence margins had to be used. However, these margins were chosen fairly conservatively.
+The most important limitation of the present study was that all descriptor values included in the statistical analysis are device‐dependent (as well as dependent upon the acquisition protocol). First, we note that the entire research on thickness alterations discussed above is strongly affected by the same limitation, since it is well‐known that different OCT devices measure fairly different layer thicknesses in the same eye. For example, Wolf‐Schnurrbusch et al. 10 reported a difference of 13 μm in the measurement of central retinal thickness (CRT) between a Spectralis HRA + OCT and a Cirrus HD‐OCT device (zeiss.com). Currently, Nam et al. 35 replicated this result, using contemporary devices from the same manufacturers and product families and obtained a CRT difference of 15.11 μm.
+However, in the current analysis, device dependence was most likely reduced by the statistical evaluation procedure being applied, that is, supplying information related to whole descriptor sets rather than to individual descriptor values and their possible differences. Although a conclusive interpretation of the present results in a (micro)biological context (e.g., in terms of possible early AMD‐driven modifications of cell structure and fine optical properties within retinal layers) lies beyond the scope of this article, the following seems to be a sound conclusion: If the observed early AMD signals are indeed caused by histological or biochemical alterations, which influence the scattering properties of certain layers or the refraction at its interfaces, then one may reasonably expect that the results of the current study can be reproduced, at least in principle, using different OCT devices. Even though case‐control value differences for individual descriptors will not be preserved, it is conceivable that the overall signals for whole descriptor sets will be repeatable.
+
+## CONCLUSION
+In the framework of a nested case–control study, significant differences were observed between the retinae of healthy and early AMD participants. For the first time, these differences were detected at the level of local neighbourhood statistics within OCT data. Difference testing revealed clear signs of AMD at the inner bound of the retina (i.e., ILM) as well as within the middle retinal layers (OPL and ONL border) distant from the outer zones where formation of early AMD lesions begins. Equivalence testing also resulted in an explicit signal for early AMD‐associated alterations of the retina. Thus, independent evidence was obtained for AMD affecting not only the outer but also the inner retinal layers, even in the early stages of the disease. The obvious device dependence of the results will most likely be reduced by the statistical evaluation procedure applied, which provided a description of early AMD signals in terms of true discoveries for whole sets of descriptors.
+In order to extract full information from OCT data, it proved indispensable to include different image modes obtained from nonlinear transformations of the raw data and, in particular, the raw data themselves in the investigations. These results make a strong case for both cartoon as well as speckle bearing essential parts of the total information within OCT data. A constructive, completely documented, traceable and repeatable approach was pursued without invoking artificial intelligence methods.
+
+## AUTHOR CONTRIBUTIONS
+Marcus Wagner: Conceptualization (equal); formal analysis (lead); funding acquisition (equal); investigation (equal); methodology (lead); software (lead); supervision (equal); validation (lead); visualization (lead); writing – original draft (lead); writing – review and editing (equal). Julia Sommerer: Conceptualization (supporting); data curation (supporting); formal analysis (equal); investigation (equal); methodology (equal); visualization (supporting); writing – review and editing (supporting). Franziska G. Rauscher: Conceptualization (equal); data curation (lead); formal analysis (equal); funding acquisition (equal); investigation (equal); methodology (equal); project administration (lead); resources (lead); supervision (equal); visualization (supporting); writing – original draft (supporting); writing – review and editing (equal).
+
+## FUNDING INFORMATION
+FGR and MW were supported by German Research Foundation (grant no. 497989466). Research with LIFE data was supported by the Leipzig Research Centre for Civilisation Diseases (LIFE), Leipzig University, which is funded by the EU, the European Social Fund, the European Regional Development Fund, and Free State Saxony's Excellence Initiative (project numbers 713‐241202, 14505/2470 and 14575/2470).
+
+## CONFLICT OF INTEREST STATEMENT
+All authors declare no conflicts of interest.
+
+## ACKNOWLEDGEMENTS
+The authors gratefully acknowledge the LIFE Adult Study team for their commitment to the eye investigation and corresponding examinations. As well, we thank the LIFE study participants for compliance with the very time‐consuming study investigation. Manual grading of retinal positions and a pilot analysis for a subset of descriptors were performed by the author (JS) in the framework of her M.Sc. thesis. 36 Open Access funding enabled and organised by Projekt DEAL.
+
+## Outcomes of the Benjamini–Yekutieli procedure for Wilcoxon tests
+Here, the outcome of the Benjamini–Yekutieli procedure for all paired Wilcoxon equivalence and difference tests is documented, see Figure A1. For this purpose, pixel maps are provided whose rows and columns correspond to the 20 positions included in the analysis (position 4–18, position 20–23 and position 25) and the descriptors involved in the respective tests. Consequently, every pixel corresponds to a single test at a specific position involving a certain descriptor. Within each test ensemble TEm,k, the tests were arranged in ascending order of the labels of the corresponding descriptors from Sm. Labels were read as integer numbers while a leading zero was ignored. For sake of clarity, the test ensembles were divided into blocks of length 10 and an empty column was inserted after each block.
+Outcomes for single Wilcoxon tests. Blue pixels—discoveries for equivalence. Brown pixels—discoveries for differences. Grey pixels—difference tests not qualified as discoveries. Tests involving descriptors based on identical quantity, window size and number of histogram classes are vertically aligned.
+The outcome of the classification of every single test by the Benjamini–Yekutieli procedure is colour‐coded. Tests belonging to the discovery sets Em,k,0.05 for equivalence were coded by blue pixels; tests belonging to the optimal discovery sets Dm,k,ϑ for difference were coded by brown pixels while tests classified neither as discoveries for equivalence nor as such for difference, thus belonging to TDm,k∖Dm,k,ϑ=TEm,k∖(Em,k,0.05⋃Dm,k,ϑ), were coded by grey pixels. Note that with the FDR methodology used for the classification of tests, one cannot specify whether a given discovery was a true or a false one.
+To ensure comparability between different test ensembles, tests involving the same descriptor were aligned vertically. As a consequence, in view of the numbering of the quantities introduced in Section 2.4, the maps corresponding to the subsets S1,S2, S3, S9, S10 and S11 contained empty parts. Moreover, the maps corresponding to the subsets S4, S5, S6, S7, S8 and S12 were split into three parts. Each part was annotated with the first and the last descriptor involved.
+
+## Results of sensitivity analysis
+Discoveries for paired t‐tests for equivalence.
+Note: Tests are grouped by image modes rawdat, …, logsvg as defined in Section 2.3.
+Abbreviations: D, number of discoveries; Perc., percentage of TDs related to total size of test ensemble TEm,k; Pos., position; TD, number of true discoveries.
+Discoveries for paired t‐tests for difference.
+Note: The percentage of TDs is related to the total size of the test ensemble TEm,k; maximal p‐value is related to all discoveries. Image modes rawdat, … logsvg are defined in Section 2.3.
+Abbreviations: FDR, false discovery rate; Pos., position; TDm,k, test ensembles defined in Section 2.7.2.
+Summary of discoveries for paired t‐tests. Dark blue—amount of false discoveries for equivalence. Light blue—amount of true discoveries for equivalence. Brown—amount of false discoveries for differences. Orange—amount of true discoveries for differences. Grey—amount of difference tests not qualified as discoveries. Scale is percent (of total number N of tests available), directed to the left for equivalence and to the right for differences. Total length of each bar is 100%.
+Wagner M, Sommerer J, Rauscher FG. Extracting full information from OCT scans—signs of early age‐related macular degeneration within inner retinal layers by local neighbourhood statistics. Part II: Results. Ophthalmic Physiol Opt. 2025;45:247–268. 10.1111/opo.13393
+
+## REFERENCES
+
+## Table TABLE 1: Discoveries for paired Wilcoxon equivalence tests.
+Image mode: rawdat | Image mode: rawreg | Image mode: rawspe | Image mode: rawsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 44 | 41 | 37.6 | 04 | 48 | 45 | 41.3 | 04 | 9 | 8 | 7.3 | 04 | 61 | 57 | 10.9
+05 | 5 | 4 | 3.7 | 05 | 4 | 3 | 2.8 | 05 | 6 | 5 | 4.6 | 05 | 51 | 48 | 9.2
+06 | 5 | 4 | 3.7 | 06 | 4 | 3 | 2.8 | 06 | 8 | 7 | 6.4 | 06 | 55 | 52 | 9.9
+07 | 12 | 11 | 10.1 | 07 | 50 | 47 | 43.1 | 07 | 5 | 4 | 3.7 | 07 | 104 | 98 | 18.7
+08 | 12 | 11 | 10.1 | 08 | 57 | 54 | 49.5 | 08 | 4 | 3 | 2.8 | 08 | 71 | 67 | 12.8
+09 | 80 | 76 | 69.7 | 09 | 100 | 95 | 87.2 | 09 | 4 | 3 | 2.8 | 09 | 48 | 45 | 8.6
+10 | 88 | 83 | 76.1 | 10 | 99 | 94 | 86.2 | 10 | 3 | 2 | 1.8 | 10 | 98 | 93 | 17.8
+11 | 88 | 83 | 76.1 | 11 | 99 | 94 | 86.2 | 11 | 5 | 4 | 3.7 | 11 | 102 | 96 | 18.4
+12 | 87 | 82 | 75.2 | 12 | 99 | 94 | 86.2 | 12 | 3 | 2 | 1.8 | 12 | 87 | 82 | 15.7
+13 | 98 | 93 | 85.3 | 13 | 99 | 94 | 86.2 | 13 | 3 | 2 | 1.8 | 13 | 111 | 105 | 20.1
+14 | 93 | 88 | 80.7 | 14 | 97 | 92 | 84.4 | 14 | 3 | 2 | 1.8 | 14 | 66 | 62 | 11.8
+15 | 20 | 19 | 17.4 | 15 | 21 | 19 | 17.4 | 15 | 9 | 8 | 7.3 | 15 | 69 | 65 | 12.4
+16 | 10 | 9 | 8.2 | 16 | 10 | 9 | 8.2 | 16 | 6 | 5 | 4.6 | 16 | 56 | 53 | 10.1
+17 | 3 | 2 | 1.8 | 17 | 0 | 0 | 0.0 | 17 | 8 | 7 | 6.4 | 17 | 70 | 66 | 12.6
+18 | 3 | 2 | 1.8 | 18 | 0 | 0 | 0.0 | 18 | 6 | 5 | 4.6 | 18 | 80 | 76 | 14.5
+20 | 8 | 7 | 6.4 | 20 | 5 | 4 | 3.7 | 20 | 8 | 7 | 6.4 | 20 | 77 | 73 | 14.0
+21 | 5 | 4 | 3.7 | 21 | 5 | 4 | 3.7 | 21 | 7 | 6 | 5.5 | 21 | 83 | 78 | 14.9
+22 | 13 | 12 | 11.0 | 22 | 5 | 4 | 3.7 | 22 | 7 | 6 | 5.5 | 22 | 64 | 60 | 11.5
+23 | 75 | 71 | 65.1 | 23 | 68 | 64 | 58.7 | 23 | 3 | 2 | 1.8 | 23 | 112 | 106 | 20.3
+25 | 99 | 94 | 86.2 | 25 | 95 | 90 | 82.6 | 25 | 8 | 7 | 6.4 | 25 | 22 | 20 | 3.8
+Image mode: gimdat | Image mode: gimreg | Image mode: gimspe | Image mode: gimsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 86 | 81 | 15.5 | 04 | 118 | 112 | 21.4 | 04 | 151 | 143 | 27.3 | 04 | 110 | 104 | 19.9
+05 | 93 | 88 | 16.8 | 05 | 139 | 132 | 25.2 | 05 | 129 | 122 | 23.3 | 05 | 95 | 90 | 17.2
+06 | 109 | 103 | 19.7 | 06 | 115 | 109 | 20.8 | 06 | 128 | 121 | 23.1 | 06 | 133 | 126 | 24.1
+07 | 136 | 129 | 24.7 | 07 | 227 | 215 | 41.1 | 07 | 114 | 108 | 20.6 | 07 | 106 | 100 | 19.1
+08 | 125 | 118 | 22.6 | 08 | 262 | 248 | 47.4 | 08 | 140 | 133 | 25.4 | 08 | 123 | 116 | 22.2
+09 | 116 | 110 | 21.0 | 09 | 127 | 120 | 22.9 | 09 | 96 | 91 | 17.4 | 09 | 121 | 114 | 21.8
+10 | 112 | 106 | 20.3 | 10 | 357 | 339 | 64.8 | 10 | 115 | 109 | 20.8 | 10 | 131 | 124 | 23.7
+11 | 139 | 132 | 25.2 | 11 | 337 | 320 | 61.2 | 11 | 164 | 155 | 29.6 | 11 | 158 | 150 | 28.7
+12 | 141 | 133 | 25.4 | 12 | 147 | 139 | 26.6 | 12 | 126 | 119 | 22.8 | 12 | 150 | 142 | 27.2
+13 | 172 | 163 | 31.2 | 13 | 431 | 409 | 78.2 | 13 | 105 | 99 | 18.9 | 13 | 95 | 90 | 17.2
+14 | 135 | 128 | 24.5 | 14 | 186 | 176 | 33.6 | 14 | 93 | 88 | 16.8 | 14 | 116 | 110 | 21.0
+15 | 47 | 44 | 8.4 | 15 | 91 | 86 | 16.4 | 15 | 120 | 114 | 21.8 | 15 | 110 | 104 | 19.9
+16 | 72 | 68 | 13.0 | 16 | 112 | 106 | 20.3 | 16 | 130 | 123 | 23.5 | 16 | 90 | 85 | 16.2
+17 | 95 | 90 | 17.2 | 17 | 93 | 88 | 16.8 | 17 | 120 | 114 | 21.8 | 17 | 116 | 110 | 21.0
+18 | 74 | 70 | 13.4 | 18 | 121 | 114 | 21.8 | 18 | 146 | 138 | 26.4 | 18 | 104 | 98 | 18.7
+20 | 89 | 84 | 16.1 | 20 | 95 | 90 | 17.2 | 20 | 124 | 117 | 22.4 | 20 | 126 | 119 | 22.8
+21 | 100 | 95 | 18.2 | 21 | 143 | 135 | 25.8 | 21 | 235 | 223 | 42.6 | 21 | 123 | 116 | 22.2
+22 | 105 | 99 | 18.9 | 22 | 103 | 97 | 18.5 | 22 | 165 | 156 | 29.8 | 22 | 110 | 104 | 19.9
+23 | 163 | 154 | 29.4 | 23 | 205 | 194 | 37.1 | 23 | 117 | 111 | 21.2 | 23 | 137 | 130 | 24.8
+25 | 144 | 136 | 26.0 | 25 | 334 | 317 | 60.6 | 25 | 56 | 53 | 10.1 | 25 | 66 | 62 | 11.8
+Image mode: lograw | Image mode: logreg | Image mode: logspe | Image mode: logsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 6 | 5 | 4.6 | 04 | 6 | 5 | 4.6 | 04 | 26 | 24 | 22.0 | 04 | 40 | 38 | 7.3
+05 | 8 | 7 | 6.4 | 05 | 1 | 0 | 0.0 | 05 | 9 | 8 | 7.3 | 05 | 21 | 19 | 3.6
+06 | 9 | 8 | 7.3 | 06 | 9 | 8 | 7.3 | 06 | 4 | 3 | 2.8 | 06 | 27 | 25 | 4.8
+07 | 9 | 8 | 7.3 | 07 | 3 | 2 | 1.8 | 07 | 9 | 8 | 7.3 | 07 | 41 | 38 | 7.3
+08 | 9 | 8 | 7.3 | 08 | 3 | 2 | 1.8 | 08 | 8 | 7 | 6.4 | 08 | 29 | 27 | 5.2
+09 | 9 | 8 | 7.3 | 09 | 9 | 8 | 7.3 | 09 | 8 | 7 | 6.4 | 09 | 18 | 17 | 3.2
+10 | 8 | 7 | 6.4 | 10 | 2 | 1 | 0.9 | 10 | 7 | 6 | 5.5 | 10 | 24 | 22 | 4.2
+11 | 9 | 8 | 7.3 | 11 | 1 | 0 | 0.0 | 11 | 23 | 21 | 19.3 | 11 | 50 | 47 | 9.0
+12 | 9 | 8 | 7.3 | 12 | 9 | 8 | 7.3 | 12 | 23 | 21 | 19.3 | 12 | 23 | 21 | 4.0
+13 | 5 | 4 | 3.7 | 13 | 2 | 1 | 0.9 | 13 | 8 | 7 | 6.4 | 13 | 12 | 11 | 2.1
+14 | 5 | 4 | 3.7 | 14 | 1 | 0 | 0.0 | 14 | 8 | 7 | 6.4 | 14 | 17 | 16 | 3.0
+15 | 6 | 5 | 4.6 | 15 | 8 | 7 | 6.4 | 15 | 1 | 0 | 0.0 | 15 | 39 | 37 | 7.1
+16 | 5 | 4 | 3.7 | 16 | 0 | 0 | 0.0 | 16 | 6 | 5 | 4.6 | 16 | 26 | 24 | 4.6
+17 | 8 | 7 | 6.4 | 17 | 4 | 3 | 2.8 | 17 | 7 | 6 | 5.5 | 17 | 32 | 30 | 5.7
+18 | 9 | 8 | 7.3 | 18 | 5 | 4 | 3.7 | 18 | 3 | 2 | 1.8 | 18 | 31 | 29 | 5.5
+20 | 8 | 7 | 6.4 | 20 | 0 | 0 | 0.0 | 20 | 6 | 5 | 4.6 | 20 | 23 | 21 | 4.0
+21 | 5 | 4 | 3.7 | 21 | 4 | 3 | 2.8 | 21 | 2 | 1 | 0.9 | 21 | 17 | 16 | 3.0
+22 | 8 | 7 | 6.4 | 22 | 8 | 7 | 6.4 | 22 | 7 | 6 | 5.5 | 22 | 11 | 10 | 1.9
+23 | 9 | 8 | 7.3 | 23 | 4 | 3 | 2.8 | 23 | 11 | 10 | 9.2 | 23 | 79 | 75 | 14.3
+25 | 3 | 2 | 1.8 | 25 | 0 | 0 | 0.0 | 25 | 15 | 14 | 12.8 | 25 | 13 | 12 | 2.3
+
+## Table TABLE 2: Discoveries for paired Wilcoxon difference tests.
+No. | Position | Image mode | Size of TDm,k | FDR applied | Number of discoveries | Number of true discoveries | Perc. of true discoveries | Maximal p‐value
+1 | Pos. 04 | rawdat | 65 | 0.41 | 17 | 10 | 9.2 | 0.0221
+2 | Pos. 04 | rawreg | 61 | 0.33 | 2 | 1 | 0.9 | 0.0022
+3 | Pos. 04 | rawspe | 100 | 0.16 | 40 | 33 | 30.3 | 0.0116
+4 | Pos. 04 | rawsvg | 462 | 0.13 | 104 | 90 | 17.2 | 0.0043
+5 | Pos. 04 | gimdat | 437 | 0.12 | 105 | 92 | 17.6 | 0.0041
+6 | Pos. 04 | gimreg | 405 | 0.19 | 101 | 81 | 15.5 | 0.0070
+7 | Pos. 04 | gimspe | 372 | 0.34 | 132 | 87 | 16.6 | 0.0184
+8 | Pos. 04 | gimsvg | 413 | 0.12 | 111 | 97 | 18.5 | 0.0047
+9 | Pos. 04 | lograw | 103 | 0.24 | 54 | 41 | 37.6 | 0.0238
+10 | Pos. 04 | logreg | 103 | 0.29 | 54 | 38 | 34.7 | 0.0290
+11 | Pos. 04 | logspe | 83 | 0.46 | 2 | 1 | 0.9 | 0.0022
+12 | Pos. 04 | logsvg | 483 | 0.33 | 12 | 8 | 1.5 | 0.0012
+13 | Pos. 11 | rawspe | 104 | 0.61 | 13 | 5 | 4.6 | 0.0145
+14 | Pos. 11 | rawsvg | 421 | 0.42 | 145 | 84 | 16.1 | 0.0217
+15 | Pos. 11 | gimdat | 384 | 0.33 | 36 | 24 | 4.6 | 0.0047
+16 | Pos. 11 | gimspe | 359 | 0.69 | 75 | 23 | 4.4 | 0.0222
+17 | Pos. 11 | gimsvg | 365 | 0.33 | 222 | 148 | 28.3 | 0.0307
+18 | Pos. 11 | logspe | 86 | 0.41 | 33 | 19 | 17.4 | 0.0307
+19 | Pos. 11 | logsvg | 473 | 0.75 | 12 | 3 | 0.6 | 0.0028
+20 | Pos. 12 | rawspe | 106 | 0.69 | 31 | 9 | 8.2 | 0.0382
+21 | Pos. 12 | rawsvg | 436 | 0.41 | 291 | 171 | 32.7 | 0.0410
+21 | Pos. 12 | gimsvg | 373 | 0.46 | 245 | 132 | 25.2 | 0.0464
+23 | Pos. 21 | rawsvg | 440 | 0.56 | 8 | 3 | 0.6 | 0.0015
+24 | Pos. 21 | gimspe | 288 | 0.84 | 22 | 3 | 0.6 | 0.0102
+25 | Pos. 21 | logreg | 105 | 0.57 | 16 | 6 | 5.5 | 0.0164
+26 | Pos. 23 | rawspe | 106 | 0.90 | 36 | 3 | 2.8 | 0.0579
+27 | Pos. 23 | lograw | 100 | 0.90 | 55 | 5 | 4.6 | 0.0949
+
+## Table TABLE 3: Reported associations between early AMD and other retinal phenotypes.
+References | Eyes a | Mean age b | Matching parameters | Result type
+Abdolrahimzadeh et al. 32 | 19/18 | 81/76 | Age | 1
+Brandl et al. 7 | 145/677 | 78 (together) | None | 2
+Lamin et al. 31 | 71/31 | 74/64 | None | 2
+Muftuoglu et al. 33 | 60/30 | 74/74 | Sex, age | 2
+Nusinowitz et al. 8 | 29/47 | 61/60 | None | 1, 2
+Trinh et al. 9 | 96/96 | 66/64 | Sex, age, refraction | 3
+Wang et al. 34 | 668/537 | 62 (together) | None | 3
+Present study | 200/200 | 62/62 | Sex, age, BMI, smoking, socioeconomic status, diabetes, non‐HDL cholesterol | 4
+
+## Table TABLE B1: Discoveries for paired t‐tests for equivalence.
+Image mode: rawdat | Image mode: rawreg | Image mode: rawspe | Image mode: rawsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 32 | 30 | 27.5 | 04 | 32 | 30 | 27.5 | 04 | 0 | 0 | 0.0 | 04 | 37 | 35 | 6.7
+05 | 0 | 0 | 0.0 | 05 | 0 | 0 | 0.0 | 05 | 2 | 1 | 0.9 | 05 | 20 | 19 | 3.6
+06 | 1 | 0 | 0.0 | 06 | 0 | 0 | 0.0 | 06 | 0 | 0 | 0.0 | 06 | 26 | 24 | 4.6
+07 | 3 | 2 | 1.8 | 07 | 7 | 6 | 5.5 | 07 | 0 | 0 | 0.0 | 07 | 76 | 72 | 13.8
+08 | 0 | 0 | 0.0 | 08 | 6 | 5 | 4.6 | 08 | 0 | 0 | 0.0 | 08 | 50 | 47 | 9.0
+09 | 67 | 63 | 57.8 | 09 | 78 | 74 | 67.9 | 09 | 0 | 0 | 0.0 | 09 | 24 | 22 | 4.2
+10 | 75 | 71 | 65.1 | 10 | 95 | 90 | 82.6 | 10 | 0 | 0 | 0.0 | 10 | 75 | 71 | 13.6
+11 | 69 | 65 | 59.6 | 11 | 96 | 91 | 83.5 | 11 | 0 | 0 | 0.0 | 11 | 89 | 84 | 16.1
+12 | 82 | 77 | 70.6 | 12 | 96 | 91 | 83.5 | 12 | 0 | 0 | 0.0 | 12 | 80 | 76 | 14.5
+13 | 91 | 86 | 78.9 | 13 | 91 | 86 | 78.9 | 13 | 0 | 0 | 0.0 | 13 | 80 | 76 | 14.5
+14 | 84 | 79 | 72.5 | 14 | 89 | 84 | 77.1 | 14 | 0 | 0 | 0.0 | 14 | 32 | 30 | 5.7
+15 | 19 | 18 | 16.5 | 15 | 19 | 18 | 16.5 | 15 | 2 | 1 | 0.9 | 15 | 53 | 50 | 9.6
+16 | 4 | 3 | 2.8 | 16 | 3 | 2 | 1.8 | 16 | 0 | 0 | 0.0 | 16 | 29 | 27 | 5.2
+17 | 0 | 0 | 0.0 | 17 | 0 | 0 | 0.0 | 17 | 1 | 0 | 0.0 | 17 | 38 | 36 | 6.9
+18 | 0 | 0 | 0.0 | 18 | 0 | 0 | 0.0 | 18 | 0 | 0 | 0.0 | 18 | 63 | 59 | 11.3
+20 | 0 | 0 | 0.0 | 20 | 0 | 0 | 0.0 | 20 | 0 | 0 | 0.0 | 20 | 31 | 29 | 5.5
+21 | 0 | 0 | 0.0 | 21 | 0 | 0 | 0.0 | 21 | 0 | 0 | 0.0 | 21 | 64 | 60 | 11.5
+22 | 8 | 7 | 6.4 | 22 | 0 | 0 | 0.0 | 22 | 0 | 0 | 0.0 | 22 | 41 | 38 | 7.3
+23 | 12 | 11 | 10.1 | 23 | 17 | 16 | 14.7 | 23 | 0 | 0 | 0.0 | 23 | 87 | 82 | 15.7
+25 | 91 | 86 | 78.9 | 25 | 95 | 90 | 82.6 | 25 | 0 | 0 | 0.0 | 25 | 8 | 7 | 1.3
+Image mode: gimdat | Image mode: gimreg | Image mode: gimspe | Image mode: gimsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 75 | 71 | 13.6 | 04 | 94 | 89 | 17.0 | 04 | 80 | 76 | 14.5 | 04 | 101 | 95 | 18.2
+05 | 78 | 74 | 14.1 | 05 | 120 | 114 | 21.8 | 05 | 121 | 114 | 21.8 | 05 | 77 | 73 | 14.0
+06 | 95 | 90 | 17.2 | 06 | 101 | 95 | 18.2 | 06 | 115 | 109 | 20.8 | 06 | 126 | 119 | 22.8
+07 | 127 | 120 | 22.9 | 07 | 141 | 133 | 25.4 | 07 | 86 | 81 | 15.5 | 07 | 91 | 86 | 16.4
+08 | 114 | 108 | 20.6 | 08 | 127 | 120 | 22.9 | 08 | 130 | 123 | 23.5 | 08 | 113 | 107 | 20.4
+09 | 102 | 96 | 18.4 | 09 | 107 | 101 | 19.3 | 09 | 69 | 65 | 12.4 | 09 | 96 | 91 | 17.4
+10 | 107 | 101 | 19.3 | 10 | 144 | 136 | 26.0 | 10 | 51 | 48 | 9.2 | 10 | 107 | 101 | 19.3
+11 | 132 | 125 | 16.1 | 11 | 160 | 152 | 29.1 | 11 | 157 | 149 | 28.5 | 11 | 154 | 146 | 27.9
+12 | 136 | 129 | 23.9 | 12 | 139 | 132 | 25.2 | 12 | 93 | 88 | 16.8 | 12 | 136 | 129 | 24.7
+13 | 162 | 153 | 29.2 | 13 | 164 | 155 | 29.6 | 13 | 63 | 59 | 11.3 | 13 | 65 | 61 | 11.7
+14 | 130 | 123 | 23.5 | 14 | 146 | 138 | 26.4 | 14 | 63 | 59 | 11.3 | 14 | 106 | 100 | 19.1
+15 | 43 | 40 | 7.6 | 15 | 83 | 78 | 14.9 | 15 | 107 | 101 | 19.3 | 15 | 99 | 94 | 18.0
+16 | 57 | 54 | 10.3 | 16 | 102 | 96 | 18.4 | 16 | 119 | 113 | 21.6 | 16 | 83 | 78 | 14.9
+17 | 89 | 84 | 16.1 | 17 | 91 | 86 | 16.4 | 17 | 113 | 107 | 20.4 | 17 | 111 | 105 | 20.1
+18 | 66 | 62 | 11.8 | 18 | 113 | 107 | 20.4 | 18 | 143 | 135 | 25.8 | 18 | 86 | 81 | 15.5
+20 | 83 | 78 | 14.9 | 20 | 90 | 85 | 16.2 | 20 | 114 | 108 | 20.6 | 20 | 121 | 114 | 21.8
+21 | 96 | 91 | 17.4 | 21 | 139 | 132 | 25.2 | 21 | 226 | 214 | 40.9 | 21 | 118 | 112 | 21.4
+22 | 91 | 86 | 16.4 | 22 | 95 | 90 | 17.2 | 22 | 155 | 147 | 28.1 | 22 | 103 | 97 | 18.5
+23 | 147 | 139 | 26.6 | 23 | 152 | 144 | 27.5 | 23 | 95 | 90 | 17.2 | 23 | 127 | 120 | 22.9
+25 | 131 | 124 | 23.7 | 25 | 175 | 166 | 31.7 | 25 | 19 | 18 | 3.4 | 25 | 29 | 27 | 5.2
+Image mode: lograw | Image mode: logreg | Image mode: logspe | Image mode: logsvg
+Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc. | Pos. | D | TD | Perc.
+04 | 0 | 0 | 0.0 | 04 | 0 | 0 | 0.0 | 04 | 19 | 18 | 16.5 | 04 | 22 | 20 | 3.8
+05 | 1 | 0 | 0.0 | 05 | 0 | 0 | 0.0 | 05 | 1 | 0 | 0.0 | 05 | 3 | 2 | 0.4
+06 | 5 | 4 | 3.7 | 06 | 0 | 0 | 0.0 | 06 | 0 | 0 | 0.0 | 06 | 3 | 2 | 0.4
+07 | 0 | 0 | 0.0 | 07 | 0 | 0 | 0.0 | 07 | 1 | 0 | 0.0 | 07 | 19 | 18 | 3.4
+08 | 0 | 0 | 0.0 | 08 | 0 | 0 | 0.0 | 08 | 3 | 2 | 1.8 | 08 | 9 | 8 | 1.5
+09 | 3 | 2 | 1.8 | 09 | 0 | 0 | 0.0 | 09 | 0 | 0 | 0.0 | 09 | 5 | 4 | 0.8
+10 | 0 | 0 | 0.0 | 10 | 0 | 0 | 0.0 | 10 | 0 | 0 | 0.0 | 10 | 12 | 11 | 2.1
+11 | 0 | 0 | 0.0 | 11 | 0 | 0 | 0.0 | 11 | 11 | 10 | 9.2 | 11 | 38 | 36 | 6.9
+12 | 0 | 0 | 0.0 | 12 | 0 | 0 | 0.0 | 12 | 18 | 17 | 15.6 | 12 | 12 | 11 | 2.1
+13 | 0 | 0 | 0.0 | 13 | 0 | 0 | 0.0 | 13 | 0 | 0 | 0.0 | 13 | 1 | 0 | 0.0
+14 | 0 | 0 | 0.0 | 14 | 0 | 0 | 0.0 | 14 | 6 | 5 | 4.6 | 14 | 5 | 4 | 0.8
+15 | 3 | 2 | 1.8 | 15 | 6 | 5 | 4.6 | 15 | 0 | 0 | 0.0 | 15 | 18 | 17 | 3.2
+16 | 0 | 0 | 0.0 | 16 | 0 | 0 | 0.0 | 16 | 2 | 1 | 0.9 | 16 | 10 | 9 | 1.7
+17 | 2 | 1 | 0.9 | 17 | 0 | 0 | 0.0 | 17 | 1 | 0 | 0.0 | 17 | 8 | 7 | 1.3
+18 | 2 | 1 | 0.9 | 18 | 0 | 0 | 0.0 | 18 | 0 | 0 | 0.0 | 18 | 8 | 7 | 1.3
+20 | 3 | 2 | 1.8 | 20 | 0 | 0 | 0.0 | 20 | 1 | 0 | 0.0 | 20 | 2 | 1 | 0.2
+21 | 4 | 3 | 2.8 | 21 | 4 | 3 | 2.8 | 21 | 0 | 0 | 0.0 | 21 | 0 | 0 | 0.0
+22 | 0 | 0 | 0.0 | 22 | 0 | 0 | 0.0 | 22 | 0 | 0 | 0.0 | 22 | 1 | 0 | 0.0
+23 | 0 | 0 | 0.0 | 23 | 0 | 0 | 0.0 | 23 | 0 | 0 | 0.0 | 23 | 63 | 59 | 11.3
+25 | 0 | 0 | 0.0 | 25 | 0 | 0 | 0.0 | 25 | 11 | 10 | 9.2 | 25 | 1 | 0 | 0.0
+
+## Table TABLE B2: Discoveries for paired t‐tests for difference.
+No. | Position | Image mode | Size of TDm,k | FDR applied | Number of discoveries | Number of true discoveries | Perc. of true discoveries | Maximal p‐value
+1 | Pos. 04 | rawdat | 77 | 0.51 | 48 | 23 | 21.1 | 0.0633
+2 | Pos. 04 | rawreg | 77 | 0.54 | 37 | 17 | 15.6 | 0.0522
+3 | Pos. 04 | rawsvg | 486 | 0.09 | 102 | 92 | 17.6 | 0.0027
+4 | Pos. 04 | gimdat | 448 | 0.20 | 120 | 96 | 18.4 | 0.0078
+5 | Pos. 04 | gimreg | 429 | 0.14 | 100 | 86 | 16.4 | 0.0049
+6 | Pos. 04 | gimspe | 443 | 0.40 | 183 | 109 | 20.8 | 0.0246
+7 | Pos. 04 | gimsvg | 422 | 0.08 | 103 | 94 | 18.0 | 0.0028
+8 | Pos. 04 | logspe | 90 | 0.64 | 4 | 1 | 0.9 | 0.0055
+9 | Pos. 04 | logsvg | 501 | 0.77 | 19 | 4 | 0.8 | 0.0042
+10 | Pos. 10 | rawreg | 14 | 0.50 | 7 | 3 | 2.8 | 0.0757
+11 | Pos. 11 | rawsvg | 434 | 0.56 | 140 | 61 | 11.7 | 0.0268
+12 | Pos. 11 | gimdat | 391 | 0.27 | 32 | 23 | 4.4 | 0.0033
+13 | Pos. 11 | gimspe | 366 | 0.48 | 39 | 20 | 3.8 | 0.0078
+14 | Pos. 11 | gimsvg | 369 | 0.31 | 193 | 133 | 25.4 | 0.0247
+15 | Pos. 11 | logspe | 98 | 0.60 | 38 | 15 | 13.8 | 0.0449
+16 | Pos. 11 | logsvg | 485 | 0.46 | 19 | 10 | 1.9 | 0.0026
+17 | Pos. 12 | rawsvg | 443 | 0.49 | 274 | 139 | 26.6 | 0.0452
+18 | Pos. 12 | gimsvg | 387 | 0.64 | 112 | 40 | 7.6 | 0.0283
+19 | Pos. 12 | logspe | 91 | 0.72 | 4 | 1 | 0.9 | 0.0061
+20 | Pos. 21 | lograw | 105 | 0.60 | 3 | 1 | 0.9 | 0.0032
+21 | Pos. 21 | logreg | 105 | 0.42 | 14 | 8 | 7.3 | 0.0106
+
+## Figure FIGURE 1: Illustration of the Benjamini–Yekutieli step‐up procedure. The x‐axis shows the indices of the tests, which are ordered by increasing p‐value. The y‐axis shows p‐values and stepnumbers. m, total number of tests included; k, optimal index found by the procedure (equals to the number of discoveries).
+
+## Figure FIGURE 2: Summary of discoveries for paired Wilcoxon tests. Dark blue—amount of false discoveries for equivalence. Light blue—amount of true discoveries for equivalence. Brown—amount of false discoveries for differences. Orange—amount of true discoveries for differences. Grey—amount of difference tests not qualified as discoveries. Scale is in percent (of total number N of tests available), directed to the left for equivalence and to the right for differences. Total length of each bar is 100%.
+
+## Figure FIGURE A1: Outcomes for single Wilcoxon tests. Blue pixels—discoveries for equivalence. Brown pixels—discoveries for differences. Grey pixels—difference tests not qualified as discoveries. Tests involving descriptors based on identical quantity, window size and number of histogram classes are vertically aligned.
+
+## Figure FIGURE B1: Summary of discoveries for paired t‐tests. Dark blue—amount of false discoveries for equivalence. Light blue—amount of true discoveries for equivalence. Brown—amount of false discoveries for differences. Orange—amount of true discoveries for differences. Grey—amount of difference tests not qualified as discoveries. Scale is percent (of total number N of tests available), directed to the left for equivalence and to the right for differences. Total length of each bar is 100%.

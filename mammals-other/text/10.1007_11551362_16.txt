@@ -1,0 +1,563 @@
+MedioVis – A User-Centred Library Metadata Browser
+Christian Grün, Jens Gerken, Hans-Christian Jetter, Werner A. König, Harald Reiterer (2005). Lecture notes in computer science. http://nbn-resolving.de/urn:nbn:de:bsz:352-opus-31601. doi:10.1007/11551362_16. Licence: cc-by-nc-nd. Text from pdf.
+
+First publ. as paper in: Research and advanced technology for digital libraries; 9th European
+Conference, ECDL 2005, Vienna, Austria, September 18 - 23, 2005, pp. 174-185
+
+MedioVis – A User-Centred Library
+Metadata Browser
+Christian Grün, Jens Gerken, Hans-Christian Jetter, Werner König, and
+Harald Reiterer
+Workgroup Human-Computer-Interaction
+Department of Computer and Information Science
+University of Konstanz
+78457 Konstanz, Germany
+{gruen, gerken, jetter, koenigw, reiterer}@inf.uni-konstanz.de
+http://hci.uni-konstanz.de
+
+Abstract. MedioVis is a visual information seeking system which was designed
+especially for library data. The objective target was to create a system which
+simplifies and optimizes the user’s information seeking process and thus further
+motivates the user to browse in the library stock. To enhance the motivation
+special attention was given to consider joy of use aspects during the design of
+the user interface. The primary user interface design is based on multiple
+coordinated views to offer a great variety of exploration possibilities in a directmanipulative manner. To accomplish a self-explanatory usability of the system
+for non-expert users, the development was accompanied by continuous user
+tests with casual and regular library users. At the end of the development
+process a comprehensive summative evaluation was conducted, comparing
+efficiency and joy of use of the existing web-based catalogue system KOALA
+of the library of the University of Konstanz with the MedioVis system. The
+results of this comparative evaluation show a significant improvement of the
+efficiency of the information seeking process with the help of MedioVis. The
+users also rated MedioVis significantly better in all dimensions of its hedonic
+quality and appeal compared with KOALA.
+
+1
+
+Motivation
+
+Retrieving relevant information on library catalogues has long time been quite a
+tedious job as the visual presentation of bibliographic metadata ignored most of the
+rules of usability and attractiveness which we are facing today and many systems did
+not match the users’ retrieval behaviour as discovered by Borgman [1]. First
+improvements could be observed when early, purely text-based interfaces were
+replaced by graphical representations. Nevertheless, in most of the cases the internal
+systematic metadata structures were only visually reproduced, disregarding the user’s
+need to get non-technical, more inviting views on the desired information. Moreover,
+as a means of retrieving information libraries have to compete with the internet.
+Although the internet is often criticised for its unreliable information space, especially
+by information experts, it should be accepted that more and more information seekers
+A. Rauber et al. (Eds.): ECDL 2005, LNCS 3652, pp. 174 – 185, 2005.
+© Springer-Verlag Berlin Heidelberg 2005
+
+Konstanzer Online-Publikations-System (KOPS)
+URL: http://www.ub.uni-konstanz.de/kops/volltexte/2007/3160/
+URN: http://nbn-resolving.de/urn:nbn:de:bsz:352-opus-31601
+
+MedioVis – A User-Centred Library Metadata Browser
+
+175
+
+choose the advanced retrieval technologies of web engines to get quick access to
+relevant information.
+This observation was decisive for us to develop a JAVA-based application that
+motivates the user to explore the complete information space which a library has to
+offer. We are convinced that library stocks still have and will always have their very
+own qualities regarding the intellectual choice of relevant works and consistent metadata editing, and we tried to create a browser interface, enabling the user to work with
+a more web-oriented browsing paradigm instead of applying the simple search and
+finding strategy. Moreover, we took advantage of the broad availability of online
+sources to enrich the metadata of the library with additional textual and multimedia
+data.
+Chapter 2 outlines the theories and concepts which have influenced the
+development of the application. Evaluation has played a central role during the
+development of MedioVis. The evaluations of our preceding projects INSYDER [2],
+INVISIP [3] and VisMeB [4] (all of them metadata browsers) represented a good base
+for crucial design decisions. All beta versions of the system were evaluated in order to
+get creative support from real users and to confirm or influence the design rules. The
+results of our evaluations, finalized by a summative evaluation, are worked out in
+Chapter 3. Conclusions are given in Chapter 4.
+
+2
+
+MedioVis System Design
+
+2.1
+
+Joy of Use
+
+A usability aspect which plays a minor role in library catalogues is the attractiveness
+of user interfaces. However, the role emotion and aesthetics plays for people has
+already been pointed out as a central psychological issue by James in 1884 [5] and has
+widely been discussed since. Nevertheless it had not been applied to usability until
+Kurosu and Kashimura [6] noted that the ergonomic quality of a product does not
+implicitly coincide with the usability perceived by the user. Considering Glass’ thesis
+from 1997, “I predict that joy of use will become an important factor in product
+development and development success.” [7], we can observe that many commercial
+products like computers, cellular phones, operating systems, etc., are already very
+fun-oriented, aiming at the users’ need for aesthetics and entertainment. Tractinsky
+even argues that “For many users, other aspects of the interaction [than aesthetics]
+hardly matter anymore.” [8].
+A major question still to solve is how aesthetics can be measured and
+parameterized in general. Although we have a common idea that aesthetic objects
+should be symmetric, balanced or well proportioned, there is – fortunately? – no
+general instruction set prescribing how to create aesthetic interfaces. Jordan [9]
+proposes some helpful methods and guidelines for the design of pleasurable products
+whereas Hassenzahl et al. [10] underline the importance of hedonic quality (novelty,
+originality) of a software product. Other interesting, more formalized approaches are
+in progress to construct mathematical concepts [11] and find mathematical
+explanations [12] for accessing aesthetic phenomena, but they are still in an early
+stage.
+
+176
+
+C. Grün et al.
+
+Our aim was to create a simple attractive and pleasurable interface, for which we
+collaborated with communication designers of the University for Applied Sciences
+Konstanz. By regularly testing our prototypes with users we could quickly react on
+possible flaws of the system. A consistent colour and font range and animations were
+applied to give the system its own identity, and the results of our evaluations proved
+that users seem to appreciate and enjoy the overall appearance of MedioVis.
+2.2
+
+Visual Information Seeking
+
+Most of the conventional library web catalogues offer three or four successive steps to
+control the user’s information seeking process:
+1. Search for Keywords (simple / advanced input forms)
+2. Display of the results as overview (10 / 20 / 50 per page, tabular / list oriented)
+3. Display of single results (list oriented / full text)
+4. (Non-Standard) Overview of all selected results
+All steps are normally visually separated from each other, i.e. the user is often
+forced to return to the first page to start a new search. This sequential approach
+reminds of real library visits: first the book titles are researched in the catalogue
+systems, then the correct book shelves have to be found in the library to finally review
+the book. It is interesting to see that real life drawbacks have been transferred to
+computer logics, as it may seem obvious that all steps can easily be combined.
+Although computer screens are limited by their resolution, the integration of all panels
+on one screen can easily be implemented, even in web sites, by cleverly partitioning
+the available space.
+The approach to combine several views with semantically similar data is known as
+“Multiple Coordinated Views” (MCVs) [13] [14], and the visualizations in MedioVis
+follow several design principles expressed by Shneiderman [15]. As seen in Fig. 1,
+the input for query terms is located on the top area of the window. We used a tablebased view to give an overview of all queried documents. Tables are a popular
+visualization concept as they can display a huge amount of data in a consistent way.
+We can establish an interesting analogy between browsing real and digital libraries by
+using tables [16]: real libraries can be browsed by walking along the shelves to spot
+material which is similar in content. Titles presented in a virtual table can be spatially
+separated in the library, but they can have other common attributes such as title
+keywords, media types or publication years. Hence one of the most important features
+of a table and a big advantage over physical libraries is the capability to sort data by
+specific attributes as the users can decide for themselves which attribute seems most
+important to them. The original shelf order can still be simulated by restricting the
+search to a certain subject area and sorting the titles by their signature. Columns can
+simply be sorted in MedioVis by clicking on the headers.
+Following the principle of coordinated views, the dataset which is currently
+focused in the table is focused in all other visualizations. Detail-on-Demand is given
+by the “Title View” which lists all attributes of the focused title. If a relevant title is
+selected, it is moved into the “Selected Media” view. Titles in this view can be
+printed, saved on disk or sent via e-mail. Alternatively the Media Location is
+displayed in this area. The currently focused title is marked in a floor plan of the
+
+MedioVis – A User-Centred Library Metadata Browser
+
+177
+
+library which should help the user to locate it in the real library (Fig. 2). The user
+interactions in MedioVis were reduced to basic mouse actions. A title in the table
+view can be focused by simply moving the mouse across it. If the mouse button is
+clicked, titles are being selected.
+An alternative view to the table is a scatterplot-like visualization which was termed
+“Graphical View” for simplification (see Fig. 2). As it was not included in the
+evaluation, it is not further described in this paper. An advanced zoomable version
+named ZUIScat will be integrated in the near future [17].
+
+Fig. 1. MedioVis main screen
+
+Fig. 2. Scatterplot, Location Panel
+
+178
+
+2.3
+
+C. Grün et al.
+
+Information Retrieval
+
+Many conventional library catalogues still cling to their internal meta-data structure
+and transfer its logic to the search forms which are to be handled by users that do not
+know about bibliographic issues and technical limitations which often are obsolete.
+To give an easy example, the existing local library catalogue KOALA expected a
+fixed format to search for names defined by “Surname, First Name”, which was why
+some of our test persons did not manage to find any results at all. Today’s retrieval
+operations should therefore be uncoupled from formal issues, allowing the user a high
+level of flexibility and freedom. Early tests of our prototypes confirmed the
+assumption that most users are accustomed to the presentation of one single search
+form as it is used in common web engines. In fact, many users used query terms like
+“DVD”, “Movie” or an ISBN. So we implemented a single input area as standard
+which queries most important metadata attributes such as Title, Author, Year, Media
+Type, Full Text Description, etc. Whereas the amount of data which has to be checked
+by such a query would have disallowed such a procedure in the past, it makes no
+difference for today’s technology and for indexing algorithms.
+One of the most striking advantages of library catalogues opposed to web indexes,
+as earlier mentioned, is the consistency and structure of the data behind. So it still
+makes sense to include an additional advanced search form to offer the user explicit
+searches for persons, titles, etc. Such a form is also implemented in MedioVis and can
+be invoked by an “Advanced” button. It allows searching for title keywords, persons,
+year ranges, media types, library sections and languages. Moreover search terms can
+be AND/OR combined (“Find all terms” / “Find at least one Term”), and the choice is
+given between querying for complete strings and substrings. The search form stays
+visible if the result set is returned and visualized.
+
+3
+
+Evaluation
+
+No matter how usable a software system proves to be during formative evaluations,
+its usefulness in a real world environment depends on the alternative software systems
+available and of course on their quality. On this account it is essential to compare the
+developed software system with its competitors in order to be able to determine
+whether the development was successful and communicate this to possible customers.
+Accordingly we decided to conduct a quantitative Usability Experiment to compare
+MedioVis with KOALA which is the retrieval system of the library of the University
+of Konstanz currently in use. We put our main focus on the questions whether users
+were able to solve realistic tasks more efficiently (objective measurement) and how
+they would rate MedioVis in comparison to KOALA (subjective measurement).
+3.1
+
+Experiment
+
+The Experiment took place within the scope of a lecture “Usability Engineering 2”,
+given by Prof. Dr. Harald Reiterer, Workgroup HCI at the University of Konstanz,
+from December 2004 to January 2005. After some detailed training we selected four
+students of the lecture as test monitors. Each of them conducted six test sessions so
+that altogether we had 24 subjects. To avoid test monitor effects we standardized and
+
+MedioVis – A User-Centred Library Metadata Browser
+
+179
+
+structured the test procedure to the greatest possible extent. Since our test monitors
+had not been involved in the development of MedioVis we could furthermore exclude
+test monitor effects due to possible personal interests in specific results. We wanted to
+test two main hypotheses, expressed as null-hypotheses:
+1. In terms of task completion time there is no significant difference between
+MedioVis and KOALA.
+2. In terms of subjective user rating there is no significant difference between
+MedioVis and KOALA.
+To check the first hypothesis we measured the time it took our 24 participants to
+complete realistic tasks with the help of either MedioVis or KOALA. The second
+hypothesis was checked with the help of two questionnaires, SUS [18] and Attrakdiff
+[19]. The latter does not only measure the pragmatic quality of a software product but
+furthermore hedonic quality and appeal – two aspects which are, in our
+understanding, extremely important for a software system which users like to work
+with. We did not especially concentrate on task accuracy since this is always to some
+extent contradictory to the measurement of task completion time, and this was where
+we put our main focus.
+3.2
+
+Method
+
+3.2.1 Participants
+We chose 24 students of the University of Konstanz as subjects, since they would be
+potential end-users. In addition we concentrated on students in the fields of
+“Literature, Art and Media Science” (11 subjects, 9 female & 2 male), as we expected
+them to be an above average part of our target group. Since one of our main aspects
+during the development of MedioVis was to develop an easy to learn system, we did
+not involve any students in the field of computer science. The subjects were between
+18 and 28 years old, with the medium age at 22.
+3.2.2 Software Systems
+The benchmark for MedioVis (see chapter 2) was KOALA, a web based catalogue
+system, which allows the user to search the library stock of the University of
+Konstanz. It offers a “simple” and an “advanced” search dialogue. The “simple”
+mode asks the user to specify at least author or title, but does not include a general
+search field. The “advanced” mode includes more specific search fields such as
+signature or year. The result is presented in a list, showing ten hits per page. The user
+can get a detail view of each result or several results at once (see Fig. 3).
+3.2.3
+Data Base and Tasks
+Our test data was based on a copy of the library stock of the Mediothek, a department
+of the library of the University of Konstanz. The data was enriched with additional
+heterogeneous data such as posters and movie ratings of the Internet Movie Database
+(IMDB). KOALA was restricted to the Mediothek inventory, but used the up-to-date
+data, which slightly differed from our copy used in MedioVis. We were able,
+however, to consider this aspect with our task design.
+
+180
+
+C. Grün et al.
+
+Fig. 3. KOALA: list-based overview, detail view
+
+The main focus of our task design was to simulate realistic seeking processes
+which would appear in the Mediothek. In order to achieve this we consulted an expert
+of the Media Science faculty of the University of Konstanz. Together we developed
+twelve tasks which were separated into two task sets, each including six tasks. Each
+task set contained three specific fact finding tasks and three extended fact finding
+tasks [20]. All tasks were designed in a way that they could be solved with both
+systems in an appropriate time frame and without major problems. In addition we
+developed six introduction tasks (three for each task set), which weren’t considered in
+the statistical analysis. The purpose of those was to assure that all test persons would
+start with a comparable knowledge of each system, especially since none of the users
+was familiar with MedioVis.
+3.2.4
+Procedure
+The experiment was conducted in our HCI usability lab. We used an Intel Pentium IV
+with 3 GHz, 1 GB RAM and a 19” TFT display. Each session was recorded with the
+help of Techsmith Morae 1.1 recording software [21]. During the session three
+persons were present in the office: The test-subject, the test-monitor and one minute
+taker. The experiment started with a Pre-Test questionnaire. In the following each
+subject started to work with task set 1 and the first system and afterwards switched
+over to the second system and task set 2. In addition the order of the systems was
+alternated: Fifty per cent of the participants started with KOALA, the other half
+started with MedioVis. Task sets were not alternated (see Fig. 4). In front of each task
+set each subject concluded the introduction tasks to get to know the system. After
+having worked with a system, the subjects filled in the SUS and Attrakdiff
+questionnaires. Each session lasted about 45-60 minutes.
+
+MedioVis – A User-Centred Library Metadata Browser
+Subject
+1
+2
+3
+4
+
+System 1
+KOALA
+MedioVis
+KOALA
+MedioVis
+
+Task- Set Questionnaire
+1
+SUS, Attr.
+1
+SUS, Attr.
+1
+SUS, Attr.
+1
+SUS, Attr.
+
+181
+
+System 2 Task-Set Questionnaire
+MedioVis
+2
+SUS, Attr.
+KOALA
+2
+SUS, Attr.
+MedioVis
+2
+SUS, Attr.
+KOALA
+2
+SUS, Attr.
+
+Fig. 4. Experiment Procedure, 4 example subjects, Attr. = Attrakdiff
+
+3.2.5
+Experimental-Design
+We used a combination of repeated-measures design (for questionnaire analysis –
+“system” as within-subjects factor, “order” as between-subjects factor, questionnaire
+score as dependent variable) and between-subjects design (for task completion time
+analysis – “system” as between-subjects factor, task completion time as dependent
+variable). As a result, we had 24 subjects who rated both KOALA and MedioVis with
+SUS and Attrakdiff. For task completion time analysis we had 12 subjects working on
+task-set 1 with KOALA and 12 working on task-set 1 with MedioVis, analogue taskset 2. We did not choose a repeated-measures design for task completion time
+analysis since we think that working on the same or at least very similar task with two
+different systems can influence the results in a significant manner. Based on our
+hypothesis that this would not be the case with questionnaires, we designed the
+experiment in this way to combine the advantages of both designs.
+3.3 Results
+3.3.1 Task Completion Time and Task Accuracy Overview
+The average task completion times were 87 seconds (task set 1) and 96 seconds (task
+set 2) for KOALA users. In contrast it took our MedioVis subjects on average 49
+seconds (task set 1) and 40 seconds (task set 2) respectively. This difference is highly
+significant (p<0.01). Levene’s Test for the homogeneity of variances furthermore
+showed that the assumption made by the Oneway ANOVA, that variances of the
+groups are all equal, is justified (p=not significant, n.s.).
+3.3.2 Task Completion Time in Detail
+Since the time differences were that significant, we were primarily interested if this
+was caused by a specific type of tasks or if it was just based on the different systems.
+We will look at the two task sets separately in order to keep everything in mind.
+As mentioned above, we clustered the tasks in specific fact finding and extended
+fact finding tasks, the latter being expected to be the more complex tasks. Regarding
+task set 1, the average completion time for specific fact finding tasks was 78 seconds
+for KOALA users and 35 seconds for MedioVis users (significant, p<0.01). Extended
+fact finding tasks took KOALA users 95 seconds on average and MedioVis users 62
+seconds. Although this seems slightly closer, the difference is still highly significant
+(p<0.01). Analyzing every task of the specific fact finding tasks for itself, we again
+have significant differences for each of them (at least p<0.05). Especially task 3 was
+outstanding, taking KOALA users on average 139 seconds and MedioVis users only
+50 seconds to complete it. The task demanded the users to search for a film, available
+on a multilingual video cassette. Since KOALA users could not limit their search on
+
+182
+
+C. Grün et al.
+
+video cassettes nor multilingual versions, they had to check each search result
+manually (see Fig. 3). MedioVis users could benefit from the table visualization, the
+sorting features and the multi coordinated views (see chapter 2.2). They could directly
+decide whether they found the correct film or not by checking out the searched
+attributes (see Fig. 3).
+The second task set took the subjects 50 seconds on average to complete the
+specific fact finding tasks with KOALA and 29 seconds with MedioVis (significant,
+p<0.01). Looking at the extended fact finding tasks, this gets even more explicit,
+taking KOALA users 143 seconds on average and MedioVis users only 51 seconds
+(significant, p<0.01). A detailed analysis reveals that the same advantages as in task
+set 1 are responsible for the better performance of MedioVis. However, there were
+two tasks were both systems performed nearly equal (p=n.s.). In both cases the user
+did not have to formulate a new search query but could work on the prior result set.
+The extended fact finding task asked the users to find out the screenplay author for
+three of the films in the result set. Although KOALA users had to load a new web
+page with the detailed information, they were nearly as fast as the MedioVis users (87
+seconds vs. 77 seconds). It seems to be the case that it takes MedioVis users more
+time to find a specific title in the result set, probably due to the rather small fonts
+within the table view.
+Next we tried to identify other variables which might have an effect on the results.
+We conducted multivariate ANOVAs with gender (male, female), semester (first
+semester, higher semester) and field of study (seven characteristics) but could not
+detect any significant impact of those variables on our dependent variable task
+completion time. Another interesting aspect is the use of the scatterplot. We did not
+include the scatterplot specifically in our test design but did not bar our users from
+trying and using it. Although most of the users were confused by the mathematical
+appearance, five subjects used it successfully for some tasks. This shows that we still
+have to work on the appearance of the scatterplot to get it used by more people.
+3.3.3 Questionnaire Analysis
+As stated before we used a repeated-measures ANOVA to analyze the results of our
+two questionnaires, Attrakdiff and SUS. The analysis revealed that the system order
+had no significant effect on the results, which proved our hypothesis that such a design
+is suitable for questionnaires. Analyzing the Attrakdiff scores we noticed that
+MedioVis scores significantly higher on each of the four scales (p<0.01) – with
+particular high scores on the pragmatic quality (PQ) and on the appeal scale (APP, both
+times 5.5 compared to 3.9 and 3.7 for KOALA on average on a 7 point scale). The
+values of hedonic quality (HQ) measurement are also clearly above KOALA with 5.0
+on average on the identity (HQ-I, KOALA 3.8) and 4.7 on average on the stimulation
+scale (HQ-S, KOALA 3.0). This is remarkable since it clearly proves our initial design
+concept of a system which is easy to learn, to use and which has a high aesthetic value.
+The SUS scores were again very clear in favour of MedioVis with a score of 83
+compared to 55 for Koala on a scale from 0-100. This difference is highly significant
+(p<0.01) and confirms the PQ score of Attrakdiff. Altogether the subjective user
+ratings with our two questionnaires underline the clear performance results once more
+and lead to the definite statement that MedioVis is superior to KOALA in nearly all
+aspects of our experiment.
+
+MedioVis – A User-Centred Library Metadata Browser
+
+4
+
+183
+
+Conclusion
+
+MedioVis was developed with the aim to proof the concept of a new user interface
+paradigm for online library catalogue systems. To reach this goal the design of the
+system was based on the following principles:
+• Design of an easy to learn system that allows novice users a quick use without any
+training.
+• Design of an easy to use system that supports all information seeking activities in
+an effective and efficient manner.
+• Design of an aesthetical pleasing system offering joy of use experiences.
+• Simple formulation of the query following the well established convention of
+web search engines, extended by an advanced search.
+• Offer a quick and insightful overview about all search results to find the “needles
+in the haystack”.
+• Offer the right amount of information in the context where the users need it.
+• Present different aspects of interest at the same time to compare them or to get
+more information at a glance.
+• Offer possibilities of restricting the amount of information to selected topics of
+interest.
+• Offer the possibility to customize the system reflecting the user’s personal needs
+(e.g. kind of result presentation, placement or amount of information).
+To fulfil all these principles we followed a multiple coordinated view approach,
+offering the user a simple and advanced search view known from web search engines,
+a powerful table and a simple graphical view for the presentation of the search results,
+a title, a selected media and a media location view to present more details about
+selected titles. Special attention was given to the aesthetic appearance of the system,
+replacing default widgets by graphical ones and improving the consistency of used
+colours, font sizes, etc.
+The results of our extensive evaluation experiment lead to the conclusion that
+MedioVis is clearly superior to conventional web-based retrieval system like KOALA
+(online catalogue system of the University of Konstanz). Our test users completed
+nearly all tasks significantly faster working with MedioVis. In addition the results of
+the Attrakdiff questionnaire (measuring the appeal of the system) and the comments
+made by the users during the experiment (e.g.: “I would have preferred to work on all
+tasks with MedioVis”, user after working on the second task-set with KOALA) also
+confirm that users seemed to like the appearance of MedioVis and were comfortable
+working with it although they had never seen or used it before. We will continue to
+work with communication designers in order to further improve the visual appearance
+of MedioVis and talk to library users in order to find out which features are still
+missing but would be welcome.
+If you take a look at the range of products available for internet search, list-based
+approaches are clearly in the lead. Nowadays users even expect Google-like interfaces
+and result presentation whenever searching information with their PC. Nevertheless
+our results show that a table based result presentation is superior to list-based
+
+184
+
+C. Grün et al.
+
+approaches, and that users are able to quickly adapt to our new interface resulting in
+an immediate enhancement of the time needed to complete typical search tasks. Since
+the market of internet search systems has become a multi-billion dollar business,
+innovations are not easy to introduce. In our opinion, libraries offer the perfect submarket to slowly establish alternative forms like our table-based MedioVis and thus
+could lead to a paradigm shift.
+
+References
+1. Borgman, C.: Why are online catalogs still hard to use? Journal of the American Society
+for Information Science 47(7) (1996) 493–503
+2. Reiterer, H., Tullius, G., Mann, T. M.: INSYDER: a content-based visual-informationseeking system for the Web. Springer-Verlag GmbH , International Journal on Digital
+Libraries (2005). http://www.springeronline.com/sgw/cda/frontpage/0,11855,5-148-701118744-0,00.html, 2005/02/25
+3. Klein, P., Müller, F., Reiterer, H., Eibl, M.: Visual Information Retrieval with the
+Supertable + Scatterplot. In: Sixth International Conference on Information Visualisation
+IV02 (2002) 70-75
+4. Klein, P., Reiterer, H., Müller, F., Limbach, T.: Metadata Visualization with VisMeB.
+IV03, 7th International Conference on Information Visualization, London (2003)
+5. James, W.: What is an Emotion? Mind, 9 (1884) 188-205. http://psychclassics.yorku.ca/
+James/emotion.htm, 2005/02/25
+6. Kurosu, M., Kashimura, K.: Apparent usability vs. inherent usability. In: Companion of
+CHI ’95 Conference on Computer Human Interaction (1995) 292-293
+7. Glass, B.: Swept Away in a Sea of Evolution: New Challenges and Opportunities for
+Usability Professionals. Software-Ergonomie '97. Usability Engineering: Integration von
+Mensch-Computer-Interaktion und Software-Entwicklung, R. Liskowsky, B.M.
+Velichkovsky, and W. Wünschmann, eds., B.G. Teubner, Stuttgart, Germany (1997) 17-26
+8. Tractinsky, N.: Towards the Study of Aesthetics in Information Technology, 25th Annual
+International Conference on Information Systems, Washington, DC, December 12-15
+(2004). http://www.ise.bgu.ac.il/faculty/noam/papers/04_nt_icis.pdf, 2005/02/25
+9. Jordan, P. W.: Designing Pleasurable Products – An Introduction To The New Human
+Factors. Taylor & Francis, London (2000)
+10. Hassenzahl M., Platz A., Burmester M., Lehner K.: Hedonic and Ergonomic Quality
+Aspects Determine a Software's Appeal. Proceedings of CHI’2000. ACM, The Haague
+(2000)
+11. Ngo., D. C. L., Teo, L. S., Byrne, J. G..: A Mathematical Theory of Interface Aesthetics.
+Visual Mathematics N 1 (2001). http://www.mi.sanu.ac.yu/vismath/ngo, 2005/02/25
+12. Bálek, M., Nešetřil, J.: Towards Mathematical Aesthetics. ITI-Series 2004, Institute for
+Theoretical Computer Science (2004)
+13. North, C., Shneiderman, B.: A Taxonomy of Multiple-Window Coordination. University
+of Maryland, Computer Science Dept, Technical Report #3854 (1997)
+14. North, C., Shneiderman, B.: Snap-together Visualization: Can Users Construct and
+Operate Coordinated Visualizations?. Int. J. Human-Computer Studies 53 (2000) 715-739
+15. Shneiderman, B.: The Eyes have it: A Task by Data Type Taxonomy. In: Proc. of IEEE
+Symp. Visual Languages 96 (1996) 336-343
+16. Wake, W., Fox, E.: SortTables: A Browser for a Digital Library. In: Proc. 4th Int. Conf. on
+Information and Knowledge Management, CIKM'95, Baltimore, MD (1995) 175-181
+
+MedioVis – A User-Centred Library Metadata Browser
+
+185
+
+17. Buering T., Reiterer H.: ZuiScat - Querying and Visualizing Information Spaces on
+Personal Digital Assistants. In MobileHCI 2005. Human Computer Interaction with
+Mobile Devices and Services, ACM Press (2005)
+18. Brooke, J.: SUS: A Quick and Dirty Usability Scale. In: Jordan, P.W., Thomas, B.,
+Weerdmeester, B.A. & McClelland, I.L. (Eds.), Usability Evaluation in Industry. London:
+Taylor & Francis (1996)
+19. Hassenzahl, M., Burmester, M., & Koller, F.: AttrakDiff: Ein Fragebogen zur Messung
+wahrgenommener hedonischer und pragmatischer Qualität. In J.Ziegler & G. Szwillus
+(Eds.), Mensch & Computer 2003. Interaktion in Bewegung (2003) 187-196
+20. Shneiderman, Ben: Designing the User Interface. Strategies for Effective HumanComputer Interaction. 3rd edition Reading, MA, Addison-Wesley (1998)
+21. Techsmith Morae 1.1: The Digital Solution for Usability Analysis. http://www.techsmith.com/products/morae/default.asp, 2005/02/25
+
+

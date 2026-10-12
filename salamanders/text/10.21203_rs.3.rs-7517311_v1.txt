@@ -1,0 +1,1390 @@
+A Computer Vision-Based Detection Model for Wild Chinese Giant Salamanders in Complex Environments
+junyi chen, xinyao Yang, Nanqing Sun, Di Lu, Hang Gao, Da Qiu, fang Tian, Zhangnian Qin, Xingmin tuo, Lirong Chen, Lei He (2025). Research Square. https://doi.org/10.21203/rs.3.rs-7517311/v1. doi:10.21203/rs.3.rs-7517311/v1. Licence: cc-by. Text from pdf.
+
+A Computer Vision-Based Detection Model for Wild
+Chinese Giant Salamanders in Complex
+Environments
+junyi chen
+
+Hubei Minzu University
+xinyao Yang
+Hubei Minzu University https://orcid.org/0009-0002-7796-4679
+Nanqing Sun
+Hubei Minzu University
+Didi Lu
+Henan University of Technology
+Hang Gao
+Hubei Minzu University
+da Qiu
+Hubei Minzu University
+fang Tian
+Hubei Minzu University
+Zhangnian Qin
+Hubei Xianfeng Zhongjian River Giant Salamander National Nature Reserve Management Center
+Xingmin Tuo
+Hubei Xianfeng Zhongjian River Giant Salamander National Nature Reserve Management Center
+Lirong Chen
+Hubei Xianfeng Zhongjian River Giant Salamander National Nature Reserve Management Center
+Lei He
+Hubei Xianfeng Zhongjian River Giant Salamander National Nature Reserve Management Center
+
+Article
+Keywords: Chinese giant salamander, object detection, YOLO v11, Deep learning
+Posted Date: September 10th, 2025
+DOI: https://doi.org/10.21203/rs.3.rs-7517311/v1
+
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: There is NO Competing Interest.
+
+A Computer Vision-Based Detection Model for Wild Chinese Giant
+Salamanders in Complex Environments
+**************1 **************1 **************3 **************1*
+************** **************1
+
+**************1
+
+**************2 **************2 **************2 **************2
+(1. **************)
+2. **************,**************
+3 **************)
+Abstract: To achieve rapid and accurate identification of wild Chinese giant salamanders in
+complex field environments, we propose an improved recognition model based on YOLO v
+11n. This model incorporates an Efficient Multi-scale Attention Module (EMA) into the Bac
+kbone layer, replaces the Complete Intersection over Union (CIoU) loss function with WiseIoU (WIoU) loss, and introduces Lightweight Adaptive Extraction of Convolutions (LAE) in
+to the Head layer. Ablation and comparative experiments demonstrate that the improved mo
+del achieves recall, precision, F1 score, and frame rate of 94.85%, 95.39%, 95.12%, and 77.
+20 f/s, respectively. The model occupies 11.56 MB of memory and performs 8.65×10⁹ float
+ing-point operations. Compared to the baseline YOLO v11n, the recall, precision, F1 score,
+and frame rate are 5.70, 6.13, 5.92 percentage points higher and 27.1 fps faster, respectivel
+y. The proposed YOLO v11n-EWL model demonstrates significant improvements in stability,
+recognition speed, and accuracy. The improved model meets the real-time detection require
+ments for wild Chinese giant salamanders in natural habitats and can sustain long-term outd
+oor operation. Based on this, an all-weather image recognition and behavior detection syste
+m for wild salamanders was developed, successfully detecting over 20 instances of wild Chi
+nese giant salamanders. This system provides a stable and reliable monitoring tool for adva
+ncing the conservation of wild salamanders and their habitats.
+Key words: Chinese giant salamander; object detection; YOLO v11; Deep learning
+
+0. Introduction
+The existence of wild Chinese giant sa
+lamanders, classified as a national Grade II
+protected species, serves as an important in
+dicator of the ecological well-being in their
+habitat. Consequently, developing reliable an
+d effective multi-faceted techniques and tool
+s for detecting giant salamanders is crucial
+for their conservation and population recove
+ry.
+Received: Revised:
+Funding: **************
+Author Profile: **************
+Corresponding author: **************
+
+The Hubei Xianfeng Zhongjian River
+Giant Salamander National Nature Reserve i
+s situated in the towns of Gaoleshang and
+Zhongbao within Xianfeng County, forming
+part of the Zhongjian River Basin, a signifi
+cant tributary of the Qingjiang River in the
+Yangtze River system. The giant salamand
+er serves as the reserve's emblematic specie
+s. This amphibian exhibits a nocturnal lifest
+yle, primarily inhabiting river segments and
+
+smaller tributaries. The habitat is marked b
+
+curacy. DU and colleagues developed a Res
+
+y intricate and low-light conditions, presenti
+ng three main obstacles for conventional de
+tection techniques: the darkness at night, th
+e complicated environmental backdrop, and
+other elements that hinder visual identificati
+on, often resulting in missed sightings; curr
+ent monitoring approaches suffer from consi
+derable delays, failing to deliver real-time,
+quantitative insights into the salamanders' pr
+
+Net50-LSTM algorithm to effectively and re
+liably identify fish breeding behaviors in co
+mplex environments. Tu and his team incor
+porated a large detection head into the YO
+LOv8 model and employed the ECAM atte
+ntion mechanism to minimize background i
+nterference, allowing for a sharper focus on
+key features of individual fish and enhanci
+ng the detection of indistinct fish. These in
+
+esence, locations, timings, and behaviors; an
+d there is a notable absence of automated s
+ystems that can reliably function in challen
+ging field conditions while providing structu
+red data promptly. Consequently, there is an
+urgent need for the creation of a compreh
+ensive observation system that can effectivel
+y and consistently detect and identify wild
+giant salamanders in real-time, even in com
+plex lighting situations, while also enabling
+
+vestigations highlight the promising applicati
+ons of deep learning, although it has yet to
+be utilized in research concerning giant sal
+amanders.
+To address the challenges related to th
+e detection and inadequate safeguarding of
+giant salamanders and their habitats, we co
+ncentrate on the development of an intellige
+nt, all-weather monitoring system and the p
+romotion of sustainable practices for these c
+
+quantitative data analysis, which is crucial f
+or the conservation and study of these creat
+ures in protected areas.
+In recent times, the application of deep
+learning has surged in intricate settings. H
+u and colleagues enhanced the YOLOv3 fra
+mework by refining both the pooling block
+and the loss function, leading to improved
+accuracy and performance in analyzing fish
+
+reatures in the Hubei Xianfeng Zhongjian R
+iver National Nature Reserve. We introduce
+an innovative target recognition model, YO
+LO v11-EWL, and establish a comprehensiv
+e system for the intelligent recognition and
+behavioral monitoring of giant salamanders
+in various weather conditions.
+
+behavior. Xu and his team utilized the faste
+r R-CNN model to study fish behavior in
+varying ammonia levels. Meanwhile, Wang
+and associates introduced small target detect
+ion frames for multi-scale fusion, optimizin
+g the YOLOv5 model to better identify abn
+ormal behaviors in zebra snapper. HUSSAM
+and his team integrated color multi-scale
+Retinex enhancement with the YOLO algori
+
+The developed imaging device operates
+without physical contact to ensure the safety of
+the giant salamander's habitat. It features a
+positioning system for identifying the
+salamanders and an imaging system dedicated to
+photographing them. This device is designed for
+prolonged outdoor use, enabling continuous,
+unattended operation for 24 hours, as illustrated
+in Fig. 1.
+
+thm, resulting in improved fish detection ac
+
+1. Equipment and dataset construction
+1.1 Experimental equipment
+
+Fig. 1 Schematic diagram of image acquisition device
+
+1. Camera for image capture 2. Antenna for positioning 3. Switch device 4. Power supply unit 5.
+Gateway interface 6. Motherboard for positioning module 7. Extension cable for positioning
+antenna 8. Environmental sensor
+The power supply module converts 220
+V AC into 12V DC, making it suitable for
+various devices, including environmental sen
+sors, RFID systems, and cameras. These co
+mponents communicate with the server via
+a gateway, allowing for centralized manage
+ment through a web interface. The RFID p
+ositioning system on the front end monitors
+the signal strength of tagged salamanders i
+n real time. When it detects a specific Rec
+eived Signal Strength Indicator (RSSI) valu
+e, it activates the camera to capture synchr
+onized images of multiple targets. These im
+ages are sent to the server through a switc
+h, where they are linked with RFID positio
+ning data and environmental sensor details t
+o create a structured dataset. Later, this mo
+del can be utilized on the server to identify
+wild salamanders that do not have RFID t
+ags.
+1.2 Data Set Construction
+1.2.1 Data acquisition
+
+Images of giant salamanders were gathered
+between December 2024 and February 2025 at
+the Hubei Xianfeng Zhongjian River National
+Nature Reserve dedicated to these creatures.
+
+The initial dataset utilized in the study
+comprises 1,020 images, which is insufficient
+for effective model training. To allow the model
+to thoroughly grasp the features of the giant
+salamander, an additional 530 images were
+sourced from online resources. The dataset was
+further augmented through techniques such as
+rotation, sharpening, brightness adjustment, and
+noise addition, resulting in a total of 6,952
+image samples. This not only enhances the
+dataset but also simulates various weather
+conditions. Examples of the data augmentation
+effects can be seen in Fig. 2.
+
+(a) Original
+image
+
+(b) Brightness
+increase
+
+(c) Adding noise
+
+(d) Sharpening
+(e) Rotation
+(f) HSV filtering
+Fig. 2 Data enhancement effect diagram
+
+1.2.2 Data labeling
+
+The data set utilizes X-Any Labeling
+software for its labeling process, with the
+resulting TXT file detailing the dimensions of
+
+the bounding box for giant salamanders. This
+
+s, while the Head layer generates the final
+
+data set is categorized into three parts: training,
+testing, and validation, following a distribution
+of 70%, 20%, and 10%, which corresponds to
+4866, 1390, and 695 samples, respectively. An
+example of the manual labeling of giant
+salamanders is illustrated in Fig. 3.
+
+output. Despite its strengths, the C2PSA mo
+dule struggles with effectively integrating m
+ulti-scale features in the complex environme
+nts of giant salamander reserves. Additionall
+y, the CIoU (Complete Intersection over Un
+ion) loss function exhibits instability when
+anchor frame quality is inconsistent, and th
+e base model's memory usage reaches 59.65
+MB, leading to increased computational co
+sts. The Neck layer continues to focus on f
+eature fusion and enhancement, with the He
+ad layer delivering the ultimate detection re
+sults.
+
+Fig. 3 Artificial labeling map of giant salamanders
+
+2 Construction
+detection model
+
+of
+
+giant
+
+salamander
+
+2.1 YOLO v11 model
+
+The YOLO v11 architecture is compos
+ed of three main components: the Backbon
+e, Neck, and Head layers. The Backbone ut
+ilizes the C3k2 module to improve feature
+extraction through the Bottleneck Block Spa
+tial Pyramid Pooling Fast (SPPF) and Cross
+stage partial with pyramid squeeze attentio
+n (C2PSA) modules. The Neck layer is res
+ponsible for merging and enhancing feature
+
+2.2 Improvement of YOLO v11n-EWL model
+
+An enhanced recognition model is intro
+duced, building upon the YOLO v11n fram
+ework. This model incorporates an Efficient
+Multi-Scale Attention (EMA) module into t
+he Backbone layer, substitutes the CIoU los
+s function with a Wise-IoU (WIoU) loss fu
+nction, and integrates a Lightweight Adaptiv
+e Extraction of Convolutions (LAE) into th
+e Head layer to boost accuracy. The combi
+nation of these three strategies leads to the
+development of the YOLO v11n-EWL mode
+l. The architecture of this model is illustrat
+ed in Fig. 4.
+
+Fig.4 YOLO v11n-EWL Network Architecture Diagram
+
+2.2.1 Efficient Multiscale Attention Module EMA
+
+The protected area's environment is intr
+icate and fluctuating, causing the salamande
+r's coloration to blend seamlessly with its s
+urroundings. Numerous environmental disrup
+tions can lead to missed detections. To ena
+ble the model to grasp the unique traits of
+the salamander during training and optimiza
+tion, facilitating swift identification in such
+
+a complex setting, this research incorporates
+the EMA high-efficiency multiscale attentio
+n module in place of the standard attention
+mechanism within the C2PSA of the backb
+one network. This enhancement aims to bol
+ster the multiscale features of the YOLO v
+11n model. The design of the EMA attentio
+n module is illustrated in Fig. 5.
+
+Fig. 5 EMA network structure diagram
+
+EMA[14]
+
+aims
+
+to
+
+retain
+
+multiscale
+
+The intricate backdrop of the salamander
+
+characteristics while preserving the dimensions
+of the channels. It reformats certain channels
+into batch dimensions and organizes the channel
+dimensions
+into
+various
+sub-features,
+preventing a decrease in channel dimensionality
+to improve the extraction of features.
+
+images captured in the outdoor environment of
+the protected area leads to a significant class
+imbalance between the salamander bodies and
+their surroundings. During model training, there
+are considerably fewer high-quality anchor
+frames compared to those with substantial
+errors. The presence of low-quality samples
+generates a large gradient, which can negatively
+influence the model's optimization trajectory.
+
+𝑋 ∈ 𝑅 𝐶∙𝐻∙𝑊 𝑋 = [𝑋0 , 𝑋𝑖 , . . . , 𝑋𝐺−1 ] 𝑋 ∈
+
+𝑅 𝐶//𝐺∙𝐻∙𝑊 The process unfolds as follows:
+
+initially, EMA takes any given input and
+partitions it into G sub-features based on the
+channel dimension, meaning that the input
+channel C is divided into G groups.
+Subsequently, attention weight descriptors for
+the grouped feature maps are derived through
+three distinct pathways. The first two pathways
+utilize a 1×1 branch that incorporates a 1×1
+convolution operation, while the third pathway
+employs a 3×3 branch featuring a 3×3
+convolution
+operation.
+Global
+spatial
+information is then encoded from the outputs of
+both the 1×1 and 3×3 branches using twodimensional global average pooling. The output
+feature maps for each group are created by
+combining the two generated spatial attention
+weight values. Ultimately, global context
+information is extracted by analyzing pixel-level
+pairwise relationships through the Sigmoid
+activation function, utilizing X AvgPool for
+horizontal global pooling and Y AvgPool for
+vertical global pooling.
+The formula for the 2D global average pooling
+operation is
+𝑍𝐶 =
+
+𝐻
+
+𝑊
+
+𝑗
+
+𝑖
+
+1
+∑ ∑ 𝑋𝐶 (𝑖, 𝑗)
+𝐻∙𝑊
+
+(1)
+
+pooling
+
+𝑋𝐶 (𝑖, 𝑗) --Input value of the Cth channel at
+
+2.2.2 WIOU loss function
+
+Fig 6. Iou structure diagram
+
+In order to address the issues mentioned,
+this research introduces WIoU as a substitute for
+the initial loss function. WIoU[15] features a
+dynamic non-monotonic focusing approach that
+assesses the quality of anchor frames, along with
+a strategy for dynamically modifying gradient
+gains. The calculation for WIoUv1 is as follows:
+where
+
+𝐿𝑊𝐼𝑜𝑈𝑣1 = 𝑅𝑊𝐼𝑜𝑈 𝐿𝐼𝑜𝑈
+
+𝑅𝑊𝐼𝑜𝑈 = 𝑒𝑥𝑝 (
+
+(𝑥 − 𝑥0 )2 + (𝑦 − 𝑦0 )2
+)
+(𝑊𝐼2 + 𝐻𝐼2 )∗
+
+(2)
+(3)
+
+Where 𝐿𝑊𝐼𝑜𝑈𝑣1 - weighted IoU loss function
+
+version 1
+
+weighting factor
+
+Where𝑍𝐶 - output value of the Cth channel after
+
+the position of width i height j
+
+The structure is illustrated in Fig. 6.
+
+𝑅𝑊𝐼𝑜𝑈 --Based on the centroid distance
+𝐿𝐼𝑜𝑈 = 1 − IoU
+
+where𝐿𝐼𝑜𝑈 - standardized IoU loss
+
+(4)
+
+𝑊𝐼 𝐻𝐼 𝑅𝑊𝐼𝑜𝑈 * indicates the division from the
+
+computational graph, which stops it from
+contributing to gradient calculations. As a result,
+it acts as a constant during forward computation,
+remaining a fixed value and not engaging in
+
+backpropagation,
+
+thereby
+
+avoiding
+
+the
+
+generation of gradients that could hinder
+convergence.
+To avoid the inclusion of subpar
+salamander image samples that generate
+significant detrimental gradients, the outlier
+degree β is established to assess the quality of
+the anchor frame, which is determined using the
+formula below.
+𝛽=
+
+𝐿∗𝐼𝑜𝑈
+𝐿𝐼𝑜𝑈
+
+Where𝐿∗𝐼𝑜𝑈 - modified IoU loss
+
+(5)
+
+In the case of anchor frames that are of poor
+quality and contain significant outliers, a
+reduced gradient gain is allocated. The
+construction of WIoUv3 incorporates these
+outliers along with WIoUv1, determined by the
+following calculation:
+𝐿𝑊𝐼𝑜𝑈𝑣3 = 𝑟𝐿𝑊𝐼𝑜𝑈𝑣1
+
+(6)
+
+Where 𝐿𝑊𝐼𝑜𝑈𝑣3 - weighted IoU loss function
+
+version 3
+
+2.2.3 Lightweight Adaptive Extraction Convolu
+tion Module LAE
+
+To enhance the speed of model recognition
+and minimize memory usage, a lightweight
+adaptive extraction convolution method is
+implemented. The LAE module serves as an
+effective feature extraction component,
+enhancing the model's adaptability to intricate
+scenes by dynamically modifying convolution
+kernel parameters and selecting features
+adaptively, all while decreasing computational
+
+demands. The
+
+configuration of LAE is
+
+illustrated in Fig. 7.
+In the section on Lightweight extraction,
+the input image undergoes convolution in
+groups, specifically with groups set to c/16. This
+indicates that the input channels are segmented
+into c/16 distinct groups, enhancing the
+efficiency of feature extraction. Moving to the
+Dimension mapping section, the convolved
+features are reorganized (R), meaning the
+outcomes of the group convolution are
+rearranged into various spatial dimensions for
+effective feature representation. The Adaptive
+extraction (AE) segment involves applying
+adaptive average pooling to the feature map,
+which consolidates feature information across
+height and width. This pooling process reduces
+the spatial dimensions of the inputs, allowing
+the model to concentrate more on global
+features. A 1x1 convolution is then applied to the
+pooled feature map, further compressing and
+adjusting the number of channels. Subsequently,
+the feature map is rearranged and subjected to
+Softmax normalization, enabling adaptive
+adjustments to the weights of each channel,
+thereby enhancing the network's expressive
+capabilities. Finally, the combined feature maps
+are added to the input features through a residual
+connection, ensuring a seamless flow of
+information and producing the final feature
+maps with dimensions of h/2×w/2×c.
+
+Fig. 7 LAE network structure diagram
+
+3. Experimental results and discussion
+3.1 Experimental environment and evaluation index
+
+The study utilizes the Autodl computin
+g platform equipped with an NVIDIA GeFo
+rce RTX 4090 GPU featuring 24GB of VR
+AM, alongside the Pytorch 2.3.0 deep learn
+ing framework, Python version 3.12.3, and
+Conda 24.4.0. In the model's training phase,
+a total of 500 epochs were conducted, wit
+h an initial learning rate established at 0.00
+1 and momentum configured at 0.937. The
+evaluation of the model's detection capabilit
+ies was carried out through metrics such as
+Precision (P), Recall (R), F1 score, floatin
+g-point operations, memory consumption, an
+d frame rate.
+3.2 Performance Comparison Experiments of
+
+Different Attention Mechanisms
+
+To assess the impact of the EMA atten
+tion module on the YOLO v11n detection
+model for salamander images, both coordina
+te attention (CA) and the convolutional bloc
+k attention module (CBAM) were implemen
+ted to enhance the model. Performance com
+parison tests were carried out using the sa
+me dataset of salamander images within a c
+onsistent experimental setup. The findings a
+re presented in Table 1.
+The YOLO v11n+EMA model outperfo
+rms YOLO v11n+CA by 7.05, 4.53, 5.80 p
+ercentage points in recall, precision, and F1
+score, along with a frame rate increase of
+1.30 f/s. Additionally, it surpasses YOLO v
+11n+CBAM by 3.26, 1.00, 2.13 percentage
+points in the same metrics and achieves a
+
+3.20 f/s higher frame rate. These findings h
+
+d 8.90 f/s, respectively, with a reduction in
+
+ighlight the substantial impact of the EMA
+attention module on enhancing the performa
+nce of the YOLO v11n model.
+
+memory usage of 7.29 MB. Additionally, it
+outperforms the model with only the EMA
+by 2.66, 4.13, 3.40 percentage points, and
+15.10 f/s, while also lowering the memory
+footprint by 67.07 MB. Compared to the m
+odel that includes both EMA and LAE, it a
+chieves improvements of 3.59 percentage po
+ints, 2.14 percentage points, and 1.60 f/s, r
+espectively. The YOLO v11n-EWL model, i
+
+Tab. 1 Results of comparative tests between different attention
+modules
+
+Model
+
+Recall
+rate /%
+
+Precision
+rate /%
+
+F1 Score
+/%
+
+Frame
+rate
+/(f s-1)
+
+YOLO
+v11n+CA
+
+85.14
+
+86.73
+
+85.92
+
+62.20
+
+88.93
+
+90.26
+
+89.59
+
+60.30
+
+92.19
+
+91.26
+
+91.26
+
+63.50
+
+YOLO
+v11n+CB
+AM
+YOLO
+v11n+EM
+A
+
+3.3 Results of ablation experiments
+
+To assess the practicality of the three
+enhanced techniques, ablation tests were co
+nducted on an identical dataset within the s
+ame configuration settings, utilizing YOLO
+v11n as the foundational network. This invo
+lved integrating the EMA Attention Mechan
+ism Module into the Backbone Layer, subst
+ituting the CIoU loss function with the WI
+oU loss function, and incorporating the Lig
+htweight Adaptive Extractive Convolutional
+(LAE) in the Head Layer. The results of th
+e validation are presented in Table 2, wher
+e \√\ signifies the adoption of a particular
+enhancement and \×\ denotes its exclusion.
+According to Table 2, the modified network
+YOLO v11n-EWL demonstrates improveme
+nts in recall, precision, F1 score, and frame
+rate by 5.12, 5.07, 5.10 percentage points,
+and 22.60 frames per second (f/s), respectiv
+ely, while also decreasing the model's mem
+ory usage by 48.67 MB compared to the v
+ersion that only uses the WIoU loss functio
+n. When compared to the model that solely
+employs the LAE, it shows enhancements
+in recall, precision, F1 score, and frame rat
+e by 3.32, 3.80, 3.57 percentage points, an
+
+ncorporating all three enhancements, surpass
+es the base YOLO v11n network by 5.70,
+6.13, 5.92 percentage points, and 27.10 f/s,
+while also reducing memory consumption b
+y 48.09 MB. The enhancements lead to a s
+ignificant decrease in memory usage by 94.
+85%, 95.39%, 95.12%, and 77.20%, resultin
+g in a total memory consumption of 11.56
+MB. The improvements stem from the EM
+A module's ability to better capture pixel-le
+vel relationships, the WIoU's filtering of lo
+w-quality anchor frames, and the LAE mod
+ule's reduction of floating-point operations,
+collectively enhancing the model's performa
+nce, robustness, and generalization capabiliti
+es, ultimately improving salamander detectio
+n in complex environments.
+In the task of recognizing salamanders
+through images, simply adding a new module or
+loss function does not necessarily enhance the
+model's performance; it could even lead to a
+decline in effectiveness. This suggests that
+relying on a solitary enhancement strategy is
+insufficient for optimizing the model. A holistic
+approach that takes various factors into account
+is essential for achieving better performance.
+
+Tab. 2 Results of ablation experiments
+
+EMA
+
+LAE
+
+WIoU
+
+Recall
+rate/ %
+
+Precision
+rate / %
+
+F1 Score
+/%
+
+Frame rate
+/ (f s-1)
+
+×
+
+×
+
+×
+
+89.15
+
+89.26
+
+89.20
+
+50.10
+
+×
+
+×
+
+√
+
+89.73
+
+90.32
+
+90.02
+
+54.60
+
+×
+
+√
+
+×
+
+91.53
+
+91.59
+
+91.55
+
+68.30
+
+√
+
+×
+
+×
+
+92.19
+
+91.26
+
+91.72
+
+62.10
+
+Floatingpoint
+operations
+1.21×1010
+1.56 x 1010
+1.04 x 1010
+1.23 x 10
+
+11
+
+Model Memory
+Usage/MB
+59.65
+60.23
+18.85
+78.63
+
+√
+
+√
+
+×
+
+91.26
+
+93.25
+
+92.24
+
+75.60
+
+1.13 x 10
+
+15.63
+
+√
+
+√
+
+√
+
+94.85
+
+95.39
+
+95.12
+
+77.20
+
+8.65 x 109
+
+11.56
+
+10
+
+Please be aware that in the table, a \√\ indicates the implementation of the improvement, while a \×\ signifies that
+the improvement has not been implemented.
+3.4 Comparison of results of different models
+
+YOLO v10n-EWL; 9.12 points compared to
+YOLO v8n-EWL, with respective increases of
+8.43, 8.78 percentage points, and 26.51 f/s;
+5.70, 6.13, 5.92 percentage points, and 27.1 f/s
+over YOLO v11n; 4.84, 4.13, 4.49 percentage
+points, and 38.00 f/s compared to SSD; and
+8.56, 6.14, 6.14, 6.18 percentage points, and
+
+To assess the effectiveness of various
+models for this task in an unbiased manner, the
+following were evaluated using the dataset
+presented in this study: YOLO v8n, YOLO
+v10n, YOLO v11n, Deformable DETR, SSD,
+and the enhanced version YOLO v11n-EWL.
+The outcomes of salamander detection for each
+model are detailed in Table 3.
+The enhanced model presented in this
+study demonstrates performance metrics of
+94.85% in recall, 95.39% in precision, 95.12%
+in F1 score, and a frame rate of 77.20 f/s. These
+results indicate improvements of 6.29, 6.05,
+6.18 percentage points, and 27.84 f/s over
+
+27.84 f/s against Deformable DETR. Overall,
+the model excels in identifying giant
+salamanders, meeting the requirements for
+real-time detection and proving suitable for
+outdoor applications.
+
+Tab.3 Comparison of different model performances
+
+Model
+
+Recall
+rate/ %
+
+Precision
+rate / %
+
+F1 score
+/%
+
+Frame rate /
+(f s-1)
+
+Floating
+point
+operations
+
+Model memory usage /
+MB
+
+YOLO v8n-EWL
+
+85.73
+
+86.96
+
+86.34
+
+50.69
+
+1.19×1011
+
+49.60
+
+Deformable DETR
+
+86.29
+
+89.25
+
+87.74
+
+43.24
+
+1.37×1010
+
+58.63
+
+SSD
+
+90.01
+
+91.26
+
+90.63
+
+39.20
+
+2.65×1011
+
+83.50
+
+YOLO v10n-EWL
+
+88.56
+
+89.34
+
+88.94
+
+49.36
+
+2.64×1011
+
+55.40
+
+YOLO v11n
+
+89.15
+
+89.26
+
+89.20
+
+50.10
+
+1.21×1010
+
+59.65
+
+YOLO v11n-EWL
+
+94.85
+
+95.39
+
+95.12
+
+77.20
+
+8.65×109
+
+11.56
+
+3.5 Visualization and analysis of comparison results
+
+Original Figure
+
+YOLO v8nEWL
+
+YOLO v10nEWL
+
+YOLO v11n
+
+YOLO v11nEWL
+
+Single salamander
+Complex environment
+Multiple salamander
+image
+image
+images
+Fig. 8 Comparison of model running results before and after improvement
+
+Low light interference
+image
+
+Figure 8 illustrates that the YOLO v8
+n-EWL model struggles with accurately re
+cognizing individual salamander images in
+unobstructed conditions, often resulting in
+
+curacy, yet they still encounter numerous
+misdetections and inferior anchor frames.
+Conversely, the YOLO v11n-EWL demonst
+rates a high detection accuracy for single
+
+missed detections and subpar anchor frame
+s in intricate settings, as well as in scenar
+ios with multiple salamanders in simpler c
+ontexts. The recognition accuracy shows a
+gradual enhancement with the YOLO v10n
+-EWL and YOLO v11n models; however,
+missed detections persist in complex envir
+onments and when multiple salamanders ar
+e present. In low-light conditions, both Y
+OLO v10n-EWL and YOLO v8n-EWL ex
+
+salamander images even in complex enviro
+nments, with no missed detections or lowquality anchor frames when identifying mu
+ltiple salamanders. In low-light settings, it
+maintains high recognition accuracy withou
+t any misdetections or issues related to lo
+w-quality anchor frames. Overall, the enha
+nced model excels in detection tasks, sho
+wcasing excellent adaptability and robustne
+ss, while effectively analyzing salamander
+
+hibit a marginally improved recognition ac
+
+features, thereby confirming the viability o
+
+f the proposed improvements.
+
+nder population within the reserve.
+
+3.6 Salamander Detection System Design and
+
+To assess the system's transmission speed,
+images are stored on the server once the system
+is activated, and the video feed is fed into the
+salamander recognition platform. Each image
+is approximately 1.8 MB, with a transfer rate
+of around 1.68 MB/s, while the video stream
+operates at about 3.5 MB/s, ensuring real-time
+salamander detection. The trained model for
+salamander images, which were previously
+
+Application
+3.6.1 System Implementation
+
+The web interface is primarily designed
+for system operation and maintenance staff,
+facilitating the holistic administration of the
+platform across various scenarios and devices.
+The management backend is responsible for
+the complete oversight and upkeep of the
+entire system, encompassing functions such as
+configuring equipment parameters, monitoring
+devices, managing data, conducting site and
+salamander inspections, and handling
+historical data, as illustrated in Fig. 9.
+
+Fig. 9 Web front-end interface
+
+3.6.2 System Application
+
+To assess the effectiveness of the gia
+nt salamander detection system, detection
+equipment was deployed at the Hubei Xia
+nfeng Zhongjian River Giant Salamander
+National Nature Reserve from March to J
+une 2025. Given the rarity of giant salam
+anders and the unpredictability of their ap
+pearances, daily continuous monitoring was
+implemented in the field to test the syste
+m's reliability and the algorithm's performa
+nce. During these observations, the salama
+nders were counted concurrently with their
+detection. Data on the quantity and occur
+rence of giant salamanders, along with the
+timing of their sightings, was recorded, a
+nd environmental data was gathered to pro
+mptly evaluate the condition of the salama
+
+captured by a camera activated by RSSI
+signals, is utilized for identification through a
+platform developed with PyQt5. This setup
+allows for continuous 24-hour monitoring of
+the outdoor camera's video stream to recognize
+salamanders, enabling their documentation
+when they appear in the camera's field of view.
+The interface displaying the identified
+salamanders is illustrated in Figure 10, and
+Figure 11 features some of the wild
+salamanders photographed after the system
+reached stability.
+By integrating enhancements from E
+MA, WIoU, and LAE, the model demonst
+rates consistent performance when faced w
+ith challenges like low lighting, obstructio
+ns, and variations in target size, achieving
+significantly lower rates of false and miss
+ed detections compared to other models. It
+effectively addresses critical issues such a
+s nighttime low visibility and intricate bac
+kgrounds in conservation areas. In practica
+l applications, the model retains the high
+efficacy observed in laboratory settings, su
+ccessfully mitigating the high false negativ
+e rates associated with conventional techni
+ques, and ensuring reliable identification o
+f giant salamanders. The system's recall, p
+recision, F1 score, and frame rate are reco
+rded at 94.85%, 95.39%, 95.12%, and 77.
+
+20 frames per second, respectively. Its ada
+
+has proven effective and resilient in the H
+
+ptability is notable; with data re-labeling a
+nd model fine-tuning, it can be utilized fo
+r the automatic monitoring of other rare a
+nd endangered species within protected reg
+ions. While the system showed commenda
+ble performance during the testing phase,
+further evaluation and optimization are nec
+essary to enhance detection capabilities un
+der extreme conditions, such as heavy rain
+
+ubei Xianfeng Zhongjian River Giant Sala
+mander National Nature Reserve, though c
+hallenges remain in extreme environmental
+conditions.
+
+and flooding, which can lead to murky
+waters, strong currents, and significant surf
+ace reflections. In conclusion, the system
+
+Fig 10 Giant salamander identification platform
+
+(a) Water surface reflection
+
+(b) Complex environment
+
+(d) Low light at night
+
+(e) Rainy day environment
+
+(f) Underwater environment
+Fig 11 Wild giant salamanders taken in various environments by the equipment
+
+4. Conclusion
+
+A new model, named YOLO v11n-E
+WL, has been developed for identifying a
+nd detecting giant salamanders. This mode
+l incorporates the EMA module, modifies
+the loss function, and includes the lightwe
+
+ight LAE module, resulting in improved r
+ecall, accuracy, F1 score, and frame rate c
+ompared to the original YOLO v11n mode
+l, achieving scores of 94.85%, 95.39%, 9
+5.12%, and 77.20 frames per second, resp
+ectively. Additionally, the memory footprin
+
+t of this model is 11.56 MB. It demonstra
+
+multiple salamanders, as well as in low-li
+
+tes consistent performance and notable rob
+ustness, maintaining the same memory usa
+ge of 11.56 MB.
+In identical experimental settings, the
+suggested model is evaluated against the
+YOLO v10n-EWL and YOLO v11n model
+s. When compared to YOLO v10n-EWL, t
+he new model shows improvements in rec
+all, precision, F1 score, and frame rate by
+
+ght and complex environments.
+Creating automated systems for ident
+ifying and detecting salamanders, along wi
+th a monitoring setup for the Zhongjian R
+iver Salamander Reserve, which is capable
+of capturing images of salamanders outdo
+ors over extended periods and allows for
+data analysis in real-time. This technology
+is valuable for recognizing salamanders in
+
+6.29, 6.05, 6.18 percentage points, and 2
+7.84 frames per second, respectively. In re
+lation to YOLO v11n, these metrics are e
+nhanced by 5.70, 6.13, 5.92 percentage po
+ints, and 27.1 frames per second, all surpa
+ssing the performance of the baseline YO
+LO v11n model. This model demonstrates
+the ability to swiftly identify salamanders
+in various scenarios, including single and
+
+intricate habitats, and the identification pla
+tform addresses the need for effective sala
+mander monitoring. By utilizing environme
+ntal data, we can gain deeper insights into
+the habitats of the giant salamander, guid
+e future reserve development, formulate en
+hanced conservation strategies for the gian
+t salamander, and aid in the species' recov
+ery efforts.
+
+Methods
+
+Data acquisition and preprocessing
+Image samples of the Chinese giant salamander were collected from the Zhongjian River Giant
+Salamander National Nature Reserve in Xianfeng, Hubei Province between December 2024 and
+February 2025. To overcome the challenge of scarcity of wild giant salamander samples, the initial
+collection of 1020 original images was expanded by supplementing 530 images from public network
+resources.To further enhance the diversity of the dataset and the generalization ability of the model,
+we use a variety of data enhancement techniques to enrich the dataset. Rotation, sharpening,
+brightness adjustment, adding noise, and HSV color space filtering are included to simulate different
+weather, lighting conditions, and environmental disturbances. After enhancement, the total size of the
+dataset reaches 6952 images, which effectively improves the robustness of the model in complex
+environments. All images are manually annotated using X-AnyLabeling software, and the annotation
+information is saved in a TXT file in YOLO format, containing the location information of the target
+bounding box. The final dataset is randomly divided into training set (4866 pieces), validation set
+(695 pieces), and test set (1391 pieces) according to a ratio of 7:2:1 to ensure the fairness and
+reproducibility of the experiment.
+Integration of efficient multi-scale attention modules (EMA).
+In order to enhance the model's ability to characterize multi-scale features, especially in complex
+scenes where the body color of giant salamander is mixed with the environmental background, we
+use the Efficient Multi-scale Attention Module (EMA) to replace the original attention mechanism in
+
+the Backbone network. Without reducing the channel dimension, the EMA module groups the
+channels and extracts the attention weights through 1x1 and 3x3 volume integral branches
+respectively, and then captures the pixel-lev·el relationship and global context information through
+two-dimensional global average pooling and Sigmoid activation function, so as to significantly
+improve the model's focus ability on key features.
+Application of the Wise-IoU (WIoU) loss function
+Aiming at the problem of uneven distribution of anchor frame mass and harmful gradient in lowquality samples in field images, we replace the original CIoU loss function with the loss function of
+dynamic non-monotonic focusing mechanism. A small gradient gain is allocated to the low-quality
+anchor frame, which guides the model to optimize towards the high-quality sample more stably,
+improving the convergence speed and stability of training.
+Introduction of Lightweight Adaptive Extraction Convolution (LAE).
+In order to reduce the complexity of the model, improve the inference speed, and make it more
+suitable for deployment on edge devices with limited computing resources, we have introduced a
+lightweight adaptive extraction convolutional LAE module at the Head layer. Through group
+convolution, dimensional rearrangement, adaptive pooling and 1x1 convolutional operations, LAE
+dynamically adjusts convolutional kernel parameters and realizes adaptive feature selection,
+significantly reducing the amount of floating-point operations and model parameters, while
+maintaining strong feature extraction capabilities.
+Experimental setup and evaluation indicators
+All experiments were conducted on the Autodl computing power platform using an NVIDIA
+GeForce RTX 4090 GPU (24GB of VRAM). The deep learning framework is PyTorch 2.3.0, and the
+programming language is Python 3.12.3. A total of 500 epochs were trained on the model, with an
+initial learning rate of 0.001 and a momentum of 0.937. To comprehensively evaluate model
+performance, we use the following evaluation metrics: Precision (P), Recall (R), F1 Score, Frames
+per Second (FPS), model memory footprint, and floating-point operation.
+Data availability
+Data will be made available on request.
+Code availability
+The algorithms used for data loading, reconstructions, and digital signal processing are standard
+and are outlined in detail in the Methods. Python scripts can be provided by the corresponding authors
+upon request.
+Acknowledgments
+This work is supported by the China University Industry-University-Research Innovation Fund
+for Intelligent Internet of Things Innovation Education Special Funding Project Plan (2024WA064)
+and the Hubei Provincial Natural Science Foundation Program Youth Project (2020CFB337).
+
+References
+[1]
+
+WANG Cheng, JIANG Wansheng, ZHOU Qiang, et al. Preliminary investigation into the activity p
+atterns and displacement distances of the chinese giant Preliminary investigation into the activity patt
+erns and displacement distances of the chinese giant salamander (Andrias davidianus)[J].
+
+[2]
+
+DENG Zhiyong, XlE Yixing, LIU Yi,et al. River health assessment of Zhangjiajie Giant Salamande
+r Na tional Nature Reserve in Hunan Province[J]. Water Resources & Hydropower Information,2024,
+45(3):111-117,129. (in Chinese)
+
+[3]
+
+YUAN Yuding.Problems and measures existing in the ecological environment of the Qingjiang Rive
+r Basin[J].Modern Science,2023(1):32-41,94. (in Chinese) Modern Science,2023(1):32-41,94.
+
+[4]
+
+Shanghai Ocean University. A neural network-based method and system for detecting fish diseases:
+CN202211623709.8[P]. 2023-03-14.
+
+[5]
+
+ZHANG Zheng,LU Xiang,HU Qingsong. Lightweight model for river crab detection based on imag
+e enhancement and improved YOLO v5s [J]. Transactions of the Chinese Society for Agricultural M
+achinery,2024,55(11):124-131,374.
+
+[6]
+
+KE Ao,WANG Yucong,HU Boyu,et al. Review on image-based wildlife detection and recognition[J].
+Computer Systems & Applications,2024,33(1):22- 36. (in Chinese)
+
+[7]
+
+LI Daoliang,LI Wanchao,DU Zhuangzhuang. Classification method of feeding intensity of sea bass
+based on self-attention-DSC-CNN6 and multi-modal Transactions of the Chinese Society for Agricult
+ural Machinery, 2025,56(1):16-24. (in Chinese)
+
+[8]
+
+Hu, J.; Zhao, D.; Zhang, Y.; Zhou, C.; Chen, W. Real-time nondestructive fish behavior detecting i
+n mixed polyculture system using deep-learning and low-cost devices. -Expert Syst. Appl. 2021, 178,
+115051. [CrossRef]
+
+[9]
+
+Xu, W.; Zhu, Z.; Ge, F.; Han, Z.; Li, J. Analysis of behavior trajectory based on deep learning in
+ammonia environment for fish.Sensors 2020, 20, 4425. [ CrossRe ]
+
+[10] Wang, H.; Zhang, S.; Zhao, S.; Wang, Q.; Li, D.; Zhao, R. Real-time detection and tracking of fis
+h abnormal behavior based on improved YOLOV5 and SiamRPN ++. Comput. Electron. Agric. 202
+2, 192, 106512. [CrossRef]
+[11] HUSSAM E M,ALI F,OMAR A,et al. MSR-YOLO:method to enhance fish detection and tracking i
+n fish farms[J] Procedia Computer Science,2020,. 170:539-546.
+[12] DU L, LU Z, LI D. Broodstock breeding behavior recognition based on Resnet50-LSTM with CB
+AM attention mechanism[J]. Computers and Electronics in Agriculture,2022,202:107404.
+[13] Tu, W.; Yu, H.; Zhang, P.; Wei, S.; Zhang, X.; Yang, Z.; Wu, J.; Lin, Y.; Hu, Z. Farmed fish det
+ection by improved YOLOv8 based on channel non-degradation with spatially coordinated attention.
+J. Dalian Ocean. Univ. 2023, 38, 717.
+[14] Qing S, Qiu Z, Wang W, et al. Improved YOLO-FastestV2 wheat spike detection model based on a
+multi-stage attention mechanism with a LightFPN detection head[J].Frontiers in Plant Science,2024,1
+5:1411510.
+[15] Dong X, Zhang L, Xu C, et al. Detection of pine wilt disease infected pine trees using YOLO v5
+optimized by attention mechanisms and loss functions[J]. Ecological Indicators,2024,168:112764.
+[16] Pan W, Chen J, Lv B, et al. Lightweight marine biodetection model based on improved YOLO v1
+0[J].Alexandria Engineering Journal,2025,119:379-390.
+[17] Ai J Q, et al. An SAR target classification algorithm based on the central coordinate attention mod
+ule[J].IEEE Sensors Journal.2023,2,24:1941-1952.
+[18] Lv M, SU W H. YOLO V5-CBAM-C3TR: An optimized model based on transformer module and
+attention mechanism for apple leaf disease detection[J].Frontiers in Plant Science, 2024, 14: 1323301.
+
+[19] Wang Xiaojuan, et al. AgeDETR: attention-guided efficient DETR for space target detection[J].Rem
+ote Sensing,2024,9,18:3452.
+[20] Fu Z, et al. DLSW-YOLO v8n: a novel small maritime search and rescue object detection framew
+ork for UAV images with deformable large kernel net[J].Drones Drones ,2024,8(7):310.
+[21] YU, Zhongwen, et al. Lsm-yolo: compact and effective roi detector for medical detection[J]. arXiv
+prepr int, arXiv:2408.14087,2024 .
+[22] YUAN Hhongchun,LI Chunqiao. research on FDC -YOLO v8 underwater biological object detection
+methodImproved by deformable convolution[J]. Transactions of the Chinese Society for Agricultural
+Machinery,2024,55(11):140-146. (in Chinese)
+[23] LUO Bin,LI Jiachao,ZHOU Yanan, et al. Lightweight rice blast spores detection method based on i
+mproved YOLO v8[J]. Transactions of the Chinese Society for Agricultural Machinery,2024,55(11):32
+-38.
+[24] YANG Duanli,QI Junlin,CHEN Hun, et al. Individual behavioral identification and differential analy
+sis of free-range laying hens based on improved YOLO v8n model[J].Transactions of the Chinese S
+ociety for Agricultural Machinery,2024,55(11):112-123. (in Chinese)
+[25] XU Haozhe,WANG Yuanxing. Algorithm for aerial image detection of unmanned aerial vehicles bas
+ed on improved YOLO v10n[J]. Computer Science and Application,2025,15(1):230-238.
+[26] Chen R, Zhou H, et al. YOLO-CE: an underwater low-visibility environment target detection algorit
+hm based on YOLO 11[J]. The Journal of Supercomputing, 2025, 81(5): 1-24.
+[27] TIAN Fang,YANG Xinyao,SUN Nanqing,et al. Salamander Detection Model Based on Improved Y
+OLO v11n-EWL[J/OL]Transactions of the Chinese Society for Agricultural Machinery, 1-10[2025-0812].https://link.cnki.net/urlid/11.1964.s.20250619.1059.002.
+[28] LI Zonggang,SONG Qiufan,DU Yajiang,et a1. Research on robot riveting defect detection method b
+ased on improved DETR[J]. Journal of Railway Science and Engineering,2024,21(4):1690-1700.
+[29] HU Yan,YUAN Zihao,TU Xiaoguang,et a1. improved SSD object detection algorithm based on cont
+rastive learning[J].Infrared Technology,2024,46(5). 548-555. (in Chinese)
+[30] ZHANG Xiuzai,QIU Ye,SHEN Tao. Small pedestrian target detection in subway scene based on imp
+roved SSD algorithm[J]. Development,2025,62(2):397-407.(in Chinese)
+
+

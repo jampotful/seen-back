@@ -1,0 +1,408 @@
+Graph guided multiscale cross attention for multilabel chest X ray classification.
+Shi G, Wang Z, Shi Y, Pan J, Sun L, Fang F, Jin L. (2026). Scientific reports. . doi:10.1038/s41598-026-53115-0. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Graph guided multiscale cross attention for multilabel chest X ray classification
+
+## Abstract
+AbstractMulti-label chest X-ray (CXR) classification is challenging because thoracic abnormalities vary substantially in scale, visual saliency, and anatomical distribution, while disease labels often exhibit clinically meaningful dependencies. We propose a visual–semantic framework that integrates heterogeneous visual representations with graph-guided label reasoning for image-level multi-label CXR classification. The visual encoder consists of a Vision Transformer (ViT) branch and a DenseNet-121 branch with complementary inductive biases: the ViT branch provides self-attention-based content-adaptive token representations, whereas the DenseNet branch provides hierarchical convolutional feature maps with explicit spatial layouts. A multi-scale bidirectional dual cross-attention fusion (DCAF) module aligns these two representations and enables bidirectional cross-representation interaction at the and stages to construct a fused visual memory. To model label dependencies, we construct an ML-GCN-style label graph whose edges are derived from training-set conditional co-occurrence statistics and whose node features are initialized using GloVe label-name embeddings. The resulting GCN-refined label embeddings initialize the label queries of a Transformer decoder, which retrieves label-specific evidence from the fused visual memory and predicts a single logits matrix for multi-label classification. The proposed method achieves a Mean AUC of 0.849 on ChestX-ray14 following its official evaluation protocol and 0.815 on CheXpert using an internal 70%/10%/20% training/validation/testing partition. Qualitative Grad-CAM visualizations on selected cases further suggest that the proposed framework tends to produce activation patterns consistent with manually indicated visually suspicious regions; these visualizations are not intended as a formal localization evaluation. Overall, the results indicate that cross-representation visual fusion and graph-guided label-query decoding provide complementary benefits for multi-label CXR classification.Subject terms: Computational biology and bioinformatics, Mathematics and computing
+
+## Introduction
+Chest X-ray (CXR) imaging is widely used for thoracic assessment because it is inexpensive, rapidly acquired, and broadly available in clinical practice. A single radiograph may contain multiple abnormalities, such as pleural effusion with atelectasis or cardiomegaly with pulmonary edema. Automated CXR interpretation is therefore naturally formulated as an image-level multi-label classification problem, in which several pathological findings must be predicted from the same image. Large-scale datasets such as ChestX-ray14 and CheXpert have accelerated the development of deep-learning systems for CXR analysis1,2. Nevertheless, reliable multi-label diagnosis remains difficult because abnormalities differ in lesion size, boundary clarity, radiographic appearance, and label frequency.
+Convolutional neural networks (CNNs) have been widely used for CXR classification. For example, CheXNet uses DenseNet-121 to encode radiographic patterns through local filtering, weight sharing, and hierarchical downsampling3. Such convolutional inductive biases are useful for preserving spatially organized anatomical and textural structures. Vision Transformers (ViTs), by contrast, represent an image as a sequence of patch tokens and use self-attention to model content-adaptive interactions across distant image regions4. ViTs are therefore well suited for modeling long-range interactions among patch tokens, which can complement the spatial inductive biases of convolutional networks in CXR analysis. It should be noted that the distinction between CNNs and ViTs should not be interpreted as an absolutely rigid local–global separation. Deep convolutional layers can also encode broad contextual information as their receptive field expands, and ViT tokens still originate from local image patches. Nevertheless, CNNs and ViTs provide different inductive biases: DenseNet offers hierarchical convolutional features with explicit spatial layouts, whereas ViT provides self-attention-based token interactions for long-range relational modeling. In this work, we therefore view DenseNet and ViT as heterogeneous visual encoders with complementary representational properties rather than as strictly separated local and global branches.
+Existing hybrid CNN–Transformer architectures often combine features through late concatenation, reweighting, or one-way attention5,6. These fusion strategies may be insufficient for CXR classification because disease evidence can appear at different spatial scales and may require interaction between spatially organized convolutional maps and self-attention-based token representations. To address this issue, we introduce a multi-scale bidirectional dual cross-attention fusion (DCAF) module. DCAF aligns DenseNet feature maps and ViT token features at the and stages and enables bidirectional cross-representation refinement before constructing the visual memory used by the decoder.
+Label dependency is another important challenge in multi-label CXR classification. Many methods treat each disease as an independent binary target, although thoracic findings often co-occur or imply related clinical conditions. Graph-based approaches such as ML-GCN model label correlations through a graph built from co-occurrence statistics7, while decoder-based methods such as Query2Label formulate multi-label prediction as label-query-based evidence retrieval8. However, learned label queries may lack explicit label-prior structure, and graph-based priors are often used as classifier parameters rather than being directly coupled with visual evidence retrieval. We address this limitation by constructing an ML-GCN-style directed label graph from training-set conditional co-occurrence statistics, initializing graph nodes with GloVe label-name embeddings, and using the GCN-refined label embeddings to initialize Transformer decoder queries. In this way, label-prior information participates directly in label-to-image evidence retrieval.
+The key contributions of this work are summarized as follows:
+We propose a heterogeneous ViT–DenseNet visual encoder with a multi-scale bidirectional DCAF module. Unlike late concatenation or one-way fusion, DCAF aligns convolutional feature maps and Transformer token features at the and stages and enables bidirectional cross-representation refinement.
+We introduce a graph-guided label-aware Transformer decoder for multi-label CXR classification. The decoder queries are initialized by GCN-refined label embeddings obtained from an ML-GCN-style graph whose edges come from training-set conditional co-occurrence statistics and whose node features are initialized from GloVe label-name embeddings.
+We evaluate the proposed framework on ChestX-ray14 and CheXpert and analyze its major components through comparison studies, fine-grained ablations, multi-run averaged evaluation, computational profiling, healthy-sample analysis, and preliminary shared-label cross-dataset analysis. These experiments are designed to assess classification performance, the contribution of visual fusion and label-prior-guided decoding, and the behavior of the final model under complementary analysis settings.
+
+## Related work
+
+## CNN-based multi-label classification for chest X-rays
+Public benchmarks enable systematic evaluation of multi-label CXR classification. ChestX-ray8/14 provide weak image-level labels and support joint prediction and coarse localization of common findings1. CheXpert further introduces uncertainty labels and an expert comparison protocol, which better reflects clinical reporting practice2. MIMIC-CXR aligns radiographs with free-text reports and supports subsequent progress in weakly supervised learning and representation pretraining9. Early multi-label CXR models were largely built on CNN backbones. CheXNet, using DenseNet-121, established a strong baseline and popularized the paradigm of independent sigmoid outputs for multi-label prediction3,10. Subsequent improvements commonly followed three directions. First, attention-based designs enhanced localization: AG-CNN introduces attention-guided refinement to highlight disease-relevant patterns, and CRAL learns category-wise attention to highlight discriminative patterns under comorbidity11,12. Second, structured clinical priors were introduced to reduce semantic inconsistency under noisy supervision, such as hierarchical disease dependencies and uncertainty-aware training13. Third, long-tailed label imbalance was addressed by asymmetric objectives and related designs that sharpen decision boundaries for rare findings14,15. Nevertheless, many CNN pipelines still rely on global pooling and independent sigmoid heads. This weakens long-range anatomical reasoning and leaves label dependency learning largely implicit, motivating hybrid encoders and explicit label-aware inference.
+
+## Vision transformers for chest X-ray classification
+Vision Transformers (ViTs) use self-attention to perform content-adaptive token interaction, which makes them effective for modeling relationships among image patches in chest radiographs4. The Swin Transformer introduces a hierarchical shifted-window mechanism to improve computational efficiency while preserving multi-scale representation learning16. CXR-specific variants, such as IEViT, further adapt Transformer architectures to enhance sensitivity to subtle lesions and low-contrast textural patterns17.
+In medical imaging, the effectiveness of Transformer-based models is often shaped by both training-set scale and supervision quality. Park et al. use knowledge distillation to stabilize training and improve generalization in CXR diagnosis18. Self-supervised pretraining has also emerged as an effective strategy. CheXzero demonstrates that large-scale self-supervised learning can support expert-level pathology detection even without manual labels19. Masked autoencoder (MAE) and self-distillation frameworks, such as DINO and DINOv2, learn transferable representations for downstream tasks20–22. DINO-CXR further demonstrates improved multi-label recognition when annotated data are limited23. However, pure Transformer models may lack the explicit spatial continuity provided by convolutional feature maps, and their training can be less robust in the presence of label noise or limited data. These limitations motivate hybrid designs that combine CNN-style spatial inductive biases with Transformer-based content-adaptive token interactions.
+
+## Multi-label decoding and cross-attention-based evidence retrieval
+Conventional multi-label CXR classifiers often compress an image into a single pooled representation and predict labels with independent sigmoid heads. This can dilute localized evidence and provides limited mechanisms for consistent prediction under comorbidity. Transformer decoders provide a more structured alternative by maintaining label queries and retrieving relevant visual evidence through cross-attention24. Query2Label formulates multi-label classification as label-conditioned evidence retrieval by treating each label as a learnable query8. ML-Decoder scales this paradigm and supports semantic initialization with word vectors to improve generalization on long-tailed categories25. CXR-oriented decoders further extend this line: TransDD aggregates complementary visual evidence with a dual-path decoder, while Label Correlation Transformer explicitly models label relations and improves evidence aggregation26,27. Many existing decoder-based methods learn queries from random initialization or weak semantic priors and rely on single-scale visual memory. This can limit fine-grained retrieval and reduce robustness when label correlations shift across datasets. These limitations motivate the use of label-prior-guided queries together with multi-scale fused visual memory for evidence retrieval.
+
+## CNN–transformer hybrid encoding and multi-scale feature fusion
+Hybrid encoders aim to combine convolutional inductive biases with attention-based token interaction. CoAtNet integrates convolution and attention across stages to improve generalization across data regimes28. MaxViT further enhances non-local token interaction via multi-axis attention while keeping computation manageable29. In CXR studies, two-branch architectures often compute CNN and Transformer features separately and fuse them only before prediction5,6. Many designs use concatenation or weighted summation, which limits how much one representation can correct the other during feature learning. This becomes critical when small lesions and widespread structural abnormalities must be recognized simultaneously. These observations motivate a fusion strategy that aligns heterogeneous visual features at multiple scales and uses bidirectional cross-attention to promote cross-representation refinement.
+
+## Label dependency modeling and prior-driven joint reasoning
+Multi-label CXR prediction involves rich inter-label structure, including co-occurrence patterns, mutual exclusivity, and clinically meaningful complication pathways. Accordingly, graph-based approaches have been widely explored to model such dependencies. ML-GCN constructs a label graph from co-occurrence statistics and uses graph convolution to learn label embeddings, which are then used to parameterize interdependent classifiers7. Beyond label graphs, ImageGCN models inter-image relationships to improve representation consistency and disease identification30. More recent studies have explored correlation-guided label feature learning, unified correlation integration frameworks, and interpretable prediction through label embeddings31–33. In multi-label CXR classification, jointly modeling visual evidence and label co-occurrence priors has also been shown to benefit the analysis of complex cases34.
+Despite these advances, two limitations remain. First, label semantics and co-occurrence-derived graph structure are often incorporated in separate stages, making it difficult to couple label priors with visual evidence retrieval. Second, label priors are frequently used only for static classifier construction or post hoc recalibration, rather than being tightly integrated with evidence retrieval during inference. These limitations motivate an ML-GCN-style label graph whose edges are derived from training-set conditional co-occurrence statistics and whose node features are initialized from semantic label embeddings; the resulting label priors are injected directly into decoder queries.
+Taken together, prior studies have advanced multi-label CXR classification through stronger CNN backbones, Transformer-based context modeling, hybrid visual encoders, decoder-based evidence retrieval, and graph-based label dependency modeling. However, unified frameworks that combine deep multi-scale visual fusion with label-prior-guided decoding remain underexplored. This gap motivates the visual–semantic framework proposed in this work, which couples a parallel ViT–DenseNet encoder with a graph-guided Transformer decoder for end-to-end integration of heterogeneous visual evidence and label priors.
+
+## Methods
+
+## Problem formulation
+Given a mini-batch of CXR images , the goal is to predict an image-level multi-label target matrix , where B is the batch size and L is the number of disease labels. The proposed model outputs a single logits matrix , and the final multi-label probabilities are obtained by
+where denotes the element-wise sigmoid function. This study focuses on image-level classification rather than lesion segmentation or detection; visualization results are therefore used only as qualitative evidence.
+For clarity, we use the following notation throughout the method description. The mini-batch size is denoted by B, the input image height and width by H and W, and the number of disease labels by L. The DenseNet branch produces convolutional feature maps at stages , where , , and denote the channel dimension, height, and width of stage s, respectively. The ViT branch produces a token feature grid T after removing the class token, if present, where , , and denote its channel dimension and spatial size. After projection and scale alignment, the corresponding features are denoted by and . The superscript denotes flattening a two-dimensional feature map into a token sequence, and the tilde symbol denotes a cross-attention-refined feature. The superscript (s) in projection functions denotes scale-specific parameters rather than exponentiation. The DCAF module outputs scale-specific fused features and an aggregated visual feature map F. The flattened visual memory is denoted by M. For the label graph, P denotes the directed conditional co-occurrence matrix, denotes the thresholded binary matrix, and A denotes the ML-GCN-style re-weighted correlation matrix. The initial and final GCN label embeddings are denoted by and , respectively.
+
+## Overview of the proposed framework
+Figure 1 summarizes the proposed visual–semantic framework. The framework contains four main components: a heterogeneous ViT–DenseNet visual encoder, a multi-scale bidirectional dual cross-attention fusion module, an ML-GCN-style label graph, and a graph-guided Transformer decoder. The DenseNet-121 branch provides hierarchical convolutional feature maps with explicit spatial layouts, while the ViT branch provides self-attention-based token representations. These two branches are treated as heterogeneous visual encoders with complementary inductive biases rather than as rigidly separated spatial-range extractors.
+Overall architecture of the proposed framework. The model uses DenseNet-121 and ViT as heterogeneous visual encoders, applies DCAF to obtain the fused visual memory, initializes label queries with GCN-refined label embeddings, and predicts a single logits matrix Z for multi-label classification. The circled “C” denotes feature concatenation, and the sigmoid layer converts logits into label probabilities.
+The DCAF module aligns DenseNet feature maps and ViT token features at the and stages and performs bidirectional cross-representation interaction. The fused feature map is flattened into a visual memory M, which is later used by the Transformer decoder. On the label side, an ML-GCN-style directed label graph is constructed from training-set conditional co-occurrence statistics. The graph nodes are initialized with GloVe 840B label-name embeddings, and a two-layer GCN produces label embeddings used to initialize decoder queries. The decoder retrieves label-specific evidence from the fused visual memory and outputs the final logits Z.
+
+## Heterogeneous visual encoder
+
+## DenseNet-121 branch
+The DenseNet-121 branch extracts hierarchical convolutional feature maps from intermediate stages. We denote the selected feature maps by
+Here, , , and denote the channel dimension, height, and width of the DenseNet feature map at stage s, respectively. The feature map preserves relatively richer spatial structure after sufficient nonlinear transformation, whereas provides stronger semantic abstraction at a lower spatial resolution. These stages are selected because they offer complementary levels of spatial and semantic abstraction for image-level CXR classification.
+
+## ViT branch
+The ViT branch divides the input image into patch tokens and encodes them with self-attention. After removing the class token when present, the remaining tokens are reshaped into a two-dimensional feature grid,
+Here, , , and denote the channel dimension, height, and width of the reshaped ViT token grid, respectively. The ViT representation provides content-adaptive token interactions. When MAE-pretrained weights are used, the pretraining is regarded as an initialization strategy that may improve patch-level representation and contextual interaction; it does not imply that the ViT branch is specialized to a single spatial range.
+
+## Multi-scale bidirectional dual cross-attention fusion
+
+## Rationale for using and
+The choice of fusion stages needs to balance spatial resolution and class-discriminative semantics. Earlier DenseNet stages such as and retain finer spatial layouts, but their features may be dominated by low-level edge and texture responses and may contain limited disease-discriminative semantics for image-level prediction. Deeper stages provide more abstract semantics, but excessive downsampling may weaken subtle visual evidence. We therefore use and as the default fusion stages, allowing DCAF to interact with the ViT feature grid at two complementary levels of the convolutional hierarchy.
+
+## Feature projection and scale alignment
+Before cross-representation interaction, DenseNet and ViT features are projected to a shared embedding dimension d. For each scale , the DenseNet feature map is projected by a pointwise mapping :
+The ViT feature grid is first projected to the same channel dimension and then resized to the spatial resolution of :
+Here, denotes the scale-specific projection applied to the ViT feature grid for alignment with the DenseNet feature map at stage s. The aligned pair is then used for bidirectional cross-attention at scale s.
+
+## Cross-attention operation
+Figure 2 illustrates the basic cross-attention operation used in DCAF. Given a query sequence , a key sequence , and a value sequence , the scaled dot-product cross-attention is defined as
+where d is the feature dimension, denotes matrix transposition, and the softmax is computed along the key dimension. For simplicity, linear query, key, and value projections are absorbed into the feature projection operators used before the attention operation.
+Principle of the cross-attention operation used in DCAF. The query feature interacts with the key feature through scaled dot-product attention to generate normalized attention weights, which are then applied to the value feature to aggregate source information. In DCAF, this operation is performed in both directions between DenseNet convolutional feature maps and ViT token features.
+
+## Bidirectional cross-representation fusion
+For each scale , the aligned maps and are flattened into sequences along the spatial dimension:
+Here, the superscript denotes flattening a two-dimensional feature map into a token sequence. The convolutional representation is updated by attending to the ViT tokens, and the ViT representation is updated by attending to the convolutional tokens:
+where and denote learnable output projections. The tilde symbol denotes the cross-attention-refined feature, and the superscript (s) denotes scale-specific parameters rather than exponentiation. The updated sequences are reshaped back to two-dimensional feature maps, denoted by and . They are then concatenated and compressed with a pointwise projection :
+Here, denotes channel-wise concatenation and denotes a pointwise projection at scale s. To aggregate information across scales, is upsampled to the resolution of , and the two scale-specific features are concatenated and projected:
+Here, denotes upsampling to the spatial resolution of , and denotes the pointwise projection used for multi-scale aggregation. The final fused feature map F is used as the visual memory for the decoder. Figure 3 summarizes the complete DCAF workflow, including scale alignment, bidirectional cross-attention refinement, and multi-scale feature aggregation.
+Structure of the DCAF module. DenseNet feature maps and ViT feature maps are aligned at scale , flattened into token sequences, and refined through bidirectional cross-attention. The updated features are concatenated and projected to obtain , and the multi-scale outputs are aggregated to form the final visual memory feature map F.
+
+## ML-GCN-style label graph construction
+
+## Conditional co-occurrence matrix
+Let denote the binary label matrix of the training split. Here, indicates that the n-th training image is annotated with the i-th disease label, and otherwise. The co-occurrence count between labels i and j is
+and the number of training samples containing label i is
+The directed conditional co-occurrence probability is then computed as
+where is a small constant for numerical stability. Here, and denote the i-th and j-th disease labels, respectively. Because and are generally different, P is a directed relation matrix.
+
+## Thresholded correlation matrix
+Following the ML-GCN-style graph construction 7, we retain only sufficiently strong conditional relations using a fixed threshold :
+where denotes the thresholded binary correlation matrix. No validation or test labels are used to construct P or .
+
+## Re-weighted correlation matrix
+To control the strength of label-neighbor propagation and preserve self-information, we use the ML-GCN re-weighting scheme 7. Let denote the number of off-diagonal neighbors of label i, where k is a label index. The final graph correlation matrix is defined as
+where controls the total weight assigned to neighboring labels. This design preserves label-specific information while allowing statistically correlated labels to exchange information.
+
+## Semantic node initialization and GCN propagation
+Semantic information is introduced through node features rather than through semantic-similarity-based graph edges. Each disease label name is represented using GloVe 840B word vectors. For a multi-word label, the initial label embedding is computed by averaging the word vectors of its constituent words. The resulting initial node-feature matrix is
+where for GloVe embeddings. A two-layer GCN propagates information over the re-weighted label graph:
+where and are learnable parameters and denotes the nonlinear activation in the GCN layers. The final label embeddings are denoted by
+Here, denotes the GCN-refined embedding of label i. These embeddings are used to initialize the Transformer decoder queries.
+
+## Handling of the No Finding label
+The No Finding label denotes the absence of annotated abnormalities and is not treated as a conventional disease category. For ChestX-ray14, the reported Mean AUC is computed over the 14 disease labels, and No Finding is not included in the disease-label graph used for label reasoning. For CheXpert, when No Finding is included in the 14-label setting, we avoid using its co-occurrence with disease labels as disease-promoting graph edges. Instead, No Finding is handled as a healthy-state indicator with its own label representation. The final prediction is still determined by label-conditioned visual evidence retrieved from the fused visual memory, rather than being forced by graph priors alone.
+
+## Graph-guided transformer decoder
+
+## Visual memory
+The fused feature map is flattened into a sequence of visual memory tokens:
+This memory contains the multi-scale cross-representation visual evidence produced by DCAF.
+
+## Label query initialization
+The GCN-refined label embeddings are expanded along the batch dimension to initialize the decoder queries:
+Each query corresponds to one disease label and carries both co-occurrence-based structural information and semantic label initialization.
+
+## Label-to-image evidence retrieval
+The Transformer decoder updates the label queries through stacked decoder layers. At each layer, query self-attention models interactions among label queries, while cross-attention retrieves label-specific visual evidence from M. For decoder layer l, this process can be summarized as
+Here, denotes the self-attention-updated intermediate query representation at decoder layer l; residual connections, layer normalization, and a feed-forward network are applied in the standard Transformer-decoder manner after each sub-layer. After the final decoder layer, the output query representations are denoted by
+
+## Multi-label prediction
+A shared linear prediction head maps each label-specific decoder output to one scalar logit:
+where is the decoder output corresponding to image b and label i, and and are the shared classifier weight and bias, respectively. The resulting logits form a single prediction matrix . The multi-label prediction probabilities are obtained as .
+
+## Training objective
+
+## Single-logits composite loss
+The model is optimized using a composite multi-label loss applied to the single logits matrix Z. No additional prediction branches are used in the training objective. The total loss is
+Here, each denotes the corresponding loss weight. This formulation follows the implementation of the composite multi-label loss used in the released code. Labels with value , when present, are ignored through the loss mask.
+
+## Loss components
+denotes asymmetric loss, which down-weights easy negative labels and helps address severe positive–negative imbalance in multi-label CXR classification. denotes binary cross-entropy with logits and ignore-label support, providing stable point-wise supervision for each disease label. is a graph-smoothing regularizer based on the label graph adjacency matrix; it softly encourages related labels to produce less contradictory probabilities without replacing image-based evidence retrieval. is a batch-wise pairwise ranking surrogate that encourages positive samples to receive higher scores than negative samples for each label, which is consistent with AUC-based evaluation. During inference, only Z is used, and the final probabilities are computed by sigmoid activation.
+
+## Implementation details
+Input images are resized to . The DenseNet-121 branch is initialized with ImageNet-pretrained weights, and the ViT branch uses vit_base_patch16_384 initialized from an MAE-pretrained checkpoint when specified. MAE pretraining is used as a representation initialization strategy and does not imply that the ViT branch is specialized to a single spatial range. The default DCAF setting uses and as fusion stages.
+For label graph construction, all co-occurrence statistics are computed only from the training split. The conditional co-occurrence threshold is fixed at , the ML-GCN re-weighting parameter is fixed at , and the node features are initialized with GloVe 840B label-name embeddings. For CheXpert, the main experiments use U-Zeros, where uncertain labels are mapped to 0, and the supplementary U-Ones analysis maps uncertain labels to 1.
+Computational efficiency is evaluated with inputs. Parameter count and FLOPs are measured for a single forward pass. Inference latency and peak memory are measured under evaluation mode without gradient computation, with batch size 1 on a single NVIDIA RTX A6000 GPU unless otherwise specified.
+
+## Algorithm summary
+Algorithm 1 summarizes the training pipeline.
+Training pipeline of the proposed framework
+
+## Experiments
+The experiments are organized in a layered manner to improve readability and to keep the evaluation logic explicit. We first describe the datasets, evaluation protocols, label co-occurrence statistics, and implementation details. We then report the main comparison results as averages over three independent runs (seeds 0, 1, and 2), followed by component-level and fine-grained ablation studies. Additional analyses examine the healthy-sample behavior and preliminary shared-label cross-dataset performance of the final model. Finally, we report computational efficiency and qualitative Grad-CAM visualizations to assess the practical cost and interpretability of the proposed framework.
+
+## Datasets and evaluation protocols
+We evaluate the proposed framework on two widely used benchmarks for multi-label chest X-ray (CXR) classification: ChestX-ray14 and CheXpert.
+
+## ChestX-ray14
+The NIH ChestX-ray14 dataset contains 112,120 frontal chest radiographs collected from 32,717 patients and annotated with 14 thoracic disease labels1. We follow the official ChestX-ray14 evaluation protocol, using 86,524 images for model training and 25,596 images for testing. The original annotation system also includes a No Finding label; however, consistent with the evaluation protocol adopted in this work, the reported Mean AUC is averaged over the 14 disease labels only. Table 1 summarizes the label distribution in the training and test splits. In this table, “Share” denotes the proportion of positive occurrences of each label among all positive label occurrences in the corresponding split.
+Statistics of ChestX-ray14 lesion labels in the training and test splits. The training split contains images with 58,067 positive label occurrences. Images labeled No Finding are retained in the dataset but excluded from the 14-lesion statistics. The independent test split contains images with 27,206 positive label occurrences.
+
+## CheXpert
+CheXpert is a large-scale CXR dataset that includes uncertainty labels2. The official CheXpert benchmark is based on a radiologist-annotated test protocol for five observations, whereas our study evaluates a 14-label setting. We therefore use the publicly released train_val.csv file and construct an internal evaluation split. Specifically, the full set is randomly shuffled with seed 0 and partitioned into 70%/10%/20% training/validation/test subsets. Uncertain labels are mapped to 0 following the U-Zeros policy in the main experiments. To assess the influence of uncertainty-label preprocessing, we additionally report a supplementary U-Ones setting, where uncertain labels are mapped to 1. In the CheXpert experiments, we adopt the 14-label prediction setting that includes No Finding. Table 2 summarizes the label distribution in the full train_val.csv file before splitting.
+Statistics of CheXpert label occurrences computed from the full train_val.csv file before the random 70%/10%/20% split. The dataset contains samples with a total of 515,589 positive label occurrences. Only label value 1 is counted as positive, while -1 (uncertain) is treated as 0 (negative).
+Both datasets exhibit pronounced long-tail label distributions. A small number of common findings account for most positive observations, whereas rare labels such as Hernia and Pleural Other occur only infrequently. This motivates the use of multi-scale visual fusion together with explicit modeling of label priors.
+
+## Evaluation metrics
+We use the per-label area under the receiver operating characteristic curve (AUC) as the primary metric and report the arithmetic mean across labels (Mean AUC). For label c, the AUC is defined as
+where and denote the true positive rate and false positive rate for label c, respectively. The Mean AUC is computed as
+where L is the number of evaluated labels. Because AUC is threshold-free, it is less sensitive to class imbalance than fixed-threshold accuracy metrics.
+
+## Co-occurrence statistics
+To motivate explicit modeling of label dependencies, we compute label co-occurrence count matrices and visualize them as . We also compute conditional probability matrices P(j|i) to characterize directed dependency strengths, as shown for ChestX-ray14 in Fig. 4 and for CheXpert in Fig. 5. In the actual label-graph construction, all graph statistics are recomputed from the training split only.
+ChestX-ray14 label co-occurrence statistics and conditional probability matrices. These visualizations are descriptive; the graph used for training is computed from the training split only.
+CheXpert label co-occurrence statistics and conditional probability matrices. These visualizations are descriptive; the graph used for training is computed from the training split only.
+
+## Implementation details
+
+## Training configuration
+All experiments were conducted on a four-GPU server equipped with NVIDIA RTX A6000 GPUs (48 GB each). Input images were resized to . The model was trained for 30 epochs with a total batch size of 64. We optimized the network using SGD with momentum 0.9 and Nesterov acceleration. The initial learning rate was set to 0.006 and decayed by a factor of 0.2 at epochs . Weight decay was set to for the backbone and for the newly added task-specific modules. The DenseNet branch was initialized with ImageNet-pretrained DenseNet-121 weights, whereas the Transformer branch used vit_base_patch16_384 initialized from an MAE-pretrained checkpoint when specified. Before supervised training on ChestX-ray14 and CheXpert, we further pretrained the visual encoder on the MIMIC-CXR-JPG dataset to adapt it to the appearance of chest radiographs and common thoracic pathology patterns35. MAE and CXR-specific pretraining are treated as initialization strategies and do not imply that the ViT branch is specialized to a single spatial range. Afterward, the full network was fine-tuned end to end on each target benchmark. Data augmentation included random resized cropping, horizontal flipping, rotation within , brightness/contrast jitter with factor 0.2, and random erasing. During validation and testing, we used deterministic resizing together with the same normalization pipeline.
+
+## Optimization objective
+The model was trained with the single-logits composite objective defined in the Method section. In the reported implementation, the loss weights were , , , and . Only the single logits matrix is used in the training objective, and no additional prediction branches are optimized. The ASL hyperparameters were , , and . Labels with value are ignored through the loss mask when applicable. Class-wise reweighting coefficients were estimated from the training data only and were used exclusively for loss reweighting during training; these coefficients were never computed on the final test split.
+
+## Label graph construction
+For each dataset, label co-occurrence statistics were computed only from the training split. We followed the ML-GCN-style construction described in the Method section: directed conditional co-occurrence probabilities were thresholded with , the re-weighted correlation matrix used , and the initial node features were initialized from GloVe 840B label-name embeddings. For multi-word labels, the node feature was computed by averaging the embeddings of the constituent words. Semantic information is therefore introduced through node features rather than through semantic-similarity-based graph edges. No validation or test labels were used for graph construction.
+
+## Efficiency measurement
+Computational efficiency was evaluated using input images resized to , consistent with the main experiments. Parameter count and FLOPs were computed for a single forward pass. Inference latency and peak GPU memory were measured on a single NVIDIA RTX A6000 GPU under evaluation mode without gradient computation. Unless otherwise specified, latency was measured with batch size 1 after warm-up iterations and averaged over repeated runs.
+
+## Training curves
+Figure 6 shows the validation Mean AUC and loss curves during training. Under the final training protocol, the Mean AUC rises rapidly in the early stage and then stabilizes, while the validation loss decreases smoothly, indicating stable optimization of the hybrid encoder, fusion module, and decoder.
+Validation performance curves of the full model. The figure reports the validation Mean AUC and validation loss under the final training protocol.
+
+## Main results
+We first compare the proposed method with representative CNN-based, graph-based, Transformer-based, and hybrid methods on ChestX-ray14 and CheXpert. For the proposed method, we report the average AUC over three independent runs (seeds 0, 1, and 2) to provide a more stable estimate of classification performance.
+
+## Results on ChestX-ray14
+As shown in Table 3, the proposed model achieves the highest Mean AUC among the listed methods on ChestX-ray14. The per-label results indicate clear gains for several subtle or clinically important findings, including Infiltration, Pneumothorax, Emphysema, Fibrosis, Pleural Thickening, Cardiomegaly, Nodule, Mass, and Hernia.
+Main comparison on ChestX-ray14. The table reports per-label AUC and Mean AUC following the official ChestX-ray14 evaluation protocol. The reported results of the proposed method are averaged over three independent runs (seeds 0, 1, and 2). Ate atelectasis, Con consolidation, Inf infiltration, Ptx pneumothorax, Ede edema, Emp emphysema, Fib fibrosis, Eff effusion, Pna pneumonia, PT pleural thickening, Car cardiomegaly, Nod nodule, Mas mass, Her hernia.
+Significant values are in bold.
+
+## Results on CheXpert
+Table 4 summarizes CheXpert performance and uncertainty-label sensitivity in a single view. U-Zeros is used as the default policy, while U-Ones is included as a supplementary setting to examine whether the conclusion depends strongly on how uncertain labels are mapped. For the proposed method, the reported values are also averaged over three independent runs (seeds 0, 1, and 2) under each uncertainty-label policy.
+Main comparison and uncertainty-label analysis on CheXpert. The table reports representative published results together with our 14-label results under the internal 70%/10%/20% training/validation/testing partition of the publicly released train_val.csv file. Because published studies may use different split protocols, label subsets, and uncertainty-label policies, these values are intended as contextual reference rather than a strictly protocol-matched comparison. The reported results of the proposed method are averaged over three independent runs (seeds 0, 1, and 2) under the corresponding uncertainty-label policy. NoFi no finding, Enla enlarged cardiomediastinum, Card cardiomegaly, Opac lung opacity, Lesi lung lesion, Edem edema, Cons consolidation, Pna pneumonia, Atel atelectasis, Ptx pneumothorax, PEff pleural effusion, POther pleural other, Frac fracture, Supp support devices.
+Significant values are in bold.
+
+## Ablation studies
+Ablation studies are conducted on ChestX-ray14 and are organized from coarse to fine. We first evaluate the contribution of the major components, then examine the design of DCAF, the initialization of the ViT branch, and the construction of graph-guided label queries. Finally, a category-wise attribution analysis is used to relate module removal to disease-level performance changes.
+Table 5 shows the contribution of the main components. Replacing the ResNet backbone in the ML-GCN baseline with stronger single-branch encoders already improves performance, while combining ViT and DenseNet through DCAF further increases the Mean AUC. The full model obtains the best result after replacing the GCN classifier with the graph-guided cross-attention decoder, suggesting that visual fusion and label-aware evidence retrieval provide complementary benefits.
+Component-wise ablation study on ChestX-ray14 (mean AUC, %).
+Significant values are in bold.
+
+## DCAF module design
+Table 6 provides a fine-grained analysis of the DCAF module from two perspectives: the fusion stage and the fusion mechanism. For the fusion-stage comparison, the setting produces the largest performance drop, suggesting that early convolutional features, despite their higher spatial resolution, may contain limited disease-discriminative semantics for image-level CXR classification. Using either or alone improves the Mean AUC, but both variants remain inferior to the default setting. This indicates that and provide complementary information: preserves relatively richer spatial structure, whereas provides stronger semantic abstraction.
+Fine-grained ablation of the DCAF module on ChestX-ray14. The fusion-stage group evaluates where DenseNet and ViT features should interact, while the fusion-mechanism group evaluates how the aligned features should be fused. The default configuration is with bidirectional DCAF.
+For the fusion-mechanism comparison, simple concatenation and weighted summation perform worse than attention-based fusion, indicating that static feature combination is insufficient for fully exploiting the complementary properties of DenseNet feature maps and ViT token representations. The two unidirectional DCAF variants improve the Mean AUC compared with static fusion, which supports the effectiveness of cross-representation attention. However, both unidirectional variants remain inferior to bidirectional DCAF. This suggests that mutual refinement between convolutional features and Transformer tokens is important: ViT tokens provide long-range relational cues for convolutional feature refinement, while DenseNet feature maps complement Transformer tokens with spatially organized visual evidence. Overall, these results support the use of fusion with bidirectional DCAF as the default configuration.
+
+## ViT initialization
+Table 7 clarifies the role of MAE initialization. Any gain from MAE pretraining should be interpreted as stronger token-level representation learning and improved optimization stability, not as evidence that the ViT branch functions as a purely global extractor.
+Effect of ViT initialization on ChestX-ray14. All variants use the same DenseNet branch, DCAF module, ML-GCN-style label graph, decoder, and training protocol; only ViT initialization is changed.
+
+## Graph-guided label-query construction
+Table 8 separates the roles of label-query initialization, co-occurrence-derived graph structure, ML-GCN re-weighting, and semantic node features. This design is aligned with the Method section, where graph edges are derived from conditional co-occurrence statistics and label-name embeddings are used only as node features.
+Ablation study of ML-GCN-style label graph construction on ChestX-ray14. The default setting uses thresholded conditional co-occurrence edges, ML-GCN re-weighting, and GloVe label-name embeddings as node features.
+
+## Category-wise attribution
+Table 9 is designed to explain non-uniform category-wise improvements. Larger drops after removing DCAF would support the role of multi-scale visual fusion for subtle findings such as Nodule and Fibrosis. Larger drops after removing the graph-guided decoder would support the role of label-prior-guided reasoning for clinically correlated findings such as Effusion and Atelectasis. Limited or fluctuating gains for diffuse categories should be interpreted cautiously because image-level labels may not fully capture their spatial and radiographic ambiguity.
+Category-wise attribution analysis on ChestX-ray14. w/o DCAF and w/o graph-guided decoder denote the AUC drop after removing the corresponding component from the full model.
+
+## Additional analyses
+The following analyses are complementary to the main comparison and ablation studies. They describe the behavior of the final model on healthy samples and under a preliminary shared-label cross-dataset setting, rather than serving as additional component ablations.
+
+## No finding and healthy-sample behavior
+Table 10 provides a descriptive check of whether the final model maintains reasonable specificity on healthy samples while retaining sensitivity to images with at least one disease label. Because this analysis reports the final model only, it is intended to characterize healthy-sample behavior rather than to serve as a component-level ablation.
+Analysis of No Finding and healthy-sample prediction of the final model on CheXpert. Healthy specificity evaluates whether healthy samples are correctly kept negative for disease labels, while diseased sensitivity evaluates whether images with at least one disease label are detected as abnormal.
+
+## Preliminary shared-label cross-dataset analysis
+To provide preliminary evidence of robustness under dataset shift, we conduct a shared-label cross-dataset analysis using the final model. Because ChestX-ray14 and CheXpert differ in label taxonomy, annotation policy, and uncertainty-label handling, we evaluate only seven labels with clear semantic correspondence: Atelectasis, Cardiomegaly, Consolidation, Edema, Effusion/Pleural Effusion, Pneumonia, and Pneumothorax. The model trained on the source dataset is directly evaluated on the target dataset without target-domain fine-tuning. This analysis is intended to characterize the final model under a controlled shared-label setting rather than to establish complete external clinical validation.
+Table 11 reports the direct cross-dataset performance of the final model in both transfer directions. The results should be interpreted cautiously as complementary evidence, because the two datasets differ in population composition, imaging protocol, label definitions, annotation policy, and uncertainty-label handling.
+Preliminary shared-label cross-dataset analysis of the final model on seven semantically matched labels between ChestX-ray14 and CheXpert. The model is trained on the source dataset and directly evaluated on the target dataset without target-domain fine-tuning. Mean AUC is computed over the seven shared labels only. These results are intended as complementary evidence rather than complete clinical external validation.
+
+## Computational efficiency analysis
+Table 12 evaluates whether the performance gain of the proposed framework is accompanied by acceptable computational overhead. Compared with the DenseNet branch only baseline, the full model increases the parameter count from 8.1M to 108.9M and the FLOPs from 11.5G to 75.3G, while improving Mean AUC from 82.0% to 84.9%. This indicates that the proposed framework introduces a substantial but expected computational cost due to the dual visual branches, DCAF, graph reasoning, and decoder-based evidence retrieval. Compared with the ViT + DenseNet + DCAF variant, the graph-guided decoder adds a relatively moderate overhead while improving Mean AUC from 83.2% to 84.9%, suggesting that label-prior-guided evidence retrieval provides a favorable performance gain relative to its additional cost.
+Computational efficiency comparison on ChestX-ray14. Params denotes trainable parameters, and FLOPs are computed for a single input image. Latency and peak GPU memory are measured under evaluation mode with batch size 1 on a single NVIDIA RTX A6000 GPU to reflect single-image inference cost.
+
+## Qualitative Grad-CAM visualization
+Because the primary objective of this study is image-level multi-label classification rather than lesion detection or segmentation, Grad-CAM is used only as a qualitative interpretability tool. The visualization is designed to examine whether the image regions emphasized by the model are broadly consistent with visually suspicious thoracic regions, rather than to provide a formal localization assessment.
+Figure 7 shows two representative cases and compares the DenseNet-121 baseline with the proposed method. For each case, we present the original radiograph with manually indicated reference regions, the Grad-CAM map of the DenseNet-121 baseline, and the Grad-CAM map of the proposed method. In the leftmost image of each row, thin dashed red rectangles are manually added to indicate approximate visually suspicious reference regions for reader guidance. These reference regions are introduced only to facilitate qualitative comparison between the DenseNet-121 baseline and the proposed method. They are not lesion annotations, are not used during training or model selection, and are not used for quantitative localization evaluation.
+Qualitative Grad-CAM visualization for two representative CXR cases. The first row shows a pneumonia case, and the second row shows a pleural effusion case. For each case, the leftmost image shows the input radiograph with manually indicated reference regions, followed by the Grad-CAM heatmap of the DenseNet-121 baseline and that of the proposed method. The thin dashed red rectangles denote approximate visually suspicious regions and are provided only as visual references for qualitative comparison. In the pneumonia case, the reference regions are placed around bilateral lower-lung suspicious opacities. In the pleural effusion case, the reference regions are placed around bilateral lower pleural and costophrenic-angle areas. These manually indicated regions are not ground-truth localization annotations and are not used for training, model selection, or quantitative evaluation.
+In the pneumonia case, the manually indicated reference regions are located mainly in the bilateral lower lung fields, where suspicious parenchymal opacities can be visually observed. The DenseNet-121 baseline shows noticeable activation outside the most relevant lung regions, including regions close to external devices and image boundaries. In contrast, the proposed method produces a more concentrated response over the lung fields and shows better spatial agreement with the visually suspicious reference regions. This suggests that the multi-scale fused visual memory may help reduce attention to non-disease-related structures.
+In the pleural effusion case, the manually indicated reference regions are placed around the bilateral lower pleural and costophrenic-angle areas, which are clinically relevant for pleural-effusion-like appearances. Compared with the baseline, the proposed method yields a broader and more coherent response over the lower thoracic and pleural-base regions. This behavior is consistent with the image-level prediction of pleural effusion, where the discriminative evidence may be distributed along the lower pleural spaces rather than confined to a small focal lesion.
+Overall, these qualitative examples suggest that the proposed framework tends to activate regions that are more consistent with disease-relevant visual evidence than the DenseNet-121 baseline. However, because the datasets used in this study provide image-level labels rather than pixel-level lesion masks, these Grad-CAM results should be interpreted only as supportive visual evidence and not as proof of localization accuracy.
+
+## Conclusion
+We presented a visual–semantic framework for image-level multi-label CXR classification that integrates heterogeneous visual representations with graph-guided label-aware decoding. The DenseNet–ViT encoder and DCAF module construct a multi-scale visual memory, while the ML-GCN-style label graph initializes decoder queries with co-occurrence-based structural priors and semantic label-name embeddings. Within the experiments reported here, the method achieves a Mean AUC of 0.849 on ChestX-ray14 following its official evaluation protocol and 0.815 on CheXpert using the internal 70%/10%/20% training/validation/testing partition described above. The multi-run averaged results, efficiency analysis, fine-grained ablations, healthy-sample behavior analysis, and preliminary shared-label cross-dataset analysis provide additional perspectives for characterizing robustness, computational cost, and cross-dataset behavior. These findings support the value of coupling cross-representation visual fusion with label-prior-guided evidence retrieval, while broader multi-center validation remains necessary before drawing strong conclusions about clinical deployment. Future work will also investigate how the current framework can interact with medical visual foundation models and biomedical vision–language pretraining, which may provide richer region-level priors and stronger semantic alignment under limited annotations and domain shift.
+
+## Author contributions
+G.S. designed the study and collected and analyzed the data. Z.W.contributed to the study design, provided guidance on the data analysis, and critically reviewed the manuscript. Y.S.assisted with the data analysis. J.P. contributed to the interpretation of the results and critically reviewed the manuscript. L.S.provided guidance on the study design. F.F. contributed to the data analysis and interpretation.L.J.contributed to the study design, provided guidance on the data analysis, and wrote the manuscript.Each author has read and approved the final version of the manuscript and has agreed to be accountable for their contributions.
+
+## Funding
+This work was supported by the Key Scientific Research Project of Higher Education Institutions of Anhui Province (Grant Nos. 2024AH051023, 2024AH051025), the Outstanding Young Backbone Talents of Anhui University Visiting and Training Abroad Project (Grant No. gxgwfx2019026), Anhui Provincial Quality Engineering Project (Grant No. 2023sx044), the Key Teaching Research Project of Anhui Province (Grant Nos. 2024jyxm0215, 2022jyxm851), the high-level talent introduction project of Anhui University of Chinese Medicine (Grant No. 2024rcyb025), the Key Teaching Research Project of Anhui University of Chinese Medicine (Grant No. 2023xjjy_zd028), and Quality Engineering Project of Anhui University of Chinese Medicine (Grant No. 2026xjzhkc-2).
+
+## Data availability
+The datasets analyzed during the current study are publicly available. The CheXpert dataset is available from Stanford University (https://stanfordmlgroup.github.io/competitions/chexpert/), and the ChestX-ray14 dataset is available from the National Institutes of Health (https://nihcc.app.box.com/v/ChestXray-NIHCC)1,2. The MIMIC-CXR-JPG dataset is available from the PhysioNet repository (https://physionet.org/content/mimic-cxr-jpg/), subject to credentialed access35. The public code repository provides split-generation scripts and preprocessing instructions; the original datasets are not redistributed and should be downloaded from their official sources according to the corresponding data-use agreements.
+
+## Code availability
+The source code, training and evaluation scripts, and configuration files for the proposed method are publicly available at: https://github.com/sgk020204-a11y/DCAF-GCN-CXR. The released repository includes the implementation of the ViT–DenseNet visual encoder, the DCAF module, the ML-GCN-style label graph construction, the graph-guided Transformer decoder, the single-logits composite multi-label loss, training and evaluation scripts, configuration files, split-generation instructions, and ablation settings. The repository does not redistribute ChestX-ray14, CheXpert, or MIMIC-CXR-JPG; users should obtain these datasets from their official sources according to the corresponding data-use agreements.
+
+## Declarations
+
+## Competing Interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+Guokun Shi and Zijian Wang contributed equally to this work.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The datasets analyzed during the current study are publicly available. The CheXpert dataset is available from Stanford University (https://stanfordmlgroup.github.io/competitions/chexpert/), and the ChestX-ray14 dataset is available from the National Institutes of Health (https://nihcc.app.box.com/v/ChestXray-NIHCC)1,2. The MIMIC-CXR-JPG dataset is available from the PhysioNet repository (https://physionet.org/content/mimic-cxr-jpg/), subject to credentialed access35. The public code repository provides split-generation scripts and preprocessing instructions; the original datasets are not redistributed and should be downloaded from their official sources according to the corresponding data-use agreements.
+The source code, training and evaluation scripts, and configuration files for the proposed method are publicly available at: https://github.com/sgk020204-a11y/DCAF-GCN-CXR. The released repository includes the implementation of the ViT–DenseNet visual encoder, the DCAF module, the ML-GCN-style label graph construction, the graph-guided Transformer decoder, the single-logits composite multi-label loss, training and evaluation scripts, configuration files, split-generation instructions, and ablation settings. The repository does not redistribute ChestX-ray14, CheXpert, or MIMIC-CXR-JPG; users should obtain these datasets from their official sources according to the corresponding data-use agreements.
+
+## Table Table 1: Statistics of ChestX-ray14 lesion labels in the training and test splits. The training split contains images with 58,067 positive label occurrences. Images labeled No Finding are retained in the dataset but excluded from the 14-lesion statistics. The independent test split contains images with 27,206 positive label occurrences.
+Label | Train positive (count) | Train share (%) | Test positive (count) | Test share (%)
+Infiltration | 14,204 | 24.46% | 6,112 | 22.47%
+Effusion | 9089 | 15.65% | 4,658 | 17.12%
+Atelectasis | 8531 | 14.69% | 3,279 | 12.05%
+Mass | 5782 | 9.96% | 1,748 | 6.43%
+Nodule | 5027 | 8.66% | 1,623 | 5.97%
+Consolidation | 3091 | 5.32% | 1,815 | 6.67%
+Pneumothorax | 2860 | 4.93% | 2,665 | 9.80%
+Pleural_Thickening | 2421 | 4.17% | 1,143 | 4.20%
+Cardiomegaly | 1746 | 3.01% | 1,069 | 3.93%
+Emphysema | 1525 | 2.63% | 1,093 | 4.02%
+Edema | 1441 | 2.48% | 925 | 3.40%
+Fibrosis | 1291 | 2.22% | 435 | 1.60%
+Pneumonia | 910 | 1.57% | 555 | 2.04%
+Hernia | 149 | 0.26% | 86 | 0.32%
+
+## Table Table 2: Statistics of CheXpert label occurrences computed from the full train_val.csv file before the random 70%/10%/20% split. The dataset contains samples with a total of 515,589 positive label occurrences. Only label value 1 is counted as positive, while -1 (uncertain) is treated as 0 (negative).
+Label | Positive (count) | Share (%)
+Support devices | 116,001 | 22.50%
+Lung opacity | 105,581 | 20.48%
+Pleural effusion | 86,187 | 16.72%
+Edema | 52,246 | 10.13%
+Atelectasis | 33,376 | 6.47%
+Cardiomegaly | 27,000 | 5.24%
+No finding | 22,381 | 4.34%
+Pneumothorax | 19,448 | 3.77%
+Consolidation | 14,783 | 2.87%
+Enlarged cardiomediastinum | 10,798 | 2.09%
+Lung lesion | 9186 | 1.78%
+Fracture | 9040 | 1.75%
+Pneumonia | 6039 | 1.17%
+Pleural other | 3523 | 0.68%
+
+## Table Table 3: Main comparison on ChestX-ray14. The table reports per-label AUC and Mean AUC following the official ChestX-ray14 evaluation protocol. The reported results of the proposed method are averaged over three independent runs (seeds 0, 1, and 2). Ate atelectasis, Con consolidation, Inf infiltration, Ptx pneumothorax, Ede edema, Emp emphysema, Fib fibrosis, Eff effusion, Pna pneumonia, PT pleural thickening, Car cardiomegaly, Nod nodule, Mas mass, Her hernia.
+Method | Ate | Con | Inf | Ptx | Ede | Emp | Fib | Eff | Pna | PT | Car | Nod | Mas | Her | Mean
+Wang et al. 1 | 0.716 | 0.708 | 0.609 | 0.806 | 0.835 | 0.815 | 0.769 | 0.784 | 0.633 | 0.708 | 0.807 | 0.671 | 0.706 | 0.767 | 0.738
+Li et al. 36 | 0.800 | 0.800 | 0.700 | 0.870 | 0.880 | 0.910 | 0.780 | 0.870 | 0.670 | 0.760 | 0.870 | 0.750 | 0.830 | 0.770 | 0.804
+AG-CNN 11 | 0.781 | 0.754 | 0.702 | 0.857 | 0.850 | 0.908 | 0.830 | 0.829 | 0.729 | 0.778 | 0.880 | 0.773 | 0.834 | 0.917 | 0.816
+Jin et al. 15 | 0.797 | 0.725 | 0.724 | 0.869 | 0.860 | 0.933 | 0.849 | 0.844 | 0.739 | 0.753 | 0.911 | 0.802 | 0.836 | 0.916 | 0.826
+ImageGCN 30 | 0.802 | 0.796 | 0.702 | 0.900 | 0.883 | 0.915 | 0.825 | 0.874 | 0.715 | 0.791 | 0.894 | 0.768 | 0.843 | 0.943 | 0.832
+SynthEnsemble 6 | 0.823 | 0.810 | 0.731 | 0.900 | 0.902 | 0.921 | 0.816 | 0.882 | 0.761 | 0.801 | 0.908 | 0.798 | 0.862 | 0.883 | 0.842
+CXR-MLAGCPL 34 | 0.799 | 0.810 | 0.717 | 0.873 | 0.901 | 0.882 | 0.799 | 0.877 | 0.763 | 0.783 | 0.904 | 0.728 | 0.810 | 0.941 | 0.828
+Med-DGTN 37 | 0.829 | 0.807 | 0.739 | 0.901 | 0.881 | 0.922 | 0.813 | 0.875 | 0.781 | 0.755 | 0.907 | 0.770 | 0.851 | 0.945 | 0.841
+Ours | 0.803 | 0.790 | 0.742 | 0.903 | 0.902 | 0.936 | 0.856 | 0.843 | 0.781 | 0.812 | 0.913 | 0.806 | 0.863 | 0.948 | 0.849
+
+## Table Table 4: Main comparison and uncertainty-label analysis on CheXpert. The table reports representative published results together with our 14-label results under the internal 70%/10%/20% training/validation/testing partition of the publicly released train_val.csv file. Because published studies may use different split protocols, label subsets, and uncertainty-label policies, these values are intended as contextual reference rather than a strictly protocol-matched comparison. The reported results of the proposed method are averaged over three independent runs (seeds 0, 1, and 2) under the corresponding uncertainty-label policy. NoFi no finding, Enla enlarged cardiomediastinum, Card cardiomegaly, Opac lung opacity, Lesi lung lesion, Edem edema, Cons consolidation, Pna pneumonia, Atel atelectasis, Ptx pneumothorax, PEff pleural effusion, POther pleural other, Frac fracture, Supp support devices.
+Method | NoFi | Enla | Card | Opac | Lesi | Edem | Cons | Pna | Atel | Ptx | PEff | POther | Frac | Supp | Mean
+ML-GCN 7 | 0.864 | 0.673 | 0.831 | 0.681 | 0.802 | 0.770 | 0.713 | 0.758 | 0.654 | 0.845 | 0.841 | 0.764 | 0.754 | 0.838 | 0.771
+U_Zeros 2 | 0.885 | 0.678 | 0.865 | 0.730 | 0.760 | 0.853 | 0.735 | 0.740 | 0.700 | 0.872 | 0.880 | 0.775 | 0.743 | 0.877 | 0.792
+Swin-T 16 | 0.845 | 0.611 | 0.800 | 0.706 | 0.720 | 0.791 | 0.674 | 0.719 | 0.679 | 0.761 | 0.834 | 0.675 | 0.682 | 0.774 | 0.734
+LCHL_0s 31 | 0.835 | 0.624 | 0.816 | 0.712 | 0.733 | 0.820 | 0.679 | 0.711 | 0.701 | 0.764 | 0.818 | 0.766 | 0.731 | 0.817 | 0.752
+CXRMLAGCPL_0s 34 | 0.898 | 0.665 | 0.864 | 0.748 | 0.786 | 0.847 | 0.708 | 0.773 | 0.741 | 0.885 | 0.890 | 0.825 | 0.782 | 0.856 | 0.805
+Ours (U-Zeros) | 0.901 | 0.682 | 0.865 | 0.760 | 0.811 | 0.853 | 0.750 | 0.775 | 0.744 | 0.886 | 0.885 | 0.830 | 0.786 | 0.879 | 0.815
+Ours (U-Ones) | 0.892 | 0.674 | 0.858 | 0.752 | 0.803 | 0.846 | 0.742 | 0.768 | 0.738 | 0.878 | 0.879 | 0.823 | 0.779 | 0.872 | 0.807
+
+## Table Table 5: Component-wise ablation study on ChestX-ray14 (mean AUC, %).
+Setting | Visual encoder | Classifier | Mean AUC (%)
+ML-GCN baseline | ResNet | GCN classifier | 76.1
+DenseNet branch only | DenseNet | GCN classifier | 82.0
+ViT branch only | ViT | GCN classifier | 82.3
+ViT + DenseNet + DCAF | ViT + DenseNet + DCAF | GCN classifier | 83.2
+Full model | ViT + DenseNet + DCAF | Graph-guided cross-attention classifier | 84.9
+
+## Table Table 6: Fine-grained ablation of the DCAF module on ChestX-ray14. The fusion-stage group evaluates where DenseNet and ViT features should interact, while the fusion-mechanism group evaluates how the aligned features should be fused. The default configuration is with bidirectional DCAF.
+Ablation group | Variant | Mean AUC (%) | vs. group default
+Fusion stage |  | 83.5 | -1.4
+only | 84.2 | -0.7
+only | 84.1 | -0.8
+ | 84.9 | –
+Fusion mechanism | Concatenation | 83.5 | -1.4
+Weighted sum | 83.7 | -1.2
+Unidirectional DCAF (ViT-to-DenseNet) | 84.2 | -0.7
+Unidirectional DCAF (DenseNet-to-ViT) | 84.1 | -0.8
+Bidirectional DCAF | 84.9 | –
+
+## Table Table 7: Effect of ViT initialization on ChestX-ray14. All variants use the same DenseNet branch, DCAF module, ML-GCN-style label graph, decoder, and training protocol; only ViT initialization is changed.
+ViT initialization | Mean AUC (%) | vs. MAE
+Random initialization | 82.9 | -2.0
+ImageNet supervised initialization | 83.8 | -1.1
+MAE-pretrained initialization | 84.9 | –
+
+## Table Table 8: Ablation study of ML-GCN-style label graph construction on ChestX-ray14. The default setting uses thresholded conditional co-occurrence edges, ML-GCN re-weighting, and GloVe label-name embeddings as node features.
+Label graph setting | Mean AUC (%) | vs. default
+Learnable label queries without GCN | 83.8 | -1.1
+Binary matrix () + GloVe node features | 84.3 | -0.6
+Re-weighted matrix (, ) + one-hot node features | 84.1 | -0.8
+Re-weighted matrix (, ) + GloVe node features (default) | 84.9 | –
+
+## Table Table 9: Category-wise attribution analysis on ChestX-ray14. w/o DCAF and w/o graph-guided decoder denote the AUC drop after removing the corresponding component from the full model.
+Category | Full model AUC | w/o DCAF | w/o graph-guided decoder | Primary interpretation
+Nodule | 0.806 | -0.024 | -0.011 | Multi-scale visual fusion
+Fibrosis | 0.856 | -0.020 | -0.009 | Multi-scale visual fusion
+Effusion | 0.843 | -0.010 | -0.021 | Label correlation reasoning
+Atelectasis | 0.803 | -0.012 | -0.019 | Label correlation reasoning
+Infiltration | 0.742 | -0.008 | -0.010 | Ambiguous weak label
+Consolidation | 0.790 | -0.009 | -0.011 | Ambiguous weak label
+
+## Table Table 10: Analysis of No Finding and healthy-sample prediction of the final model on CheXpert. Healthy specificity evaluates whether healthy samples are correctly kept negative for disease labels, while diseased sensitivity evaluates whether images with at least one disease label are detected as abnormal.
+Method | No finding AUC | Healthy specificity | Diseased sensitivity | Mean AUC
+Full model | 0.901 | 0.866 | 0.823 | 0.815
+
+## Table Table 11: Preliminary shared-label cross-dataset analysis of the final model on seven semantically matched labels between ChestX-ray14 and CheXpert. The model is trained on the source dataset and directly evaluated on the target dataset without target-domain fine-tuning. Mean AUC is computed over the seven shared labels only. These results are intended as complementary evidence rather than complete clinical external validation.
+Method | ChestX-ray14 CheXpert | CheXpert ChestX-ray14 | Average
+Full model | 0.752 | 0.767 | 0.760
+
+## Table Table 12: Computational efficiency comparison on ChestX-ray14. Params denotes trainable parameters, and FLOPs are computed for a single input image. Latency and peak GPU memory are measured under evaluation mode with batch size 1 on a single NVIDIA RTX A6000 GPU to reflect single-image inference cost.
+Method | Params (M) | FLOPs (G) | Latency (ms/img) | Memory (GB) | Mean AUC (%)
+DenseNet branch only | 8.1 | 11.5 | 18.4 | 1.3 | 82.0
+ViT branch only | 86.6 | 55.4 | 37.8 | 2.7 | 82.3
+ViT + DenseNet + DCAF | 102.4 | 72.8 | 58.6 | 4.6 | 83.2
+Full model | 108.9 | 75.3 | 64.2 | 4.9 | 84.9
+
+## Figure Fig. 1: Overall architecture of the proposed framework. The model uses DenseNet-121 and ViT as heterogeneous visual encoders, applies DCAF to obtain the fused visual memory, initializes label queries with GCN-refined label embeddings, and predicts a single logits matrix Z for multi-label classification. The circled “C” denotes feature concatenation, and the sigmoid layer converts logits into label probabilities.
+
+## Figure Fig. 2: Principle of the cross-attention operation used in DCAF. The query feature interacts with the key feature through scaled dot-product attention to generate normalized attention weights, which are then applied to the value feature to aggregate source information. In DCAF, this operation is performed in both directions between DenseNet convolutional feature maps and ViT token features.
+
+## Figure Fig. 3: Structure of the DCAF module. DenseNet feature maps and ViT feature maps are aligned at scale , flattened into token sequences, and refined through bidirectional cross-attention. The updated features are concatenated and projected to obtain , and the multi-scale outputs are aggregated to form the final visual memory feature map F.
+
+## Figure Algorithm 1: Training pipeline of the proposed framework
+
+## Figure Fig. 4: ChestX-ray14 label co-occurrence statistics and conditional probability matrices. These visualizations are descriptive; the graph used for training is computed from the training split only.
+
+## Figure Fig. 5: CheXpert label co-occurrence statistics and conditional probability matrices. These visualizations are descriptive; the graph used for training is computed from the training split only.
+
+## Figure Fig. 6: Validation performance curves of the full model. The figure reports the validation Mean AUC and validation loss under the final training protocol.
+
+## Figure Fig. 7: Qualitative Grad-CAM visualization for two representative CXR cases. The first row shows a pneumonia case, and the second row shows a pleural effusion case. For each case, the leftmost image shows the input radiograph with manually indicated reference regions, followed by the Grad-CAM heatmap of the DenseNet-121 baseline and that of the proposed method. The thin dashed red rectangles denote approximate visually suspicious regions and are provided only as visual references for qualitative comparison. In the pneumonia case, the reference regions are placed around bilateral lower-lung suspicious opacities. In the pleural effusion case, the reference regions are placed around bilateral lower pleural and costophrenic-angle areas. These manually indicated regions are not ground-truth localization annotations and are not used for training, model selection, or quantitative evaluation.

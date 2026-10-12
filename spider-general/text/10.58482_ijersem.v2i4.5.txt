@@ -1,0 +1,277 @@
+Design and Development of a Spider-Inspired Hexapod Robot for Disaster Search and Rescue Operations Using Embedded Systems and AI-Based Vision
+M Pavani, K Sirisha, K Sreeja, V Sudharani, R Vishnu, A Babulu (2026). International Journal of Emerging Research in Science Engineering and Management. https://doi.org/10.58482/ijersem.v2i4.5. doi:10.58482/ijersem.v2i4.5. Licence: cc-by. Text from pdf.
+
+International Journal of Emerging Research in Science, Engineering, and Management
+Vol. 2, Issue 4, pp.30-34, April 2026.
+
+www.ijersem.com eISSN - 3107-9075
+
+Design and Development of a Spider-Inspired
+Hexapod Robot for Disaster Search and
+Rescue Operations Using Embedded Systems
+and AI-Based Vision
+1
+
+M Pavani, 2K Sirisha, 3K Sreeja, 4V Sudharani, 5R Vishnu,
+6
+A Babulu
+Department of ECE, Gokula Krishna College of Engineering, Sullurupet, AP, India.
+1meddurugopi@gmail.com, 2sirishak102@gmail.com, 3srijakuvvakuli@gmail.com,
+4sudharanivayyavuru@gmail.com, 5vishnuravuri80@gmail.com, 6babulu.adi@gmail.com
+
+Abstract: Natural and man-made disasters such as earthquakes, landslides, fires, and structural collapses create hazardous environments that
+pose significant risks to human rescuers. To address these challenges, this paper presents the design and development of a spider-inspired hexapod
+robot for disaster search and rescue operations. The proposed system utilizes a six-legged bio-inspired structure that enables stable locomotion
+over uneven terrain, rubble, and confined spaces. The robot is equipped with an embedded control system based on an ESP32 microcontroller,
+which coordinates servo-driven leg movements using a tripod gait mechanism to ensure continuous stability. Additionally, a vision-based human
+detection system is implemented using a camera module integrated with YOLO (You Only Look Once) and Open CV for real-time object
+detection. The system communicates detection results via UART to enable responsive robot behavior such as stopping and alert generation.
+Power management is enhanced through the use of a buck converter and battery management system (BMS), ensuring stable and efficient
+operation. The proposed robot significantly improves terrain adaptability, fault tolerance, and operational safety compared to traditional wheeled
+and tracked robots. Experimental results demonstrate reliable locomotion, accurate human detection, and efficient power utilization. This work
+contributes to reducing human exposure to dangerous environments and enhances the effectiveness of disaster response operations.
+Keywords: Hexapod robot, disaster response, bio-inspired robotics, ESP32, YOLO.
+
+1 INTRODUCTION
+Natural and man-made disasters such as earthquakes, landslides, industrial accidents, fires, and building collapses often lead
+to severe destruction of infrastructure and pose a significant threat to human life. In such critical situations, rapid and efficient
+search and rescue operations are essential to locate survivors, assess environmental conditions, and minimize casualties [1].
+However, disaster environments are highly unpredictable and hazardous, characterized by uneven terrain, unstable debris, narrow
+passages, toxic gases, and poor visibility. These factors make it extremely difficult and dangerous for human rescuers to operate
+effectively [2]. Traditional rescue systems rely heavily on human intervention supported by conventional robotic platforms such
+as wheeled and tracked robots.
+Although these systems are widely used due to their simplicity and cost-effectiveness, they suffer from major limitations in
+complex disaster scenarios [3]. Wheeled robots require relatively smooth surfaces and often fail in rubble-filled environments due
+to slippage, obstacles, and gaps. Similarly, tracked robots provide better traction but consume high power, exhibit limited
+maneuverability in confined spaces, and struggle to navigate irregular terrain [4]. To overcome these limitations, bio-inspired
+robotics has emerged as a promising approach for designing efficient and adaptable robotic systems. In particular, hexapod robots
+inspired by insects and spiders have gained attention due to their superior stability, mobility, and fault tolerance [5]. A six-legged
+configuration ensures that multiple legs remain in contact with the ground at any time, allowing the robot to maintain balance even
+when one or more legs lose support. This makes hexapod robots highly suitable for navigating uneven and unpredictable terrains
+commonly found in disaster zones [6].
+This paper presents the design and development of a spider-inspired hexapod robot for disaster search and rescue operations.
+The proposed system integrates an ESP32-based embedded control unit for real-time gait coordination, along with servo-driven
+leg mechanisms that implement a tripod gait pattern for enhanced stability [7]. Furthermore, the robot incorporates a vision-based
+human detection system using a camera module, OpenCV, and YOLO (You Only Look Once) algorithm to identify survivors in
+real time [8]. The primary objective of this work is to reduce human exposure to dangerous environments while improving the
+efficiency, reliability, and responsiveness of disaster rescue operations [9].
+
+IJERSEM@2026
+
+https://doi.org/10.58482/ijersem.v2i4.5
+
+30
+
+International Journal of Emerging Research in Science, Engineering, and Management
+Vol. 2, Issue 4, pp.30-34, April 2026.
+
+www.ijersem.com eISSN - 3107-9075
+By combining bio-inspired mechanical design, embedded systems, and artificial intelligence, the proposed hexapod robot
+provides a robust and scalable solution for next-generation rescue missions.
+2 RELATED WORK
+The field of bio-inspired robotics has seen significant advancements in recent years, particularly in the development of hexapod
+robots for navigation in complex environments [1]. Early research on insect-inspired hexapod robots (2018–2019) focused on
+implementing basic locomotion strategies such as tripod gait and wave gait patterns to achieve stable walking. These systems
+demonstrated the feasibility of multi-legged locomotion; however, they primarily relied on open-loop control mechanisms without
+real-time feedback [2]. As a result, their performance was limited in unpredictable terrains, often leading to instability and
+inefficient movement. Subsequent developments in servo-based spider robot prototypes introduced cost-effective designs using
+multiple servo motors for leg actuation [3]. While these systems enabled basic walking and maneuvering capabilities, they faced
+challenges related to servo synchronization, high current consumption, and frequent system resets due to inadequate power
+management.
+These limitations highlighted the need for improved control architectures and efficient power regulation techniques [4]. In
+parallel, disaster response robotics research explored the use of wheeled and tracked robots for inspection and rescue tasks. Tracked
+robots, introduced around 2020, offered improved traction and were capable of operating in rough terrains [5]. However, they
+suffered from high power consumption, limited maneuverability in confined spaces, and difficulty in overcoming large obstacles
+or debris. Similarly, quadruped robots developed in 2021 provided better mobility than wheeled systems but lacked the stability
+and fault tolerance required for reliable operation in disaster scenarios [6]. The failure of a single leg could significantly affect
+their balance and performance [7]. Recent advancements in hexapod robotics (2022–2023) have focused on improving fault
+tolerance and adaptability [8].
+Fault-tolerant hexapod systems introduced mechanisms to maintain locomotion even when one or more legs malfunction.
+Additionally, sensor-fusion approaches incorporated inertial measurement units (IMU) and force sensors to enhance terrain
+adaptability and stability [9]. However, these systems often involved high computational complexity and lacked efficient real-time
+perception capabilities for tasks such as human detection [10]. To address these challenges, the proposed system integrates adaptive
+gait control with efficient embedded processing and AI-based vision capabilities [11]. Unlike earlier approaches, this work
+combines stable tripod gait locomotion, optimized power management using a servo driver (PCA9685), buck converter, and battery
+management system (BMS), along with real-time human detection using YOLO and OpenCV [12]. This integrated approach
+enhances stability, reduces power consumption, and enables intelligent decision-making, making the system more suitable for
+practical disaster search and rescue applications.
+3 METHODOLOGY
+The proposed spider-inspired hexapod robot is designed by integrating mechanical structure, embedded control, vision-based
+detection, communication, and power management systems into a unified framework suitable for disaster search and rescue
+operations. The system is divided into two primary subsystems: the locomotion and control unit based on an ESP32
+microcontroller, and the vision processing unit responsible for human detection. The ESP32 acts as the central controller,
+generating real-time control signals for servo motors and coordinating gait movement, while the vision system processes
+environmental data and communicates detection results to the controller through a serial interface. Fig. 1 shows the block diagram.
+
+Fig. 1. Block Diagram
+
+IJERSEM@2026
+
+https://doi.org/10.58482/ijersem.v2i4.5
+
+31
+
+International Journal of Emerging Research in Science, Engineering, and Management
+Vol. 2, Issue 4, pp.30-34, April 2026.
+
+www.ijersem.com eISSN - 3107-9075
+The mechanical design of the robot follows a bio-inspired hexapod structure, where six legs provide enhanced stability and
+adaptability compared to conventional wheeled or tracked robots. Each leg consists of three joints—coxa, femur, and tibia—driven
+by high-torque MG995 servo motors, enabling multi-degree-of-freedom movement. The robot utilizes a tripod gait locomotion
+strategy in which three alternate legs remain in contact with the ground while the other three move forward. This gait ensures
+continuous stability, balanced weight distribution, and efficient traversal over uneven terrain such as rubble and debris commonly
+found in disaster environments . The embedded control system is implemented using the ESP32 microcontroller, which offers high
+processing capability along with integrated Wi-Fi and Bluetooth features. The ESP32 generates Pulse Width Modulation (PWM)
+signals required to control multiple servo motors simultaneously. To improve signal stability and reduce computational load, a
+PCA9685-based servo driver is employed, which ensures synchronized operation of all servos and eliminates jitter issues observed
+in earlier designs.
+The controller executes predefined gait algorithms and responds dynamically to inputs received from the vision system,
+enabling real-time decision-making during navigation [2]. For intelligent perception, the system incorporates a vision-based human
+detection module using a camera interfaced with a processing unit. The captured video frames are processed using OpenCV for
+preprocessing tasks such as resizing and filtering, followed by the application of the YOLO (You Only Look Once) algorithm for
+real-time object detection. YOLO identifies human presence by generating bounding boxes around detected individuals in each
+frame. This approach ensures high detection accuracy and low latency, making it suitable for time-critical rescue operations. Upon
+detection, the system sends corresponding signals to the ESP32 controller via UART communication, enabling responsive actions
+such as stopping the robot or triggering alerts [3].
+The communication between the vision system and the control unit is established using UART (Universal Asynchronous
+Receiver-Transmitter), a reliable and low-latency serial communication protocol. This interface allows efficient transmission of
+detection signals, positional data, and control commands, ensuring seamless integration between perception and motion
+subsystems. The low complexity and robustness of UART make it suitable for embedded robotic applications where real-time
+performance is essential [4]. To ensure stable and efficient operation, a dedicated power management system is implemented. The
+robot is powered by a 12V lithium-ion battery, which supplies energy to all components.
+A buck converter is used to step down the voltage to required levels (5V, 6V, and 3.3V) for different modules, while a Battery
+Management System (BMS) provides protection against overcharging, over-discharging, and short circuits. This arrangement
+prevents voltage fluctuations, enhances battery life, and ensures reliable system performance during prolonged operations in
+disaster environments [5]. Additionally, an alert mechanism using buzzers is incorporated to provide immediate feedback during
+operation. When a human is detected, the buzzer generates an audible signal, assisting rescue teams in identifying the location of
+survivors [6]. The overall workflow of the system begins with locomotion using tripod gait, followed by continuous environment
+monitoring through the vision system. Fig. 2 shows the flowchart of the methodology.
+
+Fig. 2. Flowchart of Proposed Method
+
+IJERSEM@2026
+
+https://doi.org/10.58482/ijersem.v2i4.5
+
+32
+
+International Journal of Emerging Research in Science, Engineering, and Management
+Vol. 2, Issue 4, pp.30-34, April 2026.
+
+www.ijersem.com eISSN - 3107-9075
+Upon detecting a human, the system communicates the information to the controller, which triggers appropriate actions such
+as stopping, alerting, or repositioning. This integrated approach ensures efficient navigation, real-time detection, and enhanced
+safety, making the proposed hexapod robot a reliable solution for disaster search and rescue applications.
+4 RESULTS AND DISCUSSION
+The performance of the proposed spider-inspired hexapod robot was evaluated under simulated disaster-like conditions to
+analyse its effectiveness in navigation, stability, human detection, and overall system reliability. Experimental observations
+indicate that the robot achieves stable locomotion using the tripod gait mechanism, where three legs maintain continuous ground
+contact while the remaining legs move forward. This configuration ensures improved balance and minimizes the risk of instability
+when traversing uneven surfaces such as rubble, debris, and inclined terrain. Compared to conventional wheeled and tracked
+robots, the hexapod structure demonstrated superior adaptability by stepping over obstacles rather than being obstructed by them,
+thereby enhancing mobility in complex environments. Fig. 3 shows the hexabot robot.
+
+Fig. 3. Hexapod Robot
+The embedded control system, based on the ESP32 microcontroller and PCA9685 servo driver, provided efficient and
+synchronized control of all servo motors. The use of the servo driver significantly reduced timing issues and eliminated servo
+jitter, which were common limitations in earlier designs. Additionally, the integration of a buck converter and battery management
+system (BMS) ensured a stable power supply, preventing voltage fluctuations and unexpected system resets. This resulted in
+improved power efficiency and extended operational time, which are critical for real-time rescue missions where uninterrupted
+operation is required. The vision-based human detection module, implemented using OpenCV and the YOLO algorithm,
+demonstrated reliable performance in identifying human presence within the robot’s field of view. The system was capable of
+detecting humans in real time with acceptable accuracy and low latency, even under moderate variations in lighting and
+environmental conditions.
+Detected individuals were highlighted using bounding boxes, enabling clear identification. The communication between the
+vision processing unit and the ESP32 controller via UART was observed to be stable and responsive, allowing immediate execution
+of actions such as stopping the robot and activating alert mechanisms upon detection. The system performance was further analysed
+using key performance metrics, including locomotion stability, terrain adaptability, servo synchronization, motion accuracy, power
+efficiency, human detection accuracy, communication reliability, and response time. The results indicate that the proposed system
+achieves a balanced trade-off between computational efficiency and functional performance.
+While more advanced systems incorporating sensor fusion and high-end processors may provide higher precision, they often
+come at the cost of increased complexity and power consumption. In contrast, the proposed approach utilizes a lightweight
+embedded system with sufficient accuracy and responsiveness, making it more practical for real-world deployment in disaster
+scenarios. Overall, the experimental results validate that the spider-inspired hexapod robot provides a stable, efficient, and
+intelligent solution for disaster search and rescue operations. The integration of bio-inspired locomotion, embedded control, and
+AI-based vision enhances the robot’s capability to navigate hazardous environments and detect human presence effectively,
+thereby reducing risks to human rescuers and improving the efficiency of rescue missions.
+
+IJERSEM@2026
+
+https://doi.org/10.58482/ijersem.v2i4.5
+
+33
+
+International Journal of Emerging Research in Science, Engineering, and Management
+Vol. 2, Issue 4, pp.30-34, April 2026.
+
+www.ijersem.com eISSN - 3107-9075
+5 CONCLUSION
+This paper presented the design and development of a spider-inspired hexapod robot for disaster search and rescue operations.
+The proposed system successfully integrates bio-inspired mechanical design, embedded control using ESP32, and AI-based vision
+techniques to address the limitations of traditional rescue robots. The hexapod structure, combined with tripod gait locomotion,
+provides enhanced stability, fault tolerance, and adaptability to uneven terrains, making it highly suitable for navigating complex
+disaster environments. The implementation of a real-time human detection system using YOLO and OpenCV enables the robot to
+identify survivors efficiently and respond through alert mechanisms. Additionally, the use of a servo driver, buck converter, and
+battery management system ensures stable operation, reduced power consumption, and improved system reliability. Experimental
+results demonstrate that the proposed robot can effectively traverse rough terrains, maintain balance, and perform accurate human
+detection with minimal latency. Overall, the system reduces the risk to human rescuers by enabling remote exploration of
+hazardous zones and improves the efficiency of rescue operations. The project validates the feasibility of hexapod robots as
+intelligent assistive tools in disaster response scenarios and provides a strong foundation for future advancements in bio-inspired
+robotics and autonomous systems.
+FUNDING INFORMATION
+This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+ETHICS STATEMENT
+This study did not involve human or animal subjects and, therefore, did not require ethical approval.
+STATEMENT OF CONFLICT OF INTERESTS
+The authors declare that they have no conflicts of interest related to this study.
+LICENSING
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+REFERENCES
+[1]
+[2]
+[3]
+[4]
+[5]
+[6]
+[7]
+[8]
+[9]
+[10]
+[11]
+[12]
+
+G J. Chen, Y. Liu, J. Zhao, H. Zhang, and H. Jin, “Biomimetic design and optimal swing of a hexapod robot leg,”
+Journal of Bionic Engineering, vol. 11, no. 1, pp. 26–35, Jan. 2014, doi: 10.1016/s1672-6529(14)60017-2.
+K.-J. Huang, S.-C. Chen, H. Komsuoglu, G. Lopes, J. Clark, and P.-C. Lin, “Design and performance evaluation of
+a Bio-Inspired and Single-Motor-Driven Hexapod robot with dynamical GAITS,” Journal of Mechanisms and
+Robotics, vol. 7, no. 3, Mar. 2015, doi: 10.1115/1.4029975.
+G. Fang and J. Cheng, “Advances in climbing robots for vertical structures in the past decade: A review,”
+Biomimetics, vol. 8, no. 1, p. 47, Jan. 2023, doi: 10.3390/biomimetics8010047.
+M. Agheli, S. G. Faal, F. Chen, H. Gong and C. D. Onal, "Design and fabrication of a foldable hexapod robot towards
+experimental swarm applications," 2014 IEEE International Conference on Robotics and Automation (ICRA), Hong
+Kong, China, 2014, pp. 2971-2976, doi: 10.1109/ICRA.2014.6907287.
+J. Chen, Y. Liu, J. Zhao, H. Zhang, and H. Jin, “Biomimetic design and optimal swing of a hexapod robot leg,”
+Journal of Bionic Engineering, vol. 11, no. 1, pp. 26–35, Jan. 2014, doi: 10.1016/s1672-6529(14)60017-2.
+G. Fang and J. Cheng, “Advances in climbing robots for vertical structures in the past decade: A review,”
+Biomimetics, vol. 8, no. 1, p. 47, Jan. 2023, doi: 10.3390/biomimetics8010047.
+Q. Tan et al., “Underwater crawling robot with hydraulic soft actuators,” Frontiers in Robotics and AI, vol. 8, p.
+688697, Aug. 2021, doi: 10.3389/frobt.2021.688697.
+V. R, L. K, P. Venkatesh, W. P. Filho, M. E. Camargo, and M. Sathiyanarayanan, “Hexapod robot for enhancing
+emergency response in disaster scenarios,” Discover Applied Sciences, Mar. 2026, doi: 10.1007/s42452-026-084182.
+B. You, H. She, J. Li, and C. Chen, “Hazard-constrained global-local path planning for fault-tolerant hexapod robots
+on unstructured terrain,” Mechatronics, vol. 114, p. 103438, Dec. 2025, doi: 10.1016/j.mechatronics.2025.103438.
+Y. Su et al., “A dual-layer multi-objective optimization method for structural and legged mechanism integrated
+design of heavy-duty hexapod robots,” Mechanism and Machine Theory, vol. 221, p. 106373, Feb. 2026, doi:
+10.1016/j.mechmachtheory.2026.106373.
+S. Huang, M. Zheng, Z. Hu, and P. X. Liu, “Enhancing hexapod robot mobility on challenging terrains: Optimizing
+CPG-generated gait with reinforcement learning,” Neurocomputing, vol. 622, p. 129328, Jan. 2025, doi:
+10.1016/j.neucom.2024.129328.
+Y. Zhao, X. Chai, F. Gao, and C. Qi, “Obstacle avoidance and motion planning scheme for a hexapod robot OctopusIII,” Robotics and Autonomous Systems, vol. 103, pp. 199–212, Feb. 2018, doi: 10.1016/j.robot.2018.01.007.
+
+IJERSEM@2026
+
+https://doi.org/10.58482/ijersem.v2i4.5
+
+34
+
+

@@ -1,0 +1,201 @@
+XGBoost regression for robust acoustic impedance prediction in the absence of density and sonic logs.
+Saleh K, El Hameedy MA, Mabrouk WM, Metwally A. (2025). Scientific reports. . doi:10.1038/s41598-025-24727-9. Licence: cc-by. Text from europepmc-xml.
+
+# XGBoost regression for robust acoustic impedance prediction in the absence of density and sonic logs
+
+## Abstract
+AbstractAcoustic impedance (Z) is a fundamental parameter in geophysical subsurface characterization, governing seismic reflection coefficients and enabling reservoir property quantification through seismic inversion. Conventional derivation of Z relies on density (ρ) and P-wave velocity (Vp) logs, yet these datasets are frequently unavailable due to operational constraints, tool limitations, or borehole irregularities. Existing empirical methods, such as neutron porosity-based formulas, suffer from restrictive assumptions -including matrix/fluid constant dependencies, low shale tolerance (< 25%), and negligible secondary porosity - that limit applicability in heterogeneous formations. To overcome these challenges, we present a robust machine learning workflow that predicts Z directly from commonly available well logs, circumventing the need for sonic or density data. A multi-well dataset comprising gamma-ray (GR), neutron porosity (NPHI), deep resistivity (RD), and formation tops were analyzed. Pearson correlation identified GR, NPHI, and log-transformed resistivity (RDlog) as optimal predictors. Data preprocessing included Isolation Forest-based outlier removal and logarithmic resistivity transformation. The XGBoost regressor - selected for its scalability in handling nonlinear interactions - was trained on 80% of the data, with hyperparameters optimized via cross-validated grid search. Model performance was evaluated using mean absolute error (MAE), root MSE (RMSE), and coefficient of determination (R²). The optimized model achieved an R² of 0.916 (training) and 0.808 (testing), with RMSE values of 718.3 and 1070, respectively. Independent validation on a blind well demonstrated strong generalization (R² = 0.869, RMSE = 981.3), with predicted Z logs showing stratigraphic fidelity and suppression of high-amplitude artifacts inherent to sonic-derived impedance. Compared to empirical methods, the ML workflow eliminates reliance on matrix/fluid constants, accommodates shale volumes > 25%, and mitigates errors from secondary porosity or gas effects. This provides a scalable, cost-effective solution to enhance seismic inversion accuracy in data-scarce or complex lithological settings.Keywords: Acoustic impedance, Machine learning, XGBoost, Seismic inversion, Reservoir characterizationSubject terms: Geology, Geophysics
+
+## Introduction
+
+## Background
+Acoustic impedance (AI or Z, typically in (g/cm³)·(m/s)) is a fundamental rock property that links borehole logs to seismic data. It is defined as the product of rock density (ρ) and P-wave velocity (Vp). Importantly, Z correlates inversely with porosity: higher-porosity sandstones tend to have lower acoustic impedance than tighter shales1. This makes Z a key seismic attribute for reservoir analysis - low-Z zones often indicate porous, hydrocarbon-bearing sands, while high-Z zones suggest compact shale or carbonates2. Quantitative seismic inversion routinely targets Z because it provides a continuous subsurface impedance volume that can be directly related to lithology and fluid content3. For example, it has long been recognized that multi-attribute inversion of seismic to Z can greatly reduce uncertainty in reservoir forecasting4,5 and low Z anomalies often guide well placement in heterogenous fields. In short, accurate Z logs or volumes are invaluable for seismic inversion, amplitude-versus-offset (AVO) analysis, porosity estimation, and overall reservoir characterization6–8.
+Conventionally, acoustic impedance is computed directly from well logs using the relationship Z = ρ · Vp. Here, Vp is obtained from a sonic (transit-time) log and ρ from a bulk-density log (RHOB). When both logs are available, Z can be calculated straightforwardly. However, in many wells (especially older or frontier wells) one or both logs may be missing. In such cases, petrophysicists resort to empirical or rock-physics approximations. For example, Gardner’s Equation9. and related velocity–density trends can estimate ρ from Vp, while Castagna mudrock relations10 or Wyllie time-average models can estimate Vp from porosity or other logs11. These methods require assumptions about lithology (e.g. pure quartz vs. calcite matrix), shale content, and fluid type. Alternatively, inversion workflows use well logs to build a low-frequency model for seismic inversion, but this again relies on crude velocity - depth curves or assumed matrix velocities. In practice, these approaches can introduce significant errors: empirical transforms may fail in complex sedimentary facies or poorly understood lithologies, and inversion without a calibrated low-frequency trend tends to bias Z values12,13.
+Furthermore, Mabrouk and Hassan proposed a petrophysical inversion formula to estimate acoustic impedance directly from neutron porosity logs when both sonic and density data are absent or unreliable14. Their approach combines the density response equation, elastic impedance definition, and Raiga-Clemenceau et al. transit-time model to derive Z as a function of neutron-derived porosity, fluid and matrix densities, and matrix-specific exponent15. Applied to Gulf of Suez Basin wells, it achieved correlations exceeding 0.93 in clean formations and ≤ 10% error when shale volume remained below 25%, though accuracy diminished in shaly intervals (> 25% Vsh) due to bound water effects. While effective in data-poor wells and rough-hole conditions, this method still relies on assumptions of constant fluid/matrix properties and no secondary porosity.
+To overcome these limitations, literature has explored both empirical correlations and machine-learning (ML) models to estimate acoustic impedance or infer missing logs. Some studies use seismic attributes or other logs as proxies. For instance, Surachman et al. used nine post-stack seismic attributes (plus depth and two-way travel time) as inputs to supervised ML regressors (Random Forest, Extra Trees, Neural Network) to predict well-log Z. They achieved an R² ≈0.85 for the neural network model, with ensemble trees (Extra Trees) yielding lower error16.
+Other work targets direct log predictions. For example, Khan et al. used XGBoost and neural networks to predict missing logs in a fluvio-deltaic reservoir; their model achieved R²≈0.87 for Z on test wells17. In petrophysics, Garini et al. introduced a workflow to handle incomplete well-log datasets for lithology classification. They compared XGBoost, KNN, and ANN for imputing logs and found that XGBoost delivered the lowest error for density (RHOB) and neutron-porosity (NPHI) logs in wells with up to 30% missing data18.
+Deep learning approaches have also been applied to log imputation. For instance, Al-Fakih et al. developed sequential generative models to generate synthetic well-log sequences and impute gaps. Their bidirectional recurrent network effectively exploits depth-wise correlations in logs19. Other authors have used convolutional or LSTM networks to predict sonic or density from gamma-ray, resistivity, and porosity curves20–22. These methods demonstrate that complex nonlinear relationships among logs can be learned from data, but most focus on recovering missing intermediate logs (like sonic) rather than directly outputting impedance. Recent studies have applied machine learning and deep learning methods to reservoir property estimation. For example, deep convolutional neural networks have been used to predict elastic properties (Vp, Vs, and density) from seismic data, achieving improved lateral continuity compared to conventional inversion approaches23. Similarly, workflows integrating synthetic training data with random forest regression have been developed to reduce facies-related bias in ML-based acoustic impedance inversion, demonstrating improved prediction accuracy and facies imaging in both synthetic models and field applications24.
+
+## Research gap and roadmap
+Despite these advances, a key gap remains direct prediction of acoustic impedance from only commonly available logs (e.g. gamma-ray, neutron-porosity, deep resistivity) without using sonic or density curves. Most ML studies either perform a form of inversion or predict one log from another (e.g. sonic from GR/NPHI). Very few attempt to learn the mapping to Z itself from standard petrophysical logs. Critically, our approach avoids explicit rock-physics assumptions about shale volume or porosity that underlie empirical methods. For instance, classical density and velocity estimation often requires assumed matrix and fluid properties; by contrast, an ML model can implicitly learn these relationships from multi-well data. This study is novel in using XGBoost to directly predict Z from GR, NPHI, and resistivity logs filling the gap between missing-log imputation and inversion: we bypass intermediate sonic/density estimation entirely. In doing so, we provide a new tool for petrophysicists to generate Z logs where only basic logs exist.
+This work has important implications for frontier exploration and data-poor reservoirs. In early-stage fields, often only gamma, porosity, and resistivity logs are available (core or sonic surveys may be missing or prohibitively expensive). Yet acoustic impedance is needed for tying wells to seismic. By leveraging machine learning, our method can produce synthetic Z logs to aid inversion and reservoir modeling. Improving Z estimates under log constraints can reduce uncertainty in reservoir characterization and accelerate decisions in “exploration vintages” with sparse data. The adopted approach XGBoost-based Z prediction directly addresses the need for robust petrophysical estimation in wells where traditional data are incomplete, offering a path toward more reliable seismic inversion and reservoir Characterization in challenging settings.
+
+## Methodology
+The study follows a structured machine learning workflow, beginning with data collection and preprocessing. Preprocessing steps include outlier removal and feature engineering, alongside the computation of the target acoustic impedance using a basic empirical equation. To enhance feature-target relationships, the deep resistivity log is log-transformed, improving its correlation with the target. Subsequent stages involve exploratory data analysis and selection of the most relevant input features. The dataset is then partitioned into training and testing subsets for model development and hyperparameter optimization. Additionally, an independent blind well is reserved for evaluating the model’s generalization and practical applicability.
+Although workflow diagrams for machine learning often appear generic, Fig. 1 is included to highlights how the standard ML pipeline is adapted to the geoscience domain. Specifically, it emphasizes three critical domain-driven steps: (i) acoustic impedance generation as an input feature derived from seismic data, (ii) well correlation across formations to ensure stratigraphic consistency, and (iii) blind well evaluation as a validation approach that mimics real-world scenarios where models are applied to entirely unseen wells. These steps are not part of generic ML workflows but are essential when integrating machine learning with subsurface data. The figure therefore provides readers with a clear and concise visual representation of how conventional ML methods are specialized for petroleum geoscience applications.
+Machine Learning Workflow for acoustic impedance prediction.
+
+## Data collection and preprocessing
+The dataset comprises well log data from six boreholes drilled in the Shahd SE Field, located in the northern part of Egypt’s Western Desert. Specifically gamma-ray (GR), neutron porosity (NPHI), and deep resistivity (RD) logs were used for this study. The gamma-ray log records natural radioactivity (from K, U, Th) of the formation and is commonly used to infer shale content (high GR values typically indicate clay-rich layers). The neutron porosity log measures hydrogen content and thus serves as a proxy for fluid-filled porosity in the formation. The deep resistivity log measures the formation electrical resistivity (Ω m), which distinguishes hydrocarbon-bearing (high resistivity) from water-bearing (low resistivity) zones. These three logs are the input features for machine learning; sonic (DTC) and density (RHOB) logs are not available as predictors.
+
+## Acoustic impedance generation
+The acoustic impedance is the target variable for prediction. acoustic impedance is defined as the product of bulk density ρ and compressional wave velocity Vp​:
+When available, compressional slowness (sonic log DTC, in µs/ft) and formation density (RHOB, in g/cm³) were used to compute Vp ​ and hence Z. Assuming DTC is in microseconds per foot, the compressional velocity Vp (in ft/s) is computed as Vp = 106. 0.3048 / DTC. Converting units if necessary (e.g. to m/s) can be performed consistently. The computed velocity is then multiplied by the density (converted to kg/m³) to yield impedance in SI units.
+
+## Well correlation
+Incorporating a formation variable as an additional input feature for acoustic impedance modeling significantly enhances the predictive performance and geological consistency of the model. This variable, interpreted from conventional E-logs (such as GR, Resistivity and NPHI logs), serves as a proxy for the stratigraphic framework and lithological variations within the subsurface. By introducing formation as a categorical or encoded variable, the model can better distinguish between the distinct petrophysical behaviors of different formations. Each formation typically exhibits a limited and characteristic range of acoustic impedance values due to differences in mineralogy, porosity, and compaction (Fig. 2). As a result, the formation variable provides crucial contextual information that constrains the model’s predictions, reduces uncertainty, and minimizes the overlap in impedance values between geologically unrelated units. This leads to improved generalization and a more geologically meaningful prediction of acoustic impedance across heterogeneous intervals.
+Boxplot illustrating the distribution of acoustic impedance (Z) values across different geological formations.
+Categorical features such as formation were transformed using OneHotEncoding, which converts each formation into a binary indicator without imposing artificial numeric order on stratigraphic units. This allowed the model to capture formation-specific patterns in the log-to-impedance mapping, improving the consistency and stability of predictions.
+
+## Outlier detection and removal
+Outlier detection is then performed on the log features (Fig. 3) to remove spurious measurements (e.g. tool noise or borehole effects). We use the Isolation Forest algorithm for anomaly detection. Isolation Forest is an unsupervised tree-based method that isolates outliers by randomly partitioning data: anomalies require fewer random splits to isolate because they are “few and different” In practice, we train an Isolation Forest on the multi-log feature set. Points flagged as anomalies (typically based on an isolation score threshold or contamination parameter) are excluded from further analysis. This process ensures that extreme values do not unduly bias the model training.
+Gamma Ray log (GR) versus Neutron log (NPHI) cross-plot (A) outliers detection (red points) and (B) after removing outliers.
+Removing these anomalous points serves as a data conditioning step rather than an optimization variable: retaining them would bias the learning process, distort the log-to-log relationships, and reduce the generalizability of the model. The subsequent XGBoost model is therefore trained and evaluated exclusively on the cleaned dataset, ensuring that predictive performance reflects geologically meaningful trends rather than spurious noise.
+
+## Features engineering and selection
+
+## Data transformation
+Prior to modeling, raw log curves are cleaned and standardized. In particular, the deep resistivity values span several orders of magnitude, so we apply a logarithmic transform to compress the dynamic range. Specifically, we compute:
+Where RD is resistivity in Ω m. Figure 4 presents the histogram distributions of the original RD log and its log-transformed counterpart. The transformation effectively reduces skewness and enhances linearity, thereby improving correlation with other input logs and the target acoustic impedance22.
+Histogram distributions of the deep resistivity (RD) log. (A) Original RD values showing a highly right-skewed distribution. (B) Log-transformed RD values, exhibiting reduced skewness and a more normalized distribution.
+
+## Feature selection
+To identify the most predictive inputs, we compute the Pearson correlation coefficient (r) between each candidate log feature and the target impedance Z. The Pearson r measures linear association and is defined as:
+Where and are the data points of variables and repectively, is the mean of and is the mean of .The coefficient r ranges from − 1 to + 1, with values near ± 1 indicating strong linear correlation.
+To complement traditional correlation-based feature selection, SHapley Additive exPlanations (SHAP) were employed as an additional method to assess feature importance for the XGBoost model. SHAP is an approach that attributes the contribution of each feature by computing its marginal effect on the model output, averaged across all possible feature coalitions. Unlike correlation analysis, which captures only linear relationships, SHAP accounts for nonlinear dependencies and feature interactions, providing a consistent and interpretable measure of feature relevance. This makes it particularly suitable for complex machine learning models such as XGBoost.
+
+## Dataset splitting
+The data from the six wells were partitioned as follows: five wells were used for model development, with 80% of their data allocated for training and 20% reserved for testing to optimize model performance. The sixth well was held out entirely as a blind test well, serving as an independent dataset for the final evaluation of the model’s predictive capability.
+
+## Modeling training and evaluation
+In this study, the eXtreme Gradient Boosting (XGBoost) algorithm was adopted as the predictive model. XGBoost is an ensemble method that builds upon decision trees by applying gradient boosting, where successive trees are trained to correct the residual errors of previous ones. This approach provides several advantages that are particularly relevant for subsurface data. First, it improves predictive accuracy and generalization compared to a single decision tree, which, while effective, can be sensitive to data variability. Second, XGBoost incorporates built-in regularization (L1 and L2) that mitigates overfitting, a common risk when dealing with noisy and heterogeneous well log and seismic datasets. Third, XGBoost naturally captures nonlinear relationships and complex feature interactions, which are typical in geological systems. Finally, it allows feature importance analysis, supporting interpretability of the model results. These characteristics make XGBoost a suitable and robust choice for well log prediction tasks, while maintaining the interpretability of tree-based approaches that have previously shown promising results in similar studies.
+
+## XGBoost regression model
+We implement a gradient-boosted tree ensemble using XGBoost for regression. XGBoost (eXtreme Gradient Boosting) is an optimized implementation of gradient-boosted decision trees that delivers high predictive performance on tabular data. In this framework, the model prediction for sample is the sum of outputs from K regression trees:
+Where each is a tree-valued function mapping features to a real-valued score. Learning proceeds additively: at each boosting step , we add a new tree to improve the current predictions ​. The updated prediction is
+With initialized, often to the mean of the target variable. The boosting process continues for =1,…, K, sequentially reducing the residual errors of the ensemble at each step.
+
+## Objective function and regularization
+The XGBoost algorithm optimizes a regularized objective function at each iteration25. For regression with mean-squared-error (MSE) loss, the overall objective after t trees is:
+Where are true target values and is a complexity penalty on tree . In practice, XGBoost uses a second-order approximation of the loss. Expanding the loss via a Taylor series around the previous predictions, we obtain for step :
+Where:
+Here and represent the first and second derivatives (i.e., gradient and Hessian) of the loss with respect to the prediction. By optimizing this second order (quadratic) approximation, XGBoost efficiently determine the next tree to add to the ensemble.
+The regularization term Ω() serves to control model complexity to avoid overfitting. Each decision tree is defined as ​, where maps an input to one of leaves, and j​ is the score associated with leaf . XGBoost formulates the regularization function as:
+Here is the number of leaves in the tree, γ is the penalty applied for each additional leaf, and λ controls the L2​-norm penalty on leaf weights. Increasing γ or λ results in more conservative models by requiring higher gain thresholds for node splits and by shrinking the leaf weights, respectively.
+At each candidate split during tree growing, XGBoost computes the gain in the regularized objective. Given a node with aggregated gradient GGG and Hessian HHH, splitting it into left/right subsets yields gain:
+Where L, and represent the sum of gradients and Hessians for the left child, while R,​ ​ are the corresponding sums for the right child. A split is performed only if the calculated gain exceeds the threshold γ. This formulation incorporates both first-order and second-order information, along with regularization parameters γ and λ, ensuring both efficiency and control over model complexity.
+
+## Shrinkage and hyperparameter tuning
+To improve generalization, each tree contribution is scaled by a learning rate η (shrinkage). After computing , the predictions are updated as:
+Where η ∈ (0,1) controls the step size in the boosting process. Smaller values of η reduce the risk of overfitting by making the model learn more gradually.
+The hyperparameters of the XGBoost model (e.g. number of trees K, max tree depth, learning rate η, and regularization γ, λ) are tuned using cross-validation or grid search. In practice, we use K-fold cross-validation on the training set: for each hyperparameter combination, we train the model on k-1 folds and evaluate predictive performance on the hold-out fold. The combination yielding lowest validation error (e.g. RMSE) is chosen. This procedure ensures robust parameter selection and avoids overfitting.
+
+## Evaluation metrics
+To evaluate the predictive performance of the regression models, three established metrics were employed: Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and the Coefficient of Determination (R2). These metrics collectively assess accuracy, error sensitivity, and explanatory power, addressing distinct facets of model performance.
+
+## Mean absolute error (MAE)
+The MAE quantifies the average absolute deviations between predicted () and observed () values, computed as:
+where n denotes the total number of observations. MAE is inherently interpretable and robust to scale, as it expresses errors in the same units as the variable of interest. However, since it assigns equal weight to all residuals, it may underrepresent the influence of extreme outliers compared to Root Mean Squared Error, which penalizes large errors more strongly26.
+
+## Root mean squared error (RMSE)
+RMSE penalizes larger errors quadratically, offering sensitivity to outliers, and is defined as:
+This metric is particularly advantageous in contexts where substantial prediction errors carry disproportionately higher operational or financial risks27.
+Coefficient of Determination ().
+evaluates the proportion of variance in the dependent variable explained by the model, expressed as:
+where ​ represents the mean of observed values. Values approaching 1 indicate near-complete explanatory capability, while values near 0 suggest the model performs comparably to a naïve mean predictor28.
+
+## Results and discussion
+
+## Dataset statistics and feature relationships
+Our cleaned dataset comprises sample points from six wells, spanning sandstone, shale, and mixed lithologies. After outlier removal (Isolation Forest flagged ≈ 4% of samples). In our analysis, we computed Pearson correlation (r) coefficients for the input features versus Z. Features with higher absolute r are deemed more relevant. Figure 5 presents the Pearson correlation coefficients, indicating that the NPHI log exhibits a strong negative correlation of -0.84 with acoustic impedance. The GR and Formation features show moderate negative correlations of -0.55 and − 0.39, respectively. Although the original RD log demonstrated a very weak correlation (0.01), its logarithmic transformation significantly improved the correlation to 0.62. As a result, the transformed RD log was selected over the original RD log for model training. Table 1 summarize the Pearson correlation coefficients between input logs and target impedance.
+Pearson correlation coefficient for the input feature and the acoustic impedance (Z).
+Pearson correlation coefficients between input logs and target impedance.
+The SHapley Additive exPlanations (SHAP) method was applied to the same cleaned dataset to provide a complementary, model-based perspective on feature relevance. An initial XGBoost model was trained using all candidate features, and SHAP values were computed to quantify each feature’s contribution to predicting acoustic impedance Z. The analysis confirmed that NPHI, RDlog, and GR exert the strongest influence on model predictions, consistent with the Pearson correlation findings, while Formation labels showed a moderate but meaningful contribution. These results (Table 2) support the selection of the same three primary logs, along with Formation labels, as the most informative predictors for subsequent modeling.
+SHAP feature importance ranking from the initial XGBoost model.
+
+## Model performance on training and testing sets
+The XGBoost regressor was trained on 80% of the data with hyperparameters optimized via 5-fold cross-validated grid search. The best configuration used 500 trees, maximum depth = 6, learning rate η = 0.05, γ = 1, and L2 regularization λ = 3.
+Figure 6 shows the relationship between the number of trees (boosting rounds) and the coefficient of determination (R²) for both training and testing datasets. Both curves increase sharply during the early boosting rounds (up to ~ 50 trees), after which the improvement slows down and gradually plateaus. The training R² continues to increase slowly with more trees, while the testing R² stabilizes around 0.80 without significant gain beyond ~ 100 trees. This indicates that the model achieves strong predictive performance early, and additional trees contribute only marginal improvements. The close alignment between training and testing curves demonstrates that the model generalizes well to unseen data, without evidence of underfitting or severe overfitting.
+Evolution of model performance with increasing number of trees in the XGBoost model.
+The model achieved an R² of 0.916 and RMSE of 718.3 on the training dataset, indicating that over 91% of impedance variance is captured, as shown in Table 3; Fig. 7A. On unseen data, the model retains strong generalization with R² = 0.808 and RMSE = 1070, demonstrating robust learning of nonlinear relationships among logs without overfitting, as presented in Fig. 7B.
+Evaluation metrics for training and testing subsets.
+Actual acoustic impedance (Actual) versus predicted acoustic impedance (Predicted ) for (A) training set and (B) testing set.
+To assess model generality, we applied the trained regressor to a blind well withheld entirely from training and testing. In this validation:
+The blind well yielded R2 = 0.869 and RMSE = 981.3, closely matching test-set performance and confirming strong spatial generalization as indicated in Table 3.
+Figure 8 shows predicted and actual Z logs along the wellbore: the model successfully reproduces stratigraphic impedance trends and attenuates the “spike” artifacts seen in the sonic-derived impedance.
+Well-log comparison of acoustic impedance (Z) versus depth. Tracks show (from left to right): actual Z log (A), XGBoost-predicted Z log (B), overlay of actual and XGBoost predictions (C), Mean Absolute Error for XGBoost (D), empirical Z from Mabrouk and Hassan’s formula (E), overlay of empirical and actual Z logs (F), and Mean Absolute Error for the empirical approach (G). The visual and error-based comparisons highlight the improved agreement of the XGBoost model with the actual log relative to the empirical method.
+
+## Comparison with empirical methods
+The classical neutron-porosity formula of Mabrouk & Hassan (2013) requires assumed matrix/fluid constants and deteriorates when shale volume exceeds 25% or secondary porosity is present. In our comparative analysis on three wells:
+Empirical approach yielded average errors of 7–10% in shaly intervals and up to 30% in zones with > 25% shale.
+XGBoost model achieved much lower average error across all lithologies, including zones with > 30% shale, without explicit shale-volume thresholds or porosity-type assumptions.
+Thus, the ML framework provides good accuracy and broader applicability, eliminating reliance on site-specific matrix/fluid calibrations and empirical saturation limits (Fig. 8).
+Our results demonstrate that XGBoost can reliably predict acoustic impedance directly from routinely acquired logs (GR, NPHI, and RD), filling a critical data gap when sonic or density measurements are missed or of poor quality. This has significant implications for:
+Frontier exploration: Wells often log only basic curves; our method enables generation of AI logs for seismic tie-in and inversion without additional surveys.
+Mature fields: Legacy wells lacking sonic/density can now contribute impedance data to updated reservoir models, improving volumetric estimates.
+Complex lithologies: The model nonlinear learning accommodates shale-rich and mixed facies where empirical transforms fail.
+However, limitations include:
+Data dependency: a key limitation of the presented model, common to data-driven approaches, is its dependency on the representativeness of the training data. While the model demonstrates strong generalization within the geological context of the Shahd SE Field, its accuracy may diminish when applied to extreme lithofacies or geological provinces entirely outside the training domain (e.g., evaporites, volcanics, or highly fractured carbonates not encountered in the dataset). This is because the learned relationships between GR, NPHI, RDlog, and acoustic impedance are specific to the system they were trained on. To mitigate this limitation and enhance the model portability, future work will explore the potential of transfer learning techniques. By fine-tuning a pre-trained model on a limited dataset from a new geological domain, it may be possible to efficiently adapt the foundational relationships learned here to novel lithological settings, thereby broadening the applicability of the workflow without requiring extensive retraining from scratch.
+Feature scope: Only three log inputs were used; incorporating additional logs (e.g. shallow resistivity, spectral gamma) could further refine predictions.
+Future work may integrate physics-informed constraints or deep learning architecture (e.g. convolutional or recurrent nets) to capture sequence dependencies and further improve generalization to novel lithologies.
+
+## Conclusion
+This study successfully established a machine learning framework for the direct prediction of acoustic impedance (Z) using commonly available well logs - gamma-ray, neutron porosity, and deep resistivity - effectively bypassing the conventional dependency on sonic and density data. The core achievement lies in the demonstrated capability of the XGBoost algorithm to learn the complex, nonlinear petrophysical relationships governing Z, resulting in a robust model with strong predictive performance.
+The primary significance of this workflow is its ability to overcome the fundamental limitations of empirical methods, namely the reliance on assumed matrix and fluid constants and poor performance in shaly or complex lithologies. By providing a reliable method to generate Z logs in data-scarce scenarios, this approach directly enhances the feasibility of seismic inversion and reservoir characterization in frontier exploration and mature field redevelopment.
+Future efforts will focus on expanding the model generality across diverse geological domains through transfer learning techniques and integrating a broader suite of input logs to further improve predictive accuracy and operational utility.
+
+## Acknowledgements
+The authors would like to acknowledge the Egyptian General Petroleum Corporation for providing the data and PetroShahd Company for providing all the necessary resources to accomplish this work.
+
+## Author contributions
+Khaled Saleh: Introduction, Methodology, Data Collection and Preprocessing, Feature Selection and Engineering, Model Training and Evaluation, Results & Discussion, Conclusion. Muhammad A. El Hameedy : Introduction, Methodology, Feature Selection and Engineering, Results & Discussion, Conclusion. Walid M. Mabrouk : Supervision, Introduction, Results & Discussion, Conclusion. Ahmed Metwally : Introduction, Methodology, Model Training and Evaluation, Results & Discussion, Conclusion.
+
+## Funding
+Open access funding provided by The Science, Technology & Innovation Funding Authority (STDF) in cooperation with The Egyptian Knowledge Bank (EKB).
+
+## Data availability
+The data supporting the results of this study was obtained from the Egyptian General Petroleum Corporation. Data are however available from the corresponding author upon reasonable and with permission of The Egyptian General Petroleum Corporation.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+The data supporting the results of this study was obtained from the Egyptian General Petroleum Corporation. Data are however available from the corresponding author upon reasonable and with permission of The Egyptian General Petroleum Corporation.
+
+## Table Table 1: Pearson correlation coefficients between input logs and target impedance.
+Feature | Pearson r with Z
+R Dlog | 0.62
+NPHI | – 0.84
+GR | – 0.55
+Formation | – 0.39
+R D | 0.01
+
+## Table Table 2: SHAP feature importance ranking from the initial XGBoost model.
+Feature | SHAP Importance
+NPHI | 935.08
+GR | 746.28
+R Dlog | 556.29
+Formation | 335.8
+R D | 66.4
+
+## Table Table 3: Evaluation metrics for training and testing subsets.
+Metric | Training set | Testing set | Blind test
+MAE (g/cc·ft/s) | 480.4 | 701.6 | 682.4
+RMSE (g/cc·ft/s) | 718.3 | 1070 | 981.3
+R 2 | 0.916 | 0.808 | 0.869
+
+## Figure Fig. 1: Machine Learning Workflow for acoustic impedance prediction.
+
+## Figure Fig. 2: Boxplot illustrating the distribution of acoustic impedance (Z) values across different geological formations.
+
+## Figure Fig. 3: Gamma Ray log (GR) versus Neutron log (NPHI) cross-plot (A) outliers detection (red points) and (B) after removing outliers.
+
+## Figure Fig. 4: Histogram distributions of the deep resistivity (RD) log. (A) Original RD values showing a highly right-skewed distribution. (B) Log-transformed RD values, exhibiting reduced skewness and a more normalized distribution.
+
+## Figure Fig. 5: Pearson correlation coefficient for the input feature and the acoustic impedance (Z).
+
+## Figure Fig. 6: Evolution of model performance with increasing number of trees in the XGBoost model.
+
+## Figure Fig. 7: Actual acoustic impedance (Actual) versus predicted acoustic impedance (Predicted ) for (A) training set and (B) testing set.
+
+## Figure Fig. 8: Well-log comparison of acoustic impedance (Z) versus depth. Tracks show (from left to right): actual Z log (A), XGBoost-predicted Z log (B), overlay of actual and XGBoost predictions (C), Mean Absolute Error for XGBoost (D), empirical Z from Mabrouk and Hassan’s formula (E), overlay of empirical and actual Z logs (F), and Mean Absolute Error for the empirical approach (G). The visual and error-based comparisons highlight the improved agreement of the XGBoost model with the actual log relative to the empirical method.

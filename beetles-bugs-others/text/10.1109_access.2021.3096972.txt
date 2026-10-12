@@ -1,0 +1,915 @@
+Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control Using Evolutionary Computation: Modeling, Simulation and Experimentation
+Asan G. A. Muthalif, Khairul A. M. Nor, Azni Nabela Wahid, Abdelrahman Ali (2021). IEEE Access. https://doi.org/10.1109/access.2021.3096972. doi:10.1109/access.2021.3096972. Licence: cc-by. Text from pdf.
+
+Received June 24, 2021, accepted July 8, 2021, date of publication July 13, 2021, date of current version July 22, 2021.
+Digital Object Identifier 10.1109/ACCESS.2021.3096972
+
+Optimization of Piezoelectric Sensor-Actuator for
+Plate Vibration Control Using Evolutionary
+Computation: Modeling, Simulation
+and Experimentation
+ASAN G. A. MUTHALIF 1 , (Senior Member, IEEE), KHAIRUL A. M. NOR2 ,
+AZNI NABELA WAHID 2 , AND ABDELRAHMAN ALI 1
+
+1 Department of Mechanical and Industrial Engineering, College of Engineering, Qatar University, Doha, Qatar
+
+2 Smart Structures, Systems, and Control Research Laboratory, Department of Mechatronics Engineering, International Islamic University Malaysia, Kuala
+
+Lumpur 53100, Malaysia
+
+Corresponding author: Asan G. A. Muthalif (drasan@qu.edu.qa)
+This work was supported in part by the Qatar University International Research Collaboration under Grant IRCC-2020-017.
+
+ABSTRACT The development of lightweight, stronger, and more flexible structures has received the utmost
+interest from many researchers. For this reason, piezoelectric materials, with their inherent electromechanical
+coupling, have been widely incorporated in the development of such structures to attenuate their vibrations.
+However, one of the main challenges is to find the optimal control and sensor-actuator placement. This
+paper presents an active vibration control for flexible structures, whereby a simply supported plate is taken
+as the benchmark model. A feedback controller with a collocated sensor-actuator configuration is used.
+Both disturbance and control signal acting on the plate is created by using piezoelectric (PZT) patches. The
+analytical model is derived based on the Euler-Bernoulli model. The Optimal location of the collocated
+sensor-actuator, as well as PID controller gains, are determined using Ant Colony Optimization (ACO)
+technique, then compared with the Genetic Algorithm (GA) and enumerative method (EM). Optimization in
+this paper is based on minimizing frequency average energy. The optimal performance value of piezoelectric
+patch sensor-actuator position and PID controller gains are verified experimentally. It was found that PID
+controller gains and collocated sensor-actuator location optimizations using ACO, GA and enumerative
+methods give similar results, which implies the effectiveness of ACO as an optimization technique. More
+than 20 % of attenuation achieved using the available hardware setup.
+INDEX TERMS Active vibration control, ant colony optimization, generic algorithm, modeling and
+simulation, optimization of sensor-actuator location, piezoelectric.
+
+I. INTRODUCTION
+
+Lighter, stronger, and more flexible structures are said to
+be the ideal forms of structures in vibration suppression
+with minimum power consumption [1]. In recent years,
+the development of lightweight yet stronger structures that
+can withstand vibrational loads has gained the utmost attention by researchers. Such structures can be developed when
+piezoelectric patches (sensor-actuator) are integrated with an
+optimized active vibration control (AVC) strategy [2]. In the
+advancement of such smart structures, piezoelectrics have
+The associate editor coordinating the review of this manuscript and
+approving it for publication was Yingxiang Liu
+VOLUME 9, 2021
+
+.
+
+shown great promise. Piezoelectric materials can generate an
+electrical voltage when subjected to mechanical strains and
+stresses, and vice versa. Under the application of electrical
+voltage, these materials can generate mechanical strain in
+response to the applied voltage. Hence, allowing them to be
+utilized as both sensors and actuators when placed on flexible
+structures. Piezoelectric actuators have shown significant
+benefits in vibration control due to their ability to excite only
+the structures’ elastic modes without exciting the rigid body
+modes. It is crucial since it is often required to control the
+structures’ elastic motions [3].
+The continuous nature of the structures has provided
+flexibility to the placement of the piezoelectric patches on
+
+This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+
+100725
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+the structures. To achieve optimal performance, one must
+ensure the optimal location of the piezoelectric sensoractuator. Many researchers have investigated the optimal
+placement of the piezoelectric sensors and actuators on structures. Caruso et al. [4] investigated the optimal placement
+of the actuators and sensors for collocated flexible plates,
+and the optimal locations were achieved by maximizing
+the modal controllability and observability of the structure.
+Hongwei et al. [5] have investigated the actuators’ optimal
+locations in a smart structure using optimal control theory.
+Using the input energy correlation, it was concluded that
+size, location and control gain were independent of the initial
+conditions. Bruant and Proslier [6] considered the optimal
+location of actuators and sensors in the AVC of structures while considering the residual modes to limit spillover
+effects. By minimizing the linear quadratic regulator cost,
+Kumar and Narayanan [7] were able to optimize the piezoelectric actuators’ location on steel plates. Darivandi et al. [8]
+applied a subgradient-based algorithm to optimize the location of piezoelectric actuators on flexible structures that
+have been much more efficient and accurate than genetic
+algorithm optimization. Liu et al. [9] have investigated the
+optimal placements of piezoelectric actuators on structures
+and demonstrated that particle swarm optimization’s computational efficiency is higher than that of the genetic algorithm.
+Prion et al. [10] developed a criterion concerning the optimal
+placement of a collocated sensor-actuator pair of AVC structures based on the maximization of the pole-zero distance in
+open-loop, which correlates with the maximum achievable
+damping ratio in closed-loop. Contero-Chinchilla et al. [11]
+optimized the sensor/actuator placement for structural health
+monitoring using an objective function that combines parameters uncertainty, expected information entropy and the cost
+of both sensors and actuators.
+Optimal sensor-actuator positions and gains used in the
+controller are vital to enhancing the performance of a control system and numerous works using conventional optimization techniques such as H (infinity) norm [12], linear
+quadratic regulator (LQR) [13], and H2 norms [14], were
+proposed to cope with such problem. Various conventional optimization techniques have been employed for this
+purpose. However, biologically inspired optimization techniques have shown great potential in optimizing the sensor/
+actuator location and controller gains of AVC systems Optimization of sensor and/or actuator location and controller
+gains in AVC system were successfully carried out through
+biologically-inspired optimization techniques, including particle swarm optimization (PSO) [14], artificial neural network (ANN) [16] and genetic algorithm (GA) [17]–[19].
+In 1992, another bio-inspired optimization method based
+on swarm intelligence, namely Ant Colony Optimization
+(ACO), was founded. Since then, it has been successfully
+implemented [20]. The ant colony optimization ACO technique is another bio-inspired method that can be successfully
+implemented. Furthermore, ACO has shown great potential as an optimization technique due to its simplicity and
+100726
+
+efficiency. Nevertheless, even with its simplicity, it is shown
+that attempts using ACO in optimizing the location of the
+sensor-actuator and controllers for the AVC system is still
+considerably low. ACO was used to optimally tune the
+Proportional-Integral-Derivative (PID) controller [21], but
+these were tested only on arbitrary plants. Hardware-inthe-loop (HIL) optimization with the help of a continuous ant
+colony system (TCACS) suggested by Nobahari et al. [22],
+to optimize controller and observer parameters for a beam
+was conducted successfully. Mohamad et al. [23], proposed
+SISO control of a flexible beam using continuous ACO
+(ACOR ).
+This paper presents theoretical and experimental works on
+AVC strategy on a simply supported thin plate using a piezoelectric patch for modal overlap factor (MOF) less than 1. The
+individual vibration modes distinct, which is equivalent to a
+frequency range of 0 to 200 Hz. Optimization sensor-actuator
+location and controller gains are carried out utilizing the
+ACO and later verified using GA. Using ACO offers simplicity, less complexity and yields a similar level of accuracy.
+Although many algorithms can be used, this study focused
+on ACO and GA algorithms. These bio-inspired computing
+optimizing algorithm has gained interest as it is a promising
+approach, that can be further developed for new and robust
+competing techniques. The values obtained from ACO and
+GA are compared with the enumerative method (the actual
+value) with objective function as total energy reduction. The
+purpose of this study is to demonstrate the effectiveness of
+ACO as an optimization technique.
+This paper is organized as follows. Section 2 presents the
+equation of motion (EOM) of the system. Section 3 explains
+the optimization algorithms used in this research, i.e., ACO
+and GA. Section 4 discusses the simulation results for optimal controller gains and sensor-actuator location. Section 5
+presents the experimental verification of the optimal
+parameters found in Section 4.
+II. PLANT MODEL
+
+In this section, the system’s equation of motion of the simply supported thin rectangular plate with attached piezoelectric patches for excitation and control is derived. The
+time-averaged plate energy EP is then derived and used in the
+objective function used for the optimization. The mathematical model of the simply supported plate with piezoelectric
+patches is derived using the Euler-Bernoulli model; which
+limits the simulation results to thin plates only. Lagrange’s
+method is employed to derive the equation of motion of a
+simply supported plate with attached piezoelectric patches.
+Consider a simply-supported thin rectangular plate of
+length a, width b and thickness h is taken for this study.
+Piezoelectric patches were used for excitation and control
+forces. For linear isotropic material, the constitutive equation
+of piezoelectric as the actuator is [24]:
+σ = cE ε − eE
+(1)
+where σ is the stress vector, e is the dielectric permittivity
+matrix, cE is the matrix of elastic coefficients under constant
+VOLUME 9, 2021
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+electric field, ε is the strain vector, E = V (t)/tp is the electric
+field vector, V (t) is the voltage supplied to the piezoelectric
+actuator, tp is the piezoelectric patch thickness. The spatial
+deflection of the simply supported plate during vibration
+can be represented as the summation of modes in double
+series [25]:
+XX
+mπx nπy
+sin
+(2)
+w (x, y) =
+Wmn sin
+a
+b
+m n
+where Wmn is the magnitude, and m and n refer to the
+half-wave number in the x and y directions, respectively. The
+natural frequency (m, n)th of the plate can be written as:
+s "
+
+ 2 #
+D
+mπ 2
+nπ
+ωmn =
++
+(3)
+ρ
+Lx
+Ly
+where D is the flexural rigidity, ρ is the plate density, Lx and
+Ly refer to the dimensions in the x and y directions.
+The potential energy U and kinetic energy T are given
+by [26]:
+2
+Z Z ( 2
+∂ w ∂ 2w
+D
++
+− 2 (1 − v)
+U =
+2
+∂x 2
+∂y2
+"
+  2 2 #)
+∂ 2w ∂ 2w
+∂ w
+×
+−
+dA
+2
+2
+∂x∂y
+∂x ∂y
+(
+2
+ZZ
+1
+∂ 2w ∂ 2w
++ 2
+− 2 (1 − v)
++
+D1 (x, y)
+2
+∂x 2
+∂y
+"
+  2 2 #)
+∂ 2w ∂ 2w
+∂ w
+×
+−
+dA
+∂x∂y
+∂x 2 ∂y2
+(
+2
+ZZ
+
+1
+∂ 2w ∂ 2w
++
+D2 (x, y)
++ 2
+− 2 1 − vpz
+2
+2
+∂x
+∂y
+"
+  2 2 #)
+2
+2
+∂ w
+∂ w∂ w
+−
+×
+dA
+2
+2
+∂x∂y
+∂x ∂y
+
+ZZ
+ ∂ 2w
++ B (t)
+S (x, y) d31 + vpz d32
+∂x 2
+
+2
+∂ w
++ d32 + vpz d31
+dA
+(4)
+∂y2
+Z Z  2
+Z Z  2
+1
+∂w
+1
+∂w
+T = ρh
+dA + ρpz tp
+S (x, y) dA
+2
+∂t
+2
+∂t
+(5)
+S (x, y) is the product of Heaviside function for a patch on
+the plate and can be obtained by:
+S (x, y) = [H (x − x1 ) − H (x − x2 )]
+× [H (y − y1 ) − H (y − y2 )]
+The flexural rigidity of the plate is:
+ 3
+
+E
+h
+h2
+
+D=
+−
+z
+n
+12
+8
+1 − v2
+VOLUME 9, 2021
+
+(6)
+
+(7)
+
+The flexural rigidity of the plate under the patch area is:
+ 3
+
+h
+E
+2
+
+D1 (x, y) = D1 S (x, y) =
++
+z
+h
+S (x, y) (8)
+n
+12
+1−v2
+and the flexural rigidity of the piezoelectric patch is obtained
+by:
+D2 (x, y)
+= D2 S (x, y)
+Epz
+
+= 
+1 − v2pz
+×
+
+!
+
+
+ht 2p
+h2 tp
+2
+2
++
++
+− zn htp + tp + zn tp S (x, y)
+3
+4
+2
+
+tp3
+
+(9)
+and,
+B (t) =
+
+
+Epz V (t)
+
+ h + tp − 2zn
+2 1 − v2pz
+
+(10)
+
+where ρ and ρpz are the plate and piezoelectric density,
+respectively, and A is the plate area. d31 and d32 are piezoelectric strain constants (d32 = d31 , because of isotropic), E and
+Epz are Young’s modulus for plate and piezoelectric patch. v
+and vpz is Poisson’s ratio for the piezoelectric patch.
+The term zn is the shifted neutral axis measured from the
+plate center due to the single patch attachment i.e.
+
+Epz tp h + tp
+
+zn =
+2 Eh + Epz tp
+Substitution of both potential and kinetic energies into
+Lagrange’s Equation produce an equation of motion of the
+system as:
+
+
+−ω2 M + KC Wmn = fe + fa
+(11)
+where ω is the angular frequency, M is the mass matrix.
+By substituting both the derived potential and kinetic energies
+into the Lagrange’s equation, it produces the equation of
+motion of the system, where the term (jη + 1)K is substituted
+by Kc for simplicity. Where K is the stiffness matrix, and
+j is an imaginary point. η is the modal loss factor, Wmn
+is the vector representing modal amplitude, and fe and fa
+are the modal force vector for exciter and actuator patches,
+respectively.
+PID controller involves feedback signal, its derivative, and
+it’s integral, i.e. the feedback signal is equivalent to velocity
+term. The mass, stiffness, and damping matrices due to PID
+controller is denoted by MPID , KPID and CPID respectively.
+The EOM of the system with a PID controller is written
+as [27]:
+
+
+−ω2 (M + MPID ) + (KC + KPID ) + jωCPID wmn = fe
+(12)
+100727
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+the time-averaged plate energy, EP, can be calculated from
+EP =
+
+1
+wmn T KC wmn
+2
+
+(13)
+
+Thus, the frequency-averaged plate enrgy, EP, measured
+from an initial frequency fin to final frequency ffi is:
+Pffi
+fin EP (f )
+¯
+EP =
+(14)
+ffi − fin
+III. OPTIMIZATION FUNCTION
+
+The objective function used for optimization is defined as:
+min
+
+1
+EPnc
+=
+ER
+EPnc − EPc
+
+(15)
+
+where EPc and EPnc are the average plate energy with and
+without control, respectively. This objective function aims
+to find five optimal parameters: the x- and y-coordinates of
+sensor-actuator location (xsa , ysa ) and the Kp , Ki and Kd of the
+PID controller. Optimization of five variables simultaneously
+is difficult and time-consuming; thus, the process is divided
+into two [18].
+1. Optimize xsa and ysa while considering velocity feedback control with 1000 Ns/m, approximately 100 times
+driving point impedance, as an initial gain.
+2. Optimize Kp , Ki and Kd , using optimal sensor-actuator
+location found above.
+Vibration mode shapes of a flexible structure have nodes and
+anti-nodes. It is difficult to control the vibration by placing
+the actuator on a node even with a large actuating force.
+The location of the sensor-actuator patches is more critical
+than the PID gains, hence, the PID gains are optimized after
+finding the optimal sensor-actuator location.
+
+reduction calculated using Eq. (13). The next ants follow
+the trails with more potent pheromones and reinforce it with
+their pheromone. On the other hand, the weaker pheromone
+trails will eventually evaporate. Mathematically, this can be
+represented by:
+τij (t) = σ τij (t − 1) +
+
+NA
+X
+
+1τij (t)
+
+(18)
+
+k=1
+
+Forgetfulness of the bad choices are introduced by σ , the
+pheromone decay 0 < σ < 1, and NA is the number of ants.
+ACO parameters used in this paper are given in Table 1.
+TABLE 1. ACO parameters.
+
+B. GENETIC ALGORITHM
+
+GA, a well-established algorithm, is used in this paper to
+ascertain the results found by ACO method. It is inspired
+by the natural evolutionary process mechanics and had successfully solved problems involving optimization of actuator
+location and controller gains [28]–[33]. The GA parameters
+used in this study are listed in Table 2, and other settings are
+left to their default value.
+TABLE 2. GA parameters.
+
+A. ANT COLONY OPTIMIZATION
+
+In this paper, we utilized Simple-ACO (SACO) algorithm for
+optimization purpose. Inspired by a colony of ants looking for
+a food source, the algorithm finds optimal parameter values
+of any objective function based on the probability equation
+given by:
+
+
+α
+
+ P τij (t)
+
+α , if j ∈ Tk
+Pk (t) =
+(16)
+τij (t)
+i,j∈T
+k
+
+
+0,
+otherwise
+where τ is the pheromone trail mimicking trail made by an ant
+while searching for food, t is time, α is the relative importance
+of the pheromone values and Tk does the ant k effectuate the
+path at a given time. The magnitude of pheromone disposed
+of by an ant during a tour is represented by:
+
+ Q , if (i, j) walked by ant k.
+1τij (t) = Lk
+(17)
+
+0,
+otherwise
+where Q is a constant and Lk is the cost of tour by ant k or the
+objective function. In our case, Lk is the inverse of energy
+100728
+
+Flowcharts of the SACO algorithm is given in Figure 1, and
+the optimization strategy is illustrated in Figure 2.
+The optimal values from both ACO and GA are compared
+against the enumerative method since it gives the actual
+optimal point. As the purpose is to reduce modal energy,
+the exciter should be placed at a single location that can excite
+the required modes.
+IV. SIMULATION RESULTS
+
+Parameters of the simulation model are given in Table 3.
+For simulation purpose, the exciter patch is assumed to be
+located at (0.15 m, 0.15 m), while the control patch with collocated sensor-actuator configuration will be found through
+optimization. The frequency range of interest is between 0 to
+200 Hz, and the resonant frequencies within this range are
+shown in Table 4.
+VOLUME 9, 2021
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+TABLE 3. Benchmark model.
+
+TABLE 4. Resonant frequencies less than 200 Hz.
+
+FIGURE 1. Flowchart of SACO algorithm.
+
+TABLE 5. Optimal position.
+
+FIGURE 2. Optimization strategy.
+
+A. OPTIMAL SENSOR-ACTUATOR LOCATION
+
+To make the results as precise as possible, 10000 possible
+values of xsa and 10000 possible values of ysa are used,
+making the distances between consecutive one-two nodes
+along the x-axis and y-axis as 4.5005 × 10−5 m and 5.8006 ×
+10−5 m, respectively. Table 5 and Figures 3(a) and 3(b) show
+optimization results.
+VOLUME 9, 2021
+
+As shown in Table 5, the results from both optimization methods agree to each other. The effect of a negative velocity feedback control to the plate energy is clearly
+shown in Figure 3(a), whereby the controlled energy plot
+experiences a significant reduction of amplitude without any
+natural frequency shifting. The best location to place the
+sensor-actuator patch is near the exciter patch with more than
+100729
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+FIGURE 3. (a) Plate energy plot and (b) energy reduction for each mode
+using the optimal location of the sensor-actuator.
+
+TABLE 6. Revised sensor-actuator location.
+
+10% frequency-averaged energy reduction. This is because
+the highest energy reduction can be achieved by directly locking the disturbance force. Nevertheless, the actuator’s placement close to the disturbance point is not a practical solution
+since we normally do not know the location that causes
+vibration and its corresponding magnitude. Hence, optimal
+location is searched again by setting at least 0.1 m gabs, along
+x and y axes, between excitation and sensor-actuator locations. Table 6 shows the result and illustrated in Figures. 4(a)
+and 4(b). The revised optimal sensor-actuator locations found
+are at (0.3511 m, 0.4550 m) and (0.3472 m, 0.4592 m) using
+ACO and GA, respectively.
+An enumerative method is used to verify results from
+GA and ACO. It is a conservative technique in which the
+100730
+
+FIGURE 4. (a) Plate energy plot and (b) energy reduction for each mode
+using the revised optimal location of the sensor-actuator.
+
+sensor-actuator is systematically placed to all grid points of
+the plate, and its corresponding energy reduction is measured. The accuracy of the result depends on the number
+of grid points taken for simulation. Even with coarse grid
+points, this method can predict the optimal location. A 3-D
+plot describing energy reduction concerning the location
+of the sensor-actuator is shown in Figure 5. The optimal
+sensor-actuator locations for first and second highest energy
+reduction are (0.160 m, 0.155 m) and (0.358 m, 0.4547 m).
+
+FIGURE 5. Energy reduction with different sensor-actuator locations.
+
+B. OPTIMAL PID CONTROLLER GAINS
+
+The optimal value of Kp , Ki and Kd were found when the
+sensor-actuator was at the optimal location i.e. (xsa = 0.3511,
+ysa = 0.4550). The range of values for Kp , Ki and Kd considered here are 0 to 1000, 0 to 500 and 0 to 50, respectively.
+VOLUME 9, 2021
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+TABLE 7. Optimal PID gains.
+
+in turn, may undesirably add energy to some modes. The
+situation would be different if the aim is to control individual
+mode, as different actuator location is needed for every mode.
+When using a piezoelectric patch as an actuator, changing its
+location is impossible since it is bonded strongly/permanently
+on the plate. Another option is to use multiple actuators in
+different locations to target various modes. The current work
+aims to use a single piezoelectric actuator to target and control
+many modes optimally.
+V. EXPERIMENTAL RESULTS
+
+Table 7 shows Kp’s optimal values, Ki and Kd obtained using
+ACO and GA and its corresponding energy reduction.
+Figure 6(a) shows the PID controller had altered the system’s natural frequencies. This was due to the change in
+mass-stiffness-damping matrices as given in Eq. (12) above.
+Figure 6(b) shows energy reduction for each mode. It can
+be seen that the energy of the mode whose frequency is
+around 110 Hz is increased. However, This is the trade-off
+done when controlling broadband vibration using a single
+actuator. The location of the sensor-actuator is chosen so
+that frequency-average energy is reduced. As such, the optimization algorithm will identify an actuator that optimally
+applies force on many modes within the bandwidth; this,
+
+The experimental setup comprised of a thin stainless-steel
+plate with a dimension of 0.6 m × 0.5 m × 0.001 m lying
+on a frame to mimic a simply supported boundary condition. Vibration excitation and suppression are generated by
+2 MIDE piezoelectric patches and each is connected to ACX
+power amplifier model EL-1225 with 20-time amplification
+factor. Eight units of PCB accelerometer model 352C33 are
+used for energy estimation, while another unit located on top
+of the actuator patch meant for feedback signal purpose. Only
+one actuator is used to implement the broadband vibration
+control optimally. The generation of the excitation signal
+and the calculation of energy are performed via LABVIEW
+program with the help of Ni-cDAQ model NI-9174, two
+input modules model NI-9263 and one output module model
+NI-9234. A NI-cRIO controller model NI-9004 with one
+NI-9263 input module and one NI-9234 output module
+embedded with an FPGA-coded controller program is used
+to actively control the plate’s vibration. Figures. 7(a) and 7(b)
+show experimental setup and interconnection diagram,
+respectively.
+A. OPTIMAL SENSOR-ACTUATOR LOCATION
+
+FIGURE 6. (a) Plate energy and (b) energy reduction for each mode using
+optimal PID.
+VOLUME 9, 2021
+
+This section aims to experimentally gauge the performance
+of the optimal parameters found in Section 4. Recall that the
+optimal parameters found theoretically are xsa = 0.3511,
+ysa = 0.4550, Kp = 990, ki = 210 and kd = 19.88.
+Fifteen natural frequencies are detected for less than 200 Hz,
+as shown in Table 8, compared to twelve natural frequencies
+found in the simulation. This is due to the placement of
+accelerometers on the plate, which consequently affected the
+plate’s mass distribution and created another three natural
+frequencies, i.e., at 31.85 Hz, 57.5 Hz and 99.78 Hz. A significant reduction in acceleration measured by each accelerometer can be seen in Figure 8 and Table 9.
+The following steps are taken to estimate the plate energy:
+i Divide the plate into 8 divisions and place an
+accelerometer at the center of each division.
+ii Calculate each plate division’s kinetic energy separately by considering the mass of each division with
+the sensor and velocity sensed by each accelerometer. The total energy is the summation of energy
+for each division. Figure. 8 shows the comparison of
+energy generated between uncontrolled and controlled
+system while the corresponding reduction levels measured at each mode is given in Figures 9(a) and 9(b).
+100731
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+FIGURE 7. (a) Experimental setup, and (b) Interconnection diagram.
+
+FIGURE 8. Acceleration signals calculated at each accelerometer.
+
+TABLE 8. Experimental resonant frequencies (for below 200 Hz).
+
+The frequency-averaged energy reduction achieved is
+19.52%, which is slightly lower compared to the simulation result.
+100732
+
+TABLE 9. Experimental results.
+
+The frequency response of a continuous structure vibration is generally grouped into low, mid and high frequencies, based on the modal overlapping factor (MOF).
+Low-frequency response is deterministic, which exhibits
+distinct individual modes and is not sensitive to structural
+uncertainties (i.e., a small variation in mass or stiffness
+matrices) [34], [35].
+In this current article, the work is performed within the
+low-frequency regions. The total mass of the accelerometers
+and portion of cables on the plate are considered small, and
+their effect on the low-frequency modes is insignificant.
+VOLUME 9, 2021
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+ACKNOWLEDGMENT
+
+Open Access funding has been provided by the Qatar
+National Library, Qatar.
+REFERENCES
+
+FIGURE 9. Experimental result for plate (a) energy and (b) energy
+reduction for each mode.
+
+VI. CONCLUSION
+
+In this work, the ACO technique was utilized to optimise
+collocated sensor-actuator location on the flexible structure
+and obtain the optimal PID controller gains. The optimal values obtained from ACO are found comparable to the results
+from GA and the enumerative method. Based on the results,
+the PID controller gains and collocated sensor-actuator location optimizations using ACO, GA and enumerative methods
+give similar results. This implies the effectiveness of ACO
+for such optimization problems. The best location to place
+a collocated sensor-actuator to achieve the highest reduction of plate energy (or reduction of displacement for the
+whole plate) is near the exciter patch with more than 10%
+frequency-averaged energy reduction. This is because the
+highest energy reduction can be achieved by directly locking
+the disturbance force. However, in reality, the information
+about the disturbance such as magnitude and location is
+inaccessible. Since the location that causes vibration, and its
+corresponding magnitude can be difficult to identify. Hence,
+optimal location is investigated by setting at least 0.1 m gabs,
+along x and y axes, between excitation and sensor-actuator
+locations. As for the PID gains, with the PID controller gains
+been capped due to the output module’s limitation (NI-9263)
+to produce voltage with the range of -10V to 10V only, about
+20% of frequency-averaged energy reduction is achieved.
+A much better reduction would be accomplished if higher
+gains, or a better amplifier were used.
+VOLUME 9, 2021
+
+[1] P. Wang, A. Korniienko, X. Bombois, M. Collet, G. Scorletti, E. Skow,
+C. Wang, and K. Colin, ‘‘Active vibration control in specific zones of smart
+structures,’’ Control Eng. Pract., vol. 84, pp. 305–322, Mar. 2019.
+[2] M. R. Kermani, M. Moallem, and R. V. Patel, ‘‘Parameter selection and
+control design for vibration suppression using piezoelectric transducers,’’
+Control Eng. Pract., vol. 12, no. 8, pp. 1005–1015, Aug. 2004.
+[3] D. Halim and S. O. Reza Moheimani, ‘‘An optimization approach to
+optimal placement of collocated piezoelectric actuators and sensors on a
+thin plate,’’ Mechatronics, vol. 13, no. 1, pp. 27–47, Feb. 2003.
+[4] G. Caruso, S. Galeani, and L. Menini, ‘‘On actuators/sensors placement for
+collocated flexible plates,’’ in Proc. Medit. Conf. Control Automat., 2003.
+[5] H. Si, D. Li, Z. Liu, and J. Liang, ‘‘Optimization of the number and
+locations of the actuators in smart structures,’’ in Proc. IEEE Int. Conf.
+Robot., Intell. Syst. Signal Process., Oct. 2003, pp. 841–846.
+[6] I. Bruant and L. Proslier, ‘‘Optimal location of actuators and sensors in
+active vibration control,’’ J. Intell. Mater. Syst. Struct., vol. 16, no. 3,
+pp. 197–206, Mar. 2005.
+[7] K. Ramesh Kumar and S. Narayanan, ‘‘The optimal location of piezoelectric actuators and sensors for vibration control of plates,’’ Smart Mater.
+Struct., vol. 16, no. 6, pp. 2680–2691, Dec. 2007.
+[8] N. Darivandi, K. Morris, and A. Khajepour, ‘‘An algorithm for LQ optimal actuator location,’’ Smart Mater. Struct., vol. 22, no. 3, Mar. 2013,
+Art. no. 035001.
+[9] X. Liu, G. Cai, F. Peng, and H. Zhang, ‘‘Piezoelectric actuator placement
+optimization and active vibration control of a membrane structure,’’ Acta
+Mechanica Solida Sinica, vol. 31, no. 1, pp. 66–79, Feb. 2018.
+[10] D. Piron, S. Pathak, A. Deraemaeker, and C. Collette, ‘‘A pole-zero based
+criterion for optimal placement of collocated sensor-actuator pair,’’ Mech.
+Syst. Signal Process., vol. 155, Jun. 2021, Art. no. 107533.
+[11] S. Cantero-Chinchilla, J. L. Beck, M. Chiachío, J. Chiachío,
+D. Chronopoulos, and A. Jones, ‘‘Optimal sensor and actuator placement
+for structural health monitoring via an efficient convex cost-benefit
+optimization,’’ Mech. Syst. Signal Process., vol. 144, Oct. 2020,
+Art. no. 106901.
+[12] T. L. da Rocha, S. Silva, and V. Lopes, ‘‘Optimal location of piezoelectric
+sensor and actuator for flexible structures,’’ in Proc. 11th Int. Congr. Sound
+Vib., 2004, pp. 1–8.
+[13] J. Hu, X. Zhang, and Z. Kang, ‘‘Layout design of piezoelectric patches
+in structural linear quadratic regulator optimal control using topology
+optimization,’’ J. Intell. Mater. Syst. Struct., vol. 29, no. 10, pp. 2277–2294,
+Jun. 2018.
+[14] M. A. Demetriou, ‘‘A numerical algorithm for the optimal placement of
+actuators and sensors for flexible structures,’’ in Proc. Amer. Control Conf.,
+vol. 4, Jun. 2000, pp. 2290–2294.
+[15] S. Julai, M. O. Tokhi, M. Mohamad, and I. A. Latiff, ‘‘Active vibration
+control of a flexible plate structure using particle swarm optimization,’’ in
+Proc. IEEE 9th Int. Conf. Cyberntic Intell. Syst., Sep. 2010, pp. 1–6.
+[16] H. L. Ji, J. H. Qiu, Y. P. Wu, J. Cheng, and M. N. Ichchou, ‘‘Novel approach
+of self-sensing actuation for active vibration control,’’ J. Intell. Mater. Syst.
+Struct., vol. 22, no. 5, pp. 449–459, Mar. 2011.
+[17] J.-H. Han and I. Lee, ‘‘Optimal placement of piezoelectric sensors and
+actuators for vibration control of a composite plate using genetic algorithms,’’ Smart Mater. Struct., vol. 8, no. 2, pp. 257–267, Apr. 1999.
+[18] A. G. A. Muthalif and R. S. Langley, ‘‘Active control of high-frequency
+vibration: Optimisation using the hybrid modelling method,’’ J. Sound Vib.,
+vol. 331, no. 13, pp. 2969–2983, Jun. 2012.
+[19] P. Wang and D. P. Kwok, ‘‘Optimal design of PID process controllers based
+on genetic algorithms,’’ Control Eng. Pract., vol. 2, no. 4, pp. 641–648,
+Aug. 1994.
+[20] M. Karami, A. R. Tavakolpour-Saleh, and A. Norouzi, ‘‘Optimal nonlinear
+PID control of a micro-robot equipped with vibratory actuator using ant
+colony algorithm: Simulation and experiment,’’ J. Intell. Robotic Syst.,
+vol. 99, nos. 3–4, pp. 773–796, Sep. 2020.
+[21] I. Chiha, N. Liouane, and P. Borne, ‘‘Tuning PID controller using multiobjective ant colony optimization,’’ Appl. Comput. Intell. Soft Comput.,
+vol. 2012, pp. 1–7, Jan. 2012.
+100733
+
+A. G. A. Muthalif et al.: Optimization of Piezoelectric Sensor-Actuator for Plate Vibration Control
+
+[22] H. Nobahari, S. A. H. Kordkheili, and S. S. Afshari, ‘‘Hardware-in-theloop optimization of an active vibration controller in a flexible beam
+structure using evolutionary algorithms,’’ J. Intell. Mater. Syst. Struct.,
+vol. 25, no. 10, pp. 1211–1223, Sep. 2014.
+[23] M. Mohamad, M. O. Tokhi, and M. Omar, ‘‘Continuous ant colony optimisation for active vibration control of flexible beam structures,’’ in Proc.
+IEEE Int. Conf. Mechatronics, Apr. 2011, pp. 803–808.
+[24] A. Preumont, ‘‘Vibration control of active structures,’’ in Solid Mechanics and Its Applications, vol. 179. Cham, Switzerland: Springer, 2011,
+pp. 1–452.
+[25] S. Timoshenko and S. Woinowsky-Krieger, Theory of Plates and shells.
+New York, NY, USA: McGraw-Hill, 1959.
+[26] P. Mehta, ‘‘Vibrations of thin plate with piezoelectric actuator: Theory and
+experiments,’’ M.S. thesis, Dept. Mech. Eng., Clemson Univ., Clemson,
+SC, USA, Dec. 2009.
+[27] A. G. A. Muthalif, A. N. Wahid, and K. A. M. Nor, ‘‘Estimating ensemble average power delivered by a piezoelectric patch actuator to a nondeterministic subsystem,’’ J. Sound Vib., vol. 333, no. 4, pp. 1149–1162,
+Feb. 2014.
+[28] M. Jalili-Kharaajoo, B. Moshiri, K. Shabani, and H. Ebrahimirad, ‘‘Genetic
+algorithm based parameter tuning of adaptive LQR-repetitive controllers
+with application to uninterruptible power supply systems,’’ in Innovations
+in Applied Artificial Intelligence (Lecture Notes in Computer Science),
+vol. 3029, B. Orchard, C. Yang, and M. Ali, Eds. Berlin, Germany:
+Springer, 2004, doi: 10.1007/978-3-540-24677-0_60.
+[29] F. Peng, A. Ng, and Y.-R. Hu, ‘‘Actuator placement optimization and
+adaptive vibration control of plate smart structures,’’ J. Intell. Mater. Syst.
+Struct., vol. 16, no. 3, pp. 263–271, Mar. 2005.
+[30] J. Li and W. Li, ‘‘On-line PID parameters optimization control for wind
+power generation system based on genetic algorithm,’’ IEEE Access, vol. 8,
+pp. 137094–137100, 2020.
+[31] M. E. C. Bento, D. Dotta, R. Kuiava, and R. A. Ramos, ‘‘A procedure to
+design fault-tolerant wide-area damping controllers,’’ IEEE Access, vol. 6,
+pp. 23383–23405, Apr. 2018.
+[32] J. Wan, B. He, D. Wang, T. Yan, and Y. Shen, ‘‘Fractional-order PID motion
+control for AUV using cloud-model-based quantum genetic algorithm,’’
+IEEE Access, vol. 7, pp. 124828–124843, 2019.
+[33] F. Meng, S. Liu, and K. Liu, ‘‘Design of an optimal fractional order PID for
+constant tension control system,’’ IEEE Access, vol. 8, pp. 58933–58939,
+2020.
+[34] A. G. A. Muthalif and A. N. Wahid, ‘‘Optimal piezoelectric shunt dampers
+for non-deterministic substructure vibration control: Estimation and parametric investigation,’’ Sci. Rep., vol. 11, no. 1, p. 4642, Dec. 2021.
+[35] A. Ali, A. G. A. Muthalif, and J. Renno, ‘‘Broadband vibration energy
+harvesting from a non-deterministic system: Performance of different
+piezoelectric patch shapes,’’ Mater. Res. Exp., vol. 8, no. 2, Feb. 2021,
+Art. no. 025702.
+
+KHAIRUL A. M. NOR received the bachelor’s
+and master’s degrees in mechatronics engineering
+from International Islamic University Malaysia
+(IIUM), and the Ph.D. degree from The University of Auckland, New Zealand, in 2019. He is
+currently an Assistant Professor with the Department of Mechatronics Engineering, IIUM. His
+research interests include vibration control, active
+noise cancellation, active structural acoustic
+control, adaptive control, and vibration-based
+energy harvesting.
+
+ASAN G. A. MUTHALIF (Senior Member, IEEE)
+received the bachelor’s and master’s degrees
+in mechatronics engineering from International
+Islamic University Malaysia (IIUM) and the Ph.D.
+degree from Cambridge University, U.K., in 2008.
+He is currently an Associate Professor with the
+Department of Mechanical and Industrial Engineering, Qatar University. His research interests include mechatronics, active and semi-active
+vibration control, smart materials and structures,
+vibration-based energy harvesting, mid-high frequency vibration control,
+statistical energy analysis (SEA), and dynamics of built-up structures.
+
+ABDELRAHMAN ALI received the bachelor’s
+degree in mechanical engineering from Qatar
+University, Doha, Qatar, in 2020, where he is
+currently pursuing the master’s degree in mechanical engineering. He is also working as a Research
+Assistant with the Mechanical and Industrial
+Engineering Department. His research interests
+include active and semi-active vibration control,
+piezoelectric vibration energy harvesting, smart
+materials and structures (magnetorheological
+elastomers and fluids), and finite element analysis.
+
+100734
+
+AZNI NABELA WAHID received the B.Eng.
+degree in mechanical engineering from Vanderbilt
+University, USA, and the M.Sc. degree in mechatronics engineering and the Ph.D. degree in
+engineering from International Islamic University
+Malaysia. She is currently working as an Assistant
+Professor with the Department of Mechatronics
+Engineering, International Islamic University
+Malaysia. Her research interests include vibration
+analysis and control, energy harvesting, and smart
+materials.
+
+VOLUME 9, 2021
+
+

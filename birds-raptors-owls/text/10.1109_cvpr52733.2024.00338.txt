@@ -1,0 +1,2131 @@
+EAGLE: Eigen Aggregation Learning for Object-Centric Unsupervised Semantic Segmentation
+Chanyoung Kim, Woojung Han, Dayun Ju, Seong Jae Hwang (2024). IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings - IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings. http://arxiv.org/abs/2403.01482. doi:10.1109/cvpr52733.2024.00338. Licence: cc-by-nc-nd. Text from pdf.
+
+EAGLE: Eigen Aggregation Learning for Object-Centric
+Unsupervised Semantic Segmentation
+Chanyoung Kim* Woojung Han* Dayun Ju
+Yonsei University
+
+Seong Jae Hwang†
+
+arXiv:2403.01482v4 [cs.CV] 5 Apr 2024
+
+{chanyoung, dnwjddl, juda0707, seongjae}@yonsei.ac.kr
+
+Eigen Aggregation Module
+
+Abstract
+𝓕
+
+Semantic segmentation has innately relied on extensive
+pixel-level annotated data, leading to the emergence of unsupervised methodologies. Among them, leveraging selfsupervised Vision Transformers for unsupervised semantic
+segmentation (USS) has been making steady progress with
+expressive deep features. Yet, for semantically segmenting images with complex objects, a predominant challenge
+remains: the lack of explicit object-level semantic encoding in patch-level features. This technical limitation often
+leads to inadequate segmentation of complex objects with
+diverse structures. To address this gap, we present a novel
+approach, EAGLE, which emphasizes object-centric representation learning for unsupervised semantic segmentation.
+Specifically, we introduce EiCue, a spectral technique providing semantic and structural cues through an eigenbasis
+derived from the semantic similarity matrix of deep image
+features and color affinity from an image. Further, by incorporating our object-centric contrastive loss with EiCue, we
+guide our model to learn object-level representations with
+intra- and inter-image object-feature consistency, thereby
+enhancing semantic accuracy. Extensive experiments on
+COCO-Stuff, Cityscapes, and Potsdam-3 datasets demonstrate the state-of-the-art USS results of EAGLE with accurate and consistent semantic segmentation across complex
+scenes.
+
+Seg.
+Head
+
+Cluster
+Head
+
+Proj.
+Head
+Eigenvectors
+
+EiCue
+
+Input Image
+Prototypes
+
+Cluster
+Head
+ObjNCE Loss
+
+(a) Overview of EAGLE
+
+Seg. Result
+Input Image
+
+STEGO
+
+HP
+
+Ours
+
+Label
+
+EiCue
+
+(b) Visualizing EAGLE & Baselines
+
+Figure 1. We introduce EAGLE, Eigen AGgregation LEarning
+for object-centric unsupervised semantic segmentation. (a) We
+first leverage the aggregated eigenvectors, named EiCue, to obtain the semantic structure knowledge of object segments in an image. Based on both semantic and structural cues from the EiCue,
+we compute object-centric contrastive loss to learn object-level semantic representation. (b) A visual comparison between EAGLE
+and other methods. Our object-level semantic segmentation results
+robustly identify objects with complex semantics (e.g., blanket
+with vivid stripe patterns) by exploiting strong semantic structure
+cues from EiCue.
+
+1. Introduction
+
+tation. In response to this challenge, various studies in semantic segmentation tasks have drifted away from relying
+solely on human-labeled annotations by exploring weaklysupervised [1, 25, 28, 45, 54], semi-supervised [2, 29, 42],
+and unsupervised semantic segmentation (USS) methodologies [8, 16, 17, 22, 24, 41, 49, 58].
+
+Semantic segmentation plays a pivotal role in modern
+vision, fundamentally advancing an array of diverse areas including medical imaging [23, 46], autonomous driving [15, 52], and remote sensing imagery [12, 31]. Nevertheless, its reliance on labeled data, while common across
+nearly all vision tasks, is especially problematic due to the
+laborious and time-consuming process of pixel-level anno-
+
+Among these learning schemes, the unsupervised approach of USS clearly stands as the most challenging case.
+Specifically, compared to the classical unsupervised segmentation methods (e.g., K-means clustering) which produce segments without explicit semantics, USS additionally
+
+* Equal contribution
+† Corresponding author
+
+Project Page: https://micv-yonsei.github.io/eagle2024/
+
+1
+
+aims to derive semantically consistent local features (e.g.,
+patch-level features) that aid the further class assignment
+post-steps via clustering and the Hungarian matching algorithm. That is, semantically plausible local features result in
+accurate semantic segmentation results (e.g., Fig. 1b), but in
+USS, this must be achieved without any labels.
+Despite the glaring challenge, steady progress has been
+shown in USS. For example, initial pioneering works have
+emerged to maximize the mutual information across the
+two different views of a single image [22, 41]. Recently,
+network-based techniques such as STEGO [16] have focused on deriving patch-level semantic features with a selfsupervised pretrained model [6], showing a significant improvement compared to previous methods [8, 22, 58]. However, while these methodologies have advanced USS, unresolved shortcomings still remain.
+In particular, the recent network-based methods often
+leverage a self-supervised Vision Transformer (ViT) to
+learn patch-level features. While their patch-level features proved to be useful for further USS inference steps
+(e.g., K-means), the underlying object-level semantics are
+not explicitly imposed in these patch-level features. To
+grasp the “object-level semantics”, consider an example of
+a blanket object as shown in Fig. 1b second row. As with
+any object, blanket may easily appear with varying colors and textures across different images. Without proper
+object-level semantics, features corresponding to varying
+regions of blanket may result in vastly different feature
+representations. Ideally, though, the features corresponding
+to all kinds of blanket should be mapped to similar features, namely, object-level semantics. Thus, without carefully imposed object-level semantics, complex objects with
+diverse structures and shapes may easily be partitioned into
+multiple segments with wrong class labels or be merged
+with nearby segments of different class labels. Thus, in
+USS, an immense effort must be paid to learn the local features (e.g., patch-level) with strong object-level semantics.
+Our object-centric representation learning for USS aims
+to capture such object-level semantics. Specifically, we first
+need a semantic or structure cue in the object-centric view.
+Several previous works utilized clustering methods such as
+K-means or superpixel to obtain semantic cues [20], however, they mainly fixated on the generic image patterns, not
+the object’s semantic or structural representation. Here, we
+propose EiCue which provides semantic and structural cues
+of objects via eigenbasis. Specifically, we utilize the semantic similarity matrix obtained from the projected deep image features obtained from ViT [6, 14] and the color affinity
+matrix of the image to construct the graph Laplacian. The
+corresponding eigenbasis captures the underlying semantic
+structures of objects [32, 61], providing soft guidance to the
+subsequent object-level feature refinement step.
+Recall that accurate object-level semantics of an object
+
+must be consistent across images. Our object-centric contrastive learning framework explicitly imposes these traits
+with a novel object-level contrastive loss. Specifically,
+based on the object cues from EiCue, we derive learnable
+prototypes for each object which enables intra- and interimage object-feature consistency. Through this comprehensive learning process, our model effectively captures the
+inherent structures within images, allowing it to precisely
+identify semantically plausible object representations, the
+key to advancing modern feature-based USS.
+Contributions. Our main contributions are as follows:
+• We propose EiCue, using a learnable graph Laplacian, to
+acquire a more profound understanding of the underlying
+semantics and structural details within images.
+• We design an object-centric contrastive learning framework that capitalizes on the spectral basis of EiCue to
+construct robust object-level feature representations.
+• We demonstrate that our EAGLE achieves state-of-theart performance on unsupervised semantic segmentation,
+supported by a series of comprehensive experiments.
+
+2. Related Work
+2.1. Unsupervised Semantic Segmentation
+Semantic segmentation plays a crucial role in vision by
+assigning distinct class labels to pixels. Yet, while the segmentation performance strongly correlates with the label
+quality, acquiring precise pixel-level ground truth labels is
+a challenge on its own, especially for images with complex structures. This naturally led to numerous attempts
+to perform semantic segmentation in an unsupervised manner [8, 16, 17, 22, 24, 41, 49, 58], that is, with no labels.
+For instance, early works such as IIC [22] and AC [41]
+utilized mutual information, while subsequent approaches
+like InfoSeg [17] and PiCIE [8] integrated diverse features
+for enhanced pixel learning. Recent studies have adopted
+self-supervised, pretrained ViT models like DINO [6] for
+top-down feature extraction. Namely, STEGO [16] demonstrated a major step forward by distilling unsupervised features into discrete semantic labels with the DINO backbone.
+HP [49] interestingly utilizes contrastive learning to enhance semantic correlations among patch-level regions, but
+this patch-level (local) refinement holds little object-level
+understanding.
+
+2.2. Spectral Techniques for Segmentation
+Predating the aforementioned methods for semantic segmentation, spectral techniques have long been offering insights into diverse segmentation challenges in vision. Spanning some early pioneering works [35, 39, 43, 51] to contemporary efforts [3, 11, 26, 37, 50], these techniques share
+a common aim: to exploit the intrinsic spectral signatures
+embedded within image regions. These graph-theoretic approaches are methodologically influenced by the affinity
+2
+
+Z
+
+⨂
+Eigen Aggregation Module
+
+Image
+Encoder
+
+෩
+K
+
+S෨
+
+Inference
+
+෩ seg
+A
+
+𝐱෤
+
+෩ color
+A
+
+𝜅෤sim
+⨂ : Inner Product
+⨀ : Hadamard Product
+
+Laplacian
+Eigenvectors
+Matrix
+
+Cluster
+
+Seg. Head
+
+S
+
+CRF
+
+K
+
+Laplacian
+Matrix Eigenvectors
+
+Cluster
+
+Image
+Encoder
+
+Seg. Head
+
+Augmented Image Normal Image
+
+Aseg
+
+෩⊤
+K
+
+Eigen Aggregation Module
+
+⨀
+Positive Pair
+Negative Pair
+
+Proj. Head
+
+Acolor
+
+𝐱
+
+ℳeicue
+
+Cluster
+
+𝜅sim
+
+Z
+
+⨀
+
+Proj. Head
+
+K⊤
+
+෩
+Z
+
+⨀
+
+𝐱→෤𝐱
+ℒsc
+
+𝐱→෤𝐱
+ℒnce
+
+Prototypes
+
+𝐱→𝐱
+ℒobj
+
+Φ
+
+Φ𝑙
+
+෩
+Z
+
+Z
+
+𝐱 𝐱෤
+ℒnce
+𝐱→෤𝐱
+𝐱෤ →𝐱
+= ℒnce
++ ℒnce
+
+෩ eicue
+ℳ
+
+⨀
+
+෩ 𝑙′
+Φ
+𝐱෤ →𝐱
+ℒsc
+
+𝐱෤ →𝐱
+ℒnce
+
+𝐱෤ →෤𝐱
+ℒobj
+
+෩
+Z
+
+⨂
+
+Figure 2. The pipeline of EAGLE. Leveraging the Laplacian matrix, which integrates hierarchically projected image key features and
+color affinity, the model exploits eigenvector clustering to capture object-level perspective cues defined as Meicue and M̃eicue . Distilling
+knowledge from Meicue , our model further adopts an object-centric contrastive loss, utilizing the projected feature Z and Z̃. The learnable
+prototype Φ assigned from Z and Z̃, acts as a singular anchor that contrasts positive objects and negative objects. Our object-centric
+contrastive loss is computed in two distinct manners: intra(Lobj )- and inter(Lsc )-image to ensure semantic consistency.
+
+matrix quality, which gave rise to recent methods utilizing the network features from the pretrained deep models.
+For instance, Deep Spectral Methods [38] builds powerful Laplacian eigenvectors from the feature affinity matrix,
+while EigenFunction [10] exploits the network-based learnable eigenfunctions to produce spectral embeddings. Despite steadily discovering the effectiveness of spectral methods on deep features for capturing complex object structures, their object-level semantics still require additional
+methodological efforts, e.g., contrastive learning.
+
+a similarity matrix-based Laplacian capturing their object
+semantic relationships.
+
+3. Methods
+As we begin describing our full pipeline shown in Fig. 2,
+let us first cover the core USS framework based on pretrained models as in prior works [16, 49].
+
+3.1. Preliminary
+Unlabeled Images. Our approach is built exclusively
+upon a set of images, without any annotations, denoted as
+X = {xb }B
+b=1 , where B is the number of training images within a mini-batch. We also utilize a photometric
+augmentation strategy P to obtain an augmented image set
+X̃ = {x̃b }B
+b=1 = P (X).
+Pretrained Features K. Then, for each input image xb ,
+we use a self-supervised pretrained vision transformer [6]
+as an image encoder F to obtain hierarchical attention key
+features from the last three blocks as KL−2 = FL−2 (xb ),
+KL−1 = FL−1 (xb ), KL = FL (xb ), where L − 2, L − 1, L
+is the third-to-last layer, the second-to-last layer, and the last
+layer, respectively. Then, we concatenate them into a single
+attention tensor K = [KL−2 ; KL−1 ; KL ] ∈ RH×W ×DK .
+Similarly, we apply the same procedure for the augmented
+image x̃ and obtain its attention tensor K̃ ∈ RH×W ×DK .
+Semantic Features S. Although K contains some structural information about the objects based on the attention
+mechanism, this is known for insufficient semantic information to be considered for direct inference. Thus, for further feature refinement, we compute the semantic features
+S = Sθ (K) ∈ RH×W ×DS and S̃ = Sθ (K̃) ∈ RH×W ×DS ,
+where Sθ : RH×W ×DK → RH×W ×DS is a learnable nonlinear segmentation head. For brevity, the total number of
+
+2.3. Object-centric Contrastive Learning
+Contrastive learning approaches aim to maximize feature
+similarities between similar units while minimizing them
+between dissimilar ones. In the task of semantic segmentation, patch-level representation learning [40, 55, 57] is
+widely used. However, this approach tends to overemphasize fine details while neglecting high-level concepts (i.e.,
+semantic relations between objects). This leads object-level
+contrastive learning methods [18, 47, 48, 53, 56, 59, 60]
+to focus on balancing detailed perception with an objectcentric view, identifying objects in an unsupervised manner. For instance, MaskContrast [53] and COMUS [59]
+use unsupervised saliency to make pixel embeddings, while
+Odin [19] and DetCon [18] utilize K-means clustering and
+heuristic masks for sample generation, respectively. Refining this, SlotCon [56] assigned pixels to learn slots for
+semantic representation, and DINOSAUR [47] further improved it by reconstructing self-supervised pretrained features in the decoder, instead of the original inputs. However,
+these methods [47, 56] rely solely on slots, potentially overlooking high-level image features. In contrast, our approach
+distills knowledge from clustered eigenvectors derived from
+3
+
+Input Image 𝐱
+
+patches, denoted as H × W , will be referred to as N .
+Inference. During the inference time, given a new image,
+its semantic feature S becomes the basis of further clustering for the final semantic segmentation output with conventional evaluation setups such as the K-means clustering and
+linear probing. Thus, as with prior pretrained feature-based
+USS works [16, 49], training Sθ to output strong semantic
+features S in an unsupervised manner is the basic framework of contemporary USS frameworks. We next describe
+the remainder of the pipeline in Fig. 2 which corresponds
+to our methodological contributions for producing powerful object-level semantic features.
+
+A𝐜𝐨𝐥𝐨𝐫
+
+A𝐬𝐞𝐠
+
+$
+𝐕
+
+L𝐬𝐲𝐦
+
+Cluster
+Head
+
++
+
+EiCue
+0
+
+…
+
+…
+
+Transformer Block
+
+L-2
+
+Transformer Block
+
+L-1
+
+L
+Transformer Block
+Concatenate
+Attention
+Transformer Encoder Key Feature
+
+A𝐬𝐞𝐠 Generation Process
+
+K
+
+Seg.
+Head
+
+Transformer Block
+
+S
+
+A𝐬𝐞𝐠
+
+S⊤
+⨂
+⨂ : Inner Product
+
+Figure 3. An illustration of the EiCue generation process. From
+the input image, both color affinity matrix Acolor and semantic similarity matrix Aseg are derived, which are combined to form the
+Laplacian Lsym . An eigenvector subset V̂ of Lsym are clustered to
+produce EiCue.
+
+3.2. EiCue via the Eigen Aggregation Module
+Intuition tells us that the “semantically plausible” objectlevel segments are groups of pixels precisely capturing the
+object structure, even under complex structural variance.
+For instance, a car segment must contain all of its parts
+including the windshield, doors, wheels, etc. which may
+all appear in different shapes and views. However, without
+pixel-level annotations that provide object-level semantics,
+this becomes an extremely challenging task of inferring the
+underlying structure with zero object-level structural prior.
+From this realization, our model EAGLE first aims to derive a strong yet simple semantic structural cue, namely,
+EiCue, based on the eigenbasis of the feature similarity
+matrix as illustrated in Fig. 3. Specifically, we use the
+well-known Spectral Clustering [7, 39, 51] to obtain unsupervised feature representations that capture the underlying non-linear structures for handling data with complex
+patterns. This classically operates only in the color space
+but may easily extend to utilize the similarity matrix constructed from any features. We observed that such a spectral
+method becomes especially useful for complex real-world
+images as in Fig. 4.
+EiCue Construction. Let us describe the process of constructing EiCue in detail as shown in Fig. 3. The overall
+framework generally follows the vanilla spectral clustering:
+(1) from an adjacency matrix A, (2) construct the graph
+Laplacian L, and (3) perform the eigendecomposition on L
+to derive the eigenbasis V from which the eigenfeatures are
+used for the clustering. We describe each step below.
+
+color affinity matrix, Acolor ∈ RN ×N thus captures the pairwise relationship between the patches based on the colors.
+Specifically, we use the RBF kernel as the distance
+ function Acolor (p, q) = exp −∥ẍ(p) − ẍ(q)∥2 /2σc 2 where
+σc > 0 is a free hyperparameter. Further, to ensure that
+only nearby patches influence each other’s affinity values,
+we hard-constrain the maximum distance of the patch pairs
+such that we only compute the affinity between the patch
+pairs with a predefined spatial distance.
+(II) Semantic Similarity Matrix Aseg : The semantic similarity matrix, denoted as Aseg ∈ RN ×N , is formed by the
+product of tensor S and its transpose S⊤ . Tensor S is derived by hierarchically concatenating key attention features
+from the last three layers of a pretrained vision transformer,
+as processed through the segmentation head Sθ .
+(III) Adjacency Matrix A: The final adjacency matrix
+A is the sum of Acolor and Aseg : A = Acolor + Aseg ,
+which is also applicable to Ã. Our adjacency matrix amalgamates the high-level color information and the networkbased deep features to characterize semantic-wise relations.
+The use of the image-based Acolor preserves the image’s
+structural integrity and also complements the contextual information of the image. Following this, the incorporation of
+the learnable tensor S for the Aseg further strengthens this
+aspect, enhancing the semantic interpretation of the object
+without compromising the structural integrity and serving
+as a vital cue for our learning process.
+
+3.2.1 Adjacency Matrix Construction
+Our adjacency matrix consists of two components: (1)
+color affinity matrix and (2) semantic similarity matrix.
+
+3.2.2 Eigendecomposition
+To construct EiCue based on A, a Laplacian matrix is
+created. Formally, the Laplacian Matrix is expressed as
+L = D − A, P
+where D is the degree matrix of A defined
+N
+as D(i, i) =
+j=1 A(i, j). In our approach, we utilize
+the normalized Laplacian matrix for its enhanced clustering capabilities. The symmetric normalized Laplacian ma1
+1
+trix Lsym are defined as Lsym = D− 2 LD− 2 . Then, via
+eigendecomposition on Lsym , the eigenbasis V ∈ RN ×N
+is computed, where each column corresponds to a unique
+
+(I) Color Affinity Matrix Acolor : The color affinity matrix
+leverages the RGB values of the image x. The color affinity
+matrix is computed by the color distance. It utilizes the Euclidean distance between patches, where p and q are specific
+patch positions within the image. Here, ẍ ∈ RH×W ×3 denotes a resized version of x, scaled from its original image
+resolution to patch resolution, to ensure compatibility with
+the dimensions of other adjacency matrices. The resulting
+4
+
+3rd Eigenvector 2nd Eigenvector 1st Eigenvector Input Image
+
+eigenvector. We then extract k eigenvectors corresponding to the k smallest eigenvalues and concatenate them into
+V̂ ∈ RN ×k where the ith row corresponds to the k dimensional eigenfeature of the ith patch.
+3.2.3 Differentiable Eigen Clustering
+After obtaining eigenvectors V̂, we perform the eigenvectors clustering process and extract the EiCue denoted as
+Meicue ∈ RN . To cluster eigenvectors, we leverage a minibatch K-means algorithm based on cosine distance [36] between V̂ and C, denoted as P = V̂C. Centers of clusters
+C ∈ Rk×C are composed of learnable parameters. To learn
+C, we further trained with a loss defined as follows:
+N
+
+1 X
+Leig = −
+N i=1
+x
+
+X
+C
+
+
+Ψic Pic ,
+
+Figure 4. Visualizing eigenvectors derived from S in the Eigen
+Aggregation Module. These eigenvectors not only distinguish different objects but also identify semantically related areas, highlighting how EiCue captures object semantics and boundaries effectively.
+
+(1)
+
+c=1
+
+where C denotes pre-defined number of classes, Ψ :=
+softmax(P) and Pic and Ψic represents the ith patch and
+the cth cluster number of P and Ψ. We apply same procedure to augmented image x̃ to get Lx̃eig . By minimizing
+Leig = 12 (Lxeig + Lx̃eig ), we can obtain centers of clusters that
+enable more effective clustering. Then we obtain EiCue as
+
+X
+
+C
+′
+Meicue (i) = argmax Pic − log
+exp(Pic )
+.
+c
+
+distinctions among various object semantics. Before proceeding, we map both the projected feature Z ∈ RN ×DZ
+and Z̃ ∈ RN ×DZ , using the linear projection head Zξ , derived from the reshaped S ∈ RN ×DS and S̃ ∈ RN ×DS ,
+respectively. While the actual dimension sizes of DS and
+DZ are kept the same, we use different notations for ease of
+explanation.
+
+(2)
+
+c′ =1
+
+3.3.1
+
+As the precision of cluster centroids improves, EiCue facilitates the mapping of patch i to its corresponding object based on semantic structure. This serves as a meaningful cue to stress semantic distinctions between different
+objects, thereby enhancing the discriminative power of the
+feature embeddings.
+Remark. While similar to previous work [38] in using
+eigendecomposition, our approach differs by enhancing feature vectors S with a trainable segmentation head, unlike
+their reliance on static vectors (i.e., K). Our method enhances S learnable and adaptable via differentiable eigen
+clustering, allowing the graph Laplacian and object semantics to evolve. This dynamic integration of EiCue into the
+learning process distinctly separates our methodology from
+prior applications.
+
+Object-wise Prototypes
+
+To extract the representative object level semantic features from projected feature Z, we construct adaptable prototypes Φl based on the object l in aforementioned EiCue.
+As we describe next, semantically representative prototypes
+become the anchors for either pulling objects with similar
+semantics while pushing away the different ones.
+Let us describe how Φ is derived, which represents object semantics from Z. We first update the object-wise prototypes through the projected feature Z and a given Meicue ,
+derived from the clustered eigenbasis. Formally, for each
+object l obtained from Meicue , the mask Ml is defined as
+Ml (i) = 1 if Meicue (i) = l, and 0 otherwise, where i represents each position in Meicue . Then, applying the mask
+Ml to the projected feature tensor Z gives Zl = Z ⊙ Ml ,
+where ⊙ denotes the Hadamard product and Zl represents
+a collection of feature representations from Z corresponding to object l. Next, we compute medoid to select a single
+vector from Zl , which then becomes the prototype Φl . Let
+(i∈I )
+Il be the set of indices where Ml l = 1 to only consider
+(i)
+the indices of object l. Zl indicates the i-th feature vector
+of Zl . Then, the prototype Φl from the masked tensor Zl is
+
+3.3. EiCue-based ObjNCELoss
+For a successful semantic segmentation task, it is important not only to classify the class of each pixel accurately but also to aggregate object representation and create a segmentation map that reflects object semantic representations. From this perspective, learning relationships in
+an object-centric view is especially crucial in semantic segmentation tasks. To capture the complex relationships between objects, our approach incorporates an object-centric
+contrastive learning strategy, named ObjNCELoss, guided
+by EiCue. This strategy is designed to refine the discriminative capabilities of feature embeddings S, emphasizing the
+
+(m∗ )
+
+Φl = Z l
+
+for m∗ = argmin
+m∈Il
+
+X
+
+(m)
+
+Zl
+
+(i)
+
+− Zl
+
+2
+
+.
+
+(3)
+
+i∈Il
+
+Thus, Φl acts as the semantic vector of object l, serving as
+an anchor for the following object-centric contrastive loss.
+5
+
+Input Image
+Label
+STEGO
+HP
+Ours
+
+(a) COCO-Stuff
+
+(b) Cityscapes
+
+Figure 5. A qualitative comparison of the (a) COCO-Stuff [4] and (b) Cityscapes [9] datasets trained using ViT-S/8 and ViT-B/8 as a
+backbone, respectively. The comparison included previous state-of-the-art USS approaches, STEGO [16], HP [49], and ours.
+(i)
+
+3.3.2 Object-centric Contrastive Loss
+Once we compute prototypes, we then step towards
+object-centric contrastive loss between prototypes Φ and
+feature vectors Z. Specifically, we compute object-centric
+contrastive loss defined as follows:
+x→x
+
+Lobj
+
+"
+N
+1 X (i)
+=
+− log
+w
+N i=1 obj
+
+(i)
+
+exp((Zl · Φl )/τ )
+
+where Z̃l notes the i-th feature vector of projected feature
+Z̃ for object l. Concretely, we can formulate our objectcentric contrastive loss as Lx→x̃
+= λobj Lx→x
++ λsc Lx→x̃
+,
+nce
+sc
+obj
+where 0 < λobj < 1 and 0 < λsc < 1 are hyperparameters
+that adjust the strength of each loss. Since the loss function
+Lx→x̃
+nce is asymmetric, we also take into account the opposite
+x̃→x
+. Therefore, the final
+= λobj Lx̃→x̃
+case as Lx̃→x
+nce
+obj + λsc Lsc
+object-centric contrastive loss function (ObjNCELoss) that
+we optimize is as follows:
+
+!#
+,
+
+PC
+
+j=1,j̸=l exp((Zj · Φl )/τ )
+
+(4)
+
+where C is the total number of unique predicted objects in
+Meicue , (·) denotes the cosine similarity, and τ > 0 is the
+temperature scalar. To emphasize the influence of feature
+vectors with high similarity and direct the model’s focus
+toward them, we weigh the loss based on the similarity in(i)
+formation between vectors. The weight wobj is defined as
+PN
+(i)
+wobj = ( j=1 Ksim (i, j))/N, where Ksim ∈ RN ×N represents the similarity matrix defined as Ksim = KK⊤ .
+While Eq. (4) aggregates the object-level features based
+on the EiCue assignment, we note that another kind of robust consistency could be cleverly imposed with our photometric augmented image x̃. That is, since the photometric
+augmentation does not apply structural changes, the augmented image x̃ and x are structurally identical, allowing
+us to make the following important assumption: the vectors in the same positions of Z and Z̃ should have similar
+object-level semantics. This assumption ultimately allows
+us to create a new masked Z̃ (Fig. 2, Z̃ in green box) of x̃
+based on Meicue of x. Thus, we apply the contrastive loss to
+the augmented image x̃, based on the prototypes Φ from the
+non-augmented image x to guide the model to learn global
+semantic consistency. To illustrate this concept, our semantic consistency contrastive loss is defined as
+"
+N
+1 X (i)
+x→x̃
+w
+− log
+Lsc =
+N i=1 obj
+
+(i)
+
+exp((Z̃l · Φl )/τ )
+PC
+
+j=1,j̸=l exp((Z̃j · Φl )/τ )
+
+x→x̃
+x̃→x
+Lx↔x̃
+nce = Lnce + Lnce .
+
+(6)
+
+3.4. Total Objective
+To enhance the stability of the training process from the
+outset, we additionally employ a correspondence distillation loss [16], Lcorr (see Supp D.1. for a detailed explanation). In total, we minimize the following objective Ltotal :
+Ltotal = λnce Lx↔x̃
++ (1 − λnce )Lcorr + λeig Leig ,
+nce
+
+(7)
+
+where 0 ≦ λnce ≦ 1 and 0 ≦ λeig ≦ 1 are hyperparameters.
+Here, λnce starts from zero and increases rapidly, indicating
+the growing influence of Lx↔x̃
+during training.
+nce
+
+4. Experiments
+In this section, we first discuss the implementation details, including dataset configuration, evaluation protocols,
+and detailed experimental settings. Then, we evaluate our
+proposed method, EAGLE, both qualitatively and quantitatively while making a fair comparison with existing stateof-the-art methods. We also demonstrate the effectiveness
+of our proposed method through an ablation study. See the
+supplementary material for additional details.
+
+4.1. Experimental Settings
+
+!#
+
+Implementation Details. We use DINO [6] pretrained vision transformer F which is kept frozen during the training
+process as in the prior works [16, 49]. The training sets are
+
+,
+(5)
+
+6
+
+EiCue
+
+K-means
+
+Label
+
+Input Image
+
+Table 1. Quantitative results on the COCO-Stuff dataset [4].
+
+Figure 6. Comparison between K-means and EiCue. The bottom row presents EiCue, highlighting its superior ability to capture subtle structural intricacies and understand deeper semantic
+relationships, which is not as effectively achieved by K-means.
+
+Method
+
+Backbone
+
+Unsupervised
+Linear
+Acc. mIoU Acc. mIoU
+
+DC [5]
+MDC [5]
+IIC [22]
+PiCIE [8]
+PiCIE+H [8]
+SlotCon [56]
+DINO [6]
++ STEGO [16]
++ HP [49]
++ EAGLE (Ours)
+DINO [6]
++ TransFGU [58]
++ STEGO [16]
++ HP [49]
++ EAGLE (Ours)
+
+R18+FPN
+R18+FPN
+R18+FPN
+R18+FPN
+R18+FPN
+R50
+ViT-S/16
+ViT-S/16
+ViT-S/16
+ViT-S/16
+ViT-S/8
+ViT-S/8
+ViT-S/8
+ViT-S/8
+ViT-S/8
+
+19.9
+32.2
+21.8
+48.1
+50.0
+42.4
+22.0
+52.5
+54.5
+60.1
+28.7
+52.7
+48.3
+57.2
+64.2
+
+9.8
+6.7
+13.8
+14.4
+18.3
+8.0
+23.7
+24.3
+24.4
+11.3
+17.5
+24.5
+24.6
+27.2
+
+48.6
+44.5
+54.2
+54.8
+50.3
+70.6
+74.1
+75.2
+68.6
+74.4
+75.6
+76.8
+
+13.3
+8.4
+13.9
+14.8
+18.1
+34.5
+39.1
+42.5
+33.9
+38.3
+42.7
+43.9
+
+Table 2. Quantitative results on the Cityscapes dataset [9].
+
+resized and five-cropped to 244 × 244. For segmentation
+head Sθ , we use two layers of MLP with ReLU [16, 49],
+and for projection head Zξ we constructed a single linear layer [49]. All backbones employed an embedding dimension DS and DZ of 512. For the EiCue, we extract
+4 eigenvectors from the eigenbasis V. In the inference
+stage, we post-process the segmentation map with DenseCRF [16, 27, 49]. See supplement for more details.
+Datasets. We evaluate on (1) COCO-Stuff [4], (2)
+Cityscapes [9], and (3) Potsdam-3 [22] datasets, in line with
+methodologies established in prior works [8, 16, 22, 49]. (1)
+The COCO-Stuff dataset is composed of its detailed pixellevel annotations, facilitating comprehensive various object
+understanding, while (2) Cityscapes presents diverse urban
+street scenes. (3) The Potsdam-3 dataset is composed of
+satellite imagery. Following the class selection protocols
+from previous studies [8, 16, 22, 49], we use 27 classes
+from both COCO-Stuff and Cityscapes. For Potsdam-3, we
+use all 3 classes (see supplement for result).
+Evaluation Details. To align with established benchmarks,
+we adopt the evaluation protocols of prior works [16, 49].
+Our evaluation includes (1) a linear probe, assessing representational quality with a supervised linear layer on the
+unsupervised model, and (2) clustering through semantic
+segmentation via minibatch K-means based on cosine distance [36], without ground truth, compared against it using
+Hungarian matching. We measure performance using pixel
+accuracy (Acc.) and mean Intersection over Union (mIoU).
+
+Method
+
+Backbone
+
+Unsupervised
+Linear
+Acc. mIoU Acc. mIoU
+
+MDC [5]
+R18+FPN 40.7
+IIC [22]
+R18+FPN 47.9
+PiCIE [8]
+R18+FPN 65.5
+DINO [6]
+ViT-S/8 34.5
++ TransFGU [58] ViT-S/8 77.9
++ HP [49]
+ViT-S/8 80.1
++ EAGLE (Ours) ViT-S/8 81.8
+DINO [6]
+ViT-B/8 43.6
++ STEGO [16]
+ViT-B/8 73.2
++ HP [49]
+ViT-B/8 79.5
++ EAGLE (Ours) ViT-B/8 79.4
+
+7.1
+6.4
+12.3
+10.9
+16.8
+18.4
+19.7
+11.8
+21.0
+18.4
+22.1
+
+84.6
+91.2
+91.2
+84.2
+90.3
+90.9
+91.4
+
+22.8
+30.6
+33.1
+23.0
+26.8
+33.0
+33.4
+
+Quantitative Evaluation: COCO-Stuff. In Table 1, our
+EAGLE method sets new benchmarks on the COCO-Stuff
+dataset. (I) With the ViT-S/8 backbone, EAGLE showcases
+substantial improvements over existing methods in unsupervised accuracy, with gains of +15.9 over STEGO [16] and
++7.0 over HP [49]. The unsupervised mIoU of EAGLE also
+significantly outperforms other methods: +2.7 over STEGO
+and +2.6 over HP. The linear accuracy and mIoU of EAGLE
+both bring notable improvements over STEGO (+2.4 Acc.
+and +5.6 mIoU) and HP (+1.2 Acc. and +1.2 mIoU). Compared to SlotCon [56], which also emphasizes object-level
+representations, our model excels with a +21.8 and +8.9 in
+unsupervised mIoU and accuracy respectively. (II) With the
+ViT-S/16 backbone, EAGLE maintains its dominance, gaining +7.6 over STEGO and +5.6 over HP in unsupervised
+Acc. The linear accuracy and mIoU of EAGLE outperforms
+STEGO (+4.6 Acc. and +8.0 mIoU) and HP (+1.1 Acc. and
++3.4 mIoU) as well.
+
+4.2. Evaluation Results
+Here, we carefully compare our proposed method to existing USS works in both qualitative and quantitative ways.
+We mainly set up two representative baselines [16, 49] from
+the literature which share the same evaluation protocols.
+
+Quantitative Evaluation: Cityscapes. As shown in Table 2, our evaluations on the Cityscapes dataset show that
+7
+
+Table 3. Ablation results on the COCO-Stuff dataset [4].
+Exp.
+
+#
+1
+2
+3
+4
+5
+6
+7
+
+Lcorr
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+
+x → x̃
+Lobj Lsc
+✓
+✓
+✓
+✓
+✓
+
+✓
+✓
+✓
+
+50
+
+x̃ → x
+Unsupervised
+Meicue Mkm
+Lobj Lsc
+Acc. mIoU
+46.9 21.8
+✓
+✓
+59.3 23.2
+✓
+✓
+62.1 25.1
+✓ ✓
+✓
+61.6 24.8
+✓
+62.9 26.1
+✓ ✓
+✓ 55.1 17.0
+✓ ✓
+✓
+64.2 27.2
+
+(%)
+
+Eigenvalue
+0.05
+
+43.9
+
+0.04
+
+40
+
+0.03
+
+27.2
+
+30
+
+0.02
+20
+
+Unsup. mIoU
+Linear mIoU
+
+10
+
+(A)
+
+(B)
+
+(C)
+
+(D)
+
+(a) Hierarchical Layers
+
+(E)
+
+0.01
+0
+
+𝒌
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+
+(b) Eigengap
+
+Figure 7. (a) Analysis of hierarchical attention with the following
+layer combinations (layer numbers in square brackets): (A): [1-612], (B): [12], (C): [11-12], (D): [10-11-12], and (E): [9-10-1112]. (b) Analysis of eigengap to identify the optimal k for eigenbasis clustering, selected at the dashed line with maximal eigengap
+(i.e., the gap between two consecutive eigenvalues).
+
+EAGLE notably excels in both ViT-S/8 and ViT-B/8 backbones. (I) For the ViT-S/8 backbone, EAGLE has achieved
+significant unsupervised performance over STEGO (+3.9
+Acc. and +2.9 mIoU) and HP (+1.7 Acc. and +1.3 mIoU).
+(II) For the ViT-B/8 backbone, EAGLE significantly improves both unsupervised Acc. and mIoU. The Cityscapes
+dataset innately exhibits highly imbalanced pixel-level class
+distributions, like the predominance of sky over traffic
+light pixels, typically forces a trade-off between Acc.
+and mIoU [49], as seen with STEGO and HP excelling in
+each metric respectively. However, EAGLE effectively balances these competing metrics, showcasing strong performance in both areas despite such challenges.
+Qualitative Analysis. In Fig. 5, we also qualitatively compare our method to previous state-of-the-art models [16, 49]
+on the COCO-Stuff and Cityscapes datasets trained using ViT-S/8 and ViT-B/8 backbone, respectively. Our
+approach outperforms baselines by accurately segmenting objects and preserving details, unlike STEGO which
+tends to segment multiple elements within a single object
+furniture or road, and HP neglects certain small objects sports(kite) or traffic sign. Our model,
+however, is trained at the object level with an understanding
+of the structure of the image, which not only comprehends
+the overall layout but also ensures no objects are missed.
+
+all components. Notably, using Lobj alone (Exp. #3) significantly improves upon the baseline, underlining the importance of object-focused representation. The inclusion of Lsc
+further refines quality, as evidenced by comparing Exp. #3
+with Exp. #7. Additionally, the combined use of both Lnce
+directions (Exp. #7) shows a synergistic effect over using
+them individually (Exp. #4 and Exp. #5).
+Combination of Hierarchical Attention and Eigengap.
+In Fig. 7a, we present results from using various combinations of hierarchical attention. The combination of the thirdto-last, second-to-last, and last layers from 12-layer architecture, demonstrated the best performance since the layers
+closer to the end better capture the spatial information of
+the image. For optimal eigenbasis clustering, we conduct
+eigengap analysis in Fig. 7b. Since we choose k at the point
+where the eigengap is maximized, we have selected k = 4.
+
+5. Conclusion
+In this study, we present EAGLE, a novel method that
+addresses the persistent challenges in semantic segmentation with a focus on collecting semantic pairs through an
+object-centric lens. Through empirical analysis using a
+series of datasets, EAGLE showcases a remarkable capability to leverage the Laplacian matrix constructed from
+attention-projected features and fortified by an object-level
+prototype contrastive loss, which guarantees the accurate
+association of objects with their corresponding semantic
+pairs. Pioneering in utilizing dual advanced techniques, this
+method marks a substantial advance in addressing the constraints of patch-level representation learning found in previous research. Consequently, EAGLE emerges as a powerful framework for encapsulating the semantic and structural
+intricacies of images in contexts devoid of labels.
+
+4.3. Ablation Study
+We further analyze our model with ablation studies and
+discuss the results based on the full ablation results in Table 3 denoted as Exp. #1 to Exp. #7. We primarily conducted our experiments using the COCO-Stuff dataset using the DINO pretrained ViT-S/8 model. For more details,
+please refer to the supplementary material.
+Effect of EiCue.
+We validate the effectiveness
+of EiCue (Meicue ) by comparing the performance of
+our EiCue-enhanced method (Exp. #7) against a Kmeans (Mkm ) approach (Exp. #6) in Table 3. The EiCue
+result shows a notable improvement, capturing fine structural details that K-means misses. Fig. 6 visually demonstrates how EAGLE better identifies object semantics and
+structures compared to K-means.
+ObjNCE Loss. Table 3 shows how different loss components affect performance. The full model (Exp. #7) outperforms others, highlighting the effectiveness of combining
+
+Acknowledgement. This work was supported in part by the National Research
+Foundation of Korea (NRF) Grant funded by the Korean Government through the
+Ministry of Science and ICT (MSIT) under Grant RS-2023-00219019, and Institute
+of Information & Communications Technology Planning & Evaluation (IITP) Grant
+funded by MSIT (No. 2020-0-01361, Artificial Intelligence Graduate School Program (Yonsei University)).
+
+8
+
+References
+
+of remote sensing images. IEEE Transactions on Geoscience
+and Remote Sensing, 59(1):426–435, 2020. 1
+[13] Carl Doersch, Abhinav Gupta, and Alexei A Efros. Unsupervised visual representation learning by context prediction. In
+Proceedings of the IEEE International Conference on Computer Vision, pages 1422–1430, 2015. 1
+[14] Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov,
+Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner,
+Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is
+worth 16x16 words: Transformers for image recognition at
+scale. ICLR, 2021. 2, 3
+[15] Di Feng, Christian Haase-Schütz, Lars Rosenbaum, Heinz
+Hertlein, Claudius Glaeser, Fabian Timm, Werner Wiesbeck, and Klaus Dietmayer. Deep multi-modal object detection and semantic segmentation for autonomous driving:
+Datasets, methods, and challenges. IEEE Transactions on
+Intelligent Transportation Systems, 22(3):1341–1360, 2020.
+1
+[16] Mark Hamilton, Zhoutong Zhang, Bharath Hariharan, Noah
+Snavely, and William T. Freeman. Unsupervised semantic
+segmentation by distilling feature correspondences. In International Conference on Learning Representations, 2022. 1,
+2, 3, 4, 6, 7, 8
+[17] Robert Harb and Patrick Knöbelreiter. Infoseg: Unsupervised semantic image segmentation with mutual information
+maximization. In DAGM German Conference on Pattern
+Recognition, pages 18–32. Springer, 2021. 1, 2
+[18] Olivier J Hénaff, Skanda Koppula, Jean-Baptiste Alayrac,
+Aaron Van den Oord, Oriol Vinyals, and Joao Carreira.
+Efficient visual pretraining with contrastive detection. In
+Proceedings of the IEEE/CVF International Conference on
+Computer Vision, pages 10086–10096, 2021. 3
+[19] Olivier J Hénaff, Skanda Koppula, Evan Shelhamer, Daniel
+Zoran, Andrew Jaegle, Andrew Zisserman, João Carreira,
+and Relja Arandjelović. Object discovery and representation networks. In European Conference on Computer Vision,
+pages 123–143. Springer, 2022. 3
+[20] Jyh-Jing Hwang, Stella X Yu, Jianbo Shi, Maxwell D
+Collins, Tien-Ju Yang, Xiao Zhang, and Liang-Chieh Chen.
+Segsort: Segmentation by discriminative sorting of segments. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 7334–7344, 2019. 2
+[21] Phillip Isola, Daniel Zoran, Dilip Krishnan, and Edward H
+Adelson. Learning visual groups from co-occurrences in
+space and time. arXiv preprint arXiv:1511.06811, 2015. 1
+[22] Xu Ji, Joao F Henriques, and Andrea Vedaldi. Invariant information clustering for unsupervised image classification
+and segmentation. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 9865–9874,
+2019. 1, 2, 7
+[23] Feng Jiang, Aleksei Grigorev, Seungmin Rho, Zhihong Tian,
+YunSheng Fu, Worku Jifara, Khan Adil, and Shaohui Liu.
+Medical image semantic segmentation based on deep learning. Neural Computing and Applications, 29:1257–1265,
+2018. 1
+[24] Robin Karlsson, Tomoki Hayashi, Keisuke Fujii, Alexander Carballo, Kento Ohtani, and Kazuya Takeda. Improv-
+
+[1] Jiwoon Ahn and Suha Kwak. Learning pixel-level semantic
+affinity with image-level supervision for weakly supervised
+semantic segmentation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages
+4981–4990, 2018. 1
+[2] Inigo Alonso, Alberto Sabater, David Ferstl, Luis Montesano, and Ana C Murillo. Semi-supervised semantic segmentation with pixel-level contrastive learning from a classwise memory bank. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 8219–8228,
+2021. 1
+[3] Mirko Paolo Barbato, Paolo Napoletano, Flavio Piccoli, and
+Raimondo Schettini. Unsupervised segmentation of hyperspectral remote sensing images with superpixels. Remote
+Sensing Applications: Society and Environment, 28:100823,
+2022. 2
+[4] Holger Caesar, Jasper Uijlings, and Vittorio Ferrari. Cocostuff: Thing and stuff classes in context. In Proceedings
+of the IEEE Conference on Computer Vision and Pattern
+Recognition, pages 1209–1218, 2018. 6, 7, 8, 1, 2
+[5] Mathilde Caron, Piotr Bojanowski, Armand Joulin, and
+Matthijs Douze. Deep clustering for unsupervised learning
+of visual features. In Proceedings of the European conference on computer vision (ECCV), pages 132–149, 2018. 7,
+1
+[6] Mathilde Caron, Hugo Touvron, Ishan Misra, Hervé Jégou,
+Julien Mairal, Piotr Bojanowski, and Armand Joulin. Emerging properties in self-supervised vision transformers. In
+Proceedings of the IEEE/CVF International Conference on
+Computer Vision, pages 9650–9660, 2021. 2, 3, 6, 7, 1
+[7] Jeff Cheeger. A lower bound for the smallest eigenvalue
+of the laplacian. In Problems in Analysis: A Symposium
+in Honor of Salomon Bochner (PMS-31), pages 195–200.
+Princeton University Press, 2015. 4
+[8] Jang Hyun Cho, Utkarsh Mall, Kavita Bala, and Bharath
+Hariharan. Picie: Unsupervised semantic segmentation using invariance and equivariance in clustering. In Proceedings
+of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 16794–16804, 2021. 1, 2, 7
+[9] Marius Cordts, Mohamed Omran, Sebastian Ramos, Timo
+Rehfeld, Markus Enzweiler, Rodrigo Benenson, Uwe
+Franke, Stefan Roth, and Bernt Schiele. The cityscapes
+dataset for semantic urban scene understanding. In Proceedings of the IEEE Conference on Computer Vision and Pattern
+Recognition, pages 3213–3223, 2016. 6, 7, 1
+[10] Zhijie Deng and Yucen Luo. Learning neural eigenfunctions
+for unsupervised semantic segmentation. In Proceedings of
+the IEEE/CVF International Conference on Computer Vision
+(ICCV), pages 551–561, 2023. 3
+[11] Nameirakpam Dhanachandra, Khumanthem Manglem, and
+Yambem Jina Chanu. Image segmentation using k-means
+clustering algorithm and subtractive clustering algorithm.
+Procedia Computer Science, 54:764–771, 2015. 2
+[12] Lei Ding, Hao Tang, and Lorenzo Bruzzone. Lanet: Local
+attention embedding to improve the semantic segmentation
+
+9
+
+[37] R Manavalan and K Thangavel. Trus image segmentation using morphological operators and dbscan clustering. In 2011
+World Congress on Information and Communication Technologies, pages 898–903. IEEE, 2011. 2
+[38] Luke Melas-Kyriazi, Christian Rupprecht, Iro Laina, and
+Andrea Vedaldi. Deep spectral methods: A surprisingly
+strong baseline for unsupervised semantic segmentation and
+localization. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages 8364–
+8375, 2022. 3, 5
+[39] Andrew Ng, Michael Jordan, and Yair Weiss. On spectral
+clustering: Analysis and an algorithm. Advances in Neural
+Information Processing Systems, 14, 2001. 2, 4
+[40] Pedro O O Pinheiro, Amjad Almahairi, Ryan Benmalek, Florian Golemo, and Aaron C Courville. Unsupervised learning
+of dense visual representations. Advances in Neural Information Processing Systems, 33:4489–4500, 2020. 3
+[41] Yassine Ouali, Céline Hudelot, and Myriam Tami. Autoregressive unsupervised image segmentation. In European
+Conference on Computer Vision, pages 142–158. Springer,
+2020. 1, 2
+[42] Yassine Ouali, Céline Hudelot, and Myriam Tami. Semisupervised semantic segmentation with cross-consistency
+training. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, pages 12674–
+12684, 2020. 1
+[43] Thrasyvoulos N Pappas and Nikil S Jayant. An adaptive clustering algorithm for image segmentation. In International
+Conference on Acoustics, Speech, and Signal Processing,,
+pages 1667–1670. IEEE, 1989. 2
+[44] Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort,
+Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu
+Blondel, Peter Prettenhofer, Ron Weiss, Vincent Dubourg,
+et al. Scikit-learn: Machine learning in python. the Journal
+of machine Learning research, 12:2825–2830, 2011. 1
+[45] Shenghai Rong, Bohai Tu, Zilei Wang, and Junjie Li.
+Boundary-enhanced co-training for weakly supervised semantic segmentation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages
+19574–19584, 2023. 1
+[46] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. Unet: Convolutional networks for biomedical image segmentation. In International Conference on Medical Image Computing and Computer-Assisted Intervention, pages 234–241.
+Springer, 2015. 1
+[47] Maximilian Seitzer, Max Horn, Andrii Zadaianchuk, Dominik Zietlow, Tianjun Xiao, Carl-Johann Simon-Gabriel,
+Tong He, Zheng Zhang, Bernhard Schölkopf, Thomas Brox,
+and Francesco Locatello. Bridging the gap to real-world
+object-centric learning. In The Eleventh International Conference on Learning Representations, 2023. 3
+[48] Ramprasaath R Selvaraju, Karan Desai, Justin Johnson, and
+Nikhil Naik. Casting your model: Learning to localize improves self-supervised representations. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 11058–11067, 2021. 3
+[49] Hyun Seok Seong, WonJun Moon, SuBeen Lee, and Jae-Pil
+Heo. Leveraging hidden positives for unsupervised semantic
+
+ing dense representation learning by superpixelization and
+contrasting cluster assignment. In British Machine Vision
+Conference, 2021. 1, 2
+[25] Hoel Kervadec, Jose Dolz, Meng Tang, Eric Granger, Yuri
+Boykov, and Ismail Ben Ayed. Constrained-cnn losses for
+weakly supervised segmentation. Medical Image Analysis,
+54:88–99, 2019. 1
+[26] Soroush Abbasi Koohpayegani, Ajinkya Tejankar, and
+Hamed Pirsiavash. Mean shift for self-supervised learning.
+In Proceedings of the IEEE/CVF International Conference
+on Computer Vision, pages 10326–10335, 2021. 2
+[27] Philipp Krähenbühl and Vladlen Koltun. Efficient inference
+in fully connected crfs with gaussian edge potentials. Advances in Neural Information Processing Systems, 24, 2011.
+7
+[28] Hyeokjun Kweon, Sung-Hoon Yoon, and Kuk-Jin Yoon.
+Weakly supervised semantic segmentation via adversarial
+learning of classifier and reconstructor. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 11329–11339, 2023. 1
+[29] Xin Lai, Zhuotao Tian, Li Jiang, Shu Liu, Hengshuang Zhao,
+Liwei Wang, and Jiaya Jia. Semi-supervised semantic segmentation with directional context-aware consistency. In
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 1205–1214, 2021. 1
+[30] Seung Hyun Lee, Chanyoung Kim, Wonmin Byeon,
+Sang Ho Yoon, Jinkyu Kim, and Sangpil Kim. Lisa: Localized image stylization with audio via implicit neural representation. arXiv preprint arXiv:2211.11381, 2022. 3
+[31] Rui Li, Shunyi Zheng, Ce Zhang, Chenxi Duan, Jianlin Su,
+Libo Wang, and Peter M Atkinson. Multiattention network
+for semantic segmentation of fine-resolution remote sensing
+images. IEEE Transactions on Geoscience and Remote Sensing, 60:1–13, 2021. 1
+[32] Ze Liu, Yutong Lin, Yue Cao, Han Hu, Yixuan Wei, Zheng
+Zhang, Stephen Lin, and Baining Guo. Swin transformer:
+Hierarchical vision transformer using shifted windows. In
+Proceedings of the IEEE/CVF International Conference on
+Computer Vision, pages 10012–10022, 2021. 2
+[33] David G Lowe. Object recognition from local scale-invariant
+features. In Proceedings of the seventh IEEE International
+Conference on Computer Vision, pages 1150–1157. Ieee,
+1999. 1
+[34] Timo Lüddecke and Alexander Ecker. Image segmentation using text and image prompts. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR), pages 7086–7096, 2022. 3
+[35] Ming Luo, Yu-Fei Ma, and Hong-Jiang Zhang. A spatial
+constrained k-means approach to image segmentation. In
+Fourth International Conference on Information, Communications and Signal Processing, 2003 and the Fourth Pacific
+Rim Conference on Multimedia. Proceedings of the 2003
+Joint, pages 738–742. IEEE, 2003. 2
+[36] James MacQueen et al. Some methods for classification and
+analysis of multivariate observations. In Proceedings of the
+Fifth Berkeley Symposium on Mathematical Statistics and
+Probability, pages 281–297. Oakland, CA, USA, 1967. 5,
+7
+
+10
+
+segmentation. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages 19540–
+19549, 2023. 1, 2, 3, 4, 6, 7, 8
+[50] Jianbing Shen, Xiaopeng Hao, Zhiyuan Liang, Yu Liu, Wenguan Wang, and Ling Shao. Real-time superpixel segmentation by dbscan clustering algorithm. IEEE Transactions on
+Image Processing, 25(12):5933–5942, 2016. 2
+[51] Jianbo Shi and Jitendra Malik. Normalized cuts and image
+segmentation. IEEE Transactions on Pattern Analysis and
+Machine Intelligence, 22(8):888–905, 2000. 2, 4
+[52] Marvin Teichmann, Michael Weber, Marius Zoellner,
+Roberto Cipolla, and Raquel Urtasun. Multinet: Real-time
+joint semantic reasoning for autonomous driving. In 2018
+IEEE Intelligent Vehicles Symposium (IV), pages 1013–1020.
+IEEE, 2018. 1
+[53] Wouter Van Gansbeke, Simon Vandenhende, Stamatios
+Georgoulis, and Luc Van Gool. Unsupervised semantic segmentation by contrasting object mask proposals. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 10052–10062, 2021. 3
+[54] Alexander Vezhnevets and Joachim M Buhmann. Towards
+weakly supervised semantic segmentation by means of multiple instance and multitask learning. In 2010 IEEE Computer Society Conference on Computer Vision and Pattern
+Recognition, pages 3249–3256. IEEE, 2010. 1
+[55] Xinlong Wang, Rufeng Zhang, Chunhua Shen, Tao Kong,
+and Lei Li. Dense contrastive learning for self-supervised
+visual pre-training. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages
+3024–3033, 2021. 3
+[56] Xin Wen, Bingchen Zhao, Anlin Zheng, Xiangyu Zhang, and
+Xiaojuan Qi. Self-supervised visual representation learning
+with semantic grouping. In Advances in Neural Information
+Processing Systems, 2022. 3, 7
+[57] Zhenda Xie, Yutong Lin, Zheng Zhang, Yue Cao, Stephen
+Lin, and Han Hu. Propagate yourself: Exploring pixel-level
+consistency for unsupervised visual representation learning.
+In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pages 16684–16693, 2021.
+3
+[58] Zhaoyuan Yin, Pichao Wang, Fan Wang, Xianzhe Xu, Hanling Zhang, Hao Li, and Rong Jin. Transfgu: a top-down approach to fine-grained unsupervised semantic segmentation.
+In European Conference on Computer Vision, pages 73–89.
+Springer, 2022. 1, 2, 7
+[59] Andrii Zadaianchuk, Matthaeus Kleindessner, Yi Zhu,
+Francesco Locatello, and Thomas Brox. Unsupervised semantic segmentation with self-supervised object-centric representations. In The Eleventh International Conference on
+Learning Representations, 2023. 3
+[60] Xiao Zhang and Michael Maire. Self-supervised visual representation learning from hierarchical grouping. Advances
+in Neural Information Processing Systems, 33:16579–16590,
+2020. 3
+[61] Xiaosong Zhang, Yunjie Tian, Lingxi Xie, Wei Huang, Qi
+Dai, Qixiang Ye, and Qi Tian. Hivit: A simpler and more
+efficient design of hierarchical vision transformer. In The
+
+Eleventh International Conference on Learning Representations, 2023. 2
+
+11
+
+Input Image
+
+A. Additional Material: Project Page & Presentation Video
+
+Label
+
+STEGO
+
+HP
+
+Ours
+
+We have described our results in an easily accessible
+manner on our project page, where a brief presentation
+video is also available. The link to the project page is
+as follows: https://micv- yonsei.github.io/
+eagle2024/.
+Roads & Cars
+
+B. Additional Evaluation Results
+
+Vegetation
+
+Buildings
+
+Figure 8. Qualitative results of Potsdam-3 dataset [22] trained with
+ViT-B/8 backbone.
+
+In this section, we extend our discussion to include the
+evaluation results of EAGLE. Initially, we present both
+quantitative and qualitative findings from the Potsdam-3
+dataset [22], which were not covered in the main paper
+due to space constraints. Subsequently, we also provide
+additional qualitative analysis of the COCO-Stuff [4] and
+Cityscapes datasets [9].
+
+B.2. COCO-Stuff
+We demonstrate additional qualitative results in Fig. 13.
+
+B.3. Cityscapes
+Additional qualitative results are available in Fig. 12.
+
+B.1. Potsdam-3
+
+C. Additional Experiments
+Table 4. Quantitative results on Potsdam-3 dataset [22].
+Method
+
+Backbone
+
+Unsup. Acc.
+
+Unsup. mIoU
+
+Random CNN [22]
+K-means [44]
+SIFT [33]
+ContextPrediction [13]
+CC [21]
+DeepCluster [5]
+IIC [22]
+DINO [6]
++ STEGO [16]
++ HP [49]
++ EAGLE (Ours)
+
+VGG11
+VGG11
+VGG11
+VGG11
+VGG11
+VGG11
+VGG11
+ViT-B/8
+ViT-B/8
+ViT-B/8
+ViT-B/8
+
+38.2
+45.7
+38.2
+49.6
+63.9
+41.7
+65.1
+53.0
+77.0
+82.4
+83.3
+
+62.6
+68.6
+71.1
+
+C.1. Additional Ablation Study
+In this section, we provide additional ablation analysis
+on the feature type (Section C.1.1) and prototype selection
+method (Section C.1.2).
+C.1.1 Ablation: Feature Type
+Table 5. The experimental results for the feature type on the
+COCO-Stuff dataset.
+Feature Type
+Sθ
+Aseg
+
+In Table 4, we present the quantitative results for the
+Potsdam-3 dataset [22], where our EAGLE sets a new score.
+We not only report the unsupervised accuracy, as previously
+done by methods [16, 49], but also expand our reporting
+to include unsupervised mIoU. With the ViT-B/8 backbone,
+EAGLE surpass existing USS methods in unsupervised accuracy, with gains of +6.3 over STEGO [16] and +0.9 over
+HP [49]. In the context of unsupervised mIoU, our method
+surpasses STEGO by a significant margin of +8.5, and +2.5
+over HP.
+In our qualitative analysis in Fig. 8, compared to
+STEGO [16] and HP [49], our EAGLE demonstrates a more
+accurate understanding of object-level semantics. Specifically, in the second row, which is a zoomed-in view of the
+red box in the first row, EAGLE successfully classifies the
+cars on the road as separate entities from the buildings. This
+distinction is not as clear in the results from STEGO and HP,
+highlighting the superior capability of our approach in discerning and segmenting objects according to their semantic
+categories.
+
+F
+
+K
+
+F
+K
+Sθ (F)
+F
+K
+Sθ (K)
+
+Unsupervised
+Acc.
+mIoU
+
+Acc.
+
+mIoU
+
+43.1
+57.6
+59.1
+58.6
+56.9
+64.2
+
+74.1
+74.6
+74.5
+74.7
+74.6
+76.8
+
+41.2
+41.6
+41.5
+41.7
+41.6
+43.9
+
+17.1
+24.9
+25.4
+26.1
+23.8
+27.2
+
+Linear
+
+In this section, we explore various different combinations
+of feature types that will be used for computing Sθ and for
+the creation of Aseg , thereby exploring their implications
+and potential applications in the context of our study. In
+Table 5, we analyze the experimental results for the COCOStuff dataset [4] trained using the ViT-S/8 backbone. The
+F and K listed under the Sθ in the “Feature Type” column, represent the types of features inputted into the segmentation head Sθ . In this study, F is sourced from the
+activation map at the final layer of the vision transformer,
+while K is processed in accordance with the methods outlined in the main manuscript (Section 3.1). The Aseg located
+in the “Feature Type” column, denotes the feature types utilized in the creation of Aseg . As detailed in the manuscript,
+1
+
+C.2. Additional Visualization of the Primary Elements of Eigen Aggregation Module
+
+EiCue construction involves the sum of two adjacency matrices to form the Laplacian, one of which is the semantic
+similarity matrix Aseg , providing the semantic interpretation of the object. The F and K in the Aseg column, retain the same values as previously described, being sourced
+from a static pretrained vision transformer. When considering Sθ (F) and Sθ (K), these refer to the F and K features
+that have been processed through the segmentation head Sθ .
+As the model training progresses, these dynamic values are
+subject to change, reflecting the evolving state of the trained
+segmentation head.
+
+C.2.1 Eigenvectors
+As illustrated in Fig. 14, we provide additional visualization of eigenvectors obtained from learnable feature
+S trained using COCO-Stuff dataset [4]. Our eigenvectors present remarkable capability in distinguishing objects
+while capturing within its object semantics.
+C.2.2 EiCue
+
+As detailed in Table 5, we present the results for all possible feature type combinations. Overall, leveraging K to
+compute S through Sθ , yielded superior outcomes compared to utilizing F. To construct Aseg , utilizing dynamic
+feature types such as Sθ (F) or Sθ (K) demonstrates significantly higher values in contrast to the aforementioned static
+features, F and K, thereby validating the effectiveness of
+our training approach. Ultimately, employing the learnable
+feature Sθ (K) for Aseg delivered the best performance.
+
+As shown in Fig. 15, we present additional visualizations
+that compare our EiCue model with the traditional K-means
+clustering approach. EiCue shows a significant improvement over clustering with K-means in identifying the semantic details of objects and discerning the comprehensive
+structure of images. This distinction is particularly evident
+in the way EiCue captures intricate object semantics and
+delineates the structural elements within the images. These
+observations substantiate our model’s claim that EiCue is
+proficient in recognizing object semantics and distinguishing structural components.
+
+C.1.2 Ablation: Prototype Selection Method
+
+C.3. Application
+Our EAGLE is designed for semantic segmentation,
+which predicts dense class prediction. Consequently, EAGLE is applicable to a variety of tasks that necessitate pixellevel semantic interpretation. A key technique in our approach is the eigendecomposition of the Laplacian matrix.
+Thus, we can use eigenvectors of images and these eigenvectors are able to capture the detailed semantic structures
+present in an image. As discussed in Section C.3.1, leveraging these eigenvectors allows us to precisely perform image
+matting and achieve localized image stylization.
+
+Table 6. The experimental results for the prototype selection
+method on the COCO-Stuff dataset.
+Method
+
+Unsupervised
+Acc.
+mIoU
+
+Acc.
+
+mIoU
+
+PCA
+Centroid
+Medoid
+
+55.7
+59.0
+64.2
+
+74.7
+75.8
+76.8
+
+39.6
+42.1
+43.9
+
+18.3
+24.9
+27.2
+
+Linear
+
+We further carry out ablation experiments comparing various methods for selecting prototypes. A prototype is a
+semantic vector that represents a single object, serving as
+an anchor that attracts semantic vectors within the object
+and repels the other ones. To select a semantic vector that
+represents an object, we can consider several options for
+choosing object-representative semantic vectors. (a) Principal Component Analysis (PCA): we can use PCA to find the
+direction of maximum variance in the data, and choose the
+vector that has the largest projection on the first principal
+component. (b) Centroid: calculates the mean vector of the
+set, where each component of the centroid is the average of
+that component across all vectors in the set. (c) Medoid: we
+can choose the vector that minimizes the sum of distances to
+all other vectors. This is less sensitive to outliers compared
+to the centroid. As reported through Table 6, we observed
+that leveraging the Medoid method demonstrated the best
+performance.
+
+C.3.1 Image Matting
+The eigenvectors obtained through our proposed method
+are effective in distinguishing objects within images. To this
+end, our eigenvectors can be efficiently utilized for image
+matting and localized image stylization. The process of image matting involves the extraction of the foreground from
+an image, facilitating further manipulations like compositing onto a different background or selective editing. Historically, the matting task has been challenging due to intricate
+object edges and subtle transitions. The eigenvectors, adept
+at distinguishing distinct objects or features within images,
+provide a powerful solution to this challenge. Using our
+proposed method, we leverage the potential of these eigenvectors for refined image matting. As depicted in Fig. 9,
+the first column represents the input images. The subsequent column showcases the first eigenvector derived from
+2
+
+Input Image
+
+1st Eigenvector
+
+Image Matte
+
+CLIPSeg
+
+Edited Image
+
+framework of existing correspondence distillation loss [16],
+which involves three distinct loss functions, our method
+modifies and utilizes two of these components: (a) the augmented image correspondence distillation loss and the (b)
+random image correspondence distillation loss.
+Although Eq. (8) is applied to both types of loss, the
+difference lies in what each correspondence tensor represents. (a) In the augmented image correspondence distillation loss, Ǩaug and Šaug is computed as a cosine distance
+between K, K̃ and S, S̃, respectively. K̃ and S̃ are the results for the x̃, which is the augmented images of x, created
+through the same aforementioned process. While (b) in the
+random image correspondence distillation loss, Ǩrand and
+Šrand is computed as a cosine distance between K, Ḱ and
+S, Ś, respectively. Ḱ and Ś are the results for the random
+images from the entire dataset, created through the same
+aforementioned process. In the Eq. (8), b is defined as the
+shift of the feature value and remained fixed throughout the
+training process. In contrast, we modified baug and brand to
+dynamically adapt based on the Ǩ and Š in both losses,
+where baug represents the b in augmented image correspondence distillation loss, and brand represents the b in random
+image correspondence distillation loss. Here is the formula
+we used:
+
+Figure 9. We demonstrate our Laplacian matrix-based image matting. From left to right: the input image, eigenvector from our
+matrix, resultant image matte, CLIP-based segmentation [34], and
+edited image using our matte with existing text-driven image editing model [30]. For the editing in the last column, the text prompts
+used were plastic bag for the top image and white fur for
+the bottom image. Our matte offers clearer object boundaries than
+CLIPSeg, leading to superior editing quality.
+
+our matrix, effectively highlighting the structure of the primary object. The third column portrays the resultant image matte, distinctly separating the object from its surroundings. In contrast, the fourth column, representing the CLIPbased segmentation, while reasonable, but fails to provide
+as delicate boundaries as our eigenvector-based technique.
+A notable difference can be observed in the image of the
+boat. Our method adeptly separates the pillar of the boat,
+whereas the CLIP-based approach fails to isolate it, erroneously including the trees in the background as part of the
+foreground. The final column presents the edited images,
+emphasizing the utility of our matte for selective edits, ensuring that the distinguished object can be stylized without
+affecting the background.
+
+baug =
+
+H W
+H W
+1 XX
+1 XX
+Ǩij −
+Šij − kshift ,
+HW i=1 j=1
+HW i=1 j=1
+
+(9)
+
+brand =
+
+H W
+H W
+1 XX
+1 XX
+Ǩij +
+Šij − kshift
+HW i=1 j=1
+HW i=1 j=1
+
+D. Implementation Details
+
+!
+× vshift ,
+(10)
+
+where H and W refer to the height and width of the feature
+tensor, respectively. Here, kshift and vshift are determined as
+hyperparameters (see Section D.3.) Thus, the final correspondence distillation loss that we use is defined as
+
+In this section, we discuss details of correspondence distillation loss (Section D.1.), model architecture (Section
+D.2.), and hyperparameters (Section D.3).
+
+D.1. Correspondence Distillation Loss
+
+Lcorr = Lcd (Ǩaug , Šaug , baug ) + Lcd (Ǩrand , Šrand , brand ),
+(11)
+which is the summation of augmented image correspondence distillation loss and random image correspondence
+distillation loss.
+
+By employing a correspondence distillation loss [16], we
+enhanced the stability of the training process by ensuring
+reliable graph Laplacian initialization. The original correspondence distillation loss is defined as
+X
+
+Lcd (F̌, Š, b) = −
+F̌ − b Š,
+(8)
+
+D.2. Detailed Architecture
+Image Encoder. For all experiments, we basically leverage
+DINO [6] pretrained ViT-S/8, ViT-S/16 and ViT-B/8 [14]
+as an image encoder. Specifically, we initialize ViT with a
+teacher weight of DINO. As mentioned before, we extract
+attention keys hierarchically from ViT and then concatenate
+them into a single feature tensor K (for details, see Section
+3.1 in the main manuscript). Then, we apply channel-wise
+
+where F̌ and Š is computed as a cosine distance using F and
+S. Here, F is a feature obtained from the activation map at
+the final layer of the vision transformer with a given image
+and S is the projection of F using segmentation head Sθ .
+Since we leverage attention keys in place of F, we substitute F with K and revise S to be S = Sθ (K). Within the
+3
+
+K
+
+Segmentation Head
+
+K
+
+Linear
+
+𝐷!
+
+S
+
+Hyperparams
+λobj
+λsc
+λnce
+kshift
+vshift
+step
+Sθ , Zξ , Φ
+LR
+C
+
+Z
+
+Projection Head
+
+⨁
+
+𝐷! → 𝐷"
+
+Proj. Head
+
+Image
+Encoder
+
+Seg. Head
+
+Input Image
+
+Table 7. Hyperparameters used in EAGLE. LR refers learning rate.
+
+S
+
+S
+
+𝐷"
+
+𝐷"
+
+Linear
+
+𝐷! → 𝐷!
+
+ReLU
+
+Linear
+
+Linear
+
+COCO-Stuff ViT-S/8
+0.3
+0.7
+0.9
+0
+3.5
+200
+0.0005
+0.00005
+
+Cityscapes ViT-B/8
+0.3
+0.7
+0.7
+0.11
+3.5
+380
+0.0005
+0.0004
+
+𝐷" → 𝐷#
+
+𝐷! → 𝐷"
+
+Z
+
+In the table above, “step” refers to the number of training iterations required for the λnce to increase from 0 to the number indicated in λnce row. “LR” indicates learning rate and
+Sθ , Zξ , Φ shares same learning rate.
+
+𝐷#
+
+Figure 10. Detailed architecture of segmentation head and projection head used in our method.
+
+E. Discussion
+dropout (p = 0.1) to feature tensor K before feeding to
+segmentation head Sθ .
+
+E.1. Failure Cases
+
+Ours
+
+Label
+
+Input Image
+
+Segmentation Head. We illustrate the detailed architecture
+of the segmentation head and projection head in Fig. 10.
+For a fair performance comparison with existing models,
+we employ the same approach for the segmentation head
+Sθ as used in the previous models [16, 49]. This non-linear
+segmentation head Sθ consists of simple linear layers. The
+input is a tensor K with a dimension of DK . This tensor
+first passes through a linear layer that transforms its dimension from DK to DS , where DS represents the desired dimension for the output of Sθ . Following the initial linear
+transformation, there is a ReLU (Rectified Linear Unit) activation function, which introduces non-linearity to the process. The output of the activation layer is then fed into another linear layer, which once again maps the dimension
+from DK to DS . The outputs of the two pathways are then
+combined via a summation operation. The summation consolidates the linearly transformed input and the non-linearly
+transformed input. The result is the tensor S with the dimension DS , which is the output of the segmentation head.
+
+Figure 11. Failure cases of EAGLE.
+
+Unsupervised semantic segmentation (USS), unlike the
+fully-supervised approach, is quite challenging as it predicts classes for each pixel without labeled data. While
+USS is likely to show much better performance in the future, our model represents a step in its evolution and thus
+comes with certain limitations. Fig. 11 illustrates the failure
+cases of EAGLE, which has been trained to capture objectlevel semantics. The first to the third column is from the
+COCO-Stuff dataset and the remaining columns are from
+the Cityscapes dataset. In the first column, our model fails
+to segment objects properly. This is due to the narrow color
+distribution of the input image and the limited variety of
+object semantics present in the image, leading to a failure
+in creating a high-quality adjacency matrix for EiCue. In
+the second and third columns, we observed that our results
+successfully implemented object-level semantics but made
+errors in matching the object class. Within column four,
+we see our results that accurately segment and correctly
+
+Projection Head. As shown in Fig. 10, we project semantic
+tensor S to Z to facilitate object-centric contrastive learning. The basic concept of projection head Zξ is to project
+the tensor without transforming its input dimension. Following this concept, we form a projection head with a single
+linear layer that maps its dimension from DS to DZ . Here,
+we note that while we use different notations DS and DZ
+for clarity and ease of explanation, the actual dimensions
+represented by these notations are the same as DS = DZ .
+
+D.3. Hyperparameters
+In this section, we carefully describe hyperparameters in
+Table 7 that are used throughout our series of experiments.
+4
+
+classify car, tree, building, and person, but incorrectly categorize gravel paths as a different class instead of
+road. Similarly, in the last column, there were no critical
+errors for objects other than sidewalk. However, even
+when viewed with the human eye, the input image presents
+a challenging scenario in distinguishing between road and
+sidewalk.
+
+E.2. Future Works
+Throughout our manuscript, we demonstrated that leveraging EiCue through graph Laplacian effectively captures
+the semantic structure of an image. However, constructing
+an adjacency matrix and forming a Laplacian matrix entails
+a relatively high computational cost. This approach does
+not affect the inference time in our framework, but it does
+require more training time compared to using solely deepbased methods. In our research, we compute the adjacency
+matrix for every feature vector of an image. While EAGLE
+shows state-of-the-art results, regarding every single feature
+vector is not the most computationally efficient, suggesting that improvements to EiCue could be made by sampling
+only vital features based on other knowledge of the image
+and constructing the Laplacian matrix accordingly. Additionally, as our primary focus is on object-level semantics,
+this approach may not be directly applicable to domains like
+medical imaging. Therefore, it is crucial to engage in research that uncovers knowledge about object-level semantics, which is applicable across multiple domains and holds
+significant potential for widespread use in the field of computer vision.
+
+5
+
+Input Image
+Label
+STEGO
+HP
+Ours
+road
+
+sidewalk
+
+traffic sign
+
+parking
+
+vegetation
+
+rail track
+terrain
+
+sky
+
+building
+
+wall
+
+fence
+
+person
+
+rider
+
+car
+
+guard rail
+truck
+
+bus
+
+bridge
+caravan
+
+turnnel
+
+pole
+
+polegroup
+
+trailer
+
+train
+
+motorcycle
+
+traffic light
+bicycle
+
+Ours
+
+HP
+
+STEGO
+
+Label
+
+Input Image
+
+Figure 12. Additional qualitative results of Cityscapes dataset [9] trained with ViT-B/8 backbone.
+
+electronic
+floor
+
+appliance
+
+food
+
+furniture
+
+food
+
+furniture
+
+rawmaterial
+
+indoor
+textile
+
+kitchen
+wall
+
+accessory
+
+window
+
+animal
+
+building
+
+outdoor
+
+ground
+
+plant
+
+person
+
+sports
+
+vehicle
+
+ceiling
+
+sky
+
+solid
+
+structural
+
+water
+
+Figure 13. Additional qualitative results of COCO-Stuff dataset [4] trained with ViT-S/8 backbone.
+
+6
+
+Figure 14. Additional visualization of the eigenvector obtained by training the COCO-Stuff dataset [4] with ViT-S/8 as the backbone.
+
+7
+
+3rd Eigenvector 2nd Eigenvector 1st Eigenvector
+Input Image
+
+3rd Eigenvector 2nd Eigenvector 1st Eigenvector
+Input Image
+
+3rd Eigenvector 2nd Eigenvector 1st Eigenvector
+Input Image
+
+Input Image
+Label
+K-means
+EiCue
+Input Image
+Label
+K-means
+EiCue
+Input Image
+Label
+K-means
+EiCue
+
+Figure 15. Additional comparison between K-means and our EiCue, with EiCue demonstrating enhanced performance in discerning object
+semantics and structures relative to K-means.
+
+8
+
+

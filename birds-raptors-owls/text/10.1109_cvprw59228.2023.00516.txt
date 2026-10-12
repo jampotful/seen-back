@@ -1,0 +1,1511 @@
+OWL (Observe, Watch, Listen): Audiovisual Temporal Context for Localizing Actions in Egocentric Videos
+Merey Ramazanova, Victor A Escorcia, Fabian Caba Heilbron, Chen Zhao, Bernard Ghanem (2023). IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW). http://arxiv.org/abs/2202.04947. doi:10.1109/cvprw59228.2023.00516. Licence: cc-by. Text from pdf.
+
+arXiv:2202.04947v3 [cs.CV] 26 Oct 2022
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+1
+
+OWL (Observe, Watch, Listen):
+Audiovisual Temporal Context for Localizing
+Actions in Egocentric Videos
+Merey Ramazanova1
+
+1
+
+King Abdullah University of Science
+and Technology
+
+Victor Escorcia2
+
+2
+
+Samsung AI Center Cambridge
+
+victor.escorcia@kaust.edu.sa
+
+3
+
+Adobe Research
+
+merey.ramazanova@kaust.edu.sa
+
+Fabian Caba Heilbron3
+caba@adobe.com
+
+Chen Zhao1
+
+chen.zhao@kaust.edu.sa
+
+Bernard Ghanem1
+bernard.ghanem@kaust.edu.sa
+
+1
+
+Abstract
+Egocentric videos capture sequences of human activities from a first-person perspective and can provide rich multimodal signals. However, most current localization methods use third-person videos and only incorporate visual information. In this work, we
+take a deep look into the effectiveness of audiovisual context in detecting actions in
+egocentric videos and introduce a simple-yet-effective approach via Observing, Watching, and Listening (OWL). OWL leverages audiovisual information and context for egocentric temporal action localization (TAL). We validate our approach in two large-scale
+datasets, EPIC-Kitchens, and HOMAGE. Extensive experiments demonstrate the relevance of the audiovisual temporal context. Namely, we boost the localization performance (mAP) over visual-only models by +2.23% and +3.35% in the above datasets.
+
+Introduction
+
+Egocentric videos capture the world using wearable cameras. Arguably, in these videos, localizing actions in time is top of mind [14]. In doing so, we could enable world-changing
+applications such as an episodic memory AI assistant for health monitoring. Localizing and
+recognizing human actions in egocentric video imposes several challenges. Due to the capture nature, videos tend to be long and highly unconstrained w.r.t. the activities occurring
+on the stream. Given that the capture happens through a camera mounted on a person’s
+head, challenging conditions such as undesired camera motions, occlusions, and poor quality video make the problem of localizing and recognizing actions a complex task. Additionally, existing egocentric datasets, e.g. [15], focus on localizing atomic actions that happen
+© 2022. The copyright of this document resides with its authors.
+It may be distributed unchanged freely in print or electronic forms.
+
+2
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+the switch is pressed
+
+video
+
+audio
+
+labels
+
+time
+
+turn off extractor fan
+
+(a)
+door’s thud
+
+fridge opened
+
+fridge closed
+
+liquid gurgles
+
+video
+
+audio
+
+labels
+
+verb open grab close
+
+open
+
+grab close
+
+open
+
+pour
+
+close
+
+noun cupb. glass cupb.
+
+fridge
+
+juice fridge
+
+juice
+
+juice
+
+juice
+
+time
+
+(b)
+
+Figure 1: Audiovisual temporal context is an important cue for the temporal localization
+of actions in egocentric unedited videos. In video (a), the action, turning off the extractor
+fan, is more evident when observing the interplay between audio and visual streams. The fan
+is invisible but the interruption of the humming noise in the audio signal provides context
+to the movement of the hand in the visual domain. In video (b), the recorder is preparing a
+glass of juice . The green drawn boxes spatially localize the juicebox. Knowing the content
+of the box in action pour juice could help in predicting ambiguous actions open juice, close
+juice, and grab juice (green arrows). By following the violet arrows in the annotations, we
+can see the pattern of how people interact with kitchen items.
+densely across long videos. Consequently, the performance of egocentric TAL lags far behind compared to that in the third-person setting [34]. Given such complexity, analyzing the
+relationships of actions and looking beyond visual cues is essential in an egocentric scene.
+Despite its challenges, there are particular properties of the current egocentric datasets [15,
+38] to benefit TAL. Since the videos are unedited and continuous, the audio stream is synchronized with the visual stream, capturing the sounds and appearance of what is happening
+in the video at the moment. This is different from videos in traditional datasets that are
+curated from online video platforms like YouTube. In such datasets and due to the editing,
+audio might not correspond to the original sounds present in the scene. We argue that audio,
+in egocentric video, plays an important role in assisting visual models to localize human
+actions. For example, looking at Fig. 1a, we notice a person reaching for something in a
+kitchen. Because of the camera view, we cannot see the object they are interacting with. Can
+we guess what exactly are they doing? By observing the lighting and the location (above the
+stove), we could imagine the interaction with the fan. But how can we discern if the fan was
+turned off or on? By hearing the sounds from the scene, you would not doubt that the person
+is ‘turning off the extraction fan’. The fan’s distinctive humming noise and its disappearance
+indicate the action happening and its precise temporal endpoints.
+Using temporal context has been proven to be effective for both action recognition, and
+localization [11, 25, 35, 46, 49, 50, 51]. Temporal context might be even more informative
+in egocentric videos. For instance, at being unedited and continuous, actions unfold, with
+a more often than not, predictable sequence [21, 22, 25]. To illustrate how context can be
+helpful to localize egocentric actions, we present a toy example in Fig. 1b. Looking at the
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+3
+
+sequence holistically, the scenario is clear: the recorder is preparing a glass of juice. If we
+look at each shot separately (imitating a neural network classifying a trimmed clip), we could
+probably struggle to recognize some actions. It is unclear that the box, which the recorder
+is grabbing from the fridge, then opening and closing, contains juice. When we see some
+orange liquid (and hear) pouring from it, we can guess it must be orange juice. The instances
+‘grab juice’ and ‘pour juice’ are almost five seconds away, but still are informative to each
+other. Moreover, by leveraging context, we can decode the sequential patterns of actions in
+cooking activities. We argue that audiovisual context provide priors to better localize actions.
+We propose OWL (Observe, Watch, Listen), a simple-yet-effective transformer-based
+architecture that leverages audiovisual context to localize actions in egocentric videos. We
+do a methodical analysis to verify the importance of audiovisual context in egocentric videos.
+First, we study which components of the action localization pipeline would benefit from audio cues (Sec.4, Tab. 1). Furthermore, we analyze what temporal neighborhood provides the
+richer context (Sec.4, Tab.2a). Finally, we analyze how visually occluded instances largely
+benefit from context in egocentric videos (Sec.4, Tab.5). OWL uses self-attention to encode
+context within each modality and cross-attention to capture relevant context across modalities. Our experiments on EPIC-Kitchens-100 (EK100) [15] and HOMAGE [38] validate that
+OWL effectively encodes audiovisual context for egocentric TAL and significantly improves
+over proposed audiovisual baselines.
+Contributions. (1) We propose a transformer-based method for egocentric action localization by effectively fusing audiovisual context (Sec. 3). (2) We conduct extensive experiments
+on EK100 and HOMAGE in Sec. 4.3, and achieve competitive results. (3) We conduct a thorough analysis that validates our hypothesis and findings about audiovisual context for action
+localization in egocentric videos (Sec. 4.4).
+
+2
+
+Related Work
+
+Audiovisual learning. Video and audio are common modality choices for a multi-modal
+learning scenario in video understanding. Deep learning facilitates audiovisual learning as it
+enables learning per-modality hierarchical representations [39], which are more optimal than
+designing hand-crafted features. Recent works provide us with more sophisticated solutions
+where the learned modality representations are being fused implicitly by the network and
+are optimized for the downstream task, such as [1, 17, 24, 25, 33, 45, 47]. While several
+works discussed the audiovisual scenario for the action recognition task [47], incorporating
+audio for TAL is not a widely researched area. [42] proposes a new task of audiovisual
+event localization that aims at predicting the event class from a 10-second clip. [4] studies
+multi-modal fusion approaches for audiovisual localization but ablates it on third-person
+datasets. Compared to them, we design our method for long, diverse egocentric videos.
+We are particularly motivated by [24], who emphasized the advantage of using egocentric
+unedited videos for applying audiovisual learning in action recognition. To the best of our
+knowledge, we are the first work that analyzes this advantage in egocentric TAL.
+Temporal action localization (TAL). Given an untrimmed video, TAL models aim to detect
+the boundaries and classes of all actions happening inside the video. Recent work can be
+categorized into separate-stage and combined-stage methods. The separate-stage methods
+generate a set of class-agnostic proposals (generation) first and then use a separate classifier
+to assign an action class to each proposal [5, 9, 18, 27, 28, 49]. Most of the existing separatestage methods focus on generating better proposals and rely on global video classification
+
+4
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+models and dataset statistics to classify them. Combined-stage solutions perform action
+localization in one unified pipeline by optimizing for both tasks simultaneously [29, 34, 48,
+52]. In this paper we follow the separate-stage approach.
+Egocentric (unedited) videos. TAL has been extensively studied for third-person and mostly
+edited videos (typically, from consumer media platforms like YouTube and movies) [8, 23,
+53]. The appearance of new large-scale egocentric datasets [15, 38] opened up a unique
+opportunity for researchers to study human actions in unedited videos. The annotations for
+action localization in most common (third-person) benchmarks are relatively sparse, with
+a low variation in assigned classes per video (ActivityNet [8] has on average 1.5 instances
+and 1.0 class per video, in THUMOS14 these numbers are 15.4 and 1.1, respectively). That
+makes it possible to condition the localized action class by gathering visual cues at the videolevel. This paradigm is not suitable for more dense and diverse datasets. For instance,
+EK100 has on average 128.5 instances and 53.2 classes per video. That said, assigning
+proposals with a single video-level class would yield pretty poor localization results. To
+address the densely annotated videos on EK100, Damen et al. introduce a baseline separatestage approach using BMN [28] proposals and SlowFast [20] classification. [34] proposes
+a combined-stage method (AGT) that leverage graph-based and transformer-based architectures to localize and classify actions jointly. Note that these approaches do not explicitly
+(or implicitly) model temporal context or leverage the egocentric audio streams. Our work
+lies in the separate-stage group; thus, to design OWL, we thoroughly investigate effective
+multi-modal and contextualized classifiers to assign each proposal an action class.
+Temporal context in action localization. The importance of temporal context has been a
+long-standing aspect in action localization [2, 13, 37, 46, 49, 50]. Some works [49, 50]
+propose graph-based methods, where they define proposals and snippets as graph nodes and
+perform graph convolutions for the information exchange. Our approach is closer to recent
+work that leverage the Transformer architecture [30, 34, 41]. Due to the rising popularity of
+transformers for vision tasks [3, 10, 16], a few works [30, 34, 41] extended the transformer
+building blocks to the inner working of TAL as a way to infuse temporal context between
+proposals. In contrast to prior art, our work considers the interplay of multiple modalities,
+visual and audio, while also modeling the surrounding context of an action. By putting
+audiovisual context at the fore front, architectural differences arises in comparison to existing
+transformer-based approaches.
+
+3
+
+Methodology
+
+T , the task of TAL is to predict a set of segments
+Given a sequence of video frames V = {It }t=1
+N
+Ψ = {τn , sn , yn }n=1 with start/end timestamps τn , confidence score sn and action class labels
+yn . In our work, we consider both the visual and audio modalities of the video sequence.
+We first encode either modality into snippet-level features x ∈ RD×L [18, 49], where L is the
+number of encoded snippets and D is the channel dimension. The feature encoder usually
+adopts the pre-trained backbone of an action recognition model, such as [20, 44]. Our
+approach follows a separate-stage pipeline, where Proposal generator G generates classagnostics proposals ΨG = {τn , sn }Nn=1 , and then the Proposal classifier C assigns a class label
+yn to them (including background class), as shown in Fig. 2a.
+
+Observe, watch, and listen. We propose OWL (Observe, Watch, Listen), a transformer
+based model [43], to leverage multi-modal context in TAL. It uses an encoder composed of a
+self-attention module to encode the audio features, and a decoder composed of a self-atten-
+
+5
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+Video proposal
+features
+
+(M)
+
+Audio Proposal
+Features
+
+Q
+Verb
+
+Attention
+Pattern
+
+(a)
+
+Noun
+
+M
+M
+
+(M)
+
+Verb
+Noun
+
+G
+
+Transformer
+Decoder
+
+K,V
+
+(M)
+
+(M) Noun
+
+Verb
+
+Noun
+
+Verb
+
+…
+
+Proposal
+classifier
+C
+
+…
+
+Proposal
+generator
+
+Transformer
+Encoder
+
+Noun
+
+Verb
+
+(b)
+
+Figure 2: (a) Separate-stage pipeline for TAL. Given a sequence of snippet features, G
+produces class-agnostic action proposals with start/end timestamps. Then, C takes a set
+of proposal features and produces classification labels for each proposal. (b) OWL: We
+input the auditory sequence (yellow) into the encoder and the visual sequence (blue) into the
+decoder. K,V , and Q refer to the components of multi-head attention as in [43]. The encoder
+and decoder first perform self-attention to enrich the intra-modal representations. Then, the
+decoder performs multi-head cross-attention. The amount of context W (the green band on
+the attention pattern), within which self-attention and cross-attention act, can be controlled
+by the attention mask of size M × M. M is the input sequences size (number of proposals).
+tion and a cross-attention modules to encode the visual features and to fuse both modalities
+(Fig. 2b). Besides watching the visual signal and listening to the audio signal, our OWL is
+also able to observe each proposal in the context of its neighbours proposals. We model the
+visual and audio proposal-level features zv and za as the input tokens for the transformer. We
+use the superscripts v and a for the visual and audio modalities, respectively.
+Positional encodings. As transformer operations are permutation invariant, we use positional encodings to preserve the temporal relationship of the proposals. We encode the relative proposal start time and its absolute duration. The relative start time pr incorporates the
+position of an action in the video and the temporal order of actions. By encoding the absolute duration pd , we inject the temporal information that is lost after pooling. Specifically,
+pd = te − ts and pr = tTs , where te and te are the proposal’s predicted start and end times,
+respectively. We pass pr and pd to a fully-connected (FC) layer to generate the positional
+e
+encoding p ∈ RD [19]. p is concatenated to zv and za and passed to the transformer encoder.
+Intra-modal & inter-modal context. For each token of either modality, the self-attention
+module observes its relevant intra-modal context, correlating other proposals to enhance
+its feature representation. After self-attention, we obtain enhanced representations zve and
+zae for each proposal. The transformer decoder fuses both modalities. It contains a crossattention module, which takes zve and zae as input tokens. The visual modality tokens are used
+as queries Q, and audio modality tokens are used keys K and values V (Fig. 2b). Recall that
+attention mechanism transforms Q, K,V as
+
+
+QK T
+Attention(Q, K,V ) = so f tmax √
+V.
+(1)
+D
+Hereby, the audio features are linearly combined based on the similarities between video and
+audio proposal-level features. The resulting features are enriched by observing the intermodal context from neighboring proposals. Theoretically, we can correlate all M proposals
+
+6
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+in a video, but to study how much context is needed, we restrict the self-attention and the
+cross-attention to attend only to the proposals within a temporal neighborhood W (inspired
+by [6]). As shown on Fig. 2b, each proposal can attend to only W2 tokens from each side.
+Training and inference. We generate classification scores based on the enriched proposal-level features produced by OWL. We train C using standard cross-entropy loss. During
+inference, we multiply the scores of each noun and verb pairs to generate the action scores.
+
+4
+
+Experiments
+
+4.1
+
+Dataset
+
+We evaluate our proposed method on two large-scale egocentric video datasets. EK100 [15]
+contains 700 unscripted videos of people performing their daily kitchen routines. It has, on
+average, 129 annotated instances per video, which make it significantly harder to perform
+TAL compared to the established benchmarks [8, 23, 53]. Around 28% of actions overlap,
+and each annotated instance is composed of a verb and a noun pair describing an action
+performed with an object. Overall, there are 300 noun and 97 verb classes.
+HOMAGE [38] is a multi-view action dataset with audiovisual synchronized video data,
+containing a diverse set of daily activities. It has, on average, 15 instances per video, and 90%
+of the scenes in HOMAGE have the egocentric view. The action annotations for HOMAGE
+are not decomposed into nouns and verbs as in EK100. Therefore, we adapt our model to
+directly provide predictions for each action class. We train our model for 446 (out of 453)
+classes, as we removed some videos from the dataset due to the issues with the metadata.
+
+4.2
+
+Implementation Details
+
+Features. For EK100, we experiment with TBN [24], SlowFast visual [20], and auditory [26] features. We observe that using SlowFast features shows superior performance
+than TBN. Thus, we report all experiments using SlowFast features. We provide TBN experiments in the supplementary. We extract features at 5 FPS for training the proposal generator, and we max-pool them temporally for the proposal classification part. SlowFast features
+have dimensionality of D = 2304. For EK100, both backbones are pre-trained on EK100
+recognition task. For HOMAGE, the auditory SlowFast is pre-trained on VGG-Sound [12],
+and the visual on EK100.
+Proposal generation. We use BMN [28] as our G. In [28] the input is rescaled to a fixed
+size before being fed to the network. Given that the datasets are dense and contain mostly
+atomic actions, we implemented the sliding window approach (similarly to [36]). We use
+the sliding window of size 256 and a stride of 128 (160 and 80 for HOMAGE). We show
+the increase in average recall when using the sliding windows compared to the rescaling the
+inputs, as well as the ablation for the best window size in the supplementary. We find a
+simple concatenation of visual and audio features, followed by a FC layer, to be an effective
+strategy to fuse the modalities (early fusion). We apply Soft-NMS [7] as post-processing.
+Proposal classification. In OWL both the transformer encoder and decoder have 1 layer and
+8 attention heads with the hidden unit dimension of 512. We experiment using learned and
+fixed positional encodings, and find that the learned perform better. The dimensionality of
+positional encodings De = 32. We also provide baselines with various mutlimodal fusion
+strategies in the supplementary. These baselines perform worse than OWL.
+
+7
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+4.3
+
+Quantitative Results
+
+Audiovisual impact. Before incorporating context with OWL, we validate a simple baseline
+to verify the impact of the auditory signal on G and C. Here, instead of using the transformer,
+we simply concatenate audiovisual inputs and use FC layer to encode the proposal feature.
+We demonstrate the performance for 9 combinations of Table 2: The effect of attention window size W on in the
+inputs in Tab. 1: G with vi- transformer block described in Sec. 3. We report the perforsual (V) and/or auditory (A) mance on the validation set, measured by the average mAP
+inputs followed by C with vi- (%). Each token on the attention pattern can attend to W
+2
+sual (V) and/or auditory (A) tokens from each side.
+(a) EK100
+inputs. We find that the
+audiovisual classifier (C-AV)
+W
+0
+4
+16
+32
+64
+128 256 512
+achieves the best results for
+Noun 12.52 13.33 13.32 13.22 13.96 13.89 13.23 12.64
+all tasks (noun, verb, action).
+Verb 11.86 11.60 11.39 12.15 11.67 12.16 11.64 11.53
+Furthermore, the audiovisual
+Action 8.21 8.71 8.90 9.06 9.29 8.78 8.58 8.66
+generator (G-AV) performs
+(b) Homage
+the best for noun and action. This finding validates
+W 0
+2
+4
+5
+6
+7
+8
+9
+our intuition that audio is a
+Action 8.17 9.11 9.59 9.43 9.46 9.07 8.78 8.64
+complementary signal to the
+video for detecting egocentric actions for both localization and recognition. Our hypothesis is that audio helps localize
+actions in situations where visual interactions are occluded (an obstacle, bad camera view),
+unclear (dark environments), or ambiguous, and where the audio signal is strong enough
+and discriminative. We discuss these scenarios in Sec. 4.4. Note that our naive audiovisual
+baseline (8.35%) already improves the action mAP by 1.3%, when comparing to visual-only
+performance (7.06%). We will further refer to the visual-only model as VM.
+Incorporating context. In Tab. 2a, we ablate on the attention window size W . We find that increasing the window size
+does improve the performance of our model, validating our
+theory that the temporal context is useful for the proposal
+classification. Specifically, for EK100 W = 32 (9.06%) and
+W = 64 (9.29%) give us the best action average mAP. Using smaller window performs comparable to the audiovisual
+baseline. Enlarging the window further, degrades the performance slightly, suggesting that temporally distant proposals
+
+Table 3: Action localization
+on HOMAGE. We compare
+the performance of visualonly model (VM) vs. OWL.
+Method
+
+VM
+
+OWL
+
+Average mAP
+
+6.16
+
+9.51
+
+Table 1: Showing how uni-modal and multi-modal inputs affect the performance on
+EK100, measured by the average mAP. A, V, and AV - auditory, visual, and audiovisual
+inputs, respectively (e.g. G-V x C-AV means that we input video features to proposal generator and audiovisual to the proposal classifier). We report results of the validation set.
+
+G-A
+G-V
+G-AV
+
+C-A
+2.00
+1.60
+2.03
+
+Noun
+C-V
+9.01
+10.64
+11.22
+
+C-AV
+9.81
+12.48
+12.63
+
+C-A
+2.00
+1.76
+2.10
+
+Verb
+C-V
+8.17
+10.59
+10.01
+
+C-AV
+08.94
+11.96
+11.47
+
+C-A
+0.45
+0.59
+0.71
+
+Action
+C-V C-AV
+5.65
+6.70
+7.06
+7.66
+7.69
+8.35
+
+8
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+become irrelevant. Similarly, for HOMAGE increasing W improved the performance and
+reached its peak of 9.59% with W = 4. Recall, that EK100 has on average ∼8.6 times more
+instances per video. Overall, our findings are similar to [25]. However, [25] measures the
+context window size in actions and OWL in proposals. As proposals are more dense, noisy,
+and can be classified as background, our optimal window size is larger.
+Table 4: Action localization on EK100. We measure mAP@tIoU for tIoU ∈ {0.1, 0.2, 0.3,
+0.4, 0.5} and the average mAP on the validation and test sets. For reporting results on the
+test set, we do not use validation set for training, compared to [15].
+Method
+
+mAP (Val) for Noun classes @tIoU
+0.1
+0.2
+0.3
+0.4
+0.5 Avg.
+
+mAP (Test) for Noun classes @tIoU
+0.1
+0.2
+0.3
+0.4
+0.5 Avg.
+
+Damen et al. [15] 10.31 8.33 6.17 4.47 3.35 6.53 11.99 8.49 06.04
+AGT [34] 11.63 9.33 7.05 6.57 3.89 7.70
+OWL (ours) 17.94 15.81 14.14 12.13 9.80 13.96 16.78 15.22 13.60
+
+4.10 2.80 6.68
+11.64 9.74 13.40
+
+(a) Noun
+
+Method
+
+mAP (Val) for Verb classes @tIoU
+0.1
+0.2
+0.3
+0.4
+0.5 Avg.
+
+mAP (Test) for Verb classes @tIoU
+0.1
+0.2
+0.3
+0.4
+0.5
+Avg.
+
+Damen et al. [15] 10.83 9.84 8.43 7.11 5.58 8.36 11.10 9.40 7.44 5.69 4.09 7.54
+AGT [34] 12.01 10.25 8.15 7.12 6.14 8.73
+OWL (ours) 14.48 13.05 11.82 10.25 8.73 11.67 16.78 15.43 14.01 12.73 11.24 14.04
+(b) Verb
+
+Method
+
+mAP (Val) for Action classes @tIoU
+0.1
+0.2
+0.3 0.4 0.5
+Avg.
+
+Damen et al. [15] 6.95 6.10 5.22 4.36 3.43
+AGT [34] 7.78 6.92 5.53 4.22 3.86
+OWL (ours) 11.01 10.37 9.47 8.24 7.26
+
+5.21
+5.66
+9.29
+
+mAP (Test) for Action classes @tIoU
+0.1 0.2 0.3 0.4 0.5
+Avg.
+6.40 5.37 4.41 3.36 2.47
+9.69 9.03 8.07 7.11 6.23
+
+4.40
+8.03
+
+(c) Action
+
+Comparison with the state-of-the-art. We compare the performance of OWL on EK100
+with the existing methods in Tab. 4. OWL performs significantly better than the baseline
+of [15], and [34], and achieves 9.29% average mAP for the action class. For HOMAGE,
+to the best of our knowledge, we are the first work to explore it for TAL. As shown in
+Tab. 3, OWL achieves 9.5% average mAP, which is decent performance for more diverse
+dataset activities and a good baseline score to encourage more contributions from future
+work. In addition, we compare OWL with VM to validate the effectiveness of our approach
+to incorporate audio. OWL significantly outperforms VM by 3.35% average mAP.
+
+4.4
+
+Performance Analysis and Qualitative Results
+
+Visual occlusion analysis. We validate the hypothesis that OWL helps to detect actions in
+visually occluded environments by comparing the mAP of more-occluded vs. less-occluded
+instances. To define the occlusion level, we assume that the visual occlusion must happen
+in the place of hand-object interactions. We utilize the detected hand-object interactions in
+EK100 [40]. We measure the percentage of occluded frames per action instance by considering a frame as occluded when the object’s bounding box of the interaction is missing. Then,
+we divide the validation set into 3 disjoint partitions: No occlusion, Low occlusion (< 8%),
+High occlusion (> 8%). We empirically find that 8% of occluded frames balances the size of
+
+9
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+the three partitions. We then evaluate VM and OWL on these partitions, and measure the improvement in performance. As shown in Tab. 5 both models achieve the lowest performance
+on High occlusion across all tasks. As we hypothesized, we achieve the highest performance
+boost when using OWL over VM on High occlusion instances (56.7% improvement on action task vs. only 18.0% with Low occlusion and 22.2% with No occlusion).
+Table 5: Visual occlusion analysis. We breakdown the performance of VM and OWL on
+EK100 into 3 partitions: No, Low, and High occlusion, based on the percentage of missing
+predictions of the hand-objects interactions [15, 40]. Intuitively, when the object is out of the
+frame (occluded), the hand-object interactions are missing. OWL improves the performance
+across the board, especially in High occlusion subset.
+VM mAP
+OWL mAP
+Improvement in %
+# instances
+
+No occlusion
+noun verb action
+16.0 14.8
+10.8
+19.4 16.4
+13.2
+21.3 10.8
+22.2
+4879
+
+Low occlusion
+noun verb action
+14.3 16.0
+12.8
+17.7 20.0
+15.1
+23.8 25.0
+18.0
+2407
+
+High occlusion
+noun verb action
+9.4
+10.0
+6.0
+12.9 14.5
+9.4
+37.2 45.0
+56.7
+2382
+
+Validation set
+noun verb action
+10.6 10.6
+7.1
+14.0 11.7
+9.3
+31.2 10.2
+31.6
+9668
+
+Qualitative Results. Fig. 3 visualizes the localization results of OWL and compares it to
+the results of VM. As we can see, VM fails to predict open juice and close juice. However,
+OWL predicts them successfully. Furthermore, the localized actions are on average more
+precise for OWL (open fridge, pour juice). Our intuition is that the pouring sound helps to
+localize the actions better.
+
+video
+
+audio
+
+GT
+VM
+OWL
+
+verb open grab close
+noun cupb. glass cupb.
+
+open
+fridge
+
+open grab
+
+open
+
+noun cupb. glass
+
+fridge
+
+verb
+
+open grab
+
+open
+
+noun cupb. glass
+
+fridge
+
+verb
+
+grab close
+juice fridge
+grab
+close
+fridge
+fridge
+grab
+close
+fridge
+fridge
+
+open
+juice
+
+pour
+juice
+
+close
+juice
+
+pour
+juice
+open
+
+pour
+
+close
+
+juice
+
+juice
+
+juice
+
+Figure 3: Qualitative results. The same scenario as in Fig.2b. The ground truth (GT)
+annotations are compared with the predictions of VM and OWL. We highlight with red the
+GT actions that were missed by both VM andd OWL, and with green the predictions where
+only either of them succeeds. We can observe how OWL produces temporally more precise
+and complete outputs.
+
+5
+
+Limitations
+
+The scope of this work is limited to audio-visual context for TAL in untrimmed unedited
+videos with a large number of action categories per video. We acknowledge that the audio
+and visual signals may have an interesting interplay in highly edited videos, e.g. those on
+YouTube, TikTok, and movies. However, the audio signal in edited video might not be
+predominantly associated with the action. It might also be mixed with speech and music to
+
+10
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+evoke emotions in the viewers. Thus, we believe that it is healthy to explore the two lines of
+research independently, edited vs. unedited.
+
+6
+
+Conclusion
+
+This work studies multi-modal TAL using egocentric unedited videos. The specific challenges of public egocentric video benchmarks (e.g., unedited footage, localization of actions
+out of frame and large number of action classes per video) invite to rethink the inner workings of the TAL models. This work does so by means of two booster principles: multimodality, with audio, and temporal continuity to complement the visual signal. We validate
+our hypothesis by experimenting with the multiple audiovisual fusion approaches as well as
+context-aware pipelines. A technical contribution of our work is OWL, a transformer-based
+model that leverages both temporal context and modality fusion. By using OWL, we achieve
+competative performance on EK100, and make a strong baseline record on HOMAGE.
+Acknowledgements. V.E. contributions involved conceptualisation, methodology, writing - review and editing, and supervision. This work was supported by the King Abdullah
+University of Science and Technology (KAUST) Office of Sponsored Research through the
+Visual Computing Center (VCC) funding.
+
+References
+[1] Juan León Alcázar, Fabian Caba, Ali K Thabet, and Bernard Ghanem. Maas: Multimodal assignation for active speaker detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 265–274, 2021.
+[2] Humam Alwassel, Fabian Caba Heilbron, and Bernard Ghanem. Action search: Spotting actions in videos and its application to temporal action localization. In Proceedings
+of the European Conference on Computer Vision (ECCV), pages 251–266, 2018.
+[3] Anurag Arnab, Mostafa Dehghani, Georg Heigold, Chen Sun, Mario Lučić, and
+Cordelia Schmid. Vivit: A video vision transformer. arXiv preprint arXiv:2103.15691,
+2021.
+[4] Anurag Bagchi, Jazib Mahmood, Dolton Fernandes, and Ravi Kiran Sarvadevabhatla.
+Hear me out: Fusional approaches for audio augmented temporal action localization.
+arXiv preprint arXiv:2106.14118, 2021.
+[5] Yueran Bai, Yingying Wang, Yunhai Tong, Yang Yang, Qiyue Liu, and Junhui Liu.
+Boundary content graph neural network for temporal action proposal generation. In
+Proceedings of the European Conference on Computer Vision (ECCV), pages 121–137,
+2020.
+[6] Iz Beltagy, Matthew E Peters, and Arman Cohan. Longformer: The long-document
+transformer. arXiv preprint arXiv:2004.05150, 2020.
+[7] Navaneeth Bodla, Bharat Singh, Rama Chellappa, and Larry S Davis. Soft-nms–
+improving object detection with one line of code. In Proceedings of the IEEE international conference on computer vision, pages 5561–5569, 2017.
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+11
+
+[8] Fabian Caba Heilbron, Victor Escorcia, Bernard Ghanem, and Juan Carlos Niebles.
+Activitynet: A large-scale video benchmark for human activity understanding. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
+2015.
+[9] Fabian Caba Heilbron, Wayner Barrios, Victor Escorcia, and Bernard Ghanem. Scc:
+Semantic context cascade for efficient action detection. In Proceedings of the IEEE
+Conference on Computer Vision and Pattern Recognition, pages 1454–1463, 2017.
+[10] Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end object detection with transformers. In European Conference on Computer Vision, pages 213–229. Springer, 2020.
+[11] Alejandro Cartas, Petia Radeva, and Mariella Dimiccoli. Modeling long-term interactions to enhance action recognition. In 2020 25th International Conference on Pattern
+Recognition (ICPR), pages 10351–10358. IEEE, 2021.
+[12] Honglie Chen, Weidi Xie, Andrea Vedaldi, and Andrew Zisserman. Vggsound: A
+large-scale audio-visual dataset. In ICASSP 2020-2020 IEEE International Conference
+on Acoustics, Speech and Signal Processing (ICASSP), pages 721–725. IEEE, 2020.
+[13] Xiyang Dai, Bharat Singh, Guyue Zhang, Larry S. Davis, and Yan Qiu Chen. Temporal context network for activity localization in videos. In Proceedings of the IEEE
+International Conference on Computer Vision (ICCV), 2017.
+[14] Dima Damen, Hazel Doughty, Giovanni Maria Farinella, Sanja Fidler, Antonino
+Furnari, Evangelos Kazakos, Davide Moltisanti, Jonathan Munro, Toby Perrett, Will
+Price, et al. Scaling egocentric vision: The epic-kitchens dataset. In Proceedings of the
+European Conference on Computer Vision (ECCV), pages 720–736, 2018.
+[15] Dima Damen, Hazel Doughty, Giovanni Maria Farinella, Antonino Furnari, Evangelos
+Kazakos, Jian Ma, Davide Moltisanti, Jonathan Munro, Toby Perrett, Will Price, et al.
+Rescaling egocentric vision: Collection, pipeline and challenges for epic-kitchens-100.
+International Journal of Computer Vision, pages 1–23, 2021.
+[16] Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua
+Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, et al. An image is worth 16x16 words: Transformers for image recognition
+at scale. arXiv preprint arXiv:2010.11929, 2020.
+[17] Ariel Ephrat, Inbar Mosseri, Oran Lang, Tali Dekel, Kevin Wilson, Avinatan Hassidim, William T Freeman, and Michael Rubinstein. Looking to listen at the cocktail
+party: A speaker-independent audio-visual model for speech separation. arXiv preprint
+arXiv:1804.03619, 2018.
+[18] Victor Escorcia, Fabian Caba Heilbron, Juan Carlos Niebles, and Bernard Ghanem.
+Daps: Deep action proposals for action understanding. In Proceedings of the European
+Conference on Computer Vision (ECCV), 2016.
+[19] Victor Escorcia, Mattia Soldan, Josef Sivic, Bernard Ghanem, and Bryan Russell.
+Temporal localization of moments in video collections with natural language. ArXiv,
+abs/1907.12763, 2019.
+
+12
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+[20] Christoph Feichtenhofer, Haoqi Fan, Jitendra Malik, and Kaiming He. Slowfast networks for video recognition. In Proceedings of the IEEE/CVF international conference
+on computer vision, pages 6202–6211, 2019.
+[21] Antonino Furnari and Giovanni Maria Farinella. What would you expect? anticipating
+egocentric actions with rolling-unrolling lstms and modality attention. In Proceedings
+of the IEEE/CVF International Conference on Computer Vision, pages 6252–6261,
+2019.
+[22] Rohit Girdhar and Kristen Grauman. Anticipative video transformer. In Proceedings
+of the IEEE/CVF International Conference on Computer Vision (ICCV), pages 13505–
+13515, October 2021.
+[23] Y.-G. Jiang, J. Liu, A. Roshan Zamir, G. Toderici, I. Laptev, M. Shah, and R. Sukthankar. Thumos challenge: Action recognition with a large number of classes.
+http://crcv.ucf.edu/THUMOS14/, 2014.
+[24] Evangelos Kazakos, Arsha Nagrani, Andrew Zisserman, and Dima Damen. Epicfusion: Audio-visual temporal binding for egocentric action recognition. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 5492–5501,
+2019.
+[25] Evangelos Kazakos, Jaesung Huh, Arsha Nagrani, Andrew Zisserman, and Dima
+Damen. With a little help from my temporal context: Multimodal egocentric action
+recognition. arXiv preprint arXiv:2111.01024, 2021.
+[26] Evangelos Kazakos, Arsha Nagrani, Andrew Zisserman, and Dima Damen. Slowfast auditory streams for audio recognition. In ICASSP 2021-2021 IEEE International
+Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 855–859.
+IEEE, 2021.
+[27] Tianwei Lin, Xu Zhao, Haisheng Su, Chongjing Wang, and Ming Yang. Bsn: Boundary sensitive network for temporal action proposal generation. In Proceedings of the
+European Conference on Computer Vision (ECCV), 2018.
+[28] Tianwei Lin, Xiao Liu, Xin Li, Errui Ding, and Shilei Wen. Bmn: Boundary-matching
+network for temporal action proposal generation. In Proceedings of The IEEE/CVF
+International Conference on Computer Vision (ICCV), 2019.
+[29] Qinying Liu and Zilei Wang. Progressive boundary refinement network for temporal
+action detection. In Proceedings of the AAAI Conference on Artificial Intelligence,
+pages 11612–11619, 2020.
+[30] Xiaolong Liu, Qimeng Wang, Yao Hu, Xu Tang, Song Bai, and Xiang Bai. End-to-end
+temporal action detection with transformer. arXiv preprint arXiv:2106.10271, 2021.
+[31] Yang Liu, Samuel Albanie, Arsha Nagrani, and Andrew Zisserman. Use what you
+have: Video retrieval using representations from collaborative experts. In 30th British
+Machine Vision Conference 2019, BMVC 2019, Cardiff, UK, September 9-12, 2019,
+page 279. BMVA Press, 2019. URL https://bmvc2019.org/wp-content/
+uploads/papers/0363-paper.pdf.
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+13
+
+[32] Antoine Miech, Ivan Laptev, and Josef Sivic. Learnable pooling with context gating
+for video classification. arXiv preprint arXiv:1706.06905, 2017.
+[33] Arsha Nagrani, Shan Yang, Anurag Arnab, Aren Jansen, Cordelia Schmid, and Chen
+Sun. Attention bottlenecks for multimodal fusion. arXiv preprint arXiv:2107.00135,
+2021.
+[34] Megha Nawhal and Greg Mori. Activity graph transformer for temporal action localization. arXiv preprint arXiv:2101.08540, 2021.
+[35] Yan Bin Ng and Basura Fernando. Human action sequence classification. arXiv
+preprint arXiv:1910.02602, 2019.
+[36] Zhiwu Qing, Ziyuan Huang, Xiang Wang, Yutong Feng, Shiwei Zhang, Jianwen Jiang,
+Mingqian Tang, Changxin Gao, Marcelo H Ang Jr, and Nong Sang. A stronger baseline
+for ego-centric action detection. arXiv preprint arXiv:2106.06942, 2021.
+[37] Zhiwu Qing, Haisheng Su, Weihao Gan, Dongliang Wang, Wei Wu, Xiang Wang,
+Yu Qiao, Junjie Yan, Changxin Gao, and Nong Sang. Temporal context aggregation
+network for temporal action proposal refinement. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition, pages 485–494, 2021.
+[38] Nishant Rai, Haofeng Chen, Jingwei Ji, Rishi Desai, Kazuki Kozuka, Shun Ishizaka,
+Ehsan Adeli, and Juan Carlos Niebles. Home action genome: Cooperative compositional action understanding. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pages 11184–11193, 2021.
+[39] Dhanesh Ramachandram and Graham W Taylor. Deep multimodal learning: A survey
+on recent advances and trends. IEEE signal processing magazine, 34(6):96–108, 2017.
+[40] Dandan Shan, Jiaqi Geng, Michelle Shu, and David F. Fouhey. Understanding human
+hands in contact at internet scale. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition (CVPR), June 2020.
+[41] Deepak Sridhar, Niamul Quader, Srikanth Muralidharan, Yaoxin Li, Peng Dai, and
+Juwei Lu. Class semantics-based attention for action detection. In Proceedings of the
+IEEE/CVF International Conference on Computer Vision, pages 13739–13748, 2021.
+[42] Yapeng Tian, Jing Shi, Bochen Li, Zhiyao Duan, and Chenliang Xu. Audio-visual event
+localization in unconstrained videos. In Proceedings of the European Conference on
+Computer Vision (ECCV), pages 247–263, 2018.
+[43] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
+Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Proceedings
+of the 31st Conference on Neural Information Processing Systems (NeurIPS), 2017.
+[44] Limin Wang, Yuanjun Xiong, Zhe Wang, Yu Qiao, Dahua Lin, Xiaoou Tang, and Luc
+Van Gool. Temporal segment networks: Towards good practices for deep action recognition. In Proceedings of the European Conference on Computer Vision (ECCV), pages
+20–36, 2016.
+
+14
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+[45] Weiyao Wang, Du Tran, and Matt Feiszli. What makes training multi-modal classification networks hard? In Proceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, pages 12695–12705, 2020.
+[46] Chao-Yuan Wu, Christoph Feichtenhofer, Haoqi Fan, Kaiming He, Philipp Krahenbuhl,
+and Ross Girshick. Long-term feature banks for detailed video understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+pages 284–293, 2019.
+[47] Fanyi Xiao, Yong Jae Lee, Kristen Grauman, Jitendra Malik, and Christoph Feichtenhofer. Audiovisual slowfast networks for video recognition. arXiv preprint
+arXiv:2001.08740, 2020.
+[48] Huijuan Xu, Abir Das, and Kate Saenko. R-c3d: Region convolutional 3d network for
+temporal activity detection. In Proceedings of the IEEE International Conference on
+Computer Vision (ICCV), page 5783–5792, 2017.
+[49] Mengmeng Xu, Chen Zhao, David S Rojas, Ali Thabet, and Bernard Ghanem. G-tad:
+Sub-graph localization for temporal action detection. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition (CVPR), pages 10156–10165,
+2020.
+[50] Runhao Zeng, Wenbing Huang, Mingkui Tan, Yu Rong, Peilin Zhao, Junzhou Huang,
+and Chuang Gan. Graph convolutional networks for temporal action localization. In
+Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV),
+pages 7094–7103, 2019.
+[51] Chuhan Zhang, Ankush Gupta, and Andrew Zisserman. Temporal query networks for
+fine-grained video understanding. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, pages 4486–4496, 2021.
+[52] Chen Zhao, Ali K Thabet, and Bernard Ghanem. Video self-stitching graph network
+for temporal action localization. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pages 13658–13667, 2021.
+[53] Hang Zhao, Antonio Torralba, Lorenzo Torresani, and Zhicheng Yan. Hacs: Human
+action clips and segments dataset for recognition and temporal localization. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pages
+8668–8678, 2019.
+
+15
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+Supplementary Material
+We complement our work with the following: (i) The details on the proposal generation
+(Sec. A), (ii) per-class performance analysis (Sec. B), (iii) fusion experiments (Sec. C), and
+(iv) qualitative examples (please check the attached slides).
+
+A
+
+Action proposals
+
+This section analyzes the action proposals for EPIC-Kitchens-100 (EK100) produced by
+the proposal generator, as explained in Sec. 3.1 and Fig. 2 (cf. the main manuscript). We
+measure the quality of the proposals with average recall (AR). [18] It is worth noting that
+proposals are class-agnostic and require further classification. AR measures the localization quality of the action proposals. We consider the limited number of predicted proposals
+when computing AR and compute it for several tIOU thresholds. In the following sections, we investigate which feature encoders to use and how to treat the input sequence.
+Features
+
+A.1
+
+Feature encoders
+
+Modality
+
+AR (%)
+
+TBN
+RGB, flow, audio
+64.61
+SlowFast
+visual
+64.09
+SlowFast
+audio
+56.38
+SlowFast
+visual, audio
+65.66
+Table 6: Average Recall (AR) on EK100 for
+the proposals using TBN and SlowFast features in uni-modal and multi-modal scenarios.
+
+Our focus is to investigate audiovisual inputs; thus, we consider the encoders that
+process auditory and visual signals. We
+consider TBN [24] and SlowFast [20, 26]
+networks as our feature encoders. TBN
+operates on RGB, Flow, and spectrogram.
+Visual and Auditory SlowFast take video
+frames and spectrogram, respectively, as inputs. In Tab. 6 we compare the performance of the proposal generator on EK100 with TBN and SlowFast features. To demonstrate the effect of audiovisual features, we also provide the results of a uni-modal
+proposal generator with visual-only or audio-only inputs. To create audiovisual SlowFast features, we concatenate visual and auditory features of the corresponding SlowFast backbones. We notice that audiovisual SlowFast features outperforms TBN (65.66%
+vs. 64.61%). Furthermore, we can observe that multi-modal SlowFast features outperforms uni-modal (65.66% for audiovisual vs. 64.09% for visual and 56.38% for audio).
+
+A.2
+
+Input sequence
+
+As videos can vary in duration, their features can have different temporal dimenFeatures
+AR (%)
+sions. We investigate two types of input
+TBN (rescaled)
+54.91
+sequence treatment in the proposal generTBN
+(sliding
+window)
+64.61
+ator: (1) rescaling the features to produce
+the input of a particular temporal size and Table 7: Average Recall (AR) on EK100 for
+(2) iterating over the features with a slid- the proposals treating the input sequence with
+ing window. Sliding window treats time as rescaling vs. using the sliding windows.
+the reference framework, whereas feature
+
+16
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+rescaling uses duration. As mentioned in [52], rescaling features is suboptimal for detecting short actions in long videos. This is particularly relevant for our work as EK100 is
+annotated with many atomic instances, and a video duration can exceed one hour. We observed that previous approaches for the temporal action localization in the dataset used both
+strategies. For instance, [15] utilizes feature rescaling and [36] uses the sliding window.
+Tab. 7 compares the average recall (AR) of proposals using either strategy. We can see
+that the sliding window approach results in 10% AR increase compared to rescaling. That
+validates the idea that the sliding window is a better way to deal with the atomic actions
+in the dataset. Therefore, we conduct our experiments using the sliding window approach.
+
+A.3
+
+Window size
+
+While processing the input sequence with a sliding
+window, we aim for the most effective window size.
+Window Size AR (%)
+As observed in [36], over 98% of annotated action in200
+65.52
+stances in EK100 [15] are shorter than 20 seconds. We
+300
+65.66
+extracted features at 5 fps; thus, to capture 98% of ac400
+63.75
+tions, we should aim for a minimal stride s = 20 × 5 =
+Table
+8:
+Average
+Recall
+(AR) on
+100. In our experiments, we always make the window
+EK100
+for
+the
+proposals
+using
+size w double the stride s. In Tab. 8 we investigate
+different
+sliding
+window
+sizes.
+the best window size, starting with with w = 200 and
+s = 100. We keep increasing w and s until the performance degrades. That ensures that at least one sliding window will cover any action that
+does not exceed w2 . We reach the highest performance with w = 300 (and s = 150). This is
+because increasing the window size to 300 incorporates some relevant context to the model.
+However, further increasing the window size to 400 degrades the performance, suggesting
+that faraway context becomes irrelevant (similar to OWL’s temporal context).
+
+B
+
+Per-class performance of OWL
+
+In Fig. 4 we show a per-class performance comparison of OWL vs. the visual-only model
+(VM) on EK100. We plot the absolute improvement, measured by average precision (AP),
+for noun (Fig. 4b) and verb (Fig. 4a) classes. We can observe that OWL performs better
+than VM for most verb and noun classes. We attribute the improvements to audio or context
+incorporation and discuss them in the following subsections.
+Audio. Verbs pour, crush, drink have distinctive sounds, and OWL performs better than
+VM on these classes. Drink, is an interesting case as the source of sound is very close to
+the camera microphone. As we expect, OWL improves by more than 10% on this class.
+Likewise, several nouns, such as machine:washing, microwave, fridge, kettle, fan:extractor,
+etc. are electronic appliances which usually have distinctive sounds when turned on/off and
+while operating.
+Context. Several verbs, such as transition(used interchangeably with move, walk in in the
+dataset taxonomy), open, put, close have better predictions with OWL. We believe that the
+improvement for these verb classes can be attributed to context incorporation. As mentioned
+in Fig. 1 of the main paper, humans often do their kitchen activities following some patterns
+(logical order in human-object interactions). We also hypothesize that food that is packed,
+
+17
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+(a) Verbs classes
+
+15
+10
+5
+0
+−5
+−10
+
+brush
+
+turn-down
+
+hang
+
+scrub
+
+serve
+
+mix
+
+fold
+
+crush
+
+empty
+
+soak
+
+adjust
+
+close
+
+put
+
+pour
+
+turn
+
+open
+
+drink
+
+−15
+
+transition
+
+AP improvement with AV context (%)
+
+20
+
+80
+60
+40
+20
+0
+
+machine:washing
+power
+squash
+yoghurt
+lighter
+apron
+light
+cream
+grape
+nut
+pie
+pith
+knob
+mat
+toaster
+meat
+peach
+ladle
+carrot
+stick:crab
+towel:kitchen
+button
+drawer
+fridge
+cupboard
+board:chopping
+salt
+oven
+fan:extractor
+foil
+blueberry
+cooker:slow
+plate
+dough
+paper
+bowl
+garlic
+grater
+glass
+juice
+cereal
+towel
+pasta
+bread
+kettle
+liquid:washing
+tray
+cup
+kitchen
+hummus
+scissors
+microwave
+spatula
+cucumber
+pot
+dishwasher
+napkin
+rice
+recipe
+pestle
+ginger
+drink
+pizza
+parsley
+
+AP improvement with AV context (%)
+
+(b) Noun classes
+
+Figure 4: Absolute per class improvement in performance of OWL with respect to VM,
+measured by the average precision (AP, %). To observe the significant changes, we only
+visualize classes with the absolute difference in AP greater than 5%.
+such as grape, nut, meat, carrot, salt, juice, cereal, pasta, etc. could be ambiguous for the
+model when shown packed.
+
+C
+
+Fusing audio and visual modalities
+
+In this section we explain our preliminary experiments on the multi-modal fusion strategies.
+First, we elaborate on our terminology of the proposal generator and classifier.
+Proposal generator G. Given the visual features xv and the audio features xa of the video sequence, the proposal generator G predicts a set of candidate segments with temporal boundaries, namely, proposals Φ = {φm = (ts,m ,te,m , sm )}M
+m=1 , where φm represents an action proposal, M is the number of proposals, and ts,m , te,m and sm are its start time, end time and
+confidence score, respectively. Note that proposals do not have class labels.
+Proposal classifier C. Given the set of proposals Φ, the snippet-level visual features xv ,
+and audio features xa , we first extract visual features xvm and audio features xam for the mth
+proposal by max-pooling the snippets within its start/end boundaries1 . Then, the proposal
+classifier C predicts from xvm and xam verb and noun class labels cverb and cnoun , as well as
+their respective scores sverb and snoun . Based on the predicted verbs and nouns, we generate
+action predictions Ψ = {ψn = (ts,n ,te,n , cn , sn )}Nn=1 . , where cn = (cverb
+, cnoun
+) ∈ A and sn =
+i
+j
+1 We round the start/end values to the nearest snippets indices.
+
+18
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+sverb
+snoun
+. A is a set of pre-defined actions, each composed of a noun and a verb, and
+i
+j
+1 ≤ i ≤ M and 1 ≤ j ≤ M are proposal indices.
+Early Fusion
+
+a)
+
+Intermediate Fusion
+
+b)
+
+Visual
+Modality
+
+Audio
+Modality
+
+Video
+Modality
+
+Video features
+
+Audio features
+
+Video features
+
+Video
+Modality
+
+Audio features
+
+Video features
+
+MLP
+
+MLP
+
+Fusion module
+
+MLP
+
+Late Fusion
+
+c)
+Audio
+Modality
+
+Audio
+Modality
+Audio features
+Gating
+module
+
+Classifier
+
+MLP
+
+Classifier
+
+Classifier
+
+Classifier
+
+Classifier
+
+Classifier
+
+Classifier
+
+Classifier
+
+Classifier
+
+Noun
+
+Verb
+
+Noun
+
+Verb
+
+Noun
+
+Verb
+
+Noun
+
+Verb
+
+𝑊 !" 𝐿!"
+
+𝑊 " 𝐿"
+
+𝑊 !" 𝐿!"
+
+𝑊 ! 𝐿!
+
+MLP
+
+Classifier
+
+Noun
+
+Verb
+
+𝑊 !" 𝐿!"
+
+Figure 5: Fusion methods for the audio and video streams. Early fusion (a) does features
+aggregation. Intermediate fusion (b) combines intermediate representations of each modality. The model can be trained jointly by optimizing for three losses, or we can simplify it by
+setting Wv = Wa = 0 (the affected branches are highlighted with dashed lines). Late fusion
+(c) combines scores of two modalities. The gating module produces per-class weight for
+the scores generated by each modality. The weighted scores are aggregated by summation.
+Here we illustrate cross-gating, in which the gating module takes representations of both
+modalities as the input.
+
+C.1
+
+Where and how to fuse the modalities in C?
+
+We categorize the modality fusion into the following: early, late, and intermediate fusion, as
+shown in Fig. 5.
+Early fusion happens at the input feature level (Fig. 5 a). Given the proposal’s visual
+features xvm and audio features xam , we first fuse them and obtain one singe feature vector
+xm = Fearly (xvm , xam ). We feed xm to the following layers of operations (e.g., MLP), and
+classify it into different noun and verb classes. How to choose the fusing function Fearly ? In
+our analysis, we simply fuse the modalities by concatenating the visual and audio features
+along the channel dimension. This doesn’t require extra computations and counts on the
+following network layers to learn from the fused features.
+Intermediate fusion happens at the intermediate feature level (Fig. 5 b). We process the
+audio and video features independently for certain layers, and generate intermediate features
+(zvm and zam ). We fuse them to one feature via zm = Finter (zvm , zam ). The fused features zm
+as well as the visual and audio intermediate features zvm and zam are processed independently
+in the following layers, and correspondingly predict three groups of classification scores.
+We use them all for training, and only use the scores from the fused features for inference.
+Similarly to early fusion, we use concatenation for Finter in our experiments (Tab. 9). Our
+proposed model OWL uses intermediate fusion; however, instead of concatenation, it adaptively fuses audio features to visual by correlating to the context (more in Sec. 3).
+Late fusion happens at the output score level (Fig. 5 c). The visual and audio features
+of all proposals are independently processed until they produce classification scores svm =
+{sverb,v
+∈ RV , snoun,v
+∈ RU }, and sam = {sverb,a
+∈ RV , snoun,a
+∈ RU } where V and U are the
+m
+m
+m
+m
+numbers of verb and noun classes, respectively. We fuse the scores from both modalities
+via sm = Flate (svm , sam ), and apply softmax to sm to generate the final prediction for nouns
+
+19
+
+RAMAZANOVA ET AL.: OWL (OBSERVE, WATCH, LISTEN)
+
+and verbs. For late fusion, there is no straightforward way to do concatenation. Naively
+averaging or multiplying corresponding scores of the two modalities is not effective, due
+to the imbalance between the modalities. While audio can be a complementary source of
+information, it doesn’t contribute equally as the visual modality to solving the task. We
+observe that either modality ‘specializes’ in different classes, and it’s beneficial to combine
+the scores with different weights per class. For example, the action of ‘taking something’ is
+usually not evident from the sound, but ‘turning on’ a kitchen device is.
+For effective late fusion, motivated by [31, 32], we design a gating module to weight the
+per-class scores before fusing them. The gating module Θ is composed of a fully-connected
+layer followed by a sigmoid activation function. It learns from the concatenated intermediate
+features of the two modalities zm = [zvm ; zam ] to predict weights for the verb and noun classes
+for both modalities: wvm = Θv (z), wam = Θv (a). The weights are applied to the classification
+scores svm and sam of two modalities for linear combination, and generate the final scores via
+sm = svm wvm + sam wam . We call the gating strategy cross-gating. Alternatively, we also
+experiment with a self-gating strategy, where the weights for each modality is learned only
+from its own features: wvm = Θv (zv ), wam = Θa (za ).
+
+C.2
+
+Results
+
+We compare several fusion strategies in Tab. 9. All experiments were run on audiovisual
+proposals (G-AV). Early fusion results in a significant improvement over the visual-only
+model (VM). The intermediate fusion with only audiovisual supervision (8.24% action mAP)
+does not perform better than early fusion. However, we can achieve better results by jointly
+training with the supervision from the visual and audio streams (8.75%). Doing late fusion
+with self-gating weights does not perform well (only 7.99%), but late fusion with crossgating (Late F CG) achieves 8.82%. This finding is expected as cross-gating has richer
+representations of both modalities for weighting the class scores.
+Table 9: Fusion methods performance on EK100, measured by the average mAP (%).
+SG and CG correspond to the self-gating and cross-gating scenarios described in Sec. ??,
+respectively. We also show the modality streams being supervised in the second column.
+Method
+
+Supervision
+
+Noun
+
+Verb
+
+Action
+
+Early F
+Intermediate F
+Intermediate F
+Late F SG
+Late F CG
+
+AV
+AV
+V, A, AV
+V, A
+V, A
+
+12.63
+12.55
+13.66
+11.51
+12.66
+
+11.47
+11.66
+12.90
+10.84
+12.89
+
+8.35
+8.24
+8.75
+7.99
+8.82
+
+

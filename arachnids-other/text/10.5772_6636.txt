@@ -1,0 +1,582 @@
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+DaeEun Kim (2008). InTech eBooks. https://doi.org/10.5772/6636. doi:10.5772/6636. Licence: cc-by-nc-sa. Text from pdf.
+
+24
+Tactile Information Processing for the
+Orientation Behaviour of Sand Scorpions
+DaeEun Kim
+Yonsei University, School of Electrical and Electronic Engineering
+Corea (South Korea)
+
+Open Access Database www.intechweb.org
+
+1. Introduction
+Arachnids including sand scorpions and spiders use their tactile sense organs, called
+basitarsal compound slit sensilla (BCSS), to detect their prey. The sense organs consisting of
+mechanoreceptors are located at or near joints in the cuticle, and they can sense a vibrational
+signal caused by prey movement. The nocturnal sand scorpion Paruroctonus mesaensis has a
+distinguished capability of finding their prey only with these tactile senses. The sand
+scorpions show their orientation behaviour of positioning themselves directly towards their
+prey and then run into the prey when there is a vibration disturbance caused by the prey.
+According to the biological researches (Brownell & Farley, 1979, Brownell, 1984), it is
+presumed that the sand scorpions respond to Rayleigh waves, surface waves of sand, to
+detect the direction of a vibration source and possibly longitudinal vibrations to estimate the
+distance. Especially, the time delay between arrival of a vibration signal at the BCSS sense
+organs is an important cue to determine the direction of their prey (Brownell & Farley,
+1979).
+The central nervous system should process stimulus-locked neuron firings of the sense
+organs on their eight legs to induce the orientation behaviour. How the nervous system is
+organized to handle the orientation behaviour is still an open question. Only a few studies
+explain this behaviour mechanism. Stuerzl et al. (2000) introduced a neuronal mechanism to
+support the orientation behaviour of scorpions, and it is based on the difference of the
+arrival time of stimulus signals produced at sense organs on their legs. They argued that the
+brain of sand scorpions receives sensor signals from mechanoreceptors on their eight legs
+and processes an inhibition mechanism among a set of command neurons projected from
+the sense organs on each leg. This inhibitory interaction leads to more accumulated firings
+of the command neurons near the prey source and less firings at the opposite sides. The
+accumulated neuron firings thus form a tuning curve for a specific resource direction. Then
+the distribution of neuron firings can vote to determine the resource direction.
+In fact, arachnids have sensory projections to the central nervous system for each leg (Babu
+& Barth, 1989, Anton & Barth, 1993). Previously Brownell and Farley (1979) suggested that
+eight command neurons (or eight clusters of neurons in the brain) accumulate neuron
+firings from mechanoreceptors on the eight legs of scorpions, respectively and also interact
+each other with triad inhibitions. According to the triad inhibition hypothesis, early arrival
+of vibration stimulus to mechanoreceptors on a leg excites the corresponding command
+Source: Sensors, Focus on Tactile, Force and Stress Sensors, Book edited by: Jose Gerardo Rocha and Senentxu Lanceros-Mendez,
+ISBN 978-953-7619-31-2, pp. 444, December 2008, I-Tech, Vienna, Austria
+
+www.intechopen.com
+
+432
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+neuron and the command neuron subsequently inhibits three command neurons on the
+opposite side. This inhibition mechanism forms an appropriate tuning curve of neuron
+firings for the resource direction. Brownell and Farley (1979) built this conceptual model
+with triad inhibitions for interaction over the eight receptor neurons (command neurons)
+and later Stuezl et al., (2001) tested the hypothesis with a neuronal model. Triad inhibition
+mechanism over a stimulus vibration showed a good agreement with the real orientation
+data of sand scorpions. Recently Kim (2006b) showed that pentad and heptad inhibitions as
+well as triad inhibitions can determine the resource direction. Thus, we infer that inhibition
+processes play a critical role for the orientation behaviour.
+Once the distribution of neuron firings is available for the set of receptor neurons, the
+accurate turning angle can be decided. Population coding (Georgopoulos et al., 1982, Pouget
+et al., 1998, Deneve et al., 1999) over a set of accumulated neuron firings, that is, voting
+calculation can determine the final turning angle towards a prey (Stuerzl et al., 2000). The
+voting contribution of the neuron activations from the eight directions can be simply
+calculated (Georgopoulos et al., 1982) as follows:
+
+(1)
+where zk is the firing rate or spike counts for each direction and φk is the angular position
+for the k-th leg direction (m=8). The argument φ will represent the direction that the scorpion
+finally chooses. Each directional unit is assigned the weight proportional to the activation,
+and a population of neurons can determine the vector direction by the voting procedure.
+Triad, pentad, heptad inhibition connections among a set of command neurons can lead to a
+good agreement with the real orientation data of sand scorpions (Kim, 2006b) However, the
+effect of weight configurations and synaptic delays among the eight receptor neurons have
+not been studied in detail. In this paper, we investigate the role of inhibition mechanism and
+synaptic delays in the network configuration among the command neurons to determine the
+direction of a vibration source. Also we will re-visit the triad inhibition hypothesis
+suggested by Brownell and Farley (1979). Relevant works were presented in the paper (Kim,
+2006a, 2006b).
+
+2. Command neurons
+There are eight legs for sand scorpions and their foot positions form a circle (Brownell et al.,
+1979), as shown in Figure 1. With this structure, we can formulate the time difference of a
+vibration stimulus arrival on a set of legs. The time delay of vibration between a pair of legs
+can be calculated simply (Stuerzl et al., 2000) as
+
+where Δt(j,k) is the time difference of Rayleigh waves between the j-th and k-th foot, d(α, β)
+is the distance between position α and β, pk is the position of the k-th foot, s is the position of
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+433
+
+a vibration source, R is the radius of the foot circle (see Fig. 1, R ≅2.5 cm), v is the Rayleigh
+wave speed in the sand (v ≅ 50 m/sec), φ is the angle of vibration source, and θk is the angle
+of the k-th leg from the front direction (θk = 18, 54, 90, 140, 220, 270, 306, 342 degree).
+According to the equation, the maximum time difference of stimulus on a pair of legs is
+around 1 msec.
+
+Fig. 1. Foot position of sand scorpions in a circle and triad inhibitions in the eight command
+neurons (reprinted from (Brownell, 1984; Brownell and Farley, 1979))
+The neuron firings in the sense organs on legs depend on the amplitude of vibration signal,
+which is generated by prey movement. A command neuron or receptor neuron corresponding to
+each leg is activated by BCSS, and it accumulates the sensor activations. As shown in Fig. 1,
+there are eight receptor neurons in the brain and the command neuron for each leg receives
+inhibitory signals from three neurons on the opposite side, which is called triad inhibitions
+among command neurons. Stuerzl et al. (2000) assumed that the inhibitions have synaptic
+delay about 0.7 msec. Once sense organs on a leg first detect a vibration signal, the signal is
+transmitted to the corresponding command neuron. Then the inhibitory neuron signals
+from the command neuron often arrive at the three receptor neurons on the opposite side
+earlier than the vibration waves stimulate the three receptor neurons. Therefore, the neurons
+on the opposite side are deactivated for the vibration signals whilst the receptor neurons near
+the vibration source have intense neuron firings. The distribution of these accumulated neuron
+firings or the averaged firing rates on the eight directions will determine the orientation
+direction of scorpions capturing their prey. Here, the time delay from sense organs to the
+command neuron is common for each leg, and so what command neurons receive stimulus
+signals in an earlier time or later time is an important cue to determine the orientation.
+For the neural mechanism, the perception vector for the orientation behaviour is a
+distribution of the weighted average of the sensor activations in the preferred directions,
+responding to a given stimulus. We can assume the stimulus direction follows population
+coding (Georgopoulos et al., 1982). It is represented as a sinusoidal array of eight elements
+for the sensor activations. The phase of each element follows the angular position of the
+corresponding leg (see Fig. 1).
+
+3. Experiments
+We simulate neuronal processes for the orientation behaviour. For our experiments, the
+command neurons in the brain receive stimulus signals at the same angular position as
+
+www.intechopen.com
+
+434
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+sense organs of sand scorpions. We modelled the neuronal firings of the eight command
+neurons with inhibitory interaction by following our previous works (Kim, 2006b). Each
+receptor neuron has an integrate-and-fire model and the firing rate is proportional to the
+magnitude of membrane potential. The neural network is similar to the continuous-time
+recurrent neural networks (CTRNN) (Beer & Gallagher, 1992). Here, the neuron has a
+membrane potential fi,
+
+where τ is the time constant, zj is the firing rate of the j-th receptor neuron for a burst of
+neuron spikes, δ is the synaptic delay of inhibitory connection, μji is the weight from the j-th
+neuron to the i-th neuron, Ii is the intensity of the sensory input for the i-th leg, g is a gain
+factor, βj is a bias term and H(x) is a rectifying function to obtain positive firing rates. In the
+experiments, we set βj = 0, τ = 0.33, g=1.
+Without any interaction signal among command neurons, each neuron produces neuron
+firings purely depending on the stimulus amplitude. In our experiments, for each command
+neuron, we integrate the firing rates for 500 msec to count the number of neuron spikes for
+the period. The distribution of accumulated activations over the eight receptor neurons will
+determine the resource direction. The vibration power spectrum of sand has a peak at 300
+Hz (Aicher & Tautz, 2000) and so we assume that a burst of neuron firings has 1-2 msec
+duration. In the test, the input signal Ii has a form of half-wave rectified sinusoid with noise,
+and the vibration frequency for the input sinusoid is sampled every cycle with a Gaussian
+distribution with mean 300 Hz and standard deviation 50 Hz. In our model, we apply 10%
+random noise to the input signal and the vibration power spectrum also varies around the
+central frequency 300 Hz. Noisy input is given into the receptor neurons and the receptor
+neuron activation is accumulated for 500 msec. That integration process has a low-pass filter
+effect on the distribution of the average firing rate or the number of spikes over the eight
+receptor neurons, and thus produces steady response angles with small variance to a given
+stimulus direction. It is reasonable to observe the distribution of neuron firings accumulated
+for a time interval of 500 msec, when we consider the biological test as in Brownell and
+Farley's experiments (Brownell & Farley, 1979)
+We first tested the orientation direction of scorpions with triad inhibitions among the eight
+receptor neurons. For triad inhibitions shown in Fig. 1, Lk neuron has triad connections with
+R4-k, R5-k, R6-k neurons, and likewise Rk with L4-k, L5-k, L6-k neurons for k=1,...,4 (for
+convenience, R0=L1, L0=R1, R5=L4, L5=R4,). Inhibitions among the receptor neurons greatly
+influence the decision of resource direction. If we assume there is no inhibition at all, each
+receptor neuron will have almost the same level of neuron firings and the direction cue
+cannot be observed. Fig. 2 shows how the temporal difference of sensory afferents with the
+triad inhibitions changes the neuron firings. L1 neuron initially produces neuron firings for
+the onset of stimulus vibration and later receives an inhibitory signal from R3 neuron after
+an inhibition delay time. Accordingly, the number of spikes for the neuron L1 will be
+depressed by inhibition. The inhibition signal arrives at L2, L3 neurons earlier than the
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+435
+
+Fig. 2. Sequence of neuron firings with inhibitory actions among the eight receptor neurons
+(vibration source is given at the direction of 90 degree; solid spikes: actual spikes, dotted
+spikes: spikes inhibited by other neurons)
+
+Fig. 3. Firing rate of receptor neurons, zj with a half-wave sinusoidal input at the direction of
+90 degree (L2, L3 neurons have almost no firing by inhibitory signals from R2, R3, R4 and
+L1, L4 have relatively low amplitudes)
+
+www.intechopen.com
+
+436
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+vibration stimulus innervates the neurons and thus no neuron firing is detected. Similar
+inhibition operation is found among R2 neuron and L2, L3, L4 neurons on its opposite side.
+Spikes at L1, L4 neurons will subsequently trigger another inhibition into R3, R4, L4 neurons
+and L1, R1, R2 neurons, respectively. In Fig. 3, we can observe the transition and
+distribution of firing rates in time course. We characterize the response of the receptor
+neurons by the total number of neuron spikes in a fixed time interval, which can be obtained
+by integrating the firing rates in the interval, say, for 500 msec. It reduces the effect of
+variance due to the noise from the external stimulus, sense organs or neurons.
+
+Fig. 4. Activity level of eight receptor neurons; the vibration source is given at the direction
+of –90, 0, and 90 degrees (reprinted from (Kim, 2006b))
+Fig. 4 shows the activities of receptor neurons for a vibration stimulus at the direction of –90
+degree, 0 degree and 90 degree, respectively. Interestingly, the activity of the eight receptor
+neurons roughly has a cosine tuning curve, and if it is normalized, then it follows (1+cos(φθk))/2, k=1,...,8 for a given direction φ of vibration source. The neuron firings of the receptors
+are significantly influenced by the temporal difference of arrival of sensory afferent signals.
+It makes a relative difference of neuron firings among the eight command neurons. It
+shapes such a tuning curve. To estimate the resource direction from the activity curve of the
+eight command neurons, we need to apply a decoding method shown in equation (1).
+Several decoding methods are available to explain the population coding. Here, we use the
+complex coding, that is, simple voting mechanism with the amplitude for each phase
+(Georgopoulos et al., 1982, Kim, 2006b) .
+To find the influence of synaptic delay on the estimation of a resource direction, we tested a
+variety of delay time from 0.1 msec up to 1.5 msec on triad inhibitions. The vibration
+stimulus is given at the direction of 90 degree and the activity levels in the set of eight
+command neurons change depending on the transmission delays.
+We first see how neuron firings fluctuate in time course. Fig. 5 shows the transition of firing
+rates depending on the transmission delays of inhibitions. If the delay time δ=0.2 msec is
+taken, the duration of inhibition on the opposite side becomes small while the vibration
+waves continue to stimulate the neurons, as R3, R2 neurons cannot suppress the neuron
+activations of L2, L3 neurons sufficiently in Fig. 5(a). As a result, such interaction of the
+inhibition produces a distorted bimodal distribution of activity in the set of command
+neurons (see Fig. 6). In contrast, a long delay time, for example, δ =1.5 msec allows all the
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+437
+
+receptor neurons to be activated during the stimulus period. It thus produces a large
+estimation error for the resource direction.
+
+(a)
+
+(b)
+
+Fig. 5. Firing rate of receptor neurons with different transmission delays (a) δ=0.2 msec (b) δ
+=1.2 msec (vibration source is given at the direction of 90 degree)
+
+Fig. 6. Activity level of command neurons with various delays on inhibitory signals
+(vibration source is given at the direction of 90 degree, *: δ= 0.2 msec, triangle: δ=0.5 msec, o:
+δ=0.8 msec, square: δ=1.2 msec, x: δ=1.5 msec) (reprinted from (Kim, 2006b))
+
+As shown in Fig. 6, especially a small delay time, for instance, δ =0.2 msec will produce a
+small hill in the tuning curve in addition to the main cosine-like curve. It results from
+neuron firings which was not inhibited enough on the opposite side. That is, too small
+delays may not inhibit incoming neuron firings transmitted from sense organs on the
+opposite side. As a result, it produces a distorted bimodal-like tuning curve for the activity
+of receptor neurons rather than a cosine-tuning curve. However, too large delays induce a
+relatively small contrast among the sensory activations, since the inhibition process does not
+reduce neuron firings of other command neurons sufficiently - see Fig. 5(b). The decoding
+method in equation (1), irrespective of the distribution of neuron firings, will pinpoint an
+orientation angle.
+
+www.intechopen.com
+
+438
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+Brownell and Farley (1979) showed biological experiments for the orientation of sand
+scorpions towards their prey. They collected the orientation data of the scorpion for
+stimulus vibrations at various angles. We tested our orientation simulation over the real
+data with a neural model described above. Here, the orientation response angles were
+estimated over distribution of accumulated neuron firings. Initially, we simulated a variety
+of transmission delays on triad inhibitions, and compared the orientation results with the
+real orientation data of scorpions to see how much our model matches the real data. The
+agreement with the real data was reasonably good within the range of 0.5 - 1.1 msec; the
+performances were not significantly different within that range. However, too small or too
+large delays show a deviation from desirable estimation of orientation angle (Kim, 2006b).
+Brownell and Farley (1979) tested another experiment with ablated slit sensilla on one or a
+few legs. From the result, they suggested a hypothesis of triad inhibitions among the eight
+receptor neurons. Stuerzl et al. (2000) used a stochastic model of neuron firings with triad
+inhibitions to examine the hypothesis, and found its good agreement with the real
+orientation data of scorpions. In their experiments, monad inhibitions were worse than triad
+inhibitions in agreement with the real data. However, how many inhibitions are available is
+still unknown. Thus, we explored monad, dyad, triad, pentad, heptad inhibitions among the
+eight receptor neurons in the previous work (Kim, 2006b) – see the inhibition arrangements
+in Fig. 7.
+
+Fig. 7. Inhibitory connections among the receptor neurons (reprinted from (Kim, 2006b))
+The inhibitory mechanism was tested on the biological data (Brownell & Farley, 1979,
+Brownell, 1984) with some slit sensilla ablated. For these experiments, we used δ=0.9 msec
+for a delay time of inhibitory signal, which was a good delay parameter for the triad
+inhibition test in the above. For the monad inhibition arrangement, each receptor neuron has
+an inhibitory connection with a single receptor neuron on the opposite side (Lk with R5-k for
+k=1,...,4 and vice versa), and for the heptad connection if one neuron is activated, its
+inhibitory signal is transmitted into all the other seven neurons. For dyad inhibitions, Lk
+neuron has an inhibitory connection to two neurons R5-k and R6-k, on its opposite side, and
+similarly Rk neuron to two neurons L5-k and L6-k. For pentad inhibitions, each neuron
+transmits inhibitory signals to five command neurons except its two neighbour neurons.
+Fig. 8 shows that the neural network can determine the appropriate orientation. As Stuerzl
+et al. (2000) showed, triad inhibitions generally produce good performance in agreement test
+with the real data, but monad inhibitions have poor agreement with the real data, as shown
+in Fig. 8(b) and 8(d). Three inhibitions or more from one neuron cell can produce good
+agreement. Pentad or heptad inhibitions show the best agreement in some cases (Kim,
+2006b), and possibly more inhibitions rather than three inhibitions might be a plausible idea
+to support the orientation data. However, pentad or heptad inhibitions need more
+connections among the receptor neurons just for a slight improvement of the agreement.
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+439
+
+Thus, it may be arguable that the experiments still support the triad inhibition hypothesis
+over the eight receptors, since their performance differences are not much significant.
+
+(a)
+
+(b)
+
+(c)
+
+(d)
+
+Fig. 8. Test of orientation angles with the real orientation data (a) no ablation (b) L1, L2, L3
+and L4 ablated (c) L3 and L4 ablated (d) L1 and L2 ablated (o: real data, +: monad inhibition,
+x: dyad, triangle: triad, square: pentad, *: heptad); real orientation data of scorpions have
+been reprinted from the paper (Brownell & Farley, 1979, Brownell, 1984, and Kim, 2006b)
+In our experiments, synaptic delays on triad inhibitions significantly influence the
+estimation of a resource direction. We applied a varying delay time ranging from 0.1 msec
+up to 1.5 msec to several arrangements of inhibitions, that is, monad, dyad, triad, pentad
+and heptad connections, and the results were compared with the orientation data of sand
+scorpions. We measured the estimation error for each sample in the orientation data and
+calculated the root mean squared error for each set of data. Fig. 8 shows that each arrangement
+of inhibition needs a little different range of delay time for good performance in the agreement
+test. The delay time from 0.5 msec to 1.1 msec covers the best performance in Fig. 9(a)-(c), and
+1.0-1.4 msec in Fig. 9(d). It seems that triad, pentad or heptad connections produce better
+performance than the other connection types. From the result, we also infer that sand
+scorpions need a synaptic delay on the inhibitions within the range of 0.5 - 1.2 msec.
+According to the agreement test, we see there is still an error between the theoretical model
+and the real data. The estimation error is often found in the experiments with ablated sense
+organs. As shown in Fig. 8(b) and 8(d), even for varying inhibition arrangements, the
+orientation estimation does not perfectly match the real data. We guess several factors to cause
+
+www.intechopen.com
+
+440
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+(a)
+
+(c)
+
+(b)
+
+(d)
+
+Fig. 9. Estimation error with varying delay time on inhibitory signal (a) no ablation (b) L1,
+L2, L3 and L4 ablated (c) L3 and L4 ablated (d) L1 and L2 ablated (root mean squared error
+and standard deviation is measured with 5 trials, o: real data, +: monad inhibition, x: dyad,
+triangle: triad, square: pentad, *: heptad) (reprinted from (Kim, 2006a))
+this mismatch. Possibly sand scorpions may have different activity patterns for the receptor
+neurons or use a little different decoding method for the orientation. We assumed unbiased
+sensitivity over the eight receptor neurons for the incoming vibration waves, but it may not be
+true in reality. Above all, from the agreement test, receptors corresponding to front legs seem
+to have more contribution in the voting procedure than the others, because a large discrepany
+between the estimation and the reality is observed near the front direction when the sense
+organs at a front leg are ablated. Or, there might exist conditional operations or
+neuromodulations among the receptor activations; for instance, one receptor's firings may
+change the contribution rate or presynaptic weights of another receptor neuron. Alternatively,
+different arrangement of inhibitory connections, or partly excitatory connections may be
+available among the command neurons. Presumably, the command neurons for the front legs
+may interact each other with strong inhibitions, since ablation of the sense organs on the front
+leg at one side seems to trigger more neuron firings of the front leg at the other side (left or
+right). We need further study to explain it more precisely. In fact, there are many factors to
+influence the agreement performance, such as synaptic delay, neuron firing rate, coupling
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+441
+
+strengths among the receptor neurons, and decoding methods. More rigorous parameter
+setting and anatomical / neurophysiological result will be required for close agreement with
+the real data.
+
+4. Discussion
+In this paper, we have shown a simplified neuronal model to explain the orientation
+mechanism of sand scorpions, which is rather similar to the CTRNN network. Stuerzl et al.
+(2000) tested another type of neural networks, a population of spiking neurons to see how
+the arrival time of vibration on each leg influences the neural firings. They found the neuron
+firings on each leg is a function of the time difference of vibration stimulus among the triad
+inhibitory interactions. Our neural model is simplified to eight neurons each of which has its
+own firing rate to approximate the number of neuron spikes. The experimental result shows
+our neuron model is well fit to the real orientation data, which suggests that the eight
+neuron model may be sufficient to explain the orientation mechanism of sand scorpions.
+This simplified model has more potential for robotic application or other vibration sensing
+application, since it can be easiliy built with artificial devices.
+
+Fig. 10. Mobile robot with multi-legs
+Following the suggested neural architecture, we are testing robotic orientation with tactile
+senses. The sand scorpions use BCSS organs near joints to detect any vibration in the
+environment. We mount vibration sensors, piezoelectric sensors at the foot and measure the
+temporal signals of vibrations. We found that the time delay between arrival of a vibration
+signal on robotic legs is not much significant in an office environment when a vibration
+disturbance is given near the robot. Rayleigh waves of vibration can be easily recognized in
+the desert environment for sand scorpions (Brownell, 1984), but the flat surface shown in
+Fig. 10 is only involved with longitudinal waves, that is, sound waves. The sound speed of
+the solid surface is much higher than the sound wave in the air. To apply our neural
+approach to the robotic system in the office environment, we need to measure high
+resolution of temporal signal to detect the time delay of arrival. As an alternative approach,
+
+www.intechopen.com
+
+442
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+we can use the amplitude or power spectrum of the vibration signal. We observe that more
+distant area has more attenuation in the amplitude of sound waves. However, it is
+questionable if the distribution of amplitude attenuation can exactly pinpoint the direction
+of vibration source. The orientation with the two types of vibration signals will be tested in
+the environment similar to the desert. It is still an open question that sand scorpions use
+both Rayleigh waves and longitudinal waves or either for resource localization. We need
+further study to find the principle of orientation of sand scorpions and apply it to
+engineering problems.
+The connectivity pattern and the time delay of inhibitory signal have been investigated in
+this paper. The results are based on our neural model and it seems that the neuron firings on
+each leg follow an almost linear function of the time difference of vibration stimulus when
+triad, pentad or heptad connections are used. It implies that our model is a good
+approximation of the realistic neuron model suggested by Stuerzl et al. (2000). To validate
+our neuron model, we still need further study of whether more realistic neuronal model
+produces the same results about the inhibitory pattern or delay.
+We suggested neural networks with inhibition mechanism or suitable delay time for the
+inhibitory connections. However, there is no neurophysiological or anatomical evidence for
+the neural network of command neurons. From the experiments, it seems that the inhibitory
+interaction has a significant role on the localization of a prey source at least in the agreement
+test with the real data. We still need anatomical data on the scorpion brain to support the
+argument. Also if the information of the recording time of vibration signals for the sand
+scorpions can be obtained, it may provide the relevance and significance of the integration
+in our neural network.
+To model the decoding process of orientation angle over distribution of neuron firings in the
+command neurons, we can build a neuronal layer with a lot of directional cells (Kim, 2006b).
+One hypothesis is that there exist a large number of direction cells to pinpoint the exact
+direction of the prey source and the direction is determined before the appropriate motor
+action. As an alternative decoding mechanism, we can build a relatively small number of
+neurons directly coupled to motor neurons for the orientation behaviour. With that neural
+structure, appropriate weights may guide the orientation angle accurately.
+
+5. Conclusion
+In this paper, we present a neuronal model to process tactile information from the sense
+organs of sand scorpions. We tried to explain how sand scorpions orient towards their prey
+when there is any vibration disturbance caused by prey. They have eight clusters of neurons
+in the brain to process stimulus-locked neuron firings of the sense organs on their eight legs
+(Anton & Barth, 1993, Babu & Barth, 1989). It is modelled simply as eight command neurons
+with inhibitory interactions in our neural system.
+Our continuous-time recurrent neural networks can encode the temporal difference of tactile
+vibration on each leg, and also implement inhibitory interactions depending on synaptic
+delays. Then we compared the neuronal simulation results with the orientation of sand
+scorpions. According to the agreement test, the eight command neurons show the best
+performances with triad, pentad or heptad inhibitions, which implies three inhibitory
+connections or more may be available in the brain system of sand scorpions. Varying
+
+www.intechopen.com
+
+Tactile Information Processing for the Orientation Behaviour of Sand Scorpions
+
+443
+
+synaptic delays also influence the agreement performances. The experiments suggest that
+they have a synaptic delay of inhibition within the range of 0.5 - 1.2 msec.
+The neural model and its experiments showed that a relatively small number of neurons can
+achieve the orientation mechanism for a vibration source. This study can provide a
+foundation of tactile information processing to localize a prey source, or to detect the
+environmental cue with a collection of sensor signals. We still need further study to
+understand the orientation of sand scorpions. This will be involved with testing various
+factors including the coupling strength, non-uniform synaptic delays or varying neural
+connections among the command neurons.
+
+6. Acknowledgements
+The work has been supported by the MKE (The Ministry of Knowledge Economy), Korea,
+under the ITRC (Information Technology Research Center) support program supervised
+by the IITA (Institute for Information Technology Advancement)" (IITA-2008-C1090-08030006)
+
+7. References
+Aicher, B. and Tautz, J. (1990). Vibrational communication in the fiddler crab, Uca pugilator.
+I. signal transmission through the substratum. Journal of Comparative Physiology A,
+166:345--353.
+Anton, S. and Barth, F. (1993). Central nervous projection patterns of trichobothria and other
+cuticular sensilla in the wandering spider Cupiennius saley (arachnida, araneae).
+Zoomorphology, 113:21--32.
+Babu, K. and Barth, F. (1989). Central nervous projections of mechanoreceptors in the spider
+Cupiennius saley keys. Cell and Tissue Research, 258:69--82.
+Beer, R. and Gallagher, J. (1992). Evolving dynamic neural networks for adaptive behavior.
+Adaptive Behavior, 1(1):91--122.
+Brownell, P. (1984). Prey detection by the sand scorpion. Scientific American, 251(6):94--105.
+Brownell, P. and Farley, R. (1979). Orientation to vibrations in sand by the nocturnal
+scorpion Paruroctonus mesaensis: Mechanism of target localization. Journal of
+Comparative Physiology A, 131:23--30.
+Deneve, S., Latham, P., and Pouget, A. (2000). Reading population codes: a neural
+implementation of ideal observers. Nature Neuroscience, 2(8):740--745.
+Georgopoulos, A., Kalaska, J., Caminiti, R., and Massey, J. (1982). On the relations between
+the direction of two-dimensional arm movements and cell discharge in primate
+motor cortex. Journal of Neuroscience, 2(11):1527--1537.
+Gerstner, W. and Kistler, W. (2002). Spiking Neuron Models. Cambridge University Press.
+Kim, D. (2006a). Role of Inhibitions in Neural Networks for the Orientation Behaviour of
+Sand Scorpions, Proceedings of Int. Conf. on the Simulation and Synthesis of Living
+Systems, pp. 275--281, 2006
+Kim, D. (2006b). Neural Network Mechanism for the Orientation Behaviour of Sand
+Scorpions Towards Prey", IEEE Transactions on Neural Networks, vol. 17 (4), pp.
+1070-1076, 2006
+
+www.intechopen.com
+
+444
+
+Sensors, Focus on Tactile, Force and Stress Sensors
+
+Pouget, A., Zhang, K., Deneve, S., and Latham, P. (1998). Statistically efficient estimation
+using population coding. Neural Comp., 10:373--401.
+Stuerzl, W., Kempter, R., and van Hemmen, J. (2000). Theory of arachnid prey localization.
+Physical Review Letters, 84(24):5668--5671.
+
+www.intechopen.com
+
+Sensors: Focus on Tactile Force and Stress Sensors
+
+Edited by Jose Gerardo Rocha and Senentxu Lanceros-Mendez
+
+ISBN 978-953-7619-31-2
+Hard cover, 444 pages
+Publisher InTech
+
+Published online 01, December, 2008
+
+Published in print edition December, 2008
+This book describes some devices that are commonly identified as tactile or force sensors. This is achieved
+with different degrees of detail, in a unique and actual resource, through the description of different
+approaches to this type of sensors. Understanding the design and the working principles of the sensors
+described here requires a multidisciplinary background of electrical engineering, mechanical engineering,
+physics, biology, etc. An attempt has been made to place side by side the most pertinent information in order
+to reach a more productive reading not only for professionals dedicated to the design of tactile sensors, but
+also for all other sensor users, as for example, in the field of robotics. The latest technologies presented in this
+book are more focused on information readout and processing: as new materials, micro and sub-micro
+sensors are available, wireless transmission and processing of the sensorial information, as well as some
+innovative methodologies for obtaining and interpreting tactile information are also strongly evolving.
+
+How to reference
+
+In order to correctly reference this scholarly work, feel free to copy and paste the following:
+DaeEun Kim (2008). Tactile Information Processing for the Orientation Behaviour of Sand Scorpions, Sensors:
+Focus on Tactile Force and Stress Sensors, Jose Gerardo Rocha and Senentxu Lanceros-Mendez (Ed.),
+ISBN: 978-953-7619-31-2, InTech, Available from: http://www.intechopen.com/books/sensors-focus-on-tactileforce-and-stress-sensors/tactile_information_processing_for_the_orientation_behaviour_of_sand_scorpions
+
+InTech Europe
+
+University Campus STeP Ri
+Slavka Krautzeka 83/A
+51000 Rijeka, Croatia
+Phone: +385 (51) 770 447
+Fax: +385 (51) 686 166
+www.intechopen.com
+
+InTech China
+
+Unit 405, Office Block, Hotel Equatorial Shanghai
+No.65, Yan An Road (West), Shanghai, 200040, China
+Phone: +86-21-62489820
+Fax: +86-21-62489821
+
+© 2008 The Author(s). Licensee IntechOpen. This chapter is distributed
+under the terms of the Creative Commons Attribution-NonCommercialShareAlike-3.0 License, which permits use, distribution and reproduction for
+non-commercial purposes, provided the original is properly cited and
+derivative works building on this content are distributed under the same
+license.
+
+

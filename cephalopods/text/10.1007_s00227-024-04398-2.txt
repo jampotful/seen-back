@@ -1,0 +1,424 @@
+Hold it close: male octopus hold their hectocotylus closer to their body
+Willem Weertman, David Scheel (2024). Marine Biology. https://doi.org/10.1007/s00227-024-04398-2. doi:10.1007/s00227-024-04398-2. Licence: cc-by. Text from pdf.
+
+Marine Biology (2024) 171:95
+https://doi.org/10.1007/s00227-024-04398-2
+
+SHORT NOTES
+
+Hold it close: male octopus hold their hectocotylus closer to their body
+Willem Lee Weertman1,2,3
+
+· David Scheel1
+
+Received: 7 February 2023 / Accepted: 17 January 2024 / Published online: 14 March 2024
+© The Author(s) 2024
+
+Abstract
+The right third arm of the male octopus is the hectocotylized arm. This arm is modified by anatomy specialized to hold and
+transfer sperm packets to the female, and lacks suckers at the distal end. Male octopus may be distinguished by the skilled
+eye from their habit of holding their hectocotylus closer to their body in a protective manner, although this observation has
+never been described quantitatively. We utilized a three-step process of data annotation, pose estimation model training,
+and model inference to show that this common observation is true of Octopus rubescens. In 2338 images, the eyes, mantle
+tip, and arm tips of two male (n = 1152) and three female (n = 1085) octopuses were annotated by an experimenter. These
+images were then used to train a DeepLabCut pose estimation model which achieved a RMSE of 1.78 cm. This model was
+then used to annotate 11.4 h (n = 408,985 images) of four female and eight male octopuses moving across the middle of a
+large aquarium. We then compared the human annotated data, and the model inference data separately. In both datasets we
+compared the arm-tip-to-eye centered point distances, as well as the octopus centric arm tip 90% kernel density estimation area. In both the training dataset and the model inference datasets we found common results. Male O. rubescens hold
+their third to the right arm closer to their body than all seven other arms while the females do not. Further, in both males
+and females, the rear arm pairs operate closer to the body than the front arm pairs. Despite their anatomical similarity and
+potential redundancy, these results indicates functional differences in arm use by octopuses.
+Keywords Octopus · Cephalopod · Hectocotylus · Behavior
+
+Introduction
+Male octopuses of many species use their right third arm
+during mating in the task of depositing the spermatophores
+within the female reproductive system. This arm is modified along its length and at the tip for this purpose. The
+‘penis’ of octopuses is an internal male organ that extrudes
+the spermatophores. These are passed to the right third arm
+(hectocotylized arm), modified relative to the other arms by
+a groove along its length and termination in the ligula. The
+ligula is specifically the suckerless modified tip of this arm
+
+* Willem Lee Weertman
+wlweert@gmail.com
+1
+
+Alaska Pacific University, 4101 University Drive,
+Anchorage, AK 99508, USA
+
+2
+
+Friday Harbor Lab, University of Washington, 620 University
+Rd., Friday Harbor, WA 98250, USA
+
+3
+
+Department of Psychology, University of Washington, 3921
+W Stevens Way NE, Seattle, WA 98195, USA
+
+with which the spermatophores are inserted into the female
+oviduct.
+There is little distinction in contemporary writing
+between the hectocotylus (as the arm) and the hectocotylized
+arm (in which the hectocotylus itself is referred to as a modification). Historically, the ‘hectocotylus’ was the detached
+autonomous mating arm of the dwarf male Argonauta
+(Vérany and Vogt 1852), initially discovered detached from
+the male and first mistaken for a genus of parasitic worm
+(Hectocotylus sp.) of female Argonauta (Cuvier 1829), and
+later for the entire male (Kölliker 1846). The ‘hectocotylized arm’ refers to the arm bearing the ligula, whether or
+not it normally detaches from the male. ‘Hectocotylus’ in
+contemporary usage can refer to the hectocotylized arm,
+to the ligula, or to the erroneous genomic designation of a
+nonexistent parasite. Henceforth in this report, we will use
+hectocotylus to refer to the hectocotylized arm of the octopus; in the species under discussion (and in many others),
+this is the right third arm.
+Loss of the ligula by injury or partial amputation is presumably a disadvantage in mating to a male octopus. Yet
+
+Vol.:(0123456789)
+
+95 Page 2 of 6
+
+injury to octopus arms is common, occurring in nearly 60%
+of individuals. Among three species (Octopus bimaculatus,
+O. bimaculoides, O. rubescens), arm loss (truncation) injuries were more common on the left side, and on forward arm
+pairs 1 and 2 (Voss and Mehta 2021). Thus, right posterior
+third and fourth arms were the least injured.
+Does male octopus posture or behavior aid in protecting
+the hectocotylus? Those closely familiar with octopuses have
+sometimes been able to distinguish male octopuses from
+female in part due to the way they carry and protect the right
+third arm (e.g. Godfrey-Smith 2020). Further, in handling
+and inspecting an octopus, a male will put up considerably
+more resistance to inspection of the right third arm than to
+other arms, or than a female will. However, this has seldom
+been remarked on in the literature and we are aware of no
+published data bearing on the subject.
+In this note, we utilize an opportunity provided by training a markerless pose estimation model on octopuses to
+estimate the position of each arm tip in thousands of images
+of octopuses. This allows us to present detailed data on the
+position of arm tips among arms and between males and
+females. We assess two hypotheses: first, that regardless of
+side or anterior–posterior positions, each arm of octopuses
+operates within areas of similar size; and second, that males
+are more protective of the right third arm tip, holding it
+closer to the body center and operating it within a smaller
+area near the body.
+
+Methods
+We captured Octopus rubescens individuals (and one
+Enteroctopus dofleini female) by SCUBA diving from
+Admiralty Bay, Washington, under a permit approved by
+the Washington Department of Fish and Wildlife. Octopus
+were housed in an open circuit seawater system flume with
+12 h daylight and 12 h dark with 1 h gradual on and off light
+cycles. Video was recorded under blackout conditions and
+filmed via infrared light at the University of Washington,
+Friday Harbor Laboratories; care was in accordance with a
+protocol approved by the University of Washington Institutional Animal Care and Use Committee (Protocol number:
+4356–02). See Weertman (2022) for details.
+Males were identified by the external presence of a hectocotylus and absence of suckers on the distal end of the
+right third arm (R3, Fig. 1). Females were identified by the
+absence of a hectocotylus and the presence of suckers at
+the distal tip of the right third arm. For some analyses, we
+lumped the front arms (L1 and L2 with R1 and R2, Fig. 1),
+the rear arms (L3 and L4 with R4, excluding R3) and contrasted these with R3. Octopuses varied from near-adult
+body size up to large adult body size (Hochberg 1997), based
+
+Marine Biology (2024) 171:95
+
+on mantle length (the distance from eyes to mantle tip. See
+below and Results).
+This dataset comprises continuous video recordings of
+octopuses in the flume at night under near-infrared lamps.
+The dataset was annotated with passes of two separate DeepLabCut models, see Weertman (2022). The first pass model
+found the eyes and mantle tip of the octopuses anywhere in
+the flume; these data were used to subset periods when the
+octopus was active and moved across the middle of the tank,
+from which the model extracted octopus centric videos. The
+second was a model trained to find the eyes, mantle tip, and
+arm tips. The output of this model are the data considered in
+this note (hereafter estimated data). The model was trained
+on (n = 2237) images annotated by an experimenter, the
+analysis of which is considered separately (hereafter annotated data). The annotated data sample sizes were balanced
+between male and females. The model reached human level
+eye labeling accuracy with a validation root mean square
+error of 2.7 mm, and subhuman arm-tip validation accuracy
+of 1.78 cm, a remarkably good result given the nature of
+octopus arms. For these analysis we used the eye predictions to rotate the arm-tip predictions in an octopus centric
+reference frame.
+We used the DeepLabCut arm tip estimated data to calculate arm-tip-to-eye distances for each arm tip estimate
+in each frame (for complete methods, see Supplemental
+Information and Weertman 2022). Each octopus had eight
+arm tips, and video was analyzed at ten frames per second,
+providing thousands of images and positions. Starting with
+12.2 h of frames, we dropped frames with a prediction confidence < 0.99 or impossible velocities and positions, leaving 11.4 h of video. For estimated data with a large sample
+size of distances, we compared mean distances, reducing the
+sample size to the number of octopuses times the number
+of arm tips in each comparison. For the smaller annotated
+data set, we used individual arm tip positions in calculating statistics (n = 2237 frames). We present unnormalized
+estimated data, but to account for differences in body size
+(on average the sampled males were larger than sampled
+females, see below), we also present data after normalizing
+by dividing each eye-to-arm-tip distance by the largest eyeto-arm-tip distance recorded for that individual octopus. We
+also used the 90% kernel density estimation (KDE) area as a
+measure of the core area occupied by each arm tip relative to
+the octopus body. The areas for the estimated data were normalized using maximum area by individual octopus. For the
+annotated data, since the males were larger, and the sample
+size smaller, we did not normalize the data to highlight the
+contrastive use of R3.
+
+Marine Biology (2024) 171:95
+
+Page 3 of 6 95
+
+Fig. 1  Male octopus hold their hectocotylus closer to their body than
+other arms. Visual comparison of the third to the right arm tip area
+distributions of male and female octopus while octopus moved across
+the center of the aquaria. a A male octopus viewed from above in the
+behavior recording aquarium. Standard naming convention for octopus arms is used, right arms R1–4 and left arms L1–4 are shown. The
+hectocotylus is highlighted in yellow. b Dissected and fixed Octopus
+rubescens hectocotylus showing the arm tip specialization for reproduction. c Unspecialized O. rubescens arm tip. d & e All annotations
+
+were rotated into the octopus frame of reference and oriented perpendicular to the left and right eye axis. Sample size (n) for each sex is
+the number of annotated images (see Methods for details); sample
+size (N) is the number of individuals of each sex for which data were
+annotated to train the model. The third to the right arm (R3) is shown
+in red. d The combined 90% kernel density estimation (90%KDE)
+contour of arm tips in the expert annotated training set for DeepLabCut. e The individual 90%KDE for of arm tips for each octopus
+
+Results and discussion
+
+found that female octopuses did not hold any one arm tip
+differently than the others. The normalized estimated mean
+area of 90% KDEs did not vary significantly among the
+arms of female octopuses; and the normalized mean distance of arm tips to eyes did not vary significantly between
+R3 and the other back arms (Fig. 2b), although there was a
+significant but slight difference in the unnormalized annotated mean distance on this measure (Fig. 2a).
+
+Data inventory
+We collected continuous video recordings of twelve octopuses, four females and eight males, from an isolated ~ 12.2 h
+of octopus moving across the middle floor of the flume,
+distant from the walls. DeepLabCut provided arm tip position estimates after cleaning in 408,985 video frames. We
+also annotated arm tip positions in n = 2338 video frames
+(n = 1085 frames of three females and 1152 frames of two
+males).
+
+Female arm tip distances
+Across all octopuses of both sexes, in both annotated and
+estimated data, we found that the front arm tips operated
+significantly farther from the body than back arm tips
+(Fig. 2). Despite these front-rear differences, however, we
+
+Males protect right third (hectocotylized) arm
+Males, however, held R3 closer than their other arms to
+the body in both estimated and annotated data. The normalized mean distance of arm tips to eyes and the normalized mean area of 90% KDEs of arm R3 were significantly
+closer to the body than other rear arms of male octopuses
+(Fig. 2b).
+
+95 Page 4 of 6
+
+Marine Biology (2024) 171:95
+
+Fig. 2  Octopus display specialization when comparing arm tip distance and areas between the front, back, and third to the right arm.
+a Compares distance from arm tip to eyes in unnormalized expert
+labeled images. Sample size (n) for sex is the number of annotated
+images, sample size (n) for front, back, or R3 is the number of annotated arm tips. Male front arm tips (Front; L2, L1, R1, R2) were farther from their eyes on average than rear arm tips (Back; L3, L4, R4)
+excluding R3, which was even closer to their body on average than
+their other rear arms. A similar trend was observed between female
+Front and Back arms, while the female R3 differed much less in distance to the eyes than males. This small difference was nonetheless
+significant different because the R3 measurements were taken from
+a single arm and had a tighter distribution than the combined values in Back. a Male, arm distance independent t tests; Front to back,
+t = 5.9, p = 5e-9. Front to R3, t = − 28.2, p = 7e-164. Back to R3,
+t = − 23.2, p = 4.9e−113. a Female, arm distance independent t tests;
+Front to back, t = 7.2, p = 5e−13. Front to R3, t = − 7.3, p = 2.7e-13.
+Back to R3, t = − 2.04, p = 0.04. b Normalized arm tip to eyes dis-
+
+tance (left panel) and 90%KDE areas occupied by arm tips (right
+panel) from estimated data (see Methods for details and averaged
+by individual for each arm tip (sample size (n)). By individual averages were compared to offset the issue of large sample sizes when
+using pose estimation annotations. Normalization of measures was
+used because of the significant distribution of individual sizes in the
+experiment, see Fig. 1e. b Left panel, arm-tip distances independent t
+tests, male comparisons; Front to back, t = 3.3, p = 2e−6. Front to R3,
+t = − 16.5, p = 6e−10. Back to R3, t = − 8.9, p = 6e−10. b Left panel,
+arm-tip distances independent t tests, female comparisons; Front
+to back, t = 3.7, p = 0.0008. Front to R3, t = − 4.7, p = 0.0002. Back
+to R3, t = −1.1, p = 0.3. b Right panel, 90%KDE areas independent t tests, male comparisons; Front to back, t = 2.1, p = 0.04. Front
+to R3, t = 7.6, p = 4e−9. Back to R3, t = − 5.8, p = 3e−6. b Right
+panel, 90%KDE areas independent t tests, female comparisons; Front
+to back, t = 0.7, p = 0.5, Front to R3, t = − 1.9, p = 0.06. Back to R3,
+t = − 1.1, p = 0.3
+
+Males right third arm closer to the body
+than do females
+
+propulsion (Mather 1998; Levy et al. 2015), and this may
+require the tips to move closer to the body.
+
+Males and females differed in the activity areas of R3 relative to each other (Fig. 2, Fig. 3a, c). The annotated arm tip
+90% KDEs for males were smaller than for females, despite
+the males being larger overall (Fig. 3b).
+
+Specialization of male R3
+
+Front‑to‑back arm tip distance and specialized arm
+use
+Octopus gait is non-rhythmic, they crawl in any direction
+relative to the body (Levy et al. 2015; Weertman 2022), and
+the arms are sometimes considered unspecialized in movement (e.g. Mather 1998; Gutnick et al. 2020). Despite this,
+octopuses do exhibit a bias in movement direction relative to
+the body axis (Levy et al. 2015; Weertman 2022). The front
+arms are more likely to be used in reaching, exploration,
+and bending (Byrne et al. 2006a; Scheel et al. 2016; Kennedy et al. 2020) that may extend them farther than the back
+arms. The back arms may be preferentially used for forward
+
+Male arm R3 is anatomically specialized, bearing the hectocotylus modifications. In addition, this arm is also behaviorally specialized, likely for the protection of this important mating anatomy. We saw no overall left-to-right bias
+(Fig. 4). Octopus arm choice may be influenced visually
+(Byrne et al. 2006b; Gutnick et al. 2011, 2020) although
+this does not determine direction of movement (Byrne et al.
+2002), and octopuses do not have population-wide lateral
+preferences (despite the occurrence of individual lateralization) (Byrne et al. 2004, 2006b). Further, our data were
+recorded in complete darkness to eliminate visual influences.
+Octopus arm injuries are front- and left-biased, leaving
+the back right arms R3 and R4 the least commonly injured
+across three different octopus species (Voss and Mehta
+2021). The anterior-bias in arm use, and our results showing that front arm tips operate further from the body than
+
+Marine Biology (2024) 171:95
+
+Page 5 of 6 95
+
+Fig. 3  Male octopuses hold their third to the right arm closer to their
+body and over a smaller area than female octopuses. a Individual
+averages of normalized distance from third to the right arm tip (R3)
+to their eyes and the arm tip 90%KDE area. Sample sizes (n) are the
+number of individuals of each sex compared. Independent t tests;
+female to male arm tips, t = 3.8, p = 0.004. Female to male 90%KDE
+area, t = 4.5, p = 0.001). b Size differences between sexes of the sampled octopuses (female = 3, male = 2) in the annotated data (sample
+size (n) is the number of images annotated). Eye to eye (interocular
+
+distance) and eye to mantle tip (mantle length) are common metrics
+for reporting octopuses size. Lines indicate 90%KDE areas. The
+male and female octopus size distributions overlap, but the males
+were a little larger. c Compares the distance of R3 arm tip to the eyes
+in unnormalized annotated data. Despite the male octopus being
+slightly larger than the females, the male octopus held R3 closer to
+their eyes than females. Arm tip distances independent t test, t = 18.3,
+p = 1.2e-69
+
+Fig. 4  Raw (a) and normalized (b) arm tip distances (top) and
+90%KDE (bottom) averaged by individuals show differences between
+sexes and body axes. All plots use DeepLabCut estimated data. Sample size (n) is the number of female and males compared (females = 4,
+
+males = 8). The effects of normalization are especially apparent in
+comparing raw arm tip distances, with smaller interquartile ranges,
+and greater separation between R3 and the other arms after normalization
+
+back arm tips, can explain the front-bias in injury rates.
+However, without population-wide handedness bias, the
+left-bias in back arm injuries is unexplained. For males at
+
+least, our results show that R3 operates in an area closer to
+the body than the other back arms (Fig. 2b), and for all species in their study Voss and Mehta (2021) recorded fewer
+
+95 Page 6 of 6
+
+male injuries for R3 than its contralateral pair L3. We found
+that in females, L3 and L4 are not similarly held close to the
+body. While Voss and Mehta (2021) found variable injury
+rates in their study species to female left rear arms compared
+to right, in O. rubescens, L4 and R4 injury frequencies were
+comparable. Thus, at least for our study species O. rubescens, the proximity of R3, but not of R4, corresponds well
+to the relative injury rates of those arms in the field.
+The front-to-rear differences in arm behavior, as well as
+the male–female difference in use of the hectocotylized arm
+are functional differences in arm use, despite the apparent
+anatomical similarity and potential redundancy among eight
+octopus limbs. Those who watch octopuses in the field or
+on recordings sometimes are able to provide an expert judgment of whether an octopus is male or female, even without
+being close enough, or the images being of sufficient resolution, to discern the hectocotylized anatomy of the right third
+arm. Some observers have mentioned the perceived habit of
+octopuses to be protective of their hectocotylized arm (e.g.
+Godfrey-Smith 2020) (Fig. 1). Here we provide numerical
+data, that has previously been hard to obtain, verifying this
+claim, and that supports such expert judgements.
+Author contributions WLW: conceptualization, methodology,
+software, validation, formal analysis, visualization, investigation,
+resources, data curation, writing—original draft, writing—review and
+editing, project administration, funding acquisition. DS: conceptualization, methodology, resources, writing—original draft, writing—review
+and editing, supervision.
+Funding This project was partially aided by the support of the Beatrice
+Crosby Booth Endowed Scholarship at Friday Harbor Laboratories,
+Alan J. Kohn Endowed Fellowship. Remainder of funds came from
+personal expenditure by Willem Weertman.
+Data availability Data and code required to reproduce the work can
+be found at this link https://​github.​com/​weert​man/​Octop​us_​Hold-​It-​
+Close. If this link fails, please reach out to the authors directly. Octopus
+videos, DeepLabCut models, images, and annotations can be made
+available at a reasonable request.
+
+Declarations
+Conflict of interest This work was done in partial fulfilment of a Master of Science by Willem Weertman. There are no conflicts of interest.
+Ethics approval Octopus care was in accordance with a protocol
+approved by the University of Washington Institutional Animal Care
+and Use Committee (Protocol number: 4356–02).
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long
+as you give appropriate credit to the original author(s) and the source,
+provide a link to the Creative Commons licence, and indicate if changes
+were made. The images or other third party material in this article are
+included in the article’s Creative Commons licence, unless indicated
+
+Marine Biology (2024) 171:95
+otherwise in a credit line to the material. If material is not included in
+the article’s Creative Commons licence and your intended use is not
+permitted by statutory regulation or exceeds the permitted use, you will
+need to obtain permission directly from the copyright holder. To view a
+copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+
+References
+Byrne RA, Kuba M, Griebel U (2002) Lateral asymmetry of eye use
+in Octopus vulgaris. Anim Behav 64:461–468
+Byrne RA, Kuba MJ, Meisel DV (2004) Lateralized eye use in Octopus vulgaris shows antisymmetrical distribution. Anim Behav
+68:1107–1114. https://​doi.​org/​10.​1016/j.​anbeh​av.​2003.​11.​027
+Byrne RA, Kuba MJ, Meisel DV, Griebel U, Mather JA (2006a) Octopus arm choice is strongly influenced by eye use. Behav Brain
+Res 172:195–201
+Byrne RA, Kuba MJ, Meisle DV, Grieble U, Mather JA (2006b)
+Do Octopus vulgaris have prefered arms? J Comp Psychol
+120:198–204
+Cuvier G (1829) Memoire Sur Un Ver Parasite D’un Nouveau Genre
+(Hectocotylus Octopodis). Crochard
+Godfrey-Smith P (2020) Metazoa: Animal life and the birth of the
+mind. Farrar, Strauss and Giroux, New York
+Gutnick T, Byrne Ruth A, Hochner B, Kuba M (2011) Octopus vulgaris
+uses visual information to determine the location of its arm. Curr
+Biol 21:460–462. https://​doi.​org/​10.​1016/j.​cub.​2011.​01.​052
+Gutnick T, Zullo L, Hochner B, Kuba MJ (2020) Use of peripheral
+sensory information for central nervous control of arm movement
+by Octopus vulgaris. Curr Biol 30:4322–4327
+Hochberg FG (1997) Octopus rubescens. In: Lang MA, Hochberg FG
+(eds) Workshop on The Fishery and Market Potential of Octopus
+in California. Springer, Washington, pp 29–38
+Kennedy EL, Buresch KC, Boinapally P, Hanlon RT (2020) Octopus
+arms exhibit exceptional flexibility. Sci Rep 10:20872
+Kölliker A (1846) II. Some Observations upon the Structure of two new
+Species of Hectocotyle, parasitic upon Tremoctopus violaceus,
+D. Ch., and Argonauta Argo, Linn.; with an Exposition of the
+Hypothesis that these Hectocotylæ are the Males of the Cephalopoda upon which they are found. Transactions of the Linnean
+Society of London 20(1):9–21
+Levy G, Flash T, Hochner B (2015) Arm coordination in octopus
+crawling involves unique motor control strategies. Curr Biol
+25:1195–1200
+Mather JA (1998) How do octopuses use their arms? J Comp Psychol
+112:306–316
+Scheel D, Godfrey-Smith P, Lawrence M (2016) Signal use by octopuses in agonistic interactions. Curr Biol 26:377–382
+Vérany J, Vogt C (1852) Mémoire sur les hectocotyles et les males
+de quelques céphalopodes Annales des Sciences Naturelles, pp
+147–188
+Voss KM, Mehta RS (2021) Asymmetry in the frequency and proportion of arm truncation in three sympatric California Octopus species. Zoology 147:125940
+Weertman W (2022) Octopus use odor plumes to find food. Institute of Culture and the Environment, Alaska Pacific University,
+Anchorage
+Publisher's Note Springer Nature remains neutral with regard to
+jurisdictional claims in published maps and institutional affiliations.
+
+

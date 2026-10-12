@@ -1,0 +1,2861 @@
+New genome reveals molecular signatures of adaptation to nocturnality in moth-like butterflies (Hedylidae)
+Rachit Pratap Singh, Yi‐Ming Weng, Yash Sondhi, David M. Plotkin, Paul B. Frandsen, Akito Y. Kawahara (2023). bioRxiv (Cold Spring Harbor Laboratory). http://dx.doi.org/10.1101/2023.11.21.568084. doi:10.1101/2023.11.21.568084. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+1
+2
+
+New genome reveals molecular signatures of adaptation to nocturnality in
+moth-like butterflies (Hedylidae)
+
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+
+†
+
+Rachit Pratap Singh1, †Yi-Ming Weng1, Yash Sondhi1, David Plotkin1, Paul B. Frandsen2, Akito
+Y. Kawahara1
+†Co-first authors
+Author affiliations:
+1
+McGuire Center for Lepidoptera and Biodiversity, Florida Museum of Natural History, University
+of Florida, Gainesville, FL 32611 USA
+2
+Department of Plant and Wildlife Sciences, Brigham Young University, Provo, Utah, USA
+Corresponding author: Akito Y. Kawahara, kawahara@flmnh.ufl.edu
+ORCID:
+Rachit P. Singh: 0000-0001-6158-7659
+Yi-Ming Weng: 0000-0002-8243-5061
+Yash Sondhi: 0000-0002-7704-3944
+David Plotkin: 0000-0002-2339-655X
+Paul B. Frandsen: 0000-0002-4801-7579
+Akito Y. Kawahara: 0000-0002-3724-4610
+Keywords: color vision, diel-niche, Lepidoptera, Macrosoma, moth-butterfly, opsins,
+Papilionoidea
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+25
+
+Abstract
+
+26
+
+Nearly all animals have a preferred period of daily activity (diel-niche), which is strongly
+
+27
+
+influenced by the light environment. Sensory systems, particularly vision, are adapted to light, and
+
+28
+
+evolutionary transitions to novel light environments, especially light limited ones, can impose
+
+29
+
+strong constraints on eye evolution, color, and motion vision. The adaptive changes in sensory
+
+30
+
+abilities of animals during these transitions, both at the genetic and neural levels, are largely
+
+31
+
+unexplored. Butterflies and moths, with their diverse diel-niche shifts, are an ideal group for
+
+32
+
+investigating the gene evolution linked to these transitions. While most butterflies are day-flying,
+
+33
+
+hedylid butterflies are unique in being primarily nocturnal, and they represent an important
+
+34
+
+evolutionary shift from diurnality to nocturnality in this clade. Here, we sequence the first high-
+
+35
+
+quality Hedylidae genome and functionally annotate genes to understand genomic changes
+
+36
+
+associated with shifts in diel niche. Comparing Hedylidae visual genes against day- and night-
+
+37
+
+flying Lepidoptera species revealed that visual genes are highly conserved, with no major losses.
+
+38
+
+However, hedylid butterfly opsins were more similar to nocturnal moths than their diurnal
+
+39
+
+congeners. Tests on the evolutionary rates (dN/dS) confirmed that color vision opsins were under
+
+40
+
+strong selection, similar to nocturnal moths. We propose that a convergent event of sequence
+
+41
+
+evolution took place when these butterflies became nocturnal, approximately 98 million years ago.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+42
+
+Introduction
+
+43
+
+The natural world is subject to a continuous day-night cycle, with drastic changes in both intensity
+
+44
+
+and spectral composition of the light environment1,2. For animals, this cycle represents a critical
+
+45
+
+temporal framework within which they conduct their activities. A clear dichotomy often exists
+
+46
+
+between diurnal (day-active) and nocturnal (night-active) animals, with many insects3,4, birds5 and
+
+47
+
+mammals6 restricted to either of the activity periods, often called diel-niche. While binning into
+
+48
+
+nocturnal and diurnal categories is a simplification, given that animals occupy varied activity
+
+49
+
+periods, this allows the examination of diel patterns and how lifestyles shift over an evolutionary
+
+50
+
+time scale7,8.
+
+51
+
+Shifting from bright to dim environments presents unique challenges for an animal's sensory
+
+52
+
+systems, especially vision. Mammals, for instance, have evolved a wide range of eye shapes, such
+
+53
+
+as large corneas and pupils that maximize light intake during nocturnal forays9,10. In birds, eye size
+
+54
+
+is linked to light habitat and foraging behaviour11. Smaller animals such as insects are often limited
+
+55
+
+by absolute eye size. Insects have developed intricate visual systems, featuring compound eyes
+
+56
+
+with distinct arrangements of ommatidia. While mammals can use muscles to contract their pupils,
+
+57
+
+insect eyes have a system of migrating pigment and graded refractive indices that can bend and
+
+58
+
+manipulate light, pooling it as required to increase sensitivity or resolution. These eyes are often
+
+59
+
+categorized into two broad classes: superposition and apposition eyes, each tailored to suit the
+
+60
+
+animal’s preferred light environment12,13.
+
+61
+
+Adapting to dimly lit environments also entails subtle adjustments of the visual and nervous
+
+62
+
+system. For example, many animals, including humans, trade off color vision for more sensitive
+
+63
+
+monochromatic vision at night14,15. Similarly, nervous systems slow down and often sacrifice
+
+64
+
+spatial and temporal resolution to increase sensitivity16. Studying visual systems usually
+
+65
+
+necessitates time-intensive techniques such as behavioral observations or electrophysiology.
+
+66
+
+However, the advent of more accessible genome and transcriptome sequencing methods have
+
+67
+
+allowed for increased exploration of these patterns. For example, through the examination of genes
+
+68
+
+responsible for vision, it was found that nocturnal owls have a reduced set of color vision genes
+
+69
+
+compared to diurnal birds17. The same variation has been reported in fishes, where species adapted
+
+70
+
+to bright environments have a much greater set of color vision genes than species that live in the
+
+71
+
+deep sea18. In insects, multiple cases of gene duplications and losses have been observed, owing
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+72
+
+to the strong selective pressure imposed by light availability19,20. Butterflies and moths
+
+73
+
+(Lepidoptera) are a prime example, where duplications and color vision gene diversification is
+
+74
+
+much more prevalent in diurnal species as compared to nocturnal species21–23. This diversification
+
+75
+
+of color vision genes aligns with the over 100 diel transitions recorded in Lepidoptera, featuring
+
+76
+
+multiple evolutionary switches between nocturnality and diurnality24.
+
+77
+
+Butterflies have emerged as a valuable model system to explore the evolution of color vision in
+
+78
+
+insects. Hedylidae, commonly known as American moth-butterflies, comprise a single genus,
+
+79
+
+Macrosoma, with 36 described species25 and stand out among their butterfly counterparts in that
+
+80
+
+nearly all species are nocturnal. Marked by moth-like attributes such as filiform antennae and
+
+81
+
+nocturnal flight, hedylids were long classified within the moth superfamily Geometroidea26.
+
+82
+
+Hedylids also possess tympanal ears on their wings, which they use to detect echolocation and
+
+83
+
+defend themselves from nocturnal bat predation27,28. Recent phylogenetic analyses have revealed
+
+84
+
+that Hedylidae likely diverged from their sister group, the skippers (Hesperiidae), less than 30
+
+85
+
+Mya29,30. Studies exploring the sensory ecology of hedylids suggest they possess refracting
+
+86
+
+superposition eyes, which evolved exclusively in Hedylidae and Hesperiidae among
+
+87
+
+butterflies31,32. Because they are nested in a diurnal clade, hedylids are an ideal model to study
+
+88
+
+how shifts to a new light environment influence gene evolution. We present the first annotated
+
+89
+
+genome assembly of the hedylid Macrosoma leucophasiata, generated with PacBio Hi-Fi
+
+90
+
+sequencing. Leveraging this new resource, we examined the visual gene repertoire and conducted
+
+91
+
+a comparative analysis of curated phototransduction genes using genome assemblies of candidate
+
+92
+
+Lepidoptera species. Since the repertoire size of phototransduction genes is thought to be generally
+
+93
+
+consistent across species with different diel niches, we expected to see the gene repertoire in M.
+
+94
+
+leucophasiata to follow the same tendency. We focused our hypotheses on opsin genes, given their
+
+95
+
+strong genotype-phenotype links and key role in optimizing vision. Firstly, we tested if opsin genes
+
+96
+
+in species sharing the same diel niche show sequence similarity and whether hedylid opsins are
+
+97
+
+more closely related to butterflies or moths. To infer the selection pressure on these genes, we also
+
+98
+
+tested for positive selection. These analyses, with a focus on Hedylidae, provide new insights into
+
+99
+
+the molecular adaptations associated with the switch to a nocturnal niche in butterflies.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+100
+
+Results
+
+101
+
+Contig-scale functionally annotated reference genome assembly for Hedylidae
+
+102
+
+We sequenced the genome of Macrosoma leucophasiata (Supplementary Figure 1) using PacBio
+
+103
+
+high-fidelity (HiFi) sequencing. A total of 2.85 million HiFi reads were obtained, resulting in 32x
+
+104
+
+read coverage. A preliminary survey using Genomescope 2.0 estimated the genome size to be 452
+
+105
+
+Mbp by k-mer analysis, with a heterozygosity rate of 1.61% (Supplementary Figure 2). The
+
+106
+
+curated Hifiasm assembly resulted in a genome size of 616 Mbp comprising 66 contigs and N50
+
+107
+
+value of 22.3 Mbp (Supplementary Data 1). The draft assembly was generated after filtering
+
+108
+
+haplotigs via purging and non-target sequence removal using BlobTools33. We identified and
+
+109
+
+removed 152 contigs containing 2.82 Mbp (0.11%) of contamination linked to Euglenozoa from
+
+110
+
+the draft assembly. Similarly, haplotig purging led to further removal of duplicated and
+
+111
+
+mismatched contigs (Supplementary Data 2). We assessed BUSCO completeness at each step to
+
+112
+
+ensure consistency and prevent the loss of meaningful information. Assembly statistics and
+
+113
+
+BUSCO scores are shown in Table 1.
+
+114
+
+The circular mitochondrial genome of M. leucophasiata was also assembled into a single contig
+
+115
+
+with a length of 15,209 bp. The mitogenome was annotated with 36 protein-coding genes, 22 t-
+
+116
+
+RNA genes and two ribosomal RNA genes. The mitogenome is similar in size to the mitogenome
+
+117
+
+of M. conifera (15,344 bp)34.
+
+118
+
+To assess the extent of repetitive sequences in the final assembly of M. leucophasiata, we modeled
+
+119
+
+and soft-masked repeat regions using RepeatModeler235 and RepeatMasker36. A library of 1082
+
+120
+
+transposable elements (TE) repeat families was generated corresponding to the Dfam database37.
+
+121
+
+Repeat sequences accounted for 56.79% (349 Mbp) of the assembly. For gene annotation, we used
+
+122
+
+the resulting soft-masked genome to run the BRAKER3 pipeline with protein evidence from the
+
+123
+
+OrthoDB v1138 catalog for Arthropoda to obtain the gene model. A total of 19,292 protein-coding
+
+124
+
+genes were predicted in the resulting gene model, and were used for functional annotation
+
+125
+
+(Supplementary Data 3). We annotated gene function primarily using eggNOG-mapper39 and by
+
+126
+
+performing sequence-similarity searches against the Swiss-Prot arthropodan database using
+
+127
+
+DIAMOND v2.0.940. In eggNOG, a total of 13,169 (68.26% of the predicted genes) were
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+128
+
+functionally annotated (Table 1). Gene ontology (GO) terms for 6,598 (~50%) of the annotated
+
+129
+
+genes were obtained (Supplementary Data 4).
+
+130
+
+Gene family evolution analysis suggests conservation in vision-related genes with variable
+
+131
+
+gene tree topologies in Opsins
+
+132
+
+Our ML tree based on 3,376 BUSCO single-copy orthologs was well-supported (100% support for
+
+133
+
+SH-aLRT and ultrafast bootstrap, Figure 1). Relationships of butterfly families are consistent with
+
+134
+
+most previous studies where Hedylidae and Hesperiidae are sister groups, and Papilionidae
+
+135
+
+(swallowtails) are the first branching family within the Papilionoidea superfamily29,30. We
+
+136
+
+identified 26,990 hierarchical orthogroups (HOGs) with OrthoFinder (Supplementary Data 5)
+
+137
+
+from the primary transcripts of Augustus gene models of the 20 species generated from the
+
+138
+
+BRAKER3 pipeline (Supplementary Table 1). We evaluated gene repertoire size evolution on
+
+139
+
+the branch leading to our focal species, M. leucophasiata, using CAFE41 and found 64 HOGs at
+
+140
+
+this branch are under rapid gene expansion and eight are under rapid gene contraction. These
+
+141
+
+HOGs include many retrotransposon-related genes, odorant receptors, and cytochrome P450
+
+142
+
+genes. However, none of the candidate vision-related HOGs had a significant repertoire size
+
+143
+
+change (Supplementary Data 6).
+
+144
+
+We searched the vision gene sequences against the database of 32 phototransduction-related gene
+
+145
+
+families (from Macias-Muñoz et al.42) using BLASTp, and identified 142, 149, and 180 putative
+
+146
+
+phototransduction-related genes, clustered in 179 HOGs, for Danaus plexippus, Heliconius
+
+147
+
+melpomene, and Manduca sexta, respectively. A total of 3,503 genes from the 20 species in these
+
+148
+
+179 HOGs were considered putative phototransduction-related gene orthologs. In addition,
+
+149
+
+keyword searches in the EggNOG annotations of the remaining 17 species resulted in the
+
+150
+
+extraction of 23 additional HOGs. The unfiltered vision model from the 20 species thus consisted
+
+151
+
+of 3,721 genes in 202 HOGs (Supplementary Data 7). A total of 345 genes were removed and
+
+152
+
+three HOGs lost all their genes after filtering out the putative vision genes without corresponding
+
+153
+
+function (defined from the EggNOG annotation; Supplementary Data 8). Among these genes in
+
+154
+
+the filtered gene set, 90% (2995 genes) are single copy and 10% are duplicated. Among duplicated
+
+155
+
+orthologs, 45 (1.35%) genes from 26 HOGs met the first criterion where the sum of sequence
+
+156
+
+lengths are in the range of mean ± standard deviation of other single copy sequences, 40 (1.2%)
+
+157
+
+from 22 HOGs passed the second criterion, and 34 (1%) gene from 21 HOGs passed all criteria
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+158
+
+and were assembled into a single sequence. The false duplication correction resulted in a vision
+
+159
+
+gene count matrix consisting of 3,316 genes in 199 HOGs for these 20 species (Supplementary
+
+160
+
+Data 9). According to this gene count matrix, repertoire sizes of the vision genes are generally
+
+161
+
+consistently single-copy across the 20 species, with greater copy number variations found in the
+
+162
+
+trp and ninaC families (Supplementary Data 9). Noticeably, four out of six orthologs of the
+
+163
+
+innexin gene family are missing in M. leucophasiata (Figure 1).
+
+164
+
+The 32 phototransduction-related gene family trees differed, but genes from butterfly species
+
+165
+
+generally tended to cluster together (Supplementary Data 10). Notably, three out of the seven
+
+166
+
+opsin genes (UVRh, BRh, and LWRh) in M. leucophasiata were grouped with nocturnal moths
+
+167
+
+rather than butterflies with fairly strong branch supports (>80 supports from SH-aLRT and ultrafast
+
+168
+
+bootstrap) (Figure 2 & Supplementary Data 11). Surprisingly, this pattern is only found in a few
+
+169
+
+other genes (Supplementary Data 10).
+
+170
+
+Selection of opsin genes
+
+171
+
+Our selection analyses on opsins uncovered evidence of positive selection acting on multiple
+
+172
+
+branches and nodes within the gene trees. Specifically, we tested the hypothesis that opsin genes
+
+173
+
+in nocturnal and diurnal taxa vary in their rates of selection (dN/dS ratio) owing to adaptive
+
+174
+
+(positive) selection. We used branch-site (aBSREL43) and site-substitution (MEME44) models to
+
+175
+
+detect branches and identify the individual sites under selection. BRh showed significant evidence
+
+176
+
+of positive selection on the branch leading to A. ipsilon (LRT 11.01, p= 0.018). In UVRh1, the
+
+177
+
+clade representing all nocturnal taxa, including M. leucophasiata, was detected to have undergone
+
+178
+
+diversifying selection (LRT 9.89, p= 0.037). The inferred ω rate classes among the branches were
+
+179
+
+evenly split (ω1 = 49%, ω2= 51%) in the UVRh1 phylogeny with no ω3 classes identified. Similarly,
+
+180
+
+LWRh opsins indicated signal for positive selection with inferred fluctuating selection pressure on
+
+181
+
+the nodes, representing four nocturnal taxa with LW duplications (LRT 13.65, p= 0.007) (Figure
+
+182
+
+2). In Pteropsin, we identified sites on two branches of the nocturnal clade classified as being
+
+183
+
+under positive selection (LRT 9.41, 40.96; p= 0.047, <0.001) including a disproportionately higher
+
+184
+
+distribution of ω2 rate class (62% of branches, 92% of tree length). We recovered the M. sexta
+
+185
+
+duplication of pteropsin as shown in Macias-Muñoz et al.42, and detected a high proportion of sites
+
+186
+
+with dN/dS > 1 on that branch. No significant signal of selection was observed for the RGR-like
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+187
+
+and Unclassified (UnRh) opsins. Branches under positive selection are annotated on the opsin gene
+
+188
+
+family tree in Figure 2 and detailed selection statistics are provided in Supplementary Table 2.
+
+189
+
+Furthermore, employing the site-substitution model, MEME, within the HyPhy suite, we
+
+190
+
+conducted a comprehensive examination of branches identified as being under positive selection
+
+191
+
+by aBSREL. We examined specific sites within these genes and compared them, following the
+
+192
+
+methods of Murrell et al.44. Based on the likelihood ratio test, we found that episodic diversifying
+
+193
+
+selection has acted on multiple sites in the opsin sequences (Supplementary Data 12). The sites
+
+194
+
+detected to be under diversifying selection were examined using the interactive plots on
+
+195
+
+ObservableHQ. We used the Empirical Bayes’ Factor evidence ratio as an exploratory tool to
+
+196
+
+assess the support for positive selection at the reported sites. Notably, multiple sites in the BRh,
+
+197
+
+UVRh1, Pteropsin and LWRh sequences were observed with strong support for positive selection
+
+198
+
+in M. leucophasiata (Supplementary Figure 3).
+
+199
+
+Discussion
+
+200
+
+In this study, we generated the first, high-quality genome of Hedylidae to understand the genetic
+
+201
+
+components underlying transitions to nocturnality. While visual opsin genes were a major focus,
+
+202
+
+we also examined a range of phototransduction genes that displayed a conserved pattern of gene
+
+203
+
+copy numbers across all species. To achieve this, we employed a comparative genomics approach,
+
+204
+
+analyzing multiple high-quality genomes of butterflies and moths to gain evolutionary insights
+
+205
+
+into their visual systems. We further examined the discordant gene tree topologies and signatures
+
+206
+
+of diversifying selection; potentially tied to the emergence of nocturnality in this unusual butterfly
+
+207
+
+lineage.
+
+208
+
+Novel genome assembly for Hedylidae
+
+209
+
+New genome assemblies are now being generated at a rapid pace, and they have created the
+
+210
+
+opportunity to study molecular signatures of adaptation across diverse lineages. Genomic studies
+
+211
+
+of non-model species have uncovered a wealth of new knowledge on diverse topics, such as
+
+212
+
+polyphagy-linked gene family expansions45, long-distance moth migration46, genome size
+
+213
+
+evolution47 and opsin evolution across Lepidoptera22. However, this influx of genomic data varies
+
+214
+
+in taxonomic coverage and quality; often obscuring the genetic underpinnings of such non-model
+
+215
+
+species48,49. Within Lepidoptera, Hedylidae and their sister group Hesperiidae (Skippers)
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+216
+
+demonstrate this disparity in genomic resources. In Hesperiidae, ~12% (n= 420) of the total species
+
+217
+
+have publicly available reference genomes48,50 that have been widely utilized in evolutionary
+
+218
+
+studies51,52, while Hedylidae have none. Previous studies have highlighted the need to address the
+
+219
+
+paucity of hedylid genomes29,53,54.
+
+220
+
+Phototransduction gene evolution
+
+221
+
+Gains and losses of phototransduction genes are generally thought to be infrequent in insects
+
+222
+
+despite a wide range of photic niches covered by different species55,56. This trend was also
+
+223
+
+supported by our orthology analysis (Figure 1) with some exceptions in specific taxa and gene
+
+224
+
+families including duplications of opsin genes in many butterfly species. Notable duplications are
+
+225
+
+also found in individual species, such as the DAGLβ gene in M. leucophasiata and H. pyritoides,
+
+226
+
+Ddc gene in M. sexta and B. betularia, Pis gene in M. sexta and Pid gene in D. plexippus.
+
+227
+
+Many opsin genes have undergone numerous gene duplication events in dragonflies and
+
+228
+
+damselflies (Odonata)57. Parallel gene losses of phototransduction genes also have been reported
+
+229
+
+in subterranean water beetles (Coleoptera: Dytiscidae)58. In general, opsin is the most well
+
+230
+
+explored among the phototransduction gene families for its duplications and losses, where LWRh
+
+231
+
+shows highest variability among the opsin genes59. Indeed, our opsin gene family tree shows more
+
+232
+
+gene duplications in the LWRh clade than any others (Figure 2). The accumulation of LWRh in
+
+233
+
+butterflies has been found to modify or expand spectral sensitivity59,60. Nevertheless, our analysis
+
+234
+
+shows that no LWRh gene duplication is detected on the branch leading to M. leucophasiata,
+
+235
+
+suggesting that the adaptation of night vision of this nocturnal butterfly was unlikely achieved
+
+236
+
+through LWRh gene duplication.
+
+237
+
+Despite various approaches that we applied to detect phototransduction genes across genome
+
+238
+
+assemblies, the absence of orthologous genes occurred in some species (Supplementary Data 7).
+
+239
+
+Considering that the quality of the genomes are generally high, the absence of orthologous genes
+
+240
+
+is likely to be the result of gene loss or substantial divergence of the sequence. Interestingly, more
+
+241
+
+than half (4/6) of innexin genes were absent in M. leucophasiata (only inx3 and inx9 were
+
+242
+
+detected). Innexin proteins were found forming gap junction channels and playing important roles
+
+243
+
+in nervous system development during embryogenesis in Drosophila61, as developmental defects
+
+244
+
+are observed when depleting or down-regulating innexin genes in Drosophila62,63. In addition, inx2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+245
+
+and inx3 play significant roles in vision, including eye disk development and possibly
+
+246
+
+phototransduction processes in different insect species64–67. Macrosoma possesses adaptive
+
+247
+
+characteristics for nocturnal vision, including larger relative eye size and more corneal nipples on
+
+248
+
+the facet surface of compound eyes28. Experimental approaches testing the relationship between
+
+249
+
+adaptive eye morphology and the gain and loss of innexin genes may improve our understanding
+
+250
+
+about the underlying genetic basis of nocturnal butterfly vision evolution. Finally, an unexpected
+
+251
+
+DAGLβ gene duplication in M. leucophasiata was detected. DAGLβ was single-copy in most of
+
+252
+
+the species studied and is thought to be involved in the phototransduction cascade and neural
+
+253
+
+development55. The rare duplication of the DAGLβ gene in M. leucophasiata implies a potential
+
+254
+
+role in the species’ adaptation to night vision.
+
+255
+
+Adaptive molecular evolution and signatures of selection in opsin genes
+
+256
+
+Visual opsins play a key role in initiating the phototransduction cascade and are known to be
+
+257
+
+considerably variable in their repertoire size across the animal kingdom. They represent major
+
+258
+
+targets of adaptive evolution with direct, well-characterized connections established between opsin
+
+259
+
+gene sequences and resulting wavelength sensitivities. While non-adaptive mechanisms can also
+
+260
+
+affect the evolution of opsin sequences, adaptive forces such as changing light environments are
+
+261
+
+more likely to cause consistent diversification21. Intense selective pressure imposed by changing
+
+262
+
+light environments on insect visual systems has led to changes in the diversity of opsin gene
+
+263
+
+repertoire to adapt to altered sensory demands. Insects, due to their varying lifestyles, often exhibit
+
+264
+
+distinct patterns of opsin gene expression. Notable differences in opsin expression between diurnal
+
+265
+
+and nocturnal Lepidoptera were reported by Macias-Muñoz et al.42, contrasting with Akiyama et
+
+266
+
+al.68 who found no significant differences. This suggests that while light environments can
+
+267
+
+influence opsin expression and loss, other factors also play a role in shaping these patterns.
+
+268
+
+Molecular adaptations of visual opsins are hypothesized to accompany diel niche transitions in
+
+269
+
+Lepidoptera, conferring enhanced sensitivity under dim conditions69. Our finding that diversifying
+
+270
+
+selection is targeting opsins in moth and moth-butterfly lineages, support this premise.
+
+271
+
+Intriguingly, we observed a unique clustering of hedylid opsins with moths in our dataset, which
+
+272
+
+runs counter to species relationships. While other factors could be involved, grouping with
+
+273
+
+nocturnal taxa hints at possible convergent sequence evolution stemming from shared selective
+
+274
+
+pressures. Previous studies have used selection analyses to further examine such discordance and
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+275
+
+characterize genes that evolve more rapidly than expected under neutral evolution70–72. We applied
+
+276
+
+rigorous branch-site (aBSREL) and site-specific (MEME) models in HyPhy to identify specific
+
+277
+
+lineages experiencing diversifying selection and reported signatures of episodic diversifying
+
+278
+
+selection across multiple opsin sequences (Supplementary Data 12). Positively selected sites and
+
+279
+
+evidence of diversifying selection on the branches of blue (BRh) and UV (UVRh1) opsin
+
+280
+
+sequences leading to M. leucophasiata hints at an adaptation to a crepuscular niche. Sensitivity to
+
+281
+
+UV signals is important for night-active insects as it assists integral functions such as detecting
+
+282
+
+foraging cues in night-blooming flowers73. Alternatively, the long-wavelength (LWRh) opsin
+
+283
+
+expressing photoreceptors play an even more critical role in maintaining sensitivity in dim-light
+
+284
+
+environments and are most numerous in both diurnal and nocturnal species. A clear clustering of
+
+285
+
+LWRh opsin sequences was observed but no evidence for positive selection was observed on the
+
+286
+
+hedylid branch (Figure 2). It is possible that M. leucophasiata has retained the extended spectral
+
+287
+
+sensitivity to longer wavelengths; generally prevalent and recurrently evolved in butterflies74,75.
+
+288
+
+While multiple sites in the LWRh sequences were identified to be under diversifying selection,
+
+289
+
+our analyses are limited by the lack of a proper characterization of the spectral tuning sites, which
+
+290
+
+would enable us to understand whether these positively selected sites affect the visual range of LW
+
+291
+
+opsins in Hedylidae. While selection analyses on opsins yielded insights, our study was limited by
+
+292
+
+the lack of RNA sequencing data, which could have refined our gene models and helped validate
+
+293
+
+exon-intron boundaries.
+
+294
+
+Conclusions
+
+295
+
+Our genome assembly of Macrosoma leucophasiata provides the first reference genome for
+
+296
+
+Hedylidae, which was of high quality (Table 1). Addressing this knowledge gap collectively
+
+297
+
+reinforces the significance of genomics in broader ecological and evolutionary contexts. Beyond
+
+298
+
+vision genes, these assemblies could elucidate genetic underpinnings of other aspects of hedylid
+
+299
+
+biology such as the evolution of tympanal ears, circadian rhythm and hostplant associations. The
+
+300
+
+findings from selection analyses reported here can likely be examined further with transcriptomic
+
+301
+
+profiling across diel categories in Hedylidae. Our findings showcase the power of leveraging
+
+302
+
+genomic resources across lineages occupying diverse ecological niches. Future efforts to improve
+
+303
+
+the assembly could also focus on generating chromosomal-scale data with synteny mapping.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+304
+
+Materials and methods
+
+305
+
+Sample preparation and sequencing
+
+306
+
+Two adult individuals of Macrosoma leucophasiata were collected by AYK in August, 2016 at
+
+307
+
+the Wildsumaco Biological Station, Napo, Ecuador (0°40'17.2"S, 77°35'55.1"W, 1400m a.s.l). The
+
+308
+
+butterfly wing vouchering and tissue storage methods followed Cho et al. (2016). Wing vouchers
+
+309
+
+(LEP36876, LEP36882) and a tissue sample (MGCL_1059464) are stored at the McGuire Center
+
+310
+
+for Lepidoptera and Biodiversity (MGCL), Florida Museum of Natural History (Gainesville,
+
+311
+
+USA).
+
+312
+
+We extracted high molecular weight DNA from muscle tissue obtained from the abdomen and
+
+313
+
+thorax using a Qiagen Genomic-tip DNA extraction kit. Following DNA extraction, DNA was
+
+314
+
+visualized using pulse-field gel electrophoresis. DNA was sheared to ~20 kbp using a Diagenode
+
+315
+
+Megaruptor 3. We size-selected the DNA for fragments greater than 10 kbp using a Sage Science
+
+316
+
+BluePippin for library preparation. We prepared a PacBio HiFi library with the SMRTbell Express
+
+317
+
+Template Prep Kit 2.0 (PacBio, Menlo Park, CA, USA). The library was sequenced on a PacBio
+
+318
+
+Sequel II instrument on an 8M SMRT cell in CCS mode with a 30-hour movie time. The library
+
+319
+
+preparation and the sequencing of the DNA were conducted at the DNA Sequencing Center at
+
+320
+
+Brigham Young University (Provo, Utah, USA).
+
+321
+
+Genome profiling and coverage estimation
+
+322
+
+We performed quality control checks on the read quality of the raw high-fidelity (HiFi) sequence
+
+323
+
+reads using FastQC v 0.11.776. The k-mer density distribution was assessed from the HiFi reads
+
+324
+
+using K-Mer Counter (KMC) v.3.2.177 with the k-mer length being 21 nucleotides. We surveyed
+
+325
+
+the genome characteristics based on the k-mer distribution analyses, using GenomeScope v2.078
+
+326
+
+to predict the genome size, heterozygosity and assess genome quality. The GenomeScope 2.0
+
+327
+
+profile (Supplementary Figure 2) was generated using default settings for a diploid species. We
+
+328
+
+used the resulting profile and other metrics to inform the choice of assembly parameters and allow
+
+329
+
+stringency in error correction.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+330
+
+Genome assembly and decontamination
+
+331
+
+To assemble the HiFi reads into contigs, we used Hifiasm v 0.16.179 using default parameters with
+
+332
+
+aggressive purging level 3 (-l 3) to filter erroneous and low-quality reads. We used QUAST v5.2.0
+
+333
+
+to assess the assembly statistics and generate a summary table for assessing contiguity and GC
+
+334
+
+content80 (Supplementary Data 1). We followed the Purge Haplotigs pipeline, purge_haplotigs
+
+335
+
+v1.1.281 to sequentially identify and remove haplotigs and re-assign allelic contig pairings to
+
+336
+
+generate a deduplicated assembly. The pipeline uses a haplotype-resolved assembly to generate
+
+337
+
+mapped read coverages and aligns the contigs using Minimap2 v. 2.2182 which are flagged as
+
+338
+
+suspect and junk contigs, for haplotig removal.
+
+339
+
+We screened the purged assembly for contamination, in the form of non-target sequences, by
+
+340
+
+examining GC-coverage plots using BlobTools v1.033. To assess the read coverage, we aligned the
+
+341
+
+HiFi reads to the assembly using Minimap282 and sorted the aligned BAM file using samtools
+
+342
+
+sort83,84. We then used BLASTn85 with an E-value of 1e-25 against the NCBI nucleotide database
+
+343
+
+to facilitate the taxonomic assignment of these contigs. The resulting mapped files, coverage
+
+344
+
+results, and BLAST output were used to generate BlobPlots33 (Supplementary Figure 4). We
+
+345
+
+identified and removed the non-target sequences from the assembly after inspecting the sequence
+
+346
+
+coverage, proportion, and variation in the GC content. Final assembly completeness was
+
+347
+
+determined by repeating the BUSCO v5.3 calculation86,87, and the QUAST reports were compared
+
+348
+
+to evaluate changes in assembly statistics after contamination removal (Supplementary Data 2).
+
+349
+
+Mitogenome assembly
+
+350
+
+We assembled the mitochondrial genome for Macrosoma leucophasiata using MitoHiFi v3.288.
+
+351
+
+The raw PacBio HiFi reads and contigs from the unpurged Hifiasm assembly were used in two
+
+352
+
+separate runs. We used the mitogenome of Macrosoma conifera with accession number
+
+353
+
+NC_05085634 as a reference mitogenome. MitoFinder v1.4.089 was used to annotate the final
+
+354
+
+mitogenome (Supplementary Figure 5).
+
+355
+
+Repeat region annotation
+
+356
+
+For the genome annotation pipeline, we first generated a de novo library of repeat sequences in the
+
+357
+
+assembly using RepeatModeler235. We soft-masked the repeat regions in the assembly with
+
+358
+
+repetitive elements from various lines of evidence that were incorporated. This included the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+359
+
+integration of simple and short repeats and the initially identified elements from RepeatModeler2.
+
+360
+
+Additionally, repeats sourced from the lepidopteran entries in Repbase90–92 were utilized. We used
+
+361
+
+the RMBLAST search within the RepeatMasker v4.1.1 software to complete the soft-masking
+
+362
+
+steps36.
+
+363
+
+Gene prediction and functional annotation
+
+364
+
+We used the fully automatic BRAKER3 pipeline for gene structure prediction of protein-coding
+
+365
+
+genes in the soft-masked assembly40,93–105. We ran BRAKER using the arthropod protein
+
+366
+
+sequences from OrthoDB v11 protein database38, following the GeneMark-EP+ pipeline for a final
+
+367
+
+gene model predicted by AUGUSTUS and GeneMark-EP combined97,98. By relying solely on
+
+368
+
+orthologous protein evidence, we aimed to overcome artifacts encountered during the transcript-
+
+369
+
+mapping step. We assessed the completeness of the predicted gene models by comparing the
+
+370
+
+BUSCO scores from the lepidoptera_odb10 database for each BRAKER3 run. gFACs v1.1.2 was
+
+371
+
+used to analyze the summary statistics and report the gene model profiles106 (Supplementary
+
+372
+
+Table 3).
+
+373
+
+Functional annotation of the predicted genes from the transcript sequences was performed using
+
+374
+
+the eggNOG-Mapper v2.1.9 web server39. We used stringent parameters for the annotation by
+
+375
+
+restricting the taxonomic scope to ‘Arthropoda’ and including annotations with ‘experimental
+
+376
+
+evidence only’. Additionally, a separate annotation file was also generated using the recommended
+
+377
+
+default settings. Gene ontology (GO) terms were filtered and extracted from the eggNOG database
+
+378
+
+annotations (Supplementary Data 4).
+
+379
+
+Species tree and orthology inference
+
+380
+
+We constructed a butterfly-focused lepidopteran phylogeny with genomes from 20 species,
+
+381
+
+including M. leucophasiata, 11 species from the other six butterfly families, and eight moth species
+
+382
+
+including one each of Sesiidae and Zygaenidae, using BUSCO single-copy orthologs. Specifically,
+
+383
+
+we downloaded genome assemblies of these species from GenBank, RefSeq, and Darwin Tree of
+
+384
+
+Life to run BUSCO using the same settings as those that were applied for the M. leucophasiata
+
+385
+
+genome (Supplementary Figure 6). The 3,376 BUSCO single-copy orthologs (amino acid
+
+386
+
+sequences) were aligned using MAFFT v7.490 (the more accurate alignment option “mafft-linsi”
+
+387
+
+was used) and concatenated into supermatrix alignment107. The maximum likelihood (ML) tree
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+388
+
+was constructed using IQ-tree v.2.0.3 with ''Q.insect+FO+G4'' substitution model108,109. Branch
+
+389
+
+supports were assessed using 1,000 replicates SH-aLRT support and ultrafast bootstrap with the
+
+390
+
+''bnni'' option to avoid overestimating ultrafast bootstrap support110,111. The ML tree was converted
+
+391
+
+to an ultrametric tree using treePL, and this tree served as the basis for subsequent gene family
+
+392
+
+evolution analyses112. We re-annotated the 19 soft-masked publicly available genome assemblies
+
+393
+
+using the BRAKER3 pipeline and the Augustus models generated were selected for downstream
+
+394
+
+analyses. For these gene models, together with the model of M. leucophasiata, we used the longest
+
+395
+
+transcript of each gene to perform orthology analysis using OrthoFinder v2.5.2, and the output
+
+396
+
+phylogenetic hierarchical orthogroups (HOGs) were used to represent the orthologs113. The gene
+
+397
+
+count matrix and the ultrametric tree were jointly used to detect the rapid repertoire size changes
+
+398
+
+for each HOGs using CAFE v5.0.041,114. We report our results on the rapidly evolving genes for
+
+399
+
+the M. leucophasiata branch with a more stringent significance level of p-value= 0.01.
+
+400
+
+Vision gene evolution
+
+401
+
+Since M. leucophasiata and many other hedylid species are well known for their distinctive
+
+402
+
+nocturnal circadian rhythm compared to other butterfly species, we investigated the gene evolution
+
+403
+
+of the putative vision-related genes. We used three lepidopteran species (Danaus plexippus,
+
+404
+
+Heliconius melpomene, and Manduca sexta) that have been closely examined with their
+
+405
+
+phototransduction-related genes in recent published work as benchmark species to identify the
+
+406
+
+vision genes55. We downloaded phototransduction amino acid sequences for each of the three
+
+407
+
+species and used BLASTp to identify these genes from the BRAKER gene models with a strict E-
+
+408
+
+value threshold of 1E−50, as high sequence similarly was expected for intraspecific orthologous
+
+409
+
+gene blast115. For the other 17 species, genes from the same HOGs with the blast-identified
+
+410
+
+phototransduction genes were considered orthologs. In addition, we manually extracted the
+
+411
+
+putative phototransduction-related genes by searching keywords from the eggNOG annotations of
+
+412
+
+all species (Supplementary Data 7). Keywords were selected based on the eggNOG annotations
+
+413
+
+of the BLASTp-determined phototransduction-related genes of the three benchmark species. To
+
+414
+
+ensure the accuracy of the orthology of these annotations, we further blast the sequences against
+
+415
+
+the NCBI non-redundant (nr) protein database using DIAMOND v2.1.8 with an E-value threshold
+
+416
+
+of 1E−5040,116. Genes without phototransduction-related results in the top hits (max 50 hits) were
+
+417
+
+removed from the vision gene model (Supplementary Data 8).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+418
+
+Considering that the recruited genome assemblies are not all chromosomal or near-chromosomal
+
+419
+
+level, and not all the gene predictions have training transcriptomic data involved (Supplementary
+
+420
+
+Table 4), the false gene duplication (an ortholog of a species that was divided into multiple small
+
+421
+
+fragments due to the fragmented genome assemblies or incorrect gene prediction, and each was
+
+422
+
+predicted as an independent gene and annotated with same function thus being identified as gene
+
+423
+
+duplication) were further corrected. Specifically, we applied three criteria to determine the false
+
+424
+
+gene duplication. First, the sum of duplicated gene sequence lengths is within the range of mean ±
+
+425
+
+standard deviation of other single-copy orthologs. Second, the sequence similarities of the
+
+426
+
+duplicated genes are less than mean pairwise sequence similarity of the ortholog. Third, genes
+
+427
+
+were annotated in close tandem, in this case, we defined the distance as a span of five predicted
+
+428
+
+genes. Sequence similarities (percent identities) were calculated using Clustal Omega v1.2.0 and
+
+429
+
+the falsely duplicated genes were assembled using emboss v6.6.0 with other orthologous
+
+430
+
+sequences as reference117,118. The falsely duplicated genes were removed from the gene count
+
+431
+
+matrix which was jointly visualized using R package “phyloheatmap”119 (Figure 1 and
+
+432
+
+Supplementary Data 9). Finally, we clustered the genes of vision related HOGs and aligned
+
+433
+
+sequences of each family using MAFFT v7.505 (mafft-linsi) to construct gene family trees using
+
+434
+
+IQ-tree v.2.0.3107,108. We applied the best substitution model selected by ModelFinder and the
+
+435
+
+remaining settings were the same as those applied to reconstruct the species phylogeny120.
+
+436
+
+Selection analyses
+
+437
+
+Since some phototransduction-related genes, especially in the opsin gene family, showed
+
+438
+
+discordant topology with the species tree (see results), we further tested for positive selection on
+
+439
+
+the three opsin genes (i.e., BRh, UVRh, and LWRh). Testing for positive selection could provide
+
+440
+
+additional clues in determining whether the discordant gene tree topologies are driven by selection
+
+441
+
+or methodological limitations. We first built the individual gene trees using the same approach we
+
+442
+
+used for gene family trees and viewed them on FigTree v1.43 (Supplementary Data 11)
+
+443
+
+(http://tree.bio.ed.ac.uk/software/figtree/). The gene trees were then reconciled with the rooted
+
+444
+
+species tree (Figure 1) using GeneRax121. We employed the undated DTL reconciliation model
+
+445
+
+and SPR correction strategy in GeneRax to identify duplications, losses, and transfers. The
+
+446
+
+reconciled gene trees were assessed using the ThirdKind reconciliation viewer122 (Supplementary
+
+447
+
+Data 13). Codon alignments (DNA sequences) were generated using aligned protein sequences as
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+448
+
+references by PAL2NAL v14123. These codon alignments, along with the reconciled gene trees,
+
+449
+
+were utilized for detecting positive selection. We employed the adaptive branch-site random
+
+450
+
+effects model (aBSREL43) available in the HyPhy124 suite via the Datamonkey 2.0 webserver125.
+
+451
+
+The foreground branches were defined by the branches of nocturnal species (Figure 1). The
+
+452
+
+mixed-effects model of evolution (MEME44) was employed to detect episodic positive selection
+
+453
+
+on individual sites, allowing for variations in selection pressures across the different branches and
+
+454
+
+sites in the gene trees. Additionally, aBSREL was utilized to identify positive selection on specific
+
+455
+
+branches, employing a random effects framework to model variable selection pressures. The
+
+456
+
+branches detected to be under positive selection were identified using the likelihood ratio (LRT)
+
+457
+
+test statistic and Bonferroni-Holm corrected p-values. We marked the branches and nodes with
+
+458
+
+signatures of positive selection on to the gene family tree (Figure 2 and Supplementary Table
+
+459
+
+2). We visualized and annotated the opsin gene family tree using the Interactive tree of life (iTOL)
+
+460
+
+v. 6.5.7 tool126.
+
+461
+
+Data availability
+
+462
+
+The sequence data including PacBio HiFi sequence reads and genome assembly are deposited in
+
+463
+
+the NCBI database under bioproject PRJNA1033655 (sample ID: SAMN38040146). The raw
+
+464
+
+HiFi reads are in the SRA database with accession number SRR26586523 and the assembly is
+
+465
+
+available on genbank. The annotated mitochondrial genome is also available on NCBI with
+
+466
+
+accession number OR825356.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+467
+
+References
+
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.
+20.
+21.
+22.
+
+23.
+
+Cronin, T. W., Johnsen, S., Marshall, N. J. & Warrant, E. J. Visual Ecology. (Princeton University Press,
+2014).
+Spitschan, M., Aguirre, G. K., Brainard, D. H. & Sweeney, A. M. Variation of outdoor illumination as a
+function of solar elevation and light pollution. Sci Rep 6, 26756 (2016).
+Broadhead, G. T., Basu, T., von Arx, M. & Raguso, R. A. Diel rhythms and sex differences in the locomotor
+activity of hawkmoths. Journal of Experimental Biology 220, 1472–1480 (2017).
+Young, A. M., Kodabalagi, S., Brockmann, A. & Dyer, F. C. A hard day’s night: Patterns in the diurnal and
+nocturnal foraging behavior of Apis dorsata across lunar cycles and seasons. PLoS One 16, e0258604 (2021).
+Wu, Y. Widespread nocturnality of living birds stemming from their common ancestor. BMC Evolutionary
+Biology 19, 189 (2019).
+Vallejo-Vargas, A. F. et al. Consistent diel activity patterns of forest mammals among tropical regions. Nat
+Commun 13, 7102 (2022).
+Cox, D. T. C., Gardner, A. S. & Gaston, K. J. Diel niche variation in mammals associated with expanded trait
+space. Nat Commun 12, 1753 (2021).
+Santini, L., Rojas, D. & Donati, G. Evolving through day and night: origin and diversification of activity
+pattern in modern primates. Behavioral Ecology 26, 789–796 (2015).
+Hall, M., Kamilar, J. & Kirk, E. Eye shape and the nocturnal bottleneck of mammals. Proceedings. Biological
+sciences / The Royal Society 279, (2012).
+Wu, Y., Wang, H. & Hadly, E. A. Invasion of Ancestral Mammals into Dim-light Environments Inferred from
+Adaptive Evolution of the Phototransduction Genes. Sci Rep 7, 46542 (2017).
+Ausprey, I. J., Newell, F. L. & Robinson, S. K. Adaptations to light predict the foraging niche and
+disassembly of avian communities in tropical countrysides. Ecology 102, e03213 (2021).
+Bernhard, C. G. & Ottoson, D. Comparative Studies on Dark Adaptation in the Compound Eyes of Nocturnal
+and Diurnal Lepidoptera. Journal of General Physiology 44, 195–203 (1960).
+Warrant, E. Vision in the dimmest habitats on earth. J Comp Physiol A Neuroethol Sens Neural Behav Physiol
+190, 765–789 (2004).
+O’Carroll, D. C. & Warrant, E. J. Vision in dim light: highlights and challenges. Philos Trans R Soc Lond B
+Biol Sci 372, 20160062 (2017).
+Osorio, D. & Vorobyev, M. A review of the evolution of animal colour vision and visual communication
+signals. Vision research 48, 2042–51 (2008).
+Stöckl, A. L., O’Carroll, D. C. & Warrant, E. J. Neural Summation in the Hawkmoth Visual System Extends
+the Limits of Vision in Dim Light. Curr Biol 26, 821–826 (2016).
+Höglund, J. et al. Owls lack UV-sensitive cone opsin and red oil droplets, but see UV light at night: Retinal
+transcriptomes and ocular media transmittance. Vision Research 158, 109–119 (2019).
+Musilova, Z. et al. Vision using multiple distinct rod opsins in deep-sea fishes. Science 364, 588–592 (2019).
+Sharkey, C. R. et al. Overcoming the loss of blue sensitivity through opsin duplication in the largest animal
+group, beetles. Sci Rep 7, 8 (2017).
+Tierney, S. M. et al. Consequences of evolutionary transitions in changing photic environments. Austral
+Entomology 56, 23–46 (2017).
+Sondhi, Y., Ellis, E. A., Bybee, S. M., Theobald, J. C. & Kawahara, A. Y. Light environment drives evolution
+of color vision genes in butterflies and moths. Commun Biol 4, 1–11 (2021).
+Mulhair, P. O., Crowley, L., Boyes, D. H., Lewis, O. T. & Holland, P. W. H. Opsin Gene Duplication in
+Lepidoptera: Retrotransposition, Sex Linkage, and Gene Expression. Molecular Biology and Evolution 40,
+msad241 (2023).
+Kuwalekar, M., Deshmukh, R., Baral, S., Padvi, A. & Kunte, K. Duplication and sub-functionalisation
+characterise diversification of opsin genes in the Lepidoptera. 2022.10.31.514481 Preprint at
+https://doi.org/10.1101/2022.10.31.514481 (2022).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+
+24.
+25.
+26.
+27.
+28.
+
+29.
+30.
+31.
+32.
+33.
+34.
+
+35.
+36.
+37.
+38.
+39.
+
+40.
+41.
+42.
+43.
+44.
+45.
+
+46.
+47.
+
+Kawahara, A. Y. et al. Diel behavior in moths and butterflies: a synthesis of data illuminates the evolution of
+temporal activity. Org Divers Evol 18, 13–27 (2018).
+Kawahara, A. Y. et al. Phylogenetics of moth-like butterflies (Papilionoidea: Hedylidae) based on a new 13locus target capture probe set. Molecular Phylogenetics and Evolution 127, 600–605 (2018).
+Prout, L. B. Lepidoptera Heterocera, Fam. Geometridae, Subfam. Oenochrominae. in Genera Insectorum (ed.
+Wytsman, P.) 1–119 (1910).
+Yack, J. E. & Fullard, J. H. Ultrasonic hearing in nocturnal butterflies. Nature 403, 265–266 (2000).
+Yack, J. E., Johnson, S. E., Brown, S. G. & Warrant, E. J. The eyes of Macrosoma sp. (Lepidoptera:
+Hedyloidea): A nocturnal butterfly with superposition optics. Arthropod Structure & Development 36, 11–22
+(2007).
+Espeland, M. et al. A Comprehensive and Dated Phylogenomic Analysis of Butterflies. Current Biology 28,
+770-778.e5 (2018).
+Kawahara, A. Y. et al. A global phylogeny of butterflies reveals their evolutionary history, ancestral hosts and
+biogeographic origins. Nat Ecol Evol 7, 903–913 (2023).
+Yack, J. E., Kalko, E. K. V. & Surlykke, A. Neuroethology of ultrasonic hearing in nocturnal butterflies
+(Hedyloidea). J Comp Physiol A 193, 577–590 (2007).
+Toussaint, E. F. A. & Warren, A. D. A review of red-eye pigmentation and diel activity patterns in skippers
+(Lepidoptera, Papilionoidea, Hesperiidae). Journal of Natural History 53, 2165–2181 (2019).
+Laetsch, D. R. & Blaxter, M. L. BlobTools: Interrogation of genome assemblies. Preprint at
+https://doi.org/10.12688/f1000research.12232.1 (2017).
+McCullagh, B. S. et al. It’s a moth! It’s a butterfly! It’s the complete mitochondrial genome of the American
+moth-butterfly Macrosoma conifera (Warren, 1897) (Insecta: Lepidoptera: Hedylidae)! Mitochondrial DNA
+Part B 5, 3615–3617 (2020).
+Flynn, J. M. et al. RepeatModeler2 for automated genomic discovery of transposable element families.
+Proceedings of the National Academy of Sciences 117, 9451–9457 (2020).
+Smit, A. F. A., Hubley, R. & Green, P. RepeatMasker Open-4.0. http://www.repeatmasker.org (2013).
+Storer, J., Hubley, R., Rosen, J., Wheeler, T. J. & Smit, A. F. The Dfam community resource of transposable
+element families, sequence models, and genome annotations. Mobile DNA 12, 2 (2021).
+Kuznetsov, D. et al. OrthoDB v11: annotation of orthologs in the widest sampling of organismal diversity.
+Nucleic Acids Research 51, D445–D451 (2023).
+Cantalapiedra, C. P., Hernández-Plaza, A., Letunic, I., Bork, P. & Huerta-Cepas, J. eggNOG-mapper v2:
+Functional Annotation, Orthology Assignments, and Domain Prediction at the Metagenomic Scale. Molecular
+Biology and Evolution 38, 5825–5829 (2021).
+Buchfink, B., Xie, C. & Huson, D. H. Fast and sensitive protein alignment using DIAMOND. Nat Methods
+12, 59–60 (2015).
+Mendes, F. K., Vanderpool, D., Fulton, B. & Hahn, M. W. CAFE 5 models variation in evolutionary rates
+among gene families. Bioinformatics 36, 5516–5518 (2021).
+Macias-Muñoz, A., Rangel Olguin, A. G. & Briscoe, A. D. Evolution of Phototransduction Genes in
+Lepidoptera. Genome Biology and Evolution 11, 2107–2124 (2019).
+Smith, M. D. et al. Less Is More: An Adaptive Branch-Site Random Effects Model for Efficient Detection of
+Episodic Diversifying Selection. Molecular Biology and Evolution 32, 1342–1353 (2015).
+Murrell, B. et al. Detecting Individual Sites Subject to Episodic Diversifying Selection. PLOS Genetics 8,
+e1002764 (2012).
+Breeschoten, T., van der Linden, C. F. H., Ros, V. I. D., Schranz, M. E. & Simon, S. Expanding the Menu:
+Are Polyphagy and Gene Family Expansions Linked across Lepidoptera? Genome Biol Evol 14, evab283
+(2021).
+Tong, D. et al. The oriental armyworm genome yields insights into the long-distance migration of noctuid
+moths. Cell Reports 41, 111843 (2022).
+Blommaert, J. Genome size evolution: towards new model systems for old questions. Proceedings of the
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+
+48.
+49.
+50.
+51.
+52.
+53.
+54.
+55.
+56.
+57.
+58.
+59.
+60.
+61.
+62.
+63.
+
+64.
+65.
+66.
+67.
+68.
+
+69.
+70.
+
+Royal Society B: Biological Sciences 287, 20201441 (2020).
+Feron, R. & Waterhouse, R. M. Assessing species coverage and assembly quality of rapidly accumulating
+sequenced genomes. GigaScience 11, giac006 (2022).
+Russell, J. J. et al. Non-model model organisms. BMC Biology 15, 55 (2017).
+Sayers, E. W. et al. Database resources of the National Center for Biotechnology Information. Nucleic Acids
+Res 49, D10–D17 (2021).
+Zhang, J., Cong, Q., Shen, J., Brockmann, E. & Grishin, N. V. Three new subfamilies of skipper butterflies
+(Lepidoptera, Hesperiidae). Zookeys 861, 91–105 (2019).
+Cong, Q., Borek, D., Otwinowski, Z. & Grishin, N. V. Skipper genome sheds light on unique phenotypic traits
+and phylogeny. BMC Genomics 16, 639 (2015).
+Kawahara, A. Y. et al. Phylogenomics reveals the evolutionary timing and pattern of butterflies and moths.
+Proceedings of the National Academy of Sciences 116, 22657–22663 (2019).
+Triant, D. A., Cinel, S. D. & Kawahara, A. Y. Lepidoptera genomes: current knowledge, gaps and future
+directions. Curr Opin Insect Sci 25, 99–105 (2018).
+Macias-Muñoz, A., Rangel Olguin, A. G. & Briscoe, A. D. Evolution of phototransduction genes in
+Lepidoptera. Genome Biol Evol 11, 2107–2124 (2019).
+Feuda, R., Marlétaz, F., Bentley, M. A. & Holland, P. W. H. Conservation, Duplication, and Divergence of
+Five Opsin Genes in Insect Evolution. Genome Biol Evol 8, 579–587 (2016).
+Suvorov, A. et al. Opsins have evolved under the permanent heterozygote model: insights from
+phylotranscriptomics of Odonata. Molecular Ecology 26, 1306–1322 (2017).
+Langille, B. L. et al. Parallel decay of vision genes in subterranean water beetles. Molecular Phylogenetics
+and Evolution 173, 107522 (2022).
+McCulloch, K. J., Macias-Muñoz, A. & Briscoe, A. D. Insect opsins and evo-devo: what have we learned in
+25 years? Philosophical Transactions of the Royal Society B: Biological Sciences 377, 20210288 (2022).
+Liénard, M. A. et al. The evolution of red color vision is linked to coordinated rhodopsin tuning in lycaenid
+butterflies. Proceedings of the National Academy of Sciences 118, e2008986118 (2021).
+Güiza, J., Barría, I., Sáez, J. C. & Vega, J. L. Innexins: Expression, Regulation, and Functions. Frontiers in
+Physiology 9, (2018).
+Giuliani, F., Giuliani, G., Bauer, R. & Rabouille, C. Innexin 3, a New Gene Required for Dorsal Closure in
+Drosophila Embryo. PLOS ONE 8, e69212 (2013).
+Lipshitz, H. D. & Kankel, D. R. Specificity of gene action during central nervous system development in
+Drosophila melanogaster: Analysis of the lethal (1) optic ganglion reduced locus. Developmental Biology 108,
+56–77 (1985).
+Richard, M., Bauer, R., Tavosanis, G. & Hoch, M. The gap junction protein Innexin3 is required for eye disc
+growth in Drosophila. Developmental Biology 425, 191–207 (2017).
+Richard, M. & Hoch, M. Drosophila eye size is determined by Innexin 2-dependent Decapentaplegic
+signalling. Developmental Biology 408, 26–40 (2015).
+Ernst, D. A. & Westerman, E. L. Stage- and sex-specific transcriptome analyses reveal distinctive sensory
+gene expression patterns in a butterfly. BMC Genomics 22, 584 (2021).
+Han, Y., Xiong, L., Xu, Y., Tian, T. & Wang, T. The β-alanine transporter BalaT is required for visual
+neurotransmission in Drosophila. eLife 6, e29146 (2017).
+Akiyama, T., Uchiyama, H., Yajima, S., Arikawa, K. & Terai, Y. Parallel evolution of opsin visual pigments
+in hawkmoths by tuning of spectral sensitivities during transition from a nocturnal to a diurnal ecology.
+Journal of Experimental Biology 225, jeb244541 (2022).
+van der Kooi, C. J., Stavenga, D. G., Arikawa, K., Belušič, G. & Kelber, A. Evolution of Insect Color Vision:
+From Spectral Sensitivity to Visual Ecology. Annual Review of Entomology 66, 435–461 (2021).
+Briscoe, A. D. et al. Positive selection of a duplicated UV-sensitive visual pigment coincides with wing
+pigment evolution in Heliconius butterflies. Proceedings of the National Academy of Sciences 107, 3628–
+3633 (2010).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+
+71.
+72.
+73.
+74.
+75.
+76.
+77.
+78.
+79.
+80.
+81.
+82.
+83.
+84.
+85.
+86.
+
+87.
+
+88.
+89.
+90.
+91.
+92.
+93.
+
+94.
+
+Espíndola-Hernández, P., Mueller, J. C., Carrete, M., Boerno, S. & Kempenaers, B. Genomic Evidence for
+Sensorial Adaptations to a Nocturnal Predatory Lifestyle in Owls. Genome Biol Evol 12, 1895–1908 (2020).
+Schott, R. K., Perez, L., Kwiatkowski, M. A., Imhoff, V. & Gumm, J. M. Evolutionary analyses of visual
+opsin genes in frogs and toads: Diversity, duplication, and positive selection. Ecol Evol 12, e8595 (2022).
+Hirota, S. K., Miki, N., Yasumoto, A. A. & Yahara, T. UV bullseye contrast of Hemerocallis flowers attracts
+hawkmoths but not swallowtail butterflies. Ecology and Evolution 9, 52–64 (2019).
+Chen, P.-J., Awata, H., Matsushita, A., Yang, E.-C. & Arikawa, K. Extreme Spectral Richness in the Eye of
+the Common Bluebottle Butterfly, Graphium sarpedon. Frontiers in Ecology and Evolution 4, (2016).
+Liénard, M. A. et al. The evolution of red color vision is linked to coordinated rhodopsin tuning in lycaenid
+butterflies. Proceedings of the National Academy of Sciences 118, e2008986118 (2021).
+Andrews, S. FastQC: a quality control tool for high throughput sequence data. (Babraham Bioinformatics,
+Babraham Institute, Cambridge, United Kingdom, 2010).
+Kokot, M., Długosz, M. & Deorowicz, S. KMC 3: counting and manipulating k-mer statistics. Bioinformatics
+33, 2759–2761 (2017).
+Ranallo-Benavidez, T. R., Jaron, K. S. & Schatz, M. C. GenomeScope 2.0 and Smudgeplot for reference-free
+profiling of polyploid genomes. Nat Commun 11, 1432 (2020).
+Cheng, H., Concepcion, G. T., Feng, X., Zhang, H. & Li, H. Haplotype-resolved de novo assembly using
+phased assembly graphs with hifiasm. Nat Methods 18, 170–175 (2021).
+Gurevich, A., Saveliev, V., Vyahhi, N. & Tesler, G. QUAST: quality assessment tool for genome assemblies.
+Bioinformatics 29, 1072–1075 (2013).
+Roach, M. J., Schmidt, S. A. & Borneman, A. R. Purge Haplotigs: allelic contig reassignment for third-gen
+diploid genome assemblies. BMC Bioinformatics 19, 460 (2018).
+Li, H. Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics 34, 3094–3100 (2018).
+Li, H. et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078–2079 (2009).
+Danecek, P. et al. Twelve years of SAMtools and BCFtools. GigaScience 10, giab008 (2021).
+Altschul, S. F., Gish, W., Miller, W., Myers, E. W. & Lipman, D. J. Basic local alignment search tool. Journal
+of Molecular Biology 215, 403–410 (1990).
+Manni, M., Berkeley, M. R., Seppey, M., Simão, F. A. & Zdobnov, E. M. BUSCO Update: Novel and
+Streamlined Workflows along with Broader and Deeper Phylogenetic Coverage for Scoring of Eukaryotic,
+Prokaryotic, and Viral Genomes. Molecular Biology and Evolution 38, 4647–4654 (2021).
+Simão, F. A., Waterhouse, R. M., Ioannidis, P., Kriventseva, E. V. & Zdobnov, E. M. BUSCO: assessing
+genome assembly and annotation completeness with single-copy orthologs. Bioinformatics 31, 3210–3212
+(2015).
+Uliano-Silva, M. et al. MitoHiFi: a python pipeline for mitochondrial genome assembly from PacBio high
+fidelity reads. BMC Bioinformatics 24, 288 (2023).
+Allio, R. et al. MitoFinder: Efficient automated large-scale extraction of mitogenomic data in target
+enrichment phylogenomics. Molecular Ecology Resources 20, 892–905 (2020).
+Bao, W., Kojima, K. K. & Kohany, O. Repbase Update, a database of repetitive elements in eukaryotic
+genomes. Mobile DNA 6, 11 (2015).
+Jurka, J. Repbase Update: a database and an electronic journal of repetitive elements. Trends in Genetics 16,
+418–420 (2000).
+Jurka, J. et al. Repbase Update, a database of eukaryotic repetitive elements. Cytogenetic and Genome
+Research 110, 462–467 (2005).
+Brůna, T., Hoff, K. J., Lomsadze, A., Stanke, M. & Borodovsky, M. BRAKER2: automatic eukaryotic
+genome annotation with GeneMark-EP+ and AUGUSTUS supported by a protein database. NAR Genomics
+and Bioinformatics 3, lqaa108 (2021).
+Hoff, K. J., Lomsadze, A., Borodovsky, M. & Stanke, M. Whole-Genome Annotation with BRAKER. in
+Gene Prediction: Methods and Protocols (ed. Kollmar, M.) 65–95 (Springer, 2019). doi:10.1007/978-1-49399173-0_5.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+
+95.
+96.
+97.
+98.
+99.
+100.
+101.
+102.
+103.
+104.
+105.
+106.
+
+107.
+108.
+
+109.
+110.
+111.
+112.
+113.
+114.
+115.
+116.
+117.
+118.
+
+Hoff, K. J., Lange, S., Lomsadze, A., Borodovsky, M. & Stanke, M. BRAKER1: Unsupervised RNA-SeqBased Genome Annotation with GeneMark-ET and AUGUSTUS. Bioinformatics 32, 767–769 (2016).
+Stanke, M., Diekhans, M., Baertsch, R. & Haussler, D. Using native and syntenically mapped cDNA
+alignments to improve de novo gene finding. Bioinformatics 24, 637–644 (2008).
+Stanke, M., Schöffmann, O., Morgenstern, B. & Waack, S. Gene prediction in eukaryotes with a generalized
+hidden Markov model that uses hints from external sources. BMC Bioinformatics 7, 62 (2006).
+Brůna, T., Lomsadze, A. & Borodovsky, M. GeneMark-EP+: eukaryotic gene prediction with self-training in
+the space of genes and proteins. NAR Genom Bioinform 2, lqaa026 (2020).
+Lomsadze, A., Ter-Hovhannisyan, V., Chernoff, Y. O. & Borodovsky, M. Gene identification in novel
+eukaryotic genomes by self-training algorithm. Nucleic Acids Res 33, 6494–6506 (2005).
+Iwata, H. & Gotoh, O. Benchmarking spliced alignment programs including Spaln2, an extended version of
+Spaln that incorporates additional species-specific features. Nucleic Acids Research 40, e161 (2012).
+Gotoh, O., Morita, M. & Nelson, D. R. Assessment and refinement of eukaryotic gene structure prediction
+with gene-structure-aware multiple protein sequence alignment. BMC Bioinformatics 15, 189 (2014).
+Kim, D., Paggi, J. M., Park, C., Bennett, C. & Salzberg, S. L. Graph-based genome alignment and genotyping
+with HISAT2 and HISAT-genotype. Nat Biotechnol 37, 907–915 (2019).
+Kovaka, S. et al. Transcriptome assembly from long-read RNA-seq alignments with StringTie2. Genome
+Biology 20, 278 (2019).
+Pertea, G. & Pertea, M. GFF Utilities: GffRead and GffCompare. F1000Res 9, ISCB Comm J-304 (2020).
+Quinlan, A. R. BEDTools: The Swiss-Army Tool for Genome Feature Analysis. Current Protocols in
+Bioinformatics 47, 11.12.1-11.12.34 (2014).
+Caballero, M. & Wegrzyn, J. gFACs: Gene Filtering, Analysis, and Conversion to Unify Genome Annotations
+Across Alignment and Gene Prediction Frameworks. Genomics Proteomics Bioinformatics 17, 305–310
+(2019).
+Katoh, K., Misawa, K., Kuma, K. & Miyata, T. MAFFT: a novel method for rapid multiple sequence
+alignment based on fast Fourier transform. Nucleic Acids Research 30, 3059–3066 (2002).
+Nguyen, L.-T., Schmidt, H. A., von Haeseler, A. & Minh, B. Q. IQ-TREE: A Fast and Effective Stochastic
+Algorithm for Estimating Maximum-Likelihood Phylogenies. Molecular Biology and Evolution 32, 268–274
+(2015).
+Dang, C. C. et al. nQMaker: Estimating Time Nonreversible Amino Acid Substitution Models. Systematic
+Biology 71, 1110–1123 (2022).
+Hoang, D. T., Chernomor, O., von Haeseler, A., Minh, B. Q. & Vinh, L. S. UFBoot2: Improving the Ultrafast
+Bootstrap Approximation. Molecular Biology and Evolution 35, 518–522 (2018).
+Shimodaira, H. & Hasegawa, M. Multiple Comparisons of Log-Likelihoods with Applications to Phylogenetic
+Inference. Molecular Biology and Evolution 16, 1114 (1999).
+Smith, S. A. & O’Meara, B. C. treePL: divergence time estimation using penalized likelihood for large
+phylogenies. Bioinformatics 28, 2689–2690 (2012).
+Emms, D. M. & Kelly, S. OrthoFinder: phylogenetic orthology inference for comparative genomics. Genome
+Biology 20, 238 (2019).
+De Bie, T., Cristianini, N., Demuth, J. P. & Hahn, M. W. CAFE: a computational tool for the study of gene
+family evolution. Bioinformatics 22, 1269–1271 (2006).
+Altschul, S. F. et al. Gapped BLAST and PSI-BLAST: a new generation of protein database search programs.
+Nucleic Acids Research 25, 3389–3402 (1997).
+Pruitt, K. D., Tatusova, T. & Maglott, D. R. NCBI Reference Sequence (RefSeq): a curated non-redundant
+sequence database of genomes, transcripts and proteins. Nucleic Acids Res 33, D501–D504 (2005).
+Sievers, F. & Higgins, D. G. Clustal Omega for making accurate alignments of many protein sequences.
+Protein Science 27, 135–145 (2018).
+Rice, P., Bleasby, A. & Ison, J. EMBOSS user’s guide: practical bioinformatics. (Cambridge University
+Press, 2011).
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+
+119. Revell, L. J. phytools: an R package for phylogenetic comparative biology (and other things). Methods in
+Ecology and Evolution 3, 217–223 (2012).
+120. Kalyaanamoorthy, S., Minh, B. Q., Wong, T. K. F., von Haeseler, A. & Jermiin, L. S. ModelFinder: fast
+model selection for accurate phylogenetic estimates. Nat Methods 14, 587–589 (2017).
+121. Morel, B., Kozlov, A. M., Stamatakis, A. & Szöllősi, G. J. GeneRax: A Tool for Species-Tree-Aware
+Maximum Likelihood-Based Gene Family Tree Inference under Gene Duplication, Transfer, and Loss.
+Molecular Biology and Evolution 37, 2763–2774 (2020).
+122. Penel, S., Menet, H., Tricou, T., Daubin, V. & Tannier, E. Thirdkind: displaying phylogenetic encounters
+beyond 2-level reconciliation. Bioinformatics 38, 2350–2352 (2022).
+123. Suyama, M., Torrents, D. & Bork, P. PAL2NAL: robust conversion of protein sequence alignments into the
+corresponding codon alignments. Nucleic Acids Research 34, W609–W612 (2006).
+124. Pond, S. L. K., Frost, S. D. W. & Muse, S. V. HyPhy: hypothesis testing using phylogenies. Bioinformatics
+21, 676–679 (2005).
+125. Weaver, S. et al. Datamonkey 2.0: A Modern Web Application for Characterizing Selective and Other
+Evolutionary Processes. Molecular Biology and Evolution 35, 773–777 (2018).
+126. Letunic, I. & Bork, P. Interactive Tree Of Life (iTOL) v5: an online tool for phylogenetic tree display and
+annotation. Nucleic Acids Research 49, W293–W296 (2021).
+
+728
+
+Author contributions
+
+729
+
+RPS: Conceptualization, Data curation, Formal analysis, Visualization, Writing- Original draft
+
+730
+
+preparation, Reviewing and editing. YMW: Conceptualization, Data curation, Formal analysis,
+
+731
+
+Visualization, Writing- Original draft preparation, Reviewing and editing. YS: Conceptualization,
+
+732
+
+Validation, Writing- Reviewing and editing. DP: Resource acquisition, Writing- Reviewing and
+
+733
+
+editing PBF: Resource acquisition, Project administration
+
+734
+
+Investigation, Validation, Writing- Reviewing and editing.
+
+735
+
+Competing interests
+
+736
+
+The authors declare no competing interests.
+
+737
+
+Acknowledgements
+
+738
+
+We would like to thank Edward Wilcox at BYU for assisting molecular work, library preparation
+
+739
+
+and sequencing, Taylor Pierson for helping with the wet lab resources, Joe Martinez for helping
+
+740
+
+with accessing the museum specimens and photographing the specimens. Funding support for this
+
+741
+
+project was through the National Science Foundation (NSF) grant DEB-1541500 to AYK. We also
+
+742
+
+acknowledge University of Florida Research Computing (http://researchcomputing.ufl.edu) for
+
+743
+
+providing computational resources and support that has contributed to the research results reported
+
+744
+
+in this publication.
+
+AYK: Conceptualization,
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+
+Supplementary materials
+Supplementary information: Supplementary tables and figures
+Supplementary Data 1: Hifiasm assembly QUAST report
+Supplementary Data 2: Final soft-masked assembly QUAST report
+Supplementary Data 3: M. leucophasiata Augustus gene model
+Supplementary Data 4: M. leucophasiata EggNOG annotation
+Supplementary Data 5: Hierarchical orthogroups (HOGs) list
+Supplementary Data 6: Rapidly evolving genes in M. leucophasiata
+Supplementary Data 7: Unfiltered phototransduction-related orthologs
+Supplementary Data 8: Filtered phototransduction-related orthologs
+Supplementary Data 9: Corrected phototransduction-related orthologs
+Supplementary Data 10: All (32) vision gene family trees
+Supplementary Data 11: Opsin gene trees
+Supplementary Data 12: MEME HyPhy Opsins summary
+Supplementary Data 13: Reconciled gene trees ThirdKind
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+761
+
+Table 1: Summary and key characteristics of Macrosoma leucophasiata (Hedylidae) genome
+
+762
+
+assembly and annotation
+Metric
+
+Value
+
+General summary stats
+Genome size (bp/Mbp)
+
+616,085,051 / 616
+
+Total number of contigs
+
+66
+
+N50 contig length (bp/Mbp)
+
+22,319,534 / 22.3
+
+L50 contigs (number)
+
+13
+
+GC content (%)
+
+37.94%
+
+Average sequence read coverage
+
+32x
+
+Gene models and annotation
+Total predicted genesa
+
+19,292
+
+Input queries scanned by eggNOG
+
+13,935
+
+Functionally annotated genes (eggNOG)
+
+13,169
+
+Repeat elements
+Total repeat content (%)
+
+56.79%
+
+Long terminal repeat (LTR) elements
+
+5.27%
+
+DNA transposons
+
+5.08%
+
+Assembly completeness
+
+n
+
+%
+
+BUSCOs recovered (Total = 5286)
+
+5185
+
+98.10%
+
+Complete single-copy BUSCOs
+
+5124
+
+96.90%
+
+Complete duplicated BUSCOs
+
+61
+
+1.20%
+
+Fragmented BUSCOs
+
+22
+
+0.40%
+
+Missing BUSCOs
+
+79
+
+1.50%
+
+Accession IDs
+Genome assembly BioProject (NCBI)
+Mitogenome (NCBI)
+
+PRJNA1033655
+OR825356
+
+a Augustus gene prediction after running BRAKER3 using the Arthopoda protein database from OrthoDB v11
+
+763
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+764
+765
+
+Figure 1. Analysis of visual genes shows high conservation with day and night flying
+
+766
+
+butterflies with gene losses in the DAGL and innexin in M. leucophasiata. Maximum likelihood
+
+767
+
+tree of the 20 selected lepidopteran species (Representing six butterfly and eight moth families)
+
+768
+
+based on 3,376 BUSCO single-copy orthologs (left), and the gene count matrix of
+
+769
+
+phototransduction-related gene families (right). The diel niche of each species is indicated by
+
+770
+
+orange suns (diurnal) and purple moons (nocturnal). The mean gene count (repertoire size) is
+
+771
+
+shown in the colored heatmap.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.11.21.568084; this version posted November 21, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+772
+773
+
+Figure 2. Convergence of visual opsins in Macrosoma leucophasiata with nocturnal moth
+
+774
+
+species highlighting branches under positive selection. Opsin gene family tree showing the
+
+775
+
+seven visual opsins in the studied species. Colored branches represent nocturnal (blue) and diurnal
+
+776
+
+(orange) species. Stars indicate branches or nodes detected to be under positive selection by the
+
+777
+
+aBSREL test for episodic diversification.
+
+

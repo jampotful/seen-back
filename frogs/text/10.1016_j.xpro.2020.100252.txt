@@ -1,0 +1,294 @@
+Precisely controlled visual stimulation to study experience-dependent neural plasticity in <i>Xenopus</i> tadpoles.
+Hiramoto M, Cline HT. (2021). STAR protocols. . doi:10.1016/j.xpro.2020.100252. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Precisely controlled visual stimulation to study experience-dependent neural plasticity in Xenopus tadpoles
+
+## Abstract
+SummaryStudies on visual experience-dependent plasticity can benefit tremendously from experimental protocols in which sensory stimulation is precisely controlled for extended periods over which neuronal, circuit, and behavioral plasticity occurs. Small vertebrates, such as Xenopus tadpoles and zebrafish, are excellent systems for studying brain plasticity. Here, we present a detailed protocol to perform controlled visual stimulation for extended time periods. These methods have been used to study structural plasticity induced by temporally controlled visual stimulation in Xenopus tadpoles.For further details on the use and execution of this protocol, please refer to Hiramoto and Cline (2014, 2020).Subject areas: Cell biology, Microscopy, Model organisms, Neuroscience
+
+## Before you begin
+This protocol describes the material and steps to generate and provide controlled visual stimuli that we used in our studies on structural plasticity of retinotectal axon arbors in the Xenopus laevis visual system. The Xenopus visual system is an excellent experimental preparation to study visual experience-dependent structural plasticity of individual retinotectal axon arbors and optic tectal neurons. Successful experiments require immobilization of the tadpoles for extended periods and strategies to provide precise temporally controlled visual stimuli to the eyes. The immobilization method is also useful for imaging experiments investigating neurogenesis and cell lineage tracing that require long-term imaging. This protocol is based on our published methods (Hiramoto and Cline, 2014, 2020).
+
+## Make a stimulation device
+Timing: 8 h (over 2 days)
+Day 1: Set up a chamber to immobilize animals
+Note: The chamber consists of two acrylic plates that sandwich the animal from the two sides and a sheet of nylon mesh covering the bottom of the chamber (Figure 1A). LEDs are attached to one edge of each acrylic plate on the outer edges of the chamber (Figure 1B). The LEDs are modified to illuminate the eyes uniformly by cutting a 2 mm slit on the dome-shaped plastic on the LED. A dab of epoxy glue is inserted between the LED and the acrylic plate. This clears the foggy surface on the edge of the acrylic plate and secures the LED to the plate. Lead lines are soldered to the LED terminals and the connections between the lead lines and the LED are insulated with the epoxy glue to prevent corrosion. Epoxy glue takes 12 h to harden completely. The lead lines are soldered to pin connectors to connect to the controller (Figure 2, left panels).
+A chamber for visual stimulation
+Top view photo (A) and schematic drawings of the chamber and components (B). The chamber holds six tadpoles between the two acrylic plates that are 2 mm thick × 3 cm wide. There is a gap between the two plates of 2.3–3 mm where the tadpoles are positioned. A strip of mesh is glued under the gap of the two plates with acrylic glue and forms a sling under the tadpoles. Six rectangular rods are glued under the acrylic plates. The animal is held snugly in the chamber as follows: the ventrolateral sides of the head are supported by 0.4 mm styrene rods or strips of Sylgard glued to the lower edge of the acrylic plates. The head is supported by a Sylgard block positioned in front of the head. It is held in place by the acrylic plates on either side and the coverslip laid over the animal. The tail is supported on both sides by two strips of Sylgard glued to the painted inner edge of the acrylic plates. LEDs are positioned on each side of the chamber at eye level for the tadpoles. LEDs are glued to the acrylic plates with epoxy glue. Before mounting the LEDs on the chamber, a slit is cut in the plastic dome on top of the LED which provides more even illumination to the eye. Wires are soldered to LEDs. Either the anodes or the cathodes are connected to a common line. The other terminals are connected to the power source independently through resistors. Tadpoles are inserted in the slit. The head supporter is positioned to immobilize the tadpoles. Cover slips are overlaid on the tadpoles and attached to the acrylic plates using utility wax.
+Visual stimulation controller
+(A) A diagram of the visual stimulation setup. A controller (lower) is connected to LEDs on the plates that holds the animals (upper).
+(B) The visual stimulation controller in operation.
+(C) The pattern of the circuit board. The parts are soldered to the board. The electric parts are described in the Key resources table. Jumper lines (red) need to be soldered to the custom-ordered circuit board by users.
+Note: Paint the edges of the acrylic plate which face the animal evenly with a white paint marker to increase uniform illumination of the eye. If the white coating is not uniform, it will cause inhomogeneities in the visual stimulation. If this occurs, remove the paint with acetone and redo it. Each LED is connected to a 12 V DC power source through a resistor of 50–1,500 Ω. Measure the radiance from the LED with a photometer (International Light, IL400BL) at the painted edge of the acrylic plate. Adjust the resistor so that the radiance from the coated edge is 343 cd/m2. In addition to the resistors, the intensity of the light can be controlled by the pulse width modulation function on the controller.
+Note: We assembled a pair of the acrylic plates with LEDs by gluing them to acrylic bars (Figure 1B; six horizontal acrylic bars, positioned just in front of where the LEDs are attached). The width of the gap between the acrylic plates is adjusted to match the width of the tadpole (Figure 1B). The tadpole is supported in the chamber as follows: The tail is supported by two strips of Sylgard glued to the painted inner edge of the acrylic plates (Figure 1B, tail supporter). The head is supported by a Sylgard block positioned in front of the head and a pair of 0.4 mm cylindrical rods underneath the sides of the head. The rods are glued to the lower edges of the painted surface of the acrylic plates (Figure 1B). After positioning the animal within the customized space, cover it with a coverslip that extends over the acrylic plate. Utility wax is used to attach the coverslips to the plate during the experiment. Various sizes of chambers are prepared to accommodate various sized animals. The setup made of 2 mm thick acrylic plates fits stage 47–49 Xenopus laevis tadpoles. The width needs to be customized for each tadpole stage (stage 47: 2.3 mm, stage 49: 3 mm). The height should fit the animal so that it holds the animal snugly but without blocking the blood flow in the tectum and the hindbrain. The height of the acrylic plate can be adjusted by machining or sanding.
+Note: To accommodate various sizes of animals, stainless steel bridge bars and magnet connectors can be used to construct chambers in which the width of the gap can be adjusted to accommodate up to ~0.5 mm of the body width. Modifying the height would require thicker acrylic plates.
+CRITICAL: Completely insulate the circuit with epoxy glue. After the epoxy glue hardens overnight, submerge the plate into 1% salt water and check electric insulation between the wire and the solution using an ohmmeter.
+Day 2: Set up the stimulus controller
+Note: The custom-made circuit board shown here produces precisely timed stimuli at microsecond resolution for <$30 USD (Figures 2A and 2B). It controls the timing of the stimulus, the daily schedule of the sensory stimulus and the operation interface to modify the stimulation parameters, which is particularly useful when multiple sets of experiments are performed simultaneously. This is made by outsourcing the circuit board PCB manufacturing service, implementing the parts listed below and installing firmware. To operate the stimulator, connect LEDs to the leftmost JPC2 and JPC3 terminal (Figure 2C). When dt>0, JPC3 is triggered earlier.
+The CAD data of the circuit board and the source file of the firmware are available at https://doi.org/10.17632/bs8sdhg8h3.2. The CAD software is available from (ftp://ftp.cadsoft.de/eagle/program/). PCB manufacturing service is available from many companies. A programming device for PIC microcomputers (https://www.microchip.com/developmenttools/ProductDetails/PG164140) is used to install the firmware.
+A combination of MATLAB based software and a data acquisition device provides an alternative way to compose a stimulator setup. Detailed information is available at National Instrument (https://www.ni.com/en-us/shop/pc-based-measurement-and-control-system.html) and MathWorks (https://jp.mathworks.com/help/daq/getting-started-with-data-acquisition-toolbox.html).
+Prepare platinum plate electrodes for intravitreal plasmid electroporation.
+Timing: 1 h
+Note: Platinum plate electrodes are optimal because platinum does not corrode and damage samples. The platinum plates are fabricated from a heater filament (Sutter, FT320B). The anode is a 2 mm strip with a pointed end for focal contact with the back of the eye (Figure 3A). The cathode is a simple 2 mm width strip which provides larger contact area. These electrodes are soldered to wires, which are thick (strong) enough to hold the platinum plates. The wires are held to a 3 mm thick rod with heat-shrink tubing using a heat gun or a hair dryer (Figure 3B).
+Electrodes for electroporation
+(A) Design of the platinum electrode for electroporation. The anode is cut to a point for focal contact with the back of the eye and the cathode is larger for greater contact area with the front of the eye. The platinum plates are soldered to wire that is thick enough to hold the electrodes.
+(B) The wires are attached to a 3 mm rod with a heat-shrink tubing (gray).
+
+## Key resources table
+
+## Materials and equipment
+Steinberg solution (pH 7.4; stored at 4°C up to 1 month)
+
+## Step-by-step method details
+To study plasticity induced by sequential patterns of afferent activity in the retinotectal system, the two groups of retinal ganglion cells (RGCs) innervating the same tectal cell need to be stimulated independently. This cannot be achieved by stimulating RGCs in a single retina (Figure 4A) because lateral connections within the retina result in the retinal ganglion cells receiving input from photoreceptor cells over large areas of the retina and interferes with the ability to control visually driven activity in individual neighboring RGCs (Figures 4B and 4C).
+Visual stimulation strategy
+Retinal ganglion cells (RGCs) on a retina cannot be stimulated independently. (A) Cartoon showing an attempt to stimulate two RGCs on a retina. (B) Drawing of retinal ganglion cells in frog (Cajal, 1972). RGCs extend dendrite over wide area in the retina. This induces unintended interaction of the two visual inputs within the retina. (C and D) To control visually driven activity in convergent RGCs, animals in which one tectal lobe is ablated are used, so both eyes innervate the remaining optic tectum. Each eye can be stimulated independently. The green and pink traces are activity in the tectal cells evoked by the green and pink retinal ganglion cells, respectively.
+To resolve this issue and test the effect of sequential patterns of afferent activity on axon arbor plasticity and visual system plasticity, we used a classical experimental protocol to ablate one optic tectal lobe, which induces inputs from both eyes to converge on the remaining tectal lobe (Figure 4D). Under these conditions, stimulating the left and right eyes in sequence allows temporal control over the activity in the convergent inputs and the ability to study visual experience-driven plasticity in the convergent retinal inputs independent of potential effects within the retina.
+
+## Electroporate retinal ganglion cells
+Timing: 4 h (over 2 days)
+Plasmid solution containing p α-actinin:GAL4/UAS:TdTomato ((Bestman and Cline, 2008; Koster and Fraser, 2001) https://www.addgene.org/161712/) and pUAS:Synaptophysin-GFP (Hiramoto and Cline, 2014; Ruthazer et al., 2006) is pressure injected into the intravitreal space between the retina and the lens using a Picospritzer. An electric pulse is applied immediately after injecting the plasmid solution. A single high voltage electric pulse (52 V) is used to drive plasmids into the RGCs. The relatively high voltage is necessary because the efficiency of electroporating RGCs is relatively low, for instance compared to optic tectal cells, where pulses of <35 V are sufficient. Applying a single pulse will label a single RGC or a few identifiable cells suitable for in vivo imaging. Using a small anode targets electroporation to a few cells, while using a large cathode reduces potential tissue damage by decreasing the density of the electric field at the cathode (Figure 2A).
+Anesthetize animals: Place an animal in 0.02% MS-222 at 22°C–25°C for less than 1 min. As soon as the animal stops moving, transfer it to Steinberg solution.
+Make an incision in the skin beneath the eyeball for inserting the anode behind the eye
+Note: Most of the retina is not close to the skin. To electroporate RGCs near the center of the retina, make an incision in the skin ventral to the eye ipsilateral to the ablated tectal lobe with a #30-gauge needle. Before making the incision, locate the optic nerve and be sure to avoid touching it with the needle (or the anode).
+Set the animal on the electroporation setup: Place the tadpole ventral side up on the stage of the electroporation rig. Remove excess water from around the tadpole during electroporation.
+Injecting plasmid solutiona.Centrifuge the plasmid solution at 20,000 × g for 5 min. Take the supernatant and make a solution containing 0.5 μg/μl p α-actinin:GAL4/UAS:TdTomato and 0.25 μg/μl pUAS:Synaptophysin-GFP. Add Fast Green (0.01% final) to monitor the solution during injection.b.Load a glass pipette with the plasmid solution. Use a commercially available loader (Eppendorf, Microloader #930001007) or one made from 1 mL plastic syringe (Bestman et al., 2006).c.Attach the pipette to the Picospritzer. Break the glass pipette tip by gently touching it with a Kimwipe. Test the pipette by applying 90 psi pressure for 100 ms. If a drop of the solution does not come out of the pipette, break the pipette tip again and retest.d.Hold the eyeball with forceps to prevent it from rotating. Pierce the skin over the eye at the border between the lens and the retina with the glass pipette. Inject the plasmid solution into the eye until the blue color of the solution can be seen in the eye. The more volume the better for the electroporation but do not overfill the eye or the solution will leak out.e.Insert the anode through the incision underneath the eye and position the tip of the anode behind the retina (Figure 5). Gently place the cathode on top of the eye. Do not to push the solution out of the eye. Apply a single pulse of electric shock (52 V, 1.6 ms).f.Transfer the tadpole into fresh Steinberg solution.g.Prepare 100–200 samples by repeating a–f.
+Centrifuge the plasmid solution at 20,000 × g for 5 min. Take the supernatant and make a solution containing 0.5 μg/μl p α-actinin:GAL4/UAS:TdTomato and 0.25 μg/μl pUAS:Synaptophysin-GFP. Add Fast Green (0.01% final) to monitor the solution during injection.
+Load a glass pipette with the plasmid solution. Use a commercially available loader (Eppendorf, Microloader #930001007) or one made from 1 mL plastic syringe (Bestman et al., 2006).
+Attach the pipette to the Picospritzer. Break the glass pipette tip by gently touching it with a Kimwipe. Test the pipette by applying 90 psi pressure for 100 ms. If a drop of the solution does not come out of the pipette, break the pipette tip again and retest.
+Hold the eyeball with forceps to prevent it from rotating. Pierce the skin over the eye at the border between the lens and the retina with the glass pipette. Inject the plasmid solution into the eye until the blue color of the solution can be seen in the eye. The more volume the better for the electroporation but do not overfill the eye or the solution will leak out.
+Insert the anode through the incision underneath the eye and position the tip of the anode behind the retina (Figure 5). Gently place the cathode on top of the eye. Do not to push the solution out of the eye. Apply a single pulse of electric shock (52 V, 1.6 ms).
+Transfer the tadpole into fresh Steinberg solution.
+Prepare 100–200 samples by repeating a–f.
+CRITICAL: If the solution leaks out of the eye, the cells will not be transfected. Discard these samples.
+Electroporating the eye
+An incision (red line) is made in the skin to insert the anode to contact the back of the eye. The cathode is placed on the skin in front of the eye to make a large contact area. Electroporate immediately after injecting the DNA solution. Make sure that the DNA solution is retained between the retina and the lens before electroporation.
+
+## Ablate one tectal lobe
+Timing: 23–27 h (2 days)
+Wait 24 h after electroporation. Anesthetize an animal in 0.02% MS-222 in Steinberg Solution. Then, transfer the animal into Steinberg solution. Make an incision at the center of the dorsal surface of the midbrain. Cut the entire anterior-posterior extent of the midbrain. Simultaneously, cut both optic nerves at the optic chiasma so inputs from both eyes regrow simultaneously into the remaining optic tectal lobe. This prevents differences in the degree of innervation from the left and right eyes. This protocol is modified from (Ruthazer et al., 2003).
+Cut the boundary between the right half of the midbrain and the hindbrain. The incision should extend to the ventral aspect of the midbrain to cut through both the tectum and tegmentum. Cut at the anterior edge of the optic tectum.
+Pull a glass capillary and attach it to the microcapillary holder (Drummond). Break the tip to make an 100 μm diameter opening. Connect the tube to a vacuum line. Suck out the right tectal lobe and tegmentum. (The tegmentum is removed to decrease the likelihood of the right optic tectum regenerating.) Transfer the tadpole to fresh Steinberg solution. Maintain the animals at 18°C 20–24 h to slow down development during recovery, then move the animals to an incubator at 22°C.
+CRITICAL: Never expose the animals to MS222 after surgery. Animals with incisions are very sensitive to MS-222. This surgery needs to be precise. If the ablation is incomplete, the tectum will regenerate. If the ablation extends beyond the optic tectum, the midbrain will become deformed.
+
+## Screen samples
+Timing: 1–2 h
+Set an animal on a Sylgard block with a hole carved in the Sylgard to hold the tadpole comfortably. Add a few drops of Steinberg’s solution and place a coverslip over the tadpole. Use a regular fluorescent microscope or a spinning disc confocal microscope (ex, Perkin Elmer/Yokogawa CSU-X1) with a 20× objective lens to identify animals in which one or a few labeled RGC axons project to the single ipsilateral tectal lobe. Screening with a spinning disc confocal microscope produces less damage than a regular fluorescent microscope.
+
+## Provide visual stimulation
+Note: To stimulate only one eye, it is important to prevent stimulation of the other eye. This is particularly a problem in tadpoles and some fish because the animals may be translucent at stages when experiments are done. As shown in Figure 6A, light presented to one of the two eyes results in activity in both eyes, seen by recording the optic nerves and neurons in each optic tectal lobe. One way to prevent indirect activation of the “other” eye is to stimulate it with persistent illumination (masking light) of sufficient luminance, because the RGCs respond to changes in luminance (Figure 6B). Provide a masking light to one eye and a light OFF stimulus to the other eye. This produces robust eye-specific OFF responses, compared to the less robust ON stimulus response. In addition, the light OFF stimulus causes less relative illuminance change in the “other” eye. To further optimize control of the eye-specific light OFF responses, when the off stimulus is generated, the LEDs can be dimmed instead of turned off completely.
+Strategy to stimulate one eye
+(A) Unilateral visual stimulation activates both eyes. Electrophysiological recordings from the left and right optic nerves and whole cell recording from neurons in the left and right optic tecta show responses in the retinal ganglion cell axons and the tectal cells respectively following unilateral visual stimulation (red LED and lines indicate visual stimulus). In tadpoles each eye projects axons primarily to the contralateral optic tectum. Stimulus timing is indicated with arrowheads. The light presented to one eye stimulates both eyes due to scattering and reflection.
+(B) Masking light presented to one eye (red) prevents the indirect activation of the eye receiving the masking light and results in unilateral responses to the eye receiving the direct visual stimulation (black LED and lines indicate OFF visual stimulation).
+(C) For repeated presentation of OFF stimuli, the LED has to be turned on for the next OFF stimulation; however even a stepwise increase in light intensity can indirectly stimulate the other eye (red circle).
+(D) Gradually increasing LED intensity prevents the unintended indirect stimulation of the eye. In this example, the ramp of increased intensity was 11 s long. The recordings were collected in voltage clamp mode at −70 mV.
+Note: To turn the light on in preparation for the next OFF stimulation, the LED intensity is gradually increased over a period of 5 s or longer (Figures 6C and 6D). Gradually turning the light on or off enables generation of exclusive OFF or ON stimuli, respectively. Since ON responses and OFF responses are thought to encode different information in the visual system (Kremkow et al., 2016; Lee et al., 2016), the opportunity to provide one or the other stimulus independently would be useful for studying the contributions of ON responses and OFF responses to the sensory experience-dependent plasticity. In addition to the convergent circuit shown here, this method is also useful to study inter-tectal communication in the visual system.
+Inducing plasticity in the visual circuit with sequential visual inputsa.Set the visual stimulator (Table 1)Start with an example to generate sequential OFF stimuli with a 15 ms interval between the right and left eye stimulation, with the right eye stimulated first. Set the stimulation cycle to 11 s.i.Connect the circuit board to 12 V AC adaptor.ii.Connect the wires from the tadpole stimulation chamber to the circuit board. The sockets are located on the upper edge of the circuit board. The LEDs on the left and the right acrylic plates are connected to left and the right slots, respectively. Up to 8 animal chambers can be connected.iii.Turn on the two toggle switches at left corner.iv.Push key#2 and push key#5/6 until dt is set at “15” ([ms] interval between left and right eyes (L/R)).v.Push key#3 and push key#5/6 until u is set at “1024” (light ON intensity for right LED, “1024” is a setting for the maximum intensity. “0” is off.).vi.Push key#4 and push key#5/6 until d is set at “192” (light OFF intensity for right LED).vii.Long push key#2 and push key#5/6 until it is set at “1024” (light ON intensity of left LED).viii.Long push key#3 and push key#5/6 until D is set at “192” (light ON intensity of left LED).ix.Push key#1 and push key#5/6 until I is set at “11” ([s] cycle time interval).x.Long push key#4 and push key#5/6 until p is set at “1” (ramp speed).xi.Long push key#7 until “10 h” is displayed (stimulation time).xii.Push key# 7 to start stimulation. This switches LEDs on. Then, the cycles of OFF stimulus followed by ramping ON start.b.Placing animals in the stimulation chamber
+Set the visual stimulator (Table 1)
+Start with an example to generate sequential OFF stimuli with a 15 ms interval between the right and left eye stimulation, with the right eye stimulated first. Set the stimulation cycle to 11 s.i.Connect the circuit board to 12 V AC adaptor.ii.Connect the wires from the tadpole stimulation chamber to the circuit board. The sockets are located on the upper edge of the circuit board. The LEDs on the left and the right acrylic plates are connected to left and the right slots, respectively. Up to 8 animal chambers can be connected.iii.Turn on the two toggle switches at left corner.iv.Push key#2 and push key#5/6 until dt is set at “15” ([ms] interval between left and right eyes (L/R)).v.Push key#3 and push key#5/6 until u is set at “1024” (light ON intensity for right LED, “1024” is a setting for the maximum intensity. “0” is off.).vi.Push key#4 and push key#5/6 until d is set at “192” (light OFF intensity for right LED).vii.Long push key#2 and push key#5/6 until it is set at “1024” (light ON intensity of left LED).viii.Long push key#3 and push key#5/6 until D is set at “192” (light ON intensity of left LED).ix.Push key#1 and push key#5/6 until I is set at “11” ([s] cycle time interval).x.Long push key#4 and push key#5/6 until p is set at “1” (ramp speed).xi.Long push key#7 until “10 h” is displayed (stimulation time).xii.Push key# 7 to start stimulation. This switches LEDs on. Then, the cycles of OFF stimulus followed by ramping ON start.
+Connect the circuit board to 12 V AC adaptor.
+Connect the wires from the tadpole stimulation chamber to the circuit board. The sockets are located on the upper edge of the circuit board. The LEDs on the left and the right acrylic plates are connected to left and the right slots, respectively. Up to 8 animal chambers can be connected.
+Turn on the two toggle switches at left corner.
+Push key#2 and push key#5/6 until dt is set at “15” ([ms] interval between left and right eyes (L/R)).
+Push key#3 and push key#5/6 until u is set at “1024” (light ON intensity for right LED, “1024” is a setting for the maximum intensity. “0” is off.).
+Push key#4 and push key#5/6 until d is set at “192” (light OFF intensity for right LED).
+Long push key#2 and push key#5/6 until it is set at “1024” (light ON intensity of left LED).
+Long push key#3 and push key#5/6 until D is set at “192” (light ON intensity of left LED).
+Push key#1 and push key#5/6 until I is set at “11” ([s] cycle time interval).
+Long push key#4 and push key#5/6 until p is set at “1” (ramp speed).
+Long push key#7 until “10 h” is displayed (stimulation time).
+Push key# 7 to start stimulation. This switches LEDs on. Then, the cycles of OFF stimulus followed by ramping ON start.
+Placing animals in the stimulation chamber
+Select a chamber in which the gap between the acrylic plates fits the width of the tadpole. The anterior of the animal is supported with a Sylgard block and the tail is supported by Sylgard strips (Figure 1). The dorsal side is covered with a coverslip. The coverslip is attached to the acrylic plate with utility wax.c.Drug application
+Drug application
+To investigate the mechanisms regulating plasticity, drugs can be introduced to the bath solution (tank water) at different times depending on the experimental design.
+Use-dependent NMDAR block to dissect plasticity mechanisms
+NMDAR are thought to play several roles in neuronal and circuit plasticity. Because MK801 is a use-dependent NMDAR antagonist, this drug enables analysis of the requirement for NMDAR in specific components of neural circuits if they can be selectively stimulated. In addition, NMDAR response amplitudes are thought to encode information regulating plasticity. Here, we demonstrate how to take advantage of the use-dependent blockade by MK801 to address this hypothesis. We used MK801 to attenuate the NMDAR activity in one of the two retinotectal pathways. This procedure needs to be done in a dark room because visual stimulus from room lights is sufficient for MK801 to block NMDAR. To stimulate one of the two eyes, the “other” eye is illuminated with 100% intensity of LED light to avoid either ON or OFF responses and the active eye is stimulated with light off stimulus from LED. We stimulated OFF responses only and avoided ON responses by gradually turning on the LED.i.Place animals in the stimulation chamber and put the chamber in a light-tight black container with about 150 mL capacity. Fill the container with 50 mL Steinberg solution.ii.Stimulate the right eye with dimming light (from maximum illumination to complete off, 20% change /s in the turn on period, 5.5 s/stimulation cycle). Stimulate the left eye with persistent light at 100% luminance. Continue stimulation for 5 min. This pre-stimulation prevents strong activation by the first light stimulus after the dark environment.iii.Add 50 mL of 4 μM MK801 in Steinberg’s solution to the chamber so the final concentration is 2 μM MK801. Continue the stimulation protocol for 14 min.iv.After a total of 15 min exposure to MK801, turn off the stimulation and immediately pour 50 mL Steinberg solution into the chamber to rapidly dilute the MK801. Then, drain all the MK801 solution and replace with 50 mL fresh Steinberg’s solution. Wash with 50 mL fresh Steinberg solution three more times.v.Set the controller for both eyes at 100%–18.8% (max-min luminance) for the off stimulation, 11 s per stimulation cycle, and 8 h for duration.vi.When 15 min has passed after the LED was turned off, start the visual stimulation.
+Place animals in the stimulation chamber and put the chamber in a light-tight black container with about 150 mL capacity. Fill the container with 50 mL Steinberg solution.
+Stimulate the right eye with dimming light (from maximum illumination to complete off, 20% change /s in the turn on period, 5.5 s/stimulation cycle). Stimulate the left eye with persistent light at 100% luminance. Continue stimulation for 5 min. This pre-stimulation prevents strong activation by the first light stimulus after the dark environment.
+Add 50 mL of 4 μM MK801 in Steinberg’s solution to the chamber so the final concentration is 2 μM MK801. Continue the stimulation protocol for 14 min.
+After a total of 15 min exposure to MK801, turn off the stimulation and immediately pour 50 mL Steinberg solution into the chamber to rapidly dilute the MK801. Then, drain all the MK801 solution and replace with 50 mL fresh Steinberg’s solution. Wash with 50 mL fresh Steinberg solution three more times.
+Set the controller for both eyes at 100%–18.8% (max-min luminance) for the off stimulation, 11 s per stimulation cycle, and 8 h for duration.
+When 15 min has passed after the LED was turned off, start the visual stimulation.
+Setting table
+Key# corresponds to the number of the keys from the left top.
+To start the stimulation program, push key#7. To stop and reset, push key#8.
+
+## Image the RGC axons
+To analyze structural changes in axon arbor morphology, collect time-lapse images of the axons at intervals from 1 to 24 h, depending on the experimental design. Quantifying branch dynamics can demonstrate directed growth of axon arbors. Our previous experiments showed that projection sites of convergent axons within the optic tectum shift relative to one another when they are stimulated in a sequence. Axons that are stimulated 15–50 ms earlier or later shift their arbor position in the rostral or caudal direction, respectively. Daily imaging is suitable to detect directed growth of axons. Image samples at shorter intervals, such as every 1–2 h over 4–8 h, to analyze the spatial distribution of branch dynamics that contribute to the directed arbor growth (Hiramoto and Cline, 2014, 2020; Ruthazer et al., 2003). For time-lapse in vivo imaging, collect the images with a spinning disc microscope, confocal, or multiphoton microscope immediately before the next visual stimulation period. An advantage of multiphoton microscopes is that animals are not exposed to visual experience from the scanning laser during the image acquisition. The image data are analyzed with Imaris (Oxford Instruments) or other image processing software.
+
+## Expected outcomes
+When the interval of the inter-ocular stimulus is 15–20 ms, the analysis of arbor morphology and branch dynamics shows a spatially biased shift in arbor position along the rostrocaudal axis of the tectum (Figures 7A and 7B) as reported in Hiramoto and Cline (2014). This spatial bias is inverted by the application of 5 μM DL-APV (Figures 7C and 7D) as described in Hiramoto and Cline (2020).
+In vivo images of retinotectal axon arbors collected over a 2-day interval
+The left eye was stimulated 15 ms earlier (A and B) or later (C and D) than the right eye. The cell body of the labeled RGC is in the left eye. DIC images of the tectum are superimposed. Day 0: start of visual stimulation. Two RGCs are labeled in the left panels. Scale bar, 100 μm. From Hiromoto and Cline (2020). The diagrams show the intensity of the LEDs during the visual stimulation. One cycle of the stimulus is 11 s. The visual stimulation continued for 10 h per day. The RGCs that were stimulated earlier and later developed their arbors in the rostral and caudal direction, respectively.
+
+## Limitations
+It is challenging to limit the number of electroporated cells to produce single retinotectal axons for unambiguous single axon imaging, so many (>100) samples need to be prepared and screened. Since this procedure consists of two manipulations, the efficiency is a product of the success rate of the two procedures. Usually, 5% of the samples show labeled RGC axons projecting to the ipsilateral tectum and 1% is useful for experiment (bright and identifiable).
+The animals cannot be fed during the visual stimulation periods; however they can be fed during the time they spend in the dark.
+
+## Troubleshooting
+
+## Problem 1
+Animals die during the visual stimulation (step 9).
+
+## Potential solution
+The chamber is too small for the animal. If the coverslip pushes the dorsal side of the tectum, blood flow is decreased. Make different sizes of the stimulation chamber to accommodate animals of different sizes.
+Check leakage of electric current. If detected, insulate with epoxy glue again.
+
+## Problem 2
+No labeled axons project to the tectal lobe (step 4).
+
+## Potential solution
+DNA solution leaked out of the eye before applying the electric pulse for electroporation. This is likely caused by using thick-walled glass pipettes. Switch to thin-walled glass pipettes to inject the plasmid solution into the eye.
+If the plasmid solution contains a precipitate, it will clog the pipette and require a large pipette tip to pass the solution. This results in a large hole through which the plasmid solution leaks out of the eye. Spin DNA solution before loading into the pipette.
+
+## Problem 3
+Multiple retinal ganglion cells are labeled at different locations on the retina. Many faint retinal ganglion cell axons are labeled (step 4).
+
+## Potential solution
+Use a single electric pulse for electroporation.
+
+## Problem 4
+The tectum is deformed after ablation (steps 6 and 7).
+
+## Potential solution
+The surgery is more successful if the suction is completed rapidly. Use a suction glass pipette with a large opening (~ 100 μm).
+
+## Problem 5
+Animals die before starting the visual stimulation (steps 5 and 8).
+
+## Potential solution
+Remove animals from MS-222 solution immediately after the animals stop swimming. Do not anesthetize multiple animals at a time. Ablating the tectum itself is not fatal.
+Check for infection.
+
+## Problem 6
+The circuit board does not operate (step 2).
+
+## Potential solution
+There are many causes for this problem. First, check connections between all ground terminals of the parts using a tester. Second, check orientation of ICs.
+
+## Resource availability
+
+## Lead contact
+Further information and requests for resources and reagents should be directed to and will be fulfilled by Hollis Cline (cline@scripps.edu).
+
+## Materials availability
+This study does not generate new unique reagents.
+
+## Data and code availability
+Design sheet and codes generated in this study have been deposited to https://doi.org/10.17632/bs8sdhg8h3.2.
+
+## Acknowledgments
+We thank members of the Cline lab for critical discussions. This work was supported by the National Institutes of Health (NEI EY011261 and EY 027437), the Helen Dorris Foundation, and the Hahn Family Foundation to H.T.C.
+
+## Author contributions
+M.H. and H.T.C. designed the research, M.H. performed the research, and M.H. and H.T.C. wrote the paper.
+
+## Declaration of interests
+The authors declare no competing interests.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+Design sheet and codes generated in this study have been deposited to https://doi.org/10.17632/bs8sdhg8h3.2.
+
+## Table : 
+REAGENT or RESOURCE | SOURCE | IDENTIFIER
+Recombinant DNA
+
+p α-actinin Gal4 UAS tdTomato | Addgene | 161712
+pUAS:Synaptophysin-GFP | Modified from a gift from Dr. Jane Sullivan Washington University, as described in Ruthazer et al., 2006 | n/a
+
+Experimental models: organisms/strains
+
+Albino Xenopus tadpoles | Xen Express http://www.xenopus.com/products.htm | n/a
+
+Chemicals, peptides, and recombinant proteins
+
+MK801 | Sigma-Aldrich | S1078; CAS: 1032350-13-2
+DL-APV | Sigma-Aldrich | S4696; CAS: 694433-59-5 (free base)
+MS-222 | Sigma-Aldrich | P1675; CAS: 124-87-8
+Fast green | Sigma-Aldrich | 210-M; CAS: 2353-45-9
+Ca(NO3)2·4H2O | Sigma-Aldrich | CAS: 13477-34-4
+Tris(hydroxymethyl)aminomethane hydrochloride | Sigma-Aldrich | CAS: 1185-53-1
+
+Other
+
+Stimulator | Astro Med | SD9
+Photometer | International Light | IL400BL www.intl-light.com
+Picospritzer | Parker Hannifin | 052-0500-900
+White paint marker | POSCA | PC-1M
+Glass capillaries | Drummond | Cat#1-000-0300
+Syringe needle, 30G | Becton Dickinson | BD 305106
+Puller heater (for making electrodes) | Sutter | FT320B
+SYLGARD | Electron Microscopy Science | Cat#24236-10
+Acrylic Plate (2 mm thick × 15 cm × 3 cm) × 2 | Any brand | n/a
+LED | OptoSupply | PSHR5161A-QR
+Utility wax | Any brand | n/a
+4 mm diameter styrene rod | Any brand | n/a
+Epoxy glue | J-B WELD | SKU: 50112
+Spinning disc confocal microscope | Perkin Elmer/Yokogawa | CSU-X1
+8-bit microcomputer (Figure 2C, IC1) | Microchip | PIC16F877A/P
+Three-terminal regulator (Figure 2C, IC3) | STMicroelectronics | L7805CV
+Transistor array (Figure 2C, IC4, 5) | STMicroelectronics | ULN2803
+LCD (Figure 2C, LCD1) | LUMEX | LCM-SO1602DSF/C
+10 kΩ 104 Horizontal Type Trimpot Potentiometer (Figure 2C, R1) | Any brand | n/a
+Resistor, 10 kΩ, 1/8 W (Figure 2C, R2) | Any brand | n/a
+Resistor, 22 Ω, 1/8 W (Figure 2C, R3) | Any brand | n/a
+Ceramic capacitor, 0.1 μF, 50 V (Figure 2C, C2-4,9,10) | Panasonic | ECU-S1J104MEA
+Aluminum electrolytic capacitors, 330 μF, 16 V (Figure 2C, C11, 12) | Panasonic | EEUFM1C331
+Switching diode (Figure 2C, D1-3) | Toshiba | 1SS178
+Crystal oscillator, 12.0 MHz (Figure 2C, DC) | Abracon LLC | ACH-12.000MHZ-EK
+Toggle switch 2 × 3 contact (Figure 2C, SW_L) | MULTICOMP PRO | 2MD1T1B5M2RE
+Toggle switch 3 contact (Figure 2C, SW_P) | MULTICOMP PRO | 2MD3T2B2M2RE
+12 V AC cable jack (Figure 2C, JK1) | Any brand | n/a
+Single row pin connector (Figure 2C, JP1, 7, 8, 9, 10, 13, 14) | Any brand | n/a
+Double row pins (Figure 2C, JP2, 15) | Any brand | n/a
+AC adaptor 12 V, >1 A | Any brand | n/a
+Jumper connector (Figure 2C, JPC1-3) | Any brand | n/a
+JPL1, 2 female jumper wire connector (Figure 2C, JPL1, 2) | Any brand | n/a
+
+Software and algorithms
+
+Imaris | Oxford Instruments | https://imaris.oxinst.com/
+
+Deposited data
+
+Design sheet and codes generated in this study have been deposited Mendeley | https://doi.org/10.17632/bs8sdhg8h3.2 | n/a
+
+## Table : 
+Reagent | Final concentration | Amount
+NaCl | 58 mM | 3.4 g
+KCl | 0.67 mM | 0.05 g
+Ca(NO3)2·4H2O | 0.34 mM | 0.08 g
+MgSO4·7H2O | 0.83 mM | 0.205 g
+Tris(hydroxymethyl)aminomethane hydrochloride | 4.6 mM | 0.56 g
+ddH2O |  | 1 L
+
+## Table Table 1: Setting table
+Parameter (displayed at right bottom in the LCD) | Explanation | Operation
+dt | Interval between the stimulation of the two eyes (when >0, right terminal first) | key#2⇒Key#5&6 (=up&down key)
+I | Interval of the stimulation cycle | key#1⇒Key#5&6
+u (right LED) | Start intensity of ramp illumination (max=1,024) | key#3⇒Key#5&6
+d (right LED) | Stop intensity of ramp illumination | key#4⇒Key#5&6
+t (left LED) | Start intensity of ramp illumination (max=1,024) | key#2 long push⇒Key#5&6
+D (right LED) | Stop intensity of ramp illumination (max=1,024) | key#3 long push⇒Key#5&6
+p | Ramp speed (change per ms) | key#4 long push⇒Key#5&6
+duration | Duration of stimulation per day (hour) | Key#7 long push
+wait time | Hours before start | Key#8 long push
+
+## Figure Figure 1: A chamber for visual stimulationTop view photo (A) and schematic drawings of the chamber and components (B). The chamber holds six tadpoles between the two acrylic plates that are 2 mm thick × 3 cm wide. There is a gap between the two plates of 2.3–3 mm where the tadpoles are positioned. A strip of mesh is glued under the gap of the two plates with acrylic glue and forms a sling under the tadpoles. Six rectangular rods are glued under the acrylic plates. The animal is held snugly in the chamber as follows: the ventrolateral sides of the head are supported by 0.4 mm styrene rods or strips of Sylgard glued to the lower edge of the acrylic plates. The head is supported by a Sylgard block positioned in front of the head. It is held in place by the acrylic plates on either side and the coverslip laid over the animal. The tail is supported on both sides by two strips of Sylgard glued to the painted inner edge of the acrylic plates. LEDs are positioned on each side of the chamber at eye level for the tadpoles. LEDs are glued to the acrylic plates with epoxy glue. Before mounting the LEDs on the chamber, a slit is cut in the plastic dome on top of the LED which provides more even illumination to the eye. Wires are soldered to LEDs. Either the anodes or the cathodes are connected to a common line. The other terminals are connected to the power source independently through resistors. Tadpoles are inserted in the slit. The head supporter is positioned to immobilize the tadpoles. Cover slips are overlaid on the tadpoles and attached to the acrylic plates using utility wax.
+
+## Figure Figure 2: Visual stimulation controller(A) A diagram of the visual stimulation setup. A controller (lower) is connected to LEDs on the plates that holds the animals (upper).(B) The visual stimulation controller in operation.(C) The pattern of the circuit board. The parts are soldered to the board. The electric parts are described in the Key resources table. Jumper lines (red) need to be soldered to the custom-ordered circuit board by users.
+
+## Figure Figure 3: Electrodes for electroporation(A) Design of the platinum electrode for electroporation. The anode is cut to a point for focal contact with the back of the eye and the cathode is larger for greater contact area with the front of the eye. The platinum plates are soldered to wire that is thick enough to hold the electrodes.(B) The wires are attached to a 3 mm rod with a heat-shrink tubing (gray).
+
+## Figure Figure 4: Visual stimulation strategyRetinal ganglion cells (RGCs) on a retina cannot be stimulated independently. (A) Cartoon showing an attempt to stimulate two RGCs on a retina. (B) Drawing of retinal ganglion cells in frog (Cajal, 1972). RGCs extend dendrite over wide area in the retina. This induces unintended interaction of the two visual inputs within the retina. (C and D) To control visually driven activity in convergent RGCs, animals in which one tectal lobe is ablated are used, so both eyes innervate the remaining optic tectum. Each eye can be stimulated independently. The green and pink traces are activity in the tectal cells evoked by the green and pink retinal ganglion cells, respectively.
+
+## Figure Figure 5: Electroporating the eyeAn incision (red line) is made in the skin to insert the anode to contact the back of the eye. The cathode is placed on the skin in front of the eye to make a large contact area. Electroporate immediately after injecting the DNA solution. Make sure that the DNA solution is retained between the retina and the lens before electroporation.
+
+## Figure Figure 6: Strategy to stimulate one eye(A) Unilateral visual stimulation activates both eyes. Electrophysiological recordings from the left and right optic nerves and whole cell recording from neurons in the left and right optic tecta show responses in the retinal ganglion cell axons and the tectal cells respectively following unilateral visual stimulation (red LED and lines indicate visual stimulus). In tadpoles each eye projects axons primarily to the contralateral optic tectum. Stimulus timing is indicated with arrowheads. The light presented to one eye stimulates both eyes due to scattering and reflection.(B) Masking light presented to one eye (red) prevents the indirect activation of the eye receiving the masking light and results in unilateral responses to the eye receiving the direct visual stimulation (black LED and lines indicate OFF visual stimulation).(C) For repeated presentation of OFF stimuli, the LED has to be turned on for the next OFF stimulation; however even a stepwise increase in light intensity can indirectly stimulate the other eye (red circle).(D) Gradually increasing LED intensity prevents the unintended indirect stimulation of the eye. In this example, the ramp of increased intensity was 11 s long. The recordings were collected in voltage clamp mode at −70 mV.
+
+## Figure Figure 7: In vivo images of retinotectal axon arbors collected over a 2-day intervalThe left eye was stimulated 15 ms earlier (A and B) or later (C and D) than the right eye. The cell body of the labeled RGC is in the left eye. DIC images of the tectum are superimposed. Day 0: start of visual stimulation. Two RGCs are labeled in the left panels. Scale bar, 100 μm. From Hiromoto and Cline (2020). The diagrams show the intensity of the LEDs during the visual stimulation. One cycle of the stimulus is 11 s. The visual stimulation continued for 10 h per day. The RGCs that were stimulated earlier and later developed their arbors in the rostral and caudal direction, respectively.

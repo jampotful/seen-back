@@ -1,0 +1,702 @@
+Large-scale assembly of trait data from community science field images reveals inter- and intraspecific climate–phenology drivers of dragonfly body melanism
+Jacob H. Idec, Seth Bybee, Jessica L. Ware, John Abbott, Vincent J. Kalkman, Robert Guralnick (2026). Research Square. https://doi.org/10.21203/rs.3.rs-8427283/v1. doi:10.21203/rs.3.rs-8427283/v1. Licence: cc-by. Text from pdf.
+
+Large-scale assembly of trait data from community
+science field images reveals inter- and intraspecific
+climate–phenology drivers of dragonfly body
+melanism
+Jacob Idec
+
+Florida Museum of Natural History, University of Florida https://orcid.org/0000-0003-0976-8297
+Seth Bybee
+Florida International University
+Jessica Ware
+American Museum of Natural History https://orcid.org/0000-0002-4066-7681
+John Abbott
+Vincent Kalkman
+Naturalis Biodiversity Center https://orcid.org/0000-0002-1484-7865
+Robert Guralnick
+
+Article
+Keywords:
+Posted Date: February 9th, 2026
+DOI: https://doi.org/10.21203/rs.3.rs-8427283/v1
+License:   This work is licensed under a Creative Commons Attribution 4.0 International License.
+Read Full License
+Additional Declarations: There is NO Competing Interest.
+
+Page 1/21
+
+Abstract
+Insect coloration evolves under multiple selective pressures, and in dragonflies (Odonata: Anisoptera)
+body color likely plays roles in visual signaling and thermoregulation. Melanin-based dark body
+coloration in particular may aid muscle warming for flight under the thermal melanism hypothesis (TMH)
+and enhance immune protection in humid environments (Gloger’s rule). Recent work has shown
+phenology and climate jointly impact melanism at the assemblage level, but understanding processes
+that generate these patterns requires explicit consideration of intraspecific variation. Here we use a
+computer-vision pipeline to quantify threshold-based darkness metrics from ~ 75,000 iNaturalist images,
+representing 159 species. We also introduce new methods to account for lighting bias, key for best use
+of field images. Focusing on the conterminous United States, we test whether temperature, solar
+radiation, and humidity interact with phenology to shape melanism within and between species. We find
+phenology strongly mediates temperature effects: the darkest individuals are among the earliest fliers in
+the coldest climates. We also find support for a solar-radiation component of TMH and a nonlinear
+humidity–melanism relationship consistent with Gloger’s rule. Our results demonstrate that dragonfly
+body coloration reflects multiple interacting ecological pressures. We also provide scalable tools and
+methods broadly applicable in studies of color biology.
+
+Introduction
+Dark colors resulting from embedded melanin pigments are among the most widely studied functional
+traits in animals (1,2). Such colors are often linked to broad ecogeographical “rules”, the best-known of
+which are the thermal melanism hypothesis (TMH) and Gloger’s rule (3,4). The TMH predicts that
+organisms in colder environments will be darker to improve solar heat absorption and thermoregulation.
+Gloger's rule, on the other hand, predicts darker coloration in warmer and more humid environments,
+where melanin's direct or pleiotropic associations with pathogen resistance may be advantageous in
+pathogen-rich climates (1). In insects, evidence for both “rules” has been variable. This variability likely
+reflects a mix of methodological inconsistencies, such as differences in rule definition or scope,
+environmental gradients examined, and the genuine and dramatic variability in the ecology of different
+insect groups (4). Studied groups often differ in their thermoregulatory needs and strategies (5), use of
+microhabitat to reduce thermal pressure (6), function of color for mate signaling (7) , desiccation
+tolerance (8), and other factors. Additionally, the needs and pressures experienced within a species can
+vary and exhibit trade-offs contingent upon environmental conditions (9).
+Such variation in the relevance of climatic selective pressures is both spatial (across the geographic
+range of species), and temporal (across the course of the year and among years). Phenology – the
+seasonal timing of key biotic events such as emergence or peak flight activity— is thus a strong
+determinant of the climatic conditions an organism experiences. Given this, it has been hypothesized
+that phenology could mediate climate-based selection, or conversely, that climate could mediate
+selection on phenological traits (10–13). For example, hatching phenology was one of the strongest
+predictors of how alpine Orthoptera species responded to microclimate and elevation (13). Spring
+Page 2/21
+
+temperature was a key predictor of how the flowering time of a perennial herb responded to variation in
+grazing intensity across years (12). In plants more generally, it has long been known that flower color
+within populations and even individuals can shift over the season to best attract different sets of
+pollinators (14). And recent work has revealed interactions between phenology, climate, and color in
+insects: a study of dragonfly assemblages in Great Britain found that species active during the early or
+late parts of the season, when solar radiation is lower, tend to exhibit darker body coloration (15). There,
+the improved predictive power of solar radiation relative to temperature supports the relevance of solar
+radiation in the context of thermal melanism. Taken together, these results highlight the importance of
+seasonal flight timing when testing ecogeographical color rules.
+In addition to bright colors from pigments and structural elements, dragonflies (Odonata: Anisoptera)
+display a variety of dark melanistic color patterns on their bodies and wings. On the body, dark coloration
+ranges from stripes and spots to coverage of almost the entire body (16). On odonate wings, black or
+brown melanistic spots implicated in sexual and territorial signaling are present but do not generally aid
+in warming (17). Studies have largely supported the TMH for body color in dragonflies, but shown
+weaker or more inconsistent support for Gloger’s rule (18,19). Body melanism studies have primarily
+looked at assemblages with color data from field guide images, and have yet to incorporate intraspecific
+color data. A main reason for the paucity of studies is that color fades in dragonfly museum specimens,
+which are typically a primary source of color data. Dragonflies with bright colors in life can become dark
+weeks to months after death due to pigment and structural color degradation, especially when proper
+preservation via acetone drying is not applied (20). This uncertainty about the colors we observe in old
+specimens complicates melanistic color quantification below the species level.
+We set out to test whether climate-melanism-phenology relationships hold within and across dragonfly
+species, focusing on a broad spatiotemporal gradient in the conterminus USA. Our work explicitly
+attempts to disentangle the many possible drivers of melanistic color, including temperature, solar
+radiation, and humidity. Key to this effort is the use of “in-situ” field images of dragonflies, where color
+has not faded. In particular, we utilize field photographs with Research Grade designation on iNaturalist.
+iNaturalist provides a vast source of in-life color and recent studies have begun to take advantage of its
+richness while accounting for its heavy noise (21). We developed a computer vision pipeline that uses
+artificial intelligence approaches to derive color data, leveraging hundreds of thousands of images to
+obtain metrics for how dragonfly species vary spatially in melanistic color while reducing the influence of
+confounders such as observation bias. We also take measures to reduce noise when capturing metrics
+of dark coloration, given the unstandardized nature of iNaturalist images.
+Having obtained this data, we test the core hypothesis that climate variables (temperature, solar
+radiation, and humidity) interact with emergence phenology to drive patterns in dark body coloration
+consistent with the TMH and Gloger's rule (Fig. 1). Our statistical approach enables disentangling
+potential climate predictors, while incorporating flight onset timing as ecological context, to uncover the
+extrinsic determinants of dragonfly body coloration. More broadly, our pipeline and results demonstrate
+the value of iNaturalist data in investigating traits across broad spatial and temporal scales.
+Page 3/21
+
+Methods
+Data acquisition
+We began data collection by downloading a GBIF archive of all ~1.4 million dragonfly (Odonata:
+Anisoptera) iNaturalist observations globally (DOI: 10.15468/dl.rbnm5e). Filtering to those in the
+conterminus USA reduced the data set to 800,000. To reduce computational burden while maintaining
+taxonomic breadth, we randomly sampled a maximum of 2,000 observations per species. We kept all
+observations if the number was already below 2,000, but only kept species where the number was at
+least 500, a number we deemed necessary to yield the spatial and temporal resolution needed. Given
+that well-sampled species hold a disproportionate number of observations, this process reduced the
+total number of observations to ~180,000. We downloaded the “medium” quality images for these
+~180,000 using links in the GBIF archive and our custom multithreaded downloader then proceeded to
+segmentation and filtering. We note that in addition to field photographs, iNaturalist includes an
+extremely small number (<1%) of preserved specimen photographs and we did not attempt to
+differentiate these. While specimen images do have different color and lighting conditions than field
+images we do not expect these extremely rare images to introduce bias into our results. At this stage we
+also removed three Corduliidae genera (Dorocordulia, Cordulia, Somatochlora) from the data because
+they frequently exhibit dark metallic structural coloration which our threshold metrics (see Melanistic
+color quantification) cannot distinguish from the true melanism that is the target of our hypotheses.
+
+Segmenting insects from background
+Our two-stage approach for segmentation, or removing insects from their background, starts with a
+widely used foundational machine learning approach called groundedSAM (22) (Fig. 2). GroundedSAM
+first passes images through the groundingDINO zero-shot object detector to obtain a bounding box
+around the insect (23), then sends that box to SegmentAnything to determine which pixels in the box are
+those of the insect (24). These models are expected to excel on the majority of iNaturalist images
+relative to other models because their broad training makes them effective at finding image subjects in
+the face of highly variable targets and backgrounds (24). All groundingDINO versions use the Swin-B
+backbone, and we used the one trained on the CoG and COCO datasets. GroundingDINO takes a natural
+language prompt that it uses to find its target. Of the prompts “subject”, “insect”, and “dragonfly” all
+showed very similar error rates for a test set of 100 random images that included poor quality images
+unlikely to return good segments, with 30/100, 28/100, and 28/100 erroneous. Given this, we chose
+“insect” for being a middle ground of specificity. Box threshold (the required confidence score for
+GroundingDINO to propose a bounding box) and text threshold (the required confidence that a proposed
+box matches the word prompt) were both set to the relatively permissive value of 0.25 given that our
+primary filtering happens later on. We kept at most one box per image - the box of highest confidence and processed it with SegmentAnything to generate a binary mask. We used the largest variant of SAM,
+ViT-H (Vision Transformer - Huge), to maximize segmentation accuracy. To simplify downstream steps
+
+Page 4/21
+
+and because SAM occasionally creates piecemeal masks, we kept only the largest mask in the image
+and removed small masks separate from the primary segment.
+We opted to remove wings from our dragonfly segments because our aim in this study is to capture
+melanistic body coloration. Further, given that wings are often at least partially transparent, it is nearly
+impossible to avoid capturing background coloration; for example, green vegetation in the background
+often causes erroneous “green” wings. Since groundedSAM was unable to separate wings from body, we
+trained an additional UNet++ model, a cutting-edge segmentation architecture that excels at generalizing
+from small datasets (25), using a dataset we created containing 500 groundedSAM-extracted segments
+with wings and corresponding masks without wings. In this way groundedSAM does the heavy lifting by
+handling challenging background variation, then our custom model fine-tunes the segments for our use
+case of obtaining dragonfly bodies without wings. To normalize the output segments which have
+different sizes and subject angles, we created a custom non-AI computer vision method that finds
+candidate vertical lines using a Hough lines transform applied to a skeletonized segment, picks the line
+of best symmetry through the segment, then transforms the segment such that the line would become
+vertical. This process “straightens out” the segmented dragonfly such that the dragonfly is directly
+upright with the head always at the top.
+
+Segment filtering
+While segmentation yields reasonable segments for the majority of images, erroneous segments arise
+when groundedSAM makes a mistake, our wing removal UNet++ makes a mistake, or most commonly,
+when the original image was of low quality due to low resolution, an awkward angle, or an obscured
+organism. Images of the nymph life stage are also undesirable, and while those labeled as such in the
+metadata are removed, those that are not are retained. To filter against both of these cases, we first
+passed every segment through a ResNet18 pre-trained on the ImageNet dataset to extract features from
+the penultimate fully-connected layer, which captures high-level abstract representations of the image.
+Next we clustered the images using these features with gaussian-mixture clustering (specifying ten
+clusters), resulting in clusters where segments in each cluster generally appear similar to one another.
+Because noisy “blobs” and partial dragonflies have distinctly different image characteristics than our
+desired whole dorsal dragonfly bodies, our wanted and unwanted images generally fall into separate
+clusters from one another. For each cluster we manually reviewed 100 random images, identified
+clusters with more than 5% (1 in 20) segments being poor or nymphs, and removed those clusters in
+their entirety from the pool while keeping all images from the remaining “good” clusters. We considered
+a segment poor if it was not an adult dragonfly body or did not retain at least ~90% of the dragonfly body
+area when judged by eye. The clustering stage was performed in six batches of 30,000 images per batch
+to reduce the memory overhead associated with clustering large numbers of images, seeded for each
+batch for reproducibility.
+
+Melanistic color quantification
+
+Page 5/21
+
+We quantified the dark color of each segment as the percent of body pixels below a lightness threshold
+and obtained this metric for thresholds of 0.2 and 0.3. For example with the 0.2 threshold, the metric
+value for a body segment would be 0.25 if 25% of all pixels in the body segment were as dark or darker
+than 0.2 HSL lightness. We selected 0.2 as our primary threshold because it appeared to capture
+reasonable estimates of dark coloration in line with human perception but also calculated the more
+permissive 0.3 in order to use it in sensitivity analysis. It is necessary to account for noise in these
+metrics given the presence of uncontrolled lightning and camera variation in citizen science datasets.
+Ambient lighting can brighten or darken the pixel colors of the dragonfly, and diffuse reflections from the
+environment—such as light bouncing off vegetation—could also slightly shift pixel values. Differences in
+camera sensor sensitivity, color filter arrays, flash setting, and in-camera processing (e.g., automatic
+white balance or tone mapping) can further alter recorded brightness and color balance, adding variation
+to our measurements. While thresholds are not fully isolated from this noise, a restrictive threshold is
+less sensitive to this noise than mean lightness, where any lighting or camera variation directly alters the
+mean value. By contrast, using a threshold reduces some of this noise since only those pixels that are
+pushed above or below that threshold due to camera or external lighting conditions will have an impact.
+The exact code used for segmentation, filtering, and color and lighting quantification can be found in the
+project GItHub repository, and the reusable functions we called in that repository can be found in the
+repository for an in-development software package: both repositories are listed in the Data Availability
+Statement.
+
+Data processing
+To account for spatial biases in sampling density and reduce noise, we aggregated individual
+observation body segment records into species–grid cell combinations using a 250 km equal-area grid
+over the conterminus USA (Fig. 3). Each unique species–cell pair was retained only if it contained at
+least 10 records with valid values for the day-of-year of observation. We then estimated the phenological
+onset of summer emergence for each species cell using the 10th percentile of a Weibull distribution
+generated using the observed day-of-year values, approximating the start of seasonal activity. Because
+species-cells with more observations are more likely to pick up the early and late tails of the distribution,
+we applied a correction by regressing onset on the number of observations and adjusting residuals to
+retain the original mean. This approach removes systematic trends in onset timing associated with
+sampling effort. To each species-cell we also added the average percent dark color of all observations
+belonging to it. In this way, our transformed data captures how each dragonfly species varies spatially in
+both color and emergence timing. Finally, to each cell we added the mean annual climate values for
+temperature (“tavg”), solar radiation (“srad”), and vapor pressure (“vapr”) across the spatial range of that
+cell from WorldClim (26). We consider vapor pressure (absolute atmospheric moisture) to be the most
+direct metric for testing the effect of humidity on color, especially useful for our purposes because it is
+independent of temperature (in contrast to temperature-dependent metrics like vapor pressure deficit or
+relative humidity). For clarity and brevity, we use “humidity” to refer to vapor pressure throughout the
+paper. We used annual climate means instead of seasonal values because phenological onset already
+Page 6/21
+
+reflects the seasonal climate that species are exposed to in a given grid cell. Structuring the variation
+this way allows us to more directly test our hypothesis that onset mediates the effect of climate. All
+predictor variables were scaled before analysis to have a mean of zero and a standard deviation of one,
+enabling more direct comparison across predictors and improving model convergence.
+
+Quantifying systemic lighting bias
+Noise is most problematic when it is correlated with a response variable, for example if well-lit
+observations occur more often in the north than the south or vice versa. Because lighting and camera
+conditions are inseparable without detailed camera information, we aimed to capture them together in
+one metric. Our metric is based on the assumptions that 1) biological variation in lightness below the
+species-cell level should produce roughly symmetric distributions around the true species-cell mean; 2)
+the lighting and camera regime of a species-cell (which could vary due to geography, habitat, or observer
+behavior) introduces asymmetric (rather than uniform) measurement error. When this regime is
+integrated with the symmetric biological signal to yield the data we observe, the magnitude and direction
+of the skew in the distribution of that data should be dependent on the magnitude and direction (dark or
+light) of the lighting regime bias. Based on this logic and our two assumptions, we use the skewness of
+the distribution of the mean lightness of segments within species-cells as a proxy for the directional
+lighting noise regime (Fig. 4). In this way our metric treats the shape of the distribution itself as a
+diagnostic: a roughly symmetric distribution indicates balanced lighting conditions (metric ≈ 0), negative
+skew (metric < 0) indicates an excess of underexposed images relative to overexposed ones, and
+positive skew (metric > 0) indicates an excess of overexposed images. Assumption 1 is consistent with
+our modeling approach which already aggregates to species-cell and thus does account for speciesspecific within-cell variation. To test whether lighting bias is a confounder for latitudinal or climate
+effects, we test for correlations between it and the climate variables as well as incorporating it directly
+into our model selection framework as a covariate. We calculate skewness using the skewness() method
+from the R package moments.
+
+Selection of climate variable models
+We investigated three climatic variables – temperature, solar radiation, and humidity – using a
+systematic stepwise model selection approach with the R package buildmer (27). Because the three
+climate predictors were highly collinear, inclusion of all three in the same model led to prohibitively high
+variance inflation factors (VIFs). As no standard transformation or regularization approach allowed for
+interpretable models with all variables retained, we instead proceeded with stepwise selection for three
+separate models, each including phenological onset and a different pair of climate variables.
+Approaches like this enable assessing the effect of each climate variable while accounting for its
+covariance with the other, and is commonly used in ecological studies facing strong collinearity among
+environmental predictors when interpretability is a priority (28). For each pair of climate variables we
+started with a full model including all main effects and interactions up to the second order among
+phenological onset and the climate variables using natural spline terms (df = 2). Models were fit as
+Page 7/21
+
+generalized linear mixed models using glmmTMB with species and grid cell as random intercepts and
+Gaussian error distributions. Backward stepwise elimination proceeded by removing terms that reduced
+AIC, with the constraint that both basis functions of each natural spline were retained or removed
+together.
+
+Sensitivity and robustness analyses
+We created three additional groups of paired climate models to increase confidence in our selected dark
+color threshold, account for the possibility of phylogenetic confounding, and assess whether bias’ mean
+shift is responsible for observed effects. The first additional model group uses a more permissive HSL
+lightness threshold for dark coloration of 0.3 instead of 0.2. As glmmTMB does not support custom
+covariance structures, the second model group uses the R package phyr and a tree of North American
+species (17) to create phylogenetically corrected versions of our final model formulas. Given our
+argument that skew represents bias, the third model group uses data where within each species-cell we
+both removed the most skewed data points using IQR and used the median black threshold value
+instead of the mean - qualitatively similar results from such a model would confirm that our main model
+effects are not the result of lighting bias’ effect on the mean.
+
+Results
+Summary of data filtering steps
+Our filtering removed ~105k images (58%) of our original dataset of ~180k, leading to a final set of ~75k
+images (42% of the original dataset) representing 159 of the ~330 species of dragonflies known from
+North America, including 76 Libellulidae, 41 Gomphidae, 22 Aeshnidae, 11 Corduliidae, 4
+Cordulegastridae, 3 Macromiidae, and 2 Petaluridae. Our approach removing image clusters with >5% of
+segments being poor quality (see “Segment filtering” in Methods) ensured that the rate of poor
+segments in images used in analysis is below 5%. We considered this error rate to be acceptable for
+downstream analyses, especially given that the few erroneous images remaining should introduce noise
+rather than systemic bias.
+
+Testing systemic lighting bias
+Our proxy for systemic lighting bias of species-cells, CIELAB lightness skew (Fig. 4), was dropped in
+every model when performing model selection and showed negligible correlations with most predictors
+variables (latitude: r = 0.008, p = 0.73; temperature: r = -0.036, p = 0.13; solar radiation: r = -0.013, p =
+0.58) and only weak correlations with longitude (r = 0.052, p = 0.025) and humidity (r = -0.049, p = 0.040).
+Interestingly, skew shows a small positive correlation with our body darkness threshold metric (r=0.20, p
+< 0.01); darker species-cells are more positively skewed (have worse overexposure).
+
+Climate modeling results
+
+Page 8/21
+
+To investigate what climate variables influence dark body color and whether their effects are contingent
+on phenology or one another, we modeled the percent of body area covered by dark color as a function
+of phenological onset and two out of three climate variables. Thus we created an onset-temperaturesolar radiation model, an onset-temperature-humidity model, and an onset-solar radiation-humidity
+model, with model formulas reached using stepwise model selection. Stepwise selection was highly
+decisive for all models, with the chosen term to drop always outperforming the next best alternative by
+at least 50 ΔAIC. In this and subsequent results we report and visualize analysis of the 0.2 HSL darkness
+threshold color metric for brevity.
+In the temperature–solar radiation model (subsequently shortened to “temperature-srad model”), darker
+coloration was associated with lower solar radiation (population-level effect estimates for spline terms =
+–0.11 and –0.06, both p < 0.001), while the interaction between onset and the first temperature spline
+was positive (p < 0.001). The effect of temperature on darkness is strongest in species that onset early,
+and temperature has weak to no effect for those onsetting late.
+In the temperature–humidity model, the first humidity spline term was positive (p < 0.001), indicating
+darker coloration in more humid environments. The temperature effects were broadly similar to the
+temperature-solar radiation model, showing an interaction with onset, but the slope was greater and a
+negative relationship persisted even in the late-onset species-cells. In the solar radiation–humidity
+model, darker coloration was associated with lower solar radiation (spline terms = –0.10 and –0.05, both
+p < 0.001). While humidity effects on their own were weak and non-significant, a small but significant
+interaction was present between onset and the first humidity spline (p = 0.006) where darkness was
+more sensitive to humidity for later onset species-cells. All models include a significant negative
+association between later onset and dark coloration that was independent from climate, with lateremerging species–cells generally exhibiting lighter body color.
+
+Nonlinearity in climate models
+We anticipated the possibility of non-linear fits across gradients, especially exponential fits where trends
+tend to “level out” or show diminishing returns. We found that indeed non-linear terms were retained
+across our models fitting climate, species body darkness and onset phenology. The strongest nonlinear
+relationships existed for temperature in the temperature-srad and temperature-humidity models, and
+humidity in the temperature-humidity model only (Fig. 5). In the temperature-srad model, visualizing the
+interaction effect of temperature and onset shows that low temperatures strongly increase body
+darkness of early onset species but this effect rapidly levels out in warmer environments. Only low to
+intermediate temperatures are associated with changes in melanism and once intermediate
+temperatures are exceeded increasing temperature further has little to no effect. By contrast, we do not
+see such non-linearity for solar radiation, which has a roughly equal effect on darkness at high and low
+values. In the temperature-humidity model, the effect of humidity levels out similarly to temperature in
+the temperature-srad model; when humidity exceeds intermediate values, it no longer impacts melanism.
+
+Page 9/21
+
+Sensitivity analyses using a more permissive darkness threshold (0.3 HSL), phylogenetically corrected
+models, and models using IQR-filtered median values to reduce lighting bias all showed qualitatively
+similar results (available in GitHub repository – see Data Availability).
+
+Discussion
+Using more than 75,000 iNaturalist images of dragonflies representing 159 species from the
+conterminus USA and a semi-automated computer vision pipeline that isolates dragonfly bodies, filters
+out erroneous images, and applies a threshold to obtain dark body coverage, we tested the prediction
+that phenological onset timing mediates the relationship between climate and melanism in dragonflies.
+Our data includes 48% of the ~330 species of dragonflies known from North America, mainly comprising
+Libellulidae (47%), Gomphidae (26%), Aeshnidae (13%), and Corduliidae (7%). To our knowledge, we are
+the first to derive and analyze quantitative animal color data from iNaturalist at this taxonomic and
+spatial scale, and we expand on previous dragonfly melanism work using a broad climatic gradient,
+expansive intraspecific color data, and explicit decoupling of climate predictors and phenology. After
+aggregating our records to species-grid-cell combinations and calculating the phenological onset of
+summer emergence as the 10th percentile of observation dates, we modeled how onset, temperature,
+solar radiation, and humidity influence melanism across 159 species. In addition to testing our core
+prediction that phenology and climate jointly shape dragonfly body melanism, we evaluated support for
+the TMH and Gloger’s rule and found that both are supported, depending on context (29). These results
+align with a growing body of literature suggesting the importance of a multidimensional context
+dependency rather than a single “rule” predominating (29). Below, we discuss more about the critical
+importance of phenology mediating these responses, along with prospects and next steps for broadscale assembly of color information from community science field images.
+The effect of temperature on melanism depends on adult flight phenology
+Our core prediction is that melanism coverage on the body would be highest in dragonflies that emerge
+the earliest in the spring and dwell in areas with low annual temperatures or low solar radiation. In
+particular, populations with very early onsets are exposed to the most challenging thermal windows,
+where darker bodies could convey critical warming of wing muscles for flight, while the thermal windows
+of late-emergers, during peak summer conditions, may pose far less of a challenge (30,31). Our top
+models include a strong, significant interaction between onset and temperature, supporting this
+hypothesis that temperature’s effect on melanism is contingent on phenology. At low temperatures,
+early-onset dragonflies are markedly darker, but this temperature effect shrinks to zero for late-onset
+dragonflies.
+Decoupling the effects of temperature, humidity, and solar radiation poses a challenge to ecologists due
+to the strong geographic correlations between all three variables. These correlations make it statistically
+difficult to determine which variable is driving observed patterns in melanism: the effect attributed to one
+predictor may partially or wholly reflect the influence of correlated variables. However, our environmental
+Page 10/21
+
+gradient across the conterminus USA captures regions where similar thermal regimes coincide with
+contrasting humidity levels (e.g., humid subtropical Southeast vs. arid Southwest vs. temperate
+Northeast), providing sufficient leverage for our two-variable-at-a-time models to reveal that solar
+radiation and humidity also shape melanism. Solar radiation shows a linear negative effect with
+melanism while humidity shows a markedly non-linear effect. Lighter bodies are more common in
+regions where humidity is low, but intermediate and high humidity yield similarly darker phenotypes,
+suggesting a threshold or saturation effect. Once cuticle darkness (or correlated immune function)
+reaches a level sufficient to protect dragonflies in humid conditions, further darkening appears to provide
+no additional advantage. We note that while the temperature-onset effect holds in both temperature
+models, the apparent humidity-onset relationship in the solar–humidity model is likely an artifact of the
+very collinearity challenges described above, with humidity partially absorbing temperature’s effect when
+temperature is excluded.
+Our finding that phenology onset interacts with temperature, but not solar radiation, has intriguing
+implications for dragonfly thermal ecology. This asymmetry could reflect the lower and less
+physiologically challenging interannual variability in solar radiation seasonality compared to temperature
+seasonality. Solar radiation's dependence on orbital geometry makes it more predictable than
+temperature, which is buffered and destabilized by atmospheric dynamics. Thus, early-emergers at high
+latitudes likely face unpredictable cold snaps, which may be a strong selective pressure for darker
+bodies as a buffer against this thermal uncertainty.
+Beyond its integration with climate effects, later onset also showed a significant direct negative
+association with melanism in all three models: later emerging dragonflies are lighter in color. This
+suggests that effects beyond climate also influence color variation across the flight season, such as
+signaling needs for light or dark color that vary across the season and are largely decoupled from
+climate-based physiological needs. However, our analysis cannot rule out other explanations for this
+climate-decoupled effect, such as unmeasured climate variables, specimen age, or a specific effect of
+pruinosity signaling from Libellulidae, which we discuss in more detail below. In general, the diverging
+patterns of our three climate variables with respect to onset suggest that dragonflies face a mosaic of
+pressures: temperature imposes phenology-dependent selection, solar radiation and humidity exert
+phenology-independent pressures, while phenology itself has a net effect. While it has been tempting to
+only test one or the other ecogeographic rule, this work provides strong support for a multidimensional,
+context dependent framework (4) that critically integrates both the temporal (phenological) and spatial
+(geographic) dimensions of species' thermal niches (32).
+Assemblage-based vs. intraspecific hierarchical modeling
+Our findings complement recent work by Novella-Fernandez et al (2023), who demonstrated seasonal
+and climate-based color variation in dragonfly assemblages across Great Britain, providing the
+inspiration for our study of the conterminus USA. They show both that assemblage color is darker when
+radiation is lower during the year and that assemblages are also darker early and late in the season,
+Page 11/21
+
+suggesting a link between the two. Our approach expands upon this by decoupling phenology from
+annual climate, treating these variables as independent predictors of intraspecific and inter-specific
+melanistic color that could interact. Our multilevel hierarchical modeling structure allows us to answer a
+fundamentally different question: not whether assemblage color tracks seasonal climate fluctuations,
+but whether populations with earlier versus later emergence timing respond differently using color to the
+same annual climate regime, tested across >150 species. Our results suggest that this is indeed the
+case for temperature but not solar radiation, which diverges from results in Novella-Fernandez et al
+(2023), who found that assemblage composition shifts toward darker species on days with lower solar
+radiation. We argue that their solar radiation result, reflecting between-species associations of body
+color with seasonal timing, and our solar radiation result revealing that within species populations
+respond to annual radiation similarly regardless of when they emerge, are compatible and may indicate
+that assemblage-level phenological associations and species-level climate adaptation operate through
+distinct mechanisms. The increased or contextually different climate variation between the USA and
+Great Britain could also be responsible for these differences. While assemblage approaches excel at
+revealing community-level patterns of seasonal niche partitioning, hierarchical frameworks that capture
+intraspecific patterns across a wide range of species that themselves live in multiple different climatic
+conditions are necessary to begin to disentangle the phenology-mediated and context-dependent nature
+of climate-based selection within and ultimately across species.
+Leveraging citizen science and AI for large-scale trait analysis
+Our study demonstrates the power of merging large-scale image data with AI-driven computer vision to
+quantify morphological traits at scale, usable for deriving new insights across space, time, and taxa. The
+most similar work to date involved quantifying bird color from manual ROIs and was intended primarily
+for methods validation through comparison to measured color spectra. Recent advances in foundational
+image detection and segmentation, such as groundedSAM, enable such work by automating the process
+of background removal necessary for color quantification - such segmentation is not feasible to do
+manually for hundreds of thousands of images. Our approach is especially relevant for odonate color
+quantification, allowing us to bypass the limitations of both (a) odonate museum specimen color, where
+degradation of pigments, which is impacted by preservation method, makes it challenging to take dark
+color at face value, and (b) species colors derived from field guide images, which are often used as an
+alternative to museum specimens but lack any intraspecific color information. We leveraged this data to
+address emerging hypotheses about phenology–climate–trait interactions using a dataset spanning
+hundreds of species and much of the multidimensional climatic gradient of the conterminus USA. We
+highlight the usefulness and vigor of keeping a “human-in-the-loop” in our filtering step, in which a
+human observer picks image clusters to keep and drop based on predefined criteria for erroneous
+images and error rates. Other benefits of our filtering approach include reproducibility using clustering
+seeds and not having to train a specialized model. We also note the value of facing bias and noise
+challenges by quantifying specific sources of noise and statistically evaluating their potential for
+systemic confounding of results, as we did via measuring potential lighting and camera noise based on
+the skew of lightness distributions within species.
+Page 12/21
+
+Limitations of color quantification and the challenge of lighting
+Despite its advantages, our approach to analyzing color at scale has multiple avenues for improvement
+and extension. A significant limitation in our models and citizen science data in general is the absence of
+consistent and robust annotations. Of greatest concern is our inability to account for sex when many
+dragonflies exhibit strong sexual dimorphism in color and pattern, resulting in differences in melanism
+coverage. In this scenario it is possible that our results could be driven by one sex alone, especially for
+groups with the strongest dimorphism in melanism, such as Libellula, or species where the sexes have
+different thermoregulatory needs. Such intraspecific color could also be problematic for our lighting bias
+quantification if our skew metric is capturing dimorphism (distributions with multiple peaks) more than it
+does genuine skew. Pruniosity, a UV-reflective waxy coating that appears white or pale-blue, is an
+especially relevant case of dimorphism because it increases across the flight season and is most
+pronounced in males (33). While this temporal increase in lighter color could be thermoregulatory by
+reflecting summer heat (and thus in line with our non-pruinose color data), it could also confound our
+phenology-climate interactions if pruinosity is primarily used for signaling rather than thermoregulation.
+These issues involving color dimorphism could be addressed in future research by either inductively
+identifying species with color morphs by detecting instances where color or pattern features fall into
+clean intraspecific clusters, which is non-laborious but a new methodological challenge. Color-coding for
+sex by hand is simpler and likely accurate, but very laborious for human observers and thus difficult to
+scale. A potential middle ground is developing a machine learning model for classifying dragonfly sex
+using a supervised approach, but creating a model with sufficient and unbiased accuracy across the
+whole suborder would be challenging.
+A related consideration is that darker species-cells showed slightly more positive lightness skew, a
+pattern consistent with our interpretation that skew reflects lighting artifacts: species near the lower
+lightness bound have limited room for negative skew but substantial room for positive skew via
+overexposure. This noise pattern would, on average, shift the darkest dragonflies slightly lighter,
+potentially leading to minor underestimation of effect size in our models but not causing any changes in
+effect direction.
+More generally, we argue that the quality of our filtered images is sufficient for our dark color threshold
+metric, especially given the use of species-grid-cell averages which helps smooth individual image
+variability in lighting, camera, and viewing angle. However, the aforementioned image quality issues still
+persist and could decrease the confidence of our estimates even when it doesn’t shift their direction.
+And while our thresholding is more robust to lighting noise than color means, we could be missing subtle
+but functional variation between dark brown and black colors.
+Finally, while we presented a single method for quantifying lighting (our approach focusing on skew) we
+also tried multiple other strategies which landed on the cutting room floor. This included clustering
+image lightness histograms or backgrounds in an attempt to identify lighting regimes, searching for
+specular highlights indicating overexposure, and leveraging the pixel lightness distributions of images.
+Page 13/21
+
+We broadly suggest that approaches that don’t take into account the similarity in color of images of the
+same species are typically untenable, and resulting metrics pose a risk of being biased themselves.
+Regardless of the approach taken, quantifying lighting noise in images of such immense variety hundreds of species, taken from a variety of angles, by a range of cameras, within a breadth of
+environmental backgrounds - is a monumental challenge that will only become more important to
+address, where possible, in the future. More work, potentially leveraging continued innovation in machine
+learning, is still required to determine whether more consistent and “foolproof” methods exist for
+addressing the perpetual challenge that lighting bias poses to image-based macroecology.
+Future directions
+Given our study is associational, an important next step would be experimental validation of melanism’s
+thermal benefits across phenological gradients—for instance, testing whether dark early-emerging
+individuals reach flight-ready temperatures faster than light individuals under equivalent cold conditions.
+For dragonflies, it also remains unclear whether spatial variation in body melanism is primarily the result
+of plasticity or regional adaptation, and common garden experiments are needed to help determine what
+mechanisms drive climate-associated color. Some research suggests that diel (daily) activity patterns
+could also be relevant in shaping thermal responses in insects, and iNaturalist data may be apt for
+testing whether this could apply to dragonflies (34) (CITE our diel paper once it comes out). As a whole,
+our findings in dragonflies suggest that phenology-mediated relationships between climate and color
+could extend to other ectotherms with variation in their seasonal life cycles, highlighting the need to
+incorporate phenology into trait-based ecology (31,35,36). As climate continued to warm, our results
+imply that organismal responses could unfold across multiple dimensions simultaneously—spatial
+distributions, phenological timing, and trait evolution—with thermal melanism and Gloger's rule operating
+not as competing hypotheses but as context-dependent selective forces contingent on the spatial and
+temporal conditions populations experience. Understanding such responses will be critical and the
+convergence of citizen science, AI, and ecological theory offers a practical path forward for such global
+questions in trait-based ecology.
+
+Declarations
+
+Acknowledgements
+This work was supported by NSF grants 2002489, 2002432, 2002473, 2002457 to J. Abbott, S. Bybee, J.
+Ware and R. Guralnick for the GEODE project (Collaborative Research: Genealogy of Odonata (GEODE):
+Dispersal and color as drivers of 300 million years of global dragonfly evolution). We are grateful to the
+iNaturalist community of observers and identifiers whose collective efforts in documenting dragonfly
+biodiversity made this work possible.
+
+Data Availability Statement
+Page 14/21
+
+The raw GBIF data associated with the images and used for their download is available at DOI:
+[https://doi.org/10.15468/dl.rbnm5e]. Python functions for segmentation, filtering by feature clustering,
+and color thresholding are available on GitHub [https://github.com/jidec/bigcrittercolor]. The R code for
+analysis including sensitivity results and figure generation, as as well as the Python pipeline function
+calls, is also available on GitHub [https://github.com/jidec/dragonfly-body-darkness-na].
+
+References
+1. Clusella Trullas S, Van Wyk JH, Spotila JR. Thermal melanism in ectotherms. J Therm Biol. 2007
+July;32(5):235–45.
+2. San-Jose LM, Roulin A. Toward Understanding the Repeated Occurrence of Associations between
+Melanin-Based Coloration and Multiple Phenotypes. Am Nat. 2018 Aug;192(2):111–30.
+3. Clusella Trullas S, Van Wyk JH, Spotila JR. Thermal melanism in ectotherms. J Therm Biol. 2007
+July;32(5):235–45.
+4. Delhey K. A review of Gloger’s rule, an ecogeographical rule of colour: definitions, interpretations and
+evidence. Biol Rev. 2019 Aug;94(4):1294–316.
+5. González‐Tokman D, Córdoba‐Aguilar A, Dáttilo W, Lira‐Noriega A, Sánchez‐Guillén RA, Villalobos F.
+Insect responses to heat: physiological mechanisms, evolution and ecological implications in a
+warming world. Biol Rev. 2020 June;95(3):802–21.
+6. Kleckova I, Konvicka M, Klecka J. Thermoregulation and microhabitat use in mountain butterflies of
+the genus Erebia: Importance of fine-scale habitat heterogeneity. J Therm Biol. 2014 Apr;41:50–8.
+7. Kemp DJ, Rutowski RL. The Role of Coloration in Mate Choice and Sexual Interactions in Butterflies.
+In: Advances in the Study of Behavior [Internet]. Elsevier; 2011 [cited 2025 Nov 7]. p. 55–92.
+Available from: https://linkinghub.elsevier.com/retrieve/pii/B9780123808967000022
+8. Parkash R, Kalra B, Sharma V. Impact of body melanisation on contrasting levels of desiccation
+resistance in a circumtropical and a generalist Drosophila species. Evol Ecol. 2010 Jan;24(1):207–
+25.
+9. Haque MT, Khan MK, Herberstein ME. Current evidence of climate‐driven colour change in insects
+and its impact on sexual signals. Ecol Evol. 2024 July;14(7):e11623.
+10. Gienapp P, Reed TE, Visser ME. Why climate change will invariably alter selection pressures on
+phenology. Proc R Soc B Biol Sci. 2014 Oct 22;281(1793):20141611.
+11. Fogelström E, Olofsson M, Posledovich D, Wiklund C, Dahlgren JP, Ehrlén J. Plant‐herbivore
+synchrony and selection on plant flowering phenology. Ecology. 2017 Mar;98(3):703–11.
+12. Valdés A, Ehrlén J. Plant–animal interactions mediate climatic effects on selection on flowering
+time. Ecology [Internet]. 2021 Sept [cited 2025 July 25];102(9). Available from:
+https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecy.3466
+13. König S, Krauss J, Classen A, Hof C, Prietzel M, Wagner C, et al. Micro‐ and macroclimate
+interactively shape diversity, niches and traits of Orthoptera communities along elevational
+Page 15/21
+
+gradients. Divers Distrib. 2024 May;30(5):e13810.
+14. Paige KN, Whitham TG. Individual and Population Shifts in Flower Color by Scarlet Gilia: A
+Mechanism for Pollinator Tracking. Science. 1985 Jan 18;227(4684):315–7.
+15. Fernandez RN, Brandl R, Pinkert S, Zeuss D, Hof C. Body colour drives optimal insect phenology via
+thermoregulation [Internet]. In Review; 2023 [cited 2025 June 25]. Available from:
+https://www.researchsquare.com/article/rs-2844783/v1
+16. Suárez‐Tovar CM, Guillermo‐Ferreira R, Cooper IA, Cezário RR, Córdoba‐Aguilar A. Dragon colors: the
+nature and function of Odonata (dragonfly and damselfly) coloration. J Zool. 2022 May;317(1):1–9.
+17. Idec J, Bybee S, Ware J, Abbott J, Ferreira RG, Suvorov A, et al. Interactions between sexual signaling
+and wing size drive ecology and evolution of wing colors in Odonata. Sci Rep [Internet]. 2024 Oct 23
+[cited 2025 July 25];14(1). Available from: https://www.nature.com/articles/s41598-024-73612-4
+18. Acquah‐Lamptey D, Brändle M, Brandl R, Pinkert S. Temperature‐driven color lightness and body size
+variation scale to local assemblages of European Odonata but are modified by propensity for
+dispersal. Ecol Evol. 2020 Aug;10(16):8936–48.
+19. Pinkert S, Brandl R, Zeuss D. Colour lightness of dragonfly assemblages across North America and
+Europe. Ecography. 2017 Sept;40(9):1110–7.
+20. Schultz TD. Why Bluets are Blue, or not: Structure and function of coloration in Enallagma
+damselflies. International Congress of Orthopterology 2019.
+21. Laitly A, Callaghan CT, Delhey K, Cornwell WK. Is color data from citizen science photographs
+reliable for biodiversity research? Ecol Evol. 2021 May;11(9):4071–83.
+22. Ren T, Liu S, Zeng A, Lin J, Li K, Cao H, et al. Grounded SAM: Assembling Open-World Models for
+Diverse Visual Tasks [Internet]. arXiv; 2024 [cited 2025 Aug 1]. Available from:
+http://arxiv.org/abs/2401.14159
+23. Liu S, Zeng Z, Ren T, Li F, Zhang H, Yang J, et al. Grounding DINO: Marrying DINO with Grounded PreTraining for Open-Set Object Detection [Internet]. arXiv; 2024 [cited 2025 Aug 1]. Available from:
+http://arxiv.org/abs/2303.05499
+24. Kirillov A, Mintun E, Ravi N, Mao H, Rolland C, Gustafson L, et al. Segment Anything. In: 2023
+IEEE/CVF International Conference on Computer Vision (ICCV) [Internet]. Paris, France: IEEE; 2023
+[cited 2025 Aug 1]. p. 3992–4003. Available from: https://ieeexplore.ieee.org/document/10378323/
+25. Zhou Z, Siddiquee MMR, Tajbakhsh N, Liang J. UNet++: Redesigning Skip Connections to Exploit
+Multiscale Features in Image Segmentation. IEEE Trans Med Imaging. 2020 June;39(6):1856–67.
+26. Fick SE, Hijmans RJ. WorldClim 2: new 1‐km spatial resolution climate surfaces for global land
+areas. Int J Climatol. 2017 Oct;37(12):4302–15.
+27. Voeten CC. buildmer: Stepwise Elimination and Term Reordering for Mixed-Effects Regression
+[Internet]. 2019 [cited 2025 Aug 8]. p. 2.12. Available from: https://CRAN.Rproject.org/package=buildmer
+
+Page 16/21
+
+28. Dormann CF, Elith J, Bacher S, Buchmann C, Carl G, Carré G, et al. Collinearity: a review of methods
+to deal with it and a simulation study evaluating their performance. Ecography. 2013 Jan;36(1):27–
+46.
+29. Delhey K, Dale J, Valcu M, Kempenaers B. Reconciling ecogeographical rules: rainfall and
+temperature predict global colour variation in the largest bird radiation. Grether G, editor. Ecol Lett.
+2019 Apr;22(4):726–36.
+30. Sformo T, Doak P. Thermal ecology of Interior Alaska dragonflies (Odonata: Anisoptera). Funct Ecol.
+2006 Feb;20(1):114–23.
+31. Novella-Fernandez R, Brandl R, Pinkert S, Zeuss D, Hof C. Seasonal variation in dragonfly
+assemblage colouration suggests a link between thermal melanism and phenology. Nat Commun.
+2023 Dec 19;14(1):8427.
+32. Fredston A, Tingley M, Neate-Clegg M, Evans L, Antão L, Ban N, et al. Reimagining species on the
+move across space and time [Internet]. Ecology and Evolutionary Biology; 2024 [cited 2025 Oct 29].
+Available from: https://ecoevorxiv.org/repository/view/7963/
+33. Futahashi R, Yamahama Y, Kawaguchi M, Mori N, Ishii D, Okude G, et al. Molecular basis of waxbased color change and UV reflection in dragonflies. eLife. 2019 Jan 15;8:e43045.
+34. Schultz TD, Anderson CN, Symes LB. The conspicuousness of colour cues in male pond damselflies
+depends on ambient light and visual system. Anim Behav. 2008 Oct;76(4):1357–64.
+35. Scranton K, Amarasekare P. Predicting phenological shifts in a changing climate. Proc Natl Acad Sci.
+2017 Dec 12;114(50):13212–7.
+36. Zografou K, Swartz MT, Adamidis GC, Tilden VP, McKinney EN, Sewall BJ. Species traits affect
+phenological responses to climate change in a butterfly community. Sci Rep. 2021 Feb 8;11(1):3283.
+
+Figures
+
+Page 17/21
+
+Figure 1
+Predicting climate-melanism-phenology relationships in dragonflies and insects more broadly. (A)
+Conceptual diagram showing how broad spatial climate gradients that covary with latitude– temperature
+and solar radiation (thermal melanism hypothesis, TMH) and humidity (Gloger’s rule)– are translated into
+the proximal climate actually experienced by dragonflies through phenological onset (timing of summer
+activity) and mediating traits (e.g., thermoregulatory strategies, microhabitat selection). Proximal
+climate, together with other potential functions of melanism (e.g., signaling), exerts selection on
+melanistic body coverage.
+(B) Schematic of the latitudinal gradient in the eastern USA and predicted onset-climate interactions.
+Colored states represent low (blue), high (brown), and intermediate latitude (green) regions that differ in
+temperature, solar radiation, and humidity. The inset plot shows the expected onset-latitude interaction; a
+strong negative relationship between melanism and phenological onset occurs at high latitudes, a
+weaker effect occurs under intermediate conditions, and little to no effect occurs in low latitude humid
+regions where Gloger-type pressures may dominate.
+
+Page 18/21
+
+Figure 2
+Schematic overview of our approach to obtaining color traits from iNaturalist visualizing an example
+application on random dragonfly images. Raw citizen science images are segmented using
+groundingSAM and a custom UNet++ wing remover then filtered in a human-in-the-loop step which
+clusters image features and allows the user to select which unwanted image clusters to drop. Dark color
+coverage is quantified by measuring the number of pixels at or below a darkness threshold.
+
+Page 19/21
+
+Figure 3
+Spatial, temporal, and species distribution of species-cell-aggregated data. Histograms centered on each
+250 km grid cell show, within a given cell, how many species occur and in what months these species
+emerge for their main summer activity period. While many cells across the US represent many species,
+well-sampled cells around northeastern, southern, and western cities contain the most species and the
+most sampling effort.
+
+Figure 4
+Quantifying systemic lighting and camera bias using skew of lightness distribution. A: Expected behavior
+of species-cell groups of dragonfly body segments exposed to systemic underexposure or overexposure.
+While systemic under- or overexposure should slightly impact distribution means, it should have a
+stronger impact on skew, which allows decoupling of real biological variation from bias. B: Examples of
+real lightness distributions of negatively skewed, neutral, and positively skewed species-cell groups from
+our data, visualizing how skew is primarily caused by lighting. C: Geographic variation in lighting
+skewness, our proxy for systemic lighting variation, showing only very weak geographic patterning of
+bias.
+Page 20/21
+
+Figure 5
+Climate variables are associated with dark body coverage in USA dragonflies, and best fits are non-linear
+and/or include a mediating effect of phenological onset which also has a net effect. Shown here are
+effect plots for three key linear mixed models (see Methods for details): Model 1: temperature + solar
+radiation; Model 2: temperature + humidity. Each plot shows the effect of a key climate variable on black
+body coverage (pixels with HSL lightness ≤ 0.2) with the other variables held at their means. Temperature
+shows a strong interaction with onset where body color is darker only for dragonflies that onset early in
+cold climates (panel 1, right). Shaded bands are 95% CIs for marginal predictions. For brevity we only
+show the net onset effect from Model 1 which is nearly identical to that of the other models.
+
+Page 21/21
+
+

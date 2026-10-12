@@ -1,0 +1,785 @@
+Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+Juan Li, Chen Xu, Lingxu Jiang, Ying Xiao, Limiao Deng, Zhongzhi Han (2019). IEEE Access. https://doi.org/10.1109/access.2019.2962823. doi:10.1109/access.2019.2962823. Licence: cc-by. Text from pdf.
+
+SPECIAL SECTION ON ADVANCED OPTICAL IMAGING FOR EXTREME ENVIRONMENTS
+Received November 13, 2019, accepted December 10, 2019, date of publication December 30, 2019,
+date of current version January 30, 2020.
+Digital Object Identifier 10.1109/ACCESS.2019.2962823
+
+Detection and Analysis of Behavior Trajectory
+for Sea Cucumbers Based on Deep Learning
+JUAN LI 1 , CHEN XU 1 , LINGXU JIANG
+AND ZHONGZHI HAN 4
+
+2 , YING XIAO
+
+3 , LIMIAO DENG
+
+4,
+
+1 College of Mechanical and Electrical Engineering, Qingdao Agricultural University, Qingdao 266109, China
+2 College of Marine science and engineering, Qingdao Agricultural University, Qingdao 266109, China
+3 Chengyang No.1 High School of Qingdao, Qingdao 266000, China
+4 College of Science and Information, Qingdao Agricultural University, Qingdao 266109, China
+
+Corresponding authors: Juan Li (lijuan291@sina.com) and Zhongzhi Han (hanzhongzhi@qau.edu.cn)
+This work was sponsored in part by the National Natural Science Foundation of China under Grant 41674037, Grant 61374126, and Grant
+31872849, in part by the Shandong Provincial Natural Science Foundation under Grant ZR2017MC041, and in part by the Key Research
+and Development Program Projects of Shandong Province under Grant 2019GNC106037.
+
+ABSTRACT The motion trajectory of sea cucumbers reflects the behavior of sea cucumbers, and the
+behavior of sea cucumbers reflects the status of the feeding and individual health, which provides the important information for the culture, status detection and early disease warning. Different from the traditional
+manual observation and sensor-based automatic detection methods, this paper proposes a detection, location
+and analysis approach of behavior trajectory based on Faster R-CNN for sea cucumbers under the deep
+learning framework. The designed detection system consists of a RGB camera to collect the sea cucumbers’
+images and a corresponding sea cucumber identification software. The experimental results show that the
+proposed approach can accurately detect and locate sea cucumbers. According to the experimental results,
+the following conclusions are drawn: (1) Sea cucumbers have an adaptation time for the new environment.
+When sea cucumbers enter a new environment, the adaptation time is about 30 minutes. Sea cucumbers
+hardly move within 30 minutes and begin to move after about 30 minutes. (2) Sea cucumbers have the
+negative phototaxis and prefers to move in the shadows. (3) Sea cucumbers have a tendency to the edge. They
+like to move along the edge of the aquarium. When the sea cucumber is in the middle of the aquarium, the
+sea cucumber will look for the edge of the aquarium. (4) Sea cucumbers have unidirectional topotaxis. They
+move along the same direction with the initial motion direction. The proposed approach will be extended to
+the detection and behavioral analysis of the other marine organisms in the marine ranching.
+INDEX TERMS Artificial intelligence (AI), animal behavior, deep learning, object detection, faster R-CNN,
+marine ranching, sea cucumber.
+
+I. INTRODUCTION
+
+The motion behavior of sea cucumbers is one of the most
+basic behavioral ecology characteristics, and it is the basis of
+feeding, migration, defense, reproduction and other behaviors
+of sea cucumbers, which reflects the living habit and distribution characteristics of sea cucumbers [1]. The behavioral
+research of sea cucumbers can reveal the response of sea
+cucumber to environmental factors, and can also be used to
+improve the seedling technology of sea cucumbers and the
+The associate editor coordinating the review of this manuscript and
+approving it for publication was Huimin Lu
+18832
+
+.
+
+management pattern of sea cucumber breeding. The behavioral research of sea cucumbers can provide a theoretical basis
+for the development of breeding and fishing facilities [2], [3],
+so that the economic benefits can be improved [4].
+There are some reports about the behavior research of sea
+cucumber. Kashenko et al. researched the vertical motion
+of the larvae of sea cucumber under different salinities by
+observing and recording the behavior of the larvaes of sea
+cucumbers (such as the columnar larvae, large ear larvae,
+middle ear larvae, small ear larvae, gastrula and blastocysts) [5]. By use of the experiments and field observations, Hamel and Young et al. found that the main factors
+
+This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see http://creativecommons.org/licenses/by/4.0/
+
+VOLUME 8, 2020
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+affecting the motion behavior of sea cucumbers’ larvae were
+the searching for shaded attachments and feeding after they
+attach to a certain location [6], [7]. There are many relative
+researches by using the above methods and similar methods,
+but these methods are based on the artificial observation
+to analyze the behavior of sea cucumbers. These analysis
+methods on the basis of the artificial observation are not only
+laborious, but also subject to the subjective influence of the
+observers.
+In order to solve the above problems caused by the artificial
+observation, Fanguang Hu et al. researched the movement
+of sea cucumbers in a certain period of time by use of the
+camera photography and manual measurement for photoes,
+and obtained the influence of food intake on the movement
+of sea cucumber [8]. Similarly, in order to solve the problems
+caused by the artificial observation, Sun Lu et al. injected the
+labels into sea cucumbers to make the research more convenient [9]. However, this approach caused a serious rejection
+reaction of sea cucumbers, and the rejection reaction caused
+that the labels can’t be stored on the surface or in the body
+of sea cucumbers for a long time. So the experimental data
+is incomplete by the labelling approach. In fact, the labels
+that have no effect on sea cucumbers have being developed
+and applied in sea-visiting experiments [10]. However, these
+observation methods not only can fatigue the experimenters
+and affect the health of sea cucumbers, but also can not
+guarantee the integrity of the experimental data.
+In order to solve the above problems, the detection and
+location approaches of sea cucumbers are proposed based
+on computer vision. For example, Hong Lei Wei et al. used
+the Mean-Shif-based target tracking algorithm to detect sea
+cucumbers directly by computer [11]. In recent years, some
+novel sea cucumber detection and location algorithms have
+also been proposed. For example, in order to speed up the
+computer-based location of sea cucumbers, Luzhen Ge et al.
+realized the rapid location of the underwater sea cucumbers
+based on the morphological opening reconstruction and maximum entropy threshold algorithm [12]. Furtherly, in order
+to improve the accuracy of identification and location,
+Xi Qiao et al. used the principal component analysis and
+support vector machine to locate the underwater sea cucumbers [13]. In order to reduce the influence of the disturbance
+of seabed environment on the identification accuracy of sea
+cucumbers, Xi Qiao et al. used the limited adaptive histogram equalization and wavelet transform (CLAHE-WT) to
+identify and locate the sea cucumbers, which improved the
+identification accuracy of sea cucumbers in the presence of
+environmental disturbances [14].
+All of the above methods belong to the traditional detection and location methods for sea cucumbers. These traditional methods are not intelligent, and are time-consuming
+and laborious. In addition, these traditional methods have
+relatively inadequate adaptability. In order to solve these
+problems, we use the Faster R-CNN to detect and locate the
+sea cucumbers. In fact, with the development of the artificial
+intelligence in various fields [15], the machine learning
+VOLUME 8, 2020
+
+method of artificial intelligence have been applied to the
+identification of the marine plankton and fish and so
+on [16]–[23]. However, to the best of our knowledge, we
+have not seen the reports on the identification and location
+of sea cucumbers by use of the artificial intelligence, and
+we have not seen the researches and reports on the behavior
+trajectory analysis of sea cucumbers using the deep learning
+method. For this reason, a RGB camera is used to build an
+experimental platform to continuously make video on the
+motion of sea cucumbers for a long time in this paper. The
+three-dimensional motion trajectory is plot for sea cucumbers’ behavior by the deep learning method, which makes the
+behavior analysis of sea cucumber more intuitive and simple.
+In summary, the main contributions are as follows:
+(1) An identification and location approach is proposed
+based on Faster R-CNN for sea cucumbers, which is convenient and accurate by the camera.
+(2) The behavior analysis by the deep learning is done for
+sea cucumber, which is more intuitive and simpler than the
+traditional methods.
+
+II. MATERIALS AND METHODS
+A. EXPERIMENTAL DEVICE
+
+The apostichopus japonicas, which is a common kind of sea
+cucumbers, are selected as the experimental objects. For convenience, we call the apostichopus japonicas as sea cucumber
+in the hereafter part of the paper. The bodies of sea cucumbers
+can stretch freely, the length of the body is about 8 cm to
+14 cm and its height is about 3 cm. In order to observe
+conveniently, the glass aquarium was chosen as the culture
+tank, and the size of the glass tank was 40 cm × 40 cm ×
+60 cm. In order to observe the behavior of sea cucumbers
+conveniently, the height of water is limited to about 4 cm
+so that the sea cucumber can be just submerged. In order
+to observe the response of sea cucumbers to light, the black
+cloth is used to cover the three sides of the glass aquarium,
+but only a half is covered for the covered symmetrical sides.
+A RGB camera is mounted in the middle of the top of the glass
+aquarium, and the distance is 75cm between the camera and
+the glass aquarium. The device schematic diagram is shown
+in Fig. 1. We use the SONY HDR XR520 camera with a
+resolution of 1440×1080 and a frame rate of 25 FPS.
+Because the long-term intense direct sunlight can affect
+the health of sea cucumbers, the experimental device is put
+indoors to avoid the intense direct sunlight on sea cucumbers.
+The experiments are conducted in the next two days. On the
+first day, the video shooting starts at 8:48 a.m. until 21:48 p.m.
+On the second day, the video shooting lasts from 8:40 a.m. to
+17:30 p.m.
+The used hardware configuration and the corresponding
+operating environment are shown in Table 1 for sea cucumber
+detection. Under the configuration, the sea cucumber detector
+can achieve the detection speed of 3 frames per second.
+Because the sea cucumber moves very slowly relative to the
+18833
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+per second. Two videos are generated according to the two
+experiments, respectively. Finally, the trained Faster R-CNN
+model is used to recognize all images and generate the location coordinate files.
+C. DETECTION AND LOCATION BASED ON FASTER R-CNN
+
+FIGURE 1. Experimental device. (a) Schematic diagram of the
+experimental device, (b) Actual shooting effect from the top.
+
+TABLE 1. Hardware configuration and operating environment.
+
+other marine organisms, the hardware configuration of the
+detection can meet the practical application requirements for
+sea cucumber culture and sea cucumber fishing. With the
+development of computer hardware technology, the faster,
+more economical and more integrated chips may be applied
+to the actual detection of marine organisms, which will bring
+convenience to the sea cucumber fishing and culture.
+
+B. PRETREATMENT
+
+The Faster R-CNN is used to locate the sea cucumbers, which
+requires a lot of pictures to train the Faster R-CNN [24] model
+in advance. Therefore, we use the MATLAB software to cut
+the shot video into frames according to the criterion of 1
+frame in 20 seconds. As we all known, the motion speed of
+sea cucumber is very low. If we choose 1 frame in 10 seconds,
+it will increase the pressure of computer processing data
+although it will improve the accuracy of plotted trajectory,
+but the improvement is not obvious. If we choose 1 frame
+in 30 seconds, it will reduce the accuracy of plotted trajectory,
+so the experimental results are not accurate. So we choose
+1 frame in 20 seconds. After screening, 3810 pictures are
+obtained, and 1700 pictures are selected to mark for sea
+cucumbers with labelimg software.
+In order to locate the sea cucumber conveniently, we cut
+the picture using MATLAB so that the picture is only the size
+of the bottom of the glass aquarium, which not only can easily
+restore the real location of sea cucumber in the aquarium, but
+also can remove the inverted images of sea cucumbers on the
+laterals of the glass aquarium.
+After finishing the clip for the images from the two experiments, the video is synthesized according to 25 frames
+18834
+
+The plot of the behavior trajectory can be divided into five
+steps for sea cucumbers, as shown in Fig. 2. The first step is
+to use video recorder to shoot the motion image of sea cucumbers in the experimental environment. The second step is to
+synthesize video with appropriate resolution by the framecutting and cutting the captured images to the appropriate
+sizes. The third step is to detect the location of sea cucumber
+and extract the key information by using the Faster R-CNN.
+The fourth step is to transform the extracted information from
+the third step into the real coordinates of sea cucumbers. The
+fifth step is to draw the motion trajectory of sea cucumbers.
+In this work, the Faster R-CNN architecture combining
+a RPN [25] (Region Proposal Network) is applied for sea
+cucumber detection. The proposed process is essentially consisted of four parts, shown in Fig. 2 (a): (1) a VGG16 [26]
+for image characteristics extraction; (2) a RPN for generating
+a list of region proposals; (3) a ROI pooling for getting the
+feature graphs with the fixed size; (4) a full connectivity
+layer for regression and tagging. As we all know, the VGG is
+from the Visual Geometry Group at Oxford University, and
+it is an improvement on AlexNet [27] by tweaking the sizes
+of the contractible convolution kernel and the contractible
+pool nucleus. Here, the RPN VGG16 model is chosen. The
+practice has shown the efficiency of the VGG16 backbone
+of the CNN model, which had been pre-trained on ImageNet
+database. We employed 13 convolutional layers, 13 activiation layers and 4 max-pooling layers. The convolution
+calculation process can be expressed as:
+ai,j,d = f (
+
+F−1
+X
+X F−1
+
+(wi+m,j+n,d ∗ xi+m,j+n,d ) + wb )
+
+(1)
+
+m=0 n=0
+
+where, d denotes the depth of the feature map, F denotes
+the width of the convolution kernel; ai,j,d denotes the value
+of the ith row, the jth column and the dth dimension in the
+feature map; xi+m,j+n,d denotes the feature map of the upper
+layer; wi+m,j+n,d denotes a convolution kernel acting on two
+convolutional maps. f (·) is the ReLu activation function, and
+wb is the paranoid term.
+VGG16 uses four pooling layers which are connected
+after the convolutional layer. By the down- sampling for the
+convolved images, the size of the outputs and the number
+of parameters are reduced. Thus, the calculation speed is
+accelerated and the over-fitting problem is overcome. The
+pooling layer can be expressed by the following formula:
+1 X l−1
+a )
+(2)
+aln = f (rnl × 2
+s 2 n
+s
+
+where, aln denotes a pooled feature map, al−1
+denotes a
+n
+feature map before pooling, rnl represents the template weight,
+VOLUME 8, 2020
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+FIGURE 2. Overview of the sea cucumber analysis procedure. (a) Close-up of the Faster R-CNN detector. (b) Close-up of the
+RPN detector.
+
+s represents the sampling template, n represents the nth
+pooling layer, l − 1 and l represent the before and after
+pooling, respectively. According to the weight of the template, the pooling can be divided into the max-pooling, mean
+pooling and random pooling. Here, the max-pooling is used.
+The final feature image is transmitted to the RPN network for
+region proposals.
+Fig. 2 (b) gives a detailed description of the working
+process of the RPN stage. After receiving the feature maps
+extracted by VGG16, RPN performs a 3 × 3 sliding convolution on these images, then two 1 × 1 convolutions are
+connected after the sliding convolution, which outputs in two
+channels. One channel outputs four parameters of the marker
+box, and the other channel outputs the probability that the
+object in the marker box is a sea cucumber.
+The detailed steps of RPN implementation are as follows:
+
+2) REGION PROPOSAL
+
+The feature map is connected with two full connection layers.
+The first full connection layer outputs 18 values, i.e., the
+9 anchor boxes correspond to this anchor. Each box has two
+values which represent the probabilities of containing and not
+containing the target, respectively. The second full connection
+layer outputs 36 values, and each anchor box corresponds to
+4 values which represent the length and width of ground truth
+and the predicted x and y coordinate values, respectively.
+3) BOUNDING BOX REGRESSION
+
+For the predicted anchor box which contains the target in the
+step 2). A large number of candidate boxes are generated by
+panning and zooming the box with four location regression
+values, which is named as the bounding box regression process. The boundary box regression process can be expressed
+as:
+
+1) FEATURE EXTRACTION AND DIMENSION REDUCTION
+
+The feature map from VGG16 output is convoluted with
+3 × 3 sliding window, then the 512 × 368 × 276 feature map
+is obtained. That is to say, each pixel has a 512-dimensional
+feature vector on the feature map of 368 × 276. Then,
+the dimension is reduced by 1 × 1 full convolution, which
+reduces the calculation parameters and accelerates the speed
+of operation.
+VOLUME 8, 2020
+
+
+Ĝx = 1x + 1
+
+0
+
+0
+
+
+0 P
+
+(3)
+
+
+Ĝy = 1y + 0
+
+1
+
+0
+
+
+0 P
+
+(4)
+
+
+
+Ĝw = 0 0 1 0 PSw
+
+(5)
+
+
+
+Ĝh = 0 0 0 1 PSh
+
+(6)
+18835
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+
+T
+where, P denotes a proposed box; P = Px Py Pw Ph ,
+Px , Py , Pw and Ph represent the coordinates (x, y), the width
+and height (w, h) of the proposed box corresponding to P,
+respectively. Formula (3) and (4) represent the X-axis and
+Y-axis translation of the boundary box, respectively. The
+panning variables are expressed as (1x, 1y), in which, 1x =
+Pw dx (P), 1y = Ph dy (P). Formula (5) and (6) represent the
+zooming, i.e., the zooming is expressed as (Sw , Sh ), Sw =
+exp (dw (P)), Sh = exp (dh (P)). G represents the four paramheters of the region
+i proposal, which can be expressed as G =
+Ĝx Ĝy Ĝw Ĝh , in which, Ĝx , Ĝy , Ĝw and Ĝh represent the
+coordinates (x, y) and the width and height (w, h) of the corresponding ground truth, respectively. dx (P), dy (P), dw (P) and
+dh (P) represent the transformation for the proposed box P,
+which is the four parameters to be learned in the bounding box
+regression, and the objective value of these four parameters
+is tx , ty , tw and th . The calculation formula is as follows:
+(Gx − Px )
+Pw
+(Gy − Gy )
+ty =
+Ph
+Gw
+tw = log(
+)
+Pw
+Gh
+th = log( )
+Ph
+tx =
+
+(7)
+(8)
+
+If the number of iterations is too large, the over-fitting will
+produce, thus the detection rate will reduce. After many
+experiments, we finally chose 8500 iterations.
+We evaluate the generated model with the following
+indexes:
+TP + TN
+P0 + N
+TP
+P=
+TP + FP
+TP
+R=
+TP + FN
+A=
+
+(11)
+(12)
+(13)
+
+where, A, P and R represent the accuracy, precision and
+recall, respectively. P0 are N represent the total number
+of the negative samples and positive samples, respectively.
+TP and FP represent the number of the positive samples to
+be correctly and incorrectly judged, respectively. TN and FN
+represent the number of negative samples to be correctly and
+incorrectly judged, respectively. In this paper, the experiment
+result shows: A = 99.93%, P = 100% and R = 99.86%.
+We give examples of successful and unsuccessful detections,
+shown in Table 2.
+
+(9)
+TABLE 2. Examples of test case.
+
+(10)
+
+4) NON-MAXIMUM SUPPRESSION
+
+In order to speed up the Faster R-CNN training and testing,
+the region proposals generated in the above RPN process are
+mapped to the feature maps generated by VGG through the
+region of interest. The feature maps are pooled as the same
+size of feature maps by max-pooling, then the pooled feature
+maps are input to the full connection layer. The detailed
+implementation steps of the ROI-Pooling are divided into
+three steps:
+(a) Map the generated tags to the feature map from the
+VGG16 output.
+(b) Divide the regions that mapped to the feature map
+according to the size of the output. Assume that the output
+size is 4, then the region that mapped to the feature map is
+divided into four parts.
+(c) Max-pooling is done for every part that generated by
+the above steps.
+On the basis of the above max-pooling, the ROI-Pooling
+output feature maps with the same size are input into a series
+of full connection layers. The last two full-connection layers
+have two outputs. one output is used to generate the probability of the final recognition accuracy of the sea cucumber, and
+the other output of the final tag box is used to generate four
+information (x, y, w, h).
+III. TRAINING AND TESTING
+
+We trained and tested the collected data set according to 7:3.
+After 8500 iterations, the model file is generated. If the number of iterations is too small, the accuracy will be reduced.
+18836
+
+IV. RESULTS
+
+Because of the wide range of pictures captured by the camera,
+the coordinates of sea cucumbers may have bigger error if the
+original pictures are directly used. So we cut the pictures to
+only keep the range within the bottom of the glass aquarium.
+The first experimental video is cut to 806 × 601, so every
+pixel represented 0.66 mm × 0.49 mm. The second experimental video is cut to 786 × 601, so every pixel represents
+0.66 mm × 0.51 mm. Then the cut photos are synthesized into
+two videos and the Faster R-CNN is used to detect sea cucumbers. The coordinate point of sea cucumber is the midpoint of
+the ground box. The motion trajectories of sea cucumber are
+recorded in the two experiments, shown in Fig. 3.
+Remark 1: In order to visualize the motion trajectories
+of sea cucumbers with time, we only consider the twodimensional location information with time but not consider
+the depth information, which does not affect the application
+VOLUME 8, 2020
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+FIGURE 3. Motion trajectory of sea cucumber in two experiments. (a) Motion trajectory of the first experiment, (b) Motion
+trajectory of the second experiment.
+
+FIGURE 4. Two-dimensional motion trajectory of the first experiment. (a) Trajectory diagram of plane motion; (b) unilateral motion
+trajectory with time; (c) heat map of plane motion.
+
+of the proposed approach under considering the depth information. That is to say, the universality of sea cucumber locate
+method is not affected by using two-dimensional or threedimensional location coordinates.
+In order to plot the actual motion trajectory of sea cucumbers, the identified original coordinate information needs to
+be restored to the actual coordinate of sea cucumbers. Table 3
+is the result of using the trained model to identify the pictures
+to be detected. If no sea cucumber is detected or multiple
+sea cucumbers are detected, the number of output coordinate
+points is not equal to 1, then this data is treated as an invalid
+data (i.e., detection failure). The statistics of the location
+information is obtained by using the detected bounding box
+center in GT, which is also the reason why we choose Fast
+R-CNN, that is, the RPN of Fast R-CNN structure can make
+the detected bounding box more accurate. From Table 3, it can
+be seen that a certain number of coordinate points are lost in
+each experiment, that is, the detector did not recognize the
+VOLUME 8, 2020
+
+sea cucumber correctly at some coordinate points. However,
+these missing points do not affect the experimental results.
+TABLE 3. Statistics of location information.
+
+In order to verify the effect of ambient light on sea cucumbers, the black cloth was used to cover a half of the lateral
+sides of the glass aquarium. Two experiments were conducted. In the first experiment, the data is obtained about the
+motion of sea cucumber, shown in Fig. 4. Fig. 4(a) is the plane
+motion trajectory of the sea cucumber in the first experiment.
+Fig. 4(b) is a unilateral motion trajectory with time. Fig. 4 (c)
+is a heat map of the plane motion. In Fig. 4(c), the black line
+
+18837
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+FIGURE 5. Two-dimensional motion trajectory of the second experiment. (a) Trajectory diagram of plane motion; (b) unilateral trajectory
+with time; (c) heat map of plane motion.
+
+is the demarcation line between the high and low illumination
+and the right side of the black line is a low illumination region.
+As can be seen from Fig. 4 (a), the sea cucumber prefers
+to move in the edge region of the glass aquarium, i.e., the sea
+cucumber has a tendency to edge compared with the middle
+region of the aquarium. As can be seen from Fig. 4 (b),
+the sea cucumber hardly moves in the first 25 minutes of
+entering the aquarium, and begins to move after 25 minutes.
+This phenomenon shows that the sea cucumber has an adaptation time about 30 minutes when the sea cucumber enters a
+new environment, which has been verified by the later many
+experiments. During the adaptation period, the sea cucumber
+hardly moves, and the sea cucumber begins to move after
+the adaptation time. The adaptation time has been verified by
+many experiments in the later experiments. Fig. 4 (c) shows
+that the sea cucumber spends the most of their first day in low
+light region, while the sea cucumber spends less time to stay
+in high light region.
+According to the statistics from the first experiment,
+the time accounts for 93.88% that the sea cucumber stays
+in the low light region, while only 6.12% in the high light
+region, as shown in Table 4. From Table 4, a conclusion can
+be drawn that sea cucumbers have negative phototaxis and
+sea cucumbers don’t like to move in the high light zone.
+By comparing our research results with those of the other
+experts [2], our conclusions are consistent with theirs.
+
+edge of the glass aquarium, which further illustrates that sea
+cucumbers have a tendency to staying at the edge. In addition,
+the sea cucumber has been in a state of motion in this experiment, and the movement is much larger than that in the first
+experiment. The statistics of the two experiments are shown
+in Fig 6. We speculate that this is the foraging behavior of
+sea cucumbers, which has been verified by the many facts
+from the experiment in the subsequent period. From Fig. 5 (a),
+it can also be seen that the sea cucumber enters the high
+light region for foraging when the sea cucumber is hungry.
+As can be seen from Fig. 5 (c), the duration time is almost the
+same that the sea cucumber stays in the high and low light
+region, and the duration time accounts for 52.68% that the
+sea cucumber stays in the low light region, which shows that
+the sea cucumber may be hungry when it frequently goes to
+the high light region. By comparing our research results with
+those of the other experts [2], our conclusions are consistent
+with theirs.
+
+TABLE 4. Time statistics of sea cucumber in high light and low light
+regions.
+
+FIGURE 6. Movement of sea cucumber in two experiments.
+
+V. DISCUSSION
+
+In the second experiment, the same sea cucumber is used
+with one in the first experiment. The motion trajectory of
+the sea cucumber is shown in Fig. 5. As can be seen from
+Fig. 5 (a), the sea cucumber has been moving around the
+18838
+
+In this paper, the proposed detection and recognition
+approach can accurately detect and locate the sea cucumber
+based on Faster R-CNN, but there is still a certain shortcoming. For Example, when the sea cucumber is in the corner
+of the glass aquarium and the body is on the two different
+adjacent sides of the aquarium, one sea cucumber may be
+detected as two sea cucumbers. When this situation happens,
+VOLUME 8, 2020
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+the detection failure rate is about 0.165%. Whereas, this does
+not affect the significance and application of the proposed
+approach. Especially in some real applications such as the
+farming of the marine ranch farming, this situation is a small
+probability event and rarely occurs; even if this situation
+occurs, it does not affect the practical application from the
+perspective of application.
+In the second experiment, we found that the sea cucumber
+had been moving counterclockwise, as shown in Fig. 5 (a).
+As can be seen from Fig. 5 (a), the sea cucumber has the
+characteristic of unidirectional topotaxis.
+The deep learning is used in the identification and trajectory plot of sea cucumbers, which not only brings convenience to the research of sea cucumbers, but also brings new
+ideas for the marine culture and production of sea cucumbers.
+When some diseases occur for sea cucumbers, we can know
+the occurrence of disease in time by the analysis of the
+behavior trajectory. For example, the skin ulcer disease is one
+of the common diseases for sea cucumbers, which is a severe
+infectious disease among sea cucumbers. It often spreads
+rapidly among sea cucumbers and results in the death of a
+large number of sea cucumbers. Once the skin ulcer breaks
+out and spreads, it will cause great economic losses to the
+culture of the sea cucumber. The sea cucumbers suffering
+from the skin ulcer disease can effectively be detected by
+using the proposed approach based on deep learning, so that
+the disease can be effectively curbed before spreading.
+VI. CONCLUSION
+
+In this paper, an approach to detecting and locating sea
+cucumbers is researched based on deep learning and the
+motion trajectories of sea cucumbers are plotted. The experimental results show that the proposed approach has high
+accuracy in the identification and location of sea cucumbers.
+According to the analysis of the trajectories of sea cucumbers,
+the following conclusions are drawn: sea cucumbers have an
+about half-hour adaptation time to a new environment; sea
+cucumbers have a negative phototaxis; sea cucumbers have
+a tendency to the edge; sea cucumbers have topotaxis. The
+identification and motion behavior of sea cucumbers are automatically obtained by using the deep learning approach with
+the computer. The proposed approach provides a new monitoring pattern for the culture of sea cucumbers, which can
+effectively improve the culture efficiency of sea cucumbers.
+More importantly, the proposed approach can be extended
+to the monitoring of the other aquaculture and the animal
+farming on land, which can liberate the labor force and
+improve the production efficiency and economic benefits of
+aquaculture.
+REFERENCES
+[1] M. Huntley and M. Zhou, ‘‘Influence of animals on turbulence in the sea,’’
+Mar. Ecol. Prog. Ser., vol. 273, no. 1, pp. 65–79, 2004.
+[2] M. Yamaguchi, R. Masuda, and Y. Yamashita, ‘‘Phototaxis, thigmotaxis, geotaxis, and response to turbulence of sea cucumber Apostichopus japonicus juveniles,’’ Fisheries Sci., vol. 84, no. 1, pp. 33–39,
+Jan. 2018.
+VOLUME 8, 2020
+
+[3] B. L. Gianasi, J.-F. Hamel, and A. Mercier, ‘‘Morphometric and
+behavioural changes in the early life stages of the sea cucumber Cucumaria
+frondosa,’’ Aquaculture, vol. 490, pp. 5–18, Mar. 2018.
+[4] R. Hartati, A. Trianto, and Widianingsih, ‘‘Habitat characteristic of two
+selected locations for sea cucumber ranching purposes,’’ IOP Conf. Ser.,
+Earth Environ. Sci., vol. 55, Feb. 2017, Art. no. 012041.
+[5] S. D. Kashenko, ‘‘Acclimation of the sea cucumber apostichopus japonicus
+to decreased salinity at the blastula and gastrula stages: Its effect on the
+desalination resistance of larvae at subsequent stages of development,’’
+Russian J. Mar. Biol., vol. 26, no. 6, pp. 422–426, 2000.
+[6] J.-F. Hamel and A. Mercier, ‘‘Early development, settlement, growth, and
+spatial distribution of the sea cucumber cucumaria frondosa (echinodermata: Holothuroidea),’’ Can. J. Fisheries Aquatic Sci., vol. 53, no. 2,
+pp. 253–271, Feb. 1996.
+[7] C. M. Young and F.-S. Chia, ‘‘Factors controlling spatial distribution of
+the sea cucumber Psolus chitonoides: Settling and post-settling behavior,’’
+Mar. Biol., vol. 69, no. 2, pp. 195–205, 1982.
+[8] F. G. Hu, X. Gao, Z. G. Wang, M. Z. Li, W. J. Zhou, D. P. Ma, S. B. Li,
+and Y. Zhang, ‘‘Study on dormancy law of sea cucumber,’’ Fisheries
+Modernization, vol. 38, no. 2, pp. 37–40, 2011.
+[9] L. Sun, T.-L. Qiu, Q. Xu, H. Liu, C.-G. Lin, and H.-S. Yang, ‘‘Evaluation
+of different methods for external tagging of Apostichopus japonicas,’’ Mar.
+Sci., no. 7, pp. 1–6, 2013.
+[10] T. Fujino, H. Sawada, H. Mitamura, R. Masuda, N. Arai, and Y. Yamashita,
+‘‘Single spaghetti tagging as a high-retention marking method for Japanese
+common sea cucumber Apostichopus japonicus,’’ Fisheries Sci., vol. 83,
+no. 3, pp. 367–372, May 2017.
+[11] H. Wei, D. Peng, X. Zhu, and D. Wu, ‘‘A target tracking algorithm for
+vision based sea cucumber capture,’’ in Proc. 2nd IEEE Int. Conf. Comput.
+Commun. (ICCC), Oct. 2016, pp. 401–404.
+[12] L. Ge, G. Gao, and Z. Yang, ‘‘Study on underwater sea cucumber rapid
+locating based on morphological opening reconstruction and max–entropy
+threshold algorithm,’’ Int. J. Patt. Recogn. Artif. Intell., vol. 32, no. 7,
+Jul. 2018, Art. no. 1850022.
+[13] X. Qiao, J. Bao, H. Zhang, F. Wan, and D. Li, ‘‘FvUnderwater sea cucumber identification based on principal component analysis and support
+vector machine,’’ Measurement, vol. 133, pp. 444–455, Feb. 2019.
+[14] X. Qiao, J. Bao, H. Zhang, L. Zeng, and D. Li, ‘‘Underwater image quality
+enhancement of sea cucumbers based on improved histogram equalization
+and wavelet transform,’’ Inf. Process. Agricult., vol. 4, no. 3, pp. 206–213,
+Sep. 2017.
+[15] H. Lu, Y. Li, S. Mu, D. Wang, H. Kim, and S. Serikawa, ‘‘Motor anomaly
+detection for unmanned aerial vehicles using reinforcement learning,’’
+IEEE Internet Things J., vol. 5, no. 4, pp. 2315–2322, Aug. 2018.
+[16] H. Zheng, R. Wang, Z. Yu, N. Wang, Z. Gu, and B. Zheng, ‘‘Automatic
+plankton image classification combining multiple view features via multiple kernel learning,’’ BMC Bioinf., vol. 18, no. S16, p. 570, Dec. 2017.
+[17] N. Wang, J. Yu, B. Yang, H. Zheng, and B. Zheng, ‘‘Vision-based in situ
+monitoring of plankton size spectra via a convolutional neural network,’’
+IEEE J. Oceanic Eng., to be published.
+[18] C. Qiu, S. Zhang, C. Wang, Z. Yu, H. Zheng, and B. Zheng, ‘‘Improving transfer learning and squeeze- and-excitation networks for small–
+scale fine–grained fish image classification,’’ IEEE Access, vol. 6,
+pp. 78503–78512, 2018.
+[19] N. Tang, F. Zhou, Z. Gu, H. Zheng, Z. Yu, and B. Zheng, ‘‘Unsupervised
+pixel-wise classification for Chaetoceros image segmentation,’’ Neurocomputing, vol. 318, pp. 261–270, Nov. 2018.
+[20] Q. Xuan, Z. Chen, Y. Liu, H. Huang, G. Bao, and D. Zhang, ‘‘Multiview
+generative adversarial network and its application in pearl classification,’’
+IEEE Trans. Ind. Electron., vol. 66, no. 10, pp. 8244–8252, Oct. 2019.
+[21] H. Lu, Y. Li, T. Uemura, H. Kim, and S. Serikawa, ‘‘Low illumination
+underwater light field images reconstruction using deep convolutional
+neural networks,’’ Future Gener. Comput. Syst., vol. 82, pp. 142–148,
+May 2018.
+[22] C. Guisande, A. Manjarrés-Hernández, P. Pelayo-Villamil,
+C. Granado-Lorencio, I. Riveiro, A. Acuña, E. Prieto-Piraquive,
+E. Janeiro, J. Matías, C. Patti, B. Patti, S. Mazzola, S. Jiménez, V. Duque,
+and F. Salmerón, ‘‘IPez: An expert system for the taxonomic identification
+of fishes based on machine learning techniques,’’ Fisheries Res., vol. 102,
+no. 3, pp. 240–247, Mar. 2010.
+[23] H. Robotham, J. Castillo, P. Bosch, and J. Perez-Kallens, ‘‘A comparison
+of multi-class support vector machine and classification tree methods
+for hydroacoustic classification of fish-schools in Chile,’’ Fisheries Res.,
+vol. 111, no. 3, pp. 170–176, Nov. 2011.
+18839
+
+J. Li et al.: Detection and Analysis of Behavior Trajectory for Sea Cucumbers Based on Deep Learning
+
+[24] S. Ren, K. He, R. Girshick, and J. Sun, ‘‘Faster R–CNN: Towards real–
+time object detection with region proposal networks,’’ IEEE Trans. Pattern
+Anal. Mach. Intell., vol. 39, no. 6, pp. 1137–1149, Jun. 2017.
+[25] R. Girshick, J. Donahue, T. Darrell, and J. Malik, ‘‘Rich feature hierarchies
+for accurate object detection and semantic segmentation,’’ in Proc. IEEE
+Conf. Comput. Vis. Pattern Recognit., Jun. 2014, pp. 580–587.
+[26] K. Simonyan and A. Zisserman, ‘‘Very deep convolutional networks for
+large-scale image recognition,’’ Sep. 2014, arXiv:1409.1556. [Online].
+Available: https://arxiv.org/abs/1409.1556
+[27] A. Krizhevsky, I. Sutskever, and G. Hinton, ‘‘ImageNet classification with
+deep convolutional neural networks,’’ in Proc. NIPS. New York, NY, USA:
+Curran Associates, 2012.
+
+JUAN LI received the Ph.D. degree from the Ocean
+University of China, in 2008. She was a Senior
+Visiting Scholar with Tsinghua University and
+with Alberta University, in 2010 and 2015,
+respectively. She is currently a Professor with
+Qingdao Agricultural University. Her research
+interests include artificial intelligent, image processing, fault diagnosis, and fault-tolerant control.
+
+CHEN XU is currently pursuing the degree with
+the College of Mechanical and Electrical Engineering, Qingdao Agricultural University. He has
+been a member of the Innovation Team, 602 Laboratory of Qingdao Agricultural University. He has
+received many rewards on the AI and intelligent
+control. His research interests include artificial
+intelligence and computer vision.
+
+18840
+
+LINGXU JIANG received the master‘s degree
+from the Ocean University of China, in 2004. He
+is currently an Associate Professor with Qingdao Agricultural University. His research interests
+include ecosystem aquaculture, effects of environment factors on the crustacean, and sea cucumber.
+
+YING XIAO is currently pursuing the degree
+with the Chengyang No.1 Senior High School of
+Qingdao. Her research interests include the artificial intelligence and automatic control.
+
+LIMIAO DENG received the Ph.D. degree from
+the China University of Petroleum, in 2018. She is
+currently an Associate Professor with the College
+of Science and Information, Qingdao Agricultural
+University, China. Her research interests include
+computer vision and machine learning.
+
+ZHONGZHI HAN received the Ph.D. degree
+from the China University of Petroleum, in 2016.
+He was a Senior Visiting Scholar with Chiba
+University, in 2019. He is currently a Professor with Qingdao Agricultural University. His
+research interest includes artificial intelligent.
+
+VOLUME 8, 2020
+
+

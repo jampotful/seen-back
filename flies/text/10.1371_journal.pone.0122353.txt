@@ -1,0 +1,883 @@
+Heritable CRISPR/Cas9-Mediated Genome Editing in the Yellow Fever Mosquito, Aedes aegypti
+Shengzhang Dong, Jing‐Yi Lin, Nicole L. Held, Rollie J. Clem, A. Lorena Passarelli, Alexander W. E. Franz (2015). PLoS ONE. https://doi.org/10.1371/journal.pone.0122353. doi:10.1371/journal.pone.0122353. Licence: cc-by. Text from pdf.
+
+RESEARCH ARTICLE
+
+Heritable CRISPR/Cas9-Mediated Genome
+Editing in the Yellow Fever Mosquito, Aedes
+aegypti
+Shengzhang Dong1, Jingyi Lin1, Nicole L. Held1, Rollie J. Clem2, A. Lorena Passarelli2,
+Alexander W. E. Franz1*
+1 Department of Veterinary Pathobiology, University of Missouri, Columbia, Missouri, United States of
+America, 2 Division of Biology, Kansas State University, Manhattan, Kansas, United States of America
+* franza@missouri.edu
+
+Abstract
+
+OPEN ACCESS
+Citation: Dong S, Lin J, Held NL, Clem RJ, Passarelli
+AL, Franz AWE (2015) Heritable CRISPR/
+Cas9-Mediated Genome Editing in the Yellow Fever
+Mosquito, Aedes aegypti. PLoS ONE 10(3):
+e0122353. doi:10.1371/journal.pone.0122353
+Academic Editor: Ya-Ping Tang, Louisiana State
+University Health Sciences Center, UNITED STATES
+Received: November 10, 2014
+Accepted: February 12, 2015
+Published: March 27, 2015
+Copyright: © 2015 Dong et al. This is an open
+access article distributed under the terms of the
+Creative Commons Attribution License, which permits
+unrestricted use, distribution, and reproduction in any
+medium, provided the original author and source are
+credited.
+
+In vivo targeted gene disruption is a powerful tool to study gene function. Thus far, two tools
+for genome editing in Aedes aegypti have been applied, zinc-finger nucleases (ZFN) and
+transcription activator-like effector nucleases (TALEN). As a promising alternative to ZFN
+and TALEN, which are difficult to produce and validate using standard molecular biological
+techniques, the clustered regularly interspaced short palindromic repeats/CRISPRassociated sequence 9 (CRISPR/Cas9) system has recently been discovered as a "do-ityourself" genome editing tool. Here, we describe the use of CRISPR/Cas9 in the mosquito
+vector, Aedes aegypti. In a transgenic mosquito line expressing both Dsred and enhanced
+cyan fluorescent protein (ECFP) from the eye tissue-specific 3xP3 promoter in separated
+but tightly linked expression cassettes, we targeted the ECFP nucleotide sequence for disruption. When supplying the Cas9 enzyme and two sgRNAs targeting different regions of
+the ECFP gene as in vitro transcribed mRNAs for germline transformation, we recovered
+four different G1 pools (5.5% knockout efficiency) where individuals still expressed DsRed
+but no longer ECFP. PCR amplification, cloning, and sequencing of PCR amplicons revealed indels in the ECFP target gene ranging from 2-27 nucleotides. These results show
+for the first time that CRISPR/Cas9 mediated gene editing is achievable in Ae. aegypti, paving the way for further functional genomics related studies in this mosquito species.
+
+Data Availability Statement: All relevant data are
+within the paper and its Supporting Information files.
+Funding: This work was funded by NIAID-NIH grant
+R01AI091972. The funder had no role in study
+design, data collection and analysis, decision to
+publish, or preparation of the manuscript.
+Competing Interests: The authors confirm that coauthor Alexander Franz is a PLOS ONE Editorial
+Board member. This does not alter the authors'
+adherence to PLOS ONE Editorial policies
+and criteria.
+
+Introduction
+The yellow fever mosquito, Aedes aegypti, is the principal vector for important arboviruses
+such as yellow fever, dengue, and chikungunya viruses, which cause significant mortality and
+morbidity among humans living in tropical regions of the world [1, 2]. Major research efforts
+aim at understanding the genetics of vector competence for arboviruses in Ae. aegypti to explore novel ways to interrupt viral disease cycles [3]. Investigating the genetics of vector competence relies on the study of gene function. An important aspect when studying gene function
+is the ability to stably disrupt a gene-of-interest in a target-specific manner. Several targeted
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+1 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+genome editing tools such as homologous recombination, zinc finger nucleases (ZFN) and
+transcription activator-like effector nucleases (TALEN) have been extensively used for the
+model insects Drosophila melanogaster and/or Bombyx mori [4–8]. Successful applications of
+ZFN and TALEN have been also described for targeted genome editing in mosquitoes [9–13].
+Both systems involve specifically tailored DNA binding proteins to introduce double-strand
+breaks at the chosen target site of the host genome, leading to gene-knockout. ZFN and especially TALEN are highly effective; however, a major disadvantage is the fact that it is timeconsuming and complicated to engineer and validate target gene-specific ZFN or TALEN tools
+in a standard laboratory. Consequently, most researchers purchase ZFN or TALEN reagents as
+custom-made tools from specialized, commercial sources.
+A promising novel alternative is the clustered regularly interspaced short palindromic
+repeats/CRISPR-associated sequence 9 (CRISPR/Cas9) system, which has recently been discovered as a true "do-it-yourself" genome editing tool. Similar to ZFN and TALEN, the CRISPR/
+Cas9 system has been shown to be an efficient tool for genome editing in model organisms
+such as nematode, Drosophila, zebrafish, rat, mouse, and also in B. mori [14–21]. CRISPR/Cas9
+was discovered as a prokaryotic immunity-like system in bacteria and archaea [22–27]. Type II
+CRISPR/Cas9 uses a CRISPR RNA (crRNA) and a transactivating RNA (tracrRNA) to guide
+the Cas9 DNA endonuclease to induce site-specific dsDNA cleavage [28, 29]. Target specificity
+of Cas9 is encoded by a 20-nucleotide (nt) spacer sequence in the crRNA, which pairs with the
+tracrRNA to direct the endonuclease to the complementary target site in the genome [28]. In
+Drosophila, a two-component system has been shown to be effective, in which crRNA and
+tracrRNA are fused into a single RNA called synthetic guide RNA (sgRNA). An essential requirement for efficient binding of the Cas9/sgRNA complex to the genomic target DNA is the
+presence in the target sequence of a short protospacer adjacent motif (PAM) adjacent to the 20
+nt spacer sequence. The PAM typically consists of the 3 nt motif NGG (with N being A, C, G,
+or T) [29]. Thus, CRISPR/Cas9 based genome editing tools can be easily designed and generated, since a sgRNA with 20 nt target sequence identity adjacent to a 3 nt PAM is all that is needed for recognition of the target DNA sequence. Cas9/sgRNA-mediated double-strand breakage
+of the target DNA is recognized and repaired by the cellular DNA repair machinery via nonhomologous end joining (NHEJ) typically resulting in short nucleotide deletions or insertions
+(indels), which disrupt the target gene.
+As a proof-of-principle, we describe for the first time the use of CRISPR/Cas9 to stably disrupt a gene-of-interest in the mosquito vector, Ae. aegypti. We tested different CRISPR/Cas9
+constructs with the aim to disrupt the coding sequence of the enhanced cyan fluorescent
+protein (ECFP) gene in a transgenic mosquito line, which expresses both ECFP and Dsred
+from the eye-specific 3xP3 promoter. Successful disruption of the marker gene demonstrated
+that the CRISPR/Cas9 system is a functional tool for targeted gene disruption in Ae. aegypti, although we found that the overall efficiency of the system appears to be lower in this insect species than what has been reported for Drosophila or B. mori.
+
+Materials and Methods
+Mosquitoes
+Ae. aegypti recipients for CRISPR/Cas9-mediated gene disruption were hybrids resulting from
+a cross between the Higgs white eye strain (HWE) [30] and transgenic line PubB2 P61 [31, 32].
+PubB2 P61 mosquitoes harbor two piggyBac transposable element (TE) integrations. Each
+copy of the piggyBac transgene contains two separate fluorescent eye marker expression cassettes, DsRed and ECFP, each under control of the 3xP3 promoter (Fig. 1). Both eye marker expression cassettes are physically closely linked based on PhiC31-mediated recombination, in
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+2 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Fig 1. Schematic representation of the transgene in Ae. aegypti line PUbB2 P61 and the ECFP gene depicting sg35 and sg13 target sites. A single
+copy of the transgene is shown. The protospacer adjacent motifs (PAM) are indicated in red. Abbreviations: pB left, pB right = piggyBac transposon left or
+right arm; svA = SV40 polyA signal; ECFP = cyan fluorescent protein gene; 3xP3 = eye-specific synthetic promoter; attR, attL = right or left PhiC31
+attachment site; DsRed = red fluorescent protein gene; v5B2 = Flockhouse virus B2 gene; PUb = Ae. aegypti poly-ubiquitin promoter.
+doi:10.1371/journal.pone.0122353.g001
+
+which ECFP originates from docking strain attP26 and DsRed from the attB-site containing
+donor plasmid. To maintain the transgenic line in a double-hemizygous state, inbred PUbB2
+P61 mosquitoes were outcrossed to the non-transgenic HWE recipient strain.
+
+Plasmid constructs
+Plasmid phsp70-Cas9 containing the coding sequence (CDS) of Cas9 was obtained from
+Addgene (https://www.addgene.org/45945) [33]. Two different Cas9 expression vectors were
+derived from this plasmid: PUb/Cas9/SV40A and hsp70/Cas9/SV40A. To create PUb/Cas9/
+SV40A, the Cas9 CDS of phsp70-Cas9 was inserted into pSLfa1180fa-PUb/SV40A [32] using
+restriction enzymes NotI and NheI. Therefore the Cas9 CDS was PCR-amplified using a
+forward primer containing the NotI site and a reverse primer containing the NheI site. PCR
+amplification was conducted using AccuPrime proof-read polymerase (Invitrogen, Life Technologies, Carlsbad CA). Plasmid hsp70/Cas9/SV40A was generated by exchanging the hsp70
+3’UTR for the SV40A polyadenylation sequence using restriction enzymes XbaI and BamHI.
+As described above, matching restriction sites were added to the cDNA insert via proof-read
+polymerase PCR.
+DrU6.sgRNA constructs were based on pU6-BbsI-chiRNA, which was obtained from
+Addgene (https://www.addgene.org/45946). ECFP-targeting, guide sequence containing cDNAs
+were inserted into plasmid DrU6.sgRNA via BbsI restriction sites. For each guide sequence, a
+separate Ae. aegypti U6 promoter (AeU6).sgRNA construct was generated as a custom-made
+cDNA molecule (IDT-DNA, Coralville, IA), which was then inserted into pSLfa11280fa using
+SacI and SmaI. The nucleotide sequence of the Ae. aegypti U6 promoter (AeU6) is: 5’-GAAT
+GAAATCGCCCATCGAGTTGATACGTCCATCCATCGCTAGAACCGCGTTCGCTGTA
+GAAGACTATATAAGAGCAGAGGCAAGAGTAGTGAAAT-3’ [34].
+ECFP-targeting guide sequences were based on the ECFP CDS (GenBank accession:
+KJ081792.1) and identified using the ZiFiT Targeter Version 4.2 design tool (http://zifit.
+partners.org/ZiFiT). Suggested guide sequences were validated for unique target specificity by
+blasting against the Ae. aegypti genome (AaegL.3.2.) (https://www.vectorbase.org/organisms/
+aedes-aegypti). Two guide RNA sequences were chosen: sg13 5’-GCGCGATCACATGG
+TCCTGC-3’ and sg35 5’-GCACTGCACGCCCCAGGTCA-3’. sg13 targeted ECFP between
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+3 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+nucleotide positions 645–664 of the sense strand (with TGG as PAM motif) and sg35 targeted
+ECFP between nucleotide positions 213–194 of the antisense strand (with GGG as PAM motif)
+(Fig. 1; S1A Fig).
+
+Expressing Cas9 and chimeric RNAs from in vitro transcribed RNAs
+For Cas9 mRNA in vitro transcription, plasmid MLM3613 was obtained from Addgene
+(https://www.addgene.org/42251) and was linearized using PmeI. Linearized plasmid was in
+vitro transcribed using mMESSAGE mMACHINE T7 ULTRA kit (Ambion, Life Technologies)
+following the protocol of the manufacturer. After transcription, a poly(A) tail was added to the
+3’ end of the capped mRNA using the Poly(A) Tailing Kit (Ambion, Life Technologies). The
+Cas9 mRNA was purified with MEGAclear Transcription Clean-Up Kit (Ambion, Life Technologies). As template for guide RNA expression from the T7 RNA promoter, plasmid DR274
+was obtained from Addgene (https://www.addgene.org/42250). ECFP targeting guide sequences 13sgRNA and 35sgRNA were inserted into DR274 as described above. sgRNAs were
+in vitro transcribed from the DraI-digested sgRNA expression vectors using the MAXIscript
+T7 in vitro Transcription Kit (Ambion, Life Technologies). Resulting sgRNAs were purified
+with MEGAclear Transcription Clean-Up Kit (Ambion, Life Technologies).
+
+Microinjections, outcrossing, pooling of mosquitoes
+Purified Cas9 mRNA and each sgRNA, 13sgRNA and 35sgRNA, were mixed to final concentrations of 1 μg/μl and 50 ng/μl respectively, prior to injection into PUbB2 P61 x HWE hybrid
+embryos. Cas9-expressing plasmid DNA and sgRNA encoding plasmids were injected at final
+concentrations of 500 ng/μl and 150 ng/μl, respectively. The following combinations were set
+up: RNA: T7/Cas9+T7 sg13+T7 sg35; DNA1: PUb/Cas9+Ae(des)U6 sg13+AeU6 sg35; DNA2:
+hsp70/Cas9+AeU6 sg13+AeU6 sg35; DNA3: PUb/Cas9+Dm(Drosophila)U6 sg13+DmU6
+sg35; DNA4: hsp70/Cas9+DmU6 sg13+DmU6 sg35 (Fig. 2).
+Plasmid DNAs were diluted in 2X microinjection buffer [5 mM KCl, 0.1 mM NaH2PO4
+(pH 6.8)] [35]. Embryo microinjections were performed as previously described [32, 35, 36].
+Five days post-injection, eggs were hatched and survival rates recorded (Table 1). Adult G0
+were visually screened for loss of eye-specific ECFP expression under a Leica M10 stereomicroscope equipped with a fluorescent light source and specific filter sets. Surviving G0 males were
+singly outcrossed to 15 HWE females and surviving G0 females were pooled in groups of 4 to
+14 and outcrossed to three HWE males each. Following a 2-day mating period, crosses based
+on G0 males were pooled in groups of two to three in order to reduce the number of required
+bloodfeeds. A few of the RNA-injected G0 individuals were not pooled following outcrossing to
+HWE males; instead they were maintained as families (a single injected G0 founder x HWE).
+Mosquitoes were artificially bloodfed with defibrinated sheep blood (Colorado Serum Co, Denver, CO) as described [31, 36]. At least two eggliners were produced from each pool/family.
+
+DNA Sequencing of genomic regions targeted by CRISPR/Cas9
+Each target locus of the ECFP gene was PCR-amplified from genomic DNA of individual
+adults (G0) or pools of 5 to 20 G1 or G2 larvae. PCR products were either sequenced directly or
+cloned into a plasmid vector using the pCR4-TOPO TA cloning kit (Invitrogen, Life Technologies) prior to sequencing. From each Escherichia coli transformation, at least 10 colonies were
+picked and prepared for sequencing at the University of Missouri DNA Core. Mutated alleles
+were identified by sequence comparison with the original ECFP nucleotide sequence.
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+4 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Fig 2. Flowchart showing generation and identification of ECFP knockout mutants based on transgenic PUbB2 P61 x HWE hybrids. Five groups of
+Cas9/sgRNA constructs were each micro-injected into ~500–700 double-hemizygous embryos (G0). All surviving G0 individuals were outcrossed to HWE
+and pooled. All G1 individuals of each pool were screened for the ECFP knockout phenotype. Pools containing individuals with ECFP knockout phenotype
+were again outcrossed to HWE to generate G2. DNA was extracted and sequenced from G0 adults and from G1 and G2 larvae showing ECFP knockout
+phenotype and also from groups of G1 larvae, which did not show a mutant phenotype.
+doi:10.1371/journal.pone.0122353.g002
+
+Results
+Embryo microinjection and survival rates
+Numbers of microinjected eggs for each CRISPR/Cas9 construct ranged from 529 (DNA3) to
+685 (DNA1) (Table 1). Survival rates were lowest for DNA2 (4.5%) and highest for RNA
+(11.7%). With the exception of the RNA-injected eggs where only 1/3 of the survivors were female, sex ratios were balanced in the other treatments. Only three out of 23 RNA injected mosquito pools and one family (based on a single female G0 founder) produced G1 individuals
+showing ECFP knockout. Assuming that in each of the four pools only a single G0 individual
+was mutant (see below), we estimated a target gene knockout efficiency of 5.5%.
+
+Visual screening for ECFP knockout phenotypes
+None of the RNA- or DNA-injected G0 survivors showed loss of eye-specific ECFP expression.
+Three pools of the RNA-injected mosquitoes, P41, P49, P55, and one family, F82, generated G1
+Table 1. Transformation data of PUbB2 P61 x HWE embryos injected with different CRISPR/Cas9 constructs
+RNA
+
+DNA1
+
+DNA2
+
+DNA3
+
+DNA4
+
+No. of embryos injected
+
+626
+
+685
+
+602
+
+529
+
+605
+
+No. of G0 survivors
+
+27♀, 46♂
+
+36♀, 38♂
+
+14♀, 13♂
+
+39♀, 35♂
+
+34♀, 36♂
+
+No. of pools
+
+7♀, 16♂
+
+5♀, 16♂
+
+1♀, 5♂
+
+4♀, 11♂
+
+3♀, 12♂
+
+No. of G1 KO pools
+
+2♀, 2♂
+
+0
+
+0
+
+0
+
+0
+
+Estimated KO efﬁciency
+
+5.5%
+
+KO: knockout.
+doi:10.1371/journal.pone.0122353.t001
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+5 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Fig 3. Eye marker expression in PUbB2 P61 x HWE mosquitoes before and after CRISPR/Cas9 mediated ECFP knockout. Eyes were viewed under a
+fluorescent stereo microscope (Leica M205) equipped with DsRed (A, C, E) or ECFP (B, D, F) specific filter sets. (A, B) Eyes of a PUbB2 P61 x HWE female.
+(C, D) Eyes of a (PUbB2 P61 x HWE) P41 female (G1) originating from an embryo which had been injected with in vitro transcribed RNAs encoding Cas9 and
+two ECFP targeting sgRNAs, sg13 and sg35. (E, F) Eyes of a HWE female. (G) Eyes of the HWE female under bright field.
+doi:10.1371/journal.pone.0122353.g003
+
+larvae amongst which eye-specific ECFP expression was no longer visible, even though these
+larvae strongly expressed DsRed. These phenotypes were maintained in eyes of adults (Fig. 3).
+However, we did not detect any G1 larvae with ECFP knockout phenotype among those pools
+injected with DNA1, DNA2, DNA3, or DNA4.
+The presence of an ECFP knockout phenotype in double-hemizygous G1 and its absence
+among double- hemizygous G0 individuals supports the conclusion that in G0 only one ECFP
+allele was disrupted by CRISPR/Cas9. This conclusion is further supported by the segregation
+patterns among G1 of pools P41, P49, P55, and family F82, which all contained individuals
+with ECFP phenotypes (Table 2).
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+6 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Table 2. Proportion of different eye marker phenotypes among G1 and G2 larvae of pools P41, P49, P55, and family F82.
+Phenotype
+
+Pool 41 3♂×40 HWE♀
+
+Pool 49 3♂×40 HWE♀
+
+Pool 55 9♀×21 HWE♂
+
+Family 82 1♀×3 HWE♂
+
+G1 progeny resulting from 1. bloodfeed of G0 hybrids*
+Dsred positive, ECFP positive
+
+190
+
+13
+
+131
+
+28
+
+DsRed positive, ECFP negative
+
+70 (13%)
+
+158 (46%)
+
+0
+
+3 (5%)
+
+DsRed negative, ECFP negative
+
+294 (53%)
+
+169 (50%)
+
+161 (55%)
+
+35 (53%)
+
+Total
+
+554
+
+340
+
+292
+
+66
+
+G1 progeny resulting from 2. bloodfeed of G0 hybrids*
+Dsred positive, ECFP positive
+
+170
+
+11
+
+247
+
+33
+
+DsRed positive, ECFP negative
+
+42 (10%)
+
+89 (52%)
+
+37 (8%)
+
+9 (17%)
+
+DsRed negative, ECFP negative
+
+190 (47%)
+
+72 (42%)
+
+175 (38%)
+
+20 (38%)
+
+Total
+
+402
+
+172
+
+459
+
+52
+
+Dsred positive, ECFP positive
+
+0
+
+0
+
+0
+
+0
+
+DsRed positive, ECFP negative
+
+284 (50%)
+
+325 (47%)
+
+290 (49%)
+
+54 (50%)
+
+Outcrossed G2 progeny**
+
+DsRed negative, ECFP negative
+
+286 (50%)
+
+363 (53%)
+
+296 (51%)
+
+53 (50%)
+
+Total
+
+570
+
+688
+
+586
+
+107
+
+*PUBB2 P61 x HWE embryos (G0) were injected with CRISPR/Cas9 RNA constructs.
+**G2 mutants x HWE.
+doi:10.1371/journal.pone.0122353.t002
+
+Around 53% of the G1 PUbB2 P61 x HWE hybrids arising from the first parental bloodfeeding were non-transgenic, which follows the expected segregation pattern considering the transgene-associated fluorescent eye markers being dominant traits. Interestingly, the average
+proportion of non-transgenic progeny arising from the second parental bloodfeeding was only
+42%. Proportions of G1 larvae showing knockout of ECFP varied between 5 and 46% (from
+first parental bloodmeal) and 8 and 52% (from second parental bloodmeal). Extreme observations were F82 with only a single female G0 founder and P49 based on three male G0 founders,
+in which <10% and >90%, respectively, of the transgenic G1 individuals had an ECFP knockout phenotype. Similar to the other pools, all G1 siblings of P49 showed a uniform indel variant.
+Thus, it is unlikely that more than one male founder of P49 carried the ECFP
+knockout genotype.
+Outcrossing of the G1 mutants to HWE showed that the ECFP knockout mutations were
+stably inherited in the following generation. The proportion of individuals exhibiting the mutant phenotype amounted to around 50% in outcrossed G2 of P41, P49, P55, and F82 (Table 2).
+
+Genotypic analysis of ECFP knockout mosquitoes
+In pools P41, P49, and P55, CRISPR/Cas9 mediated targeting of the genome by sg35 resulted
+in a deletion of two nucleotides within the CDS of ECFP leading to a frameshift mutation within the gene (Fig. 4). In P49 and P55, both having an identical indel variant, two nucleotides
+were deleted 3 nt downstream of the PAM sequence, which is considered the typical cleavage
+site of Cas9 [28]. In P41, the deletion occurred 1 nt downstream of the PAM sequence. In F82,
+a 27 nt deletion adjacent to the PAM sequence resulting from sg35-mediated CRISPR/Cas9 genome targeting translated into the loss of the peptide LTWGVQCFS from the predicted ECFP
+protein. In the highly similar enhanced green fluorescent protein, the tripeptide T66Y67G68
+(LTYGVQCFS) is essential for forming the p-hydro-xybenzylidene-imidazolinone (HBI) chromophore within the central helix that runs through the center of the capped beta-barrel structure of the protein [37]. In general, cleavage patterns and size ranges of CRISPR/
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+7 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Fig 4. CRISPR/Cas9 mediated indels in the ECFP gene of PUBB2 P61 x HWE hybrids. (A) Sanger-sequencing trace data showing the regions of the
+indels in mutants P41, P49, P55, and F82. Arrows indicate the cleavage site; the sequence of guide RNA sg35 is shadowed. (B) Nucleotide sequence
+alignments showing indels. The ECFP nucleotide sequence is shown at the top with the sg35 target site in bold-type and the PAM sequence in red. Deletions
+are shown as dashes. cDNA fragments spanning each target site were PCR-amplified using genomic DNA from pooled larvae as template and cloned into
+the pCR4-TOPO TA vector. At least 10 cDNA clones per PCR amplicon were sequenced.
+doi:10.1371/journal.pone.0122353.g004
+
+Cas9-mediated indels in the genomic DNA of Ae. aegypti were not fundamentally different
+from those observed in the genomes of Drosophila or B. mori [38–42]. In the outcrossed G2,
+the same indels were detected for P41, P49, P55, and F82 indicating that those knockout mutations were stable and heritable (data not shown).
+Interestingly, only sg35 but not sg13 enabled ECFP-specific dsDNA cleavage even though
+both sgRNAs were selected using the same ZiFiT algorithm. Previously, it had been revealed
+that the efficiency of a sgRNA to bind to its target correlated with the GC content in its sequence 6 nt adjacent to its PAM [16]. However, both sgRNAs, sg13 and sg35, had the same
+level of GC content (67%) in their respective 6 nt sequences near the PAM. For sg35 no sequence similarity was detected in the genome of Ae. aegypti whereas for sg13, 14 of 20 nucleotides of the 5’ region of the sgRNA were identical to the CDS of gene AAEL007920 (though an
+adjacent PAM motif was absent in the gene sequence) (S1B Fig).
+Sequencing of DNA fragments spanning the sgRNA target sites from 15 (out of 23) G0 individuals originating from the RNA injected embryos (Table 1) did not result in the detection of
+indels. Also, no indels were revealed when sequencing DNAs from G1 larvae (~20 larvae/sample)
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+8 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+of 13 different pools including P41, P49, P55, and F82, which originated from RNA injected G0
+embryos and expressed both eye markers (Fig. 2).
+
+Discussion
+We targeted the eye marker gene ECFP in a double-hemizygous transgenic Ae. aegypti hybrid,
+PUbB2 P61 x HWE, expressing both DsRed and ECFP from the eye-specific 3xP3 promoter.
+Successful knockout of ECFP was predicted to result in individuals that express only the DsRed
+marker. Two sgRNA sequences were designed with the intention to cleave the ECFP gene simultaneously at two sites, separated by 470 bp, to obtain a truncated ECFP gene in the mutated
+progeny. According to reports from the literature, we tested several construct designs to identify a procedure that yielded maximal efficiency in Ae. aegypti. Using the two-plasmid component system for germline-specific expression of Cas9 (non-codon optimized for Ae. aegypti)
+and sgRNAs, construct designs included the AePUb or Drosophila hsp70 promoters driving expression of Cas9 and AeU6 or Drosophila U6 promoters for sgRNA expression. Alternatively,
+we transformed embryos with separate in vitro transcribed mRNAs encoding Cas9 and the two
+sgRNAs [15, 38]. Interestingly, only the in vitro transcribed mRNAs resulted in the generation
+of ECFP knockout mutants. We think that the failure of the plasmid DNA constructs to generate ECFP knockout mutants could be due to two major reasons. First, the plasmid DNA systems may have had too low efficiencies in Ae. aegypti compared to B. mori or Drosophila so
+that a number of 500–700 injected embryos was generally too low to recover mutants. Alternatively, the promoters of the constructs may not have driven high enough expression of the
+CRISPR/Cas9 system in Ae. aegypti. However, in conjunction with applications other than
+CRISPR/Cas9, both Drosophila hsp70 and AePUb promoters have been shown to efficiently
+drive gene expression in Ae. aegypti embryos [9, 35, 36], making this an unlikely possibility.
+We only tested a single AeU6 promoter in our assay, which had been characterized and successfully used in an earlier study [34]. It is possible that this promoter might not be the optimal
+choice for the CRISPR/Cas9 system. Likewise, the Drosophila U6 promoter might not be functional in the mosquito germline.
+In Drosophila, the yellow gene was knocked out with a germline mutation rate of up to 6%
+when using a two-plasmid component system in which Cas9 was expressed from the Drosophila hsp70 promoter and a single sgRNA from Drosophila U6 [33, 39]. The germline mutation
+rate based on yellow mosaic phenotypes observed among the injected G0 increased to 66%
+(n = 52) when 2 sgRNAs were used to delete the coding sequence of yellow instead of a single
+sgRNA disrupting the gene at a single locus. Germline mutation rates in B. mori ranged between 17 and 30% when using plasmid DNAs to express Cas9 and sgRNAs from B. morispecific promoters. The variation in mutation efficiency was strongly affected by the sequence
+of each of the three different sgRNAs, which were used to disrupt the BmKu70 gene [40]. Another report using the CRISPR/Cas9 system in B. mori showed a mutation frequency of 15% in
+the kynu-2 locus of B. mori embryos injected with plasmids expressing Cas9 and a single
+sgRNA [41].
+When using in vitro transcribed mRNAs of Cas9 and sgRNAs, we obtained a germline mutation rate of 5.5%. This is in stark contrast to observations with Drosophila where knockout
+mutation rates reached 86% in G0 when expressing Cas9 and sgRNAs from in vitro transcribed
+mRNAs [15]. Bassett and colleagues [15] showed that reducing Cas9 mRNA concentrations in
+their embryo injection experiments while keeping sgRNA concentrations (50 ng/μl) constant,
+reduced the proportion of G0 Drosophila with mosaic phenotype from 86% (1 μg/μl Cas9
+RNA) to 10% (0.13 μg/μl Cas9 RNA). In our experimental set-up with Ae. aegypti, we applied
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+9 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Cas9 mRNA and sgRNAs at concentrations of 1 μg/μl and 50 ng/μl, respectively, which in Drosophila led to a maximal mutation rate.
+Contrary to the findings described above, we were not able to discover ECFP mosaic phenotypes among the G0 of Ae. aegypti. However, outcrossing to the non-transgenic HWE recipient
+strain resulted in G1 that produced the ECFP knockout phenotype (Table 2, Fig. 3). As stated
+above, we think that only one of two ECFP gene alleles was disrupted among G0 individuals of
+pools P41, P49, P55, and family F82. Thus, the dominant intact ECFP allele would produce an
+intact fluorescent blue-eye phenotype, which then would overshadow any mosaic expression
+pattern in the same tissue. We maintained the CRISPR/Cas9 recipient mosquito strain, PUbB2
+P61 x HWE, in a hemizygous state because we were aware that this transgenic line harbors two
+transgene copies and we could not predict how efficiently the genome editing tool would target
+both alleles simultaneously instead of one. However, due to segregation of the G1, we could easily identify ECFP knockout mutants, which were stably maintained in outcrossed G2.
+We designed two sgRNAs, 470 bp apart from each other, to delete a major portion of the
+ECFP gene. Surprisingly, sgRNA13 did not seem to bind to its target site to promote dsDNA
+breakage followed by NHEJ. Both sgRNAs were designed to recognize the same target gene,
+had similar GC contents and secondary structures and were selected by the same ZiFiT algorithm. Thus, it is unclear why sg13 was not functional. Other researchers have also noticed that
+various sgRNAs can differ substantially in their dsDNA cleavage efficiency [15, 16, 33]. Wei
+and colleagues [42] speculated that potential secondary structures or sequence motifs in
+sgRNA sequences may account for different target site recognition efficiencies, but these are
+still not well understood. Our observation could be an indication that sgRNAs may function
+less efficiently in the complex genomic environment of Ae. aegypti than in the condensed genome structure of Drosophila. Our results also indicate that more than one or two sgRNA sequences for each DNA target in Ae. aegypti may need to be tested. Thus, a multiplex gene
+targeting approach as successfully applied in Drosophila and B. mori to target several genes simultaneously or to delete larger fragments of genomic DNA may be more difficult to design
+for Ae. aegypti [17, 33, 41].
+
+Conclusions and Future Directions
+We tested the efficacy of the CRISPR/Cas9 system in a transgenic mosquito line expressing two
+different eye markers, which allowed us to take advantage of a simple visual screening system
+for knockout mutants (presence of DsRed expression in absence of ECFP expression). Use of a
+rapid visual screening system was of great importance, because it was not foreseeable whether
+our CRISPR/Cas9 constructs would be functional in Ae. aegypti and if so, how efficient they
+would be. Since our transgenic line had two transgene copies, it complicated the screening process because mosaic-type mutants could not be identified among the G0 as may have been more
+likely in presence of a single transgene copy. Regardless, line PUbB2 P61 was the most suitable
+mosquito line we had available for this proof-of-principle study. Our study clearly demonstrates
+that CRISPR/Cas9-mediated gene editing is achievable in Ae. aegypti. Several observations suggest that the anticipated ease-of-use of the CRISPR/Cas9 system may be less efficient in this insect species: i) only one of two sgRNAs designed to target the same marker gene was functional
+indicating that it might be more difficult to predict successful sgRNA designs for use in Ae.
+aegypti; ii) only the in vitro transcribed mRNA Cas9 and sgRNA constructs, and not those
+based on expression plasmids enabled genome targeting and dsDNA cleavage in Ae. aegypti; iii)
+when using in vitro transcribed Cas9 mRNA and sgRNAs, mutation rates in Ae. aegypti were
+substantially lower than those observed in Drosophila and B. mori. However, it needs to be emphasized that these observations need further validation in subsequent experiments.
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+10 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+Future refinements aimed at enhancing Cas9/sgRNA expression levels and efficiencies
+could include the generation of transgenic driver strains of Ae. aegypti that would express the
+Cas9 gene in the germline from the Ae-nanos promoter, similar to proven strategies for Drosophila [16, 43–45]. Further, bicistronic expression of Cas9 and sgRNA from the same plasmid
+vector [46], or development of a tissue-specific CRISPR/Cas9-mediated conditional mutagenesis system by combining CRISPR/Cas9 with the UAS-Gal4 system [47] could potentially improve the efficacy of the CRISPR/Cas9 system in Ae. aegypti.
+An important and novel application of the CRISPR/Cas9 system in Ae. aegypti would be the
+targeted disruption of an endogenous gene-of-interest in combination with knock-in of a selectable marker gene via homologous recombination. In view of such an experiment, we are
+now confident that in vitro transcribed mRNA-based CRISPR/Cas9 constructs are functional
+in Ae. aegypti.
+
+Supporting Information
+S1 Fig. (A) Sequence alignments of guide RNAs sg35 (blue/bold) and sg13 (burgundy/bold)
+with the nucleotide sequences of the fluorescent reporter genes ECFP, EGFP (enhanced green
+fluorescent protein), and DsRed. Nucleotide mismatches are shown in red. (B) Alignment of
+guide RNA sg13 with endogenous gene AAEL007920 of Ae. aegypti. Location where a hypothetical PAM sequence should be present is highlighted in blue. Nucleotide mismatches are
+shown in red.
+(TIF)
+
+Acknowledgments
+The authors thank Dr. Anthony James, UC Irvine, for helpful discussions.
+
+Author Contributions
+Conceived and designed the experiments: SD JL NLH AWEF. Performed the experiments: SD
+JL NLH AWEF. Analyzed the data: SD JL NLH AWEF RJC ALP. Contributed reagents/
+materials/analysis tools: SD NLH AWEF. Wrote the paper: SD AWEF RJC ALP.
+
+References
+1.
+
+Weaver SC, Barrett AD. Transmission cycles, host range, evolution and emergence of arboviral disease. Nat Rev Microbiol. 2004; 2: 789–801. PMID: 15378043
+
+2.
+
+Weaver SC, Reisen WK. Present and future arboviral threats. Antiviral Res. 2010; 85: 328–345. doi:
+10.1016/j.antiviral.2009.10.008 PMID: 19857523
+
+3.
+
+Franz AW, Clem RJ, Passarelli AL. Novel genetic and molecular tools for the investigation and control
+of dengue virus transmission by mosquitoes. Curr Trop Med Rep. 2014; 1(1): 21–31. PMID: 24693489
+
+4.
+
+Rong YS, Golic KG. A targeted gene knockout in Drosophila. Genetics. 2001; 157(3): 1307–1312.
+PMID: 11238415
+
+5.
+
+Bozas A, Beumer KJ, Trautman JK, Carroll D. Genetic analysis of zinc-finger nuclease-induced gene
+targeting in Drosophila. Genetics. 2009; 182(3): 641–651. doi: 10.1534/genetics.109.101329 PMID:
+19380480
+
+6.
+
+Takasu Y, Kobayashi I, Beumer K, Uchino K, Sezutsu H, Sajwan S, et al. Targeted mutagenesis in
+the silkworm Bombyx mori using zinc finger nuclease mRNA injection. Insect Biochem Mol Biol. 2010;
+40(10): 759–765. doi: 10.1016/j.ibmb.2010.07.012 PMID: 20692340
+
+7.
+
+Liu J, Li C, Yu Z, Huang P, Wu H, Wei C, et al. Efficient and specific modifications of the Drosophila genome by means of an easy TALEN strategy. J Genet Genomics. 2012; 39(5): 209–215. doi: 10.1016/j.
+jgg.2012.04.003 PMID: 22624882
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+11 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+8.
+
+Takasu Y, Sajwan S, Daimon T, Osanai-Futahashi M, Uchino K, Sezutsu H, et al. Efficient TALEN construction for Bombyx mori gene targeting. PLoS One. 2013; 8(9): e73458. doi: 10.1371/journal.pone.
+0073458 PMID: 24058473
+
+9.
+
+Aryan A, Anderson MA, Myles KM, Adelman ZN. TALEN-based gene disruption in the dengue vector
+Aedes aegypti. PLoS One. 2013; 8(3): e60082. doi: 10.1371/journal.pone.0060082 PMID: 23555893
+
+10.
+
+Smidler AL, Terenzi O, Soichot J, Levashina EA, Marois E. Targeted mutagenesis in the malaria mosquito using TALE nucleases. PLoS One. 2013; 8(8): e74511. doi: 10.1371/journal.pone.0074511
+PMID: 23977401
+
+11.
+
+DeGennaro M, McBride CS, Seeholzer L, Nakagawa T, Dennis EJ, Goldman C, et al. orco mutant
+mosquitoes lose strong preference for humans and are not repelled by volatile DEET. Nature. 2013;
+498(7455): 487–491. doi: 10.1038/nature12206 PMID: 23719379
+
+12.
+
+Liesch J, Bellani LL, Vosshall LB. Functional and genetic characterization of neuropeptide Y-like receptors in Aedes aegypti. PLoS Negl Trop Dis. 2013; 7(10): e2486. doi: 10.1371/journal.pntd.0002486
+PMID: 24130914
+
+13.
+
+McMeniman CJ, Corfas RA, Matthews BJ, Ritchie SA, Vosshall LB. Multimodal integration of carbon dioxide and other sensory cues drives mosquito attraction to humans. Cell. 2014; 156(5): 1060–1071.
+doi: 10.1016/j.cell.2013.12.044 PMID: 24581501
+
+14.
+
+Dickinson DJ, Ward JD, Reiner DJ, Goldstein B. Engineering the Caenorhabditis elegans genome
+using Cas9-triggered homologous recombination. Nat Methods. 2013; 10(10): 1028–1034. doi: 10.
+1038/nmeth.2641 PMID: 23995389
+
+15.
+
+Bassett AR, Tibbit C, Ponting CP, Liu JL. Highly efficient targeted mutagenesis of Drosophila with the
+CRISPR/Cas9 system. Cell Rep. 2013; 4(1): 220–228. doi: 10.1016/j.celrep.2013.06.020 PMID:
+23827738
+
+16.
+
+Ren X, Sun J, Housden BE, Hu Y, Roesel C, Lin S, et al. Optimized gene editing technology for Drosophila melanogaster using germ line-specific Cas9. Proc Natl Acad Sci U S A. 2013; 110(47): 19012–19017.
+doi: 10.1073/pnas.1318481110 PMID: 24191015
+
+17.
+
+Yu Z, Ren M, Wang Z, Zhang B, Rong YS, Jiao R, et al. Highly efficient genome modifications mediated
+by CRISPR/Cas9 in Drosophila. Genetics. 2013; 195(1): 289–291. doi: 10.1534/genetics.113.153825
+PMID: 23833182
+
+18.
+
+Chang N, Sun C, Gao L, Zhu D, Xu X, Zhu X, et al. Genome editing with RNA-guided Cas9 nuclease in
+zebrafish embryos. Cell Res. 2013; 23(4): 465–472. doi: 10.1038/cr.2013.45 PMID: 23528705
+
+19.
+
+Hwang WY, Fu Y, Reyon D, Maeder ML, Tsai SQ, Sander JD, et al. Efficient genome editing in zebrafish using a CRISPR-Cas system. Nat Biotechnol. 2013; 31(3): 227–229. doi: 10.1038/nbt.2501 PMID:
+23360964
+
+20.
+
+Shao Y, Guan Y, Wang L, Qiu Z, Liu M, Chen Y, et al. CRISPR/Cas-mediated genome editing in the rat
+via direct injection of one-cell embryos. Nat Protoc. 2014; 9(10): 2493–2512. doi: 10.1038/nprot.2014.
+171 PMID: 25255092
+
+21.
+
+Xue W, Chen S, Yin H, Tammela T, Papagiannakopoulos T, Joshi NS, et al. CRISPR-mediated direct
+mutation of cancer genes in the mouse liver. Nature. 2014; 514(7522): 380–384. doi: 10.1038/
+nature13589 PMID: 25119044
+
+22.
+
+Barrangou R, Fremaux C, Deveau H, Richards M, Boyaval P, Moineau S, et al. CRISPR provides acquired resistance against viruses in prokaryotes. Science. 2007; 315: 1709–1712. PMID: 17379808
+
+23.
+
+Brouns SJ, Jore MM, Lundgren M, Westra ER, Slijkhuis RJ, Snijders AP, et al. Small CRISPR RNAs
+guide antiviral defense in prokaryotes. Science. 2008; 321: 960–964. doi: 10.1126/science.1159689
+PMID: 18703739
+
+24.
+
+Held NL, Whitaker RJ Viral biogeography revealed by signatures in Sulfolobus islandicus genomes.
+Environ Microbiol. 2009; 11: 457–466. doi: 10.1111/j.1462-2920.2008.01784.x PMID: 19196276
+
+25.
+
+Ishino Y, Shinagawa H, Makino K, Amemura M, Nakata A. Nucleotide sequence of the iap gene, responsible for alkaline phosphatase isozyme conversion in Escherichia coli, and identification of the
+gene product. J Bacteriol. 1987; 169: 5429–5433. PMID: 3316184
+
+26.
+
+Mojica FJM, Juez G, Rodríguez-Valera F. Transcription at different salinities of Haloferax mediterranei
+sequences adjacent to partially modified PstI sites. Mol Microbiol. 1993; 9: 613–621. PMID: 8412707
+
+27.
+
+Mojica FJM, Díez-Villaseñor C, Soria E, Juez G. Biological significance of a family of regularly spaced
+repeats in the genomes of Archaea, Bacteria and mitochondria. Mol Microbiol. 2000; 36: 244–246.
+PMID: 10760181
+
+28.
+
+Jinek M, Chylinski K, Fonfara I, Hauer M, Doudna JA, Charpentier EA. Programmable dual-RNAguided DNA endonuclease in adaptive bacterial immunity. Science. 2012; 337(6096): 816–821. doi:
+10.1126/science.1225829 PMID: 22745249
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+12 / 13
+
+Heritable CRISPR/Cas9-Mediated Genome Editing in Aedes aegypti
+
+29.
+
+Sternberg SH, Redding S, Jinek M, Greene EC, Doudna JA. DNA interrogation by the CRISPR RNAguided endonuclease Cas9. Nature. 2014; 507(7490): 62–67. doi: 10.1038/nature13011 PMID:
+24476820
+
+30.
+
+Wendell MD, Wilson TG, Higgs S, Black WC. Chemical and gamma-ray mutagenesis of the white gene
+in Aedes aegypti. Insect Mol Biol. 2000; 9: 119–125. PMID: 10762419
+
+31.
+
+Khoo CC, Doty JB, Heersink MS, Olson KE, Franz AW. Transgene-mediated suppression of the RNA
+interference pathway in Aedes aegypti interferes with gene silencing and enhances Sindbis virus and
+dengue virus type 2 replication. Insect Mol Biol. 2013; 22(1): 104–114. doi: 10.1111/imb.12008 PMID:
+23331493
+
+32.
+
+Franz AW, Jasinskiene N, Sanchez-Vargas I, Isaacs AT, Smith MR, Khoo CC, et al. Comparison of
+transgene expression in Aedes aegypti generated by mariner Mos1 transposition and ΦC31 sitedirected recombination. Insect Mol Biol. 2011; 20(5): 587–598. doi: 10.1111/j.1365-2583.2011.01089.x
+PMID: 21699593
+
+33.
+
+Gratz SJ, Cummings AM, Nguyen JN, Hamm DC, Donohue LK, Harrison MM, et al. Genome engineering of Drosophila with the CRISPR RNA-guided Cas9 nuclease. Genetics. 2013; 194(4): 1029–1035.
+doi: 10.1534/genetics.113.152710 PMID: 23709638
+
+34.
+
+Konet DS, Anderson J, Piper J, Akkina R, Suchman E, Carlson J. Short-hairpin RNA expressed from
+polymerase III promoters mediates RNA interference in mosquito cells. Insect Mol Biol. 2007; 16(2):
+199–206. PMID: 17298556
+
+35.
+
+Jasinskiene N, Coates CJ, Benedict MQ, Cornel AJ, Rafferty CS, James AA, et al. Stable transformation of the yellow fever mosquito, Aedes aegypti, with the Hermes element from the housefly. Proc Natl
+Acad Sci U S A. 1998; 95(7): 3743–3747. PMID: 9520437
+
+36.
+
+Franz AW, Sanchez-Vargas I, Raban RR, Black WC, James AA, Olson KE. Fitness impact and stability
+of a transgene conferring resistance to dengue-2 virus following introgression into a genetically diverse
+Aedes aegypti strain. PLoS Negl Trop Dis. 2014; 8: e2833. doi: 10.1371/journal.pntd.0002833 PMID:
+24810399
+
+37.
+
+Arpino JA, Rizkallah PJ, Jones DD. Structural and dynamic changes associated with beneficial engineered single-amino-acid deletion mutations in enhanced green fluorescent protein. Acta Crystallogr D
+Biol Crystallogr. 2014; 70(Pt 8): 2152–2162. doi: 10.1107/S139900471401267X PMID: 25084334
+
+38.
+
+Bassett A, Liu JL. CRISPR/Cas9 mediated genome engineering in Drosophila. Methods. 2014; 69(2):
+128–136. doi: 10.1016/j.ymeth.2014.02.019 PMID: 24576617
+
+39.
+
+Gratz SJ, Wildonger J, Harrison MM, O'Connor-Giles KM. CRISPR/Cas9-mediated genome engineering and the promise of designer flies on demand. Fly. 2013; 7(4): 249–255. doi: 10.4161/fly.26566
+PMID: 24088745
+
+40.
+
+Ma S, Chang J, Wang X, Liu Y, Zhang J, Lu W, et al. CRISPR/Cas9 mediated multiplex genome editing
+and heritable mutagenesis of BmKu70 in Bombyx mori. Sci Rep. 2014; 4: 4489. doi: 10.1038/
+srep04489 PMID: 24671069
+
+41.
+
+Liu Y, Ma S, Wang X, Chang J, Gao J, Shi R, et al. Highly efficient multiplex targeted mutagenesis and
+genomic structure variation in Bombyx mori cells using CRISPR/Cas9. Insect Biochem Mol Biol. 2014;
+49: 35–42. doi: 10.1016/j.ibmb.2014.03.010 PMID: 24698835
+
+42.
+
+Wei W, Xin H, Roy B, Dai J, Miao Y, Gao G. Heritable genome editing with CRISPR/Cas9 in the silkworm, Bombyx mori. PLoS One. 2014; 9(7): e101210. doi: 10.1371/journal.pone.0101210 PMID:
+25013902
+
+43.
+
+Adelman ZN, Jasinskiene N, Onal S, Juhn J, Ashikyan A, Salampessy M, et al. nanos gene control
+DNA mediates developmentally regulated transposition in the yellow fever mosquito Aedes aegypti.
+Proc Natl Acad Sci USA. 2007; 104: 9970–9975. PMID: 17548819
+
+44.
+
+Sebo ZL, Lee HB, Peng Y, Guo Y. A simplified and efficient germline-specific CRISPR/Cas9 system for
+Drosophila genomic engineering. Fly. 2014; 8(1): 52–57. doi: 10.4161/fly.26828 PMID: 24141137
+
+45.
+
+Kondo S, Ueda R. Highly improved gene targeting by germline-specific Cas9 expression in Drosophila.
+Genetics. 2013; 195(3): 715–721. doi: 10.1534/genetics.113.156737 PMID: 24002648
+
+46.
+
+Gokcezade J, Sienski G, Duchek P. Efficient CRISPR/Cas9 Plasmids for Rapid and Versatile Genome
+Editing in Drosophila. G3 (Bethesda). 2014; 4(11): 2279–2282. doi: 10.1534/g3.114.014126 PMID:
+25236734
+
+47.
+
+Xue Z, Wu M, Wen K, Ren M, Long L, Zhang X, et al. CRISPR/Cas9 Mediates Efficient Conditional Mutagenesis in Drosophila. G3 (Bethesda). 2014; 4(11): 2167–2173. doi: 10.1534/g3.114.014159 PMID:
+25193494
+
+PLOS ONE | DOI:10.1371/journal.pone.0122353 March 27, 2015
+
+13 / 13
+
+

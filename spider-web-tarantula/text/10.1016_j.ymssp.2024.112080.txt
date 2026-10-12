@@ -1,0 +1,849 @@
+Directional DIC method with automatic feature selection
+Thijs Masmeijer, Ed Habtour, Klemen Zaletelj, Janko Slavič (2024). Mechanical Systems and Signal Processing. https://repozitorij.uni-lj.si/IzpisGradiva.php?id=166352. doi:10.1016/j.ymssp.2024.112080. Licence: cc-by-nc-nd. Text from pdf.
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+Contents lists available at ScienceDirect
+
+Mechanical Systems and Signal Processing
+journal homepage: www.elsevier.com/locate/ymssp
+
+Directional DIC method with automatic feature selection
+Thijs Masmeijer a , Ed Habtour a ,∗, Klemen Zaletelj b , Janko Slavič b
+a
+
+University of Washington, William E. Boeing Department of Aeronautics and Astronautics, 3940 Benton Lane NE Guggenheim
+Hall, Seattle, WA, 98195, United States of America
+b University of Ljubljana, Faculty of Mechanical Engineering, Aškerčeva cesta 6, 1000, Ljubljana, Slovenia
+
+ARTICLE
+
+INFO
+
+Communicated by M. Brake
+Keywords:
+Image-based structural identification
+DIC
+Directional DIC
+Optical flow
+
+ABSTRACT
+Using displacement identification via high-speed cameras is a non-contact, full-field technique
+for characterizing the dynamic properties of engineered structures. Achieving reliable measurements of structural deformation through conventional Digital Image Correlation (DIC)
+requires a well-defined spatial gradient in two orthogonal directions within an image subset of
+pixels. However, DIC is susceptible to the aperture problem, which leads to an ill-conditioned
+optimization problem. An example of such a case is cable systems on which no speckle
+patterns can be applied. This study proposes Directional DIC (D-DIC) as an alternative technique
+to overcome the limitations posed by the aperture problem in conventional DIC methods.
+Directional DIC assumes the local direction of motion, which is often a valid assumption in
+structural vibration tests, as individual vibration shapes are often unidirectional at localized
+parts of the structure. This alleviates some restrictions on trackable image subsets, enabling
+more trackable locations. A parameter for quantifying expected tracking performance for DDIC is introduced. The parameter enables automatic feature selection for D-DIC, making optical
+methods more accessible for displacement identification on structures where no speckle patterns
+can be applied. Experimental modal tests are conducted using a flexible spider web-like structure
+to validate the D-DIC method and compare it to conventional DIC. The experimental findings
+show that the Directional DIC method allows for measuring displacements at significantly more
+locations than conventional DIC. Additionally, D-DIC provided less noisy frequency response
+functions, more retrieved stable poles, and more fitted vibrational modes. Lastly, the findings
+show that D-DIC is especially superior to DIC when using small subsets since D-DIC is less
+inhibited by the aperture problem.
+
+1. Introduction
+Measuring vibrations of engineering structures and mechanical systems is fundamental to conducting structural diagnostics,
+prognostics, reliability analysis, and service-life management [1–3]. However, installing physical sensors can be costly, complex,
+or intrusive for large or highly deformable structures. Non-contact displacement measurements based on computer vision offer
+significant advantages over contact sensors, which include full-field displacement and eliminating the added mass of physical sensors
+that often alter the dynamic characteristics of the structure [4,5]. Non-contact displacement measurements are advantageous for
+testing and evaluating flexible structures, such as aircraft wings, wind turbines, suspension bridges, cables, and soft robots. Several
+image alignment techniques have been introduced to provide not only the dynamic responses of a structure but also the deformation
+or modal shapes from extracted video motions. One of the most widely used image alignment techniques is the Lucas–Kanade
+
+∗ Corresponding author.
+E-mail address: habtour@uw.edu (E. Habtour).
+
+https://doi.org/10.1016/j.ymssp.2024.112080
+Received 17 July 2024; Received in revised form 8 October 2024; Accepted 19 October 2024
+Available online 21 November 2024
+0888-3270/© 2024 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 1. The aperture problem. An object moves horizontally (a) and diagonally (b). When observing an edge through a small hole (an aperture), the horizontal
+motion (c) and the diagonal motion (d) are indistinguishable. However, when the aperture observes a corner, unique motions are detected, thus overcoming the
+aperture problem.
+
+optical flow algorithm [6,7]. Peters et al. [8] introduced the method into engineering as Digital Image Correlation (DIC). DIC has
+been widely used in experimental mechanics since it was first applied in the field of structural dynamics in 1983 [9,10]. Current
+implementations of the Lucas–Kanade method in DIC have improved accuracy by including root-finding techniques to minimize
+residuals and can warp images for better alignment [7,11]. Alternatives to DIC consisted of methods such as photogrammetry point
+tracking [12–15], phase-based methods [16–18], and the complex pyramid method [19]. Since vibration shapes are often required in
+3D space Siebert et al. [20] demonstrated the retrieval of 3D full-field displacement responses of a structure using DIC with multiple
+time-synchronized cameras. Gorjup et al. [21] used triangulation in the frequency domain to obtain 3D vibration mode shapes using a
+single camera. An FEM model was used as an alternative to synchronized cameras for finding the 3D vibration shapes [22]. The utility
+of DIC to extract 3D mode shapes is now commonplace in structural vibration [21–27] since computer vision-based can provide
+mode-shape magnification in structural vibration [28–30], FEM model updating [31–33], damage precursors identification [15,34–
+36], and estimating moving forces for structural health monitoring [37]. High-speed infrared cameras were employed to identify
+the full field strain mode shapes of beams using the thermoelastic relationship and using individual pixels as sensors [38]. By using
+an inertial measurement unit (IMU), any 6-DOF motion was corrected for motion estimation with optical methods [39]. Readers
+interested in further information about the application of optical DIC methods in the field of structural vibrations are encouraged
+to refer to excellent review publications by Niezrecki et al. [40], and Baqersad et al. [41].
+Obtaining reliable displacement measurements with DIC requires an image subset (feature) to have a well-defined gradient in two
+orthogonal directions. However, most engineering structures lack surfaces with such well-defined gradients. The lack of sufficient
+gradient in one of the directions in a subset makes it challenging to observe the motion in that direction correctly. Fig. 1 provides
+a visual explanation of this well-known phenomenon called the aperture problem, which causes an ill-conditioned optimization
+problem in DIC [42–44]. To overcome the aperture problem, it is common to apply speckle patterns to the test samples to track the
+material displacement [45].
+There are several reasons why speckle patterns in the form of permanent paint or temporary stickers may not always be suitable
+for a structure. For example, measuring the displacement of a cable, or a network of cables presents a challenge, as no speckle
+pattern can be applied [46]. In such cases, there will only be a large gradient perpendicular to the cable, between the cable and
+the background. Other reasons range from undesirable aesthetics and cost of the speckle application to a civil structure [19] and its
+influence on the aerodynamic properties of an aerospace structure [47]. Nonetheless, the main advantage of non-contact methods,
+such as optical methods, is that the mass of the sensor will not alter the vibration characteristics of the structure [48]. For the
+same reasons, applying paint or stickers to very lightweight and flexible structures is undesirable. These examples highlight the
+need for a displacement tracking method with less restrictive requirements for trackable image subsets. Quantifying the expected
+tracking performance of these subsets is crucial for enabling the identification of naturally occurring features. Automatic feature
+detection algorithms can be utilized to localize pixel subsets in an image that can adequately track the displacement. One of the
+earliest automatic feature detection algorithms was based on the image gradients in four directions [49]. Tomasi et al. [50,51]
+2
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+introduced an influential approach that computed the eigenvalues of a pixel subset to score its expected performance, taking both
+sensitivity and stability into account. Feature detection algorithms continued to evolve and offered faster computations and enhanced
+robustness against edge-like features [52,53], or reduced the effects of 1D edges [54]. Generally, selection algorithms choose features
+in descending order of score and minimum distance between them [50,51], select features where scores have local maxima [49,52],
+or use Adaptive Non-Maximal Suppression (ANMS) to ensure features are more evenly distributed across an image [53].
+Javh et al. [55] introduced the Simplified Optical Flow method (SOF) as an alternative to the Lucas–Kanade optical flow algorithm
+to measure displacement for structural vibration. The SOF method overcame the aperture problem by taking advantage of the fact
+that the pixel intensity gradient is constant and uni-directional for low (sub-pixel) amplitudes. Patterns on measured structures
+were designed such that the motion was in the direction of the pixel intensity gradient, enabling individual pixels (or small subsets
+of pixels) to be utilized as one-degree-of-motion displacement sensors. The method significantly sped up the measurements and
+demonstrated a high displacement resolution of 0.0008 pixels. However, SOF is limited to low (sub-pixel) amplitudes, thus restricting
+its effectiveness. Additionally, SOF does not include a root-finding algorithm to refine the extracted motion, unlike Lucas–Kanade,
+which incorporates a root-finding capability for this purpose [56,57].
+To overcome the limitations of the DIC and SOF methods stated above, this study proposes the Directional DIC (D-DIC) as
+an alternative method that retrieves motion via a user-defined direction. The proposed D-DIC method can leverage root-finding
+methods, ensuring accurate high-displacement measurements. A priori motion direction produces fewer restrictions on selecting
+tracking locations by minimizing the aperture problem. As the new method has different restrictions on trackable regions, a new
+parameter, 𝜆d , is introduced to quantify expected tracking performance, thus enabling automatic feature selection for D-DIC. The
+D-DIC method is publicly available through the OpenSource Python package pyIDI [58]
+This article is organized as follows. First, a theoretical background is given on DIC and automatic feature selection in Section 2.
+The D-DIC method and parameter 𝜆d are detailed in Section 3. The experimental approach and validation of the D-DIC method are
+provided in Section 4. The section also provides a detailed comparison between the Directional and conventional DIC methods. The
+major findings of this study are summarized in the conclusion section.
+2. Theoretical background
+This section details the mathematical implementation of DIC for measuring displacements from a sequence of images and
+corresponding automatic feature selection algorithms.
+2.1. Digital image correlation
+A grayscale camera measures the light intensity field 𝐼(𝑥, 𝑦) [55]. A grayscale image is represented by a 2D array of pixels, where
+the value of each pixel represents the amount of light; i.e. light intensity. Therefore, each image contains discrete values of the light
+intensity field that can be utilized to track the motion. The goal of DIC is to align a template image 𝑇 (𝑥, 𝑦) with an input image
+𝐼(𝑥, 𝑦) [6]:
+∑
+min
+(1)
+[𝑇 (𝑥, 𝑦) − 𝐼(𝑥 + 𝛿 𝑥, 𝑦 + 𝛿 𝑦)]2 ,
+𝛿 𝑥,𝛿 𝑦
+
+𝑝
+
+where 𝑝 is the pixels in a subset of pixels in an image, typically 𝑞 × 𝑞 pixels and 𝛿 𝑥 and 𝛿 𝑦 represent the incremental displacements.
+Each subset of pixels is referred to as a feature. DIC uses multiple pixels as opposed to a single one to avoid potential ambiguity with
+respect to the global motion direction, which is related to the aperture problem illustrated in Fig. 1 [59]. The resolution potential
+of the extracted motion is expected to increase linearly with respect to size 𝑞 [55]. Residual errors may occur when solving the
+optimal incremental displacement in Eq. (1). To minimize the residuals, a new image is created by translating one of the images
+by 𝛿 𝑥 and 𝛿 𝑦, after which Eq. (1) is reevaluated. The optimal global displacements (𝛥𝑥 and 𝛥𝑦) are found by updating after each
+increment:
+𝛥𝑥 ← 𝛥𝑥 + 𝛿 𝑥, and
+(2)
+𝛥𝑦 ← 𝛥𝑦 + 𝛿 𝑦.
+DIC retrieves incremental displacements and updates the global displacements until the displacement converges, typically by
+checking if the norm of the incremental displacements is below a threshold 𝜖, i.e. ‖𝛿𝐱‖ ≤ 𝜖. As images are represented as 2D
+discrete grids located at integer coordinates, an interpolation function of one of the images needs to be generated to translate
+one of the images. A cubic interpolation function is used, which ensures the continuity and smoothness of the intensity field with
+high accuracy and convergence rate [56,60]. While Eq. (1) includes only translations, the method is often extended to include more
+involved transformations, for example, affine warp [61]. Previous work has shown that for small displacement (sub-pixel), as is often
+the case in structural vibration, extracting only translations can significantly decrease the computation time and noise in results [32].
+DIC can be implemented in various ways; for a comparison of different methods and a detailed derivation of the method, refer to, for
+example, Baker et al. [7]. In the implementation of this work, an interpolation function is set up only once for the template image
+rather than for each frame in the video. Firstly, this is advantageous as it enables precomputing the interpolation function [62].
+Secondly, as the template image can be denoised, a higher-quality interpolation function can be created leading to better results [7].
+Denoising the template image is achieved by averaging a set of frames in the time domain instead of using, for example, the first
+frame in the video [63]. In the case of small amplitude (sub-pixel) harmonic vibrations, 𝑇 can be acquired by averaging all frames
+since harmonic displacement does not, mathematically, affect the average pixel intensity level [55]. For high amplitude vibrations
+3
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 2. A schematic depiction of (a) conventional DIC, and (b) Directional DIC. Both set up with 𝑞 = 3.
+
+(multi-pixel), 𝑇 can still be averaged but only on frames before applying an excitation [63]. The DIC implementation is modified to
+ensure that only the template image needs to be interpolated. The global displacements are split into the nearest pixel integer (the
+pixel shift, ⌊𝛥𝑥⌉ and ⌊𝛥𝑦⌉) and its corresponding residuals 𝛥𝑥 and 𝛥𝑦:
+𝛥𝑥 = ⌊𝛥𝑥⌉ + {𝛥𝑥}, and
+
+(3)
+
+𝛥𝑦 = ⌊𝛥𝑦⌉ + {𝛥𝑦}.
+
+This specific split ensures that an image shifted with ⌊𝛥𝑥⌉ and ⌊𝛥𝑦⌉ is directly accessible from memory. The goal function, i.e.
+Eq. (1), is then modified into:
+∑[
+]2
+min
+𝑇{} (𝑥 − 𝛿 𝑥, 𝑦 − 𝛿 𝑦) − 𝐼⌊⌉ (𝑥, 𝑦) .
+𝛿 𝑥,𝛿 𝑦
+
+(4)
+
+𝑝
+
+where 𝑇{} is the interpolated template image, and 𝐼⌊⌉ the pixel shifted input image, or:
+𝑇{} (𝑥, 𝑦) = 𝑇 (𝑥 − {𝛥𝑥}, 𝑦 − {𝛥𝑦}), and
+
+(5)
+
+𝐼⌊⌉ (𝑥, 𝑦) = 𝐼(𝑥 + ⌊𝛥𝑥⌉, 𝑦 + ⌊𝛥𝑦⌉).
+
+(6)
+
+The residual displacements are updated according to:
+{𝛥𝑥} ← {𝛥𝑥} + 𝛿 𝑥, and
+
+(7)
+
+{𝛥𝑦} ← {𝛥𝑦} + 𝛿 𝑦.
+After convergence, the optimal global displacements are found via Eq. (3). The DIC implementation is depicted in Fig. 2(a).
+
+The optimal incremental displacements in Eq. (4) are obtained by taking the first-order Taylor expansion of 𝑇{} with respect
+to 𝑥 and 𝑦 and setting the resulting equation to zero. The spatial derivatives of 𝑇{} are switched with those of 𝐼⌊⌉ following the
+Hager-Belhumeur implementation [62]. This is a justified replacement as 𝑇{} ≈ 𝐼⌊⌉ , provided that the initial approximations of the
+global displacements are close to the truth. The replacement provides a computational advantage as 𝜕𝜕𝐱𝐼 remains constant in each
+iteration and thus only needs to be computed once per frame. The incremental displacements are then retrieved as follows:
+[ 𝜕𝐼 ]
+[
+]
+∑
+(
+)
+𝛿𝑥
+𝜕𝑥
+= 𝐻 −1
+𝐼⌊⌉ − 𝑇{} ,
+𝜕𝐼
+𝛿𝑦
+𝑝
+𝜕𝑦
+4
+
+(8)
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 3. Automatic feature selection in a spiderweb-like cable network. (a) A template image 𝑇 is established. (b) 𝑇 is filtered, for example, with 𝜆0 to create the
+score image 𝑆. (c) Features are selected automatically from 𝑆 with an algorithm, for example, in descending order of score, at local maxima, or with ANMS.
+
+where 𝐻 is the (Gauss–Newton approximation to the) Hessian matrix:
+⎡ ( )2
+𝜕𝐼 𝜕𝐼 ⎤
+∑ ⎢ 𝜕𝜕𝐼𝑥
+𝜕𝑥 𝜕𝑦 ⎥
+𝐻=
+(
+)2 ⎥ .
+⎢ 𝜕𝐼 𝜕𝐼
+𝜕𝐼
+𝑝 ⎢
+⎥
+𝜕𝑦
+⎣ 𝜕𝑥 𝜕𝑦
+⎦
+
+(9)
+
+2.2. Automatic feature selection
+An automatic feature selection algorithm first quantifies all potential tracking locations in 𝑇 based on its expected tracking
+performance to create a score image 𝑆, as shown in Fig. 3. Subsequently, an algorithm selects features from the score image, for
+example, with one of the algorithms discussed later in this section. Good features to track have high gradients in two orthogonal
+directions to overcome the aperture problem, as seen in Fig. 1. This observation can be formalized by inspecting Eq. (8). A smaller
+displacement can be measured for the same amount of difference between 𝐼⌊⌉ and 𝑇{} if 𝐻 is big, i.e. the sensitivity of Eq. (8)
+increases as 𝐻 increases. Additionally, Eq. (8) will be stable if 𝐻 is easily invertible, i.e. 𝐻 is well-conditioned. The symmetric
+matrix 𝐻 is well conditioned if ||𝜆1 || ∕ ||𝜆0 || ≈ 1, with 𝜆0 and 𝜆1 being the smaller and the larger eigenvalue of 𝐻, respectively. In
+practice, 𝐻 will be well-conditioned if the smaller eigenvalue is large. This comes from the fact that the pixel intensity gradients will
+be bounded by the minimum and maximum pixel intensity value, such that the greater eigenvalue cannot be arbitrarily large [50].
+This led Tomasi et al. to introduce the smallest eigenvalue to score the tracking performance [50].
+(10)
+
+𝜆0 = min(eigvals(𝐻))
+
+The score image 𝑆 is then created by applying Eq. (10) as a filter across the template image. The kernel size of the filter matches
+the subset size 𝑞 used in DIC. Next, an algorithm selects locations based on 𝑆. This theoretical background provides three possible
+algorithms for automatic feature selection. In Algorithm 1, tracking locations are sorted based on scores in 𝑆, and features are picked
+in descending order of score [50,51]. This algorithm excludes features that overlap with windows of size 𝑤 centered at previously
+selected features. The size of the subsets, 𝑞, does not have to match that of the windows, 𝑤, used for excluding feature locations.
+This allows for control over how spread-out features will be selected across the structure. In algorithm 2, local maxima in a window
+of size 𝑤 are retrieved from 𝑆. The highest 𝑛 local maxima are set as features [49,52]. Tuning 𝑤 provides control over the spread
+out 𝑛 features across a structure. Algorithm 3 applies the Adaptive Non-Maximal Suppression (ANMS) algorithm to select features
+that are evenly spread out across an image [53]. This can be useful in experimental modal analysis, for example, when structures are
+unevenly illuminated or patterned across the structure. ANMS starts with a list of local maxima in the score image retrieved with,
+for example, the local maxima algorithm with 𝑤 = 3. Next, the radius for which the potential feature location is a local maximum is
+retrieved. The maxima are then ordered in descending order of radius, and the largest 𝑛 radii are added as features. The algorithm
+robustness is improved by using a robustifying factor 𝑐 to retrieve the radius 𝑅 where the maximum is significantly higher than its
+neighbors.
+Algorithm 1: Select by descending score excluding overlapping windows, based on [50,51]
+Input: Score image 𝑆, window size 𝑤, number of features 𝑛
+Output: 𝑓 : a List of 𝑛 feature locations
+1 w = w // 2;
+2 Sort the pixel locations in 𝑆 in descending order of score;
+3 initialize an empty list 𝑓 ;
+4 for pixel location (𝑥, 𝑦) in the ordered list do
+5
+if any pixel locations (𝑥 − 𝑤 − 1 ∶ 𝑥 + 𝑤, 𝑦 − 𝑤 − 1 ∶ 𝑦 + 𝑤) is in 𝑓 then
+6
+Continue to the next pixel location;
+7
+end
+8
+Add the pixel locations (𝑥, 𝑦) to 𝑓 ;
+9
+if The number of features in 𝑓 equals 𝑛 then
+10
+Exit the loop;
+11
+end
+12 end
+5
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Algorithm 2: Select at local maxima, based on [49,52]
+Input: Score image 𝑆, window size 𝑤, number of features 𝑛
+Output: 𝑓 : a list of 𝑛 feature locations
+f
+1 Apply a maximum filter of size 𝑤 to the score image 𝑆 to obtain 𝑆 , the filtered score image;
+f
+2 Identify local maxima in 𝑆 by finding locations where 𝑆 (𝑥, 𝑦) = 𝑆(𝑥, 𝑦);
+3 Sort the local maxima in descending order based on their scores in 𝑆;
+4 Select the first 𝑛 locations from the sorted list as the feature locations 𝑓 ;
+Algorithm 3: ANMS algorithm, based on [53]
+Input: List of potential feature locations 𝑓 0 , score image 𝑆, number of features 𝑛, robustifying factor 𝑐
+Output: 𝑓 : List of 𝑛 feature locations
+0
+1 Sort the potential feature locations 𝑓 in descending order based on their scores in 𝑆;
+0
+0
+2 Initialize an array 𝑅 with ∞ for each 𝑓 in 𝑓 ;
+𝑖
+0
+0
+3 for each potential feature location 𝑓 in 𝑓 do
+𝑖
+0
+do
+4
+for each potential feature location 𝑓𝑗0 in 𝑓1∶𝑖−1
+0
+0
+5
+if 𝑐 ⋅ 𝑆(𝑓𝑗 ) > 𝑆(𝑓𝑖 ) then
+6
+Compute the distance 𝑟 = ‖𝑓𝑖0 − 𝑓𝑗0 ‖2 ;
+if 𝑟 < 𝑅𝑖 then
+𝑅𝑖 = 𝑟;
+9
+end
+10
+end
+11
+end
+12 end
+0
+13 Select the locations in 𝑓 corresponding to the largest 𝑛 values in 𝑅 as 𝑓 ;
+7
+
+8
+
+3. Directional DIC with automatic feature selection
+Section 3.1 details the mathematical development of the D-DIC method. The fundamental innovation in Section 3.2 is the
+introduction of parameter 𝜆d for facilitating accurate and efficient automatic feature selection. In Section 3.3, the effects of a
+discrepancy between the pre-defined motion direction and the real motion direction are discussed. Finally, the relationship between
+the subset size of a feature and the accuracy of the method is provided in Section 3.4.
+3.1. Directional DIC
+The D-DIC method assumes the motion to be in a single direction 𝐝 = [𝑒𝑥 , 𝑒𝑦 ]𝑇 , with |𝐝| = 1. Let 𝛿 𝜆 be the incremental
+displacements in 𝐝. Thus, simple coordinate transformations can be achieved, such that 𝛿 𝑥 = 𝛿 𝑒𝑥 𝜆, and equivalent in 𝑦-direction.
+The DIC method is modified accordingly, and depicted in Fig. 2(b). The algorithm is modified accordingly by, first, applying the
+coordinate transformation to the goal function (4), such that:
+∑[
+]2
+min
+𝑇{} (𝑥 − 𝛿 𝑒𝑥 𝜆, 𝑦 − 𝛿 𝑒𝑦 𝜆) − 𝐼⌊⌉ (𝑥, 𝑦) .
+(11)
+𝛿𝜆
+
+𝑝
+
+The residual displacements {𝛥𝑥} and {𝛥𝑦} after applying the coordinate transformation are updated according to (see Eq. (7) for
+comparison):
+{𝛥𝑥} ← {𝛥𝑥} + 𝛿 𝑒𝑥 𝜆, and
+(12)
+{𝛥𝑦} ← {𝛥𝑦} + 𝛿 𝑒𝑦 𝜆.
+To solve the incremental displacement 𝛿 𝜆, the nonlinear goal function, in Eq. (11), is linearized by performing a first order Taylor
+expansion on 𝑇{} with respect to 𝜆:
+[
+]2
+∑
+𝜕 𝑇{}
+min
+𝑇{} +
+𝛿 𝜆 − 𝐼⌊⌉ .
+(13)
+𝛿𝜆
+𝜕𝜆
+𝑝
+The spatial derivative with respect to 𝜆 is obtained efficiently from the spatial gradients with respect to 𝑥 and 𝑦 using the coordinate
+transformation (Eq. (14)). Similar to conventional DIC in Section 2.1, the implementation of D-DIC switches the spatial derivatives
+of 𝑇{} and 𝐼⌊⌉ , to improve computational efficiency, as follows:
+𝜕 𝐼⌊⌉
+𝜕 𝐼⌊⌉
+𝜕 𝐼⌊⌉
+𝜕 𝑇{}
+≈
+= 𝑒𝑥
++ 𝑒𝑦
+.
+(14)
+𝜕𝜆
+𝜕𝜆
+𝜕𝑥
+𝜕𝑦
+The derivative with respect to 𝜆 is retrieved, and the equation is set to zero. Accordingly, 𝛿 𝜆 becomes:
+∑ 𝜕 𝐼⌊⌉
+1
+𝛿𝜆 =
+(𝐼 − 𝑇{} ).
+(
+)
+2
+∑ 𝜕𝐼
+𝜕 𝜆 ⌊⌉
+𝑝
+
+⌊⌉
+
+𝑝
+
+𝜕𝜆
+
+6
+
+(15)
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+In short, the D-DIC algorithm loops the following steps until convergence is reached, |𝛿 𝜆| ≤ 𝜖:
+• interpolate 𝑇{} with the residual displacements using Eq. (5);
+• retrieve the incremental displacement 𝛿 𝜆 via Eq. (15); and
+• update the residual displacements via Eq. (12).
+Finally, the global displacements are found after accounting for the integer pixel shift using Eq. (3).
+3.2. Automatic feature selection for directional DIC
+In conventional DIC, a feature requires a high pixel intensity gradient in two orthogonal directions to overcome the aperture
+problem and ensure high sensitivity, as established in Section 2.2. Since Directional DIC uses a predetermined motion direction,
+it experiences a reduced influence from the aperture problem. Consequently, the requirements for a feature will be different. The
+displacement in direction 𝐝 is observable when the gradient is high. This can be formalized by inspecting Eq. (15). As the gradient in
+𝐝 increases, smaller displacement can be observed for the same amount of difference between 𝐼⌊⌉ and 𝑇{} , i.e. the sensitivity of D-DIC
+𝐼
+
+increases as 𝜕⌊⌉𝜆 increases. This observation is captured in parameter 𝜆d , which sums the intensity gradient in 𝐝 for a subset of pixels
+in a feature. Taking the absolute value ensures that the parameter highlights gradients in both positive and negative directions.
+∑ | 𝜕𝑇
+𝜕 𝑇 ||
+|𝑒𝑥
+𝜆d =
+(16)
+| 𝜕 𝑥 + 𝑒𝑦 𝜕 𝑦 |
+|
+|
+𝑝
+As 𝜆d is less strict than 𝜆0 in general more features can be selected on the same structure, especially for non-ideal surface patterns.
+Parameter 𝜆d is a similar feature to the Sum of Square of Subset Intensity Gradients (SSSIG) proposed by Pan et al. [64]. In contrast to
+SSSIG, 𝜆d will only highlight features with intensity gradients in the appropriate direction. When all tracking locations are quantified
+with 𝜆d , features can be selected with, for example, one of the algorithms described in Section 2.2.
+3.3. The assumption of single directional displacement
+Directional DIC is facilitated by assuming a constant pre-determined displacement direction 𝐝. In practical cases, one must
+consider that the actual displacement direction may not be constant, and there may be a discrepancy between the actual and
+assumed displacement directions. This raises the question of what the effect of error in the assumed displacement direction 𝐝 is
+on the robustness and the accuracy of the D-DIC method. Consider a case where there is displacement perpendicular to 𝐝, denoted
+as 𝐝⟂ . When the tracked feature has no gradient in 𝐝⟂ (a perfect edge along 𝐝⟂ ), it will not affect the robustness, as the pixel
+intensity value will remain constant independent of the displacement in 𝐝⟂ . However, if there is a gradient in 𝐝⟂ , the correlation
+between 𝐼⌊⌉ and 𝑇{} will decrease as the displacement in 𝐝⟂ increases, meaning that the expected robustness of D-DIC will decrease.
+In general, the expected robustness of D-DIC increases as the gradient in 𝐝⟂ within a feature decreases.
+We can analyze the effects of displacement in 𝐝⟂ on the accuracy of D-DIC using trigonometry. Consider the sub-pixel
+displacement of an individual pixel in a feature, shown in Fig. 4; where 𝛼 is the offset angle between the predefined motion
+direction 𝐝 and the actual motion direction 𝐝∗ ; and 𝛽 is the angle between the gradient direction of the pixel of interest (∇𝐈)
+and 𝐝. The direction of ∇𝐈 is assumed to be constant for a sub-pixel displacement and is crucial as the optimal displacement of the
+pixel is perpendicular to it. The percentage error relative to the real displacement (AC) as a function of angles 𝛼 and 𝛽 is calculated
+between the real displacement in 𝐝 (AD) and the measured displacement (AB), and it is represented by:
+(
+)
+cos (𝛼 + 𝛽)
+𝐴𝐷 − 𝐴𝐵
+error =
+⋅ 100% = cos (𝛼) −
+⋅ 100%.
+(17)
+𝐴𝐶
+(cos 𝛽)
+Eq. (17) is plotted for several cases of 𝛽 in Fig. 5. This analysis pertains to an individual pixel. Since the relationship in Eq. (17) is
+nonlinear, each pixel in a feature must be evaluated individually to determine the overall accuracy of the entire feature. Eq. (17)
+shows that the error is zero as long as 𝛽 is exactly zero. However, in all other cases, the error increases as the offset error increases.
+Notably, the error can be especially significant when the pixel intensity gradient is poorly aligned with 𝐝. Using such subsets is
+discouraged for cases where 𝛼 is expected to be high during a test. When tracking features that do not look like straight edges, it
+is expected that the accuracy of the feature will be a mixture of low- and high-error pixels, some of which will cancel each other.
+In these cases, conventional DIC can also be used to identify displacement, as there will be a gradient in two orthogonal directions.
+Generally, the accuracy of a feature will increase when its pixel intensity gradient is aligned with 𝐝.
+3.4. Relationship robustness and subset size
+While conventional DIC suffers from the aperture problem (the 2D motion is under-defined when using individual pixels), the DDIC method has a pre-determined local motion direction. The aperture problem is, therefore, expected to play a less significant role,
+which should cause the proposed method to require smaller subsets to converge than conventional DIC. The theoretical resolution
+potential is related to the subset size (𝑞 × 𝑞) and the bit depth of the camera 𝑛 according to [55]:
+1
+𝛥𝑥min = 𝑛
+.
+(18)
+(2 − 1)𝑞
+7
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 4. Schematic of the displacement of an individual pixel in a feature during D-DIC, located at A moving to C. The vector 𝐝 is the pre-determined motion
+direction. The real motion direction is 𝐝∗ . The offset angle between 𝐝 and 𝐝∗ is 𝛼. The gradient of the pixel of interest is ∇𝐈. 𝛽 is the angle between 𝐝 and the
+direction of ∇𝐈. AC: The real displacement of the pixel, AB: the measured displacement with D-DIC, and AD: the real displacement in 𝐝.
+
+Fig. 5. The mathematical error of a single pixel in a feature as a function of the offset angle 𝛼 between 𝐝 and 𝐝∗ , for several cases of 𝛽, 𝛽 is the angle between
+the pre-determined motion direction and the direction of the pixel intensity gradient of the pixel.
+
+The implication is that the resolution can be increased by choosing a larger subset. When retrieving motion of non-overlapping
+subsets, smaller subsets can be more advantageous, as more features can be selected. The change in pixel intensity is proportional
+to the displacement, meaning that the camera noise maps to the displacement noise. By using more features, the displacement noise
+can be averaged out. Using the same pixel multiple times in an overlapping feature will not average out the noise, as the pixel will
+have the same inherent error anytime it is evaluated.
+4. Experimental research
+To validate the proposed D-DIC method, a modal analysis was conducted on a structure that does not have a high pixel-intensity
+gradient in two orthogonal directions across the whole structure. The methodology for gathering modal results – consisting of
+frequency response functions and vibration shapes – based on a sequence of images starts with choosing a feature size (𝑞 × 𝑞) and
+feature locations. The feature size is typically selected through a parameter study. Feature locations can be selected either manually
+or automatically, employing suitable methods for conventional DIC (𝜆0 , see Section 2.2) or D-DIC (𝜆d , see Section 3.2). To ensure
+that automatic feature selection exclusively adds features relevant to the structure of interest, pixels outside this structure can be
+automatically omitted by excluding pixels outside a user-defined region of interest. A template image is created from the image
+sequence. This can either be an individual image or an average of multiple images. Conventional and D-DIC is then employed to
+measure the displacements at the features using a user-defined tolerance 𝜖. The motion direction 𝑑 for D-DIC, can often be estimated
+visually. However, in cases where the motion direction is unclear, the displacement can be tracked at specific locations with DIC that
+meet the required gradient conditions. The direction 𝑑 is then determined by calculating the slope of a linear fit through the resulting
+displacement path. Conventional and D-DIC is employed with the OpenSource PyIDI package [58]. In practice, it is found that not
+all features measure the displacement correctly. Therefore, three thresholds are proposed to classify a feature as (un)successful. If
+8
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 6. Global test set-up. The High-Speed Camera is a Photron Fastcam SA-Z equipped with a Sigma 180 mm F2.8 Macro lens. Top and bottom lighting is
+achieved using two battery-powered 50 kLumen LED lights.
+
+one of the following thresholds is met, the feature is classified as unsuccessful:
+(1) ∶ The maximum retrieved displacement is greater than 𝑎 pixels.
+(2) ∶ The displacement between subsequent frames is bigger than 𝑏 pixels.
+
+(19)
+
+(3) ∶ The displacement at the last frame is more than 𝑐 pixels.
+The parameters 𝑎, 𝑏, and 𝑐 are case-by-case dependent ones set by the user. The third threshold is proposed to identify features
+drifting along edge-like features in conventional DIC but will only catch features that drift by more than 𝑐 pixels. As 𝜆0 should
+score low on edge-like features, a better practice is to exclude these features by setting fewer features. Finally, modal parameter
+estimation can be performed, and vibration modes are fitted.
+4.1. Spiderweb-like structure
+The experimental setup can be described as follows. A spiderweb-like structure was 3D printed using Thermoplastic polyurethane
+(TPU) material. The structure was printed from a single layer 0.2 mm thick and 0.4 mm wide. The distance between a connection
+point and its opposing one was 29 cm. The width and height of the spiral making up the web were 22 and 26 cm, respectively.
+The flexible low-mass structure was suspended within a frame, as shown in Fig. 6. Retrieving the dynamics of such structures with
+contact method sensors, such as accelerometers and strain gauges, is discouraged as they will alter the dynamics [65]. Alternative
+non-contact methods, such as the Laser Doppler Vibrometer, require repeated testing to retrieve the full field response [65]. Applying
+a speckle pattern to the thin structure was found to be inappropriate because the paint was intrusive to the material properties of
+the TPU, resulting in a single strand feeling less flexible and damping vibrations more quickly. The spiderweb-like structure was
+excited with a modal hammer in the out-of-plane direction, where out-of-plane unidirectional vibration was predominant. In the test,
+8,000 frames were acquired at 8,000 frames/second with pixel values on a 12-bit grayscale and 1,024 × 512 pixels per frame. The
+structure was illuminated using two 50 kLumen LED lights, located at the top and bottom of the structure, with a light-diffusing
+panel located at the bottom, as shown in Fig. 6. This lighting approach ensured a high-intensity gradient between the structure
+(black) and the background (white).
+A parameter study on the subset size revealed that for conventional DIC a subset size of 9 × 9 was optimal. The same subset
+sizes were used in conventional DIC as in D-DIC. Features are selected automatically inside of a region of interest, as depicted in
+Fig. 7. Features were placed at local maxima, using 𝑤 = 3 (Algorithm 2). Features were added until the algorithm added features
+9
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 7. The automatically selected features for DIC and D-DIC with a subset size of 9 × 9. Only pixels inside the region of interest were considered as possible
+feature locations.
+
+on edge-like features for conventional DIC, or in the background for D-DIC. For both methods, a denoised template image 𝑇 was
+generated by averaging the first 150 frames prior to the impact hammer impacting the web. Conventional or Directional DIC is
+employed with a tolerance of 𝜖 = 1 ⋅ 10−8 . The displacement in the video was visually determined to be predominately vertical, so,
+D-DIC was evaluated with 𝐝 = [0, 1]𝑇 . To classify features as (un)successful, the following parameters were used in the thresholds
+in Eq. (19): 𝑎 = 6, 𝑏 = 1, and 𝑐 = 2. Next, modal parameter identification was performed using the Least Square Frequency Domain
+method [66]. Poles were extracted between 5 and 300 Hz with polynomials up to order 150. Finally, mode shapes were fitted at
+stable poles.
+For conventional DIC, 1,600 features were added using the algorithm, and 1,553 out of 1,600 were classified as successful. The
+algorithm mainly selected features at parts of the structure where strands intersect, such that the feature had high gradients in two
+orthogonal directions. For D-DIC, the algorithm was able to add significantly more features; 5,340 out of 5,400 were classified as
+successful. Many of the features failed to track the motion because the impact hammer obstructed the field of view at one or more
+frames in the video. When only including the features outside of the obstructed view, 1,521 out of 1,545 features were tracked
+successfully for conventional DIC (success rate of 0.984). However, 5,292 out of 5,292 features were tracked successfully for D-DIC
+(success rate of 1.0). The noise floor of the mean frequency response functions was higher in conventional DIC than in D-DIC, as
+highlighted in Fig. 8. This enabled D-DIC to identify more stable poles and vibration shapes than conventional DIC. For clarity,
+10
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 8. Stability diagrams of the results with a subset size of 9 × 9 Poles are retrieved with the Least Squares Frequency Domain method, with only the stable
+poles depicted. Vertical blue annotations indicate the selection of modes depicted in Fig. 9. † The noise floor difference between DIC and D-DIC.
+
+Fig. 9. Selection of mode shapes of the spiderweb-like structure comparing conventional DIC (DIC) with Directional DIC (D-DIC) method.
+
+only the poles between polynomial order 120 and 150 are depicted in Fig. 8. The poles highlighted in green indicate those that
+were identified using D-DIC. The vibration shapes of the poles highlighted in blue vertical lines are shown in Fig. 9. As D-DIC
+allowed for setting significantly more appropriate features, the vibration shapes were more spatially dense. This made analyzing
+the characteristic shapes of the vibration shapes easier, especially those at high frequencies.
+11
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 10. The automatically selected features for DIC and D-DIC with a subset size of 3 × 3. Only pixels inside the region of interest were considered as possible
+feature locations.
+
+4.2. Small subsets
+In Section 2, it was noted that in conventional DIC, subsets of pixels are used to overcome the aperture problem. In this section,
+we show why the aperture problem is expected to play a less significant role since D-DIC uses a predetermined displacement
+direction. This was validated by retrieving the displacement of the web structure with a 3 × 3 subset size. Features were added
+in descending order of expected tracking performance, using 𝑤 = 3 (Algorithm 1). The selected features shown in Fig. 10 are for the
+same parameters used in Section 4.1; 𝜖 = 1 ⋅ 10−8 , 𝐝 = [0, 1]𝑇 , 𝑎 = 6, 𝑏 = 1, and 𝑐 = 2. Modal parameter identification was performed
+using the Least Square Frequency Domain method between 5 and 300 Hz up to a polynomial order of 150. For conventional DIC,
+5,000 features were added, of which 4,846 were outside the area with an obstructed view. When attempting to add more features,
+the algorithm predominantly added non-trackable edge-like features. Of the added features, 3,040 out of 4,846 characterized the
+displacement successfully (success rate of 0.627). For D-DIC, 10,300 features were successfully added, of which 10,035 were outside
+the area with an obstructed view. Beyond this point, the algorithm began incorporating features that were predominantly in the
+background. Of these features, 10,014 out of 10,035 characterized the displacement successfully (success rate of 0.998). The mean
+frequency response functions, in Fig. 11, show that the noise floor for D-DIC remained lower than for conventional DIC. More stable
+poles were identified, and vibration shapes were fitted using D-DIC. However, fewer stable poles were identified in comparison
+with larger subset sizes. This was as expected as the displacement resolution potential increases with the subset size 𝑞, as illustrated
+by Eq. (18).
+12
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Fig. 11. Stability diagrams of the results with a subset size of 3 × 3. Poles are retrieved with the Least Squares Frequency Domain method, with only the stable
+poles depicted. † The noise floor difference between DIC and D-DIC.
+
+5. Conclusion
+The proposed Directional Digital Image Correlation (D-DIC) was a modification of the widely used DIC method by limiting
+the local displacement along a user-defined direction. The findings showed that D-DIC overcame several limitations in existing
+displacement estimators. The main limitation of using conventional DIC as a displacement estimator was that it had a strict
+requirement for features: a high pixel intensity gradient in two orthogonal directions. The requirement for a feature to be used
+with Directional DIC was less strict, as only a high gradient was required in the local displacement direction. This was validated
+by conducting a modal analysis for a spider web-like and highly flexible structure that did not have a well-defined pixel intensity
+gradient in two orthogonal directions across its full surface. More than three times as many features were tracked successfully with DDIC than for conventional DIC for both large (9 × 9) and small (3 × 3) features. D-DIC was also better at tracking displacement when
+using smaller features than conventional DIC, which was indicative of the robustness of D-DIC against the aperture problem. For
+small features (3 × 3), conventional DIC only tracked the displacement with a success rate of 0.627 compared to 0.998 for Directional
+DIC. D-DIC enabled setting up a mean frequency response function that was less noisy. Finally, more stable poles and vibration
+shapes were retrieved with D-DIC than conventional DIC. Directional DIC was able to overcome SOF’s small (sub-pixel) amplitude
+limitation by including a root-finding algorithm, as is conventional in DIC. The experimental analysis validated its accuracy at high
+displacement. The study demonstrated how to automatically select appropriate features for displacement estimation in a structure of
+interest. A parameter 𝜆d was proposed to be used for an automatic feature selector for uni-directional image-alignment techniques,
+such as Directional DIC. 𝜆d summed the pixel intensity gradient of a feature in the direction of the pre-defined displacement direction
+and takes the absolute value. Directional DIC enabled optical methods for cases where a speckle pattern could not be applied, but
+the motion was predominately uni-directional.
+CRediT authorship contribution statement
+Thijs Masmeijer: Writing – review & editing, Writing – original draft, Visualization, Validation, Software, Methodology,
+Investigation, Formal analysis, Data curation, Conceptualization. Ed Habtour: Writing – review & editing, Supervision, Resources,
+Project administration, Methodology, Investigation, Funding acquisition, Conceptualization. Klemen Zaletelj: Writing – review &
+editing, Software, Formal analysis, Data curation. Janko Slavič: Writing – review & editing, Supervision, Software, Resources,
+Project administration, Methodology, Funding acquisition, Data curation, Conceptualization.
+Declaration of competing interest
+The authors declare the following financial interests/personal relationships which may be considered as potential competing
+interests: Janko Slavic reports financial support was provided by Slovenian Research and Innovation Agency. Thijs Masmeijer reports
+financial support was provided by Boeing International Fellowship. If there are other authors, they declare that they have no known
+competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+Acknowledgments
+The authors acknowledge partial financial support from the Slovenian Research Agency (research core funding No. P2-0263).
+They are also grateful for the Boeing International Fellowship, which supported Thijs Masmeijer as a summer visiting scholar to
+conduct the experiments at the University of Ljubljana in Slovenia.
+13
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+Data availability
+Data will be made available on request.
+
+References
+[1] E. Habtour, R. Sridharan, A. Dasgupta, M. Robeson, S. Vantadori, Phase influence of combined rotational and transverse vibrations on the structural
+response, Mech. Syst. Signal Process. 100 (2018) 371–383.
+[2] R. Hou, Y. Xia, Review on the new development of vibration-based damage identification for civil engineering structures: 2010–2019, J. Sound Vib. 491
+(2021) 115741.
+[3] E. Habtour, D. Di Maio, T. Masmeijer, L. Cordova Gonzalez, T. Tinga, Highly sensitive nonlinear identification to track early fatigue signs in flexible
+structures, J. Nondestruct. Eval. Diagn. Progn. Eng. Syst. 5 (2) (2022) 021005.
+[4] C. Warren, C. Niezrecki, P. Avitabile, P. Pingle, Comparison of FRF measurements and mode shapes determined using optically image based, laser, and
+accelerometer measurements, Mech. Syst. Signal Process. 25 (2011) 2191–2202, http://dx.doi.org/10.1016/J.YMSSP.2011.01.018.
+[5] P.L. Reu, D.P. Rohe, L.D. Jacobs, Comparison of DIC and LDV for practical vibration and modal measurements, Mech. Syst. Signal Process. 86 (2017)
+2–16, http://dx.doi.org/10.1016/J.YMSSP.2016.02.006.
+[6] B.D. Lucas, T. Kanade, An iterative image registration technique with an application to stereo vision, in: IJCAI’81: 7th International Joint Conference on
+Artificial Intelligence, Vol. 2, Vancouver, Canada, 1981, pp. 674–679, URL https://hal.science/hal-03697340.
+[7] S. Baker, I. Matthews, Lucas-Kanade 20 years on: A unifying framework, Int. J. Comput. Vis. 56 (2004) 221–255, http://dx.doi.org/10.1023/B:
+VISI.0000011205.11775.fd, URL http://link.springer.com/10.1023/B:VISI.0000011205.11775.fd.
+[8] W.H. Peters, W.F. Ranson, Digital imaging techniques in experimental stress analysis, Opt. Eng., Bellingham 21 (1982) http://dx.doi.org/10.1117/12.
+7972925.
+[9] M. Sutton, W. Wolters, W. Peters, W. Ranson, S. McNeill, Determination of displacements using an improved digital correlation method, Image Vis. Comput.
+1 (1983) 133–139, http://dx.doi.org/10.1016/0262-8856(83)90064-1.
+[10] T.C. Chu, W.F. Ranson, M.A. Sutton, Applications of digital-image-correlation techniques to experimental mechanics, Exp. Mech. 25 (1985) 232–244,
+http://dx.doi.org/10.1007/BF02325092.
+[11] S.R. Atashipour, J. Baqersad, Noninvasive identification of directionally-dependent elastic properties of soft tissues using full-field optical data, J. Mech.
+Behav. Biomed. Mater. 151 (2024) 106266, http://dx.doi.org/10.1016/j.jmbbm.2023.106266.
+[12] P. Olaszek, Investigation of the dynamic characteristic of bridge structures using a computer vision method, Measurement 25 (1999) 227–236, http:
+//dx.doi.org/10.1016/S0263-2241(99)00006-8, URL https://linkinghub.elsevier.com/retrieve/pii/S0263224199000068.
+[13] T.G. Ryall, C.S. Fraser, Determination of structural modes of vibration using digital photogrammetry, J. Aircr. 39 (2002) 114–119, http://dx.doi.org/10.
+2514/2.2903.
+[14] C. Warren, C. Niezrecki, P. Avitabile, FRF measurements and mode shapes determined using image-based 3D point-tracking, in: Topics in Modal Analysis
+II, Vol. 6, Springer, 2011, pp. 243–252, http://dx.doi.org/10.1007/978-1-4419-9299-4_20, URL https://link.springer.com/10.1007/978-1-4419-9299-4_20.
+[15] M.M. Wharton, Photogrammetry and mean intensity mapping as methods of low-cost structural health monitoring, Mech. Syst. Signal Process. 219 (2024)
+111583, http://dx.doi.org/10.1016/j.ymssp.2024.111583.
+[16] D.J. Fleet, A.D. Jepson, Computation of component image velocity from local phase information, Int. J. Comput. Vis. 5 (1990) 77–104, http://dx.doi.org/
+10.1007/BF00056772.
+[17] M. Li, G. Liu, Z. Mao, Phased-based motion estimation through short-distance Hilbert transform, Mech. Syst. Signal Process. 211 (2024) 111219,
+http://dx.doi.org/10.1016/j.ymssp.2024.111219.
+[18] Y. Yang, C. Dorn, T. Mancini, Z. Talken, G. Kenyon, C. Farrar, D. Mascareñas, Blind identification of full-field vibration modes from video measurements
+with phase-based video motion magnification, Mech. Syst. Signal Process. 85 (2017) 567–590, http://dx.doi.org/10.1016/j.ymssp.2016.08.041, URL
+https://linkinghub.elsevier.com/retrieve/pii/S0888327016303272.
+[19] Y. Wang, W. Hu, J. Teng, Y. Xia, Full-field displacement measurement of long-span bridges using one camera and robust self-adaptive complex pyramid,
+Mech. Syst. Signal Process. 215 (2024) 111451, http://dx.doi.org/10.1016/J.YMSSP.2024.111451.
+[20] T. Siebert, R. Wood, K. Splitthof, High speed image correlation for vibration analysis, J. Phys. Conf. Ser. 181 (2009) 012064, http://dx.doi.org/10.1088/
+1742-6596/181/1/012064, URL https://iopscience.iop.org/article/10.1088/1742-6596/181/1/012064.
+[21] D. Gorjup, J. Slavič, M. Boltežar, Frequency domain triangulation for full-field 3D operating-deflection-shape identification, Mech. Syst. Signal Process.
+133 (2019) 106287, http://dx.doi.org/10.1016/j.ymssp.2019.106287, URL https://linkinghub.elsevier.com/retrieve/pii/S0888327019305023.
+[22] F. Renaud, S. Lo Feudo, J.-L. Dion, A. Goeller, 3D vibrations reconstruction with only one camera, Mech. Syst. Signal Process. 162 (2022) 108032,
+http://dx.doi.org/10.1016/j.ymssp.2021.108032.
+[23] M.N. Helfrick, C. Niezrecki, P. Avitabile, T. Schmidt, 3D digital image correlation methods for full-field vibration measurement, Mech. Syst. Signal Process.
+25 (2011) 917–927, http://dx.doi.org/10.1016/j.ymssp.2010.08.013.
+[24] T.J. Beberniss, D.A. Ehrhardt, High-speed 3D digital image correlation vibration measurement: Recent advancements and noted limitations, Mech. Syst.
+Signal Process. 86 (2017) 35–48, http://dx.doi.org/10.1016/J.YMSSP.2016.04.014.
+[25] R. Huňady, P. Pavelka, P. Lengvarský, Vibration and modal analysis of a rotating disc using high-speed 3D digital image correlation, Mech. Syst. Signal
+Process. 121 (2019) 201–214, http://dx.doi.org/10.1016/J.YMSSP.2018.11.024.
+[26] P. Neri, A. Paoli, A.V. Razionale, C. Santus, Low-speed cameras system for 3D-DIC vibration measurements in the kHz range, Mech. Syst. Signal Process.
+162 (2022) 108040, http://dx.doi.org/10.1016/j.ymssp.2021.108040.
+[27] B.A. Furman, B.D. Hill, J.R. Rigby, J.M. Wagner, R.B. Berke, Sensor synchronized DIC: A robust approach to linear and nonlinear modal analysis using
+low frame rate cameras, J. Sound Vib. (2024) 118478, http://dx.doi.org/10.1016/J.JSV.2024.118478, URL https://linkinghub.elsevier.com/retrieve/pii/
+S0022460X24002414.
+[28] C. Liu, A. Torralba, W.T. Freeman, F. Durand, E.H. Adelson, Motion magnification, ACM Trans. Graph. 24 (2005) 519–526, http://dx.doi.org/10.1145/
+1073204.1073223.
+[29] K. Čufar, J. Slavič, M. Boltežar, Mode-shape magnification in high-speed camera measurements, Mech. Syst. Signal Process. 213 (2024) 111336,
+http://dx.doi.org/10.1016/j.ymssp.2024.111336, URL https://linkinghub.elsevier.com/retrieve/pii/S0888327024002346.
+[30] K. Luo, X. Kong, J. Li, J. Hu, L. Deng, Motion magnification for video-based vibration measurement of civil structures: A review, Mech. Syst. Signal
+Process. 220 (2024) 111681, http://dx.doi.org/10.1016/j.ymssp.2024.111681.
+[31] W. Wang, J.E. Mottershead, A. Ihle, T. Siebert, H.R. Schubach, Finite element model updating from full-field vibration measurement using digital image
+correlation, J. Sound Vib. 330 (2011) 1599–1620, http://dx.doi.org/10.1016/J.JSV.2010.10.036.
+[32] K. Zaletelj, J. Slavič, M. Boltežar, Full-field DIC-based model updating for localized parameter identification, Mech. Syst. Signal Process. 164 (2022)
+108287, http://dx.doi.org/10.1016/j.ymssp.2021.108287, URL https://linkinghub.elsevier.com/retrieve/pii/S088832702100652X.
+14
+
+Mechanical Systems and Signal Processing 224 (2025) 112080
+
+T. Masmeijer et al.
+
+[33] K. Zaletelj, D. Gorjup, J. Slavič, M. Boltežar, Multi-level curvature-based parametrization and model updating using a 3D full-field response,
+Mech. Syst. Signal Process. 187 (2023) 109927, http://dx.doi.org/10.1016/j.ymssp.2022.109927, URL https://linkinghub.elsevier.com/retrieve/pii/
+S0888327022009955.
+[34] T.B. Abbott, F.-G. Yuan, Subsurface impact damage imaging for composite structures using 3D digital image correlation, Struct. Health Monit. 23 (2024)
+568–587, http://dx.doi.org/10.1177/14759217231172297, URL http://journals.sagepub.com/doi/10.1177/14759217231172297.
+[35] S. Yu, J. Zhang, C. Zhu, Z. Sun, S. Dong, Full-field deformation measurement and cracks detection in speckle scene using the deep learning-aided digital
+image correlation method, Mech. Syst. Signal Process. 209 (2024) 111131, http://dx.doi.org/10.1016/j.ymssp.2024.111131.
+[36] T. Wu, L. Tang, F. Zhou, Y. Zhang, Z. Zhou, Damage detection based on accelerometers and computer vision measurements of moving load-induced
+structural responses, Mech. Syst. Signal Process. 211 (2024) 111246, http://dx.doi.org/10.1016/J.YMSSP.2024.111246.
+[37] S. Zhang, P. Ni, J. Wen, Q. Han, X. Du, J. Fu, Intelligent identification of moving forces based on visual perception, Mech. Syst. Signal Process. 214
+(2024) 111372, http://dx.doi.org/10.1016/j.ymssp.2024.111372.
+[38] K. Zaletelj, J. Slavič, J. Šonc, M. Boltežar, Strain experimental modal analysis of an Euler–Bernoulli beam based on the thermoelastic principle, Mech.
+Syst. Signal Process. 201 (2023) 110655, http://dx.doi.org/10.1016/j.ymssp.2023.110655.
+[39] T. Jiang, G.T. Frøseth, S. Wang, Ø.W. Petersen, A. Rønnquist, A 6-DOF camera motion correction method using IMU sensors for photogrammetry and
+optical measurements, Mech. Syst. Signal Process. 210 (2024) 111148, http://dx.doi.org/10.1016/j.ymssp.2024.111148.
+[40] C. Niezrecki, P. Avitabile, C. Warren, P. Pingle, M. Helfrick, E.P. Tomasini, A review of digital image correlation applied to structural dynamics, in:
+Proceedings of the American Control Conference, 2010, pp. 219–232, http://dx.doi.org/10.1063/1.3455461, URL https://pubs.aip.org/aip/acp/article/
+1253/1/219-232/773027.
+[41] J. Baqersad, P. Poozesh, C. Niezrecki, P. Avitabile, Photogrammetry and optical methods in structural dynamics – A review, Mech. Syst. Signal Process.
+86 (2017) 17–34, http://dx.doi.org/10.1016/J.YMSSP.2016.02.011.
+[42] B.K. Horn, B.G. Schunck, Determining optical flow, Artificial Intelligence 17 (1981) 185–203, http://dx.doi.org/10.1016/0004-3702(81)90024-2.
+[43] E.C. Hildreth, S. Ullman, The Measurement of Visual Motion (Ph.D. thesis), Massachusetts Institute of Technology, 1982.
+[44] P. Anandan, A computational framework and an algorithm for the measurement of visual motion, Int. J. Comput. Vis. 2 (1989) 283–310, http:
+//dx.doi.org/10.1007/BF00158167, URL http://link.springer.com/10.1007/BF00158167.
+[45] D. Lecompte, A. Smits, S. Bossuyt, H. Sol, J. Vantomme, D.V. Hemelrijck, A. Habraken, Quality assessment of speckle patterns for digital image correlation,
+Opt. Lasers Eng. 44 (2006) 1132–1145, http://dx.doi.org/10.1016/j.optlaseng.2005.10.004.
+[46] T. Jiang, G.T. Frøseth, A. Rønnquist, E. Fagerholt, A robust line-tracking photogrammetry method for uplift measurements of railway catenary systems in
+noisy backgrounds, Mech. Syst. Signal Process. 144 (2020) 106888, http://dx.doi.org/10.1016/j.ymssp.2020.106888.
+[47] B.W. McCormick, Aerodynamics, Aeronautics, and Flight Mechanics, second ed., John Wiley & Sons, Nashville, TN, 1994, pp. 153–156.
+[48] L. Meirovitch, Fundamentals of Vibrations, Waveland press inc., Long Grove, 2010, pp. 616–617.
+[49] H.P. Moravec, Rover visual obstacle avoidance, in: International Joint Conference on Artificial Intelligence, 1981, URL https://api.semanticscholar.org/
+CorpusID:18232715.
+[50] C. Tomasi, T. Kanade, Shape and motion from image streams: a factorization method, Proc. Natl. Acad. Sci. 90 (1991) 9795–9802, http://dx.doi.org/10.
+1073/pnas.90.21.9795, URL https://pnas.org/doi/full/10.1073/pnas.90.21.9795.
+[51] J. Shi, Tomasi, Good features to track, in: Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, CVPR-94, IEEE Comput. Soc.
+Press, 1994, pp. 593–600, http://dx.doi.org/10.1109/CVPR.1994.323794.
+[52] C. Harris, M. Stephens, A combined corner and edge detector, in: Procedings of the Alvey Vision Conference 1988, Alvey Vision Club, 1988, pp. 23.1–23.6,
+http://dx.doi.org/10.5244/C.2.23, URL http://www.bmva.org/bmvc/1988/avc-88-023.html.
+[53] M. Brown, R. Szeliski, S. Winder, Multi-image matching using multi-scale oriented patches, in: 2005 IEEE Computer Society Conference on Computer
+Vision and Pattern Recognition, Vol. 1, CVPR’05, IEEE, 2005, pp. 510–517, http://dx.doi.org/10.1109/CVPR.2005.235, URL http://ieeexplore.ieee.org/
+document/1467310/.
+[54] B. Triggs, Detecting keypoints with stable position, orientation, and scale under illumination changes, 2004, pp. 100–113, http://dx.doi.org/10.1007/9783-540-24673-2_9, URL http://link.springer.com/10.1007/978-3-540-24673-2_9.
+[55] J. Javh, J. Slavič, M. Boltežar, The subpixel resolution of optical-flow-based modal analysis, Mech. Syst. Signal Process. 88 (2017) 89–99, http:
+//dx.doi.org/10.1016/j.ymssp.2016.11.009.
+[56] B. Pan, H.M. Xie, B.Q. Xu, F.L. Dai, Performance of sub-pixel registration algorithms in digital image correlation, Meas. Sci. Technol. 17 (2006) 1615–1621,
+http://dx.doi.org/10.1088/0957-0233/17/6/045.
+[57] S. Baker, I. Matthews, Equivalence and efficiency of image alignment algorithms, in: Proceedings of the 2001 IEEE Computer Society Conference on
+Computer Vision and Pattern Recognition, Vol. 1, CVPR 2001, IEEE Comput. Soc, 2001, pp. I–1090–I–1097, http://dx.doi.org/10.1109/CVPR.2001.990652,
+URL http://ieeexplore.ieee.org/document/990652/.
+[58] K. Zaletelj, D. Gorjup, J. Slavič, Ladisk/pyidi: release of the version v0.23 (v0.23), Zenodo, 2020, http://dx.doi.org/10.5281/zenodo.4017153.
+[59] D. Marr, S. Ullman, Directional selectivity and its use in early visual processing, Proc. R. Soc. Lond. [Biol.] 211 (1981) 151–180, http://dx.doi.org/10.
+1098/rspb.1981.0001, URL https://royalsocietypublishing.org/doi/10.1098/rspb.1981.0001.
+[60] H.W. Schreier, Systematic errors in digital image correlation caused by intensity interpolation, Opt. Eng., Bellingham 39 (2000) 2915, http://dx.doi.org/
+10.1117/1.1314593.
+[61] J.R. Bergen, P. Anandan, K.J. Hanna, R. Hingorani, Hierarchical model-based motion estimation, in: G. Sandini (Ed.), Computer Vision — ECCV’92, Springer
+Berlin Heidelberg, Berlin, Heidelberg, 1992, pp. 237–252.
+[62] G. Hager, P. Belhumeur, Efficient region tracking with parametric models of geometry and illumination, IEEE Trans. Pattern Anal. Mach. Intell. 20 (1998)
+1025–1039, http://dx.doi.org/10.1109/34.722606, URL http://ieeexplore.ieee.org/document/722606/.
+[63] F. Hild, S. Roux, Digital image correlation, in: Optical methods for solid mechanics. A full-field approach, Vol. 367, Wiley-VCH Weinheim (Germany),
+2012, p. 76.
+[64] B. Pan, H. Xie, Z. Wang, K. Qian, Z. Wang, Study on subset size selection in digital image correlation for speckle patterns, Opt. Express 16 (2008) 7037,
+http://dx.doi.org/10.1364/OE.16.007037.
+[65] K.G. McConnell, P.S. Varoto, Vibration Testing, second ed., John Wiley & Sons, Nashville, TN, 2007, p. 168.
+[66] P. Verboven, Frequency Domain System Identification for Modal Analysis (Ph.D. thesis), Vrije Universiteit Brussel, 2002.
+
+15
+
+

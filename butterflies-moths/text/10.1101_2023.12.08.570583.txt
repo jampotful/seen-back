@@ -1,0 +1,2391 @@
+Synchrotron-source micro-x-ray computed tomography for examining butterfly eyes
+Dawn Paukner, Gregg A. Wildenberg, Griffin S. Badalamente, P. B. Littlewood, Marcus R. Kronforst, Stephanie E. Palmer, Narayanan Kasthuri (2023). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/2023.12.08.570583. doi:10.1101/2023.12.08.570583. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+Syn-μCT for butterfly eyes
+
+Synchrotron-source micro-x-ray computed tomography for examining butterfly eyes
+Dawn Paukner1,2,4, Gregg A. Wildenberg1,2, Griffin S. Badalamente1,3, Peter B. Littlewood4,
+Marcus R. Kronforst6, Stephanie E. Palmer4,5, Narayanan Kasthuri1,2
+
+1. University of Chicago, Department of Neurobiology; 2. Argonne National Laboratory; 3.
+University of Cambridge, Department of Zoology; 4. University of Chicago, Department of
+Physics; 5. University of Chicago, Department of Organismal Biology and Anatomy; 6.
+University of Chicago, Department of Ecology and Evolution
+
+University of Chicago: 5801 S Ellis Ave, Chicago, IL 60637
+Argonne National Laboratory: 9700 S Cass Ave, Lemont, IL 60439
+University of Cambridge: The Old Schools, Trinity Ln, Cambridge CB2 1TN, UK
+
+Corresponding Author
+Dawn Paukner
+dpaukner@uchicago.edu
+947-51 E. 58th St., AB 401
+Chicago, IL 60637
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+1
+
+Abstract
+
+2
+3
+
+1. Comparative anatomy is an important tool for investigating evolutionary
+
+4
+
+relationships amongst species, but the lack of scalable imaging tools and
+
+5
+
+stains for rapidly mapping the microscale anatomies of related species
+
+6
+
+poses a major impediment to using comparative anatomy approaches for
+
+7
+
+identifying evolutionary adaptations.
+
+8
+
+2. We describe a method using synchrotron source micro-x-ray computed
+
+9
+
+tomography (syn-µXCT) combined with machine learning algorithms for
+
+10
+
+high-throughput imaging of Lepidoptera (i.e., butterfly and moth) eyes. Our
+
+11
+
+pipeline allows for imaging at rates of ~ 15 min/mm3 at 600 nm3 resolution.
+
+12
+
+Image contrast is generated using standard electron microscopy labeling
+
+13
+
+approaches (e.g., osmium tetroxide) that unbiasedly labels all cellular
+
+14
+
+membranes in a species independent manner thus removing any barrier to
+
+15
+
+imaging any species of interest.
+
+16
+
+3. To demonstrate the power of the method, we analyzed the 3D
+
+17
+
+morphologies of butterfly crystalline cones, a part of the visual system
+
+18
+
+associated with acuity and sensitivity and found significant variation within
+
+19
+
+six butterfly individuals. Despite this variation, a classic measure of
+
+20
+
+optimization, the ratio of interommatidial angle to resolving power of
+
+21
+
+ommatidia, largely agrees with early work on eye geometry across
+
+22
+
+species.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+23
+
+4. We show that this method can successfully be used to determine
+
+24
+
+compound eye organization and crystalline cone morphology. Our novel
+
+25
+
+pipeline provides for fast, scalable visualization and analysis of eye
+
+26
+
+anatomies that can be applied to any arthropod species, enabling new
+
+27
+
+questions about evolutionary adaptations of compound eyes and beyond.
+
+28
+29
+
+Introduction
+
+30
+
+There is a rich history of using insects to understand behavioral and anatomical
+
+31
+
+diversity (Chown & Terblanche, 2006; Price et al., 2011). Insects represent the
+
+32
+
+largest group in the animal kingdom and their absolute numbers are also
+
+33
+
+matched by their diversity in phenotypes, behavior, and anatomy (Stork, 2017).
+
+34
+
+Classically, morphological variation that could be observed by the naked eye
+
+35
+
+provided the necessary evidence for fundamental theories in evolution including
+
+36
+
+natural selection, speciation, mimicry, and mate preference (Darwin, 1859;
+
+37
+
+Poulton, 1909; Butler, 1963), to name a few. More recently, the revolution in
+
+38
+
+genetics and genomics has allowed for identifying genetic variation that drives
+
+39
+
+variation in these observable traits (Dobzhansky, 1982; Kronforst et al., 2006;
+
+40
+
+Baxter et al. 2010). However, microscopic studies have lagged behind, largely
+
+41
+
+due to a lack of experimental tools to rapidly visualize and analyze fine structural
+
+42
+
+detail over large volumes and algorithmic tools to analyze the resulting large
+
+43
+
+image data sets with minimal human effort. While there has been a recent push
+
+44
+
+to test different techniques for studying morphology, most methods do not
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+45
+
+provide a satisfactory balance between higher resolution and lower
+
+46
+
+computational power (Friedrich et al., 2014; Wipfler et al., 2016).
+
+47
+48
+
+Electron microscopy (EM) can provide the requisite resolution but is typically
+
+49
+
+limited to scanned EM, (SEM) which visualizes external morphologies (Schwarz
+
+50
+
+et al., 2011; Hao et al., 2023). A full 3D EM reconstruction using serial block face
+
+51
+
+SEM, focused ion beam SEM, or transmission EM remains time- and
+
+52
+
+computation- intensive. We, and others, have recently shown that the sample
+
+53
+
+preparation for EM using osmium tetroxide, which is species independent,
+
+54
+
+provides excellent contrast in X-ray tomography microscopes (Johnson et al,
+
+55
+
+2006; Ribi et al, 2008; Dyer et al, 2017; Van den Boogert et al, 2018). Using X-
+
+56
+
+ray tomography, large volumes of brains (even entire mouse brains) can be
+
+57
+
+imaged in 3D at submicron resolution quickly (imaging rates of 0.067 mm3/min)
+
+58
+
+(Foxley et al, 2021). Here we demonstrate a pipeline for synchrotron source X-
+
+59
+
+ray computed tomography (syn-µCT) performed at the Advanced Photon Source
+
+60
+
+(APS) at Argonne National Laboratory (ANL) for high throughput 3D imaging of
+
+61
+
+the brains and intact eyes of a variety of butterflies.
+
+62
+63
+64
+
+1. We achieve 600nm3 voxel resolution and imaging rates of 0.067 mm3/min,
+e.g., ~one insect brain every ~45 minutes.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+65
+
+2. We developed a novel embedding method that allows for automatically
+
+66
+
+imaging multiple species eyes in a single imaging run to enable high-
+
+67
+
+throughput imaging.
+
+68
+
+3. We developed a machine vision pipeline to extract the relevant
+
+69
+
+morphological features from X-ray datasets and used these
+
+70
+
+reconstructions to better understand microscopic variability in the
+
+71
+
+morphology of cells in the light path across species.
+
+72
+
+4. Specifically, we analyze these new data sets in the context of pioneering
+
+73
+
+work in Hymenoptera species (e.g., bees and parasitic wasps) that
+
+74
+
+determined an optimal ratio of interommatidial angle to resolving power
+
+75
+
+(Barlow, 1952). This ratio of interommatidial angle to resolving power is
+
+76
+
+hereafter referred to as the “Barlow ratio” and is dimensionless as both
+
+77
+
+angle and resolving power are in degrees. We extend this work by showing
+
+78
+
+the Barlow ratio of the ommatidia in butterfly species falls near the
+
+79
+
+theoretical optimum. By leveraging the full 3D datasets, we, however, find
+
+80
+
+significant variation across an individual eye.
+
+81
+
+5. Finally, we use an amalgamation of individual crystalline cone
+
+82
+
+measurements across individual eyes to generate a representative 3D
+
+83
+
+crystalline cone for each sample within and across species. Generating the
+
+84
+
+morphology of these cones allows for the mapping of light as it travels
+
+85
+
+through this structure to the rhabdom. We observe cone shapes that vary
+
+86
+
+both across the eye of an individual and between individuals (Fig. 5). This
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+87
+
+technique allows for the dissection of these effects at fine detail across the
+
+88
+
+eye and could support studies of cone optics and variation in and between
+
+89
+
+species.
+
+90
+91
+
+Materials and Methods
+
+92
+
+Samples from seven animals across six species of butterflies (Heliconius cydno,
+
+93
+
+Strymon melinus, Calycopis cecrops, Polygonia interrogationis, Polites peckius,
+
+94
+
+and two Pieris rapae) were prepared for electron microscopy (Hua et al., 2015)
+
+95
+
+and assembled in plastic pillars vertically to stabilize the samples for imaging
+
+96
+
+(Fig. 1A), and large sections of eyes were imaged at the Advanced Photon
+
+97
+
+Source (APS) at Argonne National Laboratory using syn-µCT) using an
+
+98
+
+automated z-axis tiling approach for unassisted imaging of multiple insect eyes
+
+99
+
+(Fig. 1B). The resulting X-ray data sets, with a total volume of 14.3 mm3 and an
+
+100
+
+isotropic resolution of ~0.6 microns resolved fine structure in the eye across all
+
+101
+
+species, most notably the crystalline cones (Fig. 1C, Fig. SI1). We next
+
+102
+
+developed our analysis pipeline by focusing on the crystalline cones due to its
+
+103
+
+notable variability across species upon visual inspection.
+
+104
+105
+
+We used an analysis pipeline to extract the relevant features from the X-ray
+
+106
+
+datasets. For example, Fig 2A shows the segmentation output of ilastik (Berg et
+
+107
+
+al., 2019), a free open-source software for image classification and
+
+108
+
+segmentation. The output from ilastik gave us clusters of points corresponding to
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+109
+
+each crystalline cone, which we analyzed in Matlab (The Mathworks, Natick, MA)
+
+110
+
+and Python (Van Rossum & Drake, 2009) (Fig, 2B, Fig. SI1).
+
+111
+
+112
+113
+
+Figure 1. X-ray analysis pipeline showing A) diagram of insect eyes stacked in a
+
+114
+
+vertical column, B) a diagram of the sample rotating and moving vertically in the
+
+115
+
+X-ray beam, and C) a raw X-ray image. Butterfly in A) is from (Gallice, 2012).
+
+116
+117
+
+Sample preparation
+
+118
+
+Insect samples were either collected in the wild in Chicago, IL (Pieris rapae,
+
+119
+
+Polites peckius, and Polygonia interrogationis), collected from our breeding
+
+120
+
+colonies at The University of Chicago (Heliconius cydno), or provided by Erica
+
+121
+
+Westerman (University of Arkansas) (Strymon melinus and Calycopis cecrops).
+
+122
+
+For dissections, insects were anesthetized by placing them at 4ºC for ~10
+
+123
+
+minutes. Insects were then submerged in ice cold Phosphate Buffered Saline
+
+124
+
+(PBS) and dissected in PBS under a stereomicroscope to remove the cuticle
+
+125
+
+outer layer and expose the brain. Brains with eyes intact were then cut from the
+
+126
+
+body and submerged in fixative solution consisting of 0.1M Sodium Cacodylate
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+127
+
+buffer, pH 7.4, 2% paraformaldehyde, and 2.5% glutaraldehyde. Brains were
+
+128
+
+incubated in fixative for ~24hrs, gently rocking at 4ºC. The next day, brains with
+
+129
+
+eyes were prepared using electron microscopy protocols as previously described
+
+130
+
+(Hua et al, 2015). Briefly, brains were washed extensively in cacodylate buffer at
+
+131
+
+room temperature and stained sequentially with 2% osmium tetroxide (EMS) in
+
+132
+
+cacodylate buffer, 2.5% potassium ferrocyanide (Sigma-Aldrich),
+
+133
+
+thiocarbohydrazide, unbuffered 2% osmium tetroxide, 1% uranyl acetate, and
+
+134
+
+0.66% Aspartic acid buffered Lead (II) Nitrate with extensive rinses between
+
+135
+
+each step with the exception of potassium ferrocyanide. The samples were then
+
+136
+
+dehydrated in ethanol and propylene oxide and infiltrated with 812 Epon resin
+
+137
+
+(EMS, Mixture: 49% Embed 812, 28% DDSA, 21% NMA, and 2.0% DMP 30).
+
+138
+
+Samples were cured in custom cylindrical molds to stack multiple brains into one
+
+139
+
+sample and to remove any edges to the resin that may affect X-ray imaging. The
+
+140
+
+resin-infiltrated tissue was cured at 60ºC for 3 days.
+
+141
+142
+
+µX-ray computed tomography
+
+143
+
+The syn-μCT data were acquired as previously described (Foxley et al, 2021).
+
+144
+
+Briefly, we used the 32-ID beamline at the Advanced Photon Source, Argonne
+
+145
+
+National Laboratory. The setup consists of a 1.8 cm-period undulator operated at
+
+146
+
+a low deflection parameter value of K = 0.26. This yields a single quasi-
+
+147
+
+monochromatic peak of energy 25 keV without the losses incurred by use of a
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+148
+
+crystal monochromator. For a sample 68 m from the undulator, this produces a
+
+149
+
+photon fluence rate of about 1.8×107 photons s-1µm-2.
+
+150
+
+The x-rays were imaged using a 10 µm thick thin-film LuAG:Ce scintillator
+
+151
+
+producing visible-light images then magnified using a 10X Mitutoyo long working
+
+152
+
+distance microscope objective onto a 1920x1200 pixel CMOS camera (Point
+
+153
+
+Gray GS3-U3-51S5M-C). The effective object space pixel size was 600 nm
+
+154
+
+isotropic. The thickness of the thin-film scintillator matched the depth of focus of
+
+155
+
+the objective lens, achieving a spatial resolution equivalent to the resolving
+
+156
+
+power of the lens (1.3 µm for a NA of 0.21). Since the camera field of view was
+
+157
+
+substantially smaller than the sample, a mosaic strategy was employed (Vescovi
+
+158
+
+et al., 2018).
+
+159
+
+The sample was mounted on an air-bearing rotary stage (PI-Micos UPR-160
+
+160
+
+AIR) with motorized x/y translation stages located underneath and x/y piezo
+
+161
+
+stages on top. Typical exposure time for a single projection image at one mosaic
+
+162
+
+grid point and one rotation angle was 30 ms. 360° rotation angles were used at
+
+163
+
+each grid point. The sample was translated through a 6 ×18 tomosaic grid.
+
+164
+
+165
+
+Data Analysis
+
+166
+
+Crystalline cones from the raw x-ray datasets were segmented using the
+
+167
+
+software ilastik and code based off cc3d (Silversmith, 2021). This generated sets
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+168
+
+of voxels corresponding to each of the crystalline cones. Outliers in the set of
+
+169
+
+points that were not part of the cones were deleted manually.
+
+170
+
+We defined the center of each crystalline cone as its center of mass. Then we
+
+171
+
+estimated the local radius of the eye by fitting a sphere to clusters of 60 points
+
+172
+
+corresponding to the crystalline cone centers. We chose 60 points because this
+
+173
+
+encompasses a hexagonal array surrounding a single point extending 4
+
+174
+
+ommatidia out in all directions. Vectors from the center of the sphere to the
+
+175
+
+center of each cone were calculated. Once we have defined the ‘center’ of the
+
+176
+
+eye from the local curvature we can then use the vectors from that putative
+
+177
+
+center to the centers of the cones to define an ommatidial angle. The angles
+
+178
+
+between a cone’s vector and its six nearest neighbors’ vectors were averaged,
+
+179
+
+and this was used as the (local) interommatidial angle (Δɸ). The average
+
+180
+
+distance to the six nearest neighbors was used as the diameter of the
+
+181
+
+ommatidium (D). Since the center of each cone lies below the surface of each
+
+182
+
+eye facet, this systematically underestimates the value of D by potentially a
+
+183
+
+significant fraction of the cone length times Δɸ (measured in radians). This
+
+184
+
+systematic error is then of order 2 microns or less, which is considerably smaller
+
+185
+
+than both the mean and the variance of D (Table SI1). Resolving power was
+
+186
+
+calculated by θ=1.22*λ/D where λ is the wavelength of light. For our analysis,
+
+187
+
+λ=500 nm, as it corresponds to broad peaks in both the typical sunlight spectrum
+
+188
+
+and photoreceptor sensitivity in many insects. This is also the λ that Barlow used
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+189
+
+for his calculations. The ratio Δɸ/θ, aka the Barlow ratio, was also calculated.
+
+190
+
+Extreme outliers were cut off when we noted corresponding defects in the x-ray
+
+191
+
+images or where the values seemed biologically implausible (e.g.,
+
+192
+
+interommatidial angles greater than 90 degrees). These outliers occurred almost
+
+193
+
+exclusively at the edges of the eyes. Cone shapes were determined by centering
+
+194
+
+and overlaying all cones within a single eye, and keeping the collection of shared
+
+195
+
+points, points with at least 25% overlap, across all cones. This was done to
+
+196
+
+reduce noise in the segmentation of individual cones. The number of cones
+
+197
+
+overlayed per eye varied from about 600 to 3000. There appeared to be some
+
+198
+
+variation in cones across the eye, but the biggest deviations from the average
+
+199
+
+seemed to come from the cones at the outer edges of the eye. Then, the
+
+200
+
+boundary of the cone was calculated from this set of overlapping points using the
+
+201
+
+“boundary” function on Matlab. We used the Pearson correlation coefficient to
+
+202
+
+determine the relationship between wingspan and cone length as well as
+
+203
+
+wingspan and cone ratio. We also calculated the aspect ratio and cone ratio for
+
+204
+
+each individual cone.
+
+205
+206
+
+Results
+
+207
+208
+
+In order to understand whether ommatidial diameter, interommatidial angles,
+
+209
+
+resolving power, and Barlow ratios changed within individuals, we first looked at
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+210
+
+how these different parameters varied across the surface of a single eye. When
+
+211
+
+creating these maps, we found that ommatidial diameter (as well as resolving
+
+212
+
+power) appeared to vary gradually from areas with larger diameters up to 35.3
+
+213
+
+microns to those with smaller diameters down to 17.1 microns (Fig 2C, D). In
+
+214
+
+contrast, the changes in interommatidial angle and Barlow ratio across the eye
+
+215
+
+were not as smooth, with transitions from higher to lower acuity areas being less
+
+216
+
+clear by visual inspection (Fig 2E, F).
+
+217
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+218
+219
+
+Figure 2. A) Segmented out crystalline cones with the inlay showing that cones
+
+220
+
+are labeled as separate objects. B) Centers of crystalline cones plotted in Matlab
+
+221
+
+where the rest of our analysis took place. C-F) show scatter plots showing how
+
+222
+
+C) ommatidial diameter, D) resolving power, E) interommatidial angle, and F)
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+223
+
+Barlow ratios change across the eye. The portion of the eye shown here is from
+
+224
+
+Polites peckius. Each point represents one ommatidium.
+
+225
+226
+227
+
+Next, we asked how these parameters varied across different individuals by
+
+228
+
+reporting the statistics of the distributions for these variables for each individual.
+
+229
+
+The average median ommatidial diameter across all individuals was 24.5
+
+230
+
+microns, ranging from 20.54 to 31.09 microns, with an average interquartile
+
+231
+
+range of 3.36 (Fig 3A). Resolving powers had an average median value of 1.46
+
+232
+
+degrees, ranging from 1.12 to 1.70 degrees, with an average interquartile range
+
+233
+
+of 0.18 (Fig 3B). The median interommatidial angle measured across all species
+
+234
+
+ranged from 1.42 to 1.87 degrees, with an average of 1.66 degrees and an
+
+235
+
+average interquartile range of 1.01 degrees (Fig 3B). Medians for the Barlow
+
+236
+
+ratio ranged from 0.846 to 1.49 with two individuals having medians within the
+
+237
+
+optimal range. The average median Barlow ratio was 1.17 with an average
+
+238
+
+interquartile range of 0.80 (Fig 4A).
+
+239
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+240
+241
+
+Figure 3. Plots showing the median (red line) A) ommatidial diameter in microns,
+
+242
+
+B) resolving powers, C) and interommatidial angles in degrees for the seven
+
+243
+
+individuals. Boxes show interquartile range and whiskers show the lower and
+
+244
+
+upper quartiles (Outliers are shown in Fig. SI2 for clarity of presentation).
+
+245
+
+246
+247
+
+Figure 4. A) Boxplot showing the median (red line) Barlow ratio for the seven
+
+248
+
+individuals. Boxes show interquartile range and whiskers show the lower and
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+249
+
+upper quartiles (Outliers are shown in Fig. SI2). B) Bar plot showing the
+
+250
+
+percentage of each portion of eye with a Barlow ratio that fell between 0.4 and 1.
+
+251
+252
+253
+
+Because our method provided great enough resolution to clearly distinguish
+
+254
+
+whole crystalline cones, we decided to look at the micron scale morphology of
+
+255
+
+this structure, which guides the light focused by the cornea and lens to the
+
+256
+
+ommatidia. When looking at the size and shape of this structure, we found
+
+257
+
+variation across individuals that would need to be disentangled from variation
+
+258
+
+across the eye with larger datasets. For instance, the average “typical” cone
+
+259
+
+length across species (Fig. 5) was 44.4 microns, but ranged from 22.2 microns to
+
+260
+
+72.0 microns, and some cones had a defined point at the bottom while others
+
+261
+
+were more rounded. In order to quantify how tapered a cone was, we took the
+
+262
+
+ratio of the cone diameter at 10% of the length from the bottom and the
+
+263
+
+maximum diameter at the top and found the mean of this ratio was 0.3669. The
+
+264
+
+most tapered cone had a ratio of 0.2121, while the least tapered cone was less
+
+265
+
+than half as tapered with a ratio of 0.5362. When analyzing morphological data, it
+
+266
+
+is important to consider scaling relationships in the data (Jablonski et al, 1996).
+
+267
+
+In our data, when examining allometric relationships, we found that there was a
+
+268
+
+negative correlation between the wingspan of a species and the typical cone
+
+269
+
+length (r(7)=-0.8881, p=0.0076) as well as a negative correlation between
+
+270
+
+wingspan and cone ratio (r(7)=-0.7949, p=0.0326). Besides looking at the typical
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+271
+
+crystalline cones, we also looked at the shapes of all the cones across each eye.
+
+272
+
+Changes in different parameters such as the length (Fig 5B), aspect ratio (Fig
+
+273
+
+5C), and cone ratio (Fig 5D) could be seen across the eyes of all individuals.
+
+274
+
+275
+276
+
+Figure 5. A) Cone shapes from all 7 individuals plotted by the length of the cone
+
+277
+
+and the ratio of the diameter of the cone 10% from the bottom and the maximum
+
+278
+
+width of the cone at the top. Scale bar shows 10 microns. Black line denotes the
+
+279
+
+median cone length, while the red line shows the cone length of the typical cone.
+
+280
+
+B) Histogram showing the cone lengths across the eye of Polites peckius with
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+281
+
+example cones from the 3 different peaks in the distribution. C) Histograms
+
+282
+
+showing the aspect ratios and D) cone ratios of each individual (excluding
+
+283
+
+Heliconius as there were issues with individual cone segmentation in this
+
+284
+
+dataset).
+
+285
+286
+287
+
+Discussion
+
+288
+
+Our method provides a new way to study insect morphology, especially the
+
+289
+
+individual components of the eye, using a higher contrast staining method, higher
+
+290
+
+resolution syn-μCT, and a novel analysis pipeline. With the method, an entire eye
+
+291
+
+can be surveyed for microscopic features like ommatidial diameters, angles, and
+
+292
+
+cone morphologies. Previous methods measuring microscopic features have
+
+293
+
+either imaged smaller volumes at higher resolution (e.g. Hao et al., 2023) or
+
+294
+
+larger volumes at lower resolution (e.g. Currea et al., 2023). Using our approach,
+
+295
+
+we were able to analyze seven insects of six different butterfly species to show
+
+296
+
+that the Barlow ratio of the ommatidia falls in or near the theoretical optimum, but
+
+297
+
+notable portions of the eye have Barlow ratios greater than this optimum. This
+
+298
+
+suggests that portions of the visual scene are undersampled. In previous work
+
+299
+
+that has shown a similar kind of spatial undersampling in insect eyes, it has been
+
+300
+
+suggested that this is due to motion blur from the animal moving about its
+
+301
+
+environment (Land, 1997). This indicates that theoretical models must also
+
+302
+
+account for the angular velocity of the organism or objects in its visual
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+303
+
+environment and other processing that happens later in the visual system to
+
+304
+
+optimize an insect’s vision. Additional research is needed to assess how different
+
+305
+
+luminance may change the Barlow ratio and if the theoretical models that
+
+306
+
+account for light levels, as described by Snyder et al (1977), are correct.
+
+307
+308
+
+Limitations
+
+309
+
+There are several limitations to this study. One issue is that our imaging often did
+
+310
+
+not cover the entire eye. While this is not ideal, we were still able to analyze large
+
+311
+
+enough portions of the eyes to capture the variability across eyes. This study is
+
+312
+
+complementary to previous work that allows sampling of different parts of the
+
+313
+
+eye. However, there is a future planned upgrade to the APS synchrotron that will
+
+314
+
+enable imaging of entire eyes and nervous systems of insects (Argonne National
+
+315
+
+Laboratory, n.d.).
+
+316
+317
+
+Another limitation in study is that sample preparation for electron microscopy is
+
+318
+
+well known to change the native structures of brain tissue (Zhang et al., 2017).
+
+319
+
+However, most of these artifacts involve changes in the volume of the
+
+320
+
+extracellular space (Van Harreveld & Steiner, 1970; Pallotto et al., 2015). We
+
+321
+
+analyzed crystalline cones, which are composed of concentrated, hydrophobic
+
+322
+
+proteins in closely related moths and likely less susceptible to dehydration-based
+
+323
+
+distortions (Schlamp, 1989). We designed an analysis pipeline robust to small
+
+324
+
+changes in orientation, thereby preserving local curvature and diameters.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+325
+
+Finally, we see smooth variation across individual eyes, which gives us
+
+326
+
+confidence that the differences observed are not simply noise from artifacts.
+
+327
+328
+
+Comparison to prior work
+
+329
+
+Previous analyses of ommatidial diameter and interommatidial angles were done
+
+330
+
+using light microscopy (and more recently fluorescence microscopy) and
+
+331
+
+analyzed manually (Horridge, 1978; Rutowski & Warrant, 2002;
+
+332
+
+Baumgartner,1928; del Portillo, 1936; Rigossi et al 2021), and therefore would
+
+333
+
+take a much longer time to collect data on the same volume of eye. Previous
+
+334
+
+methods for calculating interommatidial angles include observing how many
+
+335
+
+ommatidia pseudopupils crossed while rotating the eye a certain angle, using the
+
+336
+
+optomotor response, and manually measuring histological sections (Horridge,
+
+337
+
+1978; Rutowski & Warrant, 2002; Gotz, 1965; Baumgartner,1928; del Portillo,
+
+338
+
+1936; Rigossi et al., 2021). All of these methods are subject to human error, but
+
+339
+
+our method provides an automated way to calculate both the interommatidial
+
+340
+
+angle and the ommatidial diameter.
+
+341
+342
+
+Several newer methods have been proposed for measuring interommatidial
+
+343
+
+angles and other eye parameters. One such method involves staining
+
+344
+
+photoreceptors with fluorescent dyes to measure interommatidial angles using
+
+345
+
+the pseudopupil in insects with dark eyes (Rigossi et al., 2021). One advantage
+
+346
+
+of this fluorescence method is that it can be done using live animals and avoids
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+347
+
+any distortion that may occur during sample preparation. However, this is the
+
+348
+
+only parameter that can be measured with this technique and cannot reveal the
+
+349
+
+morphology of internal structures.
+
+350
+351
+
+The µCT method has recently been used to measure angles and other eye
+
+352
+
+parameters in bees (Taylor et al, 2019) and ommatidial diameters in other
+
+353
+
+compound eyes (Currea et al., 2023), but our method using the 32-ID beamline
+
+354
+
+achieves ~18x or ~170x greater resolution respectively, and imaging speeds of
+
+355
+
+~1 mm3/30min. This enhanced resolution combined with our novel embedding
+
+356
+
+method allows for greater automated throughput. Furthermore, conventional lab-
+
+357
+
+based µCT imaging that can achieve comparable spatial resolution (Alba-
+
+358
+
+Tercedor et al., 2021) have worse contrast resolution than syn-µCT (Goyens et
+
+359
+
+al., 2018). Additionally, our staining method provides even greater contrast and
+
+360
+
+allows us to better see crystalline cones, whereas previous µCT reconstructions
+
+361
+
+were unable to capture this structure. We found large variation in the sizes and
+
+362
+
+shapes of the typical crystalline cones across individuals and especially species.
+
+363
+
+Using our 3D models of these cones, further research can be done to explore
+
+364
+
+how light passes through these structures and impinges on the rhabdom.
+
+365
+366
+
+The Barlow Ratio, Variation, and Motion Blur
+
+367
+
+There was considerable variation in all measurements across individual eyes. All
+
+368
+
+the species had average Barlow ratios near the theoretical optimum, but large
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+369
+
+portions of each eye had ratios that were greater than expected, meaning the
+
+370
+
+interommatidial angle was greater than the resolving power, suggesting the
+
+371
+
+visual scene is undersampled. Undersampling of the visual scene has been
+
+372
+
+observed in other insects. In previous studies that have measured a similar ratio,
+
+373
+
+the acceptance angle to the interommatidial angle, in other diurnal insects also
+
+374
+
+found that the visual scene was undersampled (Land 1997). One reason insect
+
+375
+
+vision might be undersampled is to account for motion blur. For example,
+
+376
+
+according to a paper from Snyder et al, the fly Musca would have a Barlow ratio
+
+377
+
+of 2.13, which is greater than both Barlow’s optimum and the optimum calculated
+
+378
+
+by Snyder et al (1977). However, this value did approach a value that Snyder et
+
+379
+
+al. deemed more reasonable once angular velocity of the insect was accounted
+
+380
+
+for. Finally, Snyder et al. also looked at how different light levels would affect the
+
+381
+
+theoretical optimum for p=D*Δɸ=0.61*(Δɸ/θ). They theorized that in lower light
+
+382
+
+conditions, the optimal p would be larger. Further research must be done to
+
+383
+
+examine crepuscular and nocturnal Lepidoptera to determine if this is indeed the
+
+384
+
+case.
+
+385
+386
+
+Finally, we determined the morphology of a typical crystalline cone for each
+
+387
+
+species. We found considerable variation in height and width within and across
+
+388
+
+individuals, which could be due to scaling with total body size or cone density
+
+389
+
+within the eye. Previous analyses have identified that the point-like end of the
+
+390
+
+crystalline cone corresponds with the focal point of the lens, allowing the most
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+391
+
+efficient transfer of photons into a single rhabdom (Schwarz et al., 2011). For
+
+392
+
+species adapted to low light, the hypothesis is instead that cones are larger and
+
+393
+
+more bulbous with the focal point well inside the cone, which is believed to confer
+
+394
+
+an advantage for greater light collection by transmission through a ‘clear zone’ to
+
+395
+
+multiple rhabdoms (Warrant, 2017). Since the crystalline cone’s function is to
+
+396
+
+funnel light onto the rhabdom, further studies could potentially determine how
+
+397
+
+cone optics vary across the eye and between species. Measurements of body
+
+398
+
+size that incorporate forewing length are correlated with larger eye sizes
+
+399
+
+(Seymoure et al., 2015), and longer cones correspond to smaller wingspans,
+
+400
+
+suggesting smaller Lepidoptera have flatter lenses as they have a longer focal
+
+401
+
+length. Syn-µCT also clearly shows the shape of the lens, so our method would
+
+402
+
+be useful in testing this hypothesis. Future work will explore these differences
+
+403
+
+more fully, by modeling the wave optics of light passing through lenses and
+
+404
+
+cones with these different shapes.
+
+405
+406
+407
+
+Conflict of Interest Statement
+
+408
+
+We have no conflicts of interest to disclose.
+
+409
+410
+
+Author Contributions
+
+411
+
+Gregg A. Wildenberg, Narayanan Kasthuri, Stephanie E. Palmer, and Dawn
+
+412
+
+Paukner conceived the ideas and designed methodology; Gregg Wildenberg
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+413
+
+collected the data; Dawn Paukner and Griffin S. Badalamente created the
+
+414
+
+analysis pipeline and analyzed the data; Dawn Paukner and Narayanan Kasthuri
+
+415
+
+led the writing of the manuscript. Dawn Paukner, Gregg A. Wildenberg, Peter B.
+
+416
+
+Littlewood, Marcus R. Kronforst, Stephanie E. Palmer, and Narayanan Kasthuri
+
+417
+
+contributed to the interpretation of the results. All authors contributed critically to
+
+418
+
+the drafts and gave final approval for publication.
+
+419
+420
+
+Data Availability
+
+421
+
+Raw X-ray datasets will be made available on BossDB. Code will be made
+
+422
+
+available on github.com/dpaukner.
+
+423
+424
+
+References
+
+425
+
+Alba-Tercedor, J., Hunter, W.B. & Alba-Alejandre, I. Using micro-computed tomography
+
+426
+
+to reveal the anatomy of adult Diaphorina citri Kuwayama (Insecta: Hemiptera, Liviidae)
+
+427
+
+and how it pierces and feeds within a citrus leaf. Sci Rep 11, 1358 (2021).
+
+428
+
+https://doi.org/10.1038/s41598-020-80404-z
+
+429
+430
+
+Argonne National Laboratory. (n.d.). APS Upgrade. https://www.aps.anl.gov/APS-
+
+431
+
+Upgrade
+
+432
+433
+
+Barlow, H. B. (1952). The Size of Ommatidia in Apposition Eyes. The Journal of
+
+434
+
+Experimental Biology, 25(4), 667–674.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+435
+436
+
+Baumgärtner, H. (1928). Der formensinn und die sehschärfe der bienen. Zeitschrift für
+
+437
+
+vergleichende Physiologie, 7(1), 56-143.
+
+438
+439
+
+Baxter, S. W., Nadeau, N. J., Maroja, L. S., Wilkinson, P., Counterman, B. A., Dawson,
+
+440
+
+A., ... & Jiggins, C. D. (2010). Genomic hotspots for adaptation: the population genetics
+
+441
+
+of Müllerian mimicry in the Heliconius melpomene clade. PLoS genetics, 6(2),
+
+442
+
+e1000794.
+
+443
+444
+
+Berg, S., Kutra, D., Kroeger, T. et al. ilastik: interactive machine learning for (bio)image
+
+445
+
+analysis. Nat Methods 16, 1226–1232 (2019). https://doi.org/10.1038/s41592-019-
+
+446
+
+0582-9
+
+447
+448
+
+Butler, P. M. (1963). Tooth morphology and primate evolution. Dental anthropology, 1-13.
+
+449
+450
+
+Chown, S. L., & Terblanche, J. S. (2006). Physiological diversity in insects: ecological
+
+451
+
+and evolutionary contexts. Advances in insect physiology, 33, 50-152.
+
+452
+453
+
+Currea, J. P., Sondhi, Y., Kawahara, A. Y., & Theobald, J. (2023). Measuring compound
+
+454
+
+eye optics with microscope and microCT images. Communications Biology, 6(1), 246.
+
+455
+456
+
+Darwin, C. (1859). The Origin of Species by Means of Natural Selection, Or, The
+
+457
+
+Preservation of Favoured Races in the Struggle for Life. Books, Incorporated, Pub..
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+458
+459
+
+del Portillo, J. (1936). Beziehungen zwischen den Öffnungswinkeln der Ommatidien,
+
+460
+
+Krümmung und Gestalt der Insektenaugen und ihrer funktionellen Aufgabe. Zeitschrift
+
+461
+
+für vergleichende Physiologie, 23(1), 100-145.
+
+462
+463
+
+Dobzhansky, T. (1982). Genetics and the Origin of Species (No. 11). Columbia
+
+464
+
+university press.
+
+465
+466
+
+Dyer, E. L., Gray Roncal, W., Prasad, J. A., Fernandes, H. L., Gürsoy, D., De Andrade,
+
+467
+
+V., Fezzaa, K., Xiao, X., Vogelstein, J. T., Jacobsen, C., Körding, K. P., & Kasthuri, N.
+
+468
+
+(2017). Quantifying Mesoscale Neuroanatomy Using X-Ray Microtomography. eNeuro,
+
+469
+
+4(5), ENEURO.0195-17.2017. https://doi.org/10.1523/ENEURO.0195-17.2017
+
+470
+471
+
+Foxley, S., Sampathkumar, V., De Andrade, V., Trinkle, S., Sorokina, A.,
+
+472
+
+Norwood, K., La Riviere, P., & Kasthuri, N. (2021). Multi-modal imaging of a
+
+473
+
+single mouse brain over five orders of magnitude of resolution. NeuroImage, 238,
+
+474
+
+118250. https://doi.org/10.1016/j.neuroimage.2021.118250
+
+475
+476
+
+Friedrich, F., Matsumura, Y., Pohl, H., Bai, M., Hörnschemeyer, T., & Beutel, R.
+
+477
+
+G. (2014). Insect morphology in the age of phylogenomics: innovative techniques
+
+478
+
+and its future role in systematics. Entomological Science, 17(1), 1-24.
+
+479
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+480
+
+Gallice, G (2012). Heliconius cydno galanthus [Photograph].
+
+481
+
+https://www.flickr.com/photos/dejeuxx/6626128815/in/photostream.
+
+482
+483
+
+Götz, K.G. Die optischen Übertragungseigenschaften der Komplexaugen von Drosophila.
+
+484
+
+Kybernetik 2, 215–221 (1965). https://doi.org/10.1007/BF00306417
+
+485
+486
+
+Goyens, J., Vasilopoulou-Kampitsi, M., Claes, R., Sijbers, J. and Mancini, L.
+
+487
+
+(2018), Enhanced contrast in X-ray microtomographic images of the
+
+488
+
+membranous labyrinth using different X-ray sources and scanning modes. J.
+
+489
+
+Anat., 233: 770-782. https://doi.org/10.1111/joa.12885
+
+490
+491
+
+Hao, Y., Wang, Q., Wen, C., & Wen, J. (2023). Comparison of Fine Structure of
+
+492
+
+the Compound Eyes in Eucryptorrhynchus scrobiculatus and Eucryptorrhynchus
+
+493
+
+brandti Adults. Insects, 14(8), 699. https://doi.org/10.3390/insects14080699
+
+494
+495
+
+Horridge G. A. (1978). The separation of visual axes in apposition compound eyes.
+
+496
+
+Philosophical transactions of the Royal Society of London. Series B, Biological sciences,
+
+497
+
+285(1003), 1–59. https://doi.org/10.1098/rstb.1978.0093
+
+498
+499
+
+Hua, Y., Laserstein, P., & Helmstaedter, M. (2015). Large-volume en-bloc staining for
+
+500
+
+electron microscopy-based connectomics. Nature communications, 6, 7923.
+
+501
+
+https://doi.org/10.1038/ncomms8923
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+502
+503
+
+Jablonski, D., Erwin, D. H., & Lipps, J. H. (1996). Body size and macroevolution.
+
+504
+
+Evolutionary paleobiology. University of Chicago Press, Chicago, 256-289.
+
+505
+506
+
+Johnson, J. T., Hansen, M. S., Wu, I., Healy, L. J., Johnson, C. R., Jones, G. M., ... & Keller,
+
+507
+
+C. (2006). Virtual histology of transgenic mouse embryos for high-throughput
+
+508
+
+phenotyping. PLoS Genetics, 2(4), e61.
+
+509
+510
+
+Kronforst, M. R., Young, L. G., Kapan, D. D., McNeely, C., O'Neill, R. J., & Gilbert, L. E.
+
+511
+
+(2006). Linkage of butterfly mate preference and wing color preference cue at the
+
+512
+
+genomic location of wingless. Proceedings of the National Academy of Sciences,
+
+513
+
+103(17), 6575-6580.
+
+514
+515
+
+Land M. F. (1997). Visual acuity in insects. Annual review of entomology, 42, 147–177.
+
+516
+
+https://doi.org/10.1146/annurev.ento.42.1.147
+
+517
+518
+
+MATLAB. (2021). version 9.10.0.1669831 (R2021a) Update 2. Natick, Massachusetts:
+
+519
+
+The MathWorks Inc.
+
+520
+521
+
+Namiki, S., & Kanzaki, R. (2018). Morphology of visual projection neurons
+
+522
+
+supplying premotor area in the brain of the silkmoth Bombyx mori. Cell and tissue
+
+523
+
+research, 374(3), 497–515. https://doi.org/10.1007/s00441-018-2892-0
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+524
+525
+
+Pallotto, M., Watkins, P. V., Fubara, B., Singer, J. H., & Briggman, K. L. (2015).
+
+526
+
+Extracellular space preservation aids the connectomic analysis of neural circuits.
+
+527
+
+Elife, 4, e08206.
+
+528
+529
+
+Poulton, E. B. (1909). Mimicry in the butterflies of North America. Annals of the
+
+530
+
+entomological Society of America, 2(4), 203-242.
+
+531
+532
+
+Price, P. W., Denno, R. F., Eubanks, M. D., Finke, D. L., & Kaplan, I. (2011).
+
+533
+
+Insect ecology: behavior, populations and communities. Cambridge University
+
+534
+
+Press.
+
+535
+536
+
+Ribi, W., Senden, T. J., Sakellariou, A., Limaye, A., & Zhang, S. (2008). Imaging
+
+537
+
+honey bee brain anatomy with micro-X-ray-computed tomography. Journal of
+
+538
+
+neuroscience methods, 171(1), 93-97.
+
+539
+540
+
+Rigosi, E., Warrant, E. J., & O'Carroll, D. C. (2021). A new, fluorescence-based method for
+
+541
+
+visualizing the pseudopupil and assessing optical acuity in the dark compound eyes of
+
+542
+
+honeybees and other insects. Scientific reports, 11(1), 21267.
+
+543
+
+https://doi.org/10.1038/s41598-021-00407-2
+
+544
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+545
+
+Rutowski, R.L., Warrant, E.J. Visual field structure in the Empress Leilia, Asterocampa
+
+546
+
+leilia (Lepidoptera, Nymphalidae): dimensions and regional variation in acuity. J Comp
+
+547
+
+Physiol A 188, 1–12 (2002). https://doi.org/10.1007/s00359-001-0273-7
+
+548
+549
+
+Schlamp, Cassandra Lee, "Composition, Structure And Development Of The Crystalline
+
+550
+
+Cone Of The Superposition Compound Eye" (1989). Digitized Theses. 1851.
+
+551
+
+https://ir.lib.uwo.ca/digitizedtheses/1851
+
+552
+553
+
+Schwarz, S., Narendra, A., & Zeil, J. (2011). The properties of the visual system in the
+
+554
+
+Australian desert ant Melophorus bagoti. Arthropod structure & development, 40(2),
+
+555
+
+128–134. https://doi.org/10.1016/j.asd.2010.10.003
+
+556
+557
+
+Seymoure, B. M., Mcmillan, W. O., & Rutowski, R. (2015). Peripheral eye dimensions in
+
+558
+
+Longwing (Heliconius) butterflies vary with body size and sex but not light environment
+
+559
+
+nor mimicry ring. J Res Lepid, 48, 83-92.
+
+560
+561
+
+Silversmith, W. (2021). cc3d: Connected components on multilabel 3D & 2D images.
+
+562
+
+(Version 3.2.1) [Computer software].
+
+563
+
+https://doi.org/https://zenodo.org/record/5535251
+
+564
+565
+
+Snyder, A.W., Stavenga, D.G. & Laughlin, S.B. Spatial information capacity of compound
+
+566
+
+eyes. J. Comp. Physiol. 116, 183–207 (1977). https://doi.org/10.1007/BF00605402
+
+567
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+568
+
+Stork N. E. (2018). How Many Species of Insects and Other Terrestrial
+
+569
+
+Arthropods Are There on Earth?. Annual review of entomology, 63, 31–45.
+
+570
+
+https://doi.org/10.1146/annurev-ento-020117-043348
+
+571
+572
+
+Taylor, G. J., Tichit, P., Schmidt, M. D., Bodey, A. J., Rau, C., & Baird, E. (2019).
+
+573
+
+Bumblebee visual allometry results in locally improved resolution and globally
+
+574
+
+improved sensitivity. eLife, 8, e40613. https://doi.org/10.7554/eLife.40613
+
+575
+576
+
+Van de Kamp, T., Rolo, T.O.D & Baumbach, T. (2014). Scanning the past–
+
+577
+
+synchrotron X-ray microtomography of fossil wasps in amber. Entomologie
+
+578
+
+heute, 26, 151-160.
+
+579
+580
+
+Van den Boogert, T., Van Hoof, M., Handschuh, S., Glueckert, R., Guinand, N.,
+
+581
+
+Guyot, J. P., ... & Van de Berg, R. (2018). Optimization of 3D-visualization of
+
+582
+
+micro-anatomical structures of the human inner ear in osmium tetroxide contrast
+
+583
+
+enhanced micro-CT scans. Frontiers in Neuroanatomy, 12, 41.
+
+584
+585
+
+Van Harreveld, A., & Steiner, J. (1970). Extracellular space in frozen and ethanol
+
+586
+
+substituted central nervous tissue. The Anatomical Record, 166(1), 117-129.
+
+587
+588
+
+Van Rossum, G., & Drake, F. L. (2009). Python 3 Reference Manual. Scotts Valley, CA:
+
+589
+
+CreateSpace.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+590
+591
+
+Vescovi, R., Du, M., Andrade, V. D., Scullin, W., Gürsoy, D., & Jacobsen, C. (2018).
+
+592
+
+Tomosaic: efficient acquisition and reconstruction of teravoxel tomography data using
+
+593
+
+limited-size synchrotron X-ray beams. Journal of synchrotron radiation, 25(5), 1478-
+
+594
+
+1489.
+
+595
+596
+
+Warrant E. J. (2017). The remarkable visual capacities of nocturnal insects:
+
+597
+
+vision at the limits with small eyes and tiny brains. Philosophical transactions of
+
+598
+
+the Royal Society of London. Series B, Biological sciences, 372(1717), 20160063.
+
+599
+
+https://doi.org/10.1098/rstb.2016.0063
+
+600
+601
+
+Wipfler, B., Pohl, H., Yavorskaya, M. I., & Beutel, R. G. (2016). A review of methods for
+
+602
+
+analysing insect structures—the role of morphology in the age of phylogenomics.
+
+603
+
+Current opinion in insect science, 18, 60-68.
+
+604
+605
+
+Zhang, Y., Huang, T., Jorgens, D. M., Nickerson, A., Lin, L. J., Pelz, J., Gray, J. W.,
+
+606
+
+López, C. S., & Nan, X. (2017). Quantitating morphological changes in biological
+
+607
+
+samples during scanning electron microscopy sample preparation with
+
+608
+
+correlative super-resolution microscopy. PloS one, 12(5), e0176839.
+
+609
+
+https://doi.org/10.1371/journal.pone.0176839
+
+610
+611
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+612
+613
+614
+615
+
+Supplementary Figures
+A
+
+B
+
+616
+
+Figure SI1. A) Gif moving through the raw x-ray stack of the Polites peckius eye. B) Gif
+
+617
+
+moving through a stack of the Polites peckius eye after segmentation of crystalline cones.
+
+618
+
+619
+620
+
+Table SI1. Shows the estimated error, mean, and variance of ommatidial diameters for
+
+621
+
+each indiviudal.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.12.08.570583; this version posted December 8, 2023. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY-NC-ND 4.0 International license.
+
+622
+623
+
+Figure SI2. Boxplots showing A) ommatidial diameters, B) interommatidial angles, C)
+
+624
+
+resolving powers, and D) Barlow ratios. Red lines show medians, boxes show interquartile
+
+625
+
+ranges, and whiskers show the lower and upper quartiles. Red plus signs denote outliers.
+
+

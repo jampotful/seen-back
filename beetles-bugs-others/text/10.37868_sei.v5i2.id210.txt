@@ -1,0 +1,1277 @@
+Optimization of energy consumption in smart homes using firefly algorithm and deep neural networks
+Rituraj Jain, Yohannes Bekuma Bakare, Balachandra Pattanaik, Joseph Sam Alaric, Suresh Kumar Balam, Terefe Bayisa Ayele, Rambabu Nalagandla (2023). Sustainable Engineering and Innovation. https://doi.org/10.37868/sei.v5i2.id210. doi:10.37868/sei.v5i2.id210. Licence: cc-by. Text from pdf.
+
+ISSN 2712-0562
+Original Research
+
+Sustainable Engineering and Innovation
+Vol. 5, No. 2, December 2023, pp.161-176
+https://doi.org/10.37868/sei.v5i2.id210
+
+Optimization of energy consumption in smart homes using firefly
+algorithm and deep neural networks
+Rituraj Jain1, Yohannes Bekuma Bakare2, Joseph Sam Alaric2,3, Suresh Kumar Balam2, Balachandra
+Pattanaik2,4*, Terefe Bayisa Ayele2, Rambabu Nalagandla5
+1 Department of Information Technology, Faculty of Engineering and Technology, Marwadi University, Rajkot, India
+2 School of Electrical and Computer Engineering, Wallaga University, Nekemte, Ethiopia
+3 SCAD College of Engineering and Technology, Anna University, India
+4 Adjunct Faculty, Saveetha School of Engineering, Saveetha Institute of Medical and Technical Sciences, Chennai, India
+5 Program Manager, IT Risk and Control Leader, HSBC Technology Services USA
+
+*Corresponding author E-mail: balapk1971@gmail.com
+
+1.
+
+Received Oct. 6, 2023
+Revised Dec. 9, 2023
+Accepted Dec. 11, 2023
+
+Abstract
+Electronic gadget advancements have increased the demand for IoT-based smart
+homes as the number of connected devices grows rapidly. The most prevalent
+connected electronic devices are smart environments in houses, grids, structures,
+and metropolises. Smart grid technology advancements have enabled smart
+structures to cover every nanosecond of energy use. The problem with smart,
+intelligent operations is that they use a lot more energy than traditional ones.
+Because of the growing growth of smart cities and houses, there is an increasing
+demand for efficient resource management. Energy is a valuable resource with a
+high unit cost. Consequently, authors are endeavoring to decrease energy usage,
+specifically in smart urban areas, while simultaneously ensuring a consistent
+terrain. The objective of this study is to enhance energy efficiency in intelligent
+buildings for both homes and businesses. For the comfort indicator ("thermal,
+visual, and air quality"), three parameters are used: temperature, illumination, and
+CO2. A hybrid rule-based Deep Neural Network (DNN) and Fire Fly (FF)
+algorithm are used to read the sensor parameters and to operate the comfort
+indication, as well as optimize energy consumption, respectively. The anticipated
+user attributes contributed to the system's enhanced performance in terms of the
+ease of use of the smart system and its energy usage. When compared to traditional
+approaches in expressions of Multi View with 98.23%, convolutional neural
+network (CNN) with 99.17%, and traffic automatic vehicle (AV) with 98.14%, the
+activities of the contributed approach are negligibly commanding.
+
+© The Author 2023.
+Published by ARDA.
+
+Keywords: Energy consumption, Firefly algorithm, Hybrid rule-based deep neural
+network, Smart homes, User preference parameters
+
+Introduction
+
+The utilization of information technology (IT) within smart home contexts has evolved over the last few
+decades. Smart home networks are projected to connect more devices in the future. The Internet of Things has
+This work is licensed under a Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/ ) that allows others
+to share and adapt the material for any purpose (even commercially), in any medium with an acknowledgement of the work's authorship
+and initial publication in this journal.
+
+161
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+altered people's lifestyles [1]. Smart cities are being developed, including facilities such as automated railways,
+smart autos, automated parking, and smart lighting [1],[2]. Concerns have been raised about privacy and the
+misuse of technology in smart homes [3]. Because smart homes are grid-compatible, electronic devices run on
+energy; additionally, smart grids are synchronized with internal power units [4]. In order to reduce the energy
+consumption of smart homes, the need and supply of electrical power must be synchronized. Since the
+development of smart cities, conventional grids have been replaced with smart grids, which generate electricity
+and monitor energy consumption [5],[6]. Prediction methods are typically used to anticipate energy in smart
+homes and smart grids, as well as day ahead (DA) energy pricing [7]. Controlling energy use has become
+necessary due to the annual loss of precious resources. Furthermore, the cost of producing electricity is rising
+by the day. The situation has changed as the IT industry has advanced and the Internet of Things (IoT) has been
+implemented. Researchers are working to optimize the benefits of IoT technology. People are interested in smart
+homes and smart cities because of their enhanced features and automation.
+Prediction and optimization of energy usage are key issues in smart homes. According to new studies, the
+problem remains unaddressed, and significant quantities of energy are being wasted. The architectural
+blueprints, in accordance with environmentally sustainable energy criteria, will use less energy in the long term,
+but with optimization methodologies, we may optimize the energy-saving benefit [8]. Energy use in smart
+homes has been efficiently forecasted using several prediction algorithms [9]-[11]. The other key problem is
+selecting characteristics such as CO2, light, and temperature. Previous research has shown that when it comes
+to optimizing the energy utilization approach, the user settings remain constant. After the first setup, the system
+will continue to run with the same values, resulting in decreased energy use. In conventional houses, the process
+is identical, with the owner adjusting the settings by remote control or more conventional means. Real-time
+environments have varying parameters, and the resident's preferred settings will fall within a certain range [11][13].
+Because of the previously mentioned concerns, as well as the failure to keep smart home gadgets up to date with
+changes in weather conditions, energy consumption is significant. The comfort level of inhabitants is influenced
+by static parameters as a result of a system operating at static settings while taking into account user preferences
+and external weather conditions. Furthermore, this scenario creates issues for people with children and the
+disabled who are unable to properly use the systems; typically, current models are not user-friendly for specific
+groups of people. Many optimization algorithms [14],[15] are now used for energy minimization, including
+BAT Algorithms (BA)[16], FIREFLY (FF) [17], Grey Wolf Optimization (GWO) [18], and others. There are
+some controversies in energy minimization studies [19],[20]. Problems such as energy consumption reduction
+and an increased comfort index are addressed here. The created model will improve the system's performance
+by recognizing the needs of special people, such as youngsters and the disabled.
+The following are the significant contributions of the full paper.
+•
+•
+•
+
+To create the idea of using the FF+ Hybrid DNN algorithm to solve the energy reduction problem.
+To introduce Firefly Deep Neural Network (FF-DNN), a new method for optimizing energy usage and
+forecasting the parameters "air quality, temperature, and illumination."
+To maximize the user's level of comfort while minimizing energy use.
+
+The exploration paper's association is designed in the following order: The literature review is depicted in
+Section II. Section III depicts the armature of stoner choice parameters as well as the optimization of energy
+usage. Section IV discusses the outcomes and discussions on the optimization of energy usage and stoner
+preference factors. Section V also leads to the conclusion of the entire study.
+2.
+
+Literature review
+
+In 2020, Shah et al. [21] concentrated on optimizing energy consumption in smart homes. Three major
+parameters similar to CO2 (ppm), temperature (°F), and illumination (lx) were used for the comfort indicator,
+162
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+like air, thermal, and visual quality. In the earlier workshop, the major challenge was stationary stoner
+parameters. These parameters were distributed at first and weren't changed. Also, the nascent beta sludge was
+employed to reduce the noise from the data and predict the air quality, inner temperature, and illumination. For
+validating the stoner parameters, a Deep Extreme Learning Machine (DELM) system was enforced. Fuzzy logic
+and BA techniques were utilized in order to enhance the management of comfort index and improve energy
+usage. The overall performance of the system was enhanced using the predicted user parameters, considering
+the utilization of comfort index management, smart systems, and energy consumption. Once the optimization
+was done, the comfort index was approximately 1, which shows the system's performance. The power usage
+also decreased after optimization.
+In 2012, Corno and Razzak [22] introduced a result for energy conservation on the basis of unequivocal highposition modeling of stoner studies and verified the device control automatically from the result and a
+constrained Boolean satisfiability optimization problem. Therefore, the developed fashion was incorporated
+with a smart terrain frame and handled the stylish issues.
+In their study conducted in 2019, Molla et al. [23] proposed a framework for the Home Energy Management
+System (HEMS) designed specifically for residential users in a smart grid setting. The authors introduced novel
+limitations and employed a multi-restricted scheduling technique to enhance the system's efficiency and
+effectiveness. The preamble of the optimization issue was implemented with the Time of Use Pricing (TUP)
+model. The utilization of a novel meta-heuristic algorithm called GWO was employed for the purpose of
+optimization, and its efficacy was compared to that of particle swarm optimization (PSO). In order to
+demonstrate the efficacy of the appliances, an integrated rooftop photovoltaic (PV) system was implemented
+within the system. A total of eight scripts, each exhibiting vibrant colors, were carefully selected for study.
+These scripts were subjected to examination using distinct time scheduling models.
+In their 2018 study, Errapotu et al. [24] proposed a homomorphic encryption-based approach using the
+Alternating Direction Method of Multipliers (ADMM) for optimizing operation scheduling in a distributed
+manner while preserving the privacy of home operations. A comprehensive simulation was conducted by
+utilizing real-world facts, and the Scheduling for Flexible and Effective Energy Consumption (SAFE) model
+was implemented to achieve a reduction in electricity costs through the secure storage of pharmaceuticals.
+In 2017, Joo and Choi [25] offered a distributed optimization system to record the power operation of numerous
+smart homes with dispersed energy coffers. For home energy operation, the optimization issue was resolved
+into a two-position optimization issue similar to global HEMS (GHEMS) in the alternate position and local
+HEMS (LHEMS) in the first position. In GHEMS, the power trading and energy storehouse system was among
+the listed and the homes, whereas in LHEMS, the comfort position and cataloging the consumer’s favored
+appliances The developed distributed system has revealed good performance concerning client comfort,
+position, and price of electricity. The analysis of the influence of various network topologies was done on the
+developed model. This has shown that the optimal network configuration selection was In Coscn 2019, Huang
+et al. [26] have formulated joint optimization of energy consumption scheduling and microgrid configuration as
+a leader-follower Stackelberg game for modeling the coordination among energy consumption scheduling and
+microgrid configuration. For optimal installed counts of PV units, batteries, wind turbines, and microturbines,
+the decision of microgrid configuration as a leader was designed as an upper-level optimization issue. The
+formulation of a bi-level non-linear programming method was done for the Stackelberg game. This study
+focused on the creation and evaluation of four bi-level hierarchical approaches in conjunction with the
+Differential Evolution (DE) algorithms for the purpose of addressing optimization problems. The examination
+of the microgrid configuration within the smart structure case study was undertaken to establish the feasibility
+and advantages of the advanced game-theoretic system.
+In 2019, Essiet et al. [27] have recommended an advanced DE model to develop the response to demand among
+consumers and aggregators. The suggested approach made use of a secondary population library that holds
+163
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+infelicitous results that were preliminarily excluded by the main library of the bettered DE algorithm. The
+secondary library initiated, relocated, and recombined campaigners to improve their fitness before sending them
+back to the primary library for the fashionable selection. Non-dominated sorting genetic algorithm III (NSGAIII) is a multi-objective evolutionary algorithm that was compared to DE in terms of corruption and dominance
+to determine the produced model's capabilities. This was accomplished through a capability test of the model
+for maximizing the set of objectives characterizing the smart, intelligent home with a demand response
+aggregator. The smart home took into account both loads, known as non-shiftable and shiftable, to fake the
+energy consumption profile of a typical household.
+In 2020, Dibavar et al. [28] have introduced a mongrel robust stochastic optimization system for managing
+power in smart homes in real time (RT) and DA energy requests. Misgivings of cost and generation of PV were
+anatomized in the advanced system. A control parameter was used to alter the quantum of traditionalism in the
+robust optimization approach (ROA), producing results with colorful traditionalism situations. Also, with the
+help of stochastic programming (SP), the suggested model assumed the associated misgivings and considered
+the RT energy request. To estimate the unknown features of PV generation and energy costs, probable scripts
+were employed at this stage. In addition, when the comfort of occupants was taken into account, loads were
+controlled. The advantages of the suggested mongrel fashion were demonstrated from the results analysis, which
+assured decision-makers about the profitability of energy operations.
+The advantages and disadvantages of energy optimization and dynamic user preference parameter selection for
+smart homes are shown in Table 1.
+3.
+
+Proposed architecture
+
+3.1. Proposed methodology
+Static user settings, comfort index management, and the optimization of energy utilization are all topics that are
+addressed in this article through the presentation of a generic approach. There are three steps that make up the
+model, and each of these stages has its own predetermined criteria. Before anything else, readings of "air quality,
+temperature, and illumination" are accomplished. During the course of a total of four weeks, continuous hourly
+observations were carried out, commencing at 7.30 in the morning and concluding at 5.30 in the evening, during
+the course of typical working hours. A module for making predictions based on raw data is included in the
+second layer of the proposed design. Additionally, the alpha-beta filter is applied to the data that has been
+acquired in this layer in an effort to eliminate any stray signals that may have been picked up by the sensors.
+The primary advantage of the alpha-beta filter is that it has the potential to immediately adapt to new
+circumstances and enhance system performance without the requirement of a comprehensive structure model.
+"air quality, temperature, and illumination" are the three things that are delivered by the alpha-beta filter. A
+phrase known as "indoor environmental" modules is used to refer to the predicted values. Furthermore, these
+projections are utilized as inputs by the optimization and prediction layer of the system that is being presented.
+Along with the user parameters, the initial anticipated values of "air quality, temperature, and illumination" are
+provided as inputs to the hybrid DNN and optimization algorithm that was built and given the name FF. The
+collected data comprise the amount of energy used by appliances in watt-hours, the amount of energy used by
+light elements in the rooms in watt-hours, the temperature in two rooms, the humidity in two rooms, the
+temperature outside in Celsius, the air quality in air quality index (AQI), the pressure in millimeters of mercury,
+the humidity outside in percent, and the wind speed in meters per second. With regard to the input to the layered
+architecture that has been specified for the proposed system, the three primary characteristics that are taken into
+consideration are air quality, temperature, and illumination. For each of the input parameters, a total of 330 data
+readings were gathered and collected. Eighty percent of these collected datasets, or 264 dataset collections for
+each parameter, are designated for training purposes. The remaining twenty percent, or 66 dataset collections,
+are, on the other hand, employed for testing and validation reasons.
+
+164
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+Table 1. Merits and demerits of energy optimization and dynamic user preference parameters selection for
+smart homes
+Author
+Methodology
+Features
+Challenges
+Shahet al. [21]
+
+BAT
+
+Corno
+and
+Razzak [22]
+
+Domotic
+Effect
+Modelling
+
+Mollaet
+[23]
+
+al.
+
+GWO
+
+Errapotuet al.
+[24]
+
+ADMM
+
+Joo and Choi
+[25]
+
+Distributed
+Algorithm
+
+Huanget
+[26]
+
+al.
+
+Evolutionary
+algorithms
+
+Essiet et al.
+[27]
+
+DE
+algorithm
+
+Dibavar et al.
+[28]
+
+ROA
+
+• It is utilized to enhance comfort index
+management and optimize energy
+consumption.
+• It has high convergence rate for large
+scale optimization problems under right
+conditions.
+• It has the ability to allow the users to
+convey their requirements easily.
+• These are defined by the users based on
+the determined operators for the
+environment.
+• It is utilized to reduce the PAR and energy
+billing without impacting the user’s
+comfort level.
+• It is used to solve the problem effectively.
+• It is utilized for solving the optimization
+issues by considering the privacy
+problems in smart homes.
+• It has robust decomposability property of
+dual ascent and convergence properties.
+• It is used to decrease the computational
+complexity.
+• It attains best performance and the
+comfort level of each user is adjusted.
+• It scales well to high dimension problems.
+• It attains best performance.
+
+• For many applications, the
+best values are not clear.
+• If the count of function
+evaluations is not high,
+then the accuracy is
+restricted.
+• Need to perform better
+integration for attaining
+best performance.
+
+• It has slow convergence
+rate.
+• It doesn’t have the local
+searching ability.
+• Convergence rate is poor.
+
+• Need to improve
+performance.
+
+the
+
+• It
+doesn’t
+guarantee
+diversity
+among
+the
+solutions acquired.
+• It is utilized to optimize need of home • It can easily fall into local
+management models.
+optima.
+• It reduces the energy costs and enhancing
+the consumer comfort.
+• It is to tackle with the suspicions of smart • It has to lead a realistic
+home’s energy management.
+estimate of feasibility of
+smart homes.
+• It controls the insecurity of price in DA
+market.
+
+The training of a hybrid deep neural network (DNN) has been accomplished with the assistance of historical
+environmental characteristics and user preference data. Additionally, user-set parameters have been forecasted.
+There are numbers for the user parameter lighting, CO2, and temperature included in the historical data.
+Additionally, there are values for the temperature, CO2, and illumination levels inside the building. The FF
+algorithm is utilized in order to perform adjustments to environmental parameters with the intention of lowering
+the amount of energy that is consumed and increasing the comfort index. The objective of the FF algorithm is
+to produce a value that is optimized based on the preferences of the user in order to improve the user's level of
+comfort. Figure 1 is a diagrammatic representation of the energy optimization and user preference parameters
+165
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+that were produced for smart homes through the utilization of the FF algorithm and hybrid data-driven neural
+networks.
+Smart Homes Sensor Data
+
+Temperature
+
+Illumination
+
+Air Quality
+
+Alpha Beta
+filter
+
+Data Prediction
+
+Predicted
+Temperature
+
+Predicted
+Illumination
+
+Predicted Air
+Quality
+
+Optimization and Prediction
+
+Optimization
+using FF
+
+Trained
+Hybrid DNN
+
+Environmental Air Quality
+Environmental Illumination
+Environmental Temperature
+User Temperature
+User Illumination
+User Air Quality
+Historical Data
+
+Figure 1. Proposed architecture of power consumption optimization & improved comfort index for smart
+homes
+3.2. Hybrid rule-based deep neural network
+The back propagation method is used to train Hybrid Rule-based DNN [29]. It tests if the present Neural
+Network (NN) parameters are appropriate for categorizing training samples on an individual basis. No changes
+occur when the predicted outcome for a given instance is identical to the actual label. The weight of NN is
+updated when the samples are misclassified. Moreover, the back propagation method operates in a hierarchical
+manner. After the output layer's weights have been refreshed, it moves on to the next shallow hidden layer. Each
+hidden neuron is then assigned a percentage of the error made by the corresponding output neuron. In general,
+a greater number of iterations is needed to alter the weights for the best results. In figure 2, the structure of DNN
+is given. As an activation function, Rectified Linear Units (ReLUs) are employed. Even more, it is a piecewise
+linear function that stands in for the missing gradients of the Tanh and sigmoid functions. The mathematical
+equation of ReLU is represented in (1).
+ X if X  0
+Re lu ( X ) = 
+ 0 if X  0
+
+166
+
+(1)
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+Figure 2 is composed of three layers, specifically the input layer, output layer, and hidden layer. To extract the
+rules from a Deep Neural Network (DNN), a four-step process is employed. Firstly, the output of the neurons
+in the DNN's hidden layer is obtained. Secondly, a rule tree is constructed, connecting the DNN's hidden layer
+to its output layer. Thirdly, rule trees are created between each hidden layer and the input layer. Lastly, the rule
+trees generated in steps (a) and (b) are combined to form a singular rule tree, with the hidden layer acting as the
+join relation.
+Hidden Layer Hidden Layer
+
+Hidden Layer
+Output Layer
+
+Input Layer
+
+Input
+
+Output
+
+Figure 2. Structure of DNN
+1. Extract Neuron Information: In the behalf of the output of each and every hidden layer neuron, one rule
+,
+,....,
+extraction approach is determined. The training of DNN with j hidden layers hd 1 hd 2 hd j by
+
+considering a dataset Dt = {( P , Q ), ( P , Q ),..., ( P , Q )} . In each hidden layer, there are k neurons, in which the k
+1
+
+1
+
+2
+
+th
+
+2
+
+i
+
+neuron in j hidden layer is given by
+
+hd kj
+
+. The neuron output is computed using (2). Here, the connection
+
+weight of c neuron and in ( j − 1) hidden layer, there are
+th
+
+th
+
+th
+
+i
+
+neurons. The threshold is given by  , and
+
+d j −1
+
+th
+
+the input from the c neuron is given by X c . For the neurons present in j hidden layer, the mean value of
+th
+
+the output is given by
+
+Ophd j
+
+, which is computed in (3).
+No(hd kj ) = Re lu ( c =j−11 wec X c −  )
+d
+
+(2)
+
+1 dj
+(3)
+ No(hd ej )
+d e =1
+In (3), for every sample of data P, the collection Opi = { Ophd , Ophd ,..., Ophd ) is generated from the DNN when
+Ophd j =
+
+1
+
+there
+
+are
+
+j
+
+hidden
+
+layers.
+
+Finally,
+
+the
+
+2
+
+training
+
+j
+
+dataset
+
+Dt
+
+is
+
+transformed
+
+into
+
+Dt ' = {( Op1 , Q1 ), ( Op2 , Q2 ),..., ( Opi , Qi )} during the DNN, which is utilized to build a hidden-output tree.
+
+2. Design a hidden-output tree: Decision tree algorithm is the core key component of the hidden-output tree.
+The calculation of the information entropy of the data Dt ' is performed using equation (4), where the
+category of labels is represented by CA , and the proportion of category ca in the entire sample is designated
+as cca . It is required to discretize Dt ' , as Dt ' is not discrete type. The Dichotomy approach is shown in (5).
+Here, the two adjacent values of Dt ' sorted on Ophd are given by Ophdb and Ophdb +1 , and the count of samples
+j
+
+j
+
++
+
+j
+
+−
+
+of Dt ' is given by i . Later, Dt ' is split into Dtt ' and Dtt ' on the basis of t computed in (5).
+En( Dt ') = −  caCA cca log 2 cca
+
+(4)
+
+b
+b +1
+
+
+ Ophd j + Ophd j
+
+(5)
+TOphd = 
+|1 b  i 
+j
+2
+
+
+
+
+In (6), the computation of information gain is performed using the feature Ophd . Subsequently, the decision
+j
+
+tree selects the segmentation point t that yields the highest information gain, which serves as the branch
+
+167
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+point. This selection process is technically denoted as equation (7). With the help of Ophd , the vast gain of
+j
+
+information is the more purity improvement.
+| Dt 't |
+En( Dt 't )
+| Dt ' |
+
+(6)
+
+Gain ( Dt ', Ophd j ) = max t TOphd Gain ( Dt ', Ophd j , t )
+
+(7)
+
+Gain ( Dt ', Ophd j , t ) = En( Dt ') − {−,+}
+j
+
+3. Build input-hidden tree: The training data of DNN is considered as the input of input-hidden tree, whereas
+the output is a feature of the input of hidden-output tree. Assume that the input data for generating the inputhidden tree regarding the hd j hidden layer is Dthd = {( P1 , Op1hd ), ( P2 , Ophd2 ),..., ( Pi , Ophdi )} , in which the aim
+j
+
+value of the sample is given by Op
+
+i
+hd j
+
+j
+
+j
+
+j
+
+, which is computed using (3). Moreover, the feature vector is denoted
+
+as Pi = ( X i1 , X i2 ,..., X id ) . Two regions Rg1 = (k , X ik ) = { X | X k  X ik ) and Rg 2 = (k , X ik ) = { X | X k  X ik ) are defined
+using k th feature variable X k in Dthd and it’s value X ik as the segmentation variable and segmentation point.
+j
+
+k
+i
+
+In (8), the optimal k and X are acquired, in which ca1 and ca2 are the fixed outputs, which are computed
+in (9) and (10).
+i
+i
+min   X i Rg k (Ophd
+− ca1 )2 +  X i Rg k (Ophd
+− ca2 ) 2 
+j
+j
+
+
+1( k , X i )
+2( k , X i )
+
+ca1 =
+
+(8)
+
+1
+i
+ X Rg
+Ophd
+j
+d1 i 1( k , Xik )
+
+(9)
+
+1
+i
+ X i Rg k Ophd
+j
+2(
+k
+,
+X
+)
+i
+d2
+
+(10)
+
+ca2 =
+
+The equations provided above represent the distribution of samples in two regions based on a feature
+variable, denoted as k th , and its corresponding value, denoted as X k . The count of samples in the first region
+is represented by d1 , while the count of samples in the second region is represented by d 2 .
+4. Get the total tree: Since the output of the hidden layers is the union of the outputs and input of the inputhidden and hidden-output tree respectively, the data from the hidden layers may be used to combine the two
+trees into a single one. The output of the input-hidden tree is used as the input of the hidden-output tree to
+establish the connection between the two trees.
+5. Rule tree-based detection: Whenever a novel unseen example is considered as the input for detection, the
+parallel input to the input-hidden trees is provided as an example. Subsequently, the use of two input-hidden
+trees yields the regression values of two hidden layers, denoted as Ophd and Ophd , respectively. Finally, the
+1
+
+2
+
+hidden-output tree yields the outcomes of detection.
+3.3. Prediction process of DNN
+Figure 3 depicts the DNN explanation process. Initially, the input Eigen vectors A are categorized as
+"Illumination, Temperature, and CO2" using DNN. The input variables are then utilized to analyze the
+forecasting and discover useful data. The outcomes of this interpretation process demonstrate the significance
+of a characteristic in terms of prediction. The process commences with the retrieval of the hidden output derived
+from the DNN, followed by the acquisition of a substantial hidden layer from said hidden output. Once the most
+significant hidden layer is identified, it becomes possible to locate the input-hidden tree that is connected to it.
+Further, it is easy to determine which input feature is crucial to prediction.
+Input
+
+Illumination
+
+Temperature
+
+DNN
+
+Predicted
+outcome
+
+Co2
+
+Figure 3. The explanation procedure of hybrid DNN
+168
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+3.4. Conventional Firefly algorithm
+To attract other fireflies and gain potential, fireflies utilize flash signals. These fireflies are classified as
+unisexual, and the intensity of their flash determines how attractive they are. Consequently, when faced with
+the decision between two firefly particles, the particle will be more captivated by the firefly exhibiting the
+highest degree of luminosity (illumination) and will proceed in the same direction. The firefly's route will be
+arbitrary in the absence of other fireflies in the area around it. A fitness function is associated with the brightness
+of the light. The light intensity of the inverse square law is specified in equation (11).
+
+IL(d ) =
+
+IL
+d2
+
+(11)
+
+In the above equation, the light intensity is given by IL(d ) the distance d as well as the intensity IL at the
+source. The light intensity IL varies with distance with distance d for the given medium with absorption
+coefficient  is denoted in (12). Here, the original intensity is represented as IL0 . Since the firefly's attraction
+B is proportional to the light intensity noticed by neighboring flies, we may express this relationship
+mathematically as in (13).
+
+IL = IL0 exp(− d 2 )
+
+(12)
+
+ =  0 exp(− d )(a  1)
+
+(13)
+
+a
+
+In (13), the attractiveness  0 is at d = 0 . The term d is computed for two fireflies i1 and j1 at pi and p j , which
+1
+
+1
+
+is given in (14). In each of the iteration, the flies go near to the flies that have more brightness and it is shown
+in (15).
+
+dij =  kr =1 ( pi1 ,k − p j1 ,k ) 2 = pi1 − p j1
+
+(14)
+
+pi1 = pi1 +  0 exp (− di12j1 )( pi1 − p j1 ) + 
+
+(15)
+
+In the above equation from the Gaussian distribution, the vector of random numbers is taken, and it is given by
+𝜀 and the randomization parameter is denoted as 𝛼. one of the most practical approaches to simulation
+optimization. One similar optimization algorithm is Firefly Algorithm. The announcing aurora of fireflies is
+astounding eyesight in the summer bliss in the extended and abstentious corridors. The arrangement of cautions
+is basically dissenting from a one firefly species to another. The announcing cockcrow is created by a
+bioluminescence subpoena, and the close capacities of similar signaling approaches are even more confusing.
+However, two introductory capacities of alike cautions are to attain cooperation (contact) and to attract a
+possible mark. The aurora ardency at a circumstantial difference from the light reference declines with the
+conversely commensurate of place of difference. Another confinement of this category of contact is that the
+charade absorbs aurora, which becomes handcuffed and handcuffed as it travels expanses. Obviously, fireflies
+attract towards further brilliance. The ardency of aurora is composed in such a lead that it's before long allied
+with the disinterested capacity to betide optimized, which makes it potential to breed current optimization
+algorithms, such as Firefly Algorithm. For the clarity of the Firefly Algorithm, following three idealized
+traditions is appreciated: all fireflies are androgynous, which means that one firefly will be drawn to other
+fireflies no matter how beautiful they are. So, the junior bright undefined will actuate towards the cloudless one
+for any two announcing fireflies. The beauteousness drop with contrast as the ardency again decreases. If there's
+no exploitable brilliantly firefly, it'll actuate anyhow; the brilliancy of a firefly is affected or decided by the
+chorography of the disinterested capacity. For an optimization question of maximizing a capacity, the brilliance
+is just commensurate to the merit of the disinterested capacity.
+The basic reason tropical fireflies flash is because they think their bioluminescent messages will draw in possible
+mates and food. They may also serve as a protective alert system to warn off potential predators. The luminance
+169
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+of a firefly determines how attractive it is; if two fireflies are present, the brighter one will approach the lesser
+one. Fireflies lose appeal as they get farther away from the light source because of the inverse connection
+between light intensity and distance. A firefly will migrate at random if it cannot find another firefly that is
+brighter than it is. The luminance and, thus, the firefly's appeal are determined by the objective function with
+fitness value. According to our approach, a firefly's brilliance will increase with decreasing cost with respect to
+the fitness value.
+Algorithm 1 shows the FF algorithm's step-by-step process.
+Algorithm Pseudocode 1: FF [17]
+
+Step 1: Initialize the number of fireflies
+Step 2: Initialize iteration count as i = i + 1
+Step 3: In each of the iteration, compute the fitness values of fireflies
+Step 4: In each of the iteration, the fireflies are sorted by considering the best one based on the light intensity
+Step 5: Adjust the light intensity of the remaining flies in accordance with the distance between them.
+Step 6: Move the flies due to attraction that relies on the control parameters and light intensity
+Step 7: In the event that the exit condition is not achieved, return to step 2. Otherwise, proceed to step 8.
+Step 8: Give the results with FF particles that have a higher light intensity.
+The diagrammatic representation of FF algorithm is shown in figure 4.
+Begin
+
+Initiate the parameters
+
+Random variable
+generation
+
+No
+While
+i<max
+
+Stop
+
+Yes
+Based on fitness
+values, estimate the
+light intensity
+
+Identify the best fly
+
+Based on attraction,
+the flies will move
+
+i = i+1
+
+Figure 4. Flowchart representation of FF algorithm
+4.
+
+Result and discussion
+
+4.1. Experimental Setup
+The complete mechanism was developed using MATLAB/Simulink software under “Air Quality, Temperature
+and Illumination”. Various performance analyses were done. After obtaining the Alpha-Beta filter findings, the
+hybrid DNN and FF for the smart homes were evaluated for performance.
+170
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+4.2. Analysis using conventional machine learning (ML) algorithms
+We compare four well-known machine learning methods: Random Forest (RF), k-nearest neighbors algorithm
+(KNN) (K=5), Bagging, and Ada boost over the suggested model. To attain the best results, various parameters
+are adjusted for each algorithm. In Table 2, the outputs attained using these algorithms are depicted. The
+developed model acquires the best performance in relation of “precision, recall, F-Measure and also accuracy”
+when compared to other machine learning algorithms. From Table 2, the accuracy percentage of the suggested
+model is better than Bagging, KNN and RF is better than Ada Boost. Similarly, “recall, F-Measure and
+precision” is also attaining best performance in predicting the data.
+Table 2. Analysis using conventional ML algorithms
+Method
+
+Accuracy (%)
+
+Precision
+
+Recall
+
+F-Measure
+
+RF
+
+95.21%
+
+0.9628
+
+0.9625
+
+0.9626
+
+KNN(K=5)
+
+93.31%
+
+0.9431
+
+0.9496
+
+0.9474
+
+Bagging
+
+95.36%
+
+0.9641
+
+0.9649
+
+0.9643
+
+Ada Boost
+
+87.52%
+
+0.8887
+
+0.8845
+
+0.8852
+
+Hybrid DNN
+
+98.65%
+
+0.9893
+
+0.9927
+
+0.9904
+
+4.3. Analysis using conventional technologies
+The analysis of the developed model and the conventional existing technologies is shown in Table 3. Here, the
+suggested approach is compared with the conventional Multi View, CNN. The outputs of the presented method
+are slightly high when compared over traditional methods in terms of Multi View, CNN, and Traffic AV. There
+are some benefits when compared over conventional models like it doesn’t require complex feature processing,
+fast detection in huge speed network environment and early packet detection. Thus, it is concluded that the
+suggested technique is superior to conventional techniques in predicting the optimization of energy usage and
+enhancing the comfort index values.
+Table 3. Analysis using conventional technologies
+Method
+
+Accuracy (%)
+
+Precision
+
+Recall
+
+F-Measure
+
+Multi View
+
+98.23%
+
+0.9851
+
+0.9805
+
+0.9841
+
+CNN
+
+99.17%
+
+0.9939
+
+0.9946
+
+0.9941
+
+Traffic AV
+
+98.14%
+
+0.9822
+
+0.9851
+
+0.9823
+
+Hybrid DNN
+
+98.55%
+
+0.9793
+
+0.9827
+
+0.9804
+
+4.4. Absolute Mean Percentage Error (AMPE), Error based on Root Mean Square (ERMS), and
+Absolute Mean Error (AME) of Firefly Algorithm for ambient air quality, infrared temperature and
+luminosity
+The outcome metrics of the "Ambient air quality, Infrared temperature, and Luminosity" are displayed in Table
+4. The ERMS is a quadratic scoring rule that is employed to assess the mean magnitude of the error. The
+calculation of the ERMS involves determining the discrepancy between the observed values and the expected
+values. The specific equation for computing the ERMS is provided in (16). Additionally, the Absolute Mean
+Error (AME) quantifies the average magnitude of errors within a given group of forecasts, disregarding their
+respective directions. The metric assesses the precision of continuous variables. The mathematical expression
+for Mean Absolute Error (MAE) is denoted as (17). The Aggregate Mean Percentage Error (AMPE) is calculated
+by dividing the sum of the absolute errors by the demand for each period separately. This equation is represented
+as (18).
+171
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+Table 4. AMPE, ERMS, and AME of FF algorithm for ambient air quality, infrared temperature and
+luminosity and air quality circulation for smart homes
+The Performance Measurement
+System
+
+Ambient air quality
+
+Identifies the parameters
+Infrared Temperature
+
+Luminosity
+
+AMPE
+
+1.1956
+
+2.919
+
+1.696
+
+ERMS
+AME
+
+14.9860
+7.0901
+
+2.676
+1.5925
+
+14.98
+10.011
+
+EMRS =
+
+1 N
+e =0 ( Ac − Pr f )2
+n
+
+1
+AME =  Nf=1 | Ac f − Pr f |
+n
+| Ac f − Pr f |
+1
+AMPE =  Nf=1
+*100
+n
+Ac f
+
+(16)
+(17)
+(18)
+
+In the above equations, the actual and the predicted values are denoted as Ac f and Pr f , respectively. The term
+n indicates the whole number of observations.
+
+4.5. Total comfort index before and after optimization
+It [30] is the significant factor each developed approach has attempted to enhance the user's comfort index
+within the smart homes as well as intelligent buildings. The mathematical equation of comfort index is given in
+(19) [31]. Here, the comfort index Ci values lie in between 0 and 1. The terms  1 , 1 , and  1 indicates the user
+set parameters of “temperature, illumination, and air quality”, respectively. The sum of 1 + 1 +  1 =1 , which
+should not exceed 1. Moreover, the terms eT , eI , and e A denotes the environmental parameters of “Ambient
+air quality, Infrared temperature and Luminosity. It represents the error variances among optimized as well as
+the environmental values of the parameters  1 , 1 , and  1 . The user set parameters of  1 , 1 , and  1 are
+given by dTs , dI s , and dAs respectively.
+  eT  
+  eT  
+  eT  
+Ci = 1 1− 
+  + 1 1− 
+  +  1 1− 
+
+  dTs  
+  dI s  
+  dAs  
+
+(19)
+
+Without optimization, the overall comfort index had numerous fluctuations, however after performing the
+optimization, it has smoothed down and persisted closer to 1 as shown in figure 5. It is concluded that the
+comfort index for smart homes has been closer to 1 or less than 1 but not more than 1. Initially, it is 1 later it
+got decreased and finally from 240s it is gradually increased to 1.
+4.6. Energy consumption using FF and without using FF
+In figure 6, the total energy utilized by “Ambient air quality, infrared temperature and Luminosity” optimization
+and without optimization is depicted. Here, without optimization, the total power consumption is more, and it
+is denoted in pink dotted lines. The aggregate power consumption attributed to the use of optimization
+techniques is depicted by the dark pink line, which exhibits a lower value in comparison to the scenario without
+optimization.
+
+172
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+Figure 5. Total comfort index before and after optimization
+
+Figure 6. Energy consumption using FF and without using FF
+4.7. Comparison of energy consumption using proposed method with traditional approaches
+Table 5 compares the energy consumption of the proposed Hybrid DNN algorithm with PSO and genetic
+algorithms for ambient air quality, infrared temperature, and luminance. According to the table, the proposed
+algorithms have a greater energy consumption for infrared temperature management than the other two
+algorithms, while the energy consumption for ambient air quality and luminance from the proposed systems
+yielded better results than the other two techniques. The proposed system exhibits a lower total energy
+consumption in comparison to both the PSO and genetic algorithm.
+Table 5. Comparison of energy consumption using proposed method with traditional approaches
+Energy Consumption
+“Method”
+Infrared
+Ambient Air
+Luminosity
+Total
+Temperature
+Quality
+Particle Swarm Optimization
+836.36
+2454.31
+1054.17
+4344.83
+Genetic Algorithm
+Hybrid DNN (Proposed)
+5.
+
+704.04
+1641.10
+
+2364.78
+1509.09
+
+989.26
+831.54
+
+4058.08
+3981.73
+
+Conclusion
+
+Smart grid technology developments have made it possible for covering each and every nanosecond of energy
+use in smart structures. The conspiracy with smart intelligent operations is that they consume a large quantum
+of energy over conventional models. The demand for effective resource operation is adding day by day, due to
+173
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+the breakneck- fire accumulation of smart burgs and homes. Energy is a cherished finance with a commanding
+fate cost. As a solution, investigators are attempting to abate firepower consumption, especially in cosmopolitan
+burgs, while also maintaining a steady terrain. For comfort index management, three parameters such as
+“temperature, illumination, and CO2” were employed. The main issue in the earlier research with the state-ofthe-art models was static user parameters and those parameters were not changed at first. The utilization of
+Alpha Beta filter was done for forecasting the indoor “Ambient air quality, Infrared temperature and
+Luminosity” to eradicate the noise from the data. For user parameters prediction, a hybrid rule based DNN was
+used. FF algorithm was utilized for comfort index management and the optimization of energy consumption.
+Finally, it was concluded that the energy consumption optimization was successful using the proposed
+algorithm. The commentary of the carved classic and the ceremonious breathing technologies is shown in Table
+3. Then, the advanced form is equated with the ceremonious Multi View, CNN. The activities of the contributed
+approach are negligibly commanding when contrasted over traditional approaches in expressions of Multi View
+with 98.23%, CNN with 99.17%, and traffic AV with 98.14%. The proposed system exhibits a lower total
+energy consumption in comparison to both the PSO and genetic algorithm. Transportation and different means
+of communication are some of the major contributors to the changes in the current environment we are seeing.
+Around the world smart cities development strategies are under developing or in planning. So, in future work
+we can integrate the proposed systems with the machine learning IoT based adaptive traffic management system
+defined in [32] as well as other applications like wireless or mobile communications [33-35] to find out
+sustainability of the merged system in the development of smart cities. We will also like to collect huge amounts
+of data over long-time duration and will like to process proposed system on the huge amount of data.
+Declaration of competing interest
+The authors declare that they have no known financial or non-financial competing interests in any material
+discussed in this paper.
+Funding information
+No funding was received from any financial organization to conduct this research.
+References
+[1]
+
+J. Gubbi, R. Buyya, S. Marusic, and M. Palaniswami, “Internet of Things (IoT): A vision, architectural
+elements, and future directions,” Future Generation Computer Systems, vol. 29, no. 7, pp. 1645–1660,
+Sep. 2013, doi: 10.1016/j.future.2013.01.010.
+
+[2]
+
+J. Zhou, “Artificial Intelligence-Based recommendation and application of public services in smart
+cities,” Computational Intelligence and Neuroscience, vol. 2022, pp. 1–10, Aug. 2022, doi:
+10.1155/2022/8958865
+
+[3]
+
+B. Pattanaik and M. Pattnaik, “Maximum intermediate power tracking for renewable energy service,” in
+Lecture notes on data engineering and communications technologies, 2019, pp. 462–468. doi:
+10.1007/978-3-030-32150-5_44.
+
+[4]
+
+L. Cruz-Piris, D. Rivera, I. Marsa-Maestre, E. De La Hoz, and J. R. Velasco, “Access control mechanism
+for IoT environments based on modelling communication procedures as resources,” Sensors, vol. 18, no.
+3, p. 917, Mar. 2018, doi: 10.3390/s18030917.
+
+[5]
+
+S. M. Hussain, B. Pattanaik, W. Minda, D. Addis, B. Chala, and A. Abibual, “Sliding Mode Controller
+for Electric Vehicles based on Switched Boost Converter,” Journal of Physics, vol. 1964, no. 4, p. 042093,
+Jul. 2021, doi: 10.1088/1742-6596/1964/4/042093
+
+[6]
+
+E.-C. Chang, C.-A. Cheng, and R. Wu, “Artificial intelligence of Things-Based Optimal Finite-Time
+Terminal attractor and its application to maximum power point tracking of photovoltaic arrays in smart
+174
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+cities,” Wireless Communications and Mobile Computing, vol. 2022, pp. 1–9, Apr. 2022, doi:
+10.1155/2022/4213217
+[7]
+
+J.-S. R. Jang, “ANFIS: adaptive-network-based fuzzy inference system,” IEEE Transactions on Systems,
+Man, and Cybernetics, vol. 23, no. 3, pp. 665–685, Jan. 1993, doi: 10.1109/21.256541
+
+[8]
+
+M. B. Rasheed et al., “Energy optimization in smart homes using customer preference and dynamic
+pricing,” Energies, vol. 9, no. 8, p. 593, Jul. 2016, doi: 10.3390/en9080593
+
+[9]
+
+M. Ali et al., “Earth worm optimization for home energy management system in smart grid,” in Lecture
+notes on data engineering and communications technologies, 2017. doi: 10.1007/978-3-319-69811-3_52.
+
+[10] A. Shah, H. Nasir, M. Fayaz, A. Lajis, and A. Shah, “A review on energy consumption optimization
+techniques in IoT based smart building environments,” Information, vol. 10, no. 3, p. 108, Mar. 2019,
+doi: 10.3390/info10030108
+[11] E. Da Luz Oliveira, R. Alfaia, A. Souto, M. Silva, C. R. L. Francês, and N. L. Vijaykumar, “SmartCoM:
+Smart Consumption Management Architecture for Providing a User-Friendly Smart Home based on
+Metering and Computational Intelligence,” Journal of Microwaves, Optoelectronics and Electromagnetic
+Applications, vol. 16, no. 3, pp. 736–755, Sep. 2017, doi: 10.1590/2179-10742017v16i3965
+[12] M. Fayaz and D.-H. Kim, “A prediction methodology of energy consumption based on deep extreme
+learning machine and comparative analysis in residential buildings,” Electronics, vol. 7, no. 10, p. 222,
+Sep. 2018, doi: 10.3390/electronics7100222
+[13] M. Fayaz, H. Shah, A. M. Aseere, W. K. Mashwani, and A. Shah, “A framework for prediction of
+household energy consumption using feed forward back propagation neural network,” Technologies
+(Basel), vol. 7, no. 2, p. 30, Apr. 2019, doi: 10.3390/technologies7020030
+[14] A. Shah, H. Nasir, M. Fayaz, A. Lajis, and A. Shah, “A review on energy consumption optimization
+techniques in IoT based smart building environments,” Information, vol. 10, no. 3, p. 108, Mar. 2019,
+doi: 10.3390/info10030108
+[15] P. Niu, S. Niu, N. Liu, and C. Ling-Fang, “The defect of the Grey Wolf optimization algorithm and its
+verification method,” Knowledge Based Systems, vol. 171, pp. 37–43, May 2019, doi:
+10.1016/j.knosys.2019.01.018
+[16] F. Wahid, R. Ghazali, M. Fayaz, A.S. Shah, “A simple and easy approach for home appliances energy
+consumption prediction in residential buildings using machine learning techniques”. vol. 7(3), pp. 108119, J. Appl. Environ. Biol. Sci, March 2017.
+[17] Pattanaik, Balachandra, and Ganesh Babu. “Reliability enhancement of renewable energy using
+programmable system on chip model.” IJPT 9.1 (2017): 28405-28411.
+[18] F. Wahid, R. Ghazali, M. Fayaz, and A. Shah, “Statistical Features Based Approach (SFBA) for hourly
+energy consumption prediction using neural network,” International Journal of Information Technology
+and Computer Science, vol. 9, no. 5, pp. 23–30, May 2017, doi: 10.5815/ijitcs.2017.05.04
+[19] R. Y. M. Nakamura, L. A. M. Pereira, K. A. Costa, D. Rodrigues, J. P. Papa and X. . -S. Yang, “BBA: A
+Binary Bat Algorithm for Feature Selection,” 2012 25th SIBGRAPI Conference on Graphics, Patterns
+and Images, Ouro Preto, Brazil, 2012, pp. 291-297, doi: 10.1109/SIBGRAPI.2012.47.
+[20] P. Balachennaiah, M. Suryakalavathi, and P. Nagendra, “Firefly algorithm based solution to minimize
+the real power loss in a power system,” Ain Shams Engineering Journal, vol. 9, no. 1, pp. 89–100, Mar.
+2018, doi: 10.1016/j.asej.2015.10.005
+
+175
+
+SEI Vol. 5, No. 2, December 2023, pp.161-176
+
+[21] A. Shah, H. Nasir, M. Fayaz, A. Lajis, I. Ullah, and A. Shah, “Dynamic user preference parameters
+selection and energy consumption optimization for smart homes using Deep Extreme learning machine
+and BAT algorithm,” IEEE Access, vol. 8, pp. 204744–204762, Jan. 2020, doi:
+10.1109/access.2020.3037081
+[22] F. Corno and F. Razzak, “Intelligent energy optimization for user intelligible goals in smart home
+environments,” IEEE Transactions on Smart Grid, vol. 3, no. 4, pp. 2128–2135, Dec. 2012, doi:
+10.1109/tsg.2012.2214407
+[23] T. Molla, B. Z. Khan, B. Moges, H. H. Alhelou, R. Zamani, and P. Siano, “Integrated energy optimization
+of smart home appliances with cost-effective energy management system,” CSEE Journal of Power and
+Energy Systems, Jun. 2019, doi: 10.17775/cseejpes.2019.00340
+[24] S. M. Errapotu, J. Wang, Y. Gong, J.-H. Cho, M. Pan, and Z. Han, “SAFE: Secure appliance scheduling
+for flexible and efficient energy consumption for smart home IoT,” IEEE Internet of Things Journal, vol.
+5, no. 6, pp. 4380–4391, Dec. 2018, doi: 10.1109/jiot.2018.2866998
+[25] I.-Y. Joo and D.-H. Choi, “Distributed Optimization Framework for energy management of multiple
+smart homes with distributed energy resources,” IEEE Access, vol. 5, pp. 15551–15560, Jan. 2017, doi:
+10.1109/access.2017.2734911
+[26] Y. Huang, K. Wang, K. Gao, T. Qu, and H. Liu, “Jointly optimizing microgrid configuration and energy
+consumption scheduling of smart homes,” Swarm and Evolutionary Computation, vol. 48, pp. 251–261,
+Aug. 2019, doi: 10.1016/j.swevo.2019.04.007
+[27] I. O. Essiet, Y. Sun, and Z. Wang, “Optimized energy consumption model for smart home using improved
+differential evolution algorithm,” Energy, vol. 172, pp. 354–365, Apr. 2019, doi:
+10.1016/j.energy.2019.01.137
+[28] A. Akbari-Dibavar, S. Nojavan, B. Mohammadi-Ivatloo, and K. Zare, “Smart home energy management
+using hybrid robust-stochastic optimization,” Computers & Industrial Engineering, vol. 143, p. 106425,
+May 2020, doi: 10.1016/j.cie.2020.106425
+[29] A. Yan et al., “Effective detection of mobile malware behavior based on explainable deep neural
+network,” Neurocomputing, vol. 453, pp. 482–492, Sep. 2021, doi: 10.1016/j.neucom.2020.09.082
+[30] M. Fayaz and D.-H. Kim, “Energy consumption optimization and user comfort management in residential
+buildings using a BAT algorithm and fuzzy logic,” Energies, vol. 11, no. 1, p. 161, Jan. 2018, doi:
+10.3390/en11010161
+[31] Z. Wang, L. Wang, A. I. Dounis, and R. Yang, “Multi-agent control system with information fusion based
+comfort model for smart buildings,” Applied Energy, vol. 99, pp. 247–254, Nov. 2012, doi:
+10.1016/j.apenergy.2012.05.020
+[32] U. K. Lilhore et al., “Design and implementation of an ML and IoT based Adaptive Traffic-Management
+System for Smart Cities,” Sensors, vol. 22, no. 8, p. 2908, Apr. 2022, doi: 10.3390/s22082908
+[33] M. S. Dahal, “Energy saving in 5G mobile communication through traffic driven cell zooming strategy,”
+Energy Nexus, vol. 5, p. 100040, Mar. 2022, doi: 10.1016/j.nexus.2022.100040
+[34] G. Iazeolla and A. Pieroni, “Energy saving in data processing and communication systems,” The
+Scientific World Journal, vol. 2014, pp. 1–11, Jan. 2014, doi: 10.1155/2014/452863
+[35] V. M. Hiremath, G. A. Bidkar, “Power Optimization Techniques in Wireless Sensor Networks” Bonfring
+International Journal of Research in Communication Engineering, Vol 6, Special Issue, pp 83-84, Nov.
+2016 doi: 10.9756/bijrce.8207
+176
+
+

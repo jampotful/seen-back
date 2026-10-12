@@ -1,0 +1,3836 @@
+How spiders make their eyes: Systemic paralogy and function of retinal determination network homologs in arachnids
+Guilherme Gainett, Jesús A. Ballesteros, Charlotte R. Kanzler, Jakob T. Zehms, John M. Zern, Shlomi Aharon, Efrat Gavish-Regev, Prashant P. Sharma (2020). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/2020.04.28.067199. doi:10.1101/2020.04.28.067199. Licence: cc-by-nc-nd. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1
+
+How spiders make their eyes: Systemic paralogy and function of retinal determination
+
+2
+
+network homologs in arachnids
+
+3
+4
+
+*Guilherme Gainett1, *Jesús A. Ballesteros1, Charlotte R. Kanzler1, Jakob T. Zehms1, John
+
+5
+
+M. Zern1, Shlomi Aharon2, Efrat Gavish-Regev2, Prashant P. Sharma1
+
+6
+
+1
+
+7
+
+53706
+
+8
+
+2
+
+9
+
+Israel
+
+Department of Integrative Biology, University of Wisconsin-Madison, Madison, WI, USA
+National Natural History Collections, The Hebrew University of Jerusalem, Jerusalem,
+
+10
+11
+
+*Equal author contribution
+
+12
+13
+
+Correspondence: guilherme.gainett@wisc.edu, ballesterosc@wisc.edu
+
+14
+15
+
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+16
+17
+
+Abstract
+
+18
+19
+
+Arachnids are important components of cave ecosystems and display many examples of
+
+20
+
+troglomorphisms, such as blindness, depigmentation, and elongate appendages. Little is
+
+21
+
+known about how the eyes of arachnids are specified genetically, let alone the mechanisms
+
+22
+
+for eye reduction and loss in troglomorphic arachnids. Additionally, paralogy of Retinal
+
+23
+
+Determination Gene Network (RDGN) homologs in spiders has convoluted functional
+
+24
+
+inferences extrapolated from single-copy homologs in pancrustacean models. Here, we
+
+25
+
+investigated a sister species pair of Israeli cave whip spiders (Arachnopulmonata,
+
+26
+
+Amblypygi, Charinus) of which one species has reduced eyes. We generated the first
+
+27
+
+embryonic transcriptomes for Amblypygi, and discovered that several RDGN homologs
+
+28
+
+exhibit duplications. We show that paralogy of RDGN homologs is systemic across
+
+29
+
+arachnopulmonates (arachnid orders that bear book lungs), rather than being a spider-specific
+
+30
+
+phenomenon. A differential gene expression (DGE) analysis comparing the expression of
+
+31
+
+RDGN genes in field-collected embryos of both species identified candidate RDGN genes
+
+32
+
+involved in the formation and reduction of eyes in whip spiders. To ground bioinformatic
+
+33
+
+inference of expression patterns with functional experiments, we interrogated the function of
+
+34
+
+three candidate RDGN genes identified from DGE in a spider, using RNAi in the spider
+
+35
+
+Parasteatoda tepidariorum. We provide functional evidence that one of these paralogs, sine
+
+36
+
+oculis/Six1 A (soA), is necessary for the development of all arachnid eye types. Our results
+
+37
+
+support the conservation of at least one RDGN component across Arthropoda and establish a
+
+38
+
+framework for investigating the role of gene duplications in arachnid eye diversity.
+
+39
+40
+
+Keywords: cave blindness | sine oculis | Six1 | Parasteatoda tepidariorum | Amblypygi |
+
+41
+
+RNAi
+
+42
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+43
+
+Introduction
+
+44
+45
+
+Cave habitats offer apt systems for investigating the genetic basis of morphological
+
+46
+
+convergence because communities of these habitats are similarly shaped by environmental
+
+47
+
+pressures, such as absence of light and diminished primary productivity (Howarth, 1993;
+
+48
+
+Juan, Guzik, Jaume, & Cooper, 2010). Troglobites, species exclusive to cave environments
+
+49
+
+and adapted to life in the dark, exhibit a suite of characteristics common to cave systems
+
+50
+
+around the world, such as reduction or complete loss of eyes, depigmentation, elongation of
+
+51
+
+appendages and sensory structures, and decreased metabolic activity (Jemec, Škufca,
+
+52
+
+Prevorčnik, Fišer, & Zidar, 2017; Protas & Jeffery, 2012; Riddle et al., 2018). Previous work
+
+53
+
+has shown that troglomorphism can evolve over short time spans (<50 kyr) despite gene flow
+
+54
+
+(Bradic, Teotónio, & Borowsky, 2013; Coghill, Darrin Hulsey, Chaves-Campos, García de
+
+55
+
+Leon, & Johnson, 2014; Herman et al., 2018) and that parallel evolution of troglomorphic
+
+56
+
+traits (e.g., depigmentation; eye loss) in independent populations can involve the same
+
+57
+
+genetic locus (Protas et al., 2005; Protas, Trontelj, & Patel, 2011; Re et al., 2018).
+
+58
+
+Troglomorphism and troglobitic fauna have been analyzed across numerous taxonomic
+
+59
+
+groups with respect to systematics and population genetics. However, one component of the
+
+60
+
+troglobitic fauna that remains poorly understood is cave arachnids. Most orders of Arachnida
+
+61
+
+are prone to nocturnal life history and some orders broadly exhibit troglophily; in fact,
+
+62
+
+troglobitic species are known from all the extant terrestrial arachnid orders except Solifugae
+
+63
+
+and Uropygi (Cruz-López, Proud, & Pérez-González, 2016; Esposito et al., 2015; Harvey,
+
+64
+
+2002; 2007; Hedin & Thomas, 2010; Mammola, Mazzuca, Pantini, Isaia, & Arnedo, 2017;
+
+65
+
+Miranda, Aharon, Gavish-Regev, Giupponi, & Wizen, 2016; Santibáñez López, Francke, &
+
+66
+
+Prendini, 2014; Smrž, Kováč, Mikeš, & Lukešová, 2013). In addition to eye and pigment
+
+67
+
+loss, troglomorphism in arachnids manifests in the form of compensatory elongation of
+
+68
+
+walking legs and palps, appendages which harbor sensory structures in this group
+
+69
+
+(Derkarabetian, Steinmann, & Hedin, 2010; Mammola & Isaia, 2017; Mammola et al.,
+
+70
+
+2018a; Mammola, Cardoso, Ribera, Pavlek, & Isaia, 2018b).
+
+71
+
+Thorough understanding of the developmental genetic basis for the evolution of
+
+72
+
+troglomorphic traits has been largely spearheaded in two model systems: the Mexican cave
+
+73
+
+fish Astyanax mexicanus (Bradic et al., 2013; Coghill et al., 2014; Herman et al., 2018;
+
+74
+
+Porter, Dittmar, & Pérez-Losada, 2007; Protas et al., 2005; Protas & Jeffery, 2012) and the
+
+75
+
+cave isopod Asellus aquaticus (Jemec et al., 2017; Re et al., 2018; Stahl et al., 2015). Both
+
+76
+
+model systems have more than one hypogean population, can be maintained in laboratories,
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+77
+
+and are amenable to approaches such as genetic crosses and quantitative trait locus mapping.
+
+78
+
+The advent of short read sequencing technology in tandem with experimental approaches has
+
+79
+
+transformed the potential to triangulate regulatory differences between hypogean
+
+80
+
+(subterranean) and epigean (surface-dwelling) lineages (Protas et al., 2005; Re et al., 2018;
+
+81
+
+Riddle et al., 2018; Stahl et al., 2015), and to study a broader range of cave taxa.
+
+82
+
+Among arthropods, work on the isopod A. aquaticus in particular has made significant
+
+83
+
+advances in the identification of loci regulating pigmentation and size of arthropod eyes
+
+84
+
+(Protas et al., 2011; Re et al., 2018), complementing forward and reverse genetic screening
+
+85
+
+approaches in other pancrustacean models (e.g., Drosophila melanogaster, Tribolium
+
+86
+
+castaneum, and Gryllus bimaculatus) (Cagan, 2009; Kumar, 2009; Takagi et al., 2012;
+
+87
+
+ZarinKamar et al., 2011). However, developmental and genetic insights into the evolution of
+
+88
+
+blindness illuminated by A. aquaticus and other pancrustacean models are not directly
+
+89
+
+transferable to Arachnida for two reasons. First, the eyes of arachnids are structurally and
+
+90
+
+functionally different from those of pancrustaceans. Typically, the main eyes of adult
+
+91
+
+Pancrustacea (e.g., A. aquaticus) are a pair of faceted (or apposition) eyes, which are
+
+92
+
+composed of many subunits of ommatidia. In addition, adult Pancrustacea have small median
+
+93
+
+ocelli (typically three in holometabolous insects), often located medially and at the top of the
+
+94
+
+head.
+
+95
+
+By contrast, extant arachnids lack ommatidia and typically have multiple pairs of eyes
+
+96
+
+arranged along the frontal carapace. All arachnid eyes are simple-lens eyes or ocelli; each eye
+
+97
+
+has a single cuticular lens, below which are a vitreous body and visual cells. The retina is
+
+98
+
+composed of the visual cells and pigment cells. These eyes are divided in two types, namely
+
+99
+
+the principal eyes and the secondary eyes (Foelix, 2011; Land, 1985). Principal and
+
+100
+
+secondary eyes differ in the orientation of their retina (Homann, 1971): the principal eyes are
+
+101
+
+of the everted type, with the visual cells lying distally, and lack a reflective layer; the
+
+102
+
+secondary eyes are inverted, with the light-sensitive rhabdomeres pointing away from
+
+103
+
+incoming light (analogous to vertebrate eyes). All secondary eyes possess a reflective layer of
+
+104
+
+crystalline deposits called a tapetum, which is responsible for the “eye shine” of spiders. The
+
+105
+
+principal eyes are the median eyes (ME, also known as anterior medium eyes). The
+
+106
+
+secondary eyes comprise the anterior lateral eyes (ALE), posterior lateral eyes (PLE), and
+
+107
+
+medium lateral eyes (MLE; also known as posterior medium eyes) (Fig. 1A) (Foelix, 2011;
+
+108
+
+Land, 1985) (nomenclature used here follows Schomburg et al 2015). Certain orders and
+
+109
+
+suborders of arachnids have lost one type of eye altogether, with the homology of eyes
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+110
+
+clarified by the fossil record and embryology (Foelix, 2011; Garwood, Sharma, Dunlop, &
+
+111
+
+Giribet, 2014; Morehouse, Buschbeck, Zurek, Steck, & Porter, 2017).
+
+112
+
+The second concern in extending the model derived from pancrustaceans is that a subset
+
+113
+
+of Arachnida exhibits an ancient shared genome duplication, resulting in numerous paralogs
+
+114
+
+of developmental patterning genes. Recent phylogenetic and comparative genomic works on
+
+115
+
+Arachnida have shown that Arachnopulmonata (Ballesteros & Sharma, 2019; Ballesteros,
+
+116
+
+Santibáñez López, Kováč, Gavish-Regev, & Sharma, 2019; Sharma, Kaluziak, Pérez-Porro,
+
+117
+
+González, Hormiga, et al., 2014a), the clade of arachnids that bear book lungs (e.g., spiders,
+
+118
+
+scorpions, whip spiders), retain duplicates of many key transcription factors, such as
+
+119
+
+homeobox genes, often in conserved syntenic blocks (Leite et al., 2018; Schwager et al.,
+
+120
+
+2017; Sharma, Santiago, González-Santillán, Monod, & Wheeler, 2015a; Sharma, Schwager,
+
+121
+
+Extavour, & Wheeler, 2014b). Many of the ensuing paralogs exhibit non-overlapping
+
+122
+
+expression patterns and a small number have been shown to have subdivided the ancestral
+
+123
+
+gene function (subfunctionalization) or acquired new functions (neofunctionalization) (Leite
+
+124
+
+et al., 2018; Paese, Leite, Schönauer, McGregor, & Russell, 2018; Turetzek, Pechmann,
+
+125
+
+Schomburg, Schneider, & Prpic, 2015).
+
+126
+
+While comparatively little is known about the genetics of arachnid eye development, gene
+
+127
+
+expression surveys of insect retinal determination gene network (RDGN) homologs of two
+
+128
+
+spiders (Cupiennius salei and Parasteatoda tepidariorum) have shown that this phenomenon
+
+129
+
+extends to the formation of spider eyes as well (Samadi, Schmid, & Eriksson, 2015;
+
+130
+
+Schomburg et al., 2015). Different paralog pairs (orthologs of Pax6, Six1, Six3, eyes absent,
+
+131
+
+atonal, dachshund and orthodenticle) exhibit non-overlapping expression boundaries in the
+
+132
+
+developing eye fields, resulting in different combinations of transcription factor expression in
+
+133
+
+the eye pairs (Samadi et al., 2015; Schomburg et al., 2015). While these expression patterns
+
+134
+
+offer a potentially elegant solution to the differentiation of spider eye pairs, only a few
+
+135
+
+studies with the spider P. tepidariorum have attempted to experimentally test the role of these
+
+136
+
+genes in the formation of arachnid eyes. Ptep-orthodenticle-1 maternal RNA interference
+
+137
+
+(RNAi) knockdown results in a range of anterior defects, including complete loss of the head,
+
+138
+
+which precluded assessment of a role in the formation of the eyes (Pechmann, McGregor,
+
+139
+
+Schwager, Feitosa, & Damen, 2009). Ptep-dac2 RNAi knockdown results in appendage
+
+140
+
+segment defects, but no eye patterning defects were reported by the authors (Turetzek et al.,
+
+141
+
+2015). More recently, a functional interrogation of Ptep-Six3 paralogs, focused on labrum
+
+142
+
+development, reported no discernible morphological phenotype, despite a lower hatching rate
+
+143
+
+than controls and disruption of a downstream target with a labral expression domain
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+144
+
+(Schacht, Schomburg, & Bucher, 2020). Thus, gene expression patterns of duplicated RDGN
+
+145
+
+paralogs have never been linked to eye-related phenotypic outcomes in any
+
+146
+
+arachnopulmonate model. Similarly, the functions of the single-copy orthologs of RDGN
+
+147
+
+genes in groups like mites (Grbić et al., 2007; Telford & Thomas, 1998), ticks (Santos et al.,
+
+148
+
+2013), and harvestmen (Garwood et al., 2014; Sharma, Schwager, Giribet, Jockusch, &
+
+149
+
+Extavour, 2013; Sharma, Tarazona, Lopez, Schwager, Cohn, Wheeler, et al., 2015b) are
+
+150
+
+entirely unexplored, in one case because an otherwise tractable arachnid species lacks eyes
+
+151
+
+altogether (the mite Archegozetes longisetosus (Barnett & Thomas, 2012; 2013a; 2013b;
+
+152
+
+Telford & Thomas, 1998).
+
+153
+
+Investigating the evolution of eye loss in arachnids thus has the potential to elucidate
+
+154
+
+simultaneously (1) the morphogenesis of a poorly understood subset of metazoan eyes
+
+155
+
+(Foelix, 2011; Morehouse et al., 2017), (2) developmental mechanisms underlying a
+
+156
+
+convergent trait (i.e., eye loss in caves) in phylogenetically distant arthropod groups (Protas
+
+157
+
+& Jeffery, 2012; Re et al., 2018), (3) shared programs in eye development common to
+
+158
+
+Arthropoda (through comparisons with pancrustacean datasets) (Cagan, 2009; Stahl et al.,
+
+159
+
+2015; Takagi et al., 2012; ZarinKamar et al., 2011), and (4) the role of ancient gene
+
+160
+
+duplicates in establishing the diversity of eyes in arachnopulmonates (Leite et al., 2018;
+
+161
+
+Samadi et al., 2015; Schomburg et al., 2015).
+
+162
+
+As first steps toward these goals, we first developed transcriptomic resources for a sister
+
+163
+
+species pair of cave-dwelling Charinus whip spiders, wherein one species exhibits typical eye
+
+164
+
+morphology and the other highly reduced eyes (a troglobitic condition). We applied a
+
+165
+
+differential gene expression (DGE) analysis to these datasets to investigate whether candidate
+
+166
+
+RDGN genes with known expression patterns in model spider species (C. salei, P.
+
+167
+
+tepidariorum) exhibit differential expression in non-spider arachnopulmonates, as a function
+
+168
+
+of both eye condition and developmental stage. To link bioinformatic inference of expression
+
+169
+
+patterns with functional outcomes, we interrogated the function of three candidate RDGN
+
+170
+
+genes identified from DGE in a model arachnopulmonate, using RNAi in the spider P.
+
+171
+
+tepidariorum, which exhibits the same number and types of eyes as whip spiders. We provide
+
+172
+
+functional evidence that one of these candidates, sine oculis/Six1, is necessary for the
+
+173
+
+development of all spider eye types.
+
+174
+175
+
+Results
+
+176
+177
+
+Charinus ioanniticus and Charinus israelensis embryonic transcriptomes
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+178
+179
+
+As an empirical case of closely related, non-spider arachnopulmonate sister species pair
+
+180
+
+that constitutes one epigean and one troglobitic species, we selected the whip spider species
+
+181
+
+Charinus ioanniticus and C. israelensis (Fig. 1 B–C). Whip spiders, arachnopulmonates of
+
+182
+
+the order Amblypygi, are commonly found in cave habitats ranging from rain forests,
+
+183
+
+savannahs and deserts (Weygoldt, 2000). The recently described troglobitic species Charinus
+
+184
+
+israelensis (reduced-eyes) occurs in close proximity to its congener Charinus ioanniticus
+
+185
+
+(normal-eyes) in caves in the Galilee, northern Israel (Miranda et al. 2016). Given that the
+
+186
+
+formation of Levantine cave refuges is considerably recent, C. israelensis and C. ioanniticus
+
+187
+
+are likely sister species with a small time of divergence, an inference supported by their
+
+188
+
+similar morphology (Miranda et al 2016). We collected ovigerous females from both species
+
+189
+
+in caves in Israel and extracted RNA from embryos (SI Appendix, Table S1). Embryos of
+
+190
+
+whip-spiders (Phrynus marginemaculatus) achieve a deutembryo stage around 20–25 days
+
+191
+
+after egg laying (dAEL), a stage where most external features of the embryo, such as
+
+192
+
+tagmosis and appendages are fully formed, but not the eyes (Weygoldt, 1975). The
+
+193
+
+deutembryo hatches from the egg membrane inside the broodsac carried by the mother, but
+
+194
+
+remains in this stage relatively unchanged for around 70 days. The eyes begin to form around
+
+195
+
+50 dAEL, but the eye spots become externally visible and pigmented only close to hatching
+
+196
+
+(90 dAEL) (Weygoldt, 1975).
+
+197
+
+For de novo assembly of the embryonic transcriptomes of C. ioanniticus and C.
+
+198
+
+israelensis, we extracted RNA from all embryonic deutembryo stages collected in the field
+
+199
+
+(see Supplementary Information; table 1 for localities and sample explanations). Assemblies
+
+200
+
+include two deutembryo stages before eyespot formation and one deutembryo stage bearing
+
+201
+
+eyespots for C. ioanniticus; and two early deutembryo stages for C. israelensis (SI Appendix,
+
+202
+
+Fig. S1).
+
+203
+
+The assembly of C. ioanniticus reads resulted in 219,797 transcripts composed of
+
+204
+
+143,282,365 bp with and N50 of 1122 bp (more than 50% of transcripts are 1122 bp or
+
+205
+
+longer) (SI Appendix, Table S2). Universal single copy ortholog benchmarking with BUSCO
+
+206
+
+v3.0 (Waterhouse et al., 2017) indicated 93.8% completeness, with 5.7% of BUSCO genes
+
+207
+
+exhibiting duplication.
+
+208
+
+The assembly C. israelensis resulted in a higher number of transcripts: 663,281
+
+209
+
+transcripts composed of 230,044,656 bp and with N50 of 1045 bp. The BUSCO analysis
+
+210
+
+shows 95.2% completeness, which is similar to the value for C. ioanniticus assembly.
+
+211
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+212
+
+RDGN gene duplication in Charinus whip spiders
+
+213
+214
+
+Amblypygi is inferred to be nested stably in Arachnopulmonata, the clade of arachnids
+
+215
+
+that bear book lungs (Ballesteros & Sharma, 2019; Giribet, 2018; Lozano-Fernandez et al.,
+
+216
+
+2019; Rota-Stabelli et al., 2010; Sharma, Kaluziak, Pérez-Porro, González, Hormiga, et al.,
+
+217
+
+2014a). Recent evidence suggests that the common ancestor of arachnopulmonates has
+
+218
+
+undergone a whole- or partial-genome duplication affecting large gene families, such as
+
+219
+
+homeobox genes (Leite et al., 2018; Schwager et al., 2017; Sharma, Santiago, González-
+
+220
+
+Santillán, Monod, & Wheeler, 2015a). The stable phylogenetic position of Amblypygi in
+
+221
+
+Arachnopulmonata predicts that genes in RDGN that are duplicated in spiders, should also be
+
+222
+
+duplicated in Charinus whip spiders. To test this hypothesis, we performed phylogenetically-
+
+223
+
+informed orthology searches on the newly assembled embryonic transcriptomes of both
+
+224
+
+Charinus species, and conducted phylogenetic analysis with orthologs across selected
+
+225
+
+arthropod species. We discovered that homologs of atonal, Pax6, dachshund, sine oculis
+
+226
+
+(Six1), Optix (Six3), and orthodenticle are duplicated in Charinus, whereas eyegone and eyes
+
+227
+
+absent occur as single-copy orthologs (these latter two also occurring single-copy in spiders)
+
+228
+
+(Fig. 2).
+
+229
+
+atonal: The atonal gene tree showed poor resolution (SI Appendix, Fig. S2), hampering
+
+230
+
+unambiguous assignment of the whip spider genes to atonal copies previously annotated in
+
+231
+
+spiders (Samadi et al., 2015; Schwager et al., 2017). D. melanogaster copies of atonal and
+
+232
+
+amos clustered together forming a clade with other pancrustacean and myriapod sequences,
+
+233
+
+suggesting these paralogs are restricted to Mandibulata. The fruit fly cousin of atonal (cato)
+
+234
+
+formed a clade including the Cupiennius salei sequence of atonalB whereas the second copy
+
+235
+
+of C. salei, atonalA, is found in an independent clade with only arachnid sequences. It is in
+
+236
+
+this later clade that the only sequences of Charinus related to atonal are found, in turn
+
+237
+
+forming two separate clades with clear amino acid differences between these copies (SI
+
+238
+
+Appendix, Dataset S1; atonal alignment). Herein, these copies are labeled atonalA (atoA) and
+
+239
+
+atonalB (atoB). Note that the reference genomic sequences, annotated as “atonal like
+
+240
+
+homolog 8 like" (Ptep XP 0159181091), is found orthologous to the gene net in D.
+
+241
+
+melanogaster.
+
+242
+
+Pax6: In D. melanogaster, there are two paralogous copies of the vertebrate Pax6, eyeless
+
+243
+
+and twin of eyeless. This duplication seems to be shared across all arthropods and both Pax6
+
+244
+
+copies have been characterized in spiders (Samadi et al., 2015; Schomburg et al., 2015). The
+
+245
+
+gene tree of Pax6 homologues clearly identified a clade for toy including chelicerate and
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+246
+
+mandibulate copies, but no Charinus sequences are found in this clade (SI Appendix, Fig.
+
+247
+
+S3). The sister clade (eyeless) consists only of pancrustacean sequences whereas the
+
+248
+
+chelicerate copies, previously annotated as eyeless orthologs, are found in a separate clade.
+
+249
+
+Among these, two distinct genes, herein dubbed Pax6A and Pax6B, are present in both
+
+250
+
+Charinus species. Sequence similarity searches (blastp) of both Pax6A and Pax6B against the
+
+251
+
+genome of Drosophila melanogaster points to Dmel-toy as the best hit, followed by Dmel-ey.
+
+252
+
+Therefore, although the homology of these copies with Dmel-ey/toy is evident, it is not trivial
+
+253
+
+to assign these to either of these genes or if these represent taxon-restricted duplicates of
+
+254
+
+eyeless.
+
+255
+
+eyegone/twin of eyegone: These members of the Pax gene family are paralogous in D.
+
+256
+
+melanogaster but occur as single copy in arachnids. Single copy orthologs of eyg/toe are
+
+257
+
+present in the two target Amblypygi species (SI Appendix, Fig. S3).
+
+258
+
+dachshund: Spiders and scorpions have two paralogous copies of dachshund (Nolan,
+
+259
+
+Santibáñez López, & Sharma, 2020; Turetzek et al., 2015). Two copies are present in the
+
+260
+
+transcriptomes of both Charinus species and are here termed dacA and dacB (SI Appendix,
+
+261
+
+Fig. S4). The C. israelensis dacB is assembled in two different gene fragments that overlap
+
+262
+
+by three amino acids (SI Appendix, Fig. S4; see dachshund alignment in SI Appendix
+
+263
+
+Dataset S1). The C. ioanniticus dacA copy is also assembled as two different gene fragments
+
+264
+
+with little sequence overlap but being part of the dacA clade (SI Appendix, Fig. S4).
+
+265
+
+eyes absent: This single-copy orthologs are found in arthropods and arachnids alike
+
+266
+
+and is represented in both Charinus species. The association of transcript to this gene is
+
+267
+
+unambiguous for both amblypigid species (SI Appendix, Fig. S5).
+
+268
+
+orthodenticle: As with spiders, there are two copies homologous to Dmel-otd in
+
+269
+
+Charinus. The resolution of the gene tree is poor and does not allow uncontroversial
+
+270
+
+association to spider orthologs (SI Appendix, Fig. S6). Charinus copies are termed otdA and
+
+271
+
+otdB.
+
+272
+
+Optix: There are two very similar copies of Optix in C. israelensis and one in C.
+
+273
+
+ioanniticus (SI Appendix, Fig. S7). The C. ioanniticus copy is termed OptixA. The two copies
+
+274
+
+of C. israelensis show very conserved amino acid sequences but clear nucleotide differences.
+
+275
+
+Although the gene tree with the reference genome shows them more closely allied to one of
+
+276
+
+the spider paralogous copies of Optix (Ptep NP 00130752.1), a reduced analysis including
+
+277
+
+Cupiennius salei and P. tepidariorum copies, suggests that the Charinus copies are
+
+278
+
+independent duplications. Here the two whip spider copies are dubbed OptixA and OptixB but
+
+279
+
+they should not be considered orthologous to the spider OptixA/B.
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+280
+
+sine oculis: Two copies of sine oculis are found in C. israelensis and one in C.
+
+281
+
+ioanniticus. Both copies are nested in a clade with Ptep-soA (SI Appendix, Fig. S8). These
+
+282
+
+are herein dubbed as soA and soB given that orthology with either spider copy is unclear.
+
+283
+284
+
+RDGN genes in whip spider eye formation: comparing early and late stages of C. ioanniticus
+
+285
+286
+
+The expression of paralog pairs of Pax6, sine oculis, Optix, eyes absent, atonal,
+
+287
+
+dachshund and orthodenticle in the developing eyes of the spiders (Samadi et al., 2015;
+
+288
+
+Schomburg et al., 2015), and the occurrence of the same paralogs in Charinus whip spiders,
+
+289
+
+suggest that these genes may also be involved in the formation of eyes in whip spiders. We
+
+290
+
+investigated this idea by comparing the expression levels of these RDGN genes in the stages
+
+291
+
+before eye-spot formation versus a stage after eye-spot formation in the eye-bearing whip
+
+292
+
+spider Charinus ioanniticus (henceforth “Comparison 1”; Fig. 3A).
+
+293
+
+We mapped reads of both treatments to the reference transcriptome of C. ioanniticus
+
+294
+
+using the quasi-alignment software Salmon v. 1.1.0 (Patro, Duggal, Love, Irizarry, &
+
+295
+
+Kingsford, 2017) and conducted a differential gene expression analysis of Comparison 1
+
+296
+
+using DESeq2 v 1.24.0 (Love, Huber, & Anders, 2014) (SI Appendix, Fig. S9). These
+
+297
+
+comparisons showed that Cioa-dacA, Cioa-otdA, Ciao-eya and Cioa-soA are significantly
+
+298
+
+over-expressed (padj < 0.05) in the eyespot stage in comparison with the stage before eyespot
+
+299
+
+formation (Fig. 3A). While we cannot rule out that the differences in gene expression are due
+
+300
+
+to other developmental differences between the two stages sequenced, these results
+
+301
+
+highlighted these four RDGN genes as promising candidates involved in the formation of
+
+302
+
+eyes in whip spiders.
+
+303
+304
+
+RDGN genes in whip spider eye reduction: comparing C. ioanniticus and C. israelensis
+
+305
+306
+
+Blindness in adults of the model cave fish Astyanax mexicanus is a result of an embryonic
+
+307
+
+process in which the rudimentary eye of the embryo is induced to degenerate by signals
+
+308
+
+emitted from the lens tissue (Jeffery, 2009). Both early and late expression of RDGN genes,
+
+309
+
+such as Pax6, are responsible for the reduction of eyes in fish from cave populations
+
+310
+
+(Jeffery, 2009; Strickler, Yamamoto, & Jeffery, 2001). Likewise, in the isopod crustacean
+
+311
+
+Asellus aquaticus cave blindness has a strong genetic component and mechanisms of eye
+
+312
+
+reduction also act at embryonic stages (Mojaddidi, Fernandez, Erickson, & Protas, 2018;
+
+313
+
+Protas et al., 2011). The embryonic development of the reduced-eyes whip spider C.
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+314
+
+israelensis has not been explored to date, but we expect that reduction of eyes results from
+
+315
+
+changes in embryonic gene expression during the deutembryo stage (Weygoldt, 1975). We
+
+316
+
+investigated this possibility by quantifying the relative gene expression of RDGN genes in
+
+317
+
+comparable embryonic stages of C. israelensis (reduced eyes) and C. ioanniticus (normal
+
+318
+
+eyes) embryos before eye-spot formation (SI Appendix Table S1; Figure S1). Using the DGE
+
+319
+
+approach from Comparison 1, we conducted a heterospecific analysis using as the reference
+
+320
+
+either the C. israelensis transcriptome (henceforth “Comparison 2.1”) or the C. ioanniticus
+
+321
+
+transcriptome (henceforth “Comparison 2.2”).
+
+322
+
+Both analyses are anchored on the premise that a hybrid mapping between the sister
+
+323
+
+species is possible given the recent divergence between them. The mapping rate of the C.
+
+324
+
+ioanniticus reads was similar regardless of the reference species, (96.74% and 96.59%
+
+325
+
+respectively for C. ioanniticus and C. israelensis). In the case of the reads from C. israelensis
+
+326
+
+embryos, mapping rate to the conspecific (96.8%) transcriptome was higher than when
+
+327
+
+mapping against C. ioanniticus (82.45%). The similar mapping rate of C. ioanniticus reads
+
+328
+
+suggests that the two whip spiders are sufficiently closely related to generate interspecific
+
+329
+
+comparisons of gene expression. Comparisons 2.1 and 2.2 yielded similar results with respect
+
+330
+
+to the direction of differentially expressed RDGN genes (Fig. 3B–C). In comparison 2.1,
+
+331
+
+Pax6A, OptixA and OptixB are significantly over-expressed in the normal-eyes species, with
+
+332
+
+expression levels at least 4 times higher than in the reduced-eyes species (log2FC > 2; padj <
+
+333
+
+0.05) (Fig. 3B; SI Appendix, Fig. S10). In comparison 2.2, Pax6A and OptixA are also over-
+
+334
+
+expressed in C. ioanniticus (padj < 0.05), and so is eyes absent (padj < 0.05; Fig. 3C). In
+
+335
+
+comparison 2.2, orthodenticle-B appears under-expressed in the normal-eyes species (padj <
+
+336
+
+0.05 (Fig. 3C; SI Appendix, Fig. S11). We note that the magnitude of log2FC and
+
+337
+
+significance values differed considerably between analysis. Nonetheless, Pax6A and OptixA
+
+338
+
+were consistently over expressed in the normal-eyes species, highlighting these two genes as
+
+339
+
+promising candidates involved in the reduction of eyes in Charinus israelesis.
+
+340
+341
+
+sine oculis is necessary for principal and secondary eye development in a model
+
+342
+
+arachnopulmonate
+
+343
+344
+
+Our bioinformatic analysis in the whip spider system suggested that eyes absent and
+
+345
+
+paralogs of sine oculis, orthodenticle, and dachshund may be involved in the normal
+
+346
+
+formation of eyes in C. ioanniticus (Comparison 1). We also found evidence that Pax6 and a
+
+347
+
+paralog of Optix may be involved in the reduction of eyes in the cave whip spider C.
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+348
+
+israelensis. To link bioinformatic reconstructions of gene expression with functional
+
+349
+
+outcomes, we interrogated the function of RDGN genes using parental RNA interference
+
+350
+
+(RNAi) in the spider Parasteatoda tepidariorum. We selected Ptep-soA (Ptep-so1 sensu
+
+351
+
+Schomburg et al. 2015), Ptep-otdB (Ptep-otd2 sensu Schomburg et al. 2015) and Ptep-OptixB
+
+352
+
+(Ptep Six3.2 sensu Schomburg et al. 2015). In P. tepidariorum, these genes are known to be
+
+353
+
+expressed in all eye types, in the median eyes only, and in the lateral eyes, respectively (Fig.
+
+354
+
+1D) (Schomburg et al., 2015).
+
+355
+
+Early expression of Ptep-soA is detected in lateral domains of the head lobes (stage 10)
+
+356
+
+corresponding to the principal and secondary eyes, and continues until the pre-hatching stage
+
+357
+
+14 (Schomburg et al., 2015). Expression of Ptep-soA on wild type stage 14.1 embryos is
+
+358
+
+bilaterally symmetrical on all eyes and uniformly strong (Fig. 4A–B). By stage 14.2, it
+
+359
+
+remains strong on the principal eyes but it is stronger at the periphery of the secondary eye
+
+360
+
+spots (Fig. 4A, C).
+
+361
+
+P. tepidariorum hatchlings, or postembryos, initially have no externally visible lenses and
+
+362
+
+pigment. The red pigment and lenses of all eyes, and the reflective tapetum of the lateral
+
+363
+
+eyes, become progressively recognizable in the 48 hours (at 26˚C) until the animal molts into
+
+364
+
+the first instar with fully formed eyes (SI Appendix, Video S1) (see also Mittmann & Wolff,
+
+365
+
+2012). We fixed embryos from Ptep-soA dsRNA-injected and dH2O-injected treatments
+
+366
+
+between 24h-48h, which encompasses stages where the eyes of postembryos are already
+
+367
+
+recognizable until the first instar.
+
+368
+
+Negative control experiments (dH2O-injected females) yielded postembryos with eye
+
+369
+
+morphology indistinguishable from wild type animals: the median eyes (ME; principal eyes)
+
+370
+
+have an inferior semi-lunar ring of red pigment and lack the tapetum; and all pairs of lateral
+
+371
+
+eyes (secondary eyes) have the canoe-shaped tapetum type (Foelix, 2011; Land, 1985), which
+
+372
+
+is split in the middle and surrounded by red pigment (Fig. 5A; panel 1). We observed
+
+373
+
+misshaped tapeta on the lateral eyes of some postembryos on the earlier side of the
+
+374
+
+developmental spectrum of fixed animals, but that was never observed on postembryos close
+
+375
+
+to molting or first instars (SI Appendix, Fig. S12). It is unclear if this reflects a natural
+
+376
+
+variation of early developing tapetum or an artifact of sample preparation.
+
+377
+
+Embryos from Ptep-soA dsRNA-injected females are also able to hatch into postembryos
+
+378
+
+and continue molting to adulthood (SI Appendix, Video S2). However, a subset of the
+
+379
+
+embryos of dsRNA-injected treatment (9.5%; n=195/2049) exhibits a spectrum of eye defects
+
+380
+
+that was not observed on the controls (Fig. 5A–B; SI Appendix, Fig. S13). The defects
+
+381
+
+occurred on all eyes, namely medium eyes (ME), anterior lateral eyes (ALE), posterior lateral
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+382
+
+eyes (PLE), and medium lateral eyes (MLE) (Fig. 5A). Affected medium eyes have reduced
+
+383
+
+pigmentation or complete absence (Fig. 5A, panels 2–6), while lateral eyes also exhibited
+
+384
+
+defects of the tapetum or complete absence of the eye (Fig. 5A, panels 4–6).
+
+385
+
+We selected a subset of the knockdown postembryos initially scored as having any eye
+
+386
+
+defect (n=48) for quantifying the degree of effect per eye type, and the proportion of
+
+387
+
+symmetrical and mosaic eye phenotypes in our sample. Medium eyes are affected in almost
+
+388
+
+all cases (97%), whereas the three lateral eye types were similarly lowly affected (MLE:
+
+389
+
+14%; PLE: 8%; ALE: 10%) (Fig. 5C; SI Appendix, Fig. S12; detailed scoring criteria in
+
+390
+
+Material and Methods). The majority of defective eyes are mosaics, meaning that a given eye
+
+391
+
+pair is affected only on one side of the animal (Fig. 5C; SI Appendix, Fig. S12).
+
+392
+
+Parental RNAi against Ptep-soA did not completely abolish its expression, as detected by
+
+393
+
+in situ hybridization (Fig. 4D; see Material and Methods). Nevertheless, we detected
+
+394
+
+asymmetrical reduction of Ptep-soA expression on single eyes of a subset of stage 14
+
+395
+
+embryos (n=6/16; Fig. 4D), which closely correlates with the predominance of mosaic
+
+396
+
+phenotypes observed in late postembryos (Fig. 5C).
+
+397
+
+Parental RNAi experiments using the same protocol targeting Ptep-otdB and Ptep-OptixB
+
+398
+
+did not result in any detectable phenotypic effects on the eyes of embryos from dsRNA-
+
+399
+
+injected treatment (two and six females injected, respectively; counts not shown). These
+
+400
+
+results accord with a recent study that knocked down both Optix paralogs P. tepidariorum
+
+401
+
+and did not recover eye defects (Schacht et al., 2020)
+
+402
+403
+
+Discussion
+
+404
+405
+
+Paralogy of RDGN members in arachnopulmonates
+
+406
+407
+
+Amblypygi have a critical placement within arachnid phylogeny, as they are part of a trio
+
+408
+
+of arachnid orders (collectively, the Pedipalpi, comprised of Amblypygi, Thelyphonida, and
+
+409
+
+Schizomida), which in turn is the sister group to spiders. Whereas the eyes of spiders have
+
+410
+
+greatly diversified in structure, function, and degree of visual acuity (particularly the eyes of
+
+411
+
+hunting and jumping spiders), the arrangement and number of eyes in Amblypygi likely
+
+412
+
+reflects the ancestral condition across Tetrapulmonata (= spiders + Pedipalpi), consisting of
+
+413
+
+three pairs of simple lateral ocelli and a pair of median ocelli; a similar condition is observed
+
+414
+
+in basally branching spider groups like Mesothelae and Mygalomorphae, as well as
+
+415
+
+Thelyphonida (vinegaroons). However, while developmental genetic datasets and diverse
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+416
+
+genomic resources are available for spiders and scorpions (Oda & Akiyama-Oda, 2020;
+
+417
+
+Posnien et al., 2014; Schwager et al., 2017; Sharma, Schwager, Extavour, & Wheeler,
+
+418
+
+2014b), the developmental biology of the other three arachnopulmonate orders has been
+
+419
+
+virtually unexplored in the past four decades beyond a single work describing the
+
+420
+
+embryology of one North American amblypygid species (Weygoldt, 1975). To address this
+
+421
+
+gap, we focused our investigation on a sister species pair of cave whip spiders and generated
+
+422
+
+the first embryonic transcriptomes for this order. These datasets are immediately amenable to
+
+423
+
+testing the incidence of RDGN duplicates previously known only from two spiders (Samadi
+
+424
+
+et al., 2015; Schomburg et al., 2015) and their putative effects in patterning eyes across
+
+425
+
+Arachnopulmonata broadly.
+
+426
+
+The inference of a partial or whole genome duplication (WGD) in the most recent
+
+427
+
+common ancestor of Arachnopulmonata is supported by the systemic duplications of
+
+428
+
+transcription factors and synteny detected in the genomes of the scorpion Centruroides
+
+429
+
+sculpturatus, and the spider Parasteatoda tepidariorum, as well as homeobox gene
+
+430
+
+duplications detected in the genome of the scorpion Mesobuthus martensii and transcriptome
+
+431
+
+of the spider Pholcus phalangioides (Leite et al., 2018; Schwager et al., 2017). Additional
+
+432
+
+evidence comes from shared expression patterns of leg gap gene paralogs in a spider and a
+
+433
+
+scorpion (Nolan et al., 2020). Embryonic transcriptomes are particularly helpful in the
+
+434
+
+absence of genomes, as several duplicated genes, such as some homeobox genes, are only
+
+435
+
+expressed during early stages of development (Leite et al., 2018; Sharma, Santiago,
+
+436
+
+González-Santillán, Monod, & Wheeler, 2015a; Sharma, Schwager, Extavour, & Wheeler,
+
+437
+
+2014b). Our analysis of Charinus embryonic transcriptomes shows that RDGN gene
+
+438
+
+duplicates observed in spiders also occur in whip spiders, supporting the hypothesis that these
+
+439
+
+paralogous copies originated from a shared WGD event in the common ancestor of
+
+440
+
+Arachnopulmonata.
+
+441
+
+The conservation of some transcription factors patterning eyes is widespread in the
+
+442
+
+Metazoan tree of life (Vopalensky & Kozmik, 2009). In the model fruit fly D. melanogaster,
+
+443
+
+the homeobox Pax6 homolog, eyeless, was the first transcription factor identified as a “master
+
+444
+
+gene”, necessary for compound eye formation and capable of inducing ectopic eye formation
+
+445
+
+(Gehring & Ikeo, 1999; Kumar, 2009). The Pax6 protein is essential for eye formation across
+
+446
+
+several metazoan taxa, which has fomented ample debate about the deep homology of gene
+
+447
+
+regulatory networks in patterning structurally disparate eyes (Carroll, 2008; Shubin, Tabin, &
+
+448
+
+Carroll, 2009; Vopalensky & Kozmik, 2009). In the case of sine oculis (Six1/2), orthologs
+
+449
+
+are found across metazoans (Bebenek, Gates, Morris, Hartenstein, & Jacobs, 2004; Byrne et
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+450
+
+al., 2017; Rivera et al., 2013). Evidence that sine oculis is required for the eye patterning in
+
+451
+
+other bilaterians comes from expression pattern in the developing eyes of the annelid
+
+452
+
+Platynereis dumerilii (Arendt, Tessmar, Medeiros de Campos-Baptista, Dorresteijn, &
+
+453
+
+Wittbrodt, 2002), and functional experiments in the planarian Girardia tigrina (Pineda et al.,
+
+454
+
+2000). Therefore, studies interrogating the genetic bases of eye formation in chelicerate
+
+455
+
+models have the potential to clarify which components of the eye gene regulatory network of
+
+456
+
+Arthropoda evolved in the MRCA of the phylum, and which reflect deep homologies with
+
+457
+
+other metazoan genes.
+
+458
+459
+
+A conserved role for a sine oculis homolog in patterning arachnopulmonate eyes
+
+460
+461
+
+The eyes of arthropods are diverse in number, arrangement, structure and function
+
+462
+
+(Paulus, 1979). Both types of eyes observed in Arthropoda, the faceted eyes (compound) and
+
+463
+
+single-lens eyes (ocelli), achieve complexity and visual acuity in various ways. To mention
+
+464
+
+two extremes, in Mandibulata the compound eyes of mantis shrimps (Stomatopoda) achieve a
+
+465
+
+unique type of color vision and movements by using 12 different photoreceptive types and
+
+466
+
+flexible eye-stalks (Daly, How, Partridge, & Roberts, 2018; Marshall, Cronin, & Kleinlogel,
+
+467
+
+2007; Thoen, How, Chiou, & Marshall, 2014). In Arachnida, the simple-lens median eyes of
+
+468
+
+some jumping spiders (Salticidae) have exceptional visual acuity in relation to their eye size,
+
+469
+
+achieve trichromatic vision through spectral filtering, and can move their retina using
+
+470
+
+specialized muscles (Harland, Li, & Jackson, 2012; Land, 1985; Zurek et al., 2015).
+
+471
+
+Comparative anatomy suggests that the common ancestor of Arthropoda had both lateral
+
+472
+
+compound eyes and median ocelli that then became independently modified in the arthropod
+
+473
+
+subphyla (Morehouse et al., 2017; Paulus, 1979). While in situ hybridization data for selected
+
+474
+
+RDGN genes across arthropods generally support the hypotheses of eye homology,
+
+475
+
+comparative developmental datasets remain phylogenetically sparse outside of Pancrustacea
+
+476
+
+(Samadi et al., 2015; Schomburg et al., 2015)
+
+477
+
+We therefore applied a bioinformatic approach in a study system that lacked any genomic
+
+478
+
+resources (Amblypygi) to assess whether RDGN homologs are transcriptionally active during
+
+479
+
+the formation of eyes in the eye-bearing C. ioanniticus (Comparison 1), as well as those that
+
+480
+
+may be putatively involved in eye loss in its troglobitic sister species (Comparison 2). As first
+
+481
+
+steps toward understanding how arachnid eyes are patterned, our experiments demonstrated
+
+482
+
+that soA, a sine oculis paralog identified as differentially expressed during the formation of
+
+483
+
+eyes in C. ioanniticus, is necessary for patterning all eyes of a model arachnid system with
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+484
+
+the same eye configuration (Parasteatoda tepidariorum). Thus, we provide the first
+
+485
+
+functional evidence that part of the RDGN is evolutionarily conserved in the most recent
+
+486
+
+common ancestor (MRCA) of insects and arachnids, and by extension, across Arthropoda.
+
+487
+
+The advantage of such a bioinformatic approach is that it can potentially narrow the range
+
+488
+
+of candidate genes for functional screens, due to the inherent challenges imposed by paralogy
+
+489
+
+when assessing gene function. Eye reduction in the cave fish Astyanax mexicanus has been
+
+490
+
+shown to involve differential expression of genes known to be involved in eye patterning in
+
+491
+
+model organisms, such as hedgehog and Pax6 (eyeless/toy) (Jeffery, 2009; Protas & Jeffery,
+
+492
+
+2012). In addition, other “non-traditional” candidates have been identified, such as hsp90
+
+493
+
+(Jeffery, 2009). Likewise, evidence from quantitative trait loci mapping in cave populations
+
+494
+
+of the troglobitic crustacean Asellus aquaticus shows that eye loss phenotype is correlated
+
+495
+
+with loci that are not part of the RDGN (Protas et al., 2011; Protas & Jeffery, 2012). The
+
+496
+
+results of the DGE analysis in whip spiders underscore the potential of a DGE approach to
+
+497
+
+triangulate targets among candidate genes in non-model species more broadly. Future efforts
+
+498
+
+in the Charinus system should focus on dissecting individual eye and limb primordia of
+
+499
+
+embryos of both species, in order to identify candidate genes putatively involved in the
+
+500
+
+reduction of each eye type, as well as compensatory elongation of the sensory legs of the
+
+501
+
+troglobitic species, toward downstream functional investigation.
+
+502
+503
+
+Do gene duplications play a role in the functional diversification of arachnopulmonate eyes?
+
+504
+505
+
+A challenge in studying arachnopulmonate models to understand ancestral modes of eye
+
+506
+
+patterning in Arthropoda is the occurrence of RDGN duplicates in this lineage. Our orthology
+
+507
+
+searches and phylogenetic analysis showed that the evolutionary history of genes is not
+
+508
+
+always resolved using standard phylogenetic methods, as short alignable regions and/or
+
+509
+
+uncertainty of multiple sequence alignments can result in ambiguous gene trees. One way to
+
+510
+
+circumvent this limitation is by analyzing expression patterns via in situ hybridization
+
+511
+
+between paralogs in different arachnids in order to determine which patterns are
+
+512
+
+plesiomorphic (Leite et al., 2018; Nolan et al., 2020; Turetzek et al., 2015). Nonetheless, the
+
+513
+
+possibility of subfunctionalization and neofunctionalization may also complicate such
+
+514
+
+inferences because discerning one process from the other is analytically challenging (Sandve,
+
+515
+
+Rohlfs, & Hvidsten, 2018).
+
+516
+
+Genetic compensation of gene paralogs is another confounding variable, which can be
+
+517
+
+accounted for by experimental advances in model organisms (e.g., Shull et al., 2020). We
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+518
+
+note that the overall penetrance in this experiment is low (9.5%) when compared to some
+
+519
+
+studies in P. tepidariorum (e.g., Khadjeh et al 2012; >59% in Ptep-Antp RNAi). Wide
+
+520
+
+variance in penetrance has been reported by several research groups in this system, with
+
+521
+
+phenotypic effects varying broadly even within individual experiments (e.g., Fig. 5 of
+
+522
+
+Akiyama-Oda & Oda, 2006; Fig. S5 of Schwager, Pechmann, Feitosa, McGregor, & Damen,
+
+523
+
+2009). Furthermore, some genes have empirically proven intractable to misexpression by
+
+524
+
+RNAi in P. tepidariorum, with one case suggesting functional redundancy of posterior Hox
+
+525
+
+genes to be the cause (Khadjeh et al., 2012). Double knockdown experiments have been
+
+526
+
+shown to exhibit poor penetrance (0-1.5%) in P. tepidariorum as well (Fig. S3 of Khadjeh et
+
+527
+
+al. 2012; Fig. S1 of Setton et al., 2017), and to our knowledge, no triple knockdown has ever
+
+528
+
+been achieved. While we cannot rule out functional redundancy with other RDGN paralogs
+
+529
+
+in the present study, the low penetrance we observed may also be partly attributable to our
+
+530
+
+conservative phenotyping strategy (see Material and Methods), which did not assess a
+
+531
+
+possible delay in eye formation and emphasized dramatic defects in eye morphology for
+
+532
+
+scoring.
+
+533
+
+The occurrence of RDGN gene duplications in Arachnopulmonata, in tandem with
+
+534
+
+improving functional genetic toolkits in P. tepidariorum (e.g., Pechmann, 2016), offers a
+
+535
+
+unique opportunity of studying the role of sub- and neofunctionalization in the development
+
+536
+
+of their eyes, and a possible role of this process in the diversification of number, position and
+
+537
+
+structure of the eyes in an ancient group of arthropods (Harland et al., 2012; Land, 1985;
+
+538
+
+Morehouse et al., 2017; Paulus, 1979; Zurek et al., 2015). The genomes of mites, ticks, and
+
+539
+
+harvestmen (Grbić et al., 2011; Hoy et al., 2016) (Gulia-Nuss et al., 2016) reveal that
+
+540
+
+apulmonate arachnid orders have not undergone genome duplication events as seen in
+
+541
+
+Arachnopulmonata (Schwager et al., 2017), or horseshoe crabs (Kenny et al., 2015; Nossa et
+
+542
+
+al., 2014; Zhou et al., 2020). Future comparative studies focused on understanding the
+
+543
+
+ancestral role of chelicerate RDGN genes should additionally prioritize single-copy orthologs
+
+544
+
+in emerging model systems independent of the arachnopulmonate gene expansion, such as
+
+545
+
+the harvestman Phalangium opilio (Sharma et al., 2013; Sharma, Schwager, Extavour, &
+
+546
+
+Giribet, 2012).
+
+547
+548
+
+Materials and Methods
+
+549
+550
+
+Animal collection
+
+551
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+552
+
+Three ovigerous females of the normal-eyes species, Charinus ioanniticus (ISR021-2;
+
+553
+
+ISR021-3; ISR021-4), and two egg-carrying females of the reduced-eyes species, Charinus
+
+554
+
+israelensis (ISR051-4; ISR051-6), were hand collected in caves in Israel in August 2018
+
+555
+
+(Supplementary Information; Table 1). Females were sacrificed and the brood sacs
+
+556
+
+containing the embryos were dissected under phosphate saline buffer (PBS). For each female,
+
+557
+
+a subset of the embryos (5 to 13 individuals) was fixed in RNAlater solution after poking a
+
+558
+
+whole into the egg membrane with fine forceps, while the remaining embryos of the clutch
+
+559
+
+were fixed in a 4% formaldehyde/PBS solution to serve as vouchers (SI Appendix, Table S1).
+
+560
+
+Adult animals and embryos of Parasteatoda tepidariorum were obtained from the colony at
+
+561
+
+UW-Madison, US.
+
+562
+563
+
+Transcriptome assembly for Charinus whip spiders
+
+564
+565
+
+RNAlater-fixed embryos were transferred to 1.5mL tubes filled with TRIZOL
+
+566
+
+(Invitrogen) after two months, and subject to RNA extraction. Total RNA extracted from
+
+567
+
+each sample of the embryos of C. ioannicitus (three samples) and C. israelensis (two
+
+568
+
+samples) (SI Appendix, Table S1) was submitted for library preparation at the Biotechnology
+
+569
+
+Center of the University of Wisconsin-Madison. Each sample was sequenced in triplicate in
+
+570
+
+an Illumina High-Seq platform using paired-end 100 bp-long read strategy at the same
+
+571
+
+facility. Read quality was assessed with FastQC (Babraham Bioinformatics). Paired-end
+
+572
+
+reads for C. ioanniticus (ISR021) and C. israelensis (ISR051) were compiled and de novo
+
+573
+
+assembled using Trinity v.3.3 (Grabherr et al., 2011) enabling Trimmomatic v.0.36 to remove
+
+574
+
+adapters and low-quality reads (Bolger, Lohse, & Usadel, 2014). Transcriptome quality was
+
+575
+
+assessed with the Trinity package script ‘TrinityStats.pl’ and BUSCO v.3 (Waterhouse et al.,
+
+576
+
+2017). For BUSCO, we used the ‘Arthropoda’ database and analyzed the transcriptomes
+
+577
+
+filtered for the longest isoform per Trinity gene.
+
+578
+579
+
+RNA sequencing for differential gene expression
+
+580
+581
+
+The total RNA extraction of each sample of C. ioanniticus and C. israelensis embryos
+
+582
+
+was sequenced in triplicate in an Illumina High-Seq platform using a single-end 100 bp-long
+
+583
+
+read strategy in the same facility as described above. For C. ioanniticus (normal-eyes), we
+
+584
+
+sequenced two biological replicates of embryos at an early embryonic stage, before eye-spot
+
+585
+
+formation (ISR021-2, ISR021-3), and one sample of late embryos, after eye-spot formation
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+586
+
+(ISR021-4); For C. israelensis (reduced-eyes), we sequenced embryos at an early embryonic
+
+587
+
+stage (ISR051-6; ISR051-4) comparable to the early stage in C. ioanniticus (ISR021-2,
+
+588
+
+ISR021-3), as inferred by the elongated lateral profile of the body and marked furrows on the
+
+589
+
+opisthosomal segments (SI Appendix, Fig. S1).
+
+590
+591
+
+Differential gene expression analysis in Charinus and identification of eye gene orthologs
+
+592
+593
+
+Orthologs of Drosophila melanogaster eyeless and twin of eyeless (Pax6A, Pax6B), sine
+
+594
+
+oculis (soA, soB), orthodenticle (otdA, otdB), Optix (Six3.1, Six3.2), dachshund (dacA, dacB),
+
+595
+
+and eyes absent (eya) had been previously isolated in Parasteatoda tepidariorum
+
+596
+
+(Schomburg et al., 2015, and references therein). We used as reference sequences the
+
+597
+
+complete predicted transcripts for these genes from P. tepidariorum genome (Schwager et al.,
+
+598
+
+2017), Cupiennius salei (Samadi et al., 2015) (for atonal and Pax6), and D. melanogaster,
+
+599
+
+including also atonal and eyegone from the latter species. The sequences were aligned with
+
+600
+
+MAFFT (v7.407) (Katoh & Standley, 2013) and the resulting alignment used to build hidden
+
+601
+
+Markov model profiles for each gene (hmmbuild, from the hmmer suite v.3.3) (Finn et al.,
+
+602
+
+2015). Matches to these profiles were found using hmmsearch in the reference transcriptomes
+
+603
+
+of C. ioanniticus and C. israelensis as well as in the genomes of representative arthropods
+
+604
+
+including D. melanogaster (GCA 000001215.4), Tribolium castaneum (GCA 000002335.3),
+
+605
+
+Daphnia magna (GCA 003990815.1), Strigamia maritima (GCA 000239455.1),
+
+606
+
+Dinothrombium tinctorium (GCA 003675995.1), Ixodes scapularis (GCA 002892825.2),
+
+607
+
+Tetranychus urticae (GCA 000239435.1), Limulus polyphemus (GCA 000517525.1),
+
+608
+
+Tachypleus tridentatus (GCA 004210375.1), Centruroides sculpturatus (GCA 000671375.2),
+
+609
+
+Parasteatoda tepidariorum (GCA 000365465.2 ) and Trichonephila clavipes (GCA
+
+610
+
+002102615.1). These species were selected from a pool relatively recent genome assembly
+
+611
+
+resources and well curated reference genomes.
+
+612
+
+Homologous sequences (those with hmmer expectation value, e < 1010) to the genes of
+
+613
+
+interest were then compiled into individual gene FASTA files, combined with the reference
+
+614
+
+sequences used for the homology search, aligned (MAFFT), trimmed of gap rich regions
+
+615
+
+(trimAL v.1.2 , –gappyout) (Capella-Gutiérrez, Silla-Martínez, & Gabaldón, 2009) and used
+
+616
+
+for maximum likelihood gene tree estimation (IQTREE v.1.6.8, –mset
+
+617
+
+LG,WAG,JTT,DCMUT –bb 1000) (Nguyen, Schmidt, Haeseler, & Minh, 2015). The
+
+618
+
+association of transcripts in the Charinus species with the genes of interest is based on the
+
+619
+
+gene phylogeny and was followed by inspection of the coding sequences to distinguish
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+620
+
+splicing variants from other gene copies. Alignments and the list of Charinus sequences is
+
+621
+
+available in SI Appendix Dataset S1. These gene transcript association was then used for the
+
+622
+
+transcript to gene map required for the DGE analysis.
+
+623
+624
+
+Read mapping, transcript abundance quantification
+
+625
+626
+
+For the in-silico analysis of gene expression, single-end raw reads were first trimmed
+
+627
+
+using the software Trimmomatic v. 0.35 (Bolger et al., 2014). For the intra-specific analysis
+
+628
+
+of early (before eyespot) and late (eyespot) embryos of C. ioanniticus (Comparison 1), the
+
+629
+
+trimmed reads were quantified in the embryonic transcriptome of C. ioanniticus. For the
+
+630
+
+intra-specific comparison of early embryos of C. ioanniticus and C. israelensis, two
+
+631
+
+reciprocal analysis were conducted: reads from both species mapped onto C. israelensis
+
+632
+
+transcriptome as the reference (Comparison 2.1); and reads from both species mapped onto
+
+633
+
+C. ioanniticus transcriptome (Comparison 2.2).
+
+634
+
+Transcript abundance was quantified using the software Salmon v. 1.1.0 (Patro et al.,
+
+635
+
+2017), enabling ‘–validateMapping’ flag. Analysis of differential gene expression was
+
+636
+
+conducted with the software DESeq2 v 1.24.0 (Love et al., 2014) following a pipeline with
+
+637
+
+the R package tximport v.1.12.3 (Soneson, Love, & Robinson, 2015). The exact procedures
+
+638
+
+are documented in the custom R script (SI Appendix, Dataset S2)
+
+639
+640
+
+Parental RNA interference, in situ hybridization, and imaging in Parasteatoda tepidariorum
+
+641
+642
+
+Total RNA from a range of embryonic stages of P. tepidariorum was extracted with
+
+643
+
+TRIZOL (Invitrogen), and cDNA was synthetized using SuperScriptIII (Invitrogen). Gene
+
+644
+
+fragments for Ptep-sine oculis A (soA), orthodenticle B (otdB) and OptixB were amplified
+
+645
+
+from cDNA using gene specific primers designed with Primers3Web version 4.1.0
+
+646
+
+(Koressaar & Remm, 2007) and appended with T7 ends. Cloning amplicons were generated
+
+647
+
+using the TOPO TA Cloning Kit with One Shot Top10 chemically competent Escherichia
+
+648
+
+coli (Invitrogen). Amplicon identities and directionality were assessed with Sanger
+
+649
+
+sequencing. Primer, amplicon sequences and fragment lengths are available in SI Appendix
+
+650
+
+Dataset S3. Double-stranded RNA for Ptep-soA, Ptep-otdB and Ptep-OptixB was synthetized
+
+651
+
+from amplicon on plasmids using MEGAScript T7 transcription kit (Thermo Fischer) with
+
+652
+
+T7/T7T3 primers. Sense and antisense RNA probes for colorimetric in situ hybridization
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+653
+
+were synthetized from plasmid templates with DIG RNA labeling mix (Roche) and T7/T3
+
+654
+
+RNA polymerase (New England Biolabs) using the manufacturer’s instructions.
+
+655
+
+Parental RNA interference (RNAi) followed established protocols for double-stranded
+
+656
+
+RNA (dsRNA) injection in virgin females of P. tepidariorum (Oda & Akiyama-Oda, 2020).
+
+657
+
+Each female was injected four times with 2.5 µL of dsRNA at a concentration of 2 µg/uL, to
+
+658
+
+a total of 20µg. For Ptep-soA, seven virgin females were injected with dsRNA of a 1048bp
+
+659
+
+cloned fragment (SI Appendix, Fig. S13C) and 3 females were injected with the same volume
+
+660
+
+of dH2O as a procedural control. Two virgin females were injected with dsRNA for Ptep-
+
+661
+
+otdB, and six females for Ptep-OptixB. All females were mated after the second injection, and
+
+662
+
+were fed approximately every-other day after the last injection. Cocoons were collected until
+
+663
+
+the sixth clutch, approximately one per week.
+
+664
+
+Hatchlings for all cocoons were fixed between 24–48 hours after hatching. Freshly
+
+665
+
+hatched postembryos have almost no external signs of eye lenses and pigments. The selected
+
+666
+
+fixation window encompasses a period in which postembryos have deposited eye pigments
+
+667
+
+until the beginning of the first instar, where eyes are completely formed (SI Appendix, Video
+
+668
+
+S1, S2). Hatchlings were immersed in 25% ethanol/PBST and stored at 4ºC. For the Ptep-soA
+
+669
+
+RNAi experiment, hatchlings were scored in four classes: (1) wild type, where all eyes were
+
+670
+
+present and bilaterally symmetrical; (2) Eyes defective, where one or more eyes were reduced
+
+671
+
+in size or completely absent; (3) dead/arrested; (4) Undetermined, where embryos were
+
+672
+
+damaged or clearly freshly hatched. A subset of Ptep-soA dsRNA-injected embryos from four
+
+673
+
+clutches (n=48) and of three control clutches (n=48) were further inspected in detail to assess
+
+674
+
+the effects on individual eye types. Given that there is a spectrum on the intensity of pigment
+
+675
+
+deposition in the medium eyes (ME), and small asymmetries on the shape of the early
+
+676
+
+developing tapetum of the lateral eyes (LE) in control embryos, the following conservative
+
+677
+
+criteria was adopted: ME were considered affected when asymmetry in pigmentation or lens
+
+678
+
+size was detected. Both ME were only scored as affected when they were both completely
+
+679
+
+missing, in order to rule out embryos were simply delayed in pigment deposition; LE were
+
+680
+
+considered defective only when the tapetum was completely absent (SI Appendix, Fig. S12).
+
+681
+
+Therefore, our coding does not allow detection of a phenotype consisting of delayed
+
+682
+
+pigmentation.
+
+683
+
+For in situ hybridization, a subset of Ptep-soA dsRNA-injected embryos at stage 13/14
+
+684
+
+(Mittmann & Wolff, 2012) was fixed in a phase of heptane and 4% formaldehyde for 12–24
+
+685
+
+hours, washed in PBST, gradually dehydrated in methanol and stored at -20ºC for at least 3
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+686
+
+days before downstream procedures, after a modified protocol of Akiyama-Oda and Oda
+
+687
+
+(2003). In situ hybridization followed the protocol of Akiyama-Oda and Oda (2003).
+
+688
+
+Embryos from in situ hybridization were stained with Hoechst nuclear staining and
+
+689
+
+imaged in a Nikon SMZ25 fluorescence stereomicroscope mounted with a DS- Fi2 digital
+
+690
+
+color camera (Nikon Elements software). For postembryos, the prosoma was dissected with
+
+691
+
+fine forceps, gradually immersed in 70% Glycerol/PBS-T and mounted on glass slides.
+
+692
+
+Postembryos were imaged using an Olympus DP70 color camera mounted on an Olympus
+
+693
+
+BX60 epifluorescence compound microscope.
+
+694
+695
+
+Acknowledgements
+
+696
+697
+
+Microscopy was performed at the Newcomb Imaging Center, Department of Botany,
+
+698
+
+University of Wisconsin-Madison. Sequencing was performed at the UW-Madison
+
+699
+
+Biotechnology Center. Access to computing nodes for intensive tasks was provided by the
+
+700
+
+Center for High Throughput Computing (CHTC) and the Bioinformatics Resource Center
+
+701
+
+(BRC) of the University of Wisconsin–Madison. Specimens were collected under permit
+
+702
+
+2018/42037, issued by the Israel National Parks Authority to E.G.R. Fieldwork in Israel was
+
+703
+
+supported by a National Geographic Society Expeditions Council grant no. NGS-271R-18 to
+
+704
+
+J.A.B. This work was supported by National Science Foundation (grant no. IOS-1552610) to
+
+705
+
+P.P.S.
+
+706
+707
+
+References
+
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+
+Akiyama-Oda, Y., & Oda, H. (2006). Axis specification in the spider embryo: dpp is required
+for radial-to-axial symmetry transformation and sog for ventral patterning. Development,
+133(12), 2347–2357. http://doi.org/10.1242/dev.02400
+Arendt, D., Tessmar, K., Medeiros de Campos-Baptista, M. I., Dorresteijn, A., & Wittbrodt,
+J. (2002). Development of pigment-cup eyes in the polychaete Platynereis dumerilii and
+evolutionary conservation of larval eyes in bilateria. Development, 129(5), 1143–1154.
+Ballesteros, J. A., & Sharma, P. P. (2019). A Critical Appraisal of the Placement of
+Xiphosura (Chelicerata) with Account of Known Sources of Phylogenetic Error.
+Systematic Biology. http://doi.org/10.1093/sysbio/syz011
+Ballesteros, J. A., Santibáñez López, C. E., Kováč, Ĺ., Gavish-Regev, E., & Sharma, P. P.
+(2019). Ordered phylogenomic subsampling enables diagnosis of systematic errors in the
+placement of the enigmatic arachnid order Palpigradi. Proceedings. Biological Sciences,
+286(1917), 20192426. http://doi.org/10.1098/rspb.2019.2426
+Barnett, A. A., & Thomas, R. H. (2012). The delineation of the fourth walking leg segment is
+temporally linked to posterior segmentation in the mite Archegozetes longisetosus (Acari:
+Oribatida, Trhypochthoniidae). Evolution & Development, 14(4), 383–392.
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+
+http://doi.org/10.1111/j.1525-142X.2012.00556.x
+Barnett, A. A., & Thomas, R. H. (2013a). Posterior Hox gene reduction in an arthropod:
+Ultrabithorax and Abdominal-B are expressed in a single segment in the mite
+Archegozetes longisetosus. EvoDevo, 4(1), 23. http://doi.org/10.1186/2041-9139-4-23
+Barnett, A. A., & Thomas, R. H. (2013b). The expression of limb gap genes in the mite
+Archegozetes longisetosus reveals differential patterning mechanisms in chelicerates.
+Evolution & Development, 15(4), 280–292. http://doi.org/10.1111/ede.12038
+Bebenek, I. G., Gates, R. D., Morris, J., Hartenstein, V., & Jacobs, D. K. (2004). sine oculis
+in basal Metazoa. Development Genes and Evolution, 214(7), 342–351.
+http://doi.org/10.1007/s00427-004-0407-3
+Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: a flexible trimmer for
+Illumina sequence data. Bioinformatics, 30(15), 2114–2120.
+http://doi.org/10.1093/bioinformatics/btu170
+Bradic, M., Teotónio, H., & Borowsky, R. L. (2013). The Population Genomics of Repeated
+Evolution in the Blind Cavefish Astyanax mexicanus. Molecular Biology and Evolution,
+30(11), 2383–2400. http://doi.org/10.1093/molbev/mst136
+Byrne, M., Koop, D., Morris, V. B., Chui, J., Wray, G. A., & Cisternas, P. (2017). Expression
+of genes and proteins of the Pax-Six-Eya-Dach network in the metamorphic sea urchin:
+Insights into development of the enigmatic echinoderm body plan and sensory structures.
+Developmental Dynamics, 247(1), 239–249. http://doi.org/10.1002/dvdy.24584
+Cagan, R. (2009). Chapter 5 - Principles of Drosophila Eye Differentiation. In Current
+Topics in Developmental Biology (Vol. 89, pp. 115–135). Elsevier.
+http://doi.org/10.1016/S0070-2153(09)89005-4
+Capella-Gutiérrez, S., Silla-Martínez, J. M., & Gabaldón, T. (2009). trimAl: a tool for
+automated alignment trimming in large-scale phylogenetic analyses. Bioinformatics,
+25(15), 1972–1973. http://doi.org/10.1093/bioinformatics/btp348
+Carroll, S. B. (2008). Evo-Devo and an Expanding Evolutionary Synthesis: A Genetic
+Theory of Morphological Evolution. Cell, 134(1), 25–36.
+http://doi.org/10.1016/j.cell.2008.06.030
+Coghill, L. M., Darrin Hulsey, C., Chaves-Campos, J., García de Leon, F. J., & Johnson, S.
+G. (2014). Next generation phylogeography of cave and surface Astyanax mexicanus.
+Molecular Phylogenetics and Evolution, 79, 368–374.
+http://doi.org/10.1016/j.ympev.2014.06.029
+Cruz-López, J. A., Proud, D. N., & Pérez-González, A. (2016). When troglomorphism dupes
+taxonomists: morphology and molecules reveal the first pyramidopid harvestman
+(Arachnida, Opiliones, Pyramidopidae) from the New World. Zoological Journal of the
+Linnean Society, 177(3), 602–620. http://doi.org/10.1111/zoj.12382
+Daly, I. M., How, M. J., Partridge, J. C., & Roberts, N. W. (2018). Complex gaze
+stabilization in mantis shrimp. Proceedings of the Royal Society B: Biological Sciences,
+285(1878). http://doi.org/10.1098/rspb.2018.0594
+Derkarabetian, S., Steinmann, D. B., & Hedin, M. (2010). Repeated and time-correlated
+morphological convergence in cave-dwelling harvestmen (Opiliones, Laniatores) from
+montane Western North America. PLoS ONE, 5(5), e10388.
+http://doi.org/10.1371/journal.pone.0010388
+Esposito, L. A., Bloom, T., Caicedo-Quiroga, L., Alicea-Serrano, A. M., Sánchez-Ruíz, J. A.,
+May-Collado, L. J., et al. (2015). Islands within islands: Diversification of tailless whip
+spiders (Amblypygi, Phrynus) in Caribbean caves. Molecular Phylogenetics and
+Evolution, 93(C), 107–117. http://doi.org/10.1016/j.ympev.2015.07.005
+Finn, R. D., Clements, J., Arndt, W., Miller, B. L., Wheeler, T. J., Schreiber, F., et al. (2015).
+HMMER web server: 2015 update. Nucleic Acids Research, 43(W1), W30–8.
+
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+
+http://doi.org/10.1093/nar/gkv397
+Foelix, R. (2011). Biology of Spiders (Third Edition). Oxford: Oxford University Press.
+Garwood, R. J., Sharma, P. P., Dunlop, J. A., & Giribet, G. (2014). A Paleozoic Stem Group
+to Mite Harvestmen Revealed through Integration of Phylogenetics and Development.
+Current Biology, 24(9), 1–7. http://doi.org/10.1016/j.cub.2014.03.039
+Gehring, W. J., & Ikeo, K. (1999). Pax 6: mastering eye morphogenesis and eye evolution.
+Trends in Genetics : TIG, 15(9), 371–377. http://doi.org/10.1016/s0168-9525(99)01776x
+Giribet, G. (2018). Current views on chelicerate phylogeny—A tribute to Peter Weygoldt.
+Zoologischer Anzeiger - a Journal of Comparative Zoology, 273, 7–13.
+http://doi.org/10.1016/j.jcz.2018.01.004
+Grabherr, M. G., Haas, B. J., Yassour, M., Levin, J. Z., Thompson, D. A., Amit, I., et al.
+(2011). Full-length transcriptome assembly from RNA-Seq data without a reference
+genome. Nature Biotechnology, 29(7), 644–652. http://doi.org/10.1038/nbt.1883
+Grbić, M., Khila, A., Lee, K.-Z., Bjelica, A., Grbić, V., Whistlecraft, J., et al. (2007). Mity
+model: Tetranychus urticae, a candidate for chelicerate model organism. BioEssays,
+29(5), 489–496. http://doi.org/10.1002/bies.20564
+Grbić, M., Van Leeuwen, T., Clark, R. M., Rombauts, S., Rouzé, P., Grbić, V., et al. (2011).
+The genome of Tetranychus urticae reveals herbivorous pest adaptations. Nature,
+479(7374), 487–492. http://doi.org/10.1038/nature10640
+Gulia-Nuss, M., Nuss, A. B., Meyer, J. M., Sonenshine, D. E., Roe, R. M., Waterhouse, R.
+M., et al. (2016). Genomic insights into the Ixodes scapularis tick vector of Lyme
+disease. Nature Communications, 7(1), 10507–13. http://doi.org/10.1038/ncomms10507
+Harland, D. P., Li, D., & Jackson, R. R. (2012). How jumping spiders see the world.
+http://doi.org/10.1093/acprof:oso/9780195334654.003.0010
+Harvey, M. S. (2002). The neglected cousins: What do we know about the smaller arachnid
+orders? Journal of Arachnology, 30(2), 357–372. http://doi.org/10.1636/01618202(2002)030[0357:TNCWDW]2.0.CO;2
+Harvey, M. S. (2007). The smaller arachnid orders: Diversity, descriptions and distributions
+from Linnaeus to the present (1758 to 2007). Zootaxa, 1668(1668), 363–380.
+http://doi.org/10.11646/zootaxa.1668.1.19
+Hedin, M., & Thomas, S. M. (2010). Molecular systematics of eastern North American
+Phalangodidae (Arachnida: Opiliones: Laniatores), demonstrating convergent
+morphological evolution in caves. Molecular Phylogenetics and Evolution, 54(1), 107–
+121. http://doi.org/10.1016/j.ympev.2009.08.020
+Herman, A., Brandvain, Y., Weagley, J., Jeffery, W. R., Keene, A. C., Kono, T. J. Y., et al.
+(2018). The role of gene flow in rapid and repeated evolution of cave-related traits in
+Mexican tetra, Astyanax mexicanus. Molecular Ecology, 27(22), 4397–4416.
+http://doi.org/10.1111/mec.14877
+Homann, H. (1971). Die Augen der Araneae. Zeitschrift Für Morphologie Der Tiere, 69(3),
+201–272. http://doi.org/10.1007/BF00277623
+Howarth, F. G. (1993). High-stress subterranean habitats and evolutionary change in caveinhabiting arthropods. The American Naturalist, 142 Suppl 1(Suppl.), S65–77.
+http://doi.org/10.1086/285523
+Hoy, M. A., Waterhouse, R. M., Wu, K., Estep, A. S., Ioannidis, P., Palmer, W. J., et al.
+(2016). Genome Sequencing of the Phytoseiid Predatory Mite Metaseiulus occidentalis
+Reveals Completely Atomized Hox Genes and Superdynamic Intron Evolution. Genome
+Biology and Evolution, 8(6), 1762–1775. http://doi.org/10.1093/gbe/evw048
+Jeffery, W. R. (2009). Chapter 8. Evolution and development in the cavefish Astyanax.
+Current Topics in Developmental Biology, 86, 191–221. http://doi.org/10.1016/S0070-
+
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+
+2153(09)01008-4
+Jemec, A., Škufca, D., Prevorčnik, S., Fišer, Ž., & Zidar, P. (2017). Comparative study of
+acetylcholinesterase and glutathione S-transferase activities of closely related cave and
+surface Asellus aquaticus (Isopoda: Crustacea). PLoS ONE, 12(5), e0176746–14.
+http://doi.org/10.1371/journal.pone.0176746
+Juan, C., Guzik, M. T., Jaume, D., & Cooper, S. J. B. (2010). Evolution in caves: Darwin's
+‘wrecks of ancient life’ in the molecular era. Molecular Ecology, 19(18), 3865–3880.
+http://doi.org/10.1111/j.1365-294X.2010.04759.x
+Katoh, K., & Standley, D. M. (2013). MAFFT multiple sequence alignment software version
+7: improvements in performance and usability. Molecular Biology and Evolution, 30(4),
+772–780. http://doi.org/10.1093/molbev/mst010
+Kenny, N. J., Chan, K. W., Nong, W., Qu, Z., Maeso, I., Yip, H. Y., et al. (2015). Ancestral
+whole-genome duplication in the marine chelicerate horseshoe crabs. Heredity, 116(2),
+190–199. http://doi.org/10.1038/hdy.2015.89
+Khadjeh, S., Turetzek, N., Pechmann, M., Schwager, E. E., Wimmer, E. A., Damen, W. G.
+M., & Prpic, N. M. (2012). Divergent role of the Hox gene Antennapedia in spiders is
+responsible for the convergent evolution of abdominal limb repression. Proceedings of
+the National Academy of Sciences, 109(13), 4921–4926.
+http://doi.org/10.1073/pnas.1116421109
+Koressaar, T., & Remm, M. (2007). Enhancements and modifications of primer design
+program Primer3. Bioinformatics, 23(10), 1289–1291.
+http://doi.org/10.1093/bioinformatics/btm091
+Kumar, J. P. (2009). The molecular circuitry governing retinal determination. Biochimica Et
+Biophysica Acta (BBA) - Gene Regulatory Mechanisms, 1789(4), 306–314.
+http://doi.org/10.1016/j.bbagrm.2008.10.001
+Land, M. F. (1985). The Morphology and Optics of Spider Eyes. In Neurobiology of
+Arachnids (Vol. 189, pp. 53–78). Berlin, Heidelberg: Springer, Berlin, Heidelberg.
+http://doi.org/10.1007/978-3-642-70348-5_4
+Leite, D. J., Baudouin-Gonzalez, L., Iwasaki-Yokozawa, S., Lozano-Fernandez, J., Turetzek,
+N., Akiyama-Oda, Y., et al. (2018). Homeobox Gene Duplication and Divergence in
+Arachnids. Molecular Biology and Evolution, 35(9), 2240–2253.
+http://doi.org/10.1093/molbev/msy125
+Love, M. I., Huber, W., & Anders, S. (2014). Moderated estimation of fold change and
+dispersion for RNA-seq data with DESeq2. Genome Biology, 15(12), 31–21.
+http://doi.org/10.1186/s13059-014-0550-8
+Lozano-Fernandez, J., Tanner, A. R., Giacomelli, M., Carton, R., Vinther, J., Edgecombe, G.
+D., & Pisani, D. (2019). Increasing species sampling in chelicerate genomic-scale
+datasets provides support for monophyly of Acari and Arachnida. Nature
+Communications, 1–8. http://doi.org/10.1038/s41467-019-10244-7
+Mammola, S., & Isaia, M. (2017). Spiders in caves. Proceedings of the Royal Society B:
+Biological Sciences, 284(1853), 20170193–10. http://doi.org/10.1098/rspb.2017.0193
+Mammola, S., Arnedo, M. A., Pantini, P., Piano, E., Chiappetta, N., & Isaia, M. (2018a).
+Ecological speciation in darkness? Spatial niche partitioning in sibling subterranean
+spiders (Araneae: Linyphiidae: Troglohyphantes). Invertebrate Systematics, 32(5), 1069–
+1082. http://doi.org/10.1071/IS17090
+Mammola, S., Cardoso, P., Ribera, C., Pavlek, M., & Isaia, M. (2018b). A synthesis on cavedwelling spiders in Europe. Journal of Zoological Systematics and Evolutionary
+Research, 56(3), 301–316. http://doi.org/10.1111/jzs.12201
+Mammola, S., Mazzuca, P., Pantini, P., Isaia, M., & Arnedo, M. A. (2017). Advances in the
+systematics of the spider genus Troglohyphantes (Araneae, Linyphiidae). Systematics
+
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+
+and Biodiversity, 15(4), 307–326. http://doi.org/10.1080/14772000.2016.1254304
+Marshall, J., Cronin, T. W., & Kleinlogel, S. (2007). Stomatopod eye structure and function:
+A review. Arthropod Structure & Development, 36(4), 420–448.
+http://doi.org/10.1016/j.asd.2007.01.006
+Miranda, G. S., Aharon, S., Gavish-Regev, E., Giupponi, A. P. L., & Wizen, G. (2016). A
+new species of Charinus Simon, 1892 (Arachnida: Amblypygi: Charinidae) from Israel
+and new records of C. ioanniticus (Kritscher, 1959). European Journal of Taxonomy,
+(234), 1–18. http://doi.org/10.5852/ejt.2016.234
+Mittmann, B., & Wolff, C. (2012). Embryonic development and staging of the cobweb spider
+Parasteatoda tepidariorum C. L. Koch, 1841 (syn.: Achaearanea tepidariorum;
+Araneomorphae; Theridiidae). Development Genes and Evolution, 222(4), 189–216.
+http://doi.org/10.1007/s00427-012-0401-0
+Mojaddidi, H., Fernandez, F. E., Erickson, P. A., & Protas, M. E. (2018). Embryonic origin
+and genetic basis of cave associated phenotypes in the isopod crustacean Asellus
+aquaticus. Scientific Reports, 1–12. http://doi.org/10.1038/s41598-018-34405-8
+Morehouse, N. I., Buschbeck, E. K., Zurek, D. B., Steck, M., & Porter, M. L. (2017).
+Molecular Evolution of Spider Vision: New Opportunities, Familiar Players. Biol Bull,
+233(1), 21–38. http://doi.org/10.1086/693977
+Nguyen, L.-T., Schmidt, H. A., Haeseler, von, A., & Minh, B. Q. (2015). IQ-TREE: a fast
+and effective stochastic algorithm for estimating maximum-likelihood phylogenies.
+Molecular Biology and Evolution, 32(1), 268–274.
+http://doi.org/10.1093/molbev/msu300
+Nolan, E. D., Santibáñez López, C. E., & Sharma, P. P. (2020). Developmental gene
+expression as a phylogenetic data class: support for the monophyly of
+Arachnopulmonata. Development Genes and Evolution, 230(2), 137–153.
+http://doi.org/10.1007/s00427-019-00644-6
+Nossa, C. W., Havlak, P., Yue, J.-X., Lv, J., Vincent, K. Y., Brockmann, H. J., & Putnam, N.
+H. (2014). Joint assembly and genetic mapping of the Atlantic horseshoe crab genome
+reveals ancient whole genome duplication. GigaScience, 3(1), 708–21.
+http://doi.org/10.1186/2047-217X-3-9
+Oda, H., & Akiyama-Oda, Y. (2020). The common house spider Parasteatoda tepidariorum.
+EvoDevo, 1–7. http://doi.org/10.1186/s13227-020-00152-z
+Paese, C. L. B., Leite, D. J., Schönauer, A., McGregor, A. P., & Russell, S. (2018).
+Duplication and expression of Sox genes in spiders, 1–14. http://doi.org/10.1186/s12862018-1337-4
+Patro, R., Duggal, G., Love, M. I., Irizarry, R. A., & Kingsford, C. (2017). Salmon provides
+fast and bias-aware quantification of transcript expression. Nature Publishing Group,
+14(4), 417–419. http://doi.org/10.1038/nmeth.4197
+Paulus, H. F. (1979). Eye structure and the monophyly of the Arthropoda. In “Arthropod
+Phylogeny”(A. PGupta, Ed.) pp. 299–383.
+Pechmann, M. (2016). Formation of the germ-disc in spider embryos by a condensation-like
+mechanism. Frontiers in Zoology, 13(1), 35. http://doi.org/10.1186/s12983-016-0166-9
+Pechmann, M., McGregor, A. P., Schwager, E. E., Feitosa, N. M., & Damen, W. G. M.
+(2009). Dynamic gene expression is required for anterior regionalization in a spider.
+Proceedings of the National Academy of Sciences of the United States of America,
+106(5), 1468–1472. http://doi.org/10.1073/pnas.0811150106
+Pineda, D., Gonzalez, J., Callaerts, P., Ikeo, K., Gehring, W. J., & Salo, E. (2000). Searching
+for the prototypic eye genetic network: Sine oculis is essential for eye regeneration in
+planarians. Proceedings of the National Academy of Sciences, 97(9), 4525–4529.
+http://doi.org/10.1073/pnas.97.9.4525
+
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+
+Porter, M. L., Dittmar, K., & Pérez-Losada, M. (2007). How long does evolution of the
+troglomorphic form take? Estimating divergence times in Astyanax mexicanus. Acta
+Carsologica, 36(1), 173–182. http://doi.org/10.3986/ac.v36i1.219
+Posnien, N., Zeng, V., Schwager, E. E., Pechmann, M., Hilbrant, M., Keefe, J. D., et al.
+(2014). A Comprehensive Reference Transcriptome Resource for the Common House
+Spider Parasteatoda tepidariorum. PLoS ONE, 9(8), e104885–20.
+http://doi.org/10.1371/journal.pone.0104885
+Protas, M. E., Hersey, C., Kochanek, D., Zhou, Y., Wilkens, H., Jeffery, W. R., et al. (2005).
+Genetic analysis of cavefish reveals molecular convergence in the evolution of albinism.
+Nature Genetics, 38(1), 107–111. http://doi.org/10.1038/ng1700
+Protas, M. E., Trontelj, P., & Patel, N. H. (2011). Genetic basis of eye and pigment loss in the
+cave crustacean, Asellus aquaticus. Proceedings of the National Academy of Sciences of
+the United States of America, 108(14), 5702–5707.
+http://doi.org/10.1073/pnas.1013850108
+Protas, M., & Jeffery, W. R. (2012). Evolution and development in cave animals: from fish to
+crustaceans. Wiley Interdisciplinary Reviews: Developmental Biology, 1(6), 823–845.
+http://doi.org/10.1002/wdev.61
+Re, C., Fišer, Ž., Perez, J., Tacdol, A., Trontelj, P., & Protas, M. E. (2018). Common Genetic
+Basis of Eye and Pigment Loss in Two Distinct Cave Populations of the Isopod
+Crustacean Asellus aquaticus. Integrative and Comparative Biology, 58(3), 421–430.
+http://doi.org/10.1093/icb/icy028
+Riddle, M. R., Aspiras, A. C., Gaudenz, K., Peuß, R., Sung, J. Y., Martineau, B., et al.
+(2018). Insulin resistance in cavefish as an adaptation to a nutrient-limited environment.
+Nature, 1–19. http://doi.org/10.1038/nature26136
+Rivera, A., Winters, I., Rued, A., Ding, S., Posfai, D., Cieniewicz, B., et al. (2013). The
+evolution and function of the Pax/Six regulatory network in sponges. Evolution &
+Development, 15(3), 186–196. http://doi.org/10.1111/ede.12032
+Rota-Stabelli, O., Campbell, L., Brinkmann, H., Edgecombe, G. D., Longhorn, S. J.,
+Peterson, K. J., et al. (2010). A congruent solution to arthropod phylogeny:
+phylogenomics, microRNAs and morphology support monophyletic Mandibulata.
+Proceedings of the Royal Society B: Biological Sciences, 278(1703), 298–306.
+http://doi.org/10.1098/rspb.2010.0590
+Samadi, L., Schmid, A., & Eriksson, B. J. (2015). Differential expression of retinal
+determination genes in the principal and secondary eyes of Cupiennius salei Keyserling
+(1877). EvoDevo, 6(1), 16–17. http://doi.org/10.1186/s13227-015-0010-x
+Sandve, S. R., Rohlfs, R. V., & Hvidsten, T. R. (2018). Subfunctionalization versus
+neofunctionalization after whole-genome duplication. Nature Publishing Group, 50(7),
+908–909. http://doi.org/10.1038/s41588-018-0162-4
+Santibáñez López, C. E., Francke, O. F., & Prendini, L. (2014). Shining a light into the
+world's deepest caves: phylogenetic systematics of the troglobiotic scorpion genus
+Alacran Francke, 1982 (Typhlochactidae:Alacraninae). Invertebrate Systematics, 28(6),
+643–664. http://doi.org/10.1071/IS14035
+Santos, V. T., Ribeiro, L., Fraga, A., de Barros, C. M., Campos, E., Moraes, J., et al. (2013).
+The embryogenesis of the Tick Rhipicephalus (Boophilus) microplus: The establishment
+of a new chelicerate model system. Genesis, 51(12), 803–818.
+http://doi.org/10.1002/dvg.22717
+Schacht, M. I., Schomburg, C., & Bucher, G. (2020). six3 acts upstream of foxQ2 in labrum
+and neural development in the spider Parasteatoda tepidariorum. Development Genes
+and Evolution, 230(2), 95–104. http://doi.org/10.1007/s00427-020-00654-9
+Schomburg, C., Turetzek, N., Schacht, M. I., Schneider, J., Kirfel, P., Prpic, N.-M., &
+
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+
+Posnien, N. (2015). Molecular characterization and embryonic origin of the eyes in the
+common house spider Parasteatoda tepidariorum. EvoDevo, 6(1), 15.
+http://doi.org/10.1186/s13227-015-0011-9
+Schwager, E. E., Pechmann, M., Feitosa, N. M., McGregor, A. P., & Damen, W. G. M.
+(2009). hunchback functions as a segmentation gene in the spider Achaearanea
+tepidariorum. Current Biology : CB, 19(16), 1333–1340.
+http://doi.org/10.1016/j.cub.2009.06.061
+Schwager, E. E., Sharma, P. P., Clarke, T., Leite, D. J., Wierschin, T., Pechmann, M., et al.
+(2017). The house spider genome reveals an ancient whole-genome duplication during
+arachnid evolution. BMC Biology, 15(1), 62. http://doi.org/10.1186/s12915-017-0399-x
+Setton, E. V. W., March, L. E., Nolan, E. D., Jones, T. E., Cho, H., Wheeler, W. C., et al.
+(2017). Expression and function of spineless orthologs correlate with distal deutocerebral
+appendage morphology across Arthropoda. Developmental Biology, 430(1), 224–236.
+http://doi.org/10.1016/j.ydbio.2017.07.016
+Sharma, P. P., Kaluziak, S. T., Pérez-Porro, A. R., González, V. L., Hormiga, G., Wheeler,
+W. C., & Giribet, G. (2014a). Phylogenomic interrogation of Arachnida reveals systemic
+conflicts in phylogenetic signal. Molecular Biology and Evolution, 31(11), 2963–2984.
+http://doi.org/10.1093/molbev/msu235
+Sharma, P. P., Santiago, M. A., González-Santillán, E., Monod, L., & Wheeler, W. C.
+(2015a). Evidence of duplicated Hox genes in the most recent common ancestor of extant
+scorpions. Evolution & Development, 17(6), 347–355. http://doi.org/10.1111/ede.12166
+Sharma, P. P., Schwager, E. E., Extavour, C. G., & Giribet, G. (2012). Hox gene expression
+in the harvestman Phalangium opilio reveals divergent patterning of the chelicerate
+opisthosoma. Evolution & Development, 14(5), 450–463. http://doi.org/10.1111/j.1525142X.2012.00565.x
+Sharma, P. P., Schwager, E. E., Extavour, C. G., & Wheeler, W. C. (2014b). Hox gene
+duplications correlate with posterior heteronomy in scorpions. Proceedings. Biological
+Sciences, 281(1792), 20140661–20140661. http://doi.org/10.1098/rspb.2014.0661
+Sharma, P. P., Schwager, E. E., Giribet, G., Jockusch, E. L., & Extavour, C. G. (2013).
+Distal-less and dachshund pattern both plesiomorphic and apomorphic structures in
+chelicerates: RNA interference in the harvestman Phalangium opilio (Opiliones).
+Evolution & Development, 15(4), 228–242. http://doi.org/10.1111/ede.12029
+Sharma, P. P., Tarazona, O. A., Lopez, D. H., Schwager, E. E., Cohn, M. J., Wheeler, W. C.,
+& Extavour, C. G. (2015b). A conserved genetic mechanism specifies deutocerebral
+appendage identity in insects and arachnids. Proceedings of the Royal Society B:
+Biological Sciences, 282(1808), 20150698–20150698.
+http://doi.org/10.1098/rspb.2015.0698
+Shubin, N., Tabin, C., & Carroll, S. (2009). Deep homology and the origins of evolutionary
+novelty. Nature, 457(7231), 818–823. http://doi.org/10.1038/nature07891
+Shull, L. C., Sen, R., Menzel, J., Goyama, S., Kurokawa, M., & Artinger, K. B. (2020). The
+conserved and divergent roles of Prdm3 and Prdm16 in zebrafish and mouse craniofacial
+development. Developmental Biology. http://doi.org/10.1016/j.ydbio.2020.02.006
+Smrž, J., Kováč, Ĺ., Mikeš, J., & Lukešová, A. (2013). Microwhip Scorpions (Palpigradi)
+Feed on Heterotrophic Cyanobacteria in Slovak Caves - A Curiosity among Arachnida.
+PLoS ONE, 8(10), e75989. http://doi.org/10.1371/journal.pone.0075989
+Soneson, C., Love, M. I., & Robinson, M. D. (2015). Differential analyses for RNA-seq:
+transcript-level estimates improve gene-level inferences. F1000Research, 4, 1521.
+http://doi.org/10.12688/f1000research.7563.1
+Stahl, B. A., Gross, J. B., Speiser, D. I., Oakley, T. H., Patel, N. H., Gould, D. B., & Protas,
+M. E. (2015). A Transcriptomic Analysis of Cave, Surface, and Hybrid Isopod
+
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+
+Crustaceans of the Species Asellus aquaticus. PLoS ONE, 10(10), e0140484–14.
+http://doi.org/10.1371/journal.pone.0140484
+Strickler, A. G., Yamamoto, Y., & Jeffery, W. R. (2001). Early and late changes in Pax6
+expression accompany eye degeneration during cavefish development. Development
+Genes and Evolution, 211(3), 138–144. http://doi.org/10.1007/s004270000123
+Takagi, A., Kurita, K., Terasawa, T., Nakamura, T., Bando, T., Moriyama, Y., et al. (2012).
+Functional analysis of the role of eyes absent and sine oculis in the developing eye of the
+cricket Gryllus bimaculatus. Development, Growth & Differentiation, 54(2), 227–240.
+http://doi.org/10.1111/j.1440-169X.2011.01325.x
+Telford, M. J., & Thomas, R. H. (1998). Expression of homeobox genes shows chelicerate
+arthropods retain their deutocerebral segment. Proceedings of the National Academy of
+Sciences, 95(18), 10671–10675. http://doi.org/10.1073/pnas.95.18.10671
+Thoen, H. H., How, M. J., Chiou, T.-H., & Marshall, J. (2014). A different form of color
+vision in mantis shrimp. Science, 343(6169), 411–413.
+http://doi.org/10.1126/science.1245824
+Turetzek, N., Pechmann, M., Schomburg, C., Schneider, J., & Prpic, N.-M. (2015).
+Neofunctionalization of a Duplicate dachshund Gene Underlies the Evolution of a Novel
+Leg Segment in Arachnids. Molecular Biology and Evolution, 33(1), 109–121.
+http://doi.org/10.1093/molbev/msv200
+Vopalensky, P., & Kozmik, Z. (2009). Eye evolution: common use and independent
+recruitment of genetic components. Philosophical Transactions of the Royal Society B:
+Biological Sciences, 364(1531), 2819–2832. http://doi.org/10.1098/rstb.2009.0079
+Waterhouse, R. M., Seppey, M., Simão, F. A., Manni, M., Ioannidis, P., Klioutchnikov, G., et
+al. (2017). BUSCO Applications from Quality Assessments to Gene Prediction and
+Phylogenomics. Molecular Biology and Evolution, 35(3), 543–548.
+http://doi.org/10.1093/molbev/msx319
+Weygoldt, P. (1975). Untersuchungen zur Embryologie und Morphologie der Geißelspinne
+Tarantula marginemaculata C. L. Koch (Arachnida, Amblypygi, Tarantulidae).
+Zoomorphologie, 82, 137–199.
+Weygoldt, P. (2000). Whip Spiders (Chelicerata: Amblypygi). Their Biology, Morphology
+and Systematics. Apollo Books.
+ZarinKamar, N., Yang, X., Bao, R., Friedrich, F., Beutel, R., & Friedrich, M. (2011). The
+Pax gene eyegone facilitates repression of eye development in Tribolium. EvoDevo, 2(1),
+8–15. http://doi.org/10.1186/2041-9139-2-8
+Zhou, Y., Liang, Y., Yan, Q., Zhang, L., Chen, D., Ruan, L., et al. (2020). The draft genome
+of horseshoe crab Tachypleus tridentatus reveals its evolutionary scenario and welldeveloped innate immunity. BMC Genomics, 21(1), 137–15.
+http://doi.org/10.1186/s12864-020-6488-1
+Zurek, D. B., Cronin, T. W., Taylor, L. A., Byrne, K., Sullivan, M. L. G., & Morehouse, N. I.
+(2015). Spectral filtering enables trichromatic vision in colorful jumping spiders. Current
+Biology, 25(10), R403–R404. http://doi.org/10.1016/j.cub.2015.03.033
+
+1067
+
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1068
+
+Figure 1: Species used in this study and their eye arrangement. A: Schematic representation
+
+1069
+
+of the eyes of Charinus whip spiders (Amblypygi) (upper), and the spider Parasteatoda
+
+1070
+
+tepidariorum (Araneae; lower). B: Live specimen of C. ioanniticus from Khirbet Haruba
+
+1071
+
+cave (Haruva cave). Inset: detail of the median eyes. C: Live specimen of C. israelensis
+
+1072
+
+from Mimlach cave. Inset: detail of the reduced median eyes. D: Live specimen of
+
+1073
+
+Parasteatoda tepidariorum, and schematic representation of the expression patterns of
+
+1074
+
+paralog pairs of Ptep-sine oculis (soA/soB), Ptep-orthodenticle (otdA/otdB), and Ptep-
+
+1075
+
+Optix (OptixA/OptixB) in the eyes. ME: median eyes; ALE: anterior lateral eyes; PLE:
+
+1076
+
+posterior lateral eyes; MLE: median lateral eyes; LE: lateral eyes.
+
+1077
+
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1078
+
+Figure 2: Phylogenetic distribution of Retinal Determination Gene Network (RDGN) genes
+
+1079
+
+in an insect (Drosophila melanogaster), a non-arachnopulmonate arachnid group
+
+1080
+
+(Acariformes: Dinothrombium tinctorium; Tetranychus urticae) and Arachnopulmonata
+
+1081
+
+(spider: Parasteatoda tepidariorum; scorpion: Centruroides sculpturatus), including
+
+1082
+
+newly discovered orthologs in Charinus whip spiders (Amblypygi). Colored squares
+
+1083
+
+indicate number of gene copies for each RDGN gene. Dotted squares indicate missing
+
+1084
+
+data, not gene loss. For comprehensive list of duplicated genes in Arachnopulmonata see
+
+1085
+
+Schwager et al. (2017) and Leite et al. 2018. Gene trees and alignments for each gene are
+
+1086
+
+available in SI Appendix Dataset S1.
+
+1087
+1088
+
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1089
+
+Figure 3: Differential gene expression analysis of Retinal Determination Gene Network
+
+1090
+
+(RDGN) genes in Charinus whip spider deutembryos. Bar graphs display log2 fold
+
+1091
+
+change of selected RDGN genes. Direction of differential gene expression always
+
+1092
+
+follows sample to the left. A: Comparison 1; Comparison between reads of early (pre-
+
+1093
+
+eyespot) and late deutembryos (eyespot) of the eye-bearing species C. ioanniticus
+
+1094
+
+mapped onto C. ioanniticus transcriptome. B: Comparison 2.1; Comparison between
+
+1095
+
+reads of early deutembryo of C. ioanniticus and early deutembryo of C. israelensis
+
+1096
+
+mapped onto C. israelensis transcriptome. C: Comparison 2.2; Comparison between
+
+1097
+
+reads of early deutembryo of C. ioanniticus and early deutembryo of C. israelensis
+
+1098
+
+mapped onto C. ioanniticus transcriptome. atoA/B: atonalA/atonalB; dacA/B:
+
+1099
+
+dachshundA/B; eya: eyes absent; eyg: eyegone; otdA/B: orthodenticleA/B; soA/B: sine
+
+1100
+
+oculisA/B. Asterisks denote genes that were differentially expressed with a padj>0.05.
+
+1101
+
+Log2FC = 0 for atoA, OptixB, and soB for Comparison 1 and Comparison 2.2 are due to
+
+1102
+
+the absence of those paralogs in C. ioanniticus reference transcriptome.
+
+1103
+1104
+
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1105
+
+Figure 4: In situ hybridization using DIG-labeled riboprobes for Ptep-soA in late embryos of
+
+1106
+
+the spider Parasteatoda tepidariorum. All embryos in frontal view. A–D: bright field
+
+1107
+
+images. A’–D’: Same embryos, in Hoechst staining. A: Sense probe of a stage 14.2
+
+1108
+
+embryo (no signal). B: Antisense probe on a wild type stage 14.1 embryo. C: Antisense
+
+1109
+
+probe on a wild type stage 14.2 embryo. D: Antisense probe on a stage 14.2 embryo from
+
+1110
+
+the Ptep-soA dsRNA-injected treatment. soA: sine oculis A. White arrowhead: median
+
+1111
+
+eye; Black arrow: anterior lateral eye; White arrow: median lateral eye; Double white
+
+1112
+
+arrow: Posterior lateral eye. Dotted arrowhead/arrow indicate asymmetrical expression
+
+1113
+
+and eye defect. Sample sizes are indicated above each treatment.
+
+1114
+1115
+
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2020.04.28.067199; this version posted May 9, 2020. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+made available under a CC-BY-NC-ND 4.0 International license.
+
+1116
+
+Figure 5: RNA interference against Ptep-sine oculis A. A: Bright field images of the spider
+
+1117
+
+Parasteatoda tepidariorum postembryos resulting from control treatment (dH2O-
+
+1118
+
+injected, panel 1) and double stranded RNA (dsRNA) injected treatment (panels 2–6), in
+
+1119
+
+frontal view. B: Frequencies of each phenotypic class per treatment from the combined
+
+1120
+
+clutches of all females. See SI Appendix Fig. S13 for counts per clutch. C: Frequencies
+
+1121
+
+of symmetrical, asymmetrical, and wild type eyes quantified from a subset of 48
+
+1122
+
+individuals with eye reduction phenotype. See SI Appendix Fig. S12 for figures of all
+
+1123
+
+specimens and coding, and Material and Methods for the scoring criteria. ME: median
+
+1124
+
+eyes; ALE: anterior lateral eyes; PLE: posterior lateral eyes; MLE: median lateral eyes.
+
+1125
+
+Schematics for the different eye types follows the nomenclature in Figure 1.
+
+34
+
+

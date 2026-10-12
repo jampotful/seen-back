@@ -1,0 +1,132 @@
+Towards real-time monitoring of insect species populations.
+Venverloo T, Duarte F. (2024). Scientific reports. . doi:10.1038/s41598-024-68502-8. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# Towards real-time monitoring of insect species populations
+
+## Abstract
+AbstractInsect biodiversity and abundance are in global decline, potentially leading to a crisis with profound ecological and economic consequences. Methods and technologies to monitor insect species to aid in preservation efforts are rapidly being developed yet their adoption has been slow and focused on specific use cases. We propose a computer vision model that works towards multi-objective insect species identification in real-time and on a large scale. We leverage an image data source with 16 million instances and a recent improvement in the YOLO computer vision architecture to present a quick and open-access method to develop visual AI models to monitor insect species across climatic regions.Subject terms: Classification and taxonomy, Climate-change ecology
+
+## Introduction
+The loss of biodiversity is a global crisis with profound ecological and economic consequences1–10. Among the numerous threats to biodiversity, the rapid decline in insect populations is particularly concerning3–6, as around 65% of insect species could go extinct over the next one hundred years. This could have disastrous consequences, as insects play critical roles in pollination and nutrient cycling, and act as a food source for other species2–4. Hence, insect species abundance and diversity conservation are crucial to maintaining ecosystem stability2–4.
+Literature describing the dynamics of insect populations is growing, furthering our understanding of global biodiversity decline. Common drivers for the rapid decline in insect populations are habitat loss to agriculture and urbanization, water, air, and soil pollution including pesticides and fertilizers, pathogens and invasive species, and climate change5. Furthermore, ecological niche species are increasingly replaced by more generalist species, declining diversity while potentially stabilizing overall insect abundance11,12. While some drivers of decline might be localized, global drivers such as climate change will affect every ecosystem on the planet5,9. There is an ongoing discussion regarding the effect of climate change on insect populations in temperate regions of the globe, while for tropical regions there is a consensus that there will be large effects4–10,13.
+Challenges in insect conservation include accurate species identification, which is a very complex task considering the vast number of insect species1,14,15, the enormous lack of spatial and temporal data covering insect species populations1,16, and high uncertainty about species’ ability to adapt to changing climate conditions4,13. There is also plenty of evidence that conventional approaches are falling short in monitoring efforts, as manual classification requires extensive expertise and labor1,11.
+There are other concerns when it comes to the data utilized to describe the decline. For example, Crossley et al.12 report no net abundance and diversity declines in long-term ecological sites in the United States of America, while Welto et al.11 report that the lack of consistent sampling techniques across long-term monitoring sites has influenced those earlier findings11,12. Another confounding factor is the seasonality of insect abundance, complicating objective quantification of decline6. Furthermore, we know very little about how extreme weather events might cause mass insect death episodes, further affecting the diversity and abundance of insects6,13,17.
+More effective and standardized monitoring of important taxa will allow for improved scientific consensus and ideally inform actions by governments to protect insect abundance and biodiversity across climatic regions.
+
+## Bridging the information gap
+Data acquisition about insect species is being automized with large-scale AI models. Currently, an effort similar the one presented here, although on a much smaller scale, is already adopted for agricultural sciences, specifically focused on pest control efforts1,14,18. Leveraging this approach across regions for the overall evaluation of insect abundance and biodiversity can standardize data collection while reducing the required effort involved15. Some initiatives already incorporate such large models19; however, they require manual collection of geolocated images22.
+In a systematic literature review from 2023, the largest number of species included in a visual AI model was 40, trained on a dataset containing 4500 images1. While the largest dataset included in the review contained 88,670 images, it had only 16 insect species and achieved a relatively low mean Average Precision (mAP) of 74%1,14. Very few studies ventured beyond classifying a limited number of insect species, and are often focused on the most relevant species for their objectives, such as pest control1,14,18.
+Several technologies could help in acquiring better data, as covered by an extensive review15. Specifically, computer vision, acoustic sensors, radar and molecular methods are discussed to monitor insects. While the review highlights several studies that develop relevant technologies, they are often commercial products, such as Diopsis21, and are the result of an expensive development 20. Hence, open-source methods and tools are necessary to address this gap and extend the insect monitoring effort, including regions with low economic resources.
+This paper proposes an AI model focused on insect species classification for the Western European region. This AI model, trained on 1.54 million web-scraped images, can classify 2584 insect species and could be deployed on images collected from high-definition cameras in urban, suburban, agricultural, and natural areas. For scalability to other geographic regions, we present a code repository which uses an existing 16 million image dataset to train custom AI models for local insect species of interest.
+
+## Results
+Our dataset comprises images of 2584 insect species, totaling 1.93 million images. These images are split into 80% for training (1.53 million images) and 20% for validation (0.4 million images). A small sample of images is shown in Fig. 1. On average, each species is represented by approximately 770 images. This dataset has restricted access as some of the images might be copyright-protected. A smaller test dataset, containing 12,103 images, was collected from GBIF (Global Biodiversity Information Facility) and is accessible22. This smaller dataset is used to further validate the reported metrics from the validation dataset. The test dataset does not include any images utilized in the training of the model. Furthermore, we make available a code repository on how to utilize the GBIF framework22 to train custom YOLOv8 model for any region covered by the GBIF dataset.
+A small sample of the collected images from the GBIF repository22,26.
+The YOLOv8 model we developed achieved 82.3% Top 1 score on the validation dataset, which indicates how many times the model predicted the correct label with the highest probability. To our knowledge, this would make it the most accurate computer vision model to identify insect species at this scale. The accuracy, number of species included, and dataset size of previous literature1,14 are compared to our results in Fig. 2. The Top 5 score of 95%, also based on the validation dataset, further underscores the model’s capacity to recognize insects. We also verified those metrics with the test dataset. The metrics from the test dataset are reported in Table 1. Table 1 also indicates that saving the Top 2 predictions might be worthwhile to improve the robustness of the monitoring effort, showing a 0.07 improvement.
+The presented dataset size, the number of included species, and achieved accuracy compared to other computer vision models included in systematic reviews1,14. The blue dot indicates our results. Note that the x-axis is log-transformed due to the large increase in the number of included species.
+Metrics from the test dataset.
+While the model performs well overall, it does not perform uniformly across all species. Hence, a further validation step has been taken. First, we analyze the distribution of the number of images for each species (supplementary file 1). The analysis of the number of images indicates that the dataset has a long-tailed distribution, implying that for some species the model is trained with significantly less images than others. To test the model’s abilities on these underrepresented species, we select 30 species in 6 different parts of the long-tail distribution for further validation, as shown in Fig. 3.
+Showing the long-tailed distribution of number of images per insect species, highlighting the 6 selected parts of the distribution.
+The 6 parts are:
+Q1 with ~ 20 imagesSpecies: Lasioglossum pallens, Tapinoma erraticum, Gymnosoma dolycoridis, Sphecodes scabricollis, Cicada orni
+Species: Lasioglossum pallens, Tapinoma erraticum, Gymnosoma dolycoridis, Sphecodes scabricollis, Cicada orni
+Q2 with ~ 150 imagesSpecies: Arge dimidiata, Banchus pictus, Odontoscelis fuliginosa, Psylla buxi, Agrothereutes abbreviatus
+Species: Arge dimidiata, Banchus pictus, Odontoscelis fuliginosa, Psylla buxi, Agrothereutes abbreviatus
+Q3 with ~ 300 imagesSpecies: Lejogaster tarsata, Lestiphorus bicinctus, Glischrochilus hortensis, Euodynerus dantici, Austrolimnophila ochracea
+Species: Lejogaster tarsata, Lestiphorus bicinctus, Glischrochilus hortensis, Euodynerus dantici, Austrolimnophila ochracea
+Q4 with ~ 400 images,Species: Scymnus nigrinus, Crepidodera plutus, Temnostethus pusillus, Heterarthrus vagans, Macropis fulvipes
+Species: Scymnus nigrinus, Crepidodera plutus, Temnostethus pusillus, Heterarthrus vagans, Macropis fulvipes
+Q5 with ~ 800 imagesSpecies: Limnia unguicornis, Empis stercorea, Phaonia fuscata, Tromatobia lineatoria, Cylindromyia bicolor
+Species: Limnia unguicornis, Empis stercorea, Phaonia fuscata, Tromatobia lineatoria, Cylindromyia bicolor
+Q6 with ~ 1600 imagesSpecies: Asilus crabroniformis, Haematopota pluvialis, Baccha elongata, Andrena scotica, Plagiodera versicolora
+Species: Asilus crabroniformis, Haematopota pluvialis, Baccha elongata, Andrena scotica, Plagiodera versicolora
+During validation, the 5 species in each of these 6 parts were separately analyzed (supplementary file 2). We find that the Top 1 scores decrease substantially for species represented with less than 800 images. For species with 150 to 800 images, the Top 1 scores range between 0.25 and 0.8, with an average for Q4 of 0.482, for Q3 of 0.644, for Q2 0.622, and for Q1 the Top 1 is 0 (Fig. 4). If we generalize these results and look at the distribution of images used for our model, our pre-trained AI model would be very accurate for ~ 1000 species, reasonable accurate for ~ 1100 species, and inaccurate for ~ 400 species.
+The relationship between the number of images per species and the Top 1 score for the presented model, based on the 6 parts of the distribution.
+We conduct a similar analysis for the Top 5 score, here we find that the model performs well, and the score remains stable between ~ 150 images to ~ 1600 images. For species with less than 150 images in the dataset the accuracy drops to 0 (Fig. 5).
+The relationship between the number of images per species and the Top 5 score for the presented model, based on the 6 parts of the distribution.
+Each prediction comes with a confidence score, which could be utilized to discard bad predictions improving overall accuracy. We plot the Top 1 confidence score in relationship to the Top 1 score in Fig. 6. For Q6 and Q5, we observe high confidence scores and high Top 1 scores. For Q4, Q3, Q2, we observe a near linear relationship between the confidence of predictions and the Top 1 score. The plot suggests that discarding predictions between 0 to 0.65 confidence would improve the useability of the model.
+The relationship between the Top 1 confidence score and the Top 1 predictions for each of the 6 parts of the image dataset.
+
+## Discussion
+The results of this study highlight the potential of computer vision in addressing the challenges associated with insect species identification and biodiversity conservation. The YOLOv8 model, trained on a large and diverse dataset, achieved impressive accuracy, demonstrating its effectiveness in recognizing insect species. However, the model is trained on a long-tailed distribution of images, meaning there is an uneven distribution of images per specie in the training data. This causes lower classification performance in tail categories compared to head categories.
+There could be several solutions to circumvent this issue, including resampling the dataset, utilizing loss reweighting during the training or using semi-supervised methods to be able to effectively deal with less represented species. While this is a common issue in the field of image recognition, it is not easily resolved for new datasets. Hence, a future research direction is the utilization of the GBIF image repository incorporating methods to better deal with long-tailed distributions of classes. On the short term, discarding low-confidence predictions is an easily implementable solution. Additionally, the species in the tail end of the distribution are all rare species; thus, rebalancing the dataset might cause overprediction of very uncommon species. The primary objective of this contribution is to create a method to get a robust indicator of insect dynamics. To get this indicator, several rare species might not be relevant at this stage for initial monitoring setups. Efforts should be focused on selecting more abundant indicator species for the relevant ecosystems.
+To make these computer vision developments useable, there should be a discussion on the monitoring efforts. Standardized monitoring with AI tools requires coordination between long-term research sites to formalize camera configurations, sample plot size, and type of plants in the monitored plot. Further research still must prove that computer vision systems remain reliable during in-the-wild deployments and that these sensing systems can operate autonomously and effectively. Additionally, the conventional monitoring setups, such as sweep netting, pitfall traps, malaise traps, light traps, berlese funnel traps, and visual surveys should not be replaced11,15. These methods have their relevance in quantifying insect species; however, they often do not provide scientific data in the right granularity and in the right frequency for many analyses. There are also ways to combine these trap techniques and visual AI in parallel or in a complementary fashion11,15.
+Considering the large and pressing need to understand the dynamics of insect populations, more frequent measurements are vital. While image repositories are available15,22, scientific publications on the application of large-scale visual AI are lacking. The absence of easy methods to train AI models, a lack of awareness and dataset availability, and the commercialization of monitoring technologies are delaying monitoring efforts. In this research, we present a possible path forward by providing a reproducible method to fetch an image database of species of interest, train AI models, and provide a novel large-scale AI model applicable to insect classification, which we tested for the purposes of this paper in the Western European region.
+The presented computer vision model should be further tested and validated with deployments across multiple sites. The open-sourced code repository can be further improved on by incorporating methods to deal with the long tail distribution in the GBIF repository. Additionally, further technical developments could focus on multi-modal AI for the classification of insect. A conceivable application could be using visual recognition methods, where databases are more abundant, in combination with acoustic monitoring. The acoustic samples would then be labeled with a reliable visual classification prediction. This could create a large and needed acoustic data repository which scientists can use for more robust classification results.
+Overall, this research represents a step forward in the automation of insect species identification for biodiversity conservation. The results underscore the potential of computer vision in combating biodiversity loss and offer promising directions for future research and conservation efforts.
+
+## Methods
+Advancements in computer vision have paved the way for the automation of insect species identification at a larger scale. Convolutional Neural Networks (CNNs) have shown exceptional capabilities in image recognition tasks. While the AI field is progressing, insect population studies have yet to incorporate some of these techniques. For example, YOLO (You Only Look Once) is a real-time object detection system that has garnered attention for its speed and accuracy23,24. YOLOv8, an improvement of the YOLO architecture, offers state-of-the-art performance in object detection25 and is the architecture chosen for this article.
+To create a comprehensive dataset for insect species identification, the lead author web-scraped almost 2 million images representing 2584 insect species. A small percentage of images was collected from search engines, while a large portion of images was collected from Observations.org22. Through this method, species were captured in various angles, lighting conditions, and backgrounds, which could ensure model robustness. The variety of angles is shown in Fig. 1. The lighting conditions were analyzed based on a representative subsample of images. Figure 7 shows the overall brightness distributions based on four metrics, mean brightness, standard deviation of brightness, the V channel of the images in the HSV format, and the L channel of the images in the LAB format. 10 images on the low and high side of the mean brightness distribution are shown in Fig. 8. The assessment of the brightness of the images also demonstrate the wide variety of backgrounds.
+Brightness distribution of a subset of images in the dataset.
+Sample of 10 low and high mean brightness images.
+For the training of the AI model, the web-scraped dataset was divided into 80% training images and 20% validation images. The created dataset was used to train a novel AI model, relying on YOLOv8, where the number of species included in the model is larger by a factor of 64.6, expanding from a maximum of 40 species1,14 to 2584 species. Additionally, the reported dataset used for the training and validation is larger than previously reported datasets by a factor of 21.8, increasing from 88,0001,14 to almost 2 million images.
+As the pre-trained model is specialized for the Western European context, a code repository was developed to replicate this method for other species in different climatic zones. The repository leverages a dataset with links to 16 million images of insects across a wide range of geographic regions. A region might have specific species of interest, or indicator species relevant to estimate ecosystem health. Hence these specie names can be provided in a .csv file, after which the code repository downloads images of these species, if they are included in the image repository. The GitHub can be found at the Code Availability section, with detailed steps to create custom YOLOv8 models shown in Fig. 9.
+Schematic of the method, including the required processing steps to train custom YOLOv8 models for biodiversity tracking.
+To summarize, the GitHub repository requires two inputs from users: a simple csv file, with names of species, and a GBIF26 image repository that includes those species. The user can choose to either use the prepared download26, or create a download meeting their needs from GBIF. The prepared download includes links to images of the 16 million image data repository of GBIF26. Once both the csv file and the GBIF dataset are provided, users can run two scripts to create a new custom YOLOv8 computer vision model and run a third script to obtain the predictions on other images.
+Collect images.pyCollect images from GBIF in designated folder structure.
+Collect images from GBIF in designated folder structure.
+Train_validate.pyTrain a YOLOv8 model relying on Ultralytics and report validation results.
+Train a YOLOv8 model relying on Ultralytics and report validation results.
+Run_model.pyFinds images in a folder and runs the prediction model on those new images.
+Finds images in a folder and runs the prediction model on those new images.
+
+## Supplementary Information
+Supplementary Information 1.
+Supplementary Information 2.
+
+## Acknowledgements
+We thank the Amsterdam Institute for Advanced Metropolitan Solutions (AMS Institute) and the MIT Senseable City Lab consortium, FAE Technology, MipMap, Samoo Architects & Engineers, GoAigua, DAR Group, Ordinance Survey, RATP, Anas S.p.A., ENEL Foundation, the cities of Helsingborg, Regione Friuli-Venezia Giulia, Laval, and Stockholm, and all other members of MIT Senseable City Laboratory Consortium for supporting this research.
+
+## Author contributions
+T.V. conceptualized, designed, and executed the research. T.V. created the code and the computer vision model. F.D. helped in shaping the research and revised the manuscript substantially. All authors participated in preparing the manuscript.
+
+## Data availability
+Data availability Images can be downloaded from26, GBIF Occurrence Download https://doi.org/10.15468/dl.dk9czq.
+
+## Code availability
+https://github.com/Tvenver/Bplusplus.
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher's note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## Supplementary Information
+The online version contains supplementary material available at 10.1038/s41598-024-68502-8.
+
+## References
+
+## Associated Data
+
+## Supplementary Materials
+Supplementary Information 1.
+Supplementary Information 2.
+
+## Data Availability Statement
+Data availability Images can be downloaded from26, GBIF Occurrence Download https://doi.org/10.15468/dl.dk9czq.
+https://github.com/Tvenver/Bplusplus.
+
+## Table Table 1: Metrics from the test dataset.
+ | Top 1 | Top 2 | Top 3 | Top 4 | Top 5
+Score | 0.8287 | 0.8980 | 0.9258 | 0.9384 | 0.9443
+
+## Figure Figure 1: A small sample of the collected images from the GBIF repository22,26.
+
+## Figure Figure 2: The presented dataset size, the number of included species, and achieved accuracy compared to other computer vision models included in systematic reviews1,14. The blue dot indicates our results. Note that the x-axis is log-transformed due to the large increase in the number of included species.
+
+## Figure Figure 3: Showing the long-tailed distribution of number of images per insect species, highlighting the 6 selected parts of the distribution.
+
+## Figure Figure 4: The relationship between the number of images per species and the Top 1 score for the presented model, based on the 6 parts of the distribution.
+
+## Figure Figure 5: The relationship between the number of images per species and the Top 5 score for the presented model, based on the 6 parts of the distribution.
+
+## Figure Figure 6: The relationship between the Top 1 confidence score and the Top 1 predictions for each of the 6 parts of the image dataset.
+
+## Figure Figure 7: Brightness distribution of a subset of images in the dataset.
+
+## Figure Figure 8: Sample of 10 low and high mean brightness images.
+
+## Figure Figure 9: Schematic of the method, including the required processing steps to train custom YOLOv8 models for biodiversity tracking.

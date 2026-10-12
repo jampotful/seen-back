@@ -1,0 +1,5586 @@
+Quantized Charge Polarization as a Many-Body Invariant in (2+1)D Crystalline Topological States and Hofstadter Butterflies
+Yuxuan Zhang, Naren Manjunath, Gautam Nambiar, Maissam Barkeshli (2023). Physical Review X. https://doi.org/10.1103/physrevx.13.031005. doi:10.1103/physrevx.13.031005. Licence: cc-by. Text from pdf.
+
+PHYSICAL REVIEW X 13, 031005 (2023)
+
+Quantized Charge Polarization as a Many-Body Invariant in ð2 + 1ÞD Crystalline
+Topological States and Hofstadter Butterflies
+Yuxuan Zhang ,1,2 Naren Manjunath ,1,2 Gautam Nambiar ,1 and Maissam Barkeshli1,2
+1
+
+Department of Physics and Joint Quantum Institute, University of Maryland,
+College Park, Maryland 20742, USA
+2
+Condensed Matter Theory Center, University of Maryland, College Park, Maryland 20742, USA
+(Received 2 December 2022; revised 21 April 2023; accepted 15 May 2023; published 14 July 2023)
+⃗ for ð2 þ 1ÞD topological phases
+We show how to define a quantized many-body charge polarization P
+of matter, even in the presence of nonzero Chern number and magnetic field. For invertible topological
+⃗ is a Z2 × Z2 , Z3 , Z2 , or Z1 topological invariant in the presence of (M ¼ 2, 3, 4, or 6)-fold
+states, P
+
+⃗ manifests in the
+rotational symmetry, lattice (magnetic) translational symmetry, and charge conservation. P
+⃗ · b⃗ mod 1 to the charge bound to lattice
+bulk of the system as (i) a fractional quantized contribution of P
+⃗ (ii) a linear momentum for magnetic flux, and (iii) an
+disclinations and dislocations with Burgers vector b,
+⃗ in
+oscillatory system size dependent contribution to the effective 1D polarization on a cylinder. We study P
+
+lattice models of spinless free fermions in a magnetic field. We derive predictions from topological field
+theory, which we match to numerical calculations for the effects (i)–(iii), demonstrating that these can be
+⃗ from microscopic models in an intrinsically many-body way. We show how, given a high
+used to extract P
+
+⃗ specifies the
+symmetry point o, there is a topological invariant, the discrete shift So , such that P
+dependence of So on o. We derive colored Hofstadter butterflies, corresponding to the quantized value of
+⃗ which further refine the colored butterflies from the Chern number and discrete shift.
+P,
+DOI: 10.1103/PhysRevX.13.031005
+
+Subject Areas: Condensed Matter Physics,
+Quantum Physics,
+Strongly Correlated Materials
+
+I. INTRODUCTION
+In the presence of symmetry, gapped quantum phases of
+matter can acquire symmetry-protected topological invariants. The paradigmatic example is the quantized Hall
+conductance, which is specified by the Chern number, and
+is defined only for systems with a U(1) charge conservation
+symmetry. Since the discovery of topological insulators and
+superconductors [1–3], there has been spectacular progress
+in our understanding of symmetry-protected topological
+invariants both for single-particle free fermion models
+[4–6] and for interacting many-body systems [7–16].
+Despite these advances, a complete understanding of
+topological invariants arising from crystalline symmetries
+is still lacking.
+Recently, Refs. [17,18] applied ideas from topological
+quantum field theory (TQFT) and the algebraic theory of
+
+Published by the American Physical Society under the terms of
+the Creative Commons Attribution 4.0 International license.
+Further distribution of this work must maintain attribution to
+the author(s) and the published article’s title, journal citation,
+and DOI.
+
+2160-3308=23=13(3)=031005(42)
+
+symmetry defects [13], which can be used to characterize
+gapped quantum many-body systems, to develop a systematic classification of topological invariants for systems
+with U(1) charge conservation, discrete (magnetic) translational symmetry, and rotational symmetry in two spatial
+dimensions. In particular, Refs. [17,18] showed how
+TQFT predicts the existence of a quantized many-body
+polarization in the presence of twofold, threefold, fourfold, or sixfold rotational symmetry. For invertible topological phases, which do not host anyon excitations, the
+polarization acquires a Z2 × Z2 , Z3 , Z2 , or Z1 classification, respectively.
+Remarkably, the TQFT prediction of a quantized charge
+polarization applies also in the presence of a nonzero Chern
+number and a nontrivial magnetic field. This appears to be
+in tension with several statements made previously in the
+literature about whether the polarization is well defined in
+the presence of a nonzero Chern number [19,20].
+The TQFT not only predicts the presence of the
+invariant, but also its bulk physical manifestation. This
+is in terms of a fractional quantized contribution of the
+charge bound to lattice defects and a dual response, the
+momentum of the ground state in the presence of additionally inserted magnetic flux.
+
+031005-1
+
+Published by the American Physical Society
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 1. A menagerie of butterflies in the spinless square lattice Hofstadter model. α and β represent a plaquette center and vertex,
+respectively. For any C4 symmetric origin o, So has a Z4 classification, while Po has a Z2 classification. We empirically find that
+fSβ ; Sα ; Pβ ; Pα g follow Eqs. (41), (42), (52), and (53), respectively. Note that Sα has period 8π in ϕ, Pβ has period 4π in ϕ, while Sβ
+and Pβ have period 2π in ϕ. See Secs. IV and V for discussions.
+
+In contrast, the modern theory of polarization in insulators is based on the Berry-Zak phase of single-particle wave
+functions in momentum space [21–24]. This Berry phase
+theory of polarization assumes the phase of the singleparticle states is globally well defined throughout the
+Brillouin zone, which applies only in the case of zero
+Chern number. For the case of nonzero Chern number,
+while there has been work showing how one may define a
+notion of polarization in the single-particle context by
+fixing an origin in the Brillouin zone [24], its quantization
+from crystalline symmetries, the effects of nonzero magnetic field, and its implication for bulk response properties
+have not been studied.
+In many-body systems with interactions, the singleparticle Berry phase formulation breaks down. It can be
+replaced with a Berry phase theory based on twisted
+boundary conditions or with an expectation of Resta’s
+exponentiated polarization operator [25]. However, these
+apply only to the effective 1D polarization, meaning the
+system is viewed as an effective one-dimensional system;
+such a 1D polarization is no longer an intensive quantity in
+a higher-dimensional system.
+In this paper we show how one can indeed define a
+quantized charge polarization in an intrinsically many-body
+fashion and in the presence of both nonzero Chern number
+and nonzero magnetic field. This is not an effective 1D
+
+polarization obtained by viewing the system as a 1D
+system—rather, this is an intrinsic bulk 2D polarization,
+which has nontrivial bulk responses mentioned above.
+More specifically, we show that upon fixing a choice
+of high symmetry point (HSP) o in the unit cell, one can
+⃗ o . So is a discrete analog of
+define two invariants, So and P
+the Wen-Zee shift [26–31], which is an invariant associated
+to U(1) charge conservation and SO(2) plane rotational
+symmetry. We refer to So as the “discrete shift” because it
+is a ZM invariant, while the Wen-Zee shift is a Z invariant.
+⃗ o denotes the quantized charge polarization.
+P
+We show, through extensive numerical studies, how
+these invariants can be extracted from bulk response
+properties of microscopic models in multiple different
+ways. We show how the predictions of the TQFT, including
+the bulk response properties and the dependence of So
+⃗ o on o, can be precisely matched to calculations on
+and P
+microscopic models.
+As an application, we show how one can extract the
+quantized charge polarization for the Hofstadter model [32]
+of spinless free fermions in a nonzero magnetic field on a
+lattice. This provides yet another way to color Hofstadter’s
+butterfly (see Fig. 1), extending the recent coloring in
+Ref. [33] based on the discrete shift, and the earlier coloring
+with the Chern (TKNN) number [34,35].
+
+031005-2
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+We note that the dependence of the polarization on
+a choice of origin o is a well-known property of all
+definitions of the polarization in electronic systems; it is
+usually dealt with by considering instead changes in the
+polarization as an external parameter is tuned, or by using
+the overall charge neutrality of the system (for example, by
+taking into account the background positive ions), which
+removes the origin dependence [21]. While at first glance it
+seems unusual that an invariant of a phase of matter could
+have a dependence on a choice of origin, we explain it
+further in subsequent sections.
+
+PHYS. REV. X 13, 031005 (2023)
+
+⃗ o , respectively, on the
+present detailed results for So and P
+square lattice, highlighting the various subtleties that arise
+in matching the field theory to numerics. Section VI does
+the same for M ¼ 2, 3, 6. In Sec. VII we discuss the origin
+⃗ o from a field theory perspective. We
+dependence of So ; P
+then conclude and discuss future directions.
+II. OVERVIEW OF MAIN RESULTS
+We consider a gapped phase of matter with the symmetry
+group
+G ¼ Uð1Þ ×ϕ ½Z2 ⋊ ZM ;
+
+A. Relation to prior work
+Our work is closely related to several works over the past
+decade that also study polarization and its physical consequences but all in the context of Chern number C ¼ 0.
+Responses associated to the discrete shift have also been
+explored in microscopic models in recent works [33,36,37]
+and in the context of topological field theory [17,18,38],
+although the origin dependence of the discrete shift has not
+been discussed in prior work.
+References [19,39] discuss a quantized charge polarization in free fermion crystalline insulators with different
+point group symmetries, assuming zero Chern number.
+Reference [20] showed how, ignoring rotational symmetry, polarization is a “nonquantized” topological response
+and can be defined for zero Chern number systems in an
+intrinsically many-body fashion in terms of the momentum
+of the ground state in the presence of magnetic flux.
+Reference [40] earlier studied the momentum of magnetic
+flux and mentioned its quantization by rotational symmetries. We note that the definition of the magnetic translation operator in a magnetic field, which is used to compute
+the momentum, has a number of ambiguities that were not
+fully considered in these previous works.
+References [19,20] both asserted that the polarization is
+not well defined in the presence of nonzero Chern number,
+which disagrees with our results in the case where we have
+both translational and rotational symmetry.
+Reference [37] defines the polarization for systems with
+C ¼ 0 and zero magnetic field via Wannier representation
+theory, and characterizes it in terms of a fractional charge
+bound to lattice defects with nontrivial Burgers vector.
+Reference [41] also finds that lattice dislocations can have
+fractionally quantized charges in a rotationally symmetric
+system; here it appears that C ¼ 0 is being implicitly
+assumed. We emphasize that our definition of fractional
+charge of the lattice defects differs from the definition
+presented in Refs. [37,41].
+B. Organization of paper
+The rest of the paper is organized as follows. In Sec. II
+we summarize our main results. In Sec. III we review some
+basic properties of lattice defects. In Secs. IV and V we
+
+ð1Þ
+
+where Z2 denotes magnetic lattice translations and ZM for
+M ¼ 2, 3, 4, 6 denotes point group rotations [42]. The
+symbol ×ϕ implies that the magnetic translation operators,
+−1
+iϕN̂
+generated by T̃ x ; T̃ y, obey the algebra T̃ −1
+,
+y T̃ x T̃ y T̃ x ¼ e
+where N̂ is the total fermion number. The tilde indicates
+that the definition of the operator involves a U(1) gauge
+transformation.
+The charge conservation and translation symmetries
+allow us to define a charge per unit cell ν. Each unit cell
+can be divided into M subcells with equal flux ϕsub . The
+total flux per unit cell is then ϕ ¼ Mϕsub . Note that for our
+purposes, depending on the microscopic model we may
+need to specify the flux within even smaller subregions of
+the unit cell. Therefore we assume that the 2D system is
+embedded in a continuum, and that the magnetic field B is
+specified at each continuum point. This allows us to specify
+ϕ; ϕsub exactly as real numbers, even though the symmetry
+only requires us to define ϕ mod 2π. We comment further
+on this in Sec. IV.
+Let C be the Chern number of the system. We then define
+the integer:
+κ≡ν−C
+
+ϕ
+:
+2π
+
+ð2Þ
+
+κ is a Z topological invariant for the system if ϕ is known
+exactly (and not just modulo 2π). Fixing C and ϕ, if the
+charge per unit cell increases by an integer l, then
+κ → κ þ l. For further intuition about κ and a heuristic
+derivation of Eq. (2), see Appendix A 1 d.
+For a given high symmetry point o of the lattice unit cell,
+we will see that one can define a set of topological
+⃗ o g. The transformation of fSo ; P
+⃗ og
+invariants fSo ; P
+under a change of o is fully determined if o is preserved
+by a ZM rotation symmetry group. Therefore, it is sufficient
+⃗ o g for a single such o.
+to specify fSo ; P
+A subtle point is that the definition of the invariants
+requires a choice of operators that represent the symmetry
+group elements. In this work, we take C̃M;o to be a
+“magnetic” rotation operator about o (a spatial rotation
+combined with a gauge transformation), such that
+
+031005-3
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+ðC̃M;o ÞM ¼ 1. If we change this choice by C̃M;o →
+C̃M;o eið2π=MÞχ N̂ for some real number χ, then the invariant
+So also transforms, So → So þ χC. Nevertheless, we will
+see that there are canonical choices for C̃M;o that can
+be made.
+⃗ o we refer to throughout the
+We caution that the vector P
+text is different from the standard charge polarization vector
+⃗ o , which for zero Chern number satisfies j ¼ ∂t P
+⃗ o , where
+P
+j is the induced current. We show in Appendix B that
+
+point. Then Sγ is only defined mod 2. In all cases, we have
+the constraint [33]
+
+⃗ o × ẑ:
+ðPo;x ; Po;y Þ ¼ ðPo;y ; −Po;x Þ ¼ P
+
+ð3Þ
+
+⃗ o appears most naturally in our theory,
+However, since P
+⃗ o throughout and refer to it as
+we work in terms of P
+the polarization, recognizing this as a slight abuse of
+terminology.
+A. Warm-up: C4 symmetric lattice
+We first illustrate our main results for the square lattice.
+A representative unit cell with high symmetry points α (unit
+cell center), β (unit cell vertices), γ i (edge centers) is shown
+in Fig. 2. The points γ 1 , γ 2 are not translation equivalent but
+are related by rotations about α. α; β; γ refer to maximal
+Wyckoff position (MWPs), which are collections of points
+related by lattice symmetries; the precise definition of a
+MWP is given in Appendix A. α and β have an order 4 site
+symmetry group generated by the magnetic rotation operators C̃4;α ; C̃4;β (which also include a gauge transformation), with C̃44;α ¼ C̃44;β ¼ 1. The point γ has an order 2 site
+symmetry group generated by the operator C̃2;γ , with
+C̃22;γ ¼ 1. We can pick any of these points as our origin o.
+⃗ o for each possible
+First we define the invariants So ; P
+HSP o and list their properties; thereafter, we explain how
+to use them to characterize the topological phase of the
+given system.
+Suppose o ¼ α or β. Then, So is defined mod 4 and
+can take one of four possible values for a fixed Chern
+number C. Next, suppose o ¼ γ, which is a C2 symmetric
+
+FIG. 2. Maximal Wyckoff positions for C2, C3 , C4 , and C6
+symmetries (colored circles). × marks the unit cell center, which
+we denote as α. The high symmetry points βi and γ i each belong
+to a single maximal Wyckoff position (β or γ), but are all
+inequivalent under lattice translations. The dotted lines show a
+possible division of the unit cell into M subcells.
+
+So mod 1 ¼
+
+C
+mod 1:
+2
+
+⃗ o . For o ¼ α, β,
+We next turn to P
+
+
+
+⃗Po ∈ ð0; 0Þ; 1 ; 1 ;
+2 2
+
+ð4Þ
+
+ð5Þ
+
+up to integer vectors. We write
+⃗ o ¼ Po ð1; 1Þ
+P
+2
+
+ð6Þ
+
+in this case; Po is an integer defined mod 2. For o ¼ γ,
+there are four possible choices:
+   
+
+
+
+⃗Pγ ∈ ð0; 0Þ; 1 ; 0 ; 0; 1 ; 1 ; 1 ;
+ð7Þ
+2
+2
+2 2
+up to integer vectors.
+⃗ o for a C4 symmetric point, together with κ,
+So ; P
+⃗ o0 for all other o0. For example,
+determines So0 ; P
+fSβ ; Pβ ; κg ¼ fSα þ 2Pα − κ; Pα þ κ; κg:
+
+ð8Þ
+
+⃗ γ ; κ, we can determine P
+⃗ α and P
+⃗ β
+If we only know Sγ ; P
+fully, but can only determine Sα and Sβ mod 2 and not
+mod 4. The relevant formulas are given in Table I. Thus, to
+⃗ o for each high symmetry point in the
+fully specify So ; P
+unit cell, we need to determine them for some o with the
+largest possible site symmetry group.
+In Fig. 1, we show colored Hofstadter butterflies for two
+different origins α, β extracted for the square lattice Hofstadter
+model of spinless fermions. We find that fSβ ; Sα ; Pβ ; Pα g
+follow the empirical equations Eqs. (41), (42), (52), and (53),
+respectively. In this figure, β corresponds to a site and α to a
+plaquette center, where there is no site.
+⃗ o
+To distinguish two phases of matter based on So ; P
+(assuming C, κ and all other invariants are equal), we first
+fix a common origin o (which must be a C4 symmetric
+⃗ o for the two systems. If their values
+point) and find So ; P
+are not equal, the two systems cannot be adiabatically
+connected to each other in a symmetry-preserving manner.
+It is important to note that comparing the crystalline
+topological invariants of two phases is only meaningful
+after fixing a common origin.
+⃗ og
+B. Basic properties and classification for fSo ;P
+We now generalize the above discussion to the case with
+M ¼ 2, 3, 4, 6 [43]. In Table II we define the 2 × 2 matrices
+
+031005-4
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+⃗ o under o → o þ ðvx ;vy Þ,
+TABLE I. Transformation of So and P
+which shifts the origin from one CM symmetric point to another
+⃗ o are only defined up to
+CM symmetric point. Note that So and P
+equivalences as described in the main text. For M ¼ 4 we have
+taken the unique nontrivial choice v⃗ ¼ ð12 ; 12Þ.
+M
+
+Soþ⃗v
+
+⃗ oþ⃗v
+P
+
+2
+4
+3
+6
+
+⃗ o þ 4κðv2x þ v2y þ vx vy Þ
+So − 4⃗v · P
+So þ 2Po − κ
+So − 3vy Po − 3κðv2x þ v2y þ vx vy Þ
+So
+
+⃗ o þ ð−vy κ; vx κÞ
+P
+⃗Po þ ð− 1 κ; 1 κÞ
+2
+2
+⃗ o þ ð−vy κ; vx κÞ
+P
+0
+
+Uð2π=MÞ, corresponding to elementary 2π=M rotations
+around an origin o with M-fold rotational symmetry. These
+describe the action of the rotation operator C̃M;o on space.
+As above, we fix ðC̃M;o ÞM ¼ þ1.
+Then for any given o which is fixed under an order-M
+⃗ o g have a ZM × K M classification, where
+rotation, fSo ; P
+K M ¼ fZ2 × Z2 ; Z3 ; Z2 ; Z1 g for M ¼ 2, 3, 4, 6. A derivation is given in Appendix A. More specifically, So is an
+integer or half-integer defined modulo M, and it satisfies
+⃗ o is a two-component vector with the following
+Eq. (4). P
+quantization condition and equivalence relation:
+⃗ o ∈ Z2 ;
+½1 − Uð2π=MÞP
+⃗ o þ Λ;
+⃗ o∼P
+⃗
+P
+
+⃗ ∈ Z2 :
+Λ
+
+ð9Þ
+
+For fourfold and sixfold point groups, it is possible for
+the HSP o to only be invariant under a smaller M0 -fold
+rotation. For example, we can have M0 ¼ 2 when M ¼ 4, or
+M0 ¼ 2, 3 when M ¼ 6. In these cases, the possible values
+⃗ o g have a ZM0 × K M0 classification. The relations
+of fSo ; P
+defining them are as above, with M replaced by M0.
+⃗ o in the following
+It will be convenient to parametrize P
+way:
+8
+1
+>
+>
+2 ðPo;x ; Po;y Þ
+>
+>
+>
+<
+1
+⃗ o ¼ Po 2 ð1; 1Þ
+P
+>
+>
+Po 13 ð1; 2Þ
+>
+>
+>
+:0
+
+M0 ¼ 2
+M0 ¼ 4
+
+ð10Þ
+
+M0 ¼ 3
+M 0 ¼ 6:
+
+TABLE II. Elementary rotation matrices Uð2π=MÞ, for the
+coordinate basis shown in Fig. 2.
+M
+Uð2π=MÞ
+
+
+
+2
+−1 0
+0 −1
+
+ 
+
+3
+−1
+1
+
+−1
+0
+
+ 
+
+4
+0
+1
+
+−1
+0
+
+ 
+
+6
+0 −1
+1 1
+
+PHYS. REV. X 13, 031005 (2023)
+
+Here M 0 is the maximal integer such that o is a fixed
+point under rotations of order M0. Po can take any integer
+value according to the K M0 classification. For example,
+⃗ o:
+when M0 ¼ 2, there are four inequivalent choices for P
+⃗Po ∈ fð0;0Þ;ð1=2;0Þ;ð0;1=2Þ;ð1=2;1=2Þg. When M0 ¼ 3,
+⃗ o ∈ fð0; 0Þ; ð1=3;
+there are three inequivalent choices: P
+2=3Þ; ð2=3; 1=3Þg. This is derived in Appendix A 3 a.
+⃗ o . If
+Next we discuss the origin dependence of So ; P
+we shift o → o0 ¼ o þ ðvx ; vy Þ, then we can determine
+⃗ o0 g from fSo ; P
+⃗ o g and κ, as specified in Table I.
+fSo0 ; P
+Note that ðvx ; vy Þ can be fractions of a lattice unit. For
+⃗ o0 g to be fully specified in terms of fSo ; P
+⃗ o g, the
+fSo0 ; P
+0
+minimal rotation angle which preserves o must be a
+multiple of the minimal rotation angle which preserves o.
+In other words, the site symmetry group of o0 is isomorphic
+to a subgroup of the site symmetry group of o. For example,
+if o and o0 have site symmetry groups Z4 and Z2 ,
+⃗ o0 g can be determined using
+respectively, then fSo0 ; P
+the M ¼ 2 entry of Table I.
+Thus, in order to obtain a complete specification for each
+⃗ o g for at
+high symmetry point, we need to know fSo ; P
+least one o which is invariant under an M-fold rotation.
+⃗ o0 g
+Otherwise we will not be able to fully recover fSo0 ; P
+0
+⃗ o
+for each o . Note, in particular, that the dependence of P
+on o is completely determined by κ, and the dependence
+⃗ o and κ.
+of So on o is completely determined by P
+Nevertheless, differences
+ΔS ¼ So ðλ1 Þ − So ðλ2 Þ;
+⃗ o ðλ2 Þ
+⃗ ¼P
+⃗ o ðλ1 Þ − P
+ΔP
+
+ð11Þ
+
+are independent of o. Here λ is some tuning parameter in
+the Hamiltonian, H½λ, which keeps the invariant κ fixed
+and preserves the crystalline symmetry. This can be done,
+for example, by fixing fν; ϕsub g. The reason we need to fix
+κ is discussed in Sec. VII A.
+Note that if we have a solid-state system of electrons
+with some background positive charge due to ions, then the
+⃗ tot ¼ P
+⃗ oþP
+⃗ ion;o .
+total polarization of the system will be P
+If we assume that the ions have a charge of κ per unit cell,
+⃗ tot becomes
+then the origin dependence cancels and P
+origin independent. In realistic systems, the excess charge
+per unit cell ν − κ will be neutralized by a metallic gate,
+which we would ignore to compute the total polarization.
+As another example, if we take M ¼ 3, we have three
+maximal Wyckoff positions invariant under threefold rotation symmetry: α, β, and γ, with β ¼ α þ ð1=3; 1=3Þ and
+γ ¼ α þ ð−1=3; 2=3Þ (see Fig. 2). Then,
+
+
+
+031005-5
+
+fSβ ; Pβ ; κg ¼ fSα − Pα − κ; Pα − κ; κg;
+fSγ ; Pγ ; κg ¼ fSα þ Pα − κ; Pα þ κ; κg:
+
+ð12Þ
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+TABLE III. General equations for charge response (including dislocation and disclination charge), angular momentum, and linear
+momentum. The last column explains the different special points that arise in each calculation.
+Charge response
+
+⃗ o · b⃗ o þ νðk þ n
+Þ mod 1
+QW ¼ C 2πW;o þ ΩW2πSo þ P
+irreg;o;Ω;b⃗
+δΦ
+
+2
+
+o is origin of loop used to measure
+Burgers vector b⃗ o
+
+Angular momentum
+
+lo ðmÞ ¼ Cm
+2 þ So m þ KðC; LÞ mod M
+
+Linear momentum
+
+pλ;y ðmÞ ¼ −Po;y m þ K y mod 1
+
+o is determined by the “gauge origin”
+ō through Eq. (61)
+
+1D polarization
+
+−P O;x ¼ Ckϕ
+2π Ly þ Ly Po;y þ K mod1
+
+O is origin used in Resta’s formula,
+Eq. (26); o, O must satisfy Eq. (75).
+
+⃗ o g from microscopic models
+C. Extracting fSo ;P
+⃗ og
+For a given microscopic model, we can extract fSo ; P
+in several distinct ways, as summarized in Table III. To set
+up the calculations, we first need to fix a rotation operator
+C̃M0 ;o , where the high symmetry point o is invariant under
+2π=M0 rotations and M 0 ≤ M. In our examples we always
+0
+choose this operator so that ðC̃M0 ;o ÞM ¼ þ1. We also
+define translation operators T̃ x , T̃ y corresponding to the
+elementary lattice vectors x, y, which obey the magnetic
+translation algebra.
+Our numerical procedure is guided by a topological
+response theory derived using TQFT ideas [14,17,18].
+This gives a Lagrangian density in terms of background
+gauge fields:
+L¼
+
+⃗
+C
+S
+κ
+P
+A ∧ dA þ o A ∧ dω þ o · A ∧ T⃗ þ A ∧ AXY
+4π
+2π
+2π
+2π
+e
+⃗
+ν
+l
+P
+þ s ω ∧ dω þ s · ω ∧ T⃗ þ s ω ∧ AXY þ    :
+4π
+2π
+2π
+ð13Þ
+
+Here,R A is a background U(1) gauge field, and is defined so
+that dA represents the full magnetic field (and not just its
+deviation from some background value), ω is a background
+ZM “rotation” gauge field, which is treated as a real field
+with quantized holonomies. AXY and T⃗ are the area element
+and torsion 2-form, respectively, which are constructed
+using translation gauge fields. The notation is described
+more fully in Appendix F.
+Importantly, the coefficients of these terms are all
+quantized in specific patterns and defined modulo certain
+equivalence relations, which can be systematically derived
+for bosonic systems using group cohomology [17]. We are
+only concerned with the first four terms, which have the
+⃗ o ; κ. In this paper, we carry out a
+coefficients C; So ; P
+⃗ o in the case
+derivation of the quantization conditions on P
+of fermionic systems using a general theory of invertible
+fermionic phases developed in Ref. [14] (see Appendix F of
+this paper). We show that the quantization conditions on
+⃗ o in invertible fermionic systems (i.e., without fractionP
+alized excitations) are the same as for invertible bosonic
+
+o is rotation center
+
+systems, in contrast to the Chern number and discrete
+shift [33].
+⃗ o g from fractional charge of lattice
+1. fSo ;P
+disclinations and dislocations
+Given the magnetic rotation operator C̃M0 ;o about a high
+symmetry point o and translation operators T̃ x , T̃ y , and the
+Hamiltonian for the clean system with the full crystalline
+symmetry H clean, one can define a Hamiltonian in the
+presence of a lattice disclination or dislocation Hdefect . This
+is done through a cut-and-glue procedure described in
+Appendix C. Hdefect is uniquely defined up to local
+operators at the core of the defect. In our numerics we
+take Hclean to be a free fermion Hofstadter model, usually
+with nearest-neighbor hopping terms, but our methods
+conceptually apply more generally, as we discuss in
+Secs. IV and VI. In Appendix H, we demonstrate that
+the dislocation charge calculation generalizes naturally to
+Hamiltonians with next-nearest-neighbor hopping.
+A lattice disclination has a nonzero disclination angle Ω
+(Frank angle −Ω), and b⃗ o is the Burgers vector. Here, the
+subscript o means that the Burgers vector is measured by
+the holonomy of a loop encircling the defect, which starts at
+the point o. Note that o and o need not be equal in general.
+As we explain in Sec. III, for a disclination with Ω ≠ 0, the
+value of b⃗ o as defined above depends on o. However, for a
+lattice dislocation, which has Ω ¼ 0, the value of b⃗ o is
+independent of o.
+We can compute the fractional charge in the ground state,
+QW mod 1, in a large region W surrounding a lattice
+disclination or dislocation. We require that the boundaries
+of the region W align with the boundaries of the unit cell Θ.
+The linear size of W must be much larger than the
+correlation length. We first define the charge in a region W:
+X
+QW ¼
+wtðiÞQi ;
+ð14Þ
+i∈W
+
+where the weight wtðiÞ ¼ 1 if i is in the interior of W, while
+if i lies on the boundary ∂W, 2πwtðiÞ is the angle subtended
+by ∂W in the interior of W at i. Qi is the charge on site i in
+the ground state of H defect . An example is shown in Fig. 6.
+
+031005-6
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+Using Eq. (13) along with Eq. (2), we then find
+ΦW
+Ω
+⃗ o · b⃗ o þ κnW;o mod 1
+þ So þ P
+2π
+2π
+
+ð15Þ
+
+δΦ
+Ω
+⃗ o · b⃗ o þ νnW;o mod 1:
+¼ C W;o þ So þ P
+2π
+2π
+
+ð16Þ
+
+QW ¼ C
+
+m2
+þ KðC; LÞ mod M 0 ;
+2
+
+ð18Þ
+
+where KðC; LÞ is a constant independent of m, depending
+on the system size L and the Chern number C. The
+numerical data of lo are shown in Fig. 18. For jΨi to be
+an eigenstate of C̃M0 ;o , appropriate global holonomies of the
+background gauge field and certain commensurate system
+sizes must be chosen, as discussed in Ref. [33]. We note
+that one can also recover So by locally inserting flux and
+performing partial rotations [33].
+⃗ o from linear momentum
+3. P
+The topological field theory, Eq. (13), predicts that the
+⃗ o also specifies the linear momentum of
+polarization P
+⃗ o can be
+U(1) flux [17]. We have found empirically that P
+extracted by studying expectation values of an approximate
+translation operator, as we briefly summarize below. See
+Sec. V for additional details.
+Suppose we wish to measure Po;y on the square lattice.
+We consider a state on a clean torus with m ¼ ðϕ=2πÞLx Ly
+total flux quanta, where Lx , Ly are the number of unit cells
+in the x and y directions. While the infinite plane possesses
+an infinite magnetic translation symmetry along the two
+directions, on the torus with magnetic flux it is not possible
+to fully preserve translation symmetry along y unless
+m=Ly ¼ ðϕ=2πÞLx is an integer. For general m, on the
+torus we can insert the flux using a Landau-like gauge that
+is almost translation symmetric along y, except for a small
+strip which forms a cycle along y.
+We then define an approximate translation operator:
+P †
+i
+λc c
+T̃ y ≔ T̂ y e j j j j :
+ð19Þ
+The expectation value of T̃ y defines the linear momentum
+pλ;y in the y direction:
+
+2. So from angular momentum
+Alternatively, we can examine the action of rotations
+and translations on the ground state in order to extract an
+angular momentum or linear momentum. These dual
+responses are a valuable consistency check on the value
+of So obtained from the above charge response.
+Importantly, to compare the values of discrete shift from
+the disclination charge and angular momentum calculations, we need to set o ¼ o in both cases.
+Let jΨðmÞi be the ground state of the clean translationally invariant system on a torus in the presence of m flux
+quanta, m being an integer. Then,
+0
+
+where recall that M0 is the largest integer such that o is
+invariant under 2π=M0 rotations centered at o. We find that
+the angular momentum lo obeys the formula
+lo ðmÞ ¼ So m þ C
+
+ΦW is the total flux through the region W. nW;o is the
+number of unit cells in W, and may be fractional. ΦW has
+two contributions, ΦW ¼ ϕnW;o þ δΦW;o . Here, ϕnW;o is
+the reference background flux within W. δΦW;o is the
+excess magnetic flux in the region W relative to this
+reference. The precise microscopic definitions of δΦW;o
+and nW;o are quite subtle and nontrivial and explained in
+detail in Secs. IV–VI.
+Importantly, δΦW;o and nW;o in general depend on the
+position of o relative to the chosen unit cell Θ.
+⃗ o are indepenNevertheless, the final results for So and P
+dent of Θ. This is explained using the trimming method
+developed in Appendix D.
+Naively it may seem that the coefficients in Eq. (15)
+should also depend on o . One reason for our notation is
+that Eq. (15) comes from a TQFT which is only sensitive
+to o. But even in microscopic calculations, we find that
+⃗ o actually depends on o . This is easily
+neither So nor P
+⃗ o, which can be defined using pure dislocations,
+seen for P
+for which Ω ¼ 0 and o does not appear. To show that So is
+independent of o , we give a theoretical argument when
+C ¼ 0, in Appendix B 3. We also have extensive numerical
+evidence for this when C ≠ 0.
+The above discussion implies that we can consider any
+⃗ o (which only
+defect Hamiltonian, and extract So and P
+depend on o) by suitably defining δΦW;o and nW;o along
+with the appropriate Burgers vector. To simplify the
+disclination charge calculation of So we often choose
+o ¼ o , but this is not a requirement of the theory.
+
+C̃M0 ;o jΨi ¼ e2πilo =M jΨi;
+
+PHYS. REV. X 13, 031005 (2023)
+
+hΨðmÞjT̃ y jΨðmÞi ¼ e−γþi2πpλ;y :
+
+ð20Þ
+
+In our numerics we define λ using Eq. (59). In particular,
+we find empirically that there exist special choices of λ
+for which pλ;y determines the quantized polarization Po;y
+throughout the Hofstadter butterfly, as follows.
+We find that for the Hofstadter model, for appropriately
+chosen λ, the amplitude e−γðmÞ in general oscillates as a
+function of m and it vanishes for certain special values
+of m. Whenever the amplitude is nonzero, the linear
+momentum is found to obey the following relation:
+
+ð17Þ
+
+031005-7
+
+pλ;y ðmÞ ¼ −Po;y m þ K y mod 1;
+
+ð21Þ
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+where K y is piecewise constant in m (it can jump at the
+values of m where the amplitude vanishes). The numerical
+data of pλ;y are shown in Fig. 18.
+The origin o is determined as follows. We first define a
+point ō, referred to as the “gauge origin” for the vector
+potential, which has the property that the holonomy of the
+vector potential is trivial along the x and y cycles of the
+torus that meet at ō [see Eq. (56)]. Then the origin o used to
+⃗ o is expressed in terms of ō; see Eq. (61).
+obtain P
+In defining T̃ y we in principle have the freedom to
+combine it with an arbitrary global U(1) rotation:
+
+along î. Let us first consider î ¼ x̂. Then we can calculate
+the 1D polarization using Resta’s formula [25]:
+
+T̃ y → T̃ y eiχ N̂ ;
+
+ð22Þ
+
+which corresponds to a shift λj → λj þ χ for each j. Once o
+is fixed, then χ is fixed to be an integer multiple of ϕ by
+fixing the flux through a dislocation created using T̃ y , as
+explained in Sec. V and Appendix C. Thus we only need to
+consider the case where
+χ ¼ ϕvx ¼
+
+2πm
+v;
+Lx Ly x
+
+ð23Þ
+
+ð24Þ
+
+If we consider only the term linear in m, this implies that
+Po;y → Po;y − κvx ¼ Po;y mod 1:
+
+1
+ið2π=Lx Þ
+arghΨje
+2π
+
+P
+
+j n̂
+j x j
+
+jΨi:
+
+ð26Þ
+
+The above expression depends on a choice of origin Ox
+for jx, which we make explicit, i.e., jx ∈ f−Ox ; 1 − Ox ;
+2 − Ox ; …; Lx − 1 − Ox g. Empirically, we find that
+−P O;x ¼
+
+Ckϕ
+L þ Ly Po;y þ K 0 mod 1;
+2π y
+
+ð27Þ
+
+where k ≔ ðLx =2Þ − ōx þ Ox . Knowing the value of k is
+not crucial in extracting Po;y . This result agrees with a field
+theory prediction which we derive in Sec. V D.
+Similar to the linear momentum calculation, we extract a
+⃗ o that is consistent with other approaches only
+value of P
+when o, O satisfy a certain relation; see Eq. (75). This
+calculation is independent of the specific details of the
+gauge, as long as Φy is linear in ϕ. The full discussion is
+contained in Sec. V D.
+III. BASIC PROPERTIES OF LATTICE DEFECTS
+
+for some integer vx. Under such a shift in T̃ y ,
+pλ;y → pλ;y þ mvx ν
+
+
+Cm
+þκ :
+¼ pλ;y þ mvx
+Lx Ly
+
+P O;x ¼
+
+ð25Þ
+
+Note that one could consider the case where vx is
+fractional but quantized, and this would effectively correspond to a shift of the HSP o by ðvx ; 0Þ to a different HSP,
+as we explain in Sec. V.
+Analogous equations hold for Po;x, if we instead
+start with a Landau-like gauge along x. Furthermore,
+our procedure straightforwardly generalizes to rotational
+symmetries of order M ¼ 2, 3, 4, 6; we discuss this in
+Sec. VI D.
+⃗ o by studying the expectation
+We have also measured P
+values of a partial translation operator T̃ y jD, which is T̃ y
+restricted to some suitably chosen region D. This method
+⃗ o consistent with
+also allows us to extract a quantized P
+dislocation charge, for a suitable choice of ō and of the
+region D, when M is even. We discuss this further in
+Secs. V and VI D.
+⃗ o from dimensional reduction and 1D polarization
+4. P
+One can also define a 1D polarization along the î
+direction by treating the system as an effectively 1D system
+
+Before discussing the numerical calculations in detail,
+we review some useful background material on lattice
+defects and their properties. A more extensive background
+review is found in Appendix A. The quantum mechanical
+details of constructing a defect Hamiltonian Hdefect through
+a cut-and-glue procedure are described in detail for dislocation defects in Appendix C.
+We illustrate the procedure for constructing a dislocation
+defect in Fig. 3. First we make a cut on an infinite clean
+lattice and define the left (L) and right (R) sides of the cut.
+We replace all bonds that cross the cut so that a point Li ,
+originally connected to some point Ri , is now connected to
+
+Riþb⃗  . Here b⃗ is an integer vector related to the dislocation
+Burgers vector, which we define below.
+We illustrate the construction of a disclination defect in
+Fig. 4. We draw two rays l1 , l2 which meet at the point o ,
+such that l2 is obtained from l1 by rotating about o through
+the angle Ω > 0. Now we delete all points within the wedge
+enclosed by l1 and l2 , except those that lie exactly on l1 . We
+then reconnect the bonds so that a link i1 j (where i1 lies on
+l1 ) is replaced by a link i1 j0 , where j0 is obtained from j
+upon rotating by Ω about o .
+The disclination angle Ω can be directly measured
+from the defect lattice alone. It is the angle by which a
+unit vector is rotated upon being parallel transported around
+the defect. “Pure” dislocation defects are those with zero
+disclination angle. They are characterized by a dislocation
+⃗ which is defined as follows. Starting
+Burgers vector b,
+from a point o, consider a sequence of lattice translations
+which encircles the defect (and no other defects) in
+
+031005-8
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+
+FIG. 3. Dislocation construction on a square lattice. (a) Drawing
+a cut in the ŷ direction. (b) Conjugate hoppings. (c) Doing local
+moves. (d) Reorganizing.
+
+counterclockwise fashion, and ends at o. For a dislocation,
+the sum of these translations will not equal zero, but instead
+⃗ The above
+some integer vector, which we define as b.
+dislocation construction gives two dislocations at the two
+
+ends of the cut, with b⃗ ¼ b⃗ . For a pure dislocation,
+the shape of the loop and the choice of o do not affect the
+⃗
+value of b.
+The Burgers vector of a disclination with Ω ≠ 0 can be
+measured similarly; note that o and o need not be related.
+Importantly, the Burgers vector when Ω ≠ 0 sensitively
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 5. (a) A pure disclination with Ω ¼ ð2π=3Þ created using
+C̃3;o via a cut-and-glue construction. The disclination core o is
+marked as ×. We can define a “frame,” i.e., an x, y basis at every
+point on the defect lattice (they are plotted at the four plaquette
+centers near the disclination). The frame rotates by −2π=3 upon
+crossing the green dotted branch cut which passes through o
+and o. We calculate b⃗ o ¼ v⃗ 1 þ v⃗ 2 þ v⃗ 3 þ v⃗ 4 for different o.
+(b) o at a plaquette center. f⃗v1 ; v⃗ 2 ; v⃗ 3 ; v⃗ 4 g ¼ fð−1; 1Þ; ð−1; 0Þ;
+ð0; −1Þ; ð1; −1Þg. (c) o at one of the sites. f⃗v1 ; v⃗ 2 ; v⃗ 3 ; v⃗ 4 g ¼
+fð−2=3; 1=3Þ; ð−1=3; −1=3Þ; ð1=3; −2=3Þ; ð2=3; −1=3Þg. (d) o at
+the other site. f⃗v1 ; v⃗ 2 ; v⃗ 3 ; v⃗ 4 g ¼ fð−1=3; 2=3Þ; ð−2=3; 1=3Þ;
+ð−1=3; −1=3Þ; ð1=3; −2=3Þg.
+
+depends on the choice of o, assuming o is fixed. If we shift
+o → o þ v⃗ , then
+b⃗ oþ⃗v ¼ b⃗ o þ ½1 − UðΩÞ⃗v:
+
+ð28Þ
+
+This is derived in Appendix A. As an illustration, Fig. 5
+shows the same Ω ¼ ð2π=3Þ disclination but with different
+Burgers vectors depending on the choice of o. Since
+⃗ to be an integer vector should give us
+choosing v⃗ ¼ Λ
+an equivalent characterization of the defect, we have the
+equivalence:
+⃗
+b⃗ o ≃ b⃗ o þ ½1 − UðΩÞΛ:
+
+FIG. 4. Cut-and-glue procedure of constructing a disclination.
+(a) Original lattice on an open plane. (b) Cutting. (c) Gluing; this
+creates new plaquettes ζ i . (d) Reorganizing.
+
+ð29Þ
+
+Thus, if v⃗ is fractional, b⃗ oþ⃗v will not be equivalent to b⃗ o .
+If Ω ¼ ð2πk=M0 Þ where k, M 0 are coprime, the distinct
+classes of Burgers vectors form a group K M0 as defined
+in Sec. II.
+Note that our construction ensures the following relation:
+
+031005-9
+
+b⃗ o ≃ ð0; 0Þ;
+
+ð30Þ
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+which can be verified by constructing the various classes of
+disclinations for M ¼ 2, 3, 4, 6. Setting o ¼ o thus ensures
+that the defect has trivial Burgers vector. This is a convenient
+choice to make in the following sections. Note that we
+sometimes also use the notation b⃗ o ∈ ½ð0; 0Þ to indicate that
+b⃗ o is in the same equivalence class of (0, 0).
+IV. CALCULATION OF So ON THE
+SQUARE LATTICE
+This section and the next are devoted to numerically
+checking the predictions of the field theory for the square
+lattice. This section reviews and generalizes the main
+results from Ref. [33]. Analogous calculations for
+M ¼ 2, 3, 6 are discussed in Sec. VI.
+We fix our origin at a HSP o which has fourfold
+rotational symmetry. There are two choices, α and β, as
+shown in Fig. 2. α denotes the center of the unit cell, while
+β denotes a corner. For calculations on the simplest square
+lattice, we pick the unit cell shown in Fig. 6(c), where α
+corresponds to a plaquette center and β corresponds to a
+site. Note that the formulas for o ¼ γ are contained in the
+discussion for C2 symmetric systems given in Sec. VI.
+For either choice of o, we have two topological invariants,
+⃗ o ¼ 1 Po ð1; 1Þ. So is defined mod 4 and satisfies
+So and P
+2
+So ¼ ðC=2Þ mod 1. Po is an integer defined mod 2.
+We extract So in two physically different ways, through
+the disclination charge and the angular momentum of flux.
+The exact choice of unit cell does not affect the final result;
+we show this in Appendix D.
+A. Symmetry operators
+First we define the magnetic rotation operator C̃4;o
+which is used to create a disclination centered at o ¼ α, β:
+
+PHYS. REV. X 13, 031005 (2023)
+i
+
+C̃4;o ≡ Ĉ4;o e
+
+P
+
+λ c† c
+j j j j
+
+:
+
+ð31Þ
+
+We require that a system with a pure disclination at o
+constructed using C̃4;o has flux ϕ in each regular unit cell.
+This condition forces C̃44;β ¼ þ1 [33]. When o ¼ β, all
+unit cells are regular, and then this condition in fact
+completely fixes λj ; this is an example where there is a
+unique canonical choice for the rotation operator C̃4;o
+(once the Hamiltonian is fixed). For consistency in the
+definitions of our operators, we demand that C̃44;α ¼ þ1
+as well.
+We also define translation operators T̃ x and T̃ y which
+obey the magnetic translation algebra:
+P †
+iϕ
+c c
+−1
+j j j:
+¼
+e
+ð32Þ
+T̃ −1
+T̃
+T̃
+T̃
+y x
+y
+x
+The gauge transformations used to define the translation
+operators are discussed in Sec. V.
+B. Construction of clean Hamiltonian Hclean
+In our numerical work we consider the Hofstadter model,
+which has a spinless free fermion Hamiltonian of the form
+X
+Hclean ¼ − tij c†i cj þ H:c:;
+ð33Þ
+hiji
+
+where the nearest-neighbor hopping terms tij ¼ teiAclean;ij
+depend on a background vector potential Aclean , which
+assigns flux ϕ per unit cell. The parameters in Hclean are
+discussed in detail in Appendix A.
+Although we mainly consider nearest-neighbor hopping
+in our numerics, our theoretical predictions as well as
+our numerical scheme apply much more generally. For
+
+FIG. 6. Pure disclinations with two different o. (a) o ¼ β and (b) o ¼ α. The disclination core o is marked as ×. The weightings wtðiÞ
+within a representative choice of W are marked near each site. When o ¼ α, there is an irregular unit cell at the disclination core. (c) The
+unit cell choice; black solid lines represent hoppings.
+
+031005-10
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+example, we can consider arbitrary next-neighbor hoppings. To illustrate this, in Appendix H we give evidence
+showing that invariants extracted numerically in the square
+lattice Hofstadter model remain well defined upon adding
+next-neighbor hopping terms. Below we also argue that our
+procedure works if Hclean has N-body interaction terms
+for N > 2.
+An important point is that we require the magnetic field
+B to be defined everywhere within the unit cell. This means
+that the total magnetic flux within any subregion of the unit
+cell is specified as a real number. This requirement goes
+beyond what is directly specified by the crystalline symmetry (which only demands flux ϕ mod 2π per unit cell).
+But it is a physically natural requirement, since the most
+general lattice models with the given symmetry have some
+small amount of further neighbor hopping, between different points within a single unit cell. In fact, specifying a
+nearest-neighbor Hamiltonian with just ϕ mod 2π is ill
+defined in a sense, because it does not specify how to
+consistently perturb the model with further neighbor hopping terms. Such a specification requires a choice of ϕ as a
+real number, not just modulo 2π.
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 7. Region W for a square lattice dislocation with
+b⃗ ¼ ð1; 0Þ. The weightings wtðiÞ are labeled on each relevant
+MWP. Dashed lines represent unit cell boundaries, and colored
+circles represent the MWPs: α (red), β (blue), and γ (green).
+
+QW ¼
+
+X
+wtðiÞQi :
+
+ð34Þ
+
+C. So from disclination charge
+
+i∈W
+
+1. Construction of defect Hamiltonian Hdefect
+
+The weights wtðiÞ are defined in Sec. II; this definition
+ensures that QW þ QW 0 ¼ QW⊔W 0 when two regions W, W 0
+overlap only on their boundaries, as required by the
+response theory. Note that the value of QW depends on
+the definition of the unit cell.
+This method of measuring QW applies to any local
+gapped Hamiltonian, even if it has interaction terms. As
+long as the system has a correlation length much smaller
+than the linear size of W, the ambiguity in Hdefect near the
+defect core will not affect the value of QW for sufficiently
+large W.
+The next issue is how to assign this charge to the
+different terms in the response theory, which predicts that
+for large enough W,
+
+Start with a clean lattice Hamiltonian Hclean which
+depends on a background U(1) vector potential Aclean
+through the variables eiAij;clean . Suppose we create a
+lattice disclination (a detailed construction can be found
+in Ref. [33]), and arrive at a defect Hamiltonian
+Hdefect ½eiAij;defect  through a cut-and-glue procedure. Here
+Adefect is the vector potential on the defect lattice. Note that
+irregular unit cells may exist at the center of each defect.
+For example, there could be a triangular unit cell at the
+center of an Ω ¼ ðπ=2Þ disclination [see Fig. 6(b)], or a
+triangular unit cell at the center of a square lattice
+dislocation (see Fig. 7). Irregular unit cells can have
+different shapes depending on the value of M.
+Away from the defect, the flux in any region is fully
+determined by Aclean, and we can ensure that the system has
+flux ϕ per unit cell. However, the flux in the immediate
+vicinity of the defect depends on Aclean as well as on the
+definition of the symmetry operator which creates the
+defect. In particular, if we require a specific value of flux
+in the unit cells immediately adjacent to the defect, there
+will be a constraint on the definition of the symmetry
+operators we use.
+
+QW ¼ C
+
+ð35Þ
+
+Here Ω and b⃗ o are the disclination angle and Burgers vector
+of the defect, respectively. We fix b⃗ o ¼ ð0; 0Þ throughout
+⃗ o does not contribute (this is
+this section, so the term with P
+equivalent to saying that o ¼ o ).
+The parts of this equation which require special care are
+δΦW;o and nW;o [44]. We discuss how to define these below.
+
+2. Charge prediction from field theory
+Having fixed Hdefect , we compute the charge QW in a
+region W containing the defect. We always require that the
+boundary of W coincides with the boundary of a unit cell.
+This ensures that the only irregular unit cells in W are near
+the center of the defect. QW is defined by the formula
+
+δΦW;o
+Ω
+⃗ o · b⃗ o þ νnW;o mod 1:
+þ So þ P
+2π
+2π
+
+3. Definition of δΦW;o and nW;o
+δΦW;o is, intuitively, the excess flux in the region W. To
+define the excess flux, we must compute the flux in W, and
+compare it to some background reference flux. There are
+two possibilities. If o ¼ β, then all unit cells in W are
+
+031005-11
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+regular [see Fig. 6(a)], and nW;β ¼ 0 mod 1. Here δΦW;o ¼ 0
+if all unit cells have flux ϕ. On the other hand, if o ¼ α,
+then there is an irregular unit cell at the disclination core
+[see Fig. 6(b)].
+In general, we can arrange to have at most one irregular
+unit cell in the core of the defect, with some flux ϕirreg
+which is determined by our choice of rotation operators. Its
+area is denoted nirreg;o , which can be fractional. Note that
+
+δΦW is independent of the details of the Hamiltonian, in
+particular if there are further neighbor hopping terms and
+interaction terms. Therefore we expect that So can be
+robustly extracted for any Hclean with a symmetric, gapped
+ground state.
+
+nW;o ¼ nirreg;o mod 1:
+
+ð36Þ
+
+Then, if we choose our symmetry operators so that the
+flux through each regular unit cell in Hdefect is ϕ, we have
+δΦW;o ¼ ϕirreg − nirreg;o ϕ:
+
+ð37Þ
+
+Thus the value of δΦW;o depends on the value we assign
+to nirreg;o .
+4. Computation of nirreg;o
+If o ¼ β, there are no irregular unit cells, as discussed
+above, so we simply define nirreg;β ¼ 0 mod 1. If o ¼ α, we
+find nirreg;α ¼ 34 mod 1. A heuristic argument is that the
+cut-and-glue procedure for a π=2 disclination removes 1=4
+of a unit cell at the disclination center; i.e., the irregular
+unit cell at the disclination core consists of three subcells.
+Each subcell contributes 1=4 of a full unit cell; therefore,
+nirreg;α ¼ 34 mod 1. (A consistency check on this result is to
+demand that the value of So corresponding to some
+physical point o be the same whether we choose the unit
+cell to satisfy o ¼ α or o ¼ β. If nirreg;β ¼ 0 mod 1, we find
+it necessary to have nirreg;α ¼ 34 mod 1.)
+We note that the previous step involves another subtlety.
+Even if we know nirreg;o, there can be a further ambiguity in
+δΦW;o . If nirreg;o is an integer, then Eq. (37) is perfectly well
+defined modulo 2π. However, if nirreg;o ¼ a=b is a fraction
+with a, b coprime, δΦW;o is not invariant under the
+transformation ϕ → ϕ þ 2π. To keep δΦW;o invariant, we
+need to pick a lift of ϕ from ½0; 2πÞ to ½0; 2πbÞ. But this is
+why we insist on specifying the actual magnetic field
+everywhere in the unit cell. This fixes ϕ as a real number,
+not just mod 2π, and so fractions of ϕ can be defined
+unambiguously.
+5. Computing So
+
+We can also compute So from the angular momentum
+eigenvalues of C̃4;o after inserting additional flux, if we
+set o ¼ o . On the torus, there are two positions on the
+torus that are left invariant under a Ĉ4;o rotation, o and
+o þ ðL=2; L=2Þ. If L is odd, then the two positions are not
+the same point in the unit cell. This is deemed unnatural
+since we only want a single origin. Thus, we consider an
+even length system on a torus, insert m total flux quanta
+uniformly, and define
+C̃4;o jΨðmÞi ≡ eiðπ=2Þlo jΨðmÞi:
+
+ð39Þ
+
+The field theory predicts that there will be a contribution to
+lo which equals Sm. Indeed, we numerically find that
+lo ðmÞ ¼
+
+Cm2
+þ mSo þ KðC; LÞ mod 4:
+2
+
+ð40Þ
+
+The numerical data are shown in Fig. 18. Additional
+technical details in these calculations, in particular a
+discussion of partial rotations, can be found in Ref. [33].
+E. Application to Hofstadter model
+Reference [33] obtained So for the Hofstadter model,
+taking o ¼ β to be at a site. Here we also study the case
+where o ¼ α is at a plaquette center. The values of So
+obtained using both disclination charge and angular
+momentum are consistent. In the limit of small ϕ and ν,
+our procedure also agrees with known results for con2
+tinuum Landau levels, i.e., So ¼ C2 mod 4 for either o ¼ β
+or o ¼ α. The Hofstadter butterflies for So are plotted
+in Fig. 1.
+We find that they obey the following empirical formulas
+(recall that β is chosen to be a site). For C > 0,
+ 
+X C þ q
+C2
+Cϕ
+Sβ ðϕÞ ¼
+þ2
+mod 4;
+− ðC þ 1Þ
+2π
+2q
+2
+p=q<ϕ=2π
+odd q
+
+For a π=2 disclination with b⃗ o ¼ ð0; 0Þ, Eq. (35) predicts
+that
+δΦ
+So
+¼ QW − νnW;o − C W;o mod 1:
+4
+2π
+
+D. Angular momentum of flux
+
+ð38Þ
+
+This determines So =4 mod 1 in terms of well-defined
+quantities. Note that our procedure to define nirreg;o and
+
+ð41Þ
+where the third term of Eq. (41) we sum over all p=q in the
+Farey sequence of order C that satisfy ðp=qÞ < ðϕ=2πÞ and
+q odd. The value of Sβ for C < 0 can be obtained from
+the transformation Sβ ðμ; ϕÞ ¼ 1 − Sβ ð−μ; ϕÞ which flips
+the sign of C. Sβ ¼ 1 for the fully filled state with
+ν ¼ 1, C ¼ 0.
+
+031005-12
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+Similarly, we can set o ¼ α, which is the plaquette
+center. For C > 0,
+ 
+X C þ q
+C2
+Cϕ
+Sα ðϕÞ ¼
+þ2
+mod 4:
+þC
+2π
+2q
+2
+p=q<ϕ=2π
+
+ð42Þ
+
+odd q
+
+The value of Sα for C < 0 lobes can be obtained from the
+transformation Sα ðμ; ϕÞ ¼ 2C − Sα ð−μ; ϕÞ, which flips
+the sign of C. Sα ¼ 0 when C ¼ 0.
+One can verify that Sβ has period 2π in ϕ, but Sα has
+period 8π in ϕ. The physical reason is that the defect lattice
+with o ¼ α has a triangular plaquette at the disclination
+core. Under ϕ → ϕ þ 2π, the background flux through this
+triangular plaquette transforms as 3ϕ=4 → 3ϕ=4 þ ð3π=4Þ.
+Therefore Hdefect is invariant under ϕ → ϕ þ 8π up to
+gauge transformations.
+
+we find that when b⃗ ¼ ð0; 1Þ,
+ϕirreg ¼ Aj0 ;j0 þŷ − λj0 ;
+
+QW ¼ C
+
+⃗ o from dislocation charge
+A. P
+First we consider the charge bound to a single dislocation
+(for an explicit construction of such a dislocation defect,
+see Appendix C). We follow the procedure outlined in
+Sec. IV C; similar arguments can be applied in this case.
+For a defect with zero disclination angle and dislocation
+Burgers vector b⃗ ¼ ð0; 1Þ or ð1; 0Þ, there is a triangular
+plaquette at the dislocation, and all other plaquettes within a
+large radius are ensured to be regular through our construction. Suppose the triangular plaquette has flux ϕirreg . If
+the translation operator used to construct the dislocation is
+P
+i
+λ n̂
+T̃ y ¼ T̂ y e j j j ;
+
+ð43Þ
+
+where j0 is a specific point in the irregular unit cell at the
+dislocation (see Appendix C 2 for a proof). Thus, the value
+of ϕirreg is set by the combined choice of A, λ, and j0 . In
+particular, we show in Appendix C 2 that for vx ∈ Z, the
+following transformations all take ϕirreg → ϕirreg þ ϕvx :
+(1) taking j0 → j0 þ ðvx ; 0Þ keeping A, λ fixed; (2) taking
+λj → λj − ϕvx for each j, keeping A and j0 fixed. (Here we
+can even take vx ∈ R.) In this section it turns out that fixing
+a precise value of ϕirreg is not essential, but the above
+discussion is also useful in Sec. V C.
+The field theory predicts that the total charge in a region
+W surrounding the dislocation is
+
+⃗ o ON THE
+V. CALCULATION OF P
+SQUARE LATTICE
+⃗ o for
+We next discuss three different ways to calculate P
+o ¼ α, β directly on the square lattice, using dislocation
+charge, linear momentum, and a 1D polarization response.
+(The case o ¼ γ is handled in Sec. VI.) In fact, we show that
+⃗ α; P
+⃗ β can also be computed if we know Sα, Sβ alone: see
+P
+the results in Table I, in particular Eq. (8). These results are
+derived in Sec. VII and Appendix G. So in principle we can
+also measure the polarization indirectly from the disclination charge and angular momentum responses. All the
+⃗ αðβÞ , and
+calculations yield the same numerical values of P
+are consistent with field theory predictions.
+In this section we will not require the rotation operator
+C̃4;o , but still use the translation operators satisfying
+Eq. (32). Note that in Secs. V and VI and the related
+Appendixes C and E we use A to denote the entire vector
+potential on a lattice without dislocation or disclination
+defects, so A has the same meaning as Aclean from the
+previous section. The vector potential in a system with
+lattice defects is denoted as Adefect .
+
+PHYS. REV. X 13, 031005 (2023)
+
+δΦW;o Po
+þ
+þ ðk þ nirreg;o Þν mod 1;
+2π
+2
+
+ð44Þ
+
+where we write nW;o ¼ k þ nirreg;o for some integer k. Here
+nirreg;o is the effective number of unit cells we assign to the
+irregular unit cell at the dislocation. We use the subscript o
+in nirreg;o because the value assigned to it will turn out to be
+different for different high symmetry points o.
+Recall from the general discussion in Sec. IV C that if all
+regular unit cells have flux ϕ,
+δΦW;o ¼ ϕirreg − ϕnirreg;o ;
+where ϕnirreg;o is the background flux assigned to the
+dislocation plaquette.
+Next we determine nirreg;o . First we consider o ¼ β (see
+Fig. 7). The choice of nirreg;β should satisfy a few sanity
+checks. First, it should lead to an integer-valued Pβ .
+Numerically, only nirreg;β ¼ 0 or 1=2 give integer values
+of Pβ ; this can also be seen directly from Eq. (44) by
+looking at the limit of zero Chern number and ν ∈ Z.
+Second, the system with the same Hamiltonian but
+with all orbitals filled has zero Chern number. It can be
+adiabatically connected to one in which the points in the α,
+β, γ maximal Wyckoff positions have integer charge N α ,
+N β , N γ , respectively. In this situation, the polarization can
+also be defined using the dipole moment within each
+subcell, and it is possible to show, independent of any
+dislocation charge calculation, that
+Pα ¼ N β þ N γ mod 2;
+
+ð45Þ
+
+Pβ ¼ N α þ N γ mod 2:
+
+ð46Þ
+
+See Appendix B for the details. Now we show that Eq. (44)
+only agrees with this result if we set nirreg;β ¼ 12.
+
+031005-13
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+To derive this explicitly, consider Fig. 7. We choose W
+so that ∂W overlaps with β sites. Using our weighting
+procedure, we get
+
+TABLE IV. nirreg;o;b⃗ for all possible high symmetry points o, for
+M ¼ 2, 3, 4, 6. Points belonging to the same MWP that rotate into
+each other are given the same fβ; γg symbol but are distinguished
+by their coordinates, measured with respect to α. M0 is the site
+symmetry group at o.
+
+QW ¼ 7N α þ 7.5N β þ 15.5N γ ;
+
+ð47Þ
+
+nirreg;o;b⃗
+
+while from the field theory, if we set o ¼ β,
+Pβ
+mod 1;
+QW ¼ κð7 þ nirreg;β Þ þ
+2
+
+ð48Þ
+
+where κ ¼ N α þ N β þ 2N γ . Using Eq. (46) in the above
+equations, and simplifying, we obtain nirreg;β ¼ 1=2 mod 1.
+The above calculation was done in a limit with Chern
+number zero. We now assume that nirreg;β ¼ 1=2 even when
+C ≠ 0. This is reasonable because in the actual model under
+study, changing the Chern number should not change
+nirreg;β . After this step, we get the following prediction:
+QW ¼
+
+
+
+Pβ
+δΦW;β
+1
+þ kþ νþC
+mod 1;
+2
+2
+2π
+
+ð49Þ
+
+where W encloses only one dislocation, with one triangular
+plaquette. Note that
+δΦW;β ¼ ϕirreg −
+
+ϕ
+2
+
+is completely well defined mod 2π since ϕ is specified as
+a real number (see Sec. IV C 4). This allows us to find
+Pβ mod 2 unambiguously.
+Now let us discuss Pα . Again consider Fig. 7. Let us use
+the exact same W (i.e., the same unit cell choice), so
+QW ¼ 7N α þ 7.5N β þ 15.5N γ :
+
+Pα
+mod 1:
+2
+
+o
+
+M0
+
+nirreg;o;b¼ð1;0Þ
+⃗
+
+nirreg;o;b¼ð0;1Þ
+⃗
+
+2
+2
+
+α
+β
+
+2
+2
+
+0
+
+0
+
+γ
+δ
+
+1
+2
+
+2
+2
+
+2
+2
+
+1
+2
+1
+2
+
+4
+4
+
+α
+β
+
+4
+4
+
+4
+4
+
+γ2
+γ1
+
+2
+2
+
+3
+3
+
+α
+β
+
+3
+3
+
+3
+
+γ
+
+3
+
+6
+6
+
+α
+β1
+
+6
+3
+
+6
+
+β2
+
+3
+
+6
+
+γ1
+
+2
+
+0
+
+6
+
+γ2
+
+2
+
+6
+
+γ3
+
+2
+
+1
+2
+1
+2
+
+ð51Þ
+
+In the Chern number 0 limit, demanding consistency with
+Eq. (45) implies that nirreg;α ¼ 0 mod 1.
+We have thus found that nirreg;o depends on whether o lies
+at the corner or the center of a unit cell. The values of nirreg;o
+are tabulated in Table IV. When we consider other values of
+M in Sec. VI, we again find that nirreg;o must be fixed for
+each o by requiring consistency with analytical results in
+the limit of full filling.
+B. Application to Hofstadter model
+We apply Eq. (49) to the usual square lattice Hofstadter
+model, choosing α at a plaquette center and β at a site as
+
+0
+
+0
+
+1
+2
+
+0
+
+0
+
+1
+2
+1
+2
+
+1
+2
+
+0
+
+0
+
+1
+2
+
+0
+
+0
+
+1
+3
+2
+3
+
+2
+3
+1
+3
+
+0
+
+0
+
+1
+3
+2
+3
+
+2
+3
+1
+3
+1
+2
+
+0
+1
+2
+
+before. The Hofstadter butterfly for Pβ is plotted in Fig. 1.
+Pβ follows the empirical formula:
+
+ð50Þ
+
+However, if we choose o ¼ α, the field theory now
+predicts that
+QW ¼ κð7 þ nirreg;α Þ þ
+
+M
+
+Pβ ðϕÞ ¼ Cκ mod 2:
+
+ð52Þ
+
+Note that Pβ has period 4π in ϕ and not 2π, because its
+definition involves the quantity ϕ=2. [Also, if ϕ → ϕ þ 2π
+for fixed ν, Eq. (52) changes by C mod 2 so a shift of 4π is
+needed to leave it invariant.] We use Eq. (52), along with an
+eigenvalue database [34], to generate the Hofstadter butterfly for Pβ in Fig. 1. We have only plotted it for 0 < ϕ ≤ 2π.
+The values for 2π < ϕ ≤ 4π can be obtained either using
+Eq. (52) or by reflecting the butterfly about ϕ ¼ 2π.
+Similarly, with α at a plaquette center, and nirreg;α ¼ 0,
+we find that
+Pα ¼ ðC þ 1Þκ mod 2:
+
+ð53Þ
+
+Pα has period 2π in ϕ, and is also plotted in Fig. 1.
+Shifting ϕ → ϕ þ 2π for fixed ν changes Eq. (53) by
+CðC þ 1Þ mod 2, but as CðC þ 1Þ is even, this change is
+trivial.
+
+031005-14
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+Finally, note that there is a general relation between Pα
+and Pβ which goes beyond just the Hofstadter model:
+Pα − Pβ ¼ κ mod 2:
+
+ð54Þ
+
+Equation (54) can be proven from field theory; we do this
+in Sec. VII.
+⃗ o from linear momentum
+C. P
+⃗ o =2πÞ ·
+On a closed manifold, the field theory term ðP
+⃗
+⃗
+⃗
+A ∧ T can be rewritten as ðPo =2πÞ · R ∧ F, plus some
+additional terms, where F is the total magnetic flux, and
+⃗ ¼ ðX; YÞ is the translation gauge field mentioned below
+R
+Eq. (13). Consider the linear momentum in, say, the y
+direction associated to a state with total flux 2πm ¼ ϕLx Ly .
+The linear momentum of the inserted flux, which is the
+charge under the translation gauge field, is predicted to
+receive a contribution,
+Z
+δL Po;y
+1
+¼
+F ¼ Po;y m ¼ Po m mod 1; ð55Þ
+δY 0
+2
+2π
+from this term. The mod 1 normalization is due to the
+convention chosen to define Y. We now verify this
+prediction from numerical calculations on the Hofstadter
+model for o ¼ α, β by studying the system on a torus.
+On a torus with magnetic flux 2πm ¼ ϕLx Ly , a translation by y cannot be an exact symmetry of the Hamiltonian
+in general, even after applying a gauge transformation.
+This
+H
+is because, for a fixed x, the holonomy Ax dx along a
+noncontractible cycle of the torus changes by 2πm=Ly
+under T̃ y. If ðm=L
+H y Þ ∈ Z, T̃ y is an exact symmetry because
+the change in Ax dx can be undone by a large gauge
+transformation. For other values of m, T̃ y needs to be
+accompanied by an operator F 2πm=Ly which adiabatically
+inserts flux 2πm=Ly through the cycle running along x, to
+make it an exact symmetry. In our work we do not use the
+exact translation operator because it is difficult to numerically implement F 2πm=Ly .
+If the value of jmj mod Ly is of order 1, the inserted flux
+from F 2πm=Ly is Oð1=Ly Þ, which vanishes in the thermodynamic limit; therefore, T̃ y ≃ T̃ y F 2πm=Ly is a good
+approximation [20]. For general values of m, we find that
+the expectation value of T̃ y oscillates between 0 and 1 in
+amplitude as a function of m (indicating the closeness of the
+approximation).
+Apart from the flux in each unit cell, the vector potential
+has another gauge-invariant quantity called the gauge origin
+ō, which we define below. The operator T̃ y also requires us
+to fix a gauge transformation fλj g. The main result of this
+section is that for a fixed system size and a fixed choice of
+⃗ o is
+o, we find only one choice of ō and λ for which P
+
+PHYS. REV. X 13, 031005 (2023)
+
+quantized throughout the Hofstadter model. And remark⃗ o agrees with results from the
+ably, this value of P
+dislocation charge calculation.
+⃗ o using the
+We find that we can similarly measure P
+expectation value of a partial translation operator T̃ y jD
+(again not an exact symmetry), which is T̃ y restricted to an
+appropriate region D. Further details of the linear momentum calculations are found in Appendix E.
+1. Definition of vector potential
+We assume, as in the charge calculation, that the
+holonomies of the vector potential A can be specified
+along any loop in the continuum in which the lattice is
+embedded. We define a gauge-invariant point, the gauge
+origin ō ¼ ðōx ; ōy Þ, such that the holonomy of A is zero on
+the x and y cycles of the torus that intersect ō. Note that ō
+need not correspond to a lattice site in general. Vector
+potentials with different values of ō are not gauge equivalent, and are distinguished in the treatment below.
+To measure Po;y in our numerics, we insert a total of m
+flux quanta on the torus using a Landau-like gauge along y.
+One form of this gauge, shown in Fig. 8, is
+Aj;jþx̂ ¼ −
+Aj;jþŷ ¼
+j ¼ ðjx ; jy Þ;
+
+2πðy − ōy Þm
+δjx ;Lx −1 ;
+Ly
+
+2πðx − ōx Þm
+;
+Lx Ly
+
+jx ∈ f0; …; Lx − 1g;
+
+jy ∈ f0; …; Ly − 1g:
+ð56Þ
+
+FIG. 8. Gauge choices defined in Eq. (56) on an Lx × Ly
+torus. Each blue arrow represents a vector potential Aij ¼
+ð2π=Lx Ly Þ. Each red arrow represents a vector potential
+Aij ¼ ð2π=Ly Þ. ōx and ōy mark the distance between (0,0)
+and the cycle with trivial holonomy in the x and y directions,
+respectively. The blue region is the partial translation region D
+which is centered around ōx þ ðLx =2Þ.
+
+031005-15
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+Here, m ≡ ðϕ=2πÞLx Ly is the total number of flux quanta
+through the torus. o can be determined from ō, as we
+explain in the subsequent section.
+To measure Po;x , we define a similar gauge, but instead
+along x.
+
+there may be no solution corresponding to any high
+symmetry point o. But in Appendix C we prove that for
+our choice of A, λ, Eq. (60) can be solved and implies
+
+2. Approximate translation operator
+
+Having fixed λj , we define the linear momentum pλ;y as
+the expectation value of T̃ y in the ground state jΨi with m
+total flux quanta:
+
+Next we define the operator
+P †
+i
+λc c
+T̃ y ≔ T̂ y e j j j j :
+
+ð57Þ
+
+λj is a function of m. If T̃ y were an exact symmetry, there
+would be a set fλj g satisfying
+Aiþŷ;jþŷ ¼ Aij − λi þ λj
+
+jx < ōx
+jx > ōx
+
+ð59Þ
+
+jx ¼ ōx :
+
+Here jx is the x coordinate of the site j. For this T̃ y , Eq. (58)
+is violated only on the horizontal links that touch the
+line jx ¼ ōx .
+To measure Po;y , we need to express o in terms of gaugeinvariant properties of A or λ. If we fix A, λ as above, we can
+define o as follows. First, we find the flux ϕirreg in a
+dislocation plaquette created using T̃ y . Recall from
+Sec. VA that ϕirreg depends on A and λ as well as the
+position of the dislocation, which is fixed by a point j0 ;
+and if we shift j0 by an integer vector, ϕirreg can change
+by multiples of ϕ. For the above choices of A and λ, we
+thus define o so as to satisfy the following relation,
+with j0;x ∈ Z:
+ϕirreg ¼ ϕnirreg;o mod ϕ;
+
+ð60Þ
+
+where nirreg;o was computed in Sec. VA. In the language of
+that section, our choice of o ensures that the excess flux
+δΦW;o in the dislocation plaquette constructed using T̃ y is
+zero (mod ϕ). Note that for an arbitrary choice of ϕirreg ,
+
+Lx 1
+þ mod 1:
+2 2
+
+hΨjT̃ y jΨi ≔ e−γþi2πpλ;y :
+
+ð61Þ
+
+ð62Þ
+
+e−γ is the amplitude of the expectation value. Empirically,
+we find that
+
+ð58Þ
+
+everywhere on the torus. But as mentioned above, it is not
+possible to have exact symmetry when m=Ly ∉ Z. Thus we
+can at best ensure that this relation holds everywhere except
+for a small strip that we require to be centered at a fixed x.
+Then the freedom in choosing λ is completely fixed up to
+(i) an overall shift λj → λj þ χ for each j, (ii) the geometry
+of the strip, including the position of its center and its
+thickness, and (iii) the choice of λ for points that lie within
+the strip (if any). We discuss these further below.
+In our numerics we use the gauge
+8
+P
+i
+−ðπm=Ly Þc†j cj
+>
+j
+>
+e
+T̂
+> y
+<
+P
+T̃ y ¼ T̂ ei j ðπm=Ly Þc†j cj
+y
+>
+>
+>
+:
+T̂ y
+
+ox ¼ ōx þ
+
+pλ;y ¼ −Po;y m þ K y mod 1:
+
+ð63Þ
+
+The term linear in m is predicted by the response theory; K y
+is piecewise constant in m in our numerics, and can change
+only when the amplitude vanishes. The numerical details
+are shown in Fig. 18.
+Using the above choice of λ in the Hofstadter model, we
+find that the amplitude e−γ oscillates with m whenever
+C ≠ 0, and for a discrete set of m values it vanishes [45].
+For other values of m, the magnitude is nonvanishing
+and the linear momentum is well defined. As a result,
+for a fixed Lx , we can obtain the expected value of Po;y
+throughout the Hofstadter butterfly except for a finite set of
+ϕ values where Po;y is not determined. But for these ϕ
+values, we can pick some other Lx and then extract Po;y .
+The values of Po;y are quantized and agree with results
+from the dislocation charge measurement.
+Now we discuss alternative choices of λ. First there is the
+freedom in shifting λj → λj þ χ for each j. As stated in
+Sec. VA, taking χ ¼ ϕvx ¼ ð2πmvx =Lx Ly Þ changes the
+flux ϕirreg assigned to an irregular unit cell at a dislocation
+by −ϕvx (where vx ∈ R). If we continue to define o using
+Eq. (60), then when vx is an arbitrary real number there is
+no solution for o. But if vx is quantized to 0 or ð1=2Þ mod 1,
+we see that o must change (in fact, we show in Appendix C
+that ox → ox − vx ). Hence, only discrete sets of global U(1)
+transformations are allowed, and the effect of such transformations is simply to change the value of o.
+There is additional freedom in choosing the strip that
+violates translation symmetry. The location of the center of
+the strip can in principle be shifted by δ ∈ R if we define λj
+as in Eq. (E2) (see Appendix E). In the Hofstadter model,
+we find empirically that in order to get any quantized result
+for Po;y throughout the butterfly, δ must be fixed so that the
+center of the strip coincides with ōx , as in Eq. (59), i.e.,
+⃗ o extracted from the
+δ ¼ 0. Remarkably, the quantized P
+above linear momentum calculation agrees fully with the
+result from dislocation charge calculations.
+
+031005-16
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+When C ¼ 0 in this model, taking δ ≠ 0 is equivalent to
+taking λj → λj þ χ for some χ [46]. In this case any choice
+of δ will give a quantized result Po0 ;y , but for a high
+symmetry point o0 that depends on δ. In Appendix E we
+discuss an alternative way to understand the choice of δ
+using gauge-invariant quantities.
+Empirically, we find that the thickness of the strip does
+not matter, as long as λj varies linearly in jx within the strip
+(otherwise we do not obtain quantized results throughout
+the butterfly for Po;y ). We can pick the parameters fLy ; ōy g
+arbitrarily, and this does not affect the result for Po;y. In the
+limit of zero strip thickness, Eq. (59) is the only choice of λ
+that we have found that gives quantized results throughout
+the butterfly.
+3. Partial translations
+We P
+can also use a partial translation operator T̃ y jD ≔
+i
+
+λ c† c
+
+T̂ y jD e j∈D j j j to extract the same linear momentum. To
+⃗ o, we empirically find that D
+get quantized results for P
+needs to be mirror symmetric
+about some cycle l along
+P
+i
+
+A
+
+which the holonomy e j∈l j;jþŷ is real valued.
+Here we define the linear momentum of a state with m
+flux quanta as
+hΨjT̃ y jD jΨi ≔ e−γD þi2πpλ;y :
+
+ð64Þ
+
+Numerically, we obtain Po through the equation
+pλ;y ¼ −Po;y m þ K y mod 2:
+
+ð65Þ
+
+Here K y is some constant which only depends on the Chern
+number and the system size.
+We find that there are only two choices of the parameters
+fD; ō; λg which give a quantized Po;y throughout the
+butterfly. In one case, (1) D is centered at the cycle
+with x ¼ ōx (trivial holonomy), (2) ō is arbitrary, and
+(3) T̃ y jD ≔ T̂ y jD , i.e., λj ≡ 0 for j ∈ D. However, empirically these choices give Po;y ¼ 0 everywhere in the
+butterfly, which does not agree with the results obtained
+from other methods.
+In the second case, we choose (1) D centered at the cycle
+with x ¼ ōx − ðLx =2Þ [holonomy ð−1Þm ], for each m,
+(2) ō ¼ o þ ðLx =2Þ þ ð12 ; 12Þ, and (3) T̃ y jD is defined as
+
+PHYS. REV. X 13, 031005 (2023)
+
+linear momentum from full translations, and the 1D
+polarization discussed below). We motivate this choice
+further in Appendix E.
+⃗ o from 1D polarization
+D. P
+⃗ o as defined above
+It is natural to ask what the invariant P
+has to do with other traditional many-body definitions of
+the polarization. In this section we provide one concrete
+answer: we consider a torus and compute the 1D polarization along x as defined by Resta [22], treating Ly as a
+parameter. We show that in addition to the usual term
+proportional to C, there is a term Ly Po;y which fixes the
+dependence of the 1D polarization on the dimensionally
+reduced coordinate.
+Consider the 1D polarization in the x direction,
+denoted P x . It is defined by the following action:
+Z
+L1D ¼ −P x dxdtEx ;
+ð67Þ
+where Ex ¼ ∂t Ax − ∂x At is the x component of the electric
+field. In this section we assume that A denotes the entire
+vector potential and not just its deviation from some
+background. The sign in Eq. (67) is chosen so that the
+1D current j satisfies j ¼ ðδL1D =δAt Þ ¼ ∂t P x .
+We now use the ð2 þ 1ÞD field theory to make a
+prediction for P x if the original 2D system is dimensionally
+reduced to an effective 1D system in the x direction. We set
+the rotation gauge field ω to zero for this calculation.
+First consider the term with C:
+Z
+C
+dxdydtA ∧ dA
+4π
+Z
+C
+¼
+CdxdydtðAt B − Ax Ey þ Ay Ex Þ: ð68Þ
+4π
+
+ð66Þ
+
+Here Ex ; Ey ; B are the full electric and magnetic fields,
+respectively. Note that the Chern-Simons term is usually
+written in terms of the deviation of the vector potential from
+some background, but we have instead used the full vector
+potential. This rewriting is motivated by the topological
+field theory, derived in Appendix F, and will be justified by
+the empirical results we show below.
+If Ay ≠ 0 and Ex is independent of y, then we can rewrite
+this term as
+I
+Z
+C
+dxdt
+Ay ðxÞdy Ex þ    ;
+ð69Þ
+2π
+
+This choice of λ; ō; D is the only one we have found that
+gives a quantized but nontrivial result for Po;y throughout
+the butterfly. Furthermore, remarkably this agrees with the
+other methods used in this section (dislocation charge,
+
+This step involves an integration by parts, which contributes a factor of 2. Since the system on the torus is not
+Hexactly translationally symmetric, the holonomy Φy ðxÞ ¼
+Ay ðxÞdy has an x dependence. In order to extract a
+spatially averaged polarization, which is what we calculate
+
+P
+8
+†
+< T̂ j ei j −ðπm=Ly Þcj cj
+y D
+P
+T̃ y jD ≔
+:
+i
+ðπm=Ly Þc†j cj
+T̂ y jD e j
+
+jx ≤ ōx
+jx > ōx :
+
+031005-17
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+microscopically using Resta’s formula below, we assume
+Ex is a constant. Then the above term becomes
+C
+Φ
+2π y;av
+
+Z
+dxdtEx þ    :
+
+ð70Þ
+
+R
+Here, Φy;av ≔ ð1=Lx Þ dxdyAy is the average of the global
+holonomies in the y direction. Thus the Chern number
+contributes to the 1D polarization. The value of Φy;av
+depends on the range of integration for x. If we assume
+Ox ≤ x ≤ Lx þ Ox for some Ox and Φy ðxÞ is continuous in
+this range, we can show that
+
+
+Lx
+Φy;av ¼ ϕLy
+− ōx þ Ox mod 2π:
+2
+
+ð71Þ
+
+Now note that there is also a contribution from the field
+theory term Y ∧ dA:
+Po;y
+2π
+
+Z
+
+dxdydtY ∧ dA
+Z
+Po;y
+¼
+dxdydtðY t B − Y x Ey þ Y y Ex Þ
+2π
+Z
+I
+Po;y
+¼
+dyY y dxdtEx þ   
+2π
+Z
+¼ Po;y Ly dxdtEx þ    :
+
+FIG. 9. Butterflies showing the constant in ϕ contribution
+Ly Po;y þ K 0 of the 1D polarization P O;x , for different Ox and
+Ly . Fixing Lx ¼ 20, the result depends only on the parity of Ly .
+For a fixed O, Po;y is the difference between the ϕ ¼ 0 intercept
+for Ly ¼ 13 and Ly ¼ 12. O and o satisfy the relation Eq. (75).
+For Ox ¼ 12 only half of the period 0 < ϕ < 2π is plotted.
+
+ð72Þ
+
+H
+Note that due to a normalization convention, dyY y ¼
+2πLy . The remaining terms in the field theory do not
+contribute. Thus we naively expect that the 1D polarization
+should be equal to
+
+
+Cϕ
+Lx
+−P O;x ¼
+L
+− ōx þ Ox þ Ly Po;y þ K 0 mod 1;
+2π y 2
+ð73Þ
+where we assume K is a constant that is independent of Lx
+and Ly . We use the subscript O in P O;x to specify the
+dependence of this quantity on Ox . As we now discuss, to
+match Eq. (73) to a numerical calculation, we demand that
+Ox be the origin of coordinates in that calculation.
+Numerically we compute the quantity P O;x using Resta’s
+formula:
+P O;x ¼
+
+1
+ið2π=Lx Þ
+arghΨje
+2π
+
+P
+
+j c† c
+j x j j
+
+jΨi;
+
+Empirically, we find that P O;x exactly obeys Eq. (73).
+Let us take a square lattice with Lx ¼ 20, Ly ¼ 12, 13, and
+Ox ¼ 0; 12 as an example. The constant in ϕ contribution
+Ly Po;y þ K 0 for the two different Ly is plotted in Fig. 9.
+Empirically we find that the difference of the two gives the
+desired answer Po;y when
+ox ¼ Ox þ
+
+ð75Þ
+
+The presence of the ðLx =2Þ þ 12 term may seem mysterious,
+but we show why it should be present in the C ¼ 0
+case below.
+Consider P O;x for a square lattice with one orbital per
+site and at full filling ν ¼ 1. We analytically calculate
+P O;x jν¼1 using Resta’s formula:
+P O;x jν¼1 ¼
+
+X jx
+r
+
+Lx
+
+mod 1
+
+Lx ðLx − 1 − 2Ox Þ Ly
+mod 1
+2
+Lx
+
+
+Lx 1
+¼ Ly
+− − Ox mod 1:
+2 2
+
+¼
+
+ð74Þ
+
+where jx is defined with respect to the origin O ≡
+ðOx ; Oy Þ, i.e., jx ∈ f−Ox ;1 − Ox ;2 − Ox ;…;Lx − 1 − Ox g.
+Here O refers to the point on the torus where the coordinate
+is chosen to be (0, 0).
+
+Lx 1
+þ mod 1:
+2 2
+
+ð76Þ
+
+The coefficient of Ly equals −Po;y . In this special case
+Po;y just equals ox mod 1 (zero at a site, and 1=2 at a
+plaquette center). By equating these two expressions for
+Po;y , we get Eq. (75). We expect that when C ≠ 0, Eq. (75)
+
+031005-18
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+will continue to hold, and we have verified this expectation
+numerically.
+The relationship between O and o is reminiscent of the
+linear momentum calculation in which one has to shift
+the gauge origin ō by ðLx =2; Ly =2Þ þ ð12 ; 12Þ relative to o in
+⃗ o . We have numerically checked that
+order to obtain P
+Eq. (73) gives consistent answers for different gauge
+choices and for different system sizes.
+VI. CALCULATIONS FOR GENERAL M
+We now generalize our charge response, linear momentum, and 1D polarization calculations. We discuss M ¼ 2,
+3, 4, 6 together, and assume that o can be at any HSP within
+the unit cell. We keep the choice of unit cell Θ arbitrary.
+We focus on the details that differ from those outlined
+previously when M ¼ 4.
+Recall that M0 is the order of the rotation symmetry
+which preserves o, while M is the largest possible value of
+M0 considering all possible HSPs o. For the computations
+below we need the M0 -fold rotation operator C̃M0 ;o defined
+0
+so that ðC̃M0 ;o ÞM ¼ 1.
+A. So from pure disclination charge
+We can use the operator C̃M0 ;o to create a pure
+disclination at the high symmetry point o and calculate
+its charge response. As previously discussed, the origin o
+used to measure the Burgers vector of the disclination need
+not be equal to o . And by pure disclination, we mean that
+b⃗ o ≃ ð0; 0Þ. In this case the field theory predicts that
+QW ¼ C
+
+δΦW;o ΩW So
+þ
+þ νðk þ nirreg;o;Ω Þ mod 1;
+2π
+2π
+
+ð77Þ
+
+where k is an integer. Note that the field theory is only
+sensitive to o and not o ; it cares only about the measured
+value of the Burgers vector and not about how the defect
+was created microscopically.
+The computation of δΦW;o and then So is done according
+to the procedure discussed in Sec. IV C. As we discussed
+there, a crucial detail is the area of the irregular unit cell
+at the center of the disclination, which we here call nirreg;o;Ω .
+We include a subscript Ω because, in general, this
+number also depends on the disclination angle Ω.
+nirreg;o;Ω is defined as
+8
+Ω
+>
+>
+< ð1 − 2πÞ if o is at the center
+nirreg;o;Ω ≡
+of the unit cell
+>
+>
+:0
+otherwise:
+
+ð78Þ
+
+This can be intuitively understood as follows. If the origin
+is at the center of the unit cell, the disclination construction
+process would remove a fraction Ω=2π of the central unit
+
+PHYS. REV. X 13, 031005 (2023)
+
+cell (i.e., MΩ=2π subcells). If o is not at the center of the
+unit cell, then it must be at the boundary of the unit cell. In
+this case, there is no irregular unit cell; thus nirreg;o;Ω ¼ 0.
+Note that when M ¼ 2, 3, 4, we can always choose o to be
+on the boundary of the unit cell, so that there are no
+irregular unit cells. On the other hand, this definition of
+nirreg;o;Ω is needed especially for 2π=6 disclinations when
+M ¼ 6, because the only C6 symmetric points are at the
+unit cell centers, so in any 2π=6 disclination there will
+necessarily be an irregular unit cell.
+1. Comments on definition of nirreg;o
+In the discussion above we emphasize that nirreg;o;Ω
+depends on the relative position between o and the unit
+cell Θ, and not the absolute position of either. We can pick a
+different unit cell Θ which changes QW and nW;o simultaneously, leaving So invariant. We discuss this in detail in
+Appendix D.
+An important general point is that our definitions of
+nirreg;o;Ω (and a similar quantity nirreg;o;b⃗ defined in the
+next section) are only sensitive to the value of M and not
+to the actual fine structure of the microscopic lattice.
+Conceptually, we can imagine tiling the plane with unit
+cells (square for M ¼ 4, hexagonal for M ¼ 3, 6, and so
+on), and the only constraint is that the centers and corners
+of these unit cells need to be at appropriate high symmetry
+points of the microscopic lattice. In particular, the tiling
+does not have to match the structure of hopping or
+interaction terms in the microscopic Hamiltonian. Then,
+we note that the number of unit cells in any region W is a
+property of the tiling alone. Similarly, we can apply a cutand-glue procedure on the infinite plane tiling to get a tiling
+for a surface with a dislocation or disclination defect. Then
+the quantities nirreg;o;Ω and nirreg;o;b⃗ are properties of this
+defect tiling alone. As such, these are independent of
+microscopic details of the Hamiltonian such as the distribution of sites and the hoppings between them. The fact
+that our prescription depends on the tiling rather than
+on microscopic details such as hopping and interaction
+terms makes it readily generalizable beyond the nearestneighbor Hofstadter models that we have mainly studied in
+this work.
+⃗ o from dislocation charge
+B. P
+⃗ o from the charge response of a
+We next calculate P
+dislocation (assume Ω ¼ 0). If a defect has a nontrivial
+⃗ it will generally also have an irregular
+Burgers vector b,
+unit cell. This irregular unit cell is triangular if M ¼ 2, 4
+and quadrilateral if M ¼ 3, 6. In this case, we find that the
+area which should be assigned to the irregular unit cell
+⃗ so we use the notation n
+depends on b,
+.
+irreg;o;b⃗
+The results are shown in Table IV. They are derived by
+matching the dislocation charge result with known values
+
+031005-19
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+⃗ o in the honeycomb Hofstadter model. The site symmetry group is ZM0 , with M 0 ¼ 6, 3, 2 for the MWPs fα; β; γg,
+FIG. 10. So and P
+respectively. Sα ; Sβ1 ; Pα ; Pβ2 ; Pβ1 ; Pγ3 ;x are all calculated from the charge response [Eq. (82)] of suitable lattice defects (here we have
+⃗ o for all possible o but only some representative ones). The numerical calculations are done on an open disk with a
+not shown So and P
+radius R ¼ 20. The defects are located at the center of the disk. The noisy features appear since the butterfly is numerically calculated on
+a finite size system rather than analytically derived with an empirical formula as in Fig. 1. In the first three main Landu levels, Sα
+quantize to f12  0.0002; 2  0.004; 92  0.04g; other invariants in the first three main Landau levels have similar standard deviations.
+
+⃗ o in the C ¼ 0 limit (see Appendix B) from the same
+of P
+real space picture discussed in the previous section, when
+M ¼ 4. The origin dependence of nirreg;o;b⃗ can also be
+understood from field theory. In Sec. VII we argue that the
+following general formula holds:
+nirreg;oþ⃗v;b⃗ ¼ nirreg;o;b⃗ − vx by þ vy bx ;
+
+ð79Þ
+
+where ðbx ; by Þ is the dislocation Burgers vector, and
+ðvx ; vy Þ is a fractionally quantized vector that shifts o to
+another HSP. Additionally, if b⃗ ¼ ð0; 0Þ, then nirreg;o;b⃗ ¼ 0;
+⃗ then n
+and if b⃗ → −b,
+⃗ → −n
+⃗ mod 1. This
+irreg;o;b
+
+irreg;o;b
+
+condition means that a dislocation-antidislocation pair
+has a total unit cell number which is an integer.
+With this information, we can write down the charge
+response for a dislocation:
+QW ¼ C
+
+δΦW;o
+⃗ o · b⃗ þ νðk þ n
+Þ mod 1:
+þP
+irreg;o;b⃗
+2π
+
+ð80Þ
+
+This is the main equation that we use for calculations
+⃗ o for M ¼ 2, 3, 4, 6. As an example,
+involving P
+
+⃗ o in a Hofstadter model on
+we numerically calculate P
+the honeycomb lattice with different choices of o, whose
+site symmetry groups are Z2 , Z3 , and Z6 . The raw data for
+⃗ o are shown in Fig. 10. Again, we note that the exact
+P
+⃗ o
+choice of unit cell does not affect our calculation of P
+and So . We show this in Appendix D.
+⃗ o , it is enough to compute
+Note that in order to find P
+dislocation charge with b⃗ ¼ ð1; 0Þ; ð0; 1Þ; this is why
+⃗
+Table IV explicitly contains these values of b.
+Nevertheless, our procedure to compute dislocation charge
+⃗ The main observation is
+applies for general choices of b.
+that nirreg;o;b⃗ only depends on the equivalence class of b⃗
+under the equivalence
+⃗
+b⃗ ≃ b⃗ þ ½1 − Uð2π=M0 ÞΛ;
+
+ð81Þ
+
+⃗ is an integer vector and 2π=M0 is the minimal
+where Λ
+rotation that preserves o. For example, nirreg;o;b⃗ is invariant
+if b⃗ is rotated by the angle 2π=M0 . Since any b⃗ is in the
+same equivalence class as either (1, 0) or (0, 1), Table IV is
+⃗
+sufficient for computations with general b.
+
+031005-20
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+Combining Eqs. (77) and (80), the complete charge
+response of disclination and dislocation defects with
+arbitrary o, ΩW , and b⃗ o is
+δΦ
+Ω S
+⃗ o · b⃗ þ νðk þ n
+QW ¼ C W;o þ W o þ P
+Þ; ð82Þ
+irreg;o;Ω;b⃗
+2π
+2π
+where the effective irregular unit cell number now depends
+⃗ For all the examples that we study,
+on both Ω and b.
+we observe the relation
+nirreg;o;Ω;b⃗ ¼ nirreg;o;Ω;ð0;0Þ þ nirreg;o;0;b⃗ mod 1:
+
+C. So from angular momentum
+We denote as lo the angular momentum with o as the
+rotation center. The many-body ground state on a clean
+torus with m total flux quanta is jΨi. lo is defined by
+
+lo ¼
+
+Cm2
+þ So m þ KðC; LÞ mod M:
+2
+
+ð85Þ
+
+The above equation works for any M ¼ 2, 3, 4, 6. In this
+work we have also numerically calculated lα in the
+honeycomb lattice, choosing o ¼ α. We extract the same
+Sα from the disclination charge response (see Fig. 10). This
+verifies the prediction that So can be measured using an
+angular momentum dual response.
+One can also perform a partial rotation to extract So .
+The details (specialized to M ¼ 4) are in Ref. [33].
+⃗ o from linear momentum
+D. P
+The procedure to calculate a linear momentum
+⃗ o on the square lattice generalizes
+ðpλ;x ; pλ;y Þ and, hence, P
+straightforwardly to the case where M ¼ 2, 3, 6. For M
+even we can define T̃ y precisely as for M ¼ 4. But for
+M ¼ 3, we find that a slight modification is required in the
+definition of λ:
+
+i
+
+ðπm=Ly Þc†j cj
+
+T̂ y e
+>
+>
+P
+>
+:
+i
+ðō −j Þðπm=Ly Þc†j cj
+T̂ y e j x x
+j
+
+jx < ōx
+jx > ōx
+
+ð86Þ
+
+ōx − 1 < jx < ōx þ 1:
+
+hΨjT̃ y jΨi ≔ e−γþi2πpλ;y ;
+
+ð87Þ
+
+pλ;y ¼ −Po;y m þ K y mod 1:
+
+ð88Þ
+
+We have numerically checked that on the honeycomb
+⃗ o as with the other methods
+lattice we extract the same P
+(see Fig. 10), assuming Eq. (61). Since Po;y is quantized
+mod 3, the minus sign is crucial in this case, unlike in the
+case M ¼ 2, 4, 6.
+On the other hand, the partial translation calculation does
+not generalize to the case where o is a C3 symmetric HSP.
+This is because we appear to need the region D for partial
+translations to be mirror symmetric along the cycle with
+holonomy eiπm. But this is not possible for C3 symmetric
+points. It is not clear whether a mirror symmetric region D
+is essential for our calculation to work, or whether an
+alternative method might work in this case; we leave this
+question for future study.
+
+ð84Þ
+
+Exactly as for M ¼ 4, we find that
+
+P
+8
+i
+−ðπm=Ly Þc†j cj
+j
+>
+e
+T̂
+>
+y
+>
+<
+P
+
+This can be seen as a generalization of Eq. (59) which
+smooths out the gauge transformation around the gauge
+origin ō. The relevant equations for M ¼ 3 are identical to
+the ones for M ¼ 2, 4:
+
+ð83Þ
+
+Here nirreg;o;Ω;ð0;0Þ ; nirreg;o;0;b⃗ are the quantities we previously referred to as nirreg;o;Ω ; nirreg;o;b⃗ , respectively. This
+relation matches our expectation from the field theory, in
+which we can imagine separating a defect with parameters
+⃗ ΩÞ into two defects with parameters ½ð0; 0Þ; Ω; ðb;
+⃗ 0Þ
+ðb;
+without changing the effective number of unit cells mod 1.
+
+C̃M;o jΨi ¼ eilo ð2π=M ÞjΨi:
+
+T̃ y ¼
+
+PHYS. REV. X 13, 031005 (2023)
+
+⃗ o from 1D polarization
+E. P
+Finally, we can dimensionally reduce our 2D space
+along y, and compute a 1D polarization P x in the x
+direction. For M ¼ 4 we obtain an empirical formula,
+Eq. (73), which matches the field theory prediction. We
+rewrite it here:
+
+
+Cϕ
+Lx
+−P O;x ¼
+L
+− ōx þ Ox þ Ly Po;y þ K 0 mod 1;
+2π y 2
+ð89Þ
+where ō is the gauge origin, and O is the origin in Resta’s
+formula, Eq. (26).
+This equation turns out to also work for M ¼ 2, 3, 6. As
+an example, in the honeycomb lattice, the position of the
+sites are
+
+
+1
+1
+i ¼ ix − − Ox ; iy − − Oy ;
+3
+3
+
+
+1
+1
+j ¼ jx þ − Ox ; jy þ − Oy :
+ð90Þ
+3
+3
+i and j are at the β1 and β2 MWPs of the C6 unit cell,
+respectively (see Fig. 2 for the unit cell convention), and
+
+031005-21
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+ix ; jx ∈ f0; 1; …; Lx − 1g,
+iy ; jy ∈ f0; 1; …; Ly − 1g.
+Similar to the linear momentum calculation, in order
+⃗ o which is consistent with the known
+to get a result for P
+C ¼ 0 result, we need to choose Ox ¼ ox þ L2x þ 12 mod 1.
+
+the crystalline gauge fluxes also get redefined, leading to a
+transformation of the response coefficients.
+In the simplicial formulation, if the gauge field is flat,
+the crystalline gauge fluxes are defined by the terms
+⃗ (Note that in the discrete
+dω; AXY ; ½1 − Uð2π=MÞ−1 dR.
+⃗ we do this for the
+case we can equivalently write T⃗ as dR;
+rest of the section [47].) Under a shift of origin, these fluxes
+⃗ 0;
+transform into new quantities dω0 ; ½1 − Uð2π=MÞ−1 dR
+0
+AXY . In Appendix G we show that
+
+⃗ o
+VII. ORIGIN DEPENDENCE OF So ;P
+In this section we sketch how to derive the formulas
+⃗ oþ⃗v in terms of So ; P
+⃗ o,
+in Table I that express Soþ⃗v ; P
+and κ. v⃗ is a quantized vector (perhaps fractional) such
+that o; o þ v⃗ are both symmetric under M-fold rotations.
+These relationships were commented on previously in
+Secs. IV–VI. We leave the technical computations to
+Appendix G. Background details and definitions regarding
+the response theory which we use in this section are found
+in Appendix F.
+Let A be the full vector potential for the system (meaning
+that dA ¼ F measures the total magnetic field). The full
+Lagrangian which involves A is
+C
+A ∧ dA þ LA;o ;
+4π
+
+ð91Þ
+
+1
+⃗ o · T⃗ þ κAXY Þ:
+A ∧ ðSo dω þ P
+2π
+
+ð92Þ
+
+L¼
+LA;o ≔
+
+Here dA is the total U(1) flux. The total U(1) charge
+and flux in any region should physically be invariant under
+a shift of origin, and therefore the contribution from the
+term with C to any response property remains invariant
+upon shifting the origin. Hence we only consider the
+transformation of the remaining terms as given by LA;o.
+Crucially, in LA;o the coefficient of the term with
+ð1=2πÞA ∧ AXY is κ instead of ν, because the difference,
+given by ðCϕ=4π 2 ÞA ∧ AXY, is now contained in the
+term ðC=4πÞA ∧ dA.
+To understand the transformation of LA;o , it will be most
+convenient to use the discrete simplicial formulation of the
+response theory, as developed in Ref. [17]; in that case,
+the above wedge product should be interpreted as a cup
+product, but we stick to wedge product notation below.
+First note that a space group operation which performs a
+rotation about o and then a translation takes the form
+g ¼ ðr; hÞ, where r ∈ Z2 ; h ∈ ZM . The same group
+element with respect to the shifted origin o0 ¼ o þ v⃗ takes
+the form
+g0 ¼ ð⃗v; 0Þðr; hÞð−⃗v; 0Þ:
+Since the crystalline gauge fields encode some configuration of group elements on a manifold, a shift of origin by a
+fractional lattice vector v⃗ can be viewed as a “fractional”
+gauge transformation of the crystalline gauge fields. In
+particular, because this is not a true gauge transformation,
+
+dω0 ¼ dω;
+
+ð93Þ
+
+⃗ 0 ¼ dR
+⃗ þ τ⃗ M dω;
+dR
+
+ð94Þ
+
+⃗
+A0XY ¼ AXY þ ρM dω þ μ⃗ M · dR;
+
+ð95Þ
+
+where τ⃗ M ; ρM ; μ⃗ M depend on v⃗ . This transforms the
+Lagrangian as follows:
+1
+⃗ o0 · dR
+⃗ 0 þ κ 0 A0XY Þ:
+A ∧ ðSo0 dω0 þ P
+2π
+
+LA;o0 ¼
+
+ð96Þ
+
+Assuming a fixed choice of unit cell, the total charge
+measured in any given region W should be the same for
+either choice of origin. Thus,
+Z
+
+⃗ o · dR
+⃗ þ κAXY Þ
+ðSo dω þ P
+Z
+⃗ 0 þ κ 0 A0XY Þ:
+¼
+ðSo0 dω0 þ Po0 · dR
+
+W
+
+ð97Þ
+
+W
+
+We now use Eqs. (93)–(95), and compare coefficients. This
+gives us
+κ ¼ κ0 ;
+
+ð98Þ
+
+⃗ o0 −⃗v ¼ P
+⃗ o0 þ κ0 μ⃗ M ;
+⃗ o¼P
+P
+
+ð99Þ
+
+⃗ o0 · τ⃗ M þ κ0 ρM :
+So ¼ So0 −⃗v ¼ So0 þ P
+
+ð100Þ
+
+These equations finally give the results in Table I: the
+calculation reduces to showing Eqs. (93)–(95), and finding
+ρM ; μ⃗ M ; τ⃗ M in terms of v⃗ . We perform these calculations
+in Appendix G; to obtain values for ρM¼2;4 which are
+consistent with results for Chern number 0, we need to
+make an assumption on the functional form of AXY , which
+we explain there. The results are contained in Eq. (G13)
+(⃗τM ), Eq. (G27) (ρM ), and in Sec. G 0 3 (⃗μM ).
+Note that Eq. (G13) implies
+
+031005-22
+
+⃗ 0 ¼ dR
+⃗ þ M½1 − Uð2π=MÞdω:
+dR
+
+ð101Þ
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+This is in fact equivalent to Eq. (28), which reads
+b⃗ oþ⃗v ¼ b⃗ o þ ½1 − UðΩÞ⃗v:
+
+ð102Þ
+
+The equivalence can be shown as follows. First let us
+⃗ ¼ 2π b⃗ o , dω ¼ Ω ¼ ð2πk=MÞ.
+⃗ 0 ¼ 2π b⃗ oþ⃗v, dR
+identify dR
+Then Eq. (101) becomes
+b⃗ oþ⃗v ¼ b⃗ o þ k½1 − Uð2π=MÞ⃗v:
+
+ð103Þ
+
+To prove the equivalence, we need to show that the two
+expressions for b⃗ oþ⃗v are in the same equivalence class:
+⃗
+½1 − Uð2πk=MÞ ⃗v ¼ k½1 − Uð2π=MÞ ⃗v þ ½1 − Uð2π=MÞΛ;
+
+⃗ o transforms proportionally to κ has an
+The fact that P
+important consequence. If we consider two Hamiltonians
+(1) and (2), which can, for example, be the end points of
+some path in parameter space, we may naively imagine
+⃗ ð2Þ
+⃗ ð1Þ to be completely
+differences of the form P
+o − Po
+⃗ o as defined in this work, this
+independent of o. But for P
+is true only if κ 2 ¼ κ1 . Indeed, Eq. (106) implies that
+⃗ ð1Þ ¼ P
+⃗ ð2Þ
+⃗ ð1Þ
+⃗ ð2Þ − P
+P
+o − Po þ ðκ 2 − κ 1 Þð−vy ; vx Þ:
+oþ ⃗v
+oþ ⃗v
+
+δA → δA −
+
+ϕ
+⃗
+ðρ ω þ μ⃗ M · RÞ:
+2π M
+
+ð105Þ
+
+Note that dδA only changes around a defect, where dω
+⃗ can be nonzero. The transformations of dδA; AXY
+and dR
+indicate that our conventions for “background flux” and
+“excess flux” in each plaquette (measured by ϕAXY and
+dδA, respectively) change by equal and opposite amounts.
+But the total flux in each plaquette is invariant.
+⃗ o
+A. Transformation of P
+Although ρM ; τ⃗ M depend sensitively on M, our calculations show that
+μ⃗ M ¼ ðvy ; −vx Þ;
+irrespective of the choice of M. This implies that
+⃗ o þ κð−vy ; vx Þ;
+⃗ oþ⃗v ¼ P
+P
+for M ∈ 2, 3, 4, 6.
+
+ð106Þ
+
+ð107Þ
+
+Thus, in order to measure an origin-independent quantity
+⃗ o , we must ensure that the initial
+through differences of P
+and final values of κ are equal.
+
+ð104Þ
+⃗ ∈ Z2 . But this follows from the fact that
+for some Λ
+½1 − Uð2π=MÞ⃗v is always an integer vector.
+As a check on Table I, we can see that the values of So
+⃗ o for zero Chern number given in Appendix B follow
+and P
+the equations in the table. To check Table I when C ≠ 0,
+we consider an example with C6 rotational symmetry in
+Appendix G 4.
+In this derivation we make the crucial assumption
+that F is invariant under a shift of origin. Note that F ¼
+dδA þ ðϕ=2πÞAXY , where δA is the deviation of the U(1)
+gauge field from its background value. F can indeed be
+made invariant under the transformation of Eq. (95),
+if we take
+
+PHYS. REV. X 13, 031005 (2023)
+
+B. Formula for nirreg;o +⃗v;⃗b
+An interesting corollary of these results is that they allow
+us to determine the correct assignments of nirreg;o;b⃗ for a
+⃗ as we vary o. On an infinite plane lattice with
+fixed b,
+only dislocations, we can set ω ¼ 0, and so Eq. (95)
+becomes
+⃗
+A0XY ¼ AXY þ μ⃗ M · dR:
+
+ð108Þ
+
+With μ⃗ M as above, we integrate over a region W surrounding the dislocation, and reduce mod 1 to obtain
+nirreg;oþ⃗v;b⃗ ¼ nirreg;o;b⃗ − vx by þ vy bx mod 1:
+
+ð109Þ
+
+Once nirreg;o;b⃗ is known for a single origin o, the values of
+nirreg;oþ⃗v;b⃗ can be determined using Eq. (109), as we have
+listed in Table IV. This nontrivial transformation rule is
+confirmed by our numerical results and the analytical
+results at C ¼ 0.
+VIII. DISCUSSION
+In this paper we describe several complementary manybody approaches to measure the quantized charge polari⃗ o and the discrete shift So in gapped topological
+zation P
+phases, including those with a nonzero Chern number and
+⃗ o by studying the fractional
+magnetic field. We extract P
+charge bound to dislocations, the linear momentum bound
+to flux, and from an effective 1D polarization response. We
+obtain explicit numerical results for the spinless Hofstadter
+model with CM rotational symmetry, for M ¼ 2, 3, 4, 6,
+by matching our microscopic calculations to field theory
+predictions. We also obtain a theoretical understanding of
+⃗ o and the discrete shift So .
+the origin dependence of P
+Together with the Chern number C and κ ≡ ν − Cϕ=2π,
+
+031005-23
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+⃗ o ; κg completely specifies the
+the quadruple fC; So ; P
+quantized charge response in systems with charge conservation, magnetic translation, and point group rotation
+symmetry.
+An important issue we wish to emphasize is how to
+⃗ o as invariants describing a topological
+understand So ; P
+phase. In the case of an origin-independent invariant such
+as C or κ, knowing that the invariant differs between two
+systems is enough to distinguish them as topological
+phases. However, in order to distinguish two systems based
+⃗ o, it is essential to first
+on their respective values of So or P
+fix a common origin o for both systems, and then compare
+the various numbers. This is because two systems are in the
+same phase only if they can be adiabatically connected
+to each other without closing the gap or breaking the
+symmetry, and while keeping their common origin o fixed.
+Without fixing this common origin, we cannot meaningfully define the notion of adiabatic equivalence between
+two systems.
+⃗ o
+In this paper we have focused on the quantization of P
+due to nontrivial point group symmetry, M > 1. In the case
+where we do not have point group symmetry, our methods
+allow us to define an intrinsically two-dimensional many⃗ o for any real-space origin o, even
+body polarization P
+when C ≠ 0. It is an interesting question to understand the
+relationship between our definition of polarization for
+C ≠ 0 and the one based on free fermion band theory
+proposed by Coh and Vanderbilt [24].
+⃗ o are topological invariants that depend
+Since So and P
+on crystalline symmetry, their values cease to be quantized
+if we break the crystalline symmetry by adding disorder. In
+particular, if we introduce on-site or bond disorder which
+breaks the rotational symmetry, So is no longer quantized.
+If the disorder breaks either the translational or the rota⃗ o is no longer quantized. Nevertheless,
+tional symmetry, P
+⃗ o remain quantized to their
+the disorder averages of So ; P
+respective clean values, although their standard deviations
+increase with an increase in disorder strength. This was
+shown numerically for So in Ref. [33] and is expected to
+⃗ o as well.
+hold for P
+Next we comment on some unresolved issues in this
+work. In both the linear momentum and 1D polarization
+calculations, we need to pick a distinguished point and
+relate it to o. For the linear momentum calculation, ō is the
+gauge origin, and in the 1D polarization calculation, O
+determines the coordinates for each site in Resta’s formula,
+⃗ o correctly
+Eq. (26). In both calculations, we extract P
+only if o satisfies a certain relation with ō or O. In the
+linear momentum
+calculation, we also find that if
+P
+
+For our linear momentum calculations we use an
+approximate translation operator and thus have to work
+with its expectation values rather than exact eigenvalues. It
+would be useful to compute the linear momentum exactly
+by incorporating a flux insertion operator that makes the
+translation symmetry exact.
+Additionally, under a shift of origin, the field theory does
+⃗ o when
+not fix a unique transformation rule for So ; P
+M ¼ 2, 4; instead it gives a few different possibilities as we
+explain in detail in Appendix G. To fix the transformation
+consistent with numerics and physical expectations, we
+need to make some additional choices in the field theory
+that are allowed but do not have an obvious physical
+interpretation.
+We close by pointing out some related open questions.
+Previously, Ref. [24] proposed a way to define the charge
+polarization as a single-particle Berry phase in momentum
+space when C ≠ 0, by picking a suitable origin for the
+Brillouin zone. It would be useful to understand whether
+this choice can be related to the ones we make in defining
+⃗ o using the dislocation charge and the linear momentum.
+P
+⃗ o
+We have not commented on how the invariants So ; P
+manifest at corners and edges of the system. The relation
+between disclination charge and fractional corner charge
+when C ¼ 0 has been discussed in several places; see, e.g.,
+Ref. [49]. References [20,24] specifically discussed an
+edge charge interpretation of the polarization, Ref. [24] did
+so in the context of Chern insulators, and Ref. [20] did so
+from the perspective of a boundary Luttinger theorem when
+C ¼ 0. It would be interesting to understand the corner and
+edge charges in the context of our results, which apply for
+general C and in the presence of a magnetic field.
+Another interesting direction is to study the charge
+polarization in fractional Chern insulators. In fact,
+Refs. [17,18] use field theory to predict that this can indeed
+be defined systematically and that its quantized fractional
+values are sensitive to M as well as to the anyon content of
+the theory. In such topologically ordered phases, the charge
+polarization can encode a novel, nontrivial form of symmetry fractionalization which was called the “discrete
+torsion vector” in Refs. [17,18].
+
+i
+
+ACKNOWLEDGMENTS
+G. N. thanks D. Bulmash and V. Galitski for discussions
+during the initial stages of this project. This work is
+supported by the Laboratory for Physical Sciences through
+the Condensed Matter Theory Center, and by NSF
+CAREER (DMR-1753240) (M. B., N. M.), ARO
+W911NF-20-1-0232 (G. N.), QLCI grant OMA-2120757.
+
+λ c† c
+
+T̃ y ¼ T̂ y e j j j j , for a fixed ō there is only one choice
+of λ that gives a quantized Po;y throughout the Hofstadter
+butterfly. These observations are completely empirical; we
+leave a full explanation for future work.
+
+APPENDIX A: REVIEW
+This appendix has three parts. First, we introduce
+some standard definitions of quantities on a clean lattice.
+Next, we introduce dislocation and disclination defects,
+
+031005-24
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+
+PHYS. REV. X 13, 031005 (2023)
+
+and define the disclination angle and dislocation Burgers
+vector. After that, we discuss the basic properties of So and
+⃗ o from the perspective of disclination and dislocation
+P
+charge, respectively.
+1. Definitions and background
+a. Maximal Wyckoff positions
+The definitions in this section are taken from Ref. [50].
+Fix an origin o. Suppose we are given a set of points in the
+infinite plane which form a lattice with spatial symmetry
+group Gspace . On this lattice (assumed to be without any
+defects), we define a Hamiltonian H clean with translation
+operators T̂ x ; T̂ y corresponding to translations by the
+elementary lattice vectors, and additional point group
+symmetry operators, defined with respect to o. The full
+symmetry group G of Hclean can contain operations in
+Gspace as well as internal symmetry operations.
+For any point p in the plane, the site symmetry group Gp
+is the subgroup of operations in Gspace that leaves p
+invariant. Two points p, p0 are said to have site symmetry
+groups that are conjugate to each other if Gp0 ¼ gGp g−1 for
+some g ∈ Gspace . The Wyckoff position containing p is the
+set of all points whose site symmetry groups are conjugate
+to Gp . For example, every point p0 obtained from p by a
+lattice translation or rotation is in the same Wyckoff
+position as p. Furthermore, every point with a trivial site
+symmetry group belongs to a single Wyckoff position.
+p is in a maximal Wyckoff position (MWP) if Gp is not a
+proper subgroup of Gp0 for any other site p0 . In Fig. 2, we
+show the MWPs for the wallpaper groups p2; p3; p4; p6.
+Note that when Gspace ¼ p4, the high symmetry point γ i
+has site symmetry group Gγ ≅ Z2 but is still in a MWP,
+even though there are other points with site symmetry
+group Z4 . This is because there is no point with site
+symmetry group Z4 that contains Gγ . We always choose o
+to belong to a MWP.
+It is important to distinguish a MWP, which is a
+collection of points, from a single high symmetry point
+of a unit cell. Our notation for HSPs is βi , γ i , where β, γ
+denotes the MWP and i runs over the corresponding HSPs
+which are inequivalent under lattice translations.
+b. Unit cells and subcells
+A unit cell Θ for the given lattice corresponds to a
+division of lattice points into elementary repeating units.
+Starting with a clean lattice on the infinite plane, pick a
+HSP α for which the site symmetry group contains the full
+point group. (This choice may not be unique.) Then define
+α and its lattice translates as the centers of each unit cell.
+This is the convention used in Fig. 2. Now consider any
+other point q. If q is equidistant from n > 1 unit cell
+centers, q is assigned to be on the common boundary of n
+unit cells centered around α. If q is closest to one particular
+
+FIG. 11. Two representative ways of dividing a C4 unit cell into
+subcells.
+
+α point, we say that q lies in the interior of the unit cell.
+By convention, the corners of the unit cell are labeled as β
+(or βi, if there are multiple HSPs in the same MWP);
+any other points on the unit cell boundary are denoted
+γ; δ; … as required.
+Note that this definition does not fully determine the
+shape of the unit cell; we only require the subcells to rotate
+into each other, and there is still a lot of freedom in drawing
+the exact boundaries.
+Now let us specialize to the case where H clean has an
+M-fold rotational symmetry. We can subdivide an M-fold
+rotationally symmetric unit cell into M subcells. Figure 2
+illustrates such a division. We only require that subcells
+rotate into each other under rotations about α. We have no
+constraint on the shape of the subcells: in Fig. 11 we show
+two equally valid shapes. Therefore, although the vertices
+of each subcell are fixed by our definition of the unit cell;
+the boundaries are otherwise arbitrary.
+c. Parameters in Hclean
+In our numerics, we consider Hofstadter models, i.e.,
+free fermion Hamiltonians of the form
+X
+Hclean ¼ − tij c†i cj þ H:c:;
+
+ðA1Þ
+
+ij
+
+where i, j are site indices and the hopping terms tij ¼
+te−iAclean;ij depend on a background vector potential Aclean .
+We mainly take tij ¼ 1 if i, j are nearest neighbors,
+and tij ¼ 0 otherwise. However, in Appendix H we also
+consider the Hofstadter model with next-neighbor hopping
+terms, as an illustration.
+For
+Q any loop
+P l, the enclosed flux equals
+argð hiji∈l tij Þ ¼ hiji∈l Aclean;ij mod 2π, where the
+sum is taken counterclockwise. We assume that Hclean
+has the symmetry Gf ¼ Uð1Þf ×ϕ Gspace, where Uð1Þf
+denotes the group U(1) whose order 2 element is the
+fermion parity operation. This means that the total flux in
+each unit cell equals ϕ mod 2π.
+If Hclean is defined on a torus with side lengths L1 , L2
+instead of the infinite plane, the Z2 translation symmetry is
+broken down to ZL1 × ZL2 if there is no flux; if there is
+
+031005-25
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+flux, the symmetry is still broken down to a subgroup but
+the details are more complicated.
+As we explain in the main text, we demand that the
+magnetic field is specified everywhere within a unit cell.
+This requirement goes beyond the specification of Hclean
+and of the symmetry data. We also note (see in particular
+Appendix H) that our numerical methods are expected to
+generalize to arbitrary gapped systems with next-neighbor
+hopping and interaction terms.
+
+the difference is proportional to the discrete shift, as
+discussed in Ref. [33].
+
+d. Definition of ν and κ
+A lattice system with U(1) charge conservation symmetry has a filling per unit cell given by N e ηu:c: =N orb.
+where N e is the number of electrons, N orb is the number of
+orbitals, and ηu:c: is the number of orbitals per unit cell. On
+a clean torus, this reduces to ν ≔ ðN e =N u:c: Þ, where N u:c: is
+the total number of unit cells. If the system has a unique,
+gapped ground state and has Chern number C, ν and C
+are related by Eq. (2), which also defines the integer κ.
+Equation (2) can be derived, for example, using the
+following argument [18,51].
+The quantity e2πiν is by definition the Aharonov-Bohm
+phase corresponding to the adiabatic transport of a 2π flux
+around a unit cell, which has flux ϕ. Now the braiding
+phase of a flux ϕ1 around another flux ϕ2 can alternatively
+be expressed in terms of the Hall conductance σ H ; it equals
+eiϕ1 ϕ2 σH ¼ eiϕ1 ϕ2 ðC=2πÞ . Taking a 2π flux around a unit cell
+corresponds to setting ϕ1 ¼ 2π; ϕ2 ¼ ϕ. Thus the same
+Aharonov-Bohm phase can be expressed in two ways:
+ei2πν ¼ eiϕC
+ϕ
+⇒ν¼C
+mod 1
+2π
+⇒ν¼C
+
+ϕ
+þ κ;
+2π
+
+ðA2Þ
+ðA3Þ
+ðA4Þ
+
+where κ ∈ Z. If C ¼ 0, ν ¼ κ.
+In the limit of small flux per unit cell, 0 ≤ Cϕ=2π ≤ 1, κ
+has a simple interpretation. When κ ¼ 0, a state with Chern
+number C corresponds to a system of C filled Landau
+levels. Therefore, κ is simply the deviation of the total
+filling from the Landau level limit. In a system with
+ϕ ¼ 2πp=q, where p, q are coprime, the filling on a torus
+takes the form ν ¼ r=q for some integer r. Then Eq. (2) can
+be written as a Diophantine equation r ¼ qκ þ pC for the
+integers C, κ. In the Hofstadter model it can further be
+shown that jCj ≤ q=2. This Diophantine equation is often
+used in the study of the Hofstadter model.
+Finally, suppose we place the system on a closed
+manifold with lattice defects. This could, for example,
+be the surface of a cube, which has eight corners, each
+being a disclination with disclination angle π=2. In this
+case, the actual filling per unit cell differs from ν. In fact,
+
+2. Origin dependence of b⃗ o
+Here we prove Eq. (28) in the main text. We define a Z2
+⃗ and a ZM rotation gauge field ω
+translation gauge field R
+(see Appendix F for a detailed definition). The holonomy
+⃗ ωÞ around a defect equals some space group element
+of ðR;
+which we denote as ðb⃗ o ; ΩÞ, with b⃗ o ∈ Z2 ; MΩ=2π ∈ ZM .
+b⃗ o and Ω encode the dislocation Burgers vector and the
+disclination angle of each defect. We assume that the
+starting point of the loop is an integer vector away from
+o. Now suppose we choose a different starting point for the
+loop o0 ¼ o þ v⃗ , where v⃗ may be fractional. We wish to
+relate b⃗ o0 to b⃗ o .
+The group element which describes the same defect but
+with respect to the new origin o0 is obtained from ðbo ; ΩÞ by
+conjugating with the translation ð⃗v; 0Þ:
+ð⃗v; 0Þðb⃗ o ; ΩÞð−⃗v; 0Þ ¼ ½b⃗ o þ v⃗ − UðΩÞ⃗v; Ω:
+
+ðA5Þ
+
+Here UðΩÞ is the rotation matrix with angle Ω. The above
+result follows from the multiplication law for the space
+⃗ ω
+group. This group element must give the holonomy of R;
+with respect to a loop starting at o0 . Thus we find that
+b⃗ o0 ¼ b⃗ o þ v⃗ − UðΩÞ⃗v;
+
+ðA6Þ
+
+as claimed.
+⃗ o
+3. Properties of So ;P
+The results below were first obtained in Refs. [17,33],
+and are compiled here for completeness. Suppose the
+rotation point group of the system is ZM , and consider
+an origin o whose site symmetry group is ZM0 . The
+⃗ o is
+topological response theory which defines So ; P
+reviewed in Appendix F. Although the quantization conditions are derived using group cohomology arguments that
+are mathematically involved, the following intuition is
+enough to understand them. If a lattice defect has disclination angle Ω and Burgers vector b⃗ o, the total charge at
+the defect is a sum of various independent contributions
+from the field theory, Eq. (13). In particular, the term
+ðSo =2πÞA ∧ dω assigns this defect a fractional charge
+⃗ o =2πÞ · A ∧ T⃗ assigns the
+So ðΩ=2πÞ, while the term ðP
+⃗ o · b⃗ o .
+defect a fractional charge P
+First, we argue that So is either an integer or a halfinteger, and it is defined modulo M0 . Note that the term
+ðSo =2πÞA ∧ dω assigns U(1) charge So =M to a defect
+with disclination angle 2π=M and zero Burgers vector. On a
+closed spatial manifold of genus
+R g, the total charge assigned
+by this term equals ðSo =2πÞ dω ¼ 2So ð1 − gÞ. This must
+
+031005-26
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+be an integer, for each g, irrespective of the other terms in
+the response theory. Therefore, 2So must be an integer.
+Now, the charge at any defect can be changed by an
+integer through local operators which add a fermion at the
+defect. Therefore, the topological terms ðSo =2πÞA ∧ dω
+and ðSo þ M0 =2πÞA ∧ dω, which assign charge So =M0
+and ðSo =M0 Þ þ 1 to an elementary 2π=M0 disclination,
+are topologically equivalent (in fact, we can show that
+their difference does not contribute to the partition
+function on a closed manifold). This leads to the relation
+So ≃ So þ M 0 .
+The arguments given in Ref. [33] further show that if
+0
+the generator of rotations at o satisfies C̃M
+M 0 ;o ¼ þ1, there
+is a relation
+So ¼
+
+C
+mod 1:
+2
+
+ðA7Þ
+
+Thus, S is an integer or a half-integer according as C is
+even or odd. In particular, once we fix o and the Chern
+number, So can only take one of M0 distinct values.
+⃗ o , which turns
+Next, we explain the quantization of P
+out to be very sensitive to M 0 . Consider a lattice defect
+with parameters ðb⃗ o ; ΩÞ. The response theory predicts
+that the fractional charge at such a defect receives a
+contribution
+⃗ o · b⃗ o mod 1
+P
+⃗ o . Let us shift the origin by a lattice
+from the term with P
+⃗ This takes b⃗ o → b⃗ o þ Λ
+⃗ − UðΩÞΛ.
+⃗ The charge at
+vector Λ.
+the defect with respect to the new origin is
+⃗ o · ½b⃗ o þ Λ
+⃗ − UðΩÞΛ
+⃗ mod 1:
+P
+For the theory to be consistent under a shift of origin, the
+above quantities must agree mod 1; i.e.,
+⃗ o · ½Λ
+⃗ − UðΩÞΛ
+⃗ ¼ 0 mod 1:
+P
+
+ðA8Þ
+
+We can now take the minimal allowed disclination angle
+Ω ¼ ð2π=M0 Þ, and obtain the desired quantization:
+
+ 
+⃗ o· Λ
+⃗ ¼ 0 mod 1:
+⃗ − U 2π Λ
+P
+M0
+
+⃗ o
+a. Deriving the quantization of P
+The matrix representation of Uð2π=M0 Þ for different M0
+(chosen to be consistent with the coordinate axis definitions
+in Fig. 2) is given in Table II.
+When M0 ¼ 2, Eq. (A9) gives
+2Po;x Λx þ 2Po;y Λy ¼ 0 mod 1;
+
+ðA10Þ
+
+for any Λx, Λy . Therefore, we set Po;x ¼ ðPo;x =2Þ; Po;y ¼
+ðPo;y =2Þ, where Po;x ; Po;y are integers.
+When M0 ¼ 3, Eq. (A9) gives after simplification:
+Po;x ¼ Po;y ¼ −2Po;x mod 1;
+
+ðA11Þ
+
+⃗ o ¼ ðPo =3Þð1; 2Þ for some
+implying that we can set P
+integer Po, with Po ≃ Po þ 3.
+When M0 ¼ 4, Eq. (A9) gives after simplification:
+Po;x ¼ Po;y ¼ −Po;y mod 1;
+
+ðA12Þ
+
+⃗ ¼ ðPo =2Þð1; 1Þ for some
+implying that we can set P
+integer Po, with Po ≃ Po þ 2.
+When M0 ¼ 6, Eq. (A9) gives after simplification:
+Po;x ¼ Po;y ¼ 0 mod 1;
+
+ðA13Þ
+
+⃗ o must be an integer vector and is therefore
+implying that P
+trivial.
+⃗ o
+APPENDIX B: CALCULATION OF P
+AND So WHEN C = 0
+⃗ o
+1. P
+⃗ o in the limit of
+Here we show how to calculate P
+zero Chern number, where the system can be adiabatically
+connected to an insulator in which the charge density is a sum
+of δ functions at the maximal Wyckoff positions i ¼ α, β, γ, δ.
+The charge at these points is always an integer, of the form N i .
+⃗ o is related to the dipole
+In this limit, the polarization P
+P
+⃗
+moment Po ≔ j∈Θ Qj r⃗ j mod Z2 , where Θ is the unit cell,
+and r⃗ j is a representative position vector for the point j.
+⃗ o : we
+⃗ o to the desired quantity P
+Next we relate P
+show that
+ðPo;x ; Po;y Þ ¼ ðPo;y ; −Po;x Þ mod Z2 :
+
+ðA9Þ
+
+⃗ o compatible with this
+The distinct choices of P
+condition form a group which we denote K M0 . Using
+the rotation matrices given in Table II, we show below
+⃗ o is a nontrivial topological invariant only when
+that P
+⃗ o is given
+M0 ¼ 2, 3, 4. The general parametrization for P
+in Eq. (10).
+
+PHYS. REV. X 13, 031005 (2023)
+
+ðB1Þ
+
+This is true irrespective of any rotational symmetries. The
+argument is as follows (it is adapted from statements in
+Ref. [20], although our result differs from theirs by a sign).
+We consider a clean lattice in which the vector potential
+satisfies At ¼ 0, and the translation gauge fields have
+components satisfying the “natural” choice:
+
+031005-27
+
+Xx ¼ Y y ¼ 1;
+
+Xy ¼ Y x ¼ 0
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+R r⃗
+[implying that r⃗ if ðXx ; Y y Þ ¼ r⃗ f − r⃗ i ]. We set ω ¼ 0 for
+convenience and assume that
+L¼
+
+PHYS. REV. X 13, 031005 (2023)
+M ¼ 3: Figure 2 shows that, modulo 1,
+⃗ α ¼ 1 ðN β þ 2N γ ; N β þ 2N γ Þ;
+P
+3
+⃗ β ¼ 1 ðN γ þ 2N α ; N γ þ 2N α Þ;
+P
+3
+⃗ γ ¼ 1 ðN α þ 2N β ; N α þ 2N β Þ:
+P
+3
+
+⃗
+C
+P
+⃗ þ νA ∧ AXY ;
+A ∧ dA þ o · A ∧ dR
+4π
+2π
+
+neglecting all other terms. With the above assumptions,
+L can be expanded as follows:
+L¼
+
+Po;y
+C
+P
+ð−Ax ∂t Ay þ Ay ∂t Ax Þ − o;x ∂t Ay þ
+∂A :
+4π
+2π
+2π t x
+
+Therefore the expression for the current j is
+
+
+δL δL
+j¼
+;
+δAx δAy
+1
+C
+¼ ∂t ð−Po;y ; Po;x Þ þ ð−Ex ; Ey Þ;
+2π
+2π
+
+ðB2Þ
+
+j¼
+
+1 ⃗
+∂P :
+2π t o
+
+⃗ α ¼ 1 ðN β þ 2N γ ; 2N β þ N γ Þ;
+P
+3
+⃗ β ¼ 1 ðN γ þ 2N α ; 2N γ þ N α Þ;
+P
+3
+⃗ γ ¼ 1 ðN α þ 2N β ; 2N α þ N β Þ:
+P
+3
+
+Nβ þ Nγ
+ð1; 1Þ;
+2
+N þ Nγ
+⃗ β¼ α
+ð1; 1Þ:
+P
+2
+
+⃗ α¼
+P
+
+ðB9Þ
+
+⃗ o mod 1, and PαðβÞ ¼ N βðαÞ þ N γ mod 2.
+In this case, P⃗ o ¼ P
+The polarization at the points γ 1 , γ 2 with C2 symmetry
+can be obtained from the above M ¼ 2 results by taking
+γ 2 ¼ γ, γ 1 ¼ δ, and N γ ¼ N δ .
+2. So
+
+ðB5Þ
+
+The calculation of So in a system with M-fold rotational
+symmetry proceeds by constructing a disclination with
+disclination angle 2π=M at o and measuring the fractional
+charge QW in a region W around the disclination. When
+C ¼ 0 we can consider the fully filled limit in which the
+charge at any point in the MWPs i ¼ α, β, γ, δ is equal to
+N i . Then, by working out the different cases, we find that
+So ¼ N o mod M;
+
+This implies that, modulo 1,
+⃗ α ¼ 1 ðN β þ N δ ; N β þ N γ Þ;
+P
+2
+⃗ β ¼ 1 ðN α þ N γ ; N α þ N δ Þ;
+P
+2
+⃗ γ ¼ 1 ðN β þ N δ ; N α þ N δ Þ;
+P
+2
+⃗ δ ¼ 1 ðN α þ N γ ; N β þ N γ Þ:
+P
+2
+
+ðB8Þ
+
+⃗ o ¼ Po ð1; 2Þ mod 1, the value of
+Since by convention P
+3
+Po can be read off from the x component of the above
+equations.
+M ¼ 4: Figure 2 shows that, modulo 1,
+
+ðB4Þ
+
+Comparing the equations for j then gives Eq. (3). The
+above argument holds on the infinite plane or the torus,
+with and without rotational symmetry.
+Below we consider M ¼ 2, 3, 4 separately; for M ¼ 6,
+⃗ o ≃ ð0; 0Þ. We first determine P
+⃗ o as a dipole moment, and
+P
+⃗
+then find the corresponding Po .
+M ¼ 2: Using Fig. 2 as reference, we find that,
+modulo 1,
+⃗ α ¼ 1 ðN β þ N γ ; N β þ N δ Þ;
+P
+2
+⃗ β ¼ 1 ðN α þ N δ ; N α þ N γ Þ;
+P
+2
+⃗ γ ¼ 1 ðN α þ N δ ; N β þ N δ Þ;
+P
+2
+⃗ δ ¼ 1 ðN β þ N γ ; N α þ N γ Þ:
+P
+2
+
+This implies that, modulo 1,
+
+ðB3Þ
+
+where Ex , Ey are the electric field components. But
+when C ¼ 0, we can also write (after picking a suitable
+normalization)
+
+ðB7Þ
+
+ðB10Þ
+
+for o ¼ α, β, γ, δ.
+3. Argument that So is independent of o
+
+ðB6Þ
+
+Here we use a square lattice calculation with C ¼ 0 as an
+example to argue that So does not depend on the origin o
+used to construct the disclination, but only on the point o
+used to measure the dislocation Burgers vector. Say we
+want to prove that Sβ is independent of the origin. We
+consider o ¼ β and o ¼ α separately and construct two
+
+031005-28
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 12. Pure disclinations with two different choices of o . (a) o ¼ β, (b) o ¼ α. Dashed lines represent unit cell boundary. (c) The
+M ¼ 4 unit cell.
+
+different Ω ¼ ðπ=2Þ disclinations using C̃4;o (see Fig. 12).
+We fix o ¼ β in both cases and extract Sβ from the charge
+response. We have numerically checked that Sβ in for these
+two choices of o are the same (see Fig. 1). Now we
+analytically show that So is independent of o when C ¼ 0.
+We pick the region W shown in Fig. 12. We first consider
+Fig. 12(a) where o ¼ β. In the C ¼ 0 limit, the charge
+response is
+
+we again obtain Sβ ¼ 14 N β . This completes our verification
+that Sβ is independent of o . We can apply similar
+arguments to verify that So is independent of o for each
+o and each M ¼ 2, 3, 4, 6.
+
+Sβ
+QW ¼
+þ 12ν mod 1:
+4
+
+In this appendix, we demonstrate a systematic method
+to construct a dislocation Hamiltonian Hdefect in terms of
+the Hamiltonian H clean on a clean rotationally symmetric
+lattice with M ¼ 2, 3, 4, 6. The procedure is similar in
+spirit to the construction of disclination defects given
+in Ref. [33].
+Since the dislocation is a defect of the translation
+symmetry, the construction necessarily
+P involves the mag-
+
+ðB11Þ
+
+A direct counting of Wannier orbitals gives
+
+
+1
+QW ¼ 12N α þ 12 þ N β þ 24N γ :
+4
+
+ðB12Þ
+
+APPENDIX C: MICROSCOPIC CONSTRUCTION
+OF A DISLOCATION HAMILTONIAN
+
+i
+
+Since ν ¼ N α þ N β þ 2N γ , we obtain Sβ ¼ 14 N β .
+
+Now we switch to o ¼ α [see Fig. 12(b)]. The Burgers
+vector is nontrivial and there is an irregular unit cell in the
+defect core contributing nirreg;b;o
+¼ 12 ν. Taking C ¼ 0, the
+⃗
+impure disclination charge is
+
+
+Sβ Pβ
+1
+þ
+þ 6 þ ν mod 1:
+QW ¼
+2
+4
+2
+
+ðB13Þ
+
+Aj;jþŷ ¼ ðjx − ōx Þϕ;
+j ¼ ðjx ; jy Þ;
+
+A direct counting of Wannier orbitals gives
+
+
+
+
+3
+3
+QW ¼ 7N α þ 6 þ N β þ 12 þ N γ :
+4
+2
+
+ðB14Þ
+
+We now use the C ¼ 0 result Pβ ¼ N α þ N γ which was
+obtained above. Combined with the above equations,
+
+λ c† c
+
+netic translation operator T̃ ≡ e j j j j T̂, which is a
+translation followed by a gauge transformation which
+ensures that T̃ is a symmetry of Hclean . For concreteness,
+we write a general form of the Landau gauge on the square
+and honeycomb lattices below [this is analogous to the
+previously defined gauge on the torus, Eq. (56)]. For the
+square lattice,
+
+jx ∈ Z;
+
+jy ∈ Z:
+
+ðC1Þ
+
+This vector potential is defined on an infinite plane. In this
+appendix, we use A ≡ Aclean to denote the entire vector
+potential on the clean lattice. ō ¼ ðōx ; ōy Þ is called the
+gauge origin. On the honeycomb lattice, consider Fig. 13.
+Assume that the boundaries of the unit cell align with the
+hoppings. Then define
+
+031005-29
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+FIG. 13. Landau gauge on a honeycomb lattice with different gauge origin ō. Each blue arrow represents a hopping
+phase Aij ¼ ðϕ=4Þ.
+
+ϕ
+Ai;iþð−1=3;2=3Þ ¼ Aj;jþð1=3;1=3Þ ¼ ðx − ōx Þ ;
+2
+
+
+1
+1
+i ¼ ix − ; iy − ; ix ∈ Z; iy ∈ Z;
+3
+3
+
+
+1
+1
+j ¼ jx þ ; jy þ ; jx ∈ Z; jy ∈ Z:
+3
+3
+
+ðC2Þ
+
+i and j are site indices at MWP β and MWP γ of the C3 unit
+cell, respectively (refer to Fig. 2 for the unit cell
+convention).
+Using the aforementioned gauge choices, we now explain
+how to construct the dislocation Hamiltonian Hdefect for
+each M, starting with Hclean . In our numerics we use this
+procedure to construct dislocations with b⃗ ¼ ð1; 0Þ;
+ð0; 1Þ; all other dislocation Burgers vectors lie in the
+⃗
+same equivalence class as one of these choices of b.
+1. C2 , C4 dislocation
+Let us consider a dislocation on the simplest square
+lattice as an example. The construction below generalizes
+naturally to C2 lattice dislocations since both of them have
+quadrilateral unit cells. Given an origin o and the desired
+⃗ the procedure for constructing
+dislocation Burgers vector b,
+Hdefect is summarized in three steps: (1) draw a cut parallel
+⃗ (2) define conjugate hopping terms, (3) perform
+to b,
+local moves.
+The first step is to draw a linear cut in the direction
+of b⃗ [b⃗ ¼ ð0; 1Þ in Fig. 14]. This cut starts and
+ends on two plaquette centers. The cut intersects a
+set of links in the lattice corresponding to hopping
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 14. Dislocation construction procedure on a square lattice.
+(a) Drawing a cut in the ŷ direction. (b) Conjugate hoppings.
+(c) Doing local moves. (d) Reorganizing.
+
+terms in H clean . We only consider two-fermion hopping
+terms below.
+Consider a particular term which intersects the cut, and is
+of the form c†Lj cRj e−iALj Rj in H clean . Lj and Rj are sites on
+the left and right of the cut, respectively. We conjugate only
+the operator cRj with the translation operator T̃ y :
+e−iALj Rj c†Lj cRj → e−iALj Rj c†Lj ðT̃ y cRj T̃ †y Þ
+¼ e−iALj Rj × e−iλRj c†Lj cRjþ1 :
+
+ðC3Þ
+
+Starting with Hclean , we delete the original
+hoppings e−iALj Rj c†Lj cRj and add the new hoppings
+e−iðALj Rj þλRj Þ c†Lj cRjþ1 to obtain Hdefect . In the example
+shown in Fig. 14, this procedure creates a dislocation with
+b⃗ ¼ ð0; 1Þ on the −y side of the cut and an antidislocation
+with b⃗ ¼ ð0; −1Þ on þy side of the cut.
+We want to consistently ensure that the irregular unit
+cells in this construction are all triangular, and not
+pentagonal or in some other irregular shape. Therefore,
+in the third step, we make one local change of the hopping
+terms such that both the dislocation and antidislocation
+have a triangular plaquette [see Fig. 14(c)]. This fully
+determines H defect .
+2. Properties of ϕirreg on square lattice
+Here we derive several statements that were made in
+Sec. V regarding the flux ϕirreg in a dislocation plaquette on
+a square lattice.
+
+031005-30
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+a. Proof of Eq. (43)
+Consider Fig. 14. We refer to the point j in this figure as
+j0 in the main text. For a b⃗ ¼ ð0; 1Þ Burgers vector, the
+flux in the irregular dislocation plaquette can be written
+in terms of the vector potential Adefect on the defect lattice
+as follows:
+ϕirreg ¼ Adefect;ij þ Adefect;jk þ Adefect;ki :
+
+ðC4Þ
+
+(2) Suppose we change λj → λj þ χ for each j, and
+χ ¼ ϕvx . j0 and A are fixed. Then from Eq. (C5),
+Δϕirreg ¼ −ϕvx .
+c. Proof of Eq. (61)
+With λj as defined in Eq. (59), we calculate ϕirreg given
+that the dislocation is created at x ¼ j0;x on the torus:
+8
+ϕ
+>
+>
+< ðj0;x − ōx Þϕ þ 2 Lx
+ϕirreg ¼ ðj0;x − ōx Þϕ − ϕ Lx
+2
+>
+>
+:0
+
+From Eq. (C3), we see that the new hopping created in the
+defect lattice tc†i ck e−iAdefect;ik can be calculated in terms of
+the vector potential on the clean lattice; i.e.,
+Adefect;ik ¼ Aij þ λj :
+Moreover, Adefect;ij ¼ Aij and Adefect;jk ¼ Ajk . Therefore,
+ϕirreg ¼ Ajk − λj :
+
+b. Change in ϕirreg
+Next we prove the claims in Sec. VA about how ϕirreg
+changes when either λ or j0 is changed.
+(1) Suppose we change j0 → j0 þ ðvx ; 0Þ, vx ∈ Z,
+keeping A, λ fixed. Then the change in ϕirreg is
+Δϕirreg ¼ Aj0 þðvx ;0Þ;j0 þðvx ;0Þþŷ − λj0 þðvx ;0Þ
+− ðAj0 ;j0 þŷ − λj0 Þ:
+
+ðC6Þ
+
+j0;x < ōx
+j0;x > ōx
+
+ðC10Þ
+
+j0;x ¼ ōx :
+
+Since the sites have integer x and y coordinates, we use
+Eq. (60), along with the following relation, which can be
+read off from Table IV:
+
+
+1
+nirreg;o ¼ − ox þ
+mod 1:
+2
+
+ðC5Þ
+
+In the main text we explicitly write j ¼ j0 , k ¼ j0 þ ŷ.
+
+PHYS. REV. X 13, 031005 (2023)
+
+ðC11Þ
+
+This relation is defined mod 1 because an integer change of
+nirreg;o does not change o mod Z2 .
+From these two conditions we find that ox ¼ ōx − 12 −
+ðLx =2Þ mod 1 whenever j0;x ≠ ōx. This is the same as our
+numerical observation using Eq. (61).
+3. C3 , C6 dislocation
+We can use a similar method to construct a C3 or C6
+dislocation in the honeycomb lattice. Figure 15 shows the
+full procedure for constructing a b⃗ ¼ ð0; 1Þ dislocation
+and antidislocation pair.
+
+Now we use Eq. (58). On the infinite plane, Eq. (58)
+holds exactly, while on the torus, where it is not
+exact everywhere, we ensure that the dislocation is
+constructed within a region where this equality does
+hold. Then we get
+λj0 − λj0 þðvx ;0Þ ¼ Aj0 ;j0 þðvx ;0Þ − Aj0 þŷ;j0 þðvx ;0Þþŷ :
+ðC7Þ
+Therefore,
+Δϕirreg ¼ Aj0 þðvx ;0Þ;j0 þðvx ;0Þþŷ − Aj0 ;j0 þŷ
+þ Aj0 ;j0 þðvx ;0Þ − Aj0 þŷ;j0 þðvx ;0Þþŷ
+¼ þϕvx :
+
+ðC8Þ
+ðC9Þ
+
+The last equality is because the sum over A measures
+the flux in a rectangle of side lengths vx and 1 in the
+x and y directions, respectively.
+
+FIG. 15. Dislocation construction procedure on a honeycomb
+lattice. (a) Draw a cut in the ŷ direction. (b) Conjugate a set of
+hopping terms. (c) Perform local moves. (d) Reorganize.
+
+031005-31
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+With some fixed gauge origin ō ≡ ðōx ; ōy Þ, we construct
+Hdefect from Hclean following the same three steps as above.
+For consistency we choose the irregular unit cell to be
+quadrilateral (rather than, say, an octagon). As above,
+using δΦW;o ¼ 0, we demand that T̃ y should create a
+dislocation with ϕirreg ¼ ϕnirreg . Using λj defined in
+Eq. (86), we again recover the relation between ox and
+ōx to be ox ¼ ōx − ðLx =2Þ − 12 mod 1.
+
+where k1 is the integer part of nW 1 . Since o is at the center
+of the unit cell, we have no;irreg;Ω ¼ 1 − ðΩ=2πÞ ¼ 34 as
+defined in Eq. (78). The charge response for W 2 can be
+written as
+
+⃗ og
+APPENDIX D: INDEPENDENCE OF fSo ;P
+UNDER SHIFT OF UNIT CELL
+In this appendix, we describe the trimming method
+⃗ o and So do not
+which serves as a tool to prove that P
+depend on the choice of unit cell Θ. It is worth noting that
+the linear momentum calculation and the 1D polarization
+calculation are completely independent of Θ. Only the
+charge response calculation depends on Θ. We provide
+⃗ o,
+two examples to illustrate the method, for So and P
+respectively.
+1. So
+Consider a pure disclination on the square lattice with the
+C4 symmetric origin o at a site, as shown in Fig. 16(a). We
+consider the two choices of unit cell Θ1 , Θ2 shown in
+Figs. 16(c) and 16(d). We also define two regions W 1 , W 2
+whose boundaries are aligned with those of Θ1 , Θ2 ,
+respectively.
+Following Eq. (77), the charge response for W 1 can be
+written as
+
+
+So
+3
+CδΦW1
+QW1 ¼
+þ k1 þ ν þ
+mod 1;
+ðD1Þ
+4
+4
+2π
+
+QW2 ¼
+
+So
+CδΦW2
+þ k2 ν þ
+mod 1:
+4
+2π
+
+ðD2Þ
+
+The extra flux δΦW is only inserted near the defect,
+and W 1 and W 2 only differ at their boundary. Therefore,
+δΦW1 ¼ δΦW2 .
+In order to prove that So extracted in the two equations
+above is the same, we need to show that QW1 − QW2 ¼
+ðk3 þ 34Þν. Since we can arbitrarily add a full unit cell on the
+boundary of W 1 or W 2, k3 can vary freely without changing
+So , but the fractional part in parentheses needs to be 34.
+In order to compare QW1 and QW2 , we trim W 1 into W 2 .
+This only requires cutting out subcells on the boundary,
+which is assumed to be far away from the defect. Thus, on
+the boundary we expect the charge in each unit cell to be ν,
+and the charge in each subcell to be 14 ν. With this
+information, we can explicitly calculate QW1 − QW2 .
+For example, in Figs. 16(a) and 16(b), QW1 − QW2 ¼
+ð6 þ 34Þν, which satisfies the aforementioned condition. The
+above process is repeated for disclinations with M ¼ 2, 3,
+4, 6 lattice with arbitrary o and Ω. In all cases, the value of
+QW 1 − QW 2 obtained from the trimming method is consistent with a fixed value for So. This allows us to check
+that the extracted So does not depend on Θ.
+⃗ o
+2. P
+⃗ o does
+We use a similar procedure to prove that P
+not depend on the choice of Θ. Consider the honeycomb
+lattice dislocation shown in Fig. 15(d) with Burgers vector
+b⃗ ¼ ð0; −1Þ. Let us consider o to be at a plaquette center.
+Two choices of Θ are shown in Figs. 17(c) and 17(d).
+The charge response with unit cell as in Fig. 17(c) can be
+written as
+
+
+2
+CδΦW1
+⃗
+⃗
+QW1 ¼ Po · b þ k1 þ ν þ
+mod 1:
+3
+2π
+
+ðD3Þ
+
+Again, k1 is the integer part of the number of unit cells
+enclosed by W 1. Since the position of the origin relative to
+the center of the unit cell is ð23 ; − 13Þ, the fractional value of
+nirreg can be read off from Table IV. Similarly, the charge
+response with Θ2 as in Fig. 17(d) can be written as
+FIG. 16. Trimming method for a pure disclination on the square
+lattice. We consider two regions. (a) W 1 and (b) W 2 . W 1 , W 2
+correspond to choices of the unit cell shown in (c) and (d),
+respectively. The origin o is defined to be at a site. Black solid
+lines represent hoppings. Here W 1 is trimmed into W 2 by
+excluding subcells at the boundary.
+
+⃗ o · b⃗ þ k2 ν þ
+QW2 ¼ P
+
+CδΦW2
+mod 1:
+2π
+
+ðD4Þ
+
+Similar to the previous example, δΦW1 ¼ δΦW2 , and we
+need to show that QW1 − QW2 ¼ ðk3 þ 23Þν.
+
+031005-32
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 17. Trimming method for a dislocation. (a) Honeycomb
+dislocation with region W 1 covering the b⃗ ¼ ð0; −1Þ dislocation.
+The boundary of W is aligned with unit cell boundary of (c),
+shown as red dashed line. (b) The region W 2 after trimming. Now
+the boundary of W 2 is aligned with the hopping, which is also the
+unit cell boundary of (d), shown as black solid line.
+
+In the example shown in Figs. 17(a) and 17(b),
+each subcell contributes 13 ν. We have QW1 − QW2 ¼ 14
+3 ν¼
+2
+ð4 þ 3Þν, giving the expected answer.
+This procedure can be extended to M ¼ 2, 3, 4, 6 lattices
+⃗ With this we can verify that P
+⃗ o does
+with arbitrary o and b.
+not depend on Θ.
+APPENDIX E: FURTHER DETAILS IN LINEAR
+MOMENTUM CALCULATION
+In this appendix, we first state some numerical observations on how the quantization of the linear momentum
+changes upon starting with the operator T̃ y as in Eq. (59) but
+then changing the location of the strip that violates translation symmetry. Then we discuss some technical details
+regarding the partial translation method. The numerical
+results of linear momentum can be seen in Fig. 18.
+We note that in the main text, the origin o for the charge
+polarization is defined in terms of the gauge origin ō. This
+is, however, not the only way to define o. For a given A, λ,
+where λ is associated to the operator T̃ y , there is a point õ
+which satisfies
+λõ − Aõ;õþŷ ¼ 0:
+
+ðE1Þ
+
+õ does not change under gauge transformations, which take
+Aij → Aij þ f j − f i and λj → λj − f j þ f jþŷ . This transformation of λj is obtained by solving Eq. (58) after gauge
+transforming A. Therefore õ is a gauge-invariant point, and
+we can in principle define o in terms of õ by constraining
+the flux at a dislocation defect. This involves arguments
+
+FIG. 18. Bare numerical result of (top) angular momentum lo
+which follows Eq. (40); both calculated on an Lx × Ly ¼
+12 × 12 torus. Bottom: linear momentum pλ;y which follows
+Eq. (21), calculated on the Lx × Ly ¼ 19 × 11 and Lx × Ly ¼
+20 × 11 torus, respectively. All panels are plotted in the
+0 < ϕ < 2π range.
+
+similar to the ones in Appendix C. However, we do not use
+õ in the present work.
+1. Freedom in changing location of strip
+Consider the choice of λ in Eq. (59). Apart from global
+U(1) transformations, we can consider other choices of λj
+which serve equally well as approximate symmetries. For
+example, we can consider
+8
+P
+i
+−ðπm=Ly Þc†j cj
+>
+j
+>
+e
+T̂
+y
+>
+<
+P
+T̃ 0y ¼ T̂ ei j ðπm=Ly Þc†j cj
+y
+>
+>
+>
+:
+T̂ y
+
+jx < ōx þ δ
+jx > ōx þ δ
+
+ðE2Þ
+
+jx ¼ ōx þ δ;
+
+for some real number δ ≠ 0. The vector potential is again
+almost symmetric with respect to T̃ 0y ; the strip where T̃ 0y is
+locally not the symmetry of the Hamiltonian is, however,
+shifted from ō by the amount δ in the x direction. However,
+the expectation value of T̃ 0y does not yield the desired
+invariant Po;y . We have numerically checked that for any
+δ ≠ 0, the resulting values of Po;y are not even quantized
+throughout each gapped phase of the Hofstadter model
+when C ≠ 0. And when C ¼ 0, choosing δ ≠ 0 continues
+
+031005-33
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+to give a quantized result, but certain choices of δ will give
+Poþð1=2;0Þ;y instead of Po;y .
+These observations can be understood as follows.
+Suppose we calculate Po;y using T̃ y for a given choice
+of strip, and then change the strip position by δx̂ as in
+Eq. (E2). In general, if δ ≠ 0, λj changes by kj πm=Ly
+for each j that was crossed by the strip as it was shifted.
+kj ¼ 1 if j lies exactly on the initial or the final position
+of the strip, and kj ¼ 2 if j lies in between the initial and
+final positions of the strip. Let S be the set of points crossed
+by the strip. Then,
+P
+i
+ðk πm=Ly Þn̂j
+T̃ y → T̃ y e j∈S j
+:
+ðE3Þ
+When C ¼ 0, we verify numerically that the state jΨi is an
+almost exact eigenstate of n̂j , with expectation value κ
+(the statement being exact for the Hofstadter model). Thus
+we obtain:
+P
+iπmκ
+ðk =Ly Þ
+j∈S j
+T̃ y → T̃ y e
+:
+ðE4Þ
+Since the number of points j corresponding to a fixed kj is
+always a multiple of Ly , the extra factor is of the form
+0
+ð−1Þk m , where k0 ¼ 0 or 1, and is fixed by the actual values
+of kj and κ. If k0 ¼ 0, Po;y is invariant. But if
+k0 ¼ 1, Po;y → Po;y þ 1=2.
+Note that this reasoning breaks
+P down when C ≠ 0:
+jΨðmÞi is not an eigenstate of j∈S n̂j , and Po;y hence
+can be expected to depend sensitively on the strip position.
+As mentioned in the main text, empirically we have found
+that the strip needs to be aligned with the gauge origin ō in
+order to obtain consistent results for Po;y.
+2. Partial translation
+In the partial translation calculation we define the
+operator T̃ y jD and find that we need to pick a particular
+choice of D, so that D is a cylinder defined mirror
+symmetrically about the cycle x ¼ ōx − ðLx =2Þ [with
+⃗ o that
+holonomy ð−1Þm ]. This set of choices recovers P
+is consistent with the dislocation charge calculation. There
+is another natural choice of parameters: we can choose D to
+be defined around x ¼ ōx , and choose T̃ y jD ¼ T̂ y jD . We
+⃗ o ¼ 0 everywhere
+numerically find that this choice gives P
+in the butterfly. We do not have a complete explanation for
+why the first set of choices is required. However, we find a
+resemblance between this result and the calculation of
+angular momentum through partial rotations discussed
+previously in Ref. [33].
+In that calculation we need to choose a disk D centered
+around a special point o2 , which is one of the two
+vertices invariant under the chosen rotation operator at
+a vertex v, Ĉ4;v . The holonomy of A around either cycle
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 19. The U(1) phase of a randomly chosen low-energy
+single-particle eigenstate on a 64 × 64 torus. The gauge origin is
+at ō ¼ ð51 þ 12 ; 0Þ. The parameters are (left) m ¼ 5, C ¼ 1,
+(right) m ¼ 15, C ¼ 1. The variation in phase along y is lowest
+around x ¼ ōx .
+
+which crosses o2 is eiπm in a system with m flux quanta.
+But if we choose a disk centered around the other fixed
+point o1 , with respect to which A has trivial holonomy,
+the resulting value of the discrete shift varies irregularly
+within the same Hofstadter lobe and is not meaningful.
+Thus if we consider partial spatial symmetries, the
+⃗ o involves the part of the
+calculation of both So and P
+iπm
+system with e
+holonomy rather than the part of
+the system with trivial holonomy.
+We can provide some more heuristic numerical evidence
+explaining this choice. We consider a system at fixed C and
+plot the phase of a randomly chosen low-energy singleparticle eigenstate for different choices of m (see Fig. 19).
+We empirically find that the phase variation in the y
+direction nearly vanishes around the cycle x ¼ ōx . Note
+that our choice of D excludes the region around x ¼ ōx .
+The phase of hΨjT̃ y jD jΨi is nearly unaffected by this
+choice of D. However, choosing D to exclude the region
+around x ¼ ōx − ðLx =2Þ will significantly change
+hΨjT̃ y jD jΨi. The above discussion suggests that the region
+around x ¼ ōx − ðLx =2Þ is in a sense more important than
+⃗ o.
+the region around x ¼ ōx in order to extract P
+APPENDIX F: DERIVATION OF TOPOLOGICAL
+RESPONSE THEORY
+Here we discuss the construction of the topological
+response theory for invertible fermionic phases with the
+symmetry group Gf ¼ Uð1Þf ×ϕ ½Z2 ⋊ ZM . This construction was first developed for bosonic topological phases
+in Ref. [17], and a partial extension to invertible fermionic
+phases focusing on So was discussed in Ref. [33]. In this
+appendix, after reviewing the definition of crystalline gauge
+fields, we present two computations that are new: a
+derivation of the complete response theory using results
+⃗ o
+from Ref. [14], and a derivation of the quantization of P
+from field theory.
+
+031005-34
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+1. Review of crystalline gauge fields
+Consider a 3-manifold M3 . We define real-valued
+differential 1-form gauge fields δA;X;Y;ω ∈ Ω1 ðM3 ;RÞ.
+δA denotes the part of the vector potential in excess of
+the uniform background, and we identify δA ∼ δA þ 2π.
+(Note that the quantity A is taken to mean the entire vector
+⃗ ¼ ðX; YÞ represents the Z2 translation compotential.) R
+ponent. ω is a ZM rotation gauge field. The full gauge field
+⃗ ωÞ. It is non-Abelian and
+is denoted as B ¼ ðδA; R;
+composes according to the group law of Gf .
+⃗ dωÞ. F ≔
+The flux of B has three components ðF; T;
+dδA þ ϕAXY is the density of magnetic flux. It consists of a
+background contribution ϕAXY proportional to the area
+element AXY , and an excess contribution which is measured
+by dδA. We can equivalently write F ¼ dA, where A is the
+full vector potential.
+AXY depends on ðX; YÞ, and its precise form also
+depends on the value of M, but when ω ¼ 0, AXY ¼ X ∪ Y.
+R
+T⃗ is the torsion; the quantity ð1=2πÞ D2 T⃗ measures the
+total dislocation Burgers vector within a 2D region D2 .
+When we use orthogonal coordinates, for example when
+⃗ þ iσ y ω ∧ R,
+⃗ where iσ y ¼
+M ¼ 4, we can write T⃗ ≔ dR
+0 1
+. The general definition of T⃗ depends on how we
+−1 0
+fix our coordinate basis. We note, however, that in the
+original simplicial formulation of the response theory,
+⃗ for any value of M, because
+we can simply define T⃗ ¼ dR
+the second term can be removed by a suitable gauge
+transformation [17].
+dω Ris the disclination density; the quantity
+ð1=2πÞ D2 dω measures the total disclination angle within
+D2 . In order to correctly encode the curvature and torsion of
+⃗ ω equal to the SO(2) components of the
+M3 , we set R;
+coframe fields and the spin connection on M3 .
+There is a very important issue that was not commented
+upon in Refs. [17,33]. Since the dislocation Burgers vector
+can in general be origin dependent, the translation gauge
+fields must themselves be origin dependent. This means
+that quantities in the action constructed out of the crystalline gauge fields may all in principle carry an origin
+dependence. We return to this point in Appendix G.
+We impose the condition that B is a Gf gauge field
+through quantization conditions on the total flux of B through closed and open 2D submanifolds of M3 . If D2 ⊂ M3
+is a closed 2D submanifold, then the gauge field on D2
+must be flat; i.e.,
+
+  X
+⃗ lj δð2Þ ð⃗x − x⃗ j Þ;
+⃗Tð⃗xÞ ¼ 2π 1 − U 2π
+M
+j
+δAð⃗xÞ ¼ 2π
+
+X
+mj δð2Þ ð⃗x − x⃗ j Þ;
+j
+
+ðF1Þ
+ðF2Þ
+
+PHYS. REV. X 13, 031005 (2023)
+ωð⃗xÞ ¼ 2π
+
+X
+nj δð2Þ ð⃗x − x⃗ j Þ;
+
+ðF3Þ
+
+j
+
+within D2 , where ⃗ lj ∈ Z2 and mj ; nj ∈ Z. This physically
+corresponds to saying that the only sources of flux in D2 are
+points at the positions x⃗ j , which each carry an integer
+number of flux quanta. Note that the factor ½1 − Uð2π=MÞ
+⃗ because a Burgers vector of
+appears in the condition for T,
+the form ½1 − Uð2π=MÞ⃗r, r⃗ ∈ Z2 , is in the trivial class (see
+Appendix A) and therefore corresponds to a trivial quantum
+of flux.
+On open manifolds, we can have nonflat gauge field
+configurations, which can assign fractions of a flux
+quantum. The following conditions ensure that the net
+flux of the crystalline gauge fields in a region, although
+fractional, always corresponds to an element of Gspace :
+⃗ xÞ ¼ 2π
+Tð⃗
+
+X
+⃗ lj δð2Þ ð⃗x − x⃗ j Þ;
+
+ðF4Þ
+
+j
+
+ωð⃗xÞ ¼
+
+2π X ð2Þ
+n δ ð⃗x − x⃗ j Þ:
+M j j
+
+ðF5Þ
+
+Even when we allow nonflat gauge field configurations
+on an open manifold, the integral through any closed 2D
+submanifold D2 must still be appropriately quantized:
+
+ 
+Z
+X
+1
+⃗ lj ¼ 1 − U 2π ⃗ ltot ;
+⃗T ¼
+2π D2
+M
+j
+Z
+1
+1X
+dA ¼
+m ¼ mtot ;
+2π D2
+M j j
+Z
+1
+dω ¼ ntot ;
+2π D2
+
+ðF6Þ
+
+where mtot ; ntot ∈ Z and ⃗ ltot ∈ Z2 . Physically, ntot is the
+Euler characteristic of D2 .
+2. Response theory
+a. General derivation
+The general construction of a response theory for
+invertible fermionic topological phases with symmetry
+group Gf ¼ Uð1Þf ×ϕ ½Z2 ⋊ ZM  was outlined in Ref. [33].
+In that work, specific quantization conditions on the
+discrete shift were derived by ignoring translations. Here
+we recall the main steps in the derivation, but also consider
+translations, with a view to obtaining the quantization
+⃗ o.
+of P
+First, note that the quantity ½ω2  ∈ H2 ðGb ; Z2 Þ specifies
+Gf as a group extension of Gb by Zf2. To express ω2 in
+terms of the gauge fields, we define
+
+031005-35
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+1
+ð2Þ
+B2 ≔ ð2F þ kdωÞ ¼ πB ω2 ;
+2
+
+ðF7Þ
+
+where B refers to the pullback via B [meaning B ω2 ðxÞ ¼
+ω2 ½BðxÞ for x ∈ M3 ] [52]. As mentioned in Ref. [33], if
+the chosen 2π rotation operator acts as the identity, we
+should set k ¼ 1 in the above definition; if it acts as the
+fermion parity ð−1ÞF, we should set k ¼ 0. Accordingly,
+here we use k ¼ 1.
+Note that the choice of k in the definition of ω2 and hence
+ð1Þ
+B2 specifies the angular momentum mod 1 of the fermion.
+In general, ω2 specifies the fractional Gb quantum numbers
+of the fermion [14].
+ð1Þ
+Next, we define the quantity B2 ¼ πB n2, where
+n2 ∈ Z2 ðGb ; Z2 Þ is a general 2-cocycle, which is also
+one piece of the data in the classification of Ref. [14].
+In our case, n2 specifies the fermion parity change in the
+ground state after introducing a Gb flux quantum. It turns
+ð1Þ
+out that the most general possible parametrization of B2 is
+as follows:
+1
+ð1Þ
+B2 ≔ f2kF F þ kω dω þ ½1 − Uð2π=MÞ−1 k⃗ T · T⃗ þ kA AXY g;
+2
+ðF8Þ
+where kF ; kω ; kA ∈ Z and k⃗ T ∈ Z2 . For M ¼ 3, 6, we
+require k⃗ T ¼ ð0; 0Þ. This parametrization of n2 can be
+found, for example, in Appendix D of Ref. [17]. We also
+use the fact that n2 ≃ n2 þ ω2 (this is proven in Ref. [14]
+and is an equivalence due to relabeling fermion parity
+defects in the invertible phase). We use this equivalence to
+set kF ¼ 0.
+The three remaining terms have the following interpretation: (1) kω is the fermion parity change upon inserting a
+⃗ specifies the
+set of disclinations with Ω ¼ 2π; (2) k⃗ T · Λ
+fermion parity change in a region upon introducing dis⃗ (3) kA
+locations with total Burgers vector ½1 − Uð2π=MÞΛ;
+specifies the fermion parity per unit cell.
+Then, the main result (obtained using the general theory
+developed in Ref. [14]) is that the Lagrangian density L
+which gives the topological response theory for an invertible fermionic phase with symmetry Gf and chiral central
+charge c− must satisfy
+
+2 1 ð1Þ
+c ð2Þ
+ð1Þ
+ð2Þ
+ð2Þ
+dL ¼
+B2 ∧ ðB2 þ B2 Þ þ − B2 ∧ B2 mod 2π:
+π 2
+8
+ðF9Þ
+Its meaning is the following. The 2-cocycles n2 , ω2
+ð1Þ
+ð2Þ
+(alternatively, the quantities B2 ; B2 ) together specify
+the Gb quantum numbers of the fermions and the fermion
+parity defects in the system. But in order to ensure that the
+Gb quantum numbers of all symmetry defects are well
+
+PHYS. REV. X 13, 031005 (2023)
+defined in ð2 þ 1ÞD, we need an extra condition given by
+Eq. (F9). Note that if the rhs of this equation corresponds to
+a nontrivial class in the group H4 ½Gb ; Uð1Þ, there is no
+solution for L, and the system can only live on the boundary
+of a ð3 þ 1ÞD symmetry-protected topological (SPT) phase
+whose effective action is defined by the quantity dL.
+For free fermion phases, we can set C ¼ c− ; in general, C ¼ c− mod 8.
+The response theory finally obtained from this condition,
+ð1Þ
+ð2Þ
+by substituting B2 ; B2 and integrating, takes the form
+L¼
+
+⃗
+C
+S
+κ
+P
+A ∧ dA þ o A ∧ dω þ o · A ∧ T⃗ þ A ∧ AXY
+4π
+2π
+2π
+2π
+e
+⃗
+ν
+l
+P
+þ s ω ∧ dω þ s · ω ∧ T⃗ þ s ω ∧ AXY þ    ;
+4π
+2π
+2π
+ðF10Þ
+
+where the dots refer to additional terms that can be nonzero
+even if δA; ω are both zero. We note that because dL only
+involves F, L is written entirely in terms of A, even though
+one might expect that it should be written in terms of δA.
+The coefficients in this equation can all be expressed in
+⃗ o.
+terms of kω , kT , kA , as we now show for P
+⃗ o using response theory
+b. Quantization of P
+The quantization of So and its dependence on c− was
+discussed in Ref. [33]. Below we only discuss the quan⃗ o . In the next section we discuss the origin
+tization of P
+⃗ o.
+dependence of So and P
+⃗ o in Eq. (F10)
+Note that the derivative of the term with P
+⃗
+⃗ o =2πÞ · F ∧
+can be written as ðPo =2πÞ · dA ∧ T⃗ ¼ ðP
+T⃗ þ   . When kF ¼ 0, such a term can only come from
+ð1Þ
+ð2Þ
+the B2 ∧ B2 term in Eq. (F9). Indeed, by comparing the
+two equations we must have
+⃗ o
+1
+1
+P
+F ∧ T⃗ ¼ F ∧ ½1 − Uð2π=MÞ−1 k⃗ T · T⃗ mod 2π:
+π
+2
+2π
+ðF11Þ
+The above equation implies that
+⃗ o ¼ ½1 − Uð2π=MÞ−1 ðk⃗ T þ 2k⃗ T;SPT Þ mod Z2 :
+P
+
+ðF12Þ
+
+The term with k⃗ T;SPT ∈ Z2 arises as a constant of integration. It does not contribute to dL, and can physically be
+thought of as the polarization in a bosonic SPT phase which
+is stacked onto the original fermionic phase. We now use
+the conditions k⃗ T ; k⃗ T;SPT ∈ Z2 , along with the fact that
+⃗ o do not contribute to the partition
+integer choices of P
+function. With this we obtain the quantization result
+claimed in the main text. In particular, the classification
+
+031005-36
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+⃗ o for invertible bosonic and fermionic systems is the
+of P
+same, in contrast to the results for the Hall conductance
+and So .
+⃗ o on c− because in
+There is no dependence of P
+Eq. (F9) the terms proportional to c− only depend on
+⃗ o are
+⃗ The nontrivial values of P
+F and dω, and not on T.
+⃗
+entirely due to kT when M ¼ 2, 4, and entirely due to
+k⃗ T;SPT when M ¼ 3.
+Finally, we note that the first four terms in Eq. (F10) can
+be rewritten in a perhaps more familiar form, using the
+relations ν ¼ κ þ ðCϕ=2πÞ and F ¼ dδA þ ϕAXY :
+⃗
+C
+S
+P
+⃗ ∧ dδA
+L ¼ δA ∧ dδA þ o ω ∧ dδA þ o · R
+4π
+2π
+2π
+ν
+þ dδA ∧ AXY þ    :
+2π
+
+2. Change in So
+First we study the transformation of dω. A cocycle
+representative for dω can be explicitly written on a
+2-simplex with the group elements g1 ; g2 ; ðg1 g2 Þ−1 :
+dωðg1 ; g2 Þ ¼
+
+ðF13Þ
+
+Here we use the simplicial formulation of the topological
+response theory [17] to derive the quantities ρM ; μ⃗ M ; τ⃗ M
+defined in Eqs. (93)–(95).
+1. Fractional gauge transformations
+The definition of each group element gi ¼ ðri ; hi Þ ∈
+Gspace implicitly depends on the choice of origin o. For
+example, h ¼ ð0; 1 mod MÞ is the element in Gspace
+corresponding to a rotation by angle 2π=M (about o).
+Now suppose o0 ¼ o þ v⃗ , as before. The group element g0i
+which implements the same transformation but with respect
+to the new origin o0 can be expressed as follows:
+ðG1Þ
+
+which corresponds to translating from o0 to o, applying g,
+and translating back. Now we use the group multiplication
+law in Gspace ,
+ðG2Þ
+
+ðG4Þ
+
+where ½aM ≔ a mod M. Since dω does not depend on the
+translation group variables, it is unaffected by the transformation in Eq. (G3). Therefore, we have
+ðG5Þ
+
+⃗ An explicit cocycle
+Next we study the quantity dR.
+representative is
+⃗ 1 ; g2 Þ ¼ r1 þ r2 − ½r1 þ Uð2πh1 =MÞr2 
+dRðg
+¼ ½1 − Uð2πh1 =MÞr2 :
+
+ðG6Þ
+
+This implies that
+⃗ 0 ðg1 ; g2 Þ
+dR
+⃗ 01 ; g02 Þ
+≔ dRðg
+¼ ½1 − Uð2πh1 =MÞfr2 þ ½1 − Uð2πh2 =MÞ⃗vg
+
+ðG7Þ
+
+⃗ þ ½1 − Uð2πh1 =MÞ½1 − Uð2πh2 =MÞ⃗v:
+¼ dR
+
+ðG8Þ
+
+APPENDIX G: COMPUTATIONS FOR SEC. VII
+
+ðr1 ; h1 Þðr2 ; h2 Þ ¼ ½r1 þ Uð2πh1 =MÞr2 ; h1 þ h2 ;
+
+½h1 M þ ½h2 M − ½h1 þ h2 M
+;
+M
+
+dω0 ¼ dω:
+
+The advantage of this representation is that it makes the
+physical invariant ν explicit, and is also closer in spirit to
+the Chern-Simons response theory of the continuum
+quantum Hall effect, which only includes δA. However,
+it is a weaker form of the field theory, because it leaves out
+several terms that were explicit in Eq. (F10). For the
+derivations in the main text, we write the field theory in
+terms of A and not δA. Remarkably, our empirical findings
+are easier to explain using Eq. (F10) than with the above
+Lagrangian.
+
+g0i ¼ ð⃗v; 0Þgð−⃗v; 0Þ;
+
+PHYS. REV. X 13, 031005 (2023)
+
+The second term only depends on h1 , h2 , just like dω. In
+fact, it is coboundary equivalent to a multiple of dω. This
+can be seen by computing a cohomology invariant we
+denote I Ω , which for a general cocycle f 2 ∈ Z2 ðGspace ; ZÞ
+is defined as
+I Ω ½f 2  ≔
+
+M
+−1
+X
+
+f 2 ðhj ; hÞ mod M;
+
+ðG9Þ
+
+j¼0
+
+where we recall h ¼ ð0; 1Þ. We can show that I Ω ðdωÞ ¼ 1
+⃗ ¼ I Ω ðAXY Þ ¼ 0.
+using Eq. (G4), and also that I Ω ðdRÞ
+Thus, I Ω is an invariant corresponding to the ZM subgroup
+of H2 ðGspace ; ZÞ.
+Up to coboundaries, we have by assumption,
+⃗ þ τ⃗ M dω;
+⃗ 0 ¼ dR
+dR
+
+ðG10Þ
+
+therefore, for any integer vector u⃗ ,
+
+to find that
+
+⃗ 0 Þ ¼ I Ω ð⃗u · dRÞ
+⃗ þ I Ω ð⃗u · τ⃗ M dωÞ
+I Ω ð⃗u · dR
+g0i ¼ ½ri − Uð2πhi =MÞ⃗v þ v⃗ ; hi :
+
+ðG3Þ
+
+031005-37
+
+⃗ þ u⃗ · τ⃗ M mod M:
+¼ I Ω ð⃗u · dRÞ
+
+ðG11Þ
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+
+But we can compute
+Q3;6 ¼
+
+⃗ 0Þ
+I Ω ð⃗u · dR
+⃗ þ u⃗ ·
+¼ I Ω ð⃗u · dRÞ
+
+M
+−1
+X
+
+½1 − Uð2πj=MÞ½1 − Uð2π=MÞ⃗v
+
+j¼0
+
+⃗ þ u⃗ · M½1 − Uð2π=MÞ⃗v mod M:
+¼ I Ω ðdRÞ
+
+ðG12Þ
+
+By comparing Eqs. (G11) and (G12), and using the fact that
+u⃗ can be arbitrary, we see that
+τ⃗ M ¼ M½1 − Uð2π=MÞ⃗v:
+
+ðG13Þ
+
+The components of τ⃗ M are ambiguous up to multiples
+of M, since I Ω is a ZM invariant. This only means that
+So0 is determined up to multiples of M, as we
+already know.
+Finally, we study the transformation of the area element
+AXY . We know that AXY should be quadratic in the translation gauge fields if it corresponds to an area element.
+Consider the ansatz,
+AXY ðg1 ; g2 Þ ¼ rT1 QM Uð2πh1 =MÞr2 ;
+
+ðG14Þ
+
+We now write
+⃗
+A0XY ¼ AXY þ ρM dω þ μ⃗ M · dR;
+for some ρM ; μ⃗ M , up to coboundaries. Evaluating the
+invariant I Ω , we find that
+I Ω ðA0XY Þ ¼ ρM ¼ −Mf½Uð2π=MÞ − 1⃗vgT QM Uð2π=MÞ⃗v:
+ðG22Þ
+After expanding out this expression for each M using
+Table II, we find that
+ðG23Þ
+
+ρ3 ¼ −3ðv2x þ v2y þ vx vy Þ mod 3;
+
+ðG24Þ
+
+ρ4 ¼ −2ðv2x þ v2y Þð1 þ 2Q0 Þ mod 4;
+
+ðG25Þ
+
+ðG16Þ
+
+ρ6 ¼ 0 mod 6:
+
+ðG26Þ
+
+ðG17Þ
+
+Note that the transformation rule depends on the choice of
+Qxx ; Qyy for M ¼ 2 and on Q0 for M ¼ 4. We find that
+numerical results are matched only if we set Qxx ¼ Qyy ¼ 1
+and Q0 ¼ 0. Upon doing so, we obtain
+
+ðG15Þ
+
+Thus the particular form we chose for AXY ensures that QM
+is a constant matrix with no dependence on group variables.
+We also demand that
+
+ρ2 ¼ 4ðvx vy þ v2x þ v2y Þ mod 2;
+ρ3 ¼ −3ðv2x þ v2y þ vx vy Þ mod 3;
+
+AXY ðx; yÞ − AXY ðy; xÞ ¼ 1;
+
+ρ4 ¼ −2ðv2x þ v2y Þ mod 4;
+ρ6 ¼ 0 mod 6:
+
+which is a normalization condition. Solving these two
+conditions, we get the following possibilities for QM :
+Q2 ¼
+
+Qxx
+
+1
+
+0
+
+Qyy
+
+Q4 ¼
+
+1
+2
+
+
+
+2Q0
+−1
+
+
+;
+
+ðG20Þ
+
+ρ2 ¼ 4ðvx vy þ v2x Qxx þ v2y Qyy Þ mod 2;
+
+This implies that
+
+
+
+−1
+
+ðG21Þ
+
+Upon substituting in the ansatz for AXY , we find that
+
+Uð2π=MÞT QM Uð2π=MÞ ¼ QM :
+
+0
+
+
+:
+
+A0XY ¼ fr1 − ½Uðh1 Þ − 1 ⃗vgT QM Uðh1 Þfr1 − ½Uðh2 Þ − 1 ⃗vg:
+
+AXY ðg1 ; g2 Þ þ AXY ðg1 g2 ; g3 Þ
+
+rT1 ½Uð2π=MÞT QM Uð2π=MÞ − QM r2 ¼ 0:
+
+1
+
+Note that for M ¼ 2, 4, QM is not uniquely fixed by
+Eq. (G17). This is important in what follows. Upon shifting
+the origin, we obtain
+
+where QM is a 2 × 2 matrix. The 2-cocycle condition for
+AXY is
+
+¼ AXY ðg2 ; g3 Þ þ AXY ðg1 ; g2 g3 Þ:
+
+−1
+
+ðG27Þ
+
+Knowing τ⃗ M ; ρM allows us to conclude that
+Qxx ; Qyy ∈ Z;
+
+1
+;
+2Q0
+
+Q0 ∈ Z;
+
+ðG18Þ
+
+ðG19Þ
+
+⃗ o · ½1 − Uð2π=MÞ⃗v þ ρM ;
+So0 ¼ So þ MP
+
+ðG28Þ
+
+which gives the complete expression for the transformation
+of So . Thus the field theory does not uniquely fix the
+
+031005-38
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+transformation rules for M ¼ 2, 4; we needed to make some
+additional choices guided by numerics.
+⃗ o
+3. Change in P
+Finally, we find μ⃗ M , which fixes the transformation
+⃗ o . The calculation is given below. We discuss the
+of P
+different values of M separately. We assume
+⃗
+A0XY ¼ AXY þ ρM dω þ μ⃗ M · dR:
+
+ðG29Þ
+
+PHYS. REV. X 13, 031005 (2023)
+
+This means that 2⃗μ2 ¼ 2ðvy ; vx Þ mod Z2 . Putting this back
+⃗ o, we get the following
+into the transformation rule for P
+result (mod 1):
+2Po0 ;x ≔ 2Po;x þ κI X ½A0XY − AXY  ¼ 2Po;x þ 2κvy ;
+
+ðG39Þ
+
+2Po0 ;y ≔ 2Po;y þ κI Y ½A0XY − AXY  ¼ 2Po;y þ 2κvx :
+
+ðG40Þ
+
+I X ½f 2  ≔ f 2 ðxh; xhÞ þ f 2 ðh; hÞ mod 2;
+
+ðG30Þ
+
+Note that this result is independent of the choice for
+Qxx ; Qyy made above, as these quantities cancel out of
+the final expression.
+M ¼ 4: We can directly see the result by setting
+⃗Po ¼ ðPo =2Þð1; 1Þ and vx ¼ vy ¼ ðv0 =2Þ mod 1 in the
+above calculation for M ¼ 2. The result is
+
+I Y ½f 2  ≔ f 2 ðyh; yhÞ þ f 2 ðh; hÞ mod 2:
+
+ðG31Þ
+
+Po0 ¼ Po þ κv0 mod 2:
+
+M ¼ 2: The invariants which characterize the coho⃗ are I X , I Y , which are defined as
+mology class of μ⃗ 2 · dR
+
+Here x ¼ ½ð1; 0Þ; 0, y ¼ ½ð0; 1Þ; 0, h ¼ ½ð0; 0Þ; 1. We
+can check that I X ðdωÞ ¼ I Y ðdωÞ ¼ 0 mod 2. We can also
+show that
+⃗ ¼ 2μ2;x mod 2;
+I X ½⃗μ2 · dR
+
+ðG32Þ
+
+⃗ ¼ 2μ2;y mod 2:
+I Y ½⃗μ2 · dR
+
+ðG33Þ
+
+ðG41Þ
+
+The results for M ¼ 2, 4 are in fact all equivalent to
+Eq. (106).
+M ¼ 3: We wish to prove Eq. (106). If we parametrize
+⃗ o ¼ ðPo =3Þð1; 2Þ, this requires us to
+v⃗ ¼ v30 ð1; 1Þ and P
+show that
+Po0 ¼ Po þ 2κv0 mod 3:
+
+ðG42Þ
+
+⃗ is I X ,
+The invariant giving the cohomology class of μ⃗ 3 · dR
+defined as
+
+Therefore,
+
+I X ½f 2  ≔ f 2 ðxh; xhÞ þ f 2 ½ðxhÞ2 ; xh
+I XðYÞ ðA0XY − AXY Þ ¼ 2μ2;xðyÞ :
+
+But when M ¼ 2, ½1 − Uðh1 Þ⃗v ¼ 2h1 v⃗ for any v⃗ (where
+h1 is just an integer mod 2). Using this in Eq. (G21),
+we obtain
+
+Then, by direct calculation we get
+I X ½A0XY − AXY  ¼ ð1 þ 2vx ; 2vy ÞQ2 ð1 þ 2vx ; 2vy ÞT
+
+By direct calculation, we can show that
+⃗ ¼ 3μ3;x ¼ Po mod 3:
+I X ½⃗μ3 · dR
+
+ðG44Þ
+
+4. Example: Verifying the transformation rules for So
+
+− ð2vx ; 2vy ÞQ2 ð2vx ; 2vy ÞT − Qxx
+ðG35Þ
+ðG36Þ
+
+I Y ½A0XY − AXY  ¼ ð2vx ; 1 þ 2vy ÞQ2 ð2vx ; 1 þ 2vy ÞT
+− ð2vx ; 2vy ÞQ2 ð2vx ; 2vy ÞT − Qyy
+ðG37Þ
+¼ 2vx mod 2:
+
+ðG43Þ
+
+Again we use A0XY ðg1 ;g2 Þ ¼ fr1 − ½1 − Uðh1 Þ ⃗vgT ×
+Q3 Uðh1 Þfr2 − ½1 − Uðh2 Þ ⃗vg. We use the same procedure
+discussed for M ¼ 2. After some (tedious) algebra, we
+indeed obtain Eq. (G42), or equivalently Eq. (106).
+
+A0XY ðg1 ; g2 Þ ¼ ðr1 þ 2⃗vÞT Q2 ðr2 þ 2h2 v⃗ Þ:
+
+¼ 2vy mod 2;
+
+− f 2 ðh; hÞ − f 2 ðh2 ; hÞ mod 3:
+
+ðG34Þ
+
+ðG38Þ
+
+In this section, we use the honeycomb lattice as an
+example to verify that the field theory formulas obtained
+above agree with numerical results.
+Consider the honeycomb lattice with a disclination
+whose disclination angle is Ω ¼ ðπ=3Þ, as shown in
+Fig. 5(a). We define the unit cell Θ so that the plaquette
+center is the center of the unit cell (i.e., the point α). Let us
+consider three choices of o, shown in Figs. 5(d), which
+lead to different values of b⃗ o and nirreg , as summarized in
+Table IV. (1) Setting o ¼ α, we get a pure disclination with
+b⃗ o ∈ ½ð0;0Þ and nirreg;o;Ω ¼ 23 [Fig. 5(b)]. (2) Setting o ¼ β1 ,
+
+031005-39
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+we get an impure disclination with b⃗ o ∈ ½ð0; −1Þ and
+nirreg;o;b⃗ ¼ 13 [Fig. 5(c)]. (3) Setting o ¼ β2 , we obtain a
+different impure disclination with b⃗ o ∈ ½ð−1; 0Þ and
+nirreg;o;b⃗ ¼ 13 [Fig. 5(d)].
+Without loss of generality we can assume the flux
+through the quadrilateral plaquette to be 23 ϕ. Since W is
+defined to align with the boundary of the unit cell, W is the
+same for all three choices above. This means that QW is also
+the same, but is described by three different equations:
+Sα
+þ ðk þ 2=3Þν;
+3
+Sβ
+⃗ β · ð0; −1Þ þ Cϕ ;
+QW ¼ 1 þ ðk þ 1=3Þν þ P
+1
+6π
+3
+Sβ2
+Cϕ
+⃗ β · ð−1; 0Þ þ
+;
+þ ðk þ 1=3Þν þ P
+QW ¼
+2
+6π
+3
+QW ¼
+
+ðG45Þ
+
+where k is the integer part of nW . We then equate the three
+expressions and cancel out the ϕ dependence to derive a
+relation between Sα and Sβ . Equating the first two gives us
+Sα þ 2κ ¼ Sβ1 þ κ þ Pβð1=3;1=3Þ ð1; 2Þ · ð0; −1Þ mod 3;
+Sα ¼ Sβ1 þ Pβð1=3;1=3Þ − κ mod 3;
+
+ðG46Þ
+
+where we use κ ≡ ν − ðCϕ=2πÞ. On the other hand, setting
+o ¼ β1 , o þ ð− 13 ; − 13Þ ¼ α, the field theory [Eq. (G28)]
+predicts
+⃗ βð1=3;1=3Þ · ð1; 0Þ − κ mod 3;
+Sα ¼ Sβ1 þ 3P
+Sα ¼ Sβ1 þ Pβð1=3;1=3Þ − κ mod 3;
+
+ðG47Þ
+
+which is exactly the same equation. Equation (G46) can
+also be confirmed numerically (the numerical raw data
+are given in Fig. 10). This verifies the field theory
+prediction Eq. (G28).
+We remark that we can use the same honeycomb lattice
+Hamiltonian Hclean to construct defects with different
+disclination angles. We can then apply similar procedures
+to verify the M ¼ 2, 3, 6 transformation rules for Soþ⃗v
+⃗ oþ⃗v .
+and P
+APPENDIX H: GENERALIZATION TO MODELS
+WITH NEXT-NEAREST-NEIGHBOR HOPPING
+In the main text, we argue that our method of extracting
+⃗ o works for an arbitrarily complicated unit cell
+So and P
+
+FIG. 20. Left: b⃗ ¼ ð0; 1Þ dislocation of a square lattice with
+next-nearest-neighbor hopping (red links). The C4 symmetry
+requires all four colored triangles with different orientations
+having same flux ϕ=2. Right: the choice of unit cell. There are no
+sites at the MWP α and γ, and there is only one site at β. The nextnearest-neighbor hoppings cross each other.
+
+with further neighbor hopping and interaction terms, as
+long as it is CM symmetric. In order to apply our dislocation
+⃗ o in
+or disclination charge calculation to measure So ; P
+these generalized Hamiltonians, we need to construct a
+defect Hamiltonian Hdefect , measure the charge QW in a
+region W, and then specify the quantities nirreg;o ; δΦW;o .
+We argue that our numerical procedure allows us to
+specify these quantities as long as Hclean is local and has
+a gapped, symmetry-preserving ground state, irrespective
+of its other properties.
+We now provide numerical evidence that our procedure
+⃗ o when we add nextgives the expected quantized P
+neighbor hopping (numerically it is much harder to verify
+this for interaction terms, and we do not pursue this here).
+Consider a Hofstadter model with the unit cell shown in
+Fig. 20. The Hamiltonian with this unit cell has nextneighbor hopping. We set the nearest-neighbor hopping
+amplitude equal to t ¼ 1, and tune the next-neighbor
+(diagonal) hopping amplitude t0 between 0 and 1. There
+is a flux ϕ through each unit cell. Since we require the unit
+cell to be C4 symmetric, we also require that there is a
+flux ϕ=2 through each triangle in the unit cell, as shown
+in Fig. 20.
+We extract the Z2 invariant Pα from a dislocation charge
+computation. The respective butterflies as a function of t0
+are shown in Fig. 21. We see that the invariant is indeed
+quantized and well defined mod 2 throughout the main
+Hofstadter lobes. In the t0 ¼ 0 limit, the butterfly reduces to
+the one for Pα in Fig. 1.
+
+031005-40
+
+QUANTIZED CHARGE POLARIZATION AS A MANY-BODY …
+
+PHYS. REV. X 13, 031005 (2023)
+
+FIG. 21. Pα as a function of the next-neighbor hopping amplitude t0 ; the nearest-neighbor hopping amplitude is t ¼ 1. The calculation
+is done on a Lx × Ly ¼ 41 × 41 open disk, with a b⃗ ¼ ð0; 1Þ dislocation placed at the center. The defects are located at the center of the
+disk. The noisy features appear since the butterfly is numerically calculated on a finite size system rather than analytically derived from
+an empirical formula as in Fig. 1.
+
+[1] M. Z. Hasan and C. L. Kane, Colloquium: Topological
+Insulators, Rev. Mod. Phys. 82, 3045 (2010).
+[2] X.-L. Qi and S.-C. Zhang, Topological Insulators and
+Superconductors, Rev. Mod. Phys. 83, 1057 (2011).
+[3] B. A. Bernevig, Topological Insulators and Topological
+Superconductors, in Topological Insulators and Topological Superconductors(Princeton University Press, Princeton,
+NJ, 2013).
+[4] A. Kitaev, Periodic Table for Topological Insulators and
+Superconductors, AIP Conf. Proc. 1134, 22 (2009).
+[5] S. Ryu, A. P. Schnyder, A. Furusaki, and A. W. W. Ludwig,
+Topological Insulators and Superconductors: Tenfold Way
+and Dimensional Hierarchy, New J. Phys. 12, 065010
+(2010).
+[6] C.-K. Chiu, J. C. Y. Teo, A. P. Schnyder, and S. Ryu,
+Classification of Topological Quantum Matter with
+Symmetries, Rev. Mod. Phys. 88, 035005 (2016).
+[7] X. Chen, Z.-C. Gu, Z.-X. Liu, and X.-G. Wen, Symmetry
+Protected Topological Orders and the Group Cohomology
+of Their Symmetry Group, Phys. Rev. B 87, 155114
+(2013).
+[8] A. Kapustin, Symmetry Protected Topological Phases,
+Anomalies, and Cobordisms: Beyond Group Cohomology,
+arXiv:1403.1467.
+[9] Z.-C. Gu and X.-G. Wen, Symmetry-Protected Topological
+Orders for Interacting Fermions: Fermionic Topological
+Nonlinear σ Models and a Special Group Supercohomology
+Theory, Phys. Rev. B 90, 115141 (2014).
+
+[10] A. Kapustin, R. Thorngren, A. Turzillo, and Z. Wang,
+Fermionic Symmetry Protected Topological Phases and
+Cobordisms, J. High Energy Phys. 12 (2015) 052.
+[11] T. Senthil, Symmetry-Protected Topological Phases of
+Quantum Matter, Annu. Rev. Condens. Matter Phys. 6,
+299 (2015).
+[12] Q.-R. Wang and Z.-C. Gu, Construction and Classification
+of Symmetry-Protected Topological Phases in Interacting
+Fermion Systems, Phys. Rev. X 10, 031055 (2020).
+[13] M. Barkeshli, P. Bonderson, M. Cheng, and Z. Wang,
+Symmetry Fractionalization, Defects, and Gauging of
+Topological Phases, Phys. Rev. B 100, 115147 (2019).
+[14] M. Barkeshli, Y.-A. Chen, P.-S. Hsin, and N. Manjunath,
+Classification of ð2 þ 1ÞD Invertible Fermionic Topological
+Phases with Symmetry, Phys. Rev. B 105, 235143 (2022).
+[15] D. Bulmash and M. Barkeshli, Fermionic Symmetry Fractionalization in (2 þ 1) Dimensions, Phys. Rev. B 105,
+125114 (2022).
+[16] D. Aasen, P. Bonderson, and C. Knapp, Characterization
+and Classification of Fermionic Symmetry Enriched
+Topological Phases, arXiv:2109.10911.
+[17] N. Manjunath and M. Barkeshli, Crystalline Gauge Fields
+and Quantized Discrete Geometric Response for Abelian
+Topological Phases with Lattice Symmetry, Phys. Rev. Res.
+3, 013040 (2021).
+[18] N. Manjunath and M. Barkeshli, Classification of Fractional Quantum Hall States with Spatial Symmetries, arXiv:
+2012.11603.
+
+031005-41
+
+ZHANG, MANJUNATH, NAMBIAR, and BARKESHLI
+
+PHYS. REV. X 13, 031005 (2023)
+
+[19] C. Fang, M. J. Gilbert, and B. A. Bernevig, Bulk Topological Invariants in Noninteracting Point Group Symmetric
+Insulators, Phys. Rev. B 86, 115112 (2012).
+[20] X.-Y. Song, Y.-C. He, A. Vishwanath, and C. Wang, Electric
+Polarization as a Nonquantized Topological Response and
+Boundary Luttinger Theorem, Phys. Rev. Res. 3, 023011
+(2021).
+[21] R. Resta and D. Vanderbilt, Theory of Polarization: A
+Modern Approach, in Physics of Ferroelectrics (Springer,
+New York, 2007), pp. 31–68.
+[22] R. Resta, Macroscopic Polarization in Crystalline Dielectrics: The Geometric Phase Approach, Rev. Mod. Phys. 66,
+899 (1994).
+[23] H. Watanabe and M. Oshikawa, Inequivalent Berry Phases
+for the Bulk Polarization, Phys. Rev. X 8, 021065 (2018).
+[24] S. Coh and D. Vanderbilt, Electric Polarization in a Chern
+Insulator, Phys. Rev. Lett. 102, 107603 (2009).
+[25] R. Resta, Quantum-Mechanical Position Operator in
+Extended Systems, Phys. Rev. Lett. 80, 1800 (1998).
+[26] X. G. Wen and A. Zee, Shift and Spin Vector: New
+Topological Quantum Numbers for the Hall Fluids, Phys.
+Rev. Lett. 69, 953 (1992).
+[27] F. D. M. Haldane, Geometrical Description of the Fractional
+Quantum Hall Effect, Phys. Rev. Lett. 107, 116801 (2011).
+[28] A. G. Abanov and A. Gromov, Electromagnetic and Gravitational Responses of Two-Dimensional Noninteracting
+Electrons in a Background Magnetic Field, Phys. Rev. B
+90, 014435 (2014).
+[29] B. Bradlyn and N. Read, Low-Energy Effective Theory in
+the Bulk for Transport in a Topological Phase, Phys. Rev. B
+91, 125303 (2015).
+[30] A. Gromov, G. Y. Cho, Y. You, A. G. Abanov, and E.
+Fradkin, Framing Anomaly in the Effective Theory of the
+Fractional Quantum Hall Effect, Phys. Rev. Lett. 114,
+016805 (2015).
+[31] R. R. Biswas and D. T. Son, Fractional Charge and InterLandau–Level States at Points of Singular Curvature, Proc.
+Natl. Acad. Sci. U.S.A. 113, 8636 (2016).
+[32] D. R. Hofstadter, Energy Levels and Wave Functions of
+Bloch Electrons in Rational and Irrational Magnetic Fields,
+Phys. Rev. B 14, 2239 (1976).
+[33] Y. Zhang, N. Manjunath, G. Nambiar, and M. Barkeshli,
+Fractional Disclination Charge and Discrete Shift in the
+Hofstadter Butterfly, Phys. Rev. Lett. 129, 275301 (2022).
+[34] D. Osadchy and J. E. Avron, Hofstadter Butterfly as
+Quantum Phase Diagram, J. Math. Phys. 42, 5665 (2001).
+[35] D. J. Thouless, M. Kohmoto, M. P. Nightingale, and M. den
+Nijs, Quantized Hall Conductance in a Two-Dimensional
+Periodic Potential, Phys. Rev. Lett. 49, 405 (1982).
+[36] S. Liu, A. Vishwanath, and E. Khalaf, Shift Insulators:
+Rotation-Protected Two-Dimensional Topological Crystalline Insulators, Phys. Rev. X 9, 031003 (2019).
+[37] T. Li, P. Zhu, W. A. Benalcazar, and T. L. Hughes, Fractional
+Disclination Charge in Two-Dimensional Cn -Symmetric
+Topological Crystalline Insulators, Phys. Rev. B 101,
+115115 (2020).
+
+[38] B. Han, H. Wang, and P. Ye, Generalized Wen-Zee Terms,
+Phys. Rev. B 99, 205120 (2019).
+[39] P. Jadaun, D. Xiao, Q. Niu, and S. K. Banerjee, Topological
+Classification of Crystalline Insulators with Space Group
+Symmetry, Phys. Rev. B 88, 085110 (2013).
+[40] X.-Y. Song, C. Wang, A. Vishwanath, and Y.-C. He,
+Unifying Description of Competing Orders in TwoDimensional Quantum Magnets, Nat. Commun. 10, 4254
+(2019).
+[41] G. van Miert and C. Ortix, Dislocation Charges Reveal
+Two-Dimensional Topological Crystalline Invariants, Phys.
+Rev. B 97, 201111(R) (2018).
+[42] More specifically, G is the fermionic symmetry group,
+which acts nontrivially on fermionic operators. It is sometimes written as Uð1Þf ×ϕ ½Z2 ⋊ ZM . The symbol Uð1Þf
+means that the order 2 element of this group is identified
+with the fermion parity operation.
+[43] For the case M ¼ 1, there are no quantized discrete shift and
+polarization invariants [17].
+[44] This is referred to as nu:c:;W in Ref. [33].
+[45] For example, when Ly is even, these are given by
+m ¼ ðLy =2Þ þ kLy , where k ∈ Z. This verifies our earlier
+comment that T̃ y is a worse approximate symmetry when
+jmj mod Ly is large.
+[46] A quick argument is that in this limit jΨðmÞi is an almost
+exact eigenstate of n̂j with eigenvalue κ, for each j. Thus
+P
+iκ
+λ
+j j . Therefore any change in λ
+T̃ y ¼ T̂ y e
+j (e.g., by
+redefining δ) is equivalent to shifting λj → λj þ χ for each
+j with some suitable χ.
+[47] These fluxes correspond to a set of 2-cocycle representatives
+which generate the group H2 ðGspace ; ZÞ when Gspace ¼ Z2 ⋊
+ZM [17]. We have H2 ðGspace ; ZÞ ≅ ZM × Z × K M . The
+2-cocycles corresponding to dω;AXY ;½1 − Uð2π=MÞ−1 dR⃗
+generate these three factors, respectively.
+[48] X.-Y. Song, Y.-C. He, A. Vishwanath, and C. Wang, Electric
+Polarization as a Nonquantized Topological Response and
+Boundary Luttinger Theorem, Phys. Rev. Res. 3, 023011
+(2021).
+[49] W. A. Benalcazar, T. Li, and T. L. Hughes, Quantization of
+Fractional Corner Charge in Cn -Symmetric Higher-Order
+Topological Crystalline Insulators, Phys. Rev. B 99,
+245151 (2019).
+[50] J. Cano and B. Bradlyn, Band Representations and Topological Quantum Chemistry, Annu. Rev. Condens. Matter
+Phys. 12, 225 (2021).
+[51] Y.-M. Lu, Y. Ran, and M. Oshikawa, Filling Enforced
+Constraint on the Quantized Hall Conductivity on a
+Periodic Lattice, arXiv:1705.09298.
+ð2Þ
+[52] In Ref. [33] we set ϕ ¼ 0 and write B2 ≔ 12 ðdAb þ kdωÞ.
+Ab is a gauge field for the “bosonic” Uð1Þf =Zf2 symmetry.
+But here A always refers to the original U(1) gauge field,
+which equals Ab =2. Thus, dAb ¼ 2dA. To account for
+ϕ ≠ 0, it is sufficient to replace 2dA with 2F.
+
+031005-42
+
+

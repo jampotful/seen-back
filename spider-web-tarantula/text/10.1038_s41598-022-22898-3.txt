@@ -1,0 +1,532 @@
+Prey localization in spider orb webs using modal vibration analysis
+Martin Lott, Vinícius F. Dal Poggetto, Gabriele H. Greco, Nicola Maria Pugno, Federico Bosia (2022). Scientific Reports. https://doi.org/10.1038/s41598-022-22898-3. doi:10.1038/s41598-022-22898-3. Licence: cc-by. Text from pdf.
+
+www.nature.com/scientificreports
+
+OPEN
+
+Prey localization in spider orb webs
+using modal vibration analysis
+Martin Lott 1, Vinicius F. Dal Poggetto 2, Gabriele Greco 2, Nicola M. Pugno 2,3 &
+Federico Bosia 1*
+Spider webs are finely tuned multifunctional structures, widely studied for their prey capture
+functionalities such as impact strength and stickiness. However, they are also sophisticated sensing
+tools that enable the spider to precisely determine the location of impact and capture the prey
+before it escapes. In this paper, we suggest a new mechanism for this detection process, based on
+potential modal analysis capabilities of the spider, using its legs as distinct distributed point sensors.
+To do this, we consider a numerical model of the web structure, including asymmetry in the design,
+prestress, and geometrical nonlinearity effects. We show how vibration signals deriving from impacts
+can be decomposed into web eigenmode components, through which the spider can efficiently
+trace the source location. Based on this numerical analysis, we discuss the role of the web structure,
+asymmetry, and prestress in the imaging mechanism, confirming the role of the latter in tuning
+the web response to achieve an efficient prey detection instrument. The results can be relevant for
+efficient distributed impact sensing applications.
+
+Many natural structures have fascinated and inspired researchers over the years for their optimized characteristics. Spider webs are a particularly prominent example, due to their various functions, their versatility and
+efficiency. Spider webs occur in different shapes and geometries, and allow arachnids to perform a vast variety
+of tasks such as capturing prey, lifting heavy objects and throwing themselves at accelerations around ­80g1,2.
+Of all the types of webs, however, two dimensional orb webs are probably the most renowned. These particular
+structures are typically composed of radial and frame threads produced with major ampullate ­silk3, which are
+secured to surfaces through the cement-like piriform s­ ilk4. The radial threads are intercepted with the sticky spirals threads of the web that are produced with aggregate and flagelliform silk and efficiently adhere to the p
+­ rey5–8.
+From a mechanical point of view, spider webs display multiple excellent properties in terms of strength and
+toughness of the single silk threads, adhesion of the anchorages with the surfaces, and impact r­ esistance9. These
+web characteristics also translate into an outstanding mechanical efficiency in localizing and catching ­prey10,11, a
+process that benefits from the mechanical properties of the silk and the vibration properties of the w
+­ eb12,13. Recent
+studies based on transient response analysis have indicated that prestressing is used to tune the sonic properties
+of ­webs13,14, which has a great influence on flexural wave propagation that may be used by spiders as a means to
+localize ­prey15,16. Laser vibrometry measurements have shown that radial threads are able to efficiently transmit
+the entire frequency range between 1 and 10 ­kHz17,18, frequencies that are detected by the cuticular vibration
+receptors of the ­spiders19. These threads can undergo transverse (perpendicular to the thread and the plane of
+the web), lateral (perpendicular to the thread and in the plane of the web), and longitudinal (along the thread
+axis) ­motions17. The propagation of transverse and longitudinal waves are governed by distinct m
+­ echanisms20–22,
+giving rise to different propagation speeds and damping ­mechanisms12,18,23. The overall transmitted frequency
+by a web may vary from around 100 Hz, which is typical of insect impacts, to peaks ranging from 5 Hz to 50 Hz
+due to the leg movements of trapped insects, and between 100 Hz and 300 Hz due to fluttering bees and flies. The
+frequency contents of such signals differ considerably from those that may arise due to wind loading, typically
+below 10 Hz. The unique wave transmission characteristics of spider orb webs must therefore be able to act as
+mechanical filters for a wide variety of inputs.
+In this work, we discuss a possible vibration detection mechanism used by a spider to sense prey impacts
+using modal decomposition of the web motion. Vibrations are one of many physical quantities used by spiders
+for ­sensing15. Without wishing to address the details of the biology of spider sensing, here, we aim to demonstrate through mathematical and physical considerations the feasibility of using vibrations in a spider orb web
+1
+
+Department of Applied Science and Technology, Politecnico di Torino, Torino, Italy. 2Laboratory for Bioinspired,
+Bionic, Nano, Meta Materials and Mechanics, University of Trento, Trento, Italy. 3School of Engineering and
+Materials Science, Queen Mary University of London, Mile End Road, London E1 4NS, United Kingdom. *email:
+federico.bosia@polito.it
+
+Scientific Reports |
+
+(2022) 12:19045
+
+| https://doi.org/10.1038/s41598-022-22898-3
+
+1
+Vol.:(0123456789)
+
+www.nature.com/scientificreports/
+
+Threads
+
+∅ (µm)
+
+E (MPa)
+
+ν
+
+ρ (kg/m−3)
+
+Radial/surrounding
+
+5
+
+100
+
+0.1
+
+1350
+
+σ0 (kPa)
+10
+
+Spiral
+
+3
+
+1
+
+0.1
+
+1350
+
+10
+
+Table 1.  Input mechanical parameters for the orb web simulations in its initial state. Two types of threads
+(Radial/Surrounding and Spiral) are mechanically modeled with different parameters.
+
+for effective prey impact localization, and its compatibility with existing experimental d
+­ ata6. We use the modal
+expansion of Green’s function to construct a semi-analytical source signal created by an impact. Then, the visibility of the spider to this signal is addressed with Green’s function composition methods, allowing the web
+motion to be analyzed at the location of the spider legs. This imaging method has recently been validated with
+experiments on thin elastic p
+­ lates24. In the present study, the designed numerical web uses prestressed truss
+elements and nonlinear geometry effects to model realistic transverse elastic properties for such structures. We
+show that this approach can clearly highlight the influence of prestress, which drives the transverse rigidity; we
+also assess the role of imperfections within the web geometry, which help to split the degenerate modes of the
+structure; finally, we discuss the role of the spider position in terms of the overall imaging capabilities of the
+spider/web system. This work complements an extensive body of evidence that documents the optimization of
+structures for vibration control found in N
+­ ature25.
+
+Materials and methods
+
+Spider web geometry. The orb web model is built using thin threads, combining various structural elements in a deliberately asymmetrical (i.e. more realistic) assembly. The first element is a structural frame that
+surrounds the web, built in an irregular octagonal shape, included in a 40 cm diameter circle (the 8 corner points
+of the octagon are at equal distances from the center). The second element of the assembly is an ensemble of
+radial threads built from an off-center small circle inside the previously designed octagonal shape, connected to
+the surrounding structure (light brown in Fig. 1a) with a constant angular distribution of the threads. The third
+element of the assembly are the spiral threads (light blue in Fig. 1a), built as a spiral of maximum radius of 30 cm,
+starting at the small off-center circle, with an angle-varying radius, allowing a smaller step in the outer part of
+the spiral than in the center, with an additional randomness value, conferring a more realistic appearance to the
+obtained orb web. The overall resulting geometry is depicted in Fig. 1a. This is the original, unstrained geometry,
+i.e., before any applied prestress.
+Simulation box.
+
+The web structure is mechanically modeled with the Finite Element software COMSOL
+Multiphysics using prestressed truss elements, with the inclusion of geometrical nonlinearity effects. Prestress
+values induce a “stress stiffening” effect, where the transverse elasticity of a thread is directly proportional to the
+tensile force acting on it. Geometrical nonlinearity allows the inclusion of large strain values and geometrical
+deformations. Similar to the case of a string, if the axial stress is zero or negative, the transverse stiffness of a truss
+is ­zero26. The final stretched web acts, therefore, as a transverse resonator. The overall modal response of the web
+is investigated using eigenvalue analysis. The numerical modeling is thus based on the hypothesis that the original nonlinear problem can be treated as a linear eigenvalue problem: despite the large displacement amplitude
+induced by the prestress and geometrical nonlinearity, the modal vibrations occur around this new deformed
+state with small vibration amplitudes (i.e., dynamic displacements are small compared to the prestress-induced
+static displacements). This means that the dynamic amplitude does not affect the rigidity of the structure, which
+is essentially due to static forces. In order to include a representative mechanical response of the numerically
+designed orb-web, we associate for the surrounding frame and axial threads elements (light-brown color in
+Fig. 1a) and to the spiral threads (light-blue color in Fig. 1a) the mechanical and structural parameters indicated
+in Table 1.
+From27, the nonlinear stress/strain law for the silk suggests a non-constant value for the Young’s modulus,
+with an early transition to plasticity. The use of realistic stress values and elastic properties for the silk requires
+the integration of a complete nonlinear material law in order to obtain the global deformation and stress of the
+total structure observed in Nature. In the present study, we use the Young’s modulus value in the plastic zone,
+i.e., around 100 MPa. In this manner, the final stress value supported by the thread is coherent with previously
+published ­results28, with no need to add more complexity to the simulation box. In addition, the selected value
+for the Poisson’s ratio does not influence the simulations, as the transverse elastic properties of the web are only
+determined by the stress values in the truss and thus, by its Young’s modulus.
+
+Static study. The structure is initially stretched from the eight points that surround the structure (black
+dots in Fig. 1a) by a set of pre-determined forces, acting from the center of the web to the exterior. As the pulling
+points are not equally spaced, the set of forces needs to be determined so that their sum is zero, to avoid rigidbody motion. The following expression for the set of forces acting on the web is considered,
+
+
+−
+→
+→
+→
+(1)
+F i = F0 × xi cos(θi )−
+e 1 + xi sin(θi )−
+e2
+
+Scientific Reports |
+Vol:.(1234567890)
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+2
+
+www.nature.com/scientificreports/
+
+Figure 1.  (Color online) Design of the orb web. Light blue lines are the spiral threads rt . The light brown line
+is the radial thread st . (a) Initial, unstressed geometry. (b) Radial force distribution in the web. The equilibrium
+point should satisfy i Fi = 0, with i=1..8. (c) Final equilibrium configuration considering geometrical
+nonlinearity and stress values in color scale. Pictures and maps are made with COMSOLTM 6.0 and MATLABTM
+R2022b softwares https://​www.​comsol.​com/​livel​ink-​for-​matlab.
+where xi values are the equilibrium parameters that we choose to fix in the ]0.81.2[ interval and F0 is the global
+force amplitude. Projection on the x and y axes of this cumulative set of forces should be zero, which leads to the
+following cost function to be minimized:
+
+g(x) = |�i xi cos (θi )| + |�i xi sin (θi )|
+
+(2)
+
+Figure 1b provides the graphical representation of this set of forces after determining the 8 parameters xi in a
+geometrical frame, centered on the radial thread origin (off-center circle). To find the solution, we use a stochastic
+population-based algorithm (i.e., a genetic algorithm) that searches randomly by mutation and crossover among
+population members. The solution is not unique, however, once one set of xi is found, the global force amplitude
+can be adapted with the F0 parameter.
+After applying with the calculated forces on the structure with a 2 mN amplitude for the F0 value, the final
+geometrical state of the web differs from initial one. In Nature, a spider will construct the radial threads and
+apply a stress to them before adding the spiral threads. This differs from our procedure where the entire structure
+is built simultaneously. However, this should not influence the numerical results significantly. To prevent local
+compression arising during the pulling phase of the web, an initial and homogeneous prestress is globally applied
+to all of the threads of the structure with a small value (additional to the final stress) of σ0 = 10 kPa. The final
+geometry and stress state for the structure are depicted in Fig. 1c. The curved profiles of the threads that appear
+around the web are due to nonlinear geometrical effects. The stress distribution inside the web is influenced by
+both global prestress and applied forces. A high level of stresses (up to 60 MPa) is reached.
+
+Modal decomposition. Eigenfrequency analysis is performed on the prestressed structure, after the quasi-
+
+static traction. The final outputs for this study step are then the resonant frequencies fn and the orthonormal
+modal shapes φin, where n indicates the mode index, and i a mesh point index in the discretized and unstrained
+web domain. Both quantities are dependent of the applied forces from the previous study. Summing over
+†
+repeated i indices, the modal orthogonality implies that φni
+φin′ = δnn′ where (·)† indicates the complex conju′
+gate transpose and δnn is the Kronecker delta function. Figure 2 shows the first 16 eigenmodes of the simulated
+structure in a prestressed state. The image displays the motion of the orb web in the deformed geometry frame
+Scientific Reports |
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+3
+Vol.:(0123456789)
+
+www.nature.com/scientificreports/
+
+Figure 2.  (Color online) Vibration eigenmodes of the spider web, modeled by pre-stressed trusses with
+geometrical nonlinearity. Pictures and maps are made with COMSOLTM 6.0 and MATLABTM R2022b
+softwares.https://​www.​comsol.​com/​livel​ink-​for-​matlab.
+
+considering the transverse normalized displacement field. The frequency range of the modes predicted with the
+simulation box agrees with in-situ experimental work on real orb w
+­ ebs29,30.
+To highlight the limitations of neglecting the changes in geometry in the eigenvalue analysis, we can consider
+the analytical expression of the fundamental resonant frequency for a string:
+
+1
+T
+f0 =
+(3)
+2L ρl
+where L is the string length, ρl is its mass per unit length, and T the tension acting on it. If the pulling force
+increases, the relative change of frequency f0 can be estimated (neglecting the changes in the bulk density due
+to deformation) as follows:
+
+δf0
+δL
+1 δT
+=−
++
+f0
+L
+2 T
+
+(4)
+
+As a consequence, two opposite effects appear when increasing the pulling forces on the web: an increase
+of stress that leads to an increase stiffness and hence resonant frequency, and an increase of strain, i.e. in the
+structure length, which tends to decrease the resonant frequency. This last term is not taken into account in the
+simulation box, as the modal analysis is performed in the reference frame attached to the material. With the large
+Scientific Reports |
+Vol:.(1234567890)
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+4
+
+www.nature.com/scientificreports/
+deformations of the web, we estimate that around 10% of the relative variations of the eigenfrequencies are due to
+the geometric deformation (δL/L ≃ 0.1). In addition, silk is a highly nonlinear material, which suggests various
+possibilities for the tunability of the structure. The term δT/T is also simplified here to linear prestress. This simplification may be justified with the following remark: at the beginning of the plastic zone, the apparent Young’s
+modulus of the silk is constant in the 0.15-0.25 strain ­range27, meaning that material nonlinear effects should be
+negligible in this zone. In conclusion, although the exact strain and stress states in the web cannot be derived,
+we will suppose that modal analysis can accurately describe its dynamical response, for a given prestress state.
+
+Modal imaging. To further study the vibration transmission properties of the web, an imaging method,
+
+based on a modal expansion and Green’s function c­ omposition31, allows us to place ourselves from the spider’s point of view. This approach is based on the fact that a spider has 8 legs and is extremely sensitive to
+­vibrations32–34. By treating each leg as an independent sensor, the spider can accumulate the information from
+several modes of vibration of the web, excited following the impact of a prey.
+The mode shapes φin (Fig.2) can be used a posteriori to compute virtual sources and estimate their visibility to
+the spider as a function of its position on the web. For a source located at point i, the broadband motion induced
+in a point indexed j can generally be expressed a­ s31,35–37:
+†
+Gij = φin φnj
+,
+
+(5)
+
+where φin denotes the motion induced by the mode n at point i. This is a real function, representing a standing
+wave in space. As Eq. (5) remains true for complex mode shapes, we use here complex conjugate notation † .
+We also remove time dependency in Eq. (5) and neglect damping effects, meaning that this equation is valid
+equivalently for particle displacement, velocity or acceleration. The number of modes n dictates the spatial resolution. With an infinite number of modes, the Green function tends to a Dirac function in space. With a finite
+number of modes, the spatial resolution decrease drastically. Although this approach does not attempt to model
+the temporal evolution of a real mechanical impact, focusing only on its kinematic consequences, the theoretical
+expansion in Eq. (5) remains exploitable in real experiments for active source l­ ocalization24. The capability of the
+spider to detect sources can then be estimated using a composition of the Green’s function between the source
+i, a subset of points r and the set of points j of the domain defined by the web. This composition, according to
+the notations used in Eq. (5), is written as:
+†
+Gij −→ Gir Grj =φin φnr
+φrn′ φn† ′ j
+
+=φin Bnn′ φn† ′ j
+
+(6)
+
+where Bnn′ is the so-called visibility matrix. If the implicit summation in Eq. (6) is performed on the whole
+domain, the spatial orthogonality of the eigenmodes implies that Bnn′ is an identity matrix. Instead, when only
+a limited number of points “r” is used for the composition of Eq. (6), an artificial coupling appears between the
+modes, affecting the reconstruction of the source image. In addition, the number of modes n dictates the spatial
+resolution. With an infinite number of modes, the Green function tends to a Dirac function in space. With a finite
+number of modes, the spatial resolution decreases drastically. In the case of the spider/spiderweb system, Eq. (6)
+is evaluated for a limited number of measurement points r, coinciding with the contact points of the eight legs
+and in our case using only sixteen modes. The expected spatial resolution is therefore imperfect, but sufficient
+for the purpose of prey localization. It is therefore possible to simulate the spider’s ability to localize prey as a
+function of its position on the web. To summarize, Eq. (6) combine two Green functions which correspond: i)
+to the vibration signal induced by the prey’s impact (Gir ) and ii) to the mechanical representation that the spider
+produces of the web from its leg locations (Grj). The matrix Bnn′ may be seen as an autoMAC c­ riterion38. It gathers
+the conditions for the source reconstruction from the spider’s point of view.
+
+Results
+
+Prey detection. Figure 3 shows the calculated imaging results (in terms of normalized displacements) for
+
+an off-center impact point in two cases, i.e. when the spider is located centrally in the web, and when its position
+is off-center. In both cases, the spider legs are chosen to lie around the spider location with a constant azimuthal
+distribution (≃ 2π/9) and they are considered perfectly attached to the radial threads. The color map illustrates
+the reconstructed amplitude of the elastic source created by the impact of a prey with the vibration amplitude
+reported in the −1/1 range. As only 16 modes are used, the spatial resolution is better over the azimuthal direction than along the radial one, creating this red cone in Fig. 31-a. Increasing the number of modes could help
+to better localize the prey, but would also increase outer diagonal values in the Bnn′ matrix, leading to additional
+errors in the source reconstruction. In the first case, the prey impact point (indicated by a black dot) is faithfully
+reproduced, with a spatial uncertainty that is related to the finite number of modes used to build the image.
+Indeed, only one web aperture is highlight by the imaging process (in red on Fig. 31-a). In the second case, the
+prey position cannot be properly reconstructed with many apertures created by the imaging on Fig. 31-b. In
+Figs. 31-a and 2-a, the graphical representation of the spider is visual and is not included in the simulation. The
+positions of its eight legs are used as analysis points. A slight eccentricity of the web is accompanied by a deterioration of the virtual source reconstruction. The quality of the image can quantitatively be accessed with the
+Bnn′ matrix, defined in Eq. (6) and represented graphically in Fig. 31-b, 2-b for the two considered cases. Large
+non-diagonal values indicate cross-talk between modes and thus incorrect imaging of the source.
+
+Scientific Reports |
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+5
+Vol.:(0123456789)
+
+www.nature.com/scientificreports/
+
+Figure 3.  (Color online) Effect of the position of the spider on its detection capacity. Case 1, panel (1-a) the
+spider is in the center and the source (black dot) is correctly detected. The color code and the web deformation
+quantify the normalized displacement field, induced by the source, as reinterpreted by the spider. The absolute
+value of the visibility matrix |Bnn′ | in panel (1-b) shows small out-of-diagonal values. In Case 2, panel (2-a) the
+spider is off-center and the source is not correctly imaged. The visibility matrix (in absolute value) in panel (2-b)
+shows larger out-of-diagonal values, indicating cross-talk between modes. Pictures and maps are made with
+COMSOLTM 6.0 and MATLABTM R2022b softwares. https://​www.​comsol.​com/​livel​ink-​for-​matlab.
+
+Discussion. Although vibration sensing is by no means the only source of information for spiders in hunting
+prey, and possibly not even the most important, the results presented above suggest that spiders are capable of
+recognizing the different vibration modes supported by the web. The very structure of the web could be somehow related to the modal distribution required for optimal structural monitoring.
+In particular, from the developed simulation box and proposed data analysis, we observe that the fundamental mode of the web does not contribute to the final image of the prey. From Fig. 2, one can see that if the
+fundamental mode is well isolated in frequency from other modes (around 40 Hz, in our case), the modal density subsequently increases, and can be estimated as around 1 mode / 2 Hz. This particular modal density could
+occur by design. Indeed, as the fundamental mode is not necessary to construct an image, it may be used only
+to capture the prey after impact, exploiting its large damping properties, without overlapping with higher modes
+that are used to locate the prey. This first mode may also be used for environmental monitoring. Indeed, it is the
+only mode that presents maximum vibration amplitude at the center and thus, at the spider location. Therefore,
+it may be used to amplify external sources of noise, increasing the spider sensitivity to its ­environment9.
+The actual effect of the spider on the vibration response of the web is neglected in this work. The spider introduces additional mass to the system, but also additional stiffness, since its legs are much more rigid in flexion
+than the silk. Analysis of the modal participation factor associated for each mode indicates that the fundamental
+mode at 40Hz is the most affected by the mass of the spider, whereas the other modes may be more affected by the
+additional rigidity. Indeed, the web center corresponds to a maximum of vibration for the fundamental mode but
+is at a node location for all other modes. Thus the modeling of the spider is possible but would add complexity
+to the system and require the use of further hypotheses in its physical description, i.e., of the silk as pre-stressed
+truss elements and of the spider in terms of beams subjected to bending. This will be the object of a future study.
+
+Scientific Reports |
+Vol:.(1234567890)
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+6
+
+www.nature.com/scientificreports/
+
+Conclusion
+
+In this work, we have constructed a qualitative mechanical model of a spider orb web, including prestress and
+geometrical nonlinearity. We have shown that this system acts as a multimodal transverse resonator system,
+naturally designed for prey impact detection. The resulting outputs of the modeling, such as resonance frequencies and prestress values within the structure are consistent with previously reported experimental data. Then,
+using modal expansion and Green’s function composition methods, we have proposed an imaging mechanism
+that could be used by the spider to exploit the vibration of its web, measured by its eight independent legs, to
+detect and localize prey. These results can be adapted both for practical applications in elastic wave imaging
+(e.g. real-time impact detection for structural health monitoring in frame-like structures) and material design
+problems. They also provide additional insight and understanding of the fascinating ways in which vibration
+phenomena are exploited in Nature.
+
+Data availability
+
+The datasets used and analyzed during the current study available from the corresponding author on reasonable
+request.
+Received: 19 May 2022; Accepted: 20 October 2022
+
+References
+
+1. Greco, G. & Pugno, N. M. How spiders hunt heavy prey: The tangle web as a pulley and spider’s lifting mechanics observed and
+quantified in the laboratory. J. R. Soc. Interface 18, 20200907 (2021).
+2. Han, S., Astley, H., Maksuta, D. & Blackledge, T. External power amplification drives prey capture in a spider web. Proc. Natl. Acad.
+Sci. 116, 12060–12065 (2019).
+3. Yarger, J. L., Cherry, B. R. & Van Der Vaart, A. Uncovering the structure-function relationship in spider silk. Nat. Rev. Mater. 3,
+1–11 (2018).
+4. Wolff, J. O. & Herberstein, M. E. Three-dimensional printing spiders: back-and-forth glue application yields silk anchorages with
+high pull-off resistance under varying loading situations. J. R. Soc. Interface 14, 20160783 (2017).
+5. Guo, Y. et al. Functional gradient effects on the energy absorption of spider orb webs. Appl. Phys. Lett. 113, 103701 (2018).
+6. Greco, G., Pantano, M. F., Mazzolai, B. & Pugno, N. M. Imaging and mechanical characterization of different junctions in spider
+orb webs. Sci. Rep. 9, 1–6 (2019).
+7. Eberhard, W. G. Photography of orb webs in the field. Bull. Br. Arachnol. Soc. 3, 200–204 (1976).
+8. Meyer, A., Pugno, N. M. & Cranford, S. W. Compliant threads maximize spider silk connection strength and toughness. J. R. Soc.
+Interface 11, 20140561 (2014).
+9. Zhou, J. et al. Outsourced hearing in an orb-weaving spider that uses its web as an auditory sensor. Proc. Natl. Acad. Sci. 119,
+e2122789119 (2022).
+10. Kawano, A. & Morassi, A. Detecting a prey in a spider orb web. SIAM J. Appl. Math. 79, 2506–2529 (2019).
+11. Mortimer, B. A spider’s vibration landscape: adaptations to promote vibrational information transfer in orb webs. Integr. Comp.
+Biol. 59, 1636–1645 (2019).
+12. Klärner, D. & Barth, F. G. Vibratory signals and prey capture in orb-weaving spiders (Zygiella x-notata, Nephila clavipes; Araneidae).
+J. Comp. Physiol. 148, 445–455 (1982).
+13. Mortimer, B., Soler, A., Siviour, C., Zaera, R. & Vollrath, F. Tuning the instrument: Sonic properties in the spider’s web. J. R. Soc.
+Interface 13, 20160341 (2016).
+14. Wirth, E. & Barth, F. G. Forces in the spider orb web. J. Comp. Physiol. A. 171, 359–371 (1992).
+15. Dal Poggetto, V. F., Bosia, F., Greco, G. & Pugno, N. M. Prey impact localization enabled by material and structural interaction in
+spider orb webs. Adv. Theory Simul. 2100282 (2021).
+16. Kaewunruen, S., Ngamkhanong, C. & Yang, T. Large-amplitude vibrations of spider web structures. Appl. Sci. 10, 6032 (2020).
+17. Masters, W. M. & Markl, H. Vibration signal transmission in spider orb webs. Science 213, 363–365 (1981).
+18. Landolfa, M. A. & Barth, F. G. Vibrations in the orb web of the spider Nephila clavipes: Cues for discrimination and orientation.
+J. Comp. Physiol. A. 179, 493–508 (1996).
+19. Barth, F. G. A Spider’s World: Senses and Behavior (Springer Science & Business Media, 2002).
+20. Mortimer, B., Holland, C., Windmill, J. F. & Vollrath, F. Unpicking the signal thread of the sector web spider Zygiella x-notata. J.
+R. Soc. Interface 12, 20150633 (2015).
+21. Boutry, C. & Blackledge, T. A. Evolution of supercontraction in spider silk: Structure-function relationship from tarantulas to
+orb-weavers. J. Exp. Biol. 213, 3505–3514 (2010).
+22. Main, I. G. Vibrations and Waves in Physics (Cambridge University Press, 1993).
+23. Masters, W. M. Vibrations in the orbwebs of Nuctenea sclopetaria (Araneidae). Behav. Ecol. Sociobiol. 15, 207–215 (1984).
+24. Lott, M., Gliozzi, A. S. & Bosia, F. Source and defect localization in thin elastic plates of arbitrary geometry using eigenmodes.
+Mech. Syst. Signal Process. 184, 109706 (2023).
+25. Bosia, F. et al. Optimized structures for vibration attenuation and sound control in nature: A review. Matter 5, 3311–3340 (2022).
+26. Knobel, R. An Introduction to the Mathematical Theory of Waves Vol. 3 (American Mathematical Soc, 2000).
+27. Cranford, S. W., Tarakanova, A., Pugno, N. M. & Buehler, M. J. Nonlinear material behaviour of spider silk yields robust webs.
+Nature 482, 72–76 (2012).
+28. Greco, G., Wolff, J. O. & Pugno, N. M. Strong and tough silk for resilient attachment discs: The mechanical properties of piriform
+silk in the spider Cupiennius salei (Keyserling, 1877). Front. Mater. 7, 138 (2020).
+29. Das, R. et al. Biomechanical characterization of spider webs. J. Mech. Behav. Biomed. Mater. 67, 101–109 (2017).
+30. Jyoti, J., Kumar, A., Lakhani, P., Kumar, N. & Bhushan, B. Structural properties and their influence on the prey retention in the
+spider web. Phil. Trans. R. Soc. A 377, 20180271 (2019).
+31. Weaver, R. L. & Burkhardt, J. Weak Anderson localization and enhanced backscatter in reverberation rooms and quantum dots.
+J. Acoust. Soc. Am. 96, 3186–3190 (1994).
+32. Barth, F. G. et al. Spider vibration receptors: Threshold curves of individual slits in the metatarsal lyriform organ. J. Comp. Physiol.
+148, 175–185 (1982).
+33. Young, S. L. et al. A spider’s biological vibration filter: Micromechanical characteristics of a biomaterial surface. Acta Biomater.
+10, 4832–4842 (2014).
+34. Pringle, J. The function of the lyriform organs of arachnids. J. Exp. Biol. 32, 270–278 (1955).
+35. Gallot, T., Catheline, S. & Roux, P. Coherent backscattering enhancement in cavities. Highlights of the role of symmetry. J. Acoust.
+Soc. Am. 129, 1963–1971 (2011).
+
+Scientific Reports |
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+7
+Vol.:(0123456789)
+
+www.nature.com/scientificreports/
+36. Catheline, S., Gallot, T., Roux, P., Ribay, G. & De Rosny, J. Coherent backscattering enhancement in cavities: The simple-shape
+cavity revisited. Wave Motion 48, 214–222 (2011).
+37. Guéguen, P., Bard, P.-Y. & Chávez-García, F. J. Site-city seismic interaction in Mexico city-like environments: An analytical study.
+Bull. Seismol. Soc. Am. 92, 794–811 (2002).
+38. Pastor, M., Binda, M. & Harčarik, T. Modal assurance criterion. Procedia Eng. 48, 543–548 (2012).
+
+Acknowledgements
+
+All authors are supported by the EU H2020 FET Open “Boheme” Grant No. 863179. G.G. was supported by
+Caritro Foundation (Prot. U1277.2020/SG.1130).
+
+Author contributions
+
+M.L. conceived the simulation box and the source detection model. All authors contributed to the discussions
+and to the review of the manuscript.
+
+Competing interests
+
+The authors declare no competing interests.
+
+Additional information
+
+Correspondence and requests for materials should be addressed to F.B.
+Reprints and permissions information is available at www.nature.com/reprints.
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and
+institutional affiliations.
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International
+License, which permits use, sharing, adaptation, distribution and reproduction in any medium or
+format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the
+Creative Commons licence, and indicate if changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the
+material. If material is not included in the article’s Creative Commons licence and your intended use is not
+permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from
+the copyright holder. To view a copy of this licence, visit http://​creat​iveco​mmons.​org/​licen​ses/​by/4.​0/.
+© The Author(s) 2022, corrected publication 2022
+
+Scientific Reports |
+Vol:.(1234567890)
+
+(2022) 12:19045 |
+
+https://doi.org/10.1038/s41598-022-22898-3
+
+8
+
+

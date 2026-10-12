@@ -1,0 +1,2770 @@
+Eye structure shapes neuron function in Drosophila motion vision
+Arthur Zhao, Eyal Gruntman, Aljoscha Nern, Nirmala Iyer, Edward M. Rogers, Sanna Koskela, Igor Siwanowicz, Marisa Dreher, Miriam A Flynn, Connor W. Laughland, Henrique Ludwigh, Alexander Thomson, Cullen P. Moran, Bruck Gezahegn, Davi D. Bock, Michael B. Reiser (2022). bioRxiv (Cold Spring Harbor Laboratory). https://doi.org/10.1101/2022.12.14.520178. doi:10.1101/2022.12.14.520178. Licence: cc-by. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1
+
+Eye structure shapes neuron function in Drosophila motion vision
+
+2
+3
+
+Arthur Zhao1, Eyal Gruntman1, Aljoscha Nern1, Nirmala A. Iyer1, Edward M. Rogers1, Sanna
+
+4
+
+Koskela1, Igor Siwanowicz1, Marisa Dreher1, Miriam A. Flynn1, Connor W. Laughland1,
+
+5
+
+Henrique D.F. Ludwig1, Alex G. Thomson1, Cullen P. Moran1,2, Bruck Gezahegn1, Davi D.
+
+6
+
+Bock1,3, and Michael B. Reiser1
+
+7
+8
+
+1
+
+HHMI Janelia Research Campus, USA
+
+9
+
+2
+
+Vanderbilt Eye Institute, USA
+
+10
+
+3
+
+Department of Neurological Sciences, University of Vermont, USA
+
+11
+12
+
+Summary
+
+13
+14
+
+Many animals rely on vision to navigate through their environment. The pattern of changes in the
+
+15
+
+visual scene induced by self-motion is the optic flow1, which is first estimated in local patches by
+
+16
+
+directionally selective (DS) neurons2–4. But how should the arrays of DS neurons, each
+
+17
+
+responsive to motion in a preferred direction at a specific retinal position, be organized to
+
+18
+
+support robust decoding of optic flow by downstream circuits? Understanding this global
+
+19
+
+organization is challenging because it requires mapping fine, local features of neurons across the
+
+20
+
+animal’s field of view3. In Drosophila, the asymmetric dendrites of the T4 and T5 DS neurons
+
+21
+
+establish their preferred direction, making it possible to predict DS responses from anatomy4,5.
+
+22
+
+Here we report that the preferred directions of fly DS neurons vary at different retinal positions
+
+23
+
+and show that this spatial variation is established by the anatomy of the compound eye. To
+
+24
+
+estimate the preferred directions across the visual field, we reconstructed hundreds of T4 neurons
+
+25
+
+in a full brain EM volume6 and discovered unexpectedly stereotypical dendritic arborizations that
+
+26
+
+are independent of location. We then used whole-head µCT scans to map the viewing directions
+
+27
+
+of all compound eye facets and found a non-uniform sampling of visual space that explains the
+
+28
+
+spatial variation in preferred directions. Our findings show that the organization of preferred
+
+29
+
+directions in the fly is largely determined by the compound eye, exposing an intimate and
+
+30
+
+unexpected connection between the peripheral structure of the eye, functional properties of
+
+31
+
+neurons deep in the brain, and the control of body movements.
+
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+32
+
+Main
+
+33
+34
+
+By moving through an environment, seeing animals can determine the physical layout and
+
+35
+
+estimate their own path using visual motion detection (Fig. 1A)1, analogous to solving the
+
+36
+
+structure from motion problem in Computer Vision7. However, biological vision does not
+
+37
+
+provide perfect geometric measurements. Instead, the global structure is synthesized using arrays
+
+38
+
+of DS neurons that report relative motion in small regions of the scene. Insects are famously
+
+39
+
+skilled at rapid flight maneuvers that depend on optic flow–the global structure of visual
+
+40
+
+motion8,9. Recent progress in Drosophila has elucidated key aspects of the circuits computing
+
+41
+
+motion detection as well as the visual control of navigation. Nevertheless, the intervening logic
+
+42
+
+by which local motion detectors are spatially organized for reliable, behaviorally relevant optic
+
+43
+
+flow estimation, remains unclear.
+
+44
+45
+
+Each fruit fly eye is composed ~750 columnar units called ommatidia, arranged on a hemisphere
+
+46
+
+to maximize the field of view10. Each ommatidium houses photoreceptors and collects light from
+
+47
+
+a small area of visual space10,11. Along the motion pathway, columnar neurons such as L1 and
+
+48
+
+Mi1, receive, modify, and transmit photoreceptor signals, preserving retinotopy4,12,13 (Fig. 1B).
+
+49
+
+T4 neurons are the local ON-DS cells14,15, sensitive to bright edge movement (analogous T5
+
+50
+
+neurons are the OFF-DS cells5,16–18). T4s integrate columnar inputs along their dendrites, whose
+
+51
+
+principal anatomical orientation corresponds to the neurons’ preferred direction (PD) of
+
+52
+
+motion4,5 (Fig. 1C). There are four T4 subtypes, each with a distinct dendritic orientation, and an
+
+53
+
+axon terminal projecting to one of four layers in the lobula plate2,19. These neurons are best
+
+54
+
+understood near the center of the eye, where the PDs of each subtype align to one of four
+
+55
+
+orthogonal, cardinal directions (forward, backward, up, and down)2,4. It is unclear how well this
+
+56
+
+relationship holds for T4s away from the center. Indeed, due to the spherical geometry of the
+
+57
+
+compound eye, the PDs cannot be globally aligned with the cardinal directions while also
+
+58
+
+maintaining orthogonality between subtypes (Extended Data Fig. 1A). Since wide-field neurons
+
+59
+
+in the lobula plate integrate from large ensembles of T4 neurons19,20, the directional tuning of
+
+60
+
+T4s across the eye directly shapes global optic flow processing.
+
+61
+62
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+63
+
+Non-cardinal direction preference by DS neurons
+
+64
+65
+
+To survey the directional preference of T4s across visual space, we measured the local PD of H2,
+
+66
+
+a large, wide-field neuron that integrates from T4bs throughout the 2nd layer of the lobula
+
+67
+
+plate19,21 (Fig. 1D, Extended Data Fig. 1B). We used whole-cell electrophysiology to record H2
+
+68
+
+responses to gratings moving in 16 directions, at several locations on the eye (Fig. 1E,F). We
+
+69
+
+find that near the eye’s equator, H2’s PD is aligned with cardinal, back-to-front motion, as
+
+70
+
+previously reported21–23. However, at more dorso-frontal locations, the PD shows a prominent
+
+71
+
+downward component (Fig. 1E,F; consistently across animals, Extended Data Fig. 1C,D).
+
+72
+
+Surprisingly, these responses resembles a translational optic flow field (Fig. 1F), rather than a
+
+73
+
+purely rotational one, as expected for H2 (blowflies23). This shift in the local PD of H2 implies
+
+74
+
+that T4 neurons are not globally tuned to cardinal motion directions, a prediction that agrees well
+
+75
+
+with a recent imaging study of T4/T5 axons24. But what causes T4 cells to change their
+
+76
+
+directional preference across the eye?
+
+77
+78
+
+Two parsimonious mechanisms could account for how T4 dendrites are differentially oriented
+
+79
+
+with respect to each other at different retinotopic locations. Either T4 dendritic orientations vary
+
+80
+
+with respect to their retinotopic inputs (Fig. 1G (i)) throughout the eye, or T4s dendrites employ
+
+81
+
+a conserved integration strategy, but the representation of space by the array of input neurons is
+
+82
+
+non-uniform (Fig. 1G (ii)). To distinguish between these two hypotheses, we reconstructed the
+
+83
+
+morphology of hundreds of T4 neurons to determine the spatial integration pattern in the
+
+84
+
+medulla. We then established a new, high-resolution map, detailing the spatial sampling by each
+
+85
+
+ommatidium in the eye. By combining these datasets, we map T4s’ preferred directions into
+
+86
+
+visual space, thereby revealing the mechanism underlying the non-cardinal motion sensitivity.
+
+87
+
+Finally, our global analysis of the fly eye reveals principal axes of body movements that are most
+
+88
+
+efficiently measured via optic flow.
+
+89
+90
+
+EM reconstruction of T4 dendrites across the eye reveals stereotypical arborization pattern
+
+91
+92
+
+To compare T4 neurons’ arborization pattern across the entire medulla, we manually
+
+93
+
+reconstructed all 779 Mi1 neurons on the right side of the Full Adult Fly Brain (FAFB) volume6
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+94
+
+to establish a neuroanatomical coordinate system. Mi1s are columnar cells that are a major input
+
+95
+
+to T4 neurons4,15 (Fig. 2A,B, Extended Data Fig. 2A). Their reconstruction was essential for
+
+96
+
+propagating retinotopic coordinates from the more regular, distal layers to M10, where Mi1s
+
+97
+
+synapse onto T4 dendrites (Fig. 2C). All Mi1s in M10 were then mapped into a 2D regular grid
+
+98
+
+with the orthogonal +h and +v axes (Fig. 2D). Because the rows of Mi1s are not generally
+
+99
+
+straight (Fig. 2C), capturing the global grid structure (Fig. 2D) enables the direct comparison of
+
+100
+
+T4 neurons’ arborization pattern across the eye. We note two special rows of points that serve as
+
+101
+
+global landmarks: the “equator” (Fig. 2D, in orange) is derived from the equatorial region in Fig.
+
+102
+
+2C, which is located via the corresponding lamina cartridges with additional photoreceptors (see
+
+103
+
+Methods and Extended Data Fig. 2 B-D), and the “central meridian” (Fig. 2D, in black) that
+
+104
+
+divides the points into roughly equal halves and coincides well with the first optic chiasm
+
+105
+
+(Extended Data Fig. 2E). This regular grid mapping required access to the complete medulla and
+
+106
+
+lamina neuropils in the EM volume, and further tracing of columnar neurons can extend this
+
+107
+
+coordinate system into deeper neuropils, like the lobula (Extended Data Fig. 2F).
+
+108
+109
+
+Since the orientation of T4 dendrites corresponds to their PD (Fig. 1C), we reconstructed the
+
+110
+
+complete dendritic morphology of 176 horizontal-motion-sensitive T4b cells (Fig. 2E), and 114
+
+111
+
+vertical-motion-sensitive T4d cells (Extended Data Fig. 2G). We applied branching analysis
+
+112
+
+developed for river networks25 to each T4’s dendritic tree to capture the primary orientation (Fig.
+
+113
+
+2F, Extended Data Fig. 3A) as an anatomical PD estimate. This estimate yields a PD vector that
+
+114
+
+is represented as an arrow going through the dendrite’s center-of-mass, with a length
+
+115
+
+corresponding to the spatial extent of the dendrite along the PD (Fig. 2G).
+
+116
+117
+
+While the dendritic tree of each T4 neuron is idiosyncratic in its fine features, many conserved
+
+118
+
+characteristics, such as the size and dominant branch orientation, suggest these neurons may be
+
+119
+
+more stereotyped than expected from visual inspection of their morphology. To examine
+
+120
+
+potential stereotypy, we transformed all T4 PD vectors (and their orthogonal directions, ODs)
+
+121
+
+into the regular grid of Mi1s (Fig. 2D,H), using kernel regression that maintains the spatial
+
+122
+
+relationships between each PD and its neighboring Mi1s (excluding edge T4s, see methods).
+
+123
+
+Once transformed, the PD vectors for both T4 subtypes show a high degree of similarity. First,
+
+124
+
+the centers of mass for all T4 dendrites fall within a “home” column. Second, the heads and tails
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+125
+
+of the PD vectors are each localized to a small area (the standard deviation of the head and tail
+
+126
+
+positions is less than ½ the inter-column distance). Third, the dendrites of both subtypes roughly
+
+127
+
+span a single unit hexagon (1 home + 6 nearest columns). T4b’s and T4d’s PD vectors are mostly
+
+128
+
+aligned with the +h and -v axes, respectively (Fig. 2J). The bias (>90º) in the T4b distribution is
+
+129
+
+mostly accounted for by neurons below the equator (Extended Data Fig. 3B,C). The PD vector
+
+130
+
+lengths between the subtypes are notably different (Fig. 2K and Extended Data Fig. 3D).
+
+131
+
+However, the unit hexagon is anisotropic since its height is greater than the width. Assuming that
+
+132
+
+columns are space-filing, we defined new unit distances, “hexagon unit,” as the edge-to-edge
+
+133
+
+span: 3 horizontal columns for T4b (Dh) and 5 vertical columns (Dv) for T4d (Fig. 2M inset).
+
+134
+
+When we normalize the PD length by these new unit distances for each subtype separately, we
+
+135
+
+find that T4b’s and T4d’s are now highly overlapping (Fig. 2M, Extended Data Fig. 3E). Since
+
+136
+
+we identified the T4 subtypes based on lobula plate layer innervation, the striking within-subtype
+
+137
+
+similarity of the PDs, does not support further divisions based on morphology19,24,26. Our
+
+138
+
+analysis has thus revealed that T4 neurons share a universal sampling strategy—throughout the
+
+139
+
+eye they innervate a unit hexagon of columns, while establishing a preferred direction by
+
+140
+
+aligning their dendrites mostly in one direction, parallel to either the horizontal or vertical axes
+
+141
+
+of the hexagonal grid.
+
+142
+143
+
+Non-uniform sampling of visual space established by µCT of the Drosophila eye
+
+144
+145
+
+Having established that T4’s PD is governed by a simple local rule that is conserved throughout
+
+146
+
+the medulla (strong evidence against the hypothesis in Fig. 1G(i)), understanding the global PD
+
+147
+
+organization now reduces to understanding how visual space, sampled by the compound eye,
+
+148
+
+maps onto the array of medulla columns (required to evaluate the hypothesis in Fig. 1G(ii)).
+
+149
+
+Since the EM volume did not contain the eye, we instead imaged whole fly heads with
+
+150
+
+approximately the same number of ommatidia. We first explored confocal imaging (Extended
+
+151
+
+Data Fig. 4A), but ultimately used micro computed tomography (µCT; Fig. 3A,B). The isotropic
+
+152
+
+~1 µm resolution of the µCT data allowed us to define the viewing direction of each
+
+153
+
+ommatidium (as the vector connecting the ‘tip’ of the photoreceptors to the center of each
+
+154
+
+corneal lens, Fig. 3B,C, Extended Data Fig. 4B), and to locate the eye’s equator (using the
+
+155
+
+chirality of the photoreceptor arrangement27, Fig. 3D).
+
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+156
+157
+
+We represent the ommatidia directions in eye coordinates on a unit sphere (Fig. 3E) or with a
+
+158
+
+geographic projection (Mollweide projection, Fig. 3F; Mercator projection, Extended Data Fig.
+
+159
+
+5F-J). The field of view of this eye spans from directly above to directly below (-90° to 90°) in
+
+160
+
+elevation, and in azimuth, from ~20° into the opposite hemisphere in front to 160° behind, with a
+
+161
+
+binocular overlap of ~40° (Extended Data Fig. 4C,D). The maps of ommatidia directions
+
+162
+
+produced from 3 different females are quite consistent (Extended Data Fig. 4E), and show
+
+163
+
+greater binocular overlap than prior data based on a coarser, optical method28. The ommatidia
+
+164
+
+directions are well described by a hexagonal grid that we then aligned to the medulla column
+
+165
+
+grid using the equator (+h) and central meridian (+v) as global landmarks (Extended Data Fig.
+
+166
+
+5A, Fig. 4A).
+
+167
+168
+
+The hexagonal arrangement is a dense spatial packing that maximizes the resolving power of the
+
+169
+
+eye10. However, many unit hexagons are irregular, as illustrated by the inter-ommatidial angles
+
+170
+
+(∆Φ, Fig. 3G-H) and the shear angles (α, Fig. 3J). ∆Φ is smallest near the equator and the central
+
+171
+
+meridian, and increases in size away from this region (Fig. 3F). When calculated separately for
+
+172
+
+vertical (∆Φ! ) and horizontal (∆Φ" ) neighbors (Fig. 3H), we find that the vertical visual acuity is
+
+173
+
+highest (lowest ∆Φ! ) along the equator (a typical feature of flying insect eyes29,30, not previously
+
+174
+
+reported for Drosophila melanogaster28), and the horizontal acuity is highest in the central part
+
+175
+
+of the eye, though the effect of photoreceptor pooling (neural superposition11) on these acuity
+
+176
+
+differences is unclear. These acuity differences are consistent with the aspect ratio changes of the
+
+177
+
+unit hexagons across the eye (Extended Data Fig. 5C). Furthermore, the shear angle of the
+
+178
+
+hexagons systematically changes, with the most regular hexagons (α ≈ 90°) found near the
+
+179
+
+equator and the central meridian, and sheared hexagons with α < 90° in the fronto-dorsal and
+
+180
+
+posterior-ventral quadrants, and α > 90° in the other quadrants (Fig. 3J). This µCT scan of the
+
+181
+
+full fly head, provides the most detailed description of how the compound eye samples visual
+
+182
+
+space. Our analysis reveals an irregular arrangement of ommatidia directions with spatially
+
+183
+
+varying aspect ratios, inter-ommatidial angles, and shear angles, that shape the inputs to visual
+
+184
+
+pathways. Could this non-uniform sampling explain the global structure of T4 PDs?
+
+185
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+186
+
+Mapping neuroanatomical space into visual space explains the global organization of DS
+
+187
+
+neuron preferred directions
+
+188
+189
+
+We now have all the data required to map T4 PDs from their neuronal coordinates into the visual
+
+190
+
+coordinates of the eye. We used the regular grids established for medulla columns (Fig. 2D) and
+
+191
+
+ommatidia directions (Extended Data Fig. 5A) to construct a 1-to-1 mapping between them,
+
+192
+
+matching from the center outward (Fig. 4A, Supplementary Video 1 and 2). We used kernel
+
+193
+
+regression to transform the T4b PDs into eye coordinates (Fig. 4B). Finally, the T4b PDs were
+
+194
+
+estimated for all ommatidia directions (Fig. 4C, Extended Data Fig. 6A,B; T4d in Extended Data
+
+195
+
+Fig. 7A-D). Since T4a/b and T4c/d are mostly anti-parallel (Extended Data Fig. 6C,D), these
+
+196
+
+estimates can be directly extended to all T4 subtypes. The stereotypical alignment of T4b PDs in
+
+197
+
+the medulla (Fig. 2H) suggests that the PD field in eye coordinates should follow the ommatidia
+
+198
+
+shearing (Fig. 3J), which is indeed the case (Fig. 4D). Remarkably, the T4b PDs are well-aligned
+
+199
+
+to the spatially registered H2 responses (red arrowheads in Fig. 4C). It is noteworthy that both
+
+200
+
+show a downward component in dorso-frontal PDs, which in our anatomical analysis, could only
+
+201
+
+have originated from the non-uniform sampling of visual space. This global pattern has features
+
+202
+
+of a translational optic flow field (Fig. 1A,F), that can be readily seen in the Mercator projection
+
+203
+
+comparing the PD field with the eye coordinate parallel lines of constant elevation (Extended
+
+204
+
+Data Fig. 6A). Since T4b provides substantial input to H219, this agreement provides strong
+
+205
+
+evidence for the mechanism hypothesized in Fig. 1G(ii) and validates our anatomy based PD
+
+206
+
+prediction and mapping into visual coordinates. Taken together, these results demonstrate that
+
+207
+
+the non-uniform sampling of the eye powerfully shapes the organization of PDs available for
+
+208
+
+optic flow processing.
+
+209
+210
+
+Is the T4b PD field (Fig. 4C) optimized for the optic flow induced by cardinal motion along body
+
+211
+
+axes (Fig. 4E), as was found for mice DS neurons3? The distribution of angular differences
+
+212
+
+between the T4b PD field, the eye’s +h-axis, and several optic flow fields, shows that the PDs
+
+213
+
+are best aligned with the eye axis and yaw rotation (Fig. 4F). In contrast, there is a large spread
+
+214
+
+in the differences between the PD field and reverse-thrust or side-slip optic flow, suggesting
+
+215
+
+substantial regional variations. The spatial distribution shows that central eye PDs agree well
+
+216
+
+with all three flow fields, while frontal PDs are more sensitive to side-slip, posterior PDs to
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+217
+
+reverse-thrust motion, and yaw rotation is well matched throughout (Fig. 4G, similar analysis for
+
+218
+
+T4d in Extended Data Fig. 7E,F). Consequently, all neurons that integrate from most of a lobula
+
+219
+
+plate layer, like H2 (Extended Data Fig. 1B), will inherit this eye-derived sensitivity. However,
+
+220
+
+by selectively integrating from regional patches, lobula plate neurons can encode diverse features
+
+221
+
+of optic flow, providing an expansive set of motion patterns for behavioral control.
+
+222
+223
+
+Which body-movement-generated flow fields are most efficiently encoded by the T4b
+
+224
+
+population? We searched and found the optimal rotation axis (by minimizing angular
+
+225
+
+differences, see methods) quite close to the yaw axis, and a translation axis approximately half-
+
+226
+
+way between reverse-thrust and side-slip, near the posterior boundary of the eye’s field of view
+
+227
+
+(rightmost distributions in Fig. 4F, locations denoted with symbols in Fig. 4G, and complete
+
+228
+
+error map in Extended Data Fig. 6E). Comparing to the optimal axes for T4d PDs (Extended
+
+229
+
+Data Fig. 7F) we find a remarkable agreement between these principal axes—with the body yaw
+
+230
+
+axis matching T4ds’ optimal translation axis, and T4bs’ non-canonical optimal translation axis
+
+231
+
+matching T4ds’ optimal rotation axis (Fig. 4H). Since optic flow is a direct consequence of
+
+232
+
+movement, it is likely that these principal axes of maximal motion sensitivity are fundamental
+
+233
+
+for controlling body movements. Intriguingly, the optimal translation axes for the left and right
+
+234
+
+T4a populations are near the eye’s equator and approximately ±40º from the midline (Fig. 4J),
+
+235
+
+precisely where we predict T4s exhibit their highest acuity (Extended Data Fig. 6B). We note a
+
+236
+
+striking resemblance between the optimal translation axes for T4a/b (Fig. 4J) and the tuning of
+
+237
+
+optic flow sensitive inputs to the central complex31, from which the transformations between
+
+238
+
+body-centered and world-centered coordinates are built32. This unexpected correspondence of
+
+239
+
+maximal motion sensitivities exposes a deep link between the structure of the eye and the
+
+240
+
+coordinate systems organizing goal-directed navigation in the central brain.
+
+241
+242
+
+Discussion
+
+243
+244
+
+Our analysis of the eye-derived pattern of spatial integration by the T4 directionally selective
+
+245
+
+neurons, unifies two rich perspectives on fly motion vision—the recent discoveries about the
+
+246
+
+local circuit mechanism for computing directional selectivity in Drosophila14,15,17,33 together with
+
+247
+
+groundbreaking work in larger flies on the sensing of global optic flow patterns by wide-field
+
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+248
+
+lobula plate neurons9,20,22,23. Consequently, our study reconciles multiple previous findings.
+
+249
+
+Behavioral studies using precise, localized visual stimulation described maximal responses to
+
+250
+
+motion directions aligned with rows on the eye34,35, and work in larger flies noted that the local
+
+251
+
+PDs of several Lobula Plate Tangential Cells36 reflected the orientation of the hexagonal grid in
+
+252
+
+frontal eye regions37. A recent study of the looming-sensitive LPLC2 cells in Drosophila found
+
+253
+
+this neuron was most sensitive to non-cardinal, diagonal movement directions in the dorso-
+
+254
+
+frontal eye regions, and found that LPi interneurons had shifting PDs across the field of view38.
+
+255
+
+Finally, a recent study found T4/T5 axonal responses that resembled a translation-like pattern
+
+256
+
+with smoothly varying PDs across lobula plate layers24. Our study provides a mechanistic
+
+257
+
+explanation for these observations—the missing link between the arrangement of eye facets and
+
+258
+
+local PDs measured in the lobula plate, is the universal sampling rule we discovered for T4
+
+259
+
+neurons (Fig. 2) that adheres closely to the coordinate system of the eye. Based on our
+
+260
+
+anatomical analysis of the dendritic orientation of T4 neurons, identified by their targeted lobula
+
+261
+
+plate layer, we find no evidence for additional subtypes of T4 neurons. However, recent
+
+262
+
+transcriptomic studies26 provide evidence for additional subtype diversity, and functional
+
+263
+
+studies24 suggest that local PDs may be regionally modified through as-yet-undescribed
+
+264
+
+connectivity differences, an important question for future EM studies. Finally, our analysis of
+
+265
+
+global optic flow patterns (Fig. 4, Extended Data Figs. 6,7) provides a simple explanation for the
+
+266
+
+observation that HS and VS cell responses simultaneously represent information about both self-
+
+267
+
+rotations and self-translations39,40, since the eye-derived PDs are most sensitive to different
+
+268
+
+cardinal self-motions in different eye regions.
+
+269
+270
+
+The computation of directional selectivity depends on asymmetric wiring in the dendrites of T4
+
+271
+
+and T5 neurons. Each subtype connects to different cell types at different locations along the
+
+272
+
+dendrite5, but the developmental mechanisms establishing this wiring asymmetry are not
+
+273
+
+known41. Our discovery of a universal sampling of medulla columns by T4 dendrites suggests
+
+274
+
+that the core developmental mechanisms may be identical across the medulla (and lobula for
+
+275
+
+T5s) and all subtypes, acting together with a process that established the subtype-specific
+
+276
+
+dendritic orientation. Supporting this proposal is evidence from recent RNA-Seq studies showing
+
+277
+
+that all 8 T4 and T5 subtypes are transcriptionally very similar, including during development41–
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+278
+
+43
+
+279
+
+simplifies the scope for a required explanatory mechanism.
+
+. The realization that in the appropriate reference frame, all T4 neurons are quite similar greatly
+
+280
+281
+
+Arthropods with compound eyes, which comprise the majority of described animal species, show
+
+282
+
+a remarkable diversity of anatomical specializations, reflecting their diverse visual ecology30.
+
+283
+
+Since many features of optic lobe anatomy, including key cell types involved in motion vision,
+
+284
+
+are conserved across flies44 and comparable neurons and brain regions are found across
+
+285
+
+arthropods45, the insights uncovered in Drosophila may apply broadly. Extrapolating from our
+
+286
+
+work, we wonder whether detailed eye maps would make strong predictions about the motion
+
+287
+
+directions sensed by the animal, and thus its behavior and natural history. This correspondence
+
+288
+
+between the structure of the sensory system and an animal’s behavioral repertoire46 is an
+
+289
+
+important demonstration that neural computations cannot be considered in isolation, as evolution
+
+290
+
+jointly sculpts the function of the nervous system and the structure of the body.
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+
+Methods
+Anatomical data
+EM reconstruction
+All reconstructions in this manuscript are from a serial section transmission EM volume of a
+Drosophila melanogaster full adult fly brain (FAFB)6. We manually reconstructed neuron
+skeletons in the CATMAID environment47 (in which 27 labs were collaboratively building
+connectomes for specific circuits, mostly outside of the optic lobe) following established
+practices48. We also used two recent auto-segmentations of the same data set, FAFB-FFN149 and
+FlyWire50 to quickly examine many auto-segmented fragments for neurons of interest. Once a
+fragment of interest was found, it was imported to CATMAID, followed by manual tracing and
+identity confirmation.
+For the data reported here, we identified and reconstructed a total of 780 Mi1, 38 T4a, 176 T4b,
+22 T4c, 114 T4d, 63 TmY5a and 1 H2 cells. All the columnar neurons could be reliably matched
+to well-established morphology from golgi-stained neurons13. This reconstruction is based on
+approximately 1.35 million manually placed nodes. (1) Mi1: we traced the main branches of the
+M5 and M9/10 arbors such that the centers-of-mass of the arbors formed a visually identifiable
+grid. We used the auto-segmentation to accelerate the search for Mi1 cells wherever there
+appeared to be a missing point in the grid. After an extensive process, we believe that we have
+found all Mi1 cells in the right optic lobe (Fig. 2C,D). One Mi1 near the neuropil boundary was
+omitted in later analysis because its center-of-mass was clearly “off the grid” established by
+neighboring Mi1 cells despite a complete arbor morphology. (2) T4: we traced their axon
+terminals in the lobula plate for subtype identification (each subtypes innervating a specific
+depth in the lobula plate19) and manually reconstructed their complete dendritic morphology to
+determine their anatomical preferred direction. To sample T4 morphology across the whole eye
+with a reasonable amount of time and effort, we focused on the T4b (Fig. 2E) and T4d (Extended
+Data Fig. 2G) subtypes with sufficient density to allow us to interpolate the PDs at each column
+position. In addition, we chose 4 locations on the eye: medial (M), anterior dorsal (AD), anterior
+ventral (AV) and lateral ventral (LV), where we reconstructed 3 ~ 4 sets of T4 cells and
+confirmed that the PDs were mostly anti-parallel between T4a and T4b, as well as between T4c
+and T4d (Extended Data Fig. 6C,D). (3) TmY5a: we searched for cells along the equator and
+central meridian of the medulla and traced out their main branches to be able to extend (with
+further interpolation) the columnar structure of the medulla to the lobula (Extended Data Fig.
+2F). (4) H2: The neuron was found during a survey (unpublished) of the LPTCs in the right side
+of the FAFB brain and was completely reconstructed, including all fine branches in the lobula
+plate (Fig. 1D, Extended Data Fig. 1B).
+In addition, we identified several lamina monopolar cells and photoreceptor cells. (5) Lamina
+cells, mainly L1, L2, L3 and outer photoreceptor cells (R1-6) were reconstructed, often making
+some use of auto-segmented data, to allow for their identification. This helped us locate the
+equatorial columns in medulla that have different numbers of photoreceptor inputs in the
+corresponding lamina cartridge (Fig. 2C, Extended Data Fig. 2B-D). (6) Inner photoreceptor
+cells R7/8: we searched for R7/8 cells throughout the eye, initially as part of a focused study on
+the targets of these photoreceptors51. We extended these reconstructions to complete the medulla
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+
+map in Fig. 2. We searched for R7/8 corresponding to each Mi1 cells near the boundary of the
+medulla. Mi1 cells in columns lacking inner photoreceptors were identified and excluded from
+further analysis (Fig. 2C). Furthermore, we reconstructed several cells near the central meridian
+and used their axons’ shape to identify the location of the chiasm (Extended Data Fig. 2E).
+Generation and imaging of split-GAL4 driver lines
+
+We used split-GAL4 driver lines SS0080915 and SS01010 to drive reporter expression in Mi1
+and H2 neurons, respectively. Driver lines and representative images of their expression patterns
+are available at https://splitgal4.janelia.org/. SS01010 (newly reported here; 32A11-p65ADZp in
+attP40; 81E05-ZpGdbd in attP2) was identified and constructed using previously described
+methods and hemidriver lines52,53. We used MCFO54 for multicolor stochastic labeling. Sample
+preparation and imaging, performed by the Janelia FlyLight Project Team, were as in previous
+studies53,54. Detailed protocols are available online ( https://www.janelia.org/projectteam/flylight/protocols under “IHC - MCFO”). Images were acquired on Zeiss LSM 710 or 780
+confocal microscopes with 63x 1.4 NA objectives at 0.19x0.19x0.38 μm3 voxel size. The
+reoriented views shown in Extended Data Fig. 1B and Extended Data Fig. 2A,B were displayed
+using VVDviewer (https://github.com/JaneliaSciComp/VVDViewer). This involved manual
+editing to exclude labeling outside of approximately medulla layers M9/10 (Extended Data Fig.
+2A,B) or to only show a single H2 neuron (Extended Data Fig. 1B).
+Confocal imaging of a whole fly eye
+Sample preparation: Flies were anesthetized with CO2 and briefly washed with 70% ethanol.
+Heads were isolated, proboscis removed under 2% paraformaldehyde/PBS/0.1% triton X-100
+(PBS-T) and fixed in this solution overnight at 4°C. After washing with PBS-T, the heads were
+bisected along the midline with fine scissors and incubated in PBS with 1% triton X-100, 3%
+normal goat serum, 0.5% DMSO and Escin (0.05 mg/ml, Sigma-Aldrich, #E1378) containing
+chicken anti-GFP (1:500; Abcam #ab 13970), mouse anti-nc82 (1:50; Developmental Studies
+Hybridoma Bank) and rabbit anti-RFP (1:1000; TaKaRa Bio USA, #632496) at room
+temperature with agitation for 2 days. After a series of three ~1h-long washes in PBS-T the
+sections were incubated for another 24h in the above buffer containing secondary antibodies:
+Alexa Fluor 488 goat anti-chicken (1:1000; Thermo Fisher #A11039), Alexa Fluor 633 goat antimouse (1:1000; Thermo Fisher #A21050) and Alexa Fluor 568 goat anti-rabbit (1:1000; Thermo
+Fisher #A11011). The samples were then washed in PBS/1% triton (4 × 1 h) and post-fixed for 4
+h in PBS-T/2% paraformaldehyde. To avoid artefacts caused by osmotic shrinkage of soft tissue,
+samples were gradually dehydrated in glycerol (2-80%) and then ethanol (20 to 100%)55 and
+mounted in methyl salicylate (Sigma-Aldrich #M6752) for imaging.
+Imaging and rendering: Serial optical sections were obtained at 1 µm intervals on a Zeiss 710
+confocal microscopes with a LD-LCI 25x/0.8 NA objective using 488, 560 and 630 lasers,
+respectively. The image in Extended Data Fig. 4A is a reoriented substack projections, processed
+in Imaris v9.5 (Oxford Instruments).
+µCT imaging of whole fly heads
+µCT is an x-ray imaging technique that is similar to medical CT scanners, but with much higher
+resolution more suitable for smaller samples56. A 3D data volume set is reconstructed from a
+series of 2D x-ray images of the physical sample at different angles. The advantage of this
+method for determining the ommatidia directions (Fig. 3) is that internal details of the eye, such
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+
+as individual rhabdoms, distinguishable ‘tips’ of the photoreceptors at the boundary between the
+pseudocone and the neural retina57, and the chirality of the outer photoreceptors, can be resolved
+across the entire intact fly head with isotropic resolution, which is an important requirement for
+preserving the geometry of the eye.
+Sample preparation: Based on previously published fixation and staining protocols for a variety
+of biological models58, we undertook extensive testing of fixatives and stains in addition to
+mounting/ immobilizing steps for µCT scanning. Fixatives tested were Bouins fluid, alcoholic
+Bouins, 70% ethanol. We tested staining with Phospho-tungstic acid in water and in ethanol,
+Phosphomolybdic acid in water and in ethanol, Lugol’s Iodine solution, 1% Iodine metal
+dissolved in 100% ethanol. Various combinations of fixatives and stains were tried along with
+variations in times for each. Fixing and staining samples in aqueous solutions and then scanning
+these samples in an aqueous environment, despite efforts to immobilize the head, yielded blurry
+images and poor resolution. Drying the samples using hexamethyldisilazane (HMDS) did not
+yield images with the resolution achievable with critical point dried samples58. The protocol that
+worked best involved fixing and staining in ethanol-based solutions followed by critical point
+drying giving good contrast, high resolution images with excellent reproducibility.
+6-7 day old female D. melanogaster flies were anesthetized with CO2 and immersed in 70%
+ethanol. The heads were dissected out from the body at the thorax region just below the neck to
+allow for a larger surface area of fixative absorption. Samples were fixed in 70% ethanol at room
+temperature for 3 days in a 1.5 ml Eppendorf tube with rotation. The ethanol was then replaced
+with staining solution of 0.5% Phospho-tungstic acid in 70% ethanol. Samples remained in the
+staining solution for 5-6 days at room temperature with rotation. The heads were rinsed 3x10 min
+with 70% ethanol at room temperature to remove the staining solution followed by dehydration
+in 90% and 100% ethanol for 30 min each. The samples were then critical point dried (Tousimis
+supercritical autosamdri 931.GL). The stasis mode protocol was used with 3 stasis cycles lasting
+90 minutes each. Next, the fly head was mounted on the tip of a toothpick using a tiny drop of
+superglue on the remaining thorax region. We confirmed that no glue got on to the head region.
+Imaging and reconstruction: The samples were scanned with Zeiss Xradia Versa XRM 500
+microCT scanner. The scanning was carried out at a voltage of 40kV, current of 72µA (power
+2.9W) at 20x magnification with 10 sec exposures and a total of 1601 projections. Images had a
+pixel size of 1.0343 µm with camera binning at 2 and reconstruction binning at 1. The Zeiss
+XRM reconstruction software was used to generate TIFF stacks of the tomographs. Image
+segmentation and annotation (lenses and photoreceptor tips) were done in Imaris v9.5 (Oxford
+Instruments).
+Whole cell recordings of labeled H2 neurons
+Electrophysiology: All the flies used in electrophysiological recordings were from a single
+genotype: pJFRC28-10XUAS-IVS-GFP-p1059 in attP2 crossed to the H2 driver line SS01010
+(see section ‘Generation and imaging of split-GAL4 driver lines’). Flies were reared at a 16 light:8
+dark light cycle at 24°C. To perform the recordings, 2-3 days old female Drosophila
+melanogaster were anesthetized on ice and glued to a custom-built PEEK platform, with their
+heads tilted down, using a UV cured glues (Loctite 3972) and a high-power UV curing LED
+system (Thorlabs CS2010). To reduce brain motion, the two front legs were removed, the folded
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+
+proboscis was glued in its socket, and muscle 1660 was removed from between the antennae. The
+cuticle was removed from the posterior part of the head capsule using a hypodermic needle (BD
+Precisionglide 26G X ½’’) and fine forceps. Manual peeling of the perineural sheath using the
+forceps seemed to damage the stability of the recordings and, therefore, the sheath was removed
+using collagenase (following prior method61). To prevent contamination, the pipette holder was
+replaced after collagenase application.
+The brain was continuously perfused with an extracellular saline containing (in mM): 103 NaCl,
+3 KCl, 1.5 CaCl2 2H2O, 4 MgCl2 6H2O, 1 NaH2PO4 H2O, 26 NaHCO3, 5 N-Tris
+(hydroxymethyl) methyl-2- aminoethane-sulfonic acid, 10 Glucose, and 10 Trehalose with
+Osmolarity adjusted to 275mOsm and bubbled with carbogen throughout the experiment. Patch
+clamp electrodes were pulled (Sutter P97), pressure polished (ALA CPM2) and filled with an
+intracellular saline containing (in mM): 140 Kasp, 10 HEPES, 1 EGTA, 1 KCl, 0.1 CaCl2, 4
+MgATP, 0.5 NaGTP, and 5 Glutathione62. 250μM Alexa 594 Hydrazide was added to the
+intracellular saline prior to each experiment, to reach a final osmolarity of 265mOsm, with a pH
+of 7.3.
+Recordings were obtained using a Sutter SOM microscope with a 60X water-immersion
+objective (60X Nikon CFI APO NIR Objective, 1.0 NA, 2.8 mm WD). Contrast was generated
+using oblique illumination from an 850nm LED connected to a light guide positioned behind the
+fly’s head. Images were acquired using Micro-Manager63, to allow for automatic contrast
+adjustment. All recordings were obtained from the left side of the brain. To block visual input
+from the contralateral side, the right eye was painted with miniature paint (MSP Bones grey
+primer followed by dragon black). Current clamp recordings were sampled at 20KHz and lowpass filtered at 10KHz using Axon multiClamp 700B amplifier (National Instrument PCIe7842R LX50 Multifunction RIO board) using custom LabView (2013 v.13.0.1f2; National
+Instruments) and MATLAB (Mathworks, Inc.) software.
+Visual stimuli: The display was a G4 LED arena64 with a manual instead of a motorized rotation
+axis. The arena covered slightly more than one half of a cylinder (216° in azimuth and ~72° in
+elevation) of the fly’s visual field, with the diameter of each pixel subtending at most 2.25° on
+the fly eye. Visual stimuli were generated using custom written MATLAB code. Presented
+stimuli were:
+1) Moving grating: square wave grating with a constant spatial frequency (7 pixels ON / 7
+pixels OFF) were presented in a ~22° circular window over an intermediate intensity
+background. Gratings moved at 1.78Hz (40ms steps) and were presented at 16 different
+orientations. Grating were presented for 3 full cycles (1.68 sec) with 3 repetitions for
+each stimulus condition. The H2 responses to these trials are the basis for Fig. 1E,F and
+Extended Data Fig. 1C,D.
+2) Moving bars: This stimulus was used to detect the extent of the field of view of the inputs
+to the H2 cell. Moving bars were presented in both contrasts (ON and OFF) and both
+preferred and non-preferred directions for H2 cells (back to front and front to back
+respectively). Bars were 7 pixels wide and 21 pixels high and moved with 40ms steps
+(~56°/sec). Bars moved within a 21 pixels window that was centered around different
+positions in the arena. The H2 responses to these trials are not shown.
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+
+The local preferred direction for the H2 cells were determined using the responses to the 16
+directions of the moving gratings. Spikes were extracted from the recorded data and summed per
+trial, then averaged across repeated presentations of each stimulus. The polar plots (Fig. 1E)
+represent these averages (relative to baseline firing rate), while the vector sum over all 16
+directions is represented by the black marker in Fig. 1E and the red arrows in Fig. 1F. The
+subthreshold responses of H2 were also be used to determine the local preferred direction of the
+neuron, showing excellent agreement to the directions based on the neuron’s spiking responses
+(Extended Data Fig. 1C,D).
+Determining head orientation: First, the camera (Point grey Flea 3 with an 8X CompactTL™
+telecentric lens with in-line illumination, Edmund Optics) was aligned to a platform holder using
+a custom-made target. This allowed us to adjust the camera and platform holder such that when
+the holder is centered in the camera’s view, both yaw and roll angles are zero. Next, after the fly
+was glued to the platform, but before the dissection, images were taken from the front to check
+for yaw and roll angle of head orientation. If the deviation of the head away from a ‘straight
+ahead’ orientation was greater than 2°, then that fly was discarded. Finally, to measure pitch
+angle, the holder was rotated ±90°, and images of the fly’s eye were taken on both sides. Head
+orientation was then measured as previously described65.
+Data analysis
+Mapping medulla columns: We based our map of medulla columns on the principal, columnar
+cell type Mi1 that is found as one per column. Mi1 neurons nearly resemble columns with
+processes that do not spread far from the main ‘trunk’ of the neuron. They have a stereotypical
+arborization pattern in medulla layer M1, M5, and M9/10. For each Mi1 cell, we calculated the
+centers-of-mass of its arbors in both M5 and M10 and used them as column markers (Fig. 2B,C).
+The medulla columns do not form a perfectly regular grid— the column arrangement is squeezed
+along the anterior-posterior direction and the dorsal and ventral portions shift towards anterior.
+Nevertheless, we were able to map all column positions onto a regular grid via visual inspection
+(Fig. 2D). This was much clearer based on the positions of the M5 column markers, which are
+more regular, and were used as the basis for our grid assignment. For occasional ambiguous
+cases, we compared the whole cells (across layers) in a neighborhood to confirm our assignment.
+We then propagated the grid assignment to M10 column markers and use them throughout the
+paper since T4 cells received inputs in layer M10.
+Establishing a global reference that could be used to compare the medulla map (Fig. 2C) to the
+eye map (Fig. 3F) was essential, and so we endeavored to find the “equator” of the eye in both
+the EM and uCT data sets. Lamina cartridges in the equatorial region receive more outer
+photoreceptor inputs (7-8 compared to the normal 6)11,66. We traced hundreds of lamina
+monopolar cells (L1s or L3s), with at least one input to each of ~100 Mi1 cells near the equator
+region and counted the number of photoreceptor cells in each corresponding lamina cartridge
+(Extended Data Fig. 2B-D). This allowed us to locate the equatorial region of the medulla (Fig.
+2C). The equator in uCT is identified by the chirality of the outer photoreceptors (Fig. 3D). We
+further identified the “central meridian, +v” row, which is roughly the vertical midline. Note that
+there is some ambiguity in defining +h as the equator in Fig. 2D since there are 4 rows of
+ommatidia with 8 photoreceptors (points in tan). We opted for one of the middle two rows that
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+
+intersects with +v. We also identified the chiasm region based on the twisting of R7/8
+photoreceptor cells (Extended Data Fig. 2E), which very nearly aligned with the central
+meridian.
+T4 preferred direction (PD): Strahler number (SN) was first developed in hydrology to define
+the hierarchy of tributaries of a river25, and has since been adapted to analyze the branching
+pattern of a tree graph (Fig. 2F). A dendrite of a neuron can be considered as a tree graph. The
+smallest branches (leaves of a tree) are assigned with SN = 1. When two branches of SN = a and
+SN = b merge into a larger branch, the latter is assigned with SN = max(a, b) if a ≠ b, or with SN
+= a + 1 if a = b.
+We used SN = {2, 3} branches to define the PD because they are the most consistently
+directional (Extended Data Fig. 3A). SN = 1 branches have a relatively flat angular distribution.
+Most T4 cells we reconstructed have few SN = 4 branches (which are also directional, but too
+few to be relied upon), and rarely SN = 5 branches. Each branch is represented by a 3D vector.
+Vector sums are calculated for all SN = {2, 3} branches which define the directions of the PD
+vectors (Fig. 2F). We also assigned an amplitude to the PD, in addition to its direction. To
+generate a mass distribution for each T4 dendrite, we re-sampled the neuron’s skeleton such that
+the nodes are positioned roughly equidistantly (not so after manual tracing). Then all dendrite
+nodes were projected onto the PD axis. We define the length of the PD vector using a robust
+estimator, the distance between the 1st and 99th percentiles of this distribution. The orthogonal
+direction (OD) is a segment orthogonal to the PD vector, with its length similarly defined as PD
+and without a direction (Fig. 2G).
+Mapping T4 PDs into the regular grid in medulla (Fig. 2H) and the eye coordinates (Fig.
+4B, C) using kernel regression: Given a point set P in space A and a second point set Q in
+space B, and a 1-to-1 mapping between P and Q, one can map a new point x in A to a location y
+in B based on the relationships of x with respect to P. In our case, because the mapping from A
+to B is not a rigid coordinate transformation, we applied kernel regression to map the new points.
+Intuitively, this method takes into account the spatial relationships between x and all the points in
+P, but gives more weights to the points that are closer to x. The weight is assigned using a
+Gaussian kernel, hence the name kernel regression.
+We used this method to map PDs from local medulla space to a regular grid in Fig. 2H, and to
+map PDs from medulla space to visual space in Fig. 4B. For mapping to a regular grid, we
+defined a 2D reference grid with 19 points, which represented the home column (+1) and the 2nd
+(+6) and 3rd (+12) closest neighboring columns in a hexagonal grid. For a given T4 neuron, we
+searched for the same set of its neighboring medulla columns. We flattened these columns and
+the T4’s PD locally by projecting them onto a 2D plane that is given by principal component
+analysis, that is, the plane is perpendicular to the 3rd principal axis. Finally, we used kernel
+regression to map the PD from the locally flattened 2D medulla space to the 2D reference grid.
+The difference in mapping to the visual space (Fig. 4B, Extended Data Fig. 7A) is that the
+regression is from the locally flattened 2D medulla space to a unit sphere in 3D (the space of
+ommatidia directions).
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+
+Kernel regression can also be used as an interpolation method, which is equivalent to mapping
+from a space to its scalar or vector field, that is, to assign a value to a new location based on
+existing values in a neighborhood. This is how we calculated the PD fields in Fig. 4C and
+Extended Data Fig. 7B.
+In practice, we used the np package in R67, in particular, the “npregbw” function which
+determines the width of the Gaussian kernel. Most parameters of the npregbw function are set to
+default except: (1) We used the local-linear estimator, “regtype = ‘ll’”, which performs better
+near boundaries. (2) We used fixed bandwidth, “bwtype= ‘fixed’”, for interpolation and adaptive
+nearest neighbor method, “bwtype= ‘adaptive_nn’”, for mapping between 2 different spaces (eg.
+from medulla to ommatidia). Further details can be found in our Github repository and the np
+package manual for more details.
+Ommatidia directions: We analyzed the µCT volumes in Imaris v9.5 (Oxford Instruments). We
+manually segmented the lenses and photoreceptor tips, so they could be analyzed separately. We
+then used the “spot detection” (based on contrast) algorithm in Imaris to locate the centers of
+individual lenses and photoreceptor tips, and quality-controlled by visual inspection and manual
+editing. The lens positions are extremely regular and can be readily mapped onto a regular
+hexagonal grid (Extended Data Fig. 5A, directly comparable to the medulla grid, Fig. 2D). With
+our optimized µCT data, it is also straightforward to match all individual lenses to all individual
+photoreceptor “tips” in a one-to-one manner, and consequently to compute the ommatidia
+viewing directions. These directional vectors can be represented as points on a unit sphere (Fig.
+3E). We then performed a local weighted smoothing for points with at least 5 neighbors: the
+position of the point itself weights 50% while its neighbors’ average position accounts for the
+remining 50%. This gentle smoothing only impacts the positions in the bulk of the eye while
+leaving the boundary points alone.
+Assuming left-right symmetry, we used the lens positions from both eyes to define the frontal
+midline (sagittal plane) of the visual field. Together with the equator, identified by the inversion
+in the chirality of the outer photoreceptors (Fig. 3C,D), we could then define an eye coordinate
+system for the fly’s visual space – represented for one eye in Fig. 3E and F. Note that the z = 0
+plane (“z” is “up” in Fig. 3E) in the coordinate system is defined by lens positions, hence the
+“equator” ommatidia directions do not necessarily lie in this plane (more easily seen in Fig. 3F).
+In addition, we defined the “central meridian” line of points (“+v” in Fig. 2E,F and Extended
+Data Fig. 5A) that divides the whole grid into roughly equal halves. Because this definition is
+based on the grid structure, this “central meridian” does not lie on a geographic meridian line in
+the eye coordinates.
+Eyemap: 1-to-1 mapping between medulla columns and ommatidia directions
+With both medulla columns and ommatidia directions mapped to regular grid (Fig. 2D and
+Extended Data Fig. 5A), and equators and central meridians defined, it’s straightforward to
+match these two points sets, starting from the center outwards. Because the medulla columns are
+from a fly imaged with EM and ommatidia directions from a different fly imaged with µCT, we
+don’t expect these two point sets to match exactly, but we endeavored to use flies with a very
+similar total number of ommatidia (and of the same genotype). By matching the points from
+center outwards and relying on anatomical features such as the equator, we expect to minimize
+
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+
+the column receptive field discrepancies, especially in the interior of eye. The matching at the
+boundary is somewhat complicated by the existence of medulla columns with no inner
+photoreceptor (R7/8) inputs (Fig. 2C)68. In the eyemap in Fig. 4A, we denoted unmatched points
+with empty circles, all of which solely lie on the boundaries (which is why the ommatidia
+directions in Fig. 3F contain additional points). Any consideration of these medulla columns and
+ommatidia directions should be done with caution. In addition, we also noted those boundary
+points that do not have enough neighbors for computing the inter-ommatidial angles, the shear
+angles, or the aspect ratios in Fig. 3H, J, and Extended Data Fig. 5C,D. Importantly, our primary
+discoveries about the universal sampling of medulla columns (Fig. 2), and the strong relationship
+between T4 PDs and shear angle of ommatidia hexagons (comparing Fig. 3J to Fig. 4D) are well
+supported by the anatomy of the bulk of the eye and do not depend on perfect matching across
+data sets or the particular fly used to construct the eye map (see Extended Data Fig. 4E,F).
+Grid convention: regular vs irregular, hexagonal vs square: Facet lenses of the fly’s eye are
+arranged in an almost regular hexagonal grid. However, the medulla columns are squeezed along
+the anterior-posterior direction and more closely resemble a square grid tilted at 45º (Extended
+Data Fig. 5E). This difference can also be seen by comparing the aspect ratios (Extended Data
+Fig. 5C,D). To preserve these anatomical features, we mapped the medulla columns and T4 PDs
+onto a regular square grid (tilted by 45º, e.g. Fig. 2D, H), and the ommatidia directions onto a
+regular hexagonal grid (Extended Data Fig. 5A).
+Mercator and Mollweide projections: For presenting spherical data, the Mercator projection is
+more common, but we prefer the Mollweide projection since it produces only small distortion
+near the poles, and because of these smaller distortions it provides a more intuitive representation
+of spatial coverage. On the other hand, the Mercator projection preserves all the angular
+relationships and is more convenient for reading out angular distributions, which is why we use it
+for presenting the H2 data (Fig. 1F, Extended Data Fig. 1D). Otherwise, we used the Mollweide
+projections in the main figures and provide the Mercator version for some plots (Extended Data
+Figs. 5F-J, 6A, 7C).
+Ideal optic flow fields: Following the classic framework for the geometry of optic flow69, we
+calculate the optic flow field for a spherical sampling of visual space under the assumption that
+all objects are at an equal distance from the animal (only relevant for translational movements).
+With ommatidia directions represented by unit vectors in 3D, the optic flow field induced by
+translation is computed as the component of the inverse of the translation vector (since motion
+and optic flow are “opposite”) perpendicular to the ommatidia directions (also known as a
+“vector rejection”). The flow field induced by rotation is computed as the cross product between
+the ommatidia directions and the rotation vector. Since the motion perceived by the animal
+would be the opposite of the induced motion, the flow field is the reverse of the ones described
+above (Fig. 4E). The angles between T4 PDs and ideal optic flows at each ommatidia direction
+are computed for subsequent comparisons between various optic flow fields (Fig. 4F,G,
+Extended Data Fig. 7E,F).
+To determine the optimal axis of movement (minimal average errors) for a given PD field, we
+performed a grid search. We defined 10356 axes on the unit sphere (roughly 1º sampling) and
+generated optic flow fields induced by translations and rotations along these axes. We compared
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+
+all these optic flows fields and the PD fields for T4b and T4d to determine the axes with minimal
+average angular differences (Extended Data Fig. 6E). These are the optimal axes in Fig. 4F-J,
+Extended Data Fig. 6E, Extended Data Fig. 7F.
+Data analysis and plotting conventions
+All histograms are smoothed as a kernel density estimation. To set the scale of each histogram
+plot, we show a scale bar on the left-hand side that spans from zero at the bottom to the height of
+a uniform distribution. All 2D projections (Mollweide or Mercator) are such that the right half
+(azimuth > 0) represent the right-side visual field of the fly (looking from inside out). Top half
+(elevation > 0) represents the dorsal visual field.
+Data and Code Availability
+Data analyses were carried out with custom code in R using open-source packages, mainly
+"natverse", "tidyverse", and "np". Animations were created using Blender and the Python
+package "navis". We will make the data and code used to produce the major results of this study
+available at the time of publication. We will provide the most updated materials to correspond to
+the final version of the manuscript. EM reconstructed neurons will be uploaded to a public
+CATMAID server: https://catmaid.virtualflybrain.org. Flylight images will be available on the
+FlyLight website: https://splitgal4.janelia.org/cgi-bin/splitgal4.cgi. The µCT and some of the
+confocal stacks will be uploaded to FigShare. Analysis and plotting code will be available on
+github: https://github.com/reiserlab.
+Acknowledgements
+The authors thank Ruchi Parekh for managing the Connectome Annotation Team, Gerry Rubin
+for support of Aljosha Nern and for sharing the H2 split-GAL4 line, Tess Oram and Gwyneth
+Card for sharing collagenase, the Janelia Fly Core for fly care, Janelia FlyLight Project Team for
+help with preparation and imaging of light microscopy samples, and members of the Reiser lab
+for helpful feedback. We thank the FAFB tracing community for supportive and open sharing of
+methods and data, especially Greg Jefferis, Marta Costa, Philipp Schlegel, and the “FAFB optic
+lobe working group”, especially the groups of Mathias Wernet, Eugenia Chiappe, Marion Silies,
+and Rudy Behnia for collaborations and feedback. Development and administration of the FAFB
+tracing environment and analysis tools were funded in part by National Institutes of Health
+BRAIN Initiative grant 1RF1MH120679-01 to Davi Bock and Greg Jefferis, with software
+development effort and administrative support provided by Tom Kazimiers (Kazmos GmbH) and
+Eric Perlman (Yikes LLC). We thank Peter Li for sharing his automatic segmentation
+(https://doi.org/10.1101/605634). We thank the Princeton FlyWire team and members of the
+Mala Murthy and Sebastian Seung labs for development and maintenance of FlyWire (supported
+by BRAIN Initiative grant MH117815 to Mala Murthy and Sebastian Seung). This work made
+use of VVDviewer, based on software funded by the NIH: Fluorender: An Imaging Tool for
+Visualization and Analysis of Confocal Data as Applied to Zebrafish Research, R01-GM09815101. This work is funded by the Howard Hughes Medical Institute through its support of the
+Janelia Research Campus. This article is subject to HHMI’s Open Access to Publications policy.
+HHMI lab heads have previously granted a nonexclusive CC BY 4.0 license to the public and a
+sublicensable license to HHMI in their research articles. Pursuant to those licenses, the authoraccepted manuscript of this article can be made freely available under a CC BY 4.0 license
+immediately upon publication.
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+
+Figure 1: Non-cardinal direction preference by DS neurons
+A. Ideal optic flow fields induced by yaw rotation or backwards translation, projected onto a model fly's right eye.
+The local structure of the optic flow is similar near the eye’s equator, but different away from it. B. Columnar
+architecture of the fly's compound eye. Top half: cross section of a µCT image stack, with neuropils of the visual
+system indicated. Bottom half: schematic drawing overlaid with EM reconstructed neuron skeletons in one column.
+The arrow illustrates that ommatidium’s viewing direction, and the long gray rectangle schematizes the
+corresponding, single column. C. Four subtypes of the direction selective (DS) T4 cells, receive inputs in the
+proximal medulla layer (M10), and project to one of the 4 lobula plate layers (Lp1-4). A T4 cell’s preferred direction
+(PD, arrowheads) of motion is roughly opposite to the primary orientation of its dendrites4. D. EM reconstruction of
+a wide-field H2 neuron’s dendrite that receives inputs from T4b cells across nearly the entire layer 2 (Lp2) of the
+lobula plate. The complete morphology of the H2 neuron is shown in Extended Data Fig. 1B. E. Electrophysiology
+recordings of H2 angular tuning. Raster plots show the spiking activity in response to local stimulation with square
+gratings moving in 16 directions at 2 different retina locations. Polar plots show average spiking response rate (in
+Hz). The black dot marks the PD, and the inset shows the experimental setup. F. Ideal optic flow fields overlaid with
+H2 local direction tuning in a Mercator projection. The plotted area corresponds to the region outlined in white on
+the eye in (A). G. Two potential mechanisms for how the dendrites of T4 neurons could establish different PDs at
+location : (i) location-dependent changes in how the T4 dendrite samples the input column grid or (ii) consistent
+dendritic orientation (with respect to local input columnar grid) but visual space is non-uniformly represented.
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+
+Figure 2: EM reconstruction of T4 dendrites across the eye reveals stereotypical arborization pattern
+A. Drosophila visual system schematic highlighting an Mi1 and a T4 cell in medulla. B. EM reconstruction of 4 Mi1
+cells arborizing primarily in medulla layer M1, M5 and M9/10. C. Medulla columns identified by the center-of-mass
+of the M10 arbors of Mi1 cells. Magenta dots at the top denote dorsal rim area columns51. The belt in the middle
+denotes the equatorial region, where there are 7 (yellow) or 8 (tan) photoreceptors in the corresponding lamina
+cartridges (Extended Data Fig. 2B). Black dots denote the “central meridian,” separating the points into
+approximately equal halves. Empty circles denote medulla columns with no R7/8 inputs, which presumably have no
+corresponding ommatidia68. D. Medulla columns mapped onto a 2D regular grid, with orthogonal +h and +v axes
+defined by the equatorial region and central meridian. Also noted +p and +q axes for consistency with prior
+work28,70. E. The dendritic arbors of 176 T4b cells in M10. Two highlighted example neurons are shown in (G). F.
+An example T4b (#139) dendrite. Bold branch (upper) is color coded by Strahler number (SN; lower). Arrows
+represent the direction vectors of SN = {2, 3} branches. The preferred direction (PD) of the dendrite is defined as the
+vector sum of all SN = {2, 3} branches. G. Example T4b and T4d cells’ dendrites, with preferred directions (PD)
+and orthogonal directions (OD). Branches are colored by their SN (> 3 in black). Seven circles in each plot represent
+the home column and its 6 nearest neighbors. H. Mapping PDs to a regular grid using 19 neighboring columns (see
+Methods, the tail, center, and head of each PD vector is indicated as in (G)). J. Distribution of the angles between
+T4 PDs and +v-axis. The scale bar in histogram plots spans from zero to the height of a uniform distribution. K.
+Distribution of PD amplitudes in units of the regular grid for T4b and T4d cells (significantly different, Wilcoxon
+rank test, p-value < 2.2e-16). M. Distribution of PD amplitudes normalized by respective hexagon length units
+defined in inset (overlapping, though significantly different, Wilcoxon rank test, p-value=0.015).
+
+21
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+
+Figure 3: Non-uniform sampling of visual space established by µCT of the Drosophila eye
+A. Drosophila visual system schematic highlighting the retina. B. Maximal intensity projection of a whole fly head
+scanned with µCT. Lenses on the right eye (left half) are labeled by white spheres. C. A zoomed-in cross section
+showing lenses and photoreceptors, with an example tip-lens pair that defines the viewing direction of that
+ommatidium. D. Photoreceptors in each ommatidium are arranged in an “n” or “u” shape above or below the
+equator, respectively27. E. Right eye ommatidia directions represented by points on a unit sphere. The “eq” row of
+points is based on (D) and “+v” separates the points into approximately equal halves. F. Mollweide projection of 3D
+ommatidia directions, and the inter-ommatidial angles (IOA, ∆Φ, averaged over 6 neighbors). Contour lines label
+iso-IOA levels. G. A schematic unit hexagon containing 7 columns (home column at the origin plus v1-6). The +haxis is the line from the center of 2 right neighbors to that of 2 left neighbors, and the +v-axis as the line from the
+bottom neighbor to the top one. We define the 6-neighbor IOA ∆Φ, vertical IOA ∆Φ! , horizontal IOA ∆Φ" , and
+shear angle α. Because of the small angle approximation, we determine the IOAs using the Euclidean distance (|∙|)
+of points on the unit sphere in (E). H. Spatial distribution of ∆Φ! and ∆Φ" . Points represent ommatidia directions
+as in (F). J. Distribution of shear angles across the eye, with 3 example unit hexagons from the same vertical grid
+line. The inset plot is the histogram of all shear angles. In (H) and (J), points lacking the complete set of neighbors
+for each calculation are displayed as empty circles. Also note that, compared with (F), points not matched to
+medulla columns (see Fig. 4A) are excluded. The 3 examples are aligned with the meridian lines through the home
+column.
+
+22
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+
+Figure 4: Mapping neuroanatomical space into visual space explains global organization of DS neuron
+preferred directions
+A. 1-to-1 mapping between medulla columns, from the EM data set, and ommatidia directions, from the µCT data
+set, via mapping to regular grids. Unmatched columns on the periphery are denoted by empty circles. A T4b PD
+vector is transformed from the medulla to visual space. The neighboring columns used for kernel regression are
+highlighted with brown circles. B. 176 reconstructed T4b PDs mapped to visual space. The example vector in A is
+bolded. C. T4b PD field interpolated (see Methods) from (B), assigning one T4b PD vector to each ommatidia
+direction (length re-scaled from (B) by 50%). For comparison, the PDs recorded from an H2 neuron are replotted
+from Fig. 1F as red arrowheads. D. Angular difference between T4b PD field in (C) and the +v-axis. This structure
+of the PD field matches features of ommatidial shearing (Fig. 3J). E. Ideal optic flow fields induced by yaw rotation,
+reverse thrust, and side slip. The number of ommatidia directions is down-sampled by a factor of 9 (keeping every
+third row or column). F. Angular differences between T4b PD field, +h-axis, three cardinal self-motion optic flow
+fields, and optimized self-motion flow fields (see Extended Data Fig. 6E). The horizontal bars represent 25%, 50%
+and 75% quantiles. G. Spatial distribution of the angular differences for the comparison with the 3 cardinal selfmotions optic flow fields. The angular difference at each ommatidia direction (also down-sampled by a factor of 9)
+is represented with 3 line segments, with color matched to the cardinal self-motions and length given by the angular
+difference. The symbols “X” and “+” indicate the optimal rotation and translation axes, respectively. H. Optimal
+rotation and translation axes for T4b and T4d PD fields in the fly’s eye coordinates. J. Top view of the optimal
+translation axes for both T4a and T4b in both eyes represented along with the field of view at the equator.
+
+23
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+
+Extended Data Figure 1: Global optic flow patterns and H2 neuron results, related to Fig. 1.
+A. Left: two optic flow fields on a hemisphere (representing the right eye of a fly) induced by a yaw rotation (red)
+and a pitch rotation (blue). Right: two optic flow fields induced by a thrust (red) and a lift (blue). Note in both cases,
+the local red and blue optic flow components are orthogonal near the center of the eye while forming skewed (yet
+different) angles near the boundary. B. EM reconstruction and light microscopy image of an H2 neuron (see
+Methods). C. An H2 response to moving gratings stimuli along 16 directions at location  in Fig. 1F. Raw, filtered
+spike, sub-threshold time series are shown. D. H2 angular tuning at various visual locations, from recordings of 5
+flies. The vector locations for each animal are based on our procedure for aligning each fly’s head.
+
+24
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+
+Extended Data Figure 2: Anatomical considerations for mapping visual neurons throughout the medulla,
+related to Fig. 2.
+A. Left: light microscopy of stochastically labeled Mi1 cells in the background of nc82 staining, only showing the
+M10 portion of the medulla. Right: side view of stochastically labeled Mi1 cells (3 out of 4 columns have visible
+cells). B. A cross section of the equatorial region in the lamina, identified by cartridges (white contour) with 8
+(orange) or fewer (yellow) outer photoreceptors. C. A zoomed-in view of a single cartridge showing L1/2 cells and
+8 photoreceptor cells. L1 cells receive input from photoreceptor cells (R1-6) and output to Mi1 cells. D. 3D
+rendering of the same cartridge. E. Chiasm medulla columns (green) with corresponding Mi1 cells at 3 vertical
+locations identified by the twisting of R7/8 photoreceptor axons (not shown). For comparison, the central meridian
+is indicated in black. F. Extension of medulla column map to the lobula via interpolation of the positions of 63
+reconstructed TmY5a neurons. G. The dendritic arbors of 114 reconstructed T4d cells in M10. The 2 highlighted
+neurons are the examples in Fig. 2G.
+
+25
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+
+Extended Data Figure 3: Analysis of dendritic morphology of T4 neurons, related to Fig. 2.
+A. The angular distribution of dendritic segments, treating each segment as a vector, and calculating the angle
+formed with respect to the grid axes. For T4a/b subtypes, the angle was computed with respect to the +h-axis,
+normalized by solid angle and grouped by Strahler number (SN). For T4c/d, the angle was computed with respect to
+the -v-axis. To compute the PD vector, we use SN = {2, 3} because these segments are abundant (compared to SN =
+4) and have more consistent directions (compared to SN = 1). B. PD vectors mapped to a regular grid for T4b/d cells
+above (North) and below (South) the equator. C. Angles between the PDs and +v-axis above and below the equator.
+Wilcoxon rank test for the null-hypothesis that the distributions in the northern and southern hemispheres are the
+same yields a p-value = 0.00034 for T4b and 0.67 for T4d. D. OD vs. PD length in raw physical units [µm] in
+medulla. E. OD vs. PD length: T4b PDs and T4d ODs are normalized by the horizontal hexagon unit Dh, while T4b
+ODs and T4d PDs are normalized by the vertical hexagon unit Dv.
+
+26
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+
+Extended Data Figure 4: Ommatidia viewing directions in Drosophila compound eye maps, related to Fig. 3.
+A. Left: a high-resolution confocal image showing auto fluorescence (green) from ommatidia and many cells in the
+medulla. Lamina and medulla neuropils are visible (grey) due to nc82 antibody staining. Right: a different cross
+section showing the arrangement of individual photoreceptors near the equator. 6 dots (R1-R6) arranged an "n" or
+"u" shape can be readily seen in each ommatidium. The 7th smaller dot (R7+R8) in the center is often visible as
+well. B. Comparison of ommatidia directions defined by lens-photoreceptor tip pairs (gray, used in this study) and
+by surface normal (red). The surface normal is a typical approximation for the viewing direction, but this estimate
+differs substantially from that based on the high-resolution structure of each ommatidium. Two corresponding rows
+are connected with gray lines to illustrate the differences in different eye regions. Notably these differences are
+small near the center of the eye, and very large towards the front of the eye. C. Ommatidia directions and field of
+views (contours) for both eyes for the same fly as in Fig. 3. D. Six-neighbor inter-ommatidial angle (∆Φ ) along the
+equator (+/-15° elevation) for this same fly. E. Ommatidia directions and ∆Φ for 2 additional female flies. F. Shear
+angles for these 2 female flies, plotted as in Fig. 3J.
+
+27
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+
+Extended Data Figure 5: Quantification of the ommatidial viewing direction grids, related to Fig. 3.
+A. Ommatidia directions mapped onto a regular hexagonal grid. B. Definitions of aspect ratio and shear angle for a
+unit hexagon with examples. C. Aspect ratios calculated from ommatidia directions. D. Aspect ratios calculated
+from medulla columns. E. Distributions of aspect ratio for ommatidia and medulla columns. Comparison with the
+aspect ratios for a regular hexagonal grid and a regular square grid shows that the arrangement of ommatidia
+directions is more hexagonal while the arrangement of medulla columns is more square-like. F. Fig. 2F replotted
+using Mercator projection. G. Vertical rows of ommatidia directions given by the grid structure, shown using
+Mercator projection. H. Fig. 3J replotted using Mercator projection. J. The aspect ratio map in C replotted using
+Mercator projection.
+
+28
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+
+Extended Data Figure 6: Further quantification of T4b PD distribution, related to Fig. 4.
+A. Left: Fig. 4C replotted using Mercator projection; right: map of angle between T4b PD field and the constant
+elevation parallels. B. Visual angles subtended by T4b PD vectors (i.e., angular size). Scatter plots show the
+reconstructed T4b PDs (black dots, also in Fig. 4B) and interpolated ones (blue dots, also in Fig. 4C) along the
+equator (+/-15° horizontal shaded band) and the central meridian (+/-15° vertical shaded crescent). Most T4b PDs
+span between 10º-15º degrees, but there are almost 2-fold differences found across the eye, with larger spans
+towards the rear and smaller spans near the equatorial higher-acuity zone and front (black arrowheads). C. In an
+early pilot study we reconstructed all T4 subtypes (16~20 cells) at each of these four locations. D. We first mapped
+these T4s’ PD vectors to the regular grid in Fig. 2H. Then at each location, we computed the angles between all T4a
+vs T4b pairs. Similarly, for T4c vs T4d. E. Global search for optimal optic flow fields yielded these error maps,
+showing the average angular differences between the T4b PD field and the optic flow field induced by a rotation
+(left) or translation (right) along that direction (see Methods: Ideal optic flow). Symbols “+” and “X” denote the
+axes of translational and rotational motion with minimal angular difference, respectively. Symbols ⨁ and ⨂ denote
+those with maximal differences (minimum and maximum are antipodal).
+
+29
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+
+Extended Data Figure 7: T4d neuron analysis, related to Fig. 4
+A. T4d PDs mapped to eye coordinates. B. Interpolated T4d PD field (arrows are re-scaled to 50% of length in A).
+C. The T4d PD field from B replotted using Mercator projection. D. Visual angles subtended by T4d PD vectors
+(i.e., angular size). Scatter plots show the reconstructed T4d PDs (black dots, also in (A)) and interpolated ones (blue
+dots, also in (B)) along the equator (+/-15° horizontal shaded band) and the central meridian (+/-15° vertical shaded
+crescent). E. Agular differences between T4d PD field, -v-axis, three cardinal self-motion optic flow fields (lift,
+leftward roll, and upward pitch), and optimized self-motion flow fields. The horizontal bars represent 25%, 50% and
+75% quantiles. F. Spatial distribution of angular differences between T4b PD field and the three cardinal self-motion
+optic flow fields.
+
+30
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+
+Supplementary Information
+Supplementary Video 1: Summary of eyemap, enabling the projection of the compound eye’s visal space into
+the neural circuits of the optic lobe
+Whole-head µCT scan with overlaid EM reconstructed neurons, showing the columnar structure of the compound
+eye and optic lobe. Ommatidia directions were determined by the lens-photoreceptor tip pairs. Medulla columns
+were defined as the Mi1 cells’ arbor in layer M10. Finally, we established an eyemap: a 1-to-1 mapping between
+ommatidia directions and medulla columns.
+Supplementary Video 2: Illustration of how the dendritic orientation of T4 neurons facilitates motion
+detection in different directions
+There are 4 subtypes of T4 cells, innervating 4 distinct layers in lobula plate. A T4 cell’s preferred direction (PD) is
+computed based on its dendritic arborization pattern. PDs can be mapped to eye coordinates using the eyemap
+defined in Supplementary Video 1. In the central region of the eye, the four T4 subtypes are well aligned with
+directions of motion in the 4 cardinal directions (forward, backward, up, and down).
+Supplementary Data files 1-4: galleries of T4 neurons with PDs
+All T4 neurons reconstructed in the FAFB data set: 38 T4a, 176 T4b, 22 T4c, 114 T4d, are plotted in a similar
+fashion as in Fig. 2G. Using the eyemap established in Fig. 4A, we include the position (elevation and azimuth
+angles) in the eye coordinate. The angle between T4’s PD and the local meridian line is computed, instead of using
+the +v-axis as the reference as in Fig. 2G. The meridian line is defined as the direction line going from south pole to
+north pole in the eye reference frame (often close to the +v-axis). The cell and surrounding columns are also aligned
+such that the vertical direction in the plot coincide with the meridian direction. A summary of the Strahler number
+(SN) analysis for each cell is included.
+
+31
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+
+References
+1. Gibson, J. J. The perception of the visual world. (Houghton Mifflin, 1950).
+2. Maisak, M. S. et al. A directional tuning map of Drosophila elementary motion detectors. Nature 500, 212–216
+(2013).
+3. Sabbah, S. et al. A retinal code for motion along the gravitational and body axes. Nat. 2017 5467659 546, 492–
+497 (2017).
+4. Takemura, S. Y. et al. A visual motion detection circuit suggested by Drosophila connectomics. Nature (2013)
+doi:10.1038/nature12450.
+5. Shinomiya, K. et al. Comparisons between the ON- and OFF-edge motion pathways in the Drosophila brain.
+eLife (2019) doi:10.7554/eLife.40025.
+6. Zheng, Z. et al. A Complete Electron Microscopy Volume of the Brain of Adult Drosophila melanogaster. Cell
+174, 730-743.e22 (2018).
+7. Ullman, S. & Brenner, S. The interpretation of structure from motion. Proc. R. Soc. Lond. B Biol. Sci. 203, 405–
+426 (1979).
+8. Egelhaaf, M., Boeddeker, N., Kern, R., Kurtz, R. & Lindemann, J. P. Spatial vision in insects is facilitated by
+shaping the dynamics of visual input through behavioral action. Front. Neural Circuits 6, 108 (2012).
+9. Krapp, H. G. Neuronal Matched Filters for Optic Flow Processing in Flying Insects. in International Review of
+Neurobiology (ed. Lappe, M.) vol. 44 93–120 (Academic Press, 2000).
+10. Land, M. F. & Nilsson, D.-E. Animal Eyes. (OUP Oxford, 2012).
+11. Agi, E. et al. The Evolution and Development of Neural Superposition. J. Neurogenet. 28, 216–232 (2014).
+12. Mauss, A. S., Vlasits, A., Borst, A. & Feller, M. VISUAL CIRCUITS FOR DIRECTION SELECTIVITY. Annu.
+Rev. Neurosci. 40, 211–230 (2017).
+13. Fischbach, K.-F. & Dittrich, A. P. M. The optic lobe of Drosophila melanogaster. I. A Golgi analysis of wildtype structure. Cell Tissue Res. 258, (1989).
+14. Gruntman, E., Romani, S. & Reiser, M. B. Simple integration of fast excitation and offset, delayed inhibition
+computes directional selectivity in Drosophila. Nat. Neurosci. 21, (2018).
+15. Strother, J. A. et al. The Emergence of Directional Selectivity in the Visual Motion Pathway of Drosophila.
+Neuron 94, 168-182.e10 (2017).
+16. Gruntman, E., Romani, S. & Reiser, M. B. The computation of directional selectivity in the Drosophila OFF
+motion pathway. eLife 8, e50706 (2019).
+17. Haag, J., Mishra, A. & Borst, A. A common directional tuning mechanism of Drosophila motion-sensing neurons
+in the ON and in the OFF pathway. eLife (2017) doi:10.7554/elife.29044.
+18. Fisher, Y. E., Silies, M. & Clandinin, T. R. Orientation Selectivity Sharpens Motion Detection in Drosophila.
+Neuron 88, 390–402 (2015).
+19. Shinomiya, K., Nern, A., Meinertzhagen, I. A., Plaza, S. M. & Reiser, M. B. Neuronal circuits integrating visual
+motion information in Drosophila melanogaster. Curr. Biol. (2022) doi:10.1016/j.cub.2022.06.061.
+20. Krapp, H. G. & Hengstenberg, R. Estimation of self-motion by optic flow processing in single visual
+interneurons. Nature 384, 463–466 (1996).
+21. Wei, H., Kyung, H. Y., Kim, P. J. & Desplan, C. The diversity of lobula plate tangential cells (LPTCs) in the
+Drosophila motion vision system. J. Comp. Physiol. A 206, 139–148 (2020).
+22. Hausen, K. The Lobula-Complex of the Fly: Structure, Function and Significance in Visual Behaviour. in
+Photoreception and Vision in Invertebrates 523–559 (Springer US, 1984). doi:10.1007/978-1-4613-2743-1_15.
+23. Farrow, K., Haag, J. & Borst, A. Nonlinear, binocular interactions underlying flow field selectivity of a motionsensitive neuron. Nat. Neurosci. 9, 1312–1320 (2006).
+24. Henning, M., Ramos-Traslosheros, G., Gür, B. & Silies, M. Populations of local direction–selective cells encode
+global motion patterns generated by self-motion. Sci. Adv. 8, eabi7112 (2022).
+25. Strahler, A. N. Quantitative analysis of watershed geomorphology. Eos Trans. Am. Geophys. Union 38, 913–920
+(1957).
+26. Kurmangaliyev, Y. Z., Yoo, J., Valdes-Aleman, J., Sanfilippo, P. & Zipursky, S. L. Transcriptional Programs of
+Circuit Assembly in the Drosophila Visual System. Neuron 108, 1045-1057.e6 (2020).
+27. Ready, D. F., Hanson, T. E. & Benzer, S. Development of the Drosophila retina, a neurocrystalline lattice. Dev.
+Biol. 53, 217–240 (1976).
+28. Buchner, E. Dunkelanregung des stationaeren Flugs der Fruchtfliege Drosophila. (University of Tuebingen,
+1971).
+
+32
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+
+29. Baumgärtner, H. Der Formensinn und die Sehschärfe der Bienen. Z. Für Vgl. Physiol. 7, 56–143 (1928).
+30. Land, M. F. Compound eye structure: Matching eye to environment. in Adaptive Mechanisms in the Ecology of
+Vision (eds. Archer, S. N., Djamgoz, M. B. A., Loew, E. R., Partridge, J. C. & Vallerga, S.) 51–71 (Springer
+Netherlands, 1999). doi:10.1007/978-94-017-0619-3_3.
+31. Stone, T. et al. An Anatomically Constrained Model for Path Integration in the Bee Brain. Curr. Biol. 27, 30693085.e11 (2017).
+32. Lyu, C., Abbott, L. F. & Maimon, G. Building an allocentric travelling direction signal via vector computation.
+Nature 601, 92–97 (2022).
+33. Gonzalez-Suarez, A. D. et al. Excitatory and inhibitory neural dynamics jointly tune motion detection. Curr.
+Biol. 32, 3659-3675.e8 (2022).
+34. Buchner, E. Elementary movement detectors in an insect visual system. Biol. Cybern. 1976 242 24, 85–101
+(1976).
+35. Götz, K. G. & Buchner, E. Evidence for one-way movement detection in the visual system of Drosophila. Biol.
+Cybern. 31, 243–248 (1978).
+36. Egelhaaf, M. et al. Neural encoding of behaviourally relevant visual-motion information in the fly. Trends
+Neurosci. 25, 96–102 (2002).
+37. Petrowitz, R., Dahmen, H., Egelhaaf, M. & Krapp, H. G. Arrangement of optical axes and spatial resolution in
+the compound eye of the female blowfly Calliphora. J. Comp. Physiol. A 186, 737–746 (2000).
+38. Klapoetke, N. C. et al. Ultra-selective looming detection from radial motion opponency. Nature 551, (2017).
+39. Karmeier, K., van Hateren, J. H., Kern, R. & Egelhaaf, M. Encoding of Naturalistic Optic Flow by a Population
+of Blowfly Motion-Sensitive Neurons. J. Neurophysiol. 96, 1602–1614 (2006).
+40. Huston, S. J. & Krapp, H. G. Visuomotor transformation in the fly gaze stabilization system. PLoS Biol. (2008)
+doi:10.1371/journal.pbio.0060173.
+41. Hörmann, N. et al. A combinatorial code of transcription factors specifies subtypes of visual motion-sensing
+neurons in Drosophila. Development 147, dev186296 (2020).
+42. Kurmangaliyev, Y. Z., Yoo, J., LoCascio, S. A. & Zipursky, S. L. Modular transcriptional programs separately
+define axon and dendrite connectivity. eLife 8, e50822 (2019).
+43. Davis, F. P. et al. A genetic, genomic, and computational resource for exploring neural circuit function. eLife
+(2020) doi:10.7554/elife.50901.
+44. Buschbeck, E. K. & Strausfeld, N. J. Visual Motion-Detection Circuits in Flies: Small-Field Retinotopic
+Elements Responding to Motion Are Evolutionarily Conserved across Taxa. J. Neurosci. 16, 4563–4578 (1996).
+45. Strausfeld, N. J. & Olea-Rowe, B. Convergent evolution of optic lobe neuropil in Pancrustacea. Arthropod
+Struct. Dev. 61, 101040 (2021).
+46. Wehner, R. ‘Matched filters’ — neural models of the external world. J. Comp. Physiol. A 161, 511–531 (1987).
+47. Saalfeld, S., Cardona, A., Hartenstein, V. & Tomančák, P. CATMAID: Collaborative annotation toolkit for
+massive amounts of image data. Bioinformatics (2009) doi:10.1093/bioinformatics/btp266.
+48. Schneider-Mizell, C. M. et al. Quantitative neuroanatomy for connectomics in Drosophila. eLife 5, e12059
+(2016).
+49. Li, P. H. et al. Automated Reconstruction of a Serial-Section EM Drosophila Brain with Flood-Filling Networks
+and Local Realignment. 605634 Preprint at https://doi.org/10.1101/605634 (2020).
+50. Dorkenwald, S. et al. FlyWire: online community for whole-brain connectomics. Nat. Methods 19, 119–128
+(2022).
+51. Kind, E. et al. Synaptic targets of photoreceptors specialized to detect color and skylight polarization in
+Drosophila. eLife 10, e71858 (2021).
+52. Dionne, H., Hibbard, K. L., Cavallaro, A., Kao, J. C. & Rubin, G. M. Genetic reagents for making split-GAL4
+lines in Drosophila. Genetics (2018) doi:10.1534/genetics.118.300682.
+53. Wu, M. et al. Visual projection neurons in the Drosophila lobula link feature detection to distinct behavioral
+programs. eLife 5, (2016).
+54. Nern, A., Pfeiffer, B. D. & Rubin, G. M. Optimized tools for multicolor stochastic labeling reveal diverse
+stereotyped cell arrangements in the fly visual system. Proc. Natl. Acad. Sci. 112, E2967–E2976 (2015).
+55. Ott, S. R. Confocal microscopy in large insect brains: Zinc–formaldehyde fixation improves synapsin
+immunostaining and preservation of morphology in whole-mounts. J. Neurosci. Methods 172, 220–230 (2008).
+56. Baird, E. & Taylor, G. X-ray micro computed-tomography. Curr. Biol. 27, R289–R291 (2017).
+57. Charlton-Perkins, M. & Cook, T. A. Building a Fly Eye. in Current Topics in Developmental Biology vol. 93
+129–173 (Elsevier, 2010).
+
+33
+
+bioRxiv preprint doi: https://doi.org/10.1101/2022.12.14.520178; this version posted December 15, 2022. The copyright holder for this preprint
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+available under a CC-BY 4.0 International license.
+
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+
+58. Sombke, A., Lipke, E., Michalik, P., Uhl, G. & Harzsch, S. Potential and limitations of X-Ray micro-computed
+tomography in arthropod neuroanatomy: A methodological and comparative survey. J. Comp. Neurol. 523,
+1281–1295 (2015).
+59. Pfeiffer, B. D., Truman, J. W. & Rubin, G. M. Using translational enhancers to increase transgene expression in
+Drosophila. Proc. Natl. Acad. Sci. U. S. A. 109, 6626–6631 (2012).
+60. Demerec, M. Biology of Drosophila. (Hafner Press, 1950).
+61. von Reyn, C. R. et al. Feature Integration Drives Probabilistic Behavior in the Drosophila Escape Response.
+Neuron 94, 1190-1204.e6 (2017).
+62. Wilson, R. I. & Laurent, G. Role of GABAergic Inhibition in Shaping Odor-Evoked Spatiotemporal Patterns in
+the Drosophila Antennal Lobe. J. Neurosci. 25, 9069–9079 (2005).
+63. Edelstein, A. D. et al. Advanced methods of microscope control using μManager software. J. Biol. Methods 1,
+e10 (2014).
+64. Isaacson, M. et al. A high-speed, modular display system for diverse neuroscience applications.
+2022.08.02.502550 Preprint at https://doi.org/10.1101/2022.08.02.502550 (2022).
+65. Kim, A. J., Fenk, L. M., Lyu, C. & Maimon, G. Quantitative Predictions Orchestrate Visual Signaling in
+Drosophila. Cell (2017) doi:10.1016/j.cell.2016.12.005.
+66. Horridge, G. A. & Meinertzhagen, I. A. The accuracy of the patterns of connexions of the first- and second-order
+neurons of the visual system of Calliphora. Proc. R. Soc. Lond. B Biol. Sci. 175, 69–82 (1970).
+67. Hayfield, T. & Racine, J. S. Nonparametric Econometrics: The np Package. J. Stat. Softw. 27, 1–32 (2008).
+68. Lin, H. V., Rogulja, A. & Cadigan, K. M. Wingless eliminates ommatidia from the edge of the developing eye
+through activation of apoptosis. Development 131, 2409–2418 (2004).
+69. Koenderink, J. J. & van Doorn, A. J. Facts on optic flow. Biol. Cybern. 1987 564 56, 247–254 (1987).
+70. Dickson, W. B., Straw, A. D. & Dickinson, M. H. Integrative Model of Drosophila Flight. AIAA J. 46, 2150–
+2164 (2008).
+
+34
+
+

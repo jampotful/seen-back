@@ -1,0 +1,395 @@
+An ensemble of deep learning models with falcon optimization assisted diabetic retinopathy diagnosis on retinal fundus images
+Indresh Kumar Gupta, Shruti Patil, Ketan V. Kotecha, Swati Srivastava, Ahmed Farouk, Joel J. P. C. Rodrigues (2026). Scientific Reports. https://doi.org/10.1038/s41598-025-11075-x. doi:10.1038/s41598-025-11075-x. Licence: cc-by-nc-nd. Text from europepmc-xml.
+
+# An ensemble of deep learning models with falcon optimization assisted diabetic retinopathy diagnosis on retinal fundus images
+
+## Abstract
+AbstractDiabetic Retinopathy (DR) is a prominent results of diabetes mellitus that causes abnormalities lesions in retina. If not identified at early, it may progress to complete loss of vision. Unfortunately, DR is an irreversible, and treatment only sustains existing vision. Timely detection and accurate treatment of DR can considerably decrease the chance of blindness. Manual diagnosis of DR in retinal fundus images (RFIs) by ophthalmologist is time consuming, costly and laborious tasks with a higher risk of misdiagnosis. Recently, Deep learning (DL) has gained popularity and shown remarkable performance particularly in medical image analysis and classification. Convolutional neural networks (CNNs) are increasingly being used as a DL approach in medical image analysis, and they are very efficient. This manuscript offers the design of Falcon Optimizer with Ensemble of Deep Learning Algorithm Assisted Diabetic Retinopathy Diagnosis Model (FOEDLA-DRDM) system on RFIs. The FOEDLA-DRDM system employs a Wiener filtering (WF) based preprocessing approach to eliminate noise from images. Following this, FOEDLA-DRDM system leverages the SE-DenseNet method to generate the feature vectors. For DR recognition FOEDLA-DRDM system applies an ensemble approach that combines - AutoEncoder, long short-term memory (LSTM), and deep belief network (DBN). Finally, Falcon Optimizer (FO) adjusts the hyperparameter values of the ensemble approach, giving rise to classification efficiency. The FOEDLA-DRDM system is validated by simulating it on a Kaggle DR dataset, with results being measured according to various criteria. The simulation findings showcase the effectiveness of the FOEDLA-DRDM system in diagnosis of DR.Supplementary InformationThe online version contains supplementary material available at https://doi.org/10.1038/s41598-025-11075-x.Keywords: Deep belief network, Retinal fundus image, Autoencoder, Diabetic retinopathy, Falcon optimizerSubject terms: Diseases, Medical research
+
+## Introduction
+Diabetic Retinopathy (DR) is a dominant factor of visual deterioration in diabetic patient, resulting from changes in retinal capillary structure1. This process begins with damaging the blood vessels in the photo-sensitive tissues that also grow at the backside of the eyes. Once DR achieves its advanced level, eventually leading to completely lost. On a global scale, the sightlessness level of DR is nearly 2.7%. No symptoms occur until it attains the serious stages2. In the coming years, diabetes patients need routine retina check-ups to detect DR in its initial stage, manage their advancement, and avoid sightlessness threats. The risk components of DR are divided into modifiable factors such as glucose levels, arterial hypertension, and tobacco use, as well as non-modifiable factors namely age, genetic predisposition, and disease duration3. The retina is composed of elements such as macula, fovea, optic disc (OD) and blood vessels, experiences DR in two forms: Non-Proliferative DR (NPDR) and proliferative DR (PDR). Damage to the retinal blood vessels results in NPDR, leading to the liquid leakage that causes the retina to become swollen and moist4. Lesion in NPDR phase may involve Haemorrhages (HMs), Inter retinal microvascular abnormalities (IRMA), Micro-aneurysms (MAs), and Exudates (EXs). In PDR, the retina forms new, irregular blood vessels because of low oxygen levels caused by damaged vessels, leading to the severe vision loss5.
+The development of computer aided diagnosis (CAD) is prominent area of research in medical imaging, enabling the detection and study of early-stage abnormalities through image analysis6. During CAD processing, low-contrast medical images are enhanced using different imaging methods, highlighting key details crucial for disease detection7. CAD techniques have been quite helpful for the examination of RFIs. Regular examination and promoted treatments have reduced the likelihood of severe eye issues. Hence, misdiagnosis has been avoided, and overall time, expense and efforts have been decreased by employing a CAD diagnostic system8. Considering the previous era, the deep learning (DL) method has developed and accepted in various fields specially in medical image investigation. DL accurately detect features from input information for categorization or partition and usually overtakes all standard image investigation methods9. DL algorithms are not required to remove the handmade features though which need wide information for the training stage. On the other hand, ML methods need to removal of the hand-made features, but they don’t require wide information for the training phase. Consider the DL applications which include the detection, segmentation, retrieval, registration, and classification of the images. Convolutional Neural Network (CNN) is a kind of DL technique that is very active, effective, extensive, and applied for image scrutiny10.
+The main advancement and noteworthy contribution of this research are listed below.
+A unique Falcon Optimizer with Ensemble of Deep Learning Algorithm Assisted Diabetic Retinopathy Diagnosis Model (FOEDLA-DRDM) system is designed.
+Weiner filtering (WF)-based image preprocessing approach is performed to eradicate the noise.
+FOEDLA-DRDM system exploits the SE-DenseNet approach to derive feature vectors.
+For DR recognition, the FOEDLA-DRDM system an Ensemble of three classifiers – AutoEncoder (AE), long-short-term memory (LSTM), and deep belief network (DBN) models.
+Falcon Optimizer (FO) model adjusts the hyperparameter values of the ensemble technique effectively and leads to improved categorization performance.
+Kaggle dataset is used to test the simulation validation of the FOEDLA-DRDM system, and the results are evaluated using a variety of metrics.
+
+## Literature review
+Hemanth et al.11 introduced a new DL technique named the He Weighted Bi-directional Long Short-term Memory (HWBLSTM) method. The gathered fundus imageries primarily undergo pre-processing utilizing a Hybrid Gaussian Filter and probability density Function-based Gamma Correction (HGFPDFGC) method. Later, it divided the retinal lesion of the BV and OD deleted images through the Improved Grasshopper Optimizer-based Region Growing Algorithm (EGORGA). At last, categorization is implemented by using the HWBLSTM method. Fang and Qiao12 developed a new DAG network method for the identification of DR depends on multi-feature fusions of fundus imageries. Primarily, 3 medical signs of DR were mined by various methods: retinal varices, fundus neovascularization, and retinal hemorrhagic plaque. These 3 features sent to the identification method based on a new DAG system for performing feature learning and multi-feature fusions. At last, the enhanced method of classification was employed to classify and recognize DR. Ramesh and Sathiamoorthy13 proposed an Automatic DR recognition technique by applying the Glowworm Swarm Optimizer (GSO) with DL (ADR-GSODL) method. The presented ADR-GSODL technique forced MF as a preprocessing stage. Moreover, this method employed the NASNetLarge technique for obtaining the GSO, and a feature vector was used for parameter fine tuning. The Variational Autoencoder (VAE) method was employed for the DR identification approach.
+Kumari and Saxena14 addressed the classifications of retinal imageries (S-0 to S-4) based on the ranges of DR by a CNN made clearly for retinal fundus imageries. To enhance the RINet features performance of classification from intermediated layers were removed. These mined features were presented through layer visualization. For the localization of illness, Grad-CAM was combined at final convolution layers, efficiently emphasizing the important areas for each phase in the image. In15, fundus imageries are employed for the recognition of the developing phases of DR by 2 suggested techniques, each containing 3 methods. The first presented technique utilizes GoogLeNet with ResNet-18 and with SVM. Oulhadj et al.16 introduced a novel automated DR recognition technique that was based on DL. The above-mentioned method comprises 2 major stages: an early pre-processing stage where the deformed register was used by the retina to capture the whole imagery and remove the effects from the background by the classifying method. Another stage was the identification stage in which we trained 4 CNN methods (Xception, Resnet-50, Inception-v3, Densenet-121) to identify the phase of DR. Shoaib et al.17 proposed a new technique that provided more accuracy in DR analysis by using enhanced DL methods. The main concept of this method was transfer learning (TL), which involved the usage of well-established, pre-existing methods, Especially Inceptionv3 and InceptionResNetv2 for extractions. Simultaneously, a novel developed method specifically DiaCNN was also offered, that was personalized for the identification of eye infections. Rachapudi et al.18 presented a method that contains 4 stages. Later histogram equalization, contrast limited adaptive HE (HE and CLAHE), and pre-processing were employed. Later, the phase eliminates the optic disc (OD) and it was completed by Circle Hough Transform (CHT). Next, the Gray Level Co-occurrence Matrix (GLCM) was employed for feature extractions. Finally, the feature were categorized by the Deep Neural Networks (DNNs) by a Butterfly Optimizer Algorithm (DNN-BOA) classification which was utilized to classify the numerous phases of DR. To meet the unique requirements of medical image denoising, Annadurai et al.19 created an Efficient Transfer-Learning-Based Fractional Order Image Denoising Approach in Medical Image Analysis (ETLFOD) that combines transfer learning with fractional order techniques. It does this by utilizing pre-trained models like DenseNet121. This method has improved denoising efficiency without sacrificing important picture features. Panneerselvam et al.20 have created a multifaceted method for skin cancer prediction that combines dermoscopic images and clinical information. To extract important visual characteristics from dermoscopic pictures, they have employed transfer learning approaches in conjunction with pre-trained convolutional neural networks, such EfficientNetB3. Additionally, they have used TabNet to handle clinical metadata, such as medical history, gender, and age. To improve forecast accuracy, the characteristics gathered from the two fusion approaches have been combined.
+Existing literature limitation in automation and early detection capabilities of current DR diagnostic systems, Ophthalmologists’ manual diagnosing process is expensive, time-consuming, and prone to error. Although deep learning (DL) has demonstrated potential in medical image analysis is efficient methods are required to identify DR from RFIs with high accuracy. This entails tackling the difficulties associated with feature extraction and refining DL models for this particular purpose. By creating a unique deep learning-based method called FOEDLA-DRDM system that combines ensemble learning and optimal feature extraction to enhance DR diagnosis with high accuracy, the work that is being presented seeks to close this gap.
+
+## Materials and methods
+In this manuscript, we present the development of FOEDLA-DRDM system on retinal fundus images (RFIs). The RFIs are automatically analysed by the proposed FOEDLA-DRDM system to identify and categorize DR. The FOEDLA-DRDM system comprises WF-based image preprocessing, SE-DenseNet-based feature extractor, the ensemble of three classifiers namely AE, LSTM, and DBN for DR detection and classification, and FO-based hyperparameter tuning. Figure 1 shows the FOEDLA-DRDM system overall process.
+Overall process of FOEDLA-DRDM system. In this figure system takes RFIs as input, processes them through filtering and SE-DenseNet feature extraction, and classifies them using three deep learning models in an ensemble configuration. A Falcon Optimizer fine-tunes the setup, and the result is a DR severity prediction.
+In our methodology, we deliberately selected a combination of deep learning models for the ensemble to capitalize on their complementary strengths in diagnosing DR. The AE is employed to compress features, which is vital given the high-dimensional nature of RFIs. The LSTM is incorporated to capture subtle patterns over time or across image segments. Lastly, the DBN enables the system to identify complex, nuanced features that may be indicative of early-stage DR. Together, these models form a robust ensemble that addresses various aspects of feature learning, leading to improved diagnostic accuracy when combined with the overall system.
+
+## Noise eradicate
+Initially, FOEDLA-DRDM system undergoes the WF-based image preprocessing approach is performed to eradicate the noise. The WF is a linear filter, which minimizes the mean square error (MSE) among the signals of filtered and original21. It aims to improve images that are degraded by additive noise. By altering the parameters of the filter, the WF balances the reduction of noise and preservation of significant image particulars. The mathematical equations of WF are presented in Eqs. (1)–(3).
+Here, and denote the power spectrum of signal and noise procedures, respectively. Equation (3) is gained by dividing in Eq. (2).
+
+## Feature extraction process
+Subsequently, FOEDLA-DRDM system exploits the SE-DenseNet approach to derive feature vectors. Owing to the restrictions on the general performance of ML and rule-based techniques, we have opted to use a DL method. For the extraction of features, we utilize the backbone system of a DenseNetl69 structure, which includes a channel attention mechanism22. The SE block in DenseNet introduces a channel-wise attention mechanism. It first “squeezes” global spatial information into concise channel descriptors using global average pooling, and then “excites” the channels by learning weights that emphasize more informative features. In retinal image analysis, this mechanism helps the network focus on important structures like vessel patterns and lesions while downplaying irrelevant background information, thereby enhancing overall feature extraction and improving classification performance. DenseNet enhances the data flow and gradient among the layers of neural networks by associating feature mapping from every previous layer with a similar dimensional. The SE module‐based channel attention module permits the system to adjust the significance of dissimilar feature channels and permit it to concentrate on distinctive features. The average pooling model attains enhanced features of localization, with the max pooling approach that initiates the distinct input feature. Figure 2 portrays the framework of SE-DenseNet.
+Framework of SE-DenseNet. This figure shows Convolutional layer, Dense Blocks, SE modules, and Transition Layers are used in the model’s processing of RFIs. Pooling and a linear layer for feature output are the last steps. To improve visual clarity, important steps are indicated using color-coded blocks.
+In DenseNet, every layer obtains further input from all layers, which come first and permits its feature mapping to every following layer by a similar dimensional. Assume an input image , which delivers over a neural network (NN) of n layers. The layer contains a non-linear transformation , incorporating operations such as pooling, batch normalization (BN), ReLU activation or convolutional operations. While the layer output is represented as associated with the lth layer in classic convolution networks of feed-forward. It is exposed in Eq. (4).
+It is recognized that ResNet avoids non-linear transformation with a skip connection. The gradient follows a straight path from the later layers to preceding one, over the function of identity in ResNet, as presented in Eq. (5).
+On the other hand, the summation has been employed to unite the function of identity and output of , which might obstruct data flow in the system. To increase data flow among layers, DenseNet uses a straight connection from any layer to every later layer. As an outcome, the feature mapping of every previous layer, , is delivered to the layer of lth as an input, which is stated in Eq. (6).
+
+## Ensemble learning
+The FOEDLA-DRDM system uses a majority voting ensemble of three classifiers, including AE, LSTM, and DBN models, for DR recognition. By choosing the class that gets the most votes from each classifier, the final prediction is decided. This uncomplicated strategy has been chosen because to its ease of use and ability to effectively utilize the ensemble members’ variety.
+
+## AE classifier
+After attaining a huge set of vectors equivalent to sub-images, an AE network is trained on them23. An AE is a kind of NN model that was invented to map the assumed input to its vital feature, which permits the original input to be most precisely reconstructed. The crucial features are generally low‐dimension and denoted as latent variables. An AE contains 3 parts such as encoder, latent space, and decoder. In the latent space, the encoder reduces an assumed input to its latent variables. The decoder rebuilds the input data from the latent variables. As an unsupervised learning method, the training of an AE does not need labels. The loss function usually evaluates the MSE among the reconstructed output and original input. Overall, AE is extremely appropriate for feature learning (FL). Figure 3 illustrates the architecture of AE.
+Architecture of AE model. This figure shows how the AE uses an encoder to compress RFIs into latent features, which are then reconstituted by a decoder, to enable feature learning. A compact representation is made possible by the bottleneck latent space, which is necessary for precise classification.
+We project an easy AE to acquire low-dimensional representation for local sub‐images. In the part of the encoder, a D-dimensional input is initially mapped to a 1000‐dimensional vector then it is slowly compacted into an H-dimensional vector in the latent space. In the decoder part, the latent vector is mapped conversely to rebuild the input. Assuming that there are M training DTs, we signify the reconstruction of as , whereas N signifies the amount of sampled sub‐images within each training dataset. The mathematical formulation of the loss function is expressed in Eq. (7).
+
+## LSTM classifier
+LSTM method is applied in medical image classification to find patterns and boost classification success. A sequence of repeating components is a particular pattern of every RNN and is assumed an easy design in the conventional of every RNN24. This works in the opposite approach if functioning with LSTM, but it can be very difficult. Instead of the individuality of layer controlled in NNs, there exist 4 layers (forget, input, memory, and output gates) as shown in Fig. 4.
+LSTM structure. This figure shows LSTM’s input, forget, and output gates are highlighted to demonstrate how they control information flow.
+LSTM comprises 2 states : cell state and hidden state, At a specific time step t, LSTM resolves that data can be reserved from the cell state. The result is developed by the sigmoid function state named as forget gate. The function proceeds (resultant from the preceding HL) and (present input) and outcomes a number from zero and one. During this work, 1 implies “entirely maintaining in” and “ 0 refers to “entirely taken away” in the Eq. (8).
+The LSTM then resolves that novel data for keeping to the cell state. There exist 2 phases. The primary phase connects with the “input gate” in Eq. (8), but this gate can sigmoid function layer. This function’s role is to elect an LSTM, but the value must be upgraded. Second, the vector of novel candidate rates can be generated by the function layer. This phase adds the cell state. These phases integrated with LSTM to start generating an upgrade to state as shown in Eqs. (9)–(10).
+However, the model upgrades the old cell state into a novel cell state as defined in Eq. (11). Particularly, the gradient has been managed if working through the forget gate and enables deletes and upgrades for explicit “memory.” The model supports improved gradient vanishing problems from the conventional RNN.
+Eventually, depending on the cell layer, LSTM resolves its outcome. LSTM primary allows a sigmoid layer, but it resolves those parts of the cell state for transferring as output in Eq. (12), named as “output gate.” During this phase, LSTM controls the cell state employing the tanh function and adopts the part of the outcome as Eq. (13).
+
+## DBN classifier
+DBN is the multi-layered probabilistic generative method, which is widely used in feature learning (FL) and intricate dataset classification25. DBN effectually merges the features of neural networks with probability-based graphical methods, allowing it to efficiently manage non-linear and high-dimension data. The DBN structure contains numerous hidden layers (HLs), where every layer is answerable for acquiring discrete representations and features of the data. The hierarchical technique reduces DBN, which is mainly proficient at removing the feature from the compound data structure. The DBN training procedure is an advanced multi‐step procedure, which increases the characterization and capture of the input data. It is separated into dual foremost fragments such as global fine‐tuning and layer‐by‐layer pre‐training. Figure 5 defines the structure of DBN.
+Structure of the DBN model. This figure illustrates RBM layers are arranged hierarchically, with a classification layer at the end that generates class labels based on input vectors.
+In layer-by‐layer pre‐training, the structure includes many layers of Restricted Boltzmann Machine (RBM), each one functioning with seizing features from numerous input data levels. Throughout this stage, every RBM layer is prepared separately, without any control of another layer. This one permits every layer to focus only on FL representation from its accepted input, initiating from the bottommost layer and rising successively over the hierarchy of DBN. The input for every successive layer in RBM is the output from the previous layer. So, in the lower layer, the RBMs are proficient at acquiring vital data features. In higher layers, it gradually removes more complex and abstract feature representation. The mathematical formulations are displayed in Eqs. (14) and (15).
+In this context, and denote the ith bias and neuron input of the visible layer (VL), respectively; and represent the jth bias and neuron output of the HL, correspondingly; refers to the weight among HL and VL neurons.
+The probability distribution function of VL in RBM is expressed in Eq. (16).
+where h,m denotes the quantity of neurons in the VL and HL, correspondingly
+The VL probability distribution function of every RBM network is determined by Eq. (17).
+The independence of neurons in a similar layer is probable to compute the probability linked with the weight as shown in Eq. (18).
+Likewise, the activation function has been computed using Eq. (19).
+is signified as the activation function in the context of the NN as shown in Eq. (20).
+The main intention of RBM pretraining is to first get optimum parameters like represented by , to design a DBN structure with a pleasing fitting effect. In this phase, the model-generated probability and model numerical probability in the DBN were raised to be equivalent. The formulation for is given in Eq. (21).
+whereas T signifies the total amount of training samples.
+
+## Hyperparameter selection process
+Finally, the FO model adjusts the hyperparameter values of FOEDLA-DRDM system optimally and outcomes in greater classification performance26. FO successfully strikes a balance between exploration and exploitation in the search space, we decided to utilize it. Local optima are a common pitfall for many optimization techniques, especially in intricate hyperparameter environments. The foundation of FO is based on the hunting tactics of falcon to purse their prey in flight. The robustness and reliability of FO make it well suited for stochastic population-based problems via systematically arranging parameters using its three-action mechanism. The foraging behavior of falcons is outlined below.
+Step 1: Set the parameters of FO and their control limitations.
+The optimization task is specified by determining decision variables and constraints. Then the FO’s key parameters including the number of falcons ( NP), maximum velocity (), cognitive (), social (), following ( constants and awareness and diving probabilities () are provided.
+Step 2: Define initial position and velocity of each falcon.
+A set of falcons is randomly distributed in a D- dimensional universe using uniformly randomly generated values while satisfying the boundary conditions making the population matrix as follows in Eq. (22).
+Here, the location of the falcon is stated as x, about the quantity of NP applicants in each dimension D. The velocities are created amongst and boundaries at random that are defined in Eqs. (23) and (24).
+While and represent the maximum and minimum velocities allowed, respectively; ub is the upper bound breaking point scope of the problem for every measurement.
+Step 3: Assess the fitness score and locates the best position at both individual and global levels.
+The evaluation of each falcon’s fitness value ( of) is obtained and forming the vector as shown in Eq. (25).
+In the context of FO, global best individual is denoted as and best individual position of each falcon is denoted as
+Step 4: Establish updated positions and reassigns the falcons accordingly.
+At the start each falcon receive two random numbers , drawn from a uniform distribution to evaluate against the awareness and diving probabilities. The awareness probability is first to be compared. If is below AP, the falcon adjusts its movement to search for prey using Eq. (26).
+Here, and denote the present location and velocity of the falcon, respectively. Assuming that is greater than AP, then diving probability is compared and . If DP is less than , the falcon aims for one chosen prey and shows out its basic progress for hunting, the logarithmic twisting expressed by using Eq. (27).
+Here, denotes the newly gained location; b refers to the reliable describing the state of the logarithmic twisting, equals to 1, and t refers to the irregular amount in the interval of [− 1, 1] that describes how many subsequent situations of the falcon would be nearby its actual objective. Assume that is lesser than AP, the wellness of the chosen prey is compared with the falcon wellness where if the target is suitable and will be trailed by the prey bird, like the development of jump as shown in Eq. (28).
+Otherwise, the falcon attains a measure advising to its exact distinct finest position as shown in Eq. (29).
+The new position is analysed to ensure they meet the velocity and boundary constraints. Afterward, the new fitness values are calculated and updated values of and are determined. This procedure is previously defined in Step 4.
+Step 5: At last, after all evaluation are done, the process proceeds until maximum iteration count is achieved, thus repeating the Step 4.
+The FO method is used to derive a fitness function (FF) for attaining superior classifier accuracy. The FF in this research refers to the classification accuracy, and objective is to maximize this function. The FF is defined in Eq. (30).
+where , stands for number of correctly classified images and Total images under consideration respectively.
+
+## Experimental results and analysis
+In this section, the experimental validation outcomes of the FOEDLA-DRDM system are examined utilizing the Kaggle dataset27, which contains 35,126 samples with five class labels as defined in Table 1. Figure 6 demonstrates the sample images.
+Details on dataset.
+Sample images. This figure illustrates 25 images from dataset.
+We utilized class weights when training the AE, LSTM, and DBN models in order to mitigate the possible bias brought on by the widely used ‘Normal’ class. The less frequently encountered categories (Mild, Moderate, Severe, and PDR) are given larger weights since the class weights are inversely proportional to the class frequencies. This method improved the model’s overall performance by allowing it to learn from the underrepresented classes more successfully.
+Figure 7 depicts the classification outcomes of the FOEDLA-DRDM system on the dataset. Figure 7a, b symbolizes the confusion matrices offered by the FOEDLA-DRDM system on 80:20 of training partition (TRAP)/ testing partition (TESP) for second run. The outcome implied that the FOEDLA-DRDM system has familiar and classified all class labels exactly. Also, Fig. 7c validates the PR study of the FOEDLA-DRDM system. The outcome stated that the FOEDLA-DRDM system has increased the maximum efficiency of PR under all classes. Finally, Fig. 7d displays the ROC investigation of the FOEDLA-DRDM system. The result signified that the FOEDLA-DRDM system has resulted in proficient outcomes with the highest ROC values under different classes.
+Classification outcomes of (a,b) 80% TRAP and 20% TESP confusion matrices and (c,d) PR and ROC curves.
+Table 2 has presented the assessment of the FOEDLA-DRDM system for DR classification using 80% TRAP and 20% TESP split. Under the TRAP condition, the system has achieved exceptional results, with mean accuracy () of 99.80% for Mild, 99.64% for Moderate, 99.87% for Severe, 99.90% for PDR, and 99.45% for Normal. In addition, it has registered robust performance in terms of precision (), recall (), FScore (), and MCC —with the Mild class reporting averages of 97.70%, 99.20%, 98.42%, and 98.33%, and the Moderate class showing 98.27%, 99.35%, 98.77%, and 98.57%, respectively. Although the Severe class has delivered a slightly lower mean of 96.75% (with corresponding and MCC means of 97.08% and 96.87%), its overall has remained remarkably high. Under the TESP condition, the system has yielded comparable metrics, with mean of 99.82% for Mild, 99.68% for Moderate, 99.95% for Severe, 99.94% for PDR, and 99.63% for Normal, and with similarly robust mean values in other performance measures. These consistently high scores and very low standard deviations have underscored the system’s reliability and robustness in DR classification under both testing conditions.
+Assessment of FOEDLA-DRDM system for DR classification using 80% TRAP and 20% TESP.
+In Table 3; Fig. 8, the mean DR classification results of the FOEDLA-DRDM system with 80% TRAP and 20% TESP are shown. The outcomes designate that the FOEDLA-DRDM system correctly recognized distinct stages. With 80% TRAP, the FOEDLA-DRDM system offers an average of 99.73%, of 97.79%, of 98.82%, of 98.28%, and MCC of 98.01%. Afterward, with 20%TESP, the FOEDLA-DRDM system gets an average of 99.80%, of 98.75%, of 99.16%, of 98.96%, and MCC of 98.75%.
+Mean DR classification results of FOEDLA-DRDM system with 80%TRAP and 20%TESP.
+Mean DR classification results of FOEDLA-DRDM system with 80%TRAP and 20%TESP.
+In Fig. 9, the training and validation accuracy curves of the FOEDLA-DRDM system under 80% TRAP and 20% TESP are established. There are 25 epochs taken for accuracy value. The curves shown here show a continuous rise in both training and validation accuracy, thereby establishing the efficacy of FOEDLA-DRDM system in rising performance over several iterations. Furthermore, these curves show low overfitting and guarantee consistent generalization to unseen samples, since they remain rather well aligned over epochs.
+Accuracy graph of FOEDLA-DRDM system under 80% TRAP and 20% TESP.
+In Fig. 10, the training and validation loss curves of the FOEDLA-DRDM system under 80% TRAP and 20% TESP are shown. There are 25 epochs for computation of loss values. The values shown in curves consistently shows a declining trend. This illustrates that FOEDLA-DRDM system successfully reduces errors. The close alignment of loss values of training and validation suggest minimal overfitting, ensuring stable model performance. The continual reduction in loss values confirms the refined learning capability of FOEDLA-DRDM system leading to improved prediction accuracy over time.
+Loss graph of FOEDLA-DRDM system under 80% TRAP and 20% TESP.
+Figure 11 forms the classifier effects of the FOEDLA-DRDM system under dataset. Figure 11a and b signifies the confusion matrices accessible by the FOEDLA-DRDM system on 70:30 of TRAP/TESP for second run. The outcome implied that the FOEDLA-DRDM system accurately recognized and considered every class exactly. As well, Fig. 11c authorizes the PR study of the FOEDLA-DRDM system. The result specified that the FOEDLA-DRDM system has enlarged the maximum performance of PR under every class. Lastly, Fig. 11d shows the ROC investigation of the FOEDLA-DRDM system. The result signified that the FOEDLA-DRDM system has resulted in proficient outcomes with the greatest values of ROC under unalike classes.
+Classification outcomes of (a,b) 70% TRAP and 30% TESP confusion matrices and (c,d) PR and ROC curves.
+In Table 4, the assessment of the FOEDLA-DRDM system for DR classification using a 70% TRAP and 30% TESP split has revealed consistently high performance across all classes. Under the TRAP condition, the Mild class has achieved a mean of 99.44% with , , and MCC averaging of 95.96%, 96.05%, 96.00%, and 95.59%, respectively, while the Moderate class has recorded similar excellence with a mean of 99.45% and corresponding metrics of 98.16% , 98.23% , 98.19% , and 97.96% MCC. The Severe class, although demonstrating a slightly lower mean of 87.24%, has maintained a high mean of 99.56% alongside a of 96.37%, of 91.53%, and MCC of 91.27%. Additionally, the PDR and Normal classes have shown robust performance, with PDR achieving a mean accuracy of 99.57% ( of 87.38%, of 94.69%, of 90.90%, and MCC of 90.50%) and Normal recording a mean of 99.10% with near-perfect of 99.68%, of 99.07%, of 99.40%, and an MCC of 97.71%. Under the TESP condition, the system has maintained comparable performance, with the Mild, Moderate, Severe, PDR, and Normal classes achieving mean of 99.48%, 99.55%, 99.48%, 99.63%, and 98.96%, respectively, and with metric values that mirror those obtained under TRAP except for some higher variability in PDR precision. These consistently high results and minimal standard deviations have underscored the robustness and reliability of the FOEDLA-DRDM system for DR classification.
+Assessment of FOEDLA-DRDM system for DR classification using 70% TRAP and 30% TESP.
+The FOEDLA-DRDM system’s mean DR classification results with 70%TRAP and 30% TESP are shown in Table 5; Fig. 12. The results demonstrate that the FOEDLA-DRDM system is appropriately accustomed to different stages. The average of the FOEDLA-DRDM system is 99.42%, the is 93.68%, the is 96.88%, the is 95.20%, and the MCC is 94.61% with 70% TRAP. The FOEDLA-DRDM system achieves an average of 99.42%, of 94.13%, of 96.97%, of 95.11%, and MCC of 95.04%, with 30% TESP.
+Mean DR classification results of FOEDLA-DRDM system with 70%TRAP and 30%TESP.
+Mean DR classification results of FOEDLA-DRDM system with 70%TRAP and 30%TESP.
+The FOEDLA-DRDM system’s training and validation accuracy curves are shown in Fig. 13 under 70% TRAP and 30% TESP. For epochs 0–25, the accuracy values are computed. The accuracy values of training and validation in the curves depicts an upward trend, indicating the FOEDLA-DRDM system ‘s proficiency with improved performance over a large number of iterations. Furthermore, the accuracy of training and validation remains consistent throughout the epochs, indicating low negligible overfitting and better FOEDLA-DRDM system performance, providing reliable predictions for samples that haven’t been seen.
+Accuracy graph of FOEDLA-DRDM system under 70% TRAP and 30%TESP.
+In Fig. 14, the training and validation loss graph of the FOEDLA-DRDM system is shown under 70% TRAP and 30% TESP. Plotting the loss values over 25 epochs reveals a steep initial fall followed by slight variations as training goes on. Effective learning is demonstrated by the graph, which shows that both training and validation loss drop off quickly in the early epochs. The curves stabilize with slight oscillations as training goes on, indicating that the model is progressively improving its predictions while striking a balance between generalization and data fitting. The consistent decline in loss values attests to enhanced model performance, gradually improving forecast accuracy.
+Loss graph of FOEDLA-DRDM system under 70% TRAP and 30% TESP.
+In Table 6; Fig. 15, the data outlines the performance of a model evaluated under 15 different parameter settings. Here, the parameters AP and DP are varied across the values 0.10, 0.30, 0.50, 0.70, and 0.90 for AP and 0.10, 0.50, and 0.90 for DP, creating unique combinations for each test case. Despite these variations, the model exhibits consistently high accuracy, with average values hovering between 99.74% and 99.80%. Most combinations yield accuracies in the range of 99.78–99.80%, indicating a robust and dependable performance across the board.
+Average accuracy analysis of FOEDLA-DRDM system on AP and DP.
+Average accuracy analysis of FOEDLA-DRDM system on AP and DP.
+In Table 7; Fig. 16, a comparative analysis of various classifiers for landmark classification is presented. The FOEDLA-DRDM system stands out by achieving an impressive of 99.80%, coupled with a of 98.75%, a of 99.16%, and of 98.96%, thereby outperforming the other models evaluated. In contrast, while DenseNet-ISVM with of 98.74%, ResNet-50-SVM with of 99.13%, Inception-NB with of 99.13%, VGG19-SVM with of 98.96%, and AlexNet-RF with of 98.96% deliver high classification results, each exhibiting consistent performance across , , and , they fall slightly short of the superior metrics recorded by FOEDLA-DRDM. Notably, the DRNet Model demonstrates relatively lower performance, yielding of 96.65% and a substantially reduced of 87.96%, which is further reflected in its and values of 88.15% and 90.01%, respectively. Additionally, the FIDRC-DLFFO and ResNet 152 models show decreased effectiveness, with ResNet 152 achieving an of only 94.40% and corresponding lower scores in and . Although the Ensemble of 5 CNNs and the Wavelt CNN + SVM methods achieve moderate performance improvements, with of 95.68% and 98.80% respectively, their overall results underscore a gap when benchmarked against the FOEDLA-DRDM system. Overall, this analysis highlights the exceptional performance of the FOEDLA-DRDM system, confirming its potential as a highly robust and reliable method for landmark classification in scenarios where high accuracy and consistency are critical.
+Comparative analysis of FOEDLA-DRDM system with recent models.
+Comparative analysis of FOEDLA-DRDM system with recent models.
+In Table 8 and Fig. 17, The processing time analysis of various classifiers highlights differences in computational efficiency. FOEDLA-DRDM system demonstrates the fastest execution time at 2.41 s, followed closely by FIDRC-DLFFO at 2.96 s and DRNet Model at 3.14 s, indicating their suitability for time-sensitive applications. DenseNet-ISVM operates at 3.57 s, maintaining moderate efficiency. Inception-NB, VGG19-SVM, and Wavelt CNN + SVM exhibit mid-range processing speeds of 5.98, 4.53, and 5.40 s, respectively. ResNet 152 takes 5.78 s, while the Ensemble of 5 CNNs requires 8.74 s, reflecting their relatively higher computational costs. Among the slower models, ResNet-50-SVM and AlexNet-RF show extended processing times of 10.10 and 10.79 s, respectively, indicating increased complexity in their computations. Overall, FOEDLA-DRDM system emerges as the most efficient model, demonstrating minimal processing time while maintaining strong classification performance.
+Time outcome of FOEDLA-DRDM system with recent models.
+Time outcome of FOEDLA-DRDM system with recent models.
+
+## Conclusion
+We have outlined a FOEDLA-DRDM system to RFIs in this manuscript. The FOEDLA-DRDM system as novelty incorporated Wiener filtering (WF)-based preprocessing, SE-DenseNet feature extraction, and an ensemble of AutoEncoder, LSTM, and DBN classifiers. Falcon Optimization (FO) is used for hyperparameter tuning. The simulation results demonstrate the system’s success, achieving a high average of 99.82%. Notably, the system’s 99.27% it can reduce false negatives, which is essential for early DR diagnosis. Additionally, the system’s low processing time of 2.41 s, when compared to alternative approaches, highlights its efficiency and suggests that it may find practical use in clinical situations. The model may be integrated into medical workflows as a decision-making tool boosting early DR detection and decreasing diagnostic mistakes. Its refined ensemble method enhances accuracy, facilitates quicker screening, and is suitable for deployment even in resource-limited settings. This makes it a workable way to increase accessibility and diagnostic effectiveness in the treatment of DR. There are possible directions for future study, even if the FOEDLA-DRDM system shows encouraging findings in the classification of DR. To increase the system’s effectiveness, methods such as model compression might be used to reduce its computational complexity. To confirm its wider application, future studies will also concentrate on improving system interpretability and expanding the system to additional medical image datasets. looking at ways to improve the interpretability of the system and applying the system to additional medical picture datasets to confirm its wider applicability.
+
+## Electronic supplementary material
+Below is the link to the electronic supplementary material.
+Supplementary Material 1
+
+## Acknowledgements
+This work is partially funded by Brazilian National Council for Scientific and Technological Development - CNPq, via Grant No. 306607/2023-9.
+
+## Author contributions
+Shruti Patil: Conceptualization, Methodology, Software. Ahmed Farouk , Indresh Kumar Gupta: Validity tests, Reviewing and Editing, Writing- Original draft preparation. Swati Srivastava: Visualization, Investigation. Ketan Kotecha: Supervision, Joel J. P. C. Rodrigues: Software, Validation.
+
+## Funding
+Open access funding provided by Symbiosis International (Deemed University).
+
+## Data availability
+https://www.kaggle.com/competitions/diabetic-retinopathy-detection/data.
+
+## Declarations
+
+## Competing interests
+The authors declare no competing interests.
+
+## Footnotes
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+## References
+
+## Associated Data
+
+## Data Availability Statement
+https://www.kaggle.com/competitions/diabetic-retinopathy-detection/data.
+
+## Table Table 1: Details on dataset.
+Class | No. of count
+Mild | 2443
+Moderate | 5292
+Severe | 873
+PDR | 708
+Normal | 25,810
+Total count | 35,126
+
+## Table Table 2: Assessment of FOEDLA-DRDM system for DR classification using 80% TRAP and 20% TESP.
+Class | Metric | Run 1 | Run 2 | Run 3 | Mean | Standard deviation
+TRAP (80%)
+Mild | Accuracy | 99.79 | 99.80 | 99.80 | 99.80 | 0.01
+Precision | 97.60 | 97.89 | 97.60 | 97.70 | 0.17
+Recall | 99.08 | 99.33 | 99.18 | 99.20 | 0.13
+FScore | 98.33 | 98.52 | 98.40 | 98.42 | 0.10
+MCC | 98.30 | 98.40 | 98.30 | 98.33 | 0.06
+Moderate | Accuracy | 99.66 | 99.63 | 99.64 | 99.64 | 0.02
+Precision | 98.19 | 98.30 | 98.33 | 98.27 | 0.08
+Recall | 99.28 | 99.43 | 99.33 | 99.35 | 0.08
+FScore | 98.73 | 98.87 | 98.70 | 98.77 | 0.09
+MCC | 98.55 | 98.60 | 98.55 | 98.57 | 0.03
+Severe | Accuracy | 99.87 | 99.87 | 99.87 | 99.87 | 0.00
+Precision | 95.80 | 97.60 | 96.85 | 96.75 | 0.90
+Recall | 97.12 | 97.99 | 97.42 | 97.51 | 0.44
+FScore | 96.43 | 97.70 | 97.12 | 97.08 | 0.64
+MCC | 96.10 | 97.60 | 96.90 | 96.87 | 0.75
+PDR | Accuracy | 99.90 | 99.91 | 99.89 | 99.90 | 0.01
+Precision | 95.93 | 96.92 | 96.26 | 96.37 | 0.50
+Recall | 98.43 | 98.78 | 98.61 | 98.61 | 0.18
+FScore | 97.16 | 97.83 | 97.42 | 97.47 | 0.34
+MCC | 97.60 | 97.80 | 97.50 | 97.63 | 0.15
+Normal | Accuracy | 99.44 | 99.47 | 99.44 | 99.45 | 0.02
+Precision | 99.86 | 99.88 | 99.86 | 99.87 | 0.01
+Recall | 99.41 | 99.44 | 99.42 | 99.42 | 0.01
+FScore | 99.63 | 99.66 | 99.64 | 99.64 | 0.01
+MCC | 98.46 | 99.00 | 98.46 | 98.64 | 0.31
+TESP (20%)
+Mild | Accuracy | 99.82 | 99.84 | 99.80 | 99.82 | 0.02
+Precision | 98.76 | 98.77 | 98.37 | 98.63 | 0.23
+Recall | 98.56 | 98.97 | 98.76 | 98.76 | 0.21
+FScore | 98.66 | 98.87 | 98.52 | 98.68 | 0.18
+MCC | 98.67 | 98.79 | 98.40 | 98.62 | 0.20
+Moderate | Accuracy | 99.70 | 99.70 | 99.63 | 99.68 | 0.04
+Precision | 98.55 | 98.47 | 98.40 | 98.47 | 0.08
+Recall | 99.55 | 99.64 | 99.27 | 99.49 | 0.19
+FScore | 99.05 | 99.05 | 98.83 | 98.98 | 0.13
+MCC | 98.78 | 98.77 | 98.50 | 98.68 | 0.16
+Severe | Accuracy | 99.96 | 99.96 | 99.93 | 99.95 | 0.02
+Precision | 99.44 | 99.44 | 98.87 | 99.25 | 0.33
+Recall | 98.88 | 98.88 | 98.32 | 98.69 | 0.32
+FScore | 99.16 | 99.16 | 98.59 | 98.97 | 0.33
+MCC | 99.11 | 99.09 | 98.59 | 98.93 | 0.29
+PDR | Accuracy | 99.93 | 99.94 | 99.94 | 99.94 | 0.01
+Precision | 97.08 | 97.79 | 97.79 | 97.55 | 0.41
+Recall | 99.25 | 99.25 | 99.25 | 99.25 | 0.00
+FScore | 98.16 | 98.52 | 98.52 | 98.40 | 0.21
+MCC | 98.48 | 98.48 | 98.59 | 98.52 | 0.06
+Normal | Accuracy | 99.72 | 99.64 | 99.53 | 99.63 | 0.10
+Precision | 99.92 | 99.90 | 99.80 | 99.87 | 0.06
+Recall | 99.69 | 99.61 | 99.55 | 99.62 | 0.07
+FScore | 99.80 | 99.76 | 99.68 | 99.75 | 0.06
+MCC | 99.09 | 99.09 | 98.80 | 98.99 | 0.17
+
+## Table Table 3: Mean DR classification results of FOEDLA-DRDM system with 80%TRAP and 20%TESP.
+Class | Accuracy | Precision | Recall | FScore | MCC
+TRAP (80%)
+Mild | 99.80 | 97.70 | 99.20 | 98.42 | 98.33
+Moderate | 99.64 | 98.27 | 99.35 | 98.77 | 98.57
+Severe | 99.87 | 96.75 | 97.51 | 97.08 | 96.87
+PDR | 99.90 | 96.37 | 98.61 | 97.47 | 97.63
+Normal | 99.45 | 99.87 | 99.42 | 99.64 | 98.64
+Average | 99.73 | 97.79 | 98.82 | 98.28 | 98.01
+TESP (20%)
+Mild | 99.82 | 98.63 | 98.76 | 98.68 | 98.62
+Moderate | 99.68 | 98.47 | 99.49 | 98.98 | 98.68
+Severe | 99.95 | 99.25 | 98.69 | 98.97 | 98.93
+PDR | 99.94 | 97.55 | 99.25 | 98.40 | 98.52
+Normal | 99.63 | 99.87 | 99.62 | 99.75 | 98.99
+Average | 99.80 | 98.75 | 99.16 | 98.96 | 98.75
+
+## Table Table 4: Assessment of FOEDLA-DRDM system for DR classification using 70% TRAP and 30% TESP.
+Class | Metric | Run 1 | Run 2 | Run 3 | Mean | Standard deviation
+TRAP (70%)
+Mild | Accuracy | 99.41 | 99.50 | 99.42 | 99.44 | 0.05
+Precision | 95.70 | 96.34 | 95.84 | 95.96 | 0.34
+Recall | 95.72 | 96.40 | 96.04 | 96.05 | 0.34
+FScore | 95.67 | 96.37 | 95.96 | 96.00 | 0.35
+MCC | 94.90 | 96.16 | 95.70 | 95.59 | 0.64
+Moderate | Accuracy | 99.43 | 99.49 | 99.43 | 99.45 | 0.03
+Precision | 98.12 | 98.23 | 98.12 | 98.16 | 0.06
+Recall | 98.10 | 98.40 | 98.20 | 98.23 | 0.15
+FScore | 98.11 | 98.29 | 98.16 | 98.19 | 0.09
+MCC | 97.69 | 98.30 | 97.90 | 97.96 | 0.31
+Severe | Accuracy | 99.54 | 99.60 | 99.55 | 99.56 | 0.03
+Precision | 86.60 | 87.83 | 87.30 | 87.24 | 0.62
+Recall | 96.02 | 96.74 | 96.34 | 96.37 | 0.36
+FScore | 90.90 | 92.20 | 91.50 | 91.53 | 0.65
+MCC | 90.90 | 92.00 | 90.90 | 91.27 | 0.64
+PDR | Accuracy | 99.58 | 99.55 | 99.59 | 99.57 | 0.02
+Precision | 86.30 | 88.19 | 87.66 | 87.38 | 0.98
+Recall | 94.42 | 95.02 | 94.62 | 94.69 | 0.31
+FScore | 90.20 | 91.49 | 91.00 | 90.90 | 0.65
+MCC | 90.10 | 91.31 | 90.10 | 90.50 | 0.70
+Normal | Accuracy | 99.09 | 99.13 | 99.07 | 99.10 | 0.03
+Precision | 99.67 | 99.70 | 99.67 | 99.68 | 0.02
+Recall | 99.04 | 99.10 | 99.06 | 99.07 | 0.03
+FScore | 99.35 | 99.40 | 99.44 | 99.40 | 0.05
+MCC | 97.66 | 97.80 | 97.66 | 97.71 | 0.08
+TESP (30%)
+Mild | Accuracy | 99.41 | 99.54 | 99.48 | 99.48 | 0.07
+Precision | 95.92 | 96.43 | 95.62 | 95.99 | 0.41
+Recall | 96.53 | 97.20 | 96.53 | 96.75 | 0.39
+FScore | 96.24 | 96.77 | 96.16 | 96.39 | 0.33
+MCC | 96.05 | 96.45 | 96.00 | 96.17 | 0.25
+Moderate | Accuracy | 99.54 | 99.58 | 99.53 | 99.55 | 0.03
+Precision | 98.22 | 98.47 | 98.22 | 98.30 | 0.14
+Recall | 98.54 | 98.72 | 98.66 | 98.64 | 0.09
+FScore | 98.37 | 98.60 | 98.43 | 98.47 | 0.12
+MCC | 98.30 | 98.46 | 98.10 | 98.29 | 0.18
+Severe | Accuracy | 99.41 | 99.51 | 99.51 | 99.48 | 0.06
+Precision | 86.15 | 86.64 | 86.49 | 86.43 | 0.25
+Recall | 94.44 | 95.56 | 94.81 | 94.94 | 0.57
+FScore | 90.11 | 90.85 | 90.45 | 90.47 | 0.37
+MCC | 90.00 | 90.67 | 90.19 | 90.29 | 0.35
+PDR | Accuracy | 99.57 | 99.72 | 99.60 | 99.63 | 0.08
+Precision | 95.93 | 89.19 | 85.65 | 90.26 | 5.22
+Recall | 95.15 | 96.12 | 95.63 | 95.63 | 0.49
+FScore | 89.90 | 92.52 | 90.37 | 90.93 | 1.40
+MCC | 97.16 | 92.40 | 90.30 | 93.29 | 3.52
+Normal | Accuracy | 98.99 | 98.95 | 98.95 | 98.96 | 0.02
+Precision | 99.65 | 99.64 | 99.66 | 99.65 | 0.01
+Recall | 98.87 | 98.94 | 98.90 | 98.90 | 0.04
+F1Score | 99.26 | 99.29 | 99.26 | 99.27 | 0.02
+MCC | 97.00 | 97.40 | 97.10 | 97.17 | 0.21
+
+## Table Table 5: Mean DR classification results of FOEDLA-DRDM system with 70%TRAP and 30%TESP.
+Class | Accuracy | Precision | Recall | FScore | MCC
+TRAP (70%)
+Mild | 99.44 | 95.96 | 96.05 | 96.00 | 95.59
+Moderate | 99.45 | 98.16 | 98.23 | 98.19 | 97.96
+Severe | 99.56 | 87.24 | 96.37 | 91.53 | 91.27
+PDR | 99.57 | 87.38 | 94.69 | 90.90 | 90.50
+Normal | 99.10 | 99.68 | 99.07 | 99.40 | 97.71
+Average | 99.42 | 93.68 | 96.88 | 95.20 | 94.61
+TESP (30%)
+Mild | 99.48 | 95.99 | 96.75 | 96.39 | 96.17
+Moderate | 99.55 | 98.30 | 98.64 | 98.47 | 98.29
+Severe | 99.48 | 86.43 | 94.94 | 90.47 | 90.29
+PDR | 99.63 | 90.26 | 95.63 | 90.93 | 93.29
+Normal | 98.96 | 99.65 | 98.90 | 99.27 | 97.17
+Average | 99.42 | 94.13 | 96.97 | 95.11 | 95.04
+
+## Table Table 6: Average accuracy analysis of FOEDLA-DRDM system on AP and DP.
+AP | DP | Average accuracy
+0.10 | 0.10 | 99.78
+0.10 | 0.50 | 99.79
+0.10 | 0.90 | 99.76
+0.30 | 0.10 | 99.80
+0.30 | 0.50 | 99.80
+0.30 | 0.90 | 99.78
+0.50 | 0.10 | 99.80
+0.50 | 0.50 | 99.80
+0.50 | 0.90 | 99.79
+0.70 | 0.10 | 99.78
+0.70 | 0.50 | 99.80
+0.70 | 0.90 | 99.77
+0.90 | 0.10 | 99.76
+0.90 | 0.50 | 99.77
+0.90 | 0.90 | 99.74
+
+## Table Table 7: Comparative analysis of FOEDLA-DRDM system with recent models.
+Classifier |  |  |  | 
+FOEDLA-DRDM | 99.80 | 98.75 | 99.16 | 98.96
+DenseNet-ISVM | 98.74 | 97.72 | 96.50 | 97.11
+ResNet-50-SVM | 99.13 | 97.42 | 97.98 | 97.70
+AlexNet-RF | 98.96 | 97.18 | 97.46 | 97.32
+Inception-NB | 99.13 | 97.26 | 98.34 | 97.80
+VGG19-SVM | 98.96 | 97.13 | 97.41 | 97.27
+DRNet Model | 96.65 | 87.96 | 88.15 | 90.01
+FIDRC-DLFFO | 98.00 | 94.94 | 94.98 | 94.91
+ResNet 152 | 94.40 | 86.41 | 92.35 | 92.87
+Wavelt CNN + SVM | 98.80 | 96.89 | 96.89 | 96.89
+Ensemble of 5 CNNs | 95.68 | 97.43 | 96.47 | 96.15
+
+## Table Table 8: Time outcome of FOEDLA-DRDM system with recent models.
+Classifier | Processing time (s)
+FOEDLA-DRDM | 2.41
+DenseNet-ISVM | 3.57
+ResNet-50-SVM | 10.10
+AlexNet-RF | 10.79
+Inception-NB | 5.98
+VGG19-SVM | 4.53
+DRNet Model | 3.14
+FIDRC-DLFFO | 2.96
+ResNet 152 | 5.78
+Wavelt CNN + SVM | 5.40
+Ensemble of 5 CNNs | 8.74
+
+## Figure Fig. 1: Overall process of FOEDLA-DRDM system. In this figure system takes RFIs as input, processes them through filtering and SE-DenseNet feature extraction, and classifies them using three deep learning models in an ensemble configuration. A Falcon Optimizer fine-tunes the setup, and the result is a DR severity prediction.
+
+## Figure Fig. 2: Framework of SE-DenseNet. This figure shows Convolutional layer, Dense Blocks, SE modules, and Transition Layers are used in the model’s processing of RFIs. Pooling and a linear layer for feature output are the last steps. To improve visual clarity, important steps are indicated using color-coded blocks.
+
+## Figure Fig. 3: Architecture of AE model. This figure shows how the AE uses an encoder to compress RFIs into latent features, which are then reconstituted by a decoder, to enable feature learning. A compact representation is made possible by the bottleneck latent space, which is necessary for precise classification.
+
+## Figure Fig. 4: LSTM structure. This figure shows LSTM’s input, forget, and output gates are highlighted to demonstrate how they control information flow.
+
+## Figure Fig. 5: Structure of the DBN model. This figure illustrates RBM layers are arranged hierarchically, with a classification layer at the end that generates class labels based on input vectors.
+
+## Figure Fig. 6: Sample images. This figure illustrates 25 images from dataset.
+
+## Figure Fig. 7: Classification outcomes of (a,b) 80% TRAP and 20% TESP confusion matrices and (c,d) PR and ROC curves.
+
+## Figure Fig. 8: Mean DR classification results of FOEDLA-DRDM system with 80%TRAP and 20%TESP.
+
+## Figure Fig. 9: Accuracy graph of FOEDLA-DRDM system under 80% TRAP and 20% TESP.
+
+## Figure Fig. 10: Loss graph of FOEDLA-DRDM system under 80% TRAP and 20% TESP.
+
+## Figure Fig. 11: Classification outcomes of (a,b) 70% TRAP and 30% TESP confusion matrices and (c,d) PR and ROC curves.
+
+## Figure Fig. 12: Mean DR classification results of FOEDLA-DRDM system with 70%TRAP and 30%TESP.
+
+## Figure Fig. 13: Accuracy graph of FOEDLA-DRDM system under 70% TRAP and 30%TESP.
+
+## Figure Fig. 14: Loss graph of FOEDLA-DRDM system under 70% TRAP and 30% TESP.
+
+## Figure Fig. 15: Average accuracy analysis of FOEDLA-DRDM system on AP and DP.
+
+## Figure Fig. 16: Comparative analysis of FOEDLA-DRDM system with recent models.
+
+## Figure Fig. 17: Time outcome of FOEDLA-DRDM system with recent models.

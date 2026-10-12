@@ -1,0 +1,13 @@
+# beetles-bugs-others
+
+Made by `tools/lit/harvest.py` on 2026-10-12 23:38 UTC.
+
+- works found: 6935 (OpenAlex 4500, Europe PMC 4191, before merging)
+- with an abstract: 2706
+- openly licensed with a text to fetch: 400; texts kept: 330 (Europe PMC XML 296, PDF 34)
+- free to read without an open licence (read on the web): 1410
+
+Queries:
+- `(beetle OR beetles OR Coleoptera OR firefly OR fireflies OR Lampyridae OR "dung beetle" OR Scarabaeus OR ladybird OR Coccinellidae OR "tiger beetle" OR grasshopper) AND (vision OR visual OR eye OR eyes OR photoreceptor OR photoreceptors OR retina OR retinal OR opsin OR opsins OR "spectral sensitivity" OR "visual acuity" OR acuity OR "flicker fusion" OR "colour vision" OR "color vision" OR polarization OR polarisation OR ocelli OR ocellus OR "compound eye" OR ommatidia OR rhabdom OR "visual pigment" OR fovea OR tapetum OR "visual field" OR "eye movement" OR vibration OR vibrational OR vibratory OR seismic OR trichobothria OR "slit sensilla" OR "lyriform organ" OR mechanoreceptor OR mechanoreception OR "lateral line" OR hearing OR auditory OR tympanal OR substrate-borne OR airflow)`
+- `(locust OR Schistocerca OR Orthoptera OR cricket OR katydid OR cicada OR Hemiptera OR "true bug" OR mantis OR "praying mantis" OR Mantodea OR ant) AND (vision OR visual OR eye OR eyes OR photoreceptor OR photoreceptors OR retina OR retinal OR opsin OR opsins OR "spectral sensitivity" OR "visual acuity" OR acuity OR "flicker fusion" OR "colour vision" OR "color vision" OR polarization OR polarisation OR ocelli OR ocellus OR "compound eye" OR ommatidia OR rhabdom OR "visual pigment" OR fovea OR tapetum OR "visual field" OR "eye movement" OR vibration OR vibrational OR vibratory OR seismic OR trichobothria OR "slit sensilla" OR "lyriform organ" OR mechanoreceptor OR mechanoreception OR "lateral line" OR hearing OR auditory OR tympanal OR substrate-borne OR airflow)`
+- `(ants OR Formicidae OR Cataglyphis OR Myrmecia OR cockroach OR Periplaneta OR Blattodea OR "stick insect" OR termite) AND (vision OR visual OR eye OR eyes OR photoreceptor OR photoreceptors OR retina OR retinal OR opsin OR opsins OR "spectral sensitivity" OR "visual acuity" OR acuity OR "flicker fusion" OR "colour vision" OR "color vision" OR polarization OR polarisation OR ocelli OR ocellus OR "compound eye" OR ommatidia OR rhabdom OR "visual pigment" OR fovea OR tapetum OR "visual field" OR "eye movement" OR vibration OR vibrational OR vibratory OR seismic OR trichobothria OR "slit sensilla" OR "lyriform organ" OR mechanoreceptor OR mechanoreception OR "lateral line" OR hearing OR auditory OR tympanal OR substrate-borne OR airflow)`

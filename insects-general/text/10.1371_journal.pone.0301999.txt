@@ -1,0 +1,1938 @@
+An open platform for visual stimulation of insects
+Stefan Prech, Lukas N. Groschner, Alexander Borst (2024). PLoS ONE. https://doi.org/10.1101/2023.09.06.556482. doi:10.1371/journal.pone.0301999. Licence: cc-by-nc. Text from pdf.
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+Super Bowl, an open platform for visual stimulation of insects
+
+Stefan Prech1*, Lukas N. Groschner1,2, Alexander Borst1
+
+1 Max Planck Institute for Biological Intelligence, Martinsried, Germany.
+2 Present address: Gottfried Schatz Research Center, Medical University of Graz, Austria.
+* stefan.prech@bi.mpg.de (SP)
+
+1
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+1
+2
+
+Abstract
+
+3
+
+To study how the nervous system processes visual information, experimenters must record
+
+4
+
+neural activity while delivering visual stimuli in a controlled fashion. In animals with a nearly
+
+5
+
+panoramic field of view, such as flies, precise stimulation of the entire visual field is
+
+6
+
+challenging. We describe a projector-based device for stimulation of the insect visual system
+
+7
+
+under a microscope. The device is based on a bowl-shaped screen that provides a wide and
+
+8
+
+nearly distortion-free field of view. It is compact, cheap, easy to assemble, and easy to operate
+
+9
+
+using open source software for stimulus generation. We describe the general principle and test
+
+10
+
+the system in a series of experiments measuring the membrane potentials of visual interneurons
+
+11
+
+in the optic lobe of Drosophila melanogaster.
+
+12
+13
+
+Introduction
+
+14
+
+Neural responses are inherently variable. The visual system is no exception in this respect, as
+
+15
+
+repeated presentations of the same stimulus tend to elicit different neural responses. To
+
+16
+
+decipher the influences of visual stimulation on neuronal responses, experimenters must be
+
+17
+
+able to deliver light in a controllable and reliable manner. An ideal visual stimulation device
+
+18
+
+would provide precise temporal and spatial control over every retinal photoreceptor cell. In
+
+19
+
+recent years, research on the visual system of insects, in particular that of Drosophila
+
+20
+
+melanogaster, has produced a rich collection of stimulation devices that take many shapes and
+
+21
+
+forms. Fueled by technological advances, most of them either repurpose devices originally
+
+22
+
+designed for the human visual system [1–5], or are custom-made from highly specialized
+
+23
+
+components [6–9] rendering their implementation almost prohibitively expensive. To tailor a
+
+24
+
+stimulation device to the demands of an insect's visual system, while keeping it versatile,
+
+25
+
+compact and affordable, poses a formidable technical challenge.
+
+26
+27
+
+In contrast to the human eye, the compound eye of Drosophila is tiled by hundreds of
+
+28
+
+ommatidia arranged in a hexagonal grid. Each ommatidium of the convex retina collects light
+
+29
+
+from a visual angle of approximately 5° [10] using a miniature lens with an aperture of 16 µm
+
+30
+
+and a focal length of 20 µm [11,12]. These dimensions, for the most part, obviate the need to
+
+31
+
+accommodate, as any object beyond a few millimeters appears at infinity focus. With an inter-
+
+32
+
+ommatidial angle of ~5°, the spatial resolution of Drosophila is low, but the convex geometry
+
+33
+
+of its eyes provides for a nearly panoramic field of view [13,14].
+
+2
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+34
+
+Dynamic visual environments for head-restrained insects that allow experimenters to record
+
+35
+
+behavioral and neural responses to visual stimuli are commonplace in insect neuroethology
+
+36
+
+[15]. Relicts of long-gone manufacturing constraints, most displays used to create these virtual
+
+37
+
+environments have either a flat or a cylindrical geometry neither of which matches the shape
+
+38
+
+of the fly eye. Hence, they all bear at least three caveats: First, they cover only a small fraction
+
+39
+
+of the fly's field of view. Second, the brightness of the display varies across visual space as a
+
+40
+
+function of the viewing angle; and third, distortions in the periphery of the visual field
+
+41
+
+complicate the correspondence between actuator (pixels) and sensor (ommatidia) (Fig 1A–1C).
+
+42
+
+While the latter two can be compensated for by computationally costly pre-adjustment and pre-
+
+43
+
+distortion the displayed images, the first one is unavoidable.
+
+44
+45
+
+Here, we describe an inexpensive projector-based visual stimulation device that caters to many
+
+46
+
+of the demands of the insect visual system. It provides a wide and nearly distortion-free field
+
+47
+
+of view with uniform brightness, but is compact enough to fit under a microscope. The crux of
+
+48
+
+our system lies in its unconventional screen geometry, which simplifies both software and
+
+49
+
+hardware development. Our open-source Python code allows any user with access to a
+
+50
+
+computer and a 3D printer to create a bowl-shaped screen that suites the specifications (i.e. the
+
+51
+
+throw ratio) of their projector. The temporal, spatial and spectral performance of the system
+
+52
+
+can be adjusted, according to experimental requirements and budget constraints, by resorting
+
+53
+
+to different commercially available projectors. We provide Python code to generate the screen
+
+54
+
+design and to export it for 3D printing, but also to display a wide repertoire of visual stimuli
+
+55
+
+commonly used by researchers, teachers, and students that study the insect visual system.
+
+56
+57
+58
+
+Results
+Comparing screen geometries
+
+59
+60
+
+We use a polyhedron as a simplified and general model of an invertebrate compound eye as a
+
+61
+
+spherical approximation. As a simplified and general model of an invertebrate compound eye,
+
+62
+
+we use a polyhedron as a spherical approximation. The screen capture from each projected
+
+63
+
+polyhedron face can be understood as the number of projector pixels required to stimulate a
+
+64
+
+certain fraction of the visual field, for example, one ommatidium or one spatial receptive field
+
+65
+
+of a neuron. To allow direct comparison of different screen geometries, a Goldberg
+
+66
+
+polyhedron—containing 272 almost identical faces—served as a model observer in front of a
+
+67
+
+flat, a cylindrical, or a bowl-shaped virtual surface.
+
+3
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+68
+
+Observing the grid of a polyhedral projected onto a flat surface (Fig 1A), only the hexagon at
+
+69
+
+the center of the visual field appeared undistorted. With increasing distance from the center,
+
+70
+
+the hexagons grew rapidly in surface area and were increasingly distorted. At an angular
+
+71
+
+distance of 50° from the center, hexagonal projections were on average 3.3 times longer and
+
+72
+
+1.9 times wider, after correcting for the hexagon's original aspect ratio; their area increased by
+
+73
+
+a factor of 5.5. On a cylindrical surface (Fig 1B), hexagons remained undistorted along the
+
+74
+
+equator but were subject to heavy distortions along the elevation axis. At an angular distance
+
+75
+
+of 50° from the center, the average hexagon grew by a factor of 2.9 in elevation and 1.6 in
+
+76
+
+azimuth. The area of a hexagonal projection increased by an average factor of 4.6. The bowl-
+
+77
+
+shaped surface (Fig 1C) featured no distortion along the elevation and only slight azimuthal
+
+78
+
+distortions in the periphery of the screen. At an elevation angle of 50° from the pole, the
+
+79
+
+azimuthal distortion factor amounted to 1.2; at 100° from the pole, this factor was 2.4. The area
+
+80
+
+of the hexagonal projection increased by the same factor of 1.2 at 50° and 2.4 at 100° from the
+
+81
+
+center. Aside from robustness against distortions, a bowl-shaped screen features another
+
+82
+
+advantage: It covers a substantially larger fraction of the visual field compared to a flat or a
+
+83
+
+cylindrical screen of the same surface area. A cylindrical shape would require 44% of the area
+
+84
+
+to cover the same visual field as a flat screen. The bowl-shaped screen can stimulate the same
+
+85
+
+field of view with only 24% of the screen surface.
+
+4
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+Fig 1: Geometry of the bowl-shaped screen
+A-C Renderings of a virtual projection of a hexagonal grid onto a planar (A), cylindrical (B)
+and bowl-shaped surface (C). The area sizes are normalized to a standard undistorted
+hexagon at the center. One hexagon corresponds to the visual space covered by
+approximately nine ommatidia of Drosophila melanogaster. D Cross-section of the model
+used to calculate the screen geometry (Equation 3). (I) 2D spherical model to mimic the fly's
+photoreceptor arrangement, using a constant inter ommatidia angle of 5°. (II) 2D model of a
+projector which is designed to produce a uniform illumination and resolution on a planar
+screen. (III) Constant Lambertian reflection properties as well as the shape of the screen at
+any given point guarantee the homogeneous spatial luminance distribution. E View of the
+bowl-shaped screen, the mirrors and the projector. F The projector's field of view of the
+screen and the necessary equidistant azimuthal projection.
+5
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+86
+
+Screen design and evaluation
+
+87
+88
+
+Our display system consists of an image projector and a screen. Like in any virtual reality
+
+89
+
+system, the image must be pre-distorted in order to be accurately perceived from the position
+
+90
+
+of the observer. Both the observer and the projector are stationary, which allows us to account
+
+91
+
+for any perspectival distortions in a single step. The correction is not based on a
+
+92
+
+computationally intensive software solution, as is usually the case, but on a hardware solution
+
+93
+
+that uses a specific, pre-calculated screen geometry at no computational costs. To determine
+
+94
+
+the ideal shape, we created simplified models of both the observer and the projector. A
+
+95
+
+spherical model with a polar grid served as an approximation of the compound eye, where the
+
+96
+
+optical axis of each ommatidium was represented by a radial vector connecting the center of
+
+97
+
+the sphere with the center of the respective face. Taking advantage of the rotational symmetry
+
+98
+
+of the sphere, we reduced the model of the observer to a two-dimensional cross section
+
+99
+
+(Fig 1D I) (Equation 1). The projector model was simplified to the same extent by considering
+
+100
+
+only two dimensions: one along the optical axis of the projector and a second one along the
+
+101
+
+elevation (Fig 1D). Commercially available projectors are designed to project images with
+
+102
+
+uniform pixel size and uniform luminance onto a planar screen (Fig 1D II) (Equation 2). To
+
+103
+
+guarantee uniform brightness across the visual field of the insect, it is necessary to maintain a
+
+104
+
+constant ratio of pixels (photons) per ommatidium of the convex retina (Fig 1D I). A precise
+
+105
+
+correspondence between computer-generated pixels and the retinotopy of the insect visual
+
+106
+
+system can only be established if this ratio is constant across the field of view. We implemented
+
+107
+
+this by intersecting the optical axis vector of each ommatidium along the elevation plane with
+
+108
+
+the modeled photon vector originating at the projector. The trajectory connecting the resulting
+
+109
+
+intersection points defined the screen curvature along the elevation (Fig 1D) (Equation 3). The
+
+110
+
+curvature of the screen along the azimuth was obtained by rotating the trajectory about the
+
+111
+
+polar axis and interconnecting the trajectories (Equation 4). The resulting concave surface was
+
+112
+
+predicted to be of uniform brightness, from the insect's point of view, provided that the screen
+
+113
+
+surface features incidence angle-independent diffuse Lambertian reflectance (Fig 1D III). To
+
+114
+
+achieve this property and to avoid artefacts caused by a cascade of specular reflection (Fig 2A),
+
+115
+
+we coated the inner surface of the 3D-printed screen with different combinations of white paint
+
+116
+
+and varnish. In order to test the optical properties of the surface, we illuminated square spots
+
+117
+
+(5° × 5°) along the elevation and recorded the reflected light with a panoramic 360° camera
+
+118
+
+(Fig 2B and 2C). One of these combinations showed almost no reflection along the elevation
+
+119
+
+and was used in all subsequent experiments (Fig 2B and 2C).
+
+6
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+Fig 2: Technical validation of the operating principle
+A Overview of Lambertian and specular reflectance properties of the screen surface. The blue
+vectors describe the diffuse, the red vectors the specular reflection component of an entering
+light ray. At flat angles of incidence, a reflective cascade is caused on the screens surface. B
+Raw image data of bright rectangular squares displayed at different locations along the
+elevation. C Cross-sections along the elevation of specular (red) and matte (blue) surfaces.
+The matte surface was evaluated at different locations along the elevation. In contrast to the
+matte surface, the specular surface (without coating) showed a pronounced reflection
+cascade. D, E Brightness profiles along the azimuth (D) and the elevation (E), measured with
+the 360° camera (blue). Measurements along the azimuth were controlled using an optical
+power meter (black).
+120
+121
+
+Luminance measurements from the position of the observer using a rotatable power meter, as
+
+122
+
+well as a 360° camera, corroborated our prediction and revealed an isotropic luminance across
+
+123
+
+the entire elevation of the screen (Fig 2D and 2E). The calculated brightness uniformity (i.e.,
+
+124
+
+the lowest luminance reading at any point as fraction of the highest) amounted to 73%, which
+
+125
+
+is comparable to the uniformity other projectors achieve on a planar screen, e.g., the DLP®
+
+126
+
+LightCrafter™ Display 4710 EVM.
+
+127
+128
+
+The bowl-shaped screen was held in place by acrylic glass components (Fig 1E). Two mirrors
+
+129
+
+served to reduce the overall size of the set-up, but could be omitted depending on spatial
+
+130
+
+constraints. In the present configuration, the mirrors allowed for the projector to be placed
+
+131
+
+underneath the screen. In contrast to other virtual reality systems [1], the projector is easily
+
+132
+
+replaceable and maintainable, making the system to the largest possible extent independent of
+
+133
+
+the rapid product turn over on the consumer market. We used a standard projector with a native
+
+7
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+134
+
+resolution of 1280 × 720 pixels, a throw ratio of 1.4, a projection offset of 100% upwards, and
+
+135
+
+an intrinsic brightness uniformity of ~90%. The projector has an image refresh rate of 60 Hz
+
+136
+
+and a flicker frequency of 240 Hz, which exceeds the critical flicker fusion frequency of most
+
+137
+
+insects including that of Drosophila [16]. Higher refresh rates could be achieved by using
+
+138
+
+projectors like the ViewSonic® M2E (120 Hz) or the TI DLPLCR4500EVM (400 Hz).
+
+139
+140
+141
+
+Stimulus design and validation
+
+142
+143
+
+In order to create an immersive, panoramic virtual reality for the animal, we take the insect
+
+144
+
+observer to be at the center of a fictive unit sphere from where it observes an equidistant
+
+145
+
+azimuthal projection of the sphere. Owing to the special geometry of the screen, this projection
+
+146
+
+is—conveniently— identical to the image that must be displayed by the projector (Fig 1F). In
+
+147
+
+other words, the screen geometry allows the direct projection of a spherical texture. The
+
+148
+
+equidistant azimuthal projection is formally equivalent to a polar-transformed version of an
+
+149
+
+equi-rectangular projection, the latter of which might be more familiar to the reader, for
+
+150
+
+example, as a Cartesian map of the Earth. These interpretable equi-rectangular projections
+
+151
+
+served as spherical textures and were chosen as the input format. In order to avoid subsequent
+
+152
+
+interpolation, the projectors polar coordinate system was transformed into the cartesian
+
+153
+
+coordinate system of the input texture using two pre-calculated transformation matrices: one
+
+154
+
+for the x- and another for the y-coordinate of each pixel. The size of each matrix, and therefore
+
+155
+
+the runtime, depends on the spatial resolution of the projector. Since the output image size, the
+
+156
+
+transformation matrices, and the input image size were known (and constant) during runtime,
+
+157
+
+we used just-in-time compilation within the JAX (Google) framework to calculate the
+
+158
+
+transformations on the computer's graphics processing unit (GPU). On a standard laptop with
+
+159
+
+a GTX1060 (Nvidia) graphics card, the transformation of a color image of 1280 × 720 pixels
+
+160
+
+took on average 2-3 ms. Ahead of the transformation, to speed up processing times, equi-
+
+161
+
+rectangular representations were cropped to the field of view covered by the screen (here, 180°
+
+162
+
+× 125° in azimuth and elevation, respectively) and stimuli with a rotational component were
+
+163
+
+pre-rotated (Fig 3B). To illuminate only the screen and to minimize stray light, a clipping mask
+
+164
+
+was applied, which could be adapted to incorporate additions to the setup, such as time-stamp
+
+165
+
+signals or cameras for monitoring behavior.
+
+166
+
+8
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+167
+
+To put our stimulation device to a test, we placed a wide-angle camera (Fusion, GoPro) with a
+
+168
+
+panoramic 360° field of view at the position of the observer. The camera provided a high-
+
+169
+
+resolution equi-rectangular projection of the entire screen, which, given correct transformation
+
+170
+
+and alignment, was expected to be identical to the input image. Comparison between the two
+
+171
+
+allowed for a qualitative assessment of possible image distortions. As an input image, we used
+
+172
+
+an equirectangular projection of the panorama from inside a cube with differently colored sides
+
+173
+
+(Fig 3A) and inspected the transformed image at each step in the process chain: the cropped
+
+174
+
+input image (Fig 3B), the projected image (Fig 3C), and the image captured by the 360° camera
+
+175
+
+(Fig 3D). The cropped input image (Fig 3B) and the observed image (Fig 3D) were similar in
+
+176
+
+terms of their proportions, grid geometry, contrast, sharpness, and field of view. This attests to
+
+177
+
+the accuracy of the transformation and the correct, undistorted display of images on the 3D-
+
+178
+
+printed screen.
+Fig 3: Technical
+validation of spatial and
+temporal stimulus
+control
+A 3D view of the fly
+inside a virtual cube with
+colored walls. B Input
+image, an equidistant
+cylindrical projection of
+the virtual cube. The entire
+texture is shown in light
+color, the texture displayed
+by the screen is shown in
+dark color. C Texture from
+the viewpoint of the
+projector, prepared for
+being displayed on the
+bowl-shaped screen. D
+Captured image of the
+bowl-shaped screen from
+the 360° camera in
+equidistant cylindrical
+projection, the direct
+comparison to B. E
+Sinewave gratings moving
+at various velocities
+captured by a photodiode
+and resampled to a
+framerate of 120 Hz. F
+Spatiotemporal receptive
+field of the photodiode,
+measured over 8 minutes.
+
+9
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+179
+
+Time-varying visual stimuli were generated using custom-written software in Python. To
+
+180
+
+quantify the temporal performance, rotational stimuli like sine wave gratings moving at various
+
+181
+
+velocities (Fig 3E) as well as online generated stimuli such as discrete white noise stimuli
+
+182
+
+(Fig 3F) were evaluated using a fast photodiode as a fly’s proxy. In case of moving sine wave
+
+183
+
+gratings, there were no conspicuous flickers in the down-sampled photodiode signal (<120Hz),
+
+184
+
+which might be perceived by insects. Furthermore, the amplitude, the frequency and the phases
+
+185
+
+were identical for all velocities (Fig 3E). The latter case shows that during a binary white noise
+
+186
+
+stimulation period of 8 minutes at 60 Hz pattern change rate, a visible correlation in the
+
+187
+
+temporal receptive field of the photodiode appeared only within the first 3 frames (50 ms). This
+
+188
+
+suggests that, over a period of 8 minutes, jitter and drift are in the range ±1 frame (16.67 ms)
+
+189
+
+(Fig 3F).
+
+190
+191
+
+Experimental validation
+
+192
+193
+
+The large, nearly distortion-free field of view and the uniform illumination of the bowl-shaped
+
+194
+
+screen make it possible to stimulate the visual system in an identical manner at various spatial
+
+195
+
+positions. This is essential, for instance, when spatiotemporal receptive fields of neurons at
+
+196
+
+different spatial locations in the visual system are to be measured precisely. Before testing our
+
+197
+
+bowl-shaped screen on real neurons, we measured the receptive field of a reference photodiode
+
+198
+
+placed at different locations in the arena by projecting a 60 Hz spatiotemporal binary white-
+
+199
+
+noise stimulus onto our screen. We cross-correlated the photodiode signal with the luminance
+
+200
+
+at each screen position (Fig 4A) and corrected the resulting equirectangular image of the
+
+201
+
+receptive field by rotating the position to the undistorted center of the cylindrical texture (Fig
+
+202
+
+4B). The result demonstrates that the perspective correction yields identical receptive field
+
+203
+
+sizes, even in cases where the receptive field is located more than 50° off the center. The
+
+204
+
+occurring deviations of about 8% were below the resolution of the binary white noise grid
+
+205
+
+(Fig 4C).
+
+10
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+Fig 4: Technical validation of spatiotemporal receptive field measurements
+A Equidistant cylindrical projection of the reverse correlation between input white noise and
+voltage signal of the photodiode. The “receptive fields” are displayed in their original
+positions. B Reverse correlation after the re-rotation into the distortion-free center of the
+equidistant cylindrical projection. C Detailed view of the “receptive fields” of the photodiode
+after re-rotation to allow direct comparison.
+206
+207
+
+After the technical part, the biological validation was performed using in vivo patch clamp
+
+208
+
+recordings of medulla intrinsic Mi9 neurons in tethered flies. First, we presented a 300-s binary
+
+209
+
+white noise stimulus with a solid angle resolution of 2.8 degrees. The spatial center of mass of
+
+210
+
+each receptive field was determined and corrected by inverse rotation, whereby the largest
+
+211
+
+distance from the center was 38° in azimuth and 41° in elevation. We estimated the time-
+
+212
+
+averaged spatial receptive fields at two different time intervals (0 to 0.1 s and 0.2 to 0.6 s) and
+
+213
+
+the temporal linear kernel at the center of the spatial fields (Fig 5A). The full width at half
+
+214
+
+maximum was ~10° (–3.5° to +6.5°) in azimuth and ~10° (–5.5 to +4.5°) in elevation, along
+
+215
+
+both time intervals, and is consistent with previous measurements [17]. The temporal linear
+
+216
+
+kernel shows a strong negative contrast correlation with a kernel density of ~–7 at 0.05 s and a
+
+217
+
+weak positive correlation a with kernel density of ~1 at 0.57 s, which corresponds to a weak
+
+218
+
+bandpass characteristic (Fig 5A). In addition, we tested a battery of commonly used visual
+
+219
+
+stimuli: square-wave gratings and bright and dark edges moving at various velocities. The
+
+220
+
+responses to moving gratings showed the expected frequency- and velocity-depended
+
+221
+
+amplitude modulation (Fig 5B). The responses to moving bright and dark edges were aligned
+
+222
+
+based on the location of the receptive fields position (Fig 5C). They show a mirror symmetric
+
+223
+
+negative step response with respect to the stimulation contrast. In summary, the membrane
+
+224
+
+potentials recorded from Mi9 neurons of flies stimulated using the bowl-shaped screen are
+
+225
+
+consistent with those from an already established stimulation device [17,18].
+
+11
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+Fig 5: Voltage responses of medulla intrinsic Mi9 neurons to visual stimulation of the
+bowl-shaped screen
+A Spatiotemporal receptive fields of three medulla intrinsic Mi9 neurons and their spatial
+position on the screen. Cross Section of the 3D kernel at the center of the azimuthal axis
+(top). Temporal kernel density estimation at the center of the spatial receptive field (center).
+Location of the centers of mass of the receptive fields on the screen (center). Spatial
+estimation of the correlation kernel in a time interval from 0 s to 0.1 s (I). Spatial estimation
+of the correlation kernel in a time interval from 0.2 s to 0.6 s (II). B Averaged (black) and
+single-trail (gray) membrane voltage responses of a Mi9 neuron (1 cell, 12 trails) to a 60°wide horizontal square wave pattern, moving at four different velocities (15°/s, 30°/s, 60°/s,
+120°/s). C Averaged Mi9 single cell voltage responses to bright and dark horizontal edges,
+moving at different velocities (15°/s, 30°/s, 60°/s, 120°/s) and aligned based on their
+receptive field positions (1 cell, 3 trails).
+226
+227
+
+Discussion
+
+228
+229
+
+The screen geometry of visual stimulation devices has important implications for the
+
+230
+
+acquisition, the analysis, and the interpretation of functional data from the visual system. In
+
+231
+
+many aspects, a cylindrical surface is superior to a flat one, but observer-related perspective
+
+232
+
+distortions still remain. Super Bowl provides a virtual spherical texture, displayed on a
+
+233
+
+spherical screen, virtually devoid of any projection-related distortions, which are otherwise
+
+234
+
+difficult to overcome. The bowl-shaped screen geometry allows for a larger part of the visible
+
+235
+
+space to be covered with far smaller distortions than in commonly used geometries.
+
+236
+
+12
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+237
+
+All large system components, including the screen, can be 3D printed. The overall cost of the
+
+238
+
+system depends on the type of projector used, which gives scientists a maximum of cost control.
+
+239
+
+The system is compact and allows for recording neural responses under a microscope as well
+
+240
+
+as for behavioral experiments. (Fig 1E and 6A). The distance of the projector and the size of
+
+241
+
+the screen can be adjusted to the needs of the experiment. Thus, a complete immersive virtual
+
+242
+
+environment can be created (Fig 6A). Alternatively, if required, a subset within the field of
+
+243
+
+view can be stimulated selectively (Fig 6B). The system was designed to be easy to
+
+244
+
+manufacture and assemble by scientists. The provided software generates vector graphic files
+
+245
+
+that are readable by a broad range of programs and can be used as a design basis for 3D printing
+
+246
+
+and laser cutting. The processes of filling and painting the screen require neither special
+
+247
+
+equipment nor special practical skills. Projectors with identical throw ratios can be exchanged
+
+248
+
+seamlessly, making it easy to incorporate the latest advances in spatial and temporal resolution.
+
+249
+
+It should be mentioned, however, that the matte Lambertian surface is crucial for operation and
+
+250
+
+the brightness distribution.
+
+Fig 6: Application concepts of the bowl-shaped screen
+A 3D rendering of a walking behaviour set-up, which also provides microscopic access to the
+brain. The field of view of the screen was designed in a way which enables closed loop bar
+fixation experiments, while recording neuronal activity. B 3D rendering of a fictive tethered
+walking behaviour setup, which creates an almost completely immersive virtual world around
+the fly. The system requires only two projectors and allows tracking cameras to be installed
+at various locations using cut-outs.
+
+13
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+251
+
+The included software for stimulus generation allows researchers and students to create visual
+
+252
+
+stimuli and entire visual environments with ease. Accurately transformed projector output can
+
+253
+
+be generated based on input from a game engine, a video, or a simple numeric array. The
+
+254
+
+comparatively low computational demands of the software and fast online image
+
+255
+
+transformation allow for the system to be used in closed-loop virtual reality settings. The self-
+
+256
+
+written routines for transformation and rotation are easy to grasp and sufficient for most
+
+257
+
+projectors. The performance can be increased if the calculation is carried out directly in a
+
+258
+
+graphics library, like the Open Graphics Library (OpenGL).
+
+259
+260
+
+Projector-based systems are compatible even with noise-sensitive electrophysiological
+
+261
+
+experiments such as whole-cell patch clamp recordings (Fig 5). The only local source of
+
+262
+
+electromagnetic noise, the power supply unit or the projector itself, can be easily shielded.
+
+263
+
+Some projectors can be operated in battery-powered mode, increasing the versatility even
+
+264
+
+further. Additionally, measuring spatiotemporal receptive fields in electrophysiological
+
+265
+
+experiments is difficult in flat and cylindrical arenas. Receptive fields located in the periphery
+
+266
+
+of the screen tend to be distorted and overestimated in size (Fig 1A and 1B) and moreover,
+
+267
+
+because of their proximity to the edge, they often do not fully capture the surround of the
+
+268
+
+receptive field. Therefore, it is common practice to include in the analysis primarily neurons
+
+269
+
+with a receptive field at the center of the screen, which introduces a spatial picking bias and
+
+270
+
+reduces the amount of analyzable data.
+
+271
+272
+
+To investigate mechanisms of contrast normalization, especially the contribution of the visual
+
+273
+
+surround on a neuron’s receptive field [18–20], it is necessary to control luminance and contrast
+
+274
+
+precisely across as much of the visual surround as possible. While the brightness of rear-
+
+275
+
+projection screens [1,3,9] and conventional LED displays [5] depends on the viewing angle
+
+276
+
+and requires adjustment at the cost of dynamic range, the bowl-shaped screen features nearly
+
+277
+
+uniform brightness and only minimal perspective distortions. This allows for precisely
+
+278
+
+measuring receptive fields of visual interneurons without the need to correct them post hoc, as
+
+279
+
+is the case when using cylindrical or flat arenas.
+
+280
+281
+
+A visual system with an almost panoramic field of view should be stimulated with the maximal
+
+282
+
+possible field of view and as little distortion as possible, in order to fully understand its
+
+283
+
+neurobiology. Although spherical wide-field displays have been used in behavioral
+
+14
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+284
+
+experiments [9], Super Bowl is the first spherical system that can stimulate a large field of view
+
+285
+
+while recording nervous activity.
+
+286
+287
+288
+
+Materials and Methods
+
+289
+
+https://github.com/borstlab/super_bowl_screen
+
+290
+
+https://www.youtube.com/playlist?list=PLcB8ZWnb7EzSwOxb3ipZU5DP4hZYWpbc6
+
+Assembly instructions and a user manual are available at:
+
+291
+292
+
+Analytical solution of Super Bowl screen geometry
+
+293
+294
+295
+296
+
+In two dimensions, the position of the fly is assumed to be at the center of the coordinate
+0
+system, 𝑃𝑜𝑠𝐹𝑙𝑦 = [ ], and the position of the projector at a distance 𝑑𝑝𝑟𝑜𝑗 , i.e. 𝑃𝑜𝑠𝑃𝑟𝑜𝑗 =
+0
+𝑑
+[ 𝑝𝑟𝑜𝑗 ].
+0
+
+297
+
+The throw ratio 𝑟𝑡ℎ𝑟𝑜𝑤 and the aspect ratio 𝑟𝑎𝑠𝑝𝑒𝑐𝑡 are constants and can be summarized to
+
+298
+
+𝑟 = 𝑟𝑡ℎ𝑟𝑜𝑤 ∙ 𝑟𝑎𝑠𝑝𝑒𝑐𝑡 . A projection offset of 100% (projection upwards) is required. The
+
+299
+
+elevation angle 𝛼 𝑤𝑖𝑡ℎ 0 < 𝛼 < π in radians is used to parameterize the bowl curve.
+
+300
+301
+
+Thus, the viewing direction of the fly is given as
+cos(α)
+⃗⃗⃗⃗⃗
+Fly(α) = [
+];
+sin(α)
+
+302
+
+and the projecting direction of the projector is given as
+1
+𝑑
+⃗⃗⃗⃗⃗⃗⃗⃗
+Proj(α) = [
+] + [ 𝑝𝑟𝑜𝑗 ] ;
+𝛼/𝜋 𝑟
+0
+
+303
+
+(1)
+
+(2)
+
+The two vectors intersect at a point X, which has the coordinates:
+1
+𝛼
+⃗ (α) = 𝑑𝑝𝑟𝑜𝑗
+X
+[
+];
+𝛼−𝜋 𝑟 𝑡𝑎𝑛(𝛼) tan(α)
+
+(3)
+
+304
+
+The Vector ⃗X(α) determines the curve of the bowl-shaped screen along the optical axis and
+
+305
+
+one axis perpendicular to it. To parametrize the surface area in ℝ3 , a second variable β = β ∈
+
+306
+
+ℝ,
+
+307
+
+then given by the outer product:
+
+0 < β < 2π is needed for the azimuth axis. The surface S of the bowl-shaped screen is
+
+15
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+𝑇
+1
+1
+𝛼
+𝑆(α, β) = 𝑑𝑝𝑟𝑜𝑗 𝛼−𝜋 𝑟 𝑡𝑎𝑛(𝛼) [cos(β)] ⋅ [tan(α)] .
+sin(β)
+tan(α)
+
+(4)
+
+308
+309
+
+3D modeling and printing
+
+310
+311
+
+The screen shape along the elevation axis was calculated using a custom written script in
+
+312
+
+Python v.3.7 (Python Software Foundation), using NumPy v.1.21.5, SymPy v.1.10.1, and
+
+313
+
+Cairo v.1.16.0, based on the projector- and user-dependent input variables, such as distance,
+
+314
+
+throw ratio, resolution, and field of view. Here, we specified a field of view ranging from 15°
+
+315
+
+to 140° along the elevation axis. The automatically generated scalable vector graphics (SVG)
+
+316
+
+file was imported into the computer-aided design program SketchUp (Trimble), where a 180°
+
+317
+
+rotational extrusion along the optical axis of the path generated the final screen shape as a 3D
+
+318
+
+surface mesh. After adding mounting connections to the drawing, a surface tessellation lattice
+
+319
+
+(STL) file was exported for 3D printing. The screen was printed from black polylactide using
+
+320
+
+fused filament fabrication on a Replicator 3D printer (MakerBot). Where a 3D printer is not
+
+321
+
+available, online services such as Hubs (www.hubs.com), Materialise (www.materialise.com),
+
+322
+
+Shapeways (www.shapeways.com), or Sculpteo (www.sculpteo.com) can be used to create the
+
+323
+
+screen at competitive prices. Grooves in between filaments were filled using 2K General
+
+324
+
+Purpose Body Filler (3M) to create a smooth texture. The surface was sanded and painted with
+
+325
+
+three layers of white paint (585036, Dupli Color). To reduce specular reflection and associated
+
+326
+
+artifacts, a final layer of matte varnish (Matt varnish 850, Marabu) was applied which is a
+
+327
+
+critical step to achieve near-Lambertian reflective properties.
+
+328
+329
+
+Assembly
+
+330
+331
+
+The vector graphic of the beam path created in the previous step was also used as a guideline
+
+332
+
+for the design of the holders. The dimensions and distances as well as the optical light field of
+
+333
+
+the projection geometry were derived based on this. In order to minimize the overall
+
+334
+
+dimensions of the system, we cut out and installed two planar metal-coated mirrors (ME8S-
+
+335
+
+G01 - 8", Thorlabs) perpendicular to each other and at a 45° angle relative to the projector.
+
+336
+
+Screen, projector, and mirrors were mounted on a frame made of matte black acrylic glass
+
+337
+
+which was manufactured using a laser cutter (Speedy 360, Trotec). If a laser cutter is not
+
+16
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+338
+
+available, the frame can also be conventional manufactured, 3D printed or ordered from on-
+
+339
+
+demand fabrication services (see above).
+
+340
+341
+
+Stimulus generation
+
+342
+343
+
+A custom build Python software was used to generate and project the stimuli, as well as to
+
+344
+
+control the timing. For ease of use, the creation of stimuli is mainly done using the NumPy
+
+345
+
+v.1.21.5 Python package, for rotating textures a “just in time compiled” function was written
+
+346
+
+using the JAX package, to increase performance. As mentioned above, the projection function
+
+347
+
+was also written using the JAX package. Software based image processing and presentation
+
+348
+
+was realized using the OpenCV v.4.6.0 package. Timing was realized using the Python build
+
+349
+
+in time module. After initialization, the software operates in a loop, which is run periodically
+
+350
+
+with a stimulus dependent rate of 80 to 120 frames per second. Within each iteration, the
+
+351
+
+elapsed time is determined and, based on this, a rotation or recalculation of the input texture is
+
+352
+
+executed. The resulting texture is then projected, masked and displayed on the projector. This
+
+353
+
+procedure continues until the stop time point is reached. The entire procedure can be processed
+
+354
+
+in one thread; multithreading is not necessary, but would lead to additional speed-up. For
+
+355
+
+closed-loop experiments, behavioral feedback can also be implemented in the stimulus
+
+356
+
+generation or rotation pipeline.
+
+357
+358
+
+The white noise stochastic stimulus used to determine the receptive fields, is updated online at
+
+359
+
+60 frames per second. The individual pixels correspond to a visual solid angle on a virtual equi-
+
+360
+
+rectangular cylindrical texture. For example, using a solid angle of 5°, the field of view of the
+
+361
+
+arena was divided into 36 × 28 pixels grid and the updating stimulus was displayed over 8
+
+362
+
+minutes. The intensities of the individual pixels were drawn randomly and were either 0% or
+
+363
+
+100% of contrast. Using a sliding reverse correlation, the impact of each stimulating pixel on
+
+364
+
+the signal could be reconstructed. Each reconstructed image thus corresponds to an equidistant
+
+365
+
+cylindrical projection of the receptive field.
+
+366
+367
+
+Validation Measurements
+
+368
+369
+
+To measure luminance profiles across the screen, we took two different approaches. First, we
+
+370
+
+used a PM100D optical power meter (Thorlabs), whose sensor aperture was placed at the
+
+371
+
+position of the observer. The angle of incidence was kept constant by rotating the sensor about
+
+17
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+372
+
+its axis using a servo motor (RS-2, Modelcraft) and a gimbal tracking the position of a square
+
+373
+
+spotlight along the azimuth of the screen. In addition, we placed a 360° camera (Fusion, GoPro)
+
+374
+
+with a resolution of 3000 × 3000 pixels at the position of the fly and took a photo of the scene
+
+375
+
+in one shot. To obtain temporal high-speed measurements, we used a 5mm photodiode (L-
+
+376
+
+7113GC, Kingbright) as a light sensor and acquired the voltage-signal generated by the
+
+377
+
+photodiode by a 12 Bit digital Oscilloscope (WaveRunner HRO 66 zi, LeCroy).
+
+378
+379
+
+Evaluation of screen geometries
+
+380
+381
+
+To visualize the effect of screen geometry on the ratio of pixels per ommatidium, we generated
+
+382
+
+computer-aided designs of a flat [2–4], a cylindrical [1,5], and a bowl-shaped screen (this
+
+383
+
+paper). In place of the insect, we added a Goldberg polyhedron model of the observer. The
+
+384
+
+polyhedron contained 260 hexagonal faces of equal area (±1%) and, like any Goldberg
+
+385
+
+polyhedron, 12 pentagonal faces, each of which with an area of approximately 66% of that of
+
+386
+
+the largest hexagon. On average, one hexagonal face covered a solid angle of 14°, equivalent
+
+387
+
+to the angle covered by ~9 ommatidia of Drosophila melanogaster, a necessary approximation,
+
+388
+
+given that Goldberg polyhedron cannot assume any arbitrary number of faces. Twenty of the
+
+389
+
+hexagonal faces were regular, the rest were irregular hexagons with aspect ratios ranging from
+
+390
+
+0.87 to 1.07.
+
+391
+392
+
+The edges of the faces were projected radially onto the screen surfaces, using the open-source
+
+393
+
+physically-based render engine LuxCoreRender (https://luxcorerender.org). The resulting
+
+394
+
+renderings were vectorized and analyzed in Python v.3.7.13. Hexagonal projections were
+
+395
+
+color-coded based on their screen surface area relative to that of a central, undistorted
+
+396
+
+projection. To allow for a rigorous comparison between the different structures, a field of view
+
+397
+
+covering 105° in azimuth and elevation was considered for all screen shapes (Fig1A, B, C).
+
+398
+
+For visualization purposes, we used an orthographic view of the flat screen and a flattened
+
+399
+
+orthographic projection of the cylindrical screen. Additional perspective distortions that would
+
+400
+
+occur in the cylindrical setting under real projection conditions were neglected. The projection
+
+401
+
+of the bowl-shaped screen was already a perspective projection, which did not require
+
+402
+
+additional image distortion.
+
+403
+404
+
+18
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+405
+
+Fly husbandry and genotypes
+
+406
+407
+
+Flies were cultivated on a cornmeal, molasses and yeast medium under a 12 h–12 h light–dark
+
+408
+
+cycle at 25 °C and 60% humidity. All of the experiments were carried out on female flies
+
+409
+
+bearing at least one wild-type allele of the white gene. The experimenters were not blinded.
+
+410
+
+Drosophila melanogaster of the following genotype were used to target transgene expression
+
+411
+
+to
+
+412
+
+mCD8::GFP}su(Hw)attP5; P{VT046779-GAL4.DBD}attP2 was used to label Mi9 neurons.
+
+the
+
+respective
+
+types
+
+of
+
+neuron:
+
+P{R48A07-p65.AD}attP40,
+
+P{10XUAS-IVS-
+
+413
+414
+
+Patch-clamp recordings
+
+415
+416
+
+Whole cell in vivo patch clamp recordings were performed as recently described [17]. In this
+
+417
+
+procedure, female flies were cold-anesthetized 2-24 hours after hatching and fixed with soft
+
+418
+
+thermoplastic wax on a special polyoxymethylene mount. The left dorsal optic nerve was
+
+419
+
+exposed by surgical removal of the cuticle, adipose tissue, and trachea. Green fluorescent
+
+420
+
+somata were visually identified by bright-field and epifluorescence microscopy. Using a small
+
+421
+
+incision in the perineural sheath, access was provided to the cell membranes. Signals were
+
+422
+
+recorded at room temperature (21-23°C) using a MultiClamp 700B amplifier, low-pass filtered,
+
+423
+
+and sampled at 10 kHz. The data were corrected for the liquid junction potential and analyzed
+
+424
+
+using custom-written Python software. The resting potential was determined to be the most
+
+425
+
+negative membrane potential. Cells with a resting membrane voltage greater than -25 mV were
+
+426
+
+excluded.
+
+427
+428
+
+Funding
+
+429
+
+The Max Planck Society. Support for SP, LNG and AB. Horizon 2020 programme under the
+
+430
+
+Marie Skłodowska-Curie Action MOVIS (grant agreement no. 896143). Support for LNG.
+
+References
+1.
+
+Arenz A, Drews MS, Richter FG, Ammer G, Borst A. The temporal tuning of the
+Drosophila motion detectors is determined by the dynamics of their input elements.
+Curr Biol. 2017;27: 929–944. doi:10.1016/j.cub.2017.01.051
+
+2.
+
+Bahl A, Ammer G, Schilling T, Borst A. Object tracking in motion-blind flies. Nat
+Neurosci. 2013;16: 730–738. doi:10.1038/nn.3386
+
+19
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+3.
+
+Creamer MS, Mano O, Tanaka R, Clark DA. A flexible geometry for panoramic visual
+and optogenetic stimulation during behavior and physiology. J. Neurosci. Methods.
+2019;323: 48–55. doi:10.1016/j.jneumeth.2019.05.005
+
+4.
+
+Loesche F, Reiser MB. An inexpensive, high-precision, modular spherical treadmill
+setup optimized for Drosophila experiments. Front Behav Neurosci. 2021;15: 689573.
+doi:10.3389/fnbeh.2021.689573
+
+5.
+
+Reiser MB, Dickinson MH. A modular display system for insect behavioral
+neuroscience. J. Neurosci. Methods. 2008;167: 127–139.
+doi:10.1016/j.jneumeth.2007.07.019
+
+6.
+
+Isaacson M, Ferguson L, Loesche F, Ganguly I, Chen J, Chiu A, et al. A high-speed,
+modular display system for diverse neuroscience applications. Neuroscience; 2022 Aug.
+doi:10.1101/2022.08.02.502550
+
+7.
+
+Kócsi Z, Murray T, Dahmen H, Narendra A, Zeil J. The Antarium: A reconstructed
+visual reality device for ant navigation research. Front Behav Neurosci. 2020;14:
+599374. doi:10.3389/fnbeh.2020.599374
+
+8.
+
+Perkel JM. How remouldable computer hardware is speeding up science. Nature.
+2021;600: 348–349. doi:10.1038/d41586-021-03627-8
+
+9.
+
+Williamson WR, Peek MY, Breads P, Coop B, Card GM. Tools for rapid highresolution behavioral phenotyping of automatically isolated Drosophila. Cell Rep.
+2018;25: 1636-1649.e5. doi:10.1016/j.celrep.2018.10.048
+
+10. Götz K. Optomotorische Untersuchung des visuellen Systems einiger Augenmutanten
+der Fruchtfliege Drosophila. Kybernetik. 1964;2: 77–92.
+11. Stavenga DG. Angular and spectral sensitivity of fly photoreceptors. II. Dependence on
+facet lens F-number and rhabdomere type in Drosophila. J Comp Physiol A. 2003;189:
+189–202. doi:10.1007/s00359-003-0390-6
+12. Stavenga DG. Angular and spectral sensitivity of fly photoreceptors. I. Integrated facet
+lens and rhabdomere optics. J Comp Physiol A. 2003;189: 1–17. doi:10.1007/s00359002-0370-2
+13. Heisenberg M, Wolf R. Vision in Drosophila: Genetics of Microbehavior. Berlin:
+Springer; 1984.
+14. Zhao A, Gruntman E, Nern A, Iyer NA, Rogers EM, Koskela S, et al. Eye structure
+shapes neuron function in Drosophila motion vision. Neuroscience; 2022 Dec.
+doi:10.1101/2022.12.14.520178
+15. Dombeck DA, Reiser MB. Real neuroscience in virtual worlds. Curr. Opin. Neurobiol..
+2012;22: 3–10. doi:10.1016/j.conb.2011.10.015
+16. Miall RC. The flicker fusion frequencies of six laboratory insects, and the response of
+the compound eye to mains fluorescent ‘ripple.’ Physiol Entomol. 1978;3: 99–106.
+doi:10.1111/j.1365-3032.1978.tb00139.x
+
+20
+
+bioRxiv preprint doi: https://doi.org/10.1101/2023.09.06.556482; this version posted September 7, 2023. The copyright holder for this
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in
+perpetuity. It is made available under a CC-BY-NC 4.0 International license.
+
+17. Groschner LN, Malis JG, Zuidinga B, Borst A. A biophysical account of multiplication
+by a single neuron. Nature. 2022;603: 119–123. doi:10.1038/s41586-022-04428-3
+18. Drews MS, Leonhardt A, Pirogova N, Richter FG, Schuetzenberger A, Braun L, et al.
+Dynamic signal compression for robust motion vision in flies. Curr Biol.. 2020;30: 209221.e8. doi:10.1016/j.cub.2019.10.035
+19. Matulis CA, Chen J, Gonzalez-Suarez AD, Behnia R, Clark DA. Heterogeneous
+temporal contrast adaptation in Drosophila direction-selective circuits. Curr Biol..
+2020;30: 222-236.e6. doi:10.1016/j.cub.2019.11.077
+20. Pirogova N, Borst A. Contrast normalization affects response time-course of visual
+interneurons. PLOS ONE. 2023;18: e0285686. doi:10.1371/journal.pone.0285686
+
+21
+
+
