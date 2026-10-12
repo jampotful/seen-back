@@ -1,0 +1,129 @@
+name: coverage
+# The coverage study (docs/COVERAGE.md): species lists of growing size from iNaturalist's open-data files, BioCLIP 2's
+# text rows for every species recorded anywhere, and what the larger list does to the larger model's answers on the
+# Alachua test photos. Start it by pushing a commit to a branch named run/coverage/<anything>.
+# Results come back on ci as runs/coverage/<run>-lists, -text-<shard> and -score.
+on:
+  push:
+    branches: ['run/coverage/**']
+permissions:
+  contents: write
+concurrency:
+  group: coverage-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lists:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: count every observation
+        run: bash ci/coverage/counts.sh
+      - name: the Alachua files
+        run: |
+          mkdir -p data_in
+          git fetch -q --depth 1 origin pub/data-alachua
+          for f in regions/us-fl-alachua/species.json regions/us-fl-alachua/inat.json eval/alachua-2025/manifest.csv; do
+            mkdir -p "data_in/$(dirname "$f")"; git show "FETCH_HEAD:$f" > "data_in/$f"
+          done
+      - name: lists
+        run: |
+          set -o pipefail
+          python3 -I tools/coverage/lists.py --counts work/counts --data data_in --out lists 2>&1 | tee out/log-lists.txt
+          cp lists/summary.json lists/casual_top.csv out/
+          head -3001 lists/world.tsv > out/world-head.tsv
+          gzip -c lists/world.tsv > out/world.tsv.gz
+          ls -la out lists
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lists
+          path: lists/
+          retention-days: 5
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh coverage out lists
+
+  text:
+    needs: lists
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: lists
+          path: lists
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: rows
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -o pipefail
+          mkdir -p ret rows
+          python3 tools/coverage/text.py --names lists/names.txt --shard "${{ matrix.shard }}/16" --out rows 2>&1 | tee ret/log.txt
+          cp rows/*.json ret/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rows-${{ matrix.shard }}
+          path: rows/
+          retention-days: 5
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh coverage ret "text-${{ matrix.shard }}"
+
+  score:
+    needs: [lists, text]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: lists
+          path: lists
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: rows-*
+          path: rows
+          merge-multiple: true
+      - name: vectors
+        run: |
+          mkdir -p vec out
+          git fetch -q --depth 1 origin pub/lab-bioclip2-l14
+          for f in images/alachua-2025.f16.npy images/alachua-2025.ids.json text/species_sci.f16.npy text/species_sci.labels.json; do
+            git show "FETCH_HEAD:$f" > "vec/$(basename "$f")"
+          done
+          ls -la vec rows | head -60
+      - name: score
+        run: |
+          set -o pipefail
+          python3 -m pip install --quiet numpy
+          python3 -I tools/coverage/score.py --lists lists --rows rows --images vec/alachua-2025 --live-rows vec/species_sci --out out 2>&1 | tee out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh coverage out score
