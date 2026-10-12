@@ -2,6 +2,10 @@
 
 Compiled 11 October 2026. The app draws a camera view for sixteen groups of living things. Everything else falls in a seventeenth group called `other`, which has no view yet. This file lists what is in `other`, for the world and for the one region built so far, so that the next views can be chosen by how often people meet each creature.
 
+## Where this list went next (12 October 2026)
+
+`docs/COVERAGE.md` merges the 43 proposed views below into nineteen groups for the base app, which hold all but 0.10% of the records now in `other`, and says what they cost, where their photos come from and how each claim will be measured. The sheets of sensing notes for the first of them (spider, fish, bat, tick and fungus, each checked by a second agent) are in `docs/views/sheets/`. Three of those sheets split a proposed view in two: jumping spiders from other spiders, sharks and rays from other fish, and flying foxes from other bats. The fungus sheet sets slime moulds apart from fungi, and the tick sheet leaves mites out of the tick's view.
+
 ## How it was counted
 
 - The world figures are counts of iNaturalist research-grade observations in GBIF (dataset `50c9509d-22c7-4a22-a47d-8c48425ef4a7`), read on 11 October 2026 as facets by order and by family: 169,720,759 records in all. No single observation was fetched. Results are in `runs/fetch/10` and `runs/fetch/11` on the `ci` branch.
