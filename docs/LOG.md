@@ -2,6 +2,10 @@
 
 Newest first. Times are US Eastern.
 
+## 12 October 2026
+
+- **12 October, 08:10** Build 19, the owner's third edit, and four changes of behaviour. (1) A living thing with no view of its own is no longer shown through a general view: a photo of one, or a typed name, gets a notice that Regards cannot view the world as that creature yet, and no encounter is kept. Where the full database places a photo in such a group, its line on the picture says so and offers no change. (2) A photo in which nothing alive is found gets a notice and a button to try again; the field for typing a name is no longer offered there. (3) Every creature's sheet is rewritten in plain language: sharpness as a share of a person's, speed as flashes a second that the eye can follow, and what the picture does to suggest each. Rows that only said something was left out are gone, with the key's fourth mark. (4) A contact form (name, email, message) is built and waits for an address to send to; until one is set, "Let us know" and "here" open this repository's issues page as before. Also: a person is "a human" and gets "View the world as a human."; the owner's name in About links to their site; the credit line's link is on "here"; the line under a creature's name is its scientific name alone; names of sheets are 22 pixels; the wording of some eighty lines is the owner's.
+
 ## 11 October 2026
 
 - **19:55** Build 18: the word "recognizer" is gone from everything a person reads, by the owner's choice to give it no name. Its faults now read as plain events ("That took too long.", "A download arrived damaged.", "This browser can't identify photos."), and a line of Encounters read aloud says "named by this app". The full database keeps sentences of its own for the same faults. The hidden block of build figures still says "Recognizer".

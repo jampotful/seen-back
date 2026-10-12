@@ -37,24 +37,24 @@
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
       : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
-      off: 'Identifying is switched off.',
-      absent: 'This app can’t identify photos yet.',
-      missing: 'Some of this app’s files are missing.',
-      network: 'The download didn’t finish.',
-      damaged: 'A download arrived damaged.',
-      unfit: 'This app’s files are out of date.',
-      browser: 'This browser can’t identify photos.',
-      died: 'Something stopped working.',
-      slow: 'That took too long.',
-      photo: 'That photo couldn’t be read.'
+      off: 'IDing is turned off.',
+      absent: 'This app can’t ID photos yet. Try redownloading it.',
+      missing: 'Some of this app’s files are missing. Try redownloading it.',
+      network: 'This app’s download is incomplete. Try redownloading it.',
+      damaged: 'This app’s download is damaged. Try redownloading it.',
+      unfit: 'This app’s files are out of date. Try downloading the latest version.',
+      browser: 'This browser is too old to ID photos. Try a current Chrome, Safari, or other browser.',
+      died: 'This app’s IDing has crashed. Check that your device has enough memory.',
+      slow: 'The camera timed out. Try again.',
+      photo: 'That photo couldn’t be read. Try again.'
     };
     if (big) {
       SAY.off = 'The full database is switched off.'; SAY.absent = 'This app has no full database yet.'; SAY.missing = 'The full database\u2019s files are missing.';
-      SAY.network = 'The full database could not be downloaded.'; SAY.damaged = 'The full database\u2019s file arrived damaged.'; SAY.unfit = 'The full database\u2019s files do not fit this build of the app.';
-      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database stopped working.'; SAY.slow = 'The full database took too long.'; SAY.photo = 'The full database failed on that photo.';
-      SAY.room = 'There is not enough room on this device for the full database.';
+      SAY.network = 'The full database’s download was interrupted.'; SAY.damaged = 'The full database\u2019s download is damaged.'; SAY.unfit = 'The full database does not fit this build of the app. Download the latest version of the app.';
+      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database crashed. Check that your device has enough memory.'; SAY.slow = 'The full database timed out. Try again.'; SAY.photo = 'The full database failed on that photo. Try a different photo. Try a different photo.';
+      SAY.room = 'There is not enough storage on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
-      SAY.stopped = 'The download was stopped.';
+      SAY.stopped = 'The download has been stopped.';
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
@@ -583,7 +583,7 @@
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
       if (big) return !(getP && M) ? 'Looking more closely\u2026' : have === 'kept' ? 'Checking the full database\u2026' : 'Downloading the full database\u2026 ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB';
-      if (state === 'loading' && total > got) return 'Getting ready\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
+      if (state === 'loading' && total > got) return 'Downloading\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
       return 'Looking\u2026';
     }
     function warm() {                                  // once the opening screen is up and the page has nothing else to do

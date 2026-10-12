@@ -166,13 +166,13 @@
   function lent(m) { return lentLeft(m) > 0; }
   function lentSays(m) {
     var ms = lentLeft(m), d;
-    if (ms <= 0) return 'its eyes have gone back';
+    if (ms <= 0) return 'This creature’s view has disappeared';
     d = Math.ceil(ms / 864e5);
-    return ms <= 36e5 ? 'its eyes go back within the hour' : ms <= 864e5 ? 'its eyes go back within a day' : d >= 7 ? 'its eyes are yours for a week' : 'its eyes are yours for ' + d + ' more days';
+    return ms <= 36e5 ? 'This is the last hour with this creature’s view' : ms <= 864e5 ? 'This is the last day with this creature’s view' : d >= 7 ? 'This creature’s view is yours for a week' : 'This creature’s view is yours for ' + d + ' more days';
   }
   function lentLine(m) {                           // the same, in a few words, for the moment of meeting and of looking again
     var ms = lentLeft(m), d = Math.ceil(ms / 864e5);
-    return ms <= 0 ? '' : d >= 7 ? 'You can now see the world through this creature\u2019s eyes for a week.' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
+    return ms <= 0 ? '' : d >= 7 ? 'You can now see the world through this creature\u2019s eyes for a week.' : ms <= 864e5 ? 'The last day' : d + ' days left';
   }
   function ringOf(m, cls) {                        // a ring that empties over the week
     var f = Math.max(0, Math.min(1, lentLeft(m) / LEND_MS)), r = 6, c = 2 * Math.PI * r, s = svgEl('svg', { viewBox: '0 0 16 16', 'aria-hidden': 'true' });
@@ -193,8 +193,8 @@
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
-      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A kind of eye that has gone back' : 'A kind of eye not yet met');
-      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A creature you’ve already viewed the world as' : 'A creature you haven’t met yet');
+      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when This creature’s view has disappeared
       if (met[key]) { f = Math.max(.02, lentLeft(lm) / LEND_MS); g.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 11, 'class': 'loan', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 12 12)' })); }
       b.appendChild(g);                                    // the outer ring is the week, emptying
       if (met[key]) b.addEventListener('click', function () { lookAgain(latestOf(key)); });
@@ -208,7 +208,7 @@
       // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
       // and shown as a ring with the days left
       var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
-      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'named by this app' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : 'on your word', lentSays(m)].join(' · ')));
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'named by this app' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : '', lentSays(m)].filter(Boolean).join(' · ')));
       tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
       if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);

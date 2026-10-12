@@ -38,7 +38,7 @@ const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'na
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
 const about = (page) => page.evaluate(() => window.__seenBack.rec.about());
-const st = (page) => page.evaluate(() => { const b = window.__seenBack; return { screen: b.S.screen, eyes: b.S.eyes, named: b.S.named, claim: !document.getElementById('claim').hidden }; });
+const st = (page) => page.evaluate(() => { const b = window.__seenBack; return { screen: b.S.screen, eyes: b.S.eyes, named: b.S.named, claim: !document.getElementById('claim').hidden, notice: document.getElementById('notice').hidden ? '' : document.getElementById('noticeText').textContent }; });
 // The camera refused. In macOS WebKit the init script's refusal did not take: Begin waited on a getUserMedia that never answered (no
 // prompt can appear there), so every case stopped at #askAnimal (runs engines/12 and 15). So the refusal is also defined on the
 // prototype, and begin() sets it again in the loaded page before it taps.
@@ -73,7 +73,7 @@ async function meet(page, name) {
   }
   const n0 = await page.evaluate(() => window.__seenBack.diag().length ? window.__seenBack.diag()[window.__seenBack.diag().length - 1].at : 0);
   await page.locator('#inAnimalPick').setInputFiles(photo(name));
-  await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden; }, null, { timeout: 60000 });
+  await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden || !document.getElementById('notice').hidden; }, null, { timeout: 60000 });
   await page.waitForTimeout(150);
   const s = await st(page);
   s.shown = await text(page, 'rvName'); s.sci = await text(page, 'rvSci'); s.sub = s.claim ? await text(page, 'claimSub') : '';
@@ -165,9 +165,9 @@ async function meet(page, name) {
       && r.afterOffer.eyes === 'insect' && r.afterOffer.named.common === 'Monarch' && r.afterOffer.named.by === 'you' && /^Monarch\|Danaus plexippus\|you\|insect/.test(r.afterOfferRecord[0])
       && r.dots.eyes === 'frog' && r.dots.shown === 'frog or toad' && !r.dotsOffersShown
       && r.rings.eyes === 'reptile' && r.rings.shown === anole
-      && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'a person'
-      && r.wall.claim && !r.wall.eyes && /^Nothing alive was found in that photo\. So you tell it\./.test(r.wall.sub)
-      && /^Ardea herodias\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.infoSub) && r.notRightIsThere
+      && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'a human'
+      && !r.wall.claim && !r.wall.eyes && r.wall.notice === 'We can’t find a creature in your photo. Try again.'
+      && r.infoSub === 'Ardea herodias' && r.notRightIsThere
       && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| .* on your word/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
@@ -181,12 +181,12 @@ async function meet(page, name) {
     await page.locator('#btnBegin').tap(); await page.waitForSelector('#barFinder', { state: 'visible', timeout: 10000 }); await page.waitForTimeout(700);
     const w0 = await page.evaluate(() => window.__seenBack.state().writes);
     await page.locator('#btnShutter').tap();
-    await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden; }, null, { timeout: 30000 });
+    await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden || !document.getElementById('notice').hidden; }, null, { timeout: 30000 });
     r.state = await st(page); r.sub = r.state.claim ? await text(page, 'claimSub') : ''; r.last = await page.evaluate(() => { const x = window.__seenBack.rec.about().last; return x && { kind: x.kind, from: x.from, ms: x.ms }; });
     if (r.state.claim) await page.locator('#claimBack').tap(); else await page.waitForTimeout(3500);
     await page.waitForTimeout(600);
     r.after = await st(page); r.framesSince = (await page.evaluate(() => window.__seenBack.state().writes)) - w0; r.glError = await page.evaluate(() => window.__seenBack.state().err); r.errors = errors;
-    done('camera', r, !!r.last && /^\d+x\d+$/.test(r.last.from) && (r.state.claim ? /^Nothing alive was found/.test(r.sub) : !!r.state.eyes) && r.glError === 0 && !errors.length);
+    done('camera', r, !!r.last && /^\d+x\d+$/.test(r.last.from) && (r.state.notice ? /^We can’t find a creature/.test(r.state.notice) : !!r.state.eyes) && r.glError === 0 && !errors.length);
     await ctx.close();
   });
 
@@ -261,10 +261,10 @@ async function meet(page, name) {
     r.errors = errors;
     const tail = '', b = r.byHand;
     done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great blue heron' && before === 1
-      && r.odd.claim && !r.odd.eyes && r.odd.sub === 'We’re not sure what that species is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
+      && r.odd.claim && !r.odd.eyes && r.odd.sub === 'We’re not sure what kind of creature that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
       && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'Is it one of these?' && r.sheet.kindsShown
       && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? sentence(w.offers[i]) + ' (' + r.sheet.last.offerSci[i] + ')' : sentence(w.offers[i]))) && new Set(r.sheet.offers).size === r.sheet.offers.length
-      && r.sameName.join() === 'Giant blue sage,Red-spotted admiral (Limenitis astyanax),Red-spotted admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species.' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
+      && r.sameName.join() === 'Giant blue sage,Red-spotted admiral (Limenitis astyanax),Red-spotted admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species:' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
       && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === ''
       && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
@@ -290,11 +290,11 @@ async function meet(page, name) {
       await ctx.close();
     }
     { // a rule this build does not know is refused in words, and so is a bias file cut short
-      const tail = ' So you tell it.';
+      const tail = ' Tell us what’s there.';
       const a = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.unknown-rule.json'); await begin(a.page); r.unknownRule = (await meet(a.page, 'heron.png')).sub; r.unknownRuleWhy = (await about(a.page)).fail; await a.ctx.close();
       await ctl('reset=1'); await ctl('cut=' + encodeURIComponent('species\\.bias'));
       const b = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await begin(b.page); r.biasCutShort = (await meet(b.page, 'heron.png')).sub; r.biasCutShortWhy = (await about(b.page)).fail; await b.ctx.close(); await ctl('reset=1');
-      same = same && r.unknownRule === 'This app’s files are out of date.' + tail && r.biasCutShort === 'A download arrived damaged.' + tail;
+      same = same && r.unknownRule === 'This app’s files are out of date. Try downloading the latest version.' + tail && r.biasCutShort === 'This app’s download is damaged. Try redownloading it.' + tail;
     }
     const t = expect.trained;
     done('trained', r, same && r.about.model === 'standin-trained' && r.about.rule === 'mix' && r.about.trained === true
@@ -349,10 +349,10 @@ async function meet(page, name) {
       new MutationObserver(() => { const t = el.textContent; if (t && window.__lines[window.__lines.length - 1] !== t) window.__lines.push(t); }).observe(el, { childList: true, characterData: true, subtree: true });
     });
     await page.locator('#inAnimalPick').setInputFiles(photo('heron.png'));
-    await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden; }, null, { timeout: 60000 });
+    await page.waitForFunction(() => { const b = window.__seenBack; return !!b.S.eyes || !document.getElementById('claim').hidden || !document.getElementById('notice').hidden; }, null, { timeout: 60000 });
     const lines = await page.evaluate(() => window.__lines);
     r.lines = lines.length > 12 ? lines.slice(0, 4).concat(['... ' + (lines.length - 8) + ' more ...'], lines.slice(-4)) : lines; r.end = await st(page); r.shown = await text(page, 'rvName'); r.waited = await page.evaluate(() => window.__seenBack.rec.about().last.ms); r.errors = errors;
-    const nums = lines.map((l) => /^Getting ready… (\d+) of (\d+) MB$/.exec(l)).filter(Boolean);
+    const nums = lines.map((l) => /^Downloading… (\d+) of (\d+) MB$/.exec(l)).filter(Boolean);
     done('progress', r, r.stateAtPhoto !== 'ready' && nums.length >= 3 && nums.every((n, i) => +n[1] <= +n[2] && (!i || +n[1] >= +nums[i - 1][1])) && +nums[nums.length - 1][2] === 15 && r.end.eyes === 'wader' && r.shown === 'Great blue heron' && !errors.length);
     await ctl('reset=1'); await ctx.close();
   });
@@ -376,8 +376,8 @@ async function meet(page, name) {
     r.after = await st(page); r.record = await page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.by + '|' + m.key));
     r.next = await meet(page, 'stripes.png'); r.buttonNext = await page.locator('#barType').isVisible();   // the next photo is recognized, with no button
     r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'type-instead').length); r.errors = errors;
-    done('typeit', r, !r.buttonBefore && /^Getting ready… \d+ of 15 MB$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
-      && r.sub === 'The download carries on meanwhile.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
+    done('typeit', r, !r.buttonBefore && /^Downloading… \d+ of 15 MB$/.test(r.line) && r.button === 'Type it instead' && r.buttonUnderLine
+      && r.sub === 'Your download is finishing in the background.' && r.stateAtTap === 'loading' && !r.buttonWhileAsking
       && r.typed.eyes === 'wader' && r.typed.named.by === 'you' && r.typed.named.common === 'heron' && r.after.eyes === 'wader' && r.after.named.by === 'you' && r.after.screen === 'askView' && r.record.length === 1 && r.record[0] === 'heron|you|wader'
       && r.next.eyes === 'insect' && !r.buttonNext && r.trace === 1 && !errors.length);
     await ctl('reset=1'); await ctx.close();
@@ -459,18 +459,18 @@ async function meet(page, name) {
       r.about = await page.evaluate(() => ({ shown: !document.getElementById('svcBox').hidden, value: document.getElementById('svcChoice').value, options: [...document.querySelectorAll('#svcChoice option')].map((o) => o.textContent), label: document.querySelector('#svcBox label').textContent }));
       await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'service-about.png'), scale: 'css' }).catch(() => {});
       await shut(page);
-      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus. Named by the full database on a server, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
-        && r.offers.join() === 'Monarch,Queen,Gulf fritillary,Viceroy,Common buckeye' && /^Monarch \| Danaus plexippus .* named by the full database on a server · its eyes are yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
+      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus'
+        && r.offers.join() === 'Monarch,Queen,Gulf fritillary,Viceroy,Common buckeye' && /^Monarch \| Danaus plexippus .* named by the full database on a server · This creature’s view is yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
       // from now on it is asked without a prompt. It sees another kind of creature and is sure: the change is offered in one line, and not made
       fake.set({ answer: 'egret', delay: 300 }); let n = fake.calls().length;
-      await meet(page, 'dots.png'); await page.waitForFunction(() => /Change eyes\?$/.test(document.getElementById('svcView').textContent), null, { timeout: 15000 });
+      await meet(page, 'dots.png'); await page.waitForFunction(() => /Change to this creature\?$/.test(document.getElementById('svcView').textContent), null, { timeout: 15000 });
       await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
       const before = await st(page);
       r.change = { line: await text(page, 'svcView'), eyesBefore: before.eyes, namedBefore: before.named.common + '|' + before.named.by, posts: fake.calls().length - n, meetings: (await recordRows(page)).length };
       await page.screenshot({ path: path.join(here, 'shots', 'service-change.png'), scale: 'css' }).catch(() => {});
       await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
       const after = await st(page); r.change.after = after.eyes + '|' + after.named.common + '|' + after.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
-      all('change', r.change.line === 'It looks like a Great egret, a wading bird. Change eyes?' && r.change.eyesBefore === 'frog' && r.change.namedBefore === 'frog or toad|page' && r.change.posts === 1
+      all('change', r.change.line === 'It looks like a Great egret, a wading bird. Change to this creature?' && r.change.eyesBefore === 'frog' && r.change.namedBefore === 'frog or toad|page' && r.change.posts === 1
         && r.change.after === 'wader|Great egret|service' && r.change.record[0] === 'Great egret|Ardea alba|service|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
       // another kind, but it is not sure enough: nothing changes, and its likeliest stay as offers
       fake.set({ answer: 'unsure' }); n = fake.calls().length;
@@ -538,21 +538,21 @@ async function meet(page, name) {
     }
     { // from the sheet that asks for a name there is a way to the full database: consent first, then its answer is taken as the name
       fake.reset(); fake.set({ answer: 'egret', delay: 300 }); const { ctx, page, errors } = await open(browser, Q + 'service.json'); await ready(page); await begin(page);
-      const s = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
-      r.fromSheet = { sub: s.sub, link: await text(page, 'claimAsk'), sentBefore: fake.calls().length };
+      const s = await meet(page, 'odd.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
+      r.fromSheet = { sub: await text(page, 'claimSub'), link: await text(page, 'claimAsk'), sentBefore: fake.calls().length };
       await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); r.fromSheet.askSub = await text(page, 'askSub'); r.fromSheet.sentAtSheet = fake.calls().length;
       await page.locator('#askNo').tap(); await page.waitForSelector('#claim', { state: 'visible', timeout: 4000 }); r.fromSheet.afterNo = (await st(page)).claim; r.fromSheet.sentAfterNo = fake.calls().length;
       await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
       await byService(page); await page.waitForTimeout(200);
       const x = await st(page); r.fromSheet.after = x.eyes + '|' + x.named.common + '|' + x.named.by; r.fromSheet.record = await recordRows(page); r.fromSheet.sent = fake.calls().length;
       // it cannot name it: back to the sheet, with its guesses as offers, and no second link
-      fake.set({ answer: 'faint' }); const s2 = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
-      await page.waitForFunction(() => /could not name it/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 15000 }); await page.waitForTimeout(400);
+      fake.set({ answer: 'faint' }); const s2 = await meet(page, 'odd.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await page.locator('#claimAsk').tap(); await page.waitForSelector('#ask', { state: 'visible' }); await page.locator('#askYes').tap();
+      await page.waitForFunction(() => /can’t ID this photo/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 15000 }); await page.waitForTimeout(400);
       r.fromSheet.faint = { sub: await text(page, 'claimSub'), offers: await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)), linkAgain: await page.locator('#claimAskRow').isVisible(), eyes: (await st(page)).eyes };
       r.fromSheet.errors = errors;
-      all('fromSheet', /^Nothing alive was found/.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /made smaller, would be sent to a server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
+      all('fromSheet', /^We’re not sure what kind of creature that is\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /temporarily sent to this project’s server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
         && r.fromSheet.after === 'wader|Great egret|service' && r.fromSheet.record[0] === 'Great egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
-        && r.fromSheet.faint.sub === 'The full database could not name it.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
+        && r.fromSheet.faint.sub === 'The full database can’t ID this photo.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
       await ctx.close();
     }
     fake.reset();
@@ -621,13 +621,13 @@ async function meet(page, name) {
       r.aboutAbsent = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), halt: await page.locator('#bigHalt').isVisible(), ticked: await page.locator('#bigAsk').isChecked(), tick: (await page.locator('#bigAskRow').textContent()).trim() };
       await page.screenshot({ path: path.join(here, 'shots', 'large-about.png'), scale: 'css' }).catch(() => {});
       await page.evaluate(() => { const b = document.getElementById('bigAsk'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); }); r.aboutAbsent.choiceAfter = (await bigNow(page)).choice; r.aboutAbsent.parts = (await partsAsked()).length; r.consentErrors = errors;
-      all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'insect' && r.offer.line === 'Download the full database of specific species names?' && r.offer.partsAsked === 0);
-      all('sheet', r.sheet.title === 'Get the full database?' && r.sheet.sub === 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.'
-        && r.sheet.net === '' && r.sheet.yes === 'Download' && r.sheet.no === 'Later' && r.sheet.never === 'Do not ask again' && /^You can always delete the downloaded database under Encounters\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
+      all('offer', before === 0 && s.eyes === 'insect' && s.shown === 'insect' && r.offer.line === 'Download the full database of species?' && r.offer.partsAsked === 0);
+      all('sheet', r.sheet.title === 'Get the full database?' && r.sheet.sub === 'The full database of species is free to download and provides more accuracy in IDing.'
+        && r.sheet.net === '' && r.sheet.yes === 'Download' && r.sheet.no === 'Later' && r.sheet.never === 'Do not ask again' && /^You can always delete your download under your Encounters\.$/.test(r.sheet.note) && !r.sheet.stopShown && r.sheet.overflow <= 0);
       all('notNow', r.notNow.line === '' && r.notNow.choice === '' && r.notNow.parts === 0 && r.notNow.by === 'page');
-      all('net', r.net.save === 'This ' + d + ' is set to save data, and this download is about ' + MB + ' MB.' && r.net.metered === 'This connection reports itself as metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'This connection reports itself as slow, and this download is about ' + MB + ' MB.');
+      all('net', r.net.save === 'Your device is in data saver mode, and this download is about ' + MB + ' MB.' && r.net.metered === 'Your device’s connection is metered, and this download is about ' + MB + ' MB.' && r.net.slow === 'Your device’s connection is slow, and this download is about ' + MB + ' MB.');
       all('never', r.never.choice === 'no' && r.never.line === '');
-      all('aboutAbsent', r.aboutAbsent.state === 'You can download the full database of species to your ' + d + '. It’s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it’s fairly large and may slow down this app.' && r.aboutAbsent.get && !r.aboutAbsent.del && !r.aboutAbsent.halt && r.aboutAbsent.ticked && r.aboutAbsent.tick === 'Do not offer the full database' && r.aboutAbsent.choiceAfter === '' && r.aboutAbsent.parts === 0 && !errors.length);
+      all('aboutAbsent', r.aboutAbsent.state === 'The full database of species is free to download and provides more accuracy in IDing.' && r.aboutAbsent.get && !r.aboutAbsent.del && !r.aboutAbsent.halt && r.aboutAbsent.ticked && r.aboutAbsent.tick === 'Do not offer the full database' && r.aboutAbsent.choiceAfter === '' && r.aboutAbsent.parts === 0 && !errors.length);
       await ctx.close();
     }
     { // the download: progress, each part kept as it arrives; a reload mid-way, after which it carries on by itself and fetches no kept part again
@@ -663,17 +663,17 @@ async function meet(page, name) {
       await shut(page);
       all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely… / The full database says Monarch.'
         && r.named.line === 'The full database says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
-        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus. Named on this device by the full database, which can be wrong. Chosen among species recorded around Gainesville, Florida.'
-        && r.named.offers.join() === E('stripes.png').five.map(sentence).join() && /^Monarch \| Danaus plexippus .* named on this device by the full database · its eyes are yours for a week$/.test(r.named.rows[0]));
-      all('aboutKept', r.aboutKept.state === 'The full database is on this ' + d + ' (' + MB + ' MB). It names the species here, and photos are not sent anywhere.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
+        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus'
+        && r.named.offers.join() === E('stripes.png').five.map(sentence).join() && /^Monarch \| Danaus plexippus .* named on this device by the full database · This creature’s view is yours for a week$/.test(r.named.rows[0]));
+      all('aboutKept', r.aboutKept.state === 'You currently have the full database of species downloaded.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
       // another kind of creature, and it is sure: the change is offered in one line, and not made
-      const s2 = await meet(page, 'dots.png'); await lineIs(page, /Change eyes\?$/); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+      const s2 = await meet(page, 'dots.png'); await lineIs(page, /Change to this creature\?$/); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
       const b2 = await st(page);
       r.change = { atOnce: s2.eyes + '|' + s2.shown, line: await text(page, 'svcView'), before: b2.eyes + '|' + b2.named.common + '|' + b2.named.by, meetings: (await recordRows(page)).length };
       await page.screenshot({ path: path.join(here, 'shots', 'large-change.png'), scale: 'css' }).catch(() => {});
       await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
       const a2 = await st(page); r.change.after = a2.eyes + '|' + a2.named.common + '|' + a2.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
-      all('change', r.change.atOnce === 'frog|frog or toad' && r.change.line === 'It looks like a Great egret, a wading bird. Change eyes?' && r.change.before === 'frog|frog or toad|page'
+      all('change', r.change.atOnce === 'frog|frog or toad' && r.change.line === 'It looks like a Great egret, a wading bird. Change to this creature?' && r.change.before === 'frog|frog or toad|page'
         && r.change.after === 'wader|Great egret|device-large' && r.change.record[0] === 'Great egret|Ardea alba|device-large|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
       // it is not sure: nothing changes; a person: it is not asked; a species the small model named: it has its say all the same
       let at = (await bigNow(page)).last.at;
@@ -692,13 +692,13 @@ async function meet(page, name) {
       await page.evaluate(() => window.__seenBack.big.test.idle(60000));
       all('rest', r.rest.state === 'idle' && r.rest.after === 'Monarch' && r.rest.started);
       // from the sheet that asks for a name: the small model found nothing alive; the larger one is asked, is not sure, and offers its three likeliest kinds
-      const s6 = await meet(page, 'wall.png'); await page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 });
-      r.fromSheet = { sub: s6.sub, link: await text(page, 'claimAsk') }; await page.locator('#claimAsk').tap();
-      await page.waitForFunction(() => /full database is not sure/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 20000 }); await page.waitForTimeout(300);
+      const s6 = await meet(page, 'wall.png');
+      r.fromSheet = { first: s6.notice };
+      await page.waitForFunction(() => /not sure what kind of creature/.test(document.getElementById('claimSub').textContent) && !document.getElementById('claim').hidden, null, { timeout: 20000 }); await page.waitForTimeout(300);
       r.fromSheet.after = await page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: [...document.querySelectorAll('#claimKinds button')].map((b) => b.textContent), link: !document.getElementById('claimAskRow').hidden, eyes: window.__seenBack.S.eyes }));
       r.fromSheet.reference = E('wall.png'); await page.locator('#claimKinds button').first().tap(); await page.waitForTimeout(300); const a6 = await st(page); r.fromSheet.chosen = a6.eyes + '|' + a6.named.by;
-      all('fromSheet', /^Nothing alive was found in that photo\. So you tell it\./.test(r.fromSheet.sub) && r.fromSheet.link === 'Look more closely, with the full database on this ' + d
-        && r.fromSheet.after.sub === 'The full database is not sure what that is.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
+      all('fromSheet', !r.fromSheet.first
+        && r.fromSheet.after.sub === 'We’re not sure what kind of creature that is.' && r.fromSheet.after.kinds.length === 3 && !r.fromSheet.after.link && !r.fromSheet.after.eyes
         && r.fromSheet.chosen === E('wall.png').kindOffers[0] + '|you');
       await page.close();
       // the small model is not sure, and the larger one is on the device: it is asked before the person is, and its answer is taken
@@ -714,7 +714,7 @@ async function meet(page, name) {
       await bigHave(page, 'absent', 15000); await page.waitForTimeout(300);
       r.del.after = { kept: await keptBig(page), state: await text(page, 'bigState'), choice: (await bigNow(page)).choice, running: (await bigNow(page)).running, ticked: await page.locator('#bigAsk').isChecked() };
       await shut(page); const s8 = await meet(page, 'heron.png'); await page.waitForTimeout(700); r.del.next = { by: (await st(page)).named.by, line: await svcLine(page), parts: (await partsAsked()).length };
-      all('delete', r.del.asks === 'Delete the full database from this ' + d + '? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
+      all('delete', r.del.asks === 'Delete the full database? It is ' + MB + ' MB, and would have to be downloaded again.' && r.del.keep && r.del.keptWhileAsking >= 4 && r.del.keptAfterKeep === 'kept'
         && r.del.after.kept.length === 0 && /^You can download the full database of species to your /.test(r.del.after.state) && r.del.after.choice === 'no' && !r.del.after.running && r.del.after.ticked && r.del.next.by === 'page' && r.del.next.line === '' && r.del.next.parts === 0);
       await ctx.close();
     }
@@ -733,25 +733,25 @@ async function meet(page, name) {
       r.stop.rest = { parts: await partsAsked(), named: (await st(page)).named.common, errors };
       all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Downloading the full database… \d+ of \d+ MB$/.test(r.stop.net)
         && x.have === 'partial' && x.choice === '' && /^The download was stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
-        && /^The full database is partly on this (phone|computer): \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB are here already\.$/.test(r.stop.sheet.net)
+        && /^The full database is partly downloaded: \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB have been downloaded\.$/.test(r.stop.sheet.net)
         && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
       // a larger slot may carry a kinds head too (the same parts, kept already): it names as before, and it can say that nothing alive is there
       if (BIG_PORT === 8788) {
         await page.close(); const k = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + BIG + '/manifest.kinds.json', null, ctx); await ready(k.page); await begin(k.page); await bctl('reset=1');
         const h = await meet(k.page, 'heron.png'); await byLarge(k.page); const kb = await bigNow(k.page);
         r.kindsHead = { model: await k.page.evaluate(() => window.__seenBack.big.about().model), heron: (await st(k.page)).named.common + '|' + (await st(k.page)).named.by, parts: (await partsAsked()).length, reference: expect.big_kinds['heron.png'][month].named };
-        await meet(k.page, 'wall.png'); await k.page.waitForSelector('#claimAskRow', { state: 'visible', timeout: 6000 }); await k.page.locator('#claimAsk').tap();
-        await k.page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !document.getElementById('claim').hidden; }, kb.last.at, { timeout: 20000 }); await k.page.waitForTimeout(300);
-        r.kindsHead.wall = await k.page.evaluate(() => ({ sub: document.getElementById('claimSub').textContent, kinds: document.querySelectorAll('#claimKinds button').length, link: !document.getElementById('claimAskRow').hidden, last: window.__seenBack.big.about().last.kind, eyes: window.__seenBack.S.eyes }));
+        await meet(k.page, 'wall.png');
+        await k.page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !document.getElementById('notice').hidden; }, kb.last.at, { timeout: 20000 }); await k.page.waitForTimeout(300);
+        r.kindsHead.wall = await k.page.evaluate(() => ({ sub: document.getElementById('noticeText').textContent, kinds: document.querySelectorAll('#claimKinds button').length, link: !document.getElementById('claimAskRow').hidden, last: window.__seenBack.big.about().last.kind, eyes: window.__seenBack.S.eyes }));
         r.kindsHead.errors = k.errors;
         all('kindsHead', r.kindsHead.model === 'standin-big-kinds' && r.kindsHead.heron === 'Great blue heron|device-large' && r.kindsHead.parts === 0 && r.kindsHead.wall.last === 'none' && !r.kindsHead.wall.eyes
-          && r.kindsHead.wall.sub === 'Nothing alive was found in that photo. So you tell it.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
+          && r.kindsHead.wall.sub === 'We can’t find a creature in your photo. Try again.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
       }
       await ctx.close();
     }
     // failures, each in words on the line, with a way on where there is one; what the small model said stands throughout
     r.failures = {};
-    for (const [name, rule, wanted, keptWanted] of [['missingPart', 'lose=' + encodeURIComponent('part01'), 'The full database’s files are missing. Try again?', 1], ['damagedPart', 'damage=' + encodeURIComponent('part02'), 'The full database’s file arrived damaged. Try again?', 2], ['noNetwork', 'drop=' + encodeURIComponent('part'), 'The full database could not be downloaded. Try again?', 0]]) {
+    for (const [name, rule, wanted, keptWanted] of [['missingPart', 'lose=' + encodeURIComponent('part01'), 'The full database’s files are missing. Try again?', 1], ['damagedPart', 'damage=' + encodeURIComponent('part02'), 'The full database’s download is damaged. Try again?', 2], ['noNetwork', 'drop=' + encodeURIComponent('part'), 'The full database’s download was interrupted. Try again?', 0]]) {
       await ctl('reset=1'); await bctl('reset=1'); await bctl(rule);
       const { ctx, page, errors } = await open(browser, Q); await ready(page); await begin(page);
       await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /Try again\?$/, 30000);
@@ -763,23 +763,23 @@ async function meet(page, name) {
     }
     { // every part passes its own checksum and the whole does not: nothing of it is kept
       await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot.replace(/\/manifest\.port\.json$/, '') + (BIG_PORT === 8788 ? '/manifest.bad-whole.json' : '/manifest.port.bad-whole.json')); await ready(page); await begin(page);
-      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /arrived damaged/, 30000); const b = await bigNow(page);
+      await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /download is damaged/, 30000); const b = await bigNow(page);
       r.failures.badWhole = { line: await svcLine(page), have: b.have, why: b.getFail, kept: (await keptBig(page)).filter((k) => /^part|^whole/.test(k)).length, by: (await st(page)).named.by };
-      all('badWhole', r.failures.badWhole.line === 'The full database’s file arrived damaged. Try again?' && b.have === 'absent' && /sha256/.test(b.getFail) && r.failures.badWhole.kept === 0 && r.failures.badWhole.by === 'page'); await ctx.close();
+      all('badWhole', r.failures.badWhole.line === 'The full database’s download is damaged. Try again?' && b.have === 'absent' && /sha256/.test(b.getFail) && r.failures.badWhole.kept === 0 && r.failures.badWhole.by === 'page'); await ctx.close();
     }
     { // the browser says there is no room: nothing is fetched, and there is nothing to try again
       await ctl('reset=1'); await bctl('reset=1'); const { ctx, page } = await open(browser, Q); await ready(page); await begin(page);
       await page.evaluate(() => { navigator.storage.estimate = () => Promise.resolve({ quota: 1000, usage: 900 }); });
       await meet(page, 'stripes.png'); await offered(page); await getIt(page); await lineIs(page, /not enough room/, 15000); const b = await bigNow(page);
       r.failures.noRoom = { line: await svcLine(page), tappable: await page.evaluate(() => !document.getElementById('svcView').disabled), have: b.have, choice: b.choice, parts: (await partsAsked()).length };
-      all('noRoom', r.failures.noRoom.line === 'There is not enough room on this device for the full database.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
+      all('noRoom', r.failures.noRoom.line === 'There is not enough storage on this device for the full database.' && !r.failures.noRoom.tappable && b.have === 'absent' && b.choice === '' && r.failures.noRoom.parts === 0); await ctx.close();
     }
     { // where there is a server too, the device comes first; "Do not ask again" for the device leaves the server to be offered
       await ctl('reset=1'); await bctl('reset=1'); const Qs = (await svcFiles()) + 'service.json&big=' + slot; const { ctx, page } = await open(browser, Qs); await ready(page); await begin(page);
       await meet(page, 'stripes.png'); r.both = { first: await offered(page), sent: fake.calls().length };
       await page.locator('#svcView').tap(); await page.waitForSelector('#big', { state: 'visible' }); await page.evaluate(() => document.getElementById('bigNever').click()); await page.waitForTimeout(200);
       await meet(page, 'stripes.png'); r.both.then = await offered(page); r.both.sentAfter = fake.calls().length;
-      all('both', r.both.first === 'Download the full database of specific species names?' && r.both.then === 'The full database on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
+      all('both', r.both.first === 'Download the full database of species?' && r.both.then === 'The full database on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
     }
     await bctl('reset=1'); await ctl('reset=1');
     done('large', r, ok);
@@ -801,7 +801,7 @@ async function meet(page, name) {
     { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // and where there is no kept copy at all, the reason says so
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.none = (await meet(page, 'heron.png')).sub; r.noneWhy = (await about(page)).fail; await ctl('reset=1'); await ctx.close(); }
     done('keptcopy', r, r.plainLookupFinds === false && r.withVary === 'ready' && r.heron === 'Great blue heron' && r.hanging === 'ready in under six seconds' && !r.errors.length
-      && /^The download didn’t finish\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
+      && /^This app’s download is incomplete\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
     await ctl('reset=1');
   });
 
@@ -830,10 +830,10 @@ async function meet(page, name) {
     await about(); r.tickedAfterReload = await page.locator('#awayBox').isChecked(); await page.evaluate(() => { const b = document.getElementById('awayBox'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); }); await shut(page);
     fake.reset(); r.nearAgain = (await meet(page, 'heron.png')).shown; r.nearAgainPosts = fake.calls().length;
     r.locationAsked = await page.evaluate(() => window.__geo); r.errors = errors;
-    done('away', r, r.near.heron === 'Great blue heron' && /^Ardea herodias\. Chosen among species recorded around Gainesville, Florida\.$/.test(r.near.info)
+    done('away', r, r.near.heron === 'Great blue heron' && r.near.info === 'Ardea herodias'
       && r.switch.label === 'I am not near Gainesville' && /^Species are named from a list of those recorded around Gainesville, Florida\./.test(r.switch.note) && !r.switch.tickedAtFirst
       && r.away.atOnce === 'wader|wading bird' && r.away.top === null && r.away.sent.join() === '"" month ' + (new Date().getMonth() + 1) && r.away.named === 'Great egret|service'
-      && r.away.info === 'Ardea alba. Named by the full database on a server, which can be wrong.' && /named by the full database on a server · its eyes are yours for a week$/.test(r.away.rows[0])
+      && r.away.info === 'Ardea alba' && /named by the full database on a server · This creature’s view is yours for a week$/.test(r.away.rows[0])
       && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'Great blue heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
     await ctx.close();
   });
@@ -897,9 +897,9 @@ async function meet(page, name) {
     { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // the page arrives, and then the network is gone for everything the recognizer needs
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.offlineFirst = await meet(page, 'heron.png'); await ctl('reset=1'); await ctx.close(); }
     { const { ctx, page } = await open(browser, '&nosw=1&rec=off'); await begin(page); r.off = (await meet(page, 'heron.png')); await ctx.close(); }
-    const tail = ' So you tell it.';
-    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t identify photos yet.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing.' + tail && r.recovered === 'Great blue heron'
-      && r.offlineFirst.claim && r.offlineFirst.sub === 'The download didn’t finish.' + tail && r.off.claim && r.off.sub === 'Identifying is switched off.' + tail);
+    const tail = ' Tell us what’s there.';
+    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t ID photos yet. Try redownloading it.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing. Try redownloading it.' + tail && r.recovered === 'Great blue heron'
+      && r.offlineFirst.claim && r.offlineFirst.sub === 'This app’s download is incomplete. Try redownloading it.' + tail && r.off.claim && r.off.sub === 'IDing is turned off.' + tail);
   });
 
   if (want.includes('damaged')) await section('damaged', async () => {  // the model's bytes changed on the way; the model cut short; a kept copy that is not a model
@@ -918,7 +918,7 @@ async function meet(page, name) {
       await page.reload();     // the page tries the kept copy by itself once it is idle, finds it is no model, and throws it away; the next photo fetches a good one
       await page.waitForFunction(() => window.__seenBack.rec.about().state === 'failed', null, { timeout: 20000 }); r.keptBadWhy = (await about(page)).fail;
       await begin(page); r.keptBadThenFetchedAgain = (await meet(page, 'heron.png')).shown; await ctx.close(); }
-    const tail = ' So you tell it.', sub = 'A download arrived damaged.' + tail;
+    const tail = ' Tell us what’s there.', sub = 'This app’s download is damaged. Try redownloading it.' + tail;
     done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'Great blue heron');
     await ctl('reset=1');
   });
@@ -935,9 +935,9 @@ async function meet(page, name) {
     await page.locator('#claimBack').tap(); await page.evaluate(() => window.__seenBack.rec.test.watch(45000));
     r.afterHang = (await meet(page, 'stripes.png')).eyes;
     r.pictureStillDrawn = await page.evaluate(() => window.__seenBack.state().err === 0);
-    const tail = ' So you tell it.';
-    done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'Something stopped working.' + tail && r.afterThrow === 'Great blue heron'
-      && r.hung.claim && r.hung.sub === 'That took too long.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
+    const tail = ' Tell us what’s there.';
+    done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'This app’s IDing has crashed. Check that your device has enough memory.' + tail && r.afterThrow === 'Great blue heron'
+      && r.hung.claim && r.hung.sub === 'The camera timed out. Try again.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
     await ctx.close();
   });
 

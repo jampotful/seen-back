@@ -114,7 +114,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.goto(HTTP); await page.waitForTimeout(700);
     await page.locator('#introRec').tap(); await page.waitForSelector('#record', { state: 'visible' }); await page.waitForTimeout(250);
     const r = { sub: await text(page, 'recordSub') };
-    r.eyes = await page.evaluate(() => [...document.querySelectorAll('#eyeStrip .eye')].map(b => (b.disabled ? 0 : 1) + (b.querySelector('.pupil') ? 'p' : '-') + ':' + b.getAttribute('aria-label')).filter(x => !/not yet met/.test(x)));
+    r.eyes = await page.evaluate(() => [...document.querySelectorAll('#eyeStrip .eye')].map(b => (b.disabled ? 0 : 1) + (b.querySelector('.pupil') ? 'p' : '-') + ':' + b.getAttribute('aria-label')).filter(x => !/haven’t met yet/.test(x)));
     r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map(li => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent + ' | look ' + !!li.querySelector('.ico')));
     r.rings = await page.evaluate(() => document.querySelectorAll('#eyeStrip .eye .loan').length); r.days = await page.evaluate(() => [...document.querySelectorAll('#metList .days')].map((d) => d.textContent));
     await shot(page, 'L1-lent');
@@ -123,8 +123,8 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.locator('#metList li .ico').first().tap(); await page.waitForTimeout(1200); r.lentOpens = (await st(page)).eyes;
     r.errors = errors; out.lent = r;
     const ok = r.sub === '' && r.rings === 1 && r.days.join() === '1d'
-      && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A kind of eye that has gone back$/.test(e))
-      && /its eyes go back within a day \| look true$/.test(r.rows[0]) && /its eyes have gone back \| look false$/.test(r.rows[1]) && /its eyes have gone back \| look false$/.test(r.rows[2])
+      && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A creature you’ve already viewed the world as$/.test(e))
+      && /This is the last day with this creature’s view \| look true$/.test(r.rows[0]) && /This creature’s view has disappeared \| look false$/.test(r.rows[1]) && /This creature’s view has disappeared \| look false$/.test(r.rows[2])
       && r.goneStays && r.lentOpens === 'wader' && !errors.length;
     await ctx.close();
     if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('lent: the week of lending is not as it should be'); }
@@ -142,7 +142,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.errors = errors; out.typed = r; await ctx.close();
     const ok = /^Xqzzvk isn’t a creature we know\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
       && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('Monarch')
-      && /^Wolf spider isn’t yet a creature this app can view the world as\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
+      && /^Regards doesn’t have the ability to view the world as a wolf spider right now\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
       && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '') && !errors.length;
     if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('typed: a typed name is not handled as it should be'); }
   }
@@ -240,8 +240,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.evaluate(() => { window.__answer = { found: false }; });
     await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible' });
     await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'portrait.jpg'));
-    await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); r.nothingAlive = await text(page, 'claimSub');
-    await page.locator('#claimBack').tap(); await page.waitForTimeout(200); r.afterDismiss = (await st(page)).screen;
+    await page.waitForSelector('#notice', { state: 'visible', timeout: 8000 }); r.nothingAlive = await text(page, 'noticeText');
+    if (!/^We can’t find a creature in your photo\. Try again\.$/.test(r.nothingAlive)) throw new Error('nothing alive: ' + r.nothingAlive);
+    await page.locator('#noticeOk').tap(); await page.waitForTimeout(200); r.afterDismiss = (await st(page)).screen;
     r.overflow = await overflow(page); r.errors = errors; out.viewer = r; await ctx.close();
   }
 

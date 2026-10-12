@@ -27,7 +27,7 @@
   // A line that is waiting carries a bar under it: one that slides while the wait has no known end (the line holds an ellipsis),
   // and one that fills where the line says how far it has come ("12 of 310 MB").
   function waitMark(el, text) {
-    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026/.test(t || '');
+    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026|\.\.\./.test(t || '');
     el.classList.toggle('wait', on); el.classList.toggle('det', !!m);
     if (m) el.style.setProperty('--p', String(Math.max(0, Math.min(1, +m[1] / Math.max(1, +m[2]))))); else el.style.removeProperty('--p');
   }
@@ -228,7 +228,7 @@
   }
   function afterChange() {
     if (S.screen !== 'animal') return;
-    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That is a person. You have those eyes already.'
+    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That’s a human. You already see the world as one.'
       : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : '';
     msg(line, 6500);
   }

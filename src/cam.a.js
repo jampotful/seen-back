@@ -7,7 +7,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '18';
+  var BUILD = '19';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -23,90 +23,88 @@
   var SLOW = ' The picture is slowed to that ratio, then jumps to catch up. That rendering is this app’s invention.';
   var EYES = {
     cat: { chip: 'Cat', who: 'a cat', fov: 200, cpd: 8, topoA: 1, fall: 2.0, pupil: 'v', dof: 26, M: DEUTAN, gain: 1.7, sat: .8,
-      cue: 'What leaves focus smears up and down. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'About a fifth to a tenth of yours. The screen is blurred to what such an eye would keep of it at arm’s length.'],
-      ['m', 'Colour', 'Two cone types, near 450 and 555 nanometres. Reds fall toward olive and grey.'],
-      ['m', 'Pupil', 'A vertical slit, as in other ambush hunters. What is out of focus smears up and down.'],
-      ['m', 'Field', 'About 200 degrees to your 180. The camera holds a slice of it, and the edges are invented.'],
-      ['m', 'Dim light', 'Six to eight times your sensitivity. Shadows are lifted to suggest it.'],
-      ['i', 'Depth', 'A camera feed carries no distances. Near and far are guessed from height in the frame, and a tap sets the focus.'],
-      ['i', 'Where it is sharp', 'One central spot, entered from memory.'],
-      ['x', 'Movement', 'Cats are reported to miss very slow movement. Left out.']] },
+      cue: 'Out-of-focus things smear up and down. Tap to move the focus.', rows: [
+      ['m', 'Sharpness', 'A cat sees about a fifth to a tenth of the detail you do. We blur the picture to match.'],
+      ['m', 'Colour', 'Cats have two kinds of colour sensor in their eyes, and you have three. Reds look olive or grey to a cat.'],
+      ['m', 'Pupil', 'A cat’s pupil is a vertical slit, like those of many hunters that ambush their prey. It makes out-of-focus things smear up and down.'],
+      ['m', 'Field of view', 'A cat sees about 200 degrees around it, and you see about 180. Your camera captures less than that, so we fill in the edges ourselves.'],
+      ['m', 'Dim light', 'A cat needs six to eight times less light than you do to see. We brighten the shadows to show it.'],
+      ['i', 'Depth', 'A phone camera can’t measure distance. We guess that things lower in the picture are closer, and you can tap to set the focus.'],
+      ['i', 'Sharpest spot', 'We assume a cat sees most sharply in the centre of its view.']] },
     dog: { chip: 'Dog', who: 'a dog', fov: 240, cpd: 11, topoS: 1, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85,
       cue: 'Sharpest along the horizon. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'A quarter to a seventh of yours, blurred as that share of what this screen gives you.'],
-      ['m', 'Where it is sharp', 'A band along the horizon in long-nosed dogs, a single spot in short-nosed ones. The band is drawn.'],
-      ['i', 'Colour', 'Two cone types, entered from memory and drawn with a model of human two-cone vision.'],
-      ['i', 'Field, dim light and depth', 'Guesses. Near and far come from height in the frame.']] },
+      ['m', 'Sharpness', 'A dog sees about a quarter to a seventh of the detail you do. We blur the picture to match.'],
+      ['m', 'Sharpest spot', 'Long-nosed dogs see most sharply in a band along the horizon, and short-nosed dogs in a single spot. We show the band.'],
+      ['i', 'Colour', 'Dogs have two kinds of colour sensor in their eyes, and you have three. We show colours the way a person with only two kinds sees them.'],
+      ['i', 'Field of view, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
     squirrel: { chip: 'Squirrel', who: 'a squirrel', fov: 270, cpd: 6, topoS: 1, fall: 1.0, pupil: 'o', dof: 4, M: PROTAN, rate: .56,
       cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Colour', 'Two cone types, measured in ground squirrels near 437 and 518 nanometres.'],
-      ['g', 'Pace', 'Ground squirrels follow flicker to 108 a second, and you stop near 60.' + SLOW],
-      ['i', 'Field and sharpness', 'Guesses: eyes on the sides of the head, and coarser detail than yours.']] },
+      ['g', 'Colour', 'Ground squirrels have two kinds of colour sensor in their eyes, and you have three.'],
+      ['g', 'Speed', 'A ground squirrel’s eyes can follow a light flashing up to 108 times a second, and yours give up at about 60. Fast things look slower to it. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Field of view and sharpness', 'Our best guess is that eyes on the sides of the head give a wide view, with less detail than you see.']] },
     deer: { chip: 'Deer', who: 'a deer', fov: 310, cpd: 8, topoS: 1, fall: 2.2, pupil: 'h', dof: 22, M: DEUTAN, gain: 1.5, sat: .85,
-      cue: 'A wide band of ground, smeared sideways where it leaves focus.', rows: [
-      ['m', 'Colour', 'Two cone types, near 455 and 537 nanometres in white-tailed deer. Reds and oranges fall toward yellow and grey.'],
-      ['m', 'Field', 'About 310 degrees. The camera holds under a quarter of it, and the rest is invented.'],
-      ['g', 'Pupil', 'A horizontal bar. In grazing animals it widens the view along the ground and cuts glare from above. What is out of focus smears sideways.'],
-      ['i', 'Sharpness, dim light and depth', 'Guesses. Near and far come from height in the frame.']] },
+      cue: 'A wide band of ground. Out-of-focus things smear sideways.', rows: [
+      ['m', 'Colour', 'White-tailed deer have two kinds of colour sensor in their eyes, and you have three. Reds and oranges look yellow or grey to a deer.'],
+      ['m', 'Field of view', 'A deer sees about 310 degrees around it, which is nearly a full circle. Your camera captures less than a quarter of that, so we fill in the rest ourselves.'],
+      ['g', 'Pupil', 'Grazing animals have a pupil shaped like a horizontal bar. It widens their view along the ground and cuts the glare from the sky. It makes out-of-focus things smear sideways.'],
+      ['i', 'Sharpness, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
     rabbit: { chip: 'Rabbit', who: 'a rabbit', fov: 350, cpd: 3, topoS: 1, fall: 2.0, pupil: 'o', dof: 6, M: DEUTAN,
       cue: 'Nearly the whole circle at once, and little of it sharp.', rows: [
-      ['i', 'All of it', 'Entered from memory and unchecked: a field nearly all the way round, a sharp band along the horizon, coarse detail, two cone types.']] },
+      ['i', 'The whole view', 'Everything here is our best guess, and we haven’t checked it yet. A rabbit likely sees nearly all the way around itself, most sharply along the horizon, with little detail and two kinds of colour sensor.']] },
     hawk: { chip: 'Hawk, eagle, falcon', who: 'a hawk', fov: 180, cpd: 60, fovea: 2.2, pupil: 'o', rate: .6,
       cue: 'The centre is pulled close, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'An eagle resolves about 140 cycles per degree to your 60. The centre is magnified to suggest it, though a phone cannot supply the detail.'],
-      ['m', 'Pace', 'A peregrine follows flicker to 129 a second and a Harris’s hawk to 77, against your 50 to 60.' + SLOW.replace('that ratio', 'suggest it')],
-      ['x', 'Gait', 'Raptors do not walk with a held head, so the picture does not step.'],
-      ['i', 'Field', 'Left as the camera gives it.']] },
+      ['g', 'Sharpness', 'An eagle sees more than twice the detail you do. A phone can’t capture that much, so we magnify the centre of the picture to suggest it.'],
+      ['m', 'Speed', 'A peregrine falcon’s eyes can follow a light flashing up to 129 times a second, and a Harris’s hawk’s up to 77. Yours give up at 50 to 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Field of view', 'We leave the field of view as your camera gives it.']] },
     wader: { chip: 'Heron, crane, pigeon', who: 'a wading bird', fov: 300, cpd: 25, topoS: .6, fall: .8, pupil: 'o', sheen: .6, hold: 280, thrust: 120,
-      cue: 'Walk. The picture holds, then lurches, as a heron’s head does.', rows: [
-      ['m', 'Gaze', 'Herons, egrets, cranes, pigeons and chickens stabilize their head when walking: their eyes stay fixed on the world, then the head thrusts forward.'],
-      ['g', 'Tempo', 'The thrust lasts 100 to 150 milliseconds in pigeons.'],
-      ['g', 'Sharpness', 'Most birds resolve under 30 cycles per degree to your 60.'],
-      ['i', 'Ultraviolet', 'Some birds see it.'],
-      ['i', 'Field', 'Eyes on the sides of the head.']] },
+      cue: 'Walk. The picture holds still, then lurches forward, the way a heron’s head does.', rows: [
+      ['m', 'Head movement', 'Herons, egrets, cranes, pigeons and chickens hold their head still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch up with the body.'],
+      ['g', 'Speed', 'In pigeons, each dart forward takes about a tenth of a second.'],
+      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
+      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
     bird: { chip: 'Other bird', who: 'a bird', fov: 300, cpd: 25, topoA: .5, fall: .6, pupil: 'o', sheen: .8, rate: .5,
       cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Pace', 'Birds follow flicker at 40 to 140 a second, the faster movers higher, and you stop near 60.' + SLOW.replace('that ratio', 'suggest it')],
-      ['g', 'Sharpness', 'Most birds resolve under 30 cycles per degree to your 60.'],
-      ['i', 'Ultraviolet', 'Some birds see it and no phone records it. The violet is invented.'],
-      ['i', 'Field', 'A guess: eyes on the sides of the head.']] },
+      ['g', 'Speed', 'Birds’ eyes can follow a light flashing 40 to 140 times a second, and the fastest fliers are at the high end. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
+      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
     alligator: { chip: 'Alligator', who: 'an alligator', fov: 280, cpd: 9, topoS: 1, fall: 2.6, pupil: 'v', dof: 24, gain: 1.6, sat: .9,
       cue: 'One sharp band along the waterline.', rows: [
-      ['g', 'Where it is sharp', 'A band along the horizon, measured in crocodiles. It lets them scan the waterline without turning the head.'],
-      ['g', 'Colour', 'Crocodiles have three kinds of single cone, so colour is left as the camera gives it.'],
-      ['g', 'Pupil', 'A vertical slit. What is out of focus smears up and down.'],
-      ['i', 'Field, sharpness, dim light and depth', 'Guesses.']] },
+      ['g', 'Sharpest spot', 'Crocodiles see most sharply in a band along the horizon. It lets them scan the waterline without turning their head.'],
+      ['g', 'Colour', 'Crocodiles have three kinds of colour sensor in their eyes, as you do, so we leave colours as your camera gives them.'],
+      ['g', 'Pupil', 'An alligator’s pupil is a vertical slit. It makes out-of-focus things smear up and down.'],
+      ['i', 'Field of view, sharpness, dim light and depth', 'These are our best guesses.']] },
     reptile: { chip: 'Lizard, snake, turtle', who: 'a reptile', fov: 280, cpd: 15, topoA: 1, fall: 1.2, pupil: 'o', sheen: .6,
       cue: '', rows: [
-      ['i', 'All of it', 'Guesses: eyes on the sides of the head, one sharp central spot, and ultraviolet, drawn here as invented violet.']] },
+      ['i', 'The whole view', 'Everything here is our best guess. We assume eyes on the sides of the head, one sharp spot in the centre, and the ability to see ultraviolet light, which we show as a violet tint.']] },
     frog: { chip: 'Frog, toad', who: 'a frog or toad', fov: 340, cpd: 4, pupil: 'h', persist: .15, gate: 1,
-      cue: 'Hold still, as a frog does. Only what moves is drawn.', rows: [
-      ['m', 'Movement', 'A frog does not register the still parts of its world, and can starve beside food that keeps still. Only what changes is drawn, so hold the phone as still as a frog holds itself.'],
-      ['g', 'Pace', 'A cane toad follows flicker to under 7 a second, a ninth of your rate, so movement smears into trails.'],
-      ['i', 'Field, sharpness and pupil', 'Guesses.']] },
+      cue: 'Hold still, as a frog does. Only things that move show up.', rows: [
+      ['m', 'Movement', 'A frog doesn’t notice the parts of its world that stay still. It can starve next to food that doesn’t move. So we only show what changes. Hold your phone as still as a frog holds itself.'],
+      ['g', 'Speed', 'A cane toad’s eyes can follow a light flashing only about 7 times a second, a ninth of what yours can. Anything that moves smears into a trail.'],
+      ['i', 'Field of view, sharpness and pupil', 'These are our best guesses.']] },
     bee: { chip: 'Bee', who: 'a bee', fov: 320, cpd: 1, pupil: 'none', M: BEE, uvBlue: 1, rate: .3,
       cue: 'Red goes dark, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects resolve under 1 cycle per degree to your 60.'],
-      ['m', 'Red', 'Bees have no receptor for it. Red things go dark.'],
-      ['m', 'Pace', 'A honeybee follows flicker to 200 a second in bright light, and you stop near 60.' + SLOW],
-      ['i', 'Ultraviolet', 'Bees see it and no phone records it. The blue here is invented.'],
-      ['x', 'Drawn as', 'False colour: their green as red, their blue as green, ultraviolet as blue.']] },
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
+      ['m', 'Red', 'Bees can’t see red. Red things look dark to them.'],
+      ['m', 'Speed', 'In bright light, a honeybee’s eyes can follow a light flashing up to 200 times a second, and yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Ultraviolet', 'Bees can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the blue here stands in for it.'],
+      ['i', 'How we show the colours', 'A bee sees green, blue and ultraviolet. We can’t show you ultraviolet, so we shift every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue.']] },
     insect: { chip: 'Butterfly, other insect', who: 'an insect', fov: 320, cpd: 1, pupil: 'none', sheen: .8, rate: .45,
-      cue: 'Coarse and wide, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects resolve under 1 cycle per degree to your 60.'],
-      ['g', 'Pace', 'Flies and dragonflies follow flicker past 100 a second, and one beetle to 400.' + SLOW.replace('that ratio', 'suggest it')],
-      ['i', 'Ultraviolet', 'Bees and some other insects see it and no phone records it. The violet is invented.']] },
+      cue: 'Blurry and wide, and each moment runs slow.', rows: [
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
+      ['g', 'Speed', 'The eyes of flies and dragonflies can follow a light flashing more than 100 times a second, and one beetle’s up to 400. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Ultraviolet', 'Bees and some other insects can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.']] },
     plant: { chip: 'Plant', who: 'a plant', pupil: 'none', field: 1, noGreen: 1, persist: 2.5,
-      cue: 'There is no picture here, only how much light, what colour, and from where.', rows: [
-      ['g', 'No picture', 'A plant has nothing to focus light. It gets how much there is, what colour, and from where.'],
-      ['m', 'Neighbours', 'Plants read red against far-red light and detect neighbours before being shaded. A phone does not record that band.'],
-      ['i', 'Green and time', 'Green is removed because leaves throw most of it back, and anything quick is averaged away. Both choices are invented.']] },
+      cue: 'No picture here. Only how much light there is, what colour it is, and where it comes from.', rows: [
+      ['g', 'No picture', 'A plant has nothing like a lens to focus light into a picture. It senses how much light there is, what colour it is, and which direction it comes from.'],
+      ['m', 'Neighbours', 'Plants compare red light with far-red light, a colour just beyond what we can see. That tells them a neighbour is growing close by, before it shades them. A phone can’t capture far-red light.'],
+      ['i', 'Green and time', 'We take out the green, because leaves reflect most of it away, and we blur out anything quick. Both are our own choices.']] },
     other: { chip: 'Something else', who: 'this one', pupil: 'none', field: 1, sat: 0,
       cue: '', rows: [
-      ['i', 'No account yet', 'Nothing sourced on how this one meets light. It is shown as light and dark only.']] },
-    person: { chip: null, who: 'a person', pupil: 'o', cue: '', rows: [
-      ['m', 'Same eyes', 'That is a person. You have those eyes already.']] }
+      ['i', 'No view yet', 'Regards doesn’t have the ability to view the world as this creature right now.']] },
+    person: { chip: null, who: 'a human', pupil: 'o', cue: '', rows: [
+      ['m', 'Same eyes', 'That’s a human. You already see the world as one.']] }
   };
   var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other'];
 

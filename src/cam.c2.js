@@ -12,10 +12,10 @@
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('notice').hidden || !$('contact').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
   function closeSheets() {
-    var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
+    var wasClaim = !$('claim').hidden || !$('notice').hidden;
+    show('notice', false); show('contact', false); show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -30,11 +30,11 @@
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
     $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
-      var name = key === 'person' ? 'a person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
+      var name = key === 'person' ? 'a human' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
       kbox.appendChild(b);
     });
-    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'Is it one of these?';
+    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species:' : 'Is it one of these?';
     var offers = offerList(pocket.offers || []), box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.label); b.type = 'button';
@@ -55,12 +55,21 @@
     return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? nameCase(o.en) + ' (' + o.sci + ')' : (o.sci ? nameCase(o.en) : o.en) || o.sci }; });
   }
   function setViewPrompt(key) {
-    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'View the world as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
+    $('askViewH').textContent = 'View the world as ' + EYES[key].who + '.';   // EYES.other.who is "this one", which reads badly here
     $('askViewText').textContent = '';
     $('askViewFine').textContent = '';
   }
 
+  var REGARDS = '<em>Regards</em>';
+  function tell(html) {                            // a plain notice over the photographing screen; closing it leaves the person where a new photo can be taken or chosen
+    msg(''); closeSheets(); dropSvc(); setEyes(null);
+    if (S.src === 'cam') go('finder'); else go('naming');
+    $('noticeText').innerHTML = html; openSheet('notice'); paintType();
+  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
   function reveal(key, named) {
+    if (key === 'other') { diag('no-view', clip((named && named.common) || '', 60)); S.seq++; tell(noViewSays(named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '')); return; }
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
     if (named && (named.by === 'service' || named.by === 'device-large')) paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
@@ -75,7 +84,7 @@
     if (S.src === 'cam') go('finder'); else go('naming');
     openClaim(sub); paintType();
   }
-  function failName(why) { askName(why + ' So you tell it.'); }
+  function failName(why) { askName(why + ' Tell us what’s there.'); }
   // While the recognizer is being downloaded for the first time, the person may type the name and not wait. The download carries on.
   function paintType() { show('barType', !inViewer && S.screen === 'naming' && !S.eyes && !anySheet() && pocket.fetching()); }
   function identify() {
@@ -90,7 +99,11 @@
     pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
-      if (r.kind === 'none' && r.sure) { failName('Nothing alive was found in that photo.'); return; }
+      if (r.kind === 'none' && r.sure) {             // nothing alive, says the small model: where the full database is on this device it looks before the person is told
+        pocket.offers = []; pocket.kindOffers = [];
+        large.survey().then(function (h) { if (t !== S.token || S.eyes) return; if (h === 'kept' && !large.broken()) firstLook(t, false); else tell('We can\u2019t find a creature in your photo. Try again.'); });
+        return;
+      }
       pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       pocket.kindOffers = r.kindOffers || [];
       if (!r.sure) {
@@ -98,17 +111,17 @@
         diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
         large.survey().then(function (h) {
           if (t !== S.token || S.eyes) return;
-          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that species is.');
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what kind of creature that is.');
         });
         return;
       }
-      var common = r.kind === 'person' ? 'a person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
+      var common = r.kind === 'person' ? 'a human' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: (r.named ? nameCase(clip(common, 60)) : clip(common, 60)) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
       closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
-      failName((e && e.sentence) || 'It could not be recognized this time.');
+      failName((e && e.sentence) || 'The IDing isn’t working right now.');
     });
   }
   function recognize(t) {
@@ -116,7 +129,7 @@
     if (!(sample && canImages)) {
       msg(''); if (S.src !== 'cam') go('naming'); else go('finder');
       diag('no-recognizer', inViewer ? (sample ? 'no-images' : 'no-sample') : 'outside');
-      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : (pocket.whyNot() || 'This page cannot recognize a photo here.') + ' So you tell it.');
+      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : (pocket.whyNot() || 'This page cannot recognize a photo here.') + ' Tell us what’s there.');
       return;
     }
     if (nameCtl) nameCtl.abort();
@@ -128,7 +141,7 @@
       if (!blob) { clearTimeout(slow); failName('The photo could not be prepared.'); return; }
       sample.json(PROMPT, { images: [blob], modelTier: 'quick', signal: ctl.signal }).then(function (d) {
         clearTimeout(slow); if (t !== S.token) return;
-        if (!d || typeof d !== 'object' || d.found === false) { failName('Nothing alive was found in that photo.'); return; }
+        if (!d || typeof d !== 'object' || d.found === false) { tell('We can\u2019t find a creature in your photo. Try again.'); return; }
         var key = String(d.eyes || 'other'); if (!EYES[key]) key = 'other';
         diag('recognized', key);
         reveal(key, { common: (d.scientific ? nameCase(clip(d.common, 60)) : clip(d.common, 60)) || handName(key), scientific: clip(d.scientific, 80), by: 'Claude' });
@@ -137,7 +150,7 @@
         var code = e && e.code; if (code === 'cancelled') return;
         if (['not_granted', 'sampling_disabled', 'not_declared', 'capability_disabled', 'capability_removed', 'images_unavailable'].indexOf(code) >= 0) sample = null;
         diag('claude-error', String(code || 'unknown'));
-        failName(code === 'rate_limited' ? 'Claude is busy just now.' : code === 'not_granted' ? 'Claude was not allowed to look.' : 'It could not be recognized this time.');
+        failName(code === 'rate_limited' ? 'Claude is busy just now.' : code === 'not_granted' ? 'Claude was not allowed to look.' : 'The IDing isn’t working right now.');
       });
     }, 'image/jpeg', .86);
   }
@@ -204,7 +217,7 @@
       x.lineWidth = Math.max(1, .28 * u); x.strokeStyle = 'rgba(255,255,255,.9)'; x.stroke();
     }
     var maxW = W - 2 * pad - (side ? side + pad : 0), name = shownName(), size = 5.6 * u;
-    var small = Math.max(11, 1.85 * u), note = 'An approximation of what may reach ' + EYES[S.eyes].who + (guessed(S.eyes) ? ', part of it a guess.' : '.') + ' ' + labelDate(new Date());
+    var small = Math.max(11, 1.85 * u), note = 'What ' + EYES[S.eyes].who + (guessed(S.eyes) ? ' might see, based on scientific evidence and informed speculation' : ' sees, based on scientific evidence') + ' \u00B7 ' + labelDate(new Date());
     x.font = small + 'px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
     var words = note.split(' '), lines = [''], i;
     for (i = 0; i < words.length; i++) {
@@ -261,7 +274,7 @@
     $('keepNote').textContent = '';
     show('keepVideo', k.video); show('keepCv', !k.video);
     if (k.video) {
-      $('keepVideo').onerror = function () { show('keepVideo', false); $('keepNote').textContent = 'Recorded. It cannot be played back in this view, so save it to watch it.'; };
+      $('keepVideo').onerror = function () { show('keepVideo', false); $('keepNote').textContent = 'Recorded. It can’t be played back in this browser, so save it to watch it.'; };
       $('keepVideo').src = kept.url; $('keepVideo').play().catch(function () {});
     } else { var pv = $('keepCv'); pv.width = k.canvas.width; pv.height = k.canvas.height; pv.getContext('2d').drawImage(k.canvas, 0, 0); }
     var canShare = false;
@@ -273,17 +286,17 @@
     if (!kept) return;
     if (!inViewer) {
       var a = document.createElement('a'); a.href = kept.url; a.download = kept.name; document.body.appendChild(a); a.click(); a.remove();
-      $('keepNote').textContent = 'Sent to your downloads.'; return;
+      $('keepNote').textContent = 'Sent to your downloads'; return;
     }
-    if (!downloads) { $('keepNote').textContent = 'Saving is unavailable in this view.'; return; }
-    downloads.save({ filename: kept.name, data: kept.blob }).then(function () { $('keepNote').textContent = 'Saved.'; }).catch(function (e) {
-      var code = e && e.code; $('keepNote').textContent = code === 'declined' ? '' : code === 'rate_limited' ? 'A save is already waiting for your answer.' : 'It could not be saved here.';
+    if (!downloads) { $('keepNote').textContent = 'Saving is unavailable in this view'; return; }
+    downloads.save({ filename: kept.name, data: kept.blob }).then(function () { $('keepNote').textContent = 'Saved'; }).catch(function (e) {
+      var code = e && e.code; $('keepNote').textContent = code === 'declined' ? '' : code === 'rate_limited' ? '' : 'Save failed';
     });
   }
   function shareKept() {
     if (!kept) return;
     navigator.share({ files: [new File([kept.blob], kept.name, { type: kept.blob.type })] }).catch(function (e) {
-      if (!e || e.name !== 'AbortError') $('keepNote').textContent = 'Sharing did not go through. Save it and send it from your files.';
+      if (!e || e.name !== 'AbortError') $('keepNote').textContent = 'Sharing failed. Save it and send it from your files.';
     });
   }
 
@@ -292,12 +305,7 @@
     if (!S.eyes) return;
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
-    $('infoSub').textContent = [S.named && S.named.scientific ? S.named.scientific + '.' : '',
-      S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
-      : S.named && S.named.by === 'page' ? ''
-      : S.named && S.named.by === 'service' ? 'Named by the full database on a server, which can be wrong.'
-      : S.named && S.named.by === 'device-large' ? 'Named on this device by the full database, which can be wrong.' : 'As you said.',
-      S.named && S.named.local ? 'Chosen among species recorded around ' + pocket.place() + '.' : ''].filter(Boolean).join(' ');
+    $('infoSub').textContent = S.named && S.named.scientific ? S.named.scientific : '';
     show('infoSub', !!$('infoSub').textContent);
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
@@ -313,7 +321,7 @@
   function noteLink(before, word, after, title) {   // a line of the naming sheet with one linked word; the link opens a new report with the typed name as its title
     var n = $('claimNote'), a = document.createElement('a'); n.textContent = before;
     a.href = 'https://github.com/jampotful/seen-back/issues/new?title=' + encodeURIComponent(title); a.target = '_blank'; a.rel = 'noopener'; a.textContent = word;
-    n.appendChild(a); n.appendChild(document.createTextNode(after));
+    contactLink(a, title); n.appendChild(a); n.appendChild(document.createTextNode(after));
   }
   // ---------- wiring
   $('claimForm').addEventListener('submit', function (e) {
@@ -325,8 +333,7 @@
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
-      diag('said-noview', clip(named.common, 60));
-      $('claimNote').textContent = cap(named.common) + ' isn\u2019t yet a creature this app can view the world as. We\u2019re adding new species all the time! In the meantime, try a different creature.'; return;
+      diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
     sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
@@ -339,16 +346,16 @@
       });
       show('claimSuggestRow', true); return;
     }
-    noteLink(cap(t) + ' isn\u2019t a creature we know. If you typed in a pet\u2019s name (e.g., Marquise), please make sure you include what kind of pet it is (Marquise, my cat). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
+    noteLink(cap(t) + ' isn\u2019t a creature we know. If this is a pet\u2019s name, please make sure you include what kind of creature your pet is (e.g. \u201CGarfield, a cat\u201D). If you typed in a real species, let us know about our error ', 'here', '.', 'Not identified: ' + t);
   });
-  $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
+  $('introFine').textContent = engine ? '' : 'This browser is too old to run the picture engine. Try a current Chrome, Safari, or other browser.';
   $('btnBegin').disabled = !engine;
   if (!coarse) { $('lblAnimalCam').hidden = true; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true;    // one way in, so it is said in words
-    [['lblAnimalPick', 'Choose a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
+    [['lblAnimalPick', 'Upload a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
 
   function toAskAnimal() {
     $('askFine').textContent = inViewer ? 'Inside Claude the camera is closed to this page, so it works from a photo of who you met and a clip of your view. If nothing opens when you tap, open this page in a browser in place of the Claude app.'
-      : S.camRefused ? 'Your camera isn\u2019t available. If you took a photo with your camera app, you can upload it here instead.' : '';
+      : S.camRefused ? 'If you already have a photo of the species, you can upload it here instead.' : '';
     go('askAnimal');
   }
   $('btnBegin').addEventListener('click', function () {
@@ -356,7 +363,7 @@
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
     openCamera('environment').then(function () {
-      btn.disabled = false; setEyes(null); go('finder'); msg('Photograph something alive, or choose a photo of it.', 4500);
+      btn.disabled = false; setEyes(null); go('finder'); msg('That didn’t work. Try again or upload a photo of a species.', 4500);
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
   $('btnShutter').addEventListener('click', shutter);
@@ -419,7 +426,8 @@
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
       // another kind of creature, and the full database is sure enough by the service's own setting: the change is offered, never made
-      S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + (top.kind === 'other' ? '' : ', ' + EYES[top.kind].who) + '. Change eyes?' };
+      if (top.kind === 'other') S.svc = { t: t, state: 'said', text: 'It looks like ' + aAn(named.common) + '. Regards doesn\u2019t have the ability to view the world as one right now.' };
+      else S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + ', ' + EYES[top.kind].who + '. Change to this creature?' };
     }
     paintSvc();
   }
@@ -427,8 +435,7 @@
     var v = S.svc; if (!v) return;
     if (v.state === 'offer') {
       var c = naturalist.cfg(); if (!c) return;
-      $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
-        (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+      $('askSub').textContent = 'This photo will be temporarily sent to this project\u2019s server, ' + c.where + '.';
       $('askKeep').checked = false;
       show('claim', false); show('record', false); show('info', false); show('keep', false); openSheet('ask');
     } else if (v.state === 'change') { S.svc = null; diag(v.named.by === 'service' ? 'service-eyes' : 'large-eyes', v.kind); reveal(v.kind, v.named); }
@@ -456,16 +463,16 @@
   function netSays() {                             // what the connection says of itself, where it says anything
     var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (!c) return '';
-    if (c.saveData) return 'This ' + dev() + ' is set to save data';
-    if (c.metered === true || c.type === 'cellular') return 'This connection reports itself as metered';
-    if (/^(slow-2g|2g|3g)$/.test(c.effectiveType || '')) return 'This connection reports itself as slow';
+    if (c.saveData) return 'Your device is in data saver mode';
+    if (c.metered === true || c.type === 'cellular') return 'Your device\u2019s connection is metered';
+    if (/^(slow-2g|2g|3g)$/.test(c.effectiveType || '')) return 'Your device\u2019s connection is slow';
     return '';
   }
   function getLine() {
     var z = large.size(), h = large.has();
     // it had arrived whole and is not here now (the browser cleared it away, or the model was replaced by a newer one): said as it is
-    if (bigChoice() === 'kept' && h !== 'kept') return 'The full database is no longer on this ' + dev() + '. Get it again?';
-    return z && h === 'partial' ? 'The full database is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'Download the full database of specific species names?';
+    if (bigChoice() === 'kept' && h !== 'kept') return 'The full database is no longer on this device. Get it again?';
+    return z && h === 'partial' ? 'The full database is partly downloaded: ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'Download the full database of species?';
   }
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
@@ -477,8 +484,8 @@
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
-    $('bigSub').textContent = 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.';
-    $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
+    $('bigSub').textContent = 'The full database of species is free to download and provides more accuracy in IDing.';
+    $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB have been downloaded. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     waitMark($('bigNet'));
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -498,13 +505,13 @@
     var p = large.get(); noteBig(large.line(), openBig);
     p.then(function () {
       setBigChoice('kept'); if (!$('big').hidden) closeSheets();
-      noteBig('The full database is on this ' + dev() + '.', null, 8000);
+      noteBig('The full database has been downloaded.', null, 8000);
       // the photo in hand is looked at now, if the small model's answer is still what stands
       if (S.eyes && S.eyes !== 'person' && S.named && S.named.by === 'page' && !S.svc) lookCloser(S.token);
     }, function (e) {
       var code = (e && e.code) || 'died', z = large.size(), again = /^(network|missing|damaged|died|slow)$/.test(code);
       if (!$('big').hidden) closeSheets();
-      if (code === 'stopped') { setBigChoice(''); noteBig('The download was stopped.' + (z && z.keptMb ? ' ' + z.keptMb + ' of ' + z.mb + ' MB are kept on this ' + dev() + '.' : ''), null, 8000); return; }
+      if (code === 'stopped') { setBigChoice(''); noteBig('The download has been stopped.' + (z && z.keptMb ? ' ' + z.keptMb + ' of ' + z.mb + ' MB are kept on this device.' : ''), null, 8000); return; }
       if (!again) setBigChoice('');
       noteBig(((e && e.sentence) || large.say(code)) + (again ? ' Try again?' : ''), again ? startBig : null, 30000);
     });
@@ -549,8 +556,9 @@
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (r.sure && r.kindAt !== null && r.kind !== S.eyes && r.kind !== 'person' && r.kind !== 'none') {
       // another kind of creature, and the full database is sure enough by its slot's own setting: the change is offered, never made
-      S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
-        text: 'It looks like ' + (named ? aAn(named.common) + (r.kind === 'other' ? '' : ', ' + EYES[r.kind].who) : r.kind === 'other' ? 'some other living thing' : EYES[r.kind].who) + '. Change eyes?' };
+      if (r.kind === 'other') S.svc = { t: t, state: 'said', text: 'It looks like ' + (named ? aAn(named.common) : 'another creature') + '. Regards doesn\u2019t have the ability to view the world as ' + (named ? 'one' : 'it') + ' right now.' };
+      else S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
+        text: 'It looks like ' + (named ? aAn(named.common) + ', ' + EYES[r.kind].who : EYES[r.kind].who) + '. Change to this creature?' };
     }
     paintSvc();
   }
@@ -563,14 +571,14 @@
       if (t !== S.token || S.eyes) return;
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
-      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
-      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; tell('We can\u2019t find a creature in your photo. Try again.'); return; }     // a larger slot with a kinds head can say so
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a human' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
-      askName(unsure ? 'Even the full database isn’t sure what that is.' : 'The full database is not sure what that is.');
+      askName(unsure ? 'We’re not sure what kind of creature that is.' : 'We’re not sure what kind of creature that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
-      askName(unsure ? 'We\u2019re not sure what that species is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+      askName(unsure ? 'We\u2019re not sure what kind of creature that is.' : ((e && e.sentence) || large.say('photo')) + ' Tell us what’s there.');
     });
   }
   // The same from the server, where that is the full database there is: asked with the person's say-so, and its answer taken as the name.
@@ -585,13 +593,13 @@
       var c = naturalist.cfg(), top = a.species[0];
       pocket.offers = a.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: !!a.region }; });
       if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: nameCase(clip(top.en || top.sci, 60)), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
-      askName('The full database could not name it.');
+      askName('The full database can’t ID this photo.');
     }, function (e) {
       if (firstJob === job) firstJob = null;
       if (t !== S.token || S.eyes) return;
       diag('service-none', String((e && e.code) || 'unknown'));
       if (e && e.code === 'cancelled') return;
-      askName('The full database could not be asked just now.');
+      askName('The full database timed out. Try again.');
     });
   }
   // From the sheet that asks for a name there is a way to the full database, where there is one: on this device first, else on a server.
@@ -603,7 +611,7 @@
     function still() { return t === S.token && !$('claim').hidden && !S.eyes; }
     large.survey().then(function (h) {
       if (!still()) return;
-      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the full database on this ' + dev(); claimAskHow = 'device'; show('claimAskRow', true); return; }
+      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the full database'; claimAskHow = 'device'; show('claimAskRow', true); return; }
       naturalist.config().then(function (c) {
         if (!c || !still() || navigator.onLine === false || naturalist.choice() === 'no') return;
         $('claimAsk').textContent = 'Ask the full database on a server'; claimAskHow = 'service'; show('claimAskRow', true);
@@ -615,8 +623,7 @@
     if (claimAskHow === 'device') { diag('large-asked', ''); firstLook(t, false); return; }
     if (claimAskHow !== 'service' || !c) return;
     if (naturalist.choice() === 'yes') { closeSheets(); firstService(t); return; }
-    $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
-      (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+    $('askSub').textContent = 'This photo will be temporarily sent to this project\u2019s server, ' + c.where + '.';
     $('askKeep').checked = false;
     closeSheets(); askFirstT = t; openSheet('ask');
   });
@@ -624,13 +631,13 @@
     large.survey().then(function () {
       var h = large.has(), z = large.size(), a = large.about(), d = dev(), fail = a.getFail && !/^stopped/.test(a.getFail) ? ' ' + large.say(a.getFail.split(':')[0]) : '';
       if (!z || !h) { show('bigBox', false); return; }
-      $('bigState').textContent = bigDelAsked ? 'Delete the full database from this ' + d + '? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
+      $('bigState').textContent = bigDelAsked ? 'Delete the full database? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
         : h === 'getting' ? large.line()
-        : h === 'kept' ? 'The full database is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
-        : h === 'partial' ? 'The full database is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
-        : 'You can download the full database of species to your ' + d + '. It\u2019s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.' + fail;
+        : h === 'kept' ? 'You currently have the full database of species downloaded.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
+        : h === 'partial' ? 'The full database is partly downloaded: ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
+        : 'The full database of species is free to download and provides more accuracy in IDing.' + fail;
       waitMark($('bigState'));
-      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
+      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = h === 'partial' && !bigDelAsked ? 'Delete any downloaded data' : 'Delete the download';
       show('bigGet', !bigDelAsked && (h === 'absent' || h === 'partial')); show('bigHalt', h === 'getting'); show('bigDel', h === 'kept' || h === 'partial'); show('bigDelNo', bigDelAsked);
       show('bigAskRow', false); $('bigAsk').checked = bigChoice() === 'no';
       show('bigBox', true);
@@ -679,7 +686,7 @@
   $('btnType').addEventListener('click', function () {
     if (S.screen !== 'naming' || S.eyes) return;
     S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
-    askName('The download carries on meanwhile.');
+    askName('Your download is finishing in the background.');
   });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
@@ -701,7 +708,7 @@
     var f = S.facing === 'user' ? 'environment' : 'user';
     startCamera(f).then(paintUI).catch(function () { msg('The other camera could not be opened.', 4000); });
   });
-  function hold(on) { return function (e) { if (e && e.cancelable) e.preventDefault(); S.holding = on; $('btnEyes').classList.toggle('on', on); if (on) msg('Your own eyes.'); else msg(''); }; }
+  function hold(on) { return function (e) { if (e && e.cancelable) e.preventDefault(); S.holding = on; $('btnEyes').classList.toggle('on', on); if (on) msg('As a human'); else msg(''); }; }
   $('btnEyes').addEventListener('pointerdown', hold(true));
   ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { $('btnEyes').addEventListener(ev, hold(false)); });
   $('btnEyes').addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) hold(true)(e); });
@@ -728,7 +735,7 @@
 
   function onAnimalFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
-    decode(f).then(function (c) { pocket.file = f; gotAnimalPhoto(c); }).catch(function () { if (S.screen === 'finder') msg('That file could not be read as a photo.', 5000); else $('askFine').textContent = 'That file could not be read as a photo.'; });
+    decode(f).then(function (c) { pocket.file = f; gotAnimalPhoto(c); }).catch(function () { if (S.screen === 'finder') msg('This file could not be read as a photo.', 5000); else $('askFine').textContent = 'This file could not be read as a photo.'; });
   }
   function onViewFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f || !S.eyes || !engine) return;
@@ -738,7 +745,7 @@
       $('askViewFine').textContent = ''; setEyes(key, nm); go('animal'); showName(); later(startChange, calm ? 150 : 900);
     }).catch(function () {
       if (S.animalPhoto) showStill(S.animalPhoto, false);
-      setEyes(key, nm); $('askViewFine').textContent = 'That file could not be opened. Try another.';
+      setEyes(key, nm); $('askViewFine').textContent = 'This file could not be opened. Try another.';
     });
   }
   $('inLib').addEventListener('change', onAnimalFile);
@@ -786,19 +793,45 @@
     var f = pocket.about().fitted; if (!f) return '';
     var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
-    return 'This app identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
+    return ' identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
   }
-  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a, i;
+  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a;
     $('buildMark').textContent = aboutText(); $('aboutNote').textContent = '';
-    el.textContent = 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10) + '.';
+    el.textContent = 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10);
     if (fl) {
       el.appendChild(document.createElement('br')); el.appendChild(document.createElement('br'));
-      if (f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list) && (i = fl.indexOf('photos')) >= 0) {   // the attribution: the word "photos" opens the list of each photograph's address and licence
-        a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'photos';
-        el.appendChild(document.createTextNode(fl.slice(0, i))); el.appendChild(a); el.appendChild(document.createTextNode(fl.slice(i + 6)));
-      } else el.appendChild(document.createTextNode(fl));
+      el.appendChild(document.createElement('em')).textContent = 'Regards'; el.appendChild(document.createTextNode(fl));
+      if (f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list)) {   // the attribution: where each photograph's address and licence can be read
+        a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'here';
+        el.appendChild(document.createTextNode(' The full list of photos is ')); el.appendChild(a); el.appendChild(document.createTextNode('.'));
+      }
     }
     show('fittedOn', true); paintChoices(); }
+  var CONTACT_URL = '', CONTACT_FIELDS = { name: '', email: '', message: '', build: '' };   // a form's address and the names of its fields; empty until one is set up
+  function openContact(about) {
+    if (!CONTACT_URL && !/[?&]contact=demo\b/.test(location.search)) return false;
+    closeSheets(); ['contactName', 'contactEmail', 'contactMsg'].forEach(function (id) { $(id).parentNode.classList.remove('bad'); });
+    $('contactNote').textContent = ''; waitMark($('contactNote')); $('contactSend').disabled = false;
+    if (about && !$('contactMsg').value) $('contactMsg').value = about;
+    openSheet('contact'); $('contact').scrollTop = 0; return true;
+  }
+  function contactLink(a, about) { a.addEventListener('click', function (e) { if (openContact(typeof about === 'function' ? about() : about)) e.preventDefault(); }); }
+  $('contactClose').addEventListener('click', dismissSheets);
+  $('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = clip($('contactName').value, 80), email = clip($('contactEmail').value, 120), text = String($('contactMsg').value || '').trim().slice(0, 2000), okMail = !email || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email), body;
+    $('contactEmail').parentNode.classList.toggle('bad', !okMail); $('contactMsg').parentNode.classList.toggle('bad', !text);
+    if (!text) { $('contactNote').textContent = 'Write a message first.'; return; }
+    if (!okMail) { $('contactNote').textContent = 'That email doesn\u2019t look right.'; return; }
+    if (!CONTACT_URL) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
+    body = new URLSearchParams(); body.append(CONTACT_FIELDS.name, name); body.append(CONTACT_FIELDS.email, email); body.append(CONTACT_FIELDS.message, text); if (CONTACT_FIELDS.build) body.append(CONTACT_FIELDS.build, 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10));
+    $('contactSend').disabled = true; $('contactNote').textContent = 'Sending\u2026'; waitMark($('contactNote'));
+    fetch(CONTACT_URL, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
+      $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
+    }, function () { $('contactSend').disabled = false; $('contactNote').textContent = 'That didn\u2019t send. Check your connection and try again.'; waitMark($('contactNote')); });
+  });
+  contactLink($('aboutTellLink'), '');
+  $('noticeOk').addEventListener('click', dismissSheets);
   function openAbout() { paintAbout(); show('buildBox', false); show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); openSheet('aboutSheet'); $('aboutSheet').scrollTop = 0; }
   $('recAbout').addEventListener('click', openAbout); $('introAbout').addEventListener('click', openAbout); $('aboutClose').addEventListener('click', dismissSheets);
   $('fittedOn').addEventListener('click', function (e) { if (e.target && e.target.tagName === 'A') return; show('buildBox', $('buildBox').hidden); });   // the block of figures for a report from a real device: a tap on the version line shows it

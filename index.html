@@ -43,7 +43,7 @@
   /* Three levels of type, and nothing outside them. H1: the large lines on the picture. H2: names and the titles of sheets.
      H3: everything else; smaller text is a fixed share of H3's size. Each level has a font, a size, a weight, a style, a case and a spacing. */
   --h1-font: var(--serif); --h1-size: 38px; --h1-weight: 400; --h1-style: normal; --h1-case: none; --h1-track: 0em; --h1-lead: 1.06;
-  --h2-font: var(--sans); --h2-size: 24px; --h2-weight: 400; --h2-style: normal; --h2-case: none; --h2-track: 0em; --h2-lead: 1.1;
+  --h2-font: var(--sans); --h2-size: 22px; --h2-weight: 400; --h2-style: normal; --h2-case: none; --h2-track: 0em; --h2-lead: 1.1;
   --h3-font: var(--sans); --h3-size: 16px; --h3-weight: 400; --h3-style: normal; --h3-case: none; --h3-track: 0em; --h3-lead: 1.4;
 }
 html { padding: 0 !important; }
@@ -136,6 +136,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .35); }
 .sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 80%; overflow: auto; background: var(--panel); border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); padding: 18px 18px calc(22px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; user-select: text; -webkit-user-select: text; }
 .sheet header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.noticeText { margin: 4px 0 0; font-size: var(--h3-size); line-height: 1.45; color: var(--ink); max-width: 34ch; }
+.cform { display: grid; gap: 14px; }
+.fld { display: grid; gap: 6px; }
+.fld span { font-size: calc(var(--h3-size) * .78); letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.fld input, .fld textarea { width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255, 255, 255, .06); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.4; resize: none; outline: none; -webkit-appearance: none; appearance: none; }
+.fld input:focus, .fld textarea:focus { border-color: var(--ink); background: rgba(255, 255, 255, .1); }
+.fld.bad input, .fld.bad textarea { border-color: var(--rec); }
 .hbtns { display: inline-flex; gap: 8px; flex: none; }
 .bigbox { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
 .bigbox .fine2 { margin: 0 0 10px; font-size: calc(var(--h3-size) * .84); color: var(--dim); }
@@ -236,7 +243,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
   <section class="screen pad" id="askAnimal" hidden>
-    <h2>What did you encounter?</h2>
+    <h2>Your camera isn’t available. Tell us what you’ve encountered.</h2>
     <div class="row">
       <label class="pill round" id="lblAnimalCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
       <label class="pill ghost round" id="lblAnimalPick" aria-label="Choose a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inAnimalPick" type="file" accept="image/*"></label>
@@ -265,7 +272,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <div class="top">
         <div class="left">
           <button class="ico" id="btnBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button class="who" id="btnWho" type="button" hidden aria-label="What is shown, and how far to trust it"><span class="nm" id="whoName"></span><i class="mk g" id="whoMark"></i></button>
+          <button class="who" id="btnWho" type="button" hidden aria-label="Features"><span class="nm" id="whoName"></span><i class="mk g" id="whoMark"></i></button>
         </div>
         <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
       </div>
@@ -280,7 +287,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         <button class="ico" id="btnRecF" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
       </div>
       <div class="bottom" id="barAnimal" hidden>
-        <button class="ico" id="btnEyes" type="button" aria-label="Hold to see with your own eyes"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+        <button class="ico" id="btnEyes" type="button" aria-label="Hold to view as a human"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
         <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
         <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
       </div>
@@ -300,7 +307,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <div class="offers" id="claimKindBox" hidden><p class="note">Is it one of these?</p><div class="row" id="claimKinds"></div></div>
     <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">Is it one of these?</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
-      <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
+      <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="kind of animal or plant" aria-label="Kind of animal or plant">
       <button class="pill round" type="submit" aria-label="That is what it was"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
@@ -323,7 +330,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     </details>
     <div id="bigBox" class="bigbox" hidden>
       <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
-      <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
+      <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete the download</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
       <label class="tick" id="bigAskRow" hidden><input type="checkbox" id="bigAsk"><span>Do not offer the full database</span></label>
     </div>
   </section>
@@ -332,9 +339,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   <section class="sheet" id="aboutSheet" hidden aria-label="About">
     <header><h3>About</h3><button class="ico" id="aboutClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <div id="about">
-      <p class="aboutLead" id="aboutApp">Regards lets you view the world, for one week, through the eyes of a species you photograph. Can you find all the species?</p>
-      <p class="aboutLead" id="aboutBy">This app is made by Conrad Cheung, an artist, writer and Assistant Professor of 3D + Extended Media at the University of Florida.</p>
-      <p class="aboutLead" id="aboutTell">Something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener">Tell us</a>.</p>
+      <p class="aboutLead" id="aboutApp"><em>Regards</em> lets you view the world, for one week, through the eyes of a species you photograph. <b>How many species can you encounter?</b></p>
+      <p class="aboutLead" id="aboutBy">This app is made by <a href="https://www.conradcheung.com" target="_blank" rel="noopener">Conrad Cheung</a>, an artist, writer, and Assistant Professor of 3D + Extended Media at the University of Florida.</p>
+      <p class="aboutLead" id="aboutTell">Is something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener" id="aboutTellLink">Let us know</a>.</p>
       <p class="fine2" id="fittedOn"></p>
       <div id="buildBox" hidden>
       <pre class="about" id="buildMark"></pre>
@@ -351,12 +358,29 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     </div>
   </section>
 
+  <!-- a plain notice: something could not be done, and what to do next -->
+  <section class="sheet" id="notice" hidden aria-label="Notice" role="alertdialog" aria-describedby="noticeText">
+    <p class="noticeText" id="noticeText"></p>
+    <div class="row"><button class="pill" id="noticeOk" type="button">Try again</button></div>
+  </section>
+
+  <!-- a message to the people who make the app -->
+  <section class="sheet" id="contact" hidden aria-label="Contact">
+    <header><h3>Let us know</h3><button class="ico" id="contactClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <form id="contactForm" class="cform" novalidate>
+      <label class="fld"><span>Name</span><input id="contactName" type="text" autocomplete="name" maxlength="80"></label>
+      <label class="fld"><span>Email</span><input id="contactEmail" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>
+      <label class="fld"><span>Message</span><textarea id="contactMsg" rows="5" maxlength="2000"></textarea></label>
+      <div class="row"><button class="pill" id="contactSend" type="submit">Send</button><p class="note" id="contactNote" role="status" aria-live="polite"></p></div>
+    </form>
+  </section>
+
   <!-- what is shown, and how far to trust it -->
   <section class="sheet" id="info" hidden aria-label="What is shown">
     <header><h3 id="infoTitle"></h3><button class="ico" id="infoClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
-    <p class="key"><span><i class="mk m"></i>known in this animal</span><span><i class="mk g"></i>known in a relative</span><span><i class="mk"></i>speculative</span><span><i class="mk x"></i>left out</span></p>
+    <p class="key"><span><i class="mk m"></i>known in this animal</span><span><i class="mk g"></i>known in a relative</span><span><i class="mk"></i>speculative</span></p>
     <div class="row"><button class="pill ghost" id="infoChange" type="button">Wrong creature?</button></div>
     <details hidden>
       <summary>Sources, and what is unchecked</summary>
@@ -394,7 +418,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
     <div class="row"><button class="pill" id="bigYes" type="button">Download</button><button class="pill ghost" id="bigNo" type="button">Later</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
     <div class="row links" hidden><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">You can always delete the downloaded database under Encounters.</p>
+    <p class="note">You can always delete your download under your Encounters.</p>
   </section>
 
   <!-- a clip or a still, kept -->
@@ -418,7 +442,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '18';
+  var BUILD = '19';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -434,90 +458,88 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var SLOW = ' The picture is slowed to that ratio, then jumps to catch up. That rendering is this app’s invention.';
   var EYES = {
     cat: { chip: 'Cat', who: 'a cat', fov: 200, cpd: 8, topoA: 1, fall: 2.0, pupil: 'v', dof: 26, M: DEUTAN, gain: 1.7, sat: .8,
-      cue: 'What leaves focus smears up and down. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'About a fifth to a tenth of yours. The screen is blurred to what such an eye would keep of it at arm’s length.'],
-      ['m', 'Colour', 'Two cone types, near 450 and 555 nanometres. Reds fall toward olive and grey.'],
-      ['m', 'Pupil', 'A vertical slit, as in other ambush hunters. What is out of focus smears up and down.'],
-      ['m', 'Field', 'About 200 degrees to your 180. The camera holds a slice of it, and the edges are invented.'],
-      ['m', 'Dim light', 'Six to eight times your sensitivity. Shadows are lifted to suggest it.'],
-      ['i', 'Depth', 'A camera feed carries no distances. Near and far are guessed from height in the frame, and a tap sets the focus.'],
-      ['i', 'Where it is sharp', 'One central spot, entered from memory.'],
-      ['x', 'Movement', 'Cats are reported to miss very slow movement. Left out.']] },
+      cue: 'Out-of-focus things smear up and down. Tap to move the focus.', rows: [
+      ['m', 'Sharpness', 'A cat sees about a fifth to a tenth of the detail you do. We blur the picture to match.'],
+      ['m', 'Colour', 'Cats have two kinds of colour sensor in their eyes, and you have three. Reds look olive or grey to a cat.'],
+      ['m', 'Pupil', 'A cat’s pupil is a vertical slit, like those of many hunters that ambush their prey. It makes out-of-focus things smear up and down.'],
+      ['m', 'Field of view', 'A cat sees about 200 degrees around it, and you see about 180. Your camera captures less than that, so we fill in the edges ourselves.'],
+      ['m', 'Dim light', 'A cat needs six to eight times less light than you do to see. We brighten the shadows to show it.'],
+      ['i', 'Depth', 'A phone camera can’t measure distance. We guess that things lower in the picture are closer, and you can tap to set the focus.'],
+      ['i', 'Sharpest spot', 'We assume a cat sees most sharply in the centre of its view.']] },
     dog: { chip: 'Dog', who: 'a dog', fov: 240, cpd: 11, topoS: 1, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85,
       cue: 'Sharpest along the horizon. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'A quarter to a seventh of yours, blurred as that share of what this screen gives you.'],
-      ['m', 'Where it is sharp', 'A band along the horizon in long-nosed dogs, a single spot in short-nosed ones. The band is drawn.'],
-      ['i', 'Colour', 'Two cone types, entered from memory and drawn with a model of human two-cone vision.'],
-      ['i', 'Field, dim light and depth', 'Guesses. Near and far come from height in the frame.']] },
+      ['m', 'Sharpness', 'A dog sees about a quarter to a seventh of the detail you do. We blur the picture to match.'],
+      ['m', 'Sharpest spot', 'Long-nosed dogs see most sharply in a band along the horizon, and short-nosed dogs in a single spot. We show the band.'],
+      ['i', 'Colour', 'Dogs have two kinds of colour sensor in their eyes, and you have three. We show colours the way a person with only two kinds sees them.'],
+      ['i', 'Field of view, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
     squirrel: { chip: 'Squirrel', who: 'a squirrel', fov: 270, cpd: 6, topoS: 1, fall: 1.0, pupil: 'o', dof: 4, M: PROTAN, rate: .56,
       cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Colour', 'Two cone types, measured in ground squirrels near 437 and 518 nanometres.'],
-      ['g', 'Pace', 'Ground squirrels follow flicker to 108 a second, and you stop near 60.' + SLOW],
-      ['i', 'Field and sharpness', 'Guesses: eyes on the sides of the head, and coarser detail than yours.']] },
+      ['g', 'Colour', 'Ground squirrels have two kinds of colour sensor in their eyes, and you have three.'],
+      ['g', 'Speed', 'A ground squirrel’s eyes can follow a light flashing up to 108 times a second, and yours give up at about 60. Fast things look slower to it. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Field of view and sharpness', 'Our best guess is that eyes on the sides of the head give a wide view, with less detail than you see.']] },
     deer: { chip: 'Deer', who: 'a deer', fov: 310, cpd: 8, topoS: 1, fall: 2.2, pupil: 'h', dof: 22, M: DEUTAN, gain: 1.5, sat: .85,
-      cue: 'A wide band of ground, smeared sideways where it leaves focus.', rows: [
-      ['m', 'Colour', 'Two cone types, near 455 and 537 nanometres in white-tailed deer. Reds and oranges fall toward yellow and grey.'],
-      ['m', 'Field', 'About 310 degrees. The camera holds under a quarter of it, and the rest is invented.'],
-      ['g', 'Pupil', 'A horizontal bar. In grazing animals it widens the view along the ground and cuts glare from above. What is out of focus smears sideways.'],
-      ['i', 'Sharpness, dim light and depth', 'Guesses. Near and far come from height in the frame.']] },
+      cue: 'A wide band of ground. Out-of-focus things smear sideways.', rows: [
+      ['m', 'Colour', 'White-tailed deer have two kinds of colour sensor in their eyes, and you have three. Reds and oranges look yellow or grey to a deer.'],
+      ['m', 'Field of view', 'A deer sees about 310 degrees around it, which is nearly a full circle. Your camera captures less than a quarter of that, so we fill in the rest ourselves.'],
+      ['g', 'Pupil', 'Grazing animals have a pupil shaped like a horizontal bar. It widens their view along the ground and cuts the glare from the sky. It makes out-of-focus things smear sideways.'],
+      ['i', 'Sharpness, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
     rabbit: { chip: 'Rabbit', who: 'a rabbit', fov: 350, cpd: 3, topoS: 1, fall: 2.0, pupil: 'o', dof: 6, M: DEUTAN,
       cue: 'Nearly the whole circle at once, and little of it sharp.', rows: [
-      ['i', 'All of it', 'Entered from memory and unchecked: a field nearly all the way round, a sharp band along the horizon, coarse detail, two cone types.']] },
+      ['i', 'The whole view', 'Everything here is our best guess, and we haven’t checked it yet. A rabbit likely sees nearly all the way around itself, most sharply along the horizon, with little detail and two kinds of colour sensor.']] },
     hawk: { chip: 'Hawk, eagle, falcon', who: 'a hawk', fov: 180, cpd: 60, fovea: 2.2, pupil: 'o', rate: .6,
       cue: 'The centre is pulled close, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'An eagle resolves about 140 cycles per degree to your 60. The centre is magnified to suggest it, though a phone cannot supply the detail.'],
-      ['m', 'Pace', 'A peregrine follows flicker to 129 a second and a Harris’s hawk to 77, against your 50 to 60.' + SLOW.replace('that ratio', 'suggest it')],
-      ['x', 'Gait', 'Raptors do not walk with a held head, so the picture does not step.'],
-      ['i', 'Field', 'Left as the camera gives it.']] },
+      ['g', 'Sharpness', 'An eagle sees more than twice the detail you do. A phone can’t capture that much, so we magnify the centre of the picture to suggest it.'],
+      ['m', 'Speed', 'A peregrine falcon’s eyes can follow a light flashing up to 129 times a second, and a Harris’s hawk’s up to 77. Yours give up at 50 to 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Field of view', 'We leave the field of view as your camera gives it.']] },
     wader: { chip: 'Heron, crane, pigeon', who: 'a wading bird', fov: 300, cpd: 25, topoS: .6, fall: .8, pupil: 'o', sheen: .6, hold: 280, thrust: 120,
-      cue: 'Walk. The picture holds, then lurches, as a heron’s head does.', rows: [
-      ['m', 'Gaze', 'Herons, egrets, cranes, pigeons and chickens stabilize their head when walking: their eyes stay fixed on the world, then the head thrusts forward.'],
-      ['g', 'Tempo', 'The thrust lasts 100 to 150 milliseconds in pigeons.'],
-      ['g', 'Sharpness', 'Most birds resolve under 30 cycles per degree to your 60.'],
-      ['i', 'Ultraviolet', 'Some birds see it.'],
-      ['i', 'Field', 'Eyes on the sides of the head.']] },
+      cue: 'Walk. The picture holds still, then lurches forward, the way a heron’s head does.', rows: [
+      ['m', 'Head movement', 'Herons, egrets, cranes, pigeons and chickens hold their head still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch up with the body.'],
+      ['g', 'Speed', 'In pigeons, each dart forward takes about a tenth of a second.'],
+      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
+      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
     bird: { chip: 'Other bird', who: 'a bird', fov: 300, cpd: 25, topoA: .5, fall: .6, pupil: 'o', sheen: .8, rate: .5,
       cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Pace', 'Birds follow flicker at 40 to 140 a second, the faster movers higher, and you stop near 60.' + SLOW.replace('that ratio', 'suggest it')],
-      ['g', 'Sharpness', 'Most birds resolve under 30 cycles per degree to your 60.'],
-      ['i', 'Ultraviolet', 'Some birds see it and no phone records it. The violet is invented.'],
-      ['i', 'Field', 'A guess: eyes on the sides of the head.']] },
+      ['g', 'Speed', 'Birds’ eyes can follow a light flashing 40 to 140 times a second, and the fastest fliers are at the high end. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
+      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
     alligator: { chip: 'Alligator', who: 'an alligator', fov: 280, cpd: 9, topoS: 1, fall: 2.6, pupil: 'v', dof: 24, gain: 1.6, sat: .9,
       cue: 'One sharp band along the waterline.', rows: [
-      ['g', 'Where it is sharp', 'A band along the horizon, measured in crocodiles. It lets them scan the waterline without turning the head.'],
-      ['g', 'Colour', 'Crocodiles have three kinds of single cone, so colour is left as the camera gives it.'],
-      ['g', 'Pupil', 'A vertical slit. What is out of focus smears up and down.'],
-      ['i', 'Field, sharpness, dim light and depth', 'Guesses.']] },
+      ['g', 'Sharpest spot', 'Crocodiles see most sharply in a band along the horizon. It lets them scan the waterline without turning their head.'],
+      ['g', 'Colour', 'Crocodiles have three kinds of colour sensor in their eyes, as you do, so we leave colours as your camera gives them.'],
+      ['g', 'Pupil', 'An alligator’s pupil is a vertical slit. It makes out-of-focus things smear up and down.'],
+      ['i', 'Field of view, sharpness, dim light and depth', 'These are our best guesses.']] },
     reptile: { chip: 'Lizard, snake, turtle', who: 'a reptile', fov: 280, cpd: 15, topoA: 1, fall: 1.2, pupil: 'o', sheen: .6,
       cue: '', rows: [
-      ['i', 'All of it', 'Guesses: eyes on the sides of the head, one sharp central spot, and ultraviolet, drawn here as invented violet.']] },
+      ['i', 'The whole view', 'Everything here is our best guess. We assume eyes on the sides of the head, one sharp spot in the centre, and the ability to see ultraviolet light, which we show as a violet tint.']] },
     frog: { chip: 'Frog, toad', who: 'a frog or toad', fov: 340, cpd: 4, pupil: 'h', persist: .15, gate: 1,
-      cue: 'Hold still, as a frog does. Only what moves is drawn.', rows: [
-      ['m', 'Movement', 'A frog does not register the still parts of its world, and can starve beside food that keeps still. Only what changes is drawn, so hold the phone as still as a frog holds itself.'],
-      ['g', 'Pace', 'A cane toad follows flicker to under 7 a second, a ninth of your rate, so movement smears into trails.'],
-      ['i', 'Field, sharpness and pupil', 'Guesses.']] },
+      cue: 'Hold still, as a frog does. Only things that move show up.', rows: [
+      ['m', 'Movement', 'A frog doesn’t notice the parts of its world that stay still. It can starve next to food that doesn’t move. So we only show what changes. Hold your phone as still as a frog holds itself.'],
+      ['g', 'Speed', 'A cane toad’s eyes can follow a light flashing only about 7 times a second, a ninth of what yours can. Anything that moves smears into a trail.'],
+      ['i', 'Field of view, sharpness and pupil', 'These are our best guesses.']] },
     bee: { chip: 'Bee', who: 'a bee', fov: 320, cpd: 1, pupil: 'none', M: BEE, uvBlue: 1, rate: .3,
       cue: 'Red goes dark, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects resolve under 1 cycle per degree to your 60.'],
-      ['m', 'Red', 'Bees have no receptor for it. Red things go dark.'],
-      ['m', 'Pace', 'A honeybee follows flicker to 200 a second in bright light, and you stop near 60.' + SLOW],
-      ['i', 'Ultraviolet', 'Bees see it and no phone records it. The blue here is invented.'],
-      ['x', 'Drawn as', 'False colour: their green as red, their blue as green, ultraviolet as blue.']] },
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
+      ['m', 'Red', 'Bees can’t see red. Red things look dark to them.'],
+      ['m', 'Speed', 'In bright light, a honeybee’s eyes can follow a light flashing up to 200 times a second, and yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Ultraviolet', 'Bees can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the blue here stands in for it.'],
+      ['i', 'How we show the colours', 'A bee sees green, blue and ultraviolet. We can’t show you ultraviolet, so we shift every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue.']] },
     insect: { chip: 'Butterfly, other insect', who: 'an insect', fov: 320, cpd: 1, pupil: 'none', sheen: .8, rate: .45,
-      cue: 'Coarse and wide, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects resolve under 1 cycle per degree to your 60.'],
-      ['g', 'Pace', 'Flies and dragonflies follow flicker past 100 a second, and one beetle to 400.' + SLOW.replace('that ratio', 'suggest it')],
-      ['i', 'Ultraviolet', 'Bees and some other insects see it and no phone records it. The violet is invented.']] },
+      cue: 'Blurry and wide, and each moment runs slow.', rows: [
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
+      ['g', 'Speed', 'The eyes of flies and dragonflies can follow a light flashing more than 100 times a second, and one beetle’s up to 400. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
+      ['i', 'Ultraviolet', 'Bees and some other insects can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.']] },
     plant: { chip: 'Plant', who: 'a plant', pupil: 'none', field: 1, noGreen: 1, persist: 2.5,
-      cue: 'There is no picture here, only how much light, what colour, and from where.', rows: [
-      ['g', 'No picture', 'A plant has nothing to focus light. It gets how much there is, what colour, and from where.'],
-      ['m', 'Neighbours', 'Plants read red against far-red light and detect neighbours before being shaded. A phone does not record that band.'],
-      ['i', 'Green and time', 'Green is removed because leaves throw most of it back, and anything quick is averaged away. Both choices are invented.']] },
+      cue: 'No picture here. Only how much light there is, what colour it is, and where it comes from.', rows: [
+      ['g', 'No picture', 'A plant has nothing like a lens to focus light into a picture. It senses how much light there is, what colour it is, and which direction it comes from.'],
+      ['m', 'Neighbours', 'Plants compare red light with far-red light, a colour just beyond what we can see. That tells them a neighbour is growing close by, before it shades them. A phone can’t capture far-red light.'],
+      ['i', 'Green and time', 'We take out the green, because leaves reflect most of it away, and we blur out anything quick. Both are our own choices.']] },
     other: { chip: 'Something else', who: 'this one', pupil: 'none', field: 1, sat: 0,
       cue: '', rows: [
-      ['i', 'No account yet', 'Nothing sourced on how this one meets light. It is shown as light and dark only.']] },
-    person: { chip: null, who: 'a person', pupil: 'o', cue: '', rows: [
-      ['m', 'Same eyes', 'That is a person. You have those eyes already.']] }
+      ['i', 'No view yet', 'Regards doesn’t have the ability to view the world as this creature right now.']] },
+    person: { chip: null, who: 'a human', pupil: 'o', cue: '', rows: [
+      ['m', 'Same eyes', 'That’s a human. You already see the world as one.']] }
   };
   var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other'];
 
@@ -810,7 +832,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   // A line that is waiting carries a bar under it: one that slides while the wait has no known end (the line holds an ellipsis),
   // and one that fills where the line says how far it has come ("12 of 310 MB").
   function waitMark(el, text) {
-    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026/.test(t || '');
+    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026|\.\.\./.test(t || '');
     el.classList.toggle('wait', on); el.classList.toggle('det', !!m);
     if (m) el.style.setProperty('--p', String(Math.max(0, Math.min(1, +m[1] / Math.max(1, +m[2]))))); else el.style.removeProperty('--p');
   }
@@ -1011,7 +1033,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   }
   function afterChange() {
     if (S.screen !== 'animal') return;
-    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That is a person. You have those eyes already.'
+    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That’s a human. You already see the world as one.'
       : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : '';
     msg(line, 6500);
   }
@@ -1206,13 +1228,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function lent(m) { return lentLeft(m) > 0; }
   function lentSays(m) {
     var ms = lentLeft(m), d;
-    if (ms <= 0) return 'its eyes have gone back';
+    if (ms <= 0) return 'This creature’s view has disappeared';
     d = Math.ceil(ms / 864e5);
-    return ms <= 36e5 ? 'its eyes go back within the hour' : ms <= 864e5 ? 'its eyes go back within a day' : d >= 7 ? 'its eyes are yours for a week' : 'its eyes are yours for ' + d + ' more days';
+    return ms <= 36e5 ? 'This is the last hour with this creature’s view' : ms <= 864e5 ? 'This is the last day with this creature’s view' : d >= 7 ? 'This creature’s view is yours for a week' : 'This creature’s view is yours for ' + d + ' more days';
   }
   function lentLine(m) {                           // the same, in a few words, for the moment of meeting and of looking again
     var ms = lentLeft(m), d = Math.ceil(ms / 864e5);
-    return ms <= 0 ? '' : d >= 7 ? 'You can now see the world through this creature\u2019s eyes for a week.' : ms <= 864e5 ? 'Goes back today' : d + ' days left';
+    return ms <= 0 ? '' : d >= 7 ? 'You can now see the world through this creature\u2019s eyes for a week.' : ms <= 864e5 ? 'The last day' : d + ' days left';
   }
   function ringOf(m, cls) {                        // a ring that empties over the week
     var f = Math.max(0, Math.min(1, lentLeft(m) / LEND_MS)), r = 6, c = 2 * Math.PI * r, s = svgEl('svg', { viewBox: '0 0 16 16', 'aria-hidden': 'true' });
@@ -1233,8 +1255,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var strip = $('eyeStrip'); strip.textContent = '';
     KINDS.forEach(function (key) {
       var b = el('button', 'eye'); b.type = 'button'; b.disabled = !met[key];
-      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A kind of eye that has gone back' : 'A kind of eye not yet met');
-      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when its eyes have gone back
+      b.setAttribute('aria-label', met[key] ? 'Look as ' + EYES[key].who : once[key] ? 'A creature you’ve already viewed the world as' : 'A creature you haven’t met yet');
+      var g = eyeGlyph(key, !!once[key]), lm = latestOf(key), f, c = 2 * Math.PI * 11;   // a kind met once keeps its pupil, dimmed when This creature’s view has disappeared
       if (met[key]) { f = Math.max(.02, lentLeft(lm) / LEND_MS); g.appendChild(svgEl('circle', { cx: 12, cy: 12, r: 11, 'class': 'loan', 'stroke-dasharray': (c * f).toFixed(2) + ' ' + c.toFixed(2), transform: 'rotate(-90 12 12)' })); }
       b.appendChild(g);                                    // the outer ring is the week, emptying
       if (met[key]) b.addEventListener('click', function () { lookAgain(latestOf(key)); });
@@ -1248,7 +1270,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       // what the eye reads is the name, the scientific name and the date; who named it and how long the eyes remain are said to a screen reader in words,
       // and shown as a ring with the days left
       var sm = el('span', 'sm', [m.sci, labelDate(new Date(m.at))].filter(Boolean).join(' · ')), days = el('span', 'days'), dl = Math.ceil(lentLeft(m) / 864e5);
-      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'named by this app' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : 'on your word', lentSays(m)].join(' · ')));
+      sm.appendChild(el('span', 'vh', ' · ' + [m.by === 'Claude' ? 'recognized by Claude' : m.by === 'page' ? 'named by this app' : m.by === 'service' ? 'named by the full database on a server' : m.by === 'device-large' ? 'named on this device by the full database' : '', lentSays(m)].filter(Boolean).join(' · ')));
       tx.appendChild(sm); days.appendChild(ringOf(m)); days.appendChild(document.createTextNode(dl + 'd')); days.setAttribute('aria-hidden', 'true');
       if (!lent(m)) li.className = 'gone';
       look.type = 'button'; look.setAttribute('aria-label', 'Look as ' + m.common);
@@ -1344,24 +1366,24 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
       : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
-      off: 'Identifying is switched off.',
-      absent: 'This app can’t identify photos yet.',
-      missing: 'Some of this app’s files are missing.',
-      network: 'The download didn’t finish.',
-      damaged: 'A download arrived damaged.',
-      unfit: 'This app’s files are out of date.',
-      browser: 'This browser can’t identify photos.',
-      died: 'Something stopped working.',
-      slow: 'That took too long.',
-      photo: 'That photo couldn’t be read.'
+      off: 'IDing is turned off.',
+      absent: 'This app can’t ID photos yet. Try redownloading it.',
+      missing: 'Some of this app’s files are missing. Try redownloading it.',
+      network: 'This app’s download is incomplete. Try redownloading it.',
+      damaged: 'This app’s download is damaged. Try redownloading it.',
+      unfit: 'This app’s files are out of date. Try downloading the latest version.',
+      browser: 'This browser is too old to ID photos. Try a current Chrome, Safari, or other browser.',
+      died: 'This app’s IDing has crashed. Check that your device has enough memory.',
+      slow: 'The camera timed out. Try again.',
+      photo: 'That photo couldn’t be read. Try again.'
     };
     if (big) {
       SAY.off = 'The full database is switched off.'; SAY.absent = 'This app has no full database yet.'; SAY.missing = 'The full database\u2019s files are missing.';
-      SAY.network = 'The full database could not be downloaded.'; SAY.damaged = 'The full database\u2019s file arrived damaged.'; SAY.unfit = 'The full database\u2019s files do not fit this build of the app.';
-      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database stopped working.'; SAY.slow = 'The full database took too long.'; SAY.photo = 'The full database failed on that photo.';
-      SAY.room = 'There is not enough room on this device for the full database.';
+      SAY.network = 'The full database’s download was interrupted.'; SAY.damaged = 'The full database\u2019s download is damaged.'; SAY.unfit = 'The full database does not fit this build of the app. Download the latest version of the app.';
+      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database crashed. Check that your device has enough memory.'; SAY.slow = 'The full database timed out. Try again.'; SAY.photo = 'The full database failed on that photo. Try a different photo. Try a different photo.';
+      SAY.room = 'There is not enough storage on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
-      SAY.stopped = 'The download was stopped.';
+      SAY.stopped = 'The download has been stopped.';
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
@@ -1890,7 +1912,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
       if (big) return !(getP && M) ? 'Looking more closely\u2026' : have === 'kept' ? 'Checking the full database\u2026' : 'Downloading the full database\u2026 ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB';
-      if (state === 'loading' && total > got) return 'Getting ready\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
+      if (state === 'loading' && total > got) return 'Downloading\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
       return 'Looking\u2026';
     }
     function warm() {                                  // once the opening screen is up and the page has nothing else to do
@@ -2101,10 +2123,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   ].join('\n');
 
   function openSheet(id) { show('scrim', true); show(id, true); }
-  function anySheet() { return !$('claim').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
+  function anySheet() { return !$('claim').hidden || !$('notice').hidden || !$('contact').hidden || !$('aboutSheet').hidden || !$('record').hidden || !$('info').hidden || !$('keep').hidden || !$('ask').hidden || !$('big').hidden; }
   function closeSheets() {
-    var wasClaim = !$('claim').hidden;
-    show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
+    var wasClaim = !$('claim').hidden || !$('notice').hidden;
+    show('notice', false); show('contact', false); show('claim', false); show('record', false); show('aboutSheet', false); show('info', false); show('keep', false); show('ask', false); show('big', false); show('scrim', false);
     try { $('claimName').blur(); $('keepVideo').pause(); } catch (e) {}
     return wasClaim;
   }
@@ -2119,11 +2141,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
     $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
-      var name = key === 'person' ? 'a person' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
+      var name = key === 'person' ? 'a human' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
       kbox.appendChild(b);
     });
-    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species.' : 'Is it one of these?';
+    show('claimKindBox', kinds.length > 0); $('claimOfferNote').textContent = kinds.length ? 'Or one of these species:' : 'Is it one of these?';
     var offers = offerList(pocket.offers || []), box = $('claimOffers'); box.textContent = '';      // what the small model could not choose between
     offers.forEach(function (o) {
       var b = el('button', 'pill ghost', o.label); b.type = 'button';
@@ -2144,12 +2166,21 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     return keep.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: o.local, label: o.en && o.sci && n[low(o.en)] > 1 ? nameCase(o.en) + ' (' + o.sci + ')' : (o.sci ? nameCase(o.en) : o.en) || o.sci }; });
   }
   function setViewPrompt(key) {
-    $('askViewH').textContent = key === 'person' ? 'Now your view.' : 'View the world as ' + (key === 'other' ? 'this living thing' : EYES[key].who) + '.';   // EYES.other.who is "this one", which reads badly here
+    $('askViewH').textContent = 'View the world as ' + EYES[key].who + '.';   // EYES.other.who is "this one", which reads badly here
     $('askViewText').textContent = '';
     $('askViewFine').textContent = '';
   }
 
+  var REGARDS = '<em>Regards</em>';
+  function tell(html) {                            // a plain notice over the photographing screen; closing it leaves the person where a new photo can be taken or chosen
+    msg(''); closeSheets(); dropSvc(); setEyes(null);
+    if (S.src === 'cam') go('finder'); else go('naming');
+    $('noticeText').innerHTML = html; openSheet('notice'); paintType();
+  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
   function reveal(key, named) {
+    if (key === 'other') { diag('no-view', clip((named && named.common) || '', 60)); S.seq++; tell(noViewSays(named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '')); return; }
     S.seq++; closeSheets(); setEyes(key, named); msg(''); noteMeeting(key, named); paintType();
     if (named && (named.by === 'service' || named.by === 'device-large')) paintSvc(); else dropSvc();     // a name said by the person, or a new photo, ends any question still out
     if (S.hasView) { thaw(); go('animal'); showName(); later(startChange, calm ? 150 : 750); return; }
@@ -2164,7 +2195,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (S.src === 'cam') go('finder'); else go('naming');
     openClaim(sub); paintType();
   }
-  function failName(why) { askName(why + ' So you tell it.'); }
+  function failName(why) { askName(why + ' Tell us what’s there.'); }
   // While the recognizer is being downloaded for the first time, the person may type the name and not wait. The download carries on.
   function paintType() { show('barType', !inViewer && S.screen === 'naming' && !S.eyes && !anySheet() && pocket.fetching()); }
   function identify() {
@@ -2179,7 +2210,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     pocket.recognize(S.animalPhoto, pocket.file).then(function (r) {
       if (t !== S.token) return;
       diag('pocket', JSON.stringify({ kind: r.kind, p: +r.kindP.toFixed(3), sp: r.species.slice(0, 3).map(function (x) { return [x.sci, +x.p.toFixed(3)]; }), ms: r.ms, model: r.model, backend: r.backend }).slice(0, 400));
-      if (r.kind === 'none' && r.sure) { failName('Nothing alive was found in that photo.'); return; }
+      if (r.kind === 'none' && r.sure) {             // nothing alive, says the small model: where the full database is on this device it looks before the person is told
+        pocket.offers = []; pocket.kindOffers = [];
+        large.survey().then(function (h) { if (t !== S.token || S.eyes) return; if (h === 'kept' && !large.broken()) firstLook(t, false); else tell('We can\u2019t find a creature in your photo. Try again.'); });
+        return;
+      }
       pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       pocket.kindOffers = r.kindOffers || [];
       if (!r.sure) {
@@ -2187,17 +2222,17 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         diag('not-sure', r.kind + ' ' + r.kindP.toFixed(3));
         large.survey().then(function (h) {
           if (t !== S.token || S.eyes) return;
-          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what that species is.');
+          if (h === 'kept' && !large.broken()) firstLook(t, true); else askName('We\u2019re not sure what kind of creature that is.');
         });
         return;
       }
-      var common = r.kind === 'person' ? 'a person' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
+      var common = r.kind === 'person' ? 'a human' : r.named ? (r.named.en || r.named.sci) : handName(r.kind);
       reveal(r.kind, { common: (r.named ? nameCase(clip(common, 60)) : clip(common, 60)) || handName(r.kind), scientific: r.named ? clip(r.named.sci, 80) : '', by: 'page', local: !!r.named });
       closer(t, !!r.named);                                                // the kind is in use at once; a finer name may follow from the full database
     }, function (e) {
       if (t !== S.token) return;
       diag('pocket-error', String((e && e.code) || 'unknown'));
-      failName((e && e.sentence) || 'It could not be recognized this time.');
+      failName((e && e.sentence) || 'The IDing isn’t working right now.');
     });
   }
   function recognize(t) {
@@ -2205,7 +2240,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (!(sample && canImages)) {
       msg(''); if (S.src !== 'cam') go('naming'); else go('finder');
       diag('no-recognizer', inViewer ? (sample ? 'no-images' : 'no-sample') : 'outside');
-      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : (pocket.whyNot() || 'This page cannot recognize a photo here.') + ' So you tell it.');
+      openClaim(inViewer ? 'Claude could not be reached from this view, so you tell it.' : (pocket.whyNot() || 'This page cannot recognize a photo here.') + ' Tell us what’s there.');
       return;
     }
     if (nameCtl) nameCtl.abort();
@@ -2217,7 +2252,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (!blob) { clearTimeout(slow); failName('The photo could not be prepared.'); return; }
       sample.json(PROMPT, { images: [blob], modelTier: 'quick', signal: ctl.signal }).then(function (d) {
         clearTimeout(slow); if (t !== S.token) return;
-        if (!d || typeof d !== 'object' || d.found === false) { failName('Nothing alive was found in that photo.'); return; }
+        if (!d || typeof d !== 'object' || d.found === false) { tell('We can\u2019t find a creature in your photo. Try again.'); return; }
         var key = String(d.eyes || 'other'); if (!EYES[key]) key = 'other';
         diag('recognized', key);
         reveal(key, { common: (d.scientific ? nameCase(clip(d.common, 60)) : clip(d.common, 60)) || handName(key), scientific: clip(d.scientific, 80), by: 'Claude' });
@@ -2226,7 +2261,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         var code = e && e.code; if (code === 'cancelled') return;
         if (['not_granted', 'sampling_disabled', 'not_declared', 'capability_disabled', 'capability_removed', 'images_unavailable'].indexOf(code) >= 0) sample = null;
         diag('claude-error', String(code || 'unknown'));
-        failName(code === 'rate_limited' ? 'Claude is busy just now.' : code === 'not_granted' ? 'Claude was not allowed to look.' : 'It could not be recognized this time.');
+        failName(code === 'rate_limited' ? 'Claude is busy just now.' : code === 'not_granted' ? 'Claude was not allowed to look.' : 'The IDing isn’t working right now.');
       });
     }, 'image/jpeg', .86);
   }
@@ -2293,7 +2328,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       x.lineWidth = Math.max(1, .28 * u); x.strokeStyle = 'rgba(255,255,255,.9)'; x.stroke();
     }
     var maxW = W - 2 * pad - (side ? side + pad : 0), name = shownName(), size = 5.6 * u;
-    var small = Math.max(11, 1.85 * u), note = 'An approximation of what may reach ' + EYES[S.eyes].who + (guessed(S.eyes) ? ', part of it a guess.' : '.') + ' ' + labelDate(new Date());
+    var small = Math.max(11, 1.85 * u), note = 'What ' + EYES[S.eyes].who + (guessed(S.eyes) ? ' might see, based on scientific evidence and informed speculation' : ' sees, based on scientific evidence') + ' \u00B7 ' + labelDate(new Date());
     x.font = small + 'px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
     var words = note.split(' '), lines = [''], i;
     for (i = 0; i < words.length; i++) {
@@ -2350,7 +2385,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     $('keepNote').textContent = '';
     show('keepVideo', k.video); show('keepCv', !k.video);
     if (k.video) {
-      $('keepVideo').onerror = function () { show('keepVideo', false); $('keepNote').textContent = 'Recorded. It cannot be played back in this view, so save it to watch it.'; };
+      $('keepVideo').onerror = function () { show('keepVideo', false); $('keepNote').textContent = 'Recorded. It can’t be played back in this browser, so save it to watch it.'; };
       $('keepVideo').src = kept.url; $('keepVideo').play().catch(function () {});
     } else { var pv = $('keepCv'); pv.width = k.canvas.width; pv.height = k.canvas.height; pv.getContext('2d').drawImage(k.canvas, 0, 0); }
     var canShare = false;
@@ -2362,17 +2397,17 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (!kept) return;
     if (!inViewer) {
       var a = document.createElement('a'); a.href = kept.url; a.download = kept.name; document.body.appendChild(a); a.click(); a.remove();
-      $('keepNote').textContent = 'Sent to your downloads.'; return;
+      $('keepNote').textContent = 'Sent to your downloads'; return;
     }
-    if (!downloads) { $('keepNote').textContent = 'Saving is unavailable in this view.'; return; }
-    downloads.save({ filename: kept.name, data: kept.blob }).then(function () { $('keepNote').textContent = 'Saved.'; }).catch(function (e) {
-      var code = e && e.code; $('keepNote').textContent = code === 'declined' ? '' : code === 'rate_limited' ? 'A save is already waiting for your answer.' : 'It could not be saved here.';
+    if (!downloads) { $('keepNote').textContent = 'Saving is unavailable in this view'; return; }
+    downloads.save({ filename: kept.name, data: kept.blob }).then(function () { $('keepNote').textContent = 'Saved'; }).catch(function (e) {
+      var code = e && e.code; $('keepNote').textContent = code === 'declined' ? '' : code === 'rate_limited' ? '' : 'Save failed';
     });
   }
   function shareKept() {
     if (!kept) return;
     navigator.share({ files: [new File([kept.blob], kept.name, { type: kept.blob.type })] }).catch(function (e) {
-      if (!e || e.name !== 'AbortError') $('keepNote').textContent = 'Sharing did not go through. Save it and send it from your files.';
+      if (!e || e.name !== 'AbortError') $('keepNote').textContent = 'Sharing failed. Save it and send it from your files.';
     });
   }
 
@@ -2381,12 +2416,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (!S.eyes) return;
     var E = EYES[S.eyes];
     $('infoTitle').textContent = shownName();
-    $('infoSub').textContent = [S.named && S.named.scientific ? S.named.scientific + '.' : '',
-      S.named && S.named.by === 'Claude' ? 'Recognized by Claude from your photo, which can be wrong.'
-      : S.named && S.named.by === 'page' ? ''
-      : S.named && S.named.by === 'service' ? 'Named by the full database on a server, which can be wrong.'
-      : S.named && S.named.by === 'device-large' ? 'Named on this device by the full database, which can be wrong.' : 'As you said.',
-      S.named && S.named.local ? 'Chosen among species recorded around ' + pocket.place() + '.' : ''].filter(Boolean).join(' ');
+    $('infoSub').textContent = S.named && S.named.scientific ? S.named.scientific : '';
     show('infoSub', !!$('infoSub').textContent);
     var ul = $('rows'); ul.textContent = '';
     E.rows.forEach(function (r) {
@@ -2402,7 +2432,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function noteLink(before, word, after, title) {   // a line of the naming sheet with one linked word; the link opens a new report with the typed name as its title
     var n = $('claimNote'), a = document.createElement('a'); n.textContent = before;
     a.href = 'https://github.com/jampotful/seen-back/issues/new?title=' + encodeURIComponent(title); a.target = '_blank'; a.rel = 'noopener'; a.textContent = word;
-    n.appendChild(a); n.appendChild(document.createTextNode(after));
+    contactLink(a, title); n.appendChild(a); n.appendChild(document.createTextNode(after));
   }
   // ---------- wiring
   $('claimForm').addEventListener('submit', function (e) {
@@ -2414,8 +2444,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
     if (key === 'other') {                         // it exists, and none of the kinds of eye is its own
-      diag('said-noview', clip(named.common, 60));
-      $('claimNote').textContent = cap(named.common) + ' isn\u2019t yet a creature this app can view the world as. We\u2019re adding new species all the time! In the meantime, try a different creature.'; return;
+      diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
     if (key) { diag('said', key); reveal(key, named); return; }
     sug = (hit ? hit.has.concat(hit.near) : []).slice(0, 3); if (!sug.length) sug = nearWords(t);
@@ -2428,16 +2457,16 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       });
       show('claimSuggestRow', true); return;
     }
-    noteLink(cap(t) + ' isn\u2019t a creature we know. If you typed in a pet\u2019s name (e.g., Marquise), please make sure you include what kind of pet it is (Marquise, my cat). If you typed in a real species, let us know about the error ', 'here', '.', 'Not identified: ' + t);
+    noteLink(cap(t) + ' isn\u2019t a creature we know. If this is a pet\u2019s name, please make sure you include what kind of creature your pet is (e.g. \u201CGarfield, a cat\u201D). If you typed in a real species, let us know about our error ', 'here', '.', 'Not identified: ' + t);
   });
-  $('introFine').textContent = engine ? '' : 'This browser cannot run the picture engine (WebGL 2). Try a current Chrome or Safari.';
+  $('introFine').textContent = engine ? '' : 'This browser is too old to run the picture engine. Try a current Chrome, Safari, or other browser.';
   $('btnBegin').disabled = !engine;
   if (!coarse) { $('lblAnimalCam').hidden = true; $('lblViewClip').hidden = true; $('lblViewCam').hidden = true;    // one way in, so it is said in words
-    [['lblAnimalPick', 'Choose a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
+    [['lblAnimalPick', 'Upload a photo'], ['lblViewPick', 'Choose a clip or a photo']].forEach(function (p) { var l = $(p[0]), s = l.querySelector('svg'); l.className = 'pill'; if (s) l.removeChild(s); l.insertBefore(document.createTextNode(p[1]), l.firstChild); }); }
 
   function toAskAnimal() {
     $('askFine').textContent = inViewer ? 'Inside Claude the camera is closed to this page, so it works from a photo of who you met and a clip of your view. If nothing opens when you tap, open this page in a browser in place of the Claude app.'
-      : S.camRefused ? 'Your camera isn\u2019t available. If you took a photo with your camera app, you can upload it here instead.' : '';
+      : S.camRefused ? 'If you already have a photo of the species, you can upload it here instead.' : '';
     go('askAnimal');
   }
   $('btnBegin').addEventListener('click', function () {
@@ -2445,7 +2474,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
     openCamera('environment').then(function () {
-      btn.disabled = false; setEyes(null); go('finder'); msg('Photograph something alive, or choose a photo of it.', 4500);
+      btn.disabled = false; setEyes(null); go('finder'); msg('That didn’t work. Try again or upload a photo of a species.', 4500);
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
   $('btnShutter').addEventListener('click', shutter);
@@ -2508,7 +2537,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (top.p >= c.nameAt && top.kind !== S.eyes && top.kind !== 'person' && c.kindAt !== null && kindP >= c.kindAt) {
       // another kind of creature, and the full database is sure enough by the service's own setting: the change is offered, never made
-      S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + (top.kind === 'other' ? '' : ', ' + EYES[top.kind].who) + '. Change eyes?' };
+      if (top.kind === 'other') S.svc = { t: t, state: 'said', text: 'It looks like ' + aAn(named.common) + '. Regards doesn\u2019t have the ability to view the world as one right now.' };
+      else S.svc = { t: t, state: 'change', kind: top.kind, named: named, text: 'It looks like ' + aAn(named.common) + ', ' + EYES[top.kind].who + '. Change to this creature?' };
     }
     paintSvc();
   }
@@ -2516,8 +2546,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var v = S.svc; if (!v) return;
     if (v.state === 'offer') {
       var c = naturalist.cfg(); if (!c) return;
-      $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
-        (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+      $('askSub').textContent = 'This photo will be temporarily sent to this project\u2019s server, ' + c.where + '.';
       $('askKeep').checked = false;
       show('claim', false); show('record', false); show('info', false); show('keep', false); openSheet('ask');
     } else if (v.state === 'change') { S.svc = null; diag(v.named.by === 'service' ? 'service-eyes' : 'large-eyes', v.kind); reveal(v.kind, v.named); }
@@ -2545,16 +2574,16 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function netSays() {                             // what the connection says of itself, where it says anything
     var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (!c) return '';
-    if (c.saveData) return 'This ' + dev() + ' is set to save data';
-    if (c.metered === true || c.type === 'cellular') return 'This connection reports itself as metered';
-    if (/^(slow-2g|2g|3g)$/.test(c.effectiveType || '')) return 'This connection reports itself as slow';
+    if (c.saveData) return 'Your device is in data saver mode';
+    if (c.metered === true || c.type === 'cellular') return 'Your device\u2019s connection is metered';
+    if (/^(slow-2g|2g|3g)$/.test(c.effectiveType || '')) return 'Your device\u2019s connection is slow';
     return '';
   }
   function getLine() {
     var z = large.size(), h = large.has();
     // it had arrived whole and is not here now (the browser cleared it away, or the model was replaced by a newer one): said as it is
-    if (bigChoice() === 'kept' && h !== 'kept') return 'The full database is no longer on this ' + dev() + '. Get it again?';
-    return z && h === 'partial' ? 'The full database is partly on this ' + dev() + ': ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'Download the full database of specific species names?';
+    if (bigChoice() === 'kept' && h !== 'kept') return 'The full database is no longer on this device. Get it again?';
+    return z && h === 'partial' ? 'The full database is partly downloaded: ' + z.keptMb + ' of ' + z.mb + ' MB. Get the rest?' : 'Download the full database of species?';
   }
   function noteBig(text, tap, ms) {                // one line for the download: its progress, its end, its failure
     clearTimeout(bigNoteTimer); bigNote = text ? { text: text, tap: tap || null } : null;
@@ -2566,8 +2595,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var z = large.size(), h = large.has(), s = z && z.seconds, n = netSays(), getting = h === 'getting', rest; if (!z) return;
     rest = Math.max(1, z.mb - (h === 'partial' ? z.keptMb : 0));
     $('bigTitle').textContent = getting ? 'Getting the full database' : h === 'partial' ? 'Get the rest of the full database?' : 'Get the full database?';
-    $('bigSub').textContent = 'The full database is free to download, includes specific species names, and provides more accuracy in IDing. The one drawback is that it is fairly large and may slow down this app.';
-    $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB are here already. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
+    $('bigSub').textContent = 'The full database of species is free to download and provides more accuracy in IDing.';
+    $('bigNet').textContent = getting ? large.line() : (h === 'partial' ? z.keptMb + ' of ' + z.mb + ' MB have been downloaded. ' : '') + (n ? n + ', and ' + (h === 'partial' ? 'the rest' : 'this download') + ' is about ' + rest + ' MB.' : '');
     waitMark($('bigNet'));
     $('bigYes').textContent = h === 'partial' ? 'Get the rest' : 'Download';
     show('bigYes', !getting); show('bigNo', !getting); show('bigNever', !getting); show('bigStop', getting);
@@ -2587,13 +2616,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var p = large.get(); noteBig(large.line(), openBig);
     p.then(function () {
       setBigChoice('kept'); if (!$('big').hidden) closeSheets();
-      noteBig('The full database is on this ' + dev() + '.', null, 8000);
+      noteBig('The full database has been downloaded.', null, 8000);
       // the photo in hand is looked at now, if the small model's answer is still what stands
       if (S.eyes && S.eyes !== 'person' && S.named && S.named.by === 'page' && !S.svc) lookCloser(S.token);
     }, function (e) {
       var code = (e && e.code) || 'died', z = large.size(), again = /^(network|missing|damaged|died|slow)$/.test(code);
       if (!$('big').hidden) closeSheets();
-      if (code === 'stopped') { setBigChoice(''); noteBig('The download was stopped.' + (z && z.keptMb ? ' ' + z.keptMb + ' of ' + z.mb + ' MB are kept on this ' + dev() + '.' : ''), null, 8000); return; }
+      if (code === 'stopped') { setBigChoice(''); noteBig('The download has been stopped.' + (z && z.keptMb ? ' ' + z.keptMb + ' of ' + z.mb + ' MB are kept on this device.' : ''), null, 8000); return; }
       if (!again) setBigChoice('');
       noteBig(((e && e.sentence) || large.say(code)) + (again ? ' Try again?' : ''), again ? startBig : null, 30000);
     });
@@ -2638,8 +2667,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
     } else if (r.sure && r.kindAt !== null && r.kind !== S.eyes && r.kind !== 'person' && r.kind !== 'none') {
       // another kind of creature, and the full database is sure enough by its slot's own setting: the change is offered, never made
-      S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
-        text: 'It looks like ' + (named ? aAn(named.common) + (r.kind === 'other' ? '' : ', ' + EYES[r.kind].who) : r.kind === 'other' ? 'some other living thing' : EYES[r.kind].who) + '. Change eyes?' };
+      if (r.kind === 'other') S.svc = { t: t, state: 'said', text: 'It looks like ' + (named ? aAn(named.common) : 'another creature') + '. Regards doesn\u2019t have the ability to view the world as ' + (named ? 'one' : 'it') + ' right now.' };
+      else S.svc = { t: t, state: 'change', kind: r.kind, named: named || { common: handName(r.kind), scientific: '', by: 'device-large', local: false },
+        text: 'It looks like ' + (named ? aAn(named.common) + ', ' + EYES[r.kind].who : EYES[r.kind].who) + '. Change to this creature?' };
     }
     paintSvc();
   }
@@ -2652,14 +2682,14 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (t !== S.token || S.eyes) return;
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
-      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; failName('Nothing alive was found in that photo.'); return; }     // a larger slot with a kinds head can say so
-      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a person' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
+      if (r.sure && r.kind === 'none') { pocket.kindOffers = []; tell('We can\u2019t find a creature in your photo. Try again.'); return; }     // a larger slot with a kinds head can say so
+      if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a human' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
-      askName(unsure ? 'Even the full database isn’t sure what that is.' : 'The full database is not sure what that is.');
+      askName(unsure ? 'We’re not sure what kind of creature that is.' : 'We’re not sure what kind of creature that is.');
     }, function (e) {
       if (t !== S.token || S.eyes) return;
       S.closer = t; diag('large-none', String((e && e.code) || 'unknown'));
-      askName(unsure ? 'We\u2019re not sure what that species is.' : ((e && e.sentence) || large.say('photo')) + ' So you tell it.');
+      askName(unsure ? 'We\u2019re not sure what kind of creature that is.' : ((e && e.sentence) || large.say('photo')) + ' Tell us what’s there.');
     });
   }
   // The same from the server, where that is the full database there is: asked with the person's say-so, and its answer taken as the name.
@@ -2674,13 +2704,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       var c = naturalist.cfg(), top = a.species[0];
       pocket.offers = a.species.slice(0, 5).map(function (x) { return { sci: x.sci, en: x.en, kind: x.kind, local: !!a.region }; });
       if (top && c && top.p >= c.nameAt && top.kind !== 'person') { reveal(top.kind, { common: nameCase(clip(top.en || top.sci, 60)), scientific: clip(top.sci, 80), by: 'service', local: !!a.region }); return; }
-      askName('The full database could not name it.');
+      askName('The full database can’t ID this photo.');
     }, function (e) {
       if (firstJob === job) firstJob = null;
       if (t !== S.token || S.eyes) return;
       diag('service-none', String((e && e.code) || 'unknown'));
       if (e && e.code === 'cancelled') return;
-      askName('The full database could not be asked just now.');
+      askName('The full database timed out. Try again.');
     });
   }
   // From the sheet that asks for a name there is a way to the full database, where there is one: on this device first, else on a server.
@@ -2692,7 +2722,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     function still() { return t === S.token && !$('claim').hidden && !S.eyes; }
     large.survey().then(function (h) {
       if (!still()) return;
-      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the full database on this ' + dev(); claimAskHow = 'device'; show('claimAskRow', true); return; }
+      if (h === 'kept' && !large.broken()) { $('claimAsk').textContent = 'Look more closely, with the full database'; claimAskHow = 'device'; show('claimAskRow', true); return; }
       naturalist.config().then(function (c) {
         if (!c || !still() || navigator.onLine === false || naturalist.choice() === 'no') return;
         $('claimAsk').textContent = 'Ask the full database on a server'; claimAskHow = 'service'; show('claimAskRow', true);
@@ -2704,8 +2734,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     if (claimAskHow === 'device') { diag('large-asked', ''); firstLook(t, false); return; }
     if (claimAskHow !== 'service' || !c) return;
     if (naturalist.choice() === 'yes') { closeSheets(); firstService(t); return; }
-    $('askSub').textContent = 'This one photo, made smaller, would be sent to a server run for this project, ' + c.where + '. ' +
-      (pocket.local !== false && c.region ? 'The month and the name of this region go with it. ' : 'The month goes with it. ') + 'The photo is not kept there.';
+    $('askSub').textContent = 'This photo will be temporarily sent to this project\u2019s server, ' + c.where + '.';
     $('askKeep').checked = false;
     closeSheets(); askFirstT = t; openSheet('ask');
   });
@@ -2713,13 +2742,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     large.survey().then(function () {
       var h = large.has(), z = large.size(), a = large.about(), d = dev(), fail = a.getFail && !/^stopped/.test(a.getFail) ? ' ' + large.say(a.getFail.split(':')[0]) : '';
       if (!z || !h) { show('bigBox', false); return; }
-      $('bigState').textContent = bigDelAsked ? 'Delete the full database from this ' + d + '? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
+      $('bigState').textContent = bigDelAsked ? 'Delete the full database? It is ' + (h === 'kept' ? z.mb : z.keptMb) + ' MB, and would have to be downloaded again.'
         : h === 'getting' ? large.line()
-        : h === 'kept' ? 'The full database is on this ' + d + ' (' + z.mb + ' MB). It names the species here, and photos are not sent anywhere.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
-        : h === 'partial' ? 'The full database is partly on this ' + d + ': ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
-        : 'You can download the full database of species to your ' + d + '. It\u2019s free, includes specific species names, and provides more accuracy in IDing. The one drawback is that it\u2019s fairly large and may slow down this app.' + fail;
+        : h === 'kept' ? 'You currently have the full database of species downloaded.' + (a.state === 'failed' && a.why ? ' ' + large.say(a.why) : '')
+        : h === 'partial' ? 'The full database is partly downloaded: ' + z.keptMb + ' of ' + z.mb + ' MB.' + fail
+        : 'The full database of species is free to download and provides more accuracy in IDing.' + fail;
       waitMark($('bigState'));
-      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = bigDelAsked ? 'Delete it' : h === 'partial' ? 'Delete what is here' : 'Delete it';
+      $('bigGet').textContent = h === 'partial' ? 'Get the rest' : 'Download'; $('bigDel').textContent = h === 'partial' && !bigDelAsked ? 'Delete any downloaded data' : 'Delete the download';
       show('bigGet', !bigDelAsked && (h === 'absent' || h === 'partial')); show('bigHalt', h === 'getting'); show('bigDel', h === 'kept' || h === 'partial'); show('bigDelNo', bigDelAsked);
       show('bigAskRow', false); $('bigAsk').checked = bigChoice() === 'no';
       show('bigBox', true);
@@ -2768,7 +2797,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   $('btnType').addEventListener('click', function () {
     if (S.screen !== 'naming' || S.eyes) return;
     S.token++; S.seq++; diag('type-instead', '');             // the answer for this photo, when it comes, is not waited for
-    askName('The download carries on meanwhile.');
+    askName('Your download is finishing in the background.');
   });
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
@@ -2790,7 +2819,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var f = S.facing === 'user' ? 'environment' : 'user';
     startCamera(f).then(paintUI).catch(function () { msg('The other camera could not be opened.', 4000); });
   });
-  function hold(on) { return function (e) { if (e && e.cancelable) e.preventDefault(); S.holding = on; $('btnEyes').classList.toggle('on', on); if (on) msg('Your own eyes.'); else msg(''); }; }
+  function hold(on) { return function (e) { if (e && e.cancelable) e.preventDefault(); S.holding = on; $('btnEyes').classList.toggle('on', on); if (on) msg('As a human'); else msg(''); }; }
   $('btnEyes').addEventListener('pointerdown', hold(true));
   ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { $('btnEyes').addEventListener(ev, hold(false)); });
   $('btnEyes').addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) hold(true)(e); });
@@ -2817,7 +2846,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 
   function onAnimalFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
-    decode(f).then(function (c) { pocket.file = f; gotAnimalPhoto(c); }).catch(function () { if (S.screen === 'finder') msg('That file could not be read as a photo.', 5000); else $('askFine').textContent = 'That file could not be read as a photo.'; });
+    decode(f).then(function (c) { pocket.file = f; gotAnimalPhoto(c); }).catch(function () { if (S.screen === 'finder') msg('This file could not be read as a photo.', 5000); else $('askFine').textContent = 'This file could not be read as a photo.'; });
   }
   function onViewFile(e) {
     var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f || !S.eyes || !engine) return;
@@ -2827,7 +2856,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       $('askViewFine').textContent = ''; setEyes(key, nm); go('animal'); showName(); later(startChange, calm ? 150 : 900);
     }).catch(function () {
       if (S.animalPhoto) showStill(S.animalPhoto, false);
-      setEyes(key, nm); $('askViewFine').textContent = 'That file could not be opened. Try another.';
+      setEyes(key, nm); $('askViewFine').textContent = 'This file could not be opened. Try another.';
     });
   }
   $('inLib').addEventListener('change', onAnimalFile);
@@ -2875,19 +2904,45 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var f = pocket.about().fitted; if (!f) return '';
     var n = typeof f.photos === 'number' && isFinite(f.photos) && f.photos >= 1 ? String(Math.round(f.photos)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' : '';
     var rule = typeof f.rule === 'string' ? clip(f.rule.trim(), 300) : '';
-    return 'This app identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
+    return ' identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
   }
-  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a, i;
+  function paintAbout() { var fl = fittedLine(), f = pocket.about().fitted, el = $('fittedOn'), a;
     $('buildMark').textContent = aboutText(); $('aboutNote').textContent = '';
-    el.textContent = 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10) + '.';
+    el.textContent = 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10);
     if (fl) {
       el.appendChild(document.createElement('br')); el.appendChild(document.createElement('br'));
-      if (f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list) && (i = fl.indexOf('photos')) >= 0) {   // the attribution: the word "photos" opens the list of each photograph's address and licence
-        a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'photos';
-        el.appendChild(document.createTextNode(fl.slice(0, i))); el.appendChild(a); el.appendChild(document.createTextNode(fl.slice(i + 6)));
-      } else el.appendChild(document.createTextNode(fl));
+      el.appendChild(document.createElement('em')).textContent = 'Regards'; el.appendChild(document.createTextNode(fl));
+      if (f && typeof f.list === 'string' && /^https:\/\/[^\s"<>]+$/.test(f.list)) {   // the attribution: where each photograph's address and licence can be read
+        a = document.createElement('a'); a.href = f.list; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'here';
+        el.appendChild(document.createTextNode(' The full list of photos is ')); el.appendChild(a); el.appendChild(document.createTextNode('.'));
+      }
     }
     show('fittedOn', true); paintChoices(); }
+  var CONTACT_URL = '', CONTACT_FIELDS = { name: '', email: '', message: '', build: '' };   // a form's address and the names of its fields; empty until one is set up
+  function openContact(about) {
+    if (!CONTACT_URL && !/[?&]contact=demo\b/.test(location.search)) return false;
+    closeSheets(); ['contactName', 'contactEmail', 'contactMsg'].forEach(function (id) { $(id).parentNode.classList.remove('bad'); });
+    $('contactNote').textContent = ''; waitMark($('contactNote')); $('contactSend').disabled = false;
+    if (about && !$('contactMsg').value) $('contactMsg').value = about;
+    openSheet('contact'); $('contact').scrollTop = 0; return true;
+  }
+  function contactLink(a, about) { a.addEventListener('click', function (e) { if (openContact(typeof about === 'function' ? about() : about)) e.preventDefault(); }); }
+  $('contactClose').addEventListener('click', dismissSheets);
+  $('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = clip($('contactName').value, 80), email = clip($('contactEmail').value, 120), text = String($('contactMsg').value || '').trim().slice(0, 2000), okMail = !email || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email), body;
+    $('contactEmail').parentNode.classList.toggle('bad', !okMail); $('contactMsg').parentNode.classList.toggle('bad', !text);
+    if (!text) { $('contactNote').textContent = 'Write a message first.'; return; }
+    if (!okMail) { $('contactNote').textContent = 'That email doesn\u2019t look right.'; return; }
+    if (!CONTACT_URL) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
+    body = new URLSearchParams(); body.append(CONTACT_FIELDS.name, name); body.append(CONTACT_FIELDS.email, email); body.append(CONTACT_FIELDS.message, text); if (CONTACT_FIELDS.build) body.append(CONTACT_FIELDS.build, 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10));
+    $('contactSend').disabled = true; $('contactNote').textContent = 'Sending\u2026'; waitMark($('contactNote'));
+    fetch(CONTACT_URL, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
+      $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
+    }, function () { $('contactSend').disabled = false; $('contactNote').textContent = 'That didn\u2019t send. Check your connection and try again.'; waitMark($('contactNote')); });
+  });
+  contactLink($('aboutTellLink'), '');
+  $('noticeOk').addEventListener('click', dismissSheets);
   function openAbout() { paintAbout(); show('buildBox', false); show('claim', false); show('record', false); show('info', false); show('keep', false); show('ask', false); show('big', false); openSheet('aboutSheet'); $('aboutSheet').scrollTop = 0; }
   $('recAbout').addEventListener('click', openAbout); $('introAbout').addEventListener('click', openAbout); $('aboutClose').addEventListener('click', dismissSheets);
   $('fittedOn').addEventListener('click', function (e) { if (e.target && e.target.tagName === 'A') return; show('buildBox', $('buildBox').hidden); });   // the block of figures for a report from a real device: a tap on the version line shows it
