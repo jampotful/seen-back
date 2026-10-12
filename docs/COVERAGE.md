@@ -124,17 +124,31 @@ Photos named and names right are for the list's own prior. With the 400 km prior
 - **Pets and garden plants.** Dogs, cats, chickens and horses have research-grade records (19,180, 68,484, 25,656 and 11,576 all time), so they are in the rows. The casual observations add 1,184 species whose records are mostly casual (50 or more casual records and more than twice their research-grade ones), 43 of them with no research-grade record before 2025.
 - **The pocket model's species names.** Its species head was fitted on county photos, so outside the county it names county species. Raising `name_at` and `offer_at` to 2 in `models/pocket/manifest.json` stops that with no code changed, and it also ends the county names, which the pocket model gives for 20.1% of Alachua photos at 93.3% right (`docs/EVAL.md`). The hidden switch "I am not near Gainesville" (`pocket.local`) was the other route. The owner chose the two numbers, and build 21 set them.
 
+## The second wave of sheets (12 October 2026)
+
+Three of the five new sheets find that one view cannot be true for their whole group, and one moves members out of its group. Each split changes the labels the group head learns, so the owner's word on them decides what the head is fitted on. Fitting is cheap once the photos have vectors, and every photo in `pub/data-world` carries its iNaturalist taxon, so a head fitted on the nineteen can be refitted on a split later without new photos.
+
+| Sheet | What it proposes | Share of the group's records it moves |
+|---|---|---|
+| `crab.md` | `crab` for crabs, crayfish, shrimp, lobsters and mantis shrimp; `woodlouse` for woodlice and other isopods; barnacles, amphipods, horseshoe crabs and sea spiders back to `other` until a sheet measures them | woodlice 30.9%, the rest 8.4% |
+| `sealife.md` | `sealife` with no picture for corals, anemones, jellyfish, clams, sponges, sea squirts and moss animals; `starfish` for starfish and sea urchins | starfish and sea urchins 27.4% |
+| `mammal.md` | `mammal` for two kinds of cone (bears, otters, pigs, kangaroos, elephants and others); `raccoon` for one kind of cone or none (raccoons, the kinkajou, opossums, armadillos, sloths, anteaters, pangolins); `mole` with no picture; shrews and hedgehogs to `other` until a source is found | raccoons and opossums alone 18.6% |
+| `salamander.md` | one view for salamanders and newts; caecilians and the olm to `other`, with light only | 0.2% |
+| `snail.md` | one view for snails, slugs, sea slugs and chitons, drawn at the land snail's sharpness | none |
+
+Two of their findings bear on the page as it stands. The snail sheet's sharpness rests on 14.5 degrees for the garden snail, which a review attributes to a study whose title names a different snail (`snail.audit.md`). The crab sheet found that a phone's sensor does respond weakly to ultraviolet A, its lens passing 1.1% at 340 nm and 18.9% at 390 nm in the one phone tested (Igoe, Parisi and Carter, 2012), against the bee's row "Bees see it and no phone records it."
+
 ## Order of work
 
 1. Stop the pocket model's species names (two numbers in its manifest, which ends them in the county too). Done in build 21.
 2. Word-table entries for the nineteen groups. Done in build 21, where the word that ends last in a typed name decides, so the order of the table no longer settles "flying fox".
-3. World photos for 33 groups, nothing alive and casual, from the open-data snapshot, published to `pub/data-world`.
+3. World photos for 33 groups, nothing alive and casual, from the open-data snapshot, published to `pub/data-world`. Done on 12 October except the nothing-alive photos beyond COCO (`tools/world/`, run 2 of `.github/workflows/world.yml`, `runs/world/2` on `ci`): 95,518 photos for fitting, 9,900 each for tuning, testing and casual, and 3,500 for the world test of step 8, all under the licence rule `nc`. Each group's set is spread evenly across continents, then orders, then species. Five groups fall short of 3,000 fitting photos: alligators 1,205, flying foxes 2,230, cats 2,453, dogs 2,733 and ticks 2,897.
 4. The new group head, scored against the pass marks; shipped with `eyes.py`, the word table and the list of groups updated.
 5. Views in waves, each sheet read by the owner before it is drawn.
 6. World rows from GBIF's names, one sentence or four, whichever scores better, one byte a number, published in parts; plus the casual species.
 7. Prior files per cell of a world grid, the time zone as the first guess, and the encounter rule, measured on held-out photos.
 8. The world test: 500 photos from each continent from 2025 on, reported in `docs/EVAL.md` before the page claims anything about another continent.
-9. The next sheets, in record order.
+9. The next sheets, in record order. Snail, sea life, crab, mammal and salamander were written and checked on 12 October (`docs/views/sheets/`); worm, whale and seal, scorpion, monkey and octopus come next.
 
 ## How to rerun
 
