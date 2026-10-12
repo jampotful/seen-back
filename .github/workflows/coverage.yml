@@ -78,7 +78,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p ret rows
-          python3 tools/coverage/text.py --names lists/names.txt --shard "${{ matrix.shard }}/16" --out rows 2>&1 | tee ret/log.txt
+          python3 tools/coverage/text.py --names lists/names.txt --shard "${{ matrix.shard }}/16" --out rows --templates "$(cat ci/coverage/templates.txt 2>/dev/null || echo one)" 2>&1 | tee ret/log.txt
           cp rows/*.json ret/
       - uses: actions/upload-artifact@v4
         with:
