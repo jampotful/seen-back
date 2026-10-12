@@ -416,7 +416,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '19';
+  var BUILD = '20';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -1341,14 +1341,14 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
       off: 'IDing is turned off.',
-      absent: 'This app can’t ID photos yet. Try redownloading it.',
-      missing: 'Some of this app’s files are missing. Try redownloading it.',
-      network: 'This app’s download is incomplete. Try redownloading it.',
-      damaged: 'This app’s download is damaged. Try redownloading it.',
-      unfit: 'This app’s files are out of date. Try downloading the latest version.',
+      absent: 'This app can’t ID photos yet.',
+      missing: 'Some of this app’s files are missing. Close the app and open it again.',
+      network: 'This app’s download is incomplete. Check your connection, then close the app and open it again.',
+      damaged: 'This app’s download is damaged. Close the app and open it again.',
+      unfit: 'This app’s files are out of date. Close the app and open it again to update.',
       browser: 'This browser is too old to ID photos. Try a current Chrome, Safari, or other browser.',
       died: 'This app’s IDing has crashed. Check that your device has enough memory.',
-      slow: 'The camera timed out. Try again.',
+      slow: 'The IDing timed out. Try again.',
       photo: 'That photo couldn’t be read. Try again.'
     };
     if (big) {

@@ -294,7 +294,7 @@ async function meet(page, name) {
       const a = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.unknown-rule.json'); await begin(a.page); r.unknownRule = (await meet(a.page, 'heron.png')).sub; r.unknownRuleWhy = (await about(a.page)).fail; await a.ctx.close();
       await ctl('reset=1'); await ctl('cut=' + encodeURIComponent('species\\.bias'));
       const b = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.trained.json'); await begin(b.page); r.biasCutShort = (await meet(b.page, 'heron.png')).sub; r.biasCutShortWhy = (await about(b.page)).fail; await b.ctx.close(); await ctl('reset=1');
-      same = same && r.unknownRule === 'This app’s files are out of date. Try downloading the latest version.' + tail && r.biasCutShort === 'This app’s download is damaged. Try redownloading it.' + tail;
+      same = same && r.unknownRule === 'This app’s files are out of date. Close the app and open it again to update.' + tail && r.biasCutShort === 'This app’s download is damaged. Close the app and open it again.' + tail;
     }
     const t = expect.trained;
     done('trained', r, same && r.about.model === 'standin-trained' && r.about.rule === 'mix' && r.about.trained === true
@@ -898,8 +898,8 @@ async function meet(page, name) {
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.offlineFirst = await meet(page, 'heron.png'); await ctl('reset=1'); await ctx.close(); }
     { const { ctx, page } = await open(browser, '&nosw=1&rec=off'); await begin(page); r.off = (await meet(page, 'heron.png')); await ctx.close(); }
     const tail = ' Tell us what’s there.';
-    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t ID photos yet. Try redownloading it.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing. Try redownloading it.' + tail && r.recovered === 'Great blue heron'
-      && r.offlineFirst.claim && r.offlineFirst.sub === 'This app’s download is incomplete. Try redownloading it.' + tail && r.off.claim && r.off.sub === 'IDing is turned off.' + tail);
+    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t ID photos yet.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing. Close the app and open it again.' + tail && r.recovered === 'Great blue heron'
+      && r.offlineFirst.claim && r.offlineFirst.sub === 'This app’s download is incomplete. Check your connection, then close the app and open it again.' + tail && r.off.claim && r.off.sub === 'IDing is turned off.' + tail);
   });
 
   if (want.includes('damaged')) await section('damaged', async () => {  // the model's bytes changed on the way; the model cut short; a kept copy that is not a model
@@ -918,7 +918,7 @@ async function meet(page, name) {
       await page.reload();     // the page tries the kept copy by itself once it is idle, finds it is no model, and throws it away; the next photo fetches a good one
       await page.waitForFunction(() => window.__seenBack.rec.about().state === 'failed', null, { timeout: 20000 }); r.keptBadWhy = (await about(page)).fail;
       await begin(page); r.keptBadThenFetchedAgain = (await meet(page, 'heron.png')).shown; await ctx.close(); }
-    const tail = ' Tell us what’s there.', sub = 'This app’s download is damaged. Try redownloading it.' + tail;
+    const tail = ' Tell us what’s there.', sub = 'This app’s download is damaged. Close the app and open it again.' + tail;
     done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'Great blue heron');
     await ctl('reset=1');
   });
@@ -937,7 +937,7 @@ async function meet(page, name) {
     r.pictureStillDrawn = await page.evaluate(() => window.__seenBack.state().err === 0);
     const tail = ' Tell us what’s there.';
     done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'This app’s IDing has crashed. Check that your device has enough memory.' + tail && r.afterThrow === 'Great blue heron'
-      && r.hung.claim && r.hung.sub === 'The camera timed out. Try again.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
+      && r.hung.claim && r.hung.sub === 'The IDing timed out. Try again.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
     await ctx.close();
   });
 
