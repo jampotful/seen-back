@@ -23,7 +23,7 @@ step "vectors" fetch pub/lab-tinyclip-39m-16 root/lab/tinyclip-39m-16 images car
 step "county data" fetch pub/data-alachua root/data || exit 1
 step "world photos" fetch pub/data-world root/world || exit 1
 step "what is there" bash -c 'ls -la root/lab/tinyclip-39m-16/images | grep -E "world|alachua|coco"; wc -l root/world/lab/*/manifest.csv'
-step "fit, tune and test" python3 -I tools/world/head.py root --slot models/pocket --out out/head --with-alachua "${WITH_ALACHUA:-both}" --powers "${POWERS:-0,0.5,1}" || exit 1
+step "fit, tune and test" python3 -I tools/world/head.py root --slot models/pocket --out out/head --with-alachua "${WITH_ALACHUA:-both}" --powers "${POWERS:-0,0.5,1}" --groups "${HEAD_GROUPS:-fold}" || exit 1
 cp out/head/REPORT.md out/head/report.json out/
 label="${GITHUB_REF_NAME#run/worldhead/}"
 step "publish the candidate" bash ci/put_branch.sh "pub/heads-world-$label" out/head/slot "group head fitted on the world photos" || exit 1
