@@ -1,0 +1,64 @@
+name: lit
+# The literature on how creatures sense the world, gathered from open scholarly indexes for the senses research
+# (tools/lit/harvest.py, tools/lit/topics.json). Push a commit to run/lit/<label>; LIT_TOPICS in the commit's
+# ci/lit/run.env may name some topics, else every topic runs. Each topic's collection goes to the branch
+# pub/lit-<label> (citations, OpenAlex's abstracts, and the full texts of openly licensed works); the summaries come
+# back on ci as runs/lit/<run>.
+on:
+  push:
+    branches: ['run/lit/**']
+permissions:
+  contents: write
+concurrency:
+  group: lit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      topics: ${{ steps.p.outputs.topics }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: |
+          [ -f ci/lit/run.env ] && . ci/lit/run.env
+          python3 -c "import json,os; t=[x['name'] for x in json.load(open('tools/lit/topics.json'))['topics']]; w=[s for s in os.environ.get('LIT_TOPICS','').split(',') if s]; t=[x for x in t if not w or x in w]; print('topics='+json.dumps(t))" >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
+  harvest:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        topic: ${{ fromJSON(needs.plan.outputs.topics) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: install
+        run: sudo apt-get -qq update && sudo apt-get -qq install -y poppler-utils > /dev/null
+      - name: harvest
+        run: bash ci/lit/harvest.sh "${{ matrix.topic }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit-${{ matrix.topic }}
+          path: corpus/
+          retention-days: 7
+  publish:
+    needs: harvest
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+          pattern: lit-*
+      - name: publish
+        run: bash ci/lit/publish.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lit out
