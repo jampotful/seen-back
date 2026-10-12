@@ -1,0 +1,110 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[20:12:29] job: model=tinyclip-39m-16 shard=0/6 stages=images,images-wasm-int8-per-channel
+data_source=pub/data-alachua (species) + pub/data-world (manifest)
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=world-eval
+manifest_rows=30600
+species=5911
+[20:12:29] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 0/6 --mode mod
+fetched 200/5100 (4.1s)
+fetched 400/5100 (7.7s)
+fetched 600/5100 (11.5s)
+fetched 800/5100 (14.9s)
+fetched 1000/5100 (18.7s)
+fetched 1200/5100 (22.4s)
+fetched 1400/5100 (25.9s)
+fetched 1600/5100 (29.6s)
+fetched 1800/5100 (33.2s)
+fetched 2000/5100 (36.8s)
+fetched 2200/5100 (40.3s)
+fetched 2400/5100 (43.9s)
+fetched 2600/5100 (47.5s)
+fetched 2800/5100 (51.2s)
+fetched 3000/5100 (54.8s)
+fetched 3200/5100 (58.5s)
+fetched 3400/5100 (62.0s)
+fetched 3600/5100 (65.7s)
+fetched 3800/5100 (69.5s)
+fetched 4000/5100 (73.1s)
+fetched 4200/5100 (76.7s)
+fetched 4400/5100 (80.5s)
+fetched 4600/5100 (84.1s)
+fetched 4800/5100 (87.8s)
+fetched 5000/5100 (91.5s)
+photos: 5100 rows, 5100 to fetch, 0 failed, 93.5s
+[20:14:02] exit 0
+[20:14:02] + python3 -u tools/lab/lab.py images --model tinyclip-39m-16 --manifest data_in/manifest.csv --photos photos --shard 0/6 --shard-mode mod --evalname world-eval --out art/tinyclip-39m-16
+images: tinyclip-39m-16, eval world-eval, shard 0/6, 5100 rows
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loaded tinyclip-39m-16 via transformers in 6.3s
+[0;93m2026-10-12 20:14:09.885487441 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/5100, 9.72 photos/s
+  images 192/5100, 9.77 photos/s
+  images 352/5100, 9.80 photos/s
+  images 512/5100, 9.78 photos/s
+  images 672/5100, 9.77 photos/s
+  images 832/5100, 9.78 photos/s
+  images 992/5100, 9.78 photos/s
+  images 1152/5100, 9.78 photos/s
+  images 1312/5100, 9.79 photos/s
+  images 1472/5100, 9.79 photos/s
+  images 1632/5100, 9.79 photos/s
+  images 1792/5100, 9.79 photos/s
+  images 1952/5100, 9.79 photos/s
+  images 2112/5100, 9.79 photos/s
+  images 2272/5100, 9.79 photos/s
+  images 2432/5100, 9.79 photos/s
+  images 2592/5100, 9.79 photos/s
+  images 2752/5100, 9.79 photos/s
+  images 2912/5100, 9.79 photos/s
+  images 3072/5100, 9.79 photos/s
+  images 3232/5100, 9.79 photos/s
+  images 3392/5100, 9.79 photos/s
+  images 3552/5100, 9.79 photos/s
+  images 3712/5100, 9.80 photos/s
+  images 3872/5100, 9.80 photos/s
+  images 4032/5100, 9.80 photos/s
+  images 4192/5100, 9.80 photos/s
+  images 4352/5100, 9.80 photos/s
+  images 4512/5100, 9.80 photos/s
+  images 4672/5100, 9.80 photos/s
+  images 4832/5100, 9.80 photos/s
+  images 4992/5100, 9.81 photos/s
+images: 5100 embedded, 0 skipped, 520.1s (9.81 photos/s)
+[20:22:50] exit 0
+
+added 18 packages in 3s
+[20:23:12] wasm int8-per-channel: prev/onnx/vision.int8-per-channel.onnx sha256 5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e
+[20:23:12] + python3 -u tools/lab/lab.py pixels --model tinyclip-39m-16 --manifest data_in/manifest.csv --photos photos --shard 0/6 --shard-mode mod --split eval --pix pix_int8-per-channel
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+pixels: only rows with split=eval: 3400
+pixels: 3400 photos, 0 skipped, size 224
+[20:23:40] exit 0
+[20:23:40] wasm: 3400 photos in 4 processes
+wasm 0/850 701.9 ms
+wasm 0/850 653.1 ms
+wasm 0/850 683.1 ms
+wasm 0/850 682.0 ms
+wasm 500/850 683.3 ms
+wasm 500/850 687.1 ms
+wasm 500/850 686.9 ms
+wasm 500/850 685.5 ms
+wasm done: 850 photos, mean 685.2 ms
+wasm done: 850 photos, mean 685.3 ms
+wasm done: 850 photos, mean 685.5 ms
+wasm done: 850 photos, mean 685.7 ms
+wasm parts merged: 3400
+[20:33:28] + python3 -u tools/lab/lab.py wasm-collect --model tinyclip-39m-16 --variant int8-per-channel --manifest data_in/manifest.csv --evalname world-eval --shard 0/6 --pix pix_int8-per-channel --emb wasm_int8-per-channel.f32 --lat wasm_int8-per-channel.json --onnx-name onnx/vision.int8-per-channel.onnx --onnx-sha 5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e --out art/tinyclip-39m-16
+wasm world-eval.wasm-int8-per-channel: 3400 embedded, latency {"mean": 685.44, "p50": 683.75, "p90": 687.64, "p99": 725.75, "min": 353.91, "max": 1139.29}
+[20:33:28] exit 0
+[20:33:28] job done, fail=0
