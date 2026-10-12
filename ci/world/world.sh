@@ -74,7 +74,7 @@ FNR == 1 {
   tx = $t
   if (!(tx in tm)) { nomap[g]++; next }
   split(tm[tx], m, "\t"); grp = m[1]
-  if (grp == "person" || grp == "other") { skipped[grp]++; next }
+  if (grp == "person") { skipped[grp]++; next }
   y = $la; x = $lo
   if (y == "" || x == "") { noplace[g]++; next }
   r = int((y + 90) * 2); c = int((x + 180) * 2)
@@ -176,6 +176,7 @@ the photo's address and the photo's licence; the photographer is named on the ob
 
 - fit.csv, tune.csv, test.csv, casual.csv, species.csv: the sets (SUMMARY.md says what each holds).
 - records-by-group.tsv: research-grade (F through 2024, E from 2025) and casual (C) observations by group and continent.
+- lab/world-fit, lab/world-eval, lab/world-species: the same rows as manifests for tools/lab (an id and a split added).
 - continents-0.5deg.tsv: the continent of each half-degree cell, from Natural Earth's countries at 1:50 million
   (public domain, https://www.naturalearthdata.com), as tools/world/continents.py makes it.
 EOF

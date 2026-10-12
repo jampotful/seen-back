@@ -39,7 +39,9 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from groups import GROUPS  # noqa: E402
+from groups import GROUPS as CREATURES  # noqa: E402
+
+GROUPS = CREATURES + ("other",)           # the 33 groups, and what is left in `other` (mites, microbes, water bears)
 
 SEED = "seen-back/world/v1"
 SIZES = {"fit": 3000, "tune": 300, "test": 300, "casual": 300}
@@ -245,6 +247,21 @@ def finish(args):
     for s, lst in sets.items():
         with open(os.path.join(args.out, "%s.csv" % s), "w", encoding="utf-8", newline="") as f:
             w = csv.DictWriter(f, fieldnames=COLUMNS); w.writeheader(); w.writerows(lst)
+    # the same rows in the laboratory's form (tools/lab/lab.py reads `id`, `photo_url` and `split`): one manifest for
+    # fitting, one for tuning, testing and casual photos (tune and test share split `eval`, for the WASM vectors), and
+    # one for the species test
+    for name, parts in (("world-fit", ("fit",)), ("world-eval", ("tune", "test", "casual")), ("world-species", ("species",))):
+        d = os.path.join(args.out, "lab", name); os.makedirs(d, exist_ok=True)
+        seen = set()
+        with open(os.path.join(d, "manifest.csv"), "w", encoding="utf-8", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["id", "split"] + COLUMNS); w.writeheader()
+            for part in parts:
+                for r in sets.get(part, []):
+                    pid = "w" + r["photo_url"].split("/photos/")[1].split("/")[0]
+                    if pid in seen:
+                        continue
+                    seen.add(pid)
+                    w.writerow(dict(r, id=pid, split="eval" if part in ("tune", "test") else part))
     urls = Counter(r["photo_url"] for k, lst in sets.items() if k != "species" for r in lst)
     dup = sum(1 for n in urls.values() if n > 1)
     both = len({r["photo_url"] for r in sets.get("species", [])} & set(urls))
