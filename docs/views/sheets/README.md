@@ -8,6 +8,6 @@ One sheet a group, written before anything is drawn. Each row of a sheet carries
 | `fish.md` | fish; shark and ray | yes |
 | `bat.md` | bat; flying fox | yes |
 | `tick.md` | tick (mites stay out) | yes |
-| `fungus.md` | fungus (lichens included); slime mould | not yet |
+| `fungus.md` | fungus (lichens included); slime mould | yes |
 
 The plan these feed is `docs/COVERAGE.md`.
