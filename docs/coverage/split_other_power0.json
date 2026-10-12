@@ -1,0 +1,1177 @@
+{
+ "notes": "head alone, no county list; licence rule nc; logistic regression C=20, inverse square root weights",
+ "today_fit_counts": {
+  "alligator": 59,
+  "bee": 2359,
+  "bird": 6514,
+  "cat": 375,
+  "deer": 499,
+  "dog": 401,
+  "frog": 894,
+  "hawk": 587,
+  "insect": 31231,
+  "none": 492,
+  "other": 8018,
+  "person": 367,
+  "plant": 27506,
+  "rabbit": 122,
+  "reptile": 2220,
+  "squirrel": 195,
+  "wader": 1509
+ },
+ "split_fit_counts": {
+  "alligator": 59,
+  "bat": 146,
+  "bee": 2359,
+  "bird": 6514,
+  "cat": 375,
+  "crustacean": 158,
+  "deer": 499,
+  "dog": 401,
+  "fish": 742,
+  "frog": 894,
+  "fungus": 3219,
+  "harvestman": 99,
+  "hawk": 587,
+  "insect": 31231,
+  "jumping spider": 537,
+  "mammal": 288,
+  "millipede": 311,
+  "none": 492,
+  "other": 25,
+  "person": 367,
+  "plant": 27506,
+  "rabbit": 122,
+  "reptile": 2220,
+  "salamander": 120,
+  "shellfish": 36,
+  "snail": 499,
+  "spider": 1624,
+  "springtail": 53,
+  "squirrel": 195,
+  "tick": 85,
+  "wader": 1509,
+  "worm": 76
+ },
+ "test_original": {
+  "photos": 4197,
+  "all_right_today": [
+   0.8637121753633548,
+   0.8537050274005242,
+   0.8737193233261854,
+   4197
+  ],
+  "all_right_split": [
+   0.8672861567786514,
+   0.8570407433881344,
+   0.8765844650941148,
+   4197
+  ],
+  "old_kinds_right_today": [
+   0.8749038708023583,
+   0.8649064342476288,
+   0.884907715970264,
+   3901
+  ],
+  "old_kinds_right_split": [
+   0.8805434503973341,
+   0.8702896693155601,
+   0.8905408869520636,
+   3901
+  ],
+  "old_kinds_paired_difference": [
+   0.005639579594975647,
+   0.0007690335811330429,
+   0.010510125608818251,
+   3901
+  ],
+  "other_photos": 296,
+  "other_right_today (called other)": [
+   0.7162162162162162,
+   0.6655405405405406,
+   0.7668918918918919,
+   296
+  ],
+  "other_right_split (called its own new group)": [
+   0.6925675675675675,
+   0.6418918918918919,
+   0.7432432432432432,
+   296
+  ],
+  "other_called_an_old_kind_today": [
+   0.28378378378378377,
+   0.23648648648648649,
+   0.3344594594594595,
+   296
+  ],
+  "other_called_an_old_kind_split": [
+   0.25,
+   0.20270270270270271,
+   0.2972972972972973,
+   296
+  ],
+  "by_old_kind": {
+   "cat": {
+    "n": 11,
+    "today": 0.7272727272727273,
+    "split": 0.6363636363636364,
+    "split_called_a_new_group": 0.18181818181818182
+   },
+   "dog": {
+    "n": 6,
+    "today": 0.8333333333333334,
+    "split": 0.8333333333333334,
+    "split_called_a_new_group": 0.0
+   },
+   "squirrel": {
+    "n": 36,
+    "today": 0.8611111111111112,
+    "split": 0.8611111111111112,
+    "split_called_a_new_group": 0.027777777777777776
+   },
+   "deer": {
+    "n": 36,
+    "today": 0.7777777777777778,
+    "split": 0.7777777777777778,
+    "split_called_a_new_group": 0.1111111111111111
+   },
+   "rabbit": {
+    "n": 31,
+    "today": 0.7419354838709677,
+    "split": 0.7741935483870968,
+    "split_called_a_new_group": 0.06451612903225806
+   },
+   "hawk": {
+    "n": 82,
+    "today": 0.7804878048780488,
+    "split": 0.7804878048780488,
+    "split_called_a_new_group": 0.0
+   },
+   "wader": {
+    "n": 382,
+    "today": 0.8350785340314136,
+    "split": 0.8298429319371727,
+    "split_called_a_new_group": 0.0
+   },
+   "bird": {
+    "n": 531,
+    "today": 0.8568738229755178,
+    "split": 0.8587570621468926,
+    "split_called_a_new_group": 0.007532956685499058
+   },
+   "alligator": {
+    "n": 110,
+    "today": 0.6090909090909091,
+    "split": 0.6181818181818182,
+    "split_called_a_new_group": 0.045454545454545456
+   },
+   "reptile": {
+    "n": 268,
+    "today": 0.7238805970149254,
+    "split": 0.746268656716418,
+    "split_called_a_new_group": 0.03731343283582089
+   },
+   "frog": {
+    "n": 97,
+    "today": 0.7628865979381443,
+    "split": 0.7938144329896907,
+    "split_called_a_new_group": 0.010309278350515464
+   },
+   "bee": {
+    "n": 126,
+    "today": 0.6349206349206349,
+    "split": 0.6428571428571429,
+    "split_called_a_new_group": 0.0
+   },
+   "insect": {
+    "n": 962,
+    "today": 0.9178794178794178,
+    "split": 0.9261954261954262,
+    "split_called_a_new_group": 0.015592515592515593
+   },
+   "plant": {
+    "n": 1223,
+    "today": 0.9664758789860998,
+    "split": 0.9697465249386754,
+    "split_called_a_new_group": 0.007358953393295176
+   }
+  },
+  "by_new_group": {
+   "bat": {
+    "n": 2,
+    "recall": 1.0,
+    "precision": 0.6666666666666666,
+    "said": [
+     [
+      "bat",
+      2
+     ]
+    ]
+   },
+   "crustacean": {
+    "n": 9,
+    "recall": 0.3333333333333333,
+    "precision": 0.75,
+    "said": [
+     [
+      "insect",
+      4
+     ],
+     [
+      "crustacean",
+      3
+     ],
+     [
+      "millipede",
+      2
+     ]
+    ]
+   },
+   "fish": {
+    "n": 17,
+    "recall": 0.9411764705882353,
+    "precision": 0.6153846153846154,
+    "said": [
+     [
+      "fish",
+      16
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "fungus": {
+    "n": 62,
+    "recall": 0.8387096774193549,
+    "precision": 0.7647058823529411,
+    "said": [
+     [
+      "fungus",
+      52
+     ],
+     [
+      "plant",
+      5
+     ],
+     [
+      "insect",
+      3
+     ]
+    ]
+   },
+   "harvestman": {
+    "n": 2,
+    "recall": 0.5,
+    "precision": 1.0,
+    "said": [
+     [
+      "harvestman",
+      1
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "jumping spider": {
+    "n": 30,
+    "recall": 0.6333333333333333,
+    "precision": 0.7916666666666666,
+    "said": [
+     [
+      "jumping spider",
+      19
+     ],
+     [
+      "insect",
+      6
+     ],
+     [
+      "bee",
+      2
+     ]
+    ]
+   },
+   "mammal": {
+    "n": 17,
+    "recall": 0.47058823529411764,
+    "precision": 0.4,
+    "said": [
+     [
+      "mammal",
+      8
+     ],
+     [
+      "plant",
+      5
+     ],
+     [
+      "squirrel",
+      2
+     ]
+    ]
+   },
+   "millipede": {
+    "n": 14,
+    "recall": 0.9285714285714286,
+    "precision": 0.8125,
+    "said": [
+     [
+      "millipede",
+      13
+     ],
+     [
+      "fungus",
+      1
+     ]
+    ]
+   },
+   "other": {
+    "n": 4,
+    "recall": 0.0,
+    "precision": null,
+    "said": [
+     [
+      "spider",
+      1
+     ],
+     [
+      "plant",
+      1
+     ],
+     [
+      "fish",
+      1
+     ]
+    ]
+   },
+   "salamander": {
+    "n": 4,
+    "recall": 0.5,
+    "precision": 1.0,
+    "said": [
+     [
+      "salamander",
+      2
+     ],
+     [
+      "fish",
+      1
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "snail": {
+    "n": 16,
+    "recall": 0.8125,
+    "precision": 0.8125,
+    "said": [
+     [
+      "snail",
+      13
+     ],
+     [
+      "insect",
+      2
+     ],
+     [
+      "fungus",
+      1
+     ]
+    ]
+   },
+   "spider": {
+    "n": 115,
+    "recall": 0.6521739130434783,
+    "precision": 0.8152173913043478,
+    "said": [
+     [
+      "spider",
+      75
+     ],
+     [
+      "insect",
+      29
+     ],
+     [
+      "plant",
+      6
+     ]
+    ]
+   },
+   "tick": {
+    "n": 4,
+    "recall": 0.25,
+    "precision": 0.3333333333333333,
+    "said": [
+     [
+      "insect",
+      2
+     ],
+     [
+      "tick",
+      1
+     ],
+     [
+      "jumping spider",
+      1
+     ]
+    ]
+   }
+  },
+  "confusions_split": [
+   [
+    "wader",
+    "bird",
+    50
+   ],
+   [
+    "reptile",
+    "insect",
+    34
+   ],
+   [
+    "bee",
+    "insect",
+    34
+   ],
+   [
+    "bird",
+    "wader",
+    32
+   ],
+   [
+    "spider",
+    "insect",
+    29
+   ],
+   [
+    "insect",
+    "plant",
+    23
+   ],
+   [
+    "alligator",
+    "reptile",
+    21
+   ],
+   [
+    "plant",
+    "insect",
+    16
+   ],
+   [
+    "insect",
+    "bee",
+    15
+   ],
+   [
+    "frog",
+    "insect",
+    14
+   ],
+   [
+    "bird",
+    "insect",
+    12
+   ],
+   [
+    "hawk",
+    "bird",
+    10
+   ],
+   [
+    "bee",
+    "plant",
+    10
+   ],
+   [
+    "reptile",
+    "plant",
+    9
+   ],
+   [
+    "insect",
+    "spider",
+    9
+   ],
+   [
+    "bird",
+    "hawk",
+    9
+   ],
+   [
+    "plant",
+    "bird",
+    9
+   ],
+   [
+    "reptile",
+    "bird",
+    8
+   ],
+   [
+    "wader",
+    "plant",
+    7
+   ],
+   [
+    "insect",
+    "reptile",
+    7
+   ],
+   [
+    "jumping spider",
+    "insect",
+    6
+   ],
+   [
+    "insect",
+    "frog",
+    6
+   ],
+   [
+    "spider",
+    "plant",
+    6
+   ],
+   [
+    "fungus",
+    "plant",
+    5
+   ],
+   [
+    "mammal",
+    "plant",
+    5
+   ]
+  ]
+ },
+ "test_wasm-int8": {
+  "photos": 4197,
+  "all_right_today": [
+   0.8641887062187277,
+   0.8539432928282106,
+   0.8741958541815582,
+   4197
+  ],
+  "all_right_split": [
+   0.8718131999046939,
+   0.8620443173695497,
+   0.8815820824398379,
+   4197
+  ],
+  "old_kinds_right_today": [
+   0.8754165598564471,
+   0.8646500897205844,
+   0.8854204050243526,
+   3901
+  ],
+  "old_kinds_right_split": [
+   0.8833632401948218,
+   0.8728531145860036,
+   0.8936170212765957,
+   3901
+  ],
+  "old_kinds_paired_difference": [
+   0.007946680338374775,
+   0.0033324788515765188,
+   0.012560881825173032,
+   3901
+  ],
+  "other_photos": 296,
+  "other_right_today (called other)": [
+   0.7162162162162162,
+   0.6654560810810811,
+   0.7668918918918919,
+   296
+  ],
+  "other_right_split (called its own new group)": [
+   0.7195945945945946,
+   0.6655405405405406,
+   0.7668918918918919,
+   296
+  ],
+  "other_called_an_old_kind_today": [
+   0.28378378378378377,
+   0.23310810810810811,
+   0.33783783783783783,
+   296
+  ],
+  "other_called_an_old_kind_split": [
+   0.23986486486486486,
+   0.19594594594594594,
+   0.28716216216216217,
+   296
+  ],
+  "by_old_kind": {
+   "cat": {
+    "n": 11,
+    "today": 0.7272727272727273,
+    "split": 0.7272727272727273,
+    "split_called_a_new_group": 0.18181818181818182
+   },
+   "dog": {
+    "n": 6,
+    "today": 0.6666666666666666,
+    "split": 0.6666666666666666,
+    "split_called_a_new_group": 0.0
+   },
+   "squirrel": {
+    "n": 36,
+    "today": 0.8611111111111112,
+    "split": 0.8333333333333334,
+    "split_called_a_new_group": 0.05555555555555555
+   },
+   "deer": {
+    "n": 36,
+    "today": 0.7777777777777778,
+    "split": 0.7777777777777778,
+    "split_called_a_new_group": 0.1111111111111111
+   },
+   "rabbit": {
+    "n": 31,
+    "today": 0.7419354838709677,
+    "split": 0.7741935483870968,
+    "split_called_a_new_group": 0.06451612903225806
+   },
+   "hawk": {
+    "n": 82,
+    "today": 0.7804878048780488,
+    "split": 0.7804878048780488,
+    "split_called_a_new_group": 0.0
+   },
+   "wader": {
+    "n": 382,
+    "today": 0.837696335078534,
+    "split": 0.8429319371727748,
+    "split_called_a_new_group": 0.0
+   },
+   "bird": {
+    "n": 531,
+    "today": 0.8568738229755178,
+    "split": 0.864406779661017,
+    "split_called_a_new_group": 0.007532956685499058
+   },
+   "alligator": {
+    "n": 110,
+    "today": 0.6181818181818182,
+    "split": 0.6181818181818182,
+    "split_called_a_new_group": 0.045454545454545456
+   },
+   "reptile": {
+    "n": 268,
+    "today": 0.7201492537313433,
+    "split": 0.75,
+    "split_called_a_new_group": 0.029850746268656716
+   },
+   "frog": {
+    "n": 97,
+    "today": 0.7628865979381443,
+    "split": 0.8247422680412371,
+    "split_called_a_new_group": 0.0
+   },
+   "bee": {
+    "n": 126,
+    "today": 0.6428571428571429,
+    "split": 0.6349206349206349,
+    "split_called_a_new_group": 0.0
+   },
+   "insect": {
+    "n": 962,
+    "today": 0.920997920997921,
+    "split": 0.9313929313929314,
+    "split_called_a_new_group": 0.014553014553014554
+   },
+   "plant": {
+    "n": 1223,
+    "today": 0.9648405560098119,
+    "split": 0.9664758789860998,
+    "split_called_a_new_group": 0.01062959934587081
+   }
+  },
+  "by_new_group": {
+   "bat": {
+    "n": 2,
+    "recall": 1.0,
+    "precision": 0.6666666666666666,
+    "said": [
+     [
+      "bat",
+      2
+     ]
+    ]
+   },
+   "crustacean": {
+    "n": 9,
+    "recall": 0.4444444444444444,
+    "precision": 0.8,
+    "said": [
+     [
+      "insect",
+      4
+     ],
+     [
+      "crustacean",
+      4
+     ],
+     [
+      "millipede",
+      1
+     ]
+    ]
+   },
+   "fish": {
+    "n": 17,
+    "recall": 0.9411764705882353,
+    "precision": 0.64,
+    "said": [
+     [
+      "fish",
+      16
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "fungus": {
+    "n": 62,
+    "recall": 0.8387096774193549,
+    "precision": 0.7647058823529411,
+    "said": [
+     [
+      "fungus",
+      52
+     ],
+     [
+      "plant",
+      5
+     ],
+     [
+      "insect",
+      3
+     ]
+    ]
+   },
+   "harvestman": {
+    "n": 2,
+    "recall": 0.5,
+    "precision": 1.0,
+    "said": [
+     [
+      "harvestman",
+      1
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "jumping spider": {
+    "n": 30,
+    "recall": 0.6333333333333333,
+    "precision": 0.8636363636363636,
+    "said": [
+     [
+      "jumping spider",
+      19
+     ],
+     [
+      "insect",
+      6
+     ],
+     [
+      "bee",
+      3
+     ]
+    ]
+   },
+   "mammal": {
+    "n": 17,
+    "recall": 0.47058823529411764,
+    "precision": 0.36363636363636365,
+    "said": [
+     [
+      "mammal",
+      8
+     ],
+     [
+      "plant",
+      4
+     ],
+     [
+      "squirrel",
+      2
+     ]
+    ]
+   },
+   "millipede": {
+    "n": 14,
+    "recall": 0.9285714285714286,
+    "precision": 0.8666666666666667,
+    "said": [
+     [
+      "millipede",
+      13
+     ],
+     [
+      "fungus",
+      1
+     ]
+    ]
+   },
+   "other": {
+    "n": 4,
+    "recall": 0.0,
+    "precision": null,
+    "said": [
+     [
+      "spider",
+      1
+     ],
+     [
+      "plant",
+      1
+     ],
+     [
+      "fish",
+      1
+     ]
+    ]
+   },
+   "salamander": {
+    "n": 4,
+    "recall": 0.5,
+    "precision": 1.0,
+    "said": [
+     [
+      "salamander",
+      2
+     ],
+     [
+      "fish",
+      1
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   },
+   "snail": {
+    "n": 16,
+    "recall": 0.8125,
+    "precision": 0.8125,
+    "said": [
+     [
+      "snail",
+      13
+     ],
+     [
+      "insect",
+      2
+     ],
+     [
+      "fungus",
+      1
+     ]
+    ]
+   },
+   "spider": {
+    "n": 115,
+    "recall": 0.7043478260869566,
+    "precision": 0.8350515463917526,
+    "said": [
+     [
+      "spider",
+      81
+     ],
+     [
+      "insect",
+      24
+     ],
+     [
+      "plant",
+      6
+     ]
+    ]
+   },
+   "tick": {
+    "n": 4,
+    "recall": 0.5,
+    "precision": 0.6666666666666666,
+    "said": [
+     [
+      "tick",
+      2
+     ],
+     [
+      "insect",
+      1
+     ],
+     [
+      "reptile",
+      1
+     ]
+    ]
+   }
+  },
+  "confusions_split": [
+   [
+    "wader",
+    "bird",
+    49
+   ],
+   [
+    "reptile",
+    "insect",
+    35
+   ],
+   [
+    "bee",
+    "insect",
+    35
+   ],
+   [
+    "bird",
+    "wader",
+    33
+   ],
+   [
+    "spider",
+    "insect",
+    24
+   ],
+   [
+    "alligator",
+    "reptile",
+    22
+   ],
+   [
+    "insect",
+    "plant",
+    20
+   ],
+   [
+    "plant",
+    "insect",
+    16
+   ],
+   [
+    "frog",
+    "insect",
+    13
+   ],
+   [
+    "bird",
+    "insect",
+    13
+   ],
+   [
+    "insect",
+    "bee",
+    13
+   ],
+   [
+    "hawk",
+    "bird",
+    10
+   ],
+   [
+    "bee",
+    "plant",
+    10
+   ],
+   [
+    "reptile",
+    "plant",
+    9
+   ],
+   [
+    "insect",
+    "reptile",
+    9
+   ],
+   [
+    "plant",
+    "bird",
+    9
+   ],
+   [
+    "reptile",
+    "bird",
+    8
+   ],
+   [
+    "insect",
+    "spider",
+    8
+   ],
+   [
+    "bird",
+    "hawk",
+    8
+   ],
+   [
+    "plant",
+    "fungus",
+    7
+   ],
+   [
+    "wader",
+    "plant",
+    6
+   ],
+   [
+    "spider",
+    "plant",
+    6
+   ],
+   [
+    "jumping spider",
+    "insect",
+    6
+   ],
+   [
+    "fungus",
+    "plant",
+    5
+   ],
+   [
+    "alligator",
+    "plant",
+    5
+   ]
+  ]
+ },
+ "coco_test_original": {
+  "photos": 1240,
+  "by_kind": {
+   "cat": {
+    "n": 77,
+    "today": 0.922077922077922,
+    "split": 0.922077922077922
+   },
+   "deer": {
+    "n": 200,
+    "today": 0.96,
+    "split": 0.965
+   },
+   "dog": {
+    "n": 63,
+    "today": 0.9206349206349206,
+    "split": 0.9206349206349206
+   },
+   "none": {
+    "n": 500,
+    "today": 0.97,
+    "split": 0.974
+   },
+   "person": {
+    "n": 400,
+    "today": 0.9875,
+    "split": 0.985
+   }
+  },
+  "mean_over_kinds_today": 0.9520425685425685,
+  "mean_over_kinds_split": 0.9533425685425685,
+  "split_said_a_new_group": 0.0016129032258064516
+ },
+ "coco_test_wasm-int8": {
+  "photos": 1240,
+  "by_kind": {
+   "cat": {
+    "n": 77,
+    "today": 0.9090909090909091,
+    "split": 0.9090909090909091
+   },
+   "deer": {
+    "n": 200,
+    "today": 0.95,
+    "split": 0.965
+   },
+   "dog": {
+    "n": 63,
+    "today": 0.9365079365079365,
+    "split": 0.9206349206349206
+   },
+   "none": {
+    "n": 500,
+    "today": 0.97,
+    "split": 0.976
+   },
+   "person": {
+    "n": 400,
+    "today": 0.9875,
+    "split": 0.9875
+   }
+  },
+  "mean_over_kinds_today": 0.9506197691197691,
+  "mean_over_kinds_split": 0.9516451659451659,
+  "split_said_a_new_group": 0.0016129032258064516
+ },
+ "head_bytes_today": 17476,
+ "labels_today": [
+  "alligator",
+  "bee",
+  "bird",
+  "cat",
+  "deer",
+  "dog",
+  "frog",
+  "hawk",
+  "insect",
+  "none",
+  "other",
+  "person",
+  "plant",
+  "rabbit",
+  "reptile",
+  "squirrel",
+  "wader"
+ ],
+ "head_bytes_split": 32896,
+ "labels_split": [
+  "alligator",
+  "bat",
+  "bee",
+  "bird",
+  "cat",
+  "crustacean",
+  "deer",
+  "dog",
+  "fish",
+  "frog",
+  "fungus",
+  "harvestman",
+  "hawk",
+  "insect",
+  "jumping spider",
+  "mammal",
+  "millipede",
+  "none",
+  "other",
+  "person",
+  "plant",
+  "rabbit",
+  "reptile",
+  "salamander",
+  "shellfish",
+  "snail",
+  "spider",
+  "springtail",
+  "squirrel",
+  "tick",
+  "wader",
+  "worm"
+ ]
+}
