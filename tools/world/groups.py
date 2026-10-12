@@ -42,13 +42,26 @@ CROCODILIANS = {"Crocodylia", "Crocodilia"}
 REPTILES = {"Reptilia", "Squamata", "Testudines", "Sphenodontia", "Rhynchocephalia"}
 SALAMANDERS = {"Caudata", "Urodela", "Gymnophiona"}
 SHARKS = {"Chondrichthyes", "Elasmobranchii", "Holocephali"}
-FISH = {"Actinopterygii", "Sarcopterygii", "Dipnoi", "Dipnomorpha", "Actinistia", "Coelacanthiformes", "Myxini",
-        "Petromyzonti", "Petromyzontida", "Hyperoartia", "Cephalaspidomorphi"}
+FISH = {"Actinopterygii", "Sarcopterygii", "Dipnoi", "Dipneusti", "Dipnomorpha", "Actinistia", "Coelacanthi", "Coelacanthiformes",
+        "Myxini", "Petromyzonti", "Petromyzontida", "Hyperoartia", "Cephalaspidomorphi",
+        # GBIF's backbone files the ray-finned fish under Chordata with no class, so their orders are named
+        # (the orders of docs/views/world-orders.csv whose class is empty)
+        "Acipenseriformes", "Albuliformes", "Amiiformes", "Anguilliformes", "Ateleopodiformes", "Atheriniformes",
+        "Aulopiformes", "Batrachoidiformes", "Beloniformes", "Beryciformes", "Ceratodontiformes", "Cetomimiformes",
+        "Characiformes", "Clupeiformes", "Cypriniformes", "Cyprinodontiformes", "Elopiformes", "Esociformes", "Gadiformes",
+        "Gasterosteiformes", "Gobiesociformes", "Gonorynchiformes", "Gymnotiformes", "Lampriformes", "Lepisosteiformes",
+        "Lophiiformes", "Mugiliformes", "Myctophiformes", "Myxiniformes", "Notacanthiformes", "Ophidiiformes",
+        "Osmeriformes", "Osteoglossiformes", "Perciformes", "Percopsiformes", "Petromyzontiformes", "Pleuronectiformes",
+        "Polymixiiformes", "Polypteriformes", "Saccopharyngiformes", "Salmoniformes", "Scorpaeniformes", "Siluriformes",
+        "Stephanoberyciformes", "Stomiiformes", "Synbranchiformes", "Syngnathiformes", "Tetraodontiformes", "Zeiformes"}
 TUNICATES = {"Tunicata", "Urochordata", "Ascidiacea", "Thaliacea", "Appendicularia", "Cephalochordata", "Leptocardii"}
 INSECTS = {"Insecta", "Collembola", "Diplura", "Protura", "Entognatha"}
 SCORPIONS = {"Scorpiones", "Opiliones", "Pseudoscorpiones", "Solifugae", "Amblypygi", "Uropygi", "Thelyphonida",
              "Schizomida", "Ricinulei", "Palpigradi"}
-CRUSTACEANS = {"Crustacea", "Merostomata", "Xiphosura", "Xiphosurida", "Pycnogonida"}
+CRUSTACEANS = {"Crustacea", "Merostomata", "Xiphosura", "Xiphosurida", "Pycnogonida",
+               # GBIF's backbone has no subphylum rank, so its crustacean classes are named too
+               "Malacostraca", "Maxillopoda", "Thecostraca", "Hexanauplia", "Copepoda", "Branchiopoda", "Ostracoda",
+               "Ichthyostraca", "Remipedia", "Cephalocarida", "Mystacocarida", "Tantulocarida"}
 WORMS = {"Myriapoda", "Diplopoda", "Chilopoda", "Symphyla", "Pauropoda", "Annelida", "Platyhelminthes", "Nematoda",
          "Nematomorpha", "Nemertea", "Sipuncula", "Acanthocephala", "Chaetognatha", "Priapulida", "Xenacoelomorpha",
          "Echiura"}
