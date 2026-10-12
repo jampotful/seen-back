@@ -1,0 +1,96 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[21:31:02] job: model=bioclip-b16 shard=2/16 stages=images
+data_source=pub/data-alachua (species) + pub/data-world (manifest)
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=world-fit
+manifest_rows=98518
+species=5911
+[21:31:02] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 2/16 --mode mod
+fetched 200/6158 (2.5s)
+fetched 400/6158 (4.5s)
+fetched 600/6158 (6.6s)
+fetched 800/6158 (8.7s)
+fetched 1000/6158 (10.8s)
+fetched 1200/6158 (12.9s)
+fetched 1400/6158 (15.1s)
+fetched 1600/6158 (17.3s)
+fetched 1800/6158 (19.3s)
+fetched 2000/6158 (21.4s)
+fetched 2200/6158 (23.5s)
+fetched 2400/6158 (25.5s)
+fetched 2600/6158 (27.6s)
+fetched 2800/6158 (29.7s)
+fetched 3000/6158 (31.7s)
+fetched 3200/6158 (33.8s)
+fetched 3400/6158 (36.0s)
+fetched 3600/6158 (38.2s)
+fetched 3800/6158 (40.4s)
+fetched 4000/6158 (42.6s)
+fetched 4200/6158 (44.7s)
+fetched 4400/6158 (47.0s)
+fetched 4600/6158 (49.0s)
+fetched 4800/6158 (51.2s)
+fetched 5000/6158 (53.2s)
+fetched 5200/6158 (55.3s)
+fetched 5400/6158 (57.3s)
+fetched 5600/6158 (59.5s)
+fetched 5800/6158 (61.6s)
+fetched 6000/6158 (63.6s)
+photos: 6158 rows, 6158 to fetch, 0 failed, 65.5s
+[21:32:07] exit 0
+[21:32:07] + python3 -u tools/lab/lab.py images --model bioclip-b16 --manifest data_in/manifest.csv --photos photos --shard 2/16 --shard-mode mod --evalname world-fit --out art/bioclip-b16
+images: bioclip-b16, eval world-fit, shard 2/16, 6158 rows
+loaded bioclip-b16 via open_clip in 9.5s
+[0;93m2026-10-12 21:32:17.857751000 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+  images 32/6158, 6.32 photos/s
+  images 192/6158, 6.31 photos/s
+  images 352/6158, 6.31 photos/s
+  images 512/6158, 6.31 photos/s
+  images 672/6158, 6.30 photos/s
+  images 832/6158, 6.29 photos/s
+  images 992/6158, 6.29 photos/s
+  images 1152/6158, 6.28 photos/s
+  images 1312/6158, 6.28 photos/s
+  images 1472/6158, 6.28 photos/s
+  images 1632/6158, 6.28 photos/s
+  images 1792/6158, 6.28 photos/s
+  images 1952/6158, 6.28 photos/s
+  images 2112/6158, 6.28 photos/s
+  images 2272/6158, 6.28 photos/s
+  images 2432/6158, 6.28 photos/s
+  images 2592/6158, 6.27 photos/s
+  images 2752/6158, 6.26 photos/s
+  images 2912/6158, 6.26 photos/s
+  images 3072/6158, 6.26 photos/s
+  images 3232/6158, 6.25 photos/s
+  images 3392/6158, 6.25 photos/s
+  images 3552/6158, 6.25 photos/s
+  images 3712/6158, 6.25 photos/s
+  images 3872/6158, 6.26 photos/s
+  images 4032/6158, 6.25 photos/s
+  images 4192/6158, 6.25 photos/s
+  images 4352/6158, 6.26 photos/s
+  images 4512/6158, 6.26 photos/s
+  images 4672/6158, 6.26 photos/s
+  images 4832/6158, 6.26 photos/s
+  images 4992/6158, 6.26 photos/s
+  images 5152/6158, 6.26 photos/s
+  images 5312/6158, 6.26 photos/s
+  images 5472/6158, 6.25 photos/s
+  images 5632/6158, 6.25 photos/s
+  images 5792/6158, 6.25 photos/s
+  images 5952/6158, 6.26 photos/s
+  images 6112/6158, 6.26 photos/s
+images: 6158 embedded, 0 skipped, 984.5s (6.26 photos/s)
+[21:48:42] exit 0
+[21:48:42] job done, fail=0
