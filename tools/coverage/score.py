@@ -239,7 +239,7 @@ def main():
 
     json.dump(out, open(os.path.join(a.out, "results.json"), "w"), indent=1)
     L = ["# Species lists of growing size, scored by BioCLIP 2 on the Alachua test photos", "",
-         "Test photos: %d. Rows: one sentence per species. A photo whose species is not in a list counts as wrong." % int(test.sum()), "",
+         "Test photos: %d. Rows: as tools/coverage/text.py made them (see rows.*.json). A photo whose species is not in a list counts as wrong." % int(test.sum()), "",
          "| List | Species | MB (float16) | MB (int8) | Test species in list | Top-1, no prior | Top-1, prior (alpha) | Top-5, prior | Named at the 98 in 100 level | Named and right | Top-1 against the Alachua list (points) |",
          "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     f = lambda v: "–" if v is None or v[0] is None else "%.1f%% (%.1f to %.1f)" % (100 * v[0], 100 * v[1], 100 * v[2])
