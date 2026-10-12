@@ -163,6 +163,15 @@ def main():
         ("world, 100,000 commonest", (rank < 100000) & (rg > 0), rg),
         ("world, every species", (rg > 0) | inal, rg),
     ]
+    # rows for a large area with the prior of the 400 km circle: what the app would have if it carried large lists and
+    # learned only roughly where it was
+    near = reg["gnv400_2024"]
+    spec += [
+        ("within 1600 km, prior within 400 km", reg["gnv1600_2024"] > 0, near),
+        ("lower 48 states, prior within 400 km", reg["usa48_2024"] > 0, near),
+        ("world, 100,000 commonest, prior within 400 km", (rank < 100000) & (rg > 0), near),
+        ("world, every species, prior within 400 km", (rg > 0) | inal, near),
+    ]
     for name, mask, c in spec:
         lists[name] = (mask, logshare(c, mask))
     Rget = lambda lo, hi: R[lo:hi].astype(np.float32)
