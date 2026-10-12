@@ -112,7 +112,7 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     rows = []
     for m in a.models.split(","):
-        if not os.path.exists(os.path.join(a.root, "lab", m, "images", "world-eval.f16.npy")):
+        if not all(os.path.exists(os.path.join(a.root, "lab", m, "images", f + ".f16.npy")) for f in ("world-fit", "world-eval")):
             H.log(m, "has no world vectors here; left out")
             continue
         rows.append(one(a.root, m, a.max_fit))
