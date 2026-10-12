@@ -1,0 +1,436 @@
+{
+ "id": "bioclip-b16",
+ "source": "hf-hub:imageomics/bioclip",
+ "source_url": "https://huggingface.co/imageomics/bioclip",
+ "loader": "open_clip",
+ "licence": "MIT",
+ "licence_url": "https://raw.githubusercontent.com/Imageomics/bioclip/main/LICENSE",
+ "role": "naturalist",
+ "params": {
+  "image": 86192640,
+  "text": 63428097,
+  "total": 149620737
+ },
+ "input": {
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "preprocess_detail": {
+  "transforms": [
+   "Resize(size=224, interpolation=bicubic, max_size=None, antialias=True)",
+   "CenterCrop(size=(224, 224))",
+   "MaybeConvertMode()",
+   "MaybeToTensor()",
+   "Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])"
+  ],
+  "preprocess_cfg": {
+   "size": [
+    224,
+    224
+   ],
+   "mode": "RGB",
+   "mean": [
+    0.48145466,
+    0.4578275,
+    0.40821073
+   ],
+   "std": [
+    0.26862954,
+    0.26130258,
+    0.27577711
+   ],
+   "interpolation": "bicubic",
+   "resize_mode": "shortest",
+   "fill_color": 0
+  },
+  "antialias": true,
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "interpolation": "bicubic",
+  "resize": "shortest side to 224, then centre crop 224"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "text": {
+  "kinds": {
+   "rows": 17,
+   "width": 512
+  },
+  "species_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua"
+  },
+  "species_sci": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua"
+  },
+  "species_taxon_com": {
+   "rows": 5911,
+   "width": 512,
+   "region": "us-fl-alachua"
+  }
+ },
+ "width": 512,
+ "stages": [
+  "export",
+  "images",
+  "images-onnx-int8-per-tensor",
+  "text-kinds",
+  "text-species"
+ ],
+ "images": {
+  "standin": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 40,
+    "embedded": 40,
+    "skipped": 0,
+    "seconds": 6.6,
+    "photos_per_second": 6.04,
+    "machine_cpus": 4
+   },
+   "via": "torch"
+  },
+  "alachua-2025": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 6000,
+    "embedded": 6000,
+    "skipped": 0,
+    "seconds": 1270.5,
+    "photos_per_second": 4.72,
+    "machine_cpus": 4
+   },
+   "via": "torch"
+  },
+  "alachua-2025.int8-per-tensor": {
+   "shards": 1,
+   "shard_0": {
+    "rows": 6000,
+    "embedded": 6000,
+    "skipped": 0,
+    "seconds": 408.0,
+    "photos_per_second": 14.71,
+    "machine_cpus": 4,
+    "onnx_sha256": "fdc00ae248e4e49097d7df12667158d6517bdaa6b1f36556d2ec2377231af21b"
+   },
+   "via": "onnxruntime CPU, vision.int8-per-tensor.onnx"
+  },
+  "world-fit": {
+   "shards": 16,
+   "shard_0": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 1203.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.12,
+    "machine_cpus": 4
+   },
+   "via": "torch",
+   "shard_1": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 1489.4,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.13,
+    "machine_cpus": 4
+   },
+   "shard_10": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1278.6,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.82,
+    "machine_cpus": 4
+   },
+   "shard_11": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 784.4,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 7.85,
+    "machine_cpus": 4
+   },
+   "shard_12": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1204.4,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.11,
+    "machine_cpus": 4
+   },
+   "shard_13": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1030.6,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.97,
+    "machine_cpus": 4
+   },
+   "shard_14": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1264.4,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.87,
+    "machine_cpus": 4
+   },
+   "shard_15": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1265.8,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.86,
+    "machine_cpus": 4
+   },
+   "shard_2": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 984.5,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 6.26,
+    "machine_cpus": 4
+   },
+   "shard_3": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 1273.6,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.84,
+    "machine_cpus": 4
+   },
+   "shard_4": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 815.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 7.55,
+    "machine_cpus": 4
+   },
+   "shard_5": {
+    "rows": 6158,
+    "embedded": 6158,
+    "skipped": 0,
+    "seconds": 1286.2,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.79,
+    "machine_cpus": 4
+   },
+   "shard_6": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1219.5,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.05,
+    "machine_cpus": 4
+   },
+   "shard_7": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1487.9,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.14,
+    "machine_cpus": 4
+   },
+   "shard_8": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1055.5,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.83,
+    "machine_cpus": 4
+   },
+   "shard_9": {
+    "rows": 6157,
+    "embedded": 6157,
+    "skipped": 0,
+    "seconds": 1306.9,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.71,
+    "machine_cpus": 4
+   },
+   "rows_embedded": 98518,
+   "skipped": 0,
+   "shards_present": 16,
+   "complete": true
+  },
+  "world-eval": {
+   "shards": 8,
+   "shard_0": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 791.0,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.84,
+    "machine_cpus": 4
+   },
+   "via": "torch",
+   "shard_1": {
+    "rows": 3825,
+    "embedded": 3824,
+    "skipped": 1,
+    "seconds": 735.0,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.2,
+    "machine_cpus": 4
+   },
+   "shard_2": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 791.1,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.83,
+    "machine_cpus": 4
+   },
+   "shard_3": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 786.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.86,
+    "machine_cpus": 4
+   },
+   "shard_4": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 797.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.8,
+    "machine_cpus": 4
+   },
+   "shard_5": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 797.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.8,
+    "machine_cpus": 4
+   },
+   "shard_6": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 924.9,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 4.14,
+    "machine_cpus": 4
+   },
+   "shard_7": {
+    "rows": 3825,
+    "embedded": 3825,
+    "skipped": 0,
+    "seconds": 653.4,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 5.85,
+    "machine_cpus": 4
+   },
+   "rows_embedded": 30599,
+   "skipped": 1,
+   "shards_present": 8,
+   "complete": true
+  }
+ },
+ "onnx": {
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "output_unit_normalized": false,
+  "dynamic_batch": true,
+  "opset": 17,
+  "files": {
+   "fp32": {
+    "bytes": 345154192,
+    "published": false
+   },
+   "int8-per-tensor": {
+    "bytes": 89384836,
+    "published": true
+   },
+   "int8-per-channel": {
+    "bytes": 89802361,
+    "published": true
+   },
+   "fp16": {
+    "bytes": 172912675,
+    "published": false
+   },
+   "int8": {
+    "bytes": 89802361,
+    "published": true
+   }
+  }
+ }
+}
