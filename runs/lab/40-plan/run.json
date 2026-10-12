@@ -1,0 +1,18 @@
+{
+ "about": "BioCLIP (ViT-B/16) vectors for the world tuning, test and casual photos (lab/world-eval on pub/data-world), to measure whether a larger encoder in the base app lets the nineteen groups pass their marks (docs/COVERAGE.md). A measurement only. Publishes after run 38 so that the two never race.",
+ "data": "pub/data-world",
+ "manifest": "lab/world-eval/manifest.csv",
+ "wait_minutes": 0,
+ "shard_mode": "mod",
+ "models": [
+  "bioclip-b16"
+ ],
+ "stages": [
+  "images"
+ ],
+ "shards": {
+  "bioclip-b16": 8
+ },
+ "max_parallel": 8,
+ "publish_after_run": 38
+}
