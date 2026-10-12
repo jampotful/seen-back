@@ -90,7 +90,7 @@ def spread(cands, size, key):
                 break
         if not moved:
             break
-    out, observers = [], Counter()
+    picked, observers = [], Counter()
     for k in sorted(share, key=lambda k: h(key, "c", k)):
         queues = []
         for o in sorted(by_cont[k], key=lambda o: h(key, "o", k, o)):
@@ -108,11 +108,13 @@ def spread(cands, size, key):
                     c = q[pos[qi]]; pos[qi] += 1
                     if observers[c["observer"]] < OBSERVER_CAP:
                         observers[c["observer"]] += 1
-                        out.append(c); got += 1; moved = True
+                        picked.append(((got + 0.5) / share[k], h(key, "c", k), c)); got += 1; moved = True
                         break
             if not moved:
                 break
-    return out
+    # continents interleaved in proportion to their shares, so that any prefix of the ranking is spread as the whole is
+    picked.sort(key=lambda t: (t[0], t[1]))
+    return [t[2] for t in picked]
 
 
 def pick(args):
@@ -214,8 +216,8 @@ def finish(args):
                 out[rank[a]] = name[a]
         return out
 
-    target = dict(SIZES); kept = Counter(); refused = Counter(); nophoto = Counter(); lic = Counter()
-    sets = defaultdict(list)
+    target = dict(SIZES); kept = Counter(); refused = Counter(); nophoto = Counter(); lic = Counter(); shared = Counter()
+    sets = defaultdict(list); used = set()
     for s, g, i, c in sorted(rows, key=lambda r: (r[0], r[1] if r[0] != "species" else r[3]["continent"], r[2])):
         k = (s, g if s != "species" else c["continent"])
         cap = SPECIES_TEST if s == "species" else target[s]
@@ -227,6 +229,10 @@ def finish(args):
         l = norm_licence(p[3])
         if l not in ALLOWED:
             refused[k] += 1; continue
+        if s != "species":
+            if p[1] in used:
+                shared[k] += 1; continue
+            used.add(p[1])
         kept[k] += 1; lic[l] += 1
         t = int(c["taxon"]); ln = lineage(t)
         sets[s].append({"set": s, "group": g, "continent": c["continent"], "inat_taxon": t, "sci": name.get(t, ""),
@@ -266,8 +272,8 @@ def finish(args):
     for k in CONTINENTS:
         L.append("| %s | %d |" % (k, kept[("species", k)]))
     L.append("")
-    L.append("Licences kept: %s. Ranked observations passed over for a licence outside the rule: %d; for no photo in the file: %d. Photos in two of the group sets: %d. Photos in both the species test and a group set: %d (the two tests measure different models)." % (
-        ", ".join("%s %d" % (k, v) for k, v in lic.most_common()), sum(refused.values()), sum(nophoto.values()), dup, both))
+    L.append("Licences kept: %s. Ranked observations passed over for a licence outside the rule: %d; for no photo in the file: %d; for a photo already taken by another group's observation: %d. Photos in two of the group sets: %d. Photos in both the species test and a group set: %d (the two tests measure different models)." % (
+        ", ".join("%s %d" % (k, v) for k, v in lic.most_common()), sum(refused.values()), sum(nophoto.values()), sum(shared.values()), dup, both))
     short = ["%s/%s %d of %d" % (k[0], k[1], kept[k], (SPECIES_TEST if k[0] == "species" else target[k[0]]))
              for k in sorted(set(list(kept) + list(refused) + list(nophoto)))
              if kept[k] < (SPECIES_TEST if k[0] == "species" else target[k[0]])]

@@ -4,8 +4,8 @@
 #
 # taxa.csv.gz is downloaded whole. observations.csv.gz (13.4 GB) and photos.csv.gz (20.7 GB) are each streamed once
 # through the decompressor and mawk and never written to disk. The observation pass keeps, for each species, at most
-# three research-grade observations a continent dated through 2024, three dated 2025 or later, and two casual ones,
-# plus a thin even sample of research-grade observations from 2025 on, and counts every research-grade and casual
+# three research-grade observations a continent dated through 2024, three dated 2025 or later, and two casual ones
+# (60, 60 and 20 in the ten groups with fewest species, 20, 20 and 6 in the next seven), plus a thin even sample of research-grade observations from 2025 on, and counts every research-grade and casual
 # observation by group, continent and period. tools/world/select.py ranks from those; the photo pass fetches the
 # photos of the ranked observations; select.py keeps those the licence rule allows. S3_BASE replaces the bucket's
 # address and NE_URL Natural Earth's, for a local test.
@@ -52,7 +52,12 @@ pick_unz() {           # the fastest decompressor that gives exactly gzip's outp
 OBS='
 BEGIN { FS = "\t"; OFS = "\t"
   # the even sample keeps an observation when the first three hex digits of its id fall under the continent limit
-  lim["NA"] = "003"; lim["EU"] = "003"; lim["AS"] = "010"; lim["OC"] = "010"; lim["AF"] = "020"; lim["SA"] = "020"; lim["AN"] = "fff~" }
+  lim["NA"] = "003"; lim["EU"] = "003"; lim["AS"] = "010"; lim["OC"] = "010"; lim["AF"] = "020"; lim["SA"] = "020"; lim["AN"] = "fff~"
+  # groups with few species keep more observations of each, so that their sets can still fill (run 1 of the job)
+  n1 = split("cat dog alligator rabbit tick flyingfox deer whale cephalopod primate", g1, " ")
+  for (i = 1; i <= n1; i++) cap[g1[i]] = 60
+  n2 = split("hawk salamander slime shark bat mammal wader", g2, " ")
+  for (i = 1; i <= n2; i++) cap[g2[i]] = 20 }
 FNR == 1 { file++ }
 file == 1 { tm[$1] = $2 "\t" $3 "\t" $4; next }
 file == 2 { gr[$1] = $2; next }
@@ -78,7 +83,7 @@ FNR == 1 {
   if (g == "casual") {
     cnt[grp "\t" k0 "\tC"]++
     key = m[2] SUBSEP k0
-    if (nc[key] < 2) { nc[key]++; print "C", grp, k0, "C", m[3], m[2], tx, $u, $ob, $d > CAS }
+    if (nc[key] < ((grp in cap) ? cap[grp] / 3 : 2)) { nc[key]++; print "C", grp, k0, "C", m[3], m[2], tx, $u, $ob, $d > CAS }
     next
   }
   dd = $d
@@ -86,7 +91,7 @@ FNR == 1 {
   per = (dd <= "2024-12-31") ? "F" : "E"
   cnt[grp "\t" k0 "\t" per]++
   key = m[2] SUBSEP k0 SUBSEP per
-  if (n[key] < 3) { n[key]++; print "R", grp, k0, per, m[3], m[2], tx, $u, $ob, dd > CAND }
+  if (n[key] < ((grp in cap) ? cap[grp] : 3)) { n[key]++; print "R", grp, k0, per, m[3], m[2], tx, $u, $ob, dd > CAND }
   if (per == "E" && substr(tolower($u), 1, 3) < lim[k0]) print "R", grp, k0, per, m[3], m[2], tx, $u, $ob, dd > EVEN
 }
 END {
