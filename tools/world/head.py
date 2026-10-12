@@ -434,87 +434,106 @@ def main():
         worst = min(fails, key=lambda g: min(fails[g]["named"] or 0, fails[g]["right_when_called"] or 0))
         carried.remove(worst)
         log("put back in other:", worst)
+
+    def finish(carried, Wk, bk):
+        """Steps 3 and 4 for a head carrying these groups: the settings on the tuning photos, then the test photos."""
+        labels = OLD + carried
+        table_new, T_new = table_for(carried)
+        # 3. the settings for the page in the county, and the level under which it is not sure
+        st = settle(Wk, bk, labels, T_new, folded(A["tune"]["y"], carried))
+        fu = dict(m_old["fusion"], t_kind=st["t_kind"], w_kind=st["w_kind"], rule="mix")
+        kb = st["t_kind"] * bk
+        kw, pw_ = head_alone(W["tune"], Wk, bk, labels, st["t_kind"])
+        ka, pa = answer(A["tune"]["X"], A["tune"]["month"], Wk, kb, labels, fu, T_new)
+        kc, pc = answer(X3["tune"]["X"], X3["tune"]["month"], Wk, kb, labels, fu, T_new)
+        levels = {"world": kind_at_level(kw, pw_, folded(W["tune"]["y"], carried)), "alachua": kind_at_level(ka, pa, folded(A["tune"]["y"], carried)),
+                  "coco": kind_at_level(kc, pc, X3["tune"]["y"])}
+        fu["kind_at"] = max(levels.values())
+        rep_settings = {**st, "kind_at": fu["kind_at"], "levels": levels, "bar": 0.95}
+        log("settings", json.dumps(rep_settings))
+
+        # 4. the test photos, once: today's page against the new head as the page would use it
+        res = {}
+        yw = folded(W["test"]["y"], carried); ya = folded(A["test"]["y"], carried)
+        ko_w, _ = old_answers(W["test"]); kn_w, pn_w = head_alone(W["test"], Wk, bk, labels, st["t_kind"])
+        kf_w, _ = answer(W["test"]["X"], W["test"]["month"], Wk, kb, labels, fu, T_new)
+        ko_a, _ = old_answers(A["test"]); kn_a, pn_a = answer(A["test"]["X"], A["test"]["month"], Wk, kb, labels, fu, T_new)
+
+        def paired(ko, kn, truth):
+            sel = np.isin(truth, VIEWS)
+            ro = (ko[sel] == truth[sel]).astype(float); rn = (kn[sel] == truth[sel]).astype(float)
+            idx = boot(int(sel.sum()))
+            d = ci_mean(rn - ro, idx)
+            return {"today": ci_mean(ro, idx), "new": ci_mean(rn, idx), "difference": d, "pass": bool(d[1] is not None and d[1] > -0.02)}
+
+        res["old_groups_world"] = paired(ko_w, kn_w, yw)                     # away: the head alone
+        res["old_groups_world_with_list"] = paired(ko_w, kf_w, yw)           # for the record: as in the county's time zone
+        res["old_groups_alachua"] = paired(ko_a, kn_a, ya)
+        res["new_groups"] = group_marks(kn_w, yw, carried)
+        kc_old, _ = old_answers(X3["test"])
+        kc_new, _ = answer(X3["test"]["X"], X3["test"]["month"], Wk, kb, labels, fu, T_new)
+        kc_alone, _ = head_alone(X3["test"], Wk, bk, labels, st["t_kind"])
+        so = balanced_share(kc_old, X3["test"]["y"], COCO_KEYS)
+        sn = balanced_share(kc_new, X3["test"]["y"], COCO_KEYS); sa_ = balanced_share(kc_alone, X3["test"]["y"], COCO_KEYS)
+        res["coco"] = {"today": round(so, 4), "new_with_list": round(sn, 4), "new_alone": round(sa_, 4), "pass": bool(sn >= so - 0.01 and sa_ >= so - 0.01),
+                       "named_a_new_group": int(np.isin(kc_new, NEW).sum() + np.isin(kc_alone, NEW).sum()), "photos": int(len(kc_new))}
+        truth_raw = W["test"]["y"]
+        sel = yw == "other"
+        res["other"] = {"photos": int(sel.sum()), "given_a_view_today": round(float(np.isin(ko_w[sel], VIEWS).mean()), 4),
+                        "given_a_view_new": round(float(np.isin(kn_w[sel], VIEWS).mean()), 4)}
+        res["other"]["pass"] = bool(res["other"]["given_a_view_new"] < 0.10)
+        parts = {}
+        for g in ["other"] + [x for x in NEW if x not in carried]:
+            s_ = truth_raw == g
+            if s_.any():
+                parts[g] = {"photos": int(s_.sum()), "given_a_view_today": round(float(np.isin(ko_w[s_], VIEWS).mean()), 4),
+                            "given_a_view_new": round(float(np.isin(kn_w[s_], VIEWS).mean()), 4),
+                            "views_new": dict(Counter(k for k in kn_w[s_] if k in VIEWS).most_common(5))}
+        res["other"]["by_group"] = parts
+        so_ = truth_raw == "other"
+        orders = Counter(); orders_view = Counter()
+        for i in np.where(so_)[0]:
+            o = W["test"]["order"][i] or W["test"]["cls"][i] or "?"
+            orders[o] += 1
+            if kn_w[i] in VIEWS:
+                orders_view[(o, kn_w[i])] += 1
+        res["other"]["original_other_given_a_view_by_order"] = [{"order": o, "view": v, "photos": n} for (o, v), n in orders_view.most_common(20)]
+        res["world_all"] = {"right_new": round(float(np.mean(kn_w == yw)), 4), "right_today": round(float(np.mean(ko_w == yw)), 4),
+                            "asserted_new": round(float(np.mean(pn_w >= fu["kind_at"])), 4),
+                            "right_when_asserted_new": round(float(np.mean(kn_w[pn_w >= fu["kind_at"]] == yw[pn_w >= fu["kind_at"]])), 4)}
+        res["alachua_all"] = {"right_new": round(float(np.mean(kn_a == ya)), 4), "right_today": round(float(np.mean(ko_a == ya)), 4),
+                              "asserted_new": round(float(np.mean(pn_a >= fu["kind_at"])), 4),
+                              "right_when_asserted_new": round(float(np.mean(kn_a[pn_a >= fu["kind_at"]] == ya[pn_a >= fu["kind_at"]])), 4)}
+        res["world_by_continent"] = {c: {"photos": int((W["test"]["cont"] == c).sum()),
+                                         "right_new": round(float(np.mean(kn_w[W["test"]["cont"] == c] == yw[W["test"]["cont"] == c])), 4),
+                                         "right_today": round(float(np.mean(ko_w[W["test"]["cont"] == c] == yw[W["test"]["cont"] == c])), 4)}
+                                     for c in sorted(set(W["test"]["cont"]))}
+        conf = Counter((t, k) for t, k in zip(yw, kn_w) if t != k)
+        res["commonest_confusions"] = [{"truth": t, "answer": k, "photos": n} for (t, k), n in conf.most_common(25)]
+        res["size_bytes"] = int(len(labels) * Wk.shape[1] * 2)
+        res["blocking"] = {"old_groups_world": res["old_groups_world"]["pass"], "old_groups_alachua": res["old_groups_alachua"]["pass"],
+                           "new_groups": all(m["pass"] for m in res["new_groups"].values()), "coco": res["coco"]["pass"],
+                           "size": res["size_bytes"] < 50000}
+        return {"labels": labels, "table_new": table_new, "fu": fu, "kb": kb, "settings": rep_settings, "test": res,
+                "table_relabelled": dict(Counter(r[2] for r, o in zip(table_new, table_old) if o[2] == "other"))}
+
+    out = finish(carried, Wk, bk)
+    failed = [g for g, m in out["test"]["new_groups"].items() if not m["pass"]]
+    if a.groups == "fold" and failed:
+        # a group carried that fails on the test photos stays in other too (docs/COVERAGE.md): it is put back and the head
+        # refitted, and the test photos are read a second time for the head that ships; both readings are kept
+        rep["test_first_reading"] = out["test"]; rep["failed_on_test"] = failed
+        carried = [g for g in carried if g not in failed]
+        log("failed on the test photos, put back in other:", ", ".join(failed))
+        Xf, yf = fitting(recipe["with_alachua"], carried)
+        Wk, bk, info = fit_head(Xf, yf, recipe["power"], OLD + carried)
+        out = finish(carried, Wk, bk)
+    labels, table_new, fu, kb = out["labels"], out["table_new"], out["fu"], out["kb"]
     rep["groups"] = {"rule": a.groups, "history": history, "carried": carried, "left_in_other": [g for g in NEW if g not in carried]}
     rep["labels"] = labels
-    table_new, T_new = table_for(carried)
-    rep["table_relabelled"] = dict(Counter(r[2] for r, o in zip(table_new, table_old) if o[2] == "other"))
-
-    # 3. the settings for the page in the county, and the level under which it is not sure
-    st = settle(Wk, bk, labels, T_new, folded(A["tune"]["y"], carried))
-    fu = dict(m_old["fusion"], t_kind=st["t_kind"], w_kind=st["w_kind"], rule="mix")
-    kb = st["t_kind"] * bk
-    kw, pw_ = head_alone(W["tune"], Wk, bk, labels, st["t_kind"])
-    ka, pa = answer(A["tune"]["X"], A["tune"]["month"], Wk, kb, labels, fu, T_new)
-    kc, pc = answer(X3["tune"]["X"], X3["tune"]["month"], Wk, kb, labels, fu, T_new)
-    levels = {"world": kind_at_level(kw, pw_, folded(W["tune"]["y"], carried)), "alachua": kind_at_level(ka, pa, folded(A["tune"]["y"], carried)),
-              "coco": kind_at_level(kc, pc, X3["tune"]["y"])}
-    fu["kind_at"] = max(levels.values())
-    rep["settings"] = {**st, "kind_at": fu["kind_at"], "levels": levels, "bar": 0.95}
-    log("settings", json.dumps(rep["settings"]))
-
-    # 4. the test photos, once: today's page against the new head as the page would use it
-    res = {}
-    yw = folded(W["test"]["y"], carried); ya = folded(A["test"]["y"], carried)
-    ko_w, _ = old_answers(W["test"]); kn_w, pn_w = head_alone(W["test"], Wk, bk, labels, st["t_kind"])
-    kf_w, _ = answer(W["test"]["X"], W["test"]["month"], Wk, kb, labels, fu, T_new)
-    ko_a, _ = old_answers(A["test"]); kn_a, pn_a = answer(A["test"]["X"], A["test"]["month"], Wk, kb, labels, fu, T_new)
-
-    def paired(ko, kn, truth):
-        sel = np.isin(truth, VIEWS)
-        ro = (ko[sel] == truth[sel]).astype(float); rn = (kn[sel] == truth[sel]).astype(float)
-        idx = boot(int(sel.sum()))
-        d = ci_mean(rn - ro, idx)
-        return {"today": ci_mean(ro, idx), "new": ci_mean(rn, idx), "difference": d, "pass": bool(d[1] is not None and d[1] > -0.02)}
-
-    res["old_groups_world"] = paired(ko_w, kn_w, yw)                     # away: the head alone
-    res["old_groups_world_with_list"] = paired(ko_w, kf_w, yw)           # for the record: as in the county's time zone
-    res["old_groups_alachua"] = paired(ko_a, kn_a, ya)
-    res["new_groups"] = group_marks(kn_w, yw, carried)
-    kc_old, _ = old_answers(X3["test"])
-    kc_new, _ = answer(X3["test"]["X"], X3["test"]["month"], Wk, kb, labels, fu, T_new)
-    kc_alone, _ = head_alone(X3["test"], Wk, bk, labels, st["t_kind"])
-    so = balanced_share(kc_old, X3["test"]["y"], COCO_KEYS)
-    sn = balanced_share(kc_new, X3["test"]["y"], COCO_KEYS); sa_ = balanced_share(kc_alone, X3["test"]["y"], COCO_KEYS)
-    res["coco"] = {"today": round(so, 4), "new_with_list": round(sn, 4), "new_alone": round(sa_, 4), "pass": bool(sn >= so - 0.01 and sa_ >= so - 0.01),
-                   "named_a_new_group": int(np.isin(kc_new, NEW).sum() + np.isin(kc_alone, NEW).sum()), "photos": int(len(kc_new))}
-    truth_raw = W["test"]["y"]
-    sel = yw == "other"
-    res["other"] = {"photos": int(sel.sum()), "given_a_view_today": round(float(np.isin(ko_w[sel], VIEWS).mean()), 4),
-                    "given_a_view_new": round(float(np.isin(kn_w[sel], VIEWS).mean()), 4)}
-    res["other"]["pass"] = bool(res["other"]["given_a_view_new"] < 0.10)
-    parts = {}
-    for g in ["other"] + [x for x in NEW if x not in carried]:
-        s_ = truth_raw == g
-        if s_.any():
-            parts[g] = {"photos": int(s_.sum()), "given_a_view_today": round(float(np.isin(ko_w[s_], VIEWS).mean()), 4),
-                        "given_a_view_new": round(float(np.isin(kn_w[s_], VIEWS).mean()), 4),
-                        "views_new": dict(Counter(k for k in kn_w[s_] if k in VIEWS).most_common(5))}
-    res["other"]["by_group"] = parts
-    so_ = truth_raw == "other"
-    orders = Counter(); orders_view = Counter()
-    for i in np.where(so_)[0]:
-        o = W["test"]["order"][i] or W["test"]["cls"][i] or "?"
-        orders[o] += 1
-        if kn_w[i] in VIEWS:
-            orders_view[(o, kn_w[i])] += 1
-    res["other"]["original_other_given_a_view_by_order"] = [{"order": o, "view": v, "photos": n} for (o, v), n in orders_view.most_common(20)]
-    res["world_all"] = {"right_new": round(float(np.mean(kn_w == yw)), 4), "right_today": round(float(np.mean(ko_w == yw)), 4),
-                        "asserted_new": round(float(np.mean(pn_w >= fu["kind_at"])), 4),
-                        "right_when_asserted_new": round(float(np.mean(kn_w[pn_w >= fu["kind_at"]] == yw[pn_w >= fu["kind_at"]])), 4)}
-    res["alachua_all"] = {"right_new": round(float(np.mean(kn_a == ya)), 4), "right_today": round(float(np.mean(ko_a == ya)), 4),
-                          "asserted_new": round(float(np.mean(pn_a >= fu["kind_at"])), 4),
-                          "right_when_asserted_new": round(float(np.mean(kn_a[pn_a >= fu["kind_at"]] == ya[pn_a >= fu["kind_at"]])), 4)}
-    res["world_by_continent"] = {c: {"photos": int((W["test"]["cont"] == c).sum()),
-                                     "right_new": round(float(np.mean(kn_w[W["test"]["cont"] == c] == yw[W["test"]["cont"] == c])), 4),
-                                     "right_today": round(float(np.mean(ko_w[W["test"]["cont"] == c] == yw[W["test"]["cont"] == c])), 4)}
-                                 for c in sorted(set(W["test"]["cont"]))}
-    conf = Counter((t, k) for t, k in zip(yw, kn_w) if t != k)
-    res["commonest_confusions"] = [{"truth": t, "answer": k, "photos": n} for (t, k), n in conf.most_common(25)]
-    res["size_bytes"] = int(len(labels) * Wk.shape[1] * 2)
-    res["blocking"] = {"old_groups_world": res["old_groups_world"]["pass"], "old_groups_alachua": res["old_groups_alachua"]["pass"],
-                       "new_groups": all(m["pass"] for m in res["new_groups"].values()), "coco": res["coco"]["pass"],
-                       "size": res["size_bytes"] < 50000}
-    rep["test"] = res
+    rep["table_relabelled"] = out["table_relabelled"]
+    rep["settings"] = out["settings"]
+    rep["test"] = out["test"]
     rep["fitted"] = info
 
     # the candidate slot
@@ -581,6 +600,10 @@ def write_md(rep, path):
     L += ["", "Alachua test photos, every label: right %s (today %s); asserted %s, right when asserted %s." % (al["right_new"], al["right_today"], al["asserted_new"], al["right_when_asserted_new"])]
     L += ["", "By continent (new, today): " + "; ".join("%s %s, %s of %d" % (c, d["right_new"], d["right_today"], d["photos"]) for c, d in t["world_by_continent"].items()) + "."]
     L += ["", "Commonest confusions: " + "; ".join("%s as %s %d" % (c["truth"], c["answer"], c["photos"]) for c in t["commonest_confusions"][:15]) + "."]
+    if rep.get("failed_on_test"):
+        f = rep["test_first_reading"]["new_groups"]
+        L += ["", "Carried after the fold but failing on the test photos, so put back in `other` and the head refitted (first reading, named / right when called): " + "; ".join(
+            "%s %s / %s" % (g, f[g]["named"], f[g]["right_when_called"]) for g in rep["failed_on_test"]) + ". The tables above are the second reading, for the head that ships."]
     L += ["", "The fold, on the tuning photos (carried, failing):"]
     for h in rep["groups"]["history"]:
         fails = [g for g, m in h["marks"].items() if not m["pass"]]

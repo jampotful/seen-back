@@ -1,0 +1,30 @@
+name: worldenc
+# Encoders compared on the world photos (tools/world/encoders.py, ci/world/encoders.sh): how many of the nineteen
+# groups a head finds with each model's vectors. Push a commit to run/worldenc/<label>. ENCODERS.md, encoders.json and
+# the log come back on ci as runs/worldenc/<run>.
+on:
+  push:
+    branches: ['run/worldenc/**']
+permissions:
+  contents: write
+concurrency:
+  group: worldenc-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: python3 -m pip install --quiet numpy scikit-learn
+      - name: compare
+        run: bash ci/world/encoders.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worldenc out
