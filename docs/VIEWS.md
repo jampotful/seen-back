@@ -4,7 +4,7 @@ Compiled 11 October 2026. The app draws a camera view for sixteen groups of livi
 
 ## Where this list went next (12 October 2026)
 
-`docs/COVERAGE.md` merges the 43 proposed views below into nineteen groups for the base app, which hold all but 0.10% of the records now in `other`, and says what they cost, where their photos come from and how each claim will be measured. The sheets of sensing notes for the first of them (spider, fish, bat, tick and fungus, each checked by a second agent) are in `docs/views/sheets/`. Three of those sheets split a proposed view in two: jumping spiders from other spiders, sharks and rays from other fish, and flying foxes from other bats. The fungus sheet sets slime moulds apart from fungi, and the tick sheet leaves mites out of the tick's view.
+`docs/COVERAGE.md` merges the 43 proposed views below into nineteen groups for the base app, which leave 0.10% of world records in `other`, and says what they cost, where their photos come from and how each claim will be measured. The sheets of sensing notes for the first of them (spider, fish, bat, tick and fungus, each checked by a second agent) are in `docs/views/sheets/`. Three of those sheets split a proposed view in two: jumping spiders from other spiders, sharks and rays from other fish, and flying foxes from other bats. The fungus sheet sets slime moulds apart from fungi, and the tick sheet leaves mites out of the tick's view.
 
 ## How it was counted
 

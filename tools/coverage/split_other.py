@@ -131,7 +131,7 @@ def boot(x, B=2000):
     return [float(x.mean()), float(np.percentile(b, 2.5)), float(np.percentile(b, 97.5)), int(len(x))]
 
 
-res = {"notes": "head alone, no county list; licence rule nc; logistic regression C=20, inverse square root weights"}
+res = {"notes": "head alone, no county list; licence rule nc; logistic regression C=20; a group's photos weighted by their number to the power -%g" % POWER}
 heads = {}
 for name, so in (("today", False), ("split", True)):
     clf, counts = fit(so)
