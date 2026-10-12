@@ -12,7 +12,9 @@
   // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
   // when a photo needs it and let go after a minute with nothing to do.
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
-  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
+  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person',
+    'fungus', 'slime', 'spider', 'jumper', 'fish', 'shark', 'snail', 'sealife', 'crab', 'salamander', 'worm', 'scorpion', 'tick', 'mammal', 'primate', 'whale', 'bat', 'flyingfox', 'cephalopod'];   // the order of KINDS in tools/fusion/fuse.py; the groups with no view yet (GROUPS) follow
+  function known(k) { return !!(EYES[k] || GROUPS[k]); }   // a kind with a view, or a group the page names and cannot yet view the world as
   var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   function plain(x) { return String(x || '').toLowerCase().replace(/[^a-z' -]+/g, ' ').replace(/\s+/g, ' ').trim(); }
   function slips(a, b, lim) {                          // how many slips of the keys turn one word into the other: a letter wrong, missing, added, or two swapped
@@ -149,7 +151,7 @@
       if (!v || !f || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !(v.url || Array.isArray(v.parts))) throw err('unfit', 'manifest lacks a field');
       // a slot may come without a kinds head: then the kind is taken from the species answer, and the species are not optional
       if (k ? !(Array.isArray(k.labels) && k.url && num(f.t_kind)) : !sp) throw err('unfit', 'manifest lacks a field');
-      if (k && k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
+      if (k && k.labels.some(function (l) { return l !== 'none' && !known(l); })) throw err('unfit', 'a kind this page does not know');
       if (sp && !(sp.url && sp.table && num(sp.count) && num(f.t_species) && num(f.alpha_prior) && (!k || num(f.w_kind)) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
       // a trained head carries a bias for each row; a manifest may choose how the two heads are combined. Anything this build does not know is refused, not guessed at.
       if (k && k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
@@ -169,7 +171,7 @@
       rows = Array.isArray(t) ? t : t && t.species;
       if (!Array.isArray(rows) || rows.length !== count) throw err('unfit', 'species table has ' + (rows ? rows.length : 0) + ' rows, not ' + count);
       return rows.map(function (r) {
-        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = EYES[a[2]] ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
+        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = known(a[2]) ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
     }
@@ -684,9 +686,9 @@
       if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
       if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
       var species = out.species.slice(0, 10).map(function (s) {
-        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: known(s.eyes) ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
       }).filter(function (s) { return s && (s.sci || s.en); });
-      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (known(k.key) || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
       species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
       return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
     }

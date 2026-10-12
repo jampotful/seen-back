@@ -47,7 +47,7 @@ OLD = ["cat", "dog", "squirrel", "deer", "rabbit", "hawk", "wader", "bird", "all
        "plant", "person", "other", "none"]
 LABELS = OLD + list(NEW)
 VIEWS = [k for k in OLD if k not in ("person", "other", "none")]
-KINDS_ALL = list(F.KINDS) + list(NEW)        # the kinds a species table may carry once the page knows the groups
+KINDS_ALL = list(dict.fromkeys(list(F.KINDS) + list(NEW)))   # the kinds a species table may carry once the page knows the groups
 ALLOWED = ("cc0", "cc-by", "cc-by-nc", "pd")
 C_REG = 20.0
 SEED = 20261012

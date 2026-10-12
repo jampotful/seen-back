@@ -36,7 +36,10 @@ A rule the page does not know is refused by both: the page will not load such a 
 import json, math, pathlib
 import numpy as np
 
-KINDS = ("cat", "dog", "squirrel", "deer", "rabbit", "hawk", "wader", "bird", "alligator", "reptile", "frog", "bee", "insect", "plant", "other", "person")
+KINDS = ("cat", "dog", "squirrel", "deer", "rabbit", "hawk", "wader", "bird", "alligator", "reptile", "frog", "bee", "insect", "plant", "other", "person",
+         # the groups with no view yet (GROUPS in src/cam.a.js), which a species table or a kinds head may carry since build 22
+         "fungus", "slime", "spider", "jumper", "fish", "shark", "snail", "sealife", "crab", "salamander", "worm", "scorpion", "tick",
+         "mammal", "primate", "whale", "bat", "flyingfox", "cephalopod")
 
 
 def total(x):
