@@ -33,3 +33,20 @@ today: alachua old 0.8941, world old 0.6662, coco 0.9538
 {"power": 0.0, "amult": 3.0, "cmult": 10.0, "named": ["primate", "whale", "bat"], "world_old": 0.0393, "coco_alone": 0.0039, "best_feasible": [-0.0036, 0.0055, 1.0, 0.7], "other_view": 0.108, "marks": {"primate": [0.86, 0.875], "whale": [0.833, 0.871], "bat": [0.79, 0.853]}, "s": 148}
 {"power": 0.0, "amult": 4.0, "cmult": 20.0, "named": ["primate", "whale", "bat"], "world_old": 0.0331, "coco_alone": 0.0046, "best_feasible": [-0.0054, 0.0065, 1.0, 0.7], "other_view": 0.1149, "marks": {"primate": [0.85, 0.885], "whale": [0.837, 0.869], "bat": [0.77, 0.872]}, "s": 128}
 ```
+
+## The port in head.py, on tuning photos only (13 October 2026)
+
+`python3 -I tools/world/head.py ROOT --slot models/pocket --out OUT --recipe merge --tune-only`, and the same with `--recipe merge-other`, on TinyCLIP 39M/16 in the sandbox, before any test photo was loaded. `merge-other` is `merge` with `other`'s bias raised, in steps of 0.05, until at most 9% of the world tuning photos in `other` are given a view, then the fold and the settings again.
+
+| On the tuning photos | today | merge | merge-other |
+|---|---:|---:|---:|
+| groups named (named / right when called) | | primate 0.86 / 0.8716, whale 0.8467 / 0.8639, bat 0.7967 / 0.8566 | primate 0.86 / 0.8716, whale 0.8433 / 0.8694, bat 0.79 / 0.8745 |
+| old kinds right, world photos, the head alone | 0.6662 | 0.7045 | 0.6855 |
+| old kinds right, Alachua photos, head and list | 0.8941 | 0.8894 | 0.8846 |
+| COCO, with the list / the head alone | 0.9538 | 0.9596 / 0.9581 | 0.9567 / 0.9553 |
+| `other` given a view | | 0.1133 | 0.0890 |
+| settings | | t_kind 1.0, w_kind 0.7, kind_at 0.87 | t_kind 1.0, w_kind 0.7, kind_at 0.88, `other` +2.65 |
+
+The port agrees with the trial's lines above to about half a point (bat 0.7967 / 0.8566 against 0.79 / 0.853, `other` 0.1133 against 0.108, Alachua −0.47 against −0.36 points); those lines came from a machine since replaced, and a fit's last digits follow the machine.
+
+Chosen on these numbers, before any test photo was read: `merge-other` is the candidate to ship for TinyCLIP, since `merge` gives a view to more than 10% of `other` on the tuning photos. `merge` is read on the test photos too, as the track's brief asks (runs `m1` and `m2`, `ci/world/runs/`).
