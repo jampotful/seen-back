@@ -61,3 +61,13 @@ The script then rewrites each `R` id into the record's file and source (`birds.j
 ## 5. Calibration and cost
 
 Before the full run, the script compiles five views that already have hand-made specs (`jumper`, `owl`, `duck`, `fox`, `bigcat`) with their own specs removed from the example pool, and reports, parameter by parameter, how many values and grades match. The model is the cheapest that matches as well as the next one up on those five, as the extraction's calibration chose Haiku. A request is about 35,000 tokens in (6,000 of system, cached; 8,000 of example; up to 20,000 of records) and 5,000 out.
+
+## 7. As built (the compiler track, 13 October 2026)
+
+`tools/views/compile.py` (commands `plan`, `run`, `check`, `compare`), `tools/views/test_compile.py`, job files in `tools/views/compile/`, and the job `views-compile` (`.github/workflows/views-compile.yml`, `ci/views/compile.sh`, `ci/views/compile.env`). Where the build differs from the sections above:
+
+- **Records.** The job's `taxa` match a record's taxon, family or order as whole words; `wider` taxa are used only for traits that have no record inside `taxa`. At most 16 records a trait and 300 in all, graded `m` and hand-log records first, with a spread of taxa. Audit verdicts (`docs/views/audit/<unit>.jsonl`, line number as id) drop retracted records and swap in corrected ones; a table record whose quote was not found in its source is dropped.
+- **The reply** is a tool call with `spec`, `claims` and `quotes`. Haiku 5.5 sometimes returns `spec` as a string that runs on into the claims; the script reads it back. Sonnet 5.5 refuses a forced `tool_choice` and takes `auto`.
+- **Checks** are those of section 4, with these additions: every numeric `m` or `g` value must be a cited record's value or lie between two of them (a calculation is at most `g`); the schema's widest range replaces the reply's range; a spec's `modules` are derived from the blocks it carries; a parameter graded `i` that no row names is named by one plain row, "Settings the app chose", which the report lists as added by the script; a row's parameter names written among its record ids are moved to the fifth element.
+- **Retry.** One more request with the first reply and the errors appended; a second failure writes `<key>.<model>.refused.json`, and `compare` still reads that reply as returned.
+- **Output.** `pub/views-draft/<label>/<key>.<model>.json` (the spec, `"draft": true`, record ids rewritten to `file:Author year`), `.md` (the report) and `COMPARISON.md`. Nothing goes to `views/`.
