@@ -1,0 +1,209 @@
+=== 2026-10-13T02:08:41Z machine
+4
+/dev/root       145G   60G   85G  42% /
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1503       11289          42        3580       14486
+=== 2026-10-13T02:08:41Z machine: exit 0
+=== 2026-10-13T02:08:41Z install
+=== 2026-10-13T02:08:49Z install: exit 0
+=== 2026-10-13T02:08:49Z world test photos
+3501 work/test_manifest.csv
+=== 2026-10-13T02:08:51Z world test photos: exit 0
+=== 2026-10-13T02:08:51Z taxa
+=== 2026-10-13T02:08:52Z taxa: exit 0
+=== 2026-10-13T02:08:52Z decompressor
+decompressor: igzip -dc
+=== 2026-10-13T02:08:59Z decompressor: exit 0
+=== 2026-10-13T02:08:59Z group and species of every taxon
+taxa read: 1668467
+cat         taxa      258  species       64
+dog         taxa      283  species       59
+squirrel    taxa     6458  species     3193
+deer        taxa     1088  species      327
+rabbit      taxa      388  species      141
+hawk        taxa     1288  species      451
+wader       taxa     3753  species     1328
+bird        taxa    39554  species    13269
+alligator   taxa       76  species       38
+reptile     taxa    22447  species    15235
+frog        taxa    11581  species    10655
+bee         taxa    62244  species    50463
+insect      taxa   641523  species   510330
+plant       taxa   434046  species   336109
+fungus      taxa    88377  species    73734
+slime       taxa     1351  species     1039
+spider      taxa    52719  species    47281
+jumper      taxa     8240  species     7322
+fish        taxa    50760  species    42899
+shark       taxa     2082  species     1718
+snail       taxa    65391  species    52636
+sealife     taxa    41293  species    32178
+crab        taxa    34925  species    25784
+salamander  taxa     1604  species     1259
+worm        taxa    26631  species    17730
+scorpion    taxa    16268  species    12715
+tick        taxa      632  species      563
+mammal      taxa     3895  species     1807
+primate     taxa     1298  species      700
+whale       taxa      406  species      190
+bat         taxa     2368  species     1619
+flyingfox   taxa      373  species      237
+cephalopod  taxa     1651  species     1142
+person      taxa       15  species        5
+other       taxa    43201  species    28124
+=== 2026-10-13T02:09:16Z group and species of every taxon: exit 0
+=== 2026-10-13T02:09:16Z pass 1: records through 2024, and the test photos (streamed)
+try 1: curl 0, decompress 0, pass 0; 02:12:43
+=== 2026-10-13T02:12:43Z pass 1: records through 2024, and the test photos (streamed): exit 0
+=== 2026-10-13T02:12:43Z what pass 1 kept
+      3500 work/test_obs.tsv
+ 114367325 work/rec.tsv
+ 114370825 total
+total 1582500
+drwxr-xr-x  2 runner runner       4096 Oct 13 02:11 .
+drwxr-xr-x 21 runner runner       4096 Oct 13 02:08 ..
+-rw-r--r--  1 runner runner         41 Oct 13 02:08 data_world_sha.txt
+-rw-r--r--  1 runner runner 1533638953 Oct 13 02:12 rec.tsv
+-rw-r--r--  1 runner runner         30 Oct 13 02:08 snapshot.txt
+-rw-r--r--  1 runner runner   39999332 Oct 13 02:08 taxa.csv.gz
+-rw-r--r--  1 runner runner   45329744 Oct 13 02:09 taxmap.tsv
+-rw-r--r--  1 runner runner     998635 Oct 13 02:08 test_manifest.csv
+-rw-r--r--  1 runner runner     351793 Oct 13 02:12 test_obs.tsv
+-rw-r--r--  1 runner runner     129500 Oct 13 02:08 test_uuids.txt
+-rw-r--r--  1 runner runner         10 Oct 13 02:08 unz.txt
+=== 2026-10-13T02:12:43Z what pass 1 kept: exit 0
+=== 2026-10-13T02:12:43Z names of the rows (the rows run's names job)
+  433157 work/inat_rows.tsv
+  427164 work/rows.tsv
+  860321 total
+from runs/worlddb/1-names
+=== 2026-10-13T02:12:48Z names of the rows (the rows run's names job): exit 0
+=== 2026-10-13T02:12:48Z pass 2: the observers' records, and other people's near the test photos (streamed)
+try 1: curl 0, decompress 0, pass 0; 02:16:01
+=== 2026-10-13T02:16:01Z pass 2: the observers' records, and other people's near the test photos (streamed): exit 0
+=== 2026-10-13T02:16:01Z what pass 2 kept
+      2867 work/observers.txt
+      1550 work/test_cells.txt
+  17091103 work/obs.tsv
+    431694 work/near.tsv
+  17527214 total
+=== 2026-10-13T02:16:02Z what pass 2 kept: exit 0
+=== 2026-10-13T02:16:02Z Natural Earth countries
+=== 2026-10-13T02:16:02Z Natural Earth countries: exit 0
+=== 2026-10-13T02:16:02Z time-zone polygons
+timezone-boundary-builder release: 2026e
+total 168404
+drwxr-xr-x 2 runner runner      4096 Oct 13 02:16 .
+drwxr-xr-x 3 runner runner      4096 Oct 13 02:16 ..
+-rw-r--r-- 1 runner runner 172434359 Oct 10 07:15 combined.json
+=== 2026-10-13T02:16:03Z time-zone polygons: exit 0
+=== 2026-10-13T02:16:03Z tz database (2026b)
+total 68
+drwxr-xr-x 2 runner runner  4096 Oct 13 02:16 .
+drwxr-xr-x 4 runner runner  4096 Oct 13 02:16 ..
+-rw-r--r-- 1 runner runner 12039 Oct 13 02:16 backward
+-rw-r--r-- 1 runner runner  4841 Oct 13 02:16 iso3166.tab
+-rw-r--r-- 1 runner runner 18818 Oct 13 02:16 zone.tab
+-rw-r--r-- 1 runner runner 17601 Oct 13 02:16 zone1970.tab
+=== 2026-10-13T02:16:04Z tz database (2026b): exit 0
+=== 2026-10-13T02:16:04Z cells, places and zones
+taxa 1713381, database rows 427163
+  records read 20000000, with a row 19779774
+  records read 40000000, with a row 39562731
+  records read 60000000, with a row 59373174
+  records read 80000000, with a row 79201729
+  records read 100000000, with a row 99045063
+  records read 114367325, with a row 113322735
+pairs at 0.25 degrees: 22521949
+grid 0.5 degrees: {'pairs': 14879450, 'cells_with_records': 54302, 'bytes_varint_by_species': 34565764, 'pairs_with_one_record': 6794363}
+grid 1 degrees: {'pairs': 9219887, 'cells_with_records': 19781, 'bytes_varint_by_species': 21842880, 'pairs_with_one_record': 3692502}
+grid 2 degrees: {'pairs': 5466383, 'cells_with_records': 7087, 'bytes_varint_by_species': 12991456, 'pairs_with_one_record': 1947614}
+grid 3 degrees: {'pairs': 4027560, 'cells_with_records': 3828, 'bytes_varint_by_species': 9072815, 'pairs_with_one_record': 1348488}
+grid 4 degrees: {'pairs': 3217624, 'cells_with_records': 2453, 'bytes_varint_by_species': 7392537, 'pairs_with_one_record': 1034855}
+cells with a country: 342683
+test photos 3500, with a place 3500, with a row 3428
+observers' records with a row 16966689; other people's near the photos 428221
+{
+ "records_through_2024": {
+  "read": 114367325,
+  "with_a_row": 113322735,
+  "pairs_at_0.25": 22521949
+ },
+ "grids": {
+  "0.5": {
+   "pairs": 14879450,
+   "cells_with_records": 54302,
+   "bytes_varint_by_species": 34565764,
+   "pairs_with_one_record": 6794363
+  },
+  "1": {
+   "pairs": 9219887,
+   "cells_with_records": 19781,
+   "bytes_varint_by_species": 21842880,
+   "pairs_with_one_record": 3692502
+  },
+  "2": {
+   "pairs": 5466383,
+   "cells_with_records": 7087,
+   "bytes_varint_by_species": 12991456,
+   "pairs_with_one_record": 1947614
+  },
+  "3": {
+   "pairs": 4027560,
+   "cells_with_records": 3828,
+   "bytes_varint_by_species": 9072815,
+   "pairs_with_one_record": 1348488
+  },
+  "4": {
+   "pairs": 3217624,
+   "cells_with_records": 2453,
+   "bytes_varint_by_species": 7392537,
+   "pairs_with_one_record": 1034855
+  }
+ },
+ "country_cells": 342683,
+ "test": {
+  "photos": 3500,
+  "with_a_place": 3500,
+  "with_a_row": 3428,
+  "zones": 224
+ },
+ "met": {
+  "photos_with_three": 3486,
+  "first_three_by_source": {
+   "before,before,before": 3312,
+   "before,before,near": 43,
+   "near,near,near": 35,
+   "before,near,near": 29,
+   "before,before,after": 22,
+   "before,after,after": 18,
+   "after,after,after": 14,
+   "": 7,
+   "before,after,near": 6,
+   "after,after,near": 5,
+   "before,before": 4,
+   "after,near,near": 2
+  }
+ }
+}
+=== 2026-10-13T02:19:18Z cells, places and zones: exit 0
+total 64848
+drwxr-xr-x  3 runner runner     4096 Oct 13 02:19 .
+drwxr-xr-x 21 runner runner     4096 Oct 13 02:08 ..
+-rw-r--r--  1 runner runner      165 Oct 13 02:19 SOURCES.txt
+-rw-r--r--  1 runner runner     1429 Oct 13 02:16 countries.json
+-rw-r--r--  1 runner runner  2073728 Oct 13 02:16 country025.npy
+-rw-r--r--  1 runner runner  4164717 Oct 13 02:19 met.tsv
+-rw-r--r--  1 runner runner 29009343 Oct 13 02:16 pairs025.00.npz
+-rw-r--r--  1 runner runner 22386898 Oct 13 02:16 pairs025.01.npz
+-rw-r--r--  1 runner runner     1344 Oct 13 02:19 summary.json
+-rw-r--r--  1 runner runner   435114 Oct 13 02:16 test.tsv
+-rw-r--r--  1 runner runner  8294528 Oct 13 02:16 totals025.npy
+drwxr-xr-x  2 runner runner     4096 Oct 13 02:19 tzdb
+=== 2026-10-13T02:19:18Z publish
+remote: 
+remote: Create a pull request for 'pub/world-place' on GitHub by visiting:        
+remote:      https://github.com/jampotful/seen-back/pull/new/pub/world-place        
+remote: 
+published pub/world-place
+=== 2026-10-13T02:19:24Z publish: exit 0
