@@ -907,7 +907,7 @@ async function meet(page, name) {
     r.paris = await tryZone('Europe/Paris'); r.chicago = await tryZone('America/Chicago'); r.newYork = await tryZone('America/New_York');
     r.parisSaidNear = await tryZone('Europe/Paris', '0'); r.newYorkSaidAway = await tryZone('America/New_York', '1');
     done('zone', r, r.paris.local === false && r.paris.eyes === 'wader' && r.paris.shown === 'wading bird' && r.chicago.local === false
-      && r.newYork.local === true && r.newYork.shown === 'Great blue heron' && r.parisSaidNear.local === true && r.parisSaidNear.shown === 'Great blue heron'
+      && r.newYork.local === true && r.newYork.shown === 'great blue heron' && r.parisSaidNear.local === true && r.parisSaidNear.shown === 'great blue heron'
       && r.newYorkSaidAway.local === false && r.newYorkSaidAway.shown === 'wading bird'
       && [r.paris, r.chicago, r.newYork, r.parisSaidNear, r.newYorkSaidAway].every((x) => x.errors === 0));
   });
