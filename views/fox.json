@@ -1,0 +1,285 @@
+{
+  "key": "fox",
+  "version": 1,
+  "chip": "Fox",
+  "who": "a fox",
+  "falls_back_to": "dog",
+  "applies_to": {
+    "genus": [
+      "Vulpes",
+      "Urocyon"
+    ]
+  },
+  "cue": "Out-of-focus things smear up and down.",
+  "modules": [
+    "motion"
+  ],
+  "draft": true,
+  "params": {
+    "cpd": {
+      "value": 6,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L173"
+      ],
+      "floor": null,
+      "note": "from maps of the retina's nerve cells, an anatomical estimate",
+      "range": [
+        1,
+        40
+      ]
+    },
+    "topoA": {
+      "value": 1,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L39, L42"
+      ],
+      "floor": null,
+      "note": "a sharp centre",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "topoS": {
+      "value": 0.4,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L39, L41, L42"
+      ],
+      "floor": null,
+      "note": "a weaker band along the horizon",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "fall": {
+      "value": 1.2,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source",
+      "range": [
+        0,
+        3
+      ]
+    },
+    "pupil": {
+      "value": "v",
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L51, L141"
+      ],
+      "floor": null,
+      "note": "a tall, thin oval in bright light"
+    },
+    "dof": {
+      "value": 22,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source",
+      "range": [
+        0,
+        40
+      ]
+    },
+    "M": {
+      "value": "DEUTAN",
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L110, L111"
+      ],
+      "floor": null,
+      "note": "two cone classes, as in dogs"
+    },
+    "gain": {
+      "value": 1.6,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4: L41"
+      ],
+      "floor": null,
+      "note": "a rod-rich retina",
+      "range": [
+        1,
+        3
+      ]
+    },
+    "sat": {
+      "value": 0.8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source",
+      "range": [
+        0,
+        1.5
+      ]
+    }
+  },
+  "matrices": {
+    "DEUTAN": {
+      "rows": [
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          -0.02234,
+          0.02234,
+          1
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "Vienot, Brettel and Mollon 1999"
+      ],
+      "note": "a person's red-green colour blindness standing in for two cone classes, entered from memory as in the cat view"
+    }
+  },
+  "magnet": {
+    "k": {
+      "value": 0.6,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly the compass is drawn; the fox's sense, if it exists, is not described",
+      "range": [
+        0,
+        2
+      ]
+    }
+  },
+  "draw": {
+    "magnet": [
+      {
+        "name": "none",
+        "invented": true,
+        "note": "the view without the compass"
+      },
+      {
+        "name": "tide",
+        "invented": true,
+        "note": "a faint shade that follows the angle between the camera and magnetic north (the draft's compass arc, drawn with the existing tide)"
+      }
+    ]
+  },
+  "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none",
+    "senses": {
+      "motion": 1
+    }
+  },
+  "rows": [
+    [
+      "m",
+      "Pupil",
+      "A red fox's pupil narrows in bright light to a tall, thin oval, close to a house cat's slit, and its lens has zones that bring several colours into focus together. Out-of-focus things smear up and down in this view.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L51",
+        "L141",
+        "L54",
+        "param:pupil"
+      ]
+    ],
+    [
+      "m",
+      "Sharpest spot",
+      "A red fox sees most sharply in a small central spot, with a weaker band along the horizon. The Arctic fox, which lives on open tundra, has a stronger band.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L39",
+        "L41",
+        "L42"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Red foxes, Arctic foxes and island gray foxes have the same two kinds of colour-sensing cells as dogs. This view shows colours the way a person with red-green colour blindness sees them.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L110",
+        "L115",
+        "L40",
+        "param:M"
+      ]
+    ],
+    [
+      "m",
+      "Night eyes",
+      "A red fox's retina holds more rods for each cone than an Arctic fox's, the mark of an eye built for night in woodland. This view brightens the shadows.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L41",
+        "L39"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "Maps of the nerve cells in a red fox's retina suggest that it sees about a tenth as much detail as a person. This view is blurred to match.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L173",
+        "param:cpd"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: north",
+      "Red foxes hunting mice pounce mostly toward the north-east, and the pounces that succeed cluster toward the north. With &draw=tide and the motion sensors on, a faint shade follows magnetic north. Whether foxes sense the field is unknown, and the drawing is the app's.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L117",
+        "L175",
+        "param:magnet.k"
+      ]
+    ],
+    [
+      "i",
+      "Guesses",
+      "The weights of the centre and the band, the depth of focus, the brightening, the colour's strength and the fall of sharpness from the centre are the app's.",
+      [
+        "param:topoA",
+        "param:topoS",
+        "param:fall",
+        "param:dof",
+        "param:gain",
+        "param:sat"
+      ]
+    ],
+    [
+      "x",
+      "Hearing",
+      "A red fox hears sounds from about 51 to 48,000 vibrations a second, and at 4,000 a second its hearing is keener than a house cat's. This view leaves sound out.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.4",
+        "L174"
+      ]
+    ]
+  ]
+}

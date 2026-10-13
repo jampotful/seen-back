@@ -911,7 +911,7 @@
     // every 100 ms, the picture just drawn (above the ribbon's band) is copied into the ribbon at the heading the phone faces
     function ribbonWrite(P, now) {
       if (now - ribAt < 100) return; ribAt = now; ribbon();
-      var po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0, F = P.field || {};
+      var po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0, F = P.remap || {};
       var wdeg = CAM_DEG * Math.min(canvas.width / canvas.height, 1), W = Math.max(2, Math.round(wdeg / 360 * 1024)), x0 = Math.round(hd / 360 * 1024 - W / 2), y0 = Math.round(canvas.height * (F.band || .22));
       gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, ribFb); gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, ribTex, 0);
       gl.bindFramebuffer(gl.READ_FRAMEBUFFER, null);
@@ -1089,7 +1089,7 @@
           gl.uniform3f(u.u_mag, mg !== null && P.magMode === 'grain' ? (P.magnet.k || 1) * (1 - red) : 0, mg !== null && P.magMode === 'tide' ? (P.magnet.k || 1) * .3 * (.5 + .5 * Math.cos(mg * Math.PI / 180)) * (1 - red) : 0, mg !== null ? -mg * Math.PI / 180 + Math.PI / 2 : 0);
           if (P.snellFixed) gl.uniform3f(u.u_snell, 1, 0, 0);   // Snell's window as a field: always there, centred (&draw=window)
           addOnsTo(P, now, dt);
-          var F = P.field || {}, O = P.ovl || {}, SD = P.snd || {}, po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0;
+          var F = P.remap || {}, O = P.ovl || {}, SD = P.snd || {}, po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0;
           if (fldRef === null) fldRef = hd;
           var fc = P.fieldMode === 'wedge' ? 1 : P.fieldMode === 'fold' ? 2 : P.fieldMode === 'ribbon' ? 4 : 0;
           if (fc === 1) gl.uniform4f(u.u_fld, 1, hd - fldRef, F.blindAt === undefined ? 180 : F.blindAt, (F.blindDeg || 30) / 2);

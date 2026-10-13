@@ -1,0 +1,257 @@
+{
+  "key": "bigcat",
+  "version": 1,
+  "chip": "Lion, tiger, leopard",
+  "who": "a big cat",
+  "falls_back_to": "cat",
+  "applies_to": {
+    "genus": [
+      "Panthera",
+      "Acinonyx",
+      "Puma",
+      "Neofelis"
+    ]
+  },
+  "cue": "Out-of-focus things blur evenly in every direction.",
+  "modules": [],
+  "draft": true,
+  "params": {
+    "cpd": {
+      "value": 12,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2: L121, L75, L126"
+      ],
+      "floor": null,
+      "note": "cat 8 times the tiger's longer eye (29.4 against 19.75 mm)",
+      "range": [
+        2,
+        40
+      ]
+    },
+    "topoA": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "by analogy with the house cat",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "fall": {
+      "value": 1.0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "by analogy with the house cat",
+      "range": [
+        0,
+        3
+      ]
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2: L103, L49"
+      ],
+      "floor": null,
+      "note": "round pupils in large cats"
+    },
+    "dof": {
+      "value": 14,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source",
+      "range": [
+        0,
+        40
+      ]
+    },
+    "M": {
+      "value": "DEUTAN",
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2: L138, L97"
+      ],
+      "floor": null,
+      "note": "two cone classes"
+    },
+    "gain": {
+      "value": 1.6,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2: L122"
+      ],
+      "floor": null,
+      "note": "the lion's large tapetum",
+      "range": [
+        1,
+        3
+      ]
+    },
+    "sat": {
+      "value": 0.8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source",
+      "range": [
+        0,
+        1.5
+      ]
+    }
+  },
+  "matrices": {
+    "DEUTAN": {
+      "rows": [
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          -0.02234,
+          0.02234,
+          1
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "Vienot, Brettel and Mollon 1999"
+      ],
+      "note": "a person's red-green colour blindness standing in for two cone classes, entered from memory as in the cat view"
+    }
+  },
+  "by": {
+    "genus": {
+      "Acinonyx": {
+        "params": {
+          "cpd": {
+            "value": 23,
+            "grade": "m",
+            "invented": false,
+            "src": [
+              "research/cat-dog:docs/views/drafts/cat-dog.md#2.2: L94"
+            ],
+            "floor": null,
+            "note": "the cheetah",
+            "range": [
+              2,
+              40
+            ]
+          }
+        }
+      }
+    }
+  },
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "rows": [
+    [
+      "m",
+      "Pupil",
+      "Lions, tigers and the other large cats have round pupils, like people and dogs, where house cats have upright slits. Out-of-focus things blur evenly in every direction in this view.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L103",
+        "L49",
+        "L140",
+        "param:pupil"
+      ]
+    ],
+    [
+      "m",
+      "Lens",
+      "A tiger's lens focuses every colour at the same depth, where a house cat's lens has zones for several. Why the large cats lack those zones is unknown.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L49"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Lions, tigers, leopards and cheetahs have two kinds of colour-sensing cells, as house cats do, where people have three. This view shows colours the way a person with red-green colour blindness sees them.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L138",
+        "L97",
+        "L98",
+        "param:M"
+      ]
+    ],
+    [
+      "m",
+      "Cheetah",
+      "A cheetah sees about a third as much detail as a person, and about three times as much as a house cat. Its cones for yellow-green light crowd into a band along the horizon.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L94",
+        "L97"
+      ]
+    ],
+    [
+      "i",
+      "Sharpness",
+      "No measurement was found for lions, tigers, leopards or pumas. Their eyes are about one and a half times as long as a house cat's, and longer eyes usually see finer detail, so this view guesses that they see about a fifth as much detail as a person.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L121",
+        "L75",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Dim light",
+      "In a study of the eyes of three kinds of wild cat, the lions had the largest tapetum, the mirror-like layer behind the retina that gives light a second pass. This view brightens the shadows to suggest it.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L122",
+        "param:gain"
+      ]
+    ],
+    [
+      "i",
+      "Field of view and depth",
+      "No measurement was found for these. This view keeps the field your camera gives and assumes that things lower in the picture are closer. The depth of focus, the colour's strength and the fall of sharpness from the centre are guesses.",
+      [
+        "param:dof",
+        "param:sat",
+        "param:topoA",
+        "param:fall"
+      ]
+    ],
+    [
+      "x",
+      "Ultraviolet",
+      "House cats' lenses let through ultraviolet light, and big cats have not been tested. A phone camera filters out almost all ultraviolet, so this view leaves it out.",
+      [
+        "research/cat-dog:docs/views/drafts/cat-dog.md#2.2",
+        "L100",
+        "L127"
+      ]
+    ]
+  ]
+}

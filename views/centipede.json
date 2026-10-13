@@ -1,0 +1,186 @@
+{
+  "key": "centipede",
+  "version": 1,
+  "chip": "Centipede",
+  "who": "a centipede",
+  "falls_back_to": "insect",
+  "applies_to": {
+    "class": [
+      "Chilopoda"
+    ]
+  },
+  "cue": "Turn toward a dark gap. Large dark shapes stand out.",
+  "modules": [
+    "overlay"
+  ],
+  "draft": true,
+  "params": {
+    "cpd": {
+      "value": 0.05,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "about 2.8 times a millipede's, from the facet counts",
+      "range": [
+        0.005,
+        1
+      ]
+    },
+    "M": {
+      "value": "BLUE_GREY",
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3: L94 (Meyer-Rochow, Müller and Lindström 2006)"
+      ],
+      "floor": null,
+      "note": "one blue peak near 448 nm"
+    }
+  },
+  "matrices": {
+    "BLUE_GREY": {
+      "rows": [
+        [
+          0.05,
+          0.25,
+          0.7
+        ],
+        [
+          0.05,
+          0.25,
+          0.7
+        ],
+        [
+          0.05,
+          0.25,
+          0.7
+        ]
+      ],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3: L94"
+      ]
+    }
+  },
+  "overlay": {
+    "shadow": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how dark the ring is when the light falls",
+      "range": [
+        0,
+        2
+      ]
+    }
+  },
+  "draw": {
+    "overlay": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without rings"
+      },
+      {
+        "name": "shadow",
+        "invented": true,
+        "note": "when the light falls suddenly, a dark ring runs out from where it fell (atlas 14), for an animal that runs from light toward dark shapes"
+      }
+    ]
+  },
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "rows": [
+    [
+      "m",
+      "Eyes",
+      "The house centipede has a compound eye of about 150 to 200 facets on each side of its head. Most large tropical centipedes have four simple eyes on each side, and the soil centipedes have none.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L97",
+        "L98",
+        "L99",
+        "L101",
+        "L100"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "The house centipede's eye is most sensitive to blue light near 448 nanometres and has a second peak in ultraviolet near 350. This view weights its grey toward blue and leaves the ultraviolet out.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L94",
+        "L95",
+        "L96",
+        "param:M"
+      ]
+    ],
+    [
+      "i",
+      "Sharpness",
+      "No one has measured how much detail a centipede sees. This view assumes the house centipede sees nearly three times as sharply as a millipede, because its eye has about seven times as many facets.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L77",
+        "L81",
+        "L97",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Dark shapes",
+      "Centipedes run from light and toward dark shapes. The house centipede, the brown centipede and a large Scolopendra all head for a dark screen at the side of an arena.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L102",
+        "L103"
+      ]
+    ],
+    [
+      "m",
+      "Sunlight as heat",
+      "A large Asian centipede feels sunlight as heat in its antennae, which warm by more than 8 degrees Celsius within ten seconds of strong sun.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L104",
+        "L105"
+      ]
+    ],
+    [
+      "g",
+      "Soil centipedes",
+      "Soil centipedes are blind. In one of them every known gene for sensing light is missing, while the house centipede keeps those genes.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L101"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: shadows",
+      "With &draw=shadow, a sudden fall of light sends a dark ring across the picture. The ring is the app's drawing.",
+      [
+        "param:overlay.shadow"
+      ]
+    ],
+    [
+      "x",
+      "Not in the picture",
+      "A centipede finds prey and mates largely by smell and touch through its antennae, and a camera records neither.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.3",
+        "L186",
+        "L187"
+      ]
+    ]
+  ]
+}

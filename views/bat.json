@@ -202,6 +202,18 @@
         "docs/views/sheets/bat.md#2 bat: Magnetic compass",
         "Holland and colleagues 2006"
       ]
+    ],
+    [
+      "i",
+      "Being tried: clap and see",
+      "With &draw=clap and the microphone on, the picture stays dark until you clap or click, and then it shows for a moment. A phone cannot hear echoes the way a bat does, so the drawing stands in for them and is the app's.",
+      [
+        "docs/views/sheets/bat.md#4",
+        "param:sound.dark",
+        "param:sound.holdS",
+        "param:sound.clickHz",
+        "param:sound.k"
+      ]
     ]
   ],
   "version": 1,
@@ -213,5 +225,70 @@
     "sound": "none",
     "haptic": "none"
   },
-  "draft": true
+  "draft": true,
+  "sound": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly sound moves the picture",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "dark": {
+      "value": 0.04,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how dark the picture rests between sounds",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "holdS": {
+      "value": 0.35,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "seconds the picture stays lit after a sound",
+      "range": [
+        0.05,
+        2
+      ]
+    },
+    "clickHz": {
+      "value": 0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "clicks a second from the speaker; 0 for none",
+      "range": [
+        0,
+        8
+      ]
+    },
+    "say": "This view lights the picture when it hears a clap or a click, as a bat sees by its echoes. Tap to let it listen through the microphone. Nothing is recorded or kept."
+  },
+  "draw": {
+    "sound": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without sound"
+      },
+      {
+        "name": "clap",
+        "invented": true,
+        "note": "the picture stays dark until a clap or click lights it for a moment (atlas 18, clap and see)"
+      }
+    ]
+  }
 }

@@ -70,7 +70,7 @@
     for (k in spec.params) v[k] = specValue(spec.params[k], spec, mats, k);
     if (spec.zones) v.zones = specValue(spec.zones, spec, mats, 'zones');
     if (spec.gaze) v.gaze = specValue(spec.gaze, spec, mats, 'gaze');
-    ['spectrum', 'clock', 'pace', 'motion', 'slow', 'tilt', 'magnet', 'field', 'overlay', 'sound', 'haptic'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
+    ['spectrum', 'clock', 'pace', 'motion', 'slow', 'tilt', 'magnet', 'remap', 'overlay', 'sound', 'haptic'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
     if (spec.draw) v.draw = spec.draw;
     if (spec.inputs && spec.inputs.senses) v.senses = specValue(spec.inputs.senses, spec, mats, 'senses');
     if (spec.by && spec.by.genus) { v.byGenus = {}; for (g in spec.by.genus) v.byGenus[g] = specValue(spec.by.genus[g], spec, mats, g); }
@@ -168,7 +168,7 @@
     P.tilt = m.tilt || null; P.snell = P.tilt && P.draw.tilt === 'snell' ? 1 : 0;
     P.magnet = m.magnet || null; P.magMode = P.magnet && (P.draw.magnet === 'grain' || P.draw.magnet === 'tide') ? P.draw.magnet : '';
     // modules 8 to 11 (docs/ENGINE.md): field, overlay, sound and haptic, each drawn only through its category's option
-    P.field = m.field || null; P.fieldMode = P.field && /^(wedge|fold|window|ribbon)$/.test(P.draw.field || '') ? P.draw.field : '';
+    P.remap = m.remap || null; P.fieldMode = P.remap && /^(wedge|fold|window|ribbon)$/.test(P.draw.field || '') ? P.draw.field : '';
     P.ovl = m.overlay || null; P.ovlMode = P.ovl && /^(polar|web|rings|shadow)$/.test(P.draw.overlay || '') ? P.draw.overlay : '';
     P.snd = m.sound || null; P.sndMode = P.snd && /^(hear|clap|air|rumble|rings)$/.test(P.draw.sound || '') ? P.draw.sound : '';
     P.hap = m.haptic || null; P.hapMode = P.hap && /^(buzz|edge)$/.test(P.draw.haptic || '') ? P.draw.haptic : '';
@@ -221,8 +221,8 @@
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
     var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
-    var w = b.spec || b.clock || b.pace || b.motion || b.slow || b.tilt || b.magnet || b.field || b.ovl || b.snd || b.hap ? b : a;   // the new modules keep to the view that has them
-    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay; o.slow = w.slow; o.slowMode = w.slowMode; o.tilt = w.tilt; o.snell = w.snell; o.magnet = w.magnet; o.magMode = w.magMode; o.field = w.field; o.fieldMode = w.fieldMode; o.snellFixed = w.snellFixed; o.ovl = w.ovl; o.ovlMode = w.ovlMode; o.snd = w.snd; o.sndMode = w.sndMode; o.hap = w.hap; o.hapMode = w.hapMode;
+    var w = b.spec || b.clock || b.pace || b.motion || b.slow || b.tilt || b.magnet || b.remap || b.ovl || b.snd || b.hap ? b : a;   // the new modules keep to the view that has them
+    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay; o.slow = w.slow; o.slowMode = w.slowMode; o.tilt = w.tilt; o.snell = w.snell; o.magnet = w.magnet; o.magMode = w.magMode; o.remap = w.remap; o.fieldMode = w.fieldMode; o.snellFixed = w.snellFixed; o.ovl = w.ovl; o.ovlMode = w.ovlMode; o.snd = w.snd; o.sndMode = w.sndMode; o.hap = w.hap; o.hapMode = w.hapMode;
     o.glowC = z.glowC; o.gz = z.gz; o.draw = z.draw; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
     o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
     o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
