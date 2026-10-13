@@ -5,7 +5,7 @@
 'use strict';
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const root = path.resolve(__dirname, '..', '..');
-const file = process.argv[2] || path.join(root, 'src', 'cam.a.js');
+const file = process.argv[2];
 const lines = fs.readFileSync(file, 'utf8').split('\n');
 const a = lines.findIndex(l => /^\s*var I3 = /.test(l)), b = lines.findIndex(l => /^\s*var TRY_KEYS = /.test(l));
 const ctx = { location: { search: '' } };
@@ -45,18 +45,8 @@ function convert(key, m, offered) {
   spec.rows = m.rows.map(r => r.slice());
   return spec;
 }
-// Short objects and arrays on one line, so a parameter reads as one line of the file.
-function fmt(v, ind) {
-  ind = ind || '';
-  const flat = JSON.stringify(v);
-  if (flat.length + ind.length <= 120 || v === null || typeof v !== 'object') return flat;
-  const next = ind + '  ';
-  if (Array.isArray(v)) return '[\n' + v.map(x => next + fmt(x, next)).join(',\n') + '\n' + ind + ']';
-  return '{\n' + Object.keys(v).map(k => next + JSON.stringify(k) + ': ' + fmt(v[k], next)).join(',\n') + '\n' + ind + '}';
-}
-module.exports = { fmt };
+const { fmt } = require('./fmt.js');
 const out = path.join(root, 'views'); fs.mkdirSync(out, { recursive: true });
-if (require.main !== module) return;
 const keys = [];
 for (const k in EYES) { fs.writeFileSync(path.join(out, k + '.json'), fmt(convert(k, EYES[k], true)) + '\n'); keys.push(k); }
 for (const k in TRY) { fs.writeFileSync(path.join(out, k + '.json'), fmt(convert(k, TRY[k], false)) + '\n'); keys.push(k); }
