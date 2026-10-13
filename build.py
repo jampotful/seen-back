@@ -12,7 +12,7 @@ import pathlib, re
 
 root = pathlib.Path(__file__).resolve().parent
 src = root / "src"
-PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js")
+PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js", "cam.tune.js")
 # The self-test (src/cam.selftest.js) is not part of the page's script. It becomes selftest.js, which the page fetches only for
 # ?selftest=1, through a small hook that hands it the page's bindings it reads. Every one of them is set once at start-up and never
 # reassigned, so handing over their values is the same as reading them in place. A binding missing here fails the self-test at once.
@@ -34,6 +34,10 @@ specs = {k: json.loads((vdir / (k + ".json")).read_text(encoding="utf-8")) for k
 SPEC_JS = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 assert "/*@SPECS@*/{}" in js
 js = js.replace("/*@SPECS@*/{}", SPEC_JS)
+floor = vdir.parent / "docs" / "views" / "floor.json"   # the visibility floor (docs/ENGINE-DESIGN.md section 5), for the tuning panel's steps
+FLOOR_JS = json.dumps(json.loads(floor.read_text(encoding="utf-8")).get("floor", {}) if floor.exists() else {}, separators=(",", ":"))
+assert "/*@FLOOR@*/{}" in js
+js = js.replace("/*@FLOOR@*/{}", FLOOR_JS)
 js += ("  // ---------- self-test hook: with ?selftest=1 the page fetches selftest.js and hands it the bindings it reads (build.py)\n"
        "  if (/[?&]selftest=1(?:&|$)/.test(location.search || '')) {\n"
        "    S.selftest = true;   // at once, as the self-test did when it was part of this script: the page's loop leaves the drawing to it\n"

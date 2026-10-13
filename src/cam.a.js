@@ -20,6 +20,7 @@
   // x = left out. Specs with "offered": true are the views the app offers; the rest are reached only with ?try=<key>.
   var I3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
   var SPECS = /*@SPECS@*/{};
+  var FLOOR = /*@FLOOR@*/{};   // docs/views/floor.json: the smallest visible change of each parameter, by view
   function isParam(x) { return !!x && typeof x === 'object' && !Array.isArray(x) && x.hasOwnProperty('grade') && (x.hasOwnProperty('value') || x.hasOwnProperty('curve')); }
   function specValue(x, spec, mats, key) {
     if (typeof x === 'string' && x.charAt(0) === '@') return specValue(spec.params[x.slice(1)], spec, mats, x.slice(1));
@@ -60,6 +61,10 @@
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
   if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
   TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
+  // The tuning panel and the compare slider (src/cam.tune.js) appear only with ?try=<view>&tune=1. &draw=<option> picks one of the
+  // drawing options a view offers (docs/views/ATLAS.md), the first being the default. cmp is the compare divider's place, 0 when hidden.
+  var TUNE = { on: TRY_KEYS.length > 0 && /[?&]tune=1(?:&|$)/.test(location.search || ''), cmp: 0,
+    draw: ((/[?&]draw=([a-z]+)/.exec(location.search || '') || [0, ''])[1]) };
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }

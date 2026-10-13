@@ -326,7 +326,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
       await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
       await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
-      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
+      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '') + (process.env.EXTRA || '')); await page.waitForTimeout(500);
       const r = out.try[key] = {};
       await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
       r.prompt = await text(page, 'askViewH');
@@ -344,6 +344,17 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         const g = await page.evaluate(() => window.__seenBack.engine.gazeState());
         trace.push({ t: Date.now() - t0, x: +g.x.toFixed(3), y: +g.y.toFixed(3), mode: g.mode, jumps: g.jumps, gazes: g.gazes, maxE: +g.map.maxE.toFixed(3), maxL: +g.map.maxL.toFixed(3), shift: g.map.shift.map((v) => +v.toFixed(2)), reads: g.map.reads, salFrames: g.salFrames });
         if (n < 2 && Date.now() - t0 > (SECS * 1000) * (n + 1) / 3) { await page.screenshot({ path: path.join(dir, key + '-' + n + '.png'), scale: 'css' }); n++; }
+      }
+      if (/tune=1/.test(process.env.EXTRA || '')) {   // the tuning panel: it lists the spec's parameters, a slider changes the view, and the compare divider draws
+        r.tune = await page.evaluate(() => { const t = window.__seenBack.tune; if (!t) return null; const l = t.list(); return { n: l.length, first: l[0] }; });
+        if (r.tune) {
+          r.tune.set = await page.evaluate(() => window.__seenBack.tune.set('params.cpd', .6));
+          await page.locator('#tunePanel button', { hasText: 'Compare' }).click(); await page.waitForTimeout(1500);
+          r.tune.divider = await page.evaluate(() => getComputedStyle(document.getElementById('tuneDivider')).display !== 'none');
+          r.tune.patch = await page.evaluate(() => window.__seenBack.tune.patch());
+          await page.screenshot({ path: path.join(dir, key + '-tune' + (process.env.DRAW ? '-' + process.env.DRAW : '') + '.png'), scale: 'css' });
+        }
+        if (!r.tune || !r.tune.n || !r.tune.set || !r.tune.divider) errors.push('the tuning panel did not work: ' + JSON.stringify(r.tune));
       }
       const last = trace[trace.length - 1], gs = await page.evaluate(() => window.__seenBack.engine.gazeState());
       r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));

@@ -735,19 +735,22 @@
         gl.viewport(0, 0, canvas.width, canvas.height); gl.useProgram(vp.p);
         var u = vp.u;
         var blur = blurOf(P.inv, longPx);
-        gl.uniform1i(u.u_t, 0);
-        gl.uniform2f(u.u_res, canvas.width, canvas.height); gl.uniform2f(u.u_aniso, P.ax, P.ay);
-        gl.uniform2f(u.u_apC, fx.apX || 0, fx.apY || 0);
-        gl.uniform1f(u.u_srcAspect, sw / sh); gl.uniform1f(u.u_texLong, Math.max(sw, sh)); gl.uniform1f(u.u_maxLod, levels - 1);
-        gl.uniform1f(u.u_enc, floatOK ? 0 : 1); gl.uniform1f(u.u_mirror, fx.mirror ? 1 : 0);
-        gl.uniform1f(u.u_zoom, P.zoom / (fx.camZoom || 1)); gl.uniform1f(u.u_barrel, P.barrel); gl.uniform1f(u.u_fovea, P.fovea);
-        gl.uniform1f(u.u_blur, blur); gl.uniform1f(u.u_fall, P.fall); gl.uniform1f(u.u_wA, P.wA); gl.uniform1f(u.u_wS, P.wS);
-        gl.uniform1f(u.u_dof, P.dof * sc); gl.uniform1f(u.u_focus, fx.focus === undefined ? .5 : fx.focus); gl.uniform1f(u.u_soft, (fx.soft || 0) * sc);
-        gl.uniformMatrix3fv(u.u_M, true, new Float32Array(P.M));
-        gl.uniform1f(u.u_uvBlue, P.uvBlue); gl.uniform1f(u.u_sheen, P.sheen); gl.uniform1f(u.u_gain, P.gain); gl.uniform1f(u.u_sat, P.sat);
-        gl.uniform1f(u.u_noGreen, P.noGreen); gl.uniform1f(u.u_gateMix, moving ? P.gate : 0); gl.uniform1f(u.u_field, P.field);
-        gl.uniform1f(u.u_expo, fx.expo === undefined ? 1 : fx.expo);
-        gl.uniform1f(u.u_ap, fx.ap === undefined ? 1 : fx.ap); gl.uniform1i(u.u_shape, fx.shape || 0); gl.uniform1f(u.u_mosaic, fx.mosaic || 0);
+        function viewU(u, P) {
+          gl.uniform1i(u.u_t, 0);
+          gl.uniform2f(u.u_res, canvas.width, canvas.height); gl.uniform2f(u.u_aniso, P.ax, P.ay);
+          gl.uniform2f(u.u_apC, fx.apX || 0, fx.apY || 0);
+          gl.uniform1f(u.u_srcAspect, sw / sh); gl.uniform1f(u.u_texLong, Math.max(sw, sh)); gl.uniform1f(u.u_maxLod, levels - 1);
+          gl.uniform1f(u.u_enc, floatOK ? 0 : 1); gl.uniform1f(u.u_mirror, fx.mirror ? 1 : 0);
+          gl.uniform1f(u.u_zoom, P.zoom / (fx.camZoom || 1)); gl.uniform1f(u.u_barrel, P.barrel); gl.uniform1f(u.u_fovea, P.fovea);
+          gl.uniform1f(u.u_blur, blur); gl.uniform1f(u.u_fall, P.fall); gl.uniform1f(u.u_wA, P.wA); gl.uniform1f(u.u_wS, P.wS);
+          gl.uniform1f(u.u_dof, P.dof * sc); gl.uniform1f(u.u_focus, fx.focus === undefined ? .5 : fx.focus); gl.uniform1f(u.u_soft, (fx.soft || 0) * sc);
+          gl.uniformMatrix3fv(u.u_M, true, new Float32Array(P.M));
+          gl.uniform1f(u.u_uvBlue, P.uvBlue); gl.uniform1f(u.u_sheen, P.sheen); gl.uniform1f(u.u_gain, P.gain); gl.uniform1f(u.u_sat, P.sat);
+          gl.uniform1f(u.u_noGreen, P.noGreen); gl.uniform1f(u.u_gateMix, moving ? P.gate : 0); gl.uniform1f(u.u_field, P.field);
+          gl.uniform1f(u.u_expo, fx.expo === undefined ? 1 : fx.expo);
+          gl.uniform1f(u.u_ap, fx.ap === undefined ? 1 : fx.ap); gl.uniform1i(u.u_shape, fx.shape || 0); gl.uniform1f(u.u_mosaic, fx.mosaic || 0);
+        }
+        viewU(u, P);
         if (zoned) {
           gl.uniform1i(u.u_nz, nz); gl.uniform2f(u.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh));
           gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR); gl.uniform4fv(u['u_zX[0]'], zX);
@@ -767,5 +770,14 @@
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         if (zoned) gl.activeTexture(gl.TEXTURE0);
+        // the compare slider (?tune=1, docs/ENGINE-DESIGN.md section 4): the person's own view drawn again over the left of the divider,
+        // from the same picture, so both halves line up at the divider. It reads the time pass's picture, which for today's views
+        // holds the live frame; for a view with trails the left side keeps them (a simplification of the design's second read).
+        if (TUNE.cmp > 0 && TUNE.cmp < 1) {
+          gl.enable(gl.SCISSOR_TEST); gl.scissor(0, 0, Math.round(canvas.width * TUNE.cmp), canvas.height);
+          gl.useProgram(pView.p); var hu = mix(HUMAN, HUMAN, 0); hu.zoom = P.zoom; hu.barrel = P.barrel;   // the same squeeze, so the halves meet
+          viewU(pView.u, hu); gl.uniform1f(pView.u.u_gateMix, 0); gl.uniform1f(pView.u.u_blur, blurOf(HUMAN.inv, longPx));
+          gl.drawArrays(gl.TRIANGLES, 0, 3); gl.disable(gl.SCISSOR_TEST);
+        }
     }
   }
