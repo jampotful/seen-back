@@ -3,6 +3,9 @@ name: worlddb
 #   rows-<anything>   GBIF's names for every species of the world list (tools/world/names.py), BioCLIP 2's text rows in
 #                     shards (tools/coverage/text.py), packed at one byte a number in parts under 95 MB with a table of
 #                     names and a manifest of checksums (tools/world/pack.py), published to pub/naturalist-world.
+#   grid-<anything>   the records of every row in each quarter-degree cell, the countries of the cells, the world test
+#                     photos' places and time zones and the creatures their observers met (ci/worlddb/grid.sh,
+#                     tools/world/grid.py), published to pub/world-place.
 # Results come back on ci as runs/worlddb/<run>-<job>.
 on:
   push:
@@ -119,3 +122,20 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh worlddb out pack
+
+  grid:
+    if: startsWith(github.ref_name, 'run/worlddb/grid')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: cells, places and zones
+        run: bash ci/worlddb/grid.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out grid
