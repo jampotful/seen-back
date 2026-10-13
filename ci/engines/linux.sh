@@ -49,7 +49,8 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor*)   # only test/check4.js
   /tmp/venv/bin/pip install -q numpy
   python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
   sleep 1
-  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-3} values a parameter"
+  case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor-moving*) export FLOOR_MOVING=1 FLOOR_REDO=1 FLOOR_VALUES="${FLOOR_VALUES:-1}" ;; esac   # the moving clip, for what the still picture left invisible
+  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-3} values a parameter, moving ${FLOOR_MOVING:-0}"
   PORT=8790 FLOOR_SKIP=docs/views/floor.json FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-3}" FLOOR_OUT="$OUT/floor.json" timeout 2300 node test/check4.js floor > "$OUT/floor.txt" 2>&1
   echo "exit $?"; tail -60 "$OUT/floor.txt"
   exit 0 ;;

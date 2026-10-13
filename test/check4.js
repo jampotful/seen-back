@@ -422,7 +422,10 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     // d is doubled until the 95th percentile of delta E*ab between the renders passes FLOOR_DE (2.3, see docs/views/floor.json), then
     // bisected four times. FLOOR_PARAMS lists tuning-panel labels (all of the view's scalars by default); FLOOR_VALUES the number of values
     // across each range (1: the spec's value only). Results go to FLOOR_OUT (docs/views/floor.json's form). Temporal parameters need the
-    // moving clip and are not measured here.
+    // moving clip: with FLOOR_MOVING=1 each render plays the clip for FLOOR_RUN seconds (0.6) up to FLOOR_T at FLOOR_RATE (0.3) before the
+    // shot, and the threshold is raised to 1.5 times the largest difference among three renders at the same value (the moving clip's own noise), and a
+    // difference counts only when a second render at the same value shows it too.
+    // FLOOR_REDO=1 measures again the parameters that the still picture left invisible.
     const view = process.env.FLOOR_VIEW || 'jumper', DE = +(process.env.FLOOR_DE || 2.3), tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'floor-'));
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: phone.userAgent });
     const page = patient(await ctx.newPage()); const errors = [];
@@ -438,16 +441,28 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     const specs = await page.evaluate(() => { const t = window.__seenBack.tune; return t.list(); });
     let want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
     if (process.env.FLOOR_SKIP && fs.existsSync(process.env.FLOOR_SKIP)) {   // parameters already measured (docs/views/floor.json) are left out
-      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {}; want = want.filter((l) => !done[l]);
+      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {};
+      const blind = (x) => Array.isArray(x) && x.length && x.every((r) => r[1] === 'invisible');
+      want = want.filter((l) => process.env.FLOOR_REDO ? !done[l] || blind(done[l]) : !done[l]);
     }
     const info = await page.evaluate((v) => window.__seenBack.tuneInfo ? window.__seenBack.tuneInfo() : null, view);
     let n = 0;
+    const MOVING = !!process.env.FLOOR_MOVING, T = +(process.env.FLOOR_T || 2), RUN = +(process.env.FLOOR_RUN || .6), RATE = +(process.env.FLOOR_RATE || .3);
     async function render(lab, x) {
-      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]); await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
+      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]);
+      if (MOVING) {   // the same stretch of the clip each time, played slowly up to T, then held
+        await page.evaluate(([t0, r]) => { const v = document.getElementById('vid'); v.currentTime = t0; v.playbackRate = r; return v.play(); }, [Math.max(0, T - RUN), RATE]);
+        await page.waitForFunction((t) => document.getElementById('vid').currentTime >= t, T, { timeout: 120000 });
+        await page.evaluate(() => document.getElementById('vid').pause()); await page.waitForTimeout(300);
+      } else await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
       const f = path.join(tmp, (n++) + '.png'); await page.locator('canvas').first().screenshot({ path: f }); return f;
     }
     const de = (a, b) => JSON.parse(require('child_process').execFileSync(process.env.FLOOR_PY || 'python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
     const res = {}, NV = +(process.env.FLOOR_VALUES || 1);
+    let THR = DE, noise = null;
+    if (MOVING && want.length) {   // the moving clip's own noise: two renders at the same value
+      const lab0 = want.find((l) => info && info[l]); if (lab0) { const v0 = info[lab0][2]; const base = await render(lab0, v0); noise = 0; for (let i = 0; i < 3; i++) noise = Math.max(noise, de(base, await render(lab0, v0)).p95); THR = Math.max(DE, noise * 1.5); console.log('noise', noise, 'threshold', THR); }
+    }
     for (const lab of want) {
       const meta = info && info[lab]; if (!meta) { res[lab] = 'no such parameter'; continue; }
       const [lo, hi, v0] = meta, vals = NV <= 1 ? [v0] : Array.from({ length: NV }, (_, i) => lo + (hi - lo) * (i + .5) / NV);
@@ -456,19 +471,19 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         const a = await render(lab, v); let d = (hi - lo) / 64, up = v + d <= hi ? 1 : -1, seen = null, lastNo = 0, e = null;
         while (Math.abs(d) <= (hi - lo)) {
           const b = await render(lab, v + up * d); e = de(a, b);
-          if (e.p95 > DE) { seen = d; break; } lastNo = d; d *= 2;
+          if (e.p95 > THR && (!MOVING || de(a, await render(lab, v + up * d)).p95 > THR)) { seen = d; break; }   // on the moving clip, seen twice lastNo = d; d *= 2;
           if (v + up * d > hi || v + up * d < lo) break;
         }
         if (seen === null) { res[lab].push([v, 'invisible', e && e.p95]); continue; }
         let A = lastNo, B = seen;
-        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > DE) B = m; else A = m; }
+        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > THR && (!MOVING || de(a, await render(lab, v + up * m)).p95 > THR)) B = m; else A = m; }
         res[lab].push([+v.toPrecision(4), +B.toPrecision(3)]);
         await render(lab, v0);
       }
       console.log(lab, JSON.stringify(res[lab]));
-      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: DE, partial: true, floor: res }, null, 1));
+      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: THR, moving: MOVING, noise: noise, partial: true, floor: res }, null, 1));
     }
-    out.floor = { view: view, threshold: DE, errors: errors, floor: res };
+    out.floor = { view: view, threshold: THR, moving: MOVING, noise: noise, errors: errors, floor: res };
     if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify(out.floor, null, 1));
     await ctx.close();
   }
