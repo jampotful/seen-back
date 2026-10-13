@@ -1,0 +1,58 @@
+650 works, 650 passages, 0.8 M input tokens; estimate expected $0.09, ceiling $0.25 (cap $3.00)
+smoke test: model claude-haiku-5-5 replied with 0 records; usage {"input_tokens": 3543, "cache_creation_input_tokens": 4113, "cache_read_input_tokens": 0, "cache_creation": {"ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 4113}, "output_tokens": 308, "output_tokens_details": {"thinking_tokens": 304}, "service_tier": "standard", "inference_geo": "global"}
+submitted batch msgbatch_01WSMG7xP2GyHCKMX9g7qKs5 with 650 requests
+[15:58:34] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[15:59:34] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:00:34] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:01:35] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:02:35] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:03:36] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:04:36] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:05:37] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:06:37] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:07:38] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:08:38] batches processing; {'processing': 650, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[16:09:38] batches ended; {'processing': 0, 'succeeded': 650, 'errored': 0, 'canceled': 0, 'expired': 0}
+fetched 650 results
+spider-night: 644 records
+# The literature table
+
+Made by `tools/lit/extract.py` with claude-haiku-5-5 through the Message Batches API on 2026-10-13 16:09 UTC.
+
+
+## Cost estimate per topic (batch prices, US dollars)
+
+| Topic | works | full texts | abstracts only | passages | estimate (expected) | estimate (ceiling) |
+|---|---:|---:|---:|---:|---:|---:|
+| spider-night | 650 | 41 | 424 | 650 | 0.09 | 0.25 |
+| all (works found under several topics are counted in each, sent once) | 650 | 41 | 424 | 650 | 0.09 | 0.25 |
+
+Whole run, each work sent once: 650 requests, 0.8 million input tokens, expected $0.09, ceiling $0.25.
+The expected figure assumes the system prompt is read from the cache; the ceiling assumes it never is and that every reply is long. Token counts are estimated at 1.8 tokens a word.
+
+## Actual usage
+
+| | tokens |
+|---|---:|
+| input_tokens | 1010379 |
+| output_tokens | 435969 |
+| cache_creation_input_tokens | 12339 |
+| cache_read_input_tokens | 2661111 |
+
+Spent: **$0.17** at batch prices.
+
+## What the check pass did
+
+| | count |
+|---|---:|
+| dropped_check_py | 91 |
+| dropped_quote_not_found | 1 |
+| dropped_quote_too_long | 1 |
+| records_kept | 644 |
+| records_proposed | 737 |
+| replies_cut_off | 4 |
+| replies_unparseable | 4 |
+| requests_succeeded | 650 |
+
+check.py reasons: source needs a doi or a url x91
+
