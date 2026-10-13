@@ -1,0 +1,232 @@
+{
+ "key": "scorpion",
+ "version": 1,
+ "chip": "Scorpion",
+ "who": "a scorpion",
+ "falls_back_to": "harvestman",
+ "applies_to": {
+  "order": [
+   "Scorpiones",
+   "Uropygi",
+   "Amblypygi",
+   "Pseudoscorpiones"
+  ]
+ },
+ "cue": "You see all the way round at once, in the dim green of starlight.",
+ "modules": [],
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "M": {
+   "value": "SCORPION",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   "note": "one green-sensitive pigment peaking near 500 nm, so the picture is a single-colour view in green"
+  },
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   "note": "scorpions are reported to see all the way round the body",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "cpd": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "no record gives how much detail a scorpion sees, so this is a coarse guess for eyes about 0.3 mm across",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "gain": {
+   "value": 2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a guess at how much brighter the picture is than a person's night view",
+   "range": [
+    1,
+    4
+   ]
+  }
+ },
+ "matrices": {
+  "SCORPION": {
+   "from_pigments": [
+    500
+   ],
+   "src": [
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   "grade": "g",
+   "invented": true,
+   "rows": [
+    [
+     0.06366,
+     0.44901,
+     0.39846,
+     0.08886
+    ],
+    [
+     0.06366,
+     0.44901,
+     0.39846,
+     0.08886
+    ],
+    [
+     0.06366,
+     0.44901,
+     0.39846,
+     0.08886
+    ]
+   ],
+   "q": [
+    [
+     0.06366,
+     0.44901,
+     0.39846,
+     0.08886
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the whole way round is squeezed into the phone's picture"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colour comes from the single green pigment peak"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Eyes",
+   "A scorpion has one pair of median eyes in the middle of its shield and three to five pairs of smaller lateral eyes at the front corners. In some species the last two pairs of lateral eyes are tiny.",
+   [
+    "arachnids-other.jsonl:Aydın 2025",
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013",
+    "arachnids-other.jsonl:Yang 2013"
+   ],
+   []
+  ],
+  [
+   "g",
+   "All the way round",
+   "Scorpions are reported to see 360 degrees around the body, with a small overlap of about 40 degrees above the animal where the two median eyes look at the same place.",
+   [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "One colour",
+   "Both sets of eyes are most sensitive to green light near 500 nm. The lateral eyes also have a weaker peak in the ultraviolet. This view shows one green-sensitive pigment, so the world has a single hue.",
+   [
+    "arachnids-other.jsonl:Prévost 2020",
+    "arachnids-other.jsonl:Roldan 2018"
+   ],
+   [
+    "params.M",
+    "matrices.SCORPION"
+   ]
+  ],
+  [
+   "g",
+   "Starlight",
+   "Scorpion eyes respond to starlight levels of light, which suits an animal that hides by day and hunts at night. In one desert species the median eyes are about 3 log units more sensitive at night than by day.",
+   [
+    "arachnids-other.jsonl:B 2025",
+    "arachnids-other.jsonl:Fleissner 1977",
+    "arachnids-other.jsonl:Gaffin 2022"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Two kinds of eyes",
+   "The median eyes are thought to give the better picture, with fairly good detail. The lateral eyes may detect only changes in light.",
+   [
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   []
+  ],
+  [
+   "i",
+   "Sharpness and brightness",
+   "No one has measured how much detail a scorpion sees. This view assumes a coarse picture and a brighter night than a person would see. The squeeze of the whole circle into the screen is the app's choice.",
+   [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   [
+    "params.cpd",
+    "params.gain",
+    "params.M",
+    "matrices.SCORPION",
+    "draw.field",
+    "draw.spectrum"
+   ]
+  ],
+  [
+   "x",
+   "Not in the picture",
+   "A scorpion finds prey by feeling vibrations in the sand through its legs, up to about 50 cm away, and it tastes the ground with its comb-like pectines. The camera records neither.",
+   [
+    "arachnids-other.jsonl:Brownell 1977",
+    "arachnids-other.jsonl:Haessig 2020",
+    "arachnids-other.jsonl:Krapf 1986"
+   ],
+   []
+  ]
+ ],
+ "draft": true
+}

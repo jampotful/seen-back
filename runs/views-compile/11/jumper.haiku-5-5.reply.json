@@ -1,0 +1,340 @@
+{
+ "spec": {
+  "key": "jumper",
+  "version": 1,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "cue": "Hold still, and the spider looks for what moves. Its front eyes are sharp and narrow; its side eyes are wide and blurred.",
+  "applies_to": {
+   "family": [
+    "Salticidae"
+   ]
+  },
+  "modules": [],
+  "inputs": {
+   "motion": "optional",
+   "mic": "optional"
+  },
+  "params": {
+   "M": "UVG",
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35",
+     "R23"
+    ],
+    "note": "whole-animal field near 300 to 360 degrees"
+   },
+   "cpd": {
+    "value": 12.4,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "note": "principal eye of Portia; the view uses the best measured salticid acuity"
+   },
+   "fovea": {
+    "value": 2.2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "scale of the sharp middle, chosen by the app from the narrow principal-eye field"
+   },
+   "pupil": "o",
+   "gate": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how far still things fade, chosen by the app"
+   },
+   "persist": {
+    "value": 0.15,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how long the picture lingers, chosen by the app"
+   },
+   "sat": {
+    "value": 0.9,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "colour saturation, chosen by the app"
+   },
+   "gain": {
+    "value": 1.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "brightness gain for dim light, chosen by the app"
+   },
+   "fall": {
+    "value": 2.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how fast sharpness falls with light, chosen by the app; the Cyrba sensitivity records show the spider works at low light"
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R117",
+     "R118"
+    ],
+    "note": "slowed to a fraction of a person's flicker rate; the family flickers up to about 40 Hz"
+   }
+  },
+  "zones": [
+   {
+    "id": "front",
+    "shape": "strip",
+    "at": "centre",
+    "size": "narrow",
+    "cpd": {
+     "value": 12.4,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1"
+     ]
+    },
+    "mag": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a sharp strip about 2 degrees across, from the principal eyes"
+    }
+   }
+  ],
+  "rows": [
+   [
+    "m",
+    "The front eyes",
+    "The principal eyes of a jumping spider are the sharp pair in front. The best measured figure, for Portia, resolves about 12.4 cycles per degree, close to a person's sharpness. Most other measured jumping spiders are far blunter, at about 3.8 cycles per degree in Phidippus johnsoni.",
+    [
+     "R1",
+     "R2",
+     "R10"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "A narrow strip, moved to look",
+    "Each principal eye sees only a thin upright strip, about 2 degrees wide and about 21 degrees high in Phidippus johnsoni. The spider moves its retinas across the scene to build a view, so the sharp part is narrow.",
+    [
+     "R14",
+     "R45",
+     "R17"
+    ],
+    [
+     "zones[0]"
+    ]
+   ],
+   [
+    "m",
+    "Wide side eyes",
+    "The side eyes see much wider. In Phidippus audax the front side eye covers about 70 degrees across and 98 degrees up, and in Metaphidippus aeneolus the side eyes between them cover almost the whole circle around the animal.",
+    [
+     "R18",
+     "R46",
+     "R28"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Colour",
+    "The principal eyes see ultraviolet and green. In Plexippus validus, UV cells peak at 360 nm and green cells at about 520 nm. Some species differ, and the view draws the two classes.",
+    [
+     "R73",
+     "R82",
+     "R52"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Motion and the side eyes",
+    "The side eyes mainly detect movement. Moving things reach them more easily than still ones, and a light that only switches on and off evokes no turn in Metaphidippus harfordi.",
+    [
+     "R369",
+     "R361"
+    ],
+    [
+     "params.gate"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The blur, the lingering picture, the brightness gain and the slow flicker are the app's own choices, set from the sharpness and flicker records. The sharp strip is drawn at 2 degrees by the app.",
+    [
+     "R14",
+     "R117"
+    ],
+    [
+     "params.fovea",
+     "params.gate",
+     "params.persist",
+     "params.sat",
+     "params.gain",
+     "params.fall"
+    ]
+   ]
+  ],
+  "matrices": {
+   "UVG": {
+    "rows": [
+     [
+      0.2,
+      0.1,
+      0.3
+     ],
+     [
+      0.0,
+      0.9,
+      0.1
+     ],
+     [
+      0.1,
+      0.9,
+      0.0
+     ]
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "ultraviolet and green classes, mapped to a picture: the UV channel draws from the blue of the phone"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "the default: a sharp strip drawn over a wide blurred field"
+    }
+   ]
+  }
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The view's sharpness is the measured 12.4 cycles per degree of Portia fimbriata's principal eyes."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The sharp strip uses the same measured 12.4 cycles per degree."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R35",
+    "R23"
+   ],
+   "kind": "range_middle",
+   "how": "Whole-animal field set between the near 300 degrees of the six secondary eyes and the 360 degrees for all four pairs."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R117",
+    "R118"
+   ],
+   "kind": "calculation",
+   "how": "Flicker up to 40 Hz against a 60 Hz screen gives a rate well below a person's; graded g because it is a family figure."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "The highest spatial frequency that can be recon- structed by layer 1 with minimum receptor-row spacing 1.4 J..Lm and distance 1,980 J..Lm from the posterior nodal point of the telephoto system is 1,980/2.8 = 710 rad- 1."
+  },
+  {
+   "record": "R2",
+   "quote": "with more typical species (e.g., *Phidippus johnsoni*) having eyes that support visual angles of around 0.13 degrees"
+  },
+  {
+   "record": "R10",
+   "quote": "Certain spiders have exceptionally high acuity for their size, for example, the jumping spider *Portia* fi*mbriata* has acuity on par with passerine birds, at 13 cpd"
+  },
+  {
+   "record": "R14",
+   "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+  },
+  {
+   "record": "R17",
+   "quote": "In total they have a field of view of 0.6°."
+  },
+  {
+   "record": "R18",
+   "quote": "the ALE field-of-view is larger in the vertical plane than the horizontal plane (means ± SE; vertical axis: 97.57 ± 1.93°, horizontal axis: 69.59 ± 0.74°)."
+  },
+  {
+   "record": "R23",
+   "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+  },
+  {
+   "record": "R28",
+   "quote": "As can be seen from Fig. 1 the side eyes between them cover almost the entire 3600 around the animal in the horizontal plane"
+  },
+  {
+   "record": "R35",
+   "quote": "the remaining six, smaller eyes providing a near 300° field of view"
+  },
+  {
+   "record": "R46",
+   "quote": "the ALE field-of-view is larger in the vertical plane than the horizontal plane (means ± SE; vertical axis: 97.57 ± 1.93°, horizontal axis: 69.59 ± 0.74°)."
+  },
+  {
+   "record": "R52",
+   "quote": "green-sensitive cells had peaks at around 520-530 nm"
+  },
+  {
+   "record": "R73",
+   "quote": "UV-sensitive cells had peaks at 360 nm with less than 10% sensitivity at wavelengths longer than 400 nm"
+  },
+  {
+   "record": "R82",
+   "quote": "green cells with peak responses at ca. 520 nm, and ultraviolet (UV) cells with peak responses at ca. 360 nm."
+  },
+  {
+   "record": "R117",
+   "quote": "salticids can perceive flicker up to 40 Hz (Clark and Uetz, 1990)"
+  },
+  {
+   "record": "R118",
+   "quote": "salticids can perceive flicker up to 40 Hz (Clark and Uetz, 1990)"
+  },
+  {
+   "record": "R361",
+   "quote": "To be seen, a stimulus must subtend more than 0-7° (slightly less than the distance between receptors) and must move through a minimum angle of about i°."
+  },
+  {
+   "record": "R369",
+   "quote": "the system behaves as though it were completely blind to stationary objects."
+  }
+ ]
+}

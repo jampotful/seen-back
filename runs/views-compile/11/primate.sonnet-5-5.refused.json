@@ -1,0 +1,195 @@
+{
+ "key": "primate",
+ "model": "claude-sonnet-5-5",
+ "errors": [
+  "matrices.primate_trichromat: peak 531 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichromat: peak 561 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "chip": "Monkey or ape",
+   "who": "a monkey or ape",
+   "falls_back_to": "mammal",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "cue": "Three kinds of colour sensor and a picture nearly as sharp as yours.",
+   "modules": [],
+   "params": {
+    "cpd": {
+     "value": 28,
+     "grade": "m",
+     "invented": true,
+     "src": [
+      "R7",
+      "R4"
+     ],
+     "range": [
+      4,
+      32
+     ],
+     "note": "a figure between a rhesus monkey's 26.3 and a marmoset's close to 30; the app picks one value to speak for the whole order"
+    },
+    "M": {
+     "value": "primate_trichromat",
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R31"
+     ],
+     "note": "the three-cone case of macaques, baboons, apes and many others; the app's mapping of those peaks"
+    }
+   },
+   "matrices": {
+    "primate_trichromat": {
+     "from_pigments": [
+      430,
+      531,
+      561
+     ],
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R31"
+     ],
+     "note": "peaks near 430, 531 and 561 nanometres, as in a macaque"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "A macaque has three kinds of colour sensor, most sensitive near 430, 531 and 561 nanometres. That is close to your own set, so the colours stay much as you know them.",
+     [
+      "R31",
+      "R39",
+      "R52"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Not every monkey",
+     "Owl monkeys have only one kind of cone and lack colour vision. Male marmosets have two kinds. Howler monkeys have three. This view draws the three-cone case.",
+     [
+      "R40",
+      "R137",
+      "R143",
+      "R53",
+      "R44"
+     ],
+     []
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A rhesus monkey reached 26.3 cycles per degree, and a marmoset's cone mosaic could support close to 30. A person sees about 30, so the picture is only slightly softer. A mouse lemur manages about 4.9, which is far blurrier.",
+     [
+      "R7",
+      "R4",
+      "R5"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "A sharp centre",
+     "Most monkeys have a fovea, a small pit in the retina where cones are packed closely. Squirrel monkeys show it clearly. Owl monkeys have only a rudimentary one.",
+     [
+      "R167",
+      "R168",
+      "R172"
+     ],
+     []
+    ],
+    [
+     "g",
+     "Depth",
+     "Cells in the visual cortex of macaques respond to the small differences between the two eyes' views. Diurnal primates use these differences to judge distance among branches.",
+     [
+      "R239",
+      "R238",
+      "R247"
+     ],
+     []
+    ],
+    [
+     "i",
+     "The app's choices",
+     "One sharpness value stands for all primates, and the app picks it between two measurements. The colour matrix is the app's mapping of three measured peaks onto your screen. The drawing option for colour is also the app's.",
+     [],
+     [
+      "params.cpd",
+      "params.M",
+      "matrices.primate_trichromat",
+      "draw.spectrum"
+     ]
+    ]
+   ],
+   "version": 1,
+   "zones": [],
+   "by": {},
+   "draft": true,
+   "draw": {
+    "spectrum": [
+     {
+      "name": "matrix",
+      "invented": true,
+      "note": "colour drawn through the three-cone matrix"
+     }
+    ]
+   }
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R7",
+     "R4"
+    ],
+    "kind": "range_middle",
+    "how": "28 lies between the rhesus maximum of 26.3 cycles per degree and the marmoset estimate of close to 30."
+   },
+   {
+    "path": "params.M",
+    "records": [
+     "R31"
+    ],
+    "kind": "calculation",
+    "how": "The matrix named here is built from the three cone peaks 430, 531 and 561 nm that the cynomolgus record states."
+   },
+   {
+    "path": "matrices.primate_trichromat",
+    "records": [
+     "R31"
+    ],
+    "kind": "calculation",
+    "how": "The matrix is built from the three peaks 430, 531 and 561 nm, each equal to a value in the cynomolgus record, and the mapping to screen colour is the app's."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R7",
+    "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+   },
+   {
+    "record": "R4",
+    "quote": "The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree"
+   },
+   {
+    "record": "R31",
+    "quote": "The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively."
+   }
+  ]
+ }
+}

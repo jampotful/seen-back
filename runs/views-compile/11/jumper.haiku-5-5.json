@@ -1,0 +1,270 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "cue": "Hold still, and the spider looks for what moves. Its front eyes are sharp and narrow; its side eyes are wide and blurred.",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "modules": [
+  "zones"
+ ],
+ "inputs": {
+  "motion": "optional",
+  "mic": "optional"
+ },
+ "params": {
+  "M": "UVG",
+  "fov": {
+   "value": 300,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:Lauren 2018",
+    "spider-day.jsonl:Rößler 2021"
+   ],
+   "note": "whole-animal field near 300 to 360 degrees",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "cpd": {
+   "value": 12.4,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "jumper.jsonl:Williams 1980"
+   ],
+   "note": "principal eye of Portia; the view uses the best measured salticid acuity",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "fovea": {
+   "value": 2.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "scale of the sharp middle, chosen by the app from the narrow principal-eye field"
+  },
+  "pupil": "o",
+  "gate": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how far still things fade, chosen by the app"
+  },
+  "persist": {
+   "value": 0.15,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how long the picture lingers, chosen by the app",
+   "range": [
+    0,
+    60
+   ]
+  },
+  "sat": {
+   "value": 0.9,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "colour saturation, chosen by the app",
+   "range": [
+    0,
+    1.5
+   ]
+  },
+  "gain": {
+   "value": 1.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "brightness gain for dim light, chosen by the app",
+   "range": [
+    1,
+    4
+   ]
+  },
+  "fall": {
+   "value": 2.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how fast sharpness falls with light, chosen by the app; the Cyrba sensitivity records show the spider works at low light",
+   "range": [
+    0,
+    3
+   ]
+  },
+  "rate": {
+   "value": 0.3,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Tan 2023",
+    "spider-day.jsonl:Tan 2023"
+   ],
+   "note": "slowed to a fraction of a person's flicker rate; the family flickers up to about 40 Hz",
+   "range": [
+    0.25,
+    2
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "front",
+   "shape": "strip",
+   "at": "centre",
+   "size": "narrow",
+   "cpd": {
+    "value": 12.4,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Williams 1980"
+    ]
+   },
+   "mag": {
+    "value": 2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "a sharp strip about 2 degrees across, from the principal eyes"
+   }
+  }
+ ],
+ "rows": [
+  [
+   "m",
+   "The front eyes",
+   "The principal eyes of a jumping spider are the sharp pair in front. The best measured figure, for Portia, resolves about 12.4 cycles per degree, close to a person's sharpness. Most other measured jumping spiders are far blunter, at about 3.8 cycles per degree in Phidippus johnsoni.",
+   [
+    "jumper.jsonl:Caves 2018",
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Williams 1980"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "A narrow strip, moved to look",
+   "Each principal eye sees only a thin upright strip, about 2 degrees wide and about 21 degrees high in Phidippus johnsoni. The spider moves its retinas across the scene to build a view, so the sharp part is narrow.",
+   [
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Williams 1980"
+   ],
+   [
+    "zones[0]"
+   ]
+  ],
+  [
+   "m",
+   "Wide side eyes",
+   "The side eyes see much wider. In Phidippus audax the front side eye covers about 70 degrees across and 98 degrees up, and in Metaphidippus aeneolus the side eyes between them cover almost the whole circle around the animal.",
+   [
+    "jumper.jsonl:Goté 2019",
+    "jumper.jsonl:Land 1969"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "The principal eyes see ultraviolet and green. In Plexippus validus, UV cells peak at 360 nm and green cells at about 520 nm. Some species differ, and the view draws the two classes.",
+   [
+    "jumper.jsonl:Blest 1981"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Motion and the side eyes",
+   "The side eyes mainly detect movement. Moving things reach them more easily than still ones, and a light that only switches on and off evokes no turn in Metaphidippus harfordi.",
+   [
+    "jumper.jsonl:Land 1971"
+   ],
+   [
+    "params.gate"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The blur, the lingering picture, the brightness gain and the slow flicker are the app's own choices, set from the sharpness and flicker records. The sharp strip is drawn at 2 degrees by the app.",
+   [
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Tan 2023"
+   ],
+   [
+    "params.fovea",
+    "params.gate",
+    "params.persist",
+    "params.sat",
+    "params.gain",
+    "params.fall"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.rate",
+    "zones[0].mag",
+    "matrices.UVG"
+   ]
+  ]
+ ],
+ "matrices": {
+  "UVG": {
+   "rows": [
+    [
+     0.2,
+     0.1,
+     0.3
+    ],
+    [
+     0.0,
+     0.9,
+     0.1
+    ],
+    [
+     0.1,
+     0.9,
+     0.0
+    ]
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "ultraviolet and green classes, mapped to a picture: the UV channel draws from the blue of the phone"
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "the default: a sharp strip drawn over a wide blurred field"
+   }
+  ]
+ },
+ "falls_back_to": "spider",
+ "draft": true
+}

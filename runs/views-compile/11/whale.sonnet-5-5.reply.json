@@ -1,0 +1,281 @@
+{
+ "spec": {
+  "key": "whale",
+  "chip": "Whale, dolphin or seal",
+  "who": "a whale, dolphin or seal",
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "order": [
+    "Cetacea",
+    "Carnivora:Pinnipedia",
+    "Sirenia"
+   ]
+  },
+  "cue": "Almost no colour, less detail than yours, and a good eye for dim light.",
+  "modules": [],
+  "version": 1,
+  "draft": true,
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "cpd": {
+    "value": 5,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R3",
+     "R15"
+    ],
+    "range": [
+     1.6,
+     11.5
+    ],
+    "note": "measured and estimated values run from 1.6 for a manatee to 11.5 for a harbour seal under water; the pick of 5 lies between a Bryde's whale and a harbour seal in air and is the app's"
+   },
+   "fov": {
+    "value": 125,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R17",
+     "R19"
+    ],
+    "range": [
+     100,
+     260
+    ],
+    "note": "the middle of the 120 to 130 degree visual field given for dolphins; the records give no field for seals"
+   },
+   "M": {
+    "value": "WHALE_L_CONE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R37",
+     "R46"
+    ],
+    "note": "one kind of cone near 524 nanometres and no blue-sensitive cone; the mapping is the app's"
+   },
+   "gain": {
+    "value": 3.16,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R55"
+    ],
+    "range": [
+     1,
+     4
+    ],
+    "note": "worked out from a bottlenose dolphin being 0.5 log units more sensitive than a person in dim light"
+   },
+   "sheen": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "many whales and seals carry a reflecting layer behind the retina; the strength of the sheen is the app's"
+   }
+  },
+  "matrices": {
+   "WHALE_L_CONE": {
+    "from_pigments": [
+     524
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R37"
+    ],
+    "note": "a single long-wavelength cone, as whales and seals studied so far carry"
+   }
+  },
+  "zones": [],
+  "by": {},
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colour drawn through the single cone matrix"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Colour",
+    "In the whales and seals studied, the blue-sensitive cone is missing, so one kind of cone is left and these animals are essentially colour-blind. A bottlenose dolphin's cone peaks near 524 nanometres. Some baleen and sperm whales have also lost the cone pigments and see by rods alone. We draw colour as that single cone would give it.",
+    [
+     "R46",
+     "R37",
+     "R186",
+     "R39",
+     "R42"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Sharpness",
+    "Estimates of sharpness run from 1.6 cycles per degree in a manatee and 3.3 in a humpback whale to 4.8 in a Bryde's whale. A harbour seal reaches 8.7 in air and 11.5 under water. A person manages about 30. We blur the picture to about 5.",
+    [
+     "R13",
+     "R4",
+     "R3",
+     "R15",
+     "R5"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Wide view",
+    "A dolphin's eyes sit on the sides of its head and give a visual field of 120 to 130 degrees, with the two eyes overlapping by only 20 to 30 degrees. A sperm whale has no overlap at all. The records give no field for seals, so we use the dolphin figure for the whole view.",
+    [
+     "R17",
+     "R19",
+     "R21",
+     "R18"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Dim light",
+    "A bottlenose dolphin sees half a log unit better than a person in dim light, which is about three times better, and 0.2 log units worse in bright light. Dolphins, other whales and many seals carry a reflecting layer behind the retina, while manatees have none. We lift the brightness of the picture by about three times.",
+    [
+     "R55",
+     "R56",
+     "R241",
+     "R245",
+     "R247"
+    ],
+    [
+     "params.gain"
+    ]
+   ],
+   [
+    "x",
+    "Echolocation",
+    "Dolphins and porpoises send out clicks of 40 to 150 kilohertz and listen for the echoes. A bottlenose dolphin or sperm whale sends its sound in a beam about 8 to 9 degrees wide. A phone cannot hear or draw this, so it is left out.",
+    [
+     "R73",
+     "R344"
+    ],
+    []
+   ],
+   [
+    "x",
+    "Whiskers",
+    "A harbour seal can sense targets as far as 180 metres away by its whiskers, even when it has lost vision and hearing. It can follow the trail of a robot submarine that had a 20 second head start. No phone input matches this, so it is left out.",
+    [
+     "R103",
+     "R135"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The records come from many species, so the app picked single numbers for the whole group: a sharpness of 5, a field of 125 degrees, a brightness lift of about three and a reflective sheen of 0.6. The mapping of colour onto one cone is also the app's.",
+    [],
+    [
+     "params.cpd",
+     "params.fov",
+     "params.gain",
+     "params.sheen",
+     "params.M"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R3",
+    "R15"
+   ],
+   "kind": "range_middle",
+   "how": "The value 5 lies between the Bryde's whale estimate of 4.8 cycles per degree and the harbour seal estimate of 8.7 in air."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R17",
+    "R19"
+   ],
+   "kind": "range_middle",
+   "how": "The value 125 is the middle of the 120 to 130 degree visual field given for the bottlenose dolphin."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R37",
+    "R46"
+   ],
+   "kind": "calculation",
+   "how": "The matrix keeps a single cone near 524 nanometres (R37) because the blue-sensitive cone is absent in all whales and seals studied (R46)."
+  },
+  {
+   "path": "params.gain",
+   "records": [
+    "R55"
+   ],
+   "kind": "calculation",
+   "how": "0.5 log units more sensitive than a person means 10^0.5, about 3.16 times, which is used as the brightness gain."
+  },
+  {
+   "path": "matrices.WHALE_L_CONE",
+   "records": [
+    "R37"
+   ],
+   "kind": "value",
+   "how": "The pigment peak of 524 nanometres is the top of the published 522 to 524 nanometre range for the dolphin long-wavelength cone."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R3",
+   "quote": "4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+  },
+  {
+   "record": "R15",
+   "quote": "Retinal resolution was calculated as 11.5 cycles/deg under water and 8.7 cycles/deg in air"
+  },
+  {
+   "record": "R17",
+   "quote": "120–130, panoramic vision"
+  },
+  {
+   "record": "R19",
+   "quote": "allowing a panoramic vision with a 120–130◦ visual field"
+  },
+  {
+   "record": "R37",
+   "quote": "Published λmax values for species from Delphinoidea, such as harbor porpoise (Phocoena phocoena) and bottlenose dolphin (Tursiops truncatus), are 522 to 524 nm"
+  },
+  {
+   "record": "R46",
+   "quote": "we here demonstrate an absence of S-cones in the retinae of all whales and seals studied"
+  },
+  {
+   "record": "R55",
+   "quote": "The dolphin function was 0.5 log units more sensitive than the human function in low intensity light"
+  }
+ ]
+}

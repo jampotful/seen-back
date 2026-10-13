@@ -1,0 +1,252 @@
+{
+ "key": "whale",
+ "chip": "Whale, dolphin or seal",
+ "who": "a whale, dolphin or seal",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Cetacea",
+   "Carnivora:Pinnipedia",
+   "Sirenia"
+  ]
+ },
+ "cue": "Almost no colour, less detail than yours, and a good eye for dim light.",
+ "modules": [],
+ "version": 1,
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "cpd": {
+   "value": 5,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "measured and estimated values run from 1.6 for a manatee to 11.5 for a harbour seal under water; the pick of 5 lies between a Bryde's whale and a harbour seal in air and is the app's"
+  },
+  "fov": {
+   "value": 125,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:JM 2022",
+    "marine-mammals.jsonl:Kremers 2016"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the middle of the 120 to 130 degree visual field given for dolphins; the records give no field for seals"
+  },
+  "M": {
+   "value": "WHALE_L_CONE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   "note": "one kind of cone near 524 nanometres and no blue-sensitive cone; the mapping is the app's"
+  },
+  "gain": {
+   "value": 3.16,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Madsen 1976"
+   ],
+   "range": [
+    1,
+    4
+   ],
+   "note": "worked out from a bottlenose dolphin being 0.5 log units more sensitive than a person in dim light"
+  },
+  "sheen": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "many whales and seals carry a reflecting layer behind the retina; the strength of the sheen is the app's"
+  }
+ },
+ "matrices": {
+  "WHALE_L_CONE": {
+   "from_pigments": [
+    524
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024"
+   ],
+   "note": "a single long-wavelength cone, as whales and seals studied so far carry",
+   "rows": [
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ]
+   ],
+   "q": [
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [],
+ "by": {},
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colour drawn through the single cone matrix"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Colour",
+   "In the whales and seals studied, the blue-sensitive cone is missing, so one kind of cone is left and these animals are essentially colour-blind. A bottlenose dolphin's cone peaks near 524 nanometres. Some baleen and sperm whales have also lost the cone pigments and see by rods alone. We draw colour as that single cone would give it.",
+   [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Meredith 2013",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Sharpness",
+   "Estimates of sharpness run from 1.6 cycles per degree in a manatee and 3.3 in a humpback whale to 4.8 in a Bryde's whale. A harbour seal reaches 8.7 in air and 11.5 under water. A person manages about 30. We blur the picture to about 5.",
+   [
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Mass 2011"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Wide view",
+   "A dolphin's eyes sit on the sides of its head and give a visual field of 120 to 130 degrees, with the two eyes overlapping by only 20 to 30 degrees. A sperm whale has no overlap at all. The records give no field for seals, so we use the dolphin figure for the whole view.",
+   [
+    "marine-mammals.jsonl:JM 2022",
+    "marine-mammals.jsonl:Kremers 2016"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Dim light",
+   "A bottlenose dolphin sees half a log unit better than a person in dim light, which is about three times better, and 0.2 log units worse in bright light. Dolphins, other whales and many seals carry a reflecting layer behind the retina, while manatees have none. We lift the brightness of the picture by about three times.",
+   [
+    "marine-mammals.jsonl:Bauer 2020",
+    "marine-mammals.jsonl:Jamieson 1971",
+    "marine-mammals.jsonl:Madsen 1976",
+    "marine-mammals.jsonl:Young 1988"
+   ],
+   [
+    "params.gain"
+   ]
+  ],
+  [
+   "x",
+   "Echolocation",
+   "Dolphins and porpoises send out clicks of 40 to 150 kilohertz and listen for the echoes. A bottlenose dolphin or sperm whale sends its sound in a beam about 8 to 9 degrees wide. A phone cannot hear or draw this, so it is left out.",
+   [
+    "marine-mammals.jsonl:C 2021",
+    "marine-mammals.jsonl:MJ 2021"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Whiskers",
+   "A harbour seal can sense targets as far as 180 metres away by its whiskers, even when it has lost vision and hearing. It can follow the trail of a robot submarine that had a 20 second head start. No phone input matches this, so it is left out.",
+   [
+    "marine-mammals.jsonl:AM 2024",
+    "marine-mammals.jsonl:J 2025"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The records come from many species, so the app picked single numbers for the whole group: a sharpness of 5, a field of 125 degrees, a brightness lift of about three and a reflective sheen of 0.6. The mapping of colour onto one cone is also the app's.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.gain",
+    "params.sheen",
+    "params.M"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "matrices.WHALE_L_CONE"
+   ]
+  ]
+ ],
+ "draft": true
+}

@@ -1,0 +1,338 @@
+{
+ "key": "scorpion",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Green and ultraviolet' says m and every parameter it describes is graded i",
+  "row 'Whole circle' is graded m and cites no record graded m"
+ ],
+ "reply": {
+  "spec": {
+   "key": "scorpion",
+   "version": 2,
+   "chip": "Scorpion",
+   "who": "a scorpion",
+   "falls_back_to": "spider",
+   "applies_to": {
+    "order": [
+     "Scorpiones",
+     "Uropygi",
+     "Amblypygi",
+     "Pseudoscorpiones"
+    ]
+   },
+   "cue": "The view takes in almost the whole circle around the animal. It sees light best in the green and ultraviolet.",
+   "modules": [
+    "field",
+    "colour",
+    "overlay"
+   ],
+   "draft": true,
+   "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "optional"
+   },
+   "params": {
+    "M": {
+     "value": "SCORP",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's mapping, built from the measured peaks"
+    },
+    "fov": {
+     "value": 360,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R1",
+      "R2"
+     ],
+     "range": [
+      100,
+      360
+     ]
+    },
+    "fovea": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.2,
+      4
+     ],
+     "note": "no record gives sharpness; a person's value is kept"
+    },
+    "cpd": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "no record gives sharpness; a rough picture of large shapes"
+    },
+    "sat": {
+     "value": 0.3,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "colour is limited to green, blue and ultraviolet peaks"
+    },
+    "gain": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "the app's brightness choice for dim light"
+    },
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "still things fade, as the app's choice"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "uvBlue": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "how much of the blue channel is read as ultraviolet"
+    },
+    "pupil": "o",
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "dof": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      40
+     ]
+    },
+    "fall": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ]
+    }
+   },
+   "zones": [],
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the full circle of view, squeezed toward 360 degrees"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no overlay"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the colour matrix from the measured peaks"
+     }
+    ],
+    "sharpness": [
+     {
+      "name": "paint",
+      "invented": true,
+      "note": "a coarse picture of shapes"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Whole circle",
+     "A scorpion's median and lateral eyes together look almost all the way around the body, so the picture covers nearly the full circle.",
+     [
+      "R1",
+      "R2"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Green and ultraviolet",
+     "Scorpion eyes peak in the green near 500 to 570 nanometres and have a secondary peak in the ultraviolet, so the picture leans toward green and ultraviolet light.",
+     [
+      "R4",
+      "R5",
+      "R6",
+      "R10"
+     ],
+     [
+      "params.M",
+      "params.sat",
+      "params.uvBlue"
+     ]
+    ],
+    [
+     "g",
+     "Dim light",
+     "Scorpion eyes respond to starlight levels of light, so the view keeps a bright picture on a moonless night.",
+     [
+      "R15",
+      "R16"
+     ],
+     [
+      "params.gain"
+     ]
+    ],
+    [
+     "i",
+     "Sharpness and colour",
+     "No one has measured how sharp a scorpion's picture is. This view keeps a coarse picture of shapes, with colour limited to green, blue and ultraviolet, and the brightness and fading are the app's choices.",
+     [
+      "R12"
+     ],
+     [
+      "params.cpd",
+      "params.fovea",
+      "params.sat",
+      "params.gain",
+      "params.gate",
+      "params.uvBlue",
+      "params.fall"
+     ]
+    ],
+    [
+     "m",
+     "Touch and vibration",
+     "Scorpions sense vibration through slits in their legs and touch through hairs and pegs. Most of what they find comes through these senses, which the picture does not show.",
+     [
+      "R34",
+      "R40",
+      "R47",
+      "R48",
+      "R67"
+     ],
+     []
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R1",
+     "R2"
+    ],
+    "kind": "value",
+    "how": "Both records state a 360 degree field of view for scorpions, so the value is 360, graded g because the records come from a review and a wider group."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "scorpions can apparently see 360° around their body"
+   },
+   {
+    "record": "R2",
+    "quote": "Together, the two eyes have a 360 deg field of view"
+   },
+   {
+    "record": "R15",
+    "quote": "can detect light as low as 106 irradians"
+   },
+   {
+    "record": "R16",
+    "quote": "scorpion eyes are sensitive to starlight levels of light (Fleissner and Fleissner, 2001)"
+   },
+   {
+    "record": "R34",
+    "quote": "Compound slit sensilla on basitarsal leg segments of sand-dwelling scorpions respond to surface waves generated by movements of insects as far as 50 centimeters away"
+   },
+   {
+    "record": "R40",
+    "quote": "sufficient amplitude and bandwidth (200<f<500 Hz) to be biologically detectable"
+   },
+   {
+    "record": "R47",
+    "quote": "are sensed by the scorpion's Basitarsal Compound Slit Sensilla (BCSS)"
+   },
+   {
+    "record": "R48",
+    "quote": "Sand scorpions detect these waves using sensory hairs on their legs."
+   },
+   {
+    "record": "R67",
+    "quote": "Our records show the presence of a rapid firing (.100 Hz), quickly adapting waveform"
+   },
+   {
+    "record": "R12",
+    "quote": "earlier studies suggest that scorpion photoreceptors form a homogeneous population that has been physiologically shown to be maximally sensitive to green wavelengths"
+   },
+   {
+    "record": "R4",
+    "quote": "the peak response is obtained at 568 nm with a smaller peak at 440 nm"
+   },
+   {
+    "record": "R5",
+    "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+   },
+   {
+    "record": "R6",
+    "quote": "Both sets of eyes are most sensitive to green light (~ 500 nm)"
+   },
+   {
+    "record": "R10",
+    "quote": "with a secondary peak of sensitivity in the lateral eyes to ultraviolet light (350–400 nm)"
+   }
+  ]
+ }
+}
