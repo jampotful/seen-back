@@ -379,7 +379,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
       if (/draw=palm|draw=pond|draw=strip|draw=face/.test(process.env.EXTRA || '') === false && key === 'jumper' && process.env.STAMPS && !(r.probe.stamps > 0)) errors.push('no stamp of attention was left');
       if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
-      const ok = r.eyes === key && r.rows >= 6 && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
+      const sp = JSON.parse(fs.readFileSync(path.join(here, '..', 'views', key + '.json'), 'utf8')), want = ((sp.trial && sp.trial.rows) || sp.rows || []).length;
+      r.rowsWanted = want;   // every row the spec (or its trial) holds is shown
+      const ok = r.eyes === key && r.rows >= Math.max(3, want) && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
         && (!/^(hour|exposure)$/.test(P.slow) || (r.slow && r.slow.mode === P.slow && r.slow.n > 1)) && (!P.slow || r.probe.zones);
       if (!ok) bad.push(key);
     }
@@ -449,6 +451,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     let n = 0;
     const MOVING = !!process.env.FLOOR_MOVING, T = +(process.env.FLOOR_T || 2), RUN = +(process.env.FLOOR_RUN || .6), RATE = +(process.env.FLOOR_RATE || .3);
     async function render(lab, x) {
+      if (process.env.FLOOR_DEBUG) console.log('render', lab, x, new Date().toISOString().slice(11, 19));
       await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]);
       if (MOVING) {   // the same stretch of the clip each time, played slowly up to T, then held
         await page.evaluate(([t0, r]) => { const v = document.getElementById('vid'); v.currentTime = t0; v.playbackRate = r; return v.play(); }, [Math.max(0, T - RUN), RATE]);
@@ -471,7 +474,8 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         const a = await render(lab, v); let d = (hi - lo) / 64, up = v + d <= hi ? 1 : -1, seen = null, lastNo = 0, e = null;
         while (Math.abs(d) <= (hi - lo)) {
           const b = await render(lab, v + up * d); e = de(a, b);
-          if (e.p95 > THR && (!MOVING || de(a, await render(lab, v + up * d)).p95 > THR)) { seen = d; break; }   // on the moving clip, seen twice lastNo = d; d *= 2;
+          if (e.p95 > THR && (!MOVING || de(a, await render(lab, v + up * d)).p95 > THR)) { seen = d; break; }   // on the moving clip, seen twice
+          lastNo = d; d *= 2;
           if (v + up * d > hi || v + up * d < lo) break;
         }
         if (seen === null) { res[lab].push([v, 'invisible', e && e.p95]); continue; }
