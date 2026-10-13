@@ -364,6 +364,18 @@
       "invented": true,
       "src": ["drafts/jumper.md 1a Habronattus colour classes","log L104 to L108, L126, L155"],
       "note": "three classes at the centre; the display mapping is the app's"
+    },
+    "PRINCIPAL_Q": {
+      "from_pigments": [370,532],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/spider.md: De Voe 1975 (UV cells 370 nm, green cells 532 nm)",
+        "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+      ],
+      "note": "the principal eyes' two classes, for the neutral band; the strip keeps UV_GREEN",
+      "rows": [[0.18775,0.50874,0.22597,0.07755],[0.18775,0.50874,0.22597,0.07755],[0.0,0.00118,0.06612,0.9327]],
+      "q": [[0.0,0.00118,0.06612,0.9327],[0.18775,0.50874,0.22597,0.07755],[0,0,0,0],[0,0,0,0]]
     }
   },
   "rows": [
@@ -426,9 +438,21 @@
       "x",
       "Hearing",
       "A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out."
+    ],
+    [
+      "i",
+      "Colours it cannot tell apart",
+      "With the neutral band switched on, the places where the front eyes' two colour classes see no colour shimmer faintly. The classes are measured; the curves, the camera's colours and the shimmer are the app's.",
+      ["De Voe 1975","param:spectrum.neutral","param:matrices.PRINCIPAL_Q"]
+    ],
+    [
+      "i",
+      "A moment slowed",
+      "With the replay switched on, a tap keeps the last three quarters of a second and plays it twice as slowly. How much slower is the app's choice.",
+      ["param:pace.ratio"]
     ]
   ],
-  "modules": ["zones","light","salience","gaze"],
+  "modules": ["gaze","light","pace","salience","spectrum","zones"],
   "falls_back_to": "spider",
   "applies_to": {"family":["Salticidae"]},
   "draw": {
@@ -467,6 +491,25 @@
         "invented": true,
         "note": "still things fade out of the surround, and only movement and the strip remain"
       }
+    ],
+    "spectrum": [
+      {"name":"matrix","invented":true,"note":"the colours as the zones draw them"},
+      {
+        "name": "neutral",
+        "invented": true,
+        "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+      }
+    ],
+    "pace": [
+      {"name":"lag","invented":true,"note":"today's pace"},
+      {"name":"replay","invented":true,"note":"a tap keeps the last moment and plays it slowly"}
     ]
+  },
+  "spectrum": {
+    "q": "PRINCIPAL_Q",
+    "neutral": {"value":1,"grade":"i","invented":true,"src":[],"range":[0,2],"note":"the shimmer's strength"}
+  },
+  "pace": {
+    "ratio": {"value":2,"grade":"i","invented":true,"src":[],"range":[1,6],"note":"how much slower the kept moment plays"}
   }
 }

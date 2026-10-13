@@ -33,8 +33,17 @@
     var want = null, motionOn = false, rotS = 0, accMean = 0, accDev = 0, gotMotion = 0, lastJolt = 0, mic = null, micAsked = false, rips = [], line = null;
     var SAY = { motion: 'This view can feel the phone move and lie still. Tap to let it use the motion sensors.',
       mic: 'This view can show low sounds as ripples. Tap to let it listen through the microphone. Nothing is recorded or kept.' };
+    // module 5, motion: the turn of the phone since the last snap, in degrees (the locked world, &draw=lock), and its thrusts forward
+    // (the arm as the neck, &draw=arm). Which way each rotation axis moves the picture is the app's reading of the specification and
+    // waits for a phone to confirm it.
+    var stabX = 0, stabY = 0, snapAt = 0, lastM = 0, thrustAt = 0;
     function onMotion(e) {
       var r = e.rotationRate || {}, a = e.acceleration, g = e.accelerationIncludingGravity, now = performance.now(), am;
+      var dts = lastM ? Math.min((now - lastM) / 1000, .1) : 0; lastM = now;
+      stabX += (r.gamma || 0) * dts; stabY += (r.beta || 0) * dts;   // held upright: gamma turns the phone left and right, beta tips it up and down
+      if (a && a.z !== null && a.z !== undefined && want && want.motion && eyeP && eyeP.arm && Math.abs(a.z) > ((eyeP.motion && eyeP.motion.thrust) || 3) && now - thrustAt > 250) {
+        thrustAt = now; if (engine && engine.kick) engine.kick(); if (navigator.vibrate) try { navigator.vibrate(12); } catch (x) { /* refused */ }
+      }
       gotMotion = now;
       rotS = lerp(rotS, Math.sqrt((r.alpha || 0) * (r.alpha || 0) + (r.beta || 0) * (r.beta || 0) + (r.gamma || 0) * (r.gamma || 0)), .2);   // degrees a second
       if (a && a.x !== null && a.x !== undefined) am = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
@@ -91,6 +100,11 @@
       paint: paint,
       still: function () { return !motionOn || performance.now() - gotMotion > 1500 || (rotS < 4 && accDev < .08); },   // without the sensors, the picture alone decides
       turning: function () { return motionOn ? rotS : 0; },
+      stab: function (cfg, now) {                     // degrees to shift the picture by, so the world holds still until the next snap
+        var hold = (cfg && cfg.holdMs) || 700, most = (cfg && cfg.maxDeg) || 8;
+        if (!motionOn || now - snapAt > hold || Math.abs(stabX) > most || Math.abs(stabY) > most) { stabX = 0; stabY = 0; snapAt = now; }
+        return [stabX, -stabY];
+      },
       // ripples for the view pass: up to four, as [x, y, age in seconds, strength], in the picture's own units from its centre
       fx: function (fx, now) {
         if (mic && want && want.mic) {

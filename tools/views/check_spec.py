@@ -60,10 +60,27 @@ def check(path):
         return ["not JSON: %s" % e], notes
     if s.get("key") != path.stem:
         errs.append("key %r is not the file's name" % s.get("key"))
+    if isinstance(s.get("trial"), dict):          # changes tried on an offered view (?try=<key>): the merged spec must pass as well
+        e2, n2 = check_obj(merged(s, s["trial"]))
+        errs += ["trial: " + e for e in e2]
+    e1, n1 = check_obj(s)
+    return errs + e1, n1
+
+
+def merged(a, b):
+    o = dict(a)
+    o.pop("trial", None)
+    for k, v in b.items():
+        o[k] = merged(a[k], v) if isinstance(a.get(k), dict) and isinstance(v, dict) and "grade" not in v else v
+    return o
+
+
+def check_obj(s):
+    errs, notes = [], []
     for f in ("who", "rows", "params"):
         if f not in s:
             errs.append("no %s" % f)
-    blocks = {k: s.get(k) for k in ("params", "zones", "gaze", "by", "inputs")}
+    blocks = {k: s.get(k) for k in ("params", "zones", "gaze", "by", "inputs", "spectrum", "clock", "pace", "motion")}
     params = []
     walk(blocks, "", params)
     for m in (s.get("matrices") or {}).values():

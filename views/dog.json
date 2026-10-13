@@ -46,5 +46,95 @@
       "Field of view, dim light and depth",
       "These parts of the view are guesses. This view treats things lower in the picture as closer."
     ]
-  ]
+  ],
+  "trial": {
+    "matrices": {
+      "DOG": {
+        "from_pigments": [429,555],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/cat-dog evidence L65, L66: Neitz, Geist and Jacobs 1989 (429 and 555 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.30084,0.477,0.14861,0.07355],[0.30084,0.477,0.14861,0.07355],[0.00042,0.08393,0.6324,0.28325]],
+        "q": [[0.00042,0.08393,0.6324,0.28325],[0.30084,0.477,0.14861,0.07355],[0,0,0,0],[0,0,0,0]]
+      },
+      "DOG_ROD": {
+        "from_pigments": [508],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/cat-dog evidence L116: Jacobs, Deegan, Crognale and Fenwick 1993 (rods 508 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.08817,0.47704,0.34962,0.08517],[0.08817,0.47704,0.34962,0.08517],[0.08817,0.47704,0.34962,0.08517]],
+        "q": [[0.08817,0.47704,0.34962,0.08517],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+      }
+    },
+    "spectrum": {
+      "q": "DOG",
+      "dark": "DOG_ROD",
+      "adaptAt": {"value":[-2,-1],"grade":"i","invented":true,"src":[],"range":[-3,0]},
+      "neutral": {"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]}
+    },
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        }
+      ]
+    },
+    "rows": [
+      [
+        "m",
+        "Sharpness",
+        "Dogs see about a quarter to a seventh as much detail as people do. This view is blurred to match."
+      ],
+      [
+        "m",
+        "Sharpest spot",
+        "Dogs with long noses see most sharply along a band level with the horizon. Dogs with short noses see most sharply in one central spot. This view shows the band."
+      ],
+      [
+        "i",
+        "Colour",
+        "Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them."
+      ],
+      [
+        "i",
+        "Field of view, dim light and depth",
+        "These parts of the view are guesses. This view treats things lower in the picture as closer."
+      ],
+      [
+        "i",
+        "Being tried: colour from pigments",
+        "On this trial the colours come from the dog's two measured cone pigments, and in dim light from its rods. The camera's colours and the display are the app's.",
+        [
+          "Neitz 1989",
+          "Jacobs 1993",
+          "param:spectrum.adaptAt",
+          "param:spectrum.neutral",
+          "param:matrices.DOG",
+          "param:matrices.DOG_ROD",
+          "param:M"
+        ]
+      ]
+    ],
+    "params": {
+      "M": {
+        "value": "DOG",
+        "grade": "m",
+        "invented": true,
+        "src": ["research/cat-dog evidence L65, L66: Neitz, Geist and Jacobs 1989 (429 and 555 nm)"]
+      }
+    }
+  }
 }
