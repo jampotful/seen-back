@@ -100,7 +100,7 @@
   // without "offered" (above). A view tried joins EYES for that visit only, so a photo or a typed name in its group then opens it too.
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
   if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
-  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; if (SPECS[k].offered && SPECS[k].trial) { SPECS[k] = merged(SPECS[k], SPECS[k].trial); delete SPECS[k].trial; } });
+  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; if (SPECS[k].offered && SPECS[k].trial) { SPECS[k] = merged(SPECS[k], SPECS[k].trial); delete SPECS[k].trial; SPECS[k].hasCurve = JSON.stringify(SPECS[k]).indexOf('"curve"') >= 0 || !!SPECS[k].clock; } });
   // The tuning panel and the compare slider (src/cam.tune.js) appear only with ?try=<view>&tune=1. &draw=<option> picks one of the
   // drawing options a view offers (docs/views/ATLAS.md), the first being the default. cmp is the compare divider's place, 0 when hidden.
   var TUNE = { on: TRY_KEYS.length > 0 && /[?&]tune=1(?:&|$)/.test(location.search || ''), cmp: 0,

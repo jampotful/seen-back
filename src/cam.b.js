@@ -346,7 +346,7 @@
     // target where the phone renders to one, so it holds many more frames than the time pass's averaging, which floors at 0.2 without
     // float textures (fungus.md section 4). The time pass then takes its picture from the store.
     var pSlow = null, slowT = [null, null], slowW = 0, slowH = 0, slowN = 0, slowAt = -1e12, slowFb = null, slowMode = '', spinS = 0, spinAt = 0;
-    var watchAt = 0, develop = 0, lastCells = null, lastCellRead = 0, picMove = 0;
+    var lastSn = 0, watchAt = 0, develop = 0, lastCells = null, lastCellRead = 0, picMove = 0;
     window.addEventListener('pointerdown', function () { watchAt = performance.now(); }, { passive: true });
     function slowReset() { slowN = 0; slowAt = -1e12; develop = 0; watchAt = performance.now(); }
     function picChange() {                         // how much the picture changed between the light module's reads (0 still, 1 a lot)
@@ -751,7 +751,7 @@
       clear: function () { hasFrame = false; },
       hasFrame: function () { return hasFrame; },
       newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; slowReset(); },
-      slowState: function () { return { mode: slowMode, n: slowN, develop: +develop.toFixed(3), spin: +spinS.toFixed(2), move: +picMove.toFixed(4), w: slowW, h: slowH }; },
+      slowState: function () { return { mode: slowMode, n: slowN, develop: +develop.toFixed(3), spin: +spinS.toFixed(2), move: +picMove.toFixed(4), w: slowW, h: slowH, snell: lastSn, loc: !!(pViewZ && pViewZ.u.u_snell) }; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
       probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr, glErr: gl.getError(), stamps: stampSlots.filter(function (q) { return q.got && !q.live; }).length, light: LIGHT.reads, lum: +LIGHT.lum.toFixed(3) }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
@@ -997,7 +997,7 @@
           var st = P.lock ? senses.stab(P.motion, now) : null; gl.uniform2f(u.u_stab, st ? st[0] / CAM_DEG : 0, st ? st[1] / CAM_DEG : 0);
           gl.uniform1f(u.u_spin, spinS * Math.PI / 180);
           var pose = P.snell || P.magMode ? senses.pose() : null, sn = P.snell && pose ? clamp((pose.elev - (P.tilt.fromDeg || 15)) / ((P.tilt.fullDeg || 45) - (P.tilt.fromDeg || 15)), 0, 1) : 0;
-          gl.uniform3f(u.u_snell, sn, pose ? clamp((90 - pose.elev) / 97, 0, 1) * .5 : 0, 0);   // the disc slides toward the top as the phone levels
+          lastSn = sn; gl.uniform3f(u.u_snell, sn, pose ? clamp((90 - pose.elev) / 97, 0, 1) * .5 : 0, 0);   // the disc slides toward the top as the phone levels
           var mg = P.magMode && pose && pose.heading !== null ? pose.heading : null, red = LIGHT.reads ? clamp(((LIGHT.col[0] - LIGHT.col[2]) / (LIGHT.col[0] + .02) - .3) * 2.5, 0, 1) : 0;   // red or yellow light melts it (birds draft)
           gl.uniform3f(u.u_mag, mg !== null && P.magMode === 'grain' ? (P.magnet.k || 1) * (1 - red) : 0, mg !== null && P.magMode === 'tide' ? (P.magnet.k || 1) * .3 * (.5 + .5 * Math.cos(mg * Math.PI / 180)) * (1 - red) : 0, mg !== null ? -mg * Math.PI / 180 + Math.PI / 2 : 0);
           var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
