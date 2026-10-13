@@ -248,3 +248,219 @@ The weights overlap, since one view uses many mechanisms.
 - **Turning to fill the ring** (reframe; medium to high). For the starfish, the screen shows a ring of five windows. Only the one facing where the camera points is live; the person turns slowly on the spot and each window fills as it passes, then holds. The person's body becomes the starfish, one arm at a time.
 
 **Invented.** Everything outside the camera's own field; the dim seam's depth; the lamp count, which should follow the measured eye count where known.
+
+## 13. Light sensed with no image
+
+**Mechanism.** Many living things sense how much light there is, its colour and its direction, with no lens to make a picture: plants (red against far-red), fungi (blue light, bending toward it), slime moulds (away from blue, toward red), corals and anemones (blue, timed by the moon), woodlice and eyeless millipedes (toward dark), flatworms and earthworms, the light-sensing skin of snails and leeches, caecilians and the olm.
+
+**Evidence.** `field` and `noGreen` in `src/cam.a.js` (the plant). `fungus.md` (toward light for fungi, away for fed slime moulds; Hato and colleagues 1976). `sealife.md` (no picture; blue weighting). `crab.md` (woodlouse, same picture as `other`). Ground-invertebrates draft (millipede gradient darker on the dark side, worm field leaning toward the bright side in near darkness and away in ordinary light, a leech's back green and belly ultraviolet). `salamander.md` (caecilians and the olm).
+
+**Who has it.** Plant 37.8%, fungus 2.8%, sealife without starfish about 0.6%, woodlouse about 0.23%, millipede about 0.1%, worm 0.20% in part, slime 0.07%. Weight about 42%.
+
+**Phone in, phone out.** The camera's coarse brightness and colour, which the engine already samples; the gyroscope for the direction the light comes from; the screen.
+
+**Ways to draw it.**
+- **The field** (continuous frame; low). Today's plant view made general: one very coarse level of the camera image, coloured by each organism's weighting, with a soft bright side and a soft dark side.
+- **The lean** (continuous frame; low). The whole field drifts slowly toward the brightest region (fungi, plants) or away from it (fed slime moulds, woodlice, millipedes), as if the creature were moving. The person points the phone at a window and the view crawls toward it or flees.
+- **A compass of light** (reframe; medium). The camera image disappears. The screen holds one luminous point on a dark sphere that marks where the light comes from, set by the camera's brightest region and the gyroscope, and for plants a second, redder point for the neighbour's far-red. The person sweeps the phone round the room and the point stays fixed on the window, like a needle that points to light. The view becomes an instrument.
+
+**Invented.** Every colour weighting's exact numbers; the speed of the lean; the far-red point, since a phone records almost none (`src/cam.a.js`, plant rows).
+
+## 14. Shadows and looming
+
+**Mechanism.** A sudden darkening, or a dark shape growing in the field, triggers withdrawal: a fan worm pulls in, a snail retracts its tentacles, a giant clam closes at a dimming of about 12%.
+
+**Evidence.** Giant clam responding to 12.3% dimming and a 13.5 degree black spot (`sealife.md`, Land 2003). Fan worms and the leech's whole-body cell (ground-invertebrates draft section 2.4). Snail tentacle withdrawal (`snail.md`, Chase and Hall 1996, not confirmed by the audit; ground-invertebrates draft section 2.1).
+
+**Who has it.** Snail 1.2%, sealife 0.86%, worm 0.20%, millipede and centipede in part. Weight about 2.5%.
+
+**Phone in, phone out.** The camera's mean brightness from frame to frame; the screen; the vibration motor on Android.
+
+**Ways to draw it.**
+- **The flinch** (continuous frame; low). When the frame darkens sharply, the field contracts to a dark point and opens again over two or three seconds, like a fan worm unfurling.
+- **The aperture as the animal** (reframe; low). The screen's opening is the animal's body. A passing hand shrinks it to a pinhole, as a snail pulls in, and it reopens only as fast as a tentacle rises, so a second shadow during reopening sends it back. The person plays at frightening it and learns its patience.
+- **Shadow count** (held moments; low). Each shadow leaves a dark ring on the screen at the place it fell, rings fading over a minute. A clam's view becomes a slow record of what passed over it.
+
+**Invented.** Thresholds and timings beyond the clam's 12.3%; the look of the rings.
+
+## 15. Substrate and web vibration
+
+**Mechanism.** Most web spiders read their world through the web's shaking, with prey struggling at 5 to 30 shakes a second; scorpions read sand waves across eight legs; earthworms surface at a mole's digging (near 80 to 200 a second through the soil); millipedes curl at a shake; ticks stir at footsteps.
+
+**Evidence.** `spider.md` section 4, item 1 (Landolfa and Barth 1996). Ground-invertebrates draft (scorpion ripples in sand, L31; worms and the mole, Catania 2008; millipede curling, Cloudsley-Thompson 1951). `tick.md` section 4.
+
+**Who has it.** Spider 1.3%, scorpion 0.14%, worm 0.20%, millipede in part, tick 0.04%, snail in part. Weight about 1.9%.
+
+**Phone in, phone out.** The accelerometer, read at 60 a second or faster to follow 30 shakes a second (`spider.md`); the microphone filtered to low pitches (needs consent); the screen; the vibration motor on Android; the speaker for a low hum.
+
+**Ways to draw it.**
+- **Ripples from the side** (continuous frame; medium). A tap on the phone, or on the table it rests on, sends rings across the picture from the side the jolt came from, repeating at the rhythm the sensor measured.
+- **The web is the screen** (reframe; medium). The camera image disappears behind a drawn orb web that fills the screen. Taps and knocks on the table pluck the strand on the side they came from, and the web rings; struggling prey (a finger drumming at 10 a second) makes one sector shimmer while a slow push merely sags it. The camera survives only as faint light behind the web. The view becomes the instrument the spider plays.
+- **Feel it back** (felt through the hand; low on Android). The phone's motor answers each knock with the pattern the web would carry, delayed and softened, so the person feels the web in the palm. On iOS the same pattern is drawn as a pulse at the frame's edge.
+
+**Invented.** The web's look; the direction from the first jolt's sign; the delay and softening.
+
+## 16. Airflow and water flow
+
+**Mechanism.** Hairs on spider and scorpion legs feel moving air (trichobothria); the lateral line of fish and aquatic salamanders feels water moving along the body; spiders hear low airborne sound through leg hairs (an 80 a second hum makes a Bold Jumping Spider freeze from 2 m).
+
+**Evidence.** `spider.md` section 4, item 2 (Shamble and colleagues 2016; Zhou and colleagues 2022). `fish.md` section 4, item 2 (lateral line). `salamander.md` section 4 (axolotl lateral line). Ground-invertebrates draft (air on the scorpion's pincers, Prévost and Stemme 2020).
+
+**Who has it.** Fish 1.6%, spider 1.3%, jumper 0.40%, salamander 0.37% in part, scorpion 0.14%, shark 0.08%. Weight about 3.8%.
+
+**Phone in, phone out.** The microphone hears wind and breath as low noise; optical flow from the camera for nearby movement; the accelerometer for the phone's own movement; the screen; the vibration motor on Android.
+
+**Ways to draw it.**
+- **Pressure at the edge** (continuous frame; medium). Large nearby movement in the camera image presses a soft shading onto the edge of the screen nearest to it, as `fish.md` proposes, and the phone's own movement through the air leaves a bow wave.
+- **Blow on it** (reframe; low). Breath or wind on the microphone makes the picture's edges shiver like hairs in a breeze, and a hard breath makes the jumping spider's view freeze for a beat. The person discovers the sense by blowing on their phone, which is unexpected and immediate.
+- **The current lines** (continuous frame; medium to high). Fine streamlines are drawn across the picture and bent by optical flow, so a hand passing near the lens pushes a wake through them. The fish's body becomes a field of flow the person can stir.
+
+**Invented.** Every mapping from microphone level to drawn motion; the streamlines; the freeze.
+
+## 17. Hearing and sound localization
+
+**Mechanism.** Owls hear faint high sounds about 20 decibels better than other birds and place them within about 3 degrees; pigeons hear down to one vibration every 20 seconds; foxes hear to 48,000 a second; spiders hear low hums through hairs.
+
+**Evidence.** Birds draft (`owl` hearing; barn owl localization 3 by 8 degrees; pigeon infrasound to 0.05 Hz). Cat-dog draft (fox hearing from 51 to 48,000 a second, `x` row). `spider.md` section 4, item 2.
+
+**Who has it.** Owl 0.22%, fox, wader 1.1% (pigeon infrasound as a left-out row), spider and jumper 1.7% for low hums, cat 0.10%, dog 0.17%. Weight about 2.1% if the spiders' hearing is drawn.
+
+**Phone in, phone out.** The microphone, one channel on most phones (birds draft), with a frequency split from an analyser; the speaker; the screen.
+
+**Ways to draw it.**
+- **Sound glow** (continuous frame; medium). The level in the high band brightens the lower half of the picture for an instant, so rustling leaves flicker with light, as the birds draft proposes for the owl.
+- **Sound made visible where it lands** (held moments; medium). Each sound above a threshold leaves a soft circle in the picture, sized by its loudness and coloured by its pitch, at a place set by turning the phone: the circle is strongest when the phone faces the sound, found by the person sweeping slowly, as an owl turns its head. Direction comes from the person's sweep, which a single microphone cannot give alone.
+- **The dark owl** (reframe; low). In the dark the owl view lets the picture go nearly black and lets sound carry it: each rustle lights the scene for a moment, like lightning, and silence leaves it dark. The view becomes listening.
+
+**Invented.** Every mapping of sound to light; the sweep method; the threshold.
+
+## 18. Echolocation
+
+**Mechanism.** Bats call 5 to 10 times a second while searching and read echoes for distance, size and texture, insects out to about 2 to 6.5 m and large surfaces to 20 to 50 m, in a cone of 60 to 90 degrees; rousettes click with the tongue; toothed whales click under water.
+
+**Evidence.** `bat.md` sections 3 and 4 (Moss and Surlykke 2010; Boonman and colleagues 2013, corrected in the audit). Phone microphones do not pick up bat calls (`bat.md`: ecoObs FAQ; Bristol Batmobile blog). LiDAR to 5 m on Apple's Pro phones since 2020 (`bat.md`, phyphox). Whales are not yet in a sheet.
+
+**Who has it.** Bat 0.04%, whale and dolphin about 0.07% (toothed whales), flying fox in part (rousettes). Weight about 0.1 to 0.2%.
+
+**Phone in, phone out.** The speaker and microphone together for audible echoes (a click and its return; a phone can send and record clicks in the audible range, and how far it can range is untested); LiDAR in a native build on Pro phones; a depth model from the camera; the screen; the vibration motor.
+
+**Ways to draw it.**
+- **The strobe of calls** (held moments; low). Today's bat sketch: the picture holds and jumps about seven times a second, each snapshot one call, coarse and nearly colourless.
+- **The echo image** (continuous frame; high). Each point takes its brightness from a modelled echo strength (near, large, facing) and nothing beyond reach shows, from LiDAR or a depth model; the picture is a grey relief that fades with distance, refreshed at the call rate.
+- **Clap and see** (reframe; medium). The camera image is dark. When the person clicks their tongue or snaps their fingers, the microphone hears it and the scene appears for a moment, lit from the phone, and fades over a fifth of a second, nearer surfaces fading last. With the speaker the phone can click on its own at the bat's rate. The person sees only by making sound, which is what echolocation is.
+
+**Invented.** The echo strength model (`bat.md` says no opened source gives it); the fade times; the audible stand-in for ultrasound.
+
+## 19. Heat
+
+**Mechanism.** Ticks sense body heat through a capsule on the front leg, along a narrow line at most 5.7 degrees across, reaching a warm square about a metre away. Pit vipers sense heat too (general knowledge; no sheet).
+
+**Evidence.** `tick.md` section 4 (Carr and Salgado). The sheet recommends against drawing heat from skin colour, since it would light wood and sand, miss clothed people and fur, and likely work unevenly across skin tones.
+
+**Who has it.** Tick 0.04%; pit vipers within reptile, unmeasured share. Weight about 0.05% from the sheets.
+
+**Phone in, phone out.** No ordinary phone sensor reads body heat (`tick.md`, general knowledge). A person-and-animal detector on the camera image; the screen; the vibration motor.
+
+**Ways to draw it.**
+- **The questing leg** (reframe; medium). One small spot at the centre of a dim frame warms when a body sits under it, as the tick sheet proposes, and the person sweeps the phone the way a tick holds out its leg. The view becomes a search done with the arm.
+- **Warmth in the hand** (felt through the hand; low on Android). The same detector drives the motor in a slow pulse that quickens as the centre nears a body, like a Geiger counter. The screen stays almost dark.
+
+**Invented.** The detector's link to warmth, which is entirely the app's; both options need an `i` row.
+
+## 20. Electric fields
+
+**Mechanism.** Sharks, rays, platypuses, axolotls and amphiumas sense the faint fields around living bodies, strongest at close range.
+
+**Evidence.** `fish.md` section 4, item 5; `mammal.md` section 4 (platypus); `salamander.md` section 4. No phone can sense these fields, and the sheets say so.
+
+**Who has it.** Shark 0.08%, platypus about 0.01%, salamander a small part. Weight about 0.1%.
+
+**Phone in, phone out.** None senses it. The recognizer's detection of a living body, or motion, could stand in, wholly invented.
+
+**Ways to draw it.**
+- **A row and nothing more** (no drawing; none). The view says the shark has a sense the phone cannot reach and draws nothing for it. This is the honest default.
+- **Bodies in the murk** (reframe; medium). The picture is grey water. Any detected living body near the centre and close to the lens gives off a faint pulsing halo, and only within a hand's breadth. The person brings the phone close to a hand and the hand glows. Graded `i`.
+
+**Invented.** All of it beyond the row.
+
+## 21. Magnetic fields
+
+**Mechanism.** Many songbirds and pigeons sense the direction of the earth's field with their eyes, as an inclination compass that fails in red or yellow light; newts orient by a light-dependent compass that turns a quarter when light is mostly longer than 500 nm; red foxes pounce more successfully facing north-east; some bats carry a compass.
+
+**Evidence.** Birds draft (Wiltschko and colleagues 2021; Engels and colleagues 2012; Nießner and colleagues 2011). Cat-dog draft section 2.4 (fox, L117 and L175). `salamander.md` section 4. `bat.md` section 4.
+
+**Who has it.** Bird about 16% (songbirds and pigeons), wader 1.1%, salamander 0.37%, fox, bat 0.04%. Weight about 16%, nearly all as an `x` row or an invented drawing.
+
+**Phone in, phone out.** The compass heading (`deviceorientationabsolute` on Android, `webkitCompassHeading` on iOS after a tap); gravity from the motion sensors; the camera's average colour; the screen.
+
+**Ways to draw it.**
+- **A tide of shade** (continuous frame; low). A faint broad darkening across the sky follows the angle between the camera and magnetic north and fades when the frame is dominated by red or yellow light, as the birds draft proposes.
+- **The fox's arc** (held moments; low). The lower edge of the picture warms faintly when the phone faces between north and east, as the cat-dog draft proposes, and a thrown ball or a pounce gesture in that arc leaves a brief mark.
+- **The grain of the world** (reframe; low). The whole picture gains a fine directional grain, like brushed metal, that always runs along magnetic north whichever way the phone turns. The world gains a texture with a direction to it. Red light melts the grain.
+
+**Invented.** The look of every option; nobody knows what the sense is like (birds draft).
+
+## 22. Chemistry: smell, taste and breath
+
+**Mechanism.** Ticks wake to carbon dioxide; millipedes, harvestmen and salamanders taste with antennae, legs or nose taps; moles, bears, pigs and flying foxes smell; snails follow scent trails.
+
+**Evidence.** `tick.md` section 4 (Steullet and Guerin 1992). Ground-invertebrates draft (antennae, tasting legs). `salamander.md` (nose tapping). `mammal.md` and `bat.md` (smell rows). `snail.md` (scent trails).
+
+**Who has it.** Snail 1.2%, mammal 0.60%, salamander 0.37%, worm 0.20%, scorpion and harvestman 0.14%, tick 0.04%, flying fox 0.01%. About 2% as rows.
+
+**Phone in, phone out.** No phone sensor reads chemistry. The microphone hears a breath blown on the phone, standing for the act of breathing (`tick.md`); the touch screen can stand for a tasting touch.
+
+**Ways to draw it.**
+- **Breath wakes the tick** (reframe; low). The view is still and dim until the person breathes on the phone; the microphone hears the breath and the picture stirs and searches for a few seconds, as a tick wakes to breath. Graded `i`; the sheet calls it the act of breathing, not carbon dioxide.
+- **Trails that stay** (held moments; low). Each touch of the screen leaves a soft coloured trail that fades over a minute, like a snail's slime trail or a millipede's tapped antenna; the person paints the path the animal would smell back along.
+
+**Invented.** Both drawings.
+
+## 23. Touch
+
+**Mechanism.** Moles meet the world through the star or snout; millipede antennae tap; tentacles withdraw at a touch; harvestman legs taste what they meet.
+
+**Evidence.** `mammal.md` section 4 (moles). `snail.md` section 4 (tentacle withdrawal). Ground-invertebrates draft (antennae, tasting legs).
+
+**Who has it.** Snail 1.2%, mole about 0.06%, millipede in part, harvestman in part. Weight about 1.4%.
+
+**Phone in, phone out.** The touch screen; the screen; the vibration motor on Android.
+
+**Ways to draw it.**
+- **Light where the finger is** (reframe; low). For the mole, the screen is dark and a small patch lights under the finger as the snout touches it, fading behind. The person explores the scene by touch, a patch at a time.
+- **Recoil** (continuous frame; low). For the snail, a touch shrinks the view to darkness and it rises slowly, as `snail.md` proposes.
+
+**Invented.** Timings and the patch size.
+
+## 24. Gravity and growth time
+
+**Mechanism.** A mushroom stem rights itself over 3 to 4 hours and gills hang straight down; jellyfish carry a gravity organ; fungi and slime moulds act over minutes to hours.
+
+**Evidence.** `fungus.md` section 4 (gravity; minutes and hours). `sealife.md` section 4 (jellyfish, Nakanishi and colleagues 2009, abstract not opened in the audit).
+
+**Who has it.** Fungus 2.8%, slime 0.07%, jellyfish within sealife. Weight about 2.9%.
+
+**Phone in, phone out.** The tilt sensor; the clock; the camera at a low rate; the screen.
+
+**Ways to draw it.**
+- **The slow righting** (continuous frame; medium). Tilt the phone and the picture slowly turns back to true vertical, faster than a stem by a stated factor.
+- **The hour in a minute** (held moments; medium). The view keeps one frame every few seconds and averages them over ten minutes or more, so only what stays remains; leave the phone on a log and come back to a picture of the last hour.
+- **The patient view** (reframe; low). The view refuses to update while the person watches. Only when the phone has been set down and left still for a while does the picture develop, slowly, like a print in a tray. The fungus's time scale becomes the person's wait.
+
+**Invented.** The speed-up factor; the averaging window; the threshold for left still.
+
+## 25. Clocks: day, night and moon
+
+**Mechanism.** Scorpion eyes grow a thousand times more sensitive at night with transitions of two to three hours; corals and anemones respond to moonlight and to the dark hour after sunset; ticks wake at the onset of darkness; fiddler crab eyes change between day and night.
+
+**Evidence.** Ground-invertebrates draft section 2.5 (L26 to L28) and section 2.7 (L159). `sealife.md` section 4 (Lin and colleagues 2021). `crab.md` section 4.
+
+**Who has it.** Sealife 0.86%, crab 0.73%, scorpion 0.14%, tick 0.04%, plus every view with a night shift. Weight about 2.0%.
+
+**Phone in, phone out.** The clock and time zone; the moon's phase computed from the date; the screen.
+
+**Ways to draw it.**
+- **The view keeps time** (continuous frame; low). Settings follow the hour, ramping over two hours at dusk and dawn.
+- **Tonight's moon** (reframe; low). For corals, the view's whole brightness follows tonight's moon phase and its rising time, computed from the date and the time zone, so the view is different every night of the month and the full moon is its brightest night. The person learns the coral's calendar by opening the app on different evenings.
+
+**Invented.** The size of every lift; moonrise from the time zone's approximate place.
