@@ -1,0 +1,58 @@
+188 works, 505 passages, 1.1 M input tokens; estimate expected $0.16, ceiling $0.33 (cap $12.00)
+smoke test: model claude-haiku-5-5 replied with 7 records; usage {"input_tokens": 3465, "cache_creation_input_tokens": 4113, "cache_read_input_tokens": 0, "cache_creation": {"ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 4113}, "output_tokens": 2869, "output_tokens_details": {"thinking_tokens": 1421}, "service_tier": "standard", "inference_geo": "global"}
+submitted batch msgbatch_012Fsvfg4sQN2LJnvoS69hHY with 505 requests
+[18:26:55] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:27:55] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:28:56] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:29:56] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:30:56] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:31:57] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:32:58] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:33:58] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:34:58] batches processing; {'processing': 505, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[18:35:59] batches ended; {'processing': 0, 'succeeded': 505, 'errored': 0, 'canceled': 0, 'expired': 0}
+fetched 505 results
+calib: 1431 records
+# The literature table
+
+Made by `tools/lit/extract.py` with claude-haiku-5-5 through the Message Batches API on 2026-10-13 18:35 UTC.
+
+
+## Cost estimate per topic (batch prices, US dollars)
+
+| Topic | works | full texts | abstracts only | passages | estimate (expected) | estimate (ceiling) |
+|---|---:|---:|---:|---:|---:|---:|
+| calib | 188 | 60 | 120 | 505 | 0.16 | 0.33 |
+| all (works found under several topics are counted in each, sent once) | 188 | 60 | 120 | 505 | 0.16 | 0.33 |
+
+Whole run, each work sent once: 505 requests, 1.1 million input tokens, expected $0.16, ceiling $0.33.
+The expected figure assumes the system prompt is read from the cache; the ceiling assumes it never is and that every reply is long. Token counts are estimated at 2.3 tokens a word.
+
+## Actual usage
+
+| | tokens |
+|---|---:|
+| input_tokens | 1139831 |
+| output_tokens | 675981 |
+| cache_creation_input_tokens | 4113 |
+| cache_read_input_tokens | 2072952 |
+
+Spent: **$0.24** at batch prices.
+
+## Spend and records per topic (a work found under several topics is charged to the first)
+
+| Topic | spent (US$) | records kept (works under several topics are listed in each) |
+|---|---:|---:|
+| calib | 0.237 | 1431 |
+
+## What the check pass did
+
+| | count |
+|---|---:|
+| dropped_quote_not_found | 4 |
+| records_kept | 1431 |
+| records_proposed | 1435 |
+| replies_cut_off | 1 |
+| replies_salvaged_after_cut_off | 1 |
+| requests_succeeded | 505 |
+
