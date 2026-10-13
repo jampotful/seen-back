@@ -74,3 +74,8 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 - Specs behind `?try=` from the research drafts, by `tools/views/add_modules8.py`: owl, duck, bigcat, fox, millipede, centipede, harvestman, woodlouse; the modules offered in fish, spider, worm, bat, mammal and the bee and insect trials. Every spec passes the checker; every new view and every new option draws with no error (`test/check4.js try`). The sixteen offered views are the same objects as on `main`.
 - `docs/views/COMPILER.md`, the spec compiler's input.
 - The round 2 carry files were read only (Panthera pupils to `bigcat`, the mallard's violet cone to every duck); nothing applied.
+
+## Next
+1. Every check passed on build 31 (typed, lex, record, lent, sweep, film, still, viewer and edge with `SLOW=3`, try on all 32 non-offered or trial views, the tuning panel on duck and owl, and every section of `test/rec/check_rec.js`). The push of `agent/engine` to `main` was refused by the session's permission check at about 18:00, so build 31 waits on `agent/engine` (`main` was still at `0fa1f5b`, so it fast-forwards). The status row and the log entry on this branch already describe the merge.
+2. The owner's phone checks in `docs/ENGINE.md` ("What a real phone must judge").
+3. Not built: the drift of the yaw without a compass, a second microphone for direction, the millipede's curl and the centipede's warm antennae (drafts' effects), and a `by` level for orders (the millipede's eyeless Polydesmida).
