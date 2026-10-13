@@ -16,3 +16,6 @@ Decisions are in `docs/views/audit/<unit>.jsonl`. Results: `ci` branch `runs/lit
 ## Next
 1. Rerun the second pass on the 935 and the 556 (about $4 more; total spend so far about $7.3 of the $12), with `AUDIT_ADJ_MAX_USD` set to 4; needs an `--ids` option to select only rows whose verdict is "unchecked" for those two reasons.
 2. A later step applies the 748 corrections (642 of them change the grade, 530 of those m to g, 249 of the settled records are lambda_max_nm).
+
+# Burst 6 (started 13 Oct 2026, evening)
+Branch `agent/audit`, `main` merged in. Done: `audit.py` has prompt v2 (grade judged by whether the measured taxon is the record's taxon, with a work card from the index: title, taxa named, start of the abstract), `--prompt`, `--lit`, `--ids`, `--flagged`, `--retry-from`; `ci/lit/audit.sh` has modes first and second. Next: first pass v2 on all 4,166 (`run/lit-audit/v2`), compare with the 1,077 settled, then the second pass on the 935 and 556, then `ALL.jsonl`, `README.md`, `tools/views/apply_audit.py`.

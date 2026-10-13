@@ -12,6 +12,48 @@ if [ "${AUDIT_PLAN_ONLY:-0}" != "1" ] && [ -z "${ANTHROPIC_API_KEY:-}" ]; then
 fi
 export AUDIT_MAX_USD="${AUDIT_MAX_USD:-3}" AUDIT_ADJ_MAX_USD="${AUDIT_ADJ_MAX_USD:-8}" AUDIT_WAIT_MIN="${AUDIT_WAIT_MIN:-150}"
 
+mode="${AUDIT_MODE:-first}"      # first: the first pass (and the second, when AUDIT_ADJUDICATE=1); second: only the second pass
+prompt="${AUDIT_PROMPT:-v2}"
+pubbranch="${AUDIT_PUB_BRANCH:-pub/lit-audit}"
+mkdir -p audit-out
+
+# the literature collection: the whole of it for the second pass, only the index files for a first pass with work cards
+get_lit() {
+  git fetch -q --depth 1 origin pub/lit-t1 || { echo "cannot fetch pub/lit-t1" >&2; exit 2; }
+  if [ "$1" = full ]; then
+    git worktree add -q --detach lit FETCH_HEAD || { echo "cannot check out pub/lit-t1" >&2; exit 2; }
+  else
+    for f in $(git ls-tree -r --name-only FETCH_HEAD | grep '/index.jsonl$'); do
+      mkdir -p "lit/$(dirname "$f")"; git show "FETCH_HEAD:$f" > "lit/$f"
+    done
+  fi
+}
+
+# files from an earlier run on the ci branch
+from_ci() {   # from_ci <path on ci> <local file>
+  git fetch -q --depth 1 origin '+refs/heads/ci:refs/remotes/origin/ci' && git show "origin/ci:$1" > "$2" 2>/dev/null && [ -s "$2" ] \
+    || { echo "cannot read $1 from the ci branch" >&2; echo "cannot read $1 from ci" > out/FAILED.txt; exit 2; }
+}
+
+if [ "$mode" = second ]; then
+  status=0
+  from_ci "${AUDIT_FLAGGED_REF}/flagged.jsonl" audit-out/flagged.jsonl
+  from_ci "${AUDIT_RETRY_REF}/adjudicated.jsonl" retry-from.jsonl
+  echo "second pass only: flagged from ${AUDIT_FLAGGED_REF}, undecided rows from ${AUDIT_RETRY_REF}" | tee out/units.txt
+  get_lit full
+  ids=(); [ -n "${AUDIT_IDS_FILE:-}" ] && ids=(--ids "$AUDIT_IDS_FILE")
+  python3 -I tools/lit/audit.py adjudicate --lit lit --out audit-out --flagged audit-out/flagged.jsonl --retry-from retry-from.jsonl "${ids[@]}" \
+    --model "${AUDIT_ADJ_MODEL:-claude-sonnet-5-5}" 2>&1 | tee out/audit-second.log.txt
+  status="${PIPESTATUS[0]}"
+  cp audit-out/*.md out/ 2>/dev/null || true
+  cp audit-out/adjudicated.jsonl out/ 2>/dev/null || true
+  if [ "$status" -eq 0 ] && [ -f audit-out/adjudicated.jsonl ]; then
+    cp audit-out/adjudicated.jsonl audit-out/SUMMARY-second.md pub/ 2>/dev/null || true
+    bash ci/put_branch.sh "$pubbranch" pub "the second pass of the audit, $label"
+  fi
+  exit "$status"
+fi
+
 # the logs
 units="${AUDIT_UNITS:-all}"
 if [ "$units" = "all" ]; then
@@ -30,14 +72,14 @@ have="${have#,}"
 echo "units audited: $have" | tee out/units.txt
 [ -z "$have" ] && { echo "no logs" >&2; echo "no logs" > out/FAILED.txt; exit 2; }
 
-mkdir -p audit-out
 cmd=run; [ "${AUDIT_PLAN_ONLY:-0}" = "1" ] && cmd=plan
 limit=(); [ "${AUDIT_LIMIT:-0}" != "0" ] && limit=(--limit "$AUDIT_LIMIT")
-python3 -I tools/lit/audit.py "$cmd" --ev ev --out audit-out --units "$have" "${limit[@]}" 2>&1 | tee out/audit-first.log.txt
+lit=(); [ "$prompt" = v2 ] && { get_lit index; lit=(--lit lit); }
+python3 -I tools/lit/audit.py "$cmd" --ev ev --out audit-out --units "$have" --prompt "$prompt" "${lit[@]}" "${limit[@]}" 2>&1 | tee out/audit-first.log.txt
 status="${PIPESTATUS[0]}"
 
 if [ "$status" -eq 0 ] && [ "$cmd" = run ] && [ "${AUDIT_ADJUDICATE:-0}" = "1" ]; then
-  git fetch -q --depth 1 origin pub/lit-t1 && git worktree add -q --detach lit FETCH_HEAD || { echo "cannot fetch pub/lit-t1" >&2; exit 2; }
+  rm -rf lit; git worktree prune; get_lit full
   python3 -I tools/lit/audit.py adjudicate --lit lit --out audit-out --units "$have" --model "${AUDIT_ADJ_MODEL:-claude-sonnet-5-5}" 2>&1 | tee out/audit-second.log.txt
   status="${PIPESTATUS[0]}"
 fi
@@ -47,6 +89,6 @@ cp audit-out/*.jsonl out/ 2>/dev/null || true
 if [ "$cmd" = run ] && [ "$status" -eq 0 ]; then
   cp audit-out/*.jsonl audit-out/*.md pub/ 2>/dev/null || true
   # raw batch results are not published
-  bash ci/put_branch.sh pub/lit-audit pub "the audit of the evidence logs, $label"
+  bash ci/put_branch.sh "$pubbranch" pub "the audit of the evidence logs, $label"
 fi
 exit "$status"

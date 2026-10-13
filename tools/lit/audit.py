@@ -105,6 +105,46 @@ SYSTEM_FIRST = (
     '"problem": "1 / (2 x 0.67) is 0.746 cycles per degree, not 0.64."}\n'
 )
 
+_OLD_GRADE_START = "- grade_ok and better_grade:"
+_OLD_GRADE_END = "- taxon_ok:"
+_NEW_GRADE = (
+    "- grade_ok and better_grade: the grades are 'm' (the measurement was made on the taxon the record names, or on the "
+    "typical members of the group it names), 'g' (the measurement was made on a different taxon: a relative, a wider "
+    "group, or other studies summarised by a review) and 'i' (invented: not a measurement). Judge the grade by whether "
+    "the taxon that was measured is the record's taxon. Do not judge it by whether the quote repeats the species name: "
+    "a quote is a short excerpt and usually leaves the animal out. Use the WORK card (the paper's title, the taxa its "
+    "title and abstract name, the start of its abstract) to see what the paper measured. Answer grade_ok 'yes' when the "
+    "work is a study of the record's taxon (the title or abstract names it, or its genus or a group the record names) and "
+    "the quote, note and source line do not say the figure came from elsewhere. Answer 'no' with better_grade 'g' only "
+    "when the work, the quote or the note shows the measured animal is a different taxon from the record's (for example "
+    "the work studies another species of the genus, a family, or 'spiders' in general, a review reports it, or the note "
+    "says the value was borrowed or assumed), and with 'm' only when the record is graded 'g' but the work shows an "
+    "original measurement on exactly that taxon. If the work card does not settle it, answer 'yes'. Always give "
+    "better_grade (repeat the record's grade when grade_ok is 'yes').\n")
+
+
+def _make_v2(v1):
+    a, b = v1.index(_OLD_GRADE_START), v1.index(_OLD_GRADE_END)
+    v2 = v1[:a] + _NEW_GRADE + v1[b:]
+    v2 = v2.replace("You see the record and its quote and nothing else: you never see the paper.",
+                    "You see the record, its quote and a short card about the work it came from (title, year, taxa named, "
+                    "start of the abstract), and nothing else: you never see the paper itself.")
+    v2 = v2.replace("Source: Clemente C, 2010, The visual system of the Australian wolf spider Lycosa leuckartii.",
+                    "Work card: title: The visual system of the Australian wolf spider Lycosa leuckartii | year: 2010 | "
+                    "taxa named in title and abstract: Lycosa leuckartii")
+    v2 = v2.replace("TWO WORKED EXAMPLES", "THREE WORKED EXAMPLES")
+    v2 = v2.rstrip("\n") + (
+        '\n\nRecord: {"taxon": "Habronattus pyrrithrix", "trait": "lambda_max_nm", "value": 520, "units": "nm", "eye": "AM", '
+        '"grade": "m", "where": "results", "note": ""} Quote: "the principal eye photoreceptors peaked at 520 nm" Work card: '
+        'title: Colour vision in the jumping spider Habronattus pyrrithrix | year: 2009 | taxa named in title and abstract: '
+        'Habronattus pyrrithrix\nCorrect reply: {"supports": "yes", "units_ok": "yes", "grade_ok": "yes", "better_grade": "m", '
+        '"taxon_ok": "yes", "kind": "none", "problem": ""}  (the quote leaves out the species, and the work is a study of it, '
+        'so the grade stands)\n')
+    return v2
+
+
+SYSTEM_FIRST2 = _make_v2(SYSTEM_FIRST)
+
 SYSTEM_ADJ = (
     "You settle audit flags on one record at a time from a database of measurements of how animals sense the world. "
     "A researcher logged one value from a paper with a short quote. A first-pass reviewer saw only the record and the "
@@ -145,6 +185,33 @@ SYSTEM_ADJ = (
 # reading the logs
 
 
+def read_ids(path):
+    """Record ids from a file: one per line, or jsonl rows with an "id" field. Blank lines and # lines are skipped."""
+    out = set()
+    for line in open(path, encoding="utf-8"):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("{"):
+            line = json.loads(line)["id"]
+        out.add(line)
+    return out
+
+
+def retry_ids(adjudicated_path):
+    """Ids the earlier second pass left undecided for a reason that can be repaired: the verdict check bug, the spend cap,
+    or a reply that could not be parsed."""
+    keep = ("adjudicator gave no usable verdict", "left out by the second pass spend cap", "correct with no changes named")
+    out = set()
+    for line in open(adjudicated_path, encoding="utf-8"):
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        if r["verdict"] == "unchecked" and r.get("reason", "").startswith(keep):
+            out.add(r["id"])
+    return out
+
+
 def read_logs(ev_dir, units=None):
     recs = []
     for f in sorted(glob.glob(os.path.join(ev_dir, "*.jsonl"))):
@@ -182,7 +249,63 @@ def split_unseen(recs):
 SHOWN = ("taxon", "rank", "family", "order", "trait", "value", "units", "eye", "method", "conditions", "where", "grade", "note")
 
 
-def user_text(r):
+LATIN = re.compile(r"\b([A-Z][a-z]{3,}) ((?:[a-z]{4,})(?: [a-z]{4,})?)\b")
+FAMILY = re.compile(r"\b[A-Z][a-z]+(?:idae|inae|oidea|iformes|ptera|poda|ales)\b")
+NOT_GENUS = set("this these that there their with from have been were which while when where after before during between "
+                "among under over other some many most both each such using based study studies here also than then into "
+                "only more less very high low long short light dark visual color colour spectral eye eyes".split())
+
+
+def load_index(lit):
+    """{normalised doi: index record} from every <topic>/index.jsonl under a checkout (or a copy) of pub/lit-t1."""
+    out = {}
+    for f in sorted(glob.glob(os.path.join(lit, "*", "index.jsonl"))):
+        for line in open(f, encoding="utf-8"):
+            if not line.strip():
+                continue
+            w = json.loads(line)
+            d = E.norm_doi(w.get("doi"))
+            if d and d not in out:
+                out[d] = w
+    return out
+
+
+def taxa_named(text):
+    found = []
+    for m in LATIN.finditer(text or ""):
+        if m.group(1).lower() in NOT_GENUS:
+            continue
+        t = m.group(1) + " " + m.group(2).split(" ")[0]
+        if t not in found:
+            found.append(t)
+    for m in FAMILY.finditer(text or ""):
+        if m.group(0) not in found:
+            found.append(m.group(0))
+    return found[:8]
+
+
+def work_card(r, index):
+    s = r.get("source") or {}
+    w = index.get(E.norm_doi(s.get("doi"))) if index else None
+    if not w:
+        return "Work: %s, %s, %s (no index record)" % (s.get("authors", "?"), s.get("year", "?"), s.get("title", "?"))
+    ab = (w.get("abstract") or "").strip()
+    named = taxa_named((w.get("title") or "") + ". " + ab)
+    return ("Work card: title: %s | year: %s | venue: %s | taxa named in title and abstract (by pattern, may be noisy): %s | "
+            "abstract starts: %s" % (w.get("title"), w.get("year"), w.get("venue") or "?", ", ".join(named) or "none found",
+                                      (ab[:500] + ("..." if len(ab) > 500 else "")) if ab else "(no abstract in the index)"))
+
+
+def user_text(r, index=None):
+    if index is not None:
+        rec = {k: r.get(k) for k in SHOWN if r.get(k) not in (None, "")}
+        return "Record: %s\nQuote: %s\n%s\nAccess: %s" % (
+            json.dumps(rec, ensure_ascii=False), json.dumps(r["quote"], ensure_ascii=False), work_card(r, index),
+            (r.get("source") or {}).get("access", "?"))
+    return _user_text_v1(r)
+
+
+def _user_text_v1(r):
     rec = {k: r.get(k) for k in SHOWN if r.get(k) not in (None, "")}
     s = r.get("source") or {}
     src = "%s, %s, %s (%s)" % (s.get("authors", "?"), s.get("year", "?"), s.get("title", "?"), s.get("journal", ""))
@@ -193,9 +316,9 @@ def user_text(r):
 # ---------------------------------------------------------------------------------------------------------------
 # cost
 
-def est_first(recs, sys_text):
+def est_first(recs, sys_text, index=None):
     sys_t = int(E.words(sys_text) * E.TOK_PER_WORD)
-    in_t = sum(int(len(user_text(r)) * TOK_PER_CHAR) + 20 for r in recs)
+    in_t = sum(int(len(user_text(r, index)) * TOK_PER_CHAR) + 20 for r in recs)
     n = len(recs)
     cw = E.PRICE["cache_write_1h"] if E.CACHE_TTL == "1h" else E.PRICE["cache_write_5m"]
     out_t = 110
@@ -436,13 +559,22 @@ def run_first(a):
     E.set_model(FIRST_MODEL)
     recs = read_logs(a.ev, set(a.units.split(",")) if a.units else None)
     ok, unseen = split_unseen(recs)
+    system, index = SYSTEM_FIRST, None
+    if a.prompt == "v2":
+        if not a.lit:
+            sys.exit("--lit is required for --prompt v2 (the work cards)")
+        system, index = SYSTEM_FIRST2, load_index(a.lit)
+        print("%d works in the index; prompt v2" % len(index))
+    if a.ids:
+        want = read_ids(a.ids)
+        ok = [r for r in ok if r["_id"] in want]
     if a.limit:
         keep, per = [], collections.Counter()
         for r in ok:
             if per[r["_unit"]] < a.limit:
                 per[r["_unit"]] += 1; keep.append(r)
         ok = keep
-    est = est_first(ok, SYSTEM_FIRST)
+    est = est_first(ok, system, index)
     os.makedirs(a.out, exist_ok=True)
     work = os.path.join(a.out, "_work-first"); os.makedirs(work, exist_ok=True)
     print("%d records in the logs, %d to send, %d unseen; estimate expected $%.3f, ceiling $%.3f (cap $%.2f)" % (
@@ -460,8 +592,8 @@ def run_first(a):
         if est["ceiling_usd"] > a.max_usd:
             sys.exit("the ceiling estimate $%.2f is over AUDIT_MAX_USD $%.2f; nothing was sent" % (est["ceiling_usd"], a.max_usd))
         E.write_jsonl(os.path.join(work, "sent.jsonl"), [{"id": r["_id"]} for r in ok])
-        smoke(FIRST_MODEL, SYSTEM_FIRST, user_text(ok[0]), MAX_TOKENS_FIRST)
-        ids = submit([(r["_id"], user_text(r)) for r in ok], FIRST_MODEL, SYSTEM_FIRST, MAX_TOKENS_FIRST, work, "batches.json")
+        smoke(FIRST_MODEL, system, user_text(ok[0], index), MAX_TOKENS_FIRST)
+        ids = submit([(r["_id"], user_text(r, index)) for r in ok], FIRST_MODEL, system, MAX_TOKENS_FIRST, work, "batches.json")
     else:
         ids = [i for i in a.batch_ids.split(",") if i] or json.load(open(os.path.join(work, "batches.json")))["ids"]
     states = E.wait_for(ids, a.wait_minutes)
@@ -546,7 +678,15 @@ def adj_text(f, passage, how):
 def run_adjudicate(a):
     model = a.model or ADJ_MODEL
     E.set_model(model)
-    flagged = [json.loads(l) for l in open(os.path.join(a.out, "flagged.jsonl"), encoding="utf-8") if l.strip()]
+    flagged = [json.loads(l) for l in open(a.flagged or os.path.join(a.out, "flagged.jsonl"), encoding="utf-8") if l.strip()]
+    want_ids = set()
+    if a.ids:
+        want_ids |= read_ids(a.ids)
+    if a.retry_from:
+        want_ids |= retry_ids(a.retry_from)
+    if a.ids or a.retry_from:
+        flagged = [f for f in flagged if f["id"] in want_ids]
+        print("%d ids asked for; %d of them are flagged in %s" % (len(want_ids), len(flagged), a.flagged or "flagged.jsonl"))
     if a.units:
         want = set(a.units.split(","))
         flagged = [f for f in flagged if f["unit"] in want]
@@ -676,6 +816,23 @@ def self_test():
     it = {"text_path": None, "w": {"abstract": t}}
     p, how = passage_for(it, dict(r, quote="The PL eyes 0.78 deg here."))
     assert "found" in how and "0.78" in p
+    idx = {"10.1/x": {"doi": "10.1/x", "title": "Colour vision in the jumping spider Habronattus pyrrithrix", "year": 2009,
+                      "abstract": "We recorded from salticid eyes of Habronattus pyrrithrix (Salticidae) and found peaks."}}
+    rr = dict(r, source={"doi": "https://doi.org/10.1/X", "authors": "A", "year": 2009, "title": "T", "access": "open"})
+    ut = user_text(rr, idx)
+    assert "Habronattus pyrrithrix" in ut and "Salticidae" in ut and "taxa named" in ut
+    assert "no index record" in user_text(r, idx)
+    assert "THREE WORKED EXAMPLES" in SYSTEM_FIRST2 and "quote repeats the species name" in SYSTEM_FIRST2
+    assert "Do not judge it" in SYSTEM_FIRST2 and "Do not judge it" not in SYSTEM_FIRST
+    import tempfile
+    with tempfile.TemporaryDirectory() as d:
+        fp = os.path.join(d, "a.jsonl")
+        open(fp, "w").write(json.dumps({"id": "u:1", "verdict": "unchecked", "reason": "left out by the second pass spend cap (X)"}) + "\n"
+                            + json.dumps({"id": "u:2", "verdict": "unchecked", "reason": "source not in the literature collection"}) + "\n"
+                            + json.dumps({"id": "u:3", "verdict": "confirm", "reason": ""}) + "\n")
+        assert retry_ids(fp) == {"u:1"}
+        open(os.path.join(d, "i.txt"), "w").write("# c\nu:1\n" + json.dumps({"id": "u:9"}) + "\n")
+        assert read_ids(os.path.join(d, "i.txt")) == {"u:1", "u:9"}
     print("ok")
     return 0
 
@@ -684,12 +841,16 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", choices=["plan", "run", "collect", "adjudicate", "decisions", "test"])
     ap.add_argument("--ev", help="directory of <unit>.jsonl evidence logs")
-    ap.add_argument("--lit", help="checkout of pub/lit-t1 (adjudicate)")
+    ap.add_argument("--lit", help="checkout of pub/lit-t1 (adjudicate; first pass with --prompt v2 needs only the index.jsonl files)")
     ap.add_argument("--out", default="audit-out")
     ap.add_argument("--dest", default="docs/views/audit")
     ap.add_argument("--units", default="")
     ap.add_argument("--limit", type=int, default=0, help="at most N records of each unit (trial runs)")
     ap.add_argument("--model", default="", help="adjudicate: the model")
+    ap.add_argument("--prompt", choices=["v1", "v2"], default="v2", help="first pass: v1 sees the quote and source line only; v2 adds the work card (needs --lit)")
+    ap.add_argument("--ids", default="", help="a file of record ids (one per line or jsonl): only these are sent")
+    ap.add_argument("--flagged", default="", help="adjudicate: the flagged.jsonl to settle (default: <out>/flagged.jsonl)")
+    ap.add_argument("--retry-from", default="", help="adjudicate: an earlier adjudicated.jsonl; send the records it left undecided by the verdict bug, the cap or an unreadable reply")
     ap.add_argument("--plan-only", action="store_true", help="adjudicate: print the plan only")
     ap.add_argument("--wait-minutes", type=int, default=int(os.environ.get("AUDIT_WAIT_MIN", "200")))
     ap.add_argument("--max-usd", type=float, default=None)
@@ -707,6 +868,8 @@ def main():
         sys.exit(run_adjudicate(a))
     if not a.ev:
         sys.exit("--ev is required")
+    if a.cmd == "collect" and a.prompt == "v2" and not a.lit:
+        sys.exit("--lit is required for --prompt v2")
     a.max_usd = a.max_usd if a.max_usd is not None else float(os.environ.get("AUDIT_MAX_USD", "3"))
     sys.exit(run_first(a))
 
