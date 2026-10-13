@@ -36,7 +36,7 @@
     // module 5, motion: the turn of the phone since the last snap, in degrees (the locked world, &draw=lock), and its thrusts forward
     // (the arm as the neck, &draw=arm). Which way each rotation axis moves the picture is the app's reading of the specification and
     // waits for a phone to confirm it.
-    var stabX = 0, stabY = 0, snapAt = 0, lastM = 0, thrustAt = 0;
+    var stabX = 0, stabY = 0, snapAt = 0, lastM = 0, thrustAt = 0, yaw = 0, knockAt = 0;   // yaw: the turn left and right since the sensors began, for the field module when there is no compass
     // tilt and heading (module 5): the phone's roll in the screen's plane and the camera's elevation, from gravity, and the compass
     // heading. iOS reports gravity with the opposite sign to Android, so its readings are turned round. &roll=, &elev= and &heading=
     // set them by hand for checking. Which way each one turns the picture waits for a phone to confirm it.
@@ -49,7 +49,7 @@
     function onMotion(e) {
       var r = e.rotationRate || {}, a = e.acceleration, g = e.accelerationIncludingGravity, now = performance.now(), am;
       var dts = lastM ? Math.min((now - lastM) / 1000, .1) : 0; lastM = now;
-      stabX += (r.gamma || 0) * dts; stabY += (r.beta || 0) * dts;   // held upright: gamma turns the phone left and right, beta tips it up and down
+      stabX += (r.gamma || 0) * dts; stabY += (r.beta || 0) * dts; yaw = (yaw - (r.gamma || 0) * dts + 720) % 360;   // held upright: gamma turns the phone left and right, beta tips it up and down
       if (a && a.z !== null && a.z !== undefined && want && want.motion && eyeP && eyeP.arm && Math.abs(a.z) > ((eyeP.motion && eyeP.motion.thrust) || 3) && now - thrustAt > 250) {
         thrustAt = now; if (engine && engine.kick) engine.kick(); if (navigator.vibrate) try { navigator.vibrate(12); } catch (x) { /* refused */ }
       }
@@ -65,7 +65,7 @@
       else return;
       accDev = lerp(accDev, am, .1);
       if (want && want.jolt && am > 2.2 && now - lastJolt > 140) {   // a knock on the phone, or on the table it lies on, starts a ripple from that side
-        lastJolt = now; var dx = a ? -(a.x || 0) : 0, dy = a ? (a.y || 0) : 0, d = Math.sqrt(dx * dx + dy * dy) || 1;
+        lastJolt = now; knockAt = now; var dx = a ? -(a.x || 0) : 0, dy = a ? (a.y || 0) : 0, d = Math.sqrt(dx * dx + dy * dy) || 1;
         rips.push({ x: .32 * dx / d, y: .32 * dy / d, t: now, a: clamp(am / 6, .3, 1) });
       }
     }
@@ -82,10 +82,41 @@
         var src = ctx.createMediaStreamSource(st), bp = ctx.createBiquadFilter(), an = ctx.createAnalyser(), c = Math.sqrt(lo * hi);
         bp.type = 'bandpass'; bp.frequency.value = c; bp.Q.value = c / (hi - lo); an.fftSize = 1024;
         src.connect(bp); bp.connect(an); if (ctx.resume) ctx.resume();
-        mic = { st: st, ctx: ctx, an: an, buf: new Float32Array(an.fftSize), mean: 0, last: 0 };
+        var full = ctx.createAnalyser(); full.fftSize = 2048; full.smoothingTimeConstant = .3; src.connect(full);   // module 10, sound: the whole band, for three bands, onsets and breath
+        mic = { st: st, ctx: ctx, an: an, buf: new Float32Array(an.fftSize), mean: 0, last: 0, full: full, spec: new Float32Array(full.frequencyBinCount), hz: ctx.sampleRate / full.fftSize, bands: [0, 0, 0], bMean: [0, 0, 0], flat: 0, breath: 0, onsetAt: 0, onsetBand: 0, clickAt: 0 };
         if (!want || !want.mic) stopMic();
         paint();
       }, function () { paint(); });
+    }
+    // module 10, sound (docs/ENGINE-DESIGN.md): energy in three bands (about 50 to 300 a second, the middle, and above 5,000), an onset
+    // when a band jumps above its own running mean, and breath (low, broad, sustained noise, judged by a flat spectrum below 1,500 a
+    // second held for half a second). Every threshold is the app's. With want.click the speaker clicks at that rate (clap and see).
+    function hearBands(now) {
+      var F = mic.spec, hz = mic.hz, e = [0, 0, 0], n = [0, 0, 0], lo = 0, lg = 0, ln = 0;
+      mic.full.getFloatFrequencyData(F);
+      for (var i = 1; i < F.length; i++) {
+        var f = i * hz, db = F[i] > -140 ? F[i] : -140, pw = Math.pow(10, db / 10), b = f < 300 ? (f >= 50 ? 0 : -1) : f < 5000 ? 1 : 2;
+        if (b >= 0) { e[b] += pw; n[b]++; }
+        if (f > 100 && f < 1500) { lo += pw; lg += Math.log(pw + 1e-20); ln++; }
+      }
+      for (var k = 0; k < 3; k++) {
+        var v = clamp((10 * Math.log10(e[k] / Math.max(n[k], 1) + 1e-20) + 100) / 50, 0, 1);   // -100 dB a bin is nothing, -50 is loud
+        mic.bands[k] = lerp(mic.bands[k], v, .35); mic.bMean[k] = lerp(mic.bMean[k], v, .015);
+        if (v > mic.bMean[k] + .18 && now - mic.onsetAt > 160) { mic.onsetAt = now; mic.onsetBand = k; }
+      }
+      var flat = ln ? Math.exp(lg / ln) / (lo / ln + 1e-20) : 0;   // the spectral flatness below 1,500 a second: near 1 for breath and wind
+      mic.flat = lerp(mic.flat, flat > .25 && mic.bands[0] + mic.bands[1] > .5 ? 1 : 0, .06); mic.breath = clamp((mic.flat - .3) / .5, 0, 1);
+      if (want.click && mic.ctx.createOscillator && now - mic.clickAt > 1000 / want.click) {
+        mic.clickAt = now;
+        try { var o = mic.ctx.createOscillator(), g = mic.ctx.createGain(), t0 = mic.ctx.currentTime; o.frequency.value = 3200; g.gain.setValueAtTime(.25, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + .012); o.connect(g); g.connect(mic.ctx.destination); o.start(t0); o.stop(t0 + .015); } catch (x) { /* no speaker */ }
+      }
+    }
+    // &fakesound=1 with ?try=: a made-up sound for checking the sound views without a microphone (an onset every 1.6 s, breath
+    // rising and falling over 6 s, and a low hum that swells), so a desk and the test harness can see each drawing move
+    var FAKE_SOUND = !!(TRY_KEYS.length && /[?&]fakesound=1/.test(location.search || '')), fakeT0 = performance.now();
+    function fakeSound() {
+      var t = (performance.now() - fakeT0) / 1000, k = Math.floor(t / 1.6);
+      return { on: 1, band: [.5 + .4 * Math.sin(t * .9), .4, .3 + .5 * (t % 1.6 < .3 ? 1 : 0)], breath: Math.max(0, Math.sin(t * 2 * Math.PI / 6)), onsetAt: k > 0 ? fakeT0 + k * 1600 : 0, onsetBand: k % 3 === 0 ? 0 : 2 };
     }
     function stopMic() {
       if (!mic) return;
@@ -107,7 +138,7 @@
           } else if (k === 'mic') startMic();
         });
       }
-      line.dataset.k = need; line.textContent = SAY[need]; line.hidden = false;
+      line.dataset.k = need; line.textContent = need === 'mic' && want.say ? want.say : SAY[need]; line.hidden = false;
     }
     window.addEventListener('pagehide', stopMic);
     return {
@@ -115,6 +146,9 @@
       paint: paint,
       still: function () { return !motionOn || performance.now() - gotMotion > 1500 || (rotS < 4 && accDev < .08); },   // without the sensors, the picture alone decides
       turning: function () { return motionOn ? rotS : 0; },
+      yaw: function () { return motionOn ? yaw : null; },   // degrees turned since the sensors began, the sign untested on a phone
+      knock: function () { return knockAt; },
+      sound: function () { if (FAKE_SOUND) return fakeSound(); return mic && mic.full ? { on: 1, band: mic.bands, breath: mic.breath, onsetAt: mic.onsetAt, onsetBand: mic.onsetBand } : { on: 0, band: [0, 0, 0], breath: 0, onsetAt: 0, onsetBand: 0 }; },
       pose: function () { return { roll: 'roll' in POSE_SET ? POSE_SET.roll : roll, elev: 'elev' in POSE_SET ? POSE_SET.elev : elev, heading: 'heading' in POSE_SET ? POSE_SET.heading : heading }; },
       stab: function (cfg, now) {                     // degrees to shift the picture by, so the world holds still until the next snap
         var hold = (cfg && cfg.holdMs) || 700, most = (cfg && cfg.maxDeg) || 8;
@@ -128,7 +162,8 @@
           var s = 0, b = mic.buf; for (var i = 0; i < b.length; i++) s += b[i] * b[i];
           var lv = clamp((20 * Math.log10(Math.sqrt(s / b.length) + 1e-6) + 62) / 40, 0, 1);   // -62 dB of full scale is nothing, -22 is the loudest
           mic.mean = lerp(mic.mean, lv, .02);
-          if (lv > mic.mean + .16 && now - mic.last > 170) { mic.last = now; rips.push({ x: (Math.random() - .5) * .3, y: (Math.random() - .5) * .3, t: now, a: clamp(lv, .3, 1) }); }
+          if (want.sound) hearBands(now);
+          if (lv > mic.mean + .16 && now - mic.last > 170 && !want.sound) { mic.last = now; rips.push({ x: (Math.random() - .5) * .3, y: (Math.random() - .5) * .3, t: now, a: clamp(lv, .3, 1) }); }
         }
         while (rips.length && (now - rips[0].t > 2600 || rips.length > 4)) rips.shift();
         if (!rips.length) return;

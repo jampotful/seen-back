@@ -7,7 +7,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '30';
+  var BUILD = '31';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -62,14 +62,15 @@
     var age = ((d.getTime() - Date.UTC(2000, 0, 6, 18, 14)) / 864e5) % 29.530589; if (age < 0) age += 29.530589;
     var moon = isNaN(CLOCK_SET.moon) ? (1 - Math.cos(2 * Math.PI * age / 29.530589)) / 2 : clamp(CLOCK_SET.moon, 0, 1);
     var t = clamp((6 - alt) / 18, 0, 1);
-    return { hour: hour, sun: alt, dark: t * t * (3 - 2 * t), moon: moon, moonAge: age };
+    var az = (Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(la) - Math.tan(de) * Math.cos(la)) * 180 / Math.PI + 180) % 360;   // the sun's azimuth from north, for the polarization overlay
+    return { hour: hour, sun: alt, az: az, dark: t * t * (3 - 2 * t), moon: moon, moonAge: age };
   }
   function viewOf(spec) {
     var mats = spec.matrices || {}, v = { chip: spec.chip, who: spec.who, cue: spec.cue }, k, g;
     for (k in spec.params) v[k] = specValue(spec.params[k], spec, mats, k);
     if (spec.zones) v.zones = specValue(spec.zones, spec, mats, 'zones');
     if (spec.gaze) v.gaze = specValue(spec.gaze, spec, mats, 'gaze');
-    ['spectrum', 'clock', 'pace', 'motion', 'slow', 'tilt', 'magnet'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
+    ['spectrum', 'clock', 'pace', 'motion', 'slow', 'tilt', 'magnet', 'remap', 'overlay', 'sound', 'haptic'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
     if (spec.draw) v.draw = spec.draw;
     if (spec.inputs && spec.inputs.senses) v.senses = specValue(spec.inputs.senses, spec, mats, 'senses');
     if (spec.by && spec.by.genus) { v.byGenus = {}; for (g in spec.by.genus) v.byGenus[g] = specValue(spec.by.genus[g], spec, mats, g); }
@@ -166,7 +167,22 @@
     P.slow = m.slow || null; P.slowMode = P.slow && P.draw.slow && P.draw.slow !== 'off' ? P.draw.slow : '';
     P.tilt = m.tilt || null; P.snell = P.tilt && P.draw.tilt === 'snell' ? 1 : 0;
     P.magnet = m.magnet || null; P.magMode = P.magnet && (P.draw.magnet === 'grain' || P.draw.magnet === 'tide') ? P.draw.magnet : '';
-    P.gz = m.gaze || null; P.senses = m.senses || null; P.water = m.water || null; P.waterC = m.waterC || null;
+    // modules 8 to 11 (docs/ENGINE.md): field, overlay, sound and haptic, each drawn only through its category's option
+    P.remap = m.remap || null; P.fieldMode = P.remap && /^(wedge|fold|window|ribbon)$/.test(P.draw.field || '') ? P.draw.field : '';
+    P.ovl = m.overlay || null; P.ovlMode = P.ovl && /^(polar|web|rings|shadow)$/.test(P.draw.overlay || '') ? P.draw.overlay : '';
+    P.snd = m.sound || null; P.sndMode = P.snd && /^(hear|clap|air|rumble|rings)$/.test(P.draw.sound || '') ? P.draw.sound : '';
+    P.hap = m.haptic || null; P.hapMode = P.hap && /^(buzz|edge)$/.test(P.draw.haptic || '') ? P.draw.haptic : '';
+    if (P.fieldMode === 'window') { P.tilt = P.tilt || { fromDeg: 0, fullDeg: 1 }; P.snellFixed = 1; }
+    P.senses = m.senses || null;
+    var hearIt = P.sndMode || P.ovlMode === 'rings' || (P.hapMode && P.hap.on === 'onset');
+    if (hearIt || P.fieldMode === 'wedge' || P.fieldMode === 'ribbon' || P.ovlMode === 'polar' || P.ovlMode === 'web' || (P.hapMode && P.hap.on === 'knock')) {
+      var sn = {}, sk; for (sk in P.senses || {}) sn[sk] = P.senses[sk];
+      if (hearIt) { sn.mic = sn.mic || [40, 12000]; sn.sound = 1; if (P.snd && P.snd.say) sn.say = P.snd.say; if (P.sndMode === 'clap' && P.snd && P.snd.clickHz) sn.click = P.snd.clickHz; }
+      if (P.fieldMode === 'wedge' || P.fieldMode === 'ribbon' || P.ovlMode === 'polar') sn.motion = 1;
+      if ((P.hapMode && P.hap.on === 'knock') || P.ovlMode === 'web') { sn.motion = 1; sn.jolt = 1; }
+      P.senses = sn;
+    }
+    P.gz = m.gaze || null; P.water = m.water || null; P.waterC = m.waterC || null;
     return P;
   }
   // Module 2, spectrum: the ultraviolet column (P.U) comes with a 3 by 4 matrix; the animal's classes (P.Q, 4 by 4) serve the colour
@@ -205,8 +221,8 @@
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
     var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
-    var w = b.spec || b.clock || b.pace || b.motion || b.slow || b.tilt || b.magnet ? b : a;   // the new modules keep to the view that has them
-    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay; o.slow = w.slow; o.slowMode = w.slowMode; o.tilt = w.tilt; o.snell = w.snell; o.magnet = w.magnet; o.magMode = w.magMode;
+    var w = b.spec || b.clock || b.pace || b.motion || b.slow || b.tilt || b.magnet || b.remap || b.ovl || b.snd || b.hap ? b : a;   // the new modules keep to the view that has them
+    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay; o.slow = w.slow; o.slowMode = w.slowMode; o.tilt = w.tilt; o.snell = w.snell; o.magnet = w.magnet; o.magMode = w.magMode; o.remap = w.remap; o.fieldMode = w.fieldMode; o.snellFixed = w.snellFixed; o.ovl = w.ovl; o.ovlMode = w.ovlMode; o.snd = w.snd; o.sndMode = w.sndMode; o.hap = w.hap; o.hapMode = w.hapMode;
     o.glowC = z.glowC; o.gz = z.gz; o.draw = z.draw; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
     o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
     o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;

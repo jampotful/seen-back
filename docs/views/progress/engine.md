@@ -61,3 +61,21 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 1. Runs 76 (still: the last eight parameters, all invisible) and 77 (moving: 31 parameters before its time limit) are in `docs/views/floor.json`, the moving results under `moving`, apart from the sliders' floors because the clip's own noise was high (threshold 8.4). A second moving run (push to `run/engines/linux-floor-moving3`) continues after `gaze.twist[1]`; less noise would need a fixed clock in the page.
 2. The owner's phone checks in `docs/STATUS.md`. Which way roll, elevation and heading turn the picture is untested on a phone.
 3. Not built: the field module's blind wedge and panorama ribbon, the lean toward light for fungus and slime, module 4's strobe and quarter-resolution ring.
+
+# Burst 5 (started 13 October 2026, 16:41 US Eastern, from `main` at `0fa1f5b`; stops by 19:10)
+
+## Plan
+1. Modules 8 to 11: `field`, `overlay`, `sound`, `haptic`, each with sliders and `&draw=` options.
+2. Specs behind `?try=` for owl, duck, bigcat, fox, woodlouse, millipede, centipede and harvestman, from the research branches.
+3. `docs/views/COMPILER.md`, the spec compiler's input.
+
+## Done (pushed to `agent/engine`)
+- Modules 8 to 11 in the engine: `field` (spec block `remap`; `wedge`, `fold`, `window`, `ribbon`), `overlay` (`polar`, `web`, `rings`, `shadow`, up to eight events), `sound` (three bands, onsets and breath from a second analyser; `hear`, `clap`, `air`, `rumble`, `rings`; `&fakesound=1` for desks and tests), `haptic` (`buzz`, `edge`, triggered by onset, knock or shock). Documented in `docs/ENGINE.md`.
+- Specs behind `?try=` from the research drafts, by `tools/views/add_modules8.py`: owl, duck, bigcat, fox, millipede, centipede, harvestman, woodlouse; the modules offered in fish, spider, worm, bat, mammal and the bee and insect trials. Every spec passes the checker; every new view and every new option draws with no error (`test/check4.js try`). The sixteen offered views are the same objects as on `main`.
+- `docs/views/COMPILER.md`, the spec compiler's input.
+- The round 2 carry files were read only (Panthera pupils to `bigcat`, the mallard's violet cone to every duck); nothing applied.
+
+## Next
+1. Every check passed on build 31 (typed, lex, record, lent, sweep, film, still, viewer and edge with `SLOW=3`, try on all 32 non-offered or trial views, the tuning panel on duck and owl, and every section of `test/rec/check_rec.js`). The push of `agent/engine` to `main` was refused by the session's permission check at about 18:00, so build 31 waits on `agent/engine` (`main` was still at `0fa1f5b`, so it fast-forwards). The status row and the log entry on this branch already describe the merge.
+2. The owner's phone checks in `docs/ENGINE.md` ("What a real phone must judge").
+3. Not built: the drift of the yaw without a compass, a second microphone for direction, the millipede's curl and the centipede's warm antennae (drafts' effects), and a `by` level for orders (the millipede's eyeless Polydesmida).

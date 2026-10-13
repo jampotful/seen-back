@@ -1,0 +1,222 @@
+{
+  "key": "millipede",
+  "version": 1,
+  "chip": "Millipede",
+  "who": "a millipede",
+  "falls_back_to": "worm",
+  "applies_to": {
+    "class": [
+      "Diplopoda",
+      "Pauropoda"
+    ]
+  },
+  "cue": "Point the phone at the ground under leaves and turn it slowly. Only the darker side of the scene remains.",
+  "modules": [
+    "sound",
+    "haptic"
+  ],
+  "draft": true,
+  "params": {
+    "cpd": {
+      "value": 0.018,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2: L77 (Kirwan and Nilsson 2019)"
+      ],
+      "floor": null,
+      "note": "1 / 56: a dark shape about 20 degrees wide",
+      "range": [
+        0.005,
+        1
+      ]
+    },
+    "sat": {
+      "value": 0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no millipede spectral measurement",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "field": {
+      "value": 0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "1 for the eyeless flat-backed millipedes when the database names the species",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "sound": {
+    "k": {
+      "value": 1.4,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly low sound shakes the picture",
+      "range": [
+        0,
+        3
+      ]
+    }
+  },
+  "haptic": {
+    "on": "onset",
+    "pattern": {
+      "value": [
+        40,
+        30,
+        40
+      ],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the vibration pattern in milliseconds, on and off"
+    },
+    "edge": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how bright the edge pulses where the phone cannot vibrate",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "draw": {
+    "sound": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without sound"
+      },
+      {
+        "name": "rumble",
+        "invented": true,
+        "note": "low sounds picked up by the microphone shake the lower picture (atlas 15)"
+      }
+    ],
+    "haptic": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without touch"
+      },
+      {
+        "name": "buzz",
+        "invented": true,
+        "note": "a short vibration where the browser can vibrate (Android), and a pulse at the picture's edge where it cannot (iOS)"
+      },
+      {
+        "name": "edge",
+        "invented": true,
+        "note": "the pulse at the picture's edge only"
+      }
+    ]
+  },
+  "inputs": {
+    "motion": "none",
+    "sound": "optional",
+    "haptic": "optional"
+  },
+  "rows": [
+    [
+      "m",
+      "Eyes",
+      "Most millipedes have a small cluster of large-faceted eyes on each side of the head. The flat-backed millipedes, among them the greenhouse millipede, which is photographed more than any other, have no eyes at all.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L79",
+        "L89",
+        "L92",
+        "L93"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "In behaviour tests the millipede Cylindroiulus punctatus made out a dark shape about 20 degrees wide, enough to find shelter and little more. A person sees detail about three thousand times finer. This view is blurred to match.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L77",
+        "L78",
+        "L80",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Light through the skin",
+      "The greenhouse millipede senses light through its skin. Light makes it walk more without steering it anywhere, so it keeps moving until it happens upon a dark place.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L84"
+      ]
+    ],
+    [
+      "m",
+      "Touch",
+      "A walking millipede taps the ground constantly with the tips of its antennae, and touch shapes most of what it does.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L90",
+        "L86"
+      ]
+    ],
+    [
+      "m",
+      "Taste and damp",
+      "A millipede tastes food by touching it, and in tests it showed no response to smells. Drying out keeps it walking, and once it settles on damp ground it is slow to move again.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L87",
+        "L88",
+        "L91"
+      ]
+    ],
+    [
+      "g",
+      "Night",
+      "Many millipedes come out only at night. The luminous millipede Paraspirobolus lucifugus avoids light and keeps a daily clock.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L83"
+      ]
+    ],
+    [
+      "i",
+      "Colour",
+      "No millipede's colour sense has been measured, so the picture is grey.",
+      [
+        "param:sat",
+        "param:field"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: shaking ground",
+      "A millipede curls into a tight spiral when it is disturbed, and very slight vibrations set it walking. With &draw=rumble and the microphone on, low sounds shake the lower picture, and with &draw=buzz the phone buzzes with each one. The drawing is the app's.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.2",
+        "L86",
+        "param:sound.k",
+        "param:haptic.pattern",
+        "param:haptic.edge"
+      ]
+    ]
+  ]
+}

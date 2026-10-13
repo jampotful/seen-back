@@ -6,14 +6,48 @@
   "who": "a spider",
   "cue": "Hold still, as a spider holds its web. Only what moves reaches you.",
   "params": {
-    "fov": {"value":300,"grade":"?","invented":null,"src":[]},
-    "cpd": {"value":0.5,"grade":"?","invented":null,"src":[]},
+    "fov": {
+      "value": 300,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "cpd": {
+      "value": 0.5,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
     "pupil": "o",
-    "gate": {"value":1,"grade":"?","invented":null,"src":[]},
-    "persist": {"value":0.15,"grade":"?","invented":null,"src":[]},
-    "ripple": {"value":1,"grade":"?","invented":null,"src":[]}
+    "gate": {
+      "value": 1,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "persist": {
+      "value": 0.15,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "ripple": {
+      "value": 1,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    }
   },
-  "inputs": {"senses":{"motion":1,"jolt":1,"mic":[60,400]}},
+  "inputs": {
+    "senses": {
+      "motion": 1,
+      "jolt": 1,
+      "mic": [
+        60,
+        400
+      ]
+    }
+  },
   "matrices": {},
   "rows": [
     [
@@ -50,6 +84,114 @@
       "x",
       "Wolf spiders",
       "Wolf spiders have four large rear eyes backed by a mirror layer, which shines back in a flashlight beam and helps them spot movement in dim light. This picture leaves that out."
+    ],
+    [
+      "i",
+      "Being tried: web and air",
+      "With &draw=web the picture carries a drawn web that shakes and flashes with knocks and sounds. With &draw=air, breath on the microphone ruffles the picture. With &draw=buzz the phone buzzes at a knock. Each drawing is the app's.",
+      [
+        "docs/views/sheets/spider.md#4",
+        "param:overlay.web",
+        "param:sound.k",
+        "param:haptic.pattern",
+        "param:haptic.edge"
+      ]
     ]
-  ]
+  ],
+  "overlay": {
+    "web": {
+      "value": 0.8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly the web is drawn",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "sound": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly moving air ruffles the picture",
+      "range": [
+        0,
+        3
+      ]
+    }
+  },
+  "haptic": {
+    "on": "knock",
+    "pattern": {
+      "value": [
+        25
+      ],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the vibration pattern in milliseconds, on and off"
+    },
+    "edge": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how bright the edge pulses where the phone cannot vibrate",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "draw": {
+    "overlay": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without the web"
+      },
+      {
+        "name": "web",
+        "invented": true,
+        "note": "spokes and a spiral drawn over the picture; knocks and sounds shake them and make them flash (atlas 15)"
+      }
+    ],
+    "sound": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without airflow"
+      },
+      {
+        "name": "air",
+        "invented": true,
+        "note": "breath and moving air picked up by the microphone ruffle the picture, as air moves a spider's hairs (atlas 16)"
+      }
+    ],
+    "haptic": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without touch"
+      },
+      {
+        "name": "buzz",
+        "invented": true,
+        "note": "a short vibration where the browser can vibrate (Android), and a pulse at the picture's edge where it cannot (iOS)"
+      },
+      {
+        "name": "edge",
+        "invented": true,
+        "note": "the pulse at the picture's edge only"
+      }
+    ]
+  }
 }

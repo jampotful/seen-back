@@ -1,0 +1,326 @@
+{
+  "key": "duck",
+  "version": 1,
+  "chip": "Duck",
+  "who": "a duck",
+  "falls_back_to": "bird",
+  "applies_to": {
+    "order": [
+      "Anseriformes"
+    ]
+  },
+  "cue": "Hold the phone level. The sky above is pressed into the top of the picture, as a duck keeps it in view with its head down.",
+  "modules": [
+    "field"
+  ],
+  "draft": true,
+  "params": {
+    "fov": {
+      "value": 360,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Martin 2017; Cantlay et al. 2023"
+      ],
+      "floor": null,
+      "note": "all the way around",
+      "range": [
+        180,
+        360
+      ]
+    },
+    "cpd": {
+      "value": 11,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Caves et al. 2018"
+      ],
+      "floor": null,
+      "note": "the median bird, standing in for an unmeasured duck",
+      "range": [
+        2,
+        40
+      ]
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "unchanged"
+    },
+    "M": {
+      "value": "DUCK",
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Hart 2001 (Anas platyrhynchos 415, 452, 506, 567)"
+      ],
+      "floor": null,
+      "note": "four cone classes"
+    },
+    "sat": {
+      "value": 1.1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "a slight lift for the fourth cone",
+      "range": [
+        0,
+        1.5
+      ]
+    },
+    "sheen": {
+      "value": 0,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Hart 2001 (eye media 370 to 380)"
+      ],
+      "floor": null,
+      "note": "the eye blocks most ultraviolet",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "rate": {
+      "value": 0.75,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Boström et al. 2016"
+      ],
+      "floor": null,
+      "note": "from pigeon and chicken",
+      "range": [
+        0.25,
+        2
+      ]
+    }
+  },
+  "matrices": {
+    "DUCK": {
+      "from_pigments": [
+        415,
+        452,
+        506,
+        567
+      ],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Hart 2001"
+      ]
+    }
+  },
+  "remap": {
+    "fold": {
+      "value": 0.8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how much of what lies above the horizon is pressed into the top",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "horizon": {
+      "value": 0.05,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "where the fold begins, in screen heights from the middle",
+      "range": [
+        -0.3,
+        0.3
+      ]
+    },
+    "blindAt": {
+      "value": 180,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.4: Guillemain et al. 2002"
+      ],
+      "floor": null,
+      "note": "the blind area's direction, behind the head",
+      "range": [
+        0,
+        360
+      ]
+    },
+    "blindDeg": {
+      "value": 20,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the blind area's width; narrow in geese, none in dabbling ducks",
+      "range": [
+        0,
+        120
+      ]
+    },
+    "blindSoft": {
+      "value": 6,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the blind area's soft edge",
+      "range": [
+        0,
+        30
+      ]
+    },
+    "band": {
+      "value": 0.22,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the ribbon's height in screen heights",
+      "range": [
+        0.1,
+        0.5
+      ]
+    },
+    "fadeS": {
+      "value": 60,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "seconds a direction stays in the ribbon",
+      "range": [
+        5,
+        600
+      ]
+    }
+  },
+  "draw": {
+    "field": [
+      {
+        "name": "fold",
+        "invented": true,
+        "note": "the sky above the horizon pressed into the top of the picture (the draft's new effect)"
+      },
+      {
+        "name": "ribbon",
+        "invented": true,
+        "note": "a band along the bottom keeps every direction the phone has faced, fading with age, so the whole circle a duck sees fills in as you turn"
+      },
+      {
+        "name": "wedge",
+        "invented": true,
+        "note": "a goose's narrow blind area behind the head, fixed in the room as you turn the phone"
+      },
+      {
+        "name": "squeeze",
+        "invented": true,
+        "note": "the view without the field options"
+      }
+    ]
+  },
+  "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "rows": [
+    [
+      "m",
+      "All the way around",
+      "A mallard sees all the way around itself and over its head. Its two eyes overlap in a narrow strip, about 22 degrees wide, that runs from the bill up over the crown to the back of the head.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Cantlay et al. 2023",
+        "Martin 2017",
+        "param:fov"
+      ]
+    ],
+    [
+      "m",
+      "Below the bill",
+      "A dabbling duck cannot see below the level of its bill. Ducks that feed by filtering water find their food by touch instead, with sensitive tips on their bills.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Martin 2017",
+        "Cantlay et al. 2023"
+      ]
+    ],
+    [
+      "m",
+      "Geese differ",
+      "Grazing geese and swans can see their bill tip and keep a blind area behind the head, where dabbling ducks see all around. With &draw=wedge and the motion sensors on, the blind area stays behind where you started as you turn.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Cantlay et al. 2023",
+        "Guillemain et al. 2002",
+        "param:remap.blindAt"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Ducks have four kinds of colour-sensing cells, one more than people, and the fourth responds to violet light. A mallard's eye blocks most ultraviolet light before it reaches those cells, so this view adds no ultraviolet tint.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Hart 2001",
+        "param:M",
+        "param:sheen"
+      ]
+    ],
+    [
+      "i",
+      "Sharpness",
+      "This part of the view is a guess. It assumes that a duck sees about a fifth as much detail as a person, the middle value for birds.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Caves et al. 2018",
+        "param:cpd"
+      ]
+    ],
+    [
+      "i",
+      "Speed",
+      "This part of the view is a guess. It assumes that a duck sees flicker about as fast as a pigeon or a chicken and runs the picture slightly slow.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Boström et al. 2016",
+        "param:rate"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: the sky overhead",
+      "The fold that presses the sky into the top of the picture, the ribbon of every direction faced, the blind area's width and the colour lift are the app's drawings.",
+      [
+        "param:remap.fold",
+        "param:remap.horizon",
+        "param:remap.blindDeg",
+        "param:remap.blindSoft",
+        "param:remap.band",
+        "param:remap.fadeS",
+        "param:sat",
+        "param:pupil"
+      ]
+    ],
+    [
+      "x",
+      "Touch",
+      "Many ducks find food by feel, with the many touch-sensing cells at the tip of the bill. This view cannot show touch.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.4",
+        "Cantlay et al. 2023"
+      ]
+    ]
+  ]
+}

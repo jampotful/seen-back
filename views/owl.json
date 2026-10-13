@@ -1,0 +1,402 @@
+{
+  "key": "owl",
+  "version": 1,
+  "chip": "Owl",
+  "who": "an owl",
+  "falls_back_to": "bird",
+  "applies_to": {
+    "order": [
+      "Strigiformes"
+    ]
+  },
+  "cue": "Wait in a dim room and make a small sound. Faint, high sounds light the picture for a moment.",
+  "modules": [
+    "sound",
+    "haptic"
+  ],
+  "draft": true,
+  "params": {
+    "fov": {
+      "value": 200,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Potier et al. 2023 (tawny owl)"
+      ],
+      "floor": null,
+      "note": "the whole view across",
+      "range": [
+        100,
+        360
+      ]
+    },
+    "cpd": {
+      "value": 10,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Harmening et al. 2009; Caves et al. 2023"
+      ],
+      "floor": null,
+      "note": "between the barn owl's 2.6 to 4 and the seven-owl mean of 21.9",
+      "range": [
+        1,
+        40
+      ]
+    },
+    "topoA": {
+      "value": 1,
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Hazan et al. 2015"
+      ],
+      "floor": null,
+      "note": "one forward area of sharpest sight",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "fall": {
+      "value": 1.0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how fast sharpness falls away from the centre",
+      "range": [
+        0,
+        3
+      ]
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source read on owl pupils"
+    },
+    "dof": {
+      "value": 12,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source read on depth of field",
+      "range": [
+        0,
+        40
+      ]
+    },
+    "M": {
+      "value": "OWL",
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Hart 2001 (Strix aluco 463, 555)"
+      ],
+      "floor": null,
+      "note": "the two cone classes"
+    },
+    "sat": {
+      "value": 0.5,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Hart 2001"
+      ],
+      "floor": null,
+      "note": "colour muted, since few cones carry coloured oil",
+      "range": [
+        0,
+        1.5
+      ]
+    },
+    "gain": {
+      "value": 1.8,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Martin 1986; Orlowski et al. 2012"
+      ],
+      "floor": null,
+      "note": "shadows brightened for an eye near the limit of dim-light vision",
+      "range": [
+        1,
+        3
+      ]
+    },
+    "sheen": {
+      "value": 0,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Wu et al. 2016"
+      ],
+      "floor": null,
+      "note": "no violet or ultraviolet cone",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "rate": {
+      "value": 1,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Potier et al. 2020"
+      ],
+      "floor": null,
+      "note": "no slowing of time",
+      "range": [
+        0.25,
+        2
+      ]
+    },
+    "persist": {
+      "value": 0.1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "short trails behind moving things",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "matrices": {
+    "OWL": {
+      "from_pigments": [
+        463,
+        555
+      ],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "research/birds:docs/views/drafts/birds.md#2.2: Hart 2001"
+      ]
+    }
+  },
+  "sound": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how strongly sound moves the picture",
+      "range": [
+        0,
+        2
+      ]
+    },
+    "dark": {
+      "value": 0.12,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how dark the picture rests between sounds",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "flashS": {
+      "value": 0.8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "seconds a sound's light takes to fade",
+      "range": [
+        0.1,
+        3
+      ]
+    },
+    "steady": {
+      "value": 0.4,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how much steady high sound lifts the dark",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "say": "This view can show faint, high sounds as light, the way an owl finds prey by ear. Tap to let it listen through the microphone. Nothing is recorded or kept."
+  },
+  "haptic": {
+    "on": "onset",
+    "pattern": {
+      "value": [
+        18
+      ],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "the vibration pattern in milliseconds, on and off"
+    },
+    "edge": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "how bright the edge pulses where the phone cannot vibrate",
+      "range": [
+        0,
+        1
+      ]
+    }
+  },
+  "draw": {
+    "sound": [
+      {
+        "name": "hear",
+        "invented": true,
+        "note": "the picture rests dark, and each sound lights it from the centre outward, high sounds most (atlas 17)"
+      },
+      {
+        "name": "rings",
+        "invented": true,
+        "note": "each sound sends a circle out across a picture that stays lit (atlas 17)"
+      },
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without sound"
+      }
+    ],
+    "haptic": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without touch"
+      },
+      {
+        "name": "buzz",
+        "invented": true,
+        "note": "a short vibration where the browser can vibrate (Android), and a pulse at the picture's edge where it cannot (iOS)"
+      },
+      {
+        "name": "edge",
+        "invented": true,
+        "note": "the pulse at the picture's edge only"
+      }
+    ]
+  },
+  "inputs": {
+    "motion": "none",
+    "sound": "optional",
+    "haptic": "optional"
+  },
+  "rows": [
+    [
+      "m",
+      "Eyes that face forward",
+      "An owl's eyes face forward, so their views overlap across about 45 degrees in front, more than in most birds. Its whole view spans about 200 degrees.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Potier et al. 2023",
+        "Martin 2017",
+        "param:fov"
+      ]
+    ],
+    [
+      "m",
+      "Fixed eyes",
+      "An owl's eyes barely move in their sockets, by less than one degree, so the owl turns its whole head to look, as far as about 270 degrees.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Potier et al. 2023",
+        "Sieradzki 2022"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "A barn owl sees only a fifteenth to a twentieth as much detail as a person does, and other owls measured average about a third. This view is blurred to about a sixth of a person's sharpness, between the two.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Harmening et al. 2009",
+        "Caves et al. 2023",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Night vision",
+      "A tawny owl's eye works close to the limit that any vertebrate eye can reach in dim light. This view brightens the shadows.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Martin 1986",
+        "Orlowski et al. 2012",
+        "param:gain"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Owls have lost the colour-sensing cells for violet and ultraviolet light that other birds have, and only about one cone in ten carries a coloured droplet of oil. This view mutes colours.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Wu et al. 2016",
+        "Hart 2001",
+        "param:M",
+        "param:sat"
+      ]
+    ],
+    [
+      "m",
+      "Hearing",
+      "Owls can find and catch prey by sound alone. A barn owl hears faint sounds about 20 decibels quieter than other birds can, and hears pitches above 10,000 vibrations a second.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Martin 1986",
+        "Manley and Köppl 2025"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: hearing as light",
+      "With the microphone on, the picture rests dark and each sound lights it for a moment, high sounds most. How an owl's hearing feels is unknown, and the drawing is the app's. Where the phone can vibrate it can also buzz with each sound (&draw=buzz).",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2 new effect 2",
+        "param:sound.dark",
+        "param:sound.flashS",
+        "param:sound.steady",
+        "param:sound.k",
+        "param:haptic.pattern"
+      ]
+    ],
+    [
+      "i",
+      "Guesses",
+      "The pupil, the depth of focus, the trails and how fast sharpness falls from the centre are the app's guesses.",
+      [
+        "param:pupil",
+        "param:dof",
+        "param:persist",
+        "param:fall"
+      ]
+    ],
+    [
+      "x",
+      "Where sounds come from",
+      "A barn owl can place a sound within about 3 degrees side to side and 8 degrees up and down. A phone's microphone cannot tell direction, so this view leaves direction out.",
+      [
+        "research/birds:docs/views/drafts/birds.md#2.2",
+        "Bala et al. 2007"
+      ]
+    ]
+  ]
+}
