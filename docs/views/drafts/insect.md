@@ -574,7 +574,7 @@ One line per source behind the log, 109 in all. Works cited only through a revie
 - Wehner R, Michel B, Antonsen P 1996. Visual Navigation in Insects: Coupling of Egocentric and Geocentric Information. *Journal of Experimental Biology*. https://doi.org/10.1242/jeb.199.1.129. opened, abstract.
 - Wehner R 1997. The ant’s celestial compass system: spectral and polarization channels. *Birkhäuser Basel eBooks*. https://doi.org/10.1007/978-3-0348-8878-3_6. opened, abstract.
 - White RH, Xu H, Münch TA, Bennett RR, Grable EA 2003. The retina ofManduca sexta: rhodopsin expression, the mosaic of green-, blue- and UV-sensitive photoreceptors, and regional specialization. *Journal of Experimental Biology*. https://doi.org/10.1242/jeb.00571. opened, abstract.
-- Wiederman SD, Fabian JM, Dunbier JR, O’Carroll DC 2017. A predictive focus of gain modulation encodes target trajectories in insect vision. *eLife*. https://doi.org/10.7554/elife.26478. opened, abstract.
+- Wiederman SD, Fabian JM, Dunbier JR, O’Carroll DC 2017. A predictive focus of gain modulation encodes target trajectories in insect vision. *eLife*. https://doi.org/10.7554/elife.26478. opened, full text.
 - Yager DD, Hoy RR 1986. The Cyclopean Ear: A New Sense for the Praying Mantis. *Science*. https://doi.org/10.1126/science.3945806. opened, abstract.
 - Zhao A, Gruntman E, Nern A, Iyer N, Rogers EM, Koskela S et al. 2025. Eye structure shapes neuron function in Drosophila motion vision. *Nature*. https://doi.org/10.1038/s41586-025-09276-5. opened, full text.
 - Ziemba KS, Rutowski RL 2000. Sexual Dimorphism in Eye Morphology in a Butterfly (Asterocampa leilia; Lepidoptera, Nymphalidae). *Psyche A Journal of Entomology*. https://doi.org/10.1155/2000/54503. opened, abstract.
