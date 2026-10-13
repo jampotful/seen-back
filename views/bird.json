@@ -1,0 +1,139 @@
+{
+  "key": "bird",
+  "version": 1,
+  "offered": true,
+  "chip": "Other bird",
+  "who": "a bird",
+  "cue": "The picture runs slowly, then jumps ahead to catch up.",
+  "params": {
+    "fov": {"value":300,"grade":"?","invented":null,"src":[]},
+    "cpd": {"value":25,"grade":"?","invented":null,"src":[]},
+    "topoA": {"value":0.5,"grade":"?","invented":null,"src":[]},
+    "fall": {"value":0.6,"grade":"?","invented":null,"src":[]},
+    "pupil": "o",
+    "sheen": {"value":0.8,"grade":"?","invented":null,"src":[]},
+    "rate": {"value":0.5,"grade":"?","invented":null,"src":[]}
+  },
+  "matrices": {},
+  "rows": [
+    [
+      "g",
+      "Speed",
+      "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
+    ],
+    ["g","Sharpness","Most birds see half as much detail as people do, or less."],
+    [
+      "i",
+      "Ultraviolet",
+      "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+    ],
+    ["i","Field of view","Eyes on the sides of the head probably give a wide view. This part of the view is a guess."]
+  ],
+  "trial": {
+    "matrices": {
+      "SONGBIRD": {
+        "from_pigments": [370,450,505,610],
+        "grade": "g",
+        "invented": true,
+        "src": [
+          "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
+          "research/birds evidence L38 (oil droplets push the long class to about 610 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "note": "450 and 505 are the app's guesses; no line in the log gives them yet",
+        "rows": [[0.49977,0.32908,0.09213,0.07902],[0.05324,0.37056,0.46355,0.11266],[0.00097,0.05967,0.26254,0.67682]],
+        "q": [
+          [0.0,0.00118,0.06612,0.9327],
+          [0.00291,0.17666,0.65538,0.16506],
+          [0.0784,0.46751,0.36763,0.08646],
+          [0.49977,0.32908,0.09213,0.07902]
+        ]
+      }
+    },
+    "spectrum": {"q":"SONGBIRD","neutral":{"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]}},
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "wheel",
+          "invented": true,
+          "note": "a finger dragged across the picture turns which three of the four classes are shown (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        }
+      ],
+      "steady": [
+        {
+          "name": "lock",
+          "invented": true,
+          "note": "the picture holds still in the world against the hand, then snaps to catch up (atlas 11)"
+        },
+        {"name":"held","invented":true,"note":"today's held frames"},
+        {
+          "name": "arm",
+          "invented": true,
+          "note": "the picture moves only when the phone is jerked forward, as a pigeon thrusts its head"
+        }
+      ]
+    },
+    "rows": [
+      [
+        "g",
+        "Speed",
+        "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
+      ],
+      ["g","Sharpness","Most birds see half as much detail as people do, or less."],
+      [
+        "i",
+        "Ultraviolet",
+        "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+      ],
+      ["i","Field of view","Eyes on the sides of the head probably give a wide view. This part of the view is a guess."],
+      [
+        "i",
+        "Being tried: four colours",
+        "On this trial a songbird's four colour classes are drawn three at a time, ultraviolet in the bluest slot; dragging across the picture with the wheel turns which three are shown. Two of the four peaks are the app's guesses.",
+        ["Hart 2001","param:spectrum.neutral","param:matrices.SONGBIRD","param:M","param:sheen"]
+      ],
+      [
+        "i",
+        "Being tried: a steady head",
+        "With motion allowed, the picture holds still in the world between quick catches, as a bird's head does while its body moves. How long it holds and how far it lets the phone turn are the app's guesses.",
+        ["param:motion.holdMs","param:motion.maxDeg","param:motion.thrust","param:motion.thrustMs"]
+      ]
+    ],
+    "params": {
+      "M": {
+        "value": "SONGBIRD",
+        "grade": "g",
+        "invented": true,
+        "src": [
+          "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
+          "research/birds evidence L38 (oil droplets push the long class to about 610 nm)"
+        ]
+      },
+      "sheen": {"value":0,"grade":"i","invented":true,"src":[],"note":"the matrix carries the ultraviolet"}
+    },
+    "motion": {
+      "holdMs": {"value":700,"grade":"i","invented":true,"src":[],"range":[100,3000]},
+      "maxDeg": {"value":8,"grade":"i","invented":true,"src":[],"range":[1,30]},
+      "thrust": {
+        "value": 3,
+        "grade": "i",
+        "invented": true,
+        "src": [],
+        "range": [1,10],
+        "note": "metres a second squared along the phone's depth"
+      },
+      "thrustMs": {"value":140,"grade":"i","invented":true,"src":[],"range":[40,500]}
+    },
+    "inputs": {"motion":"optional","senses":{"motion":true}}
+  }
+}

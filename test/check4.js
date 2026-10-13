@@ -148,7 +148,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.human = await type('human');   // a human is no view (build 22): the sheet says so and the eyes stay as they are
     r.errors = errors; out.typed = r; await ctx.close();
     const ok = /^Xqzzvk isn’t a creature we know\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
-      && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('Monarch')
+      && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('monarch')
       && /^Regards doesn’t have the ability to view the world as a wolf spider right now\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
       && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '')
       && r.human.note === 'That’s a human. You already see the world as one. Try photographing another creature.' && r.human.eyes === r.exact.eyes && !errors.length;
@@ -312,6 +312,234 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       else { await page.waitForTimeout(300); let i = 0; for (const t of [0.3, 0.46, 0.62, 0.9]) { await page.evaluate(v => window.__seenBack.pose(v), t); await page.waitForTimeout(700); await shot(page, 'F-' + key + '-' + (i++)); } }
     }
     r.errors = errors; out[mode] = r; await ctx.close();
+  }
+
+  if (mode === 'try') {
+    // The views being tried (?try=, TRY lists them; jumper, reef, shark and spider by default), each on the scene clip: no errors, the rows
+    // are there, the movement map is read where the view has one, and the gaze jumps where the view has one, with what each fixation landed
+    // on (test/assets/scene.json says where everything is). Small screenshots go to test/shots/engine/.
+    const dir = path.join(here, 'shots', 'engine'); fs.mkdirSync(dir, { recursive: true });
+    const keys = (process.env.TRY || 'jumper,reef,shark,spider').split(',');
+    out.try = {}; const bad = [];
+    for (const key of keys) {
+      const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
+      await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+      await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '') + (process.env.EXTRA || '')); await page.waitForTimeout(500);
+      const r = out.try[key] = {};
+      await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+      r.prompt = await text(page, 'askViewH');
+      await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
+      await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+      // Software graphics draw a few frames a second, so the clip is slowed (PLAYBACK, 0.15) until each drawn frame is about one of the
+      // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
+      await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
+      await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
+      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!p.zones }; }, key);
+      const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 30);
+      let n = 0;
+      while (Date.now() - t0 < SECS * 1000) {
+        await page.waitForTimeout(500);
+        const g = await page.evaluate(() => window.__seenBack.engine.gazeState());
+        trace.push({ t: Date.now() - t0, x: +g.x.toFixed(3), y: +g.y.toFixed(3), mode: g.mode, jumps: g.jumps, gazes: g.gazes, maxE: +g.map.maxE.toFixed(3), maxL: +g.map.maxL.toFixed(3), shift: g.map.shift.map((v) => +v.toFixed(2)), reads: g.map.reads, salFrames: g.salFrames });
+        if (n < 2 && Date.now() - t0 > (SECS * 1000) * (n + 1) / 3) { await page.screenshot({ path: path.join(dir, key + '-' + n + '.png'), scale: 'css' }); n++; }
+      }
+      if (/tune=1/.test(process.env.EXTRA || '')) {   // the tuning panel: it lists the spec's parameters, a slider changes the view, and the compare divider draws
+        r.tune = await page.evaluate(() => { const t = window.__seenBack.tune; if (!t) return null; const l = t.list(); return { n: l.length, first: l[0] }; });
+        if (r.tune) {
+          r.tune.set = await page.evaluate(() => window.__seenBack.tune.set('params.cpd', .6));
+          await page.locator('#tunePanel button', { hasText: 'Compare' }).click(); await page.waitForTimeout(1500);
+          r.tune.divider = await page.evaluate(() => getComputedStyle(document.getElementById('tuneDivider')).display !== 'none');
+          r.tune.patch = await page.evaluate(() => window.__seenBack.tune.patch());
+          await page.screenshot({ path: path.join(dir, key + '-tune' + (process.env.DRAW ? '-' + process.env.DRAW : '') + '.png'), scale: 'css' });
+        }
+        if (!r.tune || !r.tune.n || !r.tune.set || !r.tune.divider) errors.push('the tuning panel did not work: ' + JSON.stringify(r.tune));
+      }
+      const last = trace[trace.length - 1], gs = await page.evaluate(() => window.__seenBack.engine.gazeState());
+      r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
+      r.jumps = (gs.gazes || []).map((g) => g[3]); r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+      const scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
+      r.landed = {};
+      if (scene) gs.log.forEach(([x, y, at, media]) => {   // the first gaze's fixations, against where test/make_scene.py drew everything at that clip time
+        const nn = scene.where.beetle.length, f = ((Math.round(media / 1000 * scene.fps) % nn) + nn) % nn, A = scene.size[0] / scene.size[1];
+        let best = 'nothing', bd = .1;
+        Object.keys(scene.where).forEach((k) => { const p = scene.where[k][f], d = Math.hypot((x - p[0]) * A, (1 - y) - p[1]); if (d < bd) { bd = d; best = k; } });
+        r.landed[best] = (r.landed[best] || 0) + 1;
+      });
+      await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(300);
+      r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length);
+      await page.screenshot({ path: path.join(dir, key + '-rows.png'), scale: 'css' });
+      r.errors = errors;
+      if (process.env.TRACE) fs.writeFileSync(process.env.TRACE.replace(/(\.json)?$/, '-' + key + '.json'), JSON.stringify(trace, null, 1));
+      await ctx.close();
+      if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
+      if (/draw=palm|draw=pond|draw=strip|draw=face/.test(process.env.EXTRA || '') === false && key === 'jumper' && process.env.STAMPS && !(r.probe.stamps > 0)) errors.push('no stamp of attention was left');
+      if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
+      const ok = r.eyes === key && r.rows >= 6 && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)));
+      if (!ok) bad.push(key);
+    }
+    if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
+  }
+
+  if (mode === 'still') {
+    // Every offered view on one still photo (test/assets/garden.jpg) with the camera refused, a screenshot of each after its change of eyes
+    // has finished. The picture holds still, so two builds' screenshots can be compared pixel for pixel (STILL_DIR names where they go).
+    const dir = process.env.STILL_DIR || path.join(shots, 'still'); fs.mkdirSync(dir, { recursive: true });
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+    await page.goto(HTTP); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
+    await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+    await page.waitForSelector('#askView:visible, #claim:visible', { timeout: 20000 });
+    if (await page.locator('#claim').isVisible()) { await page.locator('#claimName').fill('cat'); await page.keyboard.press('Enter'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); }
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    const keys = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'other' && k !== 'person' && !window.__seenBack.EYES[k].zones));
+    const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'beetle', plant: 'oak' };
+    for (const k of keys) {
+      if (k !== 'cat') {
+        await page.locator('#btnWho').tap(); await page.locator('#infoChange').tap(); await say(page, names[k] || k);
+        await page.waitForTimeout(600);
+        if (await page.locator('#askView').isVisible()) { await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'garden.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 }); }
+      }
+      await page.waitForTimeout(4500);
+      await page.locator('canvas').first().screenshot({ path: path.join(dir, k + '.png') });
+    }
+    out.still = { keys: keys, errors: errors }; await ctx.close();
+    if (errors.length) throw new Error('still: ' + errors.join('; '));
+  }
+
+  if (mode === 'floor') {
+    // The visibility floor (docs/ENGINE-DESIGN.md, section 5), on a still picture: the view (FLOOR_VIEW, jumper) at 390 by 844 CSS pixels
+    // and a device pixel ratio of 2, the clip paused at FLOOR_T seconds and the gaze pinned, rendered at a parameter's value v and at v + d;
+    // d is doubled until the 95th percentile of delta E*ab between the renders passes FLOOR_DE (2.3, see docs/views/floor.json), then
+    // bisected four times. FLOOR_PARAMS lists tuning-panel labels (all of the view's scalars by default); FLOOR_VALUES the number of values
+    // across each range (1: the spec's value only). Results go to FLOOR_OUT (docs/views/floor.json's form). Temporal parameters need the
+    // moving clip and are not measured here.
+    const view = process.env.FLOOR_VIEW || 'jumper', DE = +(process.env.FLOOR_DE || 2.3), tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'floor-'));
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: phone.userAgent });
+    const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+    await page.goto(HTTP + '&try=' + view + '&tune=1&draw=strip'); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'scene.webm'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    await page.evaluate((t) => { const v = document.getElementById('vid'); v.pause(); v.currentTime = t; window.__seenBack.tune.hide(true); window.__seenBack.engine.pinGaze(.5, .5); }, +(process.env.FLOOR_T || 2));
+    await page.waitForTimeout(3000); await page.evaluate(() => window.__seenBack.pose(null));
+    const specs = await page.evaluate(() => { const t = window.__seenBack.tune; return t.list(); });
+    let want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
+    if (process.env.FLOOR_SKIP && fs.existsSync(process.env.FLOOR_SKIP)) {   // parameters already measured (docs/views/floor.json) are left out
+      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {}; want = want.filter((l) => !done[l]);
+    }
+    const info = await page.evaluate((v) => window.__seenBack.tuneInfo ? window.__seenBack.tuneInfo() : null, view);
+    let n = 0;
+    async function render(lab, x) {
+      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]); await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
+      const f = path.join(tmp, (n++) + '.png'); await page.locator('canvas').first().screenshot({ path: f }); return f;
+    }
+    const de = (a, b) => JSON.parse(require('child_process').execFileSync(process.env.FLOOR_PY || 'python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
+    const res = {}, NV = +(process.env.FLOOR_VALUES || 1);
+    for (const lab of want) {
+      const meta = info && info[lab]; if (!meta) { res[lab] = 'no such parameter'; continue; }
+      const [lo, hi, v0] = meta, vals = NV <= 1 ? [v0] : Array.from({ length: NV }, (_, i) => lo + (hi - lo) * (i + .5) / NV);
+      res[lab] = [];
+      for (const v of vals) {
+        const a = await render(lab, v); let d = (hi - lo) / 64, up = v + d <= hi ? 1 : -1, seen = null, lastNo = 0, e = null;
+        while (Math.abs(d) <= (hi - lo)) {
+          const b = await render(lab, v + up * d); e = de(a, b);
+          if (e.p95 > DE) { seen = d; break; } lastNo = d; d *= 2;
+          if (v + up * d > hi || v + up * d < lo) break;
+        }
+        if (seen === null) { res[lab].push([v, 'invisible', e && e.p95]); continue; }
+        let A = lastNo, B = seen;
+        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > DE) B = m; else A = m; }
+        res[lab].push([+v.toPrecision(4), +B.toPrecision(3)]);
+        await render(lab, v0);
+      }
+      console.log(lab, JSON.stringify(res[lab]));
+      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: DE, partial: true, floor: res }, null, 1));
+    }
+    out.floor = { view: view, threshold: DE, errors: errors, floor: res };
+    if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify(out.floor, null, 1));
+    await ctx.close();
+  }
+
+  if (mode === 'perf') {
+    // Every view for a fixed number of frames on a fixed clip (test/assets/scene.webm, made by test/make_scene.py), with a table at the end.
+    // A frame's cost is measured from outside the page, so the same harness measures any build: the time of the page's own animation
+    // callbacks in that frame plus a one-pixel read of the picture after the one that drew, which waits for the graphics work to end
+    // (gl.finish() returns at once in Chromium, so it measures nothing). Headless software graphics are slow and share the machine's
+    // processors, so the numbers only compare views and builds with each other, on one machine.
+    // PERF_FRAMES (60) sets the frames a view, TRY (jumper) the views reached with ?try=, PERF_OUT a file for the JSON.
+    const FRAMES = +(process.env.PERF_FRAMES || 60), TRY = process.env.TRY === undefined ? 'jumper,reef,shark,spider' : process.env.TRY;
+    const measure = () => {
+      const W = window, pf = W.__pf = { gl: null, rec: false, frames: [] };
+      const gc = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (t, o) { const c = gc.call(this, t, o); if (t === 'webgl2' && this.id === 'gl' && c && !pf.gl) pf.gl = c; return c; };
+      const da = WebGL2RenderingContext.prototype.drawArrays; let drew = false;
+      WebGL2RenderingContext.prototype.drawArrays = function () { if (this === pf.gl) drew = true; return da.apply(this, arguments); };
+      const raf = W.requestAnimationFrame.bind(W); let cur = null; const px = new Uint8Array(4);
+      W.requestAnimationFrame = function (cb) {
+        return raf(function (ts) {
+          if (!cur || cur.ts !== ts) { if (cur && pf.rec && cur.drew) pf.frames.push(cur); cur = { ts, cb: 0, fin: 0, drew: false }; }
+          const s = performance.now(); drew = false;
+          try { cb(ts); } finally {
+            cur.cb += performance.now() - s;
+            if (drew && pf.gl) { const f = performance.now(), g = pf.gl; g.bindFramebuffer(g.FRAMEBUFFER, null); g.readPixels(0, 0, 1, 1, g.RGBA, g.UNSIGNED_BYTE, px); cur.fin += performance.now() - f; cur.drew = true; }
+          }
+        });
+      };
+      if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError'));
+    };
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(measure);
+    await page.goto(HTTP + (TRY ? '&try=' + TRY : '')); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal:not([hidden]), #askView:not([hidden])', { timeout: 8000 });
+    if (await page.locator('#askAnimal').isVisible()) {   // a build that knows ?try= goes straight to the view being tried
+      await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+      await say(page, 'cat'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    }
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'scene.webm'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 }); await page.waitForTimeout(3500);
+    const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'butterfly', plant: 'oak',
+      jumper: 'jumping spider', spider: 'wolf spider', fish: 'bass', snail: 'garden snail', crab: 'blue crab', bat: 'big brown bat', tick: 'deer tick', salamander: 'red eft', fungus: 'mushroom', mammal: 'raccoon', sealife: 'jellyfish' };
+    const have = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person' && k !== 'other'));
+    const hook = await page.evaluate(() => !!window.__seenBack.look), views = ['human'].concat(have.filter((k) => hook || names[k]));
+    const rows = [];
+    const stat = (a) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = a.reduce((x, y) => x + y, 0) / a.length; return { mean: +m.toFixed(2), median: +s[s.length >> 1].toFixed(2), p90: +s[Math.min(s.length - 1, Math.floor(s.length * .9))].toFixed(2) }; };
+    for (const key of views) {
+      if (key === 'human') { await page.evaluate(() => { window.__seenBack.S.holding = true; }); await page.waitForTimeout(600); }
+      else {
+        await page.evaluate(() => { window.__seenBack.S.holding = false; window.__seenBack.pose(null); });
+        if (await page.evaluate((k) => window.__seenBack.look ? window.__seenBack.look(k) : false, key)) await page.waitForTimeout(600);   // a build with the hook goes straight in
+        else if (await page.evaluate((k) => window.__seenBack.S.eyes !== k, key)) {
+          await page.locator('#btnWho').tap(); await page.locator('#infoChange').tap(); await say(page, names[key]);
+          await page.waitForFunction((k) => window.__seenBack.S.eyes === k && window.__seenBack.S.screen === 'animal', key, { timeout: 12000 });
+          await page.waitForTimeout(900);
+        }
+        await page.evaluate(() => window.__seenBack.pose(null)); await page.waitForTimeout(700);
+      }
+      await page.evaluate(() => { window.__pf.frames = []; window.__pf.rec = true; });
+      await page.waitForFunction((n) => window.__pf.frames.length >= n, FRAMES, { timeout: 600000, polling: 250 });
+      const got = await page.evaluate(() => { const f = window.__pf.frames.slice(); window.__pf.rec = false; const b = window.__seenBack; return { f, probe: b.probe ? b.probe() : null, eyes: b.S.eyes, k: b.S.k, err: b.state() && b.state().err, side: b.state() && b.state().sw + 'x' + b.state().sh }; });
+      const f = got.f.slice(0, FRAMES), cost = f.map((x) => x.cb + x.fin), gaps = f.slice(1).map((x, i) => x.ts - f[i].ts);
+      rows.push({ view: key, frames: f.length, cost: stat(cost), interval: stat(gaps), script: stat(f.map((x) => x.cb)), gpu: got.probe && got.probe.gpu !== null ? +got.probe.gpu.toFixed(2) : null, err: got.err, k: +got.k.toFixed(2), ring: got.side });
+    }
+    await page.evaluate(() => { window.__seenBack.S.holding = false; });
+    const table = ['| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |', '|---|---|---|---|---|---|---|']
+      .concat(rows.map((r) => '| ' + [r.view, r.cost.mean, r.cost.median, r.cost.p90, r.interval ? r.interval.median : '', r.script.mean, r.gpu === null ? 'none' : r.gpu].join(' | ') + ' |'));
+    console.log(table.join('\n'));
+    out.perf = { url: HTTP, frames: FRAMES, rows, errors };
+    if (process.env.PERF_OUT) fs.writeFileSync(process.env.PERF_OUT, JSON.stringify(out.perf, null, 1));
+    await ctx.close();
+    if (errors.length || rows.some((r) => r.err)) { console.log(JSON.stringify(out, null, 1)); throw new Error('perf: an error while drawing'); }
   }
 
   await browser.close();

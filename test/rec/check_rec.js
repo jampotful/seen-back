@@ -57,7 +57,7 @@ async function open(browser, q, opts, ctxIn) {
   return { ctx, page, errors };
 }
 const ready = (page, ms) => page.waitForFunction(() => window.__seenBack.rec.about().state === 'ready', null, { timeout: ms || 60000 });
-const sentence = (n) => n.charAt(0).toUpperCase() + n.slice(1).replace(/(?<=[\s-])[A-Z](?=[a-z])/g, (c) => c.toLowerCase());   // a species' name as the page sets it (the stand-in names hold no place names)
+const sentence = (n) => n.toLowerCase().replace(/\bgulf\b/g, 'Gulf');   // a species' name as the page sets it: all small, except the place names the test list holds (build 24)
 const aboutOpen = async (page) => { await page.locator('#recAbout').tap(); await page.waitForSelector('#aboutSheet', { state: 'visible', timeout: 5000 }); await page.waitForTimeout(250); };   // About is a sheet of its own, opened from the record's header
 const shut = (page) => page.evaluate(() => { document.getElementById(document.getElementById('aboutSheet').hidden ? 'recordClose' : 'aboutClose').click(); });
 const begin = async (page) => { await page.evaluate(noCamera).catch(() => {}); await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 }); };
@@ -133,7 +133,7 @@ async function meet(page, name) {
     r.offerButtons = await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent));
     r.offersAboveField = await page.evaluate(() => document.getElementById('claimOfferBox').getBoundingClientRect().bottom <= document.getElementById('claimName').getBoundingClientRect().top);
     await page.screenshot({ path: path.join(here, 'shots', 'offers.png'), scale: 'css' }).catch(() => {});
-    await page.locator('#claimOffers button', { hasText: 'Monarch' }).tap(); await page.waitForTimeout(300);
+    await page.locator('#claimOffers button', { hasText: 'monarch' }).tap(); await page.waitForTimeout(300);
     r.afterOffer = await st(page); r.afterOfferRecord = await page.evaluate(() => window.__seenBack.record().map((m) => m.common + '|' + m.sci + '|' + m.by + '|' + m.key));
     await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
     r.dots = await meet(page, 'dots.png');                       // no species near: the kind alone, no offers
@@ -159,16 +159,16 @@ async function meet(page, name) {
     r.rows = await page.evaluate(() => [...document.querySelectorAll('#metList li')].map((li) => li.querySelector('.nm').textContent + ' | ' + li.querySelector('.sm').textContent));
     r.trace = await page.evaluate(() => window.__seenBack.diag().filter((d) => /^pocket/.test(d.what)).slice(-2).map((d) => d.what + ' ' + d.code));
     r.errors = errors;
-    const anole = month === 0 ? 'Green anole' : 'Brown anole';
-    done('flow', r, r.heron.eyes === 'wader' && r.heron.shown === 'Great blue heron' && r.heron.sci === 'Ardea herodias' && r.heron.named.by === 'page' && /Great blue heron\|Ardea herodias\|page\|wader/.test(r.heronRecord[0]) && !r.heronOffersShown
-      && r.stripes.eyes === 'insect' && r.stripes.shown === 'insect' && r.stripes.sci === '' && r.offerLine === 'Is it one of these?' && r.offerButtons.join() === 'Gulf fritillary,Monarch,Queen' && r.offersAboveField
-      && r.afterOffer.eyes === 'insect' && r.afterOffer.named.common === 'Monarch' && r.afterOffer.named.by === 'you' && /^Monarch\|Danaus plexippus\|you\|insect/.test(r.afterOfferRecord[0])
+    const anole = month === 0 ? 'green anole' : 'brown anole';
+    done('flow', r, r.heron.eyes === 'wader' && r.heron.shown === 'great blue heron' && r.heron.sci === 'Ardea herodias' && r.heron.named.by === 'page' && /great blue heron\|Ardea herodias\|page\|wader/.test(r.heronRecord[0]) && !r.heronOffersShown
+      && r.stripes.eyes === 'insect' && r.stripes.shown === 'insect' && r.stripes.sci === '' && r.offerLine === 'Is it one of these?' && r.offerButtons.join() === 'Gulf fritillary,monarch,queen' && r.offersAboveField
+      && r.afterOffer.eyes === 'insect' && r.afterOffer.named.common === 'monarch' && r.afterOffer.named.by === 'you' && /^monarch\|Danaus plexippus\|you\|insect/.test(r.afterOfferRecord[0])
       && r.dots.eyes === 'frog' && r.dots.shown === 'frog or toad' && !r.dotsOffersShown
       && r.rings.eyes === 'reptile' && r.rings.shown === anole
-      && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.'
+      && r.garden.eyes === 'plant' && r.garden.shown === 'beggarticks' && !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.'
       && !r.wall.claim && !r.wall.eyes && r.wall.notice === 'We can’t find a creature in your photo. Try again.'
       && r.infoSub === 'Ardea herodias' && r.notRightIsThere
-      && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| /.test(x) && !/named by/.test(x))
+      && r.rows.some((x) => /great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^monarch \| /.test(x) && !/named by/.test(x))
       && r.trace.length === 2 && !errors.length);
     await ctx.close();
   });
@@ -256,15 +256,15 @@ async function meet(page, name) {
       o.noneLeads = pick(rec.test.fuseIn(world(f(0.9), t), [0, Math.log(2), 0, 0, Math.log(6)], [0, 1], 6));
       let refused = ''; try { world(Object.assign(f(0.5), { kind_at: 'high' }), t); } catch (e) { refused = e.code + ': ' + e.detail; } o.refused = refused;
       return o; });
-    r.sameName = await page.evaluate(() => window.__seenBack.offerList([{ sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Limenitis astyanax', en: 'Red-spotted admiral' },
-      { sci: 'Limenitis arthemis', en: 'Red-spotted admiral' }, { sci: 'Larra bicolor', en: 'Wasp' }]).map((o) => o.label));     // from the real list: Salvia azurea is filed under two GBIF keys; two admirals share a name
+    r.sameName = await page.evaluate(() => window.__seenBack.offerList([{ sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Salvia azurea', en: 'giant blue sage' }, { sci: 'Limenitis astyanax', en: 'red-spotted admiral' },
+      { sci: 'Limenitis arthemis', en: 'red-spotted admiral' }, { sci: 'Larra bicolor', en: 'wasp' }]).map((o) => o.label));     // from the real list: Salvia azurea is filed under two GBIF keys; two admirals share a name
     r.errors = errors;
     const tail = '', b = r.byHand;
-    done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'Great blue heron' && before === 1
+    done('notsure', r, r.sure.eyes === 'wader' && r.sure.shown === 'great blue heron' && before === 1
       && r.odd.claim && !r.odd.eyes && r.odd.sub === 'We’re not sure what kind of creature that is.' + tail && w.sure === false && r.sheet.last.sure === false && r.sheet.last.kind === w.kind && r.sheet.last.named === null && r.sheet.last.kindOffers.join() === w.kindOffers.join()
       && r.sheet.kinds.join() === r.buttonsWanted.join() && r.sheet.kinds.length === 3 && r.sheet.kindNote === 'Is it one of these?' && r.sheet.kindsShown
       && r.sheet.offers.length === w.offers.length && r.sheet.offers.every((b, i) => b === (w.offers.filter((x) => x === w.offers[i]).length > 1 ? sentence(w.offers[i]) + ' (' + r.sheet.last.offerSci[i] + ')' : sentence(w.offers[i]))) && new Set(r.sheet.offers).size === r.sheet.offers.length
-      && r.sameName.join() === 'Giant blue sage,Red-spotted admiral (Limenitis astyanax),Red-spotted admiral (Limenitis arthemis),Wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species:' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
+      && r.sameName.join() === 'giant blue sage,red-spotted admiral (Limenitis astyanax),red-spotted admiral (Limenitis arthemis),wasp' && (w.offers.length ? r.sheet.offersShown && r.sheet.offerNote === 'Or one of these species:' && r.sheet.kindsAboveOffers && r.sheet.aboveField : !r.sheet.offersShown) && r.sheet.meetings === 1
       && r.chosen.eyes === w.kindOffers[1] && r.chosen.named.by === 'you' && r.chosen.named.common === r.buttonsWanted[1] && r.record.length === 2 && new RegExp('^' + r.buttonsWanted[1] + '\\|\\|you\\|' + w.kindOffers[1] + '$').test(r.record[0])
       && r.again.kinds.join() === r.buttonsWanted.join() && r.again.sub === ''
       && r.odd2.claim && !r.dismissed.eyes && !r.dismissed.claim && r.meetingsAfterDismiss === 2
@@ -353,7 +353,7 @@ async function meet(page, name) {
     const lines = await page.evaluate(() => window.__lines);
     r.lines = lines.length > 12 ? lines.slice(0, 4).concat(['... ' + (lines.length - 8) + ' more ...'], lines.slice(-4)) : lines; r.end = await st(page); r.shown = await text(page, 'rvName'); r.waited = await page.evaluate(() => window.__seenBack.rec.about().last.ms); r.errors = errors;
     const nums = lines.map((l) => /^Downloading… (\d+) of (\d+) MB$/.exec(l)).filter(Boolean);
-    done('progress', r, r.stateAtPhoto !== 'ready' && nums.length >= 3 && nums.every((n, i) => +n[1] <= +n[2] && (!i || +n[1] >= +nums[i - 1][1])) && +nums[nums.length - 1][2] === 15 && r.end.eyes === 'wader' && r.shown === 'Great blue heron' && !errors.length);
+    done('progress', r, r.stateAtPhoto !== 'ready' && nums.length >= 3 && nums.every((n, i) => +n[1] <= +n[2] && (!i || +n[1] >= +nums[i - 1][1])) && +nums[nums.length - 1][2] === 15 && r.end.eyes === 'wader' && r.shown === 'great blue heron' && !errors.length);
     await ctl('reset=1'); await ctx.close();
   });
 
@@ -443,8 +443,8 @@ async function meet(page, name) {
       const month = new Date().getMonth() + 1;
       r.asked = { named: (await st(page)).named, lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), sent: fake.calls(), choice: await page.evaluate(() => window.__seenBack.svc.choice()), record: await recordRows(page), line: await svcLine(page) };
       const c = r.asked.sent[0] || {};
-      all('asked', r.asked.named.common === 'Monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the full database…') >= 0 && r.asked.line === 'The full database says Monarch.' && r.asked.choice === 'yes'
-        && r.asked.record[0] === 'Monarch|Danaus plexippus|service|insect' && r.asked.record.length === 2);
+      all('asked', r.asked.named.common === 'monarch' && r.asked.named.scientific === 'Danaus plexippus' && r.asked.named.by === 'service' && r.asked.lines.indexOf('Asking the full database…') >= 0 && r.asked.line === 'The full database says monarch.' && r.asked.choice === 'yes'
+        && r.asked.record[0] === 'monarch|Danaus plexippus|service|insect' && r.asked.record.length === 2);
       all('whatWasSent', r.asked.sent.length === 1 && c.jpeg && Math.max(c.w, c.h) === 512 && c.imageBytes < 1e6 && c.fields === 4 && c.month === month && c.region === 'us-fl-alachua' && c.top === 5 && !c.prefix && c.cookie === '' && c.referer === '' && c.auth === '' && /^application\/json/.test(c.type));
       // the sheet behind the name, the list of meetings, and its five likeliest as offers
       await page.locator('#inViewPick').setInputFiles(path.join(here, '..', 'assets', 'portrait.jpg'));
@@ -459,8 +459,8 @@ async function meet(page, name) {
       r.about = await page.evaluate(() => ({ shown: !document.getElementById('svcBox').hidden, value: document.getElementById('svcChoice').value, options: [...document.querySelectorAll('#svcChoice option')].map((o) => o.textContent), label: document.querySelector('#svcBox label').textContent }));
       await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); await page.waitForTimeout(150); await page.screenshot({ path: path.join(here, 'shots', 'service-about.png'), scale: 'css' }).catch(() => {});
       await shut(page);
-      all('shownAfter', r.pill === 'Monarch' && r.infoSub === 'Danaus plexippus'
-        && r.offers.join() === 'Monarch,Queen,Gulf fritillary,Viceroy,Common buckeye' && /^Monarch \| Danaus plexippus .* named by the full database on a server · This creature’s view is yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
+      all('shownAfter', r.pill === 'monarch' && r.infoSub === 'Danaus plexippus'
+        && r.offers.join() === 'monarch,queen,Gulf fritillary,viceroy,common buckeye' && /^monarch \| Danaus plexippus .* named by the full database on a server · This creature’s view is yours for a week$/.test(r.rows[0]) && r.about.shown && r.about.value === 'yes' && r.about.options.join() === 'Ask me each time,Always ask it,Never ask it');
       // from now on it is asked without a prompt. It sees another kind of creature and is sure: the change is offered in one line, and not made
       fake.set({ answer: 'egret', delay: 300 }); let n = fake.calls().length;
       await meet(page, 'dots.png'); await page.waitForFunction(() => /Change to this creature\?$/.test(document.getElementById('svcView').textContent), null, { timeout: 15000 });
@@ -470,15 +470,15 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'service-change.png'), scale: 'css' }).catch(() => {});
       await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
       const after = await st(page); r.change.after = after.eyes + '|' + after.named.common + '|' + after.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
-      all('change', r.change.line === 'It looks like a Great egret, a wading bird. Change to this creature?' && r.change.eyesBefore === 'frog' && r.change.namedBefore === 'frog or toad|page' && r.change.posts === 1
-        && r.change.after === 'wader|Great egret|service' && r.change.record[0] === 'Great egret|Ardea alba|service|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
+      all('change', r.change.line === 'It looks like a great egret, a wading bird. Change to this creature?' && r.change.eyesBefore === 'frog' && r.change.namedBefore === 'frog or toad|page' && r.change.posts === 1
+        && r.change.after === 'wader|great egret|service' && r.change.record[0] === 'great egret|Ardea alba|service|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
       // another kind, but it is not sure enough: nothing changes, and its likeliest stay as offers
       fake.set({ answer: 'unsure' }); n = fake.calls().length;
       await meet(page, 'dots.png'); await until(() => fake.calls().length > n); await svcSettled(page); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 }); await page.waitForTimeout(200);
       const u = await st(page); r.unsure = { state: u.eyes + '|' + u.named.common + '|' + u.named.by, line: await svcLine(page) };
       await page.locator('#changeAskView').tap(); await page.waitForSelector('#claim', { state: 'visible' }); await page.waitForTimeout(150);
       r.unsure.offers = await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)); await page.locator('#claimBack').tap();
-      all('unsure', r.unsure.state === 'frog|frog or toad|page' && r.unsure.line === '' && r.unsure.offers.join() === 'Great egret,Green treefrog,Snowy egret');
+      all('unsure', r.unsure.state === 'frog|frog or toad|page' && r.unsure.line === '' && r.unsure.offers.join() === 'great egret,green treefrog,snowy egret');
       // the same kind, but its best guess is under the service's own mark for naming: the name stays, the guesses are offered
       fake.set({ answer: 'faint' }); n = fake.calls().length;
       await meet(page, 'stripes.png'); await until(() => fake.calls().length > n); await svcSettled(page); await page.waitForTimeout(200);
@@ -511,7 +511,7 @@ async function meet(page, name) {
       const eyesWhileWaiting = (await st(page)).eyes; await page.waitForTimeout(1300); fake.sleep(0);     // it wakes
       await byService(page);
       r[name] = { lines: await page.evaluate(() => window.__svc.filter(Boolean).filter((x, i, a) => a.indexOf(x) === i)), eyesWhileWaiting, named: (await st(page)).named.common, posts: fake.calls().length, healthAsked: fake.state.health, wokeAfterMs: Date.now() - t0, errors: quiet(errors) };
-      all(name, r[name].lines.join(' / ') === 'Asking the full database… / The full database is waking up. This can take a minute… / The full database says Monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'Monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
+      all(name, r[name].lines.join(' / ') === 'Asking the full database… / The full database is waking up. This can take a minute… / The full database says monarch.' && eyesWhileWaiting === 'insect' && r[name].named === 'monarch' && r[name].posts === 1 && (file === 'service.json' ? r[name].healthAsked === 0 : r[name].healthAsked >= 2) && !r[name].errors.length);
       await ctx.close();
     }
     { // it does not wake within the wait (shortened here from 90 seconds to 8): it lets go quietly, and what the device said stands. Then failures and refusals of every sort
@@ -551,8 +551,8 @@ async function meet(page, name) {
       r.fromSheet.faint = { sub: await text(page, 'claimSub'), offers: await page.evaluate(() => [...document.querySelectorAll('#claimOffers button')].map((b) => b.textContent)), linkAgain: await page.locator('#claimAskRow').isVisible(), eyes: (await st(page)).eyes };
       r.fromSheet.errors = errors;
       all('fromSheet', r.fromSheet.sub === '' && r.fromSheet.link === 'Ask the full database on a server' && r.fromSheet.sentBefore === 0 && /temporarily sent to this project’s server/.test(r.fromSheet.askSub) && r.fromSheet.sentAtSheet === 0 && r.fromSheet.afterNo && r.fromSheet.sentAfterNo === 0
-        && r.fromSheet.after === 'wader|Great egret|service' && r.fromSheet.record[0] === 'Great egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
-        && r.fromSheet.faint.sub === 'The full database can’t ID this photo.' && r.fromSheet.faint.offers.join() === 'Monarch,Queen,Gulf fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
+        && r.fromSheet.after === 'wader|great egret|service' && r.fromSheet.record[0] === 'great egret|Ardea alba|service|wader' && r.fromSheet.sent === 1
+        && r.fromSheet.faint.sub === 'The full database can’t ID this photo.' && r.fromSheet.faint.offers.join() === 'monarch,queen,Gulf fritillary' && !r.fromSheet.faint.linkAgain && !r.fromSheet.faint.eyes && !errors.length);
       await ctx.close();
     }
     fake.reset();
@@ -584,6 +584,55 @@ async function meet(page, name) {
   const toAbout = async (page) => { if ((await st(page)).eyes) await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); if ((await st(page)).screen === 'askView') await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' });
     await page.waitForTimeout(350); await page.evaluate(() => { document.getElementById('record').scrollTop = 99999; }); };
 
+  // the full database for the whole world, in the large section and on its own as "world": a stand-in's rows at one byte a number, names and place files
+  const worldBlock = async (r, all) => {
+    { // the full database for the whole world (docs/tracks/worlddb.md): its rows at one byte a number, its names and its place files in parts from the
+      // second origin, and its consent sheet's size of them all; the first guess from the time zone, and the encounter rule (test/rec/make_world_standin.py)
+      const WD = path.join(here, 'models', 'standin-world'), WE = JSON.parse(fs.readFileSync(path.join(WD, 'expect.json'), 'utf8'));
+      let wslot = 'test/rec/models/standin-world';
+      if (BIG_PORT !== 8788) { fs.writeFileSync(path.join(WD, 'manifest.port.json'), fs.readFileSync(path.join(WD, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); wslot += '/manifest.port.json'; }
+      const named = async (page) => { const n = (await st(page)).named; return n ? n.common + '|' + n.by : ''; };
+      const worldIn = async (tz) => {
+        await ctl('reset=1'); await bctl('reset=1');
+        const ctx = await browser.newContext(Object.assign({}, phone, { timezoneId: tz }));
+        const o = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + wslot, null, ctx); await ready(o.page); await begin(o.page);
+        const s0 = await meet(o.page, 'stripes.png'); const line = await offered(o.page);
+        const size = await o.page.evaluate(() => window.__seenBack.big.size());
+        await o.page.locator('#svcView').tap(); await o.page.waitForSelector('#big', { state: 'visible' }); await o.page.locator('#bigYes').tap();
+        await bigHave(o.page, 'kept', 60000); await o.page.waitForFunction(() => { const l = window.__seenBack.big.about().last; return !!l && !window.__seenBack.S.svc; }, null, { timeout: 60000 }); await o.page.waitForTimeout(200);
+        return { ctx, page: o.page, errors: o.errors, small: s0.eyes, line, size, parts: (await partsAsked()).sort() };
+      };
+      r.world = {};
+      { const w = await worldIn('UTC'), pg = w.page;
+        const a1 = await bigNow(pg);
+        r.world.utc = { small: w.small, line: w.line, bytes: w.size.bytes, parts: w.parts, first: await named(pg), last: a1.last && a1.last.five.slice(0, 2).join(' / '), place0: await pg.evaluate(() => window.__seenBack.big.about().place) };
+        await meet(pg, 'heron.png'); await byLarge(pg); await pg.waitForTimeout(150);
+        r.world.utc.heron = await named(pg); r.world.utc.kept = await pg.evaluate(() => JSON.parse(localStorage.getItem('seenback.place.v1') || 'null'));
+        r.world.utc.place1 = await pg.evaluate(() => window.__seenBack.big.about().place);
+        const at = (await bigNow(pg)).last.at; await meet(pg, 'stripes.png'); await largeAfter(pg, at); await pg.waitForTimeout(150);
+        r.world.utc.then = await named(pg);
+        r.world.utc.parity = await pg.evaluate((x) => { const t = window.__seenBack.big.test.place(), c = x.cells, d = (P) => [P[c[0]], P[c[1]]];
+          const P = t.update(t.firstGuess('UTC'), x.rows['Great Blue Heron']), L = t.logShare(P);
+          return { first: { UTC: d(t.firstGuess('UTC')), 'America/New_York': d(t.firstGuess('America/New_York')), 'America/Argentina/Buenos_Aires': d(t.firstGuess('America/Argentina/Buenos_Aires')) }, after: d(P), share: Array.from(L) }; }, WE);
+        r.world.utc.alias = await pg.evaluate(() => { const t = window.__seenBack.big.test.place(), a = t.firstGuess('US/Eastern'), b = t.firstGuess('America/New_York'), c = t.firstGuess('America/Buenos_Aires'), d = t.firstGuess('America/Argentina/Buenos_Aires');
+          return a.every((x, i) => x === b[i]) && c.every((x, i) => x === d[i]) && a.some((x, i) => x !== c[i]); });
+        r.world.utc.about = await pg.evaluate(() => window.__seenBack.about()); r.world.utc.errors = w.errors; await w.ctx.close(); }
+      for (const tz of ['America/Argentina/Buenos_Aires', 'US/Eastern']) {
+        const w = await worldIn(tz); await byLarge(w.page).catch(() => {}); r.world[tz] = { first: await named(w.page), place: await w.page.evaluate(() => window.__seenBack.big.about().place), errors: w.errors }; await w.ctx.close();
+      }
+      const u = r.world.utc, near = (a, b) => a.length === b.length && a.every((x, i) => Math.abs(x - b[i]) < 1e-6 * Math.max(1, Math.abs(b[i])));
+      const sameP = Object.keys(WE.first_guess).every((z) => near(u.parity.first[z], WE.first_guess[z])) && near(u.parity.after, WE.after_heron) && near(u.parity.share, WE.log_share_utc_heron);
+      const wantParts = ['part00', 'part00', 'part01', 'part01', 'part02'];       // the encoder's three parts and the rows' two, each once
+      all('world', u.small === 'insect' && u.line === 'Download the full database of species?' && u.bytes === WE.bytes && u.parts.join() === wantParts.join()
+        && u.first === 'insect|page' && /Monarch/.test(u.last || '') && u.place0 && u.place0.zone === 'UTC' && u.place0.known === false && u.place0.met === 0
+        && u.heron === 'great blue heron|device-large' && u.kept && u.kept.met.length === 1 && u.kept.met[0].sci === 'Ardea herodias' && u.kept.met[0].zone === 'UTC' && u.place1.met === 1
+        && u.then === 'monarch|device-large' && sameP && u.alias && /place from no known time zone and 2 creatures met\.$/m.test(u.about || '')
+        && r.world['America/Argentina/Buenos_Aires'].first === 'southern monarch|device-large' && r.world['America/Argentina/Buenos_Aires'].place.known
+        && r.world['US/Eastern'].first === 'monarch|device-large' && r.world['US/Eastern'].place.known
+        && !quiet(u.errors).length && !quiet(r.world['America/Argentina/Buenos_Aires'].errors).length && !quiet(r.world['US/Eastern'].errors).length);
+      r.world.sameAsPython = sameP;
+    }
+  };
   if (want.includes('large')) await section('large', async () => {    // consent, progress, a reload mid-way, stopping, deleting; the answer in the background; another kind offered, never taken; failures in words
     const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; sofar = r; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
     const MB = Math.max(1, Math.round(JSON.parse(fs.readFileSync(path.join(here, 'models', 'standin-big', 'manifest.json'), 'utf8')).vision.bytes / 1e6));
@@ -661,10 +710,10 @@ async function meet(page, name) {
       await page.waitForSelector('#bigBox', { state: 'visible', timeout: 5000 });
       r.aboutKept = { state: await text(page, 'bigState'), get: await page.locator('#bigGet').isVisible(), del: await page.locator('#bigDel').isVisible(), tickShown: await page.locator('#bigAskRow').isVisible(), block: (await text(page, 'buildMark')).split('\n').filter((l) => /^Larger model/.test(l))[0] };
       await shut(page);
-      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'Monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely… / The full database says Monarch.'
-        && r.named.line === 'The full database says Monarch.' && r.named.record[0] === 'Monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'Monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
-        && r.named.pill === 'Monarch' && r.named.infoSub === 'Danaus plexippus'
-        && r.named.offers.join() === E('stripes.png').five.map(sentence).join() && /^Monarch \| Danaus plexippus .* named on this device by the full database · This creature’s view is yours for a week$/.test(r.named.rows[0]));
+      all('named', s1.eyes === 'insect' && r.named.overSheet < 0.05 && r.named.small === 'insect|no name|3' && r.named.after.common === 'monarch' && r.named.after.scientific === 'Danaus plexippus' && r.named.after.by === 'device-large' && r.named.lines.slice(-2).join(' / ') === 'Looking more closely… / The full database says monarch.'
+        && r.named.line === 'The full database says monarch.' && r.named.record[0] === 'monarch|Danaus plexippus|device-large|insect' && (r.named.overlay === 'monarch' || r.named.overlay === '(gone)') && r.named.last.named === E('stripes.png').named && r.named.last.kind === E('stripes.png').kind
+        && r.named.pill === 'monarch' && r.named.infoSub === 'Danaus plexippus'
+        && r.named.offers.join() === E('stripes.png').five.map(sentence).join() && /^monarch \| Danaus plexippus .* named on this device by the full database · This creature’s view is yours for a week$/.test(r.named.rows[0]));
       all('aboutKept', r.aboutKept.state === 'You currently have the full database of species downloaded.' && !r.aboutKept.get && r.aboutKept.del && !r.aboutKept.tickShown && /^Larger model: standin-big, on this device, \d+ of \d+ MB; last photo insect 1\.00, Danaus plexippus [\d.]+, in [\d.]+ s/.test(r.aboutKept.block || ''));
       // another kind of creature, and it is sure: the change is offered in one line, and not made
       const s2 = await meet(page, 'dots.png'); await lineIs(page, /Change to this creature\?$/); await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
@@ -673,8 +722,8 @@ async function meet(page, name) {
       await page.screenshot({ path: path.join(here, 'shots', 'large-change.png'), scale: 'css' }).catch(() => {});
       await page.locator('#svcView').tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 6000 }); await page.waitForTimeout(300);
       const a2 = await st(page); r.change.after = a2.eyes + '|' + a2.named.common + '|' + a2.named.by; r.change.record = await recordRows(page); r.change.lineAfter = await svcLine(page);
-      all('change', r.change.atOnce === 'frog|frog or toad' && r.change.line === 'It looks like a Great egret, a wading bird. Change to this creature?' && r.change.before === 'frog|frog or toad|page'
-        && r.change.after === 'wader|Great egret|device-large' && r.change.record[0] === 'Great egret|Ardea alba|device-large|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
+      all('change', r.change.atOnce === 'frog|frog or toad' && r.change.line === 'It looks like a great egret, a wading bird. Change to this creature?' && r.change.before === 'frog|frog or toad|page'
+        && r.change.after === 'wader|great egret|device-large' && r.change.record[0] === 'great egret|Ardea alba|device-large|wader' && r.change.record.length === r.change.meetings && r.change.lineAfter === '');
       // it is not sure: nothing changes; a person: it is not asked; a species the small model named: it has its say all the same
       let at = (await bigNow(page)).last.at;
       const s3 = await meet(page, 'small.png'); await largeAfter(page, at); await page.waitForTimeout(150); const a3 = await st(page);
@@ -685,13 +734,13 @@ async function meet(page, name) {
       r.askedOfServers = { parts: (await partsAsked()).length, photos: (await ctl('log=1')).filter((x) => !/^test\/rec\/photos|^test\/assets/.test(x) && !/^index\.html/.test(x)) };
       all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
       all('person', !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.' && !r.person.asked);   // a human: no view (build 22), and the larger model is not asked
-      all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'Great blue heron|device-large');
+      all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'great blue heron|device-large');
       all('nothingAsked', r.askedOfServers.parts === 0 && r.askedOfServers.photos.length === 0);
       // a minute with nothing to do (shortened here): its worker is let go, and the next photo starts it again
       await page.evaluate(() => window.__seenBack.big.test.idle(300)); await page.waitForFunction(() => !window.__seenBack.big.test.running(), null, { timeout: 8000 });
       r.rest = { state: (await bigNow(page)).state }; await meet(page, 'stripes.png'); await byLarge(page); r.rest.after = (await st(page)).named.common; r.rest.started = (await bigNow(page)).last.ms.load > 0;
       await page.evaluate(() => window.__seenBack.big.test.idle(60000));
-      all('rest', r.rest.state === 'idle' && r.rest.after === 'Monarch' && r.rest.started);
+      all('rest', r.rest.state === 'idle' && r.rest.after === 'monarch' && r.rest.started);
       // from the sheet that asks for a name: the small model found nothing alive; the larger one is asked, is not sure, and offers its three likeliest kinds
       const s6 = await meet(page, 'wall.png');
       r.fromSheet = { first: s6.notice };
@@ -706,7 +755,7 @@ async function meet(page, name) {
       ({ page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '/manifest.kind-at.json&big=' + slot, null, ctx)); await ready(page); await begin(page);
       await page.evaluate(() => { const el = document.getElementById('msg'); window.__lines = []; new MutationObserver(() => { const t = el.textContent; if (t && window.__lines[window.__lines.length - 1] !== t) window.__lines.push(t); }).observe(el, { childList: true, characterData: true, subtree: true }); });
       const s7 = await meet(page, 'odd.png'); r.first = { state: s7.eyes + '|' + s7.shown + '|' + (s7.named && s7.named.by), claim: s7.claim, lines: await page.evaluate(() => window.__lines.filter((x, i, a) => a.indexOf(x) === i)), small: await page.evaluate(() => window.__seenBack.rec.about().last.sure), record: (await recordRows(page))[0], errors };
-      all('first', r.first.state === 'bee|Western honey bee|device-large' && !r.first.claim && r.first.lines.indexOf('Looking more closely…') >= 0 && r.first.small === false && r.first.record === 'Western honey bee|Apis mellifera|device-large|bee' && !errors.length);
+      all('first', r.first.state === 'bee|western honey bee|device-large' && !r.first.claim && r.first.lines.indexOf('Looking more closely…') >= 0 && r.first.small === false && r.first.record === 'western honey bee|Apis mellifera|device-large|bee' && !errors.length);
       // deleted from the device, with a second thought first; after that it is not offered
       await toAbout(page); await page.waitForSelector('#bigDel', { state: 'visible', timeout: 5000 }); await page.locator('#bigDel').tap(); await page.waitForTimeout(250);
       r.del = { asks: await text(page, 'bigState'), keep: await page.locator('#bigDelNo').isVisible(), keptWhileAsking: (await keptBig(page)).length };
@@ -735,7 +784,7 @@ async function meet(page, name) {
       all('stop', r.stop.title === 'Getting the full database' && r.stop.stop === 'Stop the download' && !r.stop.yesShown && /^Downloading the full database… \d+ of \d+ MB$/.test(r.stop.net)
         && x.have === 'partial' && x.choice === '' && /^The download has been stopped\./.test(r.stop.after.line) && r.stop.after.kept === 1
         && /^The full database is partly downloaded: \d+ of \d+ MB\. Get the rest\?$/.test(r.stop.offer) && r.stop.sheet.title === 'Get the rest of the full database?' && r.stop.sheet.yes === 'Get the rest' && /^\d+ of \d+ MB have been downloaded\.$/.test(r.stop.sheet.net)
-        && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'Monarch' && !errors.length);
+        && r.stop.rest.parts.join() === 'part01,part02' && r.stop.rest.named === 'monarch' && !errors.length);
       // a larger slot may carry a kinds head too (the same parts, kept already): it names as before, and it can say that nothing alive is there
       if (BIG_PORT === 8788) {
         await page.close(); const k = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + BIG + '/manifest.kinds.json', null, ctx); await ready(k.page); await begin(k.page); await bctl('reset=1');
@@ -745,7 +794,7 @@ async function meet(page, name) {
         await k.page.waitForFunction((t) => { const l = window.__seenBack.big.about().last; return !!l && l.at > t && !document.getElementById('notice').hidden; }, kb.last.at, { timeout: 20000 }); await k.page.waitForTimeout(300);
         r.kindsHead.wall = await k.page.evaluate(() => ({ sub: document.getElementById('noticeText').textContent, kinds: document.querySelectorAll('#claimKinds button').length, link: !document.getElementById('claimAskRow').hidden, last: window.__seenBack.big.about().last.kind, eyes: window.__seenBack.S.eyes }));
         r.kindsHead.errors = k.errors;
-        all('kindsHead', r.kindsHead.model === 'standin-big-kinds' && r.kindsHead.heron === 'Great blue heron|device-large' && r.kindsHead.parts === 0 && r.kindsHead.wall.last === 'none' && !r.kindsHead.wall.eyes
+        all('kindsHead', r.kindsHead.model === 'standin-big-kinds' && r.kindsHead.heron === 'great blue heron|device-large' && r.kindsHead.parts === 0 && r.kindsHead.wall.last === 'none' && !r.kindsHead.wall.eyes
           && r.kindsHead.wall.sub === 'We can’t find a creature in your photo. Try again.' && r.kindsHead.wall.kinds === 0 && !r.kindsHead.wall.link && !k.errors.length);
       }
       await ctx.close();
@@ -759,7 +808,7 @@ async function meet(page, name) {
       const b = await bigNow(page), x = { line: await svcLine(page), have: b.have, why: b.getFail, kept: (await keptBig(page)).filter((k) => /^part/.test(k)).length, state: (await st(page)).eyes + '|' + (await st(page)).named.by, claim: (await st(page)).claim };
       await bctl('reset=1'); await page.locator('#svcView').tap(); await bigHave(page, 'kept', 30000); await byLarge(page);      // put right: a tap on the line carries on from what is kept
       x.partsAfter = (await partsAsked()).join(); x.named = (await st(page)).named.common; r.failures[name] = x;
-      all(name, x.line === wanted && x.have === (keptWanted ? 'partial' : 'absent') && x.kept === keptWanted && x.state === 'insect|page' && !x.claim && x.partsAfter === ['part00', 'part01', 'part02'].slice(keptWanted).join() && x.named === 'Monarch' && !quiet(errors).length);
+      all(name, x.line === wanted && x.have === (keptWanted ? 'partial' : 'absent') && x.kept === keptWanted && x.state === 'insect|page' && !x.claim && x.partsAfter === ['part00', 'part01', 'part02'].slice(keptWanted).join() && x.named === 'monarch' && !quiet(errors).length);
       await ctx.close();
     }
     { // every part passes its own checksum and the whole does not: nothing of it is kept
@@ -782,8 +831,14 @@ async function meet(page, name) {
       await meet(page, 'stripes.png'); r.both.then = await offered(page); r.both.sentAfter = fake.calls().length;
       all('both', r.both.first === 'Download the full database of species?' && r.both.then === 'The full database on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
     }
+    await worldBlock(r, all);
     await bctl('reset=1'); await ctl('reset=1');
     done('large', r, ok);
+  });
+
+  if (want.includes('world')) await section('world', async () => {    // the world block of the large section, alone
+    await bigUp(); const r = {}; let ok = true; sofar = r; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
+    await worldBlock(r, all); await bctl('reset=1'); await ctl('reset=1'); done('world', r, ok);
   });
 
   if (want.includes('keptcopy')) await section('keptcopy', async () => {   // the manifest's kept copy is found where a plain lookup would miss it, and used where the network neither answers nor fails
@@ -801,7 +856,7 @@ async function meet(page, name) {
       r.errors = quiet(errors); await ctx.close(); }
     { await ctl('reset=1'); await ctl('drop=' + encodeURIComponent('standin|vendor'));     // and where there is no kept copy at all, the reason says so
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.none = (await meet(page, 'heron.png')).sub; r.noneWhy = (await about(page)).fail; await ctl('reset=1'); await ctx.close(); }
-    done('keptcopy', r, r.plainLookupFinds === false && r.withVary === 'ready' && r.heron === 'Great blue heron' && r.hanging === 'ready in under six seconds' && !r.errors.length
+    done('keptcopy', r, r.plainLookupFinds === false && r.withVary === 'ready' && r.heron === 'great blue heron' && r.hanging === 'ready in under six seconds' && !r.errors.length
       && /^This app’s download is incomplete\./.test(r.none) && /^network: .*manifest\.json; no kept copy found$/.test(r.noneWhy));
     await ctl('reset=1');
   });
@@ -831,11 +886,11 @@ async function meet(page, name) {
     await about(); r.tickedAfterReload = await page.locator('#awayBox').isChecked(); await page.evaluate(() => { const b = document.getElementById('awayBox'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); }); await shut(page);
     fake.reset(); r.nearAgain = (await meet(page, 'heron.png')).shown; r.nearAgainPosts = fake.calls().length;
     r.locationAsked = await page.evaluate(() => window.__geo); r.errors = errors;
-    done('away', r, r.near.heron === 'Great blue heron' && r.near.info === 'Ardea herodias'
+    done('away', r, r.near.heron === 'great blue heron' && r.near.info === 'Ardea herodias'
       && r.switch.label === 'I am not near Gainesville' && /^Species are named from a list of those recorded around Gainesville, Florida\./.test(r.switch.note) && !r.switch.tickedAtFirst
-      && r.away.atOnce === 'wader|wading bird' && r.away.top === null && r.away.sent.join() === '"" month ' + (new Date().getMonth() + 1) && r.away.named === 'Great egret|service'
+      && r.away.atOnce === 'wader|wading bird' && r.away.top === null && r.away.sent.join() === '"" month ' + (new Date().getMonth() + 1) && r.away.named === 'great egret|service'
       && r.away.info === 'Ardea alba' && /named by the full database on a server · This creature’s view is yours for a week$/.test(r.away.rows[0])
-      && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'Great blue heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
+      && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'great blue heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
     await ctx.close();
   });
 
@@ -860,7 +915,7 @@ async function meet(page, name) {
     r.offline.requestsDropped = (await ctl('log=1')).map((x) => x.split('?')[0]).filter((x, i, a) => a.indexOf(x) === i); r.offline.errors = errors;
     await page.locator('#backAskView').tap(); await page.locator('#recAskAnimal').tap(); await page.waitForSelector('#record', { state: 'visible' }); await page.waitForTimeout(250);
     r.offline.aboutLine = (await text(page, 'buildMark')).split('\n')[1];
-    r.first.errors = []; let ok = r.first.heron === 'Great blue heron' && r.offline.online === false && r.offline.heron === 'Great blue heron' && r.offline.stripes === 'insect' && /^Recognizer: standin-random-conv, wasm/.test(r.offline.aboutLine)
+    r.first.errors = []; let ok = r.first.heron === 'great blue heron' && r.offline.online === false && r.offline.heron === 'great blue heron' && r.offline.stripes === 'insect' && /^Recognizer: standin-random-conv, wasm/.test(r.offline.aboutLine)
       && r.fetchedFirst.filter((x) => /vision\.int8\.onnx/.test(x)).length === 1 && r.fetchedFirst.filter((x) => /\.wasm\?/.test(x)).length === 1 && !errors.length;
     await page.close(); await ctx.setOffline(false); await ctl('reset=1');
     if (want.includes('version')) {
@@ -899,7 +954,7 @@ async function meet(page, name) {
       const { ctx, page } = await open(browser, '&nosw=1&rec=' + SLOT); await begin(page); r.offlineFirst = await meet(page, 'heron.png'); await ctl('reset=1'); await ctx.close(); }
     { const { ctx, page } = await open(browser, '&nosw=1&rec=off'); await begin(page); r.off = (await meet(page, 'heron.png')); await ctx.close(); }
     const tail = ' Tell us what’s there.';
-    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t ID photos yet.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing. Close the app and open it again.' + tail && r.recovered === 'Great blue heron'
+    done('missing', r, r.noSlot.claim && r.noSlot.sub === 'This app can’t ID photos yet.' + tail && r.noModel.claim && r.noModel.sub === 'Some of this app’s files are missing. Close the app and open it again.' + tail && r.recovered === 'great blue heron'
       && r.offlineFirst.claim && r.offlineFirst.sub === 'This app’s download is incomplete. Check your connection, then close the app and open it again.' + tail && r.off.claim && r.off.sub === 'IDing is turned off.' + tail);
   });
 
@@ -920,7 +975,7 @@ async function meet(page, name) {
       await page.waitForFunction(() => window.__seenBack.rec.about().state === 'failed', null, { timeout: 20000 }); r.keptBadWhy = (await about(page)).fail;
       await begin(page); r.keptBadThenFetchedAgain = (await meet(page, 'heron.png')).shown; await ctx.close(); }
     const tail = ' Tell us what’s there.', sub = 'This app’s download is damaged. Close the app and open it again.' + tail;
-    done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'Great blue heron');
+    done('damaged', r, r.changed.claim && r.changed.sub === sub && /sha256/.test(r.changedWhy) && r.keptAfter === 0 && r.cut.claim && r.cut.sub === sub && /^damaged: session/.test(r.keptBadWhy) && r.keptBadThenFetchedAgain === 'great blue heron');
     await ctl('reset=1');
   });
 
@@ -937,7 +992,7 @@ async function meet(page, name) {
     r.afterHang = (await meet(page, 'stripes.png')).eyes;
     r.pictureStillDrawn = await page.evaluate(() => window.__seenBack.state().err === 0);
     const tail = ' Tell us what’s there.';
-    done('dying', r, r.before === 'Great blue heron' && r.thrown.claim && r.thrown.sub === 'This app’s IDing has crashed. Check that your device has enough memory.' + tail && r.afterThrow === 'Great blue heron'
+    done('dying', r, r.before === 'great blue heron' && r.thrown.claim && r.thrown.sub === 'This app’s IDing has crashed. Check that your device has enough memory.' + tail && r.afterThrow === 'great blue heron'
       && r.hung.claim && r.hung.sub === 'The IDing timed out. Try again.' + tail && r.afterHang === 'insect' && r.pictureStillDrawn);
     await ctx.close();
   });
@@ -964,7 +1019,7 @@ async function meet(page, name) {
     const base = 'Regards identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
     done('about', r, /^v1\.\d+$/.test(r.fitted.none) && r.fitted.full === r.fitted.none + base
       && r.fitted.bare === r.fitted.none + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
-      && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
+      && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && (!/^Engine: /.test(r.block[4]) || /^Engine: [\d.]+ ms of script a frame, /.test(r.block[4])) && /^Screen: /.test(r.block[/^Engine: /.test(r.block[4]) ? 5 : 4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });
 

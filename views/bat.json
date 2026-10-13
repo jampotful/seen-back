@@ -1,0 +1,217 @@
+{
+  "key": "bat",
+  "chip": "Bat",
+  "who": "a bat",
+  "falls_back_to": "other",
+  "applies_to": {
+    "order": [
+      "Chiroptera"
+    ],
+    "not_family": [
+      "Pteropodidae"
+    ]
+  },
+  "cue": "Each call brings back one snapshot, so the picture holds, then jumps.",
+  "modules": [],
+  "params": {
+    "cpd": {
+      "value": 0.6,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "docs/views/sheets/bat.md#2 Sharpness: Cechetto 2020 (Myotis daubentonii, 0.6 from ganglion cell density); Brokaw 2024 (about 0.35, rufous horseshoe bat)"
+      ],
+      "range": [
+        0.2,
+        2
+      ],
+      "floor": null,
+      "note": "the lowest cpd in use is 1 (bees); at .6 check the value on a phone"
+    },
+    "hold": {
+      "value": 110,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 Calls: Moss and Surlykke 2010"
+      ],
+      "range": [
+        0,
+        300
+      ],
+      "floor": null,
+      "note": "milliseconds; the heron's held gaze reused as a call-by-call snapshot, a 140 ms cycle with thrust gives about 7 a second, inside the search rate of 5 to 10"
+    },
+    "thrust": {
+      "value": 30,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 Calls: Moss and Surlykke 2010"
+      ],
+      "range": [
+        0,
+        100
+      ],
+      "floor": null,
+      "note": "milliseconds; see hold"
+    },
+    "sat": {
+      "value": 0.25,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 Colour: Muller 2009 (cones are 2 to 4 percent of receptors in leaf-nosed bats)"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "the amount of drain is the app's"
+    },
+    "gain": {
+      "value": 1.6,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 Dim light: Boonman 2013"
+      ],
+      "range": [
+        1,
+        3
+      ],
+      "floor": null,
+      "note": "the amount is the app's"
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source was found; with dof unset it changes nothing"
+    }
+  },
+  "notes": [
+    {
+      "need": "depth image",
+      "why": "The main sense of a calling bat is an echo picture: brightness from echo strength, refreshed call by call, in a cone of 60 to 90 degrees. Needs a depth source (LiDAR or a depth model) and a new drawing mode. Hard. Until then the entry draws the coarse eyes with the call-rate hold."
+    },
+    {
+      "need": "topo",
+      "why": "Daubenton's bat has its sharp area in the upper retina, which looks at the lower field (the sheet's inference). The engine places sharpness only at the centre or along the horizon."
+    },
+    {
+      "need": "compass",
+      "why": "Big brown bats steer by the magnetic field (Holland 2006). Reading the sensor is easy; there is no basis yet for drawing it."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Calls",
+      "A big brown bat calls 5 to 10 times a second while searching, 20 to 80 times while closing in, and up to about 170 times in the final buzz. Each call returns one snapshot, so the picture holds, then jumps, about seven times a second. That rendering is this app’s invention.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Calls",
+        "Moss and Surlykke 2010",
+        "param:hold",
+        "param:thrust"
+      ]
+    ],
+    [
+      "m",
+      "Distance",
+      "From the delay of each echo, a big brown bat judges distance to within about 1.5 centimetres with its short hunting calls, and only to 15 centimetres or worse with its long search calls.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Distance",
+        "Moss and Surlykke 2010"
+      ]
+    ],
+    [
+      "g",
+      "Reach",
+      "A bat hears an insect’s echo from about 2 to 14 metres away, depending on the bat and the insect, and a forest edge from up to about 50 metres. Beyond that, its calls return nothing it can hear.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Reach",
+        "Boonman and colleagues 2013",
+        "Stilz and Schnitzler 2012",
+        "Moss and Surlykke 2010",
+        "Holderied and colleagues 2005"
+      ]
+    ],
+    [
+      "m",
+      "Direction",
+      "A big brown bat swings its beam of sound from one object to the next with an accuracy of about 5 degrees. The beam spreads over a cone of 60 to 90 degrees, about as wide as this camera’s view.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Direction",
+        "Moss and Surlykke 2010",
+        "Hartley and Suthers 1989",
+        "Simmons and colleagues 1983",
+        "Simmons 1993"
+      ]
+    ],
+    [
+      "g",
+      "Sharpness",
+      "Daubenton’s bat, an insect-eating relative, resolves about 0.6 cycles per degree to your 60, a hundredth of yours. The screen is blurred to match.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Sharpness",
+        "Cechetto and colleagues 2020",
+        "Brokaw 2024",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Dim light",
+      "In one test a big brown bat could no longer tell things apart by sight once the light fell to between 0 and 0.0008 lux. Shadows are lifted to suggest it.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Dim light",
+        "Boonman and colleagues 2013",
+        "param:gain"
+      ]
+    ],
+    [
+      "g",
+      "Colour",
+      "Some bats have a cone for ultraviolet and some have lost it, and no phone records ultraviolet. In two leaf-nosed bats only 2 to 4 in a hundred light receptors are cones, so colour is drained here.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Colour",
+        "Müller and colleagues 2009",
+        "Brokaw 2024",
+        "Vasas and colleagues 2024",
+        "param:sat"
+      ]
+    ],
+    [
+      "x",
+      "Echoes",
+      "A calling bat hears the distance to everything its calls reach, and a phone’s microphone cannot hear those calls.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Echoes",
+        "Moss and Surlykke 2010"
+      ]
+    ],
+    [
+      "x",
+      "Magnetic compass",
+      "Big brown bats steer home by the Earth’s magnetic field, which the picture does not draw.",
+      [
+        "docs/views/sheets/bat.md#2 bat: Magnetic compass",
+        "Holland and colleagues 2006"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "matrices": {},
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}

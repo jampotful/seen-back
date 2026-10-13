@@ -28,6 +28,32 @@ node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | g
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
 if [ "$THR_ONLY" = 1 ]; then ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-perf*)    # only test/check4.js perf (docs/ENGINE.md): every view on the scene clip, main's page and this commit's, interleaved
+  [ "$PART" = chromium ] || { echo "perf run: nothing for the $PART part"; exit 0; }
+  git fetch -q --depth 1 origin main && git worktree add -q /tmp/main FETCH_HEAD && echo "main at $(git -C /tmp/main log -1 --format='%h %s' | cut -c1-80)"
+  python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
+  python3 -m http.server 8791 --bind 127.0.0.1 --directory /tmp/main > /dev/null 2>&1 &
+  sleep 1
+  for ROUND in 1 2 3; do
+    for WHICH in main branch; do
+      PORTP=8790; [ "$WHICH" = main ] && PORTP=8791
+      step "perf: $WHICH, round $ROUND"
+      PORT=$PORTP PERF_FRAMES="${PERF_FRAMES:-60}" SIDE="${PERF_SIDE:-540}" PERF_OUT="$OUT/perf-$WHICH-$ROUND.json" timeout 1500 node test/check4.js perf > "$OUT/perf-$WHICH-$ROUND.txt" 2>&1
+      echo "exit $?"; head -22 "$OUT/perf-$WHICH-$ROUND.txt"
+    done
+  done
+  exit 0 ;;
+esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor*)   # only test/check4.js floor (docs/ENGINE-DESIGN.md section 5): the jumper view's visibility floor
+  [ "$PART" = chromium ] || { echo "floor run: nothing for the $PART part"; exit 0; }
+  /tmp/venv/bin/pip install -q numpy
+  python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
+  sleep 1
+  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-3} values a parameter"
+  PORT=8790 FLOOR_SKIP=docs/views/floor.json FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-3}" FLOOR_OUT="$OUT/floor.json" timeout 2300 node test/check4.js floor > "$OUT/floor.txt" 2>&1
+  echo "exit $?"; tail -60 "$OUT/floor.txt"
+  exit 0 ;;
+esac
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-sw5*) ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/sw5xx.sh; exit 0 ;; esac   # only ci/engines/patches/sw-5xx-kept.patch, proven
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
