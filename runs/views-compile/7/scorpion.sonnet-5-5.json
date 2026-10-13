@@ -1,0 +1,178 @@
+{
+ "key": "scorpion",
+ "version": 1,
+ "chip": "Scorpion",
+ "who": "a scorpion",
+ "falls_back_to": "harvestman",
+ "applies_to": {
+  "order": [
+   "Scorpiones",
+   "Uropygi",
+   "Amblypygi",
+   "Pseudoscorpiones"
+  ]
+ },
+ "cue": "The whole circle around you is in view at once, soft and dim, in shades of one colour.",
+ "modules": [],
+ "params": {
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "scorpions are reported to see all the way around the body"
+  },
+  "M": "SCORPION",
+  "cpd": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "no record measures how much detail a scorpion sees"
+  },
+  "gain": {
+   "value": 2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "note": "a lift in brightness for eyes that work at starlight"
+  }
+ },
+ "matrices": {
+  "SCORPION": {
+   "from_pigments": [
+    525
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "arachnids-other.jsonl:Forero 2026"
+   ],
+   "note": "one green-sensitive pigment, so every colour reads as a shade of one hue"
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the whole circle squeezed into the screen"
+   },
+   {
+    "name": "ribbon",
+    "invented": true,
+    "note": "the circle laid out as a band"
+   }
+  ]
+ },
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "rows": [
+  [
+   "m",
+   "Eyes",
+   "Most scorpions have one pair of median eyes on top of the head and several pairs of smaller lateral eyes at the front corners. The buthid scorpions that were checked all have five pairs of lateral eyes.",
+   [
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013",
+    "arachnids-other.jsonl:Yang 2013"
+   ],
+   []
+  ],
+  [
+   "g",
+   "All the way around",
+   "Scorpions are reported to see through a full 360 degrees around the body. The two median eyes overlap by about 40 degrees above the animal.",
+   [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   [
+    "params.fov",
+    "draw.field"
+   ]
+  ],
+  [
+   "g",
+   "One colour",
+   "The eyes of two scorpion genera respond most to blue (470 nm) and green (525 nm) light, and scorpion eyes are often described as most sensitive to green. This view shows the world in shades of a single green-sensitive channel.",
+   [
+    "arachnids-other.jsonl:Forero 2026",
+    "arachnids-other.jsonl:Prévost 2020",
+    "arachnids-other.jsonl:Roldan 2018"
+   ],
+   [
+    "matrices.SCORPION",
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Made for the dark",
+   "Scorpions are nocturnal, and their eyes are sensitive to starlight levels of light. In one species the median eyes are about 1000 times more sensitive at night than by day.",
+   [
+    "arachnids-other.jsonl:B 2025",
+    "arachnids-other.jsonl:Fleissner 1977",
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Locket 2001"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Two kinds of eye",
+   "The median eyes are the main eyes and give relatively high acuity and good spatial discrimination. The lateral eyes may only detect changes in light.",
+   [
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   []
+  ],
+  [
+   "i",
+   "Sharpness and brightness",
+   "No one has measured how much detail a scorpion sees. This view assumes a soft picture and lifts the brightness a little for night. The choice of colour channel, and the way the circle is squeezed into the screen, are the app's.",
+   [
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   [
+    "params.cpd",
+    "params.gain",
+    "params.M",
+    "matrices.SCORPION",
+    "draw.field"
+   ]
+  ],
+  [
+   "x",
+   "Not in the picture",
+   "Sand scorpions sense insects moving up to about 50 cm away through vibrations in the ground, and hairs on the pedipalps sense wind direction. The camera records neither.",
+   [
+    "arachnids-other.jsonl:Brownell 1977",
+    "arachnids-other.jsonl:Haessig 2020",
+    "arachnids-other.jsonl:Linsenmair 1972"
+   ],
+   []
+  ]
+ ],
+ "draft": true
+}

@@ -1,0 +1,509 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.rate: value 1 is not a cited record's value and does not lie between two of them (R77)",
+  "gaze.saccade: value [15,0.1] is not a cited record's value and does not lie between two of them (R80)",
+  "gaze.sweep: value [2,1.2] is not a cited record's value and does not lie between two of them (R89, R94)",
+  "row \"The app's own choices\": has a 'not X but Y' or ', not' construction; rewrite this sentence without it: \"ngth of pull toward movement are the app's drawing, not records. They are set by the app.\""
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "who": "a jumping spider",
+   "chip": "Jumping spider",
+   "cue": "Watch what the spider's principal eyes pick out. Sharp at the centre, blurred at the edge, and the scene turns when the spider looks.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "params": {
+    "cpd": {
+     "value": 12.5,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R12",
+      "R4"
+     ],
+     "note": "Portia fimbriata principal eye; the picture is sharp only in the centre"
+    },
+    "fov": {
+     "value": 360,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R23",
+      "R211"
+     ],
+     "note": "all four pairs of eyes together; salticids in general"
+    },
+    "fovea": {
+     "value": 2.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the sharp middle is much finer than the rest, drawn at a scale chosen by the app"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "by analogy with the house cat"
+    },
+    "topoS": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "how much sharper the middle is than the edge, across"
+    },
+    "fall": {
+     "value": 1.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "how fast sharpness falls with light"
+    },
+    "pupil": "o",
+    "gate": {
+     "value": 0.3,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "still things fade only a little"
+    },
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "no extra weight for living movement"
+    },
+    "rate": {
+     "value": 1,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R77"
+     ],
+     "range": [
+      0.25,
+      2
+     ],
+     "note": "flicker is followed up to about 40 times a second, so the rate is kept at a person's"
+    },
+    "sat": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "colour kept as a person sees it"
+    },
+    "gain": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no brightening"
+    },
+    "M": "JUMP",
+    "field": {
+     "value": 1,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R14",
+      "R17",
+      "R20"
+     ],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the principal eyes see a narrow upright strip about 2 degrees wide and about 21 high, and the picture is drawn narrow in the middle"
+    }
+   },
+   "matrices": {
+    "JUMP": {
+     "note": "three channels: ultraviolet, green, and a blue that the principal eyes share",
+     "rows": [
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       1
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": []
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "window",
+      "invented": true,
+      "note": "a narrow sharp strip in the middle, with the rest of the picture dim"
+     },
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "a wedge of sharp view that the spider moves"
+     },
+     {
+      "name": "fold",
+      "invented": true,
+      "note": "the picture folded at the edge"
+     },
+     {
+      "name": "ribbon",
+      "invented": true,
+      "note": "a ribbon of sharp view"
+     },
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the picture squeezed toward the field of view"
+     }
+    ],
+    "gaze": [
+     {
+      "name": "strip",
+      "invented": true,
+      "note": "a sharp strip that moves across the picture"
+     },
+     {
+      "name": "stamps",
+      "invented": true,
+      "note": "quick sharp glimpses"
+     },
+     {
+      "name": "face",
+      "invented": true,
+      "note": "a sharp face drawn in the middle"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "a palette with the blue channel carried as ultraviolet"
+     },
+     {
+      "name": "two",
+      "invented": true,
+      "note": "two colour channels"
+     }
+    ]
+   },
+   "zones": [
+    {
+     "id": "strip",
+     "shape": "strip",
+     "at": "centre",
+     "cpd": {
+      "value": 12.5,
+      "grade": "m",
+      "invented": false,
+      "src": [
+       "R12"
+      ],
+      "note": "the sharp strip in the principal eyes"
+     },
+     "gaze": {
+      "value": [
+       0,
+       0
+      ],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "note": "the strip moves with the eyes"
+     }
+    }
+   ],
+   "gaze": {
+    "saccade": {
+     "value": [
+      15,
+      0.1
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R80"
+     ],
+     "note": "a 15 degree saccade is complete within 0.1 s"
+    },
+    "sweep": {
+     "value": [
+      2,
+      1.2
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R94",
+      "R89"
+     ],
+     "note": "side-to-side sweeps of about 2 degrees, period 1.1 to 1.3 s"
+    },
+    "hold": {
+     "value": 1500,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how long the strip rests on a point"
+    }
+   },
+   "spectrum": {
+    "neutral": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "the colour kept as a person sees it"
+    }
+   },
+   "magnet": {
+    "k": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how strongly movement pulls the eye"
+    }
+   },
+   "inputs": {
+    "motion": "optional"
+   },
+   "rows": [
+    [
+     "m",
+     "Sharp middle",
+     "The principal eyes resolve fine detail. Portia fimbriata reaches about 12.5 cycles per degree, close to a person's sharpness, but only in a small central zone of the picture.",
+     [
+      "R12",
+      "R4"
+     ],
+     [
+      "params.cpd",
+      "zones[0].cpd"
+     ]
+    ],
+    [
+     "m",
+     "Narrow view",
+     "Each principal eye sees a narrow upright strip about 2 degrees wide and about 21 degrees high. Side eyes cover most of the rest of the circle.",
+     [
+      "R14",
+      "R17",
+      "R20"
+     ],
+     [
+      "params.field"
+     ]
+    ],
+    [
+     "g",
+     "Whole circle",
+     "Across all four pairs of eyes, a salticid sees about 360 degrees around it, although only the principal pair sees fine detail.",
+     [
+      "R23",
+      "R211"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Eye scanning",
+     "The principal retinas sweep side to side across a target, about 2 degrees at a time, with a period of about 1 to 1.3 seconds. A quick saccade of 15 degrees completes within a tenth of a second.",
+     [
+      "R80",
+      "R94",
+      "R89"
+     ],
+     [
+      "gaze.saccade",
+      "gaze.sweep"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The blur falloff, the fading of still things, the colour channels, the hold time and the strength of pull toward movement are the app's drawing, not records. They are set by the app.",
+     [],
+     [
+      "params.fovea",
+      "params.topoA",
+      "params.topoS",
+      "params.fall",
+      "params.gate",
+      "params.sat",
+      "params.gain",
+      "gaze.hold",
+      "magnet.k",
+      "matrices.JUMP"
+     ]
+    ]
+   ],
+   "version": 1
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R12",
+     "R4"
+    ],
+    "kind": "value",
+    "how": "Portia fimbriata principal eye resolution of 12.5 cycles per degree (R12) matches R4's 12.5 cycles per degree."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R23",
+     "R211"
+    ],
+    "kind": "value",
+    "how": "Four pairs of eyes give a 360 degree field of view, stated for salticids in general; graded g because the species is not measured."
+   },
+   {
+    "path": "params.field",
+    "records": [
+     "R14",
+     "R17",
+     "R20"
+    ],
+    "kind": "range_middle",
+    "how": "The principal retina is about 2 degrees wide and about 21 high (R14); graded g in this draft because the strip width is from a Phidippus record and the field from a wider salticid group."
+   },
+   {
+    "path": "params.rate",
+    "records": [
+     "R77"
+    ],
+    "kind": "value",
+    "how": "Salticids perceive flicker up to 40 Hz; the app keeps a person's rate, so the value is the family figure, graded g."
+   },
+   {
+    "path": "gaze.saccade",
+    "records": [
+     "R80"
+    ],
+    "kind": "value",
+    "how": "A 15 degree saccade is complete within 0.1 s in Metaphidippus harfordi."
+   },
+   {
+    "path": "gaze.sweep",
+    "records": [
+     "R94",
+     "R89"
+    ],
+    "kind": "range_middle",
+    "how": "Side-to-side sweeps of about 2 degrees with a period of 1.1 to 1.3 s, from Metaphidippus harfordi (R94) and Phidippus and Metaphidippus (R89)."
+   },
+   {
+    "path": "zones[0].cpd",
+    "records": [
+     "R12"
+    ],
+    "kind": "value",
+    "how": "The central sharp strip uses the principal eye resolution of 12.5 cycles per degree."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R12",
+    "quote": "The highest value of the spatial resolving power (Nyquist frequency) of the principle eyes of jumping spiders, such as Portia fimbriata Doleschell, 1859, is 12.5 cycles/degree"
+   },
+   {
+    "record": "R4",
+    "quote": "Portia (jumping spider) 716 0.04 A 3"
+   },
+   {
+    "record": "R23",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R211",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R14",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R17",
+    "quote": "In total they have a field of view of 0.6°."
+   },
+   {
+    "record": "R20",
+    "quote": "The anterior medial eyes (AMEs) are referred to as principal eyes and are movable, with a small visual field of around 5 deg each, but with high spatial resolution and color vision."
+   },
+   {
+    "record": "R77",
+    "quote": "salticids can perceive flicker up to 40 Hz (Clark and Uetz, 1990)"
+   },
+   {
+    "record": "R80",
+    "quote": "large saccades of 150 are complete within o-1 sec."
+   },
+   {
+    "record": "R94",
+    "quote": "The amplitude of horizontal scanning does not become smaller than 2° even for targets £° wide."
+   },
+   {
+    "record": "R89",
+    "quote": "It consists of an oscillatory, side-to-side movement of the retinae across the stimulus, with a period of 1-2 sec."
+   }
+  ]
+ }
+}

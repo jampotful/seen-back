@@ -1,0 +1,242 @@
+{
+ "key": "whale",
+ "chip": "Whale, dolphin or seal",
+ "who": "a whale, dolphin or seal",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Cetacea",
+   "Carnivora:Pinnipedia",
+   "Sirenia"
+  ]
+ },
+ "cue": "A soft, nearly colourless picture, with sound and touch doing much of the seeing.",
+ "modules": [
+  "sound"
+ ],
+ "version": 1,
+ "params": {
+  "cpd": {
+   "value": 4,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Lisney 2018"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "measured values run from 1.6 in a manatee to 11.5 in a harbour seal under water; the pick of 4 lies between a humpback whale and a Bryde's whale and is the app's"
+  },
+  "fov": {
+   "value": 125,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:JM 2022"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the middle of the 120 to 130 degrees given for a bottlenose dolphin; using it for seals and whales too is the app's choice"
+  },
+  "M": {
+   "value": "CONE_L",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   "note": "one kind of cone and no blue-sensitive cone; the single-sensor mapping is the app's reading"
+  },
+  "gain": {
+   "value": 3.16,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Madsen 1976"
+   ],
+   "range": [
+    1,
+    4
+   ],
+   "note": "worked out from a dolphin seeing 0.5 log units better than a person in dim light"
+  },
+  "sheen": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "many cetaceans and seals have a reflecting layer behind the retina; how strong the sheen looks is the app's choice"
+  }
+ },
+ "matrices": {
+  "CONE_L": {
+   "from_pigments": [
+    524
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024"
+   ],
+   "note": "one long-wavelength cone pigment, as found in whales and seals studied"
+  }
+ },
+ "zones": [],
+ "by": {},
+ "inputs": {
+  "sound": "optional",
+  "motion": "none",
+  "haptic": "none"
+ },
+ "sound": {
+  "k": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "how strongly sounds heard by the microphone ring across the picture"
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "Retinal sharpness runs from about 1.6 cycles per degree in a manatee to 3.3 in a humpback whale and 4.8 in a Bryde's whale. A harbour seal reaches 11.5 under water. Yours is many times higher. We blur the picture to about 4.",
+   [
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Mass 2011",
+    "marine-mammals.jsonl:Murayama 1998"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Whales and seals that have been studied carry only one kind of cone, the long-wavelength kind, and lack the blue-sensitive kind, so they are essentially colour-blind. A dolphin's cone pigment peaks near 522 to 524 nanometres. We draw the picture with that single colour sensor. Manatees are the exception, with two kinds of cone.",
+   [
+    "marine-mammals.jsonl:Bauer 2020",
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Kremers 2016",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M",
+    "matrices.CONE_L"
+   ]
+  ],
+  [
+   "m",
+   "Rods only in some whales",
+   "Rorquals, right whales and sperm whales have lost the genes for both cone pigments, so their vision rests on rods alone. The rod pigment of a grey whale peaks at 492 nanometres and that of an elephant seal near 483, in the blue-green.",
+   [
+    "marine-mammals.jsonl:Bischoff 2012",
+    "marine-mammals.jsonl:H 2009",
+    "marine-mammals.jsonl:Meredith 2013"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Field of view",
+   "A bottlenose dolphin's two eyes together cover about 120 to 130 degrees, and the two views overlap in only 20 to 30 degrees. A sperm whale has the same panoramic field with no overlap. We squeeze the picture to 125 degrees.",
+   [
+    "marine-mammals.jsonl:JM 2022"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Dim light",
+   "A bottlenose dolphin sees 0.5 log units better than a person in dim light, which is about three times more light, and 0.2 log units worse in bright light. Many cetaceans and seals have a reflecting layer behind the retina, while manatees lack one. We brighten the picture about three times and add a faint sheen.",
+   [
+    "marine-mammals.jsonl:Bauer 2020",
+    "marine-mammals.jsonl:Jamieson 1971",
+    "marine-mammals.jsonl:Kremers 2016",
+    "marine-mammals.jsonl:Madsen 1976"
+   ],
+   [
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "m",
+   "Echolocation",
+   "A bottlenose dolphin sends clicks between 40 and 150 kilohertz and can notice a change in echo delay as small as 1 microsecond. The sonar scene for small objects reaches about 100 metres. With the microphone on, this view can draw sound as rings across the picture.",
+   [
+    "marine-mammals.jsonl:C 2021"
+   ],
+   [
+    "params.sound.k",
+    "draw.sound"
+   ]
+  ],
+  [
+   "x",
+   "Whiskers and flow",
+   "A harbour seal can follow the wake of a fish for up to 30 seconds after it has passed, using whiskers that respond best between 10 and 100 hertz. No phone senses this, so it is left out.",
+   [
+    "marine-mammals.jsonl:J 2025"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The pick of 4 for sharpness, the 125 degree field, the single-sensor colour mapping, the threefold brightness gain, the sheen and the strength of the sound rings are the app's. The records cover many species that differ a good deal, so one view stands for all of them.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.M",
+    "matrices.CONE_L",
+    "params.gain",
+    "params.sheen",
+    "params.sound.k",
+    "draw.sound"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "sound.k"
+   ]
+  ]
+ ],
+ "draw": {
+  "sound": [
+   {
+    "name": "off",
+    "invented": true,
+    "note": "the view without sound"
+   },
+   {
+    "name": "rings",
+    "invented": true,
+    "note": "sounds heard by the microphone spread as rings across the picture, in the spirit of dolphin clicks"
+   }
+  ]
+ },
+ "draft": true
+}

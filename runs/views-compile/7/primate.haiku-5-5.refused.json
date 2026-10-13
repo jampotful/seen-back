@@ -1,0 +1,306 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "row 'Field of view': has a 'not X but Y' or ', not' construction; rewrite this sentence without it: \" app's whole-field figure of 180 degrees is a pick, not a measurement.\"",
+  "row 'Field of view' is graded m and cites no record graded m"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "chip": "Monkey or ape",
+   "who": "a monkey or ape",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "cue": "Three kinds of colour sensor in many monkeys, and a sharp middle with less detail than yours.",
+   "modules": [],
+   "falls_back_to": "mammal",
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "version": 1,
+   "params": {
+    "M": "primate_trichromat",
+    "cpd": {
+     "value": 21.4,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R12"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "a normal stumptail macaque's acuity, converted from 1.4 arc minutes; the whole picture is set to this value"
+    },
+    "fovea": {
+     "value": 2.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.5,
+      4
+     ],
+     "note": "no record gives the size of the sharp middle in these animals"
+    },
+    "fov": {
+     "value": 180,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      100,
+      360
+     ],
+     "note": "the app's whole-field pick; the records give only a Pan-like orbit allowing about 115 degrees of lateral field on one side, which does not fix a whole field"
+    },
+    "pupil": "o",
+    "gain": {
+     "value": 1.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no dim-light record was found for these animals"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "by analogy with the other views; no record gives it"
+    },
+    "topoS": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "by analogy with the other views; no record gives it"
+    }
+   },
+   "matrices": {
+    "primate_trichromat": {
+     "rows": [
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       -0.02234,
+       0.02234,
+       1
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a two-channel reading kept from the mammal view; the records show three cone classes in many monkeys, but no matrix from pigment peaks was built here"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Many monkeys and apes have three kinds of cone, as you do, but the owl monkey has a single kind and the bushbaby has one as well. Some New World monkeys vary between individuals. We show colour with a two-channel reading, which is the app's own choice.",
+     [
+      "R39",
+      "R40",
+      "R41",
+      "R49",
+      "R51",
+      "R52",
+      "R143",
+      "R137",
+      "R135",
+      "R144",
+      "param:M"
+     ],
+     [
+      "M"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A stumptail macaque resolves about 21 cycles per degree, close to a person's 30. Marmosets are set near 30 by cone counts. We blur the whole picture to about 21.",
+     [
+      "R12",
+      "R2",
+      "R4",
+      "param:cpd"
+     ],
+     [
+      "cpd"
+     ]
+    ],
+    [
+     "m",
+     "Owl monkeys and bushbabies",
+     "Owl monkeys and bushbabies are nocturnal. Owl monkeys have only a rudimentary fovea, and they lack colour vision, so their picture is grey with little sharp middle.",
+     [
+      "R168",
+      "R137",
+      "R138",
+      "R182",
+      "R183"
+     ],
+     []
+    ],
+    [
+     "m",
+     "Field of view",
+     "A Pan-like chimpanzee skull allows about 115 degrees of lateral field on one side. The app's whole-field figure of 180 degrees is a pick, not a measurement.",
+     [
+      "R18"
+     ],
+     []
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The size of the sharp middle, the dim-light gain, the whole-field figure and the blend of colour are the app's guesses. No record gave them for these animals.",
+     [
+      "R168"
+     ],
+     [
+      "fovea",
+      "gain",
+      "fov",
+      "topoA",
+      "topoS",
+      "M"
+     ]
+    ]
+   ],
+   "zones": []
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R12"
+    ],
+    "kind": "value",
+    "how": "The stumptail macaque record converts 1.4 arc minutes to 21.4 cycles per degree, so the value equals that record's converted figure."
+   },
+   {
+    "path": "M",
+    "records": [
+     "R39",
+     "R40",
+     "R41",
+     "R49",
+     "R51",
+     "R52",
+     "R143",
+     "R137",
+     "R135",
+     "R144"
+    ],
+    "kind": "value",
+    "how": "Records show three cone classes in many monkeys, one in owl monkeys and bushbabies, and variation in capuchins; the matrix is the app's two-channel reading, not built from these records, so it is graded i."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R12",
+    "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+   },
+   {
+    "record": "R18",
+    "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+   },
+   {
+    "record": "R168",
+    "quote": "Aotus has only a rudimentary fovea"
+   },
+   {
+    "record": "R137",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R138",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R39",
+    "quote": "to allow effective stimulation of all 3 cone types"
+   },
+   {
+    "record": "R40",
+    "quote": "the retinas of these species have only a single type of M/L cone, they lack colour vision"
+   },
+   {
+    "record": "R41",
+    "quote": "the retinas of these species have only a single type of M/L cone, they lack colour vision"
+   },
+   {
+    "record": "R49",
+    "quote": "these lemurs routinely have only a single class of cone photopigment in the middle to long wavelengths"
+   },
+   {
+    "record": "R51",
+    "quote": "These arise from individual variation in the presence of three different middle- to long-wavelength cone pigments"
+   },
+   {
+    "record": "R52",
+    "quote": "Macaca monkey and humans have three cone types containing either long-wavelength (L), medium-wavelength (M), or short-wavelength (S)-specific opsin"
+   },
+   {
+    "record": "R143",
+    "quote": "owl monkeys (Aotus), the sole nocturnal anthropoid primates, are the cone monochromacy due to the loss of functional S opsin gene"
+   },
+   {
+    "record": "R135",
+    "quote": "We studied a population of wild Costa Rican capuchins (Cebus imitator), comparing the diet and nutrition of adult female dichromats and trichromats."
+   },
+   {
+    "record": "R144",
+    "quote": "howler monkeys (Alouatta) attained the sex-independent trichromacy through juxtaposition of the spectrally differentiated L/M opsin genes"
+   },
+   {
+    "record": "R2",
+    "quote": "The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity."
+   },
+   {
+    "record": "R4",
+    "quote": "The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree"
+   },
+   {
+    "record": "R182",
+    "quote": "the owl monkeys, the only one nocturnal species in the simian primates"
+   },
+   {
+    "record": "R183",
+    "quote": "The owl monkey, Aotus azarae, has developed a fully nocturnal retina in recent evolution."
+   }
+  ]
+ }
+}

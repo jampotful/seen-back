@@ -1,0 +1,144 @@
+{
+ "key": "whale",
+ "chip": "Whale, dolphin or seal",
+ "who": "a whale, dolphin or seal",
+ "version": 1,
+ "applies_to": {
+  "order": [
+   "Cetacea",
+   "Carnivora:Pinnipedia",
+   "Sirenia"
+  ]
+ },
+ "cue": "Mostly blue-green and dim, with little colour and soft detail, as a whale or seal sees it.",
+ "falls_back_to": "mammal",
+ "modules": [],
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "M": "BEE_OR_MONO",
+  "cpd": {
+   "value": 3.5,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Bolin 2025",
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Murayama 1995"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the middle of the cetacean and seal sharpness records, with the app's pick of 3.5"
+  },
+  "pupil": "o",
+  "gain": {
+   "value": 1.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "note": "the brightening is the app's pick; the records show a reflecting layer but give no dim-light ratio"
+  }
+ },
+ "matrices": {
+  "BEE_OR_MONO": {
+   "rows": [
+    [
+     0.29275,
+     0.70725,
+     0
+    ],
+    [
+     0.29275,
+     0.70725,
+     0
+    ],
+    [
+     -0.02234,
+     0.02234,
+     1
+    ]
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a two-channel reading that stands in for the records, which show only one cone class"
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Colour",
+   "Most of these animals have one kind of cone, so they see little or no colour. Their picture is mostly in shades of blue-green and grey.",
+   [
+    "marine-mammals.jsonl:Griebel 2006",
+    "marine-mammals.jsonl:JM 2022",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Sharpness",
+   "A bottlenose dolphin, a Bryde's whale and a harbour seal resolve detail to a rough fraction of a person's. We soften the picture to about 3.5 cycles per degree.",
+   [
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Murayama 1995"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "i",
+   "Night eyes",
+   "Cetaceans and seals have a reflecting layer behind the retina, so dim light is brightened a little. The amount of brightening is the app's own choice.",
+   [
+    "marine-mammals.jsonl:Kremers 2016",
+    "marine-mammals.jsonl:Smodlaka 2016",
+    "marine-mammals.jsonl:Young 1988"
+   ],
+   [
+    "params.gain"
+   ]
+  ],
+  [
+   "i",
+   "The app's choices",
+   "The colour mapping, the blur and the brightness are the app's own choices. They lean on the records above but are not read from any one animal.",
+   [
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M",
+    "params.cpd",
+    "params.gain"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "matrices.BEE_OR_MONO"
+   ]
+  ]
+ ],
+ "zones": [],
+ "by": {},
+ "draft": true
+}

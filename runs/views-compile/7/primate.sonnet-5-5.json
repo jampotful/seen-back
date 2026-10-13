@@ -1,0 +1,226 @@
+{
+ "key": "primate",
+ "chip": "Monkey or ape",
+ "who": "a monkey or ape",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Primates"
+  ],
+  "not_family": [
+   "Hominidae:Homo"
+  ]
+ },
+ "cue": "Much like your own sight, with a sharp centre and three kinds of colour sensor.",
+ "modules": [],
+ "version": 1,
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "cpd": {
+   "value": 30,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Solomon 2014",
+    "primates.jsonl:Troilo 1993"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the sharp centre of a monkey with a fovea; the pick of one value for the whole picture is the app's"
+  },
+  "M": {
+   "value": "PRIMATE_TRI",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "three cone types with peaks gathered from three different primates, used for primates in general"
+  }
+ },
+ "matrices": {
+  "PRIMATE_TRI": {
+   "from_pigments": [
+    430,
+    530,
+    561
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "the 430 peak is from a cynomolgus monkey, the 530 peak from a howler monkey and the 561 peak from a marmoset; the combination is the app's"
+  }
+ },
+ "by": {
+  "Microcebus murinus": {
+   "params": {
+    "cpd": {
+     "value": 4.9,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "primates.jsonl:Melin 2016"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the grey mouse lemur, a small nocturnal primate"
+    }
+   }
+  },
+  "Pan": {
+   "params": {
+    "fov": {
+     "value": 152,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "primates.jsonl:Denion É 2016"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "a person's 180 scaled by the ratio of a Pan-like 115 degrees to a human 136.1 degrees, from a skull model"
+    }
+   }
+  },
+  "Aotus": {
+   "params": {
+    "sat": {
+     "value": 0,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "primates.jsonl:Jacobs 1996",
+      "primates.jsonl:Kawamura 2016"
+     ],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "owl monkeys have one cone type, so the picture is drawn in grey"
+    }
+   }
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Sharp in the middle",
+   "A marmoset's cone mosaic could carry about 30 cycles per degree at the fovea, about what you manage. A stumptail macaque with an intact fovea resolved 1.4 minutes of arc, about 21 cycles per degree. We keep the sharpness at 30.",
+   [
+    "primates.jsonl:Solomon 2014",
+    "primates.jsonl:Troilo 1993",
+    "primates.jsonl:Yarczower 1966"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Small night primates see coarser",
+   "A grey mouse lemur resolves about 4.9 cycles per degree, and another estimate from its retina gives 4.2. A common marmoset has about half the acuity of a person. For a mouse lemur we blur the picture to 4.9.",
+   [
+    "primates.jsonl:Joly 2014",
+    "primates.jsonl:Melin 2016",
+    "primates.jsonl:Nummela 2017"
+   ],
+   [
+    "by.Microcebus murinus.params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "Three kinds of colour sensor",
+   "Macaques have three kinds of cone, as you do. A cynomolgus monkey has a blue-sensitive cone near 430 nanometres. A howler monkey has a pigment near 530 and a marmoset one near 561. We combine these three peaks, so the colours come out close to what you see.",
+   [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000",
+    "primates.jsonl:O’Brien 1999",
+    "primates.jsonl:Saha 2024"
+   ],
+   [
+    "params.M",
+    "matrices.PRIMATE_TRI"
+   ]
+  ],
+  [
+   "m",
+   "Colour differs between monkeys",
+   "Male marmosets have two kinds of cone. Capuchins are two-cone or three-cone depending on the animal, and howler monkeys have three. The three-cone matrix stands for all of them, so some animals would see less colour than we show.",
+   [
+    "primates.jsonl:DePasquale 2023",
+    "primates.jsonl:Derrington 2002",
+    "primates.jsonl:Kawamura 2016"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Owl monkeys see in grey",
+   "Owl monkeys are the only night-active monkeys. Their retinas have a single type of cone, so they lack colour vision, and their fovea is only rudimentary. We draw their view in grey.",
+   [
+    "primates.jsonl:Jacobs 1996",
+    "primates.jsonl:KUNIYOSHI 2018",
+    "primates.jsonl:Kawamura 2016",
+    "primates.jsonl:Silveira 1993"
+   ],
+   [
+    "by.Aotus.params.sat"
+   ]
+  ],
+  [
+   "g",
+   "Chimpanzee field of view",
+   "A model built from chimpanzee and bonobo skulls gives a widest sideways reach of 115 degrees with the eye turned outward, against 136.1 degrees for a person. We scale a person's field by that ratio.",
+   [
+    "primates.jsonl:Denion É 2016"
+   ],
+   [
+    "by.Pan.params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Depth from two eyes",
+   "Neurons in a macaque's visual cortex respond to the small differences between the two eyes' pictures, which gives stereo depth. A marmoset can also focus over more than 20 dioptres. We leave depth as your camera gives it.",
+   [
+    "primates.jsonl:Gf 1995",
+    "primates.jsonl:Troilo 1993"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "One value of sharpness stands for every monkey with a fovea, and one three-cone colour matrix built from peaks of three different primates stands for all primates. The chimpanzee field of view is worked out by scaling, and owl monkeys are drawn with no colour. No record gave a pupil shape, a dim-light gain or a field of view for other species, so those stay as a person's.",
+   [],
+   [
+    "params.cpd",
+    "params.M",
+    "matrices.PRIMATE_TRI",
+    "by.Pan.params.fov",
+    "by.Aotus.params.sat"
+   ]
+  ]
+ ],
+ "draft": true
+}
