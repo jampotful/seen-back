@@ -625,10 +625,10 @@ async function meet(page, name) {
       const wantParts = ['part00', 'part00', 'part01', 'part01', 'part02'];       // the encoder's three parts and the rows' two, each once
       all('world', u.small === 'insect' && u.line === 'Download the full database of species?' && u.bytes === WE.bytes && u.parts.join() === wantParts.join()
         && u.first === 'insect|page' && /Monarch/.test(u.last || '') && u.place0 && u.place0.zone === 'UTC' && u.place0.known === false && u.place0.met === 0
-        && u.heron === 'Great blue heron|device-large' && u.kept && u.kept.met.length === 1 && u.kept.met[0].sci === 'Ardea herodias' && u.kept.met[0].zone === 'UTC' && u.place1.met === 1
-        && u.then === 'Monarch|device-large' && sameP && u.alias && /place from no known time zone and 2 creatures met\.$/m.test(u.about || '')
-        && r.world['America/Argentina/Buenos_Aires'].first === 'Southern monarch|device-large' && r.world['America/Argentina/Buenos_Aires'].place.known
-        && r.world['US/Eastern'].first === 'Monarch|device-large' && r.world['US/Eastern'].place.known
+        && u.heron === 'great blue heron|device-large' && u.kept && u.kept.met.length === 1 && u.kept.met[0].sci === 'Ardea herodias' && u.kept.met[0].zone === 'UTC' && u.place1.met === 1
+        && u.then === 'monarch|device-large' && sameP && u.alias && /place from no known time zone and 2 creatures met\.$/m.test(u.about || '')
+        && r.world['America/Argentina/Buenos_Aires'].first === 'southern monarch|device-large' && r.world['America/Argentina/Buenos_Aires'].place.known
+        && r.world['US/Eastern'].first === 'monarch|device-large' && r.world['US/Eastern'].place.known
         && !quiet(u.errors).length && !quiet(r.world['America/Argentina/Buenos_Aires'].errors).length && !quiet(r.world['US/Eastern'].errors).length);
       r.world.sameAsPython = sameP;
     }
