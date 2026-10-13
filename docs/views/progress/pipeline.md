@@ -9,13 +9,13 @@ Started 13 October 2026, 04:40 UTC. Stops at 75 minutes (about 05:55 UTC).
 - tools/lit/extract.py written (plan, run, collect, check) with stdlib only; tools/lit/test_extract.py passes (7 tests, no key needed).
 - Plan on spider-night: 650 passages, expected $0.09, ceiling $0.25.
 
-## Next
-1. Calibration set up (agent records vs collection).  
-2. Calibrate with the grep and format checks; the API part waits for the key.
-3. Calibration against research/birds, cat-dog, ground-invertebrates.
-4. .github/workflows/lit-table.yml and ci/lit/table.sh.
+- tools/lit/calibrate.py written. Offline calibration done (below).
+- .github/workflows/lit-table.yml, ci/lit/table.sh and ci/lit/table.env written; table.sh run end to end in plan mode against a local checkout of pub/lit-t1 (estimates and offline calibration produced).
+- extract.py `run` tested against a stand-in API server (8 tests pass): smoke request, batch submit, wait, results, check pass.
 
-## Notes
-- `tools/lit/harvest.py` and `ci/lit/*` exist only on `run/lit/t1`; `main` has `ci/put_branch.sh` and `ci/return.sh`.
-- No ANTHROPIC_API_KEY in this session.
-- The checkout at /home/claude/seen-back is shared with other agents (its branch changed under me); I work in a private clone.
+## Offline calibration (no API)
+593 agent records (birds 218, cat-dog 178, ground-invertebrates 197). Sources cited: 207; in the collection: 188 (60 with full text, 120 abstract only). The agents' own quotes found in the collection's text or abstract and carrying the value: 334 of 593 (56%). That is the most the extractor can recover from the collection. The other 44%: source not in the collection (153), in it without text or abstract (78), or the agent's quote came from a text the collection does not hold.
+
+## Next
+1. When the key exists: set LIT_PLAN_ONLY=0 in ci/lit/table.env, push run/lit-table/<label>; read CALIBRATION.md on ci.
+2. Review the first topic's table by hand (20 records) before the full run.

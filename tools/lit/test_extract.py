@@ -111,5 +111,96 @@ class T(unittest.TestCase):
             E.need_key()
 
 
+# ---- a stand-in for the API, to run `extract.py run` end to end without a key --------------------------------------
+import http.server, threading, re as _re, io, contextlib
+
+
+class Mock(http.server.BaseHTTPRequestHandler):
+    batches = {}
+    singles = 0
+
+    def log_message(self, *a):
+        pass
+
+    def reply(self, obj, raw=None):
+        b = raw if raw is not None else json.dumps(obj).encode()
+        self.send_response(200); self.send_header("content-length", str(len(b))); self.end_headers(); self.wfile.write(b)
+
+    @staticmethod
+    def model(params):
+        user = params["messages"][0]["content"]
+        body = user.split("---\n", 1)[1]
+        recs = []
+        for sent in _re.split(r"(?<=[.!?])\s+", body):
+            m = _re.search(r"\d+(?:\.\d+)?", sent)
+            if m and len(recs) < 2:
+                recs.append({"taxon": "Lycosa", "trait": "interreceptor_deg", "value": float(m.group()), "units": "degrees",
+                             "eye": "", "method": "", "conditions": "", "where": "text", "quote": " ".join(sent.split()[:12]),
+                             "grade": "m", "note": ""})
+        recs.append({"taxon": "x", "trait": "motion", "value": "fast", "units": "", "where": "text",
+                     "quote": "this sentence was invented by the mock model", "grade": "m"})
+        return json.dumps(recs)
+
+    def usage(self):
+        return {"input_tokens": 900, "output_tokens": 120, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 3000}
+
+    def do_POST(self):
+        n = int(self.headers["content-length"]); body = json.loads(self.rfile.read(n))
+        assert self.headers["x-api-key"] == "test-key"
+        if self.path == "/v1/messages":
+            Mock.singles += 1
+            self.reply({"content": [{"type": "text", "text": self.model(body)}], "usage": self.usage(), "stop_reason": "end_turn"})
+        elif self.path == "/v1/messages/batches":
+            bid = "msgbatch_%d" % (len(Mock.batches) + 1)
+            Mock.batches[bid] = body["requests"]
+            self.reply({"id": bid, "processing_status": "in_progress"})
+        else:
+            self.send_response(404); self.end_headers()
+
+    def do_GET(self):
+        host = "http://127.0.0.1:%d" % self.server.server_address[1]
+        m = _re.match(r"/v1/messages/batches/(\w+)(/results)?$", self.path)
+        if not m or m.group(1) not in Mock.batches:
+            self.send_response(404); self.end_headers(); return
+        reqs = Mock.batches[m.group(1)]
+        if m.group(2):
+            lines = [json.dumps({"custom_id": r["custom_id"], "result": {"type": "succeeded", "message": {
+                "content": [{"type": "text", "text": self.model(r["params"])}], "usage": self.usage(), "stop_reason": "end_turn"}}})
+                for r in reqs]
+            self.reply(None, raw="\n".join(lines).encode())
+        else:
+            self.reply({"id": m.group(1), "processing_status": "ended", "request_counts": {"succeeded": len(reqs)},
+                        "results_url": host + self.path + "/results"})
+
+
+class EndToEnd(unittest.TestCase):
+    def test_run_against_mock(self):
+        srv = http.server.HTTPServer(("127.0.0.1", 0), Mock)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        E.API = "http://127.0.0.1:%d" % srv.server_address[1]
+        os.environ["ANTHROPIC_API_KEY"] = "test-key"
+        d = tempfile.mkdtemp()
+        os.makedirs(os.path.join(d, "lit", "t", "text"))
+        with open(os.path.join(d, "lit", "t", "text", "a.txt"), "w") as f:
+            f.write("Intro.\n\nThe inter-receptor angle was 2.45 degrees in the AL eyes. " + "More text here. " * 40)
+        with open(os.path.join(d, "lit", "t", "index.jsonl"), "w") as f:
+            f.write(json.dumps({"doi": "10.1/aaa", "key": "10.1/aaa", "title": "T", "year": 2010, "authors": ["A B"],
+                                "abstract": "x " * 40, "text": "text/a.txt"}) + "\n")
+            f.write(json.dumps({"doi": "10.1/bbb", "key": "10.1/bbb", "title": "U", "year": 2011, "authors": ["C D"],
+                                "abstract": "The acuity was 1.5 cycles per degree in the posterior eyes. " + "y " * 30, "text": None}) + "\n")
+        sys.argv = ["extract.py", "run", "--lit", os.path.join(d, "lit"), "--topics", "t", "--out", os.path.join(d, "out"),
+                    "--max-usd", "1", "--wait-minutes", "1"]
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            E.main()
+        rows = [json.loads(l) for l in open(os.path.join(d, "out", "t.jsonl"))]
+        self.assertEqual(Mock.singles, 1)
+        self.assertGreaterEqual(len(rows), 2)
+        self.assertTrue(all(r["trait"] == "interreceptor_deg" for r in rows))      # the invented quote never survives
+        self.assertIn("dropped_quote_not_found", buf.getvalue() + open(os.path.join(d, "out", "SUMMARY.md")).read())
+        self.assertTrue(os.path.exists(os.path.join(d, "out", "_work", "batches.json")))
+        srv.shutdown()
+
+
 if __name__ == "__main__":
     unittest.main()
