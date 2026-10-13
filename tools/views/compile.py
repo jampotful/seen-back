@@ -32,6 +32,7 @@ def _load(name, path):
 
 EX = _load("lit_extract", os.path.join(ROOT, "tools", "lit", "extract.py"))
 CS = _load("check_spec", os.path.join(HERE, "check_spec.py"))
+PG = _load("pigments", os.path.join(HERE, "pigments.py"))
 squash = EX.squash
 
 MAX_RECORDS = 400
@@ -187,7 +188,7 @@ RULES_TEXT = """WHAT TO INCLUDE
 - Include a parameter when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Use the blocks the schema lists where the records describe them: zones for a region with its own sharpness or colour (a fovea, a sharp strip, a blind spot), gaze for scanning, dwell and saccade timings, spectrum and matrices for colour, pace for flicker, and so on. Leave out a parameter or a block about which the records say nothing; the engine then uses a person's value. Do not fill the spec with guesses.
 - A number graded m or g must be a number that a cited record states, or lie between two cited records. When you work a number out, say so with kind calculation and grade it at most g.
 - Write two or three rows that say plainly what the animal's view is like, each citing records, and one row graded i for the app's own choices, naming those parameters in its fifth element.
-- Colour. params.M names a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
+- Colour matters most to what a person sees, so keep a colour matrix whenever records give pigment peaks. params.M is a parameter object whose value is the name of a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
 - The spec is one JSON object in the spec field; claims and quotes are separate fields.
 
 WRITING RULES (rows, notes and cue)
@@ -767,9 +768,13 @@ def check_reply(job, F, records, reply, like_spec, floor):
         if peaks:
             cited = [records[i] for i in ids_in(mat.get("src")) if i in records and records[i].get("trait") == "lambda_max_nm"]
             nums = [x for r in cited for x in flat_numbers(r.get("value"))]
+            avail = sorted({(round(x), r["_id"]) for r in records.values() if r.get("trait") == "lambda_max_nm" and r["_inside"] and r.get("grade") == "m"
+                            for x in flat_numbers(r.get("value")) if isinstance(r.get("value"), (int, float))})
             for pk in peaks:
                 if not any(abs(pk - n) <= 2 for n in nums):
-                    errs.append("matrices.%s: peak %s nm is not within 2 nm of a cited lambda_max_nm record" % (name, pk))
+                    errs.append("matrices.%s: peak %s nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. "
+                                "Single peaks from records graded m on the view's own taxon: %s. Put the records you use in src and keep the colour matrix; "
+                                "do not drop it" % (name, pk, ", ".join("%d nm (%s)" % a for a in avail[:30]) or "none"))
     # 6. inside the floor's range: ranges were set above and checked by the checker; floors are warnings
     for path, o in params.items():
         v = o.get("value")
@@ -904,6 +909,7 @@ def finish(key, model, P, reply, F, specs, floor, out):
 def write_outputs(out, key, tag, job, P, spec, cby, warns, reply, model):
     os.makedirs(out, exist_ok=True)
     final = rewrite_ids(copy.deepcopy(spec), P["records"])
+    PG.fill(final.get("matrices"))                 # rows and q for every matrix given by pigment peaks, as tools/views/pigments.py does for views/
     json.dump(final, open(os.path.join(out, "%s.%s.json" % (key, tag)), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     open(os.path.join(out, "%s.%s.md" % (key, tag)), "w", encoding="utf-8").write(
         report_md(job, model, final, cby, P["records"], warns, P["stats"], len(P["records"])))

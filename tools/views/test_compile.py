@@ -123,5 +123,14 @@ bad = copy.deepcopy(good); bad["spec"]["params"]["dof"] = P(0.2, "i", True, []);
 e, w = run(bad)
 ok(not e and any("Settings the app chose" in x for x in w), "an invented parameter no row names gets the catch-all row (%s)" % (e or w))
 
+records["R5"] = rec(5, trait="lambda_max_nm", value=344, quote="UV receptor peaks at 344 nm.")
+bad = copy.deepcopy(good)
+bad["spec"]["matrices"] = {"X": {"from_pigments": [344, 440], "grade": "m", "invented": True, "src": ["R5"]}}
+e, _ = run(bad)
+ok(any("peak 440" in x and "344 nm (R5)" in x for x in e) and not any("peak 344" in x for x in e), "a pigment peak no record gives is refused and the available peaks are listed")
+bad["spec"]["matrices"]["X"]["from_pigments"] = [344]
+out = C.rewrite_ids(copy.deepcopy(bad["spec"]), records); C.PG.fill(out["matrices"])
+ok(len(out["matrices"]["X"]["rows"]) == 3, "rows are computed for a matrix given by pigment peaks")
+
 print("%d failed" % len(fails))
 sys.exit(1 if fails else 0)
