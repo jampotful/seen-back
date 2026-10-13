@@ -18,7 +18,7 @@ Started 13 October 2026 at 01:47 UTC (21:47 EDT on 12 October). The evidence log
 
 1. **Sharks against rays.** Every shark studied has one kind of cone, so a shark sees no colour (logs 19, 20). Most rays have two cone classes and some have told colours apart in tests (logs 18, 26, 139), while skates have rods only (log 27). The eyes also face differently: rays share a view overhead and some see the whole circle (logs 94, 95), and their electric sense crowds the underside around the mouth (logs 46, 131). Rays flicker slower than sharks (logs 122 to 125). **Line: by order.** `shark` takes the eight shark orders (60,349 records, 2.2% of fish records). `ray` takes the rays, skates and chimaeras (72,046 records, 2.6%).
 2. **Fresh water against the sea.** The light differs more than any eye does. Tea-coloured lakes soak up blue and leave red light, and the darkest leave only a small patch of red light overhead (logs 71, 72); clear water turns blue with depth, and sea water removes red within 10 to 20 metres (logs 4, 72, 132). The eyes follow the water: freshwater fish shift their pigments toward red, often with vitamin A2 (logs 79, 114, 142), while reef fish carry ultraviolet and blue cones and little red sensitivity (logs 62, 108, 110). Reef fish also include the families whose two eyes move independently, each with a fovea (logs 74, 75), which no freshwater minnow, catfish, gar or salmon has. **Line: by family, by the habitat where the family's records are made.** With the families and orders classified as below, `fish` takes 747,083 records (27.0% of fish records) and the new view `reef` takes 1,677,618 (60.7%). Groups with members in both waters hold 160,480 records (5.8%: scorpionfish and sculpins, temperate basses, sticklebacks, silversides, smelts, milkfish, sleepers, grunters), and small perch-order families not yet looked up hold 45,833 (1.7%); both need a species-level habitat flag, which the full database can carry. In Alachua the rule puts 997 records (97.0%) with `fish` and 27 with `reef`, and 18 of those 27 are wrong: the gizzard and threadfin shads live in Florida's fresh water, so the herring family needs that flag too. The other nine (six Hogchokers, a mullet, a needlefish and a burrfish) are coastal fish that enter rivers.
-3. **Colour inside `fish`.** Sunfish and bass have two cone types and none for blue or ultraviolet (logs 80 to 83), and a study of six sunfish species found their eyes change little between light habitats (log 92). Minnows, carp, livebearers and gars have four or more cone classes including ultraviolet (logs 31 to 35, 76, 77, 112, 114). Sunfish hold 25.2% of `fish` records worldwide and 31.0% in Alachua, and the livebearers alone hold 30.1% in Alachua, so one colour setting would be false for a third of the county's fish either way. **Line: a colour setting per family**, chosen when the recognizer or the full database names the fish: `sunfish` for Centrarchidae (188,208 records), and the four-colour default for the rest.
+3. **Colour inside `fish`.** Sunfish and bass see colour through green and red cones only: the largemouth bass has two cone types and none for blue or ultraviolet (logs 80 to 83), and six sunfish species, the Bluegill among them, express green and red cone opsins with a blue opsin at 0.05% of cone opsin and no ultraviolet opsin, alike in a clear and a dark lake (logs 150, 151). Minnows, carp, livebearers and gars have four or more cone classes including ultraviolet (logs 31 to 35, 76, 77, 112, 114, 153). Sunfish hold 25.2% of `fish` records worldwide and 31.0% in Alachua, and the livebearers alone hold 30.1% in Alachua, so one colour setting would be false for a third of the county's fish either way. **Line: a colour setting per family**, chosen when the recognizer or the full database names the fish: `sunfish` for Centrarchidae (188,208 records), and the four-colour default for the rest.
 
 The classification used for the shares: freshwater orders Cypriniformes, Salmoniformes, Cyprinodontiformes, Esociformes, Lepisosteiformes, Characiformes, Amiiformes, Acipenseriformes, Osteoglossiformes, Percopsiformes, Synbranchiformes, Gymnotiformes, Polypteriformes, the lampreys and the lungfish; the catfish except the sea catfish (Ariidae) and eel catfish (Plotosidae); the freshwater eels (Anguillidae); and the perch-order families Centrarchidae, Percidae, Cichlidae, Channidae and Elassomatidae. Everything else that was classified is marine, chiefly 58 perch-order families of reefs and coasts (among them triplefins, hawkfish, emperors, mackerels and tunas, fusiliers, morwongs and sandperches) and the orders of pufferfish, seahorses, flatfish, morays, squirrelfish and herrings. Salmon, trout and sturgeon are counted as freshwater although many spend years at sea, and the killifish family includes salt-marsh species. The family counts come from the facet saved on `ci`, joined to its names file, which covers only the first 3,000 of 17,449 animal families; nine more family keys were read from GBIF's name matcher on 13 October, the sunfish key came from the earlier sheet, four more were matched by their record counts, and the names of the twelve largest remaining perch-order families were read from GBIF's species pages on 13 October (the perch-order family facet was read the same day).
 
@@ -40,20 +40,20 @@ The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` 
 
 ### Rows
 
-1. `['m', 'Colour of a sunfish', 'Largemouth bass have two kinds of colour-sensing cells, tuned to green and to red, and none for blue or ultraviolet. Trained bass mistook blue for black and chartreuse yellow for white. For a sunfish or bass, this view turns blues dark and yellows pale.']`
-   Logs 80, 81, 82, 83 (Mitchem et al. 2019); log 92 (Bertinetti 2025) for drawing the Bluegill and other sunfish the same way. Shown in the `sunfish` setting only.
-2. `['g', 'Colour of other freshwater fish', 'Minnows, carp and livebearers such as the mosquitofish have four or more kinds of colour-sensing cells, and one kind senses ultraviolet light, which people cannot see. For these fish, this view keeps your camera’s colours and adds a faint violet sheen for ultraviolet, which is the app’s own invention.']`
-   Logs 114 (zebrafish cones at 365, 416, 483 and 574 nm), 112 (guppy cone classes from 359 to 560 nm), 31 to 35 (mosquitofish opsin genes, predicted from sequence), 76 and 77 (spotted gar). Shown in the default setting.
-3. `['m', 'Sharpness', 'A bluegill sees about a twelfth as much detail as you do, and a largemouth bass about a twentieth. This view blurs the picture to match.']`
-   Logs 84 (Bluegill, about 5 cycles per degree by behaviour), 38 (bass, 3.0 by anatomy). 5/60 and 3/60.
+1. `['m', 'Colour of a sunfish', 'Bluegills, bass and other sunfish see colour through two kinds of colour-sensing cells, tuned to green and to red, with almost none for blue and none for ultraviolet. Trained largemouth bass mistook blue for black and chartreuse yellow for white. For a sunfish, this view turns blues dark and yellows pale.']`
+   Logs 150, 151 (Bertinetti et al. 2025: six sunfish species, Bluegill included), 80, 81, 82, 83 (Mitchem et al. 2019). Shown in the `sunfish` setting only.
+2. `['g', 'Colour of other freshwater fish', 'Minnows, carp, gars and livebearers such as the mosquitofish have four or more kinds of colour-sensing cells, and one kind senses ultraviolet light, which people cannot see. For these fish, this view keeps your camera’s colours and adds a faint violet sheen for ultraviolet, which is the app’s own invention.']`
+   Logs 114 (zebrafish cones at 365, 416, 483 and 574 nm), 112 (guppy cone classes from 359 to 560 nm), 31 to 35 (mosquitofish opsin genes, predicted from sequence), 153, 76 and 77 (spotted gar: two ultraviolet opsins expressed). Shown in the default setting.
+3. `['m', 'Sharpness', 'A bluegill sees about a twelfth as much detail as you do, and a largemouth bass or a green swordtail, a relative of the mosquitofish, about a twentieth. This view blurs the picture to match.']`
+   Logs 84 (Bluegill, about 5 cycles per degree by behaviour), 38 (bass, 3.0 by anatomy), 154 (green swordtail, about 3 by anatomy; females 2 to 3 by behaviour). 5/60 and 3/60.
 4. `['m', 'Sharpest spot', 'A white crappie, a kind of sunfish, has its densest patch of cone cells in the part of the eye that looks forward, drawn out along the horizon, and it starts most attacks on prey within 40 degrees of straight ahead. This view is sharpest in the middle and along the horizon.']`
    Logs 40, 41 (Browman et al. 2008); log 89 (the Golden Shiner's sharp area also looks forward).
 5. `['g', 'Field of view', 'A golden shiner, a common minnow, takes in about 335 degrees around itself, and its two eyes overlap for about 31 degrees in front. A phone camera sees far less, so this view squeezes the picture and bends its edges to suggest the wider sweep.']`
    Logs 86, 87 (Pita et al. 2015).
-6. `['g', 'Tea-coloured water', 'Rain washes tannins from swamps into many Florida lakes and stains them the colour of tea. Tea-coloured water soaks up blue light and leaves red, and in the darkest water almost the only light left comes from a small patch overhead. This view tints the picture amber and darkens it below and toward the edges.']`
-   Logs 71 (Florida LAKEWATCH), 72 (Marques et al. 2017).
-7. `['g', 'Eyes tuned toward red', 'Many freshwater fish shift their eyes toward red light by building their light-sensing pigments from vitamin A2 in place of vitamin A1. A minnow called the common shiner uses far more A2 in winter than in summer. This view leans toward red in the cooler months.']`
-   Logs 79 (Cui et al. 2026), 142 (Allen et al. 1982: 17% in summer, 68% in winter), 114 (A2 in zebrafish cones).
+6. `['g', 'Tea-coloured water', 'Rain washes tannins from swamps into many Florida lakes and stains them the colour of tea. Such water soaks up blue light first, so a metre down in a dark lake only a fifth as much light remains as in a clear one, and most of it is orange and red. This view tints the picture amber and darkens it below and toward the edges.']`
+   Logs 71 (Florida LAKEWATCH), 156 (Johnson et al. 2013, Florida killifish water), 152 (Bertinetti et al. 2025: half the light beyond 640 nm in the dark lake against 582 nm in the clear one; 21% of the photons at 1 m), 72 (in the darkest blackwater the light comes from a small cone overhead).
+7. `['g', 'Eyes tuned toward red', 'Many freshwater fish shift their eyes toward red light by building their light-sensing pigments from vitamin A2 in place of vitamin A1. A minnow called the common shiner uses far more A2 in winter than in summer, and Florida’s bluefin killifish makes more of its red- and green-sensing pigments in tea-coloured water. This view leans toward red in the cooler months.']`
+   Logs 79 (Cui et al. 2026), 142 (Allen et al. 1982: 17% in summer, 68% in winter), 155 (Johnson et al. 2013), 114 (A2 in zebrafish cones).
 8. `['g', 'Looking up', 'Under a calm surface, a fish sees the whole sky squeezed into a bright circle about 97 degrees across, straight overhead. Beyond the circle, the underside of the surface works like a mirror and reflects the water below. When you tilt the phone upward, this view draws the circle.']`
    Logs 69 (Sabbah et al. 2006), 70 (total internal reflection beyond 48.6 degrees, OpenStax; the mirror seen from below is the direct consequence, noted in the log).
 9. `['g', 'Pace', 'Bony fish follow a flickering light up to about 46 flashes a second on average, a little below the roughly 60 at which a flickering light looks steady to you. This view keeps your pace.']`
@@ -65,14 +65,18 @@ The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` 
 12. `['x', 'Electric fields', 'Catfish and lampreys can sense the faint electric fields that living animals make in water. The picture leaves this sense out.']`
     Logs 59 (Alves-Gomes 2001), 52 (Bodznick and Northcutt 1981).
 
-A lamprey row for a later `lamprey` setting: `['g', 'Colour of a lamprey', 'Lampreys have one or two kinds of colour-sensing cells, and the southern lamprey has two, tuned near 515 and 613 nanometres. This view shows a lamprey fewer colours than other fish.']` Logs 57, 58 (Collin et al. 2003; the other lampreys it names have one cone or none). Lampreys hold 1,863 records.
+Rows for three later settings:
+
+- `lamprey` (1,863 records): `['m', 'Colour of a lamprey', 'A sea lamprey has two kinds of light-sensing cells, a rod and a single kind of cone, so it probably sees little colour. The southern lamprey has two kinds of cone. This view shows a lamprey fewer colours than other fish.']` Logs 149 (Wang et al. 2024; the inference about colour is the sheet's), 57, 58 (Collin et al. 2003).
+- `catfish` (Siluriformes, 41,655 freshwater records; 93 in Alachua): `['x', 'Taste all over', 'A catfish carries taste buds over its whole skin, so it tastes the water and the lake bottom with its body, and it finds food by touch. The picture leaves taste out.']` Log 148 (Biedenbach 1973). With it: `['g', 'Dim light', 'Many catfish have a reflecting layer behind the retina that gives light a second pass. For a catfish, this view lifts the shadows.']` Log 60 (Ito et al. 1975; bullhead catfish not confirmed). The electric row (row 12) applies too.
+- `salmon` (Salmonidae, 71,568 records): `['m', 'Ultraviolet comes and goes', 'Young salmon and trout see ultraviolet light, lose those cells when they change for life at sea, and grow them back as they mature and return to their home streams. This view gives the violet sheen to young trout and salmon only.']` Logs 145 (Allison et al. 2006), 146 (Coughlin and Hawryshyn 2008).
 
 ### The picture
 
 | Field | Value | Behind it |
 |---|---|---|
 | `fov` | 335 | Log 86. The engine shrinks the camera picture to 180/335 = 0.54 and bends the edges for the rest. |
-| `cpd` | 4 | Logs 84 (5), 38 (3.0), 88 (2.86, Golden Shiner, anatomical). The value inside the range is `invented`. Acuity follows eye size (log 140), so a later version could scale `cpd` with the fish's size where the full database knows it. |
+| `cpd` | 4 | Logs 84 (5), 38 (3.0), 88 (2.86, Golden Shiner, anatomical), 154 (3, green swordtail). The value inside the range is `invented`. Acuity follows eye size (log 140), so a later version could scale `cpd` with the fish's size where the full database knows it, and the `catfish` setting could drop to 2 (`invented`). |
 | `topoA` | 1 | Logs 40, 89: a forward-looking area. |
 | `topoS` | .5 | Log 40: the crappie's area is drawn out along the horizontal meridian. The mix of the two weights is `invented`. |
 | `fall` | 1.4 | Log 88: the shiner's edge is 2.86/1.18 = 2.4 times coarser than its peak, which is `fall` 1.4 in the engine's convention (blur times 1 + `fall` at half the frame height). |
@@ -81,20 +85,23 @@ A lamprey row for a later `lamprey` setting: `['g', 'Colour of a lamprey', 'Lamp
 | `M` (`sunfish`) | [1, 0, 0, 0, 1, 0, 0, 1, 0] | Logs 80 to 83. Read by rows, the blue channel takes the green signal, so pure blue goes black and yellow goes white, the two confusions the trained bass made. The matrix is `invented`. |
 | `M` (default) | identity, `sheen` .5 | Logs 112, 114. The violet sheen is `invented`. |
 | `sat` | 1 | Nothing measured calls for a change. |
-| `gain` | 1 | No dim-light measurement in a freshwater fish was opened. |
+| `gain` | 1 (`catfish` 1.3) | No dim-light measurement in a freshwater fish was opened; the catfish lift follows log 60 and its amount is `invented`. |
 | `rate` | 1 | Log 68: the measured mean (46) sits below 60, and slowing the picture would claim the opposite. Keeping the person's pace is `invented`. |
 | `persist` | 0 | 1/46 = 0.02 seconds of trail, too short to see. |
-| water | amber, see below | Logs 71, 72. |
+| water | amber, see below | Logs 71, 72, 152, 156. |
 
 ```
 fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, topoA: 1, topoS: .5, fall: 1.4, pupil: 'o', dof: 8, sheen: .5,
   cue: 'Detail is coarse, the field is wide, and the water is the colour of tea. Tilt the phone up to see the sky as a fish does.', rows: [ /* above */ ] }
 // setting sunfish (Centrarchidae): M: [1, 0, 0, 0, 1, 0, 0, 1, 0], sheen: 0, row 1 in place of row 2
+// setting catfish (Siluriformes): cpd: 2, gain: 1.3, with the taste and dim-light rows
+// setting salmon (Salmonidae): sheen only when the full database says the fish is young (otherwise 0)
+// setting lamprey (Petromyzontiformes): M: DEUTAN in place of the identity, with the lamprey row
 ```
 
 ### New effects the evidence calls for
 
-1. **Water colour by distance (tea-coloured fresh water).** What the person sees: near things keep their colours, and farther things turn amber, then brown, then dark, with the sides and the lower part of the frame darker than the top (log 72: in blackwater the light from the sides and below is absorbed and red light comes from a small patch above). Phone input: the engine's existing guess that lower in the frame is closer, or a depth estimate from the camera where it is affordable. Drawing: the standard picture of light in water, with each colour channel multiplied by exp(−k d) and a little of the water's own colour added back as haze; k is small for red and large for blue in fresh tea-coloured water (log 72), and the opposite in the sea (logs 4, 132). The k values are `invented` until a measured spectrum of a Florida lake is found (wanted list). Cost: one multiply and one mix per pixel with a depth value already at hand; cheap. What makes it beautiful: tea water glows warm near the surface, and the darkening toward the bottom is the real reason a tannic lake looks bottomless.
+1. **Water colour by distance (tea-coloured fresh water).** What the person sees: near things keep their colours, and farther things turn amber, then brown, then dark, with the sides and the lower part of the frame darker than the top (log 72: in blackwater the light from the sides and below is absorbed and red light comes from a small patch above). Phone input: the engine's existing guess that lower in the frame is closer, or a depth estimate from the camera where it is affordable. Drawing: the standard picture of light in water, with each colour channel multiplied by exp(−k d) and a little of the water's own colour added back as haze; k is small for red and large for blue in fresh tea-coloured water (log 72), and the opposite in the sea (logs 4, 132). The constants can be set from log 152: in the dark lake half the light lay beyond 640 nm and only 21% of the clear lake's photons reached 1 m, against a halfway point of 582 nm in the clear lake. Per-channel values for a Florida lake are still `invented` until a measured Florida spectrum is found. Cost: one multiply and one mix per pixel with a depth value already at hand; cheap. What makes it beautiful: tea water glows warm near the surface, and the darkening toward the bottom is the real reason a tannic lake looks bottomless.
 2. **Snell's window when the phone looks up.** What the person sees: tilting the phone toward the sky squeezes the whole scene above into a bright disc about 97 degrees across, its rim crowded and stretched, and outside the disc the picture shows a mirror image of the lower part of the frame (logs 69, 70). Phone input: the orientation sensor for tilt (behind the engine's permission flag); the camera for the scene. The camera's roughly 70 degree field fills only the central 51 degrees of the disc (arcsin(sin 35° / 1.33) = 25.5°, doubled), so the rim is stretched from the frame's edges, as the wide field is today. Cost: one remapping pass and a tilt reading; moderate. Beauty: the disc is the single most recognizable sight of being under water.
 3. **Seasonal shift for minnows.** What the person sees: the default setting leans slightly toward red in winter months, read from the phone's date (log 142). Cost: one number in the colour matrix per month; trivial. The size of the shift is `invented`; the direction is measured in one minnow.
 4. **Lateral line ripples.** What the person sees: when something moves close to the phone, a soft pressure ripple runs along the edge of the screen on that side, fading with distance, as the lateral line feels flow within one or two body lengths (logs 48, 49). Phone input: the engine's motion-salience map, with large, near motion (big image motion low in the frame) standing in for a nearby swimmer; the phone's own movement removed with the motion sensors. Cost: moderate, since the salience map is already planned. The mapping from image motion to water flow is `invented` and the row stays `x` until it is drawn.
@@ -133,7 +140,8 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 |---|---|---|
 | `fov` | 335 | `invented`, copied from the Golden Shiner (log 86); no reef fish field was opened. |
 | `cpd` | 2 | Logs 90, 91: 1.3 to 1.7 by behaviour in small reef fish, 3.2 to 4.6 by anatomy. Larger reef fish have larger eyes and likely see more (log 140). The value is `invented` within the range. |
-| `topoA` | 1 | Log 75: foveae in many reef groups. |
+| `topoA` | 1 | Log 75: foveae in many reef groups; logs 143, 144: a forward-looking area in reef fish generally. |
+| `topoS` | .4 | Log 144: the area often stretches into a horizontal streak in open-water reef fish, and stays a round area in fish that live among coral (log 143). The weight is `invented`. |
 | `fall` | 1.6 | `invented`. A fovea is a sharper, smaller spot than an area. |
 | `pupil` | 'o' | Log 104. Shape `invented`. |
 | `M` | [.35, 0, 0, 0, 1, 0, 0, 0, 1] | Logs 108, 110: no cone beyond about 530 nm, so reds go dark. The matrix is `invented`. |
@@ -143,7 +151,7 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 | water | blue-green, see section 2 effect 1 | Logs 4, 132. |
 
 ```
-reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, fall: 1.6, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], sheen: .6, rate: .86,
+reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: .4, fall: 1.6, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], sheen: .6, rate: .86,
   cue: 'Reds fade to grey, the water is blue, and each eye looks its own way.', rows: [ /* above */ ] }
 // setting hagfish (Myxiniformes): field: 1, sat: .3, pupil: 'none', rows: the hagfish row only, with the looking-up and moving-water rows
 ```
@@ -172,10 +180,12 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, fall: 1
 5. `['m', 'Two eyes', 'A shark’s eyes sit on the sides of its head, and in a lemon shark the two fields overlap by only about 10 degrees in front. A winghead hammerhead, whose head is very wide, overlaps by 48 degrees, and hammerheads swing their heads from side to side as they swim. This view bends the edges of the picture to suggest the wide sweep.']`
    Log 93 (McComb et al. 2009).
 6. `['g', 'Dim light', 'Many sharks have a mirror-like layer behind the retina, called a tapetum, which sends light back through the eye for a second chance to be caught, and in some sharks dark pigment slides over it in bright light. This view lifts the shadows a little.']`
-   Logs 106 (McFarland 1990), 107 (Heath 1990).
-7. `['x', 'Electric sense', 'Sharks feel the faint electric fields around living animals through gel-filled pores on the snout, called the ampullae of Lorenzini. A young hammerhead turns toward a prey-like field from about 30 centimetres away, even when the field is weaker than a billionth of a volt across a centimetre. The picture leaves this sense out.']`
+   Logs 106 (McFarland 1990), 107 (Heath 1990), 158 (sandbar shark).
+7. `['m', 'Pupil', 'A sandbar shark’s pupil closes in bright light to less than a third of its open size, halving within a minute, which deepens its focus, and it opens wide in the dark. This view sharpens the background in bright light and softens it in dim light.']`
+   Log 157 (Litherland et al. 2009: f-number from about 2 in the dark to 6 in bright light).
+8. `['x', 'Electric sense', 'Sharks feel the faint electric fields around living animals through gel-filled pores on the snout, called the ampullae of Lorenzini. A young hammerhead turns toward a prey-like field from about 30 centimetres away, even when the field is weaker than a billionth of a volt across a centimetre. The picture leaves this sense out.']`
    Logs 127 (Kajiura and Holland 2002), 47 (pores around the mouth and snout), 128 (Kalmijn 1971), 131.
-8. `['x', 'Smell first', 'A hunting shark usually smells its prey first and follows the scent upstream, then turns to sight, the lateral line, the electric sense and touch as it closes in. The picture leaves smell out.']`
+9. `['x', 'Smell first', 'A hunting shark usually smells its prey first and follows the scent upstream, then turns to sight, the lateral line, the electric sense and touch as it closes in. The picture leaves smell out.']`
    Log 117 (Gardiner et al. 2014).
 
 ### The picture
@@ -187,12 +197,13 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, fall: 1
 | `topoS` | 1 | Logs 98, 102, 103: horizontal streaks. |
 | `fall` | 1.5 | `invented`. |
 | `pupil` | 'o' | Log 105: shark pupils vary in shape. A per-species shape is a later step; the round default is `invented`. |
+| `dof` | 14, scaled by light | Log 157: an f-number of about 2 in dim light and 6 in bright light, so depth of field is shallow in the dark and deep in daylight. The strength is `invented`; the scaling is effect 4 below. |
 | `M` | [0, 1, 0, 0, 1, 0, 0, 1, 0] | Logs 19, 20; log 141 (Ryan et al. 2021 modelled a white shark's view from the camera's green channel alone). Every channel takes green, so the picture is grey. |
 | `gain` | 1.3 | Logs 106, 107. The amount is `invented`. |
 | `persist` | .04 | Log 67: 1/26.1 = 0.038 seconds; the measured range 16 to 31 Hz gives .03 to .06 (logs 122, 123). |
 
 ```
-shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, pupil: 'o', M: [0, 1, 0, 0, 1, 0, 0, 1, 0], gain: 1.3, persist: .04,
+shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, pupil: 'o', dof: 14, M: [0, 1, 0, 0, 1, 0, 0, 1, 0], gain: 1.3, persist: .04,
   cue: 'There is no colour, only light and dark, and movement leaves trails.', rows: [ /* above */ ] }
 ```
 
@@ -200,7 +211,8 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
 
 1. **The electric field at close range, as an invented glow.** What the person sees: within the bottom third of the frame (the engine's stand-in for "close"), things that move like living animals take on a faint shimmering outline that brightens as the phone comes nearer, standing for fields a shark feels within about 30 to 40 centimetres (logs 44, 127). Phone input: none senses electric fields; the planned salience map's living-motion cue stands in. Cost: moderate. It must be graded `i` in a row of its own if drawn, and the row should say plainly that the glow is the app's invention.
 2. **The head sweep.** A slow side-to-side drift of the picture of about 15 degrees each way, as hammerheads and other sharks swing their heads while swimming (log 93). Phone input: none needed; the motion sensors could stop the drift while the person turns the phone. Cost: low. The rhythm is `invented`.
-3. **Smell first.** The view could open on a blank, slowly moving field that resolves into the picture as the person approaches something, following the hunting order in log 117. This is a way of arriving at the view, and it needs the owner's word on whether a view may change over time like this.
+3. **A pupil that follows the light.** What the person sees: in a bright scene the background comes into focus over about a minute, and in a dim one it softens, as the sandbar shark's pupil closes to under a third of its open size within a minute of bright light and opens in the dark (log 157). Phone input: the camera's own exposure or the mean brightness of the frame. Cost: one smoothed number driving `dof`; trivial. Beauty: the picture breathes with the light, slowly, the way a shark's eye does.
+4. **Smell first.** The view could open on a blank, slowly moving field that resolves into the picture as the person approaches something, following the hunting order in log 117. This is a way of arriving at the view, and it needs the owner's word on whether a view may change over time like this.
 
 ## 5. The view `ray` (rays, skates and chimaeras)
 
@@ -264,35 +276,39 @@ The views proposed here are new, and no `EYES` entry exists for fish, so this se
 - Shovelnose ray cones at 477, 502, 561 and 459, 492, 553 nm: **confirmed** (log 139).
 - Parker et al. 2017 reef sharpness, with the second fish a dottyback: **confirmed** (logs 90, 91).
 - Clownfish ultraviolet cones (Mitchell et al. 2024) and goldfish ultraviolet cones (Joselevitch et al. 2010): **not re-opened**; the ultraviolet rows now rest on the damselfish family (log 62), the Ambon damselfish (log 110), the zebrafish (log 114) and the guppy (log 112).
+- The Bluegill's colour, an open question in the earlier sheet: **answered** by Bertinetti et al. 2025 (logs 150, 151), opened in full on PubMed Central; the Bluegill expresses the same green and red cone opsins as the bass.
 - The earlier sheet's 10% share for sharks and rays together is **corrected** into two views, since rays outnumber sharks and see differently.
 
 ## 7. Species with their own measurements
 
 - **Largemouth Bass** (*Micropterus salmoides*, the county's Florida Bass): cones, colour confusions, anatomical acuity, near point (logs 37 to 39, 80 to 83).
-- **Bluegill** (*Lepomis macrochirus*): acuity and contrast (logs 84, 85). Its cones are unmeasured (section 8).
+- **Bluegill** (*Lepomis macrochirus*): acuity and contrast (logs 84, 85), cone opsins (log 150).
 - **White Crappie** (*Pomoxis annularis*): sharp area and pursuit angles (logs 40, 41).
 - **Golden Shiner** (*Notemigonus crysoleucas*, 21 Alachua records): field, overlap, acuity, sharp area (logs 86 to 89).
 - **Goldfish** (*Carassius auratus*): behavioural acuity 7.1 cycles per degree and hearing (logs 1, 119).
-- **Guppy** and **Western Mosquitofish**: cone classes and opsin genes (logs 31 to 36, 112, 113), the route to an Eastern Mosquitofish profile.
+- **Guppy**, **Green Swordtail** and **Western Mosquitofish**: cone classes, opsin genes and acuity (logs 31 to 36, 112, 113, 154), the route to an Eastern Mosquitofish profile.
+- **Bluefin Killifish** (*Lucania goodei*, 22 Alachua records): opsin expression in clear and tea-stained Florida water, daily rhythm (logs 73, 155).
+- **Spotted Gar**, for the Florida Gar: pigments and retina (logs 76, 77, 153).
 - **Ambon Damselfish** (*Pomacentrus amboinensis*): four cones, acuity, blue-blind fine vision (logs 90, 110, 111).
 - **Picasso Triggerfish** (*Rhinecanthus aculeatus*): three cones, colour thresholds (logs 108, 109).
 - **White Shark**: acuity, sharp area, hunting distance (logs 11, 13, 14, 141).
 - **Bonnethead**: flicker, hunting sequence (logs 117, 122).
 - **Scalloped Hammerhead** and other hammerheads: visual overlap, electric threshold (logs 93, 127).
 - **Port Jackson Shark**: streak, acuity, rod-dominated retina (logs 101, 102).
+- **Sandbar Shark**: pupil, f-number, covered tapetum, electric threshold (logs 127, 157, 158).
 - **Yellow Stingray**: full horizontal field, flicker with temperature (logs 94, 124).
 - **Little Skate**: streak, electric cells (logs 100, 118).
 - **Greenland Shark**: rods only (log 137).
 
 ## 8. Gaps and how to fill them
 
-- **Bluegill cones.** No opened source measures them. Nearest relative: the largemouth bass in the same family (logs 80 to 83), and six sunfish species whose eyes vary little with habitat (log 92). Inference: draw sunfish as two-cone, graded `g`.
-- **Mosquitofish sharpness and field.** None found. Nearest: the guppy (same family) through Caves et al. 2021 on the swordtail (wanted list), and acuity scaling with eye size (log 140). Inference: a small livebearer resolves less than a sunfish; the default `cpd` of 4 is likely too sharp for it.
-- **Florida Gar.** Pigments only, from the spotted gar in vitro (logs 76, 77). The spotted gar retina paper (wanted list) would give cone types and topography.
+- **Bluegill cone peaks.** The opsins are measured (log 150) and the peaks are not; the bass's 535 and 614 nm (logs 80, 81) stand in.
+- **Mosquitofish sharpness and field.** None found for the mosquitofish. Nearest: the green swordtail, about 3 cycles per degree by anatomy and 2 to 3 by behaviour in females (log 154). Inference: draw a mosquitofish near 3, slightly below the sunfish.
+- **Florida Gar.** Known through the spotted gar: pigments in a dish (logs 76, 77) and two ultraviolet opsins in a duplex retina with no double cones (log 153). Sharpness and field are unknown.
 - **Catfish sight.** No acuity or cone data for bullhead catfish were opened. They have electroreceptors (log 59) and many catfish have a reflecting tapetum (log 60). Nothing is known here about bullhead vision.
 - **Freshwater flicker.** No sunfish or minnow flicker rate was opened; the view uses the ray-finned mean (log 68).
 - **Reef fish fields of view.** None opened; `fov` is copied from the Golden Shiner.
-- **Spectra of Florida waters.** No opened source gives the light spectrum under a tea-coloured Florida lake; the water effect's colour constants are invented until one is found.
+- **Spectra of Florida waters.** The nearest measured spectra are two Wisconsin lakes, clear and dark (log 152); Johnson et al. 2013 has Florida tank spectra in a supplement not read. The water effect's per-channel constants are invented until a Florida spectrum is found.
 - **Shark fields.** The hammerhead paper's full text (log 93, abstract only) gives monocular and total fields.
 - **Ray pupils.** Not opened; the round pupil is invented.
 - **Polarization in fish.** How a vertebrate cone could read polarization is disputed (logs 7, 121); nothing is drawn.
@@ -301,25 +317,21 @@ The views proposed here are new, and no `EYES` entry exists for fish, so this se
 
 The same list as `docs/views/wanted/fish-shark.jsonl`, most useful first (priority 1 would change a view's picture, 2 would confirm or correct a row, 3 is background).
 
-1. (1) Bertinetti C, Mosley C, Jones S, Torres-Dowdall J 2025. Robust sensory traits across light habitats: visual signals but not receptors vary in centrarchids inhabiting distinct photic environments. Molecular Ecology. doi:10.1111/mec.17721. Would give the cone opsins of six sunfish, settling whether the Bluegill shares the bass's two-cone colour.
-2. (1) Ryan LA, Hemmi JM, Collin SP, Hart NS 2017. Electrophysiological measures of temporal resolution, contrast sensitivity and spatial resolving power in sharks. Journal of Comparative Physiology A. doi:10.1007/s00359-017-1154-z. Measures flicker, contrast and acuity in the same sharks by one method, which would set the shark view's trails and blur together.
-3. (1) Siebeck UE, Marshall NJ 2001. Ocular media transmission of coral reef fish: can coral reef fish see ultraviolet light?. Vision Research. doi:10.1016/s0042-6989(00)00240-6. Would show which reef families' lenses pass ultraviolet, deciding where the reef view's ultraviolet sheen belongs.
-4. (1) Chung W-S, Marshall NJ, Watson S-A, Munday PL, Nilsson GE 2014. Ocean acidification slows retinal function in a damselfish through interference with GABAA receptors. Journal of Experimental Biology 217: 323-326. doi:10.1242/jeb.092478. Holds the damselfish flicker value used by the earlier sheet (89 Hz), which would set the reef view's pace for a diurnal reef fish.
-5. (1) McComb DM, Tricas TC, Kajiura SM 2009. Enhanced visual fields in hammerhead sharks. Journal of Experimental Biology. doi:10.1242/jeb.032615. The full text gives monocular and total visual fields of five sharks, replacing the shark view's invented field of 300 degrees.
-6. (2) Sukeena JM, Galicia CA, Wilson JD, McGinn T, Boughman JW, Robison BD, Postlethwait JH, Braasch I, Stenkamp DL, Fuerst PG 2016. Characterization and evolution of the spotted gar retina. Journal of Experimental Zoology Part B: Molecular and Developmental Evolution. doi:10.1002/jez.b.22710. Would give cone types and retinal layout for gars (56 Alachua records), now drawn from pigments expressed in a dish.
-7. (2) McComb DM, Kajiura SM 2008. Visual fields of four batoid fishes: a comparative study. Journal of Experimental Biology. doi:10.1242/jeb.014506. The full text gives the vertical fields and blind areas of four rays, for placing the ray view's sharp band and dark underside.
-8. (2) Caves EM, de Busserolles F, Kelley LA 2021. Sex differences in behavioural and anatomical estimates of visual acuity in the green swordtail, Xiphophorus helleri. Journal of Experimental Biology. doi:10.1242/jeb.243420. Acuity in a livebearer, the nearest measured relative of the Eastern Mosquitofish, the county's most recorded fish.
-9. (2) Foster TN, Williamson AG, Foster BR, Toomey MB 2025. Light environment and seasonal variation in the visual system of the red shiner (Cyprinella lutrensis). Journal of Experimental Biology. doi:10.1242/jeb.249878. Would size the seasonal red shift proposed for minnows, now known from one 1982 shiner study.
-10. (2) Horváth G, Varjú D 1995. Underwater refraction-polarization patterns of skylight perceived by aquatic animals through Snell's window of the flat water surface. Vision Research. doi:10.1016/0042-6989(94)00254-j. Would give the geometry and appearance of Snell's window and the surface outside it as an aquatic animal sees them, for drawing the looking-up effect.
-11. (2) Litherland L, Collin SP, Fritsches KA 2009. Visual optics and ecomorphology of the growing shark eye: a comparison between deep and shallow water species. Journal of Experimental Biology. doi:10.1242/jeb.028589. Describes pupil movement and the tapetum in the sandbar shark, which would replace the shark view's invented pupil and dim-light lift.
-12. (2) Jinson ST, Liebich J, Senft SL, Mäthger LM 2018. Retinal specializations and visual ecology in an animal with an extremely elaborate pupil shape: the little skate Leucoraja (Raja) erinacea. Journal of Comparative Neurology. doi:10.1002/cne.24465. Would give the skate's pupil shape and how it shapes blur, for the ray view's pupil.
-13. (2) Kalinoski M, Hirons A, Horodysky AZ, Brill RW 2014. Spectral sensitivity, luminous sensitivity, and temporal resolution of the visual systems in three sympatric temperate coastal shark species. Journal of Comparative Physiology A. doi:10.1007/s00359-014-0950-y. More shark flicker and dim-light values for the shark view's trails and shadows.
-14. (3) Kamermans M, Hawryshyn CW 2011. Teleost polarization vision: how it might work and what it might be good for. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2010.0211. Review of how fish might read polarized light, for deciding whether any fish view should show it.
-15. (3) Hawryshyn CW, Moyer HD, Allison WT, Haimberger TJ, McFarland WN 2003. Multidimensional polarization sensitivity in damselfishes. Journal of Comparative Physiology A. doi:10.1007/s00359-003-0392-4. Polarization sensitivity in adult damselfish, the largest reef family with measured eyes.
-16. (3) Ladich F 2015. Peripheral hearing structures in fishes: diversity and sensitivity of catfishes and cichlids. Advances in Experimental Medicine and Biology. doi:10.1007/978-3-319-21059-9_15. Hearing ranges of catfish for the freshwater view's hearing row and microphone effect.
-17. (3) Dreyfert T, Holmberg K, Struwe G 1979. Critical flicker fusion frequency of the river lamprey (Lampetra fluviatilis). Vision Research. doi:10.1016/0042-6989(79)90140-8. A lamprey's flicker rate, for a later lamprey setting.
-18. (3) Fernholm B, Holmberg K 1975. The eyes in three genera of hagfish (Eptatretus, Paramyxine and Myxine): a case of degenerative evolution. Vision Research. doi:10.1016/0042-6989(75)90215-1. Confirms what hagfish eyes can detect, for the hagfish setting.
-19. (3) Watt MJ, Evans CS, Joss JMP 1999. Use of electroreception during foraging by the Australian lungfish. Animal Behaviour. doi:10.1006/anbe.1999.1216. Electric sense in lungfish, which ride along with the freshwater view.
+1. (1) Ryan LA, Hemmi JM, Collin SP, Hart NS 2017. Electrophysiological measures of temporal resolution, contrast sensitivity and spatial resolving power in sharks. Journal of Comparative Physiology A. doi:10.1007/s00359-017-1154-z. Measures flicker, contrast and acuity in the same sharks by one method, which would set the shark view's trails and blur together.
+2. (1) Siebeck UE, Marshall NJ 2001. Ocular media transmission of coral reef fish: can coral reef fish see ultraviolet light?. Vision Research. doi:10.1016/s0042-6989(00)00240-6. Would show which reef families' lenses pass ultraviolet, deciding where the reef view's ultraviolet sheen belongs.
+3. (1) Chung W-S, Marshall NJ, Watson S-A, Munday PL, Nilsson GE 2014. Ocean acidification slows retinal function in a damselfish through interference with GABAA receptors. Journal of Experimental Biology 217: 323-326. doi:10.1242/jeb.092478. Holds the damselfish flicker value used by the earlier sheet (89 Hz), which would set the reef view's pace for a diurnal reef fish.
+4. (1) McComb DM, Tricas TC, Kajiura SM 2009. Enhanced visual fields in hammerhead sharks. Journal of Experimental Biology. doi:10.1242/jeb.032615. The full text gives monocular and total visual fields of five sharks, replacing the shark view's invented field of 300 degrees.
+5. (2) McComb DM, Kajiura SM 2008. Visual fields of four batoid fishes: a comparative study. Journal of Experimental Biology. doi:10.1242/jeb.014506. The full text gives the vertical fields and blind areas of four rays, for placing the ray view's sharp band and dark underside.
+6. (2) Foster TN, Williamson AG, Foster BR, Toomey MB 2025. Light environment and seasonal variation in the visual system of the red shiner (Cyprinella lutrensis). Journal of Experimental Biology. doi:10.1242/jeb.249878. Would size the seasonal red shift proposed for minnows, now known from one 1982 shiner study.
+7. (2) Horváth G, Varjú D 1995. Underwater refraction-polarization patterns of skylight perceived by aquatic animals through Snell's window of the flat water surface. Vision Research. doi:10.1016/0042-6989(94)00254-j. Would give the geometry and appearance of Snell's window and the surface outside it as an aquatic animal sees them, for drawing the looking-up effect.
+8. (2) Jinson ST, Liebich J, Senft SL, Mäthger LM 2018. Retinal specializations and visual ecology in an animal with an extremely elaborate pupil shape: the little skate Leucoraja (Raja) erinacea. Journal of Comparative Neurology. doi:10.1002/cne.24465. Would give the skate's pupil shape and how it shapes blur, for the ray view's pupil.
+9. (2) Kalinoski M, Hirons A, Horodysky AZ, Brill RW 2014. Spectral sensitivity, luminous sensitivity, and temporal resolution of the visual systems in three sympatric temperate coastal shark species. Journal of Comparative Physiology A. doi:10.1007/s00359-014-0950-y. More shark flicker and dim-light values for the shark view's trails and shadows.
+10. (3) Kamermans M, Hawryshyn CW 2011. Teleost polarization vision: how it might work and what it might be good for. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2010.0211. Review of how fish might read polarized light, for deciding whether any fish view should show it.
+11. (3) Hawryshyn CW, Moyer HD, Allison WT, Haimberger TJ, McFarland WN 2003. Multidimensional polarization sensitivity in damselfishes. Journal of Comparative Physiology A. doi:10.1007/s00359-003-0392-4. Polarization sensitivity in adult damselfish, the largest reef family with measured eyes.
+12. (3) Ladich F 2015. Peripheral hearing structures in fishes: diversity and sensitivity of catfishes and cichlids. Advances in Experimental Medicine and Biology. doi:10.1007/978-3-319-21059-9_15. Hearing ranges of catfish for the freshwater view's hearing row and microphone effect.
+13. (3) Dreyfert T, Holmberg K, Struwe G 1979. Critical flicker fusion frequency of the river lamprey (Lampetra fluviatilis). Vision Research. doi:10.1016/0042-6989(79)90140-8. A lamprey's flicker rate, for a later lamprey setting.
+14. (3) Fernholm B, Holmberg K 1975. The eyes in three genera of hagfish (Eptatretus, Paramyxine and Myxine): a case of degenerative evolution. Vision Research. doi:10.1016/0042-6989(75)90215-1. Confirms what hagfish eyes can detect, for the hagfish setting.
+15. (3) Watt MJ, Evans CS, Joss JMP 1999. Use of electroreception during foraging by the Australian lungfish. Animal Behaviour. doi:10.1006/anbe.1999.1216. Electric sense in lungfish, which ride along with the freshwater view.
 
 ## 10. Sources
 
@@ -359,7 +371,7 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 - Northmore DPM et al. 2007. Visual Neuroscience 24: 319-331. doi:10.1017/S0952523807070307. `opened` (abstract)
 - Pita D et al. 2015. PeerJ 3: e1113. doi:10.7717/peerj.1113. `opened`
 - Parker AN et al. 2017. J Exp Biol 220: 2387-2396. doi:10.1242/jeb.149575. `opened`
-- Bertinetti C 2025. PhD dissertation, University of Notre Dame. `opened` (abstract)
+- Bertinetti C 2025. PhD dissertation, University of Notre Dame. `opened` (abstract); superseded by the paper below
 - McComb DM et al. 2009. J Exp Biol. doi:10.1242/jeb.032615. `opened` (abstract)
 - McComb DM, Kajiura SM 2008. J Exp Biol. doi:10.1242/jeb.014506. `opened` (abstract)
 - Litherland L, Collin SP 2008. Visual Neuroscience. doi:10.1017/s0952523808080693. `opened` (abstract)
@@ -400,11 +412,22 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 - Hart NS et al. 2004. J Exp Biol 207: 4587-4594. doi:10.1242/jeb.01314. `opened` (journal page)
 - Caves EM et al. 2017. J Exp Biol 220: 1586-1596. doi:10.1242/jeb.151183. `opened` (abstract)
 - Allen DM et al. 1982. Can J Zool. doi:10.1139/z82-037. `opened` (abstract)
+- Bertinetti C, Mosley C, Jones S, Torres-Dowdall J 2025. Mol Ecol 34(8): e17721. doi:10.1111/mec.17721. `opened` (PubMed Central)
+- Sukeena JM et al. 2016. J Exp Zool B 326(7): 403-421. doi:10.1002/jez.b.22710. `opened` (PubMed Central)
+- Caves EM, de Busserolles F, Kelley LA 2021. J Exp Biol 224: jeb243420. doi:10.1242/jeb.243420. `opened` (PubMed Central)
+- Johnson AM, Stanis S, Fuller RC 2013. Proc R Soc B 280: 20130796. doi:10.1098/rspb.2013.0796. `opened` (PubMed Central and the Dryad record)
+- Litherland L, Collin SP, Fritsches KA 2009. J Exp Biol 212(21). doi:10.1242/jeb.028589. `opened` (journal PDF)
+- Collin SP, Pettigrew JD. Retinal topography in reef teleosts, parts I and II. Brain Behav Evol 31. doi:10.1159/000116594, doi:10.1159/000116595. `opened` (abstracts)
+- Allison WT et al. 2006. J Comp Neurol. doi:10.1002/cne.21164. `opened` (abstract)
+- Coughlin DJ, Hawryshyn CW 2008. Brain Behav Evol. doi:10.1159/000113636. `opened` (abstract)
+- Bailes HJ, Davies WL, Trezise AEO, Collin SP 2007. BMC Evol Biol 7: 200. doi:10.1186/1471-2148-7-200. `opened`
+- Biedenbach MA 1973. J Comp Physiol 84: 227-250. doi:10.1007/BF00694224. `opened` (abstract)
+- Wang J et al. 2024. Nat Commun. doi:10.1038/s41467-024-55019-x. `opened`
 - GBIF occurrence facets (iNaturalist research-grade dataset 50c9509d-22c7-4a22-a47d-8c48425ef4a7), saved on `ci` in `runs/fetch/10` (read 11 October 2026), GBIF species matches for nine families, the Perciformes family facet and twelve family pages, read 13 October 2026. `opened`
 
 ## 11. Questions for a specialist
 
-1. Does the Bluegill share the largemouth bass's two cones at 535 and 614 nm, or does it keep a blue or ultraviolet cone?
+1. The spotted gar expresses two ultraviolet opsins and lacks double cones. Does a gar see colour in four dimensions as a minnow does, and does it use ultraviolet?
 2. Rays show three cone pigments by microspectrophotometry (Hart et al. 2004) but two cone opsin classes by later molecular work (Hart et al. 2025). Which should a picture follow, two colours or three?
 3. Is the order of habitats a fair line for fish vision, or would the tannin and turbidity of the water a fish lives in today predict its eyes better than its family does?
 4. How should tea-coloured water be drawn: what spectral attenuation would a Florida lake at 40 to 100 platinum-cobalt units give per metre, from red to blue?
