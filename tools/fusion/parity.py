@@ -28,13 +28,15 @@ nk, ns = len(m["kinds"]["labels"]), len(t)
 M12 = [10] * 12
 
 
-def page_manifest(labels, fusion, kind_bias, n_species):
+def page_manifest(labels, fusion, kind_bias, n_species, county_bias=None):
     """A manifest the page's reader accepts; the encoder's fields are fillers, since nothing is encoded."""
     out = {"id": "parity", "vision": {"url": "x.onnx", "size": 224, "mean": [0, 0, 0], "std": [1, 1, 1]}, "width": 4, "fusion": fusion}
     if labels is not None:                                            # None: a slot without a kinds head
         out["kinds"] = {"url": "k.bin", "labels": labels}
     if kind_bias is not None:
         out["kinds"]["bias"] = kind_bias
+        if county_bias is not None:
+            out["kinds"]["county_bias"] = county_bias
     if n_species:
         out["species"] = {"url": "s.bin", "table": "t.json", "count": n_species}
     return out
@@ -60,6 +62,7 @@ def make(path):
     # ---- made-up settings
     full = list(m["kinds"]["labels"])
     few = ["wader", "plant", "bird", "person", "none"]                # the table below has kinds these labels lack
+    shared = full + ["other", "wader", "other"]                       # rows that share a label are one kind (a group head's rows merged into other)
     awkward = [
         ["Ardea herodias", "Great Blue Heron", "wader", M12],
         ["Eudocimus albus", "White Ibis", "wader", [0, 0, 5, 0, 9, 9, 9, 9, 9, 9, 9, 9]],
@@ -77,7 +80,7 @@ def make(path):
     for rule in ("product", "mix"):
         for bias in ("none", "kinds", "species", "both"):
             for tname in ("standin", "awkward", "one", "none"):
-                for labels in (full, few):
+                for labels in (full, few, shared):
                     for rep in range(2):
                         table = tables[tname]
                         f = {"t_kind": pick([1e-4, 1, 30, 100, 1e5]), "t_species": pick([1e-4, 1, 30, 100, 1e5]), "alpha_prior": pick([0, 0.25, 0.5, 2]),
@@ -92,7 +95,8 @@ def make(path):
                         sb = [float(v) for v in np.float32(rs.randn(len(table)) * 3)] if table is not None and bias in ("species", "both") else None
                         if kb is not None and rs.rand() < 0.3: kb[rs.randint(len(kb))] = 50.0     # one bias that outweighs everything
                         if sb is not None and rs.rand() < 0.3: sb[rs.randint(len(sb))] = -50.0
-                        worlds.append({"manifest": page_manifest(labels, f, kb, len(table) if table is not None else 0), "table": table, "sb": sb})
+                        kbl = [float(v) + float(rs.randn()) for v in kb] if kb is not None and table is not None and rs.rand() < 0.4 else None    # a second bias for where the list is used
+                        worlds.append({"manifest": page_manifest(labels, f, kb, len(table) if table is not None else 0, kbl), "table": table, "sb": sb})
     # ---- slots without a kinds head (the larger model): the kind is each kind's share of the species answer
     for tname in ("standin", "awkward", "one"):
         for bias in (False, True):
@@ -160,7 +164,7 @@ def check(cases_path, page_path):
         if "world" in c:
             w = worlds[c["world"]]
             kb = (w["manifest"].get("kinds") or {}).get("bias")
-            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=kb, species_bias=w["sb"])
+            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=kb, species_bias=w["sb"], kind_bias_list=(w["manifest"].get("kinds") or {}).get("county_bias"))
             tag = (w["manifest"]["fusion"].get("rule", "product") if "kinds" in w["manifest"] else "no kinds head") + (", biases" if w["sb"] is not None or kb is not None else ", no biases")
             tag += ", kind_at" if w["manifest"]["fusion"].get("kind_at") is not None else ""
             unsure += not r["sure"]
@@ -180,7 +184,7 @@ def check(cases_path, page_path):
         if not g: bad.append((name, ["the page gave no answer"])); continue
         e = np.asarray(g["emb"], dtype=np.float64)
         dk = float(np.max(np.abs(dots(tr["kinds"], e) - np.asarray(g["kd"])))); ds = float(np.max(np.abs(dots(tr["species"], e) - np.asarray(g["sd"]))))
-        r = fuse(tr["manifest"], tr["table"], g["month"], g["kd"], g["sd"], kind_bias=tr["kind_bias"], species_bias=tr["species_bias"])
+        r = fuse(tr["manifest"], tr["table"], g["month"], g["kd"], g["sd"], kind_bias=tr["kind_bias"], species_bias=tr["species_bias"], kind_bias_list=tr["kind_bias_list"])
         d, why = differences(r, g["result"])
         worst_dot, worst_p = max(worst_dot, dk, ds), max(worst_p, d)
         if max(dk, ds) > 1e-5: why.append("row scores differ by %.3g" % max(dk, ds))

@@ -677,9 +677,13 @@
     });
   }
 
-  // ---------- where the species list applies: it is one town's. No location is asked of the device; the person says if they are elsewhere.
-  var AWAY_KEY = 'seenback.away.v1';
-  try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
+  // ---------- where the species list applies: it is one county's. No location is asked of the device. Since build 22 the phone's time
+  // zone says whether the phone could be there: in the county's zone, or where the browser gives none, the list is used; elsewhere
+  // the kinds head answers alone and the full database is not told the region. A choice the person made with the switch stands.
+  var AWAY_KEY = 'seenback.away.v1', LIST_ZONES = ['America/New_York', 'US/Eastern', 'EST5EDT'];
+  function zoneNear() { try { var z = Intl.DateTimeFormat().resolvedOptions().timeZone; return !z || LIST_ZONES.indexOf(z) >= 0; } catch (e) { return true; } }
+  pocket.local = zoneNear();
+  try { var said = localStorage.getItem(AWAY_KEY); if (said === '1') pocket.local = false; else if (said === '0') pocket.local = true; } catch (e) {}
   function paintChoices() {
     // the switch is shown where it changes something: this device has a species list, or there is the full database that is told the region
     show('awayRow', false); $('awayBox').checked = pocket.local === false;

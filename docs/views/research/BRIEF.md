@@ -148,7 +148,7 @@ This section governs every round-2 prompt. Where it differs from the sections ab
 
 **Why.** The app lends each view to every species with that kind of eye (`tools/species/eyes.py`), and today's rows were written for one measured animal per view. A llama gets the white-tailed deer's rows, two of them marked "known in this animal", and an alligator gets rows about crocodiles although the herps log holds the alligator's own measurements. The owner has decided that rows will speak to the reader in the second person, as the animal ("You have two kinds of colour-sensing cell"), and that every such sentence must be true of the species on screen at the grade it shows. The owner wants as much species-level evidence as can be found, with vaguer wording only where the literature truly runs out.
 
-**The text floor.** The visibility floor (`docs/ENGINE-DESIGN.md`, section 5) decides when research on a value in the picture can stop. It says nothing about whether a row holds for each species a view is lent to. Round 2 adds a second floor for the words: for every offered view and every commonly photographed species that borrows it, each row's claim is measured in that species, carried from a relative by one of the rules below, or replaced by a sentence about what the view does.
+**The text floor.** The visibility floor (`docs/ENGINE-DESIGN.md`, section 5) decides when research on a value in the picture can stop. It says nothing about whether a row holds for each species a view is lent to. Round 2 adds a second floor for the words: for every offered view and every commonly photographed species that borrows it, each row's claim is measured in that species, carried from a relative by one of the rules below, or, only after a careful search has found nothing, stated more loosely in the second person, saying plainly what is known about the reader's kind of animal and what nobody has measured.
 
 **The carry rules.** The owner may change any of them, and the audit tests them.
 
@@ -158,6 +158,12 @@ This section governs every round-2 prompt. Where it differs from the sections ab
 4. Anything further needs a written exception with its reason, one JSON object a line in `docs/views/carry.jsonl`: `{"from": "<taxon measured>", "to": "<taxon it carries to>", "traits": ["<trait key>"], "reason": "one sentence", "source": "<the record or paper behind the reason>"}`. Propose exceptions there; the owner or the audit accepts them.
 5. A measured disagreement inside the carry range blocks the carry. Log it as a record of its own (the alpaca's band of sharp vision is horizontal and, by the same thesis, the dromedary's is vertical).
 6. The grade a reader sees is computed for the species on screen: `m` only when that species was measured, `g` when a rule or an exception carried it (and the row names the relative), `i` otherwise.
+
+**Wording by certainty (the owner's decision, 13 October).** Every row stays in the second person at every grade, and each may end with one sentence on what the view does.
+- `m`: say it plainly. "You have two kinds of colour-sensing cell, where people have three."
+- `g`: say it of the reader and name the relatives it comes from. "Deer, cattle, sheep and horses have two kinds of colour-sensing cell, where people have three, and you very likely do too."
+- `i`: say what can be said, and say plainly what nobody has measured. "Nobody has measured how sharply you see, so this view uses the sharpness measured in the alpaca, your nearest measured relative."
+- Loose wording is the last resort: use it only when `docs/views/searched/<unit>.jsonl` records the search that found nothing. Plain statements of a gap are welcome; vague attributions ("studies suggest", "scientists think") are not.
 
 **Where species-level evidence hides.** Besides the physiology journals: veterinary ophthalmology for domestic and zoo animals (textbook chapters describe pupils, tapeta, fundi and ganglion-cell maps), husbandry and welfare studies (colour choice tests in livestock), genome studies of opsin genes (an intact gene predicts a pigment and does not measure one; grade and `method` say so), comparative surveys whose tables list many species (pupil shape, eye size, flicker fusion, SWS1 opsin type across birds), and theses. Search for each species by its scientific and common names and by its genus.
 

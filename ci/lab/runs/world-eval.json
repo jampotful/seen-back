@@ -1,0 +1,14 @@
+{
+ "about": "TinyCLIP 39M/16 vectors for the world tuning, test and casual photos (lab/world-eval on pub/data-world): the original model's on every row, and the shipping int8 file through onnxruntime-web's WASM build on the tuning and test rows (split eval), as the phone computes them. Publishes after run 36 (world-fit) so that the two never race.",
+ "data": "pub/data-world",
+ "manifest": "lab/world-eval/manifest.csv",
+ "wait_minutes": 60,
+ "shard_mode": "mod",
+ "models": ["tinyclip-39m-16"],
+ "stages": ["images", "images-wasm-int8-per-channel"],
+ "shards": {"tinyclip-39m-16": 6},
+ "wasm_split": "eval",
+ "wasm_procs": 4,
+ "max_parallel": 6,
+ "publish_after_run": 36
+}

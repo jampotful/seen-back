@@ -24,9 +24,9 @@ the licence rule `nc` (docs/CONTRACTS.md: CC0, public domain, CC BY, CC BY-NC), 
 manifests and a summary. No names of people are written; an observation's address leads to its observer.
 
 Usage:
-  python3 -I tools/world/select.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
+  python3 -I tools/world/choose.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
       --out work/ranked.tsv --uuids work/uuids.txt
-  python3 -I tools/world/select.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
+  python3 -I tools/world/choose.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
       --counts work/counts.tsv --out stage/world
 """
 import argparse
@@ -39,7 +39,9 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from groups import GROUPS  # noqa: E402
+from groups import GROUPS as CREATURES  # noqa: E402
+
+GROUPS = CREATURES + ("other",)           # the 33 groups, and what is left in `other` (mites, microbes, water bears)
 
 SEED = "seen-back/world/v1"
 SIZES = {"fit": 3000, "tune": 300, "test": 300, "casual": 300}
@@ -245,6 +247,21 @@ def finish(args):
     for s, lst in sets.items():
         with open(os.path.join(args.out, "%s.csv" % s), "w", encoding="utf-8", newline="") as f:
             w = csv.DictWriter(f, fieldnames=COLUMNS); w.writeheader(); w.writerows(lst)
+    # the same rows in the laboratory's form (tools/lab/lab.py reads `id`, `photo_url` and `split`): one manifest for
+    # fitting, one for tuning, testing and casual photos (tune and test share split `eval`, for the WASM vectors), and
+    # one for the species test
+    for name, parts in (("world-fit", ("fit",)), ("world-eval", ("tune", "test", "casual")), ("world-species", ("species",))):
+        d = os.path.join(args.out, "lab", name); os.makedirs(d, exist_ok=True)
+        seen = set()
+        with open(os.path.join(d, "manifest.csv"), "w", encoding="utf-8", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["id", "split"] + COLUMNS); w.writeheader()
+            for part in parts:
+                for r in sets.get(part, []):
+                    pid = "w" + r["photo_url"].split("/photos/")[1].split("/")[0]
+                    if pid in seen:
+                        continue
+                    seen.add(pid)
+                    w.writerow(dict(r, id=pid, split="eval" if part in ("tune", "test") else part))
     urls = Counter(r["photo_url"] for k, lst in sets.items() if k != "species" for r in lst)
     dup = sum(1 for n in urls.values() if n > 1)
     both = len({r["photo_url"] for r in sets.get("species", [])} & set(urls))
@@ -253,7 +270,7 @@ def finish(args):
     if args.counts and os.path.exists(args.counts):
         for v in read_rows(args.counts, ["group", "continent", "period", "n"]):
             counts[v["group"]][(v["continent"], v["period"])] = int(v["n"])
-    L = ["# World photos", "", "Made by `tools/world/select.py` from iNaturalist's open-data snapshot (%s). Seed `%s`." % (args.snapshot or "date not given", SEED), ""]
+    L = ["# World photos", "", "Made by `tools/world/choose.py` from iNaturalist's open-data snapshot (%s). Seed `%s`." % (args.snapshot or "date not given", SEED), ""]
     L.append("Sets: fit up to %d a group (dated through 2024), tune and test %d a group each (2025 on), casual up to %d a group, and %d research-grade photos a continent from 2025 on for the full database's world test. Licence rule `nc`: %s." % (SIZES["fit"], SIZES["tune"], SIZES["casual"], SPECIES_TEST, ", ".join(sorted(ALLOWED))))
     L.append("")
     L.append("| Group | fit | tune | test | casual | research-grade records, all time | species in fit | orders in fit | continents in fit |")

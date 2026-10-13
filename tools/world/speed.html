@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Encoder speed</title></head>
+<body><p>Times an image encoder through the page's runtime in a worker (tools/world/speed.mjs drives this page).</p>
+<script>
+  // speed(model url, threads, photos): a fresh worker for each measurement, so that one run's memory and threads do not carry into the next
+  window.speed = function (model, threads, n) {
+    return new Promise(function (res) {
+      var w = new Worker('/tools/world/speed-worker.js');
+      var timer = setTimeout(function () { w.terminate(); res({ op: 'fail', message: 'timed out' }); }, 900000);
+      w.onmessage = function (ev) { clearTimeout(timer); w.terminate(); res(ev.data); };
+      w.onerror = function (e) { clearTimeout(timer); w.terminate(); res({ op: 'fail', message: 'worker error: ' + (e && e.message) }); };
+      w.postMessage({ model: model, threads: threads, n: n, size: 224 });
+    });
+  };
+  window.isolated = function () { return { isolated: window.crossOriginIsolated === true, cores: navigator.hardwareConcurrency, ua: navigator.userAgent }; };
+</script></body></html>
