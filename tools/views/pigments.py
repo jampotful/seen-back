@@ -21,6 +21,22 @@ import json, math, pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CAMERA = [(600, 32), (535, 38), (460, 30), (365, 18)]   # r, g, b, the invented ultraviolet: (centre, width) in nm, INVENTED
 
+# Pigment peaks for the views that had none in a spec (burst 4), each with the log line it comes from. The logs are on the research
+# branches (docs/views/evidence/<unit>.jsonl); "L" is the line. A peak with no source would be marked invented; none is.
+# python3 -I tools/views/pigments.py --trials writes a trial block from these for any view in the table that has none yet.
+PEAKS = {
+    'cat': {'cones': [450, 550], 'rod': 501, 'grade': 'm', 'invented': False,
+            'src': 'research/cat-dog evidence L69, L70, L71: Guenther and Zrenner 1993 (S cone 450 nm, L cone 550 nm, rods 501 nm)'},
+    'deer': {'cones': [455, 537], 'rod': 497, 'grade': 'm', 'invented': False,
+             'src': 'research/squirrel-deer-rabbit evidence L117, L118, L120: Jacobs, Deegan and Neitz 1994, white-tailed deer (S cone about 450 to 460 nm, taken as 455; M cone 537 nm; rods 497 nm)'},
+    'rabbit': {'cones': [425, 523], 'rod': 498, 'grade': 'm', 'invented': False,
+               'src': 'research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)'},
+    'squirrel': {'cones': [444, 543], 'rod': 502, 'grade': 'm', 'invented': False,
+                 'src': 'research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)'},
+    'insect': {'cones': [360, 420, 520], 'rod': None, 'grade': 'g', 'invented': False,
+               'src': 'research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird\'s, 360, 420 and 520 nm)'},
+}
+
 
 def template(peak, lam):
     x = peak / lam
@@ -81,7 +97,46 @@ def fill(mats):
     return n
 
 
+TOOL = 'tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)'
+
+
+def trial_for(key, pk):
+    """A trial block: the cones as the view's colour, the rods as its dark-adapted colour, the colour wheel and neutral band."""
+    name = key.upper()
+    mats = {name: {'from_pigments': pk['cones'], 'grade': pk['grade'], 'invented': True, 'src': [pk['src'], TOOL]}}
+    spec = {'q': name, 'neutral': {'value': 1, 'grade': 'i', 'invented': True, 'src': [], 'range': [0, 2]}}
+    rows = [['i', 'Being tried: colour from pigments', "On this trial the colours come from the measured receptor peaks (%s nm). The camera's colours and the display are the app's." % ', '.join(map(str, pk['cones'])),
+             [pk['src'].split(': ', 1)[1].split(' (')[0], 'param:spectrum.neutral', 'param:matrices.' + name, 'param:M']]]
+    if pk['rod']:
+        mats[name + '_ROD'] = {'from_pigments': [pk['rod']], 'grade': pk['grade'], 'invented': True, 'src': [pk['src'], TOOL]}
+        spec['dark'] = name + '_ROD'
+        spec['adaptAt'] = {'value': [-2, -1], 'grade': 'i', 'invented': True, 'src': [], 'range': [-3, 0]}
+        rows.append(['i', 'Being tried: dusk', "As the light falls, the colours drift toward what the rods take in, which peak near %d nm. The peak is measured; where the change happens is the app's guess." % pk['rod'],
+                     [pk['src'].split(': ', 1)[1].split(' (')[0], 'param:spectrum.adaptAt', 'param:matrices.' + name + '_ROD']])
+    draw = {'spectrum': [{'name': 'shift', 'invented': True, 'note': "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"},
+                         {'name': 'neutral', 'invented': True, 'note': 'where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)'},
+                         {'name': 'wheel', 'invented': True, 'note': 'a finger dragged across the picture turns which classes are shown (atlas 5)'}]}
+    return {'matrices': mats, 'params': {'M': {'value': name, 'grade': pk['grade'], 'invented': True, 'src': [pk['src']]}},
+            'spectrum': spec, 'draw': draw, 'rows': rows}
+
+
+def trials():
+    for key, pk in PEAKS.items():
+        f = ROOT / 'views' / (key + '.json')
+        spec = json.loads(f.read_text(encoding='utf-8'))
+        if spec.get('trial'):
+            print(key, 'already has a trial; left alone')
+            continue
+        t = trial_for(key, pk)
+        t['rows'] = spec['rows'] + t['rows']
+        spec['trial'] = t
+        f.write_text(fmt(spec) + '\n', encoding='utf-8')
+        print(key, 'trial written')
+
+
 def main():
+    if '--trials' in sys.argv:
+        trials()
     changed = 0
     for f in sorted((ROOT / 'views').glob('*.json')):
         if f.name == 'index.json':

@@ -7,7 +7,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '28';
+  var BUILD = '29';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -69,7 +69,7 @@
     for (k in spec.params) v[k] = specValue(spec.params[k], spec, mats, k);
     if (spec.zones) v.zones = specValue(spec.zones, spec, mats, 'zones');
     if (spec.gaze) v.gaze = specValue(spec.gaze, spec, mats, 'gaze');
-    ['spectrum', 'clock', 'pace', 'motion'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
+    ['spectrum', 'clock', 'pace', 'motion', 'slow', 'tilt', 'magnet'].forEach(function (b) { if (spec[b]) v[b] = specValue(spec[b], spec, mats, b); });
     if (spec.draw) v.draw = spec.draw;
     if (spec.inputs && spec.inputs.senses) v.senses = specValue(spec.inputs.senses, spec, mats, 'senses');
     if (spec.by && spec.by.genus) { v.byGenus = {}; for (g in spec.by.genus) v.byGenus[g] = specValue(spec.by.genus[g], spec, mats, g); }
@@ -100,7 +100,7 @@
   // without "offered" (above). A view tried joins EYES for that visit only, so a photo or a typed name in its group then opens it too.
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
   if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
-  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; if (SPECS[k].offered && SPECS[k].trial) { SPECS[k] = merged(SPECS[k], SPECS[k].trial); delete SPECS[k].trial; } });
+  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; if (SPECS[k].offered && SPECS[k].trial) { SPECS[k] = merged(SPECS[k], SPECS[k].trial); delete SPECS[k].trial; SPECS[k].hasCurve = JSON.stringify(SPECS[k]).indexOf('"curve"') >= 0 || !!SPECS[k].clock; } });
   // The tuning panel and the compare slider (src/cam.tune.js) appear only with ?try=<view>&tune=1. &draw=<option> picks one of the
   // drawing options a view offers (docs/views/ATLAS.md), the first being the default. cmp is the compare divider's place, 0 when hidden.
   var TUNE = { on: TRY_KEYS.length > 0 && /[?&]tune=1(?:&|$)/.test(location.search || ''), cmp: 0,
@@ -162,6 +162,10 @@
     if (P.pace && P.draw.pace === 'replay') P.replay = P.pace.ratio || 3;
     if (P.motion && P.draw.steady === 'arm') { P.hold = 0; P.thrust = P.motion.thrustMs || 140; P.arm = 1; }
     if (P.motion && P.draw.steady === 'lock') P.lock = 1;
+    // module 12, slow, and module 5's tilt and heading (docs/ENGINE.md): each drawn only through its category's option
+    P.slow = m.slow || null; P.slowMode = P.slow && P.draw.slow && P.draw.slow !== 'off' ? P.draw.slow : '';
+    P.tilt = m.tilt || null; P.snell = P.tilt && P.draw.tilt === 'snell' ? 1 : 0;
+    P.magnet = m.magnet || null; P.magMode = P.magnet && (P.draw.magnet === 'grain' || P.draw.magnet === 'tide') ? P.draw.magnet : '';
     P.gz = m.gaze || null; P.senses = m.senses || null; P.water = m.water || null; P.waterC = m.waterC || null;
     return P;
   }
@@ -201,8 +205,8 @@
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
     var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
-    var w = b.spec || b.clock || b.pace || b.motion ? b : a;   // the new modules keep to the view that has them
-    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay;
+    var w = b.spec || b.clock || b.pace || b.motion || b.slow || b.tilt || b.magnet ? b : a;   // the new modules keep to the view that has them
+    o.Q = w.Q; o.adapt = w.adapt; o.clock = w.clock; o.pace = w.pace; o.motion = w.motion; o.rot4 = w.rot4; o.lock = w.lock; o.arm = w.arm; o.replay = w.replay; o.slow = w.slow; o.slowMode = w.slowMode; o.tilt = w.tilt; o.snell = w.snell; o.magnet = w.magnet; o.magMode = w.magMode;
     o.glowC = z.glowC; o.gz = z.gz; o.draw = z.draw; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
     o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
     o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;

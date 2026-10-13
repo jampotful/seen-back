@@ -37,6 +37,15 @@
     // (the arm as the neck, &draw=arm). Which way each rotation axis moves the picture is the app's reading of the specification and
     // waits for a phone to confirm it.
     var stabX = 0, stabY = 0, snapAt = 0, lastM = 0, thrustAt = 0;
+    // tilt and heading (module 5): the phone's roll in the screen's plane and the camera's elevation, from gravity, and the compass
+    // heading. iOS reports gravity with the opposite sign to Android, so its readings are turned round. &roll=, &elev= and &heading=
+    // set them by hand for checking. Which way each one turns the picture waits for a phone to confirm it.
+    var POSE_SET = {}; ['roll', 'elev', 'heading'].forEach(function (k) { var m = new RegExp('[?&]' + k + '=(-?[0-9.]+)').exec(location.search || ''); if (m) POSE_SET[k] = +m[1]; });
+    var IOS = !!(window.DeviceMotionEvent && typeof window.DeviceMotionEvent.requestPermission === 'function'), roll = 0, elev = 0, heading = null;
+    function onOrient(e) {
+      if (typeof e.webkitCompassHeading === 'number') heading = e.webkitCompassHeading;
+      else if (e.absolute && typeof e.alpha === 'number') heading = (360 - e.alpha) % 360;
+    }
     function onMotion(e) {
       var r = e.rotationRate || {}, a = e.acceleration, g = e.accelerationIncludingGravity, now = performance.now(), am;
       var dts = lastM ? Math.min((now - lastM) / 1000, .1) : 0; lastM = now;
@@ -45,6 +54,11 @@
         thrustAt = now; if (engine && engine.kick) engine.kick(); if (navigator.vibrate) try { navigator.vibrate(12); } catch (x) { /* refused */ }
       }
       gotMotion = now;
+      if (g && g.x !== null && g.x !== undefined) {
+        var sg = IOS ? -1 : 1, gx = g.x * sg, gy = g.y * sg, gz = g.z * sg, gm = Math.sqrt(gx * gx + gy * gy + gz * gz) || 1;
+        if (gx * gx + gy * gy > .5) roll = Math.atan2(gx, gy) * 180 / Math.PI;
+        elev = -Math.asin(clamp(gz / gm, -1, 1)) * 180 / Math.PI;
+      }
       rotS = lerp(rotS, Math.sqrt((r.alpha || 0) * (r.alpha || 0) + (r.beta || 0) * (r.beta || 0) + (r.gamma || 0) * (r.gamma || 0)), .2);   // degrees a second
       if (a && a.x !== null && a.x !== undefined) am = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
       else if (g && g.x !== null && g.x !== undefined) { am = Math.sqrt(g.x * g.x + g.y * g.y + g.z * g.z); accMean = lerp(accMean || am, am, .02); am = Math.abs(am - accMean); }
@@ -58,6 +72,7 @@
     function startMotion() {
       if (motionOn) return;
       motionOn = true; window.addEventListener('devicemotion', onMotion);
+      window.addEventListener('ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation', onOrient);
     }
     function startMic() {
       if (mic || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
@@ -100,6 +115,7 @@
       paint: paint,
       still: function () { return !motionOn || performance.now() - gotMotion > 1500 || (rotS < 4 && accDev < .08); },   // without the sensors, the picture alone decides
       turning: function () { return motionOn ? rotS : 0; },
+      pose: function () { return { roll: 'roll' in POSE_SET ? POSE_SET.roll : roll, elev: 'elev' in POSE_SET ? POSE_SET.elev : elev, heading: 'heading' in POSE_SET ? POSE_SET.heading : heading }; },
       stab: function (cfg, now) {                     // degrees to shift the picture by, so the world holds still until the next snap
         var hold = (cfg && cfg.holdMs) || 700, most = (cfg && cfg.maxDeg) || 8;
         if (!motionOn || now - snapAt > hold || Math.abs(stabX) > most || Math.abs(stabY) > most) { stabX = 0; stabY = 0; snapAt = now; }

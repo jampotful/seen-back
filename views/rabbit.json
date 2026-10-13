@@ -29,5 +29,85 @@
       "The whole view",
       "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
     ]
-  ]
+  ],
+  "trial": {
+    "matrices": {
+      "RABBIT": {
+        "from_pigments": [425,523],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.14657,0.50601,0.26748,0.07994],[0.14657,0.50601,0.26748,0.07994],[0.00027,0.07048,0.6112,0.31805]],
+        "q": [[0.00027,0.07048,0.6112,0.31805],[0.14657,0.50601,0.26748,0.07994],[0,0,0,0],[0,0,0,0]]
+      },
+      "RABBIT_ROD": {
+        "from_pigments": [498],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.05831,0.44075,0.411,0.08993],[0.05831,0.44075,0.411,0.08993],[0.05831,0.44075,0.411,0.08993]],
+        "q": [[0.05831,0.44075,0.411,0.08993],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+      }
+    },
+    "params": {
+      "M": {
+        "value": "RABBIT",
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)"
+        ]
+      }
+    },
+    "spectrum": {
+      "q": "RABBIT",
+      "neutral": {"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]},
+      "dark": "RABBIT_ROD",
+      "adaptAt": {"value":[-2,-1],"grade":"i","invented":true,"src":[],"range":[-3,0]}
+    },
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        },
+        {
+          "name": "wheel",
+          "invented": true,
+          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
+        }
+      ]
+    },
+    "rows": [
+      [
+        "i",
+        "The whole view",
+        "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
+      ],
+      [
+        "i",
+        "Being tried: colour from pigments",
+        "On this trial the colours come from the measured receptor peaks (425, 523 nm). The camera's colours and the display are the app's.",
+        ["Nuboer, van Nuys and Wortel 1983, wild rabbit","param:spectrum.neutral","param:matrices.RABBIT","param:M"]
+      ],
+      [
+        "i",
+        "Being tried: dusk",
+        "As the light falls, the colours drift toward what the rods take in, which peak near 498 nm. The peak is measured; where the change happens is the app's guess.",
+        ["Nuboer, van Nuys and Wortel 1983, wild rabbit","param:spectrum.adaptAt","param:matrices.RABBIT_ROD"]
+      ]
+    ]
+  }
 }
