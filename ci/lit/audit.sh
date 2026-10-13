@@ -10,7 +10,7 @@ if [ "${AUDIT_PLAN_ONLY:-0}" != "1" ] && [ -z "${ANTHROPIC_API_KEY:-}" ]; then
   msg="ANTHROPIC_API_KEY is not set. Nothing was sent."
   echo "$msg" >&2; echo "$msg" > out/FAILED.txt; exit 2
 fi
-export AUDIT_MAX_USD="${AUDIT_MAX_USD:-3}" AUDIT_ADJ_MAX_USD="${AUDIT_ADJ_MAX_USD:-8}" AUDIT_WAIT_MIN="${AUDIT_WAIT_MIN:-100}"
+export AUDIT_MAX_USD="${AUDIT_MAX_USD:-3}" AUDIT_ADJ_MAX_USD="${AUDIT_ADJ_MAX_USD:-8}" AUDIT_WAIT_MIN="${AUDIT_WAIT_MIN:-150}"
 
 # the logs
 units="${AUDIT_UNITS:-all}"

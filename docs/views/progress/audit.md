@@ -6,6 +6,8 @@ Started 13 October 2026, about 16:20 US Eastern. Branch `agent/audit` (it alread
 - `tools/lit/audit.py`: first pass (Haiku 5.5, Message Batches API, cached system prompt, script check of the reply and of the numbers against the quote), `adjudicate` (flagged records settled from the source passage in `pub/lit-t1` by Sonnet 5.5), `decisions` (writes `docs/views/audit/<unit>.jsonl`), `test`. Checked against a local mock of the API.
 - `.github/workflows/lit-audit.yml`, `ci/lit/audit.sh`, `ci/lit/audit.env`.
 
+## Trial 2 (jumper and herps, 120 records): 85% flagged by the first prompt, too strict; prompt loosened, "unverifiable" verdict added, second pass sends worst flags first up to its cap.
+
 ## Next
 1. A trial run on two units (push to `run/lit-audit/trial1`), read the verdicts by eye.
 2. The full run over all 18 logs.
