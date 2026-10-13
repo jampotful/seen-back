@@ -265,3 +265,281 @@ Log: L186, L187.
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
 | Sunlit antennae | When the scene stays bright for several seconds, two warm filaments at the top of the frame glow orange and spread, and the picture darkens as if turning away. In shade they cool within seconds. | mean brightness over the last ten seconds | easy | L104 gives the time scale (more than 8 °C within 10 s, fast cooling). The filaments read as antennae and carry a real finding. Their colour and the threshold are **invented**. |
+
+### 2.4 `worm`: earthworms, leeches, flatworms, fan worms and ribbon worms
+
+**Rows**
+
+```
+['m', 'No eyes', 'An earthworm has no eyes. Light-sensitive cells lie in the skin of every segment, most of them at the head and the tail, and tiny windows in a layer of pigment let light reach them from set directions.'],
+```
+Log: L106, L107 (Hess 1925, sense_light_nonvisual, eye_type), L167 (Hess 1923, sense_light_nonvisual).
+
+```
+['m', 'Bright and dim', 'An earthworm crawls away from ordinary light, but it moves toward light that is very dim.'],
+```
+Log: L168 (Hess 1923, behaviour_vision).
+
+```
+['m', 'A mole digging', 'Florida earthworms rush out of their burrows when the ground carries the vibration of a digging mole. Bait collectors copy it by scraping a stake driven into the soil, and worms come up as far as 12 metres away.'],
+```
+Log: L176 to L179 (Catania 2008, sense_vibration), L108, L109 (Mitra and colleagues 2008, sense_vibration).
+
+```
+['m', 'Leeches', 'A medicinal leech has five pairs of eyecups on its head and seven pairs of light-sensing spots in every segment of its body. The spots on its back respond best to green light, and those underneath to ultraviolet.'],
+```
+Log: L114, L115 (Groves and Jellies 2021, eyes_count, lambda_max_nm), L111, L112 (Stowasser and colleagues 2019, eyes_count, receptor_classes).
+
+```
+['g', 'Flatworms', 'Each cup-shaped eye of a freshwater planarian samples the world about every 35 degrees, and the animal flees ultraviolet light most strongly. It still flees near-ultraviolet light after its eyes are removed. Land planarians, such as the hammerhead worms, have many tiny eyes on the head.'],
+```
+Log: L2, L5 (Land and Nilsson 2012, interreceptor_deg, eye_type), L119 (Paskin and colleagues 2014, behaviour_vision), L120, L121 (Birkholz and Beane 2017), L169 (Bertone 2020, eyes_count).
+
+```
+['m', 'Fan worms', 'Fan worms and Christmas tree worms have eyes on their feathery tentacles. Their light-sensing pigment peaks at 464 nanometres, close to the blue light of a shallow reef, and a passing shadow makes them pull back into their tubes at once.'],
+```
+Log: L123, L124 (Bok and colleagues 2017, lambda_max_nm, eye_role).
+
+```
+['x', 'Touch, taste and damp', 'Worms meet most of the world through touch, taste and moisture. A leech's skin answers vibration up to about 50 times a second, and land planarians need damp ground to live. None of this reaches a camera.'],
+```
+Log: L118 (Laverack 1969, sense_touch), L170 (Bertone 2020, sense_chemical), L122 (Ascunce and colleagues 2026, sense_chemical).
+
+```
+['i', 'The picture', 'This view shows only how much light there is, where it comes from and how it changes, and it counts ultraviolet and blue light most. That weighting follows the planarians and leeches and is the app's own choice.'],
+```
+Log: L119 (planarian hierarchy), L115 (leech sensilla).
+
+**The picture.** No image. The frame is a soft field whose brightness follows the scene, brighter on the side the light comes from, in grey drawn from the camera's blue more than its red. A sudden shadow makes it flinch shut.
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Worm', 'a worm or leech' | **invented**; the GROUPS label would change once millipedes and centipedes have views of their own |
+| `cpd` | .014 | L2: the planarian's 35 degrees, 1 / (2 × 35) = 0.014. Blur radius 1.79 of the long side at `VIEW_DEG` 24, so only a gradient remains. Earthworms have no eyes at all (L107); for them the gradient stands for the directional windows in the skin, and that reading is mine. |
+| `M` | [0, .3, .7] in every row | L119, L115; weights **invented** |
+| `field`, `gate`, `rate` | unset | A shadow must register at once (L124), so no averaging. |
+| `cue` | 'Hold still and let a hand pass over the phone. There is no picture, only light, its direction and the shock of a shadow.' | **invented** |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Shadow alarm | When the frame darkens sharply (for example by a third within a third of a second), the field contracts to a dark point, as a fan worm pulls in, and opens again over two or three seconds. | the camera's mean brightness | easy | L124 (fan worms), L113 (the leech's whole-body S cell). The fan opening again is the beautiful part. Thresholds and timing are **invented**. |
+| A mole digging | A low rumble or knocks on the table make the field rise and brighten, as a worm surfaces, and settle when the ground is quiet. | the microphone's energy between about 50 and 300 Hz, with consent, or the motion sensors | medium | L177 (grunting near 80 Hz, a mole near 200 Hz), L176. The band is taken from those peaks; the response is **invented**. |
+| Dim light | In near darkness the bright side draws the field toward it; in ordinary light the field leans away. | mean brightness | easy | L168 |
+| A leech's body of eyes | With the phone held flat and face up, the top half of the frame leans green and the bottom half blue, as the sensilla on the back and belly do. | device orientation, and the zones of track C | medium | L115. It is a true detail; **invented** in its proportions. |
+
+### 2.5 `scorpion`: scorpions, whip spiders, whip scorpions, pseudoscorpions and camel spiders
+
+**Rows**
+
+```
+['m', 'Two kinds of eyes', 'A scorpion has a pair of larger eyes on top of its front shield and a row of two to five small eyes along each front corner. The middle eyes may form a rough image, and the side eyes serve as very sensitive detectors of light.'],
+```
+Log: L10, L11 (Prévost and Stemme 2020, eyes_count, eye_role), L43, L44 (Lehmann and Melzer 2013, eye_role), L49 (Loria and Prendini 2014, eyes_count), L46 (Yang and colleagues 2013, eyes_count).
+
+```
+['m', 'Night sight', 'A scorpion's middle eyes grow about a thousand times more sensitive at night under a daily clock, and its side eyes are about ten times more sensitive than that. This view lifts the shadows after dark by the phone's own clock.'],
+```
+Log: L26, L27, L28 (Fleissner 1977, absolute_sensitivity and diel, in *Androctonus australis*), L15 (Prévost and Stemme 2020). Loria and Prendini (L50) give ten log units for the side eyes' margin, which conflicts with Fleissner's own one log unit; the row follows Fleissner.
+
+```
+['m', 'Colour', 'Both kinds of eye respond best to green light near 500 nanometres, and the side eyes respond to ultraviolet as well. Scorpions see red poorly, though in sensitive tests they still turn toward it. This view draws the world in green-weighted grey and lets red fall dark.'],
+```
+Log: L12, L13, L14 (Prévost and Stemme 2020), L23, L24 (Machan 1968, receptor_classes), L34 (Rivera Roldan and Gaffin 2018, behaviour_vision), L41 (Pulido Forero 2026, lambda_max_nm in *Centruroides*).
+
+```
+['m', 'A glowing body', 'Under ultraviolet light a scorpion's outer skeleton glows blue-green, though the lenses of its eyes do not. Scorpions with their eyes covered still reacted to ultraviolet light, which suggests the whole body helps to catch it.'],
+```
+Log: L35, L36 (Yong 2011, reporting Gaffin and colleagues 2012), L33 (Kloock, Kubli and Reynolds 2010), L17 (Prévost and Stemme 2020), L48 (Yang and colleagues 2013, filter_pigments).
+
+```
+['m', 'Light in the tail', 'Nerve cells in a scorpion's tail respond to light, most strongly to yellow-green near 568 nanometres.'],
+```
+Log: L32 (Geethabali and Rao 1973, in *Heterometrus*).
+
+```
+['m', 'Ripples in sand', 'A sand scorpion feels the ripples a moving insect sends through sand up to half a metre away, through slit-shaped sensors in each of its eight legs. It works out the direction of prey up to 20 centimetres away from the order in which its legs feel the ripple.'],
+```
+Log: L29, L30 (Brownell 1977), L31 (Brownell and van Hemmen 2001), L8 (Babu 1985).
+
+```
+['m', 'Combs that taste the ground', 'Under its body a scorpion carries a pair of comb-like organs, the pectines, with thousands of sensors that touch and taste the ground. A male striped bark scorpion responds strongly to the traces a female leaves on the ground.'],
+```
+Log: L19 (Prévost and Stemme 2020, sense_chemical), L171 (Steinmetz, Bost and Gaffin 2004), L172 (Gaffin, Muñoz and Hoefnagels 2022).
+
+```
+['m', 'Air and damp', 'Fine upright hairs on the pincers feel the slightest current of air, and hairs on the feet sense damp ground and water vapour.'],
+```
+Log: L21, L20 (Prévost and Stemme 2020, sense_airflow, sense_chemical), L174 (Ashford and colleagues 2018), L175 (Murayama and Willemart 2019).
+
+```
+['m', 'Whip spiders and whip scorpions', 'Whip spiders hunt at night and find their way home with their long, feeler-like front legs, even with their eyes covered. A whip scorpion's middle eyes form a clear image, and it senses light through its skin as well as its eyes.'],
+```
+Log: L69, L71 (Lehmann and Melzer 2018), L72 (Bingman and colleagues 2016), L73 (Flanigan and colleagues 2021), L38 (Meyer-Rochow 1987), L74 (Patten 1919).
+
+```
+['x', 'Not in the picture', 'A scorpion hunts and finds its way largely by vibration in the ground, currents of air and the taste of the ground, and scorpions with painted eyes still found their way home. The camera records none of these senses.'],
+```
+Log: L22 (Prévost and Stemme 2020, *Mesobuthus eupeus*), L180 (Locket 2001), L31, L19.
+
+```
+['i', 'Sharpness', 'No one has measured how much detail a scorpion's eyes resolve. This view assumes the middle eyes make out shapes a few degrees across, as the clear image in a whip scorpion's middle eye suggests, and leaves the side eyes as soft patches of light.'],
+```
+Log: L38, L11. The arithmetic is under the picture.
+
+**The picture.** A wide view squeezed into the screen. The middle holds rough shapes in green-weighted grey; the edges hold soft, brighter patches that gather light. After dark by the phone's clock the shadows lift strongly. Red objects fall dark.
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Scorpion', 'a scorpion' | `who` would replace 'a scorpion or harvestman' once harvestmen have their own view; **invented** |
+| `fov` | 360 | L16 (360 degrees by physiology, Locket as cited). The engine clamps the squeeze at 0.45. |
+| `cpd` | .1 in the middle (median-eye zone); .02 at the sides (lateral-eye zones) | **invented** by inference. The whip scorpion's median lens forms an image about 200 µm behind it and its rhabdoms are up to 20 µm wide (L38). A receptor 10 to 20 µm wide at 200 µm subtends 2.9 to 5.7 degrees, which gives 0.09 to 0.17 cycles per degree; .1 sits at the coarse end. The lateral eyes form no clear image (L11, L51); .02 is **invented**. Blur radius 0.25 of the long side for the middle at `VIEW_DEG` 24. |
+| `M` | [.05, .7, .25] in every row | L12, L41: one green peak near 500 to 525 nm; weights **invented** |
+| `gain` | 1 by day; 2.5 at night by the phone's clock, with a two-hour ramp at dusk and dawn; the side zones twice the middle's | L26 (3 log units), L27 (side eyes 1 log unit more), L28 (2 to 3 hour transitions). A screen cannot show a thousandfold change, so the amounts are **invented**. |
+| `pupil`, `gate`, `persist`, `rate` | unset | No measurement found. |
+| `cue` | 'Look along the ground in the evening. The middle holds rough shapes, the edges only gather light, and red goes dark.' | **invented** |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Night by the clock | Toward evening the shadows lift and the side patches brighten; by morning they settle. | the phone's clock and time zone | easy | L26 to L28. The view changes with the hour, as the scorpion's eyes do. |
+| Glowing rim | In light rich in blue and violet, a cyan-green glow rises around the edge of the frame, with small dark spots where the eyes would be, because the lenses do not glow. | the camera's blue level, standing in for ultraviolet | medium (an overlay pass) | L35, L36, L48. The camera records too little ultraviolet to drive this from the true signal, so it is **invented** in its trigger and must carry an `i` row if added. The glow with dark eye-spots is a striking and true image. |
+| Ripples in sand | Knocks felt through the phone send rings across the picture from the side the knock came from. | device motion (the sign of the first jolt) | medium | L31. A phone cannot time a wave across eight legs, so the direction is **invented**. |
+| Air on the pincers | Wind on the microphone makes the edge patches shimmer. | microphone, with consent | medium | L21, L174; **invented** in form |
+
+### 2.6 `harvestman`: harvestmen (Opiliones)
+
+**Rows**
+
+```
+['m', 'Eyes', 'A harvestman has a single pair of eyes, set back to back on a small turret in the middle of its body. Each eye looks out to one side.'],
+```
+Log: L52, L53 (Lehmann and colleagues 2016, eyes_count, eye_role), L66 (Friedrich 2024, eyes_count).
+
+```
+['m', 'Rough images', 'A harvestman's eyes probably give only a rough picture of light and dark. A large dark object makes a species of Leiobunum flee, and in the laboratory harvestmen move away from light.'],
+```
+Log: L53, L54, L55 (Lehmann and colleagues 2016).
+
+```
+['m', 'Hidden eyes', 'The most photographed harvestman, Phalangium opilio, also carries two more pairs of eyes inside its body, both shrunk to traces. They may help set its daily clock.'],
+```
+Log: L65 (Friedrich 2024, eyes_count).
+
+```
+['g', 'Colour and dim light', 'In two cave harvestmen from New Zealand the eyes respond to ultraviolet, blue and green light, over a range of brightness of at least a hundred thousand to one. Their lenses gather light about as well as a camera lens set to f/1.'],
+```
+Log: L62, L63 (Meyer-Rochow and Liddle 1988, lambda_max_nm, absolute_sensitivity), L59, L60 (f_number). Five log units is 100,000 to 1.
+
+```
+['m', 'Touch and taste', 'Harvestmen find food, mates and enemies mostly by touching and tasting them with their first pair of legs and their palps, and they sense little from a distance.'],
+```
+Log: L57, L58 (Willemart, Farine and Gnaspini 2008), L68 (Willemart and Chelini 2007).
+
+```
+['g', 'Smell close up', 'Some harvestmen smell food from a short distance. One South American species found fresh dead crickets hidden under mesh.'],
+```
+Log: L67 (Costa and Willemart 2013).
+
+```
+['g', 'Finding the way', 'A South American harvestman uses its eyes to find its way back to its eggs, and relies on the memory of its own steps when its eyes are covered.'],
+```
+Log: L64 (Silva and colleagues 2018).
+
+```
+['x', 'Not in the picture', 'The touch and taste of a harvestman's legs and palps carry most of what it knows, and the camera records neither.'],
+```
+Log: L57, L58.
+
+```
+['i', 'Sharpness and field', 'No one has measured how much detail a harvestman sees. This view assumes coarse sight of a few large shapes, clearest out to each side.'],
+```
+Log: L53.
+
+**The picture.** Two soft windows, one on each side of the screen, with large dark shapes in grey; the middle of the screen, straight ahead, is dim.
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Harvestman', 'a harvestman' | **invented** |
+| `cpd` | .05 | **invented**: "rough image of light and dark" (L53), set between the millipede's .018 and the tick's .07 |
+| zones | left and right bands at full brightness; the central third dimmed to about half | L53 (fields extend sideways); proportions **invented** |
+| `sat` | 0 | No spectral measurement in common species; the cave species (L62) are too far from the commonest to set a colour matrix. **invented** |
+| `gain` | 1.2 | L59, L60 (fast lenses) in cave species; amount **invented** |
+| `cue` | 'The view looks out to both sides at once, and straight ahead is dim.' | **invented** |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Two side windows | The picture splits softly into left and right fields from one turret, with a dim seam ahead. | none (zones) | easy once zones exist | L52, L53 |
+| Tasting legs | A touch on the screen flashes a small coloured bloom that fades, as a leg tip tastes what it meets. | the touch screen | easy | L57, L58; **invented** in form |
+
+### 2.7 `tick`: ticks (Ixodida)
+
+**Rows**
+
+```
+['m', 'Eyes', 'The Lone Star Tick has a simple eye on each side, a single lens over 30 to 40 light-sensitive cells. The black-legged ticks have no eyes, and their relatives carry strings of light-sensitive cells along the body instead.'],
+```
+Log: L151, L152 (Phillis and Cromroy 1977), L158 (Perret and colleagues 2003).
+
+```
+['m', 'Eyes in use', 'American Dog Ticks released in a field moved toward the warm edge of a road. Ticks with painted eyes, and ticks without the sense organ on their front legs, did so less.'],
+```
+Log: L165 (Stewart and colleagues 2025).
+
+```
+['g', 'Where they look', 'In the tropical bont tick, a relative of the Lone Star Tick, each eye takes in a patch about 43 degrees wide and 49 high, aimed 39 degrees out from straight ahead and 33 degrees up.'],
+```
+Log: L154, L155, L156 (Kaltenrieder, Labhart and Hess 1989).
+
+```
+['g', 'Colour', 'The bont tick's eye has a single peak of sensitivity, in blue near 480 nanometres, so it sees no colours. This view is drawn in grey from the camera's blue and green.'],
+```
+Log: L153.
+
+```
+['g', 'Darkness', 'The sheep tick, a relative of the black-legged ticks, walks almost only in the dark, and the coming of darkness sets it moving.'],
+```
+Log: L159, L158 (Perret and colleagues 2003).
+
+```
+['m', 'Heat', 'A Lone Star Tick senses the warmth of a body through a covered pit on each front leg. At least seven in ten adult females found a warm square 10 centimetres across from a metre away, and the pit looks along a narrow line at most 5.7 degrees wide.'],
+```
+Log: L161, L162 (Carr and Salgado 2019).
+
+```
+['m', 'Breath and scent', 'Sensors in a pit on the front legs, called Haller's organ, respond to the carbon dioxide in breath and to the scents of animals. The black-legged tick responds most strongly to the cresols in a deer's scent glands.'],
+```
+Log: L163 (Carr and colleagues 2017), L164 (Holscher, Gearhart and Barker 1980), L166 (Josek and colleagues 2020).
+
+```
+['g', 'Damp', 'A sheep tick spends less time waiting on a grass tip as the air grows drier.'],
+```
+Log: L160 (Perret and colleagues 2003).
+
+```
+['x', 'Not in the picture', 'Heat, breath and scent are how a tick finds a host, and none of them reaches a camera.'],
+```
+Log: L161, L163, L164.
+
+**The picture.** As `tick.md` describes it: a grey field of large soft patches from blue and green light, in which a passing shadow registers at once. Two changes follow from the evidence above: a coarser `cpd`, and, once zones exist, two windows aimed up and out.
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Tick', 'a tick' | as `tick.md` |
+| `cpd` | .07 | **invented** by inference from the Lone Star Tick's own eye: 30 to 40 receptors (L151) spread over a field like the bont tick's, about 43 by 49 degrees (L154, L155). An ellipse that size covers about 1,655 square degrees; 35 receptors give about 47 square degrees each, a spacing of about 6.9 degrees, and 1 / (2 × 6.9) = 0.072. `tick.md` reached 0.1 from a camel tick's 4.8 degree target. Blur radius 0.36 of the long side at `VIEW_DEG` 24. |
+| `M` | [.05, .45, .5] in every row | L153; weights **invented** (as `tick.md`) |
+| zones | two soft windows centred up and out, 39 degrees to each side and 33 degrees up, each about 43 by 49 degrees; the rest dim | L154 to L156 in the bont tick; the dim surround is **invented** |
+| `pupil`, `gate`, `persist`, `rate`, `fov` | unset | as `tick.md` |
+| `cue` | 'Hold the phone at the height of the grass tips and tilt it up. Only large shadows remain.' | `tick.md`, **invented** wording |
+
+**New effects.** `tick.md` section 4 covers heat, carbon dioxide, vibration and the two eye windows, and its judgements stand. One addition:
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Waking at dusk | When the scene falls dark and stays dark, the field stirs: its patches drift as if the tick had begun to walk. In bright light it is still. | mean brightness | easy | L159 (activity almost only in darkness, triggered by its onset). The drift is **invented**. |
+
+**[unfinished]**
