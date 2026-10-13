@@ -20,8 +20,9 @@ MODELS="${MODELS:-tinyclip-39m-16,bioclip-b16,bioclip25-mobile-fastvit}"
 step "world photos" fetch pub/data-world root/world || exit 1
 for m in ${MODELS//,/ }; do
   mkdir -p "root/lab/$m"
-  step "vectors of $m" fetch "pub/lab-$m" "root/lab/$m" card.json images/world-fit.f16.npy images/world-fit.ids.json images/world-eval.f16.npy images/world-eval.ids.json
+  step "vectors of $m" fetch "pub/lab-$m" "root/lab/$m" card.json ':(glob)images/world-fit.*' ':(glob)images/world-eval.*'
 done
+step "files kept in parts" python3 -I ci/lab/bigfiles.py join root/lab
 step "compare" python3 -I tools/world/encoders.py root --models "$MODELS" --out out/enc || exit 1
 cp out/enc/ENCODERS.md out/enc/encoders.json out/
 exit 0
