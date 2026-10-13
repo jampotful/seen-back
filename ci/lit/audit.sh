@@ -38,11 +38,11 @@ from_ci() {   # from_ci <path on ci> <local file>
 if [ "$mode" = second ]; then
   status=0
   from_ci "${AUDIT_FLAGGED_REF}/flagged.jsonl" audit-out/flagged.jsonl
-  from_ci "${AUDIT_RETRY_REF}/adjudicated.jsonl" retry-from.jsonl
+  retry=(); [ -n "${AUDIT_RETRY_REF:-}" ] && { from_ci "${AUDIT_RETRY_REF}/adjudicated.jsonl" retry-from.jsonl; retry=(--retry-from retry-from.jsonl); }
   echo "second pass only: flagged from ${AUDIT_FLAGGED_REF}, undecided rows from ${AUDIT_RETRY_REF}" | tee out/units.txt
   get_lit full
   ids=(); [ -n "${AUDIT_IDS_FILE:-}" ] && ids=(--ids "$AUDIT_IDS_FILE")
-  python3 -I tools/lit/audit.py adjudicate --lit lit --out audit-out --flagged audit-out/flagged.jsonl --retry-from retry-from.jsonl "${ids[@]}" \
+  python3 -I tools/lit/audit.py adjudicate --lit lit --out audit-out --flagged audit-out/flagged.jsonl "${retry[@]}" "${ids[@]}" \
     --model "${AUDIT_ADJ_MODEL:-claude-sonnet-5-5}" 2>&1 | tee out/audit-second.log.txt
   status="${PIPESTATUS[0]}"
   cp audit-out/*.md out/ 2>/dev/null || true
