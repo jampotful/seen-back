@@ -1,6 +1,6 @@
 # Sensing sheet: bees, wasps and sawflies (order Hymenoptera except ants), draft
 
-Started 13 October 2026, 01:46 UTC; this version 02:55 UTC. The evidence log is `docs/views/evidence/bee.jsonl` (245 lines) and the wanted list is `docs/views/wanted/bee.jsonl` (15 works). Every row below names the log lines behind it by source; the log gives the quote, place and grade for each.
+Started 13 October 2026, 01:46 UTC; this version 03:01 UTC. The evidence log is `docs/views/evidence/bee.jsonl` (252 lines) and the wanted list is `docs/views/wanted/bee.jsonl` (16 works). Every row below names the log lines behind it by source; the log gives the quote, place and grade for each.
 
 What was read. The literature collection on `pub/lit-t1` (topics `bees-wasps` and `insects-general`), full texts on disk and abstracts in the index. Three works from the owner's library: van der Kooi et al. 2021 (whole paper), Land 1997 (whole paper), and Land and Nilsson 2012, *Animal Eyes*, which came through only in part: the front matter, Chapter 1, Chapter 2 and Chapter 3 up to "Available photon numbers" (about pages 1 to 63). Chapters 4 to 9, including Chapter 7 on apposition compound eyes and Chapter 9 on eye movements, did not come through. Caves et al. 2018 arrived in the library's "General and methods" folder during this session and was read, because it is the paper behind the app's current sharpness row. Web pages were read through the fetch tool where the machine's own network refused the site (GBIF, iNaturalist, Europe PMC, PubMed and Crossref all refused direct requests from this machine; the record counts below therefore come from data already in the repository).
 
@@ -34,7 +34,7 @@ Share: bees 55.5 to 62.8% of world records and 45.9% of Alachua's; wasps (vespid
 
 **Gall wasps: split, provisionally.** Gall wasps hold 7.9% of the unit's world records. Their iNaturalist names ("leafy oak gall wasp", "Banded Bullet Gall Wasp") suggest that many records show the gall, a plant growth with a grub inside, and the grub has no eyes: in the rose gall wasp *Diplolepis triforma* the compound eyes begin to form only after feeding ends (Shorthouse and Leggo 2002). A bee's picture is false for a gall. The share of cynipid records that show a gall was not measured here (iNaturalist's life-stage and "gall" annotations would measure it), so this split depends on that check. If most records show adults, gall wasps join `wasp`.
 
-**Sawflies and horntails: a colour setting inside `wasp`.** The horntail *Sirex noctilio* has only ultraviolet (364 nm) and green (527 nm) receptors and lacks the blue opsin gene. Earlier recordings found no blue receptor in any sawfly or woodwasp except *Tenthredo campestris*, and found a fourth, red receptor in *T. campestris*, *T. scrophulariae* and the woodwasp *Xiphydria camelus* (Guignard et al. 2021, reviewing Peitsch et al. 1992; van der Kooi et al. 2021 list *T. campestris* at 337, 458, 537 and 602 nm). That makes a bee or wasp colour picture false for them. At under 1% of records, and with larvae (which have only simple larval eyes, unstudied here) making up an unknown share of those, a separate group in the pocket model is not worth it: when the full database names a sawfly or horntail, the `wasp` view should switch to a two-colour setting.
+**Sawflies and horntails: a colour setting inside `wasp`.** The horntail *Sirex noctilio* has only ultraviolet (364 nm) and green (527 nm) receptors and lacks the blue opsin gene. Earlier recordings found no blue receptor in any sawfly or woodwasp except *Tenthredo campestris*, and found a fourth, red receptor in *T. campestris*, *T. scrophulariae* and the woodwasp *Xiphydria camelus* (Guignard et al. 2021, reviewing Peitsch et al. 1992; van der Kooi et al. 2021 list *T. campestris* at 337, 458, 537 and 602 nm). That makes a bee or wasp colour picture false for them. At under 1% of records, and with larvae making up an unknown share of those, a separate group in the pocket model is not worth it: when the full database names a sawfly or horntail, the `wasp` view should switch to a two-colour setting.
 
 **Bumblebees against honeybees: no split.** Their acuity is about the same (honeybee 0.26 cycles per degree, *Bombus terrestris* 0.21 to 0.25, *B. impatiens* 0.35; Land 1997; Kelber and Somanathan 2019; Chakravarthi 2017), their receptors match, and the measured differences (electric hairs in bumblebees, an antennal electric sense in honeybees, somewhat slower receptors in *B. impatiens*) belong in the rows and leave the picture unchanged. Body size changes acuity within both (Spaethe and Chittka 2003; Taylor et al. 2019), which belongs to species settings (Section 4).
 
@@ -123,8 +123,8 @@ At `cpd` 0.3 on a phone (`VIEW_DEG` 24), the engine's blur radius is 0.6 × (lon
   Log: Gutiérrez et al. 2024 (interommatidial_deg 2.0-3.0 in the upper half; fovea; acceptance_deg 1.59 frontal and 2.82 lateral); Kelber et al. 2011 (eye_type, the indentation in all vespids).
 - `['m', 'Colour', 'Wasps have the same three kinds of colour-sensing cells as bees, tuned to ultraviolet, blue and green, and reds look dim to them. A tropical paper wasp has learned to pick out a blue card among cards of other colours and greys.']`
   Log: van der Kooi et al. 2021 (lambda_max_nm for *Vespula germanica*, *V. vulgaris*, *Vespa crabro*, *Polistes dominula*, *Philanthus triangulum*); Shafir 1996 (colour_vision, *Polybia occidentalis*, no red receptor).
-- `['m', 'Faces', 'Northern paper wasps recognize their nestmates by the yellow markings on their faces. With their eyesight, a wasp can make out such marks only from a few centimetres away, so recognition happens face to face.']`
-  Log: Tibbetts 2002 (behaviour_vision); Caves et al. 2018 (interommatidial_deg about 1; marks resolved from 1 to 5.7 cm).
+- `['m', 'Faces', 'Northern paper wasps recognize nestmates by the yellow markings on their faces, which they can make out only from a few centimetres away. In tests with pictures, they learn to tell faces apart in colour, and with grey copies they do no better than chance.']`
+  Log: Tibbetts 2002 (behaviour_vision); Jernigan et al. 2023 (behaviour_vision, greyscale faces at chance); Caves et al. 2018 (interommatidial_deg about 1; marks resolved from 1 to 5.7 cm).
 - `['m', 'Hunters' eyes', 'Hunting wasps have larger eyes for the size of their heads than bees do. Bees descend from hunting wasps, and their eyes became relatively smaller when they switched from prey to pollen, which they gather by landing on flowers.']`
   Log: Trisoglio et al. 2026 (behaviour_vision).
 - `['m', 'Hornets at dusk', 'European hornets keep flying deep into twilight and on moonlit nights, in light about a hundred times dimmer than common wasps need. Their eyes look much like a daytime wasp's, and their large size lets them gather more light.']`
@@ -135,8 +135,8 @@ At `cpd` 0.3 on a phone (`VIEW_DEG` 24), the engine's blur radius is 0.6 × (lon
   Log: Srinivasan and Lehrer 1984 (cff_hz 200, honeybee), borrowed; Skorupski and Chittka 2010 (corner_hz, bumblebee speeds).
 - `['i', 'Ultraviolet in this view', 'Phone cameras record almost no ultraviolet, so this view guesses it. The guess gives ultraviolet to the open sky and to bluish surfaces and keeps it off white flowers. Colours are shifted by one, as in researchers' photographs of what bees see: green appears as red, blue as green, and ultraviolet as blue.']`
   Log: as the bee's row.
-- `['g', 'Small wasps', 'Many wasps are tiny parasites of other insects, and the smallest have eyes less than a tenth of a millimetre long, with facets about six thousandths of a millimetre wide. This view gives every wasp a yellowjacket's eyesight, so it is far too sharp for them.']`
-  Log: Fischer et al. 2010 (eye_type, *Trichogramma evanescens*).
+- `['g', 'Small wasps', 'Many wasps are tiny parasites of other insects; one of the smallest, shorter than a third of a millimetre, has just 29 facets in each eye, where a honeybee has more than 5,000. Even so, the seven along the top edge of its eye look built to read polarized light. This view gives every wasp a yellowjacket's eyesight, so it is far too sharp for them.']`
+  Log: Makarova et al. 2025 (eye_type and polarization, *Megaphragma viggianii*); Fischer et al. 2010 (eye_type, *Trichogramma evanescens*, eyes under 0.1 mm); Penmetcha et al. 2025 (5,311 facets in the honeybee, from Ryan et al. 2020).
 - `['x', 'Smell', 'Wasps find prey by smell as well as by sight, and male velvet ants find the wingless females by scent alone. This view leaves smell out.']`
   Log: Gutiérrez et al. 2024 (sense_chemical, citing Raveret et al.); VanderSal et al. 2016 (sense_chemical, *Dasymutilla*).
 
@@ -161,6 +161,8 @@ Setting for sawflies and horntails (replaces the Colour row when the full databa
 | `pupil`, `dof` | 'none', 0 | as `bee` |
 | glances | as `bee`, borrowed (`i`) | bumblebees measured (Boeddeker et al. 2015); wasps' learning flights are known to include zigzags (Kelber and Somanathan 2019 cite Zeil's work) but were not logged as numbers |
 | cue | "Sharper below the horizon than above. Turn slowly and the picture holds, then snaps." | |
+
+The seam is a vespid fact, measured only in two yellowjackets, and the `wasp` view uses it by default because vespids hold about half or more of the wasp side's records: 17.4% of the unit's world records against at least 11.8% for all other wasps and sawflies together, and 1,167 Alachua records against 1,029. When the full database names a wasp outside Vespidae, the seam should switch off and the upper half take the lower half's `cpd` of 0.3, since no other family's sampling was found; whether digger wasps, mud daubers and velvet ants share the notch is question 2 of Section 8.
 
 ### New effects
 
@@ -240,19 +242,19 @@ Setting for sawflies and horntails (replaces the Colour row when the full databa
 ## 5. Gaps and how to fill them
 
 - **Wasp timing.** No flicker or receptor speed was found for any vespid. Nearest: honeybee 200 Hz, bumblebee green receptors 7.9 to 11.3 ms. Inference: similar-sized day fliers with the same receptor types are likely as fast; `rate` 0.3, graded `i`.
-- **Wasp field of view and polarization.** Unmapped beyond about 100 degrees of longitude (Gutiérrez et al. 2024). Take the honeybee's 312 degrees (`g`); Zeil et al. 2014 is wanted for the dorsal rim.
+- **Wasp field of view and polarization.** Unmapped beyond about 100 degrees of longitude (Gutiérrez et al. 2024). Take the honeybee's 312 degrees (`g`). No dorsal rim was found described for a vespid, but even the 29-facet eye of the parasitoid *Megaphragma* has one (Makarova et al. 2025), so one in larger wasps is a safe inference; Zeil et al. 2014 is wanted to confirm it.
 - **Small bees.** No acuity for the sweat bees that dominate Alachua's small-bee records (*Halictus poeyi*, *Agapostemon splendens*). The nearest evidence pulls two ways. In behaviour, the small stingless bee *Tetragonula carbonaria* detects targets at 18.8 degrees per cycle against the honeybee's 6 to 11 in the same kind of test (Kelber and Somanathan 2019, Table 3), and eye size and resolution scale with body size across Apidae (same review). At the retina, the same stingless bee resolves 0.53 cycles per degree against the honeybee's 0.54 by an identical method, while needing about three times the contrast (Penmetcha et al. 2025). One reading, which is this sheet's inference and not the authors' claim, reconciles the two: a bee that needs more contrast spots a small target later even when its eye resolves as finely. The authors add that bees in outdoor tests detect thin strands of spider silk at the distance where the behavioural figure says a 1 cm flower first appears, so the behavioural tests may understate small bees. Inference: keep `cpd` 0.3 for small bees and give them a stronger contrast floor (effect 8), pending Jander and Jander 2002 (wanted, priority 1). An earlier draft of this sheet halved `cpd` for small bees; the retinal result is the reason for the change.
 - **Carpenter bees.** Florida's two species are unmeasured; the Indian *X. tenuiscapa* samples at 1 degree forward in females (Somanathan et al. 2017) and 0.8 by 1.5 degrees in Table 1 of Kelber and Somanathan 2019, so about 0.5 cycles per degree (`g`).
 - **Velvet ants.** *Dasymutilla* vision is unmeasured; in the Palearctic *Myrmilla capitata*, wingless females have fewer ommatidia per area than males and apparently no ocelli (Borsotti et al. 2025, abstract). Inference: a walking female sees more coarsely than a flying wasp; nothing more is known.
 - **Gall interiors.** Nothing found on light inside galls or on the grub's senses. The `gall` view's light-only picture is invention.
-- **Sawfly larvae.** Many sawfly records may be larvae, which have simple larval eyes; no source on them was found. Nothing is known here.
-- **Parasitoid wasps.** Apart from *Trichogramma* anatomy and one cynipoid's three receptor classes, nothing was logged; ichneumonids differ from other Apocrita in their opsin genes (Guignard et al. 2021) in ways not described there.
+- **Sawfly larvae.** Many sawfly records may be larvae. Their eyes are single-chamber eyes, one on each side, formed by the fusion of many ommatidia (Buschbeck 2014, abstract; her example is *Perga*, Meyer-Rochow 1974, wanted), and larvae of a pine sawfly, *Neodiprion banksianae*, steer mainly by the sky's polarization pattern and turn toward or away from light depending on their body temperature (Wellington et al. 1951). That family, Diprionidae, holds Alachua's most recorded sawfly. Nothing on the larvae's sharpness or colour was found, so a larva setting cannot be drawn yet; if the share of larval records proves large, the gall view's light-only picture is the nearest honest stand-in.
+- **Parasitoid wasps.** Apart from the anatomy of two trichogrammatids (*Trichogramma*; *Megaphragma*, 29 facets an eye with a dorsal rim) and one cynipoid's three receptor classes, nothing was logged; ichneumonids differ from other Apocrita in their opsin genes (Guignard et al. 2021) in ways not described there.
 - **Electric and magnetic senses in wasps.** Untested in anything logged.
 - **Disagreements between sources.** The honeybee's static magnetic threshold is 260 nT in Walker and Bitterman 1989 and 26 nT in the abstract of Kirschvink et al. 1997; the drone's pursuit threshold is 0.41 degrees in two papers and 0.32 in Land 1997. Reading Vallet and Coles 1991 and the Kirschvink paper would settle both.
 
 ## 6. Closed sources wanted
 
-The same fifteen works as `docs/views/wanted/bee.jsonl`, most useful first:
+The same sixteen works as `docs/views/wanted/bee.jsonl`, most useful first:
 
 1. Jander and Jander 2002, *Allometry and resolution of bee eyes (Apoidea)*, Arthropod Structure & Development, doi 10.1016/s1467-8039(01)00035-4: sharpness from body size, for species settings.
 2. Peitsch et al. 1992, *The spectral input systems of hymenopteran insects and their receptor-based colour vision*, J Comp Physiol A 170:23-40, doi 10.1007/bf00190398: receptor peaks for 43 species including sawflies.
@@ -265,10 +267,11 @@ The same fifteen works as `docs/views/wanted/bee.jsonl`, most useful first:
 9. Menzel 1981, *Achromatic vision in the honeybee at low light intensities*, J Comp Physiol A, doi 10.1007/bf00609941.
 10. Warrant, Kelber, Wallén and Wcislo 2006, *Ocellar optics in nocturnal and diurnal bees and wasps*, Arthropod Structure & Development, doi 10.1016/j.asd.2006.08.012.
 11. Zeil, Ribi and Narendra 2014, *Polarisation vision in ants, bees and wasps*, Springer, doi 10.1007/978-3-642-54718-8_3.
-12. Jernigan et al. 2022, *Color is necessary for face discrimination in the Northern paper wasp, Polistes fuscatus*, Animal Cognition, doi 10.1007/s10071-022-01691-9 (open on PMC, which refused this session with a rate limit).
+12. Jernigan et al. 2023, *Color is necessary for face discrimination in the Northern paper wasp, Polistes fuscatus*, Animal Cognition 26:589-598, doi 10.1007/s10071-022-01691-9: the abstract is logged; the full text (closed at the publisher; PMC refused this session with a rate limit) would give face sizes and distances.
 13. Sheehan, Jinn and Tibbetts 2014, *Coevolution of visual signals and eye morphology in Polistes paper wasps*, Biology Letters, doi 10.1098/rsbl.2014.0254.
 14. Wehner 1972, *Dorsoventral asymmetry in the visual field of the bee, Apis mellifica*, J Comp Physiol, doi 10.1007/bf00696429.
 15. Vallet and Coles 1991, *A method of estimating the minimum visual stimulus that evokes a behavioural response in the drone, Apis mellifera male*, Vision Research 31:1453-1455 (no DOI seen).
+16. Meyer-Rochow 1974, *Structure and function of the larval eye of the sawfly, Perga*, Journal of Insect Physiology, doi 10.1016/0022-1910(74)90087-0: whether sawfly larvae could have a setting of their own.
 
 ## 7. Sources
 
@@ -279,12 +282,13 @@ Opened in this session (full text, abstract, or the stated pages):
 - Boeddeker N, Mertes M, Dittmar L, Egelhaaf M 2015. Bumblebee homing: the fine structure of head turning movements. PLoS ONE. doi 10.1371/journal.pone.0135020. opened
 - Borsotti A et al. 2025. Sexual dimorphism in the sensory system of Myrmilla capitata. Arthropod Struct Dev. doi 10.1016/j.asd.2025.101479. opened (abstract)
 - Brown PE, Frank CP, Groves HL, Anderson M 1998. Spectral sensitivity and visual conditioning in the parasitoid wasp Trybliographa rapae. Bull Entomol Res. doi 10.1017/s0007485300025864. opened (abstract)
+- Buschbeck EK 2014. Escaping compound eye ancestry: the evolution of single-chamber eyes in holometabolous larvae. J Exp Biol. doi 10.1242/jeb.085365. opened (abstract; the publisher's page refused the fetch tool)
 - Caves EM, Brandley NC, Johnsen S 2018. Visual acuity and the evolution of signals. Trends Ecol Evol 33:358-372. doi 10.1016/j.tree.2018.03.001. opened (owner's library)
 - Chakravarthi A 2017. Spatial vision in bees (doctoral thesis, Lund University). opened (abstract)
 - Chittka L, Waser NM 1997. Why red flowers are not invisible to bees. Israel J Plant Sci. doi 10.1080/07929978.1997.10676682. opened (abstract)
 - Chittka L, Williams NM, Rasmussen H, Thomson JD 1999. Navigation without vision: bumblebee orientation in complete darkness. Proc R Soc B. doi 10.1098/rspb.1999.0602. opened (abstract)
-- Clarke D, Whitney H, Sutton G, Robert D 2013. Detection and learning of floral electric fields by bumblebees. Science. doi 10.1126/science.1230883. opened (abstract)
 - Clarke D, Morley E, Robert D 2017. The bee, the flower, and the electric field. J Comp Physiol A. doi 10.1007/s00359-017-1176-6. opened
+- Clarke D, Whitney H, Sutton G, Robert D 2013. Detection and learning of floral electric fields by bumblebees. Science. doi 10.1126/science.1230883. opened (abstract)
 - DLR Insect Vision, Bee photoreceptor response model and Bee eye model (web pages). opened
 - Egelhaaf M, Lindemann JP 2025. Path integration and optic flow in flying insects. J Comp Physiol A. doi 10.1007/s00359-025-01734-9. opened
 - England SJ, Robert D 2024. Prey can detect predators via electroreception in air. PNAS. doi 10.1073/pnas.2322674121. opened
@@ -294,6 +298,7 @@ Opened in this session (full text, abstract, or the stated pages):
 - Greggers U et al. 2013. Reception and learning of electric fields in bees. Proc R Soc B. doi 10.1098/rspb.2013.0528. opened (abstract)
 - Greiner B 2006. Visual adaptations in the night-active wasp Apoica pallens. J Comp Neurol. doi 10.1002/cne.20882. opened (abstract)
 - Guignard Q et al. 2021. Evidence for UV-green dichromacy in the basal hymenopteran Sirex noctilio. Sci Rep. doi 10.1038/s41598-021-95107-2. opened
+- Guignard Q, Slippers B, Allison JD 2022. Chemical and visual ecology of the Symphyta. Agric For Entomol. doi 10.1111/afe.12510. opened (abstract)
 - Gutiérrez D, Rigosi E, Nagloo N, O'Carroll DC, Warrant EJ 2024. Spatial resolution and optical sensitivity in the compound eyes of two common European wasps. J Exp Biol. doi 10.1242/jeb.246670. opened
 - Hecht S, Wolf E 1929. The visual acuity of the honey bee. J Gen Physiol. doi 10.1085/jgp.12.6.727. opened (abstract)
 - Hempel de Ibarra N, Vorobyev M, Menzel R 2014. Mechanisms, functions and ecology of colour vision in the honeybee. J Comp Physiol A. doi 10.1007/s00359-014-0915-1. opened
@@ -301,9 +306,10 @@ Opened in this session (full text, abstract, or the stated pages):
 - Hung Y-S, Ibbotson MR 2014. Ocellar structure and neural innervation in the honeybee. Front Neuroanat. doi 10.3389/fnana.2014.00006. opened
 - Igoe D, Parisi A, Carter B 2012. Characterization of a smartphone camera's response to ultraviolet A radiation. Photochem Photobiol. doi 10.1111/j.1751-1097.2012.01216.x. opened (author's manuscript)
 - Inger R, Bennie J, Davies TW, Gaston KJ 2014. Potential biological and ecological effects of flickering artificial light. PLoS ONE. doi 10.1371/journal.pone.0098631. opened
-- Kelber A, Somanathan H 2019. Spatial vision and visually guided behavior in Apidae. Insects 10:418. doi 10.3390/insects10120418. opened
-- Kelber A, Jonsson F, Wallén R, Warrant EJ, Kornfeldt T, Baird E 2011. Hornets can fly at night without obvious adaptations of eyes and ocelli. PLoS ONE. doi 10.1371/journal.pone.0021892. opened
+- Jernigan CM, Stafstrom JA, Zaba NC, Vogt CC, Sheehan MJ 2023. Color is necessary for face discrimination in the Northern paper wasp, Polistes fuscatus. Animal Cognition 26:589-598. doi 10.1007/s10071-022-01691-9. opened (abstract)
 - Kelber A et al. 2005. Light intensity limits foraging activity in nocturnal and crepuscular bees. Behav Ecol. doi 10.1093/beheco/arj001. opened (abstract)
+- Kelber A, Jonsson F, Wallén R, Warrant EJ, Kornfeldt T, Baird E 2011. Hornets can fly at night without obvious adaptations of eyes and ocelli. PLoS ONE. doi 10.1371/journal.pone.0021892. opened
+- Kelber A, Somanathan H 2019. Spatial vision and visually guided behavior in Apidae. Insects 10:418. doi 10.3390/insects10120418. opened
 - Kevan PG, Chittka L, Dyer AG 2001. Limits to the salience of ultraviolet. J Exp Biol. doi 10.1242/jeb.204.14.2571. opened (abstract)
 - Kirchner WH 1993. Acoustical communication in honeybees. Apidologie 24(3). opened
 - Kirschvink JL, Padmanabha S, Boyce CK, Oglesby J 1997. Measurement of the threshold sensitivity of honeybees to weak, extremely low-frequency magnetic fields. J Exp Biol 200:1363-1368. opened (abstract)
@@ -312,6 +318,7 @@ Opened in this session (full text, abstract, or the stated pages):
 - Land MF, Nilsson D-E 2012. Animal Eyes, 2nd edition. Oxford University Press. ISBN 978-0-19-958113-9. opened in part (Chapters 1 and 2, Chapter 3 to about p. 63)
 - Linander N, Dacke M, Baird E 2015. Bumblebees measure optic flow for position and speed control flexibly within the frontal visual field. J Exp Biol. doi 10.1242/jeb.107409. opened (abstract)
 - Lunau K, Gutierrez Camargo MG, Ren Z-X 2025. Bees, flowers and UV. Plant Biology. doi 10.1111/plb.70050. opened
+- Makarova AA, Chua NJ, Diakova AV et al. 2025. The first complete 3D reconstruction and morphofunctional mapping of an insect eye. eLife. doi 10.7554/elife.103247. opened
 - Mallinson VJ, Woodburn FA, O'Reilly LJ 2025. Weak anthropogenic electric fields affect honeybee foraging. iScience. doi 10.1016/j.isci.2025.112550. opened (abstract)
 - Montgomery C, Koh KL, Robert D 2019. Measurement of electric charges on foraging bumblebees. J Phys Conf Ser. doi 10.1088/1742-6596/1322/1/012002. opened (abstract)
 - Oesterle A, Kiriş A, Haase A 2026. Experimental platform to study the neuronal mechanisms of magnetoreception in the honey bee. Methods. doi 10.1016/j.ymeth.2026.09.005. opened (abstract)
@@ -326,8 +333,8 @@ Opened in this session (full text, abstract, or the stated pages):
 - Skorupski P, Chittka L 2011. Photoreceptor processing speed and input resistance changes during light adaptation correlate with spectral class in the bumblebee, Bombus impatiens. PLoS ONE. doi 10.1371/journal.pone.0025989. opened
 - Somanathan H, Borges RM, Warrant EJ, Kelber A 2017. Visual adaptations for mate detection in the male carpenter bee Xylocopa tenuiscapa. PLoS ONE. doi 10.1371/journal.pone.0168452. opened
 - Spaethe J, Chittka L 2003. Interindividual variation of eye optics and single object resolution in bumblebees. J Exp Biol. doi 10.1242/jeb.00570. opened (abstract)
-- Srinivasan MV, Lehrer M 1984. Temporal acuity of honeybee vision: behavioural studies using moving stimuli. J Comp Physiol A 155:297-312. doi 10.1007/bf00610583. opened (abstract, publisher page)
 - Srinivasan MV, Lehrer M 1984. Temporal acuity of honeybee vision: behavioural studies using flickering stimuli. Physiol Entomol. doi 10.1111/j.1365-3032.1984.tb00787.x. opened (abstract)
+- Srinivasan MV, Lehrer M 1984. Temporal acuity of honeybee vision: behavioural studies using moving stimuli. J Comp Physiol A 155:297-312. doi 10.1007/bf00610583. opened (abstract, publisher page)
 - Srinivasan MV, Zhang SW, Lehrer M, Collett TS 1996. Honeybee navigation en route to the goal. J Exp Biol 199:237. doi 10.1242/jeb.199.1.237. opened (abstract)
 - Sutton GP, Clarke D, Morley EL, Robert D 2016. Mechanosensory hairs in bumblebees detect weak electric fields. PNAS. doi 10.1073/pnas.1601624113. opened (abstract)
 - Taylor GJ et al. 2019. Bumblebee visual allometry results in locally improved resolution and globally improved sensitivity. eLife. doi 10.7554/elife.40613. opened
@@ -338,6 +345,7 @@ Opened in this session (full text, abstract, or the stated pages):
 - VanderSal ND, Crews SC, Gillespie RG 2016. Is love in the air or at first sight? Mate finding cues used by sympatric male velvet ants. Invertebr Biol. doi 10.1111/ivb.12128. opened (abstract)
 - Walker MM, Bitterman ME 1989. Honeybees can be trained to respond to very small changes in geomagnetic field intensity. J Exp Biol 145:489-494. opened
 - Warrant EJ 2008. Seeing in the dark: vision and visual behaviour in nocturnal bees and wasps. J Exp Biol. doi 10.1242/jeb.015396. opened (abstract)
+- Wellington WG, Sullivan CR, Green GW 1951. Polarized light and body temperature level as orientation factors in the light reactions of some hymenopterous and lepidopterous larvae. Can J Zool. doi 10.1139/z51-030. opened (abstract)
 - Wolf E 1933. Critical frequency of flicker as a function of intensity of illumination for the eye of the bee. J Gen Physiol. doi 10.1085/jgp.17.1.7. opened (abstract)
 
 Secondary (values taken through the source named):
