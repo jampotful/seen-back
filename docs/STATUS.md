@@ -1,6 +1,6 @@
 # Status
 
-The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 00:20 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
+The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 01:00 US Eastern (design track). Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
 
 ## How the work is paced
 
@@ -17,6 +17,7 @@ The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. 
 | Research: cats, dogs and people | same | `research/cat-dog` | Done (`3b18838`): 178 records (about 50 for people), 23 papers wanted. Proposes `bigcat` and `fox` views, and a person's field of 200 degrees in place of 180. | The owner's decisions; an audit. |
 | Research: snails, worms, scorpions, ticks | same | `research/ground-invertebrates` | Done (`9c75995`): 197 records, 22 papers wanted. Proposes seven views, with new groups for millipedes, centipedes and harvestmen. | The owner's decisions; an audit. |
 | Research: the other eleven units | same | `research/<unit>` | Not started. `jumper` has 20 records and a draft on `main`. | Bursts 1 to 4 below. |
+| Design: the atlas and the engine design | `docs/tracks/prompts/burst1-design.md` | `agent/design` | Done (13 October, 01:00): `docs/views/ATLAS.md` (25 mechanisms, two or three ways to draw each) and `docs/ENGINE-DESIGN.md` (14 modules in build order, the spec format, the tuning panel and compare slider, the visibility floor). | The owner picks one way per mechanism; then queue entry 4 builds from the design. |
 | The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | Not started. | After the jumping spider research. |
 | The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
 | The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
