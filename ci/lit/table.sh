@@ -16,6 +16,8 @@ if [ -z "${LIT_TABLE_TOPICS:-}" ]; then
   echo "LIT_TABLE_TOPICS is empty in ci/lit/table.env" > out/FAILED.txt; exit 2
 fi
 export LIT_MAX_USD="${LIT_MAX_USD:-25}" LIT_WAIT_MIN="${LIT_WAIT_MIN:-330}"
+export LIT_MODEL="${LIT_MODEL:-claude-haiku-5-5}"
+short() { echo "$1" | sed 's/^claude-//'; }
 
 # the collection
 if [ -n "${LIT_DIR:-}" ]; then      # a checkout you already have (for trials from your own machine)
@@ -31,12 +33,39 @@ if [ "$topics" = "all" ]; then
 fi
 mode=run; [ "${LIT_PLAN_ONLY:-0}" = "1" ] && mode=plan
 
-status=0
-python3 -I tools/lit/extract.py "$mode" --lit lit --topics "$topics" --out lit-table 2>&1 | tee out/extract.log.txt
-status="${PIPESTATUS[0]}"
-cp lit-table/SUMMARY.md out/SUMMARY.md 2>/dev/null || true
+# LIT_KEEP=1 starts from the tables already on pub/lit-table, so that a full run can be sent in several pushes, each
+# with its own spend ceiling, and the branch ends up holding all of them.
+if [ "${LIT_KEEP:-0}" = "1" ] && git fetch -q --depth 1 origin pub/lit-table; then
+  git worktree add -q --detach prior FETCH_HEAD
+  cp prior/*.jsonl prior/SUMMARY-*.md lit-table/ 2>/dev/null || true
+  echo "kept from pub/lit-table: $(ls lit-table/*.jsonl 2>/dev/null | xargs -n1 basename | paste -sd' ' -)"
+fi
 
-# calibration against the agents' hand-made logs
+status=0
+if [ "${LIT_SKIP_TABLE:-0}" = "1" ]; then
+  echo "LIT_SKIP_TABLE=1: only the calibration runs" | tee out/extract.log.txt
+else
+  # topics named in LIT_STRONG_TOPICS are read by LIT_STRONG_MODEL, the rest by LIT_MODEL; both go to lit-table/
+  strong=""; rest="$topics"
+  if [ -n "${LIT_STRONG_MODEL:-}" ] && [ -n "${LIT_STRONG_TOPICS:-}" ]; then
+    strong="$LIT_STRONG_TOPICS"
+    rest="$(echo ",$topics," | tr ',' '\n' | grep -v '^$' | grep -vxF -f <(echo "$strong" | tr ',' '\n') | paste -sd, -)"
+  fi
+  if [ -n "$strong" ]; then
+    python3 -I tools/lit/extract.py "$mode" --lit lit --topics "$strong" --out lit-table --model "$LIT_STRONG_MODEL" \
+      --summary "SUMMARY-$label-$(short "$LIT_STRONG_MODEL").md" 2>&1 | tee out/extract-strong.log.txt
+    status="${PIPESTATUS[0]}"
+    cp lit-table/SUMMARY-*.md out/ 2>/dev/null || true
+  fi
+  if [ -n "$rest" ] && [ "$status" -eq 0 ]; then
+    python3 -I tools/lit/extract.py "$mode" --lit lit --topics "$rest" --out lit-table --model "$LIT_MODEL" \
+      --summary "SUMMARY-$label-$(short "$LIT_MODEL").md" 2>&1 | tee out/extract.log.txt
+    status="${PIPESTATUS[0]}"
+  fi
+  cp lit-table/SUMMARY-*.md out/ 2>/dev/null || true
+fi
+
+# calibration against the agents' hand-made logs, once for each model named in LIT_CALIB_MODELS
 if [ "${LIT_CALIBRATE:-0}" = "1" ]; then
   mkdir -p ev
   for u in birds cat-dog ground-invertebrates; do
@@ -46,20 +75,23 @@ if [ "${LIT_CALIBRATE:-0}" = "1" ]; then
   python3 -I tools/lit/calibrate.py build --lit lit --evidence ev/*.jsonl --out calib
   python3 -I tools/lit/calibrate.py offline --lit lit --evidence ev/*.jsonl --out out
   if [ "$mode" = run ] && [ "$status" -ne 2 ]; then
-    python3 -I tools/lit/extract.py run --lit calib --topics calib --out calib/table 2>&1 | tee out/calibration-extract.log.txt
-    python3 -I tools/lit/calibrate.py compare --evidence ev/*.jsonl --table calib/table/calib.jsonl --calib calib --out out
-    cp calib/table/SUMMARY.md out/calibration-extract-summary.md 2>/dev/null || true
+    for m in $(echo "${LIT_CALIB_MODELS:-$LIT_MODEL}" | tr ',' ' '); do
+      d="$(short "$m")"; mkdir -p "out/calib-$d"
+      python3 -I tools/lit/extract.py run --lit calib --topics calib --out "calib/table-$d" --model "$m" 2>&1 | tee "out/calib-$d/extract.log.txt"
+      python3 -I tools/lit/calibrate.py compare --evidence ev/*.jsonl --table "calib/table-$d/calib.jsonl" --calib calib --out "out/calib-$d"
+      cp "calib/table-$d/SUMMARY.md" "out/calib-$d/extract-summary.md" 2>/dev/null || true
+    done
   fi
 fi
 
 # the table, to its own branch (only when the extraction finished)
-if [ "$mode" = run ] && [ "$status" -eq 0 ]; then
-  rm -f lit-table/_work/passages.jsonl lit-table/_work/results.jsonl
-  cp -R lit-table/_work out/_work 2>/dev/null || true
+if [ "$mode" = run ] && [ "$status" -eq 0 ] && [ "${LIT_SKIP_TABLE:-0}" != "1" ]; then
+  find lit-table -path '*_work*' \( -name passages.jsonl -o -name results.jsonl \) -delete
+  for w in lit-table/_work*; do cp -R "$w" "out/$(basename "$w")" 2>/dev/null || true; done
   { echo; echo "Files over 95 MB are dropped from the branch:"; find lit-table -type f -size +95M -print -delete; } | tee -a out/SUMMARY.md
   bash ci/put_branch.sh pub/lit-table lit-table "the literature table, $label"
-elif [ "$mode" = run ]; then
-  cp -R lit-table/_work out/_work 2>/dev/null || true
-  rm -f out/_work/passages.jsonl out/_work/results.jsonl
+elif [ "$mode" = run ] && [ "${LIT_SKIP_TABLE:-0}" != "1" ]; then
+  for w in lit-table/_work*; do cp -R "$w" "out/$(basename "$w")" 2>/dev/null || true; done
+  find out -path '*_work*' \( -name passages.jsonl -o -name results.jsonl \) -delete
 fi
 exit "$status"

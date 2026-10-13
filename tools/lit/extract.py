@@ -25,27 +25,47 @@ import urllib.error, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-MODEL = os.environ.get("LIT_MODEL", "claude-haiku-5-5")
+MODEL = os.environ.get("LIT_MODEL", "") or "claude-haiku-5-5"
 API = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com").rstrip("/")
 CACHE_TTL = os.environ.get("LIT_CACHE_TTL", "1h")          # a batch can take longer than the 5 minute default
 PASSAGE_WORDS = 1500
 MIN_TAIL_WORDS = 150           # a shorter last passage joins the one before it
 MIN_ABSTRACT_WORDS = 25
 MAX_QUOTE_WORDS = 40
-MAX_TOKENS = 4000
+MAX_TOKENS = 12000             # run 3 (4,000) cut off 4 of 650 and 21 of 505 replies; the cap is paid only when used
 BATCH_MAX_REQUESTS = 10000     # the API allows 100,000 requests or 256 MB; smaller batches finish and fail separately
 BATCH_MAX_BYTES = 150 * 1024 * 1024
 
-# Prices in US dollars per million tokens, Claude Haiku 5.5, read from
-# https://platform.claude.com/docs/en/about-claude/pricing on 13 October 2026 (prompts up to 100,000 tokens).
-# Standard: input 0.10, output 0.50, cache write 5 minutes 0.125, cache write 1 hour 0.20, cache read 0.01.
-# Batch is half of standard on input and output; the page says the cache multipliers stack with the batch discount,
-# so the batch cache prices below are derived (half of the standard cache prices), not read.
-PRICE = {"in": 0.05, "out": 0.25, "cache_write_5m": 0.0625, "cache_write_1h": 0.10, "cache_read": 0.005}
-TOK_PER_WORD = 1.8             # scientific prose with numbers and Latin names; a deliberate over-estimate
+# Prices in US dollars per million tokens, read from https://platform.claude.com/docs/en/about-claude/pricing on
+# 13 October 2026 (Haiku 5.5 at prompts up to 100,000 tokens, which these are; Sonnet 5.5 has one tier).
+# Haiku 5.5 standard: input 0.10, output 0.50, cache write 5 minutes 0.125, 1 hour 0.20, read 0.01.
+# Sonnet 5.5 standard: input 2, output 10, cache write 5 minutes 2.50, 1 hour 4, read 0.10. Batch input and output
+# are half of standard. The cache prices below are half of the standard cache prices (derived; the page says the
+# cache multipliers stack with the batch discount). Run 3 on Haiku spent $0.1736 by this arithmetic on usage that the
+# console would show, which is the check that the derivation holds.
+PRICES = {
+    "claude-haiku-5-5": {"in": 0.05, "out": 0.25, "cache_write_5m": 0.0625, "cache_write_1h": 0.10, "cache_read": 0.005},
+    "claude-sonnet-5-5": {"in": 1.0, "out": 5.0, "cache_write_5m": 1.25, "cache_write_1h": 2.0, "cache_read": 0.05},
+}
+PRICE = PRICES.get(MODEL) or PRICES["claude-haiku-5-5"]
+
+
+def set_model(name):
+    """Choose the extractor for this process (the --model option). A model without a price here is refused, since the
+    cost estimate and the spend cap would be wrong."""
+    global MODEL, PRICE
+    if name not in PRICES:
+        sys.exit("no price known for model %r; add it to PRICES in extract.py (known: %s)" % (name, ", ".join(PRICES)))
+    MODEL, PRICE = name, PRICES[name]
+
+
+# Measured on runs 3 (13 Oct): the counted input of 650 and 505 requests came to 1.26 and 1.27 times the 1.8 tokens a
+# word that the first estimate assumed, so 2.3. Output per passage was 671 tokens on abstracts and passages of the
+# spider-night topic and 1,256 on the passages of the calibration sources, which are rich in measurements.
+TOK_PER_WORD = 2.3             # scientific prose with numbers and Latin names
 HEADER_TOKENS = 70             # the work's title line in each request
-OUT_TOKENS_EXPECTED = 250      # per passage, most passages return []
-OUT_TOKENS_CEILING = 700
+OUT_TOKENS_EXPECTED = 700      # per passage; observed 671 (spider-night) and 1,256 (calibration sources)
+OUT_TOKENS_CEILING = 1400
 
 TRAIT_HELP = [
     ("eyes_count", "number of eyes or eye pairs; integer; say which in note"),
@@ -287,6 +307,26 @@ def plan_works(lit, topics):
     return [works[k] for k in order]
 
 
+def index_url(w):
+    """An address for a work from its index record: the doi first, then the landing page or pdf, then the identifiers
+    the collection keeps (PubMed, PubMed Central, OpenAlex, Europe PMC), so that no record is dropped for want of one."""
+    doi = norm_doi(w.get("doi"))
+    if doi:
+        return "https://doi.org/" + doi
+    for k in ("landing_url", "pdf_url"):
+        if w.get(k):
+            return w[k]
+    if w.get("pmcid"):
+        return "https://www.ncbi.nlm.nih.gov/pmc/articles/%s/" % str(w["pmcid"]).upper().replace("PMC", "PMC", 1)
+    if w.get("pmid"):
+        return "https://pubmed.ncbi.nlm.nih.gov/%s/" % w["pmid"]
+    if w.get("openalex"):
+        return "https://openalex.org/" + str(w["openalex"])
+    if w.get("epmc_id"):
+        return "https://europepmc.org/article/%s/%s" % (w.get("source_epmc") or "MED", w["epmc_id"])
+    return ""
+
+
 def source_of(w, has_text):
     doi = norm_doi(w.get("doi"))
     return {
@@ -295,7 +335,7 @@ def source_of(w, has_text):
         "title": w.get("title") or "",
         "journal": w.get("venue") or "",
         "doi": doi,
-        "url": ("https://doi.org/" + doi) if doi else (w.get("landing_url") or w.get("pdf_url") or ""),
+        "url": index_url(w),
         "access": "open" if has_text else "abstract",
     }
 
@@ -418,7 +458,7 @@ def smoke(passages):
     recs, err = parse_reply(txt)
     print("smoke test: model %s replied with %s; usage %s" % (MODEL, "%d records" % len(recs) if err is None else "unparseable: " + err,
                                                          json.dumps(r.get("usage", {}))))
-    if err is not None:
+    if err not in (None, "cut off"):
         sys.exit("the smoke test reply was not a JSON array; first 300 characters: " + txt[:300])
     u = r.get("usage", {})
     if not (u.get("cache_creation_input_tokens") or u.get("cache_read_input_tokens")):
@@ -486,8 +526,28 @@ def fetch_results(states, raw_path):
 # ---------------------------------------------------------------------------------------------------------------
 # reading replies and checking them
 
+def salvage(t):
+    """The complete objects of an array that was cut off mid-way (a reply that hit max_tokens): every object that
+    decodes before the break is kept."""
+    a = t.find("[")
+    if a < 0:
+        return []
+    dec, i, out = json.JSONDecoder(), a + 1, []
+    while True:
+        while i < len(t) and t[i] in " \n\r\t,":
+            i += 1
+        if i >= len(t) or t[i] != "{":
+            return out
+        try:
+            o, i = dec.raw_decode(t, i)
+        except ValueError:
+            return out
+        out.append(o)
+
+
 def parse_reply(txt):
-    """-> (records, error). Accepts a bare array, an array in a code fence, or an array after a sentence."""
+    """-> (records, error). Accepts a bare array, an array in a code fence, or an array after a sentence. An array cut
+    off by the token limit gives the objects that are complete, with the error 'cut off'."""
     t = txt.strip()
     t = re.sub(r"^```(?:json)?\s*|\s*```$", "", t)
     if not t:
@@ -496,12 +556,17 @@ def parse_reply(txt):
         v = json.loads(t)
     except ValueError:
         a, b = t.find("["), t.rfind("]")
-        if a < 0 or b < a:
-            return [], "no JSON array"
-        try:
-            v = json.loads(t[a:b + 1])
-        except ValueError as e:
-            return [], "bad JSON: %s" % e
+        v = None
+        if a >= 0 and b > a:
+            try:
+                v = json.loads(t[a:b + 1])
+            except ValueError:
+                v = None
+        if v is None:
+            part = salvage(t)
+            if part:
+                return [r for r in part if isinstance(r, dict)], "cut off"
+            return [], "no JSON array" if a < 0 else "bad JSON"
     if isinstance(v, dict):
         v = [v]
     if not isinstance(v, list):
@@ -583,6 +648,8 @@ def check_results(raw_path, passages, items, topics, check):
     stats = collections.Counter()
     stats["check_py_reasons"] = collections.Counter()
     usage = collections.Counter()
+    cost_by_topic = collections.Counter()
+    stats["cost_by_topic"] = cost_by_topic
     out = {t: [] for t in topics}
     seen = set()
     for line in open(raw_path, encoding="utf-8"):
@@ -604,9 +671,12 @@ def check_results(raw_path, passages, items, topics, check):
             stats["replies_cut_off"] += 1
         txt = "".join(b.get("text", "") for b in msg.get("content", []) if b.get("type") == "text")
         recs, err = parse_reply(txt)
-        if err and err != "empty reply":
+        if err == "cut off":
+            stats["replies_salvaged_after_cut_off"] += 1
+        elif err and err != "empty reply":
             stats["replies_unparseable"] += 1
         it = by_key[p["key"]]
+        cost_by_topic[it["topics"][0]] += actual_cost(msg.get("usage") or {})
         if p["key"] not in tsq_cache:
             tsq_cache[p["key"]] = squash(source_text(it))
         for raw in recs:
@@ -659,7 +729,7 @@ def per_topic_estimates(items, passages):
     return rows
 
 
-def summary_md(topics, items, passages, est, stats, usage, spent, notes):
+def summary_md(topics, items, passages, est, stats, usage, spent, notes, kept=None):
     pt = per_topic_estimates(items, passages)
     L = ["# The literature table", "",
          "Made by `tools/lit/extract.py` with %s through the Message Batches API on %s." % (MODEL, time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())), ""]
@@ -686,9 +756,14 @@ def summary_md(topics, items, passages, est, stats, usage, spent, notes):
             L.append("| %s | %d |" % (k, usage.get(k, 0)))
         L.append("")
         L.append("Spent: **$%.2f** at batch prices." % spent)
+    if stats and stats.get("cost_by_topic"):
+        L += ["", "## Spend and records per topic (a work found under several topics is charged to the first)", "",
+              "| Topic | spent (US$) | records kept (works under several topics are listed in each) |", "|---|---:|---:|"]
+        for t in topics:
+            L.append("| %s | %.3f | %d |" % (t, stats["cost_by_topic"].get(t, 0.0), (kept or {}).get(t, 0)))
     if stats:
         L += ["", "## What the check pass did", "", "| | count |", "|---|---:|"]
-        for k in sorted(k for k in stats if k != "check_py_reasons"):
+        for k in sorted(k for k in stats if k not in ("check_py_reasons", "cost_by_topic")):
             L.append("| %s | %d |" % (k, stats[k]))
         if stats.get("check_py_reasons"):
             L += ["", "check.py reasons: " + "; ".join("%s x%d" % kv for kv in stats["check_py_reasons"].most_common(8))]
@@ -716,12 +791,16 @@ def main():
     ap.add_argument("--raw", help="check: a results file already downloaded (Batches results JSONL)")
     ap.add_argument("--wait-minutes", type=int, default=int(os.environ.get("LIT_WAIT_MIN", "330")))
     ap.add_argument("--max-usd", type=float, default=float(os.environ.get("LIT_MAX_USD", "25")))
+    ap.add_argument("--model", default=os.environ.get("LIT_MODEL", ""), help="the extractor (claude-haiku-5-5 or claude-sonnet-5-5)")
+    ap.add_argument("--summary", default="SUMMARY.md", help="name of the summary file under --out")
     ap.add_argument("--limit-works", type=int, default=0, help="use only the first N works of each topic (trials)")
     ap.add_argument("--batch-ids", default=os.environ.get("TABLE_BATCH_IDS", ""), help="collect: comma separated ids")
     a = ap.parse_args()
 
+    if a.model:
+        set_model(a.model)
     check = load_check()
-    work_dir = os.path.join(a.out, "_work")
+    work_dir = os.path.join(a.out, "_work" + ("-" + MODEL.replace("claude-", "") if a.model else ""))
     os.makedirs(work_dir, exist_ok=True)
     topics, items, passages = setup(a)
     if a.limit_works:
@@ -739,7 +818,7 @@ def main():
 
     if a.cmd == "plan":
         write_jsonl(os.path.join(work_dir, "passages.jsonl"), passages)
-        open(os.path.join(a.out, "SUMMARY.md"), "w").write(summary_md(topics, items, passages, est, None, None, 0, ["Plan only: nothing was sent."]))
+        open(os.path.join(a.out, a.summary), "w").write(summary_md(topics, items, passages, est, None, None, 0, ["Plan only: nothing was sent."]))
         return
 
     stats = usage = None
@@ -777,7 +856,7 @@ def main():
         states = wait_for(ids, a.wait_minutes)
         if states is None:
             notes.append("**Unfinished.** The wait ran out; batches %s are still processing. Resume with TABLE_BATCH_IDS." % ",".join(ids))
-            open(os.path.join(a.out, "SUMMARY.md"), "w").write(summary_md(topics, items, passages, est, None, None, 0, notes))
+            open(os.path.join(a.out, a.summary), "w").write(summary_md(topics, items, passages, est, None, None, 0, notes))
             sys.exit(3)
         n = fetch_results(states, raw_path)
         print("fetched %d results" % n)
@@ -787,8 +866,8 @@ def main():
     for t in topics:
         write_jsonl(os.path.join(a.out, t + ".jsonl"), out[t])
         print("%s: %d records" % (t, len(out[t])))
-    open(os.path.join(a.out, "SUMMARY.md"), "w").write(summary_md(topics, items, passages, est, stats, usage, spent, notes))
-    print(open(os.path.join(a.out, "SUMMARY.md")).read())
+    open(os.path.join(a.out, a.summary), "w").write(summary_md(topics, items, passages, est, stats, usage, spent, notes, {t: len(out[t]) for t in topics}))
+    print(open(os.path.join(a.out, a.summary)).read())
 
 
 if __name__ == "__main__":

@@ -93,6 +93,36 @@ class T(unittest.TestCase):
         self.assertEqual(len(E.parse_reply('Here you go: [{"a":1}] done')[0]), 1)
         self.assertIsNotNone(E.parse_reply("nothing")[1])
 
+    def test_cut_off_reply_is_salvaged(self):
+        recs, err = E.parse_reply('[{"a": 1}, {"b": "two"}, {"c": "thr')
+        self.assertEqual(recs, [{"a": 1}, {"b": "two"}])
+        self.assertEqual(err, "cut off")
+        self.assertEqual(E.parse_reply("[")[0], [])
+
+    def test_url_from_index_record(self):
+        self.assertEqual(E.index_url({"doi": "https://doi.org/10.1/X"}), "https://doi.org/10.1/x")
+        self.assertEqual(E.index_url({"landing_url": "https://a.b/c"}), "https://a.b/c")
+        self.assertEqual(E.index_url({"pmcid": "PMC123"}), "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC123/")
+        self.assertEqual(E.index_url({"pmid": "99"}), "https://pubmed.ncbi.nlm.nih.gov/99/")
+        self.assertEqual(E.index_url({"openalex": "W5"}), "https://openalex.org/W5")
+        self.assertEqual(E.index_url({"epmc_id": "IND1", "source_epmc": "AGR"}), "https://europepmc.org/article/AGR/IND1")
+        self.assertEqual(E.index_url({}), "")
+        # a work with no doi keeps its record, because check.py accepts the url
+        w = {"title": "T", "year": 2000, "authors": ["A B"], "pmid": "99"}
+        r = {"taxon": "x", "trait": "motion", "value": "fast", "where": "t", "quote": "q", "grade": "m",
+             "source": E.source_of(w, False), "opened": True}
+        self.assertEqual(self.check.problems(r), [])
+
+    def test_models_and_prices(self):
+        keep = (E.MODEL, E.PRICE)
+        try:
+            E.set_model("claude-sonnet-5-5")
+            self.assertAlmostEqual(E.actual_cost({"output_tokens": 1_000_000}), 5.0)
+            with self.assertRaises(SystemExit):
+                E.set_model("claude-nothing")
+        finally:
+            E.MODEL, E.PRICE = keep
+
     def test_squash_and_numbers(self):
         self.assertEqual(E.squash("inter-\nreceptor ﬁeld"), E.squash("interreceptor field"))
         self.assertTrue(E.value_in_quote([505, 510], "maxima at 505-510 nm"))
