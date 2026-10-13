@@ -1,0 +1,345 @@
+{
+ "key": "scorpion",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "zones[0].gain note: has a 'not X but Y' or ', not' construction; rewrite this sentence without it: 'rds give a sensitivity difference in another genus, not a gain'"
+ ],
+ "reply": {
+  "spec": {
+   "key": "scorpion",
+   "version": 1,
+   "chip": "Scorpion",
+   "who": "a scorpion",
+   "falls_back_to": "spider",
+   "applies_to": {
+    "order": [
+     "Scorpiones",
+     "Uropygi",
+     "Amblypygi",
+     "Pseudoscorpiones"
+    ]
+   },
+   "cue": "The view reaches all the way round, and it glows green and blue where the light is dim.",
+   "modules": [
+    "field",
+    "colour",
+    "haptic"
+   ],
+   "draft": true,
+   "params": {
+    "M": {
+     "value": "SCORPION",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a two-peak mapping, blue-green and ultraviolet, chosen by the app"
+    },
+    "fov": {
+     "value": 360,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R1",
+      "R2"
+     ],
+     "note": "whole-animal field of view reported for scorpions"
+    },
+    "cpd": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no record gives the sharpness; the view assumes coarse shapes",
+     "range": [
+      0.005,
+      40
+     ]
+    },
+    "fall": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how fast sharpness falls with light; a guess",
+     "range": [
+      0,
+      3
+     ]
+    },
+    "gain": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "brightness gain for dim light; a guess",
+     "range": [
+      1,
+      4
+     ]
+    },
+    "sat": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "colour is weak and blue-green, so the picture is partly greyed",
+     "range": [
+      0,
+      1.5
+     ]
+    },
+    "pupil": "v",
+    "gate": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how much still things fade; a guess",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a guess",
+     "range": [
+      0,
+      60
+     ]
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no tapetum is recorded for scorpion median or lateral eyes",
+     "range": [
+      0,
+      1
+     ]
+    }
+   },
+   "matrices": {
+    "SCORPION": {
+     "src": [],
+     "rows": [
+      [
+       0.6,
+       0.4,
+       0
+      ],
+      [
+       0.2,
+       0.6,
+       0.2
+      ],
+      [
+       0,
+       0.4,
+       0.6
+      ]
+     ],
+     "invented": true
+    }
+   },
+   "zones": [
+    {
+     "id": "lateral",
+     "shape": "whole",
+     "cpd": {
+      "value": 0.3,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "note": "the lateral eyes see less sharply than the median pair"
+     },
+     "gain": {
+      "value": 2.4,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "note": "a small step only; the records give a sensitivity difference in another genus, not a gain"
+     }
+    }
+   ],
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the whole ring of view squeezed into the picture"
+     }
+    ],
+    "sharpness": [
+     {
+      "name": "paint",
+      "invented": true,
+      "note": "the picture is sharpest where the light is brightest"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the blue-green palette"
+     }
+    ]
+   },
+   "inputs": {
+    "motion": "optional",
+    "haptic": "optional"
+   },
+   "rows": [
+    [
+     "g",
+     "Whole ring of view",
+     "A scorpion's median and lateral eyes together give a view of all round its body, which is why the picture reaches all the way round. The figure is reported from earlier work and not measured in these species.",
+     [
+      "R1",
+      "R2"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Blue-green colour",
+     "Scorpion eyes peak in the blue-green, with a green peak at 525 nm in one set of species and a blue peak at 470 nm in another, so the picture leans blue-green.",
+     [
+      "R5",
+      "R9",
+      "R6"
+     ],
+     [
+      "params.M",
+      "matrices.SCORPION"
+     ]
+    ],
+    [
+     "g",
+     "Ultraviolet and night light",
+     "The lateral eyes have a secondary ultraviolet sensitivity, and scorpions are attracted to 399 nm light at night, so the picture gives ultraviolet a small share.",
+     [
+      "R10",
+      "R109"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "g",
+     "Dark sensitivity",
+     "Scorpions have eyes that detect very low light, and lateral eyes in one buthid are about ten log units more sensitive than the median eyes, so the dark picture is brighter than the day picture.",
+     [
+      "R14",
+      "R15"
+     ],
+     [
+      "params.gain",
+      "zones[0].gain"
+     ]
+    ],
+    [
+     "g",
+     "Touch and air",
+     "Scorpions read the world mostly through their legs, pedipalps and pectines, which the camera does not record.",
+     [
+      "R34",
+      "R50",
+      "R67"
+     ],
+     []
+    ],
+    [
+     "i",
+     "The app's choices",
+     "How sharp the picture is, how fast it blurs in dim light, how much still things fade, and the palette's greying are the app's guesses, since no record gives them.",
+     [],
+     [
+      "params.cpd",
+      "params.fall",
+      "params.gain",
+      "params.sat",
+      "params.gate",
+      "zones[0].cpd",
+      "zones[0].gain"
+     ]
+    ]
+   ],
+   "clock": null
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R1",
+     "R2"
+    ],
+    "kind": "value",
+    "how": "Records give a 360 degree field of view for scorpions, graded g as a wider or reported figure."
+   },
+   {
+    "path": "params.M",
+    "records": [],
+    "kind": "value",
+    "how": "No claim; the matrix is the app's own mapping and is graded i."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "scorpions can apparently see 360° around their body"
+   },
+   {
+    "record": "R2",
+    "quote": "Together, the two eyes have a 360 deg field of view"
+   },
+   {
+    "record": "R5",
+    "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+   },
+   {
+    "record": "R6",
+    "quote": "Both sets of eyes are most sensitive to green light (~ 500 nm)"
+   },
+   {
+    "record": "R9",
+    "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+   },
+   {
+    "record": "R10",
+    "quote": "with a secondary peak of sensitivity in the lateral eyes to ultraviolet light (350–400 nm)"
+   },
+   {
+    "record": "R14",
+    "quote": "perceiving differences in brightness at very low intensities, ten log units more than the median eyes"
+   },
+   {
+    "record": "R15",
+    "quote": "can detect light as low as 106 irradians"
+   },
+   {
+    "record": "R34",
+    "quote": "Compound slit sensilla on basitarsal leg segments of sand-dwelling scorpions respond to surface waves generated by movements of insects as far as 50 centimeters away"
+   },
+   {
+    "record": "R50",
+    "quote": "10 ventral trichobothria on the chela"
+   },
+   {
+    "record": "R67",
+    "quote": "Our records show the presence of a rapid firing (.100 Hz), quickly adapting waveform"
+   },
+   {
+    "record": "R109",
+    "quote": "The animals were attracted to 399 and 566 nm light and also showed some attraction to 630 nm."
+   }
+  ]
+ }
+}

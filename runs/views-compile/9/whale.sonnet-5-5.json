@@ -1,0 +1,247 @@
+{
+ "key": "whale",
+ "chip": "Whale, dolphin or seal",
+ "who": "a whale, dolphin or seal",
+ "version": 1,
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Cetacea",
+   "Carnivora:Pinnipedia",
+   "Sirenia"
+  ]
+ },
+ "cue": "One kind of colour sensor, so the world is grey, with less detail than yours.",
+ "modules": [],
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "by": {},
+ "zones": [],
+ "params": {
+  "M": {
+   "value": "marine_mono",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   "note": "one cone type and no blue cone in the whales and seals studied, so colour passes through a single sensor peaking near 524 nanometres"
+  },
+  "cpd": {
+   "value": 4.05,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Lisney 2018"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the middle of the two baleen whale estimates; estimates for the whole group run from 1.6 in a manatee to 11.5 in a harbour seal under water"
+  },
+  "fov": {
+   "value": 125,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:JM 2022"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the middle of the 120 to 130 degrees recorded for a dolphin and a sperm whale; the records do not say whether this is for one eye or both"
+  },
+  "gain": {
+   "value": 3.16,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Madsen 1976"
+   ],
+   "range": [
+    1,
+    4
+   ],
+   "note": "worked out from the dolphin's 0.5 log units of extra sensitivity in dim light; bright light would not get this lift"
+  },
+  "sheen": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "records say a reflective layer is present in dolphins, whales and seals, but give no strength, so the amount is the app's guess"
+  }
+ },
+ "matrices": {
+  "marine_mono": {
+   "from_pigments": [
+    524
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   "note": "a single cone peak near 524 nanometres, from the bottlenose dolphin, applied to the whole group",
+   "rows": [
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ]
+   ],
+   "q": [
+    [
+     0.15096,
+     0.50683,
+     0.26256,
+     0.07965
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Colour",
+   "Bottlenose dolphins have one kind of cone, most sensitive near 524 nanometres, and every whale and seal studied lacks the cone for blue. We pass the picture through that single sensor, so it loses its hues and turns grey.",
+   [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Kremers 2016",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M",
+    "matrices.marine_mono"
+   ]
+  ],
+  [
+   "m",
+   "Sharpness",
+   "Estimates of sharpness run from 1.6 cycles per degree in a manatee and 2.6 to 3.3 in small whales and porpoises, to 3.3 in a humpback whale and 4.8 in a Bryde's whale, and up to 11.5 in a harbour seal under water. You resolve about 30. We blur the picture to about 4, the middle of the two baleen whale estimates.",
+   [
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Mass 2011",
+    "marine-mammals.jsonl:Murayama 1998"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Field of view",
+   "A bottlenose dolphin and a sperm whale are each recorded with a visual field of 120 to 130 degrees, and a dolphin's two eyes overlap by only 20 to 30 degrees. We narrow the picture to 125 degrees, the middle of that range.",
+   [
+    "marine-mammals.jsonl:JM 2022"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Dim light",
+   "A bottlenose dolphin saw 0.5 log units better than a person in dim light, which is about three times, and 0.2 log units worse in bright light. A reflective layer behind the retina is recorded in dolphins and in harbour seals, but manatees have none. We lift the dim picture about three times and add a faint sheen.",
+   [
+    "marine-mammals.jsonl:Bauer 2020",
+    "marine-mammals.jsonl:Jamieson 1971",
+    "marine-mammals.jsonl:Madsen 1976",
+    "marine-mammals.jsonl:Young 1988"
+   ],
+   [
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "m",
+   "Manatees and sea lions",
+   "Manatees have two kinds of cone, so their colour sense may be richer than a dolphin's. A trained California sea lion could pick out colours in tests, though other work suggests it may have judged by brightness. A trained harbour seal behaved as colour-blind.",
+   [
+    "marine-mammals.jsonl:C 2015",
+    "marine-mammals.jsonl:Cohen 1982",
+    "marine-mammals.jsonl:Gao 2022"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Sound and touch",
+   "Dolphins find objects with clicks between 40 and 150 kilohertz, and a harbour seal can sense targets as far as 180 metres away with its whiskers. A phone can do neither, so this view leaves them out.",
+   [
+    "marine-mammals.jsonl:C 2021",
+    "marine-mammals.jsonl:J 2025"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's choices",
+   "The sharpness of about 4 cycles per degree, the 125 degree field, the one-sensor colour mapping, the threefold brightness lift and the strength of the sheen are the app's own mappings of the records above. No record gave a pupil shape, so none is drawn.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.M",
+    "params.gain",
+    "params.sheen",
+    "matrices.marine_mono",
+    "draw.spectrum"
+   ]
+  ]
+ ],
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colour passes through the one-sensor matrix, which turns the picture grey"
+   }
+  ]
+ },
+ "draft": true
+}

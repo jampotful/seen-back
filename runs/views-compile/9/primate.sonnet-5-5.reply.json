@@ -1,0 +1,245 @@
+{
+ "spec": {
+  "key": "primate",
+  "chip": "Monkey or ape",
+  "who": "a monkey or ape",
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "order": [
+    "Primates"
+   ],
+   "not_family": [
+    "Hominidae:Homo"
+   ]
+  },
+  "cue": "You share their three kinds of colour sensor, and their picture is a little softer than yours.",
+  "modules": [],
+  "version": 1,
+  "params": {
+   "M": {
+    "value": "PRIMATE_TRI",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "three colour sensors with peaks near 430, 530 and 561 nanometres; the mapping to the screen is the app's"
+   },
+   "cpd": {
+    "value": 24,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R12",
+     "R7"
+    ],
+    "range": [
+     4,
+     30
+    ],
+    "note": "the middle of two macaque measurements; one number stands for many species, which the app chose"
+   },
+   "fov": {
+    "value": 152,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R18"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "scaled from a model of a chimpanzee-like eye socket against a human one"
+   }
+  },
+  "matrices": {
+   "PRIMATE_TRI": {
+    "from_pigments": [
+     430,
+     530,
+     561
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "peaks from a macaque, a howler monkey and a marmoset joined into one three-sensor set"
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "Colour",
+    "Macaques have three kinds of cone, most sensitive near 430, 531 and 561 nanometres, much like the three you have. Baboons, apes and howler monkeys also see with three. We draw the colours with three sensors that sit close to yours.",
+    [
+     "R31",
+     "R52",
+     "R50",
+     "R44"
+    ],
+    [
+     "params.M",
+     "matrices.PRIMATE_TRI"
+    ]
+   ],
+   [
+    "m",
+    "Some see less colour",
+    "Owl monkeys have a single type of cone and lack colour vision, as bushbabies do. Male marmosets have two kinds of cone. This view shows the three-cone case, so for those animals the colour is richer than the real thing.",
+    [
+     "R40",
+     "R137",
+     "R41",
+     "R53"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Sharpness",
+    "A stumptail macaque resolves a gap of 1.4 minutes of arc, close to a person. Young rhesus monkeys reach 26.3 cycles per degree. A mouse lemur manages only about 4 to 5. We blur the picture to 24, near the macaque values.",
+    [
+     "R12",
+     "R7",
+     "R4",
+     "R5",
+     "R9"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Field of view",
+    "A model of a chimpanzee-like eye socket lets each eye see out to 115 degrees to the side, against 136 degrees for a human. We narrow the picture by the same proportion.",
+    [
+     "R18"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Fovea",
+    "Macaques, squirrel monkeys and marmosets have a clear fovea, a small pit of sharp vision. The owl monkey has only a rudimentary one. The records give no size for it, so the sharp middle is left as yours.",
+    [
+     "R167",
+     "R168",
+     "R181"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Day and night",
+    "Most monkeys and apes are active by day. Owl monkeys and mouse lemurs are active at night. The records give no brightness ratio for them, so we leave brightness as yours.",
+    [
+     "R186",
+     "R185",
+     "R187",
+     "R194"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The colour matrix, the single sharpness value for many species and the width of the field are the app's choices. They rest on the measurements above but are worked out or averaged by the app.",
+    [],
+    [
+     "params.M",
+     "params.cpd",
+     "params.fov",
+     "matrices.PRIMATE_TRI",
+     "draw.spectrum"
+    ]
+   ]
+  ],
+  "zones": [],
+  "by": {},
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colour drawn through the three-sensor matrix"
+    }
+   ]
+  }
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R12",
+    "R7"
+   ],
+   "kind": "range_middle",
+   "how": "The value 24 lies between the stumptail macaque's 21.4 and the young rhesus monkey's 26.3 cycles per degree."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the peaks 430 (macaque blue cone), 530 (howler monkey) and 561 (marmoset red pigment) nanometres."
+  },
+  {
+   "path": "matrices.PRIMATE_TRI",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "calculation",
+   "how": "Peaks 430, 530 and 561 nm each lie within 2 nm of a cited record's value."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R18"
+   ],
+   "kind": "calculation",
+   "how": "180 x 115 / 136.1 = 152, scaling a person's 180 degrees by the Pan-like to human ratio of lateral field."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R12",
+   "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+  },
+  {
+   "record": "R7",
+   "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+  },
+  {
+   "record": "R31",
+   "quote": "The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively."
+  },
+  {
+   "record": "R32",
+   "quote": "L and M genes encoding pigments with λmax values of 530 and 558 nm, respectively"
+  },
+  {
+   "record": "R23",
+   "quote": "we determined exact peak absorption spectrum (λmax) of all three allelic pigments, red, yellow, and green, of the marmoset, to be 561, 553, and 539nm, respectively"
+  },
+  {
+   "record": "R18",
+   "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+  }
+ ]
+}

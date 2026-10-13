@@ -1,0 +1,73 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Sharpness' says m and every parameter it describes is graded i",
+  "checker: row 'Night monkeys' says m and every parameter it describes is graded i",
+  "matrices.primate_trichromat: peak 561 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichromat: peak 539 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichromat: peak 430 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it"
+ ],
+ "reply": {
+  "spec": "{\"key\": \"primate\", \"who\": \"a monkey or ape\", \"chip\": \"Monkey or ape\", \"cue\": \"Three kinds of colour sensor in many species, a sharp middle, and less detail than yours at the edges.\", \"applies_to\": {\"order\": [\"Primates\"], \"not_family\": [\"Hominidae:Homo\"]}, \"falls_back_to\": \"mammal\", \"modules\": [], \"inputs\": {\"motion\": \"none\", \"sound\": \"none\", \"haptic\": \"none\"}, \"version\": 1, \"draft\": true, \"params\": {\"M\": \"primate_trichromat\", \"cpd\": {\"value\": 12, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0.005, 40], \"note\": \"records give 5 to 30 cycles per degree across primates; the middle of the picture is drawn at about 12 as the app's pick\"}, \"pupil\": \"o\", \"fovea\": {\"value\": 2, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 10], \"note\": \"no scale of the sharp middle was measured as a ratio to a person; the app's choice\"}, \"fov\": {\"value\": 180, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [100, 360], \"note\": \"no field of view was measured for the whole animal; the app uses a person's width\"}, \"gain\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"no dim-light ratio was found for primates\"}, \"sat\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1.5], \"note\": \"colour kept as a person sees it, subject to the matrix\"}, \"glow\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"no tapetum in primates\"}}, \"matrices\": {\"primate_trichromat\": {\"from_pigments\": [561, 539, 430], \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"peaks taken from marmoset, owl monkey and cynomolgus records; the mapping is the engine's\"}}, \"rows\": [[\"m\", \"Three colour sensors\", \"Many monkeys and apes have three kinds of cone, peaking near 561, 539 and 430 nanometres in the records we have. Owl monkeys have only one, so they see no colour at all.\", [\"R23\", \"R24\", \"R31\", \"R40\", \"R137\"], [\"params.M\"]], [\"m\", \"Sharpness\", \"A marmoset's cone mosaic is set up for about 30 cycles per degree at the centre. Measured neurons and behaviour in other monkeys give figures from about 5 to 26. We keep the middle sharp and blur the edges.\", [\"R2\", \"R4\", \"R7\", \"R12\", \"R13\"], [\"params.cpd\"]], [\"m\", \"Night monkeys\", \"Owl monkeys are nocturnal and have only a rudimentary fovea, so their picture is dimmer and less sharp at the centre.\", [\"R168\", \"R182\", \"R183\"], [\"params.fovea\"]], [\"g\", \"Field of view\", \"Infant monkeys and chimpanzee orbits suggest a wide sweep of view, but no field was measured for the whole animal. We keep a person's width.\", [\"R18\"], [\"params.fov\"]], [\"i\", \"Choices the app makes\", \"The sharp middle, the overall width and the brightness are the app's own choices, as no record gives them for the whole animal.\", [], [\"params.cpd\", \"params.fovea\", \"params.fov\", \"params.gain\"]]], \"zones\": [], \"by\": {}}, \"claims\": [], \"quotes\": [{\"record\": \"R23\", \"quote\": \"we determined exact peak absorption spectrum (λmax) of all three allelic pigments, red, yellow, and green, of the marmoset, to be 561, 553, and 539nm, respectively\"}, {\"record\": \"R24\", \"quote\": \"green pigment of owl monkey to be 539nm, which were precise to within ±1nm\"}, {\"record\": \"R31\", \"quote\": \"The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively.\"}, {\"record\": \"R40\", \"quote\": \"the retinas of these species have only a single type of M/L cone, they lack colour vision\"}, {\"record\": \"R137\", \"quote\": \"Because the retinas of these species have only a single type of M/L cone, they lack colour vision.\"}, {\"record\": \"R2\", \"quote\": \"The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity.\"}, {\"record\": \"R4\", \"quote\": \"The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree\"}, {\"record\": \"R7\", \"quote\": \"achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys\"}, {\"record\": \"R12\", \"quote\": \"Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's.\"}, {\"record\": \"R13\", \"quote\": \"from approximately 1 minute of arc to about 3 minutes of arc\"}, {\"record\": \"R168\", \"quote\": \"Aotus has only a rudimentary fovea\"}, {\"record\": \"R182\", \"quote\": \"the owl monkeys, the only one nocturnal species in the simian primates\"}, {\"record\": \"R183\", \"quote\": \"The owl monkey, Aotus azarae, has developed a fully nocturnal retina in recent evolution.\"}, {\"record\": \"R18\", \"quote\": \"maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)\"}]}",
+  "claims": [],
+  "quotes": [
+   {
+    "record": "R23",
+    "quote": "we determined exact peak absorption spectrum (λmax) of all three allelic pigments, red, yellow, and green, of the marmoset, to be 561, 553, and 539nm, respectively"
+   },
+   {
+    "record": "R24",
+    "quote": "green pigment of owl monkey to be 539nm, which were precise to within ±1nm"
+   },
+   {
+    "record": "R31",
+    "quote": "The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively."
+   },
+   {
+    "record": "R40",
+    "quote": "the retinas of these species have only a single type of M/L cone, they lack colour vision"
+   },
+   {
+    "record": "R137",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R2",
+    "quote": "The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity."
+   },
+   {
+    "record": "R4",
+    "quote": "The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree"
+   },
+   {
+    "record": "R7",
+    "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+   },
+   {
+    "record": "R12",
+    "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+   },
+   {
+    "record": "R13",
+    "quote": "from approximately 1 minute of arc to about 3 minutes of arc"
+   },
+   {
+    "record": "R168",
+    "quote": "Aotus has only a rudimentary fovea"
+   },
+   {
+    "record": "R182",
+    "quote": "the owl monkeys, the only one nocturnal species in the simian primates"
+   },
+   {
+    "record": "R183",
+    "quote": "The owl monkey, Aotus azarae, has developed a fully nocturnal retina in recent evolution."
+   },
+   {
+    "record": "R18",
+    "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+   }
+  ]
+ }
+}

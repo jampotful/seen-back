@@ -1,0 +1,307 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.gate: value 0.6 is not a cited record's value and does not lie between two of them (R369)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "cue": "Hold still, and the spider's eyes will find you. Its front pair is sharp and narrow, and its side eyes watch the rest of the room for movement.",
+   "params": {
+    "M": "SALT",
+    "cpd": {
+     "value": 12.4,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1"
+     ],
+     "note": "Portia fimbriata principal eye; the picture uses the best measured acuity in the family"
+    },
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R35",
+      "R23"
+     ],
+     "note": "whole-animal field from the secondary eyes near 300 to 360 degrees; the picture uses the lower end"
+    },
+    "fovea": {
+     "value": 2.2,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R14"
+     ],
+     "note": "scale of the sharp middle; the principal-eye strip is about 2 degrees wide against a person's central field, and the app chose the scale from that"
+    },
+    "gate": {
+     "value": 0.6,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R369"
+     ],
+     "note": "how far still things fade; the side eyes respond only to movement, and the app chose the strength"
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how long the picture lingers, chosen by the app"
+    },
+    "pupil": "o",
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no record gives a playback rate; flicker fusion is up to 40 Hz, well above a phone"
+    },
+    "fall": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how fast sharpness falls with light, chosen by the app; the principal eyes need bright light"
+    },
+    "sat": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "colour saturation, chosen by the app"
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how much blue reads as ultraviolet, chosen by the app; the phone has no ultraviolet channel"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the green channel is kept"
+    },
+    "gain": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "brightness gain, chosen by the app"
+    }
+   },
+   "matrices": {
+    "SALT": {
+     "from_pigments": [
+      359,
+      526
+     ],
+     "src": [
+      "R51",
+      "R72"
+     ]
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Two colours in the front eyes",
+     "The principal eyes of Saitis barbipes carry an ultraviolet pigment and a green pigment, peaking near 359 nm and 526 nm. No red receptor was found, so red and black look much alike to this view.",
+     [
+      "R51",
+      "R72",
+      "R79"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Sharp centre",
+     "The front eyes of Portia fimbriata resolve about 12.4 cycles per degree, close to a bird of prey. Most salticids are far less sharp, so this picture is drawn at the sharpness of the best measured case.",
+     [
+      "R1",
+      "R10"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "A narrow strip",
+     "Each principal retina is a thin upright strip, about 2 degrees wide and 21 degrees high in Phidippus johnsoni. Only that strip is sharp at once, and the eye moves it back and forth across the scene.",
+     [
+      "R14",
+      "R45",
+      "R129"
+     ],
+     [
+      "params.fovea"
+     ]
+    ],
+    [
+     "g",
+     "Side eyes and whole-room view",
+     "The side eyes of salticids together see almost all the way round, about 300 to 360 degrees, and they respond to movement. A person sees about 180 degrees.",
+     [
+      "R35",
+      "R23",
+      "R36"
+     ],
+     [
+      "params.fov",
+      "params.gate"
+     ]
+    ],
+    [
+     "m",
+     "Movement first",
+     "The side eyes of Menemerus semilimbatus respond to moving targets and show a clear peak in turning near 50 degrees from straight ahead. Stationary targets never start a turn, which is why still things fade in this picture.",
+     [
+      "R13",
+      "R369",
+      "R360"
+     ],
+     [
+      "params.gate"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The brightness, the lingering of the picture and the way sharpness falls with dim light are the app's own choices, set from the records but not measured in one animal.",
+     [],
+     [
+      "params.gain",
+      "params.persist",
+      "params.fall",
+      "params.rate"
+     ]
+    ]
+   ],
+   "zones": [],
+   "draw": {},
+   "inputs": {}
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R1"
+    ],
+    "kind": "value",
+    "how": "Portia fimbriata principal eye acuity is stated as 12.4 cycles per degree in R1."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R35",
+     "R23"
+    ],
+    "kind": "range_middle",
+    "how": "The secondary eyes give a field near 300 degrees (R35) and the whole animal near 360 degrees (R23); 300 is the lower end of the cited range, and the grade is g because these are family-level figures."
+   },
+   {
+    "path": "params.M",
+    "records": [
+     "R51",
+     "R72"
+    ],
+    "kind": "value",
+    "how": "The matrix uses the UV peak at 359 nm and the green peak at 526 nm measured in Saitis barbipes."
+   },
+   {
+    "path": "params.fovea",
+    "records": [
+     "R14"
+    ],
+    "kind": "calculation",
+    "how": "The principal retina is about 2 degrees wide (R14); the scale 2.2 is the app's choice set against a person's central field, so it is invented and graded g only for its basis."
+   },
+   {
+    "path": "params.gate",
+    "records": [
+     "R369"
+    ],
+    "kind": "range_middle",
+    "how": "R369 says the side eyes are blind to stationary objects; the strength 0.6 is the app's choice from that statement, so it is invented and graded g."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "The highest spatial frequency that can be recon- structed by layer 1 with minimum receptor-row spacing 1.4 J..Lm and distance 1,980 J..Lm from the posterior nodal point of the telephoto system is 1,980/2.8 = 710 rad- 1."
+   },
+   {
+    "record": "R35",
+    "quote": "the remaining six, smaller eyes providing a near 300° field of view"
+   },
+   {
+    "record": "R23",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R51",
+    "quote": "we find clear evidence for photoreceptor classes with maximal sensitivity in the UV (359 nm) and green (526 nm)"
+   },
+   {
+    "record": "R72",
+    "quote": "clear evidence for photoreceptor classes with maximal sensitivity in the UV (359 nm) and green (526 nm)"
+   },
+   {
+    "record": "R79",
+    "quote": "inconclusive evidence for a photoreceptor maximally sensitive in the blue (451 nm), and no evidence for a red photoreceptor."
+   },
+   {
+    "record": "R10",
+    "quote": "the jumping spider *Portia* fi*mbriata* has acuity on par with passerine birds, at 13 cpd"
+   },
+   {
+    "record": "R14",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R45",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R129",
+    "quote": "It consists of an oscillatory, side-to-side movement of the retinae across the stimulus, with a period of 1-2 sec."
+   },
+   {
+    "record": "R36",
+    "quote": "grant the spider an almost 360° field of view"
+   },
+   {
+    "record": "R13",
+    "quote": "there was a clear peak in responses at around ±50 deg for the ALE treatment (Fig. 3)."
+   },
+   {
+    "record": "R369",
+    "quote": "the system behaves as though it were completely blind to stationary objects."
+   },
+   {
+    "record": "R360",
+    "quote": "Stationary targets never initiate saccades, although small movements of targets already within the retinal fields of view are effective stimuli."
+   }
+  ]
+ }
+}

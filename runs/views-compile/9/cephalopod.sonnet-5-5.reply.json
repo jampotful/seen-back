@@ -1,0 +1,351 @@
+{
+ "spec": {
+  "key": "cephalopod",
+  "chip": "Octopus, squid or cuttlefish",
+  "who": "an octopus, squid or cuttlefish",
+  "falls_back_to": null,
+  "applies_to": {
+   "class": [
+    "Cephalopoda"
+   ]
+  },
+  "cue": "Colour drains away and the world turns to greys that favour blue-green. Detail is coarser than yours and the field is very wide.",
+  "version": 1,
+  "draft": true,
+  "params": {
+   "cpd": {
+    "value": 8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R14",
+     "R6",
+     "R7"
+    ],
+    "range": [
+     0.3,
+     13
+    ],
+    "note": "the cuttlefish figure, which lies between the squid and octopus figures; one value stands for the whole group"
+   },
+   "fov": {
+    "value": 312,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R25"
+    ],
+    "range": [
+     250,
+     340
+    ],
+    "note": "measured in young oval squid; the app uses it for the whole group"
+   },
+   "topoA": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "a horizontal streak of dense receptors is described, and the strength is the app's"
+   },
+   "rate": {
+    "value": 0.85,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R82"
+    ],
+    "range": [
+     0.25,
+     1.2
+    ],
+    "note": "50.8 flashes a second over a person's 60"
+   },
+   "M": {
+    "value": "single_pigment",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R46",
+     "R47"
+    ],
+    "note": "one pigment peaking near 485 nanometres"
+   },
+   "pupil": "h"
+  },
+  "matrices": {
+   "single_pigment": {
+    "from_pigments": [
+     485
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R46",
+     "R47"
+    ],
+    "note": "one receptor type, so the picture keeps brightness only, weighted toward blue-green"
+   }
+  },
+  "by": {
+   "family": {
+    "Sepiidae": {
+     "params": {
+      "rate": {
+       "value": 0.5,
+       "grade": "g",
+       "invented": true,
+       "src": [
+        "R84"
+       ],
+       "range": [
+        0.25,
+        1.2
+       ],
+       "note": "30 flashes a second over a person's 60"
+      }
+     }
+    }
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the wide field pressed into the screen"
+    }
+   ],
+   "overlay": [
+    {
+     "name": "polar",
+     "invented": true,
+     "note": "shows where polarized light would stand out"
+    },
+    {
+     "name": "off",
+     "invented": true,
+     "note": "the view without the overlay"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "the single pigment drives the colour"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "Sharpness",
+    "An octopus resolves about 12 cycles per degree and a squid about 6.6, against your 30. A cuttlefish is put near 8. Newly hatched squid see far coarser, near 0.6. The picture is blurred to 8, a middle value that no single species is said to match.",
+    [
+     "R7",
+     "R6",
+     "R14",
+     "R2"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Colour",
+    "Almost every octopus, squid and cuttlefish has one visual pigment, with its peak between 470 and 500 nanometres. An Octopus tetricus is described as colour-blind, and a cuttlefish retina cannot respond to colour. Cuttlefish cannot see red light. The picture loses its colour and keeps a brightness that favours blue-green.",
+    [
+     "R46",
+     "R47",
+     "R42",
+     "R43",
+     "R204",
+     "R203",
+     "R338"
+    ],
+    [
+     "params.M",
+     "matrices.single_pigment"
+    ]
+   ],
+   [
+    "m",
+    "Field",
+    "Young oval squid take in about 312 degrees around them. One cuttlefish eye covers about 253 degrees, and the two eyes overlap by 86 degrees in front. Octopuses have no significant overlap. The camera holds a slice of this field and the rest is invented.",
+    [
+     "R25",
+     "R18",
+     "R33",
+     "R35"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Pupil",
+    "An octopus pupil is round in the dark and closes to a horizontal slit in bright light. Cuttlefish and Eledone can shrink theirs to 3% of the full area. The picture uses the horizontal slit.",
+    [
+     "R70",
+     "R73",
+     "R307",
+     "R308"
+    ],
+    [
+     "params.pupil"
+    ]
+   ],
+   [
+    "g",
+    "Where it is sharp",
+    "Octopus photoreceptors crowd into a central horizontal stripe, about 55,000 per square millimetre against 18,000 to 22,000 at the edge. Squid and cuttlefish have a similar streak. The picture is sharper along a horizontal band, and how much sharper is the app's choice.",
+    [
+     "R351",
+     "R350",
+     "R277",
+     "R272"
+    ],
+    [
+     "params.topoA"
+    ]
+   ],
+   [
+    "g",
+    "Pace",
+    "A squid loses flicker near 51 flashes a second, a cuttlefish near 30, and an octopus between 20 and 72 depending on the light. You lose it near 60. Squid time runs a little slower than yours and cuttlefish time at about half.",
+    [
+     "R82",
+     "R84",
+     "R83",
+     "R85"
+    ],
+    [
+     "params.rate",
+     "by.family.Sepiidae.params.rate"
+    ]
+   ],
+   [
+    "m",
+    "Polarized light",
+    "Octopuses respond to polarized light at a very fine threshold, a median of 0.010 on the polarization distance scale. The cephalopod retina has two sensitive planes, one horizontal and one vertical. The picture can show an overlay of where polarized light would stand out, and its look is the app's.",
+    [
+     "R187",
+     "R193",
+     "R196"
+    ],
+    []
+   ],
+   [
+    "i",
+    "How it is drawn",
+    "The single value of 8 cycles per degree, the 312 degree field taken from young squid, the strength of the sharp streak, the pace of 0.85, the horizontal pupil, the one-pigment colour matrix and the polarization overlay are the app's own settings, set inside the measured range.",
+    [],
+    [
+     "params.cpd",
+     "params.fov",
+     "params.topoA",
+     "params.rate",
+     "params.M",
+     "params.pupil",
+     "matrices.single_pigment",
+     "by.family.Sepiidae.params.rate",
+     "draw.overlay"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R14",
+    "R6",
+    "R7"
+   ],
+   "kind": "value",
+   "how": "The value 8 equals the cuttlefish figure in R14 and lies between the squid figure in R6 and the octopus figure in R7."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R25"
+   ],
+   "kind": "value",
+   "how": "The value 312 degrees is the visual field of 14 day old oval squid in R25."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R46",
+    "R47"
+   ],
+   "kind": "calculation",
+   "how": "A single pigment peaking at 485 nm, the peak given for Hapalochlaena maculosa in R46 and Octopus australis in R47, is turned into a one-channel colour matrix."
+  },
+  {
+   "path": "matrices.single_pigment",
+   "records": [
+    "R46",
+    "R47"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from one pigment peak at 485 nm, which equals the peak in R46 and R47, and the weighting into a colour matrix is the app's own."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R82"
+   ],
+   "kind": "calculation",
+   "how": "50.8 Hz from R82 divided by an assumed person's pace of 60 Hz is about 0.85."
+  },
+  {
+   "path": "by.family.Sepiidae.params.rate",
+   "records": [
+    "R84"
+   ],
+   "kind": "calculation",
+   "how": "30 Hz from R84 divided by an assumed person's pace of 60 Hz is 0.5."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R14",
+   "quote": "the cuttlefish visual acuity is approximately 8 cycles per degree [23]"
+  },
+  {
+   "record": "R6",
+   "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD) and the squid (6.56 ± 1.14 CPD)"
+  },
+  {
+   "record": "R7",
+   "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD)"
+  },
+  {
+   "record": "R25",
+   "quote": "14 days old (9.8) | 0.90 | 312"
+  },
+  {
+   "record": "R46",
+   "quote": "Hapalochlaena maculosa | AY545171 | M485b"
+  },
+  {
+   "record": "R47",
+   "quote": "Octopus australis | — | M485b"
+  },
+  {
+   "record": "R82",
+   "quote": "control: 50.8 ± 1.4 Hz"
+  },
+  {
+   "record": "R84",
+   "quote": "Cuttlefish have a fusion frequency of 30 Hz [24]"
+  }
+ ]
+}

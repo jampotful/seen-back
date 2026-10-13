@@ -1,0 +1,340 @@
+{
+ "key": "bee",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: matrices.BEE: invented is neither true nor false",
+  "matrices.BEE: graded i, so invented must be true",
+  "matrices.BEE: peak 440 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 336 nm (R46), 340 nm (R57), 340 nm (R58), 340 nm (R62), 340 nm (R63), 340 nm (R96), 341 nm (R48), 344 nm (R55), 344 nm (R66), 344 nm (R67), 346 nm (R43), 346 nm (R45), 348 nm (R47), 348 nm (R97), 349 nm (R51), 350 nm (R61), 350 nm (R64), 350 nm (R71), 353 nm (R49), 353 nm (R60), 354 nm (R52), 360 nm (R65), 362 nm (R50), 424 nm (R75), 428 nm (R76), 430 nm (R73), 435 nm (R77), 436 nm (R79), 436 nm (R84), 442 nm (R53). Put the records you use in src and keep the colour matrix; do not drop it"
+ ],
+ "reply": {
+  "spec": {
+   "key": "bee",
+   "version": 2,
+   "chip": "Bee",
+   "who": "a bee",
+   "cue": "The view is sharp only in a small spot and blurs toward the edges, it shows ultraviolet as blue, and it runs slowly, then jumps ahead.",
+   "applies_to": {
+    "family": [
+     "Apidae",
+     "Halictidae",
+     "Megachilidae",
+     "Andrenidae",
+     "Colletidae"
+    ]
+   },
+   "modules": [],
+   "inputs": {
+    "camera": "required"
+   },
+   "params": {
+    "M": "BEE",
+    "cpd": {
+     "value": 0.26,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1"
+     ],
+     "note": "honeybee worker behavioural limit; other bee records range from 0.21 to 0.54"
+    },
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R35"
+     ]
+    },
+    "fovea": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no record gives a sharp middle in bees, so a person's value is kept"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "by analogy with the house cat",
+     "range": [
+      0,
+      2
+     ]
+    },
+    "topoS": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the picture is sharper in the middle than at the edge",
+     "range": [
+      0,
+      2
+     ]
+    },
+    "pupil": "none",
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the UV class is drawn as blue, as the app's convention for bee false colour",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "rate": {
+     "value": 0.4,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the view slows movement so that flicker limits can be felt; see the cue",
+     "range": [
+      0.25,
+      2
+     ]
+    },
+    "gate": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "glow": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ]
+    },
+    "glowC": {
+     "value": [
+      0.78,
+      1,
+      0.62
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    }
+   },
+   "matrices": {
+    "BEE": {
+     "from_pigments": [
+      340,
+      440,
+      540
+     ],
+     "src": [
+      "R57",
+      "R73",
+      "R85"
+     ],
+     "grade": "i",
+     "note": "three receptor classes read as UV, blue and green, shown with the UV as blue, blue as green and green as red; the peaks are the nearest cited honeybee records (340 nm UV; 430 nm and 540 nm for the worker)"
+    }
+   },
+   "zones": [],
+   "gaze": {
+    "saccade": {
+     "value": [
+      40,
+      4
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's own drawing of a quick head turn"
+    },
+    "sweep": {
+     "value": [
+      2,
+      1.2
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's own drawing of the hold between turns"
+    },
+    "hold": {
+     "value": 1500,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "app's choice of dwell"
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the picture is squeezed toward a wide field of about 300 degrees"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no overlay"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the three classes are drawn as UV, blue and green"
+     }
+    ],
+    "gaze": [
+     {
+      "name": "strip",
+      "invented": true,
+      "note": "gaze jumps in short saccades"
+     }
+    ],
+    "surround": [
+     {
+      "name": "pond",
+      "invented": true,
+      "note": "the wide edge is drawn with motion"
+     }
+    ],
+    "tilt": [
+     {
+      "name": "level",
+      "invented": true,
+      "note": "the picture stays level"
+     }
+    ],
+    "spectrum": [
+     {
+      "name": "matrix",
+      "invented": true,
+      "note": "the BEE matrix"
+     }
+    ],
+    "slow": [
+     {
+      "name": "patient",
+      "invented": true,
+      "note": "the view runs slowly and then jumps"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Sharpness",
+     "A honeybee worker resolves gratings of about a quarter of a cycle per degree, roughly one two-hundredth of a person's sharpness. Bumblebees and stingless bees fall in the same range.",
+     [
+      "R1",
+      "R3",
+      "R4"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Colour",
+     "Bees have three colour receptors, peaking in the ultraviolet near 340 to 350 nanometres, in the blue near 430 to 445 nanometres and in the green near 530 to 556 nanometres. The view shows the ultraviolet as blue, the blue as green and the green as red, so the picture is not a true colour match.",
+     [
+      "R57",
+      "R73",
+      "R85",
+      "R93"
+     ],
+     [
+      "params.M",
+      "params.uvBlue"
+     ]
+    ],
+    [
+     "m",
+     "Field of view",
+     "A bee sees almost all around itself, about 300 degrees across the horizontal. The picture is squeezed toward this wide field.",
+     [
+      "R34",
+      "R35"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Motion",
+     "Bees hold their gaze still between quick head turns that last about 45 to 135 milliseconds. The view jumps in short steps to show this.",
+     [
+      "R145"
+     ],
+     [
+      "params.gaze"
+     ]
+    ],
+    [
+     "i",
+     "The app's choices",
+     "The sharpness, the glow of movement, the slow pace, the gaze timing and the palette of this view are the app's own choices. The records give the bee's limits, but not how they look on a screen.",
+     [],
+     [
+      "params.topoA",
+      "params.topoS",
+      "params.glow",
+      "params.glowC",
+      "params.rate",
+      "params.uvBlue",
+      "params.gaze",
+      "draw.surround",
+      "draw.slow"
+     ]
+    ]
+   ],
+   "falls_back_to": "insect"
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R1"
+    ],
+    "kind": "value",
+    "how": "The honeybee worker's highest resolved grating is 0.26 cycles per degree, as the record states."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R35"
+    ],
+    "kind": "range_middle",
+    "how": "The bee field of view is given as about 300 degrees horizontally, graded g because the record is a general figure for bees cited from an older study."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1, with no evidence of a difference in acuity between horizontal and vertical gratings."
+   },
+   {
+    "record": "R35",
+    "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+   }
+  ]
+ }
+}

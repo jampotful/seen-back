@@ -1,0 +1,639 @@
+{
+ "key": "cephalopod",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Light and sleep' says m and every parameter it describes is graded i",
+  "checker: row 'Polarised light' says m and every parameter it describes is graded i",
+  "params.fov: value 300 is not a cited record's value and does not lie between two of them (R23, R25, R27, R29, R31)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "cephalopod",
+   "chip": "Octopus, squid or cuttlefish",
+   "who": "an octopus, squid or cuttlefish",
+   "applies_to": {
+    "class": [
+     "Cephalopoda"
+    ]
+   },
+   "cue": "Detail is fine in the middle and the pupil is a slit. Tap the screen to move the focus.",
+   "modules": [
+    "tilt"
+   ],
+   "falls_back_to": "fish",
+   "params": {
+    "M": "cephalopod_mono",
+    "cpd": {
+     "value": 6,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R4",
+      "R6",
+      "R7",
+      "R2"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the middle of the measured octopus and squid acuities; the app's choice"
+    },
+    "fov": {
+     "value": 300,
+     "grade": "m",
+     "invented": true,
+     "src": [
+      "R23",
+      "R25",
+      "R27",
+      "R29",
+      "R31"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "the app picks a value inside the squid's measured adult fields"
+    },
+    "fovea": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "cephalopods have a streak rather than a fovea; the app's choice of a mild sharp middle"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "by analogy with the visual streak in octopus, cuttlefish and squid"
+    },
+    "topoS": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ]
+    },
+    "fall": {
+     "value": 1.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no record gives the fall of sharpness with light for these animals"
+    },
+    "pupil": "h",
+    "dof": {
+     "value": 20,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      40
+     ],
+     "note": "a slit pupil in bright light gives deep focus; strength is the app's"
+    },
+    "gain": {
+     "value": 1.4,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "the app's choice for a dim-light animal"
+    },
+    "sat": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "the records say these animals are colour-blind; the low value is the app's choice"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no switch for colour is needed when saturation is already low"
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the records say no tapetum has been seen in cephalopods; zero is the app's choice"
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      60
+     ]
+    },
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.25,
+      2
+     ],
+     "note": "the person's pace is kept"
+    },
+    "shimmer": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [
+      "R193"
+     ],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's drawing of polarised light, after R193 and R191"
+    },
+    "salience": 1,
+    "ripple": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [
+      "R158"
+     ],
+     "range": [
+      0,
+      1
+     ],
+     "note": "ripples that follow water movement, as the lateral line analogue in R158 suggests"
+    },
+    "glow": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "the app's glow of movement"
+    },
+    "glowC": {
+     "value": [
+      0.8,
+      0.9,
+      1
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the glow's colour"
+    },
+    "gate": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's choice; still things fade part way"
+    },
+    "uvBlue": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no record gives an ultraviolet channel for these animals"
+    },
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "no extra weight for living movement outside the records"
+    },
+    "hold": {
+     "value": 60,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      300
+     ],
+     "note": "the app's choice"
+    },
+    "thrust": {
+     "value": 30,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      100
+     ],
+     "note": "the app's choice"
+    },
+    "sweep": {
+     "value": [
+      15,
+      4.5
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's scan"
+    },
+    "water": {
+     "value": [
+      1.5,
+      0.45,
+      0.25,
+      1
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's water surface"
+    },
+    "waterC": {
+     "value": [
+      0.03,
+      0.2,
+      0.26
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's water colour"
+    },
+    "uvR": ""
+   },
+   "matrices": {
+    "cephalopod_mono": {
+     "rows": [
+      [
+       0.33,
+       0.33,
+       0.33
+      ],
+      [
+       0.33,
+       0.33,
+       0.33
+      ],
+      [
+       0.33,
+       0.33,
+       0.33
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a single receptor class: brightness only, as the records describe for most cephalopods (R58, R60, R62)"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Sharpness",
+     "Octopus measured at 3.1 to 6.8 cycles per degree in behavioural tests, with one octopus at 12.2. Squid near 0.6 to 6.6. The picture is blurred to a middle value of 6 cycles per degree.",
+     [
+      "R4",
+      "R7",
+      "R2",
+      "R6",
+      "param:cpd"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Colour",
+     "Most cephalopods have one visual pigment, and the octopus and squid studied did not tell colours apart. The picture is drawn in brightness alone, with almost no colour.",
+     [
+      "R55",
+      "R56",
+      "R205",
+      "R207",
+      "R204"
+     ],
+     [
+      "params.M",
+      "params.sat"
+     ]
+    ],
+    [
+     "m",
+     "Field",
+     "A squid of 7 days sees about 311 degrees around itself and an adult of 27 days about 323, while an octopus has no significant binocular overlap. The picture is squeezed toward 300 degrees.",
+     [
+      "R23",
+      "R27",
+      "R35",
+      "param:fov"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "g",
+     "Pupil",
+     "The octopus pupil is round in darkness and narrows to a horizontal slit in bright light. The picture uses a slit that is horizontal.",
+     [
+      "R70",
+      "R71",
+      "R69"
+     ],
+     [
+      "params.pupil"
+     ]
+    ],
+    [
+     "m",
+     "Light and sleep",
+     "The pupil closes to about 10 per cent of its dark-adapted area in bright light and takes about one second to do so. The picture closes the pupil in bright places and opens it in the dark.",
+     [
+      "R332",
+      "R374",
+      "R309"
+     ],
+     [
+      "params.dof"
+     ]
+    ],
+    [
+     "m",
+     "Polarised light",
+     "Octopus and squid sense the plane of polarised light, so the picture shows a faint shimmer that follows that plane.",
+     [
+      "R193",
+      "R191",
+      "R196"
+     ],
+     [
+      "params.shimmer"
+     ]
+    ],
+    [
+     "i",
+     "How it is drawn",
+     "The mapping to one colour channel, the sharpness fall, the streak in the middle, the gain and the glow are the app's own settings, set inside the measured range.",
+     [
+      "param:cpd",
+      "param:fall",
+      "param:fovea",
+      "param:gain",
+      "param:glow",
+      "param:M"
+     ],
+     [
+      "params.M",
+      "params.fall",
+      "params.fovea",
+      "params.gain",
+      "params.glow"
+     ]
+    ]
+   ],
+   "version": 1,
+   "zones": [],
+   "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "draft": true,
+   "tilt": {
+    "fromDeg": {
+     "value": 15,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      60
+     ]
+    },
+    "fullDeg": {
+     "value": 45,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      20,
+      90
+     ]
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "the view as it was"
+     },
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "squeezes the sides toward the field of view"
+     }
+    ],
+    "tilt": [
+     {
+      "name": "level",
+      "invented": true,
+      "note": "the view as it was"
+     },
+     {
+      "name": "snell",
+      "invented": true,
+      "note": "the sky pressed into a disc"
+     }
+    ]
+   }
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R2",
+     "R4",
+     "R6",
+     "R7"
+    ],
+    "kind": "range_middle",
+    "how": "The value 6 is inside the measured span from 0.63 (R2) to 12.23 (R7), and is graded g because the records come from several species and ages, so it is a wider-group figure rather than a single animal's value."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R23",
+     "R25",
+     "R27",
+     "R29",
+     "R31"
+    ],
+    "kind": "range_middle",
+    "how": "The value 300 lies inside the band of the squid's measured adult fields, which run from 311 to 329 degrees; the choice of 300 sits just below that band and is the app's."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R2",
+    "quote": "0.63 cpd (6.21 mm ML) for 0 day old"
+   },
+   {
+    "record": "R4",
+    "quote": "whose visual acuity was assessed as 3.1–6.8 cycles/degrees (Muntz and Gwyther, 1988)"
+   },
+   {
+    "record": "R6",
+    "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD) and the squid (6.56 ± 1.14 CPD)"
+   },
+   {
+    "record": "R7",
+    "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD)"
+   },
+   {
+    "record": "R23",
+    "quote": "7 days old (5.5) | 0.65 | 311"
+   },
+   {
+    "record": "R25",
+    "quote": "14 days old (9.8) | 0.90 | 312"
+   },
+   {
+    "record": "R27",
+    "quote": "22 days old (11.3) | 1.11 | 323"
+   },
+   {
+    "record": "R29",
+    "quote": "28 days old (13.2) | 1.18 | 322"
+   },
+   {
+    "record": "R31",
+    "quote": "35 days old (13.8) | 0.78 | 329"
+   },
+   {
+    "record": "R35",
+    "quote": "octopuses, which do not have significant binocular overlap"
+   },
+   {
+    "record": "R55",
+    "quote": "Octopus vulgaris possesses only one visual pigment within its photoreceptors"
+   },
+   {
+    "record": "R56",
+    "quote": "MSP results demonstrated that this common reef squid only contains a single visual pigment as do all other shallow water cephalopods known"
+   },
+   {
+    "record": "R58",
+    "quote": "possessing just one visual pigment"
+   },
+   {
+    "record": "R60",
+    "quote": "the vast majority of cephalopod species are color blind, possessing only a single visual pigment"
+   },
+   {
+    "record": "R62",
+    "quote": "since this group of animals cannot distinguish them because they only have one visual pigment"
+   },
+   {
+    "record": "R69",
+    "quote": "Despite the pupil is circular during the planktonic phase and pre-settlement, from ~ 80 days (> 35 suckers, ~ 48 − 40% ML/TL) the pupil starts to develop a horizontal pupillary response"
+   },
+   {
+    "record": "R70",
+    "quote": "The pupil of octopus is circular in darkness (Figure 1C), while in bright light, it constricts to a horizontal slit (Figures 1A,B)"
+   },
+   {
+    "record": "R71",
+    "quote": "Despite the pupil is circular during the planktonic phase and pre-settlement, from ~ 80 days (> 35 suckers, ~ 48 − 40% ML/TL) the pupil starts to develop a horizontal pupillary response"
+   },
+   {
+    "record": "R158",
+    "quote": "The recently discovered cephalopod lateral line system also detects water-borne vibrations, but this is more probably used for locating other animals in low light conditions."
+   },
+   {
+    "record": "R191",
+    "quote": "mobility of octopus was preferentially activated with the polarized light of either vertical or horizontal plane of polarization, and sometimes of ±45°"
+   },
+   {
+    "record": "R193",
+    "quote": "in the cephalopod retina there are only two, sensitive planes which are maximally sensitive to either horizontal or vertical vector-component of the incident light"
+   },
+   {
+    "record": "R196",
+    "quote": "Animals were trained to distinguish between light plane polarized in the vertical plane (normal to the iris slit of the intact animal) and in the horizontal plane (parallel to the slit)."
+   },
+   {
+    "record": "R204",
+    "quote": "a color-blind animal with well-developed polarization vision, Octopus tetricus"
+   },
+   {
+    "record": "R205",
+    "quote": "John B. Messenger demonstrated with still other learning experiments that Octopus does not distinguish different colors"
+   },
+   {
+    "record": "R207",
+    "quote": "However, they are colourblind"
+   },
+   {
+    "record": "R332",
+    "quote": "During our measurements, light caused the pupil to maximally constrict to approximately 10% of the dark-adapted pupil area."
+   },
+   {
+    "record": "R309",
+    "quote": "Pupil area decreased to approximately 4 mm2, or 12% of the dark-adapted pupil area, when the eye was exposed to bright light."
+   },
+   {
+    "record": "R374",
+    "quote": "After the light was switched on, the octopus pupil closed within approximately 1 s."
+   }
+  ]
+ }
+}

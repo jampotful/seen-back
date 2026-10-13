@@ -1,0 +1,233 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "falls_back_to": "insect",
+  "cue": "The view is wide and very soft, and ultraviolet shows up as blue.",
+  "params": {
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35"
+    ],
+    "range": [
+     200,
+     330
+    ],
+    "note": "Bees see about 300 degrees across with both eyes. One measurement on the honeybee gives 312 degrees."
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.05,
+     0.6
+    ],
+    "note": "Honeybee grating resolution. Bumblebees give 0.21 to 0.36."
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R43",
+     "R73",
+     "R85"
+    ],
+    "note": "Built from the three receptor peaks of the worker honeybee. How they map to screen colours is the app's own choice."
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     346,
+     430,
+     540
+    ],
+    "src": [
+     "R43",
+     "R73",
+     "R85"
+    ],
+    "note": "UV, blue and green receptor peaks of the worker honeybee."
+   }
+  },
+  "pace": {
+   "ratio": {
+    "value": 3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     6
+    ],
+    "note": "The app's choice for how much faster than a person the bee's picture refreshes."
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "Colours are drawn from the three bee receptor peaks."
+    }
+   ],
+   "overlay": [
+    {
+     "name": "polar",
+     "invented": true,
+     "note": "The sky's polarised light pattern is drawn as a overlay the app invented."
+    }
+   ],
+   "pace": [
+    {
+     "name": "replay",
+     "invented": true,
+     "note": "The faster flicker is suggested by replaying the picture."
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A honeybee resolves lines of about 0.26 cycles per degree. That is roughly 1/230 of what a person resolves, so the world looks very soft.",
+    [
+     "R1",
+     "R3"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Wide view",
+    "The two compound eyes together take in about 300 degrees across. Only a small blind region lies below and behind the bee.",
+    [
+     "R35",
+     "R31",
+     "R32"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Colour",
+    "Bees have three kinds of colour receptor. They peak near 346 nm in the ultraviolet, 430 nm in blue and 540 nm in green. Bees see ultraviolet light but cannot see far red.",
+    [
+     "R43",
+     "R73",
+     "R85",
+     "R100"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Flicker",
+    "In bright light a honeybee can still tell a flicker apart at about 200 flashes a second. A bumblebee manages about 130.",
+    [
+     "R135",
+     "R139"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sky pattern",
+    "A strip of ommatidia along the top rim of the eye reads the pattern of polarised light in the sky. Bees use it as a compass. The app draws this pattern as an overlay.",
+    [
+     "R360",
+     "R340"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "Ultraviolet is shown as blue, blue as green and green as red, and red is dropped. This follows a convention used to show bee vision on screen. The faster flicker is the app's own guess. The view has no pupil because a compound eye has none.",
+    [
+     "R268"
+    ],
+    [
+     "params.M",
+     "pace.ratio"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The record states the honeybee grating resolution of 0.26 cycles per degree."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R35"
+   ],
+   "kind": "value",
+   "how": "The record states that bees see about 300 degrees horizontally."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R43",
+    "R73",
+    "R85"
+   ],
+   "kind": "calculation",
+   "how": "The BEE matrix is built from the worker honeybee peaks 346, 430 and 540 nm, and the mapping to screen colours is the app's own."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R35",
+   "quote": "Bees can see ~300° horizontally on the body plane"
+  },
+  {
+   "record": "R43",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  },
+  {
+   "record": "R73",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  },
+  {
+   "record": "R85",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  }
+ ]
+}

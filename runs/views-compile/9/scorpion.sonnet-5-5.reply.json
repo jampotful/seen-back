@@ -1,0 +1,298 @@
+{
+ "spec": {
+  "key": "scorpion",
+  "version": 1,
+  "chip": "Scorpion",
+  "who": "a scorpion",
+  "falls_back_to": "harvestman",
+  "applies_to": {
+   "order": [
+    "Scorpiones",
+    "Uropygi",
+    "Amblypygi",
+    "Pseudoscorpiones"
+   ]
+  },
+  "cue": "The view takes in the whole circle around you at once, in soft blues and greens, with little fine detail.",
+  "modules": [
+   "field",
+   "haptic"
+  ],
+  "draft": true,
+  "params": {
+   "M": {
+    "value": "SCORPION",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "two colour channels, blue and green, taken from the measured peaks"
+   },
+   "fov": {
+    "value": 360,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R1",
+     "R2"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "scorpions apparently see all the way around the body"
+   },
+   "cpd": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "no one has measured how sharp a scorpion's picture is; this is a rough guess of coarse shapes"
+   },
+   "gain": {
+    "value": 2.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "note": "a brighter picture for eyes that work at starlight; the size of the boost is a guess"
+   }
+  },
+  "matrices": {
+   "SCORPION": {
+    "from_pigments": [
+     470,
+     525
+    ],
+    "src": [
+     "R5",
+     "R9"
+    ],
+    "invented": true,
+    "note": "blue and green peaks from electrical recordings of the eyes"
+   }
+  },
+  "haptic": {
+   "on": "knock",
+   "pattern": {
+    "value": [
+     18,
+     28
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R128",
+     "R129"
+    ],
+    "note": "the rhythm of a male's courtship judder, in milliseconds on and off"
+   },
+   "edge": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "how bright the edge pulses where the phone cannot vibrate"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the whole circle around the animal is pressed into the screen"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colour is mixed from the blue and green peaks"
+    }
+   ],
+   "haptic": [
+    {
+     "name": "buzz",
+     "invented": true,
+     "note": "a short vibration in the rhythm of a courtship judder where the phone can vibrate, and a pulse at the picture's edge where it cannot"
+    },
+    {
+     "name": "edge",
+     "invented": true,
+     "note": "the pulse at the picture's edge only"
+    },
+    {
+     "name": "off",
+     "invented": true,
+     "note": "the view without touch"
+    }
+   ]
+  },
+  "inputs": {
+   "motion": "optional",
+   "sound": "none",
+   "haptic": "optional"
+  },
+  "rows": [
+   [
+    "g",
+    "All the way round",
+    "Scorpions can apparently see 360 degrees around the body, because the two median eyes and the side eyes together cover the circle.",
+    [
+     "R1",
+     "R2",
+     "param:fov"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Blue and green",
+    "Recordings from the eyes of two scorpion genera show the strongest response to blue light near 470 nm and to green light near 525 nm. Other work puts the main peak of scorpion eyes near 500 nm in green.",
+    [
+     "R5",
+     "R9",
+     "R6",
+     "param:M"
+    ],
+    [
+     "params.M",
+     "matrices.SCORPION"
+    ]
+   ],
+   [
+    "g",
+    "Eyes for the night",
+    "Scorpions are nocturnal and hide by day. Their eyes are sensitive to starlight levels of light.",
+    [
+     "R101",
+     "R16",
+     "R102"
+    ],
+    [
+     "params.gain"
+    ]
+   ],
+   [
+    "g",
+    "Little detail",
+    "The two median eyes are the main eyes and give relatively good detail for such small eyes. The side eyes seem to detect only changes in brightness.",
+    [
+     "R135",
+     "R138"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Feeling the ground",
+    "Sand scorpions sense the footsteps of prey through slit organs in their legs from as far as 50 cm away. A courting male Centruroides margaritatus shakes in pulses about 0.018 s long, about 0.028 s apart.",
+    [
+     "R34",
+     "R35",
+     "R128",
+     "R129"
+    ],
+    [
+     "haptic.pattern"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "No record gives how sharp a scorpion's picture is, so this view assumes coarse shapes. The size of the brightness boost, the mix of the two colour channels, the buzz in the rhythm of the judder and the pulse at the picture's edge are the app's.",
+    [
+     "R135",
+     "R138"
+    ],
+    [
+     "params.cpd",
+     "params.gain",
+     "params.M",
+     "matrices.SCORPION",
+     "haptic.pattern",
+     "haptic.edge"
+    ]
+   ],
+   [
+    "x",
+    "Not in the picture",
+    "A scorpion also finds food and mates by taste and touch through its comb-like pectines, and the camera records neither.",
+    [
+     "R29",
+     "R32"
+    ],
+    []
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R1",
+    "R2"
+   ],
+   "kind": "value",
+   "how": "Both records state a 360 degree field of view for scorpions."
+  },
+  {
+   "path": "matrices.SCORPION",
+   "records": [
+    "R5",
+    "R9"
+   ],
+   "kind": "value",
+   "how": "The two pigment peaks, 470 nm and 525 nm, are the two values the record states for the blue and green maxima."
+  },
+  {
+   "path": "haptic.pattern",
+   "records": [
+    "R128",
+    "R129"
+   ],
+   "kind": "calculation",
+   "how": "A judder lasts 0.018 s and the interval is 0.028 s, so 18 ms on and 28 ms off."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "scorpions can apparently see 360° around their body"
+  },
+  {
+   "record": "R2",
+   "quote": "Together, the two eyes have a 360 deg field of view"
+  },
+  {
+   "record": "R5",
+   "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+  },
+  {
+   "record": "R9",
+   "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+  },
+  {
+   "record": "R128",
+   "quote": "The average duration of each judder was 0.018±0.009s (n=50) with an interval of 0.028±0.013s (n=50)"
+  },
+  {
+   "record": "R129",
+   "quote": "The average duration of each judder was 0.018±0.009s (n=50) with an interval of 0.028±0.013s (n=50)"
+  }
+ ]
+}
