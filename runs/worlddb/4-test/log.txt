@@ -1,0 +1,145 @@
+=== 2026-10-13T03:01:24Z machine
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1185       11601          40        3585       14803
+=== 2026-10-13T03:01:24Z machine: exit 0
+=== 2026-10-13T03:01:24Z install
+=== 2026-10-13T03:01:31Z install: exit 0
+=== 2026-10-13T03:01:31Z rows (pub/naturalist-world)
+450bb3daa3e8095dc55fa21c23bbed488bd64b89
+=== 2026-10-13T03:01:51Z rows (pub/naturalist-world): exit 0
+=== 2026-10-13T03:01:51Z place data (pub/world-place)
+2849de66beacfe8ac7e42ade3a3187935fdeba88
+=== 2026-10-13T03:01:54Z place data (pub/world-place): exit 0
+=== 2026-10-13T03:01:54Z vectors (pub/lab-bioclip2-l14)
+ff0b39eac66f70a1b0804faa690648fe48d66bd7
+total 5308
+drwxr-xr-x 2 runner runner    4096 Oct 13 03:02 .
+drwxr-xr-x 5 runner runner    4096 Oct 13 03:01 ..
+-rw-r--r-- 1 runner runner 5376128 Oct 13 03:02 world-species.f16.npy
+-rw-r--r-- 1 runner runner   49001 Oct 13 03:02 world-species.ids.json
+=== 2026-10-13T03:02:00Z vectors (pub/lab-bioclip2-l14): exit 0
+=== 2026-10-13T03:02:00Z checks of the encounter rule
+ok    disc sums equal brute force at 1 degrees
+ok    disc sums equal brute force at 2 degrees
+ok    the world guess is a distribution with no zero
+ok    an unknown zone gives the world
+ok    a zone's guess is (1 - eps) its cells plus eps the world, through an alias
+ok    three species of Gainesville bring the world to Gainesville
+ok    two of London's bring it to London
+ok    the order of meeting does not matter
+ok    the update is the product of the shares, normalized
+ok    a zone the tables lack leaves the world
+ok    the prior over species sums to one
+ok    the prior over species sums to one
+ok    the prior over species sums to one
+ok    at one known cell the prior is the disc's (n + 1) / (N + S)
+ok    at London a species of London leads those of Gainesville
+ok    under two cells the prior is the mixture of theirs
+ok    the circle prior counts the quarter-degree cells within 400 km
+ok    a zone's guess sums to one
+ok    Europe/Oslo is Norway's, not Germany's or Sweden's
+ok    America/Los_Angeles lies mostly west of 114 W
+ok    America/New_York lies mostly east of 88 W
+ok    America/New_York leaves room for Florida
+ok    America/Chicago lies mostly between 100 W and 84 W
+ok    old names and POSIX names find their zones
+ok    Asia/Kolkata is India's
+ok    every zone has cells, its country's or those near its point
+0 failed
+=== 2026-10-13T03:02:04Z checks of the encounter rule: exit 0
+=== 2026-10-13T03:02:04Z place files at 2 degrees
+{
+ "bytes": 13216090,
+ "pairs": 5466383,
+ "pair_bytes": 13151258,
+ "zones": 418,
+ "aliases": 135,
+ "zone_cells": 89278,
+ "zones_bytes": 1228487,
+ "notes": {
+  "no_cells_in_country": [
+   "Europe/Andorra",
+   "America/Antigua",
+   "America/Anguilla",
+   "Pacific/Pago_Pago",
+   "America/Aruba",
+   "Asia/Bahrain",
+   "America/St_Barthelemy",
+   "Atlantic/Bermuda",
+   "America/Kralendijk",
+   "Indian/Cocos",
+   "Pacific/Rarotonga",
+   "Indian/Christmas",
+   "America/Cayenne",
+   "Europe/Guernsey",
+   "Europe/Gibraltar",
+   "America/Guadeloupe",
+   "Pacific/Guam",
+   "Indian/Chagos",
+   "Europe/Jersey",
+   "America/St_Kitts",
+   "America/Cayman",
+   "America/St_Lucia",
+   "Europe/Vaduz",
+   "Europe/Monaco",
+   "America/Marigot",
+   "Asia/Macau",
+   "Pacific/Saipan",
+   "America/Martinique",
+   "America/Montserrat",
+   "Indian/Maldives",
+   "Pacific/Norfolk",
+   "Pacific/Nauru",
+   "Pacific/Niue",
+   "America/Miquelon",
+   "Pacific/Pitcairn",
+   "Indian/Reunion",
+   "Indian/Mahe",
+   "Atlantic/St_Helena",
+   "Arctic/Longyearbyen",
+   "Europe/San_Marino",
+   "America/Lower_Princes",
+   "America/Grand_Turk",
+   "Pacific/Fakaofo",
+   "Pacific/Tongatapu",
+   "Pacific/Funafuti",
+   "Pacific/Midway",
+   "Pacific/Wake",
+   "Europe/Vatican",
+   "America/St_Vincent",
+   "America/Tortola",
+   "America/St_Thomas",
+   "Pacific/Wallis",
+   "Indian/Mayotte"
+  ],
+  "no_offset": []
+ }
+}
+=== 2026-10-13T03:02:08Z place files at 2 degrees: exit 0
+total 14116
+drwxr-xr-x  2 runner runner     4096 Oct 13 03:02 .
+drwxr-xr-x 21 runner runner     4096 Oct 13 03:02 ..
+-rw-r--r--  1 runner runner 13216090 Oct 13 03:02 place.bin
+-rw-r--r--  1 runner runner  1228487 Oct 13 03:02 zones.json
+{"place.bin": {"bytes": 13216090, "sha256": "09bb7c379b49fc1d5c5565bb9f705ed483d293af432b5147b30a72b8cf47b2db"}, "zones.json": {"bytes": 1228487, "sha256": "0511be912276a7b7a96a6022c50ab5e93083f6eefdb0fd0677d471899c604aec"}, "res": 2.0}
+=== 2026-10-13T03:02:08Z publish the place files
+read pub/naturalist-world at 450bb3daa3e8: 16 files
+published into pub/naturalist-world: 9ae080681668 (was 450bb3daa3e8095dc55fa21c23bbed488bd64b89); files now:
+  README.md
+  _made.txt
+  check.json
+  inat_rows.tsv
+  parts.json
+  place.bin
+  place.json
+  rows.i8.part00
+  rows.i8.part01
+  rows.i8.part02
+  rows.i8.part03
+  rows.tsv
+  scale.f32
+  summary.json
+  table.json
+  zones.json
+=== 2026-10-13T03:02:34Z publish the place files: exit 0
