@@ -1,0 +1,156 @@
+
+=== 02:56:19 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1083       11700          41        3590       14906
+v22.23.3
+Python 3.12.15
+Model name:                              AMD EPYC 7763 64-Core Processor
+Flags: avx2 
+
+=== 02:56:19 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 22 | index.html 321811 bytes | artifact 317913 bytes | selftest.js 50143 bytes
+build ok
+321934 index.html
+50143 selftest.js
+
+=== 02:56:19 playwright 1.56.0: chromium
+added 2 packages in 2s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+main at 31691d9 Research round 3 and the parallel tracks: the brief, the log tools, the 
+
+=== 02:56:47 perf: main, round 1
+exit 0
+| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |
+|---|---|---|---|---|---|---|
+| human | 167.49 | 171.5 | 179.4 | 166.7 | 1.16 | none |
+| cat | 443.77 | 447.4 | 457.3 | 450 | 0.73 | none |
+| dog | 444.49 | 447.9 | 458.9 | 450 | 0.83 | none |
+| squirrel | 447.26 | 447.5 | 463.3 | 450 | 0.78 | none |
+| deer | 443.38 | 446.5 | 455.7 | 449.9 | 1.1 | none |
+| rabbit | 443.53 | 447.9 | 454.5 | 450 | 0.85 | none |
+| hawk | 170.73 | 172 | 181.9 | 166.7 | 0.9 | none |
+| wader | 339.83 | 342.7 | 350.1 | 350 | 0.91 | none |
+| bird | 341.82 | 345.2 | 350.8 | 350 | 0.93 | none |
+| alligator | 443.86 | 446.4 | 459.8 | 450 | 1.05 | none |
+| reptile | 436.33 | 440.3 | 448.2 | 433.4 | 0.83 | none |
+| frog | 377.28 | 380.2 | 389.8 | 383.3 | 0.75 | none |
+| bee | 355.41 | 357.9 | 367.3 | 366.6 | 1 | none |
+| insect | 356.36 | 358.8 | 367.9 | 366.6 | 0.92 | none |
+| plant | 168.66 | 173.1 | 179.5 | 166.7 | 0.86 | none |
+{
+ "perf": {
+  "url": "http://127.0.0.1:8791/index.html?side=540&nosw=1&svc=off&big=off&rec=off",
+  "frames": 60,
+  "rows": [
+
+=== 03:07:12 perf: branch, round 1
+exit 0
+| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |
+|---|---|---|---|---|---|---|
+| human | 219.28 | 219.8 | 229.5 | 216.7 | 0.96 | 189.36 |
+| cat | 441.19 | 445.4 | 453.6 | 449.9 | 0.85 | 374.04 |
+| dog | 441.84 | 445.5 | 452.6 | 450 | 0.97 | 375.97 |
+| squirrel | 445.3 | 449.2 | 458.5 | 450 | 1.12 | 377.75 |
+| deer | 441.89 | 446.3 | 453.1 | 449.9 | 0.84 | 375.82 |
+| rabbit | 441.45 | 442.2 | 456.1 | 450 | 1.03 | 378.33 |
+| hawk | 168.6 | 171.2 | 180.2 | 166.7 | 0.89 | 175.06 |
+| wader | 337.56 | 339.6 | 345.6 | 333.4 | 0.66 | 249.86 |
+| bird | 340.27 | 343.3 | 351.5 | 349.9 | 0.84 | 285.25 |
+| alligator | 441.63 | 445.1 | 453.3 | 450 | 0.99 | 358.67 |
+| reptile | 434.72 | 437 | 446.3 | 433.3 | 0.97 | 369.97 |
+| frog | 376.03 | 377.5 | 387.5 | 383.3 | 0.98 | 328.07 |
+| bee | 354.69 | 356.4 | 365.3 | 350 | 0.8 | 300.82 |
+| insect | 354.79 | 355.9 | 367 | 366.6 | 0.82 | 296.28 |
+| plant | 168.66 | 173.1 | 180.8 | 166.7 | 0.77 | 163.82 |
+| jumper | 437.93 | 442.4 | 449.7 | 449.9 | 1.17 | 318.59 |
+{
+ "perf": {
+  "url": "http://127.0.0.1:8790/index.html?side=540&nosw=1&svc=off&big=off&rec=off",
+  "frames": 60,
+
+=== 03:18:30 perf: main, round 2
+exit 0
+| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |
+|---|---|---|---|---|---|---|
+| human | 170.4 | 167.8 | 173.5 | 166.7 | 0.97 | none |
+| cat | 441.07 | 443.4 | 452.7 | 449.9 | 1.08 | none |
+| dog | 440.97 | 442.2 | 454 | 449.9 | 0.81 | none |
+| squirrel | 445.8 | 450.1 | 458.5 | 450 | 0.95 | none |
+| deer | 441.54 | 444.8 | 452.3 | 450 | 0.8 | none |
+| rabbit | 442.17 | 445.8 | 454.4 | 450 | 0.88 | none |
+| hawk | 167.74 | 171.6 | 177.3 | 166.7 | 0.83 | none |
+| wader | 337.89 | 339.1 | 350.3 | 333.4 | 0.78 | none |
+| bird | 340.11 | 341.4 | 351.4 | 350 | 0.86 | none |
+| alligator | 442.04 | 444.8 | 457.4 | 450 | 1.13 | none |
+| reptile | 434.48 | 437.4 | 445.8 | 433.4 | 0.65 | none |
+| frog | 375.38 | 378.1 | 386.5 | 383.3 | 0.9 | none |
+| bee | 353.99 | 355.9 | 363.9 | 350 | 1.07 | none |
+| insect | 355.41 | 357.9 | 366.2 | 366.6 | 0.98 | none |
+| plant | 169.77 | 173.2 | 180.8 | 166.7 | 0.91 | none |
+{
+ "perf": {
+  "url": "http://127.0.0.1:8791/index.html?side=540&nosw=1&svc=off&big=off&rec=off",
+  "frames": 60,
+  "rows": [
+
+=== 03:28:50 perf: branch, round 2
+exit 0
+| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |
+|---|---|---|---|---|---|---|
+| human | 217.28 | 218.6 | 227.8 | 216.7 | 0.97 | 191.61 |
+| cat | 440.93 | 443.5 | 455.3 | 450 | 1.06 | 377.53 |
+| dog | 441.56 | 444.9 | 454.2 | 450 | 0.72 | 379 |
+| squirrel | 445.93 | 449.9 | 459.3 | 450 | 0.87 | 378.07 |
+| deer | 442.44 | 446 | 455.7 | 449.9 | 1.06 | 376.06 |
+| rabbit | 441.4 | 444.8 | 452.4 | 449.9 | 0.95 | 381.07 |
+| hawk | 167.01 | 170.9 | 179.2 | 166.7 | 0.85 | 174.6 |
+| wader | 338.29 | 341.2 | 348.6 | 349.9 | 0.86 | 247.88 |
+| bird | 340.79 | 343.6 | 351.8 | 349.9 | 0.73 | 283.17 |
+| alligator | 441.54 | 443.8 | 452.8 | 450 | 0.75 | 353.62 |
+| reptile | 435.27 | 437.9 | 448.1 | 433.3 | 1 | 370.64 |
+| frog | 375.93 | 379 | 387.1 | 383.3 | 0.62 | 327.69 |
+| bee | 354.22 | 356.6 | 365.2 | 350 | 0.99 | 303.1 |
+| insect | 354.62 | 356.9 | 366.2 | 350 | 0.66 | 298.98 |
+| plant | 171.73 | 174.2 | 181.8 | 166.8 | 0.95 | 163.61 |
+| jumper | 438.04 | 441.7 | 448.7 | 449.9 | 1.2 | 318.69 |
+{
+ "perf": {
+  "url": "http://127.0.0.1:8790/index.html?side=540&nosw=1&svc=off&big=off&rec=off",
+  "frames": 60,
+
+=== 03:40:08 perf: main, round 3
+exit 0
+| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |
+|---|---|---|---|---|---|---|
+| human | 164.98 | 167 | 172.9 | 166.7 | 0.93 | none |
+| cat | 441.45 | 445.1 | 452.1 | 449.9 | 1.14 | none |
+| dog | 441.66 | 445.7 | 455.2 | 450 | 0.87 | none |
+| squirrel | 445.84 | 449.1 | 457.6 | 450 | 0.75 | none |
+| deer | 441.93 | 444.4 | 453 | 450 | 0.91 | none |
+| rabbit | 442.06 | 444.4 | 454.3 | 450 | 0.85 | none |
+| hawk | 166.4 | 169.4 | 178.9 | 166.7 | 0.71 | none |
+| wader | 337.25 | 339.8 | 349.9 | 333.4 | 1 | none |
+| bird | 339.97 | 341.1 | 348.4 | 349.9 | 0.83 | none |
+| alligator | 441.28 | 444.5 | 453.7 | 450 | 0.85 | none |
+| reptile | 434.79 | 438.3 | 447 | 433.3 | 0.93 | none |
+| frog | 375.36 | 379.2 | 385.3 | 383.3 | 1.02 | none |
+| bee | 353.17 | 355.4 | 362.8 | 350 | 1.23 | none |
+| insect | 353.61 | 357.1 | 362.9 | 350 | 1.1 | none |
+| plant | 168.41 | 170.7 | 178.1 | 166.7 | 0.89 | none |
+{
+ "perf": {
+  "url": "http://127.0.0.1:8791/index.html?side=540&nosw=1&svc=off&big=off&rec=off",
+  "frames": 60,
+  "rows": [
+
+=== 03:50:23 perf: branch, round 3
