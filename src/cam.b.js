@@ -669,8 +669,6 @@
         qEnd(); keep(cpuMs, performance.now() - c0);
       }
     };
-    return api;
-
     // ---- the screen and the camera picture. toScreen inverts the view pass's remap (squeeze and zoom; the fovea bulge is taken as 1),
     // in fractions of the canvas with y up; toPic is the forward remap, for a thumb on the screen.
     var lastP = null, lastMirror = 0, lastCamZoom = 1;
@@ -779,6 +777,8 @@
       }
       return { tick: tick };
     })();
+    return api;
+
     function drawFrame(P, fx, now, dt) {
         lastP = P; lastMirror = fx.mirror ? 1 : 0; lastCamZoom = fx.camZoom || 1;
         gl.bindVertexArray(vao);
