@@ -70,4 +70,7 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 3. `docs/views/COMPILER.md`, the spec compiler's input.
 
 ## Done (pushed to `agent/engine`)
-- Nothing yet.
+- Modules 8 to 11 in the engine: `field` (spec block `remap`; `wedge`, `fold`, `window`, `ribbon`), `overlay` (`polar`, `web`, `rings`, `shadow`, up to eight events), `sound` (three bands, onsets and breath from a second analyser; `hear`, `clap`, `air`, `rumble`, `rings`; `&fakesound=1` for desks and tests), `haptic` (`buzz`, `edge`, triggered by onset, knock or shock). Documented in `docs/ENGINE.md`.
+- Specs behind `?try=` from the research drafts, by `tools/views/add_modules8.py`: owl, duck, bigcat, fox, millipede, centipede, harvestman, woodlouse; the modules offered in fish, spider, worm, bat, mammal and the bee and insect trials. Every spec passes the checker; every new view and every new option draws with no error (`test/check4.js try`). The sixteen offered views are the same objects as on `main`.
+- `docs/views/COMPILER.md`, the spec compiler's input.
+- The round 2 carry files were read only (Panthera pupils to `bigcat`, the mallard's violet cone to every duck); nothing applied.
