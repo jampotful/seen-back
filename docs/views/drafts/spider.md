@@ -360,6 +360,9 @@ Log 179.
 `['x', 'Polarized light', 'Tarantulas may tell apart patterns of polarized light, on weak evidence from a single test. This view leaves polarized light out.']`
 Log 287 (Henton and Crawford 1966, summary only).
 
+`['x', 'Smell and silk', 'A male tarantula begins to court only after he touches a female’s silk, and the scent of a female or of prey draws him out faster than light does. The picture leaves smell out.']`
+Log 293 (Ferretti and Ferrero 2008, *Grammostola schulzei*), 292, 291 (Ruhland and colleagues 2016, *Brachypelma albopilosum*: light also raises activity).
+
 #### The picture
 
 ```
@@ -426,7 +429,7 @@ tarantula: { chip: 'Tarantula or ground spider', who: 'a tarantula or ground spi
 | Goldenrod Crab Spider, *Misumena vatia* | 0 | `crabspider` | 54 to 63, 275 to 280 |
 | *Xysticus cristatus* and *Ozyptila praticola* | 0 | `crabspider` | 110 to 120, 264, 265 (and *Xysticus* sp. 73 to 76, 81) |
 | Ogre-faced Spider, *Deinopis spinosa*, with *Dinopis subrufus* (now *Asianopis subrufa*) for the optics | 88 | `netcaster` | 133, 135, 136, 259, 260; 1 to 14, 262, 263 |
-| Tarantulas: *Aphonopelma chalcodes*, *Sericopelma rubronitens*, *Eupalaestrus weijenberghi*, *Grammostola pulchra*; trapdoor spider *Latouchia typica* | 8 (mygalomorphs) | `tarantula` | 185, 178, 179, 180, 181, 198, 183 |
+| Tarantulas: *Aphonopelma chalcodes*, *Sericopelma rubronitens*, *Eupalaestrus weijenberghi*, *Grammostola pulchra*, *G. schulzei*, *Brachypelma albopilosum*; trapdoor spider *Latouchia typica* | 8 (mygalomorphs) | `tarantula` | 185, 178, 179, 180, 181, 294, 198, 293, 182, 291, 292, 183, 287 |
 | Chilean recluse, *Loxosceles laeta* | 0 | `tarantula` | 191 |
 
 The Green Lynx Spider (*Peucetia viridans*, 246 Alachua records, the fourth most recorded spider of this unit) has a field observation of its hunting (Log 269, 270) and no measurement of its eyes; its genus appears only in a histology abstract (Log 222).
@@ -491,6 +494,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Barth FG, Nakagawa T, Eguchi E 1993. Vision in the ctenid spider Cupiennius salei: spectral range and absolute sensitivity. Journal of Experimental Biology 181: 63-79. https://doi.org/10.1242/jeb.181.1.63. `opened` (abstract). Log 137 to 138.
 - Barth FG, Höller A 1999. Dynamics of arthropod filiform hairs. V. The response of spider trichobothria to natural stimuli. Philosophical Transactions of the Royal Society B. https://doi.org/10.1098/rstb.1999.0370. `opened` (abstract). Log 176.
 - Barth FG 2020. A spider in motion: facets of sensory guidance. Journal of Comparative Physiology A. https://doi.org/10.1007/s00359-020-01449-z. `opened` (full text). Log 121 to 127.
+- Baruffaldi L, Perafán C, Perdomo C, Montes de Oca L, Pérez-Miles F, Costa FG 2013. Third pair of legs is a key feature for eliciting female receptivity in the road tarantula spider Eupalaestrus weijenberghi (Araneae: Theraphosidae). Journal of Arachnology. https://doi.org/10.1636/hi11-58.1. `opened` (abstract). Log 294.
 - Benson KE, Suter RB 2013. Reflections on the tapetum lucidum and eyeshine in lycosoid spiders. Journal of Arachnology. https://doi.org/10.1636/B12-35.1. `opened` (abstract). Log 153.
 - Bleckmann H, Barth FG 1984. Sensory ecology of a semi-aquatic spider (Dolomedes triton). Behavioral Ecology and Sociobiology 14: 303-312. https://doi.org/10.1007/BF00299502. `opened` (abstract on the publisher's page, quoted in fragments). Log 243 to 248.
 - Blest AD, Land MF 1977. The physiological optics of Dinopis subrufus L. Koch: a fish-lens in a spider. Proceedings of the Royal Society of London B 196: 197-222. https://doi.org/10.1098/rspb.1977.0037. `opened` (owner's library copy). Log 1 to 14, 262 to 263.
@@ -510,6 +514,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - England SJ, Rose L, Penna-Gonçalves V, Herberstein ME, Sumner-Rooney L 2026. Crab spider vision improves their prey capture despite low visual system investment. Royal Society Open Science. https://doi.org/10.1098/rsos.260045. `opened` (abstract). Log 187.
 - Fenk LM, Schmid A 2010. The orientation-dependent visual spatial cut-off frequency in a spider. Journal of Experimental Biology. https://doi.org/10.1242/jeb.041939. `opened` (abstract). Log 140.
 - Fenk LM, Schmid A 2011. Flicker-induced eye movements and the behavioural temporal cut-off frequency in a nocturnal spider. Journal of Experimental Biology 214(21): 3658-3663. https://doi.org/10.1242/jeb.060855. `opened` (abstract). Log 206.
+- Ferretti N, Ferrero AA 2008. Courtship and mating behavior of Grammostola schulzei (Schmidt 1994) (Araneae, Theraphosidae), a burrowing tarantula from Argentina. Journal of Arachnology. https://doi.org/10.1636/cst08-09.1. `opened` (abstract). Log 293.
 - Finck A 1972. Vibration sensitivity in an orb-weaver. American Zoologist 12(3): 539. https://doi.org/10.1093/icb/12.3.539. `opened` (abstract). Log 172.
 - Finck A 1981. The lyriform organ of the orb-weaving spider Araneus sericatus: vibration sensitivity is altered by bending the leg. Journal of the Acoustical Society of America. https://doi.org/10.1121/1.386678. `opened` (abstract). Log 173.
 - Fischer FL, Scharff N, Garm AL 2026. Photoreceptor physiology of two species of crab spiders (Araneae: Thomisidae). Journal of Comparative Physiology A. https://doi.org/10.1007/s00359-026-01802-8. Read at https://pmc.ncbi.nlm.nih.gov/articles/PMC13395977/. `opened` (full text). Log 110 to 120, 264 to 265.
@@ -560,7 +565,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Quirici V, Costa FG 2005. Seismic communication during courtship in two burrowing tarantula spiders: an experimental study on Eupalaestrus weijenberghi and Acanthoscurria suina. Journal of Arachnology. https://doi.org/10.1636/S03-22. `opened` (abstract). Log 180.
 - Quirici V, Costa FG 2007. Seismic sexual signal design of two sympatric burrowing tarantula spiders from meadows of Uruguay: Eupalaestrus weijenberghi and Acanthoscurria suina (Araneae, Theraphosidae). Journal of Arachnology. https://doi.org/10.1636/ST06-08.1. `opened` (abstract). Log 181.
 - Reyes-Alcubilla C, Ruiz MA, Ortega-Escobar J 2009. Homing in the wolf spider Lycosa tarantula (Araneae, Lycosidae): the role of active locomotion and visual landmarks. Naturwissenschaften 96(4): 485-494. https://doi.org/10.1007/s00114-008-0498-1. `opened` (abstract). Log 281 to 285.
-- Ruhland F, Caudal J-P, Blois-Heulin C, Trabalon M 2016. Male tarantula spiders' reactions to light and odours reveal their motor asymmetry. Journal of Zoology. https://doi.org/10.1111/jzo.12388. `opened` (abstract). Log 182.
+- Ruhland F, Caudal J-P, Blois-Heulin C, Trabalon M 2016. Male tarantula spiders' reactions to light and odours reveal their motor asymmetry. Journal of Zoology. https://doi.org/10.1111/jzo.12388. `opened` (abstract). Log 182, 291 to 292.
 - Schedl A 2017. No evidence for the perception of polarised light in the ctenid spider Cupiennius salei. Thesis, University of Vienna. https://doi.org/10.25365/thesis.49142. `opened` (abstract). Log 257.
 - Schmid A 1998. Different functions of different eye types in the spider Cupiennius salei. Journal of Experimental Biology 201: 221-225. https://doi.org/10.1242/jeb.201.2.221. `opened` (abstract). Log 143.
 - Seo J-H, Kim K-J, Kim H, Moon M-J 2020. Lyriform vibration receptors in the web-building spider, Nephila clavata (Araneidae: Araneae: Arachnida). Entomological Research. https://doi.org/10.1111/1748-5967.12470. `opened` (abstract). Log 174.
@@ -581,6 +586,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Yamashita S 1993. Physiological and behavioral studies of changes in absolute and spectral sensitivities on spiders eyes (KAKENHI project 03640608, project report summary, fiscal years 1991-1993). KAKEN database of grants-in-aid, Japan Society for the Promotion of Science. https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-03640608/. `opened` (project report summary). Log 267 to 268.
 - Yamashita S, Arita F 1995. Efferent control in the anterior lateral eyes of orb weaving spiders. Zoological Science 12. https://doi.org/10.2108/zsj.12.385. `opened` (abstract). Log 168.
 - Yamashita S, Nakamura T 1999. Circadian oscillation of sensitivity of spider eyes: diurnal and nocturnal spiders. Journal of Experimental Biology. https://doi.org/10.1242/jeb.202.18.2539. `opened` (abstract). Log 256.
+- Yamashita S 2002. Efferent innervation of photoreceptors in spiders. Microscopy Research and Technique. https://doi.org/10.1002/jemt.10143. `opened` (project report summary). Log 288 to 290.
 - Zhai S, Ren B, Zhang X, Shen F, Ma M, Li X, Li R 2025. Functional study of opsin genes in Pardosa astrigera (Araneae: Lycosidae). Insects 16(6): 595. https://doi.org/10.3390/insects16060595. `opened` (abstract). Log 207.
 - Zhou J, Lai J, Menda G, Stafstrom JA, Miles CI, Hoy RR, Miles RN 2022. Outsourced hearing in an orb-weaving spider that uses its web as an auditory sensor. Proceedings of the National Academy of Sciences 119(14): e2122789119. https://doi.org/10.1073/pnas.2122789119. `opened` (full text). Log 130 to 132, 258.
 - Zopf LM, Schmid A, Fredman D, Eriksson BJ 2013. Spectral sensitivity of the ctenid spider Cupiennius salei Keys. Journal of Experimental Biology. https://doi.org/10.1242/jeb.086256. `opened` (abstract). Log 139.
