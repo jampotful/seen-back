@@ -6,6 +6,8 @@ name: worlddb
 #   grid-<anything>   the records of every row in each quarter-degree cell, the countries of the cells, the world test
 #                     photos' places and time zones and the creatures their observers met (ci/worlddb/grid.sh,
 #                     tools/world/grid.py), published to pub/world-place.
+#   test-<anything>   the place files at 1 and 2 degrees (tools/world/prior.py) and the world test (tools/world/worldtest.py);
+#                     the 1-degree place files are added to pub/naturalist-world.
 # Results come back on ci as runs/worlddb/<run>-<job>.
 on:
   push:
@@ -139,3 +141,22 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh worlddb out grid
+
+  test:
+    if: startsWith(github.ref_name, 'run/worlddb/test')
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: place files and the world test
+        env:
+          PUBLISH_GRID: "1"
+        run: bash ci/worlddb/test.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out test

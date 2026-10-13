@@ -101,9 +101,9 @@ class Records:
     def __init__(self, grid, cells, rows, counts, S):
         self.grid, self.S = grid, int(S)
         o = np.lexsort((cells, rows))
-        self.cells = np.asarray(cells, np.int64)[o]
-        self.rows = np.asarray(rows, np.int64)[o]
-        self.counts = np.asarray(counts, np.float64)[o]
+        self.cells = np.asarray(cells, np.int32)[o]
+        self.rows = np.asarray(rows, np.int32)[o]
+        self.counts = np.asarray(counts, np.float32)[o]
         self.start = np.searchsorted(self.rows, np.arange(self.S + 1))
         self.T = np.bincount(self.cells, weights=self.counts, minlength=grid.n)
 

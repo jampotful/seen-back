@@ -1,15 +1,17 @@
 /* Seen Back: the recognizer's worker. A classic worker (no modules), so the picture on the page keeps moving
    while a photo is prepared and passed through the image encoder.
 
-   The page sends:   {op:'init', ort:{js,mjs,wasm}, wasmBinary, ep, model, vision:{input,output,size,mean,std,resize,crop}, width, kinds, nKinds, species, nSpecies}
-                     (kinds may be absent where there are species: a slot without a kinds head)
+   The page sends:   {op:'init', ort:{js,mjs,wasm}, wasmBinary, ep, model, vision:{input,output,size,mean,std,resize,crop}, width, kinds, nKinds, species, nSpecies,
+                      speciesType, speciesScale}
+                     (kinds may be absent where there are species: a slot without a kinds head; speciesType 'int8' gives the rows at one byte
+                     a number, row after row, with speciesScale one little-endian float32 a row, the row's value being scale * byte)
                      {op:'run', id, rgba, w, h, wantPre}          rgba: the photo's pixels, 4 bytes each, rows from the top
    and it answers:   {op:'hello'}  {op:'ready', ms, backend, threads}  {op:'done', id, kinds, species, emb, ms, pre?}  {op:'fail', id?, stage, name, message}
 
    The resize follows Pillow's Image.resize(size, Image.BICUBIC) step for step (8-bit, two passes, its fixed-point
    weights and its rounding), because the label vectors were made from photos prepared by Pillow. */
 'use strict';
-var session = null, V = null, width = 0, K = null, nK = 0, SP = null, nS = 0, backend = '', trip = '';
+var session = null, V = null, width = 0, K = null, nK = 0, SP = null, SP8 = null, SC = null, nS = 0, backend = '', trip = '';
 
 function now() { return (self.performance && performance.now) ? performance.now() : Date.now(); }
 function fail(stage, e, id) { self.postMessage({ op: 'fail', id: id, stage: stage, name: String((e && e.name) || ''), message: String((e && e.message) || e || '').slice(0, 300) }); }
@@ -104,6 +106,11 @@ function dots(M, n, e) {
   for (i = 0; i < n; i++) { s = 0; o = i * width; for (j = 0; j < width; j++) s += M[o + j] * e[j]; out[i] = s; }
   return out;
 }
+function dots8(Q, scale, n, e) {                     // rows at one byte a number: the full database for the whole world, hundreds of thousands of rows
+  var out = new Float32Array(n), i, j, s, o;
+  for (i = 0; i < n; i++) { s = 0; o = i * width; for (j = 0; j < width; j++) s += Q[o + j] * e[j]; out[i] = s * scale[i]; }
+  return out;
+}
 
 // ---------- the encoder
 function init(m) {
@@ -113,8 +120,10 @@ function init(m) {
     V = m.vision; width = m.width; backend = m.ep || 'wasm';
     if (V.resize !== 'shortest-bicubic-antialias' || (V.crop !== 'center' && V.crop !== 'center-round')) throw new Error('unknown resize or crop rule');
     // a slot may come without a kinds head (the larger model: its kind is taken from the species answer)
-    K = m.kinds ? halves(m.kinds) : null; nK = m.kinds ? m.nKinds : 0; SP = m.species ? halves(m.species) : null; nS = m.species ? m.nSpecies : 0;
-    if ((K && K.length !== nK * width) || (SP && SP.length !== nS * width) || (!K && !SP)) throw new Error('label vectors of the wrong length');
+    K = m.kinds ? halves(m.kinds) : null; nK = m.kinds ? m.nKinds : 0; nS = m.species ? m.nSpecies : 0;
+    if (m.species && m.speciesType === 'int8') { SP8 = new Int8Array(m.species); SC = new Float32Array(m.speciesScale || new ArrayBuffer(0)); SP = null; }
+    else { SP = m.species ? halves(m.species) : null; SP8 = SC = null; }
+    if ((K && K.length !== nK * width) || (SP && SP.length !== nS * width) || (SP8 && (SP8.length !== nS * width || SC.length !== nS)) || (!K && !SP && !SP8)) throw new Error('label vectors of the wrong length');
   } catch (e) { fail('unfit', e); return; }
   t1 = now();
   var ort = self.ort;
@@ -154,7 +163,7 @@ function run(m) {
   try { u8 = prepare(new Uint8Array(m.rgba), m.w, m.h, V); t = toTensor(u8, V); } catch (e) { fail('run', e, m.id); return; }
   t1 = now();
   run1(t).then(function (e) {
-    var t2 = now(), kd = K ? dots(K, nK, e) : null, sd = SP ? dots(SP, nS, e) : null, t3 = now();
+    var t2 = now(), kd = K ? dots(K, nK, e) : null, sd = SP ? dots(SP, nS, e) : SP8 ? dots8(SP8, SC, nS, e) : null, t3 = now();
     var msg = { op: 'done', id: m.id, kinds: kd, species: sd, emb: e, ms: { pre: t1 - t0, run: t2 - t1, post: t3 - t2 } };
     if (m.wantPre) msg.pre = u8;
     self.postMessage(msg);

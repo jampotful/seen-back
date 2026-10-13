@@ -162,6 +162,8 @@
     }
     m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = byOf(named.by);
     m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
+    // the full database's place (placeOf in cam.rec.js) learns from a creature it named with confidence; a name corrected later is taken back
+    if (typeof large !== 'undefined' && large.met) large.met(m.id, m.by === 'device-large' ? m.sci : '');
     saveLocal(); pushUp(m); paintRecordBits();
   }
   function forgetMeeting(id) {
