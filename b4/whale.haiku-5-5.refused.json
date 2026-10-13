@@ -1,0 +1,99 @@
+{
+ "key": "whale",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.cpd: src \"docs/views/sheets/whale.md#2 Sharpness: Lisney 2018 (4.8, Bryde's whale; 3.3, humpback); Mass and Supin; Hanke 2009 (11.5, harbour seal under water)\" is not a record id that was sent"
+ ],
+ "reply": {
+  "spec": "{\"key\": \"whale\", \"chip\": \"Whale, dolphin or seal\", \"who\": \"a whale, dolphin or seal\", \"cue\": \"A dim, colour-poor view that is sharp for movement and sound, with a faint glow where light is scarce.\", \"falls_back_to\": \"mammal\", \"applies_to\": {\"order\": [\"Cetacea\", \"Carnivora:Pinnipedia\", \"Sirenia\"]}, \"modules\": [], \"inputs\": {\"motion\": \"none\", \"sound\": \"none\", \"haptic\": \"none\"}, \"params\": {\"M\": \"whale_rod\", \"cpd\": {\"value\": 4, \"grade\": \"g\", \"invented\": true, \"src\": [\"docs/views/sheets/whale.md#2 Sharpness: Lisney 2018 (4.8, Bryde's whale; 3.3, humpback); Mass and Supin; Hanke 2009 (11.5, harbour seal under water)\"], \"range\": [0.005, 40], \"note\": \"measured sharpness runs from about 2.6 to 11.5 cycles per degree across these animals; the pick of 4 is the app's\"}, \"fov\": {\"value\": 125, \"grade\": \"m\", \"invented\": false, \"src\": [\"R17\", \"R19\"], \"range\": [100, 360], \"note\": \"panoramic field of 120 to 130 degrees for bottlenose dolphins\"}, \"pupil\": \"h\", \"gain\": {\"value\": 1.5, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"no dim-light ratio was found for these animals\"}, \"sat\": {\"value\": 0.2, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1.5], \"note\": \"colour is mostly lost; this keeps a faint trace of it\"}, \"sheen\": {\"value\": 0.8, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"a reflective tapetum lies behind the retina of most of these animals; the strength is the app's choice\"}, \"fovea\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"no record gives a sharper centre; a person's value stands\"}}, \"matrices\": {\"whale_rod\": {\"rows\": [[0.3, 0.6, 0.1], [0.3, 0.6, 0.1], [0.3, 0.6, 0.1]], \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"one cone class with peaks near 488 to 520 nm; the picture is a single blue-green channel\"}}, \"rows\": [[\"g\", \"Sharpness\", \"Measured sharpness in these animals runs from about 2.6 to 11.5 cycles per degree. A humpback whale resolves about 3.3 and a bottlenose dolphin about 2.6 to 3.3. We blur the picture to about 4.\", [\"R2\", \"R3\", \"R4\", \"R5\", \"R11\"], [\"params.cpd\"]], [\"m\", \"Colour\", \"Whales and seals carry only one kind of cone, so they see along one channel with no separate colours. Their peak sensitivity lies between about 488 and 520 nanometres, a blue-green band.\", [\"R46\", \"R186\", \"R28\", \"R29\", \"R36\"], [\"params.M\"]], [\"m\", \"Field of view\", \"A bottlenose dolphin has a panoramic field of 120 to 130 degrees, with the two eyes overlapping only 20 to 30 degrees.\", [\"R17\", \"R21\"], [\"params.fov\"]], [\"g\", \"Low light and reflection\", \"Most whales and seals have a reflective layer behind the retina, which gives dim light a second pass. Dolphins and seals on the records show it, so the picture glows a little in low light.\", [\"R246\", \"R254\", \"R248\"], [\"params.sheen\"]], [\"i\", \"The app's choices\", \"The sharpness, colour mapping, pupil shape, dim-light gain and sheen are the app's own choices, built on the records above. No record gives the pupil or the gain for these animals.\", [], [\"params.gain\", \"params.sat\", \"params.pupil\", \"params.fovea\", \"params.sheen\"]]], \"version\": 1, \"zones\": [], \"by\": {}}, \"claims\": [{\"path\": \"params.cpd\", \"records\": [\"R2\", \"R3\", \"R4\", \"R5\", \"R11\"], \"kind\": \"range_middle\", \"how\": \"The app's value of 4 sits within the measured range from 2.6 to 3.3 (R2), 3.3 to 4.8 (R3, R4), 3.95 (R11) and 8.7 to 11.5 (R5); it is graded g because it is the app's pick across several species.\"}, {\"path\": \"params.fov\", \"records\": [\"R17\", \"R19\"], \"kind\": \"range_middle\", \"how\": \"The value 125 is the middle of the 120 to 130 degree panoramic field given for bottlenose dolphins and dolphins.\"}, {\"path\": \"params.M\", \"records\": [\"R46\", \"R186\", \"R28\", \"R29\", \"R36\"], \"kind\": \"value\", \"how\": \"The one-cone statement comes from R46 and R186; the pigment peaks come from R28, R29 and R36, and the matrix weights themselves are the app's.\"}], \"quotes\": [{\"record\": \"R2\", \"quote\": \"the retinal resolving power was 2.6-3.3 cycles per degree\"}, {\"record\": \"R3\", \"quote\": \"we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively\"}, {\"record\": \"R4\", \"quote\": \"we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively\"}, {\"record\": \"R5\", \"quote\": \"Retinal resolution was calculated as 11.5 cycles/deg under water and 8.7 cycles/deg in air\"}, {\"record\": \"R11\", \"quote\": \"Visual acuity was estimated at 3.95 cycles per degree (CPD)\"}, {\"record\": \"R46\", \"quote\": \"we here demonstrate an absence of S-cones in the retinae of all whales and seals studied\"}, {\"record\": \"R186\", \"quote\": \"These marine mammals have only L-cones (cone monochromacy) and hence are essentially colour-blind.\"}, {\"record\": \"R28\", \"quote\": \"bottlenose dolphin RH1 (Tursiops truncatus, λmax = 488 nm)\"}, {\"record\": \"R29\", \"quote\": \"We found a cone spectral sensitivity curve with a peak at about 510 nm.\"}, {\"record\": \"R36\", \"quote\": \"Published λmax values for species from Delphinoidea, such as harbor porpoise (Phocoena phocoena) and bottlenose dolphin (Tursiops truncatus), are 522 to 524 nm\"}, {\"record\": \"R17\", \"quote\": \"Tursiops truncatus | Bottlenose dolphin | 2 | < 24 h from stranding (CC 1–2) | Sokolov et al. (1972); Kesarev et al. (1977); Ladygina et al. (1978) | 20–30° binocular field; 120–130, panoramic vision\"}, {\"record\": \"R19\", \"quote\": \"allowing a panoramic vision with a 120–130◦ visual field\"}, {\"record\": \"R21\", \"quote\": \"Tursiops truncatus | Bottlenose dolphin | 2 | < 24 h from stranding (CC 1–2) | Sokolov et al. (1972); Kesarev et al. (1977); Ladygina et al. (1978) | 20–30° binocular field\"}]}",
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R2",
+     "R3",
+     "R4",
+     "R5",
+     "R11"
+    ],
+    "kind": "range_middle",
+    "how": "The app's value of 4 sits within the measured range from 2.6 to 3.3 (R2), 3.3 to 4.8 (R3, R4), 3.95 (R11) and 8.7 to 11.5 (R5); it is graded g because it is the app's pick across several species."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R17",
+     "R19"
+    ],
+    "kind": "range_middle",
+    "how": "The value 125 is the middle of the 120 to 130 degree panoramic field given for bottlenose dolphins and dolphins."
+   },
+   {
+    "path": "params.M",
+    "records": [
+     "R46",
+     "R186",
+     "R28",
+     "R29",
+     "R36"
+    ],
+    "kind": "value",
+    "how": "The one-cone statement comes from R46 and R186; the pigment peaks come from R28, R29 and R36, and the matrix weights themselves are the app's."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R2",
+    "quote": "the retinal resolving power was 2.6-3.3 cycles per degree"
+   },
+   {
+    "record": "R3",
+    "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+   },
+   {
+    "record": "R4",
+    "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+   },
+   {
+    "record": "R5",
+    "quote": "Retinal resolution was calculated as 11.5 cycles/deg under water and 8.7 cycles/deg in air"
+   },
+   {
+    "record": "R11",
+    "quote": "Visual acuity was estimated at 3.95 cycles per degree (CPD)"
+   },
+   {
+    "record": "R46",
+    "quote": "we here demonstrate an absence of S-cones in the retinae of all whales and seals studied"
+   },
+   {
+    "record": "R186",
+    "quote": "These marine mammals have only L-cones (cone monochromacy) and hence are essentially colour-blind."
+   },
+   {
+    "record": "R28",
+    "quote": "bottlenose dolphin RH1 (Tursiops truncatus, λmax = 488 nm)"
+   },
+   {
+    "record": "R29",
+    "quote": "We found a cone spectral sensitivity curve with a peak at about 510 nm."
+   },
+   {
+    "record": "R36",
+    "quote": "Published λmax values for species from Delphinoidea, such as harbor porpoise (Phocoena phocoena) and bottlenose dolphin (Tursiops truncatus), are 522 to 524 nm"
+   },
+   {
+    "record": "R17",
+    "quote": "Tursiops truncatus | Bottlenose dolphin | 2 | < 24 h from stranding (CC 1–2) | Sokolov et al. (1972); Kesarev et al. (1977); Ladygina et al. (1978) | 20–30° binocular field; 120–130, panoramic vision"
+   },
+   {
+    "record": "R19",
+    "quote": "allowing a panoramic vision with a 120–130◦ visual field"
+   },
+   {
+    "record": "R21",
+    "quote": "Tursiops truncatus | Bottlenose dolphin | 2 | < 24 h from stranding (CC 1–2) | Sokolov et al. (1972); Kesarev et al. (1977); Ladygina et al. (1978) | 20–30° binocular field"
+   }
+  ]
+ }
+}

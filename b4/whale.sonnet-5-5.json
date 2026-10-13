@@ -1,0 +1,229 @@
+{
+ "key": "whale",
+ "chip": "Whale, dolphin or seal",
+ "who": "a whale, dolphin or seal",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Cetacea",
+   "Carnivora:Pinnipedia",
+   "Sirenia"
+  ]
+ },
+ "cue": "Almost no colour, a soft picture, and eyes built for dim water.",
+ "version": 1,
+ "modules": [],
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "cpd": {
+   "value": 3.95,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Bolin 2025"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a humpback whale's estimate; whale and dolphin estimates run from about 2.6 to 4.8 and a harbour seal's from 8.7 to 11.5, and the pick of one value for the whole group is the app's"
+  },
+  "M": {
+   "value": "CONE_L",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024"
+   ],
+   "note": "one kind of cone, peaking near 522 nm in dolphins and porpoises; the app applies it to the whole group"
+  },
+  "gain": {
+   "value": 3.16,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Madsen 1976"
+   ],
+   "range": [
+    1,
+    4
+   ],
+   "note": "a bottlenose dolphin was 0.5 log units more sensitive than a person in dim light; the app turns that into a brightness gain"
+  },
+  "sheen": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "many whales and seals have a reflecting layer behind the retina and manatees have none; the strength is the app's guess"
+  }
+ },
+ "matrices": {
+  "CONE_L": {
+   "from_pigments": [
+    522
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "marine-mammals.jsonl:Chi 2024"
+   ],
+   "note": "a single long-wavelength cone kind, with the peak taken from dolphin and porpoise pigments",
+   "rows": [
+    [
+     0.14224,
+     0.50505,
+     0.27248,
+     0.08024
+    ],
+    [
+     0.14224,
+     0.50505,
+     0.27248,
+     0.08024
+    ],
+    [
+     0.14224,
+     0.50505,
+     0.27248,
+     0.08024
+    ]
+   ],
+   "q": [
+    [
+     0.14224,
+     0.50505,
+     0.27248,
+     0.08024
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "One kind of cone",
+   "Whales, dolphins and seals tested so far carry only the long-wavelength kind of cone and have lost the blue-sensitive kind. A bottlenose dolphin's cone pigment peaks between 522 and 524 nanometres. We show the picture the way a single kind of cone would, which leaves almost no colour. A few behaviour tests hint that dolphins can tell two wavelengths apart, and manatees have two cone kinds, so this is the usual case for the group and has exceptions.",
+   [
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Cohen 1982",
+    "marine-mammals.jsonl:Griebel 2002",
+    "marine-mammals.jsonl:Peichl 2001"
+   ],
+   [
+    "params.M",
+    "matrices.CONE_L"
+   ]
+  ],
+  [
+   "m",
+   "The great whales",
+   "Rorquals, right whales, bowhead whales, sperm whales and beaked whales have lost the genes for both kinds of cone pigment. They see with rods alone, and their rod pigments peak between about 483 and 499 nanometres, in the blue-green part of the spectrum.",
+   [
+    "marine-mammals.jsonl:Bischoff 2012",
+    "marine-mammals.jsonl:Fasick 2011",
+    "marine-mammals.jsonl:H 2009",
+    "marine-mammals.jsonl:Meredith 2013"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Sharpness",
+   "Estimates of how fine a detail these animals resolve run from about 2.6 to 3.3 cycles per degree in several toothed whales and 3.3 to 4.8 in baleen whales. A harbour seal comes in near 11.5 under water and a manatee near 1.6. We blur the picture to 3.95, a humpback whale's estimate, which is far less sharp than your own view.",
+   [
+    "marine-mammals.jsonl:Bolin 2025",
+    "marine-mammals.jsonl:Hanke 2009",
+    "marine-mammals.jsonl:Lisney 2018",
+    "marine-mammals.jsonl:Mass 2011",
+    "marine-mammals.jsonl:Murayama 1998"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "A wide view with little overlap",
+   "A dolphin's eyes sit on the sides of its head. Together they cover 120 to 130 degrees, and the two eyes overlap by only 20 to 30 degrees. We leave the field as your camera gives it.",
+   [
+    "marine-mammals.jsonl:JM 2022",
+    "marine-mammals.jsonl:Kremers 2016"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Dim water",
+   "A bottlenose dolphin was half a log unit more sensitive than a person in dim light and a little less sensitive in bright light. Bottlenose dolphins, many whales and seals have a reflecting layer behind the retina that gives light a second pass. Manatees have none. We lift the shadows strongly and add a modest sheen.",
+   [
+    "marine-mammals.jsonl:Bauer 2020",
+    "marine-mammals.jsonl:Madsen 1976",
+    "marine-mammals.jsonl:Smodlaka 2016",
+    "marine-mammals.jsonl:Young 1988"
+   ],
+   [
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "x",
+   "Sound and touch beyond sight",
+   "A bottlenose dolphin makes clicks between 40 and 150 kilohertz and builds a picture from the echoes. A harbour seal can follow the trail of a fish through the water with its whiskers up to 35 seconds after the fish has passed. A phone cannot give either sense, so they are left out of this view.",
+   [
+    "marine-mammals.jsonl:C 2021",
+    "marine-mammals.jsonl:J 2025",
+    "marine-mammals.jsonl:X 2023"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "One sharpness of 3.95 stands for the whole group, one dolphin pigment peak stands for every species, the brightness gain is worked out from one dolphin test, and the strength of the reflecting sheen is a guess.",
+   [
+    "marine-mammals.jsonl:Bolin 2025",
+    "marine-mammals.jsonl:Chi 2024",
+    "marine-mammals.jsonl:Madsen 1976",
+    "marine-mammals.jsonl:Smodlaka 2016"
+   ],
+   [
+    "params.cpd",
+    "params.M",
+    "params.gain",
+    "params.sheen",
+    "matrices.CONE_L"
+   ]
+  ]
+ ],
+ "zones": [],
+ "by": {},
+ "draft": true
+}
