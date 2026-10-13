@@ -114,6 +114,8 @@ Sea otters (13,624 records) and polar bears are marine mammals by habit and carn
     Log 89 (Holland, Borissov and Siemers 2010).
 11. `['x', 'Body heat', 'A common vampire bat feels the body heat of the animal it feeds on through three small pits on its nose. The picture leaves this sense out.']`
     Log 87 (Jones and colleagues 2013, reviewing Kürten and Schmidt 1982 and Gracheva and colleagues 2011).
+12. `['m', 'Horseshoe bats', 'Horseshoe and roundleaf bats send long calls held at one steady pitch. The echo from a flying insect flickers with each beat of its wings, so these bats pick out their prey by its flutter against the still echoes of leaves. When the app knows one of these bats, its echo picture shows only what flutters.']`
+    Log 173, 174 (Denzinger and Schnitzler 2013: calls of 50 to 80 ms in horseshoe bats, mostly one a wingbeat). They hold 10.5% of `bat` records and have lost the ultraviolet cone (log 85).
 
 **The picture.**
 
@@ -127,6 +129,7 @@ Sea otters (13,624 records) and polar bears are marine mammals by habit and carn
 | `pupil` | 'o' | **Invented**; no source found, and with `dof` unset it changes nothing. |
 | `topoS`, `fall` | 0.4 and 0.8 | Peak ganglion cell density low in the back of the retina with horizontally drawn-out isodensity lines, only 2 to 4 times the density elsewhere (log 70), so a weak band. The values are **invented**. The band would sit a little above centre, since the lower back retina looks up and forward; the engine cannot yet move it. |
 | `fov`, `M`, `uvBlue`, `sheen`, `rate`, `persist`, `gate`, `field` | unset | No field of view, flicker rate or colour model is sourced; the ultraviolet cone is lost in several lineages (log 85, 88). |
+| Variant for Rhinolophidae and Hipposideridae | `hold` 70 ms, `thrust` 30; in the echo picture, `gate` 1 (only what moves is drawn bright) | One long call per wingbeat (log 174) and flutter detection (log 173). The timing is **invented** within the 50 to 80 ms call length; a roundleaf bat's shorter calls would shorten the hold. |
 
 **New effects.**
 
@@ -142,6 +145,8 @@ Which phone input could stand in. A phone cannot hear bat calls (ecoObs FAQ), so
 How hard. The drawing is a new mode: depth to brightness with a fall-off, a cone mask, quantized depth, a frame held and dimmed between calls, a call rate that rises as the nearest central depth shrinks, and a blend with the blurred camera image. All of it is shader work on one depth texture, and the hold already exists for the heron. The depth source is the hard part: medium with a small model in the page (cost to be measured), hard with LiDAR or ARCore because the shells need native code.
 
 What would make it beautiful as well as true: one cold colour on black, like moonlight on frost, with the contour bands of search giving way to smooth relief as a target nears, and the strobe audible as rhythm on screen. The approach and buzz give the view a climax that no other view has.
+
+*Flutter glints* (horseshoe and roundleaf bats). In the echo picture of these bats, still surfaces stay as a dim grey relief, and anything that moves with a rhythm, such as wings, leaves or a waving hand, flashes bright at its own beat. The engine's motion map and its `gate` already draw motion alone; the variant draws the echo relief faintly and gates only the brightness. Medium, once the echo picture exists (log 173, 174).
 
 *A sharp band above centre.* The bats measured see best through the low back of the retina (log 70; and a dorsal area in Daubenton's bat, log 74), which would look up and forward. The engine places sharpness only at the centre or along the horizon. A vertical offset for `topoA` or `topoS` would draw it; this is easy once a scientist confirms where the area looks (section 8).
 
