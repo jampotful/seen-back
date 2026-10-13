@@ -1,0 +1,165 @@
+huggingface_hub      0.36.2
+numpy                2.5.2
+onnx                 1.23.2
+onnxconverter-common 1.16.0
+onnxruntime          1.31.0
+open_clip_torch      3.3.0
+pillow               12.3.0
+timm                 1.0.30
+torch                2.8.0+cpu
+torchvision          0.23.0+cpu
+transformers         4.57.6
+[02:30:47] job: model=bioclip25-mobile-fastvit shard=2/8 stages=images
+data_source=pub/data-alachua (species) + pub/data-world (manifest)
+data_made=made_from=5149891a3c0a9d07e93e64942eb83c63821fb6f9 made_at=2026-10-11T01:51:13Z workflow=data run_number=4 published=extra_photo_set_coco-kinds made_from=233121cf24223a85c771136e5952ee02ae56f757 made_at=2026-10-11T05:18:47Z workflow=extradata run_number=2 published=extra_photo_set_coco-kinds made_from=240787540899da5f1db12dc21fbc1d4419e3e19e made_at=2026-10-11T05:19:53Z workflow=extradata run_number=3 published=extra_photo_set_coco-kinds made_from=c4722ddf4cb34722a9696d882c7c8023a635dd65 made_at=2026-10-11T05:22:48Z workflow=extradata run_number=4 published=extra_photo_set_coco-kinds made_from=c5c6c86fdabb266f491798bc2cfbc1dd699d5dd8 made_at=2026-10-11T05:27:17Z workflow=extradata run_number=5 published=inat.json,_iNaturalist's_names_for_the_species_list made_from=99564124dc7c165fb40b5f0e81ba726561df0ffa made_at=2026-10-11T06:52:50Z workflow=traindatas3 run_number=4 published=training_manifest_from_iNaturalist's_open-data_files made_from=febda8ae99334382d7d875c3c569e97431b96aef made_at=2026-10-11T07:11:05Z workflow=traindatas3 run_number=5 
+evalname=world-fit
+manifest_rows=98518
+species=5911
+[02:30:47] + python3 tools/lab/fetch_photos.py data_in/manifest.csv photos --shard 2/8 --mode mod
+fetched 200/12315 (4.0s)
+fetched 400/12315 (7.4s)
+fetched 600/12315 (10.8s)
+fetched 800/12315 (14.3s)
+fetched 1000/12315 (17.7s)
+fetched 1200/12315 (21.1s)
+fetched 1400/12315 (24.6s)
+fetched 1600/12315 (28.1s)
+fetched 1800/12315 (31.9s)
+fetched 2000/12315 (35.4s)
+fetched 2200/12315 (38.9s)
+fetched 2400/12315 (42.3s)
+fetched 2600/12315 (46.0s)
+fetched 2800/12315 (49.5s)
+fetched 3000/12315 (53.0s)
+fetched 3200/12315 (56.5s)
+fetched 3400/12315 (59.9s)
+fetched 3600/12315 (63.3s)
+fetched 3800/12315 (66.7s)
+fetched 4000/12315 (70.2s)
+fetched 4200/12315 (73.7s)
+fetched 4400/12315 (77.2s)
+fetched 4600/12315 (80.6s)
+fetched 4800/12315 (83.8s)
+fetched 5000/12315 (87.1s)
+fetched 5200/12315 (90.5s)
+fetched 5400/12315 (93.9s)
+fetched 5600/12315 (97.4s)
+fetched 5800/12315 (100.8s)
+fetched 6000/12315 (104.3s)
+fetched 6200/12315 (108.0s)
+fetched 6400/12315 (111.5s)
+fetched 6600/12315 (115.2s)
+fetched 6800/12315 (118.7s)
+fetched 7000/12315 (122.3s)
+fetched 7200/12315 (125.8s)
+fetched 7400/12315 (129.4s)
+fetched 7600/12315 (132.9s)
+fetched 7800/12315 (136.4s)
+fetched 8000/12315 (140.0s)
+fetched 8200/12315 (143.5s)
+fetched 8400/12315 (147.2s)
+fetched 8600/12315 (150.7s)
+fetched 8800/12315 (154.3s)
+fetched 9000/12315 (157.8s)
+fetched 9200/12315 (161.0s)
+fetched 9400/12315 (164.4s)
+fetched 9600/12315 (168.0s)
+fetched 9800/12315 (171.5s)
+fetched 10000/12315 (174.9s)
+fetched 10200/12315 (178.3s)
+fetched 10400/12315 (181.7s)
+fetched 10600/12315 (185.1s)
+fetched 10800/12315 (188.7s)
+fetched 11000/12315 (192.2s)
+fetched 11200/12315 (195.6s)
+fetched 11400/12315 (199.0s)
+fetched 11600/12315 (202.4s)
+fetched 11800/12315 (205.7s)
+fetched 12000/12315 (209.2s)
+fetched 12200/12315 (212.7s)
+photos: 12315 rows, 12315 to fetch, 0 failed, 214.9s
+[02:34:23] exit 0
+[02:34:23] + python3 -u tools/lab/lab.py images --model bioclip25-mobile-fastvit --manifest data_in/manifest.csv --photos photos --shard 2/8 --shard-mode mod --evalname world-fit --out art/bioclip25-mobile-fastvit
+images: bioclip25-mobile-fastvit, eval world-fit, shard 2/8, 12315 rows
+[0;93m2026-10-13 02:34:25.656983793 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+loaded bioclip25-mobile-fastvit via onnx in 2.0s
+  images 32/12315, 33.27 photos/s
+  images 192/12315, 34.00 photos/s
+  images 352/12315, 32.94 photos/s
+  images 512/12315, 32.88 photos/s
+  images 672/12315, 32.99 photos/s
+  images 832/12315, 33.18 photos/s
+  images 992/12315, 33.32 photos/s
+  images 1152/12315, 33.47 photos/s
+  images 1312/12315, 33.59 photos/s
+  images 1472/12315, 33.69 photos/s
+  images 1632/12315, 33.77 photos/s
+  images 1792/12315, 33.75 photos/s
+  images 1952/12315, 33.78 photos/s
+  images 2112/12315, 33.83 photos/s
+  images 2272/12315, 33.88 photos/s
+  images 2432/12315, 33.92 photos/s
+  images 2592/12315, 33.96 photos/s
+  images 2752/12315, 33.99 photos/s
+  images 2912/12315, 34.02 photos/s
+  images 3072/12315, 34.03 photos/s
+  images 3232/12315, 34.05 photos/s
+  images 3392/12315, 34.07 photos/s
+  images 3552/12315, 34.09 photos/s
+  images 3712/12315, 34.11 photos/s
+  images 3872/12315, 34.11 photos/s
+  images 4032/12315, 34.13 photos/s
+  images 4192/12315, 34.15 photos/s
+  images 4352/12315, 34.15 photos/s
+  images 4512/12315, 34.17 photos/s
+  images 4672/12315, 34.19 photos/s
+  images 4832/12315, 34.20 photos/s
+  images 4992/12315, 34.21 photos/s
+  images 5152/12315, 34.22 photos/s
+  images 5312/12315, 34.23 photos/s
+  images 5472/12315, 34.24 photos/s
+  images 5632/12315, 34.25 photos/s
+  images 5792/12315, 34.26 photos/s
+  images 5952/12315, 34.25 photos/s
+  images 6112/12315, 34.24 photos/s
+  images 6272/12315, 34.23 photos/s
+  images 6432/12315, 34.24 photos/s
+  images 6592/12315, 34.24 photos/s
+  images 6752/12315, 34.23 photos/s
+  images 6912/12315, 34.23 photos/s
+  images 7072/12315, 34.24 photos/s
+  images 7232/12315, 34.24 photos/s
+  images 7392/12315, 34.25 photos/s
+  images 7552/12315, 34.25 photos/s
+  images 7712/12315, 34.26 photos/s
+  images 7872/12315, 34.27 photos/s
+  images 8032/12315, 34.26 photos/s
+  images 8192/12315, 34.26 photos/s
+  images 8352/12315, 34.27 photos/s
+  images 8512/12315, 34.27 photos/s
+  images 8672/12315, 34.27 photos/s
+  images 8832/12315, 34.27 photos/s
+  images 8992/12315, 34.27 photos/s
+  images 9152/12315, 34.28 photos/s
+  images 9312/12315, 34.26 photos/s
+  images 9472/12315, 34.26 photos/s
+  images 9632/12315, 34.26 photos/s
+  images 9792/12315, 34.27 photos/s
+  images 9952/12315, 34.27 photos/s
+  images 10112/12315, 34.27 photos/s
+  images 10272/12315, 34.27 photos/s
+  images 10432/12315, 34.27 photos/s
+  images 10592/12315, 34.28 photos/s
+  images 10752/12315, 34.28 photos/s
+  images 10912/12315, 34.29 photos/s
+  images 11072/12315, 34.29 photos/s
+  images 11232/12315, 34.29 photos/s
+  images 11392/12315, 34.28 photos/s
+  images 11552/12315, 34.29 photos/s
+  images 11712/12315, 34.30 photos/s
+  images 11872/12315, 34.30 photos/s
+  images 12032/12315, 34.31 photos/s
+  images 12192/12315, 34.30 photos/s
+images: 12315 embedded, 0 skipped, 359.1s (34.29 photos/s)
+[02:40:29] exit 0
+[02:40:29] job done, fail=0
