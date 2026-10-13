@@ -1,0 +1,1474 @@
+{
+ "about": "The visibility floor (docs/ENGINE-DESIGN.md, section 5): for each parameter of a view, at each value measured, the smallest change whose renders differ by more than the threshold in the 95th percentile of delta E*ab, on a still picture at 390 by 844 CSS pixels and a device pixel ratio of 2. Entries are [value, smallest visible change], or [value, 'invisible', the largest delta E found]. Made by test/check4.js floor; the tuning panel steps by these.",
+ "threshold": {
+  "value": 2.3,
+  "verified": false,
+  "note": "2.3 is the JND_CIE1976 constant of the colour-science Python library (colour/difference/delta_e.py, read 13 October 2026), which cites Mokrzycki and Tatol 2011; the design cites Mahy, Van Eycken and Oosterlinck 1994. Neither paper was opened, so the figure is unverified at its primary source. Calibration on the owner's phone (section 5) rescales it in any case."
+ },
+ "eye_model": "a Gaussian blur of one device pixel before the comparison, the app's own simplification in place of a contrast sensitivity model",
+ "runs": [
+  {
+   "run": "engines 72, linux-chromium (ci branch, runs/engines/72-linux-chromium)",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 3,
+   "partial": true,
+   "note": "Stopped at its time limit after 21 of the jumper view's parameters; the rest wait for another run. Measured on a still frame with the gaze pinned at the centre and the strip drawing, so every parameter that acts only on movement (glow, living, glowC, and the front zone's living weight) shows 'invisible' with a delta E of 0 here: invisible on a still picture, not measured on a moving one."
+  },
+  {
+   "run": "engines 73, linux-chromium (ci branch, runs/engines/73-linux-chromium), from run/engines/linux-floor-jumper2",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 3,
+   "partial": true,
+   "note": "Skipped the 21 parameters run 72 measured and added 35 more. The browser closed after gaze.floor (page.waitForTimeout failed), so any parameter after it in the harness's order waits for a third run. Still frame, gaze pinned, as run 72."
+  },
+  {
+   "run": "engines 76, linux-chromium (ci branch, runs/engines/76-linux-chromium), from run/engines/linux-floor-jumper4",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 3,
+   "partial": false,
+   "note": "The last 8 of the jumper view's 64 parameters, after gaze.floor. All 8 left the still picture unchanged: the gaze's tracking and sleep timings act through time, spectrum.neutral draws only with &draw=neutral and pace.ratio only during a replay. Runs 74 and 75 (the same request) measured nothing because of a fault in the harness, fixed before this run."
+  },
+  {
+   "run": "engines 77, linux-chromium (ci branch, runs/engines/77-linux-chromium), from run/engines/linux-floor-moving2",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 1,
+   "partial": true,
+   "moving": true,
+   "note": "The first moving-clip run: 31 of the parameters the still picture left invisible before its time limit; recorded under 'moving'. Six stayed invisible even moving: params.cpd, params.glow, zones.front.deg[0], zones.gaze.uvR, zones.fovea.glow and zones.fovea.mag."
+  }
+ ],
+ "floor": {
+  "jumper": {
+   "params.fov": [
+    [
+     210,
+     4.22
+    ],
+    [
+     270,
+     8.09
+    ],
+    [
+     330,
+     10.2
+    ]
+   ],
+   "params.cpd": [
+    [
+     0.75,
+     "invisible",
+     2.159
+    ],
+    [
+     2.05,
+     "invisible",
+     0.845
+    ],
+    [
+     3.35,
+     "invisible",
+     0.613
+    ]
+   ],
+   "params.glow": [
+    [
+     0.3333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "params.living": [
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     1.5,
+     "invisible",
+     0
+    ],
+    [
+     2.5,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[0]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[1]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[2]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.deg[0]": [
+    [
+     63.3333,
+     "invisible",
+     0.845
+    ],
+    [
+     110,
+     "invisible",
+     0.585
+    ],
+    [
+     156.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.deg[1]": [
+    [
+     63.3333,
+     "invisible",
+     2.26
+    ],
+    [
+     110,
+     "invisible",
+     1.245
+    ],
+    [
+     156.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.soft": [
+    [
+     0.0833,
+     "invisible",
+     0
+    ],
+    [
+     0.25,
+     "invisible",
+     0.389
+    ],
+    [
+     0.4167,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.cpd": [
+    [
+     0.8333,
+     0.371
+    ],
+    [
+     2.1,
+     "invisible",
+     2.073
+    ],
+    [
+     3.3667,
+     "invisible",
+     0.801
+    ]
+   ],
+   "zones.front.living": [
+    [
+     0.6667,
+     "invisible",
+     0
+    ],
+    [
+     2,
+     "invisible",
+     0
+    ],
+    [
+     3.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.deg[0]": [
+    [
+     7.083,
+     4.63
+    ],
+    [
+     20.25,
+     2.24
+    ],
+    [
+     33.4167,
+     "invisible",
+     1.853
+    ]
+   ],
+   "zones.gaze.deg[1]": [
+    [
+     7.0833,
+     "invisible",
+     0
+    ],
+    [
+     20.25,
+     "invisible",
+     0.292
+    ],
+    [
+     33.4167,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.tilt[0]": [
+    [
+     7.5,
+     18.3
+    ],
+    [
+     22.5,
+     14.8
+    ],
+    [
+     37.5,
+     "invisible",
+     0.269
+    ]
+   ],
+   "zones.gaze.tilt[1]": [
+    [
+     7.5,
+     16.2
+    ],
+    [
+     22.5,
+     "invisible",
+     1.964
+    ],
+    [
+     37.5,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.gap": [
+    [
+     0.8333,
+     1.64
+    ],
+    [
+     2.5,
+     1.72
+    ],
+    [
+     4.1667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.tip": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.soft": [
+    [
+     0.0167,
+     0.0141
+    ],
+    [
+     0.05,
+     0.0133
+    ],
+    [
+     0.0833,
+     "invisible",
+     1.737
+    ]
+   ],
+   "zones.gaze.cpd": [
+    [
+     2.917,
+     2.27
+    ],
+    [
+     7.75,
+     "invisible",
+     1.209
+    ],
+    [
+     12.5833,
+     "invisible",
+     0.527
+    ]
+   ],
+   "zones.gaze.uv": [
+    [
+     0.3333,
+     0.0332
+    ],
+    [
+     1,
+     0.0605
+    ],
+    [
+     1.667,
+     0.0977
+    ]
+   ],
+   "zones.gaze.uvR": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.glow": [
+    [
+     0.3333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.living": [
+    [
+     0.6667,
+     "invisible",
+     0
+    ],
+    [
+     2,
+     "invisible",
+     0
+    ],
+    [
+     3.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.mag": [
+    [
+     1.1667,
+     "invisible",
+     0
+    ],
+    [
+     1.5,
+     "invisible",
+     0
+    ],
+    [
+     1.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.deg[0]": [
+    [
+     4.1667,
+     "invisible",
+     0
+    ],
+    [
+     10.5,
+     "invisible",
+     0
+    ],
+    [
+     16.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.deg[1]": [
+    [
+     4.1667,
+     "invisible",
+     0
+    ],
+    [
+     10.5,
+     "invisible",
+     0
+    ],
+    [
+     16.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.soft": [
+    [
+     0.0167,
+     "invisible",
+     1.255
+    ],
+    [
+     0.05,
+     0.0406
+    ],
+    [
+     0.0833,
+     "invisible",
+     0.941
+    ]
+   ],
+   "zones.fovea.cpd": [
+    [
+     2.9167,
+     "invisible",
+     0.522
+    ],
+    [
+     7.75,
+     "invisible",
+     0
+    ],
+    [
+     12.5833,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.uv": [
+    [
+     0.3333,
+     0.453
+    ],
+    [
+     1,
+     0.594
+    ],
+    [
+     1.6667,
+     "invisible",
+     0.561
+    ]
+   ],
+   "zones.fovea.uvR": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.glow": [
+    [
+     0.3333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.living": [
+    [
+     0.6667,
+     "invisible",
+     0
+    ],
+    [
+     2,
+     "invisible",
+     0
+    ],
+    [
+     3.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.fovea.mag": [
+    [
+     1.1667,
+     "invisible",
+     1.096
+    ],
+    [
+     1.5,
+     "invisible",
+     1.036
+    ],
+    [
+     1.8333,
+     "invisible",
+     0.521
+    ]
+   ],
+   "gaze.saccade[0]": [
+    [
+     33.3333,
+     "invisible",
+     0
+    ],
+    [
+     100,
+     "invisible",
+     0
+    ],
+    [
+     166.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.saccade[1]": [
+    [
+     33.3333,
+     "invisible",
+     0
+    ],
+    [
+     100,
+     "invisible",
+     0
+    ],
+    [
+     166.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sweep[0]": [
+    [
+     1.6667,
+     "invisible",
+     0
+    ],
+    [
+     5,
+     "invisible",
+     0
+    ],
+    [
+     8.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sweep[1]": [
+    [
+     1.6667,
+     "invisible",
+     0
+    ],
+    [
+     5,
+     "invisible",
+     0
+    ],
+    [
+     8.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.twist[0]": [
+    [
+     1333.3333,
+     "invisible",
+     0
+    ],
+    [
+     4000,
+     "invisible",
+     0
+    ],
+    [
+     6666.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.twist[1]": [
+    [
+     1333.3333,
+     "invisible",
+     0
+    ],
+    [
+     4000,
+     "invisible",
+     0
+    ],
+    [
+     6666.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.twist[2]": [
+    [
+     1333.3333,
+     "invisible",
+     0
+    ],
+    [
+     4000,
+     "invisible",
+     0
+    ],
+    [
+     6666.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.examine[0]": [
+    [
+     10416.6667,
+     "invisible",
+     0
+    ],
+    [
+     30250,
+     "invisible",
+     0
+    ],
+    [
+     50083.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.examine[1]": [
+    [
+     10416.6667,
+     "invisible",
+     0
+    ],
+    [
+     30250,
+     "invisible",
+     0
+    ],
+    [
+     50083.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.hold": [
+    [
+     833.3333,
+     "invisible",
+     0
+    ],
+    [
+     2500,
+     "invisible",
+     0
+    ],
+    [
+     4166.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.back": [
+    [
+     0.8333,
+     "invisible",
+     0
+    ],
+    [
+     2.5,
+     "invisible",
+     0
+    ],
+    [
+     4.1667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.pursuit": [
+    [
+     6.6667,
+     "invisible",
+     0
+    ],
+    [
+     20,
+     "invisible",
+     0
+    ],
+    [
+     33.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.ior": [
+    [
+     2500,
+     "invisible",
+     0
+    ],
+    [
+     7500,
+     "invisible",
+     0
+    ],
+    [
+     12500,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.iorDeg": [
+    [
+     5.8333,
+     "invisible",
+     0
+    ],
+    [
+     15.5,
+     "invisible",
+     0
+    ],
+    [
+     25.1667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.habit": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.surround": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.any": [
+    [
+     0.3333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.living": [
+    [
+     0.6667,
+     "invisible",
+     0
+    ],
+    [
+     2,
+     "invisible",
+     0
+    ],
+    [
+     3.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.distract": [
+    [
+     1.5,
+     "invisible",
+     0
+    ],
+    [
+     2.5,
+     "invisible",
+     0
+    ],
+    [
+     3.5,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.wander[0]": [
+    [
+     10833.3333,
+     "invisible",
+     0
+    ],
+    [
+     30500,
+     "invisible",
+     0
+    ],
+    [
+     50166.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.wander[1]": [
+    [
+     10833.3333,
+     "invisible",
+     0
+    ],
+    [
+     30500,
+     "invisible",
+     0
+    ],
+    [
+     50166.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.floor": [
+    [
+     0.0833,
+     "invisible",
+     0
+    ],
+    [
+     0.25,
+     "invisible",
+     0
+    ],
+    [
+     0.4167,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.trackDeg": [
+    [
+     14.333333333333334,
+     "invisible",
+     0
+    ],
+    [
+     41,
+     "invisible",
+     0
+    ],
+    [
+     67.66666666666667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sleep.after": [
+    [
+     3750,
+     "invisible",
+     0
+    ],
+    [
+     10250,
+     "invisible",
+     0
+    ],
+    [
+     16750,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sleep.bout[0]": [
+    [
+     20833.333333333332,
+     "invisible",
+     0
+    ],
+    [
+     60500,
+     "invisible",
+     0
+    ],
+    [
+     100166.66666666667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sleep.bout[1]": [
+    [
+     20833.333333333332,
+     "invisible",
+     0
+    ],
+    [
+     60500,
+     "invisible",
+     0
+    ],
+    [
+     100166.66666666667,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sleep.gap[0]": [
+    [
+     204166.66666666666,
+     "invisible",
+     0
+    ],
+    [
+     602500,
+     "invisible",
+     0
+    ],
+    [
+     1000833.3333333334,
+     "invisible",
+     0
+    ]
+   ],
+   "gaze.sleep.gap[1]": [
+    [
+     204166.66666666666,
+     "invisible",
+     0
+    ],
+    [
+     602500,
+     "invisible",
+     0
+    ],
+    [
+     1000833.3333333334,
+     "invisible",
+     0
+    ]
+   ],
+   "spectrum.neutral": [
+    [
+     0.3333333333333333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6666666666666667,
+     "invisible",
+     0
+    ]
+   ],
+   "pace.ratio": [
+    [
+     1.8333333333333335,
+     "invisible",
+     0
+    ],
+    [
+     3.5,
+     "invisible",
+     0
+    ],
+    [
+     5.166666666666667,
+     "invisible",
+     0
+    ]
+   ]
+  }
+ },
+ "verdict": {
+  "about": "Read from the runs above on 13 October 2026 (burst 3). 'stop' lists parameters whose largest change across their range never reached the threshold on a still picture while still changing it: research may stop refining them for the jumper view. 'visible' gives the floor where it was found; research on these continues until a value's uncertainty is smaller than its floor. 'still_zero' lists parameters that did not change the still render at all; they act on movement or on the gaze's timing, or are hidden behind another zone, and wait for a moving-clip run before anyone decides.",
+  "jumper": {
+   "stop": [
+    "params.cpd",
+    "zones.fovea.cpd",
+    "zones.fovea.mag",
+    "zones.front.deg[0]",
+    "zones.front.deg[1]",
+    "zones.front.soft",
+    "zones.gaze.deg[1]"
+   ],
+   "visible": {
+    "params.fov": [
+     [
+      210,
+      4.22
+     ],
+     [
+      270,
+      8.09
+     ],
+     [
+      330,
+      10.2
+     ]
+    ],
+    "zones.front.cpd": [
+     [
+      0.8333,
+      0.371
+     ]
+    ],
+    "zones.gaze.deg[0]": [
+     [
+      7.083,
+      4.63
+     ],
+     [
+      20.25,
+      2.24
+     ]
+    ],
+    "zones.gaze.tilt[0]": [
+     [
+      7.5,
+      18.3
+     ],
+     [
+      22.5,
+      14.8
+     ]
+    ],
+    "zones.gaze.tilt[1]": [
+     [
+      7.5,
+      16.2
+     ]
+    ],
+    "zones.gaze.gap": [
+     [
+      0.8333,
+      1.64
+     ],
+     [
+      2.5,
+      1.72
+     ]
+    ],
+    "zones.gaze.soft": [
+     [
+      0.0167,
+      0.0141
+     ],
+     [
+      0.05,
+      0.0133
+     ]
+    ],
+    "zones.gaze.cpd": [
+     [
+      2.917,
+      2.27
+     ]
+    ],
+    "zones.gaze.uv": [
+     [
+      0.3333,
+      0.0332
+     ],
+     [
+      1,
+      0.0605
+     ],
+     [
+      1.667,
+      0.0977
+     ]
+    ],
+    "zones.fovea.soft": [
+     [
+      0.05,
+      0.0406
+     ]
+    ],
+    "zones.fovea.uv": [
+     [
+      0.3333,
+      0.453
+     ],
+     [
+      1,
+      0.594
+     ]
+    ]
+   },
+   "still_zero": [
+    "gaze.any",
+    "gaze.back",
+    "gaze.distract",
+    "gaze.examine[0]",
+    "gaze.examine[1]",
+    "gaze.floor",
+    "gaze.habit",
+    "gaze.hold",
+    "gaze.ior",
+    "gaze.iorDeg",
+    "gaze.living",
+    "gaze.pursuit",
+    "gaze.saccade[0]",
+    "gaze.saccade[1]",
+    "gaze.surround",
+    "gaze.sweep[0]",
+    "gaze.sweep[1]",
+    "gaze.twist[0]",
+    "gaze.twist[1]",
+    "gaze.twist[2]",
+    "gaze.wander[0]",
+    "gaze.wander[1]",
+    "params.glow",
+    "params.glowC[0]",
+    "params.glowC[1]",
+    "params.glowC[2]",
+    "params.living",
+    "zones.fovea.deg[0]",
+    "zones.fovea.deg[1]",
+    "zones.fovea.glow",
+    "zones.fovea.living",
+    "zones.fovea.uvR",
+    "zones.front.living",
+    "zones.gaze.glow",
+    "zones.gaze.living",
+    "zones.gaze.mag",
+    "zones.gaze.tip",
+    "zones.gaze.uvR"
+   ]
+  }
+ },
+ "moving": {
+  "about": "Floors on the moving clip (FLOOR_MOVING=1, docs/ENGINE.md, The visibility floor), for the parameters the still picture left invisible, one value each. Kept apart from 'floor' and not used for the sliders' steps: the clip's own noise between two renders at one value reached a delta E p95 of 5.6 in software graphics, so the threshold was 8.4, and the smallest floors (at the first step tried) may still be noise. Treat them as a first look until a run with less noise, or a phone, confirms them.",
+  "threshold": 8.388,
+  "noise": 5.592,
+  "partial": true,
+  "jumper": {
+   "params.cpd": [
+    [
+     0.5,
+     "invisible",
+     6.896
+    ]
+   ],
+   "params.glow": [
+    [
+     0.9,
+     "invisible",
+     5.697
+    ]
+   ],
+   "params.living": [
+    [
+     0,
+     0.176
+    ]
+   ],
+   "params.glowC[0]": [
+    [
+     0.78,
+     0.0547
+    ]
+   ],
+   "params.glowC[1]": [
+    [
+     1,
+     0.0293
+    ]
+   ],
+   "params.glowC[2]": [
+    [
+     0.62,
+     0.188
+    ]
+   ],
+   "zones.front.deg[0]": [
+    [
+     114,
+     "invisible",
+     8.342
+    ]
+   ],
+   "zones.front.deg[1]": [
+    [
+     98,
+     3.83
+    ]
+   ],
+   "zones.front.soft": [
+    [
+     0.2,
+     0.0156
+    ]
+   ],
+   "zones.front.living": [
+    [
+     1.6,
+     0.00391
+    ]
+   ],
+   "zones.gaze.deg[1]": [
+    [
+     21,
+     0.347
+    ]
+   ],
+   "zones.gaze.tip": [
+    [
+     0.45,
+     0.0303
+    ]
+   ],
+   "zones.gaze.uvR": [
+    [
+     0.5,
+     "invisible",
+     7.079
+    ]
+   ],
+   "zones.gaze.glow": [
+    [
+     0,
+     0.0156
+    ]
+   ],
+   "zones.gaze.living": [
+    [
+     0,
+     0.25
+    ]
+   ],
+   "zones.gaze.mag": [
+    [
+     1.25,
+     0.242
+    ]
+   ],
+   "zones.fovea.deg[0]": [
+    [
+     5,
+     0.186
+    ]
+   ],
+   "zones.fovea.deg[1]": [
+    [
+     4,
+     0.668
+    ]
+   ],
+   "zones.fovea.cpd": [
+    [
+     3.6,
+     0.113
+    ]
+   ],
+   "zones.fovea.uvR": [
+    [
+     0.5,
+     0.0156
+    ]
+   ],
+   "zones.fovea.glow": [
+    [
+     0,
+     "invisible",
+     7.631
+    ]
+   ],
+   "zones.fovea.living": [
+    [
+     0,
+     0.133
+    ]
+   ],
+   "zones.fovea.mag": [
+    [
+     1.25,
+     "invisible",
+     4.809
+    ]
+   ],
+   "gaze.saccade[0]": [
+    [
+     40,
+     4.3
+    ]
+   ],
+   "gaze.saccade[1]": [
+    [
+     4,
+     3.13
+    ]
+   ],
+   "gaze.sweep[0]": [
+    [
+     2,
+     0.0977
+    ]
+   ],
+   "gaze.sweep[1]": [
+    [
+     1.2,
+     0.293
+    ]
+   ],
+   "gaze.twist[0]": [
+    [
+     25,
+     54.7
+    ]
+   ],
+   "gaze.twist[1]": [
+    [
+     2000,
+     3750
+    ]
+   ],
+   "gaze.twist[2]": [
+    [
+     3500,
+     500
+    ]
+   ],
+   "gaze.examine[0]": [
+    [
+     4000,
+     523
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,30 @@
+name: world
+# World photos for the 33 groups of docs/COVERAGE.md, from iNaturalist's open-data files (ci/world/world.sh,
+# tools/world/). Start it by pushing a commit to a branch named run/world/<anything>. The lists go to
+# pub/data-world; the summary and the log come back on ci as runs/world/<run>.
+on:
+  push:
+    branches: ['run/world/**']
+permissions:
+  contents: write
+concurrency:
+  group: world-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: python3 -m pip install --quiet numpy matplotlib
+      - name: choose, check and publish
+        run: bash ci/world/world.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh world out

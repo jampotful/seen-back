@@ -22,9 +22,131 @@
   var sideAsked = /[?&]side=(\d+)/.exec(location.search || ''), perfN = 0, perfSum = 0;
   if (engine && sideAsked) engine.setSide(+sideAsked[1]);
 
+  // ---------- the phone's own senses, for views that ask for them (build 23)
+  // The motion sensors tell the movement map how fast the phone is turning and whether it lies still; the microphone turns low
+  // sounds into ripples for creatures that sense vibration and moving air. Each input stays off behind SENSE_ON until the app's
+  // thread turns it on (a visit with ?try= may turn them on with &sense=motion,mic), and nothing asks for a permission until the
+  // person taps the line that says, in plain words, what the input is for. docs/ENGINE.md describes both.
+  var SENSE_ON = { motion: false, mic: false };
+  if (TRY_KEYS.length) ((/[?&]sense=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').forEach(function (k) { if (SENSE_ON.hasOwnProperty(k)) SENSE_ON[k] = true; });
+  var senses = (function () {
+    var want = null, motionOn = false, rotS = 0, accMean = 0, accDev = 0, gotMotion = 0, lastJolt = 0, mic = null, micAsked = false, rips = [], line = null;
+    var SAY = { motion: 'This view can feel the phone move and lie still. Tap to let it use the motion sensors.',
+      mic: 'This view can show low sounds as ripples. Tap to let it listen through the microphone. Nothing is recorded or kept.' };
+    // module 5, motion: the turn of the phone since the last snap, in degrees (the locked world, &draw=lock), and its thrusts forward
+    // (the arm as the neck, &draw=arm). Which way each rotation axis moves the picture is the app's reading of the specification and
+    // waits for a phone to confirm it.
+    var stabX = 0, stabY = 0, snapAt = 0, lastM = 0, thrustAt = 0;
+    // tilt and heading (module 5): the phone's roll in the screen's plane and the camera's elevation, from gravity, and the compass
+    // heading. iOS reports gravity with the opposite sign to Android, so its readings are turned round. &roll=, &elev= and &heading=
+    // set them by hand for checking. Which way each one turns the picture waits for a phone to confirm it.
+    var POSE_SET = {}; ['roll', 'elev', 'heading'].forEach(function (k) { var m = new RegExp('[?&]' + k + '=(-?[0-9.]+)').exec(location.search || ''); if (m) POSE_SET[k] = +m[1]; });
+    var IOS = !!(window.DeviceMotionEvent && typeof window.DeviceMotionEvent.requestPermission === 'function'), roll = 0, elev = 0, heading = null;
+    function onOrient(e) {
+      if (typeof e.webkitCompassHeading === 'number') heading = e.webkitCompassHeading;
+      else if (e.absolute && typeof e.alpha === 'number') heading = (360 - e.alpha) % 360;
+    }
+    function onMotion(e) {
+      var r = e.rotationRate || {}, a = e.acceleration, g = e.accelerationIncludingGravity, now = performance.now(), am;
+      var dts = lastM ? Math.min((now - lastM) / 1000, .1) : 0; lastM = now;
+      stabX += (r.gamma || 0) * dts; stabY += (r.beta || 0) * dts;   // held upright: gamma turns the phone left and right, beta tips it up and down
+      if (a && a.z !== null && a.z !== undefined && want && want.motion && eyeP && eyeP.arm && Math.abs(a.z) > ((eyeP.motion && eyeP.motion.thrust) || 3) && now - thrustAt > 250) {
+        thrustAt = now; if (engine && engine.kick) engine.kick(); if (navigator.vibrate) try { navigator.vibrate(12); } catch (x) { /* refused */ }
+      }
+      gotMotion = now;
+      if (g && g.x !== null && g.x !== undefined) {
+        var sg = IOS ? -1 : 1, gx = g.x * sg, gy = g.y * sg, gz = g.z * sg, gm = Math.sqrt(gx * gx + gy * gy + gz * gz) || 1;
+        if (gx * gx + gy * gy > .5) roll = Math.atan2(gx, gy) * 180 / Math.PI;
+        elev = -Math.asin(clamp(gz / gm, -1, 1)) * 180 / Math.PI;
+      }
+      rotS = lerp(rotS, Math.sqrt((r.alpha || 0) * (r.alpha || 0) + (r.beta || 0) * (r.beta || 0) + (r.gamma || 0) * (r.gamma || 0)), .2);   // degrees a second
+      if (a && a.x !== null && a.x !== undefined) am = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+      else if (g && g.x !== null && g.x !== undefined) { am = Math.sqrt(g.x * g.x + g.y * g.y + g.z * g.z); accMean = lerp(accMean || am, am, .02); am = Math.abs(am - accMean); }
+      else return;
+      accDev = lerp(accDev, am, .1);
+      if (want && want.jolt && am > 2.2 && now - lastJolt > 140) {   // a knock on the phone, or on the table it lies on, starts a ripple from that side
+        lastJolt = now; var dx = a ? -(a.x || 0) : 0, dy = a ? (a.y || 0) : 0, d = Math.sqrt(dx * dx + dy * dy) || 1;
+        rips.push({ x: .32 * dx / d, y: .32 * dy / d, t: now, a: clamp(am / 6, .3, 1) });
+      }
+    }
+    function startMotion() {
+      if (motionOn) return;
+      motionOn = true; window.addEventListener('devicemotion', onMotion);
+      window.addEventListener('ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation', onOrient);
+    }
+    function startMic() {
+      if (mic || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+      micAsked = true; paint();
+      navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }, video: false }).then(function (st) {
+        var AC = window.AudioContext || window.webkitAudioContext, ctx = new AC(), lo = (want && want.mic && want.mic[0]) || 60, hi = (want && want.mic && want.mic[1]) || 400;
+        var src = ctx.createMediaStreamSource(st), bp = ctx.createBiquadFilter(), an = ctx.createAnalyser(), c = Math.sqrt(lo * hi);
+        bp.type = 'bandpass'; bp.frequency.value = c; bp.Q.value = c / (hi - lo); an.fftSize = 1024;
+        src.connect(bp); bp.connect(an); if (ctx.resume) ctx.resume();
+        mic = { st: st, ctx: ctx, an: an, buf: new Float32Array(an.fftSize), mean: 0, last: 0 };
+        if (!want || !want.mic) stopMic();
+        paint();
+      }, function () { paint(); });
+    }
+    function stopMic() {
+      if (!mic) return;
+      try { mic.st.getTracks().forEach(function (t) { t.stop(); }); mic.ctx.close(); } catch (e) {}
+      mic = null;
+    }
+    function paint() {                              // the one line on the picture that offers an input, while the view wants one that is off
+      var need = want && S.screen === 'animal' ? (want.motion && SENSE_ON.motion && !motionOn ? 'motion' : want.mic && SENSE_ON.mic && !mic && !micAsked ? 'mic' : '') : '';
+      if (!need) { if (line) line.hidden = true; return; }
+      if (!line) {
+        line = document.createElement('button'); line.type = 'button'; line.className = 'line'; line.id = 'senseLine';
+        var at = $('svcHud'); at.parentNode.insertBefore(line, at.nextSibling);
+        line.addEventListener('click', function () {
+          var k = line.dataset.k;
+          if (k === 'motion') {
+            var D = window.DeviceMotionEvent;
+            if (D && typeof D.requestPermission === 'function') D.requestPermission().then(function (s) { if (s === 'granted') startMotion(); paint(); }, function () { paint(); });
+            else { startMotion(); paint(); }
+          } else if (k === 'mic') startMic();
+        });
+      }
+      line.dataset.k = need; line.textContent = SAY[need]; line.hidden = false;
+    }
+    window.addEventListener('pagehide', stopMic);
+    return {
+      want: function (s) { want = s || null; if (!want || !want.mic) { stopMic(); micAsked = false; } paint(); },
+      paint: paint,
+      still: function () { return !motionOn || performance.now() - gotMotion > 1500 || (rotS < 4 && accDev < .08); },   // without the sensors, the picture alone decides
+      turning: function () { return motionOn ? rotS : 0; },
+      pose: function () { return { roll: 'roll' in POSE_SET ? POSE_SET.roll : roll, elev: 'elev' in POSE_SET ? POSE_SET.elev : elev, heading: 'heading' in POSE_SET ? POSE_SET.heading : heading }; },
+      stab: function (cfg, now) {                     // degrees to shift the picture by, so the world holds still until the next snap
+        var hold = (cfg && cfg.holdMs) || 700, most = (cfg && cfg.maxDeg) || 8;
+        if (!motionOn || now - snapAt > hold || Math.abs(stabX) > most || Math.abs(stabY) > most) { stabX = 0; stabY = 0; snapAt = now; }
+        return [stabX, -stabY];
+      },
+      // ripples for the view pass: up to four, as [x, y, age in seconds, strength], in the picture's own units from its centre
+      fx: function (fx, now) {
+        if (mic && want && want.mic) {
+          mic.an.getFloatTimeDomainData(mic.buf);
+          var s = 0, b = mic.buf; for (var i = 0; i < b.length; i++) s += b[i] * b[i];
+          var lv = clamp((20 * Math.log10(Math.sqrt(s / b.length) + 1e-6) + 62) / 40, 0, 1);   // -62 dB of full scale is nothing, -22 is the loudest
+          mic.mean = lerp(mic.mean, lv, .02);
+          if (lv > mic.mean + .16 && now - mic.last > 170) { mic.last = now; rips.push({ x: (Math.random() - .5) * .3, y: (Math.random() - .5) * .3, t: now, a: clamp(lv, .3, 1) }); }
+        }
+        while (rips.length && (now - rips[0].t > 2600 || rips.length > 4)) rips.shift();
+        if (!rips.length) return;
+        fx.rip = rips.map(function (r) { return [r.x, r.y, (now - r.t) / 1000, r.a]; }); fx.ripK = calm ? .3 : 1;
+      }
+    };
+  })();
+
   // ---------- small helpers
   function show(id, on) { $(id).hidden = !on; }
-  function msg(t, ms) { clearTimeout(msgTimer); $('msg').textContent = t || ''; if (t && ms) msgTimer = setTimeout(function () { $('msg').textContent = ''; }, ms); }
+  // A line that is waiting carries a bar under it: one that slides while the wait has no known end (the line holds an ellipsis),
+  // and one that fills where the line says how far it has come ("12 of 310 MB").
+  function waitMark(el, text) {
+    var t = text === undefined ? el.textContent : text, m = /(\d+) of (\d+) MB/.exec(t || ''), on = !!m || /\u2026|\.\.\./.test(t || '');
+    el.classList.toggle('wait', on); el.classList.toggle('det', !!m);
+    if (m) el.style.setProperty('--p', String(Math.max(0, Math.min(1, +m[1] / Math.max(1, +m[2]))))); else el.style.removeProperty('--p');
+  }
+  function msg(t, ms) { clearTimeout(msgTimer); $('msg').textContent = t || ''; waitMark($('msg')); if (t && ms) msgTimer = setTimeout(function () { $('msg').textContent = ''; waitMark($('msg')); }, ms); }
   function cap(s) { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); }
   function clip(s, n) { s = (typeof s === 'string' ? s : '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n) : s; }
   function makeCanvas(w, h) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }
@@ -50,8 +172,19 @@
       if (bmp.close) bmp.close(); return c;
     }, viaImg);
   }
-  function labelDate(d) { var R = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii']; return d.getDate() + '.' + R[d.getMonth()] + '.' + d.getFullYear(); }
-  function handName(key) { return key === 'other' ? 'Something alive' : cap(EYES[key].who.replace(/^an? /, '')); }
+  function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
+  // A species' English name in lower case, except words that are names of places or people ("North American river otter",
+  // "Cooper's hawk", "Schaus' swallowtail"). The first word is no exception: "domestic cat" starts small, as the names of groups do.
+  var PROPER = ' african alaskan american andean antarctic antillean appalachian arabian arctic argentine asian asiatic atlantic australian bahama bahaman baltic bermuda bolivian brazilian british burmese california californian canada canadian caribbean carolina carolinian chilean chinese colombian colorado cuban dutch egyptian english eurasian european florida floridian french georgia german greek guatemalan gulf haitian hawaiian himalayan hispaniolan indian indies indonesian irish italian jamaican japanese javan korean louisiana madagascar malayan mediterranean mexican mississippi new nile norway norwegian pacific panama panamanian persian peruvian philippine polynesian portuguese puerto rican russian scotia scottish siberian spanish sumatran swedish swiss tasmanian texas texan thai turkish virginia virginian world york zealand amazon bolivia china peru lanka keys st. augustine charles sebastian william susan maria lizzie jones hentz caesar hercules jesus venus quaker confederate january february march april june july august september october november december acadian alachua alamo allegheny apache apalachicola arkansas baltimore bengal benghal blackburnian bradford brahminy caspian ceylon chickasaw columbian connecticut cretan darlington dixie everglades eustis fakahatchee formosa formosan georgian hebrew hudsonian illinois jerusalem kentucky maryland mascarene nashville nearctic neotropical ocala ohio okefenokee oklahoma ouachita oriental palamedes pandorus paraguayan pennsylvania philadelphia phoenician piedmont pharaoh polydamas polyphemus putnam rio grande santa saratoga savannah seminole shumard siam surinam tahitian taiwan taiwanese tampa tennessee tule yucatan zabulon zarucco julia isabella hermes phaon cassius dorantes eufala nessus dion io atala tokay muscovy bahia christmas halloween agrippina alyce anna delilah esther francesca ivana jair mabel sappho cyrano ';
+  function nameCase(name) {
+    name = String(name || ''); if (!name) return name;
+    return name.replace(/[^\s-]+/g, function (w, at) {
+      if (PROPER.indexOf(' ' + w.toLowerCase() + ' ') >= 0) return w.charAt(0).toUpperCase() + w.slice(1);
+      var keep = /['’]s?$/.test(w) || (w.length <= 3 && w === w.toUpperCase() && /[A-Z]/.test(w) && (at > 0 || w.length === 1));
+      return keep ? w : w.toLowerCase();
+    });
+  }
+  function handName(key) { return key === 'other' ? 'this creature' : (EYES[key] ? EYES[key].who : GROUPS[key] || 'this creature').replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own. A creature of no known group has no general name (build 22)
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
   function later(fn, ms) { var seq = S.seq; setTimeout(function () { if (seq === S.seq) fn(); }, ms); }
@@ -68,9 +201,14 @@
     show('btnFlip', S.src === 'cam' && (s === 'finder' || s === 'animal') && S.cameras > 1 && !S.freeze);
     $('btnRec').style.visibility = isMoving() && canRecord() ? 'visible' : 'hidden';
     if (S.eyes) { $('whoName').textContent = shownName(); $('whoMark').className = 'mk ' + (guessed(S.eyes) ? 'g' : 'm'); }
+    senses.paint();
   }
   function go(screen) { S.screen = screen; paintUI(); }
-  function setEyes(key, named) { S.eyes = key; S.named = named || null; eyeP = key ? paramsOf(EYES[key]) : HUMAN; S.k = 0; S.kGoal = 0; S.tr = null; S.focus = S.focusGoal = .5; }
+  function setEyes(key, named) {
+    S.eyes = key; S.named = named || null; eyeP = key ? paramsOf(EYES[key], named) : HUMAN; S.k = 0; S.kGoal = 0; S.tr = null; S.focus = S.focusGoal = .5;
+    if (engine && engine.newView) engine.newView();            // a new pair of eyes starts with no memory of where the last one looked
+    senses.want(eyeP.senses);
+  }
 
   // ---------- the opening picture: soft lights, passed through one pair of eyes after another
   var introCv = makeCanvas(160, 300), introX = introCv.getContext('2d');
@@ -171,8 +309,9 @@
   function shapeOf(key) { var p = EYES[key].pupil; return p === 'v' ? 1 : p === 'h' ? 2 : 0; }
   function showName() {
     $('rvName').textContent = shownName(); $('rvSci').textContent = (S.named && S.named.scientific) || '';
-    $('rvCount').textContent = S.named && S.named.again ? 'Met ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' ? 'A new kind of eye' : S.nov === 'name' ? 'First meeting' : S.nov === 'again' ? 'Met before' : '';
-    $('rvWarn').textContent = S.eyes !== 'person' && guessed(S.eyes) ? 'Part of what follows is a guess.' : '';
+    $('rvCount').textContent = S.named && S.named.again ? 'Encountered ' + labelDate(new Date(S.named.again)) : S.nov === 'kind' && S.eyes !== 'person' ? 'See the world as ' + (/^[aeiou]/i.test(shownName()) ? 'an' : 'a') : S.nov === 'name' ? 'First encounter' : S.nov === 'again' ? 'Encountered before' : '';
+    var mNow = S.meetingId ? record.filter(function (r) { return r.id === S.meetingId; })[0] : null;
+    $('rvWarn').textContent = S.eyes !== 'person' && mNow ? lentLine(mNow) : '';      // the week, said once at the meeting; what is a guess is marked on the name and in its sheet
     $('reveal').classList.add('show');
     clearTimeout(nameTimer); nameTimer = setTimeout(function () { $('reveal').classList.remove('show'); }, calm ? 1500 : 2500);
   }
@@ -204,12 +343,26 @@
     } else S.k = 0;
     S.focus += (S.focusGoal - S.focus) * (1 - Math.exp(-(dt || 16) / 90));
     fx.focus = S.focus; fx.mirror = S.src === 'cam' && S.mirror; fx.camZoom = S.camZoom;
+    if (key && eyeP.senses) senses.fx(fx, now);
     return fx;
+  }
+
+  // ---------- a view being tried (?try=<key>): Start opens it on the camera at once, with no photograph first, and keeps no
+  // encounter. Where the camera is closed, it asks for a clip or a photo of the person's view, as looking again does.
+  // &genus=<Genus> chooses a genus's own settings (byGenus), as a name from the recognizer would.
+  function tryStart() {
+    var key = TRY_KEYS[0]; if (!key) return false;
+    var g = (/[?&]genus=([A-Z][a-z]+)/.exec(location.search || '') || [0, ''])[1], named = { common: EYES[key].chip, scientific: g, by: 'you' };
+    S.animalPhoto = null; S.meetingId = null; S.nov = ''; S.seq++; S.token++;
+    function live() { thaw(); setEyes(key, named); go('animal'); showName(); later(startChange, calm ? 150 : 750); }
+    function still() { showStill(blankStill(), false); setEyes(key, named); setViewPrompt(key); go('askView'); }
+    openCamera(TUNE.draw === 'face' ? 'user' : 'environment').then(live, still);
+    return true;
   }
   function afterChange() {
     if (S.screen !== 'animal') return;
-    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That is a person. You have those eyes already.'
-      : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : 'Part of this is a guess. Tap the name to see which part.';
+    var E = EYES[S.eyes], line = S.eyes === 'person' ? 'That’s a human. You already see the world as one.'
+      : (isMoving() || !/slow|still|Walk/.test(E.cue)) && E.cue ? E.cue : '';
     msg(line, 6500);
   }
 
@@ -223,15 +376,15 @@
     if (s === 'intro' || s === 'askAnimal') { drawIntro(now, dt, s === 'askAnimal'); return; }
     if (isMoving() && !S.freeze && vid.readyState >= 2 && vid.videoWidth) {
       var fresh = vid.requestVideoFrameCallback ? S.newFrame : vid.currentTime !== S.lastVideoTime;
-      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now); }
+      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now, S.src === 'clip' ? vid.currentTime * 1000 : undefined); }
     }
     var fx = fxNow(now, dt), P = S.eyes ? mix(HUMAN, eyeP, S.k) : HUMAN;
     if (s === 'askView') fx.expo = .5;                       // the animal's photo sits dimmed behind the prompt
     engine.draw(P, fx, now, dt);
     if (rec && recX) { recX.drawImage(canvas, 0, 0, recCv.width, recCv.height); if (recOver) recX.drawImage(recOver, 0, 0); }
     perfSum += dt;
-    if (++perfN >= 45) {
-      if (!sideAsked && !rec && perfSum / perfN > 42 && engine.side() > 540) engine.setSide(Math.max(540, engine.side() * .75));
+    if (++perfN >= 45) {   // a phone that falls behind gives up detail in the movement map first, and only then in the picture
+      if (!sideAsked && !rec && perfSum / perfN > 42 && !engine.lighten() && engine.side() > 540) engine.setSide(Math.max(540, engine.side() * .75));
       perfN = 0; perfSum = 0;
     }
   }

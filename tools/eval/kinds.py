@@ -59,7 +59,10 @@ def load(root, model, want_wasm=False):
         part = np.array([part_of(r) for r in rows])
         eyes = np.array([r["eyes"] for r in rows])
         month = np.array([month_of(i) for i in ids_])
-        return {p: {"X": X_[part == p], "eyes": eyes[part == p], "month": month[part == p], "ids": [i for i, q in zip(ids_, part) if q == p], "vectors": "images/" + name} for p in ("fit", "tune", "test")}
+        lic = np.array([r.get("licence", "") for r in rows])
+        url = np.array([r.get("obs_url", "") for r in rows])
+        return {p: {"X": X_[part == p], "eyes": eyes[part == p], "month": month[part == p], "ids": [i for i, q in zip(ids_, part) if q == p], "vectors": "images/" + name,
+                    "licence": lic[part == p], "address": url[part == p]} for p in ("fit", "tune", "test")}
 
     out = cut(X, ids, EXTRA)
     out.update(set=EXTRA, rows_in_manifest=len(by), rows_with_vectors=len(ids))

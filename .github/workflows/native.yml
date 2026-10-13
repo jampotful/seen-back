@@ -1,0 +1,129 @@
+name: native
+# A thin native shell around the built page, built and run on build machines. Push a commit to run/native/<label>:
+#  - android: ci/native/android_build.sh makes a debug APK (a WebView activity that serves the bundled page from its assets),
+#    then ci/native/android_emu.sh runs it in an Android emulator: the opening screen, the page's self-test with the pocket
+#    recognizer, and Begin with the emulator's camera
+#  - ios: ci/native/ios.sh compiles a WKWebView app for the iPhone simulator (unsigned, ad hoc), bundles the page into it, and runs
+#    the same self-test in an iPhone simulator
+#  - pub: run/native/pub<anything> builds the page with TEST=0 into a debug APK, proves it in the emulator (the self-test on the same
+#    build with the check files added, then the published file itself opened and taken to the camera), and only then puts it on the
+#    branch pub/app-android as seen-back-debug.apk with a README.md and a built.json (ci/native/android_pub*.sh). It relies only on
+#    native/, ci/native/, this file, ci/put_branch.sh and ci/return.sh, so it works when main itself is pushed to run/native/pub-<x>.
+# run/native/android<anything> runs only the Android job, run/native/ios<anything> only the iOS job, run/native/pub<anything> only
+# the publishing job; any other label runs the Android and iOS jobs.
+# Results come back on the `ci` branch under runs/native/<run number>-android and -ios: logs, screenshots as JPEG, logcat lines,
+# and what the page reported about itself.
+on:
+  push:
+    branches: ['run/native/**']
+permissions:
+  contents: write
+concurrency:
+  group: native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  android:
+    if: ${{ !startsWith(github.ref_name, 'run/native/ios') && !startsWith(github.ref_name, 'run/native/pub') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: the page and a debug APK
+        run: bash ci/native/android_build.sh
+      - name: enable KVM for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: the APK in an Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          ram-size: 4096M
+          disable-animations: true
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back emulated
+          script: bash ci/native/android_emu.sh
+      - name: shrink pictures
+        if: always()
+        run: python3 -m pip install -q pillow && python3 -I ci/engines/shrink.py out; du -sh out
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh native out android
+  ios:
+    if: ${{ !startsWith(github.ref_name, 'run/native/android') && !startsWith(github.ref_name, 'run/native/pub') }}
+    runs-on: macos-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: the page in a WKWebView app on an iPhone simulator
+        run: bash ci/native/ios.sh
+      - name: shrink pictures
+        if: always()
+        run: python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow && /tmp/venv/bin/python -I ci/engines/shrink.py out; du -sh out
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh native out ios
+  pub:
+    if: ${{ startsWith(github.ref_name, 'run/native/pub') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: the page and two debug APKs, with and without the check files
+        run: bash ci/native/android_pub_build.sh
+      - name: enable KVM for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: the self-test, then the file to publish, in an Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          ram-size: 4096M
+          disable-animations: true
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back emulated
+          script: bash ci/native/android_pub_emu.sh
+      - name: publish pub/app-android
+        run: bash ci/native/android_pub.sh
+      - name: shrink pictures
+        if: always()
+        run: python3 -m pip install -q pillow && python3 -I ci/engines/shrink.py out; du -sh out
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh native out pub

@@ -1,0 +1,239 @@
+{
+  "key": "slime",
+  "chip": "Slime mould",
+  "who": "a slime mould",
+  "falls_back_to": "plant",
+  "applies_to": {
+    "phylum": [
+      "Mycetozoa"
+    ]
+  },
+  "cue": "There is no picture here, only how much light, what colour, and from where.",
+  "modules": [
+    "slow"
+  ],
+  "params": {
+    "field": {
+      "value": 1,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#2 slime No picture: Nakagaki 2000; Hato 1976"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null
+    },
+    "pupil": {
+      "value": "none",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null
+    },
+    "noGreen": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "red and blue both steer it (Hato 1976); green was untested"
+    },
+    "persist": {
+      "value": 6,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        30
+      ],
+      "floor": null,
+      "note": "seconds; its body pulses every 1 to 2 minutes (Kuroda 2015)"
+    }
+  },
+  "notes": [
+    {
+      "need": "field",
+      "why": "A well-fed plasmodium moves away from light and a starved one toward it. The whole field could lean away from or toward the brightest region. Not drawn."
+    }
+  ],
+  "rows": [
+    [
+      "g",
+      "No picture",
+      "A slime mould is one huge cell, from a kingdom apart from the fungi. It has no eye, and it reads how much light falls on it and of what colour.",
+      [
+        "Nakagaki 2000",
+        "Hato 1976",
+        "param:field",
+        "param:pupil"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Physarum polycephalum crawls away from blue light and far-red light, and toward red light.",
+      [
+        "Hato 1976"
+      ]
+    ],
+    [
+      "m",
+      "Hunger",
+      "Well fed, it moves away from light. Short of food, it moves toward light, and after several days without food, light turns it into spore heads.",
+      [
+        "Leitner 2002",
+        "Masui 2025"
+      ]
+    ],
+    [
+      "x",
+      "Food",
+      "It stretches tubes between pieces of food and finds the shortest route between them through a maze. The picture has no sense of food.",
+      [
+        "Nakagaki 2000"
+      ]
+    ],
+    [
+      "m",
+      "Pace",
+      "Its body swells and thins every one to two minutes, and its speed rises and falls over about 20 minutes. Your eyes follow flicker to about 60 a second.",
+      [
+        "Kuroda 2015",
+        "Inger 2014"
+      ]
+    ],
+    [
+      "i",
+      "Colour and time",
+      "Green is removed and changes are averaged over about 6 seconds. Both choices are the app's own.",
+      [
+        "param:noGreen",
+        "param:persist"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: the hour in a minute",
+      "This trial keeps one picture every three seconds and averages them over ten minutes, so anything that moves fades and what stays remains. A slime mould answers light over minutes to hours. The pace and the window are the app's.",
+      [
+        "docs/views/sheets/fungus.md#4",
+        "param:slow.everyMs",
+        "param:slow.windowS"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: the patient view",
+      "With &draw=patient the picture refuses to change while you watch. Set the phone down and leave it, and the picture comes up slowly, like a print in a tray. The waiting times are the app's.",
+      [
+        "docs/views/sheets/fungus.md#4",
+        "param:slow.stillS",
+        "param:slow.developS",
+        "param:slow.moveK"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "matrices": {},
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true,
+  "slow": {
+    "everyMs": {
+      "value": 3000,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#4"
+      ],
+      "range": [
+        500,
+        20000
+      ],
+      "floor": null,
+      "note": "one frame kept every few seconds, as the sheet proposes"
+    },
+    "windowS": {
+      "value": 600,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#4"
+      ],
+      "range": [
+        30,
+        3600
+      ],
+      "floor": null,
+      "note": "the store forgets over ten minutes, as the sheet proposes"
+    },
+    "stillS": {
+      "value": 8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        2,
+        60
+      ],
+      "floor": null,
+      "note": "seconds left alone before the patient view starts to develop"
+    },
+    "developS": {
+      "value": 30,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        5,
+        300
+      ],
+      "floor": null,
+      "note": "seconds for the patient view's print to come up fully"
+    },
+    "moveK": {
+      "value": 0.03,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0.005,
+        0.2
+      ],
+      "floor": null,
+      "note": "how much the picture may change between light reads and still count as left alone"
+    }
+  },
+  "draw": {
+    "slow": [
+      {
+        "name": "hour",
+        "invented": true,
+        "note": "the hour in a minute: one frame every few seconds, averaged over ten minutes, so only what stays remains (atlas 24)"
+      },
+      {
+        "name": "patient",
+        "invented": true,
+        "note": "the patient view: nothing develops while the person watches; set the phone down and the picture comes up like a print in a tray (atlas 24)"
+      },
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view as it was before module 12"
+      }
+    ]
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "key": "salamander",
+  "chip": "Salamander, newt",
+  "who": "a salamander or newt",
+  "falls_back_to": "other",
+  "applies_to": {
+    "order": [
+      "Caudata"
+    ]
+  },
+  "cue": "Tap what you would catch to bring it into focus. Colours stay, with a violet tint for ultraviolet.",
+  "modules": [],
+  "params": {
+    "fov": {
+      "value": 260,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/salamander.md#3 fov: Wiggers 1995 (forward eyes in tongue-shooters)"
+      ],
+      "range": [
+        180,
+        360
+      ],
+      "floor": null,
+      "note": "no field was found for any salamander; below the frog's 340 because some have forward eyes"
+    },
+    "cpd": {
+      "value": 4,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0.5,
+        10
+      ],
+      "floor": null,
+      "note": "no acuity was found; repeats the frog's guess"
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source on pupil shape was opened"
+    },
+    "dof": {
+      "value": 12,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/salamander.md#2 Distance: Werner and Himstedt 1984 (fire salamander)"
+      ],
+      "range": [
+        0,
+        30
+      ],
+      "floor": null,
+      "note": "the eye focuses on prey to judge distance, which tap-to-focus can suggest; the strength is the app's, half the alligator's 24"
+    },
+    "sheen": {
+      "value": 0.6,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/salamander.md#2 Ultraviolet: Ma 2001; Korenyak and Govardovskii 2013; Martin 2016"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "a violet sheen for the ultraviolet cones, which a phone cannot record; matches the reptile and wader entries"
+    }
+  },
+  "notes": [
+    {
+      "need": "gate",
+      "why": "Left unset on purpose: no test of whether a salamander ignores still prey was found (Kundey 2016 used fixed marks in a maze). First open question in the sheet."
+    },
+    {
+      "need": "magnetometer",
+      "why": "The eastern newt's magnetic compass swings a quarter turn under light above 500 nm (Phillips 2001). A faint line along the field could be drawn from the phone's compass; not drawn."
+    },
+    {
+      "need": "dof band",
+      "why": "The tongue-shooters keep a band of sharp focus at the tongue's reach. dof with a tap already moves the focus; the fixed distance would be invented."
+    },
+    {
+      "need": "lateral line",
+      "why": "Ripples around near movement for water-dwellers, from frame motion. Medium work, invented."
+    },
+    {
+      "need": "caecilian, olm",
+      "why": "Caecilians and the olm stay out and would take light-only settings (field 1) once they have rows of their own."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Ultraviolet",
+      "Tiger salamanders and newts have cones tuned to ultraviolet light, which is invisible to you, near 360 nanometres in the tiger salamander and 340 to 360 in three newts. The gene for that cone turned up in 40 of 58 salamander species tested.",
+      [
+        "docs/views/sheets/salamander.md#2: Ultraviolet",
+        "Ma and colleagues 2001",
+        "Isayama and colleagues 2014",
+        "Korenyak and Govardovskii 2013",
+        "param:sheen"
+      ]
+    ],
+    [
+      "m",
+      "Hunting by ultraviolet",
+      "Smooth newt larvae catch more water fleas when ultraviolet light is present, and larvae raised without it catch fewer.",
+      [
+        "docs/views/sheets/salamander.md#2: Hunting by ultraviolet",
+        "Martin and colleagues 2016"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "The fire salamander snapped at a coloured worm dummy moving across a differently coloured background of equal brightness, so it tells colours apart by hue. Its three kinds of receptor peak near 450, 500 and 570 nanometres, and colours stay as your camera gives them.",
+      [
+        "docs/views/sheets/salamander.md#2: Colour",
+        "Keller and Neumeyer 1995",
+        "param:M"
+      ]
+    ],
+    [
+      "m",
+      "Distance",
+      "The fire salamander refocuses its eyes before it turns to prey, and judges distance that way. The tongue-shooting lungless salamanders have eyes set forward, and the two eyes’ views line up at the tongue’s farthest reach; one Sardinian species was photographed with its tongue out almost 6 centimetres, and salamanders of its genus flick the tongue out in about a hundredth of a second.",
+      [
+        "docs/views/sheets/salamander.md#2: Distance",
+        "Werner and Himstedt 1984",
+        "Eurich and Straub 1995",
+        "Sanders 1997",
+        "param:dof"
+      ]
+    ],
+    [
+      "i",
+      "Still things",
+      "This view keeps still things, which the frog view drops, and that choice is our guess: no test of whether a salamander ignores still prey was found, though tiger salamanders learned to turn the way a visual mark in a maze showed them. For prey, a relative of the red-backed salamander weighs a moving target’s size and speed above its shape.",
+      [
+        "docs/views/sheets/salamander.md#2: Still things",
+        "Kundey and colleagues 2016",
+        "Schülert 2004"
+      ]
+    ],
+    [
+      "g",
+      "Night",
+      "Fire salamanders are active at night. A model of their eyes says they can tell a red throat from a yellow one by night light.",
+      [
+        "docs/views/sheets/salamander.md#2: Night",
+        "Aguilar and colleagues 2024"
+      ]
+    ],
+    [
+      "x",
+      "Smell",
+      "Lungless salamanders tap their snouts on the ground, and a groove running from each nostril to the lip draws odours up to the nose. They follow smells to food and away from danger, and a camera records no smell.",
+      [
+        "docs/views/sheets/salamander.md#2: Smell",
+        "Zug 2020"
+      ]
+    ],
+    [
+      "x",
+      "Moving water and electricity",
+      "Larvae and salamanders that live wholly in water have a lateral line, which feels movement and pressure changes in the water around them. The axolotl also has sensors for electric fields, amphiumas respond to weak electric currents, and a camera records none of this.",
+      [
+        "docs/views/sheets/salamander.md#2: Moving water and electricity",
+        "Zug 2018",
+        "Claas and Fritzsch 1984",
+        "Keathley and Moon 2021"
+      ]
+    ],
+    [
+      "x",
+      "Magnetic compass",
+      "The eastern newt has a magnetic compass that works through light-sensitive cells in or near the pineal organ, at the top of the brain. In light of wavelengths longer than 500 nanometres its chosen direction swings a quarter turn, and a camera records none of this.",
+      [
+        "docs/views/sheets/salamander.md#2: Magnetic compass",
+        "Phillips and Borland 1992",
+        "Freake and Borland 2001"
+      ]
+    ],
+    [
+      "i",
+      "Ultraviolet tint, sharpness, field and pupil",
+      "A phone can’t capture ultraviolet light, so the violet tint here stands in for it. Sharpness, field of view, pace and pupil are our best guesses.",
+      [
+        "docs/views/sheets/salamander.md#2: Ultraviolet tint, sharpness, field and pupil",
+        "param:sheen",
+        "param:fov",
+        "param:cpd",
+        "param:pupil"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: north",
+      "With &draw=grain or &draw=tide and the motion sensors on, the picture carries a texture tied to magnetic north. The eastern newt's compass turns a quarter in light longer than about 500 nanometres, so warm light weakens the drawing. Nobody knows what this sense is like, and the drawing is the app's.",
+      [
+        "docs/views/sheets/salamander.md",
+        "Phillips 2001",
+        "param:magnet.k"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "matrices": {},
+  "by": {},
+  "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none",
+    "senses": {
+      "motion": 1
+    }
+  },
+  "draft": true,
+  "magnet": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        2
+      ],
+      "floor": null,
+      "note": "how strongly the compass is drawn; nobody knows what the sense is like"
+    }
+  },
+  "draw": {
+    "magnet": [
+      {
+        "name": "none",
+        "invented": true,
+        "note": "the view as it was"
+      },
+      {
+        "name": "tide",
+        "invented": true,
+        "note": "a faint darkening of the sky that follows the angle between the camera and magnetic north, fading in red or yellow light (atlas 21)"
+      },
+      {
+        "name": "grain",
+        "invented": true,
+        "note": "a fine directional grain, like brushed metal, that runs along magnetic north whichever way the phone turns; red light melts it (atlas 21)"
+      }
+    ]
+  }
+}

@@ -12,10 +12,13 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-probe*) PROBE_ONLY=1 ;; *) PROB
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-thr*) THR_ONLY=1 ;; *) THR_ONLY=0 ;; esac   # only the threads experiment (ci/engines/threads.sh)
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-b7*) NO_ST=1 ;; *) NO_ST=0 ;; esac   # the build's checks (check_rec.js, parity, probes, threads) without the self-test, for time
 if [ "$PROBE_ONLY" = 1 ] && [ "$PART" = chromium ]; then echo "probe-only run: nothing for the chromium part"; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-resw*) [ "$PART" = chromium ] && { echo "WebKit-only resume run: nothing for the chromium part"; exit 0; } ;; esac
 case "$PART" in chromium) BROWSERS="chromium" ;; *) BROWSERS="firefox webkit" ;; esac
 
 step "machine"; uname -a; nproc; free -m | head -2; node --version; python3 --version; lscpu | grep -E "Model name|Flags" | sed -E "s/(Flags:).*/\1 $(grep -o -w -E "avx2|avx512f|avx512_vnni|avx_vnni|avx512bw" /proc/cpuinfo | sort -u | tr "\n" " ")/"
 step "build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)"
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*fix*)   # the resume probe on a page with ci/engines/patches/webkit-resume.patch applied to src/cam.rec.js
+  git apply ci/engines/patches/webkit-resume.patch && echo "webkit-resume.patch applied" || echo "webkit-resume.patch FAILED to apply" ;; esac
 if [ "${SELFTEST_INLINE:-0}" != 1 ] && git apply --check ci/engines/patches/build-selftest-on-demand.patch 2>/dev/null; then git apply ci/engines/patches/build-selftest-on-demand.patch && echo "build.py patched"; fi
 python3 -I build.py && node --check dist/app.js && { [ ! -f selftest.js ] || node --check selftest.js; } && echo "build ok"; ls -l index.html selftest.js 2>&1 | awk '{print $5, $NF}'
 step "playwright $PWV: $BROWSERS"
@@ -25,6 +28,33 @@ node "$PW/node_modules/playwright/cli.js" install --with-deps $BROWSERS 2>&1 | g
 if [ "$PART" != chromium ]; then sudo apt-get install -y -qq xvfb libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 >/dev/null 2>&1; echo "mesa and xvfb: exit $?"; fi
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install -q pillow
 if [ "$THR_ONLY" = 1 ]; then ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/threads.sh; exit 0; fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-perf*)    # only test/check4.js perf (docs/ENGINE.md): every view on the scene clip, main's page and this commit's, interleaved
+  [ "$PART" = chromium ] || { echo "perf run: nothing for the $PART part"; exit 0; }
+  git fetch -q --depth 1 origin main && git worktree add -q /tmp/main FETCH_HEAD && echo "main at $(git -C /tmp/main log -1 --format='%h %s' | cut -c1-80)"
+  python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
+  python3 -m http.server 8791 --bind 127.0.0.1 --directory /tmp/main > /dev/null 2>&1 &
+  sleep 1
+  for ROUND in 1 2 3; do
+    for WHICH in main branch; do
+      PORTP=8790; [ "$WHICH" = main ] && PORTP=8791
+      step "perf: $WHICH, round $ROUND"
+      PORT=$PORTP PERF_FRAMES="${PERF_FRAMES:-60}" SIDE="${PERF_SIDE:-540}" PERF_OUT="$OUT/perf-$WHICH-$ROUND.json" timeout 1500 node test/check4.js perf > "$OUT/perf-$WHICH-$ROUND.txt" 2>&1
+      echo "exit $?"; head -22 "$OUT/perf-$WHICH-$ROUND.txt"
+    done
+  done
+  exit 0 ;;
+esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor*)   # only test/check4.js floor (docs/ENGINE-DESIGN.md section 5): the jumper view's visibility floor
+  [ "$PART" = chromium ] || { echo "floor run: nothing for the $PART part"; exit 0; }
+  /tmp/venv/bin/pip install -q numpy
+  python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
+  sleep 1
+  case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor-moving*) export FLOOR_MOVING=1 FLOOR_REDO=1 FLOOR_VALUES="${FLOOR_VALUES:-1}" ;; esac   # the moving clip, for what the still picture left invisible
+  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-3} values a parameter, moving ${FLOOR_MOVING:-0}"
+  PORT=8790 FLOOR_SKIP=docs/views/floor.json FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-3}" FLOOR_OUT="$OUT/floor.json" timeout 2300 node test/check4.js floor > "$OUT/floor.txt" 2>&1
+  echo "exit $?"; tail -60 "$OUT/floor.txt"
+  exit 0 ;;
+esac
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-sw5*) ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/sw5xx.sh; exit 0 ;; esac   # only ci/engines/patches/sw-5xx-kept.patch, proven
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &
@@ -37,6 +67,33 @@ d=json.load(open(sys.argv[1])); print('phone', d.get('phone'), '| offline', json
   done
   exit 0
 fi
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-res*)    # only test/engines/resume_probe.js: a reload while the larger model is being downloaded (WebKit; Chromium beside it)
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & node test/rec/serve.js 8788 cors > "$OUT/rec-serve-big-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    [ "$B" = firefox ] && continue
+    step "resume_probe.js: $B"; BROWSER=$B PORT=8782 BIG_PORT=8788 timeout 300 node test/engines/resume_probe.js > "$OUT/rec/resume-$B.json" 2> "$OUT/rec/resume-$B.err.txt"; echo "resume probe $B: exit $?"
+    python3 -I -c "
+import json,sys
+d=json.load(open(sys.argv[1])); print('version', d.get('version'), 'error', d.get('error')); print('before', json.dumps(d.get('before'))[:500]); print('asked before', json.dumps(d.get('asked'))[:300])
+for a in d.get('after', [])[:12]: print(' after', json.dumps(a)[:400])
+print('last', json.dumps((d.get('after') or [None])[-1])[:500]); print('asked after', json.dumps(d.get('askedAfter'))[:500]); print('kept', d.get('kept')); print('stores', d.get('stores')); print('console', json.dumps(d.get('console'))[:800])
+print('variant', d.get('variant'), 'keysBefore', d.get('keysBefore'))
+for x in d.get('trace', []): print(' KT', x[:300])" "$OUT/rec/resume-$B.json"
+  done
+  exit 0 ;;
+esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-svc*)    # only check_rec.js service, with ci/engines/patches/check_rec-quiet-cors.patch (each engine's own words for a refused CORS request)
+  git apply ci/engines/patches/check_rec-quiet-cors.patch && echo "patch applied"
+  PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 & sleep 1
+  for B in $BROWSERS; do
+    step "check_rec.js service, patched: $B"
+    if [ "$B" = firefox ]; then NODE_PATH="$ROOT/ci/engines/pwshim:$PW/node_modules" PW_REAL="$PW/node_modules/playwright" PW_HEADED=1 LIBGL_ALWAYS_SOFTWARE=1 BROWSER=$B PORT=8782 \
+      timeout 900 xvfb-run -a -s "-screen 0 1400x1000x24" node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"
+    else BROWSER=$B PORT=8782 timeout 900 node test/rec/check_rec.js service > "$OUT/rec/svc-$B.json" 2> "$OUT/rec/svc-$B.err.txt"; fi
+    echo "check_rec service $B: exit $?"; tail -1 "$OUT/rec/svc-$B.json"; tail -c 300 "$OUT/rec/svc-$B.err.txt"
+  done
+  git checkout -q test/rec/check_rec.js; exit 0 ;;
+esac
 step "a real slot and its photos"; bash ci/engines/rec_setup.sh
 PH=$(ls ci-rec/photos | sed 's#^#ci-rec/photos/#' | paste -sd, -)
 RECQ="&rec=ci-rec/slot&recphotos=$PH&recexpect=ci-rec/slot/expect.json"

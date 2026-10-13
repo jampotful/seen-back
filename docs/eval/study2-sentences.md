@@ -10,7 +10,7 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 
 | Species head | Top-1 | Top-5 | Top-1 with prior | Top-5 with prior | Kind from summed species | Chosen on the tuning photos |
 |---|---:|---:|---:|---:|---:|---|
-| sentences | 23.0% (21.8 to 24.3) | 40.2% (38.7 to 41.6) | 35.3% (33.9 to 36.8) | 55.1% (53.6 to 56.6) | 80.7% (79.5 to 81.9) | species_com; alpha 0.75; lam 2, c 1 |
+| sentences | 23.0% (21.8 to 24.3) | 40.1% (38.7 to 41.6) | 35.3% (33.9 to 36.8) | 55.1% (53.6 to 56.6) | 80.7% (79.5 to 81.9) | species_com; alpha 0.75; lam 2, c 1 |
 
 | Kind of eye from | Right kind | Called `person` | Called `none` |
 |---|---:|---:|---:|
@@ -23,7 +23,7 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 |  | Kinds head | Rule | t_kind | w_kind | Tuning number | Wildlife tuning photos | Extra tuning photos | Kind right, wildlife test | Kind right, extra test | kind_at | Asserted, wildlife test | Right when asserted | Asserted, extra test | Right when asserted |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 |  | kind phrases | mix | 100 | 0.5 | 84.2% | 82.0% | 86.5% | 81.4% (80.2 to 82.6) | 80.1% (77.8 to 82.3) | 0.76 | 48.8% (47.3 to 50.4) | 97.7% (97.0 to 98.3) | 29.0% (26.5 to 31.5) | 97.8% (96.1 to 99.2) |
-|  | kind phrases | product | 100 | 0.7 | 83.1% | 81.0% | 85.2% | 81.1% (79.9 to 82.3) | 81.5% (79.1 to 83.5) | 0.91 | 43.0% (41.5 to 44.6) | 95.9% (94.9 to 96.7) | 27.0% (24.6 to 29.5) | 97.9% (96.1 to 99.4) |
+|  | kind phrases | product | 100 | 0.7 | 83.1% | 81.0% | 85.2% | 81.1% (79.9 to 82.3) | 81.5% (79.1 to 83.5) | 0.91 | 43.0% (41.5 to 44.6) | 95.8% (94.9 to 96.7) | 27.0% (24.6 to 29.5) | 97.9% (96.1 to 99.4) |
 | **chosen** | kind phrases | mix | 100 | 0.5 | 84.2% | 82.0% | 86.5% | 81.4% (80.2 to 82.6) | 80.1% (77.8 to 82.3) | 0.76 | 48.8% (47.3 to 50.4) | 97.7% (97.0 to 98.3) | 29.0% (26.5 to 31.5) | 97.8% (96.1 to 99.2) |
 | what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 54.2% | 84.4% | 24.1% | 83.7% (82.6 to 84.8) | 22.1% (19.8 to 24.4) | none | 100.0% (100.0 to 100.0) | 83.7% (82.6 to 84.8) | 100.0% (100.0 to 100.0) | 22.1% (19.8 to 24.4) |
 
@@ -59,7 +59,7 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 
 | Species head | Top-1 | Top-5 | Top-1 with prior | Top-5 with prior | Kind from summed species | Chosen on the tuning photos |
 |---|---:|---:|---:|---:|---:|---|
-| sentences | 15.1% (14.0 to 16.2) | 28.0% (26.7 to 29.3) | 26.5% (25.1 to 27.8) | 45.4% (43.9 to 46.9) | 78.2% (77.0 to 79.5) | species_com; alpha 1.00; lam 0, c 0.1 |
+| sentences | 15.1% (14.0 to 16.2) | 28.0% (26.7 to 29.3) | 26.4% (25.1 to 27.8) | 45.4% (43.9 to 46.9) | 78.2% (77.0 to 79.5) | species_com; alpha 1.00; lam 0, c 0.1 |
 
 | Kind of eye from | Right kind | Called `person` | Called `none` |
 |---|---:|---:|---:|
@@ -71,9 +71,9 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 
 |  | Kinds head | Rule | t_kind | w_kind | Tuning number | Wildlife tuning photos | Extra tuning photos | Kind right, wildlife test | Kind right, extra test | kind_at | Asserted, wildlife test | Right when asserted | Asserted, extra test | Right when asserted |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.2% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) |
-|  | kind phrases | product | 100 | 0.7 | 79.3% | 76.0% | 82.6% | 75.7% (74.4 to 77.0) | 82.8% (80.7 to 84.9) | 0.99 | 6.9% (6.2 to 7.7) | 97.2% (95.2 to 99.0) | 5.8% (4.5 to 7.2) | 100.0% (100.0 to 100.0) |
-| **chosen** | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.2% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.9% (94.8 to 98.6) |
+|  | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.1% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.8% (94.8 to 98.6) |
+|  | kind phrases | product | 100 | 0.7 | 79.3% | 76.0% | 82.6% | 75.7% (74.4 to 77.0) | 82.8% (80.7 to 84.9) | 0.99 | 6.9% (6.2 to 7.7) | 97.3% (95.2 to 99.0) | 5.8% (4.5 to 7.2) | 100.0% (100.0 to 100.0) |
+| **chosen** | kind phrases | mix | 100 | 0.5 | 80.6% | 76.9% | 84.3% | 77.3% (76.0 to 78.6) | 83.1% (81.0 to 85.2) | 0.80 | 42.5% (41.0 to 44.1) | 97.4% (96.7 to 98.2) | 28.1% (25.7 to 30.6) | 96.8% (94.8 to 98.6) |
 | what the wildlife photos alone would choose | kind phrases | product | 20 | 0.5 | 56.2% | 79.8% | 32.7% | 79.4% (78.2 to 80.6) | 26.2% (23.7 to 28.8) | none | 100.0% (100.0 to 100.0) | 79.4% (78.2 to 80.6) | 100.0% (100.0 to 100.0) | 26.2% (23.7 to 28.8) |
 
 The chosen setting on the extra set's test photos, by kind (no species is named in this computation):
@@ -108,7 +108,7 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 
 | Species head | Top-1 | Top-5 | Top-1 with prior | Top-5 with prior | Kind from summed species | Chosen on the tuning photos |
 |---|---:|---:|---:|---:|---:|---|
-| sentences | 90.3% (89.4 to 91.3) | 96.8% (96.2 to 97.3) | 92.5% (91.6 to 93.2) | 97.5% (97.0 to 97.9) | 98.3% (97.9 to 98.7) | species_sci; alpha 1.00; lam 2, c 1 |
+| sentences | 90.4% (89.4 to 91.3) | 96.8% (96.2 to 97.3) | 92.4% (91.6 to 93.2) | 97.5% (97.0 to 97.9) | 98.3% (97.9 to 98.7) | species_sci; alpha 1.00; lam 2, c 1 |
 
 | Kind of eye from | Right kind | Called `person` | Called `none` |
 |---|---:|---:|---:|
@@ -123,7 +123,7 @@ Fitted on 0 photos of 0 species (`none (sentence rows only)`); settings chosen o
 |  | kind phrases | mix | 100 | 0.5 | 65.2% | 97.8% | 32.6% | 98.0% (97.6 to 98.4) | 17.0% (14.9 to 19.1) | none | 100.0% (100.0 to 100.0) | 98.0% (97.6 to 98.4) | 100.0% (100.0 to 100.0) | 17.0% (14.9 to 19.1) |
 |  | kind phrases | product | 100 | 0.5 | 64.9% | 98.0% | 31.8% | 97.9% (97.5 to 98.3) | 16.9% (14.8 to 19.0) | 0.97 | 53.2% (51.7 to 54.6) | 99.8% (99.6 to 100.0) | 2.5% (1.6 to 3.4) | 96.8% (90.3 to 100.0) |
 | **chosen** | kind phrases | mix | 100 | 0.5 | 65.2% | 97.8% | 32.6% | 98.0% (97.6 to 98.4) | 17.0% (14.9 to 19.1) | none | 100.0% (100.0 to 100.0) | 98.0% (97.6 to 98.4) | 100.0% (100.0 to 100.0) | 17.0% (14.9 to 19.1) |
-| what the wildlife photos alone would choose | kind phrases | mix | 20 | 0.7 | 64.9% | 98.3% | 31.5% | 98.3% (97.8 to 98.6) | 15.7% (13.6 to 17.7) | none | 100.0% (100.0 to 100.0) | 98.3% (97.8 to 98.6) | 100.0% (100.0 to 100.0) | 15.7% (13.6 to 17.7) |
+| what the wildlife photos alone would choose | kind phrases | mix | 20 | 0.7 | 64.9% | 98.3% | 31.5% | 98.3% (97.8 to 98.6) | 15.6% (13.6 to 17.7) | none | 100.0% (100.0 to 100.0) | 98.3% (97.8 to 98.6) | 100.0% (100.0 to 100.0) | 15.6% (13.6 to 17.7) |
 
 The chosen setting on the extra set's test photos, by kind (no species is named in this computation):
 

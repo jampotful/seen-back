@@ -2,52 +2,90 @@
 
 The aim is one app that works by itself on an iPhone, an Android phone and a computer: it recognizes what you photographed, changes your camera toward that creature's sight, and keeps a record of who you have met.
 
+This file was brought up to date on 11 October 2026, when build 9 (commit `013bb77`) was live; build 10, an hour later, changed one sentence of the page. A ticked line names its evidence: a commit, a file, or a run whose results are on the `ci` branch.
+
 ## Standards every phase is held to
 
 - **Checked, or labelled as unchecked.** Every claim the app makes about an animal carries a grade and a source. Every number in an evaluation comes from a script in this repository that anyone can rerun.
-- **Tested on real engines.** Chromium and WebKit, on a phone-sized screen and a desktop one, before a build is called done.
+- **Tested on real engines.** A build runs in Chromium and WebKit, on a phone-sized screen and a desktop one, before it is called done.
 - **Private by default.** Photos stay on the device. Anything that sends a photo elsewhere says so first and can be turned off.
 - **Usable with no signal.** The app opens offline, and recognition of the kind of creature works offline.
 - **Licences recorded.** Every model, dataset and font is listed with its licence before it ships.
 
 ## Phase 1: an address, and an app that installs
 
-- [x] Standalone page with the typeface served from this site.
-- [x] Web app manifest, icons, and a service worker that keeps the app shell and large files.
-- [ ] Served at an https address. *(waiting on push access)*
-- [ ] Checked on Android Chrome, desktop Chrome, desktop Safari, and iPhone Safari.
+- [x] The page stands alone and serves its typeface from this site. *(build 5, commit `8f22787`; `fonts/`)*
+- [x] The page has a web app manifest and icons, and a service worker keeps the app shell and the large files. *(`manifest.webmanifest`, `icons/`, `src/sw.template.js`; on the live address the worker controlled the second visit in Chromium, Firefox and WebKit, `runs/engines/34-live/summary.json`)*
+- [x] The page is served at an https address, https://jampotful.github.io/seen-back/ . *(`runs/engines/34-live/summary.json` read build 8 there)*
+- [x] The self-test passed on desktop Chrome and desktop Safari. *(93 of 93 on an Intel MacBook Pro in Chrome 154 and Safari 26.5, `docs/LOG.md`, 10 October, 23:25)*
+- [x] The self-test passed in Chrome on a phone. *(93 of 93 in Chrome 154 on a phone with a Mali-G715 graphics chip, the same entry; the log does not name the phone's operating system)*
+- [ ] The self-test has yet to run in Safari on an iPhone. It has run only in Safari on iOS 26.5 in an iPhone 17 simulator on a build machine (`docs/LOG.md`, 11 October).
+
+The page has yet to run on an iPhone, and installing it to a home screen has not been checked on any device. Chromium 141 on a build machine reports no reason against installing it (`runs/engines/40-big-linux`, `docs/ENGINES.md`).
 
 ## Phase 2: recognition on the device (the pocket recognizer)
 
 Goal: the page itself tells a cat from a heron from an oak, with no network, in under a second on a recent phone.
 
-- [ ] Choose the image encoder. Candidates are small image-and-text models that run in a browser. The choice turns on licence, size, and measured accuracy on local photos. MobileCLIP-S0 (11.8 MB quantized) is the first candidate; its licence must be read before it ships.
-- [ ] Build the label set: the sixteen kinds of eye, each written several ways, plus the species most recorded locally.
-- [ ] Compute the label embeddings once, offline, so the phone downloads only the image encoder.
-- [ ] Run it in the browser with ONNX Runtime Web, files served from this site and kept by the service worker.
-- [ ] Map a recognized species to its kind of eye through taxonomy (class, order, family), replacing the word table.
-- [ ] Acceptance: kind-of-eye accuracy on a held-out set of local research-grade photos, reported per kind, with the confusion table. Latency measured on each engine.
+- [x] Choose the image encoder. TinyCLIP 39M/16 (MIT licence, int8, 41.0 MB) ships in `models/pocket/` (commit `987c09b`, then builds 8 and 9). MobileCLIP will not ship, because its licence is for research only (`docs/LICENCES.md`). Applied to slots made from sentences, the rule written beforehand in `tools/eval/decide.py` gave a tie that falls to TinyCLIP 8M/16, an answer `docs/EVAL.md` calls provisional. On the stand-in slots with kind rows fitted on photos, TinyCLIP 39M/16 was ahead by 4.8 points (4.1 to 5.5) on the kind of eye, a second look that `docs/EVAL.md` counts as evidence outside the rule.
+- [x] Build the label set: phrases for the sixteen kinds of eye and for `none` (`labels/kinds.json`), and rows for the 5,911 local species (`models/pocket/species.json`).
+- [x] Compute the label rows once, offline, so that the phone downloads the image encoder and the row files and computes no text. *(`tools/eval/export_heads.py`; `models/pocket/kinds.f16.bin`, `species.f16.bin`, `species.bias.f32.bin`)*
+- [x] Run it in the browser with ONNX Runtime Web, with the files served from this site and kept by the service worker. *(build 6, commit `68dc1cd`; `vendor/ort/`; the kept files are listed in `runs/engines/34-live/summary.json`)*
+- [x] Map a recognized species to its kind of eye through taxonomy. *(`tools/species/eyes.py`, the `eyes` column of `data/regions/us-fl-alachua/species.json`.)* The word table in `src/cam.r.js` is still used for a name the person types.
+- [x] Say "not sure" when the kind is uncertain, and offer the three likeliest kinds. *(build 8; `fusion.kind_at` in `docs/CONTRACTS.md`; the `notsure` section of `test/rec/check_rec.js`)*
+- [x] Measure the kind of eye on held-out local research-grade photos, per kind, with the confusion tables. *(`docs/EVAL.md`, `docs/eval/model-<id>.md`.)* In build 9 the kind is right for 89.1% (88.2 to 90.1) of the 4,197 test photos, and for 96.9% (1,201) of 1,240 COCO test photos of people, pets, grazing animals and rooms (`docs/eval/decision-pocket-v3.json`).
+- [ ] Measure the time a photo takes on a phone. It has been measured only on build machines (`docs/LOG.md`, 03:40).
+
+The line above that carries no tick is still open. `docs/EVAL.md` was regenerated at 06:11 on 11 October: its rows called "live" are the two slots on `main` scored as shipped, every share is rounded once from its own count, and thirty-one of its figures agree with the audit's independent counts (`docs/eval/audit.md`, `docs/LOG.md`).
 
 ## Phase 3: species (the naturalist)
 
-Goal: a species-level name for what was photographed, with an honest confidence.
+Goal: a species name for what was photographed, shown only when it is likely to be right.
 
-- [ ] Build the local candidate list from GBIF: every species recorded around the test town, with counts by month and full taxonomy.
-- [ ] Run BioCLIP 2 (ViT-L/14, MIT licence) zero-shot against that list, with and without a place-and-season prior, and measure top-1 and top-5 accuracy on held-out local research-grade photos.
-- [ ] Serve it: a small service the app can call when there is signal. The kind of eye still comes from the device at once; the species name arrives after.
-- [ ] Show uncertainty: when the top candidates are close, the app says "one of these" and lets the person choose.
+- [x] Build the local candidate list from GBIF: 5,911 species recorded in Alachua County through 2024, with counts by month and full taxonomy. *(commit `9ae44df`; `data/regions/us-fl-alachua/species.json` and its `SUMMARY.md`)*
+- [x] Run BioCLIP 2 (ViT-L/14, MIT licence) against that list, with and without a place-and-season prior, on held-out local research-grade photos. Top-1 is 90.3% (89.4 to 91.3) without the prior and 92.4% (91.6 to 93.2) with it, and top-5 is 96.8% and 97.5% (`docs/EVAL.md`, `tools/eval/study1.py`). A clean build machine reproduced the evaluation from the published files (`runs/eval/4` on `ci`, `docs/eval/reproduction.txt`).
+- [x] Build a species service. `service/` holds BioCLIP 2 behind a small Gradio app, which answered at 1.1 seconds a photo on a build machine's processor (`docs/LOG.md`, 11 October, 00:52). It has not been deployed: a free Hugging Face account cannot host a Docker or Gradio space on plain processors, and may host one on shared graphics cards only once the account is thirty days old, which is about 10 November.
+- [x] Run the larger model on the device. Because the service had no free server, BioCLIP 2's image half was quantized for the browser's WASM runtime in five recipes and each was measured through that runtime (`docs/LOG.md`, 03:45; `docs/eval/variants.md`). The recipe `hybrid-fc2-w8` (309.8 MB, four parts fetched from a commit pinned by `pin/model-bioclip2-l14-462ecdc`) ships as `models/naturalist/` from build 8: the person is asked once, the file is kept in Cache Storage (`src/cam.rec.js`), and the model runs in a worker of its own, in the background, after the pocket recognizer has answered. As shipped, with `kind_at` 0.5, it names a species for 84.2% of the test photos and is right for 98.2% of those, scored from the original model's vectors (`tools/audit/results/recompute.json`, `docs/eval/audit.md`).
+- [x] Fetch the larger model from the live address in real browsers. With build 8, through the page's own sheet, it was kept and answering in Safari 26.6 on macOS, Safari in an iPhone 17e simulator, WebKit 26.0 on macOS and on Linux, and Chromium 141 on Linux, all on build machines; nothing was fetched again after a reload, and with the network cut Chromium still ran it (`docs/ENGINES.md`).
+- [x] Measure its memory. The largest browser process peaked at 1,501 MiB in Chromium and at 1,688 to 2,598 MiB in the Apple and WebKit browsers (`docs/ENGINES.md`). In the laboratory, the weights handed to the runtime as a data file beside a 2 MB graph file cut the WASM heap from 821 to 429 MiB and the renderer's peak from 1,330 to 953 MiB, with identical vectors (`ci/lab/mem/results.json`). That form is measured and published on `pub/model-bioclip2-l14-b` (commit `add8cf5`, kept by `pin/model-bioclip2-l14-b-add8cf5`), and the page does not use it yet.
+- [x] Show uncertainty: under `offer_at` the page offers three species of the winning kind and lets the person choose. *(`docs/CONTRACTS.md`; `docs/EVAL.md`, "What the page would show")*
+
+These are still open:
+
+- No phone has held the larger model, and whether a phone's browser will keep a 310 MB file and find the memory to run it is unknown.
+- The larger model's lighter form, with the weights as a data file beside a small graph file, now loads in the page on the branch `agent/rec-b` (identical answers on six photos; the renderer's peak a quarter lower in headless Chromium). A trial on build machines found it correct in Safari and WebKit on macOS and no lighter there, the largest process peaking at about 2,045 MiB with either form (`docs/ENGINES.md`). Open: where WebKit's memory goes, since the WASM heap is not it; then the merge, with a run on Safari and Firefox.
+- In Playwright's WebKit on Linux, where no service worker controls the page, a reload while the larger model is arriving makes the page fetch a kept part again and then fail with "a part is no longer kept on this device" (`runs/engines/38-linux-firefox-webkit/rec/resume-webkit.json`). The cause is known (what the page before the reload kept is lost, and a second `put` to the same address keeps nothing), the live address is not affected because a service worker controls it, and a fix waits as `ci/engines/patches/webkit-resume.patch` (`docs/ENGINES.md`, runs 42 to 52). Open: applying it with the recognizer's full checks, and the same test in Safari itself.
+- After a reload with the larger model kept, the first photo waited 25 to 42 seconds for the pocket recognizer's answer in Chromium, where it otherwise comes in under a second on build machines (`docs/ENGINES.md`; `runs/engines/40-big-linux/big-chromium.json`; `docs/LOG.md`, 03:40). The larger model turned out not to be the cause: it starts only after the pocket recognizer's answer is on screen, and the same wait appears without it on machines that draw the page in software (`docs/LOG.md`, 06:29). Open: timing a phone from choosing a photo to seeing its kind.
+- With the larger model on the device, it does look at every photo the pocket recognizer called alive, also those the small model named (`closer()` in `src/cam.c2.js`), and it replaces the name when it is sure of the same kind and its species reaches its naming level. Open: when it is sure of the kind and unsure of the species, a name the small model gave stands unchallenged; and in Firefox the larger model is too slow to answer at all (`docs/ENGINES.md`), so it should not be offered there.
+- The species service has no home, and `service.json`, which would point the page at it, is absent.
 
 ## Phase 4: a regional pocket model
 
 Goal: species-level recognition on the device, offline, for the region.
 
-- [ ] First step: a classifier head trained on the pocket encoder's features for the most recorded local species. Small, quick to train, and a fair baseline.
-- [ ] Then distillation: a small encoder taught by BioCLIP 2 on openly licensed iNaturalist photos of regional species.
-- [ ] Evaluation against the Phase 3 numbers on the same held-out photos. A model card stating data, licences, accuracy by group, and known failures.
+- [x] Gather training photos. `train/alachua-pre2025` holds 84,808 photos of 5,467 species, all dated before 2025, read from iNaturalist's open-data files (commit `2850053`; `data/train/alachua-pre2025/SUMMARY.md`; the manifest is on `pub/data-alachua`).
+- [x] Fit heads on the pocket encoder's vectors of those photos, and measure them on the held-out photos. *(evaluation run 25, `runs/eval/25/` on `ci`; the heads under the licence rule in `docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json`)*
+- [x] Ship heads fitted under the licence rule of 11 October, with the list of photos they were fitted on published beside them as the attribution. *(build 9, commit `013bb77`: heads from `pub/heads-pocket-v3` at `f0c2544`, fitted on 83,348 photos and chosen by a rule fixed before their numbers existed, `docs/eval/decision-pocket-v3.json`; the list is `fitted_on.csv` there, `docs/LICENCES.md`)* On the test photos they name a species for 20.1% and are right for 93.3% of those (788 of 845), where the heads of build 8 named 13.3% and were right for 92.3% (`docs/eval/shipped-alachua-pre2025-nc-tinyclip-39m-16.json`, `docs/eval/audit.md`).
+- [ ] Teach a small encoder from BioCLIP 2 (distillation) on openly licensed iNaturalist photos of the region's species.
+- [ ] Write a model card for the shipped slot, stating its data, licences, accuracy by group and known failures. The slot manifests carry an `evaluation` block, and `docs/eval/model-<id>.md` gives breakdowns by kind and the commonest mistakes for each model measured.
+
+The two lines above that carry no tick are still open.
 
 ## Phase 5: the game, sharing, and review
 
-- [ ] The rule of the finding game (kept, lent, sealed eyes, or held open for a town). *(awaiting a decision)*
-- [ ] Sharing a still or clip from the phone's own share sheet.
-- [ ] Review of the sixteen eye models by a vision scientist; corrections folded back into `docs/SOURCES.md`.
-- [ ] iPhone and Android store builds, if the web app proves the case for them.
+- [ ] Decide the rule of the finding game (kept, lent, sealed eyes, or held open for a town). The decision is awaited.
+- [ ] Share a still or a clip through the phone's own share sheet. The page calls `navigator.share` (`src/cam.c2.js`), and the share sheet has not been checked on any phone (`docs/LOG.md`).
+- [ ] Have a vision scientist review the sixteen eye models, and fold the corrections back into `docs/SOURCES.md`.
+- [ ] Build for the iPhone and Android stores, if the web app proves the case for them.
+
+Every line of this phase is still open. Thin app shells around the built page ran on build machines as an experiment (`native/README.md`): an Android WebView app on an Android 14 emulator and an iPhone WKWebView app in an iPhone 17 simulator each passed the page's self-test, 98 checks of 98. The iPhone shell serves the page from a small http server of its own, and with that the larger model is fetched, kept and run in the simulator (`runs/native/7-ios`). A debug build of the Android shell is published for trying on one's own phone (`seen-back-debug.apk` on the branch `pub/app-android`, made by a push to `run/native/pub<label>`); it is signed with a throwaway key and is not a store release. Neither shell has run on a real phone.
+
+## What comes next, in order
+
+1. An iPhone comes first. The page has never run on one, and nobody knows yet whether a phone's browser will keep the 310 MB model and run it, or how long the pocket recognizer takes on a phone. On build machines the Apple and WebKit browsers reached 1,688 to 2,598 MiB while running the larger model.
+2. A server for phones that cannot hold the larger model comes next. The service in `service/` was proven on a build machine and has not been deployed, the page reads its address from `service.json` at the site's root (`docs/CONTRACTS.md`), and a free home on Hugging Face becomes possible at about 10 November.
+3. A wider set of photos with nothing alive in them comes third. The only such photos the recognizers were tuned and tested on are COCO's rooms, and in the page before build 9 shipped the pocket recognizer called a brick wall a reptile and named a photo of old coins as a fungus (`docs/LOG.md`, 05:52).
+4. Then domestic animals and cultivated plants join the species list. The list was built from records of wild things, so it holds no dog, cattle or sheep, most houseplants or common garden flowers, and every name the app gives one of them is wrong; on COCO photos the pocket recognizer named 43 of 73 cows, each wrongly (`docs/eval/audit.md`, `docs/eval/pets-livestock.json`).
+5. A student model small enough for every phone follows. Distilling BioCLIP 2 into a small encoder needs a graphics card, and the build machines used so far have none.
+6. More regions come after that. The species list, the evaluation photos and the training photos are built for one region by the scripts in `tools/species/`, and every number so far holds for Alachua County alone.
+7. The game comes last, once its rule is decided.

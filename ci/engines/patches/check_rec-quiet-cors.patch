@@ -1,0 +1,15 @@
+diff --git a/test/rec/check_rec.js b/test/rec/check_rec.js
+index 91948d5..a9930e7 100644
+--- a/test/rec/check_rec.js
++++ b/test/rec/check_rec.js
+@@ -365,7 +365,9 @@ async function meet(page, name) {
+ 
+   // ---------- the species service: a fake server that speaks Gradio's two-step call (test/rec/fake_service.js)
+   let fake = null;
+-  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_/.test(e));     // a sleeping server's refusals are written to the console by the browser itself
++  // a sleeping server's refusals are written to the console by the browser itself, each engine in its own words: Chromium "blocked by CORS policy",
++  // "net::ERR_"; Firefox "Cross-Origin Request Blocked"; WebKit "Preflight response is not successful", "due to access control checks" (runs engines/33)
++  const quiet = (errors) => errors.filter((e) => !/blocked by CORS policy|net::ERR_|Cross-Origin Request Blocked|Preflight response is not successful|due to access control checks|is not allowed by Access-Control-Allow-Origin/.test(e));
+   const svcFiles = async () => {
+     if (!fake) fake = await require('./fake_service.js').start(SVC_PORT);
+     fake.reset();

@@ -1,45 +1,188 @@
 
-  // ---------- recognition in the page itself: the pocket recognizer, and a larger model the person may fetch once
+  // ---------- recognition in the page itself: the pocket recognizer, and the full database the person may fetch once
   // Outside Claude's viewer the page names the photo by itself: an image encoder run by ONNX Runtime Web in a worker
   // (vendor/rec-worker.js), and label vectors worked out beforehand. The files are described by models/<slot>/manifest.json
   // (docs/CONTRACTS.md). Nothing here is fetched before the opening screen is up, and nothing about a photo leaves the device.
   // Kept copies: every file is asked for with ?v=<version> and kept under that address, so a new version is a new address.
   // The runtime's version is its release number; a slot's version is a fingerprint of its manifest, which is always asked of the network first.
+  // From build 9 the encoder is the exception where the manifest gives its checksum: it is asked for with ?v=sha256-<checksum>, so that
+  // new heads or new settings (a new manifest) do not cost a second download of an encoder whose bytes have not changed.
   // There are two slots. The pocket one (models/pocket) is fetched by the page itself once the opening screen is up. The larger one
   // (models/naturalist) is some hundreds of megabytes, in parts that may live on another origin: nothing of it is fetched until the
   // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
   // when a photo needs it and let go after a minute with nothing to do.
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
-  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
+  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person',
+    'fungus', 'slime', 'spider', 'jumper', 'fish', 'shark', 'snail', 'sealife', 'crab', 'salamander', 'worm', 'scorpion', 'tick', 'mammal', 'primate', 'whale', 'bat', 'flyingfox', 'cephalopod'];   // the order of KINDS in tools/fusion/fuse.py; the groups with no view yet (GROUPS) follow
+  function knownKind(k) { return !!(EYES[k] || GROUPS[k]); }   // a kind with a view, or a group the page names and cannot yet view the world as
   var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the larger model
+  function plain(x) { return String(x || '').toLowerCase().replace(/[^a-z' -]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function slips(a, b, lim) {                          // how many slips of the keys turn one word into the other: a letter wrong, missing, added, or two swapped
+    var n = a.length, m = b.length, i, j, p2 = null, p = [], c, low;
+    for (j = 0; j <= m; j++) p[j] = j;
+    for (i = 1; i <= n; i++) {
+      c = [i]; low = i;
+      for (j = 1; j <= m; j++) {
+        c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1));
+        if (p2 && i > 1 && j > 1 && a.charCodeAt(i - 1) === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === b.charCodeAt(j - 1)) c[j] = Math.min(c[j], p2[j - 2] + 1);
+        if (c[j] < low) low = c[j];
+      }
+      if (low > lim) return lim + 1;
+      p2 = p; p = c;
+    }
+    return p[m];
+  }
+  // ---------- where the phone probably is, for the full database of the whole world (docs/tracks/worlddb.md)
+  // The same arithmetic as tools/world/place.py, which says why it is so. The page reads the phone's time zone and nothing else about the
+  // place: no location is asked, and a photo's own location is never read. The first guess is the cells of the time zone (zones.json, from
+  // the tz database and Natural Earth's countries); each creature the full database names with confidence in that zone moves it, by the
+  // share of that species' records round each cell (place.bin). Those creatures are kept on this device, under their scientific names.
+  //   place.bin: "RGPL", then little-endian u32 version, f32 res, u32 rows of cells, u32 columns, u32 species, u32 pairs, u32 bytes; the
+  //   records of each cell (f32 a cell); then for each species a varint count of cells and, for each cell, the varint step from the cell
+  //   before and the varint count of records (tools/world/prior.py writes it).
+  var PLACE_KEY = 'seenback.place.v1', PLACE_KEEP = 200;
+  function zoneNow() { try { return String(Intl.DateTimeFormat().resolvedOptions().timeZone || ''); } catch (e) { return ''; } }
+  function placeOf(buf, zbuf, set, table, mine) {
+    function bad(what) { var e = new Error('The full database’s download is damaged.'); e.code = 'damaged'; e.sentence = e.message; e.detail = what; throw e; }
+    if (!buf || buf.byteLength < 32) bad('place file too short');
+    var dv = new DataView(buf), b = new Uint8Array(buf), Z;
+    if (b[0] !== 82 || b[1] !== 71 || b[2] !== 80 || b[3] !== 76 || dv.getUint32(4, true) !== 1) bad('not a place file');
+    var res = dv.getFloat32(8, true), nr = dv.getUint32(12, true), nc = dv.getUint32(16, true), S = dv.getUint32(20, true), npairs = dv.getUint32(24, true), nbytes = dv.getUint32(28, true), n = nr * nc;
+    if (S !== table.length || buf.byteLength !== 32 + 4 * n + nbytes || Math.abs(nr * res - 180) > 1e-3 || Math.abs(nc * res - 360) > 1e-3) bad('place file does not fit the table');
+    try { Z = JSON.parse(new TextDecoder('utf-8').decode(zbuf)); } catch (e) { bad('zones are not JSON'); }
+    if (!Z || typeof Z.zones !== 'object' || Math.abs((+Z.res || 0) - res) > 1e-6) bad('zones do not fit the place file');
+    var T = new Float64Array(n), i, P0 = 32 + 4 * n, start = new Uint32Array(S + 1), p = P0, s, k, m, v, mul, cnt;
+    for (i = 0; i < n; i++) T[i] = dv.getFloat32(32 + 4 * i, true);
+    function vint() { var x = 0; mul = 1; do { v = b[p++]; x += (v & 127) * mul; mul *= 128; } while (v & 128); return x; }
+    for (s = 0, cnt = 0; s < S; s++) { start[s] = p; m = vint(); cnt += m; for (k = 0; k < m; k++) { vint(); vint(); } }
+    start[S] = p;
+    if (p !== P0 + nbytes || cnt !== npairs) bad('place file of the wrong length');
+    var R = 6371.0088, D = Math.PI / 180, lat = new Float64Array(nr), radius = set.radius_km, eps = set.eps, K = new Int32Array(nr * nr), span;
+    for (i = 0; i < nr; i++) lat[i] = -90 + (i + 0.5) * res;
+    (function () {                                     // K[r * nr + r2]: the columns of row r2 within the radius of a cell of row r, by how far they may lie
+      var r, r2, j, h, d, last, half = Math.floor(nc / 2);
+      for (r = 0; r < nr; r++) for (r2 = 0; r2 < nr; r2++) {
+        last = -1;
+        for (j = 0; j <= half; j++) {
+          h = Math.pow(Math.sin((lat[r2] - lat[r]) * D / 2), 2) + Math.cos(lat[r] * D) * Math.cos(lat[r2] * D) * Math.pow(Math.sin(j * res * D / 2), 2);
+          d = 2 * R * Math.asin(Math.sqrt(Math.min(1, h)));
+          if (d <= radius) last = j; else break;
+        }
+        K[r * nr + r2] = last >= half ? nc : last;
+      }
+    })();
+    span = Math.ceil(radius / (111.19 * res)) + 1;
+    function discSum(x) {                              // for every cell, the sum of x over the cells whose centres lie within the radius of its centre
+      var out = new Float64Array(n), cs = new Float64Array(3 * nc + 1), r, r2, c, kk, tot, base;
+      for (r2 = 0; r2 < nr; r2++) {
+        base = r2 * nc; tot = 0;
+        for (c = 0; c < nc; c++) tot += x[base + c];
+        if (tot === 0) continue;
+        cs[0] = 0; for (c = 0; c < 3 * nc; c++) cs[c + 1] = cs[c] + x[base + (c % nc)];
+        for (r = Math.max(0, r2 - span); r <= Math.min(nr - 1, r2 + span); r++) {
+          kk = K[r * nr + r2]; if (kk < 0) continue;
+          if (kk >= nc || 2 * kk + 1 >= nc) { for (c = 0; c < nc; c++) out[r * nc + c] += tot; continue; }
+          for (c = 0; c < nc; c++) out[r * nc + c] += cs[nc + c + kk + 1] - cs[nc + c - kk];
+        }
+      }
+      return out;
+    }
+    var N = discSum(T), world = new Float64Array(n), sumT = 0;
+    for (i = 0; i < n; i++) sumT += T[i] + 1;
+    for (i = 0; i < n; i++) world[i] = (T[i] + 1) / sumT;
+    function zoneName(z) { if (!z) return ''; if (Z.zones[z]) return z; var a = Z.alias && Z.alias[z]; return a && Z.zones[a] ? a : ''; }
+    function firstGuess(z) {
+      var zz = zoneName(z), P = new Float64Array(n), w, cells, j, tot = 0;
+      if (!zz) { P.set(world); return P; }
+      cells = Z.zones[zz][0]; w = Z.zones[zz][1];
+      for (j = 0; j < n; j++) P[j] = eps * world[j];
+      for (j = 0; j < cells.length; j++) P[cells[j]] += (1 - eps) * w[j];
+      for (j = 0; j < n; j++) tot += P[j];
+      for (j = 0; j < n; j++) P[j] /= tot;
+      return P;
+    }
+    function localCounts(sp) {
+      var x = new Float64Array(n), cell = 0, mm, j;
+      p = start[sp]; mm = vint();
+      for (j = 0; j < mm; j++) { cell += vint(); x[cell] += vint(); }
+      return discSum(x);
+    }
+    function update(P, sp) {                           // the encounter rule: P(c) times the share of sp round c, normalized
+      var L = localCounts(sp), lp = new Float64Array(n), mx = -Infinity, j, tot = 0;
+      for (j = 0; j < n; j++) { lp[j] = Math.log(Math.max(P[j], 1e-300)) + Math.log((L[j] + 1) / (N[j] + S)); if (lp[j] > mx) mx = lp[j]; }
+      for (j = 0; j < n; j++) { lp[j] = Math.exp(lp[j] - mx); tot += lp[j]; }
+      for (j = 0; j < n; j++) lp[j] /= tot;
+      return lp;
+    }
+    function logShare(P) {                             // log share(s), share(s) = sum over cells of P(c) (n_c(s) + 1) / (N_c + S)
+      var w = new Float64Array(n), W, sw = 0, out = new Float64Array(S), j, mm, cell, acc, sp;
+      for (j = 0; j < n; j++) { w[j] = P[j] / (N[j] + S); sw += w[j]; }
+      W = discSum(w); p = P0;
+      for (sp = 0; sp < S; sp++) { mm = vint(); cell = 0; acc = 0; for (j = 0; j < mm; j++) { cell += vint(); acc += vint() * W[cell]; } out[sp] = Math.log(acc + sw); }
+      return out;
+    }
+    // the creatures met, kept on this device: {id (the meeting's), sci, zone, at}
+    var rowOf = null, cache = { key: null, prior: null, P: null };
+    function row(sci) { if (!rowOf) { rowOf = new Map(); table.forEach(function (t, j) { if (!rowOf.has(t.sci)) rowOf.set(t.sci, j); }); } return rowOf.has(sci) ? rowOf.get(sci) : -1; }
+    function kept() { try { var j = JSON.parse(localStorage.getItem(PLACE_KEY) || 'null'); return j && Array.isArray(j.met) ? j.met.filter(function (x) { return x && typeof x.sci === 'string' && typeof x.zone === 'string'; }) : []; } catch (e) { return []; } }
+    function keep(list) { try { localStorage.setItem(PLACE_KEY, JSON.stringify({ v: 1, met: list.slice(-PLACE_KEEP) })); } catch (e) {} }
+    function metHere(z) {                              // the rows of the creatures met in this time zone, each species once, in the order met
+      var seen = {}, out = [];
+      kept().forEach(function (x) { var r = x.zone === z ? row(x.sci) : -1; if (r >= 0 && !seen[r]) { seen[r] = 1; out.push(r); } });
+      return out;
+    }
+    function now() {
+      var z = zoneNow(), met = metHere(z), key = z + '|' + met.join(','), P, j;
+      if (cache.key !== key) {
+        P = firstGuess(z);
+        for (j = 0; j < met.length; j++) P = update(P, met[j]);
+        cache = { key: key, P: P, prior: null, zone: z, known: !!zoneName(z), met: met.length };
+      }
+      return cache;
+    }
+    return {
+      prior: function () { var c = now(); if (!c.prior) c.prior = logShare(c.P); return c.prior; },
+      // a meeting named, renamed or unnamed: only a name the full database gave with confidence counts, once a meeting
+      met: function (id, sci) {
+        if (!mine) return;
+        var list = kept().filter(function (x) { return x.id !== id; });
+        if (sci && row(sci) >= 0) list.push({ id: String(id || ''), sci: sci, zone: zoneNow(), at: Date.now() });
+        keep(list);
+      },
+      about: function () { var c = now(); return { zone: c.zone, known: c.known, met: c.met, cells: n, res: res }; },
+      test: { firstGuess: firstGuess, update: update, logShare: logShare, now: function () { return now().P; }, row: row, discSum: discSum, N: N, T: T }
+    };
+  }
+  function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the full database
     var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
     var cannot = inViewer ? 'off' : slot === 'off' || /\.\.|^\/|\/\//.test(slot) ? 'off'
       : (typeof Worker !== 'function' || typeof WebAssembly !== 'object' || typeof fetch !== 'function' || typeof Float32Array !== 'function') ? 'browser'
-      : (big && !window.caches) ? 'browser' : '';      // the larger model has to be kept, and this browser keeps nothing
+      : (big && !window.caches) ? 'browser' : '';      // the full database has to be kept, and this browser keeps nothing
     var SAY = {
-      off: 'This page’s recognizer is switched off.',
-      absent: 'This page has no recognizer yet.',
-      missing: 'The recognizer’s files are missing.',
-      network: 'The recognizer could not be downloaded.',
-      damaged: 'The recognizer’s file arrived damaged.',
-      unfit: 'The recognizer’s files do not fit this build of the page.',
-      browser: 'This browser cannot run the recognizer.',
-      died: 'The recognizer stopped working.',
-      slow: 'The recognizer took too long.',
-      photo: 'The recognizer failed on that photo.'
+      off: 'IDing is turned off.',
+      absent: 'This app can’t ID photos yet.',
+      missing: 'Some of this app’s files are missing. Close the app and open it again.',
+      network: 'This app’s download is incomplete. Check your connection, then close the app and open it again.',
+      damaged: 'This app’s download is damaged. Close the app and open it again.',
+      unfit: 'This app’s files are out of date. Close the app and open it again to update.',
+      browser: 'This browser is too old to ID photos. Try a current Chrome, Safari, or other browser.',
+      died: 'This app’s IDing has crashed. Check that your device has enough memory.',
+      slow: 'The IDing timed out. Try again.',
+      photo: 'That photo couldn’t be read. Try again.'
     };
     if (big) {
-      Object.keys(SAY).forEach(function (k) { SAY[k] = SAY[k].replace('recognizer', 'larger model'); });
-      SAY.room = 'There is not enough room on this device for the larger model.';
-      SAY.keep = 'The larger model could not be kept on this device.';
-      SAY.stopped = 'The download was stopped.';
+      SAY.off = 'The full database is switched off.'; SAY.absent = 'This app has no full database yet.'; SAY.missing = 'The full database\u2019s files are missing.';
+      SAY.network = 'The full database’s download was interrupted.'; SAY.damaged = 'The full database\u2019s download is damaged.'; SAY.unfit = 'The full database does not fit this build of the app. Download the latest version of the app.';
+      SAY.browser = 'This browser cannot run the full database.'; SAY.died = 'The full database crashed. Check that your device has enough memory.'; SAY.slow = 'The full database timed out. Try again.'; SAY.photo = 'The full database failed on that photo. Try a different photo. Try a different photo.';
+      SAY.room = 'There is not enough storage on this device for the full database.';
+      SAY.keep = 'The full database could not be kept on this device.';
+      SAY.stopped = 'The download has been stopped.';
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
     var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = big ? 120000 : 45000, netWaitMs = 6000, api;
-    // the larger model only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
+    // the full database only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
     var have = '', gone = false, keptBytes = 0, partGot = 0, getP = null, getCtl = null, getFail = '', surveyP = null, idleMs = 60000, idleTimer = 0, queue = Promise.resolve(), asked = 0;
 
     function err(code, detail) { var e = new Error(SAY[code] || code); e.code = code; e.sentence = SAY[code] || SAY.died; e.detail = String(detail || ''); return e; }
@@ -123,16 +266,41 @@
       return typeof u === 'string' && !!u && (/^https:\/\/[^\/]+\//.test(u) || (!/^[a-z][a-z0-9+.-]*:/i.test(u) && !/^\/\//.test(u)) || (onThisMachine && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u)));
     }
     function partsOf(V) { return Array.isArray(V.parts) ? V.parts : [{ url: V.url, bytes: V.bytes, sha256: V.sha256 }]; }
+    // The full database for the whole world (docs/tracks/worlddb.md) brings more than its encoder from another origin: its rows at one byte a
+    // number in parts, a scale for each row, its table of names, the records of each species on a world grid and the cells of each time zone.
+    // Each is a group of parts, fetched, checked and kept as the encoder's parts are. A file named by a plain address stays in the slot.
+    function far(x) { return !!x && typeof x === 'object' && (Array.isArray(x.parts) || typeof x.url === 'string'); }
+    function groupsOf(m) {
+      var g = [{ key: 'vision', V: m.vision }], sp = m.species, pl = m.place;
+      if (sp && Array.isArray(sp.parts)) g.push({ key: 'rows', V: sp });
+      if (sp && far(sp.scale)) g.push({ key: 'scale', V: sp.scale });
+      if (sp && far(sp.table)) g.push({ key: 'table', V: sp.table });
+      if (pl) { g.push({ key: 'place', V: pl }); g.push({ key: 'zones', V: pl.zones }); }
+      return g;
+    }
+    function allParts(m) { var out = []; groupsOf(m).forEach(function (g) { out = out.concat(partsOf(g.V)); }); return out; }
+    function bytesOf(m) { return allParts(m).reduce(function (a, p) { return a + p.bytes; }, 0); }
+    function okGroup(V) {                              // parts that add up to the whole, each with its length
+      var sum = 0, P = partsOf(V);
+      return P.length > 0 && num(V.bytes) && P.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) && sum === V.bytes;
+    }
     function readManifest(text) {
       var m; try { m = JSON.parse(text); } catch (e) { throw err('damaged', 'manifest is not JSON'); }
-      var v = m && m.vision, f = m && m.fusion, k = m && m.kinds, sp = m && m.species;
+      var v = m && m.vision, f = m && m.fusion, k = m && m.kinds, sp = m && m.species, pl = m && m.place;
       if (!v || !f || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !(v.url || Array.isArray(v.parts))) throw err('unfit', 'manifest lacks a field');
       // a slot may come without a kinds head: then the kind is taken from the species answer, and the species are not optional
       if (k ? !(Array.isArray(k.labels) && k.url && num(f.t_kind)) : !sp) throw err('unfit', 'manifest lacks a field');
-      if (k && k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
-      if (sp && !(sp.url && sp.table && num(sp.count) && num(f.t_species) && num(f.alpha_prior) && (!k || num(f.w_kind)) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
+      if (k && k.labels.some(function (l) { return l !== 'none' && !knownKind(l); })) throw err('unfit', 'a kind this page does not know');
+      if (sp && !((sp.url || Array.isArray(sp.parts)) && sp.table && num(sp.count) && num(f.t_species) && num(f.alpha_prior) && (!k || num(f.w_kind)) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
+      // rows at one byte a number carry a scale for each row; a database for the world carries its place files, and only the full database may
+      if (sp && sp.dtype !== undefined && sp.dtype !== 'f16' && sp.dtype !== 'int8') throw err('unfit', 'species rows of a kind this page does not know');
+      if (sp && sp.dtype === 'int8' && !far(sp.scale)) throw err('unfit', 'rows at one byte a number without their scale');
+      if (sp && (Array.isArray(sp.parts) || far(sp.scale) || far(sp.table) || pl) && !big) throw err('unfit', 'a database in parts in the pocket slot');
+      if (pl && !(far(pl) && far(pl.zones) && num(pl.radius_km) && pl.radius_km > 0 && num(pl.eps) && pl.eps > 0 && pl.eps < 1)) throw err('unfit', 'place files without their settings');
+      if (big && sp && !groupsOf(m).slice(1).every(function (g) { return okGroup(g.V); })) throw err('unfit', 'the parts do not add up to the whole');
       // a trained head carries a bias for each row; a manifest may choose how the two heads are combined. Anything this build does not know is refused, not guessed at.
       if (k && k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
+      if (k && k.county_bias !== undefined && k.county_bias !== null && !(Array.isArray(k.county_bias) && k.county_bias.length === k.labels.length && k.county_bias.every(num))) throw err('unfit', 'kinds.county_bias does not match the labels');
       if (f.rule !== undefined && f.rule !== 'product' && f.rule !== 'mix') throw err('unfit', 'a combination rule this page does not know');
       if (f.guard !== undefined && !(num(f.guard) && f.guard > 0)) throw err('unfit', 'fusion.guard is not a positive number');
       if (f.kind_at !== undefined && f.kind_at !== null && !num(f.kind_at)) throw err('unfit', 'fusion.kind_at is not a number');
@@ -141,7 +309,7 @@
         var sum = 0;
         if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
       }
-      if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the larger model without its length' : 'a model in parts in the pocket slot');
+      if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the full database without its length' : 'a model in parts in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -149,7 +317,7 @@
       rows = Array.isArray(t) ? t : t && t.species;
       if (!Array.isArray(rows) || rows.length !== count) throw err('unfit', 'species table has ' + (rows ? rows.length : 0) + ' rows, not ' + count);
       return rows.map(function (r) {
-        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = EYES[a[2]] ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
+        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = knownKind(a[2]) ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
     }
@@ -160,22 +328,27 @@
       return out;
     }
     function slotOf(m, rows, sb) {                     // everything the scoring needs: the settings, the labels, the species table, the biases
-      var has = {};
+      var has = {}, uniq = [], rowAt = [];
       if (rows) rows.forEach(function (r) { has[r.kind] = 1; });
       if (sb && (!rows || sb.length !== rows.length)) throw err('unfit', 'species biases do not match the table');
       if (!m.kinds && !rows) throw err('unfit', 'neither kinds nor species');
+      // rows of the kinds head that share a label are one kind, in the place of the label's first row (a group head keeps the row
+      // of a group it cannot yet name well and labels it `other`); their probabilities are added in fuseWith, as in tools/fusion/fuse.py
+      if (m.kinds) m.kinds.labels.forEach(function (l) { var j = uniq.indexOf(l); if (j < 0) { j = uniq.length; uniq.push(l); } rowAt.push(j); });
       // without a kinds head the labels are the kinds the table has, in the one fixed order
-      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
-        kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
+      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? uniq : KIND_ORDER.filter(function (k) { return has[k]; }), rowAt: m.kinds ? rowAt : null, table: rows, has: has,
+        kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, kbl: m.kinds && m.kinds.county_bias ? Float64Array.from(m.kinds.county_bias) : null, sb: sb || null, prior: {} };
     }
-    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go
+    function encV(V) { return V && !V.parts && typeof V.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(V.sha256) ? 'sha256-' + V.sha256.toLowerCase() : ''; }   // the encoder's own version, where its checksum is given
+    function prune(cache, v) {                         // older versions of this slot and of the runtime are let go; the encoder in use stays under its checksum
       if (!cache) return;
+      var ev = M ? encV(M.vision) : '';
       cache.keys().then(function (keys) {
         keys.forEach(function (req) {
           var u; try { u = new URL(req.url); } catch (e) { return; }
           var q = /[?&]v=([^&]+)/.exec(u.search), here = u.href.split('?')[0];
           if (!q) return;
-          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v) cache.delete(req);
+          if (here.indexOf(base) === 0 && here.slice(base.length).indexOf('/') < 0 && decodeURIComponent(q[1]) !== v && !(ev && decodeURIComponent(q[1]) === ev && here === abs(M.vision.url, base))) cache.delete(req);
           if (here.indexOf(abs(ORT.dir)) === 0 && decodeURIComponent(q[1]) !== ORT.v) cache.delete(req);
         });
       }).catch(function () {});
@@ -236,17 +409,17 @@
     function adopt(text) { M = readManifest(text); ver = fingerprint(text); base = abs(manifestUrl).replace(/[^\/]*$/, ''); cur = null; }
     function u(rel) { return withV(abs(rel, base), ver); }
 
-    // ---------- a model in parts (the larger model)
+    // ---------- a model in parts (the full database)
     // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
     function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
     function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
     function unkeepParts() {
-      var V = M.vision; have = 'absent'; keptBytes = 0;
-      return Promise.all(partsOf(V).map(function (p) { return unkeep(partKey(p)); }).concat([unkeep(wholeKey(V))]));
+      have = 'absent'; keptBytes = 0;
+      return Promise.all(allParts(M).map(function (p) { return unkeep(partKey(p)); }).concat(groupsOf(M).map(function (g) { return unkeep(wholeKey(g.V)); })));
     }
     function staleParts(cache) {                       // parts of a model this slot no longer names
       if (!cache || !M) return;
-      var now = {}; partsOf(M.vision).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); now[wholeKey(M.vision)] = 1;
+      var now = {}; allParts(M).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); groupsOf(M).forEach(function (g) { now[wholeKey(g.V)] = 1; });
       cache.keys().then(function (keys) {
         keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
       }).catch(function () {});
@@ -276,7 +449,7 @@
         }).then(next);
       }
       return next().then(function () {
-        if (!V.sha256) return;
+        if (!V.sha256 || (P.length === 1 && P[0].sha256 === V.sha256)) return;
         return kept(cache, wholeKey(V)).then(function (ok) {
           if (ok) return;
           return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
@@ -292,7 +465,7 @@
       } catch (e) {}
       return Promise.resolve();
     }
-    // What of the larger model is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
+    // What of the full database is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
     // The manifest is asked for the first time this is called, and never before.
     function survey(fresh) {
       if (cannot || gone) return Promise.resolve('none');
@@ -300,7 +473,7 @@
       if (!fresh && have) return Promise.resolve(have);
       if (!surveyP) surveyP = keepOpen().then(function (cache) {
         return (M ? Promise.resolve() : manifestText(cache).then(adopt)).then(function () {
-          var P = partsOf(M.vision);
+          var P = allParts(M);
           return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
@@ -329,7 +502,7 @@
       }).then(function (cache) {
         if (!cache) throw err('keep', 'this browser gave no store to keep it in');
         store = cache;
-        var P = partsOf(M.vision), i = 0;
+        var P = allParts(M), i = 0;
         function next() {
           if (i >= P.length) return Promise.resolve();
           var part = P[i++], key = partKey(part);
@@ -353,11 +526,11 @@
             });
           }).then(next);
         }
-        return room(Math.max(0, M.vision.bytes - keptBytes)).then(next);
+        return room(Math.max(0, bytesOf(M) - keptBytes)).then(next);
       }).then(function () {
         have = 'kept'; staleParts(store); notify();
         return ready();
-      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + M.vision.bytes); notify(); }, function (e) {
+      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + bytesOf(M)); notify(); }, function (e) {
         getP = null; getCtl = null;
         if (!e || !e.code) e = err('died', e && e.message);
         if (have !== 'kept') have = keptBytes ? 'partial' : 'absent';
@@ -368,7 +541,7 @@
       return p;
     }
     function halt() { if (getCtl) try { getCtl.abort(); } catch (e) {} }
-    function rest() {                                  // nothing has needed the larger model for a minute: its worker, and the memory it holds, are let go
+    function rest() {                                  // nothing has needed the full database for a minute: its worker, and the memory it holds, are let go
       clearTimeout(idleTimer); idleTimer = 0;
       if (!worker || state !== 'ready' || Object.keys(pending).length) return;
       var w = worker; worker = null; w.onmessage = w.onerror = null; try { w.terminate(); } catch (e) {}
@@ -394,30 +567,36 @@
       state = 'loading'; why = ''; got = 0; total = 0;
       return keepOpen().then(function (cache) {
         cacheRef = cache;
-        if (big && M) return null;                     // the larger model's worker is started again and again; its manifest is read once
+        if (big && M) return null;                     // the full database's worker is started again and again; its manifest is read once
         return manifestText(cache).then(adopt);
       }).then(function () {
-        var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, nS = M.species ? M.species.count : 0, c = cacheRef;
-        var inParts = big || !!V.parts, modelUrl = inParts ? '' : u(V.url);
+        var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, sp = M.species, nS = sp ? sp.count : 0, c = cacheRef, i8 = !!sp && sp.dtype === 'int8';
+        var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
+        function rowsLen(buf) { if (buf && buf.byteLength !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return buf; }
         return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
             file(c, withV(abs(ORT.dir + ORT.wasm), ORT.v), ORT.wasmBytes),
             inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
             M.kinds ? file(c, u(M.kinds.url), nK * M.width * 2) : null,
-            M.species ? file(c, u(M.species.url), nS * M.width * 2) : null,
-            M.species ? file(c, u(M.species.table), 0) : null,
-            M.species && M.species.bias_url ? file(c, u(M.species.bias_url), nS * 4) : null
+            sp ? (Array.isArray(sp.parts) ? joined(c, sp) : file(c, u(sp.url), nS * M.width * (i8 ? 1 : 2))).then(rowsLen) : null,
+            sp ? (far(sp.table) ? joined(c, sp.table) : file(c, u(sp.table), 0)) : null,
+            sp && sp.bias_url ? file(c, u(sp.bias_url), nS * 4) : null,
+            i8 ? (far(sp.scale) ? joined(c, sp.scale) : null) : null,
+            M.place ? joined(c, M.place) : null,
+            M.place ? joined(c, M.place.zones) : null
           ]);
         }).then(function (b) {
-          cur = slotOf(M, M.species ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
+          cur = slotOf(M, sp ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
+          if (i8 && (!b[6] || b[6].byteLength !== nS * 4)) throw err('damaged', 'species scales of the wrong length');
+          if (M.place) cur.place = placeOf(b[7], b[8], M.place, cur.table, big);   // where the phone probably is: its time zone, and the creatures met
           total = got;                                 // the downloads are over; what remains is starting the encoder
           notify();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
             wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
-            width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS };
+            width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;
@@ -451,6 +630,7 @@
       return out;
     }
     function priorFor(c, month) {                      // log of each species' share of this month's records, with a floor so that an unrecorded month is unlikely and not impossible
+      if (c.place) return c.place.prior();             // a database for the world: the share of each species where the phone probably is (placeOf)
       var key = (typeof month === 'number' && month === Math.floor(month) && month >= 0 && month < 12) ? month : 'none';   // no month known: no prior
       if (c.prior[key]) return c.prior[key];
       var t = c.table, n = t.length, out = new Float64Array(n), sum = 0, i, floor = num(c.f.prior_floor) ? c.f.prior_floor : 1e-6;
@@ -464,21 +644,38 @@
     // and tools/fusion/parity.py holds the two to the same answers; a change here is a change there.
     //   kd, sd: row . e for each kind row and each species row, e being the unit image vector. The rows are used as they are: a trained
     //   head's rows are weights, not unit vectors, and it adds a bias to each score.
-    //   A slot without a kinds head (the larger model): kd is not used, and a kind's score is its share of the species answer.
+    //   A slot without a kinds head (the full database): kd is not used, and a kind's score is its share of the species answer.
+    // The n likeliest rows (that pass `pred`), most likely first and the earlier row first where two are equal: what a stable sort of every
+    // row would put first, in one pass, since the full database has hundreds of thousands of rows.
+    function top(s, n, pred) {
+      var best = [], i, j, v;
+      for (i = 0; i < s.length; i++) {
+        if (pred && !pred(i)) continue;
+        v = s[i];
+        if (best.length === n && !(v > s[best[n - 1]])) continue;
+        for (j = best.length; j > 0 && s[best[j - 1]] < v; j--);
+        best.splice(j, 0, i); if (best.length > n) best.pop();
+      }
+      return best;
+    }
     function fuseWith(c, kd, sd, month) {
       var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
       if (c.head) {
-        z = new Float64Array(n);
-        for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
-        p = softmax(z);
+        var nr = c.rowAt.length, pr;
+        z = new Float64Array(nr);
+        var kbu = (table && sd && c.kbl) ? c.kbl : c.kb;      // a second bias where the county list is used (kinds.county_bias), as fuse.py does
+        for (i = 0; i < nr; i++) z[i] = f.t_kind * kd[i] + (kbu ? kbu[i] : 0);
+        pr = softmax(z);
+        if (nr === n) p = pr;
+        else { p = new Float64Array(n); for (i = 0; i < nr; i++) p[c.rowAt[i]] += pr[i]; }   // rows that share a label are one kind
       }
       if (table && sd) {
         var pr = f.alpha_prior ? priorFor(c, month) : null, zs = new Float64Array(table.length);
         for (i = 0; i < zs.length; i++) zs[i] = f.t_species * sd[i] + (c.sb ? c.sb[i] : 0) + (pr ? f.alpha_prior * pr[i] : 0);
         s = softmax(zs);
-        for (i = 0; i < s.length; i++) { q[table[i].kind] = (q[table[i].kind] || 0) + s[i]; order.push(i); }
-        order.sort(function (a, b) { return s[b] - s[a]; });
-        species = order.slice(0, 5).map(function (j) { return { sci: table[j].sci, en: table[j].en, p: s[j], kind: table[j].kind }; });
+        for (i = 0; i < s.length; i++) q[table[i].kind] = (q[table[i].kind] || 0) + s[i];
+        order = top(s, 5);
+        species = order.map(function (j) { return { sci: table[j].sci, en: table[j].en, p: s[j], kind: table[j].kind }; });
       }
       // a kind the species list can speak for is scored by both heads; one it has no rows for (nothing alive, a person) by the kinds alone
       function speaks(i) { return !!(s && c.has[labels[i]]); }
@@ -509,7 +706,7 @@
         else {
           // the three likeliest are kept as offers. They are taken from the kind that won, so that a flower is not offered a turtle;
           // a manifest that sets fusion.offer_any_kind takes the three likeliest of any kind.
-          var three = (f.offer_any_kind ? order : order.filter(function (j) { return table[j].kind === kind; })).slice(0, 3).map(function (j) { return { sci: table[j].sci, en: table[j].en, p: s[j], kind: table[j].kind }; });
+          var three = (f.offer_any_kind ? top(s, 3) : top(s, 3, function (j) { return table[j].kind === kind; })).map(function (j) { return { sci: table[j].sci, en: table[j].en, p: s[j], kind: table[j].kind }; });
           if (three.reduce(function (a, r) { return a + r.p; }, 0) >= f.offer_at) offers = three;
         }
       }
@@ -544,7 +741,8 @@
             worker.postMessage({ op: 'run', id: id, rgba: px.buf, w: px.w, h: px.h, wantPre: !!api.wantPre }, [px.buf]);
           }).then(function (m) {
             // far from the species list's place: a slot with a kinds head leaves the list out; one without still takes the kind from it, with no month's weight
-            var t = performance.now(), month = new Date().getMonth(), away = pocket.local === false, local = !away && !!cur.table;
+            // a database for the world names anywhere, with the prior of its place (placeOf); a county's list only near the county
+            var t = performance.now(), month = new Date().getMonth(), away = pocket.local === false, local = cur.place ? true : !away && !!cur.table;
             var r = fuseWith(cur, m.kinds, local || !cur.head ? m.species : null, local ? month : null);
             r.month = month; r.local = local;                // local: the species list of this slot's region was consulted for a name
             r.kindAt = num(cur.f.kind_at) ? cur.f.kind_at : null;
@@ -556,13 +754,13 @@
         });
       }
       if (!big) return run();
-      var p = queue.then(run, run); queue = p.catch(function () {}).then(tire); return p;     // one photo at a time through the larger model
+      var p = queue.then(run, run); queue = p.catch(function () {}).then(tire); return p;     // one photo at a time through the full database
     }
     function mb(n) { return Math.max(0, Math.round(n / 1e6)); }
     function line() {
-      if (big) return !(getP && M) ? 'Looking more closely.' : have === 'kept' ? 'Checking the larger model.' : 'Getting the larger model: ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(M.vision.bytes)) + ' MB.';
-      if (state === 'loading' && total > got) return 'Getting the recognizer: ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB.';
-      return 'Looking at what it is.';
+      if (big) return !(getP && M) ? 'Looking more closely\u2026' : have === 'kept' ? 'Checking the full database\u2026' : 'Downloading the full database\u2026 ' + mb(keptBytes + partGot) + ' of ' + Math.max(1, mb(bytesOf(M))) + ' MB';
+      if (state === 'loading' && total > got) return 'Downloading\u2026 ' + mb(got) + ' of ' + Math.max(1, mb(total)) + ' MB';
+      return 'Looking\u2026';
     }
     function warm() {                                  // once the opening screen is up and the page has nothing else to do
       if (big || cannot || (navigator.connection && navigator.connection.saveData)) return;
@@ -576,17 +774,35 @@
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
       place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
       listed: function () { return !!(cur && cur.table); },
+      met: function (id, sci) { if (cur && cur.place) cur.place.met(id, sci); },     // a meeting's name: kept where the full database gave it with confidence
+      // A typed name looked up in the species list: the species it names exactly, the species whose names hold every word of it, and the
+      // species whose names are a slip of the keys away. The most recorded come first. Empty where there is no list.
+      find: function (q) {
+        var t = cur && cur.table, s = plain(q), out = { exact: null, has: [], near: [] }, ws, lim, best = -1;
+        if (!t || s.length < 3) return out;
+        ws = s.split(' '); lim = s.length <= 5 ? 1 : 2;
+        t.forEach(function (r) {
+          var en = plain(r.en), sci = plain(r.sci), w = 0, i;
+          if (r.m) for (i = 0; i < 12; i++) w += r.m[i];
+          if (en === s || sci === s) { if (w > best) { best = w; out.exact = r; } return; }
+          if (ws.every(function (x) { return (' ' + en + ' ').indexOf(' ' + x) >= 0 || (' ' + sci + ' ').indexOf(' ' + x) >= 0; })) { out.has.push([w, r]); return; }
+          if ((en && Math.abs(en.length - s.length) <= lim && slips(s, en, lim) <= lim) || (sci && Math.abs(sci.length - s.length) <= lim && slips(s, sci, lim) <= lim)) out.near.push([w, r]);
+        });
+        function top(a) { return a.sort(function (x, y) { return y[0] - x[0]; }).slice(0, 3).map(function (x) { return x[1]; }); }
+        out.has = top(out.has); out.near = top(out.near); return out;
+      },
       progress: function (fn) { onProgress = fn; },
-      // the larger model: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
+      // the full database: what of it is here, fetching it, stopping, deleting; its size and, where the manifest gives one, a measured time for a photo
       survey: survey, get: get, halt: halt, forget: forget, say: function (code) { return SAY[code] || SAY.died; },
       has: function () { return getP ? 'getting' : have; },
       broken: function () { return state === 'failed' && (why === 'browser' || why === 'unfit'); },   // it has shown that it cannot run here: not tried again for every photo
-      size: function () { return M ? { bytes: M.vision.bytes || 0, kept: keptBytes + partGot, mb: Math.max(1, mb(M.vision.bytes || 0)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
+      size: function () { var n = M ? (big ? bytesOf(M) : M.vision.bytes || 0) : 0; return M ? { bytes: n, kept: keptBytes + partGot, mb: Math.max(1, mb(n)), keptMb: mb(keptBytes + partGot), seconds: M.seconds_a_photo || null } : null; },
       offers: [], kindOffers: [], file: null, local: true, wantPre: false, lastEmb: null, lastPre: null, lastDots: null,
-      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl,
-        have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M && M.vision.bytes || 0, getFail: getFail }; },
+      about: function () { return { state: state, why: why, fail: lastFail, model: M ? M.id : '', rule: M ? (M.fusion.rule || 'product') : '', trained: !!(cur && (cur.kb || cur.sb)), backend: info.backend, threads: info.threads, loadMs: Math.round(loadMs), start: info.ms || null, last: last, got: got, total: total, slot: manifestUrl, fitted: M && M.fitted_on && typeof M.fitted_on === 'object' ? M.fitted_on : null,
+        have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M ? (big ? bytesOf(M) : M.vision.bytes || 0) : 0, getFail: getFail, place: cur && cur.place ? cur.place.about() : null }; },
       test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
         idle: function (ms) { idleMs = ms; tire(); }, netWait: function (ms) { netWaitMs = ms; }, running: function () { return !!worker; },
+        place: function () { return cur && cur.place ? cur.place.test : null; },
         // the scoring with settings given by a check, through the same readers as a real slot (tools/fusion/parity.py)
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
         fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
@@ -594,10 +810,10 @@
     return api;
   }
   var pocket = recognizer({ slot: (/[?&]rec=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') || [0, 'models/pocket'])[1] });
-  // The larger model's slot. A check on this machine may name another slot, or switch it off; a link to the public page may not.
+  // The full database's slot. A check on this machine may name another slot, or switch it off; a link to the public page may not.
   var large = recognizer({ big: true, slot: ((onThisMachine ? /[?&]big=([A-Za-z0-9_.\/-]+)/.exec(location.search || '') : null) || [0, 'models/naturalist'])[1] });
 
-  // ---------- the species service (the naturalist): a larger model on a server, asked only with the person's say-so
+  // ---------- the species service (the naturalist): the full database on a server, asked only with the person's say-so
   // Where it lives is told by a small file at the site's root, service.json, fetched only when it is first needed:
   //   {"api": "gradio", "call": "https://<space>.hf.space/gradio_api/call/identify", "region": "us-fl-alachua", "model": "bioclip2-l14",
   //    "health": "<an address that answers {"ready": true}>" (optional), "kind_at": 0.9, "name_at": 0.5, "top": 5, "wake_s": 90, "answer_s": 60}
@@ -646,9 +862,9 @@
       if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
       if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
       var species = out.species.slice(0, 10).map(function (s) {
-        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: knownKind(s.eyes) ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
       }).filter(function (s) { return s && (s.sci || s.en); });
-      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (knownKind(k.key) || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
       species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
       return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
     }

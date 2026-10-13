@@ -1,0 +1,376 @@
+{
+  "key": "deer",
+  "version": 1,
+  "offered": true,
+  "chip": "Deer",
+  "who": "a deer",
+  "cue": "You see a wide band of ground. Out-of-focus things smear sideways.",
+  "params": {
+    "fov": {
+      "value": 310,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "cpd": {
+      "value": 8,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "topoS": {
+      "value": 1,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "fall": {
+      "value": 2.2,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "pupil": "h",
+    "dof": {
+      "value": 22,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "M": "DEUTAN",
+    "gain": {
+      "value": 1.5,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    },
+    "sat": {
+      "value": 0.85,
+      "grade": "?",
+      "invented": null,
+      "src": []
+    }
+  },
+  "matrices": {
+    "DEUTAN": {
+      "rows": [
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          -0.02234,
+          0.02234,
+          1
+        ]
+      ],
+      "grade": "?",
+      "invented": null,
+      "src": [],
+      "note": "Vienot, Brettel and Mollon 1999, entered from memory"
+    }
+  },
+  "rows": [
+    [
+      "m",
+      "Colour",
+      "White-tailed deer have two kinds of colour-sensing cells, where people have three. Reds and oranges look yellow or grey to them."
+    ],
+    [
+      "m",
+      "Field of view",
+      "A deer takes in about 310 degrees around itself, almost a full circle. A phone camera sees less than a quarter of that, so this view bends the picture at its edges to suggest it."
+    ],
+    [
+      "g",
+      "Pupil",
+      "Grazing animals have pupils shaped like horizontal bars. The shape widens their view along the ground and cuts glare from the sky. It also smears out-of-focus things sideways, and this view does the same."
+    ],
+    [
+      "i",
+      "Sharpness, dim light and depth",
+      "These parts of the view are guesses. This view treats things lower in the picture as closer."
+    ]
+  ],
+  "trial": {
+    "matrices": {
+      "DEER": {
+        "from_pigments": [
+          455,
+          537
+        ],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L117, L118, L120: Jacobs, Deegan and Neitz 1994, white-tailed deer (S cone about 450 to 460 nm, taken as 455; M cone 537 nm; rods 497 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [
+          [
+            0.21189,
+            0.50602,
+            0.20567,
+            0.07642
+          ],
+          [
+            0.21189,
+            0.50602,
+            0.20567,
+            0.07642
+          ],
+          [
+            0.00434,
+            0.20351,
+            0.64333,
+            0.14882
+          ]
+        ],
+        "q": [
+          [
+            0.00434,
+            0.20351,
+            0.64333,
+            0.14882
+          ],
+          [
+            0.21189,
+            0.50602,
+            0.20567,
+            0.07642
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "DEER_ROD": {
+        "from_pigments": [
+          497
+        ],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L117, L118, L120: Jacobs, Deegan and Neitz 1994, white-tailed deer (S cone about 450 to 460 nm, taken as 455; M cone 537 nm; rods 497 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [
+          [
+            0.05575,
+            0.43645,
+            0.41731,
+            0.09049
+          ],
+          [
+            0.05575,
+            0.43645,
+            0.41731,
+            0.09049
+          ],
+          [
+            0.05575,
+            0.43645,
+            0.41731,
+            0.09049
+          ]
+        ],
+        "q": [
+          [
+            0.05575,
+            0.43645,
+            0.41731,
+            0.09049
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "params": {
+      "M": {
+        "value": "DEER",
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/squirrel-deer-rabbit evidence L117, L118, L120: Jacobs, Deegan and Neitz 1994, white-tailed deer (S cone about 450 to 460 nm, taken as 455; M cone 537 nm; rods 497 nm)"
+        ]
+      }
+    },
+    "spectrum": {
+      "q": "DEER",
+      "neutral": {
+        "value": 1,
+        "grade": "i",
+        "invented": true,
+        "src": [],
+        "range": [
+          0,
+          2
+        ]
+      },
+      "dark": "DEER_ROD",
+      "adaptAt": {
+        "value": [
+          -2,
+          -1
+        ],
+        "grade": "i",
+        "invented": true,
+        "src": [],
+        "range": [
+          -3,
+          0
+        ]
+      }
+    },
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        },
+        {
+          "name": "wheel",
+          "invented": true,
+          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
+        }
+      ],
+      "slow": [
+        {
+          "name": "off",
+          "invented": true,
+          "note": "the view as it was"
+        },
+        {
+          "name": "exposure",
+          "invented": true,
+          "note": "the long exposure: in the dark the view pools light over a few seconds, so still things sharpen and moving things leave ghosts (atlas 7)"
+        }
+      ]
+    },
+    "rows": [
+      [
+        "m",
+        "Colour",
+        "White-tailed deer have two kinds of colour-sensing cells, where people have three. Reds and oranges look yellow or grey to them."
+      ],
+      [
+        "m",
+        "Field of view",
+        "A deer takes in about 310 degrees around itself, almost a full circle. A phone camera sees less than a quarter of that, so this view bends the picture at its edges to suggest it."
+      ],
+      [
+        "g",
+        "Pupil",
+        "Grazing animals have pupils shaped like horizontal bars. The shape widens their view along the ground and cuts glare from the sky. It also smears out-of-focus things sideways, and this view does the same."
+      ],
+      [
+        "i",
+        "Sharpness, dim light and depth",
+        "These parts of the view are guesses. This view treats things lower in the picture as closer."
+      ],
+      [
+        "i",
+        "Being tried: colour from pigments",
+        "On this trial the colours come from the measured receptor peaks (455, 537 nm). The camera's colours and the display are the app's.",
+        [
+          "Jacobs, Deegan and Neitz 1994, white-tailed deer",
+          "param:spectrum.neutral",
+          "param:matrices.DEER",
+          "param:M"
+        ]
+      ],
+      [
+        "i",
+        "Being tried: dusk",
+        "As the light falls, the colours drift toward what the rods take in, which peak near 497 nm. The peak is measured; where the change happens is the app's guess.",
+        [
+          "Jacobs, Deegan and Neitz 1994, white-tailed deer",
+          "param:spectrum.adaptAt",
+          "param:matrices.DEER_ROD"
+        ]
+      ],
+      [
+        "i",
+        "Being tried: a long exposure",
+        "A deer sees in dim light partly by pooling light over time. With &draw=exposure, in the dark the picture pools the last few seconds, so still things settle and moving things leave ghosts. The pooling time is the app's.",
+        [
+          "docs/views/ATLAS.md#7",
+          "param:slow.windowS",
+          "param:slow.mix"
+        ]
+      ]
+    ],
+    "slow": {
+      "windowS": {
+        "value": 3,
+        "grade": "i",
+        "invented": true,
+        "src": [],
+        "range": [
+          0.5,
+          20
+        ],
+        "floor": null,
+        "note": "seconds of pooling in the dark; the pooling time is the app's (atlas 7)"
+      },
+      "mix": {
+        "curve": "lux",
+        "points": [
+          [
+            -2,
+            1
+          ],
+          [
+            -0.6,
+            0
+          ]
+        ],
+        "grade": "i",
+        "invented": true,
+        "src": [],
+        "range": [
+          0,
+          1
+        ],
+        "note": "how much of the pooled picture is shown, rising as the light falls"
+      }
+    }
+  }
+}

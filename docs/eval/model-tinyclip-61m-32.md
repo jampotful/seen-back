@@ -32,7 +32,7 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 1, 
 | Animalia / Aves | 995 | 42.9% (39.8 to 45.9) | 69.8% (67.0 to 72.6) | 34.3% |
 | Plantae / Magnoliopsida | 878 | 14.5% (12.2 to 16.9) | 26.3% (23.6 to 29.3) | 4.8% |
 | Plantae / Liliopsida | 291 | 36.8% (31.3 to 42.3) | 50.5% (44.7 to 56.4) | 9.3% |
-| Animalia / Squamata | 209 | 39.2% (32.5 to 45.9) | 65.5% (58.9 to 71.8) | 8.1% |
+| Animalia / Squamata | 209 | 39.2% (32.5 to 45.9) | 65.6% (58.9 to 71.8) | 8.1% |
 | Animalia / Arachnida | 154 | 13.0% (7.8 to 18.8) | 28.6% (21.4 to 35.7) | 1.9% |
 | Animalia / Mammalia | 139 | 49.6% (41.7 to 58.3) | 68.3% (61.2 to 76.3) | 28.1% |
 | Animalia / Crocodylia | 110 | 92.7% (87.3 to 97.3) | 98.2% (95.5 to 100.0) | 49.1% |
@@ -48,7 +48,7 @@ Species rows made from the English name; settings chosen on `val`: {"min_n": 1, 
 |---|---:|---:|---:|---:|
 | not in the list | 36 | 0.0% (0.0 to 0.0) | 0.0% (0.0 to 0.0) | 0.0% |
 | 1 or 2 records | 58 | 0.0% (0.0 to 0.0) | 0.0% (0.0 to 0.0) | 3.5% |
-| 3 to 9 | 138 | 0.7% (0.0 to 2.2) | 1.5% (0.0 to 3.6) | 5.1% |
+| 3 to 9 | 138 | 0.7% (0.0 to 2.2) | 1.4% (0.0 to 3.6) | 5.1% |
 | 10 to 49 | 468 | 1.5% (0.4 to 2.6) | 6.8% (4.7 to 9.2) | 4.5% |
 | 50 to 199 | 1195 | 9.5% (8.0 to 11.3) | 30.1% (27.6 to 32.8) | 6.7% |
 | 200 or more | 2302 | 45.5% (43.4 to 47.5) | 68.2% (66.2 to 70.1) | 22.3% |

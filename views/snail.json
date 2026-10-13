@@ -1,0 +1,175 @@
+{
+  "key": "snail",
+  "chip": "Snail",
+  "who": "a snail or slug",
+  "falls_back_to": null,
+  "applies_to": {"class":["Gastropoda","Polyplacophora","Scaphopoda"]},
+  "cue": "Hold the phone close to the ground and move it slowly. Only the largest patches of light and dark remain.",
+  "modules": ["light","spectrum"],
+  "params": {
+    "cpd": {
+      "value": 0.035,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/snail.md#2 Sharpness: Serb and Eernisse 2008 (14.5 degrees, Helix); Irwin 2022 (52 degrees, Arion)"
+      ],
+      "range": [0.01,0.06],
+      "floor": null,
+      "note": "1 over 2 times 14.5; the red slug's 52 degrees gives .010, the eyed chiton's 9 degrees gives .056"
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "g",
+      "invented": true,
+      "src": ["docs/views/sheets/snail.md#2 Eyes: Shepeleva 2023"],
+      "floor": null,
+      "note": "with dof unset the shape is not seen"
+    },
+    "M": {
+      "value": "LIGHT_420",
+      "grade": "m",
+      "invented": true,
+      "src": ["docs/views/sheets/snail.md#2 Colour: Matsuo 2023 (480 nm dark, 420 nm light)"],
+      "floor": null,
+      "note": "grey weighted to blue; the weights are the app's"
+    }
+  },
+  "matrices": {
+    "snail_blue_grey": {
+      "rows": [[0.05,0.3,0.65],[0.05,0.3,0.65],[0.05,0.3,0.65]],
+      "grade": "m",
+      "invented": true,
+      "src": ["docs/views/sheets/snail.md#3"]
+    },
+    "LIGHT_420": {
+      "from_pigments": [420],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/snail.md: Matsuo and colleagues 2023, Limax valentianus (480 nm dark-adapted, 420 nm light-adapted)",
+        "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+      ],
+      "note": "one class, drawn as grey; the grey's weights follow the pigment",
+      "rows": [[0.00016,0.05564,0.5761,0.36811],[0.00016,0.05564,0.5761,0.36811],[0.00016,0.05564,0.5761,0.36811]],
+      "q": [[0.00016,0.05564,0.5761,0.36811],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    },
+    "DARK_480": {
+      "from_pigments": [480],
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/snail.md: Matsuo and colleagues 2023, Limax valentianus (480 nm dark-adapted, 420 nm light-adapted)",
+        "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+      ],
+      "rows": [[0.02336,0.3491,0.52395,0.10358],[0.02336,0.3491,0.52395,0.10358],[0.02336,0.3491,0.52395,0.10358]],
+      "q": [[0.02336,0.3491,0.52395,0.10358],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    }
+  },
+  "by": {
+    "family": {
+      "Strombidae": {
+        "params": {
+          "cpd": {
+            "value": 1,
+            "grade": "g",
+            "invented": true,
+            "src": ["docs/views/sheets/snail.md#2 Sea snails: Irwin 2022 (1.06 degrees)"],
+            "range": [0.1,3],
+            "floor": null
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    {
+      "need": "field",
+      "why": "Light sensed outside the eyes (the blinded slug, the pond snail's skin) is a whole-field glow that follows overall brightness. Not drawn."
+    },
+    {"need":"zones","why":"The chiton's dome of shell eyes, and two eyes on moving tentacles. Not drawn."}
+  ],
+  "rows": [
+    [
+      "m",
+      "Eyes",
+      "A land snail or slug has a small eye with a lens at the tip of each upper tentacle. In the White-lipped Snail each eye is about a quarter of a millimetre across.",
+      ["Nishiyama 2019","Shepeleva 2023"]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "The garden snail's eye resolves about 15 degrees, so it keeps under a thousandth of the detail you see. Behaviour tests put a red slug's resolution at about 52 degrees.",
+      ["Serb and Eernisse 2008","Irwin 2022","param:cpd"]
+    ],
+    [
+      "m",
+      "Colour",
+      "A slug's eye is most sensitive to blue near 480 nanometres in the dark and to violet near 420 in daylight. The picture is drawn in grey weighted to blue.",
+      ["Matsuo 2023","Nishiyama 2019","param:M"]
+    ],
+    [
+      "m",
+      "Light without eyes",
+      "A slug whose eyes have been removed still crawls away from bright light, which it senses with its brain.",
+      ["Nishiyama 2019"]
+    ],
+    [
+      "g",
+      "Shadows",
+      "A pond snail pulls back into its shell when a shadow falls on it. It feels the shadow through its skin, most strongly in blue-green light near 490 nanometres.",
+      ["Sunada 2012"]
+    ],
+    [
+      "g",
+      "Sea slugs",
+      "A nudibranch's eyes lie deep under the skin behind its rhinophores. Even so, one nudibranch crawled toward a black stripe placed outside its arena.",
+      ["Rudman 1999","Quinlan 2021"]
+    ],
+    [
+      "m",
+      "Chitons",
+      "One Caribbean chiton has hundreds of tiny eyes in its shell, with lenses of the mineral aragonite, and it clamps down when a dark disc 9 degrees wide appears overhead.",
+      ["Speiser 2011","Kingston 2018"]
+    ],
+    [
+      "g",
+      "Sea snails",
+      "One conch reacts to objects about 1 degree across, and a periwinkle's eye holds detail of about 4 degrees. Both see far more than this picture shows.",
+      ["Irwin 2022"]
+    ],
+    [
+      "x",
+      "Smell",
+      "A giant African land snail finds a smell on the air with its upper tentacles and follows a slime trail with its lower ones. This reaches no camera.",
+      ["Chase and Croll 1981"]
+    ],
+    [
+      "i",
+      "How it is drawn",
+      "Choosing the garden snail's figure over the coarser slug figure, and the blue-heavy grey, are the app's own settings. The round pupil is the app's too.",
+      ["param:cpd","param:M","param:pupil"]
+    ],
+    [
+      "i",
+      "Dusk",
+      "As the light falls, the grey shifts from the snail's light-adapted peak toward its dark-adapted one. The two peaks are measured; where the change happens is the app's guess.",
+      ["Matsuo 2023","param:spectrum.adaptAt","param:matrices.LIGHT_420","param:matrices.DARK_480"]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "inputs": {"motion":"none","sound":"none","haptic":"none"},
+  "draft": true,
+  "spectrum": {
+    "dark": "DARK_480",
+    "adaptAt": {
+      "value": [-1.6,-0.6],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [-3,0],
+      "note": "log10 of relative light: fully dark-adapted at the first, fully light-adapted at the second"
+    }
+  }
+}

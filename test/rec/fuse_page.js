@@ -5,10 +5,12 @@ const playwright = require('playwright'), fs = require('fs');
   const made = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
   const origin = 'http://127.0.0.1:' + (process.env.PORT || 8782);
   const browser = await playwright[process.env.BROWSER || 'chromium'].launch();
+  // the county's time zone, where the page combines the kinds head with its species list (build 22); elsewhere it leaves the list out
+  const ctx = await browser.newContext({ timezoneId: 'America/New_York' });
   const ready = (page) => page.waitForFunction(() => window.__seenBack && window.__seenBack.rec.about().state === 'ready', null, { timeout: 60000 });
   const out = { cases: [], photos: {} };
   {
-    const page = await browser.newPage();
+    const page = await ctx.newPage();
     await page.goto(origin + '/index.html?side=420&nosw=1&rec=test/rec/models/standin'); await ready(page);
     out.build = await page.evaluate(() => window.__seenBack.about().split('\n')[0]);
     // scores into the slot as loaded, or into settings handed over through the readers a real slot goes through
@@ -19,7 +21,7 @@ const playwright = require('playwright'), fs = require('fs');
     await page.close();
   }
   if (made.photos) {     // the trained-head slot, from a photo's pixels to the answer
-    const page = await browser.newPage();
+    const page = await ctx.newPage();
     await page.goto(origin + '/index.html?side=420&nosw=1&rec=' + made.photos.slot); await ready(page);
     for (const name of made.photos.names) {
       out.photos[name] = await page.evaluate(async (name) => {

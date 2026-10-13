@@ -12,7 +12,7 @@ import pathlib, re
 
 root = pathlib.Path(__file__).resolve().parent
 src = root / "src"
-PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js")
+PARTS = ("cam.a.js", "cam.g60.js", "cam.b.js", "cam.c1.js", "cam.r.js", "cam.rec.js", "cam.c2.js", "cam.tune.js")
 # The self-test (src/cam.selftest.js) is not part of the page's script. It becomes selftest.js, which the page fetches only for
 # ?selftest=1, through a small hook that hands it the page's bindings it reads. Every one of them is set once at start-up and never
 # reassigned, so handing over their values is the same as reading them in place. A binding missing here fails the self-test at once.
@@ -21,6 +21,23 @@ SELFTEST_READS = ("$", "BUILD", "EYES", "Engine", "HUMAN", "HUMAN_CPD", "ORDER",
 
 head = (src / "cam.head.html").read_text(encoding="utf-8")
 js = "".join((src / n).read_text(encoding="utf-8") for n in PARTS)
+# ---- the views, as data: views/<key>.json inlined into the page as one object (docs/ENGINE-DESIGN.md, module 0), in the order that
+# views/index.json gives, then any other spec by name. A spec the checker refuses stops the build.
+import json, subprocess, sys
+vdir = root / "views"
+order = json.loads((vdir / "index.json").read_text(encoding="utf-8"))
+keys = order + sorted(p.stem for p in vdir.glob("*.json") if p.stem != "index" and p.stem not in order)
+chk = subprocess.run([sys.executable, "-I", str(root / "tools" / "views" / "check_spec.py"), "--quiet"], capture_output=True, text=True)
+if chk.returncode != 0:
+    sys.exit("the spec checker refused a view:\n" + chk.stdout + chk.stderr)
+specs = {k: json.loads((vdir / (k + ".json")).read_text(encoding="utf-8")) for k in keys}
+SPEC_JS = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+assert "/*@SPECS@*/{}" in js
+js = js.replace("/*@SPECS@*/{}", SPEC_JS)
+floor = vdir.parent / "docs" / "views" / "floor.json"   # the visibility floor (docs/ENGINE-DESIGN.md section 5), for the tuning panel's steps
+FLOOR_JS = json.dumps(json.loads(floor.read_text(encoding="utf-8")).get("floor", {}) if floor.exists() else {}, separators=(",", ":"))
+assert "/*@FLOOR@*/{}" in js
+js = js.replace("/*@FLOOR@*/{}", FLOOR_JS)
 js += ("  // ---------- self-test hook: with ?selftest=1 the page fetches selftest.js and hands it the bindings it reads (build.py)\n"
        "  if (/[?&]selftest=1(?:&|$)/.test(location.search || '')) {\n"
        "    S.selftest = true;   // at once, as the self-test did when it was part of this script: the page's loop leaves the drawing to it\n"
@@ -37,11 +54,17 @@ script = "\n<script>\n(function () {\n" + js + "})();\n</script>\n"
 (root / "dist" / "app.js").write_text("(function () {\n" + js + "})();\n", encoding="utf-8")   # for a syntax check
 
 # ---- 2. the standalone form: a real document, the typeface served from this site, and the pieces that make it installable
-GOOGLE = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">'
+GOOGLE = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&display=swap">'
 assert GOOGLE in head
 FACES = "<style>\n" + "\n".join(
     '@font-face{font-family:"Instrument Serif";font-style:%s;font-weight:400;font-display:swap;'
     'src:url(fonts/instrument-serif-%s-400-%s.woff2) format("woff2");unicode-range:%s}' % (style, subset, style, rng)
+    for style in ("normal", "italic")
+    for subset, rng in (("latin-ext", "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"),
+                        ("latin", "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"))
+) + "\n" + "\n".join(
+    '@font-face{font-family:"DM Sans";font-style:%s;font-weight:100 1000;font-display:swap;'
+    'src:url(fonts/dm-sans-%s-wght-%s.woff2) format("woff2-variations");unicode-range:%s}' % (style, subset, style, rng)
     for style in ("normal", "italic")
     for subset, rng in (("latin-ext", "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"),
                         ("latin", "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"))
@@ -57,7 +80,7 @@ INSTALL = (
     '<meta name="mobile-web-app-capable" content="yes">\n'
     '<meta name="apple-mobile-web-app-capable" content="yes">\n'
     '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
-    '<meta name="apple-mobile-web-app-title" content="Seen Back">\n'
+    '<meta name="apple-mobile-web-app-title" content="Regards">\n'
     '<link rel="apple-touch-icon" href="icons/icon-180.png">\n'
     '<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">\n'
 )

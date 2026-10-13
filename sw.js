@@ -8,13 +8,14 @@
 // so that they are kept even on a first visit, before this worker has taken charge of the page.
 // Nothing kept here differs by what a request's headers say, so kept copies are looked up with ignoreVary: a host that sends
 // "Vary: Accept-Encoding" (GitHub Pages does) must not make a kept copy unfindable for a request whose headers differ.
-// The larger model's parts come from another origin and are fetched and kept by the page alone; this worker never sees them.
-const VERSION = '8';
+// The full database's parts come from another origin and are fetched and kept by the page alone; this worker never sees them.
+const VERSION = '30';
 const ORT_V = '1.30.0';                                            // the same number as ORT.v in src/cam.rec.js
 const SHELL = 'shell-' + VERSION;
 const KEEP = 'keep-v1';
 const SHELL_FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png',
-  'fonts/instrument-serif-latin-400-normal.woff2', 'fonts/instrument-serif-latin-400-italic.woff2'];
+  'fonts/instrument-serif-latin-400-normal.woff2', 'fonts/instrument-serif-latin-400-italic.woff2',
+  'fonts/dm-sans-latin-wght-normal.woff2', 'fonts/dm-sans-latin-wght-italic.woff2'];
 // The small scripts the recognizer's worker is made of. The large files are fetched by the page, with a count of what has arrived.
 const REC_FILES = ['vendor/rec-worker.js?v=' + VERSION, 'vendor/ort/ort.wasm.min.js?v=' + ORT_V, 'vendor/ort/ort-wasm-simd-threaded.mjs?v=' + ORT_V];
 

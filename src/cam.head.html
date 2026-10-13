@@ -1,5 +1,5 @@
-<title>Seen Back</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+<title>Regards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: a camera. The picture fills the screen and the few controls float on it. One dark look, by choice, in every theme. */
 :root, :root[data-theme="dark"], :root[data-theme="light"] {
@@ -15,11 +15,16 @@
   --paper-ink: #111111;
   --rec: #E5484D;
   --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Three levels of type, and nothing outside them. H1: the large lines on the picture. H2: names and the titles of sheets.
+     H3: everything else; smaller text is a fixed share of H3's size. Each level has a font, a size, a weight, a style, a case and a spacing. */
+  --h1-font: var(--serif); --h1-size: 38px; --h1-weight: 400; --h1-style: normal; --h1-case: none; --h1-track: 0em; --h1-lead: 1.06;
+  --h2-font: var(--sans); --h2-size: 22px; --h2-weight: 400; --h2-style: normal; --h2-case: none; --h2-track: 0em; --h2-lead: 1.1;
+  --h3-font: var(--sans); --h3-size: 16px; --h3-weight: 400; --h3-style: normal; --h3-case: none; --h3-track: 0em; --h3-lead: 1.4;
 }
 html { padding: 0 !important; }
 html, body { height: 100%; }
-body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.4; overflow: hidden; overscroll-behavior: none; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: var(--ink); font: var(--h3-style) var(--h3-weight) var(--h3-size)/var(--h3-lead) var(--h3-font); text-transform: var(--h3-case); letter-spacing: var(--h3-track); overflow: hidden; overscroll-behavior: none; -webkit-font-smoothing: antialiased; }
 button, label, input { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
 #app { position: fixed; inset: 0; overflow: hidden; background: var(--bg); touch-action: manipulation; user-select: none; -webkit-user-select: none; }
@@ -27,13 +32,15 @@ button { cursor: pointer; }
 #vid { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
 .pad { padding: calc(16px + env(safe-area-inset-top, 0px)) 18px calc(20px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; }
 
+/* the app's mark (icon design 18m2): icons/mark-168.png embedded, made by tools/icons/make_icons.py */
+.mark { display: inline-block; flex: none; width: 30px; height: 30px; margin-right: 10px; vertical-align: -6px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAbiUlEQVR42u18eZRdZZXvb+/vO+fcoaaMEGAhoCgEEEil29eAVOIAZMD5BlucnvpCiPAcFm232npzfSji0oe2kkB62d20aEvd186ESQ1RWwUyECBpgmEWQ6aa73TO9+39/ji3kqrKQIgQ1HV/WWdV1r1V537f3vvbw2/vc4EWWmihhRZaaKGFFlpooYUWWmihhRZaaKGFFlpooYUWWmihhRZaaKGFv0TQn8cylRTAsiJo8+YyzZy5SYFl2PaTdWb0N2a0DWtpzRxfKJQZAGbOLGipBG1uU1uqfh7CLhaLXCioKfastoD+0UZSLCoXe9QWCmqKReUX4p5/YSdAqVgEbfvJOrNy3exk4rsfK/w6S3H71Ebc6FKl6dbQUwKaBArmiTiAKFH126kS3iJt7lwiqcPZ/lj498fdedpACSQT71koqAHKKJcL8lKekJdSAVQo9PLMHdOotGauG32xp2e1PX3SUSdp3DiLlM5Q4NXEOFNB0wG1RByISgPQMBdOIUChUDjfQOKqDxHx6QRAoA6KEUC3MvNmEXmERLeYMNw8NLjzsZvWzK3vOSE9ajEHUirtq6i/QAUoFQrgcpn86CuLu9cGdoZ9DYNf78VfyGTPMmyz1mQg6uAlhqgHNBU2EUNVAWgCAAolKNiaDHtpNDdGIGIwBzAcgMBIfA0iLhH4p4nox0z2R9sf3fyr8uZF8airAoAjqQg6koJf3L3OjrqYIorct/CS1zpfX0DEC4h5ZiboROwq8JIAUFFASJWUwBMXqgoQgdIt6Ohrkr427vcUNCpQNQwm5gDWZJD4Gry4TaryXTb4/vIfn71prEs8Eoo4IgooFNSMWnwRyjvnP3AJGf4oKf11YHPwvgGXWm6igGlKlcZJGwoiAxBBARBx+hZECUSq2lSFgkBQ8ekfEtH4bapq6vOFoNaaDKzJotbojwEqA2b5ilVn/PpIKeJFVUARRS4BAEpy6UW/7eiy+StV9a2BzXarejhfg4IcVJmIJghdlMgQiAA2ADFUkga8A6kYODeCuJqgPgLqOrpjz2GxQaDMsXIQMjGrT9JjoAIQ0nMzXh0CgjAZG9ocYleDePdDRubq6287dW1qQL3mxQrWdCSs/op5D14Cw5+KwvZXJ66CxNUFAGjUjCdIhJiJTAioa8A7lsEdThsV54cH6jrUb4VlkngR771AfUImqKlSW3oyCJzJ9wcdkzu4bcoAt3d1mSAyMDaEKMTH+zkVe06GJ8AGJgsviVfIXS52/3DjnbM2pjGiyKVSSf6kFTA2kH3o4t+eGGjuSyFn3pFafCNRqNmv4KHKxMQmRJI0Et+3bSTe9YxItd+FErdZkaAjCobaM0HcERpqD03UEdm29tDEoUE1dpL1olECDXZX4uHHB6oDNeFcxZugYvN91DW9K5p2rA3zXe0sDl5c02ntqwkoBAQT2Dycr1dU9dqduZEvl8vn1AoFNTNnLtMXShH0wlp9rymXF3kAWLJw44cM7NWBiY5qJMMHtHhVFSYwOEQtcZIMbt/WsfMRnpQMx6+YlJl0QlfeT8raesbaGSd2RUkATdL0hhgEC2JOvUoaJ6CqECQQ8XWvmb6RpG/rUF23DVZ5U93u2jnttGwlaO/KZnPtkTp48V5BRATeVxEqxMaEQTvqjcF74cw7Vtx5xtOj8eGFcEkvmAJ6elbbNWvmuiUX3vsqE2S/Yk1mgfcNeEk8EZl9DR5eSTln22jIx8i4yq5TKo/tPoP68zOnZru62nKhMQCYQygA8YA0l6zpvqWZljalT6NbMmM9DDNgGBDxPvGyq9LYvaUeNO6xLzMPu462zijX5XwDzjcEBKIJMSINICTWRMb5RpUp+E7sa19cefvsR8e62ZdSAVQoKJfL5JfMWz/P2ugmy5lpcTLslZRpf0EPQGjzDAh2JXr7gsz2ysK2Xa9tp6QTQRjBCyACVUBUmrxBM0wf4qJ17+epAmCi9AZsUsP1OvK7OHvnNQMv25wzeG9gM8c7H0Mk8SDw/oI1E3M2moxqo/+nEsulN9x11o5iz2o7tpB8vjAvBIWwfPlcuXzBhsXWRDcT0J74qiMiO174ClX4wGSMtRElPr7LOyxdOfn+4Vdnhy+NjJ0OUeudUxbZk640BbcnbNLzsCxqqm00xVIAKl5FBEwcTQlx6puzT/5iweYL3jG78+kuVX55EGTbRDypquxV+aj6VRNXc0GQPZkNXXD28R/82VdWn7Orp2e1ffLJm+QInwBlNDmWpQsf+GLAmb93vgZRkX18vaoHsYmCNsSu9hCT/J+v//jVvfqhrx2HZMYTIGPgEsG+fvhFg6gqyKiyhfHV/003v/v6q+bfc3RNow/D8D8aCuF8bb+nAdAkCrqCejz0K9WkeMNts39+uO7osBSgUCKQLu5emwuPCr8ZhPl3NpIRr5B9XA5UfWBzJvENx8C1A/G2a26+68IKALhLv3ubCbMXwVUdQPbIsyIQGMNQrTXUnpX51tseAYDLL1rfAzYfCW3mrU5iiDgdexpG92VNxqhK4qT+zhWrur93OO6IDkf4y4qg6oaH8xWX3JKJOubV4n5HgB1fvKoSSMKgzThfv8dL/PEVq2b9WlHkOT1z+O5jdv4VQvoveJ8SNy8ZEasOUZtFY2T5spsfvrJQOM2eXk65oQ9fvPGjBHu1qs+Jek8TjUTVMxsGGR+7+rtX3tZ9y/NVAj9fn7+oUOZSiWTEx5/KRV3z6o3+JF0YjQ9YbCgI8iZ2ta+Te6pnxapZvy4Ues26xceYNWvmOhi/CEGOAPXPFUy16TJ8Gk8hqvD7uaSZHXlVlWbw1TEB+QA2yHCxApizbPHF5vTyorjYs9oWoXz9j8/8qveNCwD2Gdtu0/RrzN2IjBevqt5ENvvtpfPX/21pzVyX9jFe8BOwhxfRJQs3/lvA0bu8bwBQO94oRK3JEFRHEt+47IbbZn1ntEboLS8SAlTf/e95ILwVQdQDV/fA+DR1VOAEIh6l4ZjTy7k0reSxkm2GbAHgBbBNWYnskZmo7mEiJmxaYAKGizcB5mK6edHjCmUCyeLutcHKdbOTxfPXzg05c6WIexOIOK3T9rqkUYMjGHVSf/8Nq7q/dagngQ5Z+FhGJZTk8vnrV2airv/VaAw2S/pxwvfMlpns9ka9dsnKu7p/kdYHczxAqigyoST6t98+GYZ/BBOcAu8EBNYm58Zp6tIUohckEledt3011zfoNX60v1aJiDuUMMlDM2khQESkXlX6R2IMvHJKLtNuwFNzdnJbFJBldSDKAwSIQjW9OF1+WkOwBZL66+g7716thV5DzYJybHG5dP6GLwRB/pOJq0mTeN2PEqz6pPqmFXfMvrW3oGbRcwTmQ1LA6CIun7f+ukzU+dFGMuxSyx+bZWqSy0wNqo3dPxUXX3HDHX+95WBWoO/57p0IMm9EUvOiMGxMqiPAV+ve/W6w0be1r9a2qb8+3F9Ppja8IvbiidQkAqNKNiWj04QzZUHFW4aIwAXMlAlMkAvM7hPaLc4/tqNtRj70+YCiILAEokATDwWEiRjQGIpuuvmdD2mxyDSGaigUek3aYya5fN79Hw+CzFe8b6ioBxGPU4LhgAAaUO96rr/tzAfHKvCwFDB6gyXz1/9DJui4JnYVB6iZQBd7a7NGFeudr312xaqzD6h97VltsWaOx3tv+bIE+Y9zPOJhLcexH/npkwO17RUXbRmste2oJIlAo6y1RCAwGxgKIEpQJI7gHcEYhReQCpRIlQlkAkOWVRM4dSBV1L1HwPChMZqzNPDKrgzOOba945TpOQMho2pAEu9AnU+g8qJa06HpRC/QWwAvKpO/7KK1S0Ob/SeBJ1FH49oVTVk4iR8xzp339dtn7SwWlQ9EadtDEf7i+RvPDzj4XOJqHhAzLi9W8VHQYRquuuGxLavPuX3rRxqFQu+Bj970nUogjes3fy+w7uMgcqsf799915ODmW1VN8UQmcAo2sLAEAXwoh5wicqgd3h2t+jwZPK7G8BABdTRAVTqpHGisAREDO7oVEwZAR1NxF1doAD5IAoViXHqMBTT1F9tq+CebZVqz/HtA+ce0+5e1pWf5p0us+VFtYnWP8ZWdVEZfnH32uDG22cvv2z+2l2Rbb9FBU7F857ah8gkruajsP2ViY78R6Hw0HwA7kDcER2Y1SxyqbRMFy9cN8Wq/a3h6OXO18cVWaqQ0GbZSeO/Y3EfOiYfrt32WF3311jfz+fqkxf/y7+UHx255IHdI5SzNmtZQDDwMKqaxKQ7h+C3EvSpWHV4CmlVFBIasgbgJmk5tj5WKDxEpUHIeqWoAppKZGaK4rh2Nm0hQQ0QQ5VRdSJZpoFLXtnZd/7Zk19D1xX6FcuIcHCmc9S1Lp2/7mNROPn/Ol+Bk0TH1UAKzyYwLqndcMPt3UuLAO1vOIAPFHQ3bz6NAFL2tCK0bS/3vu7HCR+qRKTOx7tE/N/986qzf7MZwHMJX1UJgC5569bpxeFTT9gylEhXwFnDCkUWXnwV/v6dSG4Z0ri3Q+W+yax9xzBcRJTNEuWNIFSBVUWogkAFtnkFqsiCKR8RIceoT2N9YiqSWzvJfbuh7mc7VAb6FRkPIrQFxIBOvmlkRucVj87qAUgX4bTndMulNXNdEcrLV3VfV2/0fUBATxkKZA9L2OQEvY/jTNS1ZMm8jW8rgWR/6Snv3/pBadDd+IlM2PGOhhtxGMdoihoOCKpxfST+m82VgTsAoFw+PX6uxZcXpYNTXB/6x+nTT5obvuLsaiI8pGK8yOZdmny7juSnk43unsYURIQsC0wziRSkuabSgS+BQpr5P6kiBFEUERpd8BuOQvJtFvfzHapJ1Sea6HGv6ms//vRpkgwtf9+bN3SVscgfytxQqZmmrrit+199o/HFMGgzqhjndonIKESJcNni7rUB5syRiffm/fn9Uonk8gUPdLOhzye+pumxHVsMGyGQKuSqb67p3jpnzt2H2q6jReV0g0p0Xq26U9B57HQ6+axB8bc+SvUfdRiMTAbnrIfVlGoeFfjhsr3a/EcAMkyETnbrZmjt36s6I3wCR52ad40hJeajs3U+I5VB+ZAK1BvXdbvFi9cGnZ2d36nF/feEQd6qji0slZ1vKKCzMAPB/gLxPh/U21to/pL7BFNgRfy4PqqqaGBzxkvjrhWrZi0HQKVS6VAbE1osFhkgJdXHo7CLNR7sR/CNDn7Fthlo7xjwgpi8gKGjFZNOYJifP3vSVAWpQpx4sdkBHI8Ak741Qxv3jVg7iYh8JSA8DgDlmZv00LRLOmNGt7+2/PJB7/2lzjf6rAmNqjpVFQXiTNjFAO5a+ZPZ1bRbON5QJyigyESkV1608ThSfrtIrGMLR1Xxgc1x4iubJeT3FAq9BnsbIoeENLYALPLVkdrQTq1/zVOypZ3C9naclJ+Mk9piyfEOhcbwCtJU+0Q0USEHYy5SgTfnVkgUcCpqaQBHR7txcpvlye2dRqXNxl9GZWTLQLXetfzrt5/5+yKU8TzajaUSSW+h16y8ffajKskHiFjDIG+tzXAunBzV44GHyMhn0lO87OB1QDrFsEwXL3zgbKvoNRyc5CV2AAJRkcBErIq44Rrn/fPts+4rQnl/kf0QKRD90gff9MXHtz5+RZKE+UxGIQKQIYhojL7aE1rzHVxxERoaQbVB4EnEY6Q8dipIsafDqwqoFwFRgywqyIfQkJSmRHlkbJY1HW5JHCNuxDjv/EmP/s+lZyykE7/xsGqRiZ5/v3eUjr7sgvveGES5q8S7LjCtasQjX//mnef0HXIaOpr7L52//s3W5n4AEJyvwposFNjeSCqfXHlb978eLv/dZACktqHnhEyU3PfEE8jc8h+Nytat0hmGlCECjCF4L14NKZyo1mU3VRPWhuSpLn2a+E4osgAZSNphIwYBOqTWDFI+MGr1KIRmB7UFnRSYDKBMgIESnFfUaupmHI3KrO5oR+Fd4cmA/yTQfh1ObndEZf/c9dG+YypjC67UmEv7/P+Q6oA91e+F91wYhO1XAzgVxAOxq338xlVn9/b0FO2aNaXDasOp9liiNU43nVvClMxnMRx7OPVbtkj/2ntdfPfqZFriYKOIrWEFMcEGqak7EUdeY4gGmgrfq9cqAEOWcyA4EDwxW7YUMADvFN4pVChlTL3WJ01iM/d1Zvh1bwiDTJ4iGBOg5n6Junk7utfsTjOYfV3daB9kbLo+UQmp7C7xgDZPBQ6aoNDBCLj0D4t81Vs+cOKQ2zm48iezd+2vrC4Ues3MHdMIc+Y854CrqhIRqW467z+RD94qI4lnJosMAbEmTz/hBx/Y6OzvHpGRPzwr2XoDnSODknilTCYaw45Smhrs4QwU0OYniyjiWCGqjVyOkctBpk7FLgK3z50bNM6ezVPCdmORABKrcI4ZNfktuL4Qp97Xtz8FjN33RxZunbe7MfKLm+86q3KQ6Qg6lNhIhzpmMnERB7KCg/EezUFBVQVj83n3IGNmo+YFRCwCZQNCRGmnuqG1Rk1peFAbjz3pK888pV1PPukHqhX1zoPrdbD3akfJTGJILkfOEKStHcFxx3LXpElcOflk46cfzVOiDMUQDZFlg1ghyR4FpjcIGGjIuXTGL3+tvQVDi/a6oT3+fcGGY1n5a2GQe3viqj+pWHnPTT88a7C5gsPK0g7KBZWbOXtKRS/TAwl/yYVrL8xmp15Yq+36fqlEvywWlZeVoAdaFBFEN2Fc0cac0vVSVVWAjEE2CgnR0ZSZeoLthBdFogwhhSh5D1LZa0DEUGOgIFKwMiKyYJ4Cp0CsACgLAqSiSgRinjgkIwqmzlTiM3V0f6OT3EsW3Hu64aBsOXNKHA/F+ey0hVrddRlA1y7rWW2xBoflkg+h4CBNA8i+vg4gXTLv/oVBmL2NiD5mg8zPP7zg/k+WSiT7E37T+kl7YQB6AgErCDJREYbHzFklgB8UlQoInjIAZcGcMQFHNuJw9DIBR2DOgCgLoUhGYPygqFTT0kglbcwwT+hiNGd5YagOSAQAWFbas/dymfzii9ZeYCn3M0vBKXEy7Ec3AqOnAMBp03ce9oDWH90IZ8IHrclptbG7zmSykW3/wtL5G15VH3jyyuFj42oBBRTKGKOQAqNQFjwkdwD6rqYADqx+AozZWwHoKN2iB3ao1GygHVq/Qz3aAoPB5G4641c/UC3ysjlzuFCYQ8G2X3V0dXReRsyfB4ETV/UEQhDkw0Yy8Igg+gIAbDrEwu0F6Anv16/fQUTMZCJVkYYbEebgfdnJJ98+tXrKBxeVyRNI9xBRVBYiKPzwf2LIPYzIMFQPOe/eO++zn+v5ThmMMhQNURizYnWxaHE3uLRmruus33N8V2f7A0EQXQN49j4WpMI3ia9uJFd9/Y23nvY7QOmPmRP9Y6YRmvkH6ZJ56z9jTfg5hUDUO1JQYPMm9tUaiJZzrX7N9T97zW5tNvV7CwAtWuR105xPo5OvxlBch1B0xKcjVB3y1sqQu/cX33v9uXNLJQdVuuJND16qyp9johO9TzygIGZjOITz8SNk3Nzrf9T9hz+J0cTRrOfyees/Ykz0eWOCvHM1qIoHkYmCTsRJ5WFS/fQ3Vp3xvdG/W3vj4mBG9x+CY3IDJRyVuQrP1j2EGHyElCDq0BlaP+C2mDM2nEs0vPvyBeu6mYKrA5O9yEvSnBclsRxaVYFIvKxSGbz2pjVz6wcrro6oAgBQsahUKpFctmDDHAP6BHNwvojLq4qAIJYjS2TgffIzL+4L2bbqb64rn1MDgNXFYub8t63+FEf0mTT99A4g86KdBoUomGmSBRrD9+HEey9+5//Ylp06bdunoPx+a/NBkox4hXoiCqKggxJff8yJe/8Nt575ywMVYC+lAvYpPK5464Nn+oa/O7CZLudqXtOeOYdBGyeuokTmKVa6avLIzh+MNu31wdd+yIf8JZMzkzDiAK+C5rN2f5y8AVKoKKWpbsRAUK3Cy01f/eKnvvXgYzPfl42q7w1sZzbxIxAVBwVno0mcuArEuRu9G/nsDXedu+PFeFLmBX8+YHR6YOn8e84CZW+xJnwlACSuKiASAlnDYXOAym2EyHenTX72/5VuvmirKmbg0b/6NOLo/YiCPDwgDa9MTWUANJakJkA1TSKhSHmCVNjNNwjElgGrgKkDQnX44L9/uGrhAz/8USHKZKpvyWWzmXpcgah3AGA5Y1U9QPxlL/U7Vtw666f7K0r/JBUwMS5ctmD9yRY4BxRcaU2mW8TB+boHQUlB1maMoRCxr1SIkh/27Zyy/LHfvyz53k1vz8w44am/h5ETgfBUGAvEBDja258hSoeIvKQ/DQFOAEuAcYAVIPZAEteGB8Pa5odPH/jN+gtz1ZF87Zntxx4X2o7A+SGIIFFSMhxYyxES39gOTa67/tazr927F+iL9TD3ixbwxgapQkHNtOqD7yPQ3wU2c4qqQNTDSwwFHJOxhgOoxlAo4oS2GsZ/HXPM0w+84fyfd7/shKfbJrf1HR2EjZPYSgaIDcRJXHf1MJdpS6pJMjik9c5pYUelXwa275xUG652+meemSL3bzwJfYMz88PVl0+y1masBZirUNFYQdaaiA2HiF1lN1S/6WojK1euPu/Rxd1rg/6THpMXw+qPiAJGJytw9xwe9fPvfuMd+fbgqHcym3eJ+KOY7QmqLt98aMNRGnyNNSGYQsSJQ6Vq+pg1jjJVyWZqfZ0dQ2Fod2Ty2d1UrzOC4JGRWm1Gtr+PlPgPUmucF9TjE7ucz1pVNplMFBnjwVyDqrr0YY3QWh59CDx5DOpWqsY3LV/1mmdfTHdzxBUw9nNGn6JJxzqK9gm8pS2XtzNBfmVo86cRMVQ8nNQh4oWgDkxsmSzAEGGoGnghqJqmjzcgjACUATMgUocxWRDVAHgoVFRVoLBMIayJQGRQj4eeYTa/gOrGeq3yb9/8+d9sfy4i8c9dAXvIu2LP3WbsuOLiN6ztNFF4AamcA5LfA+ZqZpOxJgOR1E1BJc0eAZ92wZrDnUSUjiiqp7R72Xw8zILIwJqo6dIqCsizxME9Iv7uKAx6v/r9mdvGsp294+iSv1gFjGVRU7Jr4juXXbzhXPb4JyL+nageTcCZBOSJOTCcFsvMAZgNRBIkLu3Wpe6kARGJAaqS6jayZq2IW6fe3MPt5qHl5dNHxiYKKC3DC1FM/RkqYLwyCoW9nFS5TP59PY9nblpzYh0ALl/wy0nQrqNBybEAjlFBSKxTApPPeN8Y9OK3kOorlGg3UbCN1T+TJG47+lGdOCSmUFrWc7dZtmaOp9aXOB04hd0TwF+AexV7Vts/tS9p+hM7AQdrh6aEX3H0q8p2TGuudw62jayjGW3Dunn6Tp25YxrdDWD69J06c+YmLZWWtb6qrIUWWmihhRZaaKGFFlpooYUWWmihhRZaaKGFFlpooYUWWmihhRZaaOElxf8HkhuNSO2wTlMAAAAASUVORK5CYII=) center / contain no-repeat; }
 /* the opening screen and the photo prompts */
 .screen { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 20px; background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .92) 30%, rgba(0, 0, 0, .5) 52%, rgba(0, 0, 0, 0) 74%); }
-.screen h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 12vw, 80px); line-height: .98; letter-spacing: -0.012em; margin: 0; max-width: 12ch; text-wrap: balance; }
+.screen h1 { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; max-width: 17ch; text-wrap: balance; }
 .screen h1 em { font-style: italic; }
-.screen h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 10.5vw, 64px); line-height: 1; margin: 0; text-wrap: balance; }
+.screen h2 { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; text-wrap: balance; }
 .screen p { margin: 0; max-width: 34ch; color: var(--dim); }
-.screen .fine { font-size: 13.5px; color: var(--faint); max-width: 40ch; }
+.screen .fine { font-size: calc(var(--h3-size) * .84); color: var(--faint); max-width: 40ch; }
 .screen .fine:empty { display: none; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .pill { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--paper); color: var(--paper-ink); font-weight: 600; font-size: 16px; overflow: hidden; }
@@ -41,7 +48,7 @@ button { cursor: pointer; }
 .pill input, .ico input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 0; }
 .pill:active, .ico:active, .eye:active, .shutter:active { transform: scale(.96); }
 .pill:disabled { opacity: .5; }
-.link { background: none; border: 0; padding: 8px 0; color: var(--dim); text-decoration: underline; text-underline-offset: 3px; font-size: 14.5px; }
+.link { background: none; border: 0; padding: 8px 0; color: var(--dim); text-decoration: underline; text-underline-offset: 3px; font-size: calc(var(--h3-size) * .9); }
 .row.links { gap: 4px 22px; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
@@ -60,20 +67,41 @@ button { cursor: pointer; }
 .shutter.rec i { background: var(--rec); width: 30px; height: 30px; }
 .shutter.recording i { background: var(--rec); width: 26px; height: 26px; border-radius: 6px; }
 .who { min-width: 0; max-width: 100%; display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
-.who .nm { font-family: var(--serif); font-size: 23px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.who .nm { font: var(--h2-style) 400 var(--h2-size)/var(--h2-lead) var(--serif); text-transform: var(--h2-case); letter-spacing: var(--h2-track); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .who .mk { flex: none; margin: 0; }
-.msg { align-self: center; text-align: center; font-size: 14.5px; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); margin: 0 0 16px; max-width: 32ch; min-height: 1.4em; text-wrap: balance; pointer-events: none !important; }
+.msg { align-self: center; text-align: center; font-size: calc(var(--h3-size) * .9); color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); margin: 0 0 16px; max-width: 32ch; min-height: 1.4em; text-wrap: balance; pointer-events: none !important; }
 .msg:empty { visibility: hidden; }
-.timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.timer { align-self: center; padding: 5px 12px; border-radius: 999px; background: var(--rec); font-size: calc(var(--h3-size) * .84); font-variant-numeric: tabular-nums; font-weight: 600; }
 .stack { display: flex; flex-direction: column; }
 #barFinder:not([hidden]) ~ #barType, #barAnimal:not([hidden]) ~ #barType { display: none; }   /* only ever under the line that counts the download */
 
 /* the name, as the eyes change */
 .reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 28px rgba(0, 0, 0, .8), 0 0 4px rgba(0, 0, 0, .5); padding: 0 24px; }
 .reveal.show { opacity: 1; }
-.reveal .nm { font-family: var(--serif); font-size: clamp(50px, 14.5vw, 100px); line-height: .98; margin: 0; text-wrap: balance; }
-.reveal .sci { font-family: var(--serif); font-style: italic; font-size: clamp(21px, 5.6vw, 32px); margin: 0; color: var(--dim); }
-.reveal .warn { font-size: 13.5px; margin: 12px 0 0; color: var(--dim); }
+body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .reveal, body:has(#intro:not([hidden])) .reveal { opacity: 0; transition: none; }
+.reveal .nm { font: var(--h1-style) var(--h1-weight) var(--h1-size)/var(--h1-lead) var(--h1-font); text-transform: var(--h1-case); letter-spacing: var(--h1-track); margin: 0; text-wrap: balance; }
+.reveal .sci { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--h2-font); text-transform: var(--h2-case); letter-spacing: var(--h2-track); margin: 0; color: var(--dim); }
+.reveal .warn { font-size: calc(var(--h3-size) * .84); margin: 12px 0 0; color: var(--dim); }
+.screen p:empty, .sheet .sub:empty { display: none; }
+.loanline { display: flex; align-items: center; gap: 8px; }
+.ring { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .22); background: rgba(0, 0, 0, .25); color: var(--ink); font-size: calc(var(--h3-size) * .94); font-variant-numeric: tabular-nums; }
+.chip svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.chip span:empty { display: none; }
+.pill.round { width: 64px; height: 64px; padding: 0; justify-content: center; border-radius: 50%; }
+.pill.round svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pill.round svg .dot { fill: currentColor; stroke: none; }
+.field .pill.round { width: 52px; height: 52px; flex: none; }
+.row.links { align-items: center; gap: 14px; }
+#keep .row { gap: 12px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.eye .loan { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; opacity: .95; }
+.eye .iris { opacity: .45; }
+.met .days { display: inline-flex; align-items: center; gap: 5px; font-size: calc(var(--h3-size) * .81); color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.met .days svg { width: 16px; height: 16px; }
+.met .days .rest { fill: none; stroke: rgba(255, 255, 255, .22); stroke-width: 2; }
+.met .days .left { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.met li.gone .th, .met li.gone .nm { opacity: .5; }
 .reveal p:empty { display: none; }
 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
 .flash.go { animation: flash .34s ease-out; }
@@ -86,25 +114,37 @@ button { cursor: pointer; }
 .scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .35); }
 .sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 80%; overflow: auto; background: var(--panel); border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); padding: 18px 18px calc(22px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; user-select: text; -webkit-user-select: text; }
 .sheet header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.sheet h3 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.05; margin: 0; }
-.sheet .sub { margin: -8px 0 0; color: var(--dim); font-size: 14.5px; }
+.noticeText { margin: 4px 0 0; font-size: var(--h3-size); line-height: 1.45; color: var(--ink); max-width: 34ch; }
+.cform { display: grid; gap: 14px; }
+.fld { display: grid; gap: 6px; }
+.fld span { font-size: calc(var(--h3-size) * .78); letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.fld input, .fld textarea { width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255, 255, 255, .06); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.4; resize: none; outline: none; -webkit-appearance: none; appearance: none; }
+.fld input:focus, .fld textarea:focus { border-color: var(--ink); background: rgba(255, 255, 255, .1); }
+.fld.bad input, .fld.bad textarea { border-color: var(--rec); }
+.hbtns { display: inline-flex; gap: 8px; flex: none; }
+.bigbox { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+.bigbox .fine2 { margin: 0 0 10px; font-size: calc(var(--h3-size) * .84); color: var(--dim); }
+#fittedOn { cursor: default; }
+.sheet h3 { font: var(--h2-style) 400 29px/1 var(--serif); text-transform: var(--h2-case); letter-spacing: 0; margin: 0; }
+.sheet .sub { margin: -8px 0 0; color: var(--dim); font-size: calc(var(--h3-size) * .9); }
 .sheet .sub:empty { display: none; }
 .rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.rows li { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 15px; color: var(--dim); }
+.rows li { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 12px; align-items: start; font-size: calc(var(--h3-size) * .94); color: var(--dim); }
 .rows b { color: var(--ink); font-weight: 600; }
 .mk { display: inline-block; box-sizing: border-box; width: 12px; height: 12px; border: 1.5px solid currentColor; border-radius: 50%; margin-top: 4px; }
 .mk.m { background: currentColor; }
 .mk.g { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
 .mk.x { border-width: 0 0 1.5px 0; border-radius: 0; height: 8px; }
-.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--faint); margin: 0; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: calc(var(--h3-size) * .78); color: var(--faint); margin: 0; }
 .key span { display: inline-flex; align-items: center; gap: 6px; }
 .key .mk { margin-top: 0; }
-.sheet details { font-size: 13.5px; color: var(--dim); }
+.sheet details { font-size: calc(var(--h3-size) * .84); color: var(--dim); }
 .sheet details summary { cursor: pointer; color: var(--ink); padding: 6px 0; }
 .sheet details ul { margin: 8px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .sheet a { color: inherit; text-underline-offset: 3px; }
 .sheet .media { display: block; width: 100%; max-height: 46vh; object-fit: contain; border-radius: 12px; background: #000; }
-.note { margin: 0; font-size: 13.5px; color: var(--dim); min-height: 1.3em; }
+.note { margin: 0; font-size: calc(var(--h3-size) * .84); color: var(--dim); min-height: 1.3em; }
+.note.via { color: var(--faint); }
 .note:empty { display: none; }
 .sheet.fromtop { top: 0; bottom: auto; border-top: 0; border-bottom: 1px solid var(--line); border-radius: 0 0 22px 22px; padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 20px; }
 .field { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
@@ -120,32 +160,48 @@ button { cursor: pointer; }
 .eye:disabled { color: rgba(255, 255, 255, .26); cursor: default; }
 .met { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .met:empty { display: none; }
-.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; }
+.met li { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto auto; gap: 10px; align-items: center; }
+.met li.gone { grid-template-columns: 48px minmax(0, 1fr) auto; }
 .met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
-.met .nm { display: block; font-family: var(--serif); font-size: 23px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.met .sm { display: block; font-size: 12.5px; line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
+.met .nm { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--h2-font); text-transform: var(--h2-case); letter-spacing: var(--h2-track); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.met span.sm { display: block; font-size: calc(var(--h3-size) * .78); line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
+.met .ico.sm { color: var(--faint); }   /* the look button carries the class sm too; the sub-line rule above once caught it and put it out of centre */
 .met .x { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--faint); font-size: 22px; line-height: 1; }
 .met li.ask { grid-template-columns: minmax(0, 1fr) auto auto; min-height: 48px; }
-.met li.ask .q { font-size: 15px; color: var(--dim); }
-.met .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
+.met li.ask .q { font-size: calc(var(--h3-size) * .94); color: var(--dim); }
+.met .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: calc(var(--h3-size) * .9); }
 .sheet details ol { margin: 10px 0 0; padding-left: 32px; display: flex; flex-direction: column; gap: 5px; color: var(--faint); }
 .sheet details ol li.on { color: var(--ink); }
-.sheet .fine2 { margin: 10px 0 0; font-size: 12.5px; color: var(--faint); }
+.sheet .aboutLead { margin: 10px 0 0; color: var(--dim); }
+.sheet .fine2 { margin: 10px 0 0; font-size: calc(var(--h3-size) * .78); color: var(--faint); }
 .offers { display: flex; flex-direction: column; gap: 10px; }
 .offers[hidden] { display: none; }
 .offers .pill { min-height: 44px; padding: 0 18px; font-weight: 500; }
-.about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
-.sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: 14.5px; }
-.line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: 14.5px; line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.about { margin: 8px 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .05); font-family: inherit; font-size: calc(var(--h3-size) * .78); line-height: 1.5; color: var(--dim); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.sheet .mini { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .07); font-size: calc(var(--h3-size) * .9); }
+.line { align-self: flex-start; max-width: 34ch; margin: 0; padding: 9px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); color: var(--ink); font-size: calc(var(--h3-size) * .9); line-height: 1.35; text-align: left; text-decoration: underline; text-underline-offset: 3px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.wait { position: relative; padding-bottom: 12px; }
+.wait::after { content: ""; position: absolute; left: 50%; bottom: 2px; width: min(180px, 70%); height: 2px; border-radius: 2px; transform: translateX(-50%); background: linear-gradient(var(--ink), var(--ink)) no-repeat 0 0 / 32% 100%, rgba(255, 255, 255, .24); animation: waitSlide 1.15s ease-in-out infinite alternate; pointer-events: none; }
+.wait.det::after { animation: none; background-size: calc(var(--p, 0) * 100%) 100%, auto; transition: background-size .3s linear; }
+.line.wait::after, .note.wait::after, .fine2.wait::after, .fine.wait::after { left: 0; transform: none; }
+.line.wait:not(:disabled)::after { left: 16px; bottom: 6px; }
+@keyframes waitSlide { from { background-position: 0 0, 0 0; } to { background-position: 100% 0, 0 0; } }
+@media (prefers-reduced-motion: reduce) { .wait::after { animation: none; background-size: 100% 100%, auto; opacity: .5; } }
+.line.loupe { position: relative; width: 48px; height: 48px; max-width: none; padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; animation: loupeIn .5s ease-out both; }
+.line.loupe svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.line.loupe::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--ink); opacity: 0; animation: loupeRing 2.6s ease-out 2; pointer-events: none; }
+@keyframes loupeIn { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes loupeRing { 0% { opacity: .55; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(1.55); } }
+@media (prefers-reduced-motion: reduce) { .line.loupe, .line.loupe::after { animation: none; } }
 .line:disabled { border-color: transparent; background: none; padding-left: 0; text-decoration: none; cursor: default; opacity: 1; color: var(--ink); text-shadow: 0 1px 14px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .7); -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none !important; }
-.tick { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dim); }
+.tick { display: flex; align-items: center; gap: 10px; font-size: calc(var(--h3-size) * .94); color: var(--dim); }
 .tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--paper); }
-.sheet details .tick { margin-top: 12px; font-size: 13.5px; }
-.sheet select { display: block; margin-top: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #1c1c1c; color: var(--ink); font: inherit; font-size: 14.5px; }
+.sheet details .tick { margin-top: 12px; font-size: calc(var(--h3-size) * .84); }
+.sheet select { display: block; margin-top: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: #1c1c1c; color: var(--ink); font: inherit; font-size: calc(var(--h3-size) * .9); }
 #svcBox, #bigBox { margin-top: 12px; }
 #bigBox .row { margin-top: 8px; }
 .sheet .warnline { color: var(--ink); }
-.reveal .count { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
+.reveal .count { font-size: calc(var(--h3-size) * .78); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--dim); }
 @media (min-width: 720px) { .sheet { left: 50%; right: auto; width: 520px; transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } .flash.go, .focus.go { animation: none; } .shutter i { transition: none; } }
 </style>
@@ -158,35 +214,33 @@ button { cursor: pointer; }
 
   <!-- 1. what is about to happen -->
   <section class="screen pad" id="intro">
-    <h1>Photograph something alive. <em>Your camera takes on its way of seeing.</em></h1>
-    <p>Field of view, focus, colour and the pace of movement shift toward what is known of how it sees. Where the camera has to guess, it tells you.</p>
-    <div class="row"><button class="pill" id="btnBegin" type="button">Begin</button><button class="link" id="introRec" type="button">Met so far</button></div>
+    <h1>Photograph another species to view the world through its eyes.</h1>
+    <div class="row"><button class="pill" id="btnBegin" type="button">Start</button><button class="chip" id="introRec" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="introRecN"></span></button><button class="ico sm" id="introAbout" type="button" aria-label="About"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2"/><circle cx="12" cy="7.9" r=".55" fill="currentColor"/></svg></button></div>
     <p class="fine" id="introFine"></p>
   </section>
 
   <!-- 2b. where no live camera is allowed: the living thing, as a photo -->
   <section class="screen pad" id="askAnimal" hidden>
-    <h2>First, who you met.</h2>
-    <p>Take its photo, or choose one you have.</p>
+    <h2>Your camera isn’t available. Tell us what you’ve encountered.</h2>
     <div class="row">
-      <label class="pill" id="lblAnimalCam">Take a photo<input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblAnimalPick">Choose a photo<input id="inAnimalPick" type="file" accept="image/*"></label>
+      <label class="pill round" id="lblAnimalCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inAnimalCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblAnimalPick" aria-label="Choose a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inAnimalPick" type="file" accept="image/*"></label>
     </div>
-    <div class="row links"><button class="link" id="backAskAnimal" type="button">Back</button><button class="link" id="recAskAnimal" type="button">Met so far</button></div>
+    <div class="row links"><button class="ico sm" id="backAskAnimal" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="chip" id="recAskAnimal" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg><span id="recAskAnimalN"></span></button></div>
     <p class="fine" id="askFine"></p>
   </section>
 
   <!-- 3b. then the person's own view, as a clip or a photo -->
   <section class="screen pad" id="askView" hidden>
-    <h2>Now your view.</h2>
+    <h2 id="askViewH">Now your view.</h2>
     <p id="askViewText"></p>
     <div class="row">
-      <label class="pill" id="lblViewClip">Record a clip<input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewCam">Take a photo<input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
-      <label class="pill ghost" id="lblViewPick">Choose one<input id="inViewPick" type="file" accept="image/*,video/*"></label>
+      <label class="pill round" id="lblViewClip" aria-label="Record a clip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle class="dot" cx="12" cy="12" r="4.2"/></svg><input id="inViewClip" type="file" accept="video/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewCam" aria-label="Take a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg><input id="inViewCam" type="file" accept="image/*" capture="environment"></label>
+      <label class="pill ghost round" id="lblViewPick" aria-label="Choose a clip or a photo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inViewPick" type="file" accept="image/*,video/*"></label>
     </div>
     <button class="line" id="svcView" type="button" hidden></button>
-    <div class="row links"><button class="link" id="backAskView" type="button">Back</button><button class="link" id="changeAskView" type="button">Not right? Say what it was</button></div>
+    <div class="row links"><button class="ico sm" id="backAskView" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="link" id="changeAskView" type="button">Wrong creature?</button></div>
     <p class="fine" id="askViewFine"></p>
   </section>
 
@@ -196,7 +250,7 @@ button { cursor: pointer; }
       <div class="top">
         <div class="left">
           <button class="ico" id="btnBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button class="who" id="btnWho" type="button" hidden aria-label="What is shown, and how far to trust it"><span class="nm" id="whoName"></span><i class="mk g" id="whoMark"></i></button>
+          <button class="who" id="btnWho" type="button" hidden aria-label="Features"><span class="nm" id="whoName"></span><i class="mk g" id="whoMark"></i></button>
         </div>
         <button class="ico" id="btnFlip" type="button" hidden aria-label="Use the other camera"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
       </div>
@@ -208,10 +262,10 @@ button { cursor: pointer; }
       <div class="bottom" id="barFinder">
         <label class="ico" aria-label="Choose a photo you already have"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 16l4.5-4.5 4 4 3-3 4.5 4.5"/><circle cx="9" cy="9.5" r="1.3"/></svg><input id="inLib" type="file" accept="image/*"></label>
         <button class="shutter" id="btnShutter" type="button" aria-label="Photograph it"><i></i></button>
-        <button class="ico" id="btnRecF" type="button" aria-label="Met so far"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
+        <button class="ico" id="btnRecF" type="button" aria-label="Encounters"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.7"/><circle cx="17" cy="8" r="2.7"/><circle cx="7" cy="16.5" r="2.7"/><circle cx="17" cy="16.5" r="2.7"/></svg></button>
       </div>
       <div class="bottom" id="barAnimal" hidden>
-        <button class="ico" id="btnEyes" type="button" aria-label="Hold to see with your own eyes"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+        <button class="ico" id="btnEyes" type="button" aria-label="Hold to view as a human"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
         <button class="shutter rec" id="btnRec" type="button" aria-label="Record a clip"><i></i></button>
         <button class="ico" id="btnSnap" type="button" aria-label="Keep a still"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2.5h7L17 8.5h3v10H4z"/><circle cx="12" cy="13" r="3.2"/></svg></button>
       </div>
@@ -226,48 +280,78 @@ button { cursor: pointer; }
 
   <!-- what was it: said by the person, where nothing can recognize the photo or the answer came out wrong -->
   <section class="sheet fromtop" id="claim" hidden aria-label="Say what it was">
-    <header><h3>What was it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
+    <header><h3>What is it?</h3><button class="ico" id="claimBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
     <p class="sub" id="claimSub"></p>
-    <div class="offers" id="claimKindBox" hidden><p class="note">It may be one of these kinds.</p><div class="row" id="claimKinds"></div></div>
-    <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">It may be one of these.</p><div class="row" id="claimOffers"></div></div>
+    <div class="offers" id="claimKindBox" hidden><p class="note">Is it one of these?</p><div class="row" id="claimKinds"></div></div>
+    <div class="offers" id="claimOfferBox" hidden><p class="note" id="claimOfferNote">Is it one of these?</p><div class="row" id="claimOffers"></div></div>
     <form class="field" id="claimForm" autocomplete="off">
-      <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="Kind of animal or plant" aria-label="Kind of animal or plant">
-      <button class="pill" type="submit">That is what it was</button>
+      <input id="claimName" type="text" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="60" placeholder="kind of animal or plant" aria-label="Kind of animal or plant">
+      <button class="pill round" type="submit" aria-label="That is what it was"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
-    <div class="row links" id="claimOtherRow" hidden><button class="link" id="claimOther" type="button"></button></div>
+    <div class="offers" id="claimSuggestRow" hidden><div class="row" id="claimSuggest"></div></div>
+    <div class="row links" id="claimAboutRow" hidden><button class="link" id="claimAbout" type="button">About</button></div>
     <div class="row links" id="claimAskRow" hidden><button class="link" id="claimAsk" type="button"></button></div>
   </section>
 
   <!-- everyone met so far, and the eyes that came with them -->
-  <section class="sheet" id="record" hidden aria-label="Met so far">
-    <header><h3>Met so far</h3><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
-    <p class="sub" id="recordSub"></p>
+  <section class="sheet" id="record" hidden aria-label="Encounters">
+    <header><h3>Encounters</h3><span class="hbtns"><button class="ico" id="recAbout" type="button" aria-label="About"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2"/><circle cx="12" cy="7.9" r=".55" fill="currentColor"/></svg></button><button class="ico" id="recordClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></header>
+    <p class="sub" id="recordSub" hidden></p>
     <div class="eyes" id="eyeStrip"></div>
     <ul class="met" id="metList"></ul>
-    <details id="g60">
+    <details id="g60" hidden>
       <summary id="g60Sum"></summary>
       <ol id="g60List"></ol>
       <p class="fine2">Counts are iNaturalist research-grade records gathered by GBIF for Gainesville, October and November, all years. It is a first list, for one town and one season.</p>
     </details>
-    <details id="about">
-      <summary>About this build</summary>
+    <div id="bigBox" class="bigbox" hidden>
+      <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
+      <div class="row"><button class="mini" id="bigGet" type="button">Download</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete the download</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
+      <label class="tick" id="bigAskRow" hidden><input type="checkbox" id="bigAsk"><span>Do not offer the full database</span></label>
+    </div>
+  </section>
+
+  <!-- about the app: what it is, who made it, where to write, and the credit the photographs' licences ask for -->
+  <section class="sheet" id="aboutSheet" hidden aria-label="About">
+    <header><h3><span class="mark" role="img" aria-label="Regards"></span>About</h3><button class="ico" id="aboutClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <div id="about">
+      <p class="aboutLead" id="aboutApp"><em>Regards</em> lets you view the world, for one week, through the eyes of a species you photograph. How many species can you encounter?</p>
+      <p class="aboutLead" id="aboutBy">This app is made by <a href="https://www.conradcheung.com" target="_blank" rel="noopener">Conrad Cheung</a>, an artist, writer, and Assistant Professor of 3D + Extended Media at the University of Florida.</p>
+      <p class="aboutLead" id="aboutTell">Is something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener" id="aboutTellLink">Let us know</a>.</p>
+      <p class="fine2" id="fittedOn"></p>
+      <div id="buildBox" hidden>
       <pre class="about" id="buildMark"></pre>
-      <div class="row"><button class="mini" id="aboutCopy" type="button">Copy</button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
+      <div class="row"><button class="ico sm" id="aboutCopy" type="button" aria-label="Copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.2a1.7 1.7 0 0 0-1.7-1.7H6.2a1.7 1.7 0 0 0-1.7 1.7v7.6a1.7 1.7 0 0 0 1.7 1.7h2.3"/></svg></button><p class="note" id="aboutNote" role="status" aria-live="polite"></p></div>
+      </div>
       <div id="awayRow" hidden>
         <label class="tick"><input type="checkbox" id="awayBox"><span>I am not near Gainesville</span></label>
         <p class="fine2" id="awayNote"></p>
       </div>
-      <div id="bigBox" hidden>
-        <p class="fine2" id="bigState" role="status" aria-live="polite"></p>
-        <div class="row"><button class="mini" id="bigGet" type="button">Get it</button><button class="mini" id="bigHalt" type="button">Stop</button><button class="mini" id="bigDel" type="button">Delete it</button><button class="mini" id="bigDelNo" type="button" hidden>Keep it</button></div>
-        <label class="tick" id="bigAskRow"><input type="checkbox" id="bigAsk"><span>Do not offer the larger model</span></label>
-      </div>
       <div id="svcBox" hidden>
-        <label class="fine2" for="svcChoice">A larger model on a server can be asked to name the species, from one photo made smaller.</label>
+        <label class="fine2" for="svcChoice">The full database on a server can be asked to name the species, from one photo made smaller.</label>
         <select id="svcChoice"><option value="">Ask me each time</option><option value="yes">Always ask it</option><option value="no">Never ask it</option></select>
       </div>
-    </details>
+    </div>
+  </section>
+
+  <!-- a plain notice: something could not be done, and what to do next -->
+  <section class="sheet" id="notice" hidden aria-label="Notice" role="alertdialog" aria-describedby="noticeText">
+    <p class="noticeText" id="noticeText"></p>
+    <div class="row"><button class="pill" id="noticeOk" type="button">Try again</button></div>
+  </section>
+
+  <!-- a message to the people who make the app -->
+  <section class="sheet" id="contact" hidden aria-label="Contact">
+    <header><h3>Let us know</h3><button class="ico" id="contactClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <form id="contactForm" class="cform" novalidate>
+      <label class="fld"><span>Name</span><input id="contactName" type="text" autocomplete="name" maxlength="80"></label>
+      <label class="fld"><span>Email</span><input id="contactEmail" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>
+      <label class="fld"><span>Message</span><textarea id="contactMsg" rows="5" maxlength="2000"></textarea></label>
+      <input id="contactBot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+      <div class="row"><button class="pill" id="contactSend" type="submit">Send</button><p class="note" id="contactNote" role="status" aria-live="polite"></p></div>
+      <p class="note via">Your message goes by email to the maker of Regards, sent through a service called Web3Forms.</p>
+    </form>
   </section>
 
   <!-- what is shown, and how far to trust it -->
@@ -275,9 +359,9 @@ button { cursor: pointer; }
     <header><h3 id="infoTitle"></h3><button class="ico" id="infoClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="infoSub"></p>
     <ul class="rows" id="rows"></ul>
-    <p class="key"><span><i class="mk m"></i>measured in this animal</span><span><i class="mk g"></i>measured in a relative</span><span><i class="mk"></i>a guess</span><span><i class="mk x"></i>left out</span></p>
-    <div class="row"><button class="pill ghost" id="infoChange" type="button">Not right? Say what it was</button></div>
-    <details>
+    <p class="key"><span><i class="mk m"></i>known in this animal</span><span><i class="mk g"></i>known in a relative</span><span><i class="mk"></i>speculative</span></p>
+    <div class="row"><button class="pill ghost" id="infoChange" type="button">Wrong creature?</button></div>
+    <details hidden>
       <summary>Sources, and what is unchecked</summary>
       <ul>
         <li>Sharpness across about 600 species: Caves, Brandley and Johnsen, 2018. <a href="https://today.duke.edu/2018/05/details-look-sharp-people-may-be-blurry-their-pets" target="_blank" rel="noopener">Duke University</a>.</li>
@@ -298,22 +382,22 @@ button { cursor: pointer; }
   </section>
 
   <!-- before a photo leaves the device: what would be sent, where, and the choice -->
-  <section class="sheet" id="ask" hidden aria-label="Ask a larger model">
-    <header><h3>Ask a larger model?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+  <section class="sheet" id="ask" hidden aria-label="Ask the full database">
+    <header><h3>Ask the full database?</h3><button class="ico" id="askClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="askSub"></p>
     <label class="tick"><input type="checkbox" id="askKeep"><span>Do not ask again</span></label>
-    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Not now</button></div>
-    <p class="note">Your answer can be changed under “About this build”, in “Met so far”.</p>
+    <div class="row"><button class="pill" id="askYes" type="button">Ask it</button><button class="pill ghost" id="askNo" type="button">Later</button></div>
+    <p class="note">Your answer can be changed under About.</p>
   </section>
 
   <!-- before a large download: what it is, how large, where it stays, and the choice -->
-  <section class="sheet" id="big" hidden aria-label="Get a larger model">
-    <header><h3 id="bigTitle">Get a larger model?</h3><button class="ico" id="bigClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+  <section class="sheet" id="big" hidden aria-label="Get the full database">
+    <header><h3 id="bigTitle">Get the full database?</h3><button class="ico" id="bigClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <p class="sub" id="bigSub"></p>
     <p class="note warnline" id="bigNet" role="status" aria-live="polite"></p>
-    <div class="row"><button class="pill" id="bigYes" type="button">Get it</button><button class="pill ghost" id="bigNo" type="button">Not now</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
-    <div class="row links"><button class="link" id="bigNever" type="button">Do not ask again</button></div>
-    <p class="note">Your answer can be changed, and the model deleted, under “About this build”, in “Met so far”.</p>
+    <div class="row"><button class="pill" id="bigYes" type="button">Download</button><button class="pill ghost" id="bigNo" type="button">Later</button><button class="pill ghost" id="bigStop" type="button" hidden>Stop the download</button></div>
+    <div class="row links" hidden><button class="link" id="bigNever" type="button">Do not ask again</button></div>
+    <p class="note">You can always delete your download under your Encounters.</p>
   </section>
 
   <!-- a clip or a still, kept -->
@@ -321,7 +405,7 @@ button { cursor: pointer; }
     <header><h3 id="keepTitle">Kept</h3><button class="ico" id="keepClose" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></header>
     <video class="media" id="keepVideo" controls playsinline loop muted hidden></video>
     <canvas class="media" id="keepCv" role="img" aria-label="The kept still" hidden></canvas>
-    <div class="row"><button class="pill" id="keepShare" type="button" hidden>Share</button><button class="pill ghost" id="keepSave" type="button">Save</button></div>
+    <div class="row"><button class="ico on" id="keepShare" type="button" hidden aria-label="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5L12 3.5l4 4M6 11.5v7.5h12v-7.5"/></svg></button><button class="ico" id="keepSave" type="button" aria-label="Save"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M8 11.5l4 4 4-4M5 19.5h14"/></svg></button></div>
     <p class="note" id="keepNote" role="status" aria-live="polite"></p>
   </section>
 </div>

@@ -1,0 +1,348 @@
+{
+  "key": "fungus",
+  "chip": "Mushroom, lichen",
+  "who": "a fungus",
+  "falls_back_to": "plant",
+  "applies_to": {
+    "kingdom": [
+      "Fungi"
+    ]
+  },
+  "cue": "There is no picture here, only how much blue and green light, and from where, slowly.",
+  "modules": [
+    "slow"
+  ],
+  "params": {
+    "field": {
+      "value": 1,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#2 No picture: He and Liu 2005; Sanz 2009"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "the plant's coarse light-only drawing"
+    },
+    "pupil": {
+      "value": "none",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "follows from No picture"
+    },
+    "M": {
+      "value": "fungus_blue_green",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#2 Colour: Schwalb and Shanler 1974; Moore 2016"
+      ],
+      "floor": null,
+      "note": "red dropped, blue weighted over green; the weights are the app's"
+    },
+    "gain": {
+      "value": 2,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        1,
+        4
+      ],
+      "floor": null,
+      "note": "stands for sensitivity to faint light (Galland and Russo 1984 give the threshold)"
+    },
+    "persist": {
+      "value": 20,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        60
+      ],
+      "floor": null,
+      "note": "seconds; real responses take minutes to hours, so this falls far short"
+    }
+  },
+  "matrices": {
+    "fungus_blue_green": {
+      "rows": [
+        [
+          0,
+          0.4,
+          0.6
+        ],
+        [
+          0,
+          0.4,
+          0.6
+        ],
+        [
+          0,
+          0.4,
+          0.6
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#3"
+      ]
+    }
+  },
+  "notes": [
+    {
+      "need": "field",
+      "why": "The whole field could lean slowly toward the brightest region. Not drawn."
+    }
+  ],
+  "rows": [
+    [
+      "g",
+      "No picture",
+      "A fungus has no eye. Its cells read how much light there is, mostly blue and green, and which way it comes from.",
+      [
+        "docs/views/sheets/fungus.md#2",
+        "param:field",
+        "param:pupil"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "The young stalk of the split gill mushroom bends toward violet and green light and ignores orange and red. Another gilled mushroom, Coprinopsis cinerea, needs a little blue light to form a mushroom, and in the dark it grows a long stem under an unfinished top.",
+      [
+        "Schwalb and Shanler 1974",
+        "Moore 2016",
+        "Terashima 2005",
+        "param:M"
+      ]
+    ],
+    [
+      "g",
+      "Red",
+      "Some moulds read red as well. Aspergillus nidulans uses phytochrome, the red receptor of plants, and red light holds back its sexual spores. The picture follows the mushrooms and leaves red dark.",
+      [
+        "Blumenstein 2005"
+      ]
+    ],
+    [
+      "g",
+      "Faint light",
+      "The stalk of the pin mould Phycomyces turns toward light as faint as a billionth of a watt on a square metre, and it still steers in light ten billion times brighter.",
+      [
+        "Galland and Russo 1984",
+        "Sanz 2009",
+        "Shropshire 1962",
+        "param:gain"
+      ]
+    ],
+    [
+      "m",
+      "Down",
+      "A mushroom stem laid on its side starts to turn up in about 25 minutes, and its tip is upright again within 3 to 4 hours. The gills of a field mushroom turn back toward straight down within an hour, so the spores fall clear.",
+      [
+        "Kher 1992",
+        "Moore 1996",
+        "Moore 1994"
+      ]
+    ],
+    [
+      "g",
+      "Pace",
+      "Genes that light switches on in the mould Neurospora peak 15 to 30 minutes later, and the pin mould stalk starts to bend within 5 minutes. Your eyes follow flicker to about 60 a second.",
+      [
+        "He and Liu 2005",
+        "Sanz 2009",
+        "Inger 2014"
+      ]
+    ],
+    [
+      "m",
+      "Lichens",
+      "A lichen is a fungus with algae living inside it, and the algae make food from light. The orange lichen Xanthoria parietina makes a pigment, parietin, in its outer layer, and the pigment soaks up blue light and some ultraviolet.",
+      [
+        "Gauslaa and Ustvedt 2003",
+        "Lange 1986"
+      ]
+    ],
+    [
+      "x",
+      "Water",
+      "A lichen with green algae can wake from damp air alone, and one with blue-green algae needs liquid water. The picture does not show how wet anything is.",
+      [
+        "Lange 1986"
+      ]
+    ],
+    [
+      "x",
+      "Food",
+      "The threads of a wood-rotting fungus grow across soil to new wood and remember the side that faced it. The picture has nothing for this.",
+      [
+        "Fukasawa 2020"
+      ]
+    ],
+    [
+      "i",
+      "Colour and time",
+      "Green counts for less than blue, dim light is lifted, and changes are averaged over about 20 seconds. A fungus answers light over minutes to hours, far slower than this. These choices are the app's own.",
+      [
+        "param:M",
+        "param:gain",
+        "param:persist"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: the hour in a minute",
+      "This trial keeps one picture every three seconds and averages them over ten minutes, so anything that moves fades and what stays remains. A fungus answers light over minutes to hours. The pace and the window are the app's.",
+      [
+        "docs/views/sheets/fungus.md#4",
+        "param:slow.everyMs",
+        "param:slow.windowS"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: the patient view",
+      "With &draw=patient the picture refuses to change while you watch. Set the phone down and leave it, and the picture comes up slowly, like a print in a tray. The waiting times are the app's.",
+      [
+        "docs/views/sheets/fungus.md#4",
+        "param:slow.stillS",
+        "param:slow.developS",
+        "param:slow.moveK"
+      ]
+    ],
+    [
+      "g",
+      "Being tried: which way is down",
+      "A mushroom stem tilted on its side turns upright again over three to four hours, and the gills come to hang straight down. With &draw=righting and the motion sensors on, tilt the phone and the picture turns slowly back to true vertical, about 600 times faster than a stem.",
+      [
+        "docs/views/sheets/fungus.md#4",
+        "param:slow.rightS"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none",
+    "senses": {
+      "motion": 1
+    }
+  },
+  "draft": true,
+  "slow": {
+    "everyMs": {
+      "value": 3000,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#4"
+      ],
+      "range": [
+        500,
+        20000
+      ],
+      "floor": null,
+      "note": "one frame kept every few seconds, as the sheet proposes"
+    },
+    "windowS": {
+      "value": 600,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#4"
+      ],
+      "range": [
+        30,
+        3600
+      ],
+      "floor": null,
+      "note": "the store forgets over ten minutes, as the sheet proposes"
+    },
+    "rightS": {
+      "value": 20,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#4"
+      ],
+      "range": [
+        2,
+        120
+      ],
+      "floor": null,
+      "note": "time constant of the slow righting: a stem's 3 to 4 hours sped up about 600 times; the factor is the app's"
+    },
+    "stillS": {
+      "value": 8,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        2,
+        60
+      ],
+      "floor": null,
+      "note": "seconds left alone before the patient view starts to develop"
+    },
+    "developS": {
+      "value": 30,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        5,
+        300
+      ],
+      "floor": null,
+      "note": "seconds for the patient view's print to come up fully"
+    },
+    "moveK": {
+      "value": 0.03,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0.005,
+        0.2
+      ],
+      "floor": null,
+      "note": "how much the picture may change between light reads and still count as left alone"
+    }
+  },
+  "draw": {
+    "slow": [
+      {
+        "name": "hour",
+        "invented": true,
+        "note": "the hour in a minute: one frame every few seconds, averaged over ten minutes, so only what stays remains (atlas 24)"
+      },
+      {
+        "name": "patient",
+        "invented": true,
+        "note": "the patient view: nothing develops while the person watches; set the phone down and the picture comes up like a print in a tray (atlas 24)"
+      },
+      {
+        "name": "righting",
+        "invented": true,
+        "note": "the slow righting: tilt the phone and the picture turns slowly back to true vertical (atlas 24); needs &sense=motion"
+      },
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view as it was before module 12"
+      }
+    ]
+  }
+}

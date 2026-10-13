@@ -1,0 +1,72 @@
+diff --git a/src/cam.rec.js b/src/cam.rec.js
+index c7f569d..f62b3b9 100644
+--- a/src/cam.rec.js
++++ b/src/cam.rec.js
+@@ -66,6 +66,9 @@
+         return Promise.all(names.map(function (n) { return caches.open(n).then(function (c) { return c.delete(url, { ignoreVary: true }); }); }));
+       }).catch(function () {});
+     }
++    // After a reload, WebKit answers a put to an address it had kept before the reload as done, and keeps nothing; with a delete first,
++    // the put stays (runs/engines/45- and 49-linux-firefox-webkit). Every copy this page keeps is put this way.
++    function keepPut(cache, url, res) { return cache.delete(url, { ignoreVary: true }).catch(function () {}).then(function () { return cache.put(url, res); }); }
+     function notify() { if (onProgress) onProgress(); }
+     function tick(n) { got += n; notify(); }
+     function readAll(res, expect, count) {             // the whole body, counted as it arrives
+@@ -104,7 +107,7 @@
+               return kept(cache, url).then(function (there) {
+                 if (there) return b;
+                 var copy = new Response(b, { headers: { 'Content-Type': r.headers.get('content-type') || 'application/octet-stream', 'Content-Length': String(b.byteLength) } });
+-                return cache.put(url, copy).catch(function () {}).then(function () { return b; });   // a full disk is no reason to fail
++                return keepPut(cache, url, copy).catch(function () {}).then(function () { return b; });   // a full disk is no reason to fail
+               });
+             });
+           });
+@@ -232,7 +235,7 @@
+         if (r.status === 404) throw err('absent', manifestUrl);            // taken away on purpose, or never there
+         if (!r.ok) return keptText(cache, url, manifestUrl + ' ' + r.status);           // a server having a bad moment
+         return r.text().then(function (text) {
+-          if (cache) cache.put(url, new Response(text, { headers: { 'Content-Type': 'application/json' } })).catch(function () {});
++          if (cache) keepPut(cache, url, new Response(text, { headers: { 'Content-Type': 'application/json' } })).catch(function () {});
+           return text;
+         }, function () { return keptText(cache, url, manifestUrl + ' broke off'); });
+       }, function () { clearTimeout(timer); return keptText(cache, url, manifestUrl + (late ? ' did not answer in time' : '')); });
+@@ -283,7 +286,7 @@
+         if (!V.sha256) return;
+         return kept(cache, wholeKey(V)).then(function (ok) {
+           if (ok) return;
+-          return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
++          return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return keepPut(cache, wholeKey(V), new Response('verified')).catch(function () {}); },
+             function (e) { return unkeepParts().then(function () { throw e; }); });      // every part passed and the whole does not: nothing of it can be trusted
+         });
+       }).then(function () { return buf.buffer; });
+@@ -334,6 +337,17 @@
+         if (!cache) throw err('keep', 'this browser gave no store to keep it in');
+         store = cache;
+         var P = partsOf(M.vision), i = 0;
++        // A part counts as kept once it can be read back (see keepPut); if it cannot, it is put again, a little later each time.
++        function keep(key, b, tries) {
++          return keepPut(cache, key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
++            throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
++          }).then(function () { return cache.match(key, { ignoreVary: true }); }).then(function (hit) {
++            if (hit) return;
++            if (tries >= 3 || halted()) throw err(halted() ? 'stopped' : 'keep', 'a part was not kept after ' + (tries + 1) + ' tries');
++            diag('large-keep-again', key.replace(/^.*\/part\//, '').slice(0, 12) + ' ' + (tries + 1));
++            return new Promise(function (res) { setTimeout(res, 500 * Math.pow(2, Math.min(tries, 4))); }).then(function () { return keep(key, b, tries + 1); });
++          });
++        }
+         function next() {
+           if (i >= P.length) return Promise.resolve();
+           var part = P[i++], key = partKey(part);
+@@ -346,11 +360,7 @@
+               return readAll(r, part.bytes, function (n) { partGot += n; notify(); });
+             }).then(function (b) {
+               if (b.byteLength !== part.bytes) throw err('damaged', part.url + ' is ' + b.byteLength + ' bytes, not ' + part.bytes);
+-              return sha256(part.sha256)(b).then(function () {
+-                return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
+-                  throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
+-                });
+-              });
++              return sha256(part.sha256)(b).then(function () { return keep(key, b, 0); });
+             }).then(function () { keptBytes += part.bytes; partGot = 0; notify(); }, function (e) {
+               partGot = 0;
+               throw halted() ? err('stopped') : e && e.code ? e : err('network', part.url + ' ' + ((e && e.message) || ''));

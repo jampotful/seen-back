@@ -1,0 +1,180 @@
+{
+  "key": "sealife",
+  "chip": "Coral, anemone, jellyfish, clam",
+  "who": "a sea creature",
+  "falls_back_to": "plant",
+  "applies_to": {"phylum":["Cnidaria","Mollusca","Porifera","Echinodermata","Bryozoa","Ctenophora","Chordata"]},
+  "cue": "No picture here. Only how much light there is and where it comes from. Pass your hand over the lens to cast a shadow.",
+  "modules": ["light"],
+  "params": {
+    "field": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/sealife.md#2 Shadows: Kennedy 1960",
+        "docs/views/sheets/sealife.md#2 Moon jellies: Nakanishi 2009"
+      ],
+      "range": [0,1],
+      "floor": null
+    },
+    "pupil": {"value":"none","grade":"i","invented":true,"src":[],"floor":null,"note":"as for the plant"},
+    "M": {
+      "value": "sea_blue_green",
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/sealife.md#2 Full moon: Levy 2007",
+        "docs/views/sheets/sealife.md#2 Blue moonlight: Grawunder 2015",
+        "docs/views/sheets/sealife.md#2 Shadows: Kennedy 1960"
+      ],
+      "floor": null,
+      "note": "grey weighted to blue and green; no colour discrimination is claimed"
+    }
+  },
+  "matrices": {
+    "sea_blue_green": {
+      "rows": [[0.05,0.4,0.55],[0.05,0.4,0.55],[0.05,0.4,0.55]],
+      "grade": "i",
+      "invented": true,
+      "src": ["docs/views/sheets/sealife.md#3"]
+    }
+  },
+  "variants": {
+    "starfish": {
+      "note": "Starfish, sea urchin (and for now sea cucumbers and brittle stars): a grey field of a few soft patches that runs slow.",
+      "params": {
+        "fov": {"value":300,"grade":"i","invented":true,"src":[],"range":[180,360],"floor":null},
+        "cpd": {
+          "value": 0.06,
+          "grade": "g",
+          "invented": true,
+          "src": ["docs/views/sheets/sealife.md#2 Sharpness: Petie 2016 (8 degrees); Yerramilli and Johnsen 2010"],
+          "range": [0.03,0.2],
+          "floor": null
+        },
+        "sat": {
+          "value": 0,
+          "grade": "g",
+          "invented": false,
+          "src": ["docs/views/sheets/sealife.md#2 Grey and slow: Garm and Nilsson 2014"],
+          "range": [0,1],
+          "floor": null
+        },
+        "persist": {
+          "value": 0.6,
+          "grade": "i",
+          "invented": true,
+          "src": [],
+          "range": [0,2],
+          "floor": null,
+          "note": "from 1 to 2 flashes a second; the flicker figure is secondary"
+        },
+        "pupil": {"value":"none","grade":"i","invented":true,"src":[],"floor":null},
+        "field": {"value":0,"grade":"i","invented":true,"src":[],"range":[0,1],"floor":null}
+      }
+    }
+  },
+  "notes": [
+    {
+      "need": "light",
+      "why": "A shadow as an event (a flinch when the frame darkens), and the moon's phase from the date (Lin 2021; Levy 2007). Not drawn; graded i if added."
+    },
+    {
+      "need": "zones",
+      "why": "Starfish look out from each arm at once (a flat band 100 by 30 degrees each); scallops and giant clams have rows of small eyes. Not drawn."
+    }
+  ],
+  "rows": [
+    [
+      "i",
+      "No picture",
+      "Sea anemones and corals have no eyes. The picture keeps only how much light there is, what colour it is and where it comes from.",
+      ["param:field","param:pupil","param:M"]
+    ],
+    [
+      "m",
+      "Full moon",
+      "A reef coral makes more of one blue-light pigment on full-moon nights than on new-moon nights. Hundreds of kinds of coral spawn together on a few nights each year, and moonlight helps set those nights.",
+      ["Levy 2007"]
+    ],
+    [
+      "m",
+      "The dark hour",
+      "One reef coral spawns after the moon starts rising late, leaving a stretch of darkness after sunset. A dim light of about 0.3 lux at night held its spawning back.",
+      ["Lin 2021"]
+    ],
+    [
+      "m",
+      "Blue moonlight",
+      "A small sea anemone released its eggs and sperm in step only when blue light, standing in for a full moon, shone through five nights of each month. White light did little.",
+      ["Grawunder 2015"]
+    ],
+    [
+      "g",
+      "Shadows",
+      "A surf clam has a nerve that senses light by itself. When a shadow falls, the nerve fires a burst and the clam pulls in its siphon.",
+      ["Kennedy 1960"]
+    ],
+    [
+      "m",
+      "Moon jellies",
+      "A moon jelly has small cups of light-sensing cells around its rim, and it swims faster in brighter light. Without those cups it no longer does.",
+      ["Nakanishi 2009 (secondary: Wikipedia, Rhopalium)"]
+    ],
+    [
+      "x",
+      "Scallops and giant clams",
+      "A scallop has up to 200 eyes along the edge of its shell, each focusing light with a mirror, and a giant clam has several hundred pinhole eyes. This view does not draw them.",
+      ["Palmer 2017","Land 2003"]
+    ],
+    [
+      "x",
+      "Box jellyfish",
+      "Box jellyfish have 24 eyes, some with lenses, and one kind looks up through the water to steer by the trees above it. This view does not draw them.",
+      ["Garm 2011","Nilsson 2005"]
+    ],
+    [
+      "g",
+      "Eyes at the arm tips",
+      "A starfish has an eye at the tip of each arm. In the crown-of-thorns starfish each eye has about 250 tiny facets and looks out sideways over a patch about 100 degrees wide and 30 high.",
+      ["Petie 2016"]
+    ],
+    [
+      "g",
+      "Grey and slow",
+      "The blue sea star is colour blind, and its eyes follow flicker only up to 1 or 2 times a second, against about 60 for yours. The starfish picture is grey, and anything that moves smears.",
+      ["Garm and Nilsson 2014 (the 1 to 2 hertz is secondary)"]
+    ],
+    [
+      "m",
+      "Sea urchins",
+      "A purple sea urchin has no eyes, yet it turned toward or away from a dark disc 10 degrees wide and ignored one 6.5 degrees wide. Its spines shade the light-sensitive cells between them.",
+      ["Yerramilli and Johnsen 2010","Ullrich-Luter 2011"]
+    ],
+    [
+      "i",
+      "How it is drawn",
+      "The grey weights, the choice of a light-only picture for animals that have no eyes, and the slow pace of the starfish picture are the app's own.",
+      ["param:M","param:field"]
+    ],
+    [
+      "i",
+      "Tonight's moon",
+      "With the moon option, the view at night is as bright as tonight's moon, worked out from the date. Many corals time their spawning by the moon; how the brightness follows it is the app's.",
+      []
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {"motion":"none","sound":"none","haptic":"none"},
+  "draft": true,
+  "clock": {},
+  "draw": {
+    "clock": [
+      {"name":"time","invented":true,"note":"the view as it is at any hour"},
+      {"name":"moon","invented":true,"note":"at night the whole view is as bright as tonight's moon (atlas 25)"}
+    ]
+  }
+}
