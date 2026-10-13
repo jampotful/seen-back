@@ -47,5 +47,13 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 2. Module 12, `slow`, with sliders and `&draw=` options; tilt and heading; pigment peaks for cat, deer, rabbit, squirrel and insect; the third floor run with a moving clip.
 3. Specs for fungus, cat, deer, rabbit, squirrel and insect behind `?try=`.
 
-## Done
-(nothing yet)
+## Done (pushed to `agent/engine`)
+- `test/check4.js try`: a view with no zones (`zones: []`) passes; module 12's views must keep frames. `lent` waits up to 15 s for the look to open.
+- Module 12, `slow`: `hour`, `patient`, `righting`, `exposure`, `off` (`docs/ENGINE.md`). Fungus and slime specs use it; cat and deer trials offer `exposure`.
+- Tilt and heading: Snell's window on fish (`&draw=snell`), the magnetic tide and grain on salamander and the bird trial; `&roll=`, `&elev=`, `&heading=` for checking.
+- Pigment peaks for cat, deer, rabbit, squirrel and insect in `tools/views/pigments.py` (`PEAKS`, all sourced) and trials written from them.
+- The floor: a moving-clip mode. Two runs pushed at 14:58: `run/engines/linux-floor-jumper3` (still, the parameters after `gaze.floor`) and `run/engines/linux-floor-moving1` (moving, what the still picture left invisible). Results return on the `ci` branch under `runs/engines/<run>-linux-chromium/floor.json`.
+
+## Next
+1. Copy both runs' `floor.json` into `docs/views/floor.json` (the moving one under a `moving` note in `runs`, values under `floor.jumper` only where the still run had `invisible`).
+2. Every check, then merge `main` and push to `main` as build 29.

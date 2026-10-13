@@ -1,4 +1,4 @@
-# The picture engine: fields added in build 23
+# The picture engine: fields added in build 23 and after
 
 This file describes what the engine in `src/cam.b.js` understands beyond the fields listed in `docs/views/research/BRIEF.md`, what each field draws, what it costs, and the evidence it serves. The evidence named here is in the log of the senses research: `docs/views/evidence/jumper.jsonl` on the branch `research/jumper` (211 lines when this was written, 13 October 2026), with the draft `docs/views/drafts/jumper.md`. A value marked *invented* is the app's own choice.
 
@@ -142,13 +142,34 @@ A spec's `pace` block takes `ratio`. Category `pace`: `lag` (today's) and `repla
 
 The senses object (`src/cam.c1.js`) now integrates the rotation rate between snaps and watches for thrusts along the phone's depth. A spec's `motion` block takes `holdMs`, `maxDeg`, `thrust` and `thrustMs`. Category `steady`: `lock` (the picture is shifted against the phone's turn, through `u_stab`, until `holdMs` passes or the turn passes `maxDeg`, then snaps), `held` (today's) and `arm` (the ring is written only for `thrustMs` after each thrust, so the picture moves only when the phone is jerked forward, with a short pulse where the browser vibrates). Motion needs `&sense=motion` and a tap. Which way each axis shifts the picture is untested on a phone. Tilt, heading and the knock's side for `field` and `overlay` are not built yet.
 
+## Slow (module 12, burst 4)
+
+A spec's `slow` block feeds a store at half the picture's width and height that keeps one frame every `everyMs` and holds their running mean, then a mean that forgets over `windowS` seconds. It accumulates in a 16-bit float target where the phone can render to one (`RGBA16F`), so it can hold hundreds of frames; where it cannot, each new frame weighs at least a sixty-fourth. The time pass then takes its picture from the store. The store and its uniforms exist only in the zone programs, so the offered views draw as before. Category `slow`:
+
+| Option | What it draws | Parameters |
+|---|---|---|
+| `hour` | the hour in a minute (atlas 24): one frame every three seconds, averaged over ten minutes, so what moves fades and what stays remains | `everyMs`, `windowS` |
+| `patient` | the patient view (atlas 24): the picture starts as blank paper and refuses to change while the person watches; once the phone is left alone for `stillS` (no touch, no turn from the motion sensors, and the light module's 8 by 8 cells changing less than `moveK` between reads), the store fills and the picture comes up over `developS` like a print in a tray | `stillS`, `developS`, `moveK`, `everyMs`, `windowS` |
+| `righting` | the slow righting (atlas 24): the picture turns back toward true vertical with time constant `rightS` after the phone is rolled, read from gravity; needs `&sense=motion` | `rightS` |
+| `exposure` | the long exposure of a night eye (atlas 7): every frame pooled over `windowS` (a few seconds) and shown by `mix`, a curve against light, so still things settle and moving things leave ghosts in the dark | `windowS`, `mix` |
+| `off` | the view as it was | |
+
+The fungus spec offers `hour` (its default), `patient`, `righting` and `off`; the slime mould spec the same without `righting`, both from `fungus.md` section 4 (a stem rights itself over 3 to 4 hours; fungi act over minutes to hours). The cat and deer trials offer `exposure` behind `off`. The averaging window, the pace, the speed-up (about 600 times) and every waiting time are invented and graded `i`. `engine.slowState()` reports the mode, the frames kept, how far the print has developed and the turn.
+
+## Tilt and heading (module 5, second part, burst 4)
+
+The motion sensors now also give the phone's roll in the screen's plane and the camera's elevation, both from gravity (iOS reports gravity with the opposite sign to Android, so its readings are turned round), and the compass heading (`webkitCompassHeading` on iOS, `deviceorientationabsolute` on Android). `&roll=`, `&elev=` and `&heading=` set them by hand for checking. Which way each turns the picture waits for a phone.
+
+- **Snell's window** (atlas 2; `fish.md` section 4, item 1). A spec's `tilt` block (`fromDeg`, `fullDeg`) and category `tilt`: `level` (the default) and `snell`. As the camera's elevation passes `fromDeg` the scene is remapped through the refraction at the surface (arcsin(sin θ / 1.333)) into a disc, complete at `fullDeg`; the disc's rim is 48.6 degrees from its centre and sits 0.42 screen heights out, and it slides toward the top as the phone levels. The camera (taken as 64 degrees across) fills only the disc's middle and the rest is stretched from the edges, as the sheet foresaw; the dark ring outside the disc is invented, since the sheet has no source for it. The fish spec offers it.
+- **Magnetic north** (atlas 21). A spec's `magnet` block (`k`, the strength) and category `magnet`: `none`, `tide` (a darkening of the upper half that is strongest facing north) and `grain` (fine streaks, like brushed metal, whose direction turns with the heading). Both fade as the light module's mean colour turns red or yellow, since the birds' compass fails in such light and the newt's turns a quarter. The salamander spec and the bird trial offer them. Nobody knows what the sense is like, and every part of the drawing is invented.
+
 ## Trials on offered views
 
-A spec's `trial` block holds changes being tried on a view the app offers. They apply only with `?try=<key>`, so the offered view stays as it was (`node` comparison of every offered view's object against `main`). `dog`, `bee` and `bird` carry trials from pigment peaks in the research logs.
+A spec's `trial` block holds changes being tried on a view the app offers. They apply only with `?try=<key>`, so the offered view stays as it was (`node` comparison of every offered view's object against `main`). `dog`, `bee` and `bird` carry trials from pigment peaks in the research logs. Burst 4 adds `cat`, `deer`, `rabbit`, `squirrel` and `insect`, written by `python3 -I tools/views/pigments.py --trials` from its `PEAKS` table (each peak with the log line it comes from; none is invented): the cones as the view's colour, the rods as its dark-adapted colour, and the shift, neutral band and wheel options. The insect trial uses the seven-spot ladybird's ultraviolet, blue and green (360, 420 and 520 nm) for the most common insect pattern, graded `g`.
 
 ## The visibility floor
 
-`node test/check4.js floor` renders a view (`FLOOR_VIEW`, jumper by default) on a still frame of the scene clip at 390 by 844 CSS pixels and a device pixel ratio of 2, with the gaze pinned and the `strip` drawing, and for each scalar parameter finds the smallest change whose renders differ by more than `FLOOR_DE` (2.3) in the 95th percentile of delta E*ab (`tools/views/delta_e.py`), doubling and then bisecting. A push to `run/engines/linux-floor<anything>` runs it on a build machine at three values a parameter; results come back on the `ci` branch and go into `docs/views/floor.json`, whose `threshold` entry says how far the 2.3 was checked. Parameters that act through time (pace, the gaze's timings, glow from movement) need the moving clip and are not measured by this still harness yet.
+`node test/check4.js floor` renders a view (`FLOOR_VIEW`, jumper by default) on a still frame of the scene clip at 390 by 844 CSS pixels and a device pixel ratio of 2, with the gaze pinned and the `strip` drawing, and for each scalar parameter finds the smallest change whose renders differ by more than `FLOOR_DE` (2.3) in the 95th percentile of delta E*ab (`tools/views/delta_e.py`), doubling and then bisecting. A push to `run/engines/linux-floor<anything>` runs it on a build machine at three values a parameter; results come back on the `ci` branch and go into `docs/views/floor.json`, whose `threshold` entry says how far the 2.3 was checked. Parameters that act through time (pace, the gaze's timings, glow from movement) need the moving clip: with `FLOOR_MOVING=1` (a push to `run/engines/linux-floor-moving<anything>`) each render plays the same 0.6 s of the clip at 0.3 speed before the shot, the threshold is raised to 1.5 times the largest difference among three renders at one value (the clip's own noise in software graphics), and a difference counts only when a second render shows it too. `FLOOR_REDO=1` measures again what the still picture left invisible.
 
 ## What a real phone must judge
 
