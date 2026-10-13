@@ -340,3 +340,96 @@ What this means for the picture. A phone is almost always in air, so each of the
 | Wakes (`seal`, optional) | Anything that moves leaves a slowly fading trail behind it, like ink spreading in water, which lasts many seconds, as a fish's wake lasts for a seal. | The camera's motion map. | Easy to medium: motion-gated `persist` with a long decay. It stands in for a sense of touch and must carry an `i` row. | Log 42 to 44 |
 | Sonar beam (`dolphin`) | A narrow cone in the middle of the screen, about a third of its width, lights up as an echo picture refreshed click by click; outside the cone the grey eye image stays. The clicks quicken as something nears the centre. | The same depth sources as the bat's echo picture. | Hard, as for bats; it reuses the bat's machinery with a narrower cone and a longer reach. | Log 49, 51, 54 |
 | Glare (`whale`; and the rods-only variant of `raccoon`) | Bright parts of the scene bloom and wash toward white. | The frame's brightness. | Easy: highlight compression with bloom. | Log 142 |
+
+### `primate` (Old World monkeys, apes and howler monkeys; also any primate named only to its group)
+
+**Rows.**
+
+1. `['m', 'Colour', 'Old World monkeys and apes have three kinds of colour-sensing cells, as people do. In the crab-eating macaque, the primate recorded most often, they are most sensitive near 430, 531 and 561 nanometres, a close match for a person's. This view leaves colour as your camera shows it.']`
+   Log 101 to 103 (Baylor, Nunn and Schnapf 1987; the red and green cones matched human colour-matching curves); log 104 (rhesus cones near 536 and 565 nm, rods 502); log 99, 96.
+2. `['m', 'Every animal alike', 'Colour vision varies less among Old World monkeys and apes than it does among people. All 25 monkeys tested, from eight species, had the same three kinds of cell.']`
+   Log 100 (Jacobs and Deegan 1999); log 105 (Jacobs 1996).
+3. `['m', 'Howler monkeys', 'Howler monkeys are the only monkeys of the Americas in which every animal, male or female, sees three colours.']`
+   Log 107 (Carvalho and colleagues 2017); log 108 (Silveira and colleagues 2014).
+4. `['m', 'Sharpness', 'A chimpanzee sees about as much detail as a person, and a rhesus macaque a little less in bright light. Monkeys and apes that are active by day resolve 30 to 75 cycles per degree. This view keeps your sharpness.']`
+   Log 91 (64 cycles per degree, Spence 1934 as Caves and colleagues 2018 report), 118 (Matsuzawa 1990), 119 (Cavonius and Robbins 1973), 114 (Veilleux and Kirk 2009).
+5. `['m', 'Night sight', 'In very dim light a rhesus macaque makes out finer detail than a person does.']`
+   Log 119.
+6. `['g', 'No eye shine', 'Like people, monkeys and apes have no reflecting layer behind the retina, so their eyes do not shine back at a torch at night.']`
+   Log 129 (Ollivier and colleagues 2004), 165 (Pirie 1959).
+7. `['x', 'Smell', 'Apes, Old World monkeys and howler monkeys carry more broken genes for smell than other monkeys and lemurs, a loss that came about alongside full colour vision. The picture leaves smell out.']`
+   Log 164 (Gilad and colleagues 2004).
+8. `['i', 'Field of view and pace', 'No measurement of field of view or of the speed of sight was found for monkeys or apes. The view keeps the camera's field and your pace.']`
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Monkey, ape', 'a monkey or ape', 'Three colours and sharp sight, much as yours.' | The app's wording. |
+| `cpd` | unset (60) | Log 91, 114, 118. |
+| `M`, `sat` | unset (identity) | Log 101 to 103. |
+| `gain` | unset | No reflecting layer (log 129, 165). |
+| `pupil` | 'o' | **Invented**; no primate pupil source was opened, and it has no effect without `dof`. |
+| `fov`, `topoA`, `rate` | unset | Row 8. |
+
+This view changes almost nothing, and that is the finding. Its interest lies beside `capuchin` and `lemur`, where the same order splits three ways in colour and more than tenfold in sharpness. A comparison card that shows one scene through all three primate views would teach that at a glance; it needs no engine work.
+
+### `capuchin` (New World monkeys except howler and owl monkeys)
+
+**Rows.**
+
+1. `['g', 'Two colours or three', 'In capuchins, spider monkeys, squirrel monkeys and marmosets, every male sees with two kinds of colour-sensing cells, like a person who confuses reds and greens. Some females have three kinds and see colour as you do. This view shows the two-colour version, and a tap shows the three-colour one.']`
+   Log 106 (Carvalho and colleagues 2017), 105 (Jacobs 1996). The tap is the app's own.
+2. `['m', 'Which two', 'A male's longer-wave cell may peak anywhere from about 535 to 563 nanometres, depending on which form of the gene he carries, so two males of one species can see reds and greens differently.']`
+   Log 106 (capuchins and squirrel monkeys: 563, 550 and 535 nm).
+3. `['m', 'Smelling instead', 'Wild white-faced capuchins that cannot tell red from green sniff fruit more often than those that can.']`
+   Log 163 (Melin and colleagues 2019, 75 wild monkeys). The white-faced capuchin is the fifth most recorded primate.
+4. `['m', 'Sharpness', 'A common marmoset resolves about 30 cycles per degree, half your sharpness. This view is blurred to match.']`
+   Log 117 (Troilo, Rowland and Judge 1993). For capuchins and spider monkeys the value is `g`.
+5. `['g', 'No eye shine', 'Like other monkeys, these have no reflecting layer behind the retina.']`
+   Log 129.
+6. `['x', 'Scent of ripe fruit', 'Capuchins judge fruit partly by smell, and they sniff more often at fruits whose scent grows as they ripen. The picture leaves smell out.']`
+   Log 163.
+7. `['i', 'Field of view and pace', 'No measurement of field of view or of the speed of sight was found for these monkeys. The view keeps the camera's field and your pace.']`
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Capuchin, spider monkey, marmoset', 'a New World monkey', 'Two colours for every male; tap for a female's three.' | The app's wording. |
+| `cpd` | 30 | Marmoset (log 117). |
+| `M` | DEUTAN, and identity on a tap (new) | Log 106. A male with the 563 nm form lacks a cell near 530 nm and resembles a person missing the green-sensitive cone, which the deutan matrix models; a male with the 535 nm form resembles the protan case. The default and the tap are **invented**. |
+| `pupil`, `gain`, `fov` | 'o', unset, unset | **Invented** pupil; no reflecting layer (log 129). |
+
+**New effect.** *The colour coin.* The polymorphism is the most interesting fact about these monkeys: in one troop, some animals see a red fruit against green leaves and others do not (log 106, 163). A tap that switches between the male's two-colour view and a female's three-colour view, with a short line saying which is shown, makes that visible. A second tap could switch to the protan-like male. Easy: it swaps `M`.
+
+### `lemur` (lemurs, lorises, galagos, tarsiers and owl monkeys)
+
+**Rows.**
+
+1. `['m', 'Colour', 'Ring-tailed lemurs and brown lemurs have two kinds of colour-sensing cells, most sensitive near 437 and 545 nanometres, like a person who confuses reds and greens. This view shows colours that way.']`
+   Log 111 (Jacobs and Deegan 1993), 112 (Jacobs and Deegan 2003), 113 (Valenta and colleagues 2015).
+2. `['g', 'A few with three', 'In a few lemurs, among them sifakas, the red ruffed lemur and the blue-eyed black lemur, some females have a third kind and see three colours.']`
+   Log 110 (Carvalho and colleagues 2017).
+3. `['g', 'No colour', 'Owl monkeys, lorises, galagos and several tarsiers have lost the blue-sensitive cell and see no colour at all. When the app knows one of these animals, the view turns grey.']`
+   Log 109 (Carvalho and colleagues 2017).
+4. `['m', 'Sharpness', 'A blue-eyed black lemur resolves about 4 to 5 cycles per degree, a twelfth to a fifteenth of your sharpness, and a tarsier's eye could resolve about 9. This view is blurred to about 4.']`
+   Log 115, 116 (Veilleux and Kirk 2009).
+5. `['g', 'Golden eye shine', 'Lemurs and galagos have a reflecting layer behind the retina made of crystals of riboflavin, a vitamin. It gives their eyes a golden shine in torchlight and gives dim light a second pass through the eye. The shadows are lifted here.']`
+   Log 165 (Pirie 1959), 129 (the second pass, Ollivier and colleagues 2004).
+6. `['g', 'Night against day', 'Primates that are active at night see less detail than those active by day, because their eyes trade sharpness for sensitivity.']`
+   Log 93 (Caves and colleagues 2018), 114.
+7. `['x', 'Smell', 'Lemurs keep more working genes for smell than monkeys and apes do. The picture leaves smell out.']`
+   Log 164 (Gilad and colleagues 2004).
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Lemur, loris, galago', 'a lemur', 'Two colours, coarse detail, and the shadows lifted.' | The app's wording. |
+| `cpd` | 4 | Log 115. |
+| `M` | DEUTAN | Two cones (log 111); the matrix is **invented**. |
+| `sat` | 0.8 | **Invented**. |
+| `gain` | 1.6 | **Invented**; riboflavin tapetum (log 165). |
+| `pupil` | 'o' | **Invented**. |
+| Variant for Aotidae, Lorisidae, Galagidae, Tarsiidae | `M`: GREY545 = [.3, .6, .1, .3, .6, .1, .3, .6, .1], `sat` 0 | One cone (log 109); the weights are **invented**, since these animals' cone peaks were not found. Tarsiers have no reflecting layer in the sources read here, so the variant keeps `gain` at 1.6 only for lorises and galagos; that split is a gap (section 5). |
