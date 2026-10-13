@@ -1,6 +1,6 @@
 # Status
 
-The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 00:55 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
+The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 08:50 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
 
 ## How the work is paced
 
@@ -16,10 +16,10 @@ The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. 
 | Research: birds | `docs/views/research/BRIEF.md` | `research/birds` | Done (`77aac6c`): 218 records, 30 papers wanted. Proposes `owl` and `duck` views and corrects `hawk`. | The owner's decisions; an audit. |
 | Research: cats, dogs and people | same | `research/cat-dog` | Done (`3b18838`): 178 records (about 50 for people), 23 papers wanted. Proposes `bigcat` and `fox` views, and a person's field of 200 degrees in place of 180. | The owner's decisions; an audit. |
 | Research: snails, worms, scorpions, ticks | same | `research/ground-invertebrates` | Done (`9c75995`): 197 records, 22 papers wanted. Proposes seven views, with new groups for millipedes, centipedes and harvestmen. | The owner's decisions; an audit. |
-| Research: the other eleven units | same | `research/<unit>` | `jumper` done on `research/jumper` (`f2fcc52`): parameter table, 282 log lines, 28 papers wanted. The other ten units not started. | Bursts 1 to 4 below. |
-| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | Design done on `agent/design` (`b33aef8`): `docs/views/ATLAS.md` (25 mechanisms) and `docs/ENGINE-DESIGN.md` (modules 0 to 13). Engine not started. | The owner's picks from the atlas, then queue entry 4 in the next window. |
-| The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
-| The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
+| Research: the other eleven units | same | `research/<unit>` | `jumper` done and merged to `main` (13 Oct). Ten more units hold logs on `research/<unit>` from 12 Oct, 21:00 to 23:12: methods 1,159, insect 523, spider 320, sea-invertebrates 307, bee 267, herps 220, mammal-groups 209, plant-fungus-slime 202, fish-shark 187, squirrel-deer-rabbit 171. None audited. | The batch audit of all fourteen units once the API key exists (queue 6). |
+| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | The design is merged to `main`: `docs/views/ATLAS.md` (25 mechanisms) and `docs/ENGINE-DESIGN.md` (modules 0 to 13). `agent/engine` holds six earlier commits not on `main` (prototypes behind `?try=reef`, `shark`, `spider`). | Burst 2 (queue 4 and 4a). Drawing options are switchable with `&draw=` so the owner picks on the phone. |
+| The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | No head passes every mark (`tools/world/RESULTS.md`, 12 Oct 23:08): B/16 finds four times as many groups but loses about 10 points on people, pets and rooms. | Burst 2 takes the next step (queue 11). |
+| The full database for the world | `docs/tracks/worlddb.md` | `agent/world-db` | Built (12 Oct 23:08): world rows, place files at 2 degrees, the encounter rule, the world test, the page reading the world manifest. | Burst 2 ships it to `main` if every check passes (queue 11). |
 
 ## Burst 1 (launched 13 October 00:39, finished 00:53)
 
