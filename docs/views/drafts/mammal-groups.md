@@ -541,3 +541,90 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
 | A lower field brightened (Virginia opossum) | The lower half of the picture, where the opossum's reflecting layer looks, is lifted more than the upper half. | None. | Easy: a vertical ramp on `gain`. The mapping is my inference. | Log 162 |
 | Ground ripples (`mammal`, elephants only, optional) | When the phone senses a footstep or a thud, rings spread from the bottom of the screen. | The accelerometer. | Easy. It stands in for a sense the work read here did not measure, so it carries an `i` row and waits for a source on elephants' own detection. | Log 157 |
 | Electric sparks (`mammal`, platypus only) | Nothing honest: no phone senses fields of a few microvolts per centimetre. | None. | Not possible as measurement. | Log 153 |
+
+## 3. The earlier sheets re-checked
+
+None of this unit's groups has an `EYES` entry yet, so this section checks the two earlier sheets, `docs/views/sheets/mammal.md` and `docs/views/sheets/bat.md`, row by row against sources opened today. "Not reopened" means the row rests on the earlier sheet and its audit, which opened the source on 11 or 12 October.
+
+### `docs/views/sheets/mammal.md`
+
+| Row or number | Verdict | Today's evidence |
+|---|---|---|
+| Scope: Alachua's five most recorded (raccoon, opossum, wild pig, river otter, eastern mole) | **Confirmed**, which the audit could not do | County CSV: 281, 137, 61, 53, 51. |
+| Scope: order counts | **Confirmed** | `docs/views/world-orders.csv`; the Carnivora arithmetic in section 1. |
+| `mammal` Colour (pig 439 and 556 nm) | **Confirmed** | Log 125, 126 (Cambridge page). |
+| `mammal` Bears and otters | **Confirmed** for the bear (log 127); otters supported by the European otter (log 7) and a review (log 17); the sea otter's genes (Levenson and colleagues 2006) **not reopened** | |
+| `mammal` Kangaroos | **Confirmed**, with the missing DOI found: 10.1371/journal.pone.0014231 | Log 139 (full text on disk). |
+| `mammal` Platypus and echidnas (`g`) | **Confirmed**, and the platypus half can rise to `m` | Log 124 (SWS2 and LWS in monotremes); log 143 (red- and blue-sensitive cones in the platypus retina). |
+| `mammal` Sharpness (blur to 5) | **Corrected** to 6 | Tammar 4.8 confirmed (log 140); added rhinoceros 6 (log 136), numbat 5.2 to 6.3 (log 137), elephant 13 to 14 anatomical (log 132). The western grey kangaroo's 11.2 (Veilleux and Kirk 2014) was **not reopened**. |
+| `mammal` Elephants ("about a tenth of your sharpness") | **Corrected** | The behavioural figures stand (log 135), but the African elephant's retina predicts 13.2 to 14.4 cycles per degree (log 132), about a quarter of yours, so the one cow tested probably underperformed her eye. The row should give both. |
+| `mammal` Dim light | **Confirmed**, and the authors the earlier sheet could not find are Ollivier, Samuelson, Brooks, Lewis, Kallberg and Komáromy | Log 129. |
+| `mammal` Field of view and pupil (`i`) | **Corrected**: the field is now measured in a ferret and two marsupials | Log 144, 137, 138; the pupil is still unmeasured. |
+| `mammal` Electric sense | The behaviour is **confirmed** (log 153); the threshold of about 50 µV per cm (Scheich and colleagues 1986) was **not reopened** | |
+| `mammal` elephant colour, marked unfinished | **Filled** | Log 134: rod 496, S 419, L 552 nm, like a deuteranope. This also supports the DEUTAN matrix for elephants. |
+| `raccoon` Colour | **Confirmed** | Log 120 (Springer page). The raccoon's cone peak is still not given in the abstract. |
+| `raccoon` Opossum (561 nm) | **Confirmed**; routing **corrected** | Log 122. South American opossums have two cones (log 123), so only *Didelphis virginiana* goes to `raccoon` (82.4% of opossum records), and the rest of the order goes to `mammal`. |
+| `raccoon` Armadillos and sloths | **Confirmed** | Log 141. |
+| `raccoon` Anteaters and pangolins | **Corrected** for anteaters; pangolins **not reopened** | The 2014 abstract places rod monochromacy in the stem pilosan, sloths and anteaters together (log 141), so "their other cone is untested" no longer stands. |
+| `raccoon` Dim light | **Confirmed**, and the opossum's reflecting layer is placed in the upper retina | Log 129, 162. |
+| `raccoon` Sharpness, field and pupil (`i`) | Unchanged | Silveira and colleagues 1982 and Rapaport and colleagues 1981 are on the wanted list. |
+| `raccoon` Drawn as (`x`) | **Corrected** to `i` | It describes the app's drawing, which is a guess, and no sense is left out. |
+| `mole` Eyes and Light and dark | **Confirmed** for the eastern mole (log 169); **corrected** for the European mole | Log 130: S and M cones, an eye that passes ultraviolet. European moles hold 60.6% of mole records. |
+| `mole` Snout (`x`) | **Confirmed** | Log 169. |
+| Picture: `mammal` `cpd` 5, `gain` 1.2, DEUTAN | `cpd` **corrected** to 6; `gain` kept (still invented); DEUTAN kept, now sourced for elephants | Section 2. |
+| Picture: `mole` `sat` 0 | **Corrected** to 0.4 | Log 130. |
+| Shrews and hedgehogs left in `other` | **Superseded**: since build 21 they belong to the `mammal` group | `docs/COVERAGE.md`; still unmeasured (wanted: Bridges and Quilliam 1973). |
+
+### `docs/views/sheets/bat.md`
+
+| Row or number | Verdict | Today's evidence |
+|---|---|---|
+| Scope: the split at Pteropodidae | **Confirmed** | Section 1; flying fox total re-read today. |
+| `bat` Calls | **Confirmed**; picture **corrected** | Log 55, 56. The hold and thrust now give 4.3 renewals a second, between the free-tailed bat's 3.7 (log 67, newly found) and the big brown bat's 5 to 10. |
+| `bat` Distance | **Confirmed** | Log 57. |
+| `bat` Reach | **Confirmed** in the audited wording | Log 60. |
+| `bat` Direction | **Confirmed**, with an addition | Log 58. In the wild, Daubenton's bats narrow the beam to about 30 to 50 degrees across (log 66). Half-amplitude angles are measured from the axis and must be doubled for a full width (note on log 66). |
+| `bat` Sharpness | **Confirmed** | Log 74 (0.6); added big brown bat 0.5 to 0.7 (log 62), *Myotis* 0.1 (log 71, 92), six species 0.35 to 2 (log 69). |
+| `bat` Dim light | **Confirmed** | Log 63. |
+| `bat` Colour | **Confirmed** | Log 82, 83, 85, 88 (vampire bats added). |
+| `bat` Echoes (`x`) | **Confirmed** | ecoObs FAQ reopened today. |
+| `bat` Magnetic compass (big brown bats, Holland and colleagues 2006) | **Not reopened**; supported in another bat | Log 89 (greater mouse-eared bats calibrate the compass at sunset). The row now names that bat. |
+| `bat` picture `sat` 0.25 | **Corrected** to 0.2 (still invented) | Log 82. |
+| `flyingfox` Sharpness | **Confirmed** | Log 75, 76. |
+| `flyingfox` No calls | **Confirmed** | Log 75, 168. |
+| `flyingfox` Colour (from a press release) | **Confirmed** from the paper's own abstract, with the three *Pteropus* species named | Log 146 (Müller, Goodman and Peichl 2007). |
+| `flyingfox` One cone | **Confirmed**, with species named | Log 147. *Eidolon helvum* itself is unmeasured. |
+| `flyingfox` Dim light (300,000 to 800,000 rods per square millimetre for bats, from a conservation page) | **Corrected** | Log 148: 350,000 to 800,000 in six pteropodids, from the paper. The comparison with people was dropped, since its page was not reopened. |
+| `flyingfox` Ultraviolet (`i`, Wang and colleagues 2004) | **Not reopened**; kept | Log 85 notes that cave-roosting pteropodids lost the ultraviolet cone. |
+| `flyingfox` Clicks (`x`) | **Confirmed** | Log 81. |
+| `flyingfox` Field, focus and pupil (`i`) | **Partly filled** | Round pupil (log 80), binocular field 54 degrees (log 149), a temporal sharp area (log 77). |
+| Picture: `flyingfox` `sat` 0.7 | **Corrected** to 0.6 (still invented) | Log 148. |
+| Unfinished: no figure for the Mexican free-tailed bat | **Partly filled** | Calls (log 67) and dives (log 68); its vision paper (Lemus and colleagues 2026) is on the wanted list. |
+
+## 4. Species with their own measurements
+
+These commonly photographed species are measured well enough for a profile of their own later.
+
+| Species | Records | What is measured | Log lines |
+|---|---:|---|---|
+| Harbour seal (*Phoca vitulina*) | 44,546 | cone 510 nm; acuity in water, air and turbidity; single targets; field 208 and binocular 67 degrees; area centralis and streak; pupil and cornea; whisker trails; hearing in two media | 15, 16, 27, 28, 33 to 40, 42, 47 |
+| Humpback whale (*Megaptera novaeangliae*) | 31,040 | rods only (genes); retina near 492 nm; acuity 3.95; two sharp areas; blue-green tapetum | 1, 13, 29, 158, 159 |
+| Common bottlenose dolphin (*Tursiops truncatus*) | 16,874 | rod 488 and cone 524 nm; colour tests; acuity in both media; two sharp areas; double-slit pupil; sonar beam and angular resolution; tapetum | 8, 9, 14, 22 to 25, 48, 53, 54, 160 |
+| Crab-eating macaque (*Macaca fascicularis*) | 15,934 | cones 430, 531, 561 nm | 101 to 103 |
+| Rhesus macaque (*Macaca mulatta*) | 6,991 | rods 502, cones 536 and 565 nm; acuity across luminance | 104, 119 |
+| White-faced capuchin (*Cebus imitator*) | 8,461 | colour polymorphism in a wild troop, and its effect on sniffing | 163 |
+| Big brown bat (*Eptesicus fuscus*) | 5,579 (bat sheet) | call rates; range accuracy; beam; aiming; acuity; dim-light limit | 55 to 58, 62, 63 |
+| Mexican free-tailed bat (*Tadarida brasiliensis*) | 3,822 (bat sheet); 179 in Alachua | search calls; dives | 67, 68 |
+| Daubenton's bat (*Myotis daubentonii*) | not counted | acuity 0.6; field beam; visual threshold | 66, 73, 74 |
+| Grey-headed and black flying foxes (*Pteropus poliocephalus*, *P. alecto*) | 5,590 and 2,406 (bat sheet) | acuity about 4 | 75 |
+| Egyptian rousette (*Rousettus aegyptiacus*) | in 553 *Rousettus* | acuity; field of best vision; hearing; clicks and vision together | 75, 81, 150, 152 |
+| Common raccoon (*Procyon lotor*) | in 137,710 *Procyon* | one cone; forepaw cortex | 120, 166 |
+| Virginia opossum (*Didelphis virginiana*) | 54,547 | one cone 561 nm; tapetum in the upper retina | 122, 162 |
+| American black bear (*Ursus americanus*) | in 71,923 Ursidae | two cones, 3:1; area centralis | 127, 128 |
+| African elephant (*Loxodonta africana*) | in 28,818 Proboscidea | pigments; anatomical and behavioural acuity; tapetum; streak | 132 to 135 |
+| Tammar wallaby (*Macropus eugenii*) | in 89,090 Macropodidae | two cones; acuity 4.8 | 139, 140 |
+| European mole (*Talpa europaea*) | 17,116 | S and M cones; ultraviolet | 130, 131 |
+| Star-nosed mole (*Condylura cristata*) | 1,700 | the star's touch, rate and saccades | 154 to 156 |
+| Platypus (*Ornithorhynchus anatinus*) | in 23,545 Monotremata | retina; electric and touch hunting | 143, 153 |
+| Florida manatee (*Trichechus manatus*) | 7,903 | acuity; touch hairs | 45, 46 |
+| Northern elephant seal (*Mirounga angustirostris*) | in 79,366 Phocidae | dark adaptation; pupil range; tapetum; wild whisker hunting | 30, 32, 43, 161 |
