@@ -149,8 +149,8 @@ Chip: "Mouse, rat, beaver". Who: "a mouse or rat". Cue: "Reds go dark, and the s
   Log: L70, L71.
 - `['g', 'Night', 'Mice and rats are active mostly at night, and their retinas are packed with rods, the cells for dim light. A deer mouse has about a hundred rods for every cone. This view brightens the shadows and lets moving things leave short trails.']`
   Log: L72 (deer mouse, rods about 450,000 and cones 3,000 to 6,500 per mm²); L156 (a rat's retina responds to light about a thousand times dimmer than a ground squirrel's); L8, L13 (albino rats follow flicker to 25 to 39 Hz); L133 (flying squirrel rod process, 10 to 15 Hz). The length of the trails is *invented*.
-- `['i', 'Larger rodents', 'Beavers, muskrats, porcupines, coypus and capybaras share this view, though little is known about their eyes. The retina of a European beaver could resolve two to three times the detail a rat sees, and this view sharpens the picture for the larger animals. That part of the view is a guess.']`
-  Log: L59 (beaver, about 17 arcmin in air, 1.8 to 3.5 cycles per degree by the two possible readings); L2 note (acuity rises with eye size).
+- `['g', 'Larger rodents', 'Beavers, muskrats, porcupines, coypus, capybaras and agoutis share this view. The day-active agouti has a sharp band along the horizon and a retina rich in cones, a capybara's eye is about as long as a person's, and a European beaver's retina could resolve two to three times the detail a rat sees. This view sharpens the picture for these larger animals and drops the ultraviolet tint for agoutis and capybaras, and both choices are guesses.']`
+  Log: L162, L165 (agouti); L163, L166 (capybara: a weaker streak, an eye 22.2 mm long, a vertical oval pupil); L59 (beaver, about 17 arcmin in air, 1.8 to 3.5 cycles per degree by the two possible readings); L60, L23 (cavies and agoutis: no ultraviolet cone found in the guinea pig, 15% of ultraviolet A through the agouti's lens); L2 note (acuity rises with eye size).
 - `['x', 'Whiskers and sound', 'A rat sweeps its whiskers back and forth about eight times a second to feel its way. A house mouse hears pitches up to about 90,000 vibrations a second. This view leaves touch and sound out.']`
   Log: L140, L137, L43.
 
@@ -159,13 +159,13 @@ Chip: "Mouse, rat, beaver". Who: "a mouse or rat". Cue: "Reds go dark, and the s
 | Field | Value | Behind it |
 |---|---|---|
 | `fov` | 300 | L70 (rat, 295.4) |
-| `cpd` | 1; house mouse 0.5; beavers 2.5; capybaras, agoutis, porcupines, coypu 2 | L158, L159, L3, L64; L157, L67; L59 (beaver); the larger animals' values are *invented* from L59 and L2 |
+| `cpd` | 1; house mouse 0.5; beavers 2.5; porcupines and coypu 2; agoutis 3; capybaras 4 | L158, L159, L3, L64; L157, L67; L59 (beaver); L162, L163, L166 (agouti streak, capybara eye size); the larger animals' values are *invented* from these and L2 |
 | `topoS` | 0.5 | L35 (spiny mouse, best vision 81 degrees wide); weight *invented* |
 | `fall` | 0.5 | *invented* |
 | `pupil` | 'o' | *invented*; rodent pupils were not in the sources read |
 | `dof` | 2 | *invented* |
 | `M` | new `RODENT` matrix: every channel = 0.05 R + 0.6 G + 0.35 B | *invented* weights for a single cone near 505 nm (L83, L85, L87); reds come out dark |
-| `uvBlue` | 1 | L82, L84, L86; the tint is *invented* |
+| `uvBlue` | 1; 0 for Caviidae, Dasyproctidae and Cuniculidae | L82, L84, L86; L60, L23, L165; the tint is *invented* |
 | new `skyBand` | upper 45% of the frame, ultraviolet channel only, held level with the horizon by the tilt sensor | L77; the share of the frame is *invented* |
 | `gain` | 1.7 | *invented*; L72 |
 | `persist` | 0.15 | L8, L13, L133; value *invented* |
@@ -418,7 +418,7 @@ Each could get its own profile when the full database names it. Values a profile
 - **Deer and horse fields of view.** The horse's field is near-complete with 65 to 80 degrees of overlap (L148, L149), with no total in degrees. Hughes (1977) holds the classic measurements (wanted). The deer's 310 degrees comes only from a book (L121).
 - **Horse behavioural acuity.** Now known through two reviews (L150, L155): about 20/30 on average and 23.3 cycles per degree at best. Timney and Keil (1992) itself remains wanted to confirm the conditions.
 - **Cattle and bison acuity.** A review gives cattle 2.6 to 5 cycles per degree (L151), which settles their place with deer. Bison (12.8% of Alachua's records for this group) are unmeasured and take the cattle value. **Sheep** remain unsettled between the Landolt scores (L135) and a stated 14 (L147); the paper behind the review's figure, probably Sugnaseelan and colleagues (2013), is wanted.
-- **Beavers, muskrats, coypu, porcupines, capybaras and agoutis.** Half of the `mouse` view's world records and nothing measured except the beaver's anatomy (L59). The agouti's lens (15% of ultraviolet A, L23) and the guinea pig's non-ultraviolet S cone at 429 nm (L60) warn that the ultraviolet row may be false for cavies and agoutis. The view's ultraviolet tint should be turned off for Caviidae, Dasyproctidae and Cuniculidae (*invented* choice on L60 and L23).
+- **Beavers, muskrats, coypu, porcupines, capybaras and agoutis.** More than half of the `mouse` view's world records. Measured: the beaver's retinal resolution (L59), the agouti's streak and cones (L162, L165), the capybara's weaker streak, eye length and vertical oval pupil (L163, L166), and the paca's and vizcacha's rod-rich retinas with tapeta (L164, L167). Nothing was found for muskrats, coypu or porcupines; they take the beaver's values. The agouti's lens (15% of ultraviolet A, L23) and the guinea pig's S cone at 429 nm (L60) warn that the ultraviolet row may be false for cavies and agoutis, so the view's ultraviolet tint is turned off for Caviidae, Dasyproctidae and Cuniculidae (*invented* choice on those lines). The agouti and capybara, active by day or at dusk, might later earn a view of their own.
 - **Overhead binocular vision in rats.** Measured in anaesthetized albino rats (L70, L71); how a moving rat uses it is in Wallace and colleagues (2013) (wanted).
 - **Pikas and zebras.** Nothing measured here; they ride on rabbits and horses.
 - **Hearing in deer and horses.** Only cattle and goats (L138) and a general statement about horses (L40). Horse hearing (Heffner and Heffner 1984, cited in L139's paper) was not opened.
