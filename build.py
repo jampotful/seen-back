@@ -21,6 +21,19 @@ SELFTEST_READS = ("$", "BUILD", "EYES", "Engine", "HUMAN", "HUMAN_CPD", "ORDER",
 
 head = (src / "cam.head.html").read_text(encoding="utf-8")
 js = "".join((src / n).read_text(encoding="utf-8") for n in PARTS)
+# ---- the views, as data: views/<key>.json inlined into the page as one object (docs/ENGINE-DESIGN.md, module 0), in the order that
+# views/index.json gives, then any other spec by name. A spec the checker refuses stops the build.
+import json, subprocess, sys
+vdir = root / "views"
+order = json.loads((vdir / "index.json").read_text(encoding="utf-8"))
+keys = order + sorted(p.stem for p in vdir.glob("*.json") if p.stem != "index" and p.stem not in order)
+chk = subprocess.run([sys.executable, "-I", str(root / "tools" / "views" / "check_spec.py"), "--quiet"], capture_output=True, text=True)
+if chk.returncode != 0:
+    sys.exit("the spec checker refused a view:\n" + chk.stdout + chk.stderr)
+specs = {k: json.loads((vdir / (k + ".json")).read_text(encoding="utf-8")) for k in keys}
+SPEC_JS = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+assert "/*@SPECS@*/{}" in js
+js = js.replace("/*@SPECS@*/{}", SPEC_JS)
 js += ("  // ---------- self-test hook: with ?selftest=1 the page fetches selftest.js and hands it the bindings it reads (build.py)\n"
        "  if (/[?&]selftest=1(?:&|$)/.test(location.search || '')) {\n"
        "    S.selftest = true;   // at once, as the self-test did when it was part of this script: the page's loop leaves the drawing to it\n"
