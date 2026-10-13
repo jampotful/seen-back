@@ -8,6 +8,8 @@ name: worlddb
 #                     tools/world/grid.py), published to pub/world-place.
 #   test-<anything>   the place files at 1 and 2 degrees (tools/world/prior.py) and the world test (tools/world/worldtest.py);
 #                     the 1-degree place files are added to pub/naturalist-world.
+#   place-<anything>  the place files at 2 degrees, the grid the world test chose (no accuracy lost against 1 degree, 60% of the size),
+#                     added to pub/naturalist-world in place of the 1-degree ones; no test.
 # Results come back on ci as runs/worlddb/<run>-<job>.
 on:
   push:
@@ -143,7 +145,7 @@ jobs:
         run: bash ci/return.sh worlddb out grid
 
   test:
-    if: startsWith(github.ref_name, 'run/worlddb/test')
+    if: startsWith(github.ref_name, 'run/worlddb/test') || startsWith(github.ref_name, 'run/worlddb/place')
     runs-on: ubuntu-latest
     timeout-minutes: 330
     steps:
@@ -153,7 +155,9 @@ jobs:
           python-version: '3.12'
       - name: place files and the world test
         env:
-          PUBLISH_GRID: "1"
+          PUBLISH_GRID: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '2' || '1' }}
+          ONLY_PUBLISH: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '1' || '' }}
+          GRIDS: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '2' || '1,2' }}
         run: bash ci/worlddb/test.sh
       - name: return results
         if: always()

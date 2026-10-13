@@ -2,7 +2,8 @@
 # The world test of the full database (tools/world/worldtest.py), and its place files (tools/world/prior.py), on a build
 # machine. Called by .github/workflows/worlddb.yml for run/worlddb/test-*. Reads pub/naturalist-world (the rows),
 # pub/world-place (tools/world/grid.py) and the world test photos' vectors on pub/lab-bioclip2-l14. With PUBLISH_GRID set
-# (a grid size in degrees), that grid's place.bin and zones.json are added to pub/naturalist-world.
+# (a grid size in degrees), that grid's place.bin and zones.json are added to pub/naturalist-world; with ONLY_PUBLISH set too,
+# the place files are made and published and the test is not run.
 set -uo pipefail
 mkdir -p out work/rows work/place work/vec
 LOG=out/log.txt
@@ -30,8 +31,10 @@ for g in ${GRIDS//,/ }; do
   ships="${ships:+$ships,}ship$g"
   ls -la "ship$g" | tee -a "$LOG"
 done
-step "world test" python3 -I tools/world/worldtest.py --rows work/rows --vectors work/vec/world-species --place work/place --ship "$ships" --out out/test || exit 1
-cp out/test/WORLDTEST.md out/test/worldtest.json out/
+if [ -z "${ONLY_PUBLISH:-}" ]; then
+  step "world test" python3 -I tools/world/worldtest.py --rows work/rows --vectors work/vec/world-species --place work/place --ship "$ships" --out out/test || exit 1
+  cp out/test/WORLDTEST.md out/test/worldtest.json out/
+fi
 if [ -n "${PUBLISH_GRID:-}" ]; then
   mkdir -p pubplace && cp "ship$PUBLISH_GRID/place.bin" "ship$PUBLISH_GRID/zones.json" pubplace/
   python3 - "$PUBLISH_GRID" <<'PY' >> "$LOG"
