@@ -1,0 +1,40 @@
+name: lit-table
+# The literature table: Claude Haiku through the Message Batches API reads the works of the collection on pub/lit-t1
+# (tools/lit/extract.py) and returns candidate measurements in the evidence-log format, every quote checked by script.
+# Push a commit to run/lit-table/<label>; ci/lit/table.env names the topics, the spend ceiling and whether to plan only.
+# The table goes to the branch pub/lit-table; the summary and the calibration come back on ci as runs/lit-table/<run>.
+# The key is the repository secret ANTHROPIC_API_KEY; without it the job stops at once and says so.
+on:
+  push:
+    branches: ['run/lit-table/**']
+permissions:
+  contents: write
+concurrency:
+  group: lit-table
+  cancel-in-progress: false      # a cancelled run would leave paid batches uncollected
+jobs:
+  table:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: tests
+        run: python3 -I tools/lit/test_extract.py
+      - name: table
+        run: bash ci/lit/table.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit-table
+          path: |
+            lit-table/
+            out/
+            calib/table*/
+          retention-days: 7
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lit-table out
