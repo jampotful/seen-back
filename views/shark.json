@@ -1,0 +1,285 @@
+{
+  "key": "shark",
+  "chip": "Shark, ray",
+  "who": "a shark or ray",
+  "falls_back_to": "fish",
+  "applies_to": {
+    "class": [
+      "Chondrichthyes"
+    ]
+  },
+  "cue": "There is no colour, only light and dark, and movement leaves trails.",
+  "modules": [],
+  "params": {
+    "fov": {
+      "value": 300,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark log 93"
+      ],
+      "range": [
+        180,
+        360
+      ],
+      "floor": null,
+      "note": "eyes on the sides with small overlaps; the total was not opened"
+    },
+    "cpd": {
+      "value": 5,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark logs 11, 24, 97"
+      ],
+      "range": [
+        0.2,
+        10
+      ],
+      "floor": null
+    },
+    "topoS": {
+      "value": 1,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark logs 98, 102, 103"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "horizontal streaks"
+    },
+    "fall": {
+      "value": 1.5,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        3
+      ],
+      "floor": null
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark log 105"
+      ],
+      "floor": null,
+      "note": "shark pupils vary in shape"
+    },
+    "dof": {
+      "value": 14,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark log 157"
+      ],
+      "range": [
+        0,
+        30
+      ],
+      "floor": null
+    },
+    "M": {
+      "value": "shark_grey",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark logs 19, 20, 141"
+      ],
+      "floor": null,
+      "note": "every channel takes green, so the picture is grey"
+    },
+    "gain": {
+      "value": 1.3,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark logs 106, 107"
+      ],
+      "range": [
+        1,
+        3
+      ],
+      "floor": null,
+      "note": "the amount is the app's"
+    },
+    "persist": {
+      "value": 0.04,
+      "grade": "g",
+      "invented": false,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark log 67: 1/26.1 s; logs 122, 123"
+      ],
+      "range": [
+        0,
+        0.3
+      ],
+      "floor": null
+    }
+  },
+  "matrices": {
+    "shark_grey": {
+      "rows": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/drafts/fish-shark.md#shark logs 19, 20, 141"
+      ]
+    }
+  },
+  "variants": {
+    "ray": {
+      "note": "Rays differ: two or three cone types, a field up to the whole circle, and cpd .2 (logs 15, 94, 95). Skates have rods only (logs 27, 125).",
+      "params": {
+        "fov": {
+          "value": 360,
+          "grade": "i",
+          "invented": true,
+          "src": [],
+          "range": [
+            180,
+            360
+          ],
+          "floor": null
+        },
+        "cpd": {
+          "value": 0.2,
+          "grade": "g",
+          "invented": false,
+          "src": [
+            "docs/views/drafts/fish-shark.md#ray log 15"
+          ],
+          "range": [
+            0.05,
+            10
+          ],
+          "floor": null
+        },
+        "persist": {
+          "value": 0.08,
+          "grade": "g",
+          "invented": false,
+          "src": [
+            "docs/views/drafts/fish-shark.md#ray log 124"
+          ],
+          "range": [
+            0,
+            0.3
+          ],
+          "floor": null
+        }
+      }
+    }
+  },
+  "notes": [
+    {
+      "need": "zones",
+      "why": "A near band where the electric sense works (TRY.shark glows moving things in the lower band); the head's sideways sweep (TRY.shark sweep). Neither is drawn with today's fields."
+    },
+    {
+      "need": "field",
+      "why": "Snell's window, as for fish."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Colour",
+      "Every shark studied so far has only one kind of colour-sensing cell, so sharks are probably colour blind. They can tell apart shades of brightness that differ by less than 2 percent. This view shows the world in shades of grey.",
+      [
+        "Hart 2011",
+        "Hart 2020",
+        "param:M"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "Sharks see between a twentieth and a sixth as much detail as you do. Fast hunters of open water are at the sharp end and bottom-dwelling night hunters at the coarse end. This view uses the middle of that range.",
+      [
+        "docs/views/drafts/fish-shark.md#shark logs 11, 24, 97",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Sharpest band",
+      "Many sharks, such as the lemon shark, see most sharply along a band level with the horizon, which lets them scan the sea floor or the open water without moving their eyes. This view sharpens a band along the horizon.",
+      [
+        "docs/views/drafts/fish-shark.md#shark logs 98, 102, 103",
+        "param:topoS"
+      ]
+    ],
+    [
+      "m",
+      "Pace",
+      "Sharks follow a flickering light up to 16 to 31 flashes a second, a quarter to a half of your rate, so quick movement smears. This view leaves trails behind anything that moves.",
+      [
+        "docs/views/drafts/fish-shark.md#shark log 67",
+        "Inger 2014",
+        "param:persist"
+      ]
+    ],
+    [
+      "m",
+      "Electric sense",
+      "Sharks feel the faint electric fields around living animals through gel-filled pores on the snout. The picture leaves this out; no phone can sense an electric field.",
+      [
+        "Kalmijn 1971"
+      ]
+    ],
+    [
+      "i",
+      "Field and the rest",
+      "The field of view, the falloff from the sharp band, the pupil, the depth of focus and the dim-light lift are the app's own settings.",
+      [
+        "param:fov",
+        "param:fall",
+        "param:pupil",
+        "param:dof",
+        "param:gain",
+        "param:M"
+      ]
+    ],
+    [
+      "x",
+      "Smell first",
+      "A hunting shark usually smells its prey first and follows the scent upstream, then turns to sight, the lateral line, the electric sense and touch as it closes in. The picture leaves smell out.",
+      [
+        "docs/views/drafts/fish-shark.md#shark"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}
