@@ -1,0 +1,370 @@
+{
+ "key": "jumper",
+ "model": "claude-sonnet-5-5",
+ "errors": [
+  "gaze.sweep: value [2,1.2] is not a cited record's value and does not lie between two of them (R134)",
+  "gaze.twist: value [25,2000,3500] is not a cited record's value and does not lie between two of them (R142)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Look at one spot. A tiny patch there sees sharp and in colour, and everything around it answers only to movement.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "params": {
+    "M": {
+     "value": "JUMPER",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the colour mapping is the app's own drawing of two pigments"
+    },
+    "cpd": {
+     "value": 1.3,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R8"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "sharpness of the side eyes, used for the whole picture"
+    },
+    "fov": {
+     "value": 360,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R28"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "the side eyes cover almost the whole circle"
+    },
+    "sat": {
+     "value": 0,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R339"
+     ],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "the side eyes give one channel of vision, drawn here as grey"
+    },
+    "gate": {
+     "value": 1,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R369"
+     ],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the side eyes answer only to movement"
+    }
+   },
+   "matrices": {
+    "JUMPER": {
+     "from_pigments": [
+      360,
+      530
+     ],
+     "src": [
+      "R73",
+      "R54"
+     ]
+    }
+   },
+   "zones": [
+    {
+     "id": "principal",
+     "shape": "ellipse",
+     "at": [
+      0.5,
+      0.5
+     ],
+     "deg": {
+      "value": 5,
+      "grade": "g",
+      "invented": false,
+      "src": [
+       "R20"
+      ],
+      "range": [
+       0.5,
+       20
+      ],
+      "note": "the field of one principal eye"
+     },
+     "cpd": {
+      "value": 3.8,
+      "grade": "m",
+      "invented": true,
+      "src": [
+       "R2"
+      ],
+      "range": [
+       0.005,
+       40
+      ],
+      "note": "sharpness of the principal eyes in a typical species"
+     },
+     "sat": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0,
+       1.5
+      ],
+      "note": "colour is drawn only in the sharp patch"
+     },
+     "gate": 0
+    }
+   ],
+   "gaze": {
+    "sweep": {
+     "value": [
+      2,
+      1.2
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R134"
+     ],
+     "note": "degrees and seconds of the side-to-side scan"
+    },
+    "twist": {
+     "value": [
+      25,
+      2000,
+      3500
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R142"
+     ],
+     "note": "degrees, milliseconds to turn, milliseconds held"
+    }
+   },
+   "draw": {
+    "gaze": [
+     {
+      "name": "strip",
+      "invented": true,
+      "note": "the sharp patch drawn as a small window that scans the picture"
+     }
+    ],
+    "colour": [
+     {
+      "name": "two",
+      "invented": true,
+      "note": "two colour channels, ultraviolet shown as blue and green"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Two colours",
+     "The sharp eyes at the front hold two kinds of colour receptor, one most sensitive to ultraviolet near 360 nanometres and one to green near 530. With two kinds, the picture has two colour channels and no red.",
+     [
+      "R73",
+      "R54",
+      "R82",
+      "R85"
+     ],
+     [
+      "matrices.JUMPER"
+     ]
+    ],
+    [
+     "m",
+     "A sharp patch",
+     "The two front eyes see sharply in a very small field of about 5 degrees. A typical species resolves about 3.8 cycles per degree there, around an eighth of your sharpness.",
+     [
+      "R2",
+      "R20"
+     ],
+     [
+      "zones[0].cpd",
+      "zones[0].deg"
+     ]
+    ],
+    [
+     "g",
+     "Blurry sides",
+     "Six smaller eyes sit around the head and cover almost the whole circle. They give one channel of vision at about 1.3 cycles per degree, so the edges of the picture are soft and grey.",
+     [
+      "R8",
+      "R28",
+      "R339"
+     ],
+     [
+      "params.cpd",
+      "params.fov",
+      "params.sat"
+     ]
+    ],
+    [
+     "m",
+     "Only movement",
+     "The side eyes behave as if completely blind to stationary things, and a target in view turns the spider only when it moves. Outside the sharp patch, only movement draws attention.",
+     [
+      "R369"
+     ],
+     [
+      "params.gate"
+     ]
+    ],
+    [
+     "m",
+     "Scanning",
+     "The spider sweeps its sharp patch side to side across what it inspects, about every 1.2 seconds, and twists it 20 to 30 degrees, holding each extreme for several seconds.",
+     [
+      "R134",
+      "R142"
+     ],
+     [
+      "gaze.sweep",
+      "gaze.twist"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The colour mapping from two pigments, the grey outside the patch, the full fade of still things there, the size of the patch, the sharpness numbers carried over to the whole picture and the way the scan is drawn are choices of the app.",
+     [],
+     [
+      "params.M",
+      "params.cpd",
+      "params.sat",
+      "params.gate",
+      "zones[0].cpd",
+      "zones[0].sat",
+      "draw.gaze",
+      "draw.colour"
+     ]
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R8"
+    ],
+    "kind": "value",
+    "how": "The value 1.3 cycles per degree is the record's figure for the Evarcha side eye."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R28"
+    ],
+    "kind": "value",
+    "how": "The record says the side eyes cover almost the whole 360 degrees, so 360 is used."
+   },
+   {
+    "path": "params.sat",
+    "records": [
+     "R339"
+    ],
+    "kind": "calculation",
+    "how": "The record says the secondary eyes give monochromatic vision, so colour saturation is set to 0."
+   },
+   {
+    "path": "params.gate",
+    "records": [
+     "R369"
+    ],
+    "kind": "calculation",
+    "how": "The record says the side eyes are completely blind to stationary objects, so the gate is set to its full value of 1."
+   },
+   {
+    "path": "zones[0].cpd",
+    "records": [
+     "R2"
+    ],
+    "kind": "value",
+    "how": "The record gives 3.8 cycles per degree for the principal eye of Phidippus johnsoni."
+   },
+   {
+    "path": "zones[0].deg",
+    "records": [
+     "R20"
+    ],
+    "kind": "value",
+    "how": "The record gives a visual field of around 5 degrees for each principal eye."
+   },
+   {
+    "path": "gaze.sweep",
+    "records": [
+     "R134"
+    ],
+    "kind": "range_middle",
+    "how": "Amplitude of 2 degrees is the stated minimum and 1.2 s is the middle of the 1.1 to 1.3 s period."
+   },
+   {
+    "path": "gaze.twist",
+    "records": [
+     "R142"
+    ],
+    "kind": "range_middle",
+    "how": "25 degrees is the middle of 20 to 30, 2000 ms is the stated turn time of about 2 s, and 3500 ms is the middle of the 2 to 5 s hold."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R8",
+    "quote": "1.3 cycles/degree, as in Evarcha blancardi Scopoli, 1763 [31]"
+   },
+   {
+    "record": "R28",
+    "quote": "the side eyes between them cover almost the entire 3600 around the animal in the horizontal plane"
+   },
+   {
+    "record": "R339",
+    "quote": "offer monochromatic vision at a slightly lower resolution"
+   },
+   {
+    "record": "R369",
+    "quote": "the system behaves as though it were completely blind to stationary objects."
+   },
+   {
+    "record": "R2",
+    "quote": "visual angles of around 0.13 degrees"
+   },
+   {
+    "record": "R20",
+    "quote": "with a small visual field of around 5 deg each"
+   },
+   {
+    "record": "R134",
+    "quote": "The amplitude of horizontal scanning does not become smaller than 2°"
+   },
+   {
+    "record": "R142",
+    "quote": "the retinae rotating 20-300 clockwise then returning through the resting position"
+   }
+  ]
+ }
+}
