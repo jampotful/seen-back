@@ -1,6 +1,6 @@
 # Status
 
-Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
+The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 00:20 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
 
 ## How the work is paced
 
