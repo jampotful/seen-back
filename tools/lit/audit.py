@@ -199,11 +199,26 @@ def est_first(recs, sys_text):
     return {"requests": n, "input_tokens": in_t, "system_tokens": sys_t, "expected_usd": expected, "ceiling_usd": ceiling}
 
 
+THINKING = {"type": "disabled"}     # Haiku 5.5 thinks by default and spent a whole 600 token reply on it in trial 1
+
+
+def cid_of(rid):
+    """A record id as a batch custom_id (colons are refused)."""
+    return rid.replace(":", "__")
+
+
+def rid_of(c):
+    return c.replace("__", ":")
+
+
 def params(model, system, text, max_tokens):
-    return {"model": model, "max_tokens": max_tokens,
+    p = {"model": model, "max_tokens": max_tokens,
             "system": [{"type": "text", "text": system,
                         "cache_control": ({"type": "ephemeral", "ttl": E.CACHE_TTL} if E.CACHE_TTL != "5m" else {"type": "ephemeral"})}],
             "messages": [{"role": "user", "content": text}]}
+    if THINKING:
+        p["thinking"] = THINKING
+    return p
 
 
 def submit(items, model, system, max_tokens, work_dir, name):
@@ -218,7 +233,7 @@ def submit(items, model, system, max_tokens, work_dir, name):
             chunk, size = [], 0
 
     for cid, text in items:
-        req = {"custom_id": cid, "params": params(model, system, text, max_tokens)}
+        req = {"custom_id": cid_of(cid), "params": params(model, system, text, max_tokens)}
         b = len(json.dumps(req))
         if chunk and (len(chunk) >= E.BATCH_MAX_REQUESTS or size + b > E.BATCH_MAX_BYTES):
             flush()
@@ -229,10 +244,15 @@ def submit(items, model, system, max_tokens, work_dir, name):
 
 
 def smoke(model, system, text, max_tokens):
+    global THINKING
     try:
         r = E.call("POST", "/v1/messages", params(model, system, text, max_tokens))
     except SystemExit as e:
-        if E.CACHE_TTL != "5m" and "ttl" in str(e).lower():
+        if THINKING and "thinking" in str(e).lower():
+            print("thinking cannot be switched off for %s (%s); replies may start with thinking tokens" % (model, str(e)[:200]))
+            THINKING = None
+            r = E.call("POST", "/v1/messages", params(model, system, text, max_tokens))
+        elif E.CACHE_TTL != "5m" and "ttl" in str(e).lower():
             print("one-hour cache refused; using the 5 minute cache")
             E.CACHE_TTL = "5m"
             r = E.call("POST", "/v1/messages", params(model, system, text, max_tokens))
@@ -240,6 +260,8 @@ def smoke(model, system, text, max_tokens):
             raise
     txt = "".join(b.get("text", "") for b in r.get("content", []) if b.get("type") == "text")
     print("smoke test (%s): reply %r; usage %s" % (model, txt[:300], json.dumps(r.get("usage", {}))))
+    if not txt.strip():
+        sys.exit("the smoke test reply was empty (stop reason %s); nothing else was sent" % r.get("stop_reason"))
     return txt
 
 
@@ -266,7 +288,7 @@ def read_results(raw_path):
         if not line.strip():
             continue
         d = json.loads(line)
-        cid = d["custom_id"]
+        cid = rid_of(d["custom_id"])
         res = d.get("result", {})
         if res.get("type") != "succeeded":
             out[cid] = (None, "batch result " + str(res.get("type")), {})
