@@ -34,7 +34,7 @@ The unit covers every spider outside family Salticidae. GBIF holds 2,927,814 iNa
 | Corinnidae | | 11,106 | 0.5% | `tarantula` |
 | Ctenidae | wandering spiders | 10,905 | 0.5% | `hunter` |
 | Deinopidae | net-casting spiders | 2,849 | 0.1% | `netcaster` |
-| 38 more families in the top 60 | | 140,456 | 6.3% | by family, below |
+| 37 more families in the top 60 | | 115,437 | 5.1% | by family, below |
 | families outside the top 60 | | 8,109 | 0.4% | `spider` (the order rule) |
 
 Family names for the GBIF keys were read from `https://api.gbif.org/v1/species/<key>` for every key the repository's cached name list lacked.
@@ -45,13 +45,13 @@ Family names for the GBIF keys were read from `https://api.gbif.org/v1/species/<
 
 Four lines divide spiders that people photograph into groups that meet the world differently enough that one picture would be false for the other side.
 
-**Line 1: a web, or no web.** Web builders find prey almost entirely through the silk. Orb and sheet weavers carry only 7 to 11 airflow hairs (trichobothria) on a leg, where the wandering spider *Cupiennius salei* carries close to a thousand in all (Log 30, 33, 121). A flying insect only makes an orb weaver lift its front legs in defence, and prey capture needs thread vibration (Log 34, 251); an airflow stimulus never made a web spider jump (Log 123). Most of the side eyes of web builders carry a canoe-shaped mirror that gives a blurred, astigmatic image (Log 67, 70, 94), and their lens axes spread evenly round the body in a halo, where visual hunters cluster several eye pairs at the front (Log 106, 107). A cellar spider hunts with little or no use of vision (Log 229). Hunting spiders without webs carry grate-shaped mirrors behind large rear eyes, see down to moonlight and find prey by sight, airflow and ground vibration (Log 20, 68, 138, 153, 201). Shares: web builders 1,423,379 records (63.5% of this unit) and 2,612 in Alachua (73.5%); everything else 36.5% and 26.5%.
+**Line 1: a web, or no web.** Web builders find prey almost entirely through the silk. Orb and sheet weavers carry only 7 to 11 airflow hairs (trichobothria) on a leg, where the wandering spider *Cupiennius salei* carries close to a thousand in all (Log 30, 33, 121). A flying insect only makes an orb weaver lift its front legs in defence, and prey capture needs thread vibration (Log 34, 251); an airflow stimulus never made a web spider jump (Log 123). The side eyes of most web builders carry a canoe-shaped mirror that gives a blurred, astigmatic image (Log 67, 70, 94), and the axes of their eyes spread evenly round the body in a halo, where visual hunters cluster several eye pairs at the front (Log 106, 107). A cellar spider hunts with little or no use of vision (Log 229). Hunting spiders without webs carry grate-shaped mirrors behind large rear eyes, see down to moonlight and find prey by sight, airflow and ground vibration (Log 20, 68, 138, 153, 201). Shares: web builders 1,423,379 records (63.5% of this unit) and 2,612 in Alachua (73.5%); everything else 36.5% and 26.5%.
 
 **Line 2: among the hunters, the slow night eyes of wandering spiders against the fast day eyes of the ambushers on plants.** A wandering spider's eyes stop following flicker at 4.3 to 8.6 Hz (Log 206) and see below 0.01 lux (Log 138). A day-active crab spider's side and rear eyes follow 20 to 30 Hz (Log 110 to 112), and its front middle eyes are 2.3 log units less sensitive than the others (Log 118). Crab spiders analyze the space in front with four eyes at once (Log 58) and see sharply only very close, noticing movement to about 20 cm (Log 101). Wolf, fishing, huntsman and wandering spiders hold 385,294 records (17.2%) and 467 in Alachua (13.1%); crab, lynx and running crab spiders hold 248,246 (11.1%) and 308 in Alachua (8.7%). Lynx spiders are placed with the crab spiders by inference: they hunt on plants, cluster their eyes at the front like other visual hunters (Log 106), and their eyes are known only from histology (Log 221 to 223).
 
-**Line 3: the net-casting spiders.** Their two rear middle eyes are the largest simple eyes known in arthropods, with an F-number of 0.58, no mirror layer, and receptors that each absorb about 2,000 times as much light as a human or jumping spider receptor viewing the same field (Log 1, 2, 10, 11). They hunt by sight at night with a net held in the front legs, and they strike backward at sounds (Log 14, 135, 259). The hunter picture would be false for them in field, sensitivity and hearing. Deinopidae holds 2,849 records (0.1%) and 88 in Alachua (2.5%), where the Ogre-faced Spider is the eighth most recorded spider of this unit.
+**Line 3: the net-casting spiders.** Their two rear middle eyes are probably the largest simple eyes in arthropods, with an F-number of 0.58, no mirror layer, and receptors that each absorb about 2,000 times as much light as a human or jumping spider receptor viewing the same field (Log 1, 2, 10, 11). They hunt by sight at night with a net held in the front legs, and they strike backward at sounds (Log 14, 135, 259). The hunter picture would be false for them in field, sensitivity and hearing. Deinopidae holds 2,849 records (0.1%) and 88 in Alachua (2.5%), where the Ogre-faced Spider is the eighth most recorded spider of this unit.
 
-**Line 4: tarantulas and the ground hunters.** Tarantulas and other mygalomorphs carry the primitive sheet-like mirror (Log 66), small eyes bunched on a mound (Log 105), and in the purse-web and trapdoor families corneas that block ultraviolet (Log 190). A trapdoor spider catches prey as well with its eyes covered (Log 183); tarantulas locate prey with airflow hairs and club-shaped foot hairs that feel the soil tremble (Log 178), and court by signals through the ground (Log 180, 181). Ground, sac, recluse and spitting spiders also hunt without a web with small eyes: canoe-mirror eyes in ground and sac spiders (Log 67), six eyes in several families (Log 104), one receptor class in a recluse (Log 191), and in some ground spiders two lensless eyes turned into a sky compass (Log 155, 217). They hold 175,397 records (7.8%: 56,634 mygalomorphs and 118,763 ground and sac spiders) and 78 in Alachua (2.2%).
+**Line 4: tarantulas and the ground hunters.** Tarantulas and other mygalomorphs carry the primitive sheet-like mirror (Log 66), small eyes bunched on a mound (Log 105), and in the purse-web and trapdoor families corneas that block ultraviolet (Log 190). A trapdoor spider catches prey as well with its eyes covered (Log 183); tarantulas locate prey with airflow hairs and club-shaped foot hairs that feel the soil tremble (Log 178), and court by signals through the ground (Log 180, 181). Ground, sac, recluse and spitting spiders also hunt without a web, and their eyes are small: canoe-mirror eyes in ground and sac spiders (Log 67), six eyes in several families (Log 104), one receptor class in a recluse (Log 191), and in some ground spiders two lensless eyes turned into a sky compass (Log 155, 217). They hold 175,397 records (7.8%: 56,634 mygalomorphs and 118,763 ground and sac spiders) and 78 in Alachua (2.2%).
 
 Lines considered and left inside a view: fishing spiders (*Dolomedes*) feel water-surface waves (Log 243 to 248) and get a genus setting inside `hunter`; huntsman spiders resolve more coarsely (Log 226) and stay in `hunter`; cobweb and cellar spiders hang in tangles (Log 231 to 236) and stay in `spider` with a different web drawing.
 
@@ -63,7 +63,7 @@ Lines considered and left inside a view: fishing spiders (*Dolomedes*) feel wate
 | `hunter` | Wolf, fishing or huntsman spider | Lycosidae, Pisauridae, Sparassidae, Ctenidae, Trechaleidae, Zoropsidae, Selenopidae | 17.2% | 13.1% | the whole circle squeezed into the screen, lifted in the dark, slow, with moving things glowing grey and the ground's tremors arriving as ripples |
 | `crabspider` | Crab or lynx spider | Thomisidae, Oxyopidae, Philodromidae | 11.1% | 8.7% | a wide, coarse, daylight picture with a fast surround and a slow second picture stepping along in front |
 | `netcaster` | Net-casting spider | Deinopidae | 0.1% | 2.5% | the ground below by starlight, lifted far, grainy and grey, whipping back at a hum |
-| `tarantula` | Tarantula or ground spider | Mygalomorphae (all families) and Gnaphosidae, Dysderidae, Scytodidae, Anyphaenidae, Sicariidae, Corinnidae, Cheiracanthiidae, Trachelidae, Miturgidae, Clubionidae, Hersiliidae, Lamponidae, Liocranidae, Phrurolithidae, Trochanteriidae, Zodariidae, Palpimanidae | 7.8% | 2.2% | a dark, nearly blind picture in which knocks and footsteps on the ground arrive as ripples and moving air stirs the edges |
+| `tarantula` | Tarantula or ground spider | Mygalomorphae (all families) and Gnaphosidae, Dysderidae, Scytodidae, Anyphaenidae, Sicariidae, Corinnidae, Cheiracanthiidae, Trachelidae, Miturgidae, Clubionidae, Hersiliidae, Lamponidae, Liocranidae, Phrurolithidae, Trochanteriidae, Zodariidae, Palpimanidae | 7.8% | 2.2% | a dark, nearly blind picture in which knocks and soft taps on the table arrive as ripples and moving air stirs the edges |
 
 In `tools/species/eyes.py` this is a set of family rules placed before the order rule (Araneae goes to `spider`), as Salticidae goes to `jumper`. Mygalomorph families are listed one by one there, since the tool matches families. Hersiliidae, Zoropsidae and Selenopidae were placed by hunting mode alone; no source opened here measures their eyes.
 
@@ -78,7 +78,7 @@ Rows are written in the form of `EYES` in `src/cam.a.js`. Picture fields use the
 `['m', 'The web', 'A Golden Silk Spider feels its prey through the silk. A trapped insect shakes the web 5 to 30 times a second, and the shaking reaches some legs ten to thirty times more strongly than others, which tells the spider where the insect is. A knock on the phone, or on the table under it, sends a ripple in from that side.']`
 Log 43, 44, 47 (Landolfa and Barth 1996, *Trichonephila clavipes*; 20 to 30 dB is a ratio of 10 to 32 in amplitude). The ripple is the engine branch's knock input.
 
-`['m', 'Feeling for still prey', 'When an insect in the web goes still, an orb weaver plucks the threads and feels how they answer. One small orb weaver found a speck weighing 0.4 milligrams this way, 6 centimetres from the hub, in three trials out of four. Tap the screen to pluck, and whatever moves answers brighter for a moment.']`
+`['m', 'Feeling for still prey', 'When an insect in the web goes still, an orb weaver plucks the threads and feels how they answer. One orb weaver found a speck weighing 0.4 milligrams this way, 6 centimetres from the hub, in three trials out of four. Tap the screen to pluck, and whatever moves answers brighter for a moment.']`
 Log 49 (*T. clavipes* shakes the web to find a still object), 252 (*Zygiella x-notata*, Klärner and Barth 1982), 195 (*Uloborus diversus* crouches or shakes the web when prey goes quiet, Hung and colleagues 2026).
 
 `['m', 'Wind', 'Wind shakes an orb web most strongly at under 10 shakes a second, and orb weavers seldom attack anything shaking that slowly. This view lets the slow sway of your hand pass and answers only sharp knocks.']`
@@ -87,16 +87,16 @@ Log 40, 42 (Masters 1984, *Larinioides sclopetarius*).
 `['m', 'Hearing through silk', 'A bridge spider hears through its web, because the silk moves with the air. Half of the spiders tested turned or crouched at a tone of 68 decibels from a loudspeaker 3 metres away, and the web gives each one a listening surface up to 10,000 times its own size. With the microphone on, this view makes the web shimmer when a sound arrives.']`
 Log 130, 131, 258 (Zhou and colleagues 2022; 6 of 12 at 68 dB and 11 of 12 at 88 dB, both at 200 Hz; the 10,000 is the authors' estimate).
 
-`['m', 'Noise', 'Traffic noise slows an orb weaver’s answer to its web. In quiet, Banded Garden Spiders turned to a cricket that landed in the web within a third of a second, and with street noise playing, many took 5 to 10 seconds. In a loud place this view’s ripples fade.']`
+`['m', 'Noise', 'Traffic noise slows an orb weaver’s answer to its web. In quiet, Banded Garden Spiders responded to a cricket that landed in the web within a third of a second, and with street noise playing, many took 5 to 10 seconds. In a loud place this view’s ripples fade.']`
 Log 240, 241 (De and Blackledge 2026, *Argiope trifasciata*; 0.29 s in quiet, 4.89 s on average under 75 to 85 dB traffic noise, 40% of responders at 5 to 10 s).
 
-`['m', 'Eyes', 'Orb weavers have eight small eyes, and parts of them form no sharp image at all. A mirror layer behind the side eyes sends light back through the light-sensing cells for a second chance at catching it, and blurs what image there is. This view is coarse and soft.']`
+`['m', 'Eyes', 'Orb weavers have eight small eyes, and parts of them form no sharp image at all. A mirror layer behind six of the eyes sends light back through the light-sensing cells for a second chance at catching it, and blurs what image there is. This view is coarse and soft.']`
 Log 91 (eight eyes), 67 and 94 (canoe-shaped mirror in Araneidae, about a quarter of the retina in *Araneus*), 70 (blurred, astigmatic line image), 261 (the mirror's job).
 
-`['g', 'Sharpness', 'The eyes of web builders have hardly been measured. In a funnel weaver the light-sensing cells of the side eyes sit about 3 degrees apart, which gives under a three-hundredth of your sharpness. This view uses that figure.']`
+`['g', 'Sharpness', 'The eyes of web builders have hardly been measured. In a funnel weaver the light-sensing cells in most of its eyes sit about 3 degrees apart, which gives under a three-hundredth of your sharpness. This view uses that figure.']`
 Log 92 (web builders' eyes unstudied), 71 (*Tegenaria*, 3 degrees; 1 / (2 × 3) = 0.17 cycles per degree, and 0.17 / 60 is 1/360).
 
-`['m', 'Colour', 'Garden spiders of the genus Argiope carry ultraviolet, blue and green receptors in their two front middle eyes, and a single green receptor in the side eyes. Colour here is faint, because most of the field belongs to the side eyes.']`
+`['m', 'Colour', 'Garden spiders of the genus Argiope carry ultraviolet, blue and green receptors in their two front middle eyes, and a single green-sensing kind in their two front side eyes. This view keeps colour faint and leans it green.']`
 Log 165, 166, 167 (Yamashita and Tateda 1978: 360, 480 to 500 and 540 nm in the anterior median eyes of *Argiope bruennichi* and *A. amoena*), 168 (Yamashita and Arita 1995: one class in the anterior lateral eyes).
 
 `['m', 'Night', 'The front eyes of a night-active orb weaver rise and fall in sensitivity on a daily rhythm of their own. After dark by your phone’s clock, this view lifts dim light further.']`
@@ -126,8 +126,8 @@ spider: { chip: 'Spider', who: 'a spider', fov: 340, cpd: .17, pupil: 'o', M: SI
 | `fov` | 340 | Log 107 (lens axes spread evenly in a halo in orb weavers, which likely maximizes total field), 170 ("complete visual surveillance" in two hackled orb weavers). No total field in degrees was found. | the number is invented |
 | `cpd` | .17 | Log 71 (3 degrees between receptors in a funnel weaver's side eyes). Log 70 and 94: the mirror region forms no focused image, so the true picture is softer still in parts. | |
 | `pupil` | 'o' | Log 70 (a single-chambered camera eye). | invented |
-| `M` | `SIDE_GREEN` | Log 168 (one green class in the side eyes of *Argiope*). | the matrix is invented |
-| `sat` | .35 | Log 165 to 167 (three classes only in the two front middle eyes, which see a small part of the field). | invented |
+| `M` | `SIDE_GREEN` | Log 168 (one green class in the front side eyes of *Argiope*). | the matrix is invented |
+| `sat` | .35 | Log 165 to 168 (three classes only in the two front middle eyes; one in the front side eyes). | invented |
 | `gain` | 1.3 | Log 86, 93 (most spiders are active at night). | invented |
 | `night` **new** | 1.4 times the gain from local sunset to sunrise, by the phone's clock | Log 256 | the size and the clock rule are invented |
 | `gate` | .6 | Log 34, 48, 229; Log 134 | invented |
@@ -179,7 +179,7 @@ Log 36, 124, 125 (weak vibration releases attack, strong vibration escape).
 `['m', 'Fishing spiders', 'Fishing spiders feel ripples on the water through their legs. A Six-spotted Fishing Spider answers only water waves from prey more than 10 centimetres away, and a sight alone set off an attack in only 14 trials out of 100. For fishing spiders, this view spreads its ripples across the bottom of the picture like rings on water.']`
 Log 243, 244, 245, 246, 247 (Bleckmann and Barth 1984, *Dolomedes triton*: best at 40 to 70 Hz, aim within about 9 degrees).
 
-`['m', 'Huntsman spiders', 'A Pantropical Huntsman Spider’s side eyes cover nearly all the space around it, with one pair looking up at the sky. In tests it ran toward dark bars only when they were at least 4 to 8 degrees wide.']`
+`['m', 'Huntsman spiders', 'Six of a Pantropical Huntsman Spider’s eight eyes together cover nearly all the space around it, and one pair of them looks up at the sky. In tests it ran toward dark bars only when they were at least 4 to 8 degrees wide.']`
 Log 224, 253, 254, 226 (Lorenz 2012).
 
 `['x', 'Sky compass', 'Wolf spiders read the pattern of polarized light in the sky with their two front middle eyes, and use it to find the way home. This view leaves that sense out.']`
@@ -216,15 +216,15 @@ hunter: { chip: 'Wolf, fishing or huntsman spider', who: 'a hunting spider', fov
 
 1. **Dark adaptation.** As the camera's picture darkens, the view lifts it more, and in very dim light it grows smoother and slower, keeping coarse shapes visible where the person's own view goes black (Log 138, 160, 205). Input: the camera's own mean brightness, with no new permission. Difficulty: low to moderate. Beautiful because dusk becomes the spider's daylight.
 2. **Prey or threat.** A gentle knock draws a ripple from its side and swings the small window toward it; a hard knock makes the whole picture flinch back and dim for half a second (Log 125). Input: accelerometer, with the iPhone permission tap. Difficulty: low, a second threshold on the engine branch's knock.
-3. **Hairs in the air.** With the microphone on, sound between 40 and 600 Hz near the phone makes fine ripples, and blowing gently on the phone does too (Log 30, 121). Difficulty: low. A phone microphone measures air pressure where the spider's hairs follow the air's movement, so this is a stand-in and the row says so through its grade.
+3. **Hairs in the air.** With the microphone on, sound between 40 and 600 Hz near the phone makes fine ripples, and blowing gently on the phone does too (Log 30, 121). Difficulty: low. A phone microphone measures air pressure, while the spider's hairs follow the movement of the air itself, so the ripples stand in for what the hairs feel.
 4. **Rings on water** for *Dolomedes* (the White-banded and Six-spotted Fishing Spiders hold 229 Alachua records): ripples drawn as widening ellipses on the lower half of the picture, as on a pond seen at a low angle, from knocks and from sound between 40 and 70 Hz (Log 243 to 246). Difficulty: low to moderate. Phone microphones may record 40 Hz weakly, which needs a check on real phones.
 
 ### 2.3 `crabspider`: crab, lynx and running crab spiders
 
 #### Rows
 
-`['m', 'Eyes', 'A crab spider’s eight small eyes sit around the front and top of its head, and together they cover nearly all the space above and around it. Four of them look straight ahead, so anything that lands in front is seen by several eyes at once.']`
-Log 54 to 59 (Insausti and colleagues 2012, *Misumena vatia*), 119, 120 (*Xysticus cristatus*).
+`['m', 'Eyes', 'A crab spider’s eight small eyes together cover nearly all the space above and around it. Four of them look straight ahead, so anything that lands in front is seen by several eyes at once.']`
+Log 54 to 59 (Insausti and colleagues 2012, *Misumena vatia*), 119, 120 (*Xysticus cristatus*), 187 (small eyes for the body).
 
 `['m', 'Fast side eyes', 'The side and rear eyes of a crab spider follow a flickering light up to 20 to 30 flashes a second, and the two front middle eyes only about 10. This view draws the surround smoothly and lets a faint second picture straight ahead step along about ten times a second.']`
 Log 110 to 115 (Fischer and colleagues 2026).
@@ -241,7 +241,7 @@ Log 264, 118 (Fischer and colleagues 2026, *Xysticus cristatus*). A ground-dwell
 `['m', 'Eyes help the catch', 'Crab spiders with their eyes covered catch fewer flies, even though their eyes are small for their bodies.']`
 Log 187 (England and colleagues 2026, *Sidymella rubrosignata*).
 
-`['i', 'Lynx spiders', 'The Green Lynx Spider and its relatives hunt on low plants and bushes, with their eyes clustered at the front of the head. Their eyes have been studied only under the microscope, which suggests the side eyes catch movement well, and this view assumes they work like a crab spider’s.']`
+`['i', 'Lynx spiders', 'The Green Lynx Spider and its relatives hunt on low plants and bushes, with their eyes clustered at the front of the head. Their eyes have been described from their structure, which suggests the side eyes catch movement well, and this view assumes they work like a crab spider’s.']`
 Log 266 (habitat), 106, 221, 222, 223 (Kovoor and Muñoz-Cuevas 1997, abstract).
 
 `['x', 'Ultraviolet', 'The Goldenrod Crab Spider also sees ultraviolet light, and the corneas of crab spiders let it through. This view leaves ultraviolet out.']`
@@ -290,7 +290,7 @@ Log 3, 4 (1.48 degrees, 0.34 cycles per degree), 9.
 `['m', 'Dim light', 'The eyes give half their strongest response at light midway between starlight and moonlight, and the spider keeps catching prey under starlight alone. This view lifts the dark a long way, and in deep darkness the picture turns grainy.']`
 Log 84 (Land 1985, from Laughlin and colleagues 1980), 213, 214 (Morehouse 2020: sensitivity like that of mid-water animals, ten times a person's), 83.
 
-`['m', 'Hearing', 'An ogre-faced spider hears through its legs. Tones of 150 and 400 vibrations a second make it strike backward over its head, the way it snatches flying insects it cannot see. With the microphone on, a hum makes this view whip up and back, as the spider strikes.']`
+`['m', 'Hearing', 'An ogre-faced spider hears through its legs. Tones of 150 and 400 vibrations a second make it strike backward, the way it snatches flying insects it cannot see. With the microphone on, a hum makes this view whip up and back, as the spider strikes.']`
 Log 135, 136 (Lesser 2021, reporting Stafstrom and colleagues 2020: brain responses peak at 150 to 200, 400 to 450 and 700 to 750 Hz; leg nerves answer 1 to 10 kHz).
 
 `['i', 'Colour', 'Nobody has measured colour vision in net-casting spiders. This view shows the night in grey.']`
@@ -330,8 +330,8 @@ netcaster: { chip: 'Net-casting spider', who: 'a net-casting spider', fov: 180, 
 
 #### Rows
 
-`['m', 'Feeling the ground', 'A tarantula finds its prey mostly by touch. Club-shaped hairs on its feet feel the soil tremble, and fine hairs on its legs feel the air move. Lay the phone down, and a knock on the table beside it sends a ripple in from that side.']`
-Log 178 (den Otter 1973, *Sericopelma rubronitens*), 184 (club-shaped hairs on the feet of all tarantulas).
+`['m', 'Feeling the ground', 'A tarantula finds its prey through the hairs on its legs. Club-shaped sense hairs feel the soil tremble, and fine hairs answer the slightest movement of the air. Lay the phone down, and a knock on the table beside it sends a ripple in from that side.']`
+Log 178 (den Otter 1973, *Sericopelma rubronitens*: trichobothria and club-shaped sensilla detect and locate prey), 184 (club-shaped airflow hairs on the feet of all tarantulas; whether these are den Otter's club-shaped sensilla is not settled by the abstracts read).
 
 `['m', 'Trapdoor spiders', 'A trapdoor spider catches prey as well with its eyes covered, and it catches far fewer when a rubber mat damps the trembling of the ground.']`
 Log 183 (Nakamura and colleagues 2022, *Latouchia typica*).
@@ -342,7 +342,7 @@ Log 180, 181 (Quirici and Costa 2005, 2007).
 `['m', 'Legs as filters', 'A tarantula’s flexible legs damp the shaking of its own body, so the tremors its feet pick up come through clearer.']`
 Log 198 (Miller and colleagues 2026, *Grammostola pulchra*).
 
-`['g', 'Eyes', 'Tarantulas have eight small eyes bunched on a mound at the front of the head, and they hunt at night close to their burrows. In one tarantula that has been measured, the eyes carry a single kind of light-sensing cell, most sensitive to blue-green light near 500 nanometres. This view is coarse, dim and nearly colourless.']`
+`['g', 'Eyes', 'Tarantulas have eight small eyes bunched on a mound at the front of the head, and they hunt at night close to their retreats. In one tarantula that has been measured, the eyes carry a single kind of light-sensing cell, most sensitive to blue-green light near 500 nanometres. This view is coarse, dim and nearly colourless.']`
 Log 105, 102, 182, 185 (Dahl and Granda 1989, *Aphonopelma chalcodes*), 66.
 
 `['m', 'Ultraviolet', 'Purse-web and trapdoor spiders have corneas that block ultraviolet light, unlike the hunting spiders measured. This view shows no ultraviolet.']`
@@ -390,7 +390,7 @@ tarantula: { chip: 'Tarantula or ground spider', who: 'a tarantula or ground spi
 |---|---|---|
 | 'The web': 5 to 30 shakes a second, ten to thirty times stronger on some legs | confirmed | Landolfa and Barth 1996 read in full (Log 43, 44); the earlier sheet had the abstract |
 | 'Drawn as' (`x`): only what moves is shown in place of the web | superseded | the Australian Museum page was not re-opened; the substance holds on primary sources (Log 70, 92, 229), and the web is now drawn (section 2.1) |
-| 'Eyes' (`g`): eight eyes, few see well, web builders lean on the silk | confirmed, sources replaced | Log 91, 67, 70, 34, 48, 169; the museum quotes and Stafstrom and Hebets 2016 on web builders were not re-opened |
+| 'Eyes' (`g`): eight eyes, few see well, web builders lean on the silk | confirmed, sources replaced | Log 91, 67, 70, 34, 48, 169; the museum quotes were not re-opened, and the sentence the earlier sheet quoted from Stafstrom and Hebets 2016 is not in that paper's abstract, the part read here |
 | 'Sharpness' (`g`): about 2 degrees, borrowed from *Cupiennius* | corrected | the *Cupiennius* figure is confirmed (Log 15 to 19), but a web builder's own eye samples at 3 degrees (Log 71), so `cpd` falls from .5 to .17 |
 | 'Pace' (`g`): 4.3 to 8.6 Hz | confirmed for *Cupiennius*, regraded | Log 206; for web builders it is borrowed, so it moves into an `i` row |
 | 'Colour' (`g`): *Argiope* has ultraviolet, blue and green receptors in some eyes | confirmed and made exact | the open question about Morehouse 2020's wording is settled by the primary papers: the three classes sit in the anterior median (principal) eyes, and the anterior lateral eyes have one (Log 165 to 168); the earlier source note's "secondary eyes" reading was wrong |
