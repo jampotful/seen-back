@@ -184,3 +184,159 @@ What would make it beautiful as well as true: one cold colour on black, like moo
 | Variant for *Rousettus*, *Eidolon*, *Epomophorus* | `M`: GREYL = [.35, .55, .1, .35, .55, .1, .35, .55, .1], `sat` 0 | One green-sensitive cone (log 147). The weights are **invented**, since the cone's peak was not found. |
 
 **New effects.** *Colour by genus*, the same mechanism the jumping spider draft asks for: when the full database names a *Rousettus*, *Eidolon* or *Epomophorus* species, the view switches to the grey matrix. It is easy (a per-genus override of `M` and `sat`). *A forward overlap zone*: a sharper, slightly brighter central region 54 degrees wide where both eyes overlap (log 149), drawn with the engine's new zones; easy, and invented in its exact edge.
+
+### Whales, dolphins, seals and manatees: water, air and rods
+
+**How sight under water and in air differ.** A land mammal's cornea does much of its focusing, because light bends where air meets the eye. Under water the cornea adds little, so marine mammals focus with a powerful, nearly spherical lens and are sharp-sighted when submerged (log 19, 161, 170). In air the cornea's extra power then makes the eye short-sighted (log 34). Seals counter this with a centrally flattened cornea and a pupil that closes to a vertical slit and then a pinhole in bright light, and dolphins with a pupil that closes to two small slits (log 25, 34). In bright light, harbour seals and bottlenose dolphins resolve gratings about equally well in air and in water (log 24, 35). In dim light the pupil opens, the correction weakens, and the seal's acuity in air falls with the light; Hanke and Dehnhardt (2009) measured that decline, and only its title was readable here (wanted list). Under water, murk blurs a harbour seal's sight fast (log 40), and depth dims and blues the light: in clear ocean, blue light falls tenfold every 70 m and the sun's light is gone below about 1,000 m, where glowing animals are the only light (log 97). Coastal waters absorb blue instead (log 18, note).
+
+What this means for the picture. A phone is almost always in air, so each of these views shows the animal's sight in air, the way a seal on a beach or a dolphin beside a boat sees the person holding the phone. In bright scenes the view is coarse but evenly sharp, with deep focus from the pinhole; as the scene darkens, the blur and the shallow focus grow. A switch marked "Under water" (the app's own invention) removes the dim-air blur and adds the water's own effect on light: a haze and a blue-green cast that deepen with a depth or murkiness the person chooses (log 40, 97).
+
+**What rod-only and cone-poor retinas mean.** Seals and toothed whales keep one kind of cone, the green-sensitive one, beside their rods (log 5). A single kind of cone cannot compare colours, so in daylight the picture has no hue at all, and the grey is weighted by that one pigment: near 510 nm in the harbour seal and 522 to 531 nm in dolphins and porpoises, both well short of a land mammal's long-wave cone near 555 nm (log 9, 10, 15). My inference from those peaks is that reds look darker to a seal or a dolphin than to a dog. In dim light, comparing the cone with the rods may give back a little colour (log 16, 18), so the seal view keeps a faint tint in dim scenes, an invented strength. Baleen whales and sperm whales have no working cones at all, only rods tuned near 479 to 493 nm (log 1 to 4, 11 to 13), so their grey sits bluer still. In land mammals, rods alone mean coarse sight in dim light and dazzle in bright light (log 142). Whether whale rods are dazzled at the sunlit surface is unknown, so the `whale` view adds only a mild glare (invented) and the question goes to a specialist (section 8). Manatees keep two kinds of cone (log 17) and keep some colour.
+
+### `whale` (baleen whales, and any whale, dolphin or seal named only to its group)
+
+**Rows.**
+
+1. `['m', 'No colour', 'Humpback whales and the other rorquals, grey whales, right whales and sperm whales have lost the genes for both kinds of colour-sensing cell. They see with rods alone, the cells people use at night, so this view is grey.']`
+   Log 1 to 3 (Meredith and colleagues 2013, genes); log 4 (Schweikert and colleagues 2016: no cone opsin in the bowhead retina).
+2. `['m', 'Seals and dolphins too', 'Seals, sea lions, dolphins and porpoises have kept just one kind of colour-sensing cell, so they too see the world in greys.']`
+   Log 5, 6 (Peichl, Behrmann and Kröger 2001: seven toothed whales and five seals and sea lions); log 95 (Land and Nilsson 2012).
+3. `['m', 'Tuned to the sea', 'A humpback whale's eye is most sensitive to blue-green light near 492 nanometres. In clear ocean water, blue light reaches deepest. The grey of this view is weighted toward blue-green.']`
+   Log 13 (humpback retina, Dartnall 1962 as reviewed); log 12; log 97.
+4. `['m', 'Sharpness', 'A humpback whale's eye resolves about 4 cycles per degree, a fifteenth of your sharpness. It can make out the outline of a large animal far off, and loses fine detail beyond three or four body lengths.']`
+   Log 29 (Bolin and colleagues 2025).
+5. `['m', 'Two sharp areas', 'A humpback whale sees best in two areas of its view, one ahead of it and one out to the side and behind.']`
+   Log 158 (Lisney and Collin 2018); log 21.
+6. `['g', 'Built for water', 'The eyes of whales, seals and manatees focus sharply under water. In air most of them would be short-sighted, and most have ways to correct it.']`
+   Log 19 (Mass and Supin 2007, a review); log 170.
+7. `['m', 'Mirror behind the eye', 'Whales have a reflecting layer behind the retina that shines blue-green and gives dim light a second pass through the eye. The shadows are lifted here.']`
+   Log 159 (humpback and Bryde's whales); log 160 (pygmy sperm whale and bottlenose dolphin).
+8. `['x', 'Depth of the sea', 'Under water, light fades with depth. In the clearest ocean, blue light falls tenfold every 70 metres, and below about a kilometre the only light comes from glowing animals. This view cannot tell how deep the water is.']`
+   Log 97 (Land and Nilsson 2012).
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Whale, dolphin, seal', 'a whale', 'The world in greys, coarse, and lifted from the shadows.' | The app's wording. |
+| `cpd` | 4 | Humpback 3.95 (log 29); within the seal and dolphin ranges (log 22, 39). |
+| `M` | GREY490 = [.05, .6, .35, .05, .6, .35, .05, .6, .35] | Rods near 484 to 493 nm (log 12, 13). The weights are **invented**: equal rows give grey, and the weighting toward the camera's green and blue stands in for a blue-green pigment. |
+| `sat` | 0 | Log 1 to 6. |
+| `gain` | 1.5 | **Invented**; reflecting layers (log 159, 160). |
+| `pupil` | 'v' | Seals and dolphins close their pupils to slits (log 25, 34); baleen whale pupils were not found, so `g` for them. |
+| `topoS`, `fall` | 0.5 and 1.0 | Two sharp areas, ahead and to the side and back (log 158, 21); the band is the engine's nearest shape, and the values are **invented**. |
+| `glare` (new) | 0.3 | **Invented**; rod-only retinas are dazzled in land mammals (log 142), and whales are unmeasured. |
+| `fov`, `dof`, `rate` | unset | No whale field, pupil size or flicker rate found. |
+
+### `seal` (seals, sea lions and the walrus)
+
+**Rows.**
+
+1. `['m', 'One kind of colour cell', 'Seals and sea lions have lost the blue-sensitive colour cell. A harbour seal's single kind is most sensitive near 510 nanometres, a blue-green, so in daylight it sees no colour at all and this view is grey.']`
+   Log 5 (Peichl and colleagues 2001); log 15, 16 (Crognale and colleagues 1998).
+2. `['g', 'Colour at dusk', 'In dim light, when its rods and its one kind of colour cell both work, a seal may tell some colours apart by comparing the two. This view keeps a faint tint in dim scenes, and the strength of that tint is the app's guess.']`
+   Log 16, 18 (Griebel and Peichl 2003).
+3. `['m', 'Sharpness', 'In tests in clear water, harbour seals resolved stripes between a tenth and a twenty-fifth as fine as you can. Their retinas could support finer sight, about 11 cycles per degree under water and 9 in air.']`
+   Log 39 (Weiffen and colleagues 2006: 5.5 and 12.7 minutes of arc, two seals); log 27 (Hanke, Peichl and Dehnhardt 2009); log 26 (harp seal 9 to 11 under water); log 33 (single targets of about 0.3 degree under water, Sandow and colleagues 2026).
+4. `['m', 'Water and air', 'A seal's eye is built to focus under water. In air its cornea blurs the picture, and in bright light its pupil closes to a slit and then a pinhole that sharpens it again. This view sharpens in bright scenes and blurs as the light fades.']`
+   Log 34, 35 (Sandow and colleagues 2026, summarizing earlier work). How fast the blur grows as light falls is **invented** until Hanke and Dehnhardt 2009 is read (wanted list).
+5. `['m', 'Field of view', 'A harbour seal takes in about 208 degrees around itself without moving its eyes, and both eyes see the middle 67 degrees. Its view reaches high overhead, toward the surface of the water.']`
+   Log 36 to 38 (Hanke, Römer and Dehnhardt 2006).
+6. `['m', 'Murky water', 'Cloudy water blurs a harbour seal's sight quickly, and each step of murkiness takes away a large share of what it can make out.']`
+   Log 40 (Weiffen and colleagues 2006).
+7. `['m', 'Dim light', 'Harbour seals and California sea lions adjust to darkness faster than people and see in dimmer light. Elephant seals, which hunt deeper, adjust in half their time and see in dimmer light still. The shadows are lifted here.']`
+   Log 30, 31 (Levenson and Schusterman 1999); log 32 (pupils); log 20, 161 (reflecting layers).
+8. `['m', 'Hearing in two worlds', 'A harbour seal hears low sounds almost as well in air as under water. A California sea lion hears best in air, and an elephant seal best under water.']`
+   Log 47 (Kastak and Schusterman 1998).
+9. `['x', 'Whiskers', 'A seal can follow the invisible trail of water that a swimming fish leaves behind, by its whiskers alone, even when the trail is tens of seconds old. Wild elephant seals hunt this way in the dark of the deep sea. The picture leaves this sense out.']`
+   Log 42 (Dehnhardt and colleagues 2001), 43, 44 (Adachi and colleagues 2022).
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Seal, sea lion, walrus', 'a seal', 'Sharper in bright light; softer as the light fades.' | The app's wording. |
+| `fov` | 208 | Log 36. |
+| `cpd` | 5 | Behavioural 2.4 to 5.5 under water (log 39); anatomical 8.7 in air and 11.5 under water (log 27). The pick of 5 within that span is **invented**. |
+| `topoA`, `topoS`, `fall` | 0.7, 0.3 and 1.2 | An area centralis with a moderate streak running from it (log 28); the weights are **invented**. |
+| `pupil` | 'v' | Log 34. |
+| `dof` | 16, scaled by light (new) | **Invented** strength; the pinhole gives deep focus in bright light and the open pupil shallow focus in dim light (log 34, 98). |
+| `M` | GREY510 = [.15, .65, .2, .15, .65, .2, .15, .65, .2] | One cone near 510 nm (log 15). The weights are **invented**. |
+| `sat` | 0, rising to 0.15 in dim scenes (new) | Log 16, 18; the 0.15 is **invented**. |
+| `gain` | 1.5 | **Invented**; reflecting layer and fast dark adaptation (log 20, 31). |
+| `rate`, `persist`, `gate` | unset | No seal flicker rate found. |
+
+### `dolphin` (toothed whales: dolphins, porpoises, sperm and beaked whales, belugas, river dolphins)
+
+**Rows.**
+
+1. `['m', 'One kind of colour cell', 'Dolphins and porpoises have lost the blue-sensitive colour cell. A bottlenose dolphin's remaining kind is most sensitive near 524 nanometres and its rods near 488, so this view is grey. Sperm whales have lost both kinds of colour cell.']`
+   Log 5 (Peichl and colleagues 2001); log 8, 9 (Fasick and Robinson 2016); log 3 (Meredith and colleagues 2013); log 14 (a dolphin failed tests of colour, Madsen 1976 as reviewed).
+2. `['m', 'Sharpness', 'A bottlenose dolphin's retina resolves about 9 minutes of arc under water and 12 in air, roughly a twentieth of your sharpness. This view is blurred to match.']`
+   Log 22 (Mass and Supin 1995).
+3. `['m', 'Two sharp areas', 'A dolphin sees best in two areas of its view, one ahead of it and one out to the side and behind. This view sharpens the middle and the far edges of the picture.']`
+   Log 23 (Mass and Supin 1995: two high-density spots in the temporal and nasal retina); log 21.
+4. `['m', 'Water and air', 'In bright daylight a bottlenose dolphin sees about as well in air as under water. Its pupil closes to two small slits, and they cancel most of the blur its eye would otherwise have in air.']`
+   Log 24, 25 (Herman and colleagues 1975).
+5. `['m', 'Sound beam', 'A dolphin or porpoise probes the water ahead with clicks sent in a narrow beam, about 20 to 40 degrees across, and clicks faster as it closes in. By echoes alone, a bottlenose dolphin can tell apart two objects 1.5 degrees apart.']`
+   Log 49 (Wisniewska and colleagues 2015: off-axis angles doubled; see its note); log 54 (Jensen and colleagues 2009); log 48 (Branstetter and colleagues 2022).
+6. `['m', 'Looking ahead', 'A wild finless porpoise checks the water up to 77 metres ahead with its clicks, then swims on in silence for less than 20 metres before it checks again.']`
+   Log 51 (Akamatsu and colleagues 2005).
+7. `['m', 'Mirror behind the eye', 'A bottlenose dolphin has a reflecting layer behind its retina, made of fine fibres that shine blue and green. The shadows are lifted here.']`
+   Log 160 (Young and colleagues 1988).
+8. `['x', 'Clicks', 'A porpoise clicks at about 130 to 140 thousand vibrations a second and listens to the echoes. The picture leaves this sense out until the app can draw echoes.']`
+   Log 50 (Kyhn and colleagues 2013).
+9. `['x', 'Electric sense', 'Guiana dolphins sense weak electric fields through small pits on the snout where whiskers once grew. The picture leaves this sense out.']`
+   Log 41 (Czech-Damal and colleagues 2011).
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Dolphin, porpoise', 'a dolphin', 'Grey and coarse, sharpest ahead and at the far edges.' | The app's wording. |
+| `cpd` | 3 | Log 22 (2.5 in air, 3.3 under water). |
+| `M` | GREY524 = [.2, .65, .15, .2, .65, .15, .2, .65, .15] | One cone near 524 nm (log 9). The weights are **invented**. |
+| `sat` | 0 | Log 5, 14. |
+| `gain` | 1.4 | **Invented**; reflecting layer (log 160). |
+| `pupil` | 'v', then 'w' (new) | Two slits (log 25); 'v' is the engine's nearest shape until a double-slit pupil exists. |
+| `dof` | 10, scaled by light (new) | **Invented**, as for the seal. |
+| `topoA` | 0.6, plus sharp edges (new zones) | Two sharp areas (log 23); values **invented**. |
+| `fov` | unset | The beluga's visual field (Mass 2001) is on the wanted list. |
+
+### `manatee` (manatees and dugongs)
+
+**Rows.**
+
+1. `['g', 'Colour', 'Manatees and dugongs have two kinds of colour-sensing cells, as most land mammals do. This view shows colours the way a person with two kinds sees them.']`
+   Log 17 (Griebel and Peichl 2003, a review). The manatee's own pigment peaks (Newman and Robinson 2006) are on the wanted list.
+2. `['m', 'Sharpness', 'In tests, the sharper-eyed of two Florida manatees made out stripes about 21 to 24 minutes of arc wide in bright light, about a fortieth of your sharpness. The other manatee saw much less. This view is blurred to match the first.']`
+   Log 45 (Bauer and colleagues 2003).
+3. `['m', 'No closer look', 'The same manatee saw no better when it swam to within 30 centimetres of a target, which suggests that manatees use their eyes for larger things at a middle distance.']`
+   Log 45 (same abstract).
+4. `['g', 'Built for water', 'A manatee's eye focuses sharply under water.']`
+   Log 19 (Mass and Supin 2007).
+5. `['x', 'Touch all over', 'A Florida manatee has about 1,500 sensitive hairs on each side of its body, a few centimetres apart. They may let it feel currents and nearby animals in murky water, as a fish feels them with its lateral line. The picture leaves this sense out.']`
+   Log 46 (Reep, Marshall and Stoll 2002).
+6. `['i', 'Field, pupil and dim light', 'No measurements were found for these. The view keeps the camera's field and draws a round pupil.']`
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Manatee, dugong', 'a manatee', 'Two colours, and very coarse.' | The app's wording. |
+| `cpd` | 1.3 | Log 45 (1.25 to 1.43). The engine's lowest `cpd` today is 1 (bees); at 1.3 a phone screen of 24 degrees holds about 31 cycles. |
+| `M` | DEUTAN | Two cones (log 17); the choice of matrix is **invented**. |
+| `sat` | 0.8 | **Invented**. |
+| `pupil` | 'o' | **Invented** (row 6). |
+
+### New effects for the whale group
+
+| Effect | What the person would see | Phone input | How hard | Evidence |
+|---|---|---|---|---|
+| Blur and focus set by light (`seal`, `dolphin`) | In daylight the grey picture is coarse but evenly sharp, everything in focus; indoors or at dusk it softens and the background melts. | The frame's mean brightness, already computed for `gain`; the phone's light sensor where the browser exposes it. | Easy: scale `inv` (blur) and `dof` by a curve of brightness. The curve is invented until Hanke and Dehnhardt 2009 is read. | Log 24, 34, 35, 98 |
+| Double-slit pupil (`dolphin`) | Out-of-focus lights split into two side-by-side blurs, a quiet signature of the dolphin's eye. | None. | Medium: a two-lobe blur kernel along one axis, in the pass that draws `pupil`. | Log 25 |
+| Two sharp zones (`dolphin`, `whale`) | The middle and the far left and right edges are sharp, and the rest is softer. With `fov` above 180 the edges hold what lies to the side and behind. | None. | Medium, with the engine's new zones. | Log 21, 23, 158 |
+| Under water (`whale`, `seal`, `dolphin`, `manatee`) | A switch adds a blue-green haze that thickens with a chosen depth, and a murk slider that blurs (the seal's sight falls fast with murk). | A button and a slider; nothing can sense the water. | Easy. The mapping from depth to haze is invented, though tied to blue light falling tenfold every 70 m. | Log 40, 97 |
+| Wakes (`seal`, optional) | Anything that moves leaves a slowly fading trail behind it, like ink spreading in water, which lasts many seconds, as a fish's wake lasts for a seal. | The camera's motion map. | Easy to medium: motion-gated `persist` with a long decay. It stands in for a sense of touch and must carry an `i` row. | Log 42 to 44 |
+| Sonar beam (`dolphin`) | A narrow cone in the middle of the screen, about a third of its width, lights up as an echo picture refreshed click by click; outside the cone the grey eye image stays. The clicks quicken as something nears the centre. | The same depth sources as the bat's echo picture. | Hard, as for bats; it reuses the bat's machinery with a narrower cone and a longer reach. | Log 49, 51, 54 |
+| Glare (`whale`; and the rods-only variant of `raccoon`) | Bright parts of the scene bloom and wash toward white. | The frame's brightness. | Easy: highlight compression with bloom. | Log 142 |
