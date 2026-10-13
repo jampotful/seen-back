@@ -66,11 +66,11 @@ The line: **`squirrel`** keeps family Sciuridae except the flying squirrels (gen
 
 Tree squirrels hold about 65% of the view's world records, and the eastern grey squirrel alone holds 29% of the view's world records and 96% of its Alachua records, so the view's defaults follow the tree squirrel.
 
-**3. Horses, giraffes and camels against deer, cattle and antelope.** Every hoofed animal measured has two cone types (L90 to L91, L95 to L96, L117 to L119), a horizontal streak (L92, L94, L97, L104, L106) and, where it was examined, a horizontal pupil (L113, L116). Sharpness is where they part, and it is the setting the picture shows on every frame. Measured behaviourally, the white-tailed deer resolves 4 to 6 cycles per degree (L100), the sika deer about 4.8 (L103) and sheep about the same (L135). By anatomy the horse's streak resolves 16.5 (L92), the giraffe's best area 25 to 27 (L104), the alpaca's 12.5 to 13.4 (L106), and the dromedary 9.5 to 10 with a behavioural 10 in one Bactrian camel (L105). A deer picture at 5 would be three to five times too blurry for these large-eyed animals. The horse's lens also blocks nearly all ultraviolet (4.6% of ultraviolet A, L31) where deer, cattle and sheep pass 15 to 27% (L25 to L28), and its binocular overlap runs down its nose with a blind area in front of the forehead (L93).
+**3. Horses, giraffes and camels against deer, cattle and antelope.** Every hoofed animal measured has two cone types (L90 to L91, L95 to L96, L117 to L119), a horizontal streak (L92, L94, L97, L104, L106) and, where it was examined, a horizontal pupil (L113, L116). Sharpness is where they part, and it is the setting the picture shows on every frame. Measured behaviourally, the white-tailed deer resolves 4 to 6 cycles per degree (L100; red deer also under 6, L142), the sika deer about 4.8 (L103) and cattle 2.6 to 5 (L151). Horses tested behaviourally averaged about 20/30 on the Snellen scale, about 20 cycles per degree, and the best reached 23.3 (L150, L155), with 16.5 estimated from the streak's ganglion cells (L92). The giraffe's best area resolves 25 to 27 by anatomy (L104), the alpaca's 12.5 to 13.4 (L106), and the dromedary 9.5 to 10, with a behavioural 10 in one Bactrian camel (L105). A deer picture at 5 would be two to five times too blurry for these large-eyed animals. Cattle, animals of the horse's size, see far less (L155, L151), so body size alone does not draw the line. The horse's lens also blocks nearly all ultraviolet (4.6% of ultraviolet A, L31) where deer, cattle and sheep pass 15 to 27% (L25 to L28), and its eyes overlap by 65 to 80 degrees down its nose, with a blind area in front of the forehead (L93, L148, L149).
 
-The line: **`deer`** keeps Cervidae, Bovidae and Antilocapridae, 937,137 world records (93.5% of the group) and 951 in Alachua (80.1%). A new **`horse`** view takes Equidae, Giraffidae and Camelidae, 65,192 world records (6.5%) and 236 in Alachua (19.9%), with the giraffe's and the camels' own sharpness set by family. The deer values are behavioural and most of the others anatomical; in the one animal measured both ways here, the camel, the two agree (L105). The horse's behavioural value is wanted (Timney and Keil 1992), and the size of this gap is the least certain number in the split.
+The line: **`deer`** keeps Cervidae, Bovidae and Antilocapridae, 937,137 world records (93.5% of the group) and 951 in Alachua (80.1%). A new **`horse`** view takes Equidae, Giraffidae and Camelidae, 65,192 world records (6.5%) and 236 in Alachua (19.9%), with the giraffe's and the camels' own sharpness set by family. The deer, cattle and horse values are behavioural; the giraffe's and alpaca's are anatomical. In the one animal measured both ways here, the camel, the two agree (L105), and in the horse the behavioural value exceeds the anatomical estimate (L150, L92). The horse values come through two reviews (L150, L155); Timney and Keil (1992) itself is wanted.
 
-Cattle and bison (Alachua's 12.8%) stay with `deer` on their cone types, which match sheep and goats (L95, L96). Their acuity is unmeasured here (wanted: Entsu and colleagues 1992); a large eye, like the cattle lens of 11.1 mm (L27 note), suggests they may sit between deer and horses.
+Cattle and bison (Alachua's 12.8%) stay with `deer`: their acuity of 2.6 to 5 (L151) matches the deer's, and their cones match sheep and goats (L95, L96). Sheep are the one unsettled member. Landolt-ring scores give about 2.6 to 5.7 if read as decimal acuity (L135), while a review states "up to 14 cycles per degree" (L147); the sheep stays with `deer` until the paper behind that figure is read.
 
 **4. No split inside `rabbit`.** Rabbits and hares share a horizontal streak (L75, L38, L40), a nearly complete circle of view (L74) and two cones (L79, L80). Pikas (3.7%) are day-active and unmeasured here (wanted: Akaishi and colleagues 1995); they stay with `rabbit` until a measurement says otherwise.
 
@@ -231,10 +231,10 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
 
 - `['m', 'Colour', 'White-tailed deer have two kinds of colour-sensing cells, most sensitive to blue and to green, where people have three. Cattle, sheep and goats have the same two kinds, with the green one shifted toward yellow. Reds and oranges are hard for them to tell from greens, and this view mixes colours the same way.']`
   Log: L117, L118 (white-tailed deer, 450 to 460 and 537 nm); L119 (fallow deer, 542); L120 (rods, 497); L95, L96 (cattle, goats and sheep, 444 to 455 and 552 to 555).
-- `['m', 'Sharpness', 'A white-tailed deer sees about a tenth to a fifteenth as much detail as a person does, and sika deer and sheep score about the same. This view is blurred to match.']`
-  Log: L100 (4 to 6 cycles per degree, behavioural); L103 (sika deer, about 4.8); L135 (sheep); L123.
+- `['m', 'Sharpness', 'A white-tailed deer sees about a tenth to a fifteenth as much detail as a person does, and sika deer, red deer and cattle score about the same. This view is blurred to match.']`
+  Log: L100 (4 to 6 cycles per degree, behavioural); L142 (white-tailed and red deer under 6); L103 (sika deer, about 4.8); L135 (sheep, Landolt scores); L151 (cattle, 2.6 to 5); L123. L147 (sheep up to 14) disagrees and is unresolved.
 - `['m', 'Sharpest band', 'The green-sensing cones of a deer crowd into a band across its retina that looks out along the horizon. A deer sees most sharply across the ground ahead and to its sides, and this view keeps that band sharp.']`
-  Log: L97; L108 (many hoofed animals add a sharper zone that looks ahead and down).
+  Log: L97; L143 (in medium and large deer the dense cones extend toward the zone that looks ahead and down); L108.
 - `['g', 'Pupil', 'A white-tailed deer's pupil is a horizontal slit. In grazing animals a slit like this widens the view along the ground and cuts the glare from the sky. It also smears out-of-focus things sideways, and this view does the same.']`
   Log: L116 (white-tailed deer); L113 (reindeer); L109 (the functions, from a summary of Banks and colleagues 2015).
 - `['g', 'Level eyes', 'When a grazing animal lowers its head to feed, its eyes roll in their sockets by 50 degrees or more to keep the slit pupils level with the ground. This view keeps its sideways smear level with the real horizon however you tilt your phone.']`
@@ -247,7 +247,9 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
   Log: L25 to L28; L101; L34, L107 (reindeer retinas respond to ultraviolet). L122 records the contrary claim of the present source, which gives no evidence.
 - `['i', 'Field of view', 'This view assumes that a deer takes in about 310 degrees around itself, the figure a natural-history book gives. The view bends the picture at its edges to suggest it.']`
   Log: L121.
-- `['i', 'Speed and depth', 'This view assumes that a deer follows flicker about as fast as you do, and it treats things lower in the picture as closer. Both are guesses.']`
+- `['g', 'Speed', 'Recordings from white-tailed deer retinas, not yet published in full, suggest that deer follow a flickering light about as fast as any mammal measured, which would be one and a half to two times as fast as a person. This view runs slowly and then jumps ahead to suggest it.']`
+  Log: L141 (stated in a review, no number); L5, L9, L10 (the fastest mammals in the compilations, 100 to 120 Hz). The factor is the sheet's inference.
+- `['i', 'Depth', 'This view treats things lower in the picture as closer, which is a guess.']`
   Log: none.
 - `['x', 'Hearing', 'Cattle can tell which way a brief sound came from only to within about 30 degrees, and goats to within 18, where people manage under a degree. Their band of sharp sight already covers most of the horizon, so a rough direction is enough to bring a sound into view. This view leaves sound out.']`
   Log: L138.
@@ -260,7 +262,7 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
 | `cpd` | 5 | L100, L103, L135 |
 | `topoS` | 1 | L97 |
 | `fall` | 2.2 | *invented* |
-| `topoA` with new `spotY` | 0.3, placed 15% below centre | L108, and the upward temporal extensions in L104 and L106 notes; place and weight *invented* |
+| `topoA` with new `spotY` | 0.3, placed 15% below centre | L143 (frontal and lower field in medium and large deer), L108; place and weight *invented* |
 | `pupil` | 'h' | L116, L113 |
 | new `levelPupil` | 1 (the smear axis follows gravity) | L109 |
 | new `pupilDim` | in dim scenes the smear turns round | L113 (reindeer: a horizontal bar when constricted, round when dilated) |
@@ -270,7 +272,9 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
 | new `tapetum` | dim-light glow tinted gold (south) or blue (north, and reindeer in winter) | L98, L112, L115; tint and strength *invented* |
 | `sheen` | 0.3 | L25 to L28, L101, L107; the tint is *invented* |
 | `sat` | 0.85 | *invented* |
-| `rate` | 1 | *invented* |
+| `rate` | 0.6 | L141 (qualitative), with the fastest mammals at 100 to 120 Hz (L5, L9, L10) against 55 to 60 for people; value *invented* |
+| `cpd` override | cattle, bison and buffalo 4 | L151 (2.6 to 5) |
+| `skyBand` (roe deer only) | upper 30% of the frame through the blue channel | L144; the share is *invented* |
 
 **New effects**
 
@@ -284,22 +288,24 @@ Chip: "Horse, zebra, giraffe, camel". Who: "a horse". Cue: "A narrow band along 
 
 **Rows**
 
-- `['m', 'Sharpness', 'Along a narrow band level with the horizon, a horse sees about a quarter as much detail as a person does, and elsewhere about a twentieth. This view keeps a narrow band sharp and blurs the rest.']`
-  Log: L92 (16.5 cycles per degree in the streak, 2.7 in the periphery); L94; L111.
+- `['m', 'Sharpness', 'In daylight a horse sees about a third as much detail as a person does, and the best horses tested came close to a person. Away from a narrow band level with the horizon, its sharpness falls to about a twentieth of a person's. This view keeps a narrow band sharp and blurs the rest.']`
+  Log: L150 (average about 20/30, best 23.3 cycles per degree, behavioural, through a review); L155; L92 (16.5 in the streak, 2.7 in the periphery, anatomical); L94; L111.
 - `['m', 'Colour', 'Horses have two kinds of colour-sensing cells, most sensitive to blue and to green, where people have three. Reds and greens are hard for a horse to tell apart, and this view mixes colours the same way.']`
   Log: L90, L91 (428 and 539 nm).
-- `['m', 'Blind spot ahead', 'A horse's two eyes overlap below and along its nose, and a blind area sits right in front of its forehead. A horse lifts its nose to look at something far away with both eyes. This view darkens a patch straight ahead and above, and sharpens the overlap below it.']`
-  Log: L93. The size of the patch is *invented*.
-- `['m', 'Dim light', 'A horse can still tell colours apart in light as dim as moonlight, about as dim as a person can manage. In the horse's sharp band, rods, the cells for dim light, outnumber cones. This view lifts the shadows a little.']`
-  Log: L110, L111.
+- `['m', 'Blind spot ahead', 'A horse's two eyes overlap by 65 to 80 degrees below and along its nose, and a blind area sits right in front of its forehead. A horse lifts its nose to look at something far away with both eyes. This view darkens a patch straight ahead and above, and sharpens the overlap below it.']`
+  Log: L93, L148, L149. The size of the patch is *invented*.
+- `['m', 'Field of view', 'A horse sees almost all the way around itself. Its only blind areas lie behind its head and right in front of its forehead. This view bends the picture at its edges to suggest the wide sweep.']`
+  Log: L149.
+- `['m', 'Dim light', 'A horse can still tell colours apart in light as dim as moonlight, about as dim as a person can manage, and it can tell shapes apart on a dark, moonless night. In the horse's sharp band, rods, the cells for dim light, outnumber cones. This view lifts the shadows in dim light.']`
+  Log: L110, L153, L111.
 - `['m', 'No ultraviolet', 'A horse's large lens blocks nearly all ultraviolet light and lets through less than a twentieth of it. This view adds no ultraviolet tint.']`
   Log: L31.
-- `['g', 'Pupil', 'Horses, like other grazing animals, have pupils shaped like horizontal bars, which smear out-of-focus things sideways. This view does the same and keeps the smear level with the real horizon.']`
-  Log: L109.
+- `['m', 'Pupil', 'In daylight a horse's pupil narrows to a horizontal oval, and in the dark it opens to a near-circle about 30 millimetres across, seven times the area. The oval smears out-of-focus things sideways. This view does the same in bright light, keeps the smear level with the real horizon, and rounds it in the dark.']`
+  Log: L152; L109 (level eyes in grazing animals).
 - `['m', 'Giraffes and camels', 'A giraffe's retina could resolve nearly half the detail a person sees, and an arch of extra cells sharpens its view of the ground far below its head. Camels and alpacas see about a sixth to a fifth as much as a person does. When the app knows the species, this view sets its sharpness to match.']`
   Log: L104, L105, L106.
-- `['i', 'Field of view and speed', 'This view assumes that a horse takes in almost the whole circle around itself and follows flicker at your pace. Both are guesses.']`
-  Log: none; wanted (Harman and colleagues 1999, full text).
+- `['i', 'Speed', 'Little has been published on how fast a horse's eye follows flicker, so this view keeps your pace. That part is a guess.']`
+  Log: L154.
 - `['x', 'Hearing', 'Horses, like cattle and rabbits, judge the direction of a sound only roughly. Their wide band of sharp sight takes in the source without precise aim. This view leaves sound out.']`
   Log: L40, L138.
 
@@ -307,18 +313,19 @@ Chip: "Horse, zebra, giraffe, camel". Who: "a horse". Cue: "A narrow band along 
 
 | Field | Value | Behind it |
 |---|---|---|
-| `fov` | 340 | *invented* |
-| `cpd` | 16; giraffes 25; dromedary and Bactrian camels 10; llamas, alpacas, guanaco and vicuña 13 | L92; L104; L105; L106 |
+| `fov` | 350 | L149 (near-complete; blind only behind and in front of the forehead); the number is *invented* |
+| `cpd` | 20; giraffes 25; dromedary and Bactrian camels 10; llamas, alpacas, guanaco and vicuña 13 | L150 (about 20/30 on average, best 23.3), L92; L104; L105; L106 |
 | `topoS` | 1 | L92, L94 |
 | `fall` | 2.8 | L92 (a six-fold fall, 16.5 to 2.7); the curve is *invented* |
 | new `blind` | a soft dark patch centred 20% above the middle, a fifth of the frame wide | L93 for its place; size *invented* |
-| `topoA` with new `spotY` | 0.4, 20% below centre (the overlap down the nose) | L93; weight *invented* |
-| `pupil`, `levelPupil` | 'h', 1 | L109 |
+| `topoA` with new `spotY` | 0.4, 20% below centre (the overlap down the nose) | L93 |
+| new `binoc` | 70 degrees, centred below the middle | L148 (65 to 80), L93 |
+| `pupil`, `levelPupil`, `pupilDim` | 'h', 1, 1 | L152 (oval in daylight, near-round when dilated), L109 |
 | `dof` | 18 | *invented* |
 | `M` | mix w = 0.30 | L91; rule *invented* |
-| `gain` | 1.3 | L110, L111; value *invented* |
+| `gain` | 1.5 | L110, L153, L111; value *invented* |
 | `sheen`, `uvBlue` | 0, 0 | L31 |
-| `rate` | 1 | *invented* |
+| `rate` | 1 | *invented*; L154 (not measured) |
 
 Giraffe profile: a temporal sharp area ahead (25 to 27) on top of the streak, and a sharper lower field from the dorsal arch (L104). Camel profile: two sharp spots, one ahead and one behind, with a much blurrier middle (2 to 3) and no continuous streak (L105).
 
@@ -396,9 +403,9 @@ Each could get its own profile when the full database names it. Values a profile
 - **European rabbit** (*Oryctolagus cuniculus*; 38,839): cones at **425 and 523 nm**, rods 498 (L79 to L81); full circle with **24 degrees** of overlap (L73, L74); streak with a tenfold fall (L75); **blue-only strip of retina** (L76); hears to 49 kHz, localizes to 16.8 degrees (L136, L139).
 - **White-tailed deer** (*Odocoileus virginianus*; 310,997; 799 in Alachua): cones at **450 to 460 and 537 nm**, rods 497 (L117, L118, L120); **4 to 6 cycles per degree** (L100); green cones in a horizontal streak (L97); tapetum over the upper eye (L98), **golden in Georgia, bluer in the north** (L115); f/1.4 to 5.6 (L99); slit pupil (L116); some ultraviolet sensitivity (L101).
 - **Reindeer** (*Rangifer tarandus*): lens passes 26.5% of ultraviolet A (L25) and the retina responds to 372 nm (L34, L107); **tapetum gold in summer (541 nm), deep blue in winter (444 nm)** (L112, L114); pupil 25 mm² and horizontal when constricted, 336 mm² and round when dilated (L113).
-- **Fallow deer** (*Dama dama*): green cone at 542 nm (L119). **Sika deer** (*Cervus nippon*): about 4.8 cycles per degree (L103).
-- **Cattle, goats and sheep**: S cones 444 to 455 nm, long-wave cones **552 to 555** (L95, L96); lenses pass 22% (cattle) and 15% (sheep) of ultraviolet A (L27, L28); sheep acuity scores 0.085 to 0.19 (L135); cattle localize sound to 30 degrees, goats 18 (L138).
-- **Horse** (*Equus caballus*; 11,576 research-grade and 18,869 casual; 236 in Alachua): cones at **428 and 539 nm** (L90, L91); **16.5 cycles per degree in the streak, 2.7 elsewhere** (L92); peak of 4,000 ganglion cells per mm² (L94); colour to 0.02 cd/m² (L110); rods dominate the streak (L111); overlap down the nose and a blind area before the forehead (L93); lens passes 4.6% of ultraviolet A (L31).
+- **Fallow deer** (*Dama dama*): green cone at 542 nm (L119). **Sika deer** (*Cervus nippon*): about 4.8 cycles per degree (L103). **Red deer** (*Cervus elaphus*): under 6 (L142). **Roe deer** (*Capreolus capreolus*; 58,711): **S cones concentrated in the ventral retina**, which views the sky (L144), so it gets the sky band.
+- **Cattle, goats and sheep**: S cones 444 to 455 nm, long-wave cones **552 to 555** (L95, L96); lenses pass 22% (cattle) and 15% (sheep) of ultraviolet A (L27, L28); **cattle 2.6 to 5 cycles per degree** (L151); sheep acuity scores 0.085 to 0.19 (L135) against a stated 14 (L147); cattle localize sound to 30 degrees, goats 18 (L138).
+- **Horse** (*Equus caballus*; 11,576 research-grade and 18,869 casual; 236 in Alachua): cones at **428 and 539 nm** (L90, L91); **about 20 cycles per degree behaviourally, best 23.3** (L150, L155), 16.5 in the streak and 2.7 elsewhere by anatomy (L92); peak of 4,000 ganglion cells per mm² (L94); colour to 0.02 cd/m² and shapes below 6.81 × 10⁻⁵ cd/m² (L110, L153); rods dominate the streak (L111); **65 to 80 degrees of overlap** down the nose and blind areas only behind the head and before the forehead (L93, L148, L149); pupil an oval in daylight and a near-circle of about 30 mm in the dark (L152); lens passes 4.6% of ultraviolet A (L31). Plains zebras (17,579 records) take the horse's values, as Melin and colleagues assume (L155).
 - **Giraffe** (*Giraffa*; about 19,000): **25 to 27 cycles per degree**, horizontal streak, temporal area and dorsal arch (L104). **Dromedary camel**: **9.5 to 10**, two separate sharp areas (L105). **Alpaca**: **12.5 to 13.4** (L106), lens passes 6% of ultraviolet A (L30).
 
 ## 5. Gaps and how to fill them
@@ -407,10 +414,10 @@ Each could get its own profile when the full database names it. Values a profile
 - **Squirrel field of view.** Nothing measured. The rat's 295 degrees (L70) is the nearest rodent measurement; the chipmunk's 155-degree band of best vision (L39) shows how much of the panorama is sharp.
 - **Squirrel, rodent and rabbit pupils.** Not in any source read. Round pupils are assumed (*invented*).
 - **Rabbit sharpness.** Van Hof (1967) and Vaney (1980) measured it behaviourally (wanted). The ganglion-cell peak of 5,400 per mm² (L75) could give an anatomical estimate once the rabbit eye's focal length is known; no focal length was read in this session.
-- **Flicker in deer, horses, cattle and rabbits.** No measurement was found in the collection or the two compilations (L5 to L13 come from rodents and other animals only). Healy and colleagues (2013) fit flicker rates across 34 vertebrates to body mass, mass-specific metabolic rate and light level; their model could give an estimate once metabolic rates for these species are sourced. Until then the views keep a person's pace, graded i.
-- **Deer and horse fields of view.** Hughes (1977) holds the classic measurements (wanted). The deer's 310 degrees comes only from a book (L121).
-- **Horse behavioural acuity.** Timney and Keil (1992) (wanted). Until read, the anatomical 16.5 (L92) stands, likely an upper limit.
-- **Cattle and bison acuity.** Entsu and colleagues (1992) (wanted). Bison are 12.8% of Alachua's records for this group. The nearest measured bovid is the sheep (L135). The cattle eye is large (lens 11.1 mm, L27), so a value between the deer's 5 and the horse's 16 is plausible; the view uses the deer's 5 until the paper is read.
+- **Flicker in deer, horses, cattle and rabbits.** No number was found in the collection or the two compilations (L5 to L13 come from rodents and other animals only). For white-tailed deer a review reports unpublished electroretinograms placing deer among the fastest mammals (L141), so the deer view runs slow and jumps (rate 0.6, graded g). For horses a review finds little published (L154). Healy and colleagues (2013) fit flicker rates across 34 vertebrates to body mass, mass-specific metabolic rate and light level; their model could give estimates for horses and rabbits once metabolic rates for these species are sourced. Until then the horse and rabbit views keep a person's pace, graded i.
+- **Deer and horse fields of view.** The horse's field is near-complete with 65 to 80 degrees of overlap (L148, L149), with no total in degrees. Hughes (1977) holds the classic measurements (wanted). The deer's 310 degrees comes only from a book (L121).
+- **Horse behavioural acuity.** Now known through two reviews (L150, L155): about 20/30 on average and 23.3 cycles per degree at best. Timney and Keil (1992) itself remains wanted to confirm the conditions.
+- **Cattle and bison acuity.** A review gives cattle 2.6 to 5 cycles per degree (L151), which settles their place with deer. Bison (12.8% of Alachua's records for this group) are unmeasured and take the cattle value. **Sheep** remain unsettled between the Landolt scores (L135) and a stated 14 (L147); the paper behind the review's figure, probably Sugnaseelan and colleagues (2013), is wanted.
 - **Beavers, muskrats, coypu, porcupines, capybaras and agoutis.** Half of the `mouse` view's world records and nothing measured except the beaver's anatomy (L59). The agouti's lens (15% of ultraviolet A, L23) and the guinea pig's non-ultraviolet S cone at 429 nm (L60) warn that the ultraviolet row may be false for cavies and agoutis. The view's ultraviolet tint should be turned off for Caviidae, Dasyproctidae and Cuniculidae (*invented* choice on L60 and L23).
 - **Overhead binocular vision in rats.** Measured in anaesthetized albino rats (L70, L71); how a moving rat uses it is in Wallace and colleagues (2013) (wanted).
 - **Pikas and zebras.** Nothing measured here; they ride on rabbits and horses.
@@ -419,28 +426,31 @@ Each could get its own profile when the full database names it. Values a profile
 
 ## 6. Closed sources wanted
 
-The same list as `docs/views/wanted/squirrel-deer-rabbit.jsonl`, most useful first.
+The same list as `docs/views/wanted/squirrel-deer-rabbit.jsonl`, most useful first (priority 1 would change a view's picture, 2 would confirm or correct a row, 3 is background).
 
-1. Jacobs, Birch and Blakeslee (1982), *Visual acuity and spatial contrast sensitivity in tree squirrels*, Behavioural Processes. doi:10.1016/0376-6357(82)90008-0. Sets the `squirrel` view's sharpness.
-2. Timney and Keil (1992), *Visual acuity in the horse*, Vision Research. doi:10.1016/0042-6989(92)90092-w. Sets the `horse` view's sharpness behaviourally.
-3. Vaney (1980), *The grating acuity of the wild European rabbit*, Vision Research. doi:10.1016/0042-6989(80)90146-7. Sets the `rabbit` view's sharpness.
-4. Hughes (1977), *The topography of vision in mammals of contrasting life style: comparative optics and retinal organisation*, Handbook of Sensory Physiology vol. 7 (ed. Crescitelli), pp. 613 to 756, Springer. Fields of view and streaks for deer, rabbits and others.
-5. Entsu, Dohi and Yamada (1992), *Visual acuity of cattle determined by the method of discrimination learning*, Applied Animal Behaviour Science. doi:10.1016/s0168-1591(05)80052-8. Cattle and bison sharpness.
-6. Wallace and colleagues (2013), *Rats maintain an overhead binocular field at the expense of constant fusion*, Nature. doi:10.1038/nature12153. How the `mouse` view should draw its overhead overlap.
-7. Prusky, West and Douglas (2000), *Behavioral assessment of visual acuity in mice and rats*, Vision Research. doi:10.1016/s0042-6989(00)00081-x. The primary values behind L67 and L64.
-8. Van Hof (1967), *Visual acuity in the rabbit*, Vision Research. doi:10.1016/0042-6989(67)90037-5.
-9. Tansley, Copenhaver and Gunkel (1961), *Some aspects of the electroretinographic response of the American red squirrel, Tamiasciurus hudsonicus loquax*, J Cell Compar Physl 57: 11 to 19 (as the citing paper abbreviates it). The original of every squirrel flicker value (L5 to L11); no DOI was found on a page opened.
-10. Harman, Moore, Hoskins and Keller (1999), *Horse vision and an explanation for the visual behaviour originally explained by the 'ramp retina'*, Equine Veterinary Journal. doi:10.1111/j.2042-3306.1999.tb03837.x. The horse's binocular and blind areas in degrees.
-11. Hebel (1976), *Distribution of retinal ganglion cells in five mammalian species (pig, sheep, ox, horse, dog)*, Anatomy and Embryology. doi:10.1007/bf00346285. Cattle and sheep streaks and anatomical acuity.
-12. Veilleux and Kirk (2014), *Visual acuity in mammals: effects of eye size and ecology*, Brain Behav Evol 83: 43 to 53. A compilation that may hold most of the missing acuities.
-13. Van Hooser and Nelson (2006), *The squirrel as a rodent model of the human visual system*, Visual Neuroscience. doi:10.1017/s0952523806230098. Review of squirrel acuity, fields and timing.
-14. Banks and colleagues (2015), *Why do animal eyes have pupils of different shapes?*, Science Advances 1(7): e1500391. doi:10.1126/sciadv.1500391. Open access, did not load here; would move two rows from g to m.
-15. D'Angelo and colleagues (2008), *Visual specialization of an herbivore prey species, the white-tailed deer*, Canadian Journal of Zoology. doi:10.1139/z08-050. Cone densities for an anatomical acuity and the shape of the streak.
-16. Jacobs, Neitz and Deegan (1991), *Retinal receptors in rodents maximally sensitive to ultraviolet light*, Nature 353: 655 to 656. doi:10.1038/353655a0. Which rodents have ultraviolet cones.
-17. Jacobs (1978), *Spectral sensitivity and colour vision in the ground-dwelling sciurids*, Animal Behaviour. doi:10.1016/0003-3472(78)90058-1. Behavioural colour vision in five ground squirrels.
-18. Collewijn (1970), *The normal range of horizontal eye movements in the rabbit*, Experimental Neurology. doi:10.1016/0014-4886(70)90168-8.
-19. Akaishi and colleagues (1995), *A morphological study of the retinal ganglion cells of the Afghan pika*, Neuroscience Research. doi:10.1016/0168-0102(94)00873-e. The only pika retina in the collection.
-20. Mass and Supin (2017), beaver acuity, Doklady Biological Sciences. doi:10.1134/s0012496617020065. Whether 17 arcmin is a cycle or a stripe.
+1. (priority 1) Jacobs GH, Birch DG, Blakeslee B (1982), *Visual acuity and spatial contrast sensitivity in tree squirrels*, Behavioural Processes. doi:10.1016/0376-6357(82)90008-0. The only behavioural acuity for tree squirrels; would replace the squirrel view's guessed 6 cycles per degree.
+2. (priority 1) Vaney DI (1980), *The grating acuity of the wild European rabbit*, Vision Research. doi:10.1016/0042-6989(80)90146-7. Behavioural acuity for the wild rabbit; would replace the rabbit view's guessed 3 cycles per degree.
+3. (priority 1) Hughes A (1977), *The topography of vision in mammals of contrasting life style: comparative optics and retinal organisation*, Handbook of Sensory Physiology, Vol. 7 (Crescitelli F, ed.), pp. 613-756, Springer-Verlag. no DOI seen. Classic measurements of visual fields and streaks in rabbits, ungulates and rodents; would replace the deer's book-sourced 310 degrees and the squirrel's guessed field. Citation read in the reference list of Caves et al. 2018 (reference 10); no DOI seen.
+4. (priority 1) Wallace DJ, Greenberg DS, Sawinski J, Rulla S, Notaro G, Kerr JN (2013), *Rats maintain an overhead binocular field at the expense of constant fusion*, Nature. doi:10.1038/nature12153. How freely moving rats use their overhead binocular field; decides how the mouse view draws the overlap above.
+5. (priority 2) Timney B, Keil K (1992), *Visual acuity in the horse*, Vision Research. doi:10.1016/0042-6989(92)90092-w. The original of the horse acuity now read through two reviews (about 20/30 on average, best 23.3 cycles per degree); would confirm the conditions behind the horse view's sharpness.
+6. (priority 2) Entsu S, Dohi H, Yamada A (1992), *Visual acuity of cattle determined by the method of discrimination learning*, Applied Animal Behaviour Science. doi:10.1016/s0168-1591(05)80052-8. The primary cattle acuity behind a review's 2.6 to 5 cycles per degree; would confirm that cattle and bison belong with deer.
+7. (priority 2) Prusky GT, West PWR, Douglas RM (2000), *Behavioral assessment of visual acuity in mice and rats*, Vision Research. doi:10.1016/s0042-6989(00)00081-x. The primary values behind the mouse and rat sharpness rows, now read second-hand.
+8. (priority 2) Van Hof MW (1967), *Visual acuity in the rabbit*, Vision Research. doi:10.1016/0042-6989(67)90037-5. A second behavioural rabbit acuity to set beside Vaney 1980.
+9. (priority 2) Tansley K, Copenhaver RM, Gunkel RD (1961), *Some aspects of the electroretinographic response of the American red squirrel, Tamiasciurus hudsonicus loquax*, J Cell Compar Physl 57: 11-19 (abbreviation as given in the citing paper). no DOI seen. The original of every squirrel flicker value used (L5 to L11) and of the tree-against-ground difference that sets the squirrel view's pace. Citation read in the reference list of Inger et al. 2014 (reference 75); no DOI seen.
+10. (priority 2) Harman AM, Moore S, Hoskins R, Keller P (1999), *Horse vision and an explanation for the visual behaviour originally explained by the 'ramp retina'*, Equine Veterinary Journal. doi:10.1111/j.2042-3306.1999.tb03837.x. The horse's binocular overlap and blind area in degrees, for the horse view's blind patch.
+11. (priority 2) Hebel R (1976), *Distribution of retinal ganglion cells in five mammalian species (pig, sheep, ox, horse, dog)*, Anatomy and Embryology. doi:10.1007/bf00346285. Ganglion-cell maps for ox, sheep and horse; gives the streak shape and an anatomical acuity for cattle.
+12. (priority 2) Veilleux CC, Kirk EC (2014), *Visual acuity in mammals: effects of eye size and ecology*, Brain, Behavior and Evolution 83: 43-53. http://refhub.elsevier.com/S0169-5347(18)30052-1/sbref0075. A compilation of mammal acuities that probably holds values for squirrels, rabbits and several hoofed animals. Citation read in the reference list of Caves et al. 2018 (reference 15); no DOI seen.
+13. (priority 2) Van Hooser SD, Nelson SB (2006), *The squirrel as a rodent model of the human visual system*, Visual Neuroscience. doi:10.1017/s0952523806230098. Review of squirrel acuity, visual field and timing; may settle the squirrel view's field and sharpness.
+14. (priority 2) Banks MS, et al. (2015), *Why do animal eyes have pupils of different shapes?*, Science Advances 1(7): e1500391. doi:10.1126/sciadv.1500391. Open access but did not load in this session; read directly it would move the pupil and level-eyes rows from g to m and give the rotation range.
+15. (priority 2) D'Angelo GJ, Glasser A, Wendt M, Williams GA, Osborn DA, Gallagher GR, Warren RJ, Miller KV, Pardue MT (2008), *Visual specialization of an herbivore prey species, the white-tailed deer*, Canadian Journal of Zoology. doi:10.1139/z08-050. Cone densities and eye dimensions for an anatomical acuity of the white-tailed deer and the exact shape of its streak.
+16. (priority 2) Jacobs GH, Neitz J, Deegan JF (1991), *Retinal receptors in rodents maximally sensitive to ultraviolet light*, Nature 353: 655-656. doi:10.1038/353655a0. Which rodents have ultraviolet cones; decides which mouse-view members keep the ultraviolet tint.
+17. (priority 2) Sugnaseelan S, Prescott NB, Broom DM, Wathes CM, Phillips CJC (2013), *Visual discrimination learning and spatial acuity in sheep*, Applied Animal Behaviour Science. doi:10.1016/j.applanim.2013.04.012. Probably the source of a review's 'up to 14 cycles per degree' for sheep, against Landolt scores of about 2.6 to 5.7; decides whether sheep stay with the deer view.
+18. (priority 3) Jacobs GH (1978), *Spectral sensitivity and colour vision in the ground-dwelling sciurids: results from golden mantled ground squirrels and comparisons for five species*, Animal Behaviour. doi:10.1016/0003-3472(78)90058-1. Behavioural colour vision in five ground squirrels; would confirm the ground squirrel colour setting.
+19. (priority 3) Jacobs GH, Deegan JF, Neitz J (1998), *Photopigment basis for dichromatic color vision in cows, goats, and sheep*, Visual Neuroscience. doi:10.1017/s0952523898153154. Per-species cone peaks for cattle, goats and sheep (the abstract gives ranges).
+20. (priority 3) Collewijn H (1970), *The normal range of horizontal eye movements in the rabbit*, Experimental Neurology. doi:10.1016/0014-4886(70)90168-8. How far a rabbit's eyes move; sets the forward-look vergence effect.
+21. (priority 3) Akaishi Y, Uchiyama H, Ito H, Shimizu Y (1995), *A morphological study of the retinal ganglion cells of the Afghan pika (Ochotona rufescens)*, Neuroscience Research. doi:10.1016/0168-0102(94)00873-e. The only pika retina in the collection; tests whether pikas fit the rabbit view.
+22. (priority 3) Mass AM, Supin AYa (2017), *Estimates of underwater and aerial visual acuity in the European beaver Castor fiber L. based on morphological data*, Doklady Biological Sciences. doi:10.1134/s0012496617020065. Whether the beaver's 17 arcmin is a cycle or a stripe, which doubles or halves its sharpness.
+23. (priority 3) Prusky GT, Harker KT, Douglas RM, Whishaw IQ (2002), *Variation in visual acuity within pigmented, and between pigmented and albino rat strains*, Behavioural Brain Research. doi:10.1016/s0166-4328(02)00126-2. How much wild-type pigmented rats differ from albino laboratory rats, on which several mouse-view values rest.
 
 ## 7. Sources
 
@@ -493,13 +503,16 @@ Opened in this session unless marked **secondary**.
 - Long and Fisher 1983, J Comp Neurol 221(3), doi:10.1002/cne.902210308. **opened** (abstract).
 - Mass and Supin 2017, Doklady Biol Sci, doi:10.1134/s0012496617020065. **opened** (abstract).
 - McQuade, Williams and Eichenbaum 1986, Ethology, doi:10.1111/j.1439-0310.1986.tb00602.x. **opened** (abstract).
+- Melin, Kline, Hiramatsu and Caro 2016, PLoS ONE, doi:10.1371/journal.pone.0145679. **opened** (full text); **secondary** for the horse's 23.3.
 - Mitchinson and Prescott 2013, PLoS Comput Biol, doi:10.1371/journal.pcbi.1003236. **opened** (full text); **secondary** for the whisking rate.
 - Morris and colleagues 2025, Journal of Vision 25(13): 8, doi:10.1167/jov.25.13.8. **opened** (full text).
 - Nakamura and colleagues 2024, Mammal Study, doi:10.3106/ms2023-0085. **opened** (abstract).
 - Neitz and Jacobs 1986, J Comp Psychol 100(1), doi:10.1037//0735-7036.100.1.21. **opened** (abstract).
 - Newman, Hammond and D'Angelo 2025, J Exp Zool A, doi:10.1002/jez.70007. **opened** (full text).
+- Newman and D'Angelo 2024, *A review of Cervidae visual ecology*, Animals 14(3): 420, doi:10.3390/ani14030420. **opened** (full text); **secondary** for its cited values and for unpublished deer electroretinograms.
 - Nuboer, van Nuys and Wortel 1983, J Comp Physiol 151: 347 to 352, doi:10.1007/BF00623909. **opened** (abstract, Springer).
 - Roth, Balkenius and Kelber 2008, PLoS ONE, doi:10.1371/journal.pone.0003711. **opened** (full text).
+- Roth and McGreevy 2025, *Horse vision through two lenses*, Frontiers in Veterinary Science, doi:10.3389/fvets.2025.1647911. **opened** (full text); **secondary** for Timney and Keil 1992 and the cattle and camel values.
 - Sajdak and colleagues 2016, Visual Neuroscience, doi:10.1017/s0952523815000346. **opened** (full text).
 - Stokkan and colleagues 2013, Proc R Soc B, doi:10.1098/rspb.2013.2451. **opened** (full text).
 - Sussman, Chou and Lakshminarayanan 2011, J Mod Opt, doi:10.1080/09500340.2010.548608. **opened** (abstract).
@@ -519,8 +532,8 @@ Opened in this session unless marked **secondary**.
 ## 8. Questions for a specialist
 
 1. What behavioural acuity did Jacobs, Birch and Blakeslee (1982) find for grey squirrels, and does it differ between tree squirrels and ground squirrels?
-2. Has any deer's or horse's visual field been measured with the ophthalmoscopic reflex method, and how large is the blind area behind them?
-3. Are there flicker-fusion measurements for any deer, horse, bovid or rabbit, behavioural or electroretinographic?
+2. Has any deer's visual field been measured with the ophthalmoscopic reflex method, and how large are the blind area behind a deer and its binocular overlap in front?
+3. What flicker rates do the unpublished white-tailed deer electroretinograms show (Newman, in the 2024 review), and are there any for horses, cattle or rabbits?
 4. How many degrees above the horizon does the rabbit's blue-only strip of retina cover in a sitting rabbit, and does the mouse's ultraviolet-dominated field begin at the horizon?
 5. Were the red squirrel's 60 to 65 Hz and the ground squirrel's 100 to 120 Hz (Tansley and colleagues 1961) recorded under the same light, so that the difference between tree and ground squirrels is real?
 6. Do beavers, muskrats, coypu and porcupines have ultraviolet-sensitive cones, as mice and rats do, or violet ones, as the guinea pig does?
