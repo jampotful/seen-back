@@ -2,7 +2,7 @@
 
 Written on 13 October 2026 from 01:45 UTC by the research agent for the unit `cat-dog`. The evidence log is `docs/views/evidence/cat-dog.jsonl`; a reference such as **L17** names line 17 of that log. The wanted list is `docs/views/wanted/cat-dog.jsonl`.
 
-**What was read.** The collection on `pub/lit-t1` (topics `carnivores` and `methods`: abstracts in the index, and full texts on disk for Inger et al. 2014, Kanizsár et al. 2017, Kopania and Clark 2024 and Klećkowska-Nawrot et al. 2026). From the owner's Drive: Caves et al. 2018, the whole main text (pp. 358 to 372; the supplementary tables were not in the file); Land and Nilsson 2012, *Animal Eyes*, which came through only in part: the front matter, chapter 1, chapter 2 and chapter 3 up to p. 65 (the middle of "Sensitivity"). Chapters 4 to 9, among them chapter 5 on lens eyes on land, chapter 6 on mirrors in eyes (the tapetum) and chapter 9 on eye movements, did not come through. On the web: publisher and repository pages listed in section 7.
+**What was read.** The collection on `pub/lit-t1` (topics `carnivores` and `methods`: abstracts in the index, and full texts on disk for Inger et al. 2014, Kanizsár et al. 2017, Kopania and Clark 2024 and Klećkowska-Nawrot et al. 2026). From the owner's Drive: Caves et al. 2018, the whole main text (pp. 358 to 372; the supplementary tables were not in the file); Land and Nilsson 2012, *Animal Eyes*, which came through only in part: the front matter, chapter 1, chapter 2 and chapter 3 up to p. 65 (the middle of "Sensitivity"). Chapters 4 to 9, among them chapter 5 on lens eyes on land, chapter 6 on mirrors in eyes (the tapetum) and chapter 9 on eye movements, did not come through. Walls's *The vertebrate eye and its adaptive radiation* (1942) was read in part through the Internet Archive's search-inside service. On the web: publisher and repository pages listed in section 7, among them Lind and colleagues (2017), the one study that measured dogs and people side by side in bright and dim light.
 
 **Pages refused or unreachable.** These shaped what could be opened, and nothing behind them is used second-hand without saying so:
 
@@ -11,7 +11,7 @@ Written on 13 October 2026 from 01:45 UTC by the research agent for the unit `ca
 - science.org and the Semantic Scholar API returned errors. A Harvard course copy of Hecht, Shlaer and Pirenne (1942) is closed to robots.
 - The machine's own shell reaches no site but GitHub, so every web page was read through a fetch tool that relays quotations of at most 125 characters. Where a table row is quoted, the quote is the tool's rendering of the row, and the log line says so.
 
-**Unfinished.** Marked **[unfinished]** where they occur: the pupil shapes of pumas, cheetahs, leopards, jaguars, coyotes and gray foxes in life; the cat's binocular overlap; any measured acuity for lions, tigers, pumas, bobcats or foxes; the luminance dependence of cat and dog acuity; and the check of the two-cone colour matrix (`DEUTAN`).
+**Unfinished.** Marked **[unfinished]** where they occur: the pupil shapes of pumas, cheetahs, leopards, jaguars, coyotes and gray foxes in life, species by species; the cat's whole field and binocular overlap, where optical and behavioural figures disagree; any measured acuity for lions, tigers, pumas, bobcats or foxes; the luminance dependence of cat acuity; and the check of the two-cone colour matrix (`DEUTAN`).
 
 ## 1. Scope
 
@@ -459,7 +459,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 ## 4. Species with their own measurements
 
 - **Domestic cat** (*Felis catus*): acuity by several methods (L17, L18, L19, L88, L89), cone and rod peaks (L69 to L72), pupil range and shape (L20, L21), lens (L48), refraction and eye length (L75), flicker (L25), lens transmission of ultraviolet (L100). Enough for the `cat` view as written.
-- **Domestic dog** (*Canis lupus familiaris*): acuity (L29 to L31, L46), cone and rod peaks (L65, L66, L108, L109, L116), ganglion-cell topography by breed (L36, L37), fovea-like patch (L44, L47), flicker (L27), motion thresholds (L34, L35), tapetum by breed (L87), lens ultraviolet (L101). A profile with the nose setting is ready.
+- **Domestic dog** (*Canis lupus familiaris*): acuity in bright and dim light, with a pug and whippets compared (L166 to L169), earlier acuity estimates (L29 to L31, L46), cone and rod peaks (L65, L66, L108, L109, L116), ganglion-cell topography by breed (L36, L37), fovea-like patch (L44, L47), flicker (L27), motion thresholds (L34, L35), tapetum by breed (L87), lens ultraviolet (L101). A profile with the nose setting is ready.
 - **Red fox** (*Vulpes vulpes*): pupil and lens (L51), cones (L40, L110, L111), topography (L39, L41), compass-aligned pouncing (L117). The `fox` view rests on it.
 - **Arctic fox** (*Vulpes lagopus*): stronger streak and twice the red fox's central cone density (L42, L112, L113). A profile with `topoS` near 1 would follow from L42 once its acuity is read (wanted: Malkemper and Peichl 2018).
 - **Wolf** (*Canis lupus*): pronounced streak and about 200,000 ganglion cells (L38), round pupil (L52). It fits `dog` with the long-nose setting fixed.
