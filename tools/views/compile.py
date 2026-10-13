@@ -186,11 +186,12 @@ RULES_TEXT = """WHAT TO INCLUDE
 - Include a parameter only when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Leave out every other parameter and every block the records do not call for; the engine then uses a person's value. A short spec of grounded parameters is better than a long one of guesses.
 - A number graded m or g must be a number that a cited record states, or lie between two cited records. When you work a number out, say so with kind calculation and grade it at most g.
 - Write two or three rows that say plainly what the animal's view is like, each citing records, and one row graded i for the app's own choices, naming those parameters in its fifth element.
+- Colour. params.M names a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
 - The spec is one JSON object in the spec field; claims and quotes are separate fields.
 
 WRITING RULES (rows, notes and cue)
 - Plain sentences that a curious adult understands. Canadian spelling (colour, grey, centre, metre, behaviour).
-- No em dashes. No "not X but Y" or "Y, not X". No sentence fragments. No word with an underscore, no dot inside a word, no @, and no reference to the app's code or to parameter names in the text.
+- No em dashes. No "not X but Y" or "Y, not X", and no ", not" anywhere in a row, a note or the cue: say the positive thing instead ("only movement reaches it" rather than "it sees movement, not stillness"). No sentence fragments. No word with an underscore, no dot inside a word, no @, and no reference to the app's code or to parameter names in the text.
 - A row is [grade, title, text, [record ids], [parameter paths]]. The record ids are the R numbers of the records behind it; the paths name the parameters it describes ("params.cpd", "zones[1].mag"). A row graded m cites at least one record graded m. Every parameter that is invented has a row graded i or g that names it in the fifth element.
 - Each row says one thing a person could picture on a phone. Four to eight rows."""
 
@@ -495,7 +496,8 @@ def plain_errors(text, where):
     if RX_EM.search(text):
         errs.append("%s: has an em dash" % where)
     if RX_NOTBUT.search(text):
-        errs.append("%s: has a 'not X but Y' or ', not' construction: %r" % (where, RX_NOTBUT.search(text).group(0)[:60]))
+        m0 = RX_NOTBUT.search(text)
+        errs.append("%s: has a 'not X but Y' or ', not' construction; rewrite this sentence without it: %r" % (where, text[max(0, m0.start() - 50):m0.end() + 40]))
     m = RX_SPELL.search(text)
     if m and m.group(0).lower() not in ("colour", "colours"):
         errs.append("%s: American spelling %r" % (where, m.group(0)))
@@ -1026,11 +1028,15 @@ def cmd_compare(a):
           "Agreement means the same value within 10%, or the same string. `grade` agreement is the same letter. "
           "A hand-made parameter graded `?` has no grade to compare.", ""]
     for f in sorted(os.listdir(a.out)):
-        m = re.match(r"^(\w+)\.(.+)\.json$", f)
-        if not m or f.endswith(".reply.json") or f.endswith(".refused.json") or m.group(1) not in specs:
+        m = re.match(r"^(\w+)\.(.+?)(\.refused)?\.json$", f)
+        if not m or f.endswith(".reply.json") or m.group(1) not in specs:
             continue
-        key, tag = m.groups()
+        key, tag = m.group(1), m.group(2) + (" (REFUSED by the checks, compared as returned)" if m.group(3) else "")
         d = json.load(open(os.path.join(a.out, f)))
+        if m.group(3):
+            d = normalize_reply(d.get("reply") or {}).get("spec")
+            if not isinstance(d, dict):
+                continue
         h, c = leaves(specs[key]), leaves(d)
         both = [p for p in h if p in c]
         agree = [p for p in both if same_value(h[p][0], c[p][0])]
