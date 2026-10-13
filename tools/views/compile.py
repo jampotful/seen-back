@@ -975,7 +975,7 @@ def cmd_run(a):
     log = []
     state = {}           # (key, model) -> dict(reply, errs, attempt)
     pending = {(k, m): {"extra": None, "attempt": 1} for k in prepped for m in models}
-    for attempt in (1, 2):
+    for attempt in range(1, a.attempts + 1):
         reqs, idx = {}, {}
         for (k, m), s in pending.items():
             cid = "%s__%s__%d" % (k, re.sub(r"[^a-z0-9]", "", m.replace("claude-", "")), attempt)
@@ -1008,9 +1008,9 @@ def cmd_run(a):
                 open(os.path.join(a.out, "%s.%s.attempt%d.errors.txt" % (k, tag, attempt)), "w").write("\n".join(errs) + "\n")
             if not errs:
                 write_outputs(a.out, k, tag, P["job"], P, spec, cby, warns, reply, m)
-            elif attempt == 1:
+            elif attempt < a.attempts:
                 prev = json.dumps(reply, ensure_ascii=False) if reply is not None else "(no usable reply)"
-                nxt[(k, m)] = {"attempt": 2, "extra": [
+                nxt[(k, m)] = {"attempt": attempt + 1, "extra": [
                     {"role": "assistant", "content": "My first attempt, as the tool call's input:\n" + prev[:60000]},
                     {"role": "user", "content": "Your attempt failed these checks:\n- " + "\n- ".join(errs[:60]) +
                      "\nCall submit_spec again with a whole corrected answer. Fix each error; where a record cannot support a grade, lower the grade to i."}]}
@@ -1020,7 +1020,7 @@ def cmd_run(a):
         pending = nxt
     summary = ["# Compile run", "", "Spent $%.4f by the usage blocks at batch prices." % spent, ""] + ["- " + l for l in log]
     for (k, m) in pending:
-        summary.append("- %s %s: refused after two attempts (see the .refused.json)" % (k, m))
+        summary.append("- %s %s: refused after %d attempts (see the .refused.json)" % (k, m, a.attempts))
     open(os.path.join(a.out, "SUMMARY.md"), "w").write("\n".join(summary) + "\n")
     print("\n".join(summary))
     return 0
@@ -1107,6 +1107,7 @@ def main():
     ap.add_argument("--models", default=os.environ.get("COMPILE_MODELS", "claude-haiku-5-5"))
     ap.add_argument("--direct", action="store_true", help="plain Messages API requests instead of a batch (for a first trial)")
     ap.add_argument("--max-usd", dest="max_usd", type=float, default=float(os.environ.get("COMPILE_MAX_USD", "6")))
+    ap.add_argument("--attempts", type=int, default=int(os.environ.get("COMPILE_ATTEMPTS", "2")), help="requests a view may take, the later ones carrying the errors of the one before (COMPILER.md says 2)")
     ap.add_argument("--wait-min", dest="wait_min", type=int, default=int(os.environ.get("COMPILE_WAIT_MIN", "180")))
     a = ap.parse_args()
     if a.jobs and not a.jobs.startswith("/") and not os.path.exists(a.jobs.split(",")[0]):
