@@ -1,0 +1,2667 @@
+{
+ "model": "tinyclip-39m-16",
+ "today_model": "tinyclip-39m-16",
+ "C": 20.0,
+ "recipe": "merge-county",
+ "options": {
+  "with_alachua": "yes",
+  "powers": "0",
+  "alachua_weight": 3.0,
+  "coco_weight": 10.0,
+  "calibrate": true,
+  "groups": "merge",
+  "t_kinds": "0.5,1,2",
+  "w_kinds": "0.5,0.7,0.9,1.0",
+  "settle_on": "old",
+  "other_view": 0.09,
+  "county_lambda": 0.5
+ },
+ "made": "2026-10-13T13:52:59Z",
+ "page": "away from the county's time zone the page leaves the county list out (the head alone); in it, the head and the list are combined by the rule mix",
+ "vectors": {
+  "world": {
+   "fit": "world-fit",
+   "tune": "world-eval.wasm-int8-per-channel",
+   "test": "world-eval.wasm-int8-per-channel"
+  },
+  "alachua": {
+   "fit": "alachua-pre2025",
+   "tune": "alachua-2025.wasm-int8-per-channel",
+   "test": "alachua-2025.wasm-int8-per-channel"
+  },
+  "coco": {
+   "fit": "coco-kinds",
+   "tune": "coco-kinds",
+   "test": "coco-kinds.wasm-int8-per-channel"
+  },
+  "today": {
+   "encoder": "tinyclip-39m-16",
+   "world": "world-eval.wasm-int8-per-channel",
+   "alachua": "alachua-2025.wasm-int8-per-channel",
+   "coco_tune": "coco-kinds",
+   "coco_test": "coco-kinds.wasm-int8-per-channel"
+  }
+ },
+ "photos": {
+  "world": {
+   "fit": 98518,
+   "tune": 10200,
+   "test": 10200
+  },
+  "alachua": {
+   "fit": 81566,
+   "tune": 1788,
+   "test": 4161
+  },
+  "coco": {
+   "fit": 1769,
+   "tune": 3056,
+   "test": 1240
+  }
+ },
+ "parity_with_fuse_py": {
+  "photos": 60,
+  "set": "Alachua tuning photos",
+  "different": 0
+ },
+ "species_rows": {
+  "from": "models/pocket"
+ },
+ "county_delta": {
+  "squirrel": -0.712,
+  "rabbit": -0.915,
+  "hawk": -0.303,
+  "wader": -0.06,
+  "bird": 0.123,
+  "alligator": -0.833,
+  "reptile": 0.008,
+  "frog": -0.181,
+  "bee": 0.018,
+  "insect": 0.179,
+  "plant": 0.176,
+  "other": -1.725,
+  "fungus": 0.053,
+  "slime": -0.807,
+  "spider": -0.046,
+  "jumper": -0.331,
+  "fish": -0.232,
+  "shark": -2.21,
+  "snail": -0.356,
+  "sealife": -1.447,
+  "crab": -0.802,
+  "salamander": -0.922,
+  "worm": -0.444,
+  "scorpion": -1.009,
+  "tick": -1.063,
+  "mammal": -0.561,
+  "primate": -2.21,
+  "whale": -2.213,
+  "bat": -0.836,
+  "flyingfox": -2.062,
+  "cephalopod": -2.21
+ },
+ "recipe_grid": {
+  "grid": [
+   {
+    "cand": 0,
+    "with_alachua": true,
+    "power": 0.0,
+    "iterations": 309,
+    "seconds": 72.0,
+    "photos": 181853,
+    "groups_score": 12.6244,
+    "groups_passing": 4
+   }
+  ],
+  "chosen": {
+   "cand": 0,
+   "with_alachua": true,
+   "power": 0.0,
+   "iterations": 309,
+   "seconds": 72.0,
+   "photos": 181853,
+   "groups_score": 12.6244,
+   "groups_passing": 4
+  }
+ },
+ "offsets": {
+  "fungus": 0.25,
+  "slime": 0.25,
+  "jumper": 0.25,
+  "fish": -0.25,
+  "crab": 0.25,
+  "salamander": 0.75,
+  "worm": 0.25,
+  "scorpion": 0.75,
+  "tick": 0.75,
+  "primate": 0.25
+ },
+ "other_offset": 2.25,
+ "parity_with_fuse_py_new_head": {
+  "photos": 60,
+  "set": "Alachua tuning photos",
+  "different": 0
+ },
+ "fitted": {
+  "iterations": 309,
+  "seconds": 72.0,
+  "classes": 36,
+  "with_alachua": true,
+  "power": 0.0,
+  "photos": 181853
+ },
+ "recipe_chosen": {
+  "with_alachua": true,
+  "power": 0.0
+ },
+ "groups": {
+  "rule": "merge",
+  "history": [
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "snail",
+     "sealife",
+     "crab",
+     "salamander",
+     "worm",
+     "scorpion",
+     "tick",
+     "mammal",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.5267,
+      "called": 303,
+      "right_when_called": 0.5215,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.71,
+      "called": 293,
+      "right_when_called": 0.727,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 256,
+      "right_when_called": 0.7383,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.69,
+      "called": 287,
+      "right_when_called": 0.7213,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7267,
+      "called": 298,
+      "right_when_called": 0.7315,
+      "pass": false
+     },
+     "snail": {
+      "photos": 300,
+      "named": 0.54,
+      "called": 277,
+      "right_when_called": 0.5848,
+      "pass": false
+     },
+     "sealife": {
+      "photos": 300,
+      "named": 0.5567,
+      "called": 286,
+      "right_when_called": 0.5839,
+      "pass": false
+     },
+     "crab": {
+      "photos": 300,
+      "named": 0.5133,
+      "called": 298,
+      "right_when_called": 0.5168,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 305,
+      "right_when_called": 0.7049,
+      "pass": false
+     },
+     "worm": {
+      "photos": 300,
+      "named": 0.4733,
+      "called": 265,
+      "right_when_called": 0.5358,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 273,
+      "right_when_called": 0.7839,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7767,
+      "called": 301,
+      "right_when_called": 0.7741,
+      "pass": true
+     },
+     "mammal": {
+      "photos": 300,
+      "named": 0.4767,
+      "called": 285,
+      "right_when_called": 0.5018,
+      "pass": false
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.85,
+      "called": 301,
+      "right_when_called": 0.8472,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.81,
+      "called": 295,
+      "right_when_called": 0.8237,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.6467,
+      "called": 276,
+      "right_when_called": 0.7029,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.6788
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "snail",
+     "sealife",
+     "crab",
+     "salamander",
+     "scorpion",
+     "tick",
+     "mammal",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.5267,
+      "called": 301,
+      "right_when_called": 0.5249,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.71,
+      "called": 291,
+      "right_when_called": 0.732,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 256,
+      "right_when_called": 0.7383,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.69,
+      "called": 286,
+      "right_when_called": 0.7238,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7267,
+      "called": 298,
+      "right_when_called": 0.7315,
+      "pass": false
+     },
+     "snail": {
+      "photos": 300,
+      "named": 0.53,
+      "called": 271,
+      "right_when_called": 0.5867,
+      "pass": false
+     },
+     "sealife": {
+      "photos": 300,
+      "named": 0.5567,
+      "called": 284,
+      "right_when_called": 0.588,
+      "pass": false
+     },
+     "crab": {
+      "photos": 300,
+      "named": 0.5067,
+      "called": 288,
+      "right_when_called": 0.5278,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 303,
+      "right_when_called": 0.7096,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 272,
+      "right_when_called": 0.7868,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7767,
+      "called": 300,
+      "right_when_called": 0.7767,
+      "pass": true
+     },
+     "mammal": {
+      "photos": 300,
+      "named": 0.4767,
+      "called": 285,
+      "right_when_called": 0.5018,
+      "pass": false
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.85,
+      "called": 301,
+      "right_when_called": 0.8472,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.81,
+      "called": 295,
+      "right_when_called": 0.8237,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.6467,
+      "called": 276,
+      "right_when_called": 0.7029,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.6816
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "snail",
+     "sealife",
+     "crab",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.5267,
+      "called": 300,
+      "right_when_called": 0.5267,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 290,
+      "right_when_called": 0.731,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 256,
+      "right_when_called": 0.7383,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.69,
+      "called": 286,
+      "right_when_called": 0.7238,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7267,
+      "called": 298,
+      "right_when_called": 0.7315,
+      "pass": false
+     },
+     "snail": {
+      "photos": 300,
+      "named": 0.5267,
+      "called": 270,
+      "right_when_called": 0.5852,
+      "pass": false
+     },
+     "sealife": {
+      "photos": 300,
+      "named": 0.5567,
+      "called": 284,
+      "right_when_called": 0.588,
+      "pass": false
+     },
+     "crab": {
+      "photos": 300,
+      "named": 0.5067,
+      "called": 287,
+      "right_when_called": 0.5296,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 303,
+      "right_when_called": 0.7096,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 272,
+      "right_when_called": 0.7868,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7767,
+      "called": 300,
+      "right_when_called": 0.7767,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.85,
+      "called": 301,
+      "right_when_called": 0.8472,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 293,
+      "right_when_called": 0.8259,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.6467,
+      "called": 276,
+      "right_when_called": 0.7029,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.6815
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "snail",
+     "sealife",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.5267,
+      "called": 292,
+      "right_when_called": 0.5411,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.7033,
+      "called": 287,
+      "right_when_called": 0.7352,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 255,
+      "right_when_called": 0.7412,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6867,
+      "called": 284,
+      "right_when_called": 0.7254,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7267,
+      "called": 296,
+      "right_when_called": 0.7365,
+      "pass": false
+     },
+     "snail": {
+      "photos": 300,
+      "named": 0.49,
+      "called": 244,
+      "right_when_called": 0.6025,
+      "pass": false
+     },
+     "sealife": {
+      "photos": 300,
+      "named": 0.5333,
+      "called": 266,
+      "right_when_called": 0.6015,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 300,
+      "right_when_called": 0.7167,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.71,
+      "called": 268,
+      "right_when_called": 0.7948,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7767,
+      "called": 296,
+      "right_when_called": 0.7872,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 300,
+      "right_when_called": 0.8467,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 293,
+      "right_when_called": 0.8259,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 266,
+      "right_when_called": 0.7105,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.689
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "sealife",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.5233,
+      "called": 285,
+      "right_when_called": 0.5509,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.7033,
+      "called": 287,
+      "right_when_called": 0.7352,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 255,
+      "right_when_called": 0.7412,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6767,
+      "called": 278,
+      "right_when_called": 0.7302,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 295,
+      "right_when_called": 0.7356,
+      "pass": false
+     },
+     "sealife": {
+      "photos": 300,
+      "named": 0.49,
+      "called": 230,
+      "right_when_called": 0.6391,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 297,
+      "right_when_called": 0.7239,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 266,
+      "right_when_called": 0.797,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7733,
+      "called": 294,
+      "right_when_called": 0.7891,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 300,
+      "right_when_called": 0.8467,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 293,
+      "right_when_called": 0.8259,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.6067,
+      "called": 254,
+      "right_when_called": 0.7165,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.6996
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "fungus",
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "fungus": {
+      "photos": 300,
+      "named": 0.52,
+      "called": 278,
+      "right_when_called": 0.5612,
+      "pass": false
+     },
+     "slime": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 285,
+      "right_when_called": 0.7368,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 255,
+      "right_when_called": 0.7412,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6733,
+      "called": 273,
+      "right_when_called": 0.7399,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 290,
+      "right_when_called": 0.7483,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 295,
+      "right_when_called": 0.7254,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 266,
+      "right_when_called": 0.797,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.77,
+      "called": 291,
+      "right_when_called": 0.7938,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 299,
+      "right_when_called": 0.8696,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 299,
+      "right_when_called": 0.8495,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 292,
+      "right_when_called": 0.8288,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.58,
+      "called": 231,
+      "right_when_called": 0.7532,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7145
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox",
+     "cephalopod"
+    ],
+    "marks": {
+     "slime": {
+      "photos": 300,
+      "named": 0.6733,
+      "called": 271,
+      "right_when_called": 0.7454,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 254,
+      "right_when_called": 0.7441,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6733,
+      "called": 271,
+      "right_when_called": 0.7454,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 288,
+      "right_when_called": 0.7535,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 294,
+      "right_when_called": 0.7279,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 263,
+      "right_when_called": 0.8061,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7667,
+      "called": 290,
+      "right_when_called": 0.7931,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 299,
+      "right_when_called": 0.8495,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 290,
+      "right_when_called": 0.8345,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     },
+     "cephalopod": {
+      "photos": 300,
+      "named": 0.5767,
+      "called": 229,
+      "right_when_called": 0.7555,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7218
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "slime",
+     "spider",
+     "jumper",
+     "fish",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "slime": {
+      "photos": 300,
+      "named": 0.6733,
+      "called": 271,
+      "right_when_called": 0.7454,
+      "pass": false
+     },
+     "spider": {
+      "photos": 300,
+      "named": 0.63,
+      "called": 254,
+      "right_when_called": 0.7441,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.7,
+      "called": 273,
+      "right_when_called": 0.7692,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6667,
+      "called": 264,
+      "right_when_called": 0.7576,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 277,
+      "right_when_called": 0.7653,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7133,
+      "called": 293,
+      "right_when_called": 0.7304,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 263,
+      "right_when_called": 0.8061,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7667,
+      "called": 290,
+      "right_when_called": 0.7931,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 299,
+      "right_when_called": 0.8495,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 290,
+      "right_when_called": 0.8345,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.734
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "slime",
+     "jumper",
+     "fish",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "slime": {
+      "photos": 300,
+      "named": 0.67,
+      "called": 269,
+      "right_when_called": 0.7472,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.6967,
+      "called": 271,
+      "right_when_called": 0.7712,
+      "pass": false
+     },
+     "fish": {
+      "photos": 300,
+      "named": 0.6667,
+      "called": 264,
+      "right_when_called": 0.7576,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 277,
+      "right_when_called": 0.7653,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 290,
+      "right_when_called": 0.731,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 261,
+      "right_when_called": 0.8123,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.76,
+      "called": 288,
+      "right_when_called": 0.7917,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8467,
+      "called": 299,
+      "right_when_called": 0.8495,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 288,
+      "right_when_called": 0.8403,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 251,
+      "right_when_called": 0.8645,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.736
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "slime",
+     "jumper",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "slime": {
+      "photos": 300,
+      "named": 0.67,
+      "called": 269,
+      "right_when_called": 0.7472,
+      "pass": false
+     },
+     "jumper": {
+      "photos": 300,
+      "named": 0.6967,
+      "called": 271,
+      "right_when_called": 0.7712,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.6933,
+      "called": 268,
+      "right_when_called": 0.7761,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.6933,
+      "called": 281,
+      "right_when_called": 0.7402,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 259,
+      "right_when_called": 0.8185,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.76,
+      "called": 288,
+      "right_when_called": 0.7917,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.84,
+      "called": 297,
+      "right_when_called": 0.8485,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 288,
+      "right_when_called": 0.8403,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 250,
+      "right_when_called": 0.868,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7438
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "jumper",
+     "shark",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "jumper": {
+      "photos": 300,
+      "named": 0.6967,
+      "called": 271,
+      "right_when_called": 0.7712,
+      "pass": false
+     },
+     "shark": {
+      "photos": 300,
+      "named": 0.6933,
+      "called": 268,
+      "right_when_called": 0.7761,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.6933,
+      "called": 281,
+      "right_when_called": 0.7402,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 259,
+      "right_when_called": 0.8185,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.76,
+      "called": 288,
+      "right_when_called": 0.7917,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.84,
+      "called": 297,
+      "right_when_called": 0.8485,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8067,
+      "called": 288,
+      "right_when_called": 0.8403,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 250,
+      "right_when_called": 0.868,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7578
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "jumper",
+     "salamander",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "jumper": {
+      "photos": 300,
+      "named": 0.6967,
+      "called": 271,
+      "right_when_called": 0.7712,
+      "pass": false
+     },
+     "salamander": {
+      "photos": 300,
+      "named": 0.6933,
+      "called": 279,
+      "right_when_called": 0.7455,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7067,
+      "called": 258,
+      "right_when_called": 0.8217,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.76,
+      "called": 287,
+      "right_when_called": 0.7944,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.84,
+      "called": 292,
+      "right_when_called": 0.863,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8033,
+      "called": 287,
+      "right_when_called": 0.8397,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.72,
+      "called": 249,
+      "right_when_called": 0.8675,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7689
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "jumper",
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "jumper": {
+      "photos": 300,
+      "named": 0.6967,
+      "called": 271,
+      "right_when_called": 0.7712,
+      "pass": false
+     },
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7033,
+      "called": 256,
+      "right_when_called": 0.8242,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.76,
+      "called": 287,
+      "right_when_called": 0.7944,
+      "pass": true
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8367,
+      "called": 290,
+      "right_when_called": 0.8655,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8,
+      "called": 285,
+      "right_when_called": 0.8421,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 248,
+      "right_when_called": 0.8669,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7766
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "scorpion",
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "scorpion": {
+      "photos": 300,
+      "named": 0.7033,
+      "called": 256,
+      "right_when_called": 0.8242,
+      "pass": false
+     },
+     "tick": {
+      "photos": 300,
+      "named": 0.7367,
+      "called": 276,
+      "right_when_called": 0.8007,
+      "pass": false
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8367,
+      "called": 290,
+      "right_when_called": 0.8655,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8,
+      "called": 285,
+      "right_when_called": 0.8421,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 248,
+      "right_when_called": 0.8669,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7827
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "tick",
+     "primate",
+     "whale",
+     "bat",
+     "flyingfox"
+    ],
+    "marks": {
+     "tick": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 267,
+      "right_when_called": 0.8127,
+      "pass": false
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8667,
+      "called": 298,
+      "right_when_called": 0.8725,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8367,
+      "called": 290,
+      "right_when_called": 0.8655,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.8,
+      "called": 285,
+      "right_when_called": 0.8421,
+      "pass": true
+     },
+     "flyingfox": {
+      "photos": 300,
+      "named": 0.7167,
+      "called": 248,
+      "right_when_called": 0.8669,
+      "pass": false
+     }
+    },
+    "world_tune_right": 0.7905
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "tick",
+     "primate",
+     "whale",
+     "bat"
+    ],
+    "marks": {
+     "tick": {
+      "photos": 300,
+      "named": 0.7233,
+      "called": 267,
+      "right_when_called": 0.8127,
+      "pass": false
+     },
+     "primate": {
+      "photos": 300,
+      "named": 0.8567,
+      "called": 295,
+      "right_when_called": 0.8712,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8367,
+      "called": 290,
+      "right_when_called": 0.8655,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.7933,
+      "called": 280,
+      "right_when_called": 0.85,
+      "pass": true
+     }
+    },
+    "world_tune_right": 0.7923
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "primate",
+     "whale",
+     "bat"
+    ],
+    "marks": {
+     "primate": {
+      "photos": 300,
+      "named": 0.8567,
+      "called": 295,
+      "right_when_called": 0.8712,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8333,
+      "called": 289,
+      "right_when_called": 0.8651,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.7933,
+      "called": 279,
+      "right_when_called": 0.853,
+      "pass": true
+     }
+    },
+    "world_tune_right": 0.8025
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "primate",
+     "whale",
+     "bat"
+    ],
+    "marks": {
+     "primate": {
+      "photos": 300,
+      "named": 0.8567,
+      "called": 295,
+      "right_when_called": 0.8712,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8333,
+      "called": 289,
+      "right_when_called": 0.8651,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.7933,
+      "called": 279,
+      "right_when_called": 0.853,
+      "pass": true
+     }
+    },
+    "world_tune_right": 0.8025
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "primate",
+     "whale",
+     "bat"
+    ],
+    "marks": {
+     "primate": {
+      "photos": 300,
+      "named": 0.8567,
+      "called": 295,
+      "right_when_called": 0.8712,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8333,
+      "called": 288,
+      "right_when_called": 0.8681,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.79,
+      "called": 274,
+      "right_when_called": 0.865,
+      "pass": true
+     }
+    },
+    "world_tune_right": 0.8047
+   },
+   {
+    "t_kind": 1.0,
+    "carried": [
+     "primate",
+     "whale",
+     "bat"
+    ],
+    "marks": {
+     "primate": {
+      "photos": 300,
+      "named": 0.8567,
+      "called": 295,
+      "right_when_called": 0.8712,
+      "pass": true
+     },
+     "whale": {
+      "photos": 300,
+      "named": 0.8333,
+      "called": 288,
+      "right_when_called": 0.8681,
+      "pass": true
+     },
+     "bat": {
+      "photos": 300,
+      "named": 0.79,
+      "called": 274,
+      "right_when_called": 0.865,
+      "pass": true
+     }
+    },
+    "world_tune_right": 0.8047
+   }
+  ],
+  "carried": [
+   "primate",
+   "whale",
+   "bat"
+  ],
+  "left_in_other": [
+   "fungus",
+   "slime",
+   "spider",
+   "jumper",
+   "fish",
+   "shark",
+   "snail",
+   "sealife",
+   "crab",
+   "salamander",
+   "worm",
+   "scorpion",
+   "tick",
+   "mammal",
+   "flyingfox",
+   "cephalopod"
+  ]
+ },
+ "labels": [
+  "cat",
+  "dog",
+  "squirrel",
+  "deer",
+  "rabbit",
+  "hawk",
+  "wader",
+  "bird",
+  "alligator",
+  "reptile",
+  "frog",
+  "bee",
+  "insect",
+  "plant",
+  "person",
+  "other",
+  "none",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "primate",
+  "whale",
+  "bat",
+  "other",
+  "other"
+ ],
+ "table_relabelled": {
+  "other": 855,
+  "bat": 5,
+  "insect": 12,
+  "whale": 1
+ },
+ "settings": {
+  "t_kind": 1.0,
+  "w_kind": 0.7,
+  "alachua": 0.8965,
+  "coco": 0.9615,
+  "coco_within_1_point": true,
+  "alachua_today": 0.8941,
+  "coco_today": 0.9538,
+  "kind_at": 0.87,
+  "levels": {
+   "world": 0.87,
+   "alachua": 0.67,
+   "coco": 0.2
+  },
+  "bar": 0.95,
+  "grid": [
+   {
+    "t_kind": 0.5,
+    "w_kind": 0.5,
+    "alachua": 0.8953,
+    "coco": 0.7487,
+    "coco_ok": false
+   },
+   {
+    "t_kind": 0.5,
+    "w_kind": 0.7,
+    "alachua": 0.89,
+    "coco": 0.9445,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 0.5,
+    "w_kind": 0.9,
+    "alachua": 0.8565,
+    "coco": 0.9544,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 0.5,
+    "w_kind": 1.0,
+    "alachua": 0.826,
+    "coco": 0.9551,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 1.0,
+    "w_kind": 0.5,
+    "alachua": 0.9031,
+    "coco": 0.8031,
+    "coco_ok": false
+   },
+   {
+    "t_kind": 1.0,
+    "w_kind": 0.7,
+    "alachua": 0.8965,
+    "coco": 0.9615,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 1.0,
+    "w_kind": 0.9,
+    "alachua": 0.8798,
+    "coco": 0.9592,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 1.0,
+    "w_kind": 1.0,
+    "alachua": 0.872,
+    "coco": 0.9585,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 2.0,
+    "w_kind": 0.5,
+    "alachua": 0.8995,
+    "coco": 0.8815,
+    "coco_ok": false
+   },
+   {
+    "t_kind": 2.0,
+    "w_kind": 0.7,
+    "alachua": 0.887,
+    "coco": 0.9594,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 2.0,
+    "w_kind": 0.9,
+    "alachua": 0.881,
+    "coco": 0.9595,
+    "coco_ok": true
+   },
+   {
+    "t_kind": 2.0,
+    "w_kind": 1.0,
+    "alachua": 0.8768,
+    "coco": 0.9587,
+    "coco_ok": true
+   }
+  ]
+ },
+ "tuning": {
+  "world_marks": {
+   "primate": {
+    "photos": 300,
+    "named": 0.8567,
+    "called": 295,
+    "right_when_called": 0.8712,
+    "pass": true
+   },
+   "whale": {
+    "photos": 300,
+    "named": 0.8333,
+    "called": 288,
+    "right_when_called": 0.8681,
+    "pass": true
+   },
+   "bat": {
+    "photos": 300,
+    "named": 0.79,
+    "called": 274,
+    "right_when_called": 0.865,
+    "pass": true
+   }
+  },
+  "world_old_right": 0.6895,
+  "world_old_right_today": 0.6662,
+  "other_given_a_view": 0.09,
+  "alachua_old_right": 0.8965,
+  "alachua_old_right_today": 0.8941,
+  "coco_with_list": 0.9615,
+  "coco_today": 0.9538,
+  "coco_alone": 0.9568
+ },
+ "test": {
+  "old_groups_world": {
+   "today": [
+    0.6838,
+    0.6698,
+    0.6979,
+    4200
+   ],
+   "new": [
+    0.6948,
+    0.6805,
+    0.7086,
+    4200
+   ],
+   "difference": [
+    0.011,
+    -0.0,
+    0.0217,
+    4200
+   ],
+   "pass": true
+  },
+  "old_groups_world_with_list": {
+   "today": [
+    0.6838,
+    0.6698,
+    0.6979,
+    4200
+   ],
+   "new": [
+    0.7074,
+    0.6938,
+    0.7217,
+    4200
+   ],
+   "difference": [
+    0.0236,
+    0.015,
+    0.0329,
+    4200
+   ],
+   "pass": true
+  },
+  "old_groups_alachua": {
+   "today": [
+    0.9018,
+    0.8928,
+    0.9114,
+    3871
+   ],
+   "new": [
+    0.8938,
+    0.8843,
+    0.9031,
+    3871
+   ],
+   "difference": [
+    -0.008,
+    -0.0142,
+    -0.0023,
+    3871
+   ],
+   "pass": true
+  },
+  "new_groups": {
+   "primate": {
+    "photos": 300,
+    "named": 0.8833,
+    "called": 316,
+    "right_when_called": 0.8386,
+    "pass": true
+   },
+   "whale": {
+    "photos": 300,
+    "named": 0.7867,
+    "called": 281,
+    "right_when_called": 0.8399,
+    "pass": true
+   },
+   "bat": {
+    "photos": 300,
+    "named": 0.8033,
+    "called": 279,
+    "right_when_called": 0.8638,
+    "pass": true
+   }
+  },
+  "coco": {
+   "today": 0.9467,
+   "new_with_list": 0.9597,
+   "new_alone": 0.9567,
+   "pass": true,
+   "named_a_new_group": 0,
+   "photos": 1240
+  },
+  "other": {
+   "photos": 5100,
+   "given_a_view_today": 0.32,
+   "given_a_view_new": 0.0902,
+   "pass": true,
+   "by_group": {
+    "other": {
+     "photos": 300,
+     "given_a_view_today": 0.4533,
+     "given_a_view_new": 0.1433,
+     "views_new": {
+      "plant": 23,
+      "insect": 10,
+      "bird": 3,
+      "cat": 2,
+      "wader": 1
+     }
+    },
+    "fungus": {
+     "photos": 300,
+     "given_a_view_today": 0.38,
+     "given_a_view_new": 0.1533,
+     "views_new": {
+      "plant": 29,
+      "insect": 16,
+      "bee": 1
+     }
+    },
+    "slime": {
+     "photos": 300,
+     "given_a_view_today": 0.1967,
+     "given_a_view_new": 0.0267,
+     "views_new": {
+      "plant": 4,
+      "insect": 4
+     }
+    },
+    "spider": {
+     "photos": 300,
+     "given_a_view_today": 0.2067,
+     "given_a_view_new": 0.1,
+     "views_new": {
+      "insect": 20,
+      "bee": 5,
+      "reptile": 2,
+      "plant": 2,
+      "rabbit": 1
+     }
+    },
+    "jumper": {
+     "photos": 300,
+     "given_a_view_today": 0.3133,
+     "given_a_view_new": 0.12,
+     "views_new": {
+      "insect": 28,
+      "bee": 6,
+      "frog": 1,
+      "rabbit": 1
+     }
+    },
+    "fish": {
+     "photos": 300,
+     "given_a_view_today": 0.13,
+     "given_a_view_new": 0.05,
+     "views_new": {
+      "reptile": 6,
+      "bird": 3,
+      "insect": 2,
+      "alligator": 2,
+      "plant": 1
+     }
+    },
+    "shark": {
+     "photos": 300,
+     "given_a_view_today": 0.1333,
+     "given_a_view_new": 0.02,
+     "views_new": {
+      "bird": 3,
+      "insect": 2,
+      "plant": 1
+     }
+    },
+    "snail": {
+     "photos": 300,
+     "given_a_view_today": 0.1467,
+     "given_a_view_new": 0.0333,
+     "views_new": {
+      "insect": 8,
+      "plant": 1,
+      "frog": 1
+     }
+    },
+    "sealife": {
+     "photos": 300,
+     "given_a_view_today": 0.09,
+     "given_a_view_new": 0.02,
+     "views_new": {
+      "plant": 5,
+      "reptile": 1
+     }
+    },
+    "crab": {
+     "photos": 300,
+     "given_a_view_today": 0.2767,
+     "given_a_view_new": 0.05,
+     "views_new": {
+      "insect": 12,
+      "alligator": 1,
+      "frog": 1,
+      "plant": 1
+     }
+    },
+    "salamander": {
+     "photos": 300,
+     "given_a_view_today": 0.76,
+     "given_a_view_new": 0.15,
+     "views_new": {
+      "reptile": 34,
+      "frog": 7,
+      "alligator": 1,
+      "plant": 1,
+      "bee": 1
+     }
+    },
+    "worm": {
+     "photos": 300,
+     "given_a_view_today": 0.3067,
+     "given_a_view_new": 0.0667,
+     "views_new": {
+      "insect": 14,
+      "reptile": 3,
+      "plant": 2,
+      "bird": 1
+     }
+    },
+    "scorpion": {
+     "photos": 300,
+     "given_a_view_today": 0.4267,
+     "given_a_view_new": 0.08,
+     "views_new": {
+      "insect": 21,
+      "plant": 2,
+      "bee": 1
+     }
+    },
+    "tick": {
+     "photos": 300,
+     "given_a_view_today": 0.3433,
+     "given_a_view_new": 0.0667,
+     "views_new": {
+      "insect": 15,
+      "reptile": 1,
+      "plant": 1,
+      "frog": 1,
+      "deer": 1
+     }
+    },
+    "mammal": {
+     "photos": 300,
+     "given_a_view_today": 0.6433,
+     "given_a_view_new": 0.3733,
+     "views_new": {
+      "squirrel": 31,
+      "cat": 21,
+      "deer": 13,
+      "rabbit": 11,
+      "reptile": 8
+     }
+    },
+    "flyingfox": {
+     "photos": 300,
+     "given_a_view_today": 0.5267,
+     "given_a_view_new": 0.0767,
+     "views_new": {
+      "bird": 9,
+      "insect": 5,
+      "hawk": 5,
+      "plant": 2,
+      "deer": 1
+     }
+    },
+    "cephalopod": {
+     "photos": 300,
+     "given_a_view_today": 0.1067,
+     "given_a_view_new": 0.0033,
+     "views_new": {
+      "insect": 1
+     }
+    }
+   },
+   "original_other_given_a_view_by_order": [
+    {
+     "order": "Sarcoptiformes",
+     "view": "plant",
+     "photos": 4
+    },
+    {
+     "order": "Picornavirales",
+     "view": "insect",
+     "photos": 3
+    },
+    {
+     "order": "?",
+     "view": "insect",
+     "photos": 3
+    },
+    {
+     "order": "Trombidiformes",
+     "view": "plant",
+     "photos": 3
+    },
+    {
+     "order": "Acholeplasmatales",
+     "view": "plant",
+     "photos": 2
+    },
+    {
+     "order": "Pseudomonadales",
+     "view": "plant",
+     "photos": 2
+    },
+    {
+     "order": "Mesostigmata",
+     "view": "insect",
+     "photos": 2
+    },
+    {
+     "order": "Articulavirales",
+     "view": "wader",
+     "photos": 1
+    },
+    {
+     "order": "Peronosporales",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Mononegavirales",
+     "view": "dog",
+     "photos": 1
+    },
+    {
+     "order": "Martellivirales",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Mesostigmata",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Cirlivirales",
+     "view": "bird",
+     "photos": 1
+    },
+    {
+     "order": "Mononegavirales",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Mycoplasmatales",
+     "view": "bird",
+     "photos": 1
+    },
+    {
+     "order": "Tolivirales",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Chitovirales",
+     "view": "rabbit",
+     "photos": 1
+    },
+    {
+     "order": "Herpesvirales",
+     "view": "alligator",
+     "photos": 1
+    },
+    {
+     "order": "Mulpavirales",
+     "view": "plant",
+     "photos": 1
+    },
+    {
+     "order": "Plasmodiophorida",
+     "view": "plant",
+     "photos": 1
+    }
+   ]
+  },
+  "world_all": {
+   "right_new": 0.8051,
+   "right_today": 0.621,
+   "asserted_new": 0.5926,
+   "right_when_asserted_new": 0.956
+  },
+  "alachua_all": {
+   "right_new": 0.8846,
+   "right_today": 0.8919,
+   "asserted_new": 0.6667,
+   "right_when_asserted_new": 0.9838
+  },
+  "world_by_continent": {
+   "AF": {
+    "photos": 1674,
+    "right_new": 0.8345,
+    "right_today": 0.626
+   },
+   "AN": {
+    "photos": 220,
+    "right_new": 0.7818,
+    "right_today": 0.6591
+   },
+   "AS": {
+    "photos": 1790,
+    "right_new": 0.7955,
+    "right_today": 0.6006
+   },
+   "EU": {
+    "photos": 1611,
+    "right_new": 0.7952,
+    "right_today": 0.6176
+   },
+   "NA": {
+    "photos": 1739,
+    "right_new": 0.7999,
+    "right_today": 0.6078
+   },
+   "OC": {
+    "photos": 1543,
+    "right_new": 0.7965,
+    "right_today": 0.6442
+   },
+   "SA": {
+    "photos": 1623,
+    "right_new": 0.8121,
+    "right_today": 0.6285
+   }
+  },
+  "commonest_confusions": [
+   {
+    "truth": "other",
+    "answer": "insect",
+    "photos": 162
+   },
+   {
+    "truth": "plant",
+    "answer": "other",
+    "photos": 123
+   },
+   {
+    "truth": "insect",
+    "answer": "other",
+    "photos": 88
+   },
+   {
+    "truth": "bee",
+    "answer": "insect",
+    "photos": 81
+   },
+   {
+    "truth": "other",
+    "answer": "plant",
+    "photos": 80
+   },
+   {
+    "truth": "wader",
+    "answer": "bird",
+    "photos": 74
+   },
+   {
+    "truth": "other",
+    "answer": "reptile",
+    "photos": 55
+   },
+   {
+    "truth": "squirrel",
+    "answer": "other",
+    "photos": 54
+   },
+   {
+    "truth": "frog",
+    "answer": "other",
+    "photos": 51
+   },
+   {
+    "truth": "reptile",
+    "answer": "other",
+    "photos": 50
+   },
+   {
+    "truth": "whale",
+    "answer": "other",
+    "photos": 50
+   },
+   {
+    "truth": "dog",
+    "answer": "other",
+    "photos": 43
+   },
+   {
+    "truth": "bat",
+    "answer": "other",
+    "photos": 42
+   },
+   {
+    "truth": "cat",
+    "answer": "other",
+    "photos": 37
+   },
+   {
+    "truth": "hawk",
+    "answer": "bird",
+    "photos": 35
+   },
+   {
+    "truth": "bird",
+    "answer": "wader",
+    "photos": 34
+   },
+   {
+    "truth": "other",
+    "answer": "bat",
+    "photos": 34
+   },
+   {
+    "truth": "other",
+    "answer": "primate",
+    "photos": 33
+   },
+   {
+    "truth": "cat",
+    "answer": "dog",
+    "photos": 32
+   },
+   {
+    "truth": "rabbit",
+    "answer": "other",
+    "photos": 32
+   },
+   {
+    "truth": "other",
+    "answer": "squirrel",
+    "photos": 31
+   },
+   {
+    "truth": "bee",
+    "answer": "other",
+    "photos": 30
+   },
+   {
+    "truth": "dog",
+    "answer": "cat",
+    "photos": 27
+   },
+   {
+    "truth": "alligator",
+    "answer": "other",
+    "photos": 26
+   },
+   {
+    "truth": "other",
+    "answer": "bird",
+    "photos": 23
+   }
+  ],
+  "size_bytes": 36864,
+  "blocking": {
+   "old_groups_world": true,
+   "old_groups_alachua": true,
+   "new_groups": true,
+   "coco": true,
+   "other": true,
+   "size": true
+  },
+  "passes_every_mark_measured_here": true
+ }
+}
