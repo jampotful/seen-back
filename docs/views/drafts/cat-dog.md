@@ -413,7 +413,7 @@ Every row that compares an animal with "people" or "a person" should use these f
 | Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. The older round figure of 180 (L158, with the eyes at rest; repeated in L77 and L132) is smaller than clinical perimetry finds; 140 for the overlap is Kahmann's maximum (L145) |
 | Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63, L164 (rises with the logarithm of intensity) |
 | Colour | three kinds of cone, most sensitive near 420 (blue-violet), 530 (green) and 560 (yellow-green) nanometres; light from about 400 to 700 nanometres | L128, L129, L130 (M and L also L10, L11, L91, L92), L12, L9 |
-| Dim light | a fully dark-adapted person can just see a white surface at about a millionth of a candela per square metre, about the light of an overcast starry night | L7, L8 |
+| Dim light | a fully dark-adapted person can just see a white surface at about a millionth of a candela per square metre, about the light of stars under cloud (Land and Nilsson's "overcast starlight") | L7, L8 |
 | Pupil | area changes about 15-fold | L22 |
 | Movement | notices motion slower than a tenth of a degree a second; picks out dots moving together when about 5 in 100 do | L15, L16 |
 | Ultraviolet | the adult lens absorbs it | L102 |
@@ -424,7 +424,7 @@ Phrasings that carry these figures in rows, for any view:
 - "People see a light flicker up to about 60 times a second." Where an animal's figure comes from the edge of the eye or from very bright light, add "and up to about 100 at the edge of view in very bright light."
 - "A person takes in about 200 degrees with both eyes open, and about 120 of them with both eyes at once."
 - "People have three kinds of colour-sensing cells."
-- "A fully dark-adapted person can just see by the light of an overcast starry night."
+- "A fully dark-adapted person can just see by starlight under cloud."
 
 Three consequences for the code:
 
