@@ -1,0 +1,55 @@
+=== 2026-10-13T02:13:05Z machine
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1344       11384          42        3646       14645
+v22.23.3
+Model name:                              AMD EPYC 9V74 80-Core Processor
+=== 2026-10-13T02:13:05Z machine: exit 0
+=== 2026-10-13T02:13:05Z int8 file of tinyclip-39m-16
+=== 2026-10-13T02:13:23Z int8 file of tinyclip-39m-16: exit 0
+=== 2026-10-13T02:13:23Z int8 file of bioclip-b16
+=== 2026-10-13T02:14:04Z int8 file of bioclip-b16: exit 0
+=== 2026-10-13T02:14:04Z the files
+total 127728
+-rw-r--r-- 1 runner runner 89802361 Oct 13 02:14 bioclip-b16.onnx
+drwxr-xr-x 2 runner runner     4096 Oct 13 02:12 naturalist
+drwxr-xr-x 2 runner runner     4096 Oct 13 02:12 pocket
+-rw-r--r-- 1 runner runner 40978137 Oct 13 02:13 tinyclip-39m-16.onnx
+553188e7f7200207ba7a34f8090133148b0b6bc02a3430292943b47091a98025  models/bioclip-b16.onnx
+5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e  models/tinyclip-39m-16.onnx
+"ship_sha256": "5f7174eca7b61cf15b983f6a03ed62fc8cf96e09042dfc21ebde28d380b44c9e"
+=== 2026-10-13T02:14:04Z the files: exit 0
+=== 2026-10-13T02:14:04Z playwright 1.56.0
+added 2 packages in 2s
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+=== 2026-10-13T02:15:01Z playwright 1.56.0: exit 0
+=== 2026-10-13T02:15:01Z time
+{"round":1,"model":"bioclip-b16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":504.1,"median_ms":587.4,"p90_ms":590.8,"min_ms":584.3,"mean_ms":588.5,"warm_ms":[679.6,596.5]}
+{"round":1,"model":"bioclip-b16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":548.9,"median_ms":306.1,"p90_ms":324.8,"min_ms":301.7,"mean_ms":313.4,"warm_ms":[529.9,581.2]}
+{"round":1,"model":"tinyclip-39m-16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":172.3,"median_ms":296.2,"p90_ms":297.6,"min_ms":295,"mean_ms":296.4,"warm_ms":[298.4,295.9]}
+{"round":1,"model":"tinyclip-39m-16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":423.8,"median_ms":156.6,"p90_ms":160.2,"min_ms":150.7,"mean_ms":155.7,"warm_ms":[294.7,161.8]}
+{"round":2,"model":"bioclip-b16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":286.7,"median_ms":587.8,"p90_ms":593.7,"min_ms":583.5,"mean_ms":589.7,"warm_ms":[624.7,599.4]}
+{"round":2,"model":"bioclip-b16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":534.6,"median_ms":306.4,"p90_ms":319.6,"min_ms":302.3,"mean_ms":313,"warm_ms":[489.7,543.2]}
+{"round":2,"model":"tinyclip-39m-16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":176.7,"median_ms":296.4,"p90_ms":300.6,"min_ms":294.9,"mean_ms":298.1,"warm_ms":[299.2,296.1]}
+{"round":2,"model":"tinyclip-39m-16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":435,"median_ms":152.1,"p90_ms":159.1,"min_ms":149.7,"mean_ms":153.6,"warm_ms":[311.2,162.7]}
+{"round":3,"model":"bioclip-b16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":276.4,"median_ms":586,"p90_ms":586.9,"min_ms":582,"mean_ms":585.8,"warm_ms":[616.1,599.2]}
+{"round":3,"model":"bioclip-b16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":534.3,"median_ms":303.3,"p90_ms":319.2,"min_ms":299.9,"mean_ms":312.6,"warm_ms":[487.5,556.2]}
+{"round":3,"model":"tinyclip-39m-16","threads_asked":1,"threads":1,"isolated":true,"input":"pixel_values","width":512,"session_ms":181.7,"median_ms":296.5,"p90_ms":298,"min_ms":295.4,"mean_ms":297.6,"warm_ms":[300.8,296.2]}
+{"round":3,"model":"tinyclip-39m-16","threads_asked":4,"threads":4,"isolated":true,"input":"pixel_values","width":512,"session_ms":435.4,"median_ms":152.7,"p90_ms":164.6,"min_ms":150.8,"mean_ms":158.8,"warm_ms":[280.7,165.2]}
+# Encoder speed in headless Chromium
+
+Made by `tools/world/speed.mjs`: session.run wall time per photo, batch 1, 224 x 224, onnxruntime-web 1.30.0 (vendor/ort, the WASM build the page loads); Chromium 141.0.7390.37, headless; 4 cores (AMD EPYC 9V74 80-Core Processor), 15.6 GB; the page cross-origin isolated: true. 30 timed photos a measurement after 2 to warm up, 3 rounds taking turns. The input is a fixed made-up picture: the encoders do the same work whatever the picture shows.
+
+| Model file | bytes | threads | median ms a photo | 90th percentile | medians of the rounds | session made in ms |
+|---|---:|---:|---:|---:|---|---|
+| bioclip-b16 | 89,802,361 | 1 | 586.5 | 590.8 | 587.4, 587.8, 586 | 504.1, 286.7, 276.4 |
+| bioclip-b16 | 89,802,361 | 4 | 305.2 | 320.9 | 306.1, 306.4, 303.3 | 548.9, 534.6, 534.3 |
+| tinyclip-39m-16 | 40,978,137 | 1 | 296.3 | 298.6 | 296.2, 296.4, 296.5 | 172.3, 176.7, 181.7 |
+| tinyclip-39m-16 | 40,978,137 | 4 | 152.7 | 160.7 | 156.6, 152.1, 152.7 | 423.8, 435, 435.4 |
+
+Against TinyCLIP 39M/16 at the same thread count:
+- bioclip-b16, 1 thread(s): 1.98 times as long (586.5 ms against 296.3 ms).
+- bioclip-b16, 4 thread(s): 2.00 times as long (305.2 ms against 152.7 ms).
+=== 2026-10-13T02:17:23Z time: exit 0
