@@ -1,0 +1,62 @@
+{
+ "id": "bioclip25-mobile-fastvit",
+ "source": "crazedcodernate/bioclip-2.5-mobile-fastvit",
+ "source_url": "https://huggingface.co/crazedcodernate/bioclip-2.5-mobile-fastvit",
+ "loader": "onnx",
+ "licence": "MIT (card tag and statement only)",
+ "licence_url": "https://huggingface.co/crazedcodernate/bioclip-2.5-mobile-fastvit/raw/main/README.md",
+ "role": "reference",
+ "params": {
+  "image": 11569068,
+  "text": null,
+  "total": 11569068,
+  "note": "counted from ONNX initializers"
+ },
+ "input": {
+  "size": 224,
+  "mean": null,
+  "std": null,
+  "interpolation": "bicubic (PIL default, as in the card's example)",
+  "resize": "squash"
+ },
+ "preprocess_detail": {
+  "size": 224,
+  "resize": "squash",
+  "interpolation": "bicubic (PIL default, as in the card's example)",
+  "mean": null,
+  "std": null,
+  "range": "0..1; ImageNet normalization folded into the graph",
+  "output": "L2-normalized, 1024-d, in BioCLIP 2.5's space",
+  "input_name": "image"
+ },
+ "software": {
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "torch": "2.8.0+cpu",
+  "open_clip": "3.3.0",
+  "transformers": "4.57.6",
+  "timm": "1.0.30",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "PIL": "12.3.0"
+ },
+ "images": {
+  "world-fit": {
+   "shards": 8,
+   "shard_3": {
+    "rows": 12315,
+    "embedded": 12315,
+    "skipped": 0,
+    "seconds": 154.3,
+    "shard_mode": "mod",
+    "row_limit": null,
+    "photos_per_second": 79.83,
+    "machine_cpus": 4
+   },
+   "via": "onnxruntime CPU, the model's own ONNX file"
+  }
+ },
+ "stages": [
+  "images"
+ ]
+}
