@@ -38,7 +38,7 @@ squash = EX.squash
 MAX_RECORDS = 400
 PER_TRAIT = 16               # table records a trait
 PER_TRAIT_LOG = 40           # hand-log records a trait: the logs are audited and richer
-MAX_TOKENS = 16000
+MAX_TOKENS = 32000
 TRAIT_ORDER = ["acuity_cpd", "fov_h_deg", "fov_v_deg", "binocular_deg", "lambda_max_nm", "receptor_classes", "pupil_shape",
                "absolute_sensitivity", "cff_hz", "eye_movement"]
 # which table traits stand behind which parameter (a parameter not listed here is checked for a record, not for a trait)

@@ -13,7 +13,7 @@ fi
 if [ -z "${COMPILE_JOBS:-}" ]; then
   echo "COMPILE_JOBS is empty in ci/views/compile.env" | tee out/FAILED.txt >&2; exit 2
 fi
-export COMPILE_MAX_USD="${COMPILE_MAX_USD:-3}" COMPILE_WAIT_MIN="${COMPILE_WAIT_MIN:-200}" COMPILE_MODELS="${COMPILE_MODELS:-claude-haiku-5-5}"
+export COMPILE_MAX_USD="${COMPILE_MAX_USD:-3}" COMPILE_WAIT_MIN="${COMPILE_WAIT_MIN:-200}" COMPILE_MODELS="${COMPILE_MODELS:-claude-haiku-5-5}" COMPILE_ATTEMPTS="${COMPILE_ATTEMPTS:-2}"
 
 git fetch -q --depth 1 origin pub/lit-table || { echo "cannot fetch pub/lit-table" | tee out/FAILED.txt >&2; exit 2; }
 git worktree add -q --detach lit-table FETCH_HEAD
