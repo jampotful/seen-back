@@ -35,7 +35,7 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 - The tuning panel lists the new blocks' parameters.
 
 ## Next
-1. Check results and merge to `main` (see below for where this stopped).
+1. Build 28 merged to `main` at about 14:15 after every check passed (see `docs/LOG.md`). The owner's phone checks are listed in `docs/STATUS.md`. The `try` check fails for the specs track's views on build 27 as on build 28; that track owns it.
 2. Fungus waits on `slow` (module 12), not built. Cat, deer, rabbit, squirrel and insect have no pigment peaks in the logs yet; they get trials once research supplies them. No sheet gives a graded value for any of the fourteen offered views, so none was converted from `?`.
 3. A third floor run for the parameters after `gaze.floor`, and a moving-clip floor.
 4. Module 4's strobe and quarter-resolution ring; module 5's tilt, heading and knock side for `field` and `overlay`.
