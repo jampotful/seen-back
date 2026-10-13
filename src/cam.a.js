@@ -7,105 +7,54 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '25';
+  var BUILD = '27';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
   var HUMAN_CPD = 60;
 
-  // ---------- the eyes
-  // rows: [grade, title, text]. m = measured in this animal, g = measured in a relative or a wider group,
-  // i = a guess, x = left out. Every number is a first entry for a vision scientist to correct.
+  // ---------- the eyes, as data (module 0, docs/ENGINE-DESIGN.md section 3)
+  // Every view is a spec in views/<key>.json, inlined here by build.py, so the page makes no request for them. A spec's numbers are
+  // parameter objects ({ value, grade, invented, src }); viewOf turns a spec into the flat view the engine reads, as EYES held before.
+  // rows: [grade, title, text, sources]. m = measured in this animal, g = measured in a relative or a wider group, i = a guess,
+  // x = left out. Specs with "offered": true are the views the app offers; the rest are reached only with ?try=<key>.
   var I3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
-  var PROTAN = [0.11238, 0.88762, 0, 0.11238, 0.88762, 0, 0.00401, -0.00401, 1];   // Vienot, Brettel & Mollon 1999, from memory
-  var DEUTAN = [0.29275, 0.70725, 0, 0.29275, 0.70725, 0, -0.02234, 0.02234, 1];
-  var BEE = [0, 1, 0, 0, 0, 1, 0, 0, 0];   // their green drawn as red, their blue as green; ultraviolet (invented) goes to blue
-  var EYES = {
-    cat: { chip: 'Cat', who: 'a cat', fov: 200, cpd: 8, topoA: 1, fall: 2.0, pupil: 'v', dof: 26, M: DEUTAN, gain: 1.7, sat: .8,
-      cue: 'Out-of-focus things smear up and down. Tap the screen to move the focus.', rows: [
-      ['m', 'Sharpness', 'Cats see about a fifth to a tenth as much detail as people do. This view is blurred to match.'],
-      ['m', 'Colour', 'Cats have two kinds of colour-sensing cells in their eyes, where people have three. Reds and greens are hard for them to tell apart, so reds look olive or grey to a cat.'],
-      ['m', 'Pupil', 'A cat’s pupil closes to a narrow vertical slit, a shape common in animals that hunt by ambush. A slit like this smears out-of-focus things up and down, and this view does the same.'],
-      ['m', 'Field of view', 'A cat takes in about 200 degrees around itself, and a person about 180. A phone camera sees far less than either, so this view bends the picture at its edges to suggest the wider sweep.'],
-      ['m', 'Dim light', 'Cats can see in light six to eight times dimmer than people need. This view brightens the shadows to show it.'],
-      ['i', 'Depth', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
-      ['i', 'Sharpest spot', 'This view assumes that a cat sees most sharply straight ahead.']] },
-    dog: { chip: 'Dog', who: 'a dog', fov: 240, cpd: 11, topoS: 1, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85,
-      cue: 'The sharpest part is a band along the horizon. Tap the screen to move the focus.', rows: [
-      ['m', 'Sharpness', 'Dogs see about a quarter to a seventh as much detail as people do. This view is blurred to match.'],
-      ['m', 'Sharpest spot', 'Dogs with long noses see most sharply along a band level with the horizon. Dogs with short noses see most sharply in one central spot. This view shows the band.'],
-      ['i', 'Colour', 'Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them.'],
-      ['i', 'Field of view, dim light and depth', 'These parts of the view are guesses. This view treats things lower in the picture as closer.']] },
-    squirrel: { chip: 'Squirrel', who: 'a squirrel', fov: 270, cpd: 6, topoS: 1, fall: 1.0, pupil: 'o', dof: 4, M: PROTAN, rate: .56,
-      cue: 'The picture runs slowly, then jumps ahead to catch up.', rows: [
-      ['g', 'Colour', 'Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three.'],
-      ['g', 'Speed', 'A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up.'],
-      ['i', 'Field of view and sharpness', 'A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess.']] },
-    deer: { chip: 'Deer', who: 'a deer', fov: 310, cpd: 8, topoS: 1, fall: 2.2, pupil: 'h', dof: 22, M: DEUTAN, gain: 1.5, sat: .85,
-      cue: 'You see a wide band of ground. Out-of-focus things smear sideways.', rows: [
-      ['m', 'Colour', 'White-tailed deer have two kinds of colour-sensing cells, where people have three. Reds and oranges look yellow or grey to them.'],
-      ['m', 'Field of view', 'A deer takes in about 310 degrees around itself, almost a full circle. A phone camera sees less than a quarter of that, so this view bends the picture at its edges to suggest it.'],
-      ['g', 'Pupil', 'Grazing animals have pupils shaped like horizontal bars. The shape widens their view along the ground and cuts glare from the sky. It also smears out-of-focus things sideways, and this view does the same.'],
-      ['i', 'Sharpness, dim light and depth', 'These parts of the view are guesses. This view treats things lower in the picture as closer.']] },
-    rabbit: { chip: 'Rabbit', who: 'a rabbit', fov: 350, cpd: 3, topoS: 1, fall: 2.0, pupil: 'o', dof: 6, M: DEUTAN,
-      cue: 'You see almost the whole circle at once, and little of it is sharp.', rows: [
-      ['i', 'The whole view', 'This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells.']] },
-    hawk: { chip: 'Hawk, eagle, falcon', who: 'a hawk', fov: 180, cpd: 60, fovea: 2.2, pupil: 'o', rate: .6,
-      cue: 'The centre is magnified, and the picture runs slowly, then jumps ahead.', rows: [
-      ['g', 'Sharpness', 'Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it.'],
-      ['m', 'Speed', 'A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view runs slowly and then jumps ahead to suggest the difference.'],
-      ['i', 'Field of view', 'This view keeps the field of view your camera gives.']] },
-    wader: { chip: 'Heron, crane, pigeon', who: 'a wading bird', fov: 300, cpd: 25, topoS: .6, fall: .8, pupil: 'o', sheen: .6, hold: 280, thrust: 120,
-      cue: 'Walk. The picture holds still, then lurches forward, the way a heron’s head does.', rows: [
-      ['m', 'Head movement', 'Herons, egrets, cranes, pigeons and chickens hold their heads still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch up with the body. This view does the same while you walk.'],
-      ['g', 'Speed', 'In pigeons, each dart forward takes about a tenth of a second.'],
-      ['g', 'Sharpness', 'Most birds see half as much detail as people do, or less.'],
-      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.'],
-      ['i', 'Field of view', 'Eyes on the sides of the head probably give a wide view. This part of the view is a guess.']] },
-    bird: { chip: 'Other bird', who: 'a bird', fov: 300, cpd: 25, topoA: .5, fall: .6, pupil: 'o', sheen: .8, rate: .5,
-      cue: 'The picture runs slowly, then jumps ahead to catch up.', rows: [
-      ['g', 'Speed', 'Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference.'],
-      ['g', 'Sharpness', 'Most birds see half as much detail as people do, or less.'],
-      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.'],
-      ['i', 'Field of view', 'Eyes on the sides of the head probably give a wide view. This part of the view is a guess.']] },
-    alligator: { chip: 'Alligator', who: 'an alligator', fov: 280, cpd: 9, topoS: 1, fall: 2.6, pupil: 'v', dof: 24, gain: 1.6, sat: .9,
-      cue: 'The sharpest part is a band along the waterline.', rows: [
-      ['g', 'Sharpest spot', 'Crocodiles see most sharply along a band level with the horizon. It lets them scan the waterline without turning their heads.'],
-      ['g', 'Colour', 'Crocodiles have three kinds of colour-sensing cells, as people do, so this view leaves colours as your camera shows them.'],
-      ['g', 'Pupil', 'An alligator’s pupil is a vertical slit. It smears out-of-focus things up and down, and this view does the same.'],
-      ['i', 'Field of view, sharpness, dim light and depth', 'These parts of the view are guesses.']] },
-    reptile: { chip: 'Lizard, snake, turtle', who: 'a reptile', fov: 280, cpd: 15, topoA: 1, fall: 1.2, pupil: 'o', sheen: .6,
-      cue: '', rows: [
-      ['i', 'The whole view', 'This whole view is a guess. It assumes eyes on the sides of the head, one sharp spot straight ahead, and the ability to see ultraviolet light, which appears here as a violet tint.']] },
-    frog: { chip: 'Frog, toad', who: 'a frog or toad', fov: 340, cpd: 4, pupil: 'h', persist: .15, gate: 1,
-      cue: 'Hold still, as a frog does. Only things that move show up.', rows: [
-      ['m', 'Movement', 'A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold your phone as still as a frog holds itself.'],
-      ['g', 'Speed', 'A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail.'],
-      ['i', 'Field of view, sharpness and pupil', 'These parts of the view are guesses.']] },
-    bee: { chip: 'Bee', who: 'a bee', fov: 320, cpd: 1, pupil: 'none', M: BEE, uvBlue: 1, rate: .3,
-      cue: 'Red turns dark, and the picture runs slowly, then jumps ahead.', rows: [
-      ['g', 'Sharpness', 'Most insects see less than a sixtieth as much detail as people do.'],
-      ['m', 'Red', 'Bees have no colour-sensing cells for red, so red flowers and objects look dark to them.'],
-      ['m', 'Speed', 'In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference.'],
-      ['i', 'Ultraviolet', 'Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it.'],
-      ['i', 'How the colours are shown', 'A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue.']] },
-    insect: { chip: 'Butterfly, other insect', who: 'an insect', fov: 320, cpd: 1, pupil: 'none', sheen: .8, rate: .45,
-      cue: 'The view is wide and blurry, and it runs slowly, then jumps ahead.', rows: [
-      ['g', 'Sharpness', 'Most insects see less than a sixtieth as much detail as people do.'],
-      ['g', 'Speed', 'Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference.'],
-      ['i', 'Ultraviolet', 'Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.']] },
-    plant: { chip: 'Plant', who: 'a plant', pupil: 'none', field: 1, noGreen: 1, persist: 2.5,
-      cue: 'There’s no picture here, only how much light there is, what colour it is, and where it comes from.', rows: [
-      ['g', 'No picture', 'A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from.'],
-      ['m', 'Neighbours', 'Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light.'],
-      ['i', 'Green and time', 'This view removes green, because leaves reflect most green light away, and it smooths out anything quick. Both are the app’s own choices.']] },
-    // `other` and `person` are never views (build 22): a creature with no view of its own, and a human, each get a notice and the
-    // identifying screen stays as it is. The entries remain so that encounters kept by older builds still read.
-    other: { chip: null, who: 'this creature', pupil: 'none', field: 1, sat: 0, cue: '', rows: [
-      ['i', 'No view yet', 'Regards doesn’t have the ability to view the world as this creature right now.']] },
-    person: { chip: null, who: 'a human', pupil: 'o', cue: '', rows: [
-      ['m', 'Same eyes', 'That’s a human. You already see the world as one.']] }
-  };
+  var SPECS = /*@SPECS@*/{};
+  var LIGHT = { lum: 0, raw: 0, col: [0, 0, 0], dir: [.5, .5], shock: 0, at: 0, reads: 0, cells: null };   // written by the light module (src/cam.b.js)
+  var FLOOR = /*@FLOOR@*/{};   // docs/views/floor.json: the smallest visible change of each parameter, by view
+  function isParam(x) { return !!x && typeof x === 'object' && !Array.isArray(x) && x.hasOwnProperty('grade') && (x.hasOwnProperty('value') || x.hasOwnProperty('curve')); }
+  function specValue(x, spec, mats, key) {
+    if (typeof x === 'string' && x.charAt(0) === '@') return specValue(spec.params[x.slice(1)], spec, mats, x.slice(1));
+    if (key === 'M' && typeof x === 'string') { var m = mats[x] || (spec.matrices || {})[x]; return m && m.rows && m.rows.length === 3 ? [].concat.apply([], m.rows).slice(0, 9).length === 9 && m.rows.every(function (r) { return r.length === 3; }) ? [].concat.apply([], m.rows) : m.rows.map(function (r) { return r.slice(0, 3); }).reduce(function (a, r) { return a.concat(r); }, []) : I3.slice(); }
+    if (isParam(x)) return x.hasOwnProperty('value') ? specValue(x.value, spec, mats, key) : specCurve(x);
+    if (Array.isArray(x)) return x.map(function (v) { return specValue(v, spec, mats, key); });
+    if (x && typeof x === 'object') { var o = {}, k; for (k in x) o[k] = specValue(x[k], spec, mats, k); return o; }
+    return x;
+  }
+  // A value given against a measured input ({ curve: 'lux', points: [[x, v], ...] }) is interpolated in the logarithm of light, x being
+  // log10 of the light module's relative level (LIGHT.lum, 0 to 1 of the camera's exposure; absolute light needs the exposure time, which
+  // most browsers do not report). Before the first reading it takes the first point. The page recomputes such a view twice a second.
+  function specCurve(p) {
+    var P = p.points || []; if (!P.length) return 0;
+    if (!LIGHT.reads) return P[0][1];
+    var x = Math.log(Math.max(LIGHT.lum, 1e-3)) / Math.LN10, i;
+    if (x <= P[0][0]) return P[0][1];
+    for (i = 1; i < P.length; i++) if (x <= P[i][0]) return P[i - 1][1] + (P[i][1] - P[i - 1][1]) * (x - P[i - 1][0]) / (P[i][0] - P[i - 1][0]);
+    return P[P.length - 1][1];
+  }
+  function viewOf(spec) {
+    var mats = spec.matrices || {}, v = { chip: spec.chip, who: spec.who, cue: spec.cue }, k, g;
+    for (k in spec.params) v[k] = specValue(spec.params[k], spec, mats, k);
+    if (spec.zones) v.zones = specValue(spec.zones, spec, mats, 'zones');
+    if (spec.gaze) v.gaze = specValue(spec.gaze, spec, mats, 'gaze');
+    if (spec.draw) v.draw = spec.draw;
+    if (spec.inputs && spec.inputs.senses) v.senses = specValue(spec.inputs.senses, spec, mats, 'senses');
+    if (spec.by && spec.by.genus) { v.byGenus = {}; for (g in spec.by.genus) v.byGenus[g] = specValue(spec.by.genus[g], spec, mats, g); }
+    v.rows = (spec.rows || []).map(function (r) { return r.slice(0, 3); });
+    return v;
+  }
+  var EYES = {}, TRY = {};
+  Object.keys(SPECS).forEach(function (k) { SPECS[k].hasCurve = JSON.stringify(SPECS[k]).indexOf('"curve"') >= 0; (SPECS[k].offered ? EYES : TRY)[k] = viewOf(SPECS[k]); });
   var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant'];
   // Groups the app can name and cannot yet view the world as (docs/COVERAGE.md, decided by the owner on 12 October 2026).
   // A photo or a typed name in one of them gets the notice that Regards can't view the world as that creature yet, and no
@@ -117,23 +66,92 @@
   function noView(key) { return key === 'other' || (!!GROUPS[key] && !EYES[key]); }
   function noViewOrPerson(key) { return key === 'person' || noView(key); }   // neither becomes a view, and neither is kept as an encounter
 
+  // ---------- views being tried: reached only with ?try=<key> (several with ?try=a,b), offered nowhere else yet. They are the specs
+  // without "offered" (above). A view tried joins EYES for that visit only, so a photo or a typed name in its group then opens it too.
+  var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
+  if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
+  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
+  // The tuning panel and the compare slider (src/cam.tune.js) appear only with ?try=<view>&tune=1. &draw=<option> picks one of the
+  // drawing options a view offers (docs/views/ATLAS.md), the first being the default. cmp is the compare divider's place, 0 when hidden.
+  var TUNE = { on: TRY_KEYS.length > 0 && /[?&]tune=1(?:&|$)/.test(location.search || ''), cmp: 0,
+    draw: ((/[?&]draw=([a-z]+)/.exec(location.search || '') || [0, ''])[1]) };
+
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
-  function paramsOf(m) {
-    m = m || {};
+  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4, cross: 5 };
+  // A zone's size is a fraction of the camera picture's long side (size: [half width, half height]), or degrees of the world (deg: [width,
+  // height]), taking the long side of a phone camera's picture to span CAM_DEG degrees. An assumption: main cameras span about 60 to 70.
+  var CAM_DEG = 64;
+  // A zone states only what differs from its view; everything it leaves out is the view's own value (docs/ENGINE.md).
+  function zoneOf(z, P) {
+    var at = z.at || [.5, .5], size = z.deg ? [z.deg[0] / 2 / CAM_DEG, z.deg[1] / 2 / CAM_DEG] : z.size || [.5, .5];
+    var tilt = z.tilt || [0, 0];
+    return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? +z.gaze || 1 : 0, frac: z.frac || null, tiltU: tilt[0] * Math.PI / 180, tiltD: tilt[1] * Math.PI / 180, gap: (z.gap || 0) / CAM_DEG, tip: z.tip === undefined ? 1 : z.tip,
+      inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
+      rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
+      uv: z.uv === undefined ? P.uvBlue : z.uv, uvR: z.uvR === undefined ? P.uvR : z.uvR, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
+  }
+  var ZNUM = ['inv', 'sat', 'gain', 'gate', 'glow', 'living', 'uv', 'uvR', 'sheen', 'mag'];
+  function neutralZone(z, P) {                     // the same place and shape, drawn as the other view would draw it there
+    var o = {}, k; for (k in z) o[k] = z[k];
+    o.inv = P.inv; o.M = P.M; o.sat = P.sat; o.gain = P.gain; o.gate = P.gate; o.rate = P.rate; o.glow = P.glow; o.living = P.living; o.uv = P.uvBlue; o.uvR = P.uvR; o.sheen = P.sheen; o.mag = 1;
+    return o;
+  }
+  function withGenus(m, named) {                  // a view's settings for one genus, where the view lists any (byGenus)
+    var g = named && typeof named.scientific === 'string' ? named.scientific.trim().split(/\s+/)[0] : '';
+    var v = m && m.byGenus && g && m.byGenus.hasOwnProperty(g) ? m.byGenus[g] : null, o, k;
+    if (!v) return m;
+    o = {}; for (k in m) o[k] = m[k];
+    for (k in v) if (k !== 'zones') o[k] = v[k];
+    if (v.zones && m.zones) o.zones = m.zones.map(function (z) { var w = v.zones[z.id], r = {}, j; if (!w) return z; for (j in z) r[j] = z[j]; for (j in w) r[j] = w[j]; return r; });
+    return o;
+  }
+  function drawOf(d) {
+    var o = {}, c; if (!d) return o;
+    for (c in d) { var names = d[c].map(function (x) { return x.name; }); o[c] = names.indexOf(TUNE.draw) >= 0 ? TUNE.draw : names[0]; }
+    return o;
+  }
+  function paramsOf(m, named) {
+    m = withGenus(m || {}, named);
     var s = clamp(180 / (m.fov || 180), .45, 1);
-    return { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
+    var P = { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
       dof: m.dof || 0, ax: m.pupil === 'v' ? .3 : 1, ay: m.pupil === 'h' ? .3 : 1, M: m.M || I3, uvBlue: m.uvBlue || 0, sheen: m.sheen || 0,
       gain: m.gain || 1, sat: m.sat === undefined ? 1 : m.sat, noGreen: m.noGreen || 0, gate: m.gate || 0, field: m.field || 0,
-      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1 };
+      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1,
+      glow: m.glow || 0, living: m.living || 0, uvR: m.uvR || 0, sal: m.salience ? 1 : 0, ripple: m.ripple || 0, shimmer: m.shimmer || 0,
+      pan: m.sweep ? m.sweep[0] : 0, panS: m.sweep ? m.sweep[1] : 1 };
+    P.glowC = m.glowC || [1, 1, 1];
+    P.zones = m.zones ? m.zones.slice(0, 4).map(function (z) { return zoneOf(z, P); }) : null;
+    // drawing options (&draw=, docs/views/ATLAS.md): each category's first option is the default
+    P.draw = drawOf(m.draw); P.palm = P.draw.colour === 'palm' ? 1 : 0; P.stamps = P.draw.gaze === 'stamps' ? 1 : 0;
+    if (P.draw.surround === 'pond') { P.gate = 1; if (P.zones) P.zones.forEach(function (z) { z.gate = z.gaze ? 0 : 1; }); }   // still things fade out
+    P.gz = m.gaze || null; P.senses = m.senses || null; P.water = m.water || null; P.waterC = m.waterC || null;
+    return P;
   }
   var HUMAN = paramsOf(null);
+  function mixZones(a, b, t) {
+    var za = a.zones || [], zb = b.zones || [], n = Math.max(za.length, zb.length), out = [], i;
+    for (i = 0; i < n; i++) {
+      var A = za[i] || neutralZone(zb[i], a), B = zb[i] || neutralZone(za[i], b), z = {}, k;
+      for (k in B) z[k] = B[k];
+      ZNUM.forEach(function (f) { z[f] = lerp(A[f], B[f], t); });
+      z.M = A.M.map(function (x, j) { return lerp(x, B.M[j], t); });
+      z.rate = t > .5 ? B.rate : A.rate;
+      out.push(z);
+    }
+    return out;
+  }
   function mix(a, b, t) {
     var o = {}, k;
-    for (k in a) if (k !== 'M') o[k] = lerp(a[k], b[k], t);
+    for (k in a) if (typeof a[k] === 'number') o[k] = lerp(a[k], b[k], t);
     o.M = a.M.map(function (x, i) { return lerp(x, b.M[i], t); });
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
+    var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
+    o.glowC = z.glowC; o.gz = z.gz; o.draw = z.draw; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
+    o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
+    o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
     return o;
   }

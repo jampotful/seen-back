@@ -1,6 +1,6 @@
 # Status
 
-The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 08:50 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
+The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 11:00 US Eastern (engine row). Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
 
 ## How the work is paced
 
@@ -12,14 +12,14 @@ The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. 
 
 | Track | Brief | Branch | State | Next |
 |---|---|---|---|---|
-| The app | `docs/HANDOFF.md` | `main` | Build 23 is live: build 22 with the contact form switched on. | A first message sent from a phone; fold in the research corrections the owner approves. |
+| The app | `docs/HANDOFF.md` | `main` | Build 25 is live: build 24 (the full database for the world) with four small copy and style changes (`docs/LOG.md`, 13 October). | A first message sent from a phone; fold in the research corrections the owner approves. |
 | Research: birds | `docs/views/research/BRIEF.md` | `research/birds` | Done (`77aac6c`): 218 records, 30 papers wanted. Proposes `owl` and `duck` views and corrects `hawk`. | The owner's decisions; an audit. |
 | Research: cats, dogs and people | same | `research/cat-dog` | Done (`3b18838`): 178 records (about 50 for people), 23 papers wanted. Proposes `bigcat` and `fox` views, and a person's field of 200 degrees in place of 180. | The owner's decisions; an audit. |
 | Research: snails, worms, scorpions, ticks | same | `research/ground-invertebrates` | Done (`9c75995`): 197 records, 22 papers wanted. Proposes seven views, with new groups for millipedes, centipedes and harvestmen. | The owner's decisions; an audit. |
 | Research: the other eleven units | same | `research/<unit>` | `jumper` done and merged to `main` (13 Oct). Ten more units hold logs on `research/<unit>` from 12 Oct, 21:00 to 23:12: methods 1,159, insect 523, spider 320, sea-invertebrates 307, bee 267, herps 220, mammal-groups 209, plant-fungus-slime 202, fish-shark 187, squirrel-deer-rabbit 171. None audited. | The batch audit of all fourteen units once the API key exists (queue 6). |
-| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | The design is merged to `main`: `docs/views/ATLAS.md` (25 mechanisms) and `docs/ENGINE-DESIGN.md` (modules 0 to 13). `agent/engine` holds six earlier commits not on `main` (prototypes behind `?try=reef`, `shark`, `spider`). | Burst 2 (queue 4 and 4a). Drawing options are switchable with `&draw=` so the owner picks on the phone. |
-| The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | No head passes every mark (`tools/world/RESULTS.md`, 12 Oct 23:08): B/16 finds four times as many groups but loses about 10 points on people, pets and rooms. | Burst 2 takes the next step (queue 11). |
-| The full database for the world | `docs/tracks/worlddb.md` | `agent/world-db` | Built (12 Oct 23:08): world rows, place files at 2 degrees, the encounter rule, the world test, the page reading the world manifest. | Burst 2 ships it to `main` if every check passes (queue 11). |
+| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | Build 26 merged to `main` (13 Oct, burst 2): views are data (`views/<key>.json`, checked by `tools/views/check_spec.py`); today's fourteen views identical to build 23. Behind `?try=`: `jumper` (graded from its table), reef, shark, spider, and the specs track's fish, fungus, sealife, slime, snail. `&tune=1` gives the tuning panel and compare slider; `&draw=` switches the jumper's drawing options. The visibility floor runs on a build machine (`run/engines/linux-floor*`). Progress note: `docs/views/progress/engine.md`. | The owner judges `?try=jumper&tune=1` and each `&draw=` option on a phone; the design's four phone checks; grade the fourteen converted views (`?` today); modules `spectrum` (pigment matrices) and the rest of `light`. |
+| The pocket model's group head | `docs/tracks/head.md` | `agent/head-next`, `agent/head-ship` | `merge-county` on TinyCLIP passes every mark on the test photos (primate, whale and bat named; Alachua −0.80 points, interval to −1.42; `docs/tracks/head.md`). `agent/head-ship` (`251f719`, build 25) holds the slot and the page's second bias; not on `main`. | The app's thread merges `agent/head-ship` after `agent/world-db`. |
+| The full database for the world | `docs/tracks/worlddb.md` | `agent/world-db` | Shipped to `main` as build 24 (13 Oct): 427,163 world rows, 2-degree place files, the encounter rule and the world test. 674,978,799 bytes in all, downloaded only with consent. The world test: 63.8% right with no prior, 76.1% with the time zone, 77.1% with three creatures met, 78.8% with the true 400 km circle. | Waiting on the owner's phone test of the download. |
 
 ## Burst 1 (launched 13 October 00:39, finished 00:53)
 

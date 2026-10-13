@@ -123,7 +123,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .bigbox { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
 .bigbox .fine2 { margin: 0 0 10px; font-size: calc(var(--h3-size) * .84); color: var(--dim); }
 #fittedOn { cursor: default; }
-.sheet h3 { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--h2-font); text-transform: var(--h2-case); letter-spacing: var(--h2-track); margin: 0; }
+.sheet h3 { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--serif); text-transform: var(--h2-case); letter-spacing: var(--h2-track); margin: 0; }
 .sheet .sub { margin: -8px 0 0; color: var(--dim); font-size: calc(var(--h3-size) * .9); }
 .sheet .sub:empty { display: none; }
 .rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
@@ -162,7 +162,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .met li.gone { grid-template-columns: 48px minmax(0, 1fr) auto; }
 .met .th { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: rgba(255, 255, 255, .08); display: block; }
 .met .nm { font: var(--h2-style) var(--h2-weight) var(--h2-size)/var(--h2-lead) var(--h2-font); text-transform: var(--h2-case); letter-spacing: var(--h2-track); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.met .sm { display: block; font-size: calc(var(--h3-size) * .78); line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
+.met span.sm { display: block; font-size: calc(var(--h3-size) * .78); line-height: 1.35; color: var(--faint); overflow-wrap: anywhere; }   /* wraps: who recognized it must not be cut off */
+.met .ico.sm { color: var(--faint); }   /* the look button carries the class sm too; the sub-line rule above once caught it and put it out of centre */
 .met .x { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--faint); font-size: 22px; line-height: 1; }
 .met li.ask { grid-template-columns: minmax(0, 1fr) auto auto; min-height: 48px; }
 .met li.ask .q { font-size: calc(var(--h3-size) * .94); color: var(--dim); }
@@ -313,7 +314,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   <section class="sheet" id="aboutSheet" hidden aria-label="About">
     <header><h3>About</h3><button class="ico" id="aboutClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
     <div id="about">
-      <p class="aboutLead" id="aboutApp"><em>Regards</em> lets you view the world, for one week, through the eyes of a species you photograph. <b>How many species can you encounter?</b></p>
+      <p class="aboutLead" id="aboutApp"><em>Regards</em> lets you view the world, for one week, through the eyes of a species you photograph. How many species can you encounter?</p>
       <p class="aboutLead" id="aboutBy">This app is made by <a href="https://www.conradcheung.com" target="_blank" rel="noopener">Conrad Cheung</a>, an artist, writer, and Assistant Professor of 3D + Extended Media at the University of Florida.</p>
       <p class="aboutLead" id="aboutTell">Is something wrong or missing? <a href="https://github.com/jampotful/seen-back/issues" target="_blank" rel="noopener" id="aboutTellLink">Let us know</a>.</p>
       <p class="fine2" id="fittedOn"></p>

@@ -1,0 +1,472 @@
+{
+  "key": "jumper",
+  "version": 1,
+  "offered": false,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "cue": "Things that move glow. The sharp cross jumps to them, looks them over, and then leaves that place alone for a few seconds.",
+  "params": {
+    "fov": {
+      "value": 350,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1a whole animal","log L41, L87"],
+      "range": [180,360],
+      "note": "the side eyes cover about 360 degrees; 350 is where the squeeze stops"
+    },
+    "cpd": {
+      "value": 0.5,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1a PLE sharpness","log L37, L193"],
+      "range": [0.1,4],
+      "note": "rear side eyes, Land 1969"
+    },
+    "pupil": "o",
+    "M": "SIDE_GREEN",
+    "glow": {
+      "value": 0.9,
+      "grade": "i",
+      "invented": true,
+      "src": ["drafts/jumper.md 1a ALE and PLE","log L56 (Land 1971: the side eyes answer only to movement)"],
+      "range": [0,2],
+      "note": "how brightly movement glows is the app's choice"
+    },
+    "living": {
+      "value": 0,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [0,3],
+      "note": "no extra weight for living movement outside the front side eyes"
+    },
+    "glowC": {"value":[0.78,1,0.62],"grade":"i","invented":true,"src":[],"range":[0,1],"note":"the glow's colour"},
+    "salience": 1
+  },
+  "zones": [
+    {
+      "id": "front",
+      "shape": "ellipse",
+      "deg": {
+        "value": [114,98],
+        "grade": "g",
+        "invented": false,
+        "src": ["drafts/jumper.md 1a ALE field","log L100, L116, L115, L5"],
+        "range": [40,180],
+        "note": "both front side eyes, Phidippus audax"
+      },
+      "soft": {"value":0.2,"grade":"i","invented":true,"src":[],"range":[0,0.5]},
+      "cpd": {
+        "value": 1.1,
+        "grade": "m",
+        "invented": false,
+        "src": ["drafts/jumper.md 1a ALE sharpness","log L114, L36, L193"],
+        "range": [0.2,4],
+        "note": "Phidippus"
+      },
+      "living": {
+        "value": 1.6,
+        "grade": "i",
+        "invented": true,
+        "src": ["drafts/jumper.md 1b looming and living motion","log L113, L196, L1, L145, L147"],
+        "range": [0,4],
+        "note": "the preference is measured; its weight is the app's"
+      }
+    },
+    {
+      "id": "gaze",
+      "shape": "cross",
+      "deg": {
+        "value": [2.5,21],
+        "grade": "m",
+        "invented": true,
+        "src": ["drafts/jumper.md 1b width and height","log L38, L39"],
+        "range": [0.5,40],
+        "note": "2 by 21 degrees measured; drawn 2.5 wide for the screen"
+      },
+      "tilt": {
+        "value": [21,8.5],
+        "grade": "m",
+        "invented": false,
+        "src": ["drafts/jumper.md 1a AME overlap","log L57, L58","Land 1969"],
+        "range": [0,45],
+        "note": "the cross's arms"
+      },
+      "gap": {"value":0.75,"grade":"m","invented":false,"src":["drafts/jumper.md 1a AME overlap","log L57, L58"],"range":[0,5]},
+      "tip": {
+        "value": 0.45,
+        "grade": "g",
+        "invented": true,
+        "src": ["drafts/jumper.md 1a AME sharpness (the edge is coarser)","Williams and McIntyre 1980"],
+        "range": [0,1]
+      },
+      "soft": {"value":0.01,"grade":"i","invented":true,"src":[],"range":[0,0.1]},
+      "cpd": {
+        "value": 3.6,
+        "grade": "m",
+        "invented": false,
+        "src": ["drafts/jumper.md 1a AME sharpness","Land 1969; Harland and colleagues 2012"],
+        "range": [0.5,15],
+        "note": "Phidippus 3.3 to 3.8"
+      },
+      "M": "UV_GREEN",
+      "uv": {
+        "value": 1,
+        "grade": "i",
+        "invented": true,
+        "src": ["drafts/jumper.md 1a AME colour as drawn","log L255, L256, L197"],
+        "range": [0,2],
+        "note": "a phone records almost no ultraviolet; the guess is the app's"
+      },
+      "uvR": {"value":0.5,"grade":"i","invented":true,"src":["drafts/jumper.md 1a AME colour as drawn"],"range":[0,1]},
+      "glow": {"value":0,"grade":"i","invented":true,"src":[],"range":[0,2],"note":"no glow inside the strip"},
+      "living": {"value":0,"grade":"i","invented":true,"src":[],"range":[0,4]},
+      "mag": {
+        "value": 1.25,
+        "grade": "m",
+        "invented": true,
+        "src": ["drafts/jumper.md 1d magnification","log L26, L73"],
+        "range": [1,2],
+        "note": "1.25 in Plexippus; using it as screen magnification is invented"
+      },
+      "gaze": 1
+    },
+    {
+      "id": "fovea",
+      "shape": "ellipse",
+      "deg": {
+        "value": [5,4],
+        "grade": "i",
+        "invented": true,
+        "src": ["drafts/jumper.md 1a Habronattus colour classes"],
+        "range": [1,20],
+        "note": "the red-filtered patch's size is invented"
+      },
+      "soft": {"value":0.01,"grade":"i","invented":true,"src":[],"range":[0,0.1]},
+      "cpd": {"value":3.6,"grade":"m","invented":false,"src":["drafts/jumper.md 1a AME sharpness"],"range":[0.5,15]},
+      "M": "UV_GREEN",
+      "uv": {"value":1,"grade":"i","invented":true,"src":["drafts/jumper.md 1a AME colour as drawn"],"range":[0,2]},
+      "uvR": {"value":0.5,"grade":"i","invented":true,"src":["drafts/jumper.md 1a AME colour as drawn"],"range":[0,1]},
+      "glow": {"value":0,"grade":"i","invented":true,"src":[],"range":[0,2]},
+      "living": {"value":0,"grade":"i","invented":true,"src":[],"range":[0,4]},
+      "mag": {
+        "value": 1.25,
+        "grade": "m",
+        "invented": true,
+        "src": ["drafts/jumper.md 1d magnification","log L26, L73"],
+        "range": [1,2]
+      },
+      "gaze": 1
+    }
+  ],
+  "gaze": {
+    "saccade": {
+      "value": [40,4],
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1b jump speed","log L49"],
+      "range": [0,200],
+      "note": "40 ms plus 4 ms a degree; faster than the measured 150 degrees a second floor"
+    },
+    "sweep": {
+      "value": [2,1.2],
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1c scanning sweeps","log L50","Land 1969"],
+      "range": [0,10],
+      "note": "2 degrees, 1.2 s"
+    },
+    "twist": {
+      "value": [25,2000,3500],
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1c scanning rotation","Land 1969"],
+      "range": [0,8000],
+      "note": "25 degrees, 2 s to turn, 3.5 s at each end"
+    },
+    "examine": {
+      "value": [4000,12000],
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1c scanning bout","log L52"],
+      "range": [500,60000],
+      "note": "5 to 94 s measured; shortened to 4 to 12 s for the screen"
+    },
+    "hold": {
+      "value": 1500,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1c dwell after a jump","log L55"],
+      "range": [0,5000],
+      "note": "1 to 2 s"
+    },
+    "back": {
+      "value": 0.8,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1c dwell after a jump","log L55"],
+      "range": [0,5],
+      "note": "a 10 degree return in 10 to 15 s"
+    },
+    "pursuit": {
+      "value": 10,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1b smoothly following","log L54, L111"],
+      "range": [0,40]
+    },
+    "ior": {
+      "value": 5000,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1c time a place is ignored","log L7, L190","Ferrante and colleagues 2024"],
+      "range": [0,15000],
+      "note": "about 5 s"
+    },
+    "iorDeg": {"value":6,"grade":"i","invented":true,"src":[],"range":[1,30],"note":"the size of the ignored place"},
+    "habit": {
+      "value": 0.75,
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1c habituation at one place","Land 1971"],
+      "range": [0,1],
+      "note": "the fact is measured; 0.75 is the app's"
+    },
+    "surround": {
+      "value": 0.6,
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1b what starts a jump","Zurek and colleagues 2010"],
+      "range": [0,1],
+      "note": "gratings start nothing; the weight is the app's"
+    },
+    "any": {"value":0.6,"grade":"i","invented":true,"src":[],"range":[0,2],"note":"the pull of any movement"},
+    "living": {
+      "value": 1.8,
+      "grade": "i",
+      "invented": true,
+      "src": ["drafts/jumper.md 1b looming and living motion"],
+      "range": [0,4],
+      "note": "the pull of living movement"
+    },
+    "distract": {
+      "value": 1.5,
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1c fewer gaze shifts while examining","log L184, L195, L196","Bruce and colleagues 2021"],
+      "range": [1,4],
+      "note": "the rise is invented"
+    },
+    "wander": {
+      "value": [8000,20000],
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1c idle sweeps","log L53"],
+      "range": [1000,60000],
+      "note": "spacing kept within the camera's picture"
+    },
+    "floor": {
+      "value": 0.06,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [0,0.5],
+      "note": "the faintest movement that calls the gaze"
+    },
+    "trackDeg": {
+      "value": 9,
+      "grade": "m",
+      "invented": false,
+      "src": ["drafts/jumper.md 1b best speed","log L96"],
+      "range": [1,81],
+      "note": "strongest at 9 degrees a second"
+    },
+    "sleep": {
+      "after": {"value":3500,"grade":"i","invented":true,"src":[],"range":[500,20000]},
+      "bout": {
+        "value": [6000,12000],
+        "grade": "m",
+        "invented": true,
+        "src": ["drafts/jumper.md 1d sleep-like retinal bouts","Roessler and colleagues 2022"],
+        "range": [1000,120000],
+        "note": "a median 77 s measured; shortened for the screen"
+      },
+      "gap": {
+        "value": [20000,40000],
+        "grade": "m",
+        "invented": true,
+        "src": ["drafts/jumper.md 1d sleep-like retinal bouts","Roessler and colleagues 2022"],
+        "range": [5000,1200000],
+        "note": "a median 17 min measured; shortened for the screen"
+      }
+    }
+  },
+  "inputs": {"senses":{"motion":1}},
+  "by": {
+    "genus": {
+      "Habronattus": {"zones":{"fovea":{"M":"UV_GREEN_RED","uvR":{"value":0,"grade":"i","invented":true,"src":[],"range":[0,1]}}}},
+      "Portia": {
+        "zones": {
+          "gaze": {
+            "cpd": {
+              "value": 12.5,
+              "grade": "m",
+              "invented": false,
+              "src": ["drafts/jumper.md 1a AME sharpness","Williams and McIntyre 1980"],
+              "range": [0.5,15],
+              "note": "Portia fimbriata 12.4"
+            },
+            "deg": {"value":[1.5,21],"grade":"i","invented":true,"src":[],"range":[0.5,40]}
+          },
+          "fovea": {
+            "cpd": {
+              "value": 12.5,
+              "grade": "m",
+              "invented": false,
+              "src": ["drafts/jumper.md 1a AME sharpness","Williams and McIntyre 1980"],
+              "range": [0.5,15]
+            }
+          }
+        }
+      }
+    }
+  },
+  "matrices": {
+    "SIDE_GREEN": {
+      "rows": [
+        [0.007270875763747455,0.31307535641547857,0.09965376782077394],
+        [0.013503054989816701,0.5814256619144603,0.18507128309572304],
+        [0.007963340122199594,0.34289205702647657,0.10914460285132384]
+      ],
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1a ALE and PLE colour classes","log L30, L78, L161"],
+      "note": "one green class, measured; the tint is the app's"
+    },
+    "UV_GREEN": {
+      "rows": [
+        [0.008655804480651732,0.3727087576374745,0.11863543788187374],
+        [0.017311608961303463,0.745417515274949,0.23727087576374747],
+        [0,0,0]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": ["drafts/jumper.md 1a AME colour as drawn","research/methods receptor fits"],
+      "note": "two classes near 370 and 532 nm (Phidippus); the display mapping is the app's"
+    },
+    "UV_GREEN_RED": {
+      "rows": [
+        [0.5601617795753286,0.17290192113245703,0.26693629929221435],
+        [0.017311608961303463,0.745417515274949,0.23727087576374747],
+        [0,0,0]
+      ],
+      "grade": "m",
+      "invented": true,
+      "src": ["drafts/jumper.md 1a Habronattus colour classes","log L104 to L108, L126, L155"],
+      "note": "three classes at the centre; the display mapping is the app's"
+    }
+  },
+  "rows": [
+    [
+      "m",
+      "Eight eyes, one picture",
+      "Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely. This view draws all eight as one picture."
+    ],
+    [
+      "m",
+      "The side eyes",
+      "The six side eyes see in green only, and with little detail: under a hundredth of yours at the back and about a fiftieth in front. They answer only to movement, so here the surround is a dim green and whatever moves in it glows."
+    ],
+    [
+      "m",
+      "Living things stand out",
+      "The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves. In front, this view makes living movement glow brighter."
+    ],
+    [
+      "m",
+      "The front eyes",
+      "Each large front eye sees a narrow upright strip about 2 degrees wide and 21 high, bent in the middle, and the two strips cross like an X. In Phidippus they see about a sixteenth of the detail you do, and in Portia about a fifth."
+    ],
+    [
+      "m",
+      "Jumps and scans",
+      "The front eyes jump to a new target in about a tenth of a second and follow it if it moves. While they look, they sweep side to side across it and slowly twist back and forth, and this view does the same."
+    ],
+    [
+      "m",
+      "Looking away on purpose",
+      "Once the front eyes lock on, the side eyes ignore that spot and watch elsewhere, and their interest in it returns over about five seconds. Here the glow fades from a place just looked at and comes back as slowly."
+    ],
+    [
+      "m",
+      "Colour",
+      "Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this view adds red there when it knows the genus."
+    ],
+    [
+      "m",
+      "Sleep",
+      "At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. When the phone lies still in the dark, this view twitches its cross in bouts, closer together than a spider’s."
+    ],
+    [
+      "i",
+      "How the picture is drawn",
+      "No one knows how a jumping spider joins what its eyes report. Drawing the front eyes’ cross inside the side eyes’ surround, as one picture, is the app’s own choice."
+    ],
+    [
+      "i",
+      "Living movement",
+      "This view treats movement that holds together over a small patch and swings back and forth, as walking legs do, as the movement of something alive. That test is the app’s own approximation."
+    ],
+    [
+      "i",
+      "How the colours are shown",
+      "A phone camera records almost no ultraviolet light, so the ultraviolet in this view is a guess made from bluish and bright surfaces. Inside the cross the spider’s green shows as green and the guessed ultraviolet as blue, with red for their mix."
+    ],
+    [
+      "x",
+      "Hearing",
+      "A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out."
+    ]
+  ],
+  "modules": ["zones","light","salience","gaze"],
+  "falls_back_to": "spider",
+  "applies_to": {"family":["Salticidae"]},
+  "draw": {
+    "gaze": [
+      {
+        "name": "stamps",
+        "invented": true,
+        "note": "the hunting strip; each past fixation stays as a sharp thumbnail where it was taken and fades over gaze.ior"
+      },
+      {"name":"strip","invented":true,"note":"the hunting strip alone"},
+      {"name":"face","invented":true,"note":"the front camera, so the person is the one looked at"}
+    ],
+    "sharpness": [
+      {
+        "name": "paint",
+        "invented": true,
+        "note": "while a thumb is held on the picture the strip follows it; when it lifts the movement map leads again"
+      }
+    ],
+    "colour": [
+      {
+        "name": "two",
+        "invented": true,
+        "note": "the strip carries the principal eyes' two classes and the surround the side eyes' one; the classes are measured, the display mapping is the app's"
+      },
+      {
+        "name": "palm",
+        "invented": true,
+        "note": "adds the guessed ultraviolet under the strip felt in the hand: vibration where the browser allows it (Android), a fine moving grain otherwise (iOS)"
+      }
+    ],
+    "surround": [
+      {"name":"glow","invented":true,"note":"the coarse green picture with movement glowing faintly"},
+      {
+        "name": "pond",
+        "invented": true,
+        "note": "still things fade out of the surround, and only movement and the strip remain"
+      }
+    ]
+  }
+}

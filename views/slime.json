@@ -1,0 +1,133 @@
+{
+  "key": "slime",
+  "chip": "Slime mould",
+  "who": "a slime mould",
+  "falls_back_to": "plant",
+  "applies_to": {
+    "phylum": [
+      "Mycetozoa"
+    ]
+  },
+  "cue": "There is no picture here, only how much light, what colour, and from where.",
+  "modules": [
+    "slow"
+  ],
+  "params": {
+    "field": {
+      "value": 1,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/fungus.md#2 slime No picture: Nakagaki 2000; Hato 1976"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null
+    },
+    "pupil": {
+      "value": "none",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null
+    },
+    "noGreen": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "red and blue both steer it (Hato 1976); green was untested"
+    },
+    "persist": {
+      "value": 6,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        30
+      ],
+      "floor": null,
+      "note": "seconds; its body pulses every 1 to 2 minutes (Kuroda 2015)"
+    }
+  },
+  "notes": [
+    {
+      "need": "field",
+      "why": "A well-fed plasmodium moves away from light and a starved one toward it. The whole field could lean away from or toward the brightest region. Not drawn."
+    }
+  ],
+  "rows": [
+    [
+      "g",
+      "No picture",
+      "A slime mould is one huge cell, from a kingdom apart from the fungi. It has no eye, and it reads how much light falls on it and of what colour.",
+      [
+        "Nakagaki 2000",
+        "Hato 1976",
+        "param:field",
+        "param:pupil"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Physarum polycephalum crawls away from blue light and far-red light, and toward red light.",
+      [
+        "Hato 1976"
+      ]
+    ],
+    [
+      "m",
+      "Hunger",
+      "Well fed, it moves away from light. Short of food, it moves toward light, and after several days without food, light turns it into spore heads.",
+      [
+        "Leitner 2002",
+        "Masui 2025"
+      ]
+    ],
+    [
+      "x",
+      "Food",
+      "It stretches tubes between pieces of food and finds the shortest route between them through a maze. The picture has no sense of food.",
+      [
+        "Nakagaki 2000"
+      ]
+    ],
+    [
+      "m",
+      "Pace",
+      "Its body swells and thins every one to two minutes, and its speed rises and falls over about 20 minutes. Your eyes follow flicker to about 60 a second.",
+      [
+        "Kuroda 2015",
+        "Inger 2014"
+      ]
+    ],
+    [
+      "i",
+      "Colour and time",
+      "Green is removed and changes are averaged over about 6 seconds. Both choices are the app's own.",
+      [
+        "param:noGreen",
+        "param:persist"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "matrices": {},
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}
