@@ -25,3 +25,4 @@ Started 13 October 2026. Branch `agent/specs`, from `main`.
 - Merged `main` into `agent/specs`; the engine track's shark, spider and checker were kept.
 - `tools/views/make_specs_b.py` writes crab (with woodlouse and horseshoe crab as variants), mammal (raccoon and mole as variants), salamander, worm, bat, flyingfox and tick. Rows come from the sheets' own row lines; the worm rows from the ground-invertebrates draft, section 2.4. All pass the build's checker.
 - Next: render each with `?try=<key>`, merge to `main`, then the jumper review sheet and its PDF.
+- Rendered `?try=` for all seven in headless Chromium (the page's self-test with `&try=`): no GL error and a non-blank picture for each. The worm drew a flat picture at cpd .014 (spread 0), so it takes `field: 1`. The self-test's "zone programs compiled" check fails for every view without zones (fungus, snail and these seven alike); it is the test, not the views.

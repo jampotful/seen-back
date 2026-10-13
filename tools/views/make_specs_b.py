@@ -158,12 +158,13 @@ write("salamander", {"key": "salamander", "chip": "Salamander, newt", "who": "a 
 GI = sys.argv[1] if len(sys.argv) > 1 else "/tmp/gi.md"
 W = "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4"
 worm_rows = check_rows("worm", rows_between(GI, "### 2.4 `worm`", "**The picture.**", {
-    "No eyes": ["cpd"], "Flatworms": ["cpd"], "The picture": ["M", "cpd"]}, W))
+    "No eyes": ["cpd"], "Flatworms": ["cpd"], "The picture": ["M", "cpd", "field"]}, W))
 write("worm", {"key": "worm", "chip": "Worm", "who": "a worm or leech", "falls_back_to": "other",
  "applies_to": {"phylum": ["Annelida", "Platyhelminthes", "Nemertea"]},
  "cue": "Hold still and let a hand pass over the phone. There is no picture, only light, its direction and the shock of a shadow.", "modules": [],
  "params": {
   "cpd": P(.014, "g", True, [W+" cpd: Land and Nilsson 2012 (35 degrees, planarian cup eye); Kirwan 2018 (73 degrees, Schmidtea lugubris)"], [.005, .05], "1 over 2 times 35 gives .014; earthworms have no eyes and the gradient stands for the directional windows in their skin, which is the draft's reading"),
+  "field": P(1, "i", True, [W+" The picture"], [0, 1], "added in burst 3: at the draft's cpd of .014 the blur reaches 1.79 of the picture's long side and the whole picture goes flat (the self-test reads spread 0), so the view takes the coarse light-only drawing the plant and the woodlouse use; it shows where the light is brighter, which is the draft's own description. In the drawing it supersedes cpd"),
   "pupil": P("none", "i", True, [], None, "no eye with a pupil to draw"),
   "M": P("worm_blue", "g", True, [W+" M: Paskin 2014 (planarians flee ultraviolet most); Stowasser 2019 (leech underside)"], None, "blue weighted most because blue is the nearest colour the camera records to ultraviolet; the weights are the app's")},
  "matrices": {"worm_blue": mat([[0, .3, .7], [0, .3, .7], [0, .3, .7]], "g", True, [W+" M"], "weights invented")},
