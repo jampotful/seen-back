@@ -1,0 +1,280 @@
+{
+ "key": "bee",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: a matrix has neither rows nor from_pigments"
+ ],
+ "reply": {
+  "spec": {
+   "key": "bee",
+   "version": 1,
+   "chip": "Bee",
+   "who": "a bee",
+   "cue": "The view is wide and soft, and the colours shift toward ultraviolet.",
+   "applies_to": {
+    "family": [
+     "Apidae",
+     "Halictidae",
+     "Megachilidae",
+     "Andrenidae",
+     "Colletidae"
+    ]
+   },
+   "params": {
+    "M": "BEE",
+    "cpd": {
+     "value": 0.3,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1",
+      "R3",
+      "R11"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "Measured resolving limit of honeybee and bumblebee workers sits near a quarter to a third of a cycle per degree."
+    },
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R21",
+      "R22",
+      "R20"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "Bees see close to 300 degrees horizontally, a figure from earlier work on bees in general."
+    },
+    "fovea": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.1,
+      5
+     ],
+     "note": "no record gives a sharp middle for bees, so the person's scale is kept"
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the ultraviolet channel is shown at full strength; the records give the receptor peak but no drawing rule"
+    },
+    "sat": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "no record gives a colour saturation figure"
+    },
+    "pupil": "none",
+    "gain": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no record gives a brightness gain"
+    },
+    "persist": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      60
+     ],
+     "note": "no record gives a lingering time for bee vision"
+    },
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.25,
+      2
+     ],
+     "note": "the app keeps the person's rate; no record gives a playback rate"
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no record gives a tapetum for bees"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no record says bees lose green"
+    }
+   },
+   "matrices": {
+    "BEE": {
+     "note": "shifts ultraviolet to blue, blue to green, green to red, and drops red, following the convention in the review"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Sharpness",
+     "Bees see far less detail than people do. A honeybee worker resolves about a quarter to a third of a grating cycle per degree, about 1/230 of a person's limit.",
+     [
+      "R1",
+      "R3",
+      "R11"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "g",
+     "Width of view",
+     "Bees see nearly all the way round, about 300 degrees across the horizon, with a small blind patch behind and below.",
+     [
+      "R21",
+      "R17",
+      "R22"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Ultraviolet",
+     "Honeybees and bumblebees have an ultraviolet receptor that peaks near 340 nanometres, so they see ultraviolet light, which people cannot.",
+     [
+      "R29",
+      "R30",
+      "R43",
+      "R44"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "i",
+     "The app's choices",
+     "The sharp middle, the brightness, the colour strength, the lingering picture and the playback speed are the app's own guesses, since no record gives them for bees. The ultraviolet channel is also shown at full strength by the app's choice.",
+     [],
+     [
+      "params.fovea",
+      "params.sat",
+      "params.gain",
+      "params.persist",
+      "params.sheen",
+      "params.noGreen",
+      "params.rate",
+      "params.uvBlue"
+     ]
+    ]
+   ],
+   "modules": [],
+   "inputs": {}
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R1",
+     "R3",
+     "R11"
+    ],
+    "kind": "range_middle",
+    "how": "R1 gives 0.26 cycles per degree for honeybee workers, R3 gives about 0.25 for bumblebees, and R11 gives 0.25 to 0.33 for bees; the app uses 0.3 as a rounded middle of these values."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R21",
+     "R22",
+     "R20"
+    ],
+    "kind": "value",
+    "how": "R21 gives about 300 degrees horizontally for bees from earlier work; R22 gives 270 degrees for the honeybee and R20 gives about 200 degrees for one compound eye, so 300 is taken from R21 as a general figure for bees, not measured in one species."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1, with no evidence of a difference in acuity between horizontal and vertical gratings."
+   },
+   {
+    "record": "R3",
+    "quote": "buff-tailed bumblebees have a resolution threshold of about a quarter of a grating cycle per degree of visual angle."
+   },
+   {
+    "record": "R11",
+    "quote": "They resolve a grating of period 3°-4° in daylight"
+   },
+   {
+    "record": "R21",
+    "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+   },
+   {
+    "record": "R22",
+    "quote": "a very coarse representation of the whole 270° bee eye horizontal field of view"
+   },
+   {
+    "record": "R20",
+    "quote": "collects a composite image of the panorama in radial coordinates over about 200° horizontally"
+   },
+   {
+    "record": "R17",
+    "quote": "Generally, the two compound eyes of bees have large visual fields, with a binocular region frontally and dorsally, and only a small blind region below and behind the animal."
+   },
+   {
+    "record": "R29",
+    "quote": "Apidae Apis mellifera 346 430 540"
+   },
+   {
+    "record": "R30",
+    "quote": "Apidae Apis mellifera 346 445 529"
+   },
+   {
+    "record": "R43",
+    "quote": "Honeybees' and bumblebees' peak wavelength sensitivity of UV photoreceptors lies at approximately 340 nm"
+   },
+   {
+    "record": "R44",
+    "quote": "Honeybees' and bumblebees' peak wavelength sensitivity of UV photoreceptors lies at approximately 340 nm"
+   }
+  ]
+ }
+}
