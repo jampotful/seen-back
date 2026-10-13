@@ -345,6 +345,23 @@ No source.
 1. **The compass arc.** The phone's compass (`DeviceOrientationEvent` with an absolute heading on Android, `webkitCompassHeading` on iOS after a tap for permission) could warm the lower edge of the picture faintly when the phone faces between north and east. The arc would be the app's own invention, grounded in L117, and the `x` row above would become an `i` row saying so. Difficulty: easy to medium. It turns a sense no camera has into a quiet direction in the room, which suits the evidence: the foxes' advantage is in aim.
 2. **The night shift**, as in 2.1, effect 1.
 
+### 2.5 A sketch for the app thread
+
+The fields below follow the tables above; `ax` is a proposed numeric pupil aspect (the width of the blur relative to its height) that `paramsOf` would use in place of the fixed 0.3 for `'v'`. No file outside this unit was changed.
+
+```
+cat:    { chip: 'Cat', who: 'a cat', fov: 200, cpd: 8, topoA: 1, fall: 1.0, pupil: 'v', dof: 26, M: DEUTAN, gain: 1.7, sat: .8,
+          byGenus: { Lynx: { ax: .6 }, Otocolobus: { pupil: 'o' } }, rows: [ /* the twelve rows of 2.1 */ ] },
+bigcat: { chip: 'Lion, tiger, leopard', who: 'a big cat', cpd: 12, topoA: 1, fall: 1.0, pupil: 'o', dof: 14, M: DEUTAN, gain: 1.6, sat: .8,
+          byGenus: { Acinonyx: { cpd: 23, topoS: 1, topoA: .4 } }, rows: [ /* the eight rows of 2.2 */ ] },
+dog:    { chip: 'Dog, coyote, wolf', who: 'a dog', fov: 240, cpd: 9, topoS: 1, topoA: .5, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85, rate: .8,
+          shortNose: { topoS: .2, topoA: 1 }, rows: [ /* the twelve rows of 2.3 */ ] },
+fox:    { chip: 'Fox', who: 'a fox', cpd: 8, topoA: 1, topoS: .4, fall: 1.2, pupil: 'v', dof: 22, M: DEUTAN, gain: 1.6, sat: .8,
+          byGenus: { Urocyon: { ax: .6 } }, rows: [ /* the seven rows of 2.4 */ ] }
+```
+
+In `paramsOf`, `180 / (m.fov || 180)` would become `200 / (m.fov || 200)` if the app adopts the human field of 200 degrees (section 3.3).
+
 ## 3. The existing views checked
 
 ### 3.1 `cat` in `src/cam.a.js`
