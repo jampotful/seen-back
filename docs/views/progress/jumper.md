@@ -8,7 +8,7 @@ Resumed from the branch as it stood (75 commits, 281 log lines, 27 wanted, a 465
 - Wanted list: 28 entries (Morehouse 2020, *Spider vision*, added).
 
 ## Read this burst
-- Literature collection, topics spider-day, spider-general, arachnids-other: searched for flicker, dwell, return-inhibition and receptor figures. Nothing new on those beyond what the log holds; the 2026 flicker-fusion camouflage paper, the 2021 attention paper and the 2019 detour paper were read and add no parameter.
+- Literature collection, topics spider-day, spider-general, arachnids-other: searched for flicker, dwell, return-inhibition and receptor figures. Nothing new on those beyond what the log holds; the 2026 flicker-fusion camouflage paper, the 2021 attention paper and the 2019 detour paper were read and add no parameter. The 40 Hz flicker figure was re-checked in the Tan et al. 2023 text: it reads that salticids can perceive flicker up to 40 Hz, citing Clark and Uetz 1990.
 - Pages on par.nsf.gov, homepages.uc.edu and caltech.edu refused this machine's proxy (policy denial, not retried).
 
 ## Weakest settings
@@ -17,4 +17,4 @@ Flicker fusion (second-hand 40 Hz), dim-light thresholds for the common genera (
 ## Next three
 1. Open Steck et al. 2024 and Clark and Uetz 1990 if the owner can fetch them; each would change a row.
 2. Colour classes for *Anasaitis*, *Platycryptus*, *Colonus*, *Hentzia* (unmeasured).
-3. A free-viewing dwell time for the principal eyes in natural scenes (De Agro et al. 2025 preprint on point-light scanning may carry one).
+3. A free-viewing dwell time for the principal eyes in natural scenes (the 2025 point-light scanning preprint was read for it and gives only relative speeds, no figure).
