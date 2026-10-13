@@ -2,7 +2,7 @@
 
 Started 13 October 2026 at 01:47 UTC (21:47 EDT on 12 October). The evidence log is `docs/views/evidence/fish-shark.jsonl`, cited below as "log N" for its line N, and the wanted list is `docs/views/wanted/fish-shark.jsonl`. This sheet builds on `docs/views/sheets/fish.md` and its audit, and goes further where the two disagree.
 
-**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for the family lookups and facets described in section 1; PubMed Central article pages opened through the same tool late in the session (its search page is barred to robots). Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
+**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for the family lookups and facets described in section 1; PubMed Central article pages opened through the same tool late in the session (its search page is barred to robots) until it refused with HTTP 429 at 02:50 UTC, after which it was not used again. Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
 
 ## 1. Scope
 
@@ -121,8 +121,8 @@ fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, top
    Logs 90, 91 (Parker et al. 2017: 1.29 to 1.71 cycles per degree by behaviour, 3.2 to 4.6 by anatomy); 1.5/60 = 1/40.
 4. `['m', 'Fine detail without blue', 'A damselfish sees fine patterns only through its cells for longer wavelengths, so a pattern that differs only in blue is a blur to it, even though it can tell the blue from the green. This view blurs the blue part of the picture more than the rest.']`
    Log 111 (Siebeck et al. 2014).
-5. `['m', 'Eyes that move apart', 'Wrasses, blennies, pufferfish, triggerfish and seahorses can turn each eye on its own, and each eye has a small sharp centre, called a fovea. One eye can follow a passing fish while the other searches the reef. This view gives each half of the screen its own sharp spot, and the two wander separately.']`
-   Logs 74, 75 (Hofmann and Gebhardt 2023), 169 (a triplefin blenny's highly mobile eyes). These groups hold over 460,000 records (wrasses 176,484, pufferfish and triggerfish 180,531, blennies 54,088, seahorses and pipefish 51,732).
+5. `['m', 'Eyes that move apart', 'Wrasses, blennies, pufferfish, triggerfish, pipefish and seahorses can turn each eye on its own, and each eye has a small sharp centre, called a fovea, while butterflyfish move both eyes together. For a fish that moves its eyes apart, this view gives each half of the screen its own sharp spot, and the two wander separately.']`
+   Logs 74, 75 (Hofmann and Gebhardt 2023), 173 (Fritsches and Marshall 2002: pipefish and sandlance independent, butterflyfish yoked), 169 (a triplefin blenny's highly mobile eyes). These groups hold over 460,000 records (wrasses 176,484, pufferfish and triggerfish 180,531, blennies 54,088, seahorses and pipefish 51,732).
 6. `['m', 'Pace', 'A squirrelfish, a reef fish that hunts at night, follows a flickering light up to 70 flashes a second in bright light, faster than you can, and only about 40 at night. This view runs slightly slow in daylight and then jumps ahead to catch up.']`
    Log 65 (Fogg et al. 2023); log 66 (a cardinalfish, 42 by day).
 7. `['g', 'Looking up', 'Under a calm surface, a fish sees the whole sky squeezed into a bright circle about 97 degrees across, straight overhead. Beyond the circle, the underside of the surface works like a mirror and reflects the water below. When you tilt the phone upward, this view draws the circle.']`
@@ -144,7 +144,7 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 | `topoS` | .4 | Log 144: the area often stretches into a horizontal streak in open-water reef fish, and stays a round area in fish that live among coral (log 143). The weight is `invented`. |
 | `fall` | 1.6 | `invented`. A fovea is a sharper, smaller spot than an area. |
 | `pupil` | 'o' | Log 104. Shape `invented`. |
-| `M` | [.35, 0, 0, 0, 1, 0, 0, 0, 1] | Logs 108, 110: no cone beyond about 530 nm, so reds go dark. The matrix is `invented`. |
+| `M` | [.35, 0, 0, 0, 1, 0, 0, 0, 1] | Logs 108, 110: no cone beyond about 530 nm, so reds go dark; log 172: three temperate reef fish respond from 400 to 610 nm, probably with two cone types. The matrix is `invented`. |
 | `sheen` | 0, and .6 in the `damselfish` setting | Logs 62, 110 for damselfish; log 171 shows ultraviolet is not universal on reefs. The sheen itself is `invented`. |
 | `rate` | .86 | Log 65: 60/70. A fish that is fast by day is slow at night; switching `rate` to 1 after dusk by the phone's clock would follow logs 65 and 66. |
 | `field` (`hagfish`) | 1, `sat` .3 | Logs 54, 55. |
@@ -154,12 +154,13 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: .4, fall: 1.6, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], rate: .86,
   cue: 'Reds fade to grey, the water is blue, and each eye looks its own way.', rows: [ /* above */ ] }
 // setting damselfish (Pomacentridae, 155,557 records): sheen: .6
+// setting independent eyes (Labridae, Blenniidae, Tripterygiidae, Gobiesocidae, Tetraodontiformes, Syngnathiformes): two gaze zones, effect 1
 // setting hagfish (Myxiniformes): field: 1, sat: .3, pupil: 'none', rows: the hagfish row only, with the looking-up and moving-water rows
 ```
 
 ### New effects the evidence calls for
 
-1. **Two eyes, two gazes.** What the person sees: the left and right halves of the screen each carry a small sharp spot that drifts and jumps on its own, each drawn to movement on its side and each avoiding its last target for a while, so the two halves rarely look at the same thing (logs 74, 75). Phone input: the camera, through the engine's planned salience map and gaze controller, run twice with a separate inhibition mask per half. Cost: moderate, since it reuses the jumping spider's gaze machinery. Beauty: a person sees for the first time what it is to watch two places at once. The pattern of the drifting is `invented`; independence itself is measured.
+1. **Two eyes, two gazes (setting `independent eyes`: wrasses, blennies, triplefins, clingfish, pufferfish and triggerfish, pipefish and seahorses).** What the person sees: the left and right halves of the screen each carry a small sharp spot that drifts and jumps on its own, each drawn to movement on its side and each avoiding its last target for a while, so the two halves rarely look at the same thing (logs 74, 75, 173). Butterflyfish and other reef fish with yoked eyes keep a single gaze. Phone input: the camera, through the engine's planned salience map and gaze controller, run twice with a separate inhibition mask per half. Cost: moderate, since it reuses the jumping spider's gaze machinery. Beauty: a person sees for the first time what it is to watch two places at once. The pattern of the drifting is `invented`; independence itself is measured.
 2. **Blue loses its detail.** What the person sees: blue patterns soften while light-and-dark edges stay crisp (log 111). Drawing: blur the blue channel by a wider kernel than red and green, or blur the colour difference while keeping luminance sharp. Cost: one extra blur of one channel; low.
 3. **Red fluorescence at depth.** As the water layer removes red with distance, a few reef fish keep a red glow (logs 133, 134). The app cannot know which fish fluoresce, so this stays a proposal for a later species profile, for fairy wrasses first.
 4. **Day and night.** The phone's clock switches `rate` from .86 by day to 1 at night, following the squirrelfish's slower night vision (log 65), and raises `dof` at night, since reef fish built for the dark have large round pupils and a shallow depth of focus (log 170). Trivial.
@@ -318,6 +319,8 @@ The views proposed here are new, and no `EYES` entry exists for fish, so this se
 - **Shark fields.** The hammerhead paper's full text (log 93, abstract only) gives monocular and total fields.
 - **Ray pupils.** Not opened; the round pupil is invented.
 - **Polarization in fish.** How a vertebrate cone could read polarization is disputed (logs 7, 121); nothing is drawn.
+- **Deep-sea fish** (under 0.1% of records) ride with `reef`. Adults of many see with rods only (log 135), slowly (the escolar about 9 Hz at most, log 174), and lower mesopelagic species resolve more than optics predicts, as suits finding points of bioluminescence (log 160). A `deep` setting (dark, slow, grey, with bright points kept sharp) would follow these lines if such fish are ever photographed often.
+- **Temperate reef flicker.** The values for the spadefish, tautog and black sea bass are in the paper (log 172) and did not open.
 
 ## 9. Closed sources wanted
 
@@ -451,4 +454,4 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 
 ## Status
 
-Revised at about 02:50 UTC on 13 October 2026, with 171 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
+Revised at about 02:50 UTC on 13 October 2026, with 174 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
