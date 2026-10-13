@@ -109,7 +109,12 @@
     'uniform vec2 u_stab;',
     // module 12, slow: the picture turned back toward true vertical (u_spin, radians); module 5, tilt and heading: Snell\'s window
     // (strength, the window\'s centre in screen heights from the middle) and the magnetic options (grain, tide, the grain\'s angle)
-    'uniform float u_spin; uniform vec3 u_snell, u_mag;',   // module 5, motion: the shift that holds the world still against the hand (the locked world, &draw=lock)
+    'uniform float u_spin; uniform vec3 u_snell, u_mag;',
+    // modules 8 to 11 (docs/ENGINE.md): the field (mode 1 wedge, 2 fold, 4 ribbon; its numbers), the ribbon and the age of each of its
+    // 32 sectors, the overlays (polarization, web, sound rings, shadow rings; the sky's numbers; up to eight events: x, y, age, strength
+    // with a shadow below 0), sound (three bands and breath; the flash's age, mode, floor and strength) and the haptic edge pulse
+    'uniform vec4 u_fld, u_fld2; uniform sampler2D u_rib; uniform vec4 u_ribT[8];',
+    'uniform vec4 u_ov, u_ovP; uniform vec4 u_evt[8]; uniform vec4 u_snd, u_hear; uniform float u_pulse;',   // module 5, motion: the shift that holds the world still against the hand (the locked world, &draw=lock)
     'vec3 wheel(vec4 q, float k){ vec4 s = k < 0.5 ? q : k < 1.5 ? q.yzwx : k < 2.5 ? q.zwxy : q.wxyz; return s.zyx; }',   // light lost in water: per channel, and how far the top of the picture is taken to be (GUESSED from height); the water\'s own colour
     'vec2 ripple(vec2 p){',
     '  vec2 s = vec2(0.0);',
@@ -130,6 +135,9 @@
     '#if ZONES',
     '  if (u_ripK > 0.0) p += ripple(p);',
     '  if (u_spin != 0.0) { float cs = cos(u_spin), sn = sin(u_spin); p = mat2(cs, sn, -sn, cs) * p; }',
+    '  if (u_hear.y > 0.5 && u_hear.y < 1.5) { p.x += u_snd.w * 0.014 * sin(p.y * 38.0 + u_time * 9.0) * (0.6 + 0.4 * sin(p.x * 11.0 - u_time * 3.0)); p.y += u_snd.w * 0.006 * sin(p.x * 29.0 - u_time * 7.0); }',   // breath and moving air ruffle the picture (atlas 16, 22; invented)
+    '  if (u_hear.y > 1.5 && u_hear.y < 2.5) { float sh = u_snd.x * u_snd.x * smoothstep(0.3, -0.5, p.y); p += sh * vec2(0.004 * sin(u_time * 41.0), 0.011 * sin(u_time * 57.0)); }',   // the mole\'s rumble shakes the ground first (atlas 15; invented)
+    '  if (u_fld.x > 1.5 && u_fld.x < 2.5 && p.y > u_fld.z) p.y = u_fld.z + (p.y - u_fld.z) * (1.0 + u_fld.y);',   // the sky fold: what lies above the horizon pressed into the top of the screen (invented)
     '#endif',
     '  vec2 pa = p - u_apC;',
     '  float facet = 0.0;',
@@ -229,6 +237,44 @@
     '#endif',
     '  m *= mix(1.0, 0.035 + 1.7 * trail, gateMix);',
     '  m *= 1.0 - 0.35 * u_mosaic * smoothstep(0.35, 0.5, facet);',
+    '#if ZONES',
+    '  if (u_hear.y > 2.5 && u_hear.y < 4.5) {',   // owl hearing and clap and see: the picture stays near dark until a sound lights it (invented)
+    '    float lit = u_hear.y < 3.5 ? u_hear.w * (1.0 - smoothstep(u_hear.x * 1.4, u_hear.x * 1.4 + 0.3, length(p))) : u_hear.w;',
+    '    m *= mix(u_hear.z, 1.0, clamp(lit, 0.0, 1.0));',
+    '  }',
+    '  if (u_fld.x > 0.5 && u_fld.x < 1.5) {',   // the blind wedge: the part of the animal\'s circle it cannot see, fixed in the world as the phone turns
+    '    float dd = abs(mod(u_fld.y + p.x * u_fld2.y - u_fld.z + 540.0, 360.0) - 180.0), bl = 1.0 - smoothstep(u_fld.w, u_fld.w + u_fld2.x, dd);',
+    '    m = mix(m, m * 0.05 + vec3(0.015), bl);',
+    '  }',
+    '  if (u_ov.x > 0.0) {',   // polarization: sky light is most polarized 90 degrees from the sun (Rayleigh), drawn as fine strokes along the e-vector
+    '    float az = u_ovP.x + p.x * u_ovP.w, el = u_ovP.y + p.y * u_ovP.w, hs = u_ovP.z;',
+    '    float cd = sin(el) * sin(hs) + cos(el) * cos(hs) * cos(az), dop = (1.0 - cd * cd) / (1.0 + cd * cd) * smoothstep(-0.05, 0.12, el);',
+    '    vec2 sp = vec2(-u_ovP.x, hs - u_ovP.y) / u_ovP.w - p; vec2 nd = sp / (length(sp) + 1e-5);',
+    '    float stp = 0.5 + 0.5 * sin(dot(gl_FragCoord.xy, nd) * 0.9);',
+    '    m = mix(m, m * (0.5 + 0.5 * stp) + vec3(0.02, 0.04, 0.09) * stp, dop * u_ov.x);',
+    '  }',
+    '  float pluck = 0.0;',
+    '  for (int i = 0; i < 8; i++) {',   // sound circles (strength above 0) and shadow rings (below 0) running out from where each event began
+    '    vec4 E = u_evt[i]; if (E.w == 0.0) continue;',
+    '    float x = length(p - E.xy) - E.z * 0.45, ring = exp(-x * x / 0.0005 - E.z * 1.3);',
+    '    if (E.w > 0.0) m += vec3(0.85, 0.9, 1.0) * ring * E.w * u_ov.z; else m *= 1.0 - ring * min(-E.w, 1.0) * u_ov.w;',
+    '    pluck = max(pluck, abs(E.w) * exp(-E.z * 2.5));',
+    '  }',
+    '  if (u_ov.y > 0.0) {',   // the web: spokes and a spiral drawn on the picture; knocks and sounds displace and brighten it (atlas 15, invented)
+    '    float a = atan(p.y, p.x), rr = length(p), spk = abs(fract(a / 6.2831853 * 14.0 + 0.5) - 0.5) * rr * 0.4488;',
+    '    float rg = abs(fract(rr / 0.045 - a / 6.2831853) - 0.5) * 0.045;',
+    '    float wb = max(1.0 - smoothstep(0.0, 0.0028, spk), (1.0 - smoothstep(0.0, 0.0022, rg)) * step(0.06, rr)) * (1.0 - smoothstep(0.55, 0.7, rr));',
+    '    m = mix(m, vec3(0.93), wb * u_ov.y * (0.3 + 0.7 * pluck));',
+    '  }',
+    '  if (u_pulse > 0.0) { vec2 ev = min(v, 1.0 - v); m += vec3(0.9) * (1.0 - smoothstep(0.0, 0.05, min(ev.x, ev.y))) * u_pulse; }',   // the haptic pulse drawn at the frame\'s edge
+    '  if (u_fld.x > 3.5 && v.y < u_fld.y) {',   // the panorama ribbon: every direction the phone has faced, fading with age, centred on where it faces now
+    '    float ux = fract(u_fld.z + v.x - 0.5), sec = floor(ux * 32.0); vec4 T4 = u_ribT[int(sec / 4.0)]; float j = mod(sec, 4.0);',
+    '    float age = j < 0.5 ? T4.x : j < 1.5 ? T4.y : j < 2.5 ? T4.z : T4.w;',
+    '    vec3 rb = pow(texture(u_rib, vec2(ux, v.y / u_fld.y)).rgb, vec3(2.2)) * exp(-age / u_fld.w) * step(age, 1e5);',
+    '    float mk = 1.0 - smoothstep(0.0, 0.004, abs(abs(v.x - 0.5) - u_fld2.z * 0.5));',
+    '    m = mix(rb, vec3(1.0), mk * 0.6);',
+    '  }',
+    '#endif',
     '  if (u_ap < 0.999) {',
     '    float d; float ra2 = length(pa);',
     '    if (u_shape == 1) { float a = mix(0.030, 0.9 * A + 0.35, u_ap * u_ap), b = mix(0.40, 2.2, u_ap); d = abs(pa.x) / a + (pa.y / b) * (pa.y / b); }',
@@ -348,6 +394,11 @@
     var pSlow = null, slowT = [null, null], slowW = 0, slowH = 0, slowN = 0, slowAt = -1e12, slowFb = null, slowMode = '', spinS = 0, spinAt = 0;
     var lastSn = 0, watchAt = 0, develop = 0, lastCells = null, lastCellRead = 0, picMove = 0;
     window.addEventListener('pointerdown', function () { watchAt = performance.now(); }, { passive: true });
+    // modules 8 to 11: the field's starting heading, the ribbon (1024 by 128, 32 sectors with the time each was last written), the
+    // overlays' events, the sound flash and the haptic pulse
+    var fldRef = null, ribTex = null, ribFb = null, ribAt = 0, ribTimes = new Float64Array(32), ribT = new Float32Array(32), evts = [], evtU = new Float32Array(32);
+    var seenOnset = 0, seenKnock = 0, seenShock = 0, pulse = 0, hapAt = 0, lastFld = null;
+    function fieldReset() { fldRef = null; for (var i = 0; i < 32; i++) ribTimes[i] = -1e12; evts = []; pulse = 0; }
     function slowReset() { slowN = 0; slowAt = -1e12; develop = 0; watchAt = performance.now(); }
     function picChange() {                         // how much the picture changed between the light module's reads (0 still, 1 a lot)
       var C = LIGHT.cells; if (!C || LIGHT.reads === lastCellRead) return picMove;
@@ -750,7 +801,8 @@
       lighten: function () { if (pViewZ && salFrames && salStep < SAL_SIDES.length - 1) { salStep++; return true; } return false; },
       clear: function () { hasFrame = false; },
       hasFrame: function () { return hasFrame; },
-      newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; slowReset(); },
+      newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; slowReset(); fieldReset(); },
+      fieldState: function () { return lastFld; },
       slowState: function () { return { mode: slowMode, n: slowN, develop: +develop.toFixed(3), spin: +spinS.toFixed(2), move: +picMove.toFixed(4), w: slowW, h: slowH, snell: lastSn, loc: !!(pViewZ && pViewZ.u.u_snell) }; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
@@ -849,6 +901,41 @@
       gl.disable(gl.BLEND); gl.viewport(0, 0, canvas.width, canvas.height);
     }
     var stampFb = null;
+    // the ribbon's texture, made on first use
+    function ribbon() {
+      if (ribTex) return ribTex;
+      ribTex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, ribTex); gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA8, 1024, 128);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      ribFb = gl.createFramebuffer(); return ribTex;
+    }
+    // every 100 ms, the picture just drawn (above the ribbon's band) is copied into the ribbon at the heading the phone faces
+    function ribbonWrite(P, now) {
+      if (now - ribAt < 100) return; ribAt = now; ribbon();
+      var po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0, F = P.field || {};
+      var wdeg = CAM_DEG * Math.min(canvas.width / canvas.height, 1), W = Math.max(2, Math.round(wdeg / 360 * 1024)), x0 = Math.round(hd / 360 * 1024 - W / 2), y0 = Math.round(canvas.height * (F.band || .22));
+      gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, ribFb); gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, ribTex, 0);
+      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, null);
+      [x0, x0 - 1024, x0 + 1024].forEach(function (x) { if (x + W > 0 && x < 1024) gl.blitFramebuffer(0, y0, canvas.width, canvas.height, x, 0, x + W, 128, gl.COLOR_BUFFER_BIT, gl.LINEAR); });
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      for (var k = Math.floor(x0 / 32); k <= Math.floor((x0 + W - 1) / 32); k++) ribTimes[((k % 32) + 32) % 32] = now;
+    }
+    // events for the overlays and the haptic module: sound onsets, knocks and the light's sudden darkenings
+    function addOnsTo(P, now, dt) {
+      var so = senses.sound(), kn = senses.knock(), H = P.hap || {}, fire = false;
+      if (so.onsetAt && so.onsetAt !== seenOnset) {
+        seenOnset = so.onsetAt;
+        if (P.ovlMode === 'rings' || P.sndMode === 'rings' || P.ovlMode === 'web') evts.push({ x: (Math.random() - .5) * .25, y: (Math.random() - .5) * .25, t: now, a: clamp(.4 + so.band[so.onsetBand], .4, 1) });
+        if (H.on === 'onset') fire = true;
+      }
+      if (kn && kn !== seenKnock) { seenKnock = kn; if (P.ovlMode === 'web' || P.ovlMode === 'rings') evts.push({ x: 0, y: 0, t: now, a: 1 }); if (H.on === 'knock') fire = true; }
+      if (LIGHT.shock > .5 && now - seenShock > 600) { seenShock = now; if (P.ovlMode === 'shadow') evts.push({ x: (LIGHT.dir[0] - .5) * canvas.width / canvas.height, y: LIGHT.dir[1] - .5, t: now, a: -1 }); if (H.on === 'shock') fire = true; }
+      if (fire && P.hapMode && now - hapAt > 120) {
+        hapAt = now; var pat = H.pattern || [30], buzzed = false;
+        if (P.hapMode === 'buzz' && navigator.vibrate) try { buzzed = navigator.vibrate(pat); } catch (x) { buzzed = false; }
+        if (!buzzed) pulse = H.edge === undefined ? 1 : H.edge;   // where the browser cannot vibrate (iOS), the edge of the picture pulses
+      }
+      pulse *= Math.exp(-(dt || 16) / 180);
+    }
 
     // ---- the light module (docs/ENGINE-DESIGN.md, module 3), first part: four times a second the smallest levels of the picture's
     // mip chain (8 by 8 cells or fewer) are read back behind a fence, never waited for. They give the mean light (LIGHT.lum, 0 to 1 of
@@ -887,7 +974,7 @@
         lastP = P; lastMirror = fx.mirror ? 1 : 0; lastCamZoom = fx.camZoom || 1;
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
-        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water || P.spec || P.lock || P.slowMode || P.snell || P.magMode) && zonePrograms();
+        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water || P.spec || P.lock || P.slowMode || P.snell || P.magMode || P.fieldMode || P.ovlMode || P.sndMode || P.hapMode) && zonePrograms();
         var ad = adaptOf(P);
         if (ad > .001) { var M0 = P.M, U0 = P.U, Pa = {}, pk; for (pk in P) Pa[pk] = P[pk]; Pa.M = M0.map(function (x, j) { return lerp(x, P.adapt.M[j], ad); }); Pa.U = U0.map(function (x, j) { return lerp(x, P.adapt.U[j], ad); }); P = Pa; }
         if (zoned) readPoll(now);
@@ -1000,6 +1087,29 @@
           lastSn = sn; gl.uniform3f(u.u_snell, sn, pose ? clamp((90 - pose.elev) / 97, 0, 1) * .5 : 0, 0);   // the disc slides toward the top as the phone levels
           var mg = P.magMode && pose && pose.heading !== null ? pose.heading : null, red = LIGHT.reads ? clamp(((LIGHT.col[0] - LIGHT.col[2]) / (LIGHT.col[0] + .02) - .3) * 2.5, 0, 1) : 0;   // red or yellow light melts it (birds draft)
           gl.uniform3f(u.u_mag, mg !== null && P.magMode === 'grain' ? (P.magnet.k || 1) * (1 - red) : 0, mg !== null && P.magMode === 'tide' ? (P.magnet.k || 1) * .3 * (.5 + .5 * Math.cos(mg * Math.PI / 180)) * (1 - red) : 0, mg !== null ? -mg * Math.PI / 180 + Math.PI / 2 : 0);
+          if (P.snellFixed) gl.uniform3f(u.u_snell, 1, 0, 0);   // Snell's window as a field: always there, centred (&draw=window)
+          addOnsTo(P, now, dt);
+          var F = P.field || {}, O = P.ovl || {}, SD = P.snd || {}, po = senses.pose(), yw = senses.yaw(), hd = po.heading !== null ? po.heading : yw !== null ? yw : 0;
+          if (fldRef === null) fldRef = hd;
+          var fc = P.fieldMode === 'wedge' ? 1 : P.fieldMode === 'fold' ? 2 : P.fieldMode === 'ribbon' ? 4 : 0;
+          if (fc === 1) gl.uniform4f(u.u_fld, 1, hd - fldRef, F.blindAt === undefined ? 180 : F.blindAt, (F.blindDeg || 30) / 2);
+          else if (fc === 2) gl.uniform4f(u.u_fld, 2, F.fold || .6, F.horizon || 0, 0);
+          else if (fc === 4) gl.uniform4f(u.u_fld, 4, F.band || .22, hd / 360, F.fadeS || 60);
+          else gl.uniform4f(u.u_fld, 0, 0, 0, 0);
+          gl.uniform4f(u.u_fld2, F.blindSoft || 6, CAM_DEG, CAM_DEG * Math.min(canvas.width / canvas.height, 1) / 360, 0);
+          if (fc === 4) { for (var qi = 0; qi < 32; qi++) ribT[qi] = ribTimes[qi] < -1e11 ? 1e6 : (now - ribTimes[qi]) / 1000; gl.uniform4fv(u['u_ribT[0]'], ribT); gl.activeTexture(gl.TEXTURE5); gl.bindTexture(gl.TEXTURE_2D, ribbon()); gl.uniform1i(u.u_rib, 5); gl.activeTexture(gl.TEXTURE1); }
+          var C = P.ovlMode === 'polar' ? clockNow() : null, D2R = Math.PI / 180;
+          gl.uniform4f(u.u_ov, C && C.sun > -6 ? (O.polar || 1) : 0, P.ovlMode === 'web' ? O.web || .8 : 0, P.ovlMode === 'rings' || P.sndMode === 'rings' ? O.rings || 1 : 0, P.ovlMode === 'shadow' ? O.shadow || 1 : 0);
+          gl.uniform4f(u.u_ovP, C ? (hd - C.az) * D2R : 0, (po.elev || 0) * D2R, C ? C.sun * D2R : 0, CAM_DEG * D2R);
+          while (evts.length && (now - evts[0].t > 3000 || evts.length > 8)) evts.shift();
+          for (var ei = 0; ei < 8; ei++) { var E = evts[ei]; evtU[ei * 4] = E ? E.x : 0; evtU[ei * 4 + 1] = E ? E.y : 0; evtU[ei * 4 + 2] = E ? (now - E.t) / 1000 : 0; evtU[ei * 4 + 3] = E ? E.a : 0; }
+          gl.uniform4fv(u['u_evt[0]'], evtU);
+          var so = senses.sound(), sm = so.on ? ({ air: 1, rumble: 2, hear: 3, clap: 4, rings: 5 })[P.sndMode] || 0 : 0, age = so.onsetAt ? (now - so.onsetAt) / 1000 : 99, lit = 0;
+          if (sm === 3) lit = (so.onsetBand === 2 ? 1 : .6) * Math.exp(-age / (SD.flashS || .8)) + (SD.steady === undefined ? .4 : SD.steady) * so.band[2];
+          if (sm === 4) lit = Math.exp(-age / (SD.holdS || .35));
+          gl.uniform4f(u.u_snd, so.band[0] * (SD.k || 1), so.band[1], so.band[2], so.breath * (SD.k || 1)); gl.uniform4f(u.u_hear, age, sm, sm === 4 ? (SD.dark === undefined ? .04 : SD.dark) : (SD.dark === undefined ? .12 : SD.dark), lit);
+          gl.uniform1f(u.u_pulse, pulse);
+          lastFld = { field: P.fieldMode, ref: fldRef, heading: hd, sound: so.on ? [+so.band[0].toFixed(2), +so.band[1].toFixed(2), +so.band[2].toFixed(2), +so.breath.toFixed(2)] : null, lit: +lit.toFixed(2), events: evts.length, pulse: +pulse.toFixed(2) };
           var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -1014,6 +1124,7 @@
           gl.drawArrays(gl.TRIANGLES, 0, 3); gl.disable(gl.SCISSOR_TEST);
         }
         if (zoned && P.gz && P.stamps > .5) stamps(P, now);
+        if (zoned && P.fieldMode === 'ribbon') ribbonWrite(P, now);
         light.tick(now);
     }
   }
