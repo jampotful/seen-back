@@ -43,9 +43,7 @@ TRAIT_ORDER = ["acuity_cpd", "fov_h_deg", "fov_v_deg", "binocular_deg", "lambda_
 TRAIT_MAP = {
     "fov": ["fov_h_deg"], "cpd": ["acuity_cpd"], "topoA": ["fov_v_deg", "fovea"], "topoS": ["fov_v_deg", "fovea"],
     "pupil": ["pupil_shape"], "rate": ["cff_hz", "corner_hz"], "hold": ["cff_hz", "corner_hz"], "persist": ["cff_hz", "corner_hz"],
-    "fall": ["absolute_sensitivity"], "sat": ["lambda_max_nm", "receptor_classes", "colour_vision"],
-    "noGreen": ["lambda_max_nm", "receptor_classes", "colour_vision"], "uvBlue": ["lambda_max_nm", "receptor_classes", "colour_vision"],
-    "M": ["lambda_max_nm", "receptor_classes", "colour_vision"],
+    "fall": ["absolute_sensitivity"], "M": ["lambda_max_nm", "receptor_classes", "colour_vision"],
 }
 MEANING = {
     "fov": "horizontal field of view of the whole animal, degrees (the picture is squeezed toward this; 180 is a person)",
@@ -180,9 +178,17 @@ GRADES_TEXT = """GRADES
 - i: the app's guess; no record gives the value. Use i whenever no record stands behind the number.
 - invented: true when the app chose the number, the mapping or the drawing, even if a measurement lies behind it. A value you reach by a calculation is at most g and is invented. Every draw option is invented: true.
 - A parameter graded m or g needs a claim and at least one record id in src. A parameter graded i has an empty src and invented true.
+- A grade of ? in an example means "not yet graded"; never use it.
 - Never raise a grade to look better supported. A spec with many i parameters is correct when the records are thin; the owner prefers an honest i to an unsupported m."""
 
-RULES_TEXT = """WRITING RULES (rows, notes and cue)
+RULES_TEXT = """WHAT TO INCLUDE
+- The example shows the form of a spec; its numbers belong to another animal. Copy none of them.
+- Include a parameter only when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Leave out every other parameter and every block the records do not call for; the engine then uses a person's value. A short spec of grounded parameters is better than a long one of guesses.
+- A number graded m or g must be a number that a cited record states, or lie between two cited records. When you work a number out, say so with kind calculation and grade it at most g.
+- Write two or three rows that say plainly what the animal's view is like, each citing records, and one row graded i for the app's own choices, naming those parameters in its fifth element.
+- The spec is one JSON object in the spec field; claims and quotes are separate fields.
+
+WRITING RULES (rows, notes and cue)
 - Plain sentences that a curious adult understands. Canadian spelling (colour, grey, centre, metre, behaviour).
 - No em dashes. No "not X but Y" or "Y, not X". No sentence fragments. No word with an underscore, no dot inside a word, no @, and no reference to the app's code or to parameter names in the text.
 - A row is [grade, title, text, [record ids], [parameter paths]]. The record ids are the R numbers of the records behind it; the paths name the parameters it describes ("params.cpd", "zones[1].mag"). A row graded m cites at least one record graded m. Every parameter that is invented has a row graded i or g that names it in the fifth element.
@@ -213,7 +219,13 @@ TOOL = {
     "input_schema": {
         "type": "object",
         "properties": {
-            "spec": {"type": "object", "description": "the whole spec"},
+            "spec": {"type": "object", "description": "the whole spec, as one JSON object (not a string)",
+                     "properties": {"key": {"type": "string"}, "version": {"type": "integer"}, "chip": {"type": "string"}, "who": {"type": "string"},
+                                    "falls_back_to": {"type": "string"}, "applies_to": {"type": "object"}, "cue": {"type": "string"},
+                                    "modules": {"type": "array", "items": {"type": "string"}}, "params": {"type": "object"},
+                                    "matrices": {"type": "object"}, "zones": {"type": "array", "items": {"type": "object"}},
+                                    "draw": {"type": "object"}, "rows": {"type": "array", "items": {"type": "array"}}},
+                     "required": ["key", "who", "cue", "params", "rows"]},
             "claims": {"type": "array", "items": {"type": "object", "properties": {
                 "path": {"type": "string"}, "records": {"type": "array", "items": {"type": "string"}},
                 "kind": {"type": "string", "enum": ["value", "range_middle", "calculation"]}, "how": {"type": "string"}},
@@ -500,11 +512,50 @@ def normalize_reply(reply):
     out = dict(reply)
     for k in ("spec", "claims", "quotes"):
         if isinstance(out.get(k), str):
+            txt = out[k].strip()
+            txt = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt)
             try:
-                out[k] = json.loads(out[k])
+                out[k], end = json.JSONDecoder().raw_decode(txt)         # the first JSON value; the model sometimes runs on
             except ValueError:
-                pass
+                continue
+            rest = txt[end:].lstrip(" ,\n")
+            if k == "spec" and rest.startswith('"claims"') and not out.get("claims"):
+                try:
+                    more = json.loads("{" + rest + ("}" if not rest.rstrip().endswith("}") else ""))
+                    out["claims"] = more.get("claims") or out.get("claims")
+                    out["quotes"] = out.get("quotes") or more.get("quotes")
+                except ValueError:
+                    pass
     return out
+
+
+def name_invented(spec):
+    """A parameter the app chose needs a row graded i or g that names it. The model is asked to write such rows; whatever it
+    leaves unnamed is named in one plain row added here, and the report says so."""
+    rows = spec.get("rows")
+    for r in rows:
+        if isinstance(r, list) and len(r) == 4:
+            r.append([])
+        elif isinstance(r, list) and len(r) == 3:
+            r += [[], []]
+    named = set()
+    for r in rows:
+        if isinstance(r, list) and len(r) >= 5 and r[0] in ("i", "g") and isinstance(r[4], list):
+            named |= set(n for n in r[4] if isinstance(n, str))
+    named = {re.sub(r"^param:", "", n) for n in named}
+    miss = []
+    for p, o in walk_params(spec):
+        if o.get("invented") is True and p not in named and p.split(".")[-1] not in named:
+            miss.append(p)
+    if not miss:
+        return ""
+    for r in rows:
+        if isinstance(r, list) and len(r) >= 5 and r[1] == "Settings the app chose":
+            r[4] = list(r[4]) + miss
+            return "added %d paths to the row 'Settings the app chose'" % len(miss)
+    rows.append(["i", "Settings the app chose", "Some settings in this view are the app's own choices, because no measurement gives them. "
+                 "They are set to give a fair picture of the animal and can be tuned by hand.", [], miss])
+    return "added the row 'Settings the app chose', which names %d invented parameters the reply left unnamed" % len(miss)
 
 
 def param_name(path):
@@ -598,6 +649,9 @@ def check_reply(job, F, records, reply, like_spec, floor):
     for p, o in walk_params(spec):
         if p.startswith("params.") and F["ranges"].get(param_name(p)) and isinstance(o.get("value"), (int, float, list)):
             o["range"] = F["ranges"][param_name(p)]
+    note = name_invented(spec)
+    if note:
+        warns.append(note)
     # 1. the spec checker
     e1, _ = CS.check_obj(spec)
     errs += ["checker: " + e for e in e1]
@@ -667,7 +721,7 @@ def check_reply(job, F, records, reply, like_spec, floor):
                 pool = em
             else:
                 pool = fit
-            if c.get("kind") != "calculation" and traits:
+            if c.get("kind") != "calculation":
                 ok = value_supported(o.get("value"), pool)
                 if ok is False:
                     errs.append("%s: value %s is not a cited record's value and does not lie between two of them (%s)"

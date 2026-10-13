@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Offline tests of the spec compiler's checks (tools/views/compile.py). No key and no table needed: python3 -I tools/views/test_compile.py"""
-import copy, importlib.util, os, sys
+import copy, importlib.util, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location("compile_mod", os.path.join(HERE, "compile.py"))
@@ -115,5 +115,13 @@ out = C.rewrite_ids(copy.deepcopy(good["spec"]), records)
 ok(out["params"]["fov"]["src"] == ["t.jsonl:Smith 2020"] and out["draft"] is True, "record ids are rewritten to file and source")
 
 ok(C.value_supported(1.5, [records["R3"], records["R4"]]) is True and C.value_supported(9, [records["R3"], records["R4"]]) is False, "value_supported brackets")
+# a reply whose spec string runs on into the claims is read; unnamed invented parameters get one plain row
+run_on = {"spec": json.dumps(good["spec"]) + ', "claims": ' + json.dumps(good["claims"]), "claims": [], "quotes": good["quotes"]}
+n = C.normalize_reply(run_on)
+ok(isinstance(n["spec"], dict) and len(n["claims"]) == 2, "a spec string that runs on into the claims is read")
+bad = copy.deepcopy(good); bad["spec"]["params"]["dof"] = P(0.2, "i", True, []); bad["spec"]["rows"][1][4] = ["params.glow"]
+e, w = run(bad)
+ok(not e and any("Settings the app chose" in x for x in w), "an invented parameter no row names gets the catch-all row (%s)" % (e or w))
+
 print("%d failed" % len(fails))
 sys.exit(1 if fails else 0)
