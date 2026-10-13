@@ -570,7 +570,7 @@ Fite (1973) is on the wanted list.
 
 - **Self-motion masking.** While the gyroscope reports the phone turning faster than a few degrees a second, the motion highlight is suppressed, as moving backgrounds mask a toad's prey cells (L122). Easy.
 - **Looming flash.** The motion map's divergence (expansion) is summed over regions; when a region grows past about 20 degrees of the animal's field quickly, the whole picture flashes once and briefly drops in brightness (L124). Medium work.
-- **The chorus.** With microphone permission, sound energy in the bands of the frog's two hearing organs (below about 1,000 and above about 1,000 vibrations a second; L133) gently pulses the brightness of the picture's lower half. For a recognised Green Treefrog the bands narrow to about 900 and 3,000 (L185, L186), so its own species' calls make the picture throb and other sounds barely do. The microphone stands in for the ear, and the drawing is **invented**. Medium work (Web Audio analyser). It would be beautiful at a pond at night.
+- **The chorus.** With microphone permission, sound energy in the bands of the frog's two hearing organs (below about 1,000 and above about 1,000 vibrations a second; L133) gently pulses the brightness of the picture's lower half. For a recognized Green Treefrog the bands narrow to about 900 and 3,000 (L185, L186), so its own species' calls make the picture throb and other sounds barely do. The microphone stands in for the ear, and the drawing is **invented**. Medium work (the Web Audio API's AnalyserNode). At a pond at night, a chorus would set the whole lower half pulsing.
 
 ### 2.9 `salamander` (Caudata): new, building on `docs/views/sheets/salamander.md`
 
@@ -693,7 +693,7 @@ No source.
 | Row 'Movement' (m) | corrected: "takes little notice of the parts of its world that stay still, and it can starve beside food that never moves" comes from the introduction of Lettvin and colleagues (1959), read here as quoted in lecture notes; it is a remark, and later experiments show stationary vision | L163, L118 to L123 |
 | Row 'Speed' (g) | confirmed: 6.7 Hz for the cane toad (Inger and colleagues 2014), which is rare in Alachua (one record); the amphibian mean is 19.2 Hz | L137, L138 |
 | Row 'Field of view, sharpness and pupil' (i) | sharpness and pupil now sourced; field still a guess | L114, L192 |
-| `docs/SOURCES.md`: Lettvin via NYU lecture notes | the notes quote the paper accurately; the claim is the authors' remark | L163 |
+| `docs/SOURCES.md`: Lettvin via NYU lecture notes | the notes carry the quotation the row rests on; the paper itself did not render here, so the wording is checked against the notes alone, and the claim is the authors' remark | L163 |
 
 ## 4. Species with their own measurements
 
@@ -730,28 +730,28 @@ These are commonly photographed species measured well enough for a profile of th
 
 ## 6. Closed sources wanted
 
-The same list as `docs/views/wanted/herps.jsonl`, most useful first.
+The same list as `docs/views/wanted/herps.jsonl`, most useful first. Priority 1 would change a view's picture, 2 would confirm or correct a row, and 3 is background.
 
-1. Fite KV (1973). The visual fields of the frog and toad: a comparative study. *Behavioral Biology*. doi:10.1016/s0091-6773(73)80131-2. Sets the frog's `fov`.
-2. Brown KT (1969). A linear area centralis extending across the turtle retina and stabilized to the horizon by non-visual cues. *Vision Research*. doi:10.1016/0042-6989(69)90047-9. Would tie the turtle's band to the phone's tilt.
-3. Bakken GS, Krochmal AR (2007). The imaging properties and sensitivity of the facial pits of pitvipers as determined by optical and heat-transfer analysis. *Journal of Experimental Biology* 210(16): 2801. doi:10.1242/jeb.006965. The pit's field of view and blur for the heat glow.
-4. Jenssen TA, Swenson B (1974). An ecological correlate of critical flicker-fusion frequencies for some *Anolis* lizards. *Vision Research*. doi:10.1016/0042-6989(74)90164-3. Sets the anole's pace.
-5. Manteuffel G, Himstedt W (1978). The aerial and aquatic visual acuity of the optomotor response in the crested newt (*Triturus cristatus*). *Journal of Comparative Physiology* 128: 359 to 365. doi:10.1007/bf00657609. Behavioural newt acuity in air and water.
-6. Röll B (2001). Gecko vision: retinal organization, foveae and implications for binocular vision. *Vision Research*. doi:10.1016/s0042-6989(01)00093-1. Gecko foveae and acuity.
-7. New STD, Bull CM (2011). Retinal ganglion cell topography and visual acuity of the sleepy lizard (*Tiliqua rugosa*). *Journal of Comparative Physiology A*. doi:10.1007/s00359-011-0635-8. A skink's acuity for `lizard`.
-8. Land MF, Nilsson D-E (2012). *Animal Eyes*, chapters 4 to 9 (pp. 72 to 242). The Drive copy's text stopped near p. 66; a fresh extraction of pp. 94 to 129 and 215 to 242 would give amphibious eyes, land-vertebrate optics and eye movements.
-9. Heath JE, Northcutt RG, Barber RP (1969). Rotational optokinesis in reptiles and its bearing on pupillary shape. *Journal of Comparative Physiology A*. doi:10.1007/bf00298043. Reptile pupil shapes, crocodilians included.
-10. Martinez PS, Plummer CE (2022). Ophthalmology of Crocodilia: alligators, crocodiles, caimans, and gharials. Springer. doi:10.1007/978-3-030-71302-7_15. Crocodilian pupil, field and tapetum.
-11. Arnold K, Neumeyer C (1987). Wavelength discrimination in the turtle *Pseudemys scripta elegans*. *Vision Research*. doi:10.1016/0042-6989(87)90159-3. The behavioural basis of turtle tetrachromacy.
-12. Aho A-C (1996). The visual acuity of the frog (*Rana pipiens*). *Journal of Comparative Physiology A*. doi:10.1007/s003590050023. The full study behind L114.
-13. Fleishman LJ (1986). Motion detection in the presence and absence of background motion in an *Anolis* lizard. *Journal of Comparative Physiology A*. doi:10.1007/bf00612043. The anole's habituation to background motion.
-14. Safer AB, Grace MS (2004). Infrared imaging in vipers: differential responses of crotaline and viperine snakes to paired thermal targets. *Behavioural Brain Research*. doi:10.1016/j.bbr.2004.01.020. Whether true vipers belong in the heat view.
-15. Grace MS, Woodward OM, Church DR, Calisch G (2001). Prey targeting by the infrared-imaging snake *Python molurus*: effects of experimental and congenital visual deprivation. *Behavioural Brain Research*. doi:10.1016/s0166-4328(00)00336-3. Python heat imaging.
-16. Gracheva EO and colleagues (2010). Molecular basis of infrared detection by snakes. *Nature*. doi:10.1038/nature08943. Openly available in PMC, but every route returned 429 or a bot check.
-17. Hutchison VH, Kosh RJ (1974). Thermoregulatory function of the parietal eye in the lizard *Anolis carolinensis*. *Oecologia*. doi:10.1007/bf00345581.
-18. Bartol SM, Musick JA, Ochs AL (2002). Visual acuity thresholds of juvenile loggerhead sea turtles: an electrophysiological approach. *Journal of Comparative Physiology A*. doi:10.1007/s00359-001-0262-x.
-19. Lindquist SB, Bachmann MD (1982). The role of visual and olfactory cues in the prey catching behavior of the tiger salamander. *Copeia*. doi:10.2307/1444271.
-20. Placyk JS, Graves BM (2002). Prey detection by vomeronasal chemoreception in a plethodontid salamander. *Journal of Chemical Ecology*. doi:10.1023/a:1015213918739.
+1. (Priority 1) Fite KV (1973). The visual fields of the frog and toad: a comparative study. *Behavioral Biology*. doi:10.1016/s0091-6773(73)80131-2. It would set the frog's and toad's field of view and binocular overlap, which the frog view now guesses.
+2. (Priority 1) Brown KT (1969). A linear area centralis extending across the turtle retina and stabilized to the horizon by non-visual cues. *Vision Research*. doi:10.1016/0042-6989(69)90047-9. It would show whether the turtle's sharp band should stay level with the horizon as the phone tilts.
+3. (Priority 1) Bakken GS, Krochmal AR (2007). The imaging properties and sensitivity of the facial pits of pitvipers as determined by optical and heat-transfer analysis. *Journal of Experimental Biology*. doi:10.1242/jeb.006965. It would give the pit organ's field of view and optical blur, which set the size and softness of the heat glow.
+4. (Priority 1) Jenssen TA, Swenson B (1974). An ecological correlate of critical flicker-fusion frequencies for some *Anolis* lizards. *Vision Research*. doi:10.1016/0042-6989(74)90164-3. It would give anole flicker fusion, which sets the anole view's pace and is the nearest value for other lizards.
+5. (Priority 1) Manteuffel G, Himstedt W (1978). The aerial and aquatic visual acuity of the optomotor response in the crested newt (*Triturus cristatus*). *Journal of Comparative Physiology A*. doi:10.1007/bf00657609. It would give a newt's acuity by behaviour in air and in water, which sets the salamander view's sharpness.
+6. (Priority 1) Röll B (2001). Gecko vision: retinal organization, foveae and implications for binocular vision. *Vision Research*. doi:10.1016/s0042-6989(01)00093-1. It would give gecko foveae and acuity, which the gecko view now borrows from anoles.
+7. (Priority 1) New STD, Bull CM (2011). Retinal ganglion cell topography and visual acuity of the sleepy lizard (*Tiliqua rugosa*). *Journal of Comparative Physiology A*. doi:10.1007/s00359-011-0635-8. It would give a skink's acuity and retinal topography for the lizard view's sharpness and sharp spot.
+8. (Priority 1) Land MF, Nilsson D-E (2012). *Animal Eyes*, 2nd edition, chapters 4 to 9 (pp. 72 to 242). Oxford University Press, https://global.oup.com/academic/product/animal-eyes-9780199581146. The owner's copy came through only to about p. 66, and chapter 5 (Lens eyes on land, with Amphibious eyes at p. 117) and chapter 9 (Movements of the eyes) would check the optics, pupils and eye movements behind every view here.
+9. (Priority 2) Heath JE, Northcutt RG, Barber RP (1969). Rotational optokinesis in reptiles and its bearing on pupillary shape. *Journal of Comparative Physiology A*. doi:10.1007/bf00298043. It would check the slit and round pupils in the alligator, gecko, pitviper and lizard views against measured eye movements.
+10. (Priority 2) Martinez PS, Plummer CE (2022). Ophthalmology of Crocodilia: alligators, crocodiles, caimans, and gharials. Springer eBooks (book chapter). doi:10.1007/978-3-030-71302-7_15. It would check the crocodilian pupil, tapetum and field-of-view rows against a veterinary review.
+11. (Priority 2) Arnold K, Neumeyer C (1987). Wavelength discrimination in the turtle *Pseudemys scripta elegans*. *Vision Research*. doi:10.1016/0042-6989(87)90159-3. It would confirm by behaviour the four-cone colour vision that the turtle view's colour rows rest on.
+12. (Priority 2) Aho A-C (1996). The visual acuity of the frog (*Rana pipiens*). *Journal of Comparative Physiology A*. doi:10.1007/s003590050023. It would give the full method and conditions behind the frog view's 2.8 cycles per degree, now taken from a conference abstract.
+13. (Priority 2) Fleishman LJ (1986). Motion detection in the presence and absence of background motion in an *Anolis* lizard. *Journal of Comparative Physiology A*. doi:10.1007/bf00612043. It would set how strongly the anole view damps movement when the whole scene sways.
+14. (Priority 2) Safer A, Grace MS (2004). Infrared imaging in vipers: differential responses of crotaline and viperine snakes to paired thermal targets. *Behavioural Brain Research*. doi:10.1016/j.bbr.2004.01.020. It would show whether true vipers without pits respond to heat, which decides whether they belong in the heat view.
+15. (Priority 2) Grace MS, Woodward OM, Church DR, Calisch G (2001). Prey targeting by the infrared-imaging snake *Python molurus*: effects of experimental and congenital visual deprivation. *Behavioural Brain Research*. doi:10.1016/s0166-4328(00)00336-3. It would confirm that pythons can aim strikes by heat alone, which places pythons and boas in the heat view.
+16. (Priority 3) Gracheva EO and colleagues (2010). Molecular basis of infrared detection by snakes. *Nature*. doi:10.1038/nature08943. It is the primary source for the heat-sensing channel of pit vipers, boas and pythons, open in PubMed Central, though every route to it returned a rate limit or a bot check.
+17. (Priority 3) Hutchison VH, Kosh RJ (1974). Thermoregulatory function of the parietal eye in the lizard *Anolis carolinensis*. *Oecologia*. doi:10.1007/bf00345581. It would show how the parietal eye changes basking in anoles, which bears on the third-eye strip.
+18. (Priority 3) Bartol S, Musick JA, Ochs AL (2002). Visual acuity thresholds of juvenile loggerhead sea turtles (*Caretta caretta*): an electrophysiological approach. *Journal of Comparative Physiology A*. doi:10.1007/s00359-001-0262-x. It would give a sea turtle's acuity for comparison with the pond slider's.
+19. (Priority 3) Lindquist SB, Bachmann MD (1982). The role of visual and olfactory cues in the prey catching behavior of the tiger salamander, *Ambystoma tigrinum*. *Copeia*. doi:10.2307/1444271. It would weigh sight against smell in a salamander's strike, which sets the strength of the salamander view's movement gate.
+20. (Priority 3) Placyk JS, Graves BM (2002). Prey detection by vomeronasal chemoreception in a plethodontid salamander. *Journal of Chemical Ecology*. doi:10.1023/a:1015213918739. It would support the salamander view's smell row with a measured vomeronasal response to prey.
 
 ## 7. Sources
 
@@ -763,7 +763,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Armstrong-Gold CE, Rieke F (2003), *Journal of Neuroscience*, doi:10.1523/jneurosci.23-09-03796.2003. Opened. L156.
 - Baeckens S, Van Damme R, Cooper WE (2016), *Journal of Evolutionary Biology*, doi:10.1111/jeb.13032. Opened. L94.
 - Baeckens S, Driessens T, Van Damme R (2016), *PeerJ*, doi:10.7717/peerj.1874. Opened. L96.
-- Banks MS, Sprague WW, Schmoll J, Parnell JAQ, Love GD (2015), *Science Advances* 1: e1500391, doi:10.1126/sciadv.1500391. Opened (accepted manuscript, Durham repository). L169 to L171, L195.
+- Banks MS, Sprague WW, Schmoll J, Parnell JAQ, Love GD (2015), *Science Advances* 1: e1500391, doi:10.1126/sciadv.1500391. Opened (accepted manuscript, Durham repository; the DOI as printed on the eScholarship copy). L169 to L171, L195.
 - Barbour HR and colleagues (2002), *Journal of Comparative Neurology*, doi:10.1002/cne.10308. Opened. L182.
 - Bartol S, Mellgren RL, Musick JA (2003), *International Journal of Comparative Psychology*, doi:10.46867/c4t601. Opened. L178.
 - Baylor DA, Hodgkin AL (1973), *Journal of Physiology*, doi:10.1113/jphysiol.1973.sp010340. Opened. L107, L108.
@@ -772,8 +772,8 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Burghardt GM, Denny D (1983), *Zeitschrift für Tierpsychologie*, doi:10.1111/j.1439-0310.1983.tb02161.x. Opened. L98.
 - Chen Q and colleagues (2012), *PLoS ONE*, doi:10.1371/journal.pone.0034989. Opened (full text). L32, L50.
 - Chen Q and colleagues (2017), *Journal of Experimental Biology*, doi:10.1242/jeb.155382. Opened. L33.
-- Christensen CB, Christensen-Dalsgaard J, Brandt C, Madsen PT (2012), International Congress of Neuroethology, doi:10.3389/conf.fnbeh.2012.27.00110. Opened (conference abstract). L190.
-- Christensen-Dalsgaard J and colleagues (2012), *Proceedings of the Royal Society B* 279: 2816 to 2824. Opened (repository abstract). L191.
+- Christensen CB, Christensen-Dalsgaard J, Brandt C, Madsen P (2012), International Congress of Neuroethology, doi:10.3389/conf.fnbeh.2012.27.00110. Opened (conference abstract). L190.
+- Christensen-Dalsgaard J, Brandt C, Willis K, Christensen C, Ketten D, Edds-Walton P, Fay R, Madsen P, Carr C (2012), *Proceedings of the Royal Society B* 279: 2816 to 2824. Opened (Curtin University repository abstract; no DOI on that page). L191.
 - Clark RW, Bakken GS, Reed EJ, Soni A (2022), *Journal of Experimental Biology*, doi:10.1242/jeb.244478. Opened. L28, L29.
 - Cooper WE (1989), *Copeia*, doi:10.2307/1445446. Opened. L95.
 - David RS, Jaeger RG (1981), *Copeia*, doi:10.2307/1444234. Opened. L149.
@@ -819,15 +819,15 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Kelber A (2010), *Journal of Vision*, doi:10.1167/10.15.3. Opened. L136, L194.
 - King RB, Douglass JK, Phillips JB, Baube CL (1993), *Journal of Experimental Zoology*, doi:10.1002/jez.1402670107. Opened. L130.
 - Korenyak DA, Govardovskii VI (2013), *Journal of Evolutionary Biochemistry and Physiology*, doi:10.1134/s0022093013040038. Opened. L146, L147.
-- Land MF, Nilsson D-E (2012), *Animal Eyes*, 2nd edition, Oxford University Press. Opened (owner's copy; chapters 1 to 3 only). L22 to L27, L193.
+- Land MF, Nilsson D-E (2012), *Animal Eyes*, 2nd edition, Oxford University Press, https://global.oup.com/academic/product/animal-eyes-9780199581146 (publisher's page opened for the contents). Opened (owner's copy; chapters 1 to 3 only, to about p. 66). L22 to L27, L193.
 - Landreth HF, Ferguson DE (1967), *Science*, doi:10.1126/science.158.3807.1459. Opened. L151.
 - Larsen LO, Pedersen JN (1981), *Amphibia-Reptilia*, doi:10.1163/156853882x00248. Opened. L125.
 - Leal M, Fleishman LJ (2002), *Proceedings of the Royal Society B*, doi:10.1098/rspb.2001.1904. Opened. L197.
-- Lettvin JY, Maturana HR, McCulloch WS, Pitts WH (1959), *Proceedings of the IRE*, doi:10.1109/JRPROC.1959.287207. Secondary (quoted in D. Heeger's lecture notes, New York University). L163.
-- Levenson DH and colleagues (2004), *Copeia*, doi:10.1643/cp-03-217r1. Opened. L201.
+- Lettvin, Maturana, McCulloch and Pitts (1959), What the frog's eye tells the frog's brain. Secondary (quoted in D. Heeger's lecture notes, New York University, 2003; the paper itself did not render). L163.
+- Levenson D, Eckert SA, Crognale MA, Deegan JF, Jacobs GH (2004), *Copeia*, doi:10.1643/cp-03-217r1. Opened. L201.
 - Linke R, Roth G, Rottluff B (1986), *Journal of Morphology*, doi:10.1002/jmor.1051890204. Opened. L142.
 - Lock A, Collett T (1980), *Proceedings of the Royal Society B*, doi:10.1098/rspb.1980.0009. Opened. L120.
-- Loew ER, Fleishman LJ, Foster RG, Provencio I (2002), *Journal of Experimental Biology*, doi:10.1242/jeb.205.7.927. Opened. L51 to L55.
+- Loew ER, Fleishman LJ, Foster F, Provencio I (2002), Visual pigments and oil droplets in diurnal lizards, *Journal of Experimental Biology*, doi:10.1242/jeb.205.7.927. Opened (abstract; authors as the collection gives them). L51 to L55.
 - Loew ER, Govardovskii VI (2001), *Visual Neuroscience*, doi:10.1017/s0952523801185081. Opened. L100 to L104.
 - Loew ER, Govardovskii VI, Röhlich P, Szél A (1996), *Visual Neuroscience*, doi:10.1017/s0952523800007483. Opened. L66.
 - Ma J-X and colleagues (2001), *Visual Neuroscience*, doi:10.1017/s0952523801183057. Opened. L144.
@@ -882,7 +882,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Tovar RU and colleagues (2025), *PNAS*, doi:10.1073/pnas.2504850122. Opened. L155.
 - Tsai H-J, Ewert J-P (1988), *Brain, Behavior and Evolution*, doi:10.1159/000116530. Opened. L122.
 - Twyman H and colleagues (2016), *Proceedings of the Royal Society B*, doi:10.1098/rspb.2016.1208. Opened. L111.
-- Vanderbilt University News (8 November 2012), on Leitch and Catania (2012). Opened; secondary for the primary study. L164, L165.
+- Vanderbilt University News (8 November 2012), on Leitch D and Catania K (2012) in the *Journal of Experimental Biology*. Opened; secondary for the primary study. L164, L165.
 - Ventura DF, Zana Y, de Souza JM, DeVoe RD (2001), *Journal of Experimental Biology*, doi:10.1242/jeb.204.14.2527. Opened. L109.
 - Wada S and colleagues (2012), *PLoS ONE*, doi:10.1371/journal.pone.0039003. Opened. L71.
 - Wald G, Brown PK, Kennedy D (1957), *Journal of General Physiology*, doi:10.1085/jgp.40.5.703. Opened. L17, L18.
